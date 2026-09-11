@@ -5,6 +5,7 @@ import { pathToFileURL } from "node:url";
 import { z } from "zod";
 import { conditionalPlanStakesRequest, CONDITIONAL_PLAN_STAKES } from "../../src/engine/benchmarks/step-efficiency/conditional-plan-stakes";
 import { effectProfileDomainsRequest, EFFECT_PROFILE_DOMAINS } from "../../src/engine/benchmarks/step-efficiency/effect-profile-domains";
+import { planningActionFramesRequest, PLANNING_ACTION_FRAMES } from "../../src/engine/benchmarks/step-efficiency/planning-action-frames";
 import { registerBuiltinAlgorithms } from "../../src/engine/algorithms/registry";
 import { algorithmRef, type AlgorithmManifest, type WorldStepInput, type WorldStepPreparation } from "../../src/engine/runtime/execution";
 import { RecordingRuntimeObserver, type RuntimeEvent } from "../../src/engine/runtime/observability";
@@ -40,7 +41,7 @@ export function planStakesRequestEvidence(request: StructuredModelRequest<unknow
  * Every subsequent call is captured and stopped before HTTP or canonical commit. */
 export async function runPlayerPlanStakesProbe(argv: string[]) {
   const [sourcePath, dataRoot, output, mode = "preflight", candidateMode = "stakes"] = argv;
-  if (!sourcePath || !dataRoot || !output || !["preflight", "run"].includes(mode) || !["stakes", "profile-domains"].includes(candidateMode)) throw new Error("Expected source-export data-root output-directory [preflight|run] [stakes|profile-domains]");
+  if (!sourcePath || !dataRoot || !output || !["preflight", "run"].includes(mode) || !["stakes", "profile-domains", "action-frames"].includes(candidateMode)) throw new Error("Expected source-export data-root output-directory [preflight|run] [stakes|profile-domains|action-frames]");
   mkdirSync(output, { recursive: false });
   const source: SourceExport = JSON.parse(readFileSync(sourcePath, "utf8"));
   const first = source.events.find(event => event.event === "model.context.serialized" &&
@@ -95,12 +96,18 @@ export async function runPlayerPlanStakesProbe(argv: string[]) {
           blocked.push({ role: request.role, schemaName: request.schemaName, subjectId: request.subjectId, context: request.context });
           throw new ProbeStopped("First-response scope complete; no repair, review, continuation or transition HTTP");
         }
-        const control = candidateMode === "profile-domains" ? conditionalPlanStakesRequest(request) : request;
+        const conditional = candidateMode === "stakes" ? request : conditionalPlanStakesRequest(request);
+        const control = candidateMode === "action-frames" ? effectProfileDomainsRequest(conditional) : conditional;
         const baseline = planStakesRequestEvidence(control);
         if (frozen && contentHash(baseline) !== contentHash(frozen)) throw new Error("Reconstructed baseline request drift");
         frozen ??= baseline;
-        const adapted = arm === "C" ? (candidateMode === "profile-domains" ? effectProfileDomainsRequest(control) : conditionalPlanStakesRequest(control)) : control;
-        if (arm === "C") candidate = planStakesRequestEvidence(adapted);
+        const adapted = arm === "C" ? (candidateMode === "action-frames" ? planningActionFramesRequest(control)
+          : candidateMode === "profile-domains" ? effectProfileDomainsRequest(control) : conditionalPlanStakesRequest(control)) : control;
+        if (arm === "C") {
+          const evidence = planStakesRequestEvidence(adapted);
+          if (candidate && contentHash(evidence) !== contentHash(candidate)) throw new Error("Reconstructed candidate request drift");
+          candidate ??= evidence;
+        }
         save(output, `${label}-request.json`, planStakesRequestEvidence(adapted));
         if (!live) throw new ProbeStopped("Offline request captured");
         return gateway.generateStructured({ ...adapted, observer });
@@ -141,13 +148,17 @@ export async function runPlayerPlanStakesProbe(argv: string[]) {
   const baseline = frozen as ReturnType<typeof planStakesRequestEvidence>;
   const treatment = candidate as ReturnType<typeof planStakesRequestEvidence>;
   const firstResponsePlan = ["B", "C", "C", "B", "B", "C"] as const;
-  save(output, "manifest.json", { protocol: candidateMode === "profile-domains" ? EFFECT_PROFILE_DOMAINS : CONDITIONAL_PLAN_STAKES, candidateMode,
+  const restored = structuredClone(treatment.context) as { task: Record<string, unknown> };
+  if (candidateMode === "action-frames") delete restored.task.planningActionFrames;
+  if (contentHash(restored) !== contentHash(baseline.context)) throw new Error("Candidate changed original source context");
+  save(output, "manifest.json", { protocol: candidateMode === "action-frames" ? PLANNING_ACTION_FRAMES : candidateMode === "profile-domains" ? EFFECT_PROFILE_DOMAINS : CONDITIONAL_PLAN_STAKES, candidateMode,
     codeRevision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
     runnerHash: contentHash(readFileSync(new URL(import.meta.url), "utf8")),
     sourceExecution: source.execution.id, sourceInstance: source.execution.instanceId, sourceEvent: first.sequence,
     sourceHash: contentHash(source), manifest: ref, catalogHash: catalog.hash, sourceRequestHash: contentHash(recorded),
     baselineHash: contentHash(baseline), candidateHash: contentHash(treatment), sourceContextEqual: contentHash(recorded.context) === contentHash(baseline.context),
     contextEqual: contentHash(baseline.context) === contentHash(treatment.context),
+    originalContextPreserved: true,
     order: firstResponsePlan, maxHttp: firstResponsePlan.length, mode, acceptance: "Complete first-response mechanical admission followed by independent source-semantic review; no gameplay or latency certification from this probe" });
   if (mode === "run") for (const [index, arm] of firstResponsePlan.entries()) {
     const row = await run(`${index + 1}-${arm}`, arm, true);

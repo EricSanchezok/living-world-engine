@@ -2,10 +2,7 @@ import { z } from "zod";
 import { contentHash } from "../../models/model-audit";
 import { ModelConfigurationError, type StructuredModelRequest } from "../../models/model-provider";
 import { loadPromptAsset } from "../../prompts";
-import { expandSharedCatalogPrefix } from "../../mechanics/shared-catalog-prefix";
-import { expandSharedCatalogRecords } from "../../mechanics/shared-catalog-records";
-import { expandRepairDiagnosticDomains } from "../../mechanics/repair-diagnostic-domains";
-import { expandSharedBatchContexts } from "../../mechanics/shared-batch-context";
+import { planningSourceContexts } from "./planning-source-contexts";
 
 type Value = Record<string, unknown>;
 const object = (value: unknown): value is Value => value !== null && typeof value === "object" && !Array.isArray(value);
@@ -65,9 +62,7 @@ export function specializeEffectProfileSchema(source: Value, domains: EffectProf
 export function effectProfileDomainsRequest<T>(request: StructuredModelRequest<T>): StructuredModelRequest<T> {
   if (request.role !== "truth-resolution" || request.schemaName !== "truth_resolution_plan_commit_batch") return request;
   if (request.promptVersion.includes(EFFECT_PROFILE_DOMAINS)) throw new ModelConfigurationError("effect profile domains already applied");
-  const source = record(request.context);
-  const state = expandSharedCatalogPrefix(expandSharedCatalogRecords(expandRepairDiagnosticDomains(source.state)));
-  const domains = effectProfileDomains(expandSharedBatchContexts(state));
+  const domains = effectProfileDomains(planningSourceContexts(request.context));
   const wireJsonSchema = specializeEffectProfileSchema(request.wireJsonSchema ?? z.toJSONSchema(request.schema, { target: "draft-07" }), domains);
   const system = [request.system, instruction].join("\n\n");
   return { ...request, system, wireJsonSchema,
