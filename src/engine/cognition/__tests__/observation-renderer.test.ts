@@ -205,6 +205,24 @@ describe("ObservationRenderer", () => {
     expect(normalized.droppedIntroductions).toBe(1);
   });
 
+  it("materializes ordinary progress once despite unrelated private scalars and cognition keys", async () => {
+    const input = pendingInput();
+    input.state.truth.facts["key-authenticity"]!.value = { kind: "text", value: "in-progress" };
+    input.state.agents.keeper!.character.values.preservation = {
+      ...structuredClone(Object.values(input.state.agents.keeper!.character.values)[0]!), id: "preservation",
+    };
+    const before = structuredClone(input);
+    const provider = new ScriptedModelProvider(() => ({ summary: "preservation in-progress", introductions: [], sourceEventRefs: [],
+      apparentClaims: [{ subjectRef: "ref:local_entity:player::self", predicate: "activity-state",
+        value: { kind: "text", value: "in-progress" }, description: "我的行动仍在继续。" }] }), createTestModelCatalog(), false);
+    const result = await new ObservationRenderer(provider, 0).render(input, { workloadId: "source-relation", batchId: "progress",
+      runtimeIdentity: { worldHash: input.state.worldHash, revision: input.state.revision } });
+    expect(provider.requests).toHaveLength(1);
+    expect(result.packets[0]!.apparentClaims).toMatchObject([{ subjectId: "self", predicate: "activity-state",
+      value: { kind: "text", value: "in-progress" } }]);
+    expect(input).toEqual(before);
+  });
+
   it("repairs one observer that copies protected canonical truth", async () => {
     let calls = 0;
     const catalog = createTestModelCatalog();
