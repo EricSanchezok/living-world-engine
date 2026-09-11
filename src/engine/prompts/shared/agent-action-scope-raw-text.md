@@ -1,0 +1,1 @@
+Self-contained description of this character's complete next attempt from its own current situation. Include the intended sequence or conditions when relevant. Its scope agrees with goal and means; it does not claim successful execution.

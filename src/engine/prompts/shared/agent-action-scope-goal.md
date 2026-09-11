@@ -1,0 +1,1 @@
+The desired result or continuing condition of the same action described by rawText, in self-contained natural language. State what this attempt seeks, rather than a private goal handle or a separate broader mission. A compound or ongoing intention remains compound or ongoing when chosen.

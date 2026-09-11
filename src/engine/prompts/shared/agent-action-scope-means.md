@@ -1,0 +1,1 @@
+How the character intends to carry out the same action described by rawText and goal, or null if no method is specified. This text does not introduce a different action, assumed location or completed result.
