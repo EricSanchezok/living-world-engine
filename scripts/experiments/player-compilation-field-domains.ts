@@ -8,6 +8,7 @@ import { defineAlgorithmRef } from "../../src/engine/algorithms/composition";
 import { representedActionCompiler } from "../../src/engine/algorithms/eager-reference/represented-action-compiler";
 import { compilationFieldDomains, compilationFieldDomainsRequest, COMPILATION_FIELD_DOMAINS } from "../../src/engine/benchmarks/step-efficiency/compilation-field-domains";
 import { TypedCompilationAliases, TYPED_COMPILATION_ALIASES } from "../../src/engine/benchmarks/step-efficiency/typed-compilation-aliases";
+import { compilationOnsetDomainProof, compilationOnsetDomainRequest, COMPILATION_ONSET_DOMAIN } from "../../src/engine/benchmarks/step-efficiency/compilation-onset-domain";
 import { completeDeepSeekJsonStream } from "../../src/engine/models/deepseek-json-stream";
 import { parseLastJsonValueWithRecovery } from "../../src/engine/models/model-adapter";
 import { executeCompilationTrial, type CompilationTrialIdentity, type FirstPassTrialEvidence } from "../../src/engine/benchmarks/action-compilation/first-pass-runner";
@@ -30,6 +31,7 @@ const save = (directory: string, file: string, value: unknown) => writeFileSync(
 const codeHashes = () => Object.fromEntries(["scripts/experiments/player-compilation-field-domains.ts",
   "src/engine/benchmarks/step-efficiency/compilation-field-domains.ts", "src/engine/prompts/shared/compilation-field-domains.md",
   "src/engine/benchmarks/step-efficiency/typed-compilation-aliases.ts", "src/engine/prompts/shared/typed-compilation-aliases.md",
+  "src/engine/benchmarks/step-efficiency/compilation-onset-domain.ts", "src/engine/prompts/shared/compilation-onset-domain.md",
   "src/engine/benchmarks/action-compilation/first-pass-runner.ts", "src/engine/algorithms/eager-reference/represented-action-compiler.ts",
 ].map(file => [file, contentHash(readFileSync(file, "utf8"))]));
 
@@ -49,8 +51,11 @@ export function typedAliasReplay(raw: string, codec: TypedCompilationAliases,
 }
 
 export async function compilationFieldDomainsProbe(mode: "prepare" | "run", root: string, sourceRoot: string,
-  candidate: "field-domains" | "typed-aliases" = "field-domains") {
-  const protocol = candidate === "field-domains" ? baseProtocol : { ...baseProtocol, id: "player-compilation-typed-aliases-v1",
+  candidate: "field-domains" | "typed-aliases" | "onset-domain" = "field-domains") {
+  const protocol = candidate === "field-domains" ? baseProtocol : candidate === "onset-domain" ? {
+    ...baseProtocol, id: "player-compilation-onset-domain-v1", candidate: COMPILATION_ONSET_DOMAIN,
+    acceptance: `${baseProtocol.acceptance} C instead removes only the two uninhabited Fact/Entity absence branches from onset wire guidance after checking the actual current resolver superset and evaluator. Original schemas and validators still process identical historical responses. No replacement condition, output rewriting or completion inference. Source action triplets can themselves be inconsistent; complete semantic review must retain that upstream uncertainty.`,
+  } : { ...baseProtocol, id: "player-compilation-typed-aliases-v1",
     candidate: TYPED_COMPILATION_ALIASES, acceptance: `${baseProtocol.acceptance} C instead changes only exact catalog-typed aliases in declared reference fields and their wire descriptions. Historical C replay re-encodes the original complete response, proves exact round-trip and identical canonical validation/materialization. Raw wire hashes intentionally differ; no completion is imported into a live game.` };
   const sources = loadOfficialSourceShard(path.join(root, "source"));
   if (JSON.stringify(sources.map(source => source.actions.length).sort((a, b) => a - b)) !== JSON.stringify(protocol.sourceSizes) ||
@@ -136,9 +141,12 @@ export async function compilationFieldDomainsProbe(mode: "prepare" | "run", root
               typed = new TypedCompilationAliases(request.context, request.wireJsonSchema ?? z.toJSONSchema(request.schema, { target: "draft-07" }));
               replaySyntaxPolicy = request.jsonSyntaxRecovery;
             }
-            const adapted = arm === "C" ? typed?.request(request) ?? compilationFieldDomainsRequest(request) : request;
+            const adapted = arm === "B" ? request : candidate === "onset-domain"
+              ? compilationOnsetDomainRequest(request, originalState)
+              : typed?.request(request) ?? compilationFieldDomainsRequest(request);
             if (mode === "prepare") save(trialDirectory, "domains.json", { sourceContextHash: contentHash(request.context),
               adaptedContextHash: contentHash(adapted.context), domains: compilationFieldDomains(request.context),
+              ...(candidate === "onset-domain" ? { onsetProof: compilationOnsetDomainProof(originalState) } : {}),
               originalSchemaBytes: Buffer.byteLength(JSON.stringify(z.toJSONSchema(request.schema, { target: "draft-07" }))),
               candidateSchemaBytes: Buffer.byteLength(JSON.stringify(adapted.wireJsonSchema ?? z.toJSONSchema(request.schema, { target: "draft-07" }))) });
             return gateway.generateStructured(adapted);
@@ -196,7 +204,7 @@ export async function compilationFieldDomainsProbe(mode: "prepare" | "run", root
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const [mode, root, sourceRoot, candidate = "field-domains"] = process.argv.slice(2);
-  if ((mode !== "prepare" && mode !== "run") || !root || !sourceRoot || (candidate !== "field-domains" && candidate !== "typed-aliases")) throw new Error("Usage: prepare|run <probe-root> <original-integrated-root> [field-domains|typed-aliases]");
+  if ((mode !== "prepare" && mode !== "run") || !root || !sourceRoot || (candidate !== "field-domains" && candidate !== "typed-aliases" && candidate !== "onset-domain")) throw new Error("Usage: prepare|run <probe-root> <original-integrated-root> [field-domains|typed-aliases|onset-domain]");
   compilationFieldDomainsProbe(mode, path.resolve(root), path.resolve(sourceRoot), candidate).then(result => process.stdout.write(`${JSON.stringify(result)}\n`))
     .catch(error => { process.stderr.write(`${error instanceof Error ? error.stack : error}\n`); process.exitCode = 1; });
 }
