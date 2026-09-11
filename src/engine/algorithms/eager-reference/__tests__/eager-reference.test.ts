@@ -758,14 +758,17 @@ describe("eager reference safeguards", () => {
     });
     const pending = new EagerReferenceAlgorithm(provider).prepareStep(input, context);
     // Attach the failure observer immediately while independent model work is pending.
-    const outcome = pending.then(value => ({ value, error: undefined }), error => ({ value: undefined, error }));
+    let settled = false;
+    const outcome = pending.then(value => ({ value, error: undefined }), error => ({ value: undefined, error }))
+      .finally(() => { settled = true; });
     try {
       if (failKnown) {
         await expect.poll(() => mindStarted).toBe(true);
         releaseKnown();
-        expect((await outcome).error).toBe(failure);
-        releaseMind();
         await new Promise<void>(resolve => setImmediate(resolve));
+        expect(settled).toBe(false);
+        releaseMind();
+        expect((await outcome).error).toBe(failure);
         expect(compilationCalls).toBe(1);
       } else {
         await expect.poll(() => compilationCalls).toBe(2);

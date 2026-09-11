@@ -204,6 +204,66 @@ function reactionHarness(input: {
 }
 
 describe("World Instance host", () => {
+  it("keeps the execution open until an already-started sibling compilation records its audit", async () => {
+    const { database, host, provider } = harness();
+    const created = await host.createInstance(originStart);
+    const stored = database.readInstance(created.summary.id);
+    const document = structuredClone(stored.document);
+    const keeperPolicy = document.policyBindings.keeper!;
+    if (keeperPolicy.kind !== "model") throw new Error("fixture keeper must use the model policy");
+    keeperPolicy.resumeFromRevision = document.state.revision;
+    database.compareAndSwapInstance(created.summary.id, stored.generation, document);
+    const before = contentHash(document.state);
+    const generate = provider.generateStructured.bind(provider);
+    let announceSibling!: () => void, releaseSibling!: () => void;
+    const siblingStarted = new Promise<void>(resolve => { announceSibling = resolve; });
+    const siblingGate = new Promise<void>(resolve => { releaseSibling = resolve; });
+    let compilationCalls = 0, failureThrown = false, siblingFinished = false, siblingSettled = false;
+    let siblingInvocationId: string | undefined;
+    provider.generateStructured = async request => {
+      if (request.role !== "action-compilation") return generate(request);
+      if (++compilationCalls === 1) {
+        await siblingStarted;
+        failureThrown = true;
+        throw new ModelTransportError("known compilation failed while its sibling was in flight");
+      }
+      announceSibling();
+      await siblingGate;
+      try {
+        const result = await generate(request);
+        siblingInvocationId = result.audit.invocations[0]!.id;
+        siblingFinished = true;
+        return result;
+      } finally { siblingSettled = true; }
+    };
+    try {
+      await host.submitAction(created.summary.id, created.participants[0]!.id, {
+        submissionId: "parallel-failure", expectedRevision: created.summary.revision, text: "我观察石门。",
+      });
+      await expect.poll(() => failureThrown).toBe(true);
+      await new Promise<void>(resolve => setImmediate(resolve));
+      const execution = database.executions({ instanceId: created.summary.id }).at(-1)!;
+      expect(execution.status).toBe("running");
+      expect(siblingFinished).toBe(false);
+      releaseSibling();
+      await waitForRunStatus(host, created.summary.id, "failed");
+      expect(siblingFinished).toBe(true);
+      expect(compilationCalls).toBe(2);
+      expect(contentHash(database.readInstance(created.summary.id).document.state)).toBe(before);
+      const events = database.executionEvents(execution.id);
+      const audit = events.find(event => event.event === "model.audit.persisted" && event.correlation?.modelInvocationId === siblingInvocationId);
+      const terminal = events.find(event => event.event === "execution.failed");
+      expect(audit).toBeDefined();
+      expect(terminal!.sequence).toBeGreaterThan(audit!.sequence);
+      expect(database.execution(execution.id)?.commitRevision).toBeUndefined();
+    } finally {
+      releaseSibling();
+      await expect.poll(() => siblingSettled).toBe(true);
+      await waitForRunStatus(host, created.summary.id, "failed");
+      database.close();
+    }
+  }, 30_000);
+
   it("persists a terminal failed run when a model error has an empty message", async () => {
     const { host, database, provider } = harness();
     const created = await host.createInstance(observerStart);
@@ -288,7 +348,7 @@ describe("World Instance host", () => {
           root: {
             role: "world-execution",
             id: "eager-reference",
-            version: "20",
+            version: "21",
             manifestHash: stored.executionAlgorithm.manifestHash,
           },
         },
@@ -583,7 +643,7 @@ describe("World Instance host", () => {
       expect(stored.experimentEnrollment).toBeNull();
       expect(stored.executionAlgorithm).toMatchObject({
         id: "eager-reference",
-        version: "20",
+        version: "21",
         contractVersion: 7,
         config: {},
         children: {

@@ -406,7 +406,7 @@ export function createEagerReferenceAlgorithmRef(
   return defineAlgorithmRef({
     role: "world-execution",
     id: "eager-reference",
-    version: "20",
+    version: "21",
     contractVersion: 7,
     config: {},
     children: { agentCognition, actionCompilation, interactionGrounding, reactionResolution, truthResolution, observationRendering },
@@ -1516,10 +1516,14 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
       );
       return { resumedMindBatch, resumedActions, newActions, compiled };
     }).catch(failPreparation);
-    const [knownActionCompilationBatch, resumed] = await Promise.all([
+    const compilationWork = [
       knownActionCompilation,
       resumedPreparation,
-    ]);
+    ] as const;
+    // Preserve the first failure, but keep the execution and its Ledger open
+    // until both already-started branches have recorded their final evidence.
+    const [knownActionCompilationBatch, resumed] = await Promise.all(compilationWork)
+      .finally(async () => { await Promise.allSettled(compilationWork); });
     const { resumedMindBatch, resumedActions, newActions, compiled: resumedActionCompilationBatch } = resumed;
     const resumedOutputs = resumedMindBatch.outputs;
     await context.stages?.after(actionCompilationStage);
