@@ -64,7 +64,7 @@ function recordedContext(): Record<string, unknown> {
     },
   ];
   return {
-    contractVersion: 16,
+    contractVersion: 17,
     task: {
       slots: [{
         slot: 0,

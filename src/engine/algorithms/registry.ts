@@ -746,7 +746,7 @@ export function registerBuiltinAlgorithms(
   if (registry.has(DEFAULT_ALGORITHM_REF)) return registry;
   for (const definition of definitions) registry.registerAlgorithmDefinition(definition);
   registry.registerDefinition({
-    ...identity("world-execution", "eager-reference", "18", 7),
+    ...identity("world-execution", "eager-reference", "19", 7),
     maturity: "reference",
     configSchema: z.strictObject({}),
     children: [

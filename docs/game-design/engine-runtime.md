@@ -61,6 +61,8 @@ Action Compilation 与 AgentMind 在算法内部使用独立上限的槽位批�
 
 ## Truth 与随机承诺
 
+Truth actor context preserves each issued local reference and its canonical entity references together in `localEntityBindings`. Empty and multiple bindings remain explicit; the separate local and canonical inventories do not encode a positional correspondence. The mapping belongs to adjudication context and does not enter AgentMind or ordinary client projections. Binding identity alone does not authorize an effect.
+
 perception 只能请求 perception checks 或结束；reaction routing 只能选择有结构化感知依据的 Agent；resolution 在任何 resolution 随机前提交一次完整计划，之后只能请求离散随机或结束；transition 只提出语义效果与可信规则调用。阶段单向前进，已提交计划不能根据骰点改写。
 
 每份 ResolutionPlan 固定 actor、targets、goal、canonical grounded means、命名难度或对抗、至多一个 actor 自有 Rating、因素唯一角色、风险、基础效果、一个 primary effect、可选的较弱 secondary effect 与失败威胁。普通环境难度 `trivial/easy/challenging/hard/extreme` 映射到 DC 5/10/15/20/25，对抗 DC 为 10 加目标 Rating；semantic edge/hindrance 相抵后只决定 advantage、normal 或 disadvantage。

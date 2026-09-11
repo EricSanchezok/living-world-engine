@@ -21,6 +21,8 @@ The action-frame candidate joins each assigned action to its exact actor Entity 
 
 ## Plan
 
+Truth actor projection preserves the exact relation between issued local references and their canonical entity bindings, including unresolved and multiple bindings, alongside the complete existing inventories. A deterministic regression must distinguish two worlds with identical labels and inventory order but swapped pairings. Private AgentMind and ordinary client projections retain their existing cognitive boundary. Version the model context and execution producer for this source-contract correction; empirical model improvement remains a separate acceptance requirement.
+
 Capture the registered production composition at the failed player's planning boundary. Verify historical output through that same entry path. Compare frozen requests through the real model gateway and preserve rejected responses. Adopt only demonstrated improvements, then run independent continuous player scenarios through WorldHost and the browser. Investigate remaining serial generation, redundant work and task completion from measured critical paths.
 
 ## Verification

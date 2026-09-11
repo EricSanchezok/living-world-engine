@@ -11,7 +11,7 @@ import { dependentFieldsProvider, dependentFieldsRequest, encodeResolutionDepend
 import { expandSharedBatchContexts, factorSharedBatchContexts, type SharedBatchContext } from "../shared-batch-context";
 import { planSelectorProvider, planSelectorRequest, stripPlanSelectorAnnotations } from "../plan-source-selectors";
 
-const context = (id: string) => ({ contractVersion: 16, roleContract: { role: "truth-resolution" },
+const context = (id: string) => ({ contractVersion: 17, roleContract: { role: "truth-resolution" },
   execution: { worldId: "world", instanceId: "instance", advanceId: "step", revision: 0, step: 0 },
   task: { assignment: { targetHandles: [`ref:action:${id}`], availableHandles: [`ref:action:${id}`], allowedProposalKinds: [] }, constraints: [] },
   state: { text: "Do not rewrite e:123456789012 or ref:entity:invented in prose.", actionSet: { assigned: [{ actionRef: `ref:action:${id}`,

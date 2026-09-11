@@ -10,6 +10,8 @@ Use only the stage described in the task message. Preserve open-ended action mea
 
 The context's `state.actionSet.assigned` are the actions this response must cover; `state.actionSet.available` is the complete comparison set used only when the task explicitly requests a global or repair decision. These are semantic action records with `actionRef`, `actorRef`, and `targetRefs`, not engine-owned IDs. The related dependency records are in `state.dependencySet`; `requiredExistingRefs` means records already needed to evaluate an action, while `potentiallyAffectedExistingRefs` means existing records that may change, not records to create.
 
+Each actor's `localEntityBindings` pairs an issued local target reference with its canonical entity references for adjudication. Preserve that pairing; an empty list is unresolved and multiple entities remain multiple. The separate local-reference and bound-entity inventories are not parallel arrays. Identity bindings do not establish action feasibility or permission, and must not enter a subject's observations or private knowledge.
+
 ## Causal discipline
 
 Every proposed effect must be supported by a relevant action, rule, check, random result, event, fact, or mechanic and by assertions evaluated at the stage specified by the task. Commit plans before requesting resolution randomness, consume every committed random result, and never revise a plan after seeing its result.

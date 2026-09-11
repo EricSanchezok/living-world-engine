@@ -11,7 +11,7 @@ import { factorSharedBatchContexts } from "../shared-batch-context";
 import { visiblePlanTargetHandles, visiblePlanTargetProvider, visiblePlanTargetRequest } from "../visible-plan-target-vocabulary";
 
 const candidate = (id: string, kind = "entity", allowedUses = ["target"]) => ({ handle: `ref:${kind}:${id}`, kind, allowedUses });
-const context = (id: string) => ({ contractVersion: 16, roleContract: { role: "truth-resolution" },
+const context = (id: string) => ({ contractVersion: 17, roleContract: { role: "truth-resolution" },
   execution: { worldId: "world", instanceId: "instance", advanceId: "step", revision: 0, step: 0 },
   task: { assignment: { targetHandles: [], availableHandles: [], allowedProposalKinds: [] }, constraints: [] },
   state: { text: "ref:entity:invented-in-prose" }, referenceCatalog: { version: 2, hash: id,

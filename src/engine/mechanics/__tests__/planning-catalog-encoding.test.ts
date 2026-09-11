@@ -27,7 +27,7 @@ function request(slot: number, repair: boolean): StructuredModelRequest<unknown>
     workloadId: "instance", batchId: "step", runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 0 },
     schemaName: "truth_resolution_continuation", schema: resolutionContinuationDirectiveSchema,
     system: prompt.system, userPrompt: prompt.userPrompt, promptVersion: prompt.version,
-    context: { contractVersion: 16, roleContract: { role: "truth-resolution" },
+    context: { contractVersion: 17, roleContract: { role: "truth-resolution" },
       execution: { worldId: "world", instanceId: "instance", advanceId: "step", revision: 0, step: 0 },
       task: { assignment: { targetHandles: [], availableHandles: [], allowedProposalKinds: [] }, constraints: [] },
       state: { completeAction: `Try action ${slot} only if all conditions hold; retain quantity, timing and recipient.`,

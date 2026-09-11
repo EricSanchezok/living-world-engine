@@ -288,7 +288,7 @@ describe("World Instance host", () => {
           root: {
             role: "world-execution",
             id: "eager-reference",
-            version: "18",
+            version: "19",
             manifestHash: stored.executionAlgorithm.manifestHash,
           },
         },
@@ -583,7 +583,7 @@ describe("World Instance host", () => {
       expect(stored.experimentEnrollment).toBeNull();
       expect(stored.executionAlgorithm).toMatchObject({
         id: "eager-reference",
-        version: "18",
+        version: "19",
         contractVersion: 7,
         config: {},
         children: {
@@ -618,7 +618,7 @@ describe("World Instance host", () => {
       expect(arrivalRequest).toMatchObject({
         promptVersion: promptBundle("arrival-generator").version,
         context: {
-          contractVersion: 16,
+          contractVersion: 17,
           roleContract: expect.objectContaining({ role: "arrival-generator" }),
           task: expect.objectContaining({ assignment: expect.any(Object) }),
           state: { perspective: expect.objectContaining({ agentRef: "ref:agent:courtyard-wanderer-1" }) },

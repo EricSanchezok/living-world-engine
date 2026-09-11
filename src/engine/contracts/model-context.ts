@@ -12,7 +12,7 @@ import {
  * request and slot that issued it; the resolver never trusts model supplied
  * ids as canonical identities.
  */
-export const MODEL_CONTEXT_CONTRACT_VERSION = 16 as const;
+export const MODEL_CONTEXT_CONTRACT_VERSION = 17 as const;
 export const MODEL_REFERENCE_CATALOG_VERSION = 2 as const;
 export const ACTION_COMPILATION_CANDIDATE_KEY_VERSION = 2 as const;
 export const ACTION_COMPILATION_CANDIDATE_KEY_SUFFIX_LENGTH = 12 as const;

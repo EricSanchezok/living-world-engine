@@ -103,7 +103,7 @@ describe("dependent resolution fields", () => {
     provider.generateStructured = request => { captured.push(request); return generate(request); };
     const coordinator = new TruthBatchCoordinator(dependentFieldsProvider(provider), 12, 2, SHARED_BATCH_CONTEXT_CODEC);
     const prompt = promptBundle("truth-resolution");
-    const context = { contractVersion: 16, roleContract: { role: "truth-resolution" },
+    const context = { contractVersion: 17, roleContract: { role: "truth-resolution" },
       execution: { worldId: "world", instanceId: "instance", advanceId: "step", revision: 0, step: 0 },
       task: { assignment: { targetHandles: [], availableHandles: [], allowedProposalKinds: [] }, constraints: [] },
       state: {}, referenceCatalog: { version: 2, hash: "test", candidates: [] }, repair: null };

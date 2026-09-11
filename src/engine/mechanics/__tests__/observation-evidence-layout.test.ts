@@ -19,7 +19,7 @@ function request(id: string): StructuredModelRequest<unknown> {
     workloadId: "instance", batchId: "step", schemaName: "observation_render", schema: observationRenderSchema,
     system: prompt.system, userPrompt: prompt.userPrompt, promptVersion: prompt.version,
     runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 0 },
-    context: { contractVersion: 16, roleContract: { role: "observation-renderer" },
+    context: { contractVersion: 17, roleContract: { role: "observation-renderer" },
       execution: { worldId: "world", instanceId: "instance", advanceId: "step", revision: 0, step: 0 },
       task: { assignment: { targetHandles: [`ref:agent:${id}`], availableHandles: [], allowedProposalKinds: [] }, constraints: [] },
       state: { observationSlots: [{ observer: { agentRef: `ref:agent:${id}`, selfEntityRef: `ref:entity:${id}`,

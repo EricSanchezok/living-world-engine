@@ -1250,6 +1250,16 @@ function projectModelActors(
     }),
     boundCanonicalEntityRefs: Object.values(actor.localEntityBindings).flatMap((entityIds) =>
       entityIds.map((entityId) => resolver.handleFor("entity", entityId))),
+    localEntityBindings: actor.existingLocalEntityIds.flatMap((localId) => {
+      let localEntityRef: string;
+      try {
+        localEntityRef = resolver.handleFor("local_entity", `${agentId}::${localId}`);
+      } catch {
+        return [];
+      }
+      return [{ localEntityRef, canonicalEntityRefs: (actor.localEntityBindings[localId] ?? [])
+        .map((entityId) => resolver.handleFor("entity", entityId)) }];
+    }),
   }));
 }
 
