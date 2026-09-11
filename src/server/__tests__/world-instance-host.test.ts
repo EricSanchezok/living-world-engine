@@ -348,7 +348,7 @@ describe("World Instance host", () => {
           root: {
             role: "world-execution",
             id: "eager-reference",
-            version: "21",
+            version: "22",
             manifestHash: stored.executionAlgorithm.manifestHash,
           },
         },
@@ -643,8 +643,8 @@ describe("World Instance host", () => {
       expect(stored.experimentEnrollment).toBeNull();
       expect(stored.executionAlgorithm).toMatchObject({
         id: "eager-reference",
-        version: "21",
-        contractVersion: 7,
+        version: "22",
+        contractVersion: 8,
         config: {},
         children: {
           actionCompilation: {

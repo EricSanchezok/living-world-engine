@@ -36,7 +36,7 @@ The indexed reviewed Truth child can opt into [event-sourced outcome summaries](
 
 Models produce semantic drafts only. Agent, Entity, Fact, Meter, Rating, Condition, and subject-private cognition records use world semantic IDs. The engine deterministically assigns runtime identities for actions, Resolution Plans and Receipts, TemporalPlans, Activities, shared-resource pools, checks, random draws, mechanics, events, outcomes, observations, and apparent claims. It materializes revisions, steps, phases, lifecycle, progress, clock deltas, provenance, Profiles, and timestamps.
 
-## `eager-reference@16`
+## `eager-reference@22`
 
 The opt-in registered worklist Truth candidate binds its physical planning representations and temporal evidence through the instance Composition. [The registered pipeline contract](specs/0043-registered-worklist-planning-pipeline.md) defines qualification and gameplay boundaries; the default Composition remains the reference foundation.
 
@@ -53,7 +53,7 @@ Action Compilation and AgentMind use private byte-aware slot batches inside the 
 5. The allocator counts active holders, retaining pauses, and `ready` reservations. It grants every claim atomically or follows the strongest authored route: deterministic `reject`, stable FIFO `queue`, or joint `adjudicate`; the last route includes affected holders in the Truth component but cannot exceed hard capacity.
 6. The algorithm selects the unique earliest positive boundary across admitted actions, existing and `ready` Activities, Timers, Condition expiries, assertion boundaries, and the safety horizon. Queued time never becomes Activity progress.
 7. Action, Activity, Timer, and Condition dependencies form the conflict graph. The affected Activity set expands along persisted footprints to a fixed-point closure, then due actions are adjudicated in connected components; context-only nodes constrain those components without inventing ActionOutcomes. Actual out-of-footprint access or a cross-component write triggers one global readjudication.
-8. Every due or affected ongoing Activity receives a validated `ActivityDisposition`. Terminal dispositions release claims before connected FIFO components promote satisfiable queue heads to `ready`; a promoted Activity starts from the then-current clock only on a later positive step after its assertions still hold.
+8. Every due or affected ongoing Activity receives a validated `ActivityDisposition`. [Current boundary triggers](specs/0124-distinguish-interaction-context-from-boundary-triggers.md) distinguish a new interaction from retained Activity context. Terminal dispositions release claims before connected FIFO components promote satisfiable queue heads to `ready`; a promoted Activity starts from the then-current clock only on a later positive step after its assertions still hold.
 9. Observation Renderer fills engine-owned observer slots for normal, blocked, queued, reserved, started, and contested outcomes. Only Agents at a new decision point run AgentMind, and external reaction requests pause at a persisted `WorldStepPreparation` rather than keeping an execution open.
 10. CanonicalCommitter independently rebuilds the boundary, interaction evidence, claims, holder usage, admissions, queue order, promotions, affected Activity set, dispositions, assertions, and one global candidate before constructing state. Instance CAS and the completion execution terminal record commit in one SQLite transaction.
 

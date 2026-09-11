@@ -815,7 +815,8 @@ function validateCandidateBoundary(
   }
 
   const observedAgentIds = new Set(observations.map((observation) => observation.observerId));
-  const relevantExternalObservers = new Set(candidate.interactionDependencies.flatMap((dependency) =>
+  // A validated retained footprint is context, not a newly emitted boundary interaction.
+  const relevantExternalObservers = new Set(candidate.interactionDependencies.filter((dependency) => dependency.kind !== "activity").flatMap((dependency) =>
     dependency.audienceAgentIds.filter((agentId) =>
       agentId !== dependency.actorId && observedAgentIds.has(agentId))));
   const contextActivityIds = [...new Set([

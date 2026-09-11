@@ -20,7 +20,7 @@ const config = { planning: [CONDITIONAL_PLAN_STAKES, EFFECT_PROFILE_DOMAINS, PLA
 /** Diagnostic composition only; its combined result cannot qualify individual adapters. */
 export function integratedPlayerAlgorithmRef() {
   const foundation = standardEagerReferenceAlgorithmRef();
-  return defineAlgorithmRef({ role: "world-execution", id: "integrated-player-diagnostic", version: "4", contractVersion: 7,
+  return defineAlgorithmRef({ role: "world-execution", id: "integrated-player-diagnostic", version: "5", contractVersion: 8,
     config, children: foundation.children });
 }
 
@@ -34,7 +34,7 @@ export function integratedPlayerRequest<T>(request: StructuredModelRequest<T>): 
 
 export function registerIntegratedPlayerAlgorithm(registry = new WorldExecutionAlgorithmRegistry()) {
   registerBuiltinAlgorithms(registry);
-  registry.registerDefinition({ role: "world-execution", id: "integrated-player-diagnostic", version: "4", contractVersion: 7,
+  registry.registerDefinition({ role: "world-execution", id: "integrated-player-diagnostic", version: "5", contractVersion: 8,
     maturity: "diagnostic", configSchema: z.custom<typeof config>(value => contentHash(value) === contentHash(config)),
     children: Object.entries(standardEagerReferenceAlgorithmRef().children).map(([name, child]) => ({ name, role: child.role })),
     create: context => {

@@ -406,8 +406,8 @@ export function createEagerReferenceAlgorithmRef(
   return defineAlgorithmRef({
     role: "world-execution",
     id: "eager-reference",
-    version: "21",
-    contractVersion: 7,
+    version: "22",
+    contractVersion: 8,
     config: {},
     children: { agentCognition, actionCompilation, interactionGrounding, reactionResolution, truthResolution, observationRendering },
   });
@@ -2347,7 +2347,8 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
         const preContextCandidate = applyTransitionProposal(source, resolution.proposal, settledTemporal);
         preContextCandidate.truth.rng = structuredClone(resolution.rng);
         const observedAgentIds = new Set([...observerIds, ...resolution.stimulusObservations.map(packet => packet.observerId)]);
-        const relevantExternalObservers = new Set(interactionDependencies.flatMap(dependency =>
+        // Retained Activity footprints constrain this boundary without emitting a new interaction.
+        const relevantExternalObservers = new Set(interactionDependencies.filter(dependency => dependency.kind !== "activity").flatMap(dependency =>
           dependency.audienceAgentIds.filter(agentId => dependency.actorId !== agentId && observedAgentIds.has(agentId))));
         const preserveActiveActivityIds = new Set(reactionDecisions.flatMap((decision) => {
           if (decision.kind !== "keep" || decision.ongoingActivityDisposition !== "continue") return [];
