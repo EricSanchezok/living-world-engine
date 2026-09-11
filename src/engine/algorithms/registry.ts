@@ -57,6 +57,7 @@ import {
 } from "../runtime/execution";
 import type {
   AlgorithmDefinition,
+  AlgorithmFactoryContext,
   AlgorithmIdentity,
   AlgorithmImplementation,
   AlgorithmRole,
@@ -740,6 +741,20 @@ export function eagerReferenceAlgorithmRef(
   return createEagerReferenceAlgorithmRef(config);
 }
 
+/** Keep the producer that prepares and resumes a step identical to its registered root. */
+export function createComposedEagerReferenceAlgorithm({ ref, children, services }: AlgorithmFactoryContext<WorldExecutionAlgorithmServices>) {
+  const config = eagerConfig(children);
+  const algorithms = eagerAlgorithms(children);
+  return new EagerReferenceAlgorithm(
+    services.provider,
+    services.rulePackages,
+    config,
+    algorithms.candidateSelection.runtime,
+    eagerComponents(children, services),
+    algorithmManifest(ref as AlgorithmRef<"world-execution">),
+  );
+}
+
 export function registerBuiltinAlgorithms(
   registry: WorldExecutionAlgorithmRegistry = new WorldExecutionAlgorithmRegistry(),
 ): WorldExecutionAlgorithmRegistry {
@@ -757,19 +772,7 @@ export function registerBuiltinAlgorithms(
       { name: "truthResolution", role: "truth-resolution" },
       { name: "observationRendering", role: "observation-rendering" },
     ],
-    create: ({ ref, children, services }) => {
-      const config = eagerConfig(children);
-      const algorithms = eagerAlgorithms(children);
-      const candidateSelection = algorithms.candidateSelection;
-      return new EagerReferenceAlgorithm(
-        services.provider,
-        services.rulePackages,
-        config,
-        candidateSelection.runtime,
-        eagerComponents(children, services),
-        algorithmManifest(ref as AlgorithmRef<"world-execution">),
-      );
-    },
+    create: createComposedEagerReferenceAlgorithm,
   });
   if (!registry.has(DEFAULT_ALGORITHM_REF)) throw new Error("built-in eager-reference composition did not register");
   return registry;

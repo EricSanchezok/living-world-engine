@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { defineAlgorithmRef, type AlgorithmRef } from "../../algorithms/composition";
-import { registerBuiltinAlgorithms } from "../../algorithms/registry";
+import { defineAlgorithmRef } from "../../algorithms/composition";
+import { createComposedEagerReferenceAlgorithm, registerBuiltinAlgorithms } from "../../algorithms/registry";
 import { standardEagerReferenceAlgorithmRef } from "../../algorithms/standard-composition";
-import { algorithmManifest, WorldExecutionAlgorithmRegistry } from "../../runtime/execution";
+import { WorldExecutionAlgorithmRegistry } from "../../runtime/execution";
 import { contentHash } from "../../models/model-audit";
 import type { StructuredModelProvider, StructuredModelRequest } from "../../models/model-provider";
 import { CONDITIONAL_PLAN_STAKES, conditionalPlanStakesRequest } from "./conditional-plan-stakes";
@@ -17,7 +17,7 @@ const config = { planning: [CONDITIONAL_PLAN_STAKES, EFFECT_PROFILE_DOMAINS, PLA
 /** Diagnostic composition only; its combined result cannot qualify individual adapters. */
 export function integratedPlayerAlgorithmRef() {
   const foundation = standardEagerReferenceAlgorithmRef();
-  return defineAlgorithmRef({ role: "world-execution", id: "integrated-player-diagnostic", version: "1", contractVersion: 7,
+  return defineAlgorithmRef({ role: "world-execution", id: "integrated-player-diagnostic", version: "2", contractVersion: 7,
     config, children: foundation.children });
 }
 
@@ -28,10 +28,11 @@ export function integratedPlayerRequest<T>(request: StructuredModelRequest<T>): 
 
 export function registerIntegratedPlayerAlgorithm(registry = new WorldExecutionAlgorithmRegistry()) {
   registerBuiltinAlgorithms(registry);
-  registry.registerDefinition({ role: "world-execution", id: "integrated-player-diagnostic", version: "1", contractVersion: 7,
+  registry.registerDefinition({ role: "world-execution", id: "integrated-player-diagnostic", version: "2", contractVersion: 7,
     maturity: "diagnostic", configSchema: z.custom<typeof config>(value => contentHash(value) === contentHash(config)),
     children: Object.entries(standardEagerReferenceAlgorithmRef().children).map(([name, child]) => ({ name, role: child.role })),
-    create: ({ ref, services }) => {
+    create: context => {
+      const { ref, services } = context;
       const foundation = standardEagerReferenceAlgorithmRef();
       if (contentHash(ref.children) !== contentHash(foundation.children)) {
         throw new Error("integrated player diagnostic requires the current standard foundation");
@@ -42,12 +43,7 @@ export function registerIntegratedPlayerAlgorithm(registry = new WorldExecutionA
         assertProfilesAvailable: profiles => original.assertProfilesAvailable(profiles),
         generateStructured: request => original.generateStructured(integratedPlayerRequest(request)),
       };
-      const delegate = registry.create(foundation, { ...services, provider });
-      return { manifest: algorithmManifest(ref as AlgorithmRef<"world-execution">),
-        bootstrap: (input, context) => delegate.bootstrap(input, context),
-        prepareStep: (input, context) => delegate.prepareStep(input, context),
-        completeStep: (input, preparation, reactions, context) => delegate.completeStep(input, preparation, reactions, context),
-      };
+      return createComposedEagerReferenceAlgorithm({ ...context, services: { ...services, provider } });
     },
   });
   return registry;
