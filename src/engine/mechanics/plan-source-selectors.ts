@@ -112,6 +112,13 @@ export function stripPlanSelectorAnnotations(context: unknown): unknown {
   return copy;
 }
 
+/** Restore one logical candidate with the same selector decoder used by live output. */
+export function decodeLogicalPlanSelectors(value: unknown, context: unknown): unknown {
+  const source = stripPlanSelectorAnnotations(context);
+  if (!object(source) || isSharedBatchContext(source.state)) return fail("requires one logical source");
+  return mapPlans(value, [annotate(source, new Map())], false);
+}
+
 function wireSchema(schema: Record<string, unknown>): Record<string, unknown> {
   const copy = structuredClone(schema);
   let changed = 0;

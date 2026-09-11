@@ -25,6 +25,11 @@ import { parseModelCatalog } from "../../models/model-catalog";
 import { createModelGateway } from "../../models/model-gateway";
 import { planningContractTailRequest, PLANNING_CONTRACT_TAIL } from "../planning-contract-tail";
 import { declaredRandomPlanSchema, PLAN_RANDOM_COMPLETION_PROMPT } from "../plan-random-completion";
+import { indexedTargetRepairRequest, indexedTargetRepairDiagnostics } from "../../benchmarks/step-efficiency/indexed-target-repair";
+import { planningSourceContexts } from "../../benchmarks/step-efficiency/planning-source-contexts";
+import { logicalRepairContext } from "../../prompts/logical-repair-context";
+import { ModelOutputError } from "../../models/model-provider";
+import { planningCatalogEncodingRequest } from "../planning-catalog-encoding";
 
 it.each([true, false])("binds the planning tail to the current root or narrowed repair worklist (%s)", shared => {
   const { request, source, domain } = fixture(shared, false, true);
@@ -72,10 +77,10 @@ it("renders and accounts for the planning tail after the actual HTTP schema, rej
   expect(bodies).toHaveLength(2);
 });
 
-function fixture(shared = true, emptyTargets = false, indexMeans = false, scopeTransform?: (context: Record<string, unknown>) => void, declarations = false) {
-  const ids = shared ? ["a", "b"] : ["b"];
+function fixture(shared = true, emptyTargets = false, indexMeans = false, scopeTransform?: (context: Record<string, unknown>) => void, declarations = false, sourceIds?: string[]) {
+  const ids = sourceIds ?? (shared ? ["a", "b"] : ["b"]);
   const contexts = ids.map(id => ({ task: { constraints: ["Wait until the convoy arrives"], planCauseScope: { contract: PLAN_CAUSE_SCOPE, actionRefs: [`ref:action:${id}`] } }, state: { revision: 9, actionSet: {
-    assigned: [{ actionRef: `ref:action:${id}`, rawText: "等待商队到来再交付物资；道路封闭则留守。", goal: "Conditional delivery",
+    assigned: [{ actionRef: `ref:action:${id}`, actorRef: `ref:agent:${id}`, means: null, rawText: "等待商队到来再交付物资；道路封闭则留守。", goal: "Conditional delivery",
       allowedMeansSources: ["action", "fact", "law"].map(kind => ({ kind, ref: `ref:${kind}:${id}` })) }],
     available: [{ actionRef: "ref:action:background", rawText: "Unassigned background retained" }],
   } }, referenceCatalog: { candidates: [...(emptyTargets ? [] : [{ handle: `ref:entity:${id}`, kind: "entity", allowedUses: ["target", "cause"], label: id }]),
@@ -102,6 +107,86 @@ function fixture(shared = true, emptyTargets = false, indexMeans = false, scopeT
     secondaryEffect: null, threatenedEffect: null, visibility: "full", causes: [{ kind: "action", ref: `ref:action:${id}` }] }));
   return { original, before, request, domain, source: { kind: "commit_plans", plans } };
 }
+
+it("maps actual gateway target rejection to generated fields while retaining the complete rejected candidate and valid neighbor", async () => {
+  const initial = fixture();
+  const effect = { kind: "condition", proposalKey: "watched", targetRef: "ref:entity:a", channel: "attention", label: "watched",
+    description: "Under observation", sourceRefs: [{ kind: "action", ref: "ref:action:a" }], conditionRef: { proposalKey: "watched" },
+    conditionProfileRef: null, durationProfileRef: "ref:mechanic:a", access: { kind: "public" }, magnitude: "standard" };
+  const complete = { ...initial.source, plans: [{ ...initial.source.plans[0], primaryEffect: effect }, initial.source.plans[1]] };
+  const valid = encodeIndexedPlans(complete, initial.domain) as { plans: Array<Record<string, unknown>> };
+  const invalid = structuredClone(valid); invalid.plans[0]!.targetIndices = [];
+  let response: unknown = invalid;
+  const bodies: unknown[] = [], catalog = createTestModelCatalog(["truth-deepseek"]);
+  const gateway = createModelGateway(catalog, { TEST_MODEL_API_KEY: "fixture" }, { registry: createTestModelRegistry(catalog), maxTransportAttempts: 1,
+    fetch: async (_url, init) => {
+      bodies.push(JSON.parse(String(init?.body)));
+      return Response.json({ id: "target-repair", model: "fixture", choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(response) }, finish_reason: "stop" }],
+        usage: { prompt_tokens: 30, completion_tokens: 40, total_tokens: 70 } });
+    } });
+  const scope = { profileId: "truth-deepseek", runtimeIdentity: { worldHash: `sha256:${"1".repeat(64)}`, revision: 9 } };
+  const original = { ...planningCatalogEncodingRequest(initial.request), ...scope };
+  expect(indexedTargetRepairRequest(original)).toBe(original);
+  const rejected = await gateway.generateStructured(original).catch(error => error as unknown);
+  expect(rejected).toBeInstanceOf(ModelOutputError);
+  if (!(rejected instanceof ModelOutputError)) throw new Error("expected gateway rejection");
+  await expect(gateway.generateStructured(indexedTargetRepairRequest(original))).rejects.toBeInstanceOf(ModelOutputError);
+  expect(bodies[1]).toEqual(bodies[0]);
+  const decoded = rejected.rawValue as { slots: Array<{ slot: number; result: { plans: Array<Record<string, unknown>> } }> };
+  const previous = decoded.slots.find(slot => slot.slot === 0)!.result;
+  expect(resolutionPlanCommitDirectiveSchema.safeParse(decoded.slots.find(slot => slot.slot === 1)!.result).success).toBe(true);
+  const repairs = rejected.audit!.invocations[0]!.issues!.filter(issue => issue.path[1] === 0)
+    .map(issue => ({ ...issue, path: issue.path.slice(3), reason: issue.message }));
+  const next = fixture(true, false, false, context => {
+    const action = (context.state as { actionSet: { assigned: Array<{ actionRef: string }> } }).actionSet.assigned[0]!;
+    if (action.actionRef !== "ref:action:a") return;
+    context.repair = { issues: [...repairs, { code: "source.review", path: [], reason: "Keep this independent source issue" }] };
+    Object.assign(context, logicalRepairContext(context, { attempt: 1, scope: "slot", targetIds: [], issues: [], previousOutput: previous }, contentHash(context), "truth_resolution_plan_commit"));
+  });
+  const repairRequest = { ...planningCatalogEncodingRequest(next.request), ...scope }, candidate = indexedTargetRepairRequest(repairRequest);
+  const mapped = indexedTargetRepairDiagnostics(repairRequest.context);
+  expect(mapped.diagnostics).toMatchObject([{ actionIndex: 0, sourceSlot: 0, actionRef: "ref:action:a", previousTargetRefs: [],
+    failedEffects: [{ field: "primaryEffect", decodedTarget: "unresolved-index:0", rejectedTargetPosition: 0 }] }]);
+  expect(planningSourceContexts(candidate.context)).toEqual(planningSourceContexts(repairRequest.context));
+  expect(candidate.schema).toBe(repairRequest.schema); expect(candidate.wireJsonSchema).toBe(repairRequest.wireJsonSchema);
+  expect(() => indexedTargetRepairRequest({ ...repairRequest, wireJsonSchema: undefined })).toThrow("missing generated target relationship");
+  expect(candidate.preprocessOutput!(invalid)).toEqual(repairRequest.preprocessOutput!(invalid));
+  await expect(gateway.generateStructured(candidate)).rejects.toBeInstanceOf(ModelOutputError);
+  expect(JSON.stringify(bodies[2])).toContain("indexedTargetRepair");
+  expect(JSON.stringify(bodies[2])).toContain("Keep this independent source issue");
+  response = valid;
+  const accepted = await gateway.generateStructured(candidate);
+  expect(accepted.value).toEqual(repairRequest.schema.parse(repairRequest.preprocessOutput!(valid).value));
+  expect(() => indexedTargetRepairRequest(candidate)).toThrow("already applied");
+  const context = candidate.context as { task: { indexedTargetRepair: { diagnostics: Array<{ actionIndex: number }> } } };
+  context.task.indexedTargetRepair.diagnostics[0]!.actionIndex = 1;
+  expect(() => candidate.preprocessOutput!(valid)).toThrow("changed before decoding");
+});
+
+it("binds target diagnostics to current reindexed actions and refuses corrupted or cross-slot evidence", () => {
+  const previous = { kind: "commit_plans", plans: [{ actionRef: "ref:action:b", targetRefs: [],
+    primaryEffect: { targetRef: "unresolved-index:0" }, threatenedEffect: { targetRef: "unresolved-index:0" } }] };
+  const withRepair = (context: Record<string, unknown>) => {
+    context.repair = { previousOutputAvailable: true, previousOutput: previous, candidateBinding: { canonicalOutputHash: contentHash(previous) },
+      issues: ["primaryEffect", "threatenedEffect"].map(field => ({ path: ["plans", 0, field, "targetRef"], originalValue: "unresolved-index:0" })) };
+  };
+  const repairB = (context: Record<string, unknown>) => {
+    const state = context.state as { actionSet: { assigned: Array<{ actionRef: string }> } };
+    if (state.actionSet.assigned[0]!.actionRef === "ref:action:b") withRepair(context);
+  };
+  const root = planningCatalogEncodingRequest(fixture(true, false, false, repairB, false, ["a", "b", "c"]).request);
+  expect(indexedTargetRepairDiagnostics(root.context).diagnostics[0]).toMatchObject({ actionIndex: 1, sourceSlot: 1, actionRef: "ref:action:b" });
+  const narrowed = planningCatalogEncodingRequest(fixture(true, false, false, repairB, false, ["b", "c"]).request);
+  const mapped = indexedTargetRepairDiagnostics(narrowed.context);
+  expect(mapped.diagnostics[0]).toMatchObject({ actionIndex: 0, sourceSlot: 0, actionRef: "ref:action:b" });
+  expect(mapped.diagnostics[0]!.failedEffects).toHaveLength(2);
+  const cross = planningCatalogEncodingRequest(fixture(true, false, false, withRepair).request);
+  expect(() => indexedTargetRepairRequest(cross)).toThrow("outside its source slot");
+  const changed = planningCatalogEncodingRequest(fixture(true, false, false, context => {
+    withRepair(context); (context.repair as { candidateBinding: { canonicalOutputHash: string } }).candidateBinding.canonicalOutputHash = "changed";
+  }).request);
+  expect(() => indexedTargetRepairRequest(changed)).toThrow("binding changed");
+});
 
 it("retains per-action randomness decisions through the complete physical planning codecs and HTTP validation", async () => {
   const { request, source, domain } = fixture(true, false, true, undefined, true);
