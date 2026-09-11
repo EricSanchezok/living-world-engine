@@ -19,7 +19,7 @@ import { createModelFetchResolver } from "../../src/engine/models/model-network"
 import { ModelConfigurationError, type StructuredModelProvider, type StructuredModelRequest } from "../../src/engine/models/model-provider";
 import { createActionCompilationRetrievalRuntimeProvider } from "../../src/server/action-compilation-retrieval-runtime";
 
-interface SourceExport {
+export interface SourceExport {
   execution: { id: string; instanceId: string; manifest: AlgorithmManifest };
   events: Array<RuntimeEvent & { sequence: number }>;
 }
@@ -39,14 +39,7 @@ export function planStakesRequestEvidence(request: StructuredModelRequest<unknow
     contextLayout: request.contextLayout, jsonSyntaxRecovery: request.jsonSyntaxRecovery };
 }
 
-/** Real prepared-step reconstruction, bounded at the first physical planning request.
- * Every subsequent call is captured and stopped before HTTP or canonical commit. */
-export async function runPlayerPlanStakesProbe(argv: string[]) {
-  const [sourcePath, dataRoot, output, mode = "preflight", candidateMode = "stakes", baselineEvidencePath] = argv;
-  if (!sourcePath || !dataRoot || !output || !["preflight", "run"].includes(mode) || !["stakes", "profile-domains", "action-frames", "decision-order", "factor-products"].includes(candidateMode)) throw new Error("Expected source-export data-root output-directory [preflight|run] [stakes|profile-domains|action-frames|decision-order|factor-products] [baseline-request]");
-  if (candidateMode === "factor-products" && !baselineEvidencePath) throw new Error("Factor products requires the frozen earlier baseline request");
-  mkdirSync(output, { recursive: false });
-  const source: SourceExport = JSON.parse(readFileSync(sourcePath, "utf8"));
+export function reconstructPreparedPlayerStep(source: SourceExport, counterfactual: boolean) {
   const first = source.events.find(event => event.event === "model.context.serialized" &&
     (event.payload as { schemaName?: string })?.schemaName === "truth_resolution_plan_commit_batch");
   if (!first) throw new Error("Source has no first physical planning request");
@@ -56,7 +49,6 @@ export async function runPlayerPlanStakesProbe(argv: string[]) {
   if (!recordedInput || !recordedPreparation || Object.keys(recordedInput.state.agents).length !== 49 || Object.values(recordedInput.policyRoster).filter(policy => policy.kind === "external").length !== 1) throw new Error("Expected a complete 48 NPC plus one player source");
   const input = structuredClone(recordedInput), preparation = structuredClone(recordedPreparation);
   const recordedRef = algorithmRef(source.execution.manifest);
-  const counterfactual = ["decision-order", "factor-products"].includes(candidateMode);
   const ref = counterfactual ? DEFAULT_ALGORITHM_REF : recordedRef;
   // This explicitly selected research boundary imports prepared canonical evidence
   // into the current producer. It is not a replay, save migration or world commit.
@@ -64,8 +56,6 @@ export async function runPlayerPlanStakesProbe(argv: string[]) {
     preparation.algorithmManifestHash = ref.manifestHash;
     const restored = { ...preparation, algorithmManifestHash: recordedPreparation.algorithmManifestHash };
     if (contentHash(restored) !== contentHash(recordedPreparation)) throw new Error("Counterfactual preparation changed more than its producer binding");
-    save(output, "counterfactual-preparation.json", { sourceAlgorithm: recordedRef, algorithm: ref,
-      sourcePreparationHash: contentHash(recordedPreparation), preparationHash: contentHash(preparation), preparation });
   }
   // Ledger object serialization sorts map keys. Restore the source's recorded
   // catalog order before projections that expose insertion order to the model.
@@ -79,6 +69,21 @@ export async function runPlayerPlanStakesProbe(argv: string[]) {
     state.truth.entities = orderMap(state.truth.entities, catalogOrder.filter(handle => handle.startsWith("ref:entity:")).map(handle => handle.slice("ref:entity:".length)));
     state.truth.activities = orderMap(state.truth.activities, payload.temporalPlanning.map(row => row.activity.id));
   }
+  return { first, recorded, recordedInput, recordedPreparation, input, preparation, recordedRef, ref };
+}
+
+/** Real prepared-step reconstruction, bounded at the first physical planning request.
+ * Every subsequent call is captured and stopped before HTTP or canonical commit. */
+export async function runPlayerPlanStakesProbe(argv: string[]) {
+  const [sourcePath, dataRoot, output, mode = "preflight", candidateMode = "stakes", baselineEvidencePath] = argv;
+  if (!sourcePath || !dataRoot || !output || !["preflight", "run"].includes(mode) || !["stakes", "profile-domains", "action-frames", "decision-order", "factor-products"].includes(candidateMode)) throw new Error("Expected source-export data-root output-directory [preflight|run] [stakes|profile-domains|action-frames|decision-order|factor-products] [baseline-request]");
+  if (candidateMode === "factor-products" && !baselineEvidencePath) throw new Error("Factor products requires the frozen earlier baseline request");
+  mkdirSync(output, { recursive: false });
+  const source: SourceExport = JSON.parse(readFileSync(sourcePath, "utf8"));
+  const counterfactual = ["decision-order", "factor-products"].includes(candidateMode);
+  const { first, recorded, recordedPreparation, input, preparation, recordedRef, ref } = reconstructPreparedPlayerStep(source, counterfactual);
+  if (counterfactual) save(output, "counterfactual-preparation.json", { sourceAlgorithm: recordedRef, algorithm: ref,
+    sourcePreparationHash: contentHash(recordedPreparation), preparationHash: contentHash(preparation), preparation });
   const catalog = loadModelCatalog(path.resolve("config/models.yaml"));
   if (catalog.hash !== recorded.modelCatalogHash || recorded.modelId !== "deepseek-flash" || recorded.resolvedInference.thinking !== "disabled") throw new Error("Source model/profile differs from the authorized baseline");
   const registry = new ModelRegistry(catalog, dataRoot, { fetch: async () => { throw new ProbeStopped("Registry refresh disabled"); } });
