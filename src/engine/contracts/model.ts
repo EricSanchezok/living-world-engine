@@ -1128,7 +1128,7 @@ export interface ActionCompilationReferenceAudit {
 }
 
 export interface ModelJsonRecoveryEvidence {
-  policy: "unmatched-closers-v1";
+  policy: "unmatched-closers-v1" | "terminal-root-closer-v1";
   sourceHash: string;
   recoveredTextHash: string;
   /** Original response string offsets in UTF-16 code units. */

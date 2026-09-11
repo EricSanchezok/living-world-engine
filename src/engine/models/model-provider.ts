@@ -59,7 +59,7 @@ export interface StructuredModelRequest<T> extends ModelExecutionScope {
   /** Explicit lossless placement of physical or bound logical repair evidence. */
   repairContextPlacement?: "tail-v1" | "logical-tail-v1";
   /** Experimental local parser policy; never a provider generation parameter. */
-  jsonSyntaxRecovery?: "unmatched-closers-v1";
+  jsonSyntaxRecovery?: ModelJsonRecoveryEvidence["policy"];
   /** Lossless ordering of shared-state fields ahead of volatile batch metadata. */
   contextLayout?: "shared-state-first-v1";
   /** Deterministic, field-scoped normalization before schema validation. */

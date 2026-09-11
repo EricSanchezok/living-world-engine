@@ -22,6 +22,7 @@ import {
 import { contentHash } from "./model-audit";
 import { repairPromptLayout } from "../prompts/repair-layout";
 import { recoverUnmatchedClosers, UNMATCHED_CLOSER_RECOVERY } from "./unmatched-closer-recovery";
+import { recoverTerminalRootCloser, TERMINAL_ROOT_CLOSER_RECOVERY } from "./terminal-root-closer-recovery";
 import { completeDeepSeekJsonStream } from "./deepseek-json-stream";
 
 export interface ModelAdapterResult {
@@ -35,7 +36,7 @@ export interface ModelAdapterResult {
   tokenUsage: ModelTokenUsage;
   resolvedInference: import("./model-catalog").ResolvedModelInference;
   structuredOutputMode: ModelExecutionAudit["structuredOutputMode"];
-  jsonRecovery: "strict" | "top-level-correction" | "syntax-repair" | typeof UNMATCHED_CLOSER_RECOVERY;
+  jsonRecovery: "strict" | "top-level-correction" | "syntax-repair" | ModelJsonRecoveryEvidence["policy"];
   jsonRecoveryEvidence?: ModelJsonRecoveryEvidence;
 }
 
@@ -101,7 +102,8 @@ function requestOutputMode<T>(binding: ResolvedModelBinding, request: Structured
   if (request.jsonObjectPostlude !== undefined && (mode !== "json-object-zod" || typeof request.jsonObjectPostlude !== "string" || !request.jsonObjectPostlude.trim())) {
     throw new ModelConfigurationError("JSON-object postlude requires nonempty text and JSON-object output mode");
   }
-  if (request.jsonSyntaxRecovery !== undefined && (request.jsonSyntaxRecovery !== UNMATCHED_CLOSER_RECOVERY || mode !== "json-object-zod")) {
+  if (request.jsonSyntaxRecovery !== undefined && ((request.jsonSyntaxRecovery !== UNMATCHED_CLOSER_RECOVERY &&
+    request.jsonSyntaxRecovery !== TERMINAL_ROOT_CLOSER_RECOVERY) || mode !== "json-object-zod")) {
     throw new ModelConfigurationError("experimental syntax recovery requires the declared JSON-object parser policy");
   }
   return mode;
@@ -188,13 +190,25 @@ function parseErrorPosition(error: unknown): number | null {
  * string. Every recovered value still passes the caller's Zod and semantic
  * gates. The return value keeps the legacy last-top-level-correction contract.
  */
-export function parseLastJsonValueWithRecovery(text: string, policy?: typeof UNMATCHED_CLOSER_RECOVERY): {
+export function parseLastJsonValueWithRecovery(text: string, policy?: ModelJsonRecoveryEvidence["policy"]): {
   value: unknown; recovery: JsonRecoveryKind; evidence?: ModelJsonRecoveryEvidence;
 } {
   const source = text.replace(/^\uFEFF/u, "").trim();
   try {
     return { value: JSON.parse(source), recovery: "strict" };
   } catch (strictError) {
+    // This distinct policy alone can interpret a terminal closer before the
+    // continuation guard; a declined candidate retains the ordinary guard.
+    if (policy === TERMINAL_ROOT_CLOSER_RECOVERY) {
+      const recovered = recoverTerminalRootCloser(source);
+      if (recovered) {
+        const start = text.indexOf(source);
+        return { value: recovered.value, recovery: policy,
+          evidence: { policy, sourceHash: contentHash(text),
+            recoveredTextHash: contentHash(text.slice(0, start) + recovered.text + text.slice(start + source.length)),
+            removed: recovered.removed.map(edit => ({ ...edit, offset: edit.offset + start })) } };
+      }
+    }
     const candidates = strictTopLevelCandidates(source);
     if (candidates.length > 0) {
       return { value: candidates.at(-1)!.value, recovery: "top-level-correction" };

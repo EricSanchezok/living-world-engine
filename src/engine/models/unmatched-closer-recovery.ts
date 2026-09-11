@@ -1,37 +1,8 @@
 import { contentHash } from "./model-audit";
+import { duplicateJsonKeys } from "./json-duplicate-keys";
 
 export const UNMATCHED_CLOSER_RECOVERY = "unmatched-closers-v1" as const;
 const MAX_DELETIONS = 128;
-
-/** Input is already strict JSON. Decode key spellings so escaped duplicates
- * cannot silently overwrite earlier evidence during JSON.parse. */
-function duplicateKeys(text: string): boolean {
-  const containers: Array<Set<string> | null> = [];
-  for (let index = 0; index < text.length; index++) {
-    const character = text[index];
-    if (character === "{") containers.push(new Set());
-    else if (character === "[") containers.push(null);
-    else if (character === "}" || character === "]") containers.pop();
-    else if (character === '"') {
-      const start = index++;
-      while (index < text.length) {
-        if (text[index] === "\\") index += 2;
-        else if (text[index] === '"') break;
-        else index++;
-      }
-      let next = index + 1;
-      while (/\s/u.test(text[next] ?? "") && next < text.length) next++;
-      if (text[next] === ":") {
-        const keys = containers.at(-1);
-        if (!keys) return true;
-        const key: string = JSON.parse(text.slice(start, index + 1));
-        if (keys.has(key)) return true;
-        keys.add(key);
-      }
-    }
-  }
-  return false;
-}
 
 /** Experimental interpretation only. Never changes a string, opener, valid
  * closer, separator or value, and never salvages a nested or partial root. */
@@ -70,7 +41,7 @@ export function recoverUnmatchedClosers(source: string) {
   const text = pieces.join("") + source.slice(retainedStart);
   let value: unknown;
   try { value = JSON.parse(text); } catch { return null; }
-  if (duplicateKeys(text)) return null;
+  if (duplicateJsonKeys(text)) return null;
   return { policy: UNMATCHED_CLOSER_RECOVERY, value, text, removed,
     sourceHash: contentHash(source), recoveredTextHash: contentHash(text) };
 }

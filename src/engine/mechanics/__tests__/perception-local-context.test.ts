@@ -5,6 +5,7 @@ import type { OnsetPerceptionInput } from "../../algorithms/roles";
 import { onsetPerceptionReportSchema } from "../../contracts/llm-schemas";
 import type { ModelReferenceCatalog } from "../../contracts/model-context";
 import { contentHash } from "../../models/model-audit";
+import { TERMINAL_ROOT_CLOSER_RECOVERY } from "../../models/terminal-root-closer-recovery";
 import { createModelGateway } from "../../models/model-gateway";
 import { ScriptedModelProvider, createTestModelRegistry } from "../../testing/model-provider";
 import { selectTemporalBoundary } from "../temporal";
@@ -28,8 +29,9 @@ function fixture() {
     { workloadId: "local-context", batchId: "onset", runtimeIdentity: { worldHash: state.worldHash, revision: state.revision } }) };
 }
 
-it.each(["valid", "canonical-subject", "canonical-value", "other-observer"])(
-  "uses the supplied observer namespace through the actual gateway and materializer (%s)", async mode => {
+it.each([undefined, TERMINAL_ROOT_CLOSER_RECOVERY].flatMap(policy =>
+  ["valid", "canonical-subject", "canonical-value", "other-observer", "missing-target"].map(mode => ({ policy, mode }))))(
+  "uses the supplied observer namespace through the actual gateway and materializer ($mode, $policy)", async ({ policy, mode }) => {
     const f = fixture(), contexts: Context[] = [], bodies: string[] = [];
     if (mode === "other-observer") {
       f.input.actions.push({ ...f.input.actions[0]!, id: "watch", actorId: "keeper", rawText: "Watch silently." });
@@ -61,11 +63,11 @@ it.each(["valid", "canonical-subject", "canonical-value", "other-observer"])(
           : { targetIndex: target.targetIndex, kind: "no_stimulus", reason: "Silent watching supplies no outward onset.",
             evidence: [{ kind: "entity", ref: "ref:entity:keeper" }], checkRefs: [] });
         return new Response(JSON.stringify({ id: "local-context-" + bodies.length, model: "scripted:truth-deepseek",
-          choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify({ kind: "done", reports }) }, finish_reason: "stop" }],
+          choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify({ kind: "done", reports: bad && mode === "missing-target" ? [] : reports }) + (policy ? "}" : "") }, finish_reason: "stop" }],
           usage: { prompt_tokens: 100, completion_tokens: 20, total_tokens: 120 } }), { status: 200, headers: { "content-type": "application/json" } });
       },
     });
-    f.provider.generateStructured = request => { contexts.push(structuredClone(request.context) as Context); return gateway.generateStructured(request); };
+    f.provider.generateStructured = request => { contexts.push(structuredClone(request.context) as Context); return gateway.generateStructured({ ...request, jsonSyntaxRecovery: policy }); };
     const result = await f.run(), receipt = result.receipts.find(item => item.observerId === "keeper")!;
     expect(receipt.kind).toBe("perceived");
     if (receipt.kind !== "perceived") throw new Error("missing stimulus");

@@ -28,6 +28,7 @@ import { PHYSICAL_BATCH_REPAIR_NOTICE } from "../../prompts/repair-layout";
 import { logicalRepairContext, LOGICAL_CANDIDATE_REPAIR_NOTICE } from "../../prompts/logical-repair-context";
 import { contentHash } from "../model-audit";
 import { UNMATCHED_CLOSER_RECOVERY } from "../unmatched-closer-recovery";
+import { TERMINAL_ROOT_CLOSER_RECOVERY } from "../terminal-root-closer-recovery";
 import { serializeModelContext, SHARED_STATE_FIRST_LAYOUT } from "../../prompts/context-layout";
 import { deepSeekStreamFixture } from "../../testing/deepseek-stream";
 
@@ -334,8 +335,9 @@ describe("model catalog and provider adapters", () => {
     expect(bodies).toHaveLength(2);
   });
 
-  it("opts into local closer recovery without changing the actual request, retaining exact edit evidence", async () => {
-    const fixture = extraCloserFixture("第二条 🐉"), content = `\uFEFF  ${fixture.text} \n`;
+  it.each([UNMATCHED_CLOSER_RECOVERY, TERMINAL_ROOT_CLOSER_RECOVERY])("opts into %s without changing the actual request, retaining exact edit evidence", async policy => {
+    const fixture = extraCloserFixture("第二条 🐉");
+    const content = `\uFEFF  ${policy === TERMINAL_ROOT_CLOSER_RECOVERY ? JSON.stringify(fixture.value) + "}" : fixture.text} \n`;
     expect(() => parseLastJsonValueWithRecovery(content)).toThrow();
     const bodies: unknown[] = [];
     const gateway = createGateway(credentials, { fetch: async (_input, init) => {
@@ -344,14 +346,14 @@ describe("model catalog and provider adapters", () => {
     } });
     const input = { ...request("flash"), schema: closerOutputSchema };
     await expect(gateway.generateStructured(input)).rejects.toBeInstanceOf(ModelOutputError);
-    const result = await gateway.generateStructured({ ...input, jsonSyntaxRecovery: UNMATCHED_CLOSER_RECOVERY });
+    const result = await gateway.generateStructured({ ...input, jsonSyntaxRecovery: policy });
     expect(result.value).toEqual(fixture.value);
     expect(bodies).toHaveLength(2);
     expect(bodies[0]).toEqual(bodies[1]);
     expect(bodies[1]).toMatchObject({ thinking: { type: "disabled" } });
     const audit = result.audit.invocations[0]!;
     expect(audit).toMatchObject({ outputDisposition: "auto-normalized", tokenUsage: { input: 11, output: 7 },
-      jsonRecoveryEvidence: { policy: UNMATCHED_CLOSER_RECOVERY, sourceHash: contentHash(content) } });
+      jsonRecoveryEvidence: { policy, sourceHash: contentHash(content) } });
     const evidence = audit.jsonRecoveryEvidence!;
     const offsets = new Set(evidence.removed.map(edit => edit.offset));
     const recovered = content.split("").filter((_, index) => !offsets.has(index)).join("");
@@ -359,14 +361,15 @@ describe("model catalog and provider adapters", () => {
     expect(evidence.removed).toHaveLength(1);
   });
 
-  it.each(["schema", "codec"])("retains usage and recovery evidence when %s still rejects the recovered result", async stage => {
+  it.each([UNMATCHED_CLOSER_RECOVERY, TERMINAL_ROOT_CLOSER_RECOVERY].flatMap(policy => ["schema", "codec"].map(stage => ({ policy, stage }))))("retains usage and $policy evidence when $stage rejects", async ({ policy, stage }) => {
     let calls = 0;
     const fixture = extraCloserFixture(8);
+    if (policy === TERMINAL_ROOT_CLOSER_RECOVERY) fixture.text = JSON.stringify(fixture.value) + "}";
     expect(() => parseLastJsonValueWithRecovery(fixture.text)).toThrow();
     const gateway = createGateway(credentials, { fetch: async () => {
       calls++; return deepSeekResponse(fixture.text, 200, "stop", "deepseek-v4-flash");
     } });
-    const failure = await gateway.generateStructured({ ...request("flash"), jsonSyntaxRecovery: UNMATCHED_CLOSER_RECOVERY,
+    const failure = await gateway.generateStructured({ ...request("flash"), jsonSyntaxRecovery: policy,
       schema: closerOutputSchema,
       ...(stage === "codec" ? { preprocessOutput: () => { throw new z.ZodError([{ code: "custom", path: [], message: "codec rejected" }]); } } : {}),
     }).then(() => { throw new Error("invalid value accepted"); }, (error: unknown) => error);
@@ -374,15 +377,15 @@ describe("model catalog and provider adapters", () => {
     expect((failure as ModelOutputError).rawValue).toEqual(fixture.value);
     expect((failure as ModelOutputError).audit?.invocations[0]).toMatchObject({ outputDisposition: "rejected",
       tokenUsage: { input: 11, output: 7 }, normalization: { applied: true },
-      jsonRecoveryEvidence: { policy: UNMATCHED_CLOSER_RECOVERY, removed: expect.any(Array) } });
+      jsonRecoveryEvidence: { policy, removed: expect.any(Array) } });
     expect(calls).toBe(1);
   });
 
-  it("rejects an unsupported local recovery transport before sending", async () => {
+  it.each([UNMATCHED_CLOSER_RECOVERY, TERMINAL_ROOT_CLOSER_RECOVERY])("rejects unsupported %s transport before sending", async policy => {
     let calls = 0;
     const gateway = createGateway(credentials, { fetch: async () => { calls++; return deepSeekResponse(); } });
     await expect(gateway.generateStructured({ ...request("flash"), structuredOutputMode: "json-schema-strict",
-      jsonSyntaxRecovery: UNMATCHED_CLOSER_RECOVERY })).rejects.toBeInstanceOf(ModelConfigurationError);
+      jsonSyntaxRecovery: policy })).rejects.toBeInstanceOf(ModelConfigurationError);
     expect(calls).toBe(0);
   });
 
