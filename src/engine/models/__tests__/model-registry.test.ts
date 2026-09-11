@@ -2,7 +2,7 @@ import { mkdtempSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { parseModelCatalog, type ModelCatalogDocument } from "../model-catalog";
+import { loadModelCatalog, parseModelCatalog, type ModelCatalogDocument, type ModelMetadataOverride } from "../model-catalog";
 import {
   MODELS_DEV_API_URL,
   MAX_MODELS_DEV_RESPONSE_BYTES,
@@ -340,7 +340,7 @@ describe("models.dev registry", () => {
     expect(readdirSync(path.join(root, "model-registry", "snapshots"))).toHaveLength(1);
   });
 
-  it("records local override provenance and rejects overrides for unknown models", () => {
+  it("records local override provenance and rejects partial overrides for unknown models", () => {
     const configured = catalog({
       model_overrides: {
         deepseek: {
@@ -360,7 +360,79 @@ describe("models.dev registry", () => {
     });
     const invalid = catalog({ model_overrides: { deepseek: { missing: { disabled: true } } } });
     expect(() => normalizeModelsDevDocument(remoteCatalog(), invalid))
-      .toThrow("local overrides reference unknown deepseek models: missing");
+      .toThrow("local overrides reference unknown deepseek models without complete metadata: missing");
+  });
+});
+
+describe("complete local model definitions", () => {
+  it("resolves the bundled non-thinking Flash profiles before remote indexing", async () => {
+    const bundled = loadModelCatalog(path.resolve("config/models.yaml"));
+    const configured = catalog({
+      accounts: { "deepseek-api": bundled.account("deepseek-api") },
+      profiles: Object.fromEntries(["truth-deepseek", "agent-deepseek"].map(id => [id, bundled.profile(id)])),
+      model_overrides: { deepseek: bundled.modelOverrides.deepseek! },
+    });
+    const root = dataRoot();
+    const registry = new ModelRegistry(configured, root, { fetch: async () => jsonResponse(remoteCatalog()) });
+    const snapshot = (await registry.refresh()).snapshot;
+    for (const id of ["truth-deepseek", "agent-deepseek"]) {
+      const binding = resolveModelProfile(configured, snapshot, id);
+      expect(binding.modelId).toBe("deepseek-flash");
+      expect(binding.model.fieldSources.id).toBe("local-override");
+      expect(binding.profile).toMatchObject({ inference: { thinking: "disabled" }, response_transport: "deepseek-sse-v1" });
+      expect(binding.account.max_concurrency).toBe(4);
+    }
+    expect(new ModelRegistry(configured, root).snapshot(snapshot.hash)).toEqual(snapshot);
+  });
+
+  const definition: Required<ModelMetadataOverride> = {
+    disabled: false, name: "Explicit local model", family: "deep-family", reasoning: true,
+    reasoning_efforts: [], reasoning_toggle: true, tool_call: true, structured_output: false,
+    temperature: true, release_date: "2026-09-10", last_updated: "2026-09-10",
+    modalities: { input: ["text"], output: ["text"] }, limit: { context: 10000, output: 2000 },
+  };
+  function configured(value: ModelMetadataOverride = definition) {
+    const original = catalog().profiles;
+    const profiles = { ...original, exact: { ...original.exact!, selector: { kind: "exact" as const, model_id: "deep-local" } } };
+    return catalog({ profiles, model_overrides: { deepseek: { "deep-local": value } } });
+  }
+  it("persists local provenance, admits exact selection and preserves snapshots after remote indexing", async () => {
+    const config = configured(), root = dataRoot(); let indexed = false;
+    const registry = new ModelRegistry(config, root, { minimumRefreshIntervalMs: 0, fetch: async () => {
+      const remote = remoteCatalog();
+      if (indexed) remote.deepseek.models["deep-local"] = model("deep-local", "2026-09-10", "2026-09-10");
+      return jsonResponse(remote);
+    } });
+    const initial = (await registry.refresh()).snapshot;
+    const local = resolveModelProfile(config, initial, "exact");
+    expect(local.modelId).toBe("deep-local");
+    expect(Object.values(local.model.fieldSources).every(source => source === "local-override")).toBe(true);
+    expect(local.model.reasoningBudget).toBeNull();
+    expect(resolveModelProfile(config, initial, "latest").modelId).toBe("deep-new-a");
+    expect(local.account.base_url).toBe("https://trusted.deepseek.test/v1");
+    indexed = true;
+    const current = (await registry.refresh()).snapshot;
+    expect(current.hash).not.toBe(initial.hash);
+    expect(resolveModelProfile(config, current, "exact").model.fieldSources.id).toBeUndefined();
+    expect(resolveModelProfile(config, current, "latest").modelId).toBe("deep-local");
+    const reopened = new ModelRegistry(config, root);
+    expect(reopened.snapshot(initial.hash)).toEqual(initial);
+    expect(resolveModelProfile(config, reopened.snapshot(initial.hash), "exact").modelMetadataHash).toBe(local.modelMetadataHash);
+  });
+  it("requires every field and applies existing capability, disabled and output-limit rejection", () => {
+    for (const key of Object.keys(definition) as Array<keyof ModelMetadataOverride>) {
+      const partial = structuredClone(definition); delete (partial as ModelMetadataOverride)[key];
+      expect(() => normalizeModelsDevDocument(remoteCatalog(), configured(partial))).toThrow("without complete metadata");
+    }
+    for (const limit of [{ output: 2000 }, { context: null, output: 2000 }, { context: 10000, output: null }]) {
+      expect(() => normalizeModelsDevDocument(remoteCatalog(), configured({ ...definition, limit }))).toThrow("without complete metadata");
+    }
+    for (const change of [{ disabled: true }, { reasoning_toggle: false }, { tool_call: false },
+      { limit: { context: 10000, output: 500 } }, { modalities: { input: [], output: ["text"] } }]) {
+      const config = configured({ ...definition, ...change });
+      const document = normalizeModelsDevDocument(remoteCatalog(), config);
+      expect(() => resolveModelProfile(config, { hash: "a".repeat(64), document }, "exact")).toThrow("incompatible");
+    }
   });
 });
 

@@ -1,7 +1,7 @@
 # Persistent encoder cache and instance canary enrollment
 
 Artifact-Version: 1
-Status: Implemented
+Status: Superseded by [Spec 0022](0022-relational-candidate-selection-and-reference-refresh.md)
 
 ## Intent
 
@@ -34,3 +34,4 @@ Prove cross-process cache reuse, exact invalidation, concurrent single-flight be
 - [Activation evidence verifier](../../src/server/experiment-activation.ts)
 - [v4 offline evaluation](../../benchmarks/action-compilation/fullcatalog-stabilized/evaluations/retrieval-runtime-ab-v4/README.md)
 - [Decision 0098 — Content-addressed embedding cache and immutable canary enrollment](../decisions/0098-content-addressed-embedding-cache-and-immutable-canary-enrollment.md)
+- [Spec 0022 — Relational candidate selection and reference refresh](0022-relational-candidate-selection-and-reference-refresh.md)

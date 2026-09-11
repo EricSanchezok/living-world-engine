@@ -24,6 +24,12 @@ Dependencies flow browser → Route Handler → WorldHost → SimulationEngine �
 
 ## State and policies
 
+Action Compilation specializes [empty shared-resource domains](specs/0111-specialize-empty-resource-pool-domain.md) from its bound source state; representation adapters preserve that request schema through initial and repair calls.
+
+The experimental `source-bound-observation-rendering@2` child projects a limited owner-bound progress packet for strictly admitted pending intervals; other observations retain model rendering. Its [admission contract](specs/0082-source-bound-pending-observations.md) defines state, timing, repair and verification boundaries. Both observation implementations preserve [current-event provenance](specs/0110-preserve-observation-event-provenance.md) separately from observer fact access. The default Composition does not select the experimental child.
+
+The indexed reviewed Truth child can opt into [event-sourced outcome summaries](specs/0083-event-sourced-outcome-summaries.md). Its pinned `outcomeSummary` contract replaces independent outcome narration with explicit status and existing candidate event descriptions while preserving all other semantic output channels and commit checks.
+
 `SimulationState` contains the sole `CanonicalWorldState`, Agents, admission commits, and semantic history. Canonical truth owns the world clock, durable Activities, Entity-backed shared-resource pools, WorldTimers, mechanics, and ordinary world facts. Every `AgentState` binds one active Entity and owns an independent `AgentBeliefState`, `AgentCharacterState`, epistemic bindings, observation cursor, and next action. The closed-loop state combines world state with all private Agent control state. `projectAgentPerspective` derives the same policy-independent, de-identified read model for AgentMind, reaction, grounding, Observation rendering, Arrival, Participant, and Observer without persisting another state.
 
 `PolicyBinding` selects `model | external | idle | replay` for every Agent. External control does not create a PlayerState; the Agent's position, identity, history, and private observations remain unchanged. AgentMind does not run during external control and does not infer a human's beliefs, emotions, or next action. Release may move the Agent to idle or let AgentMind consume observations received during control before restoring model policy.
@@ -32,9 +38,11 @@ Models produce semantic drafts only. Agent, Entity, Fact, Meter, Rating, Conditi
 
 ## `eager-reference@16`
 
-The root reference Algorithm deliberately spends complete work to provide a precise semantic baseline. Its default `candidate-selection` child is the explicit `full-catalog@1` Algorithm; the `graph-hybrid-e5@1` candidate is opt-in and fail-closed:
+The opt-in registered worklist Truth candidate binds its physical planning representations and temporal evidence through the instance Composition. [The registered pipeline contract](specs/0043-registered-worklist-planning-pipeline.md) defines qualification and gameplay boundaries; the default Composition remains the reference foundation.
 
-Action Compilation candidate retrieval is owned by `eager-reference/` rather than the benchmark layer. A treatment applies one strict shortlist budget to the complete physical batch, keeps an independent allowed-key set for every slot, restricts symbol repair to that slot set, and runs a membership gate before FullCatalog materialization. Candidate passage vectors are content-addressed by exact text and shared across restarts and instances under `LIVINGWORLD_CACHE_ROOT`; dynamic query vectors use a bounded process-local cache. A cache miss, corrupt vector, fingerprint drift, or shortlist boundary violation fails before provider or materialization work and never selects FullCatalog implicitly.
+The root reference Algorithm keeps `full-catalog@1` as an explicit reference and relabeling Algorithm, while new World Instances default to the fail-closed `relational-rrf@1` candidate-selection subtree. Existing instances remain pinned to their persisted Composition:
+
+Action Compilation candidate retrieval is owned by `eager-reference/` rather than the benchmark layer. `relational-rrf@1` composes `typed-channel-rrf@1` ranking with `coverage-aware-joint-budget@1` allocation, applies one strict 20% shortlist budget to the complete physical batch, keeps an independent allowed-key set for every slot, restricts symbol repair to that slot set, and runs a membership gate before FullCatalog materialization. Candidate passage vectors are content-addressed by exact text and shared across restarts and instances under `LIVINGWORLD_CACHE_ROOT`; all deduplicated physical-batch query misses use one Encoder call behind a bounded batch/single-flight cache. The pinned model and initial-world passages require explicit installation and warming. A missing or corrupt asset, cold initial cache, fingerprint drift, encoding failure, or shortlist boundary violation fails before provider or materialization work and never selects FullCatalog implicitly.
 
 Action Compilation and AgentMind use private byte-aware slot batches inside the algorithm. Their immutable per-instance limits default to twelve and eight; independent Reaction and Action Grounding worker limits default to eight and sixteen. Action Compilation sends one complete request-local candidate namespace using opaque `candidate_` keys with twelve lowercase hexadecimal payload characters, and deterministically includes detailed evidence only for referenced, text-matched, world, eligible temporal-profile, placement-neighbor, and dependency-connected candidates. The engine materializes candidate keys into request-local handles only after schema validation; no raw canonical or private `ref:*` value is model-visible. Every omitted detail remains recoverable through the resolver; typed validation and bounded slot repair remain authoritative. AgentMind serializes each slot as one self-contained object containing its private state, task, reference catalog, allowed target handles, and repair issues, rather than associating parallel state/task/catalog arrays. Truth Engine uses fixed twelve-slot batches for graph-proven independent resolution, plan verification, transition, causal verification, and observation work. All five limits remain configurable from one through sixty-four and participate in the manifest hash. Truth batches share the complete common world context once while keeping scoped responsibility in each slot; CanonicalCommitter, RNG/check commitment, privacy validation, and atomic commit remain unchanged. Each physical request has one audit, localized semantic failures retry only their slots, structural failures repair the current batch and then bisect it, context overflow is a hard error, and terminal provider errors propagate directly. The fixed engine, Gateway, Script schema, and CanonicalCommitter do not interpret these limits.
 
@@ -50,6 +58,8 @@ Action Compilation and AgentMind use private byte-aware slot batches inside the 
 10. CanonicalCommitter independently rebuilds the boundary, interaction evidence, claims, holder usage, admissions, queue order, promotions, affected Activity set, dispositions, assertions, and one global candidate before constructing state. Instance CAS and the completion execution terminal record commit in one SQLite transaction.
 
 A model, validation, cancellation, or persistence failure never advances the revision. The failed execution and any acquired request, response, and validation evidence remain in the Execution Ledger.
+
+The onset-perception subtree honors its [full source-context contract](specs/0105-complete-onset-perception-context.md) at the actual initial, repair and committed-check continuation entries; adjudicator access does not grant an observer knowledge.
 
 ## World Instance and Participant
 
@@ -94,3 +104,25 @@ World package, runtime, algorithm, presentation, benchmark, and Ledger details l
 3. Record a [decision](decisions/README.md) only when genuine alternatives exist.
 4. Update this map and the owning product specification in the same change.
 5. Run the governance gates and the smallest sufficient behavior evidence.
+
+The optional [source-bound boundary clock](specs/0084-source-bound-boundary-clock.md) references trusted temporal input in outcome evidence while preserving actual causal validation.
+
+[Activity progress and completion](specs/0109-align-activity-progress-and-completion.md) separates supported interval effects from whole-task settlement while preserving trusted receipt deferral.
+
+The experimental [scoped plan repair batching](specs/0085-scoped-plan-repair-batching.md) option routes targeted semantic plan repairs through the shared Truth collector while retaining logical validation and replacement ownership.
+
+The indexed reviewed planner can opt into [source-indexed plan causes](specs/0086-source-indexed-plan-causes.md). It selects existing causal evidence from the complete legal catalog domain; the codec restores exact kind/ref pairs while the original materializer checks action ownership and causal validity.
+
+Its optional [action-local means indices](specs/0087-action-local-means-indices.md) bind each means source to an explicit position in that action's complete source inventory, preserving the original selector and grounding checks.
+
+The opt-in [planning relation choices](specs/0114-bind-planning-relation-choices.md) bind explicit rating and effect choices to their source owners and compatible profiles, preserving full mechanical and semantic validation.
+
+The optional [compact planning records](specs/0115-compact-planning-records.md) encode complete plans and repeated small records using schema-derived columns, retaining source content and canonical validation.
+
+The indexed reviewed planner can opt into [shared planning catalog encoding](specs/0095-shared-planning-catalog-encoding.md) for plan, verification and continuation batches, preserving complete logical source contexts.
+
+The same planner can select [plan-declared random completion](specs/0096-plan-declared-random-completion.md), binding an early termination decision to complete accepted initial plans while retaining result-dependent continuation.
+
+Experiments account for [provider model cohorts](specs/0097-provider-model-cohort-accounting.md) through one append-only budget, immutable account/model prices and explicit routed-response reconciliation.
+
+The model registry accepts [complete local model metadata](specs/0098-complete-local-model-metadata.md) for exact selection when the remote directory has not indexed a model, retaining local field provenance and execution snapshot binding.

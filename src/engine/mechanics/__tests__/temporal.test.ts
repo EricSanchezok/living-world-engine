@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
+import path from "node:path";
 import type { ActionOutcome, CausalRef } from "../../contracts/model";
+import { loadWorldScript } from "../../../script/world-loader";
+import { createTestModelCatalog } from "../../testing/model-provider";
 import {
   advanceTemporalState,
   createActivity,
@@ -13,6 +16,7 @@ import {
   resumeActivity,
   reconcileTemporalOutcomes,
   selectTemporalBoundary,
+  settleActivityContexts,
   temporalProfileEligibility,
   validateActivityState,
   validateActivityResources,
@@ -86,6 +90,58 @@ function sourceAction(plan: TemporalPlan) {
 }
 
 describe("event-boundary temporal kernel", () => {
+  it("settles multiple activities against both world phases without exposing mutable source evidence", () => {
+    const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), {
+      seed: 47, modelCatalog: createTestModelCatalog(),
+    });
+    const pre = structuredClone(definition.initialState);
+    const fact = Object.values(pre.truth.facts)[0]!;
+    expect(fact).toBeDefined();
+    fact.value = { kind: "text", value: "open" };
+    const profile = fixedProfile({ durationSeconds: 10, checkpointSeconds: 10 });
+    const activities = ["player", "keeper"].map((actorId, index) => {
+      const plan = materializeTemporalPlan({ id: `plan-${actorId}`, actionId: `action-${actorId}`, actorId,
+        rawText: "Maintain the current action", startsAtSeconds: 0, profiles: { brief: profile },
+        draft: { ...draft("brief"), continuationAssertions: index === 0
+          ? [{ kind: "elapsed_seconds_compare", operator: "lt", value: 1 }]
+          : [{ kind: "fact_matches", factId: fact.id, expected: structuredClone(fact.value) }] },
+      });
+      return createActivity({ id: `${index}-${actorId}`, plan, sourceAction: sourceAction(plan) });
+    });
+    pre.truth.activities = Object.fromEntries(activities.map(activity => [activity.id, activity]));
+    const boundary = selectTemporalBoundary({ elapsedSeconds: 0, maxAutonomousSpanSeconds: 1,
+      activities: pre.truth.activities, timers: {}, conditionExpiries: {},
+    });
+    const temporal = advanceTemporalState({ boundary, activities: pre.truth.activities, timers: {} });
+    const post = structuredClone(pre);
+    post.truth.elapsedSeconds = boundary.toElapsedSeconds;
+    post.truth.activities = structuredClone(temporal.activities);
+    const input = { preTransitionState: pre, state: post, temporal,
+      activityIds: activities.map(activity => activity.id).reverse(),
+      relevantObserverIds: new Set(["keeper"]), preserveActiveActivityIds: new Set<string>(),
+    };
+    const before = structuredClone(input);
+    const result = settleActivityContexts(input);
+    expect(result.dispositions).toMatchObject([
+      { activityId: "0-player", kind: "block", assertionResults: [
+        { phase: "pre_transition", passed: true }, { phase: "post_transition", passed: false },
+      ] },
+      { activityId: "1-keeper", kind: "pause", assertionResults: [
+        { phase: "pre_transition", passed: true }, { phase: "post_transition", passed: true },
+      ] },
+    ]);
+    expect(result.temporal.activities["0-player"]!.status).toBe("blocked");
+    expect(result.temporal.activities["1-keeper"]!.status).toBe("paused");
+    const observed = result.dispositions[1]!.assertionResults[1]!.observed as { kind: string; value: string };
+    observed.value = "modified by evidence consumer";
+    result.temporal.activities["1-keeper"]!.sourceAction.rawText = "modified by result consumer";
+    expect(input).toEqual(before);
+    post.truth.facts[fact.id]!.value = { kind: "text", value: "closed" };
+    expect(settleActivityContexts(input).dispositions[1]).toMatchObject({ kind: "block", assertionResults: [
+      { phase: "pre_transition", passed: true }, { phase: "post_transition", passed: false },
+    ] });
+  });
+
   it("permits authored reaction fallbacks only on interruptible profiles", () => {
     expect(() => validateTemporalProfile(fixedProfile({ reactionFallback: "pause" }), resources)).not.toThrow();
     expect(() => validateTemporalProfile(fixedProfile({
@@ -99,6 +155,60 @@ describe("event-boundary temporal kernel", () => {
     expect(explicitDurationSeconds("wait 1.5 hours")).toBe(5_400);
     expect(explicitDurationSeconds("休息半小时")).toBe(1_800);
     expect(explicitDurationSeconds("走到城镇")).toBeNull();
+  });
+
+  it("does not turn deadlines or maximum intervals into exact action durations", () => {
+    for (const text of ["提交提案：要求三十日内成立委员会。", "三十日以内答复", "最多休息不超过两小时", "至多两小时",
+      "Submit a proposal requiring a committee within 30 days.", "Reply within the next 2 hours.", "Rest for at most 2 hours.",
+      "Rest for up to 2 hours.", "Rest for no more than 2 hours.", "Rest for less than 2 hours."]) {
+      expect(explicitDurationSeconds(text), text).toBeNull();
+    }
+    expect(explicitDurationSeconds("休息两小时后走10公里")).toBe(7_200);
+    expect(explicitDurationSeconds("工作三十日")).toBe(2_592_000);
+    expect(explicitDurationSeconds("Work for 30 days.")).toBe(2_592_000);
+    const text = "三十日内提交答复，先休息十分钟。";
+    const evidence = extractActionTemporalEvidence(text, {});
+    expect(evidence).toHaveLength(1);
+    expect(evidence[0]).toMatchObject({ sourceText: "十分钟", seconds: 600, start: text.indexOf("十分钟"), end: text.indexOf("十分钟") + 3 });
+  });
+
+  it("rejects a deadline-derived schedule at eligibility, model materialization and the temporal kernel", () => {
+    const profile = fixedProfile({ id: "explicit-duration",
+      selection: { semanticTags: ["explicit-duration"], evidenceRequirement: "explicit_duration" } });
+    const rawText = "向 Tyrilas 提交一份书面提案：要求三十日内成立由总督、议会和市民代表三方共同监管的过渡委员会，设定可核验的安全指标和交权截止日期，同时要求 Corvin 停止街头游说。";
+    const profiles = { [profile.id]: profile };
+    const evidence = extractActionTemporalEvidence(rawText, profiles);
+    expect(temporalProfileEligibility(profile, evidence)).toMatchObject({ eligible: false, rejectionCode: "missing_explicit_duration" });
+    expect(() => materializeModelTemporalBasis(profile, { kind: "action_text_evidence", evidenceKey: "duration:21:24" }, evidence)).toThrow(/ineligible/u);
+    expect(() => materializeTemporalPlan({ id: "deadline-mutant", actionId: "proposal", actorId: "author", rawText,
+      startsAtSeconds: 0, profiles, draft: draft(profile.id, { kind: "explicit_duration", seconds: 2_592_000, sourceText: "三十日" }) })).toThrow(/not grounded/u);
+  });
+
+  it("keeps travel-distance descriptions out of exact action timing while retaining actual durations", () => {
+    for (const text of ["在距城堡半天路程处停下列队。", "在离港口两小时的航程处停船。", "在距城镇三小时车程处休息。",
+      "Stop at a camp 2 hours away from the fortress.", "Wait at a village 3 hours' walk from the harbor.",
+      "Assemble at a pass 2 days’ journey from the city."]) {
+      expect(explicitDurationSeconds(text), text).toBeNull();
+    }
+    for (const [text, seconds] of [["行军半天后停下", 43200], ["驱车两小时到村庄", 7200],
+      ["Walk for 2 hours, then halt.", 7200], ["Sail for 3 hours.", 10800]] as const) {
+      expect(explicitDurationSeconds(text), text).toBe(seconds);
+    }
+    const text = "在距城堡半天路程处休息两小时。";
+    expect(extractActionTemporalEvidence(text, {})).toMatchObject([{ sourceText: "两小时", seconds: 7200,
+      start: text.indexOf("两小时"), end: text.indexOf("两小时") + 3 }]);
+  });
+
+  it("rejects the recorded half-day-location schedule at eligibility and both temporal materializers", () => {
+    const profile = fixedProfile({ id: "explicit-duration",
+      selection: { semanticTags: ["explicit-duration"], evidenceRequirement: "explicit_duration" } });
+    const rawText = "在距 Blackoak 半天路程处停下列队，先派两名可靠斥候确认城堡外哨位与使者接待位置，同时向纵队宣布接触条件：只承认能给出具体下令者姓名和时间线索的答复方。";
+    const profiles = { [profile.id]: profile }, evidence = extractActionTemporalEvidence(rawText, profiles);
+    expect(temporalProfileEligibility(profile, evidence)).toMatchObject({ eligible: false, rejectionCode: "missing_explicit_duration" });
+    const start = rawText.indexOf("半天");
+    expect(() => materializeModelTemporalBasis(profile, { kind: "action_text_evidence", evidenceKey: `duration:${start}:${start + 2}` }, evidence)).toThrow(/ineligible/u);
+    expect(() => materializeTemporalPlan({ id: "spatial-duration-mutant", actionId: "proposal", actorId: "author", rawText,
+      startsAtSeconds: 0, profiles, draft: draft(profile.id, { kind: "explicit_duration", seconds: 43200, sourceText: "半天" }) })).toThrow(/not grounded/u);
   });
 
   it("extracts exact temporal spans and makes rate eligibility deterministic", () => {
@@ -569,5 +679,38 @@ describe("event-boundary temporal kernel", () => {
     });
     expect(completed.transitions[0]!.kind).toBe("completed");
     expect(completed.decisionPoints[0]).toMatchObject({ reason: "activity_completed" });
+  });
+
+  it("keeps goal work active across checkpoints and closes only its terminal outcome", () => {
+    const profile: TemporalProfileDefinition = { id: "finite-work", name: "Finite work", kind: "goal", checkEverySeconds: 60,
+      selection: { semanticTags: ["finite-work"], evidenceRequirement: "none" }, interruptible: true,
+      reactionFallback: "continue_if_valid", resourceClaims: [{ resourceId: "foreground", amount: 1 }] };
+    validateTemporalProfile(profile, resources);
+    const profiles = { [profile.id]: profile };
+    const plan = materializeTemporalPlan({ id: "plan-work", actionId: "action-a", actorId: "agent-a",
+      rawText: "Inspect, repair and verify the boat.", startsAtSeconds: 0, profiles, draft: draft(profile.id) });
+    let activity = createActivity({ id: "activity-work", plan, sourceAction: sourceAction(plan) });
+    for (const [elapsedSeconds, status] of [[0, "continuing"], [60, "succeeded"]] as const) {
+      const boundary = selectTemporalBoundary({ elapsedSeconds, maxAutonomousSpanSeconds: 300,
+        activities: { [activity.id]: activity }, timers: {}, conditionExpiries: {} });
+      expect(boundary.deltaSeconds).toBe(60);
+      expect(boundary.reasons).toEqual([{ kind: "activity_checkpoint", activityId: activity.id }]);
+      const advanced = advanceTemporalState({ boundary, activities: { [activity.id]: activity }, timers: {} });
+      expect(advanced.activities[activity.id]!.status).toBe("active");
+      expect(advanced.decisionPoints).toEqual([]);
+      const reconciled = reconcileTemporalOutcomes(advanced, [{ proposalId: "action-a", status } as ActionOutcome]);
+      activity = reconciled.activities[activity.id]! as typeof activity;
+      validateActivityState(activity, boundary.toElapsedSeconds, profiles, resources);
+      expect(activity.plan.continuationAssertions).toEqual([]);
+      expect(activity.plan.completionAtSeconds).toBeNull();
+      if (status === "continuing") {
+        expect(activity).toMatchObject({ status: "active", completionAtSeconds: null, nextBoundaryAtSeconds: 120 });
+        expect(reconciled.decisionPoints).toEqual([]);
+      } else {
+        expect(activity).toMatchObject({ status: "completed", completionAtSeconds: 120, nextBoundaryAtSeconds: null });
+        expect(reconciled.decisionPoints).toHaveLength(1);
+        expect(reconciled.decisionPoints[0]!.reason).toBe("activity_completed");
+      }
+    }
   });
 });

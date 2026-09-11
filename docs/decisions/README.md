@@ -138,3 +138,5 @@ An optional adjacent `Class:` line uses `architecture`, `process`, `testing`, `f
 - [0097 — Action Compilation Graph-aware Candidate Retrieval](0097-action-compilation-graph-retrieval.md)
 - [0098 — Content-addressed Embedding Cache and Immutable Canary Enrollment](0098-content-addressed-embedding-cache-and-immutable-canary-enrollment.md)
 - [0099 — Typed Hierarchical Algorithm Composition](0099-typed-hierarchical-algorithm-composition.md)
+- [0100 — Promote Relational RRF and Refresh Reference Data](0100-promote-relational-rrf-and-refresh-reference-data.md)
+- [0159 — Isolate Local Encoder Inference from the Host Event Loop](0159-isolate-local-encoder-inference.md)

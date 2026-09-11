@@ -23,6 +23,7 @@ import {
 } from "../../src/engine/benchmarks/action-compilation/ledger-export";
 import { LocalDatabase } from "../../src/server/local-database";
 import type { RuntimeEvent } from "../../src/engine/runtime/observability";
+import { FULL_CATALOG_ALGORITHM_REF } from "../../src/engine/algorithms/registry";
 
 interface Options {
   database: string;
@@ -277,6 +278,20 @@ function executionHasActionCompilation(events: readonly RuntimeEvent[]): boolean
     event.correlation?.modelRole === "action-compilation");
 }
 
+export function executionUsesFullCatalog(manifest: unknown): boolean {
+  if (!manifest || typeof manifest !== "object" || Array.isArray(manifest)) return false;
+  const root = manifest as { kind?: unknown; children?: unknown };
+  if (root.kind !== "algorithm" || !root.children || typeof root.children !== "object" || Array.isArray(root.children)) return false;
+  const actionCompilation = (root.children as Record<string, unknown>).actionCompilation;
+  if (!actionCompilation || typeof actionCompilation !== "object" || Array.isArray(actionCompilation)) return false;
+  const children = (actionCompilation as { children?: unknown }).children;
+  if (!children || typeof children !== "object" || Array.isArray(children)) return false;
+  const candidateSelection = (children as Record<string, unknown>).candidateSelection;
+  return Boolean(candidateSelection && typeof candidateSelection === "object" && !Array.isArray(candidateSelection) &&
+    (candidateSelection as { manifestHash?: unknown }).manifestHash ===
+      FULL_CATALOG_ALGORITHM_REF.children.actionCompilation!.children.candidateSelection!.manifestHash);
+}
+
 function main(argv: readonly string[]): number {
   let options: Options;
   try {
@@ -301,6 +316,9 @@ function main(argv: readonly string[]): number {
       if (!execution) throw new Error(`execution not found: ${id}`);
       const events = database.executionEvents(id);
       if (!executionHasActionCompilation(events)) throw new Error(`execution has no Action Compilation evidence: ${id}`);
+      if (!executionUsesFullCatalog(execution.manifest)) {
+        throw new Error(`execution ${id} was not produced by FullCatalog; use benchmark:refresh:action-compilation-reference to capture and regenerate reference labels`);
+      }
       return { execution, events };
     });
     const result = exportActionCompilationFromLedger(sources, options.version);

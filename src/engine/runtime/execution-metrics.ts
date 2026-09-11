@@ -272,11 +272,13 @@ registerNumericFields("counts", ["model.action_compilation.context.captured"], [
   ["lwe.model.candidate_retrieval.passage_cache_misses", "passageCacheMisses", "1", "sum"],
   ["lwe.model.candidate_retrieval.query_cache_hits", "queryCacheHits", "1", "sum"],
   ["lwe.model.candidate_retrieval.query_cache_misses", "queryCacheMisses", "1", "sum"],
+  ["lwe.model.candidate_retrieval.query_batch_size", "queryBatchSize", "1", "sum"],
 ]);
 
 registerNumericFields("measurements", ["model.action_compilation.context.captured"], [
   ["lwe.model.candidate_retrieval.batch_shortlist_ratio", "batchShortlistRatio", "1", "last"],
   ["lwe.model.candidate_retrieval.cache_read", "cacheReadMs", "ms", "sum"],
+  ["lwe.model.candidate_retrieval.passage_encode", "passageEncodeMs", "ms", "sum"],
   ["lwe.model.candidate_retrieval.query_encode", "queryEncodeMs", "ms", "sum"],
 ]);
 

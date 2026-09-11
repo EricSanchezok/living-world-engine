@@ -49,7 +49,11 @@ function copyBody(body: Record<string, unknown>): Record<string, unknown> {
 function compileOpenAICompatible(
   binding: ResolvedModelBinding,
 ): VendorDialectRequestPlan {
-  const inference = resolvedInference(binding);
+  return openAIChatRequestPlan(resolvedInference(binding));
+}
+
+/** Shared Chat inference serialization for the gateway and controlled probes. */
+export function openAIChatRequestPlan(inference: ResolvedModelInference): VendorDialectRequestPlan {
   return {
     authentication: "bearer",
     headers: {},
@@ -128,6 +132,32 @@ function compileResponses(
   };
 }
 
+/** DeepSeek Responses uses reasoning.effort, not the Chat thinking extension. */
+function compileDeepSeek(binding: ResolvedModelBinding): VendorDialectRequestPlan {
+  if (binding.account.protocol === "openai-chat") return compileOpenAICompatible(binding);
+  return deepSeekResponsesRequestPlan(resolvedInference(binding));
+}
+
+/** Shared by the production adapter and exact-message transport experiments. */
+export function deepSeekResponsesRequestPlan(inference: ResolvedModelInference): VendorDialectRequestPlan {
+  if (inference.reasoningBudgetTokens !== null || inference.textVerbosity !== null || inference.reasoningSummary !== null) {
+    throw new Error("DeepSeek Responses does not implement the requested reasoning budget, verbosity or summary");
+  }
+  return { authentication: "bearer", headers: {}, inference, transformBody(body) {
+    const transformed = copyBody(body);
+    delete transformed.store;
+    delete transformed.thinking;
+    if (inference.thinking === "disabled") transformed.reasoning = { effort: "none" };
+    else if (inference.effort !== null) transformed.reasoning = { effort: inference.effort };
+    else if (inference.thinking === "enabled") transformed.reasoning = { effort: "high" };
+    // SDKs may encode the system prompt as developer for reasoning-capable models;
+    // DeepSeek treats developer as user, so preserve our system instruction role.
+    if (Array.isArray(transformed.input)) transformed.input = transformed.input.map((item) =>
+      item && typeof item === "object" && item.role === "developer" ? { ...item, role: "system" } : item);
+    return transformed;
+  } };
+}
+
 function compileAnthropicCompatible(
   binding: ResolvedModelBinding,
 ): VendorDialectRequestPlan {
@@ -200,7 +230,7 @@ function dialect(
 }
 
 const dialects = new Map<string, VendorDialect>([
-  ["deepseek", dialect("deepseek", ["openai-chat"], compileOpenAICompatible)],
+  ["deepseek", dialect("deepseek", ["openai-chat", "openai-responses"], compileDeepSeek)],
   ["qwen", dialect("qwen", ["openai-chat"], compileQwen)],
   ["zhipu", dialect("zhipu", ["openai-chat"], compileOpenAICompatible)],
   ["moonshot", dialect("moonshot", ["openai-chat"], compileOpenAICompatible)],

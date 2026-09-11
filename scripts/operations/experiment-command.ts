@@ -58,9 +58,9 @@ function selectedManifest(options: Options) {
 }
 
 function actionCompilationCohort(ref: AlgorithmRef): "fullcatalog-control" | "retrieval-treatment" {
-  return ref.children.actionCompilation?.children.candidateSelection?.id === "graph-hybrid-e5"
-    ? "retrieval-treatment"
-    : "fullcatalog-control";
+  return ref.children.actionCompilation?.children.candidateSelection?.id === "full-catalog"
+    ? "fullcatalog-control"
+    : "retrieval-treatment";
 }
 
 export function buildExperimentReport(options: Pick<Options, "experimentId" | "version" | "database">): Record<string, unknown> {

@@ -3,6 +3,7 @@ import type {
   AgentActionProposal,
   AgentState,
   CommitmentRound,
+  CausalVerification,
   D20CheckRequest,
   D20CheckResult,
   DiscreteRandomResult,
@@ -14,8 +15,9 @@ import type {
   TransitionProposal,
   WorldEvent,
 } from "../contracts/model";
-import type { ResolutionScope } from "../contracts/prompts";
+import type { buildCausalVerificationContext, ResolutionScope } from "../contracts/prompts";
 import type { SymbolRepairPolicy } from "../contracts/symbol-repair";
+import type { PerceptionTarget } from "../contracts/perception-references";
 import type { RulePackageRegistry } from "../mechanics/rule-package";
 import type {
   ScheduledActivityState,
@@ -121,9 +123,13 @@ export interface ActionCompilationCapability {
 }
 
 export interface CandidateSelectionDiagnostics {
+  /** Repairs reuse the root allowance; their displayed pool may be smaller. */
+  rootSelection?: { fullContextHash: string; shortlistHash: string; visibleCount: number; selectedCount: number; batchBudget: number };
   selectedCount: number;
   visibleCount: number;
   batchBudget: number;
+  nominalBatchBudget?: number;
+  mandatoryBudgetFloorApplied?: boolean;
   batchShortlistRatio: number;
   prunedReferenceCount: number;
   anchorCount: number;
@@ -135,7 +141,9 @@ export interface CandidateSelectionDiagnostics {
     queryHits: number;
     queryMisses: number;
     readMs: number;
+    passageEncodeMs: number;
     queryEncodeMs: number;
+    queryBatchSize: number;
   };
 }
 
@@ -178,6 +186,7 @@ export interface OnsetPerceptionInput {
   temporalBoundary: TemporalBoundary;
   identityOwner: string;
   groundings: readonly InteractionDependency[];
+  perceptionTargets?: readonly PerceptionTarget[];
 }
 
 export interface OnsetPerceptionResult {
@@ -207,10 +216,39 @@ export interface ObservationResolution {
   modelAudits: ModelExecutionAudit[];
 }
 
+export const TRUTH_RESOLUTION_CONTRACT_VERSION = 3;
+
 export interface TruthResolution extends WorldResolutionCandidate {
   modelAudits: ModelExecutionAudit[];
   reactionModelAudits: ModelExecutionAudit[];
 }
+
+export type CausalReviewEvidence = Omit<Parameters<typeof buildCausalVerificationContext>[0], "issues">;
+
+export interface BoundCausalReview {
+  value: CausalVerification;
+  audit: ModelExecutionAudit;
+  binding: { evidenceHash: string; promptVersion: string };
+}
+
+/** Candidate generation alone never grants semantic acceptance. */
+export type UnreviewedTruthResolution = Omit<TruthResolution, "causalVerification">;
+
+export interface TruthCandidateStage {
+  resolution: UnreviewedTruthResolution;
+  reviewEvidence: CausalReviewEvidence;
+  transitionAttempt: number;
+  reviewInvocationOffset: number;
+}
+
+export type TruthCandidateFeedback = { kind: "finish" } | {
+  kind: "repair";
+  error: unknown;
+  previousReport: CausalVerification | null;
+};
+
+/** Consume sequentially; return() closes a suspended session without model work. */
+export type TruthCandidateSession = AsyncGenerator<TruthCandidateStage, UnreviewedTruthResolution | undefined, TruthCandidateFeedback>;
 
 export interface TruthResolutionInput {
   definition: WorldDefinition;
@@ -227,6 +265,13 @@ export interface TruthResolutionInput {
   };
   resolutionScope?: ResolutionScope;
   enableReactionRouting?: boolean;
+  /** Decisions already settled by the step preparation owner before component resolution. */
+  completedReactionDecisions?: readonly ReactionDecision[];
+  /** Own the canonical stream only through the closed random-commitment stage. */
+  orderedRandom?: {
+    acquire: () => Promise<SimulationState["truth"]["rng"]>;
+    finish: (rng: SimulationState["truth"]["rng"]) => Promise<SimulationState["truth"]["rng"]>;
+  };
   resolveReactions: (requests: readonly ReactionRequest[]) => Promise<ReactionResolution>;
   renderObservations: (
     proposal: Readonly<TransitionProposal>,
@@ -243,8 +288,14 @@ export interface TruthResolutionInput {
   ) => void;
 }
 
+export type TruthPreparationInput = Omit<TruthResolutionInput, "renderObservations" | "validateProposal">;
+
 export interface TruthResolutionCapability {
+  readonly candidateRepairLimit: number;
   resolve(input: TruthResolutionInput, scope: ModelExecutionScope): Promise<TruthResolution>;
+  prepare(input: TruthPreparationInput, scope: ModelExecutionScope): TruthCandidateSession;
+  reviewCandidate(evidence: CausalReviewEvidence, scope: ModelExecutionScope,
+    subjectId: string, invocationOffset?: number): Promise<BoundCausalReview>;
 }
 
 export interface ObservationRenderingInput {
@@ -255,6 +306,7 @@ export interface ObservationRenderingInput {
   observerIds: readonly string[];
   identityOwner: string;
   temporalState?: Readonly<TemporalStateSnapshot>;
+  feedbackByObserver?: Readonly<Record<string, readonly string[]>>;
 }
 
 export interface ObservationRenderingResult {
@@ -286,6 +338,14 @@ export interface ActionCompilationRoleAlgorithm extends ConfiguredRoleAlgorithm<
 
 export interface CandidateSelectionRoleAlgorithm extends ConfiguredRoleAlgorithm<"candidate-selection"> {
   readonly runtime: CandidateSelectionCapability | undefined;
+}
+
+export interface CandidateRankingRoleAlgorithm extends ConfiguredRoleAlgorithm<"candidate-ranking"> {
+  readonly rankingVersion: "typed-channel-rrf-v1";
+}
+
+export interface CandidateAllocationRoleAlgorithm extends ConfiguredRoleAlgorithm<"candidate-allocation"> {
+  readonly allocationVersion: "coverage-aware-joint-budget-v1";
 }
 
 export interface WorkBatchingRoleAlgorithm extends ConfiguredRoleAlgorithm<"work-batching"> {

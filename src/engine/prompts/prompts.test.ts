@@ -64,6 +64,18 @@ describe("external prompt resources", () => {
     expect(bundle.system).toContain('When the input is non-empty, `{"slots":[]}` is invalid.');
   });
 
+  it("separates the observation narrator from actors whose outcomes are supplied", () => {
+    const bundle = promptBundle("observation-renderer");
+    expect(bundle.system).toContain("identified by `observer.agentRef` and `observer.selfEntityRef`");
+    expect(bundle.system).toContain("not proof that this observer participated in it or perceived it");
+    expect(bundle.system).toContain('B must not say "I performed that action"');
+    expect(bundle.userPrompt).toContain("an outcome's actor may be someone else");
+    expect(bundle.system).toContain("is a JSON string copied in full");
+    expect(bundle.system).toContain('including its leading `ref:`');
+    expect(bundle.system).toContain('declared in this same result\'s `introductions`');
+    expect(bundle.system).toContain("Uncertainty must not disclose the inaccessible information it qualifies");
+  });
+
   it("keeps prompt versions content-addressed and cached", () => {
     expect(promptBundle("truth-perception")).toBe(promptBundle("truth-perception"));
     expect(promptAssetManifest()["truth-perception"]).toBe(promptBundle("truth-perception").version);

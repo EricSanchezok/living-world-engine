@@ -5,8 +5,14 @@ import { afterEach, describe, expect, it } from "vitest";
 import {
   DEFAULT_EAGER_REFERENCE_CONFIG,
   EagerReferenceAlgorithm,
+  FULL_CATALOG_EAGER_REFERENCE_CONFIG,
 } from "../../engine/algorithms/eager-reference/eager-reference";
-import { DEFAULT_ALGORITHM_REF, eagerReferenceAlgorithmRef, registerBuiltinAlgorithms } from "../../engine/algorithms/registry";
+import {
+  DEFAULT_ALGORITHM_REF,
+  eagerReferenceAlgorithmRef,
+  FULL_CATALOG_ALGORITHM_REF,
+  registerBuiltinAlgorithms,
+} from "../../engine/algorithms/registry";
 import { AlgorithmExperimentRegistry, defineAlgorithmExperimentManifest } from "../../engine/runtime/experiments";
 import {
   algorithmRef,
@@ -22,6 +28,7 @@ import {
 } from "../../engine/runtime/execution";
 import { historyReplayBaseHash } from "../../engine/runtime/history-replay";
 import { contentHash } from "../../engine/models/model-audit";
+import { ModelTransportError } from "../../engine/models/model-provider";
 import { promptBundle } from "../../engine/prompts";
 import {
   createTestModelCatalog,
@@ -53,9 +60,9 @@ function harness(input: {
   runLeaseMaxCommits?: number;
   runLeaseMaxWallTimeMs?: number;
   algorithmRegistry?: WorldExecutionAlgorithmRegistry;
-  defaultAlgorithmRef?: AlgorithmRef;
+  defaultAlgorithmRef?: AlgorithmRef | null;
   experimentRegistry?: AlgorithmExperimentRegistry;
-  experimentVariantPreflights?: WorldHostOptions["experimentVariantPreflights"];
+  actionCompilationRetrievalProvider?: WorldHostOptions["actionCompilationRetrievalProvider"];
   idFactory?: () => string;
 } = {}) {
   const provider = new DeterministicModelProvider(createTestModelCatalog(undefined, { maxInputBytes: 1_048_576 }));
@@ -81,9 +88,9 @@ function harness(input: {
     runLeaseMaxCommits: input.runLeaseMaxCommits,
     runLeaseMaxWallTimeMs: input.runLeaseMaxWallTimeMs,
     algorithmRegistry: input.algorithmRegistry,
-    defaultAlgorithmRef: input.defaultAlgorithmRef,
+    ...(input.defaultAlgorithmRef === null ? {} : { defaultAlgorithmRef: input.defaultAlgorithmRef ?? FULL_CATALOG_ALGORITHM_REF }),
     experimentRegistry: input.experimentRegistry,
-    experimentVariantPreflights: input.experimentVariantPreflights,
+    actionCompilationRetrievalProvider: input.actionCompilationRetrievalProvider,
   });
   return { database, definition, host, provider, repository };
 }
@@ -191,11 +198,76 @@ function reactionHarness(input: {
     clearTimer: input.clearTimer,
     idFactory: () => `reaction-id-${++ordinal}`,
     maxActiveParticipants: 1,
+    defaultAlgorithmRef: FULL_CATALOG_ALGORITHM_REF,
   });
   return { database, host, provider, repository };
 }
 
 describe("World Instance host", () => {
+  it("persists a terminal failed run when a model error has an empty message", async () => {
+    const { host, database, provider } = harness();
+    const created = await host.createInstance(observerStart);
+    const before = database.readInstance(created.summary.id).document.state;
+    provider.generateStructured = async () => { throw new ModelTransportError(""); };
+    await host.advance(created.summary.id, { expectedRevision: before.revision, trigger: "batch", steps: 1 });
+    await waitForRunStatus(host, created.summary.id, "failed");
+    const after = database.readInstance(created.summary.id).document;
+    expect(contentHash(after.state)).toBe(contentHash(before));
+    expect(Object.values(after.runs).at(-1)).toMatchObject({ status: "failed", stopReason: "execution-failed", error: "ModelTransportError" });
+    expect(database.executions({ instanceId: created.summary.id }).at(-1)?.status).toBe("failed");
+    database.close();
+  });
+
+  it("pins the standard integrated composition through the ordinary host default", async () => {
+    let preflightCalls = 0;
+    const retrievalRuntime = {
+      role: "candidate-selection" as const,
+      version: "action-compilation-retrieval-runtime-v6",
+      async retrieveBatch() { throw new Error("unused retrieval fixture"); },
+    };
+    const setup = harness({
+      defaultAlgorithmRef: null,
+      actionCompilationRetrievalProvider: {
+        runtime: (ref) => ref.manifestHash === DEFAULT_ALGORITHM_REF.manifestHash
+          ? retrievalRuntime
+          : undefined,
+        preflight: async (ref, input) => {
+          expect(ref.manifestHash).toBe(DEFAULT_ALGORITHM_REF.manifestHash);
+          expect(input.worldContentHash).toBe(setup.definition.contentHash);
+          preflightCalls += 1;
+        },
+      },
+    });
+    try {
+      const created = await setup.host.createInstance(observerStart);
+      const stored = setup.database.readInstance(created.summary.id).document;
+      expect(stored.executionAlgorithm).toEqual(DEFAULT_ALGORITHM_REF);
+      expect(stored.executionAlgorithm.children.actionCompilation).toMatchObject({
+        id: "represented-action-compilation", config: { representation: "AT", descriptionPolicy: "original-action-v1" },
+      });
+      expect(stored.executionAlgorithm.children.truthResolution).toMatchObject({
+        id: "indexed-reviewed-truth-resolution", version: "5",
+        children: { batching: { id: "shared-state-first-slot-batching", config: { flushBoundary: "post-promise-v1", planRepairBatching: "scoped-plans-v1" } } },
+      });
+      expect(stored.executionAlgorithm.children.observationRendering?.id).toBe("source-bound-observation-rendering");
+      expect(setup.host.inspectorWindow(created.summary.id, { limit: 1 }).algorithmComposition.root).toEqual(DEFAULT_ALGORITHM_REF);
+      expect(stored.executionAlgorithm.children.actionCompilation?.children.candidateSelection)
+        .toMatchObject({
+          role: "candidate-selection",
+          id: "relational-rrf",
+          version: "2",
+          config: { budgetPolicy: "mandatory-floor-v1" },
+          children: {
+            ranking: { id: "typed-channel-rrf" },
+            allocation: { id: "coverage-aware-joint-budget" },
+          },
+        });
+      expect(preflightCalls).toBe(1);
+    } finally {
+      setup.database.close();
+    }
+  });
+
   it("runs ten headless eager steps through the same Ledger", async () => {
     const { database, host } = harness();
     try {
@@ -216,7 +288,7 @@ describe("World Instance host", () => {
           root: {
             role: "world-execution",
             id: "eager-reference",
-            version: "16",
+            version: "18",
             manifestHash: stored.executionAlgorithm.manifestHash,
           },
         },
@@ -511,8 +583,8 @@ describe("World Instance host", () => {
       expect(stored.experimentEnrollment).toBeNull();
       expect(stored.executionAlgorithm).toMatchObject({
         id: "eager-reference",
-        version: "16",
-        contractVersion: 6,
+        version: "18",
+        contractVersion: 7,
         config: {},
         children: {
           actionCompilation: {
@@ -1185,14 +1257,14 @@ describe("World Instance host", () => {
     const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 47, modelCatalog: provider.catalog });
     const algorithms = registerBuiltinAlgorithms(new WorldExecutionAlgorithmRegistry());
     const experiments = new AlgorithmExperimentRegistry(algorithms);
-    const treatment = eagerReferenceAlgorithmRef({ ...DEFAULT_EAGER_REFERENCE_CONFIG, actionCompilationMaxSlots: 1 });
+    const treatment = eagerReferenceAlgorithmRef({ ...FULL_CATALOG_EAGER_REFERENCE_CONFIG, actionCompilationMaxSlots: 1 });
     const manifest = defineAlgorithmExperimentManifest({
       id: "world-execution-fixture",
       version: "1",
       salt: "fixture",
       eligibility: { worldContentHashes: [definition.contentHash] },
       variants: [
-        { id: "control", allocationBasisPoints: 7_000, algorithmRef: DEFAULT_ALGORITHM_REF },
+        { id: "control", allocationBasisPoints: 7_000, algorithmRef: FULL_CATALOG_ALGORITHM_REF },
         { id: "treatment", allocationBasisPoints: 3_000, algorithmRef: treatment },
       ],
       activationEvidence: { artifactHash: `sha256:${"1".repeat(64)}`, verifier: "fixture" },
@@ -1205,7 +1277,7 @@ describe("World Instance host", () => {
       if (experiments.enrollment({
         instanceId: candidate,
         worldContentHash: definition.contentHash,
-        defaultAlgorithmRef: DEFAULT_ALGORITHM_REF,
+        defaultAlgorithmRef: FULL_CATALOG_ALGORITHM_REF,
         explicitExecutionTuning: false,
       }).enrollment?.variantId === "treatment") {
         selectedInstanceId = candidate;
@@ -1213,15 +1285,10 @@ describe("World Instance host", () => {
       }
     }
     expect(selectedInstanceId).not.toBe("");
-    let preflightCalls = 0;
     const setup = harness({
       algorithmRegistry: algorithms,
       experimentRegistry: experiments,
       idFactory: () => selectedInstanceId,
-      experimentVariantPreflights: new Map([[treatment.manifestHash, async ({ worldContentHash }) => {
-        preflightCalls += 1;
-        expect(worldContentHash).toBe(definition.contentHash);
-      }]]),
     });
     try {
       const created = await setup.host.createInstance(observerStart);
@@ -1234,7 +1301,6 @@ describe("World Instance host", () => {
         variantId: "treatment",
       });
       expect(stored.experimentExclusion).toBeNull();
-      expect(preflightCalls).toBe(1);
       experiments.validateEnrollment(stored.id, stored.experimentEnrollment!);
     } finally {
       setup.database.close();
@@ -1247,12 +1313,6 @@ describe("World Instance host", () => {
     const algorithms = registerBuiltinAlgorithms(new WorldExecutionAlgorithmRegistry());
     const treatment = eagerReferenceAlgorithmRef({
       ...DEFAULT_EAGER_REFERENCE_CONFIG,
-      candidateRetrieval: {
-        mode: "runtime",
-        runtimeVersion: "action-compilation-retrieval-runtime-v4",
-        encoderFingerprint: `sha256:${"3".repeat(64)}`,
-        budgetRatio: 0.2,
-      },
     });
     const experiments = new AlgorithmExperimentRegistry(algorithms);
     const manifest = defineAlgorithmExperimentManifest({
@@ -1261,7 +1321,7 @@ describe("World Instance host", () => {
       salt: "fixture",
       eligibility: { worldContentHashes: [definition.contentHash] },
       variants: [
-        { id: "control", allocationBasisPoints: 7_000, algorithmRef: DEFAULT_ALGORITHM_REF },
+        { id: "control", allocationBasisPoints: 7_000, algorithmRef: FULL_CATALOG_ALGORITHM_REF },
         { id: "treatment", allocationBasisPoints: 3_000, algorithmRef: treatment },
       ],
       activationEvidence: { artifactHash: `sha256:${"1".repeat(64)}`, verifier: "fixture" },
@@ -1274,7 +1334,7 @@ describe("World Instance host", () => {
       if (experiments.enrollment({
         instanceId: candidate,
         worldContentHash: definition.contentHash,
-        defaultAlgorithmRef: DEFAULT_ALGORITHM_REF,
+        defaultAlgorithmRef: FULL_CATALOG_ALGORITHM_REF,
         explicitExecutionTuning: false,
       }).enrollment?.variantId === "treatment") {
         treatmentInstanceId = candidate;
@@ -1288,7 +1348,7 @@ describe("World Instance host", () => {
       idFactory: () => treatmentInstanceId,
     });
     try {
-      await expect(setup.host.createInstance(observerStart)).rejects.toThrow("treatment dependencies are missing");
+      await expect(setup.host.createInstance(observerStart)).rejects.toThrow("candidate retrieval dependencies are missing");
       expect(experiments.enrollmentStatus()).toMatchObject({ stopped: true });
       expect(setup.database.listInstances()).toHaveLength(0);
     } finally {

@@ -36,6 +36,14 @@ The registry validates the entire tree before model calls or canonical-state wor
 
 World instances, experiment variants, Ledger producers, preparations, replay, and the trusted local Inspector all pin or project this recursive identity. Ordinary world APIs do not expose it.
 
+## Standard composition
+
+Relational RRF v2 preserves the mandatory reference union as a budget floor when it exceeds the proportional shortlist budget. Diagnostics report both budgets and floor expansion; ordinary larger catalogs keep the same proportional limit. The root selection remains fixed through repair.
+
+New ordinary instances select the [standard integrated composition](../../src/engine/algorithms/standard-composition.ts), including reversible compilation, relational retrieval, source-indexed reviewed planning, shared transport and source-bound observations. The generated catalog owns the exact tree and settings. Basic composition factories remain explicit controls for tests and research; they are not an automatic fallback. Default adoption does not certify open semantic correctness or continuous-play latency. [The rollout contract](../specs/0121-standard-integrated-execution-composition.md) defines selection and verification.
+
+Persisted instances and replay keep their complete producer identity when the host default changes. Use a new instance to select the current standard. Missing historical definitions fail before execution instead of silently changing a save's algorithm.
+
 ## Runtime and benchmark availability
 
 Maturity is catalog metadata and does not enter behavior identity:
@@ -47,6 +55,14 @@ Maturity is catalog metadata and does not enter behavior identity:
 The runtime registry contains only implementations that satisfy their production Role contract and resource preflight. Benchmark-only candidate selectors use `benchmark-candidate-selection-v1`; they are independently replaceable inside the offline harness, appear in the generated catalog, and cannot resolve inside an instance Composition. Promotion requires a production-batch adapter, strict configuration, pinned resources, registry conformance, current benchmark evidence, replay equivalence, and experiment activation evidence.
 
 There is no implicit fallback between Algorithms. A missing asset, unavailable definition, invalid output, or contract mismatch fails closed under the identity that was selected.
+
+Truth Role contract 2 exposes resumable, unreviewed transition candidates and bound causal review. The existing `resolve` entry drives the same candidate session through observation rendering and review; finishing candidate generation alone supplies no causal verdict. A rejected transition resumes with its retained plans and random commitments. [The candidate-session contract](../specs/0074-resumable-truth-candidates.md) defines lifecycle and repair ownership.
+
+The source-bound worklist Truth candidate pins its physical codec order, static prompt bundle and temporal evidence policy as one registered planning pipeline. It is selected only by a fresh explicit Composition; source qualification and actual gameplay remain distinct evidence. [The pipeline contract](../specs/0043-registered-worklist-planning-pipeline.md) owns its scope.
+
+The experimental single-magnitude resolution representation wraps the physical provider beneath the existing batch coordinator. It removes only the duplicate output base magnitude and expands it before the shared canonical validators; context, batch membership and settlement remain unchanged. Its codec and prompt identity are pinned by the candidate Composition. [Decision 0112](../decisions/0112-single-magnitude-resolution-wire.md) defines the expressiveness and rejection boundary.
+
+Candidate retrieval preserves selected-record relationships using source-bound read-only snapshot identities for references outside the executable shortlist. Literal nulls and array positions retain their source meaning; the output catalog and slot permissions remain unchanged. [Decision 0115](../decisions/0115-preserve-shortlist-reference-evidence.md) defines the representation and its limits.
 
 ## Adding or changing an Algorithm
 
@@ -74,3 +90,5 @@ npm run algorithms -- catalog --check
 `npm run verify:algorithms` checks generated-catalog freshness, required registrations, benchmark-family coverage, and forbidden concrete imports across fixed runtime, mechanics, and cognition packages. `npm run check:fast` includes that gate.
 
 The architectural rationale is recorded in [0099](../decisions/0099-typed-hierarchical-algorithm-composition.md).
+
+The experimental source-inventory resolution Composition projects existing eligible means sources beside each assigned action, including repair subsets. It preserves all original context and uses the shared model output and settlement paths. [The source inventory contract](../specs/0028-resolution-source-inventory-experiment.md) defines its scope and validation boundary.

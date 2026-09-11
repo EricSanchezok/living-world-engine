@@ -260,7 +260,9 @@ export interface WorldInspectorModelInvocationSummary {
     passageCacheMisses: number;
     queryCacheHits: number;
     queryCacheMisses: number;
+    queryBatchSize: number;
     cacheReadMs: number;
+    passageEncodeMs: number;
     queryEncodeMs: number;
     perSlotSelectedCount: Readonly<Record<string, number>>;
   };

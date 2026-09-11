@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import path from "node:path";
-import { canonicalize, measureModelContext } from "../../models/model-audit";
+import { canonicalize, contentHash, measureModelContext, prepareModelContext } from "../../models/model-audit";
 import {
   RecordingRuntimeObserver,
   serializeRuntimeError,
@@ -22,6 +22,38 @@ function modelRoster(engine: SimulationEngine): Record<string, PolicyBinding> {
 }
 
 describe("model context measurements", () => {
+  it.each([null, false, 0, "中文 🐉", [null, false, { z: 1, a: "x" }],
+    { z: [], "10": null, "2": false, a: { "é": "🙂", A: 1, a: 2 } },
+  ].map((context) => ({ context })))("preserves existing hash and byte/count semantics for context $context", ({ context }) => {
+    const prepared = prepareModelContext(context);
+    expect(prepared.hash).toBe(contentHash(context));
+    expect(prepared.measure()).toEqual(measureModelContext(context));
+    const compact = JSON.stringify(canonicalize(context));
+    expect(prepared.measure(compact)).toEqual(measureModelContext(context, compact));
+  });
+
+  it("retains measurement rejection for a non-JSON undefined top-level section", () => {
+    const context = { missing: undefined };
+    const prepared = prepareModelContext(context);
+    expect(prepared.hash).toBe(contentHash(context));
+    expect(() => measureModelContext(context)).toThrow(TypeError);
+    expect(() => prepared.measure()).toThrow(TypeError);
+  });
+
+  it("owns a fresh request snapshot without caching later mutations of the caller's context", () => {
+    const context = { state: { facts: { visible: { value: "before" } } } };
+    const initial = structuredClone(context);
+    const first = prepareModelContext(context);
+    context.state.facts.visible.value = "after with more bytes";
+    expect(first.value).toEqual(initial);
+    expect(first.hash).toBe(contentHash(initial));
+    expect(first.measure()).toEqual(measureModelContext(initial));
+    const second = prepareModelContext(context);
+    expect(second.value).toEqual(context);
+    expect(second.hash).not.toBe(first.hash);
+    expect(second.measure().utf8Bytes).toBeGreaterThan(first.measure().utf8Bytes);
+  });
+
   it("rejects unknown, engine-owned, and malformed algorithm telemetry", () => {
     expect(() => validateAlgorithmTelemetryEvent({ event: "algorithm.typo" }))
       .toThrow("unknown algorithm telemetry event");

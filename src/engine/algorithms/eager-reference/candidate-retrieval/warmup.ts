@@ -1,21 +1,17 @@
-import { createActionCompilationReferenceResolver } from "../../../contracts/model-context";
 import type { AgentActionProposal, SimulationState } from "../../../contracts/model";
-import {
-  actionGroundingReferenceResolver,
-  actionGroundingSharedContext,
-} from "../../../mechanics/action-dependency";
-import { actionCompilationPassageEntriesForContext } from "./graph-aware";
+import { actionCompilationContext } from "../action-compiler";
+import { r5RelationalPassagesForContext } from "./relational-rrf";
 
 export function actionCompilationPassagesForState(
   state: Readonly<SimulationState>,
 ): readonly string[] {
   const passages = new Set<string>();
   const collect = (actions: readonly AgentActionProposal[]): void => {
-    const slotByActionId = new Map(actions.map((action, slot) => [action.id, slot]));
-    const resolver = actionGroundingReferenceResolver(state, actions, slotByActionId);
-    const projected = actionGroundingSharedContext(state, actions, resolver, true).referenceResolver;
-    const catalog = createActionCompilationReferenceResolver(projected, projected).catalog;
-    actionCompilationPassageEntriesForContext({ referenceCatalog: catalog })
+    // Ranking consumes the compiler's projected catalog, including compact
+    // candidates and candidate-key references, rather than raw handle details.
+    const context = actionCompilationContext(state, actions.map(action => ({ key: action.id, payload: { action }, issues: [] })),
+      { workloadId: "retrieval-cache-warm", batchId: "retrieval-cache-warm" });
+    r5RelationalPassagesForContext(context)
       .forEach(({ passage }) => passages.add(passage));
   };
   collect([]);

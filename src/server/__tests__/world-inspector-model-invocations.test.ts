@@ -347,7 +347,7 @@ describe("world inspector model invocation projection", () => {
       },
       payload: {
         protocolVersion: 2,
-        projection: "candidate-key-v2-12hex-deterministic-details",
+        projection: "candidate-key-v3-complete-repair-issues",
         context: {
           utf8Bytes: 12_345,
           referenceCatalogUtf8Bytes: 4_000,

@@ -7,7 +7,7 @@ import {
   type ModelProviderAdapter,
 } from "./model-adapter";
 import type { ModelCatalog } from "./model-catalog";
-import { canonicalize, contentHash, measureModelContext } from "./model-audit";
+import { canonicalize, contentHash, prepareModelContext } from "./model-audit";
 import {
   type ModelRegistryService,
   type ModelRegistrySnapshot,
@@ -20,6 +20,7 @@ import type {
   ModelTransportAttemptAudit,
 } from "../contracts/model";
 import { createReferenceResolver, normalizeModelOutput } from "../contracts/model-context";
+import { validationIssues } from "../contracts/prompts";
 import type {
   StructuredModelProvider,
   StructuredModelRequest,
@@ -425,25 +426,39 @@ export class ModelGateway implements StructuredModelProvider {
       modelInvocation,
     };
     const normalizeStartedAt = this.now();
-    const context = canonicalize(request.context);
+    const preparedContext = prepareModelContext(request.context);
+    const context = preparedContext.value;
     observe?.({
       event: "model.context.normalized",
       correlation,
       durationMs: Math.max(0, this.now() - normalizeStartedAt),
-      hashes: { context: contentHash(context) },
+      hashes: { context: preparedContext.hash },
     });
     const serializationStartedAt = this.now();
-    const schema = canonicalize(z.toJSONSchema(request.schema, { target: "draft-07" }));
+    const schema = canonicalize(request.wireJsonSchema ?? z.toJSONSchema(request.schema, { target: "draft-07" }));
     const promptBytes = structuredPromptBytes({
       system: request.system,
       userPrompt: request.userPrompt,
       context,
       schema: request.schema,
+      wireJsonSchema: request.wireJsonSchema,
+      repairContextPlacement: request.repairContextPlacement,
+      jsonObjectPostlude: request.jsonObjectPostlude,
+      contextLayout: request.contextLayout,
     });
     const contextJson = promptBytes.contextJson;
-    const contextAudit = measureModelContext(context, contextJson);
-    const contractHash = contentHash({ system: request.system, userPrompt: request.userPrompt, schema });
+    const contextAudit = preparedContext.measure(contextJson);
+    const rendering = {
+      ...(profile.response_transport ? { responseTransport: profile.response_transport } : {}),
+      ...(request.jsonObjectPostlude !== undefined ? { jsonObjectPostlude: request.jsonObjectPostlude } : {}),
+      ...(request.jsonExamplePolicy ? { jsonExamplePolicy: request.jsonExamplePolicy } : {}),
+      ...(request.repairContextPlacement ? { repairContextPlacement: request.repairContextPlacement } : {}),
+      ...(request.jsonSyntaxRecovery ? { jsonSyntaxRecovery: request.jsonSyntaxRecovery } : {}),
+    ...(request.contextLayout ? { contextLayout: request.contextLayout } : {}),
+    };
+    const contractHash = contentHash({ system: request.system, userPrompt: request.userPrompt, schema, ...rendering });
     const requestDocument = {
+      ...rendering,
       modelCatalogHash: this.catalog.hash,
       workloadId: request.workloadId,
       batchId: request.batchId,
@@ -486,7 +501,7 @@ export class ModelGateway implements StructuredModelProvider {
         requestUtf8Bytes,
       },
       counts: contextAudit.counts,
-      hashes: { context: contentHash(context), request: requestHash, contract: contractHash },
+      hashes: { context: preparedContext.hash, request: requestHash, contract: contractHash },
       payload: fullRuntimePayload(observer, requestDocument),
     });
     const contractEmissionKey = `${observer.mode}:${contractHash}`;
@@ -500,7 +515,7 @@ export class ModelGateway implements StructuredModelProvider {
           systemUtf8Bytes: Buffer.byteLength(request.system, "utf8"),
           schemaUtf8Bytes: Buffer.byteLength(JSON.stringify(schema), "utf8"),
         },
-        payload: fullRuntimePayload(observer, { system: request.system, userPrompt: request.userPrompt, schema }),
+        payload: fullRuntimePayload(observer, { system: request.system, userPrompt: request.userPrompt, schema, ...rendering }),
       });
     }
     observe?.({
@@ -524,6 +539,9 @@ export class ModelGateway implements StructuredModelProvider {
     });
     observer.flush?.();
     const transports: ModelTransportAttemptAudit[] = [];
+    const dispatchSignal = request.cancelPendingSignal
+      ? AbortSignal.any([request.cancelPendingSignal, ...(request.abortSignal ? [request.abortSignal] : [])])
+      : request.abortSignal;
     let transportAttempts = 0;
     let auditPersisted = false;
 
@@ -540,8 +558,9 @@ export class ModelGateway implements StructuredModelProvider {
         const scheduled = await this.scheduler.schedule({
           providerId: binding.accountId,
           workloadId: request.workloadId,
-          abortSignal: request.abortSignal,
+          abortSignal: dispatchSignal,
           execute: () => {
+            dispatchSignal?.throwIfAborted();
             observe?.({
               event: "model.transport.started",
               correlation: transportCorrelation,
@@ -667,6 +686,7 @@ export class ModelGateway implements StructuredModelProvider {
           referenceCatalogHash: referenceCatalogAudit(request.context).hash,
           rawOutputHash,
           normalizedOutputHash: responseHash,
+          ...(scheduled.value.jsonRecoveryEvidence ? { jsonRecoveryEvidence: structuredClone(scheduled.value.jsonRecoveryEvidence) } : {}),
         };
         const audit = executionAudit(binding, request, scheduled.value, this.catalog, [invocation]);
         observe?.({
@@ -747,7 +767,7 @@ export class ModelGateway implements StructuredModelProvider {
         const error = unwrapScheduledError(scheduledError);
         const outputError = isOutputError(error);
         const retryable = transportAttempts < this.maxTransportAttempts &&
-          isRetryableTransportError(error, request.abortSignal);
+          isRetryableTransportError(error, dispatchSignal);
         const transportCompleted = transports.some((attempt) =>
           attempt.attempt === transportAttempts && attempt.status === "succeeded");
         const transportAudit: ModelTransportAttemptAudit = transportCompleted
@@ -796,7 +816,7 @@ export class ModelGateway implements StructuredModelProvider {
           }
         }
         if (transportAttempts >= this.maxTransportAttempts ||
-          !isRetryableTransportError(error, request.abortSignal)) {
+          !isRetryableTransportError(error, dispatchSignal)) {
           if (isOutputError(error)) {
             if (error instanceof ModelOutputError && error.audit) {
               if (!auditPersisted) {
@@ -811,6 +831,7 @@ export class ModelGateway implements StructuredModelProvider {
               observer.flush?.();
               throw error;
             }
+            const rejectedCompletion = error instanceof ModelOutputError ? error.completion : undefined;
             const rawProviderOutput = completedResult?.value ??
               (error instanceof ModelOutputError ? error.rawValue : undefined);
             const rawProviderOutputHash = rawProviderOutput === undefined ? null : contentHash(rawProviderOutput);
@@ -829,20 +850,24 @@ export class ModelGateway implements StructuredModelProvider {
               responseUtf8Bytes: rawProviderOutputBytes,
               context: contextAudit,
               transports,
-              tokenUsage: completedResult?.tokenUsage ?? {
+              tokenUsage: completedResult?.tokenUsage ?? rejectedCompletion?.tokenUsage ?? {
                   input: null,
                   output: null,
                   reasoning: null,
                   cacheRead: null,
                   cacheWrite: null,
                 },
-              finishReason: completedResult?.finishReason ?? null,
-              providerRequestId: completedResult?.responseId || null,
+              finishReason: completedResult?.finishReason ?? rejectedCompletion?.finishReason ?? null,
+              providerRequestId: completedResult?.responseId || rejectedCompletion?.responseId || null,
               resultKind: null,
               outputDisposition: "rejected",
-              issues: [{ code: error instanceof Error ? error.name : "model_output_error", class: "structure", path: [], message: error instanceof Error ? error.message : String(error) }],
+              issues: validationIssues(error).map((issue) => ({
+                code: issue.code, class: issue.class ?? "structure", path: [...issue.path], message: issue.message,
+                ...(issue.originalValue !== undefined ? { originalValue: structuredClone(issue.originalValue) } : {}),
+                ...(issue.allowedHandles ? { allowedHandles: [...issue.allowedHandles] } : {}),
+              })),
               normalization: {
-                applied: false,
+                applied: Boolean(rejectedCompletion?.jsonRecoveryEvidence),
                 modifiedFieldCount: 0,
                 resolvedReferenceCount: 0,
                 proposalCount: 0,
@@ -858,6 +883,7 @@ export class ModelGateway implements StructuredModelProvider {
               referenceCatalogHash: referenceCatalogAudit(request.context).hash,
               rawOutputHash: rawProviderOutputHash,
               normalizedOutputHash: null,
+              ...(rejectedCompletion?.jsonRecoveryEvidence ? { jsonRecoveryEvidence: structuredClone(rejectedCompletion.jsonRecoveryEvidence) } : {}),
             };
             const audit = executionAudit(
               binding,
@@ -913,6 +939,7 @@ export class ModelGateway implements StructuredModelProvider {
               {
                 cause: error,
                 rawValue: error instanceof ModelOutputError ? error.rawValue : undefined,
+                completion: rejectedCompletion,
               },
             );
           }
@@ -944,7 +971,7 @@ export class ModelGateway implements StructuredModelProvider {
             error instanceof Error ? error.message : String(error),
             {
               cause: error,
-              retriable: isRetryableTransportError(error, request.abortSignal),
+              retriable: isRetryableTransportError(error, dispatchSignal),
               statusCode: statusCode(error) ?? null,
             },
           );
@@ -962,7 +989,7 @@ export class ModelGateway implements StructuredModelProvider {
         });
         observer.flush?.();
         try {
-          await this.sleep(delayMs, request.abortSignal);
+          await this.sleep(delayMs, dispatchSignal);
         } catch (retryError) {
           const cancelled = retryError instanceof Error && retryError.name === "AbortError";
           observe?.({

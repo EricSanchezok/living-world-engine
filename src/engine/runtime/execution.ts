@@ -63,9 +63,9 @@ export type { AlgorithmRef } from "../algorithms/composition";
 
 export type ExecutionKind = "interactive" | "diagnostic" | "benchmark" | "replay";
 
-export const WORLD_EXECUTION_CONTRACT_VERSION = 6 as const;
+export const WORLD_EXECUTION_CONTRACT_VERSION = 7 as const;
 export const ENGINE_OPERATION_CONTRACT_VERSION = 1 as const;
-export const WORLD_STEP_CANDIDATE_SCHEMA_VERSION = 5 as const;
+export const WORLD_STEP_CANDIDATE_SCHEMA_VERSION = 6 as const;
 export const WORLD_STEP_PREPARATION_SCHEMA_VERSION = 5 as const;
 
 export class StepPreparationInvalidatedError extends Error {
@@ -373,6 +373,12 @@ export interface WorldStepCandidate {
   schemaVersion: typeof WORLD_STEP_CANDIDATE_SCHEMA_VERSION;
   sourceStateHash: string;
   resolution: WorldResolutionCandidate;
+  finalCausalReview: {
+    contentHash: string;
+    evidenceHash: string;
+    promptVersion: string;
+    invocationIds: string[];
+  };
   mindCommits: Array<AgentMindOutput & { agentId: string }>;
   modelAudits: ModelExecutionAudit[];
   interactionDependencies: InteractionDependency[];
@@ -384,6 +390,13 @@ export interface WorldStepCandidate {
   activityDispositions: ActivityDisposition[];
   sharedResourceAdmissions: SharedResourceAdmission[];
   decisionPoints: DecisionPoint[];
+}
+
+/** Bind reviewed world behavior independently of subsequent cognition work. */
+export function finalCausalReviewContentHash(candidate: Pick<WorldStepCandidate,
+  "sourceStateHash" | "resolution" | "temporalBoundary" | "temporalState">): string {
+  return contentHash({ sourceStateHash: candidate.sourceStateHash, resolution: candidate.resolution,
+    temporalBoundary: candidate.temporalBoundary, temporalState: candidate.temporalState });
 }
 
 export interface WorldStepPreparation {

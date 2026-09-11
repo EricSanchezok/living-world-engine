@@ -3,8 +3,8 @@ import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { DEFAULT_ALGORITHM_REF, eagerReferenceAlgorithmRef } from "../../engine/algorithms/registry";
-import { DEFAULT_EAGER_REFERENCE_CONFIG } from "../../engine/algorithms/eager-reference/eager-reference";
+import { DEFAULT_ALGORITHM_REF, FULL_CATALOG_ALGORITHM_REF } from "../../engine/algorithms/registry";
+import { MULTILINGUAL_E5_BASE_ASSET } from "../../engine/algorithms/eager-reference/candidate-retrieval/model-assets";
 import { defineAlgorithmExperimentManifest } from "../../engine/runtime/experiments";
 import { verifyExperimentActivationEvidence } from "../experiment-activation";
 
@@ -14,7 +14,7 @@ afterEach(() => {
   roots.splice(0).forEach((root) => rmSync(root, { recursive: true, force: true }));
 });
 
-const ENCODER_FINGERPRINT = `sha256:${"3".repeat(64)}`;
+const ENCODER_FINGERPRINT = MULTILINGUAL_E5_BASE_ASSET.encoderFingerprint;
 
 function artifact(hardGate = true): { file: string; hash: string; datasetManifest: string } {
   const root = mkdtempSync(path.join(tmpdir(), "lwe-experiment-evidence-"));
@@ -63,15 +63,7 @@ function artifact(hardGate = true): { file: string; hash: string; datasetManifes
 }
 
 function treatmentRef() {
-  return eagerReferenceAlgorithmRef({
-    ...DEFAULT_EAGER_REFERENCE_CONFIG,
-    candidateRetrieval: {
-      mode: "runtime",
-      runtimeVersion: "action-compilation-retrieval-runtime-v4",
-      encoderFingerprint: ENCODER_FINGERPRINT,
-      budgetRatio: 0.2,
-    },
-  });
+  return DEFAULT_ALGORITHM_REF;
 }
 
 describe("experiment activation evidence", () => {
@@ -83,7 +75,7 @@ describe("experiment activation evidence", () => {
       salt: "salt",
       eligibility: { worldContentHashes: [`sha256:${"1".repeat(64)}`] },
       variants: [
-        { id: "control", allocationBasisPoints: 7_000, algorithmRef: DEFAULT_ALGORITHM_REF },
+        { id: "control", allocationBasisPoints: 7_000, algorithmRef: FULL_CATALOG_ALGORITHM_REF },
         { id: "treatment", allocationBasisPoints: 3_000, algorithmRef: treatmentRef() },
       ],
       activationEvidence: { artifactHash: evidence.hash, verifier: "action-compilation-retrieval-v4" },
@@ -106,7 +98,7 @@ describe("experiment activation evidence", () => {
       salt: "salt",
       eligibility: { worldContentHashes: [`sha256:${"1".repeat(64)}`] },
       variants: [
-        { id: "control", allocationBasisPoints: 7_000, algorithmRef: DEFAULT_ALGORITHM_REF },
+        { id: "control", allocationBasisPoints: 7_000, algorithmRef: FULL_CATALOG_ALGORITHM_REF },
         { id: "treatment", allocationBasisPoints: 3_000, algorithmRef: treatmentRef() },
       ],
       activationEvidence: { artifactHash: evidence.hash, verifier: "action-compilation-retrieval-v4" },

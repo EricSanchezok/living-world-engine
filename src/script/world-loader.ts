@@ -158,7 +158,7 @@ function mechanicsCatalog(document: MechanicsDocument): MechanicsCatalog {
         checkpointSeconds: stage.checkpoint_seconds,
       })),
     };
-    if (profile.kind === "conditional") return {
+    if (profile.kind === "conditional" || profile.kind === "goal") return {
       ...base,
       kind: profile.kind,
       checkEverySeconds: profile.check_every_seconds,

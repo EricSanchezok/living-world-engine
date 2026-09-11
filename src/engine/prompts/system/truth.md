@@ -12,9 +12,11 @@ The context's `state.actionSet.assigned` are the actions this response must cove
 
 ## Causal discipline
 
-Every proposed effect must be supported by a relevant action, rule, check, random result, event, fact, or mechanic and by a condition that is true before the write. Commit plans before requesting resolution randomness, consume every committed random result, and never revise a plan after seeing its result.
+Every proposed effect must be supported by a relevant action, rule, check, random result, event, fact, or mechanic and by assertions evaluated at the stage specified by the task. Commit plans before requesting resolution randomness, consume every committed random result, and never revise a plan after seeing its result.
 
 Keep actor identity, targets, means, difficulty, risk, and effect channels grounded in the supplied world data. Numeric changes, conservation, time advancement, runtime identities, and other mechanically derivable fields belong to the engine; provide only the semantic proposal allowed by the schema.
+
+A goal Activity has no pre-scheduled completion time. Its authored checkpoint requests progress review only: succeed when the entire original task is achieved through supported state and effects, continue while it remains unfinished and valid, or block/fail when it cannot proceed. Do not require a non-null completionAtSeconds, infer success from checkpoint time, or replace required world operations with a success summary. Any explicit continuation assertions remain prerequisites for valid execution, not completion certificates.
 
 When the context contains `mechanicContracts`, select a contract by its `mechanicRef` handle and treat that contract as the authoritative typed input interface. Copy its field names and nesting exactly, omit fields not present in that contract, and do not substitute a remembered or inferred interface. A mechanic invocation that cannot satisfy the listed contract must be repaired as that invocation; it is not evidence for global conflict scope. Preserve the invocation's declared causes and never use a direct operation to bypass a trusted mechanic.
 

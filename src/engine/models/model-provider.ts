@@ -6,20 +6,27 @@ import type {
   ModelTokenUsage,
   ModelOutputIssue,
   ModelSymbolRepairAudit,
+  ModelJsonRecoveryEvidence,
 } from "../contracts/model";
 import type { RuntimeCorrelation, RuntimeObserver } from "../runtime/observability";
 import type { ModelRegistryStatus } from "./model-registry";
 import { runtimeId } from "../runtime/runtime-id";
 import type { ExecutionStageHooks, ExecutionStagePosition } from "../runtime/stages";
 import type { CandidateSelectionCapability } from "../algorithms/roles";
+import type { AlgorithmRef } from "../algorithms/composition";
+import type { PromptValidationIssue } from "../contracts/prompts";
 
 export interface ModelExecutionScope {
   workloadId: string;
   batchId: string;
   abortSignal?: AbortSignal;
+  /** Cancel queued/new work while allowing active HTTP to finish with usage. */
+  cancelPendingSignal?: AbortSignal;
   correlation?: RuntimeCorrelation;
   observer?: RuntimeObserver;
   runtimeIdentity?: { worldHash: string; revision: number };
+  /** Exact immutable Composition that produced this execution. */
+  executionAlgorithmRef?: AlgorithmRef<"world-execution">;
   /** Pins benchmark/replay work to one immutable historical registry snapshot. */
   modelRegistrySnapshotHash?: string;
   /** Engine-owned logical stage metadata for Inspector ordering and debug gates. */
@@ -41,6 +48,20 @@ export interface StructuredModelRequest<T> extends ModelExecutionScope {
   userPrompt: string;
   context: unknown;
   schema: z.ZodType<T>;
+  /** Explicit transport mode for controlled experiments; canonical validation remains mandatory. */
+  structuredOutputMode?: "json-object-zod" | "json-schema-strict";
+  /** Trusted codec-owned wire schema; canonical validation remains schema-owned. */
+  wireJsonSchema?: Record<string, unknown>;
+  /** Pinned request rendering policy; omit examples that would invent task output. */
+  jsonExamplePolicy?: "omit";
+  /** Trusted optional instruction after the JSON-object schema and repair evidence. */
+  jsonObjectPostlude?: string;
+  /** Explicit lossless placement of physical or bound logical repair evidence. */
+  repairContextPlacement?: "tail-v1" | "logical-tail-v1";
+  /** Experimental local parser policy; never a provider generation parameter. */
+  jsonSyntaxRecovery?: "unmatched-closers-v1";
+  /** Lossless ordering of shared-state fields ahead of volatile batch metadata. */
+  contextLayout?: "shared-state-first-v1";
   /** Deterministic, field-scoped normalization before schema validation. */
   preprocessOutput?: (raw: unknown) => {
     value: unknown;
@@ -62,6 +83,14 @@ export interface StructuredModelResult<T> {
   audit: ModelExecutionAudit;
 }
 
+export interface ModelOutputCompletion {
+  tokenUsage: ModelTokenUsage;
+  finishReason: string;
+  responseId: string;
+  responseModelId: string;
+  jsonRecoveryEvidence?: ModelJsonRecoveryEvidence;
+}
+
 export class ModelOutputError extends Error {
   /**
    * The provider value is retained only in memory so a caller can isolate a
@@ -69,21 +98,36 @@ export class ModelOutputError extends Error {
    * public DTOs or persisted outside the normal model audit.
    */
   readonly rawValue: unknown;
+  /** Known provider completion remains billable even when its output fails. */
+  readonly completion?: ModelOutputCompletion;
 
   constructor(
     message: string,
     readonly audit?: ModelExecutionAudit,
-    options: ErrorOptions & { rawValue?: unknown } = {},
+    options: ErrorOptions & { rawValue?: unknown; completion?: ModelOutputCompletion } = {},
   ) {
     super(message, options);
     this.name = "ModelOutputError";
     this.rawValue = options.rawValue;
+    this.completion = options.completion ? structuredClone(options.completion) : undefined;
   }
 }
 
 export interface ModelTransportErrorOptions extends ErrorOptions {
   retriable?: boolean;
   statusCode?: number | null;
+}
+
+/** A rejected candidate's independent validation failures, for one repair. */
+export class ModelCandidateValidationError extends Error {
+  readonly issues: readonly PromptValidationIssue[];
+
+  constructor(issues: readonly PromptValidationIssue[]) {
+    if (issues.length === 0) throw new Error("candidate validation requires at least one issue");
+    super(issues.map(issue => `${issue.path.join(".")}: ${issue.message}`).join("\n"));
+    this.name = "ModelCandidateValidationError";
+    this.issues = structuredClone(issues);
+  }
 }
 
 export class ModelTransportError extends Error {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { z } from "zod";
-import { loadModelCatalog } from "../model-catalog";
+import { loadModelCatalog, parseModelCatalog } from "../model-catalog";
 import { ModelGateway } from "../model-gateway";
 import { contentHash } from "../model-audit";
 import { vendorDialect } from "../model-dialect";
@@ -15,7 +15,7 @@ import { TEST_WORLD_HASH } from "../../testing/world";
 const outputSchema = z.strictObject({ answer: z.string() });
 
 const profileModels = {
-  "agent-deepseek": "deepseek-v4-flash",
+  "agent-deepseek": "deepseek-flash",
   "agent-openai": "gpt-5.6",
   "agent-xai": "grok-4.6",
   "agent-zhipu": "glm-5.3-flash",
@@ -185,7 +185,33 @@ function request(profileId: keyof typeof profileModels, ordinal = 1) {
 }
 
 describe("provider account protocol matrix", () => {
-  it("pins every production DeepSeek profile to non-thinking V4 Flash", () => {
+  it.each(["json-object-zod", "json-schema-strict"] as const)("runs DeepSeek Responses %s through the real gateway", async (mode) => {
+    const original = loadModelCatalog();
+    const accountId = original.profile("agent-deepseek").account_id;
+    const catalog = parseModelCatalog({ schema_version: original.schemaVersion, scheduler: original.scheduler,
+      registry: original.registry, profiles: { ...original.profiles, "agent-deepseek": { ...original.profile("agent-deepseek"), response_transport: undefined } }, model_overrides: original.modelOverrides,
+      accounts: { ...original.accounts, [accountId]: { ...original.account(accountId), protocol: "openai-responses" } } });
+    let body: Record<string, unknown> | undefined;
+    const gateway = new ModelGateway(catalog, { [catalog.account(accountId).api_key_env]: "test-only" }, {
+      registry: registry(catalog), fetch: async (url, init) => {
+        expect(String(url)).toMatch(/\/responses$/u);
+        body = JSON.parse(String(init?.body));
+        return responsesApiResponse("deepseek-flash", "verified");
+      },
+    });
+    const result = await gateway.generateStructured({ ...request("agent-deepseek"), structuredOutputMode: mode });
+    expect(result.value).toEqual({ answer: "verified" });
+    expect(result.audit.structuredOutputMode).toBe(mode);
+    expect(body).toMatchObject({ reasoning: { effort: "none" }, text: { format: { type: mode === "json-object-zod" ? "json_object" : "json_schema" } } });
+    expect(body).not.toHaveProperty("response_format");
+    expect(body).not.toHaveProperty("thinking");
+    expect(body).not.toHaveProperty("store");
+    expect(body!.input).toEqual(expect.arrayContaining([expect.objectContaining({ role: "system" })]));
+    expect((body!.input as Array<{ role?: string }>).some((item) => item.role === "developer")).toBe(false);
+    expect(result.audit.invocations[0]!.tokenUsage).toMatchObject({ input: 10, output: 5, cacheRead: 1 });
+    expect(original.account(accountId).protocol).toBe("openai-chat");
+  });
+  it("pins every production DeepSeek profile to non-thinking Flash with native SSE", () => {
     const catalog = loadModelCatalog();
     const deepSeekProfiles = Object.entries(catalog.profiles)
       .filter(([, profile]) => catalog.account(profile.account_id).dialect === "deepseek");
@@ -197,9 +223,10 @@ describe("provider account protocol matrix", () => {
     for (const [, profile] of deepSeekProfiles) {
       expect(profile.selector).toEqual({
         kind: "exact",
-        model_id: "deepseek-v4-flash",
+        model_id: "deepseek-flash",
       });
       expect(profile.inference.thinking).toBe("disabled");
+      expect(profile.response_transport).toBe("deepseek-sse-v1");
     }
   });
 
@@ -280,6 +307,13 @@ describe("provider account protocol matrix", () => {
         const answer = model;
         if (url.endsWith("/responses")) return responsesApiResponse(model, answer);
         if (url.endsWith("/messages")) return anthropicResponse(model, answer);
+        if (body.stream === true) {
+          const completion = await chatResponse(model, answer, false).json();
+          const chunk = { id: completion.id, object: "chat.completion.chunk", created: 1, model,
+            choices: [{ index: 0, delta: { content: JSON.stringify({ answer }) }, finish_reason: "stop" }],
+            usage: { ...completion.usage, prompt_cache_hit_tokens: 1, prompt_cache_miss_tokens: 9 } };
+          return new Response(`data: ${JSON.stringify(chunk)}\n\ndata: [DONE]\n\n`, { headers: { "content-type": "text/event-stream" } });
+        }
         return chatResponse(model, answer, Array.isArray(body.tools));
       },
     });
@@ -330,7 +364,7 @@ describe("provider account protocol matrix", () => {
     }
     const deepSeekCall = calls.find((candidate) => candidate.url.includes("api.deepseek.com"));
     expect(deepSeekCall?.body).toMatchObject({
-      model: "deepseek-v4-flash",
+      model: "deepseek-flash",
       thinking: { type: "disabled" },
     });
     expect(deepSeekCall?.body).not.toHaveProperty("reasoning_effort");

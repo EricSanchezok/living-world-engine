@@ -17,6 +17,8 @@ export interface PassageEncodingResult {
   hits: number;
   misses: number;
   written: number;
+  readMs?: number;
+  encodeMs?: number;
 }
 
 export interface PassageEmbeddingEncoder {
@@ -252,7 +254,9 @@ export class CachedPassageEncoder implements PassageEmbeddingEncoder {
     const cache = this.cache(input.worldContentHash);
     const uniqueTexts = [...new Set(input.passages)].sort();
     const hashByText = new Map(uniqueTexts.map((text) => [text, passageHash(text)]));
+    const readStartedAt = performance.now();
     const cached = cache.read([...hashByText.values()]);
+    let readMs = Math.max(0, performance.now() - readStartedAt);
     const misses = uniqueTexts.filter((text) => !cached.has(hashByText.get(text)!));
     if (misses.length > 0 && !input.allowWrite) {
       throw new EmbeddingCacheIntegrityError(`embedding cache is not ready: ${misses.length} passage(s) missing`);
@@ -268,6 +272,7 @@ export class CachedPassageEncoder implements PassageEmbeddingEncoder {
       else ownedMisses.push(text);
     }
     let written = 0;
+    let encodeMs = 0;
     if (ownedMisses.length > 0) {
       let resolveBatch!: (vectors: readonly (readonly number[])[]) => void;
       let rejectBatch!: (error: unknown) => void;
@@ -284,11 +289,15 @@ export class CachedPassageEncoder implements PassageEmbeddingEncoder {
         pendingVectors.set(hash, pending);
       });
       try {
+        const encodeStartedAt = performance.now();
         const vectors = await this.encoder.encodeBatch(ownedMisses);
+        encodeMs = Math.max(0, performance.now() - encodeStartedAt);
         if (vectors.length !== ownedMisses.length) throw new EmbeddingCacheIntegrityError("encoder returned the wrong passage count");
         const entries = ownedMisses.map((text, index) => ({ hash: hashByText.get(text)!, vector: vectors[index]! }));
         written = cache.write(entries);
+        const persistedReadStartedAt = performance.now();
         const persisted = cache.read(entries.map((entry) => entry.hash));
+        readMs += Math.max(0, performance.now() - persistedReadStartedAt);
         const storedVectors = entries.map((entry) => {
           const vector = persisted.get(entry.hash);
           if (!vector) throw new EmbeddingCacheIntegrityError(`persisted embedding is missing: ${entry.hash}`);
@@ -308,7 +317,14 @@ export class CachedPassageEncoder implements PassageEmbeddingEncoder {
       if (!vector) throw new EmbeddingCacheIntegrityError("encoded passage disappeared from the cache result");
       return vector;
     });
-    return { vectors, hits: uniqueTexts.length - misses.length, misses: misses.length, written };
+    return {
+      vectors,
+      hits: uniqueTexts.length - misses.length,
+      misses: misses.length,
+      written,
+      readMs,
+      encodeMs,
+    };
   }
 
   close(): void {

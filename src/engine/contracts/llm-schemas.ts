@@ -516,27 +516,6 @@ export const modelTransitionProposalSchema = z.strictObject({
 });
 export type ModelTransitionProposalDraft = z.infer<typeof modelTransitionProposalSchema>;
 
-const modelCheckRequestShape = {
-  proposalKey: proposalKeySchema,
-  actorRef: modelReferenceSchema,
-  targetRef: modelReferenceSchema.nullable(),
-  ratingRef: modelReferenceSchema.nullable(),
-  modifier: z.number().int(),
-  modifierSources: z.array(z.strictObject({
-    kind: z.literal("rating"),
-    ref: modelReferenceSchema,
-    amount: z.number().int().min(-100).max(100),
-  })).max(1),
-  dc: z.number().int().min(0).max(100),
-  mode: z.enum(["normal", "advantage", "disadvantage"]),
-  stakes: z.string().min(1),
-  visibility: z.enum(["full", "result_only", "hidden"]),
-  causes: z.array(modelCausalRefSchema).min(1),
-};
-
-export const checkRequestSchema = z.strictObject(modelCheckRequestShape);
-export type ModelCheckRequestDraft = z.infer<typeof checkRequestSchema>;
-
 const persistedCheckRequestShape = {
   actorId: semanticIdSchema,
   targetId: semanticIdSchema.nullable(),
@@ -699,12 +678,33 @@ const modelResolutionDifficultySchema = z.discriminatedUnion("kind", [
     source: modelResolutionSourceRefSchema,
   }),
 ]);
+const modelCheckRequestShape = {
+  proposalKey: proposalKeySchema,
+  actorRef: modelReferenceSchemaFor("entity", { allowProposal: false }),
+  targetRef: modelReferenceSchemaFor("entity", { allowProposal: false }).nullable(),
+  ratingRef: modelReferenceSchemaFor("rating", { allowProposal: false }).nullable(),
+  difficulty: modelResolutionDifficultySchema,
+  mode: z.enum(["normal", "advantage", "disadvantage"]),
+  stakes: z.string().min(1),
+  visibility: z.enum(["full", "result_only", "hidden"]),
+  causes: z.array(z.discriminatedUnion("kind", [
+    z.strictObject({ kind: z.literal("action"), ref: modelReferenceSchemaFor("action", { allowProposal: false }) }),
+    z.strictObject({ kind: z.literal("check"), ref: modelReferenceSchemaFor("check", { allowProposal: false }) }),
+    z.strictObject({ kind: z.literal("event"), ref: modelReferenceSchemaFor("event", { allowProposal: false }) }),
+    z.strictObject({ kind: z.literal("fact"), ref: modelReferenceSchemaFor("fact", { allowProposal: false }) }),
+    z.strictObject({ kind: z.literal("law"), ref: modelReferenceSchemaFor("law", { allowProposal: false }) }),
+  ])).min(1),
+};
+
+export const checkRequestSchema = z.strictObject(modelCheckRequestShape);
+export type ModelCheckRequestDraft = z.infer<typeof checkRequestSchema>;
+
 const modelResolutionFactorBaseShape = (authority: "semantic" | "authored") => ({
   source: authority === "authored" ? modelAuthoredResolutionSourceRefSchema : modelResolutionSourceRefSchema,
   authority: z.literal(authority),
   explanation: z.string().min(1),
 });
-const modelNonNumericResolutionFactorSchema = (role: "permission" | "secondary" | "risk") => z.union([
+const modelNonNumericResolutionFactorSchema = (role: "permission" | "secondary" | "risk") => z.discriminatedUnion("authority", [
   z.strictObject({
     ...modelResolutionFactorBaseShape("semantic"),
     role: z.literal(role),
@@ -720,7 +720,7 @@ const modelNonNumericResolutionFactorSchema = (role: "permission" | "secondary" 
     channel: z.string().min(1).nullable(),
   }),
 ]);
-const modelControlResolutionFactorSchema = z.union([
+const modelControlResolutionFactorSchema = z.discriminatedUnion("authority", [
   z.strictObject({
     ...modelResolutionFactorBaseShape("semantic"),
     role: z.literal("control"),
@@ -736,7 +736,7 @@ const modelControlResolutionFactorSchema = z.union([
     channel: z.string().min(1).nullable(),
   }),
 ]);
-const modelMagnitudeResolutionFactorSchema = (role: "potency" | "protection") => z.union([
+const modelMagnitudeResolutionFactorSchema = (role: "potency" | "protection") => z.discriminatedUnion("authority", [
   z.strictObject({
     ...modelResolutionFactorBaseShape("semantic"),
     role: z.literal(role),
@@ -752,7 +752,7 @@ const modelMagnitudeResolutionFactorSchema = (role: "potency" | "protection") =>
     channel: z.string().min(1),
   }),
 ]);
-const modelResolutionFactorSchema = z.union([
+export const modelResolutionFactorSchema = z.discriminatedUnion("role", [
   modelNonNumericResolutionFactorSchema("permission"),
   modelNonNumericResolutionFactorSchema("secondary"),
   modelNonNumericResolutionFactorSchema("risk"),
@@ -760,11 +760,19 @@ const modelResolutionFactorSchema = z.union([
   modelMagnitudeResolutionFactorSchema("potency"),
   modelMagnitudeResolutionFactorSchema("protection"),
 ]);
+/** Planning precedes checks, random results and mechanics. Its causes must
+ * already exist; a same-response plan proposal is never prior evidence. */
+export const modelResolutionPlanCauseSchema = z.discriminatedUnion("kind", [
+  z.strictObject({ kind: z.literal("action"), ref: modelReferenceSchemaFor("action", { allowProposal: false }) }),
+  z.strictObject({ kind: z.literal("event"), ref: modelReferenceSchemaFor("event", { allowProposal: false }) }),
+  z.strictObject({ kind: z.literal("fact"), ref: modelReferenceSchemaFor("fact", { allowProposal: false }) }),
+  z.strictObject({ kind: z.literal("law"), ref: modelReferenceSchemaFor("law", { allowProposal: false }) }),
+]);
 const modelResolutionPlanBaseShape = {
   proposalKey: proposalKeySchema,
   actionRef: modelReferenceSchemaFor("action", { allowProposal: false }),
   targetRefs: z.array(modelReferenceSchemaFor("entity", { allowProposal: false })),
-  means: z.array(z.strictObject({ description: z.string().min(1), source: modelResolutionSourceRefSchema })),
+  means: z.array(z.strictObject({ description: z.string().min(1), source: modelResolutionSourceRefSchema.describe("For this plan.actionRef, select an exact kind/ref pair from the matching action record allowedMeansSources when present. Each selected source must support this means description; another action or slot does not authorize it.") })),
   factors: z.array(modelResolutionFactorSchema),
   risk: z.enum(["safe", "risky", "dire"]),
   baseEffect: magnitudeBandSchema,
@@ -772,7 +780,7 @@ const modelResolutionPlanBaseShape = {
   secondaryEffect: modelEffectIntentSchema.nullable(),
   threatenedEffect: modelThreatenedEffectSchema.nullable(),
   visibility: z.enum(["full", "result_only", "hidden"]),
-  causes: z.array(modelCausalRefSchema).min(1),
+  causes: z.array(modelResolutionPlanCauseSchema).min(1).describe("Cite this plan.actionRef as an existing action cause. Additional causes may be existing action, event, fact or law handles only. All causes must predate this plan; a plan proposalKey is not an action or prior evidence."),
 };
 const modelResolutionPlanSchema = z.discriminatedUnion("mode", [
   z.strictObject({
@@ -1195,15 +1203,32 @@ const actionCompilationDependencySchema = z.strictObject({
   })),
 });
 
-export const actionCompilationSlotSchema = z.strictObject({
+const actionCompilationSlotObject = z.strictObject({
   slot: z.number().int().nonnegative(),
   temporalPlan: temporalPlanDraftSchema,
   interactionDependency: actionCompilationDependencySchema,
-}) as z.ZodType<ActionCompilationModelOutput & { slot: number }>;
+});
+
+export const actionCompilationSlotSchema = actionCompilationSlotObject as z.ZodType<ActionCompilationModelOutput & { slot: number }>;
 
 export const actionCompilationBatchSchema = z.strictObject({
   slots: z.array(actionCompilationSlotSchema),
 }) as z.ZodType<ActionCompilationBatchDraft>;
+
+/** Every physical request, including a localized repair, owns its exact size. */
+export function actionCompilationRequestSchema(slotCount: number, sharedResourcePoolsAvailable = true): z.ZodType<ActionCompilationBatchDraft> {
+  if (!Number.isSafeInteger(slotCount) || slotCount < 1) throw new Error("compilation requires a nonempty physical batch");
+  if (!sharedResourcePoolsAvailable) {
+    const dependency = actionCompilationDependencySchema.extend({
+      sharedResourceClaims: z.array(z.unknown()).length(0).describe(
+        "No shared activity resource pools exist in this source state. Return []; an Entity is not a resource pool.",
+      ),
+    });
+    const slot = actionCompilationSlotObject.extend({ interactionDependency: dependency });
+    return z.strictObject({ slots: z.array(slot).length(slotCount) }) as z.ZodType<ActionCompilationBatchDraft>;
+  }
+  return z.strictObject({ slots: z.array(actionCompilationSlotSchema).length(slotCount) });
+}
 
 export interface ArrivalDraft {
   title: string;

@@ -9,6 +9,46 @@ facts:
     value: { kind: text, value: loose-sand }
     description: 庭院边缘积着一层可以抓取的松散沙土。
     access: { kind: public }
+  - id: courtyard-high-walls
+    predicate: enclosure
+    value: { kind: text, value: high-stone-walls }
+    description: 高耸的石墙围住了庭院。
+    access: { kind: public }
+  - id: courtyard-open-entrance
+    predicate: entrance
+    value: { kind: text, value: open }
+    description: 来路一侧的庭院入口仍然敞开。
+    access: { kind: public }
+  - id: courtyard-dry-ground
+    predicate: ground-state
+    value: { kind: text, value: dry }
+    description: 庭院中央的地面干燥而坚实。
+    access: { kind: public }
+  - id: courtyard-crosswind
+    predicate: air-current
+    value: { kind: text, value: crosswind }
+    description: 风从石门与墙角的缝隙间穿过。
+    access: { kind: public }
+  - id: courtyard-muted-daylight
+    predicate: illumination
+    value: { kind: text, value: muted-daylight }
+    description: 灰白的日光照进庭院。
+    access: { kind: public }
+  - id: courtyard-echo
+    predicate: acoustics
+    value: { kind: text, value: echoing }
+    description: 脚步声会在石墙之间形成短促回响。
+    access: { kind: public }
+  - id: courtyard-weathered-paving
+    predicate: paving
+    value: { kind: text, value: weathered-stone }
+    description: 靠近石门的铺石留有长期风化的痕迹。
+    access: { kind: public }
+  - id: courtyard-drain-channel
+    predicate: drainage
+    value: { kind: text, value: shallow-channel }
+    description: 墙根有一道通向入口的浅排水沟。
+    access: { kind: public }
 meters: []
 quantities: []
 ratings: []

@@ -24,8 +24,10 @@ const modelNetworkSchema = z.object({
   // The address is deliberately indirect: only the environment variable name
   // is part of the catalog. The local address itself never enters a save,
   // audit record, or source-controlled configuration.
-  local_address_env: environmentVariableSchema,
-}).strict();
+  local_address_env: environmentVariableSchema.optional(),
+  dns_over_https_url: trustedBaseUrlSchema.refine((value) => new URL(value).protocol === "https:", "DNS resolver must use HTTPS").optional(),
+  socket_connect_attempts: z.union([z.literal(1), z.literal(2)]).optional(),
+}).strict().refine((value) => value.local_address_env || value.dns_over_https_url, "network requires an address binding or DNS resolver");
 
 export const modelRoles = [
   "truth-perception",
@@ -115,6 +117,7 @@ const profileSchema = z.object({
   description: z.string().min(1),
   allowed_roles: z.array(z.enum(modelRoles)).min(1),
   request_timeout_ms: z.number().int().min(1_000).max(3_600_000),
+  response_transport: z.literal("deepseek-sse-v1").optional(),
   max_output_tokens: positiveIntegerSchema,
   max_input_bytes: positiveIntegerSchema.default(262_144),
   inference: modelInferenceSchema,

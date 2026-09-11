@@ -22,7 +22,11 @@ type PolicyBinding =
 
 ## 时间计划、活动与边界
 
-每个新行动在裁决前获得一个 `TemporalPlan`，其形态为 fixed、rate、staged、conditional 或 ongoing。时间数值只来自玩家原文中可独立验证的明确数量、世界剧本的命名 Temporal Profile，或版本化 Rule Package 的确定性结果；`temporal-planner` 只能选择 Profile 并引用依据，不能填写任意 clock delta、`elapsedSeconds`、最终进度或完成效果。
+每个新行动在裁决前获得一个 `TemporalPlan`，其形态为 fixed、rate、staged、conditional、goal 或 ongoing。时间数值只来自玩家原文中可独立验证的明确数量、世界剧本的命名 Temporal Profile，或版本化 Rule Package 的确定性结果；`temporal-planner` 只能选择 Profile 并引用依据，不能填写任意 clock delta、`elapsedSeconds`、最终进度或完成效果。
+
+A goal Activity retains the complete source action and remains active across authored checkpoints until a supported outcome completes, blocks or fails it. Its plan has no predetermined completion time; optional continuation prerequisites use the existing onset and boundary checks. Semantic completion is adjudicated from state and effects, not checkpoint time. See [goal-directed temporal activities](../decisions/0116-goal-directed-temporal-activities.md).
+
+The temporal evidence extractor excludes recognized upper-bound expressions such as “三十日内” and “within 30 days” from exact-duration authority. Original action text remains available for semantic adjudication; numeric-span eligibility alone does not prove that a span describes the acting subject’s work. The [deadline regression](../postmortems/0058-deadline-authorized-exact-action-duration.md) links the extraction and canonical-boundary guardrails.
 
 引擎把 TemporalPlan 物化为 canonical Activity。Scheduled Activity 保存来源行动、参与 Agent、阶段、开始与更新时间、进度、下一个绝对检查点、完成时刻、可中断性、每 Agent 资源声明、共享资源 claims、`continuationAssertions` 与持久 `interactionFootprint`；`queued` 保存同一行动证据和已验证的 plan draft，`ready` 再增加原子预留时刻。每步使用从 canonical Activities 重建的临时倒排索引，不持久化派生索引。默认前台容量由剧本声明为一，同一 Agent 的额外并发能力也只能由剧本资源容量授权。WorldTimer 保存未来到期时刻、唤醒对象、causes 与 assertions，不保存未经验证的未来 state delta。世界脚本可用 `world_timers` 物化初始绝对触发；到期且没有同一 Agent 的到期 Activity 时，内核注入确定性的 Timer trigger action，同刻交给 Truth，CanonicalCommitter 会重新构造并核对该 action。
 
@@ -61,6 +65,12 @@ perception 只能请求 perception checks 或结束；reaction routing 只能选
 
 每份 ResolutionPlan 固定 actor、targets、goal、canonical grounded means、命名难度或对抗、至多一个 actor 自有 Rating、因素唯一角色、风险、基础效果、一个 primary effect、可选的较弱 secondary effect 与失败威胁。普通环境难度 `trivial/easy/challenging/hard/extreme` 映射到 DC 5/10/15/20/25，对抗 DC 为 10 加目标 Rating；semantic edge/hindrance 相抵后只决定 advantage、normal 或 disadvantage。
 
+The indexed planner can opt into [source-bound relation choices](../specs/0114-bind-planning-relation-choices.md). Their reversible representation retains the same canonical plan and validation boundary.
+
+Its [compact record representation](../specs/0115-compact-planning-records.md) places mode and action identity before dependent columns while retaining all original plan values and validation responsibilities.
+
+The optional [balanced initial planning policy](../specs/0117-balance-initial-planning-work.md) distributes complete conflict components by assigned-action workload across concurrent physical requests. It preserves each logical context and commit boundary while trading extra requests and duplicated input for a measured latency opportunity.
+
 d20 余量产生 `exceptional/full/mixed/miss`，保留骰 20 升一档、1 降一档。`ResolutionReceipt` 固定派生 DC、修正、骰点、余量、结果档、最终效果和可信操作；exceptional 升 primary 一档，mixed 将 intended effects 降一档并应用风险后果，miss 只应用风险后果。离散随机只能引用 `WorldRuntimeContract` 内的分布定义；所有随机结果必须被最终机制、operation、event 或 outcome 消费。
 
 Meter 变化只接受 impact profile 的五档映射并在边界内 clamp；Condition 使用自由语义名称、五档强度、duration profile、可见性和 causal provenance。相同 Condition ID 或声明式 stacking key 才合并：更强替换、同档升档、较弱刷新持续时间。`uses` 状态在被计划作为证据使用时消耗，`elapsed` 状态由引擎拥有的时间规则到期，声明 recurring impact 的 profile 在时间推进前结算。Quantity 数额只来自行动中的明确金额、既有状态、已承诺随机结果或可信规则结果；number Fact 不自动成为修正值。
@@ -68,6 +78,10 @@ Meter 变化只接受 impact profile 的五档映射并在边界内 clamp；Cond
 每个 operation、机制调用、event 与 outcome 都包含 causal refs 和至少一个机器可求值 assertion。代码先验证引用、断言、守恒和规则包；`causal-verifier` 再检查开放语义是否相关、效果是否匹配以及事件影响级别是否夸大。
 
 ## Observation 与认知隔离
+
+indexed reviewed Truth 的实验配置 `outcomeSummary` 可选择[事件来源摘要协议](../specs/0083-event-sourced-outcome-summaries.md)：模型把实际提出的发生事项放入现有事件或状态操作，结果摘要由显式status及直接引用本行动的事件描述生成。事件本身仍需时序、因果和语义检查；只生成记录不等于证明发生，默认配置不启用此候选。
+
+实验候选 `source-bound-observation-rendering@1` 可以在世界没有事件或事实变化、本人活动仍在下个节点之前时，从绑定的源行动和活动状态直接投影有限的进度观察，其他情况仍使用模型。它不生成新的表象 claim，也不把行动意图改写为已完成事实；默认 Composition 不启用。具体准入与验证见[协议 0082](../specs/0082-source-bound-pending-observations.md)。
 
 Observation 使用观察者局部实体 ID。新对象必须在同一 packet 的 introductions 中建立局部实体；服务端私有 `canonicalEntityId` 只用于 binding，普通 API 和 AgentMind 都看不到该映射。apparent claim 只能引用该观察者已有或本包新引入的局部实体。
 

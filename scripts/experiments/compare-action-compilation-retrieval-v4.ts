@@ -7,7 +7,7 @@ import { createRuntimeGraphSlotRetriever } from "../../src/engine/algorithms/eag
 import {
   discoverLocalEncoderModelDirectory,
   livingWorldCacheRoot,
-  loadLocalMultilingualE5Small,
+  loadLocalEncoder,
   localEncoderFingerprint,
 } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/local-encoder";
 import { createActionCompilationRetrievalRuntime } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/runtime";
@@ -61,7 +61,7 @@ async function main(argv: readonly string[]): Promise<number> {
     if (existsSync(resultFile) && !options.force) throw new Error(`evaluation output already exists: ${resultFile} (use --force to replace it)`);
     const dataset = loadActionCompilationReferenceDataset(options.dataset);
     const modelDirectory = options.modelDirectory ?? discoverLocalEncoderModelDirectory(options.cacheRoot);
-    const encoder = await loadLocalMultilingualE5Small({ modelDirectory });
+    const encoder = await loadLocalEncoder({ modelDirectory });
     const passageEncoder = new CachedPassageEncoder(
       encoder,
       localEncoderFingerprint(encoder, ACTION_COMPILATION_PASSAGE_SCHEMA_VERSION),
@@ -70,7 +70,7 @@ async function main(argv: readonly string[]): Promise<number> {
     );
     try {
       const runtime = createActionCompilationRetrievalRuntime({
-        version: "action-compilation-retrieval-runtime-v4",
+        version: "action-compilation-retrieval-runtime-v6",
         budgetRatio: 0.2,
         retrieveSlot: createRuntimeGraphSlotRetriever({
           strategy: "graph-hybrid",

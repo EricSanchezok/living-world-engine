@@ -21,7 +21,10 @@ accounts:
     models_dev_provider_id: deepseek
     base_url: https://api.deepseek.com
     api_key_env: DEEPSEEK_API_KEY
-    max_concurrency: 16
+    max_concurrency: 4
+    network:
+      dns_over_https_url: https://1.1.1.1/dns-query
+      socket_connect_attempts: 2
   openai-api:
     channel: api
     region: global
@@ -129,16 +132,13 @@ accounts:
 profiles:
   truth-deepseek:
     account_id: deepseek-api
-    selector: { kind: exact, model_id: deepseek-v4-flash }
+    selector: { kind: exact, model_id: deepseek-flash }
     description: 高吞吐世界真值裁决
     allowed_roles: [truth-perception, truth-reaction-routing, truth-resolution, truth-transition, action-compilation, action-grounding, observation-renderer, causal-verifier, arrival-generator]
+    response_transport: deepseek-sse-v1
     request_timeout_ms: 300000
     max_output_tokens: 131072
-    # DeepSeek V4 Flash and GLM-5.3-Flash both advertise a one-million-token
-    # context. Keep a byte-level guardrail that accommodates the current
-    # Blackmarsh action context (~3.54 MB observed) without allowing the
-    # provider-facing request to grow into the range that previously failed.
-    # Batching still bisects deterministically when a request reaches this cap.
+    # Preserve complete shared world contexts behind a bounded wire-size limit.
     max_input_bytes: 4000000
     inference:
       thinking: disabled
@@ -194,9 +194,10 @@ profiles:
       top_p: auto
   agent-deepseek:
     account_id: deepseek-api
-    selector: { kind: exact, model_id: deepseek-v4-flash }
+    selector: { kind: exact, model_id: deepseek-flash }
     description: 高吞吐自主角色心智
     allowed_roles: [agent-bootstrap, agent-mind, agent-reaction]
+    response_transport: deepseek-sse-v1
     request_timeout_ms: 180000
     max_output_tokens: 8192
     # AgentMind batching carries the scoped graph/context contract; keep the
@@ -352,6 +353,21 @@ profiles:
     inference: *automatic-inference
 
 model_overrides:
+  deepseek:
+    deepseek-flash:
+      disabled: false
+      name: DeepSeek-V4.1-Flash
+      family: deepseek-flash
+      reasoning: true
+      reasoning_toggle: true
+      reasoning_efforts: []
+      tool_call: true
+      structured_output: true
+      temperature: true
+      release_date: "2026-09-10"
+      last_updated: "2026-09-10"
+      modalities: { input: [text, image], output: [text] }
+      limit: { context: 1048576, output: 393216 }
   hetzner:
     Qwen3.8-27B:
       # The internal gateway is text-only even though the public metadata

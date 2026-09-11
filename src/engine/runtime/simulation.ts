@@ -13,7 +13,7 @@ import type {
   WorldStepCandidate,
   WorldStepPreparation,
 } from "./execution";
-import { decisionEligibleAgentIds, resolutionObservations } from "./execution";
+import { algorithmRef, decisionEligibleAgentIds, resolutionObservations } from "./execution";
 import { createHistoryReplayBase } from "./history-replay";
 import type { CommittedStep, SimulationState } from "../contracts/model";
 import type { ModelExecutionAudit } from "../contracts/model";
@@ -342,6 +342,7 @@ function createExecutionContext(scope: ModelExecutionScope, source: SimulationSt
     correlation: { ...scope.correlation, executionId },
     observer: algorithmObserver,
     runtimeIdentity: { worldHash: source.worldHash, revision: source.revision },
+    executionAlgorithmRef: algorithmRef(manifest),
   };
   const stages = scope.stageHooks
     ? new TracedExecutionStageHooks(scope.stageHooks, trace, modelScope)

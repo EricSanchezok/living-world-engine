@@ -15,6 +15,34 @@ function formatNumber(value: number | null | undefined): string {
   return value === null || value === undefined ? "—" : value.toLocaleString();
 }
 
+type TokenUsageField = keyof WorldInspectorModelInvocationSummary["tokenUsage"];
+
+function aggregateTokenUsage(
+  invocations: WorldInspectorInvocationListItem[],
+  fields: TokenUsageField[],
+  label: string,
+): { text: string; title?: string } {
+  if (invocations.length === 0) return { text: "0" };
+  let value = 0;
+  let knownValues = 0;
+  for (const invocation of invocations) {
+    for (const field of fields) {
+      const fieldValue = invocation.tokenUsage[field];
+      if (fieldValue === null) continue;
+      value += fieldValue;
+      knownValues += 1;
+    }
+  }
+  const expectedValues = invocations.length * fields.length;
+  if (knownValues === 0) {
+    return { text: "—", title: `这些调用未记录${label}` };
+  }
+  if (knownValues < expectedValues) {
+    return { text: `≥${formatNumber(value)}`, title: `部分调用未记录${label}，显示已知最小值` };
+  }
+  return { text: formatNumber(value) };
+}
+
 function formatDuration(value: number | undefined): string {
   if (value === undefined) return "—";
   if (value < 1_000) return `${Math.round(value)} ms`;
@@ -92,8 +120,6 @@ export function WorldInspectorInvocationList({
   loadingMore?: boolean;
 }) {
   const [sort, setSort] = useState<"stage" | "timestamp" | "duration" | "inputTokens" | "outputTokens" | "retries">("stage");
-  const [minInputTokens, setMinInputTokens] = useState("");
-  const [minRetries, setMinRetries] = useState("");
   const [scrollTop, setScrollTop] = useState(0);
   const [viewportSize, setViewportSize] = useState({ width: 1024, height: 640 });
   const [itemsOffset, setItemsOffset] = useState(0);
@@ -125,18 +151,15 @@ export function WorldInspectorInvocationList({
     };
   }, []);
   const normalized = query.trim().toLocaleLowerCase();
-  const visible = useMemo(() => invocations.filter((invocation) => invocation.lineage.kind !== "repair").filter((invocation) => {
+  const matching = useMemo(() => invocations.filter((invocation) => {
     // Keep the selected root visible when a repair ID was used to enter the
     // calls view. The root is the navigational anchor even though its summary
     // does not duplicate every repair member ID.
     if (selectedId === invocation.id) return true;
-    const inputThreshold = minInputTokens === "" ? undefined : Number(minInputTokens);
-    const retryThreshold = minRetries === "" ? undefined : Number(minRetries);
-    if (inputThreshold !== undefined && (invocation.tokenUsage.input ?? -1) < inputThreshold) return false;
-    if (retryThreshold !== undefined && invocation.retryCount < retryThreshold) return false;
     if (!normalized) return true;
     return searchText(invocation).includes(normalized);
-  }).sort((left, right) => {
+  }), [invocations, normalized, selectedId]);
+  const visible = useMemo(() => matching.filter((invocation) => invocation.lineage.kind !== "repair").sort((left, right) => {
     const value = (invocation: WorldInspectorInvocationListItem): number => sort === "stage"
       ? (invocation.boundaryIndex ?? -1) * 1_000_000_000_000 + (stageIndex(invocation) + 1) * 1_000_000 +
         (invocation.logicalInvocationOrdinal ?? invocation.ordinal) * 1_000 + (invocation.ledgerSequence ?? invocation.ordinal)
@@ -148,7 +171,7 @@ export function WorldInspectorInvocationList({
       : invocation.startedAt ? Date.parse(invocation.startedAt) : invocation.ordinal;
     return value(right) - value(left) || (right.ledgerSequence ?? right.ordinal) - (left.ledgerSequence ?? left.ordinal) ||
       right.ordinal - left.ordinal;
-  }), [invocations, minInputTokens, minRetries, normalized, selectedId, sort]);
+  }), [matching, sort]);
   const viewportHeight = viewportSize.height;
   const overscan = 8;
   const rowOffsets = useMemo(() => {
@@ -176,13 +199,26 @@ export function WorldInspectorInvocationList({
   const windowEnd = Math.min(visible.length, findRowAt(effectiveScrollTop + viewportHeight) + overscan + 1);
   const windowed = visible.slice(windowStart, windowEnd);
   const windowKey = windowed.map((invocation) => invocation.id).join("|");
-  const retries = visible.reduce((sum, invocation) => sum + invocation.retryCount, 0);
-  const semanticRepairChains = new Map<string, number>();
-  for (const invocation of visible) {
+  const retries = matching.reduce((sum, invocation) => sum + invocation.retryCount, 0);
+  const tokens = {
+    total: aggregateTokenUsage(matching, ["input", "output"], "总 token"),
+    input: aggregateTokenUsage(matching, ["input"], "输入 token"),
+    output: aggregateTokenUsage(matching, ["output"], "输出 token"),
+    reasoning: aggregateTokenUsage(matching, ["reasoning"], "推理 token"),
+    cacheRead: aggregateTokenUsage(matching, ["cacheRead"], "缓存读取 token"),
+    cacheWrite: aggregateTokenUsage(matching, ["cacheWrite"], "缓存写入 token"),
+  };
+  const semanticRepairChains = new Map<string, { explicit: number; reported: number }>();
+  for (const invocation of matching) {
     const key = invocation.lineage.logicalInvocationId ?? invocation.id;
-    semanticRepairChains.set(key, Math.max(semanticRepairChains.get(key) ?? 0, invocation.semanticRepairCount));
+    const current = semanticRepairChains.get(key) ?? { explicit: 0, reported: 0 };
+    semanticRepairChains.set(key, {
+      explicit: current.explicit + (invocation.lineage.kind === "repair" ? 1 : 0),
+      reported: Math.max(current.reported, invocation.semanticRepairCount),
+    });
   }
-  const semanticRepairs = [...semanticRepairChains.values()].reduce((sum, count) => sum + count, 0);
+  const semanticRepairs = [...semanticRepairChains.values()].reduce((sum, count) =>
+    sum + Math.max(count.explicit, count.reported), 0);
   const terminalFailures = visible.filter((invocation) => invocation.chainFinalDisposition === "rejected" || invocation.chainFinalDisposition === "failed").length;
   useEffect(() => {
     const viewport = itemsRef.current;
@@ -203,7 +239,7 @@ export function WorldInspectorInvocationList({
   return (
     <section
       className="cg-inspector-invocation-list"
-      aria-label="模型调用清单"
+      aria-label={scopeLabel ? `模型调用清单：${scopeLabel}` : "模型调用清单"}
       ref={listRef}
       onScroll={(event) => {
         const itemOffset = itemsRef.current?.offsetTop ?? 0;
@@ -212,45 +248,36 @@ export function WorldInspectorInvocationList({
       }}
     >
       <header className="cg-inspector-invocation-list__header">
-        <div>
-          <strong>根调用{scopeLabel ? ` · ${scopeLabel}` : ""}</strong>
-          <small>语义修复和传输重试收在右侧详情</small>
+        <div className="cg-inspector-invocation-list__controls" aria-label="调用排序">
+          <label>排序
+            <WorldInspectorSelect
+              ariaLabel="排序"
+              onChange={(value) => setSort(value as typeof sort)}
+              options={[
+                { value: "stage", label: "引擎顺序" },
+                { value: "timestamp", label: "时间" },
+                { value: "duration", label: "耗时" },
+                { value: "inputTokens", label: "输入 token" },
+                { value: "outputTokens", label: "输出 token" },
+                { value: "retries", label: "传输重试" },
+              ]}
+              value={sort}
+            />
+          </label>
         </div>
-        <dl>
+        <dl aria-label="调用汇总">
           <div><dt>根调用</dt><dd>{visible.length}</dd></div>
+          <div><dt>总 token</dt><dd title={tokens.total.title}>{tokens.total.text}</dd></div>
+          <div><dt>输入 token</dt><dd title={tokens.input.title}>{tokens.input.text}</dd></div>
+          <div><dt>输出 token</dt><dd title={tokens.output.title}>{tokens.output.text}</dd></div>
+          <div><dt>推理 token</dt><dd title={tokens.reasoning.title}>{tokens.reasoning.text}</dd></div>
+          <div><dt>缓存读取</dt><dd title={tokens.cacheRead.title}>{tokens.cacheRead.text}</dd></div>
+          <div><dt>缓存写入</dt><dd title={tokens.cacheWrite.title}>{tokens.cacheWrite.text}</dd></div>
           <div><dt>语义修复</dt><dd>{semanticRepairs}</dd></div>
           <div><dt>传输重试</dt><dd>{retries}</dd></div>
           <div><dt>最终失败</dt><dd>{terminalFailures}</dd></div>
         </dl>
       </header>
-      <div className="cg-inspector-invocation-list__controls" aria-label="调用排序与筛选">
-        <label>排序
-          <WorldInspectorSelect
-            ariaLabel="排序"
-            onChange={(value) => setSort(value as typeof sort)}
-            options={[
-              { value: "stage", label: "引擎顺序" },
-              { value: "timestamp", label: "时间" },
-              { value: "duration", label: "耗时" },
-              { value: "inputTokens", label: "输入 token" },
-              { value: "outputTokens", label: "输出 token" },
-              { value: "retries", label: "传输重试" },
-            ]}
-            value={sort}
-          />
-        </label>
-        <details className="cg-inspector-invocation-filters">
-          <summary>筛选</summary>
-          <div>
-            <label>最少输入 token
-              <input min="0" onChange={(event) => setMinInputTokens(event.target.value)} placeholder="不限" type="number" value={minInputTokens} />
-            </label>
-            <label>最少传输重试
-              <input min="0" onChange={(event) => setMinRetries(event.target.value)} placeholder="不限" type="number" value={minRetries} />
-            </label>
-          </div>
-        </details>
-      </div>
       {visible.length === 0 && (
         <p className="cg-inspector-inline-empty">
           {normalized ? `没有匹配“${query}”的模型调用。` : "这次记录没有模型调用。"}

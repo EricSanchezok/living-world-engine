@@ -32,6 +32,7 @@ const openAIChatDriver: ProtocolDriver = {
       headers: options.authentication === "api-key" ? { "api-key": options.apiKey } : undefined,
       fetch: options.fetch,
       supportsStructuredOutputs: options.structuredOutputMode === "json-schema-strict",
+      ...(binding.profile.response_transport ? { includeUsage: true } : {}),
     }).chatModel(binding.modelId);
   },
 };
@@ -42,7 +43,7 @@ const openAIResponsesDriver: ProtocolDriver = {
     if (options.authentication !== "bearer") {
       throw new Error("openai-responses protocol requires bearer authentication");
     }
-    if (binding.account.dialect === "openai") {
+    if (binding.account.dialect === "openai" || binding.account.dialect === "deepseek") {
       return createOpenAI({
         baseURL: binding.account.base_url,
         apiKey: options.apiKey,

@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Superseded by [0100](0100-promote-relational-rrf-and-refresh-reference-data.md)
 Class: architecture
 
 ## Context and Problem Statement
@@ -63,3 +63,4 @@ Candidate Retrieval applies a joint physical-batch budget and a per-slot members
 - [0096 — Versioned behavioral benchmark datasets](0096-versioned-behavioral-benchmark-datasets.md)
 - [0075 — Pin configured execution algorithms](0075-pin-configured-execution-algorithms.md)
 - [Spec 0020 — Persistent encoder cache and instance canary enrollment](../specs/0020-persistent-encoder-cache-and-instance-canary.md)
+- [0100 — Promote relational RRF and refresh reference data](0100-promote-relational-rrf-and-refresh-reference-data.md)

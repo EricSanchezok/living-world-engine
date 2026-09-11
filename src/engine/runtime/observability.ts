@@ -114,7 +114,7 @@ export type AlgorithmTelemetryEventInput = AlgorithmTelemetryBase & ({
   attributes: Readonly<{
     phase: "action-compilation" | "agent-bootstrap" | "agent-resume" | "agent-mind" |
       "truth-resolution" | "truth-plan-verification" | "truth-transition" |
-      "truth-causal-verification" | "observation";
+      "truth-causal-verification" | "action-grounding" | "observation";
   }>;
   counts: Readonly<{
     configuredMaxSlots: number;
@@ -209,7 +209,7 @@ export type AlgorithmTelemetryEventInput = AlgorithmTelemetryBase & ({
   event: "algorithm.observation.global_projection_completed";
   attributes: Readonly<{
     phase: "observation";
-    reason: "multiple-conflict-components" | "dynamic-lifecycle";
+    reason: "multiple-conflict-components" | "dynamic-lifecycle" | "final-candidate";
   }>;
   counts: Readonly<{
     observations: number;
@@ -484,7 +484,7 @@ const algorithmTelemetryFields: Record<AlgorithmTelemetryEventName, {
       phase: [
         "action-compilation", "agent-bootstrap", "agent-resume", "agent-mind",
         "truth-resolution", "truth-plan-verification", "truth-transition",
-        "truth-causal-verification", "observation",
+        "truth-causal-verification", "action-grounding", "observation",
       ],
     },
   },
@@ -576,7 +576,7 @@ const algorithmTelemetryFields: Record<AlgorithmTelemetryEventName, {
     counts: ["observations", "observationBatches", "dependencyComponents"],
     attributeValues: {
       phase: ["observation"],
-      reason: ["multiple-conflict-components", "dynamic-lifecycle"],
+      reason: ["multiple-conflict-components", "dynamic-lifecycle", "final-candidate"],
     },
   },
   "algorithm.observation.rendering_completed": {

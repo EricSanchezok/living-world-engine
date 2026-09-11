@@ -317,7 +317,7 @@ export function projectActionCompilationContextForModel(input: unknown): ActionC
     allowedUses: [...(entry.allowedUses ?? [])],
     scope: entry.scope ?? { kind: "shared" as const },
     details: selected.has(entry.handle)
-      ? mapExactReferences(structuredClone(details.get(entry.handle) ?? null), new Map(candidates.map((candidate) => [candidate.handle, candidate.candidateKey])))
+      ? mapExactReferences(structuredClone(details.get(entry.handle) ?? null), byHandle)
       : null,
   }));
   const mappedContext = mapExactReferences(structuredClone(context), byHandle) as JsonRecord;
@@ -345,7 +345,7 @@ export function projectActionCompilationContextForModel(input: unknown): ActionC
       const repairIssues = array(repair?.issues);
       return {
         ...slotState,
-        issue: repairIssues[0] ?? (array(slotTask.constraints)[0] ?? null),
+        issues: repairIssues.length ? repairIssues : array(slotTask.constraints),
         previousAttempt: repair === null ? null : structuredClone(repair.previousOutput ?? null),
       };
     }),

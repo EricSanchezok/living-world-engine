@@ -1,4 +1,5 @@
 import { canonicalize, contentHash, measureModelContext } from "../models/model-audit";
+import { expandSharedBatchContexts, isSharedBatchContext } from "../mechanics/shared-batch-context";
 import { parseModelCatalog, type ModelCatalog } from "../models/model-catalog";
 import {
   MODELS_DEV_API_URL,
@@ -344,7 +345,7 @@ function assignedModelActions(context: unknown): Array<{
  * model-facing reference protocol before strict schema parsing. Production
  * providers never receive this adapter. */
 /* eslint-disable @typescript-eslint/no-explicit-any -- legacy fixture adapter is isolated to tests. */
-function adaptScriptedResolutionOutput(raw: unknown): unknown {
+export function adaptScriptedResolutionOutput(raw: unknown): unknown {
   if (!raw || typeof raw !== "object") return raw;
   const value = raw as { kind?: string; plans?: unknown[] };
   if (value.kind !== "commit_plans" || !Array.isArray(value.plans)) return raw;
@@ -382,6 +383,7 @@ function adaptScriptedResolutionOutput(raw: unknown): unknown {
     ...(includeMagnitude ? { magnitude: item.magnitude } : {}),
   };
   const plan = (item: any): any => ({
+    ...(Object.hasOwn(item, "additionalRandomness") ? { additionalRandomness: item.additionalRandomness } : {}),
     proposalKey: item.proposalKey ?? item.id,
     actionRef: item.actionRef ?? ref("action", item.actionId),
     targetRefs: item.targetRefs ?? (item.targetIds ?? []).map((id: string) => ref("entity", id)),
@@ -790,8 +792,10 @@ export class ScriptedModelProvider implements StructuredModelProvider {
     const promptBytes = structuredPromptBytes({
       system: request.system,
       userPrompt: request.userPrompt,
+      jsonObjectPostlude: request.jsonObjectPostlude,
       context,
       schema: request.schema,
+      wireJsonSchema: request.wireJsonSchema,
     });
     if (promptBytes.requestUtf8Bytes > profile.max_input_bytes) {
       throw new ContextLimitExceededError(
@@ -833,7 +837,8 @@ export class ScriptedModelProvider implements StructuredModelProvider {
       modelInvocation,
     ).modelInvocationId;
     const contextJson = promptBytes.contextJson;
-    const requestDocument = { system: request.system, userPrompt: request.userPrompt, context };
+    const requestDocument = { system: request.system, userPrompt: request.userPrompt, context,
+      ...(request.jsonObjectPostlude !== undefined ? { jsonObjectPostlude: request.jsonObjectPostlude } : {}) };
     const responseJson = JSON.stringify(canonicalize(raw));
     const audit: StructuredModelResult<T>["audit"] = {
       role: request.role,
@@ -947,8 +952,9 @@ export class ScriptedModelProvider implements StructuredModelProvider {
       },
       hashes: { request: audit.invocations[0]!.requestHash },
     });
+    let rejectedValue = raw;
     try {
-      const normalizedRaw = request.schemaName.startsWith("truth_resolution")
+      const normalizedRaw = request.schemaName.startsWith("truth_resolution") && !request.wireJsonSchema
         ? adaptScriptedResolutionOutput(raw)
           : request.schemaName.startsWith("truth_transition")
           ? adaptScriptedTransitionOutput(raw)
@@ -958,6 +964,9 @@ export class ScriptedModelProvider implements StructuredModelProvider {
             ? adaptScriptedVerifierOutput(raw, request.schemaName.startsWith("causal_verification"))
           : raw;
       const prepared = request.preprocessOutput?.(normalizedRaw) ?? { value: normalizedRaw, symbolRepairs: [] };
+      // Match the real adapter: schema rejection carries the expanded value,
+      // so batching can validate unaffected slots in their canonical schema.
+      rejectedValue = prepared.value;
       const value = request.schema.parse(prepared.value);
       const normalizedResponseHash = contentHash(value);
       const symbolRepairs = [...prepared.symbolRepairs];
@@ -1008,7 +1017,7 @@ export class ScriptedModelProvider implements StructuredModelProvider {
       request.observer?.flush?.();
       throw new ModelOutputError("scripted model output failed schema validation", audit, {
         cause: error,
-        rawValue: raw,
+        rawValue: rejectedValue,
       });
     }
   }
@@ -1131,7 +1140,7 @@ function deterministicActionCompilation(
 }
 
 function actionCompilationCandidateKey(value: string): ActionCompilationCandidateKey {
-  return value.startsWith("candidate_")
+  return value.startsWith("candidate_") || /^r[0-9]{3,}$/u.test(value)
     ? value as ActionCompilationCandidateKey
     : actionCompilationCandidateKeyForHandle(value);
 }
@@ -1268,7 +1277,7 @@ export function deterministicActionCompilationBatch(
         action: {
           ...slot.action,
           id: actionId.startsWith("candidate_") ? "deterministic-action" : actionId,
-          actionCandidateKey: actionReference?.startsWith("candidate_") ? actionReference : undefined,
+          actionCandidateKey: actionReference && (actionReference.startsWith("candidate_") || /^r[0-9]{3,}$/u.test(actionReference)) ? actionReference : undefined,
           actorId,
         },
         temporalEvidence: structuredClone("temporalEvidence" in slot ? slot.temporalEvidence ?? [] : []),
@@ -1328,6 +1337,12 @@ export function deterministicAgentMindBatch(
 }
 
 export function deterministicModelOutput(profileId: string, context: unknown): unknown {
+      const sharedBatch = (context as { state?: unknown })?.state;
+      if (isSharedBatchContext(sharedBatch)) {
+        return { slots: expandSharedBatchContexts(sharedBatch).map((slotContext, slot) => ({
+          slot, result: deterministicModelOutput(profileId, slotContext),
+        })) };
+      }
       const input = context as {
         execution?: { revision?: number; step?: number };
         agent?: { id: string };

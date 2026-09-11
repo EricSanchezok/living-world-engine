@@ -1,5 +1,7 @@
 import { z } from "zod";
-import { evaluateProposalCausality } from "./causality";
+import { bindMechanicalPlanRepairContext, MECHANICAL_PLAN_REPAIR, selectMechanicalPlanRepair } from "./mechanical-plan-repair";
+import { CausalAssertionValidationError, evaluateProposalCausality } from "./causality";
+import { perceptionCauseScope, perceptionDraftRelationIssues } from "../contracts/perception-references";
 import {
   causalVerificationSchema,
   mechanicInvocationRepairSchema,
@@ -47,6 +49,7 @@ import type {
 } from "../contracts/model";
 import {
   deriveCheck,
+  deriveCheckNumbers,
   deriveResolutionReceipt,
   expectedActionStatus,
   validateResolutionPlan,
@@ -59,6 +62,7 @@ import { MAX_COMMITMENT_ROUNDS_PER_STEP } from "./commitment-rounds";
 import {
   combineModelExecutionAudits,
   ModelConfigurationError,
+  ModelCandidateValidationError,
   modelInvocationCorrelation,
   modelInvocationLogicalId,
   modelInvocationIdentity,
@@ -76,6 +80,8 @@ import { fullRuntimePayload, runtimeEventEmitter, serializeRuntimeError } from "
 import { validateObservations } from "../cognition/observation";
 import {
   buildCausalVerificationContext,
+  causalProposalReferenceResolver,
+  causalAssertionRepairIssues,
   buildResolutionPlanVerificationContext,
   createTruthReferenceResolver,
   buildTruthContext,
@@ -83,8 +89,9 @@ import {
   type ResolutionScope,
   type PromptValidationIssue,
 } from "../contracts/prompts";
-import { createReferenceResolver, normalizeModelOutput } from "../contracts/model-context";
+import { createReferenceResolver, ModelReferenceError, normalizeModelOutput } from "../contracts/model-context";
 import { promptBundle, type PromptBundleId } from "../prompts";
+import { logicalRepairContext } from "../prompts/logical-repair-context";
 import {
   resolveD20Checks,
   resolveDiscreteRandomRequests,
@@ -105,25 +112,47 @@ import {
   SemanticRepairExhaustedError,
   semanticIssue,
   type SemanticRepairScope,
+  type SemanticRepairContext,
 } from "../models/semantic-repair";
 import {
   type ModelReference,
   type ReferenceResolver,
-  type ReferenceCandidateInput,
   createAgentReferenceResolver,
   isProposalReference,
 } from "../contracts/model-context";
 import type {
+  BoundCausalReview,
+  CausalReviewEvidence,
+  TruthCandidateSession,
+  UnreviewedTruthResolution,
   OnsetPerceptionInput,
   OnsetPerceptionResult,
   TruthResolution,
   TruthResolutionInput,
+  TruthPreparationInput,
 } from "../algorithms/roles";
 
+import { declaredRandomPlanSchema, declaresNoAdditionalRandomness, PLAN_RANDOM_COMPLETION, PLAN_RANDOM_COMPLETION_PROMPT } from "./plan-random-completion";
+
 export interface TruthEngineOptions {
+  mechanicalPlanRepair?: typeof MECHANICAL_PLAN_REPAIR;
+  planRandomCompletion?: typeof PLAN_RANDOM_COMPLETION;
+  includeResolutionMeansSources?: boolean;
+  includePlanCauseScope?: boolean;
+  includeResolutionFactEvidence?: boolean;
+  includeActivityTemporalEvidence?: boolean;
   repairAttempts?: number;
   maxCommitmentRounds?: number;
   rulePackages?: RulePackageRegistry;
+}
+
+/** A model verdict only applies to the complete evidence that it reviewed. */
+export function assertCausalReviewMatches(evidence: CausalReviewEvidence, review: BoundCausalReview): void {
+  if (review.value.verdict !== "accept") throw new Error("causal review did not accept the candidate");
+  if (review.binding.evidenceHash !== contentHash(evidence) ||
+    review.binding.promptVersion !== promptBundle("causal-verifier").version) {
+    throw new Error("causal review evidence binding mismatch");
+  }
 }
 
 export function normalizeOutcomeAlternativeEvidence(
@@ -239,6 +268,12 @@ interface ValidatedCallInput<T> {
   invocationOffset?: number;
   repairScope?: SemanticRepairScope;
   targetIds?: readonly string[];
+  promptExtension?: { version: string; userPrompt: string };
+  projectRepair?: (repair: SemanticRepairContext, context: unknown) => {
+    context: unknown;
+    merge: (value: T) => T;
+    evidence: Record<string, unknown>;
+  } | undefined;
 }
 
 async function generateValidated<T>(input: ValidatedCallInput<T>): Promise<{
@@ -252,6 +287,7 @@ async function generateValidated<T>(input: ValidatedCallInput<T>): Promise<{
     input.subjectId,
     (input.invocationOffset ?? 0) + 1,
   );
+  let sourceContextHash: string | undefined;
   try {
     const result = await runSemanticRepairLoop({
       role: input.role,
@@ -260,6 +296,7 @@ async function generateValidated<T>(input: ValidatedCallInput<T>): Promise<{
       maxRepairs: input.repairAttempts,
       logicalInvocationId,
       invoke: async (repairContext) => {
+        input.scope.cancelPendingSignal?.throwIfAborted();
         const contextStartedAt = Date.now();
         const issues = repairContext.issues.map((issue) => ({
           code: issue.code,
@@ -269,7 +306,11 @@ async function generateValidated<T>(input: ValidatedCallInput<T>): Promise<{
           ...(issue.originalValue !== undefined ? { originalValue: structuredClone(issue.originalValue) } : {}),
           ...(issue.allowedHandles ? { allowedHandles: [...issue.allowedHandles] } : {}),
         }));
-        const context = input.buildContext(issues);
+        const sourceContext = input.buildContext(issues);
+        sourceContextHash ??= contentHash(sourceContext);
+        const logicalContext = logicalRepairContext(sourceContext, repairContext, sourceContextHash, input.schemaName);
+        const projection = input.projectRepair?.(repairContext, logicalContext);
+        const context = projection?.context ?? logicalContext;
         const prompt = promptBundle(input.promptId);
         const invocation = (input.invocationOffset ?? 0) + repairContext.attempt + 1;
         const identity = modelInvocationIdentity(input.scope, input.role, input.subjectId, invocation);
@@ -292,15 +333,16 @@ async function generateValidated<T>(input: ValidatedCallInput<T>): Promise<{
           workloadId: input.scope.workloadId,
           batchId: input.scope.batchId,
           abortSignal: input.scope.abortSignal,
+          cancelPendingSignal: input.scope.cancelPendingSignal,
           correlation,
           observer: input.scope.observer,
           ...identity,
           role: input.role,
           subjectId: input.subjectId,
-          promptVersion: prompt.version,
+          promptVersion: input.promptExtension ? `${prompt.version}/${input.promptExtension.version}` : prompt.version,
           schemaName: input.schemaName,
           system: prompt.system,
-          userPrompt: prompt.userPrompt,
+          userPrompt: input.promptExtension ? `${prompt.userPrompt}\n\n${input.promptExtension.userPrompt}` : prompt.userPrompt,
           context,
           schema: input.schema,
         });
@@ -390,14 +432,34 @@ async function generateValidated<T>(input: ValidatedCallInput<T>): Promise<{
             );
           }
         }
-        const value = normalized.value as { kind?: unknown; verdict?: unknown };
+        let logicalValue = normalized.value as T;
+        if (projection) {
+          try { logicalValue = projection.merge(logicalValue); }
+          catch (error) {
+            if (error instanceof ModelConfigurationError) throw error;
+            throw new ModelOutputError("scoped repair did not return its complete assigned replacements", generated.audit,
+              { cause: error, rawValue: normalized.value });
+          }
+          observe?.({ event: "model.repair.candidate_reconstructed", correlation,
+            hashes: { replacement: contentHash(normalized.value), candidate: contentHash(logicalValue) },
+            payload: input.scope.observer ? fullRuntimePayload(input.scope.observer, { binding: projection.evidence, candidate: logicalValue }) : undefined });
+          const complete = normalizeModelOutput(logicalValue, { resolver: referenceResolver, dedupeArrays: false });
+          if (complete.issues.length > 0) {
+            if (invocationAudit) invocationAudit.issues = complete.issues.map(issue => ({ code: issue.code, class: issue.class,
+              path: issue.path, message: issue.reason, originalValue: issue.originalValue, allowedHandles: [...issue.allowedHandles] }));
+            throw new ModelOutputError("reconstructed joint candidate contains invalid references or declarations", generated.audit,
+              { rawValue: logicalValue });
+          }
+          logicalValue = complete.value as T;
+        }
+        const value = logicalValue as { kind?: unknown; verdict?: unknown };
         const resultKind = typeof value.kind === "string"
           ? `${input.role}_${value.kind}`
           : typeof value.verdict === "string"
             ? `${input.role}_${value.verdict}`
             : input.role;
         setModelInvocationResultKind(generated.audit, resultKind);
-        return { ...generated, value: normalized.value as T };
+        return { ...generated, value: logicalValue };
       },
       validate: (value) => input.validate?.(value),
       classify: (error) => validationIssues(error).map((issue) => semanticIssue(
@@ -527,21 +589,32 @@ function materializeCheckDraft(
   draft: ModelCheckRequestDraft,
   resolver: ReferenceResolver,
   id: string,
+  evidence: ResolutionEvidenceIndex,
 ): D20CheckRequest {
   const resolve = (reference: ModelReference, use: Parameters<ReferenceResolver["resolve"]>[1], kind: string) =>
     resolveTruthReference(reference, use, resolver, kind);
+  const actorId = resolve(draft.actorRef, "actor", "entity");
+  const targetId = draft.targetRef === null ? null : resolve(draft.targetRef, "target", "entity");
+  const ratingId = draft.ratingRef === null ? null : resolve(draft.ratingRef, "modifier", "rating");
+  const difficulty = draft.difficulty.kind === "environment"
+    ? { kind: "environment" as const, band: draft.difficulty.band, source: materializeResolutionSource(draft.difficulty.source, resolver) }
+    : { kind: "opposed" as const, targetId: resolve(draft.difficulty.targetRef, "target", "entity"),
+        ratingId: resolve(draft.difficulty.ratingRef, "source", "rating"), source: materializeResolutionSource(draft.difficulty.source, resolver) };
+  // The perceived object and the entity providing opposition are distinct
+  // semantic choices (for example, a concealed key and its concealing owner).
+  const targetIds = [...new Set([...(targetId === null ? [] : [targetId]), ...(difficulty.kind === "opposed" ? [difficulty.targetId] : [])])];
+  const numbers = deriveCheckNumbers({ actorId, actorRatingId: ratingId, targetIds, difficulty }, evidence, `check ${id}`);
+  if (!Number.isSafeInteger(numbers.dc) || numbers.dc < 0 || numbers.dc > 100 || !Number.isSafeInteger(numbers.modifier)) {
+    throw new Error(`check ${id} derives unsupported d20 numbers`);
+  }
   return {
     id,
-    actorId: resolve(draft.actorRef, "actor", "entity"),
-    targetId: draft.targetRef === null ? null : resolve(draft.targetRef, "target", "entity"),
-    ratingId: draft.ratingRef === null ? null : resolve(draft.ratingRef, "modifier", "rating"),
-    modifier: draft.modifier,
-    modifierSources: draft.modifierSources.map((source) => ({
-      kind: "rating" as const,
-      id: resolve(source.ref, "modifier", "rating"),
-      amount: source.amount,
-    })),
-    dc: draft.dc,
+    actorId,
+    targetId,
+    ratingId,
+    modifier: numbers.modifier,
+    modifierSources: ratingId === null ? [] : [{ kind: "rating", id: ratingId, amount: numbers.modifier }],
+    dc: numbers.dc,
     mode: draft.mode,
     stakes: draft.stakes,
     visibility: draft.visibility,
@@ -560,24 +633,18 @@ async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
   scope: ModelExecutionScope;
 }): Promise<OnsetPerceptionResult> {
   const perceptionSchema = perceptionDirectiveSchema;
-  const resolver = createTruthReferenceResolver({ state: input.state, definition: input.definition, actions: input.actions });
-  const allowed: Record<CausalRef["kind"], Set<string>> = {
-    action: new Set(input.actions.map((action) => action.id)),
-    check: new Set(),
-    random: new Set(),
-    event: new Set(input.state.truth.events.map((event) => event.id)),
-    fact: new Set(Object.keys(input.state.truth.facts)),
-    law: new Set(input.definition.laws.map((law) => law.id)),
-    mechanic: new Set(),
-  };
   const requests: D20CheckRequest[] = [];
   const checks: D20CheckResult[] = [];
   const commitmentRounds: CommitmentRound[] = [];
   const aliases = new Map<string, string | null>();
   const audits: ModelExecutionAudit[] = [];
   let rng = structuredClone(input.state.truth.rng);
+  const evidence = resolutionEvidenceIndex(input.state, input.actions, input.definition.laws);
 
   while (true) {
+    const referenceInput = { state: input.state, definition: input.definition, actions: input.actions, checkRequests: requests };
+    const resolver = createTruthReferenceResolver(referenceInput);
+    const allowed = perceptionCauseScope(referenceInput);
     const accepted = { round: null as D20CheckRequest[] | null };
     let draftRound: ModelCheckRequestDraft[] = [];
     const call = await generateValidated({
@@ -592,7 +659,9 @@ async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
       buildContext: (issues) => buildTruthContext({
         definition: input.definition,
         state: input.state,
+        perceptionTargets: input.perceptionTargets,
         workset: {
+          mode: "full",
           state: input.state,
           initialActions: input.actions,
           availableActions: input.actions,
@@ -621,10 +690,10 @@ async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
         if (commitmentRounds.length >= input.maxCommitmentRounds) {
           throw new Error("maximum commitment rounds exceeded");
         }
+        const relationIssues = perceptionDraftRelationIssues(directive.requests, { ...referenceInput, perceptionTargets: input.perceptionTargets }, resolver);
         draftRound = structuredClone(directive.requests);
         const roundAliases = new Map<string, string>();
         for (const [ordinal, request] of directive.requests.entries()) {
-          if (roundAliases.has(request.proposalKey)) throw new Error(`duplicate check proposalKey ${request.proposalKey}`);
           roundAliases.set(request.proposalKey, runtimeId({
             worldHash: input.state.worldHash,
             revision: input.state.revision,
@@ -635,16 +704,19 @@ async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
             ordinal,
           }));
         }
-        const normalized = directive.requests.map((request) =>
-          materializeCheckDraft(request, resolver, roundAliases.get(request.proposalKey)!));
-        for (const request of normalized) {
-          validateCheckRequest(
-            input.state,
-            request,
-            allowed,
-            input.definition.disclosure.defaultCheckVisibility,
-          );
+        const normalized: D20CheckRequest[] = [];
+        const materializationIssues: PromptValidationIssue[] = [...relationIssues];
+        for (const [index, draft] of directive.requests.entries()) {
+          if (relationIssues.some(issue => issue.path[1] === index)) continue;
+          try {
+            const request = materializeCheckDraft(draft, resolver, roundAliases.get(draft.proposalKey)!, evidence);
+            validateCheckRequest(input.state, request, allowed, input.definition.disclosure.defaultCheckVisibility);
+            normalized.push(request);
+          } catch (error) {
+            materializationIssues.push(...validationIssues(error).map(issue => ({ ...issue, path: ["requests", index, ...issue.path] })));
+          }
         }
+        if (materializationIssues.length) throw new ModelCandidateValidationError(materializationIssues);
         accepted.round = normalized;
       },
       repairAttempts: input.repairAttempts,
@@ -665,7 +737,6 @@ async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
       phase: "perception",
       requestIds: acceptedRound.map((request) => request.id),
     });
-    acceptedRound.forEach((request) => allowed.check.add(request.id));
     draftRound.forEach((request, index) => {
       const canonicalId = acceptedRound![index]!.id;
       aliases.set(request.proposalKey, aliases.has(request.proposalKey) ? null : canonicalId);
@@ -715,6 +786,7 @@ function validatePlanEffect(
   state: SimulationState,
   plan: ResolutionPlan,
   effect: NonNullable<ResolutionPlan["primaryEffect"]> | NonNullable<ResolutionPlan["threatenedEffect"]>,
+  binding: { draft: ResolutionPlanDraft; ordinal: number; field: "primaryEffect" | "secondaryEffect" | "threatenedEffect"; resolver: ReferenceResolver },
 ): void {
   if (effect.kind === "meter") {
     const meter = state.truth.meters[effect.meterId];
@@ -728,10 +800,32 @@ function validatePlanEffect(
   const profile = effect.conditionProfileId
     ? state.truth.mechanics.conditionProfiles[effect.conditionProfileId]
     : null;
-  if (!duration || (effect.conditionProfileId !== null && !profile) ||
-    (profile && profile.defaultDurationProfileId !== effect.durationProfileId)) {
-    throw new Error(`plan ${plan.id} has invalid condition effect ${effect.id}`);
+  const draftEffect = binding.draft[binding.field];
+  if (!draftEffect || draftEffect.kind !== "condition") throw new Error("condition effect draft binding differs from materialized effect");
+  const handles = (ids: readonly string[]) => binding.resolver.candidatesFor("mechanic")
+    .filter(candidate => ids.includes(binding.resolver.resolve(candidate.handle, "mechanic").engineId))
+    .map(candidate => candidate.handle);
+  const issues: PromptValidationIssue[] = [];
+  const issue = (field: "conditionProfileRef" | "durationProfileRef", allowedHandles: string[], message: string) => {
+    issues.push({ code: "reference.invalid_effect_profile", class: "reference",
+      path: ["plans", binding.ordinal, binding.field, field], originalValue: draftEffect[field], allowedHandles,
+      message: `Plan ${binding.draft.proposalKey} for action ${binding.draft.actionRef}: ${binding.field}.${field} ${draftEffect[field]}. ${message} ` +
+        "Choose only a profile supported by the intended effect; do not change the action or effect meaning to pass validation." });
+  };
+  if (effect.conditionProfileId !== null && !profile) {
+    issue("conditionProfileRef", handles(Object.keys(state.truth.mechanics.conditionProfiles)),
+      "This reference is not an authored condition profile. A duration, impact or other mechanic profile is not interchangeable with a condition profile. " +
+      "allowedHandles lists condition profiles. null is also legal for an open semantic condition without an authored condition profile; it does not remove the effect.");
   }
+  if (!duration) {
+    issue("durationProfileRef", handles(profile ? [profile.defaultDurationProfileId] : Object.keys(state.truth.mechanics.durationProfiles)),
+      "This reference is not an authored duration profile. allowedHandles lists valid duration profiles, restricted to the selected condition profile's default when one is selected.");
+  } else if (profile && profile.defaultDurationProfileId !== effect.durationProfileId) {
+    issue("durationProfileRef", handles([profile.defaultDurationProfileId]),
+      `The selected conditionProfileRef ${draftEffect.conditionProfileRef} requires its authored default duration. allowedHandles lists that duration. ` +
+      "Reconcile the selected condition and duration using the effect evidence.");
+  }
+  if (issues.length) throw new ModelCandidateValidationError(issues);
   const existing = state.truth.conditions[effect.conditionId];
   if (existing && existing.subjectId !== effect.targetId) {
     throw new Error(`plan ${plan.id} reuses condition ${effect.conditionId} for another subject`);
@@ -836,7 +930,7 @@ function materializeResolutionEffect(
   };
 }
 
-function materializeResolutionPlans(input: {
+export interface ResolutionPlanMaterializationInput {
   state: SimulationState;
   definition: WorldDefinition;
   actions: readonly AgentActionProposal[];
@@ -844,7 +938,17 @@ function materializeResolutionPlans(input: {
   identityOwner: string;
   drafts: readonly ResolutionPlanDraft[];
   allowedCauses: Record<CausalRef["kind"], Set<string>>;
-}): ResolutionPlan[] {
+}
+
+/** Read-only admission evidence from the same materializer used by execution.
+ * Collect failures across plans with the complete original action/reference
+ * scope; never return a partially accepted batch or commit any world change. */
+export function inspectResolutionPlanDrafts(input: ResolutionPlanMaterializationInput): { valid: boolean; issues: PromptValidationIssue[] } {
+  try { materializeResolutionPlans(input); return { valid: true, issues: [] }; }
+  catch (error) { return { valid: false, issues: validationIssues(error) }; }
+}
+
+function materializeResolutionPlans(input: ResolutionPlanMaterializationInput): ResolutionPlan[] {
   if (input.drafts.length !== input.actions.length) {
     throw new ResolutionPlanCardinalityError(
       input.actions.map((action) => action.id),
@@ -863,7 +967,7 @@ function materializeResolutionPlans(input: {
     return resolved.engineId;
   };
   const visibilityRank = { hidden: 0, result_only: 1, full: 2 } as const;
-  const plans = input.drafts.map((draft, ordinal) => {
+  const materialize = (draft: ResolutionPlanDraft, ordinal: number): ResolutionPlan => {
     if (aliases.has(draft.proposalKey)) throw new Error(`duplicate resolution plan proposalKey ${draft.proposalKey}`);
     aliases.add(draft.proposalKey);
     const actionId = resolve(draft.actionRef, "source", "action");
@@ -940,10 +1044,22 @@ function materializeResolutionPlans(input: {
         const sourceRef = isProposalReference(draftSource.ref)
           ? `proposal:${draftSource.ref.proposalKey}`
           : draftSource.ref;
-        throw new Error(
-          `resolution plan ${plan.id} uses means source ${draftSource.kind}:${sourceRef} outside its committed grounding; ` +
-          "use the assigned action ref, a law ref, or a ref listed in the matching state.dependencySet.assigned record",
-        );
+        const allowedHandles = resolver.candidatesFor("source").filter((candidate) => {
+          const resolved = resolver.resolve(candidate.handle, "source");
+          if (resolved.kind === "action") return resolved.engineId === action.id;
+          if (resolved.kind !== "law" && resolved.kind !== "entity" && resolved.kind !== "fact" &&
+            resolved.kind !== "condition" && resolved.kind !== "rating" && resolved.kind !== "placement") return false;
+          return groundingContainsSource(grounding, { kind: resolved.kind, id: resolved.engineId });
+        }).map((candidate) => candidate.handle);
+        throw new ModelReferenceError({
+          code: "reference.outside_action_grounding",
+          path: ["plans", ordinal, "means", meanIndex, "source", "ref"],
+          originalValue: sourceRef,
+          allowedHandles,
+          reason: `Plan ${draft.proposalKey} for action ${draft.actionRef} uses means source ${sourceRef} outside that action's committed grounding. ` +
+            "Use a source from allowedHandles that actually supports this means description; keep the action's meaning. " +
+            "Another action's dependencies and an audience Agent do not authorize a source for this action.",
+        });
       }
     }
     if (visibilityRank[plan.visibility] > visibilityRank[input.definition.disclosure.defaultCheckVisibility]) {
@@ -958,10 +1074,30 @@ function materializeResolutionPlans(input: {
       }
       validateCausalReference(cause, input.allowedCauses, `resolution plan ${plan.id}`);
     }
+    const effectTargetIssues: PromptValidationIssue[] = [];
+    for (const field of ["primaryEffect", "secondaryEffect", "threatenedEffect"] as const) {
+      const effect = plan[field];
+      if (!effect || plan.targetIds.includes(effect.targetId)) continue;
+      effectTargetIssues.push({
+        code: "reference.outside_plan_targets", class: "reference",
+        path: ["plans", ordinal, field, "targetRef"], originalValue: draft[field]!.targetRef,
+        allowedHandles: draft.targetRefs.flatMap(ref => typeof ref === "string" ? [ref] : []),
+        message: `Plan ${draft.proposalKey} for action ${draft.actionRef}: ${field}.targetRef ${draft[field]!.targetRef} ` +
+          "resolves to an existing entity but is absent from this plan's targetRefs. " +
+          "allowedHandles lists this plan's currently declared targets, not all visible entities. " +
+          "Reconcile the effect subject and targetRefs using the original action and state evidence; " +
+          "declare an additional visible target only if the action supports that effect on it. " +
+          "Do not transfer an effect to another subject or invent an effect merely to pass validation.",
+      });
+    }
+    if (effectTargetIssues.length > 0) throw new ModelCandidateValidationError(effectTargetIssues);
     validateResolutionPlan(plan, evidence);
-    for (const effect of [plan.primaryEffect, plan.secondaryEffect, plan.threatenedEffect]) {
+    const effectIssues: PromptValidationIssue[] = [];
+    for (const field of ["primaryEffect", "secondaryEffect", "threatenedEffect"] as const) {
+      const effect = plan[field];
       if (!effect) continue;
-      validatePlanEffect(input.state, plan, effect);
+      try { validatePlanEffect(input.state, plan, effect, { draft, ordinal, field, resolver }); }
+      catch (error) { effectIssues.push(...validationIssues(error)); continue; }
       if (effect.kind !== "condition") continue;
       const subject = conditionSubjects.get(effect.conditionId);
       if (subject && subject !== effect.targetId) {
@@ -969,8 +1105,21 @@ function materializeResolutionPlans(input: {
       }
       conditionSubjects.set(effect.conditionId, effect.targetId);
     }
+    if (effectIssues.length) throw new ModelCandidateValidationError(effectIssues);
     return plan;
-  });
+  };
+  const plans: ResolutionPlan[] = [];
+  const issues: PromptValidationIssue[] = [];
+  for (const [ordinal, draft] of input.drafts.entries()) {
+    try { plans.push(materialize(draft, ordinal)); }
+    catch (error) {
+      issues.push(...validationIssues(error).map(issue => ({ ...issue,
+        path: issue.path[0] === "plans" ? issue.path : ["plans", ordinal, ...issue.path] })));
+    }
+  }
+  // Preserve the entire action/reference scope while checking other plans.
+  // No partially materialized batch can escape into verification or commits.
+  if (issues.length > 0) throw new ModelCandidateValidationError(issues);
   if (input.actions.some((action) => !actionIds.has(action.id))) {
     throw new Error("resolution plans omit a final joint action");
   }
@@ -1028,7 +1177,7 @@ function checkRequestsForPlans(input: {
 }
 
 function validateReactionRequests(
-  input: TruthResolutionInput,
+  input: TruthPreparationInput,
   requests: readonly ReactionRequest[],
   checkRequests: readonly D20CheckRequest[],
   checks: readonly D20CheckResult[],
@@ -1122,7 +1271,7 @@ function validateReactionRequests(
 }
 
 function applyReactionDecisions(
-  input: TruthResolutionInput,
+  input: TruthPreparationInput,
   requests: readonly ReactionRequest[],
   decisions: readonly ReactionDecision[],
 ): AgentActionProposal[] {
@@ -1235,7 +1384,7 @@ export function materializeObservationPackets(
 }
 
 function materializeReactionRequests(
-  input: TruthResolutionInput,
+  input: TruthPreparationInput,
   requests: readonly ReactionRequestDraft[],
   committedChecks: readonly D20CheckRequest[] = [],
 ): ReactionRequest[] {
@@ -1421,53 +1570,14 @@ function materializeWorldOperation(
 }
 
 function materializeCausalVerification(
-  input: {
-    definition: WorldDefinition;
-    state: SimulationState;
-    actions: readonly AgentActionProposal[];
-    checkRequests: readonly D20CheckRequest[];
-    randomRequests: readonly DiscreteRandomRequest[];
-    proposal: TransitionProposal;
-    report: ModelCausalVerification;
-  },
+  input: Parameters<typeof causalProposalReferenceResolver>[0] & { report: ModelCausalVerification },
 ): CausalVerification {
   if (input.report.verdict === "accept") return { verdict: "accept", findings: [] };
-  const resolver = createTruthReferenceResolver({
-    state: input.state,
-    definition: input.definition,
-    actions: input.actions,
-    events: input.proposal.events,
-    outcomes: input.proposal.outcomes,
-    checkRequests: input.checkRequests,
-    randomRequests: input.randomRequests,
-    extraCandidates: [
-      ...input.proposal.operations.map((operation, index) => ({
-        kind: "operation" as const,
-        engineId: `${index}:${operation.kind}`,
-        label: operation.kind,
-        meaning: "a deterministic world operation proposed by the candidate transition",
-        allowedUses: ["target", "assertion", "source"] as const,
-        visibility: "role" as const,
-      })),
-      ...input.proposal.mechanicInvocations.map((invocation) => ({
-        kind: "mechanic" as const,
-        engineId: invocation.id,
-        label: `${invocation.packageId}/${invocation.ruleId}`,
-        meaning: "a mechanic invocation proposed by the candidate transition",
-        allowedUses: ["target", "assertion", "cause", "source"] as const,
-        visibility: "role" as const,
-      })),
-      ...input.proposal.observations.map((observation) => ({
-        kind: "observation" as const,
-        engineId: observation.id,
-        label: observation.summary,
-        meaning: "an observation rendered from the candidate transition",
-        allowedUses: ["target", "assertion", "source"] as const,
-        visibility: "role" as const,
-      })),
-    ] satisfies ReferenceCandidateInput[],
-  });
+  const resolver = causalProposalReferenceResolver(input);
   for (const finding of input.report.findings) {
+    if (isProposalReference(finding.target.targetHandle)) throw new Error("causal finding cannot target a proposal");
+    const target = resolver.resolve(finding.target.targetHandle, "target");
+    if (target.kind !== finding.target.kind) throw new Error("causal finding target kind does not match its handle");
     for (const evidenceHandle of finding.evidenceHandles) {
       if (isProposalReference(evidenceHandle)) {
         throw new Error(`causal verifier evidence cannot target proposal ${evidenceHandle.proposalKey}`);
@@ -1500,10 +1610,11 @@ function materializeTransitionProposal(
   randomAliases: ReadonlyMap<string, string | null>,
   identityOwner: string,
   checkRequests: readonly D20CheckRequest[] = [],
+  randomRequests: readonly DiscreteRandomRequest[] = [],
   resolutionReceipts: readonly ResolutionReceipt[] = [],
   mechanicContracts: readonly MechanicPromptContract[] = [],
 ): TransitionProposal {
-  const resolver = createTruthReferenceResolver({ state, definition, actions, checkRequests, resolutionReceipts, mechanicContracts });
+  const resolver = createTruthReferenceResolver({ state, definition, actions, checkRequests, randomRequests, resolutionReceipts, mechanicContracts });
   const proposalAliases = new Map<string, string>();
   const mechanicAliases = new Map<string, string>();
   for (const [ordinal, invocation] of direct.mechanicInvocations.entries()) {
@@ -1537,16 +1648,18 @@ function materializeTransitionProposal(
     proposalAliases.set(event.proposalKey, id);
   }
   const outcomeAliases = new Map<string, string>();
-  for (const [ordinal, outcome] of direct.outcomes.entries()) {
+  for (const outcome of direct.outcomes) {
     if (outcomeAliases.has(outcome.proposalKey)) throw new Error(`duplicate outcome proposalKey ${outcome.proposalKey}`);
     const id = runtimeId({
       worldHash: state.worldHash,
       revision: state.revision,
       kind: "outcome",
       stage: "transition",
-      owner: outcome.proposalKey,
+      owner: isProposalReference(outcome.actionRef)
+        ? (() => { throw new Error("outcome must refer to an existing action"); })()
+        : resolver.resolve(outcome.actionRef, "cause").engineId,
       round: 0,
-      ordinal,
+      ordinal: 0,
     });
     outcomeAliases.set(outcome.proposalKey, id);
     proposalAliases.set(outcome.proposalKey, id);
@@ -1861,28 +1974,32 @@ function runtimeMechanicInputShape(value: unknown): unknown {
   }));
 }
 
-function validateTransitionEnvelope(
-  input: TruthResolutionInput,
+function validateTransitionOutcomeCoverage(
   actions: readonly AgentActionProposal[],
   proposal: TransitionProposal,
-  checks: readonly D20CheckResult[],
-  randomResults: readonly DiscreteRandomResult[],
-  resolutionReceipts: readonly ResolutionReceipt[],
 ): void {
   const proposalIds = actions.map((action) => action.id);
   const outcomeIds = proposal.outcomes.map((outcome) => outcome.proposalId);
   if (new Set(outcomeIds).size !== outcomeIds.length) throw new Error("transition has duplicate action outcomes");
   if (proposalIds.length !== outcomeIds.length || proposalIds.some((id) => !outcomeIds.includes(id))) {
     const missingOutcomeIds = proposalIds.filter((id) => !outcomeIds.includes(id));
-    const activeActivityActionIds = new Set(Object.values(input.state.truth.activities)
-      .filter((activity) => activity.status === "active" || activity.status === "paused")
-      .map((activity) => activity.sourceActionId));
-    const missingContinuingOutcomeIds = missingOutcomeIds.filter((id) => activeActivityActionIds.has(id));
-    if (missingContinuingOutcomeIds.length > 0) {
-      throw new Error(`transition omitted the continuing outcome for active Activity action(s): ${missingContinuingOutcomeIds.join(", ")}; emit exactly one status=continuing outcome for each until its trusted boundary`);
+    if (missingOutcomeIds.length > 0) {
+      throw new Error(`transition omitted an outcome for assigned action(s): ${missingOutcomeIds.join(", ")}; emit exactly one outcome for each. Use the Activity mode and current interval evidence: fixed/rate/staged work retains its trusted completion schedule, goal/conditional completion requires supported task achievement, and ongoing work requires an explicit terminal disposition; pre-step active status or a checkpoint alone does not determine completion`);
     }
     throw new Error("transition must contain exactly one outcome for every final joint action");
   }
+}
+
+function validateTransitionEffects(
+  input: TruthPreparationInput,
+  actions: readonly AgentActionProposal[],
+  proposal: TransitionProposal,
+  checks: readonly D20CheckResult[],
+  randomResults: readonly DiscreteRandomResult[],
+  resolutionReceipts: readonly ResolutionReceipt[],
+): void {
+  validateTransitionOutcomeCoverage(actions, proposal);
+  const proposalIds = actions.map((action) => action.id);
   if (proposal.baseRevision !== input.state.revision) throw new Error("transition has a stale base revision");
 
   const historicalAgentIds = new Set([
@@ -1972,12 +2089,6 @@ function validateTransitionEnvelope(
   for (const outcome of proposal.outcomes) {
     for (const cause of outcome.causeRefs) validateCausalReference(cause, allowed, `outcome ${outcome.proposalId}`);
   }
-  for (const observation of proposal.observations) {
-    if (observation.kind !== "outcome") throw new Error(`transition observation ${observation.id} is not an outcome`);
-    for (const eventId of observation.sourceEventIds) {
-      if (!allowed.event.has(eventId)) throw new Error(`observation ${observation.id} references unknown event ${eventId}`);
-    }
-  }
 
   for (const action of actions) {
     const outcome = proposal.outcomes.find((candidate) => candidate.proposalId === action.id)!;
@@ -1988,9 +2099,6 @@ function validateTransitionEnvelope(
     if ((outcome.status === "failed" || outcome.status === "blocked") && !outcome.summary.trim()) {
       throw new Error(`failed outcome for ${action.actorId} requires an understandable summary`);
     }
-    const observationIds = new Set(proposal.observations
-      .filter((packet) => packet.observerId === action.actorId)
-      .map((packet) => packet.id));
     const belief = input.state.agents[action.actorId]?.belief;
     for (const alternative of outcome.knownAlternatives) {
       if (alternative.basis.kind === "knowledge") {
@@ -1999,7 +2107,29 @@ function validateTransitionEnvelope(
             throw new Error(`outcome alternative for ${action.actorId} references unknown evidence ${evidenceId}`);
           }
         }
-      } else if (!observationIds.has(alternative.basis.observationId)) {
+      }
+    }
+  }
+}
+
+
+/** Observation-dependent checks stay after rendering, including each actor's
+ * evidence IDs. Effects and receipt constraints do not require model work. */
+function validateTransitionObservations(input: TruthPreparationInput, actions: readonly AgentActionProposal[], proposal: TransitionProposal): void {
+  const eventIds = new Set([...input.state.truth.events, ...proposal.events].map((event) => event.id));
+  for (const observation of proposal.observations) {
+    if (observation.kind !== "outcome") throw new Error(`transition observation ${observation.id} is not an outcome`);
+    for (const eventId of observation.sourceEventIds) {
+      if (!eventIds.has(eventId)) throw new Error(`observation ${observation.id} references unknown event ${eventId}`);
+    }
+  }
+  for (const action of actions) {
+    const outcome = proposal.outcomes.find((candidate) => candidate.proposalId === action.id)!;
+    const observationIds = new Set(proposal.observations
+      .filter((packet) => packet.observerId === action.actorId)
+      .map((packet) => packet.id));
+    for (const alternative of outcome.knownAlternatives) {
+      if (alternative.basis.kind === "observation" && !observationIds.has(alternative.basis.observationId)) {
         throw new Error(`outcome alternative for ${action.actorId} references unknown observation ${alternative.basis.observationId}`);
       }
     }
@@ -2007,6 +2137,12 @@ function validateTransitionEnvelope(
 }
 
 export class TruthEngine {
+  private readonly mechanicalPlanRepair: boolean;
+  private readonly planRandomCompletion: boolean;
+  private readonly includeResolutionMeansSources: boolean;
+  private readonly includePlanCauseScope: boolean;
+  private readonly includeResolutionFactEvidence: boolean;
+  private readonly includeActivityTemporalEvidence: boolean;
   private readonly repairAttempts: number;
   private readonly maxCommitmentRounds: number;
   private readonly rulePackages: RulePackageRegistry;
@@ -2015,6 +2151,14 @@ export class TruthEngine {
     private readonly provider: StructuredModelProvider,
     options: TruthEngineOptions = {},
   ) {
+    if (options.mechanicalPlanRepair !== undefined && options.mechanicalPlanRepair !== MECHANICAL_PLAN_REPAIR) throw new Error("unknown mechanical plan repair contract");
+    this.mechanicalPlanRepair = options.mechanicalPlanRepair === MECHANICAL_PLAN_REPAIR;
+    if (options.planRandomCompletion !== undefined && options.planRandomCompletion !== PLAN_RANDOM_COMPLETION) throw new Error("unknown plan random completion contract");
+    this.planRandomCompletion = options.planRandomCompletion === PLAN_RANDOM_COMPLETION;
+    this.includeActivityTemporalEvidence = options.includeActivityTemporalEvidence ?? false;
+    this.includeResolutionMeansSources = options.includeResolutionMeansSources ?? false;
+    this.includePlanCauseScope = options.includePlanCauseScope ?? false;
+    this.includeResolutionFactEvidence = options.includeResolutionFactEvidence ?? false;
     this.repairAttempts = options.repairAttempts ?? 2;
     this.maxCommitmentRounds = options.maxCommitmentRounds ?? MAX_COMMITMENT_ROUNDS_PER_STEP;
     if (!Number.isSafeInteger(this.maxCommitmentRounds) || this.maxCommitmentRounds < 0 ||
@@ -2047,16 +2191,129 @@ export class TruthEngine {
     scope: ModelExecutionScope,
   ): Promise<TruthResolution[]> {
     if (inputs.length === 0) return [];
-    return Promise.all(inputs.map((input) => this.resolveSingle(input, scope)));
+    return Promise.all(inputs.map((input) => this.resolve(input, scope)));
   }
+
+  get candidateRepairLimit(): number { return this.repairAttempts; }
 
   async resolve(input: TruthResolutionInput, scope: ModelExecutionScope): Promise<TruthResolution> {
-    const [resolution] = await this.resolveBatch([input], scope);
-    if (!resolution) throw new Error("truth resolution batch returned no result");
-    return resolution;
+    const session = this.prepare(input, scope);
+    const observationAudits: ModelExecutionAudit[] = [];
+    const verifierAudits: ModelExecutionAudit[] = [];
+    let observationRepairRounds = 0;
+    let previousReport: CausalVerification | null = null;
+    try {
+      let pending = await session.next();
+      while (!pending.done) {
+        const stage = pending.value;
+        const candidate = stage.resolution;
+        const proposal = candidate.proposal;
+        const actions = candidate.actions;
+        let assertionResults = candidate.causalAssertionResults;
+        try {
+          const rendered = await input.renderObservations(proposal, actions, stage.transitionAttempt);
+          proposal.observations = structuredClone(rendered.packets);
+          observationAudits.push(...structuredClone(rendered.modelAudits));
+          validateTransitionObservations(input, actions, proposal);
+          input.validateProposal(proposal, candidate.checks, candidate.randomResults, actions, candidate.stimulusObservations);
+          while (true) {
+            const evidence: CausalReviewEvidence = { ...stage.reviewEvidence, proposal, assertionResults, previousReport };
+            const verification = await this.reviewCandidate(evidence, scope, input.identityOwner,
+              stage.reviewInvocationOffset + verifierAudits.reduce((count, audit) => count + audit.invocations.length, 0));
+            verifierAudits.push(verification.audit);
+            if (verification.value.verdict === "accept") {
+              assertCausalReviewMatches(evidence, verification);
+              const completed = await session.next({ kind: "finish" });
+              if (!completed.done || !completed.value) throw new Error("truth candidate session did not finish");
+              return {
+                ...completed.value,
+                proposal,
+                causalAssertionResults: assertionResults,
+                causalVerification: verification.value,
+                modelAudits: [...completed.value.modelAudits, ...observationAudits, ...combineCompatibleModelAudits(verifierAudits)],
+              };
+            }
+            previousReport = structuredClone(verification.value);
+            const observationFindings = verification.value.findings.filter(finding => finding.target.kind === "observation");
+            const onlyObserverFindings = observationFindings.length === verification.value.findings.length &&
+              observationFindings.length > 0 && observationRepairRounds < this.repairAttempts;
+            if (!onlyObserverFindings) {
+              throw new Error(`causal verifier rejected transition: ${verification.value.findings
+                .map(finding => `${finding.code}: ${finding.message}; ${finding.repairHint}`).join(" | ")}`);
+            }
+            const targetObservationIds = new Set(observationFindings.map(finding => finding.target.id));
+            const targetObserverIds = proposal.observations
+              .filter(observation => targetObservationIds.has(observation.id)).map(observation => observation.observerId);
+            if (targetObserverIds.length !== targetObservationIds.size) {
+              throw new Error("causal verifier observation target is not present in the candidate");
+            }
+            const repaired = await input.renderObservations(proposal, actions,
+              stage.transitionAttempt + observationRepairRounds + 1, [...new Set(targetObserverIds)].sort());
+            const targetObservers = new Set(targetObserverIds);
+            proposal.observations = [...proposal.observations.filter(observation => !targetObservers.has(observation.observerId)),
+              ...structuredClone(repaired.packets)]
+              .sort((left, right) => left.observerId.localeCompare(right.observerId) || left.id.localeCompare(right.id));
+            observationAudits.push(...structuredClone(repaired.modelAudits));
+            validateTransitionEffects(input, actions, proposal, candidate.checks, candidate.randomResults, candidate.resolutionReceipts);
+            validateTransitionObservations(input, actions, proposal);
+            assertionResults = evaluateProposalCausality(input.state, candidate.checks, candidate.randomResults, proposal);
+            input.validateProposal(proposal, candidate.checks, candidate.randomResults, actions, candidate.stimulusObservations);
+            observationRepairRounds += 1;
+          }
+        } catch (error) {
+          pending = await session.next({ kind: "repair", error, previousReport });
+          if (pending.done) throw error;
+        }
+      }
+      throw new Error("truth candidate session returned no reviewed resolution");
+    } finally {
+      await session.return(undefined);
+    }
   }
 
-  private async resolveSingle(input: TruthResolutionInput, scope: ModelExecutionScope): Promise<TruthResolution> {
+  async reviewCandidate(
+    evidence: CausalReviewEvidence,
+    scope: ModelExecutionScope,
+    subjectId: string,
+    invocationOffset = 0,
+  ): Promise<BoundCausalReview> {
+    const snapshot = structuredClone(evidence);
+    const binding = { evidenceHash: contentHash(snapshot), promptVersion: promptBundle("causal-verifier").version };
+    const materialize = (report: ModelCausalVerification) => materializeCausalVerification({
+      definition: snapshot.definition,
+      state: snapshot.workset.state,
+      actions: [...new Map([...snapshot.workset.initialActions, ...snapshot.workset.availableActions]
+        .map(action => [action.id, action])).values()],
+      resolutionPlans: snapshot.resolutionPlans,
+      mechanicContracts: snapshot.mechanicContracts,
+      checkRequests: snapshot.checkRequests,
+      randomRequests: snapshot.randomRequests,
+      proposal: snapshot.proposal,
+      report,
+    });
+    const generated = await generateValidated({
+      provider: this.provider,
+      profileId: snapshot.definition.modelProfiles.causalVerifier,
+      role: "causal-verifier",
+      subjectId,
+      promptId: "causal-verifier",
+      schemaName: "causal_verification",
+      schema: causalVerificationSchema,
+      scope,
+      buildContext: issues => structuredClone(buildCausalVerificationContext({ ...snapshot, issues })),
+      validate: report => { if (report.verdict === "reject") materialize(report); },
+      repairAttempts: this.repairAttempts,
+      invocationOffset,
+      repairScope: "component",
+      targetIds: snapshot.workset.assignedActions.map(action => action.id),
+    });
+    return { value: materialize(generated.value), audit: generated.audit, binding };
+  }
+
+  async *prepare(input: TruthPreparationInput, scope: ModelExecutionScope): TruthCandidateSession {
+    if (input.orderedRandom && input.enableReactionRouting !== false) {
+      throw new Error("ordered random acquisition requires closed reaction routing");
+    }
     const truthSubject = input.identityOwner;
     let actions = input.initialActions.map((action) => structuredClone(action));
     let groundings = input.groundings.map((grounding) => structuredClone(grounding));
@@ -2092,8 +2349,6 @@ export class TruthEngine {
     let reactionModelAudits: ModelExecutionAudit[] = [];
     const modelAudits: ModelExecutionAudit[] = [];
     let randomRngDrawsBefore: number | null = null;
-    const combineStageAudits = (audits: readonly ModelExecutionAudit[]) =>
-      combineCompatibleModelAudits(audits);
     const mechanicContracts = this.rulePackages.promptContracts(input.definition.rulePackages)
       .filter((contract) => !(contract.packageId === "core-resolution" &&
         (contract.ruleId === "apply-receipt" || contract.ruleId === "advance-conditions")));
@@ -2131,6 +2386,10 @@ export class TruthEngine {
         (resolutionScopeOverride?.selectedActionIds ?? actions.map((action) => action.id)),
       );
       return buildTruthContext({
+        includeResolutionMeansSources: this.includeResolutionMeansSources,
+        includeResolutionFactEvidence: this.includeResolutionFactEvidence,
+        ...(this.includePlanCauseScope && stage === "resolution" ? { planCauseActionIds: [...allowedForCommitments.action] } : {}),
+        ...(this.includeActivityTemporalEvidence ? { temporalEvidence: input.temporalBoundary } : {}),
         definition: input.definition,
         state: input.state,
         workset: {
@@ -2237,6 +2496,7 @@ export class TruthEngine {
             workloadId: scope.workloadId,
             batchId: scope.batchId,
             abortSignal: scope.abortSignal,
+            cancelPendingSignal: scope.cancelPendingSignal,
             correlation,
             observer: scope.observer,
             ...identity,
@@ -2287,7 +2547,18 @@ export class TruthEngine {
       return result.value.invocation;
     };
 
-    const commitCheckRound = (round: readonly D20CheckRequest[]) => {
+    let componentRandomStateAcquired = false;
+    let componentRandomStateFinished = false;
+    const acquireComponentRandomState = async (): Promise<void> => {
+      if (componentRandomStateFinished) throw new Error("random commitments are already closed");
+      if (input.orderedRandom && !componentRandomStateAcquired) {
+        rng = await input.orderedRandom.acquire();
+        componentRandomStateAcquired = true;
+      }
+      scope.cancelPendingSignal?.throwIfAborted();
+    };
+    const commitCheckRound = async (round: readonly D20CheckRequest[]) => {
+      await acquireComponentRandomState();
       const resolved = resolveD20Checks(rng, round);
       rng = resolved.rng;
       requests.push(...structuredClone(round));
@@ -2375,7 +2646,8 @@ export class TruthEngine {
       return normalized;
     };
 
-    const commitRandomRound = (round: readonly DiscreteRandomRequest[]) => {
+    const commitRandomRound = async (round: readonly DiscreteRandomRequest[]) => {
+      await acquireComponentRandomState();
       const resolved = resolveDiscreteRandomRequests(rng, round);
       const firstRandomDraw = randomRngDrawsBefore ?? rng.draws;
       validateDiscreteRandomCommitmentBudget(
@@ -2498,6 +2770,10 @@ export class TruthEngine {
       if (resolved.kind !== "action") throw new Error(`resolution plan actionRef must reference an action`);
       return resolved.engineId;
     };
+    const planningRepairSourceHash = () => contentHash({ state: input.state, definition: input.definition, actions, groundings,
+      requests, checks, commitmentRounds, temporalBoundary: input.temporalBoundary });
+    const planningRepairSourceBinding = this.mechanicalPlanRepair ? planningRepairSourceHash() : "";
+    let initialPlanCalls = 0;
     let pendingPlanVerification: {
       plans: ResolutionPlan[];
       checks: D20CheckRequest[];
@@ -2520,7 +2796,7 @@ export class TruthEngine {
         continuationFromTargetedRepair = true;
       } else try {
         const directiveSchema = (resolutionPlans.length === 0
-          ? resolutionPlanCommitDirectiveSchema
+          ? this.planRandomCompletion ? declaredRandomPlanSchema : resolutionPlanCommitDirectiveSchema
           : resolutionContinuationDirectiveSchema) as z.ZodType<z.infer<typeof resolutionDirectiveSchema>>;
         call = await generateValidated<z.infer<typeof resolutionDirectiveSchema>>({
           provider: this.provider,
@@ -2532,8 +2808,26 @@ export class TruthEngine {
             ? "truth_resolution_plan_commit"
             : "truth_resolution_continuation",
           schema: directiveSchema,
+          ...(this.mechanicalPlanRepair && resolutionPlans.length === 0 ? {
+            projectRepair: (repair: SemanticRepairContext, context: unknown) => {
+              const selection = selectMechanicalPlanRepair({ repair, schema: directiveSchema,
+                actionIds: actions.map(action => action.id), actionIdFor: draftActionId,
+                sourceHash: planningRepairSourceHash, expectedSourceHash: planningRepairSourceBinding });
+              if (!selection) return undefined;
+              const issues = repair.issues.map(issue => ({ ...issue, path: [...issue.path] }));
+              const scoped = truthContext("resolution", [...resolutionPlanIssues, ...issues], {
+                mode: "repair", selectedActionIds: selection.selectedActionIds, totalActionCount: actions.length });
+              return { context: bindMechanicalPlanRepairContext(context, selection.binding, scoped), merge: selection.merge, evidence: selection.binding };
+            },
+          } : {}),
+          ...(this.planRandomCompletion && resolutionPlans.length === 0 ? {
+            promptExtension: { version: PLAN_RANDOM_COMPLETION, userPrompt: PLAN_RANDOM_COMPLETION_PROMPT },
+          } : {}),
           scope,
-          buildContext: (issues) => truthContext("resolution", [...resolutionPlanIssues, ...issues]),
+          buildContext: (issues) => {
+            if (resolutionPlans.length === 0) initialPlanCalls += 1;
+            return truthContext("resolution", [...resolutionPlanIssues, ...issues]);
+          },
           validate: (directive) => {
             if (directive.kind === "commit_plans") {
               if (resolutionPlans.length > 0) throw new Error("resolution plans are already committed");
@@ -2675,6 +2969,7 @@ export class TruthEngine {
           schema: resolutionPlanVerificationSchema,
           scope,
           buildContext: (issues) => buildResolutionPlanVerificationContext({
+            ...(this.includeActivityTemporalEvidence ? { temporalEvidence: input.temporalBoundary } : {}),
             definition: input.definition,
             state: input.state,
             workset: {
@@ -2857,7 +3152,7 @@ export class TruthEngine {
         }
         resolutionPlanIssues = [];
         resolutionPlans = structuredClone(acceptedPlans);
-        if (acceptedPlanChecks.length > 0) commitCheckRound(acceptedPlanChecks);
+        if (acceptedPlanChecks.length > 0) await commitCheckRound(acceptedPlanChecks);
         const evidence = resolutionEvidenceIndex(input.state, actions, input.definition.laws);
         let checkOrdinal = 0;
         resolutionReceipts = resolutionPlans.map((plan, ordinal) => {
@@ -2879,34 +3174,49 @@ export class TruthEngine {
             result,
           });
         });
+        if (this.planRandomCompletion && initialPlanCalls === 1 && !continuationFromTargetedRepair &&
+          resolutionPlanRepairs === 0 && resolutionRepairAudits.length === 0 &&
+          verification.audit.invocations.length === 1 && commitmentRounds.length === 0 &&
+          acceptedPlanChecks.length === 0 && declaresNoAdditionalRandomness(call.value)) break;
       } else {
         if (!acceptedRandom) throw new Error("accepted random round was not materialized");
         registerRandomAliases(call.value.requests, acceptedRandom);
-        commitRandomRound(acceptedRandom);
+        await commitRandomRound(acceptedRandom);
       }
     }
-    if (resolutionAudits.length > 0) modelAudits.push(...combineStageAudits(resolutionAudits));
+    // Transition and observer repairs reuse these commitments; they never draw.
+    componentRandomStateFinished = true;
+    if (input.orderedRandom) rng = await input.orderedRandom.finish(structuredClone(rng));
+    scope.cancelPendingSignal?.throwIfAborted();
+    if (resolutionAudits.length > 0) modelAudits.push(...combineCompatibleModelAudits(resolutionAudits));
     modelAudits.push(...resolutionRepairAudits);
     if (resolutionPlanVerifierAudits.length > 0) {
-      modelAudits.push(...combineStageAudits(resolutionPlanVerifierAudits));
+      modelAudits.push(...combineCompatibleModelAudits(resolutionPlanVerifierAudits));
     }
 
     const stimulusObservations = reactionRequests.map((request) => request.stimulus);
     let transitionIssues: PromptValidationIssue[] = [];
     let transitionRepairs = 0;
+    let transitionSourceContextHash: string | undefined;
+    let previousTransitionOutput: unknown;
     let previousReport: CausalVerification | null = null;
     const transitionAudits: ModelExecutionAudit[] = [];
-    const verifierAudits: ModelExecutionAudit[] = [];
-    const observationAudits: ModelExecutionAudit[] = [];
     const observe = runtimeEventEmitter(scope.observer);
-    let observationRepairRounds = 0;
     const transitionLogicalInvocationId = modelInvocationLogicalId(scope, "truth-transition", truthSubject);
 
     while (true) {
       const auditCountBeforeAttempt = transitionAudits.length;
+      let candidateForRepair: unknown;
+      let evaluatedProposal: TransitionProposal | undefined;
       try {
         const contextStartedAt = Date.now();
-        const context = truthContext("transition", transitionIssues);
+        const sourceContext = truthContext("transition", transitionIssues);
+        transitionSourceContextHash ??= contentHash(sourceContext);
+        const repairOf = transitionAudits.at(-1)?.invocations.at(-1)?.id;
+        const context = logicalRepairContext(sourceContext, {
+          scope: "step", targetIds: actions.map(action => action.id), attempt: transitionRepairs, issues: [],
+          previousOutput: previousTransitionOutput, logicalInvocationId: transitionLogicalInvocationId, repairOf,
+        }, transitionSourceContextHash, "truth_transition");
         const invocation = transitionAudits.reduce((count, audit) => count + audit.invocations.length, 0) + 1;
         const identity = modelInvocationIdentity(
           scope,
@@ -2914,7 +3224,6 @@ export class TruthEngine {
           truthSubject,
           invocation,
         );
-        const repairOf = transitionAudits.at(-1)?.invocations.at(-1)?.id;
         const correlation = modelInvocationCorrelation(
           scope,
           "truth-transition",
@@ -2938,6 +3247,7 @@ export class TruthEngine {
           workloadId: scope.workloadId,
           batchId: scope.batchId,
           abortSignal: scope.abortSignal,
+          cancelPendingSignal: scope.cancelPendingSignal,
           correlation,
           observer: scope.observer,
           ...identity,
@@ -2953,6 +3263,7 @@ export class TruthEngine {
         transitionAudits.push(generated.audit);
         setModelInvocationResultKind(generated.audit, "truth-transition_transition");
         let transitionDraft = structuredClone(generated.value);
+        candidateForRepair = structuredClone(transitionDraft);
         while (true) {
           try {
             this.rulePackages.validateInvocationInputs(
@@ -2982,6 +3293,7 @@ export class TruthEngine {
               mechanicInvocations: transitionDraft.mechanicInvocations.map((candidate) =>
                 candidate.proposalKey === repaired.proposalKey ? structuredClone(repaired) : candidate),
             };
+            candidateForRepair = structuredClone(transitionDraft);
           }
         }
         const materializedProposal = materializeTransitionProposal(
@@ -2993,6 +3305,7 @@ export class TruthEngine {
           randomAliases,
           input.identityOwner,
           requests,
+          randomRequests,
           resolutionReceipts,
           mechanicContracts,
         );
@@ -3002,6 +3315,10 @@ export class TruthEngine {
           materializedProposal,
         );
         const directProposal = normalizedAlternatives.proposal;
+        // Outcome coverage is independent of receipts and observations. Reject
+        // an incomplete candidate before settling mechanics or asking any model
+        // to render consequences that cannot be committed.
+        validateTransitionOutcomeCoverage(actions, directProposal);
         if (normalizedAlternatives.droppedReferences > 0 || normalizedAlternatives.droppedAlternatives > 0) {
           observe?.({
             event: "algorithm.outcome.alternative_evidence_normalized",
@@ -3118,142 +3435,48 @@ export class TruthEngine {
           ],
         };
 
-        const rendered = await input.renderObservations(proposal, actions, transitionRepairs);
-        proposal.observations = structuredClone(rendered.packets);
-        observationAudits.push(...structuredClone(rendered.modelAudits));
-
-        validateTransitionEnvelope(input, actions, proposal, checks, randomResults, resolutionReceipts);
-        let causalAssertionResults = evaluateProposalCausality(input.state, checks, randomResults, proposal);
-        input.validateProposal(proposal, checks, randomResults, actions, stimulusObservations);
-
-        let verification: { value: CausalVerification; audit: ModelExecutionAudit };
-        while (true) {
-          const generatedVerification = await generateValidated({
-          provider: this.provider,
-          profileId: input.definition.modelProfiles.causalVerifier,
-          role: "causal-verifier",
-          subjectId: truthSubject,
-          promptId: "causal-verifier",
-          schemaName: "causal_verification",
-          schema: causalVerificationSchema,
-          scope,
-          buildContext: (issues) => buildCausalVerificationContext({
-            definition: input.definition,
-            state: input.state,
-            workset: {
-              state: input.modelWorkset?.state ?? input.state,
-              mode: "full",
-              initialActions: input.modelWorkset?.initialActions ?? input.initialActions,
-              availableActions: input.modelWorkset?.availableActions ?? actions,
-              assignedActions: actions,
-              availableDependencies: input.modelWorkset?.availableDependencies ?? groundings,
-              assignedDependencies: groundings,
-            },
-            checkRequests: requests,
-            checkResults: checks,
-            randomRequests,
-            randomResults,
-            commitmentRounds,
-            resolutionPlans,
-            resolutionReceipts,
-            proposal,
-            assertionResults: causalAssertionResults,
-            mechanicResults: mechanics.results,
-            previousReport,
-            instanceId: scope.workloadId,
-            advanceId: scope.batchId,
-            issues,
-            mechanicContracts,
-            resolutionScope: input.resolutionScope ?? {
-              mode: "component",
-              selectedActionIds: actions.map((action) => action.id).sort(),
-              totalActionCount: actions.length,
-            },
-          }),
-          validate: (report) => {
-            if (report.verdict !== "reject") return;
-            materializeCausalVerification({
-              definition: input.definition,
-              state: input.state,
-              actions,
-              checkRequests: requests,
-              randomRequests,
-              proposal,
-              report,
-            });
+        validateTransitionEffects(input, actions, proposal, checks, randomResults, resolutionReceipts);
+        // Causal evaluation reads a cloned working state and does not depend on
+        // observations. Reject impossible writes before paying to narrate them.
+        evaluatedProposal = proposal;
+        const causalAssertionResults = evaluateProposalCausality(input.state, checks, randomResults, proposal);
+        const reviewEvidence: CausalReviewEvidence = {
+          reactionDecisions: input.completedReactionDecisions ??
+            (input.enableReactionRouting === false ? undefined : reactionDecisions),
+          ...(this.includeActivityTemporalEvidence ? { temporalEvidence: input.temporalBoundary } : {}),
+          definition: input.definition,
+          state: input.state,
+          workset: {
+            state: input.modelWorkset?.state ?? input.state,
+            mode: "full",
+            initialActions: input.modelWorkset?.initialActions ?? input.initialActions,
+            availableActions: input.modelWorkset?.availableActions ?? actions,
+            assignedActions: actions,
+            availableDependencies: input.modelWorkset?.availableDependencies ?? groundings,
+            assignedDependencies: groundings,
           },
-          repairAttempts: this.repairAttempts,
-          invocationOffset: [resolutionPlanVerifierAudits, verifierAudits]
-            .flat()
-            .reduce((count, audit) => count + audit.invocations.length, 0),
-          repairScope: "component",
-          targetIds: actions.map((action) => action.id),
-          });
-          verification = {
-            value: materializeCausalVerification({
-              definition: input.definition,
-              state: input.state,
-              actions,
-              checkRequests: requests,
-              randomRequests,
-              proposal,
-              report: generatedVerification.value,
-            }),
-            audit: generatedVerification.audit,
-          };
-          verifierAudits.push(verification.audit);
-          if (verification.value.verdict !== "reject") break;
-          setModelInvocationOutcome(
-            generated.audit,
-            "rejected",
-            verification.value.findings.map((finding) => finding.code),
-          );
-          previousReport = structuredClone(verification.value);
-          const observationFindings = verification.value.findings.filter((finding) =>
-            finding.target.kind === "observation");
-          const onlyObserverFindings = observationFindings.length === verification.value.findings.length &&
-            observationFindings.length > 0 && observationRepairRounds < this.repairAttempts;
-          if (!onlyObserverFindings) {
-            throw new Error(`causal verifier rejected transition: ${verification.value.findings
-              .map((finding) => `${finding.code}: ${finding.message}; ${finding.repairHint}`)
-              .join(" | ")}`);
-          }
-          const targetObservationIds = new Set(observationFindings.map((finding) => finding.target.id));
-          const targetObserverIds = proposal.observations
-            .filter((observation) => targetObservationIds.has(observation.id))
-            .map((observation) => observation.observerId);
-          if (targetObserverIds.length !== targetObservationIds.size) {
-            throw new Error("causal verifier observation target is not present in the candidate");
-          }
-          const repairedObservations = await input.renderObservations(
-            proposal,
-            actions,
-            transitionRepairs + observationRepairRounds + 1,
-            [...new Set(targetObserverIds)].sort(),
-          );
-          const targetObservers = new Set(targetObserverIds);
-          proposal.observations = [
-            ...proposal.observations.filter((observation) => !targetObservers.has(observation.observerId)),
-            ...structuredClone(repairedObservations.packets),
-          ].sort((left, right) => left.observerId.localeCompare(right.observerId) || left.id.localeCompare(right.id));
-          observationAudits.push(...structuredClone(repairedObservations.modelAudits));
-          validateTransitionEnvelope(input, actions, proposal, checks, randomResults, resolutionReceipts);
-          causalAssertionResults = evaluateProposalCausality(input.state, checks, randomResults, proposal);
-          input.validateProposal(proposal, checks, randomResults, actions, stimulusObservations);
-          observationRepairRounds += 1;
-        }
-
-        setModelInvocationOutcome(generated.audit, "accepted");
-        observe?.({
-          event: "model.semantic.accepted",
-          correlation,
-          attributes: { resultKind: "truth-transition_transition" },
-        });
-        modelAudits.push(...combineStageAudits(transitionAudits));
-        modelAudits.push(...structuredClone(observationAudits));
-        modelAudits.push(...combineStageAudits(verifierAudits));
-        return {
+          checkRequests: requests,
+          checkResults: checks,
+          randomRequests,
+          randomResults,
+          commitmentRounds,
+          resolutionPlans,
+          resolutionReceipts,
           proposal,
+          assertionResults: causalAssertionResults,
+          mechanicResults: mechanics.results,
+          previousReport,
+          instanceId: scope.workloadId,
+          advanceId: scope.batchId,
+          mechanicContracts,
+          resolutionScope: input.resolutionScope ?? {
+            mode: "component",
+            selectedActionIds: actions.map((action) => action.id).sort(),
+            totalActionCount: actions.length,
+          },
+        };
+        const snapshot = (): UnreviewedTruthResolution => ({
+          proposal: structuredClone(proposal),
           initialActions: structuredClone(input.initialActions),
           actions: structuredClone(actions),
           reactionRequests: structuredClone(reactionRequests),
@@ -3266,13 +3489,32 @@ export class TruthEngine {
           commitmentRounds: structuredClone(commitmentRounds),
           resolutionPlans: structuredClone(resolutionPlans),
           resolutionReceipts: structuredClone(resolutionReceipts),
-          rng,
+          rng: structuredClone(rng),
           mechanicResults: structuredClone(mechanics.results),
           causalAssertionResults: structuredClone(causalAssertionResults),
-          causalVerification: structuredClone(verification.value),
-          modelAudits,
+          modelAudits: [...structuredClone(modelAudits), ...combineCompatibleModelAudits(transitionAudits)],
           reactionModelAudits: structuredClone(reactionModelAudits),
+        });
+        const feedback = yield {
+          resolution: snapshot(),
+          reviewEvidence: structuredClone(reviewEvidence),
+          transitionAttempt: transitionRepairs,
+          reviewInvocationOffset: resolutionPlanVerifierAudits.reduce((count, audit) => count + audit.invocations.length, 0),
         };
+        scope.cancelPendingSignal?.throwIfAborted();
+        scope.abortSignal?.throwIfAborted();
+        if (!feedback) throw new ModelConfigurationError("resuming a truth candidate requires explicit feedback");
+        if (feedback.kind === "repair") {
+          previousReport = structuredClone(feedback.previousReport);
+          throw feedback.error;
+        }
+        setModelInvocationOutcome(generated.audit, "accepted");
+        observe?.({
+          event: "model.semantic.accepted",
+          correlation,
+          attributes: { resultKind: "truth-transition_transition" },
+        });
+        return snapshot();
       } catch (error) {
         if (error instanceof ModelSemanticRepairError &&
           (error.role === "causal-verifier" || error.role === "observation-renderer")) throw error;
@@ -3285,7 +3527,17 @@ export class TruthEngine {
         if (!(error instanceof ModelOutputError) && !(error instanceof z.ZodError) && !(error instanceof Error)) {
           throw error;
         }
-        transitionIssues = validationIssues(error);
+        transitionIssues = error instanceof CausalAssertionValidationError && evaluatedProposal
+          ? causalAssertionRepairIssues({
+            definition: input.definition, state: input.modelWorkset?.state ?? input.state,
+            actions: input.modelWorkset?.availableActions ?? actions,
+            resolutionPlans, checkRequests: requests, randomRequests, mechanicContracts,
+            proposal: evaluatedProposal, failures: error.failures, evaluationState: input.state,
+          })
+          : validationIssues(error);
+        // Mirror the shared logical repair loop: an unavailable current candidate
+        // clears old evidence, while explicit null remains available model data.
+        previousTransitionOutput = structuredClone(error instanceof ModelOutputError ? error.rawValue : candidateForRepair);
         const audit = transitionAudits.at(-1);
         if (audit) setModelInvocationOutcome(audit, "rejected", transitionIssues.map((issue) => issue.code));
         const invocation = audit?.invocations.at(-1);

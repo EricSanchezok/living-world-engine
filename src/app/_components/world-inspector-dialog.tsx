@@ -740,7 +740,7 @@ export default function WorldInspectorDialog({
   const loadInvocations = useCallback(async () => {
     const request = ++invocationRequestRef.current;
     try {
-      const result = await worldInspectorApi.modelInvocations(instanceId, { limit: 100, sort: "stage" });
+      const result = await worldInspectorApi.modelInvocations(instanceId, { includeRepairs: true, limit: 100, sort: "stage" });
       if (request !== invocationRequestRef.current) return;
       startTransition(() => {
         setQueriedInvocations((current) => mergeInvocationSummaries(current, result.items));
@@ -830,6 +830,7 @@ export default function WorldInspectorDialog({
     try {
       const result = await worldInspectorApi.modelInvocations(instanceId, {
         cursor: invocationCursor,
+        includeRepairs: true,
         limit: 100,
         sort: "stage",
       });
@@ -903,9 +904,8 @@ export default function WorldInspectorDialog({
     const scoped = replayFrame
       ? invocations.filter((invocation) => replayFrame.invocationIds.includes(invocation.id) || invocation.logicalStageIndex === replayFrame.stageIndex)
       : invocations;
-    const roots = scoped.filter((invocation) => invocation.lineage.kind !== "repair");
-    if (selectedActorId === "world") return roots;
-    return roots.filter((invocation) => invocation.subjectId === selectedActorId ||
+    if (selectedActorId === "world") return scoped;
+    return scoped.filter((invocation) => invocation.subjectId === selectedActorId ||
       invocation.slotRefs.some((slot) => slot.agentId === selectedActorId));
   }, [detail, queriedInvocations, replayFrame, selectedActorId, selection]);
 

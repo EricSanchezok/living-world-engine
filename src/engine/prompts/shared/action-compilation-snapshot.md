@@ -1,0 +1,1 @@
+For fact_matches.expected, you may use {"mode":"snapshot"} to assert equality to that fact's exact typed value currently shown in this slot. This does not assert a desired future value. If the fact value is not shown, use a literal typed value instead. Literal values retain their ordinary meaning; a wrong literal will not be corrected. All other assertion forms remain available.

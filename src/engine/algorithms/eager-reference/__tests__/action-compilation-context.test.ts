@@ -135,17 +135,18 @@ describe("production Action Compilation context projector", () => {
       .toMatchObject({ kind: "fixed" });
   });
 
-  it("preserves a repair issue and previous output in the compact slot envelope", () => {
+  it("preserves every repair issue and previous output in the compact slot envelope", () => {
     const context = recordedContext();
     const task = context.task as { slots: Array<Record<string, unknown>> };
     task.slots[0]!.repair = {
       fingerprint: "repair-fingerprint",
       previousOutput: { temporalPlan: { profileRef: "ref:temporal_profile:brief" } },
-      issues: [{ code: "temporal.continuation_assertion_false", reason: "choose an onset-true assertion" }],
+      issues: [{ code: "temporal.continuation_assertion_false", reason: "choose an onset-true assertion" },
+        { code: "reference.disallowed_use", reason: "choose an allowed dependency" }],
     };
     const projected = projectActionCompilationContextForModel(context);
     expect(projected.task.slots[0]).toMatchObject({
-      issue: { code: "temporal.continuation_assertion_false" },
+      issues: [{ code: "temporal.continuation_assertion_false" }, { code: "reference.disallowed_use" }],
       previousAttempt: { temporalPlan: { profileRef: actionCompilationCandidateKeyForHandle("ref:temporal_profile:brief") } },
     });
   });

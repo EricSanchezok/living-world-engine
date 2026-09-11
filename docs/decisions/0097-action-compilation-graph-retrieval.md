@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Superseded by [0100](0100-promote-relational-rrf-and-refresh-reference-data.md)
 Class: architecture
 
 ## Context and Problem Statement
@@ -93,3 +93,4 @@ and semantic validation path.
 - [GraphRAG local search](https://github.com/microsoft/graphrag/blob/main/docs/query/local_search.md)
 - [mE5 technical report](https://arxiv.org/abs/2402.05672)
 - [0096 — Versioned behavioral benchmark datasets](0096-versioned-behavioral-benchmark-datasets.md)
+- [0100 — Promote relational RRF and refresh reference data](0100-promote-relational-rrf-and-refresh-reference-data.md)

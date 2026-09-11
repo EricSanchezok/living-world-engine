@@ -22,7 +22,7 @@ import {
 } from "../../src/engine/benchmarks/action-compilation/retrievers/advanced";
 import {
   discoverLocalEncoderModelDirectory,
-  loadLocalMultilingualE5Small,
+  loadLocalEncoder,
   type LocalEncoderRuntime,
 } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/local-encoder";
 
@@ -268,7 +268,7 @@ async function main(argv: readonly string[]): Promise<number> {
     let encoder: LocalEncoderRuntime | undefined;
     if (!args.deterministicOnly) {
       const modelDirectory = args.modelDirectory || discoverLocalEncoderModelDirectory();
-      encoder = await loadLocalMultilingualE5Small({ modelDirectory });
+      encoder = await loadLocalEncoder({ modelDirectory });
     }
     for (const strategy of ADVANCED_STRATEGIES) {
       if (args.deterministicOnly && strategy.startsWith("encoder")) continue;

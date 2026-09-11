@@ -9,7 +9,7 @@ Shorten the request-local Action Compilation selector so models have fewer chara
 
 ## Contract
 
-Action Compilation candidate keys use the exact format `candidate_` followed by twelve lowercase hexadecimal characters. The suffix is derived deterministically from the request-local handle using the engine-owned digest and has no canonical identity meaning. The Action Compilation reference catalog is version 2, the model context contract is version 16, and the audit projection is `candidate-key-v2-12hex-deterministic-details`.
+Action Compilation candidate keys use the exact format `candidate_` followed by twelve lowercase hexadecimal characters. The suffix is derived deterministically from the request-local handle using the engine-owned digest and has no canonical identity meaning. The Action Compilation reference catalog is version 2, the model context contract is version 16, and the audit projection is `candidate-key-v3-complete-repair-issues`.
 
 The projector derives every emitted key from its engine-owned handle and never trusts a stale model or fixture key. The candidate namespace remains complete, shared and slot-private scope is preserved, and duplicate generated keys fail closed. Materialization validates the exact schema before resolving keys. The existing symbol-repair policy may repair only registered closed-set symbols with a protected prefix, a payload of at least eight characters, bounded Damerau distance at most three, and a unique best candidate with the configured margin; all repaired values pass the complete schema, scope, kind, use, mechanic, temporal, and transaction checks again.
 

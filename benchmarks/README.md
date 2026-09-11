@@ -32,7 +32,7 @@ Export a version from recorded Action Compilation evidence with:
 
 ```sh
 npm run benchmark:export:action-compilation-reference -- \
-  --database .livingworld-v22/livingworld.sqlite \
+  --database .livingworld-v23/livingworld.sqlite \
   --execution <execution-id> \
   --version 1
 ```
@@ -118,41 +118,60 @@ metadata under `.cache/` is excluded from the model hash. A valid install must
 load locally and produce 384-dimensional vectors:
 
 ```sh
-npx tsx -e 'import {discoverLocalEncoderModelDirectory,loadLocalMultilingualE5Small} from "./src/engine/algorithms/eager-reference/candidate-retrieval/local-encoder"; (async()=>{const e=await loadLocalMultilingualE5Small({modelDirectory:discoverLocalEncoderModelDirectory()}); const v=await e.encodeBatch(["query: smoke-test"]); console.log({modelId:e.modelId,dimensions:e.dimensions,rows:v.length,vectorLength:v[0]?.length,modelHash:e.modelHash})})()'
+npx tsx -e 'import {discoverLocalEncoderModelDirectory,loadLocalEncoder} from "./src/engine/algorithms/eager-reference/candidate-retrieval/local-encoder"; (async()=>{const e=await loadLocalEncoder({modelDirectory:discoverLocalEncoderModelDirectory()}); const v=await e.encodeBatch(["query: smoke-test"]); console.log({modelId:e.modelId,dimensions:e.dimensions,rows:v.length,vectorLength:v[0]?.length,modelHash:e.modelHash})})()'
 ```
 
 If the directory is absent or corrupt, E1/H1/H2 and learned tracks are
 reported as `blocked`; evaluation never downloads a model, uses an online
 embedding service, or silently substitutes another model.
 
-Candidate passage embeddings are not recomputed on each evaluation or server restart. `retrieval:cache:warm` writes only missing exact passages, `retrieval:cache:verify` opens the selected SQLite read-only and validates every checksum, and `retrieval:cache:status` lists cache partitions without loading the Encoder. The dynamic slot query is still encoded per call and held only in a bounded process-local LRU.
+The E5-small instructions above reproduce historical v3/v4 evidence. Production
+`relational-rrf@1` uses the separately pinned multilingual E5-base asset. Install
+and warm it explicitly before creating an R5 instance:
+
+```sh
+npm run retrieval:model:install -- --model multilingual-e5-base
+npm run retrieval:cache:warm -- --world blackmarsh --model multilingual-e5-base
+npm run retrieval:cache:verify -- --world blackmarsh --model multilingual-e5-base
+```
+
+Candidate passage embeddings are not recomputed on each evaluation or server restart. `retrieval:cache:warm` writes only missing exact passages, `retrieval:cache:verify` opens the selected SQLite read-only and validates every checksum, and `retrieval:cache:status` lists cache partitions without loading the Encoder. R5 query encoding uses a bounded batch/single-flight LRU: a fully cached physical batch makes no encoder call, and a partial hit encodes only its deduplicated misses.
+
+The production-path evaluation is reproducible with `npm run benchmark:verify:relational-rrf`. It preserves the historical R5.5 artifact and records deployed physical-batch recall, cache behavior, and measured cold/hot timing separately in [`evaluations/retrieval-r5/`](action-compilation/fullcatalog-stabilized/evaluations/retrieval-r5/README.md); neither result is mislabeled as passing the historical recall gate.
 
 To capture the complete pre-shortlist context and immutable state evidence from
 a running Ledger (read-only, zero provider requests), use:
 
 ```sh
 npm run benchmark:capture:action-compilation -- \
-  --database .livingworld-v22/livingworld.sqlite \
+  --database .livingworld-v23/livingworld.sqlite \
   --execution <execution-id> \
   --output .livingworld-benchmarks/source/action-compilation
 ```
 
-Captured sources can be regenerated into a new benchmark version only by an
-explicit provider adapter. This is the sole path that may call a live
-FullCatalog model; offline retrieval evaluation never does:
+The capture command accepts only schema-v2
+`model.action_compilation.context.captured` events. It records the complete
+physical action batch, exact state, full pre-shortlist context, model/prompt/key
+versions, and pinned Composition. It makes no model call and does not mutate the
+game database.
+
+The canonical refresh command performs the only live FullCatalog calls. It
+uses the repository-owned regenerator and normal `ModelGateway`; there is no
+pluggable provider adapter:
 
 ```sh
-npm run benchmark:regenerate:action-compilation-reference -- \
-  --source .livingworld-benchmarks/source/action-compilation \
-  --output benchmarks/action-compilation/fullcatalog-stabilized \
-  --version 2 \
-  --provider-module ./scripts/your-fullcatalog-adapter.ts
+npm run benchmark:refresh:action-compilation-reference -- \
+  --database .livingworld-v23/livingworld.sqlite \
+  --instance <instance-id> \
+  --base benchmarks/action-compilation/fullcatalog-stabilized/v1 \
+  --version 2
 ```
 
-For a single command, `benchmark:refresh:action-compilation-reference` runs
-the read-only capture followed by this explicit versioned regeneration.
+Repeated `--execution` selections are supported. A previously captured input
+must be the exact `sources-000.jsonl.gz` file (or its directory) accompanied by
+its schema-v2 manifest; ordinary save/export JSON is not accepted.
 
-The exporter opens the Ledger read-only and makes no provider or network request. Use `--instance <instance-id>` to collect every Action Compilation execution in an instance. Frozen versions are never overwritten; export additional source executions into the next version.
+The direct exporter opens the Ledger read-only and makes no provider or network request. It accepts only executions pinned to `full-catalog@1`; relational executions are rejected with a pointer to the refresh command. Frozen versions are never overwritten.
 
 The exported manifest records source execution IDs and the observed provider,
 transport, logical invocation, and repair counts separately from the zero
@@ -169,8 +188,8 @@ multiple executions are combined.
   `evaluations/retrieval-graph-ab-v3/`; it references a dataset version and is
   safe to replace only for local scratch output with an explicit force flag.
 - Capture current executions with the read-only Ledger command before asking for
-  regeneration. Regeneration is the only command that may call a provider, and
-  it requires an explicit adapter plus an exact pre-step state snapshot.
+  regeneration. The explicit refresh command is the only benchmark command that
+  may call a provider, and every source requires an exact pre-step state snapshot.
 - Run `benchmark:verify:action-compilation-reference` after copying or
   archiving shards. Run `check:fast` after code or schema changes.
 - Keep Encoder and reranker assets local and record their hashes in experiment

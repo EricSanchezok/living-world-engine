@@ -14,6 +14,7 @@ import {
 } from "../mechanics/action-dependency";
 import {
   resolutionObservations,
+  finalCausalReviewContentHash,
   WORLD_STEP_CANDIDATE_SCHEMA_VERSION,
 } from "./execution";
 import { validatePublicInformationBoundary } from "../cognition/information-boundary";
@@ -449,6 +450,8 @@ function validateCandidateBoundary(
   }
   if (candidate.sourceStateHash !== contentHash(source)) throw new Error("execution candidate uses another source state");
   validateCandidateReactions(source, candidate, policyRoster);
+  const outcomeIds = candidate.resolution.proposal.outcomes.map(outcome => outcome.id);
+  if (new Set(outcomeIds).size !== outcomeIds.length) throw new Error("candidate contains duplicate outcome identities");
   if (new Set(actions.map((action) => action.actorId)).size !== actions.length) {
     throw new Error("execution candidate contains multiple actions for one Agent");
   }
@@ -992,6 +995,14 @@ export class CanonicalCommitter {
       candidate,
       policyRoster,
     );
+    if (resolution.causalVerification.verdict !== "accept" ||
+      !candidate.finalCausalReview || candidate.finalCausalReview.contentHash !== finalCausalReviewContentHash(candidate) ||
+      candidate.finalCausalReview.invocationIds.length === 0 ||
+      !candidate.finalCausalReview.invocationIds.every(id => candidate.modelAudits.some(audit =>
+        audit.role === "causal-verifier" && audit.promptVersion === candidate.finalCausalReview.promptVersion &&
+        audit.invocations.some(invocation => invocation.id === id)))) {
+      throw new Error("final causal review does not cover the committed candidate");
+    }
     transitioned.truth.rng = structuredClone(resolution.rng);
     for (const agentId of Object.keys(transitioned.agents)) {
       transitioned.agents[agentId] = applyObservationBindings(
