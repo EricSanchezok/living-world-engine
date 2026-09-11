@@ -59,6 +59,22 @@ export function perceptionAssessmentRequest(request: StructuredModelRequest<unkn
   if (!request.system.includes(originalRole)) throw new Error("assessment probe requires the known perception role asset");
   const system = request.system.replace(originalRole, assessmentSystem);
   const context = structuredClone(request.context) as Record<string, unknown>;
+  context.perceptionWorkItems = buildPerceptionWorkItems(request, input);
+  context.roleContract = {
+    role: "truth-perception",
+    modelOwns: ["explicit perception verdict for each assigned pair", "selection of existing evidence", "copy of selected current Fact values", "justified check choices"],
+    engineOwns: ["state and request binding", "pair and evidence validation", "check observer, onset question and Action causes from explicit pair associations", "opposed numeric source from the selected Rating", "numeric DC and modifier", "persistent identities", "randomness", "world commitment"],
+    existingReferenceRule: "Choose exact existing typed handles. Fact values and check observer/source identities must match the supplied evidence and assignment.",
+    failureRule: "Do not fabricate missing evidence or force a check. Use insufficient_evidence when a justified verdict cannot be reached.",
+  };
+  return { ...request, system, userPrompt, promptVersion: contentHash({ system, userPrompt }), context,
+    schema: perceptionAssessmentSchema, schemaName: "truth_perception_assessment_probe" };
+}
+
+/** Exact source work items shared by independent perception experiments. */
+export function buildPerceptionWorkItems(request: StructuredModelRequest<unknown>, input: Readonly<OnsetPerceptionInput>) {
+  validatePerceptionAssessmentInput(input);
+  const context = request.context;
   const resolver = createTruthReferenceResolver({ state: input.state, definition: input.definition, actions: input.actions, checkRequests: [] });
   const pairs = projectPerceptionTargets(input.perceptionTargets!, input.state, input.actions, resolver);
   const original = z.object({ task: z.object({ assignment: z.object({ perceptionTargets: z.unknown() }) }),
@@ -69,7 +85,7 @@ export function perceptionAssessmentRequest(request: StructuredModelRequest<unkn
     contentHash(original.state.actionSet.available) !== contentHash(input.actions.map(action => projectModelAction(action, resolver)))) {
     throw new Error("perception work item source differs from the actual request");
   }
-  context.perceptionWorkItems = pairs.map((pair, index) => {
+  return pairs.map((pair, index) => {
     const target = input.perceptionTargets![index]!, observer = input.state.agents[target.observerId]!;
     const action = input.actions.find(action => action.id === target.sourceActionId)!;
     const actor = input.state.agents[action.actorId]!;
@@ -83,15 +99,6 @@ export function perceptionAssessmentRequest(request: StructuredModelRequest<unkn
         .map(rating => ({ ratingRef: resolver.handleFor("rating", rating.id), value: rating.value })),
     };
   });
-  context.roleContract = {
-    role: "truth-perception",
-    modelOwns: ["explicit perception verdict for each assigned pair", "selection of existing evidence", "copy of selected current Fact values", "justified check choices"],
-    engineOwns: ["state and request binding", "pair and evidence validation", "check observer, onset question and Action causes from explicit pair associations", "opposed numeric source from the selected Rating", "numeric DC and modifier", "persistent identities", "randomness", "world commitment"],
-    existingReferenceRule: "Choose exact existing typed handles. Fact values and check observer/source identities must match the supplied evidence and assignment.",
-    failureRule: "Do not fabricate missing evidence or force a check. Use insufficient_evidence when a justified verdict cannot be reached.",
-  };
-  return { ...request, system, userPrompt, promptVersion: contentHash({ system, userPrompt }), context,
-    schema: perceptionAssessmentSchema, schemaName: "truth_perception_assessment_probe" };
 }
 
 /** An exact spatial index, with no visibility or reachability inference. */
