@@ -25,21 +25,31 @@ import { loadLocalEncoder, livingWorldCacheRoot, discoverLocalEncoderModelDirect
 import { MULTILINGUAL_E5_BASE_ASSET } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/model-assets";
 import { relationalRrfEncoderFingerprint, R5_RELATIONAL_PASSAGE_SCHEMA_VERSION } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/relational-rrf";
 
-const protocol = { id: "integrated-player-goal-diagnostic-v3", seed: 20260911, maxHttp: 120,
+const protocol = { id: "integrated-player-goal-diagnostic-v4", seed: 20260911, maxHttp: 120,
+  purpose: "unqualified-full-player-failure-localization", priorSourceQualification: "failed", promotionEligible: false,
+  knownCounterexamples: ["observer-source-role-confusion", "unsupported-barrier-identity", "unsupported-negative-assertions"],
   maxDispatchMs: 600_000, maxCommitsPerLease: 6, model: "deepseek-flash", thinking: "disabled",
   action: "向码头边靠着的领航人或搬运工打听哪里有便宜又安全的下榻处。",
-  interpretation: "One full player action through WorldHost and persisted state, with all 48 original Agents plus the external participant. Combined candidate diagnostic, not an isolated comparison or qualification. Review actual source semantics before another action. No historical preparations or model outputs are imported. Timing and repairs include every new inference call; bootstrap is reported separately from submission-to-completion latency." } as const;
+  interpretation: "One isolated full player action through WorldHost and persisted state, with all 48 original Agents plus the external participant. Prior source counterexamples remain failed qualification. This explicitly unqualified combined diagnostic locates actual critical-path and semantic failures; it neither promotes adapters nor changes prior source gates. Review actual source semantics before another action. No historical preparations or model outputs are imported. Timing and repairs include every new inference call; bootstrap is reported separately from submission-to-completion latency." } as const;
 const read = (file: string) => JSON.parse(readFileSync(file, "utf8"));
 const save = (root: string, file: string, value: unknown) => writeFileSync(path.join(root, file), `${JSON.stringify(value, null, 2)}\n`, { flag: "wx" });
+const checkedCodeRevision = () => {
+  if (execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim()) throw new Error("Commit checked code before preparing or running live gameplay");
+  return execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
+};
 const sourceHashes = () => Object.fromEntries(["scripts/experiments/player-integrated-playtest.ts",
   "scripts/operations/player-feedback-playtest.ts",
   "src/engine/benchmarks/step-efficiency/integrated-player-algorithm.ts",
   "src/engine/benchmarks/step-efficiency/agent-action-text.ts", "src/engine/prompts/shared/agent-action-text.md",
   "src/engine/prompts/shared/agent-action-text-raw.md", "src/engine/models/unmatched-closer-recovery.ts",
+  "src/engine/models/json-duplicate-keys.ts", "src/engine/models/terminal-root-closer-recovery.ts",
+  "src/engine/benchmarks/step-efficiency/perception-law-context.ts",
+  "src/engine/benchmarks/step-efficiency/perception-report-domains.ts",
   "src/engine/models/model-adapter.ts", "src/engine/algorithms/eager-reference/agent-mind.ts",
 ].map(file => [file, contentHash(readFileSync(file, "utf8"))]));
 
 export async function prepareIntegratedPlayer(root: string, registryRoot: string, snapshotHash: string) {
+  const codeRevision = checkedCodeRevision();
   mkdirSync(root, { recursive: false });
   const catalog = loadModelCatalog("config/models.yaml");
   const source = loadWorldTemplate("worlds/blackmarsh/world"), candidate = checkpointWorldTemplate(source);
@@ -80,7 +90,7 @@ export async function prepareIntegratedPlayer(root: string, registryRoot: string
     const retrieval = createActionCompilationRetrievalRuntimeProvider({ cacheRoot, encoder });
     await retrieval.preflight(algorithm, { worldContentHash: world.contentHash, state: world.initialState });
   } finally { cache.close(); await encoder.dispose?.(); }
-  const manifest = { protocol, sourceCodeHashes: sourceHashes(), algorithm, catalogHash: catalog.hash,
+  const manifest = { protocol, codeRevision, sourceCodeHashes: sourceHashes(), algorithm, catalogHash: catalog.hash,
     registrySnapshotHash: snapshotHash, profileBindings, sourceTemplateHash: contentHash(source), templateHash: contentHash(candidate),
     sourceWorldHash: baseline.contentHash, worldHash: world.contentHash, initialStateHash: contentHash(world.initialState),
     originalAgentIds: Object.keys(world.initialState.agents).sort(), originalEntityCount: Object.keys(world.initialState.truth.entities).length,
@@ -91,9 +101,9 @@ export async function prepareIntegratedPlayer(root: string, registryRoot: string
 }
 
 export async function runIntegratedPlayer(root: string) {
-  if (execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim()) throw new Error("Commit checked code before live gameplay");
+  const codeRevision = checkedCodeRevision();
   const manifest = read(path.join(root, "manifest.json"));
-  if (contentHash(manifest.protocol) !== contentHash(protocol) || contentHash(manifest.sourceCodeHashes) !== contentHash(sourceHashes()) ||
+  if (manifest.codeRevision !== codeRevision || contentHash(manifest.protocol) !== contentHash(protocol) || contentHash(manifest.sourceCodeHashes) !== contentHash(sourceHashes()) ||
     contentHash(manifest.algorithm) !== contentHash(integratedPlayerAlgorithmRef())) throw new Error("Prepared diagnostic drift");
   const directory = path.join(root, "run"); mkdirSync(directory, { recursive: false });
   const catalog = loadModelCatalog(path.join(root, "models.yaml"));

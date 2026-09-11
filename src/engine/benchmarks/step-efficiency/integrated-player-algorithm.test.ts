@@ -3,7 +3,7 @@ import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { expect, it } from "vitest";
 import { ScriptedModelProvider, deterministicModelOutput, deterministicActionCompilationBatch,
-  createTestModelCatalog } from "../../testing/model-provider";
+  createTestModelCatalog, createTestModelRegistry, deterministicOnsetReports } from "../../testing/model-provider";
 import type { ExistingReferenceHandle } from "../../contracts/model-context";
 import { loadWorldScript } from "../../../script/world-loader";
 import { MemoryWorldRepository } from "../../../script/world-repository";
@@ -17,6 +17,9 @@ import { MULTILINGUAL_E5_BASE_ASSET } from "../../algorithms/eager-reference/can
 import { CachedPassageEncoder } from "../../algorithms/eager-reference/candidate-retrieval/embedding-cache";
 import { actionCompilationPassagesForState } from "../../algorithms/eager-reference/candidate-retrieval/warmup";
 import { RecordingRuntimeObserver } from "../../runtime/observability";
+import { createModelGateway } from "../../models/model-gateway";
+import { TERMINAL_ROOT_CLOSER_RECOVERY } from "../../models/terminal-root-closer-recovery";
+import { PERCEPTION_REPORT_DOMAINS } from "./perception-report-domains";
 
 it.each([false, true])("pins the diagnostic producer through persistence with external reaction=%s", async externalReaction => {
   const root = mkdtempSync(path.join(tmpdir(), "integrated-player-"));
@@ -39,11 +42,30 @@ it.each([false, true])("pins the diagnostic producer through persistence with ex
   const cache = new CachedPassageEncoder(encoder, MULTILINGUAL_E5_BASE_ASSET.encoderFingerprint, root);
   await cache.encodePassages({ worldContentHash: definition.contentHash, passages: actionCompilationPassagesForState(definition.initialState), allowWrite: true });
   cache.close();
+  let perceptionCalls = 0, perceptionContext: unknown;
+  const gateway = createModelGateway(provider.catalog, { TEST_MODEL_API_KEY: "fixture-key" }, {
+    registry: createTestModelRegistry(provider.catalog), maxTransportAttempts: 1, fetch: async (_url, init) => {
+      perceptionCalls++;
+      const body = JSON.parse(String(init?.body));
+      expect(body.messages[1].content).toContain("Identity binding only");
+      expect(body.messages[1].content).toContain("perception_entity_assertion");
+      const content = JSON.stringify({ kind: "done", reports: deterministicOnsetReports(perceptionContext) }) + "}";
+      return Response.json({ id: "perception-fixture", object: "chat.completion", created: 1, model: body.model,
+        choices: [{ index: 0, message: { role: "assistant", content }, finish_reason: "stop" }],
+        usage: { prompt_tokens: 20, completion_tokens: 30, total_tokens: 50 } });
+    },
+  });
   const generate = provider.generateStructured.bind(provider);
   provider.generateStructured = request => {
+    if (request.role === "truth-perception") {
+      expect(request.jsonSyntaxRecovery).toBe(TERMINAL_ROOT_CLOSER_RECOVERY);
+      expect(request.promptVersion).toContain(PERCEPTION_REPORT_DOMAINS);
+      perceptionContext = request.context;
+      return gateway.generateStructured(request);
+    }
     const context = request.context as { state?: { codec?: string } };
-    // This persistence test replaces the structured provider boundary, which
-    // returns canonical values. Each wire adapter has its own codec tests.
+    // Other model roles return canonical fixture values; perception uses the
+    // actual registered request, gateway, parser and materializer above.
     return generate({ ...request, wireJsonSchema: undefined, preprocessOutput: value => {
       const fillFixtureDefaults = (node: unknown): void => {
         if (!node || typeof node !== "object") return;
@@ -81,6 +103,8 @@ it.each([false, true])("pins the diagnostic producer through persistence with ex
     expect(result.completedElapsedMs).toBeGreaterThan(0);
     const document = database.readInstance(created.summary.id).document;
     expect(document.executionAlgorithm).toEqual(ref);
+    expect(ref.version).toBe("9");
+    if (externalReaction) expect(perceptionCalls).toBeGreaterThan(0);
     const executions = database.executions({ instanceId: created.summary.id });
     const algorithmExecutions = executions.filter(execution => execution.manifest.kind === "algorithm");
     expect(algorithmExecutions).toHaveLength(externalReaction ? 3 : 2);
