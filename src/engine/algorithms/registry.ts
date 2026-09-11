@@ -451,7 +451,7 @@ const definitions = [
     children: noChildren,
   }, (algorithmIdentity, config, children) => new SymbolRepairAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({
-    ...identity("onset-perception", "model-onset-perception", "4"),
+    ...identity("onset-perception", "model-onset-perception", "5"),
     maturity: "reference",
     configSchema: z.strictObject({ fallback: z.literal("global"), contextMode: z.literal("full"), ratingChoices: z.literal(PERCEPTION_RATING_CHOICES).optional() }),
     children: noChildren,

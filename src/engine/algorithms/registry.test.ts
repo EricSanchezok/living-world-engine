@@ -63,7 +63,7 @@ describe("built-in algorithm registry", () => {
       "interaction-grounding/model-interaction-grounding@1",
       "observation-rendering/model-observation-rendering@2",
       "observation-rendering/source-bound-observation-rendering@2",
-      "onset-perception/model-onset-perception@4",
+      "onset-perception/model-onset-perception@5",
       "output-recovery/localized-repair-bisect@1",
       "reaction-decision/model-reaction-decision@1",
       "reaction-resolution/onset-reaction@1",

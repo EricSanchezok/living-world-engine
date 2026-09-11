@@ -7,8 +7,9 @@ import { perceptionDirectiveSchema } from "../../contracts/llm-schemas";
 import type { ModelReferenceCatalog } from "../../contracts/model-context";
 import { buildTruthContext, createTruthReferenceResolver } from "../../contracts/prompts";
 import { contentHash } from "../../models/model-audit";
+import { createModelGateway } from "../../models/model-gateway";
 import { loadPromptAsset, promptBundle } from "../../prompts";
-import { ScriptedModelProvider, type ScriptedModelHandler } from "../../testing/model-provider";
+import { ScriptedModelProvider, createTestModelRegistry, type ScriptedModelHandler } from "../../testing/model-provider";
 import { selectTemporalBoundary } from "../temporal";
 import { TruthEngine } from "../truth-engine";
 
@@ -36,6 +37,55 @@ function request(overrides: Record<string, unknown> = {}) {
 }
 
 function directive(check: Record<string, unknown>) { return { kind: "request_checks", requests: [check] }; }
+
+it.each(["references", "schema"])("retains independent perception diagnostics after a gateway %s rejection", async mode => {
+  const good = [0, 1, 2].map(i => request({ proposalKey: `notice-${i}`, actorRef: "ref:entity:keeper", ratingRef: "ref:rating:resolve:keeper" }));
+  const bad = structuredClone(good);
+  Object.assign(bad[0]!, { ratingRef: "ref:rating:resolve:ghost" });
+  Object.assign(bad[1]!, { ratingRef: "ref:rating:resolve:player" });
+  Object.assign(bad[2]!, { actorRef: "ref:entity:player", ratingRef: "ref:rating:resolve:player" });
+  const rejected = mode === "references" ? { kind: "request_checks", requests: bad } : { kind: "request_checks", requests: "malformed" };
+  const repaired = fixture(() => ({ kind: "done" }), 1);
+  repaired.input.perceptionTargets = [{ observerId: "keeper", sourceActionId: "inspect-key" }];
+  const before = contentHash(repaired.input), contexts: unknown[] = [], bodies: string[] = [];
+  let calls = 0;
+  const catalog = repaired.provider.catalog;
+  const gateway = createModelGateway(catalog, { TEST_MODEL_API_KEY: "test-only" }, {
+    registry: createTestModelRegistry(catalog), maxTransportAttempts: 1,
+    fetchForAccount: () => async (_url, init) => {
+      bodies.push(String(init?.body));
+      const output = calls++ === 0 ? rejected : calls === 2 ? { kind: "request_checks", requests: good } : { kind: "done" };
+      return new Response(JSON.stringify({ id: `perception-diagnostics-${calls}`, model: "scripted:truth-deepseek",
+        choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(output) }, finish_reason: "stop" }],
+        usage: { prompt_tokens: 100, completion_tokens: 20, total_tokens: 120 } }),
+      { status: 200, headers: { "content-type": "application/json" } });
+    },
+  });
+  repaired.provider.generateStructured = request => { contexts.push(structuredClone(request.context)); return gateway.generateStructured(request); };
+  let cleanCalls = 0;
+  const clean = fixture(() => cleanCalls++ === 0 ? { kind: "request_checks", requests: good } : { kind: "done" });
+  clean.input.perceptionTargets = structuredClone(repaired.input.perceptionTargets);
+  const a = await clean.run(), b = await repaired.run();
+  expect(calls).toBe(3);
+  expect(b.requests).toEqual(a.requests); expect(b.checks).toEqual(a.checks); expect(b.rng).toEqual(a.rng);
+  expect(contentHash(repaired.input)).toBe(before);
+  const repair = (contexts[1] as { repair: { previousOutput: unknown; issues: Array<{ code: string; path: unknown; allowedHandles?: string[] }> }; state: { committedCheckRequests: unknown[] } });
+  expect(repair.repair.previousOutput).toEqual(rejected);
+  expect(repair.state.committedCheckRequests).toEqual([]);
+  if (mode === "references") {
+    expect(repair.repair.issues).toEqual(expect.arrayContaining([
+      expect.objectContaining({ code: "reference.unknown_handle", path: ["requests", 0, "ratingRef"] }),
+      expect.objectContaining({ code: "perception.actor_rating_owner", path: ["requests", 1, "ratingRef"], allowedHandles: ["ref:rating:resolve:keeper"] }),
+      expect.objectContaining({ code: "perception.unassigned_observer", path: ["requests", 2, "actorRef"] }),
+    ]));
+    expect(bodies[1]).toContain("perception.actor_rating_owner");
+  } else {
+    expect(repair.repair.issues.some(issue => issue.code.startsWith("perception."))).toBe(false);
+  }
+  expect(b.modelAudit.invocations).toHaveLength(3);
+  expect(b.modelAudit.invocations[0]!.outputDisposition).toBe("rejected");
+  expect(b.modelAudit.invocations.every(invocation => invocation.tokenUsage.input === 100 && invocation.tokenUsage.output === 20)).toBe(true);
+});
 
 it.each(["observer", "source-action", "missing-action", "empty-assignment"])(
   "rejects a mechanically valid check outside focused work before RNG (%s)", async mode => {

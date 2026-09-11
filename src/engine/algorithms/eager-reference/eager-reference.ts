@@ -372,7 +372,7 @@ export function createEagerReferenceAlgorithmRef(
       onsetPerception: defineAlgorithmRef({
         role: "onset-perception",
         id: "model-onset-perception",
-        version: "4",
+        version: "5",
         contractVersion: 1,
         config: { fallback: "global", contextMode: "full" },
       }),

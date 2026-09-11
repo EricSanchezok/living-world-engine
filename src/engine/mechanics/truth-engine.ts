@@ -264,6 +264,8 @@ interface ValidatedCallInput<T> {
   scope: ModelExecutionScope;
   buildContext: (issues: readonly PromptValidationIssue[]) => unknown;
   validate?: (value: T) => void;
+  /** Pure diagnostics for a schema-valid candidate already rejected by the provider. */
+  diagnoseRejected?: (value: T) => readonly PromptValidationIssue[];
   repairAttempts: number;
   invocationOffset?: number;
   repairScope?: SemanticRepairScope;
@@ -462,17 +464,24 @@ async function generateValidated<T>(input: ValidatedCallInput<T>): Promise<{
         return { ...generated, value: logicalValue };
       },
       validate: (value) => input.validate?.(value),
-      classify: (error) => validationIssues(error).map((issue) => semanticIssue(
-        issue.code,
-        issue.message,
-        {
-          path: issue.path,
-          class: issue.class ?? "semantic",
-          originalValue: issue.originalValue,
-          allowedHandles: issue.allowedHandles,
-          targetIds: input.targetIds ? [...input.targetIds] : undefined,
-        },
-      )),
+      classify: (error) => {
+        const issues = validationIssues(error);
+        if (error instanceof ModelOutputError && input.diagnoseRejected) {
+          const candidate = input.schema.safeParse(error.rawValue);
+          if (candidate.success) issues.push(...input.diagnoseRejected(candidate.data));
+        }
+        return issues.map((issue) => semanticIssue(
+          issue.code,
+          issue.message,
+          {
+            path: issue.path,
+            class: issue.class ?? "semantic",
+            originalValue: issue.originalValue,
+            allowedHandles: issue.allowedHandles,
+            targetIds: input.targetIds ? [...input.targetIds] : undefined,
+          },
+        ));
+      },
       onRejected: ({ context, audit, issues, error }) => {
         const invocation = audit?.invocations.at(-1);
         if (audit) setModelInvocationOutcome(audit, "rejected", issues.map((issue) => issue.code));
@@ -719,6 +728,9 @@ async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
         if (materializationIssues.length) throw new ModelCandidateValidationError(materializationIssues);
         accepted.round = normalized;
       },
+      diagnoseRejected: (directive) => directive.kind === "request_checks"
+        ? perceptionDraftRelationIssues(directive.requests, { ...referenceInput, perceptionTargets: input.perceptionTargets }, resolver)
+        : [],
       repairAttempts: input.repairAttempts,
       invocationOffset: audits.reduce((count, audit) => count + audit.invocations.length, 0),
       repairScope: "step",

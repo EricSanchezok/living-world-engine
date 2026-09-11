@@ -19,7 +19,7 @@ The executable registry is authoritative. Maturity describes enrollment policy a
 | `interaction-grounding` | `model-interaction-grounding@1` | 1 | reference | `scheduling` → `work-scheduling`<br>`recovery` → `output-recovery` |
 | `observation-rendering` | `model-observation-rendering@2` | 1 | reference | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
 | `observation-rendering` | `source-bound-observation-rendering@2` | 1 | reference | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
-| `onset-perception` | `model-onset-perception@4` | 1 | reference | — |
+| `onset-perception` | `model-onset-perception@5` | 1 | reference | — |
 | `output-recovery` | `localized-repair-bisect@1` | 1 | reference | — |
 | `reaction-decision` | `model-reaction-decision@1` | 1 | reference | — |
 | `reaction-resolution` | `onset-reaction@1` | 1 | reference | `onsetPerception` → `onset-perception`<br>`reactionDecision` → `reaction-decision`<br>`scheduling` → `work-scheduling`<br>`recovery` → `output-recovery` |
@@ -61,11 +61,11 @@ These implementations are replaceable inside the offline evaluation harness, but
 
 ## Default composition
 
-Root hash: `160344b7b976546e1c87355eecb9f5f1d4fa5457ea25b9375e52b034c8db979b`
+Root hash: `ae4c665e8cc88c3629642afabb072e0606b121d6e5dc204d8e09aa95f13710a1`
 
 | Node path | Role | Algorithm | Contract | Manifest hash |
 | --- | --- | --- | ---: | --- |
-| `root` | `world-execution` | `eager-reference@22` | 8 | `160344b7b976546e1c87355eecb9f5f1d4fa5457ea25b9375e52b034c8db979b` |
+| `root` | `world-execution` | `eager-reference@22` | 8 | `ae4c665e8cc88c3629642afabb072e0606b121d6e5dc204d8e09aa95f13710a1` |
 | `root.agentCognition` | `agent-cognition` | `model-agent-cognition@1` | 1 | `1daa82dc5f667b7486ecddcbc1cd07d57accf916cb66a2d7d7ae32cf04d9630d` |
 | `root.agentCognition.batching` | `work-batching` | `bounded-slot-batching@1` | 1 | `8a6cc0ef438150ba0f22f8671b1ccedb81468f0c407976caae1521102e771981` |
 | `root.agentCognition.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |
@@ -79,8 +79,8 @@ Root hash: `160344b7b976546e1c87355eecb9f5f1d4fa5457ea25b9375e52b034c8db979b`
 | `root.interactionGrounding` | `interaction-grounding` | `model-interaction-grounding@1` | 1 | `b8f404f7113e6201b9302aa8e1a6a8d8e99a02442daeaa347f6c0da36126983a` |
 | `root.interactionGrounding.scheduling` | `work-scheduling` | `bounded-concurrency@1` | 1 | `c7439a837f29219df2f742ad910a15bf05d759586e1ed95260f724aba6a33b84` |
 | `root.interactionGrounding.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |
-| `root.reactionResolution` | `reaction-resolution` | `onset-reaction@1` | 1 | `92d0da0d7d3d8a4cd19edce9261a7aaa15726ff598f6edc942b58f0dd6a435c8` |
-| `root.reactionResolution.onsetPerception` | `onset-perception` | `model-onset-perception@4` | 1 | `adcdf35faa5953fe240241c7d62344b57d5128ddab2411ada315ff7c816a5338` |
+| `root.reactionResolution` | `reaction-resolution` | `onset-reaction@1` | 1 | `d464056017c4c192ee8fad9f1c4a92ae80b516eaed3c4f5285ef44d282f84dc1` |
+| `root.reactionResolution.onsetPerception` | `onset-perception` | `model-onset-perception@5` | 1 | `b46a293d5e2bd916b73e27676af1a71cd1ffaca60b020b9ccd7aebf0a440b432` |
 | `root.reactionResolution.reactionDecision` | `reaction-decision` | `model-reaction-decision@1` | 1 | `f601d8335328d0689059ce16d69ac4548c766b5d36b67f3919ecce3f05fcccac` |
 | `root.reactionResolution.scheduling` | `work-scheduling` | `bounded-concurrency@1` | 1 | `2348f501124ef2ed707eec5123ef91a1639a9c3375804201e1b19be2aaf3cf69` |
 | `root.reactionResolution.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |

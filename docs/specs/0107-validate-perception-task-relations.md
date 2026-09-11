@@ -13,7 +13,9 @@ When focused observer/source-action pairs are supplied, each proposed check must
 
 The existing owned observer Rating, owned opposing Rating, identical opposed source and single mechanical use requirements produce field-local diagnostics with source-bound legal handles. Independent draft errors across the complete batch are collected for one repair. Validation preserves the rejected output, full source context, original order, repair limits and model settings; it never chooses another observer, source action, aptitude, target or stakes. Optional null aptitude remains an explicit model decision, not an automatic correction.
 
-All drafts pass relation validation and existing materialization before the batch consumes randomness. Remaining materialization errors are collected across independent requests. Accepted checks retain the existing runtime identity, numeric rules, RNG order and atomicity. The default pins onset-perception@4; optional rating-choice representation remains experimental and is not enabled by this repair.
+When the model gateway rejects a schema-valid perception candidate for unresolved references, the repair classifier also runs the existing pure draft-relation diagnostics on that exact rejected candidate. It preserves the gateway rejection, original reference issues, source-bound legal choices and full candidate. Schema-invalid or unavailable values receive no speculative relation diagnostics; no rejected draft is materialized or consumes randomness. This closes the earlier provider-return gap without widening acceptance or changing model output.
+
+All drafts pass relation validation and existing materialization before the batch consumes randomness. Remaining materialization errors are collected across independent requests. Accepted checks retain the existing runtime identity, numeric rules, RNG order and atomicity. The default pins onset-perception@5; optional rating-choice representation remains experimental and is not enabled by this repair.
 
 ## Plan
 
@@ -22,6 +24,8 @@ Validate focused output task membership and report complete ownership errors thr
 ## Verification
 
 Exercise the real entry with wrong observers, mismatched actions, empty/unfocused assignments, coalesced assigned actions, additional causal evidence, independent owned/opposed/source errors and a valid repair. Verify exact paths and allowed handles in the subsequent physical request, all errors in one repair, unchanged input and identical clean/repaired checks and RNG. Replay the recorded mismatches without model HTTP and retain historical results unchanged. Run focused tests and check:fast before committing; correctness guards alone do not establish 60-second feedback.
+
+The gateway regression combines unknown references with independently invalid owner/task relations in one response, verifies both categories reach the first repair, and compares repaired checks and RNG with a clean execution. Malformed output must retain its schema error without fabricated draft diagnostics. Preserve usage, original rejection and terminal failure when recovery does not fix the candidate.
 
 ## Evidence
 
