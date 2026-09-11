@@ -133,16 +133,17 @@ it("rejects another observer's local alias and future event provenance", () => {
   expect(() => materializeOnsetPerceptionReceipts(input, [draft])).toThrow("before action resolution");
 });
 
-it.each(["success", "failure", "other-observer", "other-action", "no-world-basis", "uncommitted"])(
+it.each(["success", "failure", "dropped-success", "dropped-failure", "other-observer", "other-action", "no-world-basis", "uncommitted"])(
   "validates fixed check provenance (%s) without drawing again", mode => {
     const input = fixture();
     input.requests = [{ id: "onset-check", actorId: mode === "other-observer" ? "player" : "keeper", targetId: "player", ratingId: null,
-      dc: mode === "failure" ? 100 : 0, modifier: 0, modifierSources: [], phase: "perception", mode: "normal", visibility: "full",
+      dc: mode === "failure" || mode === "dropped-failure" ? 100 : 0, modifier: 0, modifierSources: [], phase: "perception", mode: "normal", visibility: "full",
       stakes: "Notice the present movement", causes: [{ kind: "action", id: mode === "other-action" ? "other-onset" : "player-onset" },
         ...(mode === "no-world-basis" ? [] : [{ kind: "law" as const, id: "time-passes" }])] }];
     input.checks = mode === "uncommitted" ? [] : resolveD20Checks(input.state.truth.rng, input.requests).results;
     const draft = report();
     draft.checkRefs = [createTruthReferenceResolver({ ...input, checkRequests: input.requests }).handleFor("check", "onset-check")];
+    if (mode.startsWith("dropped-")) draft.checkRefs = [];
     const before = contentHash(input);
     if (mode === "success") expect(materializeOnsetPerceptionReceipts(input, [draft])[0]).toMatchObject({ checkIds: ["onset-check"] });
     else expect(() => materializeOnsetPerceptionReceipts(input, [draft])).toThrow();

@@ -1,3 +1,4 @@
+import type { WorldStepPreparation } from "../../../runtime/execution";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import {
@@ -22,6 +23,7 @@ import {
   deterministicInteractionDependency,
   deterministicAgentMindBatch,
   deterministicModelOutput,
+  deterministicOnsetReports,
   ScriptedModelProvider,
 } from "../../../testing/model-provider";
 import {
@@ -427,11 +429,13 @@ describe("eager reference safeguards", () => {
     workbenchPoolId = Object.values(definition.initialState.truth.sharedActivityResourcePools)[0]!.id;
     const delegate = new EagerReferenceAlgorithm(provider);
     let latestCandidate: import("../../../runtime/execution").WorldStepCandidate | undefined;
+    let frozenPreparation: WorldStepPreparation;
     const algorithm: WorldExecutionAlgorithm = {
       manifest: delegate.manifest,
       bootstrap: (input, context) => delegate.bootstrap(input, context),
       prepareStep: (input, context) => delegate.prepareStep(input, context),
       completeStep: async (input, preparation, reactions, context) => {
+        frozenPreparation = structuredClone(preparation);
         latestCandidate = await delegate.completeStep(input, preparation, reactions, context);
         return latestCandidate;
       },
@@ -501,6 +505,7 @@ describe("eager reference safeguards", () => {
       forged,
       secondRoster,
       definition.runtimeDefaults.maxAutonomousSpanSeconds,
+      { definition, preparation: frozenPreparation! },
     )).toThrow("admissions do not match trusted capacity allocation");
 
     const released = await engine.step({
@@ -1938,6 +1943,7 @@ describe("eager reference safeguards", () => {
 
   it("creates a decision point when another action produces an authorized relevant observation", async () => {
     const provider = new ScriptedModelProvider(({ role, profileId, context }) => {
+      if (role === "truth-perception") return { kind: "done", reports: deterministicOnsetReports(context, "no_stimulus") };
       if (role === "action-compilation") {
         return deterministicActionCompilationBatch(profileId, context, (compilation, { action, temporalEvidence }) => {
           if (action.rawText.includes("100公里")) {
@@ -2092,23 +2098,13 @@ describe("eager reference safeguards", () => {
         });
       }
       if (role === "truth-perception") {
-        const playerAction = assignedActions(context)
-          .find((action) => action.actorId === "player")!;
-        return {
-          kind: "request_reactions",
-          requests: [{
-            agentRef: referenceHandleFor("agent", "keeper"),
-            sourceActionRef: referenceHandleFor("action", playerAction.id),
-            stimulus: {
-              summary: "旅人突然有所动作。",
-              introductions: [],
-              apparentClaims: [],
-              sourceEventRefs: [],
-            },
-            basis: [{ kind: "shared_placement", placementRef: referenceHandleFor("placement", "courtyard") }],
-          }],
-        };
+        const targets = (context as { task: { assignment: { perceptionTargets: Array<{ observerRef: string }> } } }).task.assignment.perceptionTargets;
+        return { kind: "done", reports: deterministicOnsetReports(context, "no_stimulus").map(report =>
+          targets[report.targetIndex]!.observerRef === referenceHandleFor("entity", "keeper")
+            ? { ...report, kind: "perceived", stimulus: { summary: "旅人突然有所动作。", introductions: [], apparentClaims: [], sourceEventRefs: [] } }
+            : report) };
       }
+
       if (role === "agent-reaction") {
         return {
           kind: "replace",
@@ -2297,7 +2293,7 @@ describe("eager reference safeguards", () => {
           { observerRef: referenceHandleFor("entity", "keeper"), sourceActionRef: referenceHandleFor("action", playerAction.id) },
           { observerRef: referenceHandleFor("entity", "player"), sourceActionRef: referenceHandleFor("action", keeperAction.id) },
         ] } } });
-        if (perceptionRounds > 1) return { kind: "done" };
+        if (perceptionRounds > 1) return { kind: "done", reports: deterministicOnsetReports(context) };
         return {
           kind: "request_checks",
           requests: [{
@@ -2361,11 +2357,9 @@ describe("eager reference safeguards", () => {
     }
     expect(result.committed.reactionRequests).toContainEqual(expect.objectContaining({
       agentId: "keeper",
-      basis: [expect.objectContaining({ kind: "perception_check" })],
+      perceptionReceiptHash: expect.any(String),
     }));
-    const checkId = result.committed.reactionRequests
-      .find((request) => request.agentId === "keeper")!.basis
-      .find((basis) => basis.kind === "perception_check")!.checkId;
+    const checkId = result.committed.checkRequests.find(request => request.actorId === "keeper" && request.phase === "perception")!.id;
     expect(result.committed.checkRequests).toContainEqual(expect.objectContaining({
       id: checkId,
       actorId: "keeper",
@@ -2388,6 +2382,7 @@ describe("eager reference safeguards", () => {
     { mode: "non-interruptible" as const, interruptible: false },
   ])("does not open a reaction round for a $mode action onset", async ({ mode, interruptible }) => {
     const provider = new ScriptedModelProvider(({ role, profileId, context }) => {
+      if (role === "truth-perception") return { kind: "done", reports: deterministicOnsetReports(context, "no_stimulus") };
       if (role === "action-compilation") {
         return deterministicActionCompilationBatch(profileId, context, (compilation) => {
           compilation.interactionDependency = deterministicInteractionDependency({

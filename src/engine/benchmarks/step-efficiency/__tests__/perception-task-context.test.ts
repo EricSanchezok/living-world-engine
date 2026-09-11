@@ -1,3 +1,4 @@
+import { withNoStimulusCompletion, noStimulusReportsForTargets } from "../../../testing/model-provider";
 import path from "node:path";
 import { expect, it } from "vitest";
 import type { OnsetPerceptionInput } from "../../../algorithms/roles";
@@ -31,7 +32,7 @@ function fixture() {
 }
 
 async function requestFixture() {
-  const f = fixture(), provider = new ScriptedModelProvider(() => ({ kind: "done" }), f.catalog, false);
+  const f = fixture(), provider = new ScriptedModelProvider(withNoStimulusCompletion(() => ({ kind: "done" })), f.catalog, false);
   let request!: StructuredModelRequest<unknown>;
   const generate = provider.generateStructured.bind(provider);
   provider.generateStructured = r => { request = r; return generate(r); };
@@ -46,7 +47,7 @@ it.each([null, "ref:rating:resolve:keeper"])("preserves real HTTP outputs, repai
     const gateway = createModelGateway(f.catalog, { TEST_MODEL_API_KEY: "test-only" }, { registry: createTestModelRegistry(f.catalog), maxTransportAttempts: 1,
       fetchForAccount: () => async (_url, init) => {
         bodies.push(String(init?.body));
-        const value = bodies.length === 3 ? { kind: "done" } : { kind: "request_checks", requests: [check(bodies.length === 1 ? "ref:rating:resolve:player" : aptitude)] };
+        const value = bodies.length === 3 ? { kind: "done", reports: noStimulusReportsForTargets(f.input) } : { kind: "request_checks", requests: [check(bodies.length === 1 ? "ref:rating:resolve:player" : aptitude)] };
         return new Response(JSON.stringify({ id: `task-${bodies.length}`, model: "scripted:truth-deepseek",
           choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(value) }, finish_reason: "stop" }],
           usage: { prompt_tokens: 100, completion_tokens: 20, total_tokens: 120 } }), { status: 200, headers: { "content-type": "application/json" } });

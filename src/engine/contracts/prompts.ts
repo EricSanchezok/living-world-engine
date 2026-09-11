@@ -1858,11 +1858,7 @@ export function buildTruthContext(input: {
         ? { kind: request.originalIntent.kind, actionRef: maybeModelHandle(modelRefs, "action", request.originalIntent.actionId) }
         : { kind: request.originalIntent.kind, activityRef: maybeModelHandle(modelRefs, "activity", request.originalIntent.activityId), sourceActionRef: maybeModelHandle(modelRefs, "action", request.originalIntent.sourceActionId) },
       stimulus: projectModelObservation(request.stimulus, modelRefs),
-      basis: request.basis.map((basis) => basis.kind === "shared_placement"
-        ? { kind: basis.kind, placementRef: modelHandle(modelRefs, "placement", basis.placementId) }
-        : basis.kind === "fact"
-          ? { kind: basis.kind, factRef: modelHandle(modelRefs, "fact", basis.factId) }
-          : { kind: basis.kind, checkRef: modelHandle(modelRefs, "check", basis.checkId) }),
+      perceptionReceiptHash: request.perceptionReceiptHash,
     })),
     reactionDecisions: input.reactionDecisions.map((decision) => ({
       requestRef: maybeModelHandle(modelRefs, "operation", decision.requestId),

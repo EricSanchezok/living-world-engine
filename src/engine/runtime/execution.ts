@@ -1,3 +1,5 @@
+import type { OnsetPerceptionReceipt } from "../mechanics/onset-receipts";
+import type { PerceptionTarget } from "../contracts/perception-references";
 import type { AgentMindOutput, ModelCausalAssertion } from "../contracts/llm-schemas";
 import { contentHash } from "../models/model-audit";
 import type {
@@ -63,10 +65,10 @@ export type { AlgorithmRef } from "../algorithms/composition";
 
 export type ExecutionKind = "interactive" | "diagnostic" | "benchmark" | "replay";
 
-export const WORLD_EXECUTION_CONTRACT_VERSION = 8 as const;
+export const WORLD_EXECUTION_CONTRACT_VERSION = 9 as const;
 export const ENGINE_OPERATION_CONTRACT_VERSION = 1 as const;
-export const WORLD_STEP_CANDIDATE_SCHEMA_VERSION = 6 as const;
-export const WORLD_STEP_PREPARATION_SCHEMA_VERSION = 5 as const;
+export const WORLD_STEP_CANDIDATE_SCHEMA_VERSION = 7 as const;
+export const WORLD_STEP_PREPARATION_SCHEMA_VERSION = 6 as const;
 
 export class StepPreparationInvalidatedError extends Error {
   constructor(message = "step preparation no longer matches its execution inputs") {
@@ -369,7 +371,17 @@ export interface WorldStepDiagnostics extends AlgorithmCandidateDiagnostics {
   };
 }
 
+export interface OnsetPerceptionTranscript {
+  targets: PerceptionTarget[];
+  receipts: OnsetPerceptionReceipt[];
+  requests: D20CheckRequest[];
+  checks: D20CheckResult[];
+  commitmentRounds: CommitmentRound[];
+  rng: SeededRngState;
+}
+
 export interface WorldStepCandidate {
+  onsetPerception: OnsetPerceptionTranscript;
   schemaVersion: typeof WORLD_STEP_CANDIDATE_SCHEMA_VERSION;
   sourceStateHash: string;
   resolution: WorldResolutionCandidate;
@@ -394,12 +406,14 @@ export interface WorldStepCandidate {
 
 /** Bind reviewed world behavior independently of subsequent cognition work. */
 export function finalCausalReviewContentHash(candidate: Pick<WorldStepCandidate,
-  "sourceStateHash" | "resolution" | "temporalBoundary" | "temporalState">): string {
-  return contentHash({ sourceStateHash: candidate.sourceStateHash, resolution: candidate.resolution,
+  "sourceStateHash" | "resolution" | "temporalBoundary" | "temporalState" | "onsetPerception">): string {
+  return contentHash({ sourceStateHash: candidate.sourceStateHash, resolution: candidate.resolution, onsetPerception: candidate.onsetPerception,
     temporalBoundary: candidate.temporalBoundary, temporalState: candidate.temporalState });
 }
 
 export interface WorldStepPreparation {
+  onsetPerception: OnsetPerceptionTranscript;
+  reactionRequests: ReactionRequest[];
   schemaVersion: typeof WORLD_STEP_PREPARATION_SCHEMA_VERSION;
   id: string;
   sourceStateHash: string;

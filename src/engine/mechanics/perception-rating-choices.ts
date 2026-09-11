@@ -71,7 +71,7 @@ export class PerceptionRatingChoiceCodec {
     });
     this.schema = z.discriminatedUnion("kind", [
       z.strictObject({ kind: z.literal("request_checks"), requests: z.array(wireCheck).min(1) }),
-      z.strictObject({ kind: z.literal("done") }),
+      perceptionDirectiveSchema.options[1],
     ]);
     this.bindingHash = contentHash({ version: PERCEPTION_RATING_CHOICES, sourceState: state, unmodifiedObservers, ownedRatings });
     context.perceptionRatingChoices = { version: PERCEPTION_RATING_CHOICES, bindingHash: this.bindingHash,

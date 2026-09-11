@@ -1,3 +1,4 @@
+import { withNoStimulusCompletion } from "../../../testing/model-provider";
 import path from "node:path";
 import { expect, it } from "vitest";
 import type { OnsetPerceptionInput } from "../../../algorithms/roles";
@@ -16,7 +17,7 @@ import { PerceptionSelectionCodec } from "../perception-selection-codec";
 const h = (value: string) => existingReferenceHandleSchema.parse(value);
 const k = (value: string) => proposalKeySchema.parse(value);
 async function fixture(options: { value?: FactValue; shared?: boolean; literalText?: boolean } = {}) {
-  const provider = new ScriptedModelProvider(() => ({ kind: "done" }), undefined, false);
+  const provider = new ScriptedModelProvider(withNoStimulusCompletion(() => ({ kind: "done" })), undefined, false);
   const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 47, modelCatalog: provider.catalog });
   const state = structuredClone(definition.initialState);
   state.truth.facts.route = { id: "route", subjectId: "player", predicate: "access", value: options.value ?? { kind: "text", value: "open" },
@@ -158,7 +159,7 @@ it("preserves materialization, RNG and actual reaction-consumer eligibility thro
   const decoded = codec.decodeOutput(codec.encodeOutput(draft), codec.bindingHash);
   const run = async (value: PerceptionAssessmentDraft) => {
     let calls = 0;
-    const provider = new ScriptedModelProvider(() => ++calls === 1 ? validatePerceptionAssessment(input, value, contentHash(input.state)).diagnosticDirective : { kind: "done" }, undefined, false);
+    const provider = new ScriptedModelProvider(withNoStimulusCompletion(() => ++calls === 1 ? validatePerceptionAssessment(input, value, contentHash(input.state)).diagnosticDirective : { kind: "done" }), undefined, false);
     const { modelAudit, ...result } = await new TruthEngine(provider, { repairAttempts: 0 }).perceiveOnset(input, scope);
     expect(provider.requests).toHaveLength(2);
     expect(modelAudit.invocations).toHaveLength(2);

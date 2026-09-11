@@ -87,6 +87,12 @@ export function validateOnsetPerceptionReceipts(
       if (receipt.kind === "perceived" && !result.succeeded) throw new Error("perceived onset depends on a failed check");
     }
     if (receipt.kind === "perceived") {
+      const hasCommittedUncertainty = input.requests.some(request => request.phase === "perception" &&
+        request.actorId === input.state.agents[receipt.observerId]!.entityId &&
+        request.causes.some(cause => cause.kind === "action" && cause.id === receipt.sourceActionId));
+      if (hasCommittedUncertainty && receipt.checkIds.length === 0) {
+        throw new Error("perceived onset cannot bypass its committed perception checks");
+      }
       if (receipt.stimulus.observerId !== receipt.observerId || receipt.stimulus.kind !== "stimulus" ||
         receipt.stimulus.sourceEventIds.length !== 0) throw new Error("onset receipt has invalid private stimulus provenance");
       validateObservations(input.state, [receipt.stimulus]);

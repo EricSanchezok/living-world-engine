@@ -673,7 +673,6 @@ export class ScriptedModelProvider implements StructuredModelProvider {
   readonly requests: ScriptedModelHandlerRequest[] = [];
   private pendingTransition: unknown;
   private pendingResolution: unknown;
-  private pendingRouting: unknown;
 
   constructor(
     private readonly handler: ScriptedModelHandler,
@@ -735,15 +734,6 @@ export class ScriptedModelProvider implements StructuredModelProvider {
       this.pendingResolution = undefined;
       return value;
     }
-    if (request.role === "truth-reaction-routing" && this.pendingRouting !== undefined) {
-      const value = this.pendingRouting;
-      this.pendingRouting = undefined;
-      return value;
-    }
-    if (request.role === "truth-reaction-routing" &&
-      (this.pendingResolution !== undefined || this.pendingTransition !== undefined)) {
-      return { requests: [] };
-    }
     if (request.role === "truth-resolution" && this.pendingTransition !== undefined) {
       const context = request.context as { state?: { committedResolutionPlans?: unknown[] } };
       return context.state?.committedResolutionPlans?.length ? { kind: "done" } : automaticPlanDirective(request.context);
@@ -755,17 +745,10 @@ export class ScriptedModelProvider implements StructuredModelProvider {
       proposal?: unknown;
     };
     if (request.role === "truth-perception") {
-      if (value.kind === "request_checks") return value;
+      if (value.kind === "request_checks" || value.kind === "done") return value;
       if (value.kind === "request_random") this.pendingResolution = value;
-      if (value.kind === "request_reactions") this.pendingRouting = { requests: value.requests ?? [] };
       if (value.kind === "transition") this.pendingTransition = value.proposal;
-      return { kind: "done" };
-    }
-    if (request.role === "truth-reaction-routing") {
-      if (value.kind === "request_reactions") return { requests: value.requests ?? [] };
-      if (value.kind === "request_checks" || value.kind === "request_random") this.pendingResolution = value;
-      if (value.kind === "transition") this.pendingTransition = value.proposal;
-      return { requests: [] };
+      return { kind: "done", reports: deterministicOnsetReports(request.context) };
     }
     if (request.role === "truth-resolution") {
       if (value.kind === "request_checks" || value.kind === "request_random") return value;
@@ -1336,6 +1319,46 @@ export function deterministicAgentMindBatch(
   };
 }
 
+/** Mechanical-check fixtures explicitly stipulate that no reaction stimulus is supplied. */
+export function withNoStimulusCompletion(handler: ScriptedModelHandler): ScriptedModelHandler {
+  return async request => {
+    const output = await handler(request);
+    if (request.role === "truth-perception" && output && typeof output === "object" &&
+      "kind" in output && output.kind === "done" && !("reports" in output)) {
+      return { ...output, reports: deterministicOnsetReports(request.context, "no_stimulus") };
+    }
+    return output;
+  };
+}
+
+export function noStimulusReportsForTargets(input: {
+  perceptionTargets?: readonly { observerId: string }[];
+  state: { agents: Record<string, { entityId: string }> };
+}) {
+  return (input.perceptionTargets ?? []).map((target, targetIndex) => ({ targetIndex, kind: "no_stimulus" as const,
+    reason: "The mechanical-check fixture explicitly supplies no reaction stimulus.", checkRefs: [],
+    evidence: [{ kind: "entity" as const, ref: referenceHandleFor("entity", input.state.agents[target.observerId]!.entityId) }] }));
+}
+
+/** Test-only semantic oracle; real providers must explicitly adjudicate their own reports. */
+export function deterministicOnsetReports(context: unknown, kind: "perceived" | "no_stimulus" = "perceived") {
+  const input = context as {
+    task?: { assignment?: { perceptionTargets?: Array<{ targetIndex: number; observerRef: string; sourceActionRef: string }> } };
+    state?: { committedCheckRequests?: Array<{ checkRef: string; actorRef: string; causes: Array<{ kind: string; ref: string }> }>;
+      checkResults?: Array<{ checkRef: string; succeeded: boolean }> };
+  };
+  return (input.task?.assignment?.perceptionTargets ?? []).map(target => {
+    const checks = (input.state?.committedCheckRequests ?? []).filter(check => check.actorRef === target.observerRef &&
+      check.causes.some(cause => cause.kind === "action" && cause.ref === target.sourceActionRef));
+    const failed = checks.some(check => !input.state?.checkResults?.some(result => result.checkRef === check.checkRef && result.succeeded));
+    const common = { targetIndex: target.targetIndex, reason: "The deterministic fixture explicitly supplies this observer's onset view.",
+      evidence: [{ kind: "entity" as const, ref: target.observerRef }], checkRefs: kind === "no_stimulus" ? [] : checks.map(check => check.checkRef) };
+    return kind === "no_stimulus" || failed ? { ...common, kind: "no_stimulus" as const }
+      : { ...common, kind: "perceived" as const, stimulus: { summary: "You notice a present movement.",
+          introductions: [], apparentClaims: [], sourceEventRefs: [] } };
+  });
+}
+
 export function deterministicModelOutput(profileId: string, context: unknown): unknown {
       const sharedBatch = (context as { state?: unknown })?.state;
       if (isSharedBatchContext(sharedBatch)) {
@@ -1489,8 +1512,7 @@ export function deterministicModelOutput(profileId: string, context: unknown): u
         };
       }
       if (profileId.startsWith("truth-")) {
-        if (stage === "perception") return { kind: "done" };
-        if (stage === "reaction-routing") return { requests: [] };
+        if (stage === "perception") return { kind: "done", reports: deterministicOnsetReports(context) };
         if (stage === "resolution") {
           return (stateSection.committedResolutionPlans ?? []).length ? { kind: "done" } : automaticPlanDirective(context);
         }

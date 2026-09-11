@@ -8,7 +8,7 @@ import {
   observationBatchSchema,
   perceptionDirectiveSchema,
   reactionDecisionDraftSchema,
-  reactionRoutingOutputSchema,
+  onsetPerceptionReportSchema,
   resolutionContinuationDirectiveSchema,
   resolutionDirectiveSchema,
   resolutionPlanCommitDirectiveSchema,
@@ -51,7 +51,7 @@ describe("LLM output field ownership", () => {
   it("generates strict JSON Schema for every model role without reintroducing owned fields", () => {
     const schemas = {
       perception: z.toJSONSchema(perceptionDirectiveSchema, { target: "draft-07" }),
-      reactionRouting: z.toJSONSchema(reactionRoutingOutputSchema, { target: "draft-07" }),
+      reactionRouting: z.toJSONSchema(onsetPerceptionReportSchema, { target: "draft-07" }),
       resolution: z.toJSONSchema(resolutionDirectiveSchema, { target: "draft-07" }),
       resolutionPlanVerifier: z.toJSONSchema(resolutionPlanVerificationSchema, { target: "draft-07" }),
       transition: z.toJSONSchema(transitionProposalSchema, { target: "draft-07" }),
@@ -278,8 +278,7 @@ describe("LLM output field ownership", () => {
 
   it("lets reaction routing describe private semantics without assigning runtime identities", () => {
     const request = {
-      agentRef: "ref:agent:agent-xiaoming",
-      sourceActionRef: "ref:action:action-local",
+      targetIndex: 0, kind: "perceived", reason: "The audible onset reaches the observer.", checkRefs: [],
       stimulus: {
         summary: "有人在呼唤。",
         introductions: [],
@@ -291,18 +290,16 @@ describe("LLM output field ownership", () => {
         }],
         sourceEventRefs: [],
       },
-      basis: [{ kind: "fact", factRef: "ref:fact:audible-channel" }],
+      evidence: [{ kind: "fact", ref: "ref:fact:audible-channel" }],
     };
-    expect(reactionRoutingOutputSchema.safeParse({ requests: [request] }).success).toBe(true);
-    expect(reactionRoutingOutputSchema.safeParse({
-      requests: [{
+    expect(onsetPerceptionReportSchema.safeParse(request).success).toBe(true);
+    expect(onsetPerceptionReportSchema.safeParse({
         ...request,
         stimulus: {
           ...request.stimulus,
           id: "forged-stimulus",
           apparentClaims: [{ ...request.stimulus.apparentClaims[0], id: "forged-claim" }],
         },
-      }],
     }).success).toBe(false);
   });
 

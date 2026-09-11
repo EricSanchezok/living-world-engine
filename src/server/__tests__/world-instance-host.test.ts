@@ -348,7 +348,7 @@ describe("World Instance host", () => {
           root: {
             role: "world-execution",
             id: "eager-reference",
-            version: "22",
+            version: "23",
             manifestHash: stored.executionAlgorithm.manifestHash,
           },
         },
@@ -643,8 +643,8 @@ describe("World Instance host", () => {
       expect(stored.experimentEnrollment).toBeNull();
       expect(stored.executionAlgorithm).toMatchObject({
         id: "eager-reference",
-        version: "22",
-        contractVersion: 8,
+        version: "23",
+        contractVersion: 9,
         config: {},
         children: {
           actionCompilation: {
@@ -761,7 +761,7 @@ describe("World Instance host", () => {
       expect(Object.values(window.requests)[0]).toMatchObject({
         agentId: participant.agentId,
         originalIntent: { kind: "ongoing_activity" },
-        basis: expect.any(Array),
+        perceptionReceiptHash: expect.any(String),
       });
       expect(waiting.actionWindow).not.toHaveProperty("basis");
       expect(host.instance(created.summary.id, "observer-without-control").actionWindow).toMatchObject({

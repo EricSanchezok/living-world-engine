@@ -1,4 +1,4 @@
-import { materializePrivateStimuli } from "../cognition/observation-materialization";
+import { materializeOnsetPerceptionReceipts, type OnsetPerceptionReceipt } from "./onset-receipts";
 export { materializeObservationPackets } from "../cognition/observation-materialization";
 import { z } from "zod";
 import { bindMechanicalPlanRepairContext, MECHANICAL_PLAN_REPAIR, selectMechanicalPlanRepair } from "./mechanical-plan-repair";
@@ -8,7 +8,6 @@ import {
   causalVerificationSchema,
   mechanicInvocationRepairSchema,
   perceptionDirectiveSchema,
-  reactionRoutingOutputSchema,
   resolutionContinuationDirectiveSchema,
   resolutionDirectiveSchema,
   resolutionPlanCommitDirectiveSchema,
@@ -21,7 +20,6 @@ import {
   type ModelFactValue,
   type ModelAccess,
   type ModelCausalVerification,
-  type ReactionRequestDraft,
   type ResolutionPlanDraft,
   type ModelTransitionProposalDraft,
 } from "../contracts/llm-schemas";
@@ -77,7 +75,6 @@ import {
 import { contentHash } from "../models/model-audit";
 import { ModelOverloadedError } from "../models/model-scheduler";
 import { fullRuntimePayload, runtimeEventEmitter, serializeRuntimeError } from "../runtime/observability";
-import { validateObservations } from "../cognition/observation";
 import {
   buildCausalVerificationContext,
   causalProposalReferenceResolver,
@@ -192,13 +189,6 @@ export function normalizeOutcomeAlternativeEvidence(
     droppedReferences,
     droppedAlternatives,
   };
-}
-
-class ReactionExecutionError extends Error {
-  constructor(message: string, options?: ErrorOptions) {
-    super(message, options);
-    this.name = "ReactionExecutionError";
-  }
 }
 
 class ResolutionPlanCardinalityError extends Error {
@@ -641,6 +631,7 @@ async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
   scope: ModelExecutionScope;
 }): Promise<OnsetPerceptionResult> {
   const perceptionSchema = perceptionDirectiveSchema;
+  let receipts: OnsetPerceptionReceipt[] = [];
   const requests: D20CheckRequest[] = [];
   const checks: D20CheckResult[] = [];
   const commitmentRounds: CommitmentRound[] = [];
@@ -694,7 +685,10 @@ async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
         stage: "perception",
       }),
       validate: (directive) => {
-        if (directive.kind !== "request_checks") return;
+        if (directive.kind === "done") {
+          receipts = materializeOnsetPerceptionReceipts({ ...input, targets: input.perceptionTargets ?? [], requests, checks }, directive.reports);
+          return;
+        }
         if (commitmentRounds.length >= input.maxCommitmentRounds) {
           throw new Error("maximum commitment rounds exceeded");
         }
@@ -755,6 +749,8 @@ async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
   }
 
   return {
+    targets: structuredClone([...(input.perceptionTargets ?? [])]),
+    receipts,
     requests,
     checks,
     commitmentRounds,
@@ -1184,224 +1180,6 @@ function checkRequestsForPlans(input: {
     };
     validateCheckRequest(input.state, request, input.allowedCauses, input.maximumVisibility);
     return request;
-  });
-}
-
-function validateReactionRequests(
-  input: TruthPreparationInput,
-  requests: readonly ReactionRequest[],
-  checkRequests: readonly D20CheckRequest[],
-  checks: readonly D20CheckResult[],
-): void {
-  const requestedAgents = new Set<string>();
-  const requestByCheck = new Map(checkRequests.map((request) => [request.id, request]));
-  const resultByCheck = new Map(checks.map((result) => [result.requestId, result]));
-
-  for (const request of requests) {
-    if (requestedAgents.has(request.agentId)) throw new Error(`duplicate reaction request for ${request.agentId}`);
-    requestedAgents.add(request.agentId);
-    const agent = input.state.agents[request.agentId];
-    if (!agent) throw new Error(`reaction request has unknown agent ${request.agentId}`);
-    const sourceAction = input.initialActions.find((action) => action.id === request.triggerActionId);
-    if (!sourceAction || sourceAction.actorId === request.agentId) {
-      throw new Error(`reaction request for ${request.agentId} has an invalid source action`);
-    }
-    const sourceAgent = input.state.agents[sourceAction.actorId];
-    if (!sourceAgent) throw new Error(`reaction request references unknown source actor ${sourceAction.actorId}`);
-    if (request.originalIntent.kind === "prepared_action") {
-      const actionId = request.originalIntent.actionId;
-      const original = input.initialActions.find((action) => action.id === actionId);
-      if (!original || original.actorId !== request.agentId) {
-        throw new Error(`reaction request for ${request.agentId} has no matching prepared action`);
-      }
-    } else {
-      const activity = input.state.truth.activities[request.originalIntent.activityId];
-      if (!activity || activity.status !== "active" || activity.actorId !== request.agentId ||
-        activity.sourceActionId !== request.originalIntent.sourceActionId || !activity.plan.interruptible) {
-        throw new Error(`reaction request for ${request.agentId} has no matching interruptible Activity`);
-      }
-    }
-    if (request.stimulus.observerId !== request.agentId || request.stimulus.kind !== "stimulus") {
-      throw new Error(`reaction request for ${request.agentId} has an invalid private stimulus`);
-    }
-    if (request.stimulus.sourceEventIds.length !== 0) {
-      throw new Error(`reaction stimulus ${request.stimulus.id} cannot cite uncommitted events`);
-    }
-
-    const basisIds = new Set<string>();
-    for (const basis of request.basis) {
-      const basisId = basis.kind === "shared_placement"
-        ? `${basis.kind}:${basis.placementId}`
-        : basis.kind === "fact"
-          ? `${basis.kind}:${basis.factId}`
-          : `${basis.kind}:${basis.checkId}`;
-      if (basisIds.has(basisId)) throw new Error(`reaction request for ${request.agentId} repeats basis ${basisId}`);
-      basisIds.add(basisId);
-
-      if (basis.kind === "shared_placement") {
-        const sourcePlacement = input.state.truth.placements[sourceAgent.entityId];
-        const agentPlacement = input.state.truth.placements[agent.entityId];
-        if (!sourcePlacement || sourcePlacement !== agentPlacement || sourcePlacement !== basis.placementId) {
-          throw new Error(`reaction request for ${request.agentId} has no shared direct placement`);
-        }
-        continue;
-      }
-      if (basis.kind === "fact") {
-        const fact = input.state.truth.facts[basis.factId];
-        const accessible = fact && (fact.access.kind === "public" ||
-          (fact.access.kind === "agents" && fact.access.agentIds.includes(request.agentId)));
-        if (!accessible) throw new Error(`reaction request for ${request.agentId} cites inaccessible fact`);
-        const endpoints = new Set([sourceAgent.entityId, agent.entityId]);
-        const connected = endpoints.has(fact.subjectId) ||
-          (fact.value.kind === "entity" && endpoints.has(fact.value.entityId));
-        if (!connected) {
-          throw new Error(`reaction request for ${request.agentId} cites a fact unrelated to either participant`);
-        }
-        continue;
-      }
-
-      const checkRequest = requestByCheck.get(basis.checkId);
-      const result = resultByCheck.get(basis.checkId);
-      if (!checkRequest || checkRequest.phase !== "perception" || !result?.succeeded) {
-        throw new Error(`reaction request for ${request.agentId} cites no successful perception check`);
-      }
-      if (checkRequest.actorId !== agent.entityId) {
-        throw new Error(`perception check ${basis.checkId} belongs to another observer`);
-      }
-      const citesSourceAction = checkRequest.causes.some((cause) =>
-        cause.kind === "action" && cause.id === sourceAction.id);
-      const citesWorldBasis = checkRequest.causes.some((cause) =>
-        cause.kind === "fact" || cause.kind === "law");
-      if (!citesSourceAction || !citesWorldBasis) {
-        throw new Error(`perception check ${basis.checkId} lacks source-action and world basis`);
-      }
-    }
-  }
-
-  validateObservations(input.state, requests.map((request) => request.stimulus), input.state.step + 1);
-}
-
-function applyReactionDecisions(
-  input: TruthPreparationInput,
-  requests: readonly ReactionRequest[],
-  decisions: readonly ReactionDecision[],
-): AgentActionProposal[] {
-  if (decisions.length !== requests.length) throw new Error("reaction decisions do not cover every request");
-  const requestById = new Map(requests.map((request) => [request.id, request]));
-  const decisionAgents = new Set<string>();
-  const actions = input.initialActions.map((action) => structuredClone(action));
-
-  for (const decision of decisions) {
-    const request = requestById.get(decision.requestId);
-    if (!request || request.agentId !== decision.agentId || decisionAgents.has(decision.agentId)) {
-      throw new Error(`unexpected or duplicate reaction decision for ${decision.agentId}`);
-    }
-    decisionAgents.add(decision.agentId);
-    if (decision.baseRevision !== input.state.revision) throw new Error("reaction decision has stale revision");
-    const originalProposalId = request.originalIntent.kind === "prepared_action"
-      ? request.originalIntent.actionId
-      : request.originalIntent.sourceActionId;
-    if (decision.originalProposalId !== originalProposalId) {
-      throw new Error(`reaction decision for ${decision.agentId} references another intent`);
-    }
-    const preparedActionId = request.originalIntent.kind === "prepared_action"
-      ? request.originalIntent.actionId
-      : null;
-    const actionIndex = preparedActionId !== null
-      ? actions.findIndex((action) => action.id === preparedActionId)
-      : -1;
-    if (request.originalIntent.kind === "prepared_action" && actionIndex < 0) {
-      throw new Error(`reaction decision for ${decision.agentId} references another prepared action`);
-    }
-    if (decision.kind === "replace") {
-      const replacement = decision.replacementAction;
-      if (replacement.actorId !== decision.agentId || replacement.baseRevision !== input.state.revision) {
-        throw new Error(`reaction replacement for ${decision.agentId} changes actor or revision`);
-      }
-      const allowedTargets = new Set([
-        ...Object.keys(input.state.agents[decision.agentId].belief.localEntities),
-        ...request.stimulus.introductions.map((introduction) => introduction.localEntity.id),
-      ]);
-      for (const targetId of replacement.targetIds) {
-        if (!allowedTargets.has(targetId)) {
-          throw new Error(`reaction replacement for ${decision.agentId} targets unknown local entity ${targetId}`);
-        }
-      }
-      if (actionIndex < 0) actions.push(structuredClone(replacement));
-      else actions[actionIndex] = structuredClone(replacement);
-    }
-  }
-
-  const ids = new Set<string>();
-  const actors = new Set<string>();
-  for (const action of actions) {
-    if (ids.has(action.id)) throw new Error(`reaction produced duplicate action id ${action.id}`);
-    if (actors.has(action.actorId)) throw new Error(`reaction produced duplicate actor ${action.actorId}`);
-    if (action.baseRevision !== input.state.revision) throw new Error(`reaction action ${action.id} has stale revision`);
-    if (!input.state.agents[action.actorId]) {
-      throw new Error(`reaction produced action for unknown actor ${action.actorId}`);
-    }
-    ids.add(action.id);
-    actors.add(action.actorId);
-  }
-  return actions.sort((left, right) =>
-    left.actorId.localeCompare(right.actorId) || left.id.localeCompare(right.id));
-}
-
-function materializeReactionRequests(
-  input: TruthPreparationInput,
-  requests: readonly ReactionRequestDraft[],
-  committedChecks: readonly D20CheckRequest[] = [],
-): ReactionRequest[] {
-  const truthResolver = createTruthReferenceResolver({
-    state: input.state,
-    definition: input.definition,
-    actions: input.initialActions,
-    checkRequests: committedChecks,
-  });
-  const resolveTruth = (reference: ModelReference, use: Parameters<ReferenceResolver["resolve"]>[1], kind: string): string => {
-    if (isProposalReference(reference)) throw new Error(`reaction routing cannot use proposal ${reference.proposalKey} for ${kind}`);
-    const resolved = truthResolver.resolve(reference, use);
-    if (resolved.kind !== kind) throw new Error(`reaction routing reference ${reference} is ${resolved.kind}, expected ${kind}`);
-    return resolved.engineId;
-  };
-  const materialized = materializePrivateStimuli(input.state, requests.map(request => ({
-    observerId: resolveTruth(request.agentRef, "target", "agent"),
-    stimulus: request.stimulus,
-  })), truthResolver);
-  return requests.map((request, index) => {
-    const agentId = resolveTruth(request.agentRef, "target", "agent");
-    const sourceActionId = resolveTruth(request.sourceActionRef, "source", "action");
-    const prepared = input.initialActions.find((action) => action.actorId === agentId);
-    const ongoing = Object.values(input.state.truth.activities)
-      .find((activity) => activity.status === "active" && activity.actorId === agentId);
-    if (!prepared && !ongoing) throw new Error(`reaction request for ${agentId} has no original intent`);
-    return {
-      id: runtimeId({
-        worldHash: input.state.worldHash,
-        revision: input.state.revision,
-        kind: "reaction-request",
-        stage: "truth-routing",
-        owner: [agentId, sourceActionId],
-        round: 0,
-        ordinal: index,
-      }),
-      agentId,
-      triggerActionId: sourceActionId,
-      originalIntent: prepared
-        ? { kind: "prepared_action" as const, actionId: prepared.id }
-        : {
-            kind: "ongoing_activity" as const,
-            activityId: ongoing!.id,
-            sourceActionId: ongoing!.sourceActionId,
-          },
-      stimulus: materialized[index],
-      basis: request.basis.map((basis) => basis.kind === "shared_placement"
-        ? { kind: basis.kind, placementId: resolveTruth(basis.placementRef, "assertion", "placement") }
-        : basis.kind === "fact"
-          ? { kind: basis.kind, factId: resolveTruth(basis.factRef, "assertion", "fact") }
-          : { kind: basis.kind, checkId: resolveTruth(basis.checkRef, "assertion", "check") }),
-    };
   });
 }
 
@@ -2225,12 +2003,9 @@ export class TruthEngine {
   }
 
   async *prepare(input: TruthPreparationInput, scope: ModelExecutionScope): TruthCandidateSession {
-    if (input.orderedRandom && input.enableReactionRouting !== false) {
-      throw new Error("ordered random acquisition requires closed reaction routing");
-    }
     const truthSubject = input.identityOwner;
-    let actions = input.initialActions.map((action) => structuredClone(action));
-    let groundings = input.groundings.map((grounding) => structuredClone(grounding));
+    const actions = input.initialActions.map((action) => structuredClone(action));
+    const groundings = input.groundings.map((grounding) => structuredClone(grounding));
     if (input.temporalBoundary.fromElapsedSeconds !== input.state.truth.elapsedSeconds ||
       input.temporalBoundary.toElapsedSeconds !== input.state.truth.elapsedSeconds + input.temporalBoundary.deltaSeconds ||
       !Number.isSafeInteger(input.temporalBoundary.deltaSeconds) || input.temporalBoundary.deltaSeconds <= 0) {
@@ -2258,9 +2033,9 @@ export class TruthEngine {
     const randomAliases = new Map<string, string | null>();
     let resolutionPlans: ResolutionPlan[] = [];
     let resolutionReceipts: ResolutionReceipt[] = [];
-    let reactionRequests: ReactionRequest[] = [];
-    let reactionDecisions: ReactionDecision[] = [];
-    let reactionModelAudits: ModelExecutionAudit[] = [];
+    const reactionRequests: ReactionRequest[] = [];
+    const reactionDecisions: ReactionDecision[] = [];
+    const reactionModelAudits: ModelExecutionAudit[] = [];
     const modelAudits: ModelExecutionAudit[] = [];
     let randomRngDrawsBefore: number | null = null;
     const mechanicContracts = this.rulePackages.promptContracts(input.definition.rulePackages)
@@ -2286,7 +2061,7 @@ export class TruthEngine {
     };
 
     const truthContext = (
-      stage: "perception" | "reaction-routing" | "resolution" | "transition",
+      stage: "resolution" | "transition",
       issues: readonly PromptValidationIssue[],
       resolutionScopeOverride?: ResolutionScope,
       repairTarget?: {
@@ -2318,7 +2093,7 @@ export class TruthEngine {
         },
         reactionRequests,
         reactionDecisions,
-        reactionWindow: stage === "perception" || stage === "reaction-routing" ? "open" : "closed",
+        reactionWindow: "closed",
         committedCheckRequests: requests,
         checkResults: checks,
         committedRandomRequests: randomRequests,
@@ -2589,82 +2364,6 @@ export class TruthEngine {
         randomAliases.set(request.proposalKey, randomAliases.has(request.proposalKey) ? null : canonicalId);
       });
     };
-
-    if (input.enableReactionRouting !== false) {
-      const perception = await this.perceiveOnset({
-        definition: input.definition,
-        state: input.state,
-        actions,
-        temporalBoundary: input.temporalBoundary,
-        identityOwner: input.identityOwner,
-        groundings,
-      }, scope);
-      rng = structuredClone(perception.rng);
-      requests.push(...structuredClone(perception.requests));
-      checks.push(...structuredClone(perception.checks));
-      commitmentRounds.push(...structuredClone(perception.commitmentRounds));
-      perception.requests.forEach((request) => {
-        requestIds.add(request.id);
-        allowedForCommitments.check.add(request.id);
-      });
-      perception.aliases.forEach(([alias, canonicalId]) => checkAliases.set(alias, canonicalId));
-      modelAudits.push(structuredClone(perception.modelAudit));
-
-      const routing = await generateValidated({
-        provider: this.provider,
-        profileId: input.definition.modelProfiles.reactionRouting,
-        role: "truth-reaction-routing",
-        subjectId: truthSubject,
-        promptId: "truth-reaction-routing",
-        schemaName: "truth_reaction_routing",
-        schema: reactionRoutingOutputSchema,
-        scope,
-        buildContext: (issues) => truthContext("reaction-routing", issues),
-        validate: (output) => validateReactionRequests(
-          input,
-          materializeReactionRequests(input, output.requests, requests),
-          requests,
-          checks,
-        ),
-        repairAttempts: this.repairAttempts,
-        repairScope: "step",
-        targetIds: actions.map((action) => action.id),
-      });
-      modelAudits.push(routing.audit);
-      reactionRequests = materializeReactionRequests(input, routing.value.requests, requests);
-      if (reactionRequests.length > 0) {
-        try {
-          const resolved = await input.resolveReactions(reactionRequests);
-          reactionDecisions = structuredClone(resolved.decisions);
-          reactionModelAudits = structuredClone(resolved.modelAudits);
-          actions = applyReactionDecisions(input, reactionRequests, reactionDecisions);
-          const replacedActorIds = new Set(reactionDecisions
-            .filter((decision) => decision.kind === "replace")
-            .map((decision) => decision.agentId));
-          const groundedActorIds = new Set(resolved.groundings.flatMap((grounding) =>
-            grounding.actorId === null ? [] : [grounding.actorId]));
-          if (resolved.groundings.length !== replacedActorIds.size ||
-            groundedActorIds.size !== replacedActorIds.size ||
-            [...replacedActorIds].some((actorId) => !groundedActorIds.has(actorId)) ||
-            resolved.groundings.some((grounding) => {
-              const action = actions.find((candidate) => candidate.actorId === grounding.actorId);
-              return grounding.actorId === null || !action || !replacedActorIds.has(grounding.actorId) ||
-                grounding.kind !== "action" || grounding.id !== action.id;
-            })) {
-            throw new Error("reaction replacement groundings do not cover replaced actions");
-          }
-          groundings = [
-            ...groundings.filter((grounding) => grounding.actorId === null ||
-              !replacedActorIds.has(grounding.actorId)),
-            ...resolved.groundings.map((grounding) => structuredClone(grounding)),
-          ].sort((left, right) => left.id.localeCompare(right.id));
-        } catch (error) {
-          const message = error instanceof Error ? error.message : String(error);
-          throw new ReactionExecutionError(`reaction execution failed: ${message}`, { cause: error });
-        }
-        allowedForCommitments.action = new Set(actions.map((action) => action.id));
-      }
-    }
 
     const resolutionAudits: ModelExecutionAudit[] = [];
     const resolutionPlanVerifierAudits: ModelExecutionAudit[] = [];
@@ -3356,7 +3055,7 @@ export class TruthEngine {
         const causalAssertionResults = evaluateProposalCausality(input.state, checks, randomResults, proposal);
         const reviewEvidence: CausalReviewEvidence = {
           reactionDecisions: input.completedReactionDecisions ??
-            (input.enableReactionRouting === false ? undefined : reactionDecisions),
+            undefined,
           ...(this.includeActivityTemporalEvidence ? { temporalEvidence: input.temporalBoundary } : {}),
           definition: input.definition,
           state: input.state,

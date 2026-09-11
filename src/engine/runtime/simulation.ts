@@ -706,7 +706,7 @@ export class SimulationEngine {
       }
       const candidate = await this.algorithm.completeStep(
         stepInput,
-        preparation,
+        structuredClone(preparation),
         prepared?.reactions ?? [],
         context,
       );
@@ -735,6 +735,7 @@ export class SimulationEngine {
         candidate,
         policyRoster,
         this.definition.runtimeDefaults.maxAutonomousSpanSeconds,
+        { definition: this.definition, preparation },
       );
       if (context.stages) await context.stages.after(validationStage);
       trace.emit({

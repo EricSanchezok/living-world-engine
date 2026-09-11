@@ -1029,25 +1029,9 @@ export const reactionRequestSchema = z.strictObject({
     }),
   ]),
   stimulus: persistedObservationSchema,
-  basis: z.array(z.discriminatedUnion("kind", [
-    z.strictObject({ kind: z.literal("shared_placement"), placementId: safeIdSchema }),
-    z.strictObject({ kind: z.literal("fact"), factId: safeIdSchema }),
-    z.strictObject({ kind: z.literal("perception_check"), checkId: safeIdSchema }),
-  ])).min(1),
+  perceptionReceiptHash: z.string().regex(/^[a-f0-9]{64}$/),
 }) as z.ZodType<ReactionRequest>;
 
-const reactionRequestDraftSchema = z.strictObject({
-  agentRef: modelReferenceSchema,
-  sourceActionRef: modelReferenceSchema,
-  stimulus: modelObservationRenderDraftSchema,
-  basis: z.array(z.discriminatedUnion("kind", [
-    z.strictObject({ kind: z.literal("shared_placement"), placementRef: modelReferenceSchema }),
-    z.strictObject({ kind: z.literal("fact"), factRef: modelReferenceSchema }),
-    z.strictObject({ kind: z.literal("perception_check"), checkRef: modelReferenceSchema }),
-  ])).min(1),
-});
-
-export type ReactionRequestDraft = z.infer<typeof reactionRequestDraftSchema>;
 
 export const reactionDecisionSchema = z.discriminatedUnion("kind", [
   z.strictObject({
@@ -1282,12 +1266,8 @@ export const persistedTransitionProposalSchema = z.strictObject({
 
 export const perceptionDirectiveSchema = z.discriminatedUnion("kind", [
   z.strictObject({ kind: z.literal("request_checks"), requests: z.array(checkRequestSchema).min(1) }),
-  z.strictObject({ kind: z.literal("done") }),
+  z.strictObject({ kind: z.literal("done"), reports: z.array(onsetPerceptionReportSchema) }),
 ]);
-
-export const reactionRoutingOutputSchema = z.strictObject({
-  requests: z.array(reactionRequestDraftSchema),
-});
 
 export const resolutionPlanCommitDirectiveSchema = z.strictObject({
   kind: z.literal("commit_plans"),

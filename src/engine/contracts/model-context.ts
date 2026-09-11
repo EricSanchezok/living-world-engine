@@ -237,11 +237,11 @@ export function modelRoleContract(role: string): ModelRoleContract {
     },
     "truth-perception": {
       role,
-      purpose: "decide which perception checks establish consequential visibility for the assigned actions",
-      modelOwns: ["check stakes", "observer and target selection", "grounded named or opposed difficulty", "optional observer-owned rating selection", "roll mode", "whether further perception checks are needed"],
-      engineOwns: ["check request identity", "phase", "revision", "numeric DC and modifier", "modifierSources", "dice and totals", "canonical state"],
+      purpose: "adjudicate every assigned observer-local onset report, requesting checks only for supported uncertainty",
+      modelOwns: ["check stakes", "observer and target selection", "grounded named or opposed difficulty", "optional observer-owned rating selection", "roll mode", "whether further perception checks are needed", "observer-local onset reports and stimuli"],
+      engineOwns: ["assigned targetIndex and complete report coverage", "check request identity", "phase", "revision", "numeric DC and modifier", "modifierSources", "dice and totals", "canonical state"],
       existingReferenceRule: "actorRef and non-null targetRef require existing entity handles; ratingRef selects an observer-owned rating; opposed difficulty selects a target-owned rating and cites that same rating as its source; environmental difficulty cites an existing source; causes require current actions, committed checks, events, facts or laws from this stage's catalog",
-      proposalRule: "each requested check has a unique proposalKey; all reference fields select existing handles, never same-response proposals",
+      proposalRule: "checks select existing references; only stimulus introductions declare local proposal keys, referenced within that observer stimulus",
       failureRule: "repair invalid references using the supplied evidence while preserving justified check intent; completion means no further check is needed, not that a reference failed",
     },
     "truth-reaction-routing": {

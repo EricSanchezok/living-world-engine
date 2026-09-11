@@ -139,6 +139,10 @@ export type AlgorithmTelemetryEventInput = AlgorithmTelemetryBase & ({
     perceptionReactions: number;
   }>;
 } | {
+  event: "algorithm.eager_reference.reactions_prepared";
+  attributes: Readonly<{ phase: "reaction-preparation" }>;
+  counts: Readonly<{ perceptionTargets: number; perceptionReactions: number }>;
+} | {
   event: "algorithm.agent_mind.repair_exhausted";
   attributes: Readonly<{
     phase: "bootstrap" | "resume" | "mind";
@@ -494,6 +498,10 @@ const algorithmTelemetryFields: Record<AlgorithmTelemetryEventName, {
     attributeValues: {
       phase: ["action-preparation", "reaction-preparation"],
     },
+  },
+  "algorithm.eager_reference.reactions_prepared": {
+    attributes: ["phase"], counts: ["perceptionTargets", "perceptionReactions"],
+    attributeValues: { phase: ["reaction-preparation"] },
   },
   "algorithm.agent_mind.repair_fallback": {
     attributes: ["phase", "policy"],

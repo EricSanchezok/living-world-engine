@@ -175,9 +175,8 @@ it.each([{ relations: false, compact: false }, { relations: true, compact: false
   const engine = new TruthEngine(logical, { mechanicalPlanRepair: MECHANICAL_PLAN_REPAIR, includeResolutionMeansSources: true, includeActivityTemporalEvidence: true });
   await expect(engine.resolve({ definition, state, initialActions: actions, groundings, identityOwner: "joint-test",
     temporalBoundary: { fromElapsedSeconds: 0, toElapsedSeconds: 5, deltaSeconds: 5, reasons: [], dueActivityIds: [], dueTimerIds: [], dueConditionIds: [] },
-    enableReactionRouting: false, modelWorkset: { state, initialActions: actions, availableActions: actions, availableDependencies: groundings },
-    resolutionScope: { mode: "component", selectedActionIds: actions.map(action => action.id), totalActionCount: actions.length },
-    resolveReactions: async () => { throw new Error("unexpected reactions"); }, renderObservations: async () => { throw new Error("unexpected observations"); },
+    modelWorkset: { state, initialActions: actions, availableActions: actions, availableDependencies: groundings },
+    resolutionScope: { mode: "component", selectedActionIds: actions.map(action => action.id), totalActionCount: actions.length }, renderObservations: async () => { throw new Error("unexpected observations"); },
     validateProposal: () => { throw new Error("unexpected transition"); },
   }, { workloadId: "test", batchId: "test", runtimeIdentity: { worldHash: state.worldHash, revision: state.revision } })).rejects.toThrow("full candidate reached semantic review");
   expect(physicalSizes).toEqual([2, 1]); expect(reviewedPlans).toBe(2);

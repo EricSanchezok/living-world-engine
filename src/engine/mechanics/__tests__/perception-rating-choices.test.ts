@@ -1,3 +1,4 @@
+import { withNoStimulusCompletion } from "../../testing/model-provider";
 import path from "node:path";
 import { expect, it } from "vitest";
 import { loadWorldScript } from "../../../script/world-loader";
@@ -36,7 +37,7 @@ function wireCheck(context: unknown, unmodified = false) {
 
 function fixture(handler: (request: ScriptedModelHandlerRequest, call: number) => unknown, encoded = true, repairAttempts = 0) {
   let calls = 0;
-  const provider = new ScriptedModelProvider(request => handler(request, ++calls), undefined, false);
+  const provider = new ScriptedModelProvider(withNoStimulusCompletion(request => handler(request, ++calls)), undefined, false);
   const physical: StructuredModelRequest<unknown>[] = [];
   const generate = provider.generateStructured.bind(provider);
   provider.generateStructured = request => { physical.push(request); return generate(request); };

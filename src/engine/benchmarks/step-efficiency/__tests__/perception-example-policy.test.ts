@@ -1,3 +1,4 @@
+import { noStimulusReportsForTargets } from "../../../testing/model-provider";
 import path from "node:path";
 import { expect, it } from "vitest";
 import type { OnsetPerceptionInput } from "../../../algorithms/roles";
@@ -25,7 +26,7 @@ it.each(["done", "check", "wrong-owner"])("isolates the physical example for a r
     const gateway = createModelGateway(catalog, { TEST_MODEL_API_KEY: "test-only" }, { registry: createTestModelRegistry(catalog), maxTransportAttempts: 1,
       fetchForAccount: () => async (_url, init) => {
         physical.push(JSON.parse(String(init?.body)));
-        const output = mode === "done" || physical.length > 1 ? { kind: "done" } : { kind: "request_checks", requests: [{
+        const output = mode === "done" || physical.length > 1 ? { kind: "done", reports: noStimulusReportsForTargets(input) } : { kind: "request_checks", requests: [{
           proposalKey: "notice-key", actorRef: "ref:entity:keeper", targetRef: "ref:entity:key",
           ratingRef: mode === "wrong-owner" ? "ref:rating:resolve:player" : "ref:rating:resolve:keeper",
           difficulty: { kind: "environment", band: "easy", source: { kind: "law", ref: "ref:law:time-passes" } },

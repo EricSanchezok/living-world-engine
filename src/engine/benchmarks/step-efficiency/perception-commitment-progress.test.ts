@@ -1,3 +1,4 @@
+import { noStimulusReportsForTargets } from "../../testing/model-provider";
 import path from "node:path";
 import { expect, it } from "vitest";
 import { loadWorldScript } from "../../../script/world-loader";
@@ -38,7 +39,7 @@ it("preserves the initial HTTP input and delivers bound failed-check evidence th
         difficulty: { kind: "environment", band: "hard", source: { kind: "law", ref: "ref:law:time-passes" } },
         mode: "normal", stakes: "Whether the keeper sees the player's concealed key at onset.", visibility: "full",
         causes: [{ kind: "action", ref: "ref:action:conceal-key" }, { kind: "law", ref: "ref:law:time-passes" }],
-      }] } : { kind: "done" };
+      }] } : { kind: "done", reports: noStimulusReportsForTargets({ state, perceptionTargets: [{ observerId: "keeper" }] }) };
       return new Response(JSON.stringify({ id: `progress-${http}`, model: body.model,
         choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(output) }, finish_reason: "stop" }],
         usage: { prompt_tokens: 100, completion_tokens: 100, total_tokens: 200 } }),

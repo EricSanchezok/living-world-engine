@@ -1,3 +1,4 @@
+import type { WorldStepPreparation } from "../../../runtime/execution";
 import path from "node:path";
 import { expect, it } from "vitest";
 import { buildWorldDefinition, loadWorldTemplate } from "../../../../script/world-loader";
@@ -47,11 +48,13 @@ it.each([1, 10])("uses a current interaction, not retained context, to interrupt
   const definition = buildWorldDefinition(template, { seed: 47, modelCatalog: provider.catalog });
   const delegate = new EagerReferenceAlgorithm(provider);
   let candidate: WorldStepCandidate | undefined;
+  let frozenPreparation: WorldStepPreparation;
   const algorithm: WorldExecutionAlgorithm = {
     manifest: delegate.manifest,
     bootstrap: (input, context) => delegate.bootstrap(input, context),
     prepareStep: (input, context) => delegate.prepareStep(input, context),
     completeStep: async (input, preparation, reactions, context) => {
+      frozenPreparation = structuredClone(preparation);
       candidate = await delegate.completeStep(input, preparation, reactions, context);
       return candidate;
     },
@@ -95,12 +98,12 @@ it.each([1, 10])("uses a current interaction, not retained context, to interrupt
     disposition.reason = "relevant_committed_observation";
     forged.decisionPoints.push({ agentId: "player", reason: "activity_interrupted", activityId: firstPlayer.id, timerId: null });
     const before = contentHash(first.state);
-    expect(() => new CanonicalCommitter().step(first.state, forged, roster, definition.runtimeDefaults.maxAutonomousSpanSeconds))
+    expect(() => new CanonicalCommitter().step(first.state, forged, roster, definition.runtimeDefaults.maxAutonomousSpanSeconds, { definition, preparation: frozenPreparation! }))
       .toThrow("candidate temporal transitions do not match the trusted boundary result");
     expect(contentHash(first.state)).toBe(before);
     const changedContext = structuredClone(candidate!);
     changedContext.interactionDependencies.find(dependency => dependency.id === firstKeeper.id)!.audienceAgentIds = ["keeper"];
-    expect(() => new CanonicalCommitter().step(first.state, changedContext, roster, definition.runtimeDefaults.maxAutonomousSpanSeconds))
+    expect(() => new CanonicalCommitter().step(first.state, changedContext, roster, definition.runtimeDefaults.maxAutonomousSpanSeconds, { definition, preparation: frozenPreparation! }))
       .toThrow(`candidate changes the persisted footprint of Activity ${firstKeeper.id}`);
   } else {
     expect(second.committed.actions.map(action => action.actorId).sort()).toEqual(["keeper", "player"]);

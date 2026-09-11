@@ -16,10 +16,10 @@ export function projectPerceptionTargets(
   state: Readonly<SimulationState>,
   actions: readonly AgentActionProposal[],
   resolver: ReferenceResolver,
-): Array<{ observerRef: string; sourceActionRef: string }> {
+): Array<{ targetIndex: number; observerRef: string; sourceActionRef: string }> {
   const byAction = new Map(actions.map(action => [action.id, action]));
   const seen = new Set<string>();
-  return targets.map(target => {
+  return targets.map((target, targetIndex) => {
     const observer = state.agents[target.observerId];
     if (!observer || state.truth.entities[observer.entityId]?.lifecycle !== "active") {
       throw new Error(`perception assignment has unknown or inactive observer ${target.observerId}`);
@@ -30,7 +30,7 @@ export function projectPerceptionTargets(
     const key = JSON.stringify([observer.id, action.id]);
     if (seen.has(key)) throw new Error("perception assignment repeats an observer/action pair");
     seen.add(key);
-    return { observerRef: resolver.handleFor("entity", observer.entityId), sourceActionRef: resolver.handleFor("action", action.id) };
+    return { targetIndex, observerRef: resolver.handleFor("entity", observer.entityId), sourceActionRef: resolver.handleFor("action", action.id) };
   });
 }
 

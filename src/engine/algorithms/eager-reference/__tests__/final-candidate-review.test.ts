@@ -1,3 +1,4 @@
+import type { WorldStepPreparation } from "../../../runtime/execution";
 import path from "node:path";
 import { expect, it } from "vitest";
 import { loadWorldScript } from "../../../../script/world-loader";
@@ -45,11 +46,13 @@ async function fixture(mode: "accept" | "observation" | "outcome" | "terminal") 
   const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 47, modelCatalog: provider.catalog });
   const delegate = new EagerReferenceAlgorithm(provider);
   let candidate: WorldStepCandidate | undefined;
+  let frozenPreparation: WorldStepPreparation;
   const algorithm: WorldExecutionAlgorithm = {
     manifest: delegate.manifest,
     bootstrap: (input, context) => delegate.bootstrap(input, context),
     prepareStep: (input, context) => delegate.prepareStep(input, context),
     completeStep: async (input, preparation, reactions, context) => {
+      frozenPreparation = structuredClone(preparation);
       candidate = await delegate.completeStep(input, preparation, reactions, context);
       return candidate;
     },
@@ -62,7 +65,7 @@ async function fixture(mode: "accept" | "observation" | "outcome" | "terminal") 
   const run = () => engine.step(roster, { expectedRevision: source.revision, trigger: "participant_action",
     externalActions: Object.keys(source.agents).map(agentId => ({ submissionId: `action-${agentId}`, agentId,
       rawText: "Remain here and look around.", goal: "Observe my surroundings", means: null, targetIds: [] })) });
-  return { provider, definition, engine, source, roster, run, candidate: () => candidate };
+  return { provider, definition, engine, source, roster, run, candidate: () => candidate, preparation: () => frozenPreparation };
 }
 
 it.each(["accept", "observation", "outcome"] as const)("reviews the exact final merged content and retains preparation on %s", async mode => {
@@ -98,7 +101,7 @@ it.each(["accept", "observation", "outcome"] as const)("reviews the exact final 
     const changed = structuredClone(candidate);
     mutate(changed);
     expect(() => new CanonicalCommitter().step(test.source, changed, test.roster,
-      test.definition.runtimeDefaults.maxAutonomousSpanSeconds)).toThrow("final causal review");
+      test.definition.runtimeDefaults.maxAutonomousSpanSeconds, { definition: test.definition, preparation: test.preparation() })).toThrow("final causal review");
   }
 });
 

@@ -63,7 +63,7 @@ describe("built-in algorithm registry", () => {
       "interaction-grounding/model-interaction-grounding@1",
       "observation-rendering/model-observation-rendering@2",
       "observation-rendering/source-bound-observation-rendering@2",
-      "onset-perception/model-onset-perception@5",
+      "onset-perception/model-onset-perception@6",
       "output-recovery/localized-repair-bisect@1",
       "reaction-decision/model-reaction-decision@1",
       "reaction-resolution/onset-reaction@1",
@@ -78,7 +78,7 @@ describe("built-in algorithm registry", () => {
       "work-batching/shared-context-slot-batching@2",
       "work-batching/shared-state-first-slot-batching@1",
       "work-scheduling/bounded-concurrency@1",
-      "world-execution/eager-reference@22",
+      "world-execution/eager-reference@23",
     ]);
   });
 

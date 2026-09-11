@@ -74,12 +74,11 @@ function fixture(enabled: boolean, scenario: Scenario = "none", id = "completion
     groundings: [{ kind: "action", id, actorId: "player", reads: [{ kind: "meter", id: "health:player" }],
       writes: [{ kind: "entity", id: "player" }, { kind: "meter", id: "health:player" }], audienceAgentIds: ["player"],
       sharedResourceClaims: [], globalFallback: false }],
-    identityOwner: `component-${id}`, enableReactionRouting: false,
+    identityOwner: `component-${id}`,
     temporalBoundary: selectTemporalBoundary({ elapsedSeconds: state.truth.elapsedSeconds, maxAutonomousSpanSeconds: 1,
       activities: {}, timers: {}, conditionExpiries: {} }),
     orderedRandom: { acquire: async () => { ownership.acquire += 1; return structuredClone(state.truth.rng); },
       finish: async rng => { ownership.finish += 1; return structuredClone(rng); } },
-    resolveReactions: async () => { throw new Error("closed reactions"); },
     renderObservations: async () => { throw new Error("preparation cannot render"); },
     validateProposal: () => { throw new Error("preparation cannot commit"); },
   };

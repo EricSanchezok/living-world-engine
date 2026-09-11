@@ -1,12 +1,12 @@
 # Project Onsets Before Agent Reactions
 
 ## Status
-Proposed
+Accepted
 Class: architecture
 
 ## Context and Problem Statement
 
-The eager preparation treats shared placement or an accessible entity-valued relation as sufficient onset perception and synthesizes a stimulus containing the source action's complete raw text. Conservative interaction footprints can therefore transfer unobservable intentions into another Agent's reaction context. Structural reference checks do not establish the meaning of a relation or the perceptibility of a private plan. The separate Truth routing path contains observer-local stimulus materialization, but the eager onset path bypasses it.
+Shared placement, accessible entity relations and conservative interaction footprints identify possible interactions without establishing sensory access. Synthesizing a reaction stimulus from global action text can disclose unobservable intentions. Structural reference checks establish neither the meaning of a relation nor the perceptibility of a private plan. Onset admission therefore needs an observer-local semantic projection before Agent reasoning, with the information-flow failure documented in the [onset-routing postmortem](../postmortems/0128-onset-routing-broadcast-private-intentions.md).
 
 ## Decision Drivers
 
@@ -24,7 +24,7 @@ The eager preparation treats shared placement or an accessible entity-valued rel
 
 ## Decision Outcome
 
-The proposed replacement uses the existing perception completion response to carry explicit observer-specific reports and stimuli. Engine-owned pair assignments and source-bound receipts connect these reports to frozen reactions. The [approved contract](../specs/0128-observer-bound-onset-receipts.md) owns implementation and empirical acceptance. This proposal is not evidence that the runtime replacement has shipped or that full-scene semantic qualification has succeeded.
+The perception completion response carries explicit observer-specific reports and stimuli. Engine-owned pair assignments and source-bound receipts connect these reports to frozen reactions. Preparation and completion share a typed transcript; the CanonicalCommitter compares candidate receipts and requests against the kernel’s independently retained preparation. Component Truth resolution has a closed reaction window. The [approved contract](../specs/0128-observer-bound-onset-receipts.md) owns behavioral and empirical acceptance; structural receipt validation does not certify model perception semantics or full-scene performance.
 
 ## Pros and Cons of the Options
 

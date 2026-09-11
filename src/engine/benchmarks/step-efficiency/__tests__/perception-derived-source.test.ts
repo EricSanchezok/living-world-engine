@@ -1,3 +1,4 @@
+import { noStimulusReportsForTargets } from "../../../testing/model-provider";
 import path from "node:path";
 import { expect, it } from "vitest";
 import type { OnsetPerceptionInput } from "../../../algorithms/roles";
@@ -37,7 +38,7 @@ it.each(["opposed", "null-aptitude", "environment", "repair", "wrong-owner", "wr
             ? { kind: "environment", band: "easy", ...(mode === "missing-environment-source" ? {} : { source: { kind: "law", ref: "ref:law:time-passes" } }) }
             : { kind: "opposed", targetRef: mode === "wrong-opponent" ? "ref:entity:keeper" : "ref:entity:player", ratingRef: opposingRating,
               ...(!candidate || mode === "extra-source" ? { source: mode === "extra-source" ? { kind: "law", ref: "ref:law:time-passes" } : { kind: "rating", ref: opposingRating } } : {}) };
-          const output = http > (mode === "repair" ? 2 : 1) ? { kind: "done" } : { kind: "request_checks", requests: [{
+          const output = http > (mode === "repair" ? 2 : 1) ? { kind: "done", reports: noStimulusReportsForTargets(input) } : { kind: "request_checks", requests: [{
             proposalKey: "notice-key", actorRef: mode === "reused-rating" ? "ref:entity:player" : "ref:entity:keeper", targetRef: "ref:entity:key",
             ratingRef: mode === "null-aptitude" ? null : mode === "wrong-owner" || mode === "reused-rating" || mode === "repair" && !repaired ? "ref:rating:resolve:player" : "ref:rating:resolve:keeper",
             difficulty, mode: "normal", stakes: "Whether the keeper notices the key's concealment at onset.", visibility: "full",
@@ -90,5 +91,5 @@ it("leaves other roles alone and rejects incompatible policy or layout", () => {
   const perception = { ...other, role: "truth-perception", schemaName: "truth_perception_directive" } as StructuredModelRequest<unknown>;
   expect(() => perceptionDerivedSourceRequest(perception)).toThrow("requires example omission");
   expect(() => perceptionDerivedSourceRequest({ ...perception, jsonExamplePolicy: "omit", jsonObjectPostlude: "another experiment" })).toThrow("no other codec or layout");
-  expect(perceptionDerivedSourceSchema.parse({ kind: "done" })).toEqual({ kind: "done" });
+  expect(perceptionDerivedSourceSchema.parse({ kind: "done", reports: [] })).toEqual({ kind: "done", reports: [] });
 });

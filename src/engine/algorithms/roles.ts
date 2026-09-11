@@ -1,10 +1,9 @@
+import type { OnsetPerceptionTranscript } from "../runtime/execution";
 import type { AgentMindOutput } from "../contracts/llm-schemas";
 import type {
   AgentActionProposal,
   AgentState,
-  CommitmentRound,
   CausalVerification,
-  D20CheckRequest,
   D20CheckResult,
   DiscreteRandomResult,
   ModelExecutionAudit,
@@ -189,11 +188,7 @@ export interface OnsetPerceptionInput {
   perceptionTargets?: readonly PerceptionTarget[];
 }
 
-export interface OnsetPerceptionResult {
-  requests: D20CheckRequest[];
-  checks: D20CheckResult[];
-  commitmentRounds: CommitmentRound[];
-  rng: SimulationState["truth"]["rng"];
+export interface OnsetPerceptionResult extends OnsetPerceptionTranscript {
   modelAudit: ModelExecutionAudit;
   aliases: Array<[string, string | null]>;
 }
@@ -264,7 +259,6 @@ export interface TruthResolutionInput {
     availableDependencies: readonly InteractionDependency[];
   };
   resolutionScope?: ResolutionScope;
-  enableReactionRouting?: boolean;
   /** Decisions already settled by the step preparation owner before component resolution. */
   completedReactionDecisions?: readonly ReactionDecision[];
   /** Own the canonical stream only through the closed random-commitment stage. */
@@ -272,7 +266,6 @@ export interface TruthResolutionInput {
     acquire: () => Promise<SimulationState["truth"]["rng"]>;
     finish: (rng: SimulationState["truth"]["rng"]) => Promise<SimulationState["truth"]["rng"]>;
   };
-  resolveReactions: (requests: readonly ReactionRequest[]) => Promise<ReactionResolution>;
   renderObservations: (
     proposal: Readonly<TransitionProposal>,
     actions: readonly AgentActionProposal[],

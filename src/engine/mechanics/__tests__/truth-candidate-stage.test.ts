@@ -42,14 +42,13 @@ function fixture() {
   const input: TruthResolutionInput = {
     definition, state, initialActions: [action], groundings: [{ kind: "action", id: action.id, actorId: action.actorId,
       reads: [{ kind: "meter", id: "health:player" }], writes: [{ kind: "entity", id: "player" }, { kind: "meter", id: "health:player" }], audienceAgentIds: [action.actorId], sharedResourceClaims: [], globalFallback: false }],
-    identityOwner: "candidate-component", enableReactionRouting: false,
+    identityOwner: "candidate-component",
     temporalBoundary: selectTemporalBoundary({ elapsedSeconds: state.truth.elapsedSeconds,
       maxAutonomousSpanSeconds: 1, activities: {}, timers: {}, conditionExpiries: {} }),
     orderedRandom: {
       acquire: async () => { ownership.acquire += 1; return structuredClone(state.truth.rng); },
       finish: async rng => { ownership.finish += 1; return structuredClone(rng); },
     },
-    resolveReactions: async () => { throw new Error("closed reaction routing"); },
     renderObservations: async () => { throw new Error("candidate preparation must not render observations"); },
     validateProposal: () => { throw new Error("candidate preparation must not validate unrendered observations"); },
   };

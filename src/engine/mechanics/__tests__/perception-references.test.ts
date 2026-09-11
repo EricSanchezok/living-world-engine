@@ -1,3 +1,4 @@
+import { withNoStimulusCompletion, noStimulusReportsForTargets } from "../../testing/model-provider";
 import path from "node:path";
 import { expect, it } from "vitest";
 import { z } from "zod";
@@ -14,7 +15,7 @@ import { selectTemporalBoundary } from "../temporal";
 import { TruthEngine } from "../truth-engine";
 
 function fixture(handler: ScriptedModelHandler, repairAttempts = 0) {
-  const provider = new ScriptedModelProvider(handler, undefined, false);
+  const provider = new ScriptedModelProvider(withNoStimulusCompletion(handler), undefined, false);
   const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 47, modelCatalog: provider.catalog });
   const state = structuredClone(definition.initialState);
   const input: OnsetPerceptionInput = {
@@ -54,7 +55,7 @@ it.each(["references", "schema"])("retains independent perception diagnostics af
     registry: createTestModelRegistry(catalog), maxTransportAttempts: 1,
     fetchForAccount: () => async (_url, init) => {
       bodies.push(String(init?.body));
-      const output = calls++ === 0 ? rejected : calls === 2 ? { kind: "request_checks", requests: good } : { kind: "done" };
+      const output = calls++ === 0 ? rejected : calls === 2 ? { kind: "request_checks", requests: good } : { kind: "done", reports: noStimulusReportsForTargets(repaired.input) };
       return new Response(JSON.stringify({ id: `perception-diagnostics-${calls}`, model: "scripted:truth-deepseek",
         choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(output) }, finish_reason: "stop" }],
         usage: { prompt_tokens: 100, completion_tokens: 20, total_tokens: 120 } }),
@@ -242,8 +243,8 @@ it.each([{ targets: [] }, { targets: [{ observerId: "keeper", sourceActionId: "i
     const context = structuredClone(focused.provider.requests[0]!.context) as {
       task: { assignment: { perceptionTargets?: unknown } };
     };
-    expect(context.task.assignment.perceptionTargets).toEqual(targets.map(() => ({
-      observerRef: "ref:entity:keeper", sourceActionRef: "ref:action:inspect-key",
+    expect(context.task.assignment.perceptionTargets).toEqual(targets.map((_, targetIndex) => ({
+      targetIndex, observerRef: "ref:entity:keeper", sourceActionRef: "ref:action:inspect-key",
     })));
     delete context.task.assignment.perceptionTargets;
     expect(context).toEqual(baseline.provider.requests[0]!.context);

@@ -838,11 +838,7 @@ export interface ReactionRequest {
     | { kind: "prepared_action"; actionId: string }
     | { kind: "ongoing_activity"; activityId: string; sourceActionId: string };
   stimulus: ObservationPacket;
-  basis: Array<
-    | { kind: "shared_placement"; placementId: EntityId }
-    | { kind: "fact"; factId: FactId }
-    | { kind: "perception_check"; checkId: string }
-  >;
+  perceptionReceiptHash: string;
 }
 
 export type ReactionDecision =

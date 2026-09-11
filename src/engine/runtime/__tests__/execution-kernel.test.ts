@@ -88,7 +88,7 @@ describe("execution kernel boundary", () => {
       role: "world-execution",
       id: "configured",
       version: "1",
-      contractVersion: 8,
+      contractVersion: 9,
       maturity: "diagnostic",
       configSchema: z.strictObject({ slots: z.number().int().positive() }),
       children: [],

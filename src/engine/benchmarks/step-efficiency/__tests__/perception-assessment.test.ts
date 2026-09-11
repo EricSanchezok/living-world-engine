@@ -1,3 +1,4 @@
+import { withNoStimulusCompletion } from "../../../testing/model-provider";
 import path from "node:path";
 import { expect, it } from "vitest";
 import type { OnsetPerceptionInput } from "../../../algorithms/roles";
@@ -19,7 +20,7 @@ const h = (value: string) => existingReferenceHandleSchema.parse(value);
 const key = (value: string) => proposalKeySchema.parse(value);
 
 function fixture(handler: ScriptedModelHandler = () => ({ kind: "done" })) {
-  const provider = new ScriptedModelProvider(handler, undefined, false);
+  const provider = new ScriptedModelProvider(withNoStimulusCompletion(handler), undefined, false);
   const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 47, modelCatalog: provider.catalog });
   const state = structuredClone(definition.initialState);
   state.truth.facts.route = { id: "route", subjectId: state.agents.player!.entityId, predicate: "access", value: { kind: "text", value: "open" },

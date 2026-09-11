@@ -1,3 +1,6 @@
+import { validateOnsetPerceptionReceipts } from "../mechanics/onset-receipts";
+import type { WorldDefinition } from "./world-definition";
+import type { WorldStepPreparation } from "./execution";
 import type {
   InteractionDependency,
   BootstrapCandidate,
@@ -340,8 +343,7 @@ function validateCandidateReactions(
   }
   const initialActionById = new Map(candidate.resolution.initialActions.map((action) => [action.id, action]));
   const decisionByRequest = new Map(decisions.map((decision) => [decision.requestId, decision]));
-  const checkRequestById = new Map(candidate.resolution.requests.map((request) => [request.id, request]));
-  const checkResultById = new Map(candidate.resolution.checks.map((result) => [result.requestId, result]));
+  const receipts = new Map(candidate.onsetPerception.receipts.map(receipt => [receipt.contentHash, receipt]));
 
   for (const request of requests) {
     const observer = source.agents[request.agentId];
@@ -368,41 +370,10 @@ function validateCandidateReactions(
       originalProposalId = activity.sourceActionId;
     }
 
-    const basisIds = new Set<string>();
-    for (const basis of request.basis) {
-      const key = basis.kind === "shared_placement"
-        ? `${basis.kind}:${basis.placementId}`
-        : basis.kind === "fact"
-          ? `${basis.kind}:${basis.factId}`
-          : `${basis.kind}:${basis.checkId}`;
-      if (basisIds.has(key)) throw new Error(`reaction request ${request.id} repeats basis ${key}`);
-      basisIds.add(key);
-      if (basis.kind === "shared_placement") {
-        const triggerPlacement = source.truth.placements[triggerAgent.entityId];
-        const observerPlacement = source.truth.placements[observer.entityId];
-        if (!triggerPlacement || triggerPlacement !== observerPlacement || triggerPlacement !== basis.placementId) {
-          throw new Error(`reaction request ${request.id} has no shared placement basis`);
-        }
-      } else if (basis.kind === "fact") {
-        const fact = source.truth.facts[basis.factId];
-        const accessible = fact && (fact.access.kind === "public" ||
-          fact.access.kind === "agents" && fact.access.agentIds.includes(request.agentId));
-        const endpoints = fact?.value.kind === "entity"
-          ? new Set([fact.subjectId, fact.value.entityId])
-          : new Set<string>();
-        if (!accessible || !endpoints.has(triggerAgent.entityId) || !endpoints.has(observer.entityId)) {
-          throw new Error(`reaction request ${request.id} has no accessible relational Fact basis`);
-        }
-      } else {
-        const checkRequest = checkRequestById.get(basis.checkId);
-        const result = checkResultById.get(basis.checkId);
-        if (!checkRequest || checkRequest.phase !== "perception" ||
-          checkRequest.actorId !== observer.entityId || !result?.succeeded ||
-          !checkRequest.causes.some((cause) => cause.kind === "action" && cause.id === trigger.id) ||
-          !checkRequest.causes.some((cause) => cause.kind === "fact" || cause.kind === "law")) {
-          throw new Error(`reaction request ${request.id} has no successful perception basis`);
-        }
-      }
+    const receipt = receipts.get(request.perceptionReceiptHash);
+    if (!receipt || receipt.kind !== "perceived" || receipt.observerId !== request.agentId ||
+      receipt.sourceActionId !== trigger.id || contentHash(receipt.stimulus) !== contentHash(request.stimulus)) {
+      throw new Error(`reaction request ${request.id} differs from its private perception receipt`);
     }
 
     const decision = decisionByRequest.get(request.id);
@@ -969,12 +940,32 @@ export class CanonicalCommitter {
     candidateInput: Readonly<WorldStepCandidate>,
     policyRoster: Readonly<Record<string, PolicyBinding>>,
     maxAutonomousSpanSeconds: number,
+    authority: { definition: WorldDefinition; preparation: Readonly<WorldStepPreparation> },
   ): {
     committed: CommittedStep;
     state: SimulationState;
   } {
     const source = structuredClone(sourceState) as SimulationState;
     const candidate = structuredClone(candidateInput);
+    const frozen = authority.preparation;
+    if (frozen.sourceStateHash !== contentHash(source) || frozen.policyRosterHash !== contentHash(policyRoster) ||
+      contentHash(candidate.onsetPerception) !== contentHash(frozen.onsetPerception) ||
+      contentHash(candidate.resolution.reactionRequests) !== contentHash(frozen.reactionRequests)) {
+      throw new Error("step candidate differs from the frozen onset preparation");
+    }
+    validateOnsetPerceptionReceipts({ definition: authority.definition, state: source,
+      actions: candidate.resolution.initialActions, targets: frozen.onsetPerception.targets,
+      requests: frozen.onsetPerception.requests, checks: frozen.onsetPerception.checks }, frozen.onsetPerception.receipts);
+    for (const request of frozen.onsetPerception.requests) {
+      if (!candidate.resolution.requests.some(candidate => candidate.id === request.id && contentHash(candidate) === contentHash(request))) {
+        throw new Error("step candidate changed a frozen perception check");
+      }
+    }
+    for (const check of frozen.onsetPerception.checks) {
+      if (!candidate.resolution.checks.some(candidate => candidate.requestId === check.requestId && contentHash(candidate) === contentHash(check))) {
+        throw new Error("step candidate changed a frozen perception result");
+      }
+    }
     const mindCommits = candidate.mindCommits
       .sort((left, right) => left.agentId.localeCompare(right.agentId));
     const resolution = candidate.resolution;
