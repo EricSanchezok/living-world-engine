@@ -7,6 +7,7 @@ import { conditionalPlanStakesRequest, CONDITIONAL_PLAN_STAKES } from "../../src
 import { effectProfileDomainsRequest, EFFECT_PROFILE_DOMAINS } from "../../src/engine/benchmarks/step-efficiency/effect-profile-domains";
 import { planningActionFramesRequest, PLANNING_ACTION_FRAMES } from "../../src/engine/benchmarks/step-efficiency/planning-action-frames";
 import { planningDecisionOrderRequest, PLANNING_DECISION_ORDER } from "../../src/engine/benchmarks/step-efficiency/planning-decision-order";
+import { factorChoiceProductsRequest, FACTOR_CHOICE_PRODUCTS } from "../../src/engine/benchmarks/step-efficiency/factor-choice-products";
 import { DEFAULT_ALGORITHM_REF, registerBuiltinAlgorithms } from "../../src/engine/algorithms/registry";
 import { algorithmRef, type AlgorithmManifest, type WorldStepInput, type WorldStepPreparation } from "../../src/engine/runtime/execution";
 import { RecordingRuntimeObserver, type RuntimeEvent } from "../../src/engine/runtime/observability";
@@ -41,8 +42,9 @@ export function planStakesRequestEvidence(request: StructuredModelRequest<unknow
 /** Real prepared-step reconstruction, bounded at the first physical planning request.
  * Every subsequent call is captured and stopped before HTTP or canonical commit. */
 export async function runPlayerPlanStakesProbe(argv: string[]) {
-  const [sourcePath, dataRoot, output, mode = "preflight", candidateMode = "stakes"] = argv;
-  if (!sourcePath || !dataRoot || !output || !["preflight", "run"].includes(mode) || !["stakes", "profile-domains", "action-frames", "decision-order"].includes(candidateMode)) throw new Error("Expected source-export data-root output-directory [preflight|run] [stakes|profile-domains|action-frames|decision-order]");
+  const [sourcePath, dataRoot, output, mode = "preflight", candidateMode = "stakes", baselineEvidencePath] = argv;
+  if (!sourcePath || !dataRoot || !output || !["preflight", "run"].includes(mode) || !["stakes", "profile-domains", "action-frames", "decision-order", "factor-products"].includes(candidateMode)) throw new Error("Expected source-export data-root output-directory [preflight|run] [stakes|profile-domains|action-frames|decision-order|factor-products] [baseline-request]");
+  if (candidateMode === "factor-products" && !baselineEvidencePath) throw new Error("Factor products requires the frozen earlier baseline request");
   mkdirSync(output, { recursive: false });
   const source: SourceExport = JSON.parse(readFileSync(sourcePath, "utf8"));
   const first = source.events.find(event => event.event === "model.context.serialized" &&
@@ -54,10 +56,11 @@ export async function runPlayerPlanStakesProbe(argv: string[]) {
   if (!recordedInput || !recordedPreparation || Object.keys(recordedInput.state.agents).length !== 49 || Object.values(recordedInput.policyRoster).filter(policy => policy.kind === "external").length !== 1) throw new Error("Expected a complete 48 NPC plus one player source");
   const input = structuredClone(recordedInput), preparation = structuredClone(recordedPreparation);
   const recordedRef = algorithmRef(source.execution.manifest);
-  const ref = candidateMode === "decision-order" ? DEFAULT_ALGORITHM_REF : recordedRef;
+  const counterfactual = ["decision-order", "factor-products"].includes(candidateMode);
+  const ref = counterfactual ? DEFAULT_ALGORITHM_REF : recordedRef;
   // This explicitly selected research boundary imports prepared canonical evidence
   // into the current producer. It is not a replay, save migration or world commit.
-  if (candidateMode === "decision-order") {
+  if (counterfactual) {
     preparation.algorithmManifestHash = ref.manifestHash;
     const restored = { ...preparation, algorithmManifestHash: recordedPreparation.algorithmManifestHash };
     if (contentHash(restored) !== contentHash(recordedPreparation)) throw new Error("Counterfactual preparation changed more than its producer binding");
@@ -109,12 +112,13 @@ export async function runPlayerPlanStakesProbe(argv: string[]) {
           throw new ProbeStopped("First-response scope complete; no repair, review, continuation or transition HTTP");
         }
         const conditional = candidateMode === "stakes" ? request : conditionalPlanStakesRequest(request);
-        const profiled = ["action-frames", "decision-order"].includes(candidateMode) ? effectProfileDomainsRequest(conditional) : conditional;
-        const control = candidateMode === "decision-order" ? planningActionFramesRequest(profiled) : profiled;
+        const profiled = ["action-frames", "decision-order", "factor-products"].includes(candidateMode) ? effectProfileDomainsRequest(conditional) : conditional;
+        const control = counterfactual ? planningActionFramesRequest(profiled) : profiled;
         const baseline = planStakesRequestEvidence(control);
         if (frozen && contentHash(JSON.stringify(baseline)) !== contentHash(JSON.stringify(frozen))) throw new Error("Reconstructed baseline request drift");
         frozen ??= baseline;
-        const adapted = arm === "C" ? (candidateMode === "decision-order" ? planningDecisionOrderRequest(control)
+        const adapted = arm === "C" ? (candidateMode === "factor-products" ? factorChoiceProductsRequest(control)
+          : candidateMode === "decision-order" ? planningDecisionOrderRequest(control)
           : candidateMode === "action-frames" ? planningActionFramesRequest(control)
           : candidateMode === "profile-domains" ? effectProfileDomainsRequest(control) : conditionalPlanStakesRequest(control)) : control;
         if (arm === "C") {
@@ -161,17 +165,20 @@ export async function runPlayerPlanStakesProbe(argv: string[]) {
   if (!frozen || !candidate) throw new Error("Failed to capture both complete requests");
   const baseline = frozen as ReturnType<typeof planStakesRequestEvidence>;
   const treatment = candidate as ReturnType<typeof planStakesRequestEvidence>;
-  const firstResponsePlan: readonly ("B" | "C")[] = candidateMode === "decision-order" ? ["B", "C"] : ["B", "C", "C", "B", "B", "C"];
+  const firstResponsePlan: readonly ("B" | "C")[] = candidateMode === "factor-products" ? ["C", "C"] : candidateMode === "decision-order" ? ["B", "C"] : ["B", "C", "C", "B", "B", "C"];
   const restored = structuredClone(treatment.context) as { task: Record<string, unknown> };
   if (candidateMode === "action-frames") delete restored.task.planningActionFrames;
   if (contentHash(restored) !== contentHash(baseline.context)) throw new Error("Candidate changed original source context");
   if (candidateMode === "decision-order" && contentHash(baseline.schema) !== contentHash(treatment.schema)) throw new Error("Decision order changed schema predicates");
-  save(output, "manifest.json", { protocol: candidateMode === "decision-order" ? PLANNING_DECISION_ORDER : candidateMode === "action-frames" ? PLANNING_ACTION_FRAMES : candidateMode === "profile-domains" ? EFFECT_PROFILE_DOMAINS : CONDITIONAL_PLAN_STAKES, candidateMode,
+  const earlierBaseline = baselineEvidencePath ? JSON.parse(readFileSync(baselineEvidencePath, "utf8")) : undefined;
+  if (earlierBaseline && contentHash(JSON.stringify(earlierBaseline)) !== contentHash(JSON.stringify(baseline))) throw new Error("Earlier baseline request differs; no new calls are authorized by this screen");
+  save(output, "manifest.json", { protocol: candidateMode === "factor-products" ? FACTOR_CHOICE_PRODUCTS : candidateMode === "decision-order" ? PLANNING_DECISION_ORDER : candidateMode === "action-frames" ? PLANNING_ACTION_FRAMES : candidateMode === "profile-domains" ? EFFECT_PROFILE_DOMAINS : CONDITIONAL_PLAN_STAKES, candidateMode,
     codeRevision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
     runnerHash: contentHash(readFileSync(new URL(import.meta.url), "utf8")),
     sourceExecution: source.execution.id, sourceInstance: source.execution.instanceId, sourceEvent: first.sequence,
     sourceHash: contentHash(source), sourceAlgorithm: recordedRef, manifest: ref, catalogHash: catalog.hash, sourceRequestHash: contentHash(recorded),
-    reconstruction: candidateMode === "decision-order" ? "counterfactual-prepared-boundary" : "registered-source-producer",
+    reconstruction: counterfactual ? "counterfactual-prepared-boundary" : "registered-source-producer",
+    earlierBaselineOrderedHash: earlierBaseline ? contentHash(JSON.stringify(earlierBaseline)) : null,
     sourcePreparationHash: contentHash(recordedPreparation), preparationHash: contentHash(preparation),
     baselineHash: contentHash(baseline), candidateHash: contentHash(treatment), sourceContextEqual: contentHash(recorded.context) === contentHash(baseline.context),
     baselineOrderedHash: contentHash(JSON.stringify(baseline)), candidateOrderedHash: contentHash(JSON.stringify(treatment)),
