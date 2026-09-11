@@ -9,16 +9,17 @@ export interface PlayerFeedbackResult {
   submissionId: string;
   text: string;
   baseRevision: number;
-  status: "running" | "completed" | "stopped";
+  status: "running" | "completed" | "awaiting-decision" | "stopped";
   firstFeedbackElapsedMs: number | null;
   completedElapsedMs: number | null;
+  endedElapsedMs: number | null;
   failure?: string;
   feedback: Array<{ revision: number; step: number; observedElapsedMs: number; truthHash: string;
     response: NonNullable<PublicConversationTurn["response"]>; observationCount: number }>;
   reactions: Array<{ windowId: string; observedElapsedMs: number; choice: "keep" }>;
 }
 
-/** Measures persisted player feedback; enqueueing and arrival prose are never feedback. */
+/** Measures persisted feedback and the submitted Activity's completion separately from run termination. */
 export async function runPlayerFeedbackAction(input: {
   host: WorldHost; instanceId: string; participantId: string; submissionId: string; text: string;
   read: () => WorldInstanceDocument;
@@ -32,7 +33,7 @@ export async function runPlayerFeedbackAction(input: {
   const initial = input.read().state;
   const result: PlayerFeedbackResult = { submissionId: input.submissionId, text: input.text,
     baseRevision: initial.revision, status: "running", firstFeedbackElapsedMs: null,
-    completedElapsedMs: null, feedback: [], reactions: [] };
+    completedElapsedMs: null, endedElapsedMs: null, feedback: [], reactions: [] };
   const started = performance.now();
   let previous = initial;
   input.onUpdate(result);
@@ -72,8 +73,21 @@ export async function runPlayerFeedbackAction(input: {
       }
       if (run.status === "completed" || run.status === "awaiting-decision") {
         if (!result.feedback.length || turn?.status !== "committed") throw new Error("player run ended without committed feedback");
-        result.completedElapsedMs = performance.now() - started;
-        result.status = "completed";
+        const activityId = result.feedback.at(-1)!.response.activity?.id;
+        const activity = activityId ? document.state.truth.activities[activityId] : undefined;
+        if (!activity || activity.actorId !== intent!.agentId || activity.sourceAction.baseRevision !== initial.revision ||
+          activity.sourceAction.rawText !== input.text || !run.activityIds.includes(activity.id)) {
+          throw new Error("terminal feedback is not bound to the submitted player Activity");
+        }
+        result.endedElapsedMs = performance.now() - started;
+        if (activity.status === "completed") {
+          result.completedElapsedMs = result.endedElapsedMs;
+          result.status = "completed";
+        } else if (run.status === "awaiting-decision") {
+          result.status = "awaiting-decision";
+        } else {
+          throw new Error(`player run ended with Activity ${activity.status}`);
+        }
         input.onUpdate(result);
         return result;
       }
@@ -107,6 +121,7 @@ export async function runPlayerFeedbackAction(input: {
       if (!run || !["queued", "running", "pausing"].includes(run.status)) break;
       await new Promise(resolve => setTimeout(resolve, input.pollMs ?? 250));
     }
+    result.endedElapsedMs = performance.now() - started;
     input.onUpdate(result);
     return result;
   }

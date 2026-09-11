@@ -25,13 +25,14 @@ import { loadLocalEncoder, livingWorldCacheRoot, discoverLocalEncoderModelDirect
 import { MULTILINGUAL_E5_BASE_ASSET } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/model-assets";
 import { relationalRrfEncoderFingerprint, R5_RELATIONAL_PASSAGE_SCHEMA_VERSION } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/relational-rrf";
 
-const protocol = { id: "integrated-player-goal-diagnostic-v2", seed: 20260911, maxHttp: 120,
+const protocol = { id: "integrated-player-goal-diagnostic-v3", seed: 20260911, maxHttp: 120,
   maxDispatchMs: 600_000, maxCommitsPerLease: 6, model: "deepseek-flash", thinking: "disabled",
   action: "向码头边靠着的领航人或搬运工打听哪里有便宜又安全的下榻处。",
   interpretation: "One full player action through WorldHost and persisted state, with all 48 original Agents plus the external participant. Combined candidate diagnostic, not an isolated comparison or qualification. Review actual source semantics before another action. No historical preparations or model outputs are imported. Timing and repairs include every new inference call; bootstrap is reported separately from submission-to-completion latency." } as const;
 const read = (file: string) => JSON.parse(readFileSync(file, "utf8"));
 const save = (root: string, file: string, value: unknown) => writeFileSync(path.join(root, file), `${JSON.stringify(value, null, 2)}\n`, { flag: "wx" });
 const sourceHashes = () => Object.fromEntries(["scripts/experiments/player-integrated-playtest.ts",
+  "scripts/operations/player-feedback-playtest.ts",
   "src/engine/benchmarks/step-efficiency/integrated-player-algorithm.ts",
   "src/engine/benchmarks/step-efficiency/agent-action-text.ts", "src/engine/prompts/shared/agent-action-text.md",
   "src/engine/prompts/shared/agent-action-text-raw.md", "src/engine/models/unmatched-closer-recovery.ts",
@@ -113,7 +114,8 @@ export async function runIntegratedPlayer(root: string) {
       stopReason, failure, player };
     writeFileSync(path.join(directory, "progress.json"), JSON.stringify(row, null, 2));
     process.stdout.write(`${JSON.stringify({ ...row, player: player && { status: player.status, firstFeedbackElapsedMs: player.firstFeedbackElapsedMs,
-      completedElapsedMs: player.completedElapsedMs, feedbackCount: player.feedback.length, failure: player.failure } })}\n`);
+      completedElapsedMs: player.completedElapsedMs, endedElapsedMs: player.endedElapsedMs,
+      feedbackCount: player.feedback.length, failure: player.failure } })}\n`);
   };
   const stop = () => { stopReason ??= "Operator stopped later dispatch"; };
   const deadline = setTimeout(() => { stopReason ??= "Ten-minute dispatch ceiling reached"; }, protocol.maxDispatchMs);
@@ -167,7 +169,7 @@ export async function runIntegratedPlayer(root: string) {
       onUpdate: result => { player = structuredClone(result); report(); },
       onCheckpoint: (evidence, observedElapsedMs) => save(directory, `step-${evidence.committed.step}-evidence.json`, { ...evidence, observedElapsedMs }),
     });
-    status = player.status === "completed" ? "awaiting-source-review" : "stopped";
+    status = player.status === "completed" || player.status === "awaiting-decision" ? "awaiting-source-review" : "stopped";
     failure = player.failure;
   } catch (error) { failure = String(error); stopReason ??= failure; status = "stopped"; }
   finally {

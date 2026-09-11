@@ -3,21 +3,48 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { expect, it } from "vitest";
 import { FULL_CATALOG_ALGORITHM_REF } from "../../src/engine/algorithms/registry";
-import { createTestModelCatalog, DeterministicModelProvider } from "../../src/engine/testing/model-provider";
+import { createTestModelCatalog, deterministicActionCompilationBatch, deterministicInteractionDependency,
+  deterministicModelOutput, ScriptedModelProvider } from "../../src/engine/testing/model-provider";
 import { ModelConfigurationError } from "../../src/engine/models/model-provider";
-import { loadWorldScript } from "../../src/script/world-loader";
+import { buildWorldDefinition, loadWorldTemplate } from "../../src/script/world-loader";
 import { MemoryWorldRepository } from "../../src/script/world-repository";
 import { LocalDatabase } from "../../src/server/local-database";
 import { WorldHost } from "../../src/server/world-host";
 import { runPlayerFeedbackAction, type PlayerFeedbackResult } from "./player-feedback-playtest";
 
-it.each([false, true])("measures actual persisted player feedback and preserves terminal failure=%s", async fail => {
+it.each(["completed", "failed", "awaiting-decision", "budget-paused"] as const)("measures persisted player feedback at %s", async outcome => {
   const root = mkdtempSync(path.join(tmpdir(), "player-feedback-"));
   const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
-  const provider = new DeterministicModelProvider(createTestModelCatalog(undefined, { maxInputBytes: 1_048_576 }));
-  const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 47, modelCatalog: provider.catalog });
+  const provider = new ScriptedModelProvider(({ role, profileId, context }) => {
+    if (outcome === "awaiting-decision" && role === "action-grounding") {
+      return deterministicInteractionDependency({
+        reads: [{ kind: "global", id: "world" }], writes: [{ kind: "global", id: "world" }],
+        audienceAgentIds: ["courtyard-wanderer-1"],
+      });
+    }
+    if (outcome === "awaiting-decision" && role === "action-compilation") {
+      return deterministicActionCompilationBatch(profileId, context, compilation => {
+        compilation.interactionDependency = deterministicInteractionDependency({
+          reads: [{ kind: "global", id: "world" }], writes: [{ kind: "global", id: "world" }],
+          audienceAgentIds: ["courtyard-wanderer-1"],
+        });
+      });
+    }
+    return deterministicModelOutput(profileId, context);
+  }, createTestModelCatalog(undefined, { maxInputBytes: 1_048_576 }));
+  const template = loadWorldTemplate(path.resolve("test/fixtures/open-world-script"));
+  if (outcome === "awaiting-decision" || outcome === "budget-paused") {
+    template.mechanics.temporal_profiles = template.mechanics.temporal_profiles.map(profile => {
+      if (profile.id !== "brief-action" || profile.kind !== "fixed") return profile;
+      const { duration_seconds, checkpoint_seconds, ...common } = profile;
+      expect(duration_seconds).toBe(checkpoint_seconds);
+      return { ...common, kind: "goal", check_every_seconds: checkpoint_seconds };
+    });
+  }
+  const definition = buildWorldDefinition(template, { seed: 47, modelCatalog: provider.catalog });
   const repository = new MemoryWorldRepository({ [definition.id]: definition });
-  const options = { repository, store: database, ledger: database, provider, defaultAlgorithmRef: FULL_CATALOG_ALGORITHM_REF };
+  const options = { repository, store: database, ledger: database, provider, defaultAlgorithmRef: FULL_CATALOG_ALGORITHM_REF,
+    runLeaseMaxCommits: 3 };
   const host = new WorldHost(options);
   try {
     const created = await host.createInstance({ worldId: definition.id, start: { kind: "origin", originId: "courtyard-wanderer",
@@ -29,7 +56,7 @@ it.each([false, true])("measures actual persisted player feedback and preserves 
     const gate = new Promise<void>(resolve => { release = resolve; });
     provider.generateStructured = async request => {
       entered(); await gate;
-      if (fail) throw new ModelConfigurationError("injected unavailable model");
+      if (outcome === "failed") throw new ModelConfigurationError("injected unavailable model");
       return generate(request);
     };
     const updates: PlayerFeedbackResult[] = [];
@@ -45,17 +72,32 @@ it.each([false, true])("measures actual persisted player feedback and preserves 
     expect(host.instance(created.summary.id).summary.revision).toBe(created.summary.revision);
     release();
     const result = await promise;
-    if (fail) {
+    if (outcome === "failed") {
       expect(result).toMatchObject({ status: "stopped", firstFeedbackElapsedMs: null, completedElapsedMs: null, feedback: [] });
       expect(result.failure).toBeTruthy();
       expect(checkpoints).toEqual([]);
       expect(host.instance(created.summary.id).summary.revision).toBe(created.summary.revision);
+    } else if (outcome === "awaiting-decision") {
+      const final = database.readInstance(created.summary.id).document;
+      const intent = final.participantIntents.find(value => value.submissionId === result.submissionId)!;
+      expect(final.runs[intent.runId]!.status).toBe("awaiting-decision");
+      expect(Object.values(final.state.truth.activities).find(activity => activity.actorId === intent.agentId))
+        .toMatchObject({ status: "paused", completionAtSeconds: null });
+      expect(result).toMatchObject({ status: "awaiting-decision", completedElapsedMs: null });
+      expect(result.firstFeedbackElapsedMs).toBeGreaterThan(0);
+      expect(result.endedElapsedMs).toBeGreaterThanOrEqual(result.firstFeedbackElapsedMs!);
+      expect(result.feedback.at(-1)!.response.activity?.status).toBe("paused");
+    } else if (outcome === "budget-paused") {
+      expect(result).toMatchObject({ status: "stopped", completedElapsedMs: null });
+      expect(result.feedback).toHaveLength(3);
+      expect(result.feedback.at(-1)!.response.activity?.status).toBe("active");
     } else {
       expect(result.status).toBe("completed");
       expect(result.feedback).toHaveLength(1);
       expect(checkpoints).toEqual([created.summary.revision + 1]);
       expect(result.firstFeedbackElapsedMs).toBeGreaterThan(0);
       expect(result.completedElapsedMs).toBeGreaterThanOrEqual(result.firstFeedbackElapsedMs!);
+      expect(result.endedElapsedMs).toBe(result.completedElapsedMs);
       expect(result.feedback[0]!.observationCount).toBeGreaterThan(0);
       const refreshed = new WorldHost(options).instance(created.summary.id);
       expect(refreshed.conversation!.turns[1]!.response).toEqual(result.feedback[0]!.response);
