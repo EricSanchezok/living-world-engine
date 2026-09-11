@@ -1214,8 +1214,9 @@ function scopedActors(
   state: Readonly<SimulationState>,
   actions: readonly AgentActionProposal[],
   groundings: readonly InteractionDependency[],
+  observerIds: readonly string[] = [],
 ): Record<string, { entityId: string; existingLocalEntityIds: string[]; localEntityBindings: Record<string, string[]> }> {
-  const ids = new Set<string>(actions.map((action) => action.actorId));
+  const ids = new Set<string>([...actions.map((action) => action.actorId), ...observerIds]);
   groundings.forEach((grounding) => {
     if (grounding.actorId !== null) ids.add(grounding.actorId);
     grounding.audienceAgentIds.forEach((agentId) => ids.add(agentId));
@@ -1236,8 +1237,9 @@ function projectModelActors(
   actions: readonly AgentActionProposal[],
   groundings: readonly InteractionDependency[],
   resolver: ReferenceResolver,
+  observerIds: readonly string[] = [],
 ): Record<string, unknown>[] {
-  const scoped = scopedActors(state, actions, groundings);
+  const scoped = scopedActors(state, actions, groundings, observerIds);
   return Object.entries(scoped).map(([agentId, actor]) => ({
     agentRef: resolver.handleFor("agent", agentId),
     entityRef: resolver.handleFor("entity", actor.entityId),
@@ -1268,8 +1270,9 @@ function perceptionCheckConstraints(
   actions: readonly AgentActionProposal[],
   groundings: readonly InteractionDependency[],
   resolver: ReferenceResolver,
+  observerIds: readonly string[] = [],
 ): unknown {
-  const actorEntityIds = new Set(Object.values(scopedActors(state, actions, groundings))
+  const actorEntityIds = new Set(Object.values(scopedActors(state, actions, groundings, observerIds))
     .map((actor) => actor.entityId));
   return {
     numericRules: { environmentDc: difficultyDc, opposedBaseDc: 10, actorRating: "one owned Rating, exact value, or null" },
@@ -1291,6 +1294,7 @@ export function createTruthReferenceResolver(input: {
   state: Readonly<SimulationState>;
   definition: WorldDefinition;
   actions: readonly AgentActionProposal[];
+  observerIds?: readonly string[];
   events?: readonly WorldEvent[];
     outcomes?: readonly ActionOutcome[];
   checkRequests?: readonly D20CheckRequest[];
@@ -1327,6 +1331,7 @@ export function createTruthReferenceResolver(input: {
     localTargetsByAgent.set(action.actorId, targets);
   }
   const relevantAgentIds = new Set(actions.map((action) => action.actorId));
+  const observerIds = new Set(input.observerIds ?? []);
   const mechanicCandidates = (input.mechanicContracts ?? []).map((contract) => ({
     kind: "mechanic" as const,
     engineId: `${contract.packageId}::${contract.ruleId}`,
@@ -1352,7 +1357,7 @@ export function createTruthReferenceResolver(input: {
         statePath: `history.agents.${agentId}`,
       })),
     ...Object.values(state.agents).flatMap((agent) => Object.values(agent.belief.localEntities)
-      .filter((entity) => relevantAgentIds.has(agent.id) && (localTargetsByAgent.get(agent.id)?.has(entity.id) ?? false))
+      .filter((entity) => observerIds.has(agent.id) || relevantAgentIds.has(agent.id) && (localTargetsByAgent.get(agent.id)?.has(entity.id) ?? false))
       .map((entity) => ({
       kind: "local_entity" as const,
       engineId: `${agent.id}::${entity.id}`,
@@ -1741,12 +1746,14 @@ export function buildTruthContext(input: {
     ...(input.candidateResolutionPlans ?? []),
   ];
   const planCandidates = resolutionPlanReferenceCandidates(plansForProjection);
-  const referenceResolver = planCandidates.length === 0
+  const observerIds = stage === "perception" ? [...new Set(input.perceptionTargets?.map(target => target.observerId) ?? [])] : [];
+  const referenceResolver = planCandidates.length === 0 && observerIds.length === 0
     ? projection.resolver
     : createTruthReferenceResolver({
       state: availableState,
       definition: input.definition,
       actions: availableActions,
+      observerIds,
       observations: input.reactionRequests.map((request) => request.stimulus),
       resolutionReceipts: input.resolutionReceipts,
       includeHistoryActions: input.includeHistoryActions,
@@ -1767,7 +1774,7 @@ export function buildTruthContext(input: {
     assignment: {
       targetHandles: assignedActions.map((action) => modelHandle({ existing: referenceResolver }, "action", action.id)),
       availableHandles: availableActions.map((action) => modelHandle({ existing: referenceResolver }, "action", action.id)),
-      allowedProposalKinds: stage === "transition" ? ["entity", "fact", "agent", "event", "outcome", "mechanic"] : [],
+      allowedProposalKinds: stage === "transition" ? ["entity", "fact", "agent", "event", "outcome", "mechanic"] : stage === "perception" ? ["local_entity"] : [],
       ...(stage === "perception" && input.perceptionTargets !== undefined ? {
         perceptionTargets: projectPerceptionTargets(input.perceptionTargets, input.state, availableActions, referenceResolver),
       } : {}),
@@ -1848,6 +1855,7 @@ export function buildTruthContext(input: {
       contextMode === "full" ? availableActions : availableActions,
       contextMode === "full" ? availableGroundings : availableGroundings,
       referenceResolver,
+      observerIds,
     ),
     temporalBoundary: input.temporalBoundary,
     reactionRequests: input.reactionRequests.map((request) => ({
@@ -1877,7 +1885,7 @@ export function buildTruthContext(input: {
     randomResults: input.randomResults.map((result) => projectModelRandomResult(result, modelRefs)),
     commitmentRounds: input.commitmentRounds.map((round) => projectModelCommitmentRound(round, modelRefs)),
     ...(stage === "perception" ? {
-      perceptionCheckConstraints: perceptionCheckConstraints(input.state, availableActions, availableGroundings, referenceResolver),
+      perceptionCheckConstraints: perceptionCheckConstraints(input.state, availableActions, availableGroundings, referenceResolver, observerIds),
     } : {}),
   };
   return {

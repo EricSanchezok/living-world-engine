@@ -642,7 +642,8 @@ async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
   const evidence = resolutionEvidenceIndex(input.state, input.actions, input.definition.laws);
 
   while (true) {
-    const referenceInput = { state: input.state, definition: input.definition, actions: input.actions, checkRequests: requests };
+    const referenceInput = { state: input.state, definition: input.definition, actions: input.actions, checkRequests: requests,
+      observerIds: input.perceptionTargets?.map(target => target.observerId) };
     const resolver = createTruthReferenceResolver(referenceInput);
     const allowed = perceptionCauseScope(referenceInput);
     const accepted = { round: null as D20CheckRequest[] | null };

@@ -204,13 +204,16 @@ const modelLocalEntitySchema = z.strictObject({
   status: z.enum(["observed", "reported", "hypothesized"]),
 });
 
-export const modelBeliefValueSchema = z.discriminatedUnion("kind", [
-  z.strictObject({ kind: z.literal("text"), value: z.string() }),
-  z.strictObject({ kind: z.literal("number"), value: z.number().finite() }),
-  z.strictObject({ kind: z.literal("boolean"), value: z.boolean() }),
-  z.strictObject({ kind: z.literal("local_entity"), entityRef: modelReferenceSchema }),
-  z.strictObject({ kind: z.literal("none") }),
-]);
+function beliefValueSchemaWithReferences(reference: typeof modelReferenceSchema) {
+  return z.discriminatedUnion("kind", [
+    z.strictObject({ kind: z.literal("text"), value: z.string() }),
+    z.strictObject({ kind: z.literal("number"), value: z.number().finite() }),
+    z.strictObject({ kind: z.literal("boolean"), value: z.boolean() }),
+    z.strictObject({ kind: z.literal("local_entity"), entityRef: reference }),
+    z.strictObject({ kind: z.literal("none") }),
+  ]);
+}
+export const modelBeliefValueSchema = beliefValueSchemaWithReferences(modelReferenceSchema);
 
 const modelEvidenceSchema = z.strictObject({
   proposalKey: proposalKeySchema,
@@ -968,9 +971,9 @@ const modelObservationIntroductionSchema = z.strictObject({
 });
 
 const modelApparentClaimSchema = z.strictObject({
-  subjectRef: modelReferenceSchema,
+  subjectRef: modelReferenceSchemaFor("local_entity", { allowProposal: true }),
   predicate: z.string().min(1),
-  value: modelBeliefValueSchema,
+  value: beliefValueSchemaWithReferences(modelReferenceSchemaFor("local_entity", { allowProposal: true })),
   description: z.string(),
 });
 

@@ -124,7 +124,7 @@ export function perceptionReferenceCatalog(
     const { kind, engineId } = resolver.resolve(candidate.handle);
     return { ...candidate, allowedUses: candidate.allowedUses.filter(use => {
       if (use === "actor") return kind === "entity" && input.state.truth.entities[engineId]?.lifecycle === "active";
-      if (use === "target") return kind === "entity" && Boolean(input.state.truth.entities[engineId]);
+      if (use === "target") return kind === "local_entity" || kind === "entity" && Boolean(input.state.truth.entities[engineId]);
       if (use === "modifier") return kind === "rating" && Boolean(input.state.truth.ratings[engineId]);
       if (use === "cause") return causes[kind as CausalRef["kind"]]?.has(engineId) ?? false;
       if (use === "distribution") return false;

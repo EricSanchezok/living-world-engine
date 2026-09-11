@@ -451,7 +451,7 @@ const definitions = [
     children: noChildren,
   }, (algorithmIdentity, config, children) => new SymbolRepairAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({
-    ...identity("onset-perception", "model-onset-perception", "7"),
+    ...identity("onset-perception", "model-onset-perception", "8"),
     maturity: "reference",
     configSchema: z.strictObject({ fallback: z.literal("global"), contextMode: z.literal("full"), ratingChoices: z.literal(PERCEPTION_RATING_CHOICES).optional() }),
     children: noChildren,
@@ -550,7 +550,7 @@ const definitions = [
     ],
   }, (algorithmIdentity, config, children) => new TruthResolutionAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({
-    ...identity("observation-rendering", "model-observation-rendering", "2"),
+    ...identity("observation-rendering", "model-observation-rendering", "3"),
     maturity: "reference",
     configSchema: z.strictObject({}),
     children: [
@@ -559,7 +559,7 @@ const definitions = [
     ],
   }, (algorithmIdentity, config, children) => new ObservationRenderingAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({
-    ...identity("observation-rendering", "source-bound-observation-rendering", "2"),
+    ...identity("observation-rendering", "source-bound-observation-rendering", "3"),
     maturity: "reference",
     configSchema: z.strictObject({ evidenceLayout: z.literal(OBSERVATION_EVIDENCE_LAYOUT).optional(),
       claimEncoding: z.literal(OBSERVATION_CLAIM_ENCODING).optional() }).refine(config => !config.claimEncoding || Boolean(config.evidenceLayout),
@@ -761,7 +761,7 @@ export function registerBuiltinAlgorithms(
   if (registry.has(DEFAULT_ALGORITHM_REF)) return registry;
   for (const definition of definitions) registry.registerAlgorithmDefinition(definition);
   registry.registerDefinition({
-    ...identity("world-execution", "eager-reference", "24", 9),
+    ...identity("world-execution", "eager-reference", "25", 9),
     maturity: "reference",
     configSchema: z.strictObject({}),
     children: [

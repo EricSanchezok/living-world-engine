@@ -48,7 +48,7 @@ export function validateOnsetPerceptionReceipts(
 ): void {
   if (repeatedPerceptionChecks([], input.requests).length) throw new Error("onset transcript repeats a perception check");
   const receipts = z.array(onsetPerceptionReceiptSchema).parse(values);
-  const resolver = createTruthReferenceResolver({ ...input, checkRequests: input.requests });
+  const resolver = createTruthReferenceResolver({ ...input, checkRequests: input.requests, observerIds: input.targets.map(target => target.observerId) });
   projectPerceptionTargets(input.targets, input.state, input.actions, resolver);
   if (receipts.length !== input.targets.length) throw new Error("onset receipts must cover every assigned target exactly once");
   const sourceHash = contentHash(input.state);
@@ -109,7 +109,7 @@ export function materializeOnsetPerceptionReceipts(
   values: readonly OnsetPerceptionReportDraft[],
 ): OnsetPerceptionReceipt[] {
   const reports = z.array(onsetPerceptionReportSchema).parse(values);
-  const resolver = createTruthReferenceResolver({ ...input, checkRequests: input.requests });
+  const resolver = createTruthReferenceResolver({ ...input, checkRequests: input.requests, observerIds: input.targets.map(target => target.observerId) });
   projectPerceptionTargets(input.targets, input.state, input.actions, resolver);
   const indices = new Set(reports.map(report => report.targetIndex));
   if (reports.length !== input.targets.length || indices.size !== reports.length ||

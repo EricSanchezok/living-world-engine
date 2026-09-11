@@ -368,7 +368,7 @@ export function createEagerReferenceAlgorithmRef(
       onsetPerception: defineAlgorithmRef({
         role: "onset-perception",
         id: "model-onset-perception",
-        version: "7",
+        version: "8",
         contractVersion: 1,
         config: { fallback: "global", contextMode: "full" },
       }),
@@ -394,7 +394,7 @@ export function createEagerReferenceAlgorithmRef(
   const observationRendering = defineAlgorithmRef({
     role: "observation-rendering",
     id: "model-observation-rendering",
-    version: "2",
+    version: "3",
     contractVersion: 1,
     config: {},
     children: { batching: batching(config.truthBatchMaxSlots), recovery: recovery() },
@@ -402,7 +402,7 @@ export function createEagerReferenceAlgorithmRef(
   return defineAlgorithmRef({
     role: "world-execution",
     id: "eager-reference",
-    version: "24",
+    version: "25",
     contractVersion: 9,
     config: {},
     children: { agentCognition, actionCompilation, interactionGrounding, reactionResolution, truthResolution, observationRendering },

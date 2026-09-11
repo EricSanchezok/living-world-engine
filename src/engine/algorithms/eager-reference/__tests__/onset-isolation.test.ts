@@ -9,7 +9,7 @@ import { ScriptedModelProvider, deterministicActionCompilationBatch, determinist
   deterministicModelOutput, deterministicOnsetReports } from "../../../testing/model-provider";
 import { EagerReferenceAlgorithm } from "../eager-reference";
 
-type Mode = "silent" | "occluded" | "friend" | "unrelated" | "visible" | "remote" | "introduction" | "missing" | "incomplete";
+type Mode = "silent" | "occluded" | "friend" | "unrelated" | "visible" | "remote" | "introduction" | "existing-identities" | "missing" | "incomplete";
 async function fixture(mode: Mode, secret = "PRIVATE_ALPHA", forge = false, externalKeeper = false) {
   const provider = new ScriptedModelProvider(({ role, profileId, context }) => {
     if (role === "action-compilation") return deterministicActionCompilationBatch(profileId, context, compilation => {
@@ -20,8 +20,11 @@ async function fixture(mode: Mode, secret = "PRIVATE_ALPHA", forge = false, exte
       if (mode === "missing") return { kind: "done" };
       if (mode === "incomplete") return { kind: "done", reports: [] };
       const targets = (context as { task: { assignment: { perceptionTargets: Array<{ observerRef: string }> } } }).task.assignment.perceptionTargets;
+      const actors = (context as { state: { actors: Array<{ entityRef: string; localEntityBindings: Array<{ localEntityRef: string; canonicalEntityRefs: string[] }> }> } }).state.actors;
+      const traveler = actors.find(actor => actor.entityRef === "ref:entity:keeper")?.localEntityBindings
+        .find(binding => binding.canonicalEntityRefs.includes("ref:entity:player"))?.localEntityRef;
       return { kind: "done", reports: deterministicOnsetReports(context, "no_stimulus").map(report =>
-        ["visible", "remote", "introduction"].includes(mode) && targets[report.targetIndex]!.observerRef === "ref:entity:keeper"
+        ["visible", "remote", "introduction", "existing-identities"].includes(mode) && targets[report.targetIndex]!.observerRef === "ref:entity:keeper"
           ? { ...report, kind: "perceived", reason: "The current raised hand is perceptible through the authored channel; private plans are not.",
               evidence: [{ kind: "law", ref: "ref:law:onset-channel" }],
               stimulus: { summary: "You see the traveler raise a hand.", sourceEventRefs: [],
@@ -29,7 +32,9 @@ async function fixture(mode: Mode, secret = "PRIVATE_ALPHA", forge = false, exte
                   proposalKey: "traveler-seen", name: "A traveler", description: "A person raising a hand", status: "observed",
                 } }] : [],
                 apparentClaims: mode === "introduction" ? [{ subjectRef: { proposalKey: "traveler-seen" }, predicate: "gesture",
-                  value: { kind: "text", value: "raised hand" }, description: "The traveler raises a hand." }] : [] } }
+                  value: { kind: "text", value: "raised hand" }, description: "The traveler raises a hand." }]
+                  : mode === "existing-identities" ? [{ subjectRef: traveler, predicate: "gesture",
+                    value: { kind: "text", value: "raised hand" }, description: "The traveler raises a hand." }] : [] } }
           : { ...report, reason: "The authored sensory boundary supplies no observable onset.",
               evidence: [{ kind: "law", ref: "ref:law:onset-channel" }] }) };
     }
@@ -47,7 +52,7 @@ async function fixture(mode: Mode, secret = "PRIVATE_ALPHA", forge = false, exte
     description: "They are friends; this does not provide communication or perception.", provenance: [{ kind: "world_seed", id: initial.worldHash }] };
   definition.laws.push({ id: "onset-channel", severity: "hard", text: mode === "remote"
     ? "An active scrying channel lets the keeper see the traveler's current hand gesture across locations, without a check. Silent thoughts remain private."
-    : mode === "visible" || mode === "introduction" ? "The keeper can clearly see the traveler's current hand gesture in the open courtyard, without a check. Silent thoughts remain private."
+    : ["visible", "introduction", "existing-identities"].includes(mode) ? "The keeper can clearly see the traveler's current hand gesture in the open courtyard, without a check. Silent thoughts remain private."
       : "The private thought is silent and never communicated. An opaque barrier hides any gesture, even in the same courtyard. Different locations are isolated from sound, sight, telepathy and relays. Friendship grants no channel." });
   initial.lawIds.push("onset-channel");
   definition.historyBaseHash = historyReplayBaseHash(initial);
@@ -145,6 +150,18 @@ it("keeps a new introduction local in AgentMind while committing its binding on 
   expect(JSON.stringify(call.context)).not.toMatch(/canonicalEntityId|canonicalEntityRef|ref:entity:player|PRIVATE_ALPHA/);
   const intro = result.committed.reactionRequests[0]!.stimulus.introductions[0]!;
   expect(result.state.agents.keeper!.bindings[intro.localEntity.id]!.canonicalEntityIds).toContain("player");
+});
+
+it("delivers claims about an existing local identity through actual AgentMind without replacing that identity", async () => {
+  const test = await fixture("existing-identities"), before = contentHash(test.engine.snapshot);
+  const preparation = await test.engine.prepareStep(test.roster, test.request);
+  const stimulus = preparation.reactionRequests.find(request => request.agentId === "keeper")!.stimulus;
+  expect(stimulus.introductions).toEqual([]);
+  expect(stimulus.apparentClaims[0]!.subjectId).toBe("traveler");
+  const call = test.provider.requests.find(request => request.role === "agent-reaction")!;
+  expect(JSON.stringify(call.context)).toContain("ref:local_entity:traveler");
+  expect(JSON.stringify(call.context)).not.toMatch(/canonicalEntityId|canonicalEntityRef|ref:entity:player|keeper::traveler|PRIVATE_ALPHA/);
+  expect(contentHash(test.engine.snapshot)).toBe(before);
 });
 
 it("restores an external reaction from the same serialized receipt without another perception call", async () => {

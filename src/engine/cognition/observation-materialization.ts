@@ -1,6 +1,6 @@
 import type { ModelObservationRenderDraft } from "../contracts/llm-schemas";
 import type { ObservationPacket, ObservationPacketDraft, SimulationState } from "../contracts/model";
-import { createAgentReferenceResolver, isProposalReference, type ModelReference, type ReferenceResolver } from "../contracts/model-context";
+import { isProposalReference, type ModelReference, type ReferenceResolver } from "../contracts/model-context";
 import { contentHash } from "../models/model-audit";
 import { runtimeId } from "../runtime/runtime-id";
 
@@ -70,7 +70,6 @@ export function materializePrivateStimuli(
   const materializeStimulus = (request: PrivateStimulusDraft, agentId: string, index: number): ObservationPacketDraft => {
     const agent = state.agents[agentId];
     if (!agent) throw new Error(`reaction request references unknown Agent ${agentId}`);
-    const localResolver = createAgentReferenceResolver(agent, []);
     const proposalIds = new Map<string, string>();
     const newLocalId = (key: string): string => {
       if (proposalIds.has(key)) throw new Error(`reaction stimulus duplicates proposalKey ${key}`);
@@ -84,9 +83,13 @@ export function materializePrivateStimuli(
         if (!id) throw new Error(`reaction stimulus references undeclared proposalKey ${reference.proposalKey}`);
         return id;
       }
-      const resolved = localResolver.resolve(reference, "target");
+      const resolved = truthResolver.resolve(reference, "target");
       if (resolved.kind !== "local_entity") throw new Error(`reaction stimulus reference ${reference} is ${resolved.kind}, expected local_entity`);
-      return resolved.engineId;
+      const prefix = `${agentId}::`;
+      if (!resolved.engineId.startsWith(prefix) || !agent.belief.localEntities[resolved.engineId.slice(prefix.length)]) {
+        throw new Error(`reaction stimulus local reference ${reference} does not belong to observer ${agentId}`);
+      }
+      return resolved.engineId.slice(prefix.length);
     };
     const introductions = request.stimulus.introductions.map((introduction) => ({
       localEntity: {

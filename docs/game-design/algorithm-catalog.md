@@ -17,9 +17,9 @@ The executable registry is authoritative. Maturity describes enrollment policy a
 | `candidate-selection` | `full-catalog@1` | 1 | reference | — |
 | `candidate-selection` | `relational-rrf@2` | 1 | reference | `ranking` → `candidate-ranking`<br>`allocation` → `candidate-allocation` |
 | `interaction-grounding` | `model-interaction-grounding@1` | 1 | reference | `scheduling` → `work-scheduling`<br>`recovery` → `output-recovery` |
-| `observation-rendering` | `model-observation-rendering@2` | 1 | reference | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
-| `observation-rendering` | `source-bound-observation-rendering@2` | 1 | reference | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
-| `onset-perception` | `model-onset-perception@7` | 1 | reference | — |
+| `observation-rendering` | `model-observation-rendering@3` | 1 | reference | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
+| `observation-rendering` | `source-bound-observation-rendering@3` | 1 | reference | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
+| `onset-perception` | `model-onset-perception@8` | 1 | reference | — |
 | `output-recovery` | `localized-repair-bisect@1` | 1 | reference | — |
 | `reaction-decision` | `model-reaction-decision@1` | 1 | reference | — |
 | `reaction-resolution` | `onset-reaction@1` | 1 | reference | `onsetPerception` → `onset-perception`<br>`reactionDecision` → `reaction-decision`<br>`scheduling` → `work-scheduling`<br>`recovery` → `output-recovery` |
@@ -34,7 +34,7 @@ The executable registry is authoritative. Maturity describes enrollment policy a
 | `work-batching` | `shared-context-slot-batching@2` | 1 | reference | — |
 | `work-batching` | `shared-state-first-slot-batching@1` | 1 | reference | — |
 | `work-scheduling` | `bounded-concurrency@1` | 1 | reference | — |
-| `world-execution` | `eager-reference@24` | 9 | reference | `agentCognition` → `agent-cognition`<br>`actionCompilation` → `action-compilation`<br>`interactionGrounding` → `interaction-grounding`<br>`reactionResolution` → `reaction-resolution`<br>`truthResolution` → `truth-resolution`<br>`observationRendering` → `observation-rendering` |
+| `world-execution` | `eager-reference@25` | 9 | reference | `agentCognition` → `agent-cognition`<br>`actionCompilation` → `action-compilation`<br>`interactionGrounding` → `interaction-grounding`<br>`reactionResolution` → `reaction-resolution`<br>`truthResolution` → `truth-resolution`<br>`observationRendering` → `observation-rendering` |
 
 ## Benchmark-only algorithms
 
@@ -61,11 +61,11 @@ These implementations are replaceable inside the offline evaluation harness, but
 
 ## Default composition
 
-Root hash: `eaa37dfb7e24afa61e5f55b8be0c24824f5cc477343e5e29b28692e1e60caeff`
+Root hash: `c0e190f9bbbcaa2b4cefef36155f6b7228aa4f28106d23517f51c28935bc385d`
 
 | Node path | Role | Algorithm | Contract | Manifest hash |
 | --- | --- | --- | ---: | --- |
-| `root` | `world-execution` | `eager-reference@24` | 9 | `eaa37dfb7e24afa61e5f55b8be0c24824f5cc477343e5e29b28692e1e60caeff` |
+| `root` | `world-execution` | `eager-reference@25` | 9 | `c0e190f9bbbcaa2b4cefef36155f6b7228aa4f28106d23517f51c28935bc385d` |
 | `root.agentCognition` | `agent-cognition` | `model-agent-cognition@1` | 1 | `1daa82dc5f667b7486ecddcbc1cd07d57accf916cb66a2d7d7ae32cf04d9630d` |
 | `root.agentCognition.batching` | `work-batching` | `bounded-slot-batching@1` | 1 | `8a6cc0ef438150ba0f22f8671b1ccedb81468f0c407976caae1521102e771981` |
 | `root.agentCognition.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |
@@ -79,14 +79,14 @@ Root hash: `eaa37dfb7e24afa61e5f55b8be0c24824f5cc477343e5e29b28692e1e60caeff`
 | `root.interactionGrounding` | `interaction-grounding` | `model-interaction-grounding@1` | 1 | `b8f404f7113e6201b9302aa8e1a6a8d8e99a02442daeaa347f6c0da36126983a` |
 | `root.interactionGrounding.scheduling` | `work-scheduling` | `bounded-concurrency@1` | 1 | `c7439a837f29219df2f742ad910a15bf05d759586e1ed95260f724aba6a33b84` |
 | `root.interactionGrounding.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |
-| `root.reactionResolution` | `reaction-resolution` | `onset-reaction@1` | 1 | `e5196d50936db9c50ed91a986832c3172afefe23c4f9d597f6b3363366d4c8b5` |
-| `root.reactionResolution.onsetPerception` | `onset-perception` | `model-onset-perception@7` | 1 | `e1b3481e652e55eca544137498bf5ffc630ce271bbdf4e4b46a3949d2018c95b` |
+| `root.reactionResolution` | `reaction-resolution` | `onset-reaction@1` | 1 | `eebd8223b9edeac7fa615c14d6869395cd6055c2b5c0f4513b9bb518cba3a49a` |
+| `root.reactionResolution.onsetPerception` | `onset-perception` | `model-onset-perception@8` | 1 | `359e23d60efdb6ef8cdabc9cfabcb0eb342302285ee28ad2d24fd2b1a11c9ad4` |
 | `root.reactionResolution.reactionDecision` | `reaction-decision` | `model-reaction-decision@1` | 1 | `f601d8335328d0689059ce16d69ac4548c766b5d36b67f3919ecce3f05fcccac` |
 | `root.reactionResolution.scheduling` | `work-scheduling` | `bounded-concurrency@1` | 1 | `2348f501124ef2ed707eec5123ef91a1639a9c3375804201e1b19be2aaf3cf69` |
 | `root.reactionResolution.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |
 | `root.truthResolution` | `truth-resolution` | `indexed-reviewed-truth-resolution@5` | 3 | `c6e4b8600c6d3f93d3829a3e154bd8e39915d17ec6b2e9e931d4e78e40fab845` |
 | `root.truthResolution.batching` | `work-batching` | `shared-state-first-slot-batching@1` | 1 | `67a01403a0f54e5bb154ddb4f8b1bd6f2cd6e6b3a07922f877d7f4874fd01a1e` |
 | `root.truthResolution.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |
-| `root.observationRendering` | `observation-rendering` | `source-bound-observation-rendering@2` | 1 | `df4f6f6b9c3263d28640ec08c2c420f451884d9013a77de38a49f1932504793e` |
+| `root.observationRendering` | `observation-rendering` | `source-bound-observation-rendering@3` | 1 | `726cf5b7ec1f4a545eb101451f3427c373e2208f560077b8298657f128e9c2f2` |
 | `root.observationRendering.batching` | `work-batching` | `shared-context-slot-batching@2` | 1 | `dfbacc7a899aa7e6502c0b10dac80b42ff15b8191b84393757d4c34b7cec266f` |
 | `root.observationRendering.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |

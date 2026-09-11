@@ -239,7 +239,7 @@ it("delivers onset-only responsibility with unchanged evidence through repair an
 });
 
 it.each([{ targets: [] }, { targets: [{ observerId: "keeper", sourceActionId: "inspect-key" }] }])(
-  "adds only the exact focused task to the real request, including an explicit empty task ($targets)", async ({ targets }) => {
+  "adds the exact focused task and observer identities while preserving canonical evidence ($targets)", async ({ targets }) => {
     const baseline = fixture(() => ({ kind: "done" }));
     await baseline.run();
     const focused = fixture(() => ({ kind: "done" }));
@@ -248,12 +248,22 @@ it.each([{ targets: [] }, { targets: [{ observerId: "keeper", sourceActionId: "i
     expect(focused.provider.requests).toHaveLength(1);
     const context = structuredClone(focused.provider.requests[0]!.context) as {
       task: { assignment: { perceptionTargets?: unknown } };
+      referenceCatalog: ModelReferenceCatalog;
+      state: Record<string, unknown>;
     };
     expect(context.task.assignment.perceptionTargets).toEqual(targets.map((_, targetIndex) => ({
       targetIndex, observerRef: "ref:entity:keeper", sourceActionRef: "ref:action:inspect-key",
     })));
     delete context.task.assignment.perceptionTargets;
-    expect(context).toEqual(baseline.provider.requests[0]!.context);
+    const original = baseline.provider.requests[0]!.context as typeof context;
+    const comparable = structuredClone(context);
+    comparable.referenceCatalog = original.referenceCatalog;
+    comparable.state.actors = original.state.actors;
+    comparable.state.perceptionCheckConstraints = original.state.perceptionCheckConstraints;
+    expect(comparable).toEqual(original);
+    for (const candidate of original.referenceCatalog.candidates) {
+      expect(context.referenceCatalog.candidates.find(entry => entry.handle === candidate.handle)).toEqual(candidate);
+    }
     expect(contextFor(focused.input, "resolution")).toEqual(contextFor(baseline.input, "resolution"));
   },
 );
@@ -294,7 +304,7 @@ it("retains all evidence rows while removing field uses that perception cannot m
   expect(perception.state).toMatchObject(resolution.state);
   const local = perception.referenceCatalog.candidates.find(candidate => candidate.kind === "local_entity")!;
   expect(local).toBeDefined();
-  expect(local.allowedUses).not.toContain("target");
+  expect(local.allowedUses).toContain("target");
   expect(resolution.referenceCatalog.candidates.find(candidate => candidate.handle === local.handle)!.allowedUses).toContain("target");
   const resolver = createTruthReferenceResolver(input);
   for (const candidate of perception.referenceCatalog.candidates) {
@@ -303,7 +313,7 @@ it("retains all evidence rows while removing field uses that perception cannot m
       expect(resolved.kind).toBe("entity");
       expect(input.state.truth.entities[resolved.engineId]!.lifecycle).toBe("active");
     }
-    if (candidate.allowedUses.includes("target")) expect(resolver.resolve(candidate.handle, "target").kind).toBe("entity");
+    if (candidate.allowedUses.includes("target")) expect(["entity", "local_entity"]).toContain(resolver.resolve(candidate.handle, "target").kind);
     if (candidate.allowedUses.includes("modifier")) expect(resolver.resolve(candidate.handle, "modifier").kind).toBe("rating");
     expect(candidate.allowedUses).not.toContain("distribution");
   }
