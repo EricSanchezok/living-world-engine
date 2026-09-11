@@ -19,7 +19,9 @@ import { SimulationEngine } from "../../src/engine/runtime/simulation";
 import { createActionCompilationRetrievalRuntimeProvider } from "../../src/server/action-compilation-retrieval-runtime";
 import { planStakesRequestEvidence, reconstructPreparedPlayerStep, type SourceExport } from "./player-plan-stakes-probe";
 
-const MAX_HTTP = 16;
+const PRIMARY_HTTP = 16;
+const DIAGNOSTIC_HTTP = 24;
+const DIAGNOSTIC_REPAIRS = 4;
 class ContinuationStopped extends ModelConfigurationError {}
 const object = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === "object" && !Array.isArray(value);
 const read = (file: string) => JSON.parse(readFileSync(file, "utf8"));
@@ -27,8 +29,8 @@ const save = (directory: string, name: string, value: unknown) => writeFileSync(
 type RequestEvidence = ReturnType<typeof planStakesRequestEvidence>;
 
 /** Reuse a sampled normalized result only at the exact model-visible boundary. */
-export function bindSampledPlanning<T>(request: StructuredModelRequest<T>, evidence: RequestEvidence, events: readonly RuntimeEvent[]) {
-  if (contentHash(JSON.stringify(planStakesRequestEvidence(request))) !== contentHash(JSON.stringify(evidence))) throw new Error("Sampled planning request drift");
+export function bindSampledStructuredOutput<T>(request: StructuredModelRequest<T>, evidence: RequestEvidence, events: readonly RuntimeEvent[]) {
+  if (contentHash(JSON.stringify(planStakesRequestEvidence(request))) !== contentHash(JSON.stringify(evidence))) throw new Error("Sampled request drift");
   const parsed = events.filter(event => event.event === "model.structured_output.parsed");
   const audits = events.filter(event => event.event === "model.audit.persisted");
   if (parsed.length !== 1 || audits.length !== 1 || events.some(event => ["model.structured_output.rejected", "model.semantic.rejected"].includes(event.event))) throw new Error("Sample must contain exactly one accepted physical result");
@@ -61,8 +63,8 @@ export function isContinuationRepair(request: Pick<StructuredModelRequest<unknow
 }
 
 export async function runPlayerPlanContinuation(argv: string[]) {
-  const [sourceFile, dataRoot, samplePrefix, output, mode = "preflight"] = argv;
-  if (!sourceFile || !dataRoot || !samplePrefix || !output || !["preflight", "run"].includes(mode)) throw new Error("Expected source-export data-root sample-prefix output-directory [preflight|run]");
+  const [sourceFile, dataRoot, samplePrefix, output, mode = "preflight", reviewDirectory] = argv;
+  if (!sourceFile || !dataRoot || !samplePrefix || !output || argv.length > 6 || !["preflight", "run"].includes(mode)) throw new Error("Expected source-export data-root sample-prefix output-directory [preflight|run] [recorded-review-directory]");
   if (mode === "run" && execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim()) throw new Error("Commit checked work before live continuation");
   mkdirSync(output, { recursive: false });
   const source = read(sourceFile) as SourceExport;
@@ -70,6 +72,16 @@ export async function runPlayerPlanContinuation(argv: string[]) {
   const sampleRequest = read(`${samplePrefix}-request.json`) as RequestEvidence;
   const sampleResult = read(`${samplePrefix}-result.json`);
   const sampleManifest = read(path.join(path.dirname(samplePrefix), "manifest.json"));
+  const review = reviewDirectory ? {
+    manifest: read(path.join(reviewDirectory, "manifest.json")), result: read(path.join(reviewDirectory, "result.json")),
+    events: read(path.join(reviewDirectory, "events.json")) as RuntimeEvent[],
+    request: Object.fromEntries(Object.entries(read(path.join(reviewDirectory, "downstream-1-request.json")))
+      .filter(([key]) => !["promptVersion", "subjectId", "correlation", "modelInvocationId"].includes(key))) as RequestEvidence,
+  } : undefined;
+  if (review && (review.manifest.protocol !== "sample-bound-downstream-primary-v1" || review.manifest.sampleEventsHash !== contentHash(sampleEvents) ||
+    review.manifest.sourceHash !== contentHash(source) || review.result.newHttpCount !== 1 || review.result.reusedPlanning !== 1 ||
+    review.request.schemaName !== "resolution_plan_verification_batch")) throw new Error("Recorded review provenance mismatch");
+  const maxHttp = review ? DIAGNOSTIC_HTTP : PRIMARY_HTTP;
   const { recorded, recordedPreparation, input, preparation, recordedRef, ref } = reconstructPreparedPlayerStep(source, true);
   if (sampleManifest.candidateMode !== "factor-products" || sampleManifest.sourceHash !== contentHash(source) ||
     contentHash(sampleManifest.manifest) !== contentHash(ref) || sampleResult.httpCount !== 1 || sampleResult.admittedSlots !== 11 ||
@@ -81,16 +93,16 @@ export async function runPlayerPlanContinuation(argv: string[]) {
   const observer = new RecordingRuntimeObserver({ mode: "full" });
   const network = createModelFetchResolver(process.env);
   const pending = new Set<Promise<unknown>>();
-  const requests: Array<{ ordinal: number; schemaName: string; role: string; subjectId: string; startedMs: number; elapsedMs?: number; error?: string }> = [];
+  const requests: Array<{ ordinal: number; schemaName: string; role: string; subjectId: string; invocationId?: string; repair: boolean; startedMs: number; elapsedMs?: number; error?: string }> = [];
   const blocked: unknown[] = [];
-  let httpCount = 0, reused = 0, stopped = false;
+  let httpCount = 0, reused = 0, reusedReview = 0, repairRequests = 0, stopped = false;
   const started = performance.now();
   const gateway = createModelGateway(catalog, process.env, { registry, maxTransportAttempts: 1,
     fetchForAccount: (id, account) => {
       const fetcher = network(id, account) ?? fetch;
       return async (resource, init) => {
         const request = new Request(resource, init), body = await request.clone().json();
-        if (stopped || httpCount >= MAX_HTTP || body.model !== "deepseek-flash" || body.thinking?.type !== "disabled") throw new ContinuationStopped("HTTP ceiling, stop signal or inference mismatch");
+        if (stopped || httpCount >= maxHttp || body.model !== "deepseek-flash" || body.thinking?.type !== "disabled") throw new ContinuationStopped("HTTP ceiling, stop signal or inference mismatch");
         const ordinal = ++httpCount;
         save(output, `http-${ordinal}-request.json`, { url: request.url, body });
         process.stdout.write(`${JSON.stringify({ httpStarted: ordinal, elapsedMs: performance.now() - started })}\n`);
@@ -108,40 +120,57 @@ export async function runPlayerPlanContinuation(argv: string[]) {
         const adapted = factorChoiceProductsRequest(planningActionFramesRequest(effectProfileDomainsRequest(conditionalPlanStakesRequest(request))));
         save(output, "reconstructed-planning-request.json", planStakesRequestEvidence(adapted));
         let result;
-        try { result = bindSampledPlanning(adapted, sampleRequest, sampleEvents); }
+        try { result = bindSampledStructuredOutput(adapted, sampleRequest, sampleEvents); }
         catch (error) { save(output, "sample-binding-failure.json", { error: String(error) }); throw new ContinuationStopped(String(error), { cause: error }); }
         reused++;
         save(output, "reused-planning.json", { requestHash: contentHash(sampleRequest), orderedRequestHash: contentHash(JSON.stringify(sampleRequest)),
           sourceEventsHash: contentHash(sampleEvents), audit: result.audit, value: result.value, newHttpCount: 0 });
         return result;
       }
+      if (review && reusedReview === 0 && request.schemaName === "resolution_plan_verification_batch") {
+        let result;
+        try { result = bindSampledStructuredOutput(request, review.request, review.events); }
+        catch (error) { throw new ContinuationStopped(String(error), { cause: error }); }
+        reusedReview++;
+        save(output, "reused-review.json", { requestHash: contentHash(review.request), sourceEventsHash: contentHash(review.events),
+          audit: result.audit, value: result.value, newHttpCount: 0 });
+        return result;
+      }
       const ordinal = requests.length + 1;
       save(output, `downstream-${ordinal}-request.json`, { ...planStakesRequestEvidence(request), promptVersion: request.promptVersion,
         subjectId: request.subjectId, correlation: request.correlation, modelInvocationId: request.modelInvocationId });
-      const row = { ordinal, role: request.role, schemaName: request.schemaName, subjectId: request.subjectId, startedMs: performance.now() - started } as typeof requests[number];
+      const repair = isContinuationRepair(request);
+      const row = { ordinal, role: request.role, schemaName: request.schemaName, subjectId: request.subjectId, invocationId: request.modelInvocationId,
+        repair, startedMs: performance.now() - started } as typeof requests[number];
       requests.push(row);
-      if (mode !== "run" || stopped || reused !== 1 || isContinuationRepair(request) || requests.length > MAX_HTTP || request.schemaName.startsWith("truth_resolution_plan")) {
+      if (mode !== "run" || stopped || reused !== 1 || (review && reusedReview !== 1) ||
+        (repair && (!review || repairRequests >= DIAGNOSTIC_REPAIRS)) || requests.length > maxHttp ||
+        (request.schemaName.startsWith("truth_resolution_plan") && !(review && repair))) {
         stopped = true;
-        blocked.push({ ...row, reason: mode !== "run" ? "offline preflight" : "repair, replacement planning or fixed call ceiling" });
+        blocked.push({ ...row, reason: mode !== "run" ? "offline preflight" : "fixed repair or HTTP ceiling, replacement planning or prior stop" });
         throw new ContinuationStopped("Continuation stopped before new HTTP");
       }
+      if (repair) repairRequests++;
       const call = gateway.generateStructured({ ...request, observer });
       pending.add(call);
       try { return await call; }
-      catch (error) { row.error = String(error); stopped = true; throw error; }
+      catch (error) { row.error = String(error); if (!review || error instanceof ModelConfigurationError) stopped = true; throw error; }
       finally { row.elapsedMs = performance.now() - started - row.startedMs; pending.delete(call); }
     } };
   const retrieval = createActionCompilationRetrievalRuntimeProvider();
   const algorithm = registerBuiltinAlgorithms().create(ref, { provider, resources: {
     resolve: <T>(kind: string) => (kind === "candidate-selection-runtime" ? retrieval.runtime(ref) : undefined) as T | undefined,
   } });
-  save(output, "manifest.json", { protocol: "sample-bound-downstream-primary-v1", mode, maxNewHttp: MAX_HTTP,
+  save(output, "manifest.json", { protocol: review ? "sample-bound-review-repair-diagnostic-v1" : "sample-bound-downstream-primary-v1", mode,
+    maxNewHttp: maxHttp, maxNewRepairRequests: review ? DIAGNOSTIC_REPAIRS : 0,
+    reviewSource: review ? { manifestHash: contentHash(review.manifest), eventsHash: contentHash(review.events), requestHash: contentHash(review.request) } : null,
     codeRevision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(), runnerHash: contentHash(readFileSync(new URL(import.meta.url), "utf8")),
     sourceExecution: source.execution.id, sourceHash: contentHash(source), sourceAlgorithm: recordedRef, algorithm: ref,
     sourcePreparationHash: contentHash(recordedPreparation), preparationHash: contentHash(preparation), catalogHash: catalog.hash,
     sampleRequestHash: contentHash(sampleRequest), sampleEventsHash: contentHash(sampleEvents), sampleManifestHash: contentHash(sampleManifest),
     historicalPlanningElapsedMs: sampleResult.elapsedMs, historicalPreparationAudits: preparation.modelAudits,
-    acceptance: "Counterfactual prepared-boundary diagnostic; actual primary downstream requests only, stop before repair. Canonical validation runs in memory. No production persistence, full player-action latency or deployment certification." });
+    acceptance: review ? "Counterfactual diagnostic continuing the exact recorded review verdict without redrawing or overriding it. At most 24 new HTTP and four repair requests; preserve semantic changes and all failed attempts. Canonical validation runs in memory. No production persistence, near-zero repair or full player-action latency certification."
+      : "Counterfactual prepared-boundary diagnostic; actual primary downstream requests only, stop before repair. Canonical validation runs in memory. No production persistence, full player-action latency or deployment certification." });
   save(output, "counterfactual-preparation.json", preparation);
   const before = contentHash({ input, preparation });
   const engine = new SimulationEngine(input.definition, algorithm, input.state);
@@ -159,12 +188,13 @@ export async function runPlayerPlanContinuation(argv: string[]) {
   const events = observer.snapshot();
   save(output, "events.json", events);
   const newAudits = events.filter(event => event.event === "model.audit.persisted").map(event => event.payload as ModelExecutionAudit);
-  const summary = { reusedPlanning: reused, newHttpCount: httpCount, elapsedMs: performance.now() - started, requests, blocked,
+  const summary = { reusedPlanning: reused, reusedReview, newHttpCount: httpCount, admittedRepairRequests: repairRequests, elapsedMs: performance.now() - started, requests, blocked,
     newAudits, failure, canonicalAcceptedInMemory: accepted, productionStatePersisted: false, sourceUnchanged: true,
     issues: events.filter(event => ["model.structured_output.rejected", "model.semantic.rejected"].includes(event.event)).map(event => ({ correlation: event.correlation, payload: event.payload, error: event.error })) };
   save(output, "result.json", summary);
   process.stdout.write(`${JSON.stringify({ ...summary, requests: requests.map(({ schemaName, elapsedMs, error }) => ({ schemaName, elapsedMs, error })), newAudits: newAudits.length, issues: summary.issues.length })}\n`);
-  if (mode === "preflight" && (reused !== 1 || requests[0]?.schemaName !== "resolution_plan_verification_batch" || httpCount !== 0)) throw new Error("Offline continuation did not reach independent plan review");
+  if (mode === "preflight" && (reused !== 1 || reusedReview !== (review ? 1 : 0) ||
+    requests[0]?.schemaName !== (review ? "truth_resolution_plan_repair" : "resolution_plan_verification_batch") || httpCount !== 0)) throw new Error("Offline continuation did not reach its recorded next boundary");
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) runPlayerPlanContinuation(process.argv.slice(2)).catch(error => {

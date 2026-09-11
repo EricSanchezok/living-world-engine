@@ -4,7 +4,8 @@ import { contentHash } from "../../src/engine/models/model-audit";
 import type { StructuredModelRequest } from "../../src/engine/models/model-provider";
 import { RecordingRuntimeObserver } from "../../src/engine/runtime/observability";
 import { createTestModelAudit } from "../../src/engine/testing/model-provider";
-import { bindSampledPlanning, isContinuationRepair } from "./player-plan-continuation";
+import { resolutionPlanVerificationSchema } from "../../src/engine/contracts/llm-schemas";
+import { bindSampledStructuredOutput, isContinuationRepair } from "./player-plan-continuation";
 import { planStakesRequestEvidence } from "./player-plan-stakes-probe";
 
 function sample() {
@@ -30,7 +31,7 @@ function sample() {
 
 it("reuses verified canonical output and original audit without decoding or adding a transport", () => {
   const s = sample(), before = contentHash(s.events);
-  const result = bindSampledPlanning(s.request, s.evidence, s.events);
+  const result = bindSampledStructuredOutput(s.request, s.evidence, s.events);
   expect(result).toEqual({ value: s.value, audit: s.audit });
   result.value.plans.push("caller mutation");
   result.audit.invocations[0]!.transports.push(result.audit.invocations[0]!.transports[0]!);
@@ -42,16 +43,16 @@ it("rejects reordered wire requests, changed source, output tampering and reject
   const s = sample();
   const changed = { ...s.request, wireJsonSchema: { type: "object", properties: { plans: { type: "array" }, kind: { const: "plans" } } } };
   expect(contentHash(planStakesRequestEvidence(changed))).toBe(contentHash(s.evidence));
-  expect(() => bindSampledPlanning(changed, s.evidence, s.events)).toThrow("request drift");
+  expect(() => bindSampledStructuredOutput(changed, s.evidence, s.events)).toThrow("request drift");
   for (const patch of [{ context: { source: "different", repair: null } }, { promptVersion: "different" }, { modelInvocationId: "different" }]) {
-    expect(() => bindSampledPlanning({ ...s.request, ...patch }, s.evidence, s.events)).toThrow();
+    expect(() => bindSampledStructuredOutput({ ...s.request, ...patch }, s.evidence, s.events)).toThrow();
   }
   const tampered = structuredClone(s.events);
   tampered[1]!.payload = { plans: ["invented plan"] };
-  expect(() => bindSampledPlanning(s.request, s.evidence, tampered)).toThrow("output hash mismatch");
+  expect(() => bindSampledStructuredOutput(s.request, s.evidence, tampered)).toThrow("output hash mismatch");
   tampered[1]!.payload = { plans: [] };
-  expect(() => bindSampledPlanning(s.request, s.evidence, tampered)).toThrow();
-  expect(() => bindSampledPlanning(s.request, s.evidence, [...s.events, { ...s.events[1]!, event: "model.semantic.rejected" }])).toThrow("accepted physical result");
+  expect(() => bindSampledStructuredOutput(s.request, s.evidence, tampered)).toThrow();
+  expect(() => bindSampledStructuredOutput(s.request, s.evidence, [...s.events, { ...s.events[1]!, event: "model.semantic.rejected" }])).toThrow("accepted physical result");
 });
 
 it("stops repairs in physical, logical and shared envelopes while retaining arbitrary world prose", () => {
@@ -65,4 +66,22 @@ it("stops repairs in physical, logical and shared envelopes while retaining arbi
   }
   expect(isContinuationRepair({ ...request, correlation: { semanticRepairAttempt: 1 } })).toBe(true);
   expect(isContinuationRepair({ ...request, schemaName: "truth_resolution_plan_repair" })).toBe(true);
+});
+
+it("retains a recorded semantic rejection and its complete finding instead of redrawing or accepting it", () => {
+  const s = sample();
+  const value = resolutionPlanVerificationSchema.parse({ verdict: "reject", findings: [{ planRef: "ref:plan:original", code: "impact-overstated",
+    message: "Recorded reviewer concern", repairHint: "Recorded repair instruction" }] });
+  const audit = createTestModelAudit("causal-verifier", "review", `sha256:${contentHash("world")}`);
+  audit.modelId = "deepseek-flash";
+  audit.resolvedInference.thinking = "disabled";
+  audit.invocations[0]!.responseHash = audit.invocations[0]!.normalizedOutputHash = contentHash(value);
+  const request: StructuredModelRequest<typeof value> = { ...s.request, role: audit.role, subjectId: audit.subjectId,
+    modelInvocationId: audit.invocations[0]!.id, schemaName: "resolution_plan_verification", schema: resolutionPlanVerificationSchema,
+    wireJsonSchema: z.toJSONSchema(resolutionPlanVerificationSchema, { target: "draft-07" }) };
+  const observer = new RecordingRuntimeObserver({ mode: "full" });
+  observer.emit({ event: "model.audit.persisted", hashes: { response: contentHash(value) }, payload: audit });
+  observer.emit({ event: "model.structured_output.parsed", hashes: { response: contentHash(value) }, payload: value });
+  expect(bindSampledStructuredOutput(request, planStakesRequestEvidence(request), observer.snapshot())).toEqual({ value, audit });
+  expect(s.preprocessOutput).not.toHaveBeenCalled();
 });
