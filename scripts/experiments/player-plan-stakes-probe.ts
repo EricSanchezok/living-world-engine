@@ -6,7 +6,8 @@ import { z } from "zod";
 import { conditionalPlanStakesRequest, CONDITIONAL_PLAN_STAKES } from "../../src/engine/benchmarks/step-efficiency/conditional-plan-stakes";
 import { effectProfileDomainsRequest, EFFECT_PROFILE_DOMAINS } from "../../src/engine/benchmarks/step-efficiency/effect-profile-domains";
 import { planningActionFramesRequest, PLANNING_ACTION_FRAMES } from "../../src/engine/benchmarks/step-efficiency/planning-action-frames";
-import { registerBuiltinAlgorithms } from "../../src/engine/algorithms/registry";
+import { planningDecisionOrderRequest, PLANNING_DECISION_ORDER } from "../../src/engine/benchmarks/step-efficiency/planning-decision-order";
+import { DEFAULT_ALGORITHM_REF, registerBuiltinAlgorithms } from "../../src/engine/algorithms/registry";
 import { algorithmRef, type AlgorithmManifest, type WorldStepInput, type WorldStepPreparation } from "../../src/engine/runtime/execution";
 import { RecordingRuntimeObserver, type RuntimeEvent } from "../../src/engine/runtime/observability";
 import { contentHash } from "../../src/engine/models/model-audit";
@@ -41,16 +42,28 @@ export function planStakesRequestEvidence(request: StructuredModelRequest<unknow
  * Every subsequent call is captured and stopped before HTTP or canonical commit. */
 export async function runPlayerPlanStakesProbe(argv: string[]) {
   const [sourcePath, dataRoot, output, mode = "preflight", candidateMode = "stakes"] = argv;
-  if (!sourcePath || !dataRoot || !output || !["preflight", "run"].includes(mode) || !["stakes", "profile-domains", "action-frames"].includes(candidateMode)) throw new Error("Expected source-export data-root output-directory [preflight|run] [stakes|profile-domains|action-frames]");
+  if (!sourcePath || !dataRoot || !output || !["preflight", "run"].includes(mode) || !["stakes", "profile-domains", "action-frames", "decision-order"].includes(candidateMode)) throw new Error("Expected source-export data-root output-directory [preflight|run] [stakes|profile-domains|action-frames|decision-order]");
   mkdirSync(output, { recursive: false });
   const source: SourceExport = JSON.parse(readFileSync(sourcePath, "utf8"));
   const first = source.events.find(event => event.event === "model.context.serialized" &&
     (event.payload as { schemaName?: string })?.schemaName === "truth_resolution_plan_commit_batch");
   if (!first) throw new Error("Source has no first physical planning request");
   const recorded = first.payload as SourceRequest;
-  const input = source.events.find(event => event.event === "step.preparation.started")?.payload as WorldStepInput;
-  const preparation = source.events.filter(event => event.event === "execution.preparation.persisted" && event.sequence < first.sequence).at(-1)?.payload as WorldStepPreparation;
-  if (!input || !preparation || Object.keys(input.state.agents).length !== 49 || Object.values(input.policyRoster).filter(policy => policy.kind === "external").length !== 1) throw new Error("Expected a complete 48 NPC plus one player source");
+  const recordedInput = source.events.find(event => event.event === "step.preparation.started")?.payload as WorldStepInput;
+  const recordedPreparation = source.events.filter(event => event.event === "execution.preparation.persisted" && event.sequence < first.sequence).at(-1)?.payload as WorldStepPreparation;
+  if (!recordedInput || !recordedPreparation || Object.keys(recordedInput.state.agents).length !== 49 || Object.values(recordedInput.policyRoster).filter(policy => policy.kind === "external").length !== 1) throw new Error("Expected a complete 48 NPC plus one player source");
+  const input = structuredClone(recordedInput), preparation = structuredClone(recordedPreparation);
+  const recordedRef = algorithmRef(source.execution.manifest);
+  const ref = candidateMode === "decision-order" ? DEFAULT_ALGORITHM_REF : recordedRef;
+  // This explicitly selected research boundary imports prepared canonical evidence
+  // into the current producer. It is not a replay, save migration or world commit.
+  if (candidateMode === "decision-order") {
+    preparation.algorithmManifestHash = ref.manifestHash;
+    const restored = { ...preparation, algorithmManifestHash: recordedPreparation.algorithmManifestHash };
+    if (contentHash(restored) !== contentHash(recordedPreparation)) throw new Error("Counterfactual preparation changed more than its producer binding");
+    save(output, "counterfactual-preparation.json", { sourceAlgorithm: recordedRef, algorithm: ref,
+      sourcePreparationHash: contentHash(recordedPreparation), preparationHash: contentHash(preparation), preparation });
+  }
   // Ledger object serialization sorts map keys. Restore the source's recorded
   // catalog order before projections that expose insertion order to the model.
   const catalogOrder = (recorded.context as { state: { catalogOrderPrefix: string[] } }).state.catalogOrderPrefix;
@@ -68,7 +81,6 @@ export async function runPlayerPlanStakesProbe(argv: string[]) {
   const registry = new ModelRegistry(catalog, dataRoot, { fetch: async () => { throw new ProbeStopped("Registry refresh disabled"); } });
   registry.snapshot(recorded.registrySnapshotHash);
   const retrieval = createActionCompilationRetrievalRuntimeProvider();
-  const ref = algorithmRef(source.execution.manifest);
   let frozen: ReturnType<typeof planStakesRequestEvidence> | undefined;
   let candidate: ReturnType<typeof planStakesRequestEvidence> | undefined;
   const run = async (label: string, arm: "B" | "C", live: boolean) => {
@@ -97,15 +109,17 @@ export async function runPlayerPlanStakesProbe(argv: string[]) {
           throw new ProbeStopped("First-response scope complete; no repair, review, continuation or transition HTTP");
         }
         const conditional = candidateMode === "stakes" ? request : conditionalPlanStakesRequest(request);
-        const control = candidateMode === "action-frames" ? effectProfileDomainsRequest(conditional) : conditional;
+        const profiled = ["action-frames", "decision-order"].includes(candidateMode) ? effectProfileDomainsRequest(conditional) : conditional;
+        const control = candidateMode === "decision-order" ? planningActionFramesRequest(profiled) : profiled;
         const baseline = planStakesRequestEvidence(control);
-        if (frozen && contentHash(baseline) !== contentHash(frozen)) throw new Error("Reconstructed baseline request drift");
+        if (frozen && contentHash(JSON.stringify(baseline)) !== contentHash(JSON.stringify(frozen))) throw new Error("Reconstructed baseline request drift");
         frozen ??= baseline;
-        const adapted = arm === "C" ? (candidateMode === "action-frames" ? planningActionFramesRequest(control)
+        const adapted = arm === "C" ? (candidateMode === "decision-order" ? planningDecisionOrderRequest(control)
+          : candidateMode === "action-frames" ? planningActionFramesRequest(control)
           : candidateMode === "profile-domains" ? effectProfileDomainsRequest(control) : conditionalPlanStakesRequest(control)) : control;
         if (arm === "C") {
           const evidence = planStakesRequestEvidence(adapted);
-          if (candidate && contentHash(evidence) !== contentHash(candidate)) throw new Error("Reconstructed candidate request drift");
+          if (candidate && contentHash(JSON.stringify(evidence)) !== contentHash(JSON.stringify(candidate))) throw new Error("Reconstructed candidate request drift");
           candidate ??= evidence;
         }
         save(output, `${label}-request.json`, planStakesRequestEvidence(adapted));
@@ -147,16 +161,20 @@ export async function runPlayerPlanStakesProbe(argv: string[]) {
   if (!frozen || !candidate) throw new Error("Failed to capture both complete requests");
   const baseline = frozen as ReturnType<typeof planStakesRequestEvidence>;
   const treatment = candidate as ReturnType<typeof planStakesRequestEvidence>;
-  const firstResponsePlan = ["B", "C", "C", "B", "B", "C"] as const;
+  const firstResponsePlan: readonly ("B" | "C")[] = candidateMode === "decision-order" ? ["B", "C"] : ["B", "C", "C", "B", "B", "C"];
   const restored = structuredClone(treatment.context) as { task: Record<string, unknown> };
   if (candidateMode === "action-frames") delete restored.task.planningActionFrames;
   if (contentHash(restored) !== contentHash(baseline.context)) throw new Error("Candidate changed original source context");
-  save(output, "manifest.json", { protocol: candidateMode === "action-frames" ? PLANNING_ACTION_FRAMES : candidateMode === "profile-domains" ? EFFECT_PROFILE_DOMAINS : CONDITIONAL_PLAN_STAKES, candidateMode,
+  if (candidateMode === "decision-order" && contentHash(baseline.schema) !== contentHash(treatment.schema)) throw new Error("Decision order changed schema predicates");
+  save(output, "manifest.json", { protocol: candidateMode === "decision-order" ? PLANNING_DECISION_ORDER : candidateMode === "action-frames" ? PLANNING_ACTION_FRAMES : candidateMode === "profile-domains" ? EFFECT_PROFILE_DOMAINS : CONDITIONAL_PLAN_STAKES, candidateMode,
     codeRevision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
     runnerHash: contentHash(readFileSync(new URL(import.meta.url), "utf8")),
     sourceExecution: source.execution.id, sourceInstance: source.execution.instanceId, sourceEvent: first.sequence,
-    sourceHash: contentHash(source), manifest: ref, catalogHash: catalog.hash, sourceRequestHash: contentHash(recorded),
+    sourceHash: contentHash(source), sourceAlgorithm: recordedRef, manifest: ref, catalogHash: catalog.hash, sourceRequestHash: contentHash(recorded),
+    reconstruction: candidateMode === "decision-order" ? "counterfactual-prepared-boundary" : "registered-source-producer",
+    sourcePreparationHash: contentHash(recordedPreparation), preparationHash: contentHash(preparation),
     baselineHash: contentHash(baseline), candidateHash: contentHash(treatment), sourceContextEqual: contentHash(recorded.context) === contentHash(baseline.context),
+    baselineOrderedHash: contentHash(JSON.stringify(baseline)), candidateOrderedHash: contentHash(JSON.stringify(treatment)),
     contextEqual: contentHash(baseline.context) === contentHash(treatment.context),
     originalContextPreserved: true,
     order: firstResponsePlan, maxHttp: firstResponsePlan.length, mode, acceptance: "Complete first-response mechanical admission followed by independent source-semantic review; no gameplay or latency certification from this probe" });

@@ -27,6 +27,8 @@ Capture the registered production composition at the failed player's planning bo
 
 ## Verification
 
+The decision-order screen places the action, resolution mode, actor rating and difficulty before dependent factors and effects in the wire schema and generation instructions. It preserves every field, predicate, original input and decoder. Its two-call B/C feasibility screen uses the current producer with an explicitly recorded counterfactual import of the source preparation; only its producer binding changes, never a persisted save. B retains conditional stakes, profile domains and action frames; C adds governing-choice ordering. Preserve order-sensitive request hashes. A single pair cannot establish reliability or an isolated latency effect; review every mechanically admitted result against source semantics before any continuation or promotion.
+
 Check exact source and candidate preservation, unchanged schema predicates and failed-output rejection. Run focused regressions and check:fast before each implementation commit. Full acceptance requires fresh complete player trajectories, per-action timing under 60 seconds, near-zero repair, and source-bound review of intended task completion, causal changes, time, information access and the visible response. Record every counterexample; finite samples do not prove universal semantic correctness.
 
 ## Evidence
