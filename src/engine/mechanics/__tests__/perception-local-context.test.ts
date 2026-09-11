@@ -5,6 +5,7 @@ import type { OnsetPerceptionInput } from "../../algorithms/roles";
 import { onsetPerceptionReportSchema } from "../../contracts/llm-schemas";
 import type { ModelReferenceCatalog } from "../../contracts/model-context";
 import { contentHash } from "../../models/model-audit";
+import { perceptionReportDomainsRequest } from "../../benchmarks/step-efficiency/perception-report-domains";
 import { TERMINAL_ROOT_CLOSER_RECOVERY } from "../../models/terminal-root-closer-recovery";
 import { createModelGateway } from "../../models/model-gateway";
 import { ScriptedModelProvider, createTestModelRegistry } from "../../testing/model-provider";
@@ -29,9 +30,10 @@ function fixture() {
     { workloadId: "local-context", batchId: "onset", runtimeIdentity: { worldHash: state.worldHash, revision: state.revision } }) };
 }
 
-it.each([undefined, TERMINAL_ROOT_CLOSER_RECOVERY].flatMap(policy =>
-  ["valid", "canonical-subject", "canonical-value", "other-observer", "missing-target"].map(mode => ({ policy, mode }))))(
-  "uses the supplied observer namespace through the actual gateway and materializer ($mode, $policy)", async ({ policy, mode }) => {
+it.each([{ policy: undefined, domains: false }, { policy: TERMINAL_ROOT_CLOSER_RECOVERY, domains: false },
+  { policy: TERMINAL_ROOT_CLOSER_RECOVERY, domains: true }].flatMap(({ policy, domains }) =>
+  ["valid", "canonical-subject", "canonical-value", "other-observer", "missing-target"].map(mode => ({ policy, domains, mode }))))(
+  "uses the supplied observer namespace through the actual gateway and materializer ($mode, $policy, domains=$domains)", async ({ policy, domains, mode }) => {
     const f = fixture(), contexts: Context[] = [], bodies: string[] = [];
     if (mode === "other-observer") {
       f.input.actions.push({ ...f.input.actions[0]!, id: "watch", actorId: "keeper", rawText: "Watch silently." });
@@ -67,7 +69,7 @@ it.each([undefined, TERMINAL_ROOT_CLOSER_RECOVERY].flatMap(policy =>
           usage: { prompt_tokens: 100, completion_tokens: 20, total_tokens: 120 } }), { status: 200, headers: { "content-type": "application/json" } });
       },
     });
-    f.provider.generateStructured = request => { contexts.push(structuredClone(request.context) as Context); return gateway.generateStructured({ ...request, jsonSyntaxRecovery: policy }); };
+    f.provider.generateStructured = request => { contexts.push(structuredClone(request.context) as Context); return gateway.generateStructured({ ...(domains ? perceptionReportDomainsRequest(request) : request), jsonSyntaxRecovery: policy }); };
     const result = await f.run(), receipt = result.receipts.find(item => item.observerId === "keeper")!;
     expect(receipt.kind).toBe("perceived");
     if (receipt.kind !== "perceived") throw new Error("missing stimulus");
