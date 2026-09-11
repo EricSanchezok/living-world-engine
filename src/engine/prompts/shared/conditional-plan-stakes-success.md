@@ -1,0 +1,1 @@
+Required conditional success stake: the intended meter or condition change IF this check succeeds, including its non-none magnitude. Commit it before the roll; this is not an assertion of an already achieved outcome. Ground it in this attempt and interval.
