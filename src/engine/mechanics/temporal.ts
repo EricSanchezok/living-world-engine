@@ -73,6 +73,7 @@ export type TemporalProfileDefinition = TemporalProfileBase & (
       }>;
     }
   | { kind: "conditional"; checkEverySeconds: number }
+  | { kind: "goal"; checkEverySeconds: number }
   | { kind: "ongoing"; checkpointSeconds: number }
 );
 
@@ -338,9 +339,9 @@ export function validateTemporalProfile(
       assertPositiveInteger(stage.durationSeconds, `temporal profile ${profile.id} stage duration`);
       assertPositiveInteger(stage.checkpointSeconds, `temporal profile ${profile.id} stage checkpoint`);
     }
-  } else if (profile.kind === "conditional") {
+  } else if (profile.kind === "conditional" || profile.kind === "goal") {
     if (profile.selection.evidenceRequirement !== "none") {
-      throw new Error(`conditional temporal profile ${profile.id} cannot require text quantity evidence`);
+      throw new Error(`${profile.kind} temporal profile ${profile.id} cannot require text quantity evidence`);
     }
     assertPositiveInteger(profile.checkEverySeconds, `temporal profile ${profile.id} condition interval`);
   } else {
@@ -392,7 +393,7 @@ function derivedSchedule(profile: TemporalProfileDefinition, startsAtSeconds: nu
       stages,
     };
   }
-  if (profile.kind === "conditional") {
+  if (profile.kind === "conditional" || profile.kind === "goal") {
     return {
       completionAtSeconds: null,
       checkpointSeconds: profile.checkEverySeconds,
@@ -1006,10 +1007,11 @@ export function validateActivityState(
       throw new Error(`activity ${activity.id} temporal authority is not grounded in its source action`);
     }
   }
+  const adjudicatedCompletion = activity.plan.mode === "conditional" || activity.plan.mode === "goal";
   if (!Number.isSafeInteger(activity.startedAtSeconds) || activity.startedAtSeconds !== activity.plan.startsAtSeconds ||
     activity.updatedAtSeconds < activity.startedAtSeconds ||
-    (activity.plan.mode !== "conditional" && activity.completionAtSeconds !== activity.plan.completionAtSeconds) ||
-    (activity.plan.mode === "conditional" && activity.status !== "completed" && activity.completionAtSeconds !== null)) {
+    (!adjudicatedCompletion && activity.completionAtSeconds !== activity.plan.completionAtSeconds) ||
+    (adjudicatedCompletion && activity.status !== "completed" && activity.completionAtSeconds !== null)) {
     throw new Error(`activity ${activity.id} has invalid clock`);
   }
   const terminal = new Set<ActivityStatus>(["completed", "blocked", "failed", "cancelled"]);
@@ -1223,7 +1225,7 @@ export function reconcileTemporalOutcomes(
       ? "failed" as const
       : outcome.status === "blocked"
         ? "blocked" as const
-        : activity.plan.mode === "conditional" && outcome.status === "succeeded"
+        : (activity.plan.mode === "conditional" || activity.plan.mode === "goal") && outcome.status === "succeeded"
           ? "completed" as const
           : null;
     if (!terminal) continue;
@@ -1296,6 +1298,13 @@ export function settleActivityContexts(input: {
   const relevantActivityIds = new Set(input.activityIds);
   const dispositions: ActivityDisposition[] = [];
   const dispositionByActivity = new Map<string, ActivityDisposition>();
+  // Assertion evaluation is read-only. Share unchanged world data and keep
+  // the current activity table visible as earlier activities are settled.
+  // addDisposition detaches observed values before any evidence escapes.
+  const evaluationState: Readonly<SimulationState> = {
+    ...input.state,
+    truth: { ...input.state.truth, activities: temporal.activities },
+  };
 
   const addDisposition = (
     activity: Readonly<ActivityState>,
@@ -1320,8 +1329,6 @@ export function settleActivityContexts(input: {
     const preActivity = input.preTransitionState.truth.activities[activityId] ?? activity;
     const preAssertionResults = evaluateActivityContinuation(input.preTransitionState, preActivity)
       .map((result) => ({ ...result, phase: "pre_transition" as const }));
-    const evaluationState = structuredClone(input.state) as SimulationState;
-    evaluationState.truth.activities = structuredClone(temporal.activities);
     const postAssertionResults = evaluateActivityContinuation(evaluationState, activity)
       .map((result) => ({ ...result, phase: "post_transition" as const }));
     const assertionResults = [...preAssertionResults, ...postAssertionResults];

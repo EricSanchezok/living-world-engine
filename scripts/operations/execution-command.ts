@@ -17,7 +17,7 @@ import { ModelCatalog, type ModelCatalogDocument, type ModelRole } from "../../s
 import type { ModelExecutionAudit, ModelInvocationAudit, SimulationState } from "../../src/engine/contracts/model";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { redactRuntimePayload, type RuntimeEvent } from "../../src/engine/runtime/observability";
-import { ModelOutputError, type StructuredModelProvider, type StructuredModelRequest, type StructuredModelResult } from
+import { ModelConfigurationError, ModelOutputError, type StructuredModelProvider, type StructuredModelRequest, type StructuredModelResult } from
   "../../src/engine/models/model-provider";
 import { SimulationEngine } from "../../src/engine/runtime/simulation";
 import type { WorldDefinition } from "../../src/engine/runtime/world-definition";
@@ -135,7 +135,13 @@ class RecordedModelProvider implements StructuredModelProvider {
     overlay?: ReplayProbeBinding,
   ) {
     this.overlay = overlay;
-    const audits = candidates.flatMap((candidate) => candidate.modelAudits);
+    // Candidate audits are logical projections: several slots can share one
+    // physical invocation while owning different subjects and result shapes.
+    const replayedInvocations = new Set(candidates.flatMap((candidate) => candidate.modelAudits)
+      .flatMap((audit) => audit.invocations.map((invocation) => invocation.id)));
+    const audits = events.filter((event) => event.event === "model.audit.persisted")
+      .map((event) => event.payload as ModelExecutionAudit)
+      .filter((audit) => audit.invocations.some((invocation) => replayedInvocations.has(invocation.id)));
     this.catalog = recordedCatalog(audits);
     const auditByInvocation = new Map<string, { audit: ModelExecutionAudit; invocation: ModelInvocationAudit }>();
     for (const audit of audits) {
@@ -145,8 +151,9 @@ class RecordedModelProvider implements StructuredModelProvider {
       if (event.event !== "model.structured_output.parsed" && event.event !== "model.structured_output.rejected") continue;
       const invocationId = event.correlation?.modelInvocationId;
       if (!invocationId || event.payload === undefined) continue;
+      if (!replayedInvocations.has(invocationId)) continue;
       const recorded = auditByInvocation.get(invocationId);
-      if (!recorded) continue;
+      if (!recorded) throw new ModelConfigurationError(`recorded model output has no physical audit: ${invocationId}`);
       this.outputs.set(invocationId, {
         event,
         value: structuredClone(event.payload),
@@ -189,7 +196,7 @@ class RecordedModelProvider implements StructuredModelProvider {
 
   async generateStructured<T>(request: StructuredModelRequest<T>): Promise<StructuredModelResult<T>> {
     const invocationId = request.modelInvocationId;
-    if (!invocationId) throw new Error("recorded replay requires canonical model invocation identity");
+    if (!invocationId) throw new ModelConfigurationError("recorded replay requires canonical model invocation identity");
     const isOverlayTarget = this.overlay?.targetInvocation.id === invocationId;
     if (isOverlayTarget) {
       if (this.overlayConsumed) throw new Error(`probe overlay was consumed twice: ${invocationId}`);
@@ -231,11 +238,11 @@ class RecordedModelProvider implements StructuredModelProvider {
       return { value: parsed.data, audit };
     }
     const output = this.outputs.get(invocationId);
-    if (!output) throw new Error(`recorded model output not found: ${invocationId}`);
-    if (this.consumed.has(invocationId)) throw new Error(`recorded model output was consumed twice: ${invocationId}`);
+    if (!output) throw new ModelConfigurationError(`recorded model output not found: ${invocationId}`);
+    if (this.consumed.has(invocationId)) throw new ModelConfigurationError(`recorded model output was consumed twice: ${invocationId}`);
     if (output.audit.role !== request.role || output.audit.subjectId !== request.subjectId ||
       output.audit.profileId !== request.profileId) {
-      throw new Error(`recorded model output identity mismatch: ${invocationId}`);
+      throw new ModelConfigurationError(`recorded model output identity mismatch: ${invocationId}`);
     }
     this.consumed.add(invocationId);
     request.observer?.emit({
@@ -454,9 +461,8 @@ export async function replayThroughAlgorithm(
       policyRoster: Record<string, PolicyBinding>;
       request: WorldAdvanceRequest;
     });
-  const candidateEvents = events.filter((candidate) => candidate.event === "execution.candidate.persisted");
-  const candidates = candidateEvents
-    .filter((candidate) => candidate.attributes?.phase === (stepInputs.length > 0 ? "step" : "bootstrap"))
+  const candidates = events.filter((candidate) => candidate.event === "execution.candidate.persisted" &&
+    candidate.attributes?.phase === (stepInputs.length > 0 ? "step" : "bootstrap"))
     .map((candidate) => candidate.payload as BootstrapCandidate | WorldStepCandidate);
   const overlay = replayOptions.probe ? validateProbeBinding(original, events, replayOptions.probe) : undefined;
   const provider = new RecordedModelProvider(events, candidates, overlay);

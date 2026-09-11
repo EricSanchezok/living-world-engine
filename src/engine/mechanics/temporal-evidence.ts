@@ -81,6 +81,23 @@ function exactQuantityMatches(
   return matches;
 }
 
+/** A stated upper bound is not an exact interval to commit as action duration.
+ * This lexical exclusion does not establish whose work any remaining span describes. */
+function isDurationUpperBound(text: string, start: number, end: number): boolean {
+  const before = text.slice(0, start);
+  const after = text.slice(end);
+  return /^\s*(?:以内|内)/u.test(after) ||
+    /(?:最多|至多|不超过|不多于)\s*$/u.test(before) ||
+    /\b(?:within(?:\s+the\s+next)?|at\s+most|up\s+to|no\s+more\s+than|less\s+than)\s*$/iu.test(before);
+}
+
+/** Travel-time measures can locate a place without scheduling the current action. */
+function isTravelDistance(text: string, end: number): boolean {
+  const after = text.slice(end);
+  return /^\s*(?:的\s*)?(?:路程|脚程|车程|航程)/u.test(after) ||
+    /^\s*(?:['’]\s*)?(?:(?:of\s+)?(?:travel|journey|walk|ride|drive|flight|march)\s+(?:away\s+)?(?:from|to)\b|(?:away|distant)\s+from\b)/iu.test(after);
+}
+
 export function extractActionTemporalEvidence(
   text: string,
   profiles: Readonly<Record<string, TemporalProfileDefinition>>,
@@ -91,6 +108,7 @@ export function extractActionTemporalEvidence(
     .sort();
   const evidence: ActionTemporalEvidence[] = durationUnits.flatMap((definition) =>
     exactQuantityMatches(text, definition.aliases).flatMap((match) => {
+      if (isDurationUpperBound(text, match.start, match.end) || isTravelDistance(text, match.end)) return [];
       const seconds = match.amount * definition.seconds;
       return Number.isSafeInteger(seconds) && seconds > 0 ? [{
         key: `duration:${match.start}:${match.end}`,

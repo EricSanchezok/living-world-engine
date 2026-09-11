@@ -1,0 +1,1 @@
+`candidateKey` is an opaque request-local selector, not an identity. Each key is `r` followed by a zero-padded decimal ordinal, such as `r000`. Copy keys exactly from this request; do not derive, concatenate, normalize, or invent one. An alias has the same meaning throughout repairs; slot permissions still apply. The engine resolves it after validation.

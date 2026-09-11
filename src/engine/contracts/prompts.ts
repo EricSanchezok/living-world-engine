@@ -1,4 +1,9 @@
+import { schemaValidationIssues } from "./schema-validation-issues";
+import { perceptionReferenceCatalog, projectPerceptionTargets, type PerceptionTarget } from "./perception-references";
+import { contentHash } from "../models/model-audit";
 import { z } from "zod";
+import { activityTemporalEvidence, ACTIVITY_TEMPORAL_NOTICE } from "./activity-temporal-evidence";
+import { resolutionMeansSources, withResolutionFactEvidence, RESOLUTION_FACT_EVIDENCE, RESOLUTION_FACT_EVIDENCE_NOTICE } from "./resolution-source-inventory";
 import { CharacterPatchValidationError } from "../cognition/character";
 import type {
   ActionOutcome,
@@ -23,14 +28,16 @@ import type {
   AgentPerspectiveView,
 } from "./model";
 import type { ResolutionPlan, ResolutionReceipt, ResolutionSourceRef } from "../mechanics/resolution";
+import { difficultyDc, ResolutionCheckEffectError } from "../mechanics/resolution";
 import type { InteractionDependency } from "../runtime/execution";
 import { ObservationValidationError } from "../cognition/observation";
 import { projectAgentPerspective } from "../cognition/agent-perspective";
 import type { WorldDefinition } from "../runtime/world-definition";
-import type { TemporalBoundary } from "../mechanics/temporal";
+import type { TemporalBoundary, TemporalStateSnapshot } from "../mechanics/temporal";
 import { quantityId } from "../runtime/runtime-id";
 import { MechanicInputValidationError, type MechanicPromptContract } from "../mechanics/rule-package";
 import { promptBundle, type PromptBundleId } from "../prompts";
+import { ModelCandidateValidationError, ModelOutputError } from "../models/model-provider";
 import {
   MODEL_CONTEXT_CONTRACT_VERSION as MODEL_CONTEXT_VERSION,
   createAgentReferenceResolver,
@@ -44,6 +51,7 @@ import {
 } from "./model-context";
 
 export const MODEL_CONTEXT_CONTRACT_VERSION = MODEL_CONTEXT_VERSION;
+export const PLAN_CAUSE_SCOPE = "component-plan-causes-v1";
 
 export { promptBundle } from "../prompts";
 export type { PromptBundle, PromptBundleId } from "../prompts";
@@ -138,11 +146,25 @@ function cachedFullTruthProjection(
 }
 
 export function validationIssues(error: unknown): PromptValidationIssue[] {
+  if (error instanceof ModelCandidateValidationError) return structuredClone([...error.issues]);
+  if (error instanceof ResolutionCheckEffectError) return structuredClone(error.issues);
+  if (error instanceof ModelOutputError) {
+    const seen = new Set<ModelOutputError>();
+    let cause: unknown = error;
+    let rejectedValue: unknown;
+    while (cause instanceof ModelOutputError && !seen.has(cause) && seen.size < 32) {
+      seen.add(cause);
+      rejectedValue = cause.rawValue;
+      cause = cause.cause;
+    }
+    if (cause instanceof z.ZodError) return schemaValidationIssues(cause, rejectedValue);
+    if (cause instanceof ModelCandidateValidationError || cause instanceof ModelReferenceError || cause instanceof ResolutionCheckEffectError) return validationIssues(cause);
+  }
   if (error instanceof ModelReferenceError) {
     return [{
       code: error.code,
       class: "reference",
-      path: [],
+      path: [...error.path],
       message: error.message,
       originalValue: error.originalValue,
       allowedHandles: error.allowedHandles,
@@ -159,13 +181,7 @@ export function validationIssues(error: unknown): PromptValidationIssue[] {
   if (error instanceof ObservationValidationError || error instanceof CharacterPatchValidationError) {
     return error.issues.map((issue) => ({ ...issue, path: [...issue.path] }));
   }
-  if (error instanceof z.ZodError) {
-    return error.issues.map((issue) => ({
-      code: issue.code,
-      path: issue.path.map((part) => typeof part === "symbol" ? part.description ?? "symbol" : part),
-      message: issue.message,
-    }));
-  }
+  if (error instanceof z.ZodError) return schemaValidationIssues(error);
   return [{
     code: error instanceof Error ? error.name || "validation_error" : "validation_error",
     path: [],
@@ -1104,6 +1120,15 @@ export function projectCanonicalTruthForModel(
   return projected;
 }
 
+function projectActivityTemporalContext(state: SimulationState, boundary: TemporalBoundary | undefined,
+  resolver: ReferenceResolver, activities: SimulationState["truth"]["activities"]): Record<string, unknown> {
+  if (!boundary) return {};
+  return { temporalExecution: activityTemporalEvidence({ worldHash: state.worldHash, revision: state.revision,
+    activities: Object.values(activities), boundary, resolver,
+    projectAssertion: assertion => projectModelCausalAssertion(assertion, { existing: resolver, worldHash: state.worldHash }),
+  }) };
+}
+
 type ModelActionView = {
   actionRef: string;
   actorRef: string;
@@ -1237,6 +1262,7 @@ function perceptionCheckConstraints(
   const actorEntityIds = new Set(Object.values(scopedActors(state, actions, groundings))
     .map((actor) => actor.entityId));
   return {
+    numericRules: { environmentDc: difficultyDc, opposedBaseDc: 10, actorRating: "one owned Rating, exact value, or null" },
     actors: [...actorEntityIds].sort().map((actorId) => ({
       actorRef: resolver.handleFor("entity", actorId),
       ratings: Object.values(state.truth.ratings)
@@ -1637,6 +1663,11 @@ export function buildTruthContext(input: {
   instanceId: string;
   advanceId: string;
   issues: readonly PromptValidationIssue[];
+  temporalEvidence?: TemporalBoundary;
+  includeResolutionMeansSources?: boolean;
+  planCauseActionIds?: readonly string[];
+  includeResolutionFactEvidence?: boolean;
+  perceptionTargets?: readonly PerceptionTarget[];
   stage?: "perception" | "reaction-routing" | "resolution" | "transition";
   includeHistoryActions?: boolean;
   resolutionScope?: ResolutionScope;
@@ -1644,7 +1675,10 @@ export function buildTruthContext(input: {
   mechanicContracts?: readonly MechanicPromptContract[];
   repairTarget?: RepairTarget | null;
 }): unknown {
+  if (input.temporalEvidence && contentHash(input.temporalEvidence) !== contentHash(input.temporalBoundary)) throw new Error("temporal evidence boundary mismatch");
   const stage = input.stage ?? "transition";
+  const factEvidence = stage === "resolution" && input.includeResolutionFactEvidence;
+  if (factEvidence && !input.includeResolutionMeansSources) throw new Error("resolution fact evidence requires source inventory");
   const contextMode = input.workset.mode ?? "scoped";
   const availableState = input.workset.state;
   const availableActions = input.workset.availableActions;
@@ -1724,10 +1758,19 @@ export function buildTruthContext(input: {
       targetHandles: assignedActions.map((action) => modelHandle({ existing: referenceResolver }, "action", action.id)),
       availableHandles: availableActions.map((action) => modelHandle({ existing: referenceResolver }, "action", action.id)),
       allowedProposalKinds: stage === "transition" ? ["entity", "fact", "agent", "event", "outcome", "mechanic"] : [],
+      ...(stage === "perception" && input.perceptionTargets !== undefined ? {
+        perceptionTargets: projectPerceptionTargets(input.perceptionTargets, input.state, availableActions, referenceResolver),
+      } : {}),
     },
-    constraints: input.issues.map((issue) => issue.message),
+    constraints: [...input.issues.map((issue) => issue.message), ...(input.temporalEvidence ? [ACTIVITY_TEMPORAL_NOTICE] : []), ...(factEvidence ? [RESOLUTION_FACT_EVIDENCE_NOTICE] : [])],
     stage,
     resolutionScope: projectResolutionScope(input.resolutionScope, referenceResolver),
+    ...(factEvidence ? { planFactEvidence: { contract: RESOLUTION_FACT_EVIDENCE,
+      factSnapshotHash: contentHash(projection.canonicalTruth.facts) } } : {}),
+    ...(stage === "resolution" && input.planCauseActionIds ? { planCauseScope: {
+      contract: PLAN_CAUSE_SCOPE,
+      actionRefs: input.planCauseActionIds.map(id => referenceResolver.handleFor("action", id)),
+    } } : {}),
   };
   const state = {
     trustBoundary: {
@@ -1753,10 +1796,27 @@ export function buildTruthContext(input: {
     baseRevision: input.state.revision,
     step: input.state.step,
     canonicalTruth: projection.canonicalTruth,
+    ...(input.temporalEvidence ? projectActivityTemporalContext(availableState, input.temporalEvidence, referenceResolver,
+      Object.fromEntries(Object.entries(availableState.truth.activities).filter(([, activity]) =>
+        Object.hasOwn(projection.canonicalTruth.activities as Record<string, unknown>, referenceResolver.handleFor("activity", activity.id))))) : {}),
     semanticHistory: projectModelHistory(input.state, modelRefs),
     actionSet: {
       initial: initialActions.map((action) => projectModelAction(action, referenceResolver)),
-      assigned: assignedActions.map((action) => projectModelAction(action, referenceResolver)),
+      assigned: assignedActions.map((action) => {
+        const projected = projectModelAction(action, referenceResolver);
+        if (stage !== "resolution" || !input.includeResolutionMeansSources) return projected;
+        const grounding = assignedGroundings.find(candidate => candidate.kind === "action" && candidate.id === action.id);
+        if (!grounding) throw new Error(`resolution source inventory requires grounding for ${action.id}`);
+        const refs = projectModelGrounding(grounding, referenceResolver);
+        const sources = resolutionMeansSources(referenceResolver.catalog,
+          referenceResolver.handleFor("action", action.id), {
+            requiredExistingRefs: refs.requiredExistingRefs as string[],
+            potentiallyAffectedExistingRefs: refs.potentiallyAffectedExistingRefs as string[],
+            globalFallback: grounding.globalFallback,
+          });
+        return { ...projected, allowedMeansSources: factEvidence
+          ? withResolutionFactEvidence(sources, projection.canonicalTruth.facts as Record<string, unknown>) : sources };
+      }),
       available: availableActions.map((action) => projectModelAction(action, referenceResolver)),
     },
     dependencySet: {
@@ -1826,11 +1886,186 @@ export function buildTruthContext(input: {
     },
     task,
     state,
-    referenceCatalog: referenceResolver.catalog,
+    referenceCatalog: stage === "perception" ? perceptionReferenceCatalog(referenceResolver, {
+      state: input.state, definition: input.definition, actions: availableActions,
+      checkRequests: input.committedCheckRequests,
+    }) : referenceResolver.catalog,
     repair: input.issues.length > 0 || input.repairTarget
       ? { target: projectRepairTarget(input.repairTarget, referenceResolver)?.targetRef ?? null, issues: input.issues.map(projectPromptIssue) }
       : null,
   };
+}
+
+type CausalProposalReferenceInput = {
+  definition: WorldDefinition;
+  state: SimulationState;
+  actions: readonly AgentActionProposal[];
+  resolutionPlans: readonly ResolutionPlan[];
+  checkRequests: readonly D20CheckRequest[];
+  randomRequests: readonly DiscreteRandomRequest[];
+  proposal: TransitionProposal;
+  mechanicContracts?: readonly MechanicPromptContract[];
+};
+
+export function causalProposalReferenceResolver(input: CausalProposalReferenceInput): ReferenceResolver {
+  const taskReferenceInputs: ReferenceCandidateInput[] = [
+      ...input.resolutionPlans.map((plan) => ({
+        kind: "plan" as const,
+        engineId: plan.id,
+        label: plan.goal,
+        meaning: "a committed resolution plan being verified",
+        allowedUses: ["target", "assertion", "source"] as const,
+        visibility: "role" as const,
+      })),
+      ...resolutionPlanReferenceCandidates(input.resolutionPlans),
+      ...input.proposal.events.map((event) => ({
+        kind: "event" as const,
+        engineId: event.id,
+        label: event.description,
+        meaning: "an event produced by the candidate transition",
+        allowedUses: ["target", "cause", "assertion", "source"] as const,
+        visibility: "role" as const,
+      })),
+      ...input.checkRequests.map((check) => ({
+        kind: "check" as const,
+        engineId: check.id,
+        label: check.stakes,
+        meaning: "a committed check result in this candidate",
+        allowedUses: ["target", "cause", "assertion", "source"] as const,
+        visibility: "role" as const,
+      })),
+      ...input.randomRequests.map((request) => ({
+        kind: "random" as const,
+        engineId: request.id,
+        label: request.distributionId,
+        meaning: "a committed random result in this candidate",
+        allowedUses: ["target", "cause", "assertion", "source"] as const,
+        visibility: "role" as const,
+      })),
+      ...input.randomRequests.flatMap((request) => request.distribution.steps.map((step) => ({
+        kind: "random" as const,
+        engineId: step.id,
+        label: `${request.distributionId}/${step.id}`,
+        meaning: "a step inside a committed random distribution in this candidate",
+        allowedUses: ["target", "assertion", "source"] as const,
+        visibility: "role" as const,
+      }))),
+      ...input.proposal.operations.map((operation, index) => ({
+        kind: "operation" as const,
+        engineId: `${index}:${operation.kind}`,
+        label: operation.kind,
+        meaning: "a deterministic world operation proposed by the candidate transition",
+        allowedUses: ["target", "assertion", "source"] as const,
+        visibility: "role" as const,
+      })),
+      ...input.proposal.operations.flatMap((operation): ReferenceCandidateInput[] => {
+        if (operation.kind === "create_entity") return [{ kind: "entity" as const, engineId: operation.entity.id, label: operation.entity.name, meaning: "an entity created by the candidate transition", allowedUses: ["target", "subject", "assertion", "source"] as const, visibility: "role" as const }];
+        if (operation.kind === "set_fact") return [{ kind: "fact" as const, engineId: operation.fact.id, label: operation.fact.predicate, meaning: "a fact created by the candidate transition", allowedUses: ["target", "assertion", "cause", "source"] as const, visibility: "role" as const }];
+        if (operation.kind === "create_agent") return [
+          { kind: "agent" as const, engineId: operation.agent.id, label: operation.agent.id, meaning: "an Agent created by the candidate transition", allowedUses: ["actor", "target", "audience"] as const, visibility: "role" as const },
+          { kind: "entity" as const, engineId: operation.agent.entityId, label: operation.agent.entityId, meaning: "the entity bound to an Agent created by the candidate transition", allowedUses: ["actor", "target", "subject", "assertion", "source"] as const, visibility: "role" as const },
+        ];
+        return [];
+      }),
+      ...input.proposal.mechanicInvocations.map((invocation) => ({
+        kind: "mechanic" as const,
+        engineId: invocation.id,
+        label: `${invocation.packageId}/${invocation.ruleId}`,
+        meaning: "a mechanic invocation proposed by the candidate transition",
+        allowedUses: ["target", "assertion", "cause", "source"] as const,
+        visibility: "role" as const,
+        statePath: `candidate.mechanicInvocations.${invocation.id}`,
+      })),
+      ...input.proposal.outcomes.map((outcome) => ({
+        kind: "outcome" as const,
+        engineId: outcome.id,
+        label: outcome.summary,
+        meaning: "an action outcome proposed by the candidate transition",
+        allowedUses: ["target", "assertion"] as const,
+        visibility: "role" as const,
+        statePath: `candidate.outcomes.${outcome.id}`,
+      })),
+      ...input.proposal.observations.map((observation) => ({
+        kind: "observation" as const,
+        engineId: observation.id,
+        label: observation.summary,
+        meaning: "an observation rendered from the candidate transition",
+        allowedUses: ["target", "assertion"] as const,
+        visibility: "role" as const,
+        statePath: `candidate.observations.${observation.id}`,
+      })),
+    ];
+  return createTruthReferenceResolver({
+    state: input.state,
+    definition: input.definition,
+    actions: input.actions,
+    observations: input.proposal.observations,
+    mechanicContracts: input.mechanicContracts,
+    extraCandidates: taskReferenceInputs,
+  });
+}
+
+/** Locate semantic feedback in the owning component, using its expanded candidate vocabulary. */
+export function causalReviewRepairIssues(input: CausalProposalReferenceInput,
+  findings: Extract<CausalVerification, { verdict: "reject" }>["findings"]): PromptValidationIssue[] {
+  const projected = projectModelTransitionProposal(input.proposal, {
+    existing: causalProposalReferenceResolver(input), worldHash: input.state.worldHash,
+  });
+  return findings.map(finding => {
+    const categories: Partial<Record<string, "operations" | "events" | "outcomes" | "mechanicInvocations" | "observations">> = {
+      operation: "operations", event: "events", outcome: "outcomes", mechanic: "mechanicInvocations", observation: "observations",
+    };
+    const category = categories[finding.target.kind];
+    if (!category) throw new Error("causal repair target cannot change fixed source evidence");
+    const rows = input.proposal[category];
+    const index = finding.target.kind === "operation" ? Number(finding.target.id.split(":", 1)[0])
+      : rows.findIndex(row => "id" in row && row.id === finding.target.id);
+    const target = (projected[category] as unknown[])[index];
+    if (!target) throw new Error("causal repair target is absent from its owning component");
+    return { code: finding.code, class: "semantic", path: [category, index], originalValue: target,
+      message: `Rejected expanded candidate target ${JSON.stringify(target)}: ${finding.message}; ${finding.repairHint}` };
+  });
+}
+
+/** Preserve evaluator observations; never re-evaluate against the base snapshot. */
+export function causalAssertionRepairIssues(
+  input: CausalProposalReferenceInput & { failures: readonly CausalAssertionResult[]; evaluationState: SimulationState },
+): PromptValidationIssue[] {
+  const modelRefs: ModelReferenceResolvers = {
+    existing: causalProposalReferenceResolver(input), worldHash: input.state.worldHash,
+  };
+  const binding = { sourceStateHash: contentHash(input.evaluationState), expandedProposalHash: contentHash(input.proposal) };
+  return input.failures.map((failure) => {
+    const projected = projectModelAssertionResult(failure, modelRefs);
+    // These values carry reference-bearing fields, unlike scalar observations.
+    let observed: unknown = structuredClone(failure.observed);
+    if (failure.assertion.kind === "fact_matches" && failure.observed !== null) {
+      observed = projectModelFactValue(failure.observed as SimulationState["truth"]["facts"][string]["value"], modelRefs);
+    } else if (failure.assertion.kind === "placement_equals" || failure.assertion.kind === "placement_not_equals") {
+      const value = failure.observed as { known: boolean; placementId: string | null };
+      observed = { known: value.known, placementRef: value.placementId === null ? null : modelHandle(modelRefs, "placement", value.placementId) };
+    } else if (failure.assertion.kind === "shared_placement") {
+      const value = failure.observed as { left: string | null; right: string | null };
+      observed = {
+        leftPlacementRef: value.left === null ? null : modelHandle(modelRefs, "placement", value.left),
+        rightPlacementRef: value.right === null ? null : modelHandle(modelRefs, "placement", value.right),
+      };
+    }
+    const kind = failure.target.kind;
+    const evaluation = kind === "operation"
+      ? { phase: "before-operation", expandedOperationIndex: Number(failure.target.id.split(":", 1)[0]) }
+      : { phase: kind === "mechanic" ? "base-state" : "after-all-operations" };
+    const outcome = kind === "outcome" ? input.proposal.outcomes.find((item) => item.id === failure.target.id) : undefined;
+    const evidence = {
+      ...projected, observed, evaluation, binding,
+      ...(outcome ? { actionRef: modelHandle(modelRefs, "action", outcome.proposalId) } : {}),
+    };
+    return {
+      code: "causal_assertion_failed", class: "semantic", path: [],
+      originalValue: evidence,
+      message: `causal assertions failed: ${JSON.stringify(evidence)}`,
+    };
+  });
 }
 
 export function buildCausalVerificationContext(input: {
@@ -1848,9 +2083,12 @@ export function buildCausalVerificationContext(input: {
   assertionResults: readonly CausalAssertionResult[];
   mechanicResults: readonly MechanicResult[];
   previousReport: CausalVerification | null;
+  reactionDecisions?: readonly ReactionDecision[];
   instanceId: string;
   advanceId: string;
   issues: readonly PromptValidationIssue[];
+  temporalEvidence?: TemporalBoundary;
+  candidateTemporalState?: Readonly<TemporalStateSnapshot>;
   resolutionScope?: ResolutionScope;
   mechanicContracts?: readonly MechanicPromptContract[];
   repairTarget?: RepairTarget | null;
@@ -1859,112 +2097,24 @@ export function buildCausalVerificationContext(input: {
   const availableState = input.workset.state;
   const availableActions = input.workset.availableActions;
   const availableGroundings = input.workset.availableDependencies;
-  const taskReferenceInputs: ReferenceCandidateInput[] = [
-      ...input.resolutionPlans.map((plan) => ({
-        kind: "plan" as const,
-        engineId: plan.id,
-        label: plan.goal,
-        meaning: "a committed resolution plan being verified",
-        allowedUses: ["target", "assertion", "source"] as const,
-        visibility: "role" as const,
-      })),
-      ...resolutionPlanReferenceCandidates(input.resolutionPlans),
-      ...input.proposal.events.map((event) => ({
-        kind: "event" as const,
-        engineId: event.id,
-        label: event.description,
-        meaning: "an event produced by the candidate transition",
-        allowedUses: ["cause", "assertion", "source"] as const,
-        visibility: "role" as const,
-      })),
-      ...input.checkRequests.map((check) => ({
-        kind: "check" as const,
-        engineId: check.id,
-        label: check.stakes,
-        meaning: "a committed check result in this candidate",
-        allowedUses: ["cause", "assertion", "source"] as const,
-        visibility: "role" as const,
-      })),
-      ...input.randomRequests.map((request) => ({
-        kind: "random" as const,
-        engineId: request.id,
-        label: request.distributionId,
-        meaning: "a committed random result in this candidate",
-        allowedUses: ["cause", "assertion", "source"] as const,
-        visibility: "role" as const,
-      })),
-      ...input.randomRequests.flatMap((request) => request.distribution.steps.map((step) => ({
-        kind: "random" as const,
-        engineId: step.id,
-        label: `${request.distributionId}/${step.id}`,
-        meaning: "a step inside a committed random distribution in this candidate",
-        allowedUses: ["assertion", "source"] as const,
-        visibility: "role" as const,
-      }))),
-      ...input.proposal.operations.map((operation, index) => ({
-        kind: "operation" as const,
-        engineId: `${index}:${operation.kind}`,
-        label: operation.kind,
-        meaning: "a deterministic world operation proposed by the candidate transition",
-        allowedUses: ["assertion", "source"] as const,
-        visibility: "role" as const,
-      })),
-      ...input.proposal.operations.flatMap((operation): ReferenceCandidateInput[] => {
-        if (operation.kind === "create_entity") return [{ kind: "entity" as const, engineId: operation.entity.id, label: operation.entity.name, meaning: "an entity created by the candidate transition", allowedUses: ["target", "subject", "assertion", "source"] as const, visibility: "role" as const }];
-        if (operation.kind === "set_fact") return [{ kind: "fact" as const, engineId: operation.fact.id, label: operation.fact.predicate, meaning: "a fact created by the candidate transition", allowedUses: ["assertion", "cause", "source"] as const, visibility: "role" as const }];
-        if (operation.kind === "create_agent") return [
-          { kind: "agent" as const, engineId: operation.agent.id, label: operation.agent.id, meaning: "an Agent created by the candidate transition", allowedUses: ["actor", "target", "audience"] as const, visibility: "role" as const },
-          { kind: "entity" as const, engineId: operation.agent.entityId, label: operation.agent.entityId, meaning: "the entity bound to an Agent created by the candidate transition", allowedUses: ["actor", "target", "subject", "assertion", "source"] as const, visibility: "role" as const },
-        ];
-        return [];
-      }),
-      ...input.proposal.mechanicInvocations.map((invocation) => ({
-        kind: "mechanic" as const,
-        engineId: invocation.id,
-        label: `${invocation.packageId}/${invocation.ruleId}`,
-        meaning: "a mechanic invocation proposed by the candidate transition",
-        allowedUses: ["assertion", "cause", "source"] as const,
-        visibility: "role" as const,
-        statePath: `candidate.mechanicInvocations.${invocation.id}`,
-      })),
-      ...input.proposal.outcomes.map((outcome) => ({
-        kind: "outcome" as const,
-        engineId: outcome.id,
-        label: outcome.summary,
-        meaning: "an action outcome proposed by the candidate transition",
-        allowedUses: ["assertion"] as const,
-        visibility: "role" as const,
-        statePath: `candidate.outcomes.${outcome.id}`,
-      })),
-      ...input.proposal.observations.map((observation) => ({
-        kind: "observation" as const,
-        engineId: observation.id,
-        label: observation.summary,
-        meaning: "an observation rendered from the candidate transition",
-        allowedUses: ["assertion"] as const,
-        visibility: "role" as const,
-        statePath: `candidate.observations.${observation.id}`,
-      })),
-    ];
-  const referenceResolver = createTruthReferenceResolver({
-    state: availableState,
-    definition: input.definition,
-    actions: availableActions,
-    observations: input.proposal.observations,
-    mechanicContracts: input.mechanicContracts,
-    extraCandidates: taskReferenceInputs,
+  const referenceResolver = causalProposalReferenceResolver({
+    ...input, state: availableState, actions: [...new Map([...input.workset.initialActions, ...availableActions]
+      .map(action => [action.id, action])).values()],
   });
   const visibleTruth = contextMode === "full"
     ? availableState.truth
     : scopedCanonicalTruth(input.state, availableActions, availableGroundings);
   const modelRefs: ModelReferenceResolvers = { existing: referenceResolver, worldHash: input.state.worldHash };
+  if (input.reactionDecisions?.some(decision => decision.baseRevision !== input.state.revision)) {
+    throw new Error("causal review reaction evidence has a stale revision");
+  }
   const task = {
     assignment: {
       targetHandles: input.workset.assignedActions.map((action) => modelHandle({ existing: referenceResolver }, "action", action.id)),
       availableHandles: availableActions.map((action) => modelHandle({ existing: referenceResolver }, "action", action.id)),
       allowedProposalKinds: ["operation", "event", "outcome", "mechanic"],
     },
-    constraints: input.issues.map((issue) => issue.message),
+    constraints: [...input.issues.map((issue) => issue.message), ...(input.temporalEvidence ? [ACTIVITY_TEMPORAL_NOTICE] : [])],
     resolutionScope: projectResolutionScope(input.resolutionScope, referenceResolver),
   };
   const state = {
@@ -1982,6 +2132,13 @@ export function buildCausalVerificationContext(input: {
     },
     baseRevision: input.state.revision,
     canonicalTruth: projectCanonicalTruthForModel(visibleTruth, referenceResolver),
+    ...projectActivityTemporalContext(availableState, input.temporalEvidence, referenceResolver, visibleTruth.activities),
+    ...(input.candidateTemporalState ? { candidateTemporalExecution: {
+      sourceHash: contentHash(input.candidateTemporalState),
+      ...projectActivityTemporalContext(availableState, input.temporalEvidence, referenceResolver,
+        input.candidateTemporalState.activities),
+      timers: projectCanonicalTruthForModel({ ...visibleTruth, ...input.candidateTemporalState }, referenceResolver).timers,
+    } } : {}),
     semanticHistory: projectModelHistory(availableState, modelRefs),
     actionSet: {
       initial: input.workset.initialActions.map((action) => projectModelAction(action, referenceResolver)),
@@ -2006,6 +2163,29 @@ export function buildCausalVerificationContext(input: {
       effectCount: receipt.effects.length,
       operationCount: receipt.operations.length,
     })),
+    reactionEvidence: {
+      status: input.reactionDecisions === undefined ? "unavailable" : "provided",
+      sourceHash: input.reactionDecisions === undefined ? null : contentHash(input.reactionDecisions),
+      decisions: (input.reactionDecisions ?? []).map((decision, sourceIndex) => ({
+        sourceIndex,
+        agentRef: modelHandle(modelRefs, "agent", decision.agentId),
+        baseRevision: decision.baseRevision,
+        originalActionRef: maybeModelHandle(modelRefs, "action", decision.originalProposalId),
+        source: decision.source,
+        kind: decision.kind,
+        ...(decision.kind === "keep"
+          ? { ongoingActivityDisposition: decision.ongoingActivityDisposition }
+          : { replacementAction: {
+            actionRef: maybeModelHandle(modelRefs, "action", decision.replacementAction.id),
+            actorRef: modelHandle(modelRefs, "agent", decision.replacementAction.actorId),
+            baseRevision: decision.replacementAction.baseRevision,
+            rawText: decision.replacementAction.rawText,
+            goal: decision.replacementAction.goal,
+            means: decision.replacementAction.means,
+            targetLocalIds: [...decision.replacementAction.targetIds],
+          } }),
+      })),
+    },
     candidate: projectModelTransitionProposal(input.proposal, modelRefs),
     mechanicResults: input.mechanicResults.map((result) => ({
       invocationRef: modelHandle(modelRefs, "mechanic", result.invocationId),
@@ -2057,6 +2237,7 @@ export function buildResolutionPlanVerificationContext(input: {
   instanceId: string;
   advanceId: string;
   issues: readonly PromptValidationIssue[];
+  temporalEvidence?: TemporalBoundary;
   resolutionScope?: ResolutionScope;
 }): unknown {
   const contextMode = input.workset.mode ?? "scoped";
@@ -2092,13 +2273,14 @@ export function buildResolutionPlanVerificationContext(input: {
       availableHandles: availableActions.map((action) => modelHandle({ existing: referenceResolver }, "action", action.id)),
       allowedProposalKinds: ["plan"],
     },
-    constraints: input.issues.map((issue) => issue.message),
+    constraints: [...input.issues.map((issue) => issue.message), ...(input.temporalEvidence ? [ACTIVITY_TEMPORAL_NOTICE] : [])],
     resolutionScope: projectResolutionScope(input.resolutionScope, referenceResolver),
   };
   const state = {
     world: { id: input.definition.id, laws: input.definition.laws, rulePackages: input.definition.rulePackages, mechanics },
     baseRevision: input.state.revision,
     canonicalTruth,
+    ...projectActivityTemporalContext(availableState, input.temporalEvidence, referenceResolver, visibleTruth.activities),
     semanticHistory: projectModelHistory(availableState, modelRefs),
     actionSet: {
       initial: input.workset.initialActions.map((action) => projectModelAction(action, referenceResolver)),

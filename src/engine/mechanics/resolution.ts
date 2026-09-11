@@ -25,6 +25,24 @@ export type FactorRole = "permission" | "control" | "potency" | "protection" | "
 export type FactorDirection = "helpful" | "hindering" | "neutral";
 export type FactorAuthority = "semantic" | "authored";
 
+/** Independent missing stakes must reach the same repair, before settlement. */
+export class ResolutionCheckEffectError extends Error {
+  readonly issues: Array<{ code: string; path: Array<string | number>; message: string; originalValue: null | "none" }>;
+
+  constructor(plan: ResolutionPlan) {
+    const issues: ResolutionCheckEffectError["issues"] = [];
+    if (!plan.primaryEffect || plan.primaryEffect.magnitude === "none") issues.push({
+      code: "resolution_check_primary_effect", path: plan.primaryEffect ? ["primaryEffect", "magnitude"] : ["primaryEffect"],
+      message: `plan ${plan.id} requires a non-none primary effect`, originalValue: plan.primaryEffect ? "none" : null,
+    });
+    if (!plan.threatenedEffect) issues.push({ code: "resolution_check_threatened_effect", path: ["threatenedEffect"],
+      message: `plan ${plan.id} has no failure threat`, originalValue: null });
+    super(issues.map(issue => issue.message).join("; "));
+    this.name = "ResolutionCheckEffectError";
+    this.issues = issues;
+  }
+}
+
 export type ResolutionSourceRef =
   | { kind: "action"; id: string }
   | { kind: "entity"; id: string }
@@ -255,6 +273,35 @@ function sourceExists(source: ResolutionSourceRef, index: ResolutionEvidenceInde
   }
 }
 
+/** Semantic check choices share one evidence contract and numeric rule. */
+export function deriveCheckNumbers(
+  input: Pick<ResolutionPlan, "actorId" | "actorRatingId" | "targetIds"> & { difficulty: ResolutionDifficulty },
+  index: ResolutionEvidenceIndex,
+  label: string,
+): Pick<DerivedCheck, "dc" | "modifier"> {
+  if (input.actorRatingId && index.ratingOwners.get(input.actorRatingId) !== input.actorId) {
+    throw new Error(`${label} actor rating is not owned by the actor`);
+  }
+  const difficulty = input.difficulty;
+  if (!sourceExists(difficulty.source, index)) throw new Error(`${label} has ungrounded difficulty`);
+  if (difficulty.kind === "opposed") {
+    if (!input.targetIds.includes(difficulty.targetId) ||
+      index.ratingOwners.get(difficulty.ratingId) !== difficulty.targetId) {
+      throw new Error(`${label} has invalid opposed rating`);
+    }
+    if (difficulty.source.kind !== "rating" || difficulty.source.id !== difficulty.ratingId) {
+      throw new Error(`${label} opposed difficulty does not cite its rating`);
+    }
+  }
+  if (input.actorRatingId && difficulty.source.kind === "rating" && difficulty.source.id === input.actorRatingId) {
+    throw new Error(`${label} assigns source ${sourceKey(difficulty.source)} more than one mechanical role: difficulty.source conflicts with actorRatingRef`);
+  }
+  return {
+    dc: difficulty.kind === "environment" ? difficultyDc[difficulty.band] : 10 + requiredRatingValue(difficulty.ratingId, index),
+    modifier: input.actorRatingId ? requiredRatingValue(input.actorRatingId, index) : 0,
+  };
+}
+
 export function validateResolutionPlan(
   plan: ResolutionPlan,
   index: ResolutionEvidenceIndex,
@@ -280,38 +327,26 @@ export function validateResolutionPlan(
   if (plan.mode !== "check" && (plan.difficulty || plan.actorRatingId)) {
     throw new Error(`plan ${plan.id} ${plan.mode} mode cannot carry check inputs`);
   }
-  if (plan.actorRatingId && index.ratingOwners.get(plan.actorRatingId) !== plan.actorId) {
-    throw new Error(`plan ${plan.id} actor rating is not owned by the actor`);
-  }
   if (plan.difficulty) {
-    if (!sourceExists(plan.difficulty.source, index)) throw new Error(`plan ${plan.id} has ungrounded difficulty`);
-    if (plan.difficulty.kind === "opposed") {
-      if (!plan.targetIds.includes(plan.difficulty.targetId) ||
-        index.ratingOwners.get(plan.difficulty.ratingId) !== plan.difficulty.targetId) {
-        throw new Error(`plan ${plan.id} has invalid opposed rating`);
-      }
-      if (plan.difficulty.source.kind !== "rating" || plan.difficulty.source.id !== plan.difficulty.ratingId) {
-        throw new Error(`plan ${plan.id} opposed difficulty does not cite its rating`);
-      }
-    }
+    deriveCheckNumbers({ ...plan, difficulty: plan.difficulty }, index, `plan ${plan.id}`);
   }
 
-  const preassignedSources = new Set<string>();
-  if (plan.actorRatingId) preassignedSources.add(sourceKey({ kind: "rating", id: plan.actorRatingId }));
+  const preassignedSources = new Map<string, string>();
+  if (plan.actorRatingId) preassignedSources.set(sourceKey({ kind: "rating", id: plan.actorRatingId }), "actorRatingRef");
   if (plan.difficulty) {
     const difficultyKey = sourceKey(plan.difficulty.source);
     if (preassignedSources.has(difficultyKey)) {
-      throw new Error(`plan ${plan.id} assigns source ${difficultyKey} more than one mechanical role`);
+      throw new Error(`plan ${plan.id} assigns source ${difficultyKey} more than one mechanical role: difficulty.source conflicts with ${preassignedSources.get(difficultyKey)}`);
     }
-    preassignedSources.add(difficultyKey);
+    preassignedSources.set(difficultyKey, "difficulty.source");
   }
-  const factorSources = new Set<string>();
-  for (const factor of plan.factors) {
+  const factorSources = new Map<string, string>();
+  for (const [factorIndex, factor] of plan.factors.entries()) {
     const key = sourceKey(factor.source);
     if (factorSources.has(key) || preassignedSources.has(key)) {
-      throw new Error(`plan ${plan.id} assigns source ${key} more than one mechanical role`);
+      throw new Error(`plan ${plan.id} assigns source ${key} more than one mechanical role: factors[${factorIndex}].source (${factor.role}) conflicts with ${factorSources.get(key) ?? preassignedSources.get(key)}. Neutral permission, secondary and risk factors also consume the source's one mechanical assignment`);
     }
-    factorSources.add(key);
+    factorSources.set(key, `factors[${factorIndex}].source (${factor.role})`);
     if (!sourceExists(factor.source, index)) throw new Error(`plan ${plan.id} cites unknown factor ${key}`);
     if (!factor.explanation.trim()) throw new Error(`plan ${plan.id} has an unexplained factor`);
     if (factor.authority === "authored" && factor.source.kind !== "rating" && factor.source.kind !== "law") {
@@ -339,6 +374,9 @@ export function validateResolutionPlan(
     }
     return;
   }
+  if (plan.mode === "check" && (!plan.primaryEffect || plan.primaryEffect.magnitude === "none" || !plan.threatenedEffect)) {
+    throw new ResolutionCheckEffectError(plan);
+  }
   if (!plan.primaryEffect) {
     if (plan.mode !== "automatic" || plan.baseEffect !== "none" || plan.secondaryEffect || plan.threatenedEffect) {
       throw new Error(`plan ${plan.id} requires a non-none primary effect`);
@@ -349,7 +387,6 @@ export function validateResolutionPlan(
   if (plan.primaryEffect.magnitude !== plan.baseEffect) {
     throw new Error(`plan ${plan.id} base effect does not match its primary effect`);
   }
-  if (plan.mode === "check" && !plan.threatenedEffect) throw new Error(`plan ${plan.id} has no failure threat`);
 
   const intended = [plan.primaryEffect, plan.secondaryEffect].filter((effect): effect is EffectIntent => Boolean(effect));
   for (const effect of intended) {
@@ -414,10 +451,7 @@ export function validateResolutionPlan(
 
 export function deriveCheck(plan: ResolutionPlan, index: ResolutionEvidenceIndex): DerivedCheck {
   if (plan.mode !== "check" || !plan.difficulty) throw new Error(`plan ${plan.id} is not a check`);
-  const dc = plan.difficulty.kind === "environment"
-    ? difficultyDc[plan.difficulty.band]
-    : 10 + requiredRatingValue(plan.difficulty.ratingId, index);
-  const modifier = plan.actorRatingId ? requiredRatingValue(plan.actorRatingId, index) : 0;
+  const { dc, modifier } = deriveCheckNumbers({ ...plan, difficulty: plan.difficulty }, index, `plan ${plan.id}`);
   let balance = 0;
   for (const factor of plan.factors) {
     if (factor.role !== "control") continue;

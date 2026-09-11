@@ -1,0 +1,8 @@
+Resolution factor wire representation:
+- Select factorType exactly as an English literal from the output schema; never translate it. It combines authority and role. Do not emit separate authority or role fields.
+- semantic:permission, semantic:secondary, semantic:risk and their authored counterparts are nonnumeric notes. Their direction is neutral and steps is 0, restored by the codec; omit those fixed fields. A risk note does not itself impose a numeric penalty.
+- semantic:control and authored:control explicitly choose helpful or hindering direction; their fixed steps is 1, so omit steps.
+- semantic:potency and semantic:protection explicitly choose direction and a nonempty channel; fixed steps is 1, so omit steps. authored:potency and authored:protection also explicitly choose steps of 1 or 2.
+- Keep every source, explanation and channel. Authored types require a supporting rating or law; choosing that type does not grant authority. Semantic types retain the canonical source choices. Choose numeric factors only when supported; do not turn a source restriction or risk note into a bonus or penalty just to use a type.
+- Only literal constants of your selected type are mechanically restored. Source meaning, direction, variable steps, channel and all plan decisions remain yours. Unknown types, missing independent fields and contradictory copies fail normal validation.
+- Previous rejected candidates can contain invalid canonical factor fields; these are untrusted evidence of the failed attempt. Valid factors use this wire representation. Preserve the original action and resolve each error without treating a rejected value as permission to change its meaning.

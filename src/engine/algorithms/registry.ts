@@ -1,4 +1,14 @@
+import { PLANNING_CATALOG_ENCODING, planningCatalogEncodingProvider } from "../mechanics/planning-catalog-encoding";
+import { standardEagerReferenceAlgorithmRef } from "./standard-composition";
+import { PLAN_RANDOM_COMPLETION } from "../mechanics/plan-random-completion";
+import { PERCEPTION_RATING_CHOICES, perceptionRatingChoiceProvider } from "../mechanics/perception-rating-choices";
+import { PLANNING_CONTRACT_TAIL } from "../mechanics/planning-contract-tail";
+import { OBSERVATION_EVIDENCE_LAYOUT, observationEvidenceProvider } from "../mechanics/observation-evidence-layout";
+import { OBSERVATION_CLAIM_ENCODING } from "../mechanics/observation-claim-encoding";
+import { TRUTH_RESOLUTION_CONTRACT_VERSION } from "./roles";
+import { ORDERED_RANDOM_SCHEDULING } from "../mechanics/ordered-random-stream";
 import { z } from "zod";
+import { RESOLUTION_SOURCE_INVENTORY, RESOLUTION_FACT_EVIDENCE } from "../contracts/resolution-source-inventory";
 import {
   ACTION_COMPILATION_CANDIDATE_KEY_SUFFIX_LENGTH,
   ACTION_COMPILATION_CANDIDATE_KEY_VERSION,
@@ -6,21 +16,39 @@ import {
 import {
   createEagerReferenceAlgorithmRef,
   EagerReferenceAlgorithm,
-  EAGER_REFERENCE_MANIFEST,
+  FULL_CATALOG_EAGER_REFERENCE_CONFIG,
   type EagerReferenceComponents,
   type EagerReferenceAlgorithmConfig,
 } from "./eager-reference/eager-reference";
 import { compileActions } from "./eager-reference/action-compiler";
+import { constrainedActionCompiler, constrainedCompilationPrompt, type ConstrainedCompilationOptions } from "./eager-reference/constrained-action-compiler";
+import { CONSTRAINED_COMPILATION_CODEC_VERSION } from "./eager-reference/constrained-action-compilation-codec";
+import { representedActionCompiler, representedActionCompilationPrompt } from "./eager-reference/represented-action-compiler";
+import { ACTION_COMPILATION_REPRESENTATION_VERSION, type ActionCompilationRepresentation } from "./eager-reference/action-compilation-representation";
 import { AgentMind } from "./eager-reference/agent-mind";
 import { DEFAULT_EAGER_OUTPUT_RECOVERY } from "./eager-reference/eager-slot-batching";
 import { generateInteractionDependency } from "../mechanics/action-dependency";
 import { TruthEngine } from "../mechanics/truth-engine";
-import { TruthBatchCoordinator } from "../mechanics/truth-batch-provider";
+import { TruthBatchCoordinator, SHARED_BATCH_PROMPT_VERSION, TRUTH_BATCH_REQUEST_CONTRACT } from "../mechanics/truth-batch-provider";
+import { SHARED_BATCH_CONTEXT_CODEC, SHARED_BATCH_ORDER_CODEC, type SharedBatchContext } from "../mechanics/shared-batch-context";
+import { withTruthRequestPolicy } from "../mechanics/truth-request-policy";
+import { SHARED_STATE_FIRST_LAYOUT } from "../prompts/context-layout";
+import { UNMATCHED_CLOSER_RECOVERY } from "../models/unmatched-closer-recovery";
+import { RESOLUTION_DEPENDENT_FIELDS_CODEC, RESOLUTION_DEPENDENT_FIELDS_PROMPT_VERSION, dependentFieldsProvider } from "../mechanics/resolution-dependent-fields-codec";
+import { WORKLIST_PLANNING_PIPELINE, WORKLIST_PLANNING_PROMPT_VERSION, worklistPlanningProvider } from "../mechanics/worklist-planning-pipeline";
+import { INDEXED_REVIEWED_PLANNING_PIPELINE, INDEXED_REVIEWED_PLANNING_PROMPT_VERSION, indexedReviewedPlanningProvider } from "../mechanics/indexed-reviewed-planning-pipeline";
+import { SOURCE_INDEXED_PLAN_CAUSES } from "../mechanics/source-indexed-plan-causes";
+import { SOURCE_INDEXED_PLAN_MEANS } from "../mechanics/source-indexed-planning";
+import { PLANNING_RELATION_CHOICES } from "../mechanics/planning-relation-choices";
+import { COMPACT_PLANNING_RECORDS } from "../mechanics/compact-planning-records";
+import { MECHANICAL_PLAN_REPAIR } from "../mechanics/mechanical-plan-repair";
+import { sourceIntentReviewProvider } from "../mechanics/plan-review-ownership";
 import { ObservationRenderer } from "../cognition/observation-renderer";
+import { EVENT_OUTCOME_SUMMARIES } from "../mechanics/event-outcome-summaries";
+import { BOUNDARY_CLOCK_WITNESS } from "../mechanics/boundary-clock-witness";
 import { createCoreRulePackageRegistry } from "../mechanics/rule-package";
 import { DEFAULT_SYMBOL_REPAIR_POLICY } from "../contracts/symbol-repair";
 import {
-  algorithmRef,
   algorithmManifest,
   WorldExecutionAlgorithmRegistry,
   type AlgorithmRef,
@@ -37,6 +65,8 @@ import type {
 import type {
   ActionCompilationRoleAlgorithm,
   AgentCognitionRoleAlgorithm,
+  CandidateAllocationRoleAlgorithm,
+  CandidateRankingRoleAlgorithm,
   CandidateSelectionCapability,
   CandidateSelectionRoleAlgorithm,
   ConfiguredRoleAlgorithm,
@@ -54,6 +84,10 @@ import type {
 import {
   ACTION_COMPILATION_RETRIEVAL_RUNTIME_VERSION,
 } from "./eager-reference/candidate-retrieval/runtime";
+import {
+  RELATIONAL_RRF_ENCODER_FINGERPRINT,
+  RELATIONAL_RRF_ENCODER_MODEL_ID,
+} from "./eager-reference/candidate-retrieval/relational-rrf";
 
 export { ACTION_COMPILATION_RETRIEVAL_RUNTIME_VERSION } from "./eager-reference/candidate-retrieval/runtime";
 
@@ -118,6 +152,34 @@ class ActionCompilationAlgorithm extends ConfiguredAlgorithm<"action-compilation
   readonly compile = compileActions;
 }
 
+class RepresentedActionCompilationAlgorithm extends ConfiguredAlgorithm<"action-compilation"> implements ActionCompilationRoleAlgorithm {
+  readonly compile;
+
+  constructor(algorithmIdentity: AlgorithmIdentity<"action-compilation">, config: JsonObject, children: Readonly<Record<string, ResolvedAlgorithm>>) {
+    super(algorithmIdentity, config, children);
+    const representation = config.representation as ActionCompilationRepresentation;
+    const sourceOwned = config.descriptionPolicy === "original-action-v1" || config.descriptionPolicy === "original-action-omitted-v2";
+    const omittedDescription = config.descriptionPolicy === "original-action-omitted-v2";
+    const profileChoices = config.profileChoiceEvidence === "visible-schema-v1";
+    const namedContracts = config.temporalContractSelection === "named-operators-v1";
+    if (config.promptVersion !== representedActionCompilationPrompt(representation, sourceOwned, profileChoices, namedContracts, omittedDescription).version) {
+      throw new Error("AC-FP1 prompt identity does not match its representation");
+    }
+    this.compile = representedActionCompiler(representation, config.eligibleProfileSchema === "batch-union-v1", sourceOwned, profileChoices, namedContracts, omittedDescription);
+  }
+}
+
+class ConstrainedActionCompilationAlgorithm extends ConfiguredAlgorithm<"action-compilation"> implements ActionCompilationRoleAlgorithm {
+  readonly compile;
+  constructor(algorithmIdentity: AlgorithmIdentity<"action-compilation">, config: JsonObject, children: Readonly<Record<string, ResolvedAlgorithm>>) {
+    super(algorithmIdentity, config, children);
+    const options: ConstrainedCompilationOptions = { capabilities: config.capabilities as boolean, snapshots: config.snapshots as boolean,
+      structuredOutputMode: config.structuredOutputMode as ConstrainedCompilationOptions["structuredOutputMode"] };
+    if (config.promptVersion !== constrainedCompilationPrompt(options).version) throw new Error("AC-FP2 prompt identity drift");
+    this.compile = constrainedActionCompiler(options);
+  }
+}
+
 class CandidateSelectionAlgorithm extends ConfiguredAlgorithm<"candidate-selection"> implements CandidateSelectionRoleAlgorithm {
   constructor(
     algorithmIdentity: AlgorithmIdentity<"candidate-selection">,
@@ -127,6 +189,14 @@ class CandidateSelectionAlgorithm extends ConfiguredAlgorithm<"candidate-selecti
   ) {
     super(algorithmIdentity, config, children);
   }
+}
+
+class CandidateRankingAlgorithm extends ConfiguredAlgorithm<"candidate-ranking"> implements CandidateRankingRoleAlgorithm {
+  readonly rankingVersion = "typed-channel-rrf-v1" as const;
+}
+
+class CandidateAllocationAlgorithm extends ConfiguredAlgorithm<"candidate-allocation"> implements CandidateAllocationRoleAlgorithm {
+  readonly allocationVersion = "coverage-aware-joint-budget-v1" as const;
 }
 
 class SymbolRepairAlgorithm extends ConfiguredAlgorithm<"symbol-repair"> implements SymbolRepairRoleAlgorithm {
@@ -139,7 +209,8 @@ class InteractionGroundingAlgorithm extends ConfiguredAlgorithm<"interaction-gro
 
 class OnsetPerceptionAlgorithm extends ConfiguredAlgorithm<"onset-perception"> implements OnsetPerceptionRoleAlgorithm {
   create(provider: WorldExecutionAlgorithmServices["provider"], rulePackages: NonNullable<WorldExecutionAlgorithmServices["rulePackages"]>, recovery: Readonly<OutputRecoveryCapability>) {
-    return new TruthEngine(provider, { rulePackages, repairAttempts: recovery.maxRepairs });
+    return new TruthEngine(this.config.ratingChoices === PERCEPTION_RATING_CHOICES ? perceptionRatingChoiceProvider(provider) : provider,
+      { rulePackages, repairAttempts: recovery.maxRepairs });
   }
 }
 
@@ -151,13 +222,20 @@ class ReactionDecisionAlgorithm extends ConfiguredAlgorithm<"reaction-decision">
 
 class TruthResolutionAlgorithm extends ConfiguredAlgorithm<"truth-resolution"> implements TruthResolutionRoleAlgorithm {
   create(provider: WorldExecutionAlgorithmServices["provider"], rulePackages: NonNullable<WorldExecutionAlgorithmServices["rulePackages"]>, recovery: Readonly<OutputRecoveryCapability>) {
-    return new TruthEngine(provider, { rulePackages, repairAttempts: recovery.maxRepairs });
+    return new TruthEngine(provider, { rulePackages, repairAttempts: recovery.maxRepairs,
+      ...(this.config.mechanicalPlanRepair === MECHANICAL_PLAN_REPAIR ? { mechanicalPlanRepair: MECHANICAL_PLAN_REPAIR } : {}),
+      ...(this.config.planRandomCompletion === PLAN_RANDOM_COMPLETION ? { planRandomCompletion: PLAN_RANDOM_COMPLETION } : {}),
+      includeActivityTemporalEvidence: this.config.planningPipeline === WORKLIST_PLANNING_PIPELINE || this.config.planningPipeline === INDEXED_REVIEWED_PLANNING_PIPELINE,
+      includeResolutionMeansSources: this.config.sourceInventory === RESOLUTION_SOURCE_INVENTORY,
+      includePlanCauseScope: this.config.planCauseChoices === SOURCE_INDEXED_PLAN_CAUSES,
+      includeResolutionFactEvidence: this.config.planFactEvidence === RESOLUTION_FACT_EVIDENCE });
   }
 }
 
 class ObservationRenderingAlgorithm extends ConfiguredAlgorithm<"observation-rendering"> implements ObservationRenderingRoleAlgorithm {
   create(provider: WorldExecutionAlgorithmServices["provider"], recovery: Readonly<OutputRecoveryCapability>) {
-    return new ObservationRenderer(provider, recovery.maxRepairs);
+    return new ObservationRenderer(provider, recovery.maxRepairs,
+      this.algorithmIdentity.id === "source-bound-observation-rendering");
   }
 }
 
@@ -168,7 +246,7 @@ function identity<R extends AlgorithmRole>(
   role: R,
   id: string,
   version = "1",
-  contractVersion = 1,
+  contractVersion = role === "truth-resolution" ? TRUTH_RESOLUTION_CONTRACT_VERSION : 1,
 ): AlgorithmIdentity<R> {
   return { role, id, version, contractVersion };
 }
@@ -196,16 +274,87 @@ function candidateSelectionRuntime(
   ref: AlgorithmRef<"candidate-selection">,
 ): CandidateSelectionCapability {
   const runtime = services.resources?.resolve<CandidateSelectionCapability>("candidate-selection-runtime", ref);
-  if (!runtime) throw new Error("graph-hybrid-e5 candidate selection requires its pinned runtime");
+  if (!runtime) throw new Error(`${ref.id} candidate selection requires its pinned runtime`);
   if (runtime.role !== "candidate-selection" ||
     runtime.version !== ACTION_COMPILATION_RETRIEVAL_RUNTIME_VERSION ||
     typeof runtime.retrieveBatch !== "function") {
-    throw new Error("graph-hybrid-e5 candidate selection received an incompatible runtime");
+    throw new Error(`${ref.id} candidate selection received an incompatible runtime`);
   }
   return runtime;
 }
 
 const definitions = [
+  configuredDefinition({
+    ...identity("truth-resolution", "indexed-reviewed-truth-resolution", "5"),
+    maturity: "reference",
+    configSchema: z.strictObject({ randomScheduling: z.literal(ORDERED_RANDOM_SCHEDULING),
+      representation: z.literal(RESOLUTION_DEPENDENT_FIELDS_CODEC), promptVersion: z.literal(RESOLUTION_DEPENDENT_FIELDS_PROMPT_VERSION),
+      sourceInventory: z.literal(RESOLUTION_SOURCE_INVENTORY), planningPipeline: z.literal(INDEXED_REVIEWED_PLANNING_PIPELINE),
+      pipelinePromptVersion: z.literal(INDEXED_REVIEWED_PLANNING_PROMPT_VERSION), outcomeSummary: z.literal(EVENT_OUTCOME_SUMMARIES).optional(),
+      boundaryClockWitness: z.literal(BOUNDARY_CLOCK_WITNESS).optional(), planCauseChoices: z.literal(SOURCE_INDEXED_PLAN_CAUSES).optional(),
+      planMeansChoices: z.literal(SOURCE_INDEXED_PLAN_MEANS).optional(),
+      planningRelationChoices: z.literal(PLANNING_RELATION_CHOICES).optional(),
+      compactPlanningRecords: z.literal(COMPACT_PLANNING_RECORDS).optional(),
+      planFactEvidence: z.literal(RESOLUTION_FACT_EVIDENCE).optional(),
+      planningCatalogEncoding: z.literal(PLANNING_CATALOG_ENCODING).optional(),
+      planRandomCompletion: z.literal(PLAN_RANDOM_COMPLETION).optional(),
+      mechanicalPlanRepair: z.literal(MECHANICAL_PLAN_REPAIR).optional(),
+      planningContractTail: z.literal(PLANNING_CONTRACT_TAIL).optional() }).refine(config => !config.planningContractTail ||
+        (config.planCauseChoices === SOURCE_INDEXED_PLAN_CAUSES && config.planMeansChoices === SOURCE_INDEXED_PLAN_MEANS),
+      "planning contract tail requires indexed causes and means"),
+    children: [{ name: "batching", role: "work-batching" }, { name: "recovery", role: "output-recovery" }],
+  }, (algorithmIdentity, config, children) => new TruthResolutionAlgorithm(algorithmIdentity, config, children)),
+  configuredDefinition({
+    ...identity("truth-resolution", "worklist-truth-resolution"),
+    maturity: "candidate",
+    configSchema: z.strictObject({ randomScheduling: z.literal(ORDERED_RANDOM_SCHEDULING),
+      representation: z.literal(RESOLUTION_DEPENDENT_FIELDS_CODEC), promptVersion: z.literal(RESOLUTION_DEPENDENT_FIELDS_PROMPT_VERSION),
+      sourceInventory: z.literal(RESOLUTION_SOURCE_INVENTORY), planningPipeline: z.literal(WORKLIST_PLANNING_PIPELINE),
+      pipelinePromptVersion: z.literal(WORKLIST_PLANNING_PROMPT_VERSION) }),
+    children: [{ name: "batching", role: "work-batching" }, { name: "recovery", role: "output-recovery" }],
+  }, (algorithmIdentity, config, children) => new TruthResolutionAlgorithm(algorithmIdentity, config, children)),
+  configuredDefinition({
+    ...identity("truth-resolution", "source-inventory-truth-resolution"),
+    maturity: "candidate",
+    configSchema: z.strictObject({ randomScheduling: z.literal(ORDERED_RANDOM_SCHEDULING),
+      sourceInventory: z.literal(RESOLUTION_SOURCE_INVENTORY), mechanicalPlanRepair: z.literal(MECHANICAL_PLAN_REPAIR).optional() }),
+    children: [{ name: "batching", role: "work-batching" }, { name: "recovery", role: "output-recovery" }],
+  }, (algorithmIdentity, config, children) => new TruthResolutionAlgorithm(algorithmIdentity, config, children)),
+  configuredDefinition({
+    ...identity("truth-resolution", "dependent-fields-truth-resolution"),
+    maturity: "candidate",
+    configSchema: z.strictObject({ randomScheduling: z.literal(ORDERED_RANDOM_SCHEDULING),
+      representation: z.literal(RESOLUTION_DEPENDENT_FIELDS_CODEC), promptVersion: z.literal(RESOLUTION_DEPENDENT_FIELDS_PROMPT_VERSION),
+      sourceInventory: z.literal(RESOLUTION_SOURCE_INVENTORY).optional() }),
+    children: [{ name: "batching", role: "work-batching" }, { name: "recovery", role: "output-recovery" }],
+  }, (algorithmIdentity, config, children) => new TruthResolutionAlgorithm(algorithmIdentity, config, children)),
+  configuredDefinition({
+    ...identity("truth-resolution", "ordered-rng-truth-resolution"),
+    maturity: "candidate",
+    configSchema: z.strictObject({ randomScheduling: z.literal(ORDERED_RANDOM_SCHEDULING) }),
+    children: [{ name: "batching", role: "work-batching" }, { name: "recovery", role: "output-recovery" }],
+  }, (algorithmIdentity, config, children) => new TruthResolutionAlgorithm(algorithmIdentity, config, children)),
+  configuredDefinition({
+    ...identity("work-batching", "shared-context-slot-batching"),
+    version: "2",
+    maturity: "reference",
+    configSchema: z.strictObject({ maxSlots: positiveSlots,
+      contextCodec: z.literal(SHARED_BATCH_CONTEXT_CODEC), promptVersion: z.literal(SHARED_BATCH_PROMPT_VERSION),
+      requestContract: z.literal(TRUTH_BATCH_REQUEST_CONTRACT).optional(), repairPlacement: z.literal("tail-v1").optional() }),
+    children: noChildren,
+  }, (algorithmIdentity, config, children) => new WorkBatchingAlgorithm(algorithmIdentity, config, children)),
+  configuredDefinition({
+    ...identity("work-batching", "shared-state-first-slot-batching"),
+    maturity: "reference",
+    configSchema: z.strictObject({ maxSlots: positiveSlots,
+      contextCodec: z.literal(SHARED_BATCH_ORDER_CODEC), promptVersion: z.literal(SHARED_BATCH_PROMPT_VERSION),
+      requestContract: z.literal(TRUTH_BATCH_REQUEST_CONTRACT), repairPlacement: z.literal("tail-v1"),
+      flushBoundary: z.literal("post-promise-v1").optional(),
+      planRepairBatching: z.literal("scoped-plans-v1").optional(),
+      planningPartition: z.literal("balanced-two-v1").optional(),
+      contextLayout: z.literal(SHARED_STATE_FIRST_LAYOUT), jsonSyntaxRecovery: z.literal(UNMATCHED_CLOSER_RECOVERY) }),
+    children: noChildren,
+  }, (algorithmIdentity, config, children) => new WorkBatchingAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({
     ...identity("work-batching", "bounded-slot-batching"),
     maturity: "reference",
@@ -236,30 +385,56 @@ const definitions = [
   }, (algorithmIdentity, config, children) =>
     new CandidateSelectionAlgorithm(algorithmIdentity, config, children, undefined)),
   configuredDefinition({
-    ...identity("candidate-selection", "graph-hybrid-e5"),
-    maturity: "candidate",
+    ...identity("candidate-ranking", "typed-channel-rrf"),
+    maturity: "reference",
     configSchema: z.strictObject({
-      budgetRatio: z.literal(0.2),
-      maxPathDepth: z.literal(3),
-      encoderFingerprint: z.string().regex(/^sha256:[a-f0-9]{64}$/u),
-      encoderModel: z.literal("intfloat/multilingual-e5-small"),
-      graphFeatureSchemaVersion: z.literal(1),
+      encoderFingerprint: z.literal(RELATIONAL_RRF_ENCODER_FINGERPRINT),
+      encoderModel: z.literal(RELATIONAL_RRF_ENCODER_MODEL_ID),
+      graphDepth: z.literal(3),
+      pseudoSeedCount: z.literal(16),
+      channels: z.tuple([
+        z.literal("identity"),
+        z.literal("state"),
+        z.literal("fact"),
+        z.literal("temporal"),
+      ]),
       passageSchemaVersion: z.literal(1),
-      cacheSchemaVersion: z.literal(1),
-      rankerArtifactHash: z.null(),
+      querySchemaVersion: z.literal(1),
+      rrfSchemaVersion: z.literal(1),
     }),
     children: noChildren,
+  }, (algorithmIdentity, config, children) =>
+    new CandidateRankingAlgorithm(algorithmIdentity, config, children)),
+  configuredDefinition({
+    ...identity("candidate-allocation", "coverage-aware-joint-budget"),
+    maturity: "reference",
+    configSchema: z.strictObject({ compactKindRatio: z.literal(0.15) }),
+    children: noChildren,
+  }, (algorithmIdentity, config, children) =>
+    new CandidateAllocationAlgorithm(algorithmIdentity, config, children)),
+  configuredDefinition({
+    ...identity("candidate-selection", "relational-rrf", "2"),
+    maturity: "reference",
+    configSchema: z.strictObject({
+      budgetRatio: z.literal(0.2),
+      budgetPolicy: z.literal("mandatory-floor-v1"),
+      cacheSchemaVersion: z.literal(1),
+      dynamicPassageWrites: z.literal(true),
+    }),
+    children: [
+      { name: "ranking", role: "candidate-ranking" },
+      { name: "allocation", role: "candidate-allocation" },
+    ],
     preflight: ({ services, ref }) => {
       candidateSelectionRuntime(services, ref as AlgorithmRef<"candidate-selection">);
     },
-  }, (algorithmIdentity, config, children, services, ref) => {
-    return new CandidateSelectionAlgorithm(
+  }, (algorithmIdentity, config, children, services, ref) =>
+    new CandidateSelectionAlgorithm(
       algorithmIdentity,
       config,
       children,
       candidateSelectionRuntime(services, ref),
-    );
-  }),
+    )),
   configuredDefinition({
     ...identity("symbol-repair", "bounded-symbol-repair"),
     maturity: "reference",
@@ -275,9 +450,9 @@ const definitions = [
     children: noChildren,
   }, (algorithmIdentity, config, children) => new SymbolRepairAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({
-    ...identity("onset-perception", "model-onset-perception"),
+    ...identity("onset-perception", "model-onset-perception", "4"),
     maturity: "reference",
-    configSchema: z.strictObject({ fallback: z.literal("global"), contextMode: z.literal("full") }),
+    configSchema: z.strictObject({ fallback: z.literal("global"), contextMode: z.literal("full"), ratingChoices: z.literal(PERCEPTION_RATING_CHOICES).optional() }),
     children: noChildren,
   }, (algorithmIdentity, config, children) => new OnsetPerceptionAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({
@@ -296,7 +471,7 @@ const definitions = [
     ],
   }, (algorithmIdentity, config, children) => new AgentCognitionAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({
-    ...identity("action-compilation", "model-action-compilation"),
+    ...identity("action-compilation", "model-action-compilation", "2"),
     maturity: "reference",
     configSchema: z.strictObject({
       candidateKeyVersion: z.literal(ACTION_COMPILATION_CANDIDATE_KEY_VERSION),
@@ -309,6 +484,41 @@ const definitions = [
       { name: "recovery", role: "output-recovery" },
     ],
   }, (algorithmIdentity, config, children) => new ActionCompilationAlgorithm(algorithmIdentity, config, children)),
+  configuredDefinition({
+    ...identity("action-compilation", "represented-action-compilation", "2"),
+    maturity: "reference",
+    configSchema: z.strictObject({
+      representation: z.enum(["B1", "A", "T", "AT"]),
+      eligibleProfileSchema: z.literal("batch-union-v1").optional(),
+      descriptionPolicy: z.enum(["original-action-v1", "original-action-omitted-v2"]).optional(),
+      profileChoiceEvidence: z.literal("visible-schema-v1").optional(),
+      temporalContractSelection: z.literal("named-operators-v1").optional(),
+      codecVersion: z.literal(ACTION_COMPILATION_REPRESENTATION_VERSION),
+      promptVersion: z.string().min(1),
+      candidateKeyVersion: z.literal(ACTION_COMPILATION_CANDIDATE_KEY_VERSION),
+      candidateKeyPayloadLength: z.literal(ACTION_COMPILATION_CANDIDATE_KEY_SUFFIX_LENGTH),
+      aliasPolicy: z.literal("sorted-root-union-reserved-tail-exact-only"),
+      temporalPolicy: z.literal("script-conditional-first-rest"),
+    }),
+    children: [
+      { name: "candidateSelection", role: "candidate-selection" },
+      { name: "symbolRepair", role: "symbol-repair" },
+      { name: "batching", role: "work-batching" },
+      { name: "recovery", role: "output-recovery" },
+    ],
+  }, (algorithmIdentity, config, children) => new RepresentedActionCompilationAlgorithm(algorithmIdentity, config, children)),
+  configuredDefinition({
+    ...identity("action-compilation", "constrained-action-compilation"),
+    maturity: "candidate",
+    configSchema: z.strictObject({ capabilities: z.boolean(), snapshots: z.boolean(),
+      structuredOutputMode: z.enum(["json-object-zod", "json-schema-strict"]),
+      codecVersion: z.literal(CONSTRAINED_COMPILATION_CODEC_VERSION), promptVersion: z.string().min(1),
+      candidateKeyVersion: z.literal(ACTION_COMPILATION_CANDIDATE_KEY_VERSION),
+      candidateKeyPayloadLength: z.literal(ACTION_COMPILATION_CANDIDATE_KEY_SUFFIX_LENGTH),
+    }),
+    children: [{ name: "candidateSelection", role: "candidate-selection" }, { name: "symbolRepair", role: "symbol-repair" },
+      { name: "batching", role: "work-batching" }, { name: "recovery", role: "output-recovery" }],
+  }, (algorithmIdentity, config, children) => new ConstrainedActionCompilationAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({
     ...identity("interaction-grounding", "model-interaction-grounding"),
     maturity: "reference",
@@ -339,9 +549,20 @@ const definitions = [
     ],
   }, (algorithmIdentity, config, children) => new TruthResolutionAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({
-    ...identity("observation-rendering", "model-observation-rendering"),
+    ...identity("observation-rendering", "model-observation-rendering", "2"),
     maturity: "reference",
     configSchema: z.strictObject({}),
+    children: [
+      { name: "batching", role: "work-batching" },
+      { name: "recovery", role: "output-recovery" },
+    ],
+  }, (algorithmIdentity, config, children) => new ObservationRenderingAlgorithm(algorithmIdentity, config, children)),
+  configuredDefinition({
+    ...identity("observation-rendering", "source-bound-observation-rendering", "2"),
+    maturity: "reference",
+    configSchema: z.strictObject({ evidenceLayout: z.literal(OBSERVATION_EVIDENCE_LAYOUT).optional(),
+      claimEncoding: z.literal(OBSERVATION_CLAIM_ENCODING).optional() }).refine(config => !config.claimEncoding || Boolean(config.evidenceLayout),
+      "unconfirmed claims require the observation evidence layout"),
     children: [
       { name: "batching", role: "work-batching" },
       { name: "recovery", role: "output-recovery" },
@@ -402,11 +623,17 @@ function eagerAlgorithms(children: Readonly<Record<string, ResolvedAlgorithm>>) 
 
 function eagerConfig(children: Readonly<Record<string, ResolvedAlgorithm>>): EagerReferenceAlgorithmConfig {
   const algorithms = eagerAlgorithms(children);
+  const ranking = algorithms.candidateSelection.runtime
+    ? child(algorithms.candidateSelection, "ranking") as CandidateRankingRoleAlgorithm
+    : undefined;
+  if (ranking && ranking.rankingVersion !== "typed-channel-rrf-v1") {
+    throw new Error("candidate-ranking implementation is incompatible with relational candidate selection");
+  }
   const candidateRetrieval = algorithms.candidateSelection.runtime
     ? {
         mode: "runtime" as const,
         runtimeVersion: ACTION_COMPILATION_RETRIEVAL_RUNTIME_VERSION,
-        encoderFingerprint: String(algorithms.candidateSelection.config.encoderFingerprint),
+        encoderFingerprint: String(ranking!.config.encoderFingerprint),
         budgetRatio: 0.2 as const,
       }
     : { mode: "off" as const };
@@ -448,13 +675,39 @@ function eagerComponents(
   const reactionRecovery = recoveryPolicy(child(algorithms.reactionResolution, "recovery"));
   const truthRecovery = recoveryPolicy(child(algorithms.truthResolution, "recovery"));
   const observationRecovery = recoveryPolicy(child(algorithms.observationRendering, "recovery"));
+  const truthBatching = child(algorithms.truthResolution, "batching");
+  const indexed = truthResolution.config.planningPipeline === INDEXED_REVIEWED_PLANNING_PIPELINE;
+  const catalogProvider = truthResolution.config.planningCatalogEncoding === PLANNING_CATALOG_ENCODING
+    ? planningCatalogEncodingProvider(services.provider) : services.provider;
+  const planningProvider = indexed ? indexedReviewedPlanningProvider(catalogProvider, truthResolution.config.outcomeSummary === EVENT_OUTCOME_SUMMARIES,
+    truthResolution.config.boundaryClockWitness === BOUNDARY_CLOCK_WITNESS, truthResolution.config.planCauseChoices === SOURCE_INDEXED_PLAN_CAUSES,
+    truthResolution.config.planMeansChoices === SOURCE_INDEXED_PLAN_MEANS, truthResolution.config.planningContractTail === PLANNING_CONTRACT_TAIL,
+    truthResolution.config.planningRelationChoices === PLANNING_RELATION_CHOICES, truthResolution.config.compactPlanningRecords === COMPACT_PLANNING_RECORDS)
+    : truthResolution.config.planningPipeline === WORKLIST_PLANNING_PIPELINE ? worklistPlanningProvider(services.provider) : services.provider;
+  const representedTruth = truthResolution.config.representation === RESOLUTION_DEPENDENT_FIELDS_CODEC
+    ? dependentFieldsProvider(planningProvider) : planningProvider;
   const truthProvider = new TruthBatchCoordinator(
-    services.provider,
+    withTruthRequestPolicy(representedTruth, {
+      contextLayout: truthBatching.config.contextLayout as typeof SHARED_STATE_FIRST_LAYOUT | undefined,
+      jsonSyntaxRecovery: truthBatching.config.jsonSyntaxRecovery as typeof UNMATCHED_CLOSER_RECOVERY | undefined,
+    }),
     batchLimit(child(algorithms.truthResolution, "batching")),
+    2,
+    truthBatching.config.contextCodec as SharedBatchContext["codec"] | undefined,
+    child(algorithms.truthResolution, "batching").config.requestContract as typeof TRUTH_BATCH_REQUEST_CONTRACT | undefined,
+    child(algorithms.truthResolution, "batching").config.repairPlacement as "tail-v1" | undefined,
+    truthBatching.config.flushBoundary as "post-promise-v1" | undefined,
+    truthBatching.config.planRepairBatching as "scoped-plans-v1" | undefined,
+    truthBatching.config.planningPartition as "balanced-two-v1" | undefined,
   );
   const observationProvider = new TruthBatchCoordinator(
-    services.provider,
+    observationRendering.config.evidenceLayout === OBSERVATION_EVIDENCE_LAYOUT
+      ? observationEvidenceProvider(services.provider, observationRendering.config.claimEncoding === OBSERVATION_CLAIM_ENCODING) : services.provider,
     batchLimit(child(algorithms.observationRendering, "batching")),
+    2,
+    child(algorithms.observationRendering, "batching").config.contextCodec as typeof SHARED_BATCH_CONTEXT_CODEC | undefined,
+    child(algorithms.observationRendering, "batching").config.requestContract as typeof TRUTH_BATCH_REQUEST_CONTRACT | undefined,
+    child(algorithms.observationRendering, "batching").config.repairPlacement as "tail-v1" | undefined,
   );
   return {
     provider: services.provider,
@@ -466,7 +719,8 @@ function eagerComponents(
     interactionGrounding: interactionGrounding.ground,
     onsetPerception: onsetPerception.create(services.provider, rulePackages, reactionRecovery),
     reactionDecision: reactionDecision.create(services.provider, reactionRecovery),
-    truthResolution: truthResolution.create(truthProvider, rulePackages, truthRecovery),
+    truthResolution: truthResolution.create(indexed ? sourceIntentReviewProvider(truthProvider) : truthProvider, rulePackages, truthRecovery),
+    orderedComponentRandom: truthResolution.config.randomScheduling === ORDERED_RANDOM_SCHEDULING,
     observationRendering: observationRendering.create(observationProvider, observationRecovery),
     symbolRepair: symbolRepair.policy,
     actionCompilationRecovery,
@@ -474,7 +728,11 @@ function eagerComponents(
   };
 }
 
-export const DEFAULT_ALGORITHM_REF: AlgorithmRef<"world-execution"> = algorithmRef(EAGER_REFERENCE_MANIFEST);
+export const FULL_CATALOG_ALGORITHM_REF: AlgorithmRef<"world-execution"> = createEagerReferenceAlgorithmRef(
+  FULL_CATALOG_EAGER_REFERENCE_CONFIG,
+);
+
+export const DEFAULT_ALGORITHM_REF: AlgorithmRef<"world-execution"> = standardEagerReferenceAlgorithmRef();
 
 export function eagerReferenceAlgorithmRef(
   config: Readonly<EagerReferenceAlgorithmConfig>,
@@ -488,7 +746,7 @@ export function registerBuiltinAlgorithms(
   if (registry.has(DEFAULT_ALGORITHM_REF)) return registry;
   for (const definition of definitions) registry.registerAlgorithmDefinition(definition);
   registry.registerDefinition({
-    ...identity("world-execution", "eager-reference", "16", 6),
+    ...identity("world-execution", "eager-reference", "18", 7),
     maturity: "reference",
     configSchema: z.strictObject({}),
     children: [

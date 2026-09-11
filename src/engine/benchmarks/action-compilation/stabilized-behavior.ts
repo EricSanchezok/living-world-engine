@@ -8,6 +8,7 @@ import path from "node:path";
 import { canonicalize, contentHash, isSha256 } from "../../models/model-audit";
 
 export const ACTION_COMPILATION_REFERENCE_DATASET_SCHEMA_VERSION = 1 as const;
+export const ACTION_COMPILATION_REFERENCE_DATASET_SCHEMA_VERSION_V2 = 2 as const;
 export const ACTION_COMPILATION_REFERENCE_DATASET_KIND =
   "action-compilation-fullcatalog-stabilized" as const;
 
@@ -22,7 +23,8 @@ export interface BenchmarkArtifactShard {
 }
 
 export interface ActionCompilationReferenceDatasetManifest {
-  schemaVersion: typeof ACTION_COMPILATION_REFERENCE_DATASET_SCHEMA_VERSION;
+  schemaVersion: typeof ACTION_COMPILATION_REFERENCE_DATASET_SCHEMA_VERSION |
+    typeof ACTION_COMPILATION_REFERENCE_DATASET_SCHEMA_VERSION_V2;
   kind: typeof ACTION_COMPILATION_REFERENCE_DATASET_KIND;
   datasetId: string;
   version: number;
@@ -41,11 +43,30 @@ export interface ActionCompilationReferenceDatasetManifest {
     registrySnapshotHash: string;
     profileId: string;
     modelId: string;
-    algorithmManifestHash: string;
+    algorithmManifestHash?: string;
+    captureAlgorithmManifestHash?: string;
+    referenceAlgorithmManifestHash?: string;
     promptVersion: string;
     candidateKeyVersion: string;
     symbolRepairPolicyVersion: string;
     semanticRepairAttempts: number;
+  };
+  lineage?: {
+    baseDatasets: Array<{
+      datasetId: string;
+      version: number;
+      manifestHash: string;
+      cases: number;
+    }>;
+    sourceGroups: Array<{
+      id: string;
+      stratum: "base-v1" | "r5-captured";
+      captureAlgorithmManifestHash: string;
+      referenceAlgorithmManifestHash: string;
+      sourceExecutionIds: string[];
+      initialStateHashes: string[];
+      cases: number;
+    }>;
   };
   generation: {
     seed: number;
@@ -107,11 +128,14 @@ export interface ActionCompilationReferenceCase {
   slotIndex: number;
   batchSize: number;
   category?: string;
+  stratum?: "base-v1" | "r5-captured";
   requiredCandidateKeys: string[];
   source: {
     catalogHash: string;
     worldHash: string;
     algorithmManifestHash: string;
+    captureAlgorithmManifestHash?: string;
+    referenceAlgorithmManifestHash?: string;
   };
   provenance?: {
     sourceExecutionId?: string;
@@ -140,6 +164,7 @@ export interface ActionCompilationRecallCaseResult {
   caseId: string;
   slotIndex: number;
   batchSize: number;
+  stratum: "base-v1" | "r5-captured" | "unstratified";
   requiredCount: number;
   recalledCount: number;
   recall: number | null;
@@ -166,6 +191,13 @@ export interface ActionCompilationRecallReport {
   invalidOutputKeys: number;
   byBatchSize: Record<string, { cases: number; requiredKeys: number; recalledKeys: number; recall: number | null }>;
   byCategory: Record<string, { cases: number; requiredKeys: number; recalledKeys: number; recall: number | null }>;
+  byStratum: Record<string, {
+    cases: number;
+    requiredKeys: number;
+    recalledKeys: number;
+    microRecall: number | null;
+    macroRecall: number | null;
+  }>;
   byBatchUnion: Record<string, { batches: number; requiredKeys: number; recalledKeys: number; recall: number | null }>;
   caseResults: ActionCompilationRecallCaseResult[];
 }
@@ -286,9 +318,56 @@ function validateExport(value: unknown): ActionCompilationReferenceDatasetManife
   };
 }
 
+function validateLineage(value: unknown): NonNullable<ActionCompilationReferenceDatasetManifest["lineage"]> {
+  const input = record(value, "manifest.lineage");
+  if (!Array.isArray(input.baseDatasets) || !Array.isArray(input.sourceGroups) || input.sourceGroups.length === 0) {
+    throw new Error("manifest.lineage is invalid");
+  }
+  const baseDatasets = input.baseDatasets.map((entry, index) => {
+    const item = record(entry, `manifest.lineage.baseDatasets[${index}]`);
+    if (typeof item.datasetId !== "string" || !item.datasetId || !Number.isSafeInteger(item.version) ||
+      Number(item.version) < 1 || typeof item.manifestHash !== "string" || !isSha256(item.manifestHash) ||
+      !Number.isSafeInteger(item.cases) || Number(item.cases) < 0) {
+      throw new Error(`manifest.lineage.baseDatasets[${index}] is invalid`);
+    }
+    return {
+      datasetId: item.datasetId,
+      version: Number(item.version),
+      manifestHash: item.manifestHash,
+      cases: Number(item.cases),
+    };
+  });
+  const ids = new Set<string>();
+  const sourceGroups = input.sourceGroups.map((entry, index) => {
+    const item = record(entry, `manifest.lineage.sourceGroups[${index}]`);
+    if (typeof item.id !== "string" || !item.id || ids.has(item.id) ||
+      (item.stratum !== "base-v1" && item.stratum !== "r5-captured") ||
+      typeof item.captureAlgorithmManifestHash !== "string" || !isSha256(item.captureAlgorithmManifestHash) ||
+      typeof item.referenceAlgorithmManifestHash !== "string" || !isSha256(item.referenceAlgorithmManifestHash) ||
+      !Array.isArray(item.sourceExecutionIds) || item.sourceExecutionIds.some((id) => typeof id !== "string" || !id) ||
+      !Array.isArray(item.initialStateHashes) || item.initialStateHashes.length === 0 ||
+      item.initialStateHashes.some((hash) => typeof hash !== "string" || !isSha256(hash)) ||
+      !Number.isSafeInteger(item.cases) || Number(item.cases) < 0) {
+      throw new Error(`manifest.lineage.sourceGroups[${index}] is invalid`);
+    }
+    ids.add(item.id);
+    return {
+      id: item.id,
+      stratum: item.stratum as "base-v1" | "r5-captured",
+      captureAlgorithmManifestHash: item.captureAlgorithmManifestHash,
+      referenceAlgorithmManifestHash: item.referenceAlgorithmManifestHash,
+      sourceExecutionIds: [...new Set(item.sourceExecutionIds as string[])].sort(),
+      initialStateHashes: [...new Set(item.initialStateHashes as string[])].sort(),
+      cases: Number(item.cases),
+    };
+  });
+  return { baseDatasets, sourceGroups };
+}
+
 function validateManifest(input: unknown, root: string): ActionCompilationReferenceDatasetManifest {
   const value = record(input, "manifest");
-  if (value.schemaVersion !== ACTION_COMPILATION_REFERENCE_DATASET_SCHEMA_VERSION ||
+  if ((value.schemaVersion !== ACTION_COMPILATION_REFERENCE_DATASET_SCHEMA_VERSION &&
+    value.schemaVersion !== ACTION_COMPILATION_REFERENCE_DATASET_SCHEMA_VERSION_V2) ||
     value.kind !== ACTION_COMPILATION_REFERENCE_DATASET_KIND) {
     throw new Error("manifest schemaVersion/kind is invalid");
   }
@@ -307,8 +386,18 @@ function validateManifest(input: unknown, root: string): ActionCompilationRefere
     throw new Error("manifest status is invalid");
   }
   const source = record(value.source, "manifest.source");
-  for (const key of ["worldHash", "initialStateHash", "modelCatalogHash", "registrySnapshotHash", "algorithmManifestHash"]) {
+  for (const key of ["worldHash", "initialStateHash", "modelCatalogHash", "registrySnapshotHash"]) {
     if (typeof source[key] !== "string" || !source[key]) throw new Error(`manifest.source.${key} is invalid`);
+  }
+  if (value.schemaVersion === 1) {
+    if (typeof source.algorithmManifestHash !== "string" || !source.algorithmManifestHash) {
+      throw new Error("manifest.source.algorithmManifestHash is invalid");
+    }
+  } else {
+    for (const key of ["captureAlgorithmManifestHash", "referenceAlgorithmManifestHash"]) {
+      if (typeof source[key] !== "string" || !source[key]) throw new Error(`manifest.source.${key} is invalid`);
+    }
+    validateLineage(value.lineage);
   }
   const generation = record(value.generation, "manifest.generation");
   for (const key of ["seed", "targetCases", "maxProviderRequests", "providerRequests", "logicalInvocations", "transportAttempts", "repairCalls", "acceptedSlots", "rejectedSlots"]) {
@@ -328,7 +417,7 @@ function validateManifest(input: unknown, root: string): ActionCompilationRefere
   }
   if (groups.contexts.length === 0 || groups.cases.length === 0) throw new Error("manifest must contain context and case shards");
   return {
-    schemaVersion: 1,
+    schemaVersion: value.schemaVersion as 1 | 2,
     kind: ACTION_COMPILATION_REFERENCE_DATASET_KIND,
     datasetId: value.datasetId as string,
     version: Number(value.version),
@@ -339,6 +428,9 @@ function validateManifest(input: unknown, root: string): ActionCompilationRefere
     referenceSemantics: "behavioral-reference",
     semanticGroundTruth: false,
     source: source as ActionCompilationReferenceDatasetManifest["source"],
+    ...(value.lineage === undefined ? {} : {
+      lineage: validateLineage(value.lineage),
+    }),
     generation: generation as ActionCompilationReferenceDatasetManifest["generation"],
     ...(value.export === undefined ? {} : { export: validateExport(value.export) }),
     counts: counts as ActionCompilationReferenceDatasetManifest["counts"],
@@ -377,7 +469,12 @@ function containsRawReference(value: unknown): boolean {
   return Object.values(value as Record<string, unknown>).some(containsRawReference);
 }
 
-function validateCase(value: unknown, contextMap: ReadonlyMap<string, ActionCompilationReferenceContextRecord>, index: number): ActionCompilationReferenceCase {
+function validateCase(
+  value: unknown,
+  contextMap: ReadonlyMap<string, ActionCompilationReferenceContextRecord>,
+  index: number,
+  schemaVersion: 1 | 2,
+): ActionCompilationReferenceCase {
   const input = record(value, `case ${index}`);
   if (typeof input.caseId !== "string" || !input.caseId) throw new Error(`case ${index}.caseId is invalid`);
   if (typeof input.contextHash !== "string" || !isSha256(input.contextHash)) throw new Error(`case ${input.caseId}.contextHash is invalid`);
@@ -422,12 +519,37 @@ function validateCase(value: unknown, contextMap: ReadonlyMap<string, ActionComp
   if (source.catalogHash !== contextCatalog.hash) {
     throw new Error(`case ${input.caseId}.source.catalogHash disagrees with context catalog hash`);
   }
+  if (schemaVersion === 2) {
+    if (input.stratum !== "base-v1" && input.stratum !== "r5-captured") {
+      throw new Error(`case ${input.caseId}.stratum is invalid`);
+    }
+    for (const key of ["captureAlgorithmManifestHash", "referenceAlgorithmManifestHash"]) {
+      if (typeof source[key] !== "string" || !isSha256(source[key] as string)) {
+        throw new Error(`case ${input.caseId}.source.${key} is invalid`);
+      }
+    }
+    const provenance = record(input.provenance, `case ${input.caseId}.provenance`);
+    if (input.stratum === "r5-captured" &&
+      (typeof provenance.sourceExecutionId !== "string" || !provenance.sourceExecutionId ||
+        typeof provenance.sourceInvocationId !== "string" || !provenance.sourceInvocationId)) {
+      throw new Error(`case ${input.caseId}.provenance source identity is invalid`);
+    }
+    if (provenance.repairCount !== undefined && (!Number.isSafeInteger(provenance.repairCount) || Number(provenance.repairCount) < 0)) {
+      throw new Error(`case ${input.caseId}.provenance.repairCount is invalid`);
+    }
+    for (const key of ["rawOutputHash", "normalizedOutputHash"]) {
+      if (provenance[key] !== undefined && (typeof provenance[key] !== "string" || !isSha256(provenance[key] as string))) {
+        throw new Error(`case ${input.caseId}.provenance.${key} is invalid`);
+      }
+    }
+  }
   return {
     caseId: input.caseId,
     contextHash: input.contextHash,
     slotIndex: Number(slotIndex),
     batchSize,
     ...(typeof input.category === "string" ? { category: input.category } : {}),
+    ...(input.stratum === "base-v1" || input.stratum === "r5-captured" ? { stratum: input.stratum } : {}),
     requiredCandidateKeys,
     source: source as ActionCompilationReferenceCase["source"],
     ...(input.provenance === undefined ? {} : { provenance: record(input.provenance, `case ${input.caseId}.provenance`) as ActionCompilationReferenceCase["provenance"] }),
@@ -462,7 +584,7 @@ export function loadActionCompilationReferenceDataset(rootInput: string): Action
     const records = decodeJsonlGzip<unknown>(readFileSync(artifactPath(root, shard)), shard.file);
     if (records.length !== shard.records) throw new Error(`${shard.file} record count does not match manifest`);
     for (const value of records) {
-      const parsed = validateCase(value, contexts, cases.length);
+      const parsed = validateCase(value, contexts, cases.length, manifest.schemaVersion);
       if (caseIds.has(parsed.caseId)) throw new Error(`duplicate caseId: ${parsed.caseId}`);
       caseIds.add(parsed.caseId);
       cases.push(parsed);
@@ -482,6 +604,18 @@ export function loadActionCompilationReferenceDataset(rootInput: string): Action
   }
   if (cases.some((value, index) => value.caseId !== `ac-c3-v${manifest.version}-${String(index + 1).padStart(6, "0")}`)) {
     throw new Error("case IDs must be contiguous and stable");
+  }
+  if (manifest.schemaVersion === 2) {
+    const groups = manifest.lineage!.sourceGroups;
+    if (groups.reduce((sum, group) => sum + group.cases, 0) !== cases.length) {
+      throw new Error("manifest lineage source-group counts do not match dataset cases");
+    }
+    for (const stratum of ["base-v1", "r5-captured"] as const) {
+      const expected = groups.filter((group) => group.stratum === stratum).reduce((sum, group) => sum + group.cases, 0);
+      if (cases.filter((item) => item.stratum === stratum).length !== expected) {
+        throw new Error(`manifest lineage ${stratum} count does not match dataset cases`);
+      }
+    }
   }
   return { root, manifest, contexts, cases };
 }
@@ -505,6 +639,7 @@ export function evaluateActionCompilationRecall(
   const results: ActionCompilationRecallCaseResult[] = [];
   const byBatch = new Map<string, Array<{ requiredKeys: number; recalledKeys: number; recall: number | null }>>();
   const byCategory = new Map<string, Array<{ requiredKeys: number; recalledKeys: number; recall: number | null }>>();
+  const byStratum = new Map<string, Array<{ requiredKeys: number; recalledKeys: number; recall: number | null }>>();
   const unionByContext = new Map<string, { required: Set<string>; returned: Set<string>; batchSize: number }>();
   let invalidOutputCases = 0;
   let invalidOutputKeys = 0;
@@ -541,6 +676,7 @@ export function evaluateActionCompilationRecall(
       caseId: item.caseId,
       slotIndex: item.slotIndex,
       batchSize: item.batchSize,
+      stratum: item.stratum ?? "unstratified",
       requiredCount: required.size,
       recalledCount,
       recall,
@@ -558,6 +694,10 @@ export function evaluateActionCompilationRecall(
     const categoryValues = byCategory.get(category) ?? [];
     categoryValues.push(aggregate);
     byCategory.set(category, categoryValues);
+    const stratum = item.stratum ?? "unstratified";
+    const stratumValues = byStratum.get(stratum) ?? [];
+    stratumValues.push(aggregate);
+    byStratum.set(stratum, stratumValues);
   }
   const nonEmpty = results.filter((item) => item.requiredCount > 0);
   const micro = aggregateRecall(nonEmpty.map((item) => ({ requiredKeys: item.requiredCount, recalledKeys: item.recalledCount, recall: item.recall })));
@@ -591,6 +731,18 @@ export function evaluateActionCompilationRecall(
     invalidOutputKeys,
     byBatchSize: Object.fromEntries([...byBatch].sort(([left], [right]) => Number(left) - Number(right)).map(([key, values]) => [key, aggregateRecall(values)])),
     byCategory: Object.fromEntries([...byCategory].sort(([left], [right]) => left.localeCompare(right)).map(([key, values]) => [key, aggregateRecall(values)])),
+    byStratum: Object.fromEntries([...byStratum].sort(([left], [right]) => left.localeCompare(right)).map(([key, values]) => {
+      const nonEmptyValues = values.filter((value) => value.requiredKeys > 0);
+      const aggregate = aggregateRecall(nonEmptyValues);
+      const macros = nonEmptyValues.map((value) => value.recall).filter((value): value is number => value !== null);
+      return [key, {
+        cases: values.length,
+        requiredKeys: aggregate.requiredKeys,
+        recalledKeys: aggregate.recalledKeys,
+        microRecall: aggregate.recall,
+        macroRecall: macros.length === 0 ? null : macros.reduce((sum, value) => sum + value, 0) / macros.length,
+      }];
+    })),
     byBatchUnion,
     caseResults: results,
   };

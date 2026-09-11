@@ -16,6 +16,7 @@ import type {
   ModelSelector,
   ProviderAccountConfig,
 } from "./model-catalog";
+import { modelMetadataOverrideSchema } from "./model-catalog";
 import { canonicalize, contentHash, isSha256 } from "./model-audit";
 
 export const MODELS_DEV_API_URL = "https://models.dev/api.json";
@@ -290,6 +291,16 @@ function applyOverride(model: RegisteredModel, override: ModelMetadataOverride):
   return normalizedModelSchema.parse(updated);
 }
 
+function localModelDefinition(id: string, override: ModelMetadataOverride): RegisteredModel {
+  const complete = modelMetadataOverrideSchema.required().extend({
+    limit: z.object({ context: z.number().int().positive().safe(), output: z.number().int().positive().safe() }).strict(),
+  }).parse(override);
+  const model = applyOverride(remoteModelToNormalized({ id, name: complete.name }), complete);
+  model.fieldSources = Object.fromEntries(Object.keys(model).filter(field => field !== "fieldSources")
+    .map(field => [field, "local-override" as const]));
+  return normalizedModelSchema.parse(model);
+}
+
 export function normalizeModelsDevDocument(
   value: unknown,
   catalog: ModelCatalog,
@@ -329,10 +340,9 @@ export function normalizeModelsDevDocument(
     }
     const unknownOverrides = Object.keys(catalog.modelOverrides[providerId] ?? {})
       .filter((modelId) => !provider.models[modelId]);
-    if (unknownOverrides.length > 0) {
-      throw new ModelRegistryError(
-        `local overrides reference unknown ${providerId} models: ${unknownOverrides.sort().join(", ")}`,
-      );
+    for (const modelId of unknownOverrides.sort()) {
+      try { models[modelId] = localModelDefinition(modelId, catalog.modelOverrides[providerId]![modelId]!); }
+      catch (error) { throw new ModelRegistryError(`local overrides reference unknown ${providerId} models without complete metadata: ${modelId}`, { cause: error }); }
     }
     providers[providerId] = { id: provider.id, name: provider.name, models };
   }
@@ -462,6 +472,7 @@ export function resolveModelProfile(
   }
 
   const included = Object.values(provider.models).filter((model) =>
+    model.fieldSources.id !== "local-override" &&
     selector.include.some((pattern) => matchesGlob(model.id, pattern)) &&
     !selector.exclude.some((pattern) => matchesGlob(model.id, pattern)) &&
     (!selector.family || matchesGlob(model.family ?? "", selector.family)));

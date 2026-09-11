@@ -17,7 +17,7 @@ export const MODEL_REFERENCE_CATALOG_VERSION = 2 as const;
 export const ACTION_COMPILATION_CANDIDATE_KEY_VERSION = 2 as const;
 export const ACTION_COMPILATION_CANDIDATE_KEY_SUFFIX_LENGTH = 12 as const;
 export const ACTION_COMPILATION_REFERENCE_CATALOG_VERSION = 2 as const;
-export const ACTION_COMPILATION_PROJECTION = "candidate-key-v2-12hex-deterministic-details" as const;
+export const ACTION_COMPILATION_PROJECTION = "candidate-key-v3-complete-repair-issues" as const;
 
 export type ExistingReferenceHandle = string & { readonly __existingReferenceHandle: unique symbol };
 /** A compact Action Compilation-only reference key. It is request-local and
@@ -237,12 +237,12 @@ export function modelRoleContract(role: string): ModelRoleContract {
     },
     "truth-perception": {
       role,
-      purpose: "decide which authored checks and random requests are justified by the assigned action semantics",
-      modelOwns: ["check stakes", "visible actor and target selection", "modifier sources", "requested random distributions"],
-      engineOwns: ["check and random request identity", "phase", "revision", "dice and totals", "canonical state"],
-      existingReferenceRule: "select actors, targets, ratings, laws, facts, and distributions only from this stage's catalog",
-      proposalRule: "request records use proposalKey only for same-response references; the engine assigns request identities",
-      failureRule: "omit an unsupported request and identify the exact missing handle or semantic justification",
+      purpose: "decide which perception checks establish consequential visibility for the assigned actions",
+      modelOwns: ["check stakes", "observer and target selection", "grounded named or opposed difficulty", "optional observer-owned rating selection", "roll mode", "whether further perception checks are needed"],
+      engineOwns: ["check request identity", "phase", "revision", "numeric DC and modifier", "modifierSources", "dice and totals", "canonical state"],
+      existingReferenceRule: "actorRef and non-null targetRef require existing entity handles; ratingRef selects an observer-owned rating; opposed difficulty selects a target-owned rating and cites that same rating as its source; environmental difficulty cites an existing source; causes require current actions, committed checks, events, facts or laws from this stage's catalog",
+      proposalRule: "each requested check has a unique proposalKey; all reference fields select existing handles, never same-response proposals",
+      failureRule: "repair invalid references using the supplied evidence while preserving justified check intent; completion means no further check is needed, not that a reference failed",
     },
     "truth-reaction-routing": {
       role,
@@ -796,11 +796,13 @@ export function withReferenceCandidateDetails(
 
 export class ModelReferenceError extends Error {
   readonly code: string;
+  readonly path: readonly (string | number)[];
   readonly originalValue: unknown;
   readonly allowedHandles: readonly ExistingReferenceHandle[];
 
   constructor(input: {
     code: string;
+    path?: readonly (string | number)[];
     originalValue: unknown;
     allowedHandles: readonly ExistingReferenceHandle[];
     reason: string;
@@ -808,6 +810,7 @@ export class ModelReferenceError extends Error {
     super(input.reason);
     this.name = "ModelReferenceError";
     this.code = input.code;
+    this.path = [...(input.path ?? [])];
     this.originalValue = input.originalValue;
     this.allowedHandles = [...input.allowedHandles];
   }

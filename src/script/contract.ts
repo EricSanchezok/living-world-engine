@@ -150,6 +150,11 @@ const temporalProfileSchema = z.discriminatedUnion("kind", [
   }).strict(),
   z.object({
     ...temporalProfileBase,
+    kind: z.literal("goal"),
+    check_every_seconds: z.number().int().positive(),
+  }).strict(),
+  z.object({
+    ...temporalProfileBase,
     kind: z.literal("ongoing"),
     checkpoint_seconds: z.number().int().positive(),
   }).strict(),

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "kind": "relational-rrf-production-verification",
+  "measuredAt": "2026-09-05T10:27:23.457Z",
+  "dataset": {
+    "id": "action-compilation/fullcatalog-stabilized",
+    "version": 1,
+    "manifestSha256": "2c68f83044e4eed9a658883dbdbc767c7537bbefa518c2be85f30a605fd40d47",
+    "cases": 46,
+    "contexts": 24
+  },
+  "composition": {
+    "manifestHash": "f54358535f735da671573aac63f8b4267f3b981907ffabda10f27e07bab8ca54",
+    "candidateSelection": {
+      "role": "candidate-selection",
+      "id": "relational-rrf",
+      "version": "1",
+      "contractVersion": 1,
+      "config": {
+        "budgetRatio": 0.2,
+        "cacheSchemaVersion": 1,
+        "dynamicPassageWrites": true
+      },
+      "children": {
+        "ranking": {
+          "role": "candidate-ranking",
+          "id": "typed-channel-rrf",
+          "version": "1",
+          "contractVersion": 1,
+          "config": {
+            "encoderFingerprint": "sha256:25c0f4bc4ddc81782c76a7be891f4b71d81b9d277267fc801e2f4cd10779a543",
+            "encoderModel": "intfloat/multilingual-e5-base",
+            "graphDepth": 3,
+            "pseudoSeedCount": 16,
+            "channels": [
+              "identity",
+              "state",
+              "fact",
+              "temporal"
+            ],
+            "passageSchemaVersion": 1,
+            "querySchemaVersion": 1,
+            "rrfSchemaVersion": 1
+          },
+          "children": {},
+          "manifestHash": "57007d387133a234e4009236062a06fda0446b0e295155e4afcb9ecc41d15f38"
+        },
+        "allocation": {
+          "role": "candidate-allocation",
+          "id": "coverage-aware-joint-budget",
+          "version": "1",
+          "contractVersion": 1,
+          "config": {
+            "compactKindRatio": 0.15
+          },
+          "children": {},
+          "manifestHash": "9dcbd80cf64f44254d44af845a6193943c4771149db29a7193aa76a87691b6d9"
+        }
+      },
+      "manifestHash": "352c92a4ecfa0c2f5242eb3c7fe99bea2e920093a4a900bb10880e668dacb983"
+    }
+  },
+  "encoder": {
+    "modelId": "intfloat/multilingual-e5-base",
+    "modelHash": "sha256:b89491c981d9c3d8a9990782e0439073043e0aa567424de32078ea9cb72c1541",
+    "encoderFingerprint": "sha256:25c0f4bc4ddc81782c76a7be891f4b71d81b9d277267fc801e2f4cd10779a543",
+    "dimensions": 768,
+    "revision": "d59ab9ac3405fabf723089ec5577010211014c99",
+    "onnxSha256": "sha256:df7a9a29309e3ad491e1783adf8baee710262cc06079c7cbab63c630277fac94"
+  },
+  "result": {
+    "recalledKeys": 545,
+    "requiredKeys": 609,
+    "microRecall": 0.8949096880131363,
+    "macroRecall": 0.9071189878503713,
+    "averageBatchCompression": 0.8003537994773703,
+    "p95BatchShortlistRatio": 0.19988833054159688,
+    "deterministic": true,
+    "hardGate": false,
+    "policy": "explicitly-promoted-by-decision-0100"
+  },
+  "historicalExperimentComparison": {
+    "artifact": "retrieval-r5/results.json#R5.5-multilingual-e5-base",
+    "recalledKeys": 547,
+    "requiredKeys": 609,
+    "microRecall": 0.8981937602627258,
+    "deltaRecalledKeys": -2,
+    "explanation": "The historical experiment pre-encoded queries across the whole dataset; production encodes one physical batch at a time. The pinned E5 runtime is batch-shape-sensitive, so production verification is authoritative for deployed behavior."
+  },
+  "performance": {
+    "subjectiveLatencyGateMs": null,
+    "logicalBatchesPerEvaluation": 24,
+    "retrievalCallsPerEvaluation": 48,
+    "coldEvaluationWallMs": 41561.972084,
+    "hotEvaluationWallMs": 18487.488709000005,
+    "coldMeanWallMsPerRetrievalCall": 865.8744184166667,
+    "hotMeanWallMsPerRetrievalCall": 385.15601477083345,
+    "queryBatchSize": {
+      "minimum": 5,
+      "maximum": 10,
+      "mean": 9.583333333333334,
+      "p95": 10
+    },
+    "coldFirstRequestPerBatch": {
+      "passageHits": 42592,
+      "passageMisses": 0,
+      "queryHits": 0,
+      "queryMisses": 230,
+      "queryBatchSize": 230,
+      "cacheReadMs": 1618.0588330000019,
+      "passageEncodeMs": 0,
+      "queryEncodeMs": 22542.315580999995
+    },
+    "hotFirstRequestPerBatch": {
+      "passageHits": 42592,
+      "passageMisses": 0,
+      "queryHits": 230,
+      "queryMisses": 0,
+      "queryBatchSize": 230,
+      "cacheReadMs": 1290.0645420000073,
+      "passageEncodeMs": 0,
+      "queryEncodeMs": 1.5754159999996773
+    }
+  },
+  "offline": {
+    "llmRequests": 0,
+    "networkRequests": 0,
+    "worldMutations": 0
+  }
+}

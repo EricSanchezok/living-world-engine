@@ -4,6 +4,7 @@ import { defineConfig, devices } from "@playwright/test";
 const port = Number(process.env.LIVINGWORLD_E2E_PORT ?? 32127);
 const baseURL = `http://127.0.0.1:${port}`;
 const dataRoot = path.resolve(process.env.LIVINGWORLD_E2E_DATA_ROOT ?? "e2e/artifacts/runtime-data");
+const cacheRoot = path.resolve(process.env.LIVINGWORLD_E2E_CACHE_ROOT ?? ".livingworld-cache");
 const modelCatalog = path.resolve(
   process.env.LIVINGWORLD_E2E_MODEL_CATALOG_PATH ?? "e2e/artifacts/runtime-models.yaml",
 );
@@ -47,6 +48,7 @@ export default defineConfig({
       timeout: 120_000,
       env: {
         LIVINGWORLD_DATA_ROOT: dataRoot,
+        LIVINGWORLD_CACHE_ROOT: cacheRoot,
         LIVINGWORLD_MODEL_CATALOG_PATH: modelCatalog,
         E2E_MODEL_API_KEY: "e2e-test-key",
         NEXT_TELEMETRY_DISABLED: "1",

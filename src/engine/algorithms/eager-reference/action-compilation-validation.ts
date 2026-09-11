@@ -331,39 +331,40 @@ export function materializeActionCompilationCandidateKeys(input: {
     ...cause,
     ref: resolve(cause.ref, "cause", ["temporalPlan", "causes", index, "ref"]) as never,
   }));
-  const materializeAssertion = (assertion: ActionCompilationCausalAssertion): ActionCompilationCausalAssertion => {
+  const materializeAssertion = (assertion: ActionCompilationCausalAssertion, index: number): ActionCompilationCausalAssertion => {
+    const reference = (key: string, ...field: string[]) => resolve(key, "assertion", ["temporalPlan", "continuationAssertions", index, ...field]);
     switch (assertion.kind) {
-      case "check_result": return { ...assertion, checkRef: resolve(assertion.checkRef, "assertion", ["temporalPlan", "continuationAssertions"]) as never };
+      case "check_result": return { ...assertion, checkRef: reference(assertion.checkRef, "checkRef") as never };
       case "random_result": return {
         ...assertion,
-        requestRef: resolve(assertion.requestRef, "assertion") as never,
-        stepRef: resolve(assertion.stepRef, "assertion") as never,
+        requestRef: reference(assertion.requestRef, "requestRef") as never,
+        stepRef: reference(assertion.stepRef, "stepRef") as never,
       };
       case "fact_matches": return {
         ...assertion,
-        factRef: resolve(assertion.factRef, "assertion") as never,
+        factRef: reference(assertion.factRef, "factRef") as never,
         expected: assertion.expected.kind === "entity"
-          ? { ...assertion.expected, entityRef: resolve(assertion.expected.entityRef, "assertion") as never }
+          ? { ...assertion.expected, entityRef: reference(assertion.expected.entityRef, "expected", "entityRef") as never }
           : assertion.expected,
       };
-      case "fact_absent": return { ...assertion, factRef: resolve(assertion.factRef, "assertion") as never };
+      case "fact_absent": return { ...assertion, factRef: reference(assertion.factRef, "factRef") as never };
       case "entity_absent":
-      case "entity_lifecycle": return { ...assertion, entityRef: resolve(assertion.entityRef, "assertion") as never };
+      case "entity_lifecycle": return { ...assertion, entityRef: reference(assertion.entityRef, "entityRef") as never };
       case "placement_equals":
       case "placement_not_equals": return {
         ...assertion,
-        entityRef: resolve(assertion.entityRef, "assertion") as never,
-        placementRef: assertion.placementRef === null ? null : resolve(assertion.placementRef, "assertion") as never,
+        entityRef: reference(assertion.entityRef, "entityRef") as never,
+        placementRef: assertion.placementRef === null ? null : reference(assertion.placementRef, "placementRef") as never,
       };
       case "shared_placement": return {
         ...assertion,
-        leftEntityRef: resolve(assertion.leftEntityRef, "assertion") as never,
-        rightEntityRef: resolve(assertion.rightEntityRef, "assertion") as never,
+        leftEntityRef: reference(assertion.leftEntityRef, "leftEntityRef") as never,
+        rightEntityRef: reference(assertion.rightEntityRef, "rightEntityRef") as never,
       };
-      case "meter_compare": return { ...assertion, meterRef: resolve(assertion.meterRef, "assertion") as never };
-      case "quantity_compare": return { ...assertion, quantityRef: resolve(assertion.quantityRef, "assertion") as never };
-      case "rating_compare": return { ...assertion, ratingRef: resolve(assertion.ratingRef, "assertion") as never };
-      case "shared_resource_capacity_compare": return { ...assertion, poolRef: resolve(assertion.poolRef, "assertion") as never };
+      case "meter_compare": return { ...assertion, meterRef: reference(assertion.meterRef, "meterRef") as never };
+      case "quantity_compare": return { ...assertion, quantityRef: reference(assertion.quantityRef, "quantityRef") as never };
+      case "rating_compare": return { ...assertion, ratingRef: reference(assertion.ratingRef, "ratingRef") as never };
+      case "shared_resource_capacity_compare": return { ...assertion, poolRef: reference(assertion.poolRef, "poolRef") as never };
       case "elapsed_seconds_compare": return assertion;
     }
   };

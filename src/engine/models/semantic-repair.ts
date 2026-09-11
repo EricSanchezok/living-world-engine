@@ -63,6 +63,8 @@ export interface SemanticRepairContext {
   targetIds: readonly string[];
   attempt: number;
   issues: readonly SemanticRepairIssue[];
+  /** Latest rejected logical candidate; undefined means unavailable, null is data. */
+  previousOutput?: unknown;
   logicalInvocationId?: string;
   parentInvocationId?: string;
   repairOf?: string;
@@ -123,6 +125,21 @@ function defaultIssues(error: unknown): SemanticRepairIssue[] {
   return [{ code: error instanceof Error ? error.name || "semantic_error" : "semantic_error", path: [], message, class: "semantic" }];
 }
 
+function repairIssues(classified: SemanticRepairIssue[], audited: readonly SemanticRepairIssue[]): SemanticRepairIssue[] {
+  const merged = new Map<string, SemanticRepairIssue>();
+  for (const issue of [...classified, ...audited]) {
+    const key = JSON.stringify([issue.code, issue.path]);
+    const prior = merged.get(key);
+    // Both sources describe this invocation's rejected value. Audit metadata
+    // takes precedence, but an omitted property must not erase local evidence.
+    merged.set(key, structuredClone({ ...prior, ...Object.fromEntries(Object.entries(issue).filter(([, value]) => value !== undefined)) }) as SemanticRepairIssue);
+  }
+  const issues = [...merged.values()];
+  const isWrapper = (issue: SemanticRepairIssue) => issue.path.length === 0 &&
+    ["ModelOutputError", "schema_validation"].includes(issue.code);
+  return issues.some(issue => !isWrapper(issue)) ? issues.filter(issue => !isWrapper(issue)) : issues;
+}
+
 function isTerminal(error: unknown): boolean {
   return error instanceof ModelConfigurationError || error instanceof ModelTransportError ||
     error instanceof ModelOverloadedError || (error instanceof Error && error.name === "AbortError");
@@ -162,19 +179,23 @@ export async function runSemanticRepairLoop<T>(
   const audits: ModelExecutionAudit[] = [];
   let issues: SemanticRepairIssue[] = [];
   let previousInvocationId: string | undefined;
+  let previousOutput: unknown;
   for (let attempt = 0; attempt <= input.maxRepairs; attempt += 1) {
     const context: SemanticRepairContext = {
       scope: input.repairScope,
       targetIds: [...input.targetIds],
       attempt,
       issues: structuredClone(issues),
+      ...(previousOutput !== undefined ? { previousOutput: structuredClone(previousOutput) } : {}),
       ...(input.logicalInvocationId ? { logicalInvocationId: input.logicalInvocationId } : {}),
       ...(previousInvocationId ? { parentInvocationId: previousInvocationId, repairOf: previousInvocationId } : {}),
     };
     let generatedAudit: ModelExecutionAudit | undefined;
+    let generatedValue: unknown;
     try {
       const generated = await input.invoke(context);
       generatedAudit = generated.audit;
+      generatedValue = structuredClone(generated.value);
       audits.push(generated.audit);
       previousInvocationId = generated.audit.invocations.at(-1)?.id ?? previousInvocationId;
       input.validate?.(generated.value, context);
@@ -190,18 +211,19 @@ export async function runSemanticRepairLoop<T>(
       };
     } catch (error) {
       if (isTerminal(error)) throw error;
+      // Never carry an older candidate forward when this attempt produced none.
+      previousOutput = structuredClone(error instanceof ModelOutputError && error.rawValue !== undefined ? error.rawValue : generatedValue);
       const audit = error instanceof ModelOutputError && error.audit
         ? error.audit
         : undefined;
       if (audit) audits.push(audit);
       previousInvocationId = audit?.invocations.at(-1)?.id ?? previousInvocationId;
       issues = input.classify?.(error) ?? defaultIssues(error);
-      // Providers already attach field-level semantic diagnostics to the
-      // invocation audit. Preserve those paths instead of replacing them
-      // with a generic ModelOutputError at the repair boundary.
+      // Retain precise diagnostics from either source, including evidence
+      // present on the local rejected value but omitted by an audit projection.
       const detailedIssues = audit?.invocations.at(-1)?.issues;
       if (error instanceof ModelOutputError && detailedIssues && detailedIssues.length > 0) {
-        issues = detailedIssues.map((issue) => ({
+        issues = repairIssues(issues, detailedIssues.map((issue) => ({
           code: issue.code,
           class: issue.class,
           path: [...issue.path],
@@ -209,7 +231,7 @@ export async function runSemanticRepairLoop<T>(
           ...(issue.originalValue !== undefined ? { originalValue: structuredClone(issue.originalValue) } : {}),
           ...(issue.allowedHandles ? { allowedHandles: [...issue.allowedHandles] } : {}),
           ...(issue.targetIds ? { targetIds: [...issue.targetIds] } : {}),
-        }));
+        })));
       }
       const rejectedAudit = audit ?? generatedAudit;
       if (rejectedAudit) markRejected(rejectedAudit, issues);

@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { WorldInspectorModelInvocationSummary } from "../../shared/world-inspector-api";
 import { WorldInspectorInvocationList } from "./world-inspector-invocation-list";
@@ -61,8 +61,22 @@ describe("WorldInspectorInvocationList", () => {
   it("shows a compact row with timestamp, status, and core metrics", () => {
     render(<WorldInspectorInvocationList invocations={[invocation]} onSelect={() => {}} query="" />);
 
+    const summary = within(screen.getByLabelText("调用汇总"));
     expect(screen.getByText("根调用 1 · action-compilation")).toBeVisible();
-    expect(screen.getAllByText("148,537")).toHaveLength(1);
+    expect(summary.getByText("总 token")).toBeVisible();
+    expect(summary.getByText("150,437")).toBeVisible();
+    expect(summary.getByText("输入 token")).toBeVisible();
+    expect(summary.getByText("148,537")).toBeVisible();
+    expect(summary.getByText("输出 token")).toBeVisible();
+    expect(summary.getByText("1,900")).toBeVisible();
+    expect(summary.getByText("推理 token")).toBeVisible();
+    expect(summary.getByText("120")).toBeVisible();
+    expect(summary.getByText("缓存读取")).toBeVisible();
+    expect(summary.getByText("缓存写入")).toBeVisible();
+    expect(summary.getAllByText("0")).toHaveLength(2);
+    expect(screen.getByLabelText("调用排序")).toBeVisible();
+    expect(screen.queryByText(/根调用 ·/)).not.toBeInTheDocument();
+    expect(screen.queryByText("语义修复和传输重试收在右侧详情")).not.toBeInTheDocument();
     expect(screen.getByText("修复耗尽 · 2 次")).toBeVisible();
     expect(screen.queryByText("初始输出拒绝")).not.toBeInTheDocument();
     expect(screen.getByText("09/02 08:00:00")).toBeVisible();
@@ -85,11 +99,38 @@ describe("WorldInspectorInvocationList", () => {
         parentInvocationId: invocation.id,
         repairOf: invocation.id,
       },
+      tokenUsage: { input: 10, output: 2, reasoning: 0, cacheRead: 0, cacheWrite: 0 },
     };
     render(<WorldInspectorInvocationList invocations={[invocation, repair]} onSelect={() => {}} query="" />);
 
     expect(screen.getAllByRole("button", { name: /根调用 1/ })).toHaveLength(1);
     expect(screen.queryByText(/语义修复 1 · action-compilation/)).not.toBeInTheDocument();
+    const summary = within(screen.getByLabelText("调用汇总"));
+    expect(summary.getByText("150,449")).toBeVisible();
+    expect(summary.getByText("148,547")).toBeVisible();
+    expect(summary.getByText("1,902")).toBeVisible();
+    expect(screen.queryByText("筛选")).not.toBeInTheDocument();
+  });
+
+  it("distinguishes partial token totals from completely missing usage", () => {
+    const partial = {
+      ...invocation,
+      id: "run-2::invocation-1",
+      sourceInvocationId: "invocation-2",
+      lineage: { ...invocation.lineage, logicalInvocationId: "chain-2", rootInvocationIds: ["run-2::invocation-1"] },
+      tokenUsage: { input: null, output: null, reasoning: null, cacheRead: null, cacheWrite: null },
+    };
+    const { rerender } = render(<WorldInspectorInvocationList invocations={[invocation, partial]} onSelect={() => {}} query="" />);
+
+    const summary = within(screen.getByLabelText("调用汇总"));
+    expect(summary.getByText("≥150,437")).toHaveAttribute("title", "部分调用未记录总 token，显示已知最小值");
+    expect(summary.getByText("≥148,537")).toHaveAttribute("title", "部分调用未记录输入 token，显示已知最小值");
+    expect(summary.getByText("≥1,900")).toHaveAttribute("title", "部分调用未记录输出 token，显示已知最小值");
+    expect(summary.getByText("≥120")).toHaveAttribute("title", "部分调用未记录推理 token，显示已知最小值");
+    expect(summary.getAllByText("≥0")).toHaveLength(2);
+
+    rerender(<WorldInspectorInvocationList invocations={[partial]} onSelect={() => {}} query="" />);
+    expect(within(screen.getByLabelText("调用汇总")).getAllByText("—")).toHaveLength(6);
   });
 
   it("searches persisted Agent and action fields and selects the logical invocation", () => {

@@ -450,11 +450,11 @@ describe("Execution Ledger", () => {
     expect(deriveExecutionWork(events).executionWallMs).toBe(500);
   });
 
-  it("replays recorded model outputs through the algorithm without network access", async () => {
+  it.each([1, 3])("replays recorded model outputs for %i agents without network access", async (agentCount) => {
     const ledger = database();
     try {
       const experiment = await runDeterministicExperiment({
-        agents: [1],
+        agents: [agentCount],
         steps: [1],
         actionCompilationSlots: [3],
         agentMindSlots: [2],
@@ -514,6 +514,22 @@ describe("Execution Ledger", () => {
         parentExecutionId: original!.id,
         status: "succeeded",
       });
+      if (agentCount > 1) {
+        const events = ledger.executionEvents(original!.id);
+        const logicalAudits = events.filter((event) => event.event === "execution.candidate.persisted" &&
+          event.attributes?.phase === "step").flatMap((event) => (event.payload as WorldStepCandidate).modelAudits);
+        const physicalEvent = events.find((event) => {
+          if (event.event !== "model.audit.persisted") return false;
+          const physical = event.payload as ModelExecutionAudit;
+          return logicalAudits.some((logical) => logical.subjectId !== physical.subjectId &&
+            logical.invocations.some((invocation) => physical.invocations.some((entry) => entry.id === invocation.id)));
+        });
+        expect(physicalEvent, "fixture must exercise a physical batch with logical slot audits").toBeDefined();
+        const replayCount = ledger.executions({ parentExecutionId: original!.id }).length;
+        await expect(replayThroughAlgorithm(ledger, original!, events.filter((event) => event !== physicalEvent)))
+          .rejects.toThrow("recorded model output has no physical audit");
+        expect(ledger.executions({ parentExecutionId: original!.id })).toHaveLength(replayCount);
+      }
     } finally {
       ledger.close();
     }

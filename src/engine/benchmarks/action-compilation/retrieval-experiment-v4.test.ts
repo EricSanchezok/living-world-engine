@@ -47,7 +47,16 @@ describe("retrieval v4 evaluation", () => {
               anchorCount: 1,
               budgetExceeded: false,
               perSlotSelectedCount: { "0": 1 },
-              cache: { passageHits: 10, passageMisses: 0, queryHits: 0, queryMisses: 1, readMs: 1, queryEncodeMs: 2 },
+              cache: {
+                passageHits: 10,
+                passageMisses: 0,
+                queryHits: 0,
+                queryMisses: 1,
+                readMs: 1,
+                passageEncodeMs: 0,
+                queryEncodeMs: 2,
+                queryBatchSize: 1,
+              },
             },
           };
         },

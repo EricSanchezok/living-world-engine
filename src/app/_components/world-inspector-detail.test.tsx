@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import type {
   WorldInspectorModelInvocationDetail,
   WorldInspectorRuntimeEventSummary,
@@ -144,6 +144,62 @@ describe("WorldInspectorDetail", () => {
     expect(screen.getAllByText("修复耗尽 · 1 次")).toHaveLength(1);
     expect(screen.getByText(/未通过 · 1.0 秒 · invalid_format/)).toBeVisible();
     expect(screen.getByText(/未通过 · 1.5 秒 · invalid_format/)).toBeVisible();
+  });
+
+  it("shows and copies the complete public invocation identity", async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText } });
+    render(
+      <WorldInspectorDetail
+        actorId="world"
+        actorName="整个世界"
+        instanceId="instance-1"
+        invocation={invocation}
+        loading={false}
+        selection={{ kind: "invocation", id: invocation.id, executionId: invocation.executionId }}
+      />,
+    );
+
+    const identity = screen.getByRole("region", { name: "调用调试标识" });
+    expect(within(identity).getByText(invocation.id)).toBeVisible();
+    expect(within(identity).getByText(invocation.executionId)).toBeVisible();
+    expect(within(identity).getByText(String(invocation.ledgerSequence))).toBeVisible();
+    fireEvent.click(screen.getByRole("button", { name: "复制 public invocation ID" }));
+    await waitFor(() => expect(writeText).toHaveBeenCalledWith(invocation.id));
+    expect(screen.getByRole("status")).toHaveTextContent("已复制 public invocation ID");
+  });
+
+  it("uses a balanced four-cell grid for Action Compilation reference metrics", () => {
+    const withReferenceAudit: WorldInspectorModelInvocationDetail = {
+      ...invocation,
+      actionCompilationReferenceAudit: {
+        protocolVersion: 2,
+        projection: "candidate-key-v3-complete-repair-issues",
+        context: {
+          utf8Bytes: 703_061,
+          referenceCatalogUtf8Bytes: 640_000,
+          slots: 1,
+          candidates: 1_841,
+          detailedCandidates: 914,
+          duplicateSemanticDefinitionCount: 0,
+          canonicalRefSerializedCount: 0,
+          rawPrivateReferenceSerializedCount: 0,
+        },
+        slots: [],
+      },
+    };
+    const { container } = render(
+      <WorldInspectorDetail
+        actorId="world"
+        actorName="整个世界"
+        instanceId="instance-1"
+        invocation={withReferenceAudit}
+        loading={false}
+        selection={{ kind: "invocation", id: invocation.id, executionId: invocation.executionId }}
+      />,
+    );
+
+    expect(container.querySelector(".cg-inspector-change-summary--four")?.children).toHaveLength(4);
   });
 
   it("shows field-level symbol repair evidence", () => {

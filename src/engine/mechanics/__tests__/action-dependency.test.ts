@@ -1,3 +1,4 @@
+import path from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   ActivityFootprintIndex,
@@ -8,10 +9,15 @@ import {
   interactionDependencyComponentsExhaustive,
   buildInteractionDependencyGraph,
   normalizeInteractionDependency,
+  resolutionExceedsDeclaredDependencies,
+  resolvedComponentsConflict,
 } from "../action-dependency";
+import type { UnreviewedTruthResolution } from "../../algorithms/roles";
 import type { InteractionDependency } from "../../runtime/execution";
-import type { AgentActionProposal, SimulationState } from "../../contracts/model";
+import type { AgentActionProposal, SimulationState, WorldDeltaOperation } from "../../contracts/model";
 import type { ActivityState } from "../temporal";
+import { loadWorldScript } from "../../../script/world-loader";
+import { DeterministicModelProvider } from "../../testing/model-provider";
 
 function dependency(
   actorId: string,
@@ -33,6 +39,45 @@ function dependency(
 }
 
 describe("action dependencies", () => {
+  it("detects a write upgrade that crosses components even when the other action has no physical delta", () => {
+    const provider = new DeterministicModelProvider();
+    const state = loadWorldScript(path.resolve("test/fixtures/open-world-script"), {
+      seed: 47, modelCatalog: provider.catalog,
+    }).initialState;
+    const resolution = (operations: WorldDeltaOperation[]): UnreviewedTruthResolution => ({
+      proposal: { baseRevision: state.revision, operations, outcomes: [], events: [],
+        observations: [], decisionRequests: [], mechanicInvocations: [] },
+      initialActions: [], actions: [], reactionRequests: [], reactionDecisions: [],
+      stimulusObservations: [], requests: [], checks: [], randomRequests: [], randomResults: [],
+      commitmentRounds: [], resolutionPlans: [], resolutionReceipts: [], rng: state.truth.rng,
+      mechanicResults: [], causalAssertionResults: [], modelAudits: [], reactionModelAudits: [],
+    });
+    const subject = { kind: "entity" as const, id: "keeper" };
+    const destination = { kind: "entity" as const, id: "gate" };
+    const mover = dependency("keeper", [subject, destination], []);
+    const observer = dependency("player", [subject], []);
+    const move = resolution([{ kind: "place_entity", entityId: subject.id, placementId: destination.id,
+      causes: [{ kind: "law", id: "time-passes" }], assertions: [] }]);
+    const observe = resolution([]);
+    expect(interactionDependencyComponents([mover, observer])).toHaveLength(2);
+    expect(resolvedComponentsConflict(state, move, observe)).toBe(false);
+    expect(resolutionExceedsDeclaredDependencies(state, move, [mover])).toBe(true);
+    expect(resolutionExceedsDeclaredDependencies(state, observe, [observer])).toBe(false);
+
+    const declaredMover = dependency("keeper", [destination], [subject]);
+    expect(interactionDependencyComponents([declaredMover, observer])).toHaveLength(1);
+    expect(resolutionExceedsDeclaredDependencies(state, move, [declaredMover])).toBe(false);
+    expect(resolutionExceedsDeclaredDependencies(state, move, [
+      dependency("keeper", [], [subject, destination]),
+    ])).toBe(false);
+    expect(resolutionExceedsDeclaredDependencies(state, move, [
+      dependency("keeper", [], [subject]),
+    ])).toBe(true);
+    expect(resolutionExceedsDeclaredDependencies(state, move, [
+      dependency("keeper", [], [], [], true),
+    ])).toBe(false);
+  });
+
   it("keeps independent footprints separate and joins read/write or audience dependencies", () => {
     expect(interactionDependencyComponents([
       dependency("a", [], [{ kind: "entity", id: "entity-a" }]),

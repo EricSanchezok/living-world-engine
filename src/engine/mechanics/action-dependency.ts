@@ -21,27 +21,33 @@ import {
   modelInvocationIdentity,
   setModelInvocationOutcome,
   setModelInvocationResultKind,
+  ModelCandidateValidationError,
+  ModelOutputError,
   type ModelExecutionScope,
   type StructuredModelProvider,
 } from "../models/model-provider";
-import { MODEL_CONTEXT_CONTRACT_VERSION, projectAgentPerspectiveForModel } from "../contracts/prompts";
+import { MODEL_CONTEXT_CONTRACT_VERSION, projectAgentPerspectiveForModel, validationIssues, type PromptValidationIssue } from "../contracts/prompts";
 import {
   createReferenceResolver,
   modelRoleContract,
   withReferenceCandidateDetails,
+  ModelReferenceError,
   type ExistingReferenceHandle,
   type ReferenceCandidateInput,
   type ReferenceResolver,
+  type ModelReferenceUse,
+  type ModelReferenceKind,
 } from "../contracts/model-context";
 import { promptBundle } from "../prompts";
 import { quantityId } from "../runtime/runtime-id";
 import { contentHash } from "../models/model-audit";
-import type { TruthResolution } from "../algorithms/roles";
+import type { UnreviewedTruthResolution } from "../algorithms/roles";
 import { materializeSharedActivityResourceClaims } from "./shared-activity-resources";
 import {
   SemanticRepairExhaustedError,
   runSemanticRepairLoop,
   semanticIssue,
+  type SemanticRepairContext,
 } from "../models/semantic-repair";
 
 const GROUNDING_PROMPT = promptBundle("action-grounding");
@@ -487,6 +493,27 @@ export function materializeModelInteractionDependency(
   value: import("../runtime/execution").ActionGroundingModelOutput,
   resolver = actionGroundingReferenceResolver(state, action),
 ): InteractionDependency {
+  const issues: PromptValidationIssue[] = [];
+  const check = (handle: ExistingReferenceHandle, use: ModelReferenceUse, path: Array<string | number>, kind?: ModelReferenceKind): void => {
+    try {
+      const resolved = resolver.resolve(handle, use);
+      if (kind && resolved.kind !== kind) {
+        throw new ModelReferenceError({ code: `reference.${kind}_required`, path, originalValue: handle,
+          allowedHandles: resolver.candidatesFor(use).filter(candidate => candidate.kind === kind).map(candidate => candidate.handle),
+          reason: `This field requires a ${kind} candidate; the selected candidate is ${resolved.kind}.` });
+      }
+    } catch (error) {
+      if (!(error instanceof ModelReferenceError)) throw error;
+      issues.push({ code: error.code, class: "reference", path, originalValue: handle,
+        allowedHandles: resolver.candidatesFor(use).filter(candidate => !kind || candidate.kind === kind).map(candidate => candidate.handle),
+        message: error.message });
+    }
+  };
+  value.stateDependencies.requiredExistingRefs.forEach((handle, index) => check(handle, "conflict", ["stateDependencies", "requiredExistingRefs", index]));
+  value.stateDependencies.potentiallyAffectedExistingRefs.forEach((handle, index) => check(handle, "conflict", ["stateDependencies", "potentiallyAffectedExistingRefs", index]));
+  value.audienceAgentRefs.forEach((handle, index) => check(handle, "audience", ["audienceAgentRefs", index], "agent"));
+  value.sharedResourceClaims.forEach((claim, index) => check(claim.resourcePoolRef, "conflict", ["sharedResourceClaims", index, "resourcePoolRef"], "shared_resource_pool"));
+  if (issues.length > 0) throw new ModelCandidateValidationError(issues);
   const requiredExistingRefs = value.stateDependencies.requiredExistingRefs.map((handle) => resolveGroundingReference(resolver, handle));
   const potentiallyAffectedExistingRefs = value.stateDependencies.potentiallyAffectedExistingRefs.map((handle) => resolveGroundingReference(resolver, handle));
   const audienceAgentIds = value.audienceAgentRefs.map((handle) => {
@@ -679,6 +706,7 @@ export function actionGroundingContext(
   action: AgentActionProposal,
   issues: readonly string[],
   scope: Pick<ModelExecutionScope, "workloadId" | "batchId">,
+  feedback?: Pick<SemanticRepairContext, "issues" | "previousOutput">,
 ) {
   const shared = actionGroundingSharedContext(state, action);
   const slot = actionGroundingSlotContext(state, action, issues);
@@ -701,7 +729,13 @@ export function actionGroundingContext(
     },
     referenceCatalog: shared.referenceCatalog,
     repair: issues.length > 0
-      ? { target: slot.action.actionRef, issues: issues.map((reason) => ({ code: "action_grounding", class: "semantic" as const, path: ["task"], originalValue: null, allowedHandles: [], reason })) }
+      ? { target: slot.action.actionRef,
+        issues: feedback ? feedback.issues.map(issue => ({ code: issue.code, class: issue.class, path: [...issue.path],
+          originalValue: issue.originalValue ?? null, allowedHandles: [...(issue.allowedHandles ?? [])], reason: issue.message }))
+          : issues.map((reason) => ({ code: "action_grounding", class: "semantic" as const, path: ["task"], originalValue: null, allowedHandles: [], reason })),
+        previousOutputAvailable: feedback?.previousOutput !== undefined,
+        ...(feedback?.previousOutput === undefined ? {} : { previousOutput: structuredClone(feedback.previousOutput) }),
+      }
       : null,
   };
 }
@@ -756,6 +790,7 @@ export async function generateInteractionDependency(
             action,
             repairContext.issues.map((issue) => issue.message),
             scope,
+            repairContext,
           ),
           schema: actionGroundingSchema,
         });
@@ -766,6 +801,9 @@ export async function generateInteractionDependency(
         materializeModelInteractionDependency(state, action, value);
       },
       classify: (error) => {
+        if (error instanceof ModelCandidateValidationError || error instanceof ModelReferenceError || error instanceof ModelOutputError) {
+          return validationIssues(error).map(issue => ({ ...issue, class: issue.class ?? "reference", targetIds: [action.id] }));
+        }
         const reasons = error instanceof GroundingValidationError
           ? error.reasons
           : [error instanceof Error ? error.message : String(error)];
@@ -1124,7 +1162,7 @@ function operationResources(
 
 function actualComponentFootprint(
   state: Readonly<SimulationState>,
-  resolution: TruthResolution,
+  resolution: UnreviewedTruthResolution,
 ): { reads: Set<string>; writes: Set<string> } {
   const reads = new Set<string>();
   const writes = new Set<string>();
@@ -1138,8 +1176,8 @@ function actualComponentFootprint(
 
 export function resolvedComponentsConflict(
   state: Readonly<SimulationState>,
-  left: TruthResolution,
-  right: TruthResolution,
+  left: UnreviewedTruthResolution,
+  right: UnreviewedTruthResolution,
 ): boolean {
   const leftFootprint = actualComponentFootprint(state, left);
   const rightFootprint = actualComponentFootprint(state, right);
@@ -1150,12 +1188,15 @@ export function resolvedComponentsConflict(
 
 export function resolutionExceedsDeclaredDependencies(
   state: Readonly<SimulationState>,
-  resolution: TruthResolution,
+  resolution: UnreviewedTruthResolution,
   dependencies: readonly InteractionDependency[],
 ): boolean {
   if (dependencies.some((dependency) => dependency.globalFallback)) return false;
-  const declared = new Set(dependencies.flatMap((dependency) =>
+  const declaredReads = new Set(dependencies.flatMap((dependency) =>
     [...dependency.reads, ...dependency.writes].map(footprintRefKey)));
+  const declaredWrites = new Set(dependencies.flatMap((dependency) =>
+    dependency.writes.map(footprintRefKey)));
   const actual = actualComponentFootprint(state, resolution);
-  return [...actual.reads, ...actual.writes].some((key) => !declared.has(key));
+  return [...actual.reads].some((key) => !declaredReads.has(key)) ||
+    [...actual.writes].some((key) => !declaredWrites.has(key));
 }

@@ -6,6 +6,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { z } from "zod";
 import { coreResolutionRulePackage, RulePackageRegistry } from "../../engine/mechanics/rule-package";
 import { createTestModelCatalog, DeterministicModelProvider } from "../../engine/testing/model-provider";
+import { FULL_CATALOG_ALGORITHM_REF } from "../../engine/algorithms/registry";
 import { loadWorldScript } from "../../script/world-loader";
 import { LocalDatabase } from "../local-database";
 import { WorldHost } from "../world-host";
@@ -117,7 +118,7 @@ describe("world import", () => {
     expect(database.load("open-world-fixture", 9, provider.catalog).rulePackages[1])
       .toMatchObject({ id: "test-rules", rules: [] });
 
-    const host = new WorldHost({ repository: database, store: database, provider });
+    const host = new WorldHost({ repository: database, store: database, provider, defaultAlgorithmRef: FULL_CATALOG_ALGORITHM_REF });
     const instance = await host.createInstance({ worldId: "open-world-fixture", start: { kind: "observer" } });
     expect(host.instance(instance.summary.id).world.contentHash).toBe(instance.world.contentHash);
     database.close();
@@ -186,7 +187,7 @@ describe("world import", () => {
     const provider = new DeterministicModelProvider();
     const archive = zipDirectory(fixture).toBuffer();
     database.importWorld(archive, provider.catalog);
-    const host = new WorldHost({ repository: database, store: database, catalogManager: database, provider });
+    const host = new WorldHost({ repository: database, store: database, catalogManager: database, provider, defaultAlgorithmRef: FULL_CATALOG_ALGORITHM_REF });
     const instance = await host.createInstance({ worldId: "open-world-fixture", start: { kind: "observer" } });
 
     expect(() => host.deleteWorld("open-world-fixture")).toThrow("still has instances");
@@ -210,6 +211,7 @@ describe("world import", () => {
       store: database,
       catalogManager: database,
       provider,
+      defaultAlgorithmRef: FULL_CATALOG_ALGORITHM_REF,
       idFactory: () => `id-${++nextId}`,
     });
 

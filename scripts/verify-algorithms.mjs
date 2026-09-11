@@ -48,7 +48,8 @@ for (const statement of roleContractsAst.statements) {
 const registry = await readFile(path.join(root, "src/engine/algorithms/registry.ts"), "utf8");
 for (const identity of [
   "eager-reference", "model-agent-cognition", "model-action-compilation", "full-catalog",
-  "graph-hybrid-e5", "bounded-symbol-repair", "model-interaction-grounding", "onset-reaction",
+  "relational-rrf", "typed-channel-rrf", "coverage-aware-joint-budget",
+  "bounded-symbol-repair", "model-interaction-grounding", "onset-reaction",
   "model-onset-perception", "model-reaction-decision", "model-truth-resolution",
   "model-observation-rendering", "bounded-slot-batching", "bounded-concurrency", "localized-repair-bisect",
 ]) {

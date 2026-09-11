@@ -20,7 +20,7 @@ import {
   type GraphAwareStrategy,
   type GraphRankerModel,
 } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/graph-aware";
-import { loadLocalMultilingualE5Small, hashLocalModelDirectory, LOCAL_ENCODER_MAX_BATCH_SIZE, LOCAL_ENCODER_MAX_TOKENS, type LocalEncoderRuntime } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/local-encoder";
+import { loadLocalEncoder, hashLocalModelDirectory, LOCAL_ENCODER_MAX_BATCH_SIZE, LOCAL_ENCODER_MAX_TOKENS, type LocalEncoderRuntime } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/local-encoder";
 import { CachedPassageEncoder } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/embedding-cache";
 import { discoverLocalEncoderModelDirectory, livingWorldCacheRoot, localEncoderFingerprint } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/local-encoder";
 
@@ -166,7 +166,7 @@ async function main(argv: readonly string[]): Promise<number> {
       if (!existsSync(args.modelDirectory)) {
         for (const run of graphRuns.filter((candidate) => candidate.needsEncoder)) runs.push({ id: run.id, status: "blocked", reason: `local encoder asset missing: ${args.modelDirectory}` });
       } else {
-        encoder = await loadLocalMultilingualE5Small({ modelDirectory: args.modelDirectory });
+        encoder = await loadLocalEncoder({ modelDirectory: args.modelDirectory });
         passageEncoder = new CachedPassageEncoder(encoder, localEncoderFingerprint(encoder, 1), args.cacheRoot);
       }
     }

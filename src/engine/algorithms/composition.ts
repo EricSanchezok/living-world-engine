@@ -12,6 +12,8 @@ export const ALGORITHM_ROLES = [
   "agent-cognition",
   "action-compilation",
   "candidate-selection",
+  "candidate-ranking",
+  "candidate-allocation",
   "symbol-repair",
   "interaction-grounding",
   "reaction-resolution",

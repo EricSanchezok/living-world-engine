@@ -78,10 +78,7 @@ export function algorithmCatalogMarkdown(
     ...benchmarkAlgorithms.map((entry) => {
       const source = `../../${entry.source}`;
       const evidence = `../../${entry.evidence}`;
-      const identity = entry.runtimeCounterpartIdentity
-        ? `\`${entry.id}@${entry.version}\` (runtime counterpart: \`${entry.runtimeCounterpartIdentity}\`)`
-        : `\`${entry.id}@${entry.version}\``;
-      return `| \`${entry.role}\` | ${identity} | ${entry.family} | \`${entry.strategy}\` | \`${entry.contract}\` | ${entry.maturity} | [implementation](${source}) | [evidence](${evidence}) |`;
+      return `| \`${entry.role}\` | \`${entry.id}@${entry.version}\` | ${entry.family} | \`${entry.strategy}\` | \`${entry.contract}\` | ${entry.maturity} | [implementation](${source}) | [evidence](${evidence}) |`;
     }),
     "",
     "## Default composition",

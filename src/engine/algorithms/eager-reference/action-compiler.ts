@@ -1,6 +1,9 @@
+import { PinnedActionCompilationSelection } from "./candidate-retrieval/pinned-selection";
+import { SourceActionDescriptionMismatch } from "./source-action-description";
 import { z } from "zod";
 import {
   actionCompilationBatchSchema,
+  actionCompilationRequestSchema,
   actionCompilationSlotSchema,
   type ActionCompilationModelOutput,
   type ModelCausalAssertion,
@@ -52,6 +55,8 @@ import { evaluateCausalAssertion } from "../../mechanics/causality";
 import { promptBundle } from "../../prompts";
 import {
   ACTION_COMPILATION_PROJECTION,
+  ACTION_COMPILATION_CANDIDATE_KEY_SUFFIX_LENGTH,
+  ACTION_COMPILATION_CANDIDATE_KEY_VERSION,
   createActionCompilationReferenceResolver,
   isProposalReference,
   MODEL_CONTEXT_CONTRACT_VERSION,
@@ -80,8 +85,10 @@ import {
   actionCompilationContextProjectionMetrics,
   projectActionCompilationContextForModel,
 } from "./action-compilation-context";
+import { DEFAULT_SYMBOL_REPAIR_POLICY } from "../../contracts/symbol-repair";
 
 const ACTION_COMPILER_PROMPT = promptBundle("action-compilation");
+export const ACTION_COMPILER_PROMPT_VERSION = ACTION_COMPILER_PROMPT.version;
 
 function candidateKeysInValue(value: unknown, output = new Set<string>()): Set<string> {
   if (typeof value === "string") {
@@ -144,47 +151,6 @@ function existingActivities(
     }));
 }
 
-const MAX_BOUNDED_REPAIR_ALTERNATIVES = 64;
-
-function collectModelCandidateKeys(value: unknown, target: Set<string>): void {
-  if (typeof value === "string") {
-    if (value.startsWith("candidate_")) target.add(value);
-    return;
-  }
-  if (Array.isArray(value)) {
-    value.forEach((entry) => collectModelCandidateKeys(entry, target));
-    return;
-  }
-  if (!value || typeof value !== "object") return;
-  Object.values(value as Record<string, unknown>).forEach((entry) => collectModelCandidateKeys(entry, target));
-}
-
-function actionCompilationRepairResolver(
-  resolver: ReturnType<typeof actionGroundingReferenceResolver>,
-  slots: readonly CompilationSlot[],
-): ReturnType<typeof actionGroundingReferenceResolver> {
-  const fullResolver = createActionCompilationReferenceResolver(resolver);
-  if (slots.every((slot) => slot.issues.length === 0)) return resolver;
-  if (slots.some((slot) => slot.issues.some((issue) => issue.class === "structure"))) return resolver;
-  const alternatives = slots.flatMap((slot) => slot.issues.flatMap((issue) => issue.allowedHandles));
-  if (new Set(alternatives).size > MAX_BOUNDED_REPAIR_ALTERNATIVES) return resolver;
-
-  const includedKeys = new Set(alternatives);
-  slots.forEach((slot) => collectModelCandidateKeys(slot.payload.previousOutput, includedKeys));
-  for (const [slotIndex, slot] of slots.entries()) {
-    includedKeys.add(fullResolver.candidateKeyForHandle(resolver.handleFor("action", slot.payload.action.id)));
-    includedKeys.add(fullResolver.candidateKeyForHandle(resolver.handleFor("agent", slot.payload.action.actorId)));
-    resolver.catalog.candidates
-      .filter((candidate) => candidate.slot === slotIndex || candidate.kind === "temporal_profile")
-      .forEach((candidate) => includedKeys.add(fullResolver.candidateKeyForHandle(candidate.handle)));
-  }
-  const narrowed = resolver.narrow((candidate) => {
-    const handle = resolver.handleFor(candidate.kind, candidate.engineId);
-    return includedKeys.has(fullResolver.candidateKeyForHandle(handle));
-  });
-  return narrowed;
-}
-
 function actionReferenceStatus(
   resolver: ActionCompilationReferenceResolver,
   handleResolver: ReturnType<typeof actionGroundingReferenceResolver>,
@@ -224,14 +190,17 @@ type ActionCompilationSelection = ActionCompilationReferenceAudit["slots"][numbe
 function collectActionCompilationSelections(
   value: ActionCompilationModelOutput,
   resolver: ActionCompilationReferenceResolver,
-): ActionCompilationSelection[] {
+): { selections: ActionCompilationSelection[]; issues: ModelRepairIssue[] } {
   const selections: ActionCompilationSelection[] = [];
+  const issues: ModelRepairIssue[] = [];
   const add = (path: Array<string | number>, candidateKey: unknown, use: ModelReferenceUse): void => {
     if (typeof candidateKey !== "string") return;
     try {
       const resolved = resolver.resolve(candidateKey, use);
       selections.push({ path, use, candidateKey, engineHandle: resolved.handle, kind: resolved.kind, status: "resolved" });
     } catch (error) {
+      if (!(error instanceof ModelReferenceError)) throw error;
+      issues.push(modelRepairIssueFromReferenceError(error, path));
       selections.push({
         path,
         use,
@@ -284,7 +253,7 @@ function collectActionCompilationSelections(
     add(["interactionDependency", "audienceAgentCandidateKeys", index], key, "audience"));
   value.interactionDependency.sharedResourceClaims.forEach((claim, index) =>
     add(["interactionDependency", "sharedResourceClaims", index, "resourcePoolCandidateKey"], claim.resourcePoolCandidateKey, "conflict"));
-  return selections;
+  return { selections, issues };
 }
 
 function actionCompilationReferenceAudit(input: {
@@ -369,7 +338,7 @@ function emitActionCompilationReferenceAudit(
   });
 }
 
-function actionCompilationContext(
+export function actionCompilationContext(
   state: Readonly<SimulationState>,
   slots: readonly CompilationSlot[],
   scope: Pick<ModelExecutionScope, "workloadId" | "batchId">,
@@ -379,7 +348,7 @@ function actionCompilationContext(
   const slotByActionId = new Map(slots.map((entry, slot) => [entry.payload.action.id, slot]));
   const initialResolver = batchResolver ?? actionGroundingReferenceResolver(state, actions, slotByActionId);
   const shared = actionGroundingSharedContext(state, actions, initialResolver, true);
-  const referenceResolver = actionCompilationRepairResolver(shared.referenceResolver, slots);
+  const referenceResolver = shared.referenceResolver;
   const actionReferenceResolver = createActionCompilationReferenceResolver(shared.referenceResolver, shared.referenceResolver);
   const handleResolver = shared.referenceResolver;
   const slotContexts = slots.map((entry, slot) => {
@@ -493,7 +462,7 @@ function emitActionCompilationContextProjection(
 ): void {
   const candidates = context.referenceCatalog.candidates;
   const metrics = actionCompilationContextProjectionMetrics(context);
-  const repair = context.task.slots.some((slot) => slot.issue !== null);
+  const repair = context.task.slots.some((slot) => Array.isArray(slot.issues) && slot.issues.length > 0);
   scope.observer?.emit({
     event: "algorithm.eager_reference.action_compilation_context_projected",
     correlation: modelInvocationCorrelation(scope, "action-compilation", owner, identity, lineage),
@@ -508,7 +477,7 @@ function emitActionCompilationContextProjection(
       serializedCandidates: candidates.length,
       detailedCandidates: metrics.detailedCandidates,
       duplicateSemanticDefinitionCount: metrics.duplicateSemanticDefinitionCount,
-      repairIssues: context.task.slots.filter((slot) => slot.issue !== null).length,
+      repairIssues: context.task.slots.reduce((sum, slot) => sum + (Array.isArray(slot.issues) ? slot.issues.length : 0), 0),
       contextUtf8Bytes: metrics.bytes,
       referenceCatalogUtf8Bytes: jsonUtf8Bytes(context.referenceCatalog),
       canonicalTruthUtf8Bytes: 0,
@@ -544,8 +513,25 @@ function errorChainText(error: unknown): string {
   return messages.join("\n");
 }
 
+function sourceDescriptionMismatch(error: unknown): SourceActionDescriptionMismatch | undefined {
+  let cause = error;
+  const seen = new Set<Error>();
+  while (cause instanceof Error) {
+    if (cause instanceof SourceActionDescriptionMismatch) return cause;
+    if (seen.has(cause)) break;
+    seen.add(cause);
+    cause = cause.cause;
+  }
+  return undefined;
+}
+
 function actionCompilationRepairIssues(error: unknown): ModelRepairIssue[] {
   const message = errorChainText(error);
+  const mismatch = sourceDescriptionMismatch(error);
+  if (mismatch) return [compilationIssue({
+      code: "action_compilation.source_description_mismatch", class: "semantic",
+      path: ["temporalPlan", "description"], reason: mismatch.message,
+    })];
   if (message.includes("sharedResourceClaims") && (message.includes("poolId") || message.includes("resourcePoolRef") || message.includes("resourcePoolCandidateKey"))) {
     return [
       compilationIssue({
@@ -575,7 +561,10 @@ function actionCompilationRepairIssues(error: unknown): ModelRepairIssue[] {
   return [compilationIssue({ code: "action_compilation.invalid_batch", reason: message })];
 }
 
-function actionCompilationSlotIssues(error: unknown, actionResolver?: ActionCompilationReferenceResolver): ModelRepairIssue[] {
+function actionCompilationSlotIssues(error: unknown, actionResolver?: ActionCompilationReferenceResolver,
+  selectedKeys?: readonly string[]): ModelRepairIssue[] {
+  const selected = selectedKeys ? new Set(selectedKeys) : undefined;
+  const selectable = (key: string) => !selected || selected.has(key);
   if (error instanceof ActionCompilationValidationError) {
     return error.issues.map((issue) => {
       const next = structuredClone(issue);
@@ -588,6 +577,7 @@ function actionCompilationSlotIssues(error: unknown, actionResolver?: ActionComp
           try { next.originalValue = actionResolver.candidateKeyForHandle(next.originalValue as never); } catch { /* keep diagnostic value */ }
         }
       }
+      next.allowedHandles = next.allowedHandles.filter(selectable);
       return next;
     });
   }
@@ -602,7 +592,7 @@ function actionCompilationSlotIssues(error: unknown, actionResolver?: ActionComp
       ...issue,
       allowedHandles: issue.allowedHandles.flatMap((handle) => handle.startsWith("candidate_")
         ? [handle]
-        : (() => { try { return [actionResolver.candidateKeyForHandle(handle as never)]; } catch { return []; } })()),
+        : (() => { try { return [actionResolver.candidateKeyForHandle(handle as never)]; } catch { return []; } })()).filter(selectable),
     }];
   }
   if (error instanceof z.ZodError) {
@@ -700,6 +690,16 @@ function localizedSchemaFailure(
   });
   const expectedIndexes = new Set(batch.map((_, index) => index));
   if ([...rawByIndex.keys()].some((index) => !expectedIndexes.has(index))) return null;
+  if (sourceDescriptionMismatch(error)) {
+    // Source-owned text contradictions reject the whole attempt, including
+    // schema-valid neighbors. Preserve each candidate without accepting it.
+    return { audit: error.audit, accepted: [], contextualCauseRemovals: 0, normalizedSlots: [],
+      rejected: batch.map((slot, index) => ({
+        slot: { ...slot, payload: { ...slot.payload, previousOutput: structuredClone(rawByIndex.get(index) ?? null) } },
+        issues: actionCompilationRepairIssues(error),
+      })),
+    };
+  }
   for (const [index, slot] of batch.entries()) {
     const raw = rawByIndex.get(index);
     if (raw === undefined || duplicateIndexes.has(index)) {
@@ -735,6 +735,8 @@ function localizedSchemaFailure(
       const allowed = selectedKeysBySlot?.get(index);
       if (allowed) validateActionCompilationShortlistMembership({ value: parsed.data, slot: index, allowedCandidateKeys: allowed });
       const slotResolver = resolver.scopedToSlot(index);
+      const references = collectActionCompilationSelections(parsed.data, slotResolver);
+      if (references.issues.length) throw new ActionCompilationValidationError(references.issues);
       const materialized = materializeActionCompilationCandidateKeys({ value: parsed.data, resolver: slotResolver });
       accepted.push({
         key: slot.key,
@@ -748,7 +750,7 @@ function localizedSchemaFailure(
     } catch (materializationError) {
       rejected.push({
         slot: { ...slot, payload: { ...slot.payload, previousOutput: structuredClone(parsed.data) } },
-        issues: actionCompilationSlotIssues(materializationError, resolver.scopedToSlot(index)),
+        issues: actionCompilationSlotIssues(materializationError, resolver.scopedToSlot(index), selectedKeysBySlot?.get(index)),
       });
     }
   }
@@ -816,7 +818,13 @@ function materializeCompilation(
     switch (assertion.kind) {
       case "check_result": return { kind: assertion.kind, checkId: resolve(assertion.checkRef, "assertion"), expected: assertion.expected };
       case "random_result": return { kind: assertion.kind, requestId: resolve(assertion.requestRef, "assertion"), stepId: resolve(assertion.stepRef, "assertion"), expected: structuredClone(assertion.expected) as DiscreteRandomAggregate };
-      case "fact_matches": return { kind: assertion.kind, factId: resolve(assertion.factRef, "assertion"), expected: structuredClone(assertion.expected) as never };
+      case "fact_matches": return {
+        kind: assertion.kind,
+        factId: resolve(assertion.factRef, "assertion"),
+        expected: assertion.expected.kind === "entity"
+          ? { kind: "entity", entityId: resolve(assertion.expected.entityRef, "assertion") }
+          : structuredClone(assertion.expected),
+      };
       case "fact_absent": return { kind: assertion.kind, factId: resolve(assertion.factRef, "assertion") };
       case "entity_absent": return { kind: assertion.kind, entityId: resolve(assertion.entityRef, "assertion") };
       case "entity_lifecycle": return { kind: assertion.kind, entityId: resolve(assertion.entityRef, "assertion"), expected: assertion.expected };
@@ -936,6 +944,8 @@ export async function compileActions(
     .sort((left, right) => left.actorId.localeCompare(right.actorId) || left.id.localeCompare(right.id))
     .map((action) => ({ key: action.id, payload: { action }, issues: [] }));
   const maxInputBytes = provider.catalog.profile(profileId).max_input_bytes;
+  const rootSelections = new Map<string, PinnedActionCompilationSelection>();
+  const sourceStateHash = contentHash(state);
   const result = await runEagerSlotBatches({
     slots,
     maxSlots,
@@ -966,20 +976,27 @@ export async function compileActions(
         baseResolver,
         true,
       ).referenceResolver;
-      const batchResolver = actionCompilationRepairResolver(fullBatchResolver, batch);
+      const batchResolver = fullBatchResolver;
       const batchActionResolver = createActionCompilationReferenceResolver(batchResolver, fullBatchResolver);
       const fullBatchActionResolver = createActionCompilationReferenceResolver(fullBatchResolver, fullBatchResolver);
-      const context = actionCompilationContext(state, batch, scope, fullBatchResolver);
+      const projected = actionCompilationContext(state, batch, scope, fullBatchResolver);
+      const pinnedSelection = rootSelections.get(lineage.logicalInvocationId);
+      if (pinnedSelection && contentHash(state) !== sourceStateHash) throw new Error("action compilation repair changed its source state snapshot");
+      const context = (pinnedSelection?.project(projected) ?? projected) as typeof projected;
       emitActionCompilationContextProjection(scope, owner, identity, context, lineage);
       const retrieval = scope.actionCompilationRetrieval
         ? await (async () => {
             try {
-              return await scope.actionCompilationRetrieval!.retrieveBatch({
+              if (pinnedSelection) return pinnedSelection.reuse(context);
+              if (lineage.semanticRepairAttempt > 0) throw new Error("action compilation repair lost its root candidate selection");
+              const selected = await scope.actionCompilationRetrieval!.retrieveBatch({
                 worldContentHash: state.worldHash,
                 fullContext: context,
                 slotIndices: batch.map((_, slot) => slot),
                 signal: scope.abortSignal,
               });
+              rootSelections.set(lineage.logicalInvocationId, new PinnedActionCompilationSelection(context, selected));
+              return selected;
             } catch (error) {
               scope.observer?.emit({
                 event: "model.action_compilation.retrieval_failed",
@@ -994,57 +1011,6 @@ export async function compileActions(
             }
           })()
         : undefined;
-      if (scope.observer) {
-        const fullContextHash = retrieval?.fullContextHash ?? contentHash(context);
-        scope.observer.emit({
-          event: "model.action_compilation.context.captured",
-          correlation,
-          attributes: { middlewareVersion: scope.actionCompilationRetrieval?.version ?? "fullcatalog-control", role: "action-compilation" },
-          counts: {
-            slots: batch.length,
-            selectedCandidates: retrieval?.diagnostics.selectedCount ?? context.referenceCatalog.candidates.length,
-            visibleCandidates: retrieval?.diagnostics.visibleCount ?? context.referenceCatalog.candidates.length,
-            prunedReferences: retrieval?.diagnostics.prunedReferenceCount ?? 0,
-            anchors: retrieval?.diagnostics.anchorCount ?? 0,
-            batchBudget: retrieval?.diagnostics.batchBudget ?? context.referenceCatalog.candidates.length,
-            passageCacheHits: retrieval?.diagnostics.cache.passageHits ?? 0,
-            passageCacheMisses: retrieval?.diagnostics.cache.passageMisses ?? 0,
-            queryCacheHits: retrieval?.diagnostics.cache.queryHits ?? 0,
-            queryCacheMisses: retrieval?.diagnostics.cache.queryMisses ?? 0,
-          },
-          measurements: {
-            batchShortlistRatio: retrieval?.diagnostics.batchShortlistRatio ?? 1,
-            cacheReadMs: retrieval?.diagnostics.cache.readMs ?? 0,
-            queryEncodeMs: retrieval?.diagnostics.cache.queryEncodeMs ?? 0,
-          },
-          hashes: {
-            fullContext: fullContextHash,
-            ...(retrieval ? { modelContext: retrieval.modelContextHash, shortlist: retrieval.shortlistHash } : {}),
-          },
-          payload: fullRuntimePayload(scope.observer, {
-            sourceExecutionId: scope.correlation?.executionId,
-            sourceInvocationId: identity.modelInvocationId,
-            logicalInvocationId: correlation.logicalInvocationId,
-            role: "action-compilation",
-            slotIndices: batch.map((_, slot) => slot),
-            fullContext: context,
-            stateSnapshot: state,
-            actionIds: batch.map((entry) => entry.payload.action.id),
-            ...(retrieval ? {
-              selectedKeysBySlot: [...retrieval.selectedKeysBySlot.entries()],
-              perSlotSelectedCount: retrieval.diagnostics.perSlotSelectedCount,
-              batchBudget: retrieval.diagnostics.batchBudget,
-              batchShortlistRatio: retrieval.diagnostics.batchShortlistRatio,
-              cache: retrieval.diagnostics.cache,
-            } : {}),
-            fullContextHash,
-            ...(retrieval ? { modelContextHash: retrieval.modelContextHash, shortlistHash: retrieval.shortlistHash } : {}),
-            worldHash: scope.runtimeIdentity?.worldHash,
-            stateHash: contentHash(state),
-            modelCatalogHash: typeof context.referenceCatalog?.hash === "string" ? context.referenceCatalog.hash : undefined,
-          }),
-        });
-      }
       emitActionCompilationReferenceAudit(
         scope,
         owner,
@@ -1058,6 +1024,79 @@ export async function compileActions(
         }),
         lineage,
       );
+      let contextCaptured = false;
+      const captureContext = (audit: ModelExecutionAudit) => {
+        if (scope.observer && !contextCaptured) {
+          contextCaptured = true;
+          const fullContextHash = retrieval?.fullContextHash ?? contentHash(context);
+          scope.observer.emit({
+            event: "model.action_compilation.context.captured",
+            correlation,
+            attributes: { middlewareVersion: scope.actionCompilationRetrieval?.version ?? "fullcatalog-control", role: "action-compilation" },
+            counts: {
+              slots: batch.length,
+              selectedCandidates: retrieval?.diagnostics.selectedCount ?? context.referenceCatalog.candidates.length,
+              visibleCandidates: retrieval?.diagnostics.visibleCount ?? context.referenceCatalog.candidates.length,
+              prunedReferences: retrieval?.diagnostics.prunedReferenceCount ?? 0,
+              anchors: retrieval?.diagnostics.anchorCount ?? 0,
+              batchBudget: retrieval?.diagnostics.batchBudget ?? context.referenceCatalog.candidates.length,
+              passageCacheHits: retrieval?.diagnostics.cache.passageHits ?? 0,
+              passageCacheMisses: retrieval?.diagnostics.cache.passageMisses ?? 0,
+              queryCacheHits: retrieval?.diagnostics.cache.queryHits ?? 0,
+              queryCacheMisses: retrieval?.diagnostics.cache.queryMisses ?? 0,
+              queryBatchSize: retrieval?.diagnostics.cache.queryBatchSize ?? 0,
+            },
+            measurements: {
+              batchShortlistRatio: retrieval?.diagnostics.batchShortlistRatio ?? 1,
+              cacheReadMs: retrieval?.diagnostics.cache.readMs ?? 0,
+              passageEncodeMs: retrieval?.diagnostics.cache.passageEncodeMs ?? 0,
+              queryEncodeMs: retrieval?.diagnostics.cache.queryEncodeMs ?? 0,
+            },
+            hashes: {
+              fullContext: fullContextHash,
+              ...(retrieval ? { modelContext: retrieval.modelContextHash, shortlist: retrieval.shortlistHash } : {}),
+            },
+            payload: fullRuntimePayload(scope.observer, {
+              schemaVersion: 2,
+              sourceExecutionId: scope.correlation?.executionId,
+              sourceInvocationId: identity.modelInvocationId,
+              logicalInvocationId: correlation.logicalInvocationId,
+              role: "action-compilation",
+              slotIndices: batch.map((_, slot) => slot),
+              fullContext: context,
+              stateSnapshot: state,
+              actions: batch.map((entry) => structuredClone(entry.payload.action)),
+              actionIds: batch.map((entry) => entry.payload.action.id),
+              captureAlgorithmRef: scope.executionAlgorithmRef,
+              captureAlgorithmManifestHash: scope.executionAlgorithmRef?.manifestHash,
+              ...(retrieval ? {
+                selectedKeysBySlot: [...retrieval.selectedKeysBySlot.entries()],
+                perSlotSelectedCount: retrieval.diagnostics.perSlotSelectedCount,
+                batchBudget: retrieval.diagnostics.batchBudget,
+                nominalBatchBudget: retrieval.diagnostics.nominalBatchBudget,
+                mandatoryBudgetFloorApplied: retrieval.diagnostics.mandatoryBudgetFloorApplied,
+                batchShortlistRatio: retrieval.diagnostics.batchShortlistRatio,
+                cache: retrieval.diagnostics.cache,
+                ...(retrieval.diagnostics.rootSelection ? { rootSelection: retrieval.diagnostics.rootSelection } : {}),
+              } : {}),
+              fullContextHash,
+              ...(retrieval ? { modelContextHash: retrieval.modelContextHash, shortlistHash: retrieval.shortlistHash } : {}),
+              worldHash: scope.runtimeIdentity?.worldHash,
+              stateHash: contentHash(state),
+              candidateCatalogHash: typeof context.referenceCatalog?.hash === "string" ? context.referenceCatalog.hash : undefined,
+              modelCatalogHash: audit.modelCatalogHash,
+              registrySnapshotHash: audit.registrySnapshotHash,
+              modelId: audit.modelId,
+              promptVersion: audit.promptVersion,
+              profileId: audit.profileId,
+              projectorVersion: ACTION_COMPILATION_PROJECTION,
+              candidateKeyVersion: ACTION_COMPILATION_CANDIDATE_KEY_VERSION,
+              candidateKeyPayloadLength: ACTION_COMPILATION_CANDIDATE_KEY_SUFFIX_LENGTH,
+              symbolRepairPolicyVersion: symbolRepairPolicy?.version ?? DEFAULT_SYMBOL_REPAIR_POLICY.version,
+            }),
+          });
+        }
+      };
       let generated;
       try {
         generated = await provider.generateStructured({
@@ -1075,7 +1114,7 @@ export async function compileActions(
           system: ACTION_COMPILER_PROMPT.system,
           userPrompt: ACTION_COMPILER_PROMPT.userPrompt,
           context: retrieval?.modelContext ?? context,
-          schema: actionCompilationBatchSchema,
+          schema: actionCompilationRequestSchema(batch.length, Object.keys(state.truth.sharedActivityResourcePools).length > 0),
           preprocessOutput: (raw) => preprocessActionCompilationSymbols({
             value: raw,
             resolver: batchActionResolver,
@@ -1083,6 +1122,7 @@ export async function compileActions(
             ...(retrieval ? { allowedCandidateKeysBySlot: retrieval.selectedKeysBySlot } : {}),
           }),
         });
+        captureContext(generated.audit);
         if (retrieval && scope.observer) {
           const outOfShortlistBySlot = generated.value.slots.flatMap((slot) => {
             const selected = new Set(retrieval.selectedKeysBySlot.get(slot.slot) ?? []);
@@ -1101,6 +1141,7 @@ export async function compileActions(
         }
         assertSlotCoverage(batch, generated.value.slots);
       } catch (error) {
+        if (error instanceof ModelOutputError && error.audit) captureContext(error.audit);
         if (isTerminalEagerModelError(error)) throw error;
         const localized = localizedSchemaFailure(error, batch, state, batchActionResolver, retrieval?.selectedKeysBySlot);
         if (localized) {
@@ -1148,6 +1189,14 @@ export async function compileActions(
             localized.rejected.length,
             lineage,
           );
+          scope.observer?.emit({
+            event: "model.action_compilation.slots.validated", correlation,
+            counts: { accepted: localized.accepted.length, rejected: localized.rejected.length },
+            payload: fullRuntimePayload(scope.observer, {
+              accepted: localized.accepted,
+              rejected: localized.rejected.map(({ slot, issues }) => ({ actionId: slot.key, issues })),
+            }),
+          });
           return localized;
         }
         const audit = error && typeof error === "object" && "audit" in error
@@ -1190,7 +1239,9 @@ export async function compileActions(
           const slotActionResolver = batchActionResolver.scopedToSlot(index);
           const allowed = retrieval?.selectedKeysBySlot.get(index);
           if (allowed) validateActionCompilationShortlistMembership({ value: draft, slot: index, allowedCandidateKeys: allowed });
-          selectionsBySlot.set(index, collectActionCompilationSelections(draft, slotActionResolver));
+          const references = collectActionCompilationSelections(draft, slotActionResolver);
+          selectionsBySlot.set(index, references.selections);
+          if (references.issues.length) throw new ActionCompilationValidationError(references.issues);
           const materialized = materializeActionCompilationCandidateKeys({ value: draft, resolver: slotActionResolver });
           const normalized = normalizeModelOutput(materialized.draft, { resolver: slotResolver, dedupeArrays: true });
           modifiedFieldCount += normalized.modifiedFieldCount;
@@ -1205,7 +1256,7 @@ export async function compileActions(
         } catch (error) {
           rejected.push({
             slot: { ...slot, payload: { ...slot.payload, previousOutput: structuredClone(draft) } },
-            issues: actionCompilationSlotIssues(error, batchActionResolver.scopedToSlot(index)),
+            issues: actionCompilationSlotIssues(error, batchActionResolver.scopedToSlot(index), retrieval?.selectedKeysBySlot.get(index)),
           });
         }
       }
@@ -1293,6 +1344,13 @@ export async function compileActions(
           lineage,
         );
       }
+      scope.observer?.emit({
+        event: "model.action_compilation.slots.validated", correlation,
+        counts: { accepted: accepted.length, rejected: rejected.length },
+        payload: fullRuntimePayload(scope.observer, {
+          accepted, rejected: rejected.map(({ slot, issues }) => ({ actionId: slot.key, issues })),
+        }),
+      });
       return { audit: generated.audit, accepted, rejected };
     },
   });

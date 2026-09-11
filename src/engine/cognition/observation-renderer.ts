@@ -42,6 +42,9 @@ import {
 
 const OBSERVATION_PROMPT = promptBundle("observation-renderer");
 
+/** One immutable source/proposal snapshot is shared by all observer slots and repairs. */
+type PreparedObservationInput = ObservationRenderingInput & { candidate: SimulationState };
+
 /** Keep the observation prompt focused on the observer's authorized view and
  * the evidence needed to explain this transition. The full canonical state
  * remains an engine concern; an observer only needs handles for objects it can
@@ -120,12 +123,12 @@ function scopedObservationTruth(
 }
 
 function observationContext(
-  input: ObservationRenderingInput,
+  input: PreparedObservationInput,
   observerIds: readonly string[],
   issues: readonly PromptValidationIssue[],
   scope: Pick<ModelExecutionScope, "workloadId" | "batchId">,
 ) {
-  const candidate = applyTransitionProposal(input.state, input.proposal, input.temporalState);
+  const candidate = input.candidate;
   const broadResolver = createTruthReferenceResolver({
     state: candidate,
     definition: input.definition,
@@ -178,7 +181,9 @@ function observationContext(
   ]);
   allow("law", input.definition.laws.map((law) => law.id));
   allow("world", ["world"]);
-  for (const event of projectedTruth.events) {
+  // Current events retain their provenance even when a cause's contents are
+  // outside this observer's fact view. A handle does not grant fact access.
+  for (const event of input.proposal.events) {
     for (const cause of event.causes) {
       const kind = cause.kind;
       const ids = allowedByKind.get(kind) ?? new Set<string>();
@@ -290,11 +295,11 @@ function observationContext(
 }
 
 function materializeModelObservationDraft(
-  input: ObservationRenderingInput,
+  input: PreparedObservationInput,
   observerId: string,
   draft: ModelObservationRenderDraft,
 ): ObservationRenderDraft {
-  const candidate = applyTransitionProposal(input.state, input.proposal, input.temporalState);
+  const candidate = input.candidate;
   const observer = candidate.agents[observerId];
   if (!observer) throw new Error(`observation slot references unknown Agent ${observerId}`);
   const truthResolver = createTruthReferenceResolver({
@@ -476,7 +481,7 @@ export function normalizeObservationLocalReferences(
 }
 
 function materializeObserver(
-  input: ObservationRenderingInput,
+  input: PreparedObservationInput,
   observerId: string,
   draft: ModelObservationRenderDraft,
   slotKey: string,
@@ -485,7 +490,7 @@ function materializeObserver(
   const internalDraft = materializeModelObservationDraft(input, observerId, draft);
   const eventIds = new Set(input.proposal.events.map((event) => event.id));
   const eventNormalized = normalizeObservationSourceEventIds([internalDraft], eventIds);
-  const candidate = applyTransitionProposal(input.state, input.proposal, input.temporalState);
+  const candidate = input.candidate;
   const localNormalized = normalizeObservationLocalReferences(
     candidate,
     [observerId],
@@ -536,9 +541,40 @@ function observationIssueClass(error: unknown): SemanticRepairIssueClass {
   return "structure";
 }
 
+/** Spec 0082 admits a limited progress view, never an interpretation of outcome prose. */
+function pendingObservation(input: PreparedObservationInput, observerId: string): ModelObservationRenderDraft | undefined {
+  if (input.feedbackByObserver?.[observerId]?.length || input.proposal.events.length || input.proposal.decisionRequests.length) return;
+  const operations = input.proposal.operations;
+  if (operations.length !== 1 || operations[0].kind !== "advance_time" || operations[0].seconds <= 0) return;
+  const { elapsedSeconds: sourceSeconds, activities: sourceActivities, ...sourceWorld } = input.state.truth;
+  const { elapsedSeconds: candidateSeconds, activities, ...candidateWorld } = input.candidate.truth;
+  if (candidateSeconds - sourceSeconds !== operations[0].seconds || contentHash(sourceWorld) !== contentHash(candidateWorld)) return;
+  const actions = input.actions.filter(action => action.actorId === observerId);
+  if (actions.length !== 1) return;
+  const action = actions[0]!;
+  const outcomes = input.proposal.outcomes.filter(outcome => outcome.proposalId === action.id);
+  if (outcomes.length !== 1 || outcomes[0]!.status !== "continuing" || outcomes[0]!.knownAlternatives.length) return;
+  const matches = Object.values(activities).filter(activity => activity.sourceActionId === action.id);
+  if (matches.length !== 1) return;
+  const activity = matches[0]!;
+  if (activity.actorId !== observerId || activity.status !== "active" || contentHash(activity.sourceAction) !== contentHash(action) ||
+    activity.stageIndex !== 0 || activity.plan.stages.length || activity.nextBoundaryAtSeconds === null ||
+    activity.nextBoundaryAtSeconds <= candidateSeconds || activity.startedAtSeconds > candidateSeconds ||
+    activity.completionAtSeconds !== null && activity.completionAtSeconds <= candidateSeconds ||
+    activity.progress !== null && activity.progress.current >= activity.progress.target) return;
+  const sourceActivity = sourceActivities[activity.id];
+  const intervalBoundary = sourceActivity && "plan" in sourceActivity
+    ? sourceActivity.nextBoundaryAtSeconds : activity.plan.startsAtSeconds + activity.plan.checkpointSeconds;
+  if (intervalBoundary === null || intervalBoundary <= candidateSeconds) return;
+  return {
+    summary: `你的活动仍在进行。本轮世界时间推进了 ${operations[0].seconds} 秒。\n你的原始行动意图（不代表已经实现）：${JSON.stringify(action.rawText)}`,
+    introductions: [], apparentClaims: [], sourceEventRefs: [],
+  };
+}
+
 async function renderObserver(
   provider: StructuredModelProvider,
-  input: ObservationRenderingInput,
+  input: PreparedObservationInput,
   observerId: string,
   slot: number,
   scope: ModelExecutionScope,
@@ -547,6 +583,7 @@ async function renderObserver(
   const owner = `${input.identityOwner}:observer-${observerId}`;
   const profile = provider.catalog.profile(input.definition.modelProfiles.observation);
   try {
+    let acceptedPacket: ObservationPacket | undefined;
     const rendered = await runSemanticRepairLoop({
       role: "observation-renderer",
       repairScope: "observer",
@@ -562,7 +599,12 @@ async function renderObserver(
           ...(issue.originalValue !== undefined ? { originalValue: structuredClone(issue.originalValue) } : {}),
           ...(issue.allowedHandles ? { allowedHandles: [...issue.allowedHandles] } : {}),
         }));
-        const context = observationContext(input, [observerId], issues, scope);
+        const context = observationContext(input, [observerId], [
+          ...(input.feedbackByObserver?.[observerId] ?? []).map(message => ({
+            code: "causal_observation_rejected", path: [], message, class: "semantic" as const,
+          })),
+          ...issues,
+        ], scope);
         const bytes = requestBytes(context);
         if (bytes > profile.max_input_bytes) {
           throw new ContextLimitExceededError(
@@ -584,6 +626,7 @@ async function renderObserver(
           workloadId: scope.workloadId,
           batchId: scope.batchId,
           abortSignal: scope.abortSignal,
+          cancelPendingSignal: scope.cancelPendingSignal,
           correlation,
           observer: scope.observer,
           ...identity,
@@ -600,7 +643,8 @@ async function renderObserver(
         return generated;
       },
       validate: (draft) => {
-        materializeObserver(input, observerId, draft, `${slot}`, scope);
+        acceptedPacket = undefined;
+        acceptedPacket = materializeObserver(input, observerId, draft, `${slot}`, scope);
       },
       classify: (error) => [semanticIssue(
         "invalid_observation",
@@ -629,9 +673,10 @@ async function renderObserver(
         });
       },
     });
+    if (!acceptedPacket) throw new Error("accepted observation has no validated packet");
     setModelInvocationOutcome(rendered.audit, "accepted");
     return {
-      packet: materializeObserver(input, observerId, rendered.value, `${slot}`, scope),
+      packet: acceptedPacket,
       audit: rendered.audit,
       calls: rendered.attempts,
     };
@@ -670,6 +715,7 @@ export class ObservationRenderer {
   constructor(
     private readonly provider: StructuredModelProvider,
     private readonly repairAttempts = 2,
+    private readonly sourceBoundPending = false,
   ) {}
 
   async render(input: ObservationRenderingInput, scope: ModelExecutionScope): Promise<{
@@ -680,20 +726,27 @@ export class ObservationRenderer {
     if (new Set(input.observerIds).size !== input.observerIds.length) {
       throw new Error("observation rendering requires unique observer ids");
     }
-    const rendered = await Promise.all(input.observerIds.map((observerId, slot) =>
-      renderObserver(this.provider, input, observerId, slot, scope, this.repairAttempts)));
+    if (input.observerIds.length === 0) return { packets: [], modelAudits: [], batchCount: 0 };
+    const snapshot = structuredClone(input);
+    const prepared: PreparedObservationInput = { ...snapshot,
+      candidate: applyTransitionProposal(snapshot.state, snapshot.proposal, snapshot.temporalState) };
+    const rendered = await Promise.all(snapshot.observerIds.map(async (observerId, slot) => {
+      const projected = this.sourceBoundPending ? pendingObservation(prepared, observerId) : undefined;
+      if (projected) return { packet: materializeObserver(prepared, observerId, projected, `${slot}.pending`, scope), audit: undefined };
+      return renderObserver(this.provider, prepared, observerId, slot, scope, this.repairAttempts);
+    }));
     const packets = rendered.map((entry) => entry.packet);
-    const expected = [...input.observerIds].sort();
+    const expected = [...snapshot.observerIds].sort();
     const actual = packets.map((packet) => packet.observerId).sort();
     if (expected.length !== actual.length || expected.some((agentId, index) => agentId !== actual[index])) {
       throw new Error("observation rendering did not cover every observer exactly once");
     }
     return {
       packets,
-      modelAudits: rendered.map((entry) => entry.audit),
+      modelAudits: rendered.flatMap((entry) => entry.audit ? [entry.audit] : []),
       // A TruthBatchCoordinator shares one physical audit across all slots.
       // Count invocation identities rather than logical observer slots.
-      batchCount: new Set(rendered.flatMap((entry) => entry.audit.invocations.map((invocation) => invocation.id))).size,
+      batchCount: new Set(rendered.flatMap((entry) => entry.audit?.invocations.map((invocation) => invocation.id) ?? [])).size,
     };
   }
 }

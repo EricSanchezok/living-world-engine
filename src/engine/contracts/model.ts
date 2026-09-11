@@ -1131,6 +1131,14 @@ export interface ActionCompilationReferenceAudit {
   }>;
 }
 
+export interface ModelJsonRecoveryEvidence {
+  policy: "unmatched-closers-v1";
+  sourceHash: string;
+  recoveredTextHash: string;
+  /** Original response string offsets in UTF-16 code units. */
+  removed: Array<{ offset: number; character: "}" | "]" }>;
+}
+
 export interface ModelInvocationAudit {
   id: string;
   ordinal: number;
@@ -1152,6 +1160,7 @@ export interface ModelInvocationAudit {
   referenceCatalogHash: string;
   rawOutputHash: string | null;
   normalizedOutputHash: string | null;
+  jsonRecoveryEvidence?: ModelJsonRecoveryEvidence;
 }
 
 export interface ModelExecutionAudit {

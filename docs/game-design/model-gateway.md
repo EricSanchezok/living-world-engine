@@ -49,9 +49,15 @@ model_overrides: {}
 该值不进入模型审计或持久化状态；未设置时使用默认 Node 网络。当前
 `qwen-campus` 使用 `QWEN_LOCAL_ADDRESS` 作为本地 TUN 绕行开关。
 
+Accounts can independently opt into `network.dns_over_https_url`, an HTTPS endpoint supporting Cloudflare/Google DNS JSON. The account transport resolves IPv4 addresses with single-flight requests and the minimum alias/address TTL, while preserving the provider URL, Host and TLS verification. Only the DNS hostname goes to the resolver. Failed or mismatched answers fail closed; provider redirects and cross-origin use are rejected. Existing sockets may remain open after a DNS TTL expires; new connections refresh expired answers. This option does not retry model requests or change model billing evidence.
+
+`network.socket_connect_attempts` accepts one or two and defaults to one. Selecting two enables [bounded socket establishment](../decisions/0111-bounded-socket-establishment.md) before HTTP handoff; the workbench and experiment runners use the same catalog setting. Failures after handoff remain subject to the separate model HTTP retry and billing policies.
+
 套餐账户表示引擎具备对应的传输能力，不代表扩大厂商许可的使用范围。部署者仍须遵守各产品当时的用途与工具限制；例如智谱区分通用 API 与 Coding 端点，MiniMax 为 Token Plan 单独签发 Key，Kimi 要求 Coding Key 与开放平台 URL 对应，MiMo 也将 Token Plan Key、端点和适用场景与按量 API 分开。具体约束以[智谱 Coding Plan](https://docs.bigmodel.cn/cn/coding-plan/quick-start)、[MiniMax Token Plan](https://platform.minimaxi.com/docs/token-plan/quickstart)、[Kimi Code FAQ](https://www.kimi.ai/help/kimi-code/faq)和[MiMo Token Plan](https://mimo.mi.com/docs/en-US/tokenplan/Token%20Plan/quick-access)的当前官方说明为准；引擎不伪装客户端，也不绕过这些限制。
 
 Profile 的 `allowed_roles` 覆盖 Truth、temporal planner、action grounding、Observation renderer、causal verifier、Arrival Generator 和 AgentMind 系列角色，每次调用按精确角色校验。`max_input_bytes` 是完整序列化模型请求的硬上限，也是 Observation 分批的 Context 预算。推理字段使用统一语义：`auto` 表示不发送该参数；显式 thinking、effort、reasoning budget、sampling 或其他控制只有在快照声明支持时才可进入 transport，不支持时在请求前失败。
+
+Profiles may explicitly select `response_transport: deepseek-sse-v1` for DeepSeek OpenAI Chat JSON-object generation. The SDK requests native SSE and usage while preserving the complete prompts, schema and generation settings. Runtime accepts only a complete stream with stable identity, terminal finish reason, reconciled usage and DONE; partial text never reaches canonical validation. The default remains non-streaming. See [the streamed response contract](../specs/0091-complete-streamed-json-responses.md).
 
 ## 动态模型目录
 

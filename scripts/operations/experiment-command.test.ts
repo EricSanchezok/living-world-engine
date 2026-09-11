@@ -3,7 +3,8 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { DEFAULT_EAGER_REFERENCE_CONFIG } from "../../src/engine/algorithms/eager-reference/eager-reference";
-import { DEFAULT_ALGORITHM_REF, eagerReferenceAlgorithmRef, registerBuiltinAlgorithms } from "../../src/engine/algorithms/registry";
+import { eagerReferenceAlgorithmRef, FULL_CATALOG_ALGORITHM_REF, registerBuiltinAlgorithms } from "../../src/engine/algorithms/registry";
+import { MULTILINGUAL_E5_BASE_ASSET } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/model-assets";
 import { AlgorithmExperimentRegistry, defineAlgorithmExperimentManifest } from "../../src/engine/runtime/experiments";
 import { WorldExecutionAlgorithmRegistry } from "../../src/engine/runtime/execution";
 import { contentHash } from "../../src/engine/models/model-audit";
@@ -24,13 +25,13 @@ describe("experiment report command", () => {
       const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 47, modelCatalog: provider.catalog });
       const algorithms = registerBuiltinAlgorithms(new WorldExecutionAlgorithmRegistry());
       const experiments = new AlgorithmExperimentRegistry(algorithms, database);
-      const encoderFingerprint = `sha256:${"3".repeat(64)}`;
+      const encoderFingerprint = MULTILINGUAL_E5_BASE_ASSET.encoderFingerprint;
       const treatment = eagerReferenceAlgorithmRef({
         ...DEFAULT_EAGER_REFERENCE_CONFIG,
-        candidateRetrieval: { mode: "runtime", runtimeVersion: "action-compilation-retrieval-runtime-v4", encoderFingerprint, budgetRatio: 0.2 },
+        candidateRetrieval: { mode: "runtime", runtimeVersion: "action-compilation-retrieval-runtime-v6", encoderFingerprint, budgetRatio: 0.2 },
       });
       const retrievalRuntime = {
-        version: "action-compilation-retrieval-runtime-v4",
+        version: "action-compilation-retrieval-runtime-v6",
         role: "candidate-selection" as const,
         async retrieveBatch(input: { fullContext: Readonly<Record<string, unknown>>; slotIndices: readonly number[] }) {
           const catalog = input.fullContext.referenceCatalog as { candidates: Array<{ candidateKey: string; scope?: { kind?: string; slot?: number } }> };
@@ -53,7 +54,16 @@ describe("experiment report command", () => {
               anchorCount: 0,
               budgetExceeded: false as const,
               perSlotSelectedCount: Object.fromEntries([...selectedKeysBySlot].map(([slot, keys]) => [String(slot), keys.length])),
-              cache: { passageHits: 0, passageMisses: 0, queryHits: 0, queryMisses: 0, readMs: 0, queryEncodeMs: 0 },
+            cache: {
+              passageHits: 0,
+              passageMisses: 0,
+              queryHits: 0,
+              queryMisses: 0,
+              readMs: 0,
+              passageEncodeMs: 0,
+              queryEncodeMs: 0,
+              queryBatchSize: 0,
+            },
             },
           };
         },
@@ -64,7 +74,7 @@ describe("experiment report command", () => {
         salt: "report-fixture",
         eligibility: { worldContentHashes: [definition.contentHash] },
         variants: [
-          { id: "baseline-a", allocationBasisPoints: 7_000, algorithmRef: DEFAULT_ALGORITHM_REF },
+          { id: "baseline-a", allocationBasisPoints: 7_000, algorithmRef: FULL_CATALOG_ALGORITHM_REF },
           { id: "candidate-b", allocationBasisPoints: 3_000, algorithmRef: treatment },
         ],
         activationEvidence: { artifactHash: `sha256:${"1".repeat(64)}`, verifier: "fixture" },
@@ -77,7 +87,7 @@ describe("experiment report command", () => {
         const variant = experiments.enrollment({
           instanceId: id,
           worldContentHash: definition.contentHash,
-          defaultAlgorithmRef: DEFAULT_ALGORITHM_REF,
+          defaultAlgorithmRef: FULL_CATALOG_ALGORITHM_REF,
           explicitExecutionTuning: false,
         }).enrollment!.variantId;
         ids.set(variant, ids.get(variant) ?? id);
@@ -93,8 +103,10 @@ describe("experiment report command", () => {
           provider,
           algorithmRegistry: algorithms,
           experimentRegistry: experiments,
-          actionCompilationRetrievalRuntimes: new Map([[treatment.manifestHash, retrievalRuntime]]),
-          experimentVariantPreflights: new Map([[treatment.manifestHash, async () => undefined]]),
+          actionCompilationRetrievalProvider: {
+            runtime: (ref) => ref.manifestHash === treatment.manifestHash ? retrievalRuntime : undefined,
+            preflight: async () => undefined,
+          },
           idFactory: () => ordinal++ === 0 ? instanceId : `${instanceId}-generated-${ordinal}`,
         });
         const created = await host.createInstance({ worldId: definition.id, start: { kind: "observer" } });

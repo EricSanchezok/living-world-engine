@@ -3,6 +3,9 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { DeterministicModelProvider } from "../../../engine/testing/model-provider";
+import { FULL_CATALOG_ALGORITHM_REF } from "../../../engine/algorithms/registry";
+import { ACTION_COMPILATION_RETRIEVAL_RUNTIME_VERSION } from "../../../engine/algorithms/eager-reference/candidate-retrieval/runtime";
+import { contentHash } from "../../../engine/models/model-audit";
 import type { ModelRegistryDiagnostics } from "../../../engine/models/model-provider";
 import { loadWorldScript } from "../../../script/world-loader";
 import { MemoryWorldRepository } from "../../../script/world-repository";
@@ -69,6 +72,53 @@ beforeEach(() => {
     store: database,
     ledger: database,
     provider,
+    defaultAlgorithmRef: FULL_CATALOG_ALGORITHM_REF,
+    actionCompilationRetrievalProvider: {
+      runtime: (ref) => ref.children.actionCompilation?.children.candidateSelection?.id === "relational-rrf"
+        ? {
+            role: "candidate-selection" as const,
+            version: ACTION_COMPILATION_RETRIEVAL_RUNTIME_VERSION,
+            async retrieveBatch({ fullContext, slotIndices }) {
+              const candidates = (fullContext.referenceCatalog as {
+                candidates: Array<{ candidateKey: string; scope?: { kind?: string; slot?: number } }>;
+              }).candidates;
+              const selectedKeysBySlot = new Map(slotIndices.map((slot) => [slot, candidates
+                .filter((candidate) => candidate.scope?.kind !== "slot" || candidate.scope.slot === slot)
+                .map((candidate) => candidate.candidateKey)]));
+              const modelContext = structuredClone(fullContext) as Record<string, unknown>;
+              return {
+                modelContext,
+                selectedKeysBySlot,
+                fullContextHash: contentHash(fullContext),
+                modelContextHash: contentHash(modelContext),
+                shortlistHash: contentHash([...selectedKeysBySlot]),
+                diagnostics: {
+                  selectedCount: candidates.length,
+                  visibleCount: candidates.length,
+                  batchBudget: candidates.length,
+                  batchShortlistRatio: 1,
+                  prunedReferenceCount: 0,
+                  anchorCount: 0,
+                  budgetExceeded: false as const,
+                  perSlotSelectedCount: Object.fromEntries([...selectedKeysBySlot]
+                    .map(([slot, keys]) => [String(slot), keys.length])),
+                  cache: {
+                    passageHits: 0,
+                    passageMisses: 0,
+                    queryHits: 0,
+                    queryMisses: 0,
+                    readMs: 0,
+                    passageEncodeMs: 0,
+                    queryEncodeMs: 0,
+                    queryBatchSize: 0,
+                  },
+                },
+              };
+            },
+          }
+        : undefined,
+      preflight: async () => undefined,
+    },
   }));
 });
 
@@ -125,7 +175,14 @@ describe("World Instance Route Handlers", () => {
         actionCompilation: {
           children: {
             batching: { config: { maxSlots: 3 } },
-            candidateSelection: { id: "full-catalog", role: "candidate-selection" },
+            candidateSelection: {
+              id: "relational-rrf",
+              role: "candidate-selection",
+              children: {
+                ranking: { id: "typed-channel-rrf" },
+                allocation: { id: "coverage-aware-joint-budget" },
+              },
+            },
           },
         },
       },

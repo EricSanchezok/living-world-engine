@@ -3,6 +3,7 @@ import path from "node:path";
 import {
   createEagerReferenceManifest,
   DEFAULT_EAGER_REFERENCE_CONFIG,
+  FULL_CATALOG_EAGER_REFERENCE_CONFIG,
   EagerReferenceAlgorithm,
 } from "../../src/engine/algorithms/eager-reference/eager-reference";
 import { historyReplayBaseHash } from "../../src/engine/runtime/history-replay";
@@ -441,7 +442,7 @@ export async function runDeterministicExperiment(options: ExperimentOptions): Pr
         reactionMaxSlots: DEFAULT_EAGER_REFERENCE_CONFIG.reactionMaxSlots,
         groundingMaxSlots: DEFAULT_EAGER_REFERENCE_CONFIG.groundingMaxSlots,
         truthBatchMaxSlots,
-        candidateRetrieval: DEFAULT_EAGER_REFERENCE_CONFIG.candidateRetrieval,
+        candidateRetrieval: FULL_CATALOG_EAGER_REFERENCE_CONFIG.candidateRetrieval,
       };
       const algorithmManifest = createEagerReferenceManifest(algorithmConfig);
       const definition = scaledDefinition(fixture, agentCount);

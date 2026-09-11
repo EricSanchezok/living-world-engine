@@ -2,7 +2,7 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { hashLocalModelDirectory, loadLocalMultilingualE5Small } from "../../../algorithms/eager-reference/candidate-retrieval/local-encoder";
+import { hashLocalModelDirectory, loadLocalEncoder } from "../../../algorithms/eager-reference/candidate-retrieval/local-encoder";
 
 const temporaryDirectories: string[] = [];
 
@@ -38,7 +38,7 @@ describe("local multilingual-e5-small asset handling", () => {
   });
 
   it("fails closed when the local model directory is missing", async () => {
-    await expect(loadLocalMultilingualE5Small({ modelDirectory: "/tmp/lwe-model-does-not-exist" }))
+    await expect(loadLocalEncoder({ modelDirectory: "/tmp/lwe-model-does-not-exist" }))
       .rejects.toThrow(/model directory is missing/u);
   });
 });

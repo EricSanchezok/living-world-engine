@@ -26,8 +26,11 @@ function object(value: unknown): Record<string, unknown> | undefined {
 function runtimeEncoderFingerprints(manifest: AlgorithmExperimentManifest): readonly string[] {
   return manifest.variants.flatMap(({ algorithmRef }) => {
     const selection = algorithmRef.children.actionCompilation?.children.candidateSelection;
-    return selection?.id === "graph-hybrid-e5" && typeof selection.config.encoderFingerprint === "string"
-      ? [selection.config.encoderFingerprint]
+    const fingerprint = selection?.id === "relational-rrf"
+      ? selection.children.ranking?.config.encoderFingerprint
+      : undefined;
+    return typeof fingerprint === "string"
+      ? [fingerprint]
       : [];
   });
 }

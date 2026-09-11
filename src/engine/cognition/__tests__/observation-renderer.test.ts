@@ -1,12 +1,185 @@
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import type { AgentActionProposal, TransitionProposal } from "../../contracts/model";
+import type { ObservationRenderingInput } from "../../algorithms/roles";
 import { ObservationRenderer, normalizeObservationLocalReferences } from "../observation-renderer";
 import { ScriptedModelProvider, createTestModelCatalog } from "../../testing/model-provider";
 import { loadWorldScript } from "../../../script/world-loader";
 import { validateAlgorithmTelemetryEvent, type RuntimeEventInput, type RuntimeObserver } from "../../runtime/observability";
+import { createActivity, materializeTemporalPlan } from "../../mechanics/temporal";
+import { observationEvidenceProvider } from "../../mechanics/observation-evidence-layout";
+import { TruthBatchCoordinator, TRUTH_BATCH_REQUEST_CONTRACT } from "../../mechanics/truth-batch-provider";
+
+function pendingInput(): ObservationRenderingInput {
+  const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), {
+    seed: 4, modelCatalog: createTestModelCatalog(),
+  });
+  const state = structuredClone(definition.initialState);
+  const action: AgentActionProposal = { id: `rt:action:${"0".repeat(64)}`, actorId: "player", baseRevision: state.revision,
+    rawText: "与守门人讨论开门；先不付钱，也不要替对方答应。", goal: "协商通行", means: null, targetIds: [] };
+  state.truth.mechanics.temporalProfiles.pending = { id: "pending", name: "Pending", kind: "fixed", durationSeconds: 60, checkpointSeconds: 30,
+    selection: { semanticTags: ["pending"], evidenceRequirement: "none" }, interruptible: true, reactionFallback: "continue_if_valid", resourceClaims: [] };
+  const plan = materializeTemporalPlan({ id: `rt:temporal-plan:${"0".repeat(64)}`, actionId: action.id, actorId: action.actorId,
+    rawText: action.rawText, startsAtSeconds: 0,
+    draft: { profileId: "pending", basis: { kind: "profile" }, description: action.rawText,
+      continuationAssertions: [], causes: [{ kind: "action", id: action.id }] },
+    profiles: state.truth.mechanics.temporalProfiles,
+  });
+  const activity = createActivity({ id: `rt:activity:${"0".repeat(64)}`, plan, sourceAction: action });
+  return { definition, state, actions: [action], observerIds: ["player"], identityOwner: "pending-test",
+    temporalState: { activities: { [activity.id]: activity }, timers: structuredClone(state.truth.timers) },
+    proposal: { baseRevision: state.revision, operations: [{ kind: "advance_time", seconds: 1,
+      causes: [{ kind: "action", id: action.id }], assertions: [{ kind: "elapsed_seconds_compare", operator: "eq", value: 0 }] }],
+    events: [], mechanicInvocations: [], observations: [], decisionRequests: [], outcomes: [{ id: `rt:outcome:${"0".repeat(64)}`,
+      proposalId: action.id, status: "continuing", summary: "The keeper agreed and the gate opened.",
+      causeRefs: [{ kind: "action", id: action.id }], assertions: [{ kind: "elapsed_seconds_compare", operator: "eq", value: 1 }], knownAlternatives: [] }] },
+  };
+}
 
 describe("ObservationRenderer", () => {
+  it.each(["private", "agents"] as const)("retains event provenance without granting %s fact access", async access => {
+    const input = pendingInput();
+    input.observerIds = ["player", "keeper"];
+    const fact = input.state.truth.facts["key-authenticity"]!;
+    fact.access = access === "private" ? { kind: "private" } : { kind: "agents", agentIds: ["keeper"] };
+    input.state.truth.facts["unrelated-private-fact"] = { ...structuredClone(fact),
+      id: "unrelated-private-fact", access: { kind: "private" } };
+    const event = { id: `rt:event:${"1".repeat(64)}`, step: 1, description: "The keeper examines the key.",
+      impact: "ordinary" as const, causes: [{ kind: "fact" as const, id: fact.id }],
+      assertions: [{ kind: "elapsed_seconds_compare" as const, operator: "eq" as const, value: 1 }] };
+    input.proposal.events = [event];
+    const before = structuredClone(input);
+    const provider = new ScriptedModelProvider(request => {
+      const context = request.context as { referenceCatalog: { candidates: Array<{ handle: string }> };
+        state: { canonicalTruth: { facts: Record<string, unknown> };
+          currentEvents: Array<{ eventRef: string; causes: Array<{ kind: string; ref: string }> }>;
+          observationSlots: Array<{ observer: { agentRef: string } }> } };
+      const state = context.state;
+      const owner = state.observationSlots[0]!.observer.agentRef === "ref:agent:keeper";
+      expect(state.currentEvents[0]!.causes).toEqual([{ kind: "fact", ref: "ref:fact:key-authenticity" }]);
+      expect(context.referenceCatalog.candidates.some(row => row.handle === "ref:fact:key-authenticity")).toBe(true);
+      expect(context.referenceCatalog.candidates.some(row => row.handle === "ref:fact:unrelated-private-fact")).toBe(false);
+      expect(Object.hasOwn(state.canonicalTruth.facts, "ref:fact:key-authenticity")).toBe(access === "agents" && owner);
+      return { summary: "No new information is confirmed.", introductions: [], apparentClaims: [], sourceEventRefs: [] };
+    }, createTestModelCatalog(), false);
+    const result = await new ObservationRenderer(provider).render(input, { workloadId: "event-provenance", batchId: access,
+      runtimeIdentity: { worldHash: input.state.worldHash, revision: input.state.revision } });
+    expect(result.packets.map(packet => packet.observerId)).toEqual(["player", "keeper"]);
+    expect(provider.requests).toHaveLength(2);
+    expect(input).toEqual(before);
+  });
+
+  it("rejects a nonexistent event cause before requesting an observation", async () => {
+    const input = pendingInput();
+    input.proposal.events = [{ id: `rt:event:${"2".repeat(64)}`, step: 1, description: "Unsupported event.",
+      impact: "ordinary", causes: [{ kind: "fact", id: "nonexistent-fact" }],
+      assertions: [{ kind: "elapsed_seconds_compare", operator: "eq", value: 1 }] }];
+    const provider = new ScriptedModelProvider(() => { throw new Error("must not dispatch"); }, createTestModelCatalog(), false);
+    await expect(new ObservationRenderer(provider, 0).render(input, { workloadId: "event-provenance", batchId: "missing",
+      runtimeIdentity: { worldHash: input.state.worldHash, revision: input.state.revision } })).rejects.toThrow("No fact candidate");
+    expect(provider.requests).toHaveLength(0);
+  });
+
+  it("preserves an explicitly unresolved perception through the loaded-world materializer", async () => {
+    const input = pendingInput();
+    input.feedbackByObserver = { player: ["Retain the unresolved proposition explicitly."] };
+    const provider = new ScriptedModelProvider(request => {
+      const context = request.context as { state: { observationSlots: Array<{ observer: { selfEntityRef: string;
+        localEntities: Array<{ ref: string; canonicalEntityRefs: string[] }> } }> } };
+      const observer = context.state.observationSlots[0]!.observer;
+      const subjectRef = observer.localEntities.find(entity => entity.canonicalEntityRefs.includes(observer.selfEntityRef))!.ref;
+      return { summary: "还不能确认守门人是否同意。", introductions: [], sourceEventRefs: [],
+        apparentClaims: [{ epistemicStatus: "unconfirmed", subjectRef, predicate: "passage-agreed", description: "守门人是否同意放行。" }] };
+    }, createTestModelCatalog(), false);
+    const renderer = new ObservationRenderer(new TruthBatchCoordinator(observationEvidenceProvider(provider, true), 12, 0,
+      "shared-json-v2", TRUTH_BATCH_REQUEST_CONTRACT, "tail-v1"), 0, true);
+    const before = structuredClone(input);
+    const result = await renderer.render(input, { workloadId: "pending-world", batchId: "unconfirmed",
+      runtimeIdentity: { worldHash: input.state.worldHash, revision: input.state.revision } });
+    expect(provider.requests).toHaveLength(1);
+    expect(result.packets[0]!.apparentClaims[0]).toMatchObject({ predicate: "passage-agreed",
+      value: { kind: "text", value: "尚未确认：守门人是否同意放行。" }, description: "尚未确认：守门人是否同意放行。" });
+    expect(input).toEqual(before);
+  });
+
+  it("projects only the owner's original pending intent without treating outcome narration as an event", async () => {
+    const input = pendingInput();
+    const provider = new ScriptedModelProvider(() => ({ summary: "Model observation", introductions: [], apparentClaims: [], sourceEventRefs: [] }), createTestModelCatalog(), false);
+    const scope = { workloadId: "pending-world", batchId: "pending-step", runtimeIdentity: { worldHash: input.state.worldHash, revision: input.state.revision } };
+    const baseline = await new ObservationRenderer(provider).render(input, scope);
+    expect(provider.requests).toHaveLength(1);
+    const before = structuredClone(input);
+    const projected = await new ObservationRenderer(provider, 2, true).render(input, scope);
+    expect(provider.requests).toHaveLength(1);
+    expect(projected.modelAudits).toEqual([]);
+    expect(projected.batchCount).toBe(0);
+    expect(projected.packets[0]).toMatchObject({ observerId: "player", apparentClaims: [], introductions: [], sourceEventIds: [] });
+    expect(projected.packets[0]!.summary).toContain(JSON.stringify(input.actions[0]!.rawText));
+    expect(projected.packets[0]!.summary).not.toContain("The keeper agreed");
+    expect(baseline.packets[0]!.summary).toBe("Model observation");
+    expect(input).toEqual(before);
+  });
+
+  it.each(["due", "owner", "source", "paused", "event", "write", "repair"] as const)("retains model observation for the %s boundary", async kind => {
+    const input = pendingInput();
+    const activity = structuredClone(Object.values(input.temporalState!.activities)[0]!);
+    if (kind === "due" && "plan" in activity) {
+      activity.nextBoundaryAtSeconds = 60;
+      input.proposal.operations[0] = { ...input.proposal.operations[0]!, kind: "advance_time", seconds: 30 };
+      input.proposal.outcomes[0]!.assertions = [{ kind: "elapsed_seconds_compare", operator: "eq", value: 30 }];
+    }
+    if (kind === "owner") activity.actorId = "keeper";
+    if (kind === "source") input.actions[0]!.rawText = "A different intent";
+    if (kind === "paused" && "plan" in activity) { activity.status = "paused"; activity.nextBoundaryAtSeconds = null; }
+    input.temporalState = { ...input.temporalState!, activities: { [activity.id]: activity } };
+    if (kind === "event") input.proposal.events.push({ id: `rt:event:${"0".repeat(64)}`, step: 1, description: "A sound is heard", impact: "ordinary",
+      causes: [{ kind: "action", id: input.actions[0]!.id }], assertions: [{ kind: "elapsed_seconds_compare", operator: "eq", value: 1 }] });
+    if (kind === "write") input.proposal.operations.push({ kind: "place_entity", entityId: "key", placementId: "player",
+      causes: [{ kind: "action", id: input.actions[0]!.id }], assertions: [{ kind: "elapsed_seconds_compare", operator: "eq", value: 0 }] });
+    if (kind === "repair") input.feedbackByObserver = { player: ["An authorized perception is missing"] };
+    const provider = new ScriptedModelProvider(() => ({ summary: "A model observation is required.", introductions: [], apparentClaims: [], sourceEventRefs: [] }), createTestModelCatalog(), false);
+    const rendered = new ObservationRenderer(provider, 2, true).render(input, { workloadId: "pending-world", batchId: `pending-${kind}`,
+      runtimeIdentity: { worldHash: input.state.worldHash, revision: input.state.revision } });
+    if (kind === "owner") {
+      await expect(rendered).rejects.toThrow("invalid activity");
+      expect(provider.requests).toHaveLength(0);
+      return;
+    }
+    await rendered;
+    expect(provider.requests).toHaveLength(1);
+  });
+
+  it("keeps observer coverage, action text and candidate state fixed across an in-flight repair", async () => {
+    const catalog = createTestModelCatalog();
+    let calls = 0;
+    const provider = new ScriptedModelProvider(() => {
+      if (calls++ === 0) {
+        input.state.truth.elapsedSeconds = 100;
+        input.actions[0]!.rawText = "A different action supplied after dispatch";
+        input.observerIds = ["player", "keeper"];
+        return {};
+      }
+      return { summary: "The surroundings remain visible.", introductions: [], apparentClaims: [], sourceEventRefs: [] };
+    }, catalog, false);
+    const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 4, modelCatalog: catalog });
+    const state = structuredClone(definition.initialState);
+    const input: ObservationRenderingInput = { definition, state, observerIds: ["player"], identityOwner: "fixed-observation",
+      actions: [{ id: "fixed-action", actorId: "player", baseRevision: state.revision,
+        rawText: "Observe the courtyard", goal: "Look around", means: null, targetIds: [] }],
+      proposal: { baseRevision: state.revision, outcomes: [], mechanicInvocations: [], events: [], observations: [], decisionRequests: [],
+        operations: [{ kind: "advance_time", seconds: 1, causes: [{ kind: "action", id: "fixed-action" }],
+          assertions: [{ kind: "elapsed_seconds_compare", operator: "eq", value: state.truth.elapsedSeconds }] }] },
+    };
+    const result = await new ObservationRenderer(provider).render(input, {
+      workloadId: "fixed-world", batchId: "fixed-step", runtimeIdentity: { worldHash: state.worldHash, revision: state.revision },
+    });
+    expect(result.packets.map(packet => packet.observerId)).toEqual(["player"]);
+    expect(provider.requests).toHaveLength(2);
+    for (const request of provider.requests) expect(request.context).toMatchObject({ state: {
+      canonicalTruth: { elapsedSeconds: 1 }, actionSet: { assigned: [{ rawText: "Observe the courtyard" }] },
+    } });
+  });
+
   it("reuses an observer's existing local alias for a known canonical Entity", () => {
     const catalog = createTestModelCatalog();
     const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), {
@@ -65,7 +238,9 @@ describe("ObservationRenderer", () => {
         causes: [{ kind: "action", id: action.id }],
         assertions: [{ kind: "elapsed_seconds_compare", operator: "eq", value: state.truth.elapsedSeconds }],
       }],
-      events: [],
+      events: [{ id: `rt:event:${"3".repeat(64)}`, step: 1, description: "The keeper examines the key.",
+        impact: "ordinary", causes: [{ kind: "fact", id: "key-authenticity" }],
+        assertions: [{ kind: "elapsed_seconds_compare", operator: "eq", value: 1 }] }],
       observations: [],
       decisionRequests: [],
     };
@@ -88,6 +263,14 @@ describe("ObservationRenderer", () => {
     expect(provider.requests[1].context).toMatchObject({
       repair: { issues: [{ reason: expect.stringContaining("protected information") }] },
     });
+    for (const request of provider.requests) {
+      expect(request.context).toMatchObject({ state: { currentEvents: [{
+        causes: [{ kind: "fact", ref: "ref:fact:key-authenticity" }],
+      }] } });
+      const facts = (request.context as { state: { canonicalTruth: { facts: Record<string, unknown> } } })
+        .state.canonicalTruth.facts;
+      expect(facts).not.toHaveProperty("ref:fact:key-authenticity");
+    }
     const context = provider.requests[0].context as {
       state: {
         canonicalTruth: { entities: Record<string, unknown>; facts: Record<string, unknown> };

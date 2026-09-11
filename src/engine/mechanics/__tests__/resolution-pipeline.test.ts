@@ -8,11 +8,13 @@ import type { AgentActionProposal, TransitionProposalDraft } from "../../contrac
 import { contentHash } from "../../models/model-audit";
 import { SimulationEngine } from "../../runtime/simulation";
 import { replaySimulationState } from "../../runtime/transaction";
+import { dependentFieldsProvider, encodeResolutionDependentFields } from "../resolution-dependent-fields-codec";
 import {
   createTestModelCatalog,
   deterministicModelOutput,
   deterministicGlobalActionCompilationBatch,
   ScriptedModelProvider,
+  adaptScriptedResolutionOutput,
 } from "../../testing/model-provider";
 
 function statusFor(outcome: string | null) {
@@ -23,7 +25,7 @@ function statusFor(outcome: string | null) {
 }
 
 describe("resolution pipeline", () => {
-  it("commits a semantic plan before RNG, derives effects, atomically commits, and replays the receipt", async () => {
+  it.each([false, true])("commits a semantic plan before RNG, derives effects, atomically commits, and replays the receipt (dependent wire: %s)", async (dependentWire) => {
     const catalog = createTestModelCatalog();
     let planVerificationAttempts = 0;
     let transitionAttempts = 0;
@@ -63,7 +65,7 @@ describe("resolution pipeline", () => {
           means: action.means,
           targetIds: action.targetRefs,
         }));
-        return {
+        const directive = {
           kind: "commit_plans",
           plans: actions.map((action, index) => action.actorId === "player" ? {
             id: `plan-${index}`,
@@ -158,6 +160,7 @@ describe("resolution pipeline", () => {
             causes: [{ kind: "action", id: action.id }],
           }),
         };
+        return dependentWire ? encodeResolutionDependentFields(adaptScriptedResolutionOutput(directive)) : directive;
       }
       if (role === "causal-verifier" && schemaName === "resolution_plan_verification") {
         planVerificationAttempts += 1;
@@ -309,7 +312,7 @@ describe("resolution pipeline", () => {
       seed: 2,
       modelCatalog: catalog,
     });
-    const engine = new SimulationEngine(definition, new EagerReferenceAlgorithm(provider));
+    const engine = new SimulationEngine(definition, new EagerReferenceAlgorithm(dependentWire ? dependentFieldsProvider(provider) : provider));
     await engine.bootstrapAgents();
     const source = engine.snapshot;
     const result = await engine.step({

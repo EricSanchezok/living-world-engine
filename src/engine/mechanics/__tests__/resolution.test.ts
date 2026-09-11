@@ -123,6 +123,19 @@ function result(margin: number, kept = 10): D20CheckResult {
 }
 
 describe("open semantic resolution", () => {
+  it("rejects repeated neutral mechanical uses while allowing supporting citations", () => {
+    const source = { kind: "fact" as const, id: "sword-burning" };
+    const permission = { source, role: "permission" as const, direction: "neutral" as const,
+      steps: 0 as const, authority: "semantic" as const, channel: null, explanation: "The flame permits ignition." };
+    const risk = { ...permission, role: "risk" as const, explanation: "The flame may expose the wielder." };
+    expect(() => validateResolutionPlan(plan({ factors: [permission, risk] }), evidence()))
+      .toThrow("factors[1].source (risk) conflicts with factors[0].source (permission)");
+    const valid = plan({ factors: [permission], secondaryEffect: null, means: [{ description: "Use the burning blade.", source }] });
+    expect(() => validateResolutionPlan(valid, evidence())).not.toThrow();
+    expect(() => validateResolutionPlan({ ...valid, id: "another-plan" }, evidence())).not.toThrow();
+    const opposed = plan({ factors: [{ ...permission, source: { kind: "rating", id: "foe-defense" } }] });
+    expect(() => validateResolutionPlan(opposed, evidence())).toThrow("conflicts with difficulty.source");
+  });
   it("maps named difficulty and opposed ratings without fact modifiers", () => {
     expect(difficultyDc).toEqual({ trivial: 5, easy: 10, challenging: 15, hard: 20, extreme: 25 });
     const value = plan();
@@ -188,7 +201,7 @@ describe("open semantic resolution", () => {
         { source: { kind: "fact", id: "sword-burning" }, role: "secondary", direction: "neutral", steps: 0, authority: "semantic", channel: null, explanation: "Ignition." },
       ],
     });
-    expect(() => validateResolutionPlan(reused, evidence())).toThrow("more than one mechanical role");
+    expect(() => validateResolutionPlan(reused, evidence())).toThrow("factors[1].source (secondary) conflicts with factors[0].source (potency)");
 
     const reusedAptitude = plan({
       factors: [{
@@ -203,7 +216,7 @@ describe("open semantic resolution", () => {
       secondaryEffect: null,
     });
     expect(() => validateResolutionPlan(reusedAptitude, evidence()))
-      .toThrow("more than one mechanical role");
+      .toThrow("factors[0].source (potency) conflicts with actorRatingRef");
 
     const falseOppositionEvidence = plan({
       difficulty: {

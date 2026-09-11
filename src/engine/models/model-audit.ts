@@ -31,7 +31,24 @@ function itemCount(value: unknown): number | null {
 }
 
 export function measureModelContext(context: unknown, contextJson?: string): ModelContextAudit {
-  const canonical = canonicalize(context);
+  return measureCanonicalContext(canonicalize(context), contextJson);
+}
+
+/** Own one request's normalized snapshot. Consumers must not mutate its value;
+ * hashes and measurements deliberately reuse the same detached input. */
+export function prepareModelContext(context: unknown): {
+  value: unknown;
+  hash: string;
+  measure: (contextJson?: string) => ModelContextAudit;
+} {
+  const value = canonicalize(context);
+  // contentHash treats strings as already serialized bytes. Preserve that
+  // contract for scalar string contexts as well as normalized JSON objects.
+  const hash = contentHash(typeof value === "string" ? value : JSON.stringify(value));
+  return { value, hash, measure: (contextJson) => measureCanonicalContext(value, contextJson) };
+}
+
+function measureCanonicalContext(canonical: unknown, contextJson?: string): ModelContextAudit {
   const counts: ModelContextAudit["counts"] = {
     history: 0,
     events: 0,

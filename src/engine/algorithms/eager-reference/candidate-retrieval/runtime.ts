@@ -1,10 +1,11 @@
+import { shortlistEvidenceContext } from "./shortlist-evidence";
 import { contentHash } from "../../../models/model-audit";
 import type {
   CandidateSelectionCapability,
   CandidateSelectionResult,
 } from "../../roles";
 
-export const ACTION_COMPILATION_RETRIEVAL_RUNTIME_VERSION = "action-compilation-retrieval-runtime-v4";
+export const ACTION_COMPILATION_RETRIEVAL_RUNTIME_VERSION = "action-compilation-retrieval-runtime-v6";
 
 export interface RankedCandidate {
   candidateKey: string;
@@ -18,19 +19,58 @@ export interface SlotRetrievalResult {
     passageMisses: number;
     queryHit: boolean;
     readMs: number;
+    passageEncodeMs?: number;
     queryEncodeMs: number;
   };
 }
 
+export interface BatchRetrievalCache {
+  passageHits: number;
+  passageMisses: number;
+  queryHits: number;
+  queryMisses: number;
+  readMs: number;
+  passageEncodeMs: number;
+  queryEncodeMs: number;
+  queryBatchSize: number;
+}
+
+export interface BatchSlotRetrievalResult {
+  perSlot: ReadonlyMap<number, SlotRetrievalResult>;
+  cache: BatchRetrievalCache;
+}
+
+export interface BatchSelectionCandidate {
+  candidateKey: string;
+  kind: string;
+  allowedUses: readonly string[];
+}
+
+export interface BatchCandidateSelectorInput {
+  candidates: readonly BatchSelectionCandidate[];
+  perSlot: ReadonlyMap<number, SlotRetrievalResult>;
+  mandatoryKeys: ReadonlySet<string>;
+  budget: number;
+}
+
+export type BatchCandidateSelector = (input: BatchCandidateSelectorInput) => readonly string[];
+
 export interface ActionCompilationRetrievalRuntimeOptions {
   version: string;
   budgetRatio?: number;
-  retrieveSlot(input: {
+  selectBatch?: BatchCandidateSelector;
+  retrieveSlot?(input: {
     worldContentHash: string;
     context: Readonly<Record<string, unknown>>;
     slotIndex: number;
     signal?: AbortSignal;
   }): Promise<SlotRetrievalResult>;
+  retrievePhysicalBatch?(input: {
+    worldContentHash: string;
+    context: Readonly<Record<string, unknown>>;
+    slotIndices: readonly number[];
+    signal?: AbortSignal;
+  }): Promise<BatchSlotRetrievalResult>;
 }
 
 function object(value: unknown): Record<string, unknown> | undefined {
@@ -72,14 +112,6 @@ export function actionCompilationMandatoryKeys(context: Readonly<Record<string, 
   return [...new Set(result)].sort();
 }
 
-function prune(value: unknown, selected: ReadonlySet<string>, counter: { count: number }): unknown {
-  if (candidateKey(value) && !selected.has(value)) { counter.count += 1; return null; }
-  if (Array.isArray(value)) return value.map((entry) => prune(entry, selected, counter)).filter((entry) => entry !== null);
-  const input = object(value);
-  if (!input) return value;
-  return Object.fromEntries(Object.entries(input).map(([key, entry]) => [key, prune(entry, selected, counter)]));
-}
-
 function strictBudget(count: number, ratio: number): number {
   return Math.min(Math.floor(count * ratio), Math.max(0, Math.ceil(count * ratio) - 1));
 }
@@ -88,12 +120,62 @@ function throwIfAborted(signal?: AbortSignal): void {
   if (signal?.aborted) throw signal.reason ?? new Error("candidate retrieval aborted");
 }
 
+function defaultBatchSelection(input: BatchCandidateSelectorInput): readonly string[] {
+  const selected = new Set(input.mandatoryKeys);
+  const aggregates = new Map<string, { coverage: number; score: number; bestRank: number }>();
+  for (const result of input.perSlot.values()) result.candidates.forEach((candidate, rank) => {
+    const value = aggregates.get(candidate.candidateKey) ?? {
+      coverage: 0,
+      score: Number.NEGATIVE_INFINITY,
+      bestRank: Number.MAX_SAFE_INTEGER,
+    };
+    value.coverage += 1;
+    value.score = Math.max(value.score, candidate.score);
+    value.bestRank = Math.min(value.bestRank, rank);
+    aggregates.set(candidate.candidateKey, value);
+  });
+  const ranked = [...aggregates.entries()].sort(([leftKey, left], [rightKey, right]) =>
+    right.coverage - left.coverage || right.score - left.score ||
+    left.bestRank - right.bestRank || leftKey.localeCompare(rightKey));
+  for (const [key] of ranked) {
+    if (selected.size >= input.budget) break;
+    selected.add(key);
+  }
+  return [...selected];
+}
+
+function validateBatchSelection(
+  keys: readonly string[],
+  input: BatchCandidateSelectorInput,
+): Set<string> {
+  const selected = new Set<string>();
+  const catalogKeys = new Set(input.candidates.map((candidate) => candidate.candidateKey));
+  const scoredKeys = new Set([...input.perSlot.values()].flatMap((result) =>
+    result.candidates.map((candidate) => candidate.candidateKey)));
+  for (const key of keys) {
+    if (!candidateKey(key) || !catalogKeys.has(key) || !scoredKeys.has(key)) {
+      throw new Error(`batch candidate selector returned an invalid or unscored key: ${String(key)}`);
+    }
+    if (selected.has(key)) throw new Error(`batch candidate selector returned duplicate key ${key}`);
+    selected.add(key);
+  }
+  if (selected.size > input.budget) {
+    throw new Error(`batch candidate selector exceeded budget: ${selected.size} > ${input.budget}`);
+  }
+  const missing = [...input.mandatoryKeys].filter((key) => !selected.has(key));
+  if (missing.length > 0) throw new Error(`batch candidate selector dropped mandatory keys: ${missing.join(",")}`);
+  return selected;
+}
+
 export function createActionCompilationRetrievalRuntime(
   options: ActionCompilationRetrievalRuntimeOptions,
 ): CandidateSelectionCapability {
   const budgetRatio = options.budgetRatio ?? 0.2;
   if (!Number.isFinite(budgetRatio) || budgetRatio <= 0 || budgetRatio > 0.2) {
     throw new Error("runtime budgetRatio must be in (0, 0.2]");
+  }
+  if (Boolean(options.retrieveSlot) === Boolean(options.retrievePhysicalBatch)) {
+    throw new Error("runtime requires exactly one slot or physical-batch retriever");
   }
   return {
     version: options.version,
@@ -107,12 +189,42 @@ export function createActionCompilationRetrievalRuntime(
       }) : [];
       const byKey = new Map(catalogCandidates.map((candidate) => [candidate.candidateKey as string, candidate]));
       const slots = [...new Set(slotIndices)].sort((left, right) => left - right);
+      const retrievedBatch = options.retrievePhysicalBatch
+        ? await options.retrievePhysicalBatch({
+            worldContentHash,
+            context: fullContext,
+            slotIndices: slots,
+            signal,
+          })
+        : undefined;
+      if (retrievedBatch) {
+        const actualSlots = [...retrievedBatch.perSlot.keys()].sort((left, right) => left - right);
+        if (JSON.stringify(actualSlots) !== JSON.stringify(slots)) {
+          throw new Error("physical-batch retriever returned the wrong slot set");
+        }
+      }
       const perSlot = new Map<number, SlotRetrievalResult>();
       const mandatoryBySlot = new Map<number, readonly string[]>();
-      const cache = { passageHits: 0, passageMisses: 0, queryHits: 0, queryMisses: 0, readMs: 0, queryEncodeMs: 0 };
+      const cache: BatchRetrievalCache = retrievedBatch
+        ? { ...retrievedBatch.cache }
+        : {
+            passageHits: 0,
+            passageMisses: 0,
+            queryHits: 0,
+            queryMisses: 0,
+            readMs: 0,
+            passageEncodeMs: 0,
+            queryEncodeMs: 0,
+            queryBatchSize: 0,
+          };
       for (const slotIndex of slots) {
         throwIfAborted(signal);
-        const result = await options.retrieveSlot({ worldContentHash, context: fullContext, slotIndex, signal });
+        const result = retrievedBatch?.perSlot.get(slotIndex) ?? await options.retrieveSlot!({
+          worldContentHash,
+          context: fullContext,
+          slotIndex,
+          signal,
+        });
         const seen = new Set<string>();
         for (const candidate of result.candidates) {
           if (!candidateKey(candidate.candidateKey) || !Number.isFinite(candidate.score)) {
@@ -130,35 +242,41 @@ export function createActionCompilationRetrievalRuntime(
         if (missing.length > 0) throw new Error(`candidate retrieval anchor missing for slot ${slotIndex}: ${missing.join(",")}`);
         mandatoryBySlot.set(slotIndex, mandatory);
         perSlot.set(slotIndex, result);
-        if (result.cache) {
+        if (!retrievedBatch && result.cache) {
           cache.passageHits += result.cache.passageHits;
           cache.passageMisses += result.cache.passageMisses;
           cache.queryHits += result.cache.queryHit ? 1 : 0;
           cache.queryMisses += result.cache.queryHit ? 0 : 1;
           cache.readMs += result.cache.readMs;
+          cache.passageEncodeMs += result.cache.passageEncodeMs ?? 0;
           cache.queryEncodeMs += result.cache.queryEncodeMs;
+          cache.queryBatchSize += 1;
         }
       }
 
-      const batchBudget = strictBudget(catalogCandidates.length, budgetRatio);
       const selected = new Set([...mandatoryBySlot.values()].flat());
-      if (selected.size > batchBudget) {
-        throw new Error(`candidate retrieval mandatory set exceeds batch budget: ${selected.size} > ${batchBudget}`);
-      }
-      const aggregates = new Map<string, { coverage: number; score: number; bestRank: number }>();
-      for (const result of perSlot.values()) result.candidates.forEach((candidate, rank) => {
-        const value = aggregates.get(candidate.candidateKey) ?? { coverage: 0, score: Number.NEGATIVE_INFINITY, bestRank: Number.MAX_SAFE_INTEGER };
-        value.coverage += 1;
-        value.score = Math.max(value.score, candidate.score);
-        value.bestRank = Math.min(value.bestRank, rank);
-        aggregates.set(candidate.candidateKey, value);
-      });
-      const ranked = [...aggregates.entries()].sort(([leftKey, left], [rightKey, right]) =>
-        right.coverage - left.coverage || right.score - left.score || left.bestRank - right.bestRank || leftKey.localeCompare(rightKey));
-      for (const [key] of ranked) {
-        if (selected.size >= batchBudget) break;
-        selected.add(key);
-      }
+      const nominalBatchBudget = strictBudget(catalogCandidates.length, budgetRatio);
+      // Required identities and eligible temporal profiles are a semantic floor.
+      // Small catalogs can have more anchors than the proportional shortlist.
+      const batchBudget = Math.max(nominalBatchBudget, selected.size);
+      const selectorInput: BatchCandidateSelectorInput = {
+        candidates: catalogCandidates.map((candidate) => ({
+          candidateKey: candidate.candidateKey as string,
+          kind: typeof candidate.kind === "string" ? candidate.kind : "unknown",
+          allowedUses: Array.isArray(candidate.allowedUses)
+            ? candidate.allowedUses.filter((use): use is string => typeof use === "string")
+            : [],
+        })),
+        perSlot,
+        mandatoryKeys: selected,
+        budget: batchBudget,
+      };
+      const selectedByPolicy = options.selectBatch
+        ? options.selectBatch(selectorInput)
+        : defaultBatchSelection(selectorInput);
+      const validatedSelection = validateBatchSelection(selectedByPolicy, selectorInput);
+      selected.clear();
+      validatedSelection.forEach((key) => selected.add(key));
       const selectedKeysBySlot = new Map<number, readonly string[]>();
       for (const slotIndex of slots) {
         const eligible = new Set(perSlot.get(slotIndex)!.candidates.map((candidate) => candidate.candidateKey));
@@ -169,14 +287,9 @@ export function createActionCompilationRetrievalRuntime(
         selectedKeysBySlot.set(slotIndex, keys);
       }
 
-      const modelContext = structuredClone(fullContext) as Record<string, unknown>;
-      const modelCatalog = object(modelContext.referenceCatalog);
-      const counter = { count: 0 };
-      if (modelCatalog) {
-        modelCatalog.candidates = catalogCandidates
-          .filter((candidate) => selected.has(candidate.candidateKey as string))
-          .map((candidate) => prune(candidate, selected, counter));
-      }
+      const { context: modelContext } = shortlistEvidenceContext(fullContext, catalogCandidates
+        .filter((candidate) => selected.has(candidate.candidateKey as string))
+        .map((candidate) => candidate.candidateKey as string));
       const fullContextHash = contentHash(fullContext);
       const modelContextHash = contentHash(modelContext);
       const shortlistHash = contentHash({ version: options.version, selectedBySlot: [...selectedKeysBySlot.entries()] });
@@ -190,8 +303,10 @@ export function createActionCompilationRetrievalRuntime(
           selectedCount: selected.size,
           visibleCount: catalogCandidates.length,
           batchBudget,
+          nominalBatchBudget,
+          mandatoryBudgetFloorApplied: batchBudget > nominalBatchBudget,
           batchShortlistRatio: catalogCandidates.length === 0 ? 0 : selected.size / catalogCandidates.length,
-          prunedReferenceCount: counter.count,
+          prunedReferenceCount: 0,
           anchorCount: new Set([...mandatoryBySlot.values()].flat()).size,
           budgetExceeded: false,
           perSlotSelectedCount: Object.fromEntries([...selectedKeysBySlot].map(([slot, keys]) => [String(slot), keys.length])),

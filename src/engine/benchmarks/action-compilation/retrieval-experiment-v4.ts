@@ -179,7 +179,16 @@ export function evaluateFullCatalogControlV4(dataset: ActionCompilationReference
       shortlistRatio: count === 0 ? 0 : 1,
       compression: 0,
       shortlistHash: "fullcatalog",
-      cache: { passageHits: 0, passageMisses: 0, queryHits: 0, queryMisses: 0, readMs: 0, queryEncodeMs: 0 },
+      cache: {
+        passageHits: 0,
+        passageMisses: 0,
+        queryHits: 0,
+        queryMisses: 0,
+        readMs: 0,
+        passageEncodeMs: 0,
+        queryEncodeMs: 0,
+        queryBatchSize: 0,
+      },
     };
   });
   const nonEmpty = caseResults.filter((item) => item.recall !== null);

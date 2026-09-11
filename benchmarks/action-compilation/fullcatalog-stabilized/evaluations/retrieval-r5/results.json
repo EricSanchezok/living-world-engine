@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 5,
+  "kind": "action-compilation-candidate-retrieval-r5-experiment",
+  "evaluatedAt": "2026-09-05T08:37:52Z",
+  "dataset": {
+    "id": "action-compilation/fullcatalog-stabilized",
+    "version": 1,
+    "manifestHash": "sha256:2c68f83044e4eed9a658883dbdbc767c7537bbefa518c2be85f30a605fd40d47",
+    "cases": 46,
+    "contexts": 24,
+    "requiredCandidateKeys": 609,
+    "changed": false
+  },
+  "policy": {
+    "referenceSemantics": "behavioral-reference",
+    "budgetRatio": 0.2,
+    "physicalJointBatch": true,
+    "microRecallMinimum": 0.9,
+    "macroRecallMinimum": 0.9,
+    "averageBatchCompressionExclusiveMinimum": 0.8,
+    "p95BatchShortlistRatioExclusiveMaximum": 0.2,
+    "determinismRequired": true
+  },
+  "offlineEvaluation": {
+    "llmRequests": 0,
+    "networkRequests": 0,
+    "worldMutations": 0,
+    "note": "The multilingual-e5-base asset was acquired before evaluation; all benchmark runs were local and offline."
+  },
+  "encoders": {
+    "small": {
+      "modelId": "intfloat/multilingual-e5-small",
+      "modelHash": "sha256:d36818af59d24cf4293a78d41f2194a215157aefcfccb4c650902c851a0a0b2c",
+      "encoderFingerprint": "sha256:77460a434ab05d1987db625b2899cc9a3a4de0eed0326f36dd6403ff859fb2a0",
+      "dimensions": 384
+    },
+    "base": {
+      "modelId": "intfloat/multilingual-e5-base",
+      "sourceRepository": "Xenova/multilingual-e5-base",
+      "sourceRevision": "d59ab9ac3405fabf723089ec5577010211014c99",
+      "sourceOnnxSha256": "df7a9a29309e3ad491e1783adf8baee710262cc06079c7cbab63c630277fac94",
+      "modelHash": "sha256:b89491c981d9c3d8a9990782e0439073043e0aa567424de32078ea9cb72c1541",
+      "encoderFingerprint": "sha256:25c0f4bc4ddc81782c76a7be891f4b71d81b9d277267fc801e2f4cd10779a543",
+      "dimensions": 768
+    }
+  },
+  "fixedParameters": {
+    "relationalPassageSchemaVersion": 1,
+    "mandatoryAnchorMaxDepth": 3,
+    "pseudoSeedCountPerRetriever": 16,
+    "pseudoSeedExpansionDepth": 1,
+    "rrfK": 60,
+    "rrfResidualWeight": 3500,
+    "compactKindBudgetRatio": 0.15
+  },
+  "runs": [
+    {
+      "id": "H2-runtime-joint-budget",
+      "stage": "baseline",
+      "encoder": "small",
+      "recalledKeys": 488,
+      "microRecall": 0.8013136288998358,
+      "macroRecall": 0.8258583740582293,
+      "averageBatchCompression": 0.8003537994773703,
+      "p95BatchShortlistRatio": 0.19988833054159688,
+      "deterministic": true,
+      "hardGate": false
+    },
+    {
+      "id": "R5.1-relational-passage",
+      "stage": "relational-passage",
+      "encoder": "small",
+      "recalledKeys": 481,
+      "microRecall": 0.7898193760262726,
+      "macroRecall": 0.8186760209707037,
+      "averageBatchCompression": 0.8003537994773703,
+      "p95BatchShortlistRatio": 0.19988833054159688,
+      "deterministic": true,
+      "hardGate": false
+    },
+    {
+      "id": "R5.2-multi-seed-expand",
+      "stage": "multi-seed-expand",
+      "encoder": "small",
+      "recalledKeys": 497,
+      "microRecall": 0.8160919540229885,
+      "macroRecall": 0.8323685269586061,
+      "averageBatchCompression": 0.8003537994773703,
+      "p95BatchShortlistRatio": 0.19988833054159688,
+      "deterministic": true,
+      "hardGate": false,
+      "missingByKind": {
+        "agent": 32,
+        "entity": 12,
+        "fact": 45,
+        "meter": 3,
+        "placement": 5,
+        "rating": 15
+      }
+    },
+    {
+      "id": "R5.3-typed-channel-rrf",
+      "stage": "typed-channel-rrf",
+      "encoder": "small",
+      "recalledKeys": 503,
+      "microRecall": 0.825944170771757,
+      "macroRecall": 0.8437987810706444,
+      "averageBatchCompression": 0.8003537994773703,
+      "p95BatchShortlistRatio": 0.19988833054159688,
+      "deterministic": true,
+      "hardGate": false,
+      "missingByKind": {
+        "agent": 31,
+        "entity": 10,
+        "fact": 46,
+        "meter": 3,
+        "placement": 1,
+        "rating": 15
+      }
+    },
+    {
+      "id": "R5.4-coverage-aware-physical-batch",
+      "stage": "coverage-aware-physical-batch",
+      "encoder": "small",
+      "recalledKeys": 530,
+      "microRecall": 0.8702791461412152,
+      "macroRecall": 0.8867707069042644,
+      "averageBatchCompression": 0.8003537994773703,
+      "p95BatchShortlistRatio": 0.19988833054159688,
+      "deterministic": true,
+      "hardGate": false,
+      "missingByKind": {
+        "entity": 10,
+        "fact": 44,
+        "meter": 3,
+        "placement": 7,
+        "rating": 15
+      }
+    },
+    {
+      "id": "R5.5-multilingual-e5-base",
+      "stage": "encoder-upgrade",
+      "encoder": "base",
+      "recalledKeys": 547,
+      "microRecall": 0.8981937602627258,
+      "macroRecall": 0.9088784300989439,
+      "averageBatchCompression": 0.8003537994773703,
+      "p95BatchShortlistRatio": 0.19988833054159688,
+      "deterministic": true,
+      "hardGate": false,
+      "missingByKind": {
+        "entity": 9,
+        "fact": 37,
+        "meter": 1,
+        "placement": 4,
+        "rating": 11
+      }
+    },
+    {
+      "id": "R5.6-base-small-residual-fusion",
+      "stage": "diagnostic-residual-fusion",
+      "encoders": {
+        "base": 0.75,
+        "small": 0.25
+      },
+      "recalledKeys": 536,
+      "microRecall": 0.8801313628899836,
+      "macroRecall": 0.8951259989552085,
+      "averageBatchCompression": 0.8003537994773703,
+      "p95BatchShortlistRatio": 0.19988833054159688,
+      "deterministic": true,
+      "hardGate": false,
+      "missingByKind": {
+        "entity": 9,
+        "fact": 41,
+        "meter": 1,
+        "placement": 7,
+        "rating": 15
+      }
+    }
+  ],
+  "rejectedDiagnostics": [
+    {
+      "id": "R5.4-compact-kind-18-percent",
+      "reason": "Recovered all meter occurrences but displaced more required fact/entity candidates.",
+      "microRecall": 0.8620689655172413,
+      "macroRecall": 0.8763290953756963
+    },
+    {
+      "id": "R5.6-base-small-residual-fusion",
+      "reason": "The fixed 75/25 residual fusion underperformed the base encoder alone."
+    }
+  ],
+  "implementationCommits": [
+    "fca8d38",
+    "e72c0dc",
+    "eef0dee",
+    "db1c14e",
+    "8f0c171"
+  ],
+  "recommendation": {
+    "status": "retain-fullcatalog",
+    "selectedRunId": null,
+    "bestRunId": "R5.5-multilingual-e5-base",
+    "reason": "The best run passed the macro-recall, compression, p95, and determinism gates but recalled 547/609 keys; the 90% micro-recall gate requires at least 549/609. No R5 algorithm is eligible for production registration."
+  }
+}

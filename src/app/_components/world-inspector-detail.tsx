@@ -8,6 +8,7 @@ import {
   BrainCircuit,
   Check,
   Clock3,
+  Copy,
   Dices,
   Eye,
   GitCompareArrows,
@@ -803,7 +804,7 @@ function ActionCompilationAuditSection({ audit }: { audit: ActionCompilationAudi
       icon={Link2}
       title="Action Compilation 引用解析"
     >
-      <dl className="cg-inspector-change-summary">
+      <dl className="cg-inspector-change-summary cg-inspector-change-summary--four">
         <div><dt>上下文</dt><dd>{formatNumber(audit.context.utf8Bytes)} B</dd></div>
         <div><dt>候选</dt><dd>{audit.context.candidates}（详情 {audit.context.detailedCandidates}）</dd></div>
         <div><dt>重复定义</dt><dd>{audit.context.duplicateSemanticDefinitionCount}</dd></div>
@@ -1017,6 +1018,35 @@ function InspectorErrorDetails({ message }: { message: string }) {
   );
 }
 
+function InvocationIdentity({ invocation }: { invocation: WorldInspectorModelInvocationDetail }) {
+  const [copyStatus, setCopyStatus] = useState("");
+  const copyPublicId = async () => {
+    try {
+      await navigator.clipboard.writeText(invocation.id);
+      setCopyStatus("已复制 public invocation ID");
+    } catch {
+      setCopyStatus("无法自动复制，请手动选择 ID");
+    }
+  };
+  return (
+    <section className="cg-inspector-invocation-identity" aria-label="调用调试标识">
+      <div>
+        <span>Public invocation ID</span>
+        <code><bdi dir="ltr">{invocation.id}</bdi></code>
+      </div>
+      <button aria-label="复制 public invocation ID" onClick={() => void copyPublicId()} type="button">
+        <Copy aria-hidden="true" />复制 ID
+      </button>
+      <p>可直接用于 Debug CLI 精确查询</p>
+      <dl>
+        <div><dt>Execution</dt><dd><code><bdi dir="ltr">{invocation.executionId}</bdi></code></dd></div>
+        <div><dt>Ledger sequence</dt><dd>{invocation.ledgerSequence}</dd></div>
+      </dl>
+      <span className="cg-inspector-invocation-identity__status" role="status">{copyStatus}</span>
+    </section>
+  );
+}
+
 function ModelInvocationDetailPanel({
   instanceId,
   invocation,
@@ -1043,6 +1073,7 @@ function ModelInvocationDetailPanel({
         <h3>{invocation.lineage.kind === "repair" ? `语义修复 ${invocation.lineage.semanticRepairAttempt}` : `根调用 ${invocation.logicalInvocationOrdinal || invocation.ordinal || "?"}`}</h3>
         <p><strong>{invocation.role ?? "模型调用"}</strong><span>{invocation.providerId ?? "未知 provider"} / {invocation.modelId ?? "未知 model"}</span></p>
       </header>
+      <InvocationIdentity invocation={invocation} />
       <SemanticRepairChain invocation={invocation} onSelectInvocationId={onSelectInvocationId} />
       <dl className="cg-inspector-invocation-detail__facts">
         <div><dt>Agent / slot</dt><dd>{invocation.slotRefs.length} 个</dd></div>

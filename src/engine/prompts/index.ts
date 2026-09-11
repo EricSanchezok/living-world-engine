@@ -2,6 +2,8 @@ import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { z } from "zod";
 import { canonicalize, contentHash } from "../models/model-audit";
+import { repairPromptLayout } from "./repair-layout";
+import { serializeModelContext, type SHARED_STATE_FIRST_LAYOUT } from "./context-layout";
 
 export type PromptBundleId =
   | "truth-perception"
@@ -29,7 +31,8 @@ export interface PromptBundle {
 const cache = new Map<string, string>();
 const templateKeys: Readonly<Record<string, readonly string[]>> = {
   "transport/context-envelope.md": ["TASK", "CONTEXT"],
-  "transport/json-object.md": ["ENVELOPE", "DISCRIMINATOR", "SCHEMA", "EXAMPLE"],
+  "transport/json-object.md": ["ENVELOPE", "DISCRIMINATOR", "SCHEMA", "EXAMPLE_BLOCK"],
+  "transport/json-example.md": ["EXAMPLE"],
   "transport/tool-call.md": ["ENVELOPE", "DISCRIMINATOR"],
   "transport/tool-description.md": ["SCHEMA_NAME"],
 };
@@ -83,10 +86,10 @@ interface PromptSpec {
 }
 
 const specs: Record<PromptBundleId, PromptSpec> = {
-  "truth-perception": { system: ["system/truth.md", "shared/language.md"], user: "user/truth-perception.md" },
+  "truth-perception": { system: ["system/truth-perception.md", "shared/language.md"], user: "user/truth-perception.md" },
   "truth-reaction-routing": { system: ["system/truth.md", "shared/language.md"], user: "user/truth-reaction-routing.md" },
-  "truth-resolution": { system: ["system/truth.md", "shared/language.md"], user: "user/truth-resolution.md" },
-  "truth-transition": { system: ["system/truth.md", "shared/language.md"], user: "user/truth-transition.md" },
+  "truth-resolution": { system: ["system/truth.md", "shared/resolution-plan-effects.md", "shared/resolution-condition-references.md", "shared/language.md"], user: "user/truth-resolution.md" },
+  "truth-transition": { system: ["system/truth.md", "shared/transition-assertion-states.md", "shared/transition-receipt-stage.md", "shared/language.md"], user: "user/truth-transition.md" },
   "agent-bootstrap": { system: ["system/agent-batch.md", "system/agent.md", "shared/language.md"], user: "user/agent-bootstrap.md" },
   "agent-mind": { system: ["system/agent-batch.md", "system/agent.md", "shared/language.md"], user: "user/agent-mind.md" },
   "agent-reaction": { system: ["system/reaction.md", "shared/language.md"], user: "user/agent-reaction.md" },
@@ -103,6 +106,7 @@ const bundleCache = new Map<PromptBundleId, PromptBundle>();
 const transportVersionAssets = [
   "transport/context-envelope.md",
   "transport/json-object.md",
+  "transport/json-example.md",
   "transport/tool-call.md",
   "transport/tool-description.md",
   "transport/discriminator/default.md",
@@ -148,14 +152,15 @@ export function composeJsonObjectPrompt(input: {
   userPrompt: string;
   contextJson: string;
   schemaJson: string;
-  exampleJson: string;
+  exampleJson?: string;
   discriminator: string;
 }): string {
   return renderTemplate(loadPromptAsset("transport/json-object.md", { allowTemplates: true }), {
     ENVELOPE: composeContextEnvelope(input.userPrompt, input.contextJson),
     DISCRIMINATOR: input.discriminator,
     SCHEMA: input.schemaJson,
-    EXAMPLE: input.exampleJson,
+    EXAMPLE_BLOCK: input.exampleJson === undefined ? "" : renderTemplate(
+      loadPromptAsset("transport/json-example.md", { allowTemplates: true }), { EXAMPLE: input.exampleJson }),
   });
 }
 
@@ -191,12 +196,17 @@ export function structuredPromptBytes(input: {
   userPrompt: string;
   context: unknown;
   schema: z.ZodType;
+  wireJsonSchema?: Record<string, unknown>;
+  jsonObjectPostlude?: string;
+  repairContextPlacement?: "tail-v1" | "logical-tail-v1";
+  contextLayout?: typeof SHARED_STATE_FIRST_LAYOUT;
 }): { contextJson: string; schemaJson: string; userMessage: string; requestUtf8Bytes: number } {
   // Compact JSON keeps the data payload lossless while avoiding formatting
   // bytes that do not help the model or the request budget.
-  const contextJson = JSON.stringify(canonicalize(input.context));
-  const schemaJson = JSON.stringify(canonicalize(z.toJSONSchema(input.schema, { target: "draft-07" })));
-  const userMessage = composeContextEnvelope(input.userPrompt, contextJson);
+  const contextJson = serializeModelContext(input.context, input.contextLayout);
+  const schemaJson = JSON.stringify(canonicalize(input.wireJsonSchema ?? z.toJSONSchema(input.schema, { target: "draft-07" })));
+  const layout = repairPromptLayout(input.userPrompt, contextJson, input.repairContextPlacement);
+  const userMessage = composeContextEnvelope(layout.userPrompt, layout.contextJson) + layout.tail + (input.jsonObjectPostlude ?? "");
   return {
     contextJson,
     schemaJson,

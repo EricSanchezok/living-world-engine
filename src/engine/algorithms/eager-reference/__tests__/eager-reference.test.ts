@@ -13,7 +13,7 @@ import { replaySimulationState } from "../../../runtime/transaction";
 import type { AgentActionProposal, SimulationState } from "../../../contracts/model";
 import { actionCompilationCandidateKeyForHandle, referenceHandleFor, type ExistingReferenceHandle } from "../../../contracts/model-context";
 import { contentHash } from "../../../models/model-audit";
-import { ModelSemanticRepairError } from "../../../models/model-provider";
+import { ModelOutputError, ModelSemanticRepairError, ModelTransportError } from "../../../models/model-provider";
 import { SimulationEngine } from "../../../runtime/simulation";
 import { CanonicalCommitter } from "../../../runtime/canonical-committer";
 import {
@@ -32,6 +32,10 @@ import { AgentMind } from "../agent-mind";
 import { normalizeOutcomeAlternativeEvidence } from "../../../mechanics/truth-engine";
 import { loadWorldScript } from "../../../../script/world-loader";
 import { ACTION_COMPILATION_RETRIEVAL_RUNTIME_VERSION } from "../candidate-retrieval/runtime";
+import { RELATIONAL_RRF_ENCODER_FINGERPRINT } from "../candidate-retrieval/relational-rrf";
+import { registerBuiltinAlgorithms, FULL_CATALOG_ALGORITHM_REF } from "../../registry";
+import { WorldExecutionAlgorithmRegistry } from "../../../runtime/execution";
+import { sharedContextAlgorithmRef, orderedRandomAlgorithmRef } from "../../../benchmarks/step-efficiency/protocol";
 
 type AssignedModelAction = {
   actionRef: string;
@@ -49,7 +53,7 @@ it("fails closed when a retrieval-enabled algorithm has no pinned runtime", () =
     candidateRetrieval: {
       mode: "runtime",
       runtimeVersion: ACTION_COMPILATION_RETRIEVAL_RUNTIME_VERSION,
-      encoderFingerprint: `sha256:${"1".repeat(64)}`,
+      encoderFingerprint: RELATIONAL_RRF_ENCODER_FINGERPRINT,
       budgetRatio: 0.2,
     },
   })).toThrow(/runtime is required/u);
@@ -77,6 +81,190 @@ function actorEntities(context: unknown): Record<string, { entityId: string }> {
 }
 
 describe("eager reference safeguards", () => {
+  it.each([false, true])("releases the canonical stream before transitions and preserves replay or atomic failure (terminal failure: %s)", async (terminalFailure) => {
+    const run = async (ordered: boolean) => {
+      let commits = 0;
+      const provider = new ScriptedModelProvider(({ role, profileId, context }) => {
+        if (role === "action-compilation") {
+          return deterministicActionCompilationBatch(profileId, context, (compilation, { action }) => {
+            compilation.interactionDependency = deterministicInteractionDependency({
+              reads: [{ kind: "meter", id: `health:${action.actorId}` }],
+              writes: [{ kind: "entity", id: action.actorId }, { kind: "meter", id: `health:${action.actorId}` }],
+              audienceAgentIds: [action.actorId], sharedResourceClaims: [],
+            });
+          });
+        }
+        const generated = deterministicModelOutput(profileId, context) as Record<string, unknown>;
+        if (role === "truth-resolution" && generated.kind === "commit_plans") {
+          commits += 1;
+          const actions = assignedActions(context);
+          return { ...generated, plans: (generated.plans as Array<Record<string, unknown>>).map((plan, index) => {
+            const actor = actions[index]!.actorId;
+            return { ...plan, mode: "check", baseEffect: "minor",
+              means: [{ description: "The actor's own physical exertion", source: { kind: "entity", id: actor } }],
+              difficulty: { kind: "environment", band: "trivial", source: { kind: "entity", id: actor } },
+              threatenedEffect: { kind: "meter", id: `strain-${actor}`, targetId: actor, channel: "physical-harm",
+                label: "strain", description: "Failed exertion strains the actor.",
+                sourceRefs: [{ kind: "entity", id: actor }], meterId: `health:${actor}`, impactProfileId: "harm", magnitude: "minor" },
+              primaryEffect: { kind: "meter", id: `exertion-${actor}`, targetId: actor, channel: "physical-harm",
+                label: "exertion", description: "The isolated exertion consumes the actor's own health.",
+                sourceRefs: [{ kind: "entity", id: actor }], meterId: `health:${actor}`, impactProfileId: "harm", magnitude: "minor" },
+            };
+          }) };
+        }
+        if (role === "truth-transition" && generated.kind === "transition") {
+          const receipts = (context as { state: { resolutionReceipts: Array<{ plan: { actionRef: string }; outcome: string | null; checkRef: string | null }> } }).state.resolutionReceipts;
+          const proposal = generated.proposal as { outcomes: Array<{ actionRef: string; status: string; causes: Array<{ kind: string; ref: string }>; assertions: Array<unknown> }> };
+          for (const outcome of proposal.outcomes) {
+            const receipt = receipts.find((entry) => entry.plan.actionRef === outcome.actionRef)!;
+            if (outcome.status !== "continuing") outcome.status = receipt.outcome === "miss" ? "failed" : receipt.outcome === "mixed" ? "partial" : "succeeded";
+            if (receipt.checkRef) {
+              outcome.causes.push({ kind: "check", ref: receipt.checkRef });
+              const check = (context as { state: { checkResults: Array<{ checkRef: string; succeeded: boolean }> } }).state.checkResults.find((item) => item.checkRef === receipt.checkRef)!;
+              outcome.assertions.push({ kind: "check_result", checkId: receipt.checkRef, expected: check.succeeded ? "succeeded" : "failed" });
+            }
+          }
+        }
+        return generated;
+      });
+      let transitionsOverlap = !ordered;
+      let firstWaiting = false;
+      const generate = provider.generateStructured.bind(provider);
+      let firstTransitionSubject: string | undefined;
+      let releaseFirst!: () => void;
+      const firstRelease = new Promise<void>(resolve => { releaseFirst = resolve; });
+      let finalReviews = 0;
+      const finalReviewer = new ScriptedModelProvider(({ context }) => {
+        finalReviews += 1;
+        if (finalReviews === 1) {
+          const candidate = (context as { state: { candidate: { operations: Array<{ kind: string; operationRef: string }> } } }).state.candidate;
+          const operation = candidate.operations.filter(value => value.kind !== "advance_time").at(-1)!;
+          return { verdict: "reject", findings: [{ target: { kind: "operation", targetHandle: operation.operationRef },
+            evidenceHandles: [], code: "effect-mismatch", message: "Correct the interval explanation.",
+            repairHint: "Keep the actual committed checks and receipts." }] };
+        }
+        return { verdict: "accept", findings: [] };
+      }, provider.catalog, false);
+      provider.generateStructured = async request => {
+        if (ordered && request.schemaName === "causal_verification") return finalReviewer.generateStructured(request);
+        if (ordered && request.role === "truth-transition") {
+          if (firstTransitionSubject === undefined) {
+            firstTransitionSubject = request.subjectId;
+            // Fail the ordering assertion without leaving a hung test process.
+            firstWaiting = true;
+            const deadline = setTimeout(releaseFirst, 3000);
+            await firstRelease;
+            firstWaiting = false;
+            clearTimeout(deadline);
+            if (terminalFailure) throw new ModelTransportError("controlled failure after releasing random commitments");
+          } else if (request.subjectId !== firstTransitionSubject) {
+            transitionsOverlap ||= firstWaiting;
+            releaseFirst();
+          }
+        }
+        return generate(request);
+      };
+      const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 47, modelCatalog: provider.catalog });
+      definition.initialState.truth.placements.keeper = "gate";
+      definition.historyBaseHash = historyReplayBaseHash(definition.initialState);
+      const algorithm = ordered
+        ? registerBuiltinAlgorithms(new WorldExecutionAlgorithmRegistry()).create(orderedRandomAlgorithmRef(FULL_CATALOG_ALGORITHM_REF), { provider })
+        : new EagerReferenceAlgorithm(provider);
+      const engine = new SimulationEngine(definition, algorithm);
+      await engine.bootstrapAgents();
+      const state = engine.snapshot;
+      const roster = Object.fromEntries(Object.values(state.agents).map((agent) => [agent.id, {
+        kind: "model" as const, agentId: agent.id, profiles: structuredClone(agent.modelProfiles),
+      }]));
+      if (terminalFailure) {
+        await expect(engine.step(roster, { expectedRevision: state.revision, trigger: "manual", externalActions: [] }))
+          .rejects.toMatchObject({ errors: expect.arrayContaining([expect.objectContaining({
+            name: "ModelTransportError", message: "controlled failure after releasing random commitments",
+          })]) });
+        expect(transitionsOverlap).toBe(true);
+        expect(contentHash(engine.snapshot)).toBe(contentHash(state));
+        return null;
+      }
+      const result = await engine.step(roster, { expectedRevision: state.revision, trigger: "manual", externalActions: [] });
+      expect(contentHash(replaySimulationState(result.state).truth)).toBe(contentHash(result.state.truth));
+      expect(transitionsOverlap).toBe(true);
+      if (ordered) expect(finalReviews).toBe(2);
+      return { result, commits };
+    };
+    if (terminalFailure) {
+      expect(await run(true)).toBeNull();
+      return;
+    }
+    const baseline = await run(false);
+    const candidate = await run(true);
+    if (!baseline || !candidate) throw new Error("expected committed comparison runs");
+    expect(baseline.commits).toBe(4);
+    expect(candidate.commits).toBe(2);
+    expect(candidate.result.state.truth.rng).toEqual(baseline.result.state.truth.rng);
+    expect(candidate.result.committed.checks).toEqual(baseline.result.committed.checks);
+    expect(contentHash(candidate.result.state.truth)).toBe(contentHash(baseline.result.state.truth));
+  });
+
+  it("stops sibling follow-up calls after terminal component failure and preserves the source state", async () => {
+    const provider = new ScriptedModelProvider(({ role, profileId, context }) => {
+      if (role === "action-compilation") {
+        return deterministicActionCompilationBatch(profileId, context, (compilation, { action }) => {
+          compilation.interactionDependency = deterministicInteractionDependency({
+            reads: [], writes: [{ kind: "entity", id: action.actorId }],
+            audienceAgentIds: [action.actorId], sharedResourceClaims: [],
+          });
+        });
+      }
+      return deterministicModelOutput(profileId, context);
+    });
+    const generate = provider.generateStructured.bind(provider);
+    let failingCalls = 0;
+    let siblingStarted = false;
+    let siblingSignal: AbortSignal | undefined;
+    let releaseSibling!: () => void;
+    const siblingRelease = new Promise<void>((resolve) => { releaseSibling = resolve; });
+    let terminal = false;
+    let lateCalls = 0;
+    provider.generateStructured = async (request) => {
+      if (terminal) lateCalls += 1;
+      if (request.role === "truth-resolution" && request.subjectId.includes("component-keeper")) {
+        failingCalls += 1;
+        if (failingCalls === 3) {
+          terminal = true;
+          setTimeout(releaseSibling, 0);
+        }
+        throw new ModelOutputError("injected irrecoverable component output");
+      }
+      if (request.role === "truth-resolution" && request.subjectId.includes("component-player")) {
+        siblingStarted = true;
+        siblingSignal = request.cancelPendingSignal;
+        await siblingRelease;
+      }
+      return generate(request);
+    };
+    const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), {
+      seed: 47, modelCatalog: provider.catalog,
+    });
+    definition.initialState.truth.placements.keeper = "gate";
+    definition.historyBaseHash = historyReplayBaseHash(definition.initialState);
+    const engine = new SimulationEngine(definition, new EagerReferenceAlgorithm(provider));
+    await engine.bootstrapAgents();
+    const state = engine.snapshot;
+    const before = contentHash(state);
+    const roster = Object.fromEntries(Object.values(state.agents).map((agent) => [agent.id, {
+      kind: "model" as const, agentId: agent.id, profiles: structuredClone(agent.modelProfiles),
+    }]));
+    const failure = await engine.step(roster, { expectedRevision: state.revision, trigger: "manual", externalActions: [] })
+      .then(() => undefined, (error: unknown) => error);
+    expect(failure).toBeInstanceOf(AggregateError);
+    expect((failure as AggregateError).errors[0]).toBeInstanceOf(ModelSemanticRepairError);
+    expect(failingCalls).toBe(3);
+    expect(siblingStarted).toBe(true);
+    expect(siblingSignal?.aborted).toBe(true);
+    expect(lateCalls).toBe(0);
+    expect(contentHash(engine.snapshot)).toBe(before);
+  });
+
   it("adjudicates a unique resource with its incumbent and commits only a capacity-legal winner", async () => {
     let poolId = "";
     const provider = new ScriptedModelProvider(({ role, profileId, context }) => {
@@ -526,6 +714,82 @@ describe("eager reference safeguards", () => {
     expect(events.indexOf("compile:end")).toBeGreaterThan(events.indexOf("mind:end"));
   });
 
+  it.each([false, true])("pipelines resumed compilation while known work is pending, preserving complete preparation (failed known work: %s)", async (failKnown) => {
+    const bootstrapProvider = new DeterministicModelProvider();
+    const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), {
+      seed: 47, modelCatalog: bootstrapProvider.catalog,
+    });
+    const engine = new SimulationEngine(definition, new EagerReferenceAlgorithm(bootstrapProvider));
+    await engine.bootstrapAgents();
+    const source = engine.snapshot;
+    source.agents.keeper!.nextAction = null;
+    const sourceHash = contentHash(source);
+    const input = {
+      definition, state: source,
+      policyRoster: Object.fromEntries(Object.values(source.agents).map(agent => [agent.id, {
+        kind: "model" as const, agentId: agent.id, profiles: structuredClone(agent.modelProfiles),
+      }])),
+      request: { expectedRevision: source.revision, trigger: "manual" as const, externalActions: [] },
+      decisionEligibleAgentIds: Object.keys(source.agents).sort(),
+    };
+    const context = {
+      modelScope: { workloadId: "pipeline-test", batchId: "prepare-pipeline-test",
+        runtimeIdentity: { worldHash: source.worldHash, revision: source.revision } },
+      instrumentation: { emit: () => undefined },
+    };
+    let releaseKnown!: () => void;
+    const knownGate = new Promise<void>(resolve => { releaseKnown = resolve; });
+    let releaseMind!: () => void;
+    const mindGate = new Promise<void>(resolve => { releaseMind = resolve; });
+    let compilationCalls = 0, mindStarted = false;
+    const failure = new ModelTransportError("known compilation unavailable");
+    const provider = new ScriptedModelProvider(async request => {
+      if (request.role === "agent-mind") {
+        mindStarted = true;
+        if (failKnown) await mindGate;
+      }
+      if (request.role === "action-compilation") {
+        if (++compilationCalls === 1) {
+          await knownGate;
+          if (failKnown) throw failure;
+        }
+      }
+      return deterministicModelOutput(request.profileId, request.context);
+    });
+    const pending = new EagerReferenceAlgorithm(provider).prepareStep(input, context);
+    // Attach the failure observer immediately while independent model work is pending.
+    const outcome = pending.then(value => ({ value, error: undefined }), error => ({ value: undefined, error }));
+    try {
+      if (failKnown) {
+        await expect.poll(() => mindStarted).toBe(true);
+        releaseKnown();
+        expect((await outcome).error).toBe(failure);
+        releaseMind();
+        await new Promise<void>(resolve => setImmediate(resolve));
+        expect(compilationCalls).toBe(1);
+      } else {
+        await expect.poll(() => compilationCalls).toBe(2);
+        releaseKnown();
+        const actual = await pending;
+        const reference = new ScriptedModelProvider(request => deterministicModelOutput(request.profileId, request.context));
+        const expected = await new EagerReferenceAlgorithm(reference).prepareStep(input, context);
+        expect(actual.payload).toEqual(expected.payload);
+        expect(actual.pendingReactionRequests).toEqual(expected.pendingReactionRequests);
+        expect(actual.preparedReactionDecisions).toEqual(expected.preparedReactionDecisions);
+        const requests = (p: ScriptedModelProvider) => p.requests.map(request => contentHash({
+          role: request.role, profileId: request.profileId, schemaName: request.schemaName,
+          system: request.system, userPrompt: request.userPrompt, context: request.context,
+        })).sort();
+        expect(requests(provider)).toEqual(requests(reference));
+      }
+      expect(contentHash(source)).toBe(sourceHash);
+    } finally {
+      releaseKnown();
+      releaseMind();
+      await outcome;
+    }
+  });
+
   it("recovers a compressed multi-action resolution response with one-action scopes", async () => {
     const provider = new ScriptedModelProvider(({ role, profileId, context }) => {
       if (role === "truth-resolution") {
@@ -733,18 +997,18 @@ describe("eager reference safeguards", () => {
     const repairContext = requests[1]!.context as {
       task: { slots: Array<{
         previousAttempt: unknown;
-        issue: { code: string; path: unknown[]; allowedHandles: string[] };
+        issues: Array<{ code: string; path: unknown[]; allowedHandles: string[] }>;
       }> };
       referenceCatalog: { candidates: unknown[] };
     };
     expect(repairContext.task.slots[0]?.previousAttempt).toEqual(expect.objectContaining({
       temporalPlan: expect.objectContaining({ profileRef: actionCompilationCandidateKeyForHandle("ref:temporal_profile:missing-temporal-profile") }),
     }));
-    expect(repairContext.task.slots[0]?.issue).toEqual(expect.objectContaining({
+    expect(repairContext.task.slots[0]?.issues[0]).toEqual(expect.objectContaining({
       code: "reference.unknown_candidate_key",
       path: ["temporalPlan", "profileRef"],
     }));
-    expect(repairContext.task.slots[0]!.issue.allowedHandles.length).toBeLessThanOrEqual(64);
+    expect(repairContext.task.slots[0]!.issues[0]!.allowedHandles.length).toBeLessThanOrEqual(64);
     expect(repairContext.referenceCatalog.candidates.length)
       .toBeLessThan(initialContext.referenceCatalog.candidates.length);
   });
@@ -814,7 +1078,7 @@ describe("eager reference safeguards", () => {
               eligible: boolean;
               rejectionCode: string | null;
             }>;
-            issue: { reason: string } | null;
+            issues: Array<{ reason: string }>;
           }> };
         }).task.slots;
         const keeper = stateSlots.find((slot) => slot.action.actorRef === "ref:agent:keeper");
@@ -832,8 +1096,8 @@ describe("eager reference safeguards", () => {
             compilation.temporalPlan.profileRef = referenceHandleFor("temporal_profile", "measured-travel");
             compilation.temporalPlan.basis = { kind: "profile" };
           } else if (action.actorId === "keeper") {
-            const taskSlots = (context as { task: { slots: Array<{ issue: { reason: string } | null }> } }).task.slots;
-            repairedConstraint = taskSlots[0]?.issue?.reason ?? "";
+            const taskSlots = (context as { task: { slots: Array<{ issues: Array<{ reason: string }> }> } }).task.slots;
+            repairedConstraint = taskSlots[0]?.issues[0]?.reason ?? "";
           }
         });
       }
@@ -865,7 +1129,7 @@ describe("eager reference safeguards", () => {
   it("repairs a structural resource-pool error with compact catalog guidance", async () => {
     let firstCompilation = true;
     let repairContext: {
-      task: { slots: Array<{ issue: { code: string; path: unknown[]; allowedHandles: string[] } }> };
+      task: { slots: Array<{ issues: Array<{ code: string; path: unknown[]; allowedHandles: string[] }> }> };
     } | null = null;
     const provider = new ScriptedModelProvider(({ role, profileId, context, system }) => {
       if (role === "action-compilation") {
@@ -905,7 +1169,7 @@ describe("eager reference safeguards", () => {
 
     expect(provider.requests.filter((request) => request.role === "action-compilation")).toHaveLength(2);
     expect(repairContext).not.toBeNull();
-    const issue = repairContext!.task.slots[0]!.issue;
+    const issue = repairContext!.task.slots[0]!.issues[0]!;
     expect(issue).toMatchObject({
       code: "reference.shared_resource_pool_required",
       path: ["interactionDependency", "sharedResourceClaims", 0, "resourcePoolCandidateKey"],
@@ -1041,7 +1305,7 @@ describe("eager reference safeguards", () => {
     expect(normalized).toMatchObject({ droppedReferences: 3, droppedAlternatives: 1 });
   });
 
-  it("projects the merged candidate to every Agent after independent components resolve", async () => {
+  it.each(["expanded", "shared"] as const)("projects the merged candidate through %s batching to every Agent", async (mode) => {
     const provider = new ScriptedModelProvider(({ role, profileId, context }) => {
       if (role === "action-compilation") {
         return deterministicActionCompilationBatch(profileId, context, (compilation, { action }) => {
@@ -1061,7 +1325,10 @@ describe("eager reference safeguards", () => {
     });
     definition.initialState.truth.placements.keeper = "gate";
     definition.historyBaseHash = historyReplayBaseHash(definition.initialState);
-    const engine = new SimulationEngine(definition, new EagerReferenceAlgorithm(provider));
+    const algorithm = mode === "shared"
+      ? registerBuiltinAlgorithms(new WorldExecutionAlgorithmRegistry()).create(sharedContextAlgorithmRef(FULL_CATALOG_ALGORITHM_REF), { provider })
+      : new EagerReferenceAlgorithm(provider);
+    const engine = new SimulationEngine(definition, algorithm);
     await engine.bootstrapAgents();
     const state = engine.snapshot;
     const roster = Object.fromEntries(Object.values(state.agents).map((agent) => [agent.id, {
@@ -1083,6 +1350,11 @@ describe("eager reference safeguards", () => {
     expect(globalProjections.length).toBeGreaterThan(0);
     expect(globalProjections.reduce((total, request) =>
       total + ((request.context as { state?: { slots?: unknown[] } }).state?.slots?.length ?? 0), 0)).toBeGreaterThanOrEqual(2);
+    if (mode === "shared") {
+      expect(provider.requests.filter((request) => request.schemaName === "truth_resolution_plan_commit_batch")).toHaveLength(1);
+      expect(provider.requests.filter((request) => request.schemaName === "truth_resolution_continuation_batch")).toHaveLength(1);
+      expect(contentHash(replaySimulationState(result.state).truth)).toBe(contentHash(result.state.truth));
+    }
   });
 
   it("creates and bootstraps multiple dynamic Agents with a cohort profile", async () => {
@@ -1753,6 +2025,15 @@ describe("eager reference safeguards", () => {
     const interrupted = Object.values(second.state.truth.activities)
       .find((candidate) => candidate.id === activity.id)!;
     expect(interrupted).toMatchObject({ status: "paused", progress: { target: 100 } });
+    const finalReview = provider.requests.filter(request => request.schemaName === "causal_verification").at(-1)!;
+    const reviewedTemporal = (finalReview.context as { state: { candidateTemporalExecution: {
+      sourceHash: string; temporalExecution: { activities: Record<string, { sourceActionRef: string; status: string }> };
+    } } }).state.candidateTemporalExecution;
+    expect(reviewedTemporal.sourceHash).toBe(contentHash(latestCandidate!.temporalState));
+    expect(Object.values(reviewedTemporal.temporalExecution.activities)).toContainEqual(expect.objectContaining({
+      sourceActionRef: referenceHandleFor("action", activity.sourceActionId), status: "paused",
+    }));
+
     if (interrupted.status !== "paused") throw new Error("interrupted Activity did not remain scheduled");
     expect(interrupted.progress!.current).toBeGreaterThan(25);
     expect(interrupted.progress!.current).toBeLessThan(26);
@@ -1859,6 +2140,17 @@ describe("eager reference safeguards", () => {
 
     const replacement = result.committed.actions.find((action) => action.actorId === "keeper")!;
     expect(replacement.rawText).toBe("抓起庭院沙土戒备");
+    const reviews = provider.requests.filter(request => request.schemaName === "causal_verification");
+    expect(reviews.length).toBeGreaterThan(0);
+    for (const review of reviews) {
+      expect(review.context).toMatchObject({ state: { reactionEvidence: {
+        status: "provided", sourceHash: contentHash(result.committed.reactionDecisions),
+        decisions: expect.arrayContaining([expect.objectContaining({
+          agentRef: referenceHandleFor("agent", "keeper"), source: "model", kind: "replace",
+          replacementAction: expect.objectContaining({ rawText: "抓起庭院沙土戒备" }),
+        })]),
+      } } });
+    }
     const replacementPlan = result.committed.temporalPlans
       .find((plan) => plan.actorId === "keeper")!;
     expect(replacementPlan.actionId).toBe(replacement.id);
@@ -1994,9 +2286,15 @@ describe("eager reference safeguards", () => {
       }
       if (role === "truth-perception") {
         perceptionRounds += 1;
-        if (perceptionRounds > 1) return { kind: "done" };
         const playerAction = assignedActions(context)
           .find((action) => action.actorId === "player")!;
+        const keeperAction = assignedActions(context)
+          .find((action) => action.actorId === "keeper")!;
+        expect(context).toMatchObject({ task: { assignment: { perceptionTargets: [
+          { observerRef: referenceHandleFor("entity", "keeper"), sourceActionRef: referenceHandleFor("action", playerAction.id) },
+          { observerRef: referenceHandleFor("entity", "player"), sourceActionRef: referenceHandleFor("action", keeperAction.id) },
+        ] } } });
+        if (perceptionRounds > 1) return { kind: "done" };
         return {
           kind: "request_checks",
           requests: [{
@@ -2004,9 +2302,7 @@ describe("eager reference safeguards", () => {
             actorRef: referenceHandleFor("entity", "keeper"),
             targetRef: referenceHandleFor("entity", "player"),
             ratingRef: null,
-            modifier: 0,
-            modifierSources: [],
-            dc: 0,
+            difficulty: { kind: "environment", band: "trivial", source: { kind: "law", ref: referenceHandleFor("law", "time-passes") } },
             mode: "normal",
             stakes: "守门人是否察觉远处旅人的行动开始",
             visibility: "full",
@@ -2049,6 +2345,17 @@ describe("eager reference safeguards", () => {
     });
 
     expect(perceptionRounds).toBe(2);
+    const reviews = provider.requests.filter(request => request.schemaName === "causal_verification");
+    expect(reviews.length).toBeGreaterThan(0);
+    for (const review of reviews) {
+      expect(review.context).toMatchObject({ state: { reactionEvidence: {
+        status: "provided", sourceHash: contentHash(result.committed.reactionDecisions),
+        decisions: expect.arrayContaining([expect.objectContaining({
+          agentRef: referenceHandleFor("agent", "keeper"), source: "model", kind: "keep",
+          ongoingActivityDisposition: "continue",
+        })]),
+      } } });
+    }
     expect(result.committed.reactionRequests).toContainEqual(expect.objectContaining({
       agentId: "keeper",
       basis: [expect.objectContaining({ kind: "perception_check" })],

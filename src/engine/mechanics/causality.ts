@@ -158,6 +158,17 @@ function evaluateSource(
   }));
 }
 
+export class CausalAssertionValidationError extends Error {
+  readonly failures: readonly CausalAssertionResult[];
+
+  constructor(failures: readonly CausalAssertionResult[]) {
+    const labels = failures.map((result) => `${result.target.kind}:${result.target.id}:${result.assertion.kind}`);
+    super(`causal assertions failed: ${labels.join(", ")}`);
+    this.name = "CausalAssertionValidationError";
+    this.failures = structuredClone(failures);
+  }
+}
+
 export function evaluateProposalCausality(
   state: SimulationState,
   checkResults: readonly D20CheckResult[],
@@ -215,8 +226,7 @@ export function evaluateProposalCausality(
 
   const failed = results.filter((result) => !result.passed);
   if (failed.length > 0) {
-    const labels = failed.map((result) => `${result.target.kind}:${result.target.id}:${result.assertion.kind}`);
-    throw new Error(`causal assertions failed: ${labels.join(", ")}`);
+    throw new CausalAssertionValidationError(failed);
   }
   return results;
 }

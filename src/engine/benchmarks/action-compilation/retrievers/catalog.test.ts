@@ -24,14 +24,14 @@ describe("benchmark candidate-selection catalog", () => {
     )).toBe(true);
   });
 
-  it("records the deliberately renamed advanced hybrid and the graph runtime counterpart explicitly", () => {
+  it("records the deliberately renamed advanced hybrid and historical graph diagnostic", () => {
     expect(BENCHMARK_CANDIDATE_SELECTION_ALGORITHMS).toContainEqual(expect.objectContaining({
       id: "structure-encoder-hybrid",
       strategy: "hybrid",
     }));
     expect(BENCHMARK_CANDIDATE_SELECTION_ALGORITHMS).toContainEqual(expect.objectContaining({
       id: "graph-hybrid",
-      runtimeCounterpartIdentity: "candidate-selection/graph-hybrid-e5@1",
+      availability: "benchmark-only",
     }));
   });
 });

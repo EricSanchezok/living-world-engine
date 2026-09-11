@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { createEagerReferenceAlgorithmRef, DEFAULT_EAGER_REFERENCE_CONFIG } from "./eager-reference/eager-reference";
+import { DEFAULT_EAGER_REFERENCE_CONFIG } from "./eager-reference/eager-reference";
+import { standardEagerReferenceAlgorithmRef } from "./standard-composition";
 import { algorithmCatalogMarkdown, diffAlgorithmRefs, flattenAlgorithmRef } from "./catalog";
 import { DEFAULT_ALGORITHM_REF, registerBuiltinAlgorithms } from "./registry";
 import { WorldExecutionAlgorithmRegistry } from "../runtime/execution";
@@ -16,11 +17,11 @@ describe("algorithm catalog", () => {
     expect(first).toContain("`root.actionCompilation.candidateSelection`");
     expect(first).toContain("`structure-encoder-hybrid@1`");
     expect(first).toContain("Benchmark-only algorithms");
-    expect(flattenAlgorithmRef(DEFAULT_ALGORITHM_REF)).toHaveLength(23);
+    expect(flattenAlgorithmRef(DEFAULT_ALGORITHM_REF)).toHaveLength(25);
   });
 
   it("reports only behavior-changing nodes", () => {
-    const tuned = createEagerReferenceAlgorithmRef({
+    const tuned = standardEagerReferenceAlgorithmRef({
       ...DEFAULT_EAGER_REFERENCE_CONFIG,
       actionCompilationMaxSlots: 3,
     });

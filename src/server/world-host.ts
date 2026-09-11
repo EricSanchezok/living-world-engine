@@ -31,7 +31,6 @@ import { createModelGateway } from "../engine/models/model-gateway";
 import { createModelFetchResolver } from "../engine/models/model-network";
 import { contentHash } from "../engine/models/model-audit";
 import { AlgorithmExperimentRegistry } from "../engine/runtime/experiments";
-import type { CandidateSelectionCapability } from "../engine/algorithms/roles";
 import { ModelRegistry } from "../engine/models/model-registry";
 import {
   modelInvocationCorrelation,
@@ -95,7 +94,10 @@ import type {
 import { runtimeCodeIdentity } from "./code-identity";
 import { installBundledWorlds } from "./bundled-worlds";
 import { loadAlgorithmExperimentRegistry } from "./experiment-catalog";
-import { actionCompilationRetrievalSupportForExperiment } from "./action-compilation-retrieval-runtime";
+import {
+  createActionCompilationRetrievalRuntimeProvider,
+  type ActionCompilationRetrievalRuntimeProvider,
+} from "./action-compilation-retrieval-runtime";
 import {
   DebugCheckpointModelProvider,
   EXECUTION_CHECKPOINT_SCHEMA_VERSION,
@@ -256,11 +258,7 @@ export interface WorldHostOptions {
   ledger?: ExecutionLedger;
   algorithmRegistry?: WorldExecutionAlgorithmRegistry;
   experimentRegistry?: AlgorithmExperimentRegistry;
-  actionCompilationRetrievalRuntimes?: ReadonlyMap<string, CandidateSelectionCapability>;
-  experimentVariantPreflights?: ReadonlyMap<string, (input: {
-    worldContentHash: string;
-    state: Readonly<SimulationState>;
-  }) => Promise<void>>;
+  actionCompilationRetrievalProvider?: ActionCompilationRetrievalRuntimeProvider;
   defaultAlgorithmRef?: AlgorithmRef;
   now?: () => Date;
   idFactory?: () => string;
@@ -640,7 +638,15 @@ export class WorldHost {
         installBundledWorlds(database, provider.catalog);
         const algorithmRegistry = registerBuiltinAlgorithms(new WorldExecutionAlgorithmRegistry());
         const experimentRegistry = loadAlgorithmExperimentRegistry(algorithmRegistry, undefined, database);
-        const retrievalSupport = actionCompilationRetrievalSupportForExperiment(experimentRegistry);
+        const retrievalProvider = createActionCompilationRetrievalRuntimeProvider({
+          onSafetyViolation: (ref, reason) => {
+            if (experimentRegistry.active()?.variants.some(
+              (variant) => variant.algorithmRef.manifestHash === ref.manifestHash,
+            )) {
+              experimentRegistry.stopNewEnrollment(`candidate retrieval runtime failure: ${reason}`);
+            }
+          },
+        });
         this.singleton = new WorldHost({
           repository: database,
           store: database,
@@ -649,8 +655,7 @@ export class WorldHost {
           ledger: database,
           algorithmRegistry,
           experimentRegistry,
-          actionCompilationRetrievalRuntimes: retrievalSupport.runtimes,
-          experimentVariantPreflights: retrievalSupport.preflights,
+          actionCompilationRetrievalProvider: retrievalProvider,
         });
       } catch (error) {
         modelRegistry.stopBackgroundRefresh();
@@ -728,7 +733,7 @@ export class WorldHost {
   }
 
   private algorithmServices(ref: AlgorithmRef) {
-    const retrieval = this.options.actionCompilationRetrievalRuntimes?.get(ref.manifestHash);
+    const retrieval = this.options.actionCompilationRetrievalProvider?.runtime(ref);
     return {
       provider: this.options.provider,
       rulePackages: this.options.repository.rulePackages,
@@ -743,7 +748,7 @@ export class WorldHost {
   }
 
   private requiresActionCompilationRetrieval(ref: AlgorithmRef): boolean {
-    return ref.children.actionCompilation?.children.candidateSelection?.id === "graph-hybrid-e5";
+    return ref.children.actionCompilation?.children.candidateSelection?.id === "relational-rrf";
   }
 
   private assertExecutionAlgorithmAvailable(document: WorldInstanceDocument): void {
@@ -1076,24 +1081,23 @@ export class WorldHost {
       defaultAlgorithmRef: executionAlgorithm ?? this.defaultAlgorithmRef,
       explicitExecutionTuning: executionAlgorithm !== undefined,
     });
-    const experimentPreflight = experiment.enrollment
-      ? this.options.experimentVariantPreflights?.get(experiment.algorithmRef.manifestHash)
-      : undefined;
-    if (experiment.enrollment && this.requiresActionCompilationRetrieval(experiment.algorithmRef) &&
-      (!experimentPreflight || !this.options.actionCompilationRetrievalRuntimes?.has(experiment.algorithmRef.manifestHash))) {
-      const reason = `candidate retrieval treatment dependencies are missing for ${experiment.algorithmRef.manifestHash}`;
-      this.experiments.stopNewEnrollment(reason);
-      throw new WorldHostError(`experiment treatment is not ready: ${reason}`, 503);
+    const retrievalProvider = this.options.actionCompilationRetrievalProvider;
+    const retrievalRuntime = retrievalProvider?.runtime(experiment.algorithmRef);
+    if (this.requiresActionCompilationRetrieval(experiment.algorithmRef) &&
+      (!retrievalProvider || !retrievalRuntime)) {
+      const reason = `candidate retrieval dependencies are missing for ${experiment.algorithmRef.manifestHash}`;
+      if (experiment.enrollment) this.experiments.stopNewEnrollment(reason);
+      throw new WorldHostError(`candidate selection is not ready: ${reason}`, 503);
     }
-    if (experimentPreflight) {
+    if (retrievalRuntime) {
       try {
-        await experimentPreflight({
+        await retrievalProvider!.preflight(experiment.algorithmRef, {
           worldContentHash: definition.contentHash,
           state: definition.initialState,
         });
       } catch (error) {
         throw new WorldHostError(
-          `experiment treatment is not ready: ${error instanceof Error ? error.message : String(error)}`,
+          `candidate selection is not ready: ${error instanceof Error ? error.message : String(error)}`,
           503,
         );
       }
@@ -2218,7 +2222,9 @@ export class WorldHost {
       failedRun.stopReason = invalidated
         ? "step-preparation-invalidated"
         : error instanceof Error && error.name === "AbortError" ? "user-paused" : "execution-failed";
-      failedRun.error = error instanceof Error ? error.message : String(error);
+      const failureMessage = error instanceof Error ? error.message : String(error);
+      failedRun.error = failureMessage.trim() ? failureMessage
+        : error instanceof Error && error.name.trim() ? error.name : "World execution failed";
       failedRun.updatedAt = this.now().toISOString();
       failed.actionWindow = null;
       failed.updatedAt = failedRun.updatedAt;

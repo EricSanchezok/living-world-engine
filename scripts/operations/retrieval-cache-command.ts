@@ -9,13 +9,14 @@ import {
 import {
   discoverLocalEncoderModelDirectory,
   livingWorldCacheRoot,
-  loadLocalMultilingualE5Small,
-  localEncoderFingerprint,
+  loadLocalEncoder,
 } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/local-encoder";
 import {
-  ACTION_COMPILATION_PASSAGE_SCHEMA_VERSION,
-  actionCompilationPassageEntriesForContext,
-} from "../../src/engine/algorithms/eager-reference/candidate-retrieval/graph-aware";
+  relationalRrfEncoderFingerprint,
+  R5_RELATIONAL_PASSAGE_SCHEMA_VERSION,
+  r5RelationalPassagesForContext,
+} from "../../src/engine/algorithms/eager-reference/candidate-retrieval/relational-rrf";
+import { retrievalModelAsset } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/model-assets";
 import { actionCompilationPassagesForState } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/warmup";
 import { loadActionCompilationReferenceDataset } from "../../src/engine/benchmarks/action-compilation/stabilized-behavior";
 import { loadModelCatalog } from "../../src/engine/models/model-catalog";
@@ -27,6 +28,7 @@ type Operation = "warm" | "verify" | "status" | "rebuild";
 interface Options {
   operation: Operation;
   cacheRoot: string;
+  model: string;
   modelDirectory?: string;
   world?: string;
   instance?: string;
@@ -49,6 +51,7 @@ Options:
   --dataset <directory>     Load every context from a frozen benchmark
   --database <sqlite>       Runtime Ledger (default: $LIVINGWORLD_DATA_ROOT/livingworld.sqlite)
   --cache-root <directory>  Cache root (default: $LIVINGWORLD_CACHE_ROOT or .livingworld-cache)
+  --model <name>            Pinned model (default: multilingual-e5-base)
   --model-dir <directory>   Exact local encoder asset directory
   --help
 `;
@@ -68,11 +71,13 @@ function parseArgs(argv: readonly string[]): Options {
   const options: Options = {
     operation,
     cacheRoot: livingWorldCacheRoot(),
+    model: "multilingual-e5-base",
     database: path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v23", "livingworld.sqlite"),
   };
   for (let index = 1; index < argv.length; index += 1) {
     const argument = argv[index]!;
     if (argument === "--cache-root") options.cacheRoot = path.resolve(required(argv, ++index, argument));
+    else if (argument === "--model") options.model = required(argv, ++index, argument);
     else if (argument === "--model-dir") options.modelDirectory = path.resolve(required(argv, ++index, argument));
     else if (argument === "--world") options.world = required(argv, ++index, argument);
     else if (argument === "--instance") options.instance = required(argv, ++index, argument);
@@ -85,11 +90,12 @@ function parseArgs(argv: readonly string[]): Options {
   if (operation !== "status" && sources.length !== 1) {
     throw new Error("provide exactly one of --world, --instance, or --dataset");
   }
+  retrievalModelAsset(options.model);
   return options;
 }
 
 function contextPassages(context: Readonly<Record<string, unknown>>): readonly string[] {
-  return actionCompilationPassageEntriesForContext(context).map((entry) => entry.passage);
+  return r5RelationalPassagesForContext(context).map((entry) => entry.passage);
 }
 
 function resolveWorldDirectory(value: string): string {
@@ -162,9 +168,17 @@ async function execute(options: Options): Promise<Record<string, unknown>> {
     return { operation: "status", cacheRoot: options.cacheRoot, cacheCount: caches.length, caches };
   }
   const source = sourceFromOptions(options);
-  const modelDirectory = options.modelDirectory ?? discoverLocalEncoderModelDirectory(options.cacheRoot);
-  const encoder = await loadLocalMultilingualE5Small({ modelDirectory });
-  const encoderFingerprint = localEncoderFingerprint(encoder, ACTION_COMPILATION_PASSAGE_SCHEMA_VERSION);
+  const asset = retrievalModelAsset(options.model);
+  const modelDirectory = options.modelDirectory ?? discoverLocalEncoderModelDirectory(options.cacheRoot, asset.name);
+  const encoder = await loadLocalEncoder({
+    modelDirectory,
+    modelId: asset.modelId,
+    expectedHash: asset.directorySha256,
+  });
+  const encoderFingerprint = relationalRrfEncoderFingerprint(encoder, R5_RELATIONAL_PASSAGE_SCHEMA_VERSION);
+  if (encoderFingerprint !== asset.encoderFingerprint) {
+    throw new Error(`retrieval encoder fingerprint drift: expected ${asset.encoderFingerprint}, got ${encoderFingerprint}`);
+  }
   const identity = { worldContentHash: source.worldContentHash, encoderFingerprint, dimensions: encoder.dimensions };
   const file = embeddingCacheDatabasePath(options.cacheRoot, identity);
   if (options.operation === "rebuild") {
@@ -190,6 +204,7 @@ async function execute(options: Options): Promise<Record<string, unknown>> {
       worldContentHash: source.worldContentHash,
       encoderFingerprint,
       modelHash: encoder.modelHash,
+      modelRevision: asset.revision,
       dimensions: encoder.dimensions,
       passages: source.passages.length,
       hits: result.hits,

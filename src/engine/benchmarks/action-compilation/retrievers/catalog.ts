@@ -16,7 +16,6 @@ export interface BenchmarkCandidateSelectionCatalogEntry {
   strategy: string;
   source: string;
   evidence: string;
-  runtimeCounterpartIdentity?: string;
 }
 
 function entry(input: Omit<BenchmarkCandidateSelectionCatalogEntry,
@@ -67,9 +66,6 @@ const graph = GRAPH_AWARE_CANDIDATE_SELECTION_STRATEGIES.map((strategy) => entry
   evidence: strategy === "graph-hybrid"
     ? "benchmarks/action-compilation/fullcatalog-stabilized/evaluations/retrieval-runtime-ab-v4/results.json"
     : "benchmarks/action-compilation/fullcatalog-stabilized/evaluations/retrieval-graph-ab-v3/results.json",
-  ...(strategy === "graph-hybrid" ? {
-    runtimeCounterpartIdentity: "candidate-selection/graph-hybrid-e5@1",
-  } : {}),
 }));
 
 /** Offline implementations are intentionally separate from the executable

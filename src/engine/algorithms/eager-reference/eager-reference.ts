@@ -1,3 +1,5 @@
+import { TRUTH_RESOLUTION_CONTRACT_VERSION } from "../roles";
+import { successfulOnsetPerceptionChecks } from "../../mechanics/onset-reaction-basis";
 import { AgentMind } from "./agent-mind";
 import { compileActions } from "./action-compiler";
 import { DEFAULT_EAGER_OUTPUT_RECOVERY } from "./eager-slot-batching";
@@ -15,7 +17,14 @@ import type {
   PlannedTemporalActivity,
   ReactionDecisionCapability,
   TruthResolution,
+  UnreviewedTruthResolution,
+  TruthCandidateStage,
+  TruthCandidateSession,
+  TruthCandidateFeedback,
+  BoundCausalReview,
+  CausalReviewEvidence,
   TruthResolutionCapability,
+  TruthResolutionInput,
 } from "../roles";
 import {
   ActivityFootprintIndex,
@@ -49,6 +58,7 @@ import type {
 } from "../../runtime/execution";
 import {
   StepPreparationInvalidatedError,
+  finalCausalReviewContentHash,
   WORLD_STEP_CANDIDATE_SCHEMA_VERSION,
   WORLD_STEP_PREPARATION_SCHEMA_VERSION,
 } from "../../runtime/execution";
@@ -73,6 +83,7 @@ import { contentHash } from "../../models/model-audit";
 import { applyMindCommit } from "../../cognition/mind-commit";
 import {
   ModelSemanticRepairError,
+  ModelCandidateValidationError,
   type StructuredModelProvider,
 } from "../../models/model-provider";
 import { applyObservationBindings, pendingObservationsFor, validateObservations } from "../../cognition/observation";
@@ -81,9 +92,10 @@ import { createCoreRulePackageRegistry, type RulePackageRegistry } from "../../m
 import { runtimeId } from "../../runtime/runtime-id";
 import { executionStage } from "../../runtime/stages";
 import { applyTransitionProposal } from "../../runtime/transaction";
-import { TruthEngine } from "../../mechanics/truth-engine";
+import { TruthEngine, assertCausalReviewMatches } from "../../mechanics/truth-engine";
 import { TruthBatchCoordinator } from "../../mechanics/truth-batch-provider";
-import type { ResolutionScope } from "../../contracts/prompts";
+import { OrderedRandomStream } from "../../mechanics/ordered-random-stream";
+import { causalReviewRepairIssues, type ResolutionScope } from "../../contracts/prompts";
 import {
   cancelActivity,
   cancelDeferredActivity,
@@ -115,6 +127,10 @@ import {
 import {
   ACTION_COMPILATION_RETRIEVAL_RUNTIME_VERSION,
 } from "./candidate-retrieval/runtime";
+import {
+  RELATIONAL_RRF_ENCODER_FINGERPRINT,
+  RELATIONAL_RRF_ENCODER_MODEL_ID,
+} from "./candidate-retrieval/relational-rrf";
 import { DEFAULT_SYMBOL_REPAIR_POLICY, type SymbolRepairPolicy } from "../../contracts/symbol-repair";
 
 export type EagerReferenceCandidateRetrievalConfig =
@@ -139,13 +155,27 @@ interface NormalizedEagerReferenceAlgorithmConfig {
   candidateRetrieval: EagerReferenceCandidateRetrievalConfig;
 }
 
-export const DEFAULT_EAGER_REFERENCE_CONFIG: Readonly<EagerReferenceAlgorithmConfig> = Object.freeze({
+const EAGER_REFERENCE_LIMITS = {
   actionCompilationMaxSlots: 12,
   agentMindMaxSlots: 8,
   reactionMaxSlots: 8,
   groundingMaxSlots: 16,
   truthBatchMaxSlots: 12,
+} as const;
+
+export const FULL_CATALOG_EAGER_REFERENCE_CONFIG: Readonly<EagerReferenceAlgorithmConfig> = Object.freeze({
+  ...EAGER_REFERENCE_LIMITS,
   candidateRetrieval: { mode: "off" as const },
+});
+
+export const DEFAULT_EAGER_REFERENCE_CONFIG: Readonly<EagerReferenceAlgorithmConfig> = Object.freeze({
+  ...EAGER_REFERENCE_LIMITS,
+  candidateRetrieval: {
+    mode: "runtime" as const,
+    runtimeVersion: ACTION_COMPILATION_RETRIEVAL_RUNTIME_VERSION,
+    encoderFingerprint: RELATIONAL_RRF_ENCODER_FINGERPRINT,
+    budgetRatio: 0.2 as const,
+  },
 });
 
 function slotLimit(value: unknown, label: string): number {
@@ -207,6 +237,9 @@ function parseCandidateRetrievalConfig(value: unknown): EagerReferenceCandidateR
   if (typeof input.encoderFingerprint !== "string" || !/^sha256:[a-f0-9]{64}$/u.test(input.encoderFingerprint)) {
     throw new Error("candidateRetrieval encoderFingerprint must be a SHA-256 identity");
   }
+  if (input.encoderFingerprint !== RELATIONAL_RRF_ENCODER_FINGERPRINT) {
+    throw new Error(`candidateRetrieval encoderFingerprint must be ${RELATIONAL_RRF_ENCODER_FINGERPRINT}`);
+  }
   return { mode: "runtime", runtimeVersion: input.runtimeVersion, encoderFingerprint: input.encoderFingerprint, budgetRatio: 0.2 };
 }
 
@@ -252,18 +285,39 @@ export function createEagerReferenceAlgorithmRef(
       })
     : defineAlgorithmRef({
         role: "candidate-selection",
-        id: "graph-hybrid-e5",
-        version: "1",
+        id: "relational-rrf",
+        version: "2",
         contractVersion: 1,
         config: {
           budgetRatio: config.candidateRetrieval.budgetRatio,
-          maxPathDepth: 3,
-          encoderFingerprint: config.candidateRetrieval.encoderFingerprint,
-          encoderModel: "intfloat/multilingual-e5-small",
-          graphFeatureSchemaVersion: 1,
-          passageSchemaVersion: 1,
+          budgetPolicy: "mandatory-floor-v1",
           cacheSchemaVersion: 1,
-          rankerArtifactHash: null,
+          dynamicPassageWrites: true,
+        },
+        children: {
+          ranking: defineAlgorithmRef({
+            role: "candidate-ranking",
+            id: "typed-channel-rrf",
+            version: "1",
+            contractVersion: 1,
+            config: {
+              encoderFingerprint: config.candidateRetrieval.encoderFingerprint,
+              encoderModel: RELATIONAL_RRF_ENCODER_MODEL_ID,
+              graphDepth: 3,
+              pseudoSeedCount: 16,
+              channels: ["identity", "state", "fact", "temporal"],
+              passageSchemaVersion: 1,
+              querySchemaVersion: 1,
+              rrfSchemaVersion: 1,
+            },
+          }),
+          allocation: defineAlgorithmRef({
+            role: "candidate-allocation",
+            id: "coverage-aware-joint-budget",
+            version: "1",
+            contractVersion: 1,
+            config: { compactKindRatio: 0.15 },
+          }),
         },
       });
   const symbolRepair = defineAlgorithmRef({
@@ -284,7 +338,7 @@ export function createEagerReferenceAlgorithmRef(
   const actionCompilation = defineAlgorithmRef({
     role: "action-compilation",
     id: "model-action-compilation",
-    version: "1",
+    version: "2",
     contractVersion: 1,
     config: {
       candidateKeyVersion: ACTION_COMPILATION_CANDIDATE_KEY_VERSION,
@@ -318,7 +372,7 @@ export function createEagerReferenceAlgorithmRef(
       onsetPerception: defineAlgorithmRef({
         role: "onset-perception",
         id: "model-onset-perception",
-        version: "1",
+        version: "4",
         contractVersion: 1,
         config: { fallback: "global", contextMode: "full" },
       }),
@@ -337,14 +391,14 @@ export function createEagerReferenceAlgorithmRef(
     role: "truth-resolution",
     id: "model-truth-resolution",
     version: "1",
-    contractVersion: 1,
+    contractVersion: TRUTH_RESOLUTION_CONTRACT_VERSION,
     config: {},
     children: { batching: batching(config.truthBatchMaxSlots), recovery: recovery() },
   });
   const observationRendering = defineAlgorithmRef({
     role: "observation-rendering",
     id: "model-observation-rendering",
-    version: "1",
+    version: "2",
     contractVersion: 1,
     config: {},
     children: { batching: batching(config.truthBatchMaxSlots), recovery: recovery() },
@@ -352,8 +406,8 @@ export function createEagerReferenceAlgorithmRef(
   return defineAlgorithmRef({
     role: "world-execution",
     id: "eager-reference",
-    version: "16",
-    contractVersion: 6,
+    version: "18",
+    contractVersion: 7,
     config: {},
     children: { agentCognition, actionCompilation, interactionGrounding, reactionResolution, truthResolution, observationRendering },
   });
@@ -420,25 +474,33 @@ interface EagerMindBatchOutput {
 }
 
 interface ComponentResolution {
-  resolution: TruthResolution;
+  resolution: UnreviewedTruthResolution;
+  stage: TruthCandidateStage;
+  interactionIds: readonly string[];
+  repair(error: unknown): Promise<void>;
+  finish(): Promise<void>;
+  close(): Promise<unknown>;
 }
 
 async function settledValues<T>(
   tasks: readonly (() => Promise<T>)[],
   label: string,
   maxConcurrent = tasks.length || 1,
+  onFirstFailure?: (error: unknown) => void,
 ): Promise<T[]> {
   const results = Array<T | undefined>(tasks.length);
   const failures: unknown[] = [];
   let nextIndex = 0;
   const worker = async (): Promise<void> => {
     while (true) {
+      if (failures.length > 0) return;
       const index = nextIndex++;
       if (index >= tasks.length) return;
       try {
         results[index] = await tasks[index]!();
       } catch (error) {
         failures.push(error);
+        if (failures.length === 1) onFirstFailure?.(error);
       }
     }
   };
@@ -580,13 +642,7 @@ function reactionBasis(
     })
     .sort((left, right) => left.id.localeCompare(right.id));
   if (related[0]) return [{ kind: "fact", factId: related[0].id }];
-  const resultById = new Map(perception.checks.map((result) => [result.requestId, result]));
-  const successful = perception.requests.filter((request) =>
-    request.phase === "perception" && request.actorId === observer.entityId &&
-    resultById.get(request.id)?.succeeded &&
-    request.causes.some((cause) => cause.kind === "action" && cause.id === trigger.id) &&
-    request.causes.some((cause) => cause.kind === "fact" || cause.kind === "law"))
-    .sort((left, right) => left.id.localeCompare(right.id));
+  const successful = successfulOnsetPerceptionChecks(observer.entityId, trigger.id, perception);
   return successful[0] ? [{ kind: "perception_check", checkId: successful[0].id }] : [];
 }
 
@@ -720,6 +776,7 @@ export interface EagerReferenceComponents {
   symbolRepair: Readonly<SymbolRepairPolicy>;
   actionCompilationRecovery: Readonly<OutputRecoveryCapability>;
   interactionGroundingRecovery: Readonly<OutputRecoveryCapability>;
+  orderedComponentRandom?: boolean;
 }
 
 async function resolveAgentReactionRequests(
@@ -872,10 +929,10 @@ function materializeExternalReaction(
 
 function mergeResolutions(
   source: Readonly<SimulationState>,
-  resolutions: readonly TruthResolution[],
+  resolutions: readonly UnreviewedTruthResolution[],
   boundary: Readonly<TemporalBoundary>,
   fallbackCause: import("../../contracts/model").CausalRef,
-): TruthResolution {
+): UnreviewedTruthResolution {
   const actions = resolutions.flatMap((resolution) => structuredClone(resolution.actions));
   const allMechanicInvocations = resolutions.flatMap((resolution) =>
     structuredClone(resolution.proposal.mechanicInvocations));
@@ -936,7 +993,6 @@ function mergeResolutions(
     rng: structuredClone(resolutions.at(-1)?.rng ?? source.truth.rng),
     mechanicResults,
     causalAssertionResults: evaluateProposalCausality(source, checks, randomResults, proposal),
-    causalVerification: { verdict: "accept", findings: [] },
     modelAudits: dedupeModelAudits(resolutions.flatMap((resolution) => resolution.modelAudits)),
     reactionModelAudits: dedupeModelAudits(resolutions.flatMap((resolution) => resolution.reactionModelAudits)),
   };
@@ -959,11 +1015,12 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
   private readonly provider: StructuredModelProvider;
   private readonly rulePackages: RulePackageRegistry;
   private readonly actionCompilationRetrieval?: CandidateSelectionCapability;
+  private readonly orderedComponentRandom: boolean;
 
   constructor(
     provider: StructuredModelProvider,
     rulePackages?: RulePackageRegistry,
-    config: Readonly<EagerReferenceAlgorithmConfig> = DEFAULT_EAGER_REFERENCE_CONFIG,
+    config: Readonly<EagerReferenceAlgorithmConfig> = FULL_CATALOG_EAGER_REFERENCE_CONFIG,
     actionCompilationRetrieval?: CandidateSelectionCapability,
     components?: Readonly<EagerReferenceComponents>,
     manifest?: AlgorithmManifest,
@@ -977,6 +1034,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
       contractVersion: this.manifest.contractVersion,
     });
     this.provider = components?.provider ?? provider;
+    this.orderedComponentRandom = components?.orderedComponentRandom ?? false;
     this.rulePackages = rulePackages ?? createCoreRulePackageRegistry();
     if (this.config.candidateRetrieval.mode === "runtime") {
       if (!actionCompilationRetrieval) throw new Error("candidate retrieval runtime is required by the eager-reference algorithm config");
@@ -1119,7 +1177,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     input: Readonly<WorldStepInput>,
     boundary: Readonly<TemporalBoundary>,
     cause: Readonly<CausalRef>,
-  ): TruthResolution {
+  ): UnreviewedTruthResolution {
     const invocation: MechanicInvocation = {
       id: runtimeId({
         worldHash: input.state.worldHash,
@@ -1188,7 +1246,6 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
       rng: structuredClone(input.state.truth.rng),
       mechanicResults: mechanics.results,
       causalAssertionResults: evaluateProposalCausality(input.state, [], [], proposal),
-      causalVerification: { verdict: "accept", findings: [] },
       modelAudits: [],
       reactionModelAudits: [],
     };
@@ -1236,6 +1293,9 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     context: ExecutionContext,
     globalFallback: boolean,
     temporal: Readonly<TemporalAdvanceResult>,
+    completedReactionDecisions: readonly ReactionDecision[],
+    sessions: Set<TruthCandidateSession>,
+    orderedRandom?: TruthResolutionInput["orderedRandom"],
   ): Promise<ComponentResolution> {
     const componentDependencies = dependencies.filter((dependency) => interactionIds.includes(dependency.id));
     const actorIds = [...new Set(componentDependencies.flatMap((dependency) =>
@@ -1272,8 +1332,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
       decisionPoints: scopedDecisionPoints,
     };
     const identityOwner = globalFallback ? "component-global" : `component-${actorIds.join("+")}`;
-    let transitionCandidate: SimulationState | undefined;
-    const resolution = await this.truthEngine.resolve({
+    const session = this.truthEngine.prepare({
       definition: input.definition,
       state: scopedState,
       initialActions: scopedActions.map((action) => structuredClone(action)),
@@ -1292,69 +1351,17 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
         totalActionCount: actions.length,
       } satisfies ResolutionScope,
       enableReactionRouting: false,
+      completedReactionDecisions,
+      orderedRandom,
       resolveReactions: async () => {
         throw new Error("component resolution cannot open a second reaction round");
       },
-      renderObservations: async (proposal, finalActions, transitionAttempt, requestedObserverIds) => {
+    }, context.modelScope);
+    sessions.add(session);
+    const validate = (resolution: UnreviewedTruthResolution) => {
+        const { proposal, actions: finalActions } = resolution;
         const resolvedTemporal = reconcileTemporalOutcomes(scopedTemporalBase, proposal.outcomes);
-        const observationTemporal = {
-          activities: {
-            ...structuredClone(temporal.activities),
-            ...structuredClone(resolvedTemporal.activities),
-          },
-          timers: {
-            ...structuredClone(temporal.timers),
-            ...structuredClone(resolvedTemporal.timers),
-          },
-        };
-        const observerIds = requestedObserverIds ?? [...new Set([
-          ...actorIds,
-          ...scopedDependencies.flatMap((dependency) => dependency.audienceAgentIds),
-        ])].sort();
-        const observationIdentityOwner = `${identityOwner}:transition-${transitionAttempt}`;
-        const rendered = await this.observationRenderer.render({
-          definition: input.definition,
-          state: input.state,
-          proposal: structuredClone(proposal),
-          actions: structuredClone(finalActions),
-          observerIds,
-          identityOwner: observationIdentityOwner,
-          temporalState: observationTemporal,
-        }, context.modelScope);
-        context.instrumentation.emit({
-          event: "algorithm.observation.rendering_completed",
-          attributes: { phase: "observation" },
-          counts: {
-            observationBatches: rendered.batchCount,
-            observations: rendered.packets.length,
-          },
-        });
-        return rendered;
-      },
-      validateProposal: (proposal, _checks, _randomResults, finalActions, stimulus) => {
-        const resolvedTemporal = reconcileTemporalOutcomes(scopedTemporalBase, proposal.outcomes);
-        const candidate = applyTransitionProposal(scopedState, proposal, resolvedTemporal);
-        const observationCandidate = applyTransitionProposal(input.state, proposal, {
-          activities: {
-            ...structuredClone(temporal.activities),
-            ...structuredClone(resolvedTemporal.activities),
-          },
-          timers: {
-            ...structuredClone(temporal.timers),
-            ...structuredClone(resolvedTemporal.timers),
-          },
-        });
-        validateObservations(
-          observationCandidate,
-          [...stimulus, ...proposal.observations],
-          observationCandidate.step,
-        );
-        const observers = new Set(proposal.observations
-          .filter((packet) => packet.kind === "outcome")
-          .map((packet) => packet.observerId));
-        for (const agentId of actorIds) {
-          if (!observers.has(agentId)) throw new Error(`component transition omitted observation for ${agentId}`);
-        }
+        applyTransitionProposal(scopedState, proposal, resolvedTemporal);
         if (finalActions.length !== scopedActions.length) throw new Error("component transition changed action cardinality");
         const continuingActionIds = new Set(Object.values(resolvedTemporal.activities)
           .filter((activity) => activity.status === "active")
@@ -1382,22 +1389,37 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
             throw new Error(`activity action ${actionId} reached its completion boundary and must settle now`);
           }
         }
-        for (const operation of proposal.operations) {
-          if (operation.kind === "advance_time") continue;
-          if (operation.causes.some((cause) => cause.kind === "action" && continuingActionIds.has(cause.id))) {
-            throw new Error("continuing activity cannot commit semantic completion effects before its boundary");
-          }
+        // Continuing describes the entire task, not each interval consequence.
+        // TruthEngine defers receipt settlement; typed causal validation and
+        // bound review adjudicate proposed partial effects against the source.
+    };
+    const next = async (feedback?: TruthCandidateFeedback): Promise<TruthCandidateStage> => {
+      let pending = await session.next(feedback!);
+      while (!pending.done) {
+        try {
+          validate(pending.value.resolution);
+          return pending.value;
+        } catch (error) {
+          pending = await session.next({ kind: "repair", error, previousReport: null });
         }
-        for (const event of proposal.events) {
-          if (event.causes.some((cause) => cause.kind === "action" && continuingActionIds.has(cause.id))) {
-            throw new Error("continuing activity cannot emit completion events before its boundary");
-          }
-        }
-        transitionCandidate = candidate;
+      }
+      throw new Error("component TruthEngine returned no candidate");
+    };
+    const stage = await next();
+    const result: ComponentResolution = {
+      stage, resolution: stage.resolution, interactionIds,
+      repair: async error => {
+        result.stage = await next({ kind: "repair", error, previousReport: null });
+        result.resolution = result.stage.resolution;
       },
-    }, context.modelScope);
-    if (!transitionCandidate) throw new Error("component TruthEngine returned no candidate");
-    return { resolution };
+      finish: async () => {
+        const completed = await session.next({ kind: "finish" });
+        if (!completed.done || !completed.value) throw new Error("component candidate did not finish");
+        result.resolution.modelAudits = completed.value.modelAudits;
+      },
+      close: () => session.return(undefined),
+    };
+    return result;
   }
 
   async prepareStep(input: Readonly<WorldStepInput>, context: ExecutionContext): Promise<WorldStepPreparation> {
@@ -1435,6 +1457,13 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     const actionOverlapStartedAt = performance.now();
     const actionCompilationStage = executionStage("action-compilation");
     await context.stages?.before(actionCompilationStage);
+    let preparationFailed = false;
+    let preparationError: unknown;
+    const failPreparation = (error: unknown): never => {
+      preparationFailed = true;
+      preparationError = error;
+      throw error;
+    };
     const knownActionCompilation = this.actionCompiler(
       this.provider,
       planningState,
@@ -1444,7 +1473,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
       this.config.actionCompilationMaxSlots,
       this.actionCompilationRecovery,
       this.symbolRepairPolicy,
-    );
+    ).catch(failPreparation);
     const resumedMindBatchPromise = this.thinkBatchWithFallback(
       source,
       resumedAgentIds.map((agentId) => ({
@@ -1456,34 +1485,43 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
       "resume",
       context,
     );
-    const [knownActionCompilationBatch, resumedMindBatch] = await Promise.all([
+    // Dynamic compilation depends on its AgentMind output, not on unrelated
+    // known-action repairs. Both branches read the same frozen planning state.
+    const resumedPreparation = resumedMindBatchPromise.then(async (resumedMindBatch) => {
+      if (preparationFailed) throw preparationError;
+      context.modelScope.abortSignal?.throwIfAborted();
+      context.modelScope.cancelPendingSignal?.throwIfAborted();
+      const resumedActions = resumedAgentIds.map((agentId, index) => {
+        const action = resumedMindBatch.outputs[index]?.nextAction;
+        if (!action) throw new Error(`resume AgentMind omitted action for ${agentId}`);
+        return structuredClone(action);
+      });
+      const newActions = [...knownActions, ...resumedActions]
+        .sort((left, right) => left.actorId.localeCompare(right.actorId) || left.id.localeCompare(right.id));
+      if (new Set(newActions.map((action) => action.actorId)).size !== newActions.length) {
+        throw new Error("step preparation produced more than one action for an Agent");
+      }
+      if (new Set(newActions.map((action) => action.id)).size !== newActions.length) {
+        throw new Error("step preparation produced duplicate action identities");
+      }
+      const compiled = await this.actionCompiler(
+        this.provider,
+        planningState,
+        resumedActions,
+        this.actionCompilationScope(context),
+        input.definition.modelProfiles.grounding,
+        this.config.actionCompilationMaxSlots,
+        this.actionCompilationRecovery,
+        this.symbolRepairPolicy,
+      );
+      return { resumedMindBatch, resumedActions, newActions, compiled };
+    }).catch(failPreparation);
+    const [knownActionCompilationBatch, resumed] = await Promise.all([
       knownActionCompilation,
-      resumedMindBatchPromise,
+      resumedPreparation,
     ]);
+    const { resumedMindBatch, resumedActions, newActions, compiled: resumedActionCompilationBatch } = resumed;
     const resumedOutputs = resumedMindBatch.outputs;
-    const resumedActions = resumedAgentIds.map((agentId, index) => {
-      const action = resumedOutputs[index]?.nextAction;
-      if (!action) throw new Error(`resume AgentMind omitted action for ${agentId}`);
-      return structuredClone(action);
-    });
-    const newActions = [...knownActions, ...resumedActions]
-      .sort((left, right) => left.actorId.localeCompare(right.actorId) || left.id.localeCompare(right.id));
-    if (new Set(newActions.map((action) => action.actorId)).size !== newActions.length) {
-      throw new Error("step preparation produced more than one action for an Agent");
-    }
-    if (new Set(newActions.map((action) => action.id)).size !== newActions.length) {
-      throw new Error("step preparation produced duplicate action identities");
-    }
-    const resumedActionCompilationBatch = await this.actionCompiler(
-      this.provider,
-      planningState,
-      resumedActions,
-      this.actionCompilationScope(context),
-      input.definition.modelProfiles.grounding,
-      this.config.actionCompilationMaxSlots,
-      this.actionCompilationRecovery,
-      this.symbolRepairPolicy,
-    );
     await context.stages?.after(actionCompilationStage);
     if (knownActions.length > 0) {
       this.emitSlotBatchMetrics(
@@ -1632,6 +1670,10 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
           }),
           identityOwner: "action-onset-perception",
           groundings: newDependencyResults.map((result) => structuredClone(result.dependency)),
+          perceptionTargets: perceptionReactionCandidates.map(candidate => ({
+            observerId: candidate.agentId,
+            sourceActionId: candidate.trigger.id,
+          })),
         }, context.modelScope);
     const [onsetPerceptionResult, directReactionResult] = await Promise.all([
       onsetPerceptionPromise.then(
@@ -1767,6 +1809,21 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     preparation: Readonly<WorldStepPreparation>,
     reactions: readonly ExternalReactionInput[],
     context: ExecutionContext,
+  ): Promise<WorldStepCandidate> {
+    const sessions = new Set<TruthCandidateSession>();
+    try {
+      return await this.completeStepCandidate(input, preparation, reactions, context, sessions);
+    } finally {
+      await Promise.all([...sessions].map(session => session.return(undefined)));
+    }
+  }
+
+  private async completeStepCandidate(
+    input: Readonly<WorldStepInput>,
+    preparation: Readonly<WorldStepPreparation>,
+    reactions: readonly ExternalReactionInput[],
+    context: ExecutionContext,
+    sessions: Set<TruthCandidateSession>,
   ): Promise<WorldStepCandidate> {
     const source = structuredClone(input.state);
     if (preparation.schemaVersion !== WORLD_STEP_PREPARATION_SCHEMA_VERSION ||
@@ -2078,31 +2135,54 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     await context.stages?.before(truthResolutionStage);
     if (orderedComponents.length > 1) {
       const speculativeRng = structuredClone(rng);
+      const orderedRandom = this.orderedComponentRandom ? new OrderedRandomStream(speculativeRng, orderedComponents.length) : null;
+      const pendingWork = new AbortController();
+      const componentContext: ExecutionContext = {
+        ...context,
+        modelScope: {
+          ...context.modelScope,
+          cancelPendingSignal: AbortSignal.any([
+            pendingWork.signal,
+            ...(context.modelScope.cancelPendingSignal ? [context.modelScope.cancelPendingSignal] : []),
+          ]),
+        },
+      };
       const speculativeResults = await settledValues(
-        orderedComponents.map((component) => () => this.resolveComponent(
-          temporalInput,
-          actions,
-          interactionDependencies,
-          component,
-          speculativeRng,
-          context,
-          false,
-          temporal,
-        )),
+        orderedComponents.map((component, index) => async () => {
+          const result = await this.resolveComponent(
+            temporalInput, actions, interactionDependencies, component,
+            speculativeRng, componentContext, false, temporal,
+            reactionDecisions, sessions,
+            orderedRandom ? {
+              acquire: () => orderedRandom.acquire(index),
+              finish: state => orderedRandom.finish(index, state),
+            } : undefined,
+          );
+          return result;
+        }),
         "truth resolution components",
         orderedComponents.length || 1,
+        () => {
+          const error = new DOMException("Atomic component work is invalidated", "AbortError");
+          pendingWork.abort(error);
+          orderedRandom?.abort(error);
+        },
       );
       const hasRandomCommitments = speculativeResults.some((result) =>
         result.resolution.rng.draws !== speculativeRng.draws ||
         result.resolution.checks.length > 0 ||
         result.resolution.randomRequests.length > 0);
-      if (!hasRandomCommitments) {
+      if (orderedRandom) {
+        componentResults = speculativeResults;
+        rng = structuredClone(componentResults.at(-1)!.resolution.rng);
+      } else if (!hasRandomCommitments) {
         componentResults = speculativeResults;
       } else {
         // A single deterministic RNG stream cannot be consumed concurrently
         // without changing replay semantics.  Keep the fast path for
         // non-random components and fall back to the canonical stream order
         // whenever a component actually commits a check or random draw.
+        await Promise.all(speculativeResults.map(result => result.close()));
         componentResults = [];
         rng = structuredClone(payload.onsetPerception.rng);
         for (const component of orderedComponents) {
@@ -2115,6 +2195,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
             context,
             false,
             temporal,
+            reactionDecisions, sessions,
           );
           componentResults.push(result);
           rng = structuredClone(result.resolution.rng);
@@ -2131,6 +2212,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
           context,
           false,
           temporal,
+          reactionDecisions, sessions,
         );
         componentResults.push(result);
         rng = structuredClone(result.resolution.rng);
@@ -2156,10 +2238,11 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     }
     for (const [index, resolution] of resolutions.entries()) {
       const componentDependencies = interactionDependencies.filter((dependency) =>
-        adjudicatedComponents[index].includes(dependency.id));
+        componentResults[index]!.interactionIds.includes(dependency.id));
       if (resolutionExceedsDeclaredDependencies(source, resolution, componentDependencies)) fallback = true;
     }
     if (fallback) {
+      await Promise.all(componentResults.map(result => result.close()));
       actions = [...new Map(resolutions.flatMap((entry) => entry.actions)
         .map((action) => [action.id, structuredClone(action)])).values()]
         .sort((left, right) => left.actorId.localeCompare(right.actorId) || left.id.localeCompare(right.id));
@@ -2176,167 +2259,282 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
         context,
         true,
         temporal,
+        reactionDecisions, sessions,
       )];
       resolutions = componentResults.map((result) => result.resolution);
       interactionDependencies = globalDependencies;
     }
-    if (resolutions.length === 0) {
-      resolutions = [this.contextOnlyResolution(
-        temporalInput,
-        temporalBoundary,
-        { kind: "law", id: fallbackLaw.id },
-      )];
-    }
-    const resolution = mergeResolutions(
-      planningState,
-      resolutions,
-      temporalBoundary,
-      { kind: "law", id: fallbackLaw.id },
-    );
-    const deterministicResourceActions = newActions
-      .filter((action) => deferredActionIds.has(action.id))
-      .sort((left, right) => left.id.localeCompare(right.id));
-    const deterministicResourceOutcomes = materializeSharedResourceAdmissionOutcomes({
-      worldHash: source.worldHash,
-      revision: source.revision,
-      actions: deterministicResourceActions,
-      admissions: sharedResourceAdmissions,
-      activities: planningState.truth.activities,
-      pools: planningState.truth.sharedActivityResourcePools,
-      definitions: planningState.truth.mechanics.sharedActivityResources,
-    });
-    resolution.actions = [...resolution.actions, ...structuredClone(deterministicResourceActions)]
-      .sort((left, right) => left.actorId.localeCompare(right.actorId) || left.id.localeCompare(right.id));
-    resolution.proposal.outcomes = [...resolution.proposal.outcomes, ...deterministicResourceOutcomes]
-      .sort((left, right) => left.proposalId.localeCompare(right.proposalId));
-    resolution.causalAssertionResults = evaluateProposalCausality(
-      planningState,
-      resolution.checks,
-      resolution.randomResults,
-      resolution.proposal,
-    );
-    resolution.requests = [
-      ...structuredClone(payload.onsetPerception.requests),
-      ...resolution.requests,
-    ];
-    resolution.checks = [
-      ...structuredClone(payload.onsetPerception.checks),
-      ...resolution.checks,
-    ];
-    resolution.commitmentRounds = [
-      ...structuredClone(payload.onsetPerception.commitmentRounds),
-      ...resolution.commitmentRounds,
-    ];
-    resolution.initialActions = [...new Map([
-      ...timerActions,
-      ...dueActions,
-      ...payload.newActions,
-    ].map((action) => [action.actorId, structuredClone(action)])).values()]
-      .sort((left, right) => left.actorId.localeCompare(right.actorId) || left.id.localeCompare(right.id));
-    resolution.reactionRequests = structuredClone(payload.reactionRequests);
-    resolution.reactionDecisions = structuredClone(reactionDecisions);
-    resolution.stimulusObservations = payload.reactionRequests.map((request) =>
-      structuredClone(request.stimulus));
     await context.stages?.after(truthResolutionStage);
     const transitionStage = executionStage("transition-causal-verification");
     await context.stages?.before(transitionStage);
-    temporal = reconcileTemporalOutcomes(temporal, resolution.proposal.outcomes);
+    const temporalBase = structuredClone(temporal);
     const globalObservationAudits: ModelExecutionAudit[] = [];
-    const dynamicLifecycleChange = resolution.proposal.operations.some((operation) =>
-      operation.kind === "create_entity" || operation.kind === "create_agent" ||
-      operation.kind === "retire_entity" || operation.kind === "remove_agent");
-    if (components.length > 1 || deterministicResourceActions.length > 0 || dynamicLifecycleChange) {
-      const preview = applyTransitionProposal(planningState, resolution.proposal, temporal);
-      const rendered = await this.observationRenderer.render({
-        definition: input.definition,
-        state: planningState,
-        proposal: structuredClone(resolution.proposal),
-        actions: structuredClone(resolution.actions),
-        observerIds: Object.keys(preview.agents).sort(),
-        identityOwner: "step-global-observation",
-        temporalState: temporal,
-      }, context.modelScope);
-      resolution.proposal.observations = structuredClone(rendered.packets);
-      globalObservationAudits.push(...structuredClone(rendered.modelAudits));
-      context.instrumentation.emit({
-        event: "algorithm.observation.global_projection_completed",
-        attributes: {
-          phase: "observation",
-          reason: components.length > 1 ? "multiple-conflict-components" : "dynamic-lifecycle",
-        },
-        counts: {
-          observations: rendered.packets.length,
-          observationBatches: rendered.batchCount,
-          dependencyComponents: components.length,
-        },
+    const finalReviewAudits: ModelExecutionAudit[] = [];
+    const assemble = () => {
+      const resolution = mergeResolutions(
+        planningState,
+        componentResults.length > 0 ? componentResults.map(result => result.resolution)
+          : [this.contextOnlyResolution(temporalInput, temporalBoundary, { kind: "law", id: fallbackLaw.id })],
+        temporalBoundary,
+        { kind: "law", id: fallbackLaw.id },
+      );
+      const deterministicResourceActions = newActions
+        .filter((action) => deferredActionIds.has(action.id))
+        .sort((left, right) => left.id.localeCompare(right.id));
+      const deterministicResourceOutcomes = materializeSharedResourceAdmissionOutcomes({
+        worldHash: source.worldHash,
+        revision: source.revision,
+        actions: deterministicResourceActions,
+        admissions: sharedResourceAdmissions,
+        activities: planningState.truth.activities,
+        pools: planningState.truth.sharedActivityResourcePools,
+        definitions: planningState.truth.mechanics.sharedActivityResources,
       });
-    }
-    let observations = [...resolution.stimulusObservations, ...resolution.proposal.observations];
-    const preContextCandidate = applyTransitionProposal(source, resolution.proposal, temporal);
-    preContextCandidate.truth.rng = structuredClone(resolution.rng);
-    validateObservations(preContextCandidate, observations, preContextCandidate.step);
-    const observedAgentIds = new Set(observations.map((observation) => observation.observerId));
-    const relevantExternalObservers = new Set(interactionDependencies.flatMap((dependency) =>
-      dependency.audienceAgentIds.filter((agentId) =>
-        dependency.actorId !== agentId && observedAgentIds.has(agentId))));
-    const preserveActiveActivityIds = new Set(reactionDecisions.flatMap((decision) => {
-      if (decision.kind !== "keep" || decision.ongoingActivityDisposition !== "continue") return [];
-      const request = payload.reactionRequests.find((entry) => entry.id === decision.requestId);
-      if (!request) return [];
-      if (request.originalIntent.kind === "ongoing_activity") return [request.originalIntent.activityId];
-      const preparedActionId = request.originalIntent.actionId;
-      const activity = Object.values(temporal.activities).find((entry) =>
-        entry.sourceActionId === preparedActionId);
-      return activity ? [activity.id] : [];
-    }));
-    const contextSettlement = settleActivityContexts({
-      preTransitionState: planningState,
-      state: preContextCandidate,
-      temporal,
-      activityIds: [...new Set([
-        ...affectedActivityIds,
-        ...temporalBoundary.dueActivityIds,
-        ...reactionActivityIds,
-      ])],
-      relevantObserverIds: relevantExternalObservers,
-      preserveActiveActivityIds,
-    });
-    temporal = contextSettlement.temporal;
-    const activityDispositions = contextSettlement.dispositions;
-    const promotionState = applyTransitionProposal(source, resolution.proposal, temporal);
-    const queuePromotion = promoteSharedResourceQueues({
-      activities: temporal.activities,
-      pools: promotionState.truth.sharedActivityResourcePools,
-      definitions: promotionState.truth.mechanics.sharedActivityResources,
-      entities: promotionState.truth.entities,
-      atSeconds: temporalBoundary.toElapsedSeconds,
-    });
-    temporal.activities = queuePromotion.activities;
-    temporal.transitions = [...temporal.transitions, ...queuePromotion.transitions];
-    const temporallyTerminated = new Set(activityDispositions.flatMap((disposition) => {
-      if (disposition.kind !== "block" && disposition.kind !== "fail" && disposition.kind !== "cancel") return [];
-      const activity = temporal.activities[disposition.activityId];
-      return activity ? [activity.sourceActionId] : [];
-    }));
-    if (temporallyTerminated.size > 0 || queuePromotion.reservedActivityIds.length > 0) {
-      const preview = applyTransitionProposal(source, resolution.proposal, temporal);
+      resolution.actions = [...resolution.actions, ...structuredClone(deterministicResourceActions)]
+        .sort((left, right) => left.actorId.localeCompare(right.actorId) || left.id.localeCompare(right.id));
+      resolution.proposal.outcomes = [...resolution.proposal.outcomes, ...deterministicResourceOutcomes]
+        .sort((left, right) => left.proposalId.localeCompare(right.proposalId));
+      resolution.causalAssertionResults = evaluateProposalCausality(
+        planningState,
+        resolution.checks,
+        resolution.randomResults,
+        resolution.proposal,
+      );
+      resolution.requests = [
+        ...structuredClone(payload.onsetPerception.requests),
+        ...resolution.requests,
+      ];
+      resolution.checks = [
+        ...structuredClone(payload.onsetPerception.checks),
+        ...resolution.checks,
+      ];
+      resolution.commitmentRounds = [
+        ...structuredClone(payload.onsetPerception.commitmentRounds),
+        ...resolution.commitmentRounds,
+      ];
+      resolution.initialActions = [...new Map([
+        ...timerActions,
+        ...dueActions,
+        ...payload.newActions,
+      ].map((action) => [action.actorId, structuredClone(action)])).values()]
+        .sort((left, right) => left.actorId.localeCompare(right.actorId) || left.id.localeCompare(right.id));
+      resolution.reactionRequests = structuredClone(payload.reactionRequests);
+      resolution.reactionDecisions = structuredClone(reactionDecisions);
+      resolution.stimulusObservations = payload.reactionRequests.map((request) =>
+        structuredClone(request.stimulus));
+
+      resolution.rng = structuredClone(componentResults.reduce((latest, result) =>
+        result.resolution.rng.draws > latest.draws ? result.resolution.rng : latest, payload.onsetPerception.rng));
+      const reconciled = reconcileTemporalOutcomes(temporalBase, resolution.proposal.outcomes);
+      const preview = applyTransitionProposal(source, resolution.proposal, reconciled);
+      const liveAgents = Object.keys(preview.agents).sort();
+      const dynamicLifecycleChange = resolution.proposal.operations.some(operation =>
+        operation.kind === "create_entity" || operation.kind === "create_agent" ||
+        operation.kind === "retire_entity" || operation.kind === "remove_agent");
+      let observerIds = components.length > 1 || deterministicResourceActions.length > 0 || dynamicLifecycleChange
+        ? liveAgents : [...new Set([
+          ...resolution.actions.map(action => action.actorId),
+          ...interactionDependencies.flatMap(dependency => dependency.audienceAgentIds),
+        ])].filter(id => Boolean(preview.agents[id])).sort();
+      // Observer coverage can expand once to all live Agents. Recompute lifecycle
+      // settlement from the immutable base, never from the preceding settlement.
+      while (true) {
+        let settledTemporal = structuredClone(reconciled);
+        const preContextCandidate = applyTransitionProposal(source, resolution.proposal, settledTemporal);
+        preContextCandidate.truth.rng = structuredClone(resolution.rng);
+        const observedAgentIds = new Set([...observerIds, ...resolution.stimulusObservations.map(packet => packet.observerId)]);
+        const relevantExternalObservers = new Set(interactionDependencies.flatMap(dependency =>
+          dependency.audienceAgentIds.filter(agentId => dependency.actorId !== agentId && observedAgentIds.has(agentId))));
+        const preserveActiveActivityIds = new Set(reactionDecisions.flatMap((decision) => {
+          if (decision.kind !== "keep" || decision.ongoingActivityDisposition !== "continue") return [];
+          const request = payload.reactionRequests.find((entry) => entry.id === decision.requestId);
+          if (!request) return [];
+          if (request.originalIntent.kind === "ongoing_activity") return [request.originalIntent.activityId];
+          const preparedActionId = request.originalIntent.actionId;
+          const activity = Object.values(settledTemporal.activities).find((entry) =>
+            entry.sourceActionId === preparedActionId);
+          return activity ? [activity.id] : [];
+        }));
+        const contextSettlement = settleActivityContexts({
+          preTransitionState: planningState,
+          state: preContextCandidate,
+          temporal: settledTemporal,
+          activityIds: [...new Set([
+            ...affectedActivityIds,
+            ...temporalBoundary.dueActivityIds,
+            ...reactionActivityIds,
+          ])],
+          relevantObserverIds: relevantExternalObservers,
+          preserveActiveActivityIds,
+        });
+        settledTemporal = contextSettlement.temporal;
+        const activityDispositions = contextSettlement.dispositions;
+        const promotionState = applyTransitionProposal(source, resolution.proposal, settledTemporal);
+        const queuePromotion = promoteSharedResourceQueues({
+          activities: settledTemporal.activities,
+          pools: promotionState.truth.sharedActivityResourcePools,
+          definitions: promotionState.truth.mechanics.sharedActivityResources,
+          entities: promotionState.truth.entities,
+          atSeconds: temporalBoundary.toElapsedSeconds,
+        });
+        settledTemporal.activities = queuePromotion.activities;
+        settledTemporal.transitions = [...settledTemporal.transitions, ...queuePromotion.transitions];
+
+        const needsAllObservers = activityDispositions.some(disposition =>
+          disposition.kind === "block" || disposition.kind === "fail" || disposition.kind === "cancel") ||
+          queuePromotion.reservedActivityIds.length > 0;
+        if (needsAllObservers && contentHash(observerIds) !== contentHash(liveAgents)) {
+          observerIds = liveAgents;
+          continue;
+        }
+        return { resolution, temporal: settledTemporal, activityDispositions, observerIds };
+      }
+    };
+    let assembled = assemble();
+    let observationRound = 0;
+    let observationRepairs = 0;
+    const render = async (observerIds: readonly string[], feedbackByObserver?: Readonly<Record<string, readonly string[]>>) => {
+      if (observerIds.length === 0) return;
       const rendered = await this.observationRenderer.render({
-        definition: input.definition,
-        state: planningState,
-        proposal: structuredClone(resolution.proposal),
-        actions: structuredClone(resolution.actions),
-        observerIds: Object.keys(preview.agents).sort(),
-        identityOwner: "step-temporal-disposition-observation",
-        temporalState: temporal,
+        definition: input.definition, state: planningState,
+        proposal: structuredClone(assembled.resolution.proposal), actions: assembled.resolution.actions,
+        observerIds, identityOwner: `step-final-observation-${observationRound++}`,
+        temporalState: assembled.temporal, feedbackByObserver,
       }, context.modelScope);
-      resolution.proposal.observations = structuredClone(rendered.packets);
+      if (contentHash([...new Set(rendered.packets.map(packet => packet.observerId))].sort()) !== contentHash([...observerIds].sort())) {
+        throw new Error("final observation rendering changed observer coverage");
+      }
+      const requested = new Set(observerIds);
+      assembled.resolution.proposal.observations = [
+        ...assembled.resolution.proposal.observations.filter(packet => !requested.has(packet.observerId)),
+        ...structuredClone(rendered.packets),
+      ].sort((left, right) => left.observerId.localeCompare(right.observerId) || left.id.localeCompare(right.id));
       globalObservationAudits.push(...structuredClone(rendered.modelAudits));
-      observations = [...resolution.stimulusObservations, ...resolution.proposal.observations];
-      validateObservations(preview, observations, preview.step);
+      context.instrumentation.emit({ event: "algorithm.observation.global_projection_completed",
+        attributes: { phase: "observation", reason: "final-candidate" },
+        counts: { observations: rendered.packets.length, observationBatches: rendered.batchCount, dependencyComponents: components.length } });
+    };
+    await render(assembled.observerIds);
+    let acceptedReview: BoundCausalReview;
+    while (true) {
+      const candidateResolution = assembled.resolution;
+      const proposal = candidateResolution.proposal;
+      const preview = applyTransitionProposal(source, proposal, assembled.temporal);
+      validateObservations(preview, [...candidateResolution.stimulusObservations, ...proposal.observations], preview.step);
+      for (const action of candidateResolution.actions) {
+        if (!proposal.observations.some(packet => packet.kind === "outcome" && packet.observerId === action.actorId)) {
+          throw new Error(`final transition omitted observation for ${action.actorId}`);
+        }
+      }
+      candidateResolution.causalAssertionResults = evaluateProposalCausality(planningState,
+        candidateResolution.checks, candidateResolution.randomResults, proposal);
+      if (candidateResolution.causalAssertionResults.some(result => !result.passed)) {
+        throw new Error("merged candidate failed deterministic causal assertions");
+      }
+      const evidence: CausalReviewEvidence = {
+        definition: input.definition, state: planningState,
+        workset: { state: planningState, mode: "full", initialActions: candidateResolution.initialActions,
+          assignedActions: candidateResolution.actions, availableActions: candidateResolution.actions,
+          assignedDependencies: interactionDependencies, availableDependencies: interactionDependencies },
+        checkRequests: candidateResolution.requests, checkResults: candidateResolution.checks,
+        randomRequests: candidateResolution.randomRequests, randomResults: candidateResolution.randomResults,
+        commitmentRounds: candidateResolution.commitmentRounds, resolutionPlans: candidateResolution.resolutionPlans,
+        resolutionReceipts: candidateResolution.resolutionReceipts, proposal,
+        assertionResults: candidateResolution.causalAssertionResults, mechanicResults: candidateResolution.mechanicResults,
+        reactionDecisions, temporalEvidence: temporalBoundary,
+        candidateTemporalState: { activities: assembled.temporal.activities, timers: assembled.temporal.timers },
+        previousReport: null, instanceId: context.modelScope.workloadId, advanceId: context.modelScope.batchId,
+        mechanicContracts: componentResults[0]?.stage.reviewEvidence.mechanicContracts,
+        resolutionScope: { mode: "global", selectedActionIds: candidateResolution.actions.map(action => action.id).sort(),
+          totalActionCount: candidateResolution.actions.length },
+      };
+      const review = await this.truthEngine.reviewCandidate(evidence, context.modelScope, "step-final",
+        finalReviewAudits.reduce((count, audit) => count + audit.invocations.length, 0));
+      finalReviewAudits.push(review.audit);
+      if (review.value.verdict === "accept") {
+        assertCausalReviewMatches(evidence, review);
+        acceptedReview = review;
+        break;
+      }
+      const findings = review.value.findings;
+      const describe = (finding: typeof findings[number]) => `${finding.code}: ${finding.message}; ${finding.repairHint}`;
+      const error = new Error(`causal verifier rejected final transition: ${findings.map(describe).join(" | ")}`);
+      const feedback: Record<string, string[]> = {};
+      for (const finding of findings.filter(finding => finding.target.kind === "observation")) {
+        const packet = proposal.observations.find(packet => packet.id === finding.target.id);
+        if (!packet) throw error;
+        (feedback[packet.observerId] ??= []).push(describe(finding));
+      }
+      if (findings.length > 0 && findings.every(finding => finding.target.kind === "observation")) {
+        if (observationRepairs++ >= this.truthEngine.candidateRepairLimit) throw error;
+        await render(Object.keys(feedback).sort(), feedback);
+        continue;
+      }
+      const repairs = new Map<ComponentResolution, typeof findings>();
+      for (const finding of findings.filter(finding => finding.target.kind !== "observation")) {
+        const owners = componentResults.filter(component => {
+          const local = component.resolution.proposal;
+          switch (finding.target.kind) {
+            case "outcome": return local.outcomes.some(value => value.id === finding.target.id);
+            case "event": return local.events.some(value => value.id === finding.target.id);
+            case "mechanic": return local.mechanicInvocations.some(value => value.id === finding.target.id);
+            case "operation": {
+              const operation = proposal.operations[Number(finding.target.id.split(":", 1)[0])];
+              return operation && operation.kind !== "advance_time" && local.operations.some(value => contentHash(value) === contentHash(operation));
+            }
+            default: return false;
+          }
+        });
+        if (owners.length !== 1) throw new Error(`final finding ${finding.target.kind}:${finding.target.id} has ${owners.length} component owners`, { cause: error });
+        const owner = owners[0]!;
+        const ownedFindings = repairs.get(owner) ?? [];
+        const target = structuredClone(finding.target);
+        if (target.kind === "operation") {
+          const operation = proposal.operations[Number(target.id.split(":", 1)[0])]!;
+          const localIndex = owner.resolution.proposal.operations.findIndex(value => contentHash(value) === contentHash(operation));
+          target.id = `${localIndex}:${operation.kind}`;
+        }
+        ownedFindings.push({ ...finding, target });
+        repairs.set(owner, ownedFindings);
+      }
+      if (repairs.size === 0) throw error;
+      await settledValues([...repairs].map(([owner, ownedFindings]) => () => owner.repair(new ModelCandidateValidationError(
+        causalReviewRepairIssues({ ...owner.stage.reviewEvidence, state: owner.stage.reviewEvidence.workset.state,
+          actions: owner.stage.reviewEvidence.workset.availableActions }, ownedFindings),
+      ))),
+        "final candidate component repairs");
+      for (const component of componentResults) {
+        const dependencies = interactionDependencies.filter(dependency => component.interactionIds.includes(dependency.id));
+        if (resolutionExceedsDeclaredDependencies(source, component.resolution, dependencies)) {
+          throw new Error("repaired final component exceeded its fixed dependencies");
+        }
+      }
+      for (let left = 0; left < componentResults.length; left += 1) {
+        for (let right = left + 1; right < componentResults.length; right += 1) {
+          if (resolvedComponentsConflict(source, componentResults[left]!.resolution, componentResults[right]!.resolution)) {
+            throw new Error("repaired final components introduced a conflict");
+          }
+        }
+      }
+      assembled = assemble();
+      await render(assembled.observerIds, feedback);
     }
+    await Promise.all(componentResults.map(result => result.finish()));
+    const resolution: TruthResolution = { ...assembled.resolution, causalVerification: acceptedReview.value,
+      modelAudits: dedupeModelAudits([...componentResults.flatMap(result => result.resolution.modelAudits), ...finalReviewAudits]) };
+    temporal = assembled.temporal;
+    const activityDispositions = assembled.activityDispositions;
+    const observations = [...resolution.stimulusObservations, ...resolution.proposal.observations];
     const candidate = applyTransitionProposal(source, resolution.proposal, temporal);
     candidate.truth.rng = structuredClone(resolution.rng);
     await context.stages?.after(transitionStage);
+    const { modelAudits: resolutionModelAudits, reactionModelAudits, ...resolutionCandidate } = resolution;
+    const finalCausalReview = {
+      contentHash: finalCausalReviewContentHash({ sourceStateHash: contentHash(source), resolution: resolutionCandidate,
+        temporalBoundary, temporalState: { activities: temporal.activities, timers: temporal.timers } }),
+      ...acceptedReview.binding,
+      invocationIds: acceptedReview.audit.invocations.map(invocation => invocation.id),
+    };
     const postBoundaryDecisionAgents = new Set(temporal.decisionPoints.map((point) => point.agentId));
     const busyAfterBoundary = new Set(Object.values(temporal.activities)
       .filter((activity) => activity.status === "active" || activity.status === "paused" ||
@@ -2401,11 +2599,6 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     });
     const finalMindAudits = finalMindBatches.flatMap(({ batch }) => batch.modelAudits);
     await context.stages?.after(mindStage);
-    const {
-      modelAudits: resolutionModelAudits,
-      reactionModelAudits,
-      ...resolutionCandidate
-    } = resolution;
     const finalActionIds = new Set(resolution.actions.map((action) => action.id));
     interactionDependencies = interactionDependencies.filter((dependency) =>
       dependency.kind !== "action" || finalActionIds.has(dependency.id));
@@ -2415,6 +2608,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
       schemaVersion: WORLD_STEP_CANDIDATE_SCHEMA_VERSION,
       sourceStateHash: contentHash(source),
       resolution: resolutionCandidate,
+      finalCausalReview,
       mindCommits: outputs.map((output, index) => {
         const agentId = modelAgentIds[index];
         const resumed = resumedByAgent.get(agentId);
