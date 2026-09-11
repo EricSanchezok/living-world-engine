@@ -25,14 +25,18 @@ import { loadLocalEncoder, livingWorldCacheRoot, discoverLocalEncoderModelDirect
 import { MULTILINGUAL_E5_BASE_ASSET } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/model-assets";
 import { relationalRrfEncoderFingerprint, R5_RELATIONAL_PASSAGE_SCHEMA_VERSION } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/relational-rrf";
 
-const protocol = { id: "integrated-player-goal-diagnostic-v1", seed: 20260911, maxHttp: 120,
+const protocol = { id: "integrated-player-goal-diagnostic-v2", seed: 20260911, maxHttp: 120,
   maxDispatchMs: 600_000, maxCommitsPerLease: 6, model: "deepseek-flash", thinking: "disabled",
   action: "向码头边靠着的领航人或搬运工打听哪里有便宜又安全的下榻处。",
   interpretation: "One full player action through WorldHost and persisted state, with all 48 original Agents plus the external participant. Combined candidate diagnostic, not an isolated comparison or qualification. Review actual source semantics before another action. No historical preparations or model outputs are imported. Timing and repairs include every new inference call; bootstrap is reported separately from submission-to-completion latency." } as const;
 const read = (file: string) => JSON.parse(readFileSync(file, "utf8"));
 const save = (root: string, file: string, value: unknown) => writeFileSync(path.join(root, file), `${JSON.stringify(value, null, 2)}\n`, { flag: "wx" });
 const sourceHashes = () => Object.fromEntries(["scripts/experiments/player-integrated-playtest.ts",
-  "src/engine/benchmarks/step-efficiency/integrated-player-algorithm.ts"].map(file => [file, contentHash(readFileSync(file, "utf8"))]));
+  "src/engine/benchmarks/step-efficiency/integrated-player-algorithm.ts",
+  "src/engine/benchmarks/step-efficiency/agent-action-text.ts", "src/engine/prompts/shared/agent-action-text.md",
+  "src/engine/prompts/shared/agent-action-text-raw.md", "src/engine/models/unmatched-closer-recovery.ts",
+  "src/engine/models/model-adapter.ts", "src/engine/algorithms/eager-reference/agent-mind.ts",
+].map(file => [file, contentHash(readFileSync(file, "utf8"))]));
 
 export async function prepareIntegratedPlayer(root: string, registryRoot: string, snapshotHash: string) {
   mkdirSync(root, { recursive: false });
