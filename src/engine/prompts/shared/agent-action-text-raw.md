@@ -1,0 +1,1 @@
+The complete intended attempt in self-contained natural language, including its desired result or continuing condition and any chosen method, uncertainty, conditions and scope limits. This is the sole authored action text, not a report of achieved effects or a private goal handle. Compound and ongoing intentions remain legal.
