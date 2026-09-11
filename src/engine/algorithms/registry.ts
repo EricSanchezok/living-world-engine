@@ -451,7 +451,7 @@ const definitions = [
     children: noChildren,
   }, (algorithmIdentity, config, children) => new SymbolRepairAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({
-    ...identity("onset-perception", "model-onset-perception", "6"),
+    ...identity("onset-perception", "model-onset-perception", "7"),
     maturity: "reference",
     configSchema: z.strictObject({ fallback: z.literal("global"), contextMode: z.literal("full"), ratingChoices: z.literal(PERCEPTION_RATING_CHOICES).optional() }),
     children: noChildren,
@@ -761,7 +761,7 @@ export function registerBuiltinAlgorithms(
   if (registry.has(DEFAULT_ALGORITHM_REF)) return registry;
   for (const definition of definitions) registry.registerAlgorithmDefinition(definition);
   registry.registerDefinition({
-    ...identity("world-execution", "eager-reference", "23", 9),
+    ...identity("world-execution", "eager-reference", "24", 9),
     maturity: "reference",
     configSchema: z.strictObject({}),
     children: [

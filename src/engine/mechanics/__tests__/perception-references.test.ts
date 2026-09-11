@@ -39,8 +39,14 @@ function request(overrides: Record<string, unknown> = {}) {
 
 function directive(check: Record<string, unknown>) { return { kind: "request_checks", requests: [check] }; }
 
+const independentStakes = [
+  "Whether the keeper sees wear on the key's teeth while the player examines it.",
+  "Whether the keeper sees the key's engraving while the player examines it.",
+  "Whether the keeper sees corrosion on the key's shaft while the player examines it.",
+];
+
 it.each(["references", "schema"])("retains independent perception diagnostics after a gateway %s rejection", async mode => {
-  const good = [0, 1, 2].map(i => request({ proposalKey: `notice-${i}`, actorRef: "ref:entity:keeper", ratingRef: "ref:rating:resolve:keeper" }));
+  const good = independentStakes.map((stakes, i) => request({ proposalKey: `notice-${i}`, stakes, actorRef: "ref:entity:keeper", ratingRef: "ref:rating:resolve:keeper" }));
   const bad = structuredClone(good);
   Object.assign(bad[0]!, { ratingRef: "ref:rating:resolve:ghost" });
   Object.assign(bad[1]!, { ratingRef: "ref:rating:resolve:player" });
@@ -126,7 +132,7 @@ it.each(["unfocused", "focused-with-extra-evidence", "coalesced"])(
 );
 
 it("collects owner, opposing-source, task and independent materialization failures into one real repair", async () => {
-  const good = [0, 1, 2].map(i => request({ proposalKey: `notice-${i}`, actorRef: "ref:entity:keeper", ratingRef: "ref:rating:resolve:keeper", visibility: "hidden" }));
+  const good = independentStakes.map((stakes, i) => request({ proposalKey: `notice-${i}`, stakes, actorRef: "ref:entity:keeper", ratingRef: "ref:rating:resolve:keeper", visibility: "hidden" }));
   const bad = structuredClone(good);
   Object.assign(bad[0]!, { ratingRef: "ref:rating:resolve:player", difficulty: { kind: "opposed", targetRef: "ref:entity:keeper",
     ratingRef: "ref:rating:resolve:player", source: { kind: "law", ref: "ref:law:time-passes" } } });

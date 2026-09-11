@@ -368,7 +368,7 @@ export function createEagerReferenceAlgorithmRef(
       onsetPerception: defineAlgorithmRef({
         role: "onset-perception",
         id: "model-onset-perception",
-        version: "6",
+        version: "7",
         contractVersion: 1,
         config: { fallback: "global", contextMode: "full" },
       }),
@@ -402,7 +402,7 @@ export function createEagerReferenceAlgorithmRef(
   return defineAlgorithmRef({
     role: "world-execution",
     id: "eager-reference",
-    version: "23",
+    version: "24",
     contractVersion: 9,
     config: {},
     children: { agentCognition, actionCompilation, interactionGrounding, reactionResolution, truthResolution, observationRendering },

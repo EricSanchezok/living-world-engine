@@ -13,8 +13,8 @@ describe("algorithm command", () => {
       id: "structure-encoder-hybrid",
       availability: "benchmark-only",
     }));
-    expect(JSON.parse(runAlgorithmCommand(["describe", "world-execution/eager-reference@23"]))).toMatchObject({
-      definition: { role: "world-execution", id: "eager-reference", version: "23" },
+    expect(JSON.parse(runAlgorithmCommand(["describe", "world-execution/eager-reference@24"]))).toMatchObject({
+      definition: { role: "world-execution", id: "eager-reference", version: "24" },
     });
     expect(JSON.parse(runAlgorithmCommand(["describe", "candidate-selection/typed-full@1"]))).toMatchObject({
       definition: { role: "candidate-selection", id: "typed-full", availability: "benchmark-only" },

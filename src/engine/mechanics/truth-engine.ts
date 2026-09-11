@@ -1,4 +1,5 @@
 import { materializeOnsetPerceptionReceipts, type OnsetPerceptionReceipt } from "./onset-receipts";
+import { repeatedPerceptionChecks } from "./perception-commitments";
 export { materializeObservationPackets } from "../cognition/observation-materialization";
 import { z } from "zod";
 import { bindMechanicalPlanRepairContext, MECHANICAL_PLAN_REPAIR, selectMechanicalPlanRepair } from "./mechanical-plan-repair";
@@ -719,6 +720,15 @@ async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
           }
         }
         if (materializationIssues.length) throw new ModelCandidateValidationError(materializationIssues);
+        const repeated = repeatedPerceptionChecks(requests, normalized);
+        if (repeated.length) throw new ModelCandidateValidationError(repeated.map(({ index, previous, committed }) => ({
+          code: "perception.repeated_check", class: "semantic", path: ["requests", index],
+          originalValue: directive.requests[index],
+          allowedHandles: committed ? [resolver.handleFor("check", previous.id)] : [],
+          message: committed
+            ? "This repeats an already committed perception check. Its result is fixed; do not rename, reroll or change the stakes to obtain another result. Reuse the committed check in the terminal report, preserving other genuinely distinct uncertainties."
+            : "This repeats another perception check in the same batch. Submit this uncertainty once, preserving other genuinely distinct uncertainties.",
+        })));
         accepted.round = normalized;
       },
       diagnoseRejected: (directive) => directive.kind === "request_checks"

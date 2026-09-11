@@ -157,3 +157,20 @@ it("requires an explicit outcome and forbids smuggling a stimulus into a negativ
   expect(onsetPerceptionReportSchema.safeParse({ targetIndex: 0, kind: "done" }).success).toBe(false);
   expect(() => materializeOnsetPerceptionReceipts({ ...fixture(), targets: [] }, [])).not.toThrow();
 });
+
+it("rejects a frozen transcript that renamed and rerolled a failed check even when the receipt cites only the later success", () => {
+  const input = fixture();
+  input.state.truth.rng = { seed: 0, state: 0, draws: 0 };
+  input.requests = [{ id: "first", actorId: "keeper", targetId: "player", ratingId: "resolve:keeper",
+    dc: 10, modifier: 3, modifierSources: [{ kind: "rating", id: "resolve:keeper", amount: 3 }], phase: "perception", mode: "normal", visibility: "full",
+    stakes: "Whether the keeper sees the hand.", causes: [{ kind: "action", id: "player-onset" }, { kind: "law", id: "time-passes" }] }];
+  input.requests = [...input.requests, { ...structuredClone(input.requests[0]!), id: "renamed", visibility: "result_only",
+    causes: [...input.requests[0]!.causes].reverse() }];
+  input.checks = resolveD20Checks(input.state.truth.rng, input.requests).results;
+  expect(input.checks.map(check => check.succeeded)).toEqual([false, true]);
+  const draft = report();
+  draft.checkRefs = [createTruthReferenceResolver({ ...input, checkRequests: input.requests }).handleFor("check", "renamed")];
+  const before = contentHash(input);
+  expect(() => materializeOnsetPerceptionReceipts(input, [draft])).toThrow("repeats a perception check");
+  expect(contentHash(input)).toBe(before);
+});

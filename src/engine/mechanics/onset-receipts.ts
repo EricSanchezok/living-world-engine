@@ -11,6 +11,7 @@ import { contentHash } from "../models/model-audit";
 import type { WorldDefinition } from "../runtime/world-definition";
 import { materializePrivateStimuli } from "../cognition/observation-materialization";
 import { validateObservations } from "../cognition/observation";
+import { repeatedPerceptionChecks } from "./perception-commitments";
 
 const digestSchema = z.string().regex(/^[a-f0-9]{64}$/);
 const receiptShape = {
@@ -45,6 +46,7 @@ export function validateOnsetPerceptionReceipts(
   input: OnsetReceiptInput,
   values: readonly OnsetPerceptionReceipt[],
 ): void {
+  if (repeatedPerceptionChecks([], input.requests).length) throw new Error("onset transcript repeats a perception check");
   const receipts = z.array(onsetPerceptionReceiptSchema).parse(values);
   const resolver = createTruthReferenceResolver({ ...input, checkRequests: input.requests });
   projectPerceptionTargets(input.targets, input.state, input.actions, resolver);
