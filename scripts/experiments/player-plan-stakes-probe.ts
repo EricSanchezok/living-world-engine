@@ -4,6 +4,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { z } from "zod";
 import { conditionalPlanStakesRequest, CONDITIONAL_PLAN_STAKES } from "../../src/engine/benchmarks/step-efficiency/conditional-plan-stakes";
+import { effectProfileDomainsRequest, EFFECT_PROFILE_DOMAINS } from "../../src/engine/benchmarks/step-efficiency/effect-profile-domains";
 import { registerBuiltinAlgorithms } from "../../src/engine/algorithms/registry";
 import { algorithmRef, type AlgorithmManifest, type WorldStepInput, type WorldStepPreparation } from "../../src/engine/runtime/execution";
 import { RecordingRuntimeObserver, type RuntimeEvent } from "../../src/engine/runtime/observability";
@@ -38,8 +39,8 @@ export function planStakesRequestEvidence(request: StructuredModelRequest<unknow
 /** Real prepared-step reconstruction, bounded at the first physical planning request.
  * Every subsequent call is captured and stopped before HTTP or canonical commit. */
 export async function runPlayerPlanStakesProbe(argv: string[]) {
-  const [sourcePath, dataRoot, output, mode = "preflight"] = argv;
-  if (!sourcePath || !dataRoot || !output || !["preflight", "run"].includes(mode)) throw new Error("Expected source-export data-root output-directory [preflight|run]");
+  const [sourcePath, dataRoot, output, mode = "preflight", candidateMode = "stakes"] = argv;
+  if (!sourcePath || !dataRoot || !output || !["preflight", "run"].includes(mode) || !["stakes", "profile-domains"].includes(candidateMode)) throw new Error("Expected source-export data-root output-directory [preflight|run] [stakes|profile-domains]");
   mkdirSync(output, { recursive: false });
   const source: SourceExport = JSON.parse(readFileSync(sourcePath, "utf8"));
   const first = source.events.find(event => event.event === "model.context.serialized" &&
@@ -94,10 +95,11 @@ export async function runPlayerPlanStakesProbe(argv: string[]) {
           blocked.push({ role: request.role, schemaName: request.schemaName, subjectId: request.subjectId, context: request.context });
           throw new ProbeStopped("First-response scope complete; no repair, review, continuation or transition HTTP");
         }
-        const baseline = planStakesRequestEvidence(request);
+        const control = candidateMode === "profile-domains" ? conditionalPlanStakesRequest(request) : request;
+        const baseline = planStakesRequestEvidence(control);
         if (frozen && contentHash(baseline) !== contentHash(frozen)) throw new Error("Reconstructed baseline request drift");
         frozen ??= baseline;
-        const adapted = arm === "C" ? conditionalPlanStakesRequest(request) : request;
+        const adapted = arm === "C" ? (candidateMode === "profile-domains" ? effectProfileDomainsRequest(control) : conditionalPlanStakesRequest(control)) : control;
         if (arm === "C") candidate = planStakesRequestEvidence(adapted);
         save(output, `${label}-request.json`, planStakesRequestEvidence(adapted));
         if (!live) throw new ProbeStopped("Offline request captured");
@@ -123,12 +125,14 @@ export async function runPlayerPlanStakesProbe(argv: string[]) {
     save(output, `${label}-blocked.json`, blocked);
     const row = { label, arm, live, calls, httpCount, elapsedMs: performance.now() - started,
       admittedReviewRequests: blocked.filter(request => request.schemaName === "resolution_plan_verification_batch").length,
-      repairRequests: blocked.filter(request => (request.context as { repair?: unknown }).repair != null).length,
+      admittedSlots: blocked.filter(request => request.schemaName === "resolution_plan_verification_batch")
+        .reduce((sum, request) => sum + ((request.context as { state?: { slots?: unknown[] } }).state?.slots?.length ?? 0), 0),
+      repairRequests: blocked.filter(request => request.role === "truth-resolution").length,
       audit: events.filter(event => event.event === "model.audit.persisted").map(event => event.payload),
-      issues: events.filter(event => event.event === "model.output.rejected").map(event => ({ correlation: event.correlation, error: event.error, payload: event.payload })),
+      issues: events.filter(event => ["model.structured_output.rejected", "model.semantic.rejected"].includes(event.event)).map(event => ({ correlation: event.correlation, error: event.error, payload: event.payload })),
       requestBodyHashes: requestBodies.map(contentHash), error, sourceUnchanged: true, semanticVerdict: "unassessed", stepCommitted: false };
     save(output, `${label}-result.json`, row);
-    process.stdout.write(`${JSON.stringify({ label, httpCount, elapsedMs: row.elapsedMs, admittedReviewRequests: row.admittedReviewRequests, repairRequests: row.repairRequests, error })}\n`);
+    process.stdout.write(`${JSON.stringify({ label, httpCount, elapsedMs: row.elapsedMs, admittedSlots: row.admittedSlots, repairRequests: row.repairRequests, error })}\n`);
     return row;
   };
   await run("preflight-B", "B", false);
@@ -137,7 +141,9 @@ export async function runPlayerPlanStakesProbe(argv: string[]) {
   const baseline = frozen as ReturnType<typeof planStakesRequestEvidence>;
   const treatment = candidate as ReturnType<typeof planStakesRequestEvidence>;
   const firstResponsePlan = ["B", "C", "C", "B", "B", "C"] as const;
-  save(output, "manifest.json", { protocol: CONDITIONAL_PLAN_STAKES, codeRevision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
+  save(output, "manifest.json", { protocol: candidateMode === "profile-domains" ? EFFECT_PROFILE_DOMAINS : CONDITIONAL_PLAN_STAKES, candidateMode,
+    codeRevision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
+    runnerHash: contentHash(readFileSync(new URL(import.meta.url), "utf8")),
     sourceExecution: source.execution.id, sourceInstance: source.execution.instanceId, sourceEvent: first.sequence,
     sourceHash: contentHash(source), manifest: ref, catalogHash: catalog.hash, sourceRequestHash: contentHash(recorded),
     baselineHash: contentHash(baseline), candidateHash: contentHash(treatment), sourceContextEqual: contentHash(recorded.context) === contentHash(baseline.context),

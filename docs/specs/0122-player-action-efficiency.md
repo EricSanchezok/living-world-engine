@@ -15,6 +15,8 @@ Experiments retain immutable source identities, complete requests and responses,
 
 The initial candidate clarifies that check effects are conditional stakes committed before randomness, not assertions that success has already happened. It changes instruction wording and schema descriptions only, retaining every field, value domain, action, context and validator. It cannot infer effects or resolution modes in code. An unchanged baseline and this candidate run on the same complete source request; full source-semantic review follows mechanical admission.
 
+The profile-domain candidate specializes effect profile fields from the complete source catalogs and their authored mechanic collections. Its physical union includes every eligible duration, condition and impact profile, retains null for open conditions, and preserves the original field predicates and per-slot validators. It adds no output rewriting. The control carries the conditional-stakes wording; the treatment adds finite profile choices and explains the existing risk-owned threatened magnitude. Neither arm may fabricate a profile or accept an unknown namespace.
+
 ## Plan
 
 Capture the registered production composition at the failed player's planning boundary. Verify historical output through that same entry path. Compare frozen requests through the real model gateway and preserve rejected responses. Adopt only demonstrated improvements, then run independent continuous player scenarios through WorldHost and the browser. Investigate remaining serial generation, redundant work and task completion from measured critical paths.
