@@ -87,29 +87,28 @@ function effect(): Value {
     durationProfileRef: "ref:mechanic:ongoing", access: { kind: "public" }, magnitude: "standard" };
 }
 
-it("preserves all modes, optional presence, nested effect sources, repetitions and every factor alternative", () => {
+it.each(["automatic", "check", "blocked"].flatMap(mode => [false, true].map(optional => ({ mode, optional }))))(
+  "preserves nested sources, repetitions and every factor alternative (mode=$mode, optional=$optional)", ({ mode, optional }) => {
   const { source, codec, request } = fixture();
   const branches = ((request.wireJsonSchema!.properties as Value).plans as Value).items as { oneOf: Array<{ properties: Value }> };
   const factorAlternatives = (branches.oneOf[0]!.properties.factors as { items: { oneOf: Array<{ oneOf: Array<{ properties: Record<string, { const?: unknown; enum?: unknown[]; minimum?: number }> }> }> } }).items.oneOf.flatMap(group => group.oneOf);
-  for (const mode of ["automatic", "check", "blocked"]) for (const optional of [false, true]) {
-    const value = structuredClone(source), plan = value.plans[0]!;
-    plan.mode = mode; plan.targetIndices = [0, 0];
-    plan.means = [{ sourcePosition: 0, description: "Keep every condition, quotation and Unicode character: ‘同意后再行动’" }, { sourcePosition: 0, description: "Repeated sources remain repeated." }];
-    if (mode !== "blocked") plan.primaryEffect = effect();
-    if (mode === "check") {
-      plan.difficulty = { kind: "opposed", targetRef: "ref:entity:a", ratingRef: "ref:rating:resolve:a", source: { kind: "rating", ref: "ref:rating:resolve:a" } };
-      plan.actorRatingRef = "ref:rating:insight:a";
-      plan.threatenedEffect = Object.fromEntries(Object.entries(effect()).filter(([key]) => key !== "magnitude"));
-    }
-    if (optional) plan.baseEffect = mode === "blocked" ? "none" : "standard";
-    for (const alternative of factorAlternatives) {
-      const fields = alternative.properties;
-      plan.factors = [{ factorType: fields.factorType!.const, source: { kind: "rating", ref: "ref:rating:insight:a" }, channel: fields.channel!.const ?? "attention", explanation: "An unsupported semantic assertion is retained for the real reviewer.",
-        ...(fields.direction ? { direction: fields.direction.enum![0] } : {}), ...(fields.steps ? { steps: fields.steps.minimum ?? 1 } : {}) }];
-      const wire = codec.encode(value);
-      expect(codec.decode(wire)).toEqual(value);
-      expect(request.preprocessOutput!(codec.decode(wire))).toEqual(request.preprocessOutput!(value));
-    }
+  const value = structuredClone(source), plan = value.plans[0]!;
+  plan.mode = mode; plan.targetIndices = [0, 0];
+  plan.means = [{ sourcePosition: 0, description: "Keep every condition, quotation and Unicode character: ‘同意后再行动’" }, { sourcePosition: 0, description: "Repeated sources remain repeated." }];
+  if (mode !== "blocked") plan.primaryEffect = effect();
+  if (mode === "check") {
+    plan.difficulty = { kind: "opposed", targetRef: "ref:entity:a", ratingRef: "ref:rating:resolve:a", source: { kind: "rating", ref: "ref:rating:resolve:a" } };
+    plan.actorRatingRef = "ref:rating:insight:a";
+    plan.threatenedEffect = Object.fromEntries(Object.entries(effect()).filter(([key]) => key !== "magnitude"));
+  }
+  if (optional) plan.baseEffect = mode === "blocked" ? "none" : "standard";
+  for (const alternative of factorAlternatives) {
+    const fields = alternative.properties;
+    plan.factors = [{ factorType: fields.factorType!.const, source: { kind: "rating", ref: "ref:rating:insight:a" }, channel: fields.channel!.const ?? "attention", explanation: "An unsupported semantic assertion is retained for the real reviewer.",
+      ...(fields.direction ? { direction: fields.direction.enum![0] } : {}), ...(fields.steps ? { steps: fields.steps.minimum ?? 1 } : {}) }];
+    const wire = codec.encode(value);
+    expect(codec.decode(wire)).toEqual(value);
+    expect(request.preprocessOutput!(codec.decode(wire))).toEqual(request.preprocessOutput!(value));
   }
 });
 
