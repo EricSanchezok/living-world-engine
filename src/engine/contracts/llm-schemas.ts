@@ -982,6 +982,26 @@ export const modelObservationRenderDraftSchema = z.strictObject({
 });
 export type ModelObservationRenderDraft = z.infer<typeof modelObservationRenderDraftSchema>;
 
+const onsetReportEvidenceSchema = z.discriminatedUnion("kind", [
+  z.strictObject({ kind: z.literal("entity"), ref: modelReferenceSchemaFor("entity", { allowProposal: false }) }),
+  z.strictObject({ kind: z.literal("fact"), ref: modelReferenceSchemaFor("fact", { allowProposal: false }) }),
+  z.strictObject({ kind: z.literal("law"), ref: modelReferenceSchemaFor("law", { allowProposal: false }) }),
+]);
+
+const onsetReportShape = {
+  targetIndex: z.number().int().nonnegative(),
+  reason: z.string().trim().min(1),
+  evidence: z.array(onsetReportEvidenceSchema).min(1),
+  checkRefs: z.array(modelReferenceSchemaFor("check", { allowProposal: false })),
+};
+
+/** Terminal semantic projection; target identity remains scheduler-owned. */
+export const onsetPerceptionReportSchema = z.discriminatedUnion("kind", [
+  z.strictObject({ ...onsetReportShape, kind: z.literal("no_stimulus") }),
+  z.strictObject({ ...onsetReportShape, kind: z.literal("perceived"), stimulus: modelObservationRenderDraftSchema }),
+]);
+export type OnsetPerceptionReportDraft = z.infer<typeof onsetPerceptionReportSchema>;
+
 export const persistedObservationSchema = z.strictObject({
   id: runtimeIdSchema,
   ...observationDraftShape,

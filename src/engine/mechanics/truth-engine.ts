@@ -1,3 +1,5 @@
+import { materializePrivateStimuli } from "../cognition/observation-materialization";
+export { materializeObservationPackets } from "../cognition/observation-materialization";
 import { z } from "zod";
 import { bindMechanicalPlanRepairContext, MECHANICAL_PLAN_REPAIR, selectMechanicalPlanRepair } from "./mechanical-plan-repair";
 import { CausalAssertionValidationError, evaluateProposalCausality } from "./causality";
@@ -38,8 +40,6 @@ import type {
   DiscreteRandomResult,
   ModelExecutionAudit,
   MechanicInvocation,
-  ObservationPacket,
-  ObservationPacketDraft,
   ReactionDecision,
   ReactionRequest,
   SimulationState,
@@ -117,7 +117,6 @@ import {
 import {
   type ModelReference,
   type ReferenceResolver,
-  createAgentReferenceResolver,
   isProposalReference,
 } from "../contracts/model-context";
 import type {
@@ -1349,52 +1348,6 @@ function applyReactionDecisions(
     left.actorId.localeCompare(right.actorId) || left.id.localeCompare(right.id));
 }
 
-export function materializeObservationPackets(
-  state: SimulationState,
-  packets: readonly ObservationPacketDraft[],
-  stage: "stimulus" | "outcome",
-  eventAliases: ReadonlyMap<string, string> = new Map(),
-): { packets: ObservationPacket[]; aliases: Map<string, string> } {
-  const aliases = new Map<string, string>();
-  for (const [ordinal, packet] of packets.entries()) {
-    if (aliases.has(packet.id)) throw new Error(`duplicate ${stage} observation alias ${packet.id}`);
-    aliases.set(packet.id, runtimeId({
-      worldHash: state.worldHash,
-      revision: state.revision,
-      kind: "observation",
-      stage,
-      owner: packet.observerId,
-      round: 0,
-      ordinal,
-    }));
-  }
-  return {
-    aliases,
-    packets: packets.map((packet, packetOrdinal) => {
-      const id = aliases.get(packet.id)!;
-      return {
-        ...structuredClone(packet),
-        id,
-        step: state.step + 1,
-        kind: stage,
-        apparentClaims: packet.apparentClaims.map((claim, claimOrdinal) => ({
-          ...structuredClone(claim),
-          id: runtimeId({
-            worldHash: state.worldHash,
-            revision: state.revision,
-            kind: "claim",
-            stage,
-            owner: [packet.observerId, id],
-            round: packetOrdinal,
-            ordinal: claimOrdinal,
-          }),
-        })),
-        sourceEventIds: packet.sourceEventIds.map((eventId) => eventAliases.get(eventId) ?? eventId),
-      };
-    }),
-  };
-}
-
 function materializeReactionRequests(
   input: TruthPreparationInput,
   requests: readonly ReactionRequestDraft[],
@@ -1412,61 +1365,10 @@ function materializeReactionRequests(
     if (resolved.kind !== kind) throw new Error(`reaction routing reference ${reference} is ${resolved.kind}, expected ${kind}`);
     return resolved.engineId;
   };
-  const materializeStimulus = (request: ReactionRequestDraft, agentId: string, index: number): ObservationPacketDraft => {
-    const agent = input.state.agents[agentId];
-    if (!agent) throw new Error(`reaction request references unknown Agent ${agentId}`);
-    const localResolver = createAgentReferenceResolver(agent, []);
-    const proposalIds = new Map<string, string>();
-    const newLocalId = (key: string): string => {
-      if (proposalIds.has(key)) throw new Error(`reaction stimulus duplicates proposalKey ${key}`);
-      const id = `reaction-local-${contentHash({ agentId, step: input.state.step + 1, index, key }).slice(0, 32)}`;
-      proposalIds.set(key, id);
-      return id;
-    };
-    const resolveLocal = (reference: ModelReference): string => {
-      if (isProposalReference(reference)) {
-        const id = proposalIds.get(reference.proposalKey);
-        if (!id) throw new Error(`reaction stimulus references undeclared proposalKey ${reference.proposalKey}`);
-        return id;
-      }
-      const resolved = localResolver.resolve(reference, "target");
-      if (resolved.kind !== "local_entity") throw new Error(`reaction stimulus reference ${reference} is ${resolved.kind}, expected local_entity`);
-      return resolved.engineId;
-    };
-    const introductions = request.stimulus.introductions.map((introduction) => ({
-      localEntity: {
-        id: newLocalId(introduction.localEntity.proposalKey),
-        name: introduction.localEntity.name,
-        description: introduction.localEntity.description,
-        status: introduction.localEntity.status,
-      },
-      canonicalEntityId: introduction.canonicalEntityRef === null
-        ? null
-        : resolveTruth(introduction.canonicalEntityRef, "target", "entity"),
-    }));
-    return {
-      id: `reaction-stimulus-${index}`,
-      observerId: agentId,
-      summary: request.stimulus.summary,
-      introductions,
-      apparentClaims: request.stimulus.apparentClaims.map((claim) => ({
-        subjectId: resolveLocal(claim.subjectRef),
-        predicate: claim.predicate,
-        value: claim.value.kind === "local_entity"
-          ? { kind: "local_entity" as const, localEntityId: resolveLocal(claim.value.entityRef) }
-          : structuredClone(claim.value),
-        description: claim.description,
-      })),
-        sourceEventIds: request.stimulus.sourceEventRefs.map((reference) => resolveTruth(reference, "source", "event")),
-    };
-  };
-  const materialized = materializeObservationPackets(
-    input.state,
-    requests.map((request, index) => ({
-      ...materializeStimulus(request, resolveTruth(request.agentRef, "target", "agent"), index),
-    })),
-    "stimulus",
-  ).packets;
+  const materialized = materializePrivateStimuli(input.state, requests.map(request => ({
+    observerId: resolveTruth(request.agentRef, "target", "agent"),
+    stimulus: request.stimulus,
+  })), truthResolver);
   return requests.map((request, index) => {
     const agentId = resolveTruth(request.agentRef, "target", "agent");
     const sourceActionId = resolveTruth(request.sourceActionRef, "source", "action");
