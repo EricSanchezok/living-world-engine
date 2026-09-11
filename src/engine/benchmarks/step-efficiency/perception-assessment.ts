@@ -7,6 +7,7 @@ import { createTruthReferenceResolver, projectModelAction } from "../../contract
 import { contentHash } from "../../models/model-audit";
 import type { StructuredModelRequest } from "../../models/model-provider";
 import { loadPromptAsset } from "../../prompts";
+import { derivePerceptionDifficultySource, perceptionDifficultySelectionSchema } from "./perception-derived-source";
 
 const existing = existingReferenceHandleSchemaFor;
 const perceptionEvidenceSchema = z.discriminatedUnion("kind", [
@@ -25,10 +26,7 @@ const assessmentCheckSchema = checkRequestSchema.omit({ targetRef: true, actorRe
     z.strictObject({ kind: z.literal("fact"), ref: existing("fact") }),
     z.strictObject({ kind: z.literal("law"), ref: existing("law") }),
   ])).min(1).describe("Explicit world evidence supporting this onset check; each entry must also occur in every associated assessment's evidence."),
-  difficulty: z.discriminatedUnion("kind", [
-    checkRequestSchema.shape.difficulty.options[0],
-    checkRequestSchema.shape.difficulty.options[1].omit({ source: true }),
-  ]),
+  difficulty: perceptionDifficultySelectionSchema,
 });
 
 export const perceptionAssessmentSchema = z.strictObject({
@@ -182,9 +180,7 @@ export function validatePerceptionAssessment(input: Readonly<OnsetPerceptionInpu
     return { ...check, actorRef: observerRef, targetRef: perceivedEntityRef,
       stakes: onsetQuestion(observerRef, owners.map(owner => owner.sourceActionRef), input.state.truth.elapsedSeconds),
       causes: [...owners.map(owner => ({ kind: "action" as const, ref: owner.sourceActionRef })), ...basisRefs],
-      difficulty: difficulty.kind === "opposed"
-        ? { ...difficulty, source: { kind: "rating" as const, ref: difficulty.ratingRef } }
-        : difficulty };
+      difficulty: derivePerceptionDifficultySource(difficulty) };
   });
   return { sourceStateHash, draft, hasUnknown: draft.assessments.some(a => a.verdict === "insufficient_evidence"),
     // Only exercises the unchanged check materializer; terminal distinctions remain
