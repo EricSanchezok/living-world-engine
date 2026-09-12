@@ -102,7 +102,7 @@ interface CatalogIndex {
   candidates: Candidate[];
   byKey: Map<string, Candidate>;
   edges: Map<string, Edge[]>;
-  fields: Map<string, string>;
+  lexicalDocuments: Map<string, { length: number; frequencies: ReadonlyMap<string, number> }>;
   documentFrequency: Map<string, number>;
   averageFieldLength: number;
 }
@@ -357,7 +357,7 @@ function buildCatalogIndex(context: Readonly<Record<string, unknown>>): CatalogI
     edges.set(key, values.sort((left, right) =>
       left.relation.localeCompare(right.relation) || left.to.localeCompare(right.to)));
   }
-  const fields = new Map<string, string>();
+  const lexicalDocuments: CatalogIndex["lexicalDocuments"] = new Map();
   const documentFrequency = new Map<string, number>();
   let totalFieldLength = 0;
   const partial: CatalogIndex = {
@@ -365,16 +365,18 @@ function buildCatalogIndex(context: Readonly<Record<string, unknown>>): CatalogI
     candidates: parsed.candidates,
     byKey,
     edges,
-    fields,
+    lexicalDocuments,
     documentFrequency,
     averageFieldLength: 1,
   };
   for (const candidate of parsed.candidates) {
     const field = normalize(relationalPassage(candidate, partial));
-    fields.set(candidate.candidateKey, field);
     const terms = tokens(field);
+    const frequencies = new Map<string, number>();
+    for (const term of terms) frequencies.set(term, (frequencies.get(term) ?? 0) + 1);
+    lexicalDocuments.set(candidate.candidateKey, { length: terms.length, frequencies });
     totalFieldLength += terms.length;
-    for (const term of new Set(terms)) documentFrequency.set(term, (documentFrequency.get(term) ?? 0) + 1);
+    for (const term of frequencies.keys()) documentFrequency.set(term, (documentFrequency.get(term) ?? 0) + 1);
   }
   partial.averageFieldLength = parsed.candidates.length === 0 ? 1 : totalFieldLength / parsed.candidates.length;
   return partial;
@@ -535,17 +537,15 @@ function graphPaths(
 }
 
 function bm25(index: CatalogIndex, candidate: Candidate, queryTerms: readonly string[]): number {
-  const terms = tokens(index.fields.get(candidate.candidateKey) ?? "");
-  if (terms.length === 0 || queryTerms.length === 0) return 0;
-  const counts = new Map<string, number>();
-  for (const term of terms) counts.set(term, (counts.get(term) ?? 0) + 1);
+  const document = index.lexicalDocuments.get(candidate.candidateKey);
+  if (!document?.length || queryTerms.length === 0) return 0;
   let score = 0;
   for (const term of queryTerms) {
-    const frequency = counts.get(term) ?? 0;
+    const frequency = document.frequencies.get(term) ?? 0;
     if (frequency === 0) continue;
     const documentFrequency = index.documentFrequency.get(term) ?? 0;
     const idf = Math.log(1 + (index.candidates.length - documentFrequency + 0.5) / (documentFrequency + 0.5));
-    score += idf * frequency / (frequency + 0.5 + 0.5 * terms.length / index.averageFieldLength);
+    score += idf * frequency / (frequency + 0.5 + 0.5 * document.length / index.averageFieldLength);
   }
   return score;
 }
