@@ -112,6 +112,15 @@ interface PathEvidence {
   priority: number;
 }
 
+export type RelationalRrfGraphTraversal = "field-use-constrained" | "typed-state-support";
+
+export interface RelationalRrfGraphTrace {
+  slotIndex: number;
+  policy: RelationalRrfGraphTraversal;
+  anchors: readonly { candidateKey: string; roles: readonly string[] }[];
+  paths: readonly { candidateKey: string; depth: number; priority: number }[];
+}
+
 interface PreparedEncoderData {
   candidateVectors: ReadonlyMap<string, ReadonlyMap<string, readonly number[]>>;
   queryVectors: ReadonlyMap<string, readonly number[]>;
@@ -483,8 +492,19 @@ function slotEdges(input: CandidateRetrieverInput, index: CatalogIndex): Edge[] 
   return output;
 }
 
-function relationAllowed(relation: Relation, role: string | undefined, candidate: Candidate): boolean {
+function relationAllowed(
+  relation: Relation,
+  role: string | undefined,
+  candidate: Candidate,
+  policy: RelationalRrfGraphTraversal,
+): boolean {
   if (role === "profile") return relation === "action-profile" && candidate.kind === "temporal_profile";
+  if (policy === "typed-state-support" && (role === "actor" || role === "target")) {
+    if (relation === "entity-quantity" && candidate.kind === "quantity" ||
+      relation === "entity-rating" && candidate.kind === "rating" ||
+      relation === "entity-meter" && candidate.kind === "meter" ||
+      relation === "entity-placement" && candidate.kind === "placement") return true;
+  }
   if (role === "target") return relation !== "action-profile" && candidate.allowedUses.includes("target");
   if (role === "actor") {
     return relation !== "action-profile" &&
@@ -499,6 +519,7 @@ function graphPaths(
   anchors: ReadonlySet<string>,
   roles: ReadonlyMap<string, ReadonlySet<string>>,
   maxDepth: number,
+  policy: RelationalRrfGraphTraversal = "field-use-constrained",
 ): Map<string, PathEvidence> {
   const paths = new Map<string, PathEvidence>();
   const ephemeral = new Map<string, Edge[]>();
@@ -521,7 +542,7 @@ function graphPaths(
     for (const edge of outgoing) {
       const candidate = index.byKey.get(edge.to);
       if (!candidate || !visible(candidate, input.slotIndex) || !typed(candidate) ||
-        !relationAllowed(edge.relation, current.role, candidate)) continue;
+        !relationAllowed(edge.relation, current.role, candidate, policy)) continue;
       const evidence = {
         depth: current.depth + 1,
         priority: Math.max(1, current.priority * 0.6 + RELATION_PRIORITY[edge.relation] * 0.4),
@@ -572,10 +593,19 @@ function rankSlot(
   encoderData: PreparedEncoderData,
   maxPathDepth: number,
   pseudoSeedCount: number,
+  graphTraversal: RelationalRrfGraphTraversal = "field-use-constrained",
+  onGraphTrace?: (trace: RelationalRrfGraphTrace) => void,
 ): { candidateKey: string; score: number }[] {
   const candidates = index.candidates.filter((candidate) => visible(candidate, input.slotIndex) && typed(candidate));
   const { keys: anchors, roles } = anchorKeys(input, index);
-  const paths = graphPaths(input, index, anchors, roles, maxPathDepth);
+  const paths = graphPaths(input, index, anchors, roles, maxPathDepth, graphTraversal);
+  onGraphTrace?.({
+    slotIndex: input.slotIndex,
+    policy: graphTraversal,
+    anchors: [...anchors].sort().map(candidateKey => ({ candidateKey, roles: [...(roles.get(candidateKey) ?? [])].sort() })),
+    paths: [...paths].sort(([left], [right]) => left.localeCompare(right))
+      .map(([candidateKey, evidence]) => ({ candidateKey, ...evidence })),
+  });
   const query = queryText(input);
   const queryTerms = tokens(query);
   const lexical = normalizeScores(new Map(candidates.map((candidate) => [
@@ -729,6 +759,10 @@ export interface RelationalRrfPhysicalBatchOptions {
   maxPathDepth?: number;
   pseudoSeedCount?: number;
   allowPassageWrites?: boolean;
+  /** Experimental evidence-path policy; output-use permissions do not change. */
+  graphTraversal?: RelationalRrfGraphTraversal;
+  /** Local diagnostic snapshot, never included in model context. */
+  onGraphTrace?: (trace: RelationalRrfGraphTrace) => void;
 }
 
 export type RelationalRrfPhysicalBatchRetriever = NonNullable<
@@ -756,6 +790,10 @@ export function createRelationalRrfPhysicalBatchRetriever(
   }
   const queryEncoder = options.queryEncoder ?? new CachedQueryEncoder(options.encoder);
   const allowPassageWrites = options.allowPassageWrites ?? true;
+  const graphTraversal = options.graphTraversal ?? "field-use-constrained";
+  if (graphTraversal !== "field-use-constrained" && graphTraversal !== "typed-state-support") {
+    throw new Error(`unsupported relational RRF graph traversal: ${String(graphTraversal)}`);
+  }
 
   return async ({ worldContentHash, context, slotIndices, signal }): Promise<BatchSlotRetrievalResult> => {
     if (signal?.aborted) throw signal.reason ?? new Error("candidate retrieval aborted");
@@ -813,6 +851,8 @@ export function createRelationalRrfPhysicalBatchRetriever(
         encoderData,
         maxPathDepth,
         pseudoSeedCount,
+        graphTraversal,
+        options.onGraphTrace,
       ),
     }]));
 
