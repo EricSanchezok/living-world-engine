@@ -3,7 +3,7 @@ import { z } from "zod";
 import { resolutionPlanCommitDirectiveSchema } from "../../contracts/llm-schemas";
 import { PLAN_CAUSE_SCOPE } from "../../contracts/prompts";
 import { contentHash } from "../../models/model-audit";
-import type { StructuredModelRequest } from "../../models/model-provider";
+import { ModelOutputError, ModelConfigurationError, type StructuredModelRequest } from "../../models/model-provider";
 import { promptBundle } from "../../prompts";
 import { factorSharedBatchContexts } from "../shared-batch-context";
 import { dependentFieldsRequest } from "../resolution-dependent-fields-codec";
@@ -22,6 +22,12 @@ import { createTestModelCatalog, createTestModelRegistry } from "../../testing/m
 import { stepEfficiencyAlgorithmRef } from "../../../../scripts/operations/step-efficiency-playtest";
 import { INDEXED_REVIEWED_PLANNING_PIPELINE } from "../indexed-reviewed-planning-pipeline";
 import { registerBuiltinAlgorithms } from "../../algorithms/registry";
+
+import { RatingOwnedOppositionCodec, ratingOwnedOppositionRequest } from "../../benchmarks/step-efficiency/rating-owned-opposition";
+import { dependentFieldsProvider } from "../resolution-dependent-fields-codec";
+import { indexedReviewedPlanningProvider } from "../indexed-reviewed-planning-pipeline";
+import { planningCatalogEncodingProvider, planningCatalogEncodingRequest } from "../planning-catalog-encoding";
+import { TruthBatchCoordinator, TRUTH_BATCH_REQUEST_CONTRACT } from "../truth-batch-provider";
 
 type Value = Record<string, unknown>;
 type Output = { kind: string; plans: Value[] };
@@ -60,7 +66,7 @@ function fixture(ids = ["a", "b"], empty = false) {
   const source: Output = { kind: "commit_plans", plans: ids.map((id, actionIndex) => ({ proposalKey: `plan-${id}`, actionIndex, targetIndices: [codec.targets.findIndex(row => row.targetRef === `ref:entity:${id}`)],
     means: [{ description: "Observe and wait for explicit consent", sourcePosition: 0 }], factors: [], mode: "automatic", difficulty: null, actorRatingRef: null,
     risk: "safe", primaryEffect: null, secondaryEffect: null, threatenedEffect: null, visibility: "full", causeIndices: [causeChoices.findIndex(row => row.ref === `ref:action:${id}`)] })) };
-  return { request, candidate, codec, source };
+  return { request, candidate, codec, source, contexts, original };
 }
 
 function condition(targetPosition = 0): Value {
@@ -163,4 +169,97 @@ it("passes the actual HTTP schema and existing decoders and registers only an ex
   const ref = stepEfficiencyAlgorithmRef({ sourceInventory: true, resolutionRepresentation: "resolution-dependent-fields-v1", truthTransport: "shared-state-first-v1", planningPipeline: INDEXED_REVIEWED_PLANNING_PIPELINE, planningRelationChoices: true });
   expect(registerBuiltinAlgorithms().has(ref)).toBe(true); expect(ref.children.truthResolution!.config.planningRelationChoices).toBe(PLANNING_RELATION_CHOICES);
   expect(() => stepEfficiencyAlgorithmRef({ planningRelationChoices: true })).toThrow("indexed reviewed");
+});
+
+
+function ratingFixture(ids = ["a", "b"], empty = false) {
+  const base = fixture(ids, empty);
+  return { ...base, request: planningCatalogEncodingRequest(base.request) };
+}
+
+it("round trips every eligible flat rating owner without completing invalid explicit choices", () => {
+  const { source, request, codec: hierarchy } = ratingFixture();
+  const codec = new RatingOwnedOppositionCodec(request.context), candidate = ratingOwnedOppositionRequest(request);
+  expect(codec.owners).toHaveLength(4);
+  expect(codec.owners.find(row => row.ratingRef === "ref:rating:insight:b")!.slots).toEqual([1]);
+  for (const owner of codec.owners) for (const slot of owner.slots) {
+    const value = structuredClone(source), plan = value.plans[slot]!;
+    const index = hierarchy.targets.findIndex(target => target.targetRef === owner.entityRef);
+    plan.targetIndices = [index, index]; plan.mode = "check";
+    plan.difficulty = { kind: "opposed", targetRef: owner.entityRef, ratingRef: owner.ratingRef };
+    plan.primaryEffect = condition(1); plan.threatenedEffect = { ...Object.fromEntries(Object.entries(condition(1)).filter(([key]) => key !== "magnitude")), proposalKey: "threat", conditionRef: { proposalKey: "threat" } };
+    const before = contentHash(value), encoded = codec.encode(value) as Output;
+    expect(encoded.plans[slot]!.difficulty).toHaveProperty("targetRef", null);
+    expect(codec.decode(encoded)).toEqual(value); expect(contentHash(value)).toBe(before);
+    expect(candidate.preprocessOutput!(encoded)).toEqual(request.preprocessOutput!(value));
+    candidate.schema.parse(candidate.preprocessOutput!(encoded).value);
+  }
+  const bad = structuredClone(source); bad.plans[0]!.difficulty = { kind: "opposed", ratingRef: "ref:rating:resolve:a", targetRef: "ref:entity:b" };
+  expect(codec.decode(codec.encode(bad))).toEqual(bad);
+  const historical = { repair: { previousOutput: { kind: "commit_plans", plans: [{ actionIndex: 0, difficulty: { kind: "opposed", ratingRef: "ref:rating:resolve:a", targetRef: null } }] } } };
+  expect(codec.decode(historical)).toEqual(historical);
+  for (const difficulty of [{ kind: "environment", band: "easy", source: { kind: "fact", ref: "ref:fact:terrain" } },
+    { kind: "opposed", ratingRef: "ref:rating:resolve:a" }, { kind: "opposed", ratingRef: "ref:rating:missing", targetRef: null },
+    { kind: "opposed", ratingRef: "ref:rating:insight:b", targetRef: null }]) {
+    const value = structuredClone(source); value.plans[0]!.difficulty = difficulty;
+    expect(codec.decode(value)).toEqual(value);
+  }
+  const empty = ratingFixture(["a", "b"], true), emptyCodec = new RatingOwnedOppositionCodec(empty.request.context);
+  expect(emptyCodec.owners).toEqual([]); expect(emptyCodec.decode(empty.source)).toEqual(empty.source);
+  expect(ratingOwnedOppositionRequest(empty.request).schema).toBe(empty.request.schema);
+});
+
+it("binds opposed ownership projection and schemas to their complete source", () => {
+  for (const field of ["ratingRef", "entityRef", "value", "slots"]) {
+    const { request, source } = ratingFixture(), codec = new RatingOwnedOppositionCodec(request.context);
+    (codec.owners[0] as unknown as Value)[field] = "changed";
+    expect(() => codec.decode(source)).toThrow("projection changed");
+  }
+  const { request, source } = ratingFixture(), candidate = ratingOwnedOppositionRequest(request);
+  expect(() => ratingOwnedOppositionRequest(candidate)).toThrow("already applied");
+  candidate.wireJsonSchema!.changed = true;
+  expect(() => candidate.preprocessOutput!(source)).toThrow("wire schema changed");
+  const next = ratingFixture(), other = ratingOwnedOppositionRequest(next.request);
+  (next.request.context as { task: Value }).task.changed = true;
+  expect(() => other.preprocessOutput!(next.source)).toThrow("source or ownership");
+  expect(() => ratingOwnedOppositionRequest({ ...ratingFixture().request, system: "unrelated" })).toThrow("representation contract");
+});
+
+it.each([false, true])("retains full batching, temporal scope and valid neighbors for nullable opposition (%s)", async bad => {
+  const base = fixture(), catalog = createTestModelCatalog(["truth-deepseek"], { maxInputBytes: 4_000_000 });
+  let output: unknown; const bodies: unknown[] = [];
+  const gateway = createModelGateway(catalog, { TEST_MODEL_API_KEY: "fixture" }, { registry: createTestModelRegistry(catalog), maxTransportAttempts: 1,
+    fetch: async (_url, init) => {
+      bodies.push(JSON.parse(String(init?.body)));
+      return Response.json({ id: "rating-owned", model: "fixture", choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(output) }, finish_reason: "stop" }],
+        usage: { prompt_tokens: 30, completion_tokens: 40, total_tokens: 70 } });
+    } });
+  const sink = { ...gateway, availableProfileSummaries: () => [], assertProfilesAvailable: async () => {}, generateStructured: async <T,>(request: StructuredModelRequest<T>) => {
+    const candidate = ratingOwnedOppositionRequest(request);
+    const raw = structuredClone(base.source), plan = raw.plans[0]!;
+    plan.mode = "check"; plan.primaryEffect = condition();
+    plan.threatenedEffect = { ...Object.fromEntries(Object.entries(condition()).filter(([key]) => key !== "magnitude")), proposalKey: "threat", conditionRef: { proposalKey: "threat" } };
+    plan.difficulty = { kind: "opposed", ratingRef: bad ? "ref:rating:insight:b" : "ref:rating:resolve:a", targetRef: null };
+    output = raw;
+    return gateway.generateStructured(candidate);
+  } };
+  const provider = dependentFieldsProvider(indexedReviewedPlanningProvider(planningCatalogEncodingProvider(sink), false, false, true, true, true));
+  const coordinator = new TruthBatchCoordinator({ ...provider, generateStructured: async request => {
+    try { return await provider.generateStructured(request); }
+    catch (error) { if (error instanceof ModelOutputError) throw error; throw new ModelConfigurationError(String(error)); }
+  } }, 12, 0, "shared-json-v3", TRUTH_BATCH_REQUEST_CONTRACT, "tail-v1");
+  const prompt = promptBundle("truth-resolution");
+  const results = await Promise.allSettled(base.contexts.map((context, slot) => coordinator.generateStructured({ ...base.original,
+    schemaName: "truth_resolution_plan_commit", schema: resolutionPlanCommitDirectiveSchema,
+    context: { ...context, contractVersion: 17, execution: { worldId: "world", instanceId: "test", advanceId: "test", revision: 0, step: 0 },
+      roleContract: { role: "truth-resolution", purpose: "test", modelOwns: [], engineOwns: [], existingReferenceRule: "", proposalRule: "", failureRule: "" },
+      referenceCatalog: { ...context.referenceCatalog, version: 2, hash: "test" }, repair: null },
+    system: prompt.system, userPrompt: prompt.userPrompt, subjectId: `source-${slot}`, profileId: "truth-deepseek", runtimeIdentity: { worldHash: `sha256:${"1".repeat(64)}`, revision: 0 } })));
+  if (!bodies.length && results[0]?.status === "rejected") throw results[0].reason;
+  expect(bodies).toHaveLength(1); expect(JSON.stringify(bodies).includes("do not propose future task-completion effects before their prerequisites hold.")).toBe(true);
+  expect(results[1]!.status).toBe("fulfilled"); expect(results[0]!.status).toBe(bad ? "rejected" : "fulfilled");
+  if (bad) {
+    const rejected = (results[0] as PromiseRejectedResult).reason as ModelOutputError;
+    expect(rejected).toBeInstanceOf(ModelOutputError); expect(JSON.stringify(rejected.rawValue)).toContain("ref:rating:insight:b");
+  }
 });
