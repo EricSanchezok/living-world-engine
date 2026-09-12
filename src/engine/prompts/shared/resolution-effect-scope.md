@@ -1,0 +1,1 @@
+Effect fields describe the meter or condition effects committed by a ResolutionReceipt in the supplied current temporal interval, including while the whole Activity continues; do not propose future task-completion effects before their prerequisites hold.

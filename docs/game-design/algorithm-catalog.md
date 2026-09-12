@@ -61,11 +61,11 @@ These implementations are replaceable inside the offline evaluation harness, but
 
 ## Default composition
 
-Root hash: `21c26ca4e16907befee5ec8542f545fad10bc6069e8accf7bcbaa093acc7a62c`
+Root hash: `c3ea77f5deb732d67bf21f5305885e59436c939e5d55911330140dade1d9b87a`
 
 | Node path | Role | Algorithm | Contract | Manifest hash |
 | --- | --- | --- | ---: | --- |
-| `root` | `world-execution` | `eager-reference@26` | 10 | `21c26ca4e16907befee5ec8542f545fad10bc6069e8accf7bcbaa093acc7a62c` |
+| `root` | `world-execution` | `eager-reference@26` | 10 | `c3ea77f5deb732d67bf21f5305885e59436c939e5d55911330140dade1d9b87a` |
 | `root.agentCognition` | `agent-cognition` | `model-agent-cognition@1` | 1 | `1daa82dc5f667b7486ecddcbc1cd07d57accf916cb66a2d7d7ae32cf04d9630d` |
 | `root.agentCognition.batching` | `work-batching` | `bounded-slot-batching@1` | 1 | `8a6cc0ef438150ba0f22f8671b1ccedb81468f0c407976caae1521102e771981` |
 | `root.agentCognition.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |
@@ -84,7 +84,7 @@ Root hash: `21c26ca4e16907befee5ec8542f545fad10bc6069e8accf7bcbaa093acc7a62c`
 | `root.reactionResolution.reactionDecision` | `reaction-decision` | `model-reaction-decision@1` | 1 | `f601d8335328d0689059ce16d69ac4548c766b5d36b67f3919ecce3f05fcccac` |
 | `root.reactionResolution.scheduling` | `work-scheduling` | `bounded-concurrency@1` | 1 | `2348f501124ef2ed707eec5123ef91a1639a9c3375804201e1b19be2aaf3cf69` |
 | `root.reactionResolution.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |
-| `root.truthResolution` | `truth-resolution` | `indexed-reviewed-truth-resolution@5` | 4 | `a9b3ee71e7ae543508a8ce44e514d4fa2dd7eae57523445ed54a3ca4b3e1ee9d` |
+| `root.truthResolution` | `truth-resolution` | `indexed-reviewed-truth-resolution@5` | 4 | `0666d7f0d5d9f715df90ee220c1f212a4db951b0882d68c9fca921e476c8090f` |
 | `root.truthResolution.batching` | `work-batching` | `shared-state-first-slot-batching@1` | 1 | `67a01403a0f54e5bb154ddb4f8b1bd6f2cd6e6b3a07922f877d7f4874fd01a1e` |
 | `root.truthResolution.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |
 | `root.observationRendering` | `observation-rendering` | `source-bound-observation-rendering@3` | 1 | `726cf5b7ec1f4a545eb101451f3427c373e2208f560077b8298657f128e9c2f2` |

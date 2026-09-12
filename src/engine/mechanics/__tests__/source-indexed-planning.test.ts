@@ -249,6 +249,7 @@ it.each([false, true])("keeps explicit bad condition keys rejected and valid nei
     subjectId: `source-${slot}`, profileId: "truth-deepseek", runtimeIdentity: { worldHash: `sha256:${"1".repeat(64)}`, revision: 9 } })));
   if (!bodies.length && results[0]?.status === "rejected") throw results[0].reason;
   expect(bodies).toHaveLength(1); expect(JSON.stringify(bodies)).toContain("conditionRef: null");
+  expect(JSON.stringify(bodies)).toContain("do not propose future task-completion effects before their prerequisites hold.");
   expect(results[1]!.status).toBe("fulfilled"); expect(results[0]!.status).toBe(bad ? "rejected" : "fulfilled");
   if (!bad) return;
   const rejected = (results[0] as PromiseRejectedResult).reason as ModelOutputError;
