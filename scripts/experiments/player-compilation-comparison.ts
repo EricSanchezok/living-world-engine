@@ -3,6 +3,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { representedActionCompiler } from "../../src/engine/algorithms/eager-reference/represented-action-compiler";
+import { defineAlgorithmRef } from "../../src/engine/algorithms/composition";
 import { CachedPassageEncoder } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/embedding-cache";
 import { actionCompilationPassagesForState } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/warmup";
 import { discoverLocalEncoderModelDirectory, livingWorldCacheRoot, loadLocalEncoder } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/local-encoder";
@@ -11,6 +12,7 @@ import { relationalRrfEncoderFingerprint, R5_RELATIONAL_PASSAGE_SCHEMA_VERSION }
 import type { ActionCompilationResult } from "../../src/engine/algorithms/roles";
 import type { FirstPassCallEvidence } from "../../src/engine/benchmarks/action-compilation/first-pass-runner";
 import { integratedPlayerAlgorithmRef } from "../../src/engine/benchmarks/step-efficiency/integrated-player-algorithm";
+import { compilationReferenceUses, compilationReferenceUsesRequest, COMPILATION_REFERENCE_USES } from "../../src/engine/benchmarks/step-efficiency/compilation-reference-uses";
 import type { SimulationState } from "../../src/engine/contracts/model";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { completeDeepSeekJsonStream } from "../../src/engine/models/deepseek-json-stream";
@@ -26,7 +28,7 @@ import { loadOfficialSourceShard } from "./refresh-action-compilation-reference"
 import { finiteWorkWorldTemplate } from "./step-finite-work-world";
 import { finiteWorkCompilationState } from "./finite-work-compilation-state";
 
-const protocol = { id: "finite-work-compilation-v1", sourceExecution: "14c18986-48ed-40ce-9bc8-0f3caf542273",
+const finiteWorkProtocol = { id: "finite-work-compilation-v1", sourceExecution: "14c18986-48ed-40ce-9bc8-0f3caf542273",
   seed: 20260911, orderedBatchSizes: [12, 12, 12, 5, 8], maxHttp: 10, maxDispatchMs: 600_000,
   model: "deepseek-flash", thinking: "disabled", repairs: 0, transportRetries: 0,
   retrievalCache: "warm passage cache; independent cold query cache per physical batch, matching all five historical first retrievals",
@@ -36,13 +38,16 @@ const save = (root: string, file: string, value: unknown) => writeFileSync(path.
 const git = (...args: string[]) => execFileSync("git", args, { encoding: "utf8" }).trim();
 const errorValue = (error: unknown) => error instanceof Error ? { name: error.name, message: error.message } : { name: "UnknownError", message: String(error) };
 const sourceHashes = () => Object.fromEntries([
-  "scripts/experiments/finite-work-compilation.ts", "scripts/experiments/finite-work-compilation-state.ts",
+  "scripts/experiments/player-compilation-comparison.ts", "scripts/experiments/finite-work-compilation-state.ts",
   "scripts/experiments/step-finite-work-world.ts", "scripts/experiments/world-fragments/finite-work-goal.yaml",
   "src/engine/algorithms/eager-reference/represented-action-compiler.ts",
   "src/engine/benchmarks/step-efficiency/integrated-player-algorithm.ts",
+  "src/engine/benchmarks/step-efficiency/compilation-reference-uses.ts", "src/engine/prompts/shared/compilation-reference-uses.md",
 ].map(file => [file, contentHash(readFileSync(file, "utf8"))]));
 
-export async function finiteWorkCompilation(mode: "prepare" | "run", root: string, sourceRoot: string, captureRoot: string) {
+export async function playerCompilationComparison(mode: "prepare" | "run", root: string, sourceRoot: string, captureRoot: string, referenceUsesBaseline?: string) {
+  const protocol = referenceUsesBaseline ? { ...finiteWorkProtocol, id: "compilation-reference-uses-v1", candidate: COMPILATION_REFERENCE_USES,
+    interpretation: "Both arms use the complete finite-work counterfactual world and all 49 original actions in the original five physical batches. B exactly reconstructs the sealed preceding finite-work C requests. C adds only action-local declared reference-use links and interpretation instructions after the unchanged R5 retrieval and alias encoding. Freeze ten complete ordered requests on a clean committed producer. Replay every original response in both offline arms through unchanged output dictionaries, schema and materialization, retaining all original acceptance/rejection. One new primary per source/arm, alternating order, no repair/retry/redraw. Preserve every response, physical audit, usage, formal and source-semantic error. This is compilation evidence, not a gameplay source, successful full player action or reliability estimate." } : finiteWorkProtocol;
   const ledger: RuntimeEvent[] = read(path.join(sourceRoot, "run/ledger-events.json"));
   const eventFor = (invocation: string, event: string) => {
     const found = ledger.filter(entry => entry.event === event && entry.correlation?.modelInvocationId === invocation);
@@ -62,9 +67,32 @@ export async function finiteWorkCompilation(mode: "prepare" | "run", root: strin
   const template = loadWorldTemplate(path.join(sourceRoot, "worlds/blackmarsh/world"));
   const before = buildWorldDefinition(template, { seed: protocol.seed, modelCatalog: catalog });
   const after = buildWorldDefinition(finiteWorkWorldTemplate(template), { seed: protocol.seed, modelCatalog: catalog });
-  const overlay = finiteWorkCompilationState(original, before, after), algorithm = integratedPlayerAlgorithmRef();
+  const overlay = finiteWorkCompilationState(original, before, after), foundation = integratedPlayerAlgorithmRef();
+  const algorithm = referenceUsesBaseline ? defineAlgorithmRef({ ...foundation, id: "compilation-reference-uses-diagnostic", version: "1",
+    config: { ...foundation.config, comparison: COMPILATION_REFERENCE_USES } }) : foundation;
+  const baselineState = referenceUsesBaseline ? overlay.state : original;
+  const prior = referenceUsesBaseline ? {
+    manifest: read(path.join(referenceUsesBaseline, "manifest.json")), terminal: read(path.join(referenceUsesBaseline, "run/terminal.json")),
+    states: read(path.join(referenceUsesBaseline, "preflight/states.json")),
+    rows: sources.map((_, index) => {
+      const prefix = path.join(referenceUsesBaseline, "run", `source-${index}-C`);
+      return { request: read(path.join(prefix, "request.json")), response: read(path.join(prefix, "response.json")),
+        retrieval: read(path.join(prefix, "retrieval-1.json")), evidence: read(path.join(prefix, "evidence.json")) };
+    }),
+  } : undefined;
+  if (prior && (prior.manifest.binding.protocol.id !== finiteWorkProtocol.id || !prior.terminal.complete || prior.terminal.totalHttp !== 10 ||
+    prior.manifest.binding.sourceHash !== contentHash(sources) || prior.manifest.binding.catalogHash !== catalog.hash ||
+    contentHash(prior.manifest.binding.overlay) !== contentHash(overlay.provenance) ||
+    JSON.stringify(prior.states.C) !== JSON.stringify(overlay.state) || prior.rows.some((row, index) =>
+      row.evidence.mode !== "run" || row.evidence.actualHttp !== 1 || !row.evidence.stateUnchanged || row.evidence.arm !== "C" ||
+      row.evidence.sourceIndex !== index || contentHash(row.evidence.actionIds) !== contentHash(sources[index]!.actionIds) ||
+      row.request.orderedBodyHash !== contentHash(row.request.orderedBody) || !row.evidence.calls[0]?.audit))) {
+    throw new Error("Reference-use comparison requires the complete sealed finite-work C evidence");
+  }
   const binding = { protocol, sourceCodeHashes: sourceHashes(), algorithm, sourceHash: contentHash(sources), catalogHash: catalog.hash,
-    originalStateOrderHash: contentHash(JSON.stringify(original)), overlay: overlay.provenance };
+    originalStateOrderHash: contentHash(JSON.stringify(original)), overlay: overlay.provenance,
+    ...(prior ? { baseline: { kind: "preceding-counterfactual-compilation-C", manifestHash: contentHash(prior.manifest),
+      terminalHash: contentHash(prior.terminal), rowHashes: prior.rows.map(row => contentHash(row)) } } : {}) };
   const frozenManifest = mode === "run" ? read(path.join(root, "manifest.json")) : undefined;
   if (mode === "run" && (git("status", "--porcelain") || frozenManifest.codeRevision !== git("rev-parse", "HEAD") ||
     contentHash(frozenManifest.binding) !== contentHash(binding))) {
@@ -74,7 +102,7 @@ export async function finiteWorkCompilation(mode: "prepare" | "run", root: strin
   const directory = path.join(root, mode === "prepare" ? "preflight" : "run");
   mkdirSync(directory, { recursive: false });
   save(directory, "binding.json", { binding, codeRevision: git("rev-parse", "HEAD"), mode });
-  save(directory, "states.json", { B: original, C: overlay.state });
+  save(directory, "states.json", { B: baselineState, C: overlay.state });
   save(directory, "sources.json", sources);
   const cacheRoot = livingWorldCacheRoot();
   const encoder = await loadLocalEncoder({ modelDirectory: discoverLocalEncoderModelDirectory(cacheRoot, MULTILINGUAL_E5_BASE_ASSET.name),
@@ -89,20 +117,22 @@ export async function finiteWorkCompilation(mode: "prepare" | "run", root: strin
   const stop = () => { stopped ??= "Operator stopped later dispatch"; };
   process.on("SIGINT", stop); process.on("SIGTERM", stop);
   try {
-    for (const [arm, state] of Object.entries({ B: original, C: overlay.state })) {
+    for (const [arm, state] of Object.entries({ B: baselineState, C: overlay.state })) {
       const warmed = await cache.encodePassages({ worldContentHash: state.worldHash,
         passages: actionCompilationPassagesForState(state), allowWrite: mode === "prepare" });
       save(directory, `cache-${arm}.json`, { hits: warmed.hits, misses: warmed.misses });
       await resources.preflight(algorithm, { worldContentHash: state.worldHash, state });
     }
     for (const [sourceIndex, source] of sources.entries()) {
-      const oldRequest = eventFor(source.sourceInvocationId, "model.transport.request.raw").payload as { body: string };
-      const oldResponse = eventFor(source.sourceInvocationId, "model.transport.response.raw").payload as { body: string; status: number };
+      const preceding = prior?.rows[sourceIndex];
+      const oldRequest = preceding ? { body: preceding.request.orderedBody } : eventFor(source.sourceInvocationId, "model.transport.request.raw").payload as { body: string };
+      const oldResponse = preceding ? preceding.response as { body: string; status: number } : eventFor(source.sourceInvocationId, "model.transport.response.raw").payload as { body: string; status: number };
+      const expectedRetrieval = preceding ? preceding.retrieval.selected as { fullContextHash: string; modelContextHash: string; shortlistHash: string } : source;
       for (const arm of sourceIndex % 2 ? ["C", "B"] : ["B", "C"]) {
         if (stopped) throw new Error(stopped);
         const id = `source-${sourceIndex}-${arm}`, trialDirectory = path.join(directory, id);
         mkdirSync(trialDirectory, { recursive: false });
-        const state = structuredClone(arm === "B" ? original : overlay.state), stateHash = contentHash(state);
+        const state = structuredClone(arm === "B" ? baselineState : overlay.state), stateHash = contentHash(state);
         const observer = new RecordingRuntimeObserver({ mode: "full" });
         // Do not let an earlier counterfactual populate the baseline query cache.
         const retrieval = createActionCompilationRetrievalRuntimeProvider({ cacheRoot, encoder }).runtime(algorithm);
@@ -120,8 +150,8 @@ export async function finiteWorkCompilation(mode: "prepare" | "run", root: strin
               if (++sends !== 1 || accountId !== "deepseek-api" || parsed.model !== protocol.model || parsed.thinking?.type !== "disabled") throw new ModelConfigurationError("Primary-only model binding drift");
               save(trialDirectory, "request.json", { url: request.url, body: parsed, orderedBody: body, orderedBodyHash: contentHash(body) });
               if (mode === "prepare") {
-                if (arm === "B") {
-                  if (body !== oldRequest.body) throw new ModelConfigurationError("Historical B request bytes differ");
+                if (arm === "B" || preceding) {
+                  if (arm === "B" && body !== oldRequest.body) throw new ModelConfigurationError("Historical B request bytes differ");
                   transportUsage = completeDeepSeekJsonStream(oldResponse.body, protocol.model).usage;
                   return new Response(oldResponse.body, { status: oldResponse.status, headers: { "content-type": "text/event-stream" } });
                 }
@@ -159,7 +189,13 @@ export async function finiteWorkCompilation(mode: "prepare" | "run", root: strin
             }
             if (request.profileId !== source.profileId || request.modelRegistrySnapshotHash !== source.registrySnapshotHash) throw new ModelConfigurationError("Captured profile/registry pin lost");
             try {
-              const generated = await gateway.generateStructured(request);
+              const adapted = preceding && arm === "C" ? compilationReferenceUsesRequest(request) : request;
+              if (adapted !== request) {
+                save(trialDirectory, "reference-use-projection.json", compilationReferenceUses(request.context).proof);
+                if (adapted.schema !== request.schema || adapted.wireJsonSchema !== request.wireJsonSchema) throw new ModelConfigurationError("Reference-use view changed output schema");
+              }
+              call.context = adapted.context; call.promptVersion = adapted.promptVersion;
+              const generated = await gateway.generateStructured(adapted);
               call.value = generated.value; call.audit = generated.audit;
               return generated;
             } catch (error) {
@@ -174,17 +210,17 @@ export async function finiteWorkCompilation(mode: "prepare" | "run", root: strin
         try {
           result = await representedActionCompiler("AT", true, true, true)(provider, state, source.actions, {
             workloadId: execution.instanceId, batchId: execution.advanceId,
-            correlation: { executionId: `finite-work:${id}`, revision: state.revision }, observer,
+            correlation: { executionId: `${protocol.id}:${id}`, revision: state.revision }, observer,
             runtimeIdentity: { worldHash: state.worldHash, revision: state.revision },
             modelRegistrySnapshotHash: source.registrySnapshotHash, executionAlgorithmRef: algorithm,
             actionCompilationRetrieval: { ...retrieval, retrieveBatch: async request => {
               const ordinal = ++retrievalCalls;
               if (ordinal === 1 && (request.slotIndices.length !== source.actions.length ||
-                (arm === "B" && contentHash(request.fullContext) !== source.fullContextHash))) throw new ModelConfigurationError("Initial context/cardinality differs");
+                ((arm === "B" || preceding) && contentHash(request.fullContext) !== expectedRetrieval.fullContextHash))) throw new ModelConfigurationError("Initial context/cardinality differs");
               const selected = await retrieval.retrieveBatch(request);
               save(trialDirectory, `retrieval-${ordinal}.json`, { request, selected: { ...selected, selectedKeysBySlot: [...selected.selectedKeysBySlot] } });
               if (ordinal === 1 && selected.diagnostics.cache?.queryHits !== 0) throw new ModelConfigurationError("Initial cold query-cache binding differs");
-              if (ordinal === 1 && arm === "B" && (selected.modelContextHash !== source.modelContextHash || selected.shortlistHash !== source.shortlistHash)) throw new ModelConfigurationError("Historical B R5 shortlist differs");
+              if (ordinal === 1 && (arm === "B" || preceding) && (selected.modelContextHash !== expectedRetrieval.modelContextHash || selected.shortlistHash !== expectedRetrieval.shortlistHash)) throw new ModelConfigurationError("Historical R5 shortlist differs");
               return selected;
             } },
           }, source.profileId, source.actions.length);
@@ -192,14 +228,14 @@ export async function finiteWorkCompilation(mode: "prepare" | "run", root: strin
         const evidence = { id, arm, sourceIndex, sourceInvocationId: source.sourceInvocationId, actionIds: source.actionIds,
           mode, compilerAccepted: Boolean(result), result, error, calls, events: observer.events, captureOnly,
           stateUnchanged: contentHash(state) === stateHash, wallMs: performance.now() - trialStart, actualHttp,
-          transportUsage, usageOrigin: mode === "run" ? "new-inference" : arm === "B" ? "historical-replay" : "none",
+          transportUsage, usageOrigin: mode === "run" ? "new-inference" : (arm === "B" || preceding) ? "historical-replay" : "none",
           semanticVerdict: "pending-source-review", gameplayCommit: false };
         save(trialDirectory, "evidence.json", evidence);
         rows.push({ id, arm, sourceIndex, slots: source.actions.length, accepted: Boolean(result), captureOnly, actualHttp,
           wallMs: evidence.wallMs, usage: transportUsage, repairAttemptsBlocked: Math.max(0, calls.length - 1), error });
         process.stdout.write(`${JSON.stringify(rows.at(-1))}\n`);
         if (!evidence.stateUnchanged || sends !== 1 || calls[0]?.schemaName !== "action_compilation_at_eligible_source_choice_v1") throw new Error("Source, request or schema invariant failed");
-        if (mode === "prepare" && arm === "C") {
+        if (mode === "prepare" && arm === "C" && !preceding) {
           if (!captureOnly || calls.length !== 1 || result) throw new Error("C preparation must capture only");
           continue;
         }
@@ -211,12 +247,15 @@ export async function finiteWorkCompilation(mode: "prepare" | "run", root: strin
           invocation.tokenUsage.output !== transportUsage.completion_tokens || invocation.tokenUsage.cacheRead !== transportUsage.prompt_cache_hit_tokens ||
           invocation.tokenUsage.reasoning !== 0) throw new Error("Complete first-response audit and nonthinking usage required; later dispatch stopped");
         if (mode === "prepare") {
-          const validations = (events: RuntimeEvent[]) => events.filter(entry => entry.event === "model.action_compilation.slots.validated" &&
-            entry.correlation?.modelInvocationId === source.sourceInvocationId).map(entry => entry.payload);
-          if (validations(ledger).length !== 1 || contentHash(validations(ledger)) !== contentHash(validations(observer.events))) throw new Error("Historical B slot validation/rejection differs");
-          const normalized = ledger.filter(entry => entry.event === "model.output.normalized" && entry.correlation?.modelInvocationId === source.sourceInvocationId).at(-1);
-          const persisted = eventFor(source.sourceInvocationId, "model.audit.persisted").payload as { invocations: Array<{ normalizedOutputHash?: string | null }> };
-          if ((normalized?.hashes?.normalizedOutput ?? persisted.invocations[0]?.normalizedOutputHash) !== invocation.normalizedOutputHash) throw new Error("Historical B normalization differs");
+          const historicalInvocation = preceding?.evidence.calls[0].invocationId ?? source.sourceInvocationId;
+          const historicalEvents: RuntimeEvent[] = preceding?.evidence.events ?? ledger;
+          const validations = (events: RuntimeEvent[], invocationId: string | null | undefined) => events.filter(entry =>
+            entry.event === "model.action_compilation.slots.validated" && entry.correlation?.modelInvocationId === invocationId).map(entry => entry.payload);
+          const previousValidations = validations(historicalEvents, historicalInvocation);
+          if (previousValidations.length !== 1 || contentHash(previousValidations) !== contentHash(validations(observer.events, calls[0]?.invocationId))) throw new Error("Historical slot validation/rejection differs");
+          const normalized = historicalEvents.filter(entry => entry.event === "model.output.normalized" && entry.correlation?.modelInvocationId === historicalInvocation).at(-1);
+          const persisted = preceding?.evidence.calls[0].audit ?? eventFor(source.sourceInvocationId, "model.audit.persisted").payload as { invocations: Array<{ normalizedOutputHash?: string | null }> };
+          if ((normalized?.hashes?.normalizedOutput ?? persisted.invocations[0]?.normalizedOutputHash) !== invocation.normalizedOutputHash) throw new Error("Historical normalization differs");
         }
       }
     }
@@ -233,8 +272,8 @@ export async function finiteWorkCompilation(mode: "prepare" | "run", root: strin
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  const [mode, root, sourceRoot, captureRoot] = process.argv.slice(2);
-  if ((mode !== "prepare" && mode !== "run") || !root || !sourceRoot || !captureRoot) throw new Error("usage: finite-work-compilation.ts <prepare|run> <output> <integrated-player-source> <official-capture>");
-  finiteWorkCompilation(mode, path.resolve(root), path.resolve(sourceRoot), path.resolve(captureRoot))
+  const [mode, root, sourceRoot, captureRoot, flag, baseline] = process.argv.slice(2);
+  if ((mode !== "prepare" && mode !== "run") || !root || !sourceRoot || !captureRoot || (flag && (flag !== "--reference-uses-baseline" || !baseline)) || process.argv.length > 8) throw new Error("usage: player-compilation-comparison.ts <prepare|run> <output> <integrated-player-source> <official-capture> [--reference-uses-baseline <sealed-finite-work-comparison>]");
+  playerCompilationComparison(mode, path.resolve(root), path.resolve(sourceRoot), path.resolve(captureRoot), baseline ? path.resolve(baseline) : undefined)
     .catch(error => { process.stderr.write(`${JSON.stringify(errorValue(error))}\n`); process.exitCode = 1; });
 }
