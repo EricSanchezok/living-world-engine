@@ -17,11 +17,16 @@ The experiment identity binds model-directory and graph hashes, tokenizer assets
 
 The offline comparison covers all five original batches and all 49 actions. Preserve complete query strings, coverage witnesses, vectors and native timings. Compare cold encoding, actual per-query partial-cache reuse after the recorded alternative-world batch, reordered queries and complete warm reuse. Require exact vector equality for the same candidate text across these cases; retain any failure rather than weakening tolerance. Report encoded windows and padded-token work as well as elapsed time. No provider HTTP, model-output reuse, gameplay mutation or player-latency claim is part of this comparison.
 
+The paired passage-space comparison uses the same complete-text native encoder for both query and passage inputs. Its cache fingerprint includes the complete inference contract, assets, runtime identity, passage schema and encoder implementation hashes. Generate two independent persistent caches: one from each world's complete passage union, the other by processing original contexts in reverse order with actual partial-cache population. Require every persisted passage vector to match exactly after closing and reopening both caches read-only. Record complete strings, token coverage, native batches, cache counts and preparation time; preparation is not player latency.
+
+Run the unchanged R5 physical retriever and joint-budget selector on every original batch. First require extracted native query vectors to match the completed query-only comparison. Then compare cold queries, alternative-world partial query reuse, complete warm reuse, and independently regenerated passage caches. Exact selected keys, shortlist and complete selected context must match within the candidate. Preserve the difference from the recorded quantized baseline, including removed and added references and their source records, without calling changed membership an improvement. Mechanical cache consistency, source-semantic retrieval quality and gameplay acceptance have separate result fields. No production fingerprint override, old/new vector mixing, model request or default promotion is permitted.
+
 ## Plan
 
 1. Separate graph quantization and padding effects with real native controls.
 2. Implement and test complete token windows and weighted pooling at the experimental boundary.
 3. Run the full recorded query cohort and record correctness, local cost and remaining retrieval obligations.
+4. Generate and reopen independent passage caches, then verify complete-source retrieval and its remaining semantic limits.
 
 ## Verification
 
@@ -30,3 +35,5 @@ Tests must expose truncation at a boundary, tail omission, duplicate/missing pay
 ## Evidence
 
 The [window encoder](../../src/engine/benchmarks/step-efficiency/full-text-window-encoder.ts) owns token coverage and pooling. Its [tests](../../src/engine/benchmarks/step-efficiency/full-text-window-encoder.test.ts) protect those contracts. The [native verifier](../../scripts/experiments/verify-full-text-window-encoder.ts) owns complete-source comparisons. [The decision](../decisions/0194-encode-complete-text-in-stable-width-windows.md) records alternatives and evidence limits.
+
+The shared [native loader](../../scripts/experiments/full-text-window-native.ts) owns the experiment's inference identity. The [paired retrieval verifier](../../scripts/experiments/verify-full-text-window-retrieval.ts) owns persistent passage generation and complete R5 comparison. Its [qualification tests](../../scripts/experiments/verify-full-text-window-retrieval.test.ts) reject incomplete cohorts, absent partial-hit controls and inconsistent evidence.

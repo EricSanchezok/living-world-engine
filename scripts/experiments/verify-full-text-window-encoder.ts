@@ -3,35 +3,14 @@ import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-import { inspectFullPrecisionEncoder } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/encoder-graph";
-import { CachedQueryEncoder, hashLocalModelDirectory, resolveInstalledModule } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/local-encoder";
-import { encodeFullTextWindows, FULL_TEXT_WINDOW_CONTRACT, type TokenizedEncoderText } from "../../src/engine/benchmarks/step-efficiency/full-text-window-encoder";
-import { FP32_E5_SOURCE } from "./verify-semantic-first-pass-encoder";
+import { CachedQueryEncoder } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/local-encoder";
+import { FULL_TEXT_WINDOW_CONTRACT } from "../../src/engine/benchmarks/step-efficiency/full-text-window-encoder";
+import { loadFullTextWindowNative, type FullTextEncodingTrace } from "./full-text-window-native";
 
-interface NativeTensor {
-  dims: number[];
-  data: Float32Array;
-  normalize(p: number, dimension: number): NativeTensor;
-  tolist(): number[][];
-}
-interface NativeTokenizer {
-  (text: string, options: Record<string, unknown>): { input_ids: number[] };
-  pad_token_id: number;
-}
-interface NativeModule {
-  env: { allowRemoteModels: boolean; allowLocalModels: boolean };
-  Tensor: new (kind: string, data: BigInt64Array, dims: number[]) => NativeTensor;
-  mean_pooling(output: NativeTensor, mask: NativeTensor): NativeTensor;
-  pipeline(task: string, model: string, options: Record<string, unknown>): Promise<{
-    tokenizer: NativeTokenizer;
-    model(inputs: Record<string, NativeTensor>): Promise<{ last_hidden_state: NativeTensor }>;
-    dispose(): Promise<void>;
-  }>;
-}
 interface TraceFile { trace: Array<{ queries: string[] }> }
 const read = <T>(file: string): T => JSON.parse(readFileSync(file, "utf8")) as T;
 const hash = (file: string) => createHash("sha256").update(readFileSync(file)).digest("hex");
-const implementationFiles = ["scripts/experiments/verify-full-text-window-encoder.ts", "scripts/experiments/verify-semantic-first-pass-encoder.ts",
+const implementationFiles = ["scripts/experiments/verify-full-text-window-encoder.ts", "scripts/experiments/full-text-window-native.ts", "scripts/experiments/verify-semantic-first-pass-encoder.ts",
   "src/engine/benchmarks/step-efficiency/full-text-window-encoder.ts", "src/engine/algorithms/eager-reference/candidate-retrieval/local-encoder.ts",
   "src/engine/algorithms/eager-reference/candidate-retrieval/encoder-graph.ts"];
 
@@ -51,18 +30,9 @@ export async function verifyFullTextWindowEncoder(sourceRoot: string, modelDirec
       || traces.C[0]!.queries.length !== actions.length * 5) throw new Error("incomplete physical query batch");
     return { files, B: traces.B[0]!.queries, C: traces.C[0]!.queries };
   });
-  const graph = inspectFullPrecisionEncoder(path.join(modelDirectory, "onnx/model.onnx"), FP32_E5_SOURCE.sha256);
-  const modelHash = hashLocalModelDirectory(modelDirectory);
-  const libraryEntries = ["@huggingface/transformers", "onnxruntime-node/package.json"].map(name => {
-    const entry = resolveInstalledModule(name);
-    return { name, entrySha256: hash(entry) };
-  });
-  const transformersEntry = resolveInstalledModule("@huggingface/transformers");
-  const transformersRoot = path.dirname(path.dirname(transformersEntry));
-  const runtimePackage = resolveInstalledModule("onnxruntime-node/package.json");
-  const libraries = { transformersVersion: read<{ version: string }>(path.join(transformersRoot, "package.json")).version,
-    transformersHash: hashLocalModelDirectory(transformersRoot), onnxVersion: read<{ version: string }>(runtimePackage).version,
-    onnxHash: hashLocalModelDirectory(path.dirname(runtimePackage)), node: process.version, platform: process.platform, arch: process.arch };
+  let calls: FullTextEncodingTrace[] = [];
+  const native = await loadFullTextWindowNative(modelDirectory, call => { calls.push(call); });
+  const { encoder, identity: { graph, modelHash, libraries, libraryEntries } } = native;
   mkdirSync(outputRoot, { recursive: false });
   const save = (name: string, value: unknown) => writeFileSync(path.join(outputRoot, name + ".json"), JSON.stringify(value, null, 2) + "\n", { flag: "wx" });
   save("manifest", { protocol: "full-text-window-encoder-v1", codeRevision, contract: FULL_TEXT_WINDOW_CONTRACT,
@@ -70,40 +40,6 @@ export async function verifyFullTextWindowEncoder(sourceRoot: string, modelDirec
     sources: sourceFiles.map(source => ({ B: hash(source.files.B), C: hash(source.files.C) })),
     implementationHashes: Object.fromEntries(implementationFiles.map(file => [file, hash(file)])), newModelHttp: 0,
     passageWrites: false, retrievalQualification: false, fullPlayerQualification: false });
-  const native = await import(pathToFileURL(transformersEntry).href) as NativeModule;
-  native.env.allowRemoteModels = false;
-  native.env.allowLocalModels = true;
-  const extractor = await native.pipeline("feature-extraction", modelDirectory, { device: "cpu", dtype: "fp32", local_files_only: true });
-  const tokenIds = (text: string, special: boolean) => extractor.tokenizer(text,
-    { add_special_tokens: special, padding: false, truncation: false, return_tensor: false }).input_ids;
-  const empty = tokenIds("", true);
-  if (empty.length !== 2) throw new Error("unexpected E5 boundary tokens");
-  const prefixes = { "query: ": tokenIds("query: ", false), "passage: ": tokenIds("passage: ", false) };
-  const tokenize = (text: string): TokenizedEncoderText => {
-    const prefix = Object.keys(prefixes).find(value => text.startsWith(value)) as keyof typeof prefixes | undefined;
-    if (!prefix) throw new Error("missing E5 query/passage prefix");
-    return { tokenIds: tokenIds(text, true), prefixIds: prefixes[prefix], bos: empty[0]!, eos: empty[1]!, pad: extractor.tokenizer.pad_token_id };
-  };
-  let calls: unknown[] = [];
-  const encoder = { modelId: FP32_E5_SOURCE.modelId, modelHash, dimensions: 768,
-    async encodeBatch(texts: readonly string[]) {
-      const started = performance.now(), tokenized = texts.map(tokenize), shapes: number[][] = [];
-      const output = await encodeFullTextWindows(tokenized, async windows => {
-        const width = windows[0]!.width, shape = [windows.length, width];
-        shapes.push(shape);
-        const input = new native.Tensor("int64", BigInt64Array.from(windows.flatMap(window => window.inputIds), BigInt), shape);
-        const mask = new native.Tensor("int64", BigInt64Array.from(windows.flatMap(window => window.attentionMask), BigInt), shape);
-        const raw = await extractor.model({ input_ids: input, attention_mask: mask });
-        const pooled = native.mean_pooling(raw.last_hidden_state, mask).normalize(2, -1);
-        if (!(pooled.data instanceof Float32Array) || pooled.dims.length !== 2 || pooled.dims[0] !== windows.length || pooled.dims[1] !== 768) {
-          throw new Error("native window output contract mismatch");
-        }
-        return pooled.tolist();
-      }, 768);
-      const elapsedMs = performance.now() - started;
-      calls.push({ texts, tokenized, ...output, shapes, elapsedMs });
-      return output.vectors;
-    } };
   const rows = [];
   try {
     for (const [index, source] of sourceFiles.entries()) {
@@ -142,7 +78,7 @@ export async function verifyFullTextWindowEncoder(sourceRoot: string, modelDirec
       rows, newModelHttp: 0, retrievalQualification: false, fullPlayerQualification: false };
     save("result", result);
     return result;
-  } finally { await extractor.dispose(); }
+  } finally { await native.dispose(); }
 }
 
 if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) {
