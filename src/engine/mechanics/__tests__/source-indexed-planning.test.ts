@@ -36,6 +36,8 @@ import { planningCatalogEncodingProvider } from "../planning-catalog-encoding";
 import { TruthBatchCoordinator, TRUTH_BATCH_REQUEST_CONTRACT } from "../truth-batch-provider";
 import { expandSharedBatchContexts, type SharedBatchContext } from "../shared-batch-context";
 
+import { selfConditionReferenceRequest, encodeSelfConditionReference, decodeSelfConditionReference } from "../../benchmarks/step-efficiency/self-condition-reference";
+
 function ownedFixture() {
   const base = fixture(true, false, true);
   const caused = sourceIndexedPlanCausesRequest(base.request);
@@ -45,6 +47,51 @@ function ownedFixture() {
     { kind: string; plans: Array<Record<string, unknown>> };
   return { ...base, request, candidate, codec, wire: source };
 }
+
+
+it("expands only explicit self condition references and preserves all other choices", () => {
+  const { request, wire } = ownedFixture(), candidate = selfConditionReferenceRequest(request);
+  const value = structuredClone(wire), plan = value.plans[0]!;
+  const primary = { kind: "condition", proposalKey: "注视-é", targetPosition: 0, channel: "attention", label: "watched",
+    description: "Under observation", sourceRefs: [{ kind: "action", ref: "ref:action:a" }], conditionRef: { proposalKey: "注视-é" },
+    conditionProfileRef: null, durationProfileRef: "ref:mechanic:a", access: { kind: "public" }, magnitude: "standard" };
+  Object.assign(plan, { primaryEffect: primary, secondaryEffect: { ...primary, proposalKey: "secondary", conditionRef: { proposalKey: "secondary" } },
+    threatenedEffect: Object.fromEntries(Object.entries({ ...primary, proposalKey: "threat", conditionRef: { proposalKey: "threat" } }).filter(([key]) => key !== "magnitude")) });
+  const before = contentHash(value), encoded = encodeSelfConditionReference(value) as typeof value;
+  for (const field of ["primaryEffect", "secondaryEffect", "threatenedEffect"]) expect(encoded.plans[0]![field]).toHaveProperty("conditionRef", null);
+  expect(decodeSelfConditionReference(encoded)).toEqual(value); expect(contentHash(value)).toBe(before);
+  expect(candidate.preprocessOutput!(encoded)).toEqual(request.preprocessOutput!(value));
+  candidate.schema.parse(candidate.preprocessOutput!(encoded).value);
+  expect(candidate.context).toBe(request.context); expect(candidate.schema).toBe(request.schema);
+  expect(candidate.system).toContain("conditionRef: null"); expect(candidate.jsonObjectPostlude).toContain("conditionRef: null");
+  for (const ref of ["ref:condition:existing", { proposalKey: "secondary" }, { proposalKey: "misspelled" }, { proposalKey: "注视-é", extra: true }]) {
+    const explicit = structuredClone(value); (explicit.plans[0]!.primaryEffect as Record<string, unknown>).conditionRef = ref;
+    expect(decodeSelfConditionReference(encodeSelfConditionReference(explicit))).toEqual(explicit);
+  }
+  for (const key of [null, "", "   ", " padded ", "e\u0301", "x".repeat(129), "bad\nkey", 12, undefined]) {
+    const malformed = { kind: "commit_plans", plans: [{ primaryEffect: { kind: "condition", proposalKey: key, conditionRef: null } }] };
+    expect(decodeSelfConditionReference(malformed)).toEqual(malformed);
+    expect(resolutionPlanCommitDirectiveSchema.safeParse(malformed).success).toBe(false);
+  }
+  const unrelated = { kind: "commit_plans", plans: [{ primaryEffect: { kind: "meter", proposalKey: "x", conditionRef: null } }],
+    repair: { previousOutput: value }, context: { nested: value } };
+  expect(decodeSelfConditionReference(unrelated)).toEqual(unrelated);
+  expect(decodeSelfConditionReference({ slots: [{ slot: 0, result: encoded }] })).toEqual({ slots: [{ slot: 0, result: value }] });
+});
+
+it("rejects changed self-reference instructions, source and wire schemas", () => {
+  for (const changed of ["context", "wireJsonSchema", "system", "jsonObjectPostlude", "userPrompt", "promptVersion"]) {
+    const { request, wire } = ownedFixture(), candidate = selfConditionReferenceRequest(request);
+    if (changed === "context" || changed === "wireJsonSchema") (candidate[changed] as Record<string, unknown>).changed = true;
+    else candidate[changed as "system"] += " changed";
+    expect(() => candidate.preprocessOutput!(wire)).toThrow("changed before decoding");
+  }
+  const { request } = ownedFixture();
+  expect(() => selfConditionReferenceRequest(selfConditionReferenceRequest(request))).toThrow("already applied");
+  expect(() => selfConditionReferenceRequest({ ...request, wireJsonSchema: undefined })).toThrow("missing wire schema");
+  expect(() => selfConditionReferenceRequest({ ...request, wireJsonSchema: {} })).toThrow("missing condition");
+  expect(() => selfConditionReferenceRequest({ ...request, jsonObjectPostlude: undefined })).toThrow("system and tail");
+});
 
 it("round trips explicit effect ownership across all modes, effect kinds and repeated target positions", () => {
   const { request, candidate, codec, wire } = ownedFixture();
@@ -163,6 +210,50 @@ it("retains a valid neighboring slot through the production coordinator, codecs 
   const rejected = (results[0] as PromiseRejectedResult).reason as ModelOutputError;
   expect(rejected).toBeInstanceOf(ModelOutputError);
   expect(JSON.stringify(rejected.rawValue)).toContain("invalidTargetOwnedEffects");
+});
+
+it.each([false, true])("keeps explicit bad condition keys rejected and valid neighbors through the real coordinator (%s)", async bad => {
+  const base = fixture(true, false, true, context => {
+    context.repair = null; context.contractVersion = 17;
+    context.roleContract = { role: "truth-resolution", purpose: "test", modelOwns: [], engineOwns: [], existingReferenceRule: "", proposalRule: "", failureRule: "" };
+    context.execution = { worldId: "world", instanceId: "test", advanceId: "test", revision: 9, step: 0 };
+    Object.assign(context.referenceCatalog as object, { version: 2, hash: "test" });
+  }), catalog = createTestModelCatalog(["truth-deepseek"], { maxInputBytes: 4_000_000 });
+  let output: unknown; const bodies: unknown[] = [];
+  const gateway = createModelGateway(catalog, { TEST_MODEL_API_KEY: "fixture" }, { registry: createTestModelRegistry(catalog), maxTransportAttempts: 1,
+    fetch: async (_url, init) => {
+      bodies.push(JSON.parse(String(init?.body)));
+      return Response.json({ id: "target-owned", model: "fixture", choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(output) }, finish_reason: "stop" }],
+        usage: { prompt_tokens: 30, completion_tokens: 40, total_tokens: 70 } });
+    } });
+  const sink = { ...gateway, availableProfileSummaries: () => [], assertProfilesAvailable: async () => {}, generateStructured: async <T,>(request: StructuredModelRequest<T>) => {
+    expect(request.schemaName).toBe("truth_resolution_plan_commit_batch");
+    const candidate = selfConditionReferenceRequest(request);
+    const causeCodec = new SourceIndexedPlanCauseCodec(base.request.context);
+    const source = causeCodec.encode(encodeIndexedPlans(base.source, base.domain));
+    const raw = source as { plans: Array<Record<string, unknown>> };
+    raw.plans[0]!.primaryEffect = { kind: "condition", proposalKey: "watched", targetPosition: 0, channel: "attention", label: "watched",
+      description: "Under observation", sourceRefs: [{ kind: "action", ref: "ref:action:a" }], conditionRef: bad ? { proposalKey: "wacthed" } : null,
+      conditionProfileRef: null, durationProfileRef: "ref:mechanic:a", access: { kind: "public" }, magnitude: "standard" };
+    output = raw;
+    return gateway.generateStructured(candidate);
+  } };
+  const provider = dependentFieldsProvider(indexedReviewedPlanningProvider(planningCatalogEncodingProvider(sink), false, false, true, true, true));
+  const coordinator = new TruthBatchCoordinator({ ...provider, generateStructured: async request => {
+    try { return await provider.generateStructured(request); }
+    catch (error) { if (error instanceof ModelOutputError) throw error; throw new ModelConfigurationError(String(error)); }
+  } }, 12, 0, "shared-json-v3", TRUTH_BATCH_REQUEST_CONTRACT, "tail-v1");
+  const contexts = expandSharedBatchContexts((base.original.context as { state: SharedBatchContext }).state), prompt = promptBundle("truth-resolution");
+  const results = await Promise.allSettled(contexts.map((context, slot) => coordinator.generateStructured({ ...base.original,
+    schema: resolutionPlanCommitDirectiveSchema, schemaName: "truth_resolution_plan_commit", context, system: prompt.system, userPrompt: prompt.userPrompt,
+    subjectId: `source-${slot}`, profileId: "truth-deepseek", runtimeIdentity: { worldHash: `sha256:${"1".repeat(64)}`, revision: 9 } })));
+  if (!bodies.length && results[0]?.status === "rejected") throw results[0].reason;
+  expect(bodies).toHaveLength(1); expect(JSON.stringify(bodies)).toContain("conditionRef: null");
+  expect(results[1]!.status).toBe("fulfilled"); expect(results[0]!.status).toBe(bad ? "rejected" : "fulfilled");
+  if (!bad) return;
+  const rejected = (results[0] as PromiseRejectedResult).reason as ModelOutputError;
+  expect(rejected).toBeInstanceOf(ModelOutputError);
+  expect(JSON.stringify(rejected.rawValue)).toContain("wacthed");
 });
 
 it.each([true, false])("binds the planning tail to the current root or narrowed repair worklist (%s)", shared => {
