@@ -78,7 +78,7 @@ describe("built-in algorithm registry", () => {
       "work-batching/shared-context-slot-batching@2",
       "work-batching/shared-state-first-slot-batching@1",
       "work-scheduling/bounded-concurrency@1",
-      "world-execution/eager-reference@25",
+      "world-execution/eager-reference@26",
     ]);
   });
 

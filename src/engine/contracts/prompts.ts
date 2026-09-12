@@ -2251,9 +2251,11 @@ export function buildResolutionPlanVerificationContext(input: {
   instanceId: string;
   advanceId: string;
   issues: readonly PromptValidationIssue[];
+  temporalBoundary: TemporalBoundary;
   temporalEvidence?: TemporalBoundary;
   resolutionScope?: ResolutionScope;
 }): unknown {
+  if (input.temporalEvidence && contentHash(input.temporalEvidence) !== contentHash(input.temporalBoundary)) throw new Error("temporal evidence boundary mismatch");
   const contextMode = input.workset.mode ?? "scoped";
   const availableState = input.workset.state;
   const availableActions = input.workset.availableActions;
@@ -2294,6 +2296,7 @@ export function buildResolutionPlanVerificationContext(input: {
     world: { id: input.definition.id, laws: input.definition.laws, rulePackages: input.definition.rulePackages, mechanics },
     baseRevision: input.state.revision,
     canonicalTruth,
+    temporalBoundary: structuredClone(input.temporalBoundary),
     ...projectActivityTemporalContext(availableState, input.temporalEvidence, referenceResolver, visibleTruth.activities),
     semanticHistory: projectModelHistory(availableState, modelRefs),
     actionSet: {

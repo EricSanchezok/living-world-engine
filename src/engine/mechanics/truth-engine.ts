@@ -1796,7 +1796,10 @@ function validateTransitionEffects(
   for (const action of actions) {
     const outcome = proposal.outcomes.find((candidate) => candidate.proposalId === action.id)!;
     const receipt = resolutionReceipts.find((candidate) => candidate.plan.actionId === action.id);
-    if (!receipt || outcome.status !== expectedActionStatus(receipt)) {
+    const continuingActivity = outcome.status === "continuing" && Object.values(input.state.truth.activities)
+      .some((activity) => activity.sourceActionId === action.id &&
+        (activity.status === "active" || activity.status === "paused"));
+    if (!receipt || (!continuingActivity && outcome.status !== expectedActionStatus(receipt))) {
       throw new Error(`outcome for ${action.id} contradicts its resolution receipt`);
     }
     if ((outcome.status === "failed" || outcome.status === "blocked") && !outcome.summary.trim()) {
@@ -2593,6 +2596,7 @@ export class TruthEngine {
           schema: resolutionPlanVerificationSchema,
           scope,
           buildContext: (issues) => buildResolutionPlanVerificationContext({
+            temporalBoundary: input.temporalBoundary,
             ...(this.includeActivityTemporalEvidence ? { temporalEvidence: input.temporalBoundary } : {}),
             definition: input.definition,
             state: input.state,
@@ -2960,16 +2964,12 @@ export class TruthEngine {
           (invocation.ruleId === "apply-receipt" || invocation.ruleId === "advance-conditions"))) {
           throw new Error("core-resolution settlement invocations are engine-owned");
         }
-        const continuingActionIds = new Set(directProposal.outcomes
-          .filter((outcome) => outcome.status === "continuing")
-          .map((outcome) => outcome.proposalId));
         resolutionReceipts = resolutionReceipts.map((receipt) => ({
           ...structuredClone(receipt),
-          settled: !continuingActionIds.has(receipt.plan.actionId),
+          settled: true,
           operations: [],
         }));
-        const settledReceipts = resolutionReceipts.filter((receipt) => receipt.settled);
-        const resolutionInvocations: MechanicInvocation[] = settledReceipts.map((receipt, ordinal) => {
+        const resolutionInvocations: MechanicInvocation[] = resolutionReceipts.map((receipt, ordinal) => {
           const check = receipt.checkRequestId
             ? checks.find((candidate) => candidate.requestId === receipt.checkRequestId)
             : null;
@@ -3033,7 +3033,6 @@ export class TruthEngine {
           conditionAdvanceInvocation,
         ], directProposal.operations);
         resolutionReceipts = resolutionReceipts.map((receipt) => {
-          if (!receipt.settled) return { ...structuredClone(receipt), operations: [] };
           const invocation = resolutionInvocations.find((candidate) =>
             (candidate.input as { receiptId: string }).receiptId === receipt.id)!;
           const result = mechanics.results.find((candidate) => candidate.invocationId === invocation.id);

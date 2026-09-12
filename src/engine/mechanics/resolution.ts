@@ -654,8 +654,7 @@ export function mergeCondition(
 
 export function expectedActionStatus(
   receipt: ResolutionReceipt,
-): "succeeded" | "partial" | "failed" | "blocked" | "continuing" {
-  if (!receipt.settled) return "continuing";
+): "succeeded" | "partial" | "failed" | "blocked" {
   switch (receipt.outcome) {
     case null: return "blocked";
     case "exceptional":

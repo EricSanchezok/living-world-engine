@@ -673,10 +673,9 @@ function validateCommittedStepShape(step: CommittedStep, state: SimulationState)
       entry.activityId === actionActivity.id);
     const temporallyTerminated = disposition?.kind === "block" || disposition?.kind === "fail" ||
       disposition?.kind === "cancel";
-    const validTemporalTermination = temporallyTerminated && !receipt.settled && receipt.operations.length === 0 &&
-      outcome?.status === expectedActionStatus(receipt);
-    if (!outcome || (!validTemporalTermination &&
-      (outcome.status !== expectedActionStatus(receipt) || activityIsContinuing === receipt.settled))) {
+    const intervalStillContinuing = activityIsContinuing || (temporallyTerminated && outcome?.status === "continuing");
+    const expectedStatus = intervalStillContinuing ? "continuing" : expectedActionStatus(receipt);
+    if (!receipt.settled || !outcome || outcome.status !== expectedStatus) {
       throw new Error(`step ${step.step} resolution receipt ${receipt.id} contradicts temporal settlement`);
     }
   }
@@ -728,19 +727,12 @@ function validateCommittedStepShape(step: CommittedStep, state: SimulationState)
   }
   const receiptInvocations = step.mechanicInvocations.filter((invocation) =>
     invocation.packageId === "core-resolution" && invocation.ruleId === "apply-receipt");
-  const settledReceipts = step.resolutionReceipts.filter((receipt) => receipt.settled);
-  if (receiptInvocations.length !== settledReceipts.length) {
+  if (receiptInvocations.length !== step.resolutionReceipts.length) {
     throw new Error(`step ${step.step} has an invalid apply-receipt invocation count`);
   }
   for (const receipt of step.resolutionReceipts) {
     const invocations = receiptInvocations.filter((invocation) =>
       (invocation.input as { receiptId?: unknown }).receiptId === receipt.id);
-    if (!receipt.settled) {
-      if (invocations.length !== 0 || receipt.operations.length !== 0) {
-        throw new Error(`step ${step.step} deferred receipt ${receipt.id} has settlement effects`);
-      }
-      continue;
-    }
     if (invocations.length !== 1) throw new Error(`step ${step.step} does not uniquely apply receipt ${receipt.id}`);
     const result = step.mechanicResults.find((candidate) => candidate.invocationId === invocations[0].id);
     if (!result || result.packageId !== "core-resolution" || result.ruleId !== "apply-receipt" ||

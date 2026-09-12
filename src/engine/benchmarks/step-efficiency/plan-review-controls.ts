@@ -58,7 +58,7 @@ export function createPlanReviewControls(catalog: ModelCatalog) {
     if (!effect && receipt.effects.length) throw new Error("null-effect control changed mechanical consequences");
     const dependency: InteractionDependency = { kind: "action", id: action.id, actorId: action.actorId, reads: [], writes: [],
       audienceAgentIds: [], sharedResourceClaims: [], globalFallback: false };
-    const context = buildResolutionPlanVerificationContext({ definition, state,
+    const context = buildResolutionPlanVerificationContext({ definition, state, temporalBoundary: temporalEvidence,
       workset: { state, mode: "full", initialActions: [action], availableActions: [action], assignedActions: [action],
         availableDependencies: [dependency], assignedDependencies: [dependency] },
       plans: [plan], commitmentRounds: [], instanceId: "plan-review-controls", advanceId: "review-controls-01", issues: [], temporalEvidence });

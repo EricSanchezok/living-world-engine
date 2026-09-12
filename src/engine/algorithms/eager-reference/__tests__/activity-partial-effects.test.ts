@@ -86,8 +86,8 @@ it.each(["progress", "early-completion", "false-witness", "rejected-event"] as c
       status: "active", completionAtSeconds: 10, nextBoundaryAtSeconds: 2,
     }));
     expect(result.committed.outcomes).toEqual([expect.objectContaining({ status: "continuing" })]);
-    expect(result.committed.resolutionReceipts).toEqual([expect.objectContaining({ settled: false, operations: [] })]);
-    expect(result.committed.mechanicInvocations.some(invocation => invocation.packageId === "core-resolution" && invocation.ruleId === "apply-receipt")).toBe(false);
+    expect(result.committed.resolutionReceipts).toEqual([expect.objectContaining({ settled: true, operations: [] })]);
+    expect(result.committed.mechanicInvocations.some(invocation => invocation.packageId === "core-resolution" && invocation.ruleId === "apply-receipt")).toBe(true);
     expect(result.committed.events).toContainEqual(expect.objectContaining({ description: "At the gate, still watching; the ten-second task is unfinished." }));
     expect(reviewedProgress).toBeGreaterThan(0);
     expect(contentHash(replaySimulationState(result.state).truth)).toBe(contentHash(result.state.truth));

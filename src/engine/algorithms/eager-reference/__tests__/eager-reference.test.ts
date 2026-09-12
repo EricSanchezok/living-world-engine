@@ -1534,11 +1534,11 @@ describe("eager reference safeguards", () => {
     expect(result.committed.outcomes).toHaveLength(1);
     expect(result.committed.outcomes[0]!.status).toBe("continuing");
     expect(result.committed.resolutionReceipts).toEqual([
-      expect.objectContaining({ settled: false, operations: [] }),
+      expect.objectContaining({ settled: true, operations: [] }),
     ]);
     expect(result.committed.mechanicInvocations.some((invocation) =>
       invocation.packageId === "core-resolution" && invocation.ruleId === "apply-receipt"))
-      .toBe(false);
+      .toBe(true);
     expect(result.committed.decisionPoints).toEqual([]);
     expect(result.committed.beliefPatches).toEqual([]);
 

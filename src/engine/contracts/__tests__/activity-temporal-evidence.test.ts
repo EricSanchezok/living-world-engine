@@ -88,7 +88,7 @@ it("preserves source context and cache isolation while supplying the same interv
   expect(buildTruthContext(input)).toEqual(baseline);
   const common = { definition: input.definition, state: input.state, workset: input.workset, instanceId: input.instanceId,
     advanceId: input.advanceId, issues: [], temporalEvidence: input.temporalBoundary };
-  const planReview = buildResolutionPlanVerificationContext({ ...common, plans: [], commitmentRounds: [] }) as Context;
+  const planReview = buildResolutionPlanVerificationContext({ ...common, temporalBoundary: input.temporalBoundary, plans: [], commitmentRounds: [] }) as Context;
   const causalReview = buildCausalVerificationContext({ ...common, checkRequests: [], checkResults: [], randomRequests: [], randomResults: [],
     commitmentRounds: [], resolutionPlans: [], resolutionReceipts: [], assertionResults: [], mechanicResults: [], previousReport: null,
     proposal: { baseRevision: input.state.revision, outcomes: [], operations: [], events: [], observations: [], mechanicInvocations: [], decisionRequests: [] } }) as Context;

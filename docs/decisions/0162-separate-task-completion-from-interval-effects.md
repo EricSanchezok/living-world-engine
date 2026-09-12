@@ -1,7 +1,7 @@
 # Separate task completion from interval effects
 
 ## Status
-Accepted
+Superseded by [0187](0187-separate-interval-receipts-from-task-status.md)
 Class: bug-fix
 
 ## Context and Problem Statement

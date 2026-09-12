@@ -103,7 +103,7 @@ it.each([false, true])("pins the diagnostic producer through persistence with ex
     expect(result.completedElapsedMs).toBeGreaterThan(0);
     const document = database.readInstance(created.summary.id).document;
     expect(document.executionAlgorithm).toEqual(ref);
-    expect(ref.version).toBe("9");
+    expect(ref.version).toBe("10");
     if (externalReaction) expect(perceptionCalls).toBeGreaterThan(0);
     const executions = database.executions({ instanceId: created.summary.id });
     const algorithmExecutions = executions.filter(execution => execution.manifest.kind === "algorithm");

@@ -13,7 +13,7 @@ Fixed, rate and staged activities retain their trusted completion schedule. A st
 
 Continuing is the status of the whole task, not a prohibition on all intermediate events or operations. Proposed interval effects use the existing typed operations, state assertions, cause validation, dependency reconciliation and bound causal review. Temporal context, complete source intent and authored rules remain available to that review. An identity fact, a clock witness or a model's claim of progress does not establish an arbitrary occurrence or justify an early final effect. No effect or outcome is synthesized, removed or relabelled to gain acceptance.
 
-The receipt for a continuing action remains unsettled with no applied receipt operations. Only the existing engine settlement path can invoke receipt effects. Resource-queued actions remain unstarted and cannot be semantically adjudicated. Exact clock advancement, resource constraints, world revision atomicity and replay remain kernel-owned. The component validator does not classify all action-linked effects as completion effects merely because their source action remains active.
+Current-interval receipts follow the [interval settlement contract](0134-settle-interval-resolution-effects.md), independently of whole-task completion. Only the existing engine settlement path can invoke receipt effects. Resource-queued actions remain unstarted and cannot be semantically adjudicated. Exact clock advancement, resource constraints, world revision atomicity and replay remain kernel-owned. The component validator does not classify all action-linked effects as completion effects merely because their source action remains active.
 
 ## Plan
 
@@ -21,7 +21,7 @@ Unify mode-specific instructions in the real transition prompt, remove the overb
 
 ## Verification
 
-Exercise the real loader, compiler, TruthEngine, committer and replay with a two-part scheduled action: reach an intermediate state, then remain occupied until the authored end. Verify actual intermediate placement/event, continued activity, unchanged completion time and deferred receipts. Reject early settled status, false state/time witnesses and a causal-review veto atomically. Retain goal/conditional completion, invalidation, shared-resource queue and receipt deferral regressions. Run relevant tests and check:fast before a local commit.
+Exercise the real loader, compiler, TruthEngine, committer and replay with a two-part scheduled action: reach an intermediate state, then remain occupied until the authored end. Verify actual intermediate placement/event, continued activity, unchanged completion time and consumed interval receipts. Reject early settled status, false state/time witnesses and a causal-review veto atomically. Retain goal/conditional completion, invalidation, shared-resource queue and receipt settlement regressions. Run relevant tests and check:fast before a local commit.
 
 ## Evidence
 

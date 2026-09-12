@@ -36,7 +36,7 @@ The indexed reviewed Truth child can opt into [event-sourced outcome summaries](
 
 Models produce semantic drafts only. Agent, Entity, Fact, Meter, Rating, Condition, and subject-private cognition records use world semantic IDs. The engine deterministically assigns runtime identities for actions, Resolution Plans and Receipts, TemporalPlans, Activities, shared-resource pools, checks, random draws, mechanics, events, outcomes, observations, and apparent claims. It materializes revisions, steps, phases, lifecycle, progress, clock deltas, provenance, Profiles, and timestamps.
 
-## `eager-reference@22`
+## `eager-reference@26`
 
 The opt-in registered worklist Truth candidate binds its physical planning representations and temporal evidence through the instance Composition. [The registered pipeline contract](specs/0043-registered-worklist-planning-pipeline.md) defines qualification and gameplay boundaries; the default Composition remains the reference foundation.
 
@@ -107,7 +107,7 @@ World package, runtime, algorithm, presentation, benchmark, and Ledger details l
 
 The optional [source-bound boundary clock](specs/0084-source-bound-boundary-clock.md) references trusted temporal input in outcome evidence while preserving actual causal validation.
 
-[Activity progress and completion](specs/0109-align-activity-progress-and-completion.md) separates supported interval effects from whole-task settlement while preserving trusted receipt deferral.
+[Activity progress and completion](specs/0109-align-activity-progress-and-completion.md) separates supported interval effects from whole-task settlement while preserving trusted interval receipt settlement.
 
 The experimental [scoped plan repair batching](specs/0085-scoped-plan-repair-batching.md) option routes targeted semantic plan repairs through the shared Truth collector while retaining logical validation and replacement ownership.
 

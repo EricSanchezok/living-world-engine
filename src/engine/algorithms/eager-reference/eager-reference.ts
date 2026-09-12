@@ -402,8 +402,8 @@ export function createEagerReferenceAlgorithmRef(
   return defineAlgorithmRef({
     role: "world-execution",
     id: "eager-reference",
-    version: "25",
-    contractVersion: 9,
+    version: "26",
+    contractVersion: 10,
     config: {},
     children: { agentCognition, actionCompilation, interactionGrounding, reactionResolution, truthResolution, observationRendering },
   });
@@ -1296,12 +1296,8 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
         const continuingActionIds = new Set(Object.values(resolvedTemporal.activities)
           .filter((activity) => activity.status === "active")
           .map((activity) => activity.sourceActionId));
-        // A due Activity whose engine-selected boundary is its completion is no
-        // longer allowed to remain a deferred/continuing action.  This is a
-        // deterministic temporal fact, so make it a repairable semantic issue
-        // before the candidate reaches CanonicalCommitter.  Without this guard
-        // a model can return `continuing` for a just-completed long action,
-        // leaving its receipt unapplied and making the step unreplayable.
+        // Whole-task completion follows the trusted temporal boundary even
+        // when the current interval's receipt has already been consumed.
         const completingActionIds = new Set(scopedTemporalBase.boundary.dueActivityIds
           .map((activityId) => scopedTemporalBase.activities[activityId])
           .filter((activity): activity is import("../../mechanics/temporal").ScheduledActivityState =>
@@ -1319,9 +1315,8 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
             throw new Error(`activity action ${actionId} reached its completion boundary and must settle now`);
           }
         }
-        // Continuing describes the entire task, not each interval consequence.
-        // TruthEngine defers receipt settlement; typed causal validation and
-        // bound review adjudicate proposed partial effects against the source.
+        // Continuing describes the entire task; interval effects retain their
+        // trusted receipt mechanics and source-bound causal review.
     };
     const next = async (feedback?: TruthCandidateFeedback): Promise<TruthCandidateStage> => {
       let pending = await session.next(feedback!);

@@ -65,9 +65,9 @@ export type { AlgorithmRef } from "../algorithms/composition";
 
 export type ExecutionKind = "interactive" | "diagnostic" | "benchmark" | "replay";
 
-export const WORLD_EXECUTION_CONTRACT_VERSION = 9 as const;
+export const WORLD_EXECUTION_CONTRACT_VERSION = 10 as const;
 export const ENGINE_OPERATION_CONTRACT_VERSION = 1 as const;
-export const WORLD_STEP_CANDIDATE_SCHEMA_VERSION = 7 as const;
+export const WORLD_STEP_CANDIDATE_SCHEMA_VERSION = 8 as const;
 export const WORLD_STEP_PREPARATION_SCHEMA_VERSION = 6 as const;
 
 export class StepPreparationInvalidatedError extends Error {

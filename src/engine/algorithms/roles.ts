@@ -211,7 +211,7 @@ export interface ObservationResolution {
   modelAudits: ModelExecutionAudit[];
 }
 
-export const TRUTH_RESOLUTION_CONTRACT_VERSION = 3;
+export const TRUTH_RESOLUTION_CONTRACT_VERSION = 4;
 
 export interface TruthResolution extends WorldResolutionCandidate {
   modelAudits: ModelExecutionAudit[];
