@@ -27,6 +27,7 @@ import { buildWorldDefinition, loadWorldTemplate } from "../../src/script/world-
 import { loadOfficialSourceShard } from "./refresh-action-compilation-reference";
 import { finiteWorkWorldTemplate } from "./step-finite-work-world";
 import { finiteWorkCompilationState } from "./finite-work-compilation-state";
+import { adjudicatedObjectiveState, adjudicatedObjectiveWorld, ADJUDICATED_OBJECTIVE_PROFILES } from "./adjudicated-objective-world";
 
 const finiteWorkProtocol = { id: "finite-work-compilation-v1", sourceExecution: "14c18986-48ed-40ce-9bc8-0f3caf542273",
   seed: 20260911, orderedBatchSizes: [12, 12, 12, 5, 8], maxHttp: 10, maxDispatchMs: 600_000,
@@ -39,14 +40,18 @@ const git = (...args: string[]) => execFileSync("git", args, { encoding: "utf8" 
 const errorValue = (error: unknown) => error instanceof Error ? { name: error.name, message: error.message } : { name: "UnknownError", message: String(error) };
 const sourceHashes = () => Object.fromEntries([
   "scripts/experiments/player-compilation-comparison.ts", "scripts/experiments/finite-work-compilation-state.ts",
+  "scripts/experiments/adjudicated-objective-world.ts", "src/engine/mechanics/temporal.ts",
   "scripts/experiments/step-finite-work-world.ts", "scripts/experiments/world-fragments/finite-work-goal.yaml",
   "src/engine/algorithms/eager-reference/represented-action-compiler.ts",
   "src/engine/benchmarks/step-efficiency/integrated-player-algorithm.ts",
   "src/engine/benchmarks/step-efficiency/compilation-reference-uses.ts", "src/engine/prompts/shared/compilation-reference-uses.md",
 ].map(file => [file, contentHash(readFileSync(file, "utf8"))]));
 
-export async function playerCompilationComparison(mode: "prepare" | "run", root: string, sourceRoot: string, captureRoot: string, referenceUsesBaseline?: string) {
-  const protocol = referenceUsesBaseline ? { ...finiteWorkProtocol, id: "compilation-reference-uses-v1", candidate: COMPILATION_REFERENCE_USES,
+export async function playerCompilationComparison(mode: "prepare" | "run", root: string, sourceRoot: string, captureRoot: string, comparisonBaseline?: string, adjudicatedObjectives = false) {
+  if (adjudicatedObjectives && !comparisonBaseline) throw new Error("Adjudicated objective comparison requires its sealed reference-use baseline");
+  const protocol = adjudicatedObjectives ? { ...finiteWorkProtocol, id: "adjudicated-objective-compilation-v1", referenceUses: COMPILATION_REFERENCE_USES,
+    goalProfileIds: ADJUDICATED_OBJECTIVE_PROFILES,
+    interpretation: "Both arms retain the complete finite-work world, action-local reference-use view, all 49 original actions and the original five batches. B exactly reconstructs the sealed reference-use C requests. C changes only the two authored wait/travel profile kinds from conditional to goal; all timing, guards, source text and other world fields remain. The original runtime permits all former guarded plans and additionally admits no extra invariant. This is a world-contract expansion, not equivalent validation. Freeze ten complete requests on a clean producer. Offline B preserves prior normalization and rejection; offline C captures only and never reuses another context's aliases. Use original retrieval/schema/materializer. One primary per source/arm, alternating order, no repair/retry/redraw. Preserve all usage, audits, errors, changed shortlists and source semantics. No player latency or reliability claim, no save migration or promotion." } : comparisonBaseline ? { ...finiteWorkProtocol, id: "compilation-reference-uses-v1", candidate: COMPILATION_REFERENCE_USES,
     interpretation: "Both arms use the complete finite-work counterfactual world and all 49 original actions in the original five physical batches. B exactly reconstructs the sealed preceding finite-work C requests. C adds only action-local declared reference-use links and interpretation instructions after the unchanged R5 retrieval and alias encoding. Freeze ten complete ordered requests on a clean committed producer. Replay every original response in both offline arms through unchanged output dictionaries, schema and materialization, retaining all original acceptance/rejection. One new primary per source/arm, alternating order, no repair/retry/redraw. Preserve every response, physical audit, usage, formal and source-semantic error. This is compilation evidence, not a gameplay source, successful full player action or reliability estimate." } : finiteWorkProtocol;
   const ledger: RuntimeEvent[] = read(path.join(sourceRoot, "run/ledger-events.json"));
   const eventFor = (invocation: string, event: string) => {
@@ -66,28 +71,33 @@ export async function playerCompilationComparison(mode: "prepare" | "run", root:
   for (const source of sources) registry.snapshot(source.registrySnapshotHash);
   const template = loadWorldTemplate(path.join(sourceRoot, "worlds/blackmarsh/world"));
   const before = buildWorldDefinition(template, { seed: protocol.seed, modelCatalog: catalog });
-  const after = buildWorldDefinition(finiteWorkWorldTemplate(template), { seed: protocol.seed, modelCatalog: catalog });
-  const overlay = finiteWorkCompilationState(original, before, after), foundation = integratedPlayerAlgorithmRef();
-  const algorithm = referenceUsesBaseline ? defineAlgorithmRef({ ...foundation, id: "compilation-reference-uses-diagnostic", version: "1",
-    config: { ...foundation.config, comparison: COMPILATION_REFERENCE_USES } }) : foundation;
-  const baselineState = referenceUsesBaseline ? overlay.state : original;
-  const prior = referenceUsesBaseline ? {
-    manifest: read(path.join(referenceUsesBaseline, "manifest.json")), terminal: read(path.join(referenceUsesBaseline, "run/terminal.json")),
-    states: read(path.join(referenceUsesBaseline, "preflight/states.json")),
+  const finiteTemplate = finiteWorkWorldTemplate(template);
+  const after = buildWorldDefinition(finiteTemplate, { seed: protocol.seed, modelCatalog: catalog });
+  const finiteOverlay = finiteWorkCompilationState(original, before, after), foundation = integratedPlayerAlgorithmRef();
+  const overlay = adjudicatedObjectives ? adjudicatedObjectiveState(finiteOverlay.state, after,
+    buildWorldDefinition(adjudicatedObjectiveWorld(finiteTemplate, ADJUDICATED_OBJECTIVE_PROFILES), { seed: protocol.seed, modelCatalog: catalog }),
+    ADJUDICATED_OBJECTIVE_PROFILES) : finiteOverlay;
+  const algorithm = comparisonBaseline ? defineAlgorithmRef({ ...foundation,
+    id: adjudicatedObjectives ? "adjudicated-objective-diagnostic" : "compilation-reference-uses-diagnostic", version: "1",
+    config: { ...foundation.config, comparison: adjudicatedObjectives ? protocol : COMPILATION_REFERENCE_USES } }) : foundation;
+  const baselineState = comparisonBaseline ? finiteOverlay.state : original;
+  const prior = comparisonBaseline ? {
+    manifest: read(path.join(comparisonBaseline, "manifest.json")), terminal: read(path.join(comparisonBaseline, "run/terminal.json")),
+    states: read(path.join(comparisonBaseline, "preflight/states.json")),
     rows: sources.map((_, index) => {
-      const prefix = path.join(referenceUsesBaseline, "run", `source-${index}-C`);
+      const prefix = path.join(comparisonBaseline, "run", `source-${index}-C`);
       return { request: read(path.join(prefix, "request.json")), response: read(path.join(prefix, "response.json")),
         retrieval: read(path.join(prefix, "retrieval-1.json")), evidence: read(path.join(prefix, "evidence.json")) };
     }),
   } : undefined;
-  if (prior && (prior.manifest.binding.protocol.id !== finiteWorkProtocol.id || !prior.terminal.complete || prior.terminal.totalHttp !== 10 ||
+  if (prior && (prior.manifest.binding.protocol.id !== (adjudicatedObjectives ? "compilation-reference-uses-v1" : finiteWorkProtocol.id) || !prior.terminal.complete || prior.terminal.totalHttp !== 10 ||
     prior.manifest.binding.sourceHash !== contentHash(sources) || prior.manifest.binding.catalogHash !== catalog.hash ||
-    contentHash(prior.manifest.binding.overlay) !== contentHash(overlay.provenance) ||
-    JSON.stringify(prior.states.C) !== JSON.stringify(overlay.state) || prior.rows.some((row, index) =>
+    contentHash(prior.manifest.binding.overlay) !== contentHash(finiteOverlay.provenance) ||
+    JSON.stringify(prior.states.C) !== JSON.stringify(baselineState) || prior.rows.some((row, index) =>
       row.evidence.mode !== "run" || row.evidence.actualHttp !== 1 || !row.evidence.stateUnchanged || row.evidence.arm !== "C" ||
       row.evidence.sourceIndex !== index || contentHash(row.evidence.actionIds) !== contentHash(sources[index]!.actionIds) ||
       row.request.orderedBodyHash !== contentHash(row.request.orderedBody) || !row.evidence.calls[0]?.audit))) {
-    throw new Error("Reference-use comparison requires the complete sealed finite-work C evidence");
+    throw new Error("Comparison requires its complete sealed preceding C evidence");
   }
   const binding = { protocol, sourceCodeHashes: sourceHashes(), algorithm, sourceHash: contentHash(sources), catalogHash: catalog.hash,
     originalStateOrderHash: contentHash(JSON.stringify(original)), overlay: overlay.provenance,
@@ -131,6 +141,7 @@ export async function playerCompilationComparison(mode: "prepare" | "run", root:
       for (const arm of sourceIndex % 2 ? ["C", "B"] : ["B", "C"]) {
         if (stopped) throw new Error(stopped);
         const id = `source-${sourceIndex}-${arm}`, trialDirectory = path.join(directory, id);
+        const replayHistorical = arm === "B" || Boolean(preceding && !adjudicatedObjectives);
         mkdirSync(trialDirectory, { recursive: false });
         const state = structuredClone(arm === "B" ? baselineState : overlay.state), stateHash = contentHash(state);
         const observer = new RecordingRuntimeObserver({ mode: "full" });
@@ -150,7 +161,7 @@ export async function playerCompilationComparison(mode: "prepare" | "run", root:
               if (++sends !== 1 || accountId !== "deepseek-api" || parsed.model !== protocol.model || parsed.thinking?.type !== "disabled") throw new ModelConfigurationError("Primary-only model binding drift");
               save(trialDirectory, "request.json", { url: request.url, body: parsed, orderedBody: body, orderedBodyHash: contentHash(body) });
               if (mode === "prepare") {
-                if (arm === "B" || preceding) {
+                if (replayHistorical) {
                   if (arm === "B" && body !== oldRequest.body) throw new ModelConfigurationError("Historical B request bytes differ");
                   transportUsage = completeDeepSeekJsonStream(oldResponse.body, protocol.model).usage;
                   return new Response(oldResponse.body, { status: oldResponse.status, headers: { "content-type": "text/event-stream" } });
@@ -189,7 +200,7 @@ export async function playerCompilationComparison(mode: "prepare" | "run", root:
             }
             if (request.profileId !== source.profileId || request.modelRegistrySnapshotHash !== source.registrySnapshotHash) throw new ModelConfigurationError("Captured profile/registry pin lost");
             try {
-              const adapted = preceding && arm === "C" ? compilationReferenceUsesRequest(request) : request;
+              const adapted = preceding && (arm === "C" || adjudicatedObjectives) ? compilationReferenceUsesRequest(request) : request;
               if (adapted !== request) {
                 save(trialDirectory, "reference-use-projection.json", compilationReferenceUses(request.context).proof);
                 if (adapted.schema !== request.schema || adapted.wireJsonSchema !== request.wireJsonSchema) throw new ModelConfigurationError("Reference-use view changed output schema");
@@ -216,11 +227,11 @@ export async function playerCompilationComparison(mode: "prepare" | "run", root:
             actionCompilationRetrieval: { ...retrieval, retrieveBatch: async request => {
               const ordinal = ++retrievalCalls;
               if (ordinal === 1 && (request.slotIndices.length !== source.actions.length ||
-                ((arm === "B" || preceding) && contentHash(request.fullContext) !== expectedRetrieval.fullContextHash))) throw new ModelConfigurationError("Initial context/cardinality differs");
+                (replayHistorical && contentHash(request.fullContext) !== expectedRetrieval.fullContextHash))) throw new ModelConfigurationError("Initial context/cardinality differs");
               const selected = await retrieval.retrieveBatch(request);
               save(trialDirectory, `retrieval-${ordinal}.json`, { request, selected: { ...selected, selectedKeysBySlot: [...selected.selectedKeysBySlot] } });
               if (ordinal === 1 && selected.diagnostics.cache?.queryHits !== 0) throw new ModelConfigurationError("Initial cold query-cache binding differs");
-              if (ordinal === 1 && (arm === "B" || preceding) && (selected.modelContextHash !== expectedRetrieval.modelContextHash || selected.shortlistHash !== expectedRetrieval.shortlistHash)) throw new ModelConfigurationError("Historical R5 shortlist differs");
+              if (ordinal === 1 && replayHistorical && (selected.modelContextHash !== expectedRetrieval.modelContextHash || selected.shortlistHash !== expectedRetrieval.shortlistHash)) throw new ModelConfigurationError("Historical R5 shortlist differs");
               return selected;
             } },
           }, source.profileId, source.actions.length);
@@ -228,14 +239,14 @@ export async function playerCompilationComparison(mode: "prepare" | "run", root:
         const evidence = { id, arm, sourceIndex, sourceInvocationId: source.sourceInvocationId, actionIds: source.actionIds,
           mode, compilerAccepted: Boolean(result), result, error, calls, events: observer.events, captureOnly,
           stateUnchanged: contentHash(state) === stateHash, wallMs: performance.now() - trialStart, actualHttp,
-          transportUsage, usageOrigin: mode === "run" ? "new-inference" : (arm === "B" || preceding) ? "historical-replay" : "none",
+          transportUsage, usageOrigin: mode === "run" ? "new-inference" : replayHistorical ? "historical-replay" : "none",
           semanticVerdict: "pending-source-review", gameplayCommit: false };
         save(trialDirectory, "evidence.json", evidence);
         rows.push({ id, arm, sourceIndex, slots: source.actions.length, accepted: Boolean(result), captureOnly, actualHttp,
           wallMs: evidence.wallMs, usage: transportUsage, repairAttemptsBlocked: Math.max(0, calls.length - 1), error });
         process.stdout.write(`${JSON.stringify(rows.at(-1))}\n`);
         if (!evidence.stateUnchanged || sends !== 1 || calls[0]?.schemaName !== "action_compilation_at_eligible_source_choice_v1") throw new Error("Source, request or schema invariant failed");
-        if (mode === "prepare" && arm === "C" && !preceding) {
+        if (mode === "prepare" && !replayHistorical) {
           if (!captureOnly || calls.length !== 1 || result) throw new Error("C preparation must capture only");
           continue;
         }
@@ -273,7 +284,7 @@ export async function playerCompilationComparison(mode: "prepare" | "run", root:
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const [mode, root, sourceRoot, captureRoot, flag, baseline] = process.argv.slice(2);
-  if ((mode !== "prepare" && mode !== "run") || !root || !sourceRoot || !captureRoot || (flag && (flag !== "--reference-uses-baseline" || !baseline)) || process.argv.length > 8) throw new Error("usage: player-compilation-comparison.ts <prepare|run> <output> <integrated-player-source> <official-capture> [--reference-uses-baseline <sealed-finite-work-comparison>]");
-  playerCompilationComparison(mode, path.resolve(root), path.resolve(sourceRoot), path.resolve(captureRoot), baseline ? path.resolve(baseline) : undefined)
+  if ((mode !== "prepare" && mode !== "run") || !root || !sourceRoot || !captureRoot || (flag && (!["--reference-uses-baseline", "--adjudicated-objective-baseline"].includes(flag) || !baseline)) || process.argv.length > 8) throw new Error("usage: player-compilation-comparison.ts <prepare|run> <output> <integrated-player-source> <official-capture> [--reference-uses-baseline|--adjudicated-objective-baseline <sealed-preceding-comparison>]");
+  playerCompilationComparison(mode, path.resolve(root), path.resolve(sourceRoot), path.resolve(captureRoot), baseline ? path.resolve(baseline) : undefined, flag === "--adjudicated-objective-baseline")
     .catch(error => { process.stderr.write(`${JSON.stringify(errorValue(error))}\n`); process.exitCode = 1; });
 }
