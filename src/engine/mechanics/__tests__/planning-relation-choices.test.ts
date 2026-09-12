@@ -28,11 +28,12 @@ import { dependentFieldsProvider } from "../resolution-dependent-fields-codec";
 import { indexedReviewedPlanningProvider } from "../indexed-reviewed-planning-pipeline";
 import { planningCatalogEncodingProvider, planningCatalogEncodingRequest } from "../planning-catalog-encoding";
 import { TruthBatchCoordinator, TRUTH_BATCH_REQUEST_CONTRACT } from "../truth-batch-provider";
+import { actionTextCopies, MeansTextCopyCodec, meansTextCopiesRequest } from "../../benchmarks/step-efficiency/means-text-copies";
 
 type Value = Record<string, unknown>;
 type Output = { kind: string; plans: Value[] };
 
-function fixture(ids = ["a", "b"], empty = false) {
+function fixture(ids = ["a", "b"], empty = false, actionTexts: Record<string, string> = {}) {
   const truth = {
     entities: Object.fromEntries(["a", "b"].map(id => [`ref:entity:${id}`, { name: id, lifecycle: "active" }])),
     ratings: empty ? {} : Object.fromEntries(["a", "b"].flatMap(id => ["resolve", "insight"].map((name, value) => [`ref:rating:${name}:${id}`, { entityRef: `ref:entity:${id}`, value, definitionId: name }]))),
@@ -47,7 +48,7 @@ function fixture(ids = ["a", "b"], empty = false) {
   const mechanicRows = Object.entries(truth.mechanics).flatMap(([collection, rows]) => Object.keys(rows).map(id => ({ handle: `ref:mechanic:${id}`, kind: "mechanic", label: id, allowedUses: ["mechanic"], statePath: `state.truth.mechanics.${collection}.${id}` })));
   const contexts = ids.map(id => ({ task: { planCauseScope: { contract: PLAN_CAUSE_SCOPE, actionRefs: [`ref:action:${id}`] } },
     state: { canonicalTruth: structuredClone(truth), actors: [{ agentRef: `ref:agent:${id}`, entityRef: `ref:entity:${id}` }], actionSet: {
-      assigned: [{ actionRef: `ref:action:${id}`, actorRef: `ref:agent:${id}`, rawText: "观察对方，等他明确同意才继续。", goal: "Wait for explicit consent", allowedMeansSources: [{ kind: "action", ref: `ref:action:${id}` }] }], available: [] } },
+      assigned: [{ actionRef: `ref:action:${id}`, actorRef: `ref:agent:${id}`, rawText: actionTexts[id] ?? "观察对方，等他明确同意才继续。", goal: "Wait for explicit consent", allowedMeansSources: [{ kind: "action", ref: `ref:action:${id}` }] }], available: [] } },
     referenceCatalog: { candidates: [...entityRows, ...ratedRows.filter(row => id === "b" || row.handle !== "ref:rating:insight:b"), ...meterRows, ...mechanicRows,
       { handle: `ref:action:${id}`, kind: "action", label: id, allowedUses: ["cause", "source"] }] },
   }));
@@ -225,7 +226,7 @@ it("binds opposed ownership projection and schemas to their complete source", ()
   expect(() => ratingOwnedOppositionRequest({ ...ratingFixture().request, system: "unrelated" })).toThrow("representation contract");
 });
 
-it.each([false, true])("retains full batching, temporal scope and valid neighbors for nullable opposition (%s)", async bad => {
+it.each(["rating", "copy"].flatMap(kind => [false, true].map(bad => ({ kind, bad }))))("retains full batching, temporal scope and valid neighbors ($kind, $bad)", async ({ kind, bad }) => {
   const base = fixture(), catalog = createTestModelCatalog(["truth-deepseek"], { maxInputBytes: 4_000_000 });
   let output: unknown; const bodies: unknown[] = [];
   const gateway = createModelGateway(catalog, { TEST_MODEL_API_KEY: "fixture" }, { registry: createTestModelRegistry(catalog), maxTransportAttempts: 1,
@@ -235,11 +236,13 @@ it.each([false, true])("retains full batching, temporal scope and valid neighbor
         usage: { prompt_tokens: 30, completion_tokens: 40, total_tokens: 70 } });
     } });
   const sink = { ...gateway, availableProfileSummaries: () => [], assertProfilesAvailable: async () => {}, generateStructured: async <T,>(request: StructuredModelRequest<T>) => {
-    const candidate = ratingOwnedOppositionRequest(request);
+    const candidate = kind === "rating" ? ratingOwnedOppositionRequest(request) : meansTextCopiesRequest(request);
     const raw = structuredClone(base.source), plan = raw.plans[0]!;
-    plan.mode = "check"; plan.primaryEffect = condition();
-    plan.threatenedEffect = { ...Object.fromEntries(Object.entries(condition()).filter(([key]) => key !== "magnitude")), proposalKey: "threat", conditionRef: { proposalKey: "threat" } };
-    plan.difficulty = { kind: "opposed", ratingRef: bad ? "ref:rating:insight:b" : "ref:rating:resolve:a", targetRef: null };
+    if (kind === "rating") {
+      plan.mode = "check"; plan.primaryEffect = condition();
+      plan.threatenedEffect = { ...Object.fromEntries(Object.entries(condition()).filter(([key]) => key !== "magnitude")), proposalKey: "threat", conditionRef: { proposalKey: "threat" } };
+      plan.difficulty = { kind: "opposed", ratingRef: bad ? "ref:rating:insight:b" : "ref:rating:resolve:a", targetRef: null };
+    } else plan.means = [{ description: { copy: bad ? 999 : 0 }, sourcePosition: 0 }];
     output = raw;
     return gateway.generateStructured(candidate);
   } };
@@ -260,6 +263,59 @@ it.each([false, true])("retains full batching, temporal scope and valid neighbor
   expect(results[1]!.status).toBe("fulfilled"); expect(results[0]!.status).toBe(bad ? "rejected" : "fulfilled");
   if (bad) {
     const rejected = (results[0] as PromiseRejectedResult).reason as ModelOutputError;
-    expect(rejected).toBeInstanceOf(ModelOutputError); expect(JSON.stringify(rejected.rawValue)).toContain("ref:rating:insight:b");
+    expect(rejected).toBeInstanceOf(ModelOutputError); expect(JSON.stringify(rejected.rawValue)).toContain(kind === "rating" ? "ref:rating:insight:b" : '"copy":999');
+  } else if (kind === "copy") {
+    expect(JSON.stringify((results[0] as PromiseFulfilledResult<unknown>).value)).toContain(base.contexts[0]!.state.actionSet.assigned[0]!.rawText);
   }
+});
+
+it("retains exact authored text, punctuation, Unicode and provenance for copy choices", () => {
+  const rawText = " 👩🏽‍🚀先观察；若门没开，就继续等。\n不要进入！  ";
+  const action = { rawText, goal: rawText, means: "Only ask; never force entry." }, copies = actionTextCopies(action);
+  expect(copies[0]!.text).toBe(rawText);
+  expect(copies[0]!.sources.map(row => row.field)).toEqual(["rawText", "goal"]);
+  for (const copy of copies) for (const source of copy.sources) expect(action[source.field].slice(source.start, source.end)).toBe(copy.text);
+  expect(copies.some(copy => copy.text === "若门没开，就继续等。\n")).toBe(true);
+  expect(copies.some(copy => copy.text === action.means)).toBe(true);
+  expect(new Set(copies.map(copy => copy.text)).size).toBe(copies.length);
+  expect(actionTextCopies({ rawText: "A", goal: "B", means: null }).map(copy => copy.text)).toEqual(["A", "B"]);
+});
+
+it("round trips every copy, preserves free text and rejects malformed copying without repairing it", () => {
+  const { request, source } = ratingFixture(), codec = new MeansTextCopyCodec(request.context), candidate = meansTextCopiesRequest(request);
+  for (const action of codec.actions) for (const copy of action.copies) {
+    const raw = structuredClone(source); raw.plans[action.actionIndex]!.means = [{ description: copy.text, sourcePosition: 0 }, { description: copy.text, sourcePosition: 0 }];
+    const hash = contentHash(raw), encoded = codec.encode(raw);
+    expect(codec.decode(encoded)).toEqual(raw); expect(contentHash(raw)).toBe(hash);
+    expect(candidate.preprocessOutput!(encoded)).toEqual(request.preprocessOutput!(raw));
+    candidate.schema.parse(candidate.preprocessOutput!(encoded).value);
+  }
+  expect(codec.decode(codec.encode(source))).toEqual(source);
+  const historical = { repair: { previousOutput: { kind: "commit_plans", plans: [{ actionIndex: 0, means: [{ description: { copy: 0 } }] }] } } };
+  expect(codec.decode(historical)).toEqual(historical);
+  for (const description of [{ copy: -1 }, { copy: 999 }, { copy: 0.5 }, { copy: "0" }, { copy: null }, {}, { copy: 0, text: "extra" }, { copy: 0, actionIndex: 1 }]) {
+    const raw = structuredClone(source); raw.plans[0]!.means = [{ description, sourcePosition: 0 }];
+    expect(codec.decode(raw)).toEqual(raw);
+    expect(candidate.schema.safeParse(candidate.preprocessOutput!(raw).value).success).toBe(false);
+  }
+});
+
+it("binds copies to original assigned actions, projected text and outgoing schema", () => {
+  const distinct = fixture(["a", "b"], false, { a: "Wait outside.", b: "Ask before opening." });
+  const local = new MeansTextCopyCodec(planningCatalogEncodingRequest(distinct.request).context);
+  const selected = structuredClone(distinct.source);
+  selected.plans.forEach(plan => { plan.means = [{ description: { copy: 0 }, sourcePosition: 0 }]; });
+  const restored = local.decode(selected) as Output;
+  expect((restored.plans[0]!.means as Value[])[0]!.description).toBe("Wait outside.");
+  expect((restored.plans[1]!.means as Value[])[0]!.description).toBe("Ask before opening.");
+  const { request, source } = ratingFixture(), codec = new MeansTextCopyCodec(request.context);
+  codec.actions[0]!.copies[0]!.text = "changed";
+  expect(() => codec.decode(source)).toThrow("projection changed");
+  const next = ratingFixture(), candidate = meansTextCopiesRequest(next.request);
+  expect(() => meansTextCopiesRequest(candidate)).toThrow("already applied");
+  candidate.wireJsonSchema!.changed = true;
+  expect(() => candidate.preprocessOutput!(next.source)).toThrow("wire schema changed");
+  const third = ratingFixture(), bound = meansTextCopiesRequest(third.request);
+  (third.request.context as { task: Value }).task.changed = true;
+  expect(() => bound.preprocessOutput!(third.source)).toThrow("source or text projection");
 });
