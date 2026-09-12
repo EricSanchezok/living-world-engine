@@ -28,8 +28,142 @@ import { declaredRandomPlanSchema, PLAN_RANDOM_COMPLETION_PROMPT } from "../plan
 import { indexedTargetRepairRequest, indexedTargetRepairDiagnostics } from "../../benchmarks/step-efficiency/indexed-target-repair";
 import { planningSourceContexts } from "../../benchmarks/step-efficiency/planning-source-contexts";
 import { logicalRepairContext } from "../../prompts/logical-repair-context";
-import { ModelOutputError } from "../../models/model-provider";
+import { ModelOutputError, ModelConfigurationError } from "../../models/model-provider";
 import { planningCatalogEncodingRequest } from "../planning-catalog-encoding";
+import { TargetOwnedPlansCodec, targetOwnedPlansRequest } from "../../benchmarks/step-efficiency/target-owned-plans";
+import { dependentFieldsProvider } from "../resolution-dependent-fields-codec";
+import { planningCatalogEncodingProvider } from "../planning-catalog-encoding";
+import { TruthBatchCoordinator, TRUTH_BATCH_REQUEST_CONTRACT } from "../truth-batch-provider";
+import { expandSharedBatchContexts, type SharedBatchContext } from "../shared-batch-context";
+
+function ownedFixture() {
+  const base = fixture(true, false, true);
+  const caused = sourceIndexedPlanCausesRequest(base.request);
+  const request = planningCatalogEncodingRequest(planningContractTailRequest(caused));
+  const codec = new TargetOwnedPlansCodec(request.context), candidate = targetOwnedPlansRequest(request);
+  const source = new SourceIndexedPlanCauseCodec(base.request.context).encode(encodeIndexedPlans(base.source, base.domain)) as
+    { kind: string; plans: Array<Record<string, unknown>> };
+  return { ...base, request, candidate, codec, wire: source };
+}
+
+it("round trips explicit effect ownership across all modes, effect kinds and repeated target positions", () => {
+  const { request, candidate, codec, wire } = ownedFixture();
+  const effect = { kind: "condition", proposalKey: "watched", targetPosition: 1, channel: "attention", label: "watched",
+    description: "Wait until the convoy arrives before delivery", sourceRefs: [{ kind: "action", ref: "ref:action:a" }],
+    conditionRef: { proposalKey: "watched" }, conditionProfileRef: null, durationProfileRef: "ref:mechanic:a", access: { kind: "public" }, magnitude: "standard" };
+  for (const mode of ["automatic", "check", "blocked"]) for (const kind of ["condition", "meter"]) {
+    const value = structuredClone(wire), plan = value.plans[0]!;
+    plan.targetIndices = [0, 0]; plan.mode = mode;
+    if (mode === "check") { plan.difficulty = { kind: "environment", band: "easy", source: { kind: "fact", ref: "ref:fact:a" } }; plan.actorRatingRef = "ref:rating:a"; }
+    if (mode !== "blocked") {
+      const primary = kind === "condition" ? effect : { ...Object.fromEntries(Object.entries(effect).filter(([key]) =>
+        !["conditionRef", "conditionProfileRef", "durationProfileRef", "access"].includes(key))), kind, meterRef: "ref:meter:a", impactProfileRef: "ref:mechanic:a" };
+      plan.primaryEffect = primary;
+      plan.secondaryEffect = { ...primary, targetPosition: 0, proposalKey: "secondary", ...(kind === "condition" ? { conditionRef: { proposalKey: "secondary" } } : {}) };
+      plan.threatenedEffect = Object.fromEntries(Object.entries({ ...primary, proposalKey: "threat", ...(kind === "condition" ? { conditionRef: { proposalKey: "threat" } } : {}) }).filter(([key]) => key !== "magnitude"));
+    }
+    const hash = contentHash(value), encoded = codec.encode(value) as { plans: Array<{ targets: Array<{ entityRef: string; effects: unknown[] }> }> };
+    expect(encoded.plans[0]!.targets).toHaveLength(2);
+    expect(encoded.plans[0]!.targets.map(target => target.entityRef)).toEqual(["ref:entity:a", "ref:entity:a"]);
+    expect(codec.decode(encoded)).toEqual(value); expect(contentHash(value)).toBe(hash);
+    expect(candidate.preprocessOutput!(encoded)).toEqual(request.preprocessOutput!(value));
+    candidate.schema.parse(candidate.preprocessOutput!(encoded).value);
+  }
+  expect(candidate.context).toBe(request.context); expect(candidate.schema).toBe(request.schema);
+  expect(candidate.system).not.toContain("Use plan.targetIndices to select");
+  expect(candidate.jsonObjectPostlude).not.toContain("POSITION IN THAT PLAN");
+  expect(candidate.system).toContain("Each means emits sourcePosition");
+  const missing = structuredClone(wire); missing.plans[0]!.targetIndices = []; missing.plans[0]!.primaryEffect = effect;
+  expect(() => codec.encode(missing)).toThrow("subject absent");
+});
+
+it("keeps malformed target ownership as a strict canonical rejection with its source and valid neighbor", () => {
+  const { candidate, codec, wire } = ownedFixture();
+  const valid = codec.encode(wire) as { plans: Array<Record<string, unknown>> };
+  const corruptions: Array<(plan: Record<string, unknown>) => void> = [
+    plan => { plan.targets = null; },
+    plan => { plan.targets = [{ entityRef: "ref:entity:b", effects: [] }]; },
+    plan => { plan.targets = [{ entityRef: "ref:entity:unknown", effects: [] }]; },
+    plan => { plan.targets = [{ entityRef: "ref:entity:a", effects: [], invented: true }]; },
+    plan => { plan.targets = [{ entityRef: "ref:entity:a", effects: [{ role: "primary", effect: { targetRef: "ref:entity:a" } }] }]; },
+    plan => { plan.targets = [{ entityRef: "ref:entity:a", effects: [{ role: "primary", effect: {} }, { role: "primary", effect: {} }] }]; },
+    plan => { plan.targets = [{ entityRef: "ref:entity:a", effects: [{ role: "unknown", effect: {} }] }]; },
+    plan => { plan.targets = [{ entityRef: "ref:entity:a", effects: [null] }]; },
+    plan => { plan.targets = [false]; },
+    plan => { plan.targetIndices = []; },
+    plan => { plan.primaryEffect = null; },
+  ];
+  for (const corrupt of corruptions) {
+    const raw = structuredClone(valid); corrupt(raw.plans[0]!);
+    const decoded = candidate.preprocessOutput!(raw).value as { slots: Array<{ slot: number; result: { plans: Array<Record<string, unknown>> } }> };
+    const bad = decoded.slots.find(slot => slot.slot === 0)!.result;
+    expect(bad.plans[0]!.invalidTargetOwnedEffects).toMatchObject({ rejectedValue: raw.plans[0] });
+    expect(resolutionPlanCommitDirectiveSchema.safeParse(bad).success).toBe(false);
+    expect(resolutionPlanCommitDirectiveSchema.safeParse(decoded.slots.find(slot => slot.slot === 1)!.result).success).toBe(true);
+  }
+  for (const actionIndex of [-1, "0", 1]) {
+    const raw = structuredClone(valid); raw.plans[0]!.actionIndex = actionIndex;
+    expect(() => candidate.preprocessOutput!(raw)).toThrow("actionIndex");
+  }
+  expect(() => candidate.preprocessOutput!({ kind: "commit_plans", plans: [valid.plans[0]] })).toThrow("missing actionIndex");
+});
+
+it("binds the complete target domain, source slots, schema and generated instructions", () => {
+  for (const field of ["handle", "label", "slots", "targetIndex"]) {
+    const { request } = ownedFixture();
+    const changed = structuredClone(request.context) as { task: { planningWorklist: { targetChoices: Array<Record<string, unknown>> } } };
+    changed.task.planningWorklist.targetChoices[0]![field] = field === "slots" ? [1] : "changed";
+    expect(() => new TargetOwnedPlansCodec(changed)).toThrow("binding changed");
+  }
+  const { request, candidate, codec, wire } = ownedFixture(), value = codec.encode(wire);
+  expect(() => targetOwnedPlansRequest(candidate)).toThrow("already applied");
+  expect(() => targetOwnedPlansRequest({ ...request, jsonObjectPostlude: undefined })).toThrow("system and tail");
+  const context = request.context as { task: { planningWorklist: { actions: Array<{ action: { rawText: string } }> } } };
+  context.task.planningWorklist.actions[0]!.action.rawText = "changed";
+  expect(() => candidate.preprocessOutput!(value)).toThrow("changed before decoding");
+  const next = ownedFixture(); next.candidate.wireJsonSchema!.description = "changed";
+  expect(() => next.candidate.preprocessOutput!(value)).toThrow("schema changed");
+});
+
+it("retains a valid neighboring slot through the production coordinator, codecs and actual gateway", async () => {
+  const base = fixture(true, false, true, context => {
+    context.repair = null; context.contractVersion = 17;
+    context.roleContract = { role: "truth-resolution", purpose: "test", modelOwns: [], engineOwns: [], existingReferenceRule: "", proposalRule: "", failureRule: "" };
+    context.execution = { worldId: "world", instanceId: "test", advanceId: "test", revision: 9, step: 0 };
+    Object.assign(context.referenceCatalog as object, { version: 2, hash: "test" });
+  }), catalog = createTestModelCatalog(["truth-deepseek"], { maxInputBytes: 4_000_000 });
+  let output: unknown; const bodies: unknown[] = [];
+  const gateway = createModelGateway(catalog, { TEST_MODEL_API_KEY: "fixture" }, { registry: createTestModelRegistry(catalog), maxTransportAttempts: 1,
+    fetch: async (_url, init) => {
+      bodies.push(JSON.parse(String(init?.body)));
+      return Response.json({ id: "target-owned", model: "fixture", choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(output) }, finish_reason: "stop" }],
+        usage: { prompt_tokens: 30, completion_tokens: 40, total_tokens: 70 } });
+    } });
+  const sink = { ...gateway, availableProfileSummaries: () => [], assertProfilesAvailable: async () => {}, generateStructured: async <T,>(request: StructuredModelRequest<T>) => {
+    expect(request.schemaName).toBe("truth_resolution_plan_commit_batch");
+    const codec = new TargetOwnedPlansCodec(request.context), candidate = targetOwnedPlansRequest(request);
+    const causeCodec = new SourceIndexedPlanCauseCodec(base.request.context);
+    const source = causeCodec.encode(encodeIndexedPlans(base.source, base.domain));
+    const raw = codec.encode(source) as { plans: Array<{ targets: unknown[] }> };
+    raw.plans[0]!.targets = [{ entityRef: "ref:entity:b", effects: [] }]; output = raw;
+    return gateway.generateStructured(candidate);
+  } };
+  const provider = dependentFieldsProvider(indexedReviewedPlanningProvider(planningCatalogEncodingProvider(sink), false, false, true, true, true));
+  const coordinator = new TruthBatchCoordinator({ ...provider, generateStructured: async request => {
+    try { return await provider.generateStructured(request); }
+    catch (error) { if (error instanceof ModelOutputError) throw error; throw new ModelConfigurationError(String(error)); }
+  } }, 12, 0, "shared-json-v3", TRUTH_BATCH_REQUEST_CONTRACT, "tail-v1");
+  const contexts = expandSharedBatchContexts((base.original.context as { state: SharedBatchContext }).state), prompt = promptBundle("truth-resolution");
+  const results = await Promise.allSettled(contexts.map((context, slot) => coordinator.generateStructured({ ...base.original,
+    schema: resolutionPlanCommitDirectiveSchema, schemaName: "truth_resolution_plan_commit", context, system: prompt.system, userPrompt: prompt.userPrompt,
+    subjectId: `source-${slot}`, profileId: "truth-deepseek", runtimeIdentity: { worldHash: `sha256:${"1".repeat(64)}`, revision: 9 } })));
+  if (!bodies.length && results[0]?.status === "rejected") throw results[0].reason;
+  expect(bodies).toHaveLength(1); expect(JSON.stringify(bodies)).toContain("entityRef");
+  expect(results[1]!.status).toBe("fulfilled"); expect(results[0]!.status).toBe("rejected");
+  const rejected = (results[0] as PromiseRejectedResult).reason as ModelOutputError;
+  expect(rejected).toBeInstanceOf(ModelOutputError);
+  expect(JSON.stringify(rejected.rawValue)).toContain("invalidTargetOwnedEffects");
+});
 
 it.each([true, false])("binds the planning tail to the current root or narrowed repair worklist (%s)", shared => {
   const { request, source, domain } = fixture(shared, false, true);
