@@ -1,6 +1,7 @@
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import { stringify } from "yaml";
 import { expect, it } from "vitest";
 import type { ActionOutcome } from "../../src/engine/contracts/model";
 import { prepareNonthinkingWorld } from "../../src/engine/benchmarks/step-efficiency/nonthinking-world";
@@ -10,6 +11,7 @@ import { buildWorldDefinition, loadWorldTemplate } from "../../src/script/world-
 import { advanceTemporalState, cancelActivity, createActivity, materializeTemporalPlan, reconcileTemporalOutcomes,
   selectTemporalBoundary, validateActivityResources, validateActivityState, type TemporalPlanDraft, type TemporalProfileDefinition } from "../../src/engine/mechanics/temporal";
 import { checkpointWorldTemplate, prepareCheckpointWorld, CHECKPOINT_PROFILE_IDS } from "./step-checkpoint-world";
+import { finiteWorkWorldTemplate } from "./step-finite-work-world";
 
 it("prepares and reloads a complete immutable world with only two declared timing changes", () => {
   const root = mkdtempSync(path.join(tmpdir(), "checkpoint-world-"));
@@ -21,6 +23,9 @@ it("prepares and reloads a complete immutable world with only two declared timin
     prepareNonthinkingWorld(sourceRoot, new ModelCatalog({ schema_version: sourceCatalog.schemaVersion,
       scheduler: sourceCatalog.scheduler, registry: sourceCatalog.registry, accounts: sourceCatalog.accounts,
       profiles, model_overrides: sourceCatalog.modelOverrides }));
+    const sourceDirectory = path.join(sourceRoot, "worlds/blackmarsh/world");
+    const finiteWork = finiteWorkWorldTemplate(loadWorldTemplate(sourceDirectory));
+    writeFileSync(path.join(sourceDirectory, "mechanics.yaml"), stringify(finiteWork.mechanics));
     const result = prepareCheckpointWorld({ sourceRoot, destination });
     expect(prepareCheckpointWorld({ sourceRoot, destination })).toEqual(result);
     expect(result.manifest).toMatchObject({ paidHttp: 0, agents: 48, entities: 232, runtimePromoted: false });
@@ -44,7 +49,7 @@ it("makes a wrong short selection a checkpoint while preserving brief completion
   const template = loadWorldTemplate(path.resolve("worlds/blackmarsh/world"));
   const catalog = loadModelCatalog(path.resolve("config/models.yaml"));
   const baseline = buildWorldDefinition(template, { seed: 1, modelCatalog: catalog });
-  const candidate = buildWorldDefinition(checkpointWorldTemplate(template), { seed: 1, modelCatalog: catalog });
+  const candidate = buildWorldDefinition(checkpointWorldTemplate(finiteWorkWorldTemplate(template)), { seed: 1, modelCatalog: catalog });
   const resources = candidate.initialState.truth.mechanics.activityResources;
   function start(profiles: Record<string, TemporalProfileDefinition>, profileId: string, rawText: string,
     basis: TemporalPlanDraft["basis"] = { kind: "profile" }) {

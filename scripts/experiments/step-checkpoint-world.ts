@@ -7,11 +7,13 @@ import { assertNonthinkingWorld } from "../../src/engine/benchmarks/step-efficie
 import { contentHash } from "../../src/engine/models/model-audit";
 import { loadModelCatalog } from "../../src/engine/models/model-catalog";
 import { buildWorldDefinition, loadWorldTemplate, parseWorldTemplate, type NormalizedWorldTemplate } from "../../src/script/world-loader";
+import { assertFiniteWorkWorld } from "./step-finite-work-world";
 
 export const CHECKPOINT_PROFILE_IDS = ["momentary-action", "brief-action"] as const;
 
 /** This is an explicit experiment-world edit, never runtime action classification. */
 export function checkpointWorldTemplate(source: NormalizedWorldTemplate): NormalizedWorldTemplate {
+  assertFiniteWorkWorld(source);
   const candidate = structuredClone(source);
   for (const id of CHECKPOINT_PROFILE_IDS) {
     const index = candidate.mechanics.temporal_profiles.findIndex(profile => profile.id === id);

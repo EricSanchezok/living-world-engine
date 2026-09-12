@@ -3,10 +3,11 @@ import { cpSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { stringify } from "yaml";
-import { checkpointWorldTemplate } from "./step-checkpoint-world";
+import { buildIntegratedPlayerWorld, INTEGRATED_PLAYER_WORLD_RECIPE } from "./player-integrated-world";
+import { assertFiniteWorkWorld } from "./step-finite-work-world";
 import { integratedPlayerAlgorithmRef, registerIntegratedPlayerAlgorithm } from "../../src/engine/benchmarks/step-efficiency/integrated-player-algorithm";
 import { assertNonthinkingWorld } from "../../src/engine/benchmarks/step-efficiency/nonthinking-world";
-import { loadWorldScript, loadWorldTemplate, buildWorldDefinition } from "../../src/script/world-loader";
+import { loadWorldScript, loadWorldTemplate } from "../../src/script/world-loader";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { loadModelCatalog } from "../../src/engine/models/model-catalog";
 import { ModelRegistry, resolveModelProfile } from "../../src/engine/models/model-registry";
@@ -25,7 +26,7 @@ import { loadLocalEncoder, livingWorldCacheRoot, discoverLocalEncoderModelDirect
 import { MULTILINGUAL_E5_BASE_ASSET } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/model-assets";
 import { relationalRrfEncoderFingerprint, R5_RELATIONAL_PASSAGE_SCHEMA_VERSION } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/relational-rrf";
 
-const protocol = { id: "integrated-player-goal-diagnostic-v4", seed: 20260911, maxHttp: 120,
+const protocol = { id: "integrated-player-goal-diagnostic-v5", worldRecipe: INTEGRATED_PLAYER_WORLD_RECIPE, seed: 20260911, maxHttp: 120,
   purpose: "unqualified-full-player-failure-localization", priorSourceQualification: "failed", promotionEligible: false,
   knownCounterexamples: ["observer-source-role-confusion", "unsupported-barrier-identity", "unsupported-negative-assertions"],
   maxDispatchMs: 600_000, maxCommitsPerLease: 6, model: "deepseek-flash", thinking: "disabled",
@@ -38,6 +39,8 @@ const checkedCodeRevision = () => {
   return execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
 };
 const sourceHashes = () => Object.fromEntries(["scripts/experiments/player-integrated-playtest.ts",
+  "scripts/experiments/player-integrated-world.ts", "scripts/experiments/step-finite-work-world.ts",
+  "scripts/experiments/step-checkpoint-world.ts", "scripts/experiments/world-fragments/finite-work-goal.yaml",
   "scripts/operations/player-feedback-playtest.ts",
   "src/engine/benchmarks/step-efficiency/integrated-player-algorithm.ts",
   "src/engine/benchmarks/step-efficiency/agent-action-text.ts", "src/engine/prompts/shared/agent-action-text.md",
@@ -52,12 +55,9 @@ export async function prepareIntegratedPlayer(root: string, registryRoot: string
   const codeRevision = checkedCodeRevision();
   mkdirSync(root, { recursive: false });
   const catalog = loadModelCatalog("config/models.yaml");
-  const source = loadWorldTemplate("worlds/blackmarsh/world"), candidate = checkpointWorldTemplate(source);
-  const baseline = buildWorldDefinition(source, { seed: protocol.seed, modelCatalog: catalog });
-  const world = buildWorldDefinition(candidate, { seed: protocol.seed, modelCatalog: catalog });
+  const source = loadWorldTemplate("worlds/blackmarsh/world");
+  const { candidate, baseline, world } = buildIntegratedPlayerWorld(source, protocol.seed, catalog);
   const profileIds = assertNonthinkingWorld(world, catalog, protocol.model);
-  if (Object.keys(world.initialState.agents).length !== 48 ||
-    contentHash(world.initialState.agents) !== contentHash(baseline.initialState.agents)) throw new Error("Source Agent set changed");
   const snapshot = new ModelRegistry(catalog, registryRoot).snapshot(snapshotHash);
   const profileBindings = profileIds.map(id => {
     const binding = resolveModelProfile(catalog, snapshot, id);
@@ -71,6 +71,7 @@ export async function prepareIntegratedPlayer(root: string, registryRoot: string
     return true;
   } });
   writeFileSync(path.join(destination, "mechanics.yaml"), stringify(candidate.mechanics));
+  assertFiniteWorkWorld(loadWorldTemplate(destination));
   cpSync("config/models.yaml", path.join(root, "models.yaml"), { errorOnExist: true, force: false });
   const dataRoot = path.join(root, "data"), snapshots = path.join(dataRoot, "model-registry/snapshots");
   mkdirSync(snapshots, { recursive: true });
@@ -94,7 +95,9 @@ export async function prepareIntegratedPlayer(root: string, registryRoot: string
     registrySnapshotHash: snapshotHash, profileBindings, sourceTemplateHash: contentHash(source), templateHash: contentHash(candidate),
     sourceWorldHash: baseline.contentHash, worldHash: world.contentHash, initialStateHash: contentHash(world.initialState),
     originalAgentIds: Object.keys(world.initialState.agents).sort(), originalEntityCount: Object.keys(world.initialState.truth.entities).length,
-    changedProfiles: ["momentary-action", "brief-action"], cachePreparation: { hits: cachePreparation.hits, misses: cachePreparation.misses },
+    changedProfiles: ["momentary-action", "brief-action"], addedProfiles: ["work-until-objective"],
+    addedTemporalCoverage: ["finite-work"], addedTemporalCalibrations: ["finite-work-objective-time"],
+    cachePreparation: { hits: cachePreparation.hits, misses: cachePreparation.misses },
     newHttp: 0, runtimePromoted: false };
   save(root, "manifest.json", manifest);
   return manifest;
@@ -107,6 +110,7 @@ export async function runIntegratedPlayer(root: string) {
     contentHash(manifest.algorithm) !== contentHash(integratedPlayerAlgorithmRef())) throw new Error("Prepared diagnostic drift");
   const directory = path.join(root, "run"); mkdirSync(directory, { recursive: false });
   const catalog = loadModelCatalog(path.join(root, "models.yaml"));
+  assertFiniteWorkWorld(loadWorldTemplate(path.join(root, "worlds/blackmarsh/world")));
   const world = loadWorldScript(path.join(root, "worlds/blackmarsh/world"), { seed: protocol.seed, modelCatalog: catalog });
   if (catalog.hash !== manifest.catalogHash || world.contentHash !== manifest.worldHash || contentHash(world.initialState) !== manifest.initialStateHash) throw new Error("Frozen world or catalog drift");
   const dataRoot = path.join(root, "data"), registry = new ModelRegistry(catalog, dataRoot);

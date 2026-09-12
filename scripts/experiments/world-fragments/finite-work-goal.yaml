@@ -1,0 +1,19 @@
+temporal_profiles:
+  - id: work-until-objective
+    name: 有限目标工作：按实际进展完成
+    kind: goal
+    check_every_seconds: 300
+    interruptible: true
+    reaction_fallback: continue_if_valid
+    resource_claims:
+      - { resource_id: foreground, amount: 1 }
+    selection:
+      semantic_tags: [finite-work]
+      evidence_requirement: none
+temporal_profile_coverage:
+  required_semantic_tags: [finite-work]
+temporal_calibrations:
+  - id: finite-work-objective-time
+    situation: 调查、核对、筹备、修缮或组织等具有明确目标，但行动原文没有可验证时长或工作量的有限工作。
+    profile_id: work-until-objective
+    explanation: 每五分钟检查实际进展，不等于整项工作完成。保留全部行动目标、次序和条件，未完成时继续，允许中断、受阻或失败。只保留真实额外持续条件，未要求时使用空列表，不能捏造条件或把任务缩成宣布意向。
