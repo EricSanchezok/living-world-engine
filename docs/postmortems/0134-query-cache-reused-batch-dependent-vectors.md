@@ -16,6 +16,7 @@ The source is execution 14c18986-48ed-40ce-9bc8-0f3caf542273, captured before it
 - Independent cold query caches restored all five historical source requests and allowed the comparison to preserve its baseline.
 - An initial diagnostic primed the preceding B source; it had no shared query strings and did not reproduce the issue.
 - Reconstructing the actual same-source C-to-B order reproduced the original thirty-six hits, twenty-four misses and exact changed shortlist.
+- The first complete forty-nine-action comparison used two worlds whose generated queries were identical. All five batches exercised full-warm reuse, so its passing equivalence result did not test partial-hit correction. The diagnostic qualification now requires an observed partial-cache selection counterexample.
 - The isolated complete-batch cache candidate is defined by [Spec 0141](../specs/0141-preserve-query-batch-cache-context.md); production activation and passage-cache qualification remain separate.
 
 ## Root cause

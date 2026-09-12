@@ -15,6 +15,8 @@ The reference per-query cache remains the experimental control. Neither the new 
 
 The offline diagnostic retains full recorded requests from the original 49-action cohort and tests all five physical batches, including the observed overlap between two world contexts. First verify each cold source against its recorded shortlist and model-context hashes. Compare the reference partial cache and candidate against the same cold result, then verify complete warm reuse with no additional encoding. Preserve mismatches, vector deltas, all query strings, cache counts and timings. No provider HTTP, new model output, world commit, semantic success or player-latency claim is permitted from this evidence alone.
 
+Qualification requires at least one control batch with both cache hits and misses and a different selected context from its recorded cold result. An identical-query full-warm comparison is a useful negative control but cannot qualify a partial-cache correction. Keep the frozen negative control and its original protocol result separate from this stronger eligibility check.
+
 ## Plan
 
 1. Reproduce cache-dependent selection with the actual local encoder and frozen passage vectors.

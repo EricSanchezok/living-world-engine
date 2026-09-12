@@ -26,12 +26,19 @@ function equalSelection(a: CandidateSelectionResult, b: { modelContextHash: stri
   return a.modelContextHash === b.modelContextHash && a.shortlistHash === b.shortlistHash;
 }
 
+export function queryCacheCounterexampleCovered(rows: readonly {
+  partialMatchesCold: boolean;
+  cache: { partial?: { queryHits: number; queryMisses: number } };
+}[]): boolean {
+  return rows.some(row => !row.partialMatchesCold && (row.cache.partial?.queryHits ?? 0) > 0 && (row.cache.partial?.queryMisses ?? 0) > 0);
+}
+
 export async function verifyQueryBatchCache(sourceRoot: string, outputRoot: string) {
   if (execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim()) throw new Error("Commit checked diagnostic before native comparison");
   const manifestFile = path.join(sourceRoot, "manifest.json");
   const manifest = read<{ binding: { protocol: { id: string } } }>(manifestFile);
   const terminal = read<{ complete: boolean; totalHttp: number }>(path.join(sourceRoot, "preflight/terminal.json"));
-  if (manifest.binding.protocol.id !== "adjudicated-objective-compilation-v1" || !terminal.complete || terminal.totalHttp !== 0) throw new Error("Complete frozen objective preflight required");
+  if (!["finite-work-compilation-v1", "adjudicated-objective-compilation-v1"].includes(manifest.binding.protocol.id) || !terminal.complete || terminal.totalHttp !== 0) throw new Error("Complete frozen compilation preflight required");
   const originals = read<Array<{ actionIds: string[] }>>(path.join(sourceRoot, "preflight/sources.json"));
   if (JSON.stringify(originals.map(source => source.actionIds.length)) !== JSON.stringify([12, 12, 12, 5, 8]) ||
     new Set(originals.flatMap(source => source.actionIds)).size !== 49) throw new Error("Complete original 49-action cohort required");
@@ -41,11 +48,11 @@ export async function verifyQueryBatchCache(sourceRoot: string, outputRoot: stri
   const cacheRoot = livingWorldCacheRoot();
   mkdirSync(outputRoot, { recursive: false });
   const save = (file: string, value: unknown) => writeFileSync(path.join(outputRoot, file), JSON.stringify(value, null, 2) + "\n", { flag: "wx" });
-  save("manifest.json", { protocol: "complete-query-batch-cache-v1", codeRevision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
+  save("manifest.json", { protocol: "complete-query-batch-cache-v2", codeRevision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
     sourceRoot, sourceManifestSha256: fileHash(manifestFile), sourceSha256: files.map(pair => ({ B: fileHash(pair.B), C: fileHash(pair.C) })),
     implementationHashes: Object.fromEntries(sourceFiles.map(file => [file, fileHash(file)])), actionIds: originals.map(source => source.actionIds),
     comparisons: ["cold B", "per-query C then B", "complete-batch C then B", "complete-batch repeated B"],
-    newHttp: 0, passageWrites: false, fullPlayerAcceptance: false });
+    newHttp: 0, passageWrites: false, fullPlayerAcceptance: false, qualificationRequiresObservedPartialCacheSelectionDrift: true });
   const encoder = await loadLocalEncoder({ modelDirectory: discoverLocalEncoderModelDirectory(cacheRoot, MULTILINGUAL_E5_BASE_ASSET.name),
     modelId: MULTILINGUAL_E5_BASE_ASSET.modelId, expectedHash: MULTILINGUAL_E5_BASE_ASSET.directorySha256 });
   const fingerprint = relationalRrfEncoderFingerprint(encoder, R5_RELATIONAL_PASSAGE_SCHEMA_VERSION);
@@ -109,7 +116,8 @@ export async function verifyQueryBatchCache(sourceRoot: string, outputRoot: stri
       save(`source-${index}-summary.json`, row);
       process.stdout.write(JSON.stringify(row) + "\n");
     }
-    const result = { complete: true, passed: rows.every(row => row.completeMatchesCold && row.warmMatchesCold && row.completeVectors.changed === 0 && row.cache.warm?.queryMisses === 0),
+    const counterexampleCovered = queryCacheCounterexampleCovered(rows);
+    const result = { complete: true, counterexampleCovered, passed: counterexampleCovered && rows.every(row => row.completeMatchesCold && row.warmMatchesCold && row.completeVectors.changed === 0 && row.cache.warm?.queryMisses === 0),
       newHttp: 0, rows, elapsedMs: performance.now() - started, fingerprint,
       limitation: "Query-cache equivalence with frozen passages on five full batches; not passage generation invariance, retrieval quality, model success or player latency." };
     save("result.json", result);
@@ -122,7 +130,7 @@ export async function verifyQueryBatchCache(sourceRoot: string, outputRoot: stri
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   globalThis.fetch = async () => { throw new Error("Offline retrieval diagnostic forbids HTTP"); };
-  if (process.argv.length !== 4) throw new Error("usage: verify-query-batch-cache.ts <objective-preflight-root> <new-output-root>");
+  if (process.argv.length !== 4) throw new Error("usage: verify-query-batch-cache.ts <compilation-preflight-root> <new-output-root>");
   void verifyQueryBatchCache(path.resolve(process.argv[2]!), path.resolve(process.argv[3]!)).then(result => {
     process.stdout.write(JSON.stringify({ complete: result.complete, passed: result.passed, rows: result.rows.length, newHttp: 0 }) + "\n");
     if (!result.passed) process.exitCode = 1;
