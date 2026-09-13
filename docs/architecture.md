@@ -28,6 +28,8 @@ The [sampled perception experiment](specs/0156-sampled-perception-candidate-sele
 
 The benchmark [temporal route representation](specs/0157-temporal-route-perception-screen.md) derives a terminal perception tag from a selected current or pending route case. Pending transfers have no stimulus payload; original receipt validation remains authoritative for the compiled result.
 
+Its optional [observer-local symbol codec](specs/0158-observer-local-perception-symbols.md) binds existing claim identities to each assigned observer's complete local inventory. Explicit introductions remain model-authored; the codec restores selected opaque handles without identity inference.
+
 ## State and policies
 
 Action Compilation specializes [empty shared-resource domains](specs/0111-specialize-empty-resource-pool-domain.md) from its bound source state; representation adapters preserve that request schema through initial and repair calls.
