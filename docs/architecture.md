@@ -22,6 +22,8 @@ Living World Engine maintains one canonical world and multiple Agents with priva
 
 Dependencies flow browser → Route Handler → WorldHost → SimulationEngine → WorldExecutionAlgorithm → CanonicalCommitter. WorldHost resolves the complete instance-pinned Composition through the internal registry, and replay resolves the recorded tree through the same mechanism. Algorithms return candidates but never hold authority to mutate canonical state or define stable telemetry. The engine and world YAML load only on the server. [Algorithm system](game-design/algorithm-system.md) defines the replaceability boundary.
 
+The benchmark-only [perception evidence reader](specs/0155-demand-read-perception-evidence.md) separates a complete immutable source from explicitly loaded wire records. Its read transcript and actual HTTP bodies account for the additional inference calls; the original gateway and canonical materializers retain full-source validation. Default perception continues to receive its complete context.
+
 ## State and policies
 
 Action Compilation specializes [empty shared-resource domains](specs/0111-specialize-empty-resource-pool-domain.md) from its bound source state; representation adapters preserve that request schema through initial and repair calls.
