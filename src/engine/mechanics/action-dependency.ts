@@ -1174,16 +1174,69 @@ function actualComponentFootprint(
   return { reads, writes };
 }
 
+// Creation scope rationale: docs/decisions/0200-cover-condition-creation-with-subject-scopes.md.
+function createdConditionSubjects(
+  state: Readonly<SimulationState>,
+  resolution: UnreviewedTruthResolution,
+): Set<string> {
+  return new Set(resolution.proposal.operations.flatMap((operation) =>
+    operation.kind === "set_condition" && !Object.hasOwn(state.truth.conditions, operation.condition.id)
+      ? [operation.condition.subjectId] : []));
+}
+
+function conditionSubjectAccesses(
+  state: Readonly<SimulationState>,
+  resolution: UnreviewedTruthResolution,
+  dependencies: readonly InteractionDependency[],
+): Set<string> {
+  const subjects = new Set<string>();
+  const addCondition = (id: string): void => {
+    const existing = state.truth.conditions[id];
+    if (existing) subjects.add(existing.subjectId);
+  };
+  for (const dependency of dependencies) {
+    for (const ref of [...dependency.reads, ...dependency.writes]) {
+      if (ref.kind === "entity" || ref.kind === "placement") subjects.add(ref.id);
+      if (ref.kind === "condition") addCondition(ref.id);
+    }
+  }
+  for (const operation of resolution.proposal.operations) {
+    const footprint = operationResources(state, operation);
+    for (const key of [...footprint.reads, ...footprint.writes]) {
+      if (key.startsWith("entity:")) subjects.add(key.slice("entity:".length));
+    }
+    if (operation.kind === "set_condition") {
+      subjects.add(operation.condition.subjectId);
+      addCondition(operation.condition.id);
+    }
+    if (operation.kind === "remove_condition") addCondition(operation.conditionId);
+  }
+  return subjects;
+}
+
 export function resolvedComponentsConflict(
   state: Readonly<SimulationState>,
   left: UnreviewedTruthResolution,
   right: UnreviewedTruthResolution,
+  leftDependencies: readonly InteractionDependency[],
+  rightDependencies: readonly InteractionDependency[],
 ): boolean {
   const leftFootprint = actualComponentFootprint(state, left);
   const rightFootprint = actualComponentFootprint(state, right);
-  return [...leftFootprint.writes].some((key) =>
+  if ([...leftFootprint.writes].some((key) =>
     rightFootprint.writes.has(key) || rightFootprint.reads.has(key)) ||
-    [...rightFootprint.writes].some((key) => leftFootprint.reads.has(key));
+    [...rightFootprint.writes].some((key) => leftFootprint.reads.has(key))) return true;
+  const leftCreations = createdConditionSubjects(state, left);
+  const rightCreations = createdConditionSubjects(state, right);
+  if (leftCreations.size === 0 && rightCreations.size === 0) return false;
+  // An exact record read cannot name a future record. The subject scope also
+  // protects other components' declared reads, including zero-delta readers.
+  if ((leftCreations.size > 0 && rightDependencies.some((dependency) => dependency.globalFallback)) ||
+    (rightCreations.size > 0 && leftDependencies.some((dependency) => dependency.globalFallback))) return true;
+  const leftSubjects = conditionSubjectAccesses(state, left, leftDependencies);
+  const rightSubjects = conditionSubjectAccesses(state, right, rightDependencies);
+  return [...leftCreations].some((subject) => rightSubjects.has(subject)) ||
+    [...rightCreations].some((subject) => leftSubjects.has(subject));
 }
 
 export function resolutionExceedsDeclaredDependencies(
@@ -1197,6 +1250,13 @@ export function resolutionExceedsDeclaredDependencies(
   const declaredWrites = new Set(dependencies.flatMap((dependency) =>
     dependency.writes.map(footprintRefKey)));
   const actual = actualComponentFootprint(state, resolution);
+  const coveredCreations = new Set<string>();
+  for (const operation of resolution.proposal.operations) {
+    if (operation.kind !== "set_condition" || Object.hasOwn(state.truth.conditions, operation.condition.id)) continue;
+    const { id, subjectId } = operation.condition;
+    if (!Object.hasOwn(state.truth.entities, subjectId) || !declaredWrites.has(`entity:${subjectId}`)) return true;
+    coveredCreations.add(`condition:${id}`);
+  }
   return [...actual.reads].some((key) => !declaredReads.has(key)) ||
-    [...actual.writes].some((key) => !declaredWrites.has(key));
+    [...actual.writes].some((key) => !declaredWrites.has(key) && !coveredCreations.has(key));
 }

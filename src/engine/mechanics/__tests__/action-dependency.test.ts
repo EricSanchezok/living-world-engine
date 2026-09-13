@@ -60,7 +60,7 @@ describe("action dependencies", () => {
       causes: [{ kind: "law", id: "time-passes" }], assertions: [] }]);
     const observe = resolution([]);
     expect(interactionDependencyComponents([mover, observer])).toHaveLength(2);
-    expect(resolvedComponentsConflict(state, move, observe)).toBe(false);
+    expect(resolvedComponentsConflict(state, move, observe, [mover], [observer])).toBe(false);
     expect(resolutionExceedsDeclaredDependencies(state, move, [mover])).toBe(true);
     expect(resolutionExceedsDeclaredDependencies(state, observe, [observer])).toBe(false);
 

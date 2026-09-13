@@ -2097,9 +2097,12 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     if (!fallbackLaw) throw new Error("temporal advancement requires at least one world law");
     let fallback = false;
     if (contentHash(interactionDependencyComponents(interactionDependencies)) !== contentHash(components)) fallback = true;
+    const dependenciesFor = (component: typeof componentResults[number]) =>
+      interactionDependencies.filter((dependency) => component.interactionIds.includes(dependency.id));
     for (let left = 0; left < resolutions.length; left += 1) {
       for (let right = left + 1; right < resolutions.length; right += 1) {
-        if (resolvedComponentsConflict(source, resolutions[left], resolutions[right])) fallback = true;
+        if (resolvedComponentsConflict(source, resolutions[left], resolutions[right],
+          dependenciesFor(componentResults[left]!), dependenciesFor(componentResults[right]!))) fallback = true;
       }
     }
     for (const [index, resolution] of resolutions.entries()) {
@@ -2378,7 +2381,8 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
       }
       for (let left = 0; left < componentResults.length; left += 1) {
         for (let right = left + 1; right < componentResults.length; right += 1) {
-          if (resolvedComponentsConflict(source, componentResults[left]!.resolution, componentResults[right]!.resolution)) {
+          if (resolvedComponentsConflict(source, componentResults[left]!.resolution, componentResults[right]!.resolution,
+            dependenciesFor(componentResults[left]!), dependenciesFor(componentResults[right]!))) {
             throw new Error("repaired final components introduced a conflict");
           }
         }
