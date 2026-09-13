@@ -1,0 +1,1 @@
+Build one source-onset frame per distinct assigned action from the complete source and laws. Keep the actor, first receiving parties, current attempt, later steps and unspoken goals distinct. Preserve uncertainty and quote the original action fields exactly. Do not project the frame into any observer's knowledge.

@@ -30,6 +30,8 @@ The benchmark [temporal route representation](specs/0157-temporal-route-percepti
 
 Its optional [observer-local symbol codec](specs/0158-observer-local-perception-symbols.md) binds existing claim identities to each assigned observer's complete local inventory. Explicit introductions remain model-authored; the codec restores selected opaque handles without identity inference.
 
+The separate [source-frame screen](specs/0159-source-onset-frame-screen.md) tests one shared onset interpretation per assigned source action before observer projection. Frames remain diagnostic artifacts and never become canonical events or perception receipts.
+
 ## State and policies
 
 Action Compilation specializes [empty shared-resource domains](specs/0111-specialize-empty-resource-pool-domain.md) from its bound source state; representation adapters preserve that request schema through initial and repair calls.
