@@ -9,11 +9,13 @@ Test whether independent assignment groups reduce observed batch-wide perception
 
 ## Contract
 
-Partition all assigned observer/source pairs into groups of at most seven observers. Keep every pair for an observer together. Each request retains the complete world, all actions, all private canonical evidence, original catalog, original wire schema, laws, examples and inference settings. Only the assigned perceptionTargets subset and invocation identity differ. Groups retain original targetIndex values. Every original pair occurs once per candidate repetition; none is dropped or reassigned.
+Partition all assigned observer/source pairs into groups with an explicitly frozen maximum observer count. Keep every pair for an observer together. Each request retains the complete world, all actions, all private canonical evidence, original catalog, laws, examples and inference settings. Both arms use the same complete field-domain transformation; its per-target constraints compile only the assigned group, retaining the original global target indices. Only the assigned perceptionTargets subset, its mechanically derived generation constraints, and invocation identity differ. Groups retain original targetIndex values. Every original pair occurs once per candidate repetition; none is dropped or reassigned.
 
 ## Plan
 
-For the complete source with 35 distinct observers, compare one B request with five parallel C requests per repetition in B/C/C/B wave order: two B and ten C model calls total, no repair or continuation, maximum five concurrent calls. Freeze complete source, actual bodies, manifest and producer identities. This deliberately increases candidate calls and repeated input by roughly five times; report actual tokens, cache, output length, failures and wall time per complete 35-pair wave. Keep the candidate out of default execution.
+The single-observer continuation screen uses all eighteen assigned observers from the latest complete forty-nine-subject source, with its three recorded commitments fixed. Compare a full B request, one complete wave of eighteen C requests, then another full B request. Freeze a maximum of six concurrent calls and twenty new HTTP requests; block repair and new check execution. Both B bodies must match the preceding complete field-domain treatment exactly. Preserve all eighteen C tasks even when another fails, and merge reports only after every group returns its exact assigned coverage. Record each group, the whole wave, input/cache/output usage, failures and complete-source semantic counterexamples. Mixed done/check outputs remain an incomplete candidate wave. A qualified wave requires subsequent replication and complete player testing before integration.
+
+This is a measured escalation after intact-batch and seven-observer grouping failures, not the first optimization: it deliberately multiplies candidate calls and repeated context by eighteen. Preserve the earlier thirty-five-observer, seven-per-group screen as historical evidence. Keep all results out of default execution until independently qualified.
 
 ## Verification
 

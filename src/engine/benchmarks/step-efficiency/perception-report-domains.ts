@@ -53,12 +53,13 @@ export function perceptionReportDomainsSchema(context: unknown): Record<string, 
     state.committedCheckRequests.some(check => !results.has(check.checkRef))) {
     throw new ModelConfigurationError("perception report has incomplete committed check results");
   }
-  const assignments = new Set<string>();
-  for (const [index, target] of perceptionTargets.entries()) {
+  const assignments = new Set<string>(), targetIndices = new Set<number>();
+  for (const target of perceptionTargets) {
     const pair = JSON.stringify([target.observerRef, target.sourceActionRef]);
-    if (target.targetIndex !== index || assignments.has(pair) || byHandle.get(target.observerRef)?.kind !== "entity" ||
+    if (targetIndices.has(target.targetIndex) || assignments.has(pair) || byHandle.get(target.observerRef)?.kind !== "entity" ||
       byHandle.get(target.sourceActionRef)?.kind !== "action") throw new ModelConfigurationError("Invalid perception report assignment");
     assignments.add(pair);
+    targetIndices.add(target.targetIndex);
   }
   requireMembers("local_entity", state.actors.flatMap(actor => actor.availableLocalEntityRefs));
   if (new Set(state.world.laws.map(law => law.id)).size !== state.world.laws.length ||

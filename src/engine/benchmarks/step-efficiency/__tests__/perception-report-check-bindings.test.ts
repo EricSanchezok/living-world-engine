@@ -10,6 +10,7 @@ import type { StructuredModelRequest } from "../../../models/model-provider";
 import { ScriptedModelProvider } from "../../../testing/model-provider";
 import { loadWorldScript } from "../../../../script/world-loader";
 import { perceptionReportDomainsRequest, perceptionReportDomainsSchema } from "../perception-report-domains";
+import { perceptionObserverGroups } from "../perception-observer-groups";
 
 it("binds fixed checks to their assigned pairs and diagnoses all original report positions through actual repair", async () => {
   const captured: StructuredModelRequest<unknown>[] = [];
@@ -85,6 +86,18 @@ it("binds fixed checks to their assigned pairs and diagnoses all original report
     { ...valid, reports: [valid.reports[0], report(0, [shared!.checkRef, shared!.checkRef], true), valid.reports[2]] },
   ]) expect(validate(invalid)).toBe(false);
   expect(validate({ ...valid, reports: [report(2, [], false), ...valid.reports.slice(1)] })).toBe(true);
+  const groups = perceptionObserverGroups(captured[1]!.context, 1);
+  expect(groups).toHaveLength(2);
+  for (const [ordinal, group] of groups.entries()) {
+    const groupWire = JSON.parse(JSON.stringify(perceptionReportDomainsSchema(group)), (key, value) =>
+      key === "pattern" && typeof value === "string" && value.includes("\\p{") ? undefined : value);
+    const acceptsGroup = new Ajv({ schemaId: "auto", unknownFormats: "ignore" }).compile(groupWire);
+    const selected = ordinal === 0 ? valid.reports.slice(1) : valid.reports.slice(0, 1);
+    expect(acceptsGroup({ kind: "done", reports: selected })).toBe(true);
+    expect(acceptsGroup(valid)).toBe(false);
+    expect(group.state).toEqual((captured[1]!.context as { state: unknown }).state);
+    expect(group.referenceCatalog).toEqual((captured[1]!.context as { referenceCatalog: unknown }).referenceCatalog);
+  }
   const missing = structuredClone(captured[1]!.context) as { state: { checkResults: unknown[] } };
   missing.state.checkResults.pop();
   expect(() => perceptionReportDomainsSchema(missing)).toThrow("incomplete committed check results");
