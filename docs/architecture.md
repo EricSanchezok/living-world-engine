@@ -24,6 +24,8 @@ Dependencies flow browser → Route Handler → WorldHost → SimulationEngine �
 
 The benchmark-only [perception evidence reader](specs/0155-demand-read-perception-evidence.md) separates a complete immutable source from explicitly loaded wire records. Its read transcript and actual HTTP bodies account for the additional inference calls; the original gateway and canonical materializers retain full-source validation. Default perception continues to receive its complete context.
 
+The [sampled perception experiment](specs/0156-sampled-perception-candidate-selection.md) screens whole proposals before selection. TruthEngine and the experiment share pure onset-check materialization; randomness remains in the runtime after admission. A selected proposal retains its exact original fields and must still pass canonical validation.
+
 ## State and policies
 
 Action Compilation specializes [empty shared-resource domains](specs/0111-specialize-empty-resource-pool-domain.md) from its bound source state; representation adapters preserve that request schema through initial and repair calls.

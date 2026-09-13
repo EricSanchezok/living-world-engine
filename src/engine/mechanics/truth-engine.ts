@@ -625,6 +625,45 @@ function materializeCheckDraft(
   };
 }
 
+/** Pure shared admission before any perception RNG; source semantics remain model-owned. */
+export function materializeOnsetPerceptionChecks(
+  input: Pick<OnsetPerceptionInput, "definition" | "state" | "actions" | "identityOwner" | "perceptionTargets"> & {
+    requests: readonly D20CheckRequest[]; commitmentRound: number;
+  },
+  drafts: readonly ModelCheckRequestDraft[],
+): D20CheckRequest[] {
+  const referenceInput = { state: input.state, definition: input.definition, actions: input.actions, checkRequests: input.requests,
+    observerIds: input.perceptionTargets?.map(target => target.observerId) };
+  const resolver = createTruthReferenceResolver(referenceInput), allowed = perceptionCauseScope(referenceInput);
+  const evidence = resolutionEvidenceIndex(input.state, input.actions, input.definition.laws);
+  const relationIssues = perceptionDraftRelationIssues(drafts, { ...referenceInput, perceptionTargets: input.perceptionTargets }, resolver);
+  const normalized: D20CheckRequest[] = [];
+  const issues: PromptValidationIssue[] = [...relationIssues];
+  for (const [index, draft] of drafts.entries()) {
+    if (relationIssues.some(issue => issue.path[1] === index)) continue;
+    try {
+      const id = runtimeId({ worldHash: input.state.worldHash, revision: input.state.revision, kind: "check",
+        stage: "perception", owner: input.identityOwner, round: input.commitmentRound, ordinal: index });
+      const request = materializeCheckDraft(draft, resolver, id, evidence);
+      validateCheckRequest(input.state, request, allowed, input.definition.disclosure.defaultCheckVisibility);
+      normalized.push(request);
+    } catch (error) {
+      issues.push(...validationIssues(error).map(issue => ({ ...issue, path: ["requests", index, ...issue.path] })));
+    }
+  }
+  if (issues.length) throw new ModelCandidateValidationError(issues);
+  const repeated = repeatedPerceptionChecks(input.requests, normalized);
+  if (repeated.length) throw new ModelCandidateValidationError(repeated.map(({ index, previous, committed }) => ({
+    code: "perception.repeated_check", class: "semantic", path: ["requests", index],
+    originalValue: drafts[index],
+    allowedHandles: committed ? [resolver.handleFor("check", previous.id)] : [],
+    message: committed
+      ? "This repeats an already committed perception check. Its result is fixed; do not rename, reroll or change the stakes to obtain another result. Reuse the committed check in the terminal report, preserving other genuinely distinct uncertainties."
+      : "This repeats another perception check in the same batch. Submit this uncertainty once, preserving other genuinely distinct uncertainties.",
+  })));
+  return normalized;
+}
+
 async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
   provider: StructuredModelProvider;
   repairAttempts: number;
@@ -639,13 +678,11 @@ async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
   const aliases = new Map<string, string | null>();
   const audits: ModelExecutionAudit[] = [];
   let rng = structuredClone(input.state.truth.rng);
-  const evidence = resolutionEvidenceIndex(input.state, input.actions, input.definition.laws);
 
   while (true) {
     const referenceInput = { state: input.state, definition: input.definition, actions: input.actions, checkRequests: requests,
       observerIds: input.perceptionTargets?.map(target => target.observerId) };
     const resolver = createTruthReferenceResolver(referenceInput);
-    const allowed = perceptionCauseScope(referenceInput);
     const accepted = { round: null as D20CheckRequest[] | null };
     let draftRound: ModelCheckRequestDraft[] = [];
     const call = await generateValidated({
@@ -694,43 +731,8 @@ async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
         if (commitmentRounds.length >= input.maxCommitmentRounds) {
           throw new Error("maximum commitment rounds exceeded");
         }
-        const relationIssues = perceptionDraftRelationIssues(directive.requests, { ...referenceInput, perceptionTargets: input.perceptionTargets }, resolver);
         draftRound = structuredClone(directive.requests);
-        const roundAliases = new Map<string, string>();
-        for (const [ordinal, request] of directive.requests.entries()) {
-          roundAliases.set(request.proposalKey, runtimeId({
-            worldHash: input.state.worldHash,
-            revision: input.state.revision,
-            kind: "check",
-            stage: "perception",
-            owner: input.identityOwner,
-            round: commitmentRounds.length,
-            ordinal,
-          }));
-        }
-        const normalized: D20CheckRequest[] = [];
-        const materializationIssues: PromptValidationIssue[] = [...relationIssues];
-        for (const [index, draft] of directive.requests.entries()) {
-          if (relationIssues.some(issue => issue.path[1] === index)) continue;
-          try {
-            const request = materializeCheckDraft(draft, resolver, roundAliases.get(draft.proposalKey)!, evidence);
-            validateCheckRequest(input.state, request, allowed, input.definition.disclosure.defaultCheckVisibility);
-            normalized.push(request);
-          } catch (error) {
-            materializationIssues.push(...validationIssues(error).map(issue => ({ ...issue, path: ["requests", index, ...issue.path] })));
-          }
-        }
-        if (materializationIssues.length) throw new ModelCandidateValidationError(materializationIssues);
-        const repeated = repeatedPerceptionChecks(requests, normalized);
-        if (repeated.length) throw new ModelCandidateValidationError(repeated.map(({ index, previous, committed }) => ({
-          code: "perception.repeated_check", class: "semantic", path: ["requests", index],
-          originalValue: directive.requests[index],
-          allowedHandles: committed ? [resolver.handleFor("check", previous.id)] : [],
-          message: committed
-            ? "This repeats an already committed perception check. Its result is fixed; do not rename, reroll or change the stakes to obtain another result. Reuse the committed check in the terminal report, preserving other genuinely distinct uncertainties."
-            : "This repeats another perception check in the same batch. Submit this uncertainty once, preserving other genuinely distinct uncertainties.",
-        })));
-        accepted.round = normalized;
+        accepted.round = materializeOnsetPerceptionChecks({ ...input, requests, commitmentRound: commitmentRounds.length }, directive.requests);
       },
       diagnoseRejected: (directive) => directive.kind === "request_checks"
         ? perceptionDraftRelationIssues(directive.requests, { ...referenceInput, perceptionTargets: input.perceptionTargets }, resolver)

@@ -1,0 +1,7 @@
+# Select a supported perception candidate
+
+You select a whole proposed perception directive against the complete original world and action evidence. candidateSelection preserves the original perception instructions and three untrusted model proposals. Its eligibleIndices identify proposals that passed mechanical screening, not proposals proven semantically correct.
+
+Inspect the source independently. Preserve the actual observer, source actor and complete attempted action. Distinguish what starts now from a later meeting, delivery, successful task or private intention. Shared region, authority, kinship and an intended recipient do not themselves transmit information. Preserve established direct perception and authored remote access. A random check cannot create a missing route; a required or supported uncertainty cannot be dropped to obtain a terminal answer. Check every report or requested check in a selected candidate, including its reason, evidence, stimulus and private claims.
+
+Select only an index in eligibleIndices, and only when the entire candidate is supported. A structurally valid candidate can still be wrong. Other candidates agreeing with it is not world evidence. If none is defensible, return candidateIndex null with a concise reason identifying the blocking problem. Do not edit, combine, repair or invent candidate content. Return only the selection schema object. The engine will return the selected original directive unchanged and retain its normal canonical validation and random-commitment rules.
