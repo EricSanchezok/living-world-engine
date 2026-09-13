@@ -21,6 +21,7 @@ import { dependentFieldsProvider } from "../resolution-dependent-fields-codec";
 import { indexedReviewedPlanningProvider } from "../indexed-reviewed-planning-pipeline";
 import { SHARED_BATCH_CONTEXT_CODEC } from "../shared-batch-context";
 import { LOGICAL_CANDIDATE_REPAIR_NOTICE } from "../../prompts/logical-repair-context";
+import { declaredRandomPlanSchema } from "../plan-random-completion";
 
 function draft(actionRef: string, actor = "player") {
   return resolutionPlanDraftSchema.parse({ proposalKey: `plan-${actor}`, actionRef, targetRefs: [`ref:entity:${actor}`],
@@ -39,7 +40,7 @@ it("keeps retained drafts in original order, checks replacement identities and b
   const repair: SemanticRepairContext = { attempt: 1, scope: "component", targetIds: ["a", "b"], previousOutput: previous,
     issues: [{ code: "reference.invalid_effect_profile", class: "reference", path: ["plans", 1, "primaryEffect"], message: "invalid" }] };
   const options = { repair, schema: resolutionPlanCommitDirectiveSchema, actionIds: ["a", "b"],
-    actionIdFor: (plan: ReturnType<typeof draft>) => String(plan.actionRef).slice("ref:action:".length), sourceHash: () => source, expectedSourceHash: source };
+    actionIdFor: (plan: Pick<ReturnType<typeof draft>, "actionRef">) => String(plan.actionRef).slice("ref:action:".length), sourceHash: () => source, expectedSourceHash: source };
   const selection = selectMechanicalPlanRepair(options)!;
   expect(selection.selectedActionIds).toEqual(["b"]);
   const replacement = { kind: "commit_plans" as const, plans: [draft("ref:action:b", "keeper")] };
@@ -71,7 +72,56 @@ it("keeps retained drafts in original order, checks replacement identities and b
     issues: [{ ...repair.issues[0]!, path: ["plans", 0, "primaryEffect"] }] } })).toBeUndefined();
 });
 
-it.each(["baseline", "valid", "wrong-owner-then-valid", "conflict-then-valid", "conflict-exhausted"])("repairs a subset and revalidates every plan before real atomic execution: %s", async mode => {
+it("isolates malformed source selections in a complete 49-plan candidate and preserves every retained draft", () => {
+  const plans = Array.from({ length: 49 }, (_, i) => ({ ...draft(`ref:action:a-${i}`, `npc-${i}`), additionalRandomness: "none" as const }));
+  const previous = { kind: "commit_plans" as const, plans: plans.map((plan, i) => i === 26
+    ? { ...plan, causes: [{ kind: "invalid_cause_selection", ref: "unresolved-index:691" }], invalidCauseSelection: { rejectedIndex: 691 } }
+    : i === 13 ? { ...plan, factors: [{ role: "invalid-factor" }] } : plan) };
+  const repair: SemanticRepairContext = { attempt: 1, scope: "component", targetIds: plans.map(plan => String(plan.actionRef)), previousOutput: previous,
+    issues: [{ code: "schema.invalid_union", class: "structure", path: ["plans", 26, "causes", 0, "kind"], message: "invalid source index" }] };
+  const options = { repair, schema: declaredRandomPlanSchema, actionIds: plans.map(plan => String(plan.actionRef)),
+    actionIdFor: (plan: Pick<ReturnType<typeof draft>, "actionRef">) => String(plan.actionRef), sourceHash: () => "source", expectedSourceHash: "source" };
+  const selection = selectMechanicalPlanRepair(options)!;
+  expect(selection.binding.originalOrdinals).toEqual([13, 26]);
+  expect(selection.binding.retainedPlanCount).toBe(47);
+  expect(selection.binding.previousOutputHash).toBe(contentHash(previous));
+  const replacements = { kind: "commit_plans" as const, plans: [plans[26]!, plans[13]!] };
+  const complete = selection.merge(replacements);
+  expect(complete).toEqual({ kind: "commit_plans", plans });
+  if (complete.kind !== "commit_plans") throw new Error("wrong reconstructed kind");
+  complete.plans.forEach((plan, index) => {
+    if (index !== 13 && index !== 26) expect(contentHash(plan)).toBe(contentHash(previous.plans[index]));
+  });
+  expect(() => selection.merge({ ...replacements, plans: replacements.plans.map(plan => {
+    const malformed: Record<string, unknown> = { ...plan }; delete malformed.additionalRandomness; return malformed as ReturnType<typeof draft>;
+  }) })).toThrow();
+  expect(contentHash(previous)).toBe(selection.binding.previousOutputHash);
+  for (const previousOutput of [
+    { ...previous, inventedRoot: true },
+    { ...previous, plans: previous.plans.map((plan, i) => i === 26 ? { ...plan, actionRef: "unresolved-index:691" } : plan) },
+    { ...previous, plans: previous.plans.map((plan, i) => i === 26 ? { ...plan, proposalKey: plans[0]!.proposalKey } : plan) },
+  ]) expect(selectMechanicalPlanRepair({ ...options, repair: { ...repair, previousOutput } })).toBeUndefined();
+  const globalSchema = declaredRandomPlanSchema.superRefine((_value, context) => context.addIssue({ code: "custom", path: [], message: "joint failure" }));
+  expect(selectMechanicalPlanRepair({ ...options, schema: globalSchema, repair: { ...repair, previousOutput: { kind: "commit_plans", plans } } })).toBeUndefined();
+});
+
+it("includes declaration owners and consumers when the selected owner is malformed", () => {
+  const plans = [draft("ref:action:a", "a"), draft("ref:action:b", "b"), draft("ref:action:c", "c")];
+  const previous = { kind: "commit_plans" as const, plans: [
+    { ...plans[0], causes: [{ kind: "invalid_cause_selection", ref: "unresolved-index:691" }] },
+    { ...plans[1], primaryEffect: { ...plans[1]!.primaryEffect, conditionRef: { proposalKey: "effect-a" } } }, plans[2],
+  ] };
+  const selection = selectMechanicalPlanRepair({ schema: resolutionPlanCommitDirectiveSchema,
+    repair: { attempt: 1, scope: "component", targetIds: ["a", "b", "c"], previousOutput: previous,
+      issues: [{ code: "schema.invalid_union", class: "structure", path: ["plans", 0, "causes"], message: "invalid source" }] },
+    actionIds: plans.map(plan => String(plan.actionRef)), actionIdFor: plan => String(plan.actionRef), sourceHash: () => "source", expectedSourceHash: "source" })!;
+  expect(selection.binding.originalOrdinals).toEqual([0, 1]);
+  expect(selection.merge({ kind: "commit_plans", plans: plans.slice(0, 2) })).toEqual({ kind: "commit_plans", plans });
+});
+
+it.each(["baseline", "valid", "malformed-baseline", "malformed-valid", "wrong-owner-then-valid", "conflict-then-valid", "conflict-exhausted"])("repairs a subset and revalidates every plan before real atomic execution: %s", async mode => {
+  const baseline = mode.endsWith("baseline");
+  const twoCalls = ["valid", "baseline", "malformed-valid", "malformed-baseline"].includes(mode);
   let attempts = 0;
   const contexts: unknown[] = [];
   const outputs: ReturnType<typeof resolutionPlanCommitDirectiveSchema.parse>[] = [];
@@ -96,7 +146,10 @@ it.each(["baseline", "valid", "wrong-owner-then-valid", "conflict-then-valid", "
       plans[0] = structuredClone(prior.plans.find(plan => plan.proposalKey === "plan-player")!);
     }
     const output = { kind: "commit_plans" as const, plans };
-    outputs.push(structuredClone(output)); return output;
+    outputs.push(structuredClone(output));
+    if (attempts === 1 && mode.startsWith("malformed")) return { ...output, plans: output.plans.map((plan, i) => i === keeperIndex
+      ? { ...plan, causes: [{ kind: "invalid_cause_selection", ref: "unresolved-index:691" }], invalidCauseSelection: { rejectedIndex: 691 } } : plan) };
+    return output;
   }, undefined, false);
   const generate = provider.generateStructured.bind(provider);
   provider.generateStructured = request => generate(request.schemaName === "truth_resolution_plan_commit"
@@ -104,7 +157,7 @@ it.each(["baseline", "valid", "wrong-owner-then-valid", "conflict-then-valid", "
   const base = FULL_CATALOG_ALGORITHM_REF;
   const truth = defineAlgorithmRef({ role: "truth-resolution", id: "source-inventory-truth-resolution", version: "1", contractVersion: TRUTH_RESOLUTION_CONTRACT_VERSION,
     config: { randomScheduling: ORDERED_RANDOM_SCHEDULING, sourceInventory: RESOLUTION_SOURCE_INVENTORY,
-      ...(mode === "baseline" ? {} : { mechanicalPlanRepair: MECHANICAL_PLAN_REPAIR }) }, children: base.children.truthResolution!.children });
+      ...(baseline ? {} : { mechanicalPlanRepair: MECHANICAL_PLAN_REPAIR }) }, children: base.children.truthResolution!.children });
   const ref = defineAlgorithmRef({ ...base, children: { ...base.children, truthResolution: truth } });
   const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 31, modelCatalog: provider.catalog });
   const engine = new SimulationEngine(definition, registerBuiltinAlgorithms().create(ref, { provider }));
@@ -121,9 +174,9 @@ it.each(["baseline", "valid", "wrong-owner-then-valid", "conflict-then-valid", "
     expect(Object.values(completed.state.truth.conditions).filter(condition => condition.label === "Watching")).toHaveLength(2);
     expect(replaySimulationState(completed.state)).toEqual(completed.state);
   }
-  expect(attempts).toBe(mode === "valid" || mode === "baseline" ? 2 : 3);
+  expect(attempts).toBe(twoCalls ? 2 : 3);
   const views = contexts as Array<{ state: { canonicalTruth: unknown; actionSet: { assigned: unknown[]; available: unknown[] } }; repair: { previousOutput: { plans: unknown[] }; issues: Array<{ reason: string }>; planReplacement: { retainedPlanCount: number } } }>;
-  expect(views.map(value => value.state.actionSet.assigned.length)).toEqual(mode === "baseline" ? [2, 2] : mode === "valid" ? [2, 1] : [2, 1, 2]);
+  expect(views.map(value => value.state.actionSet.assigned.length)).toEqual(baseline ? [2, 2] : twoCalls ? [2, 1] : [2, 1, 2]);
   for (const current of views.slice(1)) {
     expect(current.state.canonicalTruth).toEqual(views[0]!.state.canonicalTruth);
     expect(current.state.actionSet.available).toEqual(views[0]!.state.actionSet.available);
@@ -136,11 +189,12 @@ it.each(["baseline", "valid", "wrong-owner-then-valid", "conflict-then-valid", "
   if (mode.startsWith("conflict")) expect(views[2]!.repair.issues.some(issue => /duplicate|declared|declaration/.test(issue.reason))).toBe(true);
 });
 
-it.each([{ relations: false, compact: false }, { relations: true, compact: false }, { relations: false, compact: true }, { relations: true, compact: true }])("preserves full joint validation through indexed physical batching and scoped repair (%j)", async ({ relations, compact }) => {
+it.each([{ relations: false, compact: false, malformedCause: true }, { relations: false, compact: false }, { relations: true, compact: false }, { relations: false, compact: true }, { relations: true, compact: true }])("preserves full joint validation through indexed physical batching and scoped repair (%j)", async ({ relations, compact, malformedCause }) => {
   let planningCalls = 0, reviewedPlans = 0;
   const physicalSizes: number[] = [];
   const provider = new ScriptedModelProvider(({ context }) => {
     const task = (context as { task: { planningWorklist: { actions: Array<{ actionIndex: number; action: { actionRef: string } }>; targetChoices: Array<{ targetIndex: number; handle: string }> };
+      planCauseChoices?: { choices: Array<{ kind: string; ref: string }> };
       planningRelations?: { conditionDurations: Array<{ conditionProfileRef: string | null; durationProfileRef: string }> } } }).task;
     const worklist = task.planningWorklist;
     planningCalls++; physicalSizes.push(worklist.actions.length);
@@ -153,12 +207,17 @@ it.each([{ relations: false, compact: false }, { relations: true, compact: false
           : { conditionProfileRef: null, durationProfileRef: "ref:mechanic:brief" }) }, secondaryEffect: null, threatenedEffect: null,
       visibility: "full", mode: "automatic", difficulty: null, ...(relations ? { actorRatingPosition: null } : { actorRatingRef: null }),
       causes: [{ kind: "action", ref: planningCalls === 1 && index === 1 ? worklist.actions[0]!.action.actionRef : row.action.actionRef }] }));
+    if (malformedCause) return { kind: "commit_plans", plans: plans.map((plan, index) => {
+      const projected: Record<string, unknown> = { ...plan, causeIndices: [planningCalls === 1 && index === 1 ? 691
+        : task.planCauseChoices!.choices.findIndex(choice => choice.kind === "action" && choice.ref === worklist.actions[index]!.action.actionRef)] };
+      delete projected.causes; return projected;
+    }) };
     return { kind: "commit_plans", plans: compact ? plans.map(plan => ["automatic", plan.actionIndex, plan.proposalKey, plan.targetIndices,
       plan.means.map(mean => [mean.source, mean.description]), plan.factors, plan.risk,
       { ...plan.primaryEffect, sourceRefs: plan.primaryEffect.sourceRefs.map(source => [source.kind, source.ref]) }, null, null, plan.visibility,
       plan.causes.map(source => [source.kind, source.ref]), {}]) : plans };
   }, undefined, false);
-  const coordinator = new TruthBatchCoordinator(dependentFieldsProvider(indexedReviewedPlanningProvider(provider, false, false, false, false, false, relations, compact)), 12, 2, SHARED_BATCH_CONTEXT_CODEC, TRUTH_BATCH_REQUEST_CONTRACT, "tail-v1");
+  const coordinator = new TruthBatchCoordinator(dependentFieldsProvider(indexedReviewedPlanningProvider(provider, false, false, malformedCause, false, false, relations, compact)), 12, 2, SHARED_BATCH_CONTEXT_CODEC, TRUTH_BATCH_REQUEST_CONTRACT, "tail-v1");
   const logical: StructuredModelProvider = { catalog: provider.catalog, availableProfileSummaries: provider.availableProfileSummaries.bind(provider), assertProfilesAvailable: provider.assertProfilesAvailable.bind(provider),
     generateStructured: request => {
       if (request.role === "causal-verifier") {
@@ -172,7 +231,7 @@ it.each([{ relations: false, compact: false }, { relations: true, compact: false
   const actions = ["player", "keeper"].map(actorId => ({ id: `act-${actorId}`, actorId, baseRevision: state.revision, rawText: "Observe.", goal: "Observe", means: null, targetIds: [] }));
   const groundings = actions.map(action => ({ kind: "action" as const, id: action.id, actorId: action.actorId, reads: [], writes: [], audienceAgentIds: [], sharedResourceClaims: [], globalFallback: false }));
   const before = contentHash({ state, actions, groundings });
-  const engine = new TruthEngine(logical, { mechanicalPlanRepair: MECHANICAL_PLAN_REPAIR, includeResolutionMeansSources: true, includeActivityTemporalEvidence: true });
+  const engine = new TruthEngine(logical, { mechanicalPlanRepair: MECHANICAL_PLAN_REPAIR, includeResolutionMeansSources: true, includeActivityTemporalEvidence: true, includePlanCauseScope: malformedCause });
   await expect(engine.resolve({ definition, state, initialActions: actions, groundings, identityOwner: "joint-test",
     temporalBoundary: { fromElapsedSeconds: 0, toElapsedSeconds: 5, deltaSeconds: 5, reasons: [], dueActivityIds: [], dueTimerIds: [], dueConditionIds: [] },
     modelWorkset: { state, initialActions: actions, availableActions: actions, availableDependencies: groundings },

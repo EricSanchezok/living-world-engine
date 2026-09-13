@@ -2391,7 +2391,7 @@ export class TruthEngine {
       actions,
       checkRequests: requests,
     });
-    const draftActionId = (draft: ResolutionPlanDraft): string => {
+    const draftActionId = (draft: Pick<ResolutionPlanDraft, "actionRef">): string => {
       if (isProposalReference(draft.actionRef)) throw new Error(`resolution plan actionRef cannot be a proposal`);
       const resolved = planReferenceResolver.resolve(draft.actionRef, "source");
       if (resolved.kind !== "action") throw new Error(`resolution plan actionRef must reference an action`);

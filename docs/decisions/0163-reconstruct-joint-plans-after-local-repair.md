@@ -23,7 +23,7 @@ The deterministic materializer reports plan-local failures with complete joint s
 
 ## Decision Outcome
 
-Use reconstruction followed by complete joint validation as an opt-in experimental recovery strategy. Select a strict subset only from unambiguous plan ordinals in a complete typed candidate, including its transitive proposal declaration/reference dependencies. Keep full recovery for failures without that evidence. This changes repair output responsibility, not the first batch or world scope.
+Use reconstruction followed by complete joint validation as an opt-in experimental recovery strategy. Select a strict subset only from unambiguous plan ordinals in an identity-complete candidate, including its transitive proposal declaration/reference dependencies. Selected drafts may be structurally invalid; retained drafts pass the invocation schema and the reconstructed candidate passes complete joint validation. Keep full recovery for failures without that evidence. This changes repair output responsibility, not the first batch or world scope.
 
 ## Pros and Cons of the Options
 

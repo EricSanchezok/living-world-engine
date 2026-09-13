@@ -1,5 +1,5 @@
-import type { z } from "zod";
-import type { resolutionDirectiveSchema, ResolutionPlanDraft } from "../contracts/llm-schemas";
+import { z } from "zod";
+import { resolutionPlanDraftSchema, type resolutionDirectiveSchema, type ResolutionPlanDraft } from "../contracts/llm-schemas";
 import { contentHash } from "../models/model-audit";
 import { ModelConfigurationError } from "../models/model-provider";
 import type { SemanticRepairContext } from "../models/semantic-repair";
@@ -7,30 +7,38 @@ import { LOGICAL_CANDIDATE_REPAIR_NOTICE } from "../prompts/logical-repair-conte
 
 type Directive = z.infer<typeof resolutionDirectiveSchema>;
 export const MECHANICAL_PLAN_REPAIR_NOTICE = "repair.previousOutput is the complete rejected logical candidate, not committed evidence. Issue paths index that original candidate. Generate exactly one replacement plan for each currently assigned action and no other plans. The engine retains unselected drafts unchanged, restores the original order, and revalidates the complete joint candidate before review or commitment. Use the full original action and world evidence; do not change mode, invent effects, omit supported meaning, or treat an unfinished action as complete merely to satisfy validation.";
-export const MECHANICAL_PLAN_REPAIR = `mechanical-plan-replacement-v1@${contentHash(MECHANICAL_PLAN_REPAIR_NOTICE).slice(0, 16)}`;
+export const MECHANICAL_PLAN_REPAIR = `mechanical-plan-replacement-v2@${contentHash(MECHANICAL_PLAN_REPAIR_NOTICE).slice(0, 16)}`;
+const candidateEnvelope = z.strictObject({ kind: z.literal("commit_plans"), plans: z.array(z.unknown()).min(1) });
+const planIdentity = resolutionPlanDraftSchema.options[0].pick({ proposalKey: true, actionRef: true }).strip();
 
-/** Select only an unambiguous subset of a complete, typed rejected candidate.
+/** Select only an unambiguous subset of an identity-complete rejected candidate.
  * Selection grants no validity to retained drafts: the caller validates the
  * reconstructed full candidate with its original action and reference scope. */
 export function selectMechanicalPlanRepair(input: {
   repair: SemanticRepairContext;
   schema: z.ZodType<Directive>;
   actionIds: readonly string[];
-  actionIdFor: (draft: ResolutionPlanDraft) => string;
+  actionIdFor: (draft: Pick<ResolutionPlanDraft, "actionRef">) => string;
   sourceHash: () => string;
   expectedSourceHash: string;
 }) {
   if (input.repair.attempt === 0 || input.repair.issues.length === 0) return undefined;
   if (input.sourceHash() !== input.expectedSourceHash) throw new ModelConfigurationError("mechanical plan repair source snapshot changed");
-  const parsed = input.schema.safeParse(input.repair.previousOutput);
-  if (!parsed.success || parsed.data.kind !== "commit_plans" || parsed.data.plans.length !== input.actionIds.length) return undefined;
-  const original = structuredClone(parsed.data);
+  const envelope = candidateEnvelope.safeParse(input.repair.previousOutput);
+  if (!envelope.success || envelope.data.plans.length !== input.actionIds.length) return undefined;
+  const original = structuredClone(envelope.data);
+  const identities = original.plans.map(plan => planIdentity.safeParse(plan));
+  if (identities.some(identity => !identity.success)) return undefined;
+  const identityValues = identities.map(identity => identity.data!);
   let actionIds: string[];
-  try { actionIds = original.plans.map(input.actionIdFor); } catch { return undefined; }
-  if (new Set(actionIds).size !== input.actionIds.length || new Set(original.plans.map(plan => plan.proposalKey)).size !== original.plans.length ||
+  try { actionIds = identityValues.map(input.actionIdFor); } catch { return undefined; }
+  if (new Set(actionIds).size !== input.actionIds.length || new Set(identityValues.map(plan => plan.proposalKey)).size !== original.plans.length ||
     input.actionIds.some(id => !actionIds.includes(id))) return undefined;
   const indices = new Set<number>();
-  for (const issue of input.repair.issues) {
+  const parsed = input.schema.safeParse(original);
+  // Schema failures must also have plan-local ownership, including failures
+  // not yet reported by the downstream materializer. Root failures fall back.
+  for (const issue of [...input.repair.issues, ...(parsed.success ? [] : parsed.error.issues)]) {
     const [field, index] = issue.path;
     if (field !== "plans" || typeof index !== "number" || !Number.isSafeInteger(index) || index < 0 || index >= original.plans.length) return undefined;
     indices.add(index);
@@ -63,11 +71,16 @@ export function selectMechanicalPlanRepair(input: {
     }
   }
   if (indices.size === 0 || indices.size === original.plans.length) return undefined;
+  // Do not infer that an unreported draft is structurally valid. Use the exact
+  // invocation schema, including optional contracts such as random completion.
+  for (const [index, plan] of original.plans.entries()) {
+    if (!indices.has(index) && !input.schema.safeParse({ ...original, plans: [plan] }).success) return undefined;
+  }
   const selectedActionIds = actionIds.filter((_id, index) => indices.has(index));
   const selected = new Set(selectedActionIds);
   const sourceHash = input.sourceHash();
   const binding = { contractVersion: MECHANICAL_PLAN_REPAIR, sourceHash, previousOutputHash: contentHash(original),
-    replacementActionRefs: original.plans.filter((_plan, index) => indices.has(index)).map(plan => plan.actionRef),
+    replacementActionRefs: identityValues.filter((_plan, index) => indices.has(index)).map(plan => plan.actionRef),
     originalOrdinals: [...indices].sort((a, b) => a - b), retainedPlanCount: original.plans.length - indices.size };
   return {
     selectedActionIds, binding,
@@ -80,7 +93,10 @@ export function selectMechanicalPlanRepair(input: {
         if (!selected.has(id) || replacements.has(id)) throw new Error("mechanical plan repair changed or repeated its assigned action identity");
         replacements.set(id, structuredClone(draft));
       }
-      return { ...structuredClone(original), plans: original.plans.map((plan, index) => replacements.get(actionIds[index]!) ?? structuredClone(plan)) };
+      const complete = { ...structuredClone(original), plans: original.plans.map((plan, index) => replacements.get(actionIds[index]!) ?? structuredClone(plan)) };
+      // Validate without replacing retained drafts with schema-transformed data.
+      input.schema.parse(complete);
+      return complete as Directive;
     },
   };
 }

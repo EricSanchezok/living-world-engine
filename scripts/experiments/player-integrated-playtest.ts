@@ -7,6 +7,7 @@ import { buildIntegratedPlayerWorld, INTEGRATED_PLAYER_WORLD_RECIPE } from "./pl
 import { assertFiniteWorkWorld } from "./step-finite-work-world";
 import { integratedPlayerAlgorithmRef, registerIntegratedPlayerAlgorithm } from "../../src/engine/benchmarks/step-efficiency/integrated-player-algorithm";
 import { standardEagerReferenceAlgorithmRef } from "../../src/engine/algorithms/standard-composition";
+import { localPlanRepairAlgorithmRef } from "../../src/engine/benchmarks/step-efficiency/local-plan-repair-algorithm";
 import { globalMeansPoolRequest } from "../../src/engine/benchmarks/step-efficiency/global-means-pool";
 import { assertNonthinkingWorld } from "../../src/engine/benchmarks/step-efficiency/nonthinking-world";
 import { loadWorldScript, loadWorldTemplate } from "../../src/script/world-loader";
@@ -42,8 +43,9 @@ const checkedCodeRevision = () => {
 };
 const selectedAlgorithm = (selection: unknown) => {
   if (selection === "standard" || selection === "standard-pooled") return standardEagerReferenceAlgorithmRef();
+  if (selection === "standard-local-repair") return localPlanRepairAlgorithmRef();
   if (selection === "integrated") return integratedPlayerAlgorithmRef();
-  throw new Error("Expected explicit standard, standard-pooled or integrated composition selection");
+  throw new Error("Expected explicit standard, standard-pooled, standard-local-repair or integrated composition selection");
 };
 const sourceHashes = () => Object.fromEntries(["scripts/experiments/player-integrated-playtest.ts",
   "scripts/experiments/player-integrated-world.ts", "scripts/experiments/step-finite-work-world.ts",
@@ -51,6 +53,8 @@ const sourceHashes = () => Object.fromEntries(["scripts/experiments/player-integ
   "scripts/operations/player-feedback-playtest.ts",
   "src/engine/benchmarks/step-efficiency/integrated-player-algorithm.ts",
   "src/engine/algorithms/standard-composition.ts",
+  "src/engine/benchmarks/step-efficiency/local-plan-repair-algorithm.ts",
+  "src/engine/mechanics/mechanical-plan-repair.ts",
   "src/engine/benchmarks/step-efficiency/global-means-pool.ts",
   "src/engine/prompts/shared/global-means-pool.md",
   "src/engine/mechanics/plan-source-selectors.ts",
@@ -217,7 +221,7 @@ export async function runIntegratedPlayer(root: string) {
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const [mode, directory, registryRoot, snapshotHash, algorithmSelection = "integrated", ...extra] = process.argv.slice(2);
   if (!directory || extra.length || mode === "prepare" && (!registryRoot || !snapshotHash) || mode === "run" && registryRoot || !["prepare", "run"].includes(mode)) {
-    throw new Error("Expected prepare output-directory registry-data-root snapshot-hash [standard|standard-pooled|integrated] | run prepared-directory");
+    throw new Error("Expected prepare output-directory registry-data-root snapshot-hash [standard|standard-pooled|standard-local-repair|integrated] | run prepared-directory");
   }
   (mode === "prepare" ? prepareIntegratedPlayer(path.resolve(directory), registryRoot!, snapshotHash!, algorithmSelection) : runIntegratedPlayer(path.resolve(directory)))
     .then(result => { if (result) process.stdout.write(`${JSON.stringify({ prepared: true, worldHash: result.worldHash, newHttp: 0 })}\n`); })
