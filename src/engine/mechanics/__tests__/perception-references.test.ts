@@ -34,10 +34,49 @@ function request(overrides: Record<string, unknown> = {}) {
     ratingRef: "ref:rating:resolve:player",
     difficulty: { kind: "environment", band: "easy", source: { kind: "law", ref: "ref:law:time-passes" } },
     mode: "normal", stakes: "Whether the existing wear on the key's teeth can be seen without using the lock.", visibility: "full",
-    causes: [{ kind: "action", ref: "ref:action:inspect-key" }], ...overrides };
+    causes: [{ kind: "action", ref: "ref:action:inspect-key" }, { kind: "law", ref: "ref:law:time-passes" }], ...overrides };
 }
 
 function directive(check: Record<string, unknown>) { return { kind: "request_checks", requests: [check] }; }
+
+it("rejects an assigned onset check without a world basis before making it a fixed commitment", async () => {
+  let calls = 0;
+  const bad = request({ actorRef: "ref:entity:keeper", ratingRef: "ref:rating:resolve:keeper",
+    causes: [{ kind: "action", ref: "ref:action:inspect-key" }] });
+  const f = fixture(() => { calls++; return directive(bad); });
+  f.input.perceptionTargets = [{ observerId: "keeper", sourceActionId: "inspect-key" }];
+  const before = contentHash(f.input);
+  await expect(f.run()).rejects.toThrow("world Fact or authored Law");
+  expect(calls).toBe(1);
+  expect(contentHash(f.input)).toBe(before);
+});
+
+it("repairs missing world evidence before RNG and produces the same fixed checks as a clean request", async () => {
+  const good = request({ actorRef: "ref:entity:keeper", ratingRef: "ref:rating:resolve:keeper", causes: [
+    { kind: "action", ref: "ref:action:inspect-key" }, { kind: "law", ref: "ref:law:time-passes" },
+  ] });
+  const bad = { ...good, causes: [{ kind: "action", ref: "ref:action:inspect-key" }] };
+  let repairCalls = 0, cleanCalls = 0;
+  const repaired = fixture(r => {
+    repairCalls++;
+    if (repairCalls === 1) return directive(bad);
+    if (repairCalls === 2) {
+      const context = r.context as { state: { committedCheckRequests: unknown[]; checkResults: unknown[] }; repair: { issues: Array<{ code: string; path: unknown }> } };
+      expect(context.state.committedCheckRequests).toEqual([]);
+      expect(context.state.checkResults).toEqual([]);
+      expect(context.repair.issues).toEqual([expect.objectContaining({ code: "perception.missing_world_basis", path: ["requests", 0, "causes"] })]);
+      return directive(good);
+    }
+    return { kind: "done" };
+  }, 1);
+  const clean = fixture(() => cleanCalls++ === 0 ? directive(good) : { kind: "done" });
+  for (const f of [clean, repaired]) f.input.perceptionTargets = [{ observerId: "keeper", sourceActionId: "inspect-key" }];
+  const a = await clean.run(), b = await repaired.run();
+  expect(repairCalls).toBe(3);
+  expect(b.requests).toEqual(a.requests);
+  expect(b.checks).toEqual(a.checks);
+  expect(b.rng).toEqual(a.rng);
+});
 
 const independentStakes = [
   "Whether the keeper sees wear on the key's teeth while the player examines it.",
@@ -348,7 +387,7 @@ it.each(["ref:entity:key", null])("materializes the explicit target %s and exact
   expect(result.requests).toHaveLength(1);
   expect(result.requests[0]).toMatchObject({ actorId: "player", targetId: targetRef === null ? null : "key", ratingId: "resolve:player",
     modifier: 2, modifierSources: [{ kind: "rating", id: "resolve:player", amount: 2 }], stakes: check.stakes,
-    causes: [{ kind: "action", id: "inspect-key" }], phase: "perception" });
+    causes: [{ kind: "action", id: "inspect-key" }, { kind: "law", id: "time-passes" }], phase: "perception" });
   expect(result.checks).toHaveLength(1);
   expect(result.rng.draws).toBeGreaterThan(f.input.state.truth.rng.draws);
   expect(contentHash(f.input.state)).toBe(source);

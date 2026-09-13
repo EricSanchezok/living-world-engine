@@ -68,6 +68,13 @@ export function perceptionDraftRelationIssues(
     if (proposals.has(draft.proposalKey)) issue("perception.duplicate_proposal", ["proposalKey"], draft.proposalKey, [], "duplicate check proposalKey");
     proposals.add(draft.proposalKey);
     if (targets !== undefined) {
+      // Every fixed check for a scheduled receipt must satisfy its eventual provenance contract.
+      // Reject before RNG: a later report cannot add causes to an immutable commitment.
+      if (!draft.causes.some(cause => cause.kind === "fact" || cause.kind === "law")) {
+        issues.push({ code: "perception.missing_world_basis", class: "semantic", path: ["requests", index, "causes"],
+          originalValue: draft.causes,
+          message: `Check ${draft.proposalKey}: an assigned onset check must cite an existing world Fact or authored Law in causes, in addition to its assigned source Action. Its fixed result must be usable by that observer's later receipt. Select a genuinely supporting basis from the complete source catalog; the action's intended result or a difficulty source alone is not this causal basis. Do not add an irrelevant citation or invent evidence merely to retain a check. If the world does not justify the uncertainty, reconsider the need for that check without fabricating a perception result.` });
+      }
       const assigned = typeof draft.actorRef === "string" ? actionsByObserver.get(draft.actorRef) : undefined;
       if (!assigned) {
         issue("perception.unassigned_observer", ["actorRef"], draft.actorRef, [...actionsByObserver.keys()],
