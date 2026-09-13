@@ -6,6 +6,7 @@ import Ajv from "ajv";
 import { perceptionCheckDomainsSchema } from "../../src/engine/benchmarks/step-efficiency/perception-check-domains";
 import { perceptionCatalogTransport, PERCEPTION_CATALOG_TRANSPORT } from "../../src/engine/benchmarks/step-efficiency/perception-catalog-transport";
 import { perceptionObserverGroups, perceptionAssignmentAccepted } from "../../src/engine/benchmarks/step-efficiency/perception-observer-groups";
+import { perceptionSourceIndexRequest } from "../../src/engine/benchmarks/step-efficiency/perception-source-index";
 import { perceptionDirectiveSchema } from "../../src/engine/contracts/llm-schemas";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { loadModelCatalog } from "../../src/engine/models/model-catalog";
@@ -35,13 +36,15 @@ When returning done, reports may mix perceived and no_stimulus; decide each pair
 
 /** Complete initial perception source, B/C/C/B; no repair, continuation or world commit. */
 export async function runPerceptionCheckProbe(argv: string[]) {
-  const [sourceRoot, output, mode = "preflight", candidate = "check-domains"] = argv;
-  if (!sourceRoot || !output || argv.length > 4 || !["preflight", "run"].includes(mode) ||
-    !["check-domains", "visibility-branches", "catalog-records", "observer-groups"].includes(candidate)) throw new Error("Expected source-player-directory output-directory [preflight|run] [check-domains|visibility-branches|catalog-records|observer-groups]");
+  const [sourceRoot, output, mode = "preflight", candidate = "check-domains", priorGroupRoot] = argv;
+  if (!sourceRoot || !output || argv.length > 5 || !["preflight", "run"].includes(mode) ||
+    !["check-domains", "visibility-branches", "catalog-records", "observer-groups", "observer-source-index"].includes(candidate) ||
+    (candidate === "observer-source-index") !== Boolean(priorGroupRoot)) throw new Error("Expected source-player-directory output-directory [preflight|run] candidate [prior-group-directory for observer-source-index]");
   const codeRevision = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
   const patch = execFileSync("git", ["diff", "--binary", "HEAD"], { encoding: "utf8" });
   const producerFiles = [process.argv[1]!, "src/engine/benchmarks/step-efficiency/perception-check-domains.ts", "package-lock.json",
     "src/engine/benchmarks/step-efficiency/perception-observer-groups.ts",
+    ...(candidate === "observer-source-index" ? ["src/engine/benchmarks/step-efficiency/perception-source-index.ts"] : []),
     ...(candidate === "catalog-records" ? ["src/engine/benchmarks/step-efficiency/perception-catalog-transport.ts", "src/engine/mechanics/shared-catalog-records.ts"] : [])];
   const producerHashes = () => Object.fromEntries(producerFiles.map(file => [file, contentHash(readFileSync(file, "utf8"))]));
   const boundProducer = producerHashes();
@@ -68,11 +71,19 @@ export async function runPerceptionCheckProbe(argv: string[]) {
       targets: rows(record(record(record(source.context).task).assignment).perceptionTargets) };
   });
   if (sources.length !== 1) throw new Error("Missing initial perception source");
+  const priorManifest = priorGroupRoot ? record(read(path.join(priorGroupRoot, "manifest.json"))) : null;
+  if (priorManifest && (priorManifest.protocol !== "perception-observer-groups-paired-v1" || priorManifest.sourceEventsHash !== contentHash(events))) throw new Error("Different parent group source");
+  const priorBodies = new Map<string, unknown>();
+  if (priorGroupRoot && priorManifest) for (const ordinal of [0, 1]) for (let group = 0; group < 5; group++) {
+    const id = `${ordinal}-C-${group}`, body = read(path.join(priorGroupRoot, `${id}-http-request.json`));
+    if (contentHash(body) !== record(priorManifest.requestHashes)[id]) throw new Error("Parent group HTTP changed");
+    priorBodies.set(`${ordinal}-B-${group}`, body);
+  }
   const catalog = loadModelCatalog(path.join(sourceRoot, "models.yaml"));
   const registry = new ModelRegistry(catalog, path.join(sourceRoot, "data"));
   const network = createModelFetchResolver(process.env), captured = new Map<string, unknown>();
   let phase: "capture" | "run" = "capture", totalHttp = 0;
-  const maxHttp = candidate === "observer-groups" ? 12 : 4;
+  const maxHttp = candidate === "observer-source-index" ? 20 : candidate === "observer-groups" ? 12 : 4;
   const observer = new RecordingRuntimeObserver({ mode: "full" });
   const gatewayFor = (active: string) => createModelGateway(catalog, process.env, { registry: { catalog,
     capture: async hash => registry.snapshot(hash ?? String(sources[0]!.source.registrySnapshotHash)),
@@ -87,8 +98,9 @@ export async function runPerceptionCheckProbe(argv: string[]) {
       if (arm === "C" && candidate === "catalog-records") {
         body = perceptionCatalogTransport(body, sources[0]!.source.context);
       }
-      if (arm === "B" && contentHash(body) !== contentHash(sources[0]!.body)) {
-        save(output, `${active}-source-body.json`, sources[0]!.body);
+      const baselineBody = priorManifest ? priorBodies.get(active) : sources[0]!.body;
+      if (arm === "B" && contentHash(body) !== contentHash(baselineBody)) {
+        save(output, `${active}-source-body.json`, baselineBody);
         save(output, `${active}-mismatch-body.json`, body);
         throw new ModelConfigurationError("Baseline HTTP differs from source");
       }
@@ -108,8 +120,9 @@ export async function runPerceptionCheckProbe(argv: string[]) {
     const p = row.source;
     if (p.modelCatalogHash !== catalog.hash || p.modelId !== "deepseek-flash") throw new Error("Source model binding drift");
     registry.snapshot(String(p.registrySnapshotHash));
-    const contexts = arm === "C" && candidate === "observer-groups" ? perceptionObserverGroups(p.context, 7) : [p.context];
-    if (candidate === "observer-groups" && (row.targets.length !== 35 || (arm === "C" && contexts.length !== 5))) throw new Error("Observer screen requires the frozen 35-observer source");
+    const grouped = candidate === "observer-source-index" || (arm === "C" && candidate === "observer-groups");
+    const contexts = grouped ? perceptionObserverGroups(p.context, 7) : [p.context];
+    if (grouped && (row.targets.length !== 35 || contexts.length !== 5)) throw new Error("Observer screen requires the frozen 35-observer source");
     return contexts.map((context, group) => {
     const id = `${ordinal}-${arm}${contexts.length > 1 ? `-${group}` : ""}`;
     const workloadId = String(record(record(p.context).execution).instanceId), batchId = `perception-${candidate}-${id}`;
@@ -129,9 +142,9 @@ export async function runPerceptionCheckProbe(argv: string[]) {
         jsonObjectPostlude: `${p.jsonObjectPostlude ?? ""}${visibilityBranches}`,
         promptVersion: `${p.promptVersion}/perception-visibility-branches-v1@${contentHash(visibilityBranches).slice(0, 16)}` } : {}),
       ...(arm === "C" && candidate === "catalog-records" ? { promptVersion: `${p.promptVersion}/${PERCEPTION_CATALOG_TRANSPORT}` } : {}),
-      ...(arm === "C" && candidate === "observer-groups" ? { promptVersion: `${p.promptVersion}/observer-groups-7-v1` } : {}),
+      ...(grouped ? { promptVersion: `${p.promptVersion}/observer-groups-7-v1` } : {}),
     };
-    return { id, ordinal, arm, request };
+    return { id, ordinal, arm, request: arm === "C" && candidate === "observer-source-index" ? perceptionSourceIndexRequest(request) : request };
     });
   }));
   if (requests.length !== maxHttp) throw new Error("Unexpected physical request count");
@@ -141,11 +154,12 @@ export async function runPerceptionCheckProbe(argv: string[]) {
   }
   save(output, "manifest.json", { protocol: `perception-${candidate}-paired-v1`, candidate, mode,
     physicalTransportTransform: candidate === "catalog-records" ? PERCEPTION_CATALOG_TRANSPORT : null,
+    priorGroupManifestHash: priorManifest ? contentHash(priorManifest) : null,
     requestAuditBoundary: "Saved *-http-request.json and requestHashes bind the actual transmitted body. Gateway request audits precede the experimental physical transform; canonical output validation retains the complete original source catalog.",
     codeRevision, producerHashes: boundProducer, sourcePatchHash: contentHash(patch),
     runnerHash: contentHash(readFileSync(new URL(import.meta.url), "utf8")), sourceEventsHash: contentHash(events),
     catalogHash: catalog.hash, sourceCohort: 49, perceptionTargets: sources[0]!.targets.length, repetitionsPerArm: 2, maxNewHttp: maxHttp, maxRepairHttp: 0,
-    maxConcurrentHttp: candidate === "observer-groups" ? 5 : 1,
+    maxConcurrentHttp: candidate === "observer-groups" || candidate === "observer-source-index" ? 5 : 1,
     order: requests.map(entry => entry.id), requestHashes: Object.fromEntries([...captured].map(([id, body]) => [id, contentHash(body)])),
     sourceInvocations: sources.map(row => ({ sequence: row.event.sequence, id: row.event.correlation?.modelInvocationId, subject: row.source.subjectId, targets: row.targets })),
     qualification: "Source-level schema/reference and compiled-relation screen only; justified uncertainty and report semantics require separate review. All upstream work is imported; no player latency, persisted action completion or independent intent qualification is established." });
