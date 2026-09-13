@@ -4,9 +4,12 @@ import { contentHash } from "../../models/model-audit";
 import { ModelConfigurationError, type StructuredModelRequest } from "../../models/model-provider";
 
 const identityDescription = "Identity binding only: the introduced local entity denotes this canonical entity itself, not its owner, carrier, container or a distinct part of it. A visible hand is not identical to the whole person merely because it belongs to that person. Use null when the introduced referent has no established canonical counterpart. Existing observer-local identities remain available for the same referent; evidence-supported new appearances and unbound local identities are still allowed.";
-export const PERCEPTION_REPORT_DOMAINS = `perception-report-domains-v1@${contentHash(identityDescription).slice(0, 16)}`;
+export const PERCEPTION_REPORT_DOMAINS = `perception-report-domains-v2@${contentHash(identityDescription).slice(0, 16)}`;
 type ObjectValue = Record<string, unknown>;
 const sourceShape = z.looseObject({
+  task: z.looseObject({ assignment: z.looseObject({ perceptionTargets: z.array(z.looseObject({
+    targetIndex: z.number().int().nonnegative(), observerRef: z.string(), sourceActionRef: z.string(),
+  })) }) }),
   referenceCatalog: z.looseObject({ candidates: z.array(z.looseObject({
     handle: z.string(), kind: z.string(), allowedUses: z.array(z.string()), statePath: z.string().optional(),
   })) }),
@@ -14,7 +17,10 @@ const sourceShape = z.looseObject({
     canonicalTruth: z.looseObject({ entities: z.record(z.string(), z.unknown()), facts: z.record(z.string(), z.unknown()) }),
     world: z.looseObject({ laws: z.array(z.looseObject({ id: z.string() })) }),
     actors: z.array(z.looseObject({ availableLocalEntityRefs: z.array(z.string()) })),
-    committedCheckRequests: z.array(z.looseObject({ checkRef: z.string() })),
+    committedCheckRequests: z.array(z.looseObject({ checkRef: z.string(), actorRef: z.string(), phase: z.string(), stakes: z.string(),
+      causes: z.array(z.looseObject({ kind: z.string(), ref: z.string() })),
+    })),
+    checkResults: z.array(z.looseObject({ checkRef: z.string(), succeeded: z.boolean() })),
   }),
 });
 function object(value: unknown): ObjectValue {
@@ -28,7 +34,7 @@ function objects(value: unknown): ObjectValue[] {
 
 /** Complete field domains, without selecting an observer, event or semantic result. */
 export function perceptionReportDomainsSchema(context: unknown): Record<string, unknown> {
-  const { state, referenceCatalog: { candidates } } = sourceShape.parse(context);
+  const { state, referenceCatalog: { candidates }, task: { assignment: { perceptionTargets } } } = sourceShape.parse(context);
   const byHandle = new Map(candidates.map(candidate => [candidate.handle, candidate]));
   if (byHandle.size !== candidates.length || candidates.some(row => !row.handle.startsWith(`ref:${row.kind}:`))) {
     throw new ModelConfigurationError("perception report domains have duplicate or mismatched handles");
@@ -42,6 +48,18 @@ export function perceptionReportDomainsSchema(context: unknown): Record<string, 
   requireMembers("entity", Object.keys(state.canonicalTruth.entities));
   requireMembers("fact", Object.keys(state.canonicalTruth.facts));
   requireMembers("check", state.committedCheckRequests.map(check => check.checkRef));
+  const results = new Map(state.checkResults.map(check => [check.checkRef, check]));
+  if (results.size !== state.checkResults.length || results.size !== state.committedCheckRequests.length ||
+    state.committedCheckRequests.some(check => !results.has(check.checkRef))) {
+    throw new ModelConfigurationError("perception report has incomplete committed check results");
+  }
+  const assignments = new Set<string>();
+  for (const [index, target] of perceptionTargets.entries()) {
+    const pair = JSON.stringify([target.observerRef, target.sourceActionRef]);
+    if (target.targetIndex !== index || assignments.has(pair) || byHandle.get(target.observerRef)?.kind !== "entity" ||
+      byHandle.get(target.sourceActionRef)?.kind !== "action") throw new ModelConfigurationError("Invalid perception report assignment");
+    assignments.add(pair);
+  }
   requireMembers("local_entity", state.actors.flatMap(actor => actor.availableLocalEntityRefs));
   if (new Set(state.world.laws.map(law => law.id)).size !== state.world.laws.length ||
     candidates.filter(row => row.kind === "law").length !== state.world.laws.length ||
@@ -71,6 +89,22 @@ export function perceptionReportDomainsSchema(context: unknown): Record<string, 
   const reports = objects(object(object(object(terminal.properties).reports).items).oneOf);
   for (const report of reports) {
     const fields = object(report.properties);
+    const perceived = object(fields.kind).const === "perceived";
+    report.allOf = [perceptionTargets.length ? { anyOf: perceptionTargets.map(target => {
+      const assigned = state.committedCheckRequests.filter(check => check.phase === "perception" && check.actorRef === target.observerRef &&
+        check.causes.some(cause => cause.kind === "action" && cause.ref === target.sourceActionRef));
+      const usable = assigned.filter(check => check.causes.some(cause => cause.kind === "fact" || cause.kind === "law") &&
+        (!perceived || results.get(check.checkRef)!.succeeded));
+      return { properties: {
+        targetIndex: { const: target.targetIndex, description: JSON.stringify({
+          observerRef: target.observerRef, sourceActionRef: target.sourceActionRef,
+          committedChecks: assigned.map(check => ({ checkRef: check.checkRef, stakes: check.stakes,
+            succeeded: results.get(check.checkRef)!.succeeded })),
+        }) },
+        checkRefs: { uniqueItems: true, items: usable.length ? { enum: usable.map(check => check.checkRef) } : { not: {} },
+          ...(perceived && assigned.length ? { minItems: 1 } : {}) },
+      } };
+    }) } : { not: {} }];
     for (const evidence of objects(object(object(fields.evidence).items).oneOf)) {
       const properties = object(evidence.properties);
       bind(properties.ref, String(object(properties.kind).const), "assertion");
@@ -86,6 +120,12 @@ export function perceptionReportDomainsSchema(context: unknown): Record<string, 
     const localValue = objects(object(claim.value).oneOf).find(option => object(object(option.properties).kind).const === "local_entity")!;
     bind(object(localValue.properties).entityRef, "local_entity", "target");
   }
+  const reportArray = object(object(terminal.properties).reports);
+  reportArray.minItems = perceptionTargets.length;
+  reportArray.maxItems = perceptionTargets.length;
+  if (perceptionTargets.length) reportArray.allOf = perceptionTargets.map(target => ({ contains: {
+    type: "object", properties: { targetIndex: { const: target.targetIndex } }, required: ["targetIndex"],
+  } }));
   return { ...schema, $defs: definitions };
 }
 

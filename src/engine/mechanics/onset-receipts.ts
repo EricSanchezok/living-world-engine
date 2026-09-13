@@ -6,8 +6,9 @@ import {
 } from "../contracts/llm-schemas";
 import type { AgentActionProposal, D20CheckRequest, D20CheckResult, SimulationState } from "../contracts/model";
 import { projectPerceptionTargets, type PerceptionTarget } from "../contracts/perception-references";
-import { createTruthReferenceResolver } from "../contracts/prompts";
+import { createTruthReferenceResolver, validationIssues, type PromptValidationIssue } from "../contracts/prompts";
 import { contentHash } from "../models/model-audit";
+import { ModelCandidateValidationError } from "../models/model-provider";
 import type { WorldDefinition } from "../runtime/world-definition";
 import { materializePrivateStimuli } from "../cognition/observation-materialization";
 import { validateObservations } from "../cognition/observation";
@@ -39,6 +40,52 @@ export interface OnsetReceiptInput {
   targets: readonly PerceptionTarget[];
   requests: readonly D20CheckRequest[];
   checks: readonly D20CheckResult[];
+}
+
+/** Diagnose every check citation at the original draft position, before reports are sorted. */
+export function onsetReportCheckIssues(
+  input: OnsetReceiptInput,
+  reports: readonly OnsetPerceptionReportDraft[],
+): PromptValidationIssue[] {
+  const resolver = createTruthReferenceResolver({ ...input, checkRequests: input.requests,
+    observerIds: input.targets.map(target => target.observerId) });
+  const results = new Map(input.checks.map(result => [result.requestId, result]));
+  const issues: PromptValidationIssue[] = [];
+  for (const [index, report] of reports.entries()) {
+    const target = input.targets[report.targetIndex];
+    if (!target) continue; // The assignment coverage validator owns this error.
+    const assigned = input.requests.filter(request => request.phase === "perception" &&
+      request.actorId === input.state.agents[target.observerId]?.entityId &&
+      request.causes.some(cause => cause.kind === "action" && cause.id === target.sourceActionId));
+    const usable = assigned.filter(request => request.causes.some(cause => cause.kind === "fact" || cause.kind === "law") &&
+      results.has(request.id) && (report.kind !== "perceived" || results.get(request.id)!.succeeded));
+    const allowedHandles = usable.map(request => resolver.handleFor("check", request.id));
+    const add = (code: string, path: Array<string | number>, originalValue: unknown, message: string) => issues.push({
+      code, class: "semantic", path: ["reports", index, "checkRefs", ...path], originalValue, allowedHandles,
+      message: `Target ${report.targetIndex}, observer ${resolver.handleFor("entity", input.state.agents[target.observerId]!.entityId)}, source ${resolver.handleFor("action", target.sourceActionId)}: ${message} A fixed check is not transferable between observers or source actions and cannot establish a missing sensory route. Preserve the source meaning; do not invent a replacement check or change a verdict just to pass validation.`,
+    });
+    const seen = new Set<string>();
+    for (const [ordinal, ref] of report.checkRefs.entries()) {
+      try {
+        if (typeof ref !== "string" || resolver.resolve(ref, "assertion").kind !== "check") {
+          add("perception.report_check_reference", [ordinal], ref, "Select an existing committed check reference.");
+          continue;
+        }
+      } catch (error) {
+        issues.push(...validationIssues(error).map(issue => ({ ...issue,
+          path: ["reports", index, "checkRefs", ordinal, ...issue.path], allowedHandles })));
+        continue;
+      }
+      if (seen.has(ref)) add("perception.report_duplicate_check", [ordinal], ref, "This report repeats a check dependency.");
+      seen.add(ref);
+      if (!allowedHandles.includes(ref)) add("perception.report_check_binding", [ordinal], ref,
+        "This check has no matching observer, source action and world basis with a committed result usable by this verdict.");
+    }
+    if (report.kind === "perceived" && assigned.length > 0 && report.checkRefs.length === 0) {
+      add("perception.report_missing_check", [], report.checkRefs, "A perceived onset cannot bypass its committed perception checks.");
+    }
+  }
+  return issues;
 }
 
 /** Mechanical provenance validation does not certify the model's perception semantics. */
@@ -116,6 +163,8 @@ export function materializeOnsetPerceptionReceipts(
     reports.some(report => !input.targets[report.targetIndex])) {
     throw new Error("onset reports must cover every assigned target exactly once");
   }
+  const checkIssues = onsetReportCheckIssues(input, reports);
+  if (checkIssues.length) throw new ModelCandidateValidationError(checkIssues);
   const ordered = [...reports].sort((a, b) => a.targetIndex - b.targetIndex);
   const perceived = ordered.filter(report => report.kind === "perceived");
   if (perceived.some(report => report.stimulus.sourceEventRefs.length !== 0)) {

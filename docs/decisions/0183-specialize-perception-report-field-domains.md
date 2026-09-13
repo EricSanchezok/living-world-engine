@@ -23,7 +23,7 @@ A reference can exist in the global catalog and still be illegal in one output f
 
 ## Decision Outcome
 
-Use the isolated benchmark transformation defined by [0130](../specs/0130-perception-report-field-domains.md). Exact domains expose existing materializer permissions without selecting a semantic answer. Identity denotation remains model-owned and independently reviewed. The generation schema is an instruction to the hosted model; the original schema and materializer still own acceptance. No production algorithm selects the adapter implicitly.
+Use the isolated benchmark transformation defined by [0130](../specs/0130-perception-report-field-domains.md). Exact domains expose existing materializer permissions, assigned observer/action joins and committed-check outcomes without selecting a semantic answer. Per-target schema branches carry matching check identities, stakes and fixed outcomes and compile the same provenance and coverage constraints as canonical validation. Identity denotation remains model-owned and independently reviewed. The generation schema is an instruction to the hosted model; the original schema and materializer still own acceptance. No production algorithm selects the adapter implicitly.
 
 ## Pros and Cons of the Options
 
