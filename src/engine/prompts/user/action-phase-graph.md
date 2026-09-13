@@ -1,0 +1,1 @@
+Build a partially ordered attempt graph for each distinct assigned source action from the complete original source. Preserve concurrent attempts, delegated performers, future delivery, external prerequisites and unspoken intent. Exact source excerpts and graph validity do not establish world truth.

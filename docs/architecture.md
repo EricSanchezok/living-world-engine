@@ -32,6 +32,8 @@ Its optional [observer-local symbol codec](specs/0158-observer-local-perception-
 
 The separate [source-frame screen](specs/0159-source-onset-frame-screen.md) tests one shared onset interpretation per assigned source action before observer projection. Frames remain diagnostic artifacts and never become canonical events or perception receipts.
 
+The [action-phase graph screen](specs/0160-action-phase-graph-screen.md) exposes completion dependencies and external prerequisites between open attempted steps. Its initial frontier is a deterministic reading of an untrusted graph, with no execution or commit authority.
+
 ## State and policies
 
 Action Compilation specializes [empty shared-resource domains](specs/0111-specialize-empty-resource-pool-domain.md) from its bound source state; representation adapters preserve that request schema through initial and repair calls.
