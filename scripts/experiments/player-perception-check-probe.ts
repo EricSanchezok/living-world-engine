@@ -7,6 +7,7 @@ import { perceptionCheckDomainsSchema } from "../../src/engine/benchmarks/step-e
 import { perceptionCatalogTransport, PERCEPTION_CATALOG_TRANSPORT } from "../../src/engine/benchmarks/step-efficiency/perception-catalog-transport";
 import { perceptionObserverGroups, perceptionAssignmentAccepted } from "../../src/engine/benchmarks/step-efficiency/perception-observer-groups";
 import { perceptionSourceIndexRequest } from "../../src/engine/benchmarks/step-efficiency/perception-source-index";
+import { perceptionSemanticDraftRequest, perceptionSemanticDraftSchema } from "../../src/engine/benchmarks/step-efficiency/perception-semantic-draft";
 import { perceptionDirectiveSchema } from "../../src/engine/contracts/llm-schemas";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { loadModelCatalog } from "../../src/engine/models/model-catalog";
@@ -37,14 +38,16 @@ When returning done, reports may mix perceived and no_stimulus; decide each pair
 /** Complete initial perception source, B/C/C/B; no repair, continuation or world commit. */
 export async function runPerceptionCheckProbe(argv: string[]) {
   const [sourceRoot, output, mode = "preflight", candidate = "check-domains", priorGroupRoot] = argv;
+  const pairedGroups = candidate === "observer-source-index" || candidate === "observer-semantic-draft";
   if (!sourceRoot || !output || argv.length > 5 || !["preflight", "run"].includes(mode) ||
-    !["check-domains", "visibility-branches", "catalog-records", "observer-groups", "observer-source-index"].includes(candidate) ||
-    (candidate === "observer-source-index") !== Boolean(priorGroupRoot)) throw new Error("Expected source-player-directory output-directory [preflight|run] candidate [prior-group-directory for observer-source-index]");
+    !["check-domains", "visibility-branches", "catalog-records", "observer-groups", "observer-source-index", "observer-semantic-draft"].includes(candidate) ||
+    pairedGroups !== Boolean(priorGroupRoot)) throw new Error("Expected source-player-directory output-directory [preflight|run] candidate [prior-group-directory for paired groups]");
   const codeRevision = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
   const patch = execFileSync("git", ["diff", "--binary", "HEAD"], { encoding: "utf8" });
   const producerFiles = [process.argv[1]!, "src/engine/benchmarks/step-efficiency/perception-check-domains.ts", "package-lock.json",
     "src/engine/benchmarks/step-efficiency/perception-observer-groups.ts",
-    ...(candidate === "observer-source-index" ? ["src/engine/benchmarks/step-efficiency/perception-source-index.ts"] : []),
+    ...(pairedGroups ? ["src/engine/benchmarks/step-efficiency/perception-source-index.ts"] : []),
+    ...(candidate === "observer-semantic-draft" ? ["src/engine/benchmarks/step-efficiency/perception-semantic-draft.ts", "src/engine/prompts/system/truth-perception.md"] : []),
     ...(candidate === "catalog-records" ? ["src/engine/benchmarks/step-efficiency/perception-catalog-transport.ts", "src/engine/mechanics/shared-catalog-records.ts"] : [])];
   const producerHashes = () => Object.fromEntries(producerFiles.map(file => [file, contentHash(readFileSync(file, "utf8"))]));
   const boundProducer = producerHashes();
@@ -72,7 +75,8 @@ export async function runPerceptionCheckProbe(argv: string[]) {
   });
   if (sources.length !== 1) throw new Error("Missing initial perception source");
   const priorManifest = priorGroupRoot ? record(read(path.join(priorGroupRoot, "manifest.json"))) : null;
-  if (priorManifest && (priorManifest.protocol !== "perception-observer-groups-paired-v1" || priorManifest.sourceEventsHash !== contentHash(events))) throw new Error("Different parent group source");
+  const priorProtocol = candidate === "observer-semantic-draft" ? "perception-observer-source-index-paired-v1" : "perception-observer-groups-paired-v1";
+  if (priorManifest && (priorManifest.protocol !== priorProtocol || priorManifest.sourceEventsHash !== contentHash(events))) throw new Error("Different parent group source");
   const priorBodies = new Map<string, unknown>();
   if (priorGroupRoot && priorManifest) for (const ordinal of [0, 1]) for (let group = 0; group < 5; group++) {
     const id = `${ordinal}-C-${group}`, body = read(path.join(priorGroupRoot, `${id}-http-request.json`));
@@ -83,7 +87,7 @@ export async function runPerceptionCheckProbe(argv: string[]) {
   const registry = new ModelRegistry(catalog, path.join(sourceRoot, "data"));
   const network = createModelFetchResolver(process.env), captured = new Map<string, unknown>();
   let phase: "capture" | "run" = "capture", totalHttp = 0;
-  const maxHttp = candidate === "observer-source-index" ? 20 : candidate === "observer-groups" ? 12 : 4;
+  const maxHttp = pairedGroups ? 20 : candidate === "observer-groups" ? 12 : 4;
   const observer = new RecordingRuntimeObserver({ mode: "full" });
   const gatewayFor = (active: string) => createModelGateway(catalog, process.env, { registry: { catalog,
     capture: async hash => registry.snapshot(hash ?? String(sources[0]!.source.registrySnapshotHash)),
@@ -120,7 +124,7 @@ export async function runPerceptionCheckProbe(argv: string[]) {
     const p = row.source;
     if (p.modelCatalogHash !== catalog.hash || p.modelId !== "deepseek-flash") throw new Error("Source model binding drift");
     registry.snapshot(String(p.registrySnapshotHash));
-    const grouped = candidate === "observer-source-index" || (arm === "C" && candidate === "observer-groups");
+    const grouped = pairedGroups || (arm === "C" && candidate === "observer-groups");
     const contexts = grouped ? perceptionObserverGroups(p.context, 7) : [p.context];
     if (grouped && (row.targets.length !== 35 || contexts.length !== 5)) throw new Error("Observer screen requires the frozen 35-observer source");
     return contexts.map((context, group) => {
@@ -144,7 +148,10 @@ export async function runPerceptionCheckProbe(argv: string[]) {
       ...(arm === "C" && candidate === "catalog-records" ? { promptVersion: `${p.promptVersion}/${PERCEPTION_CATALOG_TRANSPORT}` } : {}),
       ...(grouped ? { promptVersion: `${p.promptVersion}/observer-groups-7-v1` } : {}),
     };
-    return { id, ordinal, arm, request: arm === "C" && candidate === "observer-source-index" ? perceptionSourceIndexRequest(request) : request };
+    const adapted = candidate === "observer-semantic-draft"
+      ? arm === "C" ? perceptionSemanticDraftRequest(request) : perceptionSourceIndexRequest(request)
+      : arm === "C" && candidate === "observer-source-index" ? perceptionSourceIndexRequest(request) : request;
+    return { id, ordinal, arm, request: adapted };
     });
   }));
   if (requests.length !== maxHttp) throw new Error("Unexpected physical request count");
@@ -159,10 +166,12 @@ export async function runPerceptionCheckProbe(argv: string[]) {
     codeRevision, producerHashes: boundProducer, sourcePatchHash: contentHash(patch),
     runnerHash: contentHash(readFileSync(new URL(import.meta.url), "utf8")), sourceEventsHash: contentHash(events),
     catalogHash: catalog.hash, sourceCohort: 49, perceptionTargets: sources[0]!.targets.length, repetitionsPerArm: 2, maxNewHttp: maxHttp, maxRepairHttp: 0,
-    maxConcurrentHttp: candidate === "observer-groups" || candidate === "observer-source-index" ? 5 : 1,
+    maxConcurrentHttp: candidate === "observer-groups" || pairedGroups ? 5 : 1,
     order: requests.map(entry => entry.id), requestHashes: Object.fromEntries([...captured].map(([id, body]) => [id, contentHash(body)])),
     sourceInvocations: sources.map(row => ({ sequence: row.event.sequence, id: row.event.correlation?.modelInvocationId, subject: row.source.subjectId, targets: row.targets })),
-    qualification: "Source-level schema/reference and compiled-relation screen only; justified uncertainty and report semantics require separate review. All upstream work is imported; no player latency, persisted action completion or independent intent qualification is established." });
+    qualification: candidate === "observer-semantic-draft"
+      ? "Candidate is a relaxed semantic-only task with no checks or canonical report decoder. Its draft acceptance cannot be compared as canonical reliability. Review shared semantics independently. No second phase, RNG, player completion or world commit is executed."
+      : "Source-level schema/reference and compiled-relation screen only; justified uncertainty and report semantics require separate review. All upstream work is imported; no player latency, persisted action completion or independent intent qualification is established." });
   for (const [id, body] of captured) save(output, `${id}-http-request.json`, body);
   writeFileSync(path.join(output, "source.patch"), patch, { flag: "wx" });
   if (mode === "preflight") return { sourceMatched: true, perceptionTargets: sources[0]!.targets.length, newHttp: 0 };
@@ -178,6 +187,13 @@ export async function runPerceptionCheckProbe(argv: string[]) {
       let row: Value;
       try {
         const result = await gatewayFor(active).generateStructured({ ...entry.request, observer });
+        const draftTask = entry.request.schemaName === "truth_perception_semantic_draft_probe";
+        if (draftTask) {
+          const draft = perceptionSemanticDraftSchema.parse(result.value);
+          row = { id: active, subject: entry.request.subjectId, schemaAccepted: true, relationAccepted: null,
+            assignmentAccepted: true, canonicalPerceptionAccepted: false, kind: "semantic_draft",
+            output: draft, audit: result.audit, elapsedMs: performance.now() - started };
+        } else {
         const decision = perceptionDirectiveSchema.parse(result.value);
         const relationAccepted = Boolean(validateRelations(decision));
         row = { id: active, subject: entry.request.subjectId, schemaAccepted: true, relationAccepted,
@@ -185,9 +201,11 @@ export async function runPerceptionCheckProbe(argv: string[]) {
           issues: relationAccepted ? [] : structuredClone(validateRelations.errors),
           kind: decision.kind, checkCount: decision.kind === "request_checks" ? decision.requests.length : 0,
           output: decision, audit: result.audit, elapsedMs: performance.now() - started };
+        }
       } catch (error) {
         if (!(error instanceof ModelOutputError)) throw error;
-        row = { id: active, subject: entry.request.subjectId, schemaAccepted: false, relationAccepted: false, assignmentAccepted: false,
+        row = { id: active, subject: entry.request.subjectId, schemaAccepted: false,
+          relationAccepted: entry.request.schemaName === "truth_perception_semantic_draft_probe" ? null : false, assignmentAccepted: false,
           error: String(error), output: error.rawValue, audit: error.audit, elapsedMs: performance.now() - started };
       }
       save(output, `${active}-result.json`, row); results.push(row);
