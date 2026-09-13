@@ -53,6 +53,7 @@ const sourceHashes = () => Object.fromEntries(["scripts/experiments/player-integ
   "src/engine/algorithms/standard-composition.ts",
   "src/engine/benchmarks/step-efficiency/global-means-pool.ts",
   "src/engine/prompts/shared/global-means-pool.md",
+  "src/engine/mechanics/plan-source-selectors.ts",
   "src/engine/benchmarks/step-efficiency/agent-action-text.ts", "src/engine/prompts/shared/agent-action-text.md",
   "src/engine/prompts/shared/agent-action-text-raw.md", "src/engine/models/unmatched-closer-recovery.ts",
   "src/engine/models/json-duplicate-keys.ts", "src/engine/models/terminal-root-closer-recovery.ts",

@@ -9,6 +9,7 @@ const object = (value: unknown): value is Record<string, unknown> => value !== n
 const fail = (message: string): never => { throw new ModelConfigurationError(`plan selectors: ${message}`); };
 const selector = (prefix: string, value: unknown) => `${prefix}:${contentHash(value).slice(0, 12)}`;
 type Source = { kind: string; ref: string };
+export const planMeansSourceSelector = (actionRef: string, source: Source): string => selector("m", { actionRef, source });
 type Domain = { targets: Map<string, string>; means: Map<string, Map<string, Source>> };
 const instruction = loadPromptAsset("shared/plan-source-selectors.md");
 
@@ -41,7 +42,7 @@ function annotate(context: Record<string, unknown>, bindings: Map<string, unknow
     for (const source of action.allowedMeansSources) {
       if (!object(source) || typeof source.kind !== "string" || typeof source.ref !== "string" || Object.hasOwn(source, "sourceSelector")) fail("invalid source inventory entry");
       const pair = { kind: source.kind, ref: source.ref };
-      const id = selector("m", { actionRef: action.actionRef, source: pair });
+      const id = planMeansSourceSelector(action.actionRef, pair);
       insert(bindings, id, { actionRef: action.actionRef, source: pair });
       insert(choices, id, pair);
       source.sourceSelector = id;

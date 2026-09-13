@@ -9,7 +9,7 @@ Keep complete global planning requests within the existing model input limit by 
 
 ## Contract
 
-The experimental transport adapter applies only to singleton global plan commit or repair requests. Every source record remains available once in a shared pool. Each action retains an ordered inventory of record indices and its own exact source selectors. Worklist positions are derived only when all original positions equal their row indices; absent positions remain absent. Identical inventories share storage. Arbitrary remaining source fields, exact fact records, evidence hashes, ordering, duplicates and action ownership survive an exact canonical JSON round trip.
+The experimental transport adapter applies only to singleton global plan commit or repair requests. Every source record remains available once in a shared pool. Each action retains an ordered inventory of record indices. Its exact source selectors are derived by the existing action-owned selector function after verifying that every original value matches that function. The adapter requires the indexed-means contract, whose output uses source positions rather than selector hashes. Worklist positions are derived only when all original positions equal their row indices; absent positions remain absent. Identical inventories share storage. Arbitrary remaining source fields, exact fact records, evidence hashes, ordering, duplicates and action ownership survive an exact canonical JSON round trip.
 
 The original output schema, selected sources, decoder, repair limits, complete world and actions, RNG, semantics and commit authority remain unchanged. This input representation does not establish visibility, relevance or plan correctness. Changed source bindings fail locally. No input ceiling is raised, source is pruned, output is filled, or extra model call is implied by sharing. The full player runner records the explicit standard-pooled selection and transport source hashes; standard and integrated controls retain their existing layouts.
 
@@ -19,7 +19,7 @@ Measure exact round-trip equality and request bytes on the complete frozen pre-r
 
 ## Verification
 
-Exercise repeated and action-specific records, absent and explicit positions, ordering, duplicates, unknown fields, cross-action selectors and mutated bindings. Preserve the real planning request's output decoder and rejection behavior. Confirm the pooled complete physical request fits the pinned profile limit before any paid dispatch, using the gateway's request layout. Run relevant tests and check:fast before committing. The sixty-second complete player objective remains separate.
+Exercise repeated and action-specific records, absent and explicit positions, ordering, duplicates, unknown fields, cross-action selectors and mutated bindings. Preserve the real planning request's output decoder and rejection behavior. Confirm the pooled complete physical request fits the pinned byte limit before paid dispatch, using the gateway's request layout. Provider token capacity is a separate acceptance condition: record any context rejection without interpreting reported prompt-token counts as billed usage or lowering the output allowance to hide an oversized input. Run relevant tests and check:fast before committing. The sixty-second complete player objective remains separate.
 
 ## Evidence
 

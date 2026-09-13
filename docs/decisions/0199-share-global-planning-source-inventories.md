@@ -23,7 +23,7 @@ Global fallback makes every canonical source eligible for every action. Action-l
 
 ## Decision Outcome
 
-Use an explicit source pool for global planning experiments. A record dictionary retains all exact source fields, including fact evidence. Ordered inventories retain each action's selectors; worklist positions have a checked ordinal encoding. A source hash verifies exact reconstruction, while original decoders and canonical validators retain authority. The [experiment contract](../specs/0153-global-planning-source-pool.md) owns scope and qualification.
+Use an explicit source pool for global planning experiments. A record dictionary retains all exact source fields, including fact evidence. Ordered inventories retain each action's record indices. The existing action-owned selector function reconstructs exact selectors after every source value is checked; indexed output does not require those hashes. Worklist positions have a checked ordinal encoding. A source hash verifies exact reconstruction, while original decoders and canonical validators retain authority. The [experiment contract](../specs/0153-global-planning-source-pool.md) owns scope and qualification.
 
 ## Pros and Cons of the Options
 
