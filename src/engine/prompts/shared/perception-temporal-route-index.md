@@ -1,0 +1,1 @@
+Exact assigned source index follows. Its original actions, observers, source actors, current placement chains and observer Ratings are copied from the unchanged complete world. Interpret all original evidence and authored laws. The index is not a verdict about access, a completed message or an action outcome.

@@ -1,0 +1,1 @@
+Adjudicate each assigned observer's perception at the current onset. Request supported unresolved checks, or complete all assigned targetIndex reports using the temporal route cases. Keep the first recipient, required later transfers, current placement and actually available information distinct. Preserve all fixed checks and original private-stimulus constraints.

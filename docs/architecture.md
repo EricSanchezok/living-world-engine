@@ -26,6 +26,8 @@ The benchmark-only [perception evidence reader](specs/0155-demand-read-perceptio
 
 The [sampled perception experiment](specs/0156-sampled-perception-candidate-selection.md) screens whole proposals before selection. TruthEngine and the experiment share pure onset-check materialization; randomness remains in the runtime after admission. A selected proposal retains its exact original fields and must still pass canonical validation.
 
+The benchmark [temporal route representation](specs/0157-temporal-route-perception-screen.md) derives a terminal perception tag from a selected current or pending route case. Pending transfers have no stimulus payload; original receipt validation remains authoritative for the compiled result.
+
 ## State and policies
 
 Action Compilation specializes [empty shared-resource domains](specs/0111-specialize-empty-resource-pool-domain.md) from its bound source state; representation adapters preserve that request schema through initial and repair calls.
