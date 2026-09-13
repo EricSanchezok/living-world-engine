@@ -25,10 +25,17 @@ const rows = (value: unknown): Value[] => {
 const read = (file: string) => JSON.parse(readFileSync(file, "utf8"));
 const save = (root: string, name: string, value: unknown) => writeFileSync(path.join(root, name), `${JSON.stringify(value, null, 2)}\n`, { flag: "wx" });
 
+const visibilityBranches = `\n\nPerception decision table (apply independently to each assigned observer/source-action pair):
+- Established sensory or informational access, with no required check: return perceived and its present observer-specific stimulus. Ordinary speech heard by its actual recipient is a stimulus even when noticing it is easy or certain. No check required does not mean no stimulus.
+- Established absence of any route, or a failed required committed check: return no_stimulus. A plan to travel, send a message or meet later does not establish present access. Being assigned a pair does not establish access.
+- Supported consequential uncertainty or an authored check requirement: request the justified check. Do not label uncertainty no_stimulus simply to finish, and do not roll for work quality or the action's eventual success.
+When returning done, reports may mix perceived and no_stimulus; decide each pair from its own evidence. The outer done means no additional justified check is needed, not that every observer has the same perception status. Keep the observer, source actor and intended recipient distinct. All original schema fields, exact references, authored remote routes and local identity rules remain mandatory.`;
+
 /** Complete initial perception source, B/C/C/B; no repair, continuation or world commit. */
 export async function runPerceptionCheckProbe(argv: string[]) {
-  const [sourceRoot, output, mode = "preflight"] = argv;
-  if (!sourceRoot || !output || argv.length > 3 || !["preflight", "run"].includes(mode)) throw new Error("Expected source-player-directory output-directory [preflight|run]");
+  const [sourceRoot, output, mode = "preflight", candidate = "check-domains"] = argv;
+  if (!sourceRoot || !output || argv.length > 4 || !["preflight", "run"].includes(mode) ||
+    !["check-domains", "visibility-branches"].includes(candidate)) throw new Error("Expected source-player-directory output-directory [preflight|run] [check-domains|visibility-branches]");
   const codeRevision = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
   const patch = execFileSync("git", ["diff", "--binary", "HEAD"], { encoding: "utf8" });
   const producerFiles = [process.argv[1]!, "src/engine/benchmarks/step-efficiency/perception-check-domains.ts", "package-lock.json"];
@@ -102,8 +109,11 @@ export async function runPerceptionCheckProbe(argv: string[]) {
       promptVersion: String(p.promptVersion), schema: perceptionDirectiveSchema, wireJsonSchema: record(p.schema),
       jsonObjectPostlude: typeof p.jsonObjectPostlude === "string" ? p.jsonObjectPostlude : undefined,
       jsonSyntaxRecovery: p.jsonSyntaxRecovery as StructuredModelRequest<unknown>["jsonSyntaxRecovery"],
-      ...(arm === "C" ? { wireJsonSchema: perceptionCheckDomainsSchema(p.context, record(p.schema)),
+      ...(arm === "C" && candidate === "check-domains" ? { wireJsonSchema: perceptionCheckDomainsSchema(p.context, record(p.schema)),
         promptVersion: `${p.promptVersion}/perception-check-domains-v1@${contentHash(perceptionCheckDomainsSchema(p.context, record(p.schema))).slice(0, 16)}` } : {}),
+      ...(arm === "C" && candidate === "visibility-branches" ? {
+        jsonObjectPostlude: `${p.jsonObjectPostlude ?? ""}${visibilityBranches}`,
+        promptVersion: `${p.promptVersion}/perception-visibility-branches-v1@${contentHash(visibilityBranches).slice(0, 16)}` } : {}),
     };
     return { id: `${ordinal}-${arm}`, ordinal, arm, request };
   }));
@@ -112,7 +122,7 @@ export async function runPerceptionCheckProbe(argv: string[]) {
     try { await gateway.generateStructured(entry.request); }
     catch (error) { if (!captured.has(active)) throw error; }
   }
-  save(output, "manifest.json", { protocol: "perception-check-domains-paired-v1", mode,
+  save(output, "manifest.json", { protocol: `perception-${candidate}-paired-v1`, candidate, mode,
     codeRevision, producerHashes: boundProducer, sourcePatchHash: contentHash(patch),
     runnerHash: contentHash(readFileSync(new URL(import.meta.url), "utf8")), sourceEventsHash: contentHash(events),
     catalogHash: catalog.hash, sourceCohort: 49, perceptionTargets: sources[0]!.targets.length, repetitionsPerArm: 2, maxNewHttp: 4, maxRepairHttp: 0,
