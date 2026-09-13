@@ -26,6 +26,8 @@ Complete-input perception experiments retain role confusion, invented communicat
 
 Select option 2 for a bounded experimental reader, with full-context retrieval as an explicit operation. Canonical tables remain immutable, successful reads retain exact values, and terminal citations require those values to have been loaded. The original gateway validates against the complete catalog, while actual wire bodies and read costs remain visible. This accepts a diagnostic interface and its comparison protocol, not default runtime integration or semantic equivalence.
 
+Read batches must add evidence. Loading the complete snapshot closes retrieval and restores the original decision forms and complete-source instructions. This explicit state transition prevents repeated full reads from consuming the remaining inference budget; semantic sufficiency and correctness remain separate obligations.
+
 ## Pros and Cons of the Options
 
 Option 1 minimizes retrieval calls and retains direct access but supplies all records repeatedly and has not qualified current model behavior. Option 2 can reduce initial context and lets the model request evidence, but adds sequential inference, retrieval-selection errors and the risk of missing an uncited cause. Option 3 has a simpler fixed cost, but mistakes in relevance selection become inaccessible evidence and repeat the historical context-omission failure. Explicit reads preserve availability without proving that the model will request everything it needs.

@@ -11,7 +11,7 @@ import { createTestModelCatalog, createTestModelRegistry, noStimulusReportsForTa
 import { expandPerceptionCatalog } from "../perception-catalog-transport";
 import { PerceptionEvidenceReader } from "../perception-evidence-reader";
 
-it.each(["valid", "unread", "unknown"])("reads through the real gateway without weakening canonical validation (%s)", async mode => {
+it.each(["valid", "complete", "unread", "unknown"])("reads through the real gateway without weakening canonical validation (%s)", async mode => {
   const catalog = createTestModelCatalog();
   const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 47, modelCatalog: catalog });
   const state = definition.initialState;
@@ -29,11 +29,12 @@ it.each(["valid", "unread", "unknown"])("reads through the real gateway without 
       expect(wire).toEqual({ ...body, messages: expect.any(Array) });
       const user = (wire.messages as Array<{ role: string; content: string }>).find(message => message.role === "user")!;
       expect(user.content).toContain(JSON.stringify(canonicalize(reader.view())));
-      expect(user.content).toContain('"read_evidence"');
-      expect(user.content).not.toContain("top-level result kind must be exactly");
+      const complete = mode === "complete" && calls === 2;
+      expect(user.content.includes('"read_evidence"')).toBe(!complete);
+      expect(user.content.includes("top-level result kind must be exactly")).toBe(complete);
       expect(() => reader.transformBody(wire)).toThrow("does not match");
       let output: unknown;
-      if (calls === 1 && mode !== "unread") output = { kind: "read_evidence", reads: [{ table: "facts", keys: [fact] }] };
+      if (calls === 1 && mode !== "unread") output = { kind: "read_evidence", reads: [mode === "complete" ? { table: "source_context", keys: [] } : { table: "facts", keys: [fact] }] };
       else {
         const reports = noStimulusReportsForTargets(input);
         const evidence = mode === "unknown"
@@ -57,7 +58,9 @@ it.each(["valid", "unread", "unknown"])("reads through the real gateway without 
       const audits = [];
       for (let round = 0; round < 3; round++) {
         const identity = modelInvocationIdentity({ ...request, runtimeIdentity: { worldHash: state.worldHash, revision: state.revision } }, request.role, request.subjectId, round + 1);
-        const result = await gateway.generateStructured({ ...adapted, ...identity });
+        const current = reader.request(request);
+        expect(current.schema.safeParse({ kind: "read_evidence", reads: [{ table: "source_context", keys: [] }] }).success).toBe(!(mode === "complete" && round === 1));
+        const result = await gateway.generateStructured({ ...current, ...identity });
         audits.push(result.audit);
         const output = result.value as { kind: string };
         if (output.kind === "read_evidence") reader.read(output);
@@ -67,7 +70,7 @@ it.each(["valid", "unread", "unknown"])("reads through the real gateway without 
     } };
   const run = new TruthEngine(provider, { repairAttempts: 0 }).perceiveOnset(input,
     { workloadId: "reader-world", batchId: "onset", runtimeIdentity: { worldHash: state.worldHash, revision: state.revision } });
-  if (mode !== "valid") await expect(run).rejects.toThrow();
+  if (mode === "unread" || mode === "unknown") await expect(run).rejects.toThrow();
   else {
     const result = await run;
     expect(result.receipts).toHaveLength(1); expect(result.modelAudit.invocations).toHaveLength(2);
@@ -81,11 +84,21 @@ it.each(["valid", "unread", "unknown"])("reads through the real gateway without 
     const read = readerCopy.read({ kind: "read_evidence", reads: tables.map(([table]) => ({ table, keys: [] })) });
     expect(read.results.map(result => [result.table, result.records])).toEqual(tables);
     readerCopy.assertLoadedReferences({ evidence: fact! });
-    const complete = readerCopy.read({ kind: "read_evidence", reads: [{ table: "source_context", keys: [] }] });
+    expect(readerCopy.request(source!).schemaName).toBe(source!.schemaName);
+    const fullReader = new PerceptionEvidenceReader(source!.context, 2);
+    const complete = fullReader.read({ kind: "read_evidence", reads: [{ table: "source_context", keys: [] }] });
     expect(complete.results[0]!.records).toEqual(source!.context);
     const restored = readerCopy.view(); delete restored.evidenceAccess;
     expect(expandPerceptionCatalog(restored, contentHash(source!.context))).toEqual(source!.context);
-    expect(() => readerCopy.read({ kind: "read_evidence", reads: [{ table: "source_context", keys: [] }] })).toThrow("read limit reached");
+    expect(() => fullReader.read({ kind: "read_evidence", reads: [{ table: "source_context", keys: [] }] })).toThrow("already complete");
+    const partial = new PerceptionEvidenceReader(source!.context, 2);
+    partial.read({ kind: "read_evidence", reads: [{ table: "facts", keys: [fact!] }] });
+    const partialHash = contentHash(partial.view());
+    expect(() => partial.read({ kind: "read_evidence", reads: [{ table: "facts", keys: [fact!] }] })).toThrow("adds no evidence");
+    expect(contentHash(partial.view())).toBe(partialHash);
+    const bounded = new PerceptionEvidenceReader(source!.context, 1);
+    bounded.read({ kind: "read_evidence", reads: [{ table: "facts", keys: [fact!] }] });
+    expect(() => bounded.read({ kind: "read_evidence", reads: [{ table: "source_context", keys: [] }] })).toThrow("read limit reached");
     (complete.results[0]!.records as Record<string, unknown>).state = {};
     expect(readerCopy.view()).not.toEqual(complete.results[0]!.records);
     const changed = structuredClone(source!.context) as Record<string, unknown>, bound = new PerceptionEvidenceReader(changed, 1);

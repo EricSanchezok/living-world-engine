@@ -12,7 +12,8 @@ const record = (value: unknown): Value => {
   return value as Value;
 };
 const instruction = loadPromptAsset("shared/perception-evidence-reader.md");
-export const PERCEPTION_EVIDENCE_READER = `perception-evidence-reader-v1@${contentHash({ instruction, catalog: PERCEPTION_CATALOG_TRANSPORT }).slice(0, 16)}`;
+const completeInstruction = loadPromptAsset("shared/perception-evidence-complete.md");
+export const PERCEPTION_EVIDENCE_READER = `perception-evidence-reader-v2@${contentHash({ instruction, completeInstruction, catalog: PERCEPTION_CATALOG_TRANSPORT }).slice(0, 16)}`;
 const readSchema = z.strictObject({ kind: z.literal("read_evidence"), reads: z.array(z.strictObject({ table: z.string().min(1), keys: z.array(z.string().min(1)) })).min(1) });
 export const perceptionEvidenceDirectiveSchema = z.union([perceptionDirectiveSchema, readSchema]);
 type ReadDirective = z.infer<typeof readSchema>;
@@ -63,6 +64,7 @@ export class PerceptionEvidenceReader {
       else if (value && typeof value === "object") Object.values(value).forEach(preloadChecks);
     };
     preloadChecks(state.committedCheckRequests);
+    this.complete = [...this.tables].every(([table, rows]) => this.loaded.get(table)!.size === Object.keys(rows).length);
   }
 
   assertSource(): void {
@@ -86,6 +88,7 @@ export class PerceptionEvidenceReader {
   read(value: unknown) {
     this.assertSource();
     const request = readSchema.parse(value);
+    if (this.complete) throw new ModelOutputError("perception evidence is already complete; return a canonical perception decision");
     if (this.journal.length >= this.maxReadRounds) throw new ModelOutputError("perception evidence read limit reached; the attempt remains incomplete");
     const seen = new Set<string>();
     const results = request.reads.map(({ table, keys }) => {
@@ -102,10 +105,14 @@ export class PerceptionEvidenceReader {
       const records = Object.fromEntries(selected.map(key => [key, structuredClone(rows[key])]));
       return { table, keys: selected, records, hash: contentHash(records) };
     });
+    if (!results.some(result => result.table === "source_context" || result.keys.some(key => !this.loaded.get(result.table)!.has(key)))) {
+      throw new ModelOutputError("perception read adds no evidence; select unread values or return a canonical perception decision");
+    }
     for (const result of results) {
       if (result.table === "source_context") this.complete = true;
       else result.keys.forEach(key => this.loaded.get(result.table)!.add(key));
     }
+    if ([...this.tables].every(([table, rows]) => this.loaded.get(table)!.size === Object.keys(rows).length)) this.complete = true;
     const response = { sourceHash: this.sourceHash, round: this.journal.length + 1, results };
     this.journal.push({ round: response.round, reads: structuredClone(request.reads), resultHash: contentHash(response) });
     return response;
@@ -132,10 +139,11 @@ export class PerceptionEvidenceReader {
     const wire = structuredClone(request.wireJsonSchema ?? z.toJSONSchema(request.schema, { target: "draft-07" }));
     const alternatives = wire.oneOf ?? wire.anyOf;
     if (!Array.isArray(alternatives)) throw new ModelConfigurationError("perception reader requires the original directive union");
-    alternatives.push(z.toJSONSchema(readSchema, { target: "draft-07" }));
-    return { ...request, schemaName: "truth_perception_evidence_directive", schema: perceptionEvidenceDirectiveSchema, wireJsonSchema: wire, jsonExamplePolicy: "omit",
+    if (!this.complete) alternatives.push(z.toJSONSchema(readSchema, { target: "draft-07" }));
+    return { ...request, schemaName: this.complete ? request.schemaName : "truth_perception_evidence_directive",
+      schema: this.complete ? request.schema : perceptionEvidenceDirectiveSchema, wireJsonSchema: wire, jsonExamplePolicy: "omit",
       promptVersion: `${request.promptVersion}/${PERCEPTION_EVIDENCE_READER}`,
-      jsonObjectPostlude: `${request.jsonObjectPostlude ?? ""}\n\n${instruction}`,
+      jsonObjectPostlude: `${request.jsonObjectPostlude ?? ""}\n\n${this.complete ? completeInstruction : instruction}`,
       preprocessOutput: value => {
         this.assertSource();
         if (record(value).kind === "read_evidence") return { value, symbolRepairs: [] };
