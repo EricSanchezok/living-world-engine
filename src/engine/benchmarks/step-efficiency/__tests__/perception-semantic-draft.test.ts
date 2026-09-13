@@ -5,7 +5,7 @@ import { TruthEngine } from "../../../mechanics/truth-engine";
 import { selectTemporalBoundary } from "../../../mechanics/temporal";
 import { contentHash } from "../../../models/model-audit";
 import { createModelGateway } from "../../../models/model-gateway";
-import type { StructuredModelRequest } from "../../../models/model-provider";
+import { ModelOutputError, type StructuredModelRequest } from "../../../models/model-provider";
 import { ScriptedModelProvider, createTestModelRegistry, noStimulusReportsForTargets } from "../../../testing/model-provider";
 import { perceptionSemanticDraftRequest } from "../perception-semantic-draft";
 
@@ -58,10 +58,11 @@ it("screens a real source through the gateway without converting a semantic draf
     (copy: typeof draft) => { copy.assessments[0]!.evidence[0]!.ref = "ref:entity:invented"; },
   ]) {
     const changed = structuredClone(draft); mutate(changed); response = changed;
-    await expect(gateway.generateStructured(adapted)).rejects.toThrow();
+    await expect(gateway.generateStructured(adapted)).rejects.toMatchObject({ name: "ModelOutputError", rawValue: changed,
+      audit: { invocations: [expect.objectContaining({ tokenUsage: expect.objectContaining({ input: 100, output: 20 }) })] } });
   }
   response = { kind: "done", reports: [] };
-  await expect(gateway.generateStructured(adapted)).rejects.toThrow();
+  await expect(gateway.generateStructured(adapted)).rejects.toBeInstanceOf(ModelOutputError);
   expect(() => perceptionSemanticDraftRequest(adapted)).toThrow("original perception task");
   expect(contentHash(input)).toBe(before);
   context.repair = { changed: true };

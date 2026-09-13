@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { existingReferenceHandleSchemaFor as existing } from "../../contracts/model-context";
 import { contentHash } from "../../models/model-audit";
-import { ModelConfigurationError, type StructuredModelRequest } from "../../models/model-provider";
+import { ModelConfigurationError, ModelOutputError, type StructuredModelRequest } from "../../models/model-provider";
 import { loadPromptAsset } from "../../prompts";
 import { buildPerceptionSourceIndex } from "./perception-source-index";
 
@@ -65,15 +65,17 @@ export function perceptionSemanticDraftRequest(request: StructuredModelRequest<u
         const pair = byIndex.get(row.targetIndex);
         if (!pair || seen.has(row.targetIndex) || row.observerRef !== pair.observer.entityRef ||
           row.sourceActionRef !== pair.sourceAction.actionRef || row.sourceActorRef !== pair.sourceActor.entityRef) {
-          throw new Error("semantic draft assignment/source binding mismatch");
+          throw new ModelOutputError("semantic draft assignment/source binding mismatch", undefined, { rawValue: value });
         }
         seen.add(row.targetIndex);
         for (const evidence of row.evidence) {
           const entry = byRef.get(evidence.ref);
-          if (entry?.kind !== evidence.kind || !entry.allowedUses.includes("assertion")) throw new Error("semantic draft evidence is not an existing permitted reference");
+          if (entry?.kind !== evidence.kind || !entry.allowedUses.includes("assertion")) {
+            throw new ModelOutputError("semantic draft evidence is not an existing permitted reference", undefined, { rawValue: value });
+          }
         }
       }
-      if (seen.size !== byIndex.size) throw new Error("semantic draft omits assigned pairs");
+      if (seen.size !== byIndex.size) throw new ModelOutputError("semantic draft omits assigned pairs", undefined, { rawValue: value });
       return { value: draft, symbolRepairs: [] };
     } };
 }

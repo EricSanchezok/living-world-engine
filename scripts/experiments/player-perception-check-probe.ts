@@ -15,7 +15,7 @@ import { createModelGateway } from "../../src/engine/models/model-gateway";
 import { createModelFetchResolver } from "../../src/engine/models/model-network";
 import { ModelRegistry } from "../../src/engine/models/model-registry";
 import { ModelConfigurationError, ModelOutputError, modelInvocationIdentity, type StructuredModelRequest } from "../../src/engine/models/model-provider";
-import { RecordingRuntimeObserver, type RuntimeEvent } from "../../src/engine/runtime/observability";
+import { RecordingRuntimeObserver, type RuntimeEvent, type RuntimeObserver } from "../../src/engine/runtime/observability";
 
 type Value = Record<string, unknown>;
 const record = (value: unknown): Value => {
@@ -183,10 +183,13 @@ export async function runPerceptionCheckProbe(argv: string[]) {
   const results: Value[] = [], waves: Value[] = [];
   const runEntry = async (entry: typeof requests[number]) => {
       const active = entry.id;
+      // Frozen source invocation IDs may be shared; retain an independent physical-trial identity.
+      const trialObserver: RuntimeObserver = { mode: observer.mode, degraded: false,
+        emit: event => observer.emit({ ...event, attributes: { ...event.attributes, probeRequestId: active } }) };
       const started = performance.now();
       let row: Value;
       try {
-        const result = await gatewayFor(active).generateStructured({ ...entry.request, observer });
+        const result = await gatewayFor(active).generateStructured({ ...entry.request, observer: trialObserver });
         const draftTask = entry.request.schemaName === "truth_perception_semantic_draft_probe";
         if (draftTask) {
           const draft = perceptionSemanticDraftSchema.parse(result.value);
@@ -203,7 +206,10 @@ export async function runPerceptionCheckProbe(argv: string[]) {
           output: decision, audit: result.audit, elapsedMs: performance.now() - started };
         }
       } catch (error) {
-        if (!(error instanceof ModelOutputError)) throw error;
+        if (!(error instanceof ModelOutputError)) {
+          save(output, `${active}-fatal.json`, { id: active, error: String(error), elapsedMs: performance.now() - started });
+          throw error;
+        }
         row = { id: active, subject: entry.request.subjectId, schemaAccepted: false,
           relationAccepted: entry.request.schemaName === "truth_perception_semantic_draft_probe" ? null : false, assignmentAccepted: false,
           error: String(error), output: error.rawValue, audit: error.audit, elapsedMs: performance.now() - started };
