@@ -4,6 +4,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import Ajv from "ajv";
 import { perceptionCheckDomainsSchema } from "../../src/engine/benchmarks/step-efficiency/perception-check-domains";
+import { perceptionCatalogTransport, PERCEPTION_CATALOG_TRANSPORT } from "../../src/engine/benchmarks/step-efficiency/perception-catalog-transport";
 import { perceptionDirectiveSchema } from "../../src/engine/contracts/llm-schemas";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { loadModelCatalog } from "../../src/engine/models/model-catalog";
@@ -35,10 +36,11 @@ When returning done, reports may mix perceived and no_stimulus; decide each pair
 export async function runPerceptionCheckProbe(argv: string[]) {
   const [sourceRoot, output, mode = "preflight", candidate = "check-domains"] = argv;
   if (!sourceRoot || !output || argv.length > 4 || !["preflight", "run"].includes(mode) ||
-    !["check-domains", "visibility-branches"].includes(candidate)) throw new Error("Expected source-player-directory output-directory [preflight|run] [check-domains|visibility-branches]");
+    !["check-domains", "visibility-branches", "catalog-records"].includes(candidate)) throw new Error("Expected source-player-directory output-directory [preflight|run] [check-domains|visibility-branches|catalog-records]");
   const codeRevision = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
   const patch = execFileSync("git", ["diff", "--binary", "HEAD"], { encoding: "utf8" });
-  const producerFiles = [process.argv[1]!, "src/engine/benchmarks/step-efficiency/perception-check-domains.ts", "package-lock.json"];
+  const producerFiles = [process.argv[1]!, "src/engine/benchmarks/step-efficiency/perception-check-domains.ts", "package-lock.json",
+    ...(candidate === "catalog-records" ? ["src/engine/benchmarks/step-efficiency/perception-catalog-transport.ts", "src/engine/mechanics/shared-catalog-records.ts"] : [])];
   const producerHashes = () => Object.fromEntries(producerFiles.map(file => [file, contentHash(readFileSync(file, "utf8"))]));
   const boundProducer = producerHashes();
   mkdirSync(output, { recursive: false });
@@ -75,9 +77,13 @@ export async function runPerceptionCheckProbe(argv: string[]) {
   }, maxTransportAttempts: 1, fetchForAccount: (accountId, account) => {
     const send = network(accountId, account) ?? fetch;
     return async (input, init) => {
-      const request = new Request(input, init), body = await request.clone().json();
+      const request = new Request(input, init);
+      let body = await request.clone().json();
       if (accountId !== "deepseek-api" || body.model !== "deepseek-flash" || body.thinking?.type !== "disabled") throw new ModelConfigurationError("Inference drift");
       const arm = active.split("-")[1];
+      if (arm === "C" && candidate === "catalog-records") {
+        body = perceptionCatalogTransport(body, sources[0]!.source.context);
+      }
       if (arm === "B" && contentHash(body) !== contentHash(sources[0]!.body)) {
         save(output, `${active}-source-body.json`, sources[0]!.body);
         save(output, `${active}-mismatch-body.json`, body);
@@ -90,7 +96,8 @@ export async function runPerceptionCheckProbe(argv: string[]) {
       if (totalHttp >= 4 || contentHash(body) !== contentHash(captured.get(active))) throw new ModelConfigurationError("Request or call ceiling drift");
       if (contentHash(producerHashes()) !== contentHash(boundProducer)) throw new ModelConfigurationError("Frozen producer files changed");
       totalHttp++;
-      return send(input, init);
+      // Preserve the account transport's original URL/init calling convention.
+      return send(input, arm === "C" && candidate === "catalog-records" ? { ...init, body: JSON.stringify(body) } : init);
     };
   } });
   const requests = [["B", "C"], ["C", "B"]].flatMap((arms, ordinal) => arms.map(arm => {
@@ -114,6 +121,7 @@ export async function runPerceptionCheckProbe(argv: string[]) {
       ...(arm === "C" && candidate === "visibility-branches" ? {
         jsonObjectPostlude: `${p.jsonObjectPostlude ?? ""}${visibilityBranches}`,
         promptVersion: `${p.promptVersion}/perception-visibility-branches-v1@${contentHash(visibilityBranches).slice(0, 16)}` } : {}),
+      ...(arm === "C" && candidate === "catalog-records" ? { promptVersion: `${p.promptVersion}/${PERCEPTION_CATALOG_TRANSPORT}` } : {}),
     };
     return { id: `${ordinal}-${arm}`, ordinal, arm, request };
   }));
@@ -123,6 +131,8 @@ export async function runPerceptionCheckProbe(argv: string[]) {
     catch (error) { if (!captured.has(active)) throw error; }
   }
   save(output, "manifest.json", { protocol: `perception-${candidate}-paired-v1`, candidate, mode,
+    physicalTransportTransform: candidate === "catalog-records" ? PERCEPTION_CATALOG_TRANSPORT : null,
+    requestAuditBoundary: "Saved *-http-request.json and requestHashes bind the actual transmitted body. Gateway request audits precede the experimental physical transform; canonical output validation retains the complete original source catalog.",
     codeRevision, producerHashes: boundProducer, sourcePatchHash: contentHash(patch),
     runnerHash: contentHash(readFileSync(new URL(import.meta.url), "utf8")), sourceEventsHash: contentHash(events),
     catalogHash: catalog.hash, sourceCohort: 49, perceptionTargets: sources[0]!.targets.length, repetitionsPerArm: 2, maxNewHttp: 4, maxRepairHttp: 0,
