@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { applyBeliefPatch } from "../../cognition/belief";
 import { applyCharacterPatch } from "../../cognition/character";
 import {
@@ -61,6 +62,7 @@ import {
 } from "../../contracts/prompts";
 import {
   createAgentReferenceResolver,
+  ModelReferenceError,
   isProposalReference,
   normalizeModelOutput,
   type ModelReference,
@@ -428,6 +430,33 @@ function validateMindOutput(
   };
 }
 
+/** The reaction validator admits known and newly introduced local entities only.
+ * A local identity merely mentioned by an apparent claim is not an introduction. */
+function reactionTargets(agent: AgentState, stimulus: ObservationPacket) {
+  const allowed = new Set([
+    ...Object.keys(agent.belief.localEntities),
+    ...stimulus.introductions.map(introduction => introduction.localEntity.id),
+  ]);
+  const resolver = createAgentReferenceResolver(agent, [stimulus]);
+  const handles = resolver.catalog.candidates.filter(candidate => candidate.kind === "local_entity" &&
+    candidate.allowedUses.includes("target") && allowed.has(resolver.resolve(candidate.handle).engineId)).map(candidate => candidate.handle);
+  return { resolver, handles };
+}
+
+/** Specialize only the target field; retain the complete canonical action contract. */
+export function reactionTargetWireSchema(handles: readonly string[]) {
+  const schema = z.toJSONSchema(reactionDecisionDraftSchema, { target: "draft-07" });
+  const branch = schema.oneOf?.find(branch => {
+    const kind = typeof branch === "object" ? branch.properties?.kind : undefined;
+    return typeof kind === "object" && kind.const === "replace";
+  });
+  const replacement = typeof branch === "object" ? branch.properties?.replacementAction : undefined;
+  const targets = typeof replacement === "object" ? replacement.properties?.targetHandles : undefined;
+  if (typeof targets !== "object" || targets.type !== "array") throw new Error("Reaction target schema changed");
+  targets.items = handles.length ? { type: "string", enum: [...handles] } : { not: {} };
+  return schema;
+}
+
 function validateReactionDecision(
   worldHash: string,
   agent: AgentState,
@@ -450,17 +479,17 @@ function validateReactionDecision(
   }
 
   const replacement = decision.replacementAction;
-  const resolver = createAgentReferenceResolver(agent, [stimulus]);
-  const allowedTargets = new Set([
-    ...Object.keys(agent.belief.localEntities),
-    ...stimulus.introductions.map((introduction) => introduction.localEntity.id),
-  ]);
-  const targetIds = replacement.targetHandles.map((handle) => {
-    const resolved = resolver.resolve(handle, "target");
-    if (resolved.kind !== "local_entity" || !allowedTargets.has(resolved.engineId)) {
-      throw new Error(`Agent reaction ${agent.id} targeted unknown local entity handle ${handle}`);
+  const { resolver, handles } = reactionTargets(agent, stimulus);
+  const targetIds = replacement.targetHandles.map((handle, index) => {
+    if (!handles.includes(handle)) {
+      throw new ModelReferenceError({ code: resolver.catalog.candidates.some(candidate => candidate.handle === handle)
+        ? "reference.disallowed_use" : "reference.unknown_handle",
+        path: ["replacementAction", "targetHandles", index], originalValue: handle,
+        allowedHandles: handles,
+        reason: "Replacement targets must be known or newly introduced local entities; observations and claims are evidence, not action targets.",
+      });
     }
-    return resolved.engineId;
+    return resolver.resolve(handle, "target").engineId;
   });
   const { targetHandles: _targetHandles, ...replacementText } = replacement;
   void _targetHandles;
@@ -817,6 +846,7 @@ export class AgentMind {
     scope: ModelExecutionScope,
   ): Promise<ReactionDecision & { modelAudit: ModelExecutionAudit }> {
     const stimulus = request.stimulus;
+    const wireJsonSchema = reactionTargetWireSchema(reactionTargets(agent, stimulus).handles);
     const observe = runtimeEventEmitter(scope.observer);
     const logicalInvocationId = modelInvocationLogicalId(scope, "agent-reaction", agent.id);
     try {
@@ -871,12 +901,13 @@ export class AgentMind {
           ...identity,
           role: "agent-reaction",
           subjectId: agent.id,
-          promptVersion: prompt.version,
+          promptVersion: `${prompt.version}/reaction-target-domain-v1@${contentHash(wireJsonSchema).slice(0, 16)}`,
           schemaName: "agent_reaction_decision",
           system: prompt.system,
           userPrompt: prompt.userPrompt,
           context,
           schema: reactionDecisionDraftSchema,
+          wireJsonSchema,
         });
           setModelInvocationResultKind(result.audit, "agent-reaction_decision");
           return result;

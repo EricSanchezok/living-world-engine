@@ -457,7 +457,7 @@ const definitions = [
     children: noChildren,
   }, (algorithmIdentity, config, children) => new OnsetPerceptionAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({
-    ...identity("reaction-decision", "model-reaction-decision"),
+    ...identity("reaction-decision", "model-reaction-decision", "2"),
     maturity: "reference",
     configSchema: z.strictObject({}),
     children: noChildren,

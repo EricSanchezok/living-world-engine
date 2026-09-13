@@ -65,7 +65,7 @@ describe("built-in algorithm registry", () => {
       "observation-rendering/source-bound-observation-rendering@3",
       "onset-perception/model-onset-perception@8",
       "output-recovery/localized-repair-bisect@1",
-      "reaction-decision/model-reaction-decision@1",
+      "reaction-decision/model-reaction-decision@2",
       "reaction-resolution/onset-reaction@1",
       "symbol-repair/bounded-symbol-repair@1",
       "truth-resolution/dependent-fields-truth-resolution@1",

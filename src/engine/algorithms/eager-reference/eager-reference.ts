@@ -375,7 +375,7 @@ export function createEagerReferenceAlgorithmRef(
       reactionDecision: defineAlgorithmRef({
         role: "reaction-decision",
         id: "model-reaction-decision",
-        version: "1",
+        version: "2",
         contractVersion: 1,
         config: {},
       }),
