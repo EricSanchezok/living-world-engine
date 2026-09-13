@@ -6,6 +6,7 @@ import { stringify } from "yaml";
 import { buildIntegratedPlayerWorld, INTEGRATED_PLAYER_WORLD_RECIPE } from "./player-integrated-world";
 import { assertFiniteWorkWorld } from "./step-finite-work-world";
 import { integratedPlayerAlgorithmRef, registerIntegratedPlayerAlgorithm } from "../../src/engine/benchmarks/step-efficiency/integrated-player-algorithm";
+import { standardEagerReferenceAlgorithmRef } from "../../src/engine/algorithms/standard-composition";
 import { assertNonthinkingWorld } from "../../src/engine/benchmarks/step-efficiency/nonthinking-world";
 import { loadWorldScript, loadWorldTemplate } from "../../src/script/world-loader";
 import { contentHash } from "../../src/engine/models/model-audit";
@@ -38,11 +39,17 @@ const checkedCodeRevision = () => {
   if (execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim()) throw new Error("Commit checked code before preparing or running live gameplay");
   return execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
 };
+const selectedAlgorithm = (selection: unknown) => {
+  if (selection === "standard") return standardEagerReferenceAlgorithmRef();
+  if (selection === "integrated") return integratedPlayerAlgorithmRef();
+  throw new Error("Expected explicit standard or integrated composition selection");
+};
 const sourceHashes = () => Object.fromEntries(["scripts/experiments/player-integrated-playtest.ts",
   "scripts/experiments/player-integrated-world.ts", "scripts/experiments/step-finite-work-world.ts",
   "scripts/experiments/step-checkpoint-world.ts", "scripts/experiments/world-fragments/finite-work-goal.yaml",
   "scripts/operations/player-feedback-playtest.ts",
   "src/engine/benchmarks/step-efficiency/integrated-player-algorithm.ts",
+  "src/engine/algorithms/standard-composition.ts",
   "src/engine/benchmarks/step-efficiency/agent-action-text.ts", "src/engine/prompts/shared/agent-action-text.md",
   "src/engine/prompts/shared/agent-action-text-raw.md", "src/engine/models/unmatched-closer-recovery.ts",
   "src/engine/models/json-duplicate-keys.ts", "src/engine/models/terminal-root-closer-recovery.ts",
@@ -51,8 +58,9 @@ const sourceHashes = () => Object.fromEntries(["scripts/experiments/player-integ
   "src/engine/models/model-adapter.ts", "src/engine/algorithms/eager-reference/agent-mind.ts",
 ].map(file => [file, contentHash(readFileSync(file, "utf8"))]));
 
-export async function prepareIntegratedPlayer(root: string, registryRoot: string, snapshotHash: string) {
+export async function prepareIntegratedPlayer(root: string, registryRoot: string, snapshotHash: string, algorithmSelection = "integrated") {
   const codeRevision = checkedCodeRevision();
+  const algorithm = selectedAlgorithm(algorithmSelection);
   mkdirSync(root, { recursive: false });
   const catalog = loadModelCatalog("config/models.yaml");
   const source = loadWorldTemplate("worlds/blackmarsh/world");
@@ -78,7 +86,7 @@ export async function prepareIntegratedPlayer(root: string, registryRoot: string
   save(snapshots, `${snapshotHash}.json`, snapshot.document);
   const persisted = loadWorldScript(destination, { seed: protocol.seed, modelCatalog: catalog });
   if (contentHash(persisted) !== contentHash(world)) throw new Error("World asset round trip changed source");
-  const algorithm = integratedPlayerAlgorithmRef(), cacheRoot = livingWorldCacheRoot();
+  const cacheRoot = livingWorldCacheRoot();
   const encoder = await loadLocalEncoder({ modelDirectory: discoverLocalEncoderModelDirectory(cacheRoot, MULTILINGUAL_E5_BASE_ASSET.name),
     modelId: MULTILINGUAL_E5_BASE_ASSET.modelId, expectedHash: MULTILINGUAL_E5_BASE_ASSET.directorySha256 });
   const fingerprint = relationalRrfEncoderFingerprint(encoder, R5_RELATIONAL_PASSAGE_SCHEMA_VERSION);
@@ -91,7 +99,7 @@ export async function prepareIntegratedPlayer(root: string, registryRoot: string
     const retrieval = createActionCompilationRetrievalRuntimeProvider({ cacheRoot, encoder });
     await retrieval.preflight(algorithm, { worldContentHash: world.contentHash, state: world.initialState });
   } finally { cache.close(); await encoder.dispose?.(); }
-  const manifest = { protocol, codeRevision, sourceCodeHashes: sourceHashes(), algorithm, catalogHash: catalog.hash,
+  const manifest = { protocol, codeRevision, sourceCodeHashes: sourceHashes(), algorithmSelection, algorithm, catalogHash: catalog.hash,
     registrySnapshotHash: snapshotHash, profileBindings, sourceTemplateHash: contentHash(source), templateHash: contentHash(candidate),
     sourceWorldHash: baseline.contentHash, worldHash: world.contentHash, initialStateHash: contentHash(world.initialState),
     originalAgentIds: Object.keys(world.initialState.agents).sort(), originalEntityCount: Object.keys(world.initialState.truth.entities).length,
@@ -107,7 +115,7 @@ export async function runIntegratedPlayer(root: string) {
   const codeRevision = checkedCodeRevision();
   const manifest = read(path.join(root, "manifest.json"));
   if (manifest.codeRevision !== codeRevision || contentHash(manifest.protocol) !== contentHash(protocol) || contentHash(manifest.sourceCodeHashes) !== contentHash(sourceHashes()) ||
-    contentHash(manifest.algorithm) !== contentHash(integratedPlayerAlgorithmRef())) throw new Error("Prepared diagnostic drift");
+    contentHash(manifest.algorithm) !== contentHash(selectedAlgorithm(manifest.algorithmSelection))) throw new Error("Prepared diagnostic drift");
   const directory = path.join(root, "run"); mkdirSync(directory, { recursive: false });
   const catalog = loadModelCatalog(path.join(root, "models.yaml"));
   assertFiniteWorkWorld(loadWorldTemplate(path.join(root, "worlds/blackmarsh/world")));
@@ -202,11 +210,11 @@ export async function runIntegratedPlayer(root: string) {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const [mode, directory, registryRoot, snapshotHash, ...extra] = process.argv.slice(2);
+  const [mode, directory, registryRoot, snapshotHash, algorithmSelection = "integrated", ...extra] = process.argv.slice(2);
   if (!directory || extra.length || mode === "prepare" && (!registryRoot || !snapshotHash) || mode === "run" && registryRoot || !["prepare", "run"].includes(mode)) {
-    throw new Error("Expected prepare output-directory registry-data-root snapshot-hash | run prepared-directory");
+    throw new Error("Expected prepare output-directory registry-data-root snapshot-hash [standard|integrated] | run prepared-directory");
   }
-  (mode === "prepare" ? prepareIntegratedPlayer(path.resolve(directory), registryRoot!, snapshotHash!) : runIntegratedPlayer(path.resolve(directory)))
+  (mode === "prepare" ? prepareIntegratedPlayer(path.resolve(directory), registryRoot!, snapshotHash!, algorithmSelection) : runIntegratedPlayer(path.resolve(directory)))
     .then(result => { if (result) process.stdout.write(`${JSON.stringify({ prepared: true, worldHash: result.worldHash, newHttp: 0 })}\n`); })
     .catch(error => { process.stderr.write(`${String(error)}\n`); process.exitCode = 1; });
 }
