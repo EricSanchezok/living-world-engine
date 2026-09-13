@@ -31,6 +31,39 @@ export function perceptionObserverGroups(context: unknown, maxObservers: number)
   return contexts;
 }
 
+export function perceptionAssignedSourcesContext(context: unknown): Value {
+  const source = record(context), task = record(source.task), assignment = record(task.assignment), state = record(source.state);
+  const actionSet = record(state.actionSet), dependencySet = record(state.dependencySet);
+  if (task.stage !== "perception" || !Array.isArray(assignment.perceptionTargets) || !Array.isArray(assignment.targetHandles) ||
+    !Array.isArray(actionSet.assigned) || !Array.isArray(actionSet.available) ||
+    !Array.isArray(dependencySet.assigned) || !Array.isArray(dependencySet.available)) throw new ModelConfigurationError("missing perception assignment source fields");
+  const targets = assignment.perceptionTargets.map(record), handles = assignment.targetHandles;
+  const actions = actionSet.assigned.map(record), dependencies = dependencySet.assigned.map(record);
+  const refs = new Set(targets.map(target => target.sourceActionRef));
+  const availableActions = actionSet.available.map(record), availableDependencies = dependencySet.available.map(record);
+  if (!targets.length || [...refs].some(ref => typeof ref !== "string") ||
+    actions.some(action => typeof action.actionRef !== "string") ||
+    new Set(actions.map(action => action.actionRef)).size !== actions.length ||
+    new Set(availableActions.map(action => action.actionRef)).size !== availableActions.length ||
+    new Set(handles).size !== actions.length || handles.length !== actions.length ||
+    actions.some(action => !handles.includes(action.actionRef)) ||
+    [...refs].some(ref => actions.filter(action => action.actionRef === ref).length !== 1) ||
+    actions.some(action => availableActions.filter(available => available.actionRef === action.actionRef && contentHash(available) === contentHash(action)).length !== 1) ||
+    dependencies.some(dependency => dependency.kind !== "action" || !actions.some(action => action.actionRef === dependency.ref) ||
+      availableDependencies.filter(available => available.kind === dependency.kind && available.ref === dependency.ref && contentHash(available) === contentHash(dependency)).length !== 1) ||
+    new Set(dependencies.map(dependency => dependency.ref)).size !== dependencies.length) throw new ModelConfigurationError("inconsistent perception assigned source join");
+  const copy = structuredClone(source), copyState = record(copy.state);
+  record(record(copy.task).assignment).targetHandles = handles.filter(ref => refs.has(ref));
+  record(copyState.actionSet).assigned = structuredClone(actions.filter(action => refs.has(action.actionRef)));
+  record(copyState.dependencySet).assigned = structuredClone(dependencies.filter(dependency => refs.has(dependency.ref)));
+  const restored = structuredClone(copy), restoredState = record(restored.state);
+  record(record(restored.task).assignment).targetHandles = assignment.targetHandles;
+  record(restoredState.actionSet).assigned = actionSet.assigned;
+  record(restoredState.dependencySet).assigned = dependencySet.assigned;
+  if (contentHash(restored) !== contentHash(source)) throw new ModelConfigurationError("perception source alignment changed available evidence");
+  return copy;
+}
+
 export function perceptionAssignmentAccepted(context: unknown, decision: unknown): boolean {
   const assignment = record(record(record(context).task).assignment), output = record(decision);
   if (!Array.isArray(assignment.perceptionTargets)) return false;

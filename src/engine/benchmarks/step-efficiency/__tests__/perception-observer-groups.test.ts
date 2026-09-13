@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 import { contentHash } from "../../../models/model-audit";
-import { perceptionAssignmentAccepted, perceptionObserverGroups } from "../perception-observer-groups";
+import { perceptionAssignedSourcesContext, perceptionAssignmentAccepted, perceptionObserverGroups } from "../perception-observer-groups";
 
 it("partitions observer responsibilities without losing world evidence, splitting an observer or aliasing source state", () => {
   const targets = [
@@ -32,4 +32,39 @@ it("partitions observer responsibilities without losing world evidence, splittin
   expect(contentHash(source)).toBe(before);
   expect(groups[1]!.state).toEqual(source.state);
   expect(() => perceptionObserverGroups({ ...source, task: { assignment: { perceptionTargets: [targets[0], targets[0]] } } }, 2)).toThrow();
+});
+
+it("aligns responsibilities to source actions while retaining cross-action dependencies and all available evidence", () => {
+  const actions = ["x", "y", "z"].map(id => ({ actionRef: `ref:action:${id}`, actorRef: `ref:entity:${id}`, rawText: `Attempt ${id}` }));
+  const dependencies = actions.map(action => ({ kind: "action", ref: action.actionRef, requiredExistingRefs: ["ref:entity:shared"] }));
+  const source = {
+    task: { stage: "perception", assignment: { targetHandles: actions.map(action => action.actionRef), availableHandles: actions.map(action => action.actionRef),
+      perceptionTargets: [{ observerRef: "ref:entity:observer", sourceActionRef: "ref:action:z", targetIndex: 17 },
+        { observerRef: "ref:entity:observer", sourceActionRef: "ref:action:x", targetIndex: 3 }] } },
+    state: { actionSet: { assigned: actions, available: structuredClone(actions) }, dependencySet: { assigned: dependencies, available: structuredClone(dependencies) },
+      canonicalTruth: { secret: "Complete evidence" }, checkResults: [{ checkRef: "fixed", total: 15 }] },
+    referenceCatalog: { candidates: [{ handle: "ref:entity:shared" }] },
+  };
+  const before = contentHash(source), projected = perceptionAssignedSourcesContext(source) as typeof source;
+  expect(projected.task.assignment.targetHandles).toEqual(["ref:action:x", "ref:action:z"]);
+  expect(projected.state.actionSet.assigned).toEqual([actions[0], actions[2]]);
+  expect(projected.state.dependencySet.assigned).toEqual([dependencies[0], dependencies[2]]);
+  const restored = structuredClone(projected);
+  restored.task.assignment.targetHandles = source.task.assignment.targetHandles;
+  restored.state.actionSet.assigned = source.state.actionSet.assigned;
+  restored.state.dependencySet.assigned = source.state.dependencySet.assigned;
+  expect(restored).toEqual(source);
+  expect(perceptionAssignedSourcesContext(projected)).toEqual(projected);
+  for (const mutate of [
+    (copy: typeof source) => { copy.task.assignment.perceptionTargets[0]!.sourceActionRef = "ref:action:absent"; },
+    (copy: typeof source) => { copy.task.assignment.targetHandles[0] = "ref:action:absent"; },
+    (copy: typeof source) => { copy.state.actionSet.available[2]!.actorRef = "ref:entity:wrong"; },
+    (copy: typeof source) => { copy.state.actionSet.available.push(copy.state.actionSet.available[2]!); },
+    (copy: typeof source) => { copy.state.dependencySet.available[2]!.requiredExistingRefs = []; },
+  ]) {
+    const broken = structuredClone(source); mutate(broken);
+    expect(() => perceptionAssignedSourcesContext(broken)).toThrow("inconsistent perception assigned source join");
+  }
+  projected.state.actionSet.available[0]!.rawText = "changed";
+  expect(contentHash(source)).toBe(before);
 });

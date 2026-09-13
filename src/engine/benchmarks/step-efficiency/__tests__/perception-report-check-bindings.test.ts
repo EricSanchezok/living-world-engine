@@ -10,7 +10,7 @@ import type { StructuredModelRequest } from "../../../models/model-provider";
 import { ScriptedModelProvider } from "../../../testing/model-provider";
 import { loadWorldScript } from "../../../../script/world-loader";
 import { perceptionReportDomainsRequest, perceptionReportDomainsSchema } from "../perception-report-domains";
-import { perceptionObserverGroups } from "../perception-observer-groups";
+import { perceptionAssignedSourcesContext, perceptionObserverGroups } from "../perception-observer-groups";
 
 it("binds fixed checks to their assigned pairs and diagnoses all original report positions through actual repair", async () => {
   const captured: StructuredModelRequest<unknown>[] = [];
@@ -89,6 +89,12 @@ it("binds fixed checks to their assigned pairs and diagnoses all original report
   const groups = perceptionObserverGroups(captured[1]!.context, 1);
   expect(groups).toHaveLength(2);
   for (const [ordinal, group] of groups.entries()) {
+    const aligned = perceptionAssignedSourcesContext(group);
+    expect(perceptionReportDomainsSchema(aligned)).toEqual(perceptionReportDomainsSchema(group));
+    const scope = aligned as { task: { assignment: { targetHandles: string[] } }; state: { actionSet: { assigned: unknown[] }; committedCheckRequests: unknown[] } };
+    expect(scope.task.assignment.targetHandles).toEqual(ordinal === 0 ? ["ref:action:a", "ref:action:b"] : ["ref:action:c"]);
+    expect(scope.state.actionSet.assigned).toHaveLength(ordinal === 0 ? 2 : 1);
+    expect(scope.state.committedCheckRequests).toHaveLength(2);
     const groupWire = JSON.parse(JSON.stringify(perceptionReportDomainsSchema(group)), (key, value) =>
       key === "pattern" && typeof value === "string" && value.includes("\\p{") ? undefined : value);
     const acceptsGroup = new Ajv({ schemaId: "auto", unknownFormats: "ignore" }).compile(groupWire);

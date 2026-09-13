@@ -24,7 +24,7 @@ Complete-source perception screens retain systematic invented abilities, observe
 
 ## Decision Outcome
 
-Select option 2 for a bounded first-response experiment after the preceding intact-batch interventions. Group all pairs for each observer together; keep the original world in every request. Freeze the maximum observer count per request and compare complete waves, explicitly reporting every extra physical call and repeated input token. A single-observer continuation screen isolates residual role confusion after the grouped screen while retaining all fixed commitments and original global target indices. This decision accepts the experiment, not a default runtime or a qualified gameplay algorithm.
+Select option 2 for bounded first-response experiments after the preceding intact-batch interventions. Group all pairs for each observer together; keep the original world in every request. Freeze the maximum observer count per request and explicitly report every extra physical call and repeated input token. Complete waves measure task coverage; preselected diagnostic cases isolate observed failure mechanisms without establishing complete-task performance. The source-alignment treatment makes assigned action handles and dependencies agree with each observer group's source actions, while preserving all available evidence, fixed commitments and original global target indices. This decision accepts the experiment, not a default runtime or a qualified gameplay algorithm.
 
 ## Pros and Cons of the Options
 
