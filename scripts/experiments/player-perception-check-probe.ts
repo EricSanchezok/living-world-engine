@@ -5,6 +5,7 @@ import { pathToFileURL } from "node:url";
 import Ajv from "ajv";
 import { perceptionCheckDomainsSchema } from "../../src/engine/benchmarks/step-efficiency/perception-check-domains";
 import { perceptionCatalogTransport, PERCEPTION_CATALOG_TRANSPORT } from "../../src/engine/benchmarks/step-efficiency/perception-catalog-transport";
+import { perceptionObserverGroups, perceptionAssignmentAccepted } from "../../src/engine/benchmarks/step-efficiency/perception-observer-groups";
 import { perceptionDirectiveSchema } from "../../src/engine/contracts/llm-schemas";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { loadModelCatalog } from "../../src/engine/models/model-catalog";
@@ -36,10 +37,11 @@ When returning done, reports may mix perceived and no_stimulus; decide each pair
 export async function runPerceptionCheckProbe(argv: string[]) {
   const [sourceRoot, output, mode = "preflight", candidate = "check-domains"] = argv;
   if (!sourceRoot || !output || argv.length > 4 || !["preflight", "run"].includes(mode) ||
-    !["check-domains", "visibility-branches", "catalog-records"].includes(candidate)) throw new Error("Expected source-player-directory output-directory [preflight|run] [check-domains|visibility-branches|catalog-records]");
+    !["check-domains", "visibility-branches", "catalog-records", "observer-groups"].includes(candidate)) throw new Error("Expected source-player-directory output-directory [preflight|run] [check-domains|visibility-branches|catalog-records|observer-groups]");
   const codeRevision = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
   const patch = execFileSync("git", ["diff", "--binary", "HEAD"], { encoding: "utf8" });
   const producerFiles = [process.argv[1]!, "src/engine/benchmarks/step-efficiency/perception-check-domains.ts", "package-lock.json",
+    "src/engine/benchmarks/step-efficiency/perception-observer-groups.ts",
     ...(candidate === "catalog-records" ? ["src/engine/benchmarks/step-efficiency/perception-catalog-transport.ts", "src/engine/mechanics/shared-catalog-records.ts"] : [])];
   const producerHashes = () => Object.fromEntries(producerFiles.map(file => [file, contentHash(readFileSync(file, "utf8"))]));
   const boundProducer = producerHashes();
@@ -69,9 +71,10 @@ export async function runPerceptionCheckProbe(argv: string[]) {
   const catalog = loadModelCatalog(path.join(sourceRoot, "models.yaml"));
   const registry = new ModelRegistry(catalog, path.join(sourceRoot, "data"));
   const network = createModelFetchResolver(process.env), captured = new Map<string, unknown>();
-  let phase: "capture" | "run" = "capture", active = "", totalHttp = 0;
+  let phase: "capture" | "run" = "capture", totalHttp = 0;
+  const maxHttp = candidate === "observer-groups" ? 12 : 4;
   const observer = new RecordingRuntimeObserver({ mode: "full" });
-  const gateway = createModelGateway(catalog, process.env, { registry: { catalog,
+  const gatewayFor = (active: string) => createModelGateway(catalog, process.env, { registry: { catalog,
     capture: async hash => registry.snapshot(hash ?? String(sources[0]!.source.registrySnapshotHash)),
     refresh: async () => { throw new ModelConfigurationError("Frozen registry"); }, status: () => registry.status(),
   }, maxTransportAttempts: 1, fetchForAccount: (accountId, account) => {
@@ -93,26 +96,30 @@ export async function runPerceptionCheckProbe(argv: string[]) {
         captured.set(active, body);
         throw new ModelConfigurationError("Captured without network");
       }
-      if (totalHttp >= 4 || contentHash(body) !== contentHash(captured.get(active))) throw new ModelConfigurationError("Request or call ceiling drift");
+      if (totalHttp >= maxHttp || contentHash(body) !== contentHash(captured.get(active))) throw new ModelConfigurationError("Request or call ceiling drift");
       if (contentHash(producerHashes()) !== contentHash(boundProducer)) throw new ModelConfigurationError("Frozen producer files changed");
       totalHttp++;
       // Preserve the account transport's original URL/init calling convention.
       return send(input, arm === "C" && candidate === "catalog-records" ? { ...init, body: JSON.stringify(body) } : init);
     };
   } });
-  const requests = [["B", "C"], ["C", "B"]].flatMap((arms, ordinal) => arms.map(arm => {
+  const requests = [["B", "C"], ["C", "B"]].flatMap((arms, ordinal) => arms.flatMap(arm => {
     const row = sources[0]!;
     const p = row.source;
     if (p.modelCatalogHash !== catalog.hash || p.modelId !== "deepseek-flash") throw new Error("Source model binding drift");
     registry.snapshot(String(p.registrySnapshotHash));
-    const workloadId = String(record(record(p.context).execution).instanceId), batchId = `perception-check-domains-${ordinal}-${arm}`;
+    const contexts = arm === "C" && candidate === "observer-groups" ? perceptionObserverGroups(p.context, 7) : [p.context];
+    if (candidate === "observer-groups" && (row.targets.length !== 35 || (arm === "C" && contexts.length !== 5))) throw new Error("Observer screen requires the frozen 35-observer source");
+    return contexts.map((context, group) => {
+    const id = `${ordinal}-${arm}${contexts.length > 1 ? `-${group}` : ""}`;
+    const workloadId = String(record(record(p.context).execution).instanceId), batchId = `perception-${candidate}-${id}`;
     const identity = modelInvocationIdentity({ workloadId, batchId,
       runtimeIdentity: { worldHash: String(record(input.state).worldHash), revision: Number(record(input.state).revision) },
     }, "truth-perception", String(p.subjectId), 1);
     const request: StructuredModelRequest<unknown> = { role: "truth-perception", schemaName: "truth_perception_directive",
       workloadId, batchId, ...identity,
       subjectId: String(p.subjectId), profileId: String(p.profileId), modelRegistrySnapshotHash: String(p.registrySnapshotHash),
-      system: String(p.system), userPrompt: String(p.userPrompt), context: p.context,
+      system: String(p.system), userPrompt: String(p.userPrompt), context,
       promptVersion: String(p.promptVersion), schema: perceptionDirectiveSchema, wireJsonSchema: record(p.schema),
       jsonObjectPostlude: typeof p.jsonObjectPostlude === "string" ? p.jsonObjectPostlude : undefined,
       jsonSyntaxRecovery: p.jsonSyntaxRecovery as StructuredModelRequest<unknown>["jsonSyntaxRecovery"],
@@ -122,20 +129,23 @@ export async function runPerceptionCheckProbe(argv: string[]) {
         jsonObjectPostlude: `${p.jsonObjectPostlude ?? ""}${visibilityBranches}`,
         promptVersion: `${p.promptVersion}/perception-visibility-branches-v1@${contentHash(visibilityBranches).slice(0, 16)}` } : {}),
       ...(arm === "C" && candidate === "catalog-records" ? { promptVersion: `${p.promptVersion}/${PERCEPTION_CATALOG_TRANSPORT}` } : {}),
+      ...(arm === "C" && candidate === "observer-groups" ? { promptVersion: `${p.promptVersion}/observer-groups-7-v1` } : {}),
     };
-    return { id: `${ordinal}-${arm}`, ordinal, arm, request };
+    return { id, ordinal, arm, request };
+    });
   }));
+  if (requests.length !== maxHttp) throw new Error("Unexpected physical request count");
   for (const entry of requests) {
-    active = entry.id;
-    try { await gateway.generateStructured(entry.request); }
-    catch (error) { if (!captured.has(active)) throw error; }
+    try { await gatewayFor(entry.id).generateStructured(entry.request); }
+    catch (error) { if (!captured.has(entry.id)) throw error; }
   }
   save(output, "manifest.json", { protocol: `perception-${candidate}-paired-v1`, candidate, mode,
     physicalTransportTransform: candidate === "catalog-records" ? PERCEPTION_CATALOG_TRANSPORT : null,
     requestAuditBoundary: "Saved *-http-request.json and requestHashes bind the actual transmitted body. Gateway request audits precede the experimental physical transform; canonical output validation retains the complete original source catalog.",
     codeRevision, producerHashes: boundProducer, sourcePatchHash: contentHash(patch),
     runnerHash: contentHash(readFileSync(new URL(import.meta.url), "utf8")), sourceEventsHash: contentHash(events),
-    catalogHash: catalog.hash, sourceCohort: 49, perceptionTargets: sources[0]!.targets.length, repetitionsPerArm: 2, maxNewHttp: 4, maxRepairHttp: 0,
+    catalogHash: catalog.hash, sourceCohort: 49, perceptionTargets: sources[0]!.targets.length, repetitionsPerArm: 2, maxNewHttp: maxHttp, maxRepairHttp: 0,
+    maxConcurrentHttp: candidate === "observer-groups" ? 5 : 1,
     order: requests.map(entry => entry.id), requestHashes: Object.fromEntries([...captured].map(([id, body]) => [id, contentHash(body)])),
     sourceInvocations: sources.map(row => ({ sequence: row.event.sequence, id: row.event.correlation?.modelInvocationId, subject: row.source.subjectId, targets: row.targets })),
     qualification: "Source-level schema/reference and compiled-relation screen only; justified uncertainty and report semantics require separate review. All upstream work is imported; no player latency, persisted action completion or independent intent qualification is established." });
@@ -147,31 +157,43 @@ export async function runPerceptionCheckProbe(argv: string[]) {
   // The gateway keeps canonical Zod patterns; Ajv 6 checks the additional Draft-07 relations.
   const validateRelations = new Ajv({ schemaId: "auto", unknownFormats: "ignore" }).compile(validationSchema);
   phase = "run";
-  const results = [];
-  try {
-    for (const entry of requests) {
-      active = entry.id;
+  const results: Value[] = [], waves: Value[] = [];
+  const runEntry = async (entry: typeof requests[number]) => {
+      const active = entry.id;
       const started = performance.now();
       let row: Value;
       try {
-        const result = await gateway.generateStructured({ ...entry.request, observer });
+        const result = await gatewayFor(active).generateStructured({ ...entry.request, observer });
         const decision = perceptionDirectiveSchema.parse(result.value);
         const relationAccepted = Boolean(validateRelations(decision));
         row = { id: active, subject: entry.request.subjectId, schemaAccepted: true, relationAccepted,
+          assignmentAccepted: perceptionAssignmentAccepted(entry.request.context, decision),
           issues: relationAccepted ? [] : structuredClone(validateRelations.errors),
           kind: decision.kind, checkCount: decision.kind === "request_checks" ? decision.requests.length : 0,
           output: decision, audit: result.audit, elapsedMs: performance.now() - started };
       } catch (error) {
         if (!(error instanceof ModelOutputError)) throw error;
-        row = { id: active, subject: entry.request.subjectId, schemaAccepted: false, relationAccepted: false,
+        row = { id: active, subject: entry.request.subjectId, schemaAccepted: false, relationAccepted: false, assignmentAccepted: false,
           error: String(error), output: error.rawValue, audit: error.audit, elapsedMs: performance.now() - started };
       }
       save(output, `${active}-result.json`, row); results.push(row);
       process.stdout.write(`${JSON.stringify({ id: active, schemaAccepted: row.schemaAccepted, relationAccepted: row.relationAccepted, elapsedMs: row.elapsedMs, totalHttp })}\n`);
+  };
+  try {
+    for (const [ordinal, arms] of [["B", "C"], ["C", "B"]].entries()) {
+      for (const arm of arms) {
+        const group = requests.filter(entry => entry.ordinal === ordinal && entry.arm === arm), started = performance.now();
+        const settled = await Promise.allSettled(group.map(runEntry));
+        const wave = { ordinal, arm, ids: group.map(entry => entry.id), elapsedMs: performance.now() - started };
+        waves.push(wave); save(output, `${ordinal}-${arm}-wave.json`, wave);
+        const failed = settled.find(result => result.status === "rejected");
+        if (failed?.status === "rejected") throw failed.reason;
+      }
     }
   } finally {
     save(output, "events.json", observer.snapshot());
     save(output, "result.json", { newHttp: totalHttp, completed: results.length === requests.length,
+      waves,
       results: results.map(({ output: _output, audit: _audit, ...row }) => { void _output; void _audit; return row; }), wholeGoalAchieved: false });
   }
   return { newHttp: totalHttp, completed: results.length === requests.length };
