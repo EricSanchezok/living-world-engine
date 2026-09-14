@@ -42,6 +42,8 @@ The [recursive intention experiment](specs/0164-recursive-intent-tree-screen.md)
 
 The separate [intention reference view](specs/0166-scope-qualified-intent-reference-screen.md) presents complete embedded intentions using action-local symbols and binding tables. Its benchmark planning adapter preserves the source and canonical output contract without interpreting intentions as execution.
 
+The [initial intent frontier screen](specs/0170-initial-intent-frontier-screen.md) adds a deterministic starting view for assigned programs whose Activities are at the interval start. Complete intentions and temporal adjudication remain authoritative.
+
 ## State and policies
 
 Action Compilation specializes [empty shared-resource domains](specs/0111-specialize-empty-resource-pool-domain.md) from its bound source state; representation adapters preserve that request schema through initial and repair calls.
