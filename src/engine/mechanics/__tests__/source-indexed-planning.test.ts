@@ -31,6 +31,7 @@ import { logicalRepairContext } from "../../prompts/logical-repair-context";
 import { ModelOutputError, ModelConfigurationError } from "../../models/model-provider";
 import { planningCatalogEncodingRequest } from "../planning-catalog-encoding";
 import { TargetOwnedPlansCodec, targetOwnedPlansRequest } from "../../benchmarks/step-efficiency/target-owned-plans";
+import { CanonicalPlanningTargetsCodec, canonicalPlanningTargetsRequest } from "../../benchmarks/step-efficiency/canonical-planning-targets";
 import { dependentFieldsProvider } from "../resolution-dependent-fields-codec";
 import { planningCatalogEncodingProvider } from "../planning-catalog-encoding";
 import { TruthBatchCoordinator, TRUTH_BATCH_REQUEST_CONTRACT } from "../truth-batch-provider";
@@ -172,7 +173,7 @@ it("binds the complete target domain, source slots, schema and generated instruc
   expect(() => next.candidate.preprocessOutput!(value)).toThrow("schema changed");
 });
 
-it("retains a valid neighboring slot through the production coordinator, codecs and actual gateway", async () => {
+it.each(["owned", "canonical"])("retains a valid neighboring slot through the production coordinator and gateway (%s)", async representation => {
   const base = fixture(true, false, true, context => {
     context.repair = null; context.contractVersion = 17;
     context.roleContract = { role: "truth-resolution", purpose: "test", modelOwns: [], engineOwns: [], existingReferenceRule: "", proposalRule: "", failureRule: "" };
@@ -188,11 +189,14 @@ it("retains a valid neighboring slot through the production coordinator, codecs 
     } });
   const sink = { ...gateway, availableProfileSummaries: () => [], assertProfilesAvailable: async () => {}, generateStructured: async <T,>(request: StructuredModelRequest<T>) => {
     expect(request.schemaName).toBe("truth_resolution_plan_commit_batch");
-    const codec = new TargetOwnedPlansCodec(request.context), candidate = targetOwnedPlansRequest(request);
+    const codec = representation === "owned" ? new TargetOwnedPlansCodec(request.context) : new CanonicalPlanningTargetsCodec(request.context);
+    const candidate = representation === "owned" ? targetOwnedPlansRequest(request) : canonicalPlanningTargetsRequest(request);
     const causeCodec = new SourceIndexedPlanCauseCodec(base.request.context);
     const source = causeCodec.encode(encodeIndexedPlans(base.source, base.domain));
-    const raw = codec.encode(source) as { plans: Array<{ targets: unknown[] }> };
-    raw.plans[0]!.targets = [{ entityRef: "ref:entity:b", effects: [] }]; output = raw;
+    const raw = codec.encode(source) as { plans: Array<Record<string, unknown>> };
+    if (representation === "owned") raw.plans[0]!.targets = [{ entityRef: "ref:entity:b", effects: [] }];
+    else raw.plans[0]!.targetRefs = ["ref:entity:b"];
+    output = raw;
     return gateway.generateStructured(candidate);
   } };
   const provider = dependentFieldsProvider(indexedReviewedPlanningProvider(planningCatalogEncodingProvider(sink), false, false, true, true, true));
@@ -205,11 +209,94 @@ it("retains a valid neighboring slot through the production coordinator, codecs 
     schema: resolutionPlanCommitDirectiveSchema, schemaName: "truth_resolution_plan_commit", context, system: prompt.system, userPrompt: prompt.userPrompt,
     subjectId: `source-${slot}`, profileId: "truth-deepseek", runtimeIdentity: { worldHash: `sha256:${"1".repeat(64)}`, revision: 9 } })));
   if (!bodies.length && results[0]?.status === "rejected") throw results[0].reason;
-  expect(bodies).toHaveLength(1); expect(JSON.stringify(bodies)).toContain("entityRef");
+  expect(bodies).toHaveLength(1); expect(JSON.stringify(bodies)).toContain(representation === "owned" ? "entityRef" : "targetRefs");
   expect(results[1]!.status).toBe("fulfilled"); expect(results[0]!.status).toBe("rejected");
   const rejected = (results[0] as PromiseRejectedResult).reason as ModelOutputError;
   expect(rejected).toBeInstanceOf(ModelOutputError);
-  expect(JSON.stringify(rejected.rawValue)).toContain("invalidTargetOwnedEffects");
+  expect(JSON.stringify(rejected.rawValue)).toContain(representation === "owned" ? "invalidTargetOwnedEffects" : "invalidCanonicalTargets");
+});
+
+it("preserves canonical plans while replacing only targets across modes, effects and repeated positions", () => {
+  const { request, wire } = ownedFixture(), codec = new CanonicalPlanningTargetsCodec(request.context), candidate = canonicalPlanningTargetsRequest(request);
+  for (const mode of ["automatic", "check", "blocked"]) for (const kind of ["condition", "meter"]) {
+    const value = structuredClone(wire), plan = value.plans[0]!;
+    plan.mode = mode; plan.targetIndices = [0, 0];
+    if (mode === "check") { plan.difficulty = { kind: "environment", band: "easy", source: { kind: "fact", ref: "ref:fact:a" } }; plan.actorRatingRef = "ref:rating:a"; }
+    if (mode !== "blocked") {
+      const primary = { kind, proposalKey: "watched", targetPosition: 1, channel: "attention", label: "watched", description: "Wait before delivery",
+        sourceRefs: [{ kind: "action", ref: "ref:action:a" }], magnitude: "standard",
+        ...(kind === "condition" ? { conditionRef: { proposalKey: "watched" }, conditionProfileRef: null, durationProfileRef: "ref:mechanic:a", access: { kind: "public" } } :
+          { meterRef: "ref:meter:a", impactProfileRef: "ref:mechanic:a" }) };
+      plan.primaryEffect = primary; plan.secondaryEffect = { ...primary, targetPosition: 0 };
+      plan.threatenedEffect = Object.fromEntries(Object.entries(primary).filter(([key]) => key !== "magnitude"));
+    }
+    const before = contentHash(value), encoded = codec.encode(value) as typeof value;
+    expect(encoded.plans[0]!.targetRefs).toEqual(["ref:entity:a", "ref:entity:a"]);
+    for (const key of ["actionIndex", "means", "factors", "causeIndices", "difficulty", "actorRatingRef"]) expect(encoded.plans[0]![key]).toEqual(plan[key]);
+    expect(candidate.preprocessOutput!(encoded)).toEqual(request.preprocessOutput!(value));
+    candidate.schema.parse(candidate.preprocessOutput!(encoded).value); expect(contentHash(value)).toBe(before);
+  }
+  const empty = structuredClone(wire); empty.plans[0]!.targetIndices = [];
+  expect(candidate.preprocessOutput!(codec.encode(empty))).toEqual(request.preprocessOutput!(empty));
+  expect(candidate.context).toBe(request.context); expect(candidate.schema).toBe(request.schema);
+  expect(candidate.system).toContain("Each means emits sourcePosition"); expect(candidate.system).not.toContain("Use plan.targetIndices to select");
+  expect(candidate.jsonObjectPostlude).toContain("emit targetRef as the exact entity handle");
+  const definition = (candidate.wireJsonSchema!.definitions as Record<string, unknown>).canonical_planning_target;
+  expect(definition).toEqual({ type: "string", enum: codec.domain.targets.map(target => target.handle) });
+});
+
+it("keeps malformed canonical targets and all invalid neighboring fields rejected", () => {
+  const { request, wire } = ownedFixture(), codec = new CanonicalPlanningTargetsCodec(request.context), candidate = canonicalPlanningTargetsRequest(request);
+  const valid = codec.encode(wire) as typeof wire;
+  const corruptions: Array<(plan: Record<string, unknown>) => void> = [
+    plan => { plan.targetRefs = null; }, plan => { plan.targetRefs = ["ref:entity:b"]; }, plan => { plan.targetRefs = ["ref:entity:unknown"]; },
+    plan => { plan.targetIndices = []; }, plan => { plan.primaryEffect = { targetRef: "ref:entity:unknown" }; },
+    plan => { plan.primaryEffect = { targetRef: "ref:entity:a", targetPosition: 0 }; },
+  ];
+  for (const corrupt of corruptions) {
+    const raw = structuredClone(valid); corrupt(raw.plans[0]!);
+    const decoded = candidate.preprocessOutput!(raw).value as { slots: Array<{ slot: number; result: { plans: Array<Record<string, unknown>> } }> };
+    const bad = decoded.slots.find(slot => slot.slot === 0)!.result;
+    expect(bad.plans[0]!.invalidCanonicalTargets).toMatchObject({ rejectedValue: raw.plans[0] });
+    expect(resolutionPlanCommitDirectiveSchema.safeParse(bad).success).toBe(false);
+    expect(resolutionPlanCommitDirectiveSchema.safeParse(decoded.slots.find(slot => slot.slot === 1)!.result).success).toBe(true);
+  }
+  for (const corrupt of ["means", "factors", "causeIndices"]) {
+    const raw = structuredClone(valid); raw.plans[0]![corrupt] = [{ unsupported: true }];
+    try { expect(candidate.schema.safeParse(candidate.preprocessOutput!(raw).value).success).toBe(false); }
+    catch (error) { expect(error).toBeInstanceOf(z.ZodError); }
+  }
+  const missing = structuredClone(valid); missing.plans.pop();
+  expect(() => candidate.preprocessOutput!(missing)).toThrow("missing actionIndex");
+});
+
+it("rejects canonical target source/schema drift and inconsistent instructions without touching ordinary calls", () => {
+  const { request, wire } = ownedFixture();
+  for (const field of ["context", "wireJsonSchema"]) {
+    const copy = { ...request, context: structuredClone(request.context), wireJsonSchema: structuredClone(request.wireJsonSchema) };
+    const candidate = canonicalPlanningTargetsRequest(copy), codec = new CanonicalPlanningTargetsCodec(copy.context), value = codec.encode(wire);
+    (candidate[field as "wireJsonSchema"] as Record<string, unknown>).changed = true;
+    expect(() => candidate.preprocessOutput!(value)).toThrow("changed before decoding");
+  }
+  const candidate = canonicalPlanningTargetsRequest(request);
+  expect(() => canonicalPlanningTargetsRequest(candidate)).toThrow("already applied");
+  expect(() => canonicalPlanningTargetsRequest({ ...request, jsonObjectPostlude: undefined })).toThrow("system and tail");
+  const ordinary = { ...request, role: "causal-verifier" as const };
+  expect(canonicalPlanningTargetsRequest(ordinary)).toBe(ordinary);
+});
+
+it("applies canonical targets to actual singleton first planning and repair contexts", () => {
+  for (const schemaName of ["truth_resolution_plan_commit", "truth_resolution_plan_repair"]) {
+    const base = fixture(false, false, true, context => { if (schemaName === "truth_resolution_plan_commit") context.repair = null; });
+    const request = planningContractTailRequest(sourceIndexedPlanCausesRequest({ ...base.request, schemaName }));
+    const candidate = canonicalPlanningTargetsRequest(request), codec = new CanonicalPlanningTargetsCodec(request.context);
+    const indexed = new SourceIndexedPlanCauseCodec(base.request.context).encode(encodeIndexedPlans(base.source, base.domain));
+    expect(candidate.preprocessOutput!(codec.encode(indexed))).toEqual(request.preprocessOutput!(indexed));
+    candidate.schema.parse(candidate.preprocessOutput!(codec.encode(indexed)).value);
+    const drifted = structuredClone(request.context) as { state: Record<string, unknown> };
+    drifted.state.codec = "unknown";
+    expect(() => new CanonicalPlanningTargetsCodec(drifted)).toThrow("invalid source");
+  }
 });
 
 it.each([false, true])("keeps explicit bad condition keys rejected and valid neighbors through the real coordinator (%s)", async bad => {

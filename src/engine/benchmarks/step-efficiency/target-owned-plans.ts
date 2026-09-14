@@ -23,11 +23,13 @@ const at = <T>(values: readonly T[], index: unknown): T | undefined =>
   typeof index === "number" && Number.isSafeInteger(index) && index >= 0 ? values[index] : undefined;
 
 /** Restore the exact earlier indexed source and reuse its complete projection guards. */
-function sourceDomain(context: unknown): PlanningIndexDomain {
+export function indexedPlanningSourceDomain(context: unknown): PlanningIndexDomain {
   const source = structuredClone(context);
   if (!object(source) || !object(source.task) || !object(source.task.planningIndices) ||
     source.task.planningIndices.meansContract !== SOURCE_INDEXED_PLAN_MEANS) return fail("requires indexed means source");
-  source.state = expandSharedCatalogPrefix(expandSharedCatalogRecords(expandRepairDiagnosticDomains(source.state)));
+  if (object(source.state) && Object.hasOwn(source.state, "codec")) {
+    source.state = expandSharedCatalogPrefix(expandSharedCatalogRecords(expandRepairDiagnosticDomains(source.state)));
+  }
   delete source.task.planningActionFrames;
   const caused = structuredClone(source);
   delete source.task.planCauseChoices;
@@ -43,7 +45,7 @@ export class TargetOwnedPlansCodec {
   private readonly domainHash: string;
 
   constructor(private readonly context: unknown) {
-    this.domain = sourceDomain(context);
+    this.domain = indexedPlanningSourceDomain(context);
     this.sourceHash = contentHash(context);
     this.domainHash = contentHash(this.domain);
   }

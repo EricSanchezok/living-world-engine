@@ -150,3 +150,5 @@ The model registry accepts [complete local model metadata](specs/0098-complete-l
 The benchmark-only [repair reference witness screen](specs/0167-repair-reference-witness-screen.md) repeats exact candidate reference records and ownership joins after the singleton planning schema. Complete source contexts and canonical output authority remain unchanged.
 
 The shared [bound-target dependency materializer](specs/0168-bound-target-dependency-reads.md) includes original target binding identities as conservative entity reads for compilation, grounding and conflict scheduling.
+
+The benchmark-only [canonical target planning screen](specs/0169-canonical-target-planning-screen.md) replaces plan and effect target indices with explicit entity references while retaining action, means, factor and cause constraints.
