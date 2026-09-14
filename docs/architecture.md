@@ -28,6 +28,8 @@ The benchmark-only [source-authored speech producer](specs/0163-source-authored-
 
 The [sampled perception experiment](specs/0156-sampled-perception-candidate-selection.md) screens whole proposals before selection. TruthEngine and the experiment share pure onset-check materialization; randomness remains in the runtime after admission. A selected proposal retains its exact original fields and must still pass canonical validation.
 
+The [fixed planning selection screen](specs/0173-fixed-planning-candidate-selection.md) binds three initial automatic proposals to their complete planning source. Its selection-only model returns an unchanged eligible proposal or abstains; the runtime plan materializer and original execution pipeline retain validation authority.
+
 The benchmark [temporal route representation](specs/0157-temporal-route-perception-screen.md) derives a terminal perception tag from a selected current or pending route case. Pending transfers have no stimulus payload; original receipt validation remains authoritative for the compiled result.
 
 Its optional [observer-local symbol codec](specs/0158-observer-local-perception-symbols.md) binds existing claim identities to each assigned observer's complete local inventory. Explicit introductions remain model-authored; the codec restores selected opaque handles without identity inference.
