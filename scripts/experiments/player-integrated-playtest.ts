@@ -8,6 +8,7 @@ import { assertFiniteWorkWorld } from "./step-finite-work-world";
 import { integratedPlayerAlgorithmRef, registerIntegratedPlayerAlgorithm } from "../../src/engine/benchmarks/step-efficiency/integrated-player-algorithm";
 import { standardEagerReferenceAlgorithmRef } from "../../src/engine/algorithms/standard-composition";
 import { localPlanRepairAlgorithmRef } from "../../src/engine/benchmarks/step-efficiency/local-plan-repair-algorithm";
+import { recursivePlayerAlgorithmRef } from "../../src/engine/benchmarks/step-efficiency/recursive-player-algorithm";
 import { globalMeansPoolRequest } from "../../src/engine/benchmarks/step-efficiency/global-means-pool";
 import { assertNonthinkingWorld } from "../../src/engine/benchmarks/step-efficiency/nonthinking-world";
 import { loadWorldScript, loadWorldTemplate } from "../../src/script/world-loader";
@@ -29,9 +30,10 @@ import { loadLocalEncoder, livingWorldCacheRoot, discoverLocalEncoderModelDirect
 import { MULTILINGUAL_E5_BASE_ASSET } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/model-assets";
 import { relationalRrfEncoderFingerprint, R5_RELATIONAL_PASSAGE_SCHEMA_VERSION } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/relational-rrf";
 
-const protocol = { id: "integrated-player-goal-diagnostic-v5", worldRecipe: INTEGRATED_PLAYER_WORLD_RECIPE, seed: 20260911, maxHttp: 120,
+const protocol = { id: "integrated-player-goal-diagnostic-v6", worldRecipe: INTEGRATED_PLAYER_WORLD_RECIPE, seed: 20260911, maxHttp: 120,
   purpose: "unqualified-full-player-failure-localization", priorSourceQualification: "failed", promotionEligible: false,
-  knownCounterexamples: ["observer-source-role-confusion", "unsupported-barrier-identity", "unsupported-negative-assertions"],
+  knownCounterexamples: ["observer-source-role-confusion", "unsupported-barrier-identity", "unsupported-negative-assertions",
+    "work-inside-wait-condition", "success-gate-before-failure-handling", "ambiguous-binary-condition"],
   maxDispatchMs: 600_000, maxCommitsPerLease: 6, model: "deepseek-flash", thinking: "disabled",
   action: "向码头边靠着的领航人或搬运工打听哪里有便宜又安全的下榻处。",
   interpretation: "One isolated full player action through WorldHost and persisted state, with all 48 original Agents plus the external participant. Prior source counterexamples remain failed qualification. This explicitly unqualified combined diagnostic locates actual critical-path and semantic failures; it neither promotes adapters nor changes prior source gates. Review actual source semantics before another action. No historical preparations or model outputs are imported. Timing and repairs include every new inference call; bootstrap is reported separately from submission-to-completion latency." } as const;
@@ -44,8 +46,9 @@ const checkedCodeRevision = () => {
 const selectedAlgorithm = (selection: unknown) => {
   if (selection === "standard" || selection === "standard-pooled") return standardEagerReferenceAlgorithmRef();
   if (selection === "standard-local-repair") return localPlanRepairAlgorithmRef();
+  if (selection === "recursive-local-repair") return recursivePlayerAlgorithmRef();
   if (selection === "integrated") return integratedPlayerAlgorithmRef();
-  throw new Error("Expected explicit standard, standard-pooled, standard-local-repair or integrated composition selection");
+  throw new Error("Expected explicit standard, standard-pooled, standard-local-repair, recursive-local-repair or integrated composition selection");
 };
 const sourceHashes = () => Object.fromEntries(["scripts/experiments/player-integrated-playtest.ts",
   "scripts/experiments/player-integrated-world.ts", "scripts/experiments/step-finite-work-world.ts",
@@ -54,6 +57,9 @@ const sourceHashes = () => Object.fromEntries(["scripts/experiments/player-integ
   "src/engine/benchmarks/step-efficiency/integrated-player-algorithm.ts",
   "src/engine/algorithms/standard-composition.ts",
   "src/engine/benchmarks/step-efficiency/local-plan-repair-algorithm.ts",
+  "src/engine/benchmarks/step-efficiency/recursive-player-algorithm.ts",
+  "src/engine/benchmarks/step-efficiency/agent-recursive-intent.ts", "src/engine/prompts/shared/agent-recursive-intent.md",
+  "src/engine/benchmarks/step-efficiency/agent-intent-program.ts", "src/engine/prompts/shared/agent-intent-program.md",
   "src/engine/mechanics/mechanical-plan-repair.ts",
   "src/engine/benchmarks/step-efficiency/global-means-pool.ts",
   "src/engine/prompts/shared/global-means-pool.md",
@@ -221,7 +227,7 @@ export async function runIntegratedPlayer(root: string) {
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const [mode, directory, registryRoot, snapshotHash, algorithmSelection = "integrated", ...extra] = process.argv.slice(2);
   if (!directory || extra.length || mode === "prepare" && (!registryRoot || !snapshotHash) || mode === "run" && registryRoot || !["prepare", "run"].includes(mode)) {
-    throw new Error("Expected prepare output-directory registry-data-root snapshot-hash [standard|standard-pooled|standard-local-repair|integrated] | run prepared-directory");
+    throw new Error("Expected prepare output-directory registry-data-root snapshot-hash [standard|standard-pooled|standard-local-repair|recursive-local-repair|integrated] | run prepared-directory");
   }
   (mode === "prepare" ? prepareIntegratedPlayer(path.resolve(directory), registryRoot!, snapshotHash!, algorithmSelection) : runIntegratedPlayer(path.resolve(directory)))
     .then(result => { if (result) process.stdout.write(`${JSON.stringify({ prepared: true, worldHash: result.worldHash, newHttp: 0 })}\n`); })

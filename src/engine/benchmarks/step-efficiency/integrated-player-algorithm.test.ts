@@ -20,8 +20,14 @@ import { RecordingRuntimeObserver } from "../../runtime/observability";
 import { createModelGateway } from "../../models/model-gateway";
 import { TERMINAL_ROOT_CLOSER_RECOVERY } from "../../models/terminal-root-closer-recovery";
 import { PERCEPTION_REPORT_DOMAINS } from "./perception-report-domains";
+import { recursivePlayerAlgorithmRef } from "./recursive-player-algorithm";
+import { AGENT_RECURSIVE_INTENT, lowerRecursiveIntent, type RecursiveIntent } from "./agent-recursive-intent";
+import { INTENT_PROGRAM_PREFIX } from "./agent-intent-program";
 
-it.each([false, true])("pins the diagnostic producer through persistence with external reaction=%s", async externalReaction => {
+it.each([
+  { recursive: false, externalReaction: false }, { recursive: false, externalReaction: true },
+  { recursive: true, externalReaction: false }, { recursive: true, externalReaction: true },
+])("pins the diagnostic producer through persistence: %j", async ({ recursive, externalReaction }) => {
   const root = mkdtempSync(path.join(tmpdir(), "integrated-player-"));
   const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
   const provider = new ScriptedModelProvider(request => {
@@ -36,20 +42,28 @@ it.each([false, true])("pins the diagnostic producer through persistence with ex
     return deterministicModelOutput(request.profileId, request.context);
   }, createTestModelCatalog(undefined, { maxInputBytes: 1_048_576 }));
   const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 47, modelCatalog: provider.catalog });
-  const ref = integratedPlayerAlgorithmRef();
+  const ref = recursive ? recursivePlayerAlgorithmRef() : integratedPlayerAlgorithmRef();
   const encoder = { modelId: MULTILINGUAL_E5_BASE_ASSET.modelId, modelHash: MULTILINGUAL_E5_BASE_ASSET.directorySha256,
     dimensions: 2, encodeBatch: async (texts: readonly string[]) => texts.map(text => [text.length % 7, 1]) };
   const cache = new CachedPassageEncoder(encoder, MULTILINGUAL_E5_BASE_ASSET.encoderFingerprint, root);
   await cache.encodePassages({ worldContentHash: definition.contentHash, passages: actionCompilationPassagesForState(definition.initialState), allowWrite: true });
   cache.close();
-  let perceptionCalls = 0, perceptionContext: unknown;
+  let perceptionCalls = 0, perceptionContext: unknown, recursiveCalls = 0;
+  const recursivePrograms: RecursiveIntent[] = [];
+  let recursiveOutput: unknown;
   const gateway = createModelGateway(provider.catalog, { TEST_MODEL_API_KEY: "fixture-key" }, {
     registry: createTestModelRegistry(provider.catalog), maxTransportAttempts: 1, fetch: async (_url, init) => {
-      perceptionCalls++;
       const body = JSON.parse(String(init?.body));
-      expect(body.messages[1].content).toContain("Identity binding only");
-      expect(body.messages[1].content).toContain("perception_entity_assertion");
-      const content = JSON.stringify({ kind: "done", reports: deterministicOnsetReports(perceptionContext) }) + "}";
+      let content: string;
+      if (recursive) {
+        recursiveCalls++;
+        content = JSON.stringify(recursiveOutput);
+      } else {
+        perceptionCalls++;
+        expect(body.messages[1].content).toContain("Identity binding only");
+        expect(body.messages[1].content).toContain("perception_entity_assertion");
+        content = JSON.stringify({ kind: "done", reports: deterministicOnsetReports(perceptionContext) }) + "}";
+      }
       return Response.json({ id: "perception-fixture", object: "chat.completion", created: 1, model: body.model,
         choices: [{ index: 0, message: { role: "assistant", content }, finish_reason: "stop" }],
         usage: { prompt_tokens: 20, completion_tokens: 30, total_tokens: 50 } });
@@ -57,15 +71,29 @@ it.each([false, true])("pins the diagnostic producer through persistence with ex
   });
   const generate = provider.generateStructured.bind(provider);
   provider.generateStructured = request => {
-    if (request.role === "truth-perception") {
+    if (recursive && ["agent-bootstrap", "agent-mind"].includes(request.role)) {
+      expect(request.promptVersion).toContain(AGENT_RECURSIVE_INTENT);
+      const output = deterministicModelOutput(request.profileId, request.context) as {
+        slots: { nextActionIntent: { rawText: string; targetHandles: string[] } }[];
+      };
+      recursiveOutput = { ...output, slots: output.slots.map(slot => {
+        const program: RecursiveIntent = { kind: "sequence", children: [
+          { kind: "attempt", text: slot.nextActionIntent.rawText, targetHandles: slot.nextActionIntent.targetHandles },
+          { kind: "attempt", text: "随后观察周围情况，不预先断言成功。", targetHandles: ["ref:local_entity:self"] },
+        ] };
+        recursivePrograms.push(program);
+        return { ...slot, nextActionIntent: { program } };
+      }) };
+      return gateway.generateStructured(request);
+    }
+    if (!recursive && request.role === "truth-perception") {
       expect(request.jsonSyntaxRecovery).toBe(TERMINAL_ROOT_CLOSER_RECOVERY);
       expect(request.promptVersion).toContain(PERCEPTION_REPORT_DOMAINS);
       perceptionContext = request.context;
       return gateway.generateStructured(request);
     }
     const context = request.context as { state?: { codec?: string } };
-    // Other model roles return canonical fixture values; perception uses the
-    // actual registered request, gateway, parser and materializer above.
+    // The selected producer uses the gateway above; other model roles return canonical fixtures.
     return generate({ ...request, wireJsonSchema: undefined, preprocessOutput: value => {
       const fillFixtureDefaults = (node: unknown): void => {
         if (!node || typeof node !== "object") return;
@@ -93,6 +121,14 @@ it.each([false, true])("pins the diagnostic producer through persistence with ex
     const host = new WorldHost(options);
     const created = await host.createInstance({ worldId: definition.id, start: { kind: "origin", originId: "courtyard-wanderer",
       displayName: "旅人", appearance: "背着旅行包。", motivation: "了解庭院。" } });
+    if (recursive) {
+      expect(recursiveCalls).toBeGreaterThan(0);
+      const initial = database.readInstance(created.summary.id).document;
+      expect(Object.keys(initial.state.agents)).toHaveLength(Object.keys(definition.initialState.agents).length + 1);
+      const actions = Object.values(initial.state.agents).flatMap(agent => agent.nextAction ? [agent.nextAction.rawText] : []);
+      expect(actions.sort()).toEqual(recursivePrograms.map(program =>
+        INTENT_PROGRAM_PREFIX + JSON.stringify(lowerRecursiveIntent(program).program)).sort());
+    }
     const result = await runPlayerFeedbackAction({ host, instanceId: created.summary.id, participantId: created.participants[0]!.id,
       submissionId: "observe-courtyard", text: "我观察石门和守门人。", read: () => database.readInstance(created.summary.id).document,
       onUpdate: () => {}, onCheckpoint: () => {}, stopReason: () => undefined, onStop: () => {}, pollMs: 5 });
@@ -103,8 +139,8 @@ it.each([false, true])("pins the diagnostic producer through persistence with ex
     expect(result.completedElapsedMs).toBeGreaterThan(0);
     const document = database.readInstance(created.summary.id).document;
     expect(document.executionAlgorithm).toEqual(ref);
-    expect(ref.version).toBe("10");
-    if (externalReaction) expect(perceptionCalls).toBeGreaterThan(0);
+    expect(ref.version).toBe(recursive ? "1" : "10");
+    if (externalReaction && !recursive) expect(perceptionCalls).toBeGreaterThan(0);
     const executions = database.executions({ instanceId: created.summary.id });
     const algorithmExecutions = executions.filter(execution => execution.manifest.kind === "algorithm");
     expect(algorithmExecutions).toHaveLength(externalReaction ? 3 : 2);

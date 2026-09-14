@@ -1,7 +1,9 @@
 import path from "node:path";
 import { expect, it } from "vitest";
 import { z } from "zod";
-import { AgentMind } from "../../algorithms/eager-reference/agent-mind";
+import { registerIntegratedPlayerAlgorithm } from "./integrated-player-algorithm";
+import { recursivePlayerAlgorithmRef } from "./recursive-player-algorithm";
+import { createActionCompilationRetrievalRuntimeProvider } from "../../../server/action-compilation-retrieval-runtime";
 import { agentMindBatchOutputSchema } from "../../contracts/llm-schemas";
 import { loadWorldScript } from "../../../script/world-loader";
 import { contentHash } from "../../models/model-audit";
@@ -73,8 +75,9 @@ it("keeps original private and non-action contracts and resolves every recursive
   source.context.slots.push({ slot: 1 }); expect(() => candidate.preprocessOutput!(wire)).toThrow("source or schema changed");
 });
 
-it.each([false, true])("uses real AgentMind and gateway with foreign local target=%s", async foreign => {
-  const catalog = createTestModelCatalog(), { initialState: state } = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 17, modelCatalog: catalog });
+it.each([false, true])("uses registered recursive bootstrap and gateway with foreign local target=%s", async foreign => {
+  const catalog = createTestModelCatalog(), definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 17, modelCatalog: catalog });
+  const state = definition.initialState;
   const agents = Object.values(state.agents).sort((a, b) => a.id.localeCompare(b.id)), before = contentHash(state);
   const expected = agents.map(agent => ({ kind: "sequence" as const, children: [attempt("观察周围情况"),
     attempt("查看相关对象，不宣称已经成功", agent.id === "keeper" ? "traveler" : "copper-key")] }));
@@ -92,18 +95,23 @@ it.each([false, true])("uses real AgentMind and gateway with foreign local targe
   const provider: StructuredModelProvider = { catalog, availableProfileSummaries: role => gateway.availableProfileSummaries(role),
     assertProfilesAvailable: ids => gateway.assertProfilesAvailable(ids), generateStructured: source => {
       if (++calls > 1) throw new ModelConfigurationError("Foreign target stopped before repair HTTP");
-      return gateway.generateStructured(agentRecursiveIntentRequest(source));
+      expect(source.promptVersion).toContain("agent-recursive-intent-v1");
+      return gateway.generateStructured(source);
     } };
-  const pending = new AgentMind(provider).thinkBatch(state, agents.map(agent => ({ agent, observations: [], events: [],
-    currentResolution: { action: null, outcome: null } })), { workloadId: "world", batchId: "bootstrap", observer,
-    runtimeIdentity: { worldHash: state.worldHash, revision: state.revision } }, "bootstrap", 8);
+  const ref = recursivePlayerAlgorithmRef(), retrieval = createActionCompilationRetrievalRuntimeProvider();
+  const algorithm = registerIntegratedPlayerAlgorithm().create(ref, { provider,
+    resources: { resolve: <T,>() => retrieval.runtime(ref) as T } });
+  const pending = algorithm.bootstrap({ definition, state }, {
+    modelScope: { workloadId: "world", batchId: "bootstrap", observer,
+      runtimeIdentity: { worldHash: state.worldHash, revision: state.revision } }, instrumentation: { emit: () => undefined },
+  });
   if (foreign) {
     await expect(pending).rejects.toThrow("Foreign target stopped");
     expect(JSON.stringify(observer.snapshot().filter(e => e.event === "model.semantic.rejected").map(e => e.payload))).toContain("reference.unknown_handle");
   } else {
-    const result = await pending; expect(result.failures).toEqual([]); expect(result.outputs.size).toBe(agents.length);
+    const result = await pending; expect(result.agentCommits).toHaveLength(agents.length);
     for (const [index, agent] of agents.entries()) {
-      const output = result.outputs.get(agent.id)!, lowered = lowerRecursiveIntent(expected[index]!);
+      const output = result.agentCommits.find(commit => commit.agentId === agent.id)!, lowered = lowerRecursiveIntent(expected[index]!);
       expect(JSON.parse(output.nextAction.rawText.slice(INTENT_PROGRAM_PREFIX.length))).toEqual(lowered.program);
       expect(output.nextAction.targetIds).toEqual(lowered.targetHandles.map(h => h.replace("ref:local_entity:", "")));
       expect(output.nextAction.actorId).toBe(agent.id);
@@ -111,6 +119,7 @@ it.each([false, true])("uses real AgentMind and gateway with foreign local targe
     }
   }
   expect(http).toBe(1); expect(contentHash(state)).toEqual(before);
+  expect(algorithm.manifest.hash).toBe(ref.manifestHash);
 });
 
 it.each(["duplicate-target", "missing-child", "index-reference", "blank-condition", "legacy-action"])("retains exact wire and billable audit for malformed tree: %s", async mode => {

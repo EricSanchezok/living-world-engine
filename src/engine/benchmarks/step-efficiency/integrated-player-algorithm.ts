@@ -15,6 +15,7 @@ import { UNMATCHED_CLOSER_RECOVERY } from "../../models/unmatched-closer-recover
 import { TERMINAL_ROOT_CLOSER_RECOVERY } from "../../models/terminal-root-closer-recovery";
 import { PERCEPTION_LAW_CONTEXT, perceptionLawContextRequest } from "./perception-law-context";
 import { PERCEPTION_REPORT_DOMAINS, perceptionReportDomainsRequest } from "./perception-report-domains";
+import { registerRecursivePlayerAlgorithm } from "./recursive-player-algorithm";
 
 const config = { planning: [CONDITIONAL_PLAN_STAKES, EFFECT_PROFILE_DOMAINS, PLANNING_ACTION_FRAMES, FACTOR_CHOICE_PRODUCTS],
   perception: { lawContext: PERCEPTION_LAW_CONTEXT, reportDomains: PERCEPTION_REPORT_DOMAINS, jsonSyntaxRecovery: TERMINAL_ROOT_CLOSER_RECOVERY },
@@ -59,5 +60,5 @@ export function registerIntegratedPlayerAlgorithm(registry = new WorldExecutionA
       return createComposedEagerReferenceAlgorithm({ ...context, services: { ...services, provider } });
     },
   });
-  return registry;
+  return registerRecursivePlayerAlgorithm(registry);
 }

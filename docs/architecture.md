@@ -38,7 +38,7 @@ The [action-phase graph screen](specs/0160-action-phase-graph-screen.md) exposes
 
 The [Agent intent-program screen](specs/0161-agent-intent-program-screen.md) generates control structure at the private decision boundary and preserves the complete program through a diagnostic action embedding. Its inspection exposes attempts or unevaluated conditions; production execution remains unchanged.
 
-The [recursive intention screen](specs/0164-recursive-intent-tree-screen.md) replaces model-authored graph references with embedded children and leaf-local targets. A deterministic compiler produces the complete indexed diagnostic representation without deciding which conditions or attempts succeed.
+The [recursive intention experiment](specs/0164-recursive-intent-tree-screen.md) replaces model-authored graph references with embedded children and leaf-local targets. A deterministic compiler produces the complete indexed diagnostic representation without deciding which conditions or attempts succeed. Its separately registered player diagnostic passes the full intention through ordinary compilation and adjudication on the local plan repair foundation.
 
 ## State and policies
 
