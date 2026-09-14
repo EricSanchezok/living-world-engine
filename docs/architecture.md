@@ -154,3 +154,5 @@ The benchmark-only [repair reference witness screen](specs/0167-repair-reference
 The shared [bound-target dependency materializer](specs/0168-bound-target-dependency-reads.md) includes original target binding identities as conservative entity reads for compilation, grounding and conflict scheduling.
 
 The benchmark-only [canonical target planning screen](specs/0169-canonical-target-planning-screen.md) replaces plan and effect target indices with explicit entity references while retaining action, means, factor and cause constraints.
+
+The separate [canonical cause planning screen](specs/0172-canonical-cause-planning-screen.md) changes only the outer cause reference field and its instructions. The complete cause table, slot permissions, other representations and original canonical validator remain authoritative.

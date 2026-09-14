@@ -7,6 +7,7 @@ import { SourceIndexedPlanCauseCodec, SOURCE_INDEXED_PLAN_CAUSES } from "./sourc
 const heading = "\n\nFinal physical planning contract (all original state, actions and schema above remain authoritative):\n";
 const coverage = "Return exactly one complete plan for every listed actionIndex in one commit_plans result. These are all assigned actions across all original slots, not examples or background actions. Preserve every original action and its constraints. Before returning, verify the complete index set.";
 const causes = "For this candidate the supplied schema names causeIndices, not causes. Select each causeIndex from task.planCauseChoices.choices within the original source slot; the code restores its exact kind/ref. Include the plan's own action as an explicit selected cause. Never emit causes or entity sources in that list.";
+export const planningContractTailCauseInstruction = (): string => causes;
 const intent = loadPromptAsset("shared/planning-intent-preservation.md");
 export const PLANNING_CONTRACT_TAIL = `indexed-planning-contract-tail-v1@${contentHash({ heading, coverage, causes, intent,
   indexed: sourceIndexedPlanningInstruction(true), causeContract: SOURCE_INDEXED_PLAN_CAUSES }).slice(0, 16)}`;

@@ -8,6 +8,7 @@ import { expandSharedBatchContexts, isSharedBatchContext } from "./shared-batch-
 
 const instruction = "For each plan, emit causeIndices instead of causes. Select indices from task.planCauseChoices.choices; each row binds an exact existing kind/ref and its permitted source slots. Select only rows permitted for this actionIndex's original slot and component planCauseScope. Visible actions outside that component cannot be selected as plan causes. Include the row for this plan's own action as required by the canonical plan contract. Preserve every additional supported cause and its order. The decoder restores exactly those pairs; it never supplies a missing action cause. Entities and post-plan evidence have no legal plan-cause index; they may still support other fields under their original contracts. Original state, action intent, means, targets and causal validators remain authoritative. In repair, select indices from the CURRENT domain; a rejected request's indices are only interpretable using its recorded domain. Never emit both causes and causeIndices.";
 export const SOURCE_INDEXED_PLAN_CAUSES = `source-indexed-plan-causes-v2@${contentHash(instruction).slice(0, 16)}`;
+export const sourceIndexedPlanCausesInstruction = (): string => instruction;
 type Value = Record<string, unknown>;
 const object = (value: unknown): value is Value => value !== null && typeof value === "object" && !Array.isArray(value);
 const fail = (message: string): never => { throw new ModelConfigurationError(`plan cause choices: ${message}`); };
