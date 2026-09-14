@@ -146,3 +146,5 @@ The same planner can select [plan-declared random completion](specs/0096-plan-de
 Experiments account for [provider model cohorts](specs/0097-provider-model-cohort-accounting.md) through one append-only budget, immutable account/model prices and explicit routed-response reconciliation.
 
 The model registry accepts [complete local model metadata](specs/0098-complete-local-model-metadata.md) for exact selection when the remote directory has not indexed a model, retaining local field provenance and execution snapshot binding.
+
+The benchmark-only [repair reference witness screen](specs/0167-repair-reference-witness-screen.md) repeats exact candidate reference records and ownership joins after the singleton planning schema. Complete source contexts and canonical output authority remain unchanged.
