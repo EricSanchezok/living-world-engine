@@ -24,6 +24,8 @@ Dependencies flow browser → Route Handler → WorldHost → SimulationEngine �
 
 The benchmark-only [perception evidence reader](specs/0155-demand-read-perception-evidence.md) separates a complete immutable source from explicitly loaded wire records. Its read transcript and actual HTTP bodies account for the additional inference calls; the original gateway and canonical materializers retain full-source validation. Default perception continues to receive its complete context. The isolated [paired demonstrations](specs/0162-paired-perception-demonstration-screen.md) append authored cases to the system prompt while preserving the full source, output protocol and validators.
 
+The benchmark-only [source-authored speech producer](specs/0163-source-authored-speech-screen.md) offers exact current utterances alongside unrestricted open actions. Its descriptor binds the speaker to the materialized actor and leaves delivery unadjudicated; the world runtime and cognition owners retain all authority.
+
 The [sampled perception experiment](specs/0156-sampled-perception-candidate-selection.md) screens whole proposals before selection. TruthEngine and the experiment share pure onset-check materialization; randomness remains in the runtime after admission. A selected proposal retains its exact original fields and must still pass canonical validation.
 
 The benchmark [temporal route representation](specs/0157-temporal-route-perception-screen.md) derives a terminal perception tag from a selected current or pending route case. Pending transfers have no stimulus payload; original receipt validation remains authoritative for the compiled result.

@@ -7,6 +7,7 @@ import { AgentMind } from "../../src/engine/algorithms/eager-reference/agent-min
 import type { AgentCognitionBatchResult } from "../../src/engine/algorithms/roles";
 import { agentActionScopeRequest, AGENT_ACTION_SCOPE } from "../../src/engine/benchmarks/step-efficiency/agent-action-scope";
 import { agentActionTextRequest, AGENT_ACTION_TEXT } from "../../src/engine/benchmarks/step-efficiency/agent-action-text";
+import { agentAuthoredSpeechRequest, AGENT_AUTHORED_SPEECH, decodeAgentAuthoredSpeech } from "../../src/engine/benchmarks/step-efficiency/agent-authored-speech";
 import { agentIntentProgramRequest, AGENT_INTENT_PROGRAM, decodeAgentIntentProgram } from "../../src/engine/benchmarks/step-efficiency/agent-intent-program";
 import { agentMindBatchOutputSchema } from "../../src/engine/contracts/llm-schemas";
 import { completeDeepSeekJsonStream } from "../../src/engine/models/deepseek-json-stream";
@@ -27,13 +28,14 @@ const scopeProtocol = { id: "player-agent-action-scope-v1", sourceExecution: "f7
   acceptance: "Use all six original bootstrap batches with all 48 original NPCs, each through the real AgentMind materializer. B retains the complete original prompt; C changes only action-scope instructions and three schema descriptions. Preserve private contexts, all fields, validators, original batch size and every legal compound, conditional or ongoing intent. Offline B HTTP bytes and both arms' historical canonical output hashes and materialized commits must match before any inference. Freeze each request, then alternate B/C with one fresh primary per batch and arm, at most12 HTTP; block all repairs/retries before network, drain active work and stop later dispatch on missing usage/audit. Review all candidate identities, situations, action/goal/means coherence, self-contained goal text and source support before downstream qualification. Different autonomous choices are allowed. Historical replay is not semantic success; no imported result, bootstrap duration or mechanically accepted draft is full player action completion. No added critic call, inferred correction or resampling." } as const;
 const read = (file: string) => JSON.parse(readFileSync(file, "utf8"));
 const save = (directory: string, file: string, value: unknown) => writeFileSync(path.join(directory, file), `${JSON.stringify(value, null, 2)}\n`, { flag: "wx" });
-const codeHashes = (intentProgram: boolean) => Object.fromEntries([
+const codeHashes = (intentProgram: boolean, speech: boolean) => Object.fromEntries([
   "scripts/experiments/player-agent-action-scope.ts", "src/engine/benchmarks/step-efficiency/agent-action-scope.ts",
   "src/engine/benchmarks/step-efficiency/agent-action-text.ts", "src/engine/prompts/shared/agent-action-text.md", "src/engine/prompts/shared/agent-action-text-raw.md",
   ...["agent-action-scope", "agent-action-scope-raw-text", "agent-action-scope-goal", "agent-action-scope-means"].map(name => `src/engine/prompts/shared/${name}.md`),
   "src/engine/algorithms/eager-reference/agent-mind.ts", "src/engine/contracts/llm-schemas.ts", "src/engine/contracts/prompts.ts",
   "src/engine/prompts/system/agent.md", "src/engine/prompts/system/agent-batch.md", "src/engine/prompts/user/agent-bootstrap.md",
   ...(intentProgram ? ["src/engine/benchmarks/step-efficiency/agent-intent-program.ts", "src/engine/prompts/shared/agent-intent-program.md"] : []),
+  ...(speech ? ["src/engine/benchmarks/step-efficiency/agent-authored-speech.ts", "src/engine/prompts/shared/agent-authored-speech.md"] : []),
 ].map(file => [file, contentHash(readFileSync(file, "utf8"))]));
 const contextSchema = z.object({
   contractVersion: z.literal(17), execution: z.object({ instanceId: z.string(), advanceId: z.string(), revision: z.number(), step: z.number(), worldId: z.string() }).passthrough(),
@@ -84,9 +86,28 @@ export function intentProgramBootstrapFixture(body: string) {
     origin: "synthetic-full-historical-text-program-fixture", sourceHash: contentHash(body), outputHash: contentHash(output) };
 }
 
+/** The open branch preserves the complete historical action without inferring speech. */
+export function authoredSpeechBootstrapFixture(body: string) {
+  const text = singleTextBootstrapFixture(body);
+  const wireOutput = { slots: text.output.slots.map(slot => ({ ...slot, nextActionIntent: {
+    kind: "open", text: slot.nextActionIntent.rawText, targetHandles: slot.nextActionIntent.targetHandles,
+  } })) };
+  const output = agentMindBatchOutputSchema.parse(decodeAgentAuthoredSpeech(wireOutput));
+  const frame = JSON.parse(text.body.slice(6).split("\n")[0]!);
+  frame.id = `synthetic-${contentHash(wireOutput)}`;
+  frame.choices[0].delta.content = JSON.stringify(wireOutput);
+  return { output, wireOutput, body: `data: ${JSON.stringify(frame)}\n\ndata: [DONE]\n\n`,
+    origin: "synthetic-full-historical-text-open-fixture", sourceHash: contentHash(body), outputHash: contentHash(output) };
+}
+
 export async function agentActionScopeProbe(mode: "prepare" | "run", root: string, sourceRoot: string,
-  variant: "scope" | "single-text" | "intent-program" = "scope", controlRoot?: string) {
-  const protocol = variant === "intent-program" ? { ...scopeProtocol, id: "player-agent-intent-program-v1", candidate: AGENT_INTENT_PROGRAM,
+  variant: "scope" | "single-text" | "intent-program" | "authored-speech" = "scope", controlRoot?: string) {
+  const sourceChoice = variant === "intent-program" || variant === "authored-speech";
+  const choiceFixture = variant === "authored-speech" ? authoredSpeechBootstrapFixture : intentProgramBootstrapFixture;
+  const protocol = variant === "authored-speech" ? { ...scopeProtocol, id: "player-agent-authored-speech-v1", candidate: AGENT_AUTHORED_SPEECH,
+    control: AGENT_ACTION_TEXT,
+    acceptance: "B is the exact prior single-text producer; C chooses unrestricted open actions or exact current spoken utterances. Preserve all48 autonomous subjects in the six original8-slot batches, complete own private contexts, non-action fields and validators. Preflight complete historical-text fixtures through open without interpreting old actions; B physical bodies equal prior single-text C. Freeze12 alternating primary-only official deepseek-flash/thinking-disabled requests. No retries/repair HTTP, extra critic, new RNG or world commit. Stop later dispatch if complete billable audit is missing. Review every chosen action against own situation and knowledge, including whether speech fully represents it and whether addressees are invented. A proposal descriptor binds speaker from materialized actor and preserves exact words; intended addressees remain local and delivery unadjudicated. No automatic perception, belief update or quoted effect. Different valid decisions are allowed; report open/speak coverage and all cost. This is not49-subject player success." }
+    : variant === "intent-program" ? { ...scopeProtocol, id: "player-agent-intent-program-v1", candidate: AGENT_INTENT_PROGRAM,
     control: AGENT_ACTION_TEXT,
     acceptance: "B is the existing single-text producer; C chooses an open intent program at decision time. Preserve all six original batches,48 autonomous subjects, complete private context, cognition fields, validators and ordered local targets. Every leaf/condition remains an intention; valid structure proves no world result. Both arms preflight synthetic complete-historical-text fixtures through actual AgentMind/gateway, with all private patches and targets unchanged; B physical requests must equal the previous single-text treatment. Freeze source, code, program schema, complete request bodies, synthetic fixtures and this rubric before12 alternating primary-only deepseek-flash/thinking-disabled HTTP. Block all retries/repairs before HTTP, retain recovery demand and stop dispatch if usage/audit is missing. Review every candidate against own identity, current situation, knowledge, intention scope, control-flow causality, delegated work, arrival/receipt and private cognition; legal autonomous choices may differ. Review complete trees, not only initial leaves. Compare output costs and downstream interpretation needs; no world commits/RNG, inferred branch evaluation, critic calls or batch reduction. No bootstrap or syntax success counts as the49-subject full-player objective; no runtime promotion without downstream qualification." }
     : variant === "scope" ? scopeProtocol : { ...scopeProtocol, id: "player-agent-action-text-v1", candidate: AGENT_ACTION_TEXT,
@@ -119,14 +140,14 @@ export async function agentActionScopeProbe(mode: "prepare" | "run", root: strin
   }).sort((left, right) => left.ids[0]!.localeCompare(right.ids[0]!));
   if (sources.length !== protocol.sourceBatches || new Set(sources.flatMap(source => source.ids)).size !== protocol.sourceAgents ||
     Object.keys(world.initialState.agents).length !== protocol.sourceAgents) throw new Error("Complete original48 cohort required");
-  if (variant === "intent-program" && !controlRoot) throw new Error("Intent program screen requires the prior single-text control root");
-  const controlRequests = variant === "intent-program" ? sources.map((_, index) =>
+  if (sourceChoice && !controlRoot) throw new Error("Source-choice screen requires the prior single-text control root");
+  const controlRequests = sourceChoice ? sources.map((_, index) =>
     read(path.join(controlRoot!, "preflight", `source-${index}-C`, "request.json"))) : undefined;
   const binding = { protocol, sourceHash: contentHash(sources), sourceStateHash: contentHash(world.initialState),
     ...(variant === "single-text" ? { fixtureHash: contentHash(sources.map(source => singleTextBootstrapFixture(source.response.body))) } : {}),
-    ...(variant === "intent-program" ? { controlRequestsHash: contentHash(controlRequests),
-      fixtureHash: contentHash(sources.map(source => [singleTextBootstrapFixture(source.response.body), intentProgramBootstrapFixture(source.response.body)])) } : {}),
-    catalogHash: catalog.hash, registrySnapshotHash: manifest.registrySnapshotHash, codeHashes: codeHashes(variant === "intent-program") };
+    ...(sourceChoice ? { controlRequestsHash: contentHash(controlRequests),
+      fixtureHash: contentHash(sources.map(source => [singleTextBootstrapFixture(source.response.body), choiceFixture(source.response.body)])) } : {}),
+    catalogHash: catalog.hash, registrySnapshotHash: manifest.registrySnapshotHash, codeHashes: codeHashes(variant === "intent-program", variant === "authored-speech") };
   if (mode === "run") {
     if (execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim()) throw new Error("Commit checked code before HTTP");
     if (contentHash(read(path.join(root, "manifest.json")).binding) !== contentHash(binding)) throw new Error("Prepared bootstrap probe drift");
@@ -142,7 +163,7 @@ export async function agentActionScopeProbe(mode: "prepare" | "run", root: strin
     for (const [index, source] of sources.entries()) for (const arm of index % 2 ? ["C", "B"] : ["B", "C"]) {
       if (stopReason) throw new Error(stopReason);
       const trialId = `source-${index}-${arm}`, trialDirectory = path.join(directory, trialId); mkdirSync(trialDirectory);
-      const fixture = variant === "intent-program" ? (arm === "B" ? singleTextBootstrapFixture(source.response.body) : intentProgramBootstrapFixture(source.response.body))
+      const fixture = sourceChoice ? (arm === "B" ? singleTextBootstrapFixture(source.response.body) : choiceFixture(source.response.body))
         : variant === "single-text" && arm === "C" ? singleTextBootstrapFixture(source.response.body) : undefined;
       if (mode === "prepare" && fixture) save(trialDirectory, "synthetic-fixture.json", fixture);
       const observer = new RecordingRuntimeObserver({ mode: "full" }), state = structuredClone(world.initialState);
@@ -183,7 +204,7 @@ export async function agentActionScopeProbe(mode: "prepare" | "run", root: strin
           }
           if (contentHash(request.context) !== contentHash(source.context)) throw new ModelConfigurationError("Historical private context differs");
           const pinned = { ...request, modelRegistrySnapshotHash: manifest.registrySnapshotHash };
-          const adapted = variant === "intent-program" ? (arm === "B" ? agentActionTextRequest(pinned) : agentIntentProgramRequest(pinned))
+          const adapted = sourceChoice ? (arm === "B" ? agentActionTextRequest(pinned) : variant === "authored-speech" ? agentAuthoredSpeechRequest(pinned) : agentIntentProgramRequest(pinned))
             : arm === "C" ? variant === "single-text" ? agentActionTextRequest(pinned) : agentActionScopeRequest(pinned) : pinned;
           try { const result = await gateway.generateStructured(adapted); primaryAudit = result.audit; return result; }
           catch (error) { if (error instanceof ModelOutputError) primaryAudit = error.audit; throw error; }
@@ -227,8 +248,8 @@ export async function agentActionScopeProbe(mode: "prepare" | "run", root: strin
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const [mode, root, sourceRoot, variant = "scope", controlRoot, ...extra] = process.argv.slice(2);
-  if ((mode !== "prepare" && mode !== "run") || !root || !sourceRoot || !["scope", "single-text", "intent-program"].includes(variant) || extra.length ||
-    (variant === "intent-program") !== Boolean(controlRoot)) throw new Error("Usage: prepare|run <probe-root> <original-integrated-root> [scope|single-text|intent-program] [prior-single-text-root for intent-program]");
-  agentActionScopeProbe(mode, path.resolve(root), path.resolve(sourceRoot), variant as "scope" | "single-text" | "intent-program", controlRoot && path.resolve(controlRoot)).then(result => process.stdout.write(`${JSON.stringify(result)}\n`))
+  if ((mode !== "prepare" && mode !== "run") || !root || !sourceRoot || !["scope", "single-text", "intent-program", "authored-speech"].includes(variant) || extra.length ||
+    (["intent-program", "authored-speech"].includes(variant)) !== Boolean(controlRoot)) throw new Error("Usage: prepare|run <probe-root> <original-integrated-root> [scope|single-text|intent-program|authored-speech] [prior-single-text-root for source-choice variants]");
+  agentActionScopeProbe(mode, path.resolve(root), path.resolve(sourceRoot), variant as "scope" | "single-text" | "intent-program" | "authored-speech", controlRoot && path.resolve(controlRoot)).then(result => process.stdout.write(`${JSON.stringify(result)}\n`))
     .catch(error => { process.stderr.write(`${error instanceof Error ? error.stack : String(error)}\n`); process.exitCode = 1; });
 }

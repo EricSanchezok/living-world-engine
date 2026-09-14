@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { capturedBootstrapContext, singleTextBootstrapFixture, intentProgramBootstrapFixture } from "./player-agent-action-scope";
+import { capturedBootstrapContext, singleTextBootstrapFixture, intentProgramBootstrapFixture, authoredSpeechBootstrapFixture } from "./player-agent-action-scope";
 import { completeDeepSeekJsonStream } from "../../src/engine/models/deepseek-json-stream";
 import { decodeAgentActionText } from "../../src/engine/benchmarks/step-efficiency/agent-action-text";
 import { decodeAgentIntentProgram, INTENT_PROGRAM_PREFIX } from "../../src/engine/benchmarks/step-efficiency/agent-intent-program";
@@ -26,6 +26,10 @@ it("labels synthetic single-text replay and retains all historical text without 
   expect(completeDeepSeekJsonStream(fixture.body).usage.total_tokens).toBe(0);
   expect(decodeAgentActionText(fixture.output)).not.toEqual(output);
   expect(fixture.output.slots[0]!.beliefChanges).toEqual(output.slots[0]!.beliefChanges);
+  const speechFixture = authoredSpeechBootstrapFixture(`data: ${JSON.stringify(frame)}\n\ndata: [DONE]\n\n`);
+  expect(speechFixture.output).toEqual(decodeAgentActionText(fixture.output));
+  expect(speechFixture.wireOutput.slots[0]!.nextActionIntent.kind).toBe("open");
+  expect(completeDeepSeekJsonStream(speechFixture.body).usage.total_tokens).toBe(0);
   const programFixture = intentProgramBootstrapFixture(`data: ${JSON.stringify(frame)}\n\ndata: [DONE]\n\n`);
   const completion = completeDeepSeekJsonStream(programFixture.body);
   expect(completion.usage.total_tokens).toBe(0);
