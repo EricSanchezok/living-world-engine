@@ -335,7 +335,7 @@ export function createEagerReferenceAlgorithmRef(
   const actionCompilation = defineAlgorithmRef({
     role: "action-compilation",
     id: "model-action-compilation",
-    version: "2",
+    version: "3",
     contractVersion: 1,
     config: {
       candidateKeyVersion: ACTION_COMPILATION_CANDIDATE_KEY_VERSION,
@@ -354,7 +354,7 @@ export function createEagerReferenceAlgorithmRef(
   const interactionGrounding = defineAlgorithmRef({
     role: "interaction-grounding",
     id: "model-interaction-grounding",
-    version: "1",
+    version: "2",
     contractVersion: 1,
     config: {},
     children: { scheduling: scheduling(config.groundingMaxSlots), recovery: recovery() },

@@ -48,19 +48,32 @@ it("rejects historical Truth contracts and random scheduling instead of changing
 });
 
 describe("built-in algorithm registry", () => {
+  it("rejects prior compiler and grounding identities instead of changing pinned dependency behavior", () => {
+    const registry = registerBuiltinAlgorithms(new WorldExecutionAlgorithmRegistry());
+    for (const current of [DEFAULT_ALGORITHM_REF, FULL_CATALOG_ALGORITHM_REF]) {
+      expect(registry.has(current)).toBe(true);
+      for (const slot of ["actionCompilation", "interactionGrounding"]) {
+        const child = current.children[slot]!;
+        const previous = replaceChild(current, slot, defineAlgorithmRef({ ...child, version: String(Number(child.version) - 1) }));
+        expect(previous.manifestHash).not.toBe(current.manifestHash);
+        expect(registry.has(previous)).toBe(false);
+      }
+    }
+  });
+
   it("resolves every node in the default Composition", () => {
     const registry = registerBuiltinAlgorithms(new WorldExecutionAlgorithmRegistry());
     expect(registry.has(DEFAULT_ALGORITHM_REF)).toBe(true);
     expect(registry.catalog().map((entry) => `${entry.role}/${entry.id}@${entry.version}`)).toEqual([
-      "action-compilation/constrained-action-compilation@1",
-      "action-compilation/model-action-compilation@2",
-      "action-compilation/represented-action-compilation@2",
+      "action-compilation/constrained-action-compilation@2",
+      "action-compilation/model-action-compilation@3",
+      "action-compilation/represented-action-compilation@3",
       "agent-cognition/model-agent-cognition@1",
       "candidate-allocation/coverage-aware-joint-budget@1",
       "candidate-ranking/typed-channel-rrf@1",
       "candidate-selection/full-catalog@1",
       "candidate-selection/relational-rrf@2",
-      "interaction-grounding/model-interaction-grounding@1",
+      "interaction-grounding/model-interaction-grounding@2",
       "observation-rendering/model-observation-rendering@3",
       "observation-rendering/source-bound-observation-rendering@3",
       "onset-perception/model-onset-perception@8",

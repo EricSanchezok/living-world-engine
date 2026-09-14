@@ -47,7 +47,7 @@ export function constrainedFirstPassAlgorithmRef(base: AlgorithmRef<"world-execu
   const original = base.children.actionCompilation;
   if (!original) throw new Error("source has no action compiler");
   const options = constrainedArmOptions(arm);
-  const compiler = defineAlgorithmRef({ role: "action-compilation", id: "constrained-action-compilation", version: "1", contractVersion: 1,
+  const compiler = defineAlgorithmRef({ role: "action-compilation", id: "constrained-action-compilation", version: "2", contractVersion: 1,
     config: { ...original.config, ...options, codecVersion: CONSTRAINED_COMPILATION_CODEC_VERSION,
       promptVersion: constrainedCompilationPrompt(options).version }, children: original.children });
   return defineAlgorithmRef({ ...base, children: { ...base.children, actionCompilation: compiler } });

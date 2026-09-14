@@ -92,3 +92,5 @@ npm run algorithms -- catalog --check
 The architectural rationale is recorded in [0099](../decisions/0099-typed-hierarchical-algorithm-composition.md).
 
 The experimental source-inventory resolution Composition projects existing eligible means sources beside each assigned action, including repair subsets. It preserves all original context and uses the shared model output and settlement paths. [The source inventory contract](../specs/0028-resolution-source-inventory-experiment.md) defines its scope and validation boundary.
+
+Compilation and grounding share [bound-target dependency materialization](../specs/0168-bound-target-dependency-reads.md). It conservatively includes exact original target bindings as entity reads before conflict scheduling and resolution source selection; semantic relevance and write authority remain separate.

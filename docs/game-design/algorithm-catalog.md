@@ -8,15 +8,15 @@ The executable registry is authoritative. Maturity describes enrollment policy a
 
 | Role | Algorithm | Contract | Maturity | Child slots |
 | --- | --- | ---: | --- | --- |
-| `action-compilation` | `constrained-action-compilation@1` | 1 | candidate | `candidateSelection` → `candidate-selection`<br>`symbolRepair` → `symbol-repair`<br>`batching` → `work-batching`<br>`recovery` → `output-recovery` |
-| `action-compilation` | `model-action-compilation@2` | 1 | reference | `candidateSelection` → `candidate-selection`<br>`symbolRepair` → `symbol-repair`<br>`batching` → `work-batching`<br>`recovery` → `output-recovery` |
-| `action-compilation` | `represented-action-compilation@2` | 1 | reference | `candidateSelection` → `candidate-selection`<br>`symbolRepair` → `symbol-repair`<br>`batching` → `work-batching`<br>`recovery` → `output-recovery` |
+| `action-compilation` | `constrained-action-compilation@2` | 1 | candidate | `candidateSelection` → `candidate-selection`<br>`symbolRepair` → `symbol-repair`<br>`batching` → `work-batching`<br>`recovery` → `output-recovery` |
+| `action-compilation` | `model-action-compilation@3` | 1 | reference | `candidateSelection` → `candidate-selection`<br>`symbolRepair` → `symbol-repair`<br>`batching` → `work-batching`<br>`recovery` → `output-recovery` |
+| `action-compilation` | `represented-action-compilation@3` | 1 | reference | `candidateSelection` → `candidate-selection`<br>`symbolRepair` → `symbol-repair`<br>`batching` → `work-batching`<br>`recovery` → `output-recovery` |
 | `agent-cognition` | `model-agent-cognition@1` | 1 | reference | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
 | `candidate-allocation` | `coverage-aware-joint-budget@1` | 1 | reference | — |
 | `candidate-ranking` | `typed-channel-rrf@1` | 1 | reference | — |
 | `candidate-selection` | `full-catalog@1` | 1 | reference | — |
 | `candidate-selection` | `relational-rrf@2` | 1 | reference | `ranking` → `candidate-ranking`<br>`allocation` → `candidate-allocation` |
-| `interaction-grounding` | `model-interaction-grounding@1` | 1 | reference | `scheduling` → `work-scheduling`<br>`recovery` → `output-recovery` |
+| `interaction-grounding` | `model-interaction-grounding@2` | 1 | reference | `scheduling` → `work-scheduling`<br>`recovery` → `output-recovery` |
 | `observation-rendering` | `model-observation-rendering@3` | 1 | reference | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
 | `observation-rendering` | `source-bound-observation-rendering@3` | 1 | reference | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
 | `onset-perception` | `model-onset-perception@8` | 1 | reference | — |
@@ -61,22 +61,22 @@ These implementations are replaceable inside the offline evaluation harness, but
 
 ## Default composition
 
-Root hash: `b6afa1ae88eedc3fb839efd83b4dbaa4a0b935d153b53163c5ecc89a443f9dab`
+Root hash: `f24f324e8169953b79b3095d7330232a383aef75b8ce72ffe6d234f484b7cb5b`
 
 | Node path | Role | Algorithm | Contract | Manifest hash |
 | --- | --- | --- | ---: | --- |
-| `root` | `world-execution` | `eager-reference@27` | 11 | `b6afa1ae88eedc3fb839efd83b4dbaa4a0b935d153b53163c5ecc89a443f9dab` |
+| `root` | `world-execution` | `eager-reference@27` | 11 | `f24f324e8169953b79b3095d7330232a383aef75b8ce72ffe6d234f484b7cb5b` |
 | `root.agentCognition` | `agent-cognition` | `model-agent-cognition@1` | 1 | `1daa82dc5f667b7486ecddcbc1cd07d57accf916cb66a2d7d7ae32cf04d9630d` |
 | `root.agentCognition.batching` | `work-batching` | `bounded-slot-batching@1` | 1 | `8a6cc0ef438150ba0f22f8671b1ccedb81468f0c407976caae1521102e771981` |
 | `root.agentCognition.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |
-| `root.actionCompilation` | `action-compilation` | `represented-action-compilation@2` | 1 | `188f71b509ddcac896ac39f7e122596d7e27ca75388caba4f795616b96585033` |
+| `root.actionCompilation` | `action-compilation` | `represented-action-compilation@3` | 1 | `6b45d7859ad57c3f7663abab12e0b63f796db77994e4e7a47e910e82945d742f` |
 | `root.actionCompilation.candidateSelection` | `candidate-selection` | `relational-rrf@2` | 1 | `f04df3f3f6c16741124de308033603fd58f488c9929ed3a315828ddd8edd2649` |
 | `root.actionCompilation.candidateSelection.ranking` | `candidate-ranking` | `typed-channel-rrf@1` | 1 | `57007d387133a234e4009236062a06fda0446b0e295155e4afcb9ecc41d15f38` |
 | `root.actionCompilation.candidateSelection.allocation` | `candidate-allocation` | `coverage-aware-joint-budget@1` | 1 | `9dcbd80cf64f44254d44af845a6193943c4771149db29a7193aa76a87691b6d9` |
 | `root.actionCompilation.symbolRepair` | `symbol-repair` | `bounded-symbol-repair@1` | 1 | `7a97611c42b335f7a2532431340c484fbce35920ec65e598a95c62d11e3634a8` |
 | `root.actionCompilation.batching` | `work-batching` | `bounded-slot-batching@1` | 1 | `ec3df81acb514ffef2029f3e8d9bb1a11ba4bec19d4d76e95f3f1baedc350a46` |
 | `root.actionCompilation.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |
-| `root.interactionGrounding` | `interaction-grounding` | `model-interaction-grounding@1` | 1 | `b8f404f7113e6201b9302aa8e1a6a8d8e99a02442daeaa347f6c0da36126983a` |
+| `root.interactionGrounding` | `interaction-grounding` | `model-interaction-grounding@2` | 1 | `87e92ecd7d88d08d94702408ad05da379646a5ae74a799f23d93ac0a015071c2` |
 | `root.interactionGrounding.scheduling` | `work-scheduling` | `bounded-concurrency@1` | 1 | `c7439a837f29219df2f742ad910a15bf05d759586e1ed95260f724aba6a33b84` |
 | `root.interactionGrounding.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |
 | `root.reactionResolution` | `reaction-resolution` | `onset-reaction@1` | 1 | `4b92d1b0327641971adbad1f6c0cf49a1f5cbfe3be85daa869f1d6aace02cccc` |

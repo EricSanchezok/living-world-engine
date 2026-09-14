@@ -56,7 +56,7 @@ export function firstPassAlgorithmRef(base: AlgorithmRef<"world-execution">, rep
   delete config.profileChoiceEvidence;
   delete config.temporalContractSelection;
   const compiler = defineAlgorithmRef({
-    role: "action-compilation", id: "represented-action-compilation", version: "2", contractVersion: 1,
+    role: "action-compilation", id: "represented-action-compilation", version: "3", contractVersion: 1,
     config: { ...config, representation, codecVersion: ACTION_COMPILATION_REPRESENTATION_VERSION,
       ...(eligibleProfilesOnly ? { eligibleProfileSchema: "batch-union-v1" } : {}),
       ...(sourceOwnedDescription ? { descriptionPolicy: omitSourceDescription ? "original-action-omitted-v2" : "original-action-v1" } : {}),

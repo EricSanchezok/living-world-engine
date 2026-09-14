@@ -472,7 +472,7 @@ const definitions = [
     ],
   }, (algorithmIdentity, config, children) => new AgentCognitionAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({
-    ...identity("action-compilation", "model-action-compilation", "2"),
+    ...identity("action-compilation", "model-action-compilation", "3"),
     maturity: "reference",
     configSchema: z.strictObject({
       candidateKeyVersion: z.literal(ACTION_COMPILATION_CANDIDATE_KEY_VERSION),
@@ -486,7 +486,7 @@ const definitions = [
     ],
   }, (algorithmIdentity, config, children) => new ActionCompilationAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({
-    ...identity("action-compilation", "represented-action-compilation", "2"),
+    ...identity("action-compilation", "represented-action-compilation", "3"),
     maturity: "reference",
     configSchema: z.strictObject({
       representation: z.enum(["B1", "A", "T", "AT"]),
@@ -509,7 +509,7 @@ const definitions = [
     ],
   }, (algorithmIdentity, config, children) => new RepresentedActionCompilationAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({
-    ...identity("action-compilation", "constrained-action-compilation"),
+    ...identity("action-compilation", "constrained-action-compilation", "2"),
     maturity: "candidate",
     configSchema: z.strictObject({ capabilities: z.boolean(), snapshots: z.boolean(),
       structuredOutputMode: z.enum(["json-object-zod", "json-schema-strict"]),
@@ -521,7 +521,7 @@ const definitions = [
       { name: "batching", role: "work-batching" }, { name: "recovery", role: "output-recovery" }],
   }, (algorithmIdentity, config, children) => new ConstrainedActionCompilationAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({
-    ...identity("interaction-grounding", "model-interaction-grounding"),
+    ...identity("interaction-grounding", "model-interaction-grounding", "2"),
     maturity: "reference",
     configSchema: z.strictObject({}),
     children: [

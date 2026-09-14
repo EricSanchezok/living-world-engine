@@ -550,6 +550,16 @@ function enrichDependency(
     { kind: "entity", id: agent.entityId },
     ...(placementId ? [{ kind: "placement" as const, id: placementId }] : []),
   ];
+  // All possible bindings are reads; this neither selects a referent nor grants a write.
+  for (const localId of action.targetIds) {
+    if (!agent.belief.localEntities[localId]) continue;
+    for (const entityId of agent.bindings[localId]?.canonicalEntityIds ?? []) {
+      if (!state.truth.entities[entityId]) {
+        throw new GroundingValidationError(action.id, [`bound target ${localId} references missing canonical entity ${entityId}`]);
+      }
+      mandatory.push({ kind: "entity", id: entityId });
+    }
+  }
   return {
     kind: "action",
     id: action.id,
