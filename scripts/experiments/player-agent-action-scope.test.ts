@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { capturedBootstrapContext, singleTextBootstrapFixture, intentProgramBootstrapFixture, authoredSpeechBootstrapFixture } from "./player-agent-action-scope";
+import { capturedBootstrapContext, singleTextBootstrapFixture, intentProgramBootstrapFixture, authoredSpeechBootstrapFixture, recursiveIntentBootstrapFixture } from "./player-agent-action-scope";
 import { completeDeepSeekJsonStream } from "../../src/engine/models/deepseek-json-stream";
 import { decodeAgentActionText } from "../../src/engine/benchmarks/step-efficiency/agent-action-text";
 import { decodeAgentIntentProgram, INTENT_PROGRAM_PREFIX } from "../../src/engine/benchmarks/step-efficiency/agent-intent-program";
@@ -37,4 +37,9 @@ it("labels synthetic single-text replay and retains all historical text without 
   const program = JSON.parse(programFixture.output.slots[0]!.nextActionIntent.rawText.slice(INTENT_PROGRAM_PREFIX.length));
   expect(program).toEqual({ root: 0, nodes: [{ nodeId: 0, kind: "attempt", text: fixture.output.slots[0]!.nextActionIntent.rawText, targetIndices: [] }] });
   expect(programFixture.output.slots[0]!.beliefChanges).toEqual(output.slots[0]!.beliefChanges);
+  const recursiveFixture = recursiveIntentBootstrapFixture(`data: ${JSON.stringify(frame)}\n\ndata: [DONE]\n\n`);
+  expect(recursiveFixture.output).toEqual(programFixture.output);
+  expect(completeDeepSeekJsonStream(recursiveFixture.body).usage.total_tokens).toBe(0);
+  expect(recursiveFixture.wireOutput.slots[0]!.nextActionIntent.program).toEqual({ kind: "attempt",
+    text: fixture.output.slots[0]!.nextActionIntent.rawText, targetHandles: [] });
 });
