@@ -6,7 +6,7 @@ import { agentMindBatchOutputSchema } from "../../contracts/llm-schemas";
 import { loadWorldScript } from "../../../script/world-loader";
 import { contentHash } from "../../models/model-audit";
 import { createModelGateway } from "../../models/model-gateway";
-import { ModelConfigurationError, type StructuredModelProvider } from "../../models/model-provider";
+import { ModelConfigurationError, ModelOutputError, type StructuredModelProvider } from "../../models/model-provider";
 import { RecordingRuntimeObserver } from "../../runtime/observability";
 import { createTestModelCatalog, createTestModelRegistry } from "../../testing/model-provider";
 import { agentIntentProgramRequest, agentIntentProgramSchema, decodeAgentIntentProgram,
@@ -127,4 +127,32 @@ it.each([false, true])("materializes full programs through real AgentMind/gatewa
     expect(calls).toBe(1);
   }
   expect(http).toBe(1); expect(contentHash(state)).toBe(before);
+});
+
+it.each(["unused-target", "cycle", "out-of-range", "legacy-fields"])("retains billable usage and exact rejected wire for invalid program: %s", async invalid => {
+  const catalog = createTestModelCatalog(), raw = structuredClone(wire);
+  const action = raw.slots[0]!.nextActionIntent;
+  if (invalid === "unused-target") action.targetHandles.push("ref:local_entity:ship");
+  else if (invalid === "cycle") action.program.nodes = [{ nodeId: 0, kind: "sequence", children: [0] }];
+  else if (invalid === "out-of-range") action.program.nodes = [{ nodeId: 0, kind: "attempt", text: "观察", targetIndices: [2] }];
+  else Object.assign(action, { rawText: "a competing legacy intention" });
+  let http = 0;
+  const gateway = createModelGateway(catalog, { TEST_MODEL_API_KEY: "fixture-only" }, {
+    maxTransportAttempts: 1, registry: createTestModelRegistry(catalog), fetch: async (_url, init) => {
+      http++;
+      const body = JSON.parse(String(init?.body));
+      return Response.json({ id: "rejected-fixture", object: "chat.completion", created: 1, model: body.model,
+        choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(raw) }, finish_reason: "stop" }],
+        usage: { prompt_tokens: 29, completion_tokens: 41, total_tokens: 70, completion_tokens_details: { reasoning_tokens: 0 } } });
+    } });
+  const request = { workloadId: "world", batchId: "bootstrap", profileId: "agent-default", subjectId: "slots", promptVersion: "source",
+    role: "agent-bootstrap" as const, schemaName: "agent_mind_batch_output", schema: agentMindBatchOutputSchema,
+    system: "Own perspective", userPrompt: "Initialize", context: { slots: [{ slot: 0 }] },
+    runtimeIdentity: { worldHash: `sha256:${contentHash("intent-program-fixture")}`, revision: 0 } };
+  const error = await gateway.generateStructured(agentIntentProgramRequest(request)).then(() => null, error => error);
+  expect(error).toBeInstanceOf(ModelOutputError);
+  expect(error.rawValue).toEqual(raw);
+  expect(error.audit.invocations).toHaveLength(1);
+  expect(error.audit.invocations[0]).toMatchObject({ tokenUsage: { input: 29, output: 41, reasoning: 0 }, finishReason: "stop" });
+  expect(http).toBe(1);
 });

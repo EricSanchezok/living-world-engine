@@ -26,11 +26,14 @@ Frozen source replay also reuses the source's public model invocation identity. 
 
 The final paired order is incomplete; no B/C/C/B efficacy claim is available. All fifteen model responses remain billable. Neither a world step nor a player result was committed, and no production composition used the draft task. Simpler-schema acceptance does not erase the candidate's future-information and onset counterexamples.
 
+The intent-program screen repeated this error category at a new codec boundary. An unused selected target raised a generic Error after a completed SSE response, stopping the screen after its second HTTP call. Valid AgentMind materialization and direct decoder rejection tests both passed; neither exercised an invalid program through the gateway. A foreign-target AgentMind test exercised a later canonical validator, so it did not cover the codec's earlier failure path. The original two-response screen remains incomplete and billable; correcting error classification does not qualify its rejected program or fill its missing samples.
+
 ## Guardrails
 
 - The [draft codec](../../src/engine/benchmarks/step-efficiency/perception-semantic-draft.ts) raises ModelOutputError with the untouched raw value for model-owned relation failures; changed source configuration remains fatal.
 - The [gateway regression](../../src/engine/benchmarks/step-efficiency/__tests__/perception-semantic-draft.test.ts) checks the exact output-error category, raw rejected value and retained billable completion rather than only expecting an exception.
 - The [probe runner](../../scripts/experiments/player-perception-check-probe.ts) labels every runtime event with its physical probeRequestId and saves a per-entry fatal record before aborting. Frozen invocation identity is preserved independently.
+- The [intent-program decoder](../../src/engine/benchmarks/step-efficiency/agent-intent-program.ts) retains the untouched wire value in ModelOutputError for model-owned tree and target-domain failures. Its [gateway regressions](../../src/engine/benchmarks/step-efficiency/agent-intent-program.test.ts) require the output-error category, exact raw value and billable usage for unused targets, cycles, out-of-range indices and conflicting legacy fields.
 
 ## Verification
 

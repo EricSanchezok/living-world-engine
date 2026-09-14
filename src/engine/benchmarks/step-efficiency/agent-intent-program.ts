@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { existingReferenceHandleSchema } from "../../contracts/model-context";
 import { contentHash } from "../../models/model-audit";
-import { ModelConfigurationError, type StructuredModelRequest } from "../../models/model-provider";
+import { ModelConfigurationError, ModelOutputError, type StructuredModelRequest } from "../../models/model-provider";
 import { loadPromptAsset } from "../../prompts";
 
 const id = z.number().int().nonnegative(), text = z.string().min(1).regex(/\S/u, "Intent text must contain non-whitespace");
@@ -61,13 +61,17 @@ export function inspectAgentIntentProgram(program: Program, targetCount: number)
 /** Exact new-producer embedding, preserving the entire tree and ordered targets. */
 export function decodeAgentIntentProgram(value: unknown) {
   const envelope = envelopeSchema.parse(value);
-  return { ...envelope, slots: envelope.slots.map(slot => {
-    const { program, targetHandles } = slot.nextActionIntent;
-    if (new Set(targetHandles).size !== targetHandles.length) throw new Error("intent program has duplicate target handles");
-    inspectAgentIntentProgram(program, targetHandles.length);
-    const rawText = INTENT_PROGRAM_PREFIX + JSON.stringify(program);
-    return { ...slot, nextActionIntent: { rawText, goal: rawText, means: null, targetHandles } };
-  }) };
+  try {
+    return { ...envelope, slots: envelope.slots.map(slot => {
+      const { program, targetHandles } = slot.nextActionIntent;
+      if (new Set(targetHandles).size !== targetHandles.length) throw new Error("intent program has duplicate target handles");
+      inspectAgentIntentProgram(program, targetHandles.length);
+      const rawText = INTENT_PROGRAM_PREFIX + JSON.stringify(program);
+      return { ...slot, nextActionIntent: { rawText, goal: rawText, means: null, targetHandles } };
+    }) };
+  } catch (error) {
+    throw new ModelOutputError(error instanceof Error ? error.message : String(error), undefined, { cause: error, rawValue: value });
+  }
 }
 
 type Value = Record<string, unknown>;
