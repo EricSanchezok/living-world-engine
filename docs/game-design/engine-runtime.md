@@ -67,7 +67,7 @@ Truth actor context preserves each issued local reference and its canonical enti
 
 perception 只能请求 perception checks 或结束；reaction routing 只能选择有结构化感知依据的 Agent；resolution 在任何 resolution 随机前提交一次完整计划，之后只能请求离散随机或结束；transition 只提出语义效果与可信规则调用。阶段单向前进，已提交计划不能根据骰点改写。
 
-每份 ResolutionPlan 固定 actor、targets、goal、canonical grounded means、命名难度或对抗、至多一个 actor 自有 Rating、因素唯一角色、风险、基础效果、一个 primary effect、可选的较弱 secondary effect 与失败威胁。普通环境难度 `trivial/easy/challenging/hard/extreme` 映射到 DC 5/10/15/20/25，对抗 DC 为 10 加目标 Rating；semantic edge/hindrance 相抵后只决定 advantage、normal 或 disadvantage。
+每份 ResolutionPlan 固定 actor、targets、goal、canonical grounded means、命名难度或对抗、至多一个 actor 自有 Rating、因素、风险、基础效果、一个 primary effect、可选的较弱 secondary effect 与失败威胁。[证据说明与机械来源](../specs/0171-evidence-annotation-source-ownership.md)区分 permission／risk 注释与独占的数值贡献和副效果授权，同时保留原始引用及 Condition 使用次数结算。普通环境难度 `trivial/easy/challenging/hard/extreme` 映射到 DC 5/10/15/20/25，对抗 DC 为 10 加目标 Rating；semantic edge/hindrance 相抵后只决定 advantage、normal 或 disadvantage。
 
 ResolutionPlan and its receipt adjudicate the current temporal interval. Trusted receipt effects are consumed exactly once in that step even when the complete Activity remains continuing. Whole-task completion follows temporal and causal evidence, independently of interval grade; planning cannot move future completion effects into the current interval. [Interval receipt settlement](../specs/0134-settle-interval-resolution-effects.md) owns the contract and regression requirements.
 

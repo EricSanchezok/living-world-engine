@@ -20,6 +20,8 @@ it.each(["truth_resolution_plan_commit", "truth_resolution_plan_repair"])("prese
     workloadId: "source-role-test", batchId: "original-batch", subjectId: "original-action", runtimeIdentity: { worldHash: `sha256:${"1".repeat(64)}`, revision: 0 },
     promptVersion: prompt.version, context, schemaName, schema: resolutionPlanCommitDirectiveSchema };
   const candidate = resolutionSourceRoleRequest(request);
+  expect(candidate.system.split(RESOLUTION_SOURCE_ROLE_INSTRUCTION)).toHaveLength(2);
+  expect(promptBundle("resolution-plan-verifier").system).toContain(RESOLUTION_SOURCE_ROLE_INSTRUCTION);
   expect(candidate.context).toBe(context);
   expect(candidate.schema).toBe(request.schema);
   expect(candidate.userPrompt).toBe(request.userPrompt);

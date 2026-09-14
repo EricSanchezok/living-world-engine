@@ -24,6 +24,6 @@ The model-facing contract explained numeric factor constraints but omitted the c
 
 ## Guardrails
 
-- [Kernel tests](../../src/engine/mechanics/__tests__/resolution.test.ts) cover neutral-role collisions, aptitude/difficulty conflicts and legal reuse in means or separate plans.
+- [Kernel tests](../../src/engine/mechanics/__tests__/resolution.test.ts) cover repeated annotation roles, mechanical source conflicts and legal supporting citations under the [evidence ownership contract](../specs/0171-evidence-annotation-source-ownership.md).
 - [The research instruction](../../src/engine/prompts/shared/resolution-source-role-exclusivity.md) distinguishes mechanical assignments from supporting citations without suppressing intended consequences.
-- [Specification 0064](../specs/0064-resolution-source-role-diagnostic.md) keeps validation, full source semantics and gameplay qualification separate. No automatic deduplication or weakened validator is permitted.
+- [Specification 0064](../specs/0064-resolution-source-role-diagnostic.md) binds the historical diagnostic to its original acceptance set. The current ownership contract requires independent lifecycle, cognition and numeric verification; no automatic factor deletion or source substitution changes a model's chosen plan.

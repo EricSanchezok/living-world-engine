@@ -403,8 +403,8 @@ export function createEagerReferenceAlgorithmRef(
   return defineAlgorithmRef({
     role: "world-execution",
     id: "eager-reference",
-    version: "27",
-    contractVersion: 11,
+    version: "28",
+    contractVersion: 12,
     config: {},
     children: { agentCognition, actionCompilation, interactionGrounding, reactionResolution, truthResolution, observationRendering },
   });

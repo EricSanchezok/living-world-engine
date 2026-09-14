@@ -5,7 +5,7 @@ import type { AgentActionProposal, MechanicInvocation, WorldDeltaOperation } fro
 import { createCoreRulePackageRegistry, MechanicInputValidationError } from "../rule-package";
 import { quantityId, runtimeId } from "../../runtime/runtime-id";
 import { createTestModelCatalog } from "../../testing/model-provider";
-import type { ResolutionPlan, ResolutionReceipt } from "../resolution";
+import { deriveResolutionReceipt, type ResolutionPlan, type ResolutionReceipt } from "../resolution";
 
 const fixture = path.resolve("test/fixtures/open-world-script");
 
@@ -47,6 +47,40 @@ function ruleContext(definition: ReturnType<typeof loaded>, actions: AgentAction
 }
 
 describe("core-resolution trusted rules", () => {
+  it.each([1, 3])("consumes a Condition once across repeated means and evidence annotations (uses=%s)", remainingUses => {
+    const definition = loaded(), registry = createCoreRulePackageRegistry(), playerAction = action(definition.contentHash);
+    const state = structuredClone(definition.initialState);
+    state.truth.mechanics.durationProfiles["test-charge"] = { id: "test-charge", name: "Test charge", kind: "uses", uses: remainingUses };
+    state.truth.conditions["test-charge"] = { id: "test-charge", subjectId: "player", label: "Charged focus", description: "A finite-use supporting focus.",
+      magnitude: "minor", durationProfileId: "test-charge", conditionProfileId: null, stackingKey: null, remainingUses,
+      expiresAtElapsedSeconds: null, access: { kind: "public" }, provenance: [{ kind: "action", id: playerAction.id }] };
+    const source = { kind: "condition" as const, id: "test-charge" };
+    const planId = runtimeId({ worldHash: definition.contentHash, revision: 0, kind: "resolution-plan", stage: "test", owner: playerAction.id, round: 0, ordinal: 0 });
+    const base: ResolutionPlan = { id: planId, actionId: playerAction.id, actorId: "player", targetIds: ["player"], goal: "Use the focus while observing.",
+      means: [{ description: "Use the supporting focus.", source }, { description: "The same focus remains the source of concentration.", source }],
+      factors: [], mode: "automatic", difficulty: null, actorRatingId: null, risk: "safe", baseEffect: "none", primaryEffect: null,
+      secondaryEffect: null, threatenedEffect: null, visibility: "full", causes: [{ kind: "action", id: playerAction.id }] };
+    const annotated: ResolutionPlan = { ...base, factors: [
+      { source, role: "permission", direction: "neutral", steps: 0, authority: "semantic", channel: null, explanation: "The focus supports this attempt." },
+      { source, role: "risk", direction: "neutral", steps: 0, authority: "semantic", channel: null, explanation: "The limited focus may be exhausted." },
+    ] };
+    const before = structuredClone({ state, annotated });
+    const apply = (plan: ResolutionPlan) => {
+      const receiptId = runtimeId({ worldHash: definition.contentHash, revision: 0, kind: "resolution-receipt", stage: "test", owner: plan.id, round: 0, ordinal: 0 });
+      const receipt = deriveResolutionReceipt({ receiptId, plan, checkRequestId: null, check: null, result: null });
+      const invocation: MechanicInvocation = { id: runtimeId({ worldHash: definition.contentHash, revision: 0, kind: "mechanic", stage: "test", owner: receiptId, round: 0, ordinal: 0 }),
+        packageId: "core-resolution", ruleId: "apply-receipt", input: { receiptId: receipt.id },
+        causes: [{ kind: "action", id: playerAction.id }], assertions: [{ kind: "entity_lifecycle", entityId: "player", expected: "active" }] };
+      return registry.resolve(definition.rulePackages, { ...ruleContext(definition, [playerAction]), state, resolutionPlans: [plan], resolutionReceipts: [receipt] }, [invocation], []);
+    };
+    const baseline = apply(base), candidate = apply(annotated);
+    expect(candidate.operations).toEqual(baseline.operations);
+    expect(candidate.operations).toHaveLength(1);
+    expect(candidate.operations[0]).toMatchObject(remainingUses === 1 ? { kind: "remove_condition", conditionId: "test-charge" }
+      : { kind: "set_condition", condition: { id: "test-charge", remainingUses: remainingUses - 1 } });
+    expect({ state, annotated }).toEqual(before);
+  });
+
   it("projects runtime mechanic contracts without executable package details", () => {
     const definition = loaded();
     const contracts = createCoreRulePackageRegistry().promptContracts(definition.rulePackages);

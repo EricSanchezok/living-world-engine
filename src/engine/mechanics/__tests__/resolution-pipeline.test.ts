@@ -93,6 +93,14 @@ describe("resolution pipeline", () => {
               authority: "semantic",
               channel: null,
               explanation: "The grounded sand can obscure vision after the strike.",
+            }, {
+              source: { kind: "fact", id: "courtyard-sandy-ground" },
+              role: "permission", direction: "neutral", steps: 0, authority: "semantic", channel: null,
+              explanation: "The loose courtyard sand provides the improvised means.",
+            }, {
+              source: { kind: "fact", id: "courtyard-sandy-ground" },
+              role: "risk", direction: "neutral", steps: 0, authority: "semantic", channel: null,
+              explanation: "Throwing the loose sand can expose the committed traveler.",
             }],
             risk: "risky",
             baseEffect: repaired ? "standard" : "major",
@@ -343,6 +351,8 @@ describe("resolution pipeline", () => {
     expect(receipt.checkRequestId).toBe(committed.checks.find((check) => check.requestId === receipt.checkRequestId)?.requestId);
     expect(committed.commitmentRounds).toContainEqual(expect.objectContaining({ kind: "check", phase: "resolution" }));
     expect(receipt.plan.difficulty).toMatchObject({ kind: "opposed", ratingId: "resolve:keeper" });
+    expect(receipt.plan.factors.map(factor => factor.role)).toEqual(["secondary", "permission", "risk"]);
+    expect(receipt.plan.factors.map(factor => factor.source)).toEqual(Array(3).fill({ kind: "fact", id: "courtyard-sandy-ground" }));
     expect(receipt.operations).toEqual(committed.mechanicResults
       .find((mechanic) => (mechanic.data as { receiptId?: string }).receiptId === receipt.id)?.operations);
     expect(committed.operations).toEqual(expect.arrayContaining(receipt.operations));

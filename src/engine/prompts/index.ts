@@ -88,7 +88,7 @@ interface PromptSpec {
 const specs: Record<PromptBundleId, PromptSpec> = {
   "truth-perception": { system: ["system/truth-perception.md", "shared/language.md"], user: "user/truth-perception.md" },
   "truth-reaction-routing": { system: ["system/truth.md", "shared/language.md"], user: "user/truth-reaction-routing.md" },
-  "truth-resolution": { system: ["system/truth.md", "shared/resolution-effect-scope.md", "shared/resolution-plan-effects.md", "shared/resolution-condition-references.md", "shared/language.md"], user: "user/truth-resolution.md" },
+  "truth-resolution": { system: ["system/truth.md", "shared/resolution-effect-scope.md", "shared/resolution-plan-effects.md", "shared/resolution-condition-references.md", "shared/resolution-source-role-exclusivity.md", "shared/language.md"], user: "user/truth-resolution.md" },
   "truth-transition": { system: ["system/truth.md", "shared/transition-assertion-states.md", "shared/transition-receipt-stage.md", "shared/language.md"], user: "user/truth-transition.md" },
   "agent-bootstrap": { system: ["system/agent-batch.md", "system/agent.md", "shared/language.md"], user: "user/agent-bootstrap.md" },
   "agent-mind": { system: ["system/agent-batch.md", "system/agent.md", "shared/language.md"], user: "user/agent-mind.md" },
@@ -97,7 +97,7 @@ const specs: Record<PromptBundleId, PromptSpec> = {
   "action-grounding": { system: ["system/action-grounding.md", "shared/interaction-grounding.md", "shared/language.md"], user: "user/action-grounding.md" },
   "observation-renderer": { system: ["system/observation-renderer.md", "shared/language.md"], user: "user/observation-renderer.md" },
   "arrival-generator": { system: ["system/arrival.md", "shared/language.md"], user: "user/arrival.md" },
-  "resolution-plan-verifier": { system: ["system/resolution-plan-verifier.md", "shared/language.md"], user: "user/resolution-plan-verifier.md" },
+  "resolution-plan-verifier": { system: ["system/resolution-plan-verifier.md", "shared/resolution-source-role-exclusivity.md", "shared/language.md"], user: "user/resolution-plan-verifier.md" },
   "causal-verifier": { system: ["system/causal-verifier.md", "shared/language.md"], user: "user/causal-verifier.md" },
   "model-smoke": { system: ["system/model-smoke.md", "shared/language.md"], user: "user/model-smoke.md" },
 };

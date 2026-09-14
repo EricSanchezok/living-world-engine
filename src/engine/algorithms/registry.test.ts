@@ -48,10 +48,13 @@ it("rejects historical Truth contracts and random scheduling instead of changing
 });
 
 describe("built-in algorithm registry", () => {
-  it("rejects prior compiler and grounding identities instead of changing pinned dependency behavior", () => {
+  it("rejects prior execution, truth, compiler and grounding identities instead of changing pinned behavior", () => {
     const registry = registerBuiltinAlgorithms(new WorldExecutionAlgorithmRegistry());
     for (const current of [DEFAULT_ALGORITHM_REF, FULL_CATALOG_ALGORITHM_REF]) {
       expect(registry.has(current)).toBe(true);
+      expect(registry.has(defineAlgorithmRef({ ...current, contractVersion: 11 }))).toBe(false);
+      const truth = current.children.truthResolution!;
+      expect(registry.has(replaceChild(current, "truthResolution", defineAlgorithmRef({ ...truth, contractVersion: 4 })))).toBe(false);
       for (const slot of ["actionCompilation", "interactionGrounding"]) {
         const child = current.children[slot]!;
         const previous = replaceChild(current, slot, defineAlgorithmRef({ ...child, version: String(Number(child.version) - 1) }));
@@ -91,7 +94,7 @@ describe("built-in algorithm registry", () => {
       "work-batching/shared-context-slot-batching@2",
       "work-batching/shared-state-first-slot-batching@1",
       "work-scheduling/bounded-concurrency@1",
-      "world-execution/eager-reference@27",
+      "world-execution/eager-reference@28",
     ]);
   });
 

@@ -17,7 +17,7 @@ The default check is d20 plus at most one actor-owned aptitude Rating. Named env
 
 Settlement is deterministic from the committed plan. Exceptional upgrades the primary intended effect one magnitude, full and automatic apply intended effects as planned, mixed downgrades intended effects one magnitude and applies the mixed risk consequence, and miss applies only the miss risk consequence. Safe consequences are none/minor, risky consequences minor/standard, and dire consequences major/decisive for mixed/miss respectively.
 
-Each action-target-channel has one primary impact and at most one secondary impact at least one magnitude lower. A source has one factor role, only grounded means participate, and net potency/protection shifts are clamped to two magnitude steps in either direction. A source used for a secondary effect cannot also increase the primary effect.
+Each action-target-channel has one primary impact and at most one secondary impact at least one magnitude lower. [Evidence annotation and mechanical source ownership](0171-evidence-annotation-source-ownership.md) define source reuse. Only grounded means participate, and net potency/protection shifts are clamped to two magnitude steps in either direction. A source used for a secondary effect cannot also increase the primary effect.
 
 `ConditionState` stores a subject, open semantic label and description, magnitude, named duration profile, visibility, and causal provenance. Conditions need no predefined type. Declared condition profiles may add a stacking key, deterministic recurrence, recovery, or thresholds. Reapplying the same condition or stacking key replaces it when stronger, steps it up when equal, and otherwise refreshes duration.
 

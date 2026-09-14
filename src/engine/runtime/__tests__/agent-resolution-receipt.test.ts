@@ -81,6 +81,24 @@ function receipt(visibility: "full" | "result_only" | "hidden"): ResolutionRecei
 }
 
 describe("AgentPerspective resolution receipt projection", () => {
+  it("retains both visible annotation roles while independently filtering hidden evidence", () => {
+    const definition = loadWorldScript(fixture, { seed: 1, modelCatalog: createTestModelCatalog() });
+    const annotated = receipt("full");
+    annotated.plan.factors.push(
+      { source: { kind: "entity", id: "key" }, role: "permission", direction: "neutral", steps: 0, authority: "semantic", channel: null, explanation: "The carried key provides the attempted means." },
+      { source: { kind: "entity", id: "key" }, role: "risk", direction: "neutral", steps: 0, authority: "semantic", channel: null, explanation: "The visible key can draw attention." },
+    );
+    const view = projectAgentResolutionReceipt(definition.initialState, definition.initialState.agents.player, annotated);
+    expect(view).toMatchObject({ visibility: "full", plan: { factors: [
+      { role: "permission", direction: "neutral", steps: 0, explanation: "The carried key provides the attempted means." },
+      { role: "risk", direction: "neutral", steps: 0, explanation: "The visible key can draw attention." },
+    ] } });
+    expect(JSON.stringify(view)).not.toContain("key-authenticity");
+    expect(JSON.stringify(view)).not.toContain("ref:entity:key");
+    expect(projectAgentResolutionReceipt(definition.initialState, definition.initialState.agents.player, { ...annotated, plan: { ...annotated.plan, visibility: "result_only" } }))
+      .not.toHaveProperty("plan");
+  });
+
   it("shows a full adjudication chain without hidden canonical evidence", () => {
     const definition = loadWorldScript(fixture, { seed: 1, modelCatalog: createTestModelCatalog() });
     const view = projectAgentResolutionReceipt(

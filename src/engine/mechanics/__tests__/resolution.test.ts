@@ -123,18 +123,41 @@ function result(margin: number, kept = 10): D20CheckResult {
 }
 
 describe("open semantic resolution", () => {
-  it("rejects repeated neutral mechanical uses while allowing supporting citations", () => {
+  it("preserves permission and risk explanations without counting their evidence twice", () => {
     const source = { kind: "fact" as const, id: "sword-burning" };
     const permission = { source, role: "permission" as const, direction: "neutral" as const,
       steps: 0 as const, authority: "semantic" as const, channel: null, explanation: "The flame permits ignition." };
     const risk = { ...permission, role: "risk" as const, explanation: "The flame may expose the wielder." };
-    expect(() => validateResolutionPlan(plan({ factors: [permission, risk] }), evidence()))
-      .toThrow("factors[1].source (risk) conflicts with factors[0].source (permission)");
-    const valid = plan({ factors: [permission], secondaryEffect: null, means: [{ description: "Use the burning blade.", source }] });
+    const mechanical = plan({ factors: [], secondaryEffect: null, means: [{ description: "Use the burning blade.", source }] });
+    const valid = { ...mechanical, factors: [permission, risk] };
+    const before = structuredClone(valid);
     expect(() => validateResolutionPlan(valid, evidence())).not.toThrow();
+    expect(valid).toEqual(before);
+    expect(deriveCheck(valid, evidence())).toEqual(deriveCheck(mechanical, evidence()));
     expect(() => validateResolutionPlan({ ...valid, id: "another-plan" }, evidence())).not.toThrow();
-    const opposed = plan({ factors: [{ ...permission, source: { kind: "rating", id: "foe-defense" } }] });
-    expect(() => validateResolutionPlan(opposed, evidence())).toThrow("conflicts with difficulty.source");
+    const annotatedInputs = { ...mechanical, factors: [
+      { ...permission, source: { kind: "rating" as const, id: "hero-prowess" } },
+      { ...risk, source: { kind: "rating" as const, id: "foe-defense" } },
+    ] };
+    expect(() => validateResolutionPlan(annotatedInputs, evidence())).not.toThrow();
+    expect(deriveCheck(annotatedInputs, evidence())).toEqual(deriveCheck(mechanical, evidence()));
+    const secondary = plan();
+    const annotatedSecondary = { ...secondary, factors: [...secondary.factors, permission, risk] };
+    expect(() => validateResolutionPlan(annotatedSecondary, evidence())).not.toThrow();
+    const receipt = (value: ResolutionPlan) => deriveResolutionReceipt({ receiptId: "receipt", plan: value,
+      checkRequestId: "check-strike", check: deriveCheck(value, evidence()), result: result(4, 15) });
+    expect(receipt(annotatedSecondary).effects).toEqual(receipt(secondary).effects);
+  });
+
+  it("rejects repeated annotation roles, numeric notes and invalid evidence without deleting explanations", () => {
+    const permission = { source: { kind: "fact" as const, id: "sword-burning" }, role: "permission" as const, direction: "neutral" as const,
+      steps: 0 as const, authority: "semantic" as const, channel: null, explanation: "The flame permits ignition." };
+    const value = plan({ factors: [permission, { ...permission, explanation: "A second description does not create a second permission." }], secondaryEffect: null });
+    expect(() => validateResolutionPlan(value, evidence())).toThrow("repeats evidence annotation");
+    expect(value.factors).toHaveLength(2);
+    expect(() => validateResolutionPlan({ ...value, factors: [{ ...permission, direction: "helpful", steps: 1 }] }, evidence())).toThrow("numeric permission");
+    expect(() => validateResolutionPlan({ ...value, factors: [{ ...permission, source: { kind: "fact", id: "missing" } }] }, evidence())).toThrow("unknown factor");
+    expect(() => validateResolutionPlan({ ...value, factors: [{ ...permission, authority: "authored" }] }, evidence())).toThrow("unauthoritative authored factor");
   });
   it("maps named difficulty and opposed ratings without fact modifiers", () => {
     expect(difficultyDc).toEqual({ trivial: 5, easy: 10, challenging: 15, hard: 20, extreme: 25 });

@@ -24,17 +24,17 @@ The executable registry is authoritative. Maturity describes enrollment policy a
 | `reaction-decision` | `model-reaction-decision@2` | 1 | reference | — |
 | `reaction-resolution` | `onset-reaction@1` | 1 | reference | `onsetPerception` → `onset-perception`<br>`reactionDecision` → `reaction-decision`<br>`scheduling` → `work-scheduling`<br>`recovery` → `output-recovery` |
 | `symbol-repair` | `bounded-symbol-repair@1` | 1 | reference | — |
-| `truth-resolution` | `dependent-fields-truth-resolution@1` | 4 | candidate | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
-| `truth-resolution` | `indexed-reviewed-truth-resolution@5` | 4 | reference | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
-| `truth-resolution` | `model-truth-resolution@1` | 4 | reference | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
-| `truth-resolution` | `ordered-rng-truth-resolution@1` | 4 | candidate | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
-| `truth-resolution` | `source-inventory-truth-resolution@1` | 4 | candidate | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
-| `truth-resolution` | `worklist-truth-resolution@1` | 4 | candidate | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
+| `truth-resolution` | `dependent-fields-truth-resolution@1` | 5 | candidate | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
+| `truth-resolution` | `indexed-reviewed-truth-resolution@5` | 5 | reference | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
+| `truth-resolution` | `model-truth-resolution@1` | 5 | reference | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
+| `truth-resolution` | `ordered-rng-truth-resolution@1` | 5 | candidate | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
+| `truth-resolution` | `source-inventory-truth-resolution@1` | 5 | candidate | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
+| `truth-resolution` | `worklist-truth-resolution@1` | 5 | candidate | `batching` → `work-batching`<br>`recovery` → `output-recovery` |
 | `work-batching` | `bounded-slot-batching@1` | 1 | reference | — |
 | `work-batching` | `shared-context-slot-batching@2` | 1 | reference | — |
 | `work-batching` | `shared-state-first-slot-batching@1` | 1 | reference | — |
 | `work-scheduling` | `bounded-concurrency@1` | 1 | reference | — |
-| `world-execution` | `eager-reference@27` | 11 | reference | `agentCognition` → `agent-cognition`<br>`actionCompilation` → `action-compilation`<br>`interactionGrounding` → `interaction-grounding`<br>`reactionResolution` → `reaction-resolution`<br>`truthResolution` → `truth-resolution`<br>`observationRendering` → `observation-rendering` |
+| `world-execution` | `eager-reference@28` | 12 | reference | `agentCognition` → `agent-cognition`<br>`actionCompilation` → `action-compilation`<br>`interactionGrounding` → `interaction-grounding`<br>`reactionResolution` → `reaction-resolution`<br>`truthResolution` → `truth-resolution`<br>`observationRendering` → `observation-rendering` |
 
 ## Benchmark-only algorithms
 
@@ -61,11 +61,11 @@ These implementations are replaceable inside the offline evaluation harness, but
 
 ## Default composition
 
-Root hash: `f24f324e8169953b79b3095d7330232a383aef75b8ce72ffe6d234f484b7cb5b`
+Root hash: `5165eb71e719d122e48bc980a0983e3fe80e5bc0bfdc09c05674ddcde16135e3`
 
 | Node path | Role | Algorithm | Contract | Manifest hash |
 | --- | --- | --- | ---: | --- |
-| `root` | `world-execution` | `eager-reference@27` | 11 | `f24f324e8169953b79b3095d7330232a383aef75b8ce72ffe6d234f484b7cb5b` |
+| `root` | `world-execution` | `eager-reference@28` | 12 | `5165eb71e719d122e48bc980a0983e3fe80e5bc0bfdc09c05674ddcde16135e3` |
 | `root.agentCognition` | `agent-cognition` | `model-agent-cognition@1` | 1 | `1daa82dc5f667b7486ecddcbc1cd07d57accf916cb66a2d7d7ae32cf04d9630d` |
 | `root.agentCognition.batching` | `work-batching` | `bounded-slot-batching@1` | 1 | `8a6cc0ef438150ba0f22f8671b1ccedb81468f0c407976caae1521102e771981` |
 | `root.agentCognition.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |
@@ -84,7 +84,7 @@ Root hash: `f24f324e8169953b79b3095d7330232a383aef75b8ce72ffe6d234f484b7cb5b`
 | `root.reactionResolution.reactionDecision` | `reaction-decision` | `model-reaction-decision@2` | 1 | `752f178384af74ce99cf5053545ee5d374aa79a1a39d4861a5b65fbd37f584f9` |
 | `root.reactionResolution.scheduling` | `work-scheduling` | `bounded-concurrency@1` | 1 | `2348f501124ef2ed707eec5123ef91a1639a9c3375804201e1b19be2aaf3cf69` |
 | `root.reactionResolution.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |
-| `root.truthResolution` | `truth-resolution` | `indexed-reviewed-truth-resolution@5` | 4 | `0666d7f0d5d9f715df90ee220c1f212a4db951b0882d68c9fca921e476c8090f` |
+| `root.truthResolution` | `truth-resolution` | `indexed-reviewed-truth-resolution@5` | 5 | `385c441bad2d400badf63dcbd42b3c34bcaf8b5eb93836f2c4c9fcabbe8deab3` |
 | `root.truthResolution.batching` | `work-batching` | `shared-state-first-slot-batching@1` | 1 | `67a01403a0f54e5bb154ddb4f8b1bd6f2cd6e6b3a07922f877d7f4874fd01a1e` |
 | `root.truthResolution.recovery` | `output-recovery` | `localized-repair-bisect@1` | 1 | `00fef850faee60380416d17f007f154e41064c65d25ccb8bc727e5dbd787b1b7` |
 | `root.observationRendering` | `observation-rendering` | `source-bound-observation-rendering@3` | 1 | `726cf5b7ec1f4a545eb101451f3427c373e2208f560077b8298657f128e9c2f2` |

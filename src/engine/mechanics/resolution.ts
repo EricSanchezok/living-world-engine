@@ -341,12 +341,9 @@ export function validateResolutionPlan(
     preassignedSources.set(difficultyKey, "difficulty.source");
   }
   const factorSources = new Map<string, string>();
+  const annotationSources = new Map<string, string>();
   for (const [factorIndex, factor] of plan.factors.entries()) {
     const key = sourceKey(factor.source);
-    if (factorSources.has(key) || preassignedSources.has(key)) {
-      throw new Error(`plan ${plan.id} assigns source ${key} more than one mechanical role: factors[${factorIndex}].source (${factor.role}) conflicts with ${factorSources.get(key) ?? preassignedSources.get(key)}. Neutral permission, secondary and risk factors also consume the source's one mechanical assignment`);
-    }
-    factorSources.set(key, `factors[${factorIndex}].source (${factor.role})`);
     if (!sourceExists(factor.source, index)) throw new Error(`plan ${plan.id} cites unknown factor ${key}`);
     if (!factor.explanation.trim()) throw new Error(`plan ${plan.id} has an unexplained factor`);
     if (factor.authority === "authored" && factor.source.kind !== "rating" && factor.source.kind !== "law") {
@@ -365,6 +362,22 @@ export function validateResolutionPlan(
     if ((factor.role === "potency" || factor.role === "protection") &&
       (factor.direction === "neutral" || factor.steps === 0 || !factor.channel)) {
       throw new Error(`plan ${plan.id} ${factor.role} factors require a relevant channel and steps`);
+    }
+    // Ownership rationale: docs/decisions/0217-separate-evidence-annotations-from-mechanical-contributions.md.
+    // Explanations remain in the receipt and its Condition consumption set.
+    // Only mechanical contributions compete for a source; secondary authorizes an extra effect.
+    const position = `factors[${factorIndex}].source (${factor.role})`;
+    if (factor.role === "permission" || factor.role === "risk") {
+      const annotationKey = `${key}:${factor.role}`;
+      if (annotationSources.has(annotationKey)) {
+        throw new Error(`plan ${plan.id} repeats evidence annotation ${position} for source ${key}: conflicts with ${annotationSources.get(annotationKey)}`);
+      }
+      annotationSources.set(annotationKey, position);
+    } else {
+      if (factorSources.has(key) || preassignedSources.has(key)) {
+        throw new Error(`plan ${plan.id} assigns source ${key} more than one mechanical role: ${position} conflicts with ${factorSources.get(key) ?? preassignedSources.get(key)}. Secondary factors retain exclusive mechanical source ownership`);
+      }
+      factorSources.set(key, position);
     }
   }
 

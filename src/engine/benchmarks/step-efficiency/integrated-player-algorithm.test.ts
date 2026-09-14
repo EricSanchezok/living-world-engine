@@ -139,7 +139,7 @@ it.each([
     expect(result.completedElapsedMs).toBeGreaterThan(0);
     const document = database.readInstance(created.summary.id).document;
     expect(document.executionAlgorithm).toEqual(ref);
-    expect(ref.version).toBe(recursive ? "2" : "11");
+    expect(ref.version).toBe(recursive ? "2" : "12");
     if (externalReaction && !recursive) expect(perceptionCalls).toBeGreaterThan(0);
     const executions = database.executions({ instanceId: created.summary.id });
     const algorithmExecutions = executions.filter(execution => execution.manifest.kind === "algorithm");

@@ -75,7 +75,7 @@ it.each([false, true])("runs registered planning, canonical source restoration a
     generateStructured: request => {
       const context = request.context as { task: { planningWorklist?: PhysicalPlanningWorklist }; state: { temporalExecution?: unknown; candidateResolutionPlans?: Array<{ targetRefs: string[]; means: Array<{ source: { kind: string } }> }> } };
       if (context.task?.planningWorklist) {
-        expect(request.system.split(RESOLUTION_SOURCE_ROLE_INSTRUCTION).length - 1).toBe(indexed ? 1 : 0);
+        expect(request.system.split(RESOLUTION_SOURCE_ROLE_INSTRUCTION).length - 1).toBe(1);
         planned++; if (indexed) assertIndexedPlanningContext(request.context); else assertPhysicalPlanningWorklist(request.context);
         expect(context.state.temporalExecution).toBeDefined();
         expect(request.promptVersion).toContain("physical-planning-worklist-v1");
