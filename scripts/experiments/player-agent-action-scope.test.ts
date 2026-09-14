@@ -1,7 +1,8 @@
 import { expect, it } from "vitest";
-import { capturedBootstrapContext, singleTextBootstrapFixture } from "./player-agent-action-scope";
+import { capturedBootstrapContext, singleTextBootstrapFixture, intentProgramBootstrapFixture } from "./player-agent-action-scope";
 import { completeDeepSeekJsonStream } from "../../src/engine/models/deepseek-json-stream";
 import { decodeAgentActionText } from "../../src/engine/benchmarks/step-efficiency/agent-action-text";
+import { decodeAgentIntentProgram, INTENT_PROGRAM_PREFIX } from "../../src/engine/benchmarks/step-efficiency/agent-intent-program";
 
 it("extracts only the bounded gateway context and preserves complete private source data", () => {
   const context = { contractVersion: 17, execution: { instanceId: "source", advanceId: "bootstrap:source", revision: 0, step: 0, worldId: "world" },
@@ -25,4 +26,11 @@ it("labels synthetic single-text replay and retains all historical text without 
   expect(completeDeepSeekJsonStream(fixture.body).usage.total_tokens).toBe(0);
   expect(decodeAgentActionText(fixture.output)).not.toEqual(output);
   expect(fixture.output.slots[0]!.beliefChanges).toEqual(output.slots[0]!.beliefChanges);
+  const programFixture = intentProgramBootstrapFixture(`data: ${JSON.stringify(frame)}\n\ndata: [DONE]\n\n`);
+  const completion = completeDeepSeekJsonStream(programFixture.body);
+  expect(completion.usage.total_tokens).toBe(0);
+  expect(decodeAgentIntentProgram(JSON.parse(completion.choices[0]!.message.content!))).toEqual(programFixture.output);
+  const program = JSON.parse(programFixture.output.slots[0]!.nextActionIntent.rawText.slice(INTENT_PROGRAM_PREFIX.length));
+  expect(program).toEqual({ root: 0, nodes: [{ nodeId: 0, kind: "attempt", text: fixture.output.slots[0]!.nextActionIntent.rawText, targetIndices: [] }] });
+  expect(programFixture.output.slots[0]!.beliefChanges).toEqual(output.slots[0]!.beliefChanges);
 });

@@ -34,6 +34,8 @@ The separate [source-frame screen](specs/0159-source-onset-frame-screen.md) test
 
 The [action-phase graph screen](specs/0160-action-phase-graph-screen.md) exposes completion dependencies and external prerequisites between open attempted steps. Its initial frontier is a deterministic reading of an untrusted graph, with no execution or commit authority.
 
+The [Agent intent-program screen](specs/0161-agent-intent-program-screen.md) generates control structure at the private decision boundary and preserves the complete program through a diagnostic action embedding. Its inspection exposes attempts or unevaluated conditions; production execution remains unchanged.
+
 ## State and policies
 
 Action Compilation specializes [empty shared-resource domains](specs/0111-specialize-empty-resource-pool-domain.md) from its bound source state; representation adapters preserve that request schema through initial and repair calls.
