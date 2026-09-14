@@ -1,6 +1,7 @@
 import { validateOnsetPerceptionReceipts } from "../../mechanics/onset-receipts";
 import type { OnsetPerceptionTranscript } from "../../runtime/execution";
 import { TRUTH_RESOLUTION_CONTRACT_VERSION } from "../roles";
+import { observedExternalInterruptions } from "../../mechanics/observed-activity-interruptions";
 import { AgentMind } from "./agent-mind";
 import { compileActions } from "./action-compiler";
 import { DEFAULT_EAGER_OUTPUT_RECOVERY } from "./eager-slot-batching";
@@ -402,8 +403,8 @@ export function createEagerReferenceAlgorithmRef(
   return defineAlgorithmRef({
     role: "world-execution",
     id: "eager-reference",
-    version: "26",
-    contractVersion: 10,
+    version: "27",
+    contractVersion: 11,
     config: {},
     children: { agentCognition, actionCompilation, interactionGrounding, reactionResolution, truthResolution, observationRendering },
   });
@@ -2139,7 +2140,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     const temporalBase = structuredClone(temporal);
     const globalObservationAudits: ModelExecutionAudit[] = [];
     const finalReviewAudits: ModelExecutionAudit[] = [];
-    const assemble = () => {
+    const assemble = (observations: readonly ObservationPacket[] = []) => {
       const resolution = mergeResolutions(
         planningState,
         componentResults.length > 0 ? componentResults.map(result => result.resolution)
@@ -2191,6 +2192,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
       resolution.reactionDecisions = structuredClone(reactionDecisions);
       resolution.stimulusObservations = preparation.reactionRequests.map((request) =>
         structuredClone(request.stimulus));
+      resolution.proposal.observations = structuredClone([...observations]);
 
       resolution.rng = structuredClone(componentResults.reduce((latest, result) =>
         result.resolution.rng.draws > latest.draws ? result.resolution.rng : latest, preparation.onsetPerception.rng));
@@ -2211,10 +2213,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
         let settledTemporal = structuredClone(reconciled);
         const preContextCandidate = applyTransitionProposal(source, resolution.proposal, settledTemporal);
         preContextCandidate.truth.rng = structuredClone(resolution.rng);
-        const observedAgentIds = new Set([...observerIds, ...resolution.stimulusObservations.map(packet => packet.observerId)]);
-        // Retained Activity footprints constrain this boundary without emitting a new interaction.
-        const relevantExternalObservers = new Set(interactionDependencies.filter(dependency => dependency.kind !== "activity").flatMap(dependency =>
-          dependency.audienceAgentIds.filter(agentId => dependency.actorId !== agentId && observedAgentIds.has(agentId))));
+        const relevantExternalObservers = observedExternalInterruptions(resolution);
         const preserveActiveActivityIds = new Set(reactionDecisions.flatMap((decision) => {
           if (decision.kind !== "keep" || decision.ongoingActivityDisposition !== "continue") return [];
           const request = preparation.reactionRequests.find((entry) => entry.id === decision.requestId);
@@ -2263,7 +2262,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     let assembled = assemble();
     let observationRound = 0;
     let observationRepairs = 0;
-    const render = async (observerIds: readonly string[], feedbackByObserver?: Readonly<Record<string, readonly string[]>>) => {
+    const render = async (observerIds: readonly string[], feedbackByObserver?: Readonly<Record<string, readonly string[]>>): Promise<void> => {
       if (observerIds.length === 0) return;
       const rendered = await this.observationRenderer.render({
         definition: input.definition, state: planningState,
@@ -2279,10 +2278,15 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
         ...assembled.resolution.proposal.observations.filter(packet => !requested.has(packet.observerId)),
         ...structuredClone(rendered.packets),
       ].sort((left, right) => left.observerId.localeCompare(right.observerId) || left.id.localeCompare(right.id));
+      // Recompute from the immutable boundary base so repaired observations cannot retain a stale pause.
+      assembled = assemble(assembled.resolution.proposal.observations);
       globalObservationAudits.push(...structuredClone(rendered.modelAudits));
       context.instrumentation.emit({ event: "algorithm.observation.global_projection_completed",
         attributes: { phase: "observation", reason: "final-candidate" },
         counts: { observations: rendered.packets.length, observationBatches: rendered.batchCount, dependencyComponents: components.length } });
+      const covered = new Set(assembled.resolution.proposal.observations.map(packet => packet.observerId));
+      const additional = assembled.observerIds.filter(id => !covered.has(id));
+      if (additional.length) await render(additional);
     };
     await render(assembled.observerIds);
     let acceptedReview: BoundCausalReview;

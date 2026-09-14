@@ -16,6 +16,7 @@ import { actionCompilationCandidateKeyForHandle, referenceHandleFor, type Existi
 import { contentHash } from "../../../models/model-audit";
 import { ModelOutputError, ModelSemanticRepairError, ModelTransportError } from "../../../models/model-provider";
 import { SimulationEngine } from "../../../runtime/simulation";
+import { resumeActivity } from "../../../mechanics/temporal";
 import { CanonicalCommitter } from "../../../runtime/canonical-committer";
 import {
   DeterministicModelProvider,
@@ -1941,8 +1942,25 @@ describe("eager reference safeguards", () => {
     }));
   });
 
-  it("creates a decision point when another action produces an authorized relevant observation", async () => {
-    const provider = new ScriptedModelProvider(({ role, profileId, context }) => {
+  it.each(["witnessed", "unwitnessed", "repaired"] as const)("settles external event interruption from accepted observations: %s", async mode => {
+    let rejectedObservation = false;
+    const provider = new ScriptedModelProvider(({ role, profileId, context, schemaName }) => {
+      if (schemaName === "causal_verification" && mode === "repaired" && !rejectedObservation) {
+        const review = (context as { state: {
+          actionSet: { assigned: { actorRef: string }[] };
+          candidate: { observations: { observationRef: string; observerRef: string }[] };
+          candidateTemporalExecution: { temporalExecution: { activities: Record<string, { status: string }> } };
+        } }).state;
+        if (review.actionSet.assigned.some(action => action.actorRef === "ref:agent:keeper")) {
+          const packet = review.candidate.observations.find(packet => packet.observerRef === "ref:agent:player")!;
+          expect(Object.values(review.candidateTemporalExecution.temporalExecution.activities).some(activity => activity.status === "paused")).toBe(true);
+          rejectedObservation = true;
+          return { verdict: "reject", findings: [{ target: { kind: "observation", targetHandle: packet.observationRef },
+            evidenceHandles: [], code: "observation-mismatch", message: "This observer did not witness the external event.",
+            repairHint: "Remove the unsupported event citation." }] };
+        }
+      }
+      if (role === "causal-verifier") return { verdict: "accept", findings: [] };
       if (role === "truth-perception") return { kind: "done", reports: deterministicOnsetReports(context, "no_stimulus") };
       if (role === "action-compilation") {
         return deterministicActionCompilationBatch(profileId, context, (compilation, { action, temporalEvidence }) => {
@@ -1968,8 +1986,21 @@ describe("eager reference safeguards", () => {
           });
         });
       }
-      return deterministicModelOutput(profileId, context);
-    });
+      const output = deterministicModelOutput(profileId, context) as { kind?: string;
+        proposal?: { events: { proposalKey: string; description: string; impact: string; causes: { kind: string; ref: string }[]; assertions: unknown[] }[] };
+        sourceEventRefs?: string[] };
+      if (output.kind === "transition" && output.proposal) {
+        const actions = (context as { state: { actionSet: { assigned: { actionRef: string; actorRef: string }[] } } }).state.actionSet.assigned;
+        const actor = actions.find(action => action.actorRef === "ref:agent:keeper") ?? actions[0]!;
+        output.proposal.events = [{ proposalKey: "observed-progress", impact: "ordinary",
+          description: actor.actorRef === "ref:agent:keeper" ? "守门人在这一边界发出呼喊。" : "旅人在自己的路程上取得普通进展。",
+          causes: [{ kind: "action", ref: actor.actionRef }], assertions: [{ kind: "elapsed_seconds_compare", operator: "gte", value: 0 }] }];
+      }
+      if (role === "observation-renderer" && (mode === "unwitnessed" || rejectedObservation)) {
+        output.sourceEventRefs = [];
+      }
+      return output;
+    }, undefined, false);
     const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), {
       seed: 47,
       modelCatalog: provider.catalog,
@@ -1983,11 +2014,13 @@ describe("eager reference safeguards", () => {
     definition.historyBaseHash = historyReplayBaseHash(definition.initialState);
     const delegate = new EagerReferenceAlgorithm(provider);
     let latestCandidate: import("../../../runtime/execution").WorldStepCandidate | undefined;
+    let latestPreparation: WorldStepPreparation;
     const algorithm: WorldExecutionAlgorithm = {
       manifest: delegate.manifest,
       bootstrap: (input, context) => delegate.bootstrap(input, context),
       prepareStep: (input, context) => delegate.prepareStep(input, context),
       completeStep: async (input, preparation, reactions, context) => {
+        latestPreparation = structuredClone(preparation);
         latestCandidate = await delegate.completeStep(input, preparation, reactions, context);
         return latestCandidate;
       },
@@ -2033,6 +2066,14 @@ describe("eager reference safeguards", () => {
 
     const interrupted = Object.values(second.state.truth.activities)
       .find((candidate) => candidate.id === activity.id)!;
+    if (mode !== "witnessed") {
+      expect(rejectedObservation).toBe(mode === "repaired");
+      expect(second.committed.events).toHaveLength(1);
+      expect(second.committed.observations.filter(packet => packet.observerId === "player").every(packet => packet.sourceEventIds.length === 0)).toBe(true);
+      expect(interrupted.status).toBe("active");
+      expect(second.committed.decisionPoints.some(point => point.agentId === "player")).toBe(false);
+      return;
+    }
     expect(interrupted).toMatchObject({ status: "paused", progress: { target: 100 } });
     const finalReview = provider.requests.filter(request => request.schemaName === "causal_verification").at(-1)!;
     const reviewedTemporal = (finalReview.context as { state: { candidateTemporalExecution: {
@@ -2044,6 +2085,22 @@ describe("eager reference safeguards", () => {
     }));
 
     if (interrupted.status !== "paused") throw new Error("interrupted Activity did not remain scheduled");
+    const forged = structuredClone(latestCandidate!);
+    forged.temporalState.activities[activity.id] = resumeActivity(interrupted, second.state.truth.elapsedSeconds).activity;
+    const transition = forged.activityTransitions.find(entry => entry.activityId === activity.id)!;
+    transition.kind = "progressed";
+    transition.toStatus = "active";
+    const disposition = forged.activityDispositions.find(entry => entry.activityId === activity.id)!;
+    disposition.kind = "continue";
+    disposition.reason = "continuation_valid";
+    forged.decisionPoints = forged.decisionPoints.filter(point => point.activityId !== activity.id);
+    const roster = Object.fromEntries(Object.values(first.state.agents).map(agent => [agent.id,
+      { kind: "model" as const, agentId: agent.id, profiles: structuredClone(agent.modelProfiles) }]));
+    const before = contentHash(first.state);
+    expect(() => new CanonicalCommitter().step(first.state, forged, roster,
+      definition.runtimeDefaults.maxAutonomousSpanSeconds, { definition, preparation: latestPreparation! }))
+      .toThrow("candidate temporal transitions do not match the trusted boundary result");
+    expect(contentHash(first.state)).toBe(before);
     expect(interrupted.progress!.current).toBeGreaterThan(25);
     expect(interrupted.progress!.current).toBeLessThan(26);
     expect(latestCandidate?.interactionDependencies).toContainEqual(expect.objectContaining({

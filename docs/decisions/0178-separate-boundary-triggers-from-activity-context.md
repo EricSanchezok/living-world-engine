@@ -1,7 +1,7 @@
 # Separate boundary triggers from Activity context
 
 ## Status
-Accepted
+Superseded by [0211](0211-require-observed-interruption-evidence.md)
 Class: architecture
 
 ## Context and Problem Statement

@@ -10,11 +10,12 @@ import type { WorldExecutionAlgorithm, WorldStepCandidate } from "../../../runti
 import { replaySimulationState } from "../../../runtime/transaction";
 import { pauseActivity } from "../../../mechanics/temporal";
 import { deterministicActionCompilationBatch, deterministicInteractionDependency,
-  deterministicModelOutput, ScriptedModelProvider } from "../../../testing/model-provider";
+  deterministicModelOutput, deterministicOnsetReports, ScriptedModelProvider } from "../../../testing/model-provider";
 import { EagerReferenceAlgorithm } from "../eager-reference";
 
-it.each([1, 10])("uses a current interaction, not retained context, to interrupt (other checkpoint %s)", async otherCheckpoint => {
+it.each([1, 10])("keeps possible audiences as context without an observed interruption (other checkpoint %s)", async otherCheckpoint => {
   const provider = new ScriptedModelProvider(({ role, profileId, context }) => {
+    if (role === "truth-perception") return { kind: "done", reports: deterministicOnsetReports(context, "no_stimulus") };
     if (role === "action-compilation") {
       return deterministicActionCompilationBatch(profileId, context, (compilation, { action }) => {
         compilation.temporalPlan.profileRef = referenceHandleFor("temporal_profile",
@@ -68,6 +69,8 @@ it.each([1, 10])("uses a current interaction, not retained context, to interrupt
   const firstPlayer = Object.values(first.state.truth.activities).find(activity => activity.actorId === "player")!;
   const firstKeeper = Object.values(first.state.truth.activities).find(activity => activity.actorId === "keeper")!;
   expect(firstPlayer.status).toBe("active");
+  expect(first.committed.reactionRequests).toEqual([]);
+  expect(first.committed.events.every(event => event.causes.every(cause => cause.kind === "law"))).toBe(true);
   expect(firstKeeper).toMatchObject({ status: "active", nextBoundaryAtSeconds: otherCheckpoint === 1 ? 2 : 10 });
   expect(firstKeeper.interactionFootprint.audienceAgentIds).toContain("player");
   const requestCount = provider.requests.length;
@@ -107,8 +110,9 @@ it.each([1, 10])("uses a current interaction, not retained context, to interrupt
       .toThrow(`candidate changes the persisted footprint of Activity ${firstKeeper.id}`);
   } else {
     expect(second.committed.actions.map(action => action.actorId).sort()).toEqual(["keeper", "player"]);
-    expect(player.status).toBe("paused");
-    expect(second.committed.decisionPoints).toContainEqual(expect.objectContaining({ agentId: "player", reason: "activity_interrupted" }));
+    expect(player.status).toBe("active");
+    expect(second.committed.events.every(event => event.causes.every(cause => cause.kind === "law"))).toBe(true);
+    expect(second.committed.decisionPoints).toEqual([]);
   }
   expect(contentHash(replaySimulationState(second.state, second.state.revision))).toBe(contentHash(second.state));
 }, 30_000);

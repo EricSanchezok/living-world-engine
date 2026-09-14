@@ -8,6 +8,7 @@ import type {
   PolicyBinding,
   WorldStepCandidate,
 } from "./execution";
+import { observedExternalInterruptions } from "../mechanics/observed-activity-interruptions";
 import {
   ActivityFootprintIndex,
   buildInteractionDependencyGraph,
@@ -785,11 +786,7 @@ function validateCandidateBoundary(
     }
   }
 
-  const observedAgentIds = new Set(observations.map((observation) => observation.observerId));
-  // A validated retained footprint is context, not a newly emitted boundary interaction.
-  const relevantExternalObservers = new Set(candidate.interactionDependencies.filter((dependency) => dependency.kind !== "activity").flatMap((dependency) =>
-    dependency.audienceAgentIds.filter((agentId) =>
-      agentId !== dependency.actorId && observedAgentIds.has(agentId))));
+  const relevantExternalObservers = observedExternalInterruptions(candidate.resolution);
   const contextActivityIds = [...new Set([
     ...expectedAffectedActivityIds,
     ...expectedBoundary.dueActivityIds,

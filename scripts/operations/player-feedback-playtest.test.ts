@@ -4,7 +4,7 @@ import path from "node:path";
 import { expect, it } from "vitest";
 import { FULL_CATALOG_ALGORITHM_REF } from "../../src/engine/algorithms/registry";
 import { createTestModelCatalog, deterministicActionCompilationBatch, deterministicInteractionDependency,
-  deterministicModelOutput, ScriptedModelProvider } from "../../src/engine/testing/model-provider";
+  deterministicModelOutput, deterministicOnsetReports, ScriptedModelProvider } from "../../src/engine/testing/model-provider";
 import { ModelConfigurationError } from "../../src/engine/models/model-provider";
 import { buildWorldDefinition, loadWorldTemplate } from "../../src/script/world-loader";
 import { MemoryWorldRepository } from "../../src/script/world-repository";
@@ -16,6 +16,9 @@ it.each(["completed", "failed", "awaiting-decision", "budget-paused"] as const)(
   const root = mkdtempSync(path.join(tmpdir(), "player-feedback-"));
   const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
   const provider = new ScriptedModelProvider(({ role, profileId, context }) => {
+    if (outcome === "awaiting-decision" && role === "truth-perception") {
+      return { kind: "done", reports: deterministicOnsetReports(context, "no_stimulus") };
+    }
     if (outcome === "awaiting-decision" && role === "action-grounding") {
       return deterministicInteractionDependency({
         reads: [{ kind: "global", id: "world" }], writes: [{ kind: "global", id: "world" }],
@@ -30,7 +33,17 @@ it.each(["completed", "failed", "awaiting-decision", "budget-paused"] as const)(
         });
       });
     }
-    return deterministicModelOutput(profileId, context);
+    const output = deterministicModelOutput(profileId, context);
+    if (outcome === "awaiting-decision" && role === "truth-transition") {
+      const transition = output as { kind?: string; proposal?: { events: unknown[] } };
+      const action = (context as { state: { actionSet: { assigned: { actionRef: string; actorRef: string }[] } } })
+        .state.actionSet.assigned.find(action => action.actorRef === "ref:agent:keeper");
+      if (transition.kind === "transition" && transition.proposal && action) {
+        transition.proposal.events = [{ proposalKey: "keeper-call", description: "守门人在庭院中发出呼喊。", impact: "ordinary",
+          causes: [{ kind: "action", ref: action.actionRef }], assertions: [{ kind: "elapsed_seconds_compare", operator: "gte", value: 0 }] }];
+      }
+    }
+    return output;
   }, createTestModelCatalog(undefined, { maxInputBytes: 1_048_576 }));
   const template = loadWorldTemplate(path.resolve("test/fixtures/open-world-script"));
   if (outcome === "awaiting-decision" || outcome === "budget-paused") {

@@ -11,12 +11,12 @@ const config = { cognition: AGENT_RECURSIVE_INTENT };
 
 /** Unqualified full-player diagnostic under decision 0184; intentions remain opaque to the runtime. */
 export function recursivePlayerAlgorithmRef() {
-  return defineAlgorithmRef({ role: "world-execution", id: "recursive-player-diagnostic", version: "1", contractVersion: WORLD_EXECUTION_CONTRACT_VERSION,
+  return defineAlgorithmRef({ role: "world-execution", id: "recursive-player-diagnostic", version: "2", contractVersion: WORLD_EXECUTION_CONTRACT_VERSION,
     config, children: localPlanRepairAlgorithmRef().children });
 }
 
 export function registerRecursivePlayerAlgorithm(registry: WorldExecutionAlgorithmRegistry) {
-  registry.registerDefinition({ role: "world-execution", id: "recursive-player-diagnostic", version: "1", contractVersion: WORLD_EXECUTION_CONTRACT_VERSION,
+  registry.registerDefinition({ role: "world-execution", id: "recursive-player-diagnostic", version: "2", contractVersion: WORLD_EXECUTION_CONTRACT_VERSION,
     maturity: "diagnostic", configSchema: z.custom<typeof config>(value => contentHash(value) === contentHash(config)),
     children: Object.entries(localPlanRepairAlgorithmRef().children).map(([name, child]) => ({ name, role: child.role })),
     create: context => {
