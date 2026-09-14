@@ -30,6 +30,8 @@ The [sampled perception experiment](specs/0156-sampled-perception-candidate-sele
 
 The [fixed planning selection screen](specs/0173-fixed-planning-candidate-selection.md) binds three initial automatic proposals to their complete planning source. Its selection-only model returns an unchanged eligible proposal or abstains; the runtime plan materializer and original execution pipeline retain validation authority.
 
+The [conditional perception report program](specs/0174-conditional-perception-report-programs.md) declares an initial check batch and conditional reports before runtime RNG. Its benchmark capability uses the shared check, RNG and receipt functions for local branch execution or explicitly defers to ordinary model interpretation; canonical commit validation remains unchanged.
+
 The benchmark [temporal route representation](specs/0157-temporal-route-perception-screen.md) derives a terminal perception tag from a selected current or pending route case. Pending transfers have no stimulus payload; original receipt validation remains authoritative for the compiled result.
 
 Its optional [observer-local symbol codec](specs/0158-observer-local-perception-symbols.md) binds existing claim identities to each assigned observer's complete local inventory. Explicit introductions remain model-authored; the codec restores selected opaque handles without identity inference.
