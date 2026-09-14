@@ -40,6 +40,8 @@ The [Agent intent-program screen](specs/0161-agent-intent-program-screen.md) gen
 
 The [recursive intention experiment](specs/0164-recursive-intent-tree-screen.md) replaces model-authored graph references with embedded children and leaf-local targets. A deterministic compiler produces the complete indexed diagnostic representation without deciding which conditions or attempts succeed. Its separately registered player diagnostic passes the full intention through ordinary compilation and adjudication on the local plan repair foundation.
 
+The separate [intention reference view](specs/0166-scope-qualified-intent-reference-screen.md) presents complete embedded intentions using action-local symbols and binding tables. Its benchmark planning adapter preserves the source and canonical output contract without interpreting intentions as execution.
+
 ## State and policies
 
 Action Compilation specializes [empty shared-resource domains](specs/0111-specialize-empty-resource-pool-domain.md) from its bound source state; representation adapters preserve that request schema through initial and repair calls.
