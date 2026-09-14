@@ -811,10 +811,41 @@ function validatePlanEffect(
   if (effect.kind === "meter") {
     const meter = state.truth.meters[effect.meterId];
     const profile = state.truth.mechanics.impactProfiles[effect.impactProfileId];
-    if (!meter || meter.entityId !== effect.targetId || !profile || profile.meterDefinitionId !== meter.definitionId) {
-      throw new Error(`plan ${plan.id} has invalid meter effect ${effect.id}`);
+    if (meter && meter.entityId === effect.targetId && profile?.meterDefinitionId === meter.definitionId) return;
+    const draftEffect = binding.draft[binding.field];
+    if (!draftEffect || draftEffect.kind !== "meter") throw new Error("meter effect draft binding differs from materialized effect");
+    const sourceCandidates = binding.resolver.candidatesFor("source");
+    const ownedMeters = sourceCandidates.filter(candidate => candidate.kind === "meter").flatMap(candidate => {
+      const value = state.truth.meters[binding.resolver.resolve(candidate.handle, "source").engineId];
+      return value?.entityId === effect.targetId ? [{ handle: candidate.handle, value }] : [];
+    });
+    const compatibleProfiles = (definitionId: string | undefined) => binding.resolver.candidatesFor("mechanic")
+      .filter(candidate => state.truth.mechanics.impactProfiles[binding.resolver.resolve(candidate.handle, "mechanic").engineId]
+        ?.meterDefinitionId === definitionId && definitionId !== undefined).map(candidate => candidate.handle);
+    const owner = meter && sourceCandidates.find(candidate => candidate.kind === "entity" &&
+      binding.resolver.resolve(candidate.handle, "source").engineId === meter.entityId)?.handle;
+    const combinations = ownedMeters.map(({ handle, value }) => ({ meterRef: handle, impactProfileRefs: compatibleProfiles(value.definitionId) }));
+    const prefix = `Plan ${binding.draft.proposalKey} for action ${binding.draft.actionRef}: ${binding.field} targets ${draftEffect.targetRef}. `;
+    const consequence = "The combinations establish ownership only, not whether the selected target is relevant. Reconcile the target with the original action and state evidence first. Keep the intended subject and supported consequence. Do not transfer an effect to another subject, drop it, or invent harm merely to pass validation. " +
+      "If the intended consequence has no applicable meter representation, retain it as an evidence-supported non-meter effect, such as an open semantic condition when appropriate.";
+    const issues: PromptValidationIssue[] = [];
+    if (!meter || meter.entityId !== effect.targetId) {
+      issues.push({ code: "reference.invalid_meter_ownership", class: "reference",
+        path: ["plans", binding.ordinal, binding.field, "meterRef"], originalValue: draftEffect.meterRef,
+        allowedHandles: ownedMeters.map(row => row.handle),
+        message: prefix + (meter ? `Selected meter ${draftEffect.meterRef} belongs to ${owner ?? "an entity unavailable in this request"}, not this target. ` : `Selected meter ${draftEffect.meterRef} does not exist. `) +
+          (ownedMeters.length === 0 ? "The selected target has no meter available in this request. " : "allowedHandles contains only this target's meters. ") +
+          `Compatible combinations for the selected target: ${JSON.stringify(combinations)}. ${consequence}` });
     }
-    return;
+    if (!profile || !meter || profile.meterDefinitionId !== meter.definitionId) {
+      issues.push({ code: "reference.invalid_meter_profile", class: "reference",
+        path: ["plans", binding.ordinal, binding.field, "impactProfileRef"], originalValue: draftEffect.impactProfileRef,
+        allowedHandles: compatibleProfiles(meter?.definitionId),
+        message: prefix + `Selected impactProfileRef ${draftEffect.impactProfileRef} is not an impact profile compatible with meter ${draftEffect.meterRef}. ` +
+          "allowedHandles lists compatible impact profiles for the selected meter; meter ownership must also match the intended target. " +
+          `Compatible combinations for the selected target: ${JSON.stringify(combinations)}. ${consequence}` });
+    }
+    throw new ModelCandidateValidationError(issues);
   }
   const duration = state.truth.mechanics.durationProfiles[effect.durationProfileId];
   const profile = effect.conditionProfileId
