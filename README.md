@@ -1,4 +1,6 @@
-# Computable Worlds
+# Living World Engine
+
+An engine for persistent, interactive worlds inhabited by autonomous AI agents.
 
 本仓库是 **Computable Worlds** 研究方向的一个持续演化实现与实验工作台，当前运行时品牌为 Living World Engine（活世界引擎）。研究对象不是某一个固定引擎，而是能够被初始化、推进、观察、干预和回放的可执行世界；核心问题是这种世界轨迹能否训练模型获得状态条件化的交互拟真与持久世界线能力。
 
