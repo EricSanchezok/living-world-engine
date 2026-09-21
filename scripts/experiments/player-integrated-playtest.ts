@@ -9,6 +9,7 @@ import { integratedPlayerAlgorithmRef, registerIntegratedPlayerAlgorithm } from 
 import { standardEagerReferenceAlgorithmRef } from "../../src/engine/algorithms/standard-composition";
 import { localPlanRepairAlgorithmRef } from "../../src/engine/benchmarks/step-efficiency/local-plan-repair-algorithm";
 import { recursivePlayerAlgorithmRef } from "../../src/engine/benchmarks/step-efficiency/recursive-player-algorithm";
+import { incrementalPlayerAlgorithmRef } from "../../src/engine/benchmarks/step-efficiency/incremental-player-algorithm";
 import { globalMeansPoolRequest } from "../../src/engine/benchmarks/step-efficiency/global-means-pool";
 import { assertNonthinkingWorld } from "../../src/engine/benchmarks/step-efficiency/nonthinking-world";
 import { loadWorldScript, loadWorldTemplate } from "../../src/script/world-loader";
@@ -47,10 +48,18 @@ const selectedAlgorithm = (selection: unknown) => {
   if (selection === "standard" || selection === "standard-pooled") return standardEagerReferenceAlgorithmRef();
   if (selection === "standard-local-repair") return localPlanRepairAlgorithmRef();
   if (selection === "recursive-local-repair") return recursivePlayerAlgorithmRef();
+  if (selection === "incremental-local-repair") return incrementalPlayerAlgorithmRef();
   if (selection === "integrated") return integratedPlayerAlgorithmRef();
-  throw new Error("Expected explicit standard, standard-pooled, standard-local-repair, recursive-local-repair or integrated composition selection");
+  throw new Error("Expected explicit standard, standard-pooled, standard-local-repair, recursive-local-repair, incremental-local-repair or integrated composition selection");
 };
 const sourceHashes = () => Object.fromEntries(["scripts/experiments/player-integrated-playtest.ts",
+  "src/engine/benchmarks/step-efficiency/incremental-player-algorithm.ts",
+  "src/engine/benchmarks/step-efficiency/incremental-intent-execution.ts",
+  "src/engine/benchmarks/step-efficiency/agent-intent-control.ts",
+  "src/engine/benchmarks/step-efficiency/intent-execution-cursor.ts",
+  "src/engine/prompts/shared/agent-intent-control.md", "src/engine/prompts/shared/agent-intent-guard.md",
+  "src/engine/prompts/shared/agent-intent-guard-user.md",
+  "src/engine/runtime/execution-state.ts", "src/engine/runtime/transaction.ts", "src/engine/runtime/canonical-committer.ts",
   "scripts/experiments/player-integrated-world.ts", "scripts/experiments/step-finite-work-world.ts",
   "scripts/experiments/step-checkpoint-world.ts", "scripts/experiments/world-fragments/finite-work-goal.yaml",
   "scripts/operations/player-feedback-playtest.ts",
@@ -227,7 +236,7 @@ export async function runIntegratedPlayer(root: string) {
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const [mode, directory, registryRoot, snapshotHash, algorithmSelection = "integrated", ...extra] = process.argv.slice(2);
   if (!directory || extra.length || mode === "prepare" && (!registryRoot || !snapshotHash) || mode === "run" && registryRoot || !["prepare", "run"].includes(mode)) {
-    throw new Error("Expected prepare output-directory registry-data-root snapshot-hash [standard|standard-pooled|standard-local-repair|recursive-local-repair|integrated] | run prepared-directory");
+    throw new Error("Expected prepare output-directory registry-data-root snapshot-hash [standard|standard-pooled|standard-local-repair|recursive-local-repair|incremental-local-repair|integrated] | run prepared-directory");
   }
   (mode === "prepare" ? prepareIntegratedPlayer(path.resolve(directory), registryRoot!, snapshotHash!, algorithmSelection) : runIntegratedPlayer(path.resolve(directory)))
     .then(result => { if (result) process.stdout.write(`${JSON.stringify({ prepared: true, worldHash: result.worldHash, newHttp: 0 })}\n`); })

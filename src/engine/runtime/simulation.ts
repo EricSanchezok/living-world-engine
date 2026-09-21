@@ -15,6 +15,7 @@ import type {
 } from "./execution";
 import { algorithmRef, decisionEligibleAgentIds, resolutionObservations } from "./execution";
 import { createHistoryReplayBase } from "./history-replay";
+import { validateAlgorithmExecutionState } from "./execution-state";
 import type { CommittedStep, SimulationState } from "../contracts/model";
 import type { ModelExecutionAudit } from "../contracts/model";
 import { contentHash } from "../models/model-audit";
@@ -538,6 +539,7 @@ export class SimulationEngine {
     this.state = structuredClone(initialState);
     if (this.state.worldId !== definition.id) throw new Error("simulation state belongs to another world");
     if (!consumeValidatedSnapshot(this.state)) validateSimulationState(this.state, false, true);
+    validateAlgorithmExecutionState(this.state.executionState, algorithm.manifest.hash);
     this.state.historyBase ??= createHistoryReplayBase(definition.initialState);
   }
 

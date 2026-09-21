@@ -232,6 +232,7 @@ export interface CanonicalWorldState {
 }
 
 export interface HistoryReplayBase {
+  executionState: import("../runtime/execution-state").AlgorithmExecutionState | null;
   truth: CanonicalWorldState;
   agents: Record<AgentId, AgentState>;
 }
@@ -594,7 +595,8 @@ export interface AgentAdmissionCommit {
 export type WorldEventDraft = Omit<WorldEvent, "step">;
 
 export interface SimulationState {
-  schemaVersion: 15;
+  schemaVersion: 16;
+  executionState: import("../runtime/execution-state").AlgorithmExecutionState | null;
   worldId: string;
   worldHash: string;
   lawIds: string[];
@@ -1182,6 +1184,7 @@ export interface ModelExecutionAudit {
 }
 
 export interface CommittedStep {
+  executionState: import("../runtime/execution-state").AlgorithmExecutionState | null;
   contentHash: string;
   semanticHash: string;
   executionRef?: import("../runtime/execution").ExecutionRef;

@@ -25,7 +25,7 @@ The diagnostic intention producer supplies sequence, parallel and conditional st
 
 ## Decision Outcome
 
-Use an isolated residual interpreter under [Spec 0176](../specs/0176-incremental-intent-execution.md). The interpreter exposes work, binds issued child actions, consumes committed completions and retains an explicit remaining program. It has no authority to write the world or establish natural-language truth. Product adoption requires atomic cursor/world persistence and qualified guard and resource integration.
+Use an isolated residual interpreter under [Spec 0176](../specs/0176-incremental-intent-execution.md). The interpreter exposes work, binds issued child actions, consumes committed completions and retains an explicit remaining program. It has no authority to write the world or establish natural-language truth. The [persistent diagnostic](../specs/0177-persistent-intent-execution.md) owns cursor/world persistence and guard/resource integration; product adoption requires full-player qualification.
 
 The design borrows the distinction between one transition and legal termination from IndiGolog's online execution semantics. It does not implement its theorem prover, assume guarded action axioms for arbitrary prose, or inherit the paper's correctness theorem.
 

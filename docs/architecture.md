@@ -6,7 +6,7 @@ Living World Engine maintains one canonical world and multiple Agents with priva
 
 | Layer | Location | Responsibility |
 |---|---|---|
-| World contract | `src/script/` | Read schema v14 world packages, validate temporal/mechanics/resource profiles and assets, and construct `WorldDefinition` and `SimulationState` v15 |
+| World contract | `src/script/` | Read schema v14 world packages, validate temporal/mechanics/resource profiles and assets, and construct `WorldDefinition` and `SimulationState` v16 |
 | Execution algorithms | `src/engine/algorithms/` | Typed Roles, strict versioned definitions, recursive Compositions, generated discovery, and `eager-reference/` candidate generation |
 | Model gateway | `src/engine/models/` | Trusted provider accounts, models.dev snapshots, deterministic Profile resolution, protocol drivers, vendor dialects, external prompt bundles, strict structured output, fair scheduling, and invocation audit |
 | Cognition | `src/engine/cognition/` | Agent perspective, private belief/character updates, observations, information boundaries, and mind commits |
@@ -48,7 +48,7 @@ The separate [intention reference view](specs/0166-scope-qualified-intent-refere
 
 The [initial intent frontier screen](specs/0170-initial-intent-frontier-screen.md) adds a deterministic starting view for assigned programs whose Activities are at the interval start. Complete intentions and temporal adjudication remain authoritative.
 
-The experimental [incremental intent cursor](specs/0176-incremental-intent-execution.md) retains a residual program, issues uniquely bound attempts and advances from committed Activity evidence or owning-Agent guard decisions. Its replayable journal is benchmark-only; atomic host persistence and world Composition integration retain separate qualification requirements.
+The experimental [incremental intent cursor](specs/0176-incremental-intent-execution.md) retains a residual program, issues uniquely bound attempts and advances from committed Activity evidence or owning-Agent guard decisions. The [persistent diagnostic](specs/0177-persistent-intent-execution.md) binds its journal to the producing Composition and saves it atomically with the world. Its gameplay semantics and latency require full-player qualification.
 
 ## State and policies
 

@@ -68,7 +68,7 @@ describe("open world script loader", () => {
       version: "2.0.0",
       config: {},
     })]);
-    expect(definition.initialState.schemaVersion).toBe(15);
+    expect(definition.initialState.schemaVersion).toBe(16);
     expect(definition.initialState.truth.mechanics.sharedActivityResources["fixture-workbench"]).toEqual({
       id: "fixture-workbench",
       name: "庭院工作台",

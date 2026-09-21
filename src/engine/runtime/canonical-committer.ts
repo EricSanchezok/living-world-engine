@@ -1,3 +1,4 @@
+import { validateAlgorithmExecutionState } from "./execution-state";
 import { validateOnsetPerceptionReceipts } from "../mechanics/onset-receipts";
 import type { WorldDefinition } from "./world-definition";
 import type { WorldStepPreparation } from "./execution";
@@ -944,6 +945,9 @@ export class CanonicalCommitter {
   } {
     const source = structuredClone(sourceState) as SimulationState;
     const candidate = structuredClone(candidateInput);
+    validateAlgorithmExecutionState(source.executionState, authority.preparation.algorithmManifestHash);
+    validateAlgorithmExecutionState(candidate.executionState, authority.preparation.algorithmManifestHash);
+    if (contentHash(candidate.executionState) !== contentHash(authority.preparation.executionState)) throw new Error("execution state differs from frozen preparation");
     const frozen = authority.preparation;
     if (frozen.sourceStateHash !== contentHash(source) || frozen.policyRosterHash !== contentHash(policyRoster) ||
       contentHash(candidate.onsetPerception) !== contentHash(frozen.onsetPerception) ||
@@ -1023,8 +1027,10 @@ export class CanonicalCommitter {
       );
     }
     transitioned.historyBase ??= createHistoryReplayBase(source);
+    transitioned.executionState = structuredClone(candidate.executionState);
     validateSimulationState(transitioned, false);
     const semanticPayload: Omit<CommittedStep, "contentHash" | "semanticHash"> = {
+      executionState: structuredClone(candidate.executionState),
       baseRevision: source.revision,
       revision: transitioned.revision,
       step: transitioned.step,

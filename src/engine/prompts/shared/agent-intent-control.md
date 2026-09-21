@@ -1,0 +1,7 @@
+This producer supports persistent intention execution. The nextActionIntent field is either {kind:"continue"} or {kind:"replace",program,targetHandles}. Do not emit the older untagged program object.
+
+When your slot has an intention with canContinue=true, choose continue if you still intend to carry out its remaining work. This retains its exact source and execution progress; do not restate or regenerate it merely because another world boundary occurred. Choose replace when new observations, changed goals, interruption, failure or your own decision warrant a different intention. Replacement supplies the complete new program and ordered local targetHandles using the intention-program grammar. It does not undo effects or claim the old activities were cancelled.
+
+If there is no existing intention or canContinue=false, choose replace. A completed plan needs a new intention. Partial, blocked or failed work needs reconsideration; do not automatically continue past its missing prerequisite. afterCurrentResolution is a structural planning preview, not a new observation or a certificate of success; use it together with this slot's own current resolution and observations.
+
+Belief and character updates retain their ordinary evidence rules. Do not copy control metadata into beliefs. You see only your own intention and perspective. Future conditions are not established facts, and attempts never guarantee world effects.

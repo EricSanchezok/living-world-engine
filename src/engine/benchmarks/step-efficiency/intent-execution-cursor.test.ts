@@ -200,7 +200,7 @@ it("rejects snapshot corruption, invalid replay and nonexact producer embeddings
   const execution = cursor(), snapshot = execution.snapshot();
   const changed = structuredClone(snapshot); changed.source.action.targetIds[0] = "other";
   expect(() => IntentExecutionCursor.restore(changed)).toThrow("hash mismatch");
-  const invalid = { ...snapshot, events: [{ kind: "issue", workId: "future-work", revision: 0, action: snapshot.source.action }] };
+  const invalid = { ...snapshot, events: [{ kind: "issue", workIds: ["future-work"], revision: 0, action: snapshot.source.action }] };
   invalid.hash = contentHash({ version: invalid.version, source: invalid.source, events: invalid.events });
   expect(() => IntentExecutionCursor.restore(invalid)).toThrow("frontier");
   const ordinary = structuredClone(snapshot.source); ordinary.action.rawText = "Just look around.";

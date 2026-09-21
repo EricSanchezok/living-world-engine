@@ -9,7 +9,7 @@ const actionSchema = z.strictObject({ id: text, actorId: text, baseRevision: ord
 const sourceSchema = z.strictObject({ worldHash: z.string().regex(/^sha256:[a-f0-9]{64}$/u),
   action: actionSchema, program: agentIntentProgramSchema });
 const eventSchema = z.discriminatedUnion("kind", [
-  z.strictObject({ kind: z.literal("issue"), workId: text, revision: ordinal, action: actionSchema }),
+  z.strictObject({ kind: z.literal("issue"), workIds: z.array(text).min(1), revision: ordinal, action: actionSchema }),
   z.strictObject({ kind: z.literal("guard"), workId: text, perspectiveHash: text, revision: ordinal,
     verdict: z.enum(["true", "false", "unknown"]) }),
   z.strictObject({ kind: z.literal("settle"), workId: text, revision: ordinal, activityId: text, commitHash: text,
@@ -17,7 +17,7 @@ const eventSchema = z.discriminatedUnion("kind", [
   z.strictObject({ kind: z.literal("suspend"), reason: text }),
   z.strictObject({ kind: z.literal("resume") }),
 ]);
-const snapshotSchema = z.strictObject({ version: z.literal(1), source: sourceSchema,
+const snapshotSchema = z.strictObject({ version: z.literal(2), source: sourceSchema,
   events: z.array(eventSchema), hash: text });
 type Source = z.infer<typeof sourceSchema>;
 type Node = Source["program"]["nodes"][number];
@@ -86,7 +86,7 @@ export class IntentExecutionCursor {
   }
 
   snapshot() {
-    const payload = { version: 1 as const, source: this.source, events: this.events };
+    const payload = { version: 2 as const, source: this.source, events: this.events };
     return structuredClone({ ...payload, hash: contentHash(payload) });
   }
 
@@ -105,11 +105,42 @@ export class IntentExecutionCursor {
     });
   }
 
+  /** Structural planning preview only; it cannot create a saved journal or
+   * establish that the supplied attempts actually succeeded in the world. */
+  previewCompletion(actionIds: readonly string[]) {
+    const preview = IntentExecutionCursor.restore(this.snapshot());
+    for (const leaf of preview.leaves()) {
+      if (leaf.issued && actionIds.includes(leaf.issued.id)) preview.root = preview.replace(leaf, { kind: "done", nodeId: leaf.nodeId });
+    }
+    preview.root = preview.normalize(preview.root);
+    return { status: preview.status, frontier: preview.frontier() };
+  }
+
   /** Bind the exact action allocated by the engine's preparation boundary. */
   issue(workId: string, action: AgentActionProposal): AgentActionProposal {
+    return this.issueGroup([workId], action);
+  }
+
+  attemptGroup(workIds: string[]) {
+    if (!workIds.length || new Set(workIds).size !== workIds.length) throw new Error("attempt group requires distinct work identities");
+    const nodes = workIds.map(id => {
+      const leaf = this.find(id), node = this.nodes.get(leaf.nodeId)!;
+      if (node.kind !== "attempt" || leaf.issued) throw new Error("only an unissued attempt can be dispatched");
+      return node;
+    });
+    const indices = nodes.length === 1 ? nodes[0]!.targetIndices
+      : [...new Set(nodes.flatMap(node => node.targetIndices))].sort((a, b) => a - b);
+    const targetIds = indices.map(index => this.source.action.targetIds[index]!);
+    const rawText = nodes.length === 1 ? nodes[0]!.text : "CURRENT_PARALLEL_ATTEMPTS_V1 (all members are attempted together; no success is assumed):\n" + JSON.stringify({
+      attempts: nodes.map(node => ({ text: node.text, targetIndices: node.targetIndices.map(index => indices.indexOf(index)) })),
+    });
+    return { rawText, goal: rawText, means: null, targetIds };
+  }
+
+  issueGroup(workIds: string[], action: AgentActionProposal): AgentActionProposal {
     const prepared = actionSchema.parse(action);
-    this.apply({ kind: "issue", workId, revision: prepared.baseRevision, action: prepared });
-    return structuredClone(this.find(workId).issued!);
+    this.apply({ kind: "issue", workIds, revision: prepared.baseRevision, action: prepared });
+    return structuredClone(this.find(workIds[0]!).issued!);
   }
 
   guardTicket(workId: string, perspective: AgentPerspectiveView): IntentGuardTicket {
@@ -232,18 +263,16 @@ export class IntentExecutionCursor {
       this.paused = false;
     } else {
       if (event.revision < this.lastRevision) throw new Error("intent evidence revision moved backwards");
-      const leaf = this.find(event.workId), node = this.nodes.get(leaf.nodeId)!;
+      const leaf = this.find(event.kind === "issue" ? event.workIds[0]! : event.workId), node = this.nodes.get(leaf.nodeId)!;
       if (event.kind === "issue") {
         this.assertDispatchable();
-        if (node.kind !== "attempt" || leaf.issued) throw new Error("only an unissued attempt can be dispatched");
         const expected = { ...event.action, actorId: this.source.action.actorId, baseRevision: event.revision,
-          rawText: node.text, goal: node.text, means: null,
-          targetIds: node.targetIndices.map(index => this.source.action.targetIds[index]!) };
+          ...this.attemptGroup(event.workIds) };
         if (contentHash(event.action) !== contentHash(expected)) throw new Error("prepared action differs from the current attempt");
         if (event.action.id === this.source.action.id || this.events.some(previous => previous.kind === "issue" && previous.action.id === event.action.id)) {
           throw new Error("prepared action identity was already used");
         }
-        leaf.issued = structuredClone(event.action);
+        for (const workId of event.workIds) this.find(workId).issued = structuredClone(event.action);
       } else if (event.kind === "settle") {
         if (!leaf.issued || leaf.settledFailure || event.revision <= leaf.issued.baseRevision) throw new Error("invalid attempt settlement");
         if (event.status === "completed") this.root = this.replace(leaf, { kind: "done", nodeId: leaf.nodeId });

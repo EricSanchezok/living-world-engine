@@ -1,3 +1,4 @@
+import { validateAlgorithmExecutionState } from "./execution-state";
 import { z } from "zod";
 import type { ExecutionRef } from "./execution";
 import type {
@@ -579,6 +580,7 @@ function validateCommittedRandomTranscript(step: CommittedStep, state: Simulatio
 }
 
 function validateCommittedStepShape(step: CommittedStep, state: SimulationState): void {
+  validateAlgorithmExecutionState(step.executionState, state.executionState?.producerHash);
   if (step.semanticHash !== semanticStepHash(step)) throw new Error(`step ${step.step} semantic hash mismatch`);
   const payload = structuredClone(step) as Partial<CommittedStep>;
   delete payload.contentHash;
@@ -805,7 +807,8 @@ export function replaySimulationState(
     return structuredClone(state);
   }
   const replay: SimulationState = {
-    schemaVersion: 15,
+    schemaVersion: 16,
+    executionState: structuredClone(state.historyBase.executionState),
     worldId: state.worldId,
     worldHash: state.worldHash,
     lawIds: structuredClone(state.lawIds),
@@ -909,6 +912,7 @@ export function replaySimulationState(
         step.events,
       );
     }
+    advanced.executionState = structuredClone(step.executionState);
     advanced.history.push(structuredClone(step));
     Object.assign(replay, advanced);
   }
@@ -922,6 +926,7 @@ export function replayCommittedHistory(state: SimulationState): void {
   const replay = replaySimulationState(state);
   const core = (value: SimulationState) => ({
     revision: value.revision,
+    executionState: value.executionState,
     step: value.step,
     truth: value.truth,
     agents: value.agents,
@@ -962,10 +967,11 @@ export function validateModelAudit(
 
 export function validateSimulationState(state: SimulationState, requireNextActions = false, requireHistoryAlignment = false): void {
   assertExactKeys(state, [
-    "schemaVersion", "worldId", "worldHash", "lawIds", "revision", "step", "truth", "agents", "admissions", "history",
+    "schemaVersion", "executionState", "worldId", "worldHash", "lawIds", "revision", "step", "truth", "agents", "admissions", "history",
     "bootstrapAgentCommits",
   ], ["historyBase", "bootstrapExecutionRef"], "simulation state");
-  if (state.schemaVersion !== 15 || !isSemanticId(state.worldId) || !/^sha256:[a-f0-9]{64}$/.test(state.worldHash)) {
+  validateAlgorithmExecutionState(state.executionState);
+  if (state.schemaVersion !== 16 || !isSemanticId(state.worldId) || !/^sha256:[a-f0-9]{64}$/.test(state.worldHash)) {
     throw new Error("invalid simulation identity");
   }
   if (state.bootstrapExecutionRef) validateExecutionRef(state.bootstrapExecutionRef, "bootstrapExecutionRef");
@@ -1226,7 +1232,10 @@ export function validateSimulationState(state: SimulationState, requireNextActio
     assertCauses(event.causes, `event ${event.id}`);
     if (event.assertions.length === 0) throw new Error(`event ${event.id} has no assertions`);
   }
-  if (state.historyBase) assertExactKeys(state.historyBase, ["truth", "agents"], [], "history replay base");
+  if (state.historyBase) {
+    assertExactKeys(state.historyBase, ["truth", "agents", "executionState"], [], "history replay base");
+    validateAlgorithmExecutionState(state.historyBase.executionState);
+  }
   if (requireHistoryAlignment) replayCommittedHistory(state);
 }
 

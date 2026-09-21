@@ -742,7 +742,8 @@ export function eagerReferenceAlgorithmRef(
 }
 
 /** Keep the producer that prepares and resumes a step identical to its registered root. */
-export function createComposedEagerReferenceAlgorithm({ ref, children, services }: AlgorithmFactoryContext<WorldExecutionAlgorithmServices>) {
+export function createComposedEagerReferenceAlgorithm({ ref, children, services }: AlgorithmFactoryContext<WorldExecutionAlgorithmServices>,
+  configureComponents: (components: EagerReferenceComponents) => EagerReferenceComponents = components => components) {
   const config = eagerConfig(children);
   const algorithms = eagerAlgorithms(children);
   return new EagerReferenceAlgorithm(
@@ -750,7 +751,7 @@ export function createComposedEagerReferenceAlgorithm({ ref, children, services 
     services.rulePackages,
     config,
     algorithms.candidateSelection.runtime,
-    eagerComponents(children, services),
+    configureComponents(eagerComponents(children, services)),
     algorithmManifest(ref as AlgorithmRef<"world-execution">),
   );
 }
@@ -761,7 +762,7 @@ export function registerBuiltinAlgorithms(
   if (registry.has(DEFAULT_ALGORITHM_REF)) return registry;
   for (const definition of definitions) registry.registerAlgorithmDefinition(definition);
   registry.registerDefinition({
-    ...identity("world-execution", "eager-reference", "28", 12),
+    ...identity("world-execution", "eager-reference", "29", 12),
     maturity: "reference",
     configSchema: z.strictObject({}),
     children: [

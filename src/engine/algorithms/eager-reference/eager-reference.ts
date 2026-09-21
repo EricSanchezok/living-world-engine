@@ -3,6 +3,7 @@ import type { OnsetPerceptionTranscript } from "../../runtime/execution";
 import { TRUTH_RESOLUTION_CONTRACT_VERSION } from "../roles";
 import { observedExternalInterruptions } from "../../mechanics/observed-activity-interruptions";
 import { AgentMind } from "./agent-mind";
+import type { AlgorithmExecutionState } from "../../runtime/execution-state";
 import { compileActions } from "./action-compiler";
 import { DEFAULT_EAGER_OUTPUT_RECOVERY } from "./eager-slot-batching";
 import type {
@@ -403,7 +404,7 @@ export function createEagerReferenceAlgorithmRef(
   return defineAlgorithmRef({
     role: "world-execution",
     id: "eager-reference",
-    version: "28",
+    version: "29",
     contractVersion: 12,
     config: {},
     children: { agentCognition, actionCompilation, interactionGrounding, reactionResolution, truthResolution, observationRendering },
@@ -700,6 +701,7 @@ interface ReactionResolutionBatch {
 }
 
 export interface EagerReferenceComponents {
+  selectActions?: EagerActionSelection;
   provider: StructuredModelProvider;
   agentCognition: AgentCognitionCapability;
   actionCompilation: ActionCompilationCapability;
@@ -713,6 +715,11 @@ export interface EagerReferenceComponents {
   interactionGroundingRecovery: Readonly<OutputRecoveryCapability>;
   orderedComponentRandom?: boolean;
 }
+
+export type EagerActionSelection = (input: Readonly<WorldStepInput>, actions: readonly AgentActionProposal[],
+  executionState: AlgorithmExecutionState | null, context: ExecutionContext) => Promise<{
+    actions: AgentActionProposal[]; executionState: AlgorithmExecutionState | null; modelAudits: ModelExecutionAudit[];
+  }>;
 
 async function resolveAgentReactionRequests(
   agentMind: EagerReferenceComponents["reactionDecision"],
@@ -948,6 +955,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
   private readonly actionCompilationRecovery: Readonly<OutputRecoveryCapability>;
   private readonly interactionGroundingRecovery: Readonly<OutputRecoveryCapability>;
   private readonly provider: StructuredModelProvider;
+  private readonly selectActions?: EagerActionSelection;
   private readonly rulePackages: RulePackageRegistry;
   private readonly actionCompilationRetrieval?: CandidateSelectionCapability;
   private readonly orderedComponentRandom: boolean;
@@ -969,6 +977,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
       contractVersion: this.manifest.contractVersion,
     });
     this.provider = components?.provider ?? provider;
+    this.selectActions = components?.selectActions;
     this.orderedComponentRandom = components?.orderedComponentRandom ?? false;
     this.rulePackages = rulePackages ?? createCoreRulePackageRegistry();
     if (this.config.candidateRetrieval.mode === "runtime") {
@@ -1379,7 +1388,17 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
         (binding.resumeFromRevision !== undefined || source.agents[agentId]?.nextAction === null))
       .map(([agentId]) => agentId)
       .sort();
-    const knownActions = collectKnownActions(input, eligibleAgentIds, new Set(resumedAgentIds));
+    let executionState = structuredClone(source.executionState);
+    const selectionAudits: ModelExecutionAudit[] = [];
+    const select = async (actions: AgentActionProposal[]) => {
+      if (!this.selectActions) return actions;
+      const selected = await this.selectActions(input, actions, executionState, context);
+      executionState = structuredClone(selected.executionState);
+      planningState.executionState = structuredClone(executionState);
+      selectionAudits.push(...selected.modelAudits);
+      return selected.actions;
+    };
+    const knownActions = await select(collectKnownActions(input, eligibleAgentIds, new Set(resumedAgentIds)));
     const actionOverlapStartedAt = performance.now();
     const actionCompilationStage = executionStage("action-compilation");
     await context.stages?.before(actionCompilationStage);
@@ -1417,11 +1436,11 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
       if (preparationFailed) throw preparationError;
       context.modelScope.abortSignal?.throwIfAborted();
       context.modelScope.cancelPendingSignal?.throwIfAborted();
-      const resumedActions = resumedAgentIds.map((agentId, index) => {
+      const resumedActions = await select(resumedAgentIds.map((agentId, index) => {
         const action = resumedMindBatch.outputs[index]?.nextAction;
         if (!action) throw new Error(`resume AgentMind omitted action for ${agentId}`);
         return structuredClone(action);
-      });
+      }));
       const newActions = [...knownActions, ...resumedActions]
         .sort((left, right) => left.actorId.localeCompare(right.actorId) || left.id.localeCompare(right.id));
       if (new Set(newActions.map((action) => action.actorId)).size !== newActions.length) {
@@ -1642,6 +1661,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
         ordinal: 0,
       }),
       sourceStateHash: contentHash(source),
+      executionState: structuredClone(executionState),
       algorithmManifestHash: this.manifest.hash,
       policyRosterHash: contentHash(input.policyRoster),
       requestHash: contentHash(input.request),
@@ -1650,6 +1670,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
       pendingReactionRequests: structuredClone(pendingReactionRequests),
       preparedReactionDecisions: structuredClone(preparedReactionDecisions),
       modelAudits: [
+        ...selectionAudits,
         ...resumedMindBatch.modelAudits.map((audit) => structuredClone(audit)),
         ...knownActionCompilationBatch.modelAudits.map((audit) => structuredClone(audit)),
         ...resumedActionCompilationBatch.modelAudits.map((audit) => structuredClone(audit)),
@@ -2401,6 +2422,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     const activityDispositions = assembled.activityDispositions;
     const observations = [...resolution.stimulusObservations, ...resolution.proposal.observations];
     const candidate = applyTransitionProposal(source, resolution.proposal, temporal);
+    candidate.executionState = structuredClone(preparation.executionState);
     candidate.truth.rng = structuredClone(resolution.rng);
     await context.stages?.after(transitionStage);
     const { modelAudits: resolutionModelAudits, reactionModelAudits, ...resolutionCandidate } = resolution;
@@ -2482,6 +2504,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     return {
       schemaVersion: WORLD_STEP_CANDIDATE_SCHEMA_VERSION,
       sourceStateHash: contentHash(source),
+      executionState: structuredClone(preparation.executionState),
       resolution: resolutionCandidate,
       onsetPerception: structuredClone(preparation.onsetPerception),
       finalCausalReview,
