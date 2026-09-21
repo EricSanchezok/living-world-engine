@@ -21,6 +21,102 @@ import { incrementalPlayerAlgorithmRef } from "./incremental-player-algorithm";
 import { AGENT_INTENT_CONTROL } from "./agent-intent-control";
 import { readIntentMemory, reconcileIntentMemory } from "./incremental-intent-execution";
 import { IntentExecutionCursor } from "./intent-execution-cursor";
+import type { ActionCompilationBatchDraft } from "../../contracts/llm-schemas";
+import type { SimulationState } from "../../contracts/model";
+
+function canonicalDiagnosticOutputs(provider: ScriptedModelProvider) {
+  // Keep the intent-control wire decoder; the other diagnostic codecs have
+  // dedicated wire tests and receive canonical model fixtures here.
+  const generate = provider.generateStructured.bind(provider);
+  provider.generateStructured = request => {
+    if (request.promptVersion.includes(AGENT_INTENT_CONTROL) || request.schemaName === "intent_guard_batch") return generate(request);
+    return generate({ ...request, wireJsonSchema: undefined, preprocessOutput: value => {
+      const fill = (node: unknown): void => {
+        if (!node || typeof node !== "object") return;
+        if (Array.isArray(node)) { node.forEach(fill); return; }
+        const row = node as Record<string, unknown>;
+        if (row.kind === "commit_plans" && Array.isArray(row.plans)) {
+          for (const plan of row.plans as Array<Record<string, unknown>>) plan.additionalRandomness ??= "none";
+        }
+        Object.values(row).forEach(fill);
+      };
+      fill(value); return { value, symbolRepairs: [] };
+    } });
+  };
+}
+
+it("repairs a known action after resumed intention selection without changing either compilation snapshot", async () => {
+  const root = mkdtempSync(path.join(tmpdir(), "incremental-compilation-"));
+  let releaseKnown!: () => void, releaseResumed!: () => void;
+  const knownStarted = new Promise<void>(resolve => { releaseKnown = resolve; });
+  const resumedStarted = new Promise<void>(resolve => { releaseResumed = resolve; });
+  let preparing = false, compilations = 0;
+  const events: string[] = [];
+  const provider = new ScriptedModelProvider(async request => {
+    if (preparing && request.role === "agent-mind") {
+      await knownStarted;
+      events.push("resumed-mind");
+    }
+    const output = deterministicModelOutput(request.profileId, request.context);
+    if (request.promptVersion.includes(AGENT_INTENT_CONTROL)) {
+      for (const slot of (output as { slots: Array<{ nextActionIntent: unknown }> }).slots) {
+        slot.nextActionIntent = { kind: "replace", program: {
+          kind: "attempt", text: "我观察自己的衣物。", targetHandles: ["ref:local_entity:self"],
+        } };
+      }
+    }
+    if (preparing && request.role === "action-compilation") {
+      const call = ++compilations;
+      if (call === 1) {
+        events.push("known-start"); releaseKnown();
+        await resumedStarted;
+        events.push("known-rejection");
+        // Real localized schema rejection requires the compiler to reuse its
+        // pinned source and retrieval result after resumed selection finishes.
+        (output as ActionCompilationBatchDraft).slots[0]!.temporalPlan.causes = null as never;
+      } else if (call === 2) {
+        events.push("resumed-compilation"); releaseResumed();
+      } else events.push("known-repair");
+    }
+    return output;
+  }, createTestModelCatalog(undefined, { maxInputBytes: 1_048_576 }));
+  canonicalDiagnosticOutputs(provider);
+  const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 47, modelCatalog: provider.catalog });
+  const ref = incrementalPlayerAlgorithmRef();
+  const encoder = { modelId: MULTILINGUAL_E5_BASE_ASSET.modelId, modelHash: MULTILINGUAL_E5_BASE_ASSET.directorySha256,
+    dimensions: 2, encodeBatch: async (texts: readonly string[]) => texts.map(text => [text.length % 7, 1]) };
+  const cache = new CachedPassageEncoder(encoder, MULTILINGUAL_E5_BASE_ASSET.encoderFingerprint, root);
+  await cache.encodePassages({ worldContentHash: definition.contentHash, passages: actionCompilationPassagesForState(definition.initialState), allowWrite: true });
+  cache.close();
+  const retrieval = createActionCompilationRetrievalRuntimeProvider({ cacheRoot: root, encoder,
+    fingerprint: () => MULTILINGUAL_E5_BASE_ASSET.encoderFingerprint });
+  try {
+    const algorithm = registerIntegratedPlayerAlgorithm().create(ref, { provider, resources: {
+      resolve: <T,>(kind: string) => kind === "candidate-selection-runtime" ? retrieval.runtime(ref) as T : undefined,
+    } });
+    const engine = new SimulationEngine(definition, algorithm);
+    await engine.bootstrapAgents();
+    const source = engine.snapshot;
+    source.agents.keeper!.nextAction = null;
+    const before = contentHash(source);
+    preparing = true;
+    const prepared = await algorithm.prepareStep({ definition, state: source,
+      policyRoster: Object.fromEntries(Object.values(source.agents).map(agent => [agent.id, {
+        kind: "model" as const, agentId: agent.id, profiles: structuredClone(agent.modelProfiles),
+      }])),
+      request: { expectedRevision: source.revision, trigger: "manual", externalActions: [] },
+      decisionEligibleAgentIds: Object.keys(source.agents).sort(),
+    }, { modelScope: { workloadId: "selection-overlap", batchId: "selection-overlap",
+      runtimeIdentity: { worldHash: source.worldHash, revision: source.revision } }, instrumentation: { emit: () => undefined } });
+    expect(events).toEqual(["known-start", "resumed-mind", "resumed-compilation", "known-rejection", "known-repair"]);
+    expect(compilations).toBe(3);
+    expect(contentHash(source)).toBe(before);
+    expect(Object.keys(readIntentMemory(prepared.executionState, ref.manifestHash).active).sort()).toEqual(["keeper", "player"]);
+    const payload = prepared.payload as unknown as { planningState: SimulationState };
+    expect(payload.planningState.executionState).toEqual(prepared.executionState);
+    expect(prepared.modelAudits.filter(audit => audit.role === "action-compilation")).toHaveLength(3);
+  } finally { releaseKnown(); releaseResumed(); rmSync(root, { recursive: true, force: true }); }
+}, 30_000);
 
 it("runs parallel work, survives failed guard preparation and resumes the saved program through WorldHost", async () => {
   const root = mkdtempSync(path.join(tmpdir(), "incremental-player-"));
@@ -57,24 +153,7 @@ it("runs parallel work, survives failed guard preparation and resumes the saved 
     }
     return output;
   }, createTestModelCatalog(undefined, { maxInputBytes: 1_048_576 }));
-  // Other diagnostic codecs already have their own wire tests; canonical
-  // fixtures replace those model outputs while this test exercises control wire.
-  const generate = provider.generateStructured.bind(provider);
-  provider.generateStructured = request => {
-    if (request.promptVersion.includes(AGENT_INTENT_CONTROL) || request.schemaName === "intent_guard_batch") return generate(request);
-    return generate({ ...request, wireJsonSchema: undefined, preprocessOutput: value => {
-      const fill = (node: unknown): void => {
-        if (!node || typeof node !== "object") return;
-        if (Array.isArray(node)) { node.forEach(fill); return; }
-        const row = node as Record<string, unknown>;
-        if (row.kind === "commit_plans" && Array.isArray(row.plans)) {
-          for (const plan of row.plans as Array<Record<string, unknown>>) plan.additionalRandomness ??= "none";
-        }
-        Object.values(row).forEach(fill);
-      };
-      fill(value); return { value, symbolRepairs: [] };
-    } });
-  };
+  canonicalDiagnosticOutputs(provider);
   const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 47, modelCatalog: provider.catalog });
   const ref = incrementalPlayerAlgorithmRef();
   expect(ref.children.truthResolution!.children.batching!.config.planningPartition).toBe("ready-wave-work-v1");

@@ -1394,11 +1394,11 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
       if (!this.selectActions) return actions;
       const selected = await this.selectActions(input, actions, executionState, context);
       executionState = structuredClone(selected.executionState);
-      planningState.executionState = structuredClone(executionState);
       selectionAudits.push(...selected.modelAudits);
       return selected.actions;
     };
     const knownActions = await select(collectKnownActions(input, eligibleAgentIds, new Set(resumedAgentIds)));
+    planningState.executionState = structuredClone(executionState);
     const actionOverlapStartedAt = performance.now();
     const actionCompilationStage = executionStage("action-compilation");
     await context.stages?.before(actionCompilationStage);
@@ -1469,6 +1469,8 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     // until both already-started branches have recorded their final evidence.
     const [knownActionCompilationBatch, resumed] = await Promise.all(compilationWork)
       .finally(async () => { await Promise.allSettled(compilationWork); });
+    // Publish resumed control updates only after both compilers release their shared snapshot.
+    planningState.executionState = structuredClone(executionState);
     const { resumedMindBatch, resumedActions, newActions, compiled: resumedActionCompilationBatch } = resumed;
     const resumedOutputs = resumedMindBatch.outputs;
     await context.stages?.after(actionCompilationStage);
