@@ -25,6 +25,30 @@ function audit(ordinal: number) {
 }
 
 describe("eager slot batching", () => {
+  it("drains in-flight batches and suppresses later repairs after a terminal sibling failure", async () => {
+    let started!: () => void, release!: () => void;
+    const siblingStarted = new Promise<void>(resolve => { started = resolve; });
+    const siblingGate = new Promise<void>(resolve => { release = resolve; });
+    const failure = new ModelTransportError("stopped dispatch");
+    let calls = 0, failureThrown = false, settled = false;
+    const pending = runEagerSlotBatches({ slots: slots(4), maxSlots: 2, maxInputBytes: 1000,
+      requestBytes: batch => batch.length, label: "drain-test", issuesForError: () => ["invalid"],
+      invoke: async batch => {
+        calls++;
+        if (batch[0]!.key === "slot-0") { await siblingStarted; failureThrown = true; throw failure; }
+        started(); await siblingGate;
+        return { audit: audit(calls), accepted: [], rejected: batch.map(slot => ({ slot, issues: ["invalid"] })) };
+      },
+    }).then(value => { settled = true; return value; }, error => { settled = true; return error; });
+    try {
+      await expect.poll(() => failureThrown).toBe(true);
+      await new Promise<void>(resolve => setImmediate(resolve));
+      expect(settled).toBe(false);
+      release(); expect(await pending).toBe(failure);
+      expect(calls).toBe(2);
+    } finally { release(); await pending; }
+  });
+
   it.each([1, 2, 3, 12, 64])("honors a max of %i slots and keeps a stable tail batch", (maxSlots) => {
     const batches = partitionEagerSlots({
       slots: slots(65),

@@ -28,6 +28,7 @@ import {
   EagerSlotAttemptError,
   isTerminalEagerModelError,
   runEagerSlotBatches,
+  settleEagerWork,
   type EagerSlot,
   type EagerSlotAttemptLineage,
 } from "./eager-slot-batching";
@@ -612,7 +613,7 @@ export class AgentMind {
       group.push({ key: input.agent.id, payload: input, issues: [] });
       groups.set(profileId, group);
     }
-    const groupResults = await Promise.all([...groups.entries()].sort(([left], [right]) => left.localeCompare(right))
+    const groupResults = await settleEagerWork([...groups.entries()].sort(([left], [right]) => left.localeCompare(right))
       .map(async ([profileId, slots]) => runEagerSlotBatches({
         slots,
         maxSlots,

@@ -204,6 +204,53 @@ function reactionHarness(input: {
 }
 
 describe("World Instance host", () => {
+  it("drains sibling bootstrap calls before closing the failed execution", async () => {
+    const { database, host, provider } = harness({ defaultAlgorithmRef: eagerReferenceAlgorithmRef({
+      ...FULL_CATALOG_EAGER_REFERENCE_CONFIG, agentMindMaxSlots: 1,
+    }) });
+    const generate = provider.generateStructured.bind(provider);
+    let started!: () => void, release!: () => void;
+    const siblingStarted = new Promise<void>(resolve => { started = resolve; });
+    const siblingGate = new Promise<void>(resolve => { release = resolve; });
+    const failure = new ModelTransportError("bootstrap transport stopped");
+    let calls = 0, failureThrown = false, siblingSettled = false;
+    let siblingInvocationId: string | undefined;
+    provider.generateStructured = async request => {
+      if (request.role !== "agent-bootstrap") return generate(request);
+      if (++calls === 1) { await siblingStarted; failureThrown = true; throw failure; }
+      if (calls > 2) throw failure;
+      started();
+      await siblingGate;
+      try {
+        const result = await generate(request);
+        siblingInvocationId = result.audit.invocations[0]!.id;
+        return result;
+      } finally { siblingSettled = true; }
+    };
+    const creation = host.createInstance(observerStart).then(() => undefined, error => error);
+    try {
+      await expect.poll(() => failureThrown).toBe(true);
+      await new Promise<void>(resolve => setImmediate(resolve));
+      const execution = database.executions({}).at(-1)!;
+      expect(execution.status).toBe("running");
+      release();
+      expect(await creation).toBe(failure);
+      const events = database.executionEvents(execution.id);
+      const audit = events.find(event => event.event === "model.audit.persisted" && event.correlation?.modelInvocationId === siblingInvocationId);
+      const terminal = events.find(event => event.event === "execution.failed");
+      expect(audit).toBeDefined();
+      expect(terminal!.sequence).toBeGreaterThan(audit!.sequence);
+      expect(events.find(event => event.event === "instance.bootstrap.rolled_back")?.attributes?.rollbackStateMatches).toBe(true);
+      expect(database.execution(execution.id)?.commitRevision).toBeUndefined();
+      expect(() => database.readInstance(execution.instanceId!)).toThrow("not found");
+      expect(calls).toBe(2);
+    } finally {
+      release(); await creation;
+      await expect.poll(() => siblingSettled).toBe(true);
+      database.close();
+    }
+  });
+
   it("keeps the execution open until an already-started sibling compilation records its audit", async () => {
     const { database, host, provider } = harness();
     const created = await host.createInstance(originStart);

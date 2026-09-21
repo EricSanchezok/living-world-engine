@@ -149,6 +149,12 @@ function mergeBatchResults<TResult, TPayload, TIssue>(
   };
 }
 
+/** Preserve the first failure, but retain ownership until every started branch
+ * has finished emitting its execution evidence. */
+export async function settleEagerWork<T>(work: readonly Promise<T>[]): Promise<T[]> {
+  return Promise.all(work).finally(async () => { await Promise.allSettled(work); });
+}
+
 export async function runEagerSlotBatches<TPayload, TIssue, TResult>(input: {
   slots: readonly EagerSlot<TPayload, TIssue>[];
   maxSlots: number;
@@ -172,10 +178,19 @@ export async function runEagerSlotBatches<TPayload, TIssue, TResult>(input: {
   if (recovery.exhaustion !== "fail-step" || typeof recovery.splitAt !== "function") {
     throw new Error("eager slot batch requires a fail-step output recovery capability");
   }
-  const recover = async (
+  type Lineage = { logicalInvocationId: string; baseAttempt: number; parentInvocationId?: string };
+  let terminalFailure: { error: unknown } | undefined;
+  const checkTerminalFailure = () => { if (terminalFailure) throw terminalFailure.error; };
+  const recover = (sourceSlots: readonly EagerSlot<TPayload, TIssue>[], lineageState: Lineage) =>
+    recoverBatch(sourceSlots, lineageState).catch(error => {
+      terminalFailure ??= { error };
+      throw terminalFailure.error;
+    });
+  const recoverBatch = async (
     sourceSlots: readonly EagerSlot<TPayload, TIssue>[],
-    lineageState: { logicalInvocationId: string; baseAttempt: number; parentInvocationId?: string },
+    lineageState: Lineage,
   ): Promise<EagerSlotBatchResult<TResult, TPayload, TIssue>> => {
+    checkTerminalFailure();
     const fitted = partitionEagerSlots({
       slots: sourceSlots,
       maxSlots: input.maxSlots,
@@ -183,7 +198,7 @@ export async function runEagerSlotBatches<TPayload, TIssue, TResult>(input: {
       requestBytes: input.requestBytes,
       label: input.label,
     });
-    if (fitted.length > 1) return mergeBatchResults(await Promise.all(fitted.map((batch) => recover(batch, lineageState))));
+    if (fitted.length > 1) return mergeBatchResults(await settleEagerWork(fitted.map((batch) => recover(batch, lineageState))));
 
     let pending = fitted[0] ?? [];
     const results = new Map<string, TResult>();
@@ -203,6 +218,7 @@ export async function runEagerSlotBatches<TPayload, TIssue, TResult>(input: {
     let lastError: unknown = new Error(`${input.label} failed without a model attempt`);
     const seenFailureFingerprints = new Set<string>();
     for (let attempt = 0; attempt <= maxRepairs; attempt += 1) {
+      checkTerminalFailure();
       if (pending.length === 0) break;
       const semanticRepairAttempt = lineageState.baseAttempt + attempt;
       const repairedFit = partitionEagerSlots({
@@ -213,7 +229,7 @@ export async function runEagerSlotBatches<TPayload, TIssue, TResult>(input: {
         label: input.label,
       });
       if (repairedFit.length > 1) {
-        const recovered = mergeBatchResults(await Promise.all(repairedFit.map((batch) => recover(batch, {
+        const recovered = mergeBatchResults(await settleEagerWork(repairedFit.map((batch) => recover(batch, {
           logicalInvocationId: lineageState.logicalInvocationId,
           // The current attempt already produced the last audit. A split
           // therefore starts with the next semantic repair number; otherwise
@@ -304,7 +320,7 @@ export async function runEagerSlotBatches<TPayload, TIssue, TResult>(input: {
         metrics,
       };
     }
-    const recovered = mergeBatchResults(await Promise.all(splitEagerSlots(
+    const recovered = mergeBatchResults(await settleEagerWork(splitEagerSlots(
       pending,
       recovery.splitAt(pending.length),
     ).map((batch) => recover(batch, {
@@ -336,7 +352,7 @@ export async function runEagerSlotBatches<TPayload, TIssue, TResult>(input: {
     requestBytes: input.requestBytes,
     label: input.label,
   });
-  return mergeBatchResults(await Promise.all(initial.map((batch) => recover(batch, {
+  return mergeBatchResults(await settleEagerWork(initial.map((batch) => recover(batch, {
     logicalInvocationId: `${input.label}:${contentHash(batch.map((slot) => slot.key))}`,
     baseAttempt: 0,
   }))));

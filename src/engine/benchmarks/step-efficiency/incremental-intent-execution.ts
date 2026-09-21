@@ -11,6 +11,7 @@ import { runtimeId } from "../../runtime/runtime-id";
 import { agentIntentProgramSchema, INTENT_PROGRAM_PREFIX } from "./agent-intent-program";
 import { IntentExecutionCursor } from "./intent-execution-cursor";
 import { loadPromptAsset } from "../../prompts";
+import { settleEagerWork } from "../../algorithms/eager-reference/eager-slot-batching";
 
 export const INTENT_CONTINUE_PREFIX = "INTENT_CONTINUE_V1 (engine-bound continuation, not a world action):\n";
 const guardInstruction = loadPromptAsset("shared/agent-intent-guard.md");
@@ -81,7 +82,7 @@ async function resolveGuards(provider: StructuredModelProvider, cursors: Map<str
     if (round === limit) throw new Error("intent guards did not reach an execution or waiting boundary");
     const batches = [...groups.entries()].flatMap(([profileId, entries]) =>
       Array.from({ length: Math.ceil(entries.length / maxSlots) }, (_, index) => ({ profileId, entries: entries.slice(index * maxSlots, (index + 1) * maxSlots) })));
-    const results = await Promise.all(batches.map(async ({ profileId, entries }) => {
+    const results = await settleEagerWork(batches.map(async ({ profileId, entries }) => {
       context.modelScope.abortSignal?.throwIfAborted();
       context.modelScope.cancelPendingSignal?.throwIfAborted();
       const owner = `intent-guards:${contentHash(entries.map(entry => entry.ticket.work.workId))}`;

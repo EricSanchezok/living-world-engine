@@ -5,7 +5,7 @@ import { observedExternalInterruptions } from "../../mechanics/observed-activity
 import { AgentMind } from "./agent-mind";
 import type { AlgorithmExecutionState } from "../../runtime/execution-state";
 import { compileActions } from "./action-compiler";
-import { DEFAULT_EAGER_OUTPUT_RECOVERY } from "./eager-slot-batching";
+import { DEFAULT_EAGER_OUTPUT_RECOVERY, settleEagerWork } from "./eager-slot-batching";
 import type {
   ActionCompilationCapability,
   AgentCognitionBatchInput,
@@ -2477,7 +2477,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     });
     const mindStage = executionStage("observation-agent-mind");
     await context.stages?.before(mindStage);
-    const finalMindBatches = await Promise.all((["bootstrap", "mind"] as const).map(async (purpose) => {
+    const finalMindBatches = await settleEagerWork((["bootstrap", "mind"] as const).map(async (purpose) => {
       const work = mindWork.filter((entry) => entry.purpose === purpose);
       const batch = await this.thinkBatchWithFallback(
         candidate,

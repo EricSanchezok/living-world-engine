@@ -25,6 +25,8 @@ Parsed valid slots survive a partial semantic failure; only invalid slots receiv
 
 One physical request contributes one model audit regardless of slot count. The candidate stores each audit once, and runtime telemetry records requested, accepted, retried, split, and fallback slot counts.
 
+Parallel batch owners retain the first failure and wait for every started branch to finish recording evidence before returning it. This applies recursively to fitted batches, repair splits, cognition profiles and cognition purposes. Once a recovery tree has a terminal failure, its remaining branches cannot start additional repair or split calls. Already-started calls may finish and record their actual outcomes; they cannot produce a partial world commit. Private intention guard batches retain the same completion ownership.
+
 ## Plan
 
 Add configurable algorithm definitions and configuration-bearing references, then bump the forward-only execution and instance contracts. Implement a private eager-reference slot batching helper and replace the single-action and single-Agent paths while retaining the existing validation and fallback owners. Add request tuning to instance creation and independent slot matrices to deterministic experiments. Update the architecture and runtime observability references after the executable contract is stable.
