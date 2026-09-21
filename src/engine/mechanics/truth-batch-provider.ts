@@ -565,7 +565,7 @@ export class TruthBatchCoordinator implements StructuredModelProvider {
     private readonly repairPlacement?: "tail-v1",
     private readonly flushBoundary?: "post-promise-v1",
     private readonly planRepairBatching?: "scoped-plans-v1",
-    private readonly planningPartition?: "balanced-two-v1",
+    private readonly planningPartition?: "balanced-two-v1" | "ready-wave-work-v1",
   ) {
     if (!Number.isSafeInteger(maxSlots) || maxSlots < 1 || maxSlots > 64) {
       throw new RangeError(
@@ -576,6 +576,7 @@ export class TruthBatchCoordinator implements StructuredModelProvider {
     if (flushBoundary && (!contextCodec || !requestContract)) throw new ModelConfigurationError("post-promise batching requires shared contexts and the physical request contract");
     if (planRepairBatching && (!contextCodec || !requestContract)) throw new ModelConfigurationError("scoped plan repair batching requires shared contexts and the physical request contract");
     if (planningPartition && (!contextCodec || !requestContract)) throw new ModelConfigurationError("balanced planning requires shared contexts and the physical request contract");
+    if (planningPartition === "ready-wave-work-v1" && !flushBoundary) throw new ModelConfigurationError("ready-wave planning requires the post-promise dispatch boundary");
   }
 
   availableProfileSummaries(role?: ModelRole): ModelProfileSummary[] {
@@ -613,7 +614,7 @@ export class TruthBatchCoordinator implements StructuredModelProvider {
         resolve: resolve as (result: StructuredModelResult<unknown>) => void,
         reject,
       });
-      if (this.pending.length >= this.maxSlots) {
+      if (this.pending.length >= this.maxSlots && this.planningPartition !== "ready-wave-work-v1") {
         void this.flush();
       } else if (!this.flushScheduled) {
         this.flushScheduled = true;
@@ -656,7 +657,8 @@ export class TruthBatchCoordinator implements StructuredModelProvider {
     // LPT with action count as a work proxy; no model-time guarantee.
     // Provenance and tradeoff: docs/decisions/0168-balance-complete-planning-components.md.
     weighted.sort((left, right) => right.weight - left.weight || left.entry.key.localeCompare(right.entry.key));
-    const bins = Array.from({ length: Math.max(2, Math.ceil(group.length / this.maxSlots)) }, () =>
+    const minimumBins = this.planningPartition === "ready-wave-work-v1" ? 1 : 2;
+    const bins = Array.from({ length: Math.max(minimumBins, Math.ceil(group.length / this.maxSlots)) }, () =>
       ({ entries: [] as PendingRequest[], weight: 0 }));
     for (const item of weighted) {
       const target = bins.filter(bin => bin.entries.length < this.maxSlots)

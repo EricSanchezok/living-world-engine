@@ -191,6 +191,50 @@ describe("TruthBatchCoordinator", () => {
     return input.schemaName.endsWith("_batch") ? { slots: results.map((result, slot) => ({ slot, result })) } : results[0];
   }
 
+  it("balances the complete ready wave without adding calls or dividing conflict components", async () => {
+    const counts = [2, 3, 22, 1, 1, 3, 2, 2, 1, 1, 1, 1, ...Array<number>(9).fill(1)];
+    const inputs = counts.map((count, index) => initialComponent(`component-${String(index).padStart(2, "0")}`, count));
+    const groups: unknown[][][] = [];
+    for (const reversed of [false, true]) {
+      const order = reversed ? [...inputs].reverse() : inputs;
+      let release!: () => void;
+      const gate = new Promise<void>(resolve => { release = resolve; });
+      const provider = new ScriptedModelProvider(async input => { await gate; return componentResponse(input); }, createTestModelCatalog(), false);
+      const physical = capturePhysicalRequests(provider);
+      const coordinator = new TruthBatchCoordinator(provider, 12, 0, "shared-json-v3", TRUTH_BATCH_REQUEST_CONTRACT,
+        "tail-v1", "post-promise-v1", "scoped-plans-v1", "ready-wave-work-v1");
+      const pending = Promise.all(order.map(async (input, index) => {
+        if (index >= 12) await Promise.resolve();
+        return coordinator.generateStructured(input);
+      }));
+      try {
+        await new Promise<void>(resolve => setImmediate(resolve));
+        expect(physical).toHaveLength(2);
+        const grouped = physical.map(physicalContexts);
+        expect(grouped.map(contexts => contexts.length)).toEqual([9, 12]);
+        expect(grouped.map(contexts => contexts.reduce<number>((sum, context) => sum +
+          (context as { state: { actionSet: { assigned: unknown[] } } }).state.actionSet.assigned.length, 0))).toEqual([30, 19]);
+        const normalized = (contexts: unknown[]) => contexts.map(canonicalize).map(value => JSON.stringify(value)).sort();
+        expect(normalized(grouped.flat())).toEqual(normalized(inputs.map(input => input.context)));
+        groups.push(grouped);
+      } finally { release(); }
+      const results = await pending;
+      expect(results.map(result => result.value)).toEqual(order.map(input => completeComponent(input.context)));
+    }
+    expect(groups[1]).toEqual(groups[0]);
+  });
+
+  it.each([1, 2, 12, 13, 25])("uses the minimum physical request count for a ready wave of %i components", async count => {
+    const inputs = Array.from({ length: count }, (_, index) => initialComponent(`component-${index}`, 1));
+    const provider = new ScriptedModelProvider(componentResponse, createTestModelCatalog(), false);
+    const physical = capturePhysicalRequests(provider);
+    const coordinator = new TruthBatchCoordinator(provider, 12, 0, "shared-json-v3", TRUTH_BATCH_REQUEST_CONTRACT,
+      "tail-v1", "post-promise-v1", "scoped-plans-v1", "ready-wave-work-v1");
+    await Promise.all(inputs.map(input => coordinator.generateStructured(input)));
+    expect(physical).toHaveLength(Math.ceil(count / 12));
+    expect(physical.every(input => physicalContexts(input).length <= 12)).toBe(true);
+  });
+
   it("balances whole components deterministically and dispatches both groups before either finishes", async () => {
     const inputs = [18, 20, 2, 1, 1, 1, 1, 1, 2, 1, 1].map((count, index) => initialComponent(`component-${String(index).padStart(2, "0")}`, count));
     const original = structuredClone(inputs.map(input => input.context));
@@ -221,7 +265,7 @@ describe("TruthBatchCoordinator", () => {
     expect(inputs.map(input => input.context)).toEqual(original);
   });
 
-  it("keeps repair and global grouping, unsupported workloads and the original default intact", async () => {
+  it.each(["balanced-two-v1", "ready-wave-work-v1"] as const)("keeps repair and global grouping, unsupported workloads and the original default intact: %s", async policy => {
     for (const mode of ["default", "repair", "global", "missing"]) {
       const inputs = [initialComponent("a", 2), initialComponent("b", 3)];
       for (const input of inputs) {
@@ -234,14 +278,14 @@ describe("TruthBatchCoordinator", () => {
         result: completeComponent(initialComponent(String(slot), 1).context) })) }), createTestModelCatalog(), false);
       const physical = capturePhysicalRequests(provider);
       const coordinator = new TruthBatchCoordinator(provider, 12, 0, "shared-json-v3", TRUTH_BATCH_REQUEST_CONTRACT,
-        "tail-v1", "post-promise-v1", "scoped-plans-v1", mode === "default" ? undefined : "balanced-two-v1");
+        "tail-v1", "post-promise-v1", "scoped-plans-v1", mode === "default" ? undefined : policy);
       await Promise.all(inputs.map(input => coordinator.generateStructured(input)));
       expect(physical).toHaveLength(1);
       expect(physicalContexts(physical[0]!)).toEqual(inputs.map(input => input.context));
     }
   });
 
-  it("keeps the slot ceiling, singleton path and malformed result ownership under balanced planning", async () => {
+  it.each(["balanced-two-v1", "ready-wave-work-v1"] as const)("keeps the slot ceiling and malformed result ownership under balanced planning: %s", async policy => {
     const inputs = Array.from({ length: 13 }, (_, index) => initialComponent(`component-${String(index).padStart(2, "0")}`, 1));
     const provider = new ScriptedModelProvider(input => {
       const response = componentResponse(input)!;
@@ -252,15 +296,15 @@ describe("TruthBatchCoordinator", () => {
     }, createTestModelCatalog(), false);
     const physical = capturePhysicalRequests(provider);
     const coordinator = new TruthBatchCoordinator(provider, 12, 0, "shared-json-v3", TRUTH_BATCH_REQUEST_CONTRACT,
-      "tail-v1", "post-promise-v1", "scoped-plans-v1", "balanced-two-v1");
+      "tail-v1", "post-promise-v1", "scoped-plans-v1", policy);
     const results = await Promise.allSettled(inputs.map(input => coordinator.generateStructured(input)));
-    expect(physical.map(input => physicalContexts(input).length)).toEqual([6, 6, 1]);
+    expect(physical.map(input => physicalContexts(input).length)).toEqual(policy === "balanced-two-v1" ? [6, 6, 1] : [7, 6]);
     expect(results.map(result => result.status)).toEqual(inputs.map((_, index) => index === 3 ? "rejected" : "fulfilled"));
     expect(results[3]).toMatchObject({ reason: expect.any(ModelOutputError) });
-    expect(physical[2]!.context).toEqual(inputs[12]!.context);
+    if (policy === "balanced-two-v1") expect(physical[2]!.context).toEqual(inputs[12]!.context);
   });
 
-  it("preserves execution and signal boundaries before balancing", async () => {
+  it.each(["balanced-two-v1", "ready-wave-work-v1"] as const)("preserves execution and signal boundaries before balancing: %s", async policy => {
     for (const boundary of ["revision", "profile", "abort", "cancel-pending"]) {
       const inputs = ["a", "b", "c", "d"].map(id => initialComponent(id, 2));
       const signal = new AbortController().signal;
@@ -273,10 +317,10 @@ describe("TruthBatchCoordinator", () => {
       const provider = new ScriptedModelProvider(componentResponse, createTestModelCatalog(), false);
       const physical = capturePhysicalRequests(provider);
       const coordinator = new TruthBatchCoordinator(provider, 12, 0, "shared-json-v3", TRUTH_BATCH_REQUEST_CONTRACT,
-        "tail-v1", "post-promise-v1", "scoped-plans-v1", "balanced-two-v1");
+        "tail-v1", "post-promise-v1", "scoped-plans-v1", policy);
       await Promise.all(inputs.map(input => coordinator.generateStructured(input)));
-      expect(physical).toHaveLength(4);
-      expect(physical.map(input => input.context)).toEqual(inputs.map(input => input.context));
+      expect(physical).toHaveLength(policy === "balanced-two-v1" ? 4 : 2);
+      expect(physical.flatMap(physicalContexts)).toEqual(inputs.map(input => input.context));
     }
     expect(() => new TruthBatchCoordinator(new ScriptedModelProvider(() => ({})), 12, 0, undefined, undefined,
       undefined, undefined, undefined, "balanced-two-v1")).toThrow("requires shared contexts");

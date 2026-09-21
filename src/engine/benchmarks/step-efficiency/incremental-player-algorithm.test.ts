@@ -77,6 +77,8 @@ it("runs parallel work, survives failed guard preparation and resumes the saved 
   };
   const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 47, modelCatalog: provider.catalog });
   const ref = incrementalPlayerAlgorithmRef();
+  expect(ref.children.truthResolution!.children.batching!.config.planningPartition).toBe("ready-wave-work-v1");
+  expect(ref.children.truthResolution!.children.batching!.config.maxSlots).toBe(12);
   const encoder = { modelId: MULTILINGUAL_E5_BASE_ASSET.modelId, modelHash: MULTILINGUAL_E5_BASE_ASSET.directorySha256,
     dimensions: 2, encodeBatch: async (texts: readonly string[]) => texts.map(text => [text.length % 7, 1]) };
   const cache = new CachedPassageEncoder(encoder, MULTILINGUAL_E5_BASE_ASSET.encoderFingerprint, root);

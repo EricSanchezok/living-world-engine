@@ -352,7 +352,7 @@ const definitions = [
       requestContract: z.literal(TRUTH_BATCH_REQUEST_CONTRACT), repairPlacement: z.literal("tail-v1"),
       flushBoundary: z.literal("post-promise-v1").optional(),
       planRepairBatching: z.literal("scoped-plans-v1").optional(),
-      planningPartition: z.literal("balanced-two-v1").optional(),
+      planningPartition: z.enum(["balanced-two-v1", "ready-wave-work-v1"]).optional(),
       contextLayout: z.literal(SHARED_STATE_FIRST_LAYOUT), jsonSyntaxRecovery: z.literal(UNMATCHED_CLOSER_RECOVERY) }),
     children: noChildren,
   }, (algorithmIdentity, config, children) => new WorkBatchingAlgorithm(algorithmIdentity, config, children)),
@@ -699,7 +699,7 @@ function eagerComponents(
     child(algorithms.truthResolution, "batching").config.repairPlacement as "tail-v1" | undefined,
     truthBatching.config.flushBoundary as "post-promise-v1" | undefined,
     truthBatching.config.planRepairBatching as "scoped-plans-v1" | undefined,
-    truthBatching.config.planningPartition as "balanced-two-v1" | undefined,
+    truthBatching.config.planningPartition as "balanced-two-v1" | "ready-wave-work-v1" | undefined,
   );
   const observationProvider = new TruthBatchCoordinator(
     observationRendering.config.evidenceLayout === OBSERVATION_EVIDENCE_LAYOUT

@@ -65,6 +65,7 @@ const sourceHashes = () => Object.fromEntries(["scripts/experiments/player-integ
   "scripts/operations/player-feedback-playtest.ts",
   "src/engine/benchmarks/step-efficiency/integrated-player-algorithm.ts",
   "src/engine/algorithms/standard-composition.ts",
+  "src/engine/algorithms/registry.ts", "src/engine/mechanics/truth-batch-provider.ts",
   "src/engine/benchmarks/step-efficiency/local-plan-repair-algorithm.ts",
   "src/engine/benchmarks/step-efficiency/recursive-player-algorithm.ts",
   "src/engine/benchmarks/step-efficiency/agent-recursive-intent.ts", "src/engine/prompts/shared/agent-recursive-intent.md",

@@ -9,21 +9,31 @@ import { localPlanRepairAlgorithmRef } from "./local-plan-repair-algorithm";
 import { AGENT_INTENT_CONTROL, agentIntentControlRequest, type IntentCognitionScope } from "./agent-intent-control";
 import { incrementalIntentSelector, INTENT_GUARD_VERSION } from "./incremental-intent-execution";
 
-const config = { cognition: AGENT_INTENT_CONTROL, guard: INTENT_GUARD_VERSION, execution: "persistent-frontier-groups-v1" };
+const config = { cognition: AGENT_INTENT_CONTROL, guard: INTENT_GUARD_VERSION, execution: "persistent-frontier-groups-v1",
+  planningPartition: "ready-wave-work-v1" };
+function foundation() {
+  const base = localPlanRepairAlgorithmRef(), truth = base.children.truthResolution!;
+  const batching = truth.children.batching!;
+  return defineAlgorithmRef({ ...base, children: { ...base.children,
+    truthResolution: defineAlgorithmRef({ ...truth, children: { ...truth.children,
+      batching: defineAlgorithmRef({ ...batching, config: { ...batching.config, planningPartition: config.planningPartition } }),
+    } }),
+  } });
+}
 export function incrementalPlayerAlgorithmRef() {
-  return defineAlgorithmRef({ role: "world-execution", id: "incremental-player-diagnostic", version: "1",
-    contractVersion: WORLD_EXECUTION_CONTRACT_VERSION, config, children: localPlanRepairAlgorithmRef().children });
+  return defineAlgorithmRef({ role: "world-execution", id: "incremental-player-diagnostic", version: "2",
+    contractVersion: WORLD_EXECUTION_CONTRACT_VERSION, config, children: foundation().children });
 }
 
 /** Complete diagnostic integration; semantic and player-latency qualification
  * remain separate from construction and deterministic persistence checks. */
 export function registerIncrementalPlayerAlgorithm(registry: WorldExecutionAlgorithmRegistry) {
-  registry.registerDefinition({ role: "world-execution", id: "incremental-player-diagnostic", version: "1",
+  registry.registerDefinition({ role: "world-execution", id: "incremental-player-diagnostic", version: "2",
     contractVersion: WORLD_EXECUTION_CONTRACT_VERSION, maturity: "diagnostic",
     configSchema: z.custom<typeof config>(value => contentHash(value) === contentHash(config)),
-    children: Object.entries(localPlanRepairAlgorithmRef().children).map(([name, child]) => ({ name, role: child.role })),
+    children: Object.entries(foundation().children).map(([name, child]) => ({ name, role: child.role })),
     create: context => {
-      if (contentHash(context.ref.children) !== contentHash(localPlanRepairAlgorithmRef().children)) throw new Error("incremental diagnostic foundation changed");
+      if (contentHash(context.ref.children) !== contentHash(foundation().children)) throw new Error("incremental diagnostic foundation changed");
       const cognition = new AsyncLocalStorage<IntentCognitionScope>(), original = context.services.provider;
       const producerHash = context.ref.manifestHash;
       const provider: StructuredModelProvider = { catalog: original.catalog,
