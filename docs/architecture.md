@@ -48,6 +48,8 @@ The separate [intention reference view](specs/0166-scope-qualified-intent-refere
 
 The [initial intent frontier screen](specs/0170-initial-intent-frontier-screen.md) adds a deterministic starting view for assigned programs whose Activities are at the interval start. Complete intentions and temporal adjudication remain authoritative.
 
+The experimental [incremental intent cursor](specs/0176-incremental-intent-execution.md) retains a residual program, issues uniquely bound attempts and advances from committed Activity evidence or owning-Agent guard decisions. Its replayable journal is benchmark-only; atomic host persistence and world Composition integration retain separate qualification requirements.
+
 ## State and policies
 
 Action Compilation specializes [empty shared-resource domains](specs/0111-specialize-empty-resource-pool-domain.md) from its bound source state; representation adapters preserve that request schema through initial and repair calls.
