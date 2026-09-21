@@ -45,13 +45,13 @@ it("runs parallel work, survives failed guard preparation and resumes the saved 
         const context = slots.find(source => source.slot === slot.slot)!;
         const intention = context.agentState?.intention ?? context.state?.intention;
         slot.nextActionIntent = intention?.canContinue ? { kind: "continue" } : {
-          kind: "replace", targetHandles: ["ref:local_entity:self"], program: { root: 0, nodes: [
-            { nodeId: 0, kind: "sequence", children: [1, 4, 5] },
-            { nodeId: 1, kind: "parallel", children: [2, 3] },
-            { nodeId: 2, kind: "attempt", text: "观察自己的衣物。", targetIndices: [0] },
-            { nodeId: 3, kind: "attempt", text: "同时留意周围声音。", targetIndices: [0] },
-            { nodeId: 4, kind: "await", condition: "我已获得刚才观察的结果。", targetIndices: [0] },
-            { nodeId: 5, kind: "attempt", text: "随后整理刚才得到的信息。", targetIndices: [0] },
+          kind: "replace", program: { kind: "sequence", children: [
+            { kind: "parallel", children: [
+              { kind: "attempt", text: "观察自己的衣物。", targetHandles: ["ref:local_entity:self"] },
+              { kind: "attempt", text: "同时留意周围声音。", targetHandles: ["ref:local_entity:self"] },
+            ] },
+            { kind: "await", condition: "我已获得刚才观察的结果。", targetHandles: ["ref:local_entity:self"] },
+            { kind: "attempt", text: "随后整理刚才得到的信息。", targetHandles: ["ref:local_entity:self"] },
           ] } };
       }
     }

@@ -3,6 +3,7 @@ import { expect, it } from "vitest";
 import { z } from "zod";
 import { registerIntegratedPlayerAlgorithm } from "./integrated-player-algorithm";
 import { recursivePlayerAlgorithmRef } from "./recursive-player-algorithm";
+import { incrementalPlayerAlgorithmRef } from "./incremental-player-algorithm";
 import { createActionCompilationRetrievalRuntimeProvider } from "../../../server/action-compilation-retrieval-runtime";
 import { agentMindBatchOutputSchema } from "../../contracts/llm-schemas";
 import { loadWorldScript } from "../../../script/world-loader";
@@ -75,7 +76,10 @@ it("keeps original private and non-action contracts and resolves every recursive
   source.context.slots.push({ slot: 1 }); expect(() => candidate.preprocessOutput!(wire)).toThrow("source or schema changed");
 });
 
-it.each([false, true])("uses registered recursive bootstrap and gateway with foreign local target=%s", async foreign => {
+it.each([
+  { persistent: false, foreign: false }, { persistent: false, foreign: true },
+  { persistent: true, foreign: false }, { persistent: true, foreign: true },
+])("uses registered recursive bootstrap and gateway: persistent=$persistent, foreign=$foreign", async ({ persistent, foreign }) => {
   const catalog = createTestModelCatalog(), definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 17, modelCatalog: catalog });
   const state = definition.initialState;
   const agents = Object.values(state.agents).sort((a, b) => a.id.localeCompare(b.id)), before = contentHash(state);
@@ -87,7 +91,7 @@ it.each([false, true])("uses registered recursive bootstrap and gateway with for
     maxTransportAttempts: 1, registry: createTestModelRegistry(catalog), fetch: async (_url, init) => {
       http++; const body = JSON.parse(String(init?.body));
       const output = { slots: expected.map((program, slot) => ({ slot, beliefChanges: { operations: [] }, characterChanges: { operations: [] },
-        nextActionIntent: { program: foreign && slot === 0 ? attempt("查看", "copper-key") : program } })) };
+        nextActionIntent: { ...(persistent ? { kind: "replace" } : {}), program: foreign && slot === 0 ? attempt("查看", "copper-key") : program } })) };
       return Response.json({ id: "fixture", object: "chat.completion", created: 1, model: body.model,
         choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(output) }, finish_reason: "stop" }],
         usage: { prompt_tokens: 20, completion_tokens: 30, total_tokens: 50, completion_tokens_details: { reasoning_tokens: 0 } } });
@@ -96,9 +100,22 @@ it.each([false, true])("uses registered recursive bootstrap and gateway with for
     assertProfilesAvailable: ids => gateway.assertProfilesAvailable(ids), generateStructured: source => {
       if (++calls > 1) throw new ModelConfigurationError("Foreign target stopped before repair HTTP");
       expect(source.promptVersion).toContain("agent-recursive-intent-v1");
+      let references = 0;
+      const inspect = (value: unknown): void => {
+        if (!value || typeof value !== "object") return;
+        if ("$ref" in value) {
+          const ref = (value as { $ref: string }).$ref;
+          expect(ref.startsWith("#/definitions/recursiveIntent_")).toBe(true);
+          const resolved = ref.slice(2).split("/").reduce<unknown>((current, key) => (current as Record<string, unknown>)[key], source.wireJsonSchema);
+          expect(resolved).toBeDefined(); references++;
+        }
+        Object.values(value).forEach(inspect);
+      };
+      inspect(source.wireJsonSchema); expect(references).toBeGreaterThan(3);
       return gateway.generateStructured(source);
     } };
-  const ref = recursivePlayerAlgorithmRef(), retrieval = createActionCompilationRetrievalRuntimeProvider();
+  const ref = persistent ? incrementalPlayerAlgorithmRef() : recursivePlayerAlgorithmRef();
+  const retrieval = createActionCompilationRetrievalRuntimeProvider();
   const algorithm = registerIntegratedPlayerAlgorithm().create(ref, { provider,
     resources: { resolve: <T,>() => retrieval.runtime(ref) as T } });
   const pending = algorithm.bootstrap({ definition, state }, {
