@@ -1,6 +1,7 @@
 import { PLANNING_CATALOG_ENCODING, planningCatalogEncodingProvider } from "../mechanics/planning-catalog-encoding";
 import { standardEagerReferenceAlgorithmRef } from "./standard-composition";
 import { PLAN_RANDOM_COMPLETION } from "../mechanics/plan-random-completion";
+import { PLAN_TRANSITION_FUSION } from "../mechanics/plan-transition-fusion";
 import { PERCEPTION_RATING_CHOICES, perceptionRatingChoiceProvider } from "../mechanics/perception-rating-choices";
 import { PLANNING_CONTRACT_TAIL } from "../mechanics/planning-contract-tail";
 import { OBSERVATION_EVIDENCE_LAYOUT, observationEvidenceProvider } from "../mechanics/observation-evidence-layout";
@@ -224,6 +225,7 @@ class ReactionDecisionAlgorithm extends ConfiguredAlgorithm<"reaction-decision">
 class TruthResolutionAlgorithm extends ConfiguredAlgorithm<"truth-resolution"> implements TruthResolutionRoleAlgorithm {
   create(provider: WorldExecutionAlgorithmServices["provider"], rulePackages: NonNullable<WorldExecutionAlgorithmServices["rulePackages"]>, recovery: Readonly<OutputRecoveryCapability>) {
     return new TruthEngine(provider, { rulePackages, repairAttempts: recovery.maxRepairs,
+      ...(this.config.planTransitionFusion === PLAN_TRANSITION_FUSION ? { planTransitionFusion: PLAN_TRANSITION_FUSION } : {}),
       ...(this.config.mechanicalPlanRepair === MECHANICAL_PLAN_REPAIR ? { mechanicalPlanRepair: MECHANICAL_PLAN_REPAIR } : {}),
       ...(this.config.planRandomCompletion === PLAN_RANDOM_COMPLETION ? { planRandomCompletion: PLAN_RANDOM_COMPLETION } : {}),
       includeActivityTemporalEvidence: this.config.planningPipeline === WORKLIST_PLANNING_PIPELINE || this.config.planningPipeline === INDEXED_REVIEWED_PLANNING_PIPELINE,
@@ -299,10 +301,12 @@ const definitions = [
       planFactEvidence: z.literal(RESOLUTION_FACT_EVIDENCE).optional(),
       planningCatalogEncoding: z.literal(PLANNING_CATALOG_ENCODING).optional(),
       planRandomCompletion: z.literal(PLAN_RANDOM_COMPLETION).optional(),
+      planTransitionFusion: z.literal(PLAN_TRANSITION_FUSION).optional(),
       mechanicalPlanRepair: z.literal(MECHANICAL_PLAN_REPAIR).optional(),
       planningContractTail: z.literal(PLANNING_CONTRACT_TAIL).optional() }).refine(config => !config.planningContractTail ||
         (config.planCauseChoices === SOURCE_INDEXED_PLAN_CAUSES && config.planMeansChoices === SOURCE_INDEXED_PLAN_MEANS),
-      "planning contract tail requires indexed causes and means"),
+      "planning contract tail requires indexed causes and means").refine(config => !config.planTransitionFusion ||
+        config.planRandomCompletion === PLAN_RANDOM_COMPLETION, "plan transition fusion requires explicit random completion"),
     children: [{ name: "batching", role: "work-batching" }, { name: "recovery", role: "output-recovery" }],
   }, (algorithmIdentity, config, children) => new TruthResolutionAlgorithm(algorithmIdentity, config, children)),
   configuredDefinition({

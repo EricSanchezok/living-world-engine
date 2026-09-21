@@ -49,10 +49,12 @@ const selectedAlgorithm = (selection: unknown) => {
   if (selection === "standard-local-repair") return localPlanRepairAlgorithmRef();
   if (selection === "recursive-local-repair") return recursivePlayerAlgorithmRef();
   if (selection === "incremental-local-repair") return incrementalPlayerAlgorithmRef();
+  if (selection === "fused-local-repair") return incrementalPlayerAlgorithmRef(true);
   if (selection === "integrated") return integratedPlayerAlgorithmRef();
-  throw new Error("Expected explicit standard, standard-pooled, standard-local-repair, recursive-local-repair, incremental-local-repair or integrated composition selection");
+  throw new Error("Expected explicit standard, standard-pooled, standard-local-repair, recursive-local-repair, incremental-local-repair, fused-local-repair or integrated composition selection");
 };
 const sourceHashes = () => Object.fromEntries(["scripts/experiments/player-integrated-playtest.ts",
+  "src/engine/mechanics/truth-engine.ts", "src/engine/mechanics/plan-transition-fusion.ts", "src/engine/prompts/shared/plan-transition-fusion.md",
   "src/engine/benchmarks/step-efficiency/incremental-player-algorithm.ts",
   "src/engine/benchmarks/step-efficiency/incremental-intent-execution.ts",
   "src/engine/benchmarks/step-efficiency/agent-intent-control.ts",

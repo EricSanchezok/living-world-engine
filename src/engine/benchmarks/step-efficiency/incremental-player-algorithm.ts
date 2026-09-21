@@ -8,32 +8,36 @@ import { WORLD_EXECUTION_CONTRACT_VERSION, type WorldExecutionAlgorithmRegistry 
 import { localPlanRepairAlgorithmRef } from "./local-plan-repair-algorithm";
 import { AGENT_INTENT_CONTROL, agentIntentControlRequest, type IntentCognitionScope } from "./agent-intent-control";
 import { incrementalIntentSelector, INTENT_GUARD_VERSION } from "./incremental-intent-execution";
+import { PLAN_TRANSITION_FUSION } from "../../mechanics/plan-transition-fusion";
 
 const config = { cognition: AGENT_INTENT_CONTROL, guard: INTENT_GUARD_VERSION, execution: "persistent-frontier-groups-v1",
   planningPartition: "ready-wave-work-v1" };
-function foundation() {
+function foundation(fusion = false) {
   const base = localPlanRepairAlgorithmRef(), truth = base.children.truthResolution!;
   const batching = truth.children.batching!;
   return defineAlgorithmRef({ ...base, children: { ...base.children,
-    truthResolution: defineAlgorithmRef({ ...truth, children: { ...truth.children,
+    truthResolution: defineAlgorithmRef({ ...truth, config: { ...truth.config,
+      ...(fusion ? { planTransitionFusion: PLAN_TRANSITION_FUSION } : {}) }, children: { ...truth.children,
       batching: defineAlgorithmRef({ ...batching, config: { ...batching.config, planningPartition: config.planningPartition } }),
     } }),
   } });
 }
-export function incrementalPlayerAlgorithmRef() {
-  return defineAlgorithmRef({ role: "world-execution", id: "incremental-player-diagnostic", version: "2",
-    contractVersion: WORLD_EXECUTION_CONTRACT_VERSION, config, children: foundation().children });
+export function incrementalPlayerAlgorithmRef(fusion = false) {
+  return defineAlgorithmRef({ role: "world-execution", id: fusion ? "fused-player-diagnostic" : "incremental-player-diagnostic", version: fusion ? "1" : "2",
+    contractVersion: WORLD_EXECUTION_CONTRACT_VERSION, config: { ...config, ...(fusion ? { planTransitionFusion: PLAN_TRANSITION_FUSION } : {}) }, children: foundation(fusion).children });
 }
 
 /** Complete diagnostic integration; semantic and player-latency qualification
  * remain separate from construction and deterministic persistence checks. */
 export function registerIncrementalPlayerAlgorithm(registry: WorldExecutionAlgorithmRegistry) {
-  registry.registerDefinition({ role: "world-execution", id: "incremental-player-diagnostic", version: "2",
+  for (const fusion of [false, true]) {
+    const ref = incrementalPlayerAlgorithmRef(fusion);
+    registry.registerDefinition({ role: "world-execution", id: ref.id, version: ref.version,
     contractVersion: WORLD_EXECUTION_CONTRACT_VERSION, maturity: "diagnostic",
-    configSchema: z.custom<typeof config>(value => contentHash(value) === contentHash(config)),
-    children: Object.entries(foundation().children).map(([name, child]) => ({ name, role: child.role })),
+    configSchema: z.custom<typeof config>(value => contentHash(value) === contentHash(ref.config)),
+    children: Object.entries(ref.children).map(([name, child]) => ({ name, role: child.role })),
     create: context => {
-      if (contentHash(context.ref.children) !== contentHash(foundation().children)) throw new Error("incremental diagnostic foundation changed");
+      if (contentHash(context.ref.children) !== contentHash(ref.children)) throw new Error("incremental diagnostic foundation changed");
       const cognition = new AsyncLocalStorage<IntentCognitionScope>(), original = context.services.provider;
       const producerHash = context.ref.manifestHash;
       const provider: StructuredModelProvider = { catalog: original.catalog,
@@ -52,5 +56,6 @@ export function registerIncrementalPlayerAlgorithm(registry: WorldExecutionAlgor
             cognition.run({ state, inputs }, () => base.thinkBatch(state, inputs, scope, purpose, maxSlots)) } };
       });
     } });
+  }
   return registry;
 }

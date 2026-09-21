@@ -23,6 +23,18 @@ import { readIntentMemory, reconcileIntentMemory } from "./incremental-intent-ex
 import { IntentExecutionCursor } from "./intent-execution-cursor";
 import type { ActionCompilationBatchDraft } from "../../contracts/llm-schemas";
 import type { SimulationState } from "../../contracts/model";
+import { expandSharedBatchContexts, isSharedBatchContext, type SharedBatchContext } from "../../mechanics/shared-batch-context";
+
+function fusedDiagnosticOutput(profileId: string, context: unknown): unknown {
+  const state = (context as { state: { stageContexts: SharedBatchContext } }).state;
+  if (isSharedBatchContext(state)) return { slots: expandSharedBatchContexts(state).map((entry, slot) => ({
+    slot, result: fusedDiagnosticOutput(profileId, entry),
+  })) };
+  const [planning, transition] = expandSharedBatchContexts(state.stageContexts);
+  const plans = deterministicModelOutput(profileId, planning) as { kind: "commit_plans"; plans: Array<Record<string, unknown>> };
+  return { ...plans, plans: plans.plans.map(plan => ({ ...plan, additionalRandomness: "none" })),
+    provisionalTransition: (deterministicModelOutput(profileId, transition) as { proposal: unknown }).proposal };
+}
 
 function canonicalDiagnosticOutputs(provider: ScriptedModelProvider) {
   // Keep the intent-control wire decoder; the other diagnostic codecs have
@@ -118,11 +130,12 @@ it("repairs a known action after resumed intention selection without changing ei
   } finally { releaseKnown(); releaseResumed(); rmSync(root, { recursive: true, force: true }); }
 }, 30_000);
 
-it("runs parallel work, survives failed guard preparation and resumes the saved program through WorldHost", async () => {
+it.each([false, true])("runs parallel work, survives a failed guard and resumes through WorldHost with fusion=%s", async fusion => {
   const root = mkdtempSync(path.join(tmpdir(), "incremental-player-"));
   let database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
   let failGuard = false, guardCalls = 0;
   const provider = new ScriptedModelProvider(request => {
+    if (request.schemaName.startsWith("truth_resolution_fused_commit")) return fusedDiagnosticOutput(request.profileId, request.context);
     if (request.role === "arrival-generator") return { title: "庭院", scene: "你站在庭院里。", possibleNextActions: ["观察四周", "查看石门", "询问守门人"] };
     if (request.schemaName === "intent_guard_batch") {
       guardCalls++;
@@ -155,7 +168,7 @@ it("runs parallel work, survives failed guard preparation and resumes the saved 
   }, createTestModelCatalog(undefined, { maxInputBytes: 1_048_576 }));
   canonicalDiagnosticOutputs(provider);
   const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 47, modelCatalog: provider.catalog });
-  const ref = incrementalPlayerAlgorithmRef();
+  const ref = incrementalPlayerAlgorithmRef(fusion);
   expect(ref.children.truthResolution!.children.batching!.config.planningPartition).toBe("ready-wave-work-v1");
   expect(ref.children.truthResolution!.children.batching!.config.maxSlots).toBe(12);
   const encoder = { modelId: MULTILINGUAL_E5_BASE_ASSET.modelId, modelHash: MULTILINGUAL_E5_BASE_ASSET.directorySha256,
@@ -177,6 +190,7 @@ it("runs parallel work, survives failed guard preparation and resumes the saved 
       onUpdate: () => {}, onCheckpoint: () => {}, stopReason: () => undefined, onStop: () => {}, pollMs: 5 });
     const first = await run("first-look");
     expect(first.failure).toBeUndefined(); expect(first.status).toBe("completed"); expect(first.feedback.length).toBeGreaterThan(0);
+    expect(provider.requests.some(request => request.schemaName.startsWith("truth_resolution_fused_commit"))).toBe(fusion);
     const saved = database.readInstance(created.summary.id).document;
     const initialMemory = readIntentMemory(saved.state.executionState, ref.manifestHash);
     expect(Object.keys(initialMemory.active).sort()).toEqual(["keeper", "player"]);

@@ -2,6 +2,7 @@ import { materializeOnsetPerceptionReceipts, type OnsetPerceptionReceipt } from 
 import { repeatedPerceptionChecks } from "./perception-commitments";
 export { materializeObservationPackets } from "../cognition/observation-materialization";
 import { z } from "zod";
+import { fusedPlanTransitionSchema, fusionPlanningDirective, PLAN_TRANSITION_FUSION, PLAN_TRANSITION_FUSION_PROMPT, planTransitionFusionContext } from "./plan-transition-fusion";
 import { bindMechanicalPlanRepairContext, MECHANICAL_PLAN_REPAIR, selectMechanicalPlanRepair } from "./mechanical-plan-repair";
 import { CausalAssertionValidationError, evaluateProposalCausality } from "./causality";
 import { perceptionCauseScope, perceptionDraftRelationIssues } from "../contracts/perception-references";
@@ -132,6 +133,7 @@ import type {
 import { declaredRandomPlanSchema, declaresNoAdditionalRandomness, PLAN_RANDOM_COMPLETION, PLAN_RANDOM_COMPLETION_PROMPT } from "./plan-random-completion";
 
 export interface TruthEngineOptions {
+  planTransitionFusion?: typeof PLAN_TRANSITION_FUSION;
   mechanicalPlanRepair?: typeof MECHANICAL_PLAN_REPAIR;
   planRandomCompletion?: typeof PLAN_RANDOM_COMPLETION;
   includeResolutionMeansSources?: boolean;
@@ -1876,6 +1878,7 @@ function validateTransitionObservations(input: TruthPreparationInput, actions: r
 }
 
 export class TruthEngine {
+  private readonly planTransitionFusion: boolean;
   private readonly mechanicalPlanRepair: boolean;
   private readonly planRandomCompletion: boolean;
   private readonly includeResolutionMeansSources: boolean;
@@ -1890,6 +1893,9 @@ export class TruthEngine {
     private readonly provider: StructuredModelProvider,
     options: TruthEngineOptions = {},
   ) {
+    if (options.planTransitionFusion !== undefined && options.planTransitionFusion !== PLAN_TRANSITION_FUSION) throw new Error("unknown plan transition fusion contract");
+    this.planTransitionFusion = options.planTransitionFusion === PLAN_TRANSITION_FUSION;
+    if (this.planTransitionFusion && options.planRandomCompletion !== PLAN_RANDOM_COMPLETION) throw new Error("plan transition fusion requires explicit random completion");
     if (options.mechanicalPlanRepair !== undefined && options.mechanicalPlanRepair !== MECHANICAL_PLAN_REPAIR) throw new Error("unknown mechanical plan repair contract");
     this.mechanicalPlanRepair = options.mechanicalPlanRepair === MECHANICAL_PLAN_REPAIR;
     if (options.planRandomCompletion !== undefined && options.planRandomCompletion !== PLAN_RANDOM_COMPLETION) throw new Error("unknown plan random completion contract");
@@ -2433,6 +2439,10 @@ export class TruthEngine {
     const planningRepairSourceHash = () => contentHash({ state: input.state, definition: input.definition, actions, groundings,
       requests, checks, commitmentRounds, temporalBoundary: input.temporalBoundary });
     const planningRepairSourceBinding = this.mechanicalPlanRepair ? planningRepairSourceHash() : "";
+    const fusionSourceHash = () => contentHash({ source: planningRepairSourceHash(), modelWorkset: input.modelWorkset,
+      resolutionScope: input.resolutionScope, completedReactionDecisions: input.completedReactionDecisions });
+    const fusionSourceBinding = this.planTransitionFusion ? fusionSourceHash() : "";
+    let fusedTransition: { draft: ModelTransitionProposalDraft; audit: ModelExecutionAudit } | null = null;
     let initialPlanCalls = 0;
     let pendingPlanVerification: {
       plans: ResolutionPlan[];
@@ -2455,8 +2465,9 @@ export class TruthEngine {
         pendingPlanVerification = null;
         continuationFromTargetedRepair = true;
       } else try {
+        const jointGeneration = this.planTransitionFusion && resolutionPlans.length === 0;
         const directiveSchema = (resolutionPlans.length === 0
-          ? this.planRandomCompletion ? declaredRandomPlanSchema : resolutionPlanCommitDirectiveSchema
+          ? jointGeneration ? fusedPlanTransitionSchema : this.planRandomCompletion ? declaredRandomPlanSchema : resolutionPlanCommitDirectiveSchema
           : resolutionContinuationDirectiveSchema) as z.ZodType<z.infer<typeof resolutionDirectiveSchema>>;
         call = await generateValidated<z.infer<typeof resolutionDirectiveSchema>>({
           provider: this.provider,
@@ -2465,10 +2476,10 @@ export class TruthEngine {
           subjectId: truthSubject,
           promptId: "truth-resolution",
           schemaName: resolutionPlans.length === 0
-            ? "truth_resolution_plan_commit"
+            ? jointGeneration ? "truth_resolution_fused_commit" : "truth_resolution_plan_commit"
             : "truth_resolution_continuation",
           schema: directiveSchema,
-          ...(this.mechanicalPlanRepair && resolutionPlans.length === 0 ? {
+          ...(this.mechanicalPlanRepair && resolutionPlans.length === 0 && !jointGeneration ? {
             projectRepair: (repair: SemanticRepairContext, context: unknown) => {
               const selection = selectMechanicalPlanRepair({ repair, schema: directiveSchema,
                 actionIds: actions.map(action => action.id), actionIdFor: draftActionId,
@@ -2481,12 +2492,14 @@ export class TruthEngine {
             },
           } : {}),
           ...(this.planRandomCompletion && resolutionPlans.length === 0 ? {
-            promptExtension: { version: PLAN_RANDOM_COMPLETION, userPrompt: PLAN_RANDOM_COMPLETION_PROMPT },
+            promptExtension: { version: jointGeneration ? PLAN_TRANSITION_FUSION : PLAN_RANDOM_COMPLETION,
+              userPrompt: jointGeneration ? `${PLAN_RANDOM_COMPLETION_PROMPT}\n\n${promptBundle("truth-transition").system}\n\n${promptBundle("truth-transition").userPrompt}\n\n${PLAN_TRANSITION_FUSION_PROMPT}` : PLAN_RANDOM_COMPLETION_PROMPT },
           } : {}),
           scope,
           buildContext: (issues) => {
             if (resolutionPlans.length === 0) initialPlanCalls += 1;
-            return truthContext("resolution", [...resolutionPlanIssues, ...issues]);
+            const planning = truthContext("resolution", [...resolutionPlanIssues, ...issues]);
+            return jointGeneration ? planTransitionFusionContext(planning, truthContext("transition", [])) : planning;
           },
           validate: (directive) => {
             if (directive.kind === "commit_plans") {
@@ -2838,7 +2851,19 @@ export class TruthEngine {
         if (this.planRandomCompletion && initialPlanCalls === 1 && !continuationFromTargetedRepair &&
           resolutionPlanRepairs === 0 && resolutionRepairAudits.length === 0 &&
           verification.audit.invocations.length === 1 && commitmentRounds.length === 0 &&
-          acceptedPlanChecks.length === 0 && declaresNoAdditionalRandomness(call.value)) break;
+          acceptedPlanChecks.length === 0 && declaresNoAdditionalRandomness(fusionPlanningDirective(call.value))) {
+          const fused = this.planTransitionFusion ? fusedPlanTransitionSchema.safeParse(call.value) : null;
+          if (fused?.success && fused.data.provisionalTransition !== null) {
+            if (fusionSourceHash() !== fusionSourceBinding) throw new ModelConfigurationError("fusion source changed before transition reuse");
+            fusedTransition = { draft: structuredClone(fused.data.provisionalTransition), audit: call.audit };
+            // This invocation generated both drafts. Its single audit follows
+            // the transition through validation rather than being counted twice.
+            const auditIndex = resolutionAudits.indexOf(call.audit);
+            if (auditIndex < 0) throw new ModelConfigurationError("fusion generation audit is missing");
+            resolutionAudits.splice(auditIndex, 1);
+          }
+          break;
+        }
       } else {
         if (!acceptedRandom) throw new Error("accepted random round was not materialized");
         registerRandomAliases(call.value.requests, acceptedRandom);
@@ -2869,6 +2894,7 @@ export class TruthEngine {
       const auditCountBeforeAttempt = transitionAudits.length;
       let candidateForRepair: unknown;
       let evaluatedProposal: TransitionProposal | undefined;
+      let transitionCorrelation: ReturnType<typeof modelInvocationCorrelation> | undefined;
       try {
         const contextStartedAt = Date.now();
         const sourceContext = truthContext("transition", transitionIssues);
@@ -2879,7 +2905,13 @@ export class TruthEngine {
           previousOutput: previousTransitionOutput, logicalInvocationId: transitionLogicalInvocationId, repairOf,
         }, transitionSourceContextHash, "truth_transition");
         const invocation = transitionAudits.reduce((count, audit) => count + audit.invocations.length, 0) + 1;
-        const identity = modelInvocationIdentity(
+        const pendingFusion = fusedTransition;
+        fusedTransition = null;
+        if (pendingFusion && fusionSourceHash() !== fusionSourceBinding) throw new ModelConfigurationError("fusion source changed before transition consumption");
+        const identity = pendingFusion ? {
+          modelInvocationId: pendingFusion.audit.invocations.at(-1)!.id,
+          modelInvocation: pendingFusion.audit.invocations.at(-1)!.ordinal,
+        } : modelInvocationIdentity(
           scope,
           "truth-transition",
           truthSubject,
@@ -2887,23 +2919,24 @@ export class TruthEngine {
         );
         const correlation = modelInvocationCorrelation(
           scope,
-          "truth-transition",
+          pendingFusion ? "truth-resolution" : "truth-transition",
           truthSubject,
           identity,
           {
-            logicalInvocationId: transitionLogicalInvocationId,
+            logicalInvocationId: pendingFusion ? modelInvocationLogicalId(scope, "truth-resolution", truthSubject) : transitionLogicalInvocationId,
             semanticRepairAttempt: transitionRepairs,
             ...(repairOf ? { parentInvocationId: repairOf, repairOf } : {}),
           },
         );
-        observe?.({
+        transitionCorrelation = correlation;
+        if (!pendingFusion) observe?.({
           event: "model.context.built",
           correlation,
           durationMs: Math.max(0, Date.now() - contextStartedAt),
           hashes: { context: contentHash(context) },
         });
         const prompt = promptBundle("truth-transition");
-        const generated = await this.provider.generateStructured({
+        const generated = pendingFusion ? { value: pendingFusion.draft, audit: pendingFusion.audit } : await this.provider.generateStructured({
           profileId: input.definition.modelProfiles.transition,
           workloadId: scope.workloadId,
           batchId: scope.batchId,
@@ -2922,7 +2955,9 @@ export class TruthEngine {
           schema: transitionProposalSchema,
         });
         transitionAudits.push(generated.audit);
-        setModelInvocationResultKind(generated.audit, "truth-transition_transition");
+        setModelInvocationResultKind(generated.audit, pendingFusion ? "truth-resolution_plan-and-transition" : "truth-transition_transition");
+        if (pendingFusion) observe?.({ event: "algorithm.plan_transition_fusion.consumed", correlation,
+          hashes: { source: fusionSourceBinding, transition: contentHash(pendingFusion.draft) }, counts: { savedTransitionCalls: 1 } });
         let transitionDraft = structuredClone(generated.value);
         candidateForRepair = structuredClone(transitionDraft);
         while (true) {
@@ -3168,7 +3203,7 @@ export class TruthEngine {
         observe?.({
           event: "model.semantic.accepted",
           correlation,
-          attributes: { resultKind: "truth-transition_transition" },
+          attributes: { resultKind: pendingFusion ? "truth-resolution_plan-and-transition" : "truth-transition_transition" },
         });
         return snapshot();
       } catch (error) {
@@ -3200,7 +3235,7 @@ export class TruthEngine {
         observe?.({
           event: "model.semantic.rejected",
           level: "warn",
-          correlation: modelInvocationCorrelation(scope, "truth-transition", truthSubject, {
+          correlation: transitionCorrelation ?? modelInvocationCorrelation(scope, "truth-transition", truthSubject, {
             modelInvocationId: invocation?.id,
             modelInvocation: invocation?.ordinal,
           }, {

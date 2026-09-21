@@ -120,12 +120,13 @@ type CachedTruthProjection = {
 /* A transition component may ask for the same full-world projection many
  * times in one step. Keep the immutable projection request-local and reuse it
  * across those calls; slot-specific task data is still built per request. */
-const fullTruthProjectionCache = new WeakMap<object, WeakMap<object, WeakMap<object, CachedTruthProjection>>>();
+const fullTruthProjectionCache = new WeakMap<object, WeakMap<object, WeakMap<object, Map<string, CachedTruthProjection>>>>();
 
 function cachedFullTruthProjection(
   state: SimulationState,
   actions: readonly AgentActionProposal[],
   definition: WorldDefinition,
+  referenceInputsHash: string,
   build: () => CachedTruthProjection,
 ): CachedTruthProjection {
   let byActions = fullTruthProjectionCache.get(state);
@@ -138,10 +139,15 @@ function cachedFullTruthProjection(
     byDefinition = new WeakMap();
     byActions.set(actions, byDefinition);
   }
-  const cached = byDefinition.get(definition);
+  let byReferences = byDefinition.get(definition);
+  if (!byReferences) {
+    byReferences = new Map();
+    byDefinition.set(definition, byReferences);
+  }
+  const cached = byReferences.get(referenceInputsHash);
   if (cached) return cached;
   const projection = build();
-  byDefinition.set(definition, projection);
+  byReferences.set(referenceInputsHash, projection);
   return projection;
 }
 
@@ -1704,7 +1710,10 @@ export function buildTruthContext(input: {
   const canReuseFullProjection = contextMode === "full" &&
     input.committedCheckRequests.length === 0 && input.committedRandomRequests.length === 0;
   const projection = canReuseFullProjection
-    ? cachedFullTruthProjection(availableState, availableActions, input.definition, () => {
+    ? cachedFullTruthProjection(availableState, availableActions, input.definition, contentHash({
+      observations: input.reactionRequests.map(request => request.stimulus), resolutionReceipts: input.resolutionReceipts,
+      includeHistoryActions: input.includeHistoryActions, mechanicContracts: input.mechanicContracts,
+    }), () => {
       const resolver = createTruthReferenceResolver({
         state: availableState,
         definition: input.definition,

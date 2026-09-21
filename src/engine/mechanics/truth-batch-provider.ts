@@ -27,10 +27,12 @@ import { PHYSICAL_BATCH_REPAIR_NOTICE } from "../prompts/repair-layout";
 import { MODEL_REFERENCE_CATALOG_VERSION, normalizeModelOutput } from "../contracts/model-context";
 import { factorSharedBatchContexts, SHARED_BATCH_ORDER_CODEC, withSharedContextReuse, type SharedBatchContext } from "./shared-batch-context";
 import { MECHANICAL_PLAN_REPAIR } from "./mechanical-plan-repair";
+import { fusedPlanTransitionSchema } from "./plan-transition-fusion";
 
 type BatchableSchemaName =
   | "truth_resolution_directive"
   | "truth_resolution_plan_commit"
+  | "truth_resolution_fused_commit"
   | "truth_resolution_plan_repair"
   | "truth_resolution_continuation"
   | "resolution_plan_verification"
@@ -120,6 +122,9 @@ function batchSchemaFor(
   scopedRepairs = false,
   logicalSchema?: BatchSchema,
 ): { name: string; schema: BatchSchema } | null {
+  if (schemaName === "truth_resolution_fused_commit") return { name: `${schemaName}_batch`, schema: z.strictObject({
+    slots: z.array(z.strictObject({ slot: z.number().int().nonnegative(), result: logicalSchema ?? fusedPlanTransitionSchema })),
+  }) };
   if (factored && schemaName === "action_grounding") {
     return { name: "action_grounding_batch", schema: z.strictObject({
       slots: z.array(z.strictObject({ slot: z.number().int().nonnegative(), result: logicalSchema ?? actionGroundingSchema })),
@@ -649,7 +654,7 @@ export class TruthBatchCoordinator implements StructuredModelProvider {
       const context = request.context as { task?: { resolutionScope?: { mode?: string } };
         state?: { actionSet?: { assigned?: unknown[] } } } | null;
       const assigned = context?.state?.actionSet?.assigned;
-      const initial = request.role === "truth-resolution" && request.schemaName === "truth_resolution_plan_commit" &&
+      const initial = request.role === "truth-resolution" && ["truth_resolution_plan_commit", "truth_resolution_fused_commit"].includes(request.schemaName) &&
         context?.task?.resolutionScope?.mode === "component" && repairBoundary(request) === "normal";
       return { entry, weight: initial && Array.isArray(assigned) ? assigned.length : 0 };
     });
