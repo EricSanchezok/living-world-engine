@@ -88,7 +88,7 @@ import {
   type ResolutionScope,
   type PromptValidationIssue,
 } from "../contracts/prompts";
-import { createReferenceResolver, ModelReferenceError, normalizeModelOutput } from "../contracts/model-context";
+import { createReferenceResolver, ModelReferenceError, normalizeModelOutput, referenceHandleFor } from "../contracts/model-context";
 import { promptBundle, type PromptBundleId } from "../prompts";
 import { logicalRepairContext } from "../prompts/logical-repair-context";
 import {
@@ -925,18 +925,21 @@ function materializeResolutionEffect(
   resolver: ReferenceResolver,
   state: SimulationState,
   includeMagnitude: true,
+  priorPlan?: ResolutionPlan,
 ): NonNullable<ResolutionPlan["primaryEffect"]>;
 function materializeResolutionEffect(
   effect: NonNullable<ResolutionPlanDraft["threatenedEffect"]> | null,
   resolver: ReferenceResolver,
   state: SimulationState,
   includeMagnitude: false,
+  priorPlan?: ResolutionPlan,
 ): NonNullable<ResolutionPlan["threatenedEffect"]>;
 function materializeResolutionEffect(
   effect: ModelResolutionEffect | null,
   resolver: ReferenceResolver,
   state: SimulationState,
   includeMagnitude: boolean,
+  priorPlan?: ResolutionPlan,
 ): ResolutionPlan["primaryEffect"] | ResolutionPlan["threatenedEffect"] {
   if (!effect) return null;
   const targetRef = effect.targetRef;
@@ -965,13 +968,23 @@ function materializeResolutionEffect(
     throw new Error("condition effects require an existing duration and condition profile");
   }
   const conditionProposal = isProposalReference(conditionRef);
-  const condition = conditionProposal ? null : resolver.resolve(conditionRef, "source");
+  // A repair may retain its own planned effect identity. It is not yet a
+  // world condition and must never enter the general evidence resolver.
+  const pending = !conditionProposal && priorPlan
+    ? [priorPlan.primaryEffect, priorPlan.secondaryEffect, priorPlan.threatenedEffect].find(candidate =>
+      candidate?.kind === "condition" && !state.truth.conditions[candidate.conditionId] &&
+      referenceHandleFor("condition", candidate.conditionId) === conditionRef)
+    : undefined;
+  if (pending && (pending.targetId !== target.engineId || pending.channel !== effect.channel)) {
+    throw new Error("a pending condition reference must retain its prior plan's subject and channel; declare a new condition proposal for a new effect");
+  }
+  const condition = conditionProposal || pending ? null : resolver.resolve(conditionRef, "source");
   const duration = resolver.resolve(durationRef, "mechanic");
   const conditionProfile = conditionProfileRef === null ? null : resolver.resolve(conditionProfileRef, "mechanic");
   if ((condition && condition.kind !== "condition") || duration.kind !== "mechanic" || (conditionProfile && conditionProfile.kind !== "mechanic")) {
     throw new Error("condition effect references have the wrong kinds");
   }
-  const conditionId = condition
+  const conditionId = pending?.kind === "condition" ? pending.conditionId : condition
     ? condition.engineId
     : `condition-${contentHash({ revision: state.revision, proposalKey: conditionProposal ? conditionRef.proposalKey : "unknown" }).slice(0, 32)}`;
   return {
@@ -990,6 +1003,8 @@ export interface ResolutionPlanMaterializationInput {
   groundings: readonly InteractionDependency[];
   identityOwner: string;
   drafts: readonly ResolutionPlanDraft[];
+  /** Accepted candidates under targeted repair, never evidence of world facts. */
+  priorPlans?: readonly ResolutionPlan[];
   allowedCauses: Record<CausalRef["kind"], Set<string>>;
 }
 
@@ -1030,6 +1045,7 @@ function materializeResolutionPlans(input: ResolutionPlanMaterializationInput): 
     if (!action) throw new Error(`resolution plan references unknown action ${actionId}`);
     const actor = input.state.agents[action.actorId];
     if (!actor) throw new Error(`resolution plan ${draft.proposalKey} references unknown action actor ${action.actorId}`);
+    const priorPlan = input.priorPlans?.find(plan => plan.actionId === actionId);
     // The action binding is authoritative for identity and intent.  These two
     // fields are repeated in the draft for provider readability, but accepting
     // a paraphrase (or a stale actor id) would let a model retarget a plan.
@@ -1078,9 +1094,9 @@ function materializeResolutionPlans(input: ResolutionPlanMaterializationInput): 
         explanation: factor.explanation,
         source: materializeResolutionSource(factor.source, resolver),
       })),
-      primaryEffect: materializeResolutionEffect(draft.primaryEffect, resolver, input.state, true),
-      secondaryEffect: materializeResolutionEffect(draft.secondaryEffect, resolver, input.state, true),
-      threatenedEffect: materializeResolutionEffect(draft.threatenedEffect, resolver, input.state, false),
+      primaryEffect: materializeResolutionEffect(draft.primaryEffect, resolver, input.state, true, priorPlan),
+      secondaryEffect: materializeResolutionEffect(draft.secondaryEffect, resolver, input.state, true, priorPlan),
+      threatenedEffect: materializeResolutionEffect(draft.threatenedEffect, resolver, input.state, false, priorPlan),
       actorRatingId: draft.actorRatingRef === null ? null : resolve(draft.actorRatingRef, "modifier", "rating"),
       mode: draft.mode,
       risk: draft.risk,
@@ -2783,6 +2799,7 @@ export class TruthEngine {
                   groundings,
                   identityOwner: input.identityOwner,
                   drafts: scopedDrafts,
+                  priorPlans: [plan],
                   allowedCauses: allowedForCommitments,
                 });
               },
@@ -2801,6 +2818,7 @@ export class TruthEngine {
                 ? result.value.plans.filter((draft) => draftActionId(draft) === plan.actionId)
                 : [],
               allowedCauses: allowedForCommitments,
+              priorPlans: [plan],
             });
             return { planId: plan.id, plans: repairedPlans, audit: result.audit };
           }));

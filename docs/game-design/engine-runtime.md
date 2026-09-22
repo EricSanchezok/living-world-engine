@@ -69,6 +69,8 @@ perception 只能请求 perception checks 或结束；reaction routing 只能选
 
 每份 ResolutionPlan 固定 actor、targets、goal、canonical grounded means、命名难度或对抗、至多一个 actor 自有 Rating、因素、风险、基础效果、一个 primary effect、可选的较弱 secondary effect 与失败威胁。[证据说明与机械来源](../specs/0171-evidence-annotation-source-ownership.md)区分 permission／risk 注释与独占的数值贡献和副效果授权，同时保留原始引用及 Condition 使用次数结算。普通环境难度 `trivial/easy/challenging/hard/extreme` 映射到 DC 5/10/15/20/25，对抗 DC 为 10 加目标 Rating；semantic edge/hindrance 相抵后只决定 advantage、normal 或 disadvantage。
 
+定向计划修复可以在同一行动、同一 subject 和 channel 的效果字段中沿用原候选计划的待定 Condition 引用；更换目标或通道必须提出新 Condition。待定效果尚未成为 canonical truth，不能用作 means、factors、difficulty 或 sourceRefs 的既有事实，也不能借用其他行动的待定编号。最终效果仍经过完整验证和原子提交。
+
 ResolutionPlan and its receipt adjudicate the current temporal interval. Trusted receipt effects are consumed exactly once in that step even when the complete Activity remains continuing. Whole-task completion follows temporal and causal evidence, independently of interval grade; planning cannot move future completion effects into the current interval. [Interval receipt settlement](../specs/0134-settle-interval-resolution-effects.md) owns the contract and regression requirements.
 
 The indexed planner can opt into [source-bound relation choices](../specs/0114-bind-planning-relation-choices.md). Their reversible representation retains the same canonical plan and validation boundary.

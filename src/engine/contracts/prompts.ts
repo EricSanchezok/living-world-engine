@@ -980,7 +980,7 @@ function resolutionPlanReferenceCandidates(
       kind: "plan" as const,
       engineId: plan.id,
       label: plan.goal,
-      meaning: "a committed resolution plan under review",
+      meaning: "a resolution plan under review or committed within this candidate, not a committed world change",
       allowedUses: ["target", "assertion"] as const,
       visibility: "role" as const,
       statePath: `candidatePlans.${plan.id}`,
@@ -992,7 +992,7 @@ function resolutionPlanReferenceCandidates(
           ? [effect.impactProfileId]
           : [effect.conditionProfileId, effect.durationProfileId].filter((id): id is string => id !== null);
         return [
-          { kind: effect.kind === "meter" ? "meter" as const : "condition" as const, engineId: effect.kind === "meter" ? effect.meterId : effect.conditionId, label: effect.label, meaning: "an effect channel named by a committed resolution plan", allowedUses: ["assertion", "source"] as const, visibility: "role" as const },
+          { kind: effect.kind === "meter" ? "meter" as const : "condition" as const, engineId: effect.kind === "meter" ? effect.meterId : effect.conditionId, label: effect.label, meaning: "a planned effect channel; this reference alone does not establish a condition in canonical truth", allowedUses: ["assertion", "source"] as const, visibility: "role" as const },
           ...profileIds.map((id) => ({ kind: "mechanic" as const, engineId: id, label: id, meaning: "an authored mechanic profile used by a committed resolution plan", allowedUses: ["mechanic", "source"] as const, visibility: "role" as const })),
         ];
       }),
@@ -1788,7 +1788,10 @@ export function buildTruthContext(input: {
         perceptionTargets: projectPerceptionTargets(input.perceptionTargets, input.state, availableActions, referenceResolver),
       } : {}),
     },
-    constraints: [...input.issues.map((issue) => issue.message), ...(input.temporalEvidence ? [ACTIVITY_TEMPORAL_NOTICE] : []), ...(factEvidence ? [RESOLUTION_FACT_EVIDENCE_NOTICE] : [])],
+    constraints: [...input.issues.map((issue) => issue.message), ...(input.temporalEvidence ? [ACTIVITY_TEMPORAL_NOTICE] : []), ...(factEvidence ? [RESOLUTION_FACT_EVIDENCE_NOTICE] : []),
+      ...(stage === "resolution" && input.candidateResolutionPlans?.length ? [
+        "A targeted repair may retain a pending conditionRef only in an effect of the same action, with the same subject and channel as its prior candidate plan. A different effect requires a new proposal. Pending effects are not existing truth and cannot support means, factors, difficulty or sourceRefs.",
+      ] : [])],
     stage,
     resolutionScope: projectResolutionScope(input.resolutionScope, referenceResolver),
     ...(factEvidence ? { planFactEvidence: { contract: RESOLUTION_FACT_EVIDENCE,
