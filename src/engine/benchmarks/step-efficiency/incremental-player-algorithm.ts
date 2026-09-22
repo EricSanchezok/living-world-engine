@@ -10,9 +10,10 @@ import { AGENT_INTENT_CONTROL, agentIntentControlRequest, type IntentCognitionSc
 import { incrementalIntentSelector, INTENT_GUARD_VERSION } from "./incremental-intent-execution";
 import { PLAN_TRANSITION_FUSION } from "../../mechanics/plan-transition-fusion";
 import type { EagerReferenceComponents } from "../../algorithms/eager-reference/eager-reference";
+import { OBSERVATION_ACTION_DICTIONARY, observationActionDictionaryRequest } from "./observation-action-dictionary";
 
 const config = { cognition: AGENT_INTENT_CONTROL, guard: INTENT_GUARD_VERSION, execution: "persistent-frontier-groups-v1",
-  planningPartition: "ready-wave-work-v1" };
+  planningPartition: "ready-wave-work-v1", observation: OBSERVATION_ACTION_DICTIONARY };
 function foundation(fusion = false) {
   const base = localPlanRepairAlgorithmRef(), truth = base.children.truthResolution!;
   const batching = truth.children.batching!;
@@ -24,7 +25,7 @@ function foundation(fusion = false) {
   } });
 }
 export function incrementalPlayerAlgorithmRef(fusion = false) {
-  return defineAlgorithmRef({ role: "world-execution", id: fusion ? "fused-player-diagnostic" : "incremental-player-diagnostic", version: fusion ? "1" : "2",
+  return defineAlgorithmRef({ role: "world-execution", id: fusion ? "fused-player-diagnostic" : "incremental-player-diagnostic", version: fusion ? "2" : "3",
     contractVersion: WORLD_EXECUTION_CONTRACT_VERSION, config: { ...config, ...(fusion ? { planTransitionFusion: PLAN_TRANSITION_FUSION } : {}) }, children: foundation(fusion).children });
 }
 
@@ -37,7 +38,8 @@ export function createIncrementalPlayerAlgorithm(context: Parameters<typeof crea
     assertProfilesAvailable: profiles => original.assertProfilesAvailable(profiles),
     generateStructured: request => {
       const scope = cognition.getStore();
-      return original.generateStructured(scope ? agentIntentControlRequest(request, scope, producerHash) : request);
+      const compacted = observationActionDictionaryRequest(request);
+      return original.generateStructured(scope ? agentIntentControlRequest(compacted, scope, producerHash) : compacted);
     } };
   const slots = context.ref.children.agentCognition!.children.batching!.config.maxSlots;
   if (typeof slots !== "number" || !Number.isSafeInteger(slots) || slots < 1) throw new Error("intent guard batch cardinality is not pinned");

@@ -21,6 +21,7 @@ import { actionCompilationPassagesForState } from "../../algorithms/eager-refere
 import { createActionCompilationRetrievalRuntimeProvider } from "../../../server/action-compilation-retrieval-runtime";
 import { AGENT_INTENT_CONTROL } from "./agent-intent-control";
 import { RecordingRuntimeObserver } from "../../runtime/observability";
+import { ACTION_DICTIONARY_CODEC, expandObservationActions } from "./observation-action-dictionary";
 
 function fixture(catalog = createTestModelCatalog(undefined, { maxInputBytes: 1_048_576 })) {
   const template = loadWorldTemplate(path.resolve("test/fixtures/open-world-script"));
@@ -144,18 +145,25 @@ it.each(["keep", "replace"] as const)("restores, commits and replays the diagnos
   const generate = provider.generateStructured.bind(provider);
   // Test the execution boundary with canonical fixtures; representation codecs
   // have independent wire tests. The joint envelope still passes its schema.
-  provider.generateStructured = request => request.promptVersion.includes(AGENT_INTENT_CONTROL) ? generate(request) : generate({
-    ...request, wireJsonSchema: undefined, preprocessOutput: value => {
-      const fill = (node: unknown): void => {
-        if (!node || typeof node !== "object") return;
-        if (Array.isArray(node)) { node.forEach(fill); return; }
-        const row = node as Record<string, unknown>;
-        if (row.kind === "commit_plans") for (const plan of row.plans as Array<Record<string, unknown>>) plan.additionalRandomness ??= "none";
-        Object.values(row).forEach(fill);
-      };
-      fill(value); return { value, symbolRepairs: [] };
-    },
-  });
+  provider.generateStructured = request => {
+    if (request.promptVersion.includes(AGENT_INTENT_CONTROL)) return generate(request);
+    const context = request.context as { state?: { codec?: string } };
+    if (request.schemaName === "observation_projection_batch") expect(context.state?.codec).toBe(ACTION_DICTIONARY_CODEC);
+    return generate({
+      ...request, context: context.state?.codec === ACTION_DICTIONARY_CODEC
+        ? { ...context, state: expandObservationActions(context.state) } : request.context,
+      wireJsonSchema: undefined, preprocessOutput: value => {
+        const fill = (node: unknown): void => {
+          if (!node || typeof node !== "object") return;
+          if (Array.isArray(node)) { node.forEach(fill); return; }
+          const row = node as Record<string, unknown>;
+          if (row.kind === "commit_plans") for (const plan of row.plans as Array<Record<string, unknown>>) plan.additionalRandomness ??= "none";
+          Object.values(row).forEach(fill);
+        };
+        fill(value); return { value, symbolRepairs: [] };
+      },
+    });
+  };
   const definition = fixture(provider.catalog), ref = executablePlayerAlgorithmRef();
   const encoder = { modelId: MULTILINGUAL_E5_BASE_ASSET.modelId, modelHash: MULTILINGUAL_E5_BASE_ASSET.directorySha256,
     dimensions: 2, encodeBatch: async (texts: readonly string[]) => texts.map(text => [text.length % 7, 1]) };

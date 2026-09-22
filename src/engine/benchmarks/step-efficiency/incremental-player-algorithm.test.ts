@@ -24,6 +24,7 @@ import { IntentExecutionCursor } from "./intent-execution-cursor";
 import type { ActionCompilationBatchDraft } from "../../contracts/llm-schemas";
 import type { SimulationState } from "../../contracts/model";
 import { expandSharedBatchContexts, isSharedBatchContext, type SharedBatchContext } from "../../mechanics/shared-batch-context";
+import { ACTION_DICTIONARY_CODEC, expandObservationActions } from "./observation-action-dictionary";
 
 function fusedDiagnosticOutput(profileId: string, context: unknown): unknown {
   const state = (context as { state: { stageContexts: SharedBatchContext } }).state;
@@ -42,7 +43,11 @@ function canonicalDiagnosticOutputs(provider: ScriptedModelProvider) {
   const generate = provider.generateStructured.bind(provider);
   provider.generateStructured = request => {
     if (request.promptVersion.includes(AGENT_INTENT_CONTROL) || request.schemaName === "intent_guard_batch") return generate(request);
-    return generate({ ...request, wireJsonSchema: undefined, preprocessOutput: value => {
+    const context = request.context as { state?: { codec?: string } };
+    if (request.schemaName === "observation_projection_batch") expect(context.state?.codec).toBe(ACTION_DICTIONARY_CODEC);
+    return generate({ ...request, context: context.state?.codec === ACTION_DICTIONARY_CODEC
+      ? { ...context, state: expandObservationActions(context.state) } : request.context,
+      wireJsonSchema: undefined, preprocessOutput: value => {
       const fill = (node: unknown): void => {
         if (!node || typeof node !== "object") return;
         if (Array.isArray(node)) { node.forEach(fill); return; }

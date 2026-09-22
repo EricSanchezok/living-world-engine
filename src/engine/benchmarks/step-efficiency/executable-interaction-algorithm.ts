@@ -20,7 +20,7 @@ const storageKey = "executableInteractions";
 type Bindings = Record<string, BoundInteractionProgram>;
 export function executablePlayerAlgorithmRef() {
   const base = incrementalPlayerAlgorithmRef();
-  return defineAlgorithmRef({ ...base, id: "executable-player-diagnostic", version: "2",
+  return defineAlgorithmRef({ ...base, id: "executable-player-diagnostic", version: "3",
     config: { ...base.config, executableInteraction: EXECUTABLE_INTERACTION_VERSION } });
 }
 
