@@ -19,6 +19,8 @@ Source compilation screening uses all three complete 49-subject development sour
 
 Before inference, freeze code, model metadata, disabled thinking, source hashes, prompts, request limits, category inputs and acceptance contracts. Count every physical request, rejection, repair, fallback and discarded candidate. Useful feedback and goal completion require actual source-supported results; generic success prose is insufficient. Report unexecuted measurements as missing, never zero.
 
+Operational recovery may resume a drained arm only after a contiguous prefix of durably recorded inputs, with the current state matching the last checkpoint and no live player run. Completed and failed inputs are immutable and never resent. An unknown-usage request follows the explicit evidence-review and full-reservation quarantine rule in [0026](0026-full-step-efficiency-experiment.md); quarantined input trials stay closed and only distinct later inputs may proceed. Administrative runner recovery retains the frozen producer and request protocol, rejects changes to engine, prompt, model, world or task bindings, and records both code revisions. Report recovery downtime separately from measured player-input waits.
+
 ## Plan
 
 Implement a bounded program and deterministic guard/execution module, then integrate joint compilation and durable bindings through an opt-in diagnostic root. Exercise real materialization and commits with positive and adversarial fixtures. Freeze and run source screening, then full WorldHost episodes; preserve evidence and diagnose the first failing boundary rather than only latency.

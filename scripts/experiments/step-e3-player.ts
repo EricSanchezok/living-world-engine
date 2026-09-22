@@ -1,4 +1,5 @@
 import { cpSync, existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { stringify } from "yaml";
@@ -56,6 +57,48 @@ export const E3_TASKS = [
 const limits = { maxActionDispatchMs: 600_000, maxCommitsPerLease: 6, pollMs: 250 };
 type Arm = "B" | "C";
 interface Pair { id: string; category: number; seed: number; order: Arm[]; phase: "canary" | "confirmation" }
+interface ActionRow {
+  index: number; result: PlayerFeedbackResult;
+  beforeBudget: ReturnType<typeof e3Environment>["budget"]["summary"];
+  afterBudget: ReturnType<typeof e3Environment>["budget"]["summary"];
+  stateHash: string; revision: number; elapsedSeconds: number; quality: string;
+}
+
+/** Resume only after a completely recorded input; never redraw an interrupted input. */
+export function completedE3Inputs(directory: string, pairId: string, texts: readonly string[],
+  currentStateHash: string, runStatuses: readonly string[]): ActionRow[] {
+  if (runStatuses.some(status => ["queued", "running", "pausing", "awaiting-reaction"].includes(status))) {
+    throw new Error("Cannot resume while a persisted player run remains live");
+  }
+  const rows: ActionRow[] = [];
+  let missing = false;
+  for (const [index, text] of texts.entries()) {
+    const file = path.join(directory, `input-${index + 1}.json`);
+    if (!existsSync(file)) { missing = true; continue; }
+    if (missing) throw new Error("Recorded player inputs are not a contiguous prefix");
+    const row = json<ActionRow>(file);
+    if (row.index !== index || row.result.submissionId !== `step-e3-${pairId}-${index + 1}` ||
+      row.result.text !== text || !["completed", "awaiting-decision", "stopped"].includes(row.result.status) ||
+      typeof row.result.endedElapsedMs !== "number" || !Number.isFinite(row.result.endedElapsedMs) ||
+      row.result.endedElapsedMs < 0 || !row.stateHash ||
+      (index > 0 && row.result.baseRevision !== rows[index - 1]!.revision)) {
+      throw new Error("Recorded player input binding changed");
+    }
+    rows.push(row);
+  }
+  if (!rows.length || rows.at(-1)!.stateHash !== currentStateHash) {
+    throw new Error("Incomplete arm lacks a settled input matching its current world state");
+  }
+  return rows;
+}
+
+/** Administrative recovery may change; the frozen engine, prompts and protocol may not. */
+export function assertE3ContinuationPaths(paths: readonly string[]) {
+  const allowed = new Set(["scripts/experiments/step-e3-player.ts", "scripts/experiments/step-e3-player.test.ts"]);
+  if (paths.some(file => !allowed.has(file) && !/^docs\/.*\.md$/u.test(file))) {
+    throw new Error("Frozen E3 producer changed outside administrative recovery");
+  }
+}
 function pairs(): Pair[] {
   return [...Array.from({ length: 3 }, (_, i): Pair => ({ id: `canary-${i + 1}`, category: i, seed: 20260922 + i,
     order: i % 2 ? ["C", "B"] : ["B", "C"], phase: "canary" })),
@@ -93,8 +136,12 @@ export async function e3Player(mode: "prepare" | "canary" | "confirmation", root
     return;
   }
   const manifest = json<typeof binding & { worldHash: string; templateHash: string }>(path.join(root, "P2-manifest.json"));
-  if (contentHash({ ...manifest, worldHash: undefined, templateHash: undefined }) !== contentHash(binding) ||
+  if (manifest.revision !== revision) {
+    assertE3ContinuationPaths(execFileSync("git", ["diff", "--name-only", manifest.revision, revision], { encoding: "utf8" }).trim().split("\n").filter(Boolean));
+  }
+  if (contentHash({ ...manifest, worldHash: undefined, templateHash: undefined }) !== contentHash({ ...binding, revision: manifest.revision }) ||
     contentHash(loadWorldTemplate(worldPath)) !== manifest.templateHash) throw new Error("Frozen P2 binding changed");
+  if (env.budget.summary.blockingUnknown.length) throw new Error("Review and retain unknown reservations before continuing distinct trials");
   if (mode === "confirmation" && !existsSync(path.join(root, "P2-canary-result.json"))) throw new Error("Canary accounting must complete before confirmation");
   const start = performance.now();
   let current = "starting", actionProgress: PlayerFeedbackResult | undefined;
@@ -119,7 +166,7 @@ export async function e3Player(mode: "prepare" | "canary" | "confirmation", root
       const resources = () => createActionCompilationRetrievalRuntimeProvider();
       if (!existsSync(initialPath)) {
         if (existsSync(bootstrapPath)) throw new Error("Incomplete fresh initialization retained; do not silently redraw it");
-        current = `${pair.id}-bootstrap`; localStop = undefined; env.beginTrial(`trajectory-${current}`);
+        current = `${pair.id}-bootstrap`; localStop = undefined; actionProgress = undefined; env.beginTrial(`trajectory-${current}`);
         const database = new LocalDatabase(bootstrapPath, { heartbeat: false });
         const host = new WorldHost({ repository, store: database, ledger: database, provider: env.provider,
           algorithmRegistry: registerIntegratedPlayerAlgorithm(), defaultAlgorithmRef: refs.B, actionCompilationRetrievalProvider: resources() });
@@ -151,15 +198,27 @@ export async function e3Player(mode: "prepare" | "canary" | "confirmation", root
       for (const arm of pair.order) {
         const armRoot = path.join(directory, arm), resultPath = path.join(armRoot, "result.json");
         if (existsSync(resultPath)) { rows.push(json(resultPath)); continue; }
-        if (existsSync(armRoot)) throw new Error("Incomplete arm retained; inspect its durable run before resuming");
-        mkdirSync(armRoot);
-        cpSync(bootstrapPath, path.join(armRoot, "world.sqlite"));
+        const resuming = existsSync(armRoot);
+        if (!resuming) {
+          mkdirSync(armRoot);
+          cpSync(bootstrapPath, path.join(armRoot, "world.sqlite"));
+        }
         const database = new LocalDatabase(path.join(armRoot, "world.sqlite"), { heartbeat: false });
         const saved = database.readInstance(initial.id);
-        const sharedHash = contentHash(saved.document.state);
-        if (sharedHash !== contentHash(initial.state)) throw new Error("Pair bootstrap differs before dispatch");
-        const document = { ...saved.document, executionAlgorithm: refs[arm] };
-        database.compareAndSwapInstance(initial.id, saved.generation, document);
+        const sharedHash = contentHash(initial.state);
+        if (!resuming && contentHash(saved.document.state) !== sharedHash) throw new Error("Pair bootstrap differs before dispatch");
+        if (resuming && contentHash(saved.document.executionAlgorithm) !== contentHash(refs[arm])) throw new Error("Resumed arm producer differs");
+        const actions: ActionRow[] = resuming ? completedE3Inputs(armRoot, pair.id, manifest.tasks[pair.category]!.inputs,
+          contentHash(saved.document.state), Object.values(saved.document.runs).map(run => run.status)) : [];
+        const resumedInputs = actions.length;
+        const measuredBeforeResumeMs = actions.reduce((sum, row) => sum + row.result.endedElapsedMs!, 0);
+        const document = resuming ? saved.document : { ...saved.document, executionAlgorithm: refs[arm] };
+        if (!resuming) database.compareAndSwapInstance(initial.id, saved.generation, document);
+        if (resuming) save(path.join(armRoot, `resume-after-${resumedInputs}.json`), {
+          resumedInputs, currentStateHash: contentHash(document.state), frozenRevision: manifest.revision,
+          runnerRevision: revision, resumedAt: new Date().toISOString(), budget: env.budget.summary,
+          policy: "Retain every prior input and continue only the next preregistered input. No model or world changes.",
+        });
         const retrieval = resources(), algorithmRegistry = registerIntegratedPlayerAlgorithm();
         const algorithm = algorithmRegistry.create(refs[arm], { provider: env.provider, resources: {
           resolve: <T,>(kind: string) => kind === "candidate-selection-runtime" ? retrieval.runtime(refs[arm]) as T : undefined,
@@ -168,9 +227,10 @@ export async function e3Player(mode: "prepare" | "canary" | "confirmation", root
         const host = new WorldHost({ repository, store: database, ledger: database, provider: env.provider, algorithmRegistry,
           defaultAlgorithmRef: refs[arm], actionCompilationRetrievalProvider: retrieval,
           runLeaseMaxCommits: limits.maxCommitsPerLease, runLeaseMaxWallTimeMs: limits.maxActionDispatchMs });
-        const actions: unknown[] = [], armStart = performance.now(), beforeBudget = env.budget.summary;
+        const armStart = performance.now(), beforeBudget = actions[0]?.beforeBudget ?? env.budget.summary;
         try {
           for (const [index, text] of manifest.tasks[pair.category]!.inputs.entries()) {
+            if (index < resumedInputs) continue;
             localStop = undefined; actionProgress = undefined; current = `${pair.id}-${arm}-${index + 1}`;
             env.beginTrial(`trajectory-${current}`); progress();
             const before = env.budget.summary;
@@ -193,13 +253,18 @@ export async function e3Player(mode: "prepare" | "canary" | "confirmation", root
             save(path.join(armRoot, `input-${index + 1}.json`), row); actions.push(row); progress();
             if (env.stopReason()) throw new Error(env.stopReason());
           }
-          const result = { pair, arm, initialStateHash: sharedHash, actions, elapsedMs: performance.now() - armStart,
+          const result = { pair, arm, initialStateHash: sharedHash, actions, elapsedMs: measuredBeforeResumeMs + performance.now() - armStart,
+            measuredInputElapsedMs: actions.reduce((sum, row) => sum + row.result.endedElapsedMs!, 0),
+            frozenRevision: manifest.revision, runnerRevision: revision, resumedInputs,
+            elapsedBasis: resuming ? "Recorded input waits plus resumed arm runtime; operational recovery gap excluded" : "Continuous arm runtime",
             beforeBudget, afterBudget: env.budget.summary, doctor: database.debugDoctor() };
           save(resultPath, result); save(path.join(armRoot, "final.json"), database.readInstance(initial.id).document); rows.push(result);
         } finally { await env.drain(); database.close(); }
       }
     }
-    env.checkpoint(`P2-${mode}-result.json`, { complete: true, rows, elapsedMs: performance.now() - start });
+    env.checkpoint(`P2-${mode}-result.json`, { complete: true, rows, elapsedMs: performance.now() - start,
+      elapsedBasis: "This runner invocation; use immutable per-input waits for a phase resumed after an operational stop",
+      frozenRevision: manifest.revision, runnerRevision: revision });
   } finally { clearInterval(timer); process.off("SIGINT", stop); process.off("SIGTERM", stop); progress(); }
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
