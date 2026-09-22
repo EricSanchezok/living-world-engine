@@ -3,7 +3,8 @@ import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { expect, it } from "vitest";
 import { buildWorldDefinition, loadWorldTemplate } from "../../../script/world-loader";
-import { createTestModelCatalog, deterministicModelOutput, ScriptedModelProvider } from "../../testing/model-provider";
+import { createTestModelCatalog, deterministicActionCompilationBatch,
+  deterministicModelOutput, deterministicOnsetReports, ScriptedModelProvider } from "../../testing/model-provider";
 import { contentHash } from "../../models/model-audit";
 import { createActivity, type TemporalPlan } from "../../mechanics/temporal";
 import type { AgentActionProposal, SimulationState } from "../../contracts/model";
@@ -114,10 +115,20 @@ it("resolves a conserved transfer through the real rule package and rejects hidd
   expect(executeInteractionComponent(input, { [action.id]: bindInteractionProgram(input.state, action, program) }).resolution.proposal.events[0]!.description).toContain("仿制品");
 });
 
-it("commits through the diagnostic root after restoring a serialized preparation and replays without duplicate effects", async () => {
+it.each(["keep", "replace"] as const)("restores, commits and replays the diagnostic root with %s reactions without duplicate effects", async reaction => {
   const root = mkdtempSync(path.join(tmpdir(), "executable-interaction-"));
   const provider = new ScriptedModelProvider(request => {
-    const output = deterministicModelOutput(request.profileId, request.context);
+    if (request.role === "truth-perception") return { kind: "done", reports: deterministicOnsetReports(request.context) };
+    if (request.role === "agent-reaction") return reaction === "keep" ? { kind: "keep" } : {
+      kind: "replace", replacementAction: { rawText: "我再次对自己说：钥匙是真的。", goal: "说出这句话", means: null,
+        targetHandles: ["ref:local_entity:self"] },
+    };
+    const output = request.role === "action-compilation"
+      ? deterministicActionCompilationBatch(request.profileId, request.context, compilation => {
+        const candidates = (request.context as { referenceCatalog: { candidates: Array<{ kind: string; candidateKey: string }> } }).referenceCatalog.candidates;
+        compilation.interactionDependency.audienceAgentRefs = candidates.filter(candidate => candidate.kind === "agent")
+          .map(candidate => candidate.candidateKey as typeof compilation.interactionDependency.audienceAgentRefs[number]);
+      }) : deterministicModelOutput(request.profileId, request.context);
     if (request.promptVersion.includes(AGENT_INTENT_CONTROL)) {
       for (const slot of (output as { slots: Array<{ nextActionIntent: unknown }> }).slots) slot.nextActionIntent = {
         kind: "replace", program: { kind: "attempt", text: "我对自己说：钥匙是真的。", targetHandles: ["ref:local_entity:self"] },
@@ -163,21 +174,26 @@ it("commits through the diagnostic root after restoring a serialized preparation
     const scope = { workloadId: "executable-test", batchId: "executable-test", observer };
     const prepared = await engine.prepareStep(roster, request, scope);
     expect(Object.keys(prepared.executionState!.data.executableInteractions!)).toHaveLength(2);
+    expect(prepared.reactionRequests).toHaveLength(2);
+    const frozenHash = contentHash(prepared);
     const restarted = new SimulationEngine(definition, algorithm(), source);
     const result = await restarted.completePreparedStep(roster, request, JSON.parse(JSON.stringify(prepared)), [], scope);
+    expect(result.state.executionState).toEqual(prepared.executionState);
+    expect(contentHash(prepared)).toBe(frozenHash);
+    expect(result.committed.reactionDecisions.every(decision => decision.kind === reaction)).toBe(true);
     expect(observer.snapshot().some(e => e.event === "algorithm.executable_interaction.executed")).toBe(true);
     expect(observer.snapshot().filter(e => e.event === "algorithm.executable_interaction.fallback")).toEqual([]);
     expect(result.state.truth.events.filter(e => e.description.includes("钥匙是真的"))).toHaveLength(2);
     expect(result.state.truth.facts["key-authenticity"]!.value).toEqual({ kind: "text", value: "fake" });
     expect(contentHash(replaySimulationState(result.state))).toBe(contentHash(result.state));
-    expect(provider.requests.filter(r => r.role === "action-compilation")).toHaveLength(1);
+    expect(provider.requests.filter(r => r.role === "action-compilation")).toHaveLength(reaction === "replace" ? 2 : 1);
     expect(provider.requests.some(r => r.schemaName.startsWith("causal_verification"))).toBe(true);
     const committed = contentHash(restarted.snapshot);
     await expect(restarted.completePreparedStep(roster, request, prepared, [], scope)).rejects.toThrow();
     expect(contentHash(restarted.snapshot)).toBe(committed);
     const next = await restarted.step(roster, { ...request, expectedRevision: result.state.revision }, scope);
     expect(next.state.truth.events.filter(e => e.description.includes("钥匙是真的"))).toHaveLength(4);
-    expect(provider.requests.filter(r => r.role === "action-compilation")).toHaveLength(2);
+    expect(provider.requests.filter(r => r.role === "action-compilation")).toHaveLength(reaction === "replace" ? 4 : 2);
     expect(contentHash(replaySimulationState(next.state))).toBe(contentHash(next.state));
   } finally { rmSync(root, { recursive: true, force: true }); }
 }, 30_000);

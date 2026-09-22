@@ -20,7 +20,7 @@ const storageKey = "executableInteractions";
 type Bindings = Record<string, BoundInteractionProgram>;
 export function executablePlayerAlgorithmRef() {
   const base = incrementalPlayerAlgorithmRef();
-  return defineAlgorithmRef({ ...base, id: "executable-player-diagnostic", version: "1",
+  return defineAlgorithmRef({ ...base, id: "executable-player-diagnostic", version: "2",
     config: { ...base.config, executableInteraction: EXECUTABLE_INTERACTION_VERSION } });
 }
 
@@ -172,10 +172,10 @@ export function registerExecutablePlayerAlgorithm(registry: WorldExecutionAlgori
             return { ...prepared, executionState: writeBindings(prepared.executionState, bindings) };
           });
         },
-        completeStep: (input, preparation, reactions, scope) => local.run({ bindings: readBindings(preparation.executionState) }, async () => {
-          const candidate = await base.completeStep(input, preparation, reactions, scope);
-          return { ...candidate, executionState: writeBindings(candidate.executionState, current()) };
-        }),
+        // Reaction compilation can replace bindings for this completion only.
+        // The preparation's execution journal is already frozen by the kernel.
+        completeStep: (input, preparation, reactions, scope) => local.run({ bindings: readBindings(preparation.executionState) },
+          () => base.completeStep(input, preparation, reactions, scope)),
       };
     },
   });
