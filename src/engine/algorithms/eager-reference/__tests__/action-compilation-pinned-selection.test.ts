@@ -11,6 +11,7 @@ import { compileActions } from "../action-compiler";
 import { createActionCompilationRetrievalRuntime } from "../candidate-retrieval/runtime";
 import { PinnedActionCompilationSelection } from "../candidate-retrieval/pinned-selection";
 import type { CandidateSelectionResult } from "../../roles";
+import { createActivity, type TemporalPlan } from "../../../mechanics/temporal";
 
 type Context = { task: { slots: Array<{ slot: number; action: { rawText: string }; actionReferences: { actionCandidateKey: string } }> };
   referenceCatalog: { candidates: Array<{ candidateKey: string; kind: string; label: string; scope: { kind: "shared" | "slot"; slot?: number } }> } } & Record<string, unknown>;
@@ -40,6 +41,33 @@ function setup() {
 }
 
 describe("production compiler root candidate selection", () => {
+  it("preserves authored profile details when a repair drops another actor's activity", async () => {
+    const base = setup(), oldAction = { ...actions[0]!, id: "ongoing-keeper" };
+    const plan: TemporalPlan = { id: "ongoing-plan", actionId: oldAction.id, actorId: "keeper",
+      profileId: "brief-action", mode: "fixed", description: "Existing keeper activity",
+      basis: { kind: "profile", profileId: "brief-action" }, startsAtSeconds: 0,
+      completionAtSeconds: 10, checkpointSeconds: 10, progress: null, stages: [], continuationAssertions: [],
+      interruptible: true, resourceClaims: [{ resourceId: "foreground", amount: 1 }],
+      causes: [{ kind: "action", id: oldAction.id }] };
+    base.state.truth.activities["ongoing-keeper"] = createActivity({ id: "ongoing-keeper", plan, sourceAction: oldAction });
+    const profileKey = actionCompilationCandidateKeyForHandle(referenceHandleFor("temporal_profile", "brief-action"));
+    const provider = new ScriptedModelProvider(({ profileId, context }) => {
+      const current = context as Context;
+      const profile = current.referenceCatalog.candidates.find(candidate => candidate.candidateKey === profileKey);
+      expect(profile).toMatchObject({ details: { kind: "fixed", name: base.state.truth.mechanics.temporalProfiles["brief-action"]!.name } });
+      return deterministicActionCompilationBatch(profileId, context, (compilation, slot) => {
+        if (provider.requests.length === 1 && slot.slot === 1) compilation.temporalPlan.profileRef = referenceHandleFor("temporal_profile", "missing");
+      });
+    });
+    const before = contentHash(base.state);
+    const result = await compileActions(provider, base.state, actions, { ...base.scope, actionCompilationRetrieval: base.runtime }, "truth-engine", 12);
+    expect(result.compilations).toHaveLength(2);
+    expect(result.metrics.repairCalls).toBe(1);
+    expect(provider.requests).toHaveLength(2);
+    expect((provider.requests[1]!.context as Context).task.slots).toHaveLength(1);
+    expect(contentHash(base.state)).toBe(before);
+  });
+
   it.each([false, true])("limits repair suggestions to the failed action's original shortlist (schema localization: %s)", async (schemaFailure) => {
     const base = setup();
     let suggested: string[] = [];

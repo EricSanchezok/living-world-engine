@@ -99,26 +99,12 @@ function mergedCandidates(context: JsonRecord): CandidateRecord[] {
   return [...byHandle.values()].sort((left, right) => left.candidateKey.localeCompare(right.candidateKey));
 }
 
-function registerDetails(details: Map<string, unknown>, value: unknown): void {
+function registerDetails(details: Map<string, unknown>, value: unknown, ownerKey?: "profileRef" | "activityRef"): void {
   const item = record(value);
   if (!item) return;
-  const reference = typeof item.ref === "string"
-    ? item.ref
-    : typeof item.entityRef === "string"
-      ? item.entityRef
-      : typeof item.profileRef === "string"
-        ? item.profileRef
-        : typeof item.activityRef === "string"
-          ? item.activityRef
-          : null;
-  if (!reference) return;
-  const referenceKey = typeof item.ref === "string"
-    ? "ref"
-    : typeof item.entityRef === "string"
-      ? "entityRef"
-      : typeof item.profileRef === "string"
-        ? "profileRef"
-        : "activityRef";
+  const referenceKey = ownerKey ?? (typeof item.ref === "string" ? "ref" : "entityRef");
+  const reference = item[referenceKey];
+  if (typeof reference !== "string") return;
   details.set(reference, withoutKeys(item, [referenceKey]));
 }
 
@@ -129,10 +115,10 @@ function completeDetails(context: JsonRecord, candidates: readonly CandidateReco
   const canonicalTruth = record(state?.canonicalTruth);
   if (canonicalTruth) Object.values(canonicalTruth).flatMap(array).forEach((value) => registerDetails(details, value));
   array(state?.actors).forEach((value) => registerDetails(details, value));
-  array(state?.temporalProfiles).forEach((value) => registerDetails(details, value));
+  array(state?.temporalProfiles).forEach((value) => registerDetails(details, value, "profileRef"));
   array(state?.slots).forEach((slotValue) => {
     const slot = record(slotValue);
-    array(slot?.existingActivities).forEach((value) => registerDetails(details, value));
+    array(slot?.existingActivities).forEach((value) => registerDetails(details, value, "activityRef"));
   });
   const world = candidates.find((entry) => entry.kind === "world");
   if (world && typeof state?.currentElapsedSeconds === "number") {
