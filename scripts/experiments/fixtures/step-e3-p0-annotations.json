@@ -1,0 +1,2544 @@
+{
+  "version": 1,
+  "sourceEvidenceHash": "207eed35e0cba767c07b4b47ac831d97b7ab785ec5c392f7da637b28fef85594",
+  "policy": "W0 complete current-boundary work; preservation, arithmetic, and quoted intent alone are not executable coverage. Manual source review, not a keyword classifier.",
+  "annotations": [
+    {
+      "actorId": "archon-devers",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "63bed4a3da47a9be6894a7704cf03cf5cb4320175563776bb41900664b5997fd",
+      "clauses": [
+        {
+          "text": "在晨间点名后召集值勤军官，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。点名是前提；军官不是自动绑定的统一心智，昨日明细需核查。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "形成实际召集、逐人核查结果和重申记录；处罚授权与私人交易的否定约束保留。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "逐一核对过去一昼夜的疲劳、伤病、值勤与武器状况，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。点名是前提；军官不是自动绑定的统一心智，昨日明细需核查。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "形成实际召集、逐人核查结果和重申记录；处罚授权与私人交易的否定约束保留。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "重申处罚与豁免必须由我和记录册承认，不由私人交易决定。",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。点名是前提；军官不是自动绑定的统一心智，昨日明细需核查。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "形成实际召集、逐人核查结果和重申记录；处罚授权与私人交易的否定约束保留。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "autarch-elana",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "129b74b8a0bf5206161f006b871c933a77d5c068c404513371b2e6c955741e1c",
+      "clauses": [
+        {
+          "text": "我派人分别召 Rinisar 与 Kinkaris 的传信者到总部当面说明：",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。召见经传信者发生；路线、时点、数额、风险和凭据是请求的信息，不是已有答复。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "记录派遣与真实接触，收到逐项陈述及凭据才记核对完成。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "不是责备，而是要求他们把最近短报里省略的路线、时点、数额与需要总部承担的风险逐项补齐，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。召见经传信者发生；路线、时点、数额、风险和凭据是请求的信息，不是已有答复。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "记录派遣与真实接触，收到逐项陈述及凭据才记核对完成。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "并带来可供核对的凭据。",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。召见经传信者发生；路线、时点、数额、风险和凭据是请求的信息，不是已有答复。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "记录派遣与真实接触，收到逐项陈述及凭据才记核对完成。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "azure-king",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "e58e9ce6b63d950d3ba23651f2a44018351a9c257956486681471385ee488f6e",
+      "clauses": [
+        {
+          "text": "我前往月贝采集者们常出发的礁脊，",
+          "coverage": "fallback",
+          "work": "移动/到场",
+          "prerequisites": "起终点、路线、移动规则、实际持续时间和接触成立。须先前往礁脊；五名 mermaid 属群体成员，不能由群体实体伪造五份心智。",
+          "residual": "准备或提出前往不证明到达；不能用同一 placement 假定接触",
+          "expected": "移动和接触有证据；分人记录航程安排及实际复述，不能把提出问题当作复述。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "向带队的五名 mermaid 当面确认下一次满月采集的航程：谁在何处下潜、由谁接应、返航时若少人该向哪里报信，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。须先前往礁脊；五名 mermaid 属群体成员，不能由群体实体伪造五份心智。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "移动和接触有证据；分人记录航程安排及实际复述，不能把提出问题当作复述。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "并让他们复述各自理解的失联处置办法。",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。须先前往礁脊；五名 mermaid 属群体成员，不能由群体实体伪造五份心智。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "移动和接触有证据；分人记录航程安排及实际复述，不能把提出问题当作复述。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "bedewald-atheling",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "1227b2735a75b1df1a77e370474f182756c87c4d861a812701c3ee9f4ef91ff4",
+      "clauses": [
+        {
+          "text": "我按现有轮值派出下一班巡逻，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。巡逻队执行与往返、爪迹新旧、向南移动属于未确定观察。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "派遣与巡逻进度可继续；交付具体地点及现场证据才算调查完成。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "沿既定观察点重新核对 Hydra 洞穴以南的爪迹、足迹新旧与是否有向南移动迹象，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。巡逻队执行与往返、爪迹新旧、向南移动属于未确定观察。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "派遣与巡逻进度可继续；交付具体地点及现场证据才算调查完成。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "要求带回沿线的具体位置而不是笼统结论。",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。巡逻队执行与往返、爪迹新旧、向南移动属于未确定观察。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "派遣与巡逻进度可继续；交付具体地点及现场证据才算调查完成。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "canon-brannoc",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "8e41156ecf7c2456bf32ab7d073b692ac76b0c42770936fb01c52f5469e1ed56",
+      "clauses": [
+        {
+          "text": "我在神殿接待厅找到那名新来的旅人，",
+          "coverage": "fallback",
+          "work": "移动/到场",
+          "prerequisites": "起终点、路线、移动规则、实际持续时间和接触成立。接待厅旅人须存在并建立接触；问题涉及其私有经历、意愿与未来承诺。",
+          "residual": "准备或提出前往不证明到达；不能用同一 placement 假定接触",
+          "expected": "分别记录问话、警告与对方实际答复；不代答、不强制服从或履约。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "先问他在港口听过什么、从哪里来、愿意为谁冒风险；",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。接待厅旅人须存在并建立接触；问题涉及其私有经历、意愿与未来承诺。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "分别记录问话、警告与对方实际答复；不代答、不强制服从或履约。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "随后直说黑沼城堡地下仍危险，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。接待厅旅人须存在并建立接触；问题涉及其私有经历、意愿与未来承诺。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "分别记录问话、警告与对方实际答复；不代答、不强制服从或履约。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "问他若被派进去，能否保证不抛弃受伤的同伴并按约定把情报交回神殿核验。",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。接待厅旅人须存在并建立接触；问题涉及其私有经历、意愿与未来承诺。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "分别记录问话、警告与对方实际答复；不代答、不强制服从或履约。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "chief-bjarni",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "3b3081d1a028ff22ca4b20997bf1ff144f4e55157f9fd677dae704ed75dff6bb",
+      "clauses": [
+        {
+          "text": "召集村里管船与管仓的几名老手，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。管船管仓者须绑定；船只材料和逐船修补状态不能由笼统库存推导。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "按实际核查形成余量、不可离港船只和修补清单；保留条件与期限。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "逐项复核盐鱼、绳索、船体修补料与冬储余量，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。管船管仓者须绑定；船只材料和逐船修补状态不能由笼统库存推导。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "按实际核查形成余量、不可离港船只和修补清单；保留条件与期限。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "标出哪几艘船在任何情况下都不能离港，",
+          "coverage": "fallback",
+          "work": "推断/选择/规划",
+          "prerequisites": "相关证据由该主体合法获得，并保留自主判断。管船管仓者须绑定；船只材料和逐船修补状态不能由笼统库存推导。",
+          "residual": "计算合法不能证明推断、意愿或外交结果正确；计划不是完成",
+          "expected": "按实际核查形成余量、不可离港船只和修补清单；保留条件与期限。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "也标出风暴季前必须完成的修补。",
+          "coverage": "fallback",
+          "work": "推断/选择/规划",
+          "prerequisites": "相关证据由该主体合法获得，并保留自主判断。管船管仓者须绑定；船只材料和逐船修补状态不能由笼统库存推导。",
+          "residual": "计算合法不能证明推断、意愿或外交结果正确；计划不是完成",
+          "expected": "按实际核查形成余量、不可离港船只和修补清单；保留条件与期限。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "chief-kalfvald",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "9b406b4fe778d4e94b7f7a0a1bced74686ca07a89547161be12595dce9c8bd9a",
+      "clauses": [
+        {
+          "text": "我把 Hamdir 叫到粮仓旁单独谈话。",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。Hamdir 有独立心智；召到粮仓旁和私密通道尚需成立。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "记录私下谈话和 Hamdir 的选择；父亲的誓言不得自动转给儿子。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "我先说清自己向 Ragnar 立下的誓言仍要由我本人履行，不会替他答应；",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。Hamdir 有独立心智；召到粮仓旁和私密通道尚需成立。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "记录私下谈话和 Hamdir 的选择；父亲的誓言不得自动转给儿子。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "然后问他：若我因年迈不能亲往，Daretop 的粮船与人力他打算如何在援王与保护聚落之间取舍，要他把话说定。",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。Hamdir 有独立心智；召到粮仓旁和私密通道尚需成立。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "记录私下谈话和 Hamdir 的选择；父亲的誓言不得自动转给儿子。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "chief-yngvar",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "95defe0d0536492510e6a10dc56479d31139dd5c2f70fa9fd3c37bd6017ef174",
+      "clauses": [
+        {
+          "text": "先巡查 Gamla 的仓储、粮袋与西侧沼泽哨位，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。巡查场所、袋数、可出战人数和消耗率不等同于抽象 provisions 总量。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "有来源的袋数、天数、人数组成结果；缺少消耗率就不捏造天数。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "确认本季收成、护卫人数和一旦断粮能撑多久；",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。巡查场所、袋数、可出战人数和消耗率不等同于抽象 provisions 总量。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "有来源的袋数、天数、人数组成结果；缺少消耗率就不捏造天数。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "把结果按袋数、日数和可出战人数列出来。",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。巡查场所、袋数、可出战人数和消耗率不等同于抽象 provisions 总量。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "有来源的袋数、天数、人数组成结果；缺少消耗率就不捏造天数。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "curator-iseult-vale",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "c4439100aa5fb0e079b3815636882d2a8f7c802738bd18d9a703ecd6564c1391",
+      "clauses": [
+        {
+          "text": "重新核对密封索引的编号、笔迹与交叉引用，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。索引对象存在不代表每页编号、笔迹和交叉引用已经显式建模。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "逐条可核对抄录；仍在活动的设施与地点须有来源，未知留空。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "把能确认的 Atacyl 记号单独抄出，",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。索引对象存在不代表每页编号、笔迹和交叉引用已经显式建模。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "逐条可核对抄录；仍在活动的设施与地点须有来源，未知留空。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "同时检查有无指向仍在活动的设施名称或地点线索。",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。索引对象存在不代表每页编号、笔迹和交叉引用已经显式建模。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "逐条可核对抄录；仍在活动的设施与地点须有来源，未知留空。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "duke-caedwine",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "c152a5af3fc19bc2571c69f42837484ab511905c3c01640d4aea3938f8ccfeb2",
+      "clauses": [
+        {
+          "text": "派人请在城中逗留的新来者赴宴，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。派遣、宴请和侍从调查是并行意图；不能直接获得新来者经历或商机。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "保存邀请与调查两支进度、实际回应和证词来源；未接触则继续。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "以公爵的名义邀请他讲述亲自经历的危险与见闻；",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。派遣、宴请和侍从调查是并行意图；不能直接获得新来者经历或商机。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "保存邀请与调查两支进度、实际回应和证词来源；未接触则继续。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "同时让侍从探问其来路和可谈的商机。",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。派遣、宴请和侍从调查是并行意图；不能直接获得新来者经历或商机。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "保存邀请与调查两支进度、实际回应和证词来源；未接触则继续。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "ealdorman-paddock-ryburn",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "5a2ce6c682da36595d8e67eab00a790c08a29acfb96dc6cc4cc67b7b5231a6e7",
+      "clauses": [
+        {
+          "text": "请 Barris 把本周三家大买家的报价、交割条件与在场证人整理成公开记录，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。Barris 自主反应；三家报价、证人和张贴地点需要实际来源与执行。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "请求、整理、张贴分开；公示后才有接收可能，禁私雇不等于已拒绝一笔交易。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "并在市场上张贴告示：下轮竞价按同一公开程序进行，",
+          "coverage": "fallback",
+          "work": "物理操作/制作",
+          "prerequisites": "具体对象、资源所有权、数量、材料与执行规则成立。Barris 自主反应；三家报价、证人和张贴地点需要实际来源与执行。",
+          "residual": "抽象库存和工具名称不能证明加固、搬运、张贴或制作已发生",
+          "expected": "请求、整理、张贴分开；公示后才有接收可能，禁私雇不等于已拒绝一笔交易。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "任何私下雇用 constable 的行为都会被拒绝。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。Barris 自主反应；三家报价、证人和张贴地点需要实际来源与执行。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "请求、整理、张贴分开；公示后才有接收可能，禁私雇不等于已拒绝一笔交易。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "egil-longhair",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "3f7134684ecc64e2ab04d84cb37ef0364dda21b323cb17ad2d02fa11a262d7ab",
+      "clauses": [
+        {
+          "text": "下令轮班休息的战士继续整备桨架、帆索与盾墙，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。整备与侦察并行；队伍行动、近岸感知与报告均不能从命令推导。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "两支工作各记进展，报告只包含已观察证据，保留不得推断财富/弱点。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "同时派出小艇与岸上观察组在 Smoking Bay 近岸侦察：",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。整备与侦察并行；队伍行动、近岸感知与报告均不能从命令推导。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "两支工作各记进展，报告只包含已观察证据，保留不得推断财富/弱点。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "只回报实际看见的岸灯、航道、水深、守备迹象与人影，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。整备与侦察并行；队伍行动、近岸感知与报告均不能从命令推导。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "两支工作各记进展，报告只包含已观察证据，保留不得推断财富/弱点。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "不许把猜想当作财富或弱点证据。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。整备与侦察并行；队伍行动、近岸感知与报告均不能从命令推导。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "两支工作各记进展，报告只包含已观察证据，保留不得推断财富/弱点。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "gmung",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "3a4eeec6d105dadf6b7d2de6ed193b51c70c15f76bb766ef62e4e52366c10e16",
+      "clauses": [
+        {
+          "text": "召粮仓看守与亲族见证者到议事火前，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。看守与见证者是待绑定的个人；上轮贡额、冬粮分项与春耕周期需证据。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "两人独立复述与木板实录；不得把观点或预言写成确定库存事实。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "让两人各自复述若按上一轮规模交贡会削减哪一部分冬粮，",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。看守与见证者是待绑定的个人；上轮贡额、冬粮分项与春耕周期需证据。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "两人独立复述与木板实录；不得把观点或预言写成确定库存事实。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "并把可支撑到春耕的账目刻在木板上，",
+          "coverage": "fallback",
+          "work": "物理操作/制作",
+          "prerequisites": "具体对象、资源所有权、数量、材料与执行规则成立。看守与见证者是待绑定的个人；上轮贡额、冬粮分项与春耕周期需证据。",
+          "residual": "抽象库存和工具名称不能证明加固、搬运、张贴或制作已发生",
+          "expected": "两人独立复述与木板实录；不得把观点或预言写成确定库存事实。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "作为公开判断依据而非预言。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。看守与见证者是待绑定的个人；上轮贡额、冬粮分项与春耕周期需证据。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "两人独立复述与木板实录；不得把观点或预言写成确定库存事实。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "governor-tyrilas",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "e41987202b6a080960a5df1c917475ffdef28219fd730a69c007375387d3f386",
+      "clauses": [
+        {
+          "text": "召集议会代表听取港口、市场与城民近况，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。议会各席不是一个心智；近况和关切须来自实际发言。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "召集后逐席记录观点，保持与总督立场分离。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "要求各席分别说明对城堡下层风险与人类复权请愿的具体关切，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。议会各席不是一个心智；近况和关切须来自实际发言。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "召集后逐席记录观点，保持与总督立场分离。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "而不是替总督表态。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。议会各席不是一个心智；近况和关切须来自实际发言。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "召集后逐席记录观点，保持与总督立场分离。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "hamdir",
+      "phase": "initial",
+      "pointer": "/attempts/0/text",
+      "textHash": "c5f333b7bd9c78be72cad0227dfea2e58f2820984e22fe8effbf9a1abfcce562",
+      "clauses": [
+        {
+          "text": "请父亲 Kalfvald 一同核对今年粮运、守备轮值与拟交给我的账册；",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。父子核账与远方使者两条并行线；保护承诺不同于援王誓言，未收条款不得表态。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "核账、承诺、远方派遣、实际条件与回复分别有证据；两线保留未完成部分。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "我明确说明保护他、照料伤员和维持 Daretop 运转是我的承诺，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。父子核账与远方使者两条并行线；保护承诺不同于援王誓言，未收条款不得表态。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "核账、承诺、远方派遣、实际条件与回复分别有证据；两线保留未完成部分。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "但不以儿子的身份自动承担他个人向 Ragnar 立下的援王誓言。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。父子核账与远方使者两条并行线；保护承诺不同于援王誓言，未收条款不得表态。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "核账、承诺、远方派遣、实际条件与回复分别有证据；两线保留未完成部分。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "hamdir",
+      "phase": "initial",
+      "pointer": "/attempts/1/text",
+      "textHash": "641a58cb8c0fbc700dc449279e46242d8cc46f13b481a8c49cbf19b25777f3a4",
+      "clauses": [
+        {
+          "text": "派出可靠亲信分别去王城与 Gamla，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。父子核账与远方使者两条并行线；保护承诺不同于援王誓言，未收条款不得表态。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "核账、承诺、远方派遣、实际条件与回复分别有证据；两线保留未完成部分。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "只问两件事：他们各自要求 Daretop 交出多少粮、多少船、多少兵，期限多长，以及若遭报复谁来保护村田与粮道；",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。父子核账与远方使者两条并行线；保护承诺不同于援王誓言，未收条款不得表态。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "核账、承诺、远方派遣、实际条件与回复分别有证据；两线保留未完成部分。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "未收到成文条款前，我不代表 Daretop 表态支持任何一方。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。父子核账与远方使者两条并行线；保护承诺不同于援王誓言，未收条款不得表态。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "核账、承诺、远方派遣、实际条件与回复分别有证据；两线保留未完成部分。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "harbor-wayfarer-1",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "f0f3d4de0ddf45fc4d460914ca79c69c8715c591f0ba4bc3565eba23ce5f8b2d",
+      "clauses": [
+        {
+          "text": "向码头边靠着的领航人或搬运工打听哪里有便宜又安全的下榻处。",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。没有绑定的领航人/搬运工；harbor 是地点；来源未给明确房价、今夜床位或安全承诺。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "须有实际接触、询问、受话者来源与交付；有用地点/证词与便宜安全住宿目标分别验收。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "high-captain-sinerian",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "1e2b15f4ae6f685354be2e3e46000639372d310417d7e480cb098d1949e7f242",
+      "clauses": [
+        {
+          "text": "召集各巡逻圈队长会议，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。各巡逻圈队长须实际参与；航迹、活动和空档不是公开目标名称能替代的情报。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "逐段情报和无人回应路线有来源，之后的协同讨论仍属未决。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "要求逐段列出 Vasan 航迹、Raven 活动与南方勘探压力下的空档，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。各巡逻圈队长须实际参与；航迹、活动和空档不是公开目标名称能替代的情报。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "逐段情报和无人回应路线有来源，之后的协同讨论仍属未决。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "先画出无人回应的路线，",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。各巡逻圈队长须实际参与；航迹、活动和空档不是公开目标名称能替代的情报。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "逐段情报和无人回应路线有来源，之后的协同讨论仍属未决。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "再讨论如何重新结绳。",
+          "coverage": "fallback",
+          "work": "推断/选择/规划",
+          "prerequisites": "相关证据由该主体合法获得，并保留自主判断。各巡逻圈队长须实际参与；航迹、活动和空档不是公开目标名称能替代的情报。",
+          "residual": "计算合法不能证明推断、意愿或外交结果正确；计划不是完成",
+          "expected": "逐段情报和无人回应路线有来源，之后的协同讨论仍属未决。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "high-chief-cruk",
+      "phase": "initial",
+      "pointer": "/attempts/0/text",
+      "textHash": "465361043c109c9d863ccf1ce4a472d59b0f17c3efd8d73955352d593b129c10",
+      "clauses": [
+        {
+          "text": "以 High Chief 的身份巡视圣林，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。圣林守卫轮换需观察；被守护者证据是前提，传话及六 chiefs 到场不能默认。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "巡视证据、叮嘱、派遣与会谈分别记录；远距/不可触碰及日落期限保留。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "检查守卫轮换是否完整，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。圣林守卫轮换需观察；被守护者证据是前提，传话及六 chiefs 到场不能默认。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "巡视证据、叮嘱、派遣与会谈分别记录；远距/不可触碰及日落期限保留。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "并叮嘱值守者：在被守护者未给出新的可复核证据前，任何人都只可远距观察，不可触碰。",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。圣林守卫轮换需观察；被守护者证据是前提，传话及六 chiefs 到场不能默认。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "巡视证据、叮嘱、派遣与会谈分别记录；远距/不可触碰及日落期限保留。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "high-chief-cruk",
+      "phase": "initial",
+      "pointer": "/attempts/1/text",
+      "textHash": "5f6f25088ff99b807594f1509ee639ba740f4824045fe44789405cc622d9fef3",
+      "clauses": [
+        {
+          "text": "派人传话召集六位 chiefs 于日落前在圣林外缘会谈，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。圣林守卫轮换需观察；被守护者证据是前提，传话及六 chiefs 到场不能默认。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "巡视证据、叮嘱、派遣与会谈分别记录；远距/不可触碰及日落期限保留。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "请他们各自带上亲族守卫名册，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。圣林守卫轮换需观察；被守护者证据是前提，传话及六 chiefs 到场不能默认。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "巡视证据、叮嘱、派遣与会谈分别记录；远距/不可触碰及日落期限保留。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "并准备说明近期外来的寻剑传闻是否已传到本族。",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。圣林守卫轮换需观察；被守护者证据是前提，传话及六 chiefs 到场不能默认。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "巡视证据、叮嘱、派遣与会谈分别记录；远距/不可触碰及日落期限保留。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "john-abrams",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "168ef96f46b95ddf8c9c0e7a599dc1caeec276cfe817cf3f2fce94dfe2ddc11f",
+      "clauses": [
+        {
+          "text": "前往港区码头与信号岗，",
+          "coverage": "fallback",
+          "work": "移动/到场",
+          "prerequisites": "起终点、路线、移动规则、实际持续时间和接触成立。须移动到港区与信号岗；现有回港名册不等于那两艇已回信。",
+          "residual": "准备或提出前往不证明到达；不能用同一 placement 假定接触",
+          "expected": "保留名册核对来源；仅凭实际回信/灯号/避风消息更新失联判断。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "逐项核对回港名册，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。须移动到港区与信号岗；现有回港名册不等于那两艇已回信。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "保留名册核对来源；仅凭实际回信/灯号/避风消息更新失联判断。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "确认那两艘未归的沿岸小艇是否已有回信、灯号或避风位置的消息。",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。须移动到港区与信号岗；现有回港名册不等于那两艇已回信。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "保留名册核对来源；仅凭实际回信/灯号/避风消息更新失联判断。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "king-graptar",
+      "phase": "initial",
+      "pointer": "/attempts/0/text",
+      "textHash": "ef9f637ca25f46d8dd6edcae93ed7faca42ff9df46a98b90b6cd90b8894667f7",
+      "clauses": [
+        {
+          "text": "以 Stupendous 之名召集亲卫，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。军械守卫轮换、观察眼神和远方侦察各有独立语义；不能把宣告当作执行。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "召集/宣告、现场行为证据和侦察时间表分开；不虚构押运和援兵时间。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "宣布轮换军械钥匙与粮仓守卫，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。军械守卫轮换、观察眼神和远方侦察各有独立语义；不能把宣告当作执行。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "召集/宣告、现场行为证据和侦察时间表分开；不虚构押运和援兵时间。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "借检阅之名观察谁在坏消息后会先看别人。",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。军械守卫轮换、观察眼神和远方侦察各有独立语义；不能把宣告当作执行。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "召集/宣告、现场行为证据和侦察时间表分开；不虚构押运和援兵时间。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "king-graptar",
+      "phase": "initial",
+      "pointer": "/attempts/1/text",
+      "textHash": "fa92e2de30569c6b5aa44b71bb7f4b93e7adca6da9a82d81333979971dd681a6",
+      "clauses": [
+        {
+          "text": "派出熟悉 Newcombe 小路的斥候小队，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。军械守卫轮换、观察眼神和远方侦察各有独立语义；不能把宣告当作执行。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "召集/宣告、现场行为证据和侦察时间表分开；不虚构押运和援兵时间。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "只侦察 Greenton 外围与 Strangeholms 方向的粮车路线、押运人数和援兵到达时间，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。军械守卫轮换、观察眼神和远方侦察各有独立语义；不能把宣告当作执行。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "召集/宣告、现场行为证据和侦察时间表分开；不虚构押运和援兵时间。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "并带回一份能公开分配战利品的袭掠时间表草案。",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。军械守卫轮换、观察眼神和远方侦察各有独立语义；不能把宣告当作执行。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "召集/宣告、现场行为证据和侦察时间表分开；不虚构押运和援兵时间。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "king-neptar",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "986eaaf784eb03c3ad30903b81f72e4d329c3622d3a55519ecf8b7eccfba52d7",
+      "clauses": [
+        {
+          "text": "守在王子的葬仪中，",
+          "coverage": "fallback",
+          "work": "物理操作/制作",
+          "prerequisites": "具体对象、资源所有权、数量、材料与执行规则成立。葬仪当前状态、痕迹和目击者来源需分开；不派复仇是命令不是群体已知。",
+          "residual": "抽象库存和工具名称不能证明加固、搬运、张贴或制作已发生",
+          "expected": "记录葬仪参与、分类资料和实际通知；不自动改变家属/守卫信念。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "命令把遗体、卷流痕迹与目击者证词分开记录，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。葬仪当前状态、痕迹和目击者来源需分开；不派复仇是命令不是群体已知。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "记录葬仪参与、分类资料和实际通知；不自动改变家属/守卫信念。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "并让家属与守卫先知道今夜不派盲目的复仇攻击。",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。葬仪当前状态、痕迹和目击者来源需分开；不派复仇是命令不是群体已知。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "记录葬仪参与、分类资料和实际通知；不自动改变家属/守卫信念。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "king-nilal",
+      "phase": "initial",
+      "pointer": "/attempts/0/text",
+      "textHash": "d7c7708834466c29c3b99f305cb159a24a0e6d93494aadcb556b3b4c27a60693",
+      "clauses": [
+        {
+          "text": "在西塔召集王后 Aerindel 与军需官，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。三个并行分支：西塔会议与两封不同收件人的信；资源余量、信使与送达均未确立。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "来源支撑的支援清单；每封信独立记录写作/发出/送达，王廷主张不直接变成新控制事实。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "逐项核对瀑布 Viz 产出、守卫轮换和 Ranger 支援请求的缺口，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。三个并行分支：西塔会议与两封不同收件人的信；资源余量、信使与送达均未确立。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "来源支撑的支援清单；每封信独立记录写作/发出/送达，王廷主张不直接变成新控制事实。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "准备一份只按剩余余量分批兑现的支援清单。",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。三个并行分支：西塔会议与两封不同收件人的信；资源余量、信使与送达均未确立。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "来源支撑的支援清单；每封信独立记录写作/发出/送达，王廷主张不直接变成新控制事实。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "king-nilal",
+      "phase": "initial",
+      "pointer": "/attempts/1/text",
+      "textHash": "a4973c24e4fa463c7b2f48f5d3274e4f7bbd8223a6980c3d4b95ba5493c4b6e7",
+      "clauses": [
+        {
+          "text": "致信 Sinerian，说明 Greywood 能承担的预警、向导与施法支援上限，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。三个并行分支：西塔会议与两封不同收件人的信；资源余量、信使与送达均未确立。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "来源支撑的支援清单；每封信独立记录写作/发出/送达，王廷主张不直接变成新控制事实。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "要求她按优先次序把压力最大的一段边界先列出来。",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。三个并行分支：西塔会议与两封不同收件人的信；资源余量、信使与送达均未确立。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "来源支撑的支援清单；每封信独立记录写作/发出/送达，王廷主张不直接变成新控制事实。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "king-nilal",
+      "phase": "initial",
+      "pointer": "/attempts/2/text",
+      "textHash": "6f3f8281dfe91a73deb823c60e28e6a265e53ed9bb6f14c5868a6418208c370e",
+      "clauses": [
+        {
+          "text": "另备一封给 Tyrilas 的短笺，重申 Stardell Falls、岩后神殿与 Viz 来源的最终控制仍归 Greywood，任何地下遗产封锁都不应绕过王廷。",
+          "coverage": "fallback",
+          "work": "物理操作/制作",
+          "prerequisites": "具体对象、资源所有权、数量、材料与执行规则成立。三个并行分支：西塔会议与两封不同收件人的信；资源余量、信使与送达均未确立。",
+          "residual": "抽象库存和工具名称不能证明加固、搬运、张贴或制作已发生",
+          "expected": "来源支撑的支援清单；每封信独立记录写作/发出/送达，王廷主张不直接变成新控制事实。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "king-ragnar",
+      "phase": "initial",
+      "pointer": "/attempts/0/text",
+      "textHash": "312a7ffd5b217ab93c2642868e8cf302dc966d6dd72e05fcf68e59d17c2d3a40",
+      "clauses": [
+        {
+          "text": "在 Castle Taldane 召见仍在营中的首领与军需，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。议事、王戒调查、遣使/探听三支；统治效果和幸存者证词仍须开放裁决。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "三支分别留账；不把王令宣告算服从，不把首饰猜成王戒，不提前公开指控。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "重新主持军务与粮食议事，",
+          "coverage": "fallback",
+          "work": "推断/选择/规划",
+          "prerequisites": "相关证据由该主体合法获得，并保留自主判断。议事、王戒调查、遣使/探听三支；统治效果和幸存者证词仍须开放裁决。",
+          "residual": "计算合法不能证明推断、意愿或外交结果正确；计划不是完成",
+          "expected": "三支分别留账；不把王令宣告算服从，不把首饰猜成王戒，不提前公开指控。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "让王令在 Yngvar 行动前仍被公开执行。",
+          "coverage": "fallback",
+          "work": "推断/选择/规划",
+          "prerequisites": "相关证据由该主体合法获得，并保留自主判断。议事、王戒调查、遣使/探听三支；统治效果和幸存者证词仍须开放裁决。",
+          "residual": "计算合法不能证明推断、意愿或外交结果正确；计划不是完成",
+          "expected": "三支分别留账；不把王令宣告算服从，不把首饰猜成王戒，不提前公开指控。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "king-ragnar",
+      "phase": "initial",
+      "pointer": "/attempts/1/text",
+      "textHash": "0eb69b5fa00cd7046d8b10852455396279039561743cb6426d95b2d7e2be9854",
+      "clauses": [
+        {
+          "text": "派可信而清醒的老人分别追查当年袭港幸存者和旧战利品流向，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。议事、王戒调查、遣使/探听三支；统治效果和幸存者证词仍须开放裁决。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "三支分别留账；不把王令宣告算服从，不把首饰猜成王戒，不提前公开指控。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "只查证谁可能经手王戒，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。议事、王戒调查、遣使/探听三支；统治效果和幸存者证词仍须开放裁决。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "三支分别留账；不把王令宣告算服从，不把首饰猜成王戒，不提前公开指控。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "不许假定任何店铺或首饰就是它。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。议事、王戒调查、遣使/探听三支；统治效果和幸存者证词仍须开放裁决。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "三支分别留账；不把王令宣告算服从，不把首饰猜成王戒，不提前公开指控。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "king-ragnar",
+      "phase": "initial",
+      "pointer": "/attempts/2/text",
+      "textHash": "943770dde144b2f50acc4e7e5cf12c5805a283a8ac8d612237f63232810b3c42",
+      "clauses": [
+        {
+          "text": "遣使问 Kalfvald 的粮援何时能到，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。议事、王戒调查、遣使/探听三支；统治效果和幸存者证词仍须开放裁决。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "三支分别留账；不把王令宣告算服从，不把首饰猜成王戒，不提前公开指控。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "同时探听 Yngvar 近日见了哪些首领、说了什么话，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。议事、王戒调查、遣使/探听三支；统治效果和幸存者证词仍须开放裁决。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "三支分别留账；不把王令宣告算服从，不把首饰猜成王戒，不提前公开指控。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "暂不公开称其为挑战。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。议事、王戒调查、遣使/探听三支；统治效果和幸存者证词仍须开放裁决。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "三支分别留账；不把王令宣告算服从，不把首饰猜成王戒，不提前公开指控。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "king-suduk",
+      "phase": "initial",
+      "pointer": "/attempts/0/text",
+      "textHash": "fcfabe5d268893dcf835e4525036b17a69b7dff1ff40bc7c0f2549de180a0afb",
+      "clauses": [
+        {
+          "text": "派传令者赶赴 2306 山脊，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。远方山脊命令先经传令；本人回洞网核账与可撤道路是另一支。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "撤退命令与执行/伤员收拢分离；库存天数有消费依据，拖贡仍是准备。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "命令三十名族人停止向两道沟壑继续压进，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。远方山脊命令先经传令；本人回洞网核账与可撤道路是另一支。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "撤退命令与执行/伤员收拢分离；库存天数有消费依据，拖贡仍是准备。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "先守住退路和收拢伤员，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。远方山脊命令先经传令；本人回洞网核账与可撤道路是另一支。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "撤退命令与执行/伤员收拢分离；库存天数有消费依据，拖贡仍是准备。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "不与 Vasan berserker 缠斗到底。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。远方山脊命令先经传令；本人回洞网核账与可撤道路是另一支。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "撤退命令与执行/伤员收拢分离；库存天数有消费依据，拖贡仍是准备。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "king-suduk",
+      "phase": "initial",
+      "pointer": "/attempts/1/text",
+      "textHash": "59666ca04902e27989be062c2d62860cf579d29feb48b9b8ba3828d57f60636c",
+      "clauses": [
+        {
+          "text": "回到洞网与 G'mung 及粮官对账，",
+          "coverage": "fallback",
+          "work": "移动/到场",
+          "prerequisites": "起终点、路线、移动规则、实际持续时间和接触成立。远方山脊命令先经传令；本人回洞网核账与可撤道路是另一支。",
+          "residual": "准备或提出前往不证明到达；不能用同一 placement 假定接触",
+          "expected": "撤退命令与执行/伤员收拢分离；库存天数有消费依据，拖贡仍是准备。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "算清还能支撑多少天、哪条洞道可撤、哪些族人必须留在防线，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。远方山脊命令先经传令；本人回洞网核账与可撤道路是另一支。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "撤退命令与执行/伤员收拢分离；库存天数有消费依据，拖贡仍是准备。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "准备向 Kinkaris 拖延下一轮贡赋。",
+          "coverage": "fallback",
+          "work": "推断/选择/规划",
+          "prerequisites": "相关证据由该主体合法获得，并保留自主判断。远方山脊命令先经传令；本人回洞网核账与可撤道路是另一支。",
+          "residual": "计算合法不能证明推断、意愿或外交结果正确；计划不是完成",
+          "expected": "撤退命令与执行/伤员收拢分离；库存天数有消费依据，拖贡仍是准备。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "kinkaris",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "b667d8de0e96cfd7812c99d6ede3ca2bd57c77c5183f583a510d67904053c0b3",
+      "clauses": [
+        {
+          "text": "召集二十名守卫，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。二十守卫不能被群体实体代答；授权文书和无人落单须实际核对。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "召集结果、贡物/路线/授权及人员覆盖的证据明确。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "逐项核对贡物账册、撤离水道和总部留下的书面授权，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。二十守卫不能被群体实体代答；授权文书和无人落单须实际核对。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "召集结果、贡物/路线/授权及人员覆盖的证据明确。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "并确认无人被单独留在石堆外层。",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。二十守卫不能被群体实体代答；授权文书和无人落单须实际核对。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "召集结果、贡物/路线/授权及人员覆盖的证据明确。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "kostbera",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "a8875bd79c2bf41757f667b540186dce64cde1938fc7d1ba31c9249ba192ae51",
+      "clauses": [
+        {
+          "text": "趁风暴未至，清点现有干柴、鱼获与修补材料，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。材料细项、房屋结构、物品可移动性和地势未由总库存指定；天气是前提。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "清点、加固与搬运分别产生真实进度/结果；不把天气判断算施工作业。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "加固浮木小屋的压绳和屋顶，",
+          "coverage": "fallback",
+          "work": "物理操作/制作",
+          "prerequisites": "具体对象、资源所有权、数量、材料与执行规则成立。材料细项、房屋结构、物品可移动性和地势未由总库存指定；天气是前提。",
+          "residual": "抽象库存和工具名称不能证明加固、搬运、张贴或制作已发生",
+          "expected": "清点、加固与搬运分别产生真实进度/结果；不把天气判断算施工作业。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "并把可移动的粮食与火种移到较高处；",
+          "coverage": "fallback",
+          "work": "物理操作/制作",
+          "prerequisites": "具体对象、资源所有权、数量、材料与执行规则成立。材料细项、房屋结构、物品可移动性和地势未由总库存指定；天气是前提。",
+          "residual": "抽象库存和工具名称不能证明加固、搬运、张贴或制作已发生",
+          "expected": "清点、加固与搬运分别产生真实进度/结果；不把天气判断算施工作业。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "这些是天气迹象要求的实际准备。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。材料细项、房屋结构、物品可移动性和地势未由总库存指定；天气是前提。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "清点、加固与搬运分别产生真实进度/结果；不把天气判断算施工作业。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "lady-aerindel",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "c1b2d6ab71a812893a1fd61085ed0ea1cef01731b23003e77cd601a037ab7584",
+      "clauses": [
+        {
+          "text": "审阅 Sinerian 最新一份边境摘要，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。必须有 Sinerian 最新摘要及各道路联络证据；名单是分析所得。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "保留摘要来源与时点，区分失联事实、危险证词及拟定预警名单。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "标出哪些道路与聚落已失去日常联系、最晚发现的危险来自哪里，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。必须有 Sinerian 最新摘要及各道路联络证据；名单是分析所得。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "保留摘要来源与时点，区分失联事实、危险证词及拟定预警名单。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "为下一步扩大预警网拟出具体名单。",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。必须有 Sinerian 最新摘要及各道路联络证据；名单是分析所得。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "保留摘要来源与时点，区分失联事实、危险证词及拟定预警名单。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "lord-ingwold",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "3657d291296e4e00b3762538c789ac7714048189c57d03cd74542aea0b49239a",
+      "clauses": [
+        {
+          "text": "召集会社几名可靠的队长，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。三班回报、两处标记和可用人手需证据；提出小队不等于派队完成调查。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "逐条核对旧警示并保留队长建议；不抽空渔业/贸易的约束须验证。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "按最近三班巡查的回报核对两处需要复查的旧警示标记；",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。三班回报、两处标记和可用人手需证据；提出小队不等于派队完成调查。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "逐条核对旧警示并保留队长建议；不抽空渔业/贸易的约束须验证。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "要求他们提出一支不抽空村庄渔业与装备贸易的复查小队。",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。三班回报、两处标记和可用人手需证据；提出小队不等于派队完成调查。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "逐条核对旧警示并保留队长建议；不抽空渔业/贸易的约束须验证。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "lord-maracan",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "fac4dcab7869d80ddf88c98be3ae0605d789b2f76a5456416c2538c1053bb199",
+      "clauses": [
+        {
+          "text": "重新审阅给商人、侦察兵与 Dennis 的路线材料，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。路线坐标真伪、宣传可信性与外交依赖是语义判断，不能由复制资料决定。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "来源明确的坐标核验和待修改段落；不直接写入他国信任或依赖。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "确认共享的坐标都能经得起核对，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。路线坐标真伪、宣传可信性与外交依赖是语义判断，不能由复制资料决定。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "来源明确的坐标核验和待修改段落；不直接写入他国信任或依赖。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "同时检视哪些突出税负、Ranger 迟援与精灵准入限制的段落需要调整，",
+          "coverage": "fallback",
+          "work": "推断/选择/规划",
+          "prerequisites": "相关证据由该主体合法获得，并保留自主判断。路线坐标真伪、宣传可信性与外交依赖是语义判断，不能由复制资料决定。",
+          "residual": "计算合法不能证明推断、意愿或外交结果正确；计划不是完成",
+          "expected": "来源明确的坐标核验和待修改段落；不直接写入他国信任或依赖。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "以免因经不起核验而失去 Grand Kingdom 对 Jorvik 的依赖。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。路线坐标真伪、宣传可信性与外交依赖是语义判断，不能由复制资料决定。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "来源明确的坐标核验和待修改段落；不直接写入他国信任或依赖。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "lord-mazardan",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "a995f7d5707482f2cda73486a8e61434fb0bf05d9d3ba66fb963069addc363b2",
+      "clauses": [
+        {
+          "text": "召集 Company 的验货人与账房，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。二百金币是报价而非成交转移量；验货人和账房须参与，公告须实际张贴。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "价格声明和拒收条件、公告制作/张贴分别留证据；不直接转移币或 Viz。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "重申公开价格仍是每份可核实 Viz 二百金币，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。二百金币是报价而非成交转移量；验货人和账房须参与，公告须实际张贴。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "价格声明和拒收条件、公告制作/张贴分别留证据；不直接转移币或 Viz。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "凡带来酒馆转述、染色石头或隐瞒来源者一律当场说明不接受；",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。二百金币是报价而非成交转移量；验货人和账房须参与，公告须实际张贴。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "价格声明和拒收条件、公告制作/张贴分别留证据；不直接转移币或 Viz。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "把这条口径写成告示贴到 Oldan Hold 的交易所与客栈。",
+          "coverage": "fallback",
+          "work": "物理操作/制作",
+          "prerequisites": "具体对象、资源所有权、数量、材料与执行规则成立。二百金币是报价而非成交转移量；验货人和账房须参与，公告须实际张贴。",
+          "residual": "抽象库存和工具名称不能证明加固、搬运、张贴或制作已发生",
+          "expected": "价格声明和拒收条件、公告制作/张贴分别留证据；不直接转移币或 Viz。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "lord-octa",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "4ecd38a48ba8cdcdcd04a69f5326971a6088914b788bafbb04fd3707f9769d98",
+      "clauses": [
+        {
+          "text": "集合留在围栏的牧工与护卫，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。十二骑手是兵力选择约束，非数量转移；牧工/护卫身份、现场与技能待核。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "实际集合点名与分工，守栏覆盖保持；不把命令变成已追击或已赶牛。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "当面点清人手：",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。十二骑手是兵力选择约束，非数量转移；牧工/护卫身份、现场与技能待核。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "实际集合点名与分工，守栏覆盖保持；不把命令变成已追击或已赶牛。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "追击队只带十二名最熟蹄印的骑手，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。十二骑手是兵力选择约束，非数量转移；牧工/护卫身份、现场与技能待核。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "实际集合点名与分工，守栏覆盖保持；不把命令变成已追击或已赶牛。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "其余人继续北侧赶牛，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。十二骑手是兵力选择约束，非数量转移；牧工/护卫身份、现场与技能待核。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "实际集合点名与分工，守栏覆盖保持；不把命令变成已追击或已赶牛。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "绝不让两段围栏空着。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。十二骑手是兵力选择约束，非数量转移；牧工/护卫身份、现场与技能待核。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "实际集合点名与分工，守栏覆盖保持；不把命令变成已追击或已赶牛。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "lord-travvarn",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "accfd6bcbd9c65d420fcef0123a8be47a217d8093a8a4cb791f6858f8d351d05",
+      "clauses": [
+        {
+          "text": "命航海官与瞭望手整理当前船位、剩余淡水粮秣、风暴迹象与黑沼外海可能的避风锚地；",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。船位、补给、天气、锚地须报告；Devers 是独立主体，安全登陆是后续判断。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "收到航海/瞭望报告及 Devers 答复才有判断依据，不能将征询写成登陆。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "同时让 Archon Devers 呈报值勤、武器与士兵状况，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。船位、补给、天气、锚地须报告；Devers 是独立主体，安全登陆是后续判断。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "收到航海/瞭望报告及 Devers 答复才有判断依据，不能将征询写成登陆。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "以便判断能否安全派出小艇或登陆队接触海岸。",
+          "coverage": "fallback",
+          "work": "推断/选择/规划",
+          "prerequisites": "相关证据由该主体合法获得，并保留自主判断。船位、补给、天气、锚地须报告；Devers 是独立主体，安全登陆是后续判断。",
+          "residual": "计算合法不能证明推断、意愿或外交结果正确；计划不是完成",
+          "expected": "收到航海/瞭望报告及 Devers 答复才有判断依据，不能将征询写成登陆。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "lord-varxis",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "87a135c5333bd898e5caf0cfce25390d6b4ec6d199eccbb4ea54bf5eae3fee2f",
+      "clauses": [
+        {
+          "text": "召集 Camden 各矿的工头与当班领队，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。十二守卫重排需矿井班次、护送距离、风险和实际人员表，不能仅做人数算术。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "新班表有来源和不同时争用的可核验分配；宣告不能替代人员到位。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "把换班板上的十二名机动守卫按矿井日照、护送距离和夜班风险重新排班；",
+          "coverage": "fallback",
+          "work": "推断/选择/规划",
+          "prerequisites": "相关证据由该主体合法获得，并保留自主判断。十二守卫重排需矿井班次、护送距离、风险和实际人员表，不能仅做人数算术。",
+          "residual": "计算合法不能证明推断、意愿或外交结果正确；计划不是完成",
+          "expected": "新班表有来源和不同时争用的可核验分配；宣告不能替代人员到位。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "明晨矿车队与两座夜班矿井不能同时争用同一批人。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。十二守卫重排需矿井班次、护送距离、风险和实际人员表，不能仅做人数算术。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "新班表有来源和不同时争用的可核验分配；宣告不能替代人员到位。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "master-corvin-hale",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "708c4e77d85918537492c2ffd0a35e76c0d12fabb6e387c40169f6ee14cb937a",
+      "clauses": [
+        {
+          "text": "我先不出面接触 Causari，",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。不亲自接触；两中间人并行，散布旧例和探询意愿；反馈名单属于私有证词。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "两支派遣和真实接触分别留证据，实际愿意者/顾虑有来源，不替人承诺。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "而是让 Company of Honorable Men 的两名可靠中间人分头行动：",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。不亲自接触；两中间人并行，散布旧例和探询意愿；反馈名单属于私有证词。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "两支派遣和真实接触分别留证据，实际愿意者/顾虑有来源，不替人承诺。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "一人去码头与酒馆散布“交权请愿又被地下安全当借口拖延”的具体旧例，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。不亲自接触；两中间人并行，散布旧例和探询意愿；反馈名单属于私有证词。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "两支派遣和真实接触分别留证据，实际愿意者/顾虑有来源，不替人承诺。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "另一人去接触商贩和退役公会成员，试探他们对联合要求交权期限的接受程度。",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。不亲自接触；两中间人并行，散布旧例和探询意愿；反馈名单属于私有证词。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "两支派遣和真实接触分别留证据，实际愿意者/顾虑有来源，不替人承诺。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "我只要求他们带回愿意联名者的名单与顾虑，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。不亲自接触；两中间人并行，散布旧例和探询意愿；反馈名单属于私有证词。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "两支派遣和真实接触分别留证据，实际愿意者/顾虑有来源，不替人承诺。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "不替任何人许诺条件。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。不亲自接触；两中间人并行，散布旧例和探询意愿；反馈名单属于私有证词。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "两支派遣和真实接触分别留证据，实际愿意者/顾虑有来源，不替人承诺。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "matthew-thanes",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "734ac78c2e25c9324e20cfb0526c77ebaf10c6820caa175fcb8ff13afcd97893",
+      "clauses": [
+        {
+          "text": "我先把北路沿途的登记点、水井与最近可用接应点在心里过一遍，",
+          "coverage": "fallback",
+          "work": "推断/选择/规划",
+          "prerequisites": "相关证据由该主体合法获得，并保留自主判断。心中回顾不产生外部事实；侦察准备与本人准备不能计作已勘查。",
+          "residual": "计算合法不能证明推断、意愿或外交结果正确；计划不是完成",
+          "expected": "可记录个人回顾/备装/携物和待出发状态；前往炊烟与调查留 pending。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "并让一名熟悉 Muncaester 路的斥候备好轻装与信号旗；",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。心中回顾不产生外部事实；侦察准备与本人准备不能计作已勘查。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "可记录个人回顾/备装/携物和待出发状态；前往炊烟与调查留 pending。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "我自己带上旅粮和绳索，",
+          "coverage": "fallback",
+          "work": "物理操作/制作",
+          "prerequisites": "具体对象、资源所有权、数量、材料与执行规则成立。心中回顾不产生外部事实；侦察准备与本人准备不能计作已勘查。",
+          "residual": "抽象库存和工具名称不能证明加固、搬运、张贴或制作已发生",
+          "expected": "可记录个人回顾/备装/携物和待出发状态；前往炊烟与调查留 pending。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "准备沿最后报到点向炊烟方向做一次近距勘查。",
+          "coverage": "fallback",
+          "work": "推断/选择/规划",
+          "prerequisites": "相关证据由该主体合法获得，并保留自主判断。心中回顾不产生外部事实；侦察准备与本人准备不能计作已勘查。",
+          "residual": "计算合法不能证明推断、意愿或外交结果正确；计划不是完成",
+          "expected": "可记录个人回顾/备装/携物和待出发状态；前往炊烟与调查留 pending。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "mayor-holbein-redleaf",
+      "phase": "initial",
+      "pointer": "/attempts/0/text",
+      "textHash": "44baff38b59ec8cb8478fdfce98fe9c3b7cf214da904781d63dd96b7c40e790e",
+      "clauses": [
+        {
+          "text": "我带上画笔与卷尺，亲自到西北田墙再看一次那些新痕迹：",
+          "coverage": "fallback",
+          "work": "移动/到场",
+          "prerequisites": "起终点、路线、移动规则、实际持续时间和接触成立。现场痕迹细节与因果判断未知；另一支询问车夫意愿，护送只是条件。",
+          "residual": "准备或提出前往不证明到达；不能用同一 placement 假定接触",
+          "expected": "观察记录和判断分离，两名车夫各自答复/护送记录；不惊民、不强迫夜探。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "量出擦痕高度、黏液干湿和与旧污迹的颜色差别，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。现场痕迹细节与因果判断未知；另一支询问车夫意愿，护送只是条件。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "观察记录和判断分离，两名车夫各自答复/护送记录；不惊民、不强迫夜探。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "并在田埂边画出草倒伏方向，",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。现场痕迹细节与因果判断未知；另一支询问车夫意愿，护送只是条件。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "观察记录和判断分离，两名车夫各自答复/护送记录；不惊民、不强迫夜探。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "判断那生物是穿田而过还是沿墙游走。",
+          "coverage": "fallback",
+          "work": "推断/选择/规划",
+          "prerequisites": "相关证据由该主体合法获得，并保留自主判断。现场痕迹细节与因果判断未知；另一支询问车夫意愿，护送只是条件。",
+          "residual": "计算合法不能证明推断、意愿或外交结果正确；计划不是完成",
+          "expected": "观察记录和判断分离，两名车夫各自答复/护送记录；不惊民、不强迫夜探。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "我只记录，不惊动农户。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。现场痕迹细节与因果判断未知；另一支询问车夫意愿，护送只是条件。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "观察记录和判断分离，两名车夫各自答复/护送记录；不惊民、不强迫夜探。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "mayor-holbein-redleaf",
+      "phase": "initial",
+      "pointer": "/attempts/1/text",
+      "textHash": "f79a73583915e1626ffc39ac913698a5284b384e07c6443dd8d5d61c81270e83",
+      "clauses": [
+        {
+          "text": "同时我让 constable 把两名运粮车夫请到村厅，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。现场痕迹细节与因果判断未知；另一支询问车夫意愿，护送只是条件。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "观察记录和判断分离，两名车夫各自答复/护送记录；不惊民、不强迫夜探。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "明确问他们：若派两人持灯护送，他们愿不愿意按原定日子出发？",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。现场痕迹细节与因果判断未知；另一支询问车夫意愿，护送只是条件。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "观察记录和判断分离，两名车夫各自答复/护送记录；不惊民、不强迫夜探。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "我把护送人数、路段和返程时间逐条记下，",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。现场痕迹细节与因果判断未知；另一支询问车夫意愿，护送只是条件。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "观察记录和判断分离，两名车夫各自答复/护送记录；不惊民、不强迫夜探。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "不强迫任何人夜间深入废堡方向。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。现场痕迹细节与因果判断未知；另一支询问车夫意愿，护送只是条件。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "观察记录和判断分离，两名车夫各自答复/护送记录；不惊民、不强迫夜探。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "naomi",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "8c327460b1450e8ab20473b154a90c80838dce9ae9615f36ea1d7e76f35bc953",
+      "clauses": [
+        {
+          "text": "我先沿岛岸逐段复查最近那两处痕迹：带斧痕的登陆点、被风浪冲破而无工具的小艇，以及附近折枝与鸟群动向。",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。两类来客的痕迹需现场访问；盐迹、脚印和鸟群细节不由描述自动生成。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "来源分组的逐项观察记录，不把不同来客或推断合并成一个事实。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "我按枝痕新旧、盐迹和脚印方向分别记录，",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。两类来客的痕迹需现场访问；盐迹、脚印和鸟群细节不由描述自动生成。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "来源分组的逐项观察记录，不把不同来客或推断合并成一个事实。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "不把两类来客混成一类。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。两类来客的痕迹需现场访问；盐迹、脚印和鸟群细节不由描述自动生成。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "来源分组的逐项观察记录，不把不同来客或推断合并成一个事实。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "neera-dane",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "d63475f6b6f27f2c14f6a866d7d7db59d8b0aeeae43ca170698ee8eb88aaeebe",
+      "clauses": [
+        {
+          "text": "我先召集 Ashdown 议会中几名还能值夜的人，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。逐户劳动力和照护负担不是一个 faction 余量；需个人/住户资料及授权。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "逐户可调人手、治疗/住宿/向导三栏均有来源，保留无法抽调者。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "把本季住户名册按户核对：谁家已有成年人随巡逻圈在外、谁还能短时护送或值夜、谁家照看老人孩子不能抽调。",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。逐户劳动力和照护负担不是一个 faction 余量；需个人/住户资料及授权。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "逐户可调人手、治疗/住宿/向导三栏均有来源，保留无法抽调者。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "我要求他们把能提供的治疗、住宿和短期向导分成三栏写清，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。逐户劳动力和照护负担不是一个 faction 余量；需个人/住户资料及授权。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "逐户可调人手、治疗/住宿/向导三栏均有来源，保留无法抽调者。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "而不是笼统答应。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。逐户劳动力和照护负担不是一个 faction 余量；需个人/住户资料及授权。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "逐户可调人手、治疗/住宿/向导三栏均有来源，保留无法抽调者。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "player",
+      "phase": "initial",
+      "pointer": "/attempts/0/text",
+      "textHash": "73e7d7a79c99594becfceaa417573d447633281d668b13ebf3e290f1ae75936a",
+      "clauses": [
+        {
+          "text": "我先在港区找一处能避风的屋檐或客栈登记处，",
+          "coverage": "fallback",
+          "work": "移动/到场",
+          "prerequisites": "起终点、路线、移动规则、实际持续时间和接触成立。这是自治 Agent player，不是外部玩家 harbor-wayfarer-1；住宿与港区情报两线并行且未绑定受话者。",
+          "residual": "准备或提出前往不证明到达；不能用同一 placement 假定接触",
+          "expected": "分别收到价格/床位信息及三问证词；不预付，保留未确定安全性与后续接触选择。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "问清价格和今夜是否还有床位；",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。这是自治 Agent player，不是外部玩家 harbor-wayfarer-1；住宿与港区情报两线并行且未绑定受话者。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "分别收到价格/床位信息及三问证词；不预付，保留未确定安全性与后续接触选择。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "风暴将至，先确保落脚点，再谈其他。",
+          "coverage": "fallback",
+          "work": "推断/选择/规划",
+          "prerequisites": "相关证据由该主体合法获得，并保留自主判断。这是自治 Agent player，不是外部玩家 harbor-wayfarer-1；住宿与港区情报两线并行且未绑定受话者。",
+          "residual": "计算合法不能证明推断、意愿或外交结果正确；计划不是完成",
+          "expected": "分别收到价格/床位信息及三问证词；不预付，保留未确定安全性与后续接触选择。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "我只打听，不预付整周的钱。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。这是自治 Agent player，不是外部玩家 harbor-wayfarer-1；住宿与港区情报两线并行且未绑定受话者。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "分别收到价格/床位信息及三问证词；不预付，保留未确定安全性与后续接触选择。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "player",
+      "phase": "initial",
+      "pointer": "/attempts/1/text",
+      "textHash": "05d9c2548d9def4dbdc57e42f98b4db10773fdefba6a68526a8669628ec3fb4c",
+      "clauses": [
+        {
+          "text": "与此同时，我向港工或领航人问三件事：哪条街是本地势力常出入的、最近城外道路是否安全、港区里谁的消息比较可靠。",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。这是自治 Agent player，不是外部玩家 harbor-wayfarer-1；住宿与港区情报两线并行且未绑定受话者。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "分别收到价格/床位信息及三问证词；不预付，保留未确定安全性与后续接触选择。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "我留意他们的迟疑和指路方向，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。这是自治 Agent player，不是外部玩家 harbor-wayfarer-1；住宿与港区情报两线并行且未绑定受话者。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "分别收到价格/床位信息及三问证词；不预付，保留未确定安全性与后续接触选择。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "再决定先接触谁。",
+          "coverage": "fallback",
+          "work": "推断/选择/规划",
+          "prerequisites": "相关证据由该主体合法获得，并保留自主判断。这是自治 Agent player，不是外部玩家 harbor-wayfarer-1；住宿与港区情报两线并行且未绑定受话者。",
+          "residual": "计算合法不能证明推断、意愿或外交结果正确；计划不是完成",
+          "expected": "分别收到价格/床位信息及三问证词；不预付，保留未确定安全性与后续接触选择。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "rinisar-anothil",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "6a23caecd3c420442414ac9e88b19ab3ef18616cda1d2be6fe397a891093ae40",
+      "clauses": [
+        {
+          "text": "我先在营地召集诱饵、警戒和断后三组的负责人，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。三组负责人各有私有报告；风向、岔路与诱饵是待核实情况。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "逐组失败点和缺口有来源；不得共享全盘计划或把堵路请求变成已封路。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "逐项核对他们各自报告的失败点：诱饵是否够稳、狭口风向是否还合、那条会把追击引回营地的岔路能否封住。",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。三组负责人各有私有报告；风向、岔路与诱饵是待核实情况。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "逐组失败点和缺口有来源；不得共享全盘计划或把堵路请求变成已封路。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "我要求他们只报事实与缺口，不交换全盘计划。",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。三组负责人各有私有报告；风向、岔路与诱饵是待核实情况。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "逐组失败点和缺口有来源；不得共享全盘计划或把堵路请求变成已封路。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "sapphire-enchantress",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "695b0e514bcefff7f23d275aef6611ef61b5e75a3ec2ec209ad29fb9a77a665b",
+      "clauses": [
+        {
+          "text": "我先把月贝岛最近的采集、满月转化与实际交付记录分开重抄一遍，",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。当前记录的批次日期、数量和经手人未自动由 Viz 总量产生；比较对象也需证据。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "按实际原记录重抄和标注；缺项明确无证据，不制造历史批次。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "标注每一批的日期、数量与经手人；",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。当前记录的批次日期、数量和经手人未自动由 Viz 总量产生；比较对象也需证据。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "按实际原记录重抄和标注；缺项明确无证据，不制造历史批次。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "凡记录中缺项或无法与陨山作比较的地方，",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。当前记录的批次日期、数量和经手人未自动由 Viz 总量产生；比较对象也需证据。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "按实际原记录重抄和标注；缺项明确无证据，不制造历史批次。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "我留空并写明“无证据”，",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。当前记录的批次日期、数量和经手人未自动由 Viz 总量产生；比较对象也需证据。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "按实际原记录重抄和标注；缺项明确无证据，不制造历史批次。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "不补上猜想。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。当前记录的批次日期、数量和经手人未自动由 Viz 总量产生；比较对象也需证据。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "按实际原记录重抄和标注；缺项明确无证据，不制造历史批次。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "scytheback",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "acef09c66fd8be0e5507f8142f832729ae462433f1e4f4fe835fb4193372ece1",
+      "clauses": [
+        {
+          "text": "沿失踪子代最后一次可确认的西北飞行路线低空巡猎，",
+          "coverage": "fallback",
+          "work": "移动/到场",
+          "prerequisites": "起终点、路线、移动规则、实际持续时间和接触成立。低空巡猎路线、途中感知和失踪子代痕迹须裁决，线索不等于结论。",
+          "residual": "准备或提出前往不证明到达；不能用同一 placement 假定接触",
+          "expected": "实际移动/观察记录，保留线索等级和猎路私密性。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "仔细观察岩面刮痕、焦痕、脱落的鳞片与被啃食的骸骨，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。低空巡猎路线、途中感知和失踪子代痕迹须裁决，线索不等于结论。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "实际移动/观察记录，保留线索等级和猎路私密性。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "任何一处都先当作线索而非结论，",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。低空巡猎路线、途中感知和失踪子代痕迹须裁决，线索不等于结论。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "实际移动/观察记录，保留线索等级和猎路私密性。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "不向任何人泄露猎路细节。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。低空巡猎路线、途中感知和失踪子代痕迹须裁决，线索不等于结论。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "实际移动/观察记录，保留线索等级和猎路私密性。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "sheriff-barris-ironoak",
+      "phase": "initial",
+      "pointer": "/attempts/0/text",
+      "textHash": "c4092d845c9f1ac476d5d19b64b2889ada80896222d3ee3b029c78beb0f024d9",
+      "clauses": [
+        {
+          "text": "带两名亲信 constable 巡查北侧装货巷与酒摊，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。巡查/疏散与私下约谈两支；constable 个体、报价证词、现场堵点均须证据。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "独立记录现场/清理进度与两份私密陈述；暂不抓捕、不公开调查。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "记录堵点、车流与轮值缺口，",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。巡查/疏散与私下约谈两支；constable 个体、报价证词、现场堵点均须证据。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "独立记录现场/清理进度与两份私密陈述；暂不抓捕、不公开调查。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "命令清理唯一的横向疏散口并划定人货通道，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。巡查/疏散与私下约谈两支；constable 个体、报价证词、现场堵点均须证据。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "独立记录现场/清理进度与两份私密陈述；暂不抓捕、不公开调查。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "暂不抓捕任何人，只保留现场记录。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。巡查/疏散与私下约谈两支；constable 个体、报价证词、现场堵点均须证据。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "独立记录现场/清理进度与两份私密陈述；暂不抓捕、不公开调查。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "sheriff-barris-ironoak",
+      "phase": "initial",
+      "pointer": "/attempts/1/text",
+      "textHash": "4ae430a5947d68a5514d8bbfebc67b2f4744b0f03e55e51478ee81b6595418dd",
+      "clauses": [
+        {
+          "text": "分别约谈那两名报告过私下出价的 constable，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。巡查/疏散与私下约谈两支；constable 个体、报价证词、现场堵点均须证据。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "独立记录现场/清理进度与两份私密陈述；暂不抓捕、不公开调查。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "要求他们写清商号、时间、地点和传递手段，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。巡查/疏散与私下约谈两支；constable 个体、报价证词、现场堵点均须证据。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "独立记录现场/清理进度与两份私密陈述；暂不抓捕、不公开调查。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "承诺记录会保密但必须可复核，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。巡查/疏散与私下约谈两支；constable 个体、报价证词、现场堵点均须证据。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "独立记录现场/清理进度与两份私密陈述；暂不抓捕、不公开调查。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "暂不动用公开调查以免惊动可能协调出价的人。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。巡查/疏散与私下约谈两支；constable 个体、报价证词、现场堵点均须证据。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "独立记录现场/清理进度与两份私密陈述；暂不抓捕、不公开调查。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "sigrun-the-boneless",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "416242b35d76f564f54f71402bdde51bda640b7d4720014536f2779f3cdd8ccb",
+      "clauses": [
+        {
+          "text": "在纵队接近 Blackoak 前召集两名队长和骨干，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。接近 Blackoak 是前提，队长和骨干须参与；纪律不代表已经执行。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "实际召集和规则传达，掠夺/伤员分工保留条件，不直接写群体一致。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "重申接战前纪律与撤退顺序，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。接近 Blackoak 是前提，队长和骨干须参与；纪律不代表已经执行。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "实际召集和规则传达，掠夺/伤员分工保留条件，不直接写群体一致。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "明确谁在什么条件下可以抢掠、谁必须留下看守伤员，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。接近 Blackoak 是前提，队长和骨干须参与；纪律不代表已经执行。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "实际召集和规则传达，掠夺/伤员分工保留条件，不直接写群体一致。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "防止纵队自行分裂成抢掠派、谈判派和逃亡者。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。接近 Blackoak 是前提，队长和骨干须参与；纪律不代表已经执行。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "实际召集和规则传达，掠夺/伤员分工保留条件，不直接写群体一致。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "sir-autse-darkheart",
+      "phase": "initial",
+      "pointer": "/attempts/0/text",
+      "textHash": "a4c89fbd8bf3f19d3268f7fd49970ab695fe58f8fcca016164820f7e5c71e103",
+      "clauses": [
+        {
+          "text": "以旧军令格式下令亡灵驻军按口令轮换：",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。亡灵执行口令、魔法签名、旧印记和封印效力属于未覆盖语义；两支不能合并。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "命令、施工/巡查、异常记录及凭证质询分开；未验证不得入遗址。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "加固结社遗址的湖崖坡道、",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。亡灵执行口令、魔法签名、旧印记和封印效力属于未覆盖语义；两支不能合并。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "命令、施工/巡查、异常记录及凭证质询分开；未验证不得入遗址。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "检查旧印记与封印位置，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。亡灵执行口令、魔法签名、旧印记和封印效力属于未覆盖语义；两支不能合并。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "命令、施工/巡查、异常记录及凭证质询分开；未验证不得入遗址。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "巡逻不得越过可信防御线，",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。亡灵执行口令、魔法签名、旧印记和封印效力属于未覆盖语义；两支不能合并。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "命令、施工/巡查、异常记录及凭证质询分开；未验证不得入遗址。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "并逐条记录夜间异常。",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。亡灵执行口令、魔法签名、旧印记和封印效力属于未覆盖语义；两支不能合并。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "命令、施工/巡查、异常记录及凭证质询分开；未验证不得入遗址。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "sir-autse-darkheart",
+      "phase": "initial",
+      "pointer": "/attempts/1/text",
+      "textHash": "e149ae330dfcec07582d94c87dc7469ce0f83002f046ab1d0ee42e591e4168b0",
+      "clauses": [
+        {
+          "text": "向最近出没的 Jorvik 与 Warlock Island 信使或小股人员发出正式质询，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。亡灵执行口令、魔法签名、旧印记和封印效力属于未覆盖语义；两支不能合并。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "命令、施工/巡查、异常记录及凭证质询分开；未验证不得入遗址。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "要求他们出示能同时通过旧印记、魔法签名和连续口令的凭证；",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。亡灵执行口令、魔法签名、旧印记和封印效力属于未覆盖语义；两支不能合并。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "命令、施工/巡查、异常记录及凭证质询分开；未验证不得入遗址。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "没有凭证者只能作为外来传言对待，不得进遗址。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。亡灵执行口令、魔法签名、旧印记和封印效力属于未覆盖语义；两支不能合并。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "命令、施工/巡查、异常记录及凭证质询分开；未验证不得入遗址。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "sir-causari",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "cf5172064b33fc04cf1a0c6b64eb5a780197928b752dd3662cf8b19183bee639",
+      "clauses": [
+        {
+          "text": "把三份请愿答复整理成一份公开的过渡备忘录，",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。三份请愿答复需原文；公开备忘录的递交和收件人回应分别成立。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "合并文本/实际递交/请求条件/职责声明分别留证据，不能把要求当已协定。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "向总督办公厅与议会递交，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。三份请愿答复需原文；公开备忘录的递交和收件人回应分别成立。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "合并文本/实际递交/请求条件/职责声明分别留证据，不能把要求当已协定。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "要求写明自治过渡的每一项安全指标、完成期限、共同监管人和失败时的处置条件，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。三份请愿答复需原文；公开备忘录的递交和收件人回应分别成立。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "合并文本/实际递交/请求条件/职责声明分别留证据，不能把要求当已协定。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "并声明守军职责不因谈判改变。",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。三份请愿答复需原文；公开备忘录的递交和收件人回应分别成立。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "合并文本/实际递交/请求条件/职责声明分别留证据，不能把要求当已协定。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "sir-dennis-langre",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "fa7a11e4f9b655df88c8b0103b248133373021d375c2b1602388ba3a1ffbc56e",
+      "clauses": [
+        {
+          "text": "按本堡巡逻与商队证词安排一次独立侦察：",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。独立侦察需人员路线；足迹/时间/损失及 Maracan 独立性均是调查对象。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "记录派遣与三户观察、每条来源独立性；不因单次报告调兵。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "沿 Westwall 北侧山麓核对三户农场的足迹方向、时间与损失，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。独立侦察需人员路线；足迹/时间/损失及 Maracan 独立性均是调查对象。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "记录派遣与三户观察、每条来源独立性；不因单次报告调兵。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "同时记录每一条情报是否独立于 Maracan，",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。独立侦察需人员路线；足迹/时间/损失及 Maracan 独立性均是调查对象。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "记录派遣与三户观察、每条来源独立性；不因单次报告调兵。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "暂不因单次报告调动驻军。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。独立侦察需人员路线；足迹/时间/损失及 Maracan 独立性均是调查对象。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "记录派遣与三户观察、每条来源独立性；不因单次报告调兵。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "thil-the-cowled",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "785551f0016119309f052671d26ba76f31aa0b8b654ddf329aa6722d21d239bb",
+      "clauses": [
+        {
+          "text": "在商店与学徒一起核对近日入货、估价记录和地下商人询问的黑色金属器，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。学徒独立在场、货物/估价细项和私人标记未由店铺描述穷举。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "有来源的逐件核对及识别结果，不能向买家泄露。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "逐件比对是否带有 Atacyl 私人记号或非常规封存方式，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。学徒独立在场、货物/估价细项和私人标记未由店铺描述穷举。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "有来源的逐件核对及识别结果，不能向买家泄露。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "不向买家公开识别结果。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。学徒独立在场、货物/估价细项和私人标记未由店铺描述穷举。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "有来源的逐件核对及识别结果，不能向买家泄露。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "wizard-of-the-isle",
+      "phase": "initial",
+      "pointer": "/rawText",
+      "textHash": "85470db3da8040d72fcd73a99383875b333a5f434b293500220ce63ba427633a",
+      "clauses": [
+        {
+          "text": "沿 Mountain That Fell 的岸线与常见登陆点做一次长期观测例行巡查，",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。长期巡查不是瞬时公开事实读取；新船痕、营火、Viz 变化及模式须证据。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "记录实际巡查进度、观察与比较；隐蔽登陆点不对外传播。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "记录新的船痕、营火与 Viz 脉动变化，",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。长期巡查不是瞬时公开事实读取；新船痕、营火、Viz 变化及模式须证据。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "记录实际巡查进度、观察与比较；隐蔽登陆点不对外传播。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "核对是否与此前采掘扰动后的异常模式相吻合，",
+          "coverage": "fallback",
+          "work": "推断/选择/规划",
+          "prerequisites": "相关证据由该主体合法获得，并保留自主判断。长期巡查不是瞬时公开事实读取；新船痕、营火、Viz 变化及模式须证据。",
+          "residual": "计算合法不能证明推断、意愿或外交结果正确；计划不是完成",
+          "expected": "记录实际巡查进度、观察与比较；隐蔽登陆点不对外传播。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "不向外人透露隐蔽登陆点。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。长期巡查不是瞬时公开事实读取；新船痕、营火、Viz 变化及模式须证据。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "记录实际巡查进度、观察与比较；隐蔽登陆点不对外传播。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "archon-devers",
+      "phase": "reaction",
+      "pointer": "/rawText",
+      "textHash": "3dfa128550b42e468a73c8fdc063bcef2b8b313cfeb28c8468b44950c69921e1",
+      "clauses": [
+        {
+          "text": "立即应召前往 Lord Travvarn 处，",
+          "coverage": "fallback",
+          "work": "移动/到场",
+          "prerequisites": "起终点、路线、移动规则、实际持续时间和接触成立。应召后仍需移动/接触；报告来自自身知识，不是 canonical 全知；新的命令须 Travvarn 作答。",
+          "residual": "准备或提出前往不证明到达；不能用同一 placement 假定接触",
+          "expected": "移动、实报、请求和留档分别有依据；不能用反应文本证明任务完成。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "呈报过去一昼夜的值勤、武器与士兵状况：秩序尚可，但疲劳导致的轻微违纪在增加；",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。应召后仍需移动/接触；报告来自自身知识，不是 canonical 全知；新的命令须 Travvarn 作答。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "移动、实报、请求和留档分别有依据；不能用反应文本证明任务完成。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "并当场请求他说明此番整理船位、淡水粮秣与避风锚地的具体命令，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。应召后仍需移动/接触；报告来自自身知识，不是 canonical 全知；新的命令须 Travvarn 作答。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "移动、实报、请求和留档分别有依据；不能用反应文本证明任务完成。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "以便我将其与记录册和共同使命对照留档。",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。应召后仍需移动/接触；报告来自自身知识，不是 canonical 全知；新的命令须 Travvarn 作答。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "移动、实报、请求和留档分别有依据；不能用反应文本证明任务完成。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "lady-aerindel",
+      "phase": "reaction",
+      "pointer": "/rawText",
+      "textHash": "aa029ee46610f2aba8b8fbf30473f5d0130def4766422b1a3b2371c67018effc",
+      "clauses": [
+        {
+          "text": "随 Nilal 到西塔与军需官核对瀑布 Viz 产出、守卫轮换和 Ranger 支援请求的缺口；",
+          "coverage": "fallback",
+          "work": "观察/核查",
+          "prerequisites": "合法访问/感知依据、具体既存资料或已裁决的现场证据。与 Nilal/军需官共同核账需接触与账目；余量、预警需求和支援分配仍未决。",
+          "residual": "未知细节、发现过程、比较结论不能由事实可见标签自动产生",
+          "expected": "共同核对、分批清单和保留预警缺口的约束分别有证据。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "以剩余余量为基础排出分批支援清单，",
+          "coverage": "fallback",
+          "work": "推断/选择/规划",
+          "prerequisites": "相关证据由该主体合法获得，并保留自主判断。与 Nilal/军需官共同核账需接触与账目；余量、预警需求和支援分配仍未决。",
+          "residual": "计算合法不能证明推断、意愿或外交结果正确；计划不是完成",
+          "expected": "共同核对、分批清单和保留预警缺口的约束分别有证据。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "同时标出哪些缺口须留给 Ranger 预警网而非一次性耗尽。",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。与 Nilal/军需官共同核账需接触与账目；余量、预警需求和支援分配仍未决。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "共同核对、分批清单和保留预警缺口的约束分别有证据。",
+          "deterministicOperations": []
+        }
+      ]
+    },
+    {
+      "actorId": "sheriff-barris-ironoak",
+      "phase": "reaction",
+      "pointer": "/rawText",
+      "textHash": "eb015cfa1534905c57a065eeb9a808b4a507ea7a188fb9d26fafde3ec06ee738",
+      "clauses": [
+        {
+          "text": "Ealdorman Paddock Ryburn 当面交办：把本周三家大买家的报价、交割条件与在场证人整理成公开记录，并在市场张贴告示，说明下轮竞价按同一公开程序进行，任何私下雇用 constable 的请求一律拒绝。",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。首句是已收到交办的反应来源，不是新公告；三家报价和证人姓名不能从命令制造。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "取工具/编记录、召集、复述、指定张贴者与记录私雇分别留进度；暂不抓捕封贸。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "我先取纸笔，",
+          "coverage": "fallback",
+          "work": "物理操作/制作",
+          "prerequisites": "具体对象、资源所有权、数量、材料与执行规则成立。首句是已收到交办的反应来源，不是新公告；三家报价和证人姓名不能从命令制造。",
+          "residual": "抽象库存和工具名称不能证明加固、搬运、张贴或制作已发生",
+          "expected": "取工具/编记录、召集、复述、指定张贴者与记录私雇分别留进度；暂不抓捕封贸。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "逐项列出三家报价与证人姓名，",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。首句是已收到交办的反应来源，不是新公告；三家报价和证人姓名不能从命令制造。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "取工具/编记录、召集、复述、指定张贴者与记录私雇分别留进度；暂不抓捕封贸。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "注明每一条的来源和记录时间；",
+          "coverage": "fallback",
+          "work": "记录/复述",
+          "prerequisites": "原始数据、证词来源、记录载体或实际复述存在。首句是已收到交办的反应来源，不是新公告；三家报价和证人姓名不能从命令制造。",
+          "residual": "复制不能创造被抄信息，也不能把意图或命令当作已有记录",
+          "expected": "取工具/编记录、召集、复述、指定张贴者与记录私雇分别留进度；暂不抓捕封贸。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "随后召集当日轮值的 constables，",
+          "coverage": "fallback",
+          "work": "召集/派遣/接触",
+          "prerequisites": "个体或执行者身份、通道、可用性、旅行/接触时序与自主响应成立。首句是已收到交办的反应来源，不是新公告；三家报价和证人姓名不能从命令制造。",
+          "residual": "群体不是心智；请求、派出、到达和执行不能相互推导",
+          "expected": "取工具/编记录、召集、复述、指定张贴者与记录私雇分别留进度；暂不抓捕封贸。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "把这份公开程序复述一遍，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。首句是已收到交办的反应来源，不是新公告；三家报价和证人姓名不能从命令制造。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "取工具/编记录、召集、复述、指定张贴者与记录私雇分别留进度；暂不抓捕封贸。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "并当面指定告示张贴地点与当众宣读的人选，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。首句是已收到交办的反应来源，不是新公告；三家报价和证人姓名不能从命令制造。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "取工具/编记录、召集、复述、指定张贴者与记录私雇分别留进度；暂不抓捕封贸。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "要求他们记录任何仍试图私下出价的人、时间、地点和传递手段，",
+          "coverage": "fallback",
+          "work": "表达/请求",
+          "prerequisites": "发话者有依据，实际接触和通道/时序由规则或裁决确立。首句是已收到交办的反应来源，不是新公告；三家报价和证人姓名不能从命令制造。",
+          "residual": "发出内容不证明送达、答复、相信、服从或后续任务完成",
+          "expected": "取工具/编记录、召集、复述、指定张贴者与记录私雇分别留进度；暂不抓捕封贸。",
+          "deterministicOperations": []
+        },
+        {
+          "text": "但暂不抓捕、不封锁贸易。",
+          "coverage": "fallback",
+          "work": "条件/否定/承诺约束",
+          "prerequisites": "原意完整保留，依赖的行动/证据满足后才检验其遵守情况。首句是已收到交办的反应来源，不是新公告；三家报价和证人姓名不能从命令制造。",
+          "residual": "约束文本可保存，但不是独立完成的世界工作，不计执行覆盖收益",
+          "expected": "取工具/编记录、召集、复述、指定张贴者与记录私雇分别留进度；暂不抓捕封贸。",
+          "deterministicOperations": []
+        }
+      ]
+    }
+  ]
+}

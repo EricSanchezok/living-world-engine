@@ -7,17 +7,22 @@ const action: ActionInput = {
 };
 const annotations = (): TextAnnotation[] => actionTexts(action).map((p) => ({
   actorId: action.actorId, phase: "initial", pointer: p.pointer, textHash: sha256(p.text),
-  clauses: [{ text: p.text, coverage: "fallback", work: "delivery", prerequisites: "Bound messenger and route", residual: "Delivery not established", expected: "Pending until evidenced receipt" }],
+  clauses: [{ text: p.text, coverage: "fallback", work: "delivery", prerequisites: "Bound messenger and route", residual: "Delivery not established", expected: "Pending until evidenced receipt", deterministicOperations: [] }],
 }));
 
 describe("offline executable-interaction P0 evidence", () => {
   it("rejects dropped negation, parallel work, reaction changes, and duplicate actors", () => {
     expect(auditCoverage([action], [action], annotations())).toHaveLength(2);
+    expect(auditCoverage([action], [action], annotations()).map((p) => p.targetIds)).toEqual([["recipient"], []]);
+    const unsupportedCoverage = annotations();
+    unsupportedCoverage[0].clauses[0].coverage = "complete";
+    expect(() => auditCoverage([action], [action], unsupportedCoverage)).toThrow("Incomplete clause assessment");
     const dropped = annotations();
     dropped[0].clauses[0].text = "派信使送信；";
     expect(() => auditCoverage([action], [action], dropped)).toThrow("clause partition");
     expect(() => auditCoverage([action], [action], annotations().slice(0, 1))).toThrow("membership");
     expect(() => auditCoverage([action], [{ ...action, rawText: "取消寄信。" }], annotations())).toThrow("membership");
+    expect(() => auditCoverage([action], [{ ...action, targetIds: ["another-person"] }], annotations())).toThrow("membership");
     expect(() => auditCoverage([action, action], [action, action], annotations())).toThrow("roster");
   });
 

@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "sourceEvidenceHash": "207eed35e0cba767c07b4b47ac831d97b7ab785ec5c392f7da637b28fef85594",
+  "executionId": "465161a6-c7c4-4899-8ca9-0046b5014580",
+  "policy": "Historical physical-request DAG with every local computation, dispatch delay, queue wait, and persistence cost optimistically set to zero. Measured transport times stay whole. This is not a prediction or a universal latency bound.",
+  "dependencyEvidence": {
+    "preparation": "Known action compilation overlaps resumed AgentMind; resumed compilation waits for its AgentMind. Perception waits for both branches. eager-reference.ts prepare path.",
+    "perception": "Two sequential perception rounds, each with one dependent repair; committed-check context and Ledger sequence establish the order. truth-engine.ts runOnsetPerceptionStage.",
+    "reaction": "Six private reactions follow accepted perception; replacement compilation follows the finite reaction set. eager-reference.ts preparation/completion boundary.",
+    "planning": "Two physical plan batches run concurrently; each plan-verification batch has the same assigned action set as its producer. Logical source membership is retained in the inventory.",
+    "continuation": "The continuation batch contains the 22-action and 3-action components from p21. Duke Caedwine transitions separately after p24. The remaining transitions depend on continuation and reviewed plans; p27 also includes Bedewald from p22.",
+    "randomOrder": "Components sort by their smallest action ID. Duke is ordinal 0, the 22-action component ordinal 1, the 3-action continuation component ordinal 9, and the p22 components ordinals 12-20. OrderedRandomStream.finish waits for predecessors before transition.",
+    "commit": "Global observation waits for all transitions; final causal review waits for the assembled observation candidate. Local validation and persistence are zero in this optimistic DAG."
+  },
+  "parents": {
+    "p1": [],
+    "p2": [],
+    "p3": [],
+    "p4": [],
+    "p5": [],
+    "p6": [
+      "p5"
+    ],
+    "p7": [
+      "p1"
+    ],
+    "p8": [
+      "p7"
+    ],
+    "p9": [
+      "p2",
+      "p3",
+      "p4",
+      "p6",
+      "p8"
+    ],
+    "p10": [
+      "p9"
+    ],
+    "p11": [
+      "p10"
+    ],
+    "p12": [
+      "p11"
+    ],
+    "p13": [
+      "p12"
+    ],
+    "p14": [
+      "p12"
+    ],
+    "p15": [
+      "p12"
+    ],
+    "p16": [
+      "p12"
+    ],
+    "p17": [
+      "p12"
+    ],
+    "p18": [
+      "p12"
+    ],
+    "p19": [
+      "p13",
+      "p14",
+      "p15",
+      "p16",
+      "p17",
+      "p18"
+    ],
+    "p20": [
+      "p19"
+    ],
+    "p21": [
+      "p20"
+    ],
+    "p22": [
+      "p20"
+    ],
+    "p23": [
+      "p22"
+    ],
+    "p24": [
+      "p21"
+    ],
+    "p25": [
+      "p24"
+    ],
+    "p26": [
+      "p24"
+    ],
+    "p27": [
+      "p23",
+      "p24",
+      "p25"
+    ],
+    "p28": [
+      "p23",
+      "p24",
+      "p25"
+    ],
+    "p29": [
+      "p26",
+      "p27",
+      "p28"
+    ],
+    "p30": [
+      "p29"
+    ]
+  },
+  "inventorySha256": "76d2b487f3f1542ca6f1e48d700dec6b87f15ff117989d1c8f771f8517e4f631"
+}

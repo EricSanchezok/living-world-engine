@@ -4,14 +4,23 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 // Offline P0 evidence only. This module has no provider, environment, or world-write dependency.
+// Protocol and evidence: ../../docs/research/2026-09-22-step-e3-p0.md
 export interface ActionInput {
   id: string;
   actorId: string;
   rawText: string;
   targetIds: string[];
+  goal?: string;
+  means?: string | null;
+}
+
+export function actionsDiffer(a: ActionInput, b: ActionInput): boolean {
+  return a.id !== b.id || a.rawText !== b.rawText || a.goal !== b.goal || a.means !== b.means ||
+    JSON.stringify(a.targetIds) !== JSON.stringify(b.targetIds);
 }
 
 interface WorkItem { slot?: number; action: { actorRef: string; rawText: string } }
+interface AssignedState { actionSet?: { assigned?: Array<{ actorRef: string; rawText: string }> } }
 interface LedgerEvent {
   sequence: number;
   event: string;
@@ -34,7 +43,10 @@ interface LedgerEvent {
     request?: { externalActions: Array<{ agentId: string }> };
     state?: { agents: Record<string, unknown>; truth: { entities: Record<string, unknown> } };
     invocations?: Array<{ id: string; tokenUsage: Record<string, number | null> }>;
-    context?: { task?: {
+    context?: { state?: AssignedState & {
+      shared?: { state?: AssignedState };
+      slots?: Array<{ slot: number; delta: { state?: AssignedState } }>;
+    }; task?: {
       planningWorklist?: { actions: WorkItem[] };
       transitionWorklist?: { actions: WorkItem[] };
     } };
@@ -45,7 +57,7 @@ export function sha256(value: string | Buffer): string {
   return createHash("sha256").update(value).digest("hex");
 }
 
-export function actionTexts(action: ActionInput): Array<{ pointer: string; text: string }> {
+export function actionTexts(action: ActionInput): Array<{ pointer: string; text: string; targetIds: string[] }> {
   if (action.rawText.startsWith("CURRENT_PARALLEL_ATTEMPTS_V1 ")) {
     const wrapper = JSON.parse(action.rawText.slice(action.rawText.indexOf("\n") + 1)) as {
       attempts: Array<{ text: string; targetIndices: number[] }>;
@@ -55,9 +67,10 @@ export function actionTexts(action: ActionInput): Array<{ pointer: string; text:
         !Number.isInteger(i) || i < 0 || i >= action.targetIds.length))) {
       throw new Error(`Invalid parallel source: ${action.actorId}`);
     }
-    return wrapper.attempts.map((x, i) => ({ pointer: `/attempts/${i}/text`, text: x.text }));
+    return wrapper.attempts.map((x, i) => ({ pointer: `/attempts/${i}/text`, text: x.text,
+      targetIds: x.targetIndices.map((index) => action.targetIds[index]) }));
   }
-  return [{ pointer: "/rawText", text: action.rawText }];
+  return [{ pointer: "/rawText", text: action.rawText, targetIds: action.targetIds }];
 }
 
 export interface ClauseAnnotation {
@@ -67,6 +80,7 @@ export interface ClauseAnnotation {
   prerequisites: string;
   residual: string;
   expected: string;
+  deterministicOperations: string[];
 }
 export interface TextAnnotation {
   actorId: string;
@@ -83,7 +97,7 @@ export function auditCoverage(initial: ActionInput[], final: ActionInput[], anno
     final.length !== initial.length || final.some((a) => !initialByActor.has(a.actorId))) {
     throw new Error("Action roster must be complete and unique across phases");
   }
-  const changed = final.filter((a) => a.rawText !== initialByActor.get(a.actorId)!.rawText);
+  const changed = final.filter((a) => actionsDiffer(a, initialByActor.get(a.actorId)!));
   const expected = [
     ...initial.map((action) => ({ action, phase: "initial" as const })),
     ...changed.map((action) => ({ action, phase: "reaction" as const })),
@@ -91,7 +105,7 @@ export function auditCoverage(initial: ActionInput[], final: ActionInput[], anno
   const key = (x: { actorId: string; phase: string; pointer: string }) => `${x.phase}:${x.actorId}:${x.pointer}`;
   const index = new Map(annotations.map((a) => [key(a), a]));
   if (index.size !== annotations.length || index.size !== expected.length) throw new Error("Annotation membership mismatch");
-  return expected.map(({ action, phase, pointer, text }) => {
+  return expected.map(({ action, phase, pointer, text, targetIds }) => {
     const annotation = index.get(key({ actorId: action.actorId, phase, pointer }));
     if (!annotation || annotation.textHash !== sha256(text) || !annotation.clauses.length ||
       annotation.clauses.map((c) => c.text).join("") !== text) {
@@ -101,12 +115,17 @@ export function auditCoverage(initial: ActionInput[], final: ActionInput[], anno
     const clauses = annotation.clauses.map((clause) => {
       if (!clause.text || !clause.work || !clause.prerequisites || !clause.expected ||
         !["complete", "partial", "fallback", "unknown"].includes(clause.coverage) ||
-        (clause.coverage !== "complete" && !clause.residual)) throw new Error("Incomplete clause assessment");
+        (clause.coverage !== "complete" && !clause.residual) || !Array.isArray(clause.deterministicOperations) ||
+        ((clause.coverage === "complete" || clause.coverage === "partial") && !clause.deterministicOperations.length)) {
+        throw new Error("Incomplete clause assessment");
+      }
       const start = offset;
       offset += clause.text.length;
       return { ...clause, startUtf16: start, endUtf16: offset };
     });
-    return { actorId: action.actorId, actionId: action.id, phase, pointer, textHash: annotation.textHash, clauses };
+    return { actorId: action.actorId, actionId: action.id, phase, pointer, targetIds,
+      currentBoundary: phase === "initial" ? "initial submitted frontier" : "reaction replacement frontier",
+      textHash: annotation.textHash, clauses };
   });
 }
 
@@ -168,7 +187,11 @@ export function extractSource(root: string, directory: string, label: string) {
     const transport = associated.find((x) => x.event === "model.transport.completed");
     const audit = associated.find((x) => x.event === "model.audit.persisted")?.payload?.invocations?.find((x) => x.id === invocationId);
     const request = serialized.get(invocationId);
-    const work = request?.payload?.context?.task?.planningWorklist?.actions ?? request?.payload?.context?.task?.transitionWorklist?.actions;
+    const ctx = request?.payload?.context;
+    const assigned = ctx?.state?.slots?.flatMap((slot) =>
+      (slot.delta.state?.actionSet?.assigned ?? ctx.state?.shared?.state?.actionSet?.assigned ?? [])
+        .map((action) => ({ slot: slot.slot, action }))) ?? ctx?.state?.actionSet?.assigned?.map((action) => ({ slot: 0, action }));
+    const work = ctx?.task?.planningWorklist?.actions ?? ctx?.task?.transitionWorklist?.actions ?? assigned;
     const captured = captures.find((x) => x.payload?.sourceInvocationId === invocationId)?.payload?.actions;
     return {
       id: `p${i + 1}`, invocationId, publicInvocationId: `${executionId}::${invocationId}`,
@@ -189,6 +212,7 @@ export function extractSource(root: string, directory: string, label: string) {
     throw new Error("Transport pairing incomplete; do not silently omit retries or failures");
   }
   const result = readJson<{ status: string; newHttp: number; player: Record<string, unknown>; elapsedMs: number }>(path.join(source, "run/result.json"));
+  const executions = readJson<Array<{ id: string; startedAt: string; finishedAt: string; status: string; manifest: { id: string; version: string } }>>(path.join(source, "run/executions.json"));
   return {
     label, directory, hashes, codeRevision: manifest.codeRevision,
     algorithm: { id: manifest.algorithm.id, version: manifest.algorithm.version, manifestHash: manifest.algorithm.manifestHash },
@@ -198,6 +222,9 @@ export function extractSource(root: string, directory: string, label: string) {
     agentCount: Object.keys(preparation.payload.state.agents).length,
     entityCount: Object.keys(preparation.payload.state.truth.entities).length,
     capturedActions: [...actions.values()].sort((a, b) => a.actorId.localeCompare(b.actorId)),
+    historicalExecutions: executions.map((e) => ({ id: e.id, algorithm: `${e.manifest.id}@${e.manifest.version}`,
+      startedAt: e.startedAt, finishedAt: e.finishedAt, status: e.status,
+      elapsedMs: Date.parse(e.finishedAt) - Date.parse(e.startedAt) })),
     http, historicalTotalHttp: result.newHttp, historicalPlayer: result.player,
     historicalTotalElapsedMs: result.elapsedMs, historicalStatus: result.status,
   };
@@ -214,11 +241,22 @@ function main() {
   const evidenceFile = path.join(root, "incremental-player-02/run/step-1-evidence.json");
   const evidenceHash = sha256(readFileSync(evidenceFile));
   if (evidenceHash !== "207eed35e0cba767c07b4b47ac831d97b7ab785ec5c392f7da637b28fef85594") throw new Error("P0 /51 source hash mismatch");
-  const evidence = readJson<{ committed: Record<string, unknown> & { initialActions: ActionInput[]; actions: ActionInput[] } }>(evidenceFile);
+  const evidence = readJson<{
+    source: { agents: Record<string, {
+      bindings: Record<string, { canonicalEntityIds: string[] }>;
+      belief: { localEntities: Record<string, unknown> };
+    }> };
+    committed: Record<string, unknown> & { initialActions: ActionInput[]; actions: ActionInput[] };
+  }>(evidenceFile);
   const { committed } = evidence;
   const report = {
     version: 1, paidModelHttp: 0, sourceEvidenceHash: evidenceHash, sources,
     initialActions: committed.initialActions, finalActions: committed.actions,
+    initialTargetBindings: committed.initialActions.flatMap((a) => a.targetIds.map((localId) => ({
+      actorId: a.actorId, localId,
+      canonicalEntityIds: evidence.source.agents[a.actorId].bindings[localId]?.canonicalEntityIds ?? [],
+      knownLocalEntity: Object.hasOwn(evidence.source.agents[a.actorId].belief.localEntities, localId),
+    }))),
     historicalCommit: Object.fromEntries(["baseRevision", "revision", "temporalBoundary", "temporalPlans", "outcomes", "events", "operations", "observations", "activityDispositions"].map((k) => [k, committed[k]])),
   };
   mkdirSync(output, { recursive: true });

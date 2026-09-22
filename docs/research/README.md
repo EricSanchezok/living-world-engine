@@ -1,6 +1,6 @@
 # 调研记录（Research）
 
-这里存放对外部世界的调研证据——游戏设计理论、方法论、相似产品。调研不是决定：结论被采纳时写成决策（[docs/decisions/](../../docs/decisions/README.md)）或规格（[../game-design/](../game-design/README.md)），并链接回本目录的研究记录。
+这里存放外部调研证据与可复现的研究实验结果。研究不是决定：结论被采纳时写成决策（[docs/decisions/](../../docs/decisions/README.md)）或规格（[../game-design/](../game-design/README.md)），并链接回本目录的研究记录。
 
 ## 命名与格式
 
@@ -12,6 +12,7 @@
 
 | 日期 | 主题 | 文件 |
 |---|---|---|
+| 2026-09-22 | STEP-E3 可执行交互 P0 可行性结果 | [2026-09-22-step-e3-p0.md](2026-09-22-step-e3-p0.md) |
 | 2026-08-18 | 游戏设计学术理论 | [2026-08-18-game-theory-academic.md](2026-08-18-game-theory-academic.md) |
 | 2026-08-18 | 玩法方法论与无限游玩 | [2026-08-18-methodology-playability.md](2026-08-18-methodology-playability.md) |
 | 2026-08-18 | 相似 AI 游戏与产品 | [2026-08-18-similar-ai-games.md](2026-08-18-similar-ai-games.md) |
