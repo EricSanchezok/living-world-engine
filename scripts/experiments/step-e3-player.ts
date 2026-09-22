@@ -106,13 +106,21 @@ function pairs(): Pair[] {
     category, seed: 20261001 + category * 5 + i, order: (category * 5 + i) % 2 ? ["C", "B"] : ["B", "C"], phase: "confirmation" })))];
 }
 
-export async function e3Player(mode: "prepare" | "canary" | "confirmation", root: string) {
+export function assertE3PlayerRootPhase(root: string, phase: "P2" | "R1") {
+  const other = phase === "P2" ? "R1" : "P2";
+  if ([`${other}-manifest.json`, `${other}-budget.jsonl`, `${other}-episodes`].some(file => existsSync(path.join(root, file)))) {
+    throw new Error("Original and repaired player experiments require separate evidence roots");
+  }
+}
+
+export async function e3Player(mode: "prepare" | "canary" | "confirmation", root: string, phase: "P2" | "R1" = "P2") {
+  assertE3PlayerRootPhase(root, phase);
   const revision = cleanRevision();
   let localStop: string | undefined;
-  const env = e3Environment(root, "P2", { stopReason: () => localStop });
+  const env = e3Environment(root, phase, { stopReason: () => localStop });
   const refs = { B: incrementalPlayerAlgorithmRef(), C: executablePlayerAlgorithmRef() };
-  const binding = { protocol: "step-e3-complete-player-v1", revision, tasks: E3_TASKS, pairs: pairs(), limits,
-    refs, prices: E3_PRICE, ceilings: E3_PHASES.P2, snapshot: E3_SNAPSHOT,
+  const binding = { protocol: phase === "R1" ? "step-e3-repair-validation-v1" : "step-e3-complete-player-v1", revision, tasks: E3_TASKS, pairs: pairs(), limits,
+    refs, prices: E3_PRICE, ceilings: E3_PHASES[phase], snapshot: E3_SNAPSHOT,
     initialStatePolicy: "Each pair receives one newly inferred complete bootstrap and player arrival. Copy that unadvanced database to both arms. Canonical truth, private cognition, next actions, arrival, RNG and initial history must hash identically. Bootstrap belongs to its actual B producer and is reported once as a shared initialization cost. C changes only the opt-in root for future steps; never imports a historical model output or changes an existing execution journal.",
     evaluation: "All 33 pairs and three inputs per arm remain in the denominator. Performance and coverage failures do not suppress later diagnostics. Every input uses the real player API; B/C continue on their own committed trajectory. No repair or prompt tuning between frozen samples. A source-supported nonempty event/observation still needs independent semantic review; generic succeeded and time-only commits are not automatically useful. Severe semantic failures fail qualification even when later samples run." };
   const worldPath = path.join(root, "worlds/blackmarsh/world");
@@ -132,24 +140,24 @@ export async function e3Player(mode: "prepare" | "canary" | "confirmation", root
       const retrieval = createActionCompilationRetrievalRuntimeProvider({ cacheRoot, encoder });
       for (const ref of Object.values(refs)) await retrieval.preflight(ref, { worldContentHash: persisted.contentHash, state: persisted.initialState });
     } finally { cache.close(); await encoder.dispose?.(); }
-    save(path.join(root, "P2-manifest.json"), { ...binding, worldHash: persisted.contentHash, templateHash: contentHash(loadWorldTemplate(worldPath)) });
+    save(path.join(root, `${phase}-manifest.json`), { ...binding, worldHash: persisted.contentHash, templateHash: contentHash(loadWorldTemplate(worldPath)) });
     return;
   }
-  const manifest = json<typeof binding & { worldHash: string; templateHash: string }>(path.join(root, "P2-manifest.json"));
+  const manifest = json<typeof binding & { worldHash: string; templateHash: string }>(path.join(root, `${phase}-manifest.json`));
   if (manifest.revision !== revision) {
     assertE3ContinuationPaths(execFileSync("git", ["diff", "--name-only", manifest.revision, revision], { encoding: "utf8" }).trim().split("\n").filter(Boolean));
   }
   if (contentHash({ ...manifest, worldHash: undefined, templateHash: undefined }) !== contentHash({ ...binding, revision: manifest.revision }) ||
-    contentHash(loadWorldTemplate(worldPath)) !== manifest.templateHash) throw new Error("Frozen P2 binding changed");
+    contentHash(loadWorldTemplate(worldPath)) !== manifest.templateHash) throw new Error("Frozen player experiment binding changed");
   if (env.budget.summary.blockingUnknown.length) throw new Error("Review and retain unknown reservations before continuing distinct trials");
-  if (mode === "confirmation" && !existsSync(path.join(root, "P2-canary-result.json"))) throw new Error("Canary accounting must complete before confirmation");
+  if (mode === "confirmation" && !existsSync(path.join(root, `${phase}-canary-result.json`))) throw new Error("Canary accounting must complete before confirmation");
   const start = performance.now();
   let current = "starting", actionProgress: PlayerFeedbackResult | undefined;
   const progress = () => {
     const value = { current, elapsedMs: performance.now() - start, stop: localStop ?? env.stopReason(), budget: env.budget.summary,
       action: actionProgress && { status: actionProgress.status, failure: actionProgress.failure, feedback: actionProgress.feedback.length,
         firstFeedbackElapsedMs: actionProgress.firstFeedbackElapsedMs, endedElapsedMs: actionProgress.endedElapsedMs } };
-    writeFileSync(path.join(root, "P2-progress.json"), JSON.stringify(value, null, 2));
+    writeFileSync(path.join(root, `${phase}-progress.json`), JSON.stringify(value, null, 2));
     process.stdout.write(`${JSON.stringify(value)}\n`);
   };
   const timer = setInterval(progress, 15_000), stop = () => { localStop = "Operator stopped new dispatch"; };
@@ -157,7 +165,7 @@ export async function e3Player(mode: "prepare" | "canary" | "confirmation", root
   const rows: unknown[] = [];
   try {
     for (const pair of manifest.pairs.filter(p => p.phase === mode)) {
-      const directory = path.join(root, "P2-episodes", pair.id); mkdirSync(directory, { recursive: true });
+      const directory = path.join(root, `${phase}-episodes`, pair.id); mkdirSync(directory, { recursive: true });
       const definition = loadWorldScript(worldPath, { seed: pair.seed, modelCatalog: env.catalog });
       const repository = new MemoryWorldRepository({ [definition.id]: definition });
       const bootstrapPath = path.join(directory, "bootstrap.sqlite"), initialPath = path.join(directory, "initial.json");
@@ -262,13 +270,15 @@ export async function e3Player(mode: "prepare" | "canary" | "confirmation", root
         } finally { await env.drain(); database.close(); }
       }
     }
-    env.checkpoint(`P2-${mode}-result.json`, { complete: true, rows, elapsedMs: performance.now() - start,
+    env.checkpoint(`${phase}-${mode}-result.json`, { complete: true, rows, elapsedMs: performance.now() - start,
       elapsedBasis: "This runner invocation; use immutable per-input waits for a phase resumed after an operational stop",
       frozenRevision: manifest.revision, runnerRevision: revision });
   } finally { clearInterval(timer); process.off("SIGINT", stop); process.off("SIGTERM", stop); progress(); }
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const [mode, root] = process.argv.slice(2);
-  if (!root || mode !== "prepare" && mode !== "canary" && mode !== "confirmation") throw new Error("Usage: step-e3-player.ts prepare|canary|confirmation ROOT");
-  e3Player(mode, path.resolve(root)).catch(error => { process.stderr.write(`${String(error)}\n`); process.exitCode = 1; });
+  const [mode, root, phase = "P2"] = process.argv.slice(2);
+  if (!root || mode !== "prepare" && mode !== "canary" && mode !== "confirmation" || phase !== "P2" && phase !== "R1") {
+    throw new Error("Usage: step-e3-player.ts prepare|canary|confirmation ROOT [P2|R1]");
+  }
+  e3Player(mode, path.resolve(root), phase).catch(error => { process.stderr.write(`${String(error)}\n`); process.exitCode = 1; });
 }

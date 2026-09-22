@@ -15,7 +15,7 @@ export const E3_SNAPSHOT = "4f6530d4868b8613bd027a36cf609c215bf58e57c879f9553f83
 export const E3_PRICE = { accountId: "deepseek-api", modelId: "deepseek-flash", inputHitNanoCnyPerToken: 40,
   inputMissNanoCnyPerToken: 2000, outputNanoCnyPerToken: 8000,
   pricingSource: "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/", pricingCheckedAt: "2026-09-22" } as const;
-export const E3_PHASES = { P1: { cny: 100, http: 60 }, P2: { cny: 300, http: 2400 } } as const;
+export const E3_PHASES = { P1: { cny: 100, http: 60 }, P2: { cny: 300, http: 2400 }, R1: { cny: 100, http: 800 } } as const;
 export const json = <T = unknown>(file: string): T => JSON.parse(readFileSync(file, "utf8"));
 export function save(file: string, value: unknown) {
   mkdirSync(path.dirname(file), { recursive: true });

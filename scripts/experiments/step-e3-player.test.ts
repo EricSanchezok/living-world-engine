@@ -2,7 +2,7 @@ import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterEach, expect, it } from "vitest";
-import { assertE3ContinuationPaths, completedE3Inputs } from "./step-e3-player";
+import { assertE3ContinuationPaths, assertE3PlayerRootPhase, completedE3Inputs } from "./step-e3-player";
 
 const directories: string[] = [];
 afterEach(() => directories.splice(0).forEach(directory => rmSync(directory, { recursive: true, force: true })));
@@ -18,6 +18,16 @@ function input(root: string, index: number, overrides: Record<string, unknown> =
   return row;
 }
 const texts = ["input 1", "input 2", "input 3"];
+
+it("refuses to mix repaired inference with an original budget or measurement root", () => {
+  const original = directory(), repaired = directory();
+  writeFileSync(path.join(original, "P2-budget.jsonl"), "");
+  writeFileSync(path.join(repaired, "R1-manifest.json"), "{}");
+  expect(() => assertE3PlayerRootPhase(original, "R1")).toThrow("separate evidence roots");
+  expect(() => assertE3PlayerRootPhase(repaired, "P2")).toThrow("separate evidence roots");
+  expect(() => assertE3PlayerRootPhase(original, "P2")).not.toThrow();
+  expect(() => assertE3PlayerRootPhase(repaired, "R1")).not.toThrow();
+});
 
 it("retains failed inputs as a completed prefix instead of retrying them", () => {
   const root = directory(), first = input(root, 1), second = input(root, 2);
