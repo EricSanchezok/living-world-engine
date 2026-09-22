@@ -27,6 +27,7 @@ import {
   type WorldStepInput,
 } from "../../engine/runtime/execution";
 import { historyReplayBaseHash } from "../../engine/runtime/history-replay";
+import { replaySimulationState } from "../../engine/runtime/transaction";
 import { contentHash } from "../../engine/models/model-audit";
 import { ModelTransportError } from "../../engine/models/model-provider";
 import { promptBundle } from "../../engine/prompts";
@@ -204,6 +205,79 @@ function reactionHarness(input: {
 }
 
 describe("World Instance host", () => {
+  it("accepts a new action after a failed run with an active player activity and preserves failure evidence", async () => {
+    let timerId = 0;
+    const timers = new Map<number, () => void | Promise<void>>();
+    const { database, host, provider } = reactionHarness({
+      setTimer: callback => {
+        const id = ++timerId;
+        timers.set(id, async () => { timers.delete(id); await callback(); });
+        return id as unknown as ReturnType<typeof setTimeout>;
+      },
+      clearTimer: timer => { timers.delete(timer as unknown as number); },
+    });
+    try {
+      const created = await host.createInstance(originStart);
+      const participant = created.participants[0]!;
+      const generate = provider.generateStructured.bind(provider);
+      let failAfterCommit = true;
+      provider.generateStructured = request => {
+        if (failAfterCommit && database.readInstance(created.summary.id).document.state.revision > created.summary.revision) {
+          throw new ModelTransportError("controlled failure after the player's first travel checkpoint");
+        }
+        return generate(request);
+      };
+      await host.submitAction(created.summary.id, participant.id, {
+        submissionId: "failed-long-travel", expectedRevision: created.summary.revision, text: "我沿道路走向100公里外的城镇。",
+      });
+      const failedCallback = timers.get(timerId)!;
+      await failedCallback();
+      const failed = database.readInstance(created.summary.id).document;
+      const failedRun = Object.values(failed.runs).find(run => run.status === "failed")!;
+      expect(failedRun).toMatchObject({ stopReason: "execution-failed", error: expect.stringContaining("controlled failure") });
+      expect(failed.state.revision).toBe(created.summary.revision + 1);
+      const active = Object.values(failed.state.truth.activities).find(activity =>
+        activity.status === "active" && activity.participantAgentIds.includes(participant.agentId))!;
+      expect(active).toBeDefined();
+      const failureHash = contentHash(failedRun), sourceHash = contentHash(failed.state);
+      const input = { submissionId: "recover-after-failure", expectedRevision: failed.state.revision, text: "我停下脚步，观察石门。" };
+      await expect(host.submitAction(created.summary.id, participant.id, input, "not-the-owner")).rejects.toMatchObject({ status: 404 });
+      await expect(host.submitAction(created.summary.id, participant.id, { ...input, expectedRevision: created.summary.revision }))
+        .rejects.toMatchObject({ status: 409 });
+      expect(contentHash(database.readInstance(created.summary.id).document)).toBe(contentHash(failed));
+      failAfterCommit = false;
+      const accepted = await host.submitAction(created.summary.id, participant.id, input);
+      const recoveryCallback = timers.get(timerId)!;
+      expect(accepted.run).toMatchObject({ status: "queued" });
+      expect(accepted.run!.id).not.toBe(failedRun.id);
+      const recovered = database.readInstance(created.summary.id).document;
+      expect(contentHash(recovered.state)).toBe(sourceHash);
+      expect(contentHash(recovered.runs[failedRun.id])).toBe(failureHash);
+      const duplicate = await host.submitAction(created.summary.id, participant.id, input);
+      expect(duplicate.run!.id).toBe(accepted.run!.id);
+      expect(database.readInstance(created.summary.id).document.participantIntents.filter(intent => intent.submissionId === input.submissionId)).toHaveLength(1);
+      await failedCallback();
+      expect(contentHash(database.readInstance(created.summary.id).document.state)).toBe(sourceHash);
+      await recoveryCallback();
+      const window = database.readInstance(created.summary.id).document.actionWindow;
+      expect(window?.kind).toBe("reaction");
+      if (!window || window.kind !== "reaction") throw new Error("replacement preparation must expose its actual onset reaction");
+      await host.submitReaction(created.summary.id, participant.id, {
+        submissionId: "keep-recovery-action", windowId: window.id, generation: window.generation,
+        preparedStepId: window.preparedStepId, expectedRevision: failed.state.revision, kind: "keep",
+      });
+      await timers.get(timerId)!();
+      const final = database.readInstance(created.summary.id).document;
+      expect(final.state.revision).toBe(failed.state.revision + 1);
+      expect(final.state.truth.activities[active.id]!.status).toBe("cancelled");
+      expect(contentHash(final.runs[failedRun.id])).toBe(failureHash);
+      expect(final.state.history.at(-1)!.initialActions).toContainEqual(expect.objectContaining({ actorId: participant.agentId, rawText: input.text }));
+      expect(replaySimulationState(final.state)).toEqual(final.state);
+      expect(database.debugDoctor()).toMatchObject({ indexFresh: true, missingIndexRows: 0, orphanedArtifacts: 0 });
+    } finally { database.close(); }
+  }, 30_000);
+
+
   it("drains sibling bootstrap calls before closing the failed execution", async () => {
     const { database, host, provider } = harness({ defaultAlgorithmRef: eagerReferenceAlgorithmRef({
       ...FULL_CATALOG_EAGER_REFERENCE_CONFIG, agentMindMaxSlots: 1,

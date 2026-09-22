@@ -2268,19 +2268,24 @@ export class WorldHost {
       }
       if (input.expectedRevision !== document.state.revision) throw new WorldHostError("world revision changed", 409);
 
-      const pausedRun = currentRun(document);
+      const previousRun = currentRun(document);
       // A debug checkpoint may be invalidated after its action window has
       // already moved to `resolving`. That window belongs to the discarded
       // preparation and must not block the next participant action.
-      if (pausedRun?.status === "preparation-invalidated" && document.actionWindow?.status === "resolving") {
+      if (previousRun?.status === "preparation-invalidated" && document.actionWindow?.status === "resolving") {
         document.actionWindow = null;
       }
       let requiredAgentIds = externalDecisionAgentIds(document);
-      if (pausedRun && (pausedRun.status === "paused" || pausedRun.status === "budget-paused" || pausedRun.status === "debug-paused") &&
+      if (previousRun && (previousRun.status === "paused" || previousRun.status === "budget-paused" ||
+        previousRun.status === "debug-paused" || previousRun.status === "failed") &&
         document.policyBindings[participant.agentId]?.kind === "external") {
-        pausedRun.status = "completed";
-        pausedRun.stopReason = "replaced-by-external-action";
-        pausedRun.updatedAt = this.now().toISOString();
+        // A terminal failure can leave the participant's Activity busy.
+        // Accept a distinct intent without rewriting the failed run's evidence.
+        if (previousRun.status !== "failed") {
+          previousRun.status = "completed";
+          previousRun.stopReason = "replaced-by-external-action";
+          previousRun.updatedAt = this.now().toISOString();
+        }
         document.actionWindow = null;
         requiredAgentIds = [participant.agentId];
         this.createRun(document, "participant_action", null, "awaiting-decision");

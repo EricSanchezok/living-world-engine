@@ -140,6 +140,8 @@ required Agent 的提交以 `submissionId` 幂等。相同 ID 与相同内容重
 
 一个 Participant intent 对应一个持久 WorldRun，能够连续提交多个 TemporalBoundary。状态为 `queued | running | pausing | paused | awaiting-decision | awaiting-reaction | preparation-invalidated | completed | failed | budget-paused`；记录 generation、根行动、Activity、execution、已提交 revisions、停止原因和当前 lease。
 
+运行失败后，即使该玩家的 Activity 仍处于执行中，持有 external 策略的原 Participant 也可以提交一个不同 ID 的新行动。宿主先验证 principal、revision 与幂等身份，再创建新的 WorldRun；原失败状态、错误和执行证据保持不变。接收输入本身不改 canonical state，旧活动只在新步骤实际提交时按中断规则处理，旧运行的迟到回调不能恢复执行。
+
 每个自动 lease 默认最多 100 次提交或 15 分钟真实执行时间，任一预算耗尽只进入 `budget-paused`。需要真人反应时，预演执行将完整 `WorldStepPreparation` 写入内容寻址 Ledger artifact，并与 frozen request/roster hashes 和窗口原子持久化；预演执行以 succeeded 结束但没有 commit revision。回答后的短执行以预演为 parent，验证全部 hash 后完成正时间提交。artifact、manifest、roster 或 source 不匹配时 canonical state 保持不变并进入 `preparation-invalidated`；进程启动不重跑模型，只有用户显式恢复才重新预演。
 
 ## Participant 准入与控制转移
