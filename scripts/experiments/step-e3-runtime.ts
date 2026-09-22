@@ -46,7 +46,7 @@ export function e3Environment(root: string, phase: keyof typeof E3_PHASES, optio
     registry: { catalog, capture: async hash => registry.snapshot(hash ?? E3_SNAPSHOT),
       refresh: async () => { throw new ModelConfigurationError("Frozen model registry refresh disabled"); }, status: () => registry.status() },
     fetchForAccount: (id, account) => {
-      if (id !== E3_PRICE.accountId) throw new ModelConfigurationError("E3 account drift");
+      if (id !== E3_PRICE.accountId) return async () => { throw new ModelConfigurationError("E3 account drift"); };
       if (!transport) {
         transport = new FirstPassExperimentTransport(budget, { root: path.join(root, phase), baseUrl: account.base_url,
         inputTokenCeiling: 1_048_576, outputTokenCeiling: 131_072, fetch: network(id, account) ?? fetch,
