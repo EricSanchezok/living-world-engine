@@ -1,6 +1,6 @@
 # STEP-E3：修复与追加预算验证
 
-本记录跟踪原实验暴露的缺陷修复及独立 R1 验证。[原实验报告](2026-09-22-step-e3-execution.md)保留原冻结版本的 23/198 条测量；新版本结果不填入原版本剩余的 175 条。
+日期：2026-09-22。五个确定性缺陷已修复，观察输入已接入无损动作字典；追加 R1 实测在 100 元并发预留边界结束，已测 5/198 条，193 条未测。没有取得合格玩家结果。新证据明确暴露复核器误判与持续空推进，不能将工程修复称为整个实验成功。[原实验报告](2026-09-22-step-e3-execution.md)保留原冻结版本的 23/198 条测量；R1 不填入原版本剩余的 175 条。
 
 ## 确定性修复
 
@@ -13,14 +13,80 @@
 | 定向修复拒绝本计划的待定 Condition | 仅允许同 action、subject、channel 的效果字段沿用原编号 | 正例提交重放；5 类越界反例回滚；历史 5 个失败输出材料化全部通过 | `77440c53` |
 | Observation action 数组重复导致超出模型上下文 | B/C 同时选用现有精确 record/sequence 字典 | 真实 12 槽请求从 2,982,683 字节减至 1,501,664 字节，展开哈希一致；注册入口回归通过 | `bc22e73c` |
 
-各修复单元均在完整 `check:fast` 通过后提交并推送。条件修复后的完整检查为 341 个测试文件、2068 条测试。离线复现和自动测试没有 DeepSeek 支出，也不构成真实玩家任务成功证据。永久回归与原因分别记录在 postmortem [0144](../postmortems/0144-activity-details-overwrote-temporal-profiles.md)、[0145](../postmortems/0145-reaction-compilation-lost-introduced-identities.md)、[0146](../postmortems/0146-reaction-programs-mutated-frozen-execution-state.md)、[0147](../postmortems/0147-failed-runs-blocked-new-player-actions.md)、[0148](../postmortems/0148-plan-repair-rejected-its-own-pending-conditions.md)、[0149](../postmortems/0149-observation-repetition-exhausted-model-context.md)。
+各修复单元均在完整 `check:fast` 通过后提交并推送 main。R1 冻结前完整检查为 341 个测试文件、2070 条测试，lint 为 0 错误与 74 个既有警告。离线复现和自动测试没有 DeepSeek 支出，也不构成真实玩家任务成功证据。永久回归与原因分别记录在 postmortem [0144](../postmortems/0144-activity-details-overwrote-temporal-profiles.md)、[0145](../postmortems/0145-reaction-compilation-lost-introduced-identities.md)、[0146](../postmortems/0146-reaction-programs-mutated-frozen-execution-state.md)、[0147](../postmortems/0147-failed-runs-blocked-new-player-actions.md)、[0148](../postmortems/0148-plan-repair-rejected-its-own-pending-conditions.md)、[0149](../postmortems/0149-observation-repetition-exhausted-model-context.md)。
 
 ## R1 验证协议
 
-R1 使用独立证据根 `.livingworld-benchmarks/step-e3/repair-v1/` 和独立追加 100 元账本。协议、完整 49 人世界、三组 canary 与三十组 confirmation 的固定队列、原输入与接受条件由 [0180](../specs/0180-executable-interaction-diagnostic.md)及[运行器](../../scripts/experiments/step-e3-player.ts)约束。修复后的 B、C producer 均为 version 3。原世界不补写 authored capabilities，不减少角色、动作自由或批量槽位。
+R1 使用独立证据根 `.livingworld-benchmarks/step-e3/repair-v1/` 和独立追加 100 元／800 HTTP 账本，冻结版本为 `dc960d18ce9c03e6885e24a2d80545d0c345acd0`。协议、完整 49 人世界、三组 canary 与三十组 confirmation 的固定队列、原输入与接受条件由 [0180](../specs/0180-executable-interaction-diagnostic.md)及[运行器](../../scripts/experiments/step-e3-player.ts)约束。B 为 `incremental-player-diagnostic@3`，C 为 `executable-player-diagnostic@3`。世界哈希仍为 `sha256:7ecd5071b319d79c7765fb8983ef545a2d7cad4e8f2c70dffbca832c4d4e146d`，保留原研究世界的短检查点配方，不补写 authored capabilities，不减少角色、动作自由或批量槽位。
 
 每对实验重新初始化一次完整世界，再从相同未演化快照分成 B/C；各臂沿各自实际提交轨迹执行。所有初始化、修复、失败、回退和未知用量都计费；负面质量结果不取消后续诊断，预算门限仍然约束派发。费用按冻结的 DeepSeek 峰值单价估算，不替代账户账单。
 
-## 实测状态
+固定请求模型 `deepseek-flash`、关闭 thinking，使用原模型元数据快照、并发上限 16、Truth 输出上限 131072、Agent 输出上限 8192、每输入十分钟新派发上限和每租约六次提交上限。234 次响应的模型字段均报告 `deepseek-flash`。峰值估算单价仍为每百万缓存命中输入 0.04 元、未命中输入 2 元、输出 8 元；价格冻结于 2026-09-22，不把响应别名当作独立核实的底层模型版本。
 
-R1 实测尚未启动；当前支出为 0。原实验中的反馈主体混淆、无实际效果的持续推进及 W0 规则覆盖率问题尚无改善结论。后续评估以持久世界变化和有来源的反馈为准，不将成功状态、经过的时间或模型自述视作目标完成。
+## 实测结果与预算
+
+首对任务为问询／证词，种子 `20260922`，顺序 B→C。共享初始化用时 40.227 秒、8 HTTP、0.68476656 元；两臂从同一未演化快照开始。在线运行共 1509.855 秒，未因质量不合格停止后续输入。C 第二条触及并发请求的保守费用预留上限，所有在途请求结束后停止；没有提高预算、重抽失败输入或在冻结样本之间修改实现。
+
+| 输入 | 终止等待秒 | HTTP | 峰时估算元 | 结果 |
+| --- | ---: | ---: | ---: | --- |
+| canary-1/B/1 | 294.710 | 39 | 12.92062936 | NPC 计划因果复核修复耗尽；整步回滚 |
+| canary-1/B/2 | 90.269 | 14 | 2.20753900 | 未获分配任务的观察者仍生成感知检查；修复耗尽 |
+| canary-1/B/3 | 604.739 | 83 | 46.65586764 | 四次空进展提交后触及十分钟派发上限 |
+| canary-1/C/1 | 237.290 | 53 | 16.18064144 | 复核器错误指责重复来源；整步回滚 |
+| canary-1/C/2 | 241.582 | 37 | 12.05900096 | 总预算并发预留不足，预算删失 |
+
+累计 234 HTTP，全部返回 HTTP 200 并保存 usage，已知峰时估算 **90.70844496 元**；在途请求、未知费用与保留预留均为 0。结算后剩余 **9.29155504 元**。剩余额度不代表当时能够承接并发波次的最大请求预留；日志中的 `CNY budget exhausted` 指预算准入边界，不是账户实际扣满 100 元。C 第二条外层只显示 `truth resolution components batch failed`，但执行 `b8ee4115-4c18-4839-99ae-6964469ee7d7` 的终止事件 2068 明确包含预算叶错误，因此将其保留为预算删失，而非无删失的算法语义失败。
+
+B 的 3 条输入共 136 HTTP／61.784036 元，C 的 2 条共 90 HTTP／28.2396424 元，初始化单列。下一条未测输入是 `canary-1/C/3`；其余两对 canary 和全部确认集尚未执行，共 **193 条缺测**，不能报告全实验完成。原 P2 的缺测分母不变。
+
+五条输入都没有获得合格的有用反馈或目标完成；T_useful、T_goal 均未取得，不能填成零秒。B 有四次提交、C 没有提交；所有已测输入的运行状态都是 stopped，其中 C 第二条受预算截断。样本数量、路径终止位置与 bootstrap 随机结果均不足以支持修复前后的速度、成功率或 B/C 优劣结论。
+
+## 真实路径揭示的剩余问题
+
+### 复核器对当前计划产生错误拒绝
+
+C 第一条执行 `330a5767-4428-4966-86ea-6fca0f36b9c1` 的最终复核调用 `rt:model-audit:7f509a0b93226bd4625f581de2b539a5667507f9dc1dc6debb278676cbb7e72d`，对应物理请求 `trajectory-canary-1-C-1-http-051`。它声称 Devers 同时以 `ochre-expedition-command` 作为 permission 和 risk；实际发送的当前候选只有一条以 `devers-office` 为源的 permission、一条以 `ochre-expedition-command` 为源的 risk，以及一条以 `knowledge-is-local` 为源的 risk，全部为 neutral／0 steps。该“重复”在当前计划中不存在。
+
+物理系统提示明确包含允许同源 permission 与 risk 各出现一次的契约；即便真有该组合，也不应仅因组合本身拒绝。第二个 finding 将 cause／risk 的同源引用也视为重复，超出了内核的机械来源互斥规则。[决定 0217](../decisions/0217-separate-evidence-annotations-from-mechanical-contributions.md)与[内核](../../src/engine/mechanics/resolution.ts)区分说明性注解和机械贡献。此证据证明具体拒绝理由错误，不证明整份计划的全部开放语义都正确，也未事后强行接受原失败样本。
+
+这类误判会驱动无必要的计划改写，耗尽修复次数后回滚全局步骤。它不能通过放宽引用、跳过因果审查或简单删除所有 `duplicated-source` finding 解决；下一轮需要验证 finding 是否确实绑定当前候选与具体冲突位置，同时保留对真实机械重复计数和语义无关证据的拒绝。本轮没有在冻结实验中改变该接受边界。
+
+### 短检查点持续触发工作，玩家目标没有进展
+
+B 第三条分别在 242.171、333.616、426.035、551.784 秒提交，模拟时间从 0 推进到 1、2、3、4 秒。四次只有 `advance_time`，均为 0 事件，没有新的住宿证词、路线或下一步决定。反馈为仍在进行、暂无新信息，或重述入场信息；因此不计作有效结果。
+
+四个检查点全部保留 49 个 active Activity，完成数为 0。King Graptar 与 Lord Octa 使用每秒检查的 `momentary-action` 目标模板，下一边界依次移到 2、3、4、5 秒；外部玩家使用 `work-until-objective`，检查间隔为 300 秒。该轨迹明确显示两个 NPC 的短检查点反复触发全局工作，玩家的检查点尚未到达。不能用“增加时间推进次数”代替实际进展，也不能仅据此决定强行完成 NPC 活动；需要联合审查时间模板选择、目标完成条件与应执行的世界效果。
+
+### C 的可执行覆盖仍为零
+
+C 记录 17 次程序编译事件、45 次组件回退事件、**0 次规则执行事件**。本轮 W0 没有增加候选要求的作者能力，回退证据仍包含无匹配能力、残余行动与缺少 program。编译事件数量不是成功动作数量，也不能算减少了模型阶段。工程接通与世界契约覆盖缺口仍然是两个不同问题。
+
+### 无损字典有效，但节省依赖输入结构
+
+本轮 16 次观察 HTTP 中，13 次为采用字典的批次，3 次为原单观察者入口。13 份实际批次的展开／再编码哈希全部一致，包含完整 12 槽批次；相同 context 的字节节省为 0.1473%–19.6294%，其中 12 槽批次为约 0.15%–2.66%。16 次观察请求的实际输入为 126893–385450 token，没有再次出现上下文 HTTP 400。
+
+历史溢出请求的 49.65% 字节节省仅属于那份大量重复动作的请求，不能作为一般 token、费用或延迟节省率。本轮世界轨迹也没有重现原溢出输入，不能把零次 400 当成未来任意请求都不会超限的保证。
+
+## 成本与可靠性
+
+已知输入共 53193501 token，其中缓存命中 9008374；输出 247232 token。234 个物理请求全部通过 body hash 和供应商 response ID 对应至 Ledger；复制到两臂的 bootstrap 按 execution ID 去重。记录到 33 次首次请求的结构／引用拒绝、40 次语义或显式修复请求，其中 28 次有明确接受且无拒绝事件；这些是调用级计数，不等于玩家任务恢复率。复核器返回 reject 是合法结构输出，其语义误判不计入上述结构／引用拒绝数。
+
+| 模型工作 | HTTP | 峰时估算元 | 费用占比 |
+| --- | ---: | ---: | ---: |
+| Truth resolution | 38 | 32.48993880 | 35.82% |
+| 因果复核 | 28 | 16.07404552 | 17.72% |
+| Truth transition | 17 | 11.45829096 | 12.63% |
+| 观察生成 | 16 | 10.43186248 | 11.50% |
+| Truth perception | 13 | 7.44671584 | 8.21% |
+| Action grounding | 14 | 6.94738208 | 7.66% |
+| Action compilation | 45 | 4.40517648 | 4.86% |
+| AgentMind 与反应 | 55 | 0.77026624 | 0.85% |
+| 共享 bootstrap 与入场 | 8 | 0.68476656 | 0.75% |
+
+这些是费用占比，不是关键路径时间占比。降低编译阶段成本本身不足以解决当前主要支出。后续优先级来自本轮证据：约束复核器对当前计划的错误指控；查清短检查点为什么没有形成阶段性效果或完成；再单独验证作者能力契约覆盖。不能把这些尚未验证的方向列为已完成修复。
+
+## 完整性与证据归档
+
+两臂最终都保留全部 49 个主体，B 的最终 revision 为 5、模拟时间 4 秒；C 为 revision 1、模拟时间 0 秒。两份数据库的 canonical history 全部重放通过，四个提交均只有一次正确的正时间推进。Ledger Doctor 没有缺失索引、孤立索引或孤立 artifact，活跃运行数为 0。机械一致性不证明开放语义正确；原反馈错源问题在本轮没有足够的新结果用于宣布修复。
+
+本地忽略目录 `R1-final-analysis/` 固定保存 14 份分析和修复证明，并索引 721 份原始 JSON、预算日志与 SQLite 数据库，共 497315570 字节。该目录 `manifest.json` 的 SHA-256 为 `0fe69127a25577fcb73b0958fb1498f8768b11ce1b0db984675df76019226f44`。原始请求、响应与完整世界留在本机，不加入 Git。原 P2 归档 manifest 哈希仍为 `ab807f144a1c9b8e1d66895a94fea235dac20139db05668be33f0892184620b5`。
