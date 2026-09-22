@@ -86,6 +86,17 @@ type AlgorithmTelemetryBase = Omit<
 };
 
 export type AlgorithmTelemetryEventInput = AlgorithmTelemetryBase & ({
+  event: "algorithm.executable_interaction.compiled";
+  attributes: Readonly<{ reason: string }>;
+  counts: Readonly<{ actions: number; rejectedPrograms: number }>;
+} | {
+  event: "algorithm.executable_interaction.fallback" | "algorithm.executable_interaction.rejected";
+  attributes: Readonly<{ reason: string }>;
+  counts: Readonly<{ actions: number }>;
+} | {
+  event: "algorithm.executable_interaction.executed";
+  counts: Readonly<{ actions: number }>;
+} | {
   event: "algorithm.eager_reference.action_compilation_context_projected";
   attributes: Readonly<{
     phase: "action-compilation";
@@ -441,6 +452,10 @@ const algorithmTelemetryFields: Record<AlgorithmTelemetryEventName, {
   counts: readonly string[];
   attributeValues?: Readonly<Record<string, readonly RuntimeAttribute[]>>;
 }> = {
+  "algorithm.executable_interaction.compiled": { attributes: ["reason"], counts: ["actions", "rejectedPrograms"] },
+  "algorithm.executable_interaction.fallback": { attributes: ["reason"], counts: ["actions"] },
+  "algorithm.executable_interaction.rejected": { attributes: ["reason"], counts: ["actions"] },
+  "algorithm.executable_interaction.executed": { attributes: [], counts: ["actions"] },
   "algorithm.eager_reference.action_compilation_context_projected": {
     attributes: ["phase", "projection", "repair"],
     counts: [

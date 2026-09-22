@@ -38,6 +38,8 @@ export interface ModelExecutionScope {
 }
 
 export interface StructuredModelRequest<T> extends ModelExecutionScope {
+  /** Server-owned physical compiler membership; never a provider generation parameter. */
+  boundActionIds?: readonly string[];
   profileId: string;
   role: ModelExecutionAudit["role"];
   subjectId: string;

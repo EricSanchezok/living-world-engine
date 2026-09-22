@@ -17,6 +17,7 @@ import { PERCEPTION_LAW_CONTEXT, perceptionLawContextRequest } from "./perceptio
 import { PERCEPTION_REPORT_DOMAINS, perceptionReportDomainsRequest } from "./perception-report-domains";
 import { registerRecursivePlayerAlgorithm } from "./recursive-player-algorithm";
 import { registerIncrementalPlayerAlgorithm } from "./incremental-player-algorithm";
+import { registerExecutablePlayerAlgorithm } from "./executable-interaction-algorithm";
 
 const config = { planning: [CONDITIONAL_PLAN_STAKES, EFFECT_PROFILE_DOMAINS, PLANNING_ACTION_FRAMES, FACTOR_CHOICE_PRODUCTS],
   perception: { lawContext: PERCEPTION_LAW_CONTEXT, reportDomains: PERCEPTION_REPORT_DOMAINS, jsonSyntaxRecovery: TERMINAL_ROOT_CLOSER_RECOVERY },
@@ -61,5 +62,5 @@ export function registerIntegratedPlayerAlgorithm(registry = new WorldExecutionA
       return createComposedEagerReferenceAlgorithm({ ...context, services: { ...services, provider } });
     },
   });
-  return registerIncrementalPlayerAlgorithm(registerRecursivePlayerAlgorithm(registry));
+  return registerExecutablePlayerAlgorithm(registerIncrementalPlayerAlgorithm(registerRecursivePlayerAlgorithm(registry)));
 }

@@ -775,7 +775,7 @@ async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
   };
 }
 
-function resolutionEvidenceIndex(
+export function resolutionEvidenceIndex(
   state: SimulationState,
   actions: readonly AgentActionProposal[],
   laws: readonly { id: string }[],

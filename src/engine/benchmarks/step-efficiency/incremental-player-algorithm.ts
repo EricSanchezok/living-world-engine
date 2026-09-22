@@ -9,6 +9,7 @@ import { localPlanRepairAlgorithmRef } from "./local-plan-repair-algorithm";
 import { AGENT_INTENT_CONTROL, agentIntentControlRequest, type IntentCognitionScope } from "./agent-intent-control";
 import { incrementalIntentSelector, INTENT_GUARD_VERSION } from "./incremental-intent-execution";
 import { PLAN_TRANSITION_FUSION } from "../../mechanics/plan-transition-fusion";
+import type { EagerReferenceComponents } from "../../algorithms/eager-reference/eager-reference";
 
 const config = { cognition: AGENT_INTENT_CONTROL, guard: INTENT_GUARD_VERSION, execution: "persistent-frontier-groups-v1",
   planningPartition: "ready-wave-work-v1" };
@@ -27,6 +28,27 @@ export function incrementalPlayerAlgorithmRef(fusion = false) {
     contractVersion: WORLD_EXECUTION_CONTRACT_VERSION, config: { ...config, ...(fusion ? { planTransitionFusion: PLAN_TRANSITION_FUSION } : {}) }, children: foundation(fusion).children });
 }
 
+export function createIncrementalPlayerAlgorithm(context: Parameters<typeof createComposedEagerReferenceAlgorithm>[0],
+  configure: (components: EagerReferenceComponents) => EagerReferenceComponents = components => components) {
+  const cognition = new AsyncLocalStorage<IntentCognitionScope>(), original = context.services.provider;
+  const producerHash = context.ref.manifestHash;
+  const provider: StructuredModelProvider = { catalog: original.catalog,
+    availableProfileSummaries: role => original.availableProfileSummaries(role),
+    assertProfilesAvailable: profiles => original.assertProfilesAvailable(profiles),
+    generateStructured: request => {
+      const scope = cognition.getStore();
+      return original.generateStructured(scope ? agentIntentControlRequest(request, scope, producerHash) : request);
+    } };
+  const slots = context.ref.children.agentCognition!.children.batching!.config.maxSlots;
+  if (typeof slots !== "number" || !Number.isSafeInteger(slots) || slots < 1) throw new Error("intent guard batch cardinality is not pinned");
+  return createComposedEagerReferenceAlgorithm({ ...context, services: { ...context.services, provider } }, components => {
+    const base = components.agentCognition;
+    return configure({ ...components, selectActions: incrementalIntentSelector(original, producerHash, slots),
+      agentCognition: { thinkBatch: (state, inputs, scope, purpose, maxSlots) =>
+        cognition.run({ state, inputs }, () => base.thinkBatch(state, inputs, scope, purpose, maxSlots)) } });
+  });
+}
+
 /** Complete diagnostic integration; semantic and player-latency qualification
  * remain separate from construction and deterministic persistence checks. */
 export function registerIncrementalPlayerAlgorithm(registry: WorldExecutionAlgorithmRegistry) {
@@ -38,23 +60,7 @@ export function registerIncrementalPlayerAlgorithm(registry: WorldExecutionAlgor
     children: Object.entries(ref.children).map(([name, child]) => ({ name, role: child.role })),
     create: context => {
       if (contentHash(context.ref.children) !== contentHash(ref.children)) throw new Error("incremental diagnostic foundation changed");
-      const cognition = new AsyncLocalStorage<IntentCognitionScope>(), original = context.services.provider;
-      const producerHash = context.ref.manifestHash;
-      const provider: StructuredModelProvider = { catalog: original.catalog,
-        availableProfileSummaries: role => original.availableProfileSummaries(role),
-        assertProfilesAvailable: profiles => original.assertProfilesAvailable(profiles),
-        generateStructured: request => {
-          const scope = cognition.getStore();
-          return original.generateStructured(scope ? agentIntentControlRequest(request, scope, producerHash) : request);
-        } };
-      const slots = context.ref.children.agentCognition!.children.batching!.config.maxSlots;
-      if (typeof slots !== "number" || !Number.isSafeInteger(slots) || slots < 1) throw new Error("intent guard batch cardinality is not pinned");
-      return createComposedEagerReferenceAlgorithm({ ...context, services: { ...context.services, provider } }, components => {
-        const base = components.agentCognition;
-        return { ...components, selectActions: incrementalIntentSelector(original, producerHash, slots),
-          agentCognition: { thinkBatch: (state, inputs, scope, purpose, maxSlots) =>
-            cognition.run({ state, inputs }, () => base.thinkBatch(state, inputs, scope, purpose, maxSlots)) } };
-      });
+      return createIncrementalPlayerAlgorithm(context);
     } });
   }
   return registry;

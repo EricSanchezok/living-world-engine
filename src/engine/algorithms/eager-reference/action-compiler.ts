@@ -1111,6 +1111,7 @@ export async function compileActions(
           subjectId: owner,
           promptVersion: ACTION_COMPILER_PROMPT.version,
           schemaName: "action_compilation_batch",
+          boundActionIds: batch.map(entry => entry.payload.action.id),
           system: ACTION_COMPILER_PROMPT.system,
           userPrompt: ACTION_COMPILER_PROMPT.userPrompt,
           context: retrieval?.modelContext ?? context,
