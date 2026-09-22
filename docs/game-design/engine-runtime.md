@@ -51,7 +51,7 @@ Action Compilation 与 AgentMind 在算法内部使用独立上限的槽位批�
 1. 只为当前决策点的 model/external Agent 收集新行动；被 active Activity 占用的 Agent 不运行普通 AgentMind。
 2. 每个新行动独立规划 TemporalPlan，并用一次 grounding 生成 read/write/audience footprint 和共享资源 claims，在当前时刻物化带 continuation assertions 的 Activity。普通新行动替换本人可中断、queued 或 ready Activity 时，同一投影先取消旧 Activity。
 3. 临时 `ActivityFootprintIndex` 通过 footprint、participant、audience 和 resource-pool key 查询新行动影响的 live Activities。只有 dependency 相交、共享位置、连接双方的可访问关系 Fact 或成功感知检定提供依据，且 Activity 可中断时，才冻结一轮 onset reaction 请求；正持续时间保证此刻的替换仍先于未来结算。
-4. model、external、replay 与 profile fallback 分别产生 `ReactionDecision`。`keep` 可继续、暂停或取消当前 Activity；`replace` 从当前世界时间重新规划并 grounding。请求集合冻结，replacement 扩大依赖只触发全局重裁决，不递归请求反应。
+4. model、external、replay 与 profile fallback 分别产生 `ReactionDecision`。`keep` 可继续、暂停或取消当前 Activity；`replace` 从当前世界时间重新规划并 grounding。替换行动的编译副本包含该主体自己的冻结 stimulus introductions，不改变源状态、准备 artifact 或其他主体的私有绑定；绑定随整步成功提交持久化。请求集合冻结，replacement 扩大依赖只触发全局重裁决，不递归请求反应。
 5. 分配器原子处理新 claims。reject/queue 不调用 Truth 争抢容量；adjudicate 把相关 holder 的持久 source action 加入同一 Truth 分量，不重新 grounding，也不增加 AgentMind 调用。
 6. 所有 keep、replacement、已准入新行动、既有 Activity、ready start、Timer、Condition expiry、assertion boundary 和安全上限共同进入一次确定性最早边界选择。
 7. 到期行动与 `Action | Activity | Timer | Condition` 通用 interaction dependencies 形成冲突分量；受影响 Activity 沿持久 footprint 扩展到固定点闭包。纯 context node 不伪造 ActionOutcome；实际 operation 超出声明 footprint、replacement 改变依赖图，或分量实际读写交叉时，全体行动以 global dependency 重新裁决。

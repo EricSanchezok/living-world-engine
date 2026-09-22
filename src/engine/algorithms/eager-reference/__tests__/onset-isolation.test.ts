@@ -4,13 +4,14 @@ import { loadWorldScript } from "../../../../script/world-loader";
 import { contentHash } from "../../../models/model-audit";
 import { historyReplayBaseHash } from "../../../runtime/history-replay";
 import { SimulationEngine } from "../../../runtime/simulation";
+import { replaySimulationState } from "../../../runtime/transaction";
 import type { WorldExecutionAlgorithm, WorldStepCandidate, WorldStepPreparation } from "../../../runtime/execution";
 import { ScriptedModelProvider, deterministicActionCompilationBatch, deterministicInteractionDependency,
   deterministicModelOutput, deterministicOnsetReports } from "../../../testing/model-provider";
 import { EagerReferenceAlgorithm } from "../eager-reference";
 
 type Mode = "silent" | "occluded" | "friend" | "unrelated" | "visible" | "remote" | "introduction" | "existing-identities" | "missing" | "incomplete";
-async function fixture(mode: Mode, secret = "PRIVATE_ALPHA", forge = false, externalKeeper = false) {
+async function fixture(mode: Mode, secret = "PRIVATE_ALPHA", forge = false, externalKeeper = false, replaceIntroduction = false) {
   const provider = new ScriptedModelProvider(({ role, profileId, context }) => {
     if (role === "action-compilation") return deterministicActionCompilationBatch(profileId, context, compilation => {
       compilation.interactionDependency = deterministicInteractionDependency({ reads: [{ kind: "global", id: "world" }],
@@ -38,7 +39,15 @@ async function fixture(mode: Mode, secret = "PRIVATE_ALPHA", forge = false, exte
           : { ...report, reason: "The authored sensory boundary supplies no observable onset.",
               evidence: [{ kind: "law", ref: "ref:law:onset-channel" }] }) };
     }
-    if (role === "agent-reaction") return { kind: "keep" };
+    if (role === "agent-reaction") {
+      if (replaceIntroduction) {
+        const target = (context as { referenceCatalog: { candidates: Array<{ handle: string; label: string }> } })
+          .referenceCatalog.candidates.find(candidate => candidate.label === "A traveler")!;
+        return { kind: "replace", replacementAction: { rawText: "I greet the newly noticed traveler.",
+          goal: "Greet the traveler", means: null, targetHandles: [target.handle] } };
+      }
+      return { kind: "keep" };
+    }
     if (role === "causal-verifier") return { verdict: "accept", findings: [] };
     return deterministicModelOutput(profileId, context);
   }, undefined, false);
@@ -150,6 +159,26 @@ it("keeps a new introduction local in AgentMind while committing its binding on 
   expect(JSON.stringify(call.context)).not.toMatch(/canonicalEntityId|canonicalEntityRef|ref:entity:player|PRIVATE_ALPHA/);
   const intro = result.committed.reactionRequests[0]!.stimulus.introductions[0]!;
   expect(result.state.agents.keeper!.bindings[intro.localEntity.id]!.canonicalEntityIds).toContain("player");
+});
+
+it("compiles a replacement against its frozen introduction after preparation restoration", async () => {
+  const test = await fixture("introduction", "PRIVATE_ALPHA", false, false, true);
+  const before = contentHash(test.source);
+  const preparation = await test.engine.prepareStep(test.roster, test.request);
+  const frozen = JSON.parse(JSON.stringify(preparation)) as WorldStepPreparation;
+  const stimulus = frozen.reactionRequests.find(request => request.agentId === "keeper")!.stimulus;
+  const localId = stimulus.introductions[0]!.localEntity.id;
+  expect(test.source.agents.keeper!.bindings[localId]).toBeUndefined();
+  const preparationHash = contentHash(frozen);
+  const restored = new SimulationEngine(test.definition, test.algorithm, test.source);
+  const result = await restored.completePreparedStep(test.roster, test.request, frozen, []);
+  const replacement = result.committed.reactionDecisions.find(decision => decision.kind === "replace")!;
+  expect(replacement).toMatchObject({ kind: "replace", replacementAction: { actorId: "keeper", targetIds: [localId] } });
+  expect(result.state.agents.keeper!.bindings[localId]!.canonicalEntityIds).toEqual(["player"]);
+  expect(result.state.agents.player!.bindings[localId]).toBeUndefined();
+  expect(contentHash(test.source)).toBe(before);
+  expect(contentHash(frozen)).toBe(preparationHash);
+  expect(replaySimulationState(result.state)).toEqual(result.state);
 });
 
 it("delivers claims about an existing local identity through actual AgentMind without replacing that identity", async () => {

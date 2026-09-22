@@ -1779,6 +1779,12 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     }
 
     const replacementDecisions = reactionDecisions.filter((decision) => decision.kind === "replace");
+    for (const decision of replacementDecisions) {
+      const request = preparation.reactionRequests.find((entry) => entry.id === decision.requestId)!;
+      planningState.agents[request.agentId] = applyObservationBindings(
+        planningState.agents[request.agentId], [request.stimulus],
+      );
+    }
     const replacementCompilationBatch = await this.actionCompiler(
       this.provider,
       planningState,
