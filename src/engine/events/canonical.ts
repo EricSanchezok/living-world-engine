@@ -51,6 +51,13 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
   if (!source.executionState || source.executionState.producerHash !== producerHash || proof.version !== 1 ||
     proof.request.expectedRevision !== source.revision) throw new Error("event execution source changed");
   const before = readDecisionEventState(source.executionState, source);
+  for (const revision of proof.beliefRevisions) {
+    for (const evidence of [...revision.evidence, ...revision.creationEvidence]) if (!proof.decisions.some(use =>
+      equal(use.batch, evidence.batch) && equal(use.result, evidence.result))) throw new Error("belief judgment has no recorded decision use");
+    if (revision.creation?.audit && !proof.modelAudits.some(audit => equal(audit, revision.creation!.audit))) {
+      throw new Error("belief creation has no recorded physical audit");
+    }
+  }
   if (verifyControl) {
     const admitted = replayActivityAdmissions(source, proof.authority, worldResources(source, proof.authority, before.worldResources),
       proof.activityAdmissionInput, before.activities, proof.decisions);

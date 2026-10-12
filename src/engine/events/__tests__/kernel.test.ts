@@ -359,21 +359,21 @@ describe("source-bound world event kernel", () => {
     const configured = decisionTestProvider(body => {
       const wire = JSON.stringify(body); expect(wire).not.toContain(f.state.agents.player!.character.persona.summary);
       expect(wire).not.toContain("canonicalEntityIds");
-      return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: "supported" }])) };
+      return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: id === "expand" ? "unchanged" : "supported" }])) };
     });
     const registry = await configured.registry.capture(); let ordinal = 0;
     const output = await reviseEventBeliefs(new DecisionRuntime(configured.gateway), f.state, "keeper", ["new"], undefined,
-      { profileId: "world-test", workloadId: "belief-test", batchId: "belief-test", modelRegistrySnapshotHash: registry.hash,
+      { profileId: "world-test", creationProfileId: "world-test", workloadId: "belief-test", batchId: "belief-test", modelRegistrySnapshotHash: registry.hash,
         runtimeIdentity: { worldHash: f.state.worldHash, revision: 0 }, nextInvocation: () => ++ordinal });
-    const revised = applyEventBeliefs(f.state, output.revision);
+    const revised = applyEventBeliefs(f.state, output.revision, undefined, "world-test");
     expect(revised.belief.claims.test).toMatchObject({ stance: "believed", confidence: 0.5, evidenceIds: ["new"] });
     expect(f.state.agents.keeper!.belief.claims.test!.stance).toBe("suspected");
-    expect(applyEventBeliefs(f.state, JSON.parse(JSON.stringify(output.revision)))).toEqual(revised);
+    expect(applyEventBeliefs(f.state, JSON.parse(JSON.stringify(output.revision)), undefined, "world-test")).toEqual(revised);
     const forged = structuredClone(output.revision); forged.patch.operations = [];
     forged.hash = contentHash(Object.fromEntries(Object.entries(forged).filter(([key]) => key !== "hash")));
-    expect(() => applyEventBeliefs(f.state, forged)).toThrow("differs from its decisions");
+    expect(() => applyEventBeliefs(f.state, forged, undefined, "world-test")).toThrow("differs from its decisions");
     f.state.agents.keeper!.belief.evidence.new!.description = "Different testimony.";
-    expect(() => applyEventBeliefs(f.state, output.revision)).toThrow("private input");
+    expect(() => applyEventBeliefs(f.state, output.revision, undefined, "world-test")).toThrow("private input");
   });
   it("freezes authored random stakes before drawing and replays the exact result through atomic commit", async () => {
     const f = fixture();

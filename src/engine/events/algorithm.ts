@@ -206,13 +206,14 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
         return reviseEventBeliefs(runtime, preview.state, patch.agentId, evidenceIds, prepared.control.agents[patch.agentId]?.resources,
           { ...context.modelScope, modelRegistrySnapshotHash: prepared.control.registryHash,
             runtimeIdentity: { worldHash: input.state.worldHash, revision: input.state.revision }, profileId: prepared.control.models.decision,
-            fallbackProfileId: prepared.control.models.fallback, nextInvocation: () => allocator.next(patch.agentId) });
+            fallbackProfileId: prepared.control.models.fallback, creationProfileId: prepared.control.models.creation,
+            nextInvocation: () => allocator.next(patch.agentId) });
       }));
       const errors = revised.flatMap(value => value.status === "rejected" ? [value.reason] : []);
       if (errors.length) throw new AggregateError(errors, "private observation interpretation failed");
       for (const result of revised) if (result.status === "fulfilled") {
         beliefRevisions.push(result.value.revision); decisions.push(...result.value.calls);
-        audits.push(...result.value.calls.filter(call => !call.reused).map(call => call.result.audit));
+        audits.push(...result.value.calls.filter(call => !call.reused).map(call => call.result.audit), ...result.value.creationAudits);
       }
       finalControl = settleProgramWorldEvent(input.state, prepared.control, prepared.event, authority, this.manifest.hash, beliefRevisions).control;
     }

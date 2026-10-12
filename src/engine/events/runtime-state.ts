@@ -37,7 +37,7 @@ export interface AgentProgramState {
   planning: { inputHash: string; attempts: number; waitReason: string | null } | null;
 }
 export interface ProgramRuntimeFailure {
-  ownerId: string; phase: "goal" | "program" | "utterance" | "world-rule" | "adjudication" | "activity";
+  ownerId: string; phase: "goal" | "program" | "utterance" | "world-rule" | "adjudication" | "activity" | "belief";
   inputHash: string; reason: string; recoverable: true;
 }
 export interface DecisionEventState {

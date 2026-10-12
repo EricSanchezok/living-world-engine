@@ -53,7 +53,7 @@ export function nativeProgramFixture(options: { goalVerdict?: "yes" | "no" | "un
     const choice = wire.includes("You update an Agent's existing beliefs") ? "unchanged" : wire.includes("ALL required shared resource claims") ||
       wire.includes("Check whether the authored world sources and current attempted action justify every declared random request") ? "yes"
       : wire.includes("actual long-term goal") ? options.goalVerdict ?? "unknown" : options.worldVerdict ?? "yes";
-    return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice }])) };
+    return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: id === "expand" ? "unchanged" : choice }])) };
   }, ["world-test", "truth-deepseek", "agent-deepseek"]);
   const roster: Record<string, PolicyBinding> = { keeper: { kind: "model", agentId: "keeper", profiles: world.initialState.agents.keeper!.modelProfiles },
     player: options.bothActors ? { kind: "model", agentId: "player", profiles: world.initialState.agents.player!.modelProfiles }

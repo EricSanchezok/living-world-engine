@@ -41,9 +41,12 @@ export function settleProgramWorldEvent(source: Readonly<SimulationState>, prepa
     const delivered = perception.beliefPatches.find(patch => patch.agentId === revision.agentId)?.operations
       .flatMap(operation => operation.kind === "upsert_evidence" ? [operation.evidence.id] : []) ?? [];
     if (contentHash(delivered.slice().sort()) !== contentHash(revision.evidenceIds.slice().sort())) throw new Error("belief revision does not bind this Agent's actual deliveries");
-    state.agents[revision.agentId] = applyEventBeliefs(state, revision, prepared.agents[revision.agentId]?.resources);
+    state.agents[revision.agentId] = applyEventBeliefs(state, revision, prepared.agents[revision.agentId]?.resources, prepared.models.creation);
   }
   const control = structuredClone(prepared);
+  for (const revision of beliefs) if (revision.creation?.status === "failed") control.failures.push({
+    ownerId: revision.agentId, phase: "belief", inputHash: revision.creation.sourceHash, reason: revision.creation.reason, recoverable: true,
+  });
   if (control.randomReservation && (control.randomReservation.atSeconds !== event.atSeconds ||
     control.randomReservation.commitment.hash !== event.randomness?.hash)) throw new Error("world event does not settle the reserved random frontier");
   control.randomReservation = null;
