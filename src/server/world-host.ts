@@ -633,7 +633,7 @@ export class WorldHost {
         /* turbopackIgnore: true */ process.env.LIVINGWORLD_MODEL_CATALOG_PATH ?? "config/models.yaml",
       ));
       const dataRoot = path.resolve(
-        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v23",
+        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v24",
       );
       const modelRegistry = new ModelRegistry(catalog, dataRoot);
       modelRegistry.startBackgroundRefresh();
@@ -1113,7 +1113,7 @@ export class WorldHost {
     }
     const now = this.now().toISOString();
     const initial: WorldInstanceDocument = {
-      schemaVersion: 23,
+      schemaVersion: 24,
       id,
       world: toWorldRuntimeContract(definition),
       executionAlgorithm: structuredClone(experiment.algorithmRef),

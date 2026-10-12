@@ -529,7 +529,7 @@ export function buildWorldDefinition(
   try {
     const mechanics = mechanicsCatalog(mechanicsDocument);
     const state: SimulationState = {
-      schemaVersion: 16,
+      schemaVersion: 17,
       executionState: null,
       worldId: manifest.id,
       worldHash,

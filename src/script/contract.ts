@@ -10,7 +10,7 @@ import {
 } from "../engine/contracts/state-schemas";
 
 export const scriptManifestSchema = z.object({
-  schema_version: z.literal(14),
+  schema_version: z.literal(15),
   id: z.string().regex(/^[a-z0-9][a-z0-9-]*$/),
   name: z.string().min(1),
   version: z.string().min(1),

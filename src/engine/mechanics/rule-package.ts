@@ -900,7 +900,7 @@ const instantiateEntityCohort: MechanicRule = {
 
 export const coreResolutionRulePackage: RulePackage = {
   id: "core-resolution",
-  version: "2.0.0",
+  version: "3.0.0",
   adjudication: "先提交 ResolutionPlan，再由引擎把命名难度、风险和效果档确定性映射为 d20 检定与规则效果。模型不得提交 raw DC、modifier、Meter delta、Condition 强度或 Rating 数值。",
   configSchema: coreResolutionConfigSchema,
   rules: [applyReceipt, advanceConditions, transferQuantity, changeQuantity, instantiateEntityProfile, instantiateEntityCohort],

@@ -2,7 +2,7 @@
 
 ## 状态边界
 
-`SimulationState` v15 是闭环仿真的持久状态：canonical world、全部 Agent 私有状态、准入提交、ResolutionPlan、ResolutionReceipt、TemporalPlan、模型执行审计与语义历史。Canonical world 持有世界时钟、带持久交互足迹的 Activity、Entity 共享资源池与 WorldTimer；`WorldInstanceDocument` v23 在其外层固定完整递归算法 Composition 与不可变实验归属或排除原因，并保存 Participant、持久 Arrival、Participant intent、PolicyBinding、判别式 ActionWindow、Preparation v5 artifact、调度配置和 WorldRun。
+`SimulationState` v17 是闭环仿真的持久状态：canonical world、全部 Agent 私有状态、准入提交、ResolutionPlan、ResolutionReceipt、TemporalPlan、模型执行审计与语义历史。Canonical world 持有世界时钟、带持久交互足迹的 Activity、Entity 共享资源池与 WorldTimer；`WorldInstanceDocument` v24 在其外层固定完整递归算法 Composition 与不可变实验归属或排除原因，并保存 Participant、持久 Arrival、Participant intent、PolicyBinding、判别式 ActionWindow、Preparation v5 artifact、调度配置和 WorldRun。
 
 真人与自主主体使用同一个 `AgentState`。策略表必须精确覆盖全部 Agent：
 
@@ -55,7 +55,7 @@ Action Compilation 与 AgentMind 在算法内部使用独立上限的槽位批�
 5. 分配器原子处理新 claims。reject/queue 不调用 Truth 争抢容量；adjudicate 把相关 holder 的持久 source action 加入同一 Truth 分量，不重新 grounding，也不增加 AgentMind 调用。
 6. 所有 keep、replacement、已准入新行动、既有 Activity、ready start、Timer、Condition expiry、assertion boundary 和安全上限共同进入一次确定性最早边界选择。
 7. 到期行动与 `Action | Activity | Timer | Condition` 通用 interaction dependencies 形成冲突分量；受影响 Activity 沿持久 footprint 扩展到固定点闭包。纯 context node 不伪造 ActionOutcome；实际 operation 超出声明 footprint、replacement 改变依赖图，或分量实际读写交叉时，全体行动以 global dependency 重新裁决。
-8. transition 只能提交语义操作和规则调用。引擎用 `core-resolution@2.0.0` 结算可信收据并注入唯一正时间 `advance_time`。每个到期或受影响 Activity 必须有 `continue | pause | complete | block | fail | cancel` disposition；continuation assertions 在创建和受影响 transition 前后验证，失效且无更具体语义时确定性 block。释放后的队列推进与最终状态属于同一原子候选。
+8. transition 只能提交语义操作和规则调用。引擎用 `core-resolution@3.0.0` 结算可信收据并注入唯一正时间 `advance_time`。每个到期或受影响 Activity 必须有 `continue | pause | complete | block | fail | cancel` disposition；continuation assertions 在创建和受影响 transition 前后验证，失效且无更具体语义时确定性 block。释放后的队列推进与最终状态属于同一原子候选。
 9. Observation Renderer 根据 transition 后状态、事件和 interaction audience 生成固定槽位 observation；reject、入队、预留、开始和争用结果不维护第二套叙事事实。onset `keep` 可以让 Activity 在接收本次刺激后继续；没有预警的相关结果则可在同一提交中暂停 Activity。只有已解除 active 占用的真正决策点才允许运行 AgentMind。
 10. CanonicalCommitter 重新应用 Candidate v5，并独立重建 source hash、最早边界、四类 interaction nodes、affected Activity 集、claims、holder 释放、admissions、FIFO promotion、dispositions、assertion evidence、统一 Observation 和全部 canonical 不变量，随后构造 `CommittedStep` 与下一状态。
 

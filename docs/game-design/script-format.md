@@ -23,7 +23,7 @@ world-id/
 ## `script.yaml`
 
 ```yaml
-schema_version: 14
+schema_version: 15
 id: immortal-realms
 name: 万域修途
 version: 1.0.0
@@ -69,7 +69,7 @@ laws:
 ```yaml
 rule_packages:
   - id: core-resolution
-    version: 2.0.0
+    version: 3.0.0
     config: {}
 meters:
   - id: health
@@ -175,7 +175,7 @@ adjudication_calibrations:
 random_distributions: []
 ```
 
-`rule_packages` 必须包含 `core-resolution@2.0.0`，并可追加服务端注册的精确版本；世界不能提供规则代码。Meter 阈值可以设置 lifecycle 或 Fact。Quantity 的生产与消耗分别由法则授权，转移保持守恒。Rating 是通用 aptitude 或对抗强度；一次检定最多使用一个归属于 actor 的 Rating，number Fact 不会自动成为 modifier。
+`rule_packages` 必须包含 `core-resolution@3.0.0`，并可追加服务端注册的精确版本；世界不能提供规则代码。Meter 阈值可以设置 lifecycle 或 Fact。Quantity 的生产与消耗分别由法则授权，转移保持守恒。Rating 是通用 aptitude 或对抗强度；一次检定最多使用一个归属于 actor 的 Rating，number Fact 不会自动成为 modifier。
 
 所有剧本共享 `none | minor | standard | major | decisive` 效果档。`impact_profiles` 将档位映射为 Meter 的确定性增减并在边界 clamp；`duration_profiles` 只定义 Condition 的使用次数、模拟秒数或持续至解除；`condition_profiles` 可为重要自由语义状态声明 stacking key、持续影响、恢复说明和阈值。没有 profile 的状态仍可存在并参与后续语义裁决。`entity_mechanics_profiles` 是出生角色的 Meter、Quantity、Rating 模板，`adjudication_calibrations` 同时约束 planner、verifier 与测试，不是动作白名单。
 
@@ -286,7 +286,7 @@ Origin 定义身份幻想、出生位置、初始 persona、默认 goal、关系
 
 loader 验证 Entity、placement 无环、Fact、Agent self binding、character/belief 局部引用、全部 Mechanics Profile 与 shared-resource definition/pool 引用及范围、random distribution、模型 Profile、Origin spawn/mechanics/image、数量和所有 ID 唯一性。初始 Agent 的 `nextAction` 由引擎设为 null；初始 lifecycle、Fact provenance、character 时间戳和运行时身份由引擎注入。
 
-loader 只接受 `schema_version: 14`。旧世界包、状态和存档直接拒绝，不提供迁移或兼容层。
+loader 只接受 `schema_version: 15`。旧世界包、状态和存档直接拒绝，不提供迁移或兼容层。
 
 ## 程序覆盖报告
 

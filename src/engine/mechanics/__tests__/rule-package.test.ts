@@ -85,7 +85,7 @@ describe("core-resolution trusted rules", () => {
     const definition = loaded();
     const contracts = createCoreRulePackageRegistry().promptContracts(definition.rulePackages);
     const transfer = contracts.find((contract) => contract.ruleId === "transfer-quantity");
-    expect(transfer).toMatchObject({ packageId: "core-resolution", version: "2.0.0" });
+    expect(transfer).toMatchObject({ packageId: "core-resolution", version: "3.0.0" });
     expect(transfer?.inputSchema).toMatchObject({
       type: "object",
       required: ["definitionRef", "fromHolderRef", "toHolderRef", "amountSource"],

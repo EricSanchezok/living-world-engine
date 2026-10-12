@@ -6,7 +6,7 @@ Living World Engine maintains one canonical world and multiple Agents with priva
 
 | Layer | Location | Responsibility |
 |---|---|---|
-| World contract | `src/script/` | Read schema v14 world packages, validate temporal/mechanics/resource profiles and assets, and construct `WorldDefinition` and `SimulationState` v16 |
+| World contract | `src/script/` | Read schema v15 world packages, validate temporal/mechanics/resource profiles and assets, and construct `WorldDefinition` and `SimulationState` v17 |
 | Execution algorithms | `src/engine/algorithms/` | Typed Roles, strict versioned definitions, recursive Compositions, generated discovery, and `eager-reference/` candidate generation |
 | Model gateway | `src/engine/models/` | Trusted provider accounts, models.dev snapshots, deterministic Profile resolution, protocol drivers, vendor dialects, external prompt bundles, strict structured output, fair scheduling, and invocation audit |
 | Cognition | `src/engine/cognition/` | Agent perspective, private belief/character updates, observations, information boundaries, and mind commits |
@@ -16,7 +16,7 @@ Living World Engine maintains one canonical world and multiple Agents with priva
 | Prompt resources | `src/engine/prompts/` | Server-loaded English role/task/transport Markdown, content-addressed bundle versions, and unified task/context serialization |
 | Shared contracts | `src/engine/contracts/` | Semantic state types, model-output schemas, and prompt/context contracts shared across owners |
 | Benchmarks | `src/engine/benchmarks/` | Benchmark-only code and evidence generators kept off the product execution path |
-| Instance host | `src/server/world-host.ts` | `WorldInstanceDocument` v23, immutable experiment enrollment, pinned recursive `AlgorithmRef`, persistent WorldRuns, Participants, decision/reaction windows, Preparation v5 artifacts, leases, recovery, and generation fencing |
+| Instance host | `src/server/world-host.ts` | `WorldInstanceDocument` v24, immutable experiment enrollment, pinned recursive `AlgorithmRef`, persistent WorldRuns, Participants, decision/reaction windows, Preparation v5 artifacts, leases, recovery, and generation fencing |
 | Execution evidence | `src/server/execution-ledger.ts` | The sole persisted source for executions, events, artifacts, experiments, replay, and Inspector data |
 | HTTP and browser | `src/app/` | Public API v12, world library, assistant-ui sessions, decision/reaction controls, unified Agent Perspective HUD, control orb, and read-only Inspector API v13 with local Debug routes |
 | Shared browser contracts | `src/shared/` | Browser-safe DTOs and trusted-local Inspector DTOs |
@@ -110,7 +110,7 @@ A Participant session projects persisted Arrival, Participant intent, every comm
 
 Normalized world content receives a SHA-256 covering the manifest, laws, mechanics, entities, participation configuration, and static-asset identities. An instance pins its `WorldRuntimeContract` and world content hash, and reconstruction verifies both against the content-addressed version.
 
-World versions, instances, and the Execution Ledger live in `LIVINGWORLD_DATA_ROOT/livingworld.sqlite`; content-addressed model-registry snapshots live beside it under `model-registry/`. The default v23 directory is `.livingworld-v23/`. Disposable local encoder assets and candidate vectors live separately under `LIVINGWORLD_CACHE_ROOT`, which defaults to `.livingworld-cache/`; a world content hash and encoder fingerprint partition the embedding SQLite files, and an exact passage hash addresses each checksummed Float32 vector. Operational entrypoints are grouped under `scripts/experiments/` and `scripts/operations/`, while repo-seed governance scripts retain their managed root paths. Canonical SQLite uses WAL, `synchronous=FULL`, strict tables, process leases, write transactions, and generation compare-and-swap. Old schemas are not migrated; a different contract uses a new data root.
+World versions, instances, and the Execution Ledger live in `LIVINGWORLD_DATA_ROOT/livingworld.sqlite`; content-addressed model-registry snapshots live beside it under `model-registry/`. The default v24 directory is `.livingworld-v24/`. Disposable local encoder assets and candidate vectors live separately under `LIVINGWORLD_CACHE_ROOT`, which defaults to `.livingworld-cache/`; a world content hash and encoder fingerprint partition the embedding SQLite files, and an exact passage hash addresses each checksummed Float32 vector. Operational entrypoints are grouped under `scripts/experiments/` and `scripts/operations/`, while repo-seed governance scripts retain their managed root paths. Canonical SQLite uses WAL, `synchronous=FULL`, strict tables, process leases, write transactions, and generation compare-and-swap. Old schemas are not migrated; a different contract uses a new data root.
 
 ## Hard invariants
 

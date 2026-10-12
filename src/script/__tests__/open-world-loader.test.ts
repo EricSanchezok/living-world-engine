@@ -65,10 +65,10 @@ describe("open world script loader", () => {
     expect(definition.initialState.truth.rng.seed).toBe(91);
     expect(definition.rulePackages).toEqual([expect.objectContaining({
       id: "core-resolution",
-      version: "2.0.0",
+      version: "3.0.0",
       config: {},
     })]);
-    expect(definition.initialState.schemaVersion).toBe(16);
+    expect(definition.initialState.schemaVersion).toBe(17);
     expect(definition.initialState.truth.mechanics.sharedActivityResources["fixture-workbench"]).toEqual({
       id: "fixture-workbench",
       name: "庭院工作台",
@@ -218,12 +218,12 @@ describe("open world script loader", () => {
     });
   });
 
-  it("rejects schema v13 worlds and missing or duplicate Agent self bindings", () => {
+  it("rejects schema v14 worlds and missing or duplicate Agent self bindings", () => {
     const oldWorld = copiedFixture();
     const manifestFile = path.join(oldWorld, "script.yaml");
     writeFileSync(
       manifestFile,
-      readFileSync(manifestFile, "utf8").replace("schema_version: 14", "schema_version: 13"),
+      readFileSync(manifestFile, "utf8").replace("schema_version: 15", "schema_version: 14"),
       "utf8",
     );
     expect(() => loadWorldScript(oldWorld, { modelCatalog })).toThrow();
@@ -297,11 +297,11 @@ describe("open world script loader", () => {
     const missingCoreFile = path.join(missingCore, "mechanics.yaml");
     writeFileSync(
       missingCoreFile,
-      readFileSync(missingCoreFile, "utf8").replace("core-resolution", "cultivation-resolution"),
+      readFileSync(missingCoreFile, "utf8").replace("core-resolution", "cultivation-resolution").replace("version: 3.0.0", "version: 2.0.0"),
       "utf8",
     );
     expect(() => loadWorldScript(missingCore, { seed: 1, rulePackages: registry, modelCatalog }))
-      .toThrow("schema v14 worlds require core-resolution@2.0.0");
+      .toThrow("schema v15 worlds require core-resolution@3.0.0");
   });
 
   it("enforces the exact canonical UTF-8 distribution budget during world loading", () => {

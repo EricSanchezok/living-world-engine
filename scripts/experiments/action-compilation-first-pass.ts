@@ -32,7 +32,7 @@ const defaultRoot = path.resolve(".livingworld-benchmarks/experiments/ac-fp1/v1"
 export async function preflightFirstPass(root: string) {
   const sources = orderedFirstPassSources(loadOfficialSourceShard(path.join(root, "source-staging")));
   const catalog = loadModelCatalog(path.resolve("config/models.yaml"));
-  const modelRegistry = new ModelRegistry(catalog, path.resolve(".livingworld-v23"), {
+  const modelRegistry = new ModelRegistry(catalog, path.resolve(".livingworld-v24"), {
     fetch: async () => { throw new Error("offline preflight cannot refresh model metadata"); },
   });
   const algorithms = registerBuiltinAlgorithms(new WorldExecutionAlgorithmRegistry());
@@ -258,7 +258,7 @@ async function runFirstPass(args: FirstPassArgs) {
   const profile = catalog.profile(source.profileId);
   const account = catalog.account(profile.account_id);
   if (!process.env[account.api_key_env]?.trim()) throw new Error("captured provider credential is not configured in the process environment");
-  const modelRegistry = new ModelRegistry(catalog, path.resolve(".livingworld-v23"), { fetch: async () => { throw new Error("experiment model registry cannot access the network"); } });
+  const modelRegistry = new ModelRegistry(catalog, path.resolve(".livingworld-v24"), { fetch: async () => { throw new Error("experiment model registry cannot access the network"); } });
   const snapshot = modelRegistry.snapshot(source.registrySnapshotHash);
   const metadata = snapshot.document.providers[account.models_dev_provider_id]?.models[source.modelId];
   if (!metadata?.limit.context || !profile.max_output_tokens) throw new Error("captured provider has no trusted token ceiling");

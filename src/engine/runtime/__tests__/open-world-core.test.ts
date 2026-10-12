@@ -28,7 +28,7 @@ import { agentMindOutputSchema, characterPatchSchema } from "../../contracts/llm
 function worldState(): SimulationState {
   const workbenchPoolId = sharedActivityResourcePoolId(TEST_WORLD_HASH, "workbench", "gate");
   return {
-    schemaVersion: 16,
+    schemaVersion: 17,
     executionState: null,
     worldId: "test-world",
     worldHash: TEST_WORLD_HASH,
@@ -259,6 +259,11 @@ function proposal(operations: TransitionProposal["operations"]): TransitionPropo
 const causalAction = [{ kind: "action" as const, id: "player-action" }];
 
 describe("open world kernel", () => {
+  it("rejects the previous persisted state contract without migration", () => {
+    const old = worldState();
+    (old as unknown as { schemaVersion: number }).schemaVersion = 16;
+    expect(() => validateSimulationState(old)).toThrow("invalid simulation identity");
+  });
   it("reserves rt identities from every model-authored semantic namespace", () => {
     expect(quantityId(TEST_WORLD_HASH, "definition:a", "holder"))
       .not.toBe(quantityId(TEST_WORLD_HASH, "definition", "a:holder"));

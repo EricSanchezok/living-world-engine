@@ -14,7 +14,7 @@ Observer 契约为 `src/shared/world-observer-api.ts`。`selected.perspective` �
 
 | 方法与路径 | 语义 |
 |---|---|
-| `GET /api/worlds` | 列出已安装的 schema v14 世界 |
+| `GET /api/worlds` | 列出已安装的 schema v15 世界 |
 | `POST /api/worlds/import` | 导入或显式替换世界 ZIP |
 | `DELETE /api/worlds/:id` | 在没有关联实例时卸载世界 |
 | `GET /api/worlds/:id/start-options` | 读取 Origin 与 Observer 准入选项 |
