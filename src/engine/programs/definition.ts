@@ -123,7 +123,7 @@ export function admitProgram(input: unknown, admission: ProgramAdmission): Admit
   if (definition.interrupts.includes(definition.startPredicateId)) throw new Error("startPredicateId cannot also interrupt the program when true; declare a separate invalidation predicate");
   for (const predicate of definition.predicates) {
     unique(predicate.reads, "predicate read"); unique(predicate.sourceIds, "predicate source");
-    for (const read of predicate.reads) if (!definition.reads.includes(read)) throw new Error(`undeclared predicate read ${read}`);
+    for (const read of predicate.reads) if (!definition.reads.includes(read)) throw new Error(`undeclared predicate read ${read}: predicate ${predicate.id} reads this resource but the program's top-level reads array does not include it`);
     for (const source of predicate.sourceIds) if (!definition.sourceIds.includes(source)) throw new Error(`undeclared predicate source ${source}`);
     if (predicate.test.kind === "mechanical") {
       for (const expression of [predicate.test.left, predicate.test.right]) {
@@ -204,7 +204,7 @@ export function bindProgram(program: AdmittedProgram, parameters: Record<string,
   if (Object.keys(parameters).sort().join("\n") !== Object.keys(program.definition.parameters).sort().join("\n")) throw new Error("program parameters do not match the definition");
   for (const [name, parameter] of Object.entries(program.definition.parameters)) {
     const value = parameters[name];
-    if (parameter.kind === "entity" && (typeof value !== "string" || !entityIds.has(value))) throw new Error(`invalid entity parameter ${name}`);
+    if (parameter.kind === "entity" && (typeof value !== "string" || !entityIds.has(value))) throw new Error(`invalid entity parameter ${name}: ${JSON.stringify(value)}; allowed local entity IDs: ${[...entityIds].sort().join(", ")}`);
     if (parameter.kind === "text" && typeof value !== "string") throw new Error(`invalid text parameter ${name}`);
     if (parameter.kind === "number" && (typeof value !== "number" || !Number.isFinite(value))) throw new Error(`invalid numeric parameter ${name}`);
   }

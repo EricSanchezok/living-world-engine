@@ -4,7 +4,7 @@ import { contentHash } from "../models/model-audit";
 import { validateDecisionResult } from "../models/decision";
 import { admitProgram } from "../programs/definition";
 import { ProgramInterpreter, type ProgramPredicateWork } from "../programs/interpreter";
-import { programPredicateBatch, type DecisionUse } from "../programs/decision-runtime";
+import { programPredicateBatch, programPredicateQuestionVersion, type DecisionUse } from "../programs/decision-runtime";
 import { privateProgramEntityIds, privateProgramResources, privateProgramSources } from "../programs/private-resources";
 import type { ExternalActionInput, PolicyBinding } from "../runtime/execution";
 import type { JsonObject } from "../runtime/json";
@@ -101,7 +101,7 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
       }
       const interpreter = previous ? ProgramInterpreter.restore(previous.snapshot, definition.program, new Set(previous.entityIds), receipts)
         : new ProgramInterpreter(definition.program, entry.snapshot.instanceId, entry.snapshot.parameters, new Set(entry.entityIds), entry.snapshot.startedAtSeconds);
-      const proofTickets = new Map<string, { verdict: string; evidenceHash: string }>();
+      const proofTickets = new Map<string, { verdict: string; evidenceHash: string; readKeys: string[] }>();
       for (const event of entry.snapshot.events.slice(previous?.snapshot.events.length ?? 0)) {
         if (roster[agent.id]?.kind !== "model" && !(event.kind === "interrupt" &&
           event.reason === `controller:${roster[agent.id]?.kind}` && before.policyKinds[agent.id] !== after.policyKinds[agent.id])) {
@@ -115,6 +115,13 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
           if (!work || work.kind !== "predicate") throw new Error("predicate is outside the actual program frontier");
           if (work.mechanicalVerdict !== null) {
             if (event.evidenceHash !== contentHash({ evaluator: "program-arithmetic-v1", work, verdict: work.mechanicalVerdict })) throw new Error("mechanical evidence mismatch");
+          } else if (event.reusedFrom) {
+            const version = programPredicateQuestionVersion(interpreter, work);
+            const prior = interpreter.reusablePredicateEvidence(work, resources.resources, version);
+            if (!prior || prior.ticket !== event.reusedFrom || prior.verdict !== event.verdict || prior.evidenceHash !== event.evidenceHash) {
+              throw new Error("private predicate reuse has no matching authorized evidence");
+            }
+            proofTickets.set(event.ticket, { verdict: prior.verdict, evidenceHash: prior.evidenceHash, readKeys: Object.keys(prior.reads) });
           } else if (!proofTickets.has(event.ticket)) {
             const use = decisions.find(value => value.programInstanceId === interpreter.instanceId && value.evidenceHash === event.evidenceHash &&
               value.programWorkIds?.some(group => group.includes(event.ticket)));
@@ -127,11 +134,13 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
             }));
             if (!equal(programPredicateBatch(interpreter, groups), use.batch)) throw new Error("private decision contains a different authorized input");
             groups.forEach((group, index) => group.forEach(item => proofTickets.set(item.id, {
-              verdict: use.result.answers[`q${index}`]!.choice, evidenceHash: use.evidenceHash })));
+              verdict: use.result.answers[`q${index}`]!.choice, evidenceHash: use.evidenceHash, readKeys: Object.keys(use.batch.dependencies) })));
           }
           if (work.mechanicalVerdict === null && (!proofTickets.has(event.ticket) || proofTickets.get(event.ticket)!.verdict !== event.verdict ||
             proofTickets.get(event.ticket)!.evidenceHash !== event.evidenceHash)) throw new Error("predicate verdict differs from its decision");
-          interpreter.resolve(work, resources.resources, event.verdict, event.evidenceHash, now);
+          interpreter.resolve(work, resources.resources, event.verdict, event.evidenceHash, now, work.mechanicalVerdict === null
+            ? { readKeys: proofTickets.get(event.ticket)!.readKeys, questionVersion: programPredicateQuestionVersion(interpreter, work),
+              ...(event.reusedFrom ? { reusedFrom: event.reusedFrom } : {}) } : undefined);
         } else if (event.kind === "utterance" || event.kind === "issue" || event.kind === "deadline") {
           const work = interpreter.work(resources.resources, now).find(value => value.id === event.workId);
           if (!work || work.kind === "predicate") throw new Error("instruction is outside the actual program frontier");

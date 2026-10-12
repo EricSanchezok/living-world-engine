@@ -15,6 +15,17 @@ export type ProgramReceipt = z.infer<typeof programReceiptSchema>;
 type Verdict = "yes" | "no" | "unknown";
 /** The generated read list cannot omit the owner's actual observation and physical evidence. */
 const semanticEvidenceKeys = ["self", "mechanics", "containment", "facts", "claims", "evidence", "observations"];
+const readProofSchema = z.record(z.string(), z.object({ version: ordinal, hash: programHash }).strict());
+type PredicateReads = z.infer<typeof readProofSchema>;
+function predicateReads(resources: ProgramResources, keys: readonly string[]): PredicateReads {
+  return Object.fromEntries([...new Set(keys)].sort().map(key => {
+    const value = resources[key]; if (!value) throw new Error(`missing predicate evidence ${key}`);
+    return [key, { version: value.version, hash: contentHash(value.value) }];
+  }));
+}
+function readsMatch(resources: ProgramResources, reads: PredicateReads): boolean {
+  return Object.entries(reads).every(([key, value]) => resources[key]?.version === value.version && contentHash(resources[key]!.value) === value.hash);
+}
 type Leaf = { kind: "leaf"; nodeId: string; activation: number; atSeconds: number | null; issued: string | null;
   lastInputHash: string | null; utterance: string | null };
 type Residual = Leaf | { kind: "done"; nodeId: string }
@@ -46,7 +57,8 @@ export type ProgramWork = ProgramPredicateWork | ProgramAttemptWork;
 const eventSchema = z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("predicate"), ticket: programHash, predicateId: programKey,
     reason: z.enum(["start", "flow", "interrupt", "milestone", "goal"]), subjectId: z.string().min(1),
-    inputHash: programHash, verdict: z.enum(["yes", "no", "unknown"]), evidenceHash: programHash, atSeconds: ordinal }).strict(),
+    inputHash: programHash, verdict: z.enum(["yes", "no", "unknown"]), evidenceHash: programHash, atSeconds: ordinal,
+    reads: readProofSchema, questionVersion: programHash.nullable(), reusedFrom: programHash.nullable() }).strict(),
   z.object({ kind: z.literal("issue"), workId: programHash, requestHash: programHash, atSeconds: ordinal }).strict(),
   z.object({ kind: z.literal("utterance"), workId: programHash, text: z.string().trim().min(1), atSeconds: ordinal }).strict(),
   z.object({ kind: z.literal("settle"), receipt: programReceiptSchema, waitInputHash: programHash }).strict(),
@@ -55,7 +67,7 @@ const eventSchema = z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("deadline"), workId: programHash, atSeconds: ordinal }).strict(),
 ]);
 type JournalEvent = z.infer<typeof eventSchema>;
-const snapshotSchema = z.object({ version: z.literal(1), instanceId: programKey, definitionHash: programHash,
+const snapshotSchema = z.object({ version: z.literal(2), instanceId: programKey, definitionHash: programHash,
   parameters: z.record(programKey, z.json()), startedAtSeconds: ordinal, events: z.array(eventSchema), hash: programHash }).strict();
 export type ProgramInstance = z.infer<typeof snapshotSchema>;
 
@@ -65,7 +77,7 @@ export class ProgramInterpreter {
   private readonly predicates: Map<string, ProgramPredicate>;
   private readonly parameters: Readonly<Record<string, JsonValue>>;
   private readonly events: JournalEvent[] = [];
-  private readonly checked = new Map<string, string>();
+  private readonly checked = new Map<string, { inputHash: string; reads: PredicateReads }>();
   private readonly seenFlow = new Map<string, number>();
   private readonly milestoneEvidence = new Map<string, string>();
   private readonly goalEvidence = new Map<string, string>();
@@ -102,7 +114,7 @@ export class ProgramInterpreter {
   }
 
   snapshot(): ProgramInstance {
-    const payload = { version: 1 as const, instanceId: this.instanceId, definitionHash: this.program.hash,
+    const payload = { version: 2 as const, instanceId: this.instanceId, definitionHash: this.program.hash,
       parameters: this.parameters, startedAtSeconds: this.startedAtSeconds, events: this.events };
     return snapshotSchema.parse({ ...payload, hash: contentHash(payload) });
   }
@@ -120,6 +132,11 @@ export class ProgramInterpreter {
 
   subscriptions(resources: ProgramResources, atSeconds: number) {
     const resourceKeys = new Set<string>(); const receiptWorkIds: string[] = []; const deadlines: number[] = [];
+    const watch = (predicateId: string) => {
+      this.predicateResources(this.predicates.get(predicateId)!, resources).forEach(key => resourceKeys.add(key));
+      const prior = this.events.findLast(event => event.kind === "predicate" && event.predicateId === predicateId);
+      if (prior?.kind === "predicate") Object.keys(prior.reads).forEach(key => resourceKeys.add(key));
+    };
     let noProgress = false;
     for (const leaf of this.leaves()) {
       const node = this.nodes.get(leaf.nodeId)!;
@@ -127,7 +144,7 @@ export class ProgramInterpreter {
       if (node.kind === "attempt") this.program.definition.reads.forEach(key => resourceKeys.add(key));
       if (node.kind === "branch" || node.kind === "repeat" || node.kind === "wait") {
         const predicate = this.predicates.get(node.predicateId)!;
-        this.predicateResources(predicate, resources).forEach(key => resourceKeys.add(key));
+        watch(predicate.id);
         const hash = this.project(predicate, resources).inputHash;
         if (node.kind === "repeat" && this.seenFlow.get(`${node.id}:${hash}`) === this.progress && !this.checked.has(`flow:${this.workId(leaf)}`)) noProgress = true;
         if (node.kind === "wait" && node.deadlineSeconds !== null && leaf.atSeconds! + node.deadlineSeconds > atSeconds) deadlines.push(leaf.atSeconds! + node.deadlineSeconds);
@@ -136,7 +153,7 @@ export class ProgramInterpreter {
     const watched = [this.program.definition.startPredicateId, ...this.program.definition.interrupts,
       ...this.program.definition.milestones.filter(milestone => !this.milestoneEvidence.has(milestone.id)).map(milestone => milestone.predicateId),
       ...this.program.definition.goals.filter(goal => !this.goalEvidence.has(goal.goalId)).map(goal => goal.predicateId)];
-    for (const id of watched) this.predicateResources(this.predicates.get(id)!, resources).forEach(key => resourceKeys.add(key));
+    watched.forEach(watch);
     if (this.program.definition.goals.some(goal => !this.goalEvidence.has(goal.goalId))) {
       semanticEvidenceKeys.filter(key => Object.hasOwn(resources, key)).forEach(key => resourceKeys.add(key));
     }
@@ -166,7 +183,8 @@ export class ProgramInterpreter {
     const predicate = this.predicates.get(predicateId)!;
     const projected = this.project(predicate, resources, reason === "goal" ? [`goal:${subjectId}`] : []);
     const checkKey = `${reason}:${subjectId}`;
-    if (this.checked.get(checkKey) === projected.inputHash) return null;
+    const checked = this.checked.get(checkKey);
+    if (checked?.inputHash === projected.inputHash && readsMatch(resources, checked.reads)) return null;
     if (reason === "flow" && this.seenFlow.get(`${this.find(subjectId).nodeId}:${projected.inputHash}`) === this.progress) return null;
     let mechanicalVerdict: Verdict | null = null;
     if (predicate.test.kind === "mechanical") {
@@ -228,12 +246,27 @@ export class ProgramInterpreter {
   }
 
   /** A batched verdict must still match this owner's current actual dependency values and versions. */
-  resolve(work: ProgramPredicateWork, resources: ProgramResources, verdict: Verdict, evidenceHash: string, atSeconds: number) {
+  reusablePredicateEvidence(work: ProgramPredicateWork, resources: ProgramResources, questionVersion: string) {
+    const previous = this.events.findLast(event => event.kind === "predicate" && event.predicateId === work.predicateId &&
+      event.inputHash === work.inputHash && event.questionVersion === questionVersion && readsMatch(resources, event.reads));
+    return previous?.kind === "predicate" ? { ticket: previous.ticket, verdict: previous.verdict,
+      evidenceHash: previous.evidenceHash, reads: structuredClone(previous.reads), questionVersion } : null;
+  }
+
+  resolve(work: ProgramPredicateWork, resources: ProgramResources, verdict: Verdict, evidenceHash: string, atSeconds: number,
+    proof?: { readKeys: string[]; questionVersion: string; reusedFrom?: string }) {
     const current = this.work(resources, atSeconds).find(item => item.id === work.id);
     if (!current || contentHash(current) !== contentHash(work)) throw new Error("stale or foreign program predicate ticket");
     if (work.mechanicalVerdict !== null && work.mechanicalVerdict !== verdict) throw new Error("model cannot override a mechanical condition");
+    const reads = predicateReads(resources, proof?.readKeys ?? Object.keys(work.dependencies));
+    if (Object.keys(work.dependencies).some(key => !Object.hasOwn(reads, key))) throw new Error("predicate evidence omits an actual dependency");
+    if (proof?.reusedFrom) {
+      const prior = this.reusablePredicateEvidence(work, resources, proof.questionVersion);
+      if (!prior || prior.ticket !== proof.reusedFrom || prior.verdict !== verdict || prior.evidenceHash !== evidenceHash ||
+        contentHash(prior.reads) !== contentHash(reads)) throw new Error("reused predicate differs from its original evidence");
+    }
     this.apply({ kind: "predicate", ticket: work.id, predicateId: work.predicateId, reason: work.reason, subjectId: work.subjectId,
-      inputHash: work.inputHash, verdict, evidenceHash, atSeconds });
+      inputHash: work.inputHash, verdict, evidenceHash, atSeconds, reads, questionVersion: proof?.questionVersion ?? null, reusedFrom: proof?.reusedFrom ?? null });
   }
 
   issue(work: ProgramAttemptWork, resources: ProgramResources, atSeconds: number): string {
@@ -338,8 +371,14 @@ export class ProgramInterpreter {
         if (event.reason === "interrupt" && (event.subjectId !== event.predicateId || !this.program.definition.interrupts.includes(event.predicateId))) throw new Error("interrupt predicate is not declared");
         if (event.reason === "start" && (event.subjectId !== "start" || this.started || event.predicateId !== this.program.definition.startPredicateId)) throw new Error("invalid start predicate");
         const checkKey = `${event.reason}:${event.subjectId}`;
-        if (this.checked.get(checkKey) === event.inputHash) throw new Error("duplicate unchanged predicate");
-        this.checked.set(checkKey, event.inputHash);
+        if (this.checked.get(checkKey)?.inputHash === event.inputHash &&
+          contentHash(this.checked.get(checkKey)!.reads) === contentHash(event.reads)) throw new Error("duplicate unchanged predicate");
+        if (event.reusedFrom && !this.events.some(prior => prior.kind === "predicate" && prior.ticket === event.reusedFrom &&
+          prior.predicateId === event.predicateId && prior.inputHash === event.inputHash && prior.questionVersion === event.questionVersion &&
+          prior.verdict === event.verdict && prior.evidenceHash === event.evidenceHash && contentHash(prior.reads) === contentHash(event.reads))) {
+          throw new Error("predicate reuse has no matching journal evidence");
+        }
+        this.checked.set(checkKey, { inputHash: event.inputHash, reads: event.reads });
         if (event.reason === "start") {
           if (event.verdict === "yes") this.started = true;
           else if (event.verdict === "no" || predicate.unknown === "expand") this.expansion = `inapplicable:${predicate.id}`;

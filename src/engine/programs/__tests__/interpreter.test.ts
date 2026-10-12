@@ -58,6 +58,20 @@ describe("private program admission", () => {
 });
 
 describe("persistent program interpreter", () => {
+  it("invalidates remembered semantics on every resource actually supplied in the original batch", () => {
+    const fixture = programFixture();
+    fixture.definition.predicates[0]!.test = { kind: "semantic", instructions: "Is this plan appropriate?" };
+    fixture.program = admitProgram(fixture.definition, fixture.admission);
+    const interpreter = new ProgramInterpreter(fixture.program, "batch-evidence", fixture.parameters, fixture.entities);
+    const work = interpreter.work(fixture.resources, 0)[0] as ProgramPredicateWork;
+    const version = contentHash("question-v1");
+    interpreter.resolve(work, fixture.resources, "yes", contentHash("source-result"), 0, { readKeys: ["self", "task"], questionVersion: version });
+    expect(interpreter.reusablePredicateEvidence(work, fixture.resources, version)?.verdict).toBe("yes");
+    expect(interpreter.reusablePredicateEvidence(work, fixture.resources, contentHash("question-v2"))).toBeNull();
+    expect(interpreter.subscriptions(fixture.resources, 0).resources).toContain("task");
+    fixture.resources.task = { version: 1, value: { delivered: true } };
+    expect(interpreter.reusablePredicateEvidence(work, fixture.resources, version)).toBeNull();
+  });
   it("binds semantic conditions and wake subscriptions to the actual private evidence envelope", () => {
     const fixture = programFixture();
     fixture.definition.predicates[0]!.test = { kind: "semantic", instructions: "Is the recipient available here?" };

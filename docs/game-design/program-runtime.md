@@ -12,13 +12,13 @@
 
 ## Execution and recovery
 
-`ProgramInterpreter` persists an event journal and derives its exact control position by replay. Each activated node has a deterministic work identity. Issued attempts bind a request hash; only a matching receipt from the canonical receipt collection can settle them. Restoring an instance requires the same immutable definition and the recorded canonical receipts. Duplicate settlement fails. Partial completion and failure either wait for changed dependencies or request expansion, according to the program.
+`ProgramInterpreter` persists a version 2 event journal and derives its exact control position by replay. Each activated node has a deterministic work identity. Issued attempts bind a request hash; only a matching receipt from the canonical receipt collection can settle them. Restoring an instance requires the same immutable definition and the recorded canonical receipts. Duplicate settlement fails. Partial completion and failure either wait for changed dependencies or request expansion, according to the program.
 
 Speech has one structural variant: none, already authored text, or a request to create text for a stated purpose. A creation request must receive concrete words before action dispatch. Creating words does not deliver them or establish their truth.
 
 Starting a wait node starts its deadline; time spent on earlier sequence nodes does not consume it. Explicit interruption survives restart. An unchanged condition is not queried again. Repeated control flow at the same input and without committed progress stops model work and exposes a no-progress subscription reason.
 
-Execution ending, milestones and long-term goal evidence remain separate fields. Reaching a terminal node does not mark the goal completed.
+Execution ending, milestones and long-term goal evidence remain separate fields. Reaching a terminal node does not mark the goal completed. A separately verified goal judgment updates the owner's private goal status and retains an inference evidence record referencing that judgment. This records the Agent's conclusion; task qualification still checks actual canonical world outcomes independently.
 
 ## Decision dependency boundary
 
@@ -27,6 +27,8 @@ Execution ending, milestones and long-term goal evidence remain separate fields.
 Mechanical expressions execute in code with finite-number checks. Semantic predicates use yes/no/unknown questions. A decision round contains only currently independent work from one owner. Duplicate uses of the same predicate share a question. Lossless partitions retain all required resources, and the generative comparison arm uses the same partition rule. A single inseparable overflow uses the explicit decision fallback.
 
 `DecisionRuntime` keys reuse by the complete authorized batch, question and prompt versions, program hash, dependencies, model catalog, profile and pinned registry snapshot. Unpinned registry work is not cached. Cached results refer to original model invocations without creating another audit or increasing physical request counts. Before applying a result the interpreter rechecks its actual current input ticket.
+
+The private journal also reuses an already proved predicate when a later control node needs the same condition. Reuse binds the question version and every resource actually supplied in the original batch, including resources shared with other questions. A changed value or version invalidates it. The new journal entry references the original ticket; canonical replay verifies that link and the actual read set without another model invocation. Goal questions retain their additional authored-goal requirement and cannot reuse a weaker milestone answer.
 
 ## Verification and live evidence
 

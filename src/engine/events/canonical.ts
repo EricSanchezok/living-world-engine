@@ -11,6 +11,7 @@ import type { DecisionEventBootstrap, DecisionEventStep } from "./execution-cont
 import { initialDecisionEventState, readDecisionEventState, type DecisionEventState } from "./runtime-state";
 import { validateControlTransition } from "./control-validation";
 import { settleProgramWorldEvent } from "./settlement";
+import { applyProgramGoalEvidence } from "./goal-completion";
 
 const equal = (a: unknown, b: unknown) => contentHash(a) === contentHash(b);
 function validateAuthority(state: Readonly<SimulationState>, authority: WorldRuntimeContract) {
@@ -32,6 +33,7 @@ export function applyDecisionEventBootstrap(source: Readonly<SimulationState>, p
   state.historyBase ??= createHistoryReplayBase(state);
   state.executionState = { producerHash: proof.producerHash, data: structuredClone(proof.control) as unknown as JsonObject };
   state.bootstrapDecisionEvent = structuredClone(proof);
+  applyProgramGoalEvidence(state, proof.control, source.revision);
   for (const agent of Object.values(state.agents)) agent.nextAction = null;
   validateSimulationState(state, false);
   return state;
@@ -46,15 +48,17 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
   if (verifyControl) validateControlTransition(source, before, proof.preparedControl, proof.authority, producerHash,
     proof.decisions, proof.modelAudits, proof.policyRoster, proof.request.externalActions);
   let state: SimulationState, computed: DecisionEventState;
-  let observations: CommittedStep["observations"] = [], beliefPatches: CommittedStep["beliefPatches"] = [];
+  let observations: CommittedStep["observations"] = [], beliefPatches: CommittedStep["beliefPatches"] = [], characterPatches: CommittedStep["characterPatches"] = [];
   if (proof.event) {
     const settled = settleProgramWorldEvent(source, proof.preparedControl, proof.event, proof.authority, producerHash, proof.beliefRevisions);
-    state = settled.state; computed = settled.control; observations = settled.observations; beliefPatches = settled.beliefPatches;
+    state = settled.state; computed = settled.control; observations = settled.observations; beliefPatches = settled.beliefPatches; characterPatches = settled.characterPatches;
   } else {
     if (proof.beliefRevisions.length) throw new Error("a control revision cannot fabricate new observation evidence");
     state = structuredClone(source) as SimulationState; state.revision += 1;
     for (const agent of Object.values(state.agents)) agent.nextAction = null;
     computed = proof.preparedControl;
+    const goals = applyProgramGoalEvidence(state, computed, source.revision);
+    beliefPatches = goals.beliefPatches; characterPatches = goals.characterPatches;
   }
   const executionOnly = (value: DecisionEventState) => ({ ...value, hash: "", decisionCache: null, modelOrdinals: null });
   if (!equal(executionOnly(computed), executionOnly(proof.finalControl))) throw new Error("final program state differs from canonical settlement");
@@ -96,7 +100,7 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
     checkRequests: [], checks: [], randomRequests: event?.randomness?.plan.requests ?? [], randomResults: event?.randomness?.results ?? [],
     commitmentRounds: [], outcomes, mechanicInvocations: [], mechanicResults: [], causalAssertionResults: [],
     causalVerification: { verdict: "accept", findings: [] }, events: state.truth.events.slice(source.truth.events.length),
-    observations, operations: event?.effects ?? [], decisionRequests: [], beliefPatches, characterPatches: [], nextActions: [],
+    observations, operations: event?.effects ?? [], decisionRequests: [], beliefPatches, characterPatches, nextActions: [],
   };
   const semantic = { ...payload, semanticHash: contentHash(payload) };
   const committed: CommittedStep = { ...semantic, contentHash: contentHash(semantic) };

@@ -76,6 +76,12 @@ export async function resolveProgramPredicates(runtime: DecisionRuntime, interpr
     const evidence = contentHash({ evaluator: "program-arithmetic-v1", work, verdict: work.mechanicalVerdict });
     interpreter.resolve(work, resources, work.mechanicalVerdict!, evidence, atSeconds); mechanicalEvidence.push(evidence);
   }
+  for (const work of initial.filter(work => work.mechanicalVerdict === null && isCurrent(work))) {
+    const version = programPredicateQuestionVersion(interpreter, work);
+    const prior = interpreter.reusablePredicateEvidence(work, resources, version);
+    if (prior && isCurrent(work)) interpreter.resolve(work, resources, prior.verdict, prior.evidenceHash, atSeconds,
+      { readKeys: Object.keys(prior.reads), questionVersion: version, reusedFrom: prior.ticket });
+  }
   const work = initial.filter(work => work.mechanicalVerdict === null && isCurrent(work));
   const groups = new Map<string, ProgramPredicateWork[]>();
   for (const item of work) {
@@ -101,10 +107,16 @@ export async function resolveProgramPredicates(runtime: DecisionRuntime, interpr
     for (const [index, group] of partition.entries()) {
       const verdict = use.result.answers[`q${index}`]!.choice;
       if (!(verdict === "yes" || verdict === "no" || verdict === "unknown")) throw new Error("invalid program predicate answer");
-      for (const item of group) if (isCurrent(item)) interpreter.resolve(item, resources, verdict, use.evidenceHash, atSeconds);
+      for (const item of group) if (isCurrent(item)) interpreter.resolve(item, resources, verdict, use.evidenceHash, atSeconds,
+        { readKeys: Object.keys(use.batch.dependencies), questionVersion: programPredicateQuestionVersion(interpreter, item) });
     }
   }
   return { decisions, mechanicalEvidence };
+}
+
+export function programPredicateQuestionVersion(interpreter: ProgramInterpreter, work: ProgramPredicateWork): string {
+  const predicate = interpreter.program.definition.predicates.find(value => value.id === work.predicateId)!;
+  return contentHash({ predicate, goalId: work.reason === "goal" ? work.subjectId : null, instruction: loadPromptAsset("shared/program-predicate.md") });
 }
 
 /** Canonical projection shared by model preparation and commit verification. */
@@ -121,7 +133,7 @@ export function programPredicateBatch(interpreter: ProgramInterpreter, selected:
         const predicate = predicates.get(group[0]!.predicateId)!;
         const goalId = group[0]!.reason === "goal" ? group[0]!.subjectId : null;
         if (predicate.test.kind !== "semantic" && goalId === null) throw new Error("mechanical predicate reached the model boundary");
-        return [`q${index}`, { version: contentHash({ predicate, goalId }), instructions: `${instruction}\n\n${predicate.test.kind === "semantic" ? predicate.test.instructions : JSON.stringify(predicate.test)}\n${JSON.stringify({ relevantResources: predicate.reads, goalId })}${goalId ? "\nA yes answer must establish the actual long-term goal in resource goal:" + goalId + ", as well as this generated condition. Ending a program or completing a subtask is insufficient." : ""}`,
+        return [`q${index}`, { version: programPredicateQuestionVersion(interpreter, group[0]!), instructions: `${instruction}\n\n${predicate.test.kind === "semantic" ? predicate.test.instructions : JSON.stringify(predicate.test)}\n${JSON.stringify({ relevantResources: predicate.reads, goalId })}${goalId ? "\nA yes answer must establish the actual long-term goal in resource goal:" + goalId + ", as well as this generated condition. Ending a program or completing a subtask is insufficient." : ""}`,
           criteria: { yes: "The supplied evidence establishes the condition.", no: "The supplied evidence explicitly contradicts the condition.",
             unknown: "There is insufficient evidence to establish or contradict the condition." }, sources: predicate.sourceIds }];
       })),

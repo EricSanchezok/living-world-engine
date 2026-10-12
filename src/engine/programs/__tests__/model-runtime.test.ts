@@ -13,6 +13,7 @@ import { projectAgentPerspective } from "../../cognition/agent-perspective";
 import { ProgramInterpreter, type ProgramPredicateWork } from "../interpreter";
 import type { DecisionBatch } from "../../models/decision";
 import { ProgramLibrary } from "../library";
+import { admitProgram } from "../definition";
 
 function provider(output: (body: Record<string, unknown>, attempt: number) => unknown) {
   const base = createTestModelCatalog(["program-test"]);
@@ -89,6 +90,31 @@ describe("program compilation through the model gateway", () => {
 });
 
 describe("versioned decision reuse", () => {
+  it("reuses a proved condition across milestone, wait and later branch after restart", async () => {
+    const fixture = programFixture();
+    fixture.definition.nodes = [
+      { id: "root", kind: "sequence", children: ["wait", "branch"] },
+      { id: "wait", kind: "wait", predicateId: "accepted", deadlineSeconds: null },
+      { id: "branch", kind: "branch", predicateId: "accepted", yes: "yes", no: "no" },
+      { id: "yes", kind: "finish" }, { id: "no", kind: "finish" },
+    ];
+    const program = admitProgram(fixture.definition, fixture.admission);
+    let interpreter = new ProgramInterpreter(program, "reuse-condition", fixture.parameters, fixture.entities);
+    const configured = provider(() => ({ answers: { q0: { choice: "yes" } } }));
+    const registry = await configured.registry.capture(); let ordinal = 1;
+    const scope = { ...compilation(), modelRegistrySnapshotHash: registry.hash, nextInvocation: () => ordinal++ };
+    const runtime = new DecisionRuntime(configured.gateway);
+    await resolveProgramPredicates(runtime, interpreter, fixture.resources, 0, scope);
+    await resolveProgramPredicates(runtime, interpreter, fixture.resources, 0, scope);
+    expect(configured.transport).toHaveBeenCalledTimes(1);
+    interpreter = ProgramInterpreter.restore(interpreter.snapshot(), program, fixture.entities, fixture.receipts);
+    const reused = await resolveProgramPredicates(new DecisionRuntime(configured.gateway), interpreter, fixture.resources, 0, scope);
+    expect(reused.decisions).toEqual([]);
+    expect(configured.transport).toHaveBeenCalledTimes(1);
+    expect(interpreter.status).toBe("ended");
+    expect(interpreter.snapshot().events.some(event => event.kind === "predicate" && event.reusedFrom !== null)).toBe(true);
+    expect(interpreter.completion.goals).toEqual({});
+  });
   it("coalesces identical authorized requests and restores references without new model invocations", async () => {
     const configured = provider(() => ({ answers: { consent: { choice: "unknown" } } }));
     const registry = await configured.registry.capture();

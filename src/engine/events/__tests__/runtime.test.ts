@@ -10,6 +10,41 @@ import { contentHash } from "../../models/model-audit";
 
 
 describe("native event runtime through SimulationEngine", () => {
+  it("persists a separately proved goal judgment as private cognition without claiming a physical effect", async () => {
+    const f = nativeProgramFixture({ goalVerdict: "yes" }); await f.configured.registry.capture();
+    const engine = new SimulationEngine(f.world, new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig));
+    const boot = await engine.bootstrapAgents();
+    const goal = boot.agents.keeper!.character.goals["guard-gate"]!;
+    expect(goal).toMatchObject({ status: "completed", progress: 1 });
+    expect(boot.agents.keeper!.belief.evidence[goal.evidenceIds[0]!]).toMatchObject({ kind: "inference" });
+    expect(boot.truth).toEqual(f.world.initialState.truth);
+    expect(restoreOwnerPrograms(boot.bootstrapDecisionEvent!.control, "keeper")[0]!.completion.executionEnded).toBe(false);
+    expect(replaySimulationState(boot)).toEqual(boot);
+    const result = await engine.step(f.roster, { expectedRevision: 0, trigger: "manual", externalActions: [] });
+    expect(result.state.agents.keeper!.character.goals["guard-gate"]!.evidenceIds).toEqual(goal.evidenceIds);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("canonically replays a condition reused by a later branch without another decision", async () => {
+    const f = nativeProgramFixture();
+    const ask = f.program.nodes[0]!;
+    f.program.entry = "sequence";
+    f.program.predicates[1]!.test = { kind: "mechanical", operator: "eq", left: { kind: "literal", value: false }, right: { kind: "literal", value: true } };
+    f.program.predicates.push({ id: "available", description: "The known traveler is available", reads: ["evidence"], sourceIds: ["goal:guard-gate"],
+      unknown: "wait", test: { kind: "semantic", instructions: "Is the traveler available?" } });
+    f.program.milestones = [{ id: "available", predicateId: "available" }];
+    f.program.nodes = [{ id: "sequence", kind: "sequence", children: ["wait", "branch"] },
+      { id: "wait", kind: "wait", predicateId: "available", deadlineSeconds: null },
+      { id: "branch", kind: "branch", predicateId: "available", yes: ask.id, no: "finish" }, ask, { id: "finish", kind: "finish" }];
+    await f.configured.registry.capture();
+    const engine = new SimulationEngine(f.world, new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig));
+    const boot = await engine.bootstrapAgents();
+    const events = boot.bootstrapDecisionEvent!.control.agents.keeper!.instances[0]!.snapshot.events;
+    expect(events.filter(event => event.kind === "predicate" && event.reusedFrom)).toHaveLength(1);
+    expect(boot.bootstrapDecisionEvent!.decisions.filter(use => use.programInstanceId)).toHaveLength(1);
+    expect(replaySimulationState(boot)).toEqual(boot);
+    const result = await engine.step(f.roster, { expectedRevision: 0, trigger: "manual", externalActions: [] });
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("exposes every ordered debug stage around native model work and canonical validation", async () => {
     const f = nativeProgramFixture(); await f.configured.registry.capture();
     const engine = new SimulationEngine(f.world, new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig));

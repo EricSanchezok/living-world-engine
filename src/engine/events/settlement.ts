@@ -5,6 +5,7 @@ import { contentHash } from "../models/model-audit";
 import type { JsonObject } from "../runtime/json";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import { applyEventBeliefs, type BeliefRevision } from "./cognition";
+import { applyProgramGoalEvidence } from "./goal-completion";
 import { commitWorldEvent, type WorldEventCandidate } from "./kernel";
 import { projectEventPerception } from "./perception";
 import { nextWorldClockBoundary } from "./clock-boundary";
@@ -39,6 +40,7 @@ export function settleProgramWorldEvent(source: Readonly<SimulationState>, prepa
     if (contentHash(delivered.slice().sort()) !== contentHash(revision.evidenceIds.slice().sort())) throw new Error("belief revision does not bind this Agent's actual deliveries");
     state.agents[revision.agentId] = applyEventBeliefs(state, revision, prepared.agents[revision.agentId]?.resources);
   }
+  const goals = applyProgramGoalEvidence(state, prepared, source.revision);
   const control = structuredClone(prepared);
   control.receipts.push(committed.receipt);
   const canonicalReceipts = programReceiptIndex(control);
@@ -78,5 +80,5 @@ export function settleProgramWorldEvent(source: Readonly<SimulationState>, prepa
   const sealed = sealDecisionEventState(control);
   state.executionState = { producerHash, data: sealed as unknown as JsonObject };
   return { state, control: sealed, receipt: committed.receipt, observations: perception.observations,
-    beliefPatches: [...perception.beliefPatches, ...beliefs.map(revision => revision.patch)] };
+    beliefPatches: [...perception.beliefPatches, ...beliefs.map(revision => revision.patch), ...goals.beliefPatches], characterPatches: goals.characterPatches };
 }
