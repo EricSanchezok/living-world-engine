@@ -67,7 +67,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     const control = sealDecisionEventState(result.control);
     return { schemaVersion: WORLD_STEP_CANDIDATE_SCHEMA_VERSION, sourceStateHash: contentHash(input.state), agentCommits: [],
       modelAudits: result.modelAudits, diagnostics: { activatedAgentIds: result.activatedAgentIds, reusedAgentIds: [], mindFallbackAgentIds: [] },
-      decisionEvent: { version: 1 as const, producerHash: this.manifest.hash, authority, control,
+      decisionEvent: { version: 2 as const, producerHash: this.manifest.hash, modelCatalog: this.provider.catalog.snapshot(), authority, control,
         decisions: result.decisions, modelAudits: result.modelAudits } };
   }
   async prepareStep(input: Readonly<WorldStepInput>, context: ExecutionContext): Promise<WorldStepPreparation> {

@@ -32,9 +32,9 @@ export async function compileWorldProgram(provider: StructuredModelProvider, req
   if (request.state.agents[request.attempt.actorId]?.entityId !== request.attempt.actorEntityId) throw new Error("world compiler attempt ownership mismatch");
   const sources = worldProgramSources(request.definition, request.state), entities = new Set(Object.keys(request.state.truth.entities));
   // Explicit projection: never serialize request.state, whose Agent entries contain hidden cognition and identity bindings.
-  const sourceAddresses = Object.fromEntries(Object.entries(sources).map(([id, source]) => [id, id.startsWith("fact:")
+  const sourceAddresses = Object.fromEntries(Object.entries(sources).map(([id, source]) => [id, id.startsWith("fact:") && contentHash(request.resources[id]?.value ?? null) === contentHash(source)
     ? { resourceRef: id, hash: contentHash(source) } : source]));
-  const context = frozenClone({ shared: { sources: sourceAddresses, sourceIds: Object.keys(sources),
+  const context = frozenClone({ shared: { sources: sourceAddresses, sourceIds: Object.keys(sources).sort(),
     // Lossless view: atomic keys address the same values in these collections; do not send their contents twice.
     resources: Object.fromEntries(Object.entries(request.resources).filter(([key]) => !key.includes(":") && key !== "rng")),
     resourceKeys: Object.keys(request.resources).filter(key => key !== "rng").sort(), entityIds: [...entities].sort(),

@@ -66,7 +66,7 @@ export function worldProgramSources(definition: WorldRuntimeContract, state: Rea
   return JSON.parse(JSON.stringify({ world: { id: definition.id, description: definition.description, contentHash: definition.contentHash },
     mechanics: { packages: definition.rulePackages, catalog: state.truth.mechanics, randomDistributions: definition.randomDistributions },
     ...Object.fromEntries(definition.laws.map(law => [`law:${law.id}`, law])),
-    ...Object.fromEntries(Object.values(state.truth.facts).filter(fact => fact.provenance.some(source => source.kind === "world_seed"))
+    ...Object.fromEntries(Object.values((state.historyBase?.truth ?? state.truth).facts).filter(fact => fact.provenance.some(source => source.kind === "world_seed"))
       .map(fact => [`fact:${fact.id}`, fact])),
   })) as Record<string, JsonValue>;
 }

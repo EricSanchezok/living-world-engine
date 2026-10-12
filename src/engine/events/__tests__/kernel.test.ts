@@ -18,6 +18,7 @@ import { applyEventBeliefs, reviseEventBeliefs } from "../cognition";
 import { worldProgramDuration } from "../adjudication";
 import { authorizeWorldRandomness, prepareWorldRandomPlan, validateWorldRandomness, worldRandomResources } from "../randomness";
 import { nextWorldClockBoundary } from "../clock-boundary";
+import { createHistoryReplayBase } from "../../runtime/history-replay";
 
 function fixture() {
   const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: createTestModelCatalog() });
@@ -60,6 +61,19 @@ async function adjudicate(f: ReturnType<typeof fixture>, programs = [f.bound], a
 }
 
 describe("source-bound world event kernel", () => {
+  it("keeps authored fact sources immutable while actual fact dependencies change", () => {
+    const f = fixture();
+    f.state.historyBase = createHistoryReplayBase(f.state);
+    const sourceId = Object.keys(f.sources).find(id => id.startsWith("fact:"))!;
+    const factId = sourceId.slice(5);
+    f.state.truth.facts[factId]!.description += " Its current condition changed.";
+    const changed = worldResources(f.state, f.definition, f.resources);
+    expect(worldProgramSources(f.definition, f.state)).toEqual(f.sources);
+    expect(changed[sourceId]!.version).toBe(f.resources[sourceId]!.version + 1);
+    delete f.state.truth.facts[factId];
+    expect(worldProgramSources(f.definition, f.state)[sourceId]).toEqual(f.sources[sourceId]);
+    expect(worldResources(f.state, f.definition, changed)[sourceId]!.value).toBeNull();
+  });
   it("repairs unsupported observed acknowledgements during compilation before execution", async () => {
     const f = fixture(); f.raw.branches[0]!.acknowledgement = "observed-outcome";
     const configured = decisionTestProvider((body, attempt) => {

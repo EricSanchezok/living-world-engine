@@ -1,11 +1,12 @@
 import type { CommittedStep, SimulationState } from "../engine/contracts/model";
 import { restoreOwnerPrograms } from "../engine/events/runtime-state";
 import { estimateModelCost } from "../engine/models/model-cost";
+import { restoreDecisionEventStep } from "../engine/events/journal";
 
 /** Trusted local Inspector projection; never used by public perspectives or model prompts. */
 export function inspectDecisionPrograms(before: SimulationState, step: CommittedStep) {
-  const proof = step.decisionEvent;
-  if (!proof) return undefined;
+  if (!step.decisionEvent) return undefined;
+  const proof = restoreDecisionEventStep(before, step.decisionEvent);
   const control = proof.finalControl;
   const prior = before.executionState?.data.kind === "decision-event"
     ? before.executionState.data as unknown as typeof control : before.bootstrapDecisionEvent?.control;

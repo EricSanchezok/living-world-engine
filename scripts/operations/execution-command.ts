@@ -17,7 +17,7 @@ import { ModelCatalog, type ModelCatalogDocument, type ModelRole } from "../../s
 import type { ModelExecutionAudit, ModelInvocationAudit, SimulationState } from "../../src/engine/contracts/model";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { redactRuntimePayload, type RuntimeEvent } from "../../src/engine/runtime/observability";
-import { ModelConfigurationError, ModelOutputError, type StructuredModelProvider, type StructuredModelRequest, type StructuredModelResult } from
+import { ModelConfigurationError, ModelOutputError, modelInvocationIdentity, type StructuredModelProvider, type StructuredModelRequest, type StructuredModelResult } from
   "../../src/engine/models/model-provider";
 import { SimulationEngine } from "../../src/engine/runtime/simulation";
 import type { WorldDefinition } from "../../src/engine/runtime/world-definition";
@@ -133,6 +133,7 @@ class RecordedModelProvider implements StructuredModelProvider {
     events: readonly RuntimeEvent[],
     candidates: readonly (BootstrapCandidate | WorldStepCandidate)[],
     overlay?: ReplayProbeBinding,
+    pinnedCatalog?: ModelCatalog,
   ) {
     this.overlay = overlay;
     // Candidate audits are logical projections: several slots can share one
@@ -142,7 +143,7 @@ class RecordedModelProvider implements StructuredModelProvider {
     const audits = events.filter((event) => event.event === "model.audit.persisted")
       .map((event) => event.payload as ModelExecutionAudit)
       .filter((audit) => audit.invocations.some((invocation) => replayedInvocations.has(invocation.id)));
-    this.catalog = recordedCatalog(audits);
+    this.catalog = pinnedCatalog ?? recordedCatalog(audits);
     const auditByInvocation = new Map<string, { audit: ModelExecutionAudit; invocation: ModelInvocationAudit }>();
     for (const audit of audits) {
       for (const invocation of audit.invocations) auditByInvocation.set(invocation.id, { audit, invocation });
@@ -195,7 +196,8 @@ class RecordedModelProvider implements StructuredModelProvider {
   }
 
   async generateStructured<T>(request: StructuredModelRequest<T>): Promise<StructuredModelResult<T>> {
-    const invocationId = request.modelInvocationId;
+    const invocationId = request.modelInvocationId ?? (request.modelInvocation
+      ? modelInvocationIdentity(request, request.role, request.subjectId, request.modelInvocation).modelInvocationId : undefined);
     if (!invocationId) throw new ModelConfigurationError("recorded replay requires canonical model invocation identity");
     const isOverlayTarget = this.overlay?.targetInvocation.id === invocationId;
     if (isOverlayTarget) {
@@ -465,7 +467,13 @@ export async function replayThroughAlgorithm(
     candidate.attributes?.phase === (stepInputs.length > 0 ? "step" : "bootstrap"))
     .map((candidate) => candidate.payload as BootstrapCandidate | WorldStepCandidate);
   const overlay = replayOptions.probe ? validateProbeBinding(original, events, replayOptions.probe) : undefined;
-  const provider = new RecordedModelProvider(events, candidates, overlay);
+  const bootstrapCandidate = candidates.find((candidate): candidate is BootstrapCandidate => !("resolution" in candidate));
+  const nativeBootstrap = stepInputs[0]?.state.bootstrapDecisionEvent ?? bootstrapCandidate?.decisionEvent;
+  const pinnedCatalog = nativeBootstrap ? new ModelCatalog(nativeBootstrap.modelCatalog) : undefined;
+  if (pinnedCatalog && (pinnedCatalog.hash !== nativeBootstrap!.control.modelCatalogHash || pinnedCatalog.hash !== original.modelCatalogHash)) {
+    throw new Error("recorded native model catalog differs from its pinned execution");
+  }
+  const provider = new RecordedModelProvider(events, candidates, overlay, pinnedCatalog);
   const registry = registerBuiltinAlgorithms(algorithmRegistry);
   const recordedRef = algorithmRef(original.manifest);
   const createAlgorithm = () => registry.create(recordedRef, {
@@ -532,6 +540,7 @@ export async function replayThroughAlgorithm(
         const result = await engine.step(input.policyRoster, input.request, {
           workloadId: `replay:${original.id}`,
           batchId: `replay:${original.id}:${index + 1}`,
+          ...(nativeBootstrap ? { modelRegistrySnapshotHash: nativeBootstrap.control.registryHash } : {}),
           correlation: {
             executionId: replayExecutionId,
             instanceId: original.instanceId,
@@ -550,6 +559,7 @@ export async function replayThroughAlgorithm(
       finalState = await engine.bootstrapAgents({
         workloadId: `replay:${original.id}`,
         batchId: `replay:${original.id}:bootstrap`,
+        ...(nativeBootstrap ? { modelRegistrySnapshotHash: nativeBootstrap.control.registryHash } : {}),
         correlation: { executionId: replayExecutionId, revision: source.revision, step: source.step },
         observer: trace,
       });
@@ -559,7 +569,8 @@ export async function replayThroughAlgorithm(
     const consumption = provider.assertFullyConsumed();
     const semanticHash = semanticHashes.length > 0
       ? original.kind === "benchmark" ? contentHash(semanticHashes) : semanticHashes.at(-1)!
-      : contentHash({ bootstrapAgentCommits: finalState.bootstrapAgentCommits });
+      : contentHash(finalState.bootstrapDecisionEvent ? { bootstrapDecisionEvent: finalState.bootstrapDecisionEvent }
+        : { bootstrapAgentCommits: finalState.bootstrapAgentCommits });
     const stateHash = contentHash(finalState);
     database.finishExecution(replayExecutionId, {
       status: "succeeded",

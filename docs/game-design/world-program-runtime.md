@@ -4,7 +4,7 @@ The world program kernel lives in [`src/engine/events/kernel.ts`](../../src/engi
 
 ## Compilation and authority
 
-`compileWorldProgram` projects canonical physical resources without Agent cognition or identity-binding maps. DeepSeek returns an immutable source-bound rule and parameter bindings. Sources include the world contract, laws, mechanics, and authored seed facts. Runtime testimony is evidence, not new rule authority. Admission checks exact source identities, parameter ownership, expression dependencies, effect shapes, and branch references. One targeted repair is allowed. Exhaustion retains a recoverable failure and all invocation evidence.
+`compileWorldProgram` projects canonical physical resources without Agent cognition or identity-binding maps. DeepSeek returns an immutable source-bound rule and parameter bindings. Sources include the world contract, laws, mechanics, and authored seed facts from the pinned history base. Runtime fact changes affect read dependencies without rewriting their authored source. Runtime testimony is evidence, not new rule authority. Admission checks exact source identities, parameter ownership, expression dependencies, effect shapes, and branch references. One targeted repair is allowed. Exhaustion retains a recoverable failure and all invocation evidence.
 
 Effects are JSON templates. Dynamic leaves use `$expression` or `$text`; `$literal` escapes literal data. Code materializes templates into typed world operations. Generated rules cannot own time advancement or initialize quantities to bypass conservation. Fact and condition provenance is supplied by the kernel. Speech delivery must match the concrete utterance authored before the attempt.
 
@@ -16,7 +16,7 @@ Compilation closes nested predicate sources and expression reads into the progra
 
 Timing selects an authored temporal profile. Code derives fixed durations, travel rates, staged durations and open-ended checkpoints. Explicit quantities and durations must match evidence extracted from the action text. Each effect judgment sees its actual temporal plan and reads the selected profile version. An open-ended checkpoint cannot announce activity completion.
 
-The compiler sends each canonical collection once; atomic read keys and authored fact sources address those same records. Repeated JSON-schema definitions use references. Stable world context precedes the attempt in the request layout. These are lossless layout choices, not removals of world evidence.
+The compiler sends each canonical collection once; atomic read keys address those records. An authored fact source aliases a current fact only while their values match; otherwise the original source is supplied separately. Repeated JSON-schema definitions use references. Stable world context precedes the attempt in the request layout. These are lossless layout choices, not removals of world evidence.
 
 ## Decisions and commits
 
@@ -52,11 +52,15 @@ Failed world judgments retain the complete actual read union, bound source hashe
 
 `DecisionEventAlgorithm` pins the creation, decision and context-fallback profiles, registry snapshot, program definitions and dependency-round limit in the instance's execution state. Bootstrap covers actual private goals without changing canonical time. A control commit advances the revision only; a physical event also advances the world step and strictly positive elapsed time. A quiescent world raises a typed waiting result instead of minting repeated empty revisions.
 
+The native bootstrap retains the complete model catalog configuration, including unused creation or fallback profiles. It contains credential environment variable names only. Recorded algorithm replay restores this exact catalog and pinned registry identity and derives invocation identities with the live gateway's function; it never contacts model providers. Sorted source catalogs keep compilation hashes stable when the Ledger serializes object keys canonically.
+
 The fixed committer re-executes newly appended private instructions against the owner's actual resources. Generated definitions are re-admitted, creation output hashes are checked, semantic decisions are reconstructed from concrete frontier tickets, and issued attempts must match their private program or authorized player submission. Reusing an existing immutable plan rechecks today's source identity and reference catalogs; unrelated additions to the admission environment do not invalidate its original creation evidence. Persistent goal questions include the original goal, even when a generated mechanical condition is true. Completion checks run before replacing an ended program.
 
 Player text remains an attempted action. Creation renders exact spoken content before world adjudication; canonical delivery establishes who actually heard it. A controller change interrupts private planning and revokes unstarted or interruptible pending work. Noninterruptible work retains its already established execution boundary. Resuming model control creates a local wakeup.
 
 World settlement consumes exactly the persisted pending frontier. Private deadline queue items must come from the active interpreter. Canonical event evidence, actual observations, belief revisions and program receipts are replayed by the same deterministic implementation used for preparation and commit. Native history has source-bound decision evidence; it does not invent a legacy `causal-verifier` invocation.
+
+Native history encodes prepared and settled control as lossless JSON deltas, each binding its exact base and reconstructed result hashes. Unchanged libraries, old cache entries and prior private journals are retained in the source checkpoint instead of copied into each step. The world authority is referenced by its pinned bootstrap hash; the step's execution-state envelope contains the resulting control hash. Replay and Inspector reconstruct the complete proof before using it. Delta decoding does not replace source-bound semantic validation, and the latest instance checkpoint retains complete live control for restart.
 
 ## Observation and cognition
 

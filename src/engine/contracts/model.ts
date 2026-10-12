@@ -1185,7 +1185,7 @@ export interface ModelExecutionAudit {
 }
 
 export interface CommittedStep {
-  decisionEvent?: import("../events/execution-contract").DecisionEventStep;
+  decisionEvent?: import("../events/journal").StoredDecisionEventStep;
   executionState: import("../runtime/execution-state").AlgorithmExecutionState | null;
   contentHash: string;
   semanticHash: string;

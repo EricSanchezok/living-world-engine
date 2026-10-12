@@ -10,6 +10,7 @@ import { historyReplayBaseHash } from "../../engine/runtime/history-replay";
 import { MemoryWorldRepository } from "../../script/world-repository";
 import { LocalDatabase } from "../local-database";
 import { WorldHost } from "../world-host";
+import { replayThroughAlgorithm } from "../../../scripts/operations/execution-command";
 
 describe("decision programs through the persistent WorldHost", () => {
   it("persists a queued parallel instruction and starts it after restart without consuming time while queued", async () => {
@@ -78,6 +79,12 @@ describe("decision programs through the persistent WorldHost", () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-native-host-"));
     const filename = path.join(root, "livingworld.sqlite");
     const fixture = nativeProgramFixture();
+    const transport = fixture.configured.transport.getMockImplementation()!; let requestOrdinal = 0;
+    fixture.configured.transport.mockImplementation(async (...args) => {
+      const ordinal = ++requestOrdinal, result = await transport(...args);
+      if (ordinal % 2) await new Promise(resolve => setTimeout(resolve, 20));
+      return result;
+    });
     await fixture.configured.registry.capture();
     let database = new LocalDatabase(filename, { heartbeat: false });
     const repository = new MemoryWorldRepository({ [fixture.world.id]: fixture.world });
@@ -105,6 +112,15 @@ describe("decision programs through the persistent WorldHost", () => {
       expect(inspected.programs!.decisions.length).toBeGreaterThan(0);
       expect(inspected.programs!.cost.unknownInvocations).toBeGreaterThan(0);
       const calls = fixture.configured.transport.mock.calls.length;
+      for (const executionId of [saved.state.bootstrapExecutionRef!.executionId, saved.state.history[0]!.executionRef!.executionId]) {
+        const original = database.execution(executionId)!;
+        const replayed = await replayThroughAlgorithm(database, original, database.executionEvents(executionId));
+        expect(replayed.replayStatus).toBe("succeeded");
+        const candidate = (id: string) => database.executionEvents(id).find(event => event.event === "execution.candidate.persisted")?.payload;
+        expect(candidate(replayed.replayExecutionId)).toEqual(candidate(executionId));
+        expect(replayed.stateHash).toBe(original.stateHash);
+      }
+      expect(fixture.configured.transport).toHaveBeenCalledTimes(calls);
       database.close();
       database = new LocalDatabase(filename, { heartbeat: false });
       const reopened = makeHost();

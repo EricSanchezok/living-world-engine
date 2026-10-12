@@ -1,5 +1,6 @@
 import type { ActionOutcome, AgentActionProposal, CommittedStep, SimulationState } from "../contracts/model";
 import { contentHash } from "../models/model-audit";
+import { ModelCatalog } from "../models/model-catalog";
 import { createHistoryReplayBase } from "../runtime/history-replay";
 import type { JsonObject } from "../runtime/json";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
@@ -14,6 +15,7 @@ import { settleProgramWorldEvent } from "./settlement";
 import { applyProgramGoalEvidence } from "./goal-completion";
 import { replayActivityAdmissions, settleProgramActivities } from "./activities";
 import { worldResources } from "./resources";
+import { restoreDecisionEventStep, storeDecisionEventStep } from "./journal";
 
 const equal = (a: unknown, b: unknown) => contentHash(a) === contentHash(b);
 function validateAuthority(state: Readonly<SimulationState>, authority: WorldRuntimeContract) {
@@ -24,7 +26,8 @@ function validateAuthority(state: Readonly<SimulationState>, authority: WorldRun
 }
 
 export function applyDecisionEventBootstrap(source: Readonly<SimulationState>, proof: DecisionEventBootstrap): SimulationState {
-  if (source.revision !== 0 || source.history.length || source.bootstrapDecisionEvent || proof.version !== 1) throw new Error("native bootstrap requires a new instance");
+  if (source.revision !== 0 || source.history.length || source.bootstrapDecisionEvent || proof.version !== 2) throw new Error("native bootstrap requires a new instance");
+  if (new ModelCatalog(proof.modelCatalog).hash !== proof.control.modelCatalogHash) throw new Error("native bootstrap model catalog mismatch");
   validateAuthority(source, proof.authority);
   const initial = initialDecisionEventState(source, proof.control.models, proof.control.modelCatalogHash, proof.control.registryHash);
   const roster = Object.fromEntries(Object.values(source.agents).map(agent => [agent.id, {
@@ -103,7 +106,8 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
       ...(event?.clockBoundary.conditions.map(conditionId => ({ kind: "condition_expiry" as const, conditionId })) ?? [])],
     dueActivityIds: [], dueTimerIds: event?.clockBoundary.timers.map(timer => timer.id) ?? [], dueConditionIds: event?.clockBoundary.conditions ?? [] };
   const payload: Omit<CommittedStep, "contentHash" | "semanticHash"> = {
-    decisionEvent: structuredClone(proof), executionState: structuredClone(state.executionState),
+    decisionEvent: storeDecisionEventStep(source, proof), executionState: { producerHash,
+      data: { kind: "decision-event-reference", hash: proof.finalControl.hash } },
     baseRevision: source.revision, revision: state.revision, step: state.step,
     initialActions: actions, actions, reactionRequests: [], reactionDecisions: [],
     rngBefore: structuredClone(source.truth.rng), rngAfter: structuredClone(state.truth.rng),
@@ -128,7 +132,7 @@ export function nativeCandidate(source: Readonly<SimulationState>, proof: Decisi
   activatedAgentIds: string[]): WorldStepCandidate {
   const { committed: step } = deriveDecisionEventStep(source, proof, producerHash, false);
   const candidate: WorldStepCandidate = {
-    decisionEvent: proof, executionState: step.executionState, schemaVersion: WORLD_STEP_CANDIDATE_SCHEMA_VERSION,
+    decisionEvent: proof, executionState: { producerHash, data: structuredClone(proof.finalControl) as unknown as JsonObject }, schemaVersion: WORLD_STEP_CANDIDATE_SCHEMA_VERSION,
     sourceStateHash: contentHash(source), onsetPerception: { targets: [], receipts: [], requests: [], checks: [], commitmentRounds: [], rng: structuredClone(source.truth.rng) },
     resolution: { proposal: { baseRevision: source.revision, outcomes: step.outcomes, mechanicInvocations: step.mechanicInvocations, operations: step.operations,
       events: step.events, observations: step.observations, decisionRequests: step.decisionRequests }, initialActions: step.initialActions, actions: step.actions,
@@ -157,7 +161,7 @@ export function commitDecisionEventBootstrap(source: Readonly<SimulationState>, 
 
 export function replayDecisionEventStep(source: Readonly<SimulationState>, step: CommittedStep) {
   if (!step.decisionEvent || !step.executionState) throw new Error("native replay proof missing");
-  const result = deriveDecisionEventStep(source, step.decisionEvent, step.executionState.producerHash);
+  const result = deriveDecisionEventStep(source, restoreDecisionEventStep(source, step.decisionEvent), step.executionState.producerHash);
   const withoutEnvelope = (value: CommittedStep) => {
     const copy = { ...value }; delete copy.executionRef; return { ...copy, contentHash: "" };
   };

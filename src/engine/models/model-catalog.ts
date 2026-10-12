@@ -258,6 +258,12 @@ export class ModelCatalog {
     return profile;
   }
 
+  /** Configuration contains environment variable names, never resolved credentials. */
+  snapshot(): ModelCatalogDocument {
+    return catalogDocumentSchema.parse({ schema_version: this.schemaVersion, scheduler: this.scheduler,
+      registry: this.registry, accounts: this.accounts, profiles: this.profiles, model_overrides: this.modelOverrides });
+  }
+
   account(accountId: string): ProviderAccountConfig {
     const account = this.accounts[accountId];
     if (!account) throw new Error(`unknown model provider account ${accountId}`);

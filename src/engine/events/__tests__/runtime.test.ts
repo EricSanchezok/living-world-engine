@@ -8,6 +8,8 @@ import { restoreOwnerPrograms, readDecisionEventState } from "../runtime-state";
 import type { PolicyBinding } from "../../runtime/execution";
 import { contentHash } from "../../models/model-audit";
 import { quantityId } from "../../runtime/runtime-id";
+import { restoreDecisionEventStep } from "../journal";
+import { replayDecisionEventStep } from "../canonical";
 
 
 describe("native event runtime through SimulationEngine", () => {
@@ -129,6 +131,14 @@ describe("native event runtime through SimulationEngine", () => {
     expect(result.committed.actions).toHaveLength(1); expect(result.committed.observations.map(packet => packet.observerId)).toContain("player");
     const control = readDecisionEventState(result.state.executionState!, result.state);
     expect(control.pending).toHaveLength(0); expect(control.receipts).toHaveLength(1);
+    expect(result.committed.decisionEvent!.version).toBe(2);
+    expect(result.committed.executionState!.data).toEqual({ kind: "decision-event-reference", hash: control.hash });
+    const proof = restoreDecisionEventStep(boot, result.committed.decisionEvent!);
+    expect(proof.finalControl).toEqual(control);
+    expect(JSON.stringify(result.committed.decisionEvent).length).toBeLessThan(JSON.stringify(proof).length);
+    const damaged = structuredClone(result.committed);
+    damaged.decisionEvent!.settled.resultHash = contentHash("a different execution state");
+    expect(() => replayDecisionEventStep(boot, damaged)).toThrow("delta result mismatch");
     expect(restoreOwnerPrograms(control, "keeper")[0]!.completion).toMatchObject({ executionEnded: true, goals: {} });
     expect(f.configured.transport.mock.calls.every(call => !String(call[1]?.body).includes("causal-verifier"))).toBe(true);
     const calls = f.configured.transport.mock.calls.length;
