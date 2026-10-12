@@ -19,6 +19,7 @@ export const programActivitySchema = z.object({
   id: z.string(), attemptId: z.string(), programHash: z.string(), actorId: z.string(),
   requestedAtSeconds: second, startedAtSeconds: second.nullable(), dueAtSeconds: second.nullable(), endedAtSeconds: second.nullable(),
   status: z.enum(["queued", "active", "completed", "cancelled", "blocked"]),
+  checkpointCount: z.number().int().nonnegative().safe(),
   actorClaims: z.array(z.object({ resourceId: z.string(), amount: z.number().positive() }).strict()),
   sharedClaims: z.array(z.unknown()), authorizationHash: z.string(), competitionHash: z.string().nullable(),
 }).strict();
@@ -92,7 +93,7 @@ export function* activityAdmissionSteps(state: Readonly<SimulationState>, defini
       const claims = worldActivityClaims(value.bound!, state, resources);
       const record: ProgramActivity = { id: activityId(value), attemptId: value.attempt.id, programHash: value.bound!.program.hash,
         actorId: value.attempt.actorId, requestedAtSeconds: now, startedAtSeconds: null, dueAtSeconds: null, endedAtSeconds: null,
-        status: choice === "yes" ? "queued" : "blocked", ...claims, authorizationHash: call.evidenceHash, competitionHash: null };
+        status: choice === "yes" ? "queued" : "blocked", checkpointCount: 0, ...claims, authorizationHash: call.evidenceHash, competitionHash: null };
       if (choice !== "yes") record.endedAtSeconds = now;
       const old = activities.findIndex(activity => activity.id === record.id);
       if (old !== -1) activities.splice(old, 1);
@@ -198,6 +199,11 @@ export function validateProgramActivities(state: Readonly<SimulationState>, acti
       }
       if (activity.status === "queued" && (activity.startedAtSeconds !== null || activity.dueAtSeconds !== null) || activity.endedAtSeconds !== null) throw new Error("live activity has invalid lifecycle fields");
       if (activity.status === "active") {
+        const timing = resources ? worldProgramTiming(item.bound!, resources) : null;
+        if (timing && (timing.completionAtSeconds !== null && activity.checkpointCount !== 0 || activity.startedAtSeconds !== item.attempt.startedAtSeconds ||
+          activity.dueAtSeconds !== activity.startedAtSeconds! + worldProgramDuration(item.bound!, resources!) * (activity.checkpointCount + 1))) {
+          throw new Error("activity checkpoint is not derived from its original timing");
+        }
         const missing = shortage(activity, active, state);
         if (missing.actor.length || missing.pools.length) throw new Error("program activity capacity exceeded");
         active.push(activity);

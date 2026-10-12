@@ -102,7 +102,7 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
       assertions: worldProvenance(bound).assertions, knownAlternatives: [] };
     const branch = bound.program.definition.branches.find(branch => branch.id === event!.selections.find(value => value.attemptId === bound.attempt.id)!.branchId)!;
     const observed = branch.acknowledgement === "observed-outcome";
-    return { id: `outcome:${bound.attempt.id}`, proposalId: bound.attempt.id, status: observed ? branch.outcome : "succeeded",
+    return { id: `outcome:${bound.attempt.id}`, proposalId: bound.attempt.id, status: event!.continuingAttemptIds.includes(bound.attempt.id) ? "partial" : observed ? branch.outcome : "succeeded",
       summary: observed ? event!.deliveries.filter(delivery => delivery.attemptId === bound.attempt.id &&
         delivery.recipientEntityId === bound.attempt.actorEntityId && delivery.kind === "observation").map(delivery => delivery.text).join("\n")
         : `Attempt executed: ${bound.attempt.intent}`, causeRefs: worldProvenance(bound).causes,

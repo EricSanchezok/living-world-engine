@@ -13,6 +13,7 @@ import { programWorldResources } from "./resources";
 import { EventScheduler } from "./scheduler";
 import { programReceiptIndex, readDecisionEventState, restoreOwnerPrograms, sealDecisionEventState, type DecisionEventState } from "./runtime-state";
 import { settleProgramActivities } from "./activities";
+import { worldProgramDuration } from "./adjudication";
 
 /** One deterministic implementation is shared by speculative preparation, canonical commit and replay. */
 export function settleProgramWorldEvent(source: Readonly<SimulationState>, prepared: DecisionEventState,
@@ -46,16 +47,27 @@ export function settleProgramWorldEvent(source: Readonly<SimulationState>, prepa
   if (control.randomReservation && (control.randomReservation.atSeconds !== event.atSeconds ||
     control.randomReservation.commitment.hash !== event.randomness?.hash)) throw new Error("world event does not settle the reserved random frontier");
   control.randomReservation = null;
-  control.activities = settleProgramActivities(control.activities, event.programs.map(bound => bound.attempt.id), [], event.atSeconds);
+  const completed = new Set(event.programs.map(bound => bound.attempt.id).filter(id => !event.continuingAttemptIds.includes(id)));
+  control.activities = settleProgramActivities(control.activities, [...completed], [], event.atSeconds);
+  for (const id of event.continuingAttemptIds) {
+    const pending = control.pending.find(value => value.attempt.id === id)!;
+    const activity = control.activities.find(value => value.attemptId === id && value.programHash === pending.bound!.program.hash)!;
+    activity.checkpointCount += 1;
+    activity.dueAtSeconds = event.atSeconds + worldProgramDuration(pending.bound!, prepared.worldResources);
+    pending.atSeconds = activity.dueAtSeconds;
+  }
   control.receipts.push(committed.receipt);
   const canonicalReceipts = programReceiptIndex(control);
   const due = scheduler.nextTime === event.atSeconds ? scheduler.frontier() : [];
   if (due.length) scheduler.acknowledge(due.map(value => value.id), event.atSeconds);
   else scheduler.advanceBoundary(event.atSeconds);
-  const completed = new Set(event.programs.map(bound => bound.attempt.id));
   const retired = new Set(Object.keys(control.agents).filter(id => !state.agents[id]));
   control.pending = control.pending.filter(pending => !completed.has(pending.attempt.id) && !retired.has(pending.attempt.actorId));
   const pendingIds = new Set(control.pending.map(pending => pending.attempt.id));
+  for (const pending of control.pending.filter(value => event.continuingAttemptIds.includes(value.attempt.id))) {
+    scheduler.schedule({ atSeconds: pending.atSeconds!, subjectId: null, kind: "world",
+      inputHash: contentHash({ attempt: pending.attempt, program: pending.bound!.program.hash }), payload: { attemptId: pending.attempt.id } });
+  }
   for (const queued of scheduler.snapshot().pending) if (queued.kind === "world" &&
     !pendingIds.has((queued.payload as { attemptId: string }).attemptId)) scheduler.cancel(queued.id);
   for (const ownerId of retired) scheduler.unsubscribe(ownerId);
@@ -66,7 +78,7 @@ export function settleProgramWorldEvent(source: Readonly<SimulationState>, prepa
     for (const receipt of committed.receipt.programReceipts) {
       const program = programs.find(value => value.instanceId === receipt.instanceId); if (!program) continue;
       program.settle(receipt.id, canonicalReceipts, owner.resources.resources);
-      scheduler.receipt(agent.id, receipt.workId, receipt.id);
+      if (receipt.status !== "continuing" || receipt.madeProgress) scheduler.receipt(agent.id, receipt.workId, receipt.id);
     }
     for (const program of programs) owner.instances.find(entry => entry.snapshot.instanceId === program.instanceId)!.snapshot = program.snapshot();
     scheduler.notify(agent.id, owner.resources.resources);

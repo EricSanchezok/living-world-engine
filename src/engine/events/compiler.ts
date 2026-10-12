@@ -65,7 +65,7 @@ export async function compileWorldProgram(provider: StructuredModelProvider, req
       worldQuestionWork(bound, request.resources, { state: request.state, definition: request.definition });
   };
   const system = loadPromptAsset("system/world-program-creation.md"), userPrompt = loadPromptAsset("user/world-program-creation.md");
-  const promptVersion = `world-program-creation-${contentHash({ system, userPrompt, contract: 4, repair: LOGICAL_CANDIDATE_REPAIR_VERSION, layout: "logical-tail-v1" })}`;
+  const promptVersion = `world-program-creation-${contentHash({ system, userPrompt, contract: 5, repair: LOGICAL_CANDIDATE_REPAIR_VERSION, layout: "logical-tail-v1" })}`;
   const logicalInvocationId = modelInvocationIdentity(request, "creation", "world", request.invocationBase).modelInvocationId;
   const scope = { workloadId: request.workloadId, batchId: request.batchId, runtimeIdentity: request.runtimeIdentity,
     modelRegistrySnapshotHash: request.modelRegistrySnapshotHash, observer: request.observer, abortSignal: request.abortSignal,
@@ -78,14 +78,14 @@ export async function compileWorldProgram(provider: StructuredModelProvider, req
         const previous = worldCompilationSchema.safeParse(repair.previousOutput);
         const wireRepairCandidate = previous.success ? encodeWorldDraft(previous.data.definition, previous.data.parameters as Record<string, JsonValue>) : null;
         return provider.generateStructured({ ...scope, ...identity, profileId: request.profileId, subjectId: "world", role: "creation",
-          schemaName: "WorldProgramV4", schema: worldCompilationSchema,
+          schemaName: "WorldProgramV5", schema: worldCompilationSchema,
           wireJsonSchema: z.toJSONSchema(worldDraftSchema([...entities].sort()), { target: "draft-07" }),
           system, userPrompt, promptVersion, jsonExamplePolicy: "omit",
           preprocessOutput: raw => ({ value: decodeWorldDraft(raw, [...entities].sort()), symbolRepairs: [] }),
           ...(repair.attempt > 0 ? { repairContextPlacement: "logical-tail-v1" as const } : {}),
           correlation: modelInvocationCorrelation(request, "creation", "world", identity, { logicalInvocationId,
             semanticRepairAttempt: repair.attempt, ...(repair.parentInvocationId ? { parentInvocationId: repair.parentInvocationId } : {}), ...(repair.repairOf ? { repairOf: repair.repairOf } : {}) }),
-          context: logicalRepairContext({ ...context, wireRepairCandidate, repair: { issues: repair.issues } }, repair, sourceHash, "WorldProgramV4"),
+          context: logicalRepairContext({ ...context, wireRepairCandidate, repair: { issues: repair.issues } }, repair, sourceHash, "WorldProgramV5"),
         });
       } });
     return { status: "ready", sourceHash, bound: { program: admitWorldProgram(result.value.definition, sources),

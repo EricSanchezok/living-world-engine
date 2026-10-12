@@ -25,10 +25,10 @@ function fixture() {
   const state = structuredClone(definition.initialState), sources = worldProgramSources(definition, state), resources = worldResources(state, definition);
   const from = `quantity:${quantityId(state.worldHash, "spirit-stone", "player")}`;
   const to = `quantity:${quantityId(state.worldHash, "spirit-stone", "keeper")}`;
-  const raw: WorldProgramDefinition = { version: 4, namespace: "world", id: "voluntary-gift", description: "Transfer the actor's offered stones to a nearby recipient.",
+  const raw: WorldProgramDefinition = { version: 5, namespace: "world", id: "voluntary-gift", description: "Transfer the actor's offered stones to a nearby recipient.",
     sourceIds: ["world", "law:no-free-spirit-stones", "mechanics"], parameters: { actor: { kind: "entity", description: "Giver" }, recipient: { kind: "entity", description: "Recipient" }, amount: { kind: "number", description: "Offered amount" } },
     reads: ["entity:{actor}", "entity:{recipient}", "placement:{actor}", "placement:{recipient}", from, to], writes: ["quantities"],
-    timing: { profileId: "explicit-duration", basis: { kind: "explicit_duration", seconds: { kind: "literal", value: 5 }, sourceText: "5 seconds" } }, random: [], resolutions: [], sharedResources: [],
+    timing: { completionPredicateId: null, profileId: "explicit-duration", basis: { kind: "explicit_duration", seconds: { kind: "literal", value: 5 }, sourceText: "5 seconds" } }, random: [], resolutions: [], sharedResources: [],
     predicates: [{ id: "authorized", description: "The actor voluntarily offers their own stones to this reachable recipient.", reads: ["placement:{actor}", "placement:{recipient}"], sourceIds: ["world"],
       test: { kind: "semantic", instructions: "Check the actual offer and reach. Do not fabricate acceptance or an exchange promised in return." }, unknown: "wait" }],
     branches: [{ id: "give", when: [{ predicateId: "authorized", equals: "yes" }], outcome: "succeeded", acknowledgement: "attempted", description: "A voluntary transfer occurs.",
@@ -65,7 +65,7 @@ describe("source-bound world event kernel", () => {
     const f = fixture(); f.bound.attempt.intent = "花 5 秒把两个灵石交给守门人。";
     const input = f.raw.branches[0]!.mechanics[0]!.input as Record<string, import("../../runtime/json").JsonValue>;
     const amount = input.amountSource as Record<string, import("../../runtime/json").JsonValue>;
-    f.raw.timing = { profileId: "explicit-duration", basis: { kind: "explicit_duration", seconds: { kind: "literal", value: 5 }, sourceText: "5 秒" } };
+    f.raw.timing = { completionPredicateId: null, profileId: "explicit-duration", basis: { kind: "explicit_duration", seconds: { kind: "literal", value: 5 }, sourceText: "5 秒" } };
     const configured = decisionTestProvider((body, attempt) => {
       expect(JSON.stringify(body)).toContain("explicitNumbers");
       if (attempt === 2) {
@@ -284,7 +284,7 @@ describe("source-bound world event kernel", () => {
     expect(worldProgramDuration(f.bound, f.resources)).toBe(5);
     const forged = structuredClone(f.bound); forged.attempt.intent = "Give a gift.";
     expect(() => worldProgramDuration(forged, f.resources)).toThrow("grounded");
-    f.raw.timing = { profileId: "brief-action", basis: { kind: "profile" } };
+    f.raw.timing = { completionPredicateId: null, profileId: "brief-action", basis: { kind: "profile" } };
     f.bound.program = admitWorldProgram(f.raw, f.sources);
     expect(worldProgramDuration(f.bound, f.resources)).toBe(1);
     f.raw.timing.profileId = "invented-profile"; f.bound.program = admitWorldProgram(f.raw, f.sources);

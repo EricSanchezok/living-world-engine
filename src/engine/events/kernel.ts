@@ -7,7 +7,7 @@ import { assertJsonValue, frozenClone, type JsonValue } from "../runtime/json";
 import { runtimeId, quantityId } from "../runtime/runtime-id";
 import { applyWorldDeltaOperation, validateSimulationState } from "../runtime/transaction";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
-import { makeWorldDecisionBatch, mechanicalWorldCondition, validateWorldEvidence, worldProgramDuration, worldProgramTiming, worldProvenance, worldQuestionWork,
+import { makeWorldDecisionBatch, mechanicalWorldCondition, validateWorldEvidence, worldProgramBoundary, worldProgramTiming, worldProvenance, worldQuestionWork,
   selectableWorldBranches,
   type BoundWorldProgram, type WorldAdjudication, type WorldConditionRecord } from "./adjudication";
 import { captureReads, validateReads, worldProgramSources, worldResources, type ReadSet } from "./resources";
@@ -23,6 +23,7 @@ export interface WorldDelivery { attemptId: string; recipientEntityId: string; k
 export interface WorldEventCandidate {
   version: 1;
   unresolved: boolean;
+  continuingAttemptIds: string[];
   id: string;
   atSeconds: number;
   programs: BoundWorldProgram[];
@@ -123,8 +124,9 @@ function materialize(programs: BoundWorldProgram[], records: Map<string, WorldCo
       delivery.kind === "observation" && bound.parameters[delivery.recipientParameter] === bound.attempt.actorEntityId)) {
       throw new Error("an observed outcome acknowledgement requires a committed observation to its actor");
     }
-    if (worldProgramTiming(bound, resources).completionAtSeconds === null && branch.outcome === "succeeded") {
-      throw new Error("an ongoing activity checkpoint cannot prove activity completion");
+    if (worldProgramTiming(bound, resources).completionAtSeconds === null && branch.outcome === "succeeded" &&
+      !branch.when.some(condition => condition.predicateId === bound.program.definition.timing.completionPredicateId && condition.equals === "yes")) {
+      throw new Error("an ongoing activity needs its declared completion predicate before it can finish");
     }
     selections.push({ attemptId: bound.attempt.id, branchId: branch.id });
     const mechanical = materializeWorldMechanics(bound, branch.id, resources, context);
@@ -156,10 +158,10 @@ export function createWorldEventCandidate(state: Readonly<SimulationState>, defi
     if (bound.parameters.actor !== bound.attempt.actorEntityId || state.agents[bound.attempt.actorId]?.entityId !== bound.attempt.actorEntityId ||
       !bound.attempt.intent.trim() || !Number.isSafeInteger(bound.attempt.startedAtSeconds) || bound.attempt.startedAtSeconds < 0 ||
       bound.attempt.startedAtSeconds > state.truth.elapsedSeconds || bound.attempt.targetEntityIds.some(id => !entityIds.has(id))) throw new Error("world attempt ownership or parameters are invalid");
-    if (atSeconds < bound.attempt.startedAtSeconds + worldProgramDuration(bound, resources)) throw new Error("world effects precede their execution duration");
+    if (atSeconds < worldProgramBoundary(bound, resources)) throw new Error("world effects precede their execution duration");
   }
   if (!Number.isSafeInteger(atSeconds) || atSeconds <= state.truth.elapsedSeconds) throw new Error("physical world event must advance time");
-  if (programs.length && atSeconds !== Math.max(...programs.map(bound => bound.attempt.startedAtSeconds + worldProgramDuration(bound, resources)))) throw new Error("world event time differs from its execution boundary");
+  if (programs.length && atSeconds !== Math.max(...programs.map(bound => worldProgramBoundary(bound, resources)))) throw new Error("world event time differs from its execution boundary");
   const proof = { records: adjudication.records, evidence: adjudication.evidence };
   const context = { state, definition, randomness };
   const records = verifyAdjudication(programs, proof, resources, sources, context);
@@ -167,14 +169,18 @@ export function createWorldEventCandidate(state: Readonly<SimulationState>, defi
   // An unresolved joint frontier ends with blocked receipts and no fabricated effects.
   const unresolved = Boolean(activeRandomReservation(state) && programs.some(bound => selectableWorldBranches(bound, [...records.values()]).length !== 1));
   const value = unresolved ? { selections: [], effects: [], deliveries: [], mechanicInvocations: [], mechanicResults: [], resolutionPlans: [], resolutionReceipts: [] } : materialize(programs, records, resources, context);
+  const continuingAttemptIds = unresolved ? [] : programs.filter(bound => worldProgramTiming(bound, resources).completionAtSeconds === null &&
+    bound.program.definition.branches.find(branch => branch.id === value.selections.find(selection => selection.attemptId === bound.attempt.id)!.branchId)!.outcome === "partial")
+    .map(bound => bound.attempt.id);
   const reads = captureReads(resources, [...new Set([
     ...proof.records.flatMap(record => Object.keys(record.readSet)),
     ...programs.flatMap(bound => [ `entity:${bound.attempt.actorEntityId}`, ...bound.program.definition.reads.map(key => renderWorldText(key, bound.parameters)) ]),
     ...value.effects.flatMap(operation => operationReads(state, operation)),
     ...Object.keys(randomness?.plan.reads ?? {}),
+    ...programs.map(bound => `program-actor:${bound.attempt.actorEntityId}`).filter(key => resources[key]),
     ...clockBoundary.timers.map(timer => `timer:${timer.id}`), ...clockBoundary.conditions.map(id => `condition:${id}`),
   ])]);
-  const body = { version: 1 as const, unresolved, atSeconds, programs, adjudication: proof, ...value, reads, randomness, clockBoundary };
+  const body = { version: 1 as const, unresolved, continuingAttemptIds, atSeconds, programs, adjudication: proof, ...value, reads, randomness, clockBoundary };
   return frozenClone({ ...body, id: contentHash(body) });
 }
 
@@ -259,7 +265,8 @@ export function commitWorldEvent(source: Readonly<SimulationState>, definition: 
     const branch = bound.program.definition.branches.find(value => value.id === candidate.selections.find(value => value.attemptId === bound.attempt.id)?.branchId);
     const value = { instanceId: bound.attempt.program.instanceId, workId: bound.attempt.program.workId, requestHash: bound.attempt.program.requestHash,
       // An executed attempt does not reveal an unobserved hit, failure, delivery, or secret state change.
-      status: candidate.unresolved ? "blocked" as const : branch!.acknowledgement === "observed-outcome" ? branch!.outcome : "succeeded" as const,
+      status: candidate.unresolved ? "blocked" as const : candidate.continuingAttemptIds.includes(bound.attempt.id) ? "continuing" as const :
+        branch!.acknowledgement === "observed-outcome" ? branch!.outcome : "succeeded" as const,
       atSeconds: candidate.atSeconds, eventIds: [events[ordinal]!.id],
       effectHash: contentHash({ candidateId: id, attemptId: bound.attempt.id }),
       madeProgress: privatePhysicalHash(source, bound.attempt.actorId) !== privatePhysicalHash(next, bound.attempt.actorId) ||

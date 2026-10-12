@@ -67,6 +67,11 @@ export function worldProgramDuration(bound: BoundWorldProgram, resources: Progra
   if (!Number.isSafeInteger(duration) || duration <= 0) throw new Error("world program duration must be positive integer seconds");
   return duration;
 }
+export function worldProgramBoundary(bound: BoundWorldProgram, resources: ProgramResources): number {
+  const activities = resources[`program-actor:${bound.attempt.actorEntityId}`]?.value as unknown as import("./activities").ProgramActivity[] | undefined;
+  const activity = activities?.find(value => value.attemptId === bound.attempt.id && value.programHash === bound.program.hash && value.status === "active");
+  return activity?.dueAtSeconds ?? bound.attempt.startedAtSeconds + worldProgramDuration(bound, resources);
+}
 function actualKeys(bound: BoundWorldProgram, templates: string[]) { return templates.map(key => renderWorldText(key, bound.parameters)); }
 function compare(left: JsonValue, operator: string, right: JsonValue): WorldVerdict {
   if (operator === "eq" || operator === "ne") return (contentHash(left) === contentHash(right)) === (operator === "eq") ? "yes" : "no";

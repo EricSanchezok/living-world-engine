@@ -16,13 +16,13 @@ const predicate = z.object({ id: programKey, description: text, reads: z.array(t
     z.object({ kind: z.literal("semantic"), instructions: text }).strict(),
     z.object({ kind: z.literal("mechanical"), operator: z.enum(["eq", "ne", "lt", "lte", "gt", "gte"]), left: valueExpressionSchema, right: valueExpressionSchema }).strict(),
   ]), unknown: z.enum(["wait", "expand"]) }).strict();
-const timing = z.object({ profileId: programKey, basis: z.discriminatedUnion("kind", [
+const timing = z.object({ profileId: programKey, completionPredicateId: programKey.nullable(), basis: z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("profile") }).strict(),
   z.object({ kind: z.literal("explicit_duration"), seconds: valueExpressionSchema, sourceText: text }).strict(),
   z.object({ kind: z.literal("explicit_quantity"), amount: valueExpressionSchema, unit: text, sourceText: text }).strict(),
 ]) }).strict();
 export const worldProgramSchema = z.object({
-  version: z.literal(4), namespace: z.literal("world"), id: programKey, description: text,
+  version: z.literal(5), namespace: z.literal("world"), id: programKey, description: text,
   sourceIds: z.array(programKey).min(1), parameters: z.record(programKey, z.object({ kind: z.enum(["entity", "text", "number"]), description: text }).strict()),
   reads: z.array(text).min(1), writes: z.array(text), timing,
   sharedResources: z.array(z.object({ poolId: worldValueSchema, basis: z.discriminatedUnion("kind", [
@@ -154,6 +154,9 @@ export function admitWorldProgram(input: unknown, sources: Readonly<Record<strin
     }
   };
   definition.reads.forEach(checkText); definition.writes.forEach(checkText);
+  if (definition.timing.completionPredicateId && !definition.predicates.some(predicate => predicate.id === definition.timing.completionPredicateId)) {
+    throw new Error("activity completion names an absent predicate");
+  }
   for (const claim of definition.sharedResources) checkValue(claim.poolId);
   for (const resolution of definition.resolutions) {
     checkValue(resolution.plan);

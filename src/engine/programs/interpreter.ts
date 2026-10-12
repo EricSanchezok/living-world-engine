@@ -7,7 +7,7 @@ import { bindProgram, evaluateExpression, programHash, programKey, type Admitted
 const ordinal = z.number().int().nonnegative().safe();
 export const programReceiptSchema = z.object({
   id: programHash, instanceId: programKey, workId: programHash, requestHash: programHash,
-  status: z.enum(["succeeded", "partial", "failed", "blocked", "cancelled"]),
+  status: z.enum(["succeeded", "partial", "continuing", "failed", "blocked", "cancelled"]),
   eventIds: z.array(z.string().min(1)), effectHash: programHash, madeProgress: z.boolean(),
   atSeconds: ordinal,
 }).strict();
@@ -67,7 +67,7 @@ const eventSchema = z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("deadline"), workId: programHash, atSeconds: ordinal }).strict(),
 ]);
 type JournalEvent = z.infer<typeof eventSchema>;
-const snapshotSchema = z.object({ version: z.literal(2), instanceId: programKey, definitionHash: programHash,
+const snapshotSchema = z.object({ version: z.literal(3), instanceId: programKey, definitionHash: programHash,
   parameters: z.record(programKey, z.json()), startedAtSeconds: ordinal, events: z.array(eventSchema), hash: programHash }).strict();
 export type ProgramInstance = z.infer<typeof snapshotSchema>;
 
@@ -114,7 +114,7 @@ export class ProgramInterpreter {
   }
 
   snapshot(): ProgramInstance {
-    const payload = { version: 2 as const, instanceId: this.instanceId, definitionHash: this.program.hash,
+    const payload = { version: 3 as const, instanceId: this.instanceId, definitionHash: this.program.hash,
       parameters: this.parameters, startedAtSeconds: this.startedAtSeconds, events: this.events };
     return snapshotSchema.parse({ ...payload, hash: contentHash(payload) });
   }
@@ -355,7 +355,7 @@ export class ProgramInterpreter {
       this.settledReceipts.add(receipt.id);
       if (receipt.madeProgress) this.progress++;
       if (receipt.status === "succeeded") this.root = this.replace(leaf, { kind: "done", nodeId: leaf.nodeId });
-      else {
+      else if (receipt.status !== "continuing") {
         const route = receipt.status === "partial" ? node.onPartial : node.onFailure;
         if (route === "expand") this.expansion = `${receipt.status}:${node.id}`;
         else { leaf.issued = null; leaf.activation = this.activation++; leaf.lastInputHash = event.waitInputHash; leaf.utterance = null; }

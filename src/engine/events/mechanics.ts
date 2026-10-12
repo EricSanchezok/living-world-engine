@@ -3,7 +3,7 @@ import { createCoreRulePackageRegistry, type RuleExecutionContext } from "../mec
 import type { ProgramResources } from "../programs/definition";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import { quantityId, runtimeId } from "../runtime/runtime-id";
-import { worldProgramDuration, worldProvenance, type BoundWorldProgram } from "./adjudication";
+import { worldProgramBoundary, worldProvenance, type BoundWorldProgram } from "./adjudication";
 import { evaluateWorldValue, materializeWorldBranch } from "./world-program";
 import type { WorldRandomCommitment } from "./randomness";
 import { materializeWorldResolutions, worldResolutionReceipt } from "./resolutions";
@@ -63,7 +63,7 @@ export function materializeWorldMechanics(bound: BoundWorldProgram, branchId: st
     causes: [...worldProvenance(bound).causes, ...(context.randomness?.plan.requests.map(request => ({ kind: "random" as const, id: request.id })) ?? [])],
   }))];
   const effectState = { ...context.state, truth: { ...context.state.truth,
-    elapsedSeconds: bound.attempt.startedAtSeconds + worldProgramDuration(bound, resources) } } as SimulationState;
+    elapsedSeconds: worldProgramBoundary(bound, resources) } } as SimulationState;
   const input: RuleExecutionContext = { state: effectState, actions: [action], resolutionPlans: resolved.map(value => value.plan), resolutionReceipts: receipts,
     checkRequests: context.randomness?.plan.checkRequests ?? [], checkResults: context.randomness?.checks ?? [],
     randomRequests: context.randomness?.plan.requests ?? [], randomResults: context.randomness?.results ?? [] };

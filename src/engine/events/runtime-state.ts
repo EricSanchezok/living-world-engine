@@ -14,7 +14,7 @@ import { EventScheduler } from "./scheduler";
 import { WorldProgramLibrary } from "./library";
 import type { BoundWorldProgram, WorldAttempt } from "./adjudication";
 import type { CommitReceipt } from "./kernel";
-import { worldProgramDuration } from "./adjudication";
+import { worldProgramBoundary } from "./adjudication";
 import { worldRecoverySchema, type WorldAttemptRecovery } from "./world-recovery";
 import { programActivitySchema, validateProgramActivities, type ProgramActivity } from "./activities";
 import { validateRandomReservation, type WorldRandomReservation } from "./randomness";
@@ -40,7 +40,7 @@ export interface ProgramRuntimeFailure {
   inputHash: string; reason: string; recoverable: true;
 }
 export interface DecisionEventState {
-  kind: "decision-event"; version: 4; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
+  kind: "decision-event"; version: 5; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
   models: DecisionEventModels; privateLibrary: ReturnType<ProgramLibrary["snapshot"]>; worldLibrary: ReturnType<WorldProgramLibrary["snapshot"]>;
   policyKinds: Record<string, "model" | "external" | "idle" | "replay">;
   agents: Record<string, AgentProgramState>; worldResources: ProgramResources;
@@ -50,7 +50,7 @@ export interface DecisionEventState {
   activities: ProgramActivity[];
   randomReservation: WorldRandomReservation | null;
 }
-const stateSchema = z.object({ kind: z.literal("decision-event"), version: z.literal(4), hash: programHash,
+const stateSchema = z.object({ kind: z.literal("decision-event"), version: z.literal(5), hash: programHash,
   worldHash: z.string().regex(/^sha256:[a-f0-9]{64}$/u), modelCatalogHash: z.string().min(1), registryHash: z.string().min(1),
   models: z.object({ decision: z.string().min(1), creation: z.string().min(1), fallback: z.string().min(1) }).strict(),
   policyKinds: z.record(z.string(), z.enum(["model", "external", "idle", "replay"])),
@@ -71,7 +71,7 @@ export function initialDecisionEventState(state: Readonly<SimulationState>, mode
   const scheduler = new EventScheduler(state.truth.elapsedSeconds);
   for (const agentId of Object.keys(state.agents).sort()) scheduler.schedule({ atSeconds: state.truth.elapsedSeconds, subjectId: agentId,
     kind: "control", inputHash: contentHash({ bootstrap: agentId, worldHash: state.worldHash }), payload: { reason: "initial-goal-coverage" } });
-  return sealDecisionEventState({ kind: "decision-event", version: 4, worldHash: state.worldHash, modelCatalogHash: catalogHash, registryHash,
+  return sealDecisionEventState({ kind: "decision-event", version: 5, worldHash: state.worldHash, modelCatalogHash: catalogHash, registryHash,
     models, policyKinds: Object.fromEntries(Object.keys(state.agents).map(id => [id, "model" as const])),
     privateLibrary: new ProgramLibrary().snapshot(), worldLibrary: new WorldProgramLibrary().snapshot(),
     agents: Object.fromEntries(Object.values(state.agents).map(agent => [agent.id, {
@@ -125,7 +125,7 @@ export function readDecisionEventState(executionState: AlgorithmExecutionState, 
     const activity = value.activities.find(item => item.attemptId === pending.attempt.id && item.programHash === pending.bound?.program.hash);
     if (pending.bound && !pending.failure && (pending.atSeconds === null ? activity?.status !== "queued" :
       activity?.status !== "active" || pending.atSeconds !== activity.dueAtSeconds || pending.attempt.startedAtSeconds !== activity.startedAtSeconds ||
-      pending.atSeconds !== pending.attempt.startedAtSeconds + worldProgramDuration(pending.bound, value.worldResources))) {
+      pending.atSeconds !== worldProgramBoundary(pending.bound, value.worldResources))) {
       throw new Error("pending attempt execution boundary changed");
     }
   }

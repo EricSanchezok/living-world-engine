@@ -16,7 +16,7 @@ The creation wire contract is a nested behavior tree with inline conditions and 
 
 ## Execution and recovery
 
-`ProgramInterpreter` persists a version 2 event journal and derives its exact control position by replay. Each activated node has a deterministic work identity. Issued attempts bind a request hash; only a matching receipt from the canonical receipt collection can settle them. Restoring an instance requires the same immutable definition and the recorded canonical receipts. Duplicate settlement fails. Partial completion and failure either wait for changed dependencies or request expansion, according to the program.
+`ProgramInterpreter` persists a version 3 event journal and derives its exact control position by replay. Each activated node has a deterministic work identity. Issued attempts bind a request hash; only a matching receipt from the canonical receipt collection can settle them. Restoring an instance requires the same immutable definition and the recorded canonical receipts. Duplicate settlement fails. A continuing receipt records an ongoing checkpoint and keeps the issued instruction in place. Partial completion and failure either wait for changed dependencies or request expansion, according to the program.
 
 Speech has one structural variant: none, already authored text, or a request to create text for a stated purpose. A creation request must receive concrete words before action dispatch. Creating words does not deliver them or establish their truth.
 
