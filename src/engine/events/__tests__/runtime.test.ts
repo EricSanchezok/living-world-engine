@@ -62,6 +62,10 @@ describe("native event runtime through SimulationEngine", () => {
     const owner = readDecisionEventState(result.state.executionState!, result.state).agents.keeper!;
     expect(owner.instances).toHaveLength(2);
     expect(owner.planning?.attempts).toBe(2);
+    const wire = f.configured.transport.mock.calls.flatMap(([, init]) =>
+      (JSON.parse(String(init!.body)).messages as Array<{ content: string }>).map(message => message.content)).join("\n");
+    expect(wire).toMatch(/"lastVerdict"\s*:\s*"unknown"/u);
+    expect(wire).toContain("Do not repeat an unchanged guard of an unobserved final result");
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
   it("persists trusted numeric derivation through the canonical entry and replays it without duplication", async () => {

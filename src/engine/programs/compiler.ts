@@ -8,6 +8,7 @@ import { logicalRepairContext, LOGICAL_CANDIDATE_REPAIR_VERSION } from "../promp
 import { assertJsonValue, frozenClone, type JsonValue } from "../runtime/json";
 import { admitProgram, bindProgram, programDefinitionSchema, programKey, type AdmittedProgram, type ProgramAdmission } from "./definition";
 import { encodeProgramDraft, lowerProgramDraft, programDraftSchema } from "./creation-codec";
+import { validateProgramReadShapes } from "./read-shapes";
 
 export const programCreationSchema = z.object({ definition: programDefinitionSchema, parameters: z.record(programKey, z.json()) }).strict();
 export interface ProgramCompilationRequest extends ModelExecutionScope {
@@ -49,6 +50,7 @@ export async function compileAgentProgram(provider: StructuredModelProvider, inp
     const program = admitProgram(value.definition, admission);
     if (!program.definition.goals.some(goal => goal.goalId === input.goalId)) throw new Error("generated program does not cover the requested goal");
     bindProgram(program, value.parameters, entities);
+    validateProgramReadShapes(program.definition, value.parameters, input.resources);
   };
   const system = loadPromptAsset("system/program-creation.md"), userPrompt = loadPromptAsset("user/program-creation.md");
   const promptVersion = `program-creation-${contentHash({ system, userPrompt, contract: 3, wireJsonSchema, repair: LOGICAL_CANDIDATE_REPAIR_VERSION, layout: "logical-tail-v1" })}`;

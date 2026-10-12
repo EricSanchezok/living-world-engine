@@ -11,6 +11,7 @@ import { ProgramLibrary } from "../programs/library";
 import { privateProgramEntityIds, privateProgramResources, privateProgramSources, resourceValues } from "../programs/private-resources";
 import { createProgramUtterance } from "../programs/utterance";
 import { adaptationReasonPrefix, programAdaptationBatch } from "../programs/adaptation";
+import { programRevisionContext } from "../programs/revision-context";
 import type { PolicyBinding } from "../runtime/execution";
 import type { JsonObject, JsonValue } from "../runtime/json";
 import { issueProgramAttempt } from "./attempt";
@@ -134,7 +135,7 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
         const compiled = reuse ? { status: "ready" as const, program: reuse.program, parameters: reuse.parameters }
           : await compileAgentProgram(provider, { ...scope, profileId: control.models.creation, ownerId, goalId: goal!.id,
             intent: goal!.description, reason: active ? "revision" : "initial-coverage", perspective: json(perspective),
-            priorProgram: active ? json({ definition: active.program.definition, snapshot: active.snapshot(), completion: active.completion }) : null,
+            priorProgram: active ? programRevisionContext(active) : null,
             resources: resourceValues(resources), sources: privateProgramSources(perspective),
             goalIds: Object.keys(agent.character.goals), entityIds: privateProgramEntityIds(perspective), invocationBase: options.nextInvocation(ownerId, 2) });
         if ("audit" in compiled && compiled.audit) audits.push(compiled.audit);

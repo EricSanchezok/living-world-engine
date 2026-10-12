@@ -5,7 +5,8 @@ import { validateDecisionResult } from "../models/decision";
 import { admitProgram } from "../programs/definition";
 import { ProgramInterpreter, type ProgramPredicateWork } from "../programs/interpreter";
 import { programPredicateBatch, programPredicateQuestionVersion, type DecisionUse } from "../programs/decision-runtime";
-import { privateProgramEntityIds, privateProgramResources, privateProgramSources } from "../programs/private-resources";
+import { privateProgramEntityIds, privateProgramResources, privateProgramSources, resourceValues } from "../programs/private-resources";
+import { validateProgramReadShapes } from "../programs/read-shapes";
 import type { ExternalActionInput, PolicyBinding } from "../runtime/execution";
 import type { JsonObject } from "../runtime/json";
 import { validateModelAudit } from "../runtime/transaction";
@@ -93,6 +94,7 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
         const sources = privateProgramSources(perspective);
         const admitted = admitProgram(definition.program.definition, { ownerId: agent.id, sources: new Map(Object.entries(sources).map(([key, value]) => [key, contentHash(value)])),
           resources: new Set(Object.keys(resources.resources)), goalIds: new Set(Object.keys(agent.character.goals)) });
+        validateProgramReadShapes(admitted.definition, entry.snapshot.parameters, resourceValues(resources.resources));
         const reused = before.privateLibrary.entries.some(prior => equal(prior, definition) && equal(prior.parameters, entry.snapshot.parameters));
         // Admission snapshots describe the original compilation environment. A reused
         // immutable definition is rechecked against today's catalog, while its own

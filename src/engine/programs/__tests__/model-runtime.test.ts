@@ -47,6 +47,22 @@ function batch(): DecisionBatch {
 }
 
 describe("program compilation through the model gateway", () => {
+  it("repairs an invented array field during compilation rather than treating it as missing evidence", async () => {
+    const fixture = programFixture(), input = compilation();
+    input.resources.inventory = { quantities: [{ amount: 2 }] };
+    fixture.definition.reads.push("inventory");
+    fixture.definition.predicates[0]!.reads = ["inventory"];
+    const configured = provider((body, attempt) => {
+      if (attempt === 2) expect(JSON.stringify(body)).toContain("invalid array read inventory.quantities.sealCount");
+      fixture.definition.predicates[0]!.test = { kind: "mechanical", operator: "gte",
+        left: { kind: "read", resource: "inventory", path: ["quantities", attempt === 1 ? "sealCount" : "0", "amount"] },
+        right: { kind: "literal", value: 1 } };
+      return encodeProgramDraft(fixture.definition, fixture.parameters);
+    });
+    const result = await compileAgentProgram(configured.gateway, input);
+    expect(result.status).toBe("ready"); expect(configured.transport).toHaveBeenCalledTimes(2);
+    expect(result.audit?.invocations.map(invocation => invocation.outputDisposition)).toEqual(["rejected", "llm-repaired"]);
+  });
   it("indexes only the owner's immutable programs and reports actual startup coverage", async () => {
     const fixture = programFixture();
     const configured = provider(() => encodeProgramDraft(fixture.definition, fixture.parameters));
