@@ -176,7 +176,7 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
           } else {
             try {
               const attempt = issueProgramAttempt(source, active, item, resources);
-              control.pending.push({ attempt, bound: null, atSeconds: null, dependencyHash: "", failure: null });
+              control.pending.push({ attempt, bound: null, atSeconds: null, dependencyHash: "", failure: null, recovery: null });
             } catch (error) {
               const reason = error instanceof Error ? error.message : String(error);
               active.interrupt(reason, now);

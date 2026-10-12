@@ -8,6 +8,7 @@ import { WorldProgramLibrary } from "./library";
 import { EventScheduler } from "./scheduler";
 import { collectDecisionAudits, sealDecisionEventState, type DecisionEventState } from "./runtime-state";
 import { worldProgramSources, worldResources } from "./resources";
+import { deferWorldAttempt, worldInputUnchanged, worldRecoveryInput } from "./world-recovery";
 
 /** Compile or bind only previously unhandled attempts. A failed input waits for an actual physical dependency change. */
 export async function prepareProgramWorldWork(provider: StructuredModelProvider, definition: WorldRuntimeContract,
@@ -17,23 +18,33 @@ export async function prepareProgramWorldWork(provider: StructuredModelProvider,
   const control = structuredClone(initial), library = new WorldProgramLibrary(control.worldLibrary);
   const resources = worldResources(state, definition, control.worldResources), sources = worldProgramSources(definition, state);
   const scheduler = new EventScheduler(state.truth.elapsedSeconds, control.scheduler), audits: ModelExecutionAudit[] = [];
-  const physicalHash = contentHash({ sources, resources: Object.fromEntries(Object.entries(resources)
-    .filter(([key]) => key !== "clock" && key !== "events" && key !== "rng" && !key.startsWith("random:"))) });
   scope = { ...scope, modelRegistrySnapshotHash: control.registryHash, runtimeIdentity: { worldHash: state.worldHash, revision: state.revision } };
   const results = await Promise.allSettled(control.pending.map(async pending => {
     if (pending.bound && pending.failure === null) return;
-    if (pending.failure && pending.dependencyHash === physicalHash) return;
-    pending.dependencyHash = physicalHash;
+    const dependency = worldRecoveryInput(pending, resources, sources);
+    const revisionUsed = pending.recovery?.revisedInputs.some(input => worldInputUnchanged(input, resources, sources)) ?? false;
+    if (pending.failure && pending.dependencyHash === dependency.hash &&
+      (pending.recovery?.disposition !== "expand" || revisionUsed)) return;
+    const rejection = pending.failure ? { reason: pending.failure, program: pending.bound,
+      evidenceHashes: pending.recovery?.evidenceHashes ?? [] } : undefined;
+    const expanding = pending.recovery?.disposition === "expand";
+    // An unchanged input gets at most one targeted semantic revision, including
+    // revisions whose newly generated read declaration differs from the old one.
+    if (expanding && revisionUsed) return;
+    if (expanding) pending.recovery!.revisedInputs.push({ reads: dependency.reads, sourceHashes: dependency.sourceHashes });
+    pending.dependencyHash = dependency.hash;
     if (pending.failure) pending.attempt.startedAtSeconds = state.truth.elapsedSeconds;
     const cached = library.lookup(pending.attempt, sources, new Set(Object.keys(state.truth.entities)), resources);
-    if (cached) { pending.bound = cached; pending.failure = null; }
+    if (cached && !pending.recovery?.rejectedProgramHashes.includes(cached.program.hash)) { pending.bound = cached; pending.failure = null; }
     else {
       const result = await compileWorldProgram(provider, { ...scope, profileId: control.models.creation,
-        invocationBase: nextInvocation("world", 2), definition, state, resources, attempt: pending.attempt, reason: "new-intent" });
+        invocationBase: nextInvocation("world", 2), definition, state, resources, attempt: pending.attempt,
+        reason: rejection ? "revision" : "new-intent", ...(rejection ? { rejection } : {}) });
       if (result.audit) audits.push(result.audit);
       if (result.status === "failed") {
-        pending.failure = result.reason; pending.bound = null; pending.atSeconds = null;
-        control.failures.push({ ownerId: pending.attempt.actorId, phase: "world-rule", inputHash: physicalHash, reason: result.reason, recoverable: true });
+        pending.bound = null;
+        deferWorldAttempt(pending, resources, sources, result.reason, null);
+        control.failures.push({ ownerId: pending.attempt.actorId, phase: "world-rule", inputHash: dependency.hash, reason: result.reason, recoverable: true });
         return;
       }
       library.add(result); pending.bound = result.bound; pending.failure = null;

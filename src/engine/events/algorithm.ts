@@ -25,6 +25,7 @@ import { nativeCandidate } from "./canonical";
 import { settleProgramWorldEvent } from "./settlement";
 import type { DecisionEventStep } from "./execution-contract";
 import { authorExternalAction } from "./external-action";
+import { deferWorldAttempt } from "./world-recovery";
 
 export interface DecisionEventConfig extends DecisionEventModels { maxDependencyRounds: number }
 export const JEV_EVENT_CONFIG: DecisionEventConfig = { decision: "decision-jev", creation: "creation-deepseek",
@@ -94,7 +95,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
         runtimeIdentity: { worldHash: source.worldHash, revision: source.revision }, modelRegistrySnapshotHash: initial.registryHash,
         profileId: initial.models.creation, invocationBase: allocator.next(action.agentId, 2) });
       if (authored.audit) controlled.modelAudits.push(authored.audit);
-      if (authored.status === "ready") controlled.control.pending.push({ attempt: authored.attempt, bound: null, atSeconds: null, dependencyHash: "", failure: null });
+      if (authored.status === "ready") controlled.control.pending.push({ attempt: authored.attempt, bound: null, atSeconds: null, dependencyHash: "", failure: null, recovery: null });
       else controlled.control.failures.push({ ownerId: action.agentId, phase: "utterance", inputHash: contentHash(action), reason: authored.reason, recoverable: true });
     }
     await context.stages?.after(executionStage("action-compilation"));
@@ -120,11 +121,16 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     const randomPlan = prepareWorldRandomPlan(physical, authority, control.worldResources, programs);
     let randomness: WorldRandomCommitment | null = null;
     let randomDeferral: string | null = null;
+    let randomRejection: Parameters<typeof deferWorldAttempt>[5];
     if (randomPlan) {
       const authorized = await authorizeWorldRandomness(runtime, randomPlan, scoped());
       randomness = authorized.commitment; decisions.push(authorized.call);
       if (!authorized.call.reused) audits.push(authorized.call.result.audit);
-      if (!randomness) randomDeferral = `world rule awaits evidence or expansion: random applicability requires ${authorized.disposition}`;
+      if (!randomness) {
+        randomDeferral = `world rule awaits evidence or expansion: random applicability requires ${authorized.disposition}`;
+        randomRejection = { disposition: authorized.disposition === "expand" ? "expand" : "wait",
+          reads: randomPlan.reads, evidenceHash: authorized.call.evidenceHash };
+      }
     }
     await context.stages?.after(executionStage("temporal-dependency"));
     await context.stages?.before(executionStage("truth-resolution"));
@@ -142,7 +148,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
         if (!(error instanceof Error) || !/world rule awaits evidence or expansion|ambiguous world branches require expansion/u.test(error.message)) throw error;
         for (const bound of programs) {
           const pending = control.pending.find(value => value.attempt.id === bound.attempt.id)!;
-          pending.failure = error.message; pending.atSeconds = null;
+          deferWorldAttempt(pending, resources, worldProgramSources(authority, source), error.message, adjudication, randomRejection);
           control.failures.push({ ownerId: bound.attempt.actorId, phase: "adjudication", inputHash: pending.dependencyHash, reason: error.message, recoverable: true });
           for (const queued of scheduler.snapshot().pending) if (queued.kind === "world" &&
             (queued.payload as { attemptId: string }).attemptId === bound.attempt.id) scheduler.cancel(queued.id);

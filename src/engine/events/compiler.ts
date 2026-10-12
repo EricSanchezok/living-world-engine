@@ -18,6 +18,7 @@ export const worldCompilationSchema = z.object({ definition: worldProgramSchema,
 export interface WorldCompilationRequest extends ModelExecutionScope {
   profileId: string; invocationBase: number; definition: WorldRuntimeContract; state: Readonly<SimulationState>;
   resources: ProgramResources; attempt: WorldAttempt; reason: "initial-coverage" | "new-intent" | "revision";
+  rejection?: { reason: string; program: BoundWorldProgram | null; evidenceHashes: string[] };
 }
 export type WorldCompilation =
   | { status: "ready"; bound: BoundWorldProgram; sourceHash: string; audit: ModelExecutionAudit }
@@ -38,7 +39,7 @@ export async function compileWorldProgram(provider: StructuredModelProvider, req
       rating: "ratings[id]", condition: "conditions[id]", activity: "activities[id]", pool: "pools[id]", timer: "timers[id]", law: "laws entry matching id",
       temporal: "mechanics.temporalProfiles[id]" },
     effectContract: z.toJSONSchema(worldDeltaOperationSchema, { target: "draft-07", reused: "ref" }) },
-    task: { attempt: request.attempt, reason: request.reason, constraints: [] }, repair: null });
+    task: { attempt: request.attempt, reason: request.reason, rejection: request.rejection ?? null, constraints: [] }, repair: null });
   const sourceHash = contentHash(context);
   const validate = (output: z.infer<typeof worldCompilationSchema>) => {
     const program = admitWorldProgram(output.definition, sources); bindWorldProgram(program, output.parameters, entities);

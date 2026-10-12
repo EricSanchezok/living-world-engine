@@ -10,6 +10,25 @@ import { contentHash } from "../../models/model-audit";
 
 
 describe("native event runtime through SimulationEngine", () => {
+  it("reuses an immutable plan after new private evidence without requiring its original admission environment", async () => {
+    const options = { reuse: false };
+    const f = nativeProgramFixture(options); await f.configured.registry.capture();
+    const engine = new SimulationEngine(f.world, new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig));
+    await engine.bootstrapAgents();
+    const first = await engine.step(f.roster, { expectedRevision: 0, trigger: "manual", externalActions: [] });
+    const keeperRef = Object.values(first.state.agents.player!.bindings).find(binding => binding.canonicalEntityIds[0] === "keeper")!.localEntityId;
+    const idle = { ...f.roster, keeper: { kind: "idle" as const, agentId: "keeper", reason: "explicit" as const } };
+    const heard = await engine.step(idle, { expectedRevision: first.state.revision, trigger: "participant_action", externalActions: [{ agentId: "player",
+      submissionId: "new-evidence-before-reuse", rawText: 'Spend 5 seconds saying "Hello keeper" to the keeper.', goal: "Greet", means: null, targetIds: [keeperRef] }] });
+    const before = readDecisionEventState(heard.state.executionState!, heard.state);
+    options.reuse = true;
+    const result = await engine.step(f.roster, { expectedRevision: heard.state.revision, trigger: "manual", externalActions: [] });
+    const after = readDecisionEventState(result.state.executionState!, result.state);
+    expect(after.privateLibrary).toEqual(before.privateLibrary);
+    expect(after.agents.keeper!.instances).toHaveLength(2);
+    expect(result.committed.decisionEvent!.modelAudits.filter(audit => audit.role === "creation")).toEqual([]);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("keeps a new private goal conclusion separate from simultaneous delivered observations", async () => {
     const options: { goalVerdict: "yes" | "unknown" } = { goalVerdict: "unknown" };
     const f = nativeProgramFixture(options); await f.configured.registry.capture();

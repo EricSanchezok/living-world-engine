@@ -92,9 +92,13 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
         const sources = privateProgramSources(perspective);
         const admitted = admitProgram(definition.program.definition, { ownerId: agent.id, sources: new Map(Object.entries(sources).map(([key, value]) => [key, contentHash(value)])),
           resources: new Set(Object.keys(resources.resources)), goalIds: new Set(Object.keys(agent.character.goals)) });
-        if (!equal(admitted, definition.program) || !equal(entry.entityIds, privateProgramEntityIds(perspective)) ||
+        const reused = before.privateLibrary.entries.some(prior => equal(prior, definition) && equal(prior.parameters, entry.snapshot.parameters));
+        // Admission snapshots describe the original compilation environment. A reused
+        // immutable definition is rechecked against today's catalog, while its own
+        // source identity (rather than unrelated new evidence) determines validity.
+        if (!(reused ? admitted.hash === definition.program.hash : equal(admitted, definition.program)) || !equal(entry.entityIds, privateProgramEntityIds(perspective)) ||
           entry.snapshot.startedAtSeconds !== source.truth.elapsedSeconds ||
-          !before.privateLibrary.entries.some(prior => equal(prior, definition) && equal(prior.parameters, entry.snapshot.parameters)) &&
+          !reused &&
           !creationEvidence(audits, agent.id, { definition: admitted.definition, parameters: entry.snapshot.parameters }, after.models.creation, definition.creationInvocationIds)) {
           throw new Error("new private program has no authorized creation evidence");
         }

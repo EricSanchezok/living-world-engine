@@ -1,6 +1,6 @@
 # World Program Runtime
 
-The world program kernel lives in [`src/engine/events/kernel.ts`](../../src/engine/events/kernel.ts). It is independent of private Agent programs. The registered `decision-event@1` candidate runs through SimulationEngine, CanonicalCommitter and history replay. The default Composition remains the baseline while WorldHost integration, schema replacement and qualification under [spec 0181](../specs/0181-jev-decision-event-engine.md) continue.
+The world program kernel lives in [`src/engine/events/kernel.ts`](../../src/engine/events/kernel.ts). It is independent of private Agent programs. The registered `decision-event@1` candidate runs through WorldHost, SimulationEngine, CanonicalCommitter and history replay. The default Composition remains the baseline while schema replacement and qualification under [spec 0181](../specs/0181-jev-decision-event-engine.md) continue.
 
 ## Compilation and authority
 
@@ -36,11 +36,13 @@ Canonical timers and condition expiry are hard time barriers even if the calling
 
 Private control restores checksummed libraries, program journals, receipts and pending attempts. Local wakeups run goal selection and program predicates through Jev; only new programs and concrete utterances call creation. Independent owners run concurrently with separate invocation ordinals, and all in-flight outcomes settle before failure propagates. A pending issued attempt is not issued again on restart. World rules can reuse the same private definition/node/parameter binding with a new `utterance` parameter, without regenerating the rule. Preparation preserves failed attempts for a relevant dependency change.
 
+Failed world judgments retain the complete actual read union, bound source hashes and judgment evidence identities. Unknown conditions whose policy is wait remain suspended until one of those inputs changes. Rejected effect interpretations bypass the rejected library entry and receive one targeted creation revision. The revision budget binds the input before revision, so changing a generated read declaration cannot reset it. Structural repair exhaustion waits on the complete compiler input. Unrelated world mutations do not wake a semantic wait.
+
 ## Simulation entry and recovery
 
 `DecisionEventAlgorithm` pins the creation, decision and context-fallback profiles, registry snapshot, program definitions and dependency-round limit in the instance's execution state. Bootstrap covers actual private goals without changing canonical time. A control commit advances the revision only; a physical event also advances the world step and strictly positive elapsed time. A quiescent world raises a typed waiting result instead of minting repeated empty revisions.
 
-The fixed committer re-executes newly appended private instructions against the owner's actual resources. Generated definitions are re-admitted, creation output hashes are checked, semantic decisions are reconstructed from concrete frontier tickets, and issued attempts must match their private program or authorized player submission. Persistent goal questions include the original goal, even when a generated mechanical condition is true. Completion checks run before replacing an ended program.
+The fixed committer re-executes newly appended private instructions against the owner's actual resources. Generated definitions are re-admitted, creation output hashes are checked, semantic decisions are reconstructed from concrete frontier tickets, and issued attempts must match their private program or authorized player submission. Reusing an existing immutable plan rechecks today's source identity and reference catalogs; unrelated additions to the admission environment do not invalidate its original creation evidence. Persistent goal questions include the original goal, even when a generated mechanical condition is true. Completion checks run before replacing an ended program.
 
 Player text remains an attempted action. Creation renders exact spoken content before world adjudication; canonical delivery establishes who actually heard it. A controller change interrupts private planning and revokes unstarted or interruptible pending work. Noninterruptible work retains its already established execution boundary. Resuming model control creates a local wakeup.
 
@@ -56,4 +58,4 @@ World settlement consumes exactly the persisted pending frontier. Private deadli
 
 Tests exercise the actual ModelGateway with only HTTP replaced, compilation/repair, quantity transfers, stale reads, unrelated updates, source/evidence tampering, unknown, atomic competition failure, exact speech, no-op progress, and scheduler restart. SimulationEngine tests also cover registered execution, natural-language player actions, actual speech delivery, same-time control commits, controller interruption, quiescence, persistent replay and recovery without repeated effects. A real-model diagnostic is available as `scripts/experiments/jev-world-smoke.ts`, consuming a successful private-program probe. It exercises the world kernel directly, not WorldHost persistence or a complete game.
 
-WorldHost lifecycle integration, Inspector, schema upgrades, default replacement and full A/B/C qualification remain subsequent work. Passing the runtime checks does not establish the acceptance targets.
+WorldHost lifecycle integration and the local Inspector expose native programs, coverage, wake reasons, decisions and measured call costs. Schema upgrades, default replacement and full A/B/C qualification remain subsequent work. Passing the runtime checks does not establish the acceptance targets.

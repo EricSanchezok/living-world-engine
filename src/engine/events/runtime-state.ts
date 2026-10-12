@@ -15,6 +15,7 @@ import { WorldProgramLibrary } from "./library";
 import type { BoundWorldProgram, WorldAttempt } from "./adjudication";
 import type { CommitReceipt } from "./kernel";
 import { worldProgramDuration } from "./adjudication";
+import { worldRecoverySchema, type WorldAttemptRecovery } from "./world-recovery";
 
 export interface DecisionEventModels { decision: string; creation: string; fallback: string }
 export interface PendingProgramAttempt {
@@ -23,6 +24,7 @@ export interface PendingProgramAttempt {
   atSeconds: number | null;
   dependencyHash: string;
   failure: string | null;
+  recovery: WorldAttemptRecovery | null;
 }
 export interface AgentProgramState {
   resources: PrivateResourceSnapshot;
@@ -36,7 +38,7 @@ export interface ProgramRuntimeFailure {
   inputHash: string; reason: string; recoverable: true;
 }
 export interface DecisionEventState {
-  kind: "decision-event"; version: 1; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
+  kind: "decision-event"; version: 2; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
   models: DecisionEventModels; privateLibrary: ReturnType<ProgramLibrary["snapshot"]>; worldLibrary: ReturnType<WorldProgramLibrary["snapshot"]>;
   policyKinds: Record<string, "model" | "external" | "idle" | "replay">;
   agents: Record<string, AgentProgramState>; worldResources: ProgramResources;
@@ -44,7 +46,7 @@ export interface DecisionEventState {
   modelOrdinals: { revision: number; subjects: Record<string, number> };
   pending: PendingProgramAttempt[]; receipts: CommitReceipt[]; coverage: GoalProgramCoverage[]; failures: ProgramRuntimeFailure[];
 }
-const stateSchema = z.object({ kind: z.literal("decision-event"), version: z.literal(1), hash: programHash,
+const stateSchema = z.object({ kind: z.literal("decision-event"), version: z.literal(2), hash: programHash,
   worldHash: z.string().regex(/^sha256:[a-f0-9]{64}$/u), modelCatalogHash: z.string().min(1), registryHash: z.string().min(1),
   models: z.object({ decision: z.string().min(1), creation: z.string().min(1), fallback: z.string().min(1) }).strict(),
   policyKinds: z.record(z.string(), z.enum(["model", "external", "idle", "replay"])),
@@ -55,7 +57,9 @@ const stateSchema = z.object({ kind: z.literal("decision-event"), version: z.lit
   coverage: z.array(z.unknown()), failures: z.array(z.unknown()) }).strict();
 
 export function sealDecisionEventState(input: Omit<DecisionEventState, "hash"> | DecisionEventState): DecisionEventState {
-  const body = Object.fromEntries(Object.entries(input).filter(([key]) => key !== "hash"));
+  const body: Record<string, unknown> = { ...Object.fromEntries(Object.entries(input).filter(([key]) => key !== "hash")),
+    failures: input.failures.slice().sort((a, b) => a.ownerId.localeCompare(b.ownerId) || a.inputHash.localeCompare(b.inputHash) ||
+      a.phase.localeCompare(b.phase) || a.reason.localeCompare(b.reason)) };
   assertJsonValue(body, "decision event state");
   return structuredClone({ ...body, hash: contentHash(body) }) as unknown as DecisionEventState;
 }
@@ -63,7 +67,7 @@ export function initialDecisionEventState(state: Readonly<SimulationState>, mode
   const scheduler = new EventScheduler(state.truth.elapsedSeconds);
   for (const agentId of Object.keys(state.agents).sort()) scheduler.schedule({ atSeconds: state.truth.elapsedSeconds, subjectId: agentId,
     kind: "control", inputHash: contentHash({ bootstrap: agentId, worldHash: state.worldHash }), payload: { reason: "initial-goal-coverage" } });
-  return sealDecisionEventState({ kind: "decision-event", version: 1, worldHash: state.worldHash, modelCatalogHash: catalogHash, registryHash,
+  return sealDecisionEventState({ kind: "decision-event", version: 2, worldHash: state.worldHash, modelCatalogHash: catalogHash, registryHash,
     models, policyKinds: Object.fromEntries(Object.keys(state.agents).map(id => [id, "model" as const])),
     privateLibrary: new ProgramLibrary().snapshot(), worldLibrary: new WorldProgramLibrary().snapshot(),
     agents: Object.fromEntries(Object.values(state.agents).map(agent => [agent.id, {
@@ -106,6 +110,8 @@ export function readDecisionEventState(executionState: AlgorithmExecutionState, 
     if (owner.activeInstanceId !== null && !owner.instances.some(entry => entry.snapshot.instanceId === owner.activeInstanceId)) throw new Error("active program instance is absent");
   }
   for (const pending of value.pending) {
+    if (pending.recovery !== null) worldRecoverySchema.parse(pending.recovery);
+    if (pending.failure && !pending.recovery) throw new Error("failed world attempt has no recovery dependencies");
     const program = pending.attempt.program;
     if (program && (!instances.has(program.instanceId) || !value.agents[pending.attempt.actorId]?.instances.some(entry =>
       entry.snapshot.instanceId === program.instanceId && entry.snapshot.definitionHash === program.definitionHash))) throw new Error("pending attempt has no private program");
