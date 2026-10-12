@@ -8,6 +8,7 @@ import { contentHash } from "../../models/model-audit";
 import { advanceProgramControls } from "../program-control";
 import { initialDecisionEventState, readDecisionEventState, restoreOwnerPrograms } from "../runtime-state";
 import type { PolicyBinding } from "../../runtime/execution";
+import { EventScheduler } from "../scheduler";
 
 function fixture() {
   const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: createTestModelCatalog() });
@@ -32,6 +33,37 @@ function fixture() {
   return { world, definition, roster, options: { maxDependencyRounds: 32, nextInvocation } };
 }
 describe("durable private program control", () => {
+  it("cancels an unbound attempt after a source-bound interruption and schedules a bounded revision", async () => {
+    const f = fixture();
+    f.definition.interrupts = ["invalidated"];
+    f.definition.reads.push("observations");
+    f.definition.predicates.push({ id: "invalidated", description: "A new observation invalidates this plan.", reads: ["observations"],
+      sourceIds: ["goal:guard-gate"], unknown: "wait", test: { kind: "semantic", instructions: "Does the actual new observation invalidate this plan?" } });
+    let interrupt = false;
+    const configured = decisionTestProvider(body => {
+      const wire = JSON.stringify(body);
+      if (wire.includes("Compile a reusable private behavior program")) return { definition: f.definition, parameters: { recipient: "traveler" } };
+      if (wire.includes("Write the exact words this Agent")) return { text: "Why are you here?" };
+      if (wire.includes("Choose which actual active goal")) return { answers: { goal: { choice: "g0" } } };
+      return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: interrupt ? "yes" : "no" }])) };
+    });
+    const registry = await configured.registry.capture(), source = f.world.initialState;
+    const initial = initialDecisionEventState(source, { decision: "world-test", creation: "world-test", fallback: "world-test" }, configured.gateway.catalog.hash, registry.hash);
+    const scope = { workloadId: "interrupt", batchId: "interrupt" };
+    const first = await advanceProgramControls(configured.gateway, source, initial, f.roster, scope, f.options);
+    expect(first.control.pending).toHaveLength(1);
+    const awakened = structuredClone(first.control);
+    // A real private observation changes both the decision cache key and its wake dependency.
+    source.agents.keeper!.belief.evidence["interruption-observation"] = { id: "interruption-observation", step: 0,
+      kind: "observation", description: "The traveler has left.", sourceId: null };
+    const scheduler = new EventScheduler(0, awakened.scheduler);
+    scheduler.schedule({ atSeconds: 0, subjectId: "keeper", kind: "control", inputHash: contentHash("new-observation"), payload: { reason: "observation" } });
+    awakened.scheduler = scheduler.snapshot(); interrupt = true;
+    const second = await advanceProgramControls(configured.gateway, source, awakened, f.roster, scope, f.options);
+    expect(second.control.pending).toEqual([]);
+    expect(restoreOwnerPrograms(second.control, "keeper")[0]!.status).toBe("interrupted");
+    expect(second.control.scheduler.pending.some(event => event.kind === "control" && event.subjectId === "keeper")).toBe(true);
+  });
   it("revises an unknown plan once, then stops same-input expansion across new instance IDs", async () => {
     const f = fixture();
     f.definition.predicates[0] = { ...f.definition.predicates[0]!, unknown: "expand",

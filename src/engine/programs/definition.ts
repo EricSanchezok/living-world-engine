@@ -120,6 +120,7 @@ export function admitProgram(input: unknown, admission: ProgramAdmission): Admit
   const predicates = new Set(definition.predicates.map(predicate => predicate.id));
   const predicateRef = (id: string) => { if (!predicates.has(id)) throw new Error(`unknown predicate ${id}`); };
   predicateRef(definition.startPredicateId);
+  if (definition.interrupts.includes(definition.startPredicateId)) throw new Error("startPredicateId cannot also interrupt the program when true; declare a separate invalidation predicate");
   for (const predicate of definition.predicates) {
     unique(predicate.reads, "predicate read"); unique(predicate.sourceIds, "predicate source");
     for (const read of predicate.reads) if (!definition.reads.includes(read)) throw new Error(`undeclared predicate read ${read}`);
@@ -142,7 +143,7 @@ export function admitProgram(input: unknown, admission: ProgramAdmission): Admit
   const visit = (id: string, depth: number): void => {
     if (depth > 64) throw new Error("program nesting exceeds 64 levels");
     if (active.has(id)) throw new Error("program graph cycles require an explicit repeat node");
-    if (visited.has(id)) throw new Error("program nodes require one structural parent");
+    if (visited.has(id)) throw new Error(`program node ${id} has more than one structural parent; use distinct node IDs in each branch`);
     const node = nodes.get(id); if (!node) throw new Error(`unknown program node ${id}`);
     visited.add(id); active.add(id);
     if (node.kind === "attempt") {
@@ -163,7 +164,7 @@ export function admitProgram(input: unknown, admission: ProgramAdmission): Admit
     active.delete(id);
   };
   visit(definition.entry, 0);
-  if (visited.size !== nodes.size) throw new Error("program contains unreachable nodes");
+  if (visited.size !== nodes.size) throw new Error(`program contains unreachable nodes: ${[...nodes.keys()].filter(id => !visited.has(id)).join(", ")}`);
   return frozenClone({ definition, sourceHashes, hash: contentHash({ definition, sourceHashes }), admissionHash: contentHash({ ownerId: admission.ownerId,
     sources: Object.fromEntries(admission.sources), goals: [...admission.goalIds].sort(), resources: [...admission.resources].sort() }) });
 }

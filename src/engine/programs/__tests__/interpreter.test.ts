@@ -48,6 +48,8 @@ describe("private program admission", () => {
       [...fixture.definition.nodes, { id: "unused", kind: "finish" as const }],
     ]) expect(() => admitProgram({ ...fixture.definition, nodes }, fixture.admission)).toThrow();
     expect(() => admitProgram({ ...fixture.definition, goals: [{ goalId: "deliver", predicateId: "missing" }] }, fixture.admission)).toThrow("unknown predicate");
+    expect(() => admitProgram({ ...fixture.definition, interrupts: [fixture.definition.startPredicateId] }, fixture.admission))
+      .toThrow("startPredicateId cannot also interrupt");
   });
   it("computes finite arithmetic in code", () => {
     expect(evaluateExpression({ kind: "arithmetic", operation: "subtract", values: [{ kind: "parameter", name: "stock" }, { kind: "literal", value: 3 }] }, { stock: 8 }, {})).toBe(5);
@@ -56,6 +58,23 @@ describe("private program admission", () => {
 });
 
 describe("persistent program interpreter", () => {
+  it("binds semantic conditions and wake subscriptions to the actual private evidence envelope", () => {
+    const fixture = programFixture();
+    fixture.definition.predicates[0]!.test = { kind: "semantic", instructions: "Is the recipient available here?" };
+    fixture.program = admitProgram(fixture.definition, fixture.admission);
+    fixture.interpreter = new ProgramInterpreter(fixture.program, "instance-a", fixture.parameters, fixture.entities);
+    const resources: ProgramResources = { ...fixture.resources,
+      self: { version: 1, value: { location: "local-bay" } },
+      containment: { version: 2, value: [{ entity: "local-peer", container: "local-bay" }] },
+      observations: { version: 3, value: ["An actual delivery was observed."] },
+    };
+    const initial = fixture.interpreter.work(resources, 0).find(work => work.kind === "predicate") as ProgramPredicateWork;
+    expect(initial.state).toMatchObject({ self: resources.self, containment: resources.containment,
+      observations: resources.observations });
+    expect(fixture.interpreter.subscriptions(resources, 0).resources).toContain("observations");
+    const changed: ProgramResources = { ...resources, observations: { version: 4, value: ["The peer explicitly refused."] } };
+    expect(() => resolve(fixture.interpreter, changed, initial, "yes")).toThrow("stale");
+  });
   it("waits without polling, rejects stale evidence and keeps execution, milestone and goal completion distinct", () => {
     const fixture = programFixture(); start(fixture); settle(fixture, "succeeded", 0);
     const wait = fixture.interpreter.work(fixture.resources, 1).find(work => work.kind === "predicate" && work.reason === "flow") as ProgramPredicateWork;

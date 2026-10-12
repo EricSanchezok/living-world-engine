@@ -61,7 +61,7 @@ export class ProgramLibrary {
         matching.some(entry => entry.program.hash === interpreter.program.hash));
       const startable = instances.some(interpreter => interpreter.work(resources, atSeconds).some(work => work.kind === "attempt" || work.kind === "utterance"));
       const needsDecision = instances.some(interpreter => interpreter.work(resources, atSeconds).some(work => work.kind === "predicate"));
-      const waiting = instances.some(interpreter => interpreter.status !== "needs-expansion" && interpreter.status !== "ended" &&
+      const waiting = instances.some(interpreter => interpreter.status !== "needs-expansion" && interpreter.status !== "interrupted" && interpreter.status !== "ended" &&
         !interpreter.work(resources, atSeconds).length && interpreter.subscriptions(resources, atSeconds).reason !== "no-progress");
       return { ownerId, goalId, status: instances.some(interpreter => interpreter.completion.goals[goalId]) ? "completed" : startable ? "startable" : needsDecision ? "needs-decision" : waiting ? "waiting" : "needs-generation",
         programHashes: matching.map(entry => entry.program.hash), reasons: instances.map(interpreter => interpreter.completion.expansionReason ??

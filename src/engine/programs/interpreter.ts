@@ -13,6 +13,8 @@ export const programReceiptSchema = z.object({
 }).strict();
 export type ProgramReceipt = z.infer<typeof programReceiptSchema>;
 type Verdict = "yes" | "no" | "unknown";
+/** The generated read list cannot omit the owner's actual observation and physical evidence. */
+const semanticEvidenceKeys = ["self", "mechanics", "containment", "facts", "claims", "evidence", "observations"];
 type Leaf = { kind: "leaf"; nodeId: string; activation: number; atSeconds: number | null; issued: string | null;
   lastInputHash: string | null; utterance: string | null };
 type Residual = Leaf | { kind: "done"; nodeId: string }
@@ -124,7 +126,8 @@ export class ProgramInterpreter {
       if (leaf.issued) receiptWorkIds.push(this.workId(leaf));
       if (node.kind === "attempt") this.program.definition.reads.forEach(key => resourceKeys.add(key));
       if (node.kind === "branch" || node.kind === "repeat" || node.kind === "wait") {
-        const predicate = this.predicates.get(node.predicateId)!; predicate.reads.forEach(key => resourceKeys.add(key));
+        const predicate = this.predicates.get(node.predicateId)!;
+        this.predicateResources(predicate, resources).forEach(key => resourceKeys.add(key));
         const hash = this.project(predicate, resources).inputHash;
         if (node.kind === "repeat" && this.seenFlow.get(`${node.id}:${hash}`) === this.progress && !this.checked.has(`flow:${this.workId(leaf)}`)) noProgress = true;
         if (node.kind === "wait" && node.deadlineSeconds !== null && leaf.atSeconds! + node.deadlineSeconds > atSeconds) deadlines.push(leaf.atSeconds! + node.deadlineSeconds);
@@ -133,14 +136,22 @@ export class ProgramInterpreter {
     const watched = [this.program.definition.startPredicateId, ...this.program.definition.interrupts,
       ...this.program.definition.milestones.filter(milestone => !this.milestoneEvidence.has(milestone.id)).map(milestone => milestone.predicateId),
       ...this.program.definition.goals.filter(goal => !this.goalEvidence.has(goal.goalId)).map(goal => goal.predicateId)];
-    for (const id of watched) this.predicates.get(id)!.reads.forEach(key => resourceKeys.add(key));
+    for (const id of watched) this.predicateResources(this.predicates.get(id)!, resources).forEach(key => resourceKeys.add(key));
+    if (this.program.definition.goals.some(goal => !this.goalEvidence.has(goal.goalId))) {
+      semanticEvidenceKeys.filter(key => Object.hasOwn(resources, key)).forEach(key => resourceKeys.add(key));
+    }
     for (const goal of this.program.definition.goals) if (!this.goalEvidence.has(goal.goalId)) resourceKeys.add(`goal:${goal.goalId}`);
     return { resources: [...resourceKeys].sort(), receiptWorkIds, deadline: deadlines.length ? Math.min(...deadlines) : null,
       reason: noProgress ? "no-progress" : receiptWorkIds.length ? "receipt" : "evidence" };
   }
 
+  private predicateResources(predicate: ProgramPredicate, resources: ProgramResources, additional: string[] = []) {
+    return [...new Set([...predicate.reads, ...additional, ...(predicate.test.kind === "semantic" || additional.length
+      ? semanticEvidenceKeys.filter(key => Object.hasOwn(resources, key)) : [])])];
+  }
+
   private project(predicate: ProgramPredicate, resources: ProgramResources, additional: string[] = []) {
-    const state = Object.fromEntries([...new Set([...predicate.reads, ...additional])].map(key => {
+    const state = Object.fromEntries(this.predicateResources(predicate, resources, additional).map(key => {
       const value = resources[key];
       if (!value || !Number.isSafeInteger(value.version) || value.version < 0) throw new Error(`missing versioned predicate input ${key}`);
       assertJsonValue(value.value, `resource ${key}`);

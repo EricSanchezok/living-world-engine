@@ -165,6 +165,9 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
     const changed = before.policyKinds[pending.attempt.actorId] !== after.policyKinds[pending.attempt.actorId] ||
       externalActions.some(action => action.agentId === pending.attempt.actorId);
     const interruptible = pending.failure || !pending.bound || source.truth.mechanics.temporalProfiles[pending.bound.program.definition.timing.profileId]?.interruptible;
-    if (!changed || roster[pending.attempt.actorId]?.kind === "model" || !interruptible) throw new Error("pending action disappeared without authorized interruption");
+    const modelInterrupt = roster[pending.attempt.actorId]?.kind === "model" && pending.attempt.program &&
+      after.agents[pending.attempt.actorId]?.instances.some(entry => entry.snapshot.instanceId === pending.attempt.program!.instanceId &&
+        entry.snapshot.events.some(event => event.kind === "predicate" && event.reason === "interrupt" && event.verdict === "yes" && event.atSeconds === source.truth.elapsedSeconds));
+    if (!interruptible || !(modelInterrupt || changed && roster[pending.attempt.actorId]?.kind !== "model")) throw new Error("pending action disappeared without authorized interruption");
   }
 }

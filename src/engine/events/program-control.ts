@@ -74,6 +74,7 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
   if (frontier.length) scheduler.acknowledge(frontier.map(event => event.id), now);
   const subscriptions: Array<{ ownerId: string; keys: string[]; receipts: string[]; deadline: number | null }> = [];
   const continuations: Array<{ ownerId: string; hash: string }> = [];
+  const cancelledAttempts = new Set<string>();
   const record = (use: DecisionUse) => { decisions.push(use); if (!use.reused) audits.push(use.result.audit); };
   const settled = await Promise.allSettled(waking.map(async ownerId => {
     const agent = source.agents[ownerId], policy = roster[ownerId];
@@ -188,7 +189,15 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
         if (round === options.maxDependencyRounds - 1) continuations.push({ ownerId, hash: active.snapshot().hash });
       }
     }
-    if (active?.status === "needs-expansion" && !control.pending.some(pending => pending.attempt.actorId === ownerId)) {
+    if (active?.status === "interrupted") {
+      for (const pending of control.pending.filter(pending => pending.attempt.program?.instanceId === active!.instanceId)) {
+        if (!pending.bound || source.truth.mechanics.temporalProfiles[pending.bound.program.definition.timing.profileId]?.interruptible) {
+          cancelledAttempts.add(pending.attempt.id);
+        }
+      }
+      control.pending = control.pending.filter(pending => !cancelledAttempts.has(pending.attempt.id));
+    }
+    if ((active?.status === "needs-expansion" || active?.status === "interrupted") && !control.pending.some(pending => pending.attempt.actorId === ownerId)) {
       if (owner.planning!.attempts < 2) continuations.push({ ownerId, hash: active.snapshot().hash });
       else if (owner.planning!.waitReason !== "expansion-budget-exhausted") {
         owner.planning!.waitReason = "expansion-budget-exhausted";
@@ -204,12 +213,13 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
       .map(interpreter => interpreter.subscriptions(resources, now));
     const keys = [...new Set(watched.flatMap(value => value.resources))];
     // With no active plan, new private evidence and goals can end a deliberate wait or repair a failed compilation.
-    if (!watched.length || active?.status === "needs-expansion") keys.push(...Object.keys(resources).filter(key => key !== "clock"));
+    if (!watched.length || active?.status === "needs-expansion" || active?.status === "interrupted") keys.push(...Object.keys(resources).filter(key => key !== "clock"));
     const deadlines = watched.flatMap(value => value.deadline === null ? [] : [value.deadline]);
     subscriptions.push({ ownerId, keys, receipts: watched.flatMap(value => value.receiptWorkIds), deadline: deadlines.length ? Math.min(...deadlines) : null });
   }));
   const errors = settled.flatMap(result => result.status === "rejected" ? [result.reason] : []);
   if (errors.length) throw new AggregateError(errors, "private program control failed");
+  for (const queued of scheduler.snapshot().pending) if (queued.kind === "world" && cancelledAttempts.has((queued.payload as { attemptId: string }).attemptId)) scheduler.cancel(queued.id);
   for (const value of subscriptions.sort((a, b) => a.ownerId.localeCompare(b.ownerId))) scheduler.subscribe(value.ownerId,
     control.agents[value.ownerId]!.resources.resources, value.keys, value.receipts, value.deadline);
   for (const value of continuations.sort((a, b) => a.ownerId.localeCompare(b.ownerId))) scheduler.schedule({ atSeconds: now,
