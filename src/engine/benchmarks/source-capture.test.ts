@@ -6,7 +6,7 @@ import {
   emitActionCompilationFullContextCapture,
   readActionCompilationCapturedSources,
 } from "./source-capture";
-import { DEFAULT_ALGORITHM_REF } from "../algorithms/registry";
+import { EAGER_REFERENCE_ALGORITHM_REF } from "../algorithms/registry";
 
 function completeSource(fullContext: Record<string, unknown>) {
   const stateSnapshot = { worldId: "world", revision: 0 };
@@ -29,8 +29,8 @@ function completeSource(fullContext: Record<string, unknown>) {
       targetIds: [],
     }],
     actionIds: ["action-1"],
-    captureAlgorithmRef: DEFAULT_ALGORITHM_REF,
-    captureAlgorithmManifestHash: DEFAULT_ALGORITHM_REF.manifestHash,
+    captureAlgorithmRef: EAGER_REFERENCE_ALGORITHM_REF,
+    captureAlgorithmManifestHash: EAGER_REFERENCE_ALGORITHM_REF.manifestHash,
     worldHash: "world-hash",
     candidateCatalogHash: "candidate-catalog-hash",
     modelCatalogHash: "model-catalog-hash",

@@ -27,7 +27,7 @@ ratings:
   - { id: "resolve:curator-iseult-vale", definition_id: resolve, value: 4 }
 agent:
   id: curator-iseult-vale
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 贫穷但不卑微的档案守护者；相信知识必须有门槛，却厌恶把门槛简单等同于财富或权力。

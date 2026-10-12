@@ -95,7 +95,7 @@ export async function prepareRuntimeAdmission() {
   if (catalog.hash !== history.catalogHash) throw new Error("catalog mismatch");
   const registry = new ModelRegistry(catalog, history.dataRoot, { fetch: async () => { throw new Error("frozen registry cannot refresh"); } });
   const snapshot = registry.snapshot(history.registrySnapshotHash);
-  const profileId = source.definition.modelProfiles.resolution;
+  const profileId = source.definition.modelProfiles.creation;
   const profile = resolveModelProfile(catalog, snapshot, profileId);
   if (profile.accountId !== "deepseek-api" || profile.modelId !== STEP_E2_PROTOCOL.model || profile.profile.inference.thinking !== "disabled" ||
     profile.profile.max_output_tokens !== STEP_E2_PROTOCOL.outputTokenCeiling) throw new Error("nonthinking model binding mismatch");

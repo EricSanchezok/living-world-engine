@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { loadWorldScript } from "../../../script/world-loader";
 import { compileActions } from "../../algorithms/eager-reference/action-compiler";
 import { ActionCompilationCodec } from "../../algorithms/eager-reference/action-compilation-representation";
-import { DEFAULT_ALGORITHM_REF } from "../../algorithms/registry";
+import { EAGER_REFERENCE_ALGORITHM_REF } from "../../algorithms/registry";
 import type { CandidateSelectionCapability } from "../../algorithms/roles";
 import { ModelGateway } from "../../models/model-gateway";
 import { contentHash } from "../../models/model-audit";
@@ -26,7 +26,7 @@ async function fixture() {
   await compileActions(scripted, state, [{ id: "runner-action", actorId: "player", baseRevision: 0,
     rawText: "Observe the gate", goal: "observe", means: null, targetIds: [] }], {
     workloadId: "runner-fixture", batchId: "batch", correlation: { executionId: "fixture", revision: state.revision },
-    observer, runtimeIdentity: { worldHash: state.worldHash, revision: state.revision }, executionAlgorithmRef: DEFAULT_ALGORITHM_REF,
+    observer, runtimeIdentity: { worldHash: state.worldHash, revision: state.revision }, executionAlgorithmRef: EAGER_REFERENCE_ALGORITHM_REF,
   }, "truth-engine", 12);
   const source = readActionCompilationCapturedSources(observer.events)[0]!;
   const registry = createTestModelRegistry(scripted.catalog);

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { AC_FP1_ARMS, AC_FP1_SOURCES, firstPassAlgorithmRef, firstPassSchedule, orderedFirstPassSources } from "./first-pass-protocol";
-import { DEFAULT_ALGORITHM_REF, FULL_CATALOG_ALGORITHM_REF, registerBuiltinAlgorithms } from "../../algorithms/registry";
+import { EAGER_REFERENCE_ALGORITHM_REF, FULL_CATALOG_ALGORITHM_REF, registerBuiltinAlgorithms } from "../../algorithms/registry";
 import { WorldExecutionAlgorithmRegistry } from "../../runtime/execution";
 import { DeterministicModelProvider } from "../../testing/model-provider";
 import { contentHash } from "../../models/model-audit";
@@ -30,20 +30,20 @@ describe("frozen AC-FP1 protocol", () => {
   });
 
   it("registers all arms without altering retrieval, batching, recovery or the default", () => {
-    const before = contentHash(DEFAULT_ALGORITHM_REF);
+    const before = contentHash(EAGER_REFERENCE_ALGORITHM_REF);
     const registry = registerBuiltinAlgorithms(new WorldExecutionAlgorithmRegistry());
     const identities = AC_FP1_ARMS.map((arm) => {
-      const ref = firstPassAlgorithmRef(DEFAULT_ALGORITHM_REF, arm);
+      const ref = firstPassAlgorithmRef(EAGER_REFERENCE_ALGORITHM_REF, arm);
       registry.validateExperimentComposition(ref);
-      expect(ref.children.actionCompilation!.children).toEqual(DEFAULT_ALGORITHM_REF.children.actionCompilation!.children);
-      expect(ref.config).toEqual(DEFAULT_ALGORITHM_REF.config);
+      expect(ref.children.actionCompilation!.children).toEqual(EAGER_REFERENCE_ALGORITHM_REF.children.actionCompilation!.children);
+      expect(ref.config).toEqual(EAGER_REFERENCE_ALGORITHM_REF.config);
       const full = firstPassAlgorithmRef(FULL_CATALOG_ALGORITHM_REF, arm);
       expect(registry.create(full, { provider: new DeterministicModelProvider() }).manifest.hash).toBe(full.manifestHash);
       return ref.manifestHash;
     });
     expect(new Set(identities).size).toBe(4);
-    expect(contentHash(DEFAULT_ALGORITHM_REF)).toBe(before);
-    expect(DEFAULT_ALGORITHM_REF.children.actionCompilation!.config.representation).toBe("AT");
+    expect(contentHash(EAGER_REFERENCE_ALGORITHM_REF)).toBe(before);
+    expect(EAGER_REFERENCE_ALGORITHM_REF.children.actionCompilation!.config.representation).toBe("AT");
   });
 
   it("orders only approved initial sources and refuses provenance or batch drift", () => {

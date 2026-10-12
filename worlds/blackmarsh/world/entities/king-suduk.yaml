@@ -24,7 +24,7 @@ ratings:
   - { id: "insight:king-suduk", definition_id: insight, value: 2 }
 agent:
   id: king-suduk
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 把年贡视为刻在王权上的耻辱，却能数清一场仓促反叛会留下多少空洞与孤儿；他的愤怒真实而公开，选择何时让愤怒成为命令则极其谨慎。

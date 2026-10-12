@@ -20,21 +20,7 @@ export const scriptManifestSchema = z.object({
     realtime_interval_ms: z.number().int().min(1_000).max(86_400_000),
     action_window_ms: z.number().int().min(1_000).max(86_400_000),
   }).strict(),
-  model_profiles: z.object({
-    perception: safeIdSchema,
-    reaction_routing: safeIdSchema,
-    resolution: safeIdSchema,
-    transition: safeIdSchema,
-    causal_verifier: safeIdSchema,
-    grounding: safeIdSchema,
-    observation: safeIdSchema,
-    arrival: safeIdSchema,
-    dynamic_agent: z.object({
-      bootstrap: safeIdSchema,
-      mind: safeIdSchema,
-      reaction: safeIdSchema,
-    }).strict(),
-  }).strict(),
+  model_profiles: z.object({ decision: safeIdSchema, creation: safeIdSchema, fallback: safeIdSchema }).strict(),
 }).strict();
 
 const participationImageSchema = z.object({
@@ -56,9 +42,9 @@ export const participationFileSchema = z.object({
     risks: z.array(z.string().trim().min(1).max(300)).max(8).default([]),
     mechanics_profile_id: safeIdSchema,
     model_profiles: z.object({
-      bootstrap: safeIdSchema,
-      mind: safeIdSchema,
-      reaction: safeIdSchema,
+      creation: safeIdSchema,
+      decision: safeIdSchema,
+      fallback: safeIdSchema,
     }).strict().optional(),
     image: participationImageSchema.optional(),
     fallback_arrival: z.string().trim().min(1).max(2_000),
@@ -401,9 +387,9 @@ export const entityDocumentSchema = z.object({
   agent: z.object({
     id: safeIdSchema,
     model_profiles: z.object({
-      bootstrap: safeIdSchema,
-      mind: safeIdSchema,
-      reaction: safeIdSchema,
+      creation: safeIdSchema,
+      decision: safeIdSchema,
+      fallback: safeIdSchema,
     }).strict(),
     character: characterSeedSchema,
     belief: beliefSeedSchema,

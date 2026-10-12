@@ -73,7 +73,7 @@ async function resolveGuards(provider: StructuredModelProvider, cursors: Map<str
       const view = projectAgentPerspective(state, state.agents[actorId]!);
       for (const work of cursor.frontier()) {
         if (work.kind === "attempt" || work.lastPerspectiveHash === contentHash(view)) continue;
-        const profile = state.agents[actorId]!.modelProfiles.mind;
+        const profile = state.agents[actorId]!.modelProfiles.creation;
         const group = groups.get(profile) ?? [];
         group.push({ actorId, cursor, ticket: cursor.guardTicket(work.workId, view) }); groups.set(profile, group);
       }

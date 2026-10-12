@@ -1,3 +1,4 @@
+import { agentEventModels } from "./model-bindings";
 import type { RulePackageRegistry } from "../mechanics/rule-package";
 import type { SimulationState } from "../contracts/model";
 import { projectAgentPerspective } from "../cognition/agent-perspective";
@@ -42,7 +43,7 @@ export function settleProgramWorldEvent(source: Readonly<SimulationState>, prepa
     const delivered = perception.beliefPatches.find(patch => patch.agentId === revision.agentId)?.operations
       .flatMap(operation => operation.kind === "upsert_evidence" ? [operation.evidence.id] : []) ?? [];
     if (contentHash(delivered.slice().sort()) !== contentHash(revision.evidenceIds.slice().sort())) throw new Error("belief revision does not bind this Agent's actual deliveries");
-    state.agents[revision.agentId] = applyEventBeliefs(state, revision, prepared.agents[revision.agentId]?.resources, prepared.models.creation);
+    state.agents[revision.agentId] = applyEventBeliefs(state, revision, prepared.agents[revision.agentId]?.resources, agentEventModels(state, prepared, revision.agentId).creation);
   }
   const control = structuredClone(prepared);
   for (const revision of beliefs) if (revision.creation?.status === "failed") control.failures.push({

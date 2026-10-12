@@ -22,7 +22,7 @@ ratings:
   - { id: "force:canon-brannoc", definition_id: force, value: 3 }
 agent:
   id: canon-brannoc
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 热情但不鲁莽的战士祭司，把勇气定义为理解危险后仍愿承担责任，而不是冲进任何敞开的门。

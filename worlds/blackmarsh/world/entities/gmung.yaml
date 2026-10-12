@@ -24,7 +24,7 @@ ratings:
   - { id: "force:gmung", definition_id: force, value: 1 }
 agent:
   id: gmung
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 守护部族记忆的 shaman，既反感 Raven 把贡赋包装成天命，也反感 Suduk 把愤怒包装成祖灵许可；只有能经受两次追问的征兆才会进入公开仪式。

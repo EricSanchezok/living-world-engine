@@ -28,7 +28,7 @@ ratings:
   - { id: "influence:wizard-of-the-isle", definition_id: influence, value: 1 }
 agent:
   id: wizard-of-the-isle
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 把每个结论拆成“亲见、重复、推测”的孤岛守护者；他宁可因沉默被当作专横，也不肯用一个漂亮的宇宙解释覆盖仍互相矛盾的记录。

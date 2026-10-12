@@ -22,7 +22,7 @@ ratings:
   - { id: "resolve:hamdir", definition_id: resolve, value: 4 }
 agent:
   id: hamdir
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 在父亲仍活着时就被迫思考继承后果的务实青年；他不愿羞辱 Kalfvald，也不愿让一份自己从未立下的旧誓把 Daretop 拖进 Ragnar 的衰败。

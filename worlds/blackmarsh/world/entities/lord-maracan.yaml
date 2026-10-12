@@ -28,7 +28,7 @@ ratings:
   - { id: "finesse:lord-maracan", definition_id: finesse, value: 3 }
 agent:
   id: lord-maracan
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 很少直接撒一个容易拆穿的谎，而是给不同听众一张足够准确、却把他们引向不同政治结论的地图；他要复兴的是 Jorvik 旧家系的权力，不是假装收到失踪旧主的神谕。

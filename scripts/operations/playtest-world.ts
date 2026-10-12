@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { closeSync, mkdirSync, openSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { DEFAULT_ALGORITHM_REF } from "../../src/engine/algorithms/registry";
+import { EAGER_REFERENCE_ALGORITHM_REF } from "../../src/engine/algorithms/registry";
 import { firstPassAlgorithmRef } from "../../src/engine/benchmarks/action-compilation/first-pass-protocol";
 import { ExperimentBudget } from "../../src/engine/benchmarks/action-compilation/experiment-budget";
 import { FirstPassExperimentTransport } from "../../src/engine/benchmarks/action-compilation/experiment-transport";
@@ -58,7 +58,7 @@ async function main(): Promise<void> {
     },
   });
   const database = new LocalDatabase(path.join(dataRoot, "livingworld.sqlite"));
-  const algorithmRef = firstPassAlgorithmRef(DEFAULT_ALGORITHM_REF, "T");
+  const algorithmRef = firstPassAlgorithmRef(EAGER_REFERENCE_ALGORITHM_REF, "T");
   const host = new WorldHost({
     repository: database, store: database, ledger: database, provider,
     actionCompilationRetrievalProvider: createActionCompilationRetrievalRuntimeProvider(),

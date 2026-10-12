@@ -13,7 +13,7 @@ import { r5RelationalPassagesForContext } from "../../engine/algorithms/eager-re
 import { compileActions } from "../../engine/algorithms/eager-reference/action-compiler";
 import { ModelTransportError } from "../../engine/models/model-provider";
 import {
-  DEFAULT_ALGORITHM_REF,
+  EAGER_REFERENCE_ALGORITHM_REF,
   eagerReferenceAlgorithmRef,
   FULL_CATALOG_ALGORITHM_REF,
 } from "../../engine/algorithms/registry";
@@ -90,8 +90,8 @@ describe("Action Compilation retrieval runtime provider", () => {
     const support = createActionCompilationRetrievalRuntimeProvider({
       cacheRoot: path.join(input.root, "missing-cache"),
     });
-    expect(support.runtime(DEFAULT_ALGORITHM_REF)).toBeDefined();
-    await expect(support.preflight(DEFAULT_ALGORITHM_REF, {
+    expect(support.runtime(EAGER_REFERENCE_ALGORITHM_REF)).toBeDefined();
+    await expect(support.preflight(EAGER_REFERENCE_ALGORITHM_REF, {
       worldContentHash: input.definition.contentHash,
       state: input.definition.initialState,
     })).rejects.toThrow(/local encoder model root is missing/u);
@@ -106,12 +106,12 @@ describe("Action Compilation retrieval runtime provider", () => {
       fingerprint: () => MULTILINGUAL_E5_BASE_ASSET.encoderFingerprint,
       onSafetyViolation: (ref, reason) => violations.push(`${ref.manifestHash}:${reason}`),
     });
-    await expect(support.preflight(DEFAULT_ALGORITHM_REF, {
+    await expect(support.preflight(EAGER_REFERENCE_ALGORITHM_REF, {
       worldContentHash: input.definition.contentHash,
       state: input.definition.initialState,
     })).rejects.toThrow(/cache/u);
     expect(violations).toHaveLength(1);
-    expect(violations[0]).toContain(DEFAULT_ALGORITHM_REF.manifestHash);
+    expect(violations[0]).toContain(EAGER_REFERENCE_ALGORITHM_REF.manifestHash);
   });
 
   it("verifies warmed initial passages and resolves tuned pinned Compositions", async () => {
@@ -138,9 +138,9 @@ describe("Action Compilation retrieval runtime provider", () => {
       actionCompilationMaxSlots: 3,
     });
 
-    expect(support.runtime(DEFAULT_ALGORITHM_REF)).toBeDefined();
+    expect(support.runtime(EAGER_REFERENCE_ALGORITHM_REF)).toBeDefined();
     expect(support.runtime(tuned)).toBeDefined();
-    expect(support.runtime(tuned)).not.toBe(support.runtime(DEFAULT_ALGORITHM_REF));
+    expect(support.runtime(tuned)).not.toBe(support.runtime(EAGER_REFERENCE_ALGORITHM_REF));
     await expect(support.preflight(tuned, {
       worldContentHash: input.definition.contentHash,
       state: input.definition.initialState,

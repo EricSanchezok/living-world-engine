@@ -1,3 +1,4 @@
+import { eventModelProfilesSchema, eventModelOverridesSchema, type DecisionEventModels, type DecisionEventModelOverrides } from "./model-bindings";
 import { z } from "zod";
 import type { SimulationState } from "../contracts/model";
 import type { ModelExecutionAudit } from "../contracts/model";
@@ -20,7 +21,7 @@ import { programActivitySchema, validateProgramActivities, type ProgramActivity 
 import { validateRandomReservation, type WorldRandomReservation } from "./randomness";
 import type { DecisionUse } from "../programs/decision-runtime";
 
-export interface DecisionEventModels { decision: string; creation: string; fallback: string }
+export type { DecisionEventModels } from "./model-bindings";
 export interface PendingProgramAttempt {
   attempt: WorldAttempt;
   bound: BoundWorldProgram | null;
@@ -41,8 +42,8 @@ export interface ProgramRuntimeFailure {
   inputHash: string; reason: string; recoverable: true;
 }
 export interface DecisionEventState {
-  kind: "decision-event"; version: 5; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
-  models: DecisionEventModels; privateLibrary: ReturnType<ProgramLibrary["snapshot"]>; worldLibrary: ReturnType<WorldProgramLibrary["snapshot"]>;
+  kind: "decision-event"; version: 6; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
+  models: DecisionEventModels; modelOverrides: DecisionEventModelOverrides; privateLibrary: ReturnType<ProgramLibrary["snapshot"]>; worldLibrary: ReturnType<WorldProgramLibrary["snapshot"]>;
   policyKinds: Record<string, "model" | "external" | "idle" | "replay">;
   agents: Record<string, AgentProgramState>; worldResources: ProgramResources;
   scheduler: ReturnType<EventScheduler["snapshot"]>; decisionCache: JsonObject | null;
@@ -51,9 +52,9 @@ export interface DecisionEventState {
   activities: ProgramActivity[];
   randomReservation: WorldRandomReservation | null;
 }
-const stateSchema = z.object({ kind: z.literal("decision-event"), version: z.literal(5), hash: programHash,
+const stateSchema = z.object({ kind: z.literal("decision-event"), version: z.literal(6), hash: programHash,
   worldHash: z.string().regex(/^sha256:[a-f0-9]{64}$/u), modelCatalogHash: z.string().min(1), registryHash: z.string().min(1),
-  models: z.object({ decision: z.string().min(1), creation: z.string().min(1), fallback: z.string().min(1) }).strict(),
+  models: eventModelProfilesSchema, modelOverrides: eventModelOverridesSchema,
   policyKinds: z.record(z.string(), z.enum(["model", "external", "idle", "replay"])),
   privateLibrary: z.unknown(), worldLibrary: z.unknown(), agents: z.record(z.string(), z.unknown()), worldResources: z.record(z.string(), z.unknown()),
   scheduler: z.unknown(), decisionCache: z.unknown(), randomReservation: z.unknown(),
@@ -68,12 +69,12 @@ export function sealDecisionEventState(input: Omit<DecisionEventState, "hash"> |
   assertJsonValue(body, "decision event state");
   return structuredClone({ ...body, hash: contentHash(body) }) as unknown as DecisionEventState;
 }
-export function initialDecisionEventState(state: Readonly<SimulationState>, models: DecisionEventModels, catalogHash: string, registryHash: string): DecisionEventState {
+export function initialDecisionEventState(state: Readonly<SimulationState>, models: DecisionEventModels, catalogHash: string, registryHash: string, modelOverrides: DecisionEventModelOverrides = models): DecisionEventState {
   const scheduler = new EventScheduler(state.truth.elapsedSeconds);
   for (const agentId of Object.keys(state.agents).sort()) scheduler.schedule({ atSeconds: state.truth.elapsedSeconds, subjectId: agentId,
     kind: "control", inputHash: contentHash({ bootstrap: agentId, worldHash: state.worldHash }), payload: { reason: "initial-goal-coverage" } });
-  return sealDecisionEventState({ kind: "decision-event", version: 5, worldHash: state.worldHash, modelCatalogHash: catalogHash, registryHash,
-    models, policyKinds: Object.fromEntries(Object.keys(state.agents).map(id => [id, "model" as const])),
+  return sealDecisionEventState({ kind: "decision-event", version: 6, worldHash: state.worldHash, modelCatalogHash: catalogHash, registryHash,
+    models, modelOverrides, policyKinds: Object.fromEntries(Object.keys(state.agents).map(id => [id, "model" as const])),
     privateLibrary: new ProgramLibrary().snapshot(), worldLibrary: new WorldProgramLibrary().snapshot(),
     agents: Object.fromEntries(Object.values(state.agents).map(agent => [agent.id, {
       resources: privateProgramResources(projectAgentPerspective(state as SimulationState, agent)),

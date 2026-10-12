@@ -18,9 +18,9 @@ ratings:
 agent:
   id: quartermaster
   model_profiles:
-    bootstrap: agent-deepseek
-    mind: agent-deepseek
-    reaction: agent-deepseek
+    decision: decision-jev
+    creation: creation-deepseek
+    fallback: decision-deepseek
   character:
     persona:
       summary: 管理库存，愿意以一个密封组件交换两个能量电池。要明确条款与实际交付；不因一句请求就认为自己的交换目标已经完成。

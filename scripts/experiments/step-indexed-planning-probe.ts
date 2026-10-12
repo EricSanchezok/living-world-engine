@@ -61,7 +61,7 @@ export async function prepareIndexedPlanningProbe() {
   if (!history.commit.startsWith("cdcd4c3") || catalog.hash !== history.catalogHash) throw new Error("frozen model foundation changed");
   const registry = new ModelRegistry(catalog, history.dataRoot, { fetch: async () => { throw new Error("frozen registry cannot refresh"); } });
   const snapshot = registry.snapshot(history.registrySnapshotHash);
-  const profile = resolveModelProfile(catalog, snapshot, input.definition.modelProfiles.resolution);
+  const profile = resolveModelProfile(catalog, snapshot, input.definition.modelProfiles.creation);
   if (profile.accountId !== "deepseek-api" || profile.modelId !== STEP_E2_PROTOCOL.model || profile.profile.inference.thinking !== "disabled") throw new Error("approved model settings changed");
   const cacheNamespace = contentHash({ trialId: TRIAL, version: 1, purpose: "fresh complete 45/3 source-index qualification with bounded recovery" });
   const cases = [];

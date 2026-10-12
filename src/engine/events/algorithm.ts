@@ -1,3 +1,4 @@
+import { INHERIT_EVENT_MODELS, resolveEventModels, agentEventModels, type DecisionEventModelOverrides } from "./model-bindings";
 import type { RulePackageRegistry } from "../mechanics/rule-package";
 import type { ModelExecutionAudit } from "../contracts/model";
 import { contentHash } from "../models/model-audit";
@@ -21,7 +22,7 @@ import { settleRandomReservation } from "./random-reservation";
 import { worldProgramSources, programWorldResources } from "./resources";
 import { EventScheduler } from "./scheduler";
 import { collectDecisionAudits, collectDecisionUses, initialDecisionEventState, invocationAllocator, readDecisionEventState, sealDecisionEventState,
-  type DecisionEventModels, type DecisionEventState } from "./runtime-state";
+  type DecisionEventState } from "./runtime-state";
 import { prepareProgramWorldWork } from "./world-control";
 import { nativeCandidate } from "./canonical";
 import { settleProgramWorldEvent } from "./settlement";
@@ -30,12 +31,13 @@ import { authorExternalAction } from "./external-action";
 import { deferWorldAttempt } from "./world-recovery";
 import { settleProgramActivities } from "./activities";
 
-export interface DecisionEventConfig extends DecisionEventModels { maxDependencyRounds: number }
+export interface DecisionEventConfig extends DecisionEventModelOverrides { maxDependencyRounds: number }
 export const JEV_EVENT_CONFIG: DecisionEventConfig = { decision: "decision-jev", creation: "creation-deepseek",
   fallback: "decision-deepseek", maxDependencyRounds: 32 };
-export const decisionEventManifest = (config: DecisionEventConfig = JEV_EVENT_CONFIG) =>
-  defineAlgorithmManifest({ id: "decision-event", version: "1", config: config as unknown as JsonObject });
-export const decisionEventAlgorithmRef = (config: DecisionEventConfig = JEV_EVENT_CONFIG) => algorithmRef(decisionEventManifest(config));
+export const SCRIPT_EVENT_CONFIG: DecisionEventConfig = { ...INHERIT_EVENT_MODELS, maxDependencyRounds: 32 };
+export const decisionEventManifest = (config: DecisionEventConfig = SCRIPT_EVENT_CONFIG) =>
+  defineAlgorithmManifest({ id: "decision-event", version: "2", config: config as unknown as JsonObject });
+export const decisionEventAlgorithmRef = (config: DecisionEventConfig = SCRIPT_EVENT_CONFIG) => algorithmRef(decisionEventManifest(config));
 
 export { WorldQuiescentError } from "../runtime/execution";
 interface PreparedNative {
@@ -45,18 +47,19 @@ interface PreparedNative {
 
 export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
   readonly manifest;
-  constructor(private readonly provider: StructuredModelProvider, readonly config: DecisionEventConfig = JEV_EVENT_CONFIG, readonly rulePackages?: RulePackageRegistry) {
+  constructor(private readonly provider: StructuredModelProvider, readonly config: DecisionEventConfig = SCRIPT_EVENT_CONFIG, readonly rulePackages?: RulePackageRegistry) {
     this.manifest = decisionEventManifest(config);
     if (!Number.isSafeInteger(config.maxDependencyRounds) || config.maxDependencyRounds < 1) throw new Error("invalid program round budget");
-    for (const profile of [config.decision, config.creation, config.fallback]) provider.catalog.profile(profile);
+    for (const profile of [config.decision, config.creation, config.fallback]) if (profile !== null) provider.catalog.profile(profile);
   }
   async bootstrap(input: Readonly<BootstrapInput>, context: ExecutionContext) {
     if (input.state.executionState) throw new Error("program bootstrap requires a new instance");
     const registryHash = context.modelScope.modelRegistrySnapshotHash ?? (await this.provider.modelRegistryDiagnostics?.())?.registry.currentHash;
     if (!registryHash) throw new Error("program bootstrap requires a captured model registry");
     const authority = toWorldRuntimeContract(input.definition);
-    const initial = initialDecisionEventState(input.state, { decision: this.config.decision, creation: this.config.creation, fallback: this.config.fallback },
-      this.provider.catalog.hash, registryHash);
+    const modelOverrides = { decision: this.config.decision, creation: this.config.creation, fallback: this.config.fallback };
+    const initial = initialDecisionEventState(input.state, resolveEventModels(authority.modelProfiles, modelOverrides),
+      this.provider.catalog.hash, registryHash, modelOverrides);
     const allocator = invocationAllocator(initial, input.state.revision);
     const roster: Record<string, PolicyBinding> = Object.fromEntries(Object.values(input.state.agents).map(agent => [agent.id, {
       kind: "model", agentId: agent.id, profiles: agent.modelProfiles,
@@ -70,7 +73,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     const modelAudits = collectDecisionAudits([...result.modelAudits, ...prepared.modelAudits]);
     return { schemaVersion: WORLD_STEP_CANDIDATE_SCHEMA_VERSION, sourceStateHash: contentHash(input.state), agentCommits: [],
       modelAudits, diagnostics: { activatedAgentIds: result.activatedAgentIds, reusedAgentIds: [], mindFallbackAgentIds: [] },
-      decisionEvent: { version: 3 as const, producerHash: this.manifest.hash, modelCatalog: this.provider.catalog.snapshot(), authority, control,
+      decisionEvent: { version: 4 as const, producerHash: this.manifest.hash, producer: algorithmRef(this.manifest), modelCatalog: this.provider.catalog.snapshot(), authority, control,
         activityAdmissionInput: prepared.activityAdmissionInput,
         decisions: collectDecisionUses([...result.decisions, ...prepared.decisions]), modelAudits } };
 
@@ -103,7 +106,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
       controlled.control.pending = controlled.control.pending.filter(pending => !cancelled.has(pending.attempt.id));
       const authored = await authorExternalAction(this.provider, source, action, { ...context.modelScope,
         runtimeIdentity: { worldHash: source.worldHash, revision: source.revision }, modelRegistrySnapshotHash: initial.registryHash,
-        profileId: initial.models.creation, invocationBase: allocator.next(action.agentId, 2) });
+        profileId: agentEventModels(source, initial, action.agentId).creation, invocationBase: allocator.next(action.agentId, 2) });
       if (authored.audit) controlled.modelAudits.push(authored.audit);
       if (authored.status === "ready") controlled.control.pending.push({ attempt: authored.attempt, bound: null, atSeconds: null, dependencyHash: "", failure: null, recovery: null });
       else controlled.control.failures.push({ ownerId: action.agentId, phase: "utterance", inputHash: contentHash(action), reason: authored.reason, recoverable: true });
@@ -206,11 +209,12 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     if (prepared.event) {
       const preview = settleProgramWorldEvent(input.state, prepared.control, prepared.event, authority, this.manifest.hash, [], this.rulePackages);
       const revised = await Promise.allSettled(preview.perceptionBeliefPatches.map(async patch => {
+        const models = agentEventModels(preview.state, prepared.control, patch.agentId);
         const evidenceIds = patch.operations.flatMap(operation => operation.kind === "upsert_evidence" ? [operation.evidence.id] : []);
         return reviseEventBeliefs(runtime, preview.state, patch.agentId, evidenceIds, prepared.control.agents[patch.agentId]?.resources,
           { ...context.modelScope, modelRegistrySnapshotHash: prepared.control.registryHash,
-            runtimeIdentity: { worldHash: input.state.worldHash, revision: input.state.revision }, profileId: prepared.control.models.decision,
-            fallbackProfileId: prepared.control.models.fallback, creationProfileId: prepared.control.models.creation,
+            runtimeIdentity: { worldHash: input.state.worldHash, revision: input.state.revision }, profileId: models.decision,
+            fallbackProfileId: models.fallback, creationProfileId: models.creation,
             nextInvocation: () => allocator.next(patch.agentId) });
       }));
       const errors = revised.flatMap(value => value.status === "rejected" ? [value.reason] : []);

@@ -28,7 +28,7 @@ ratings:
   - { id: "craft:lord-octa", definition_id: craft, value: 2 }
 agent:
   id: lord-octa
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 把领地看成一整年才能结算的牛群账：他愿意立刻追赶劫掠者，却不会为一次漂亮冲锋毁掉赶牛、腌肉和冬季供给。

@@ -151,7 +151,7 @@ describe("world import", () => {
     const manifest = path.join(world, "script.yaml");
     writeFileSync(
       manifest,
-      readFileSync(manifest, "utf8").replace("truth-deepseek", "missing-profile"),
+      readFileSync(manifest, "utf8").replace("decision-jev", "missing-profile"),
       "utf8",
     );
     expect(() => parseWorldArchive(zipDirectory(world).toBuffer(), modelCatalog))

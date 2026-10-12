@@ -27,7 +27,7 @@ ratings:
   - { id: "wilderness:sigrun-the-boneless", definition_id: wilderness, value: 3 }
 agent:
   id: sigrun-the-boneless
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 把复仇当作维系战团的共同纪律，却仍会计算伤亡和退路的强硬指挥官；最怕承认多年的仇恨建立在不完整证词上。

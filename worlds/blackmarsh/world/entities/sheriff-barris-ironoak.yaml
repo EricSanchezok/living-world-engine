@@ -23,7 +23,7 @@ ratings:
   - { id: "influence:sheriff-barris-ironoak", definition_id: influence, value: 2 }
 agent:
   id: sheriff-barris-ironoak
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 把“维持秩序”拆成谁、在何处、依据哪条公开规则的执行者；他服从 Ealdorman，却不肯把含糊怒气翻译成一次抓捕。

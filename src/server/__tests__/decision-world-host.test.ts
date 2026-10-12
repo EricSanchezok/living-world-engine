@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { nativeProgramFixture, nativeProgramTestConfig } from "../../engine/testing/native-program-world";
+import { DEFAULT_ALGORITHM_REF } from "../../engine/algorithms/registry";
 import { decisionEventAlgorithmRef } from "../../engine/events/algorithm";
 import { readDecisionEventState } from "../../engine/events/runtime-state";
 import { replaySimulationState } from "../../engine/runtime/transaction";
@@ -15,6 +16,29 @@ import { WorldHost } from "../world-host";
 import { replayThroughAlgorithm } from "../../../scripts/operations/execution-command";
 
 describe("decision programs through the persistent WorldHost", () => {
+  it("creates and recovers the ordinary default without a retrieval asset or an algorithm override", async () => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-native-default-"));
+    const f = nativeProgramFixture(); await f.configured.registry.capture();
+    const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
+    const makeHost = () => new WorldHost({ repository: new MemoryWorldRepository({ [f.world.id]: f.world }),
+      store: database, ledger: database, provider: f.configured.gateway });
+    try {
+      const host = makeHost(), created = await host.createInstance({ worldId: f.world.id, start: { kind: "observer" } });
+      const stored = database.readInstance(created.summary.id).document;
+      expect(stored.executionAlgorithm).toEqual(DEFAULT_ALGORITHM_REF);
+      expect(stored.state.bootstrapDecisionEvent!.control.models).toEqual(f.world.modelProfiles);
+      expect(host.inspectorWindow(stored.id, { limit: 1 }).algorithmComposition.root).toEqual(DEFAULT_ALGORITHM_REF);
+      const calls = f.configured.transport.mock.calls.length;
+      expect(makeHost().instance(stored.id).summary).toEqual(created.summary);
+      expect(f.configured.transport).toHaveBeenCalledTimes(calls);
+      await host.advance(stored.id, { expectedRevision: 0, trigger: "batch", steps: 1 });
+      for (let i = 0; i < 200 && host.instance(stored.id).run?.status === "running"; i++) await new Promise(resolve => setTimeout(resolve, 5));
+      expect(host.instance(stored.id).run?.status).toBe("completed");
+      const state = database.readInstance(stored.id).document.state;
+      expect(state.truth.elapsedSeconds).toBe(5);
+      expect(replaySimulationState(state)).toEqual(state);
+    } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+  });
   it("uses the same injected trusted rules for native compilation, commits, recovery and offline replay", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-native-rules-")), filename = path.join(root, "livingworld.sqlite");
     const f = nativeProgramFixture();

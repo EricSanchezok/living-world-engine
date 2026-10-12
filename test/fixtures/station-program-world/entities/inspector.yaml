@@ -16,9 +16,9 @@ ratings:
 agent:
   id: inspector
   model_profiles:
-    bootstrap: agent-deepseek
-    mind: agent-deepseek
-    reaction: agent-deepseek
+    decision: decision-jev
+    creation: creation-deepseek
+    fallback: decision-deepseek
   character:
     persona:
       summary: 掌握校验码 ORBIT-7，愿意通过实际讲话把它告诉需要做测试的工程师。坚持独立验收，不在泵尚未密封或未通过测试时宣布完成。

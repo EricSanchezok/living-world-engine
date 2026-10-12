@@ -8,7 +8,7 @@ import { effectProfileDomainsRequest, EFFECT_PROFILE_DOMAINS } from "../../src/e
 import { planningActionFramesRequest, PLANNING_ACTION_FRAMES } from "../../src/engine/benchmarks/step-efficiency/planning-action-frames";
 import { planningDecisionOrderRequest, PLANNING_DECISION_ORDER } from "../../src/engine/benchmarks/step-efficiency/planning-decision-order";
 import { factorChoiceProductsRequest, FACTOR_CHOICE_PRODUCTS } from "../../src/engine/benchmarks/step-efficiency/factor-choice-products";
-import { DEFAULT_ALGORITHM_REF, registerBuiltinAlgorithms } from "../../src/engine/algorithms/registry";
+import { EAGER_REFERENCE_ALGORITHM_REF, registerBuiltinAlgorithms } from "../../src/engine/algorithms/registry";
 import { algorithmRef, type AlgorithmManifest, type WorldStepInput, type WorldStepPreparation } from "../../src/engine/runtime/execution";
 import { RecordingRuntimeObserver, type RuntimeEvent } from "../../src/engine/runtime/observability";
 import { contentHash } from "../../src/engine/models/model-audit";
@@ -49,7 +49,7 @@ export function reconstructPreparedPlayerStep(source: SourceExport, counterfactu
   if (!recordedInput || !recordedPreparation || Object.keys(recordedInput.state.agents).length !== 49 || Object.values(recordedInput.policyRoster).filter(policy => policy.kind === "external").length !== 1) throw new Error("Expected a complete 48 NPC plus one player source");
   const input = structuredClone(recordedInput), preparation = structuredClone(recordedPreparation);
   const recordedRef = algorithmRef(source.execution.manifest);
-  const ref = counterfactual ? DEFAULT_ALGORITHM_REF : recordedRef;
+  const ref = counterfactual ? EAGER_REFERENCE_ALGORITHM_REF : recordedRef;
   // This explicitly selected research boundary imports prepared canonical evidence
   // into the current producer. It is not a replay, save migration or world commit.
   if (counterfactual) {

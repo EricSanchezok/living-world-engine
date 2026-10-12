@@ -23,9 +23,9 @@ ratings:
 agent:
   id: governor-tyrilas
   model_profiles:
-    bootstrap: agent-deepseek
-    mind: agent-deepseek
-    reaction: agent-deepseek
+    decision: decision-jev
+    creation: creation-deepseek
+    fallback: decision-deepseek
   character:
     persona:
       summary: 克制而务实的精灵总督，把托管视为危险消失前不得卸下的责任，同时知道城市不能靠占领永久治理。

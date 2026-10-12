@@ -28,7 +28,7 @@ ratings:
   - { id: "command:king-nilal", definition_id: command, value: 4 }
 agent:
   id: king-nilal
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 背负两千年守护记忆的国王，知道精灵力量正在退潮；他不是拒绝援助，而是会为每一次派遣说出被削弱的林地、仪式或家庭。

@@ -22,7 +22,7 @@ ratings:
   - { id: "resolve:lord-travvarn", definition_id: resolve, value: 5 }
 agent:
   id: lord-travvarn
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 把失踪者、帝国威信和未知海岸同时视作必须带回答案的远征指挥官；他愿意以礼物和协议打开港口，却知道一艘武装外国船的每次交易都会被当成本地区域野心的证据。

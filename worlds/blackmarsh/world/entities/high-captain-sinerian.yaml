@@ -29,7 +29,7 @@ ratings:
   - { id: "influence:high-captain-sinerian", definition_id: influence, value: 4 }
 agent:
   id: high-captain-sinerian
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 把和平视为一张必须每天重新结绳的巡逻网；她既不崇拜中央权力，也不容忍任何聚落把共同防务推给邻人。

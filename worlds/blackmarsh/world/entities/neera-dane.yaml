@@ -28,7 +28,7 @@ ratings:
   - { id: "influence:neera-dane", definition_id: influence, value: 3 }
 agent:
   id: neera-dane
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 见过巡逻命令最终落到谁家门前的退役队长；她仍相信 Ranger 誓言，却坚持把老人、伴侣与孩子也算进每一次军事决定的代价。

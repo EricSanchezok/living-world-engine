@@ -1,3 +1,5 @@
+import { resolveEventModels, eventModelOverridesSchema } from "./model-bindings";
+import { validateAlgorithmRef } from "../runtime/execution";
 import type { RulePackageRegistry } from "../mechanics/rule-package";
 import type { ActionOutcome, AgentActionProposal, CommittedStep, SimulationState } from "../contracts/model";
 import { contentHash } from "../models/model-audit";
@@ -28,10 +30,14 @@ function validateAuthority(state: Readonly<SimulationState>, authority: WorldRun
 }
 
 export function applyDecisionEventBootstrap(source: Readonly<SimulationState>, proof: DecisionEventBootstrap): SimulationState {
-  if (source.revision !== 0 || source.history.length || source.bootstrapDecisionEvent || proof.version !== 3) throw new Error("native bootstrap requires a new instance");
+  if (source.revision !== 0 || source.history.length || source.bootstrapDecisionEvent || proof.version !== 4) throw new Error("native bootstrap requires a new instance");
   if (new ModelCatalog(proof.modelCatalog).hash !== proof.control.modelCatalogHash) throw new Error("native bootstrap model catalog mismatch");
   validateAuthority(source, proof.authority);
-  const initial = initialDecisionEventState(source, proof.control.models, proof.control.modelCatalogHash, proof.control.registryHash);
+  validateAlgorithmRef(proof.producer);
+  const overrides = eventModelOverridesSchema.parse(Object.fromEntries(["decision", "creation", "fallback"].map(key => [key, proof.producer.config[key]])));
+  if (proof.producer.manifestHash !== proof.producerHash || !equal(overrides, proof.control.modelOverrides) ||
+    !equal(resolveEventModels(proof.authority.modelProfiles, overrides), proof.control.models)) throw new Error("native bootstrap model configuration differs from its producer");
+  const initial = initialDecisionEventState(source, proof.control.models, proof.control.modelCatalogHash, proof.control.registryHash, overrides);
   const roster = Object.fromEntries(Object.values(source.agents).map(agent => [agent.id, {
     kind: "model" as const, agentId: agent.id, profiles: agent.modelProfiles,
   }]));
@@ -77,8 +83,6 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
     }
     if (admitted.pending.length !== proof.preparedControl.pending.length) throw new Error("activity admission pending membership changed");
   }
-  if (verifyControl) validateControlTransition(source, before, proof.preparedControl, proof.authority, producerHash,
-    proof.decisions, proof.modelAudits, proof.policyRoster, proof.request.externalActions);
   let state: SimulationState, computed: DecisionEventState;
   let observations: CommittedStep["observations"] = [], beliefPatches: CommittedStep["beliefPatches"] = [], characterPatches: CommittedStep["characterPatches"] = [];
   if (proof.event) {
@@ -96,6 +100,8 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
     const goals = applyProgramGoalEvidence(state, computed, source.revision);
     beliefPatches = goals.beliefPatches; characterPatches = goals.characterPatches;
   }
+  if (verifyControl) validateControlTransition(source, before, proof.preparedControl, proof.authority, producerHash,
+    proof.decisions, proof.modelAudits, proof.policyRoster, proof.request.externalActions, state);
   const executionOnly = (value: DecisionEventState) => ({ ...value, hash: "", decisionCache: null, modelOrdinals: null });
   if (!equal(executionOnly(computed), executionOnly(proof.finalControl))) throw new Error("final program state differs from canonical settlement");
   state.executionState = { producerHash, data: structuredClone(proof.finalControl) as unknown as JsonObject };

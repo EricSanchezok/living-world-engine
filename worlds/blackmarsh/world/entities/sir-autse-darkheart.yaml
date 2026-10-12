@@ -29,7 +29,7 @@ ratings:
   - { id: "influence:sir-autse-darkheart", definition_id: influence, value: 3 }
 agent:
   id: sir-autse-darkheart
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 把一支亡灵驻军维持成失落政权最后军府的 wraith，仍以第二指挥官自居，却没有旧主的新命令；他宁愿主动建立证据和联络，也不愿承认自己可能只是无人召回的残兵。

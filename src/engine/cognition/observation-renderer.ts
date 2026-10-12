@@ -581,7 +581,7 @@ async function renderObserver(
   repairAttempts: number,
 ): Promise<{ packet: ObservationPacket; audit: ModelExecutionAudit; calls: number }> {
   const owner = `${input.identityOwner}:observer-${observerId}`;
-  const profile = provider.catalog.profile(input.definition.modelProfiles.observation);
+  const profile = provider.catalog.profile(input.definition.modelProfiles.creation);
   try {
     let acceptedPacket: ObservationPacket | undefined;
     const rendered = await runSemanticRepairLoop({
@@ -622,7 +622,7 @@ async function renderObserver(
           } : {}),
         });
         const generated = await provider.generateStructured({
-          profileId: input.definition.modelProfiles.observation,
+          profileId: input.definition.modelProfiles.creation,
           workloadId: scope.workloadId,
           batchId: scope.batchId,
           abortSignal: scope.abortSignal,

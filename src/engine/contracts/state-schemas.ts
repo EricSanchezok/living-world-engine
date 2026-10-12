@@ -473,9 +473,9 @@ export const agentStateSchema = z.strictObject({
   id: semanticIdSchema,
   entityId: semanticIdSchema,
   modelProfiles: z.strictObject({
-    bootstrap: safeIdSchema,
-    mind: safeIdSchema,
-    reaction: safeIdSchema,
+    creation: safeIdSchema,
+    decision: safeIdSchema,
+    fallback: safeIdSchema,
   }),
   character: agentCharacterStateSchema,
   belief: beliefStateSchema,

@@ -1,3 +1,4 @@
+import { agentEventModels } from "../engine/events/model-bindings";
 import { randomUUID } from "node:crypto";
 import { rmSync } from "node:fs";
 import path from "node:path";
@@ -299,7 +300,7 @@ const ARRIVAL_PROMPT = promptBundle("arrival-generator");
 
 const ARRIVAL_PRODUCER_MANIFEST = defineEngineOperationManifest({
   id: "arrival-generator",
-  version: "2",
+  version: "3",
   config: { promptVersion: ARRIVAL_PROMPT.version },
 });
 
@@ -2662,19 +2663,23 @@ export class WorldHost {
     fallback: string,
   ): Promise<ArrivalView> {
     const participant = document.participants[participantId];
-    const definition = this.definition(document);
+    const programControl = document.state.executionState?.data.kind === "decision-event"
+      ? document.state.executionState.data as unknown as DecisionEventState : null;
+    const creationProfile = programControl ? agentEventModels(document.state, programControl, participant.agentId).creation
+      : document.state.agents[participant.agentId]!.modelProfiles.creation;
     const execution = this.beginExecution(document, "interactive", "arrival", ARRIVAL_PRODUCER_MANIFEST);
     try {
       const scope = {
+        ...(programControl ? { modelRegistrySnapshotHash: programControl.registryHash } : {}),
         workloadId: document.id,
         batchId: `arrival:${participantId}`,
         correlation: { executionId: execution?.id, instanceId: document.id, revision: document.state.revision },
         observer: execution?.trace ?? this.runtimeObserver,
         runtimeIdentity: { worldHash: document.state.worldHash, revision: document.state.revision },
       };
-      const identity = modelInvocationIdentity(scope, "arrival-generator", participant.agentId, 1);
-      const correlation = modelInvocationCorrelation(scope, "arrival-generator", participant.agentId, identity, {
-        logicalInvocationId: modelInvocationLogicalId(scope, "arrival-generator", participant.agentId),
+      const identity = modelInvocationIdentity(scope, "creation", participant.agentId, 1);
+      const correlation = modelInvocationCorrelation(scope, "creation", participant.agentId, identity, {
+        logicalInvocationId: modelInvocationLogicalId(scope, "creation", participant.agentId),
         semanticRepairAttempt: 0,
       });
       const referenceResolver = createAgentReferenceResolver(document.state.agents[participant.agentId], []);
@@ -2682,8 +2687,8 @@ export class WorldHost {
         ...scope,
         ...identity,
         correlation,
-        profileId: definition.modelProfiles.arrival,
-        role: "arrival-generator",
+        profileId: creationProfile,
+        role: "creation",
         subjectId: participant.agentId,
         promptVersion: ARRIVAL_PROMPT.version,
         schemaName: "arrival",
@@ -2700,6 +2705,7 @@ export class WorldHost {
             step: document.state.step,
           },
           task: {
+            kind: "arrival",
             assignment: {
               targetHandles: [referenceResolver.handleFor("agent", participant.agentId)],
               availableHandles: referenceResolver.catalog.candidates.map((candidate) => candidate.handle),

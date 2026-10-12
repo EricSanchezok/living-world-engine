@@ -54,7 +54,7 @@ export function nativeProgramFixture(options: { goalVerdict?: "yes" | "no" | "un
       wire.includes("Check whether the authored world sources and current attempted action justify every declared random request") ? "yes"
       : wire.includes("actual long-term goal") ? options.goalVerdict ?? "unknown" : options.worldVerdict ?? "yes";
     return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: id === "expand" ? "unchanged" : choice }])) };
-  }, ["world-test", "truth-deepseek", "agent-deepseek"]);
+  }, ["world-test", "decision-jev", "creation-deepseek", "decision-deepseek"]);
   const roster: Record<string, PolicyBinding> = { keeper: { kind: "model", agentId: "keeper", profiles: world.initialState.agents.keeper!.modelProfiles },
     player: options.bothActors ? { kind: "model", agentId: "player", profiles: world.initialState.agents.player!.modelProfiles }
       : { kind: "external", agentId: "player", participantId: "human" } };

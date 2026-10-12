@@ -38,9 +38,9 @@ World instances, experiment variants, Ledger producers, preparations, replay, an
 
 ## Standard composition
 
-Relational RRF v2 preserves the mandatory reference union as a budget floor when it exceeds the proportional shortlist budget. Diagnostics report both budgets and floor expansion; ordinary larger catalogs keep the same proportional limit. The root selection remains fixed through repair.
+New ordinary instances select `decision-event@2`. Its configuration inherits separate world and Agent decision, creation and explicit context-fallback profiles from the immutable script. Explicit experiment overrides are pinned in the producer. The [program and event runtime](world-program-runtime.md) owns execution and validation; the generated catalog owns the exact registered identity. This default needs no local retrieval encoder or warmed candidate cache.
 
-New ordinary instances select the [standard integrated composition](../../src/engine/algorithms/standard-composition.ts), including reversible compilation, relational retrieval, source-indexed reviewed planning, shared transport and source-bound observations. The generated catalog owns the exact tree and settings. Basic composition factories remain explicit controls for tests and research; they are not an automatic fallback. Default adoption does not certify open semantic correctness or continuous-play latency. [The rollout contract](../specs/0121-standard-integrated-execution-composition.md) defines selection and verification.
+The explicit eager reference compositions remain available during replacement qualification. They are never an automatic fallback. The frozen baseline revision and the three-arm qualification contract are recorded in [Spec 0181](../specs/0181-jev-decision-event-engine.md). Default selection does not establish its cost, latency or task-completion targets.
 
 Persisted instances and replay keep their complete producer identity when the host default changes. Use a new instance to select the current standard. Missing historical definitions fail before execution instead of silently changing a save's algorithm.
 

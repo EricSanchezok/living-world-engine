@@ -1,7 +1,7 @@
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { loadWorldScript } from "../../../script/world-loader";
-import { DEFAULT_ALGORITHM_REF } from "../../algorithms/registry";
+import { EAGER_REFERENCE_ALGORITHM_REF } from "../../algorithms/registry";
 import { compileActions } from "../../algorithms/eager-reference/action-compiler";
 import { RecordingRuntimeObserver } from "../../runtime/observability";
 import { DeterministicModelProvider } from "../../testing/model-provider";
@@ -34,8 +34,8 @@ describe("FullCatalog reference regenerator", () => {
       observer,
       runtimeIdentity: { worldHash: state.worldHash, revision: state.revision },
       modelRegistrySnapshotHash: "a".repeat(64),
-      executionAlgorithmRef: DEFAULT_ALGORITHM_REF,
-    }, definition.modelProfiles.grounding, 12);
+      executionAlgorithmRef: EAGER_REFERENCE_ALGORITHM_REF,
+    }, definition.modelProfiles.creation, 12);
     const [source] = readActionCompilationCapturedSources(observer.events);
     expect(source).toBeDefined();
     const reference = await regenerateActionCompilationFullCatalog(source!, new DeterministicModelProvider(provider.catalog));

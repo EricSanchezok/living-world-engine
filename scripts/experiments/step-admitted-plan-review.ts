@@ -42,7 +42,7 @@ export async function prepareAdmittedPlanReview() {
     scope: { modelRegistrySnapshotHash: snapshot.hash }, onVerifierRequest: (request, slot) => { requests[slot] = request; } });
   if (!result.firstHttpComplete || requests.length !== 12 || result.rows.some((row, slot) =>
     contentHash(row.verifierContext) !== contentHash(admitted.result.rows[slot].verifierContext))) throw new Error("replayed verifier context changed");
-  const profile = resolveModelProfile(catalog, snapshot, source.definition.modelProfiles.causalVerifier);
+  const profile = resolveModelProfile(catalog, snapshot, source.definition.modelProfiles.creation);
   if (profile.accountId !== "deepseek-api" || profile.modelId !== STEP_E2_PROTOCOL.model || profile.profile.inference.thinking !== "disabled" ||
     profile.profile.max_output_tokens !== STEP_E2_PROTOCOL.outputTokenCeiling) throw new Error("review model binding changed");
   const captures: ReturnType<typeof admissionRequestEvidence>[] = [];

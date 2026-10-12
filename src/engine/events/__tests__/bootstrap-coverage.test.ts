@@ -11,7 +11,7 @@ describe("executable initial goal coverage", () => {
     const f = nativeProgramFixture(); await f.configured.registry.capture();
     const engine = new SimulationEngine(f.world, new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig));
     const boot = await engine.bootstrapAgents(), proof = boot.bootstrapDecisionEvent!, control = proof.control;
-    expect(proof.version).toBe(3);
+    expect(proof.version).toBe(4);
     expect(boot.truth).toEqual(f.world.initialState.truth);
     expect(control.worldLibrary.entries).toHaveLength(1);
     expect(control.pending[0]).toMatchObject({ atSeconds: 5, failure: null, bound: { program: { definition: { id: "ask-reachable" } } } });

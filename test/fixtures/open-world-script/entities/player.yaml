@@ -13,9 +13,9 @@ ratings:
 agent:
   id: player
   model_profiles:
-    bootstrap: agent-deepseek
-    mind: agent-deepseek
-    reaction: agent-deepseek
+    decision: decision-jev
+    creation: creation-deepseek
+    fallback: decision-deepseek
   character:
     persona: { summary: 一个刚来到石门前的旅人。, voice: 谨慎, evidence_ids: [] }
     traits: []

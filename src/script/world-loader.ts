@@ -353,11 +353,7 @@ function agentFrom(document: EntityDocument): AgentState | undefined {
   return {
     id: document.agent.id,
     entityId: document.id,
-    modelProfiles: {
-      bootstrap: document.agent.model_profiles.bootstrap,
-      mind: document.agent.model_profiles.mind,
-      reaction: document.agent.model_profiles.reaction,
-    },
+    modelProfiles: structuredClone(document.agent.model_profiles),
     character: characterFrom(document.agent),
     belief: beliefFrom(document.agent),
     bindings: Object.fromEntries(
@@ -680,32 +676,14 @@ export function buildWorldDefinition(
             relationshipHooks: [...origin.relationship_hooks],
             risks: [...origin.risks],
             mechanicsProfileId: origin.mechanics_profile_id,
-            modelProfiles: origin.model_profiles ?? {
-              bootstrap: manifest.model_profiles.dynamic_agent.bootstrap,
-              mind: manifest.model_profiles.dynamic_agent.mind,
-              reaction: manifest.model_profiles.dynamic_agent.reaction,
-            },
+            modelProfiles: structuredClone(origin.model_profiles ?? manifest.model_profiles),
             ...(image ? { image: { hash: image.hash, alt: origin.image!.alt } } : {}),
             fallbackArrival: origin.fallback_arrival,
           };
         }),
       } : null,
       contentHash: worldHash,
-      modelProfiles: {
-        perception: manifest.model_profiles.perception,
-        reactionRouting: manifest.model_profiles.reaction_routing,
-        resolution: manifest.model_profiles.resolution,
-        transition: manifest.model_profiles.transition,
-        causalVerifier: manifest.model_profiles.causal_verifier,
-        grounding: manifest.model_profiles.grounding,
-        observation: manifest.model_profiles.observation,
-        arrival: manifest.model_profiles.arrival,
-        dynamicAgent: {
-          bootstrap: manifest.model_profiles.dynamic_agent.bootstrap,
-          mind: manifest.model_profiles.dynamic_agent.mind,
-          reaction: manifest.model_profiles.dynamic_agent.reaction,
-        },
-      },
+      modelProfiles: structuredClone(manifest.model_profiles),
       laws: laws.laws,
       disclosure: { defaultCheckVisibility: laws.disclosure.default_check_visibility },
       rulePackages: rulePackages.validate(mechanicsDocument.rule_packages.map((reference) => ({

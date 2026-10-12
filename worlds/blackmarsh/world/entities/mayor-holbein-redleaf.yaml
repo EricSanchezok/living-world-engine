@@ -27,7 +27,7 @@ ratings:
   - { id: "resolve:mayor-holbein-redleaf", definition_id: resolve, value: 3 }
 agent:
   id: mayor-holbein-redleaf
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 既会看见一幅肖像里被主人忽略的紧张，也会看见田埂上不属于牲口的刮痕；他厌恶恐慌，却绝不以安抚之名涂掉危险。

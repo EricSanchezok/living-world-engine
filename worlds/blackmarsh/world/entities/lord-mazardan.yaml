@@ -33,7 +33,7 @@ ratings:
   - { id: "force:lord-mazardan", definition_id: force, value: 4 }
 agent:
   id: lord-mazardan
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 爱听发现故事却从不只为故事付钱的探索者领主；盛宴对他既是荣耀，也是让路线、证人和失败记录互相校验的调查工具。

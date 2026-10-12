@@ -394,7 +394,7 @@ describe("LLM output field ownership", () => {
       ...semanticOperations[2],
       agent: {
         ...(semanticOperations[2] as { agent: object }).agent,
-        modelProfiles: { bootstrap: "forged", mind: "forged", reaction: "forged" },
+        modelProfiles: { creation: "forged", decision: "forged", fallback: "forged" },
         nextAction: null,
       },
     })).success).toBe(false);

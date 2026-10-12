@@ -21,7 +21,7 @@ function fixture(mode: "ready" | "repair" | "failed" | "unknown" | "skip") {
     const body = JSON.parse(String(init?.body)) as Record<string, unknown>;
     const wire = (body.messages as Array<{ content: string }>).map(message => message.content).join("\n");
     const respond = (value: unknown) => Response.json({ id: `belief-${f.configured.transport.mock.calls.length}`,
-      model: "scripted:world-test", created: 1, choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(value) }, finish_reason: "stop" }],
+      model: body.model, created: 1, choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(value) }, finish_reason: "stop" }],
       usage: { prompt_tokens: 100, completion_tokens: 10, total_tokens: 110 } });
     if (wire.includes("You propose new private beliefs")) {
       creations += 1;
@@ -47,6 +47,19 @@ function fixture(mode: "ready" | "repair" | "failed" | "unknown" | "skip") {
 }
 
 describe("new private beliefs from actual delivered evidence", () => {
+  it("uses the Agent's creation capability for belief admission and offline replay", async () => {
+    const f = fixture("ready");
+    f.world.initialState.agents.player!.modelProfiles.creation = "world-test";
+    f.world.historyBaseHash = historyReplayBaseHash(f.world.initialState);
+    await f.configured.registry.capture();
+    const engine = new SimulationEngine(f.world, new DecisionEventAlgorithm(f.configured.gateway));
+    const boot = await engine.bootstrapAgents();
+    const result = await engine.step(f.roster, { expectedRevision: 0, trigger: "manual", externalActions: [] });
+    const proof = restoreDecisionEventStep(boot, result.committed.decisionEvent!);
+    expect(proof.beliefRevisions.find(value => value.agentId === "player")!.creation!.audit!.profileId).toBe("world-test");
+    expect(proof.preparedControl.models.creation).toBe("creation-deepseek");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it.each(["ready", "repair", "unknown"] as const)("creates and judges a %s interpretation through the real entry and replays without inference", async mode => {
     const f = fixture(mode); await f.configured.registry.capture();
     const algorithm = new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig);

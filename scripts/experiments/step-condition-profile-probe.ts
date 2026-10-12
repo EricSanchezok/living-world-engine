@@ -59,7 +59,7 @@ export async function prepareConditionProfileProbe() {
   if (history.commit !== "3d30e819ebd2ecd44a24d9fe6f2d5c33e297c1b9" || history.catalogHash !== catalog.hash) throw new Error("historical model foundation changed");
   const registry = new ModelRegistry(catalog, history.dataRoot, { fetch: async () => { throw new Error("frozen registry cannot refresh"); } });
   const snapshot = registry.snapshot(history.registrySnapshotHash);
-  const profile = resolveModelProfile(catalog, snapshot, input.definition.modelProfiles.resolution);
+  const profile = resolveModelProfile(catalog, snapshot, input.definition.modelProfiles.creation);
   if (profile.accountId !== "deepseek-api" || profile.modelId !== STEP_E2_PROTOCOL.model || profile.profile.inference.thinking !== "disabled") throw new Error("model binding changed");
   const cacheNamespace = contentHash({ trialId: TRIAL, version: 1 });
   const captures: Array<ReturnType<typeof admissionRequestEvidence>> = [];

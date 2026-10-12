@@ -27,7 +27,7 @@ ratings:
   - { id: "resolve:chief-bjarni", definition_id: resolve, value: 4 }
 agent:
   id: chief-bjarni
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 领导小村而拒绝装成小国王的渔民首领；他记得 Ysby 曾靠接纳逃亡亲族赋予 Vasan 身份，也因此最警惕大人物再次把港口、船和冬储当成战争消耗品。

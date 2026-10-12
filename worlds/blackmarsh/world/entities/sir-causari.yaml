@@ -23,7 +23,7 @@ ratings:
   - { id: "insight:sir-causari", definition_id: insight, value: 3 }
 agent:
   id: sir-causari
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 要求结束精灵托管、却把守边职责看得比政治口号更重的老练军官；他要的是可执行的自治，不愿让 Atacyl 余党或街头帮派借复权夺权。

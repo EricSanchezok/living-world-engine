@@ -22,7 +22,7 @@ ratings:
   - { id: "finesse:egil-longhair", definition_id: finesse, value: 3 }
 agent:
   id: egil-longhair
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 把战利品看作证明自己能带船远航、带人回家的公开凭证的袭击者；他渴望日出后的胜利，却不会把原作的一句计划误当成必须牺牲两船人的命运。

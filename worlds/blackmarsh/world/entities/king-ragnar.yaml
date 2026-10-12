@@ -32,7 +32,7 @@ ratings:
   - { id: "resolve:king-ragnar", definition_id: resolve, value: 2 }
 agent:
   id: king-ragnar
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 曾能亲率长船作战、如今把失去王戒视作众人都在审判自己的流亡王；傲慢和自厌让他以酒与暴怒逃避治理，但尚未完全放弃证明自己配得上王号。

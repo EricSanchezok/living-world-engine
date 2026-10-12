@@ -691,7 +691,7 @@ async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
     let draftRound: ModelCheckRequestDraft[] = [];
     const call = await generateValidated({
       provider: input.provider,
-      profileId: input.definition.modelProfiles.perception,
+      profileId: input.definition.modelProfiles.creation,
       role: "truth-perception",
       subjectId: input.identityOwner,
       promptId: "truth-perception",
@@ -1273,7 +1273,7 @@ function materializeWorldOperation(
         ...structuredClone(operation),
         agent: {
           ...structuredClone(operation.agent),
-          modelProfiles: structuredClone(definition.modelProfiles.dynamicAgent),
+          modelProfiles: structuredClone(definition.modelProfiles),
           character: {
             persona: {
               ...structuredClone(operation.agent.character.persona),
@@ -2038,7 +2038,7 @@ export class TruthEngine {
     });
     const generated = await generateValidated({
       provider: this.provider,
-      profileId: snapshot.definition.modelProfiles.causalVerifier,
+      profileId: snapshot.definition.modelProfiles.creation,
       role: "causal-verifier",
       subjectId,
       promptId: "causal-verifier",
@@ -2234,7 +2234,7 @@ export class TruthEngine {
           });
           const prompt = promptBundle("truth-transition");
           const generated = await this.provider.generateStructured({
-            profileId: input.definition.modelProfiles.transition,
+            profileId: input.definition.modelProfiles.creation,
             workloadId: scope.workloadId,
             batchId: scope.batchId,
             abortSignal: scope.abortSignal,
@@ -2471,7 +2471,7 @@ export class TruthEngine {
           : resolutionContinuationDirectiveSchema) as z.ZodType<z.infer<typeof resolutionDirectiveSchema>>;
         call = await generateValidated<z.infer<typeof resolutionDirectiveSchema>>({
           provider: this.provider,
-          profileId: input.definition.modelProfiles.resolution,
+          profileId: input.definition.modelProfiles.creation,
           role: "truth-resolution",
           subjectId: truthSubject,
           promptId: "truth-resolution",
@@ -2574,7 +2574,7 @@ export class TruthEngine {
             };
             const result = await generateValidated({
               provider: this.provider,
-              profileId: input.definition.modelProfiles.resolution,
+              profileId: input.definition.modelProfiles.creation,
               role: "truth-resolution",
               subjectId: `${truthSubject}:repair:${action.id}`,
               promptId: "truth-resolution",
@@ -2634,7 +2634,7 @@ export class TruthEngine {
         if (acceptedPlans.length === 0) throw new Error("accepted resolution plans were not materialized");
         const verification = await generateValidated({
           provider: this.provider,
-          profileId: input.definition.modelProfiles.causalVerifier,
+          profileId: input.definition.modelProfiles.creation,
           role: "causal-verifier",
           subjectId: truthSubject,
           promptId: "resolution-plan-verifier",
@@ -2754,7 +2754,7 @@ export class TruthEngine {
               }));
             const result = await generateValidated({
               provider: this.provider,
-              profileId: input.definition.modelProfiles.resolution,
+              profileId: input.definition.modelProfiles.creation,
               role: "truth-resolution",
               subjectId: `${truthSubject}:plan-repair:${plan.id}`,
               promptId: "truth-resolution",
@@ -2939,7 +2939,7 @@ export class TruthEngine {
         });
         const prompt = promptBundle("truth-transition");
         const generated = pendingFusion ? { value: pendingFusion.draft, audit: pendingFusion.audit } : await this.provider.generateStructured({
-          profileId: input.definition.modelProfiles.transition,
+          profileId: input.definition.modelProfiles.creation,
           workloadId: scope.workloadId,
           batchId: scope.batchId,
           abortSignal: scope.abortSignal,

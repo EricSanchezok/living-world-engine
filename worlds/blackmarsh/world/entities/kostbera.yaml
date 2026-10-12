@@ -27,7 +27,7 @@ ratings:
   - { id: "influence:kostbera", definition_id: influence, value: 2 }
 agent:
   id: kostbera
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 靠敏锐观察、Vasan 象征传统与孤岛稀缺性维生的占兆者；她不把自己当作掌握唯一未来的神谕，却知道来客常会按一句含混解释发动真实行动。

@@ -13,9 +13,9 @@ ratings:
 agent:
   id: keeper
   model_profiles:
-    bootstrap: agent-deepseek
-    mind: agent-deepseek
-    reaction: agent-deepseek
+    decision: decision-jev
+    creation: creation-deepseek
+    fallback: decision-deepseek
   character:
     persona:
       summary: 谨慎，重视职责，但会根据自己掌握的证据作判断。

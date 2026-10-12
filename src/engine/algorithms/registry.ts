@@ -737,7 +737,8 @@ export const FULL_CATALOG_ALGORITHM_REF: AlgorithmRef<"world-execution"> = creat
   FULL_CATALOG_EAGER_REFERENCE_CONFIG,
 );
 
-export const DEFAULT_ALGORITHM_REF: AlgorithmRef<"world-execution"> = standardEagerReferenceAlgorithmRef();
+export const EAGER_REFERENCE_ALGORITHM_REF: AlgorithmRef<"world-execution"> = standardEagerReferenceAlgorithmRef();
+export const DEFAULT_ALGORITHM_REF: AlgorithmRef<"world-execution"> = decisionEventAlgorithmRef();
 
 export function eagerReferenceAlgorithmRef(
   config: Readonly<EagerReferenceAlgorithmConfig>,
@@ -764,12 +765,12 @@ export function registerBuiltinAlgorithms(
   registry: WorldExecutionAlgorithmRegistry = new WorldExecutionAlgorithmRegistry(),
 ): WorldExecutionAlgorithmRegistry {
   if (!registry.has(decisionEventAlgorithmRef())) registry.registerDefinition({
-    role: "world-execution", id: "decision-event", version: "1", contractVersion: 12, maturity: "candidate",
-    configSchema: z.strictObject({ decision: z.string().min(1), creation: z.string().min(1), fallback: z.string().min(1), maxDependencyRounds: z.number().int().positive() }),
+    role: "world-execution", id: "decision-event", version: "2", contractVersion: 12, maturity: "candidate",
+    configSchema: z.strictObject({ decision: z.string().min(1).nullable(), creation: z.string().min(1).nullable(), fallback: z.string().min(1).nullable(), maxDependencyRounds: z.number().int().positive() }),
     children: [],
     create: ({ ref, services }) => new DecisionEventAlgorithm(services.provider, ref.config as unknown as import("../events/algorithm").DecisionEventConfig, services.rulePackages),
   });
-  if (registry.has(DEFAULT_ALGORITHM_REF)) return registry;
+  if (registry.has(FULL_CATALOG_ALGORITHM_REF)) return registry;
   for (const definition of definitions) registry.registerAlgorithmDefinition(definition);
   registry.registerDefinition({
     ...identity("world-execution", "eager-reference", "29", 12),
@@ -785,7 +786,7 @@ export function registerBuiltinAlgorithms(
     ],
     create: createComposedEagerReferenceAlgorithm,
   });
-  if (!registry.has(DEFAULT_ALGORITHM_REF)) throw new Error("built-in eager-reference composition did not register");
+  if (!registry.has(FULL_CATALOG_ALGORITHM_REF) || !registry.has(DEFAULT_ALGORITHM_REF)) throw new Error("built-in composition did not register");
   return registry;
 }
 import { DecisionEventAlgorithm, decisionEventAlgorithmRef } from "../events/algorithm";

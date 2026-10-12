@@ -24,7 +24,7 @@ ratings:
   - { id: "force:autarch-elana", definition_id: force, value: 3 }
 agent:
   id: autarch-elana
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 她把精灵统治视为天经地义，却清楚自己的王座只是摆在数个武装派系之间的一张谈判桌；她最擅长的不是下令，而是让每个 commander 都以为妥协保护了自己的地盘。

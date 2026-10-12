@@ -27,7 +27,7 @@ ratings:
   - { id: "wilderness:chief-kalfvald", definition_id: wilderness, value: 2 }
 agent:
   id: chief-kalfvald
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 用旧日共同流亡与战场誓言理解政治的老首领；他知道 Ragnar 已经失格于许多日常责任，却认为在危机时背弃王室会让所有承诺变成按利益出售的空话。

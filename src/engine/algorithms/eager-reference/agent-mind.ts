@@ -608,7 +608,7 @@ export class AgentMind {
     const prompt = promptBundle(role);
     const groups = new Map<string, AgentMindSlot[]>();
     for (const input of [...inputs].sort((left, right) => left.agent.id.localeCompare(right.agent.id))) {
-      const profileId = purpose === "bootstrap" ? input.agent.modelProfiles.bootstrap : input.agent.modelProfiles.mind;
+      const profileId = purpose === "bootstrap" ? input.agent.modelProfiles.creation : input.agent.modelProfiles.creation;
       const group = groups.get(profileId) ?? [];
       group.push({ key: input.agent.id, payload: input, issues: [] });
       groups.set(profileId, group);
@@ -893,7 +893,7 @@ export class AgentMind {
           hashes: { context: contentHash(context) },
         });
         const result = await this.provider.generateStructured({
-          profileId: agent.modelProfiles.reaction,
+          profileId: agent.modelProfiles.creation,
           workloadId: scope.workloadId,
           batchId: scope.batchId,
           abortSignal: scope.abortSignal,

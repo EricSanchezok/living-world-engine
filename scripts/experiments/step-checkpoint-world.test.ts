@@ -19,7 +19,8 @@ it("prepares and reloads a complete immutable world with only two declared timin
     const sourceRoot = path.join(root, "source"), destination = path.join(root, "candidate");
     const sourceCatalog = loadModelCatalog();
     const profiles = Object.fromEntries(Object.entries(sourceCatalog.profiles).map(([id, profile]) => [id,
-      profile.account_id === "deepseek-api" ? { ...profile, selector: { kind: "exact" as const, model_id: STEP_E2_PROTOCOL.model } } : profile]));
+      profile.account_id === "deepseek-api" || id === "decision-jev" ? { ...sourceCatalog.profiles["creation-deepseek"]!, allowed_roles: profile.allowed_roles,
+        selector: { kind: "exact" as const, model_id: STEP_E2_PROTOCOL.model } } : profile]));
     prepareNonthinkingWorld(sourceRoot, new ModelCatalog({ schema_version: sourceCatalog.schemaVersion,
       scheduler: sourceCatalog.scheduler, registry: sourceCatalog.registry, accounts: sourceCatalog.accounts,
       profiles, model_overrides: sourceCatalog.modelOverrides }));

@@ -25,7 +25,7 @@ ratings:
   - { id: "magic:scytheback", definition_id: magic, value: 3 }
 agent:
   id: scytheback
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 以王朝兴亡为记账周期的古龙；她把宝藏、亲族与代理人分成不同层级控制，绝不会因一次联盟就把巢穴钥匙交给短命政治家。

@@ -22,7 +22,7 @@ ratings:
   - { id: "command:ealdorman-paddock-ryburn", definition_id: command, value: 3 }
 agent:
   id: ealdorman-paddock-ryburn
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 宴桌上好客、量谷时寸步不让的市场领袖；他真心相信开放交易能养活 Newcombe，也真心认为外商只有在看见边界时才会尊重本地人。

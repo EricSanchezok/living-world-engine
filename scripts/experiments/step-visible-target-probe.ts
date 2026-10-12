@@ -79,7 +79,7 @@ export async function prepareVisibleTargetProbe() {
   if (catalog.hash !== history.catalogHash) throw new Error("frozen catalog changed");
   const registry = new ModelRegistry(catalog, history.dataRoot, { fetch: async () => { throw new Error("frozen registry cannot refresh"); } });
   const snapshot = registry.snapshot(history.registrySnapshotHash);
-  const profile = resolveModelProfile(catalog, snapshot, input.definition.modelProfiles.resolution);
+  const profile = resolveModelProfile(catalog, snapshot, input.definition.modelProfiles.creation);
   if (profile.accountId !== "deepseek-api" || profile.modelId !== STEP_E2_PROTOCOL.model || profile.profile.inference.thinking !== "disabled") throw new Error("approved model settings changed");
   const cacheNamespace = contentHash({ trialId: TRIAL, version: 1, purpose: "fresh paired physical target vocabulary" });
   const cases = [];

@@ -64,7 +64,7 @@ export function createPlanReviewControls(catalog: ModelCatalog) {
       plans: [plan], commitmentRounds: [], instanceId: "plan-review-controls", advanceId: "review-controls-01", issues: [], temporalEvidence });
     const prompt = promptBundle("resolution-plan-verifier");
     const request: StructuredModelRequest<unknown> = { workloadId: "plan-review-controls", batchId: "review-controls-01",
-      profileId: definition.modelProfiles.causalVerifier, role: "causal-verifier", subjectId: `case-${ordinal}`,
+      profileId: definition.modelProfiles.creation, role: "causal-verifier", subjectId: `case-${ordinal}`,
       schemaName: "resolution_plan_verification", schema: resolutionPlanVerificationSchema,
       promptVersion: prompt.version, system: prompt.system, userPrompt: prompt.userPrompt, context };
     return { id: ordinal, expected: negative ? "reject" as const : "accept" as const,

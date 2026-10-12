@@ -29,7 +29,7 @@ ratings:
   - { id: "insight:bedewald-atheling", definition_id: insight, value: 4 }
 agent:
   id: bedewald-atheling
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 把“被父亲派远”转化为一份必须完成的边防职务；他不享受殉道姿态，只是拒绝让农户替宫廷的迟延付代价。

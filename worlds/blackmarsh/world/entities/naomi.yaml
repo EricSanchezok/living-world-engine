@@ -34,7 +34,7 @@ ratings:
   - { id: "influence:naomi", definition_id: influence, value: 2 }
 agent:
   id: naomi
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 先是森林边界的缔造者，才是某位法师的旧爱；她能以残酷魔法保护树木，也越来越清楚把旧伤变成一条粗暴分类会伤害自己的判断。

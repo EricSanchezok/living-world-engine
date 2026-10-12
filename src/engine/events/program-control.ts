@@ -1,3 +1,4 @@
+import { agentEventModels } from "./model-bindings";
 import type { ModelExecutionAudit, SimulationState } from "../contracts/model";
 import { projectAgentPerspective } from "../cognition/agent-perspective";
 import { contentHash } from "../models/model-audit";
@@ -82,6 +83,7 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
     const agent = source.agents[ownerId], policy = roster[ownerId];
     if (!agent || policy?.kind !== "model") return;
     const perspective = projectAgentPerspective(source as SimulationState, agent);
+    const models = agentEventModels(source, control, ownerId);
     const owner = control.agents[ownerId] ?? { resources: privateProgramResources(perspective), instances: [], activeInstanceId: null, planning: null,
       lastEvidenceIds: Object.keys(agent.belief.evidence).sort() };
     control.agents[ownerId] = owner;
@@ -96,8 +98,8 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
     activatedAgentIds.push(ownerId);
     let active = interpreters.find(interpreter => interpreter.instanceId === owner.activeInstanceId);
     if (active?.status === "ended") {
-      const resolved = await resolveProgramPredicates(runtime, active, resources, now, { ...scope, profileId: control.models.decision,
-        fallbackProfileId: control.models.fallback, nextInvocation: () => options.nextInvocation(ownerId) });
+      const resolved = await resolveProgramPredicates(runtime, active, resources, now, { ...scope, profileId: models.decision,
+        fallbackProfileId: models.fallback, nextInvocation: () => options.nextInvocation(ownerId) });
       resolved.decisions.forEach(record);
     }
     const goals = Object.values(agent.character.goals).filter(goal => goal.status === "active" &&
@@ -123,7 +125,7 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
           criteria: { ...Object.fromEntries(goals.map((goal, index) => [`g${index}`, `Create a plan for: ${goal.description}`])),
             ...Object.fromEntries(reusable.map((entry, index) => [`p${index}`, `Execute reusable plan: ${entry.program.definition.name}`])), wait: "Wait for a relevant observation or dependency change." },
           sources: goals.map(goal => `goal:${goal.id}`) } } };
-      const selected = await runtime.decide({ ...scope, profileId: control.models.decision, fallbackProfileId: control.models.fallback,
+      const selected = await runtime.decide({ ...scope, profileId: models.decision, fallbackProfileId: models.fallback,
         batch, subjectId: ownerId, modelInvocation: options.nextInvocation(ownerId) }); record(selected);
       const choice = selected.result.answers.goal!.choice;
       const reuse = /^p\d+$/u.test(choice) ? reusable[Number(choice.slice(1))] : undefined;
@@ -133,7 +135,7 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
       if (goal || reuse) {
         owner.planning!.attempts += 1;
         const compiled = reuse ? { status: "ready" as const, program: reuse.program, parameters: reuse.parameters }
-          : await compileAgentProgram(provider, { ...scope, profileId: control.models.creation, ownerId, goalId: goal!.id,
+          : await compileAgentProgram(provider, { ...scope, profileId: models.creation, ownerId, goalId: goal!.id,
             intent: goal!.description, reason: active ? "revision" : "initial-coverage", perspective: json(perspective),
             priorProgram: active ? programRevisionContext(active) : null,
             resources: resourceValues(resources), sources: privateProgramSources(perspective),
@@ -156,7 +158,7 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
         if (!work.length) break;
         if (work.some(item => item.kind === "predicate")) {
           const resolved = await resolveProgramPredicates(runtime, active, resources, now, { ...scope,
-            profileId: control.models.decision, fallbackProfileId: control.models.fallback, nextInvocation: () => options.nextInvocation(ownerId) });
+            profileId: models.decision, fallbackProfileId: models.fallback, nextInvocation: () => options.nextInvocation(ownerId) });
           resolved.decisions.forEach(record);
         }
         const nextWork = active.work(resources, now);
@@ -168,7 +170,7 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
           if (item.kind === "predicate") continue;
           if (item.kind === "deadline") { active.expire(item, now); continue; }
           if (item.kind === "utterance") {
-            const created = await createProgramUtterance(provider, { ...scope, profileId: control.models.creation,
+            const created = await createProgramUtterance(provider, { ...scope, profileId: models.creation,
               invocationBase: options.nextInvocation(ownerId, 2), perspective, work: item });
             if (created.audit) audits.push(created.audit);
             if (created.status === "ready") active.supplyUtterance(item, created.text, resources, now);
@@ -195,7 +197,7 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
     if (active && !control.pending.some(pending => pending.attempt.actorId === ownerId)) {
       const batch = programAdaptationBatch(active, resources, now);
       if (batch) {
-        const use = await runtime.decide({ ...scope, profileId: control.models.decision, fallbackProfileId: control.models.fallback,
+        const use = await runtime.decide({ ...scope, profileId: models.decision, fallbackProfileId: models.fallback,
           batch, subjectId: ownerId, modelInvocation: options.nextInvocation(ownerId) });
         use.programInstanceId = active.instanceId; record(use);
         if (use.result.answers.adaptation!.choice === "revise") active.interrupt(`${adaptationReasonPrefix}${use.evidenceHash}`, now);

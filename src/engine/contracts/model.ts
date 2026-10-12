@@ -388,9 +388,9 @@ export interface AgentState {
   id: AgentId;
   entityId: EntityId;
   modelProfiles: {
-    bootstrap: string;
-    mind: string;
-    reaction: string;
+    creation: string;
+    decision: string;
+    fallback: string;
   };
   character: AgentCharacterState;
   belief: AgentBeliefState;

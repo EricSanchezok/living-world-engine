@@ -22,7 +22,7 @@ ratings:
   - { id: "wilderness:matthew-thanes", definition_id: wilderness, value: 3 }
 agent:
   id: matthew-thanes
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 习惯同时考虑货主、护卫、道路和下一班出发时间的商队组织者；不以英雄自居，却把按时带人回家视为职业荣誉。

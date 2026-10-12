@@ -20,7 +20,7 @@ export function decisionTestProvider(output?: (body: Record<string, unknown>, at
     const body = JSON.parse(String(init?.body));
     calls += 1;
     const value = output ? output(body, calls) : { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: "yes" }])) };
-    return Response.json({ id: `request-${calls}`, model: "scripted:world-test", created: 1,
+    return Response.json({ id: `request-${calls}`, model: body.model, created: 1,
       choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(value) }, finish_reason: "stop" }],
       usage: { prompt_tokens: 100, completion_tokens: 10, total_tokens: 110 } });
   });

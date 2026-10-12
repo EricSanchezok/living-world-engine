@@ -50,7 +50,7 @@ export async function preparePlanEvidenceReview(rootId: "016" | "017") {
   const requests = captures.map(value => restoreCapturedPlanVerifier(value.request));
   const plans = requests.flatMap(request => (request.context as { state: { candidateResolutionPlans: unknown[] } }).state.candidateResolutionPlans);
   if (plans.length !== selected.actions) throw new Error("verifier plan cardinality changed");
-  const profile = resolveModelProfile(prepared.catalog, prepared.snapshot, selected.source.definition.modelProfiles.causalVerifier);
+  const profile = resolveModelProfile(prepared.catalog, prepared.snapshot, selected.source.definition.modelProfiles.creation);
   if (profile.accountId !== "deepseek-api" || profile.modelId !== STEP_E2_PROTOCOL.model || profile.profile.inference.thinking !== "disabled" ||
     profile.profile.max_output_tokens !== STEP_E2_PROTOCOL.outputTokenCeiling || requests.some(request => request.profileId !== profile.profileId)) throw new Error("review model binding changed");
   const physical: ReturnType<typeof admissionRequestEvidence>[] = [];

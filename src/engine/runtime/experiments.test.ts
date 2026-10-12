@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { z } from "zod";
-import { DEFAULT_ALGORITHM_REF, eagerReferenceAlgorithmRef, registerBuiltinAlgorithms } from "../algorithms/registry";
+import { EAGER_REFERENCE_ALGORITHM_REF, eagerReferenceAlgorithmRef, registerBuiltinAlgorithms } from "../algorithms/registry";
 import { DEFAULT_EAGER_REFERENCE_CONFIG } from "../algorithms/eager-reference/eager-reference";
 import { defineAlgorithmRef, type AlgorithmRef, type AlgorithmRole } from "../algorithms/composition";
 import { WorldExecutionAlgorithmRegistry } from "./execution";
@@ -34,7 +34,7 @@ function fixture() {
     salt: "fixture-salt",
     eligibility: { worldContentHashes: [`sha256:${"1".repeat(64)}`] },
     variants: [
-      { id: "control", allocationBasisPoints: 7_000, algorithmRef: DEFAULT_ALGORITHM_REF },
+      { id: "control", allocationBasisPoints: 7_000, algorithmRef: EAGER_REFERENCE_ALGORITHM_REF },
       { id: "treatment", allocationBasisPoints: 3_000, algorithmRef: eagerReferenceAlgorithmRef({ ...DEFAULT_EAGER_REFERENCE_CONFIG, actionCompilationMaxSlots: 1 }) },
     ],
     activationEvidence: { artifactHash: `sha256:${"2".repeat(64)}`, verifier: "npm run fixture" },
@@ -59,13 +59,13 @@ describe("algorithm experiment registry", () => {
     const first = registry.enrollment({
       instanceId: "instance-1",
       worldContentHash: manifest.eligibility.worldContentHashes[0]!,
-      defaultAlgorithmRef: DEFAULT_ALGORITHM_REF,
+      defaultAlgorithmRef: EAGER_REFERENCE_ALGORITHM_REF,
       explicitExecutionTuning: false,
     });
     const repeated = registry.enrollment({
       instanceId: "instance-1",
       worldContentHash: manifest.eligibility.worldContentHashes[0]!,
-      defaultAlgorithmRef: DEFAULT_ALGORITHM_REF,
+      defaultAlgorithmRef: EAGER_REFERENCE_ALGORITHM_REF,
       explicitExecutionTuning: false,
     });
     expect(first).toEqual(repeated);
@@ -79,13 +79,13 @@ describe("algorithm experiment registry", () => {
     expect(registry.enrollment({
       instanceId: "instance-1",
       worldContentHash: manifest.eligibility.worldContentHashes[0]!,
-      defaultAlgorithmRef: DEFAULT_ALGORITHM_REF,
+      defaultAlgorithmRef: EAGER_REFERENCE_ALGORITHM_REF,
       explicitExecutionTuning: true,
     })).toMatchObject({ enrollment: null, exclusionReason: "explicit-execution-tuning" });
     const enrollment = registry.enrollment({
       instanceId: "instance-2",
       worldContentHash: manifest.eligibility.worldContentHashes[0]!,
-      defaultAlgorithmRef: DEFAULT_ALGORITHM_REF,
+      defaultAlgorithmRef: EAGER_REFERENCE_ALGORITHM_REF,
       explicitExecutionTuning: false,
     }).enrollment!;
     const empty = new AlgorithmExperimentRegistry(registerBuiltinAlgorithms(new WorldExecutionAlgorithmRegistry()));
@@ -128,18 +128,18 @@ describe("algorithm experiment registry", () => {
       config: {},
     });
     const actionCompilation = replaceChild(
-      DEFAULT_ALGORITHM_REF.children.actionCompilation!,
+      EAGER_REFERENCE_ALGORITHM_REF.children.actionCompilation!,
       "candidateSelection",
       diagnosticSelection,
     );
-    const composition = replaceChild(DEFAULT_ALGORITHM_REF, "actionCompilation", actionCompilation);
+    const composition = replaceChild(EAGER_REFERENCE_ALGORITHM_REF, "actionCompilation", actionCompilation);
     const manifest = defineAlgorithmExperimentManifest({
       id: "invalid-diagnostic-experiment",
       version: "1",
       salt: "fixture-salt",
       eligibility: { worldContentHashes: [] },
       variants: [
-        { id: "control", allocationBasisPoints: 5_000, algorithmRef: DEFAULT_ALGORITHM_REF },
+        { id: "control", allocationBasisPoints: 5_000, algorithmRef: EAGER_REFERENCE_ALGORITHM_REF },
         { id: "diagnostic", allocationBasisPoints: 5_000, algorithmRef: composition },
       ],
       activationEvidence: { artifactHash: `sha256:${"2".repeat(64)}`, verifier: "npm run fixture" },
@@ -154,7 +154,7 @@ describe("algorithm experiment registry", () => {
     const existing = registry.enrollment({
       instanceId: "existing",
       worldContentHash: manifest.eligibility.worldContentHashes[0]!,
-      defaultAlgorithmRef: DEFAULT_ALGORITHM_REF,
+      defaultAlgorithmRef: EAGER_REFERENCE_ALGORITHM_REF,
       explicitExecutionTuning: false,
     }).enrollment!;
     registry.stopNewEnrollment("cache integrity failure");
@@ -162,7 +162,7 @@ describe("algorithm experiment registry", () => {
     expect(registry.enrollment({
       instanceId: "new",
       worldContentHash: manifest.eligibility.worldContentHashes[0]!,
-      defaultAlgorithmRef: DEFAULT_ALGORITHM_REF,
+      defaultAlgorithmRef: EAGER_REFERENCE_ALGORITHM_REF,
       explicitExecutionTuning: false,
     })).toMatchObject({ enrollment: null, exclusionReason: "experiment-stopped", exclusionDetail: "cache integrity failure" });
     expect(() => registry.validateEnrollment("existing", existing)).not.toThrow();

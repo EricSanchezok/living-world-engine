@@ -29,7 +29,7 @@ ratings:
   - { id: "magic:high-chief-cruk", definition_id: magic, value: 1 }
 agent:
   id: high-chief-cruk
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 靠守护而非持有圣剑建立权威的仪式领袖，既敬畏那道不肯解释自己的光，也害怕年轻 chiefs 会把谨慎称作软弱；他宁可承认不知道，也不愿再用族人的手验证传说。

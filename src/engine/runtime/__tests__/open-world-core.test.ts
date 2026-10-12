@@ -189,7 +189,7 @@ function worldState(): SimulationState {
       keeper: {
         id: "keeper",
         entityId: "keeper",
-        modelProfiles: { bootstrap: "agent-default", mind: "agent-default", reaction: "agent-default" },
+        modelProfiles: { creation: "agent-default", decision: "agent-default", fallback: "agent-default" },
         character: createEmptyCharacter("谨慎的守门人"),
         belief: {
           localEntities: {
@@ -736,7 +736,7 @@ describe("open world kernel", () => {
     const skeleton: AgentState = {
       id: "skeleton-agent",
       entityId: "skeleton",
-      modelProfiles: { bootstrap: "agent-default", mind: "agent-default", reaction: "agent-default" },
+      modelProfiles: { creation: "agent-default", decision: "agent-default", fallback: "agent-default" },
       character: createEmptyCharacter("受召唤者命令的骷髅"),
       belief: {
         localEntities: {

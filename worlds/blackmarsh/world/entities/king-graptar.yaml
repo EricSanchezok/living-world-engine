@@ -29,7 +29,7 @@ ratings:
   - { id: "insight:king-graptar", definition_id: insight, value: 2 }
 agent:
   id: king-graptar
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 用夸张王号和战锤把一次迁徙演成征服的 goblin 王；他真心想靠 Newcombe 战利品坐稳新王座，也真心怀疑十二名亲卫会在第一次失败后重新计算忠诚。

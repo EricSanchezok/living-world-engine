@@ -910,7 +910,7 @@ describe("eager reference safeguards", () => {
     });
   });
 
-  it("isolates all three AgentMind purposes and model profiles", async () => {
+  it("preserves AgentMind purpose isolation with one creation capability", async () => {
     const provider = new ScriptedModelProvider(({ profileId, context }) =>
       deterministicModelOutput(profileId, context));
     const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), {
@@ -918,8 +918,7 @@ describe("eager reference safeguards", () => {
       modelCatalog: provider.catalog,
     });
     const state = structuredClone(definition.initialState);
-    state.agents.keeper!.modelProfiles.bootstrap = "agent-openai";
-    state.agents.keeper!.modelProfiles.mind = "agent-xai";
+    state.agents.keeper!.modelProfiles.creation = "agent-xai";
     const mind = new AgentMind(provider);
     const inputs = Object.values(state.agents).map((agent) => ({
       agent,
@@ -951,12 +950,12 @@ describe("eager reference safeguards", () => {
         agents: context.slots.map((slot) => slot.agentState.perspective.agentRef.replace(/^ref:agent:/u, "")),
       };
     })).toEqual([
-      { role: "agent-bootstrap", profileId: "agent-deepseek", agents: ["player"] },
-      { role: "agent-bootstrap", profileId: "agent-openai", agents: ["keeper"] },
-      { role: "agent-mind", profileId: "agent-deepseek", agents: ["player"] },
+      { role: "agent-bootstrap", profileId: "agent-xai", agents: ["keeper"] },
+      { role: "agent-bootstrap", profileId: "creation-deepseek", agents: ["player"] },
       { role: "agent-mind", profileId: "agent-xai", agents: ["keeper"] },
-      { role: "agent-mind", profileId: "agent-deepseek", agents: ["player"] },
+      { role: "agent-mind", profileId: "creation-deepseek", agents: ["player"] },
       { role: "agent-mind", profileId: "agent-xai", agents: ["keeper"] },
+      { role: "agent-mind", profileId: "creation-deepseek", agents: ["player"] },
     ]);
   });
 

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { mkdtempSync, readdirSync, rmSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { DEFAULT_ALGORITHM_REF } from "../../src/engine/algorithms/registry";
+import { EAGER_REFERENCE_ALGORITHM_REF } from "../../src/engine/algorithms/registry";
 import {
   allVisibleCandidateRetriever,
   evaluateActionCompilationRecall,
@@ -34,8 +34,8 @@ function fixture() {
     actions: [{ id: "action-r5", actorId: "agent-r5", baseRevision: 0, rawText: "act", goal: "act", means: null, targetIds: [] }],
     actionIds: ["action-r5"],
     fullContextHash,
-    captureAlgorithmRef: DEFAULT_ALGORITHM_REF,
-    captureAlgorithmManifestHash: DEFAULT_ALGORITHM_REF.manifestHash,
+    captureAlgorithmRef: EAGER_REFERENCE_ALGORITHM_REF,
+    captureAlgorithmManifestHash: EAGER_REFERENCE_ALGORITHM_REF.manifestHash,
     worldHash: base.manifest.source.worldHash,
     candidateCatalogHash: String((context.referenceCatalog as { hash: string }).hash),
     modelCatalogHash: base.manifest.source.modelCatalogHash,

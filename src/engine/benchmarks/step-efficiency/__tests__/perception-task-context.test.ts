@@ -20,7 +20,7 @@ const check = (ratingRef: string | null = "ref:rating:resolve:keeper") => ({ pro
 function fixture() {
   const catalog = createTestModelCatalog();
   const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 47, modelCatalog: catalog });
-  definition.modelProfiles.perception = "truth-deepseek";
+  definition.modelProfiles.creation = "truth-deepseek";
   const state = structuredClone(definition.initialState);
   const input: OnsetPerceptionInput = { definition, state, identityOwner: "task-context-test", groundings: [],
     actions: [{ id: "conceal", actorId: "player", baseRevision: state.revision, rawText: "Conceal the key in my sleeve.",

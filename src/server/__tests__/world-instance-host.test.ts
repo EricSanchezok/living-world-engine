@@ -8,7 +8,7 @@ import {
   FULL_CATALOG_EAGER_REFERENCE_CONFIG,
 } from "../../engine/algorithms/eager-reference/eager-reference";
 import {
-  DEFAULT_ALGORITHM_REF,
+  EAGER_REFERENCE_ALGORITHM_REF,
   eagerReferenceAlgorithmRef,
   FULL_CATALOG_ALGORITHM_REF,
   registerBuiltinAlgorithms,
@@ -399,7 +399,7 @@ describe("World Instance host", () => {
     database.close();
   });
 
-  it("pins the standard integrated composition through the ordinary host default", async () => {
+  it("pins an explicitly selected reference composition", async () => {
     let preflightCalls = 0;
     const retrievalRuntime = {
       role: "candidate-selection" as const,
@@ -407,13 +407,13 @@ describe("World Instance host", () => {
       async retrieveBatch() { throw new Error("unused retrieval fixture"); },
     };
     const setup = harness({
-      defaultAlgorithmRef: null,
+      defaultAlgorithmRef: EAGER_REFERENCE_ALGORITHM_REF,
       actionCompilationRetrievalProvider: {
-        runtime: (ref) => ref.manifestHash === DEFAULT_ALGORITHM_REF.manifestHash
+        runtime: (ref) => ref.manifestHash === EAGER_REFERENCE_ALGORITHM_REF.manifestHash
           ? retrievalRuntime
           : undefined,
         preflight: async (ref, input) => {
-          expect(ref.manifestHash).toBe(DEFAULT_ALGORITHM_REF.manifestHash);
+          expect(ref.manifestHash).toBe(EAGER_REFERENCE_ALGORITHM_REF.manifestHash);
           expect(input.worldContentHash).toBe(setup.definition.contentHash);
           preflightCalls += 1;
         },
@@ -422,7 +422,7 @@ describe("World Instance host", () => {
     try {
       const created = await setup.host.createInstance(observerStart);
       const stored = setup.database.readInstance(created.summary.id).document;
-      expect(stored.executionAlgorithm).toEqual(DEFAULT_ALGORITHM_REF);
+      expect(stored.executionAlgorithm).toEqual(EAGER_REFERENCE_ALGORITHM_REF);
       expect(stored.executionAlgorithm.children.actionCompilation).toMatchObject({
         id: "represented-action-compilation", config: { representation: "AT", descriptionPolicy: "original-action-v1" },
       });
@@ -431,7 +431,7 @@ describe("World Instance host", () => {
         children: { batching: { id: "shared-state-first-slot-batching", config: { flushBoundary: "post-promise-v1", planRepairBatching: "scoped-plans-v1" } } },
       });
       expect(stored.executionAlgorithm.children.observationRendering?.id).toBe("source-bound-observation-rendering");
-      expect(setup.host.inspectorWindow(created.summary.id, { limit: 1 }).algorithmComposition.root).toEqual(DEFAULT_ALGORITHM_REF);
+      expect(setup.host.inspectorWindow(created.summary.id, { limit: 1 }).algorithmComposition.root).toEqual(EAGER_REFERENCE_ALGORITHM_REF);
       expect(stored.executionAlgorithm.children.actionCompilation?.children.candidateSelection)
         .toMatchObject({
           role: "candidate-selection",
@@ -795,7 +795,7 @@ describe("World Instance host", () => {
       expect(manifests).toContainEqual(expect.objectContaining({ kind: "algorithm", id: "eager-reference" }));
       expect(manifests).toContainEqual(expect.objectContaining({ kind: "engine-operation", id: "arrival-generator" }));
       expect(stored.policyBindings["courtyard-wanderer-1"]).toMatchObject({ kind: "external" });
-      const arrivalRequest = provider.requests.find((request) => request.role === "arrival-generator");
+      const arrivalRequest = provider.requests.find((request) => request.role === "creation" && request.schemaName === "arrival");
       expect(arrivalRequest).toMatchObject({
         promptVersion: promptBundle("arrival-generator").version,
         context: {

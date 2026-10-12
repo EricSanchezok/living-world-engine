@@ -8,15 +8,6 @@ runtime_defaults:
   realtime_interval_ms: 60000
   action_window_ms: 30000
 model_profiles:
-  perception: truth-deepseek
-  reaction_routing: truth-deepseek
-  resolution: truth-deepseek
-  transition: truth-deepseek
-  causal_verifier: truth-deepseek
-  grounding: truth-deepseek
-  observation: truth-deepseek
-  arrival: truth-deepseek
-  dynamic_agent:
-    bootstrap: agent-deepseek
-    mind: agent-deepseek
-    reaction: agent-deepseek
+  decision: decision-jev
+  creation: creation-deepseek
+  fallback: decision-deepseek

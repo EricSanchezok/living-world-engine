@@ -27,7 +27,7 @@ ratings:
   - { id: "resolve:master-corvin-hale", definition_id: resolve, value: 3 }
 agent:
   id: master-corvin-hale
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 把旧日正义和今日利益编成同一套说辞的地下组织者；很少直接撒谎，更擅长只给出能推动对方的一半事实。

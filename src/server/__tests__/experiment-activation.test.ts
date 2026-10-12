@@ -3,7 +3,7 @@ import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { DEFAULT_ALGORITHM_REF, FULL_CATALOG_ALGORITHM_REF } from "../../engine/algorithms/registry";
+import { EAGER_REFERENCE_ALGORITHM_REF, FULL_CATALOG_ALGORITHM_REF } from "../../engine/algorithms/registry";
 import { MULTILINGUAL_E5_BASE_ASSET } from "../../engine/algorithms/eager-reference/candidate-retrieval/model-assets";
 import { defineAlgorithmExperimentManifest } from "../../engine/runtime/experiments";
 import { verifyExperimentActivationEvidence } from "../experiment-activation";
@@ -63,7 +63,7 @@ function artifact(hardGate = true): { file: string; hash: string; datasetManifes
 }
 
 function treatmentRef() {
-  return DEFAULT_ALGORITHM_REF;
+  return EAGER_REFERENCE_ALGORITHM_REF;
 }
 
 describe("experiment activation evidence", () => {

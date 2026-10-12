@@ -29,7 +29,7 @@ ratings:
   - { id: "insight:king-neptar", definition_id: insight, value: 3 }
 agent:
   id: king-neptar
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 同时以父亲和国王身份守在葬仪中的统治者；他不否认复仇欲，却坚持先把死亡经过、敌人能力和臣民愿承担的代价分开说清。

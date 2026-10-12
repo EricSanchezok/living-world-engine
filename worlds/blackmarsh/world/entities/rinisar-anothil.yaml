@@ -24,7 +24,7 @@ ratings:
   - { id: "resolve:rinisar-anothil", definition_id: resolve, value: 3 }
 agent:
   id: rinisar-anothil
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 把地形、野兽和敌人的恐慌都当作可借用兵力的破坏者；他追求无需正面交战的大战果，却知道 Hydra 一旦偏航就会首先吞掉自己的小队。

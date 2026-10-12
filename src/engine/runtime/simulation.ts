@@ -595,6 +595,7 @@ export class SimulationEngine {
       const validationStartedAt = performance.now();
       trace.emit({ event: "canonical.validation.started", attributes: { phase: "bootstrap" } });
       const committed = this.committer.bootstrap(source, candidate, this.definition);
+      validateAlgorithmExecutionState(committed.executionState, this.algorithm.manifest.hash);
       trace.emit({
         event: "canonical.validation.completed",
         attributes: {

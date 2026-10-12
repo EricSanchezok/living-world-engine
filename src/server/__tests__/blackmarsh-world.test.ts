@@ -2,7 +2,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import AdmZip from "adm-zip";
 import { describe, expect, it } from "vitest";
-import { DeterministicModelProvider } from "../../engine/testing/model-provider";
+import { createTestModelCatalog, DeterministicModelProvider } from "../../engine/testing/model-provider";
 import { loadModelCatalog } from "../../engine/models/model-catalog";
 import { EagerReferenceAlgorithm } from "../../engine/algorithms/eager-reference/eager-reference";
 import { SimulationEngine } from "../../engine/runtime/simulation";
@@ -576,7 +576,7 @@ describe("Blackmarsh reference world", () => {
   it("bootstraps all Agents and commits one deterministic open-world step", async () => {
     // The structural 48-Agent test keeps the production twelve-slot batching
     // policy while exercising observer-scoped semantic context.
-    const provider = new DeterministicModelProvider(blackmarshModelCatalog);
+    const provider = new DeterministicModelProvider(createTestModelCatalog(undefined, { maxInputBytes: 4_000_000 }));
     const definition = loadWorldScript(worldRoot, { seed: 47, modelCatalog: provider.catalog });
     const engine = new SimulationEngine(definition, new EagerReferenceAlgorithm(provider));
     await engine.bootstrapAgents();
@@ -587,7 +587,7 @@ describe("Blackmarsh reference world", () => {
     expect(provider.requests.filter((request) => request.role === "agent-bootstrap").every((request) =>
       (request.context as { roleContract: { role: string }; slots: Array<{ agentState: { perspective: { agentRef: string } } }> }).roleContract.role === "agent-bootstrap" &&
       (request.context as { slots: Array<{ agentState: { perspective: { agentRef: string } } }> }).slots.every((slot) =>
-        state.agents[slot.agentState.perspective.agentRef.replace(/^ref:agent:/u, "")]?.modelProfiles.bootstrap === request.profileId))).toBe(true);
+        state.agents[slot.agentState.perspective.agentRef.replace(/^ref:agent:/u, "")]?.modelProfiles.creation === request.profileId))).toBe(true);
     const roster = Object.fromEntries(Object.values(state.agents).map((agent) => [agent.id, {
       kind: "model" as const,
       agentId: agent.id,
@@ -612,7 +612,7 @@ describe("Blackmarsh reference world", () => {
     expect(provider.requests.filter((request) => request.role === "agent-mind").every((request) =>
       (request.context as { roleContract: { role: string }; slots: Array<{ agentState: { perspective: { agentRef: string } } }> }).roleContract.role === "agent-mind" &&
       (request.context as { slots: Array<{ agentState: { perspective: { agentRef: string } } }> }).slots.every((slot) =>
-        state.agents[slot.agentState.perspective.agentRef.replace(/^ref:agent:/u, "")]?.modelProfiles.mind === request.profileId))).toBe(true);
+        state.agents[slot.agentState.perspective.agentRef.replace(/^ref:agent:/u, "")]?.modelProfiles.creation === request.profileId))).toBe(true);
     const batchedAudits = [...engine.bootstrapModelAudits, ...completed.modelAudits]
       .filter((audit) => audit.role === "action-compilation" || audit.role === "agent-bootstrap" ||
         audit.role === "agent-mind");

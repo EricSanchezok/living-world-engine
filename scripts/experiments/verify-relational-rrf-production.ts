@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { DEFAULT_ALGORITHM_REF } from "../../src/engine/algorithms/registry";
+import { EAGER_REFERENCE_ALGORITHM_REF } from "../../src/engine/algorithms/registry";
 import { CachedPassageEncoder } from "../../src/engine/algorithms/eager-reference/candidate-retrieval/embedding-cache";
 import {
   CachedQueryEncoder,
@@ -186,8 +186,8 @@ export async function main(argv: readonly string[]): Promise<number> {
           contexts: dataset.contexts.size,
         },
         composition: {
-          manifestHash: DEFAULT_ALGORITHM_REF.manifestHash,
-          candidateSelection: DEFAULT_ALGORITHM_REF.children.actionCompilation?.children.candidateSelection,
+          manifestHash: EAGER_REFERENCE_ALGORITHM_REF.manifestHash,
+          candidateSelection: EAGER_REFERENCE_ALGORITHM_REF.children.actionCompilation?.children.candidateSelection,
         },
         encoder: {
           modelId: encoder.modelId,

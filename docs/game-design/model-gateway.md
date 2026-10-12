@@ -21,11 +21,11 @@ accounts:
     api_key_env: DEEPSEEK_API_KEY
     max_concurrency: 16
 profiles:
-  truth-deepseek:
+  creation-deepseek:
     account_id: deepseek-api
-    selector: { kind: exact, model_id: deepseek-v4-flash }
-    description: 高吞吐世界真值裁决
-    allowed_roles: [truth-perception, truth-reaction-routing, truth-resolution, truth-transition, temporal-planner, action-grounding, observation-renderer, causal-verifier, arrival-generator]
+    selector: { kind: exact, model_id: deepseek-flash }
+    description: 按需生成程序与具体内容
+    allowed_roles: [creation]
     request_timeout_ms: 300000
     max_output_tokens: 131072
     # Application-level UTF-8 request budget; this is not the provider's
@@ -55,7 +55,7 @@ Accounts can independently opt into `network.dns_over_https_url`, an HTTPS endpo
 
 套餐账户表示引擎具备对应的传输能力，不代表扩大厂商许可的使用范围。部署者仍须遵守各产品当时的用途与工具限制；例如智谱区分通用 API 与 Coding 端点，MiniMax 为 Token Plan 单独签发 Key，Kimi 要求 Coding Key 与开放平台 URL 对应，MiMo 也将 Token Plan Key、端点和适用场景与按量 API 分开。具体约束以[智谱 Coding Plan](https://docs.bigmodel.cn/cn/coding-plan/quick-start)、[MiniMax Token Plan](https://platform.minimaxi.com/docs/token-plan/quickstart)、[Kimi Code FAQ](https://www.kimi.ai/help/kimi-code/faq)和[MiMo Token Plan](https://mimo.mi.com/docs/en-US/tokenplan/Token%20Plan/quick-access)的当前官方说明为准；引擎不伪装客户端，也不绕过这些限制。
 
-Profile 的 `allowed_roles` 覆盖 Truth、temporal planner、action grounding、Observation renderer、causal verifier、Arrival Generator 和 AgentMind 系列角色，每次调用按精确角色校验。`max_input_bytes` 是完整序列化模型请求的硬上限，也是 Observation 分批的 Context 预算。推理字段使用统一语义：`auto` 表示不发送该参数；显式 thinking、effort、reasoning budget、sampling 或其他控制只有在快照声明支持时才可进入 transport，不支持时在请求前失败。
+原生运行时的 Profile `allowed_roles` 分别授权 `decision` 与 `creation`，每次调用按精确职责校验。世界裁决与 Agent 私有决策使用各自的 Profile，具体任务仍保留独立的提示词与审计身份。`max_input_bytes` 是完整序列化模型请求的硬上限，也是 Observation 分批的 Context 预算。推理字段使用统一语义：`auto` 表示不发送该参数；显式 thinking、effort、reasoning budget、sampling 或其他控制只有在快照声明支持时才可进入 transport，不支持时在请求前失败。
 
 Profiles may explicitly select `response_transport: deepseek-sse-v1` for DeepSeek OpenAI Chat JSON-object generation. The SDK requests native SSE and usage while preserving the complete prompts, schema and generation settings. Runtime accepts only a complete stream with stable identity, terminal finish reason, reconciled usage and DONE; partial text never reaches canonical validation. The default remains non-streaming. See [the streamed response contract](../specs/0091-complete-streamed-json-responses.md).
 
@@ -65,7 +65,7 @@ Profiles may explicitly select `response_transport: deepseek-sse-v1` for DeepSee
 
 规范化快照按内容 SHA-256 写入 `LIVINGWORLD_DATA_ROOT/model-registry/snapshots/`，检查时间另存，因此相同目录内容不会制造新快照。刷新使用十秒超时、ETag/304、single-flight 和每小时后台周期；失败保留最后有效快照，损坏响应不能切换 current pointer。一次 execution 在第一次模型调用时捕获一个快照，全部并行 Agent 复用该 hash；后续 execution 才能看到新快照。Benchmark 与回放可在 `modelRegistrySnapshotHash` 中固定历史快照，历史文件缺失即失败。
 
-`exact` selector 只接受指定 ID，模型缺失、禁用、deprecated 或能力不兼容时不替换。生产目录中所有使用 DeepSeek 账户的 Profile 都精确绑定 `deepseek-v4-flash` 并显式关闭 thinking，避免目录刷新后静默切换到 Pro 或推理模式。`latest-compatible` 在单个 models.dev provider 内应用 family、简单 include/exclude glob、文本 modality、结构化结果、输出 limit 与显式 inference 要求，再按 `release_date` 降序、`last_updated` 降序、ID 升序选出唯一模型。运行中没有跨模型、跨账户、跨套餐或跨供应商 fallback。
+`exact` selector 只接受指定 ID，模型缺失、禁用、deprecated 或能力不兼容时不替换。原生运行时的 DeepSeek Profile 精确绑定 `deepseek-flash` 并显式关闭 thinking，避免目录刷新后静默切换到 Pro 或推理模式。`latest-compatible` 在单个 models.dev provider 内应用 family、简单 include/exclude glob、文本 modality、结构化结果、输出 limit 与显式 inference 要求，再按 `release_date` 降序、`last_updated` 降序、ID 升序选出唯一模型。只有原生决策协议允许显式配置的上下文超限 fallback；该调用单独留证，不改变固定的主 Profile。
 
 ## 协议、方言与结构化结果
 

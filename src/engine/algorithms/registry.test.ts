@@ -6,6 +6,7 @@ import { defineAlgorithmRef, type AlgorithmRef, type AlgorithmRole } from "./com
 import {
   ACTION_COMPILATION_RETRIEVAL_RUNTIME_VERSION,
   DEFAULT_ALGORITHM_REF,
+  EAGER_REFERENCE_ALGORITHM_REF,
   eagerReferenceAlgorithmRef,
   FULL_CATALOG_ALGORITHM_REF,
   registerBuiltinAlgorithms,
@@ -48,9 +49,17 @@ it("rejects historical Truth contracts and random scheduling instead of changing
 });
 
 describe("built-in algorithm registry", () => {
+  it("defaults to the native decision event producer with script capability bindings", () => {
+    const registry = registerBuiltinAlgorithms(new WorldExecutionAlgorithmRegistry());
+    expect(DEFAULT_ALGORITHM_REF).toMatchObject({ id: "decision-event", version: "2", children: {},
+      config: { decision: null, creation: null, fallback: null, maxDependencyRounds: 32 } });
+    expect(registry.has(DEFAULT_ALGORITHM_REF)).toBe(true);
+    expect(registry.has(defineAlgorithmRef({ ...DEFAULT_ALGORITHM_REF, version: "1" }))).toBe(false);
+    expect(registerBuiltinAlgorithms(registry)).toBe(registry);
+  });
   it("rejects prior execution, truth, compiler and grounding identities instead of changing pinned behavior", () => {
     const registry = registerBuiltinAlgorithms(new WorldExecutionAlgorithmRegistry());
-    for (const current of [DEFAULT_ALGORITHM_REF, FULL_CATALOG_ALGORITHM_REF]) {
+    for (const current of [EAGER_REFERENCE_ALGORITHM_REF, FULL_CATALOG_ALGORITHM_REF]) {
       expect(registry.has(current)).toBe(true);
       expect(registry.has(defineAlgorithmRef({ ...current, contractVersion: 11 }))).toBe(false);
       const truth = current.children.truthResolution!;
@@ -94,7 +103,7 @@ describe("built-in algorithm registry", () => {
       "work-batching/shared-context-slot-batching@2",
       "work-batching/shared-state-first-slot-batching@1",
       "work-scheduling/bounded-concurrency@1",
-      "world-execution/decision-event@1",
+      "world-execution/decision-event@2",
       "world-execution/eager-reference@29",
     ]);
   });

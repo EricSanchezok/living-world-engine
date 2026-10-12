@@ -1,6 +1,6 @@
 # Decision and behavior program runtime
 
-[Spec 0181](../specs/0181-jev-decision-event-engine.md) defines the replacement engine contract. The program runtime lives in `src/engine/programs/` and runs through the registered world event candidate; default instance replacement remains in progress.
+[Spec 0181](../specs/0181-jev-decision-event-engine.md) defines the replacement engine contract. The program runtime lives in `src/engine/programs/` and runs through the default registered decision-event producer.
 
 ## Private program boundary
 

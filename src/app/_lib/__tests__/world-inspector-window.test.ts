@@ -13,7 +13,7 @@ function inspectorWindow(
     apiVersion: 13,
     algorithmComposition: {
       root: DEFAULT_ALGORITHM_REF,
-      nodeCount: 23,
+      nodeCount: 1,
     },
     instance: {
       id: "instance-1",

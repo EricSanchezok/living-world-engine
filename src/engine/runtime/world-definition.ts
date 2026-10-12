@@ -32,7 +32,7 @@ export interface WorldOrigin {
   relationshipHooks: string[];
   risks: string[];
   mechanicsProfileId: string;
-  modelProfiles: { bootstrap: string; mind: string; reaction: string };
+  modelProfiles: { creation: string; decision: string; fallback: string };
   image?: { hash: string; alt: string };
   fallbackArrival: string;
 }
@@ -49,21 +49,7 @@ export interface WorldRuntimeContract {
   runtimeDefaults: WorldRuntimeDefaults;
   participation: WorldParticipation | null;
   contentHash: string;
-  modelProfiles: {
-    perception: string;
-    reactionRouting: string;
-    resolution: string;
-    transition: string;
-    causalVerifier: string;
-    grounding: string;
-    observation: string;
-    arrival: string;
-    dynamicAgent: {
-      bootstrap: string;
-      mind: string;
-      reaction: string;
-    };
-  };
+  modelProfiles: { decision: string; creation: string; fallback: string };
   laws: WorldLaw[];
   disclosure: MechanicalDisclosurePolicy;
   rulePackages: RulePackageReference[];
@@ -145,37 +131,18 @@ export function validateWorldDefinition(definition: WorldDefinition): void {
 }
 
 export function validateWorldModelProfiles(definition: WorldDefinition, catalog: ModelCatalog): void {
-  catalog.assertProfile(definition.modelProfiles.perception, "truth-perception");
-  catalog.assertProfile(definition.modelProfiles.reactionRouting, "truth-reaction-routing");
-  catalog.assertProfile(definition.modelProfiles.resolution, "truth-resolution");
-  catalog.assertProfile(definition.modelProfiles.transition, "truth-transition");
-  catalog.assertProfile(definition.modelProfiles.causalVerifier, "causal-verifier");
-  catalog.assertProfile(definition.modelProfiles.grounding, "action-compilation");
-  catalog.assertProfile(definition.modelProfiles.grounding, "action-grounding");
-  catalog.assertProfile(definition.modelProfiles.observation, "observation-renderer");
-  catalog.assertProfile(definition.modelProfiles.arrival, "arrival-generator");
-  catalog.assertProfile(definition.modelProfiles.dynamicAgent.bootstrap, "agent-bootstrap");
-  catalog.assertProfile(definition.modelProfiles.dynamicAgent.mind, "agent-mind");
-  catalog.assertProfile(definition.modelProfiles.dynamicAgent.reaction, "agent-reaction");
-  for (const agent of Object.values(definition.initialState.agents)) {
-    catalog.assertProfile(agent.modelProfiles.bootstrap, "agent-bootstrap");
-    catalog.assertProfile(agent.modelProfiles.mind, "agent-mind");
-    catalog.assertProfile(agent.modelProfiles.reaction, "agent-reaction");
+  const bindings = [definition.modelProfiles, ...Object.values(definition.initialState.agents).map(agent => agent.modelProfiles),
+    ...(definition.participation?.origins.map(origin => origin.modelProfiles) ?? [])];
+  for (const profiles of bindings) {
+    catalog.assertProfile(profiles.decision, "decision");
+    catalog.assertProfile(profiles.creation, "creation");
+    catalog.assertProfile(profiles.fallback, "decision");
   }
 }
 
 export function worldModelProfileIds(definition: WorldDefinition): string[] {
-  return [...new Set([
-    definition.modelProfiles.perception,
-    definition.modelProfiles.reactionRouting,
-    definition.modelProfiles.resolution,
-    definition.modelProfiles.transition,
-    definition.modelProfiles.causalVerifier,
-    definition.modelProfiles.grounding,
-    definition.modelProfiles.observation,
-    definition.modelProfiles.arrival,
-    ...Object.values(definition.modelProfiles.dynamicAgent),
-    ...Object.values(definition.initialState.agents)
-      .flatMap((agent) => Object.values(agent.modelProfiles)),
+  return [...new Set([ ...Object.values(definition.modelProfiles),
+    ...Object.values(definition.initialState.agents).flatMap(agent => Object.values(agent.modelProfiles)),
+    ...(definition.participation?.origins.flatMap(origin => Object.values(origin.modelProfiles)) ?? []),
   ])].sort();
 }

@@ -29,7 +29,7 @@ ratings:
   - { id: "seamanship:sapphire-enchantress", definition_id: seamanship, value: 4 }
 agent:
   id: sapphire-enchantress
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 在王廷责任、私人亲密与自身研究之间画清可验证边界的顾问；她愿意翻译不同世界的顾虑，却不会把爱人的沉默包装成自己掌握的答案。

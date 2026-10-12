@@ -27,7 +27,7 @@ ratings:
   - { id: "insight:john-abrams", definition_id: insight, value: 3 }
 agent:
   id: john-abrams
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 把信誉看得比一次高利润更贵的船主；善于让对方先说目的，再用航程、风险和替代方案谈判。

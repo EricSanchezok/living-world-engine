@@ -1,3 +1,4 @@
+import { ModelCatalog } from "../../engine/models/model-catalog";
 import { cpSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -364,12 +365,12 @@ describe("open world script loader", () => {
       .toThrow("catalog exceeds distribution limit");
   });
 
-  it("rejects unknown or role-incompatible Truth and Agent model profiles", () => {
+  it("rejects unknown or role-incompatible decision and creation profiles", () => {
     const unknownTruth = copiedFixture();
     const truthManifest = path.join(unknownTruth, "script.yaml");
     writeFileSync(
       truthManifest,
-      readFileSync(truthManifest, "utf8").replace("truth-deepseek", "missing-truth-profile"),
+      readFileSync(truthManifest, "utf8").replace("decision-jev", "missing-decision-profile"),
       "utf8",
     );
     expect(() => loadWorldScript(unknownTruth, { modelCatalog })).toThrow("unknown model profile");
@@ -378,16 +379,18 @@ describe("open world script loader", () => {
     const wrongRoleManifest = path.join(wrongTruthRole, "script.yaml");
     writeFileSync(
       wrongRoleManifest,
-      readFileSync(wrongRoleManifest, "utf8").replace("truth-deepseek", "agent-deepseek"),
+      readFileSync(wrongRoleManifest, "utf8").replace("decision: decision-jev", "decision: creation-deepseek"),
       "utf8",
     );
-    expect(() => loadWorldScript(wrongTruthRole, { modelCatalog })).toThrow("does not allow role truth-perception");
+    const strictDocument = modelCatalog.snapshot();
+    strictDocument.profiles["creation-deepseek"]!.allowed_roles = ["creation"];
+    expect(() => loadWorldScript(wrongTruthRole, { modelCatalog: new ModelCatalog(strictDocument) })).toThrow("does not allow role decision");
 
     const unknownAgent = copiedFixture();
     const keeper = path.join(unknownAgent, "entities/keeper.yaml");
     writeFileSync(
       keeper,
-      readFileSync(keeper, "utf8").replace("agent-deepseek", "missing-agent-profile"),
+      readFileSync(keeper, "utf8").replace("creation-deepseek", "missing-agent-profile"),
       "utf8",
     );
     expect(() => loadWorldScript(unknownAgent, { modelCatalog })).toThrow("unknown model profile");

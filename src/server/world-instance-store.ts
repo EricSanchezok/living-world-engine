@@ -80,9 +80,9 @@ function validateBinding(agentId: string, binding: PolicyBinding, document: Worl
   if (!(agentId in document.state.agents)) throw new Error(`policy binding references unknown agent ${agentId}`);
   switch (binding.kind) {
     case "model": {
-      requireText(binding.profiles.bootstrap, `model policy ${agentId} bootstrap profile`);
-      requireText(binding.profiles.mind, `model policy ${agentId} mind profile`);
-      requireText(binding.profiles.reaction, `model policy ${agentId} reaction profile`);
+      requireText(binding.profiles.creation, `model policy ${agentId} creation profile`);
+      requireText(binding.profiles.decision, `model policy ${agentId} decision profile`);
+      requireText(binding.profiles.fallback, `model policy ${agentId} decision fallback profile`);
       if (binding.resumeFromRevision !== undefined &&
         (!Number.isSafeInteger(binding.resumeFromRevision) || binding.resumeFromRevision < 0 ||
           binding.resumeFromRevision > document.state.revision)) {

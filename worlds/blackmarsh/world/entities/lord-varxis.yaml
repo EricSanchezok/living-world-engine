@@ -29,7 +29,7 @@ ratings:
   - { id: "insight:lord-varxis", definition_id: insight, value: 3 }
 agent:
   id: lord-varxis
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 把防务当作一张永远少一枚棋子的矿路图；他宁可向公爵承认缺口，也不愿用漂亮的总数掩盖某座矿井今夜无人响应。

@@ -24,7 +24,7 @@ ratings:
   - { id: "insight:azure-king", definition_id: insight, value: 4 }
 agent:
   id: azure-king
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 像读潮汐一样治理的海底国王，把人口、航线和资源看成必须逐程兑现的责任；他尊重私人忠诚，却拒绝用血缘或恋情虚构一条国家命令链。

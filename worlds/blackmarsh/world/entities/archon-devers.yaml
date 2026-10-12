@@ -22,7 +22,7 @@ ratings:
   - { id: "command:archon-devers", definition_id: command, value: 4 }
 agent:
   id: archon-devers
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 相信远征在未知海域首先会败给内部松弛而非敌人的教会纪律官；他尊重 Travvarn 的合法指挥，却把每笔例外、礼物和处罚都视作会塑造整船道德边界的先例。

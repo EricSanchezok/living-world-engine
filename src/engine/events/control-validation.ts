@@ -1,3 +1,4 @@
+import { agentEventModels } from "./model-bindings";
 import type { ModelExecutionAudit, SimulationState } from "../contracts/model";
 import { projectAgentPerspective } from "../cognition/agent-perspective";
 import { contentHash } from "../models/model-audit";
@@ -28,27 +29,32 @@ function creationEvidence(audits: ModelExecutionAudit[], owner: string, output: 
 /** Re-execute each newly appended private instruction against its owner's actual input. */
 export function validateControlTransition(source: Readonly<SimulationState>, before: DecisionEventState, after: DecisionEventState,
   authority: WorldRuntimeContract, producerHash: string, decisions: DecisionUse[], audits: ModelExecutionAudit[],
-  roster: Readonly<Record<string, PolicyBinding>>, externalActions: readonly ExternalActionInput[] = []) {
+  roster: Readonly<Record<string, PolicyBinding>>, externalActions: readonly ExternalActionInput[] = [], decisionState: Readonly<SimulationState> = source) {
   readDecisionEventState({ producerHash, data: after as unknown as JsonObject }, source);
   if (before.randomReservation && (!equal(before.randomReservation, after.randomReservation) || !equal(before.pending, after.pending))) {
     throw new Error("a durable random reservation or its stakes were rewritten");
   }
   if (source.revision === 0 && !source.executionState && after.randomReservation) throw new Error("bootstrap cannot draw randomness");
-  for (const key of ["worldHash", "modelCatalogHash", "registryHash", "models", "receipts"] as const) {
+  for (const key of ["worldHash", "modelCatalogHash", "registryHash", "models", "modelOverrides", "receipts"] as const) {
     if (!equal(before[key], after[key])) throw new Error(`private control changed pinned ${key}`);
   }
   if (!equal(after.worldResources, programWorldResources(source, authority, after.activities, before.worldResources))) throw new Error("world preparation used noncanonical resources");
   for (const audit of audits) {
     validateModelAudit(audit, "decision event");
     if (audit.modelCatalogHash !== after.modelCatalogHash || audit.registrySnapshotHash !== after.registryHash) throw new Error("decision event model identity changed");
+    if (audit.role === "creation") {
+      const models = audit.subjectId === "world" ? after.models : agentEventModels(source.agents[audit.subjectId] ? source : decisionState, after, audit.subjectId);
+      if (audit.profileId !== models.creation) throw new Error("creation used another pinned model");
+    }
   }
   for (const use of decisions) {
     validateDecisionResult(use.batch, use.result);
     if (use.evidenceHash !== contentHash(use.result)) throw new Error("decision evidence hash mismatch");
     const audit = use.result.audit;
+    const models = use.batch.view.kind === "agent" ? agentEventModels(source.agents[use.batch.view.agentId] ? source : decisionState, after, use.batch.view.agentId) : after.models;
     validateModelAudit(audit, "program decision");
     if (audit.registrySnapshotHash !== after.registryHash || audit.modelCatalogHash !== after.modelCatalogHash ||
-      audit.profileId !== (use.result.fallback ? after.models.fallback : after.models.decision)) throw new Error("decision used another pinned model");
+      audit.profileId !== (use.result.fallback ? models.fallback : models.decision)) throw new Error("decision used another pinned model");
     if (!use.reused && !audits.some(value => equal(value, audit))) throw new Error("new decision has no physical invocation audit");
     if (use.reused) {
       const cached = before.decisionCache?.entries as unknown as Array<{ result: unknown }> | undefined;
@@ -81,6 +87,7 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
   }
   const receipts = programReceiptIndex(before), actualIssued = new Map<string, ReturnType<typeof issueProgramAttempt>>();
   for (const agent of Object.values(source.agents)) {
+    const models = agentEventModels(source, after, agent.id);
     if (after.policyKinds[agent.id] !== roster[agent.id]?.kind) throw new Error("private policy kind differs from the authorized roster");
     const owner = after.agents[agent.id]; if (!owner) throw new Error("private program owner disappeared");
     const perspective = projectAgentPerspective(source as SimulationState, agent);
@@ -115,7 +122,7 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
         if (!(reused ? admitted.hash === definition.program.hash : equal(admitted, definition.program)) || !equal(entry.entityIds, privateProgramEntityIds(perspective)) ||
           entry.snapshot.startedAtSeconds !== source.truth.elapsedSeconds ||
           !reused &&
-          !creationEvidence(audits, agent.id, { definition: admitted.definition, parameters: entry.snapshot.parameters }, after.models.creation, definition.creationInvocationIds)) {
+          !creationEvidence(audits, agent.id, { definition: admitted.definition, parameters: entry.snapshot.parameters }, models.creation, definition.creationInvocationIds)) {
           throw new Error("new private program has no authorized creation evidence");
         }
       }
@@ -168,7 +175,7 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
           const work = interpreter.work(resources.resources, now).find(value => value.id === event.workId);
           if (!work || work.kind === "predicate") throw new Error("instruction is outside the actual program frontier");
           if (event.kind === "utterance") {
-            if (!creationEvidence(audits, agent.id, { text: event.text }, after.models.creation)) throw new Error("utterance has no pre-action creation evidence");
+            if (!creationEvidence(audits, agent.id, { text: event.text }, models.creation)) throw new Error("utterance has no pre-action creation evidence");
             interpreter.supplyUtterance(work, event.text, resources.resources, now);
           } else if (event.kind === "issue") {
             const attempt = issueProgramAttempt(source, interpreter, work, resources.resources);
@@ -215,7 +222,7 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
         externalWorldAttempt(source, action, pending.attempt.utterance).id === pending.attempt.id);
       if (!action || roster[action.agentId]?.kind !== "external" ||
         !equal(externalWorldAttempt(source, action, pending.attempt.utterance), pending.attempt) ||
-        !creationEvidence(audits, action.agentId, { utterance: pending.attempt.utterance }, after.models.creation)) throw new Error("world attempt has no authorized player submission");
+        !creationEvidence(audits, action.agentId, { utterance: pending.attempt.utterance }, agentEventModels(source, after, action.agentId).creation)) throw new Error("world attempt has no authorized player submission");
     }
   }
   for (const pending of before.pending) if (!after.pending.some(value => value.attempt.id === pending.attempt.id)) {

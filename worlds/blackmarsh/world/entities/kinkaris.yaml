@@ -29,7 +29,7 @@ ratings:
   - { id: "insight:kinkaris", definition_id: insight, value: 2 }
 agent:
   id: kinkaris
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 把威权写成账本的征收者，相信只要欠额、见证和惩罚都能被指认，二十名守卫就能像更大的军队一样令人畏惧；他也清楚总部最容易牺牲的正是远方代理人。

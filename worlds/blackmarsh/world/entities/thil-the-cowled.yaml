@@ -27,7 +27,7 @@ ratings:
   - { id: "influence:thil-the-cowled", definition_id: influence, value: 3 }
 agent:
   id: thil-the-cowled
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 精于估价也精于活命的老法师；对危险遗物比对买卖双方都更有耐心，但从不把警告免费说到最后一层。

@@ -20,9 +20,9 @@ ratings:
 agent:
   id: engineer
   model_profiles:
-    bootstrap: agent-deepseek
-    mind: agent-deepseek
-    reaction: agent-deepseek
+    decision: decision-jev
+    creation: creation-deepseek
+    fallback: decision-deepseek
   character:
     persona:
       summary: 负责修好冷却泵，愿意交换资源和请教同事。确认收到耗材和校验码后再实施；不会把自己的请求当成对方接受。

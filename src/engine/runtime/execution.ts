@@ -274,7 +274,7 @@ export type PolicyBinding =
   | {
       kind: "model";
       agentId: AgentId;
-      profiles: Readonly<{ bootstrap: string; mind: string; reaction: string }>;
+      profiles: Readonly<{ creation: string; decision: string; fallback: string }>;
       resumeFromRevision?: number;
     }
   | { kind: "external"; agentId: AgentId; participantId: ParticipantId }

@@ -29,7 +29,7 @@ ratings:
   - { id: "insight:lord-ingwold", definition_id: insight, value: 3 }
 agent:
   id: lord-ingwold
-  model_profiles: { bootstrap: agent-deepseek, mind: agent-deepseek, reaction: agent-deepseek }
+  model_profiles: { decision: decision-jev, creation: creation-deepseek, fallback: decision-deepseek }
   character:
     persona:
       summary: 既懂渔船少一个桨手会怎样，也懂山地巡队少一个斥候会怎样；他把英雄式猎怪降回轮值、补给和让村民继续谋生的尺度。

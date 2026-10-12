@@ -1,6 +1,6 @@
 import { canonicalize, contentHash, measureModelContext } from "../models/model-audit";
 import { expandSharedBatchContexts, isSharedBatchContext } from "../mechanics/shared-batch-context";
-import { parseModelCatalog, type ModelCatalog } from "../models/model-catalog";
+import { parseModelCatalog, modelRoles, type ModelCatalog } from "../models/model-catalog";
 import {
   MODELS_DEV_API_URL,
   type ModelRegistryService,
@@ -20,6 +20,7 @@ import { structuredPromptBytes } from "../prompts";
 import { actionCompilationCandidateKeyForHandle, referenceHandleFor, type ActionCompilationCandidateKey, type ExistingReferenceHandle } from "../contracts/model-context";
 
 const TEST_PROFILE_IDS = [
+  "decision-jev", "creation-deepseek", "decision-deepseek",
   "truth-engine",
   "agent-default",
   "truth-deepseek",
@@ -60,8 +61,9 @@ export function createTestModelCatalog(
       account_id: "scripted-test",
       selector: { kind: "exact", model_id: `scripted:${profileId}` },
       description: `Deterministic test profile ${profileId}`,
-      allowed_roles: profileId.startsWith("truth-") || profileId === "truth-engine"
+      allowed_roles: ["decision-jev", "creation-deepseek", "decision-deepseek"].includes(profileId) ? [...modelRoles] : profileId.startsWith("truth-") || profileId === "truth-engine"
         ? [
+            "decision", "creation",
             "truth-perception",
             "truth-reaction-routing",
             "truth-resolution",
@@ -72,7 +74,7 @@ export function createTestModelCatalog(
             "causal-verifier",
             "arrival-generator",
           ]
-        : ["agent-bootstrap", "agent-mind", "agent-reaction"],
+        : ["decision", "creation", "agent-bootstrap", "agent-mind", "agent-reaction"],
       request_timeout_ms: 10_000,
       max_output_tokens: 32_768,
       max_input_bytes: options.maxInputBytes ?? 262_144,
@@ -1511,7 +1513,7 @@ export function deterministicModelOutput(profileId: string, context: unknown): u
             .filter((handle): handle is string => Boolean(handle)),
         };
       }
-      if (profileId.startsWith("truth-")) {
+      if (stage === "perception" || stage === "resolution" || stage === "transition") {
         if (stage === "perception") return { kind: "done", reports: deterministicOnsetReports(context) };
         if (stage === "resolution") {
           return (stateSection.committedResolutionPlans ?? []).length ? { kind: "done" } : automaticPlanDirective(context);
