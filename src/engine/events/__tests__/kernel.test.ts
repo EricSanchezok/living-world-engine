@@ -12,6 +12,9 @@ import { worldProgramSources, worldResources } from "../resources";
 import { commitWorldEvent, createWorldEventCandidate } from "../kernel";
 import { compileWorldProgram } from "../compiler";
 import { WorldProgramLibrary } from "../library";
+import { projectEventPerception } from "../perception";
+import { applyEventBeliefs, reviseEventBeliefs } from "../cognition";
+import { worldProgramDuration } from "../adjudication";
 
 function fixture() {
   const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: createTestModelCatalog() });
@@ -21,7 +24,7 @@ function fixture() {
   const raw: WorldProgramDefinition = { version: 1, namespace: "world", id: "voluntary-gift", description: "Transfer the actor's offered stones to a nearby recipient.",
     sourceIds: ["world", "law:no-free-spirit-stones"], parameters: { actor: { kind: "entity", description: "Giver" }, recipient: { kind: "entity", description: "Recipient" }, amount: { kind: "number", description: "Offered amount" } },
     reads: ["entity:{actor}", "entity:{recipient}", "placement:{actor}", "placement:{recipient}", from, to], writes: ["quantities"],
-    durationSeconds: { kind: "literal", value: 5 },
+    timing: { profileId: "explicit-duration", basis: { kind: "explicit_duration", seconds: { kind: "literal", value: 5 }, sourceText: "5 seconds" } },
     predicates: [{ id: "authorized", description: "The actor voluntarily offers their own stones to this reachable recipient.", reads: ["placement:{actor}", "placement:{recipient}"], sourceIds: ["world"],
       test: { kind: "semantic", instructions: "Check the actual offer and reach. Do not fabricate acceptance or an exchange promised in return." }, unknown: "wait" }],
     branches: [{ id: "give", when: [{ predicateId: "authorized", equals: "yes" }], outcome: "succeeded", description: "A voluntary transfer occurs.",
@@ -35,7 +38,7 @@ function fixture() {
   const program = admitWorldProgram(raw, sources);
   const bound: BoundWorldProgram = { program, parameters: { actor: "player", recipient: "keeper", amount: 2 }, attempt: {
     id: runtimeId({ worldHash: state.worldHash, revision: 0, kind: "action", stage: "program", owner: "player", round: 0, ordinal: 0 }),
-    actorId: "player", actorEntityId: "player", intent: "Give the keeper two of my stones as a gift.", utterance: null, targetEntityIds: ["keeper"], startedAtSeconds: 0,
+    actorId: "player", actorEntityId: "player", intent: "Spend 5 seconds giving the keeper two of my stones as a gift.", utterance: null, targetEntityIds: ["keeper"], startedAtSeconds: 0,
     program: { instanceId: "gift-1", workId: contentHash("work"), requestHash: contentHash("request") },
   } };
   return { definition, state, sources, resources, raw, bound, from, to };
@@ -147,5 +150,61 @@ describe("source-bound world event kernel", () => {
     const { result } = await adjudicate(f), candidate = createWorldEventCandidate(f.state, f.definition, f.resources, [f.bound], result, 5);
     const committed = commitWorldEvent(f.state, f.definition, f.resources, candidate, { earliestPendingSeconds: 5, receipts: new Map() });
     expect(committed.receipt.programReceipts[0]!.madeProgress).toBe(false);
+  });
+  it("binds duration to authored profiles and exact action evidence", () => {
+    const f = fixture();
+    expect(worldProgramDuration(f.bound, f.resources)).toBe(5);
+    const forged = structuredClone(f.bound); forged.attempt.intent = "Give a gift.";
+    expect(() => worldProgramDuration(forged, f.resources)).toThrow("grounded");
+    f.raw.timing = { profileId: "brief-action", basis: { kind: "profile" } };
+    f.bound.program = admitWorldProgram(f.raw, f.sources);
+    expect(worldProgramDuration(f.bound, f.resources)).toBe(1);
+    f.raw.timing.profileId = "invented-profile"; f.bound.program = admitWorldProgram(f.raw, f.sources);
+    expect(() => worldProgramDuration(f.bound, f.resources)).toThrow("authored temporal profile");
+  });
+  it("projects only committed deliveries without exposing a speaker's hidden identity", async () => {
+    const f = fixture(); f.raw.writes = []; f.raw.branches[0]!.effects = [];
+    f.bound.attempt.utterance = "I am the rightful king.";
+    f.raw.branches[0]!.deliveries = [{ recipientParameter: "recipient", kind: "speech", text: f.bound.attempt.utterance }];
+    f.bound.program = admitWorldProgram(f.raw, f.sources);
+    for (const [id, binding] of Object.entries(f.state.agents.keeper!.bindings)) if (binding.canonicalEntityIds.includes("player")) delete f.state.agents.keeper!.bindings[id];
+    const { result } = await adjudicate(f), candidate = createWorldEventCandidate(f.state, f.definition, f.resources, [f.bound], result, 5);
+    const committed = commitWorldEvent(f.state, f.definition, f.resources, candidate, { earliestPendingSeconds: 5, receipts: new Map() });
+    expect(() => projectEventPerception(f.state, candidate, committed.receipt)).toThrow("committed world receipt");
+    const tampered = structuredClone(candidate); tampered.deliveries[0]!.text = "A fabricated statement.";
+    expect(() => projectEventPerception(committed.state, tampered, committed.receipt)).toThrow("committed world receipt");
+    const projected = projectEventPerception(committed.state, candidate, committed.receipt);
+    expect(projected.observations).toHaveLength(1);
+    expect(projected.observations[0]).toMatchObject({ observerId: "keeper", summary: "说话者说：“I am the rightful king.”", apparentClaims: [] });
+    expect(projected.observations[0]!.introductions[0]!.localEntity.name).toBe("说话者");
+    expect(projected.agents.player).toEqual(committed.state.agents.player);
+    expect(projected.agents.keeper!.belief.claims).toEqual(committed.state.agents.keeper!.belief.claims);
+    expect(Object.values(projected.agents.keeper!.belief.evidence).some(value => value.kind === "testimony" && value.sourceId === projected.observations[0]!.id)).toBe(true);
+    expect(committed.state.agents.keeper!.belief.evidence).toEqual(f.state.agents.keeper!.belief.evidence);
+  });
+  it("revises existing beliefs from the owner's evidence, with deterministic proof-checked replay", async () => {
+    const f = fixture(), agent = f.state.agents.keeper!;
+    const localId = Object.keys(agent.belief.localEntities)[0]!;
+    agent.belief.evidence.new = { id: "new", kind: "testimony", description: "A stranger says the gate is open.", sourceId: null, step: 0 };
+    agent.belief.claims.test = { id: "test", subjectId: localId, predicate: "gate-open", value: { kind: "boolean", value: true },
+      description: "The gate is open", stance: "suspected", confidence: 0.5, evidenceIds: [] };
+    const configured = decisionTestProvider(body => {
+      const wire = JSON.stringify(body); expect(wire).not.toContain(f.state.agents.player!.character.persona.summary);
+      expect(wire).not.toContain("canonicalEntityIds");
+      return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: "supported" }])) };
+    });
+    const registry = await configured.registry.capture(); let ordinal = 0;
+    const output = await reviseEventBeliefs(new DecisionRuntime(configured.gateway), f.state, "keeper", ["new"], undefined,
+      { profileId: "world-test", workloadId: "belief-test", batchId: "belief-test", modelRegistrySnapshotHash: registry.hash,
+        runtimeIdentity: { worldHash: f.state.worldHash, revision: 0 }, nextInvocation: () => ++ordinal });
+    const revised = applyEventBeliefs(f.state, output.revision);
+    expect(revised.belief.claims.test).toMatchObject({ stance: "believed", confidence: 0.5, evidenceIds: ["new"] });
+    expect(f.state.agents.keeper!.belief.claims.test!.stance).toBe("suspected");
+    expect(applyEventBeliefs(f.state, JSON.parse(JSON.stringify(output.revision)))).toEqual(revised);
+    const forged = structuredClone(output.revision); forged.patch.operations = [];
+    forged.hash = contentHash(Object.fromEntries(Object.entries(forged).filter(([key]) => key !== "hash")));
+    expect(() => applyEventBeliefs(f.state, forged)).toThrow("differs from its decisions");
+    f.state.agents.keeper!.belief.evidence.new!.description = "Different testimony.";
+    expect(() => applyEventBeliefs(f.state, output.revision)).toThrow("private input");
   });
 });

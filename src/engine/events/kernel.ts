@@ -7,7 +7,7 @@ import { assertJsonValue, frozenClone, type JsonValue } from "../runtime/json";
 import { runtimeId, quantityId } from "../runtime/runtime-id";
 import { applyWorldDeltaOperation, validateSimulationState } from "../runtime/transaction";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
-import { makeWorldDecisionBatch, mechanicalWorldCondition, validateWorldEvidence, worldProgramDuration, worldProvenance, worldQuestionWork,
+import { makeWorldDecisionBatch, mechanicalWorldCondition, validateWorldEvidence, worldProgramDuration, worldProgramTiming, worldProvenance, worldQuestionWork,
   type BoundWorldProgram, type WorldAdjudication, type WorldConditionRecord } from "./adjudication";
 import { captureReads, validateReads, worldProgramSources, worldResources, type ReadSet } from "./resources";
 import { admitWorldProgram, bindWorldProgram, materializeWorldBranch, renderWorldText } from "./world-program";
@@ -104,6 +104,9 @@ function materialize(programs: BoundWorldProgram[], records: Map<string, WorldCo
     const branches = bound.program.definition.branches.filter(branch => branch.when.every(condition => verdict(condition.predicateId) === condition.equals) && verdict(`effect:${branch.id}`) === "yes");
     if (branches.length !== 1) throw new Error(branches.length ? "ambiguous world branches require expansion" : "world rule awaits evidence or expansion");
     const branch = branches[0]!;
+    if (worldProgramTiming(bound, resources).completionAtSeconds === null && branch.outcome === "succeeded") {
+      throw new Error("an ongoing activity checkpoint cannot prove activity completion");
+    }
     selections.push({ attemptId: bound.attempt.id, branchId: branch.id });
     effects.push(...materializeWorldBranch(bound.program, branch.id, bound.parameters, resources, worldProvenance(bound)));
     for (const delivery of branch.deliveries) {

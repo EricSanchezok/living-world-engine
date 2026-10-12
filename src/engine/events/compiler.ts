@@ -34,7 +34,8 @@ export async function compileWorldProgram(provider: StructuredModelProvider, req
     resources: Object.fromEntries(Object.entries(request.resources).filter(([key]) => !key.includes(":"))),
     resourceKeys: Object.keys(request.resources).sort(), entityIds: [...entities].sort(),
     resourceAddressing: { entity: "entities[id]", placement: "placements[id]", fact: "facts[id]", meter: "meters[id]", quantity: "quantities[id]",
-      rating: "ratings[id]", condition: "conditions[id]", activity: "activities[id]", pool: "pools[id]", timer: "timers[id]", law: "laws entry matching id" },
+      rating: "ratings[id]", condition: "conditions[id]", activity: "activities[id]", pool: "pools[id]", timer: "timers[id]", law: "laws entry matching id",
+      temporal: "mechanics.temporalProfiles[id]" },
     effectContract: z.toJSONSchema(worldDeltaOperationSchema, { target: "draft-07", reused: "ref" }) },
     task: { attempt: request.attempt, reason: request.reason, constraints: [] }, repair: null });
   const sourceHash = contentHash(context);

@@ -1,4 +1,5 @@
 import type { CausalSource } from "../contracts/model";
+import { materializeTemporalPlan, type TemporalPlanDraft, type TemporalProfileDefinition } from "../mechanics/temporal";
 import { contentHash } from "../models/model-audit";
 import { decisionPrompt, nativeDecisionBounds, validateDecisionResult, type DecisionBatch, type DecisionResult } from "../models/decision";
 import { DecisionRuntime, type DecisionUse, type ProgramDecisionScope } from "../programs/decision-runtime";
@@ -40,10 +41,30 @@ export function worldProvenance(bound: BoundWorldProgram): CausalSource {
     ...Object.keys(bound.program.sourceHashes).filter(id => id.startsWith("law:")).map(id => ({ kind: "law" as const, id: id.slice(4) }))],
     assertions: [{ kind: "entity_lifecycle", entityId: bound.attempt.actorEntityId, expected: "active" }] };
 }
+export function worldProgramTiming(bound: BoundWorldProgram, resources: ProgramResources) {
+  const timing = bound.program.definition.timing, source = timing.basis;
+  let basis: TemporalPlanDraft["basis"] = { kind: "profile" };
+  if (source.kind !== "profile") {
+    const expression = source.kind === "explicit_duration" ? source.seconds : source.amount;
+    const value = evaluateExpression(bindWorldExpression(expression, bound.parameters), bound.parameters, resources);
+    if (typeof value !== "number" || !Number.isFinite(value) || value <= 0) throw new Error("invalid world temporal quantity");
+    const sourceText = renderWorldText(source.sourceText, bound.parameters);
+    basis = source.kind === "explicit_duration" ? { kind: source.kind, seconds: value, sourceText }
+      : { kind: source.kind, amount: value, unit: source.unit, sourceText };
+  }
+  const profile = resources[`temporal:${timing.profileId}`]?.value as unknown as TemporalProfileDefinition;
+  if (!profile || profile.id !== timing.profileId) throw new Error("world timing requires an authored temporal profile");
+  return materializeTemporalPlan({ id: `program-time:${bound.attempt.id}`, actionId: bound.attempt.id,
+    actorId: bound.attempt.actorId, rawText: bound.attempt.intent, startsAtSeconds: bound.attempt.startedAtSeconds,
+    profiles: { [profile.id]: profile }, draft: { profileId: timing.profileId, basis,
+      description: bound.program.definition.description, continuationAssertions: worldProvenance(bound).assertions,
+      causes: worldProvenance(bound).causes } });
+}
 export function worldProgramDuration(bound: BoundWorldProgram, resources: ProgramResources): number {
-  const value = evaluateExpression(bindWorldExpression(bound.program.definition.durationSeconds, bound.parameters), bound.parameters, resources);
-  if (typeof value !== "number" || !Number.isSafeInteger(value) || value <= 0) throw new Error("world program duration must be positive integer seconds");
-  return value;
+  const plan = worldProgramTiming(bound, resources);
+  const duration = plan.completionAtSeconds === null ? plan.checkpointSeconds : plan.completionAtSeconds - plan.startsAtSeconds;
+  if (!Number.isSafeInteger(duration) || duration <= 0) throw new Error("world program duration must be positive integer seconds");
+  return duration;
 }
 function actualKeys(bound: BoundWorldProgram, templates: string[]) { return templates.map(key => renderWorldText(key, bound.parameters)); }
 function compare(left: JsonValue, operator: string, right: JsonValue): WorldVerdict {
@@ -83,8 +104,8 @@ export function worldQuestionWork(bound: BoundWorldProgram, resources: ProgramRe
     version: contentHash(condition),
   }));
   for (const branch of definition.branches) {
-    questions.push({ bound, id: `effect:${branch.id}`, reads: actualKeys(bound, definition.reads),
-      payload: { branch, durationSeconds: worldProgramDuration(bound, resources),
+    questions.push({ bound, id: `effect:${branch.id}`, reads: [...actualKeys(bound, definition.reads), `temporal:${definition.timing.profileId}`],
+      payload: { branch, timing: worldProgramTiming(bound, resources) as unknown as JsonValue, durationSeconds: worldProgramDuration(bound, resources),
         operations: JSON.parse(JSON.stringify(materializeWorldBranch(bound.program, branch.id, bound.parameters, resources, worldProvenance(bound)))) as JsonValue,
         deliveries: branch.deliveries.map(delivery => ({ recipientEntityId: bound.parameters[delivery.recipientParameter]!,
           text: renderWorldText(delivery.text, bound.parameters), kind: delivery.kind })) },

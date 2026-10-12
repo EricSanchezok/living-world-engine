@@ -23,6 +23,7 @@ export function worldResources(state: Readonly<SimulationState>, definition: Wor
     for (const [id, value] of Object.entries(entries)) values[`${prefix}:${id}`] = value;
   }
   for (const law of definition.laws) values[`law:${law.id}`] = law;
+  for (const profile of Object.values(truth.mechanics.temporalProfiles)) values[`temporal:${profile.id}`] = profile;
   for (const definitionId of Object.keys(truth.mechanics.quantities)) for (const entityId of Object.keys(truth.entities)) {
     const id = quantityId(state.worldHash, definitionId, entityId); values[`quantity:${id}`] ??= null;
   }

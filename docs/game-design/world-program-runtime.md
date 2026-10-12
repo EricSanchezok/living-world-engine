@@ -8,6 +8,8 @@ The world program foundation lives in [`src/engine/events/kernel.ts`](../../src/
 
 Effects are JSON templates. Dynamic leaves use `$expression` or `$text`; `$literal` escapes literal data. Code materializes templates into typed world operations. Generated rules cannot own time advancement or initialize quantities to bypass conservation. Fact and condition provenance is supplied by the kernel. Speech delivery must match the concrete utterance authored before the attempt.
 
+Timing selects an authored temporal profile. Code derives fixed durations, travel rates, staged durations and open-ended checkpoints. Explicit quantities and durations must match evidence extracted from the action text. Each effect judgment sees its actual temporal plan and reads the selected profile version. An open-ended checkpoint cannot announce activity completion.
+
 The compiler sends each canonical collection once; atomic read keys and authored fact sources address those same records. Repeated JSON-schema definitions use references. Stable world context precedes the attempt in the request layout. These are lossless layout choices, not removals of world evidence.
 
 ## Decisions and commits
@@ -26,8 +28,14 @@ The native gateway preserves raw probabilities. Observed hundredth-precision Jev
 
 `jointActionComponents` connects read/write conflicts, shared actors, and interacting recipients transitively. Independent components can prepare concurrently; the queue retains commit order.
 
+## Observation and cognition
+
+`projectEventPerception` requires matching candidate and committed receipt hashes. Only explicit committed deliveries become observation packets. A known private speaker alias can be reused; an unidentified speaker receives a neutral local alias without canonical names or hidden identity claims. Hearing testimony adds evidence that words were heard and does not assert that their contents are true.
+
+`reviseEventBeliefs` asks independent questions about the owner's existing claims using only that owner's authorized perspective. Supported and contradicted answers update stance; insufficient or irrelevant evidence leaves the claim unchanged. Probability is retained in the decision audit and does not replace epistemic confidence. `applyEventBeliefs` reconstructs the exact private input and derives the patch again from the recorded output during commit or replay. New evidence remains available directly to program predicates, including when there are no existing claims to revise.
+
 ## Verification boundary
 
 Tests exercise the actual ModelGateway with only HTTP replaced, compilation/repair, quantity transfers, stale reads, unrelated updates, source/evidence tampering, unknown, atomic competition failure, exact speech, no-op progress, and scheduler restart. A real-model diagnostic is available as `scripts/experiments/jev-world-smoke.ts`, consuming a successful private-program probe. It exercises the world kernel directly, not WorldHost persistence or a complete game.
 
-Random commitments, observation/cognition delivery, timer-only physical boundaries, production persistence, Inspector, schema upgrades, and full A/B/C qualification are subsequent integration work. Passing these foundational checks does not establish the acceptance targets.
+Random commitments, timer-only physical boundaries, production integration of observation/cognition, persistence, Inspector, schema upgrades, and full A/B/C qualification are subsequent integration work. Passing these foundational checks does not establish the acceptance targets.

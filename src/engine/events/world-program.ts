@@ -15,10 +15,15 @@ const predicate = z.object({ id: programKey, description: text, reads: z.array(t
     z.object({ kind: z.literal("semantic"), instructions: text }).strict(),
     z.object({ kind: z.literal("mechanical"), operator: z.enum(["eq", "ne", "lt", "lte", "gt", "gte"]), left: valueExpressionSchema, right: valueExpressionSchema }).strict(),
   ]), unknown: z.enum(["wait", "expand"]) }).strict();
+const timing = z.object({ profileId: programKey, basis: z.discriminatedUnion("kind", [
+  z.object({ kind: z.literal("profile") }).strict(),
+  z.object({ kind: z.literal("explicit_duration"), seconds: valueExpressionSchema, sourceText: text }).strict(),
+  z.object({ kind: z.literal("explicit_quantity"), amount: valueExpressionSchema, unit: text, sourceText: text }).strict(),
+]) }).strict();
 export const worldProgramSchema = z.object({
   version: z.literal(1), namespace: z.literal("world"), id: programKey, description: text,
   sourceIds: z.array(programKey).min(1), parameters: z.record(programKey, z.object({ kind: z.enum(["entity", "text", "number"]), description: text }).strict()),
-  reads: z.array(text).min(1), writes: z.array(text), durationSeconds: valueExpressionSchema,
+  reads: z.array(text).min(1), writes: z.array(text), timing,
   predicates: z.array(predicate).min(1),
   branches: z.array(z.object({ id: programKey,
     when: z.array(z.object({ predicateId: programKey, equals: z.enum(["yes", "no"]) }).strict()).min(1),
@@ -89,7 +94,11 @@ export function admitWorldProgram(input: unknown, sources: Readonly<Record<strin
       if (reserved[0] === "$text") checkText(z.string().parse(object.$text));
     } else for (const [key, child] of Object.entries(value)) { programKey.parse(key); checkValue(child, depth + 1); }
   };
-  definition.reads.forEach(checkText); definition.writes.forEach(checkText); checkExpression(definition.durationSeconds, definition.reads);
+  definition.reads.forEach(checkText); definition.writes.forEach(checkText);
+  if (definition.timing.basis.kind !== "profile") {
+    const basis = definition.timing.basis; checkText(basis.sourceText);
+    checkExpression(basis.kind === "explicit_duration" ? basis.seconds : basis.amount, definition.reads);
+  }
   for (const condition of definition.predicates) {
     if (condition.id.startsWith("effect:")) throw new Error("world predicate uses an engine-owned effect identifier");
     unique(condition.reads, "world predicate read"); unique(condition.sourceIds, "world predicate source");
