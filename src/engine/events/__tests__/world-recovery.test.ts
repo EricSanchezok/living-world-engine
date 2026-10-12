@@ -8,6 +8,30 @@ import { prepareProgramWorldWork } from "../world-control";
 import { toWorldRuntimeContract } from "../../runtime/world-definition";
 
 describe("world program recovery through the native engine", () => {
+  it("retains a supported frontier and rejudges it after a coupled unsupported attempt exhausts repair", async () => {
+    const f = nativeProgramFixture();
+    f.rule.predicates.push({ id: "actor-allowed", description: "Only this compiled actor branch is available.", sourceIds: ["world"],
+      reads: ["entity:{actor}"], unknown: "expand", test: { kind: "mechanical", operator: "eq",
+        left: { kind: "parameter", name: "actor" }, right: { kind: "literal", value: "keeper" } } });
+    f.rule.branches[0]!.when.push({ predicateId: "actor-allowed", equals: "yes" });
+    await f.configured.registry.capture();
+    const engine = new SimulationEngine(f.world, new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig));
+    await engine.bootstrapAgents();
+    const first = await engine.step(f.roster, { expectedRevision: 0, trigger: "participant_action", externalActions: [{ agentId: "player",
+      submissionId: "coupled-unsupported", rawText: 'Spend 5 seconds calling out "Hello keeper".', goal: "Greet", means: null, targetIds: [] }] });
+    const control = readDecisionEventState(first.state.executionState!, first.state);
+    expect(control.pending.find(value => value.attempt.actorId === "keeper")).toMatchObject({ failure: null, atSeconds: 5 });
+    const failed = control.pending.find(value => value.attempt.actorId === "player")!;
+    expect(failed.failure).toContain('"evaluated":{"left":"player","right":"keeper"}');
+    expect(failed.failure).toContain('"unmetConditions":[{"predicateId":"actor-allowed","equals":"yes"}]');
+    const repaired = await engine.step(f.roster, { expectedRevision: first.state.revision, trigger: "manual", externalActions: [] });
+    const completed = await engine.step(f.roster, { expectedRevision: repaired.state.revision, trigger: "manual", externalActions: [] });
+    expect(completed.state.truth.elapsedSeconds).toBe(5);
+    expect(completed.committed.actions.map(action => action.actorId)).toEqual(["keeper"]);
+    expect(completed.state.step).toBe(1);
+    expect(readDecisionEventState(completed.state.executionState!, completed.state).pending[0]!.attempt.actorId).toBe("player");
+    expect(replaySimulationState(completed.state)).toEqual(completed.state);
+  });
   it("waits on actual judgment reads and ignores an unrelated world's change", async () => {
     const options = { worldVerdict: "unknown" as const };
     const f = nativeProgramFixture(options); await f.configured.registry.capture();

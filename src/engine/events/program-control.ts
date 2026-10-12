@@ -107,6 +107,7 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
       const reusable = library.forOwner(ownerId).filter(entry => {
         if (!entry.program.definition.goals.some(goal => goals.some(current => current.id === goal.goalId))) return false;
         if (active?.status === "needs-expansion" && active.program.hash === entry.program.hash) return false;
+        if (active?.status === "interrupted" && owner.planning!.attempts > 0 && active.program.hash === entry.program.hash) return false;
         try { return admitProgram(entry.program.definition, admission).hash === entry.program.hash &&
           !!bindProgram(entry.program, entry.parameters, new Set(privateProgramEntityIds(perspective))); } catch { return false; }
       });

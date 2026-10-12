@@ -2,6 +2,7 @@ import { contentHash } from "../models/model-audit";
 import type { ProgramResources } from "../programs/definition";
 import type { JsonValue } from "../runtime/json";
 import type { WorldAdjudication } from "./adjudication";
+import { worldBranchDiagnostic } from "./adjudication";
 import { captureReads, type ReadSet } from "./resources";
 import type { PendingProgramAttempt } from "./runtime-state";
 import { renderWorldText } from "./world-program";
@@ -56,5 +57,6 @@ export function deferWorldAttempt(pending: PendingProgramAttempt, resources: Pro
     rejectedProgramHashes: [...new Set([...rejected, ...(!wait && pending.bound ? [pending.bound.program.hash] : [])])].sort(),
     evidenceHashes: [...new Set([...records.map(record => record.evidenceHash), ...(random ? [random.evidenceHash] : [])])].sort() };
   pending.dependencyHash = worldRecoveryInput(pending, resources, sources).hash;
-  pending.failure = reason; pending.atSeconds = null;
+  pending.failure = pending.bound && records.length ? `${reason}: ${JSON.stringify(worldBranchDiagnostic(pending.bound, resources, records))}` : reason;
+  pending.atSeconds = null;
 }

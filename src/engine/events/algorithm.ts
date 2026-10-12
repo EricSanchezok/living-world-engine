@@ -10,7 +10,7 @@ import {
 import { executionStage } from "../runtime/stages";
 import type { JsonObject } from "../runtime/json";
 import { toWorldRuntimeContract } from "../runtime/world-definition";
-import { adjudicateWorldPrograms } from "./adjudication";
+import { adjudicateWorldPrograms, selectableWorldBranches } from "./adjudication";
 import { reviseEventBeliefs } from "./cognition";
 import { nextWorldClockBoundary } from "./clock-boundary";
 import { createWorldEventCandidate, type WorldEventCandidate } from "./kernel";
@@ -148,15 +148,18 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
         event = createWorldEventCandidate(physical, authority, control.worldResources, programs, adjudication, atSeconds, randomness);
       } catch (error) {
         if (!(error instanceof Error) || !/world rule awaits evidence or expansion|ambiguous world branches require expansion/u.test(error.message)) throw error;
-        for (const bound of programs) {
+        const unsupported = randomDeferral ? programs.filter(bound => bound.program.definition.random.length > 0)
+          : programs.filter(bound => selectableWorldBranches(bound, adjudication.records).length !== 1);
+        if (!unsupported.length) throw error;
+        for (const bound of unsupported) {
           const pending = control.pending.find(value => value.attempt.id === bound.attempt.id)!;
           deferWorldAttempt(pending, resources, worldProgramSources(authority, source), error.message, adjudication, randomRejection);
-          control.failures.push({ ownerId: bound.attempt.actorId, phase: "adjudication", inputHash: pending.dependencyHash, reason: error.message, recoverable: true });
+          control.failures.push({ ownerId: bound.attempt.actorId, phase: "adjudication", inputHash: pending.dependencyHash, reason: pending.failure!, recoverable: true });
           for (const queued of scheduler.snapshot().pending) if (queued.kind === "world" &&
             (queued.payload as { attemptId: string }).attemptId === bound.attempt.id) scheduler.cancel(queued.id);
         }
         control.scheduler = scheduler.snapshot();
-        control.activities = settleProgramActivities(control.activities, [], programs.map(bound => bound.attempt.id), source.truth.elapsedSeconds);
+        control.activities = settleProgramActivities(control.activities, [], unsupported.map(bound => bound.attempt.id), source.truth.elapsedSeconds);
         control.worldResources = programWorldResources(source, authority, control.activities, initial.worldResources);
       }
     }

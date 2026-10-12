@@ -8,6 +8,7 @@ import { runtimeId, quantityId } from "../runtime/runtime-id";
 import { applyWorldDeltaOperation, validateSimulationState } from "../runtime/transaction";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import { makeWorldDecisionBatch, mechanicalWorldCondition, validateWorldEvidence, worldProgramDuration, worldProgramTiming, worldProvenance, worldQuestionWork,
+  selectableWorldBranches,
   type BoundWorldProgram, type WorldAdjudication, type WorldConditionRecord } from "./adjudication";
 import { captureReads, validateReads, worldProgramSources, worldResources, type ReadSet } from "./resources";
 import { admitWorldProgram, bindWorldProgram, renderWorldText } from "./world-program";
@@ -110,8 +111,7 @@ function materialize(programs: BoundWorldProgram[], records: Map<string, WorldCo
   const selections: WorldEventCandidate["selections"] = [], effects: WorldDeltaOperation[] = [], deliveries: WorldDelivery[] = [];
   const mechanicInvocations: MechanicInvocation[] = [], mechanicResults: MechanicResult[] = [];
   for (const bound of programs) {
-    const verdict = (id: string) => records.get(conditionKey({ ruleHash: bound.program.hash, attemptHash: contentHash(bound.attempt), conditionId: id }))?.verdict;
-    const branches = bound.program.definition.branches.filter(branch => branch.when.every(condition => verdict(condition.predicateId) === condition.equals) && verdict(`effect:${branch.id}`) === "yes");
+    const branches = selectableWorldBranches(bound, [...records.values()]);
     if (branches.length !== 1) throw new Error(branches.length ? "ambiguous world branches require expansion" : "world rule awaits evidence or expansion");
     const branch = branches[0]!;
     if (branch.acknowledgement === "observed-outcome" && !branch.deliveries.some(delivery =>

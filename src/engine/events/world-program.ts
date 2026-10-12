@@ -198,6 +198,10 @@ export function bindWorldProgram(program: AdmittedWorldProgram, parameters: Read
     if (declaration.kind === "text" && typeof value !== "string") throw new Error(`invalid world text parameter ${name}`);
     if (declaration.kind === "number" && (typeof value !== "number" || !Number.isFinite(value))) throw new Error(`invalid world number parameter ${name}`);
   }
+  for (const branch of program.definition.branches) if (branch.acknowledgement === "observed-outcome" &&
+    !branch.deliveries.some(delivery => delivery.kind === "observation" && parameters[delivery.recipientParameter] === parameters.actor)) {
+    throw new Error(`branch ${branch.id}: an observed outcome acknowledgement requires a committed observation to its actor; supply an actor observation or use attempted acknowledgement`);
+  }
 }
 
 export function materializeWorldBranch(program: AdmittedWorldProgram, branchId: string, parameters: Readonly<Record<string, JsonValue>>,

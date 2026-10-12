@@ -4,6 +4,18 @@ import { admitProgram, bindProgram } from "../definition";
 import { encodeProgramDraft, lowerProgramDraft, programDraftSchema } from "../creation-codec";
 
 describe("structured behavior creation codec", () => {
+  it("uses one semantic proposition so an interrupt cannot have a contradictory second question", () => {
+    const f = programFixture(), draft = encodeProgramDraft(f.definition, f.parameters);
+    draft.interrupts = [{ description: "The goal is no longer active.", reads: ["task"], sourceIds: ["goal:delivery"],
+      test: { kind: "semantic" }, unknown: "wait" }];
+    const result = lowerProgramDraft(draft, "agent-a");
+    expect(result.definition.predicates.find(predicate => predicate.id === result.definition.interrupts[0])).toMatchObject({
+      description: "The goal is no longer active.", test: { kind: "semantic", instructions: "The goal is no longer active." },
+    });
+    const conflicting = structuredClone(draft) as unknown as { interrupts: Array<{ test: Record<string, unknown> }> };
+    conflicting.interrupts[0]!.test.instructions = "The goal is still active.";
+    expect(programDraftSchema([...f.entities]).safeParse(conflicting).success).toBe(false);
+  });
   it("derives node identities, condition identities and read closure without changing the authored acts", () => {
     const f = programFixture(), draft = encodeProgramDraft(f.definition, f.parameters);
     draft.dependencies = [];

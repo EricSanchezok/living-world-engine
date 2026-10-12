@@ -4,7 +4,9 @@ import { expressionDependencies, predicateSchema, programKey, programNodeSchema,
   type ProgramDefinition, type ProgramNode, type ProgramPredicate } from "./definition";
 import type { JsonValue } from "../runtime/json";
 
-const conditionSchema = predicateSchema.omit({ id: true });
+const conditionSchema = predicateSchema.omit({ id: true }).extend({ test: z.discriminatedUnion("kind", [
+  z.object({ kind: z.literal("semantic") }).strict(), predicateSchema.shape.test.options[1],
+]) });
 type ConditionDraft = z.infer<typeof conditionSchema>;
 type Attempt = Omit<Extract<ProgramNode, { kind: "attempt" }>, "id">;
 export type BehaviorNode = Attempt
@@ -36,7 +38,7 @@ export function programDraftSchema(entityIds: readonly string[], catalogs?: { re
   const resource = domain(catalogs?.resources), source = domain(catalogs?.sources), goal = domain(catalogs?.goals);
   const condition = conditionSchema.extend({ reads: z.array(resource).min(1), sourceIds: z.array(source).min(1) });
   return z.object({
-    version: z.literal(1), name: description, description,
+    version: z.literal(2), name: description, description,
     sourceIds: z.array(source).min(1), dependencies: z.array(resource), writes: z.array(resource),
     parameters: z.record(programKey, z.discriminatedUnion("kind", [
       z.object({ kind: z.literal("entity"), description, value: entity }).strict(),
@@ -58,7 +60,8 @@ export function lowerProgramDraft(draft: ProgramDraft, ownerId: string): { defin
   const condition = (input: ConditionDraft) => {
     const expressionReads = input.test.kind === "mechanical"
       ? [...expressionDependencies(input.test.left).reads, ...expressionDependencies(input.test.right).reads] : [];
-    const normalized = { ...input, reads: [...new Set([...input.reads, ...expressionReads])].sort(), sourceIds: [...new Set(input.sourceIds)].sort() };
+    const normalized = { ...input, test: input.test.kind === "semantic" ? { kind: "semantic" as const, instructions: input.description } : input.test,
+      reads: [...new Set([...input.reads, ...expressionReads])].sort(), sourceIds: [...new Set(input.sourceIds)].sort() };
     normalized.reads.forEach(key => reads.add(key)); normalized.sourceIds.forEach(id => sources.add(id));
     const id = `p:${contentHash(normalized).slice(0, 32)}`;
     predicates.set(id, { id, ...normalized }); return id;
@@ -91,7 +94,7 @@ export function lowerProgramDraft(draft: ProgramDraft, ownerId: string): { defin
 export function encodeProgramDraft(definition: ProgramDefinition, parameters: Record<string, JsonValue>): ProgramDraft {
   const condition = (id: string): ConditionDraft => {
     const value = definition.predicates.find(value => value.id === id); if (!value) throw new Error(`missing encoded condition ${id}`);
-    return conditionSchema.strip().parse(value);
+    return conditionSchema.strip().parse(value.test.kind === "semantic" ? { ...value, description: value.test.instructions, test: { kind: "semantic" } } : value);
   };
   const encode = (id: string): BehaviorNode => {
     const node = definition.nodes.find(value => value.id === id); if (!node) throw new Error(`missing encoded node ${id}`);
@@ -102,7 +105,7 @@ export function encodeProgramDraft(definition: ProgramDefinition, parameters: Re
     return node.kind === "attempt" ? programNodeSchema.options[0].omit({ id: true }).strip().parse(node) : { kind: "finish" };
   };
   return programDraftSchema(Object.entries(definition.parameters).filter(([, value]) => value.kind === "entity")
-    .map(([key]) => String(parameters[key]))).parse({ version: 1, name: definition.name, description: definition.description,
+    .map(([key]) => String(parameters[key]))).parse({ version: 2, name: definition.name, description: definition.description,
     sourceIds: definition.sourceIds, dependencies: definition.reads, writes: definition.writes,
     parameters: Object.fromEntries(Object.entries(definition.parameters).map(([key, value]) => [key, { ...value, value: parameters[key] }])),
     start: condition(definition.startPredicateId), interrupts: definition.interrupts.map(condition),

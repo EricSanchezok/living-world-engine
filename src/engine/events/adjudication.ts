@@ -80,6 +80,29 @@ export function mechanicalWorldCondition(bound: BoundWorldProgram, id: string, r
   const evaluate = (value: import("../programs/definition").ValueExpression) => evaluateExpression(bindWorldExpression(value, bound.parameters), bound.parameters, resources);
   return compare(evaluate(condition.test.left), condition.test.operator, evaluate(condition.test.right));
 }
+
+export function selectableWorldBranches(bound: BoundWorldProgram, records: readonly WorldConditionRecord[]) {
+  const verdicts = new Map(records.filter(record => record.ruleHash === bound.program.hash && record.attemptHash === contentHash(bound.attempt))
+    .map(record => [record.conditionId, record.verdict]));
+  return bound.program.definition.branches.filter(branch => branch.when.every(condition => verdicts.get(condition.predicateId) === condition.equals) &&
+    verdicts.get(`effect:${branch.id}`) === "yes");
+}
+
+/** Repair sees evaluated operands and branch eligibility, not merely opaque evidence identities. */
+export function worldBranchDiagnostic(bound: BoundWorldProgram, resources: ProgramResources, records: readonly WorldConditionRecord[]) {
+  const actual = records.filter(record => record.ruleHash === bound.program.hash && record.attemptHash === contentHash(bound.attempt));
+  const verdicts = new Map(actual.map(record => [record.conditionId, record.verdict]));
+  return { conditions: bound.program.definition.predicates.map(predicate => ({ id: predicate.id, description: predicate.description,
+    verdict: verdicts.get(predicate.id) ?? "not-evaluated", test: predicate.test,
+    ...(predicate.test.kind === "mechanical" ? { evaluated: {
+      left: evaluateExpression(bindWorldExpression(predicate.test.left, bound.parameters), bound.parameters, resources),
+      right: evaluateExpression(bindWorldExpression(predicate.test.right, bound.parameters), bound.parameters, resources),
+    } } : {}),
+  })), branches: bound.program.definition.branches.map(branch => ({ id: branch.id,
+    effectAuthorization: verdicts.get(`effect:${branch.id}`) ?? "not-evaluated",
+    unmetConditions: branch.when.filter(condition => verdicts.get(condition.predicateId) !== condition.equals),
+  })) };
+}
 interface QuestionWork { bound: BoundWorldProgram; id: string; instructions: string; reads: string[]; payload: JsonValue; version: string }
 
 /** Every world judgment sees the actual participants and containment chain, regardless of generated read declarations. */

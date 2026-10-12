@@ -60,6 +60,21 @@ async function adjudicate(f: ReturnType<typeof fixture>, programs = [f.bound], a
 }
 
 describe("source-bound world event kernel", () => {
+  it("repairs unsupported observed acknowledgements during compilation before execution", async () => {
+    const f = fixture(); f.raw.branches[0]!.acknowledgement = "observed-outcome";
+    const configured = decisionTestProvider((body, attempt) => {
+      if (attempt === 2) {
+        expect(JSON.stringify(body)).toContain("committed observation to its actor");
+        f.raw.branches[0]!.deliveries.push({ recipientParameter: "actor", kind: "observation", text: "You hand over the offered stones." });
+      }
+      return encodeWorldDraft(f.raw, f.bound.parameters);
+    });
+    const result = await compileWorldProgram(configured.gateway, { profileId: "world-test", invocationBase: 1,
+      workloadId: "acknowledgement", batchId: "acknowledgement", definition: f.definition, state: f.state,
+      resources: f.resources, attempt: f.bound.attempt, reason: "new-intent", runtimeIdentity: { worldHash: f.state.worldHash, revision: 0 } });
+    expect(result.status).toBe("ready"); expect(configured.transport).toHaveBeenCalledTimes(2);
+    expect(result.audit?.invocations.map(invocation => invocation.outputDisposition)).toEqual(["rejected", "llm-repaired"]);
+  });
   it("closes explicitly referenced nested sources before admission without inventing rule authority", async () => {
     const f = fixture(), fact = Object.keys(f.sources).find(id => id.startsWith("fact:"))!;
     f.raw.predicates[0]!.sourceIds.push(fact);

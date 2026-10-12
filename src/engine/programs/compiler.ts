@@ -51,7 +51,7 @@ export async function compileAgentProgram(provider: StructuredModelProvider, inp
     bindProgram(program, value.parameters, entities);
   };
   const system = loadPromptAsset("system/program-creation.md"), userPrompt = loadPromptAsset("user/program-creation.md");
-  const promptVersion = `program-creation-${contentHash({ system, userPrompt, contract: 2, wireJsonSchema, repair: LOGICAL_CANDIDATE_REPAIR_VERSION, layout: "logical-tail-v1" })}`;
+  const promptVersion = `program-creation-${contentHash({ system, userPrompt, contract: 3, wireJsonSchema, repair: LOGICAL_CANDIDATE_REPAIR_VERSION, layout: "logical-tail-v1" })}`;
   const logicalInvocationId = modelInvocationIdentity(input, "creation", input.ownerId, input.invocationBase).modelInvocationId;
   try {
     const result = await runSemanticRepairLoop({ role: "creation", repairScope: "invocation", targetIds: [input.goalId], maxRepairs: 1,
@@ -65,13 +65,13 @@ export async function compileAgentProgram(provider: StructuredModelProvider, inp
           try { wireRepairCandidate = encodeProgramDraft(previous.data.definition, previous.data.parameters); } catch { /* Original rejection evidence is retained. */ }
         }
         return provider.generateStructured({ ...input, ...identity, role: "creation", subjectId: input.ownerId,
-          schemaName: "AgentBehaviorTreeV1", schema: programCreationSchema, wireJsonSchema, system, userPrompt, promptVersion, jsonExamplePolicy: "omit",
+          schemaName: "AgentBehaviorTreeV2", schema: programCreationSchema, wireJsonSchema, system, userPrompt, promptVersion, jsonExamplePolicy: "omit",
           preprocessOutput: raw => ({ value: lowerProgramDraft(draftSchema.parse(raw), input.ownerId), symbolRepairs: [] }),
           ...(repair.attempt > 0 ? { repairContextPlacement: "logical-tail-v1" as const } : {}),
           correlation: modelInvocationCorrelation(input, "creation", input.ownerId, identity, { logicalInvocationId,
             semanticRepairAttempt: repair.attempt, ...(repair.parentInvocationId ? { parentInvocationId: repair.parentInvocationId } : {}),
             ...(repair.repairOf ? { repairOf: repair.repairOf } : {}) }),
-          context: logicalRepairContext({ ...context, wireRepairCandidate, repair: { issues: repair.issues } }, repair, sourceHash, "AgentBehaviorTreeV1"),
+          context: logicalRepairContext({ ...context, wireRepairCandidate, repair: { issues: repair.issues } }, repair, sourceHash, "AgentBehaviorTreeV2"),
         });
       },
     });
