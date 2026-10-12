@@ -291,10 +291,11 @@ function applyOverride(model: RegisteredModel, override: ModelMetadataOverride):
   return normalizedModelSchema.parse(updated);
 }
 
-function localModelDefinition(id: string, override: ModelMetadataOverride): RegisteredModel {
+function localModelDefinition(id: string, override: ModelMetadataOverride, nativeDecision = false): RegisteredModel {
   const complete = modelMetadataOverrideSchema.required().extend({
-    limit: z.object({ context: z.number().int().positive().safe(), output: z.number().int().positive().safe() }).strict(),
+    limit: z.object({ context: z.number().int().positive().safe(), output: z.number().int().positive().safe().nullable() }).strict(),
   }).parse(override);
+  if (!nativeDecision && complete.limit.output === null) throw new Error("generative models require an explicit output limit");
   const model = applyOverride(remoteModelToNormalized({ id, name: complete.name }), complete);
   model.fieldSources = Object.fromEntries(Object.keys(model).filter(field => field !== "fieldSources")
     .map(field => [field, "local-override" as const]));
@@ -313,6 +314,18 @@ export function normalizeModelsDevDocument(
     .map((account) => account.models_dev_provider_id));
   const providers: Record<string, z.infer<typeof normalizedProviderSchema>> = {};
   for (const providerId of providerIds) {
+    const nativeDecision = Object.values(catalog.accounts).filter(account => account.models_dev_provider_id === providerId)
+      .every(account => account.protocol === "typesafe-systemone");
+    if (!Object.hasOwn(remote, providerId) && catalog.modelOverrides[providerId]) {
+      const models: Record<string, RegisteredModel> = {};
+      for (const [modelId, override] of Object.entries(catalog.modelOverrides[providerId]!)) {
+        try { models[modelId] = localModelDefinition(modelId, override, nativeDecision); }
+        catch (error) { throw new ModelRegistryError(`local provider ${providerId} requires complete metadata for ${modelId}`, { cause: error }); }
+      }
+      if (Object.keys(models).length === 0) throw new ModelRegistryError(`local provider ${providerId} has no models`);
+      providers[providerId] = { id: providerId, name: providerId, models };
+      continue;
+    }
     let provider: z.infer<typeof remoteProviderSchema>;
     try {
       provider = remoteProviderSchema.parse(remote[providerId]);
@@ -341,7 +354,7 @@ export function normalizeModelsDevDocument(
     const unknownOverrides = Object.keys(catalog.modelOverrides[providerId] ?? {})
       .filter((modelId) => !provider.models[modelId]);
     for (const modelId of unknownOverrides.sort()) {
-      try { models[modelId] = localModelDefinition(modelId, catalog.modelOverrides[providerId]![modelId]!); }
+      try { models[modelId] = localModelDefinition(modelId, catalog.modelOverrides[providerId]![modelId]!, nativeDecision); }
       catch (error) { throw new ModelRegistryError(`local overrides reference unknown ${providerId} models without complete metadata: ${modelId}`, { cause: error }); }
     }
     providers[providerId] = { id: provider.id, name: provider.name, models };

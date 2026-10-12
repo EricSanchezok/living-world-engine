@@ -53,7 +53,7 @@ function modelMetadata(id: string, structuredOutput: boolean) {
 
 function registry(catalog: ReturnType<typeof loadModelCatalog>): ModelRegistryService {
   const providers: ModelRegistrySnapshot["document"]["providers"] = {};
-  for (const [profileId, modelId] of Object.entries(profileModels)) {
+  for (const [profileId, modelId] of [...Object.entries(profileModels), ["decision-jev", "jev-1.13.0"]] as Array<[string, string]>) {
     const profile = catalog.profile(profileId);
     const account = catalog.account(profile.account_id);
     const provider = providers[account.models_dev_provider_id] ??= {
@@ -218,6 +218,8 @@ describe("provider account protocol matrix", () => {
 
     expect(deepSeekProfiles.map(([profileId]) => profileId).sort()).toEqual([
       "agent-deepseek",
+      "creation-deepseek",
+      "decision-deepseek",
       "truth-deepseek",
     ]);
     for (const [, profile] of deepSeekProfiles) {
@@ -305,6 +307,8 @@ describe("provider account protocol matrix", () => {
         calls.push({ url, headers, body });
         const model = String(body.model);
         const answer = model;
+        if (url.endsWith("/systemone")) return Response.json({ model, usage: { input_tokens: 10, output_tokens: 2 },
+          answers: { ready: { type: "choice", choice: "yes", probabilities: { yes: 1, unknown: 0 }, confidence: 1 } } });
         if (url.endsWith("/responses")) return responsesApiResponse(model, answer);
         if (url.endsWith("/messages")) return anthropicResponse(model, answer);
         if (body.stream === true) {
@@ -343,7 +347,14 @@ describe("provider account protocol matrix", () => {
       expect(JSON.stringify(result.audit)).not.toContain(credentials[account.api_key_env]);
     }
 
-    expect(calls).toHaveLength(Object.keys(profileModels).length);
+    const state = { ready: true };
+    const native = await gateway.decide({ workloadId: "native-matrix", batchId: "native-matrix", profileId: "decision-jev",
+      subjectId: "world", runtimeIdentity: { worldHash: TEST_WORLD_HASH, revision: 0 },
+      batch: { version: 1, view: { kind: "world", projectionHash: contentHash(state) }, programHash: contentHash("matrix"),
+        dependencies: { ready: 1 }, state, questions: { ready: { version: "1", instructions: "Is ready explicitly true?",
+          criteria: { yes: "Ready", unknown: "Not established" }, sources: ["fixture:ready"] } } } });
+    expect(native.audit.structuredOutputMode).toBe("native-decision");
+    expect(calls).toHaveLength(Object.keys(profileModels).length + 1);
     for (const call of calls.filter((candidate) => candidate.url.includes("bigmodel.cn"))) {
       const responseFormat = call.body.response_format as { type?: unknown } | undefined;
       if (responseFormat?.type === "json_object") {
@@ -378,7 +389,7 @@ describe("provider account protocol matrix", () => {
       }
     }
     const byBase = new Map(calls.map((call) => [new URL(call.url).origin + new URL(call.url).pathname
-      .replace(/\/(?:chat\/completions|responses|messages)$/, ""), call]));
+      .replace(/\/(?:chat\/completions|responses|messages|systemone)$/, ""), call]));
     for (const account of Object.values(catalog.accounts)) {
       expect([...byBase.keys()].some((calledBase) =>
         calledBase.replace(/\/$/, "") === account.base_url.replace(/\/$/, ""))).toBe(true);

@@ -13,6 +13,15 @@ registry:
 # Transport destinations and credential names are trusted local configuration.
 # Metadata received from models.dev never changes these values.
 accounts:
+  typesafe-api:
+    channel: api
+    region: global
+    protocol: typesafe-systemone
+    dialect: typesafe
+    models_dev_provider_id: typesafe
+    base_url: https://api.typesafe.ai/v1
+    api_key_env: TYPESAFE_API_KEY
+    max_concurrency: 16
   deepseek-api:
     channel: api
     region: global
@@ -130,6 +139,35 @@ accounts:
       local_address_env: QWEN_LOCAL_ADDRESS
 
 profiles:
+  decision-jev:
+    account_id: typesafe-api
+    selector: { kind: exact, model_id: jev-1.13.0 }
+    description: 原生情境选择与语义条件判断
+    allowed_roles: [decision]
+    request_timeout_ms: 60000
+    max_output_tokens: 8192
+    max_input_bytes: 262144
+    inference: {}
+  decision-deepseek:
+    account_id: deepseek-api
+    selector: { kind: exact, model_id: deepseek-flash }
+    description: 决策对照与显式超长上下文回退
+    allowed_roles: [decision]
+    response_transport: deepseek-sse-v1
+    request_timeout_ms: 120000
+    max_output_tokens: 8192
+    max_input_bytes: 4000000
+    inference: { thinking: disabled }
+  creation-deepseek:
+    account_id: deepseek-api
+    selector: { kind: exact, model_id: deepseek-flash }
+    description: 可执行程序与开放内容生成
+    allowed_roles: [creation]
+    response_transport: deepseek-sse-v1
+    request_timeout_ms: 180000
+    max_output_tokens: 32768
+    max_input_bytes: 4000000
+    inference: { thinking: disabled }
   truth-deepseek:
     account_id: deepseek-api
     selector: { kind: exact, model_id: deepseek-flash }
@@ -353,6 +391,21 @@ profiles:
     inference: *automatic-inference
 
 model_overrides:
+  typesafe:
+    jev-1.13.0:
+      disabled: false
+      name: Jev 1.13.0
+      family: jev
+      reasoning: false
+      reasoning_toggle: false
+      reasoning_efforts: []
+      tool_call: false
+      structured_output: true
+      temperature: false
+      release_date: null
+      last_updated: null
+      modalities: { input: [text], output: [text] }
+      limit: { context: 64000, output: null }
   deepseek:
     deepseek-flash:
       disabled: false

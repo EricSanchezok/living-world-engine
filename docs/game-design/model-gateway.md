@@ -69,6 +69,12 @@ Profiles may explicitly select `response_transport: deepseek-sse-v1` for DeepSee
 
 ## 协议、方言与结构化结果
 
+`typesafe-systemone` uses a native decision adapter at `/systemone`. `ModelGateway.decide` (or `executeDecision` for a wrapped provider) accepts one authorized `DecisionBatch`, binds its projection hash, program hash, question versions, sources and dependency versions, and retains the complete choice distribution and ordinary gateway audit. The native body contains only the pinned model, state and independent choice questions. It has no generative inference parameters; unknown evidence remains an explicit criterion. Native probabilities are diagnostic evidence, never world randomness.
+
+The catalog pins `decision-jev` to `jev-1.13.0`, and `decision-deepseek` and `creation-deepseek` to `deepseek-flash` with thinking disabled. Decision and creation are separately authorized roles. Generative decisions use the same question contract and return choices without fabricated probabilities. An explicitly selected generative fallback is allowed only for context overflow and is recorded in `DecisionResult.fallback`; transport failures do not silently change models. Until a provider tokenizer is available, UTF-8 byte bounds plus framing allowance conservatively enforce the native 32k state-plus-question and 64k combined limits without truncation.
+
+A provider absent from models.dev can be supplied by complete local metadata with `local-override` provenance. Invalid remote provider entries still fail validation. Native choice models may explicitly declare an unknown output token limit; generative local definitions still require a positive output limit. Historical registry snapshot identity remains mandatory for reproduction.
+
 `ProtocolDriver` 只负责 OpenAI Chat、OpenAI Responses 或 Anthropic Messages 的通用 wire contract。`VendorDialect` 负责 thinking/effort 字段、特殊 header、prompt cache 与响应差异。Kimi Coding 使用 `LivingWorldEngine/<version>` User-Agent，并以 Profile、prompt bundle 内容哈希和 bundle version 生成稳定 `prompt_cache_key`；它不伪装其他编码客户端。
 
 结构化结果按协议和模型能力使用三条路径：原生 strict JSON Schema；JSON Object 加 schema prompt 和本地 Zod；强制 `submit_result` tool call 加本地 Zod。所有成功结果再次通过调用点的 Zod schema。引擎不从 Markdown、前后缀文字、截断文本或普通自然语言中猜测 JSON。Qwen campus Profile 使用 JSON Object 加本地 Zod（避免 vLLM 在不同复杂 schema 间切换结构化输出后端），并由方言注入关闭 thinking 的 chat-template 参数。

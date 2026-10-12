@@ -30,6 +30,8 @@ const modelNetworkSchema = z.object({
 }).strict().refine((value) => value.local_address_env || value.dns_over_https_url, "network requires an address binding or DNS resolver");
 
 export const modelRoles = [
+  "decision",
+  "creation",
   "truth-perception",
   "truth-reaction-routing",
   "truth-resolution",
@@ -45,6 +47,7 @@ export const modelRoles = [
 ] as const;
 
 export const modelProtocols = [
+  "typesafe-systemone",
   "openai-chat",
   "openai-responses",
   "anthropic-messages",

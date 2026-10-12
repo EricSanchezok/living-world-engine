@@ -949,7 +949,7 @@ export function validateModelAudit(
     !audit.providerId.trim() || !audit.modelId.trim() || audit.modelCatalogSchemaVersion !== 3 ||
     !isSha256(audit.registrySnapshotHash) || !isSha256(audit.modelMetadataHash) ||
     !isSha256(audit.modelCatalogHash) || !audit.promptVersion.trim() ||
-    !["json-schema-strict", "json-object-zod", "tool-call-zod", "deterministic-test"]
+    !["json-schema-strict", "json-object-zod", "tool-call-zod", "native-decision", "deterministic-test"]
       .includes(audit.structuredOutputMode)) throw new Error(`${label} has invalid model identity`);
   modelSelectorSchema.parse(audit.selector);
   modelInferenceSchema.parse(audit.requestedInference);

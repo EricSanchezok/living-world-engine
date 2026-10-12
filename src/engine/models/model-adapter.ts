@@ -24,6 +24,7 @@ import { repairPromptLayout } from "../prompts/repair-layout";
 import { recoverUnmatchedClosers, UNMATCHED_CLOSER_RECOVERY } from "./unmatched-closer-recovery";
 import { recoverTerminalRootCloser, TERMINAL_ROOT_CLOSER_RECOVERY } from "./terminal-root-closer-recovery";
 import { completeDeepSeekJsonStream } from "./deepseek-json-stream";
+import { TypeSafeModelAdapter } from "./typesafe-adapter";
 
 export interface ModelAdapterResult {
   value: unknown;
@@ -373,6 +374,10 @@ export function structuredOutputMode(
   binding: ResolvedModelBinding,
   requested?: "json-object-zod" | "json-schema-strict",
 ): Exclude<ModelExecutionAudit["structuredOutputMode"], "deterministic-test"> {
+  if (binding.account.protocol === "typesafe-systemone") {
+    if (requested) throw new ModelConfigurationError("TypeSafe accepts native decisions only");
+    return "native-decision";
+  }
   if (requested) {
     if (binding.account.protocol === "anthropic-messages" || !binding.model.structuredOutput) {
       throw new Error(`model ${binding.modelId} does not support explicit ${requested}`);
@@ -729,12 +734,19 @@ export function createModelProviderAdapter(
   apiKey: string,
   fetchImplementation: typeof fetch = fetch,
 ): ModelProviderAdapter {
+  if (account.protocol === "typesafe-systemone") {
+    return new TypeSafeModelAdapter(accountId, account, apiKey, fetchImplementation);
+  }
   return new ProtocolModelAdapter(accountId, apiKey, fetchImplementation, account);
 }
 
 export function validateModelProviderAccount(
   account: import("./model-catalog").ProviderAccountConfig,
 ): void {
+  if (account.protocol === "typesafe-systemone") {
+    if (account.dialect !== "typesafe") throw new ModelConfigurationError("TypeSafe protocol requires the typesafe dialect");
+    return;
+  }
   vendorDialect(account.dialect, account.protocol);
   protocolDriver(account.protocol);
 }

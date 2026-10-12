@@ -1179,7 +1179,7 @@ export interface ModelExecutionAudit {
   promptVersion: string;
   requestedInference: ModelInferenceConfig;
   resolvedInference: ResolvedModelInference;
-  structuredOutputMode: "json-schema-strict" | "json-object-zod" | "tool-call-zod" | "deterministic-test";
+  structuredOutputMode: "json-schema-strict" | "json-object-zod" | "tool-call-zod" | "native-decision" | "deterministic-test";
   invocations: ModelInvocationAudit[];
 }
 

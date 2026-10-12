@@ -52,6 +52,8 @@ The experimental [incremental intent cursor](specs/0176-incremental-intent-execu
 
 ## State and policies
 
+The model gateway also exposes the [native decision contract](game-design/model-gateway.md#协议方言与结构化结果) approved in [Spec 0181](specs/0181-jev-decision-event-engine.md). It keeps TypeSafe choice distributions and authorized input bindings in the existing scheduling and audit path, with an explicit generative context fallback. The program/event runtime replacement remains under implementation; this adapter alone does not change the default world execution algorithm.
+
 Action Compilation specializes [empty shared-resource domains](specs/0111-specialize-empty-resource-pool-domain.md) from its bound source state; representation adapters preserve that request schema through initial and repair calls.
 
 The experimental `source-bound-observation-rendering@2` child projects a limited owner-bound progress packet for strictly admitted pending intervals; other observations retain model rendering. Its [admission contract](specs/0082-source-bound-pending-observations.md) defines state, timing, repair and verification boundaries. Both observation implementations preserve [current-event provenance](specs/0110-preserve-observation-event-provenance.md) separately from observer fact access. The default Composition does not select the experimental child.
