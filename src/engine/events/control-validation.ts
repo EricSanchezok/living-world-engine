@@ -14,6 +14,7 @@ import { issueProgramAttempt } from "./attempt";
 import { readDecisionEventState, programReceiptIndex, type DecisionEventState } from "./runtime-state";
 import { programWorldResources } from "./resources";
 import { externalWorldAttempt } from "./external-action";
+import { adaptationQuestionVersion, adaptationReasonPrefix, programAdaptationBatch } from "../programs/adaptation";
 
 const equal = (a: unknown, b: unknown) => contentHash(a) === contentHash(b);
 function creationEvidence(audits: ModelExecutionAudit[], owner: string, output: unknown, profile: string, ids?: string[]) {
@@ -106,6 +107,9 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
       const interpreter = previous ? ProgramInterpreter.restore(previous.snapshot, definition.program, new Set(previous.entityIds), receipts)
         : new ProgramInterpreter(definition.program, entry.snapshot.instanceId, entry.snapshot.parameters, new Set(entry.entityIds), entry.snapshot.startedAtSeconds);
       const proofTickets = new Map<string, { verdict: string; evidenceHash: string; readKeys: string[] }>();
+      const adaptationUses = decisions.filter(use => use.programInstanceId === interpreter.instanceId &&
+        use.batch.questions.adaptation?.version === adaptationQuestionVersion);
+      const checkedAdaptations = new Set<string>();
       for (const event of entry.snapshot.events.slice(previous?.snapshot.events.length ?? 0)) {
         if (roster[agent.id]?.kind !== "model" && !(event.kind === "interrupt" &&
           event.reason === `controller:${roster[agent.id]?.kind}` && before.policyKinds[agent.id] !== after.policyKinds[agent.id])) {
@@ -156,8 +160,33 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
             if (attempt.program!.requestHash !== event.requestHash) throw new Error("issued attempt payload changed");
             actualIssued.set(attempt.id, attempt);
           } else interpreter.expire(work, now);
-        } else if (event.kind === "interrupt") interpreter.interrupt(event.reason, now);
+        } else if (event.kind === "interrupt") {
+          if (event.reason.startsWith(adaptationReasonPrefix)) {
+            const use = adaptationUses.find(use => event.reason === `${adaptationReasonPrefix}${use.evidenceHash}`);
+            const batch = programAdaptationBatch(interpreter, resources.resources, now);
+            if (!use || !batch || !equal(use.batch, batch) || use.result.answers.adaptation?.choice !== "revise") {
+              throw new Error("plan adaptation has no actual stalled-frontier decision");
+            }
+            checkedAdaptations.add(use.evidenceHash);
+          } else if (!(event.reason === `controller:${roster[agent.id]?.kind}` &&
+            before.policyKinds[agent.id] !== after.policyKinds[agent.id] && roster[agent.id]?.kind !== "model")) {
+            const failures = interpreter.work(resources.resources, now).flatMap(work => {
+              if (work.kind !== "attempt") return [];
+              const copy = ProgramInterpreter.restore(interpreter.snapshot(), definition.program, new Set(entry.entityIds), receipts);
+              try { issueProgramAttempt(source, copy, work, resources.resources); return []; }
+              catch (error) { return [error instanceof Error ? error.message : String(error)]; }
+            });
+            if (!failures.includes(event.reason)) throw new Error("private interruption has no controller, decision or execution failure");
+          }
+          interpreter.interrupt(event.reason, now);
+        }
         else interpreter.resume(now);
+      }
+      for (const use of adaptationUses) if (!checkedAdaptations.has(use.evidenceHash)) {
+        const batch = programAdaptationBatch(interpreter, resources.resources, source.truth.elapsedSeconds);
+        if (!batch || !equal(batch, use.batch) || use.result.answers.adaptation?.choice === "revise") {
+          throw new Error("wait assessment differs from the actual private frontier");
+        }
       }
       if (!equal(interpreter.snapshot(), entry.snapshot)) throw new Error("program journal does not deterministically replay");
     }

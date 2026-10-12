@@ -13,6 +13,54 @@ import { replayDecisionEventStep } from "../canonical";
 
 
 describe("native event runtime through SimulationEngine", () => {
+  it.each(["wait", "unknown"] as const)("preserves a %s assessment without converting unknown into false or polling again", async adaptation => {
+    const f = nativeProgramFixture({ adaptation });
+    // Only the start condition is evaluated, and absence of a historical receipt stays unknown.
+    f.program.predicates[0]!.test = { kind: "semantic", instructions: "Is the actual long-term goal already achieved?" };
+    f.program.predicates[0]!.description = "Is the actual long-term goal already achieved?";
+    await f.configured.registry.capture();
+    const engine = new SimulationEngine(f.world, new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig));
+    const boot = await engine.bootstrapAgents();
+    const program = restoreOwnerPrograms(boot.bootstrapDecisionEvent!.control, "keeper")[0]!;
+    expect(program.status).toBe("waiting");
+    expect(program.snapshot().events.filter(event => event.kind === "predicate").map(event => event.verdict)).toEqual(["unknown"]);
+    const calls = f.configured.transport.mock.calls.length;
+    const policyChange = await engine.step(f.roster, { expectedRevision: 0, trigger: "manual", externalActions: [] });
+    expect(policyChange.state.truth).toEqual(boot.truth);
+    await expect(engine.step(f.roster, { expectedRevision: 1, trigger: "manual", externalActions: [] })).rejects.toBeInstanceOf(WorldQuiescentError);
+    expect(f.configured.transport).toHaveBeenCalledTimes(calls);
+    expect(replaySimulationState(boot)).toEqual(boot);
+  });
+  it("revises an unjustified private wait with bound decision evidence and then executes through the real entry", async () => {
+    const f = nativeProgramFixture({ adaptation: "revise" });
+    const ready = structuredClone(f.program.predicates[0]!);
+    f.program.predicates[0]!.test = { kind: "semantic", instructions: "Is the actual long-term goal already achieved?" };
+    f.program.predicates[0]!.description = "Is the actual long-term goal already achieved?";
+    await f.configured.registry.capture();
+    const engine = new SimulationEngine(f.world, new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig));
+    const boot = await engine.bootstrapAgents();
+    const interrupted = restoreOwnerPrograms(boot.bootstrapDecisionEvent!.control, "keeper")[0]!;
+    expect(interrupted.status).toBe("interrupted");
+    expect(interrupted.snapshot().events.at(-1)).toMatchObject({ kind: "interrupt", reason: expect.stringMatching(/^plan-adaptation:/u) });
+    expect(boot.truth).toEqual(f.world.initialState.truth);
+    expect(replaySimulationState(boot)).toEqual(boot);
+    const edited = structuredClone(boot), proof = edited.bootstrapDecisionEvent!;
+    const snapshot = proof.control.agents.keeper!.instances[0]!.snapshot;
+    const interruption = snapshot.events.at(-1)!;
+    if (interruption.kind !== "interrupt") throw new Error("missing interruption");
+    interruption.reason = `plan-adaptation:${contentHash("unrelated-decision")}`;
+    snapshot.hash = contentHash(Object.fromEntries(Object.entries(snapshot).filter(([key]) => key !== "hash")));
+    proof.control.hash = contentHash(Object.fromEntries(Object.entries(proof.control).filter(([key]) => key !== "hash")));
+    edited.executionState!.data = JSON.parse(JSON.stringify(proof.control));
+    expect(() => validateSimulationState(edited, false, true)).toThrow("stalled-frontier decision");
+    f.program.predicates[0] = ready;
+    const result = await engine.step(f.roster, { expectedRevision: 0, trigger: "manual", externalActions: [] });
+    expect(result.state.truth.elapsedSeconds).toBe(5);
+    const owner = readDecisionEventState(result.state.executionState!, result.state).agents.keeper!;
+    expect(owner.instances).toHaveLength(2);
+    expect(owner.planning?.attempts).toBe(2);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("persists trusted numeric derivation through the canonical entry and replays it without duplication", async () => {
     const f = nativeProgramFixture();
     f.program.nodes[0] = { ...f.program.nodes[0]!, intent: "Spend 5 seconds giving two spirit stones to {recipient}." } as typeof f.program.nodes[number];

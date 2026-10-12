@@ -9,7 +9,8 @@ import type { WorldProgramDefinition } from "../events/world-program";
 import type { PolicyBinding } from "../runtime/execution";
 
 export const nativeProgramTestConfig = { decision: "world-test", creation: "world-test", fallback: "world-test", maxDependencyRounds: 32 };
-export function nativeProgramFixture(options: { goalVerdict?: "yes" | "no" | "unknown"; reuse?: boolean; worldVerdict?: "yes" | "no" | "unknown" } = {}) {
+export function nativeProgramFixture(options: { goalVerdict?: "yes" | "no" | "unknown"; reuse?: boolean; worldVerdict?: "yes" | "no" | "unknown";
+  adaptation?: "wait" | "revise" | "unknown" } = {}) {
   const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: createTestModelCatalog() });
   const program: ProgramDefinition = { version: 1, id: "ask-purpose", name: "Ask the purpose", description: "Ask and await evidence.", owner: { kind: "agent", agentId: "keeper" },
     sourceIds: ["goal:guard-gate"], parameters: { recipient: { kind: "entity", description: "Known traveler" } },
@@ -36,6 +37,7 @@ export function nativeProgramFixture(options: { goalVerdict?: "yes" | "no" | "un
       { actor: "player", recipient: "keeper", utterance: "Hello keeper" } : { actor: "keeper", recipient: "player", utterance: "Why are you here?" });
     if (wire.includes("Render the player's submitted action.")) return { utterance: "Hello keeper" };
     if (wire.includes("Choose which actual active goal")) return { answers: { goal: { choice: wire.includes("guard-gate") ? options.reuse ? "p0" : "g0" : "wait" } } };
+    if (wire.includes("Assess this Agent's actual stalled program frontier")) return { answers: { adaptation: { choice: options.adaptation ?? "wait" } } };
     const choice = wire.includes("You update an Agent's existing beliefs") ? "unchanged" : wire.includes("ALL required shared resource claims") ? "yes"
       : wire.includes("actual long-term goal") ? options.goalVerdict ?? "unknown" : options.worldVerdict ?? "yes";
     return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice }])) };

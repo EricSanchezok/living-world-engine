@@ -10,6 +10,7 @@ import { admitProgram, bindProgram } from "../programs/definition";
 import { ProgramLibrary } from "../programs/library";
 import { privateProgramEntityIds, privateProgramResources, privateProgramSources, resourceValues } from "../programs/private-resources";
 import { createProgramUtterance } from "../programs/utterance";
+import { adaptationReasonPrefix, programAdaptationBatch } from "../programs/adaptation";
 import type { PolicyBinding } from "../runtime/execution";
 import type { JsonObject, JsonValue } from "../runtime/json";
 import { issueProgramAttempt } from "./attempt";
@@ -188,6 +189,15 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
         }
         if (active.snapshot().hash === before || control.pending.some(pending => pending.attempt.actorId === ownerId)) break;
         if (round === options.maxDependencyRounds - 1) continuations.push({ ownerId, hash: active.snapshot().hash });
+      }
+    }
+    if (active && !control.pending.some(pending => pending.attempt.actorId === ownerId)) {
+      const batch = programAdaptationBatch(active, resources, now);
+      if (batch) {
+        const use = await runtime.decide({ ...scope, profileId: control.models.decision, fallbackProfileId: control.models.fallback,
+          batch, subjectId: ownerId, modelInvocation: options.nextInvocation(ownerId) });
+        use.programInstanceId = active.instanceId; record(use);
+        if (use.result.answers.adaptation!.choice === "revise") active.interrupt(`${adaptationReasonPrefix}${use.evidenceHash}`, now);
       }
     }
     if (active?.status === "interrupted") {
