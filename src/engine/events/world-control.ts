@@ -7,8 +7,10 @@ import { compileWorldProgram } from "./compiler";
 import { WorldProgramLibrary } from "./library";
 import { EventScheduler } from "./scheduler";
 import { collectDecisionAudits, sealDecisionEventState, type DecisionEventState } from "./runtime-state";
-import { worldProgramSources, worldResources } from "./resources";
+import { worldProgramSources, worldResources, programWorldResources } from "./resources";
 import { deferWorldAttempt, worldInputUnchanged, worldRecoveryInput } from "./world-recovery";
+import { DecisionRuntime } from "../programs/decision-runtime";
+import { admitProgramActivities } from "./activities";
 
 /** Compile or bind only previously unhandled attempts. A failed input waits for an actual physical dependency change. */
 export async function prepareProgramWorldWork(provider: StructuredModelProvider, definition: WorldRuntimeContract,
@@ -54,6 +56,19 @@ export async function prepareProgramWorldWork(provider: StructuredModelProvider,
   }));
   const errors = results.flatMap(result => result.status === "rejected" ? [result.reason] : []);
   if (errors.length) throw new AggregateError(errors, "world program preparation failed");
+  const activityAdmissionInput = structuredClone(control.pending);
+  const runtime = new DecisionRuntime(provider, control.decisionCache ?? undefined);
+  const admission = await admitProgramActivities(runtime, state, definition, resources, control.pending, control.activities, {
+    ...scope, profileId: control.models.decision, fallbackProfileId: control.models.fallback, nextInvocation: () => nextInvocation("world"),
+  });
+  control.pending = admission.pending; control.activities = admission.activities;
+  for (const pending of control.pending) if (pending.failure && activityAdmissionInput.find(value => value.attempt.id === pending.attempt.id)?.failure !== pending.failure) {
+    control.failures.push({ ownerId: pending.attempt.actorId, phase: "activity", inputHash: pending.dependencyHash, reason: pending.failure, recoverable: true });
+  }
+  control.decisionCache = runtime.snapshot() as unknown as import("../runtime/json").JsonObject;
+  audits.push(...admission.calls.filter(call => !call.reused).map(call => call.result.audit));
+  for (const queued of scheduler.snapshot().pending) if (queued.kind === "world" && !control.pending.some(pending =>
+    pending.attempt.id === (queued.payload as { attemptId: string }).attemptId && !pending.failure && pending.atSeconds === queued.atSeconds)) scheduler.cancel(queued.id);
   // Canonical insertion order is independent of model response arrival order.
   for (const pending of control.pending.filter(value => value.bound && !value.failure && value.atSeconds !== null)
     .sort((a, b) => a.atSeconds! - b.atSeconds! || a.attempt.id.localeCompare(b.attempt.id))) {
@@ -61,7 +76,8 @@ export async function prepareProgramWorldWork(provider: StructuredModelProvider,
     scheduler.schedule({ atSeconds: pending.atSeconds!, subjectId: null, kind: "world",
       inputHash: contentHash({ attempt: pending.attempt, program: pending.bound!.program.hash }), payload });
   }
-  control.worldResources = resources; control.worldLibrary = library.snapshot(); control.scheduler = scheduler.snapshot();
+  control.worldResources = programWorldResources(state, definition, control.activities, initial.worldResources);
+  control.worldLibrary = library.snapshot(); control.scheduler = scheduler.snapshot();
   control.failures.sort((a, b) => a.ownerId.localeCompare(b.ownerId) || a.inputHash.localeCompare(b.inputHash));
-  return { control: sealDecisionEventState(control), modelAudits: collectDecisionAudits(audits) };
+  return { control: sealDecisionEventState(control), modelAudits: collectDecisionAudits(audits), decisions: admission.calls, activityAdmissionInput };
 }

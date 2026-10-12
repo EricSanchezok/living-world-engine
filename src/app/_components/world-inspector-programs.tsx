@@ -34,6 +34,7 @@ export function WorldInspectorPrograms({ value, actorId }: { value: Programs; ac
       <JsonInspector label="程序位置、等待条件与完成证据" value={program} />
     </details>)}
     <JsonInspector label="本次唤醒事件" value={value.wakes.filter(event => event.subjectId === null || relevant(event.subjectId))} />
+    <JsonInspector label="资源占用、排队与释放记录" value={value.activities.filter(activity => relevant(activity.actorId))} />
     <JsonInspector label="已预约行动与恢复原因" value={{ pending: value.pending.filter(pending => relevant(pending.actorId)),
       failures: value.failures.filter(failure => relevant(failure.ownerId)) }} />
     <details><summary>具体判断 · {decisions.length} 项</summary>

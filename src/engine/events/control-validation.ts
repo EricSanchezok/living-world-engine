@@ -12,7 +12,7 @@ import { validateModelAudit } from "../runtime/transaction";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import { issueProgramAttempt } from "./attempt";
 import { readDecisionEventState, programReceiptIndex, type DecisionEventState } from "./runtime-state";
-import { worldResources } from "./resources";
+import { programWorldResources } from "./resources";
 import { externalWorldAttempt } from "./external-action";
 
 const equal = (a: unknown, b: unknown) => contentHash(a) === contentHash(b);
@@ -30,7 +30,7 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
   for (const key of ["worldHash", "modelCatalogHash", "registryHash", "models", "receipts"] as const) {
     if (!equal(before[key], after[key])) throw new Error(`private control changed pinned ${key}`);
   }
-  if (!equal(after.worldResources, worldResources(source, authority, before.worldResources))) throw new Error("world preparation used noncanonical resources");
+  if (!equal(after.worldResources, programWorldResources(source, authority, after.activities, before.worldResources))) throw new Error("world preparation used noncanonical resources");
   for (const audit of audits) {
     validateModelAudit(audit, "decision event");
     if (audit.modelCatalogHash !== after.modelCatalogHash || audit.registrySnapshotHash !== after.registryHash) throw new Error("decision event model identity changed");

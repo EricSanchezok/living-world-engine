@@ -1,6 +1,7 @@
 import type { BeliefRevision } from "./cognition";
 import type { WorldEventCandidate } from "./kernel";
 import type { DecisionEventState } from "./runtime-state";
+import type { PendingProgramAttempt } from "./runtime-state";
 import type { DecisionUse } from "../programs/decision-runtime";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import type { ModelExecutionAudit } from "../contracts/model";
@@ -20,6 +21,7 @@ export interface DecisionEventStep {
   version: 1;
   authority: WorldRuntimeContract;
   preparedControl: DecisionEventState;
+  activityAdmissionInput: PendingProgramAttempt[];
   event: WorldEventCandidate | null;
   beliefRevisions: BeliefRevision[];
   finalControl: DecisionEventState;

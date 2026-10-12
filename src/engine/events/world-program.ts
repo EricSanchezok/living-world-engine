@@ -22,9 +22,13 @@ const timing = z.object({ profileId: programKey, basis: z.discriminatedUnion("ki
   z.object({ kind: z.literal("explicit_quantity"), amount: valueExpressionSchema, unit: text, sourceText: text }).strict(),
 ]) }).strict();
 export const worldProgramSchema = z.object({
-  version: z.literal(2), namespace: z.literal("world"), id: programKey, description: text,
+  version: z.literal(3), namespace: z.literal("world"), id: programKey, description: text,
   sourceIds: z.array(programKey).min(1), parameters: z.record(programKey, z.object({ kind: z.enum(["entity", "text", "number"]), description: text }).strict()),
   reads: z.array(text).min(1), writes: z.array(text), timing,
+  sharedResources: z.array(z.object({ poolId: worldValueSchema, basis: z.discriminatedUnion("kind", [
+    z.object({ kind: z.literal("default") }).strict(),
+    z.object({ kind: z.literal("explicit_quantity"), amount: z.number().positive(), unit: text, sourceText: text }).strict(),
+  ]) }).strict()),
   random: z.array(z.object({ id: programKey, distributionId: programKey, purpose: text }).strict()).max(32),
   predicates: z.array(predicate).min(1),
   branches: z.array(z.object({ id: programKey,
@@ -64,6 +68,8 @@ export function closeWorldProgramReferences(input: WorldProgramDefinition): Worl
     for (const mechanic of branch.mechanics) collect(mechanic.input);
     if (branch.mechanics.length) sources.add("mechanics");
   }
+  for (const claim of definition.sharedResources) collect(claim.poolId);
+  if (definition.sharedResources.length) sources.add("mechanics");
   if (definition.timing.basis.kind !== "profile") {
     const basis = definition.timing.basis;
     expressionDependencies(basis.kind === "explicit_duration" ? basis.seconds : basis.amount).reads.forEach(key => reads.add(key));
@@ -140,6 +146,7 @@ export function admitWorldProgram(input: unknown, sources: Readonly<Record<strin
     } else for (const [key, child] of Object.entries(value)) { programKey.parse(key); checkValue(child, depth + 1); }
   };
   definition.reads.forEach(checkText); definition.writes.forEach(checkText);
+  for (const claim of definition.sharedResources) checkValue(claim.poolId);
   for (const read of definition.reads.filter(key => key.startsWith("random:"))) {
     if (!definition.random.some(request => read === `random:{actor}:${request.id}`)) throw new Error("undeclared world random read");
   }

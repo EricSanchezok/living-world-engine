@@ -12,6 +12,44 @@ import { LocalDatabase } from "../local-database";
 import { WorldHost } from "../world-host";
 
 describe("decision programs through the persistent WorldHost", () => {
+  it("persists a queued parallel instruction and starts it after restart without consuming time while queued", async () => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-native-queue-")), filename = path.join(root, "livingworld.sqlite");
+    const fixture = nativeProgramFixture(), attempt = fixture.program.nodes[0]!;
+    fixture.program.entry = "parallel";
+    fixture.program.nodes = [{ id: "parallel", kind: "parallel", children: ["ask-a", "ask-b"] },
+      { ...attempt, id: "ask-a" }, { ...attempt, id: "ask-b" }];
+    await fixture.configured.registry.capture();
+    let database = new LocalDatabase(filename, { heartbeat: false });
+    const repository = new MemoryWorldRepository({ [fixture.world.id]: fixture.world });
+    const makeHost = () => new WorldHost({ repository, store: database, ledger: database, provider: fixture.configured.gateway,
+      defaultAlgorithmRef: decisionEventAlgorithmRef(nativeProgramTestConfig) });
+    try {
+      let host = makeHost();
+      const created = await host.createInstance({ worldId: fixture.world.id, start: { kind: "observer" } }), id = created.summary.id;
+      await host.advance(id, { expectedRevision: 0, trigger: "batch", steps: 1 });
+      for (let i = 0; i < 200 && host.instance(id).run?.status === "running"; i++) await new Promise(resolve => setTimeout(resolve, 5));
+      expect(host.instance(id).run?.status).toBe("completed");
+      const first = database.readInstance(id).document.state;
+      const control = readDecisionEventState(first.executionState!, first);
+      expect(first.truth.elapsedSeconds).toBe(5);
+      expect(control.activities.map(activity => activity.status).sort()).toEqual(["completed", "queued"]);
+      expect(control.pending[0]!.atSeconds).toBeNull();
+      expect(replaySimulationState(first)).toEqual(first);
+      database.close(); database = new LocalDatabase(filename, { heartbeat: false }); host = makeHost();
+      await host.advance(id, { expectedRevision: first.revision, trigger: "batch", steps: 1 });
+      for (let i = 0; i < 200 && host.instance(id).run?.status === "running"; i++) await new Promise(resolve => setTimeout(resolve, 5));
+      expect(host.instance(id).run?.status).toBe("completed");
+      const final = database.readInstance(id).document.state;
+      const completed = readDecisionEventState(final.executionState!, final);
+      expect(final.truth.elapsedSeconds).toBe(10);
+      expect(completed.activities.map(activity => activity.status)).toEqual(["completed", "completed"]);
+      expect(completed.activities.map(activity => activity.startedAtSeconds).sort()).toEqual([0, 5]);
+      expect(completed.pending).toEqual([]);
+      expect(final.history[1]!.decisionEvent!.modelAudits.filter(audit => audit.role === "creation")).toEqual([]);
+      expect(host.inspectorStep(id, 2).programs!.activities).toEqual(completed.activities);
+      expect(replaySimulationState(final)).toEqual(final);
+    } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+  });
   it("sleeps with no fabricated time, revision, failure or recurring model work", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-native-sleep-"));
     const fixture = nativeProgramFixture();

@@ -9,9 +9,10 @@ import { applyProgramGoalEvidence } from "./goal-completion";
 import { commitWorldEvent, type WorldEventCandidate } from "./kernel";
 import { projectEventPerception } from "./perception";
 import { nextWorldClockBoundary } from "./clock-boundary";
-import { worldResources } from "./resources";
+import { programWorldResources } from "./resources";
 import { EventScheduler } from "./scheduler";
 import { programReceiptIndex, readDecisionEventState, restoreOwnerPrograms, sealDecisionEventState, type DecisionEventState } from "./runtime-state";
+import { settleProgramActivities } from "./activities";
 
 /** One deterministic implementation is shared by speculative preparation, canonical commit and replay. */
 export function settleProgramWorldEvent(source: Readonly<SimulationState>, prepared: DecisionEventState,
@@ -42,6 +43,7 @@ export function settleProgramWorldEvent(source: Readonly<SimulationState>, prepa
     state.agents[revision.agentId] = applyEventBeliefs(state, revision, prepared.agents[revision.agentId]?.resources);
   }
   const control = structuredClone(prepared);
+  control.activities = settleProgramActivities(control.activities, event.programs.map(bound => bound.attempt.id), [], event.atSeconds);
   control.receipts.push(committed.receipt);
   const canonicalReceipts = programReceiptIndex(control);
   const due = scheduler.nextTime === event.atSeconds ? scheduler.frontier() : [];
@@ -76,7 +78,7 @@ export function settleProgramWorldEvent(source: Readonly<SimulationState>, prepa
       inputHash: contentHash(perception.observations.filter(packet => packet.observerId === agentId)),
       payload: { observationIds: perception.observations.filter(packet => packet.observerId === agentId).map(packet => packet.id) } });
   }
-  control.worldResources = worldResources(state, definition, committed.resources); control.scheduler = scheduler.snapshot();
+  control.worldResources = programWorldResources(state, definition, control.activities, committed.resources); control.scheduler = scheduler.snapshot();
   const sealed = sealDecisionEventState(control);
   state.executionState = { producerHash, data: sealed as unknown as JsonObject };
   return { state, control: sealed, receipt: committed.receipt, observations: perception.observations,

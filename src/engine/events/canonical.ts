@@ -12,6 +12,8 @@ import { initialDecisionEventState, readDecisionEventState, type DecisionEventSt
 import { validateControlTransition } from "./control-validation";
 import { settleProgramWorldEvent } from "./settlement";
 import { applyProgramGoalEvidence } from "./goal-completion";
+import { replayActivityAdmissions, settleProgramActivities } from "./activities";
+import { worldResources } from "./resources";
 
 const equal = (a: unknown, b: unknown) => contentHash(a) === contentHash(b);
 function validateAuthority(state: Readonly<SimulationState>, authority: WorldRuntimeContract) {
@@ -45,6 +47,19 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
   if (!source.executionState || source.executionState.producerHash !== producerHash || proof.version !== 1 ||
     proof.request.expectedRevision !== source.revision) throw new Error("event execution source changed");
   const before = readDecisionEventState(source.executionState, source);
+  if (verifyControl) {
+    const admitted = replayActivityAdmissions(source, proof.authority, worldResources(source, proof.authority, before.worldResources),
+      proof.activityAdmissionInput, before.activities, proof.decisions);
+    const failed = proof.preparedControl.pending.filter(value => value.failure).map(value => value.attempt.id);
+    const expected = settleProgramActivities(admitted.activities, [], failed, source.truth.elapsedSeconds);
+    if (!equal(expected, proof.preparedControl.activities)) throw new Error("activity reservations differ from deterministic admission");
+    for (const pending of admitted.pending) {
+      const actual = proof.preparedControl.pending.find(value => value.attempt.id === pending.attempt.id);
+      if (!actual || !equal(pending.attempt, actual.attempt) || !equal(pending.bound, actual.bound) ||
+        !actual.failure && (pending.failure || pending.atSeconds !== actual.atSeconds)) throw new Error("activity admission changed its actual attempt");
+    }
+    if (admitted.pending.length !== proof.preparedControl.pending.length) throw new Error("activity admission pending membership changed");
+  }
   if (verifyControl) validateControlTransition(source, before, proof.preparedControl, proof.authority, producerHash,
     proof.decisions, proof.modelAudits, proof.policyRoster, proof.request.externalActions);
   let state: SimulationState, computed: DecisionEventState;

@@ -16,7 +16,7 @@ import { nextWorldClockBoundary } from "./clock-boundary";
 import { createWorldEventCandidate, type WorldEventCandidate } from "./kernel";
 import { advanceProgramControls } from "./program-control";
 import { authorizeWorldRandomness, prepareWorldRandomPlan, worldRandomResources, type WorldRandomCommitment } from "./randomness";
-import { worldProgramSources, worldResources } from "./resources";
+import { worldProgramSources, worldResources, programWorldResources } from "./resources";
 import { EventScheduler } from "./scheduler";
 import { collectDecisionAudits, initialDecisionEventState, invocationAllocator, readDecisionEventState, sealDecisionEventState,
   type DecisionEventModels, type DecisionEventState } from "./runtime-state";
@@ -26,6 +26,7 @@ import { settleProgramWorldEvent } from "./settlement";
 import type { DecisionEventStep } from "./execution-contract";
 import { authorExternalAction } from "./external-action";
 import { deferWorldAttempt } from "./world-recovery";
+import { settleProgramActivities } from "./activities";
 
 export interface DecisionEventConfig extends DecisionEventModels { maxDependencyRounds: number }
 export const JEV_EVENT_CONFIG: DecisionEventConfig = { decision: "decision-jev", creation: "creation-deepseek",
@@ -37,6 +38,7 @@ export const decisionEventAlgorithmRef = (config: DecisionEventConfig = JEV_EVEN
 export { WorldQuiescentError } from "../runtime/execution";
 interface PreparedNative {
   control: DecisionEventState; event: WorldEventCandidate | null; decisions: DecisionUse[]; activatedAgentIds: string[];
+  activityAdmissionInput: DecisionEventStep["activityAdmissionInput"];
 }
 
 export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
@@ -103,7 +105,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     const prepared = await prepareProgramWorldWork(this.provider, authority, source, controlled.control, context.modelScope, allocator.next);
     await context.stages?.after(executionStage("grounding-resource-admission"));
     await context.stages?.before(executionStage("reaction-perception"));
-    const control = prepared.control, decisions = [...controlled.decisions], audits = [...controlled.modelAudits, ...prepared.modelAudits];
+    const control = prepared.control, decisions = [...controlled.decisions, ...prepared.decisions], audits = [...controlled.modelAudits, ...prepared.modelAudits];
     const scheduler = new EventScheduler(source.truth.elapsedSeconds, control.scheduler);
     const runtime = new DecisionRuntime(this.provider, control.decisionCache ?? undefined);
     const scoped = () => ({ ...context.modelScope, modelRegistrySnapshotHash: control.registryHash,
@@ -154,6 +156,8 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
             (queued.payload as { attemptId: string }).attemptId === bound.attempt.id) scheduler.cancel(queued.id);
         }
         control.scheduler = scheduler.snapshot();
+        control.activities = settleProgramActivities(control.activities, [], programs.map(bound => bound.attempt.id), source.truth.elapsedSeconds);
+        control.worldResources = programWorldResources(source, authority, control.activities, initial.worldResources);
       }
     }
     control.decisionCache = runtime.snapshot() as unknown as JsonObject; control.modelOrdinals = allocator.ordinals;
@@ -161,7 +165,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     const progressHash = (value: DecisionEventState) => contentHash({ ...value, hash: "", modelOrdinals: null });
     if (!event && progressHash(sealed) === progressHash(initial)) throw new WorldQuiescentError(sealed.failures);
     await context.stages?.after(executionStage("transition-causal-verification"));
-    const payload: PreparedNative = { control: sealed, event, decisions, activatedAgentIds: controlled.activatedAgentIds };
+    const payload: PreparedNative = { control: sealed, event, decisions, activatedAgentIds: controlled.activatedAgentIds, activityAdmissionInput: prepared.activityAdmissionInput };
     const body = { executionState: { producerHash: this.manifest.hash, data: sealed as unknown as JsonObject },
       onsetPerception: { targets: [], receipts: [], requests: [], checks: [], commitmentRounds: [], rng: structuredClone(source.truth.rng) },
       reactionRequests: [], schemaVersion: WORLD_STEP_PREPARATION_SCHEMA_VERSION, sourceStateHash: contentHash(source),
@@ -202,7 +206,8 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     }
     finalControl = sealDecisionEventState({ ...finalControl, modelOrdinals: allocator.ordinals, decisionCache: runtime.snapshot() as unknown as JsonObject });
     await context.stages?.after(executionStage("observation-agent-mind"));
-    const proof: DecisionEventStep = { version: 1, authority, preparedControl: prepared.control, event: prepared.event, beliefRevisions, finalControl,
+    const proof: DecisionEventStep = { version: 1, authority, preparedControl: prepared.control, activityAdmissionInput: prepared.activityAdmissionInput,
+      event: prepared.event, beliefRevisions, finalControl,
       decisions, modelAudits: collectDecisionAudits(audits), policyRoster: structuredClone(input.policyRoster), request: structuredClone(input.request) };
     return nativeCandidate(input.state, proof, this.manifest.hash, prepared.activatedAgentIds);
   }

@@ -1,5 +1,6 @@
 import path from "node:path";
 import { encodeProgramDraft } from "../programs/creation-codec";
+import { encodeWorldDraft } from "../events/creation-codec";
 import { loadWorldScript } from "../../script/world-loader";
 import { createTestModelCatalog } from "./model-provider";
 import { decisionQuestionIds, decisionTestProvider } from "./decision-provider";
@@ -20,10 +21,10 @@ export function nativeProgramFixture(options: { goalVerdict?: "yes" | "no" | "un
       test: { kind: "mechanical", operator: "eq", left: { kind: "literal", value: true }, right: { kind: "literal", value: true } } },
     { id: "complete", description: "Duty complete", sourceIds: ["goal:guard-gate"], reads: ["evidence"], unknown: "wait",
       test: { kind: "semantic", instructions: "Is the actual guarding duty complete?" } }] };
-  const rule: WorldProgramDefinition = { version: 2, namespace: "world", id: "ask-reachable", description: "Ask a nearby traveler a question.",
+  const rule: WorldProgramDefinition = { version: 3, namespace: "world", id: "ask-reachable", description: "Ask a nearby traveler a question.",
     sourceIds: ["world"], parameters: { actor: { kind: "entity", description: "Speaker" }, recipient: { kind: "entity", description: "Listener" },
       utterance: { kind: "text", description: "Exact words" } }, reads: ["entity:{actor}", "entity:{recipient}", "placement:{actor}", "placement:{recipient}"], writes: [],
-    timing: { profileId: "explicit-duration", basis: { kind: "explicit_duration", seconds: { kind: "literal", value: 5 }, sourceText: "5 seconds" } }, random: [],
+    timing: { profileId: "explicit-duration", basis: { kind: "explicit_duration", seconds: { kind: "literal", value: 5 }, sourceText: "5 seconds" } }, random: [], sharedResources: [],
     predicates: [{ id: "reachable", description: "Speech can be heard", sourceIds: ["world"], reads: ["placement:{actor}", "placement:{recipient}"], unknown: "wait",
       test: { kind: "semantic", instructions: "Does the actual speaker address the reachable listener?" } }],
     branches: [{ id: "spoken", when: [{ predicateId: "reachable", equals: "yes" }], acknowledgement: "attempted", outcome: "succeeded",
@@ -31,11 +32,12 @@ export function nativeProgramFixture(options: { goalVerdict?: "yes" | "no" | "un
   const configured = decisionTestProvider(body => {
     const wire = (body.messages as Array<{ content: string }>).map(message => message.content).join("\n");
     if (wire.includes("Compile a reusable private behavior program")) return encodeProgramDraft(program, { recipient: "traveler" });
-    if (wire.includes("You compile authored world sources")) return { definition: rule, parameters: wire.includes("Hello keeper") ?
-      { actor: "player", recipient: "keeper", utterance: "Hello keeper" } : { actor: "keeper", recipient: "player", utterance: "Why are you here?" } };
+    if (wire.includes("You compile authored world sources")) return encodeWorldDraft(rule, wire.includes("Hello keeper") ?
+      { actor: "player", recipient: "keeper", utterance: "Hello keeper" } : { actor: "keeper", recipient: "player", utterance: "Why are you here?" });
     if (wire.includes("Render the player's submitted action.")) return { utterance: "Hello keeper" };
     if (wire.includes("Choose which actual active goal")) return { answers: { goal: { choice: wire.includes("guard-gate") ? options.reuse ? "p0" : "g0" : "wait" } } };
-    const choice = wire.includes("You update an Agent's existing beliefs") ? "unchanged" : wire.includes("actual long-term goal") ? options.goalVerdict ?? "unknown" : options.worldVerdict ?? "yes";
+    const choice = wire.includes("You update an Agent's existing beliefs") ? "unchanged" : wire.includes("ALL required shared resource claims") ? "yes"
+      : wire.includes("actual long-term goal") ? options.goalVerdict ?? "unknown" : options.worldVerdict ?? "yes";
     return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice }])) };
   }, ["world-test", "truth-deepseek", "agent-deepseek"]);
   const roster: Record<string, PolicyBinding> = { keeper: { kind: "model", agentId: "keeper", profiles: world.initialState.agents.keeper!.modelProfiles },

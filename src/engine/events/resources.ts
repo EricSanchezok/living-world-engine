@@ -4,8 +4,15 @@ import type { ProgramResources } from "../programs/definition";
 import type { JsonValue } from "../runtime/json";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import { quantityId } from "../runtime/runtime-id";
+import type { ProgramActivity } from "./activities";
 
 export type ReadSet = Record<string, { version: number; hash: string }>;
+
+export function programWorldResources(state: Readonly<SimulationState>, definition: WorldRuntimeContract, activities: ProgramActivity[], previous: ProgramResources) {
+  const physical = { ...state, executionState: { producerHash: state.executionState?.producerHash ?? "prepared",
+    data: { kind: "decision-event", activities: activities as unknown as JsonValue } } } as SimulationState;
+  return worldResources(physical, definition, previous);
+}
 
 /** This index contains canonical physical truth, never any Agent's private cognition or programs. */
 export function worldResources(state: Readonly<SimulationState>, definition: WorldRuntimeContract, previous: ProgramResources = {}): ProgramResources {
@@ -14,7 +21,8 @@ export function worldResources(state: Readonly<SimulationState>, definition: Wor
     mechanics: truth.mechanics, distributions: definition.randomDistributions,
     entities: truth.entities, placements: truth.placements, facts: truth.facts, meters: truth.meters,
     quantities: truth.quantities, ratings: truth.ratings, conditions: truth.conditions,
-    activities: truth.activities, pools: truth.sharedActivityResourcePools, timers: truth.timers,
+    activities: truth.activities, programActivities: state.executionState?.data.kind === "decision-event" ? state.executionState.data.activities ?? [] : [],
+    pools: truth.sharedActivityResourcePools, timers: truth.timers,
     events: truth.events, tombstones: truth.factTombstones,
     agentRoster: Object.fromEntries(Object.values(state.agents).map(agent => [agent.id, { entityId: agent.entityId, modelProfiles: agent.modelProfiles }])) };
   for (const [prefix, entries] of Object.entries({ entity: truth.entities, placement: truth.placements, fact: truth.facts,
@@ -23,6 +31,10 @@ export function worldResources(state: Readonly<SimulationState>, definition: Wor
     for (const [id, value] of Object.entries(entries)) values[`${prefix}:${id}`] = value;
   }
   for (const law of definition.laws) values[`law:${law.id}`] = law;
+  const programActivities = values.programActivities as ProgramActivity[];
+  for (const agent of Object.values(state.agents)) values[`program-actor:${agent.entityId}`] = programActivities.filter(activity => activity.actorId === agent.id && activity.status === "active");
+  for (const pool of Object.values(truth.sharedActivityResourcePools)) values[`program-pool:${pool.id}`] = programActivities.filter(activity =>
+    activity.status === "active" && activity.sharedClaims.some(claim => claim.poolId === pool.id));
   for (const profile of Object.values(truth.mechanics.temporalProfiles)) values[`temporal:${profile.id}`] = profile;
   for (const definitionId of Object.keys(truth.mechanics.quantities)) for (const entityId of Object.keys(truth.entities)) {
     const id = quantityId(state.worldHash, definitionId, entityId); values[`quantity:${id}`] ??= null;

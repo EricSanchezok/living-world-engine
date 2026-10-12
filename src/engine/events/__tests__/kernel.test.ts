@@ -11,6 +11,7 @@ import { adjudicateWorldPrograms, type BoundWorldProgram } from "../adjudication
 import { worldProgramSources, worldResources } from "../resources";
 import { commitWorldEvent, createWorldEventCandidate } from "../kernel";
 import { compileWorldProgram } from "../compiler";
+import { encodeWorldDraft } from "../creation-codec";
 import { WorldProgramLibrary } from "../library";
 import { projectEventPerception } from "../perception";
 import { applyEventBeliefs, reviseEventBeliefs } from "../cognition";
@@ -23,10 +24,10 @@ function fixture() {
   const state = structuredClone(definition.initialState), sources = worldProgramSources(definition, state), resources = worldResources(state, definition);
   const from = `quantity:${quantityId(state.worldHash, "spirit-stone", "player")}`;
   const to = `quantity:${quantityId(state.worldHash, "spirit-stone", "keeper")}`;
-  const raw: WorldProgramDefinition = { version: 2, namespace: "world", id: "voluntary-gift", description: "Transfer the actor's offered stones to a nearby recipient.",
+  const raw: WorldProgramDefinition = { version: 3, namespace: "world", id: "voluntary-gift", description: "Transfer the actor's offered stones to a nearby recipient.",
     sourceIds: ["world", "law:no-free-spirit-stones", "mechanics"], parameters: { actor: { kind: "entity", description: "Giver" }, recipient: { kind: "entity", description: "Recipient" }, amount: { kind: "number", description: "Offered amount" } },
     reads: ["entity:{actor}", "entity:{recipient}", "placement:{actor}", "placement:{recipient}", from, to], writes: ["quantities"],
-    timing: { profileId: "explicit-duration", basis: { kind: "explicit_duration", seconds: { kind: "literal", value: 5 }, sourceText: "5 seconds" } }, random: [],
+    timing: { profileId: "explicit-duration", basis: { kind: "explicit_duration", seconds: { kind: "literal", value: 5 }, sourceText: "5 seconds" } }, random: [], sharedResources: [],
     predicates: [{ id: "authorized", description: "The actor voluntarily offers their own stones to this reachable recipient.", reads: ["placement:{actor}", "placement:{recipient}"], sourceIds: ["world"],
       test: { kind: "semantic", instructions: "Check the actual offer and reach. Do not fabricate acceptance or an exchange promised in return." }, unknown: "wait" }],
     branches: [{ id: "give", when: [{ predicateId: "authorized", equals: "yes" }], outcome: "succeeded", acknowledgement: "attempted", description: "A voluntary transfer occurs.",
@@ -62,7 +63,7 @@ describe("source-bound world event kernel", () => {
   it("closes explicitly referenced nested sources before admission without inventing rule authority", async () => {
     const f = fixture(), fact = Object.keys(f.sources).find(id => id.startsWith("fact:"))!;
     f.raw.predicates[0]!.sourceIds.push(fact);
-    const configured = decisionTestProvider(() => ({ definition: f.raw, parameters: f.bound.parameters }));
+    const configured = decisionTestProvider(() => encodeWorldDraft(f.raw, f.bound.parameters));
     const result = await compileWorldProgram(configured.gateway, { profileId: "world-test", invocationBase: 1,
       workloadId: "source-closure", batchId: "source-closure", definition: f.definition, state: f.state,
       resources: f.resources, attempt: f.bound.attempt, reason: "initial-coverage", runtimeIdentity: { worldHash: f.state.worldHash, revision: 0 } });
@@ -101,7 +102,7 @@ describe("source-bound world event kernel", () => {
     const configured = decisionTestProvider((body, attempt) => {
       expect(JSON.stringify(body)).not.toContain(f.state.agents.keeper!.character.persona.summary);
       if (attempt === 2) expect(JSON.stringify(body)).toContain("world compiler changed the action owner");
-      return { definition: f.raw, parameters: { ...f.bound.parameters, actor: attempt === 1 ? "keeper" : "player" } };
+      return encodeWorldDraft(f.raw, { ...f.bound.parameters, actor: attempt === 1 ? "keeper" : "player" });
     });
     const result = await compileWorldProgram(configured.gateway, { workloadId: "world-compile", batchId: "world-compile", profileId: "world-test", invocationBase: 1,
       definition: f.definition, state: f.state, resources: f.resources, attempt: f.bound.attempt, reason: "new-intent",
@@ -117,7 +118,7 @@ describe("source-bound world event kernel", () => {
     }
   });
   it("retains an unsupported world program as a recoverable compilation failure", async () => {
-    const f = fixture(), configured = decisionTestProvider(() => ({ definition: { ...f.raw, sourceIds: ["invented-law"] }, parameters: f.bound.parameters }));
+    const f = fixture(), configured = decisionTestProvider(() => encodeWorldDraft({ ...f.raw, sourceIds: ["invented-law"] }, f.bound.parameters));
     const result = await compileWorldProgram(configured.gateway, { workloadId: "world-compile", batchId: "world-compile", profileId: "world-test", invocationBase: 1,
       definition: f.definition, state: f.state, resources: f.resources, attempt: f.bound.attempt, reason: "new-intent",
       runtimeIdentity: { worldHash: f.state.worldHash, revision: 0 } });
@@ -130,7 +131,7 @@ describe("source-bound world event kernel", () => {
     f.raw.parameters.utterance = { kind: "text", description: "The concrete pre-action utterance." };
     f.bound.parameters.utterance = f.bound.attempt.utterance;
     f.raw.branches[0]!.deliveries = [{ recipientParameter: "recipient", kind: "speech", text: "{utterance}" }];
-    const configured = decisionTestProvider(() => ({ definition: f.raw, parameters: f.bound.parameters }));
+    const configured = decisionTestProvider(() => encodeWorldDraft(f.raw, f.bound.parameters));
     const compiled = await compileWorldProgram(configured.gateway, { profileId: "world-test", invocationBase: 1,
       workloadId: "reusable-speech", batchId: "reusable-speech", runtimeIdentity: { worldHash: f.state.worldHash, revision: 0 },
       definition: f.definition, state: f.state, resources: f.resources, attempt: f.bound.attempt, reason: "initial-coverage" });
