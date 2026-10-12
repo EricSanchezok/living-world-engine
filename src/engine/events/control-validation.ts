@@ -29,6 +29,10 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
   authority: WorldRuntimeContract, producerHash: string, decisions: DecisionUse[], audits: ModelExecutionAudit[],
   roster: Readonly<Record<string, PolicyBinding>>, externalActions: readonly ExternalActionInput[] = []) {
   readDecisionEventState({ producerHash, data: after as unknown as JsonObject }, source);
+  if (before.randomReservation && (!equal(before.randomReservation, after.randomReservation) || !equal(before.pending, after.pending))) {
+    throw new Error("a durable random reservation or its stakes were rewritten");
+  }
+  if (source.revision === 0 && !source.executionState && after.randomReservation) throw new Error("bootstrap cannot draw randomness");
   for (const key of ["worldHash", "modelCatalogHash", "registryHash", "models", "receipts"] as const) {
     if (!equal(before[key], after[key])) throw new Error(`private control changed pinned ${key}`);
   }

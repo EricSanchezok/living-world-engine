@@ -13,7 +13,7 @@ import { makeWorldDecisionBatch, mechanicalWorldCondition, validateWorldEvidence
 import { captureReads, validateReads, worldProgramSources, worldResources, type ReadSet } from "./resources";
 import { admitWorldProgram, bindWorldProgram, renderWorldText } from "./world-program";
 import { materializeWorldMechanics, type WorldMechanicsContext } from "./mechanics";
-import { validateWorldRandomness, type WorldRandomCommitment } from "./randomness";
+import { activeRandomReservation, validateWorldRandomness, type WorldRandomCommitment } from "./randomness";
 import { worldClockBoundary, type WorldClockBoundary } from "./clock-boundary";
 import { projectAgentPerspective } from "../cognition/agent-perspective";
 import { privateProgramResources } from "../programs/private-resources";
@@ -21,6 +21,7 @@ import { privateProgramResources } from "../programs/private-resources";
 export interface WorldDelivery { attemptId: string; recipientEntityId: string; kind: "speech" | "observation"; text: string }
 export interface WorldEventCandidate {
   version: 1;
+  unresolved: boolean;
   id: string;
   atSeconds: number;
   programs: BoundWorldProgram[];
@@ -157,7 +158,10 @@ export function createWorldEventCandidate(state: Readonly<SimulationState>, defi
   const proof = { records: adjudication.records, evidence: adjudication.evidence };
   const context = { state, definition, randomness };
   const records = verifyAdjudication(programs, proof, resources, sources, context);
-  const value = materialize(programs, records, resources, context);
+  // A persisted draw cannot be repaired into different stakes after its result is known.
+  // An unresolved joint frontier ends with blocked receipts and no fabricated effects.
+  const unresolved = Boolean(activeRandomReservation(state) && programs.some(bound => selectableWorldBranches(bound, [...records.values()]).length !== 1));
+  const value = unresolved ? { selections: [], effects: [], deliveries: [], mechanicInvocations: [], mechanicResults: [] } : materialize(programs, records, resources, context);
   const reads = captureReads(resources, [...new Set([
     ...proof.records.flatMap(record => Object.keys(record.readSet)),
     ...programs.flatMap(bound => [ `entity:${bound.attempt.actorEntityId}`, ...bound.program.definition.reads.map(key => renderWorldText(key, bound.parameters)) ]),
@@ -165,7 +169,7 @@ export function createWorldEventCandidate(state: Readonly<SimulationState>, defi
     ...Object.keys(randomness?.plan.reads ?? {}),
     ...clockBoundary.timers.map(timer => `timer:${timer.id}`), ...clockBoundary.conditions.map(id => `condition:${id}`),
   ])]);
-  const body = { version: 1 as const, atSeconds, programs, adjudication: proof, ...value, reads, randomness, clockBoundary };
+  const body = { version: 1 as const, unresolved, atSeconds, programs, adjudication: proof, ...value, reads, randomness, clockBoundary };
   return frozenClone({ ...body, id: contentHash(body) });
 }
 
@@ -218,10 +222,10 @@ export function commitWorldEvent(source: Readonly<SimulationState>, definition: 
     if (next.truth.entities[agent.entityId]?.lifecycle !== "active") delete next.agents[agentId]; else agent.nextAction = null;
   }
   const events: WorldEvent[] = candidate.programs.map((bound, ordinal) => {
-    const selected = candidate.selections.find(selection => selection.attemptId === bound.attempt.id)!;
-    const branch = bound.program.definition.branches.find(branch => branch.id === selected.branchId)!;
+    const selected = candidate.selections.find(selection => selection.attemptId === bound.attempt.id);
+    const branch = bound.program.definition.branches.find(branch => branch.id === selected?.branchId);
     return { id: runtimeId({ worldHash: next.worldHash, revision: source.revision, kind: "event", stage: "world-program", owner: bound.attempt.id, round: 0, ordinal }),
-      step: next.step, description: renderWorldText(branch.description, bound.parameters), impact: "ordinary", ...worldProvenance(bound) };
+      step: next.step, description: candidate.unresolved ? "The attempt produced no confirmed outcome." : renderWorldText(branch!.description, bound.parameters), impact: "ordinary", ...worldProvenance(bound) };
   });
   for (const [ordinal, timer] of candidate.clockBoundary.timers.entries()) {
     const sourceTimer = source.truth.timers[timer.id]!;
@@ -246,14 +250,14 @@ export function commitWorldEvent(source: Readonly<SimulationState>, definition: 
   const effectHash = contentHash({ operations: candidate.effects, deliveries: candidate.deliveries, randomness: candidate.randomness?.hash ?? null });
   const programReceipts: ProgramReceipt[] = candidate.programs.flatMap((bound, ordinal) => {
     if (!bound.attempt.program) return [];
-    const branch = bound.program.definition.branches.find(value => value.id === candidate.selections.find(value => value.attemptId === bound.attempt.id)!.branchId)!;
+    const branch = bound.program.definition.branches.find(value => value.id === candidate.selections.find(value => value.attemptId === bound.attempt.id)?.branchId);
     const value = { instanceId: bound.attempt.program.instanceId, workId: bound.attempt.program.workId, requestHash: bound.attempt.program.requestHash,
       // An executed attempt does not reveal an unobserved hit, failure, delivery, or secret state change.
-      status: branch.acknowledgement === "observed-outcome" ? branch.outcome : "succeeded" as const,
+      status: candidate.unresolved ? "blocked" as const : branch!.acknowledgement === "observed-outcome" ? branch!.outcome : "succeeded" as const,
       atSeconds: candidate.atSeconds, eventIds: [events[ordinal]!.id],
       effectHash: contentHash({ candidateId: id, attemptId: bound.attempt.id }),
       madeProgress: privatePhysicalHash(source, bound.attempt.actorId) !== privatePhysicalHash(next, bound.attempt.actorId) ||
-        branch.deliveries.some(delivery => bound.parameters[delivery.recipientParameter] === bound.attempt.actorEntityId) };
+        Boolean(branch?.deliveries.some(delivery => bound.parameters[delivery.recipientParameter] === bound.attempt.actorEntityId)) };
     return [{ ...value, id: contentHash(value) }];
   });
   const value = { version: 1 as const, candidateId: id, beforeHash: contentHash(source), afterHash: contentHash(next),

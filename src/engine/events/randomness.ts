@@ -20,6 +20,34 @@ export interface WorldRandomCommitment {
   version: 1; hash: string; plan: WorldRandomPlan; authorization: DecisionResult;
   after: SeededRngState; results: DiscreteRandomResult[];
 }
+export interface WorldRandomReservation {
+  version: 1; hash: string; sourceRevision: number; atSeconds: number; commitment: WorldRandomCommitment;
+}
+
+export function reserveWorldRandomness(sourceRevision: number, atSeconds: number, commitment: WorldRandomCommitment): WorldRandomReservation {
+  const body = { version: 1 as const, sourceRevision, atSeconds, commitment };
+  return frozenClone({ ...body, hash: contentHash(body) });
+}
+
+export function validateRandomReservation(reservation: WorldRandomReservation): void {
+  const { hash, ...body } = reservation;
+  if (reservation.version !== 1 || hash !== contentHash(body) || !Number.isSafeInteger(reservation.sourceRevision) ||
+    reservation.sourceRevision < 0 || !Number.isSafeInteger(reservation.atSeconds) || reservation.atSeconds < 1) throw new Error("invalid random reservation");
+  const { hash: commitmentHash, ...commitment } = reservation.commitment;
+  if (commitmentHash !== contentHash(commitment)) throw new Error("edited reserved random commitment");
+  verifyAuthorization(commitment.plan, commitment.authorization);
+  const outcome = resolveDiscreteRandomRequests(commitment.plan.before, commitment.plan.requests);
+  if (contentHash(outcome.rng) !== contentHash(commitment.after) || contentHash(outcome.results) !== contentHash(commitment.results)) {
+    throw new Error("reserved random result does not replay");
+  }
+}
+
+export function activeRandomReservation(state: Readonly<SimulationState>): WorldRandomReservation | null {
+  const value = state.executionState?.data.kind === "decision-event" ? state.executionState.data.randomReservation : null;
+  if (!value) return null;
+  const reservation = value as unknown as WorldRandomReservation;
+  validateRandomReservation(reservation); return reservation;
+}
 
 /** Fix stakes and source distributions without extracting or exposing any RNG word. */
 export function prepareWorldRandomPlan(state: Readonly<SimulationState>, definition: WorldRuntimeContract,
@@ -83,6 +111,20 @@ Promise<{ commitment: WorldRandomCommitment | null; call: DecisionUse; dispositi
 /** Reconstruct requests, sources, inputs and seeded results during commit/recovery; never ask a model to roll. */
 export function validateWorldRandomness(state: Readonly<SimulationState>, definition: WorldRuntimeContract, resources: ProgramResources,
   programs: BoundWorldProgram[], commitment: WorldRandomCommitment | null): ProgramResources {
+  const reservation = activeRandomReservation(state);
+  if (reservation && state.revision > reservation.sourceRevision) {
+    if (!commitment || commitment.hash !== reservation.commitment.hash || contentHash(state.truth.rng) !== contentHash(commitment.after)) {
+      throw new Error("world randomness differs from the durable reservation");
+    }
+    // Rebuild the pre-draw input with its original identity. Every other actual read must still match.
+    const before = structuredClone(state) as SimulationState;
+    before.revision = reservation.sourceRevision; before.truth.rng = structuredClone(commitment.plan.before);
+    const original = { ...resources, rng: { version: commitment.plan.reads.rng!.version, value: commitment.plan.before as unknown as JsonValue } };
+    const expected = prepareWorldRandomPlan(before, definition, original, programs);
+    if (contentHash(expected) !== contentHash(commitment.plan)) throw new Error("reserved random stakes or dependencies changed");
+    validateReads(original, commitment.plan.reads);
+    return worldRandomResources(resources, commitment);
+  }
   const plan = prepareWorldRandomPlan(state, definition, resources, programs);
   if (!plan) { if (commitment !== null) throw new Error("unexpected world randomness"); return resources; }
   if (!commitment) throw new Error("missing world random commitment");

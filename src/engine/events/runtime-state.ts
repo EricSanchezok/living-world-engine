@@ -17,6 +17,7 @@ import type { CommitReceipt } from "./kernel";
 import { worldProgramDuration } from "./adjudication";
 import { worldRecoverySchema, type WorldAttemptRecovery } from "./world-recovery";
 import { programActivitySchema, validateProgramActivities, type ProgramActivity } from "./activities";
+import { validateRandomReservation, type WorldRandomReservation } from "./randomness";
 
 export interface DecisionEventModels { decision: string; creation: string; fallback: string }
 export interface PendingProgramAttempt {
@@ -39,7 +40,7 @@ export interface ProgramRuntimeFailure {
   inputHash: string; reason: string; recoverable: true;
 }
 export interface DecisionEventState {
-  kind: "decision-event"; version: 3; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
+  kind: "decision-event"; version: 4; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
   models: DecisionEventModels; privateLibrary: ReturnType<ProgramLibrary["snapshot"]>; worldLibrary: ReturnType<WorldProgramLibrary["snapshot"]>;
   policyKinds: Record<string, "model" | "external" | "idle" | "replay">;
   agents: Record<string, AgentProgramState>; worldResources: ProgramResources;
@@ -47,13 +48,14 @@ export interface DecisionEventState {
   modelOrdinals: { revision: number; subjects: Record<string, number> };
   pending: PendingProgramAttempt[]; receipts: CommitReceipt[]; coverage: GoalProgramCoverage[]; failures: ProgramRuntimeFailure[];
   activities: ProgramActivity[];
+  randomReservation: WorldRandomReservation | null;
 }
-const stateSchema = z.object({ kind: z.literal("decision-event"), version: z.literal(3), hash: programHash,
+const stateSchema = z.object({ kind: z.literal("decision-event"), version: z.literal(4), hash: programHash,
   worldHash: z.string().regex(/^sha256:[a-f0-9]{64}$/u), modelCatalogHash: z.string().min(1), registryHash: z.string().min(1),
   models: z.object({ decision: z.string().min(1), creation: z.string().min(1), fallback: z.string().min(1) }).strict(),
   policyKinds: z.record(z.string(), z.enum(["model", "external", "idle", "replay"])),
   privateLibrary: z.unknown(), worldLibrary: z.unknown(), agents: z.record(z.string(), z.unknown()), worldResources: z.record(z.string(), z.unknown()),
-  scheduler: z.unknown(), decisionCache: z.unknown(),
+  scheduler: z.unknown(), decisionCache: z.unknown(), randomReservation: z.unknown(),
   modelOrdinals: z.object({ revision: z.number().int().nonnegative(), subjects: z.record(z.string(), z.number().int().nonnegative()) }).strict(),
   pending: z.array(z.unknown()), receipts: z.array(z.unknown()), activities: z.array(programActivitySchema),
   coverage: z.array(z.unknown()), failures: z.array(z.unknown()) }).strict();
@@ -69,14 +71,14 @@ export function initialDecisionEventState(state: Readonly<SimulationState>, mode
   const scheduler = new EventScheduler(state.truth.elapsedSeconds);
   for (const agentId of Object.keys(state.agents).sort()) scheduler.schedule({ atSeconds: state.truth.elapsedSeconds, subjectId: agentId,
     kind: "control", inputHash: contentHash({ bootstrap: agentId, worldHash: state.worldHash }), payload: { reason: "initial-goal-coverage" } });
-  return sealDecisionEventState({ kind: "decision-event", version: 3, worldHash: state.worldHash, modelCatalogHash: catalogHash, registryHash,
+  return sealDecisionEventState({ kind: "decision-event", version: 4, worldHash: state.worldHash, modelCatalogHash: catalogHash, registryHash,
     models, policyKinds: Object.fromEntries(Object.keys(state.agents).map(id => [id, "model" as const])),
     privateLibrary: new ProgramLibrary().snapshot(), worldLibrary: new WorldProgramLibrary().snapshot(),
     agents: Object.fromEntries(Object.values(state.agents).map(agent => [agent.id, {
       resources: privateProgramResources(projectAgentPerspective(state as SimulationState, agent)),
       instances: [], activeInstanceId: null, planning: null, lastEvidenceIds: Object.keys(agent.belief.evidence).sort(),
     }])), worldResources: {}, scheduler: scheduler.snapshot(), decisionCache: null,
-    modelOrdinals: { revision: state.revision, subjects: {} }, pending: [], activities: [], receipts: [], coverage: [], failures: [] });
+    modelOrdinals: { revision: state.revision, subjects: {} }, pending: [], activities: [], randomReservation: null, receipts: [], coverage: [], failures: [] });
 }
 export function programReceiptIndex(value: Pick<DecisionEventState, "receipts">): Map<string, ProgramReceipt> {
   const receipts = new Map<string, ProgramReceipt>();
@@ -95,6 +97,8 @@ export function readDecisionEventState(executionState: AlgorithmExecutionState, 
   const parsed = stateSchema.parse(executionState.data), { hash, ...body } = parsed;
   if (hash !== contentHash(body) || parsed.worldHash !== state.worldHash) throw new Error("program runtime checksum or world mismatch");
   const value = structuredClone(parsed) as unknown as DecisionEventState;
+  if (value.randomReservation === undefined) throw new Error("missing random reservation state");
+  if (value.randomReservation) validateRandomReservation(value.randomReservation);
   const library = new ProgramLibrary(value.privateLibrary); new WorldProgramLibrary(value.worldLibrary);
   new EventScheduler(state.truth.elapsedSeconds, value.scheduler);
   const receipts = programReceiptIndex(value), instances = new Set<string>();

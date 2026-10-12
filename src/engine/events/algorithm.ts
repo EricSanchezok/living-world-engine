@@ -15,7 +15,8 @@ import { reviseEventBeliefs } from "./cognition";
 import { nextWorldClockBoundary } from "./clock-boundary";
 import { createWorldEventCandidate, type WorldEventCandidate } from "./kernel";
 import { advanceProgramControls } from "./program-control";
-import { authorizeWorldRandomness, prepareWorldRandomPlan, worldRandomResources, type WorldRandomCommitment } from "./randomness";
+import { authorizeWorldRandomness, prepareWorldRandomPlan, reserveWorldRandomness, worldRandomResources, type WorldRandomCommitment } from "./randomness";
+import { settleRandomReservation } from "./random-reservation";
 import { worldProgramSources, worldResources, programWorldResources } from "./resources";
 import { EventScheduler } from "./scheduler";
 import { collectDecisionAudits, initialDecisionEventState, invocationAllocator, readDecisionEventState, sealDecisionEventState,
@@ -76,7 +77,10 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     const initial = readDecisionEventState(source.executionState, source), allocator = invocationAllocator(initial, source.revision);
     const authority = toWorldRuntimeContract(input.definition);
     await context.stages?.before(executionStage("action-compilation"));
-    const controlled = await advanceProgramControls(this.provider, source, initial, input.policyRoster, context.modelScope, {
+    if (initial.randomReservation && (input.request.externalActions.length || Object.entries(input.policyRoster).some(([id, policy]) =>
+      initial.policyKinds[id] !== policy.kind))) throw new Error("settle the committed random attempt before submitting another action or changing controllers");
+    const controlled = initial.randomReservation ? { control: structuredClone(initial), decisions: [] as DecisionUse[],
+      modelAudits: [] as ModelExecutionAudit[], activatedAgentIds: [] as string[] } : await advanceProgramControls(this.provider, source, initial, input.policyRoster, context.modelScope, {
       maxDependencyRounds: this.config.maxDependencyRounds, nextInvocation: allocator.next,
     });
     if (new Set(input.request.externalActions.map(action => action.agentId)).size !== input.request.externalActions.length) throw new Error("duplicate external actor submission");
@@ -120,14 +124,19 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     let event: WorldEventCandidate | null = null;
     const programs = atSeconds !== null && atSeconds > source.truth.elapsedSeconds
       ? control.pending.filter(pending => pending.atSeconds === atSeconds && !pending.failure && pending.bound).map(pending => pending.bound!) : [];
-    const randomPlan = prepareWorldRandomPlan(physical, authority, control.worldResources, programs);
-    let randomness: WorldRandomCommitment | null = null;
+    const randomPlan = initial.randomReservation ? null : prepareWorldRandomPlan(physical, authority, control.worldResources, programs);
+    let randomness: WorldRandomCommitment | null = initial.randomReservation?.commitment ?? null;
+    let reservationCreated = false;
     let randomDeferral: string | null = null;
     let randomRejection: Parameters<typeof deferWorldAttempt>[5];
     if (randomPlan) {
       const authorized = await authorizeWorldRandomness(runtime, randomPlan, scoped());
       randomness = authorized.commitment; decisions.push(authorized.call);
       if (!authorized.call.reused) audits.push(authorized.call.result.audit);
+      if (randomness) {
+        control.randomReservation = reserveWorldRandomness(source.revision, atSeconds!, randomness);
+        reservationCreated = true;
+      }
       if (!randomness) {
         randomDeferral = `world rule awaits evidence or expansion: random applicability requires ${authorized.disposition}`;
         randomRejection = { disposition: authorized.disposition === "expand" ? "expand" : "wait",
@@ -137,12 +146,12 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     await context.stages?.after(executionStage("temporal-dependency"));
     await context.stages?.before(executionStage("truth-resolution"));
     const resources = randomness ? worldRandomResources(control.worldResources, randomness) : control.worldResources;
-    const adjudication = programs.length && !randomDeferral ? await adjudicateWorldPrograms(runtime, programs, resources, worldProgramSources(authority, source), scoped(), { state: physical, definition: authority, randomness })
+    const adjudication = programs.length && !randomDeferral && !reservationCreated ? await adjudicateWorldPrograms(runtime, programs, resources, worldProgramSources(authority, source), scoped(), { state: physical, definition: authority, randomness })
       : { records: [], evidence: [], calls: [] };
     decisions.push(...adjudication.calls); audits.push(...adjudication.calls.filter(call => !call.reused).map(call => call.result.audit));
     await context.stages?.after(executionStage("truth-resolution"));
     await context.stages?.before(executionStage("transition-causal-verification"));
-    if (atSeconds !== null && atSeconds > source.truth.elapsedSeconds) {
+    if (atSeconds !== null && atSeconds > source.truth.elapsedSeconds && !reservationCreated) {
       try {
         if (randomDeferral) throw new Error(randomDeferral);
         event = createWorldEventCandidate(physical, authority, control.worldResources, programs, adjudication, atSeconds, randomness);
@@ -189,7 +198,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     const allocator = invocationAllocator(prepared.control, input.state.revision);
     const runtime = new DecisionRuntime(this.provider, prepared.control.decisionCache ?? undefined);
     const beliefRevisions: DecisionEventStep["beliefRevisions"] = [];
-    let finalControl = prepared.control;
+    let finalControl = settleRandomReservation(input.state, prepared.control, authority, decisions).control;
     if (prepared.event) {
       const preview = settleProgramWorldEvent(input.state, prepared.control, prepared.event, authority, this.manifest.hash);
       const revised = await Promise.allSettled(preview.perceptionBeliefPatches.map(async patch => {

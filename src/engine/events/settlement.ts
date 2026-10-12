@@ -43,6 +43,9 @@ export function settleProgramWorldEvent(source: Readonly<SimulationState>, prepa
     state.agents[revision.agentId] = applyEventBeliefs(state, revision, prepared.agents[revision.agentId]?.resources);
   }
   const control = structuredClone(prepared);
+  if (control.randomReservation && (control.randomReservation.atSeconds !== event.atSeconds ||
+    control.randomReservation.commitment.hash !== event.randomness?.hash)) throw new Error("world event does not settle the reserved random frontier");
+  control.randomReservation = null;
   control.activities = settleProgramActivities(control.activities, event.programs.map(bound => bound.attempt.id), [], event.atSeconds);
   control.receipts.push(committed.receipt);
   const canonicalReceipts = programReceiptIndex(control);

@@ -16,6 +16,7 @@ import { applyProgramGoalEvidence } from "./goal-completion";
 import { replayActivityAdmissions, settleProgramActivities } from "./activities";
 import { worldResources } from "./resources";
 import { restoreDecisionEventStep, storeDecisionEventStep } from "./journal";
+import { settleRandomReservation } from "./random-reservation";
 
 const equal = (a: unknown, b: unknown) => contentHash(a) === contentHash(b);
 function validateAuthority(state: Readonly<SimulationState>, authority: WorldRuntimeContract) {
@@ -68,13 +69,17 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
   let state: SimulationState, computed: DecisionEventState;
   let observations: CommittedStep["observations"] = [], beliefPatches: CommittedStep["beliefPatches"] = [], characterPatches: CommittedStep["characterPatches"] = [];
   if (proof.event) {
+    if (proof.event.randomness && (!before.randomReservation || before.randomReservation.commitment.hash !== proof.event.randomness.hash)) {
+      throw new Error("random outcomes must be durably committed before world adjudication");
+    }
     const settled = settleProgramWorldEvent(source, proof.preparedControl, proof.event, proof.authority, producerHash, proof.beliefRevisions);
     state = settled.state; computed = settled.control; observations = settled.observations; beliefPatches = settled.beliefPatches; characterPatches = settled.characterPatches;
   } else {
     if (proof.beliefRevisions.length) throw new Error("a control revision cannot fabricate new observation evidence");
-    state = structuredClone(source) as SimulationState; state.revision += 1;
+    const reserved = settleRandomReservation(source, proof.preparedControl, proof.authority, proof.decisions);
+    state = reserved.state; state.revision += 1;
     for (const agent of Object.values(state.agents)) agent.nextAction = null;
-    computed = proof.preparedControl;
+    computed = reserved.control;
     const goals = applyProgramGoalEvidence(state, computed, source.revision);
     beliefPatches = goals.beliefPatches; characterPatches = goals.characterPatches;
   }
@@ -92,6 +97,9 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
       goal: bound.attempt.intent, means: bound.attempt.utterance, targetIds };
   });
   const outcomes: ActionOutcome[] = programs.map(bound => {
+    if (event!.unresolved) return { id: `outcome:${bound.attempt.id}`, proposalId: bound.attempt.id, status: "blocked",
+      summary: "The attempt produced no confirmed outcome.", causeRefs: worldProvenance(bound).causes,
+      assertions: worldProvenance(bound).assertions, knownAlternatives: [] };
     const branch = bound.program.definition.branches.find(branch => branch.id === event!.selections.find(value => value.attemptId === bound.attempt.id)!.branchId)!;
     const observed = branch.acknowledgement === "observed-outcome";
     return { id: `outcome:${bound.attempt.id}`, proposalId: bound.attempt.id, status: observed ? branch.outcome : "succeeded",
@@ -116,7 +124,9 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
     activityTransitions: [], activityDispositions: [], sharedResourceAdmissions: [],
     decisionPoints: [...new Set(observations.map(packet => packet.observerId))].map(agentId => ({
       agentId, reason: "activity_completed", activityId: null, timerId: null })),
-    checkRequests: [], checks: [], randomRequests: event?.randomness?.plan.requests ?? [], randomResults: event?.randomness?.results ?? [],
+    checkRequests: [], checks: [],
+    randomRequests: !before.randomReservation ? proof.preparedControl.randomReservation?.commitment.plan.requests ?? [] : [],
+    randomResults: !before.randomReservation ? proof.preparedControl.randomReservation?.commitment.results ?? [] : [],
     commitmentRounds: [], outcomes, mechanicInvocations: event?.mechanicInvocations ?? [], mechanicResults: event?.mechanicResults ?? [], causalAssertionResults: [],
     causalVerification: { verdict: "accept", findings: [] }, events: state.truth.events.slice(source.truth.events.length),
     observations, operations: event?.effects ?? [], decisionRequests: [], beliefPatches, characterPatches, nextActions: [],
