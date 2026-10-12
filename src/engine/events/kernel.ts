@@ -8,9 +8,9 @@ import { runtimeId, quantityId } from "../runtime/runtime-id";
 import { applyWorldDeltaOperation, validateSimulationState } from "../runtime/transaction";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import { makeWorldDecisionBatch, mechanicalWorldCondition, validateWorldEvidence, worldProgramBoundary, worldProgramTiming, worldProvenance, worldQuestionWork,
-  selectableWorldBranches,
+  selectableWorldBranches, worldProgramComponents, worldDecisionParticipants,
   type BoundWorldProgram, type WorldAdjudication, type WorldConditionRecord } from "./adjudication";
-import { captureReads, validateReads, worldProgramSources, worldResources, type ReadSet } from "./resources";
+import { captureReads, worldOperationReads, validateReads, worldProgramSources, worldResources, type ReadSet } from "./resources";
 import { admitWorldProgram, bindWorldProgram, renderWorldText } from "./world-program";
 import { materializeWorldMechanics, type WorldMechanicsContext } from "./mechanics";
 import { activeRandomReservation, validateWorldRandomness, type WorldRandomCommitment } from "./randomness";
@@ -52,6 +52,7 @@ function verifyAdjudication(programs: BoundWorldProgram[], adjudication: Omit<Wo
   resources: ProgramResources, sources: Record<string, JsonValue>, context: WorldMechanicsContext): Map<string, WorldConditionRecord> {
   const records = new Map(adjudication.records.map(record => [conditionKey(record), record]));
   if (records.size !== adjudication.records.length) throw new Error("duplicate world condition record");
+  const components = worldProgramComponents(programs, resources, context);
   const expected = programs.flatMap(bound => worldQuestionWork(bound, resources, context));
   const claimed = new Set<string>();
   const evidenceHashes = new Set<string>();
@@ -69,7 +70,7 @@ function verifyAdjudication(programs: BoundWorldProgram[], adjudication: Omit<Wo
         contentHash(record.readSet) !== contentHash(captureReads(resources, Object.keys(evidence.batch.dependencies)))) throw new Error("world condition does not match its decision");
       validateReads(resources, record.readSet); return question;
     });
-    const canonical = makeWorldDecisionBatch(work, programs.map(program => program.attempt), resources, sources);
+    const canonical = makeWorldDecisionBatch(work, worldDecisionParticipants(components, work), resources, sources);
     if (contentHash(canonical) !== contentHash(evidence.batch)) throw new Error("world decision used different sources, effects, attempts, or resources");
   }
   for (const bound of programs) for (const predicate of bound.program.definition.predicates) {
@@ -87,30 +88,6 @@ function verifyAdjudication(programs: BoundWorldProgram[], adjudication: Omit<Wo
   return records;
 }
 
-/** Additional mechanical reads cannot be omitted by a generated declaration. */
-function operationReads(state: Readonly<SimulationState>, operation: WorldDeltaOperation): string[] {
-  const keys = ["mechanics"];
-  switch (operation.kind) {
-    case "create_entity": return [...keys, "entities", "placements"];
-    case "retire_entity": return [...keys, `entity:${operation.entityId}`];
-    case "place_entity": return [...keys, `entity:${operation.entityId}`, "placements", ...(operation.placementId ? [`entity:${operation.placementId}`] : [])];
-    case "set_fact": return [...keys, "facts", "tombstones", `entity:${operation.fact.subjectId}`, ...(operation.fact.value.kind === "entity" ? [`entity:${operation.fact.value.entityId}`] : [])];
-    case "remove_fact": return [...keys, `fact:${operation.factId}`, "tombstones"];
-    case "set_meter": return [...keys, "meters", `entity:${operation.meter.entityId}`, "facts"];
-    case "adjust_meter": return [...keys, `meter:${operation.meterId}`, "facts", "entities"];
-    case "transfer_quantity": return [...keys, `entity:${operation.fromHolderId}`, `entity:${operation.toHolderId}`,
-      ...[operation.fromHolderId, operation.toHolderId].map(holder => `quantity:${quantityId(state.worldHash, operation.definitionId, holder)}`)];
-    case "produce_quantity": case "consume_quantity": return [...keys, `entity:${operation.holderId}`,
-      `quantity:${quantityId(state.worldHash, operation.definitionId, operation.holderId)}`, `law:${operation.lawId}`];
-    case "set_quantity": return [...keys, "quantities", `entity:${operation.quantity.holderId}`];
-    case "set_rating": return [...keys, "ratings", `entity:${operation.rating.entityId}`];
-    case "set_condition": return [...keys, "conditions", `entity:${operation.condition.subjectId}`];
-    case "remove_condition": return [...keys, `condition:${operation.conditionId}`];
-    case "set_shared_activity_resource_capacity": return [...keys, `pool:${operation.poolId}`, "activities"];
-    case "create_agent": case "remove_agent": return [...keys, "entities", "agentRoster"];
-    case "advance_time": throw new Error("world program cannot own time advancement");
-  }
-}
 
 function materialize(programs: BoundWorldProgram[], records: Map<string, WorldConditionRecord>, resources: ProgramResources, context: WorldMechanicsContext) {
   const selections: WorldEventCandidate["selections"] = [], effects: WorldDeltaOperation[] = [], deliveries: WorldDelivery[] = [];
@@ -175,7 +152,7 @@ export function createWorldEventCandidate(state: Readonly<SimulationState>, defi
   const reads = captureReads(resources, [...new Set([
     ...proof.records.flatMap(record => Object.keys(record.readSet)),
     ...programs.flatMap(bound => [ `entity:${bound.attempt.actorEntityId}`, ...bound.program.definition.reads.map(key => renderWorldText(key, bound.parameters)) ]),
-    ...value.effects.flatMap(operation => operationReads(state, operation)),
+    ...value.effects.flatMap(operation => worldOperationReads(state, operation)),
     ...Object.keys(randomness?.plan.reads ?? {}),
     ...programs.map(bound => `program-actor:${bound.attempt.actorEntityId}`).filter(key => resources[key]),
     ...clockBoundary.timers.map(timer => `timer:${timer.id}`), ...clockBoundary.conditions.map(id => `condition:${id}`),

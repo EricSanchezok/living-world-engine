@@ -6,6 +6,7 @@ import { quantityId, runtimeId } from "../runtime/runtime-id";
 import { worldProgramBoundary, worldProvenance, type BoundWorldProgram } from "./adjudication";
 import { evaluateWorldValue, materializeWorldBranch } from "./world-program";
 import type { WorldRandomCommitment } from "./randomness";
+import { worldOperationReads, worldOperationWrites } from "./resources";
 import { materializeWorldResolutions, worldResolutionReceipt } from "./resolutions";
 
 export interface WorldMechanicsContext { state: Readonly<SimulationState>; definition: WorldRuntimeContract; randomness?: WorldRandomCommitment | null }
@@ -71,5 +72,8 @@ export function materializeWorldMechanics(bound: BoundWorldProgram, branchId: st
   const reads = mechanicalReads(mechanics.invocations, context.state);
   if (resolved.length) for (const key of ["facts", "placements", "ratings", "conditions", "meters", "mechanics"]) if (!reads.includes(key)) reads.push(key);
   for (const [index, receipt] of receipts.entries()) receipt.operations = mechanics.results[index]!.operations;
-  return { operations: [...direct, ...mechanics.operations], mechanics, reads, resolutionPlans: resolved.map(value => value.plan), resolutionReceipts: receipts };
+  const operations = [...direct, ...mechanics.operations];
+  const actualReads = [...new Set([...reads, ...operations.flatMap(operation => worldOperationReads(context.state, operation))])];
+  const writes = [...new Set(operations.flatMap(operation => worldOperationWrites(context.state, operation)))];
+  return { operations, mechanics, reads: actualReads, writes, resolutionPlans: resolved.map(value => value.plan), resolutionReceipts: receipts };
 }

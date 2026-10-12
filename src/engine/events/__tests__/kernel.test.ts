@@ -7,7 +7,7 @@ import { contentHash } from "../../models/model-audit";
 import { DecisionRuntime } from "../../programs/decision-runtime";
 import { quantityId, runtimeId } from "../../runtime/runtime-id";
 import { admitWorldProgram, type WorldProgramDefinition } from "../world-program";
-import { adjudicateWorldPrograms, type BoundWorldProgram } from "../adjudication";
+import { adjudicateWorldPrograms, worldProgramComponents, type BoundWorldProgram } from "../adjudication";
 import { worldProgramSources, worldResources } from "../resources";
 import { commitWorldEvent, createWorldEventCandidate } from "../kernel";
 import { compileWorldProgram } from "../compiler";
@@ -61,6 +61,45 @@ async function adjudicate(f: ReturnType<typeof fixture>, programs = [f.bound], a
 }
 
 describe("source-bound world event kernel", () => {
+  it("derives shared-resource components from actual effects even if generated write declarations omit them", () => {
+    const f = fixture(); f.raw.writes = [];
+    f.bound.program = admitWorldProgram(f.raw, f.sources); f.bound.attempt.targetEntityIds = [];
+    const other = structuredClone(f.bound);
+    other.parameters.actor = "keeper"; other.parameters.recipient = "player";
+    Object.assign(other.attempt, { id: "other-gift", actorId: "keeper", actorEntityId: "keeper",
+      intent: "Spend 5 seconds giving the player 2 of my stones.", targetEntityIds: [] });
+    const groups = worldProgramComponents([f.bound, other], f.resources, f);
+    expect(groups).toHaveLength(1);
+    expect(groups[0]!.map(bound => bound.attempt.id).sort()).toEqual([f.bound.attempt.id, other.attempt.id].sort());
+  });
+  it("packs independent components together when they fit and keeps full partners when they do not", async () => {
+    const f = fixture(); f.raw.reads = ["entity:{actor}"]; f.raw.writes = [];
+    f.raw.predicates[0]!.reads = ["entity:{actor}"];
+    f.raw.branches[0]!.mechanics = []; f.bound.program = admitWorldProgram(f.raw, f.sources);
+    f.bound.attempt.targetEntityIds = [];
+    const other = structuredClone(f.bound);
+    other.parameters.actor = "keeper"; other.parameters.recipient = "player";
+    Object.assign(other.attempt, { id: "other", actorId: "keeper", actorEntityId: "keeper", targetEntityIds: [] });
+    other.attempt.program = null;
+    const programs = [f.bound, other];
+    expect(worldProgramComponents(programs, f.resources, f)).toHaveLength(2);
+    const small = await adjudicate(f, programs);
+    expect(small.configured.transport).toHaveBeenCalledTimes(1);
+    expect(small.result.evidence[0]!.batch.state).toHaveProperty("attempts", [other.attempt, f.bound.attempt].sort((a, b) => a.id.localeCompare(b.id)));
+    createWorldEventCandidate(f.state, f.definition, f.resources, programs, small.result, 5);
+    for (const bound of programs) bound.attempt.intent = "Spend 5 seconds here. " + "An independently situated action. ".repeat(300);
+    const large = await adjudicate(f, programs);
+    expect(large.result.evidence).toHaveLength(2);
+    for (const proof of large.result.evidence) expect((proof.batch.state as { attempts: unknown[] }).attempts).toHaveLength(1);
+    const candidate = createWorldEventCandidate(f.state, f.definition, f.resources, programs, large.result, 5);
+    expect(commitWorldEvent(f.state, f.definition, f.resources, candidate,
+      { earliestPendingSeconds: 5, receipts: new Map() }).state.truth.elapsedSeconds).toBe(5);
+    other.attempt.targetEntityIds = ["player"];
+    const coupled = await adjudicate(f, programs);
+    expect(worldProgramComponents(programs, f.resources, f)).toHaveLength(1);
+    for (const proof of coupled.result.evidence) expect((proof.batch.state as { attempts: unknown[] }).attempts).toHaveLength(2);
+    createWorldEventCandidate(f.state, f.definition, f.resources, programs, coupled.result, 5);
+  });
   it("shows exact Chinese number evidence and repairs a classifier quote through the actual compiler", async () => {
     const f = fixture(); f.bound.attempt.intent = "花 5 秒把两个灵石交给守门人。";
     const input = f.raw.branches[0]!.mechanics[0]!.input as Record<string, import("../../runtime/json").JsonValue>;

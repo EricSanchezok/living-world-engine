@@ -1,4 +1,4 @@
-import type { SimulationState } from "../contracts/model";
+import type { SimulationState, WorldDeltaOperation } from "../contracts/model";
 import { contentHash } from "../models/model-audit";
 import type { ProgramResources } from "../programs/definition";
 import type { JsonValue } from "../runtime/json";
@@ -69,4 +69,55 @@ export function worldProgramSources(definition: WorldRuntimeContract, state: Rea
     ...Object.fromEntries(Object.values((state.historyBase?.truth ?? state.truth).facts).filter(fact => fact.provenance.some(source => source.kind === "world_seed"))
       .map(fact => [`fact:${fact.id}`, fact])),
   })) as Record<string, JsonValue>;
+}
+
+/** Additional mechanical reads cannot be omitted by a generated declaration. */
+export function worldOperationReads(state: Readonly<SimulationState>, operation: WorldDeltaOperation): string[] {
+  const keys = ["mechanics"];
+  switch (operation.kind) {
+    case "create_entity": return [...keys, "entities", "placements"];
+    case "retire_entity": return [...keys, `entity:${operation.entityId}`];
+    case "place_entity": return [...keys, `entity:${operation.entityId}`, "placements", ...(operation.placementId ? [`entity:${operation.placementId}`] : [])];
+    case "set_fact": return [...keys, "facts", "tombstones", `entity:${operation.fact.subjectId}`, ...(operation.fact.value.kind === "entity" ? [`entity:${operation.fact.value.entityId}`] : [])];
+    case "remove_fact": return [...keys, `fact:${operation.factId}`, "tombstones"];
+    case "set_meter": return [...keys, "meters", `entity:${operation.meter.entityId}`, "facts"];
+    case "adjust_meter": return [...keys, `meter:${operation.meterId}`, "facts", "entities"];
+    case "transfer_quantity": return [...keys, `entity:${operation.fromHolderId}`, `entity:${operation.toHolderId}`,
+      ...[operation.fromHolderId, operation.toHolderId].map(holder => `quantity:${quantityId(state.worldHash, operation.definitionId, holder)}`)];
+    case "produce_quantity": case "consume_quantity": return [...keys, `entity:${operation.holderId}`,
+      `quantity:${quantityId(state.worldHash, operation.definitionId, operation.holderId)}`, `law:${operation.lawId}`];
+    case "set_quantity": return [...keys, "quantities", `entity:${operation.quantity.holderId}`];
+    case "set_rating": return [...keys, "ratings", `entity:${operation.rating.entityId}`];
+    case "set_condition": return [...keys, "conditions", `entity:${operation.condition.subjectId}`];
+    case "remove_condition": return [...keys, `condition:${operation.conditionId}`];
+    case "set_shared_activity_resource_capacity": return [...keys, `pool:${operation.poolId}`, "activities"];
+    case "create_agent": case "remove_agent": return [...keys, "entities", "agentRoster"];
+    case "advance_time": throw new Error("world program cannot own time advancement");
+  }
+}
+
+
+/** Conservative writes include implicit lifecycle/threshold effects of trusted meters. */
+export function worldOperationWrites(state: Readonly<SimulationState>, operation: WorldDeltaOperation): string[] {
+  switch (operation.kind) {
+    case "create_entity": return [`entity:${operation.entity.id}`, `placement:${operation.entity.id}`];
+    case "retire_entity": return [`entity:${operation.entityId}`, "agentRoster", "facts", "conditions", "placements", "activities"];
+    case "place_entity": return [`placement:${operation.entityId}`];
+    case "set_fact": return [`fact:${operation.fact.id}`, "tombstones"];
+    case "remove_fact": return [`fact:${operation.factId}`, "tombstones"];
+    case "set_meter": return [`meter:${operation.meter.id}`, `entity:${operation.meter.entityId}`, "facts", "agentRoster"];
+    case "adjust_meter": {
+      const meter = state.truth.meters[operation.meterId], thresholds = meter && state.truth.mechanics.meters[meter.definitionId]?.thresholds;
+      return [`meter:${operation.meterId}`, ...(thresholds?.length ? [`entity:${meter!.entityId}`, "facts", "agentRoster"] : [])];
+    }
+    case "set_quantity": return [`quantity:${operation.quantity.id}`];
+    case "transfer_quantity": return [operation.fromHolderId, operation.toHolderId].map(holder => `quantity:${quantityId(state.worldHash, operation.definitionId, holder)}`);
+    case "produce_quantity": case "consume_quantity": return [`quantity:${quantityId(state.worldHash, operation.definitionId, operation.holderId)}`];
+    case "set_rating": return [`rating:${operation.rating.id}`];
+    case "set_condition": return [`condition:${operation.condition.id}`];
+    case "remove_condition": return [`condition:${operation.conditionId}`];
+    case "set_shared_activity_resource_capacity": return [`pool:${operation.poolId}`];
+    case "create_agent": case "remove_agent": return ["agentRoster"];
+    case "advance_time": throw new Error("world programs cannot write the clock");
+  }
 }

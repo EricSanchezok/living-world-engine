@@ -9,6 +9,7 @@ import { frozenClone, type JsonValue } from "../runtime/json";
 import { validateModelAudit } from "../runtime/transaction";
 import { bindWorldExpression, renderWorldText, type AdmittedWorldProgram } from "./world-program";
 import { materializeWorldMechanics, type WorldMechanicsContext } from "./mechanics";
+import { jointActionComponents } from "./scheduler";
 import { captureReads, type ReadSet } from "./resources";
 
 export interface WorldAttempt {
@@ -108,6 +109,27 @@ export function worldBranchDiagnostic(bound: BoundWorldProgram, resources: Progr
     unmetConditions: branch.when.filter(condition => verdicts.get(condition.predicateId) !== condition.equals),
   })) };
 }
+
+/** Derive components from the declared scope plus actual mechanical reads and possible branch writes. */
+export function worldProgramComponents(programs: BoundWorldProgram[], resources: ProgramResources, context: WorldMechanicsContext): BoundWorldProgram[][] {
+  const index = new Map(programs.map(bound => [bound.attempt.id, bound]));
+  const dependencies = programs.map(bound => {
+    const branches = bound.program.definition.branches.map(branch => materializeWorldMechanics(bound, branch.id, resources, context));
+    return { id: bound.attempt.id, actorEntityId: bound.attempt.actorEntityId,
+      targetEntityIds: [...new Set([...bound.attempt.targetEntityIds, ...bound.program.definition.branches.flatMap(branch =>
+        branch.deliveries.map(delivery => bound.parameters[delivery.recipientParameter] as string))])],
+      reads: [...new Set([...physicalReadKeys([bound.attempt], resources), ...actualKeys(bound, bound.program.definition.reads), ...branches.flatMap(branch => branch.reads)])],
+      writes: [...new Set([...actualKeys(bound, bound.program.definition.writes), ...branches.flatMap(branch => branch.writes)])] };
+  });
+  return jointActionComponents(dependencies).map(component => component.map(action => index.get(action.id)!));
+}
+
+export function worldDecisionParticipants(components: BoundWorldProgram[][], work: readonly { bound: BoundWorldProgram }[]): WorldAttempt[] {
+  const owners = new Set(work.map(item => item.bound.attempt.id));
+  return components.filter(component => component.some(bound => owners.has(bound.attempt.id))).flat()
+    .map(bound => bound.attempt).sort((a, b) => a.id.localeCompare(b.id));
+}
+
 interface QuestionWork { bound: BoundWorldProgram; id: string; instructions: string; reads: string[]; payload: JsonValue; version: string }
 
 /** Every world judgment sees the actual participants and containment chain, regardless of generated read declarations. */
@@ -195,17 +217,23 @@ export async function adjudicateWorldPrograms(runtime: DecisionRuntime, programs
       records.push({ ...record, evidenceHash: contentHash({ evaluator: "world-mechanical-v1", ...record }) });
     }
   }
-  const component = programs.map(program => program.attempt), all = programs.flatMap(bound => worldQuestionWork(bound, resources, context));
+  const components = worldProgramComponents(programs, resources, context);
+  const all = components.flat().flatMap(bound => worldQuestionWork(bound, resources, context));
+  const makeBatch = (work: QuestionWork[]) => makeWorldDecisionBatch(work, worldDecisionParticipants(components, work), resources, sources);
   const partitions: QuestionWork[][] = []; let current: QuestionWork[] = [];
   for (const work of all) {
     const next = [...current, work];
-    if (current.length && !nativeDecisionBounds(makeWorldDecisionBatch(next, component, resources, sources)).fits) { partitions.push(current); current = [work]; }
+    if (current.length && !nativeDecisionBounds(makeBatch(next)).fits) { partitions.push(current); current = [work]; }
     else current = next;
   }
   if (current.length) partitions.push(current);
-  for (const partition of partitions) {
-    const batch = makeWorldDecisionBatch(partition, component, resources, sources);
-    const call = await runtime.decide({ ...scope, batch, subjectId: "world", modelInvocation: scope.nextInvocation() }); calls.push(call);
+  const results = await Promise.all(partitions.map(async partition => {
+    const batch = makeBatch(partition);
+    const call = await runtime.decide({ ...scope, batch, subjectId: "world", modelInvocation: scope.nextInvocation() });
+    return { partition, batch, call };
+  }));
+  for (const { partition, batch, call } of results) {
+    calls.push(call);
     const proof = { batch, result: call.result, hash: contentHash({ batch, result: call.result }) }; validateWorldEvidence(proof); evidence.push(proof);
     for (const [index, work] of partition.entries()) {
       const id = `q${index}`, verdict = call.result.answers[id]!.choice;
