@@ -8,11 +8,15 @@ import { ProgramInterpreter, type ProgramPredicateWork } from "./interpreter";
 
 export interface DecisionUse { batch: DecisionBatch; result: DecisionResult; evidenceHash: string; reused: boolean;
   programInstanceId?: string; programWorkIds?: string[][] }
-const cacheSchema = z.object({ version: z.literal(1), entries: z.array(z.object({ key: programHash, result: z.unknown() }).strict()).max(512), hash: programHash }).strict();
+const orderSchema = z.object({ revision: z.number().int().nonnegative(), subject: z.string(), invocation: z.number().int().nonnegative() }).strict();
+type CacheEntry = { order: z.infer<typeof orderSchema>; result: DecisionResult };
+const cacheSchema = z.object({ version: z.literal(2), entries: z.array(z.object({ key: programHash, order: orderSchema, result: z.unknown() }).strict()).max(512), hash: programHash }).strict();
+const compareEntries = ([keyA, a]: [string, CacheEntry], [keyB, b]: [string, CacheEntry]) => a.order.revision - b.order.revision ||
+  a.order.subject.localeCompare(b.order.subject) || a.order.invocation - b.order.invocation || keyA.localeCompare(keyB);
 
 /** Cache reuse refers to the original physical invocation; it never creates another model audit. */
 export class DecisionRuntime {
-  private readonly cache = new Map<string, DecisionResult>();
+  private readonly cache = new Map<string, CacheEntry>();
   private readonly pending = new Map<string, Promise<DecisionResult>>();
   constructor(readonly provider: StructuredModelProvider, snapshot?: unknown) {
     if (snapshot !== undefined) {
@@ -20,12 +24,12 @@ export class DecisionRuntime {
       if (hash !== contentHash(value)) throw new Error("decision cache checksum mismatch");
       for (const entry of value.entries) {
         if (this.cache.has(entry.key)) throw new Error("duplicate decision cache key");
-        this.cache.set(entry.key, structuredClone(entry.result) as DecisionResult);
+        this.cache.set(entry.key, { order: entry.order, result: structuredClone(entry.result) as DecisionResult });
       }
     }
   }
   snapshot() {
-    const value = { version: 1 as const, entries: [...this.cache].map(([key, result]) => ({ key, result })) };
+    const value = { version: 2 as const, entries: [...this.cache].sort(compareEntries).map(([key, entry]) => ({ key, ...entry })) };
     return structuredClone({ ...value, hash: contentHash(value) });
   }
   async decide(request: DecisionRequest): Promise<DecisionUse> {
@@ -33,7 +37,7 @@ export class DecisionRuntime {
     if (batch.view.kind === "agent" && batch.view.agentId !== request.subjectId) throw new Error("decision cache cannot cross Agent ownership");
     const key = contentHash({ batch, promptVersion: decisionPrompt().version, catalogHash: this.provider.catalog.hash,
       registry: request.modelRegistrySnapshotHash ?? null, profile: request.profileId, fallback: request.fallbackProfileId ?? null });
-    const cached = request.modelRegistrySnapshotHash ? this.cache.get(key) : undefined;
+    const cached = request.modelRegistrySnapshotHash ? this.cache.get(key)?.result : undefined;
     if (cached) {
       validateDecisionResult(batch, cached);
       if (cached.inputHash !== contentHash({ batch, promptVersion: decisionPrompt().version }) ||
@@ -51,8 +55,9 @@ export class DecisionRuntime {
     try {
       const result = await call;
       if (request.modelRegistrySnapshotHash) {
-        if (this.cache.size >= 512) this.cache.delete(this.cache.keys().next().value!);
-        this.cache.set(key, structuredClone(result));
+        this.cache.set(key, { order: { revision: request.runtimeIdentity?.revision ?? 0, subject: request.subjectId,
+          invocation: request.modelInvocation ?? 0 }, result: structuredClone(result) });
+        if (this.cache.size > 512) this.cache.delete([...this.cache].sort(compareEntries)[0]![0]);
       }
       return { batch, result, evidenceHash: contentHash(result), reused: false };
     } finally { this.pending.delete(key); }

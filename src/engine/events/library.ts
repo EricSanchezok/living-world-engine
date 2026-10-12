@@ -50,7 +50,7 @@ export class WorldProgramLibrary {
     return { program, parameters, attempt: structuredClone(attempt) };
   }
   snapshot() {
-    const value = { version: 1 as const, entries: [...this.entries.values()] };
+    const value = { version: 1 as const, entries: [...this.entries.values()].sort((a, b) => a.signature.localeCompare(b.signature)) };
     return structuredClone({ ...value, hash: contentHash(value) });
   }
 }

@@ -18,6 +18,7 @@ import { worldProgramBoundary } from "./adjudication";
 import { worldRecoverySchema, type WorldAttemptRecovery } from "./world-recovery";
 import { programActivitySchema, validateProgramActivities, type ProgramActivity } from "./activities";
 import { validateRandomReservation, type WorldRandomReservation } from "./randomness";
+import type { DecisionUse } from "../programs/decision-runtime";
 
 export interface DecisionEventModels { decision: string; creation: string; fallback: string }
 export interface PendingProgramAttempt {
@@ -163,7 +164,10 @@ export function collectDecisionAudits(audits: ModelExecutionAudit[]): ModelExecu
     if (prior && contentHash(prior) !== contentHash(audit)) throw new Error("conflicting physical model invocation evidence");
     if (!prior) unique.set(key, audit);
   }
-  return [...unique.values()];
+  return [...unique.values()].sort((a, b) => a.invocations[0]!.id.localeCompare(b.invocations[0]!.id));
+}
+export function collectDecisionUses(uses: DecisionUse[]): DecisionUse[] {
+  return uses.map(use => ({ use, hash: contentHash(use) })).sort((a, b) => a.hash.localeCompare(b.hash)).map(entry => entry.use);
 }
 
 export function invocationAllocator(value: DecisionEventState, revision: number) {

@@ -32,6 +32,8 @@ Mechanical expressions execute in code with finite-number checks. Semantic predi
 
 `DecisionRuntime` keys reuse by the complete authorized batch, question and prompt versions, program hash, dependencies, model catalog, profile and pinned registry snapshot. Unpinned registry work is not cached. Cached results refer to original model invocations without creating another audit or increasing physical request counts. Before applying a result the interpreter rechecks its actual current input ticket.
 
+Cache version 2 persists a stable ordering from the request revision, subject and invocation ordinal, with the cache key breaking ties. Eviction and snapshot order use those coordinates rather than HTTP completion time. Program selection uses stable definition ordering; world library entries, recorded decisions and model audits also have canonical ordering. Multi-owner bootstrap and step replay exercise delayed out-of-order responses through WorldHost and SQLite without another model call.
+
 The private journal also reuses an already proved predicate when a later control node needs the same condition. Reuse binds the question version and every resource actually supplied in the original batch, including resources shared with other questions. A changed value or version invalidates it. The new journal entry references the original ticket; canonical replay verifies that link and the actual read set without another model invocation. Goal questions retain their additional authored-goal requirement and cannot reuse a weaker milestone answer.
 
 ## Verification and live evidence

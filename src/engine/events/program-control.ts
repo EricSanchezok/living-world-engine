@@ -16,7 +16,7 @@ import type { PolicyBinding } from "../runtime/execution";
 import type { JsonObject, JsonValue } from "../runtime/json";
 import { issueProgramAttempt } from "./attempt";
 import { EventScheduler } from "./scheduler";
-import { collectDecisionAudits, restoreOwnerPrograms, sealDecisionEventState, type DecisionEventState } from "./runtime-state";
+import { collectDecisionAudits, collectDecisionUses, restoreOwnerPrograms, sealDecisionEventState, type DecisionEventState } from "./runtime-state";
 
 const json = (value: unknown): JsonValue => JSON.parse(JSON.stringify(value)) as JsonValue;
 export interface ProgramControlResult {
@@ -245,5 +245,5 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
       restoreOwnerPrograms(control, agent.id), owner.resources.resources, now).map(row => row.status === "needs-generation" &&
         owner.planning?.waitReason === "waiting-for-relevant-evidence" ? { ...row, status: "waiting" as const, reasons: [owner.planning.waitReason] } : row);
   });
-  return { control: sealDecisionEventState(control), modelAudits: collectDecisionAudits(audits), decisions, activatedAgentIds: activatedAgentIds.sort() };
+  return { control: sealDecisionEventState(control), modelAudits: collectDecisionAudits(audits), decisions: collectDecisionUses(decisions), activatedAgentIds: activatedAgentIds.sort() };
 }

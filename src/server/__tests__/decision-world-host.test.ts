@@ -75,10 +75,10 @@ describe("decision programs through the persistent WorldHost", () => {
       expect(fixture.configured.transport).toHaveBeenCalledTimes(calls);
     } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
   });
-  it("persists the native producer, actual speech and sleeping program, then reopens and replays without model calls", async () => {
+  it.each([false, true])("persists the native producer and replays without model calls after out-of-order responses (two actors: %s)", async bothActors => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-native-host-"));
     const filename = path.join(root, "livingworld.sqlite");
-    const fixture = nativeProgramFixture();
+    const fixture = nativeProgramFixture({ bothActors });
     const transport = fixture.configured.transport.getMockImplementation()!; let requestOrdinal = 0;
     fixture.configured.transport.mockImplementation(async (...args) => {
       const ordinal = ++requestOrdinal, result = await transport(...args);

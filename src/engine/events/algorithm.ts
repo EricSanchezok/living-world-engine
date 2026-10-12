@@ -19,7 +19,7 @@ import { authorizeWorldRandomness, prepareWorldRandomPlan, reserveWorldRandomnes
 import { settleRandomReservation } from "./random-reservation";
 import { worldProgramSources, worldResources, programWorldResources } from "./resources";
 import { EventScheduler } from "./scheduler";
-import { collectDecisionAudits, initialDecisionEventState, invocationAllocator, readDecisionEventState, sealDecisionEventState,
+import { collectDecisionAudits, collectDecisionUses, initialDecisionEventState, invocationAllocator, readDecisionEventState, sealDecisionEventState,
   type DecisionEventModels, type DecisionEventState } from "./runtime-state";
 import { prepareProgramWorldWork } from "./world-control";
 import { nativeCandidate } from "./canonical";
@@ -220,7 +220,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     await context.stages?.after(executionStage("observation-agent-mind"));
     const proof: DecisionEventStep = { version: 1, authority, preparedControl: prepared.control, activityAdmissionInput: prepared.activityAdmissionInput,
       event: prepared.event, beliefRevisions, finalControl,
-      decisions, modelAudits: collectDecisionAudits(audits), policyRoster: structuredClone(input.policyRoster), request: structuredClone(input.request) };
+      decisions: collectDecisionUses(decisions), modelAudits: collectDecisionAudits(audits), policyRoster: structuredClone(input.policyRoster), request: structuredClone(input.request) };
     return nativeCandidate(input.state, proof, this.manifest.hash, prepared.activatedAgentIds);
   }
 }

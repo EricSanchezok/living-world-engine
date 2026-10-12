@@ -7,11 +7,19 @@ import { decisionQuestionIds, decisionTestProvider } from "./decision-provider";
 import type { ProgramDefinition } from "../programs/definition";
 import type { WorldProgramDefinition } from "../events/world-program";
 import type { PolicyBinding } from "../runtime/execution";
+import { historyReplayBaseHash } from "../runtime/history-replay";
 
 export const nativeProgramTestConfig = { decision: "world-test", creation: "world-test", fallback: "world-test", maxDependencyRounds: 32 };
 export function nativeProgramFixture(options: { goalVerdict?: "yes" | "no" | "unknown"; reuse?: boolean; worldVerdict?: "yes" | "no" | "unknown";
-  adaptation?: "wait" | "revise" | "unknown" } = {}) {
+  adaptation?: "wait" | "revise" | "unknown"; bothActors?: boolean } = {}) {
   const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: createTestModelCatalog() });
+  if (options.bothActors) {
+    const player = world.initialState.agents.player!, keeper = world.initialState.agents.keeper!;
+    player.belief.localEntities.guard = { id: "guard", name: "Guard", description: "A visible guard", status: "observed" };
+    player.bindings.guard = { localEntityId: "guard", canonicalEntityIds: ["keeper"] };
+    player.character.goals["guard-gate"] = { ...structuredClone(keeper.character.goals["guard-gate"]!), motivatedByIds: [], targetIds: ["guard"] };
+    world.historyBaseHash = historyReplayBaseHash(world.initialState);
+  }
   const program: ProgramDefinition = { version: 1, id: "ask-purpose", name: "Ask the purpose", description: "Ask and await evidence.", owner: { kind: "agent", agentId: "keeper" },
     sourceIds: ["goal:guard-gate"], parameters: { recipient: { kind: "entity", description: "Known traveler" } },
     reads: ["evidence"], writes: [], entry: "ask", startPredicateId: "ready", interrupts: [], milestones: [],
@@ -32,7 +40,11 @@ export function nativeProgramFixture(options: { goalVerdict?: "yes" | "no" | "un
       description: "The keeper asks a question.", resolutions: [], effects: [], mechanics: [], deliveries: [{ kind: "speech", recipientParameter: "recipient", text: "{utterance}" }] }] };
   const configured = decisionTestProvider(body => {
     const wire = (body.messages as Array<{ content: string }>).map(message => message.content).join("\n");
-    if (wire.includes("Compile a reusable private behavior program")) return encodeProgramDraft(program, { recipient: "traveler" });
+    if (wire.includes("Compile a reusable private behavior program")) return encodeProgramDraft(program, {
+      recipient: options.bothActors && /"agentId"\s*:\s*"player"/u.test(wire) ? "guard" : "traveler" });
+    if (options.bothActors && wire.includes("You compile authored world sources") && /"actorId"\s*:\s*"player"/u.test(wire)) {
+      return encodeWorldDraft(rule, { actor: "player", recipient: "keeper", utterance: "Why are you here?" });
+    }
     if (wire.includes("You compile authored world sources")) return encodeWorldDraft(rule, wire.includes("Hello keeper") ?
       { actor: "player", recipient: "keeper", utterance: "Hello keeper" } : { actor: "keeper", recipient: "player", utterance: "Why are you here?" });
     if (wire.includes("Render the player's submitted action.")) return { utterance: "Hello keeper" };
@@ -44,6 +56,7 @@ export function nativeProgramFixture(options: { goalVerdict?: "yes" | "no" | "un
     return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice }])) };
   }, ["world-test", "truth-deepseek", "agent-deepseek"]);
   const roster: Record<string, PolicyBinding> = { keeper: { kind: "model", agentId: "keeper", profiles: world.initialState.agents.keeper!.modelProfiles },
-    player: { kind: "external", agentId: "player", participantId: "human" } };
+    player: options.bothActors ? { kind: "model", agentId: "player", profiles: world.initialState.agents.player!.modelProfiles }
+      : { kind: "external", agentId: "player", participantId: "human" } };
   return { world, configured, roster, program, rule };
 }

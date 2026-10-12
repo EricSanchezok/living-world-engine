@@ -44,7 +44,8 @@ export class ProgramLibrary {
     if (!existing) this.entries.set(entry.program.hash, entry);
   }
   forOwner(ownerId: string): ProgramLibraryEntry[] {
-    return [...this.entries.values()].filter(entry => entry.program.definition.owner.agentId === ownerId).map(entry => structuredClone(entry));
+    return [...this.entries.values()].filter(entry => entry.program.definition.owner.agentId === ownerId)
+      .sort((a, b) => a.program.hash.localeCompare(b.program.hash)).map(entry => structuredClone(entry));
   }
   get(ownerId: string, hash: string, admission: ProgramAdmission, entityIds: ReadonlySet<string>, parameters?: Record<string, JsonValue>) {
     const entry = this.entries.get(hash);

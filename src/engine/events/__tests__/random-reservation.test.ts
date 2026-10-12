@@ -39,7 +39,7 @@ describe("durable randomness through SimulationEngine", () => {
     expect(reserved.committed.actions).toEqual([]);
     const drawProof = restoreDecisionEventStep(boot, reserved.committed.decisionEvent!);
     expect(drawProof.event).toBeNull();
-    expect(drawProof.decisions.at(-1)!.batch).toEqual(control.randomReservation!.commitment.plan.batch);
+    expect(drawProof.decisions.map(use => use.batch)).toContainEqual(control.randomReservation!.commitment.plan.batch);
     expect(replaySimulationState(reserved.state)).toEqual(reserved.state);
     f.options.worldVerdict = verdict;
     const restarted = new SimulationEngine(f.world, algorithm, reserved.state);
