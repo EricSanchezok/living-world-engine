@@ -74,10 +74,16 @@ export function decisionOutputSchema(batch: DecisionBatch, native: boolean) {
     return [id, native
       ? z.object({ type: z.literal("choice"), choice,
           probabilities: z.object(Object.fromEntries(choices.map(option => [option, z.number().min(0).max(1)]))).strict()
-            .refine(value => Math.abs(Object.values(value).reduce((sum, probability) => sum + probability, 0) - 1) <= 0.001,
-              "probabilities must sum to one"),
+            .refine(value => {
+              const probabilities = Object.values(value), sum = probabilities.reduce((total, probability) => total + probability, 0);
+              // Live jev-1.13.0 returned {0.93, 0.05, 0.01}. Preserve the provider's
+              // rounded values, with a bounded tolerance only for hundredth precision.
+              const hundredths = probabilities.every(probability => Math.abs(probability * 100 - Math.round(probability * 100)) < 1e-9);
+              const tolerance = hundredths ? Math.min(0.005 * probabilities.length, 0.02) : 0.001;
+              return Math.abs(sum - 1) <= tolerance + 1e-12;
+            }, "probabilities must sum to one within bounded provider rounding"),
           confidence: z.number().min(0).max(1),
-        }).strict()
+        }).strict().refine(value => value.probabilities[value.choice]! + 1e-12 >= Math.max(...Object.values(value.probabilities)), "choice must have maximal probability")
       : z.object({ choice }).strict()];
   }))).strict() }).strict();
 }
@@ -86,6 +92,22 @@ export function decisionPrompt() {
   const system = loadPromptAsset("system/decision.md");
   const userPrompt = loadPromptAsset("user/decision.md");
   return { system, userPrompt, version: `decision-${contentHash({ system, userPrompt, version: DECISION_CONTRACT_VERSION })}` };
+}
+
+/** Bind persisted choices to the gateway's normalized output evidence, including native distributions. */
+export function validateDecisionResult(batch: DecisionBatch, result: DecisionResult): void {
+  const prompt = decisionPrompt(), native = result.audit.protocol === "typesafe-systemone";
+  if (result.version !== 1 || result.inputHash !== contentHash({ batch, promptVersion: prompt.version }) ||
+    result.programHash !== batch.programHash || contentHash(result.view) !== contentHash(batch.view) ||
+    contentHash(result.dependencies) !== contentHash(batch.dependencies) || contentHash(result.questions) !== contentHash(batch.questions) ||
+    result.audit.role !== "decision" || result.audit.promptVersion !== prompt.version) throw new Error("decision result input binding mismatch");
+  const output = { answers: Object.fromEntries(Object.entries(result.answers).map(([id, answer]) => [id, native
+    ? { type: "choice", choice: answer.choice, probabilities: answer.probabilities, confidence: answer.confidence }
+    : { choice: answer.choice }])) };
+  decisionOutputSchema(batch, native).parse(output);
+  if (!native && Object.values(result.answers).some(answer => answer.probabilities !== null || answer.confidence !== null)) throw new Error("generative decision invented native probabilities");
+  const invocation = result.audit.invocations.at(-1), hash = contentHash(output);
+  if (!invocation || invocation.outputDisposition === "rejected" || invocation.normalizedOutputHash !== hash || invocation.responseHash !== hash) throw new Error("decision choices differ from the recorded model output");
 }
 
 /** Native transport carries this same complete semantic contract on every independent question. */

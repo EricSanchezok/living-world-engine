@@ -89,6 +89,15 @@ describe("native decision gateway", () => {
     expect(error.audit.invocations[0].tokenUsage.input).toBe(123);
     expect(transport).toHaveBeenCalledTimes(1);
   });
+  it("preserves bounded provider rounding without renormalizing probabilities or accepting a nonmaximal choice", async () => {
+    const value = response(); value.answers.consent.probabilities = { yes: 0.01, no: 0.05, unknown: 0.93 };
+    const result = await gateway(async () => Response.json(value)).decide(request());
+    expect(result.answers.consent!.probabilities).toEqual(value.answers.consent.probabilities);
+    value.answers.consent.choice = "no";
+    await expect(gateway(async () => Response.json(value)).decide(request())).rejects.toBeInstanceOf(ModelOutputError);
+    value.answers.consent.choice = "unknown"; value.answers.consent.probabilities = { yes: 0.01, no: 0.05, unknown: 0.9 };
+    await expect(gateway(async () => Response.json(value)).decide(request())).rejects.toBeInstanceOf(ModelOutputError);
+  });
 
   it("rejects invalid view identity, projection, empty batches and singletons before dispatch", async () => {
     const transport = vi.fn<typeof fetch>();

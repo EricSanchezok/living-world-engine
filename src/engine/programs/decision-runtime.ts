@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { contentHash } from "../models/model-audit";
-import { decisionPrompt, executeDecision, nativeDecisionBounds, validateDecisionBatch, type DecisionBatch, type DecisionRequest, type DecisionResult } from "../models/decision";
+import { decisionPrompt, executeDecision, nativeDecisionBounds, validateDecisionBatch, validateDecisionResult, type DecisionBatch, type DecisionRequest, type DecisionResult } from "../models/decision";
 import type { ModelExecutionScope, StructuredModelProvider } from "../models/model-provider";
 import { loadPromptAsset } from "../prompts";
 import { programHash, type ProgramResources } from "./definition";
@@ -34,6 +34,7 @@ export class DecisionRuntime {
       registry: request.modelRegistrySnapshotHash ?? null, profile: request.profileId, fallback: request.fallbackProfileId ?? null });
     const cached = request.modelRegistrySnapshotHash ? this.cache.get(key) : undefined;
     if (cached) {
+      validateDecisionResult(batch, cached);
       if (cached.inputHash !== contentHash({ batch, promptVersion: decisionPrompt().version }) ||
         cached.audit.registrySnapshotHash !== request.modelRegistrySnapshotHash || cached.audit.modelCatalogHash !== this.provider.catalog.hash) {
         throw new Error("cached decision differs from its authorized input or model identity");
