@@ -26,7 +26,10 @@ export class WorldProgramLibrary {
     }
   }
   private signature(attempt: WorldAttempt) {
-    return contentHash({ actorEntityId: attempt.actorEntityId, intent: attempt.intent, utterance: attempt.utterance, targets: attempt.targetEntityIds });
+    return contentHash({ actorEntityId: attempt.actorEntityId, targets: attempt.targetEntityIds,
+      origin: attempt.program ? { definitionHash: attempt.program.definitionHash, nodeId: attempt.program.nodeId,
+        parameterHash: attempt.program.parameterHash, intent: attempt.intent, hasSpeech: attempt.utterance !== null }
+        : { intent: attempt.intent, utterance: attempt.utterance } });
   }
   add(compilation: Extract<WorldCompilation, { status: "ready" }>) {
     const bound = compilation.bound;
@@ -40,9 +43,11 @@ export class WorldProgramLibrary {
     if (Object.entries(entry.sourceHashes).some(([id, hash]) => !Object.hasOwn(sources, id) || contentHash(sources[id]) !== hash)) return null;
     const program = admitWorldProgram(entry.definition, sources);
     if (program.hash !== entry.programHash) return null;
-    bindWorldProgram(program, entry.parameters, entities);
-    captureReads(resources, program.definition.reads.filter(key => !key.startsWith("random:")).map(key => renderWorldText(key, entry.parameters)));
-    return { program, parameters: structuredClone(entry.parameters), attempt: structuredClone(attempt) };
+    const parameters = structuredClone(entry.parameters);
+    if (attempt.utterance !== null && program.definition.parameters.utterance?.kind === "text") parameters.utterance = attempt.utterance;
+    bindWorldProgram(program, parameters, entities);
+    captureReads(resources, program.definition.reads.filter(key => !key.startsWith("random:")).map(key => renderWorldText(key, parameters)));
+    return { program, parameters, attempt: structuredClone(attempt) };
   }
   snapshot() {
     const value = { version: 1 as const, entries: [...this.entries.values()] };

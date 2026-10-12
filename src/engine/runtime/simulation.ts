@@ -593,7 +593,7 @@ export class SimulationEngine {
       trace.flush();
       const validationStartedAt = performance.now();
       trace.emit({ event: "canonical.validation.started", attributes: { phase: "bootstrap" } });
-      const committed = this.committer.bootstrap(source, candidate);
+      const committed = this.committer.bootstrap(source, candidate, this.definition);
       trace.emit({
         event: "canonical.validation.completed",
         attributes: {

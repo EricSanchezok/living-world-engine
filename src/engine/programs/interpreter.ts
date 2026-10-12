@@ -130,12 +130,13 @@ export class ProgramInterpreter {
       ...this.program.definition.milestones.filter(milestone => !this.milestoneEvidence.has(milestone.id)).map(milestone => milestone.predicateId),
       ...this.program.definition.goals.filter(goal => !this.goalEvidence.has(goal.goalId)).map(goal => goal.predicateId)];
     for (const id of watched) this.predicates.get(id)!.reads.forEach(key => resourceKeys.add(key));
+    for (const goal of this.program.definition.goals) if (!this.goalEvidence.has(goal.goalId)) resourceKeys.add(`goal:${goal.goalId}`);
     return { resources: [...resourceKeys].sort(), receiptWorkIds, deadline: deadlines.length ? Math.min(...deadlines) : null,
       reason: noProgress ? "no-progress" : receiptWorkIds.length ? "receipt" : "evidence" };
   }
 
-  private project(predicate: ProgramPredicate, resources: ProgramResources) {
-    const state = Object.fromEntries(predicate.reads.map(key => {
+  private project(predicate: ProgramPredicate, resources: ProgramResources, additional: string[] = []) {
+    const state = Object.fromEntries([...new Set([...predicate.reads, ...additional])].map(key => {
       const value = resources[key];
       if (!value || !Number.isSafeInteger(value.version) || value.version < 0) throw new Error(`missing versioned predicate input ${key}`);
       assertJsonValue(value.value, `resource ${key}`);
@@ -148,7 +149,7 @@ export class ProgramInterpreter {
 
   private predicateWork(predicateId: string, reason: ProgramPredicateWork["reason"], subjectId: string, resources: ProgramResources): ProgramPredicateWork | null {
     const predicate = this.predicates.get(predicateId)!;
-    const projected = this.project(predicate, resources);
+    const projected = this.project(predicate, resources, reason === "goal" ? [`goal:${subjectId}`] : []);
     const checkKey = `${reason}:${subjectId}`;
     if (this.checked.get(checkKey) === projected.inputHash) return null;
     if (reason === "flow" && this.seenFlow.get(`${this.find(subjectId).nodeId}:${projected.inputHash}`) === this.progress) return null;
@@ -166,6 +167,8 @@ export class ProgramInterpreter {
         } else mechanicalVerdict = "unknown";
       } catch { mechanicalVerdict = "unknown"; }
     }
+    // A generated arithmetic condition cannot itself prove an authored long-term goal.
+    if (reason === "goal" && mechanicalVerdict === "yes") mechanicalVerdict = null;
     return { kind: "predicate", predicateId, reason, subjectId, ...projected, mechanicalVerdict,
       id: contentHash({ instanceId: this.instanceId, definitionHash: this.program.hash, reason, subjectId, inputHash: projected.inputHash }) };
   }

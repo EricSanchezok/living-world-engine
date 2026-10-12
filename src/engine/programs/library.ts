@@ -13,7 +13,7 @@ const snapshotSchema = z.object({ version: z.literal(1), entries: z.array(entryS
 export interface GoalProgramCoverage {
   ownerId: string;
   goalId: string;
-  status: "startable" | "waiting" | "needs-generation" | "needs-decision";
+  status: "completed" | "startable" | "waiting" | "needs-generation" | "needs-decision";
   programHashes: string[];
   reasons: string[];
 }
@@ -63,7 +63,7 @@ export class ProgramLibrary {
       const needsDecision = instances.some(interpreter => interpreter.work(resources, atSeconds).some(work => work.kind === "predicate"));
       const waiting = instances.some(interpreter => interpreter.status !== "needs-expansion" && interpreter.status !== "ended" &&
         !interpreter.work(resources, atSeconds).length && interpreter.subscriptions(resources, atSeconds).reason !== "no-progress");
-      return { ownerId, goalId, status: startable ? "startable" : needsDecision ? "needs-decision" : waiting ? "waiting" : "needs-generation",
+      return { ownerId, goalId, status: instances.some(interpreter => interpreter.completion.goals[goalId]) ? "completed" : startable ? "startable" : needsDecision ? "needs-decision" : waiting ? "waiting" : "needs-generation",
         programHashes: matching.map(entry => entry.program.hash), reasons: instances.map(interpreter => interpreter.completion.expansionReason ??
           (interpreter.status === "ended" && !interpreter.completion.goals[goalId] ? "program-ended-without-goal-evidence"
             : interpreter.subscriptions(resources, atSeconds).reason)) };

@@ -29,6 +29,7 @@ export const worldProgramSchema = z.object({
   branches: z.array(z.object({ id: programKey,
     when: z.array(z.object({ predicateId: programKey, equals: z.enum(["yes", "no"]) }).strict()).min(1),
     outcome: z.enum(["succeeded", "partial", "failed", "blocked"]), description: text,
+    acknowledgement: z.enum(["attempted", "observed-outcome"]),
     effects: z.array(z.object({ kind: z.enum(["create_entity", "retire_entity", "place_entity", "set_fact", "remove_fact", "set_meter", "adjust_meter",
       "transfer_quantity", "produce_quantity", "consume_quantity", "set_rating", "set_condition", "remove_condition", "set_shared_activity_resource_capacity",
       "create_agent", "remove_agent"]), fields: z.record(programKey, worldValueSchema) }).strict()),

@@ -3,6 +3,7 @@ import type { ProgramResources } from "../programs/definition";
 import { ProgramInterpreter, type ProgramAttemptWork } from "../programs/interpreter";
 import { runtimeId } from "../runtime/runtime-id";
 import type { WorldAttempt } from "./adjudication";
+import { contentHash } from "../models/model-audit";
 
 /** The only crossing from private program references to canonical action bindings. */
 export function issueProgramAttempt(state: Readonly<SimulationState>, interpreter: ProgramInterpreter, work: ProgramAttemptWork,
@@ -22,5 +23,6 @@ export function issueProgramAttempt(state: Readonly<SimulationState>, interprete
   return { id: runtimeId({ worldHash: state.worldHash, revision: state.revision, kind: "action", stage: "program-attempt",
     owner: [interpreter.instanceId, work.id], round: 0, ordinal: 0 }),
     actorId: owner, actorEntityId: agent.entityId, intent: work.intent, utterance: work.utterance, targetEntityIds: targets,
-    startedAtSeconds: state.truth.elapsedSeconds, program: { instanceId: interpreter.instanceId, workId: work.id, requestHash } };
+    startedAtSeconds: state.truth.elapsedSeconds, program: { instanceId: interpreter.instanceId, definitionHash: interpreter.program.hash,
+      nodeId: work.nodeId, parameterHash: contentHash(interpreter.parameterValues), workId: work.id, requestHash } };
 }

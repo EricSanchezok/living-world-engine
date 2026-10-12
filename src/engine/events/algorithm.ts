@@ -1,0 +1,176 @@
+import type { ModelExecutionAudit } from "../contracts/model";
+import { contentHash } from "../models/model-audit";
+import type { StructuredModelProvider } from "../models/model-provider";
+import { DecisionRuntime, type DecisionUse } from "../programs/decision-runtime";
+import {
+  defineAlgorithmManifest, algorithmRef, WORLD_STEP_CANDIDATE_SCHEMA_VERSION, WORLD_STEP_PREPARATION_SCHEMA_VERSION,
+  StepPreparationInvalidatedError, type BootstrapInput, type ExecutionContext, type ExternalReactionInput, type WorldExecutionAlgorithm,
+  type WorldStepInput, type WorldStepPreparation, type PolicyBinding,
+} from "../runtime/execution";
+import type { JsonObject } from "../runtime/json";
+import { toWorldRuntimeContract } from "../runtime/world-definition";
+import { adjudicateWorldPrograms } from "./adjudication";
+import { reviseEventBeliefs } from "./cognition";
+import { nextWorldClockBoundary } from "./clock-boundary";
+import { createWorldEventCandidate, type WorldEventCandidate } from "./kernel";
+import { advanceProgramControls } from "./program-control";
+import { authorizeWorldRandomness, prepareWorldRandomPlan, worldRandomResources, type WorldRandomCommitment } from "./randomness";
+import { worldProgramSources, worldResources } from "./resources";
+import { EventScheduler } from "./scheduler";
+import { collectDecisionAudits, initialDecisionEventState, invocationAllocator, readDecisionEventState, sealDecisionEventState,
+  type DecisionEventModels, type DecisionEventState } from "./runtime-state";
+import { prepareProgramWorldWork } from "./world-control";
+import { nativeCandidate } from "./canonical";
+import { settleProgramWorldEvent } from "./settlement";
+import type { DecisionEventStep } from "./execution-contract";
+import { authorExternalAction } from "./external-action";
+
+export interface DecisionEventConfig extends DecisionEventModels { maxDependencyRounds: number }
+export const JEV_EVENT_CONFIG: DecisionEventConfig = { decision: "decision-jev", creation: "creation-deepseek",
+  fallback: "decision-deepseek", maxDependencyRounds: 32 };
+export const decisionEventManifest = (config: DecisionEventConfig = JEV_EVENT_CONFIG) =>
+  defineAlgorithmManifest({ id: "decision-event", version: "1", config: config as unknown as JsonObject });
+export const decisionEventAlgorithmRef = (config: DecisionEventConfig = JEV_EVENT_CONFIG) => algorithmRef(decisionEventManifest(config));
+
+/** Persisted no-work is an idle world, never a reason to mint another empty revision. */
+export class WorldQuiescentError extends Error {
+  constructor(readonly failures: DecisionEventState["failures"]) { super("world is waiting for new input or evidence"); this.name = "WorldQuiescentError"; }
+}
+interface PreparedNative {
+  control: DecisionEventState; event: WorldEventCandidate | null; decisions: DecisionUse[]; activatedAgentIds: string[];
+}
+
+export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
+  readonly manifest;
+  constructor(private readonly provider: StructuredModelProvider, readonly config: DecisionEventConfig = JEV_EVENT_CONFIG) {
+    this.manifest = decisionEventManifest(config);
+    if (!Number.isSafeInteger(config.maxDependencyRounds) || config.maxDependencyRounds < 1) throw new Error("invalid program round budget");
+    for (const profile of [config.decision, config.creation, config.fallback]) provider.catalog.profile(profile);
+  }
+  async bootstrap(input: Readonly<BootstrapInput>, context: ExecutionContext) {
+    if (input.state.executionState) throw new Error("program bootstrap requires a new instance");
+    const registryHash = context.modelScope.modelRegistrySnapshotHash ?? (await this.provider.modelRegistryDiagnostics?.())?.registry.currentHash;
+    if (!registryHash) throw new Error("program bootstrap requires a captured model registry");
+    const authority = toWorldRuntimeContract(input.definition);
+    const initial = initialDecisionEventState(input.state, { decision: this.config.decision, creation: this.config.creation, fallback: this.config.fallback },
+      this.provider.catalog.hash, registryHash);
+    const allocator = invocationAllocator(initial, input.state.revision);
+    const roster: Record<string, PolicyBinding> = Object.fromEntries(Object.values(input.state.agents).map(agent => [agent.id, {
+      kind: "model", agentId: agent.id, profiles: agent.modelProfiles,
+    }]));
+    const result = await advanceProgramControls(this.provider, input.state, initial, roster, context.modelScope, {
+      maxDependencyRounds: this.config.maxDependencyRounds, nextInvocation: allocator.next,
+    });
+    result.control.worldResources = worldResources(input.state, authority);
+    result.control.modelOrdinals = allocator.ordinals;
+    const control = sealDecisionEventState(result.control);
+    return { schemaVersion: WORLD_STEP_CANDIDATE_SCHEMA_VERSION, sourceStateHash: contentHash(input.state), agentCommits: [],
+      modelAudits: result.modelAudits, diagnostics: { activatedAgentIds: result.activatedAgentIds, reusedAgentIds: [], mindFallbackAgentIds: [] },
+      decisionEvent: { version: 1 as const, producerHash: this.manifest.hash, authority, control,
+        decisions: result.decisions, modelAudits: result.modelAudits } };
+  }
+  async prepareStep(input: Readonly<WorldStepInput>, context: ExecutionContext): Promise<WorldStepPreparation> {
+    const source = input.state;
+    if (!source.executionState) throw new Error("program runtime must bootstrap before advancing");
+    const initial = readDecisionEventState(source.executionState, source), allocator = invocationAllocator(initial, source.revision);
+    const authority = toWorldRuntimeContract(input.definition);
+    const controlled = await advanceProgramControls(this.provider, source, initial, input.policyRoster, context.modelScope, {
+      maxDependencyRounds: this.config.maxDependencyRounds, nextInvocation: allocator.next,
+    });
+    if (new Set(input.request.externalActions.map(action => action.agentId)).size !== input.request.externalActions.length) throw new Error("duplicate external actor submission");
+    for (const action of input.request.externalActions) {
+      if (input.policyRoster[action.agentId]?.kind !== "external") throw new Error("external action cannot control this Agent");
+      if (controlled.control.pending.some(pending => pending.attempt.actorId === action.agentId)) throw new Error("the actor is completing noninterruptible work");
+      const authored = await authorExternalAction(this.provider, source, action, { ...context.modelScope,
+        runtimeIdentity: { worldHash: source.worldHash, revision: source.revision }, modelRegistrySnapshotHash: initial.registryHash,
+        profileId: initial.models.creation, invocationBase: allocator.next(action.agentId, 2) });
+      if (authored.audit) controlled.modelAudits.push(authored.audit);
+      if (authored.status === "ready") controlled.control.pending.push({ attempt: authored.attempt, bound: null, atSeconds: null, dependencyHash: "", failure: null });
+      else controlled.control.failures.push({ ownerId: action.agentId, phase: "utterance", inputHash: contentHash(action), reason: authored.reason, recoverable: true });
+    }
+    const prepared = await prepareProgramWorldWork(this.provider, authority, source, controlled.control, context.modelScope, allocator.next);
+    const control = prepared.control, decisions = [...controlled.decisions], audits = [...controlled.modelAudits, ...prepared.modelAudits];
+    const scheduler = new EventScheduler(source.truth.elapsedSeconds, control.scheduler);
+    const runtime = new DecisionRuntime(this.provider, control.decisionCache ?? undefined);
+    const scoped = { ...context.modelScope, modelRegistrySnapshotHash: control.registryHash,
+      runtimeIdentity: { worldHash: source.worldHash, revision: source.revision }, profileId: control.models.decision,
+      fallbackProfileId: control.models.fallback, nextInvocation: () => allocator.next("world") };
+    const physical = structuredClone(source);
+    physical.executionState = { producerHash: this.manifest.hash, data: control as unknown as JsonObject };
+    const times = [scheduler.nextTime, nextWorldClockBoundary(physical)].filter((value): value is number => value !== null);
+    const atSeconds = times.length ? Math.min(...times) : null;
+    let event: WorldEventCandidate | null = null;
+    if (atSeconds !== null && atSeconds > source.truth.elapsedSeconds) {
+      const programs = control.pending.filter(pending => pending.atSeconds === atSeconds && !pending.failure && pending.bound).map(pending => pending.bound!);
+      const randomPlan = prepareWorldRandomPlan(physical, authority, control.worldResources, programs);
+      let randomness: WorldRandomCommitment | null = null;
+      if (randomPlan) {
+        const authorized = await authorizeWorldRandomness(runtime, randomPlan, scoped);
+        randomness = authorized.commitment; decisions.push(authorized.call);
+        if (!authorized.call.reused) audits.push(authorized.call.result.audit);
+      }
+      const resources = randomness ? worldRandomResources(control.worldResources, randomness) : control.worldResources;
+      const adjudication = programs.length ? await adjudicateWorldPrograms(runtime, programs, resources, worldProgramSources(authority, source), scoped)
+        : { records: [], evidence: [], calls: [] };
+      decisions.push(...adjudication.calls); audits.push(...adjudication.calls.filter(call => !call.reused).map(call => call.result.audit));
+      try { event = createWorldEventCandidate(physical, authority, control.worldResources, programs, adjudication, atSeconds, randomness); }
+      catch (error) {
+        if (!(error instanceof Error) || !/world rule awaits evidence or expansion|ambiguous world branches require expansion/u.test(error.message)) throw error;
+        for (const bound of programs) {
+          const pending = control.pending.find(value => value.attempt.id === bound.attempt.id)!;
+          pending.failure = error.message; pending.atSeconds = null;
+          control.failures.push({ ownerId: bound.attempt.actorId, phase: "adjudication", inputHash: pending.dependencyHash, reason: error.message, recoverable: true });
+          for (const queued of scheduler.snapshot().pending) if (queued.kind === "world" &&
+            (queued.payload as { attemptId: string }).attemptId === bound.attempt.id) scheduler.cancel(queued.id);
+        }
+        control.scheduler = scheduler.snapshot();
+      }
+    }
+    control.decisionCache = runtime.snapshot() as unknown as JsonObject; control.modelOrdinals = allocator.ordinals;
+    const sealed = sealDecisionEventState(control);
+    const progressHash = (value: DecisionEventState) => contentHash({ ...value, hash: "", modelOrdinals: null });
+    if (!event && progressHash(sealed) === progressHash(initial)) throw new WorldQuiescentError(sealed.failures);
+    const payload: PreparedNative = { control: sealed, event, decisions, activatedAgentIds: controlled.activatedAgentIds };
+    const body = { executionState: { producerHash: this.manifest.hash, data: sealed as unknown as JsonObject },
+      onsetPerception: { targets: [], receipts: [], requests: [], checks: [], commitmentRounds: [], rng: structuredClone(source.truth.rng) },
+      reactionRequests: [], schemaVersion: WORLD_STEP_PREPARATION_SCHEMA_VERSION, sourceStateHash: contentHash(source),
+      algorithmManifestHash: this.manifest.hash, policyRosterHash: contentHash(input.policyRoster), requestHash: contentHash(input.request),
+      pendingReactionRequests: [], preparedReactionDecisions: [], modelAudits: collectDecisionAudits(audits),
+      payload: payload as unknown as JsonObject };
+    return { ...body, id: contentHash(body) };
+  }
+  async completeStep(input: Readonly<WorldStepInput>, preparation: Readonly<WorldStepPreparation>,
+    reactions: readonly ExternalReactionInput[], context: ExecutionContext) {
+    const { id, ...body } = preparation;
+    if (id !== contentHash(body) || preparation.sourceStateHash !== contentHash(input.state) ||
+      preparation.policyRosterHash !== contentHash(input.policyRoster) || preparation.requestHash !== contentHash(input.request) ||
+      preparation.algorithmManifestHash !== this.manifest.hash || reactions.length) throw new StepPreparationInvalidatedError();
+    const prepared = structuredClone(preparation.payload) as unknown as PreparedNative, authority = toWorldRuntimeContract(input.definition);
+    const audits: ModelExecutionAudit[] = [...preparation.modelAudits], decisions = [...prepared.decisions];
+    const allocator = invocationAllocator(prepared.control, input.state.revision);
+    const runtime = new DecisionRuntime(this.provider, prepared.control.decisionCache ?? undefined);
+    const beliefRevisions: DecisionEventStep["beliefRevisions"] = [];
+    let finalControl = prepared.control;
+    if (prepared.event) {
+      const preview = settleProgramWorldEvent(input.state, prepared.control, prepared.event, authority, this.manifest.hash);
+      const revised = await Promise.allSettled(preview.beliefPatches.map(async patch => {
+        const evidenceIds = patch.operations.flatMap(operation => operation.kind === "upsert_evidence" ? [operation.evidence.id] : []);
+        return reviseEventBeliefs(runtime, preview.state, patch.agentId, evidenceIds, prepared.control.agents[patch.agentId]?.resources,
+          { ...context.modelScope, modelRegistrySnapshotHash: prepared.control.registryHash,
+            runtimeIdentity: { worldHash: input.state.worldHash, revision: input.state.revision }, profileId: prepared.control.models.decision,
+            fallbackProfileId: prepared.control.models.fallback, nextInvocation: () => allocator.next(patch.agentId) });
+      }));
+      const errors = revised.flatMap(value => value.status === "rejected" ? [value.reason] : []);
+      if (errors.length) throw new AggregateError(errors, "private observation interpretation failed");
+      for (const result of revised) if (result.status === "fulfilled") {
+        beliefRevisions.push(result.value.revision); decisions.push(...result.value.calls);
+        audits.push(...result.value.calls.filter(call => !call.reused).map(call => call.result.audit));
+      }
+      finalControl = settleProgramWorldEvent(input.state, prepared.control, prepared.event, authority, this.manifest.hash, beliefRevisions).control;
+    }
+    finalControl = sealDecisionEventState({ ...finalControl, modelOrdinals: allocator.ordinals, decisionCache: runtime.snapshot() as unknown as JsonObject });
+    const proof: DecisionEventStep = { version: 1, authority, preparedControl: prepared.control, event: prepared.event, beliefRevisions, finalControl,
+      decisions, modelAudits: collectDecisionAudits(audits), policyRoster: structuredClone(input.policyRoster), request: structuredClone(input.request) };
+    return nativeCandidate(input.state, proof, this.manifest.hash, prepared.activatedAgentIds);
+  }
+}

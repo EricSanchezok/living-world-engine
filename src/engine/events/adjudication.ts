@@ -18,7 +18,7 @@ export interface WorldAttempt {
   utterance: string | null;
   targetEntityIds: string[];
   startedAtSeconds: number;
-  program: { instanceId: string; workId: string; requestHash: string } | null;
+  program: { instanceId: string; definitionHash: string; nodeId: string; parameterHash: string; workId: string; requestHash: string } | null;
 }
 export interface BoundWorldProgram {
   program: AdmittedWorldProgram;

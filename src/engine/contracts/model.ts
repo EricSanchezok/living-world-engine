@@ -608,6 +608,7 @@ export interface SimulationState {
   history: CommittedStep[];
   historyBase?: HistoryReplayBase;
   bootstrapAgentCommits: AgentMindCommit[];
+  bootstrapDecisionEvent?: import("../events/execution-contract").DecisionEventBootstrap;
   bootstrapExecutionRef?: import("../runtime/execution").ExecutionRef;
 }
 
@@ -1184,6 +1185,7 @@ export interface ModelExecutionAudit {
 }
 
 export interface CommittedStep {
+  decisionEvent?: import("../events/execution-contract").DecisionEventStep;
   executionState: import("../runtime/execution-state").AlgorithmExecutionState | null;
   contentHash: string;
   semanticHash: string;

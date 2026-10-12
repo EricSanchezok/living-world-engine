@@ -1,6 +1,6 @@
 # World Program Runtime
 
-The world program foundation lives in [`src/engine/events/kernel.ts`](../../src/engine/events/kernel.ts). It is independent of private Agent programs. The production SimulationEngine and WorldHost still use the existing execution Composition; integration and qualification under [spec 0181](../specs/0181-jev-decision-event-engine.md) remain pending.
+The world program kernel lives in [`src/engine/events/kernel.ts`](../../src/engine/events/kernel.ts). It is independent of private Agent programs. The registered `decision-event@1` candidate runs through SimulationEngine, CanonicalCommitter and history replay. The default Composition remains the baseline while WorldHost integration, schema replacement and qualification under [spec 0181](../specs/0181-jev-decision-event-engine.md) continue.
 
 ## Compilation and authority
 
@@ -22,6 +22,8 @@ The native gateway preserves raw probabilities. Observed hundredth-precision Jev
 
 `commitWorldEvent` checks the earliest pending boundary, source hashes, actual read versions, canonical parameter ownership, decision bindings, causal assertions, references, write declarations, and quantity laws. It uses an isolated clone, so a later invalid operation rolls back the entire component. Physical time advances positively. `CommitReceipt` binds actual writes, events, and program receipts. Repeating a candidate with its durable receipt does not apply effects again. Identical no-op effects do not count as program progress.
 
+World outcomes and private acknowledgements are distinct. An `attempted` acknowledgement confirms execution without disclosing an unobserved hit, failure or delivery. An `observed-outcome` acknowledgement requires a committed observation to the actor that establishes the exact outcome, checked by its source-bound effect judgment. Program progress uses changes visible in the actor's own perspective or deliveries to that actor; hidden canonical changes do not leak through its progress bit.
+
 Random declarations bind exact authored distributions, purposes and complete branch stakes. `prepareWorldRandomPlan` freezes these inputs without extracting any RNG word or revealing the seed to the model. Jev must authorize applicability and stakes before code samples the seeded distribution. Result resources are read-only. The candidate retains before/after RNG, requests, results and authorization; commit and recovery reconstruct all of them. Unknown authorization does not draw. Model probabilities never enter this calculation.
 
 Canonical timers and condition expiry are hard time barriers even if the calling scheduler supplies a later boundary. Due timers fire or cancel according to their code-evaluated assertions; only firing timers wake their declared subjects. A timer-only boundary commits without model work. An empty event cannot advance time without an actual due boundary. World event judgments also see authored timers.
@@ -32,6 +34,18 @@ Canonical timers and condition expiry are hard time barriers even if the calling
 
 `jointActionComponents` connects read/write conflicts, shared actors, and interacting recipients transitively. Independent components can prepare concurrently; the queue retains commit order.
 
+Private control restores checksummed libraries, program journals, receipts and pending attempts. Local wakeups run goal selection and program predicates through Jev; only new programs and concrete utterances call creation. Independent owners run concurrently with separate invocation ordinals, and all in-flight outcomes settle before failure propagates. A pending issued attempt is not issued again on restart. World rules can reuse the same private definition/node/parameter binding with a new `utterance` parameter, without regenerating the rule. Preparation preserves failed attempts for a relevant dependency change.
+
+## Simulation entry and recovery
+
+`DecisionEventAlgorithm` pins the creation, decision and context-fallback profiles, registry snapshot, program definitions and dependency-round limit in the instance's execution state. Bootstrap covers actual private goals without changing canonical time. A control commit advances the revision only; a physical event also advances the world step and strictly positive elapsed time. A quiescent world raises a typed waiting result instead of minting repeated empty revisions.
+
+The fixed committer re-executes newly appended private instructions against the owner's actual resources. Generated definitions are re-admitted, creation output hashes are checked, semantic decisions are reconstructed from concrete frontier tickets, and issued attempts must match their private program or authorized player submission. Persistent goal questions include the original goal, even when a generated mechanical condition is true. Completion checks run before replacing an ended program.
+
+Player text remains an attempted action. Creation renders exact spoken content before world adjudication; canonical delivery establishes who actually heard it. A controller change interrupts private planning and revokes unstarted or interruptible pending work. Noninterruptible work retains its already established execution boundary. Resuming model control creates a local wakeup.
+
+World settlement consumes exactly the persisted pending frontier. Private deadline queue items must come from the active interpreter. Canonical event evidence, actual observations, belief revisions and program receipts are replayed by the same deterministic implementation used for preparation and commit. Native history has source-bound decision evidence; it does not invent a legacy `causal-verifier` invocation.
+
 ## Observation and cognition
 
 `projectEventPerception` requires matching candidate and committed receipt hashes. Only explicit committed deliveries become observation packets. A known private speaker alias can be reused; an unidentified speaker receives a neutral local alias without canonical names or hidden identity claims. Hearing testimony adds evidence that words were heard and does not assert that their contents are true.
@@ -40,6 +54,6 @@ Canonical timers and condition expiry are hard time barriers even if the calling
 
 ## Verification boundary
 
-Tests exercise the actual ModelGateway with only HTTP replaced, compilation/repair, quantity transfers, stale reads, unrelated updates, source/evidence tampering, unknown, atomic competition failure, exact speech, no-op progress, and scheduler restart. A real-model diagnostic is available as `scripts/experiments/jev-world-smoke.ts`, consuming a successful private-program probe. It exercises the world kernel directly, not WorldHost persistence or a complete game.
+Tests exercise the actual ModelGateway with only HTTP replaced, compilation/repair, quantity transfers, stale reads, unrelated updates, source/evidence tampering, unknown, atomic competition failure, exact speech, no-op progress, and scheduler restart. SimulationEngine tests also cover registered execution, natural-language player actions, actual speech delivery, same-time control commits, controller interruption, quiescence, persistent replay and recovery without repeated effects. A real-model diagnostic is available as `scripts/experiments/jev-world-smoke.ts`, consuming a successful private-program probe. It exercises the world kernel directly, not WorldHost persistence or a complete game.
 
-Production integration of programs, scheduling and observation/cognition, persistence, Inspector, schema upgrades, and full A/B/C qualification are subsequent work. Passing these foundational checks does not establish the acceptance targets.
+WorldHost lifecycle integration, Inspector, schema upgrades, default replacement and full A/B/C qualification remain subsequent work. Passing the runtime checks does not establish the acceptance targets.

@@ -1,0 +1,72 @@
+import path from "node:path";
+import { describe, expect, it } from "vitest";
+import { loadWorldScript } from "../../../script/world-loader";
+import { createTestModelCatalog } from "../../testing/model-provider";
+import { decisionQuestionIds, decisionTestProvider } from "../../testing/decision-provider";
+import type { ProgramDefinition } from "../../programs/definition";
+import { contentHash } from "../../models/model-audit";
+import { advanceProgramControls } from "../program-control";
+import { initialDecisionEventState, readDecisionEventState, restoreOwnerPrograms } from "../runtime-state";
+import type { PolicyBinding } from "../../runtime/execution";
+
+function fixture() {
+  const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: createTestModelCatalog() });
+  const definition: ProgramDefinition = { version: 1, id: "ask-at-gate", name: "Ask at the gate", owner: { kind: "agent", agentId: "keeper" },
+    description: "Ask what the traveler wants before deciding what to do.", sourceIds: ["goal:guard-gate"],
+    parameters: { recipient: { kind: "entity", description: "Known traveler" } }, reads: ["evidence"], writes: [],
+    entry: "ask", startPredicateId: "ready", nodes: [{ id: "ask", kind: "attempt", intent: "Ask {recipient} why they are here.",
+      entityTargetParameters: ["recipient"], speech: { kind: "create", purpose: "Ask their purpose" }, onFailure: "expand", onPartial: "wait" }],
+    predicates: [{ id: "ready", description: "This is an available course of action.", reads: ["evidence"], sourceIds: ["goal:guard-gate"], unknown: "wait",
+      test: { kind: "mechanical", operator: "eq", left: { kind: "literal", value: true }, right: { kind: "literal", value: true } } },
+    { id: "guarded", description: "Guarding duty is complete.", reads: ["evidence"], sourceIds: ["goal:guard-gate"], unknown: "wait",
+      test: { kind: "semantic", instructions: "Has guarding duty actually ended successfully?" } }], interrupts: [], milestones: [],
+    goals: [{ goalId: "guard-gate", predicateId: "guarded" }] };
+  const roster: Record<string, PolicyBinding> = {
+    player: { kind: "external", agentId: "player", participantId: "human" },
+    keeper: { kind: "model", agentId: "keeper", profiles: world.initialState.agents.keeper!.modelProfiles },
+  };
+  const counters = new Map<string, number>();
+  const nextInvocation = (subjectId: string, slots = 1) => {
+    const next = (counters.get(subjectId) ?? 0) + 1; counters.set(subjectId, next + slots - 1); return next;
+  };
+  return { world, definition, roster, options: { maxDependencyRounds: 32, nextInvocation } };
+}
+describe("durable private program control", () => {
+  it("uses the actual private goal, authors speech before issuing, and restores pending work without dispatching twice", async () => {
+    const f = fixture();
+    const configured = decisionTestProvider(body => {
+      const wire = JSON.stringify(body); expect(wire).not.toContain("key-is-authentic"); expect(wire).not.toContain("canonicalEntityIds");
+      if (wire.includes("Compile a reusable private behavior program")) return { definition: f.definition, parameters: { recipient: "traveler" } };
+      if (wire.includes("Write the exact words this Agent")) return { text: "Why are you here?" };
+      if (wire.includes("Choose which actual active goal")) return { answers: { goal: { choice: "g0" } } };
+      return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: "unknown" }])) };
+    });
+    const registry = await configured.registry.capture();
+    const source = f.world.initialState, hash = contentHash(source);
+    const initial = initialDecisionEventState(source, { decision: "world-test", creation: "world-test", fallback: "world-test" }, configured.gateway.catalog.hash, registry.hash);
+    const scope = { workloadId: "program-control", batchId: "program-control", runtimeIdentity: { worldHash: source.worldHash, revision: 0 } };
+    const first = await advanceProgramControls(configured.gateway, source, initial, f.roster, scope, f.options);
+    expect(contentHash(source)).toBe(hash);
+    expect(first.activatedAgentIds).toEqual(["keeper"]);
+    expect(first.control.pending).toHaveLength(1);
+    expect(first.control.pending[0]!.attempt).toMatchObject({ actorId: "keeper", actorEntityId: "keeper",
+      utterance: "Why are you here?", targetEntityIds: ["player"] });
+    expect(restoreOwnerPrograms(first.control, "keeper")[0]!.completion.goals).toEqual({});
+    const persisted = readDecisionEventState({ producerHash: contentHash("native-test"), data: JSON.parse(JSON.stringify(first.control)) }, source);
+    const count = configured.transport.mock.calls.length;
+    const resumed = await advanceProgramControls(configured.gateway, source, persisted, f.roster, scope, f.options);
+    expect(configured.transport).toHaveBeenCalledTimes(count);
+    expect(resumed.control.pending).toEqual(first.control.pending);
+    expect(resumed.control.agents.keeper!.instances).toEqual(first.control.agents.keeper!.instances);
+    expect(first.modelAudits.map(audit => audit.role).sort()).toEqual(["creation", "creation", "decision", "decision"]);
+    expect(new Set(first.modelAudits.flatMap(audit => audit.invocations.map(invocation => invocation.id))).size).toBe(4);
+  });
+  it("acknowledges external and idle wakeups without creating model work", async () => {
+    const f = fixture(), configured = decisionTestProvider(), registry = await configured.registry.capture(), source = f.world.initialState;
+    const initial = initialDecisionEventState(source, { decision: "world-test", creation: "world-test", fallback: "world-test" }, configured.gateway.catalog.hash, registry.hash);
+    const result = await advanceProgramControls(configured.gateway, source, initial, { ...f.roster,
+      keeper: { kind: "idle", agentId: "keeper", reason: "explicit" } }, { workloadId: "idle", batchId: "idle" }, f.options);
+    expect(result.control.pending).toEqual([]); expect(result.activatedAgentIds).toEqual([]);
+    expect(configured.transport).not.toHaveBeenCalled();
+  });
+});

@@ -13,6 +13,8 @@ import { captureReads, validateReads, worldProgramSources, worldResources, type 
 import { admitWorldProgram, bindWorldProgram, materializeWorldBranch, renderWorldText } from "./world-program";
 import { validateWorldRandomness, type WorldRandomCommitment } from "./randomness";
 import { worldClockBoundary, type WorldClockBoundary } from "./clock-boundary";
+import { projectAgentPerspective } from "../cognition/agent-perspective";
+import { privateProgramResources } from "../programs/private-resources";
 
 export interface WorldDelivery { attemptId: string; recipientEntityId: string; kind: "speech" | "observation"; text: string }
 export interface WorldEventCandidate {
@@ -108,6 +110,10 @@ function materialize(programs: BoundWorldProgram[], records: Map<string, WorldCo
     const branches = bound.program.definition.branches.filter(branch => branch.when.every(condition => verdict(condition.predicateId) === condition.equals) && verdict(`effect:${branch.id}`) === "yes");
     if (branches.length !== 1) throw new Error(branches.length ? "ambiguous world branches require expansion" : "world rule awaits evidence or expansion");
     const branch = branches[0]!;
+    if (branch.acknowledgement === "observed-outcome" && !branch.deliveries.some(delivery =>
+      delivery.kind === "observation" && bound.parameters[delivery.recipientParameter] === bound.attempt.actorEntityId)) {
+      throw new Error("an observed outcome acknowledgement requires a committed observation to its actor");
+    }
     if (worldProgramTiming(bound, resources).completionAtSeconds === null && branch.outcome === "succeeded") {
       throw new Error("an ongoing activity checkpoint cannot prove activity completion");
     }
@@ -129,7 +135,7 @@ export function createWorldEventCandidate(state: Readonly<SimulationState>, defi
   resources = validateWorldRandomness(state, definition, resources, programs, randomness);
   const sources = worldProgramSources(definition, state), entityIds = new Set(Object.keys(state.truth.entities));
   const clockBoundary = worldClockBoundary(state, atSeconds);
-  if ((!programs.length && !clockBoundary.timers.length && !clockBoundary.conditions.length) ||
+  if ((!programs.length && !clockBoundary.timers.length && !clockBoundary.conditions.length && !clockBoundary.programDeadlines.length) ||
     new Set(programs.map(bound => bound.attempt.id)).size !== programs.length) throw new Error("event requires distinct attempts or an actual clock boundary");
   for (const bound of programs) {
     const admitted = admitWorldProgram(bound.program.definition, sources);
@@ -159,12 +165,10 @@ export function createWorldEventCandidate(state: Readonly<SimulationState>, defi
 const collectionFor: Record<string, string> = { entity: "entities", placement: "placements", fact: "facts", meter: "meters", quantity: "quantities",
   rating: "ratings", condition: "conditions", activity: "activities", pool: "pools", timer: "timers" };
 
-function physicalProgressHash(state: SimulationState): string {
-  const truth = structuredClone(state.truth);
-  truth.events = []; truth.elapsedSeconds = 0;
-  for (const fact of Object.values(truth.facts)) fact.provenance = [];
-  for (const condition of Object.values(truth.conditions)) condition.provenance = [];
-  return contentHash({ truth, agentIds: Object.keys(state.agents).sort() });
+function privatePhysicalHash(state: Readonly<SimulationState>, agentId: string): string {
+  const agent = state.agents[agentId]; if (!agent) return contentHash(null);
+  const resources = privateProgramResources(projectAgentPerspective(state as SimulationState, agent)).resources;
+  return contentHash(Object.fromEntries(Object.entries(resources).filter(([key]) => key !== "clock").map(([key, resource]) => [key, resource.value])));
 }
 
 /** Atomic deterministic commit. Semantic evidence is replayed, never replaced with a causal-verifier call token. */
@@ -183,12 +187,10 @@ export function commitWorldEvent(source: Readonly<SimulationState>, definition: 
   if (contentHash(canonical) !== contentHash(candidate)) throw new Error("world candidate effects differ from the admitted program");
   const next = structuredClone(source) as SimulationState;
   if (candidate.randomness) next.truth.rng = structuredClone(candidate.randomness.after);
-  const progress = new Set<string>();
   // All programs in this component were jointly adjudicated. Resource competition is still checked against the evolving transaction clone.
   for (const operation of candidate.effects) {
     for (const assertion of operation.assertions) if (!evaluateCausalAssertion(source, assertion).passed) throw new Error("world effect causal assertion failed");
-    const before = physicalProgressHash(next); applyWorldDeltaOperation(next, operation);
-    if (before !== physicalProgressHash(next)) for (const cause of operation.causes) if (cause.kind === "action") progress.add(cause.id);
+    applyWorldDeltaOperation(next, operation);
   }
   // Transfers cannot create resources. Production/consumption require the existing code-owned quantity laws.
   for (const quantity of Object.values(next.truth.quantities)) {
@@ -237,9 +239,13 @@ export function commitWorldEvent(source: Readonly<SimulationState>, definition: 
   const programReceipts: ProgramReceipt[] = candidate.programs.flatMap((bound, ordinal) => {
     if (!bound.attempt.program) return [];
     const branch = bound.program.definition.branches.find(value => value.id === candidate.selections.find(value => value.attemptId === bound.attempt.id)!.branchId)!;
-    const value = { ...bound.attempt.program, status: branch.outcome, atSeconds: candidate.atSeconds, eventIds: [events[ordinal]!.id],
+    const value = { instanceId: bound.attempt.program.instanceId, workId: bound.attempt.program.workId, requestHash: bound.attempt.program.requestHash,
+      // An executed attempt does not reveal an unobserved hit, failure, delivery, or secret state change.
+      status: branch.acknowledgement === "observed-outcome" ? branch.outcome : "succeeded" as const,
+      atSeconds: candidate.atSeconds, eventIds: [events[ordinal]!.id],
       effectHash: contentHash({ candidateId: id, attemptId: bound.attempt.id }),
-      madeProgress: progress.has(bound.attempt.id) || branch.deliveries.length > 0 };
+      madeProgress: privatePhysicalHash(source, bound.attempt.actorId) !== privatePhysicalHash(next, bound.attempt.actorId) ||
+        branch.deliveries.some(delivery => bound.parameters[delivery.recipientParameter] === bound.attempt.actorEntityId) };
     return [{ ...value, id: contentHash(value) }];
   });
   const value = { version: 1 as const, candidateId: id, beforeHash: contentHash(source), afterHash: contentHash(next),

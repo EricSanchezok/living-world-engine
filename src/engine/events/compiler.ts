@@ -43,6 +43,11 @@ export async function compileWorldProgram(provider: StructuredModelProvider, req
   const validate = (output: z.infer<typeof worldCompilationSchema>) => {
     const program = admitWorldProgram(output.definition, sources); bindWorldProgram(program, output.parameters, entities);
     if (output.parameters.actor !== request.attempt.actorEntityId) throw new Error("world compiler changed the action owner");
+    if (request.attempt.utterance !== null && (program.definition.parameters.utterance?.kind !== "text" ||
+      output.parameters.utterance !== request.attempt.utterance ||
+      program.definition.branches.some(branch => branch.deliveries.some(delivery => delivery.kind === "speech" && delivery.text !== "{utterance}")))) {
+      throw new Error("pre-action speech must bind the reusable utterance text parameter exactly");
+    }
     const bound: BoundWorldProgram = { program, parameters: output.parameters, attempt: request.attempt };
     captureReads(request.resources, program.definition.reads.filter(key => !key.startsWith("random:")).map(key => renderWorldText(key, bound.parameters)));
     worldProgramDuration(bound, request.resources);

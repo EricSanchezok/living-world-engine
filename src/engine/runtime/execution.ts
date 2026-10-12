@@ -245,6 +245,7 @@ export interface BootstrapInput {
 }
 
 export interface BootstrapCandidate {
+  decisionEvent?: import("../events/execution-contract").DecisionEventBootstrap;
   schemaVersion: typeof WORLD_STEP_CANDIDATE_SCHEMA_VERSION;
   sourceStateHash: string;
   agentCommits: Array<AgentMindOutput & { agentId: string }>;
@@ -381,6 +382,7 @@ export interface OnsetPerceptionTranscript {
 }
 
 export interface WorldStepCandidate {
+  decisionEvent?: import("../events/execution-contract").DecisionEventStep;
   executionState: import("./execution-state").AlgorithmExecutionState | null;
   onsetPerception: OnsetPerceptionTranscript;
   schemaVersion: typeof WORLD_STEP_CANDIDATE_SCHEMA_VERSION;

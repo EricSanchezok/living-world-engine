@@ -586,6 +586,7 @@ function validateCommittedStepShape(step: CommittedStep, state: SimulationState)
   delete payload.contentHash;
   if (step.contentHash !== contentHash(payload)) throw new Error(`step ${step.step} content hash mismatch`);
   if (step.executionRef) validateExecutionRef(step.executionRef, `step ${step.step} executionRef`);
+  if (step.decisionEvent) return;
   step.initialActions.forEach((action) => actionProposalSchema.parse(action));
   step.actions.forEach((action) => actionProposalSchema.parse(action));
   step.reactionRequests.forEach((request) => reactionRequestSchema.parse(request));
@@ -827,6 +828,7 @@ export function replaySimulationState(
     if (!agent) throw new Error(`bootstrap commit targets unknown Agent ${commit.agentId}`);
     replay.agents[commit.agentId] = applyMindCommit(agent, commit, 0, [], []);
   }
+  if (state.bootstrapDecisionEvent) Object.assign(replay, applyDecisionEventBootstrap(replay, state.bootstrapDecisionEvent));
   const entries = [
     ...state.history.map((step) => ({ kind: "step" as const, revision: step.revision, value: step })),
     ...state.admissions.map((commit) => ({ kind: "admission" as const, revision: commit.revision, value: commit })),
@@ -840,6 +842,10 @@ export function replaySimulationState(
     }
     const step = entry.value;
     validateCommittedStepShape(step, replay);
+    if (step.decisionEvent) {
+      Object.assign(replay, replayDecisionEventStep(replay, step));
+      continue;
+    }
     if (step.baseRevision !== replay.revision || step.revision !== replay.revision + 1 || step.step !== replay.step + 1) {
       throw new Error(`history step ${step.step} is not contiguous`);
     }
@@ -969,7 +975,7 @@ export function validateSimulationState(state: SimulationState, requireNextActio
   assertExactKeys(state, [
     "schemaVersion", "executionState", "worldId", "worldHash", "lawIds", "revision", "step", "truth", "agents", "admissions", "history",
     "bootstrapAgentCommits",
-  ], ["historyBase", "bootstrapExecutionRef"], "simulation state");
+  ], ["historyBase", "bootstrapExecutionRef", "bootstrapDecisionEvent"], "simulation state");
   validateAlgorithmExecutionState(state.executionState);
   if (state.schemaVersion !== 16 || !isSemanticId(state.worldId) || !/^sha256:[a-f0-9]{64}$/.test(state.worldHash)) {
     throw new Error("invalid simulation identity");
@@ -1328,3 +1334,4 @@ export function createEmptyCharacter(summary: string, voice = ""): AgentState["c
     commitments: {},
   };
 }
+import { applyDecisionEventBootstrap, replayDecisionEventStep } from "../events/canonical";

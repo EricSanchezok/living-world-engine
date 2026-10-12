@@ -149,7 +149,7 @@ describe("private program resource projection", () => {
     const start = fixture.interpreter.work(fixture.resources, 0)[0] as ProgramPredicateWork;
     fixture.interpreter.resolve(start, fixture.resources, "yes", contentHash(start), 0);
     const restored = ProgramInterpreter.restore(fixture.interpreter.snapshot(), fixture.program, fixture.entities, fixture.receipts);
-    expect(restored.subscriptions(fixture.resources, 0).resources).toEqual(["contact", "self", "task"]);
+    expect(restored.subscriptions(fixture.resources, 0).resources).toEqual(["contact", "goal:deliver", "self", "task"]);
     expect(restored.subscriptions(fixture.resources, 0).deadline).toBeNull();
   });
 });

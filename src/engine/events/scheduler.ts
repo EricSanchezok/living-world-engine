@@ -68,6 +68,16 @@ export class EventScheduler {
     if (!this.pending.has(id)) throw new Error("cannot cancel an unknown pending event");
     this.pending.delete(id); this.completed.add(id);
   }
+  /** Advance over a canonical timer/expiry boundary that has no separate private queue item. */
+  advanceBoundary(atSeconds: number): void {
+    second.parse(atSeconds);
+    if (atSeconds < this.clock || this.nextTime !== null && this.nextTime < atSeconds) throw new Error("clock advance skips a pending event");
+    this.clock = atSeconds;
+  }
+  unsubscribe(subjectId: string): void {
+    this.subscriptions.delete(subjectId);
+    for (const event of [...this.pending.values()]) if (event.subjectId === subjectId) this.cancel(event.id);
+  }
   subscribe(subjectId: string, resources: ProgramResources, keys: string[], receiptWorkIds: string[], deadline: number | null) {
     const subscription = subscriptionSchema.parse({ subjectId, versions: Object.fromEntries([...new Set(keys)].sort().map(key => {
       if (!resources[key]) throw new Error(`missing private subscription resource ${key}`); return [key, resources[key]!.version];

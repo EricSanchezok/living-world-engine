@@ -24,6 +24,7 @@ export function programFixture() {
   const admission: ProgramAdmission = { ownerId: "agent-a", sources: new Map([["goal:delivery", contentHash("deliver")]]),
     resources: new Set(["self", "contact", "task"]), goalIds: new Set(["deliver"]) };
   const resources: Record<string, { version: number; value: { [key: string]: boolean | string } }> = {
+    "goal:deliver": { version: 0, value: { id: "deliver", description: "Deliver the traded goods to the recipient." } },
     self: { version: 0, value: { ready: true } }, contact: { version: 0, value: { reply: "none" } }, task: { version: 0, value: { delivered: false } },
   };
   const entities = new Set(["local:recipient"]), parameters = { recipient: "local:recipient" };

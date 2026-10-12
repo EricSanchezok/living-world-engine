@@ -29,7 +29,7 @@ function fixture() {
     timing: { profileId: "explicit-duration", basis: { kind: "explicit_duration", seconds: { kind: "literal", value: 5 }, sourceText: "5 seconds" } }, random: [],
     predicates: [{ id: "authorized", description: "The actor voluntarily offers their own stones to this reachable recipient.", reads: ["placement:{actor}", "placement:{recipient}"], sourceIds: ["world"],
       test: { kind: "semantic", instructions: "Check the actual offer and reach. Do not fabricate acceptance or an exchange promised in return." }, unknown: "wait" }],
-    branches: [{ id: "give", when: [{ predicateId: "authorized", equals: "yes" }], outcome: "succeeded", description: "A voluntary transfer occurs.",
+    branches: [{ id: "give", when: [{ predicateId: "authorized", equals: "yes" }], outcome: "succeeded", acknowledgement: "attempted", description: "A voluntary transfer occurs.",
       effects: [{ kind: "transfer_quantity", fields: {
         definitionId: "spirit-stone",
         fromHolderId: { $expression: { kind: "parameter", name: "actor" } },
@@ -41,7 +41,8 @@ function fixture() {
   const bound: BoundWorldProgram = { program, parameters: { actor: "player", recipient: "keeper", amount: 2 }, attempt: {
     id: runtimeId({ worldHash: state.worldHash, revision: 0, kind: "action", stage: "program", owner: "player", round: 0, ordinal: 0 }),
     actorId: "player", actorEntityId: "player", intent: "Spend 5 seconds giving the keeper two of my stones as a gift.", utterance: null, targetEntityIds: ["keeper"], startedAtSeconds: 0,
-    program: { instanceId: "gift-1", workId: contentHash("work"), requestHash: contentHash("request") },
+    program: { instanceId: "gift-1", definitionHash: contentHash("private"), nodeId: "give", parameterHash: contentHash("parameters"),
+      workId: contentHash("work"), requestHash: contentHash("request") },
   } };
   return { definition, state, sources, resources, raw, bound, from, to };
 }
@@ -85,6 +86,26 @@ describe("source-bound world event kernel", () => {
       runtimeIdentity: { worldHash: f.state.worldHash, revision: 0 } });
     expect(result).toMatchObject({ status: "failed", recoverable: true }); expect(configured.transport).toHaveBeenCalledTimes(2);
     expect(f.state.step).toBe(0);
+  });
+  it("reuses a compiled private program node when only its pre-action words change", async () => {
+    const f = fixture();
+    f.bound.attempt.utterance = "Please accept this gift.";
+    f.raw.parameters.utterance = { kind: "text", description: "The concrete pre-action utterance." };
+    f.bound.parameters.utterance = f.bound.attempt.utterance;
+    f.raw.branches[0]!.deliveries = [{ recipientParameter: "recipient", kind: "speech", text: "{utterance}" }];
+    const configured = decisionTestProvider(() => ({ definition: f.raw, parameters: f.bound.parameters }));
+    const compiled = await compileWorldProgram(configured.gateway, { profileId: "world-test", invocationBase: 1,
+      workloadId: "reusable-speech", batchId: "reusable-speech", runtimeIdentity: { worldHash: f.state.worldHash, revision: 0 },
+      definition: f.definition, state: f.state, resources: f.resources, attempt: f.bound.attempt, reason: "initial-coverage" });
+    if (compiled.status !== "ready") throw new Error(compiled.reason);
+    const library = new WorldProgramLibrary(); library.add(compiled);
+    const next = { ...f.bound.attempt, id: "next-attempt", utterance: "These are for you.", startedAtSeconds: 5 };
+    const reused = library.lookup(next, f.sources, new Set(Object.keys(f.state.truth.entities)), f.resources);
+    expect(reused!.parameters.utterance).toBe(next.utterance);
+    expect(reused!.program.hash).toBe(compiled.bound.program.hash);
+    expect(configured.transport).toHaveBeenCalledTimes(1);
+    next.program = { ...next.program!, parameterHash: contentHash("changed-quantity") };
+    expect(library.lookup(next, f.sources, new Set(Object.keys(f.state.truth.entities)), f.resources)).toBeNull();
   });
   it("executes a declared transfer through gateway decisions and commits exactly once", async () => {
     const f = fixture(), { result, configured } = await adjudicate(f);
@@ -152,6 +173,20 @@ describe("source-bound world event kernel", () => {
     const { result } = await adjudicate(f), candidate = createWorldEventCandidate(f.state, f.definition, f.resources, [f.bound], result, 5);
     const committed = commitWorldEvent(f.state, f.definition, f.resources, candidate, { earliestPendingSeconds: 5, receipts: new Map() });
     expect(committed.receipt.programReceipts[0]!.madeProgress).toBe(false);
+  });
+  it("does not reveal hidden outcomes or hidden progress through a private program receipt", async () => {
+    const f = fixture(); f.raw.writes = ["facts"];
+    f.raw.branches[0]!.outcome = "failed";
+    f.raw.branches[0]!.effects = [{ kind: "set_fact", fields: { fact: { id: "hidden-result", subjectId: "keeper", predicate: "secret-result",
+      value: { kind: "text", value: "failure" }, description: "An unobserved result.", access: { kind: "private" } } } }];
+    f.bound.program = admitWorldProgram(f.raw, f.sources);
+    const judged = await adjudicate(f), candidate = createWorldEventCandidate(f.state, f.definition, f.resources, [f.bound], judged.result, 5);
+    const result = commitWorldEvent(f.state, f.definition, f.resources, candidate, { earliestPendingSeconds: 5, receipts: new Map() });
+    expect(result.state.truth.facts["hidden-result"]!.value).toEqual({ kind: "text", value: "failure" });
+    expect(result.receipt.programReceipts[0]).toMatchObject({ status: "succeeded", madeProgress: false });
+    f.raw.branches[0]!.acknowledgement = "observed-outcome"; f.bound.program = admitWorldProgram(f.raw, f.sources);
+    const unsupported = await adjudicate(f);
+    expect(() => createWorldEventCandidate(f.state, f.definition, f.resources, [f.bound], unsupported.result, 5)).toThrow("committed observation");
   });
   it("binds duration to authored profiles and exact action evidence", () => {
     const f = fixture();
