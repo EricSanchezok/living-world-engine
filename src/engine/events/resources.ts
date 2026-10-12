@@ -10,7 +10,7 @@ export type ReadSet = Record<string, { version: number; hash: string }>;
 /** This index contains canonical physical truth, never any Agent's private cognition or programs. */
 export function worldResources(state: Readonly<SimulationState>, definition: WorldRuntimeContract, previous: ProgramResources = {}): ProgramResources {
   const truth = state.truth;
-  const values: Record<string, unknown> = { clock: truth.elapsedSeconds, laws: definition.laws,
+  const values: Record<string, unknown> = { clock: truth.elapsedSeconds, rng: truth.rng, laws: definition.laws,
     mechanics: truth.mechanics, distributions: definition.randomDistributions,
     entities: truth.entities, placements: truth.placements, facts: truth.facts, meters: truth.meters,
     quantities: truth.quantities, ratings: truth.ratings, conditions: truth.conditions,

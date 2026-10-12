@@ -24,6 +24,7 @@ export const worldProgramSchema = z.object({
   version: z.literal(1), namespace: z.literal("world"), id: programKey, description: text,
   sourceIds: z.array(programKey).min(1), parameters: z.record(programKey, z.object({ kind: z.enum(["entity", "text", "number"]), description: text }).strict()),
   reads: z.array(text).min(1), writes: z.array(text), timing,
+  random: z.array(z.object({ id: programKey, distributionId: programKey, purpose: text }).strict()).max(32),
   predicates: z.array(predicate).min(1),
   branches: z.array(z.object({ id: programKey,
     when: z.array(z.object({ predicateId: programKey, equals: z.enum(["yes", "no"]) }).strict()).min(1),
@@ -67,6 +68,11 @@ export function admitWorldProgram(input: unknown, sources: Readonly<Record<strin
   const unique = (values: string[], label: string) => { if (new Set(values).size !== values.length) throw new Error(`duplicate ${label}`); };
   unique(definition.sourceIds, "world source"); unique(definition.reads, "world read"); unique(definition.writes, "world write");
   unique(definition.predicates.map(value => value.id), "world predicate"); unique(definition.branches.map(value => value.id), "world branch");
+  unique(definition.random.map(value => value.id), "world random request");
+  if (definition.random.length && !definition.sourceIds.includes("mechanics")) throw new Error("world randomness requires an authored mechanics source");
+  if (definition.reads.includes("rng") || definition.writes.some(key => key === "rng" || key.startsWith("random:"))) {
+    throw new Error("RNG state and random results are owned by the engine");
+  }
   if (definition.parameters.actor?.kind !== "entity") throw new Error("world programs require the actor entity parameter");
   const sourceHashes = Object.fromEntries(definition.sourceIds.map(id => {
     if (!Object.hasOwn(sources, id)) throw new Error(`unknown world program source ${id}`);
@@ -95,6 +101,9 @@ export function admitWorldProgram(input: unknown, sources: Readonly<Record<strin
     } else for (const [key, child] of Object.entries(value)) { programKey.parse(key); checkValue(child, depth + 1); }
   };
   definition.reads.forEach(checkText); definition.writes.forEach(checkText);
+  for (const read of definition.reads.filter(key => key.startsWith("random:"))) {
+    if (!definition.random.some(request => read === `random:{actor}:${request.id}`)) throw new Error("undeclared world random read");
+  }
   if (definition.timing.basis.kind !== "profile") {
     const basis = definition.timing.basis; checkText(basis.sourceText);
     checkExpression(basis.kind === "explicit_duration" ? basis.seconds : basis.amount, definition.reads);

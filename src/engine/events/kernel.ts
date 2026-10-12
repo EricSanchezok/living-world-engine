@@ -11,6 +11,8 @@ import { makeWorldDecisionBatch, mechanicalWorldCondition, validateWorldEvidence
   type BoundWorldProgram, type WorldAdjudication, type WorldConditionRecord } from "./adjudication";
 import { captureReads, validateReads, worldProgramSources, worldResources, type ReadSet } from "./resources";
 import { admitWorldProgram, bindWorldProgram, materializeWorldBranch, renderWorldText } from "./world-program";
+import { validateWorldRandomness, type WorldRandomCommitment } from "./randomness";
+import { worldClockBoundary, type WorldClockBoundary } from "./clock-boundary";
 
 export interface WorldDelivery { attemptId: string; recipientEntityId: string; kind: "speech" | "observation"; text: string }
 export interface WorldEventCandidate {
@@ -23,6 +25,8 @@ export interface WorldEventCandidate {
   reads: ReadSet;
   effects: WorldDeltaOperation[];
   deliveries: WorldDelivery[];
+  randomness: WorldRandomCommitment | null;
+  clockBoundary: WorldClockBoundary;
 }
 export interface CommitReceipt {
   version: 1; id: string; candidateId: string; beforeHash: string; afterHash: string;
@@ -121,9 +125,12 @@ function materialize(programs: BoundWorldProgram[], records: Map<string, WorldCo
 }
 
 export function createWorldEventCandidate(state: Readonly<SimulationState>, definition: WorldRuntimeContract, resources: ProgramResources,
-  programs: BoundWorldProgram[], adjudication: WorldAdjudication, atSeconds: number): WorldEventCandidate {
+  programs: BoundWorldProgram[], adjudication: WorldAdjudication, atSeconds: number, randomness: WorldRandomCommitment | null = null): WorldEventCandidate {
+  resources = validateWorldRandomness(state, definition, resources, programs, randomness);
   const sources = worldProgramSources(definition, state), entityIds = new Set(Object.keys(state.truth.entities));
-  if (!programs.length || new Set(programs.map(bound => bound.attempt.id)).size !== programs.length) throw new Error("event requires distinct attempts");
+  const clockBoundary = worldClockBoundary(state, atSeconds);
+  if ((!programs.length && !clockBoundary.timers.length && !clockBoundary.conditions.length) ||
+    new Set(programs.map(bound => bound.attempt.id)).size !== programs.length) throw new Error("event requires distinct attempts or an actual clock boundary");
   for (const bound of programs) {
     const admitted = admitWorldProgram(bound.program.definition, sources);
     if (admitted.hash !== bound.program.hash) throw new Error("world program sources changed");
@@ -134,7 +141,7 @@ export function createWorldEventCandidate(state: Readonly<SimulationState>, defi
     if (atSeconds < bound.attempt.startedAtSeconds + worldProgramDuration(bound, resources)) throw new Error("world effects precede their execution duration");
   }
   if (!Number.isSafeInteger(atSeconds) || atSeconds <= state.truth.elapsedSeconds) throw new Error("physical world event must advance time");
-  if (atSeconds !== Math.max(...programs.map(bound => bound.attempt.startedAtSeconds + worldProgramDuration(bound, resources)))) throw new Error("world event time differs from its execution boundary");
+  if (programs.length && atSeconds !== Math.max(...programs.map(bound => bound.attempt.startedAtSeconds + worldProgramDuration(bound, resources)))) throw new Error("world event time differs from its execution boundary");
   const proof = { records: adjudication.records, evidence: adjudication.evidence };
   const records = verifyAdjudication(programs, proof, resources, sources);
   const value = materialize(programs, records, resources);
@@ -142,8 +149,10 @@ export function createWorldEventCandidate(state: Readonly<SimulationState>, defi
     ...proof.records.flatMap(record => Object.keys(record.readSet)),
     ...programs.flatMap(bound => [ `entity:${bound.attempt.actorEntityId}`, ...bound.program.definition.reads.map(key => renderWorldText(key, bound.parameters)) ]),
     ...value.effects.flatMap(operation => operationReads(state, operation)),
+    ...Object.keys(randomness?.plan.reads ?? {}),
+    ...clockBoundary.timers.map(timer => `timer:${timer.id}`), ...clockBoundary.conditions.map(id => `condition:${id}`),
   ])]);
-  const body = { version: 1 as const, atSeconds, programs, adjudication: proof, ...value, reads };
+  const body = { version: 1 as const, atSeconds, programs, adjudication: proof, ...value, reads, randomness, clockBoundary };
   return frozenClone({ ...body, id: contentHash(body) });
 }
 
@@ -167,11 +176,13 @@ export function commitWorldEvent(source: Readonly<SimulationState>, definition: 
   const existing = options.receipts.get(id);
   if (existing) return { state: structuredClone(source) as SimulationState, resources, receipt: structuredClone(existing), replayed: true };
   if (candidate.atSeconds !== options.earliestPendingSeconds) throw new Error("cannot commit past an unsettled earlier world event");
-  resources = worldResources(source, definition, resources);
+  const physicalResources = worldResources(source, definition, Object.fromEntries(Object.entries(resources).filter(([key]) => !key.startsWith("random:"))));
+  resources = validateWorldRandomness(source, definition, physicalResources, candidate.programs, candidate.randomness);
   validateReads(resources, candidate.reads);
-  const canonical = createWorldEventCandidate(source, definition, resources, candidate.programs, { ...candidate.adjudication, calls: [] }, candidate.atSeconds);
+  const canonical = createWorldEventCandidate(source, definition, resources, candidate.programs, { ...candidate.adjudication, calls: [] }, candidate.atSeconds, candidate.randomness);
   if (contentHash(canonical) !== contentHash(candidate)) throw new Error("world candidate effects differ from the admitted program");
   const next = structuredClone(source) as SimulationState;
+  if (candidate.randomness) next.truth.rng = structuredClone(candidate.randomness.after);
   const progress = new Set<string>();
   // All programs in this component were jointly adjudicated. Resource competition is still checked against the evolving transaction clone.
   for (const operation of candidate.effects) {
@@ -185,9 +196,13 @@ export function commitWorldEvent(source: Readonly<SimulationState>, definition: 
   }
   next.truth.elapsedSeconds = candidate.atSeconds;
   const expired = new Set<string>();
-  for (const [conditionId, condition] of Object.entries(next.truth.conditions)) if (condition.expiresAtElapsedSeconds !== null && condition.expiresAtElapsedSeconds <= candidate.atSeconds) {
-    expired.add(`condition:${conditionId}`); delete next.truth.conditions[conditionId];
+  for (const conditionId of candidate.clockBoundary.conditions) {
+    const current = next.truth.conditions[conditionId];
+    if (!current || current.expiresAtElapsedSeconds !== null && current.expiresAtElapsedSeconds <= candidate.atSeconds) {
+      expired.add(`condition:${conditionId}`); delete next.truth.conditions[conditionId];
+    }
   }
+  for (const timer of candidate.clockBoundary.timers) next.truth.timers[timer.id]!.status = timer.status;
   next.revision += 1; next.step += 1;
   for (const [agentId, agent] of Object.entries(next.agents)) {
     if (next.truth.entities[agent.entityId]?.lifecycle !== "active") delete next.agents[agentId]; else agent.nextAction = null;
@@ -198,18 +213,27 @@ export function commitWorldEvent(source: Readonly<SimulationState>, definition: 
     return { id: runtimeId({ worldHash: next.worldHash, revision: source.revision, kind: "event", stage: "world-program", owner: bound.attempt.id, round: 0, ordinal }),
       step: next.step, description: renderWorldText(branch.description, bound.parameters), impact: "ordinary", ...worldProvenance(bound) };
   });
+  for (const [ordinal, timer] of candidate.clockBoundary.timers.entries()) {
+    const sourceTimer = source.truth.timers[timer.id]!;
+    events.push({ id: runtimeId({ worldHash: next.worldHash, revision: source.revision, kind: "event", stage: "world-timer",
+      owner: timer.id, round: 0, ordinal }), step: next.step, impact: "ordinary",
+      description: timer.status === "fired" ? sourceTimer.description : `Timer cancelled because its preconditions no longer hold: ${sourceTimer.description}`,
+      causes: structuredClone(sourceTimer.causes), assertions: [{ kind: "elapsed_seconds_compare", operator: "eq", value: candidate.atSeconds }] });
+  }
   next.truth.events.push(...events);
   validateSimulationState(next, false);
-  const updated = worldResources(next, definition, resources);
-  const writes = Object.keys(updated).filter(key => (key.includes(":") || key === "agentRoster") && contentHash(updated[key]?.value) !== contentHash(resources[key]?.value ?? null));
+  const updated = worldResources(next, definition, physicalResources);
+  const writes = Object.keys(updated).filter(key => (key.includes(":") || key === "agentRoster" || key === "rng") &&
+    contentHash(updated[key]?.value) !== contentHash(physicalResources[key]?.value ?? null));
   const declared = new Set(candidate.programs.flatMap(bound => bound.program.definition.writes.map(key => renderWorldText(key, bound.parameters))));
   for (const write of writes) {
     const collection = collectionFor[write.slice(0, write.indexOf(":"))];
-    if (!declared.has(write) && !declared.has(collection!) && !expired.has(write)) {
+    if (write !== "rng" && !candidate.clockBoundary.timers.some(timer => write === `timer:${timer.id}`) &&
+      !declared.has(write) && !declared.has(collection!) && !expired.has(write)) {
       throw new Error(`world program wrote an undeclared resource ${write}`);
     }
   }
-  const effectHash = contentHash({ operations: candidate.effects, deliveries: candidate.deliveries });
+  const effectHash = contentHash({ operations: candidate.effects, deliveries: candidate.deliveries, randomness: candidate.randomness?.hash ?? null });
   const programReceipts: ProgramReceipt[] = candidate.programs.flatMap((bound, ordinal) => {
     if (!bound.attempt.program) return [];
     const branch = bound.program.definition.branches.find(value => value.id === candidate.selections.find(value => value.attemptId === bound.attempt.id)!.branchId)!;

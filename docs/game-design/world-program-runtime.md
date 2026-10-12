@@ -18,9 +18,13 @@ Each semantic condition and candidate branch effect has a concrete yes/no/unknow
 
 The native gateway preserves raw probabilities. Observed hundredth-precision Jev responses can sum to 0.99; validation allows only the corresponding bounded rounding interval (at most 0.02), while requiring complete domains, finite probabilities, and a maximal-probability choice. It does not renormalize distributions or use them for world randomness.
 
-`WorldEventCandidate` binds programs, attempts, selected branches, materialized effects, deliveries, read versions/hashes, and full decision evidence. A selected branch must have all its conditions satisfied and its exact effects authorized. Missing or ambiguous branches remain uncommitted. Recorded answers must match the gateway's normalized output hash; changing an answer cannot reuse the original audit.
+`WorldEventCandidate` binds programs, attempts, selected branches, materialized effects, deliveries, clock boundaries, random commitments, read versions/hashes, and full decision evidence. A selected branch must have all its conditions satisfied and its exact effects authorized. Missing or ambiguous branches remain uncommitted. Recorded answers must match the gateway's normalized output hash; changing an answer cannot reuse the original audit.
 
 `commitWorldEvent` checks the earliest pending boundary, source hashes, actual read versions, canonical parameter ownership, decision bindings, causal assertions, references, write declarations, and quantity laws. It uses an isolated clone, so a later invalid operation rolls back the entire component. Physical time advances positively. `CommitReceipt` binds actual writes, events, and program receipts. Repeating a candidate with its durable receipt does not apply effects again. Identical no-op effects do not count as program progress.
+
+Random declarations bind exact authored distributions, purposes and complete branch stakes. `prepareWorldRandomPlan` freezes these inputs without extracting any RNG word or revealing the seed to the model. Jev must authorize applicability and stakes before code samples the seeded distribution. Result resources are read-only. The candidate retains before/after RNG, requests, results and authorization; commit and recovery reconstruct all of them. Unknown authorization does not draw. Model probabilities never enter this calculation.
+
+Canonical timers and condition expiry are hard time barriers even if the calling scheduler supplies a later boundary. Due timers fire or cancel according to their code-evaluated assertions; only firing timers wake their declared subjects. A timer-only boundary commits without model work. An empty event cannot advance time without an actual due boundary. World event judgments also see authored timers.
 
 ## Local scheduling
 
@@ -38,4 +42,4 @@ The native gateway preserves raw probabilities. Observed hundredth-precision Jev
 
 Tests exercise the actual ModelGateway with only HTTP replaced, compilation/repair, quantity transfers, stale reads, unrelated updates, source/evidence tampering, unknown, atomic competition failure, exact speech, no-op progress, and scheduler restart. A real-model diagnostic is available as `scripts/experiments/jev-world-smoke.ts`, consuming a successful private-program probe. It exercises the world kernel directly, not WorldHost persistence or a complete game.
 
-Random commitments, timer-only physical boundaries, production integration of observation/cognition, persistence, Inspector, schema upgrades, and full A/B/C qualification are subsequent integration work. Passing these foundational checks does not establish the acceptance targets.
+Production integration of programs, scheduling and observation/cognition, persistence, Inspector, schema upgrades, and full A/B/C qualification are subsequent work. Passing these foundational checks does not establish the acceptance targets.

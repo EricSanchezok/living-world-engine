@@ -15,6 +15,8 @@ import { WorldProgramLibrary } from "../library";
 import { projectEventPerception } from "../perception";
 import { applyEventBeliefs, reviseEventBeliefs } from "../cognition";
 import { worldProgramDuration } from "../adjudication";
+import { authorizeWorldRandomness, prepareWorldRandomPlan, validateWorldRandomness, worldRandomResources } from "../randomness";
+import { nextWorldClockBoundary } from "../clock-boundary";
 
 function fixture() {
   const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: createTestModelCatalog() });
@@ -24,7 +26,7 @@ function fixture() {
   const raw: WorldProgramDefinition = { version: 1, namespace: "world", id: "voluntary-gift", description: "Transfer the actor's offered stones to a nearby recipient.",
     sourceIds: ["world", "law:no-free-spirit-stones"], parameters: { actor: { kind: "entity", description: "Giver" }, recipient: { kind: "entity", description: "Recipient" }, amount: { kind: "number", description: "Offered amount" } },
     reads: ["entity:{actor}", "entity:{recipient}", "placement:{actor}", "placement:{recipient}", from, to], writes: ["quantities"],
-    timing: { profileId: "explicit-duration", basis: { kind: "explicit_duration", seconds: { kind: "literal", value: 5 }, sourceText: "5 seconds" } },
+    timing: { profileId: "explicit-duration", basis: { kind: "explicit_duration", seconds: { kind: "literal", value: 5 }, sourceText: "5 seconds" } }, random: [],
     predicates: [{ id: "authorized", description: "The actor voluntarily offers their own stones to this reachable recipient.", reads: ["placement:{actor}", "placement:{recipient}"], sourceIds: ["world"],
       test: { kind: "semantic", instructions: "Check the actual offer and reach. Do not fabricate acceptance or an exchange promised in return." }, unknown: "wait" }],
     branches: [{ id: "give", when: [{ predicateId: "authorized", equals: "yes" }], outcome: "succeeded", description: "A voluntary transfer occurs.",
@@ -206,5 +208,77 @@ describe("source-bound world event kernel", () => {
     expect(() => applyEventBeliefs(f.state, forged)).toThrow("differs from its decisions");
     f.state.agents.keeper!.belief.evidence.new!.description = "Different testimony.";
     expect(() => applyEventBeliefs(f.state, output.revision)).toThrow("private input");
+  });
+  it("freezes authored random stakes before drawing and replays the exact result through atomic commit", async () => {
+    const f = fixture();
+    f.definition.randomDistributions = [{ id: "gift-size", description: "An offered gift uses one or two stones with equal chance.",
+      steps: [{ id: "amount", count: 1, outcomes: [1, 2], aggregate: "first", when: null }] }];
+    f.sources = worldProgramSources(f.definition, f.state); f.resources = worldResources(f.state, f.definition);
+    f.raw.sourceIds.push("mechanics"); f.raw.random = [{ id: "gift", distributionId: "gift-size", purpose: "Choose the offered gift amount." }];
+    f.raw.reads.push("random:{actor}:gift");
+    f.raw.branches[0]!.effects[0]!.fields.amount = { $expression: { kind: "read", resource: "random:{actor}:gift", path: ["steps", "0", "aggregate"] } };
+    f.bound.attempt.intent = "Spend 5 seconds giving the keeper the authored randomly sized gift.";
+    f.bound.program = admitWorldProgram(f.raw, f.sources);
+    const plan = prepareWorldRandomPlan(f.state, f.definition, f.resources, [f.bound])!;
+    expect(plan.before).toEqual(f.state.truth.rng); expect(plan).not.toHaveProperty("results");
+    expect(JSON.stringify(plan.batch.state)).not.toContain('"rng"');
+    const configured = decisionTestProvider(), registry = await configured.registry.capture(); let ordinal = 0;
+    const scope = { profileId: "world-test", workloadId: "random-test", batchId: "random-test", modelRegistrySnapshotHash: registry.hash,
+      runtimeIdentity: { worldHash: f.state.worldHash, revision: 0 }, nextInvocation: () => ++ordinal };
+    const runtime = new DecisionRuntime(configured.gateway);
+    const { commitment } = await authorizeWorldRandomness(runtime, plan, scope);
+    expect(f.state.truth.rng).toEqual(plan.before); expect(commitment.after.draws).toBe(plan.before.draws + 1);
+    const expanded = validateWorldRandomness(f.state, f.definition, f.resources, [f.bound], commitment);
+    expect(expanded).toEqual(worldRandomResources(f.resources, commitment));
+    const judgments = await adjudicateWorldPrograms(runtime, [f.bound], expanded, f.sources, scope);
+    const candidate = createWorldEventCandidate(f.state, f.definition, expanded, [f.bound], judgments, 5, commitment);
+    const result = commitWorldEvent(f.state, f.definition, f.resources, candidate, { earliestPendingSeconds: 5, receipts: new Map() });
+    const amount = commitment.results[0]!.steps[0]!.aggregate as number;
+    expect(result.state.truth.quantities[quantityId(f.state.worldHash, "spirit-stone", "player")]!.amount).toBe(3 - amount);
+    expect(result.state.truth.rng).toEqual(commitment.after);
+    expect(result.receipt.writes).toContain("rng");
+    expect(commitWorldEvent(f.state, f.definition, f.resources, JSON.parse(JSON.stringify(candidate)),
+      { earliestPendingSeconds: 5, receipts: new Map() }).receipt).toEqual(result.receipt);
+    expect(commitWorldEvent(result.state, f.definition, result.resources, candidate,
+      { earliestPendingSeconds: 5, receipts: new Map([[candidate.id, result.receipt]]) }).state.truth.rng).toEqual(commitment.after);
+    const edited = structuredClone(commitment); edited.after.draws += 1;
+    edited.hash = contentHash(Object.fromEntries(Object.entries(edited).filter(([key]) => key !== "hash")));
+    expect(() => validateWorldRandomness(f.state, f.definition, f.resources, [f.bound], edited)).toThrow("does not replay");
+    const stale = structuredClone(f.state); stale.truth.rng = commitment.after;
+    expect(() => commitWorldEvent(stale, f.definition, f.resources, candidate, { earliestPendingSeconds: 5, receipts: new Map() })).toThrow("random commitment");
+    const refused = decisionTestProvider(body => ({ answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: "unknown" }])) }));
+    const refusedRegistry = await refused.registry.capture();
+    await expect(authorizeWorldRandomness(new DecisionRuntime(refused.gateway), plan,
+      { ...scope, modelRegistrySnapshotHash: refusedRegistry.hash })).rejects.toThrow("affirmative");
+    expect(f.state.truth.rng).toEqual(plan.before);
+    expect(() => createWorldEventCandidate(f.state, f.definition, expanded, [f.bound], judgments, 5)).toThrow("missing world random commitment");
+    expect(() => admitWorldProgram({ ...f.raw, reads: [...f.raw.reads, "rng"] }, f.sources)).toThrow("owned by the engine");
+    const changedStakes = structuredClone(f.bound); changedStakes.program.definition.branches[0]!.description = "Different stakes.";
+    expect(() => prepareWorldRandomPlan(f.state, f.definition, f.resources, [changedStakes])).toThrow("sources changed");
+  });
+  it("commits an authored timer without a model call and prevents crossing an earlier deadline", async () => {
+    const f = fixture();
+    f.state.truth.timers.deadline = { id: "deadline", description: "The gate deadline has arrived.", createdAtSeconds: 0, dueAtSeconds: 3,
+      status: "scheduled", wakeAgentIds: ["keeper"], causes: [{ kind: "law", id: f.state.lawIds[0]! }],
+      assertions: [{ kind: "elapsed_seconds_compare", operator: "eq", value: 3 }] };
+    f.resources = worldResources(f.state, f.definition);
+    expect(nextWorldClockBoundary(f.state)).toBe(3);
+    const { result } = await adjudicate(f);
+    expect(() => createWorldEventCandidate(f.state, f.definition, f.resources, [f.bound], result, 5)).toThrow("earlier canonical timer");
+    const candidate = createWorldEventCandidate(f.state, f.definition, f.resources, [], { records: [], evidence: [], calls: [] }, 3);
+    const committed = commitWorldEvent(f.state, f.definition, f.resources, candidate, { earliestPendingSeconds: 3, receipts: new Map() });
+    expect(committed.state.truth.timers.deadline!.status).toBe("fired");
+    expect(committed.state.truth.elapsedSeconds).toBe(3);
+    expect(committed.receipt.programReceipts).toEqual([]);
+    expect(candidate.clockBoundary.timers[0]!.wakeAgentIds).toEqual(["keeper"]);
+    expect(committed.state.truth.events.at(-1)!.description).toBe(f.state.truth.timers.deadline!.description);
+    expect(committed.state.truth.rng).toEqual(f.state.truth.rng);
+    expect(commitWorldEvent(f.state, f.definition, f.resources, JSON.parse(JSON.stringify(candidate)),
+      { earliestPendingSeconds: 3, receipts: new Map() }).receipt).toEqual(committed.receipt);
+    expect(() => createWorldEventCandidate(committed.state, f.definition, committed.resources, [], { records: [], evidence: [], calls: [] }, 4)).toThrow("actual clock boundary");
+    f.state.truth.timers.deadline!.assertions.push({ kind: "entity_lifecycle", entityId: "keeper", expected: "retired" });
+    f.resources = worldResources(f.state, f.definition, f.resources);
+    const cancelled = createWorldEventCandidate(f.state, f.definition, f.resources, [], { records: [], evidence: [], calls: [] }, 3);
+    expect(cancelled.clockBoundary.timers[0]).toMatchObject({ status: "cancelled", wakeAgentIds: [] });
   });
 });

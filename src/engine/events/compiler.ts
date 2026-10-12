@@ -12,6 +12,7 @@ import type { WorldRuntimeContract } from "../runtime/world-definition";
 import { worldProgramDuration, worldQuestionWork, type BoundWorldProgram, type WorldAttempt } from "./adjudication";
 import { captureReads, worldProgramSources } from "./resources";
 import { admitWorldProgram, bindWorldProgram, renderWorldText, worldProgramSchema } from "./world-program";
+import { prepareWorldRandomPlan } from "./randomness";
 
 export const worldCompilationSchema = z.object({ definition: worldProgramSchema, parameters: z.record(programKey, z.json()) }).strict();
 export interface WorldCompilationRequest extends ModelExecutionScope {
@@ -31,8 +32,8 @@ export async function compileWorldProgram(provider: StructuredModelProvider, req
     ? { resourceRef: id, hash: contentHash(source) } : source]));
   const context = frozenClone({ shared: { sources: sourceAddresses, sourceIds: Object.keys(sources),
     // Lossless view: atomic keys address the same values in these collections; do not send their contents twice.
-    resources: Object.fromEntries(Object.entries(request.resources).filter(([key]) => !key.includes(":"))),
-    resourceKeys: Object.keys(request.resources).sort(), entityIds: [...entities].sort(),
+    resources: Object.fromEntries(Object.entries(request.resources).filter(([key]) => !key.includes(":") && key !== "rng")),
+    resourceKeys: Object.keys(request.resources).filter(key => key !== "rng").sort(), entityIds: [...entities].sort(),
     resourceAddressing: { entity: "entities[id]", placement: "placements[id]", fact: "facts[id]", meter: "meters[id]", quantity: "quantities[id]",
       rating: "ratings[id]", condition: "conditions[id]", activity: "activities[id]", pool: "pools[id]", timer: "timers[id]", law: "laws entry matching id",
       temporal: "mechanics.temporalProfiles[id]" },
@@ -43,10 +44,11 @@ export async function compileWorldProgram(provider: StructuredModelProvider, req
     const program = admitWorldProgram(output.definition, sources); bindWorldProgram(program, output.parameters, entities);
     if (output.parameters.actor !== request.attempt.actorEntityId) throw new Error("world compiler changed the action owner");
     const bound: BoundWorldProgram = { program, parameters: output.parameters, attempt: request.attempt };
-    captureReads(request.resources, program.definition.reads.map(key => renderWorldText(key, bound.parameters)));
+    captureReads(request.resources, program.definition.reads.filter(key => !key.startsWith("random:")).map(key => renderWorldText(key, bound.parameters)));
     worldProgramDuration(bound, request.resources);
     // Build every branch before accepting it, so malformed effect shapes get the single targeted repair.
-    worldQuestionWork(bound, request.resources);
+    if (!program.definition.random.length) worldQuestionWork(bound, request.resources);
+    else prepareWorldRandomPlan(request.state, request.definition, request.resources, [bound]);
   };
   const system = loadPromptAsset("system/world-program-creation.md"), userPrompt = loadPromptAsset("user/world-program-creation.md");
   const promptVersion = `world-program-creation-${contentHash({ system, userPrompt, contract: 1, repair: LOGICAL_CANDIDATE_REPAIR_VERSION, layout: "logical-tail-v1" })}`;

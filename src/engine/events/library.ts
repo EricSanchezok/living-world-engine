@@ -41,7 +41,7 @@ export class WorldProgramLibrary {
     const program = admitWorldProgram(entry.definition, sources);
     if (program.hash !== entry.programHash) return null;
     bindWorldProgram(program, entry.parameters, entities);
-    captureReads(resources, program.definition.reads.map(key => renderWorldText(key, entry.parameters)));
+    captureReads(resources, program.definition.reads.filter(key => !key.startsWith("random:")).map(key => renderWorldText(key, entry.parameters)));
     return { program, parameters: structuredClone(entry.parameters), attempt: structuredClone(attempt) };
   }
   snapshot() {

@@ -54,7 +54,7 @@ export function worldProgramTiming(bound: BoundWorldProgram, resources: ProgramR
   }
   const profile = resources[`temporal:${timing.profileId}`]?.value as unknown as TemporalProfileDefinition;
   if (!profile || profile.id !== timing.profileId) throw new Error("world timing requires an authored temporal profile");
-  return materializeTemporalPlan({ id: `program-time:${bound.attempt.id}`, actionId: bound.attempt.id,
+  return materializeTemporalPlan({ id: `rt:temporal-plan:${contentHash({ actionId: bound.attempt.id, programHash: bound.program.hash })}`, actionId: bound.attempt.id,
     actorId: bound.attempt.actorId, rawText: bound.attempt.intent, startsAtSeconds: bound.attempt.startedAtSeconds,
     profiles: { [profile.id]: profile }, draft: { profileId: timing.profileId, basis,
       description: bound.program.definition.description, continuationAssertions: worldProvenance(bound).assertions,
@@ -82,8 +82,8 @@ export function mechanicalWorldCondition(bound: BoundWorldProgram, id: string, r
 interface QuestionWork { bound: BoundWorldProgram; id: string; instructions: string; reads: string[]; payload: JsonValue; version: string }
 
 /** Every world judgment sees the actual participants and containment chain, regardless of generated read declarations. */
-function physicalReadKeys(component: readonly WorldAttempt[], resources: ProgramResources): string[] {
-  const entities = new Set<string>(), keys = new Set<string>(["laws"]);
+export function physicalReadKeys(component: readonly WorldAttempt[], resources: ProgramResources): string[] {
+  const entities = new Set<string>(), keys = new Set<string>(["laws", "timers"]);
   const visit = (id: string) => {
     if (entities.has(id)) return; entities.add(id);
     keys.add(`entity:${id}`); keys.add(`placement:${id}`);
