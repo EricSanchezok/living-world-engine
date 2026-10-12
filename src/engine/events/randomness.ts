@@ -68,12 +68,16 @@ function verifyAuthorization(plan: WorldRandomPlan, authorization: DecisionResul
 
 /** No randomness is extracted before this source-bound authorization has passed. */
 export async function authorizeWorldRandomness(runtime: DecisionRuntime, plan: WorldRandomPlan, scope: ProgramDecisionScope):
-Promise<{ commitment: WorldRandomCommitment; call: DecisionUse }> {
+Promise<{ commitment: WorldRandomCommitment | null; call: DecisionUse; disposition: "authorized" | "wait" | "expand" }> {
   const call = await runtime.decide({ ...scope, batch: plan.batch, subjectId: "world", modelInvocation: scope.nextInvocation() });
+  validateWorldEvidence({ batch: plan.batch, result: call.result, hash: contentHash({ batch: plan.batch, result: call.result }) });
+  if (Object.values(call.result.answers).some(answer => answer.choice !== "yes")) {
+    return { commitment: null, call, disposition: Object.values(call.result.answers).some(answer => answer.choice === "no") ? "expand" : "wait" };
+  }
   verifyAuthorization(plan, call.result);
   const outcome = resolveDiscreteRandomRequests(plan.before, plan.requests);
   const body = { version: 1 as const, plan, authorization: call.result, after: outcome.rng, results: outcome.results };
-  return { commitment: frozenClone({ ...body, hash: contentHash(body) }), call };
+  return { commitment: frozenClone({ ...body, hash: contentHash(body) }), call, disposition: "authorized" };
 }
 
 /** Reconstruct requests, sources, inputs and seeded results during commit/recovery; never ask a model to roll. */

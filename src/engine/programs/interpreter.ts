@@ -111,6 +111,10 @@ export class ProgramInterpreter {
       goals: Object.fromEntries(this.goalEvidence), expansionReason: this.expansion };
   }
   get parameterValues() { return structuredClone(this.parameters); }
+  get position() {
+    return this.leaves().map(leaf => ({ nodeId: leaf.nodeId, kind: this.nodes.get(leaf.nodeId)!.kind,
+      workId: this.workId(leaf), issued: leaf.issued !== null, sinceSeconds: leaf.atSeconds }));
+  }
 
   subscriptions(resources: ProgramResources, atSeconds: number) {
     const resourceKeys = new Set<string>(); const receiptWorkIds: string[] = []; const deadlines: number[] = [];

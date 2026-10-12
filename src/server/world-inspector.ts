@@ -1,3 +1,4 @@
+import { inspectDecisionPrograms } from "./world-inspector-programs";
 import type {
   ActionCompilationReferenceAudit,
   CausalRef,
@@ -1488,6 +1489,7 @@ export function buildWorldInspectorStepDetail(
     summary: projection.summary,
     committed: { ...structuredClone(committed), modelAudits: audits },
     interaction: interactionEvidenceForStep(runtimeEvents, committed),
+    ...(committed.decisionEvent ? { programs: inspectDecisionPrograms(before, committed) } : {}),
     before: snapshot(before),
     after: snapshot(after),
     runtimeEvents: executionEvents.map(summarizeRuntimeEvent),

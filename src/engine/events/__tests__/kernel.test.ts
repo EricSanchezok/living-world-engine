@@ -262,6 +262,7 @@ describe("source-bound world event kernel", () => {
       runtimeIdentity: { worldHash: f.state.worldHash, revision: 0 }, nextInvocation: () => ++ordinal };
     const runtime = new DecisionRuntime(configured.gateway);
     const { commitment } = await authorizeWorldRandomness(runtime, plan, scope);
+    if (!commitment) throw new Error("test random authorization was deferred");
     expect(f.state.truth.rng).toEqual(plan.before); expect(commitment.after.draws).toBe(plan.before.draws + 1);
     const expanded = validateWorldRandomness(f.state, f.definition, f.resources, [f.bound], commitment);
     expect(expanded).toEqual(worldRandomResources(f.resources, commitment));
@@ -283,8 +284,10 @@ describe("source-bound world event kernel", () => {
     expect(() => commitWorldEvent(stale, f.definition, f.resources, candidate, { earliestPendingSeconds: 5, receipts: new Map() })).toThrow("random commitment");
     const refused = decisionTestProvider(body => ({ answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: "unknown" }])) }));
     const refusedRegistry = await refused.registry.capture();
-    await expect(authorizeWorldRandomness(new DecisionRuntime(refused.gateway), plan,
-      { ...scope, modelRegistrySnapshotHash: refusedRegistry.hash })).rejects.toThrow("affirmative");
+    const deferred = await authorizeWorldRandomness(new DecisionRuntime(refused.gateway), plan,
+      { ...scope, modelRegistrySnapshotHash: refusedRegistry.hash });
+    expect(deferred.commitment).toBeNull(); expect(deferred.disposition).toBe("wait");
+    expect(deferred.call.result.answers.q0!.choice).toBe("unknown");
     expect(f.state.truth.rng).toEqual(plan.before);
     expect(() => createWorldEventCandidate(f.state, f.definition, expanded, [f.bound], judgments, 5)).toThrow("missing world random commitment");
     expect(() => admitWorldProgram({ ...f.raw, reads: [...f.raw.reads, "rng"] }, f.sources)).toThrow("owned by the engine");

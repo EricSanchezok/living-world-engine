@@ -21,6 +21,7 @@ export interface ProgramCompilationRequest extends ModelExecutionScope {
   goalIds: string[];
   entityIds: string[];
   invocationBase: number;
+  priorProgram?: JsonValue;
 }
 export type ProgramCompilationResult =
   | { status: "ready"; sourceHash: string; program: AdmittedProgram; parameters: Record<string, JsonValue>; audit: ModelExecutionAudit }
@@ -35,7 +36,7 @@ export async function compileAgentProgram(provider: StructuredModelProvider, inp
   const context = frozenClone({ ownerId: input.ownerId, goalId: input.goalId, intent: input.intent, reason: input.reason,
     perspective: input.perspective, resources: input.resources, resourceKeys: Object.keys(input.resources).sort(),
     sources: input.sources, sourceIds: Object.keys(input.sources).sort(), goalIds: input.goalIds, entityIds: input.entityIds,
-    task: { constraints: [] }, repair: null });
+    priorProgram: input.priorProgram ?? null, task: { constraints: [] }, repair: null });
   assertJsonValue(context, "program compilation source");
   const sourceHash = contentHash(context);
   const admission: ProgramAdmission = { ownerId: input.ownerId, sources: new Map(Object.entries(input.sources).map(([id, source]) => [id, contentHash(source)])),

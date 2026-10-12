@@ -1,0 +1,240 @@
+rule_packages:
+  - id: core-resolution
+    version: 2.0.0
+    config: {}
+meters:
+  - id: health
+    name: 生命
+    min: 0
+    max: 20
+    thresholds:
+      - id: death-at-zero
+        when:
+          operator: lte
+          value: 0
+        effects:
+          - kind: set_lifecycle
+            lifecycle: retired
+quantities:
+  - id: energy-cell
+    name: 能量电池
+    unit: 个
+    production_law_ids: []
+    consumption_law_ids: []
+  - id: seal-kit
+    name: 密封组件
+    unit: 个
+    production_law_ids: []
+    consumption_law_ids:
+      - repair-materials
+  - id: coolant
+    name: 冷却剂
+    unit: 升
+    production_law_ids: []
+    consumption_law_ids:
+      - repair-materials
+ratings:
+  - id: resolve
+    name: 决心
+    min: -5
+    max: 10
+impact_profiles:
+  - id: harm
+    name: 伤害
+    meter_definition_id: health
+    direction: decrease
+    amounts:
+      none: 0
+      minor: 2
+      standard: 5
+      major: 10
+      decisive: 20
+  - id: recovery
+    name: 恢复
+    meter_definition_id: health
+    direction: increase
+    amounts:
+      none: 0
+      minor: 2
+      standard: 5
+      major: 10
+      decisive: 20
+duration_profiles:
+  - id: brief
+    name: 短暂
+    kind: uses
+    uses: 1
+  - id: ongoing
+    name: 持续
+    kind: until_cleared
+activity_resources:
+  - id: foreground
+    name: 前台行动
+    capacity: 1
+shared_activity_resources:
+  - id: pump-console
+    name: 冷却泵操作面板
+    unit: 席
+    default_claim_amount: 1
+    allow_explicit_amount: false
+    contention: queue
+    paused_retention: release
+temporal_profiles:
+  - id: brief-action
+    name: 一秒短动作
+    kind: fixed
+    duration_seconds: 1
+    checkpoint_seconds: 1
+    selection:
+      semantic_tags:
+        - short
+      evidence_requirement: none
+    interruptible: true
+    resource_claims:
+      - resource_id: foreground
+        amount: 1
+  - id: explicit-duration
+    name: 明确时长行动
+    kind: fixed
+    duration_seconds: 60
+    checkpoint_seconds: 60
+    selection:
+      semantic_tags:
+        - explicit-duration
+      evidence_requirement: explicit_duration
+    interruptible: true
+    resource_claims:
+      - resource_id: foreground
+        amount: 1
+  - id: measured-travel
+    name: 可量化移动
+    kind: rate
+    unit: km
+    unit_aliases:
+      - 公里
+      - kilometer
+      - kilometers
+    units_per_period: 5
+    period_seconds: 3600
+    checkpoint_units: 1
+    selection:
+      semantic_tags:
+        - travel
+      evidence_requirement: explicit_profile_quantity
+    interruptible: true
+    resource_claims:
+      - resource_id: foreground
+        amount: 1
+  - id: staged-treatment
+    name: 分阶段处理
+    kind: staged
+    stages:
+      - id: assess
+        name: 检查
+        duration_seconds: 60
+        checkpoint_seconds: 60
+      - id: treat
+        name: 处理
+        duration_seconds: 300
+        checkpoint_seconds: 120
+    selection:
+      semantic_tags:
+        - staged-treatment
+      evidence_requirement: none
+    interruptible: true
+    resource_claims:
+      - resource_id: foreground
+        amount: 1
+  - id: wait-condition
+    name: 等待条件
+    kind: conditional
+    check_every_seconds: 60
+    selection:
+      semantic_tags:
+        - conditional-wait
+      evidence_requirement: none
+    interruptible: true
+    resource_claims:
+      - resource_id: foreground
+        amount: 1
+  - id: ongoing-action
+    name: 持续行动
+    kind: ongoing
+    checkpoint_seconds: 60
+    selection:
+      semantic_tags:
+        - open-ended
+        - reconnaissance
+      evidence_requirement: none
+    interruptible: true
+    resource_claims:
+      - resource_id: foreground
+        amount: 1
+temporal_profile_coverage:
+  required_semantic_tags:
+    - short
+    - explicit-duration
+    - travel
+    - staged-treatment
+    - conditional-wait
+    - open-ended
+    - reconnaissance
+temporal_calibrations:
+  - id: station-speech
+    situation: 说出一句请求或答复。
+    profile_id: brief-action
+    explanation: 一次可实际听见的短句；不包含对方的未来回应。
+  - id: station-repair
+    situation: 按规则用 30 秒更换密封组件。
+    profile_id: explicit-duration
+    explanation: 明确耗时与实际消耗都必须满足。
+  - id: station-test
+    situation: 按规则用 10 秒做一次压力测试。
+    profile_id: explicit-duration
+    explanation: 测试产生单独的物理回执，不能与维修完成混同。
+world_timers:
+  - id: repair-window-end
+    description: 冷却泵安全检修窗口关闭，核查实际维修与压力状态。
+    due_at_seconds: 120
+    wake_agent_ids:
+      - engineer
+      - quartermaster
+      - inspector
+    law_id: station-clock
+condition_profiles:
+  - id: obscured-vision
+    name: 视线受阻
+    stacking_key: obscured-vision
+    default_duration_profile_id: brief
+    recurring_impact_profile_id: null
+    recovery: 清理眼睛或离开干扰源。
+    thresholds: []
+entity_mechanics_profiles:
+  - id: station-technician
+    name: 空间站技术员
+    meters:
+      - definition_id: health
+        current: 20
+    quantities: []
+    ratings:
+      - definition_id: resolve
+        value: 2
+adjudication_calibrations:
+  - id: station-transfer
+    situation: 把自己持有的物资交给同舱的另一人。
+    difficulty: automatic
+    risk: safe
+    effect: standard
+    explanation: 没有障碍的自愿交付不需要战斗骰；资源数量由事务内核检查。
+random_distributions:
+  - id: pressure-test
+    description: 已密封冷却泵的一次压力测试，固定四个等概率槽，三个稳定槽和一个不稳定槽。
+    steps:
+      - id: reading
+        count: 1
+        outcomes:
+          - stable
+          - stable
+          - stable
+          - unstable
+        aggregate: first

@@ -10,6 +10,19 @@ import { contentHash } from "../../models/model-audit";
 
 
 describe("native event runtime through SimulationEngine", () => {
+  it("exposes every ordered debug stage around native model work and canonical validation", async () => {
+    const f = nativeProgramFixture(); await f.configured.registry.capture();
+    const engine = new SimulationEngine(f.world, new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig));
+    await engine.bootstrapAgents();
+    const entered: number[] = [], completed: number[] = [];
+    await engine.step(f.roster, { expectedRevision: 0, trigger: "manual", externalActions: [] }, {
+      workloadId: "native-stages", batchId: "native-stages", stageHooks: { enabled: true,
+        before: async stage => { entered.push(stage.index); }, after: async stage => { completed.push(stage.index); },
+        failed: () => { throw new Error("unexpected stage failure"); } },
+    });
+    expect(entered).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+    expect(completed).toEqual(entered);
+  });
   it("registers a pinned algorithm, commits actual speech, and replays/restarts without duplicate effects", async () => {
     const f = nativeProgramFixture(); await f.configured.registry.capture();
     const registry = registerBuiltinAlgorithms();

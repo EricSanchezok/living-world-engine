@@ -1,3 +1,4 @@
+import { DECISION_MODEL_PRICES } from "../../models/model-cost";
 import { mkdirSync, openSync, closeSync, unlinkSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
@@ -14,16 +15,11 @@ export const JEV_BUDGET_POLICY: ExperimentBudgetPolicy = {
   maximumNanoCny: 100_000_000_000 - Math.ceil(0.035729814 * 8 * 1_000_000_000),
   inputMissNanoCnyPerToken: 2400, inputHitNanoCnyPerToken: 48, outputNanoCnyPerToken: 9600,
   maxConcurrentRequests: 16, maxHttpRequests: { trajectory: 10000 }, maxKnownTokens: { trajectory: 1_000_000_000 },
-  prices: {
-    jev: { accountId: "typesafe-api", modelId: "jev-1.13.0", inputMissNanoCnyPerToken: 336, inputHitNanoCnyPerToken: 336,
-      outputNanoCnyPerToken: 0, pricingCheckedAt: "2026-10-12", pricingSource: "https://docs.typesafe.ai/models" },
-    deepseek: { accountId: "deepseek-api", modelId: "deepseek-flash", inputMissNanoCnyPerToken: 2400, inputHitNanoCnyPerToken: 48,
-      outputNanoCnyPerToken: 9600, pricingCheckedAt: "2026-10-12", pricingSource: "https://api-docs.deepseek.com/quick_start/pricing/" },
-  },
+  prices: DECISION_MODEL_PRICES,
 };
 
 /** One shared append-only budget, with an exclusive process lease before any paid request. */
-export function createJevLiveRuntime(root = path.resolve(".livingworld-benchmarks/jev-engine")) {
+export function createJevLiveRuntime(root = path.resolve(".livingworld-benchmarks/jev-engine"), options: { includeBaselineProfiles?: boolean } = {}) {
   mkdirSync(root, { recursive: true });
   const lock = path.join(root, "budget.lock");
   const descriptor = openSync(lock, "wx", 0o600);
@@ -33,7 +29,8 @@ export function createJevLiveRuntime(root = path.resolve(".livingworld-benchmark
     const source = loadModelCatalog();
     const catalog = parseModelCatalog({ schema_version: 3, scheduler: source.scheduler, registry: source.registry,
       accounts: Object.fromEntries(["typesafe-api", "deepseek-api"].map(id => [id, source.account(id)])),
-      profiles: Object.fromEntries(["decision-jev", "decision-deepseek", "creation-deepseek"].map(id => [id, source.profile(id)])),
+      profiles: Object.fromEntries(["decision-jev", "decision-deepseek", "creation-deepseek",
+        ...(options.includeBaselineProfiles ? ["truth-deepseek", "agent-deepseek"] : [])].map(id => [id, source.profile(id)])),
       model_overrides: { typesafe: source.modelOverrides.typesafe, deepseek: source.modelOverrides.deepseek } });
     const registry = new ModelRegistry(catalog, root);
     const observer = new RecordingRuntimeObserver({ mode: "full" });

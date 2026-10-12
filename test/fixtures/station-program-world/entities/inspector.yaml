@@ -1,0 +1,83 @@
+id: inspector
+kind: person
+name: 检查员乔伊
+description: 检查员乔伊，在检修舱值班。
+placement: service-bay
+facts: []
+meters:
+  - id: health:inspector
+    definition_id: health
+    current: 20
+quantities: []
+ratings:
+  - id: resolve:inspector
+    definition_id: resolve
+    value: 2
+agent:
+  id: inspector
+  model_profiles:
+    bootstrap: agent-deepseek
+    mind: agent-deepseek
+    reaction: agent-deepseek
+  character:
+    persona:
+      summary: 掌握校验码 ORBIT-7，愿意通过实际讲话把它告诉需要做测试的工程师。坚持独立验收，不在泵尚未密封或未通过测试时宣布完成。
+      voice: 准确简洁，明确区分请求、承诺与实际结果。
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: independent-certification
+        description: 向工程师实际提供启动压力测试所需的信息，并在实际获知密封已完成、压力测试稳定后认证检修完成。
+        target_ids:
+          - repair
+          - pump
+        priority: 1
+        progress: 0
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 我
+        description: 检查员乔伊
+        status: observed
+      - id: repair
+        name: 工程师林岚
+        description: 当前同舱的已知对象。
+        status: observed
+      - id: supply
+        name: 物资员杜衡
+        description: 当前同舱的已知对象。
+        status: observed
+      - id: pump
+        name: 冷却泵
+        description: 当前同舱的已知对象。
+        status: observed
+      - id: bay
+        name: 检修舱
+        description: 当前同舱的已知对象。
+        status: observed
+    evidence:
+      - id: assigned-test-code
+        kind: observation
+        description: 个人值班记录上的压力测试校验码为 ORBIT-7。
+        sourceId: self
+        step: 0
+    claims: []
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - inspector
+      - local_entity_id: repair
+        canonical_entity_ids:
+          - engineer
+      - local_entity_id: supply
+        canonical_entity_ids:
+          - quartermaster
+      - local_entity_id: pump
+        canonical_entity_ids:
+          - cooling-pump
+      - local_entity_id: bay
+        canonical_entity_ids:
+          - service-bay

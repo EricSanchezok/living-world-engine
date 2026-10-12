@@ -60,7 +60,12 @@ describe("decision programs through the persistent WorldHost", () => {
       expect(saved.state.history[0]!.observations.some(observation => observation.observerId === "player")).toBe(true);
       expect(readDecisionEventState(saved.state.executionState!, saved.state).pending).toEqual([]);
       expect(replaySimulationState(saved.state)).toEqual(saved.state);
-      expect(host.inspectorStep(id, 1).committed.decisionEvent).toBeDefined();
+      const inspected = host.inspectorStep(id, 1);
+      expect(inspected.committed.decisionEvent).toBeDefined();
+      expect(inspected.programs!.programs[0]).toMatchObject({ ownerId: "keeper", status: "ended",
+        completion: { executionEnded: true, goals: {} } });
+      expect(inspected.programs!.decisions.length).toBeGreaterThan(0);
+      expect(inspected.programs!.cost.unknownInvocations).toBeGreaterThan(0);
       const calls = fixture.configured.transport.mock.calls.length;
       database.close();
       database = new LocalDatabase(filename, { heartbeat: false });

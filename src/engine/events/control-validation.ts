@@ -49,7 +49,7 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
         throw new Error("reused decision has no previous physical invocation");
       }
     }
-    if (use.batch.programHash === contentHash("program-goal-selection-v1")) {
+    if (use.batch.programHash === contentHash("program-goal-selection-v2")) {
       if (use.batch.view.kind !== "agent" || !source.agents[use.batch.view.agentId]) throw new Error("goal choice has no authorized owner");
       const agent = source.agents[use.batch.view.agentId]!, input = use.batch.state as unknown as { perspective: unknown };
       if (!equal(input.perspective, projectAgentPerspective(source as SimulationState, agent))) throw new Error("goal selection used a foreign perspective");
@@ -71,6 +71,13 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
     const perspective = projectAgentPerspective(source as SimulationState, agent);
     const resources = privateProgramResources(perspective, before.agents[agent.id]?.resources);
     if (!equal(owner.resources, resources)) throw new Error("private resource projection differs from the owner's knowledge");
+    const planningInput = contentHash(Object.fromEntries(Object.entries(resources.resources).filter(([key]) => key !== "clock")
+      .map(([key, value]) => [key, value.value])));
+    const planned = decisions.filter(use => use.batch.programHash === contentHash("program-goal-selection-v2") &&
+      use.batch.view.kind === "agent" && use.batch.view.agentId === agent.id && use.result.answers.goal?.choice !== "wait").length;
+    const priorPlanning = before.agents[agent.id]?.planning;
+    if (planned && (owner.planning?.inputHash !== planningInput || owner.planning.attempts !==
+      (priorPlanning?.inputHash === planningInput ? priorPlanning.attempts : 0) + planned)) throw new Error("private expansion budget differs from actual planning work");
     const oldInstances = before.agents[agent.id]?.instances ?? [];
     if (oldInstances.some(old => !owner.instances.some(value => value.snapshot.instanceId === old.snapshot.instanceId))) throw new Error("program history was deleted");
     for (const entry of owner.instances) {
@@ -87,6 +94,7 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
           resources: new Set(Object.keys(resources.resources)), goalIds: new Set(Object.keys(agent.character.goals)) });
         if (!equal(admitted, definition.program) || !equal(entry.entityIds, privateProgramEntityIds(perspective)) ||
           entry.snapshot.startedAtSeconds !== source.truth.elapsedSeconds ||
+          !before.privateLibrary.entries.some(prior => equal(prior, definition) && equal(prior.parameters, entry.snapshot.parameters)) &&
           !creationEvidence(audits, agent.id, { definition: admitted.definition, parameters: entry.snapshot.parameters }, after.models.creation, definition.creationInvocationIds)) {
           throw new Error("new private program has no authorized creation evidence");
         }

@@ -32,6 +32,58 @@ function fixture() {
   return { world, definition, roster, options: { maxDependencyRounds: 32, nextInvocation } };
 }
 describe("durable private program control", () => {
+  it("revises an unknown plan once, then stops same-input expansion across new instance IDs", async () => {
+    const f = fixture();
+    f.definition.predicates[0] = { ...f.definition.predicates[0]!, unknown: "expand",
+      test: { kind: "semantic", instructions: "Is this course of action supported by the available evidence?" } };
+    let created = 0;
+    const configured = decisionTestProvider(body => {
+      const wire = JSON.stringify(body);
+      if (wire.includes("Compile a reusable private behavior program")) {
+        created += 1;
+        if (created > 1) expect(wire).toContain("priorProgram");
+        return { definition: { ...f.definition, id: `plan-${created}` }, parameters: { recipient: "traveler" } };
+      }
+      if (wire.includes("Choose which actual active goal")) return { answers: { goal: { choice: "g0" } } };
+      return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: "unknown" }])) };
+    });
+    const registry = await configured.registry.capture(), source = f.world.initialState;
+    const initial = initialDecisionEventState(source, { decision: "world-test", creation: "world-test", fallback: "world-test" }, configured.gateway.catalog.hash, registry.hash);
+    const scope = { workloadId: "expansion", batchId: "expansion" };
+    const first = await advanceProgramControls(configured.gateway, source, initial, f.roster, scope, f.options);
+    expect(first.control.scheduler.pending.some(event => event.kind === "control" && event.subjectId === "keeper")).toBe(true);
+    const second = await advanceProgramControls(configured.gateway, source, first.control, f.roster, scope, f.options);
+    expect(second.control.agents.keeper!.planning).toMatchObject({ attempts: 2, waitReason: "expansion-budget-exhausted" });
+    const calls = configured.transport.mock.calls.length;
+    const third = await advanceProgramControls(configured.gateway, source, second.control, f.roster, scope, f.options);
+    expect(created).toBe(2); expect(configured.transport).toHaveBeenCalledTimes(calls);
+    expect(third.control.pending).toEqual([]);
+    expect(third.control.failures.some(failure => failure.reason.includes("one targeted plan revision"))).toBe(true);
+  });
+  it("selects a previously admitted private program without generating the definition again", async () => {
+    const f = fixture();
+    f.definition.nodes[0] = { ...f.definition.nodes[0]!, speech: { kind: "authored", text: "Why are you here?" } } as ProgramDefinition["nodes"][number];
+    let created = 0, reuse = false;
+    const configured = decisionTestProvider(body => {
+      const wire = JSON.stringify(body);
+      if (wire.includes("Compile a reusable private behavior program")) {
+        created += 1; return { definition: f.definition, parameters: { recipient: "traveler" } };
+      }
+      if (wire.includes("Choose which actual active goal")) return { answers: { goal: { choice: reuse ? "p0" : "g0" } } };
+      return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: "unknown" }])) };
+    });
+    const registry = await configured.registry.capture(), source = f.world.initialState;
+    const initial = initialDecisionEventState(source, { decision: "world-test", creation: "world-test", fallback: "world-test" }, configured.gateway.catalog.hash, registry.hash);
+    const scope = { workloadId: "reuse", batchId: "reuse" };
+    const first = await advanceProgramControls(configured.gateway, source, initial, f.roster, scope, f.options);
+    const paused = await advanceProgramControls(configured.gateway, source, first.control, { ...f.roster,
+      keeper: { kind: "idle", agentId: "keeper", reason: "explicit" } }, scope, f.options);
+    reuse = true;
+    const resumed = await advanceProgramControls(configured.gateway, source, paused.control, f.roster, scope, f.options);
+    expect(created).toBe(1); expect(resumed.modelAudits.every(audit => audit.role === "decision")).toBe(true);
+    expect(resumed.control.agents.keeper!.instances).toHaveLength(2);
+    expect(resumed.control.pending).toHaveLength(1);
+  });
   it("uses the actual private goal, authors speech before issuing, and restores pending work without dispatching twice", async () => {
     const f = fixture();
     const configured = decisionTestProvider(body => {

@@ -7,6 +7,7 @@ import {
   WorldQuiescentError, StepPreparationInvalidatedError, type BootstrapInput, type ExecutionContext, type ExternalReactionInput, type WorldExecutionAlgorithm,
   type WorldStepInput, type WorldStepPreparation, type PolicyBinding,
 } from "../runtime/execution";
+import { executionStage } from "../runtime/stages";
 import type { JsonObject } from "../runtime/json";
 import { toWorldRuntimeContract } from "../runtime/world-definition";
 import { adjudicateWorldPrograms } from "./adjudication";
@@ -71,6 +72,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     if (!source.executionState) throw new Error("program runtime must bootstrap before advancing");
     const initial = readDecisionEventState(source.executionState, source), allocator = invocationAllocator(initial, source.revision);
     const authority = toWorldRuntimeContract(input.definition);
+    await context.stages?.before(executionStage("action-compilation"));
     const controlled = await advanceProgramControls(this.provider, source, initial, input.policyRoster, context.modelScope, {
       maxDependencyRounds: this.config.maxDependencyRounds, nextInvocation: allocator.next,
     });
@@ -95,33 +97,48 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
       if (authored.status === "ready") controlled.control.pending.push({ attempt: authored.attempt, bound: null, atSeconds: null, dependencyHash: "", failure: null });
       else controlled.control.failures.push({ ownerId: action.agentId, phase: "utterance", inputHash: contentHash(action), reason: authored.reason, recoverable: true });
     }
+    await context.stages?.after(executionStage("action-compilation"));
+    await context.stages?.before(executionStage("grounding-resource-admission"));
     const prepared = await prepareProgramWorldWork(this.provider, authority, source, controlled.control, context.modelScope, allocator.next);
+    await context.stages?.after(executionStage("grounding-resource-admission"));
+    await context.stages?.before(executionStage("reaction-perception"));
     const control = prepared.control, decisions = [...controlled.decisions], audits = [...controlled.modelAudits, ...prepared.modelAudits];
     const scheduler = new EventScheduler(source.truth.elapsedSeconds, control.scheduler);
     const runtime = new DecisionRuntime(this.provider, control.decisionCache ?? undefined);
-    const scoped = { ...context.modelScope, modelRegistrySnapshotHash: control.registryHash,
+    const scoped = () => ({ ...context.modelScope, modelRegistrySnapshotHash: control.registryHash,
       runtimeIdentity: { worldHash: source.worldHash, revision: source.revision }, profileId: control.models.decision,
-      fallbackProfileId: control.models.fallback, nextInvocation: () => allocator.next("world") };
+      fallbackProfileId: control.models.fallback, nextInvocation: () => allocator.next("world") });
     const physical = structuredClone(source);
     physical.executionState = { producerHash: this.manifest.hash, data: control as unknown as JsonObject };
+    await context.stages?.after(executionStage("reaction-perception"));
+    await context.stages?.before(executionStage("temporal-dependency"));
     const times = [scheduler.nextTime, nextWorldClockBoundary(physical)].filter((value): value is number => value !== null);
     const atSeconds = times.length ? Math.min(...times) : null;
     let event: WorldEventCandidate | null = null;
+    const programs = atSeconds !== null && atSeconds > source.truth.elapsedSeconds
+      ? control.pending.filter(pending => pending.atSeconds === atSeconds && !pending.failure && pending.bound).map(pending => pending.bound!) : [];
+    const randomPlan = prepareWorldRandomPlan(physical, authority, control.worldResources, programs);
+    let randomness: WorldRandomCommitment | null = null;
+    let randomDeferral: string | null = null;
+    if (randomPlan) {
+      const authorized = await authorizeWorldRandomness(runtime, randomPlan, scoped());
+      randomness = authorized.commitment; decisions.push(authorized.call);
+      if (!authorized.call.reused) audits.push(authorized.call.result.audit);
+      if (!randomness) randomDeferral = `world rule awaits evidence or expansion: random applicability requires ${authorized.disposition}`;
+    }
+    await context.stages?.after(executionStage("temporal-dependency"));
+    await context.stages?.before(executionStage("truth-resolution"));
+    const resources = randomness ? worldRandomResources(control.worldResources, randomness) : control.worldResources;
+    const adjudication = programs.length && !randomDeferral ? await adjudicateWorldPrograms(runtime, programs, resources, worldProgramSources(authority, source), scoped())
+      : { records: [], evidence: [], calls: [] };
+    decisions.push(...adjudication.calls); audits.push(...adjudication.calls.filter(call => !call.reused).map(call => call.result.audit));
+    await context.stages?.after(executionStage("truth-resolution"));
+    await context.stages?.before(executionStage("transition-causal-verification"));
     if (atSeconds !== null && atSeconds > source.truth.elapsedSeconds) {
-      const programs = control.pending.filter(pending => pending.atSeconds === atSeconds && !pending.failure && pending.bound).map(pending => pending.bound!);
-      const randomPlan = prepareWorldRandomPlan(physical, authority, control.worldResources, programs);
-      let randomness: WorldRandomCommitment | null = null;
-      if (randomPlan) {
-        const authorized = await authorizeWorldRandomness(runtime, randomPlan, scoped);
-        randomness = authorized.commitment; decisions.push(authorized.call);
-        if (!authorized.call.reused) audits.push(authorized.call.result.audit);
-      }
-      const resources = randomness ? worldRandomResources(control.worldResources, randomness) : control.worldResources;
-      const adjudication = programs.length ? await adjudicateWorldPrograms(runtime, programs, resources, worldProgramSources(authority, source), scoped)
-        : { records: [], evidence: [], calls: [] };
-      decisions.push(...adjudication.calls); audits.push(...adjudication.calls.filter(call => !call.reused).map(call => call.result.audit));
-      try { event = createWorldEventCandidate(physical, authority, control.worldResources, programs, adjudication, atSeconds, randomness); }
-      catch (error) {
+      try {
+        if (randomDeferral) throw new Error(randomDeferral);
+        event = createWorldEventCandidate(physical, authority, control.worldResources, programs, adjudication, atSeconds, randomness);
+      } catch (error) {
         if (!(error instanceof Error) || !/world rule awaits evidence or expansion|ambiguous world branches require expansion/u.test(error.message)) throw error;
         for (const bound of programs) {
           const pending = control.pending.find(value => value.attempt.id === bound.attempt.id)!;
@@ -137,6 +154,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     const sealed = sealDecisionEventState(control);
     const progressHash = (value: DecisionEventState) => contentHash({ ...value, hash: "", modelOrdinals: null });
     if (!event && progressHash(sealed) === progressHash(initial)) throw new WorldQuiescentError(sealed.failures);
+    await context.stages?.after(executionStage("transition-causal-verification"));
     const payload: PreparedNative = { control: sealed, event, decisions, activatedAgentIds: controlled.activatedAgentIds };
     const body = { executionState: { producerHash: this.manifest.hash, data: sealed as unknown as JsonObject },
       onsetPerception: { targets: [], receipts: [], requests: [], checks: [], commitmentRounds: [], rng: structuredClone(source.truth.rng) },
@@ -152,6 +170,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     if (id !== contentHash(body) || preparation.sourceStateHash !== contentHash(input.state) ||
       preparation.policyRosterHash !== contentHash(input.policyRoster) || preparation.requestHash !== contentHash(input.request) ||
       preparation.algorithmManifestHash !== this.manifest.hash || reactions.length) throw new StepPreparationInvalidatedError();
+    await context.stages?.before(executionStage("observation-agent-mind"));
     const prepared = structuredClone(preparation.payload) as unknown as PreparedNative, authority = toWorldRuntimeContract(input.definition);
     const audits: ModelExecutionAudit[] = [...preparation.modelAudits], decisions = [...prepared.decisions];
     const allocator = invocationAllocator(prepared.control, input.state.revision);
@@ -176,6 +195,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
       finalControl = settleProgramWorldEvent(input.state, prepared.control, prepared.event, authority, this.manifest.hash, beliefRevisions).control;
     }
     finalControl = sealDecisionEventState({ ...finalControl, modelOrdinals: allocator.ordinals, decisionCache: runtime.snapshot() as unknown as JsonObject });
+    await context.stages?.after(executionStage("observation-agent-mind"));
     const proof: DecisionEventStep = { version: 1, authority, preparedControl: prepared.control, event: prepared.event, beliefRevisions, finalControl,
       decisions, modelAudits: collectDecisionAudits(audits), policyRoster: structuredClone(input.policyRoster), request: structuredClone(input.request) };
     return nativeCandidate(input.state, proof, this.manifest.hash, prepared.activatedAgentIds);

@@ -1,0 +1,43 @@
+id: cooling-pump
+kind: machine
+name: 冷却泵
+description: 需要更换密封组件并通过独立压力测试的冷却泵。
+placement: service-bay
+facts:
+  - id: pump-seal
+    predicate: seal
+    value:
+      kind: text
+      value: leaking
+    description: 密封泄漏。
+    access:
+      kind: public
+  - id: pump-pressure
+    predicate: pressure
+    value:
+      kind: text
+      value: untested
+    description: 尚未做本轮压力测试。
+    access:
+      kind: public
+  - id: pump-code
+    predicate: test-code
+    value:
+      kind: text
+      value: ORBIT-7
+    description: 压力测试启动校验码。
+    access:
+      kind: agents
+      agentIds:
+        - inspector
+  - id: pump-certification
+    predicate: certification
+    value:
+      kind: text
+      value: pending
+    description: 检查员尚未基于本轮维修与测试进行认证。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

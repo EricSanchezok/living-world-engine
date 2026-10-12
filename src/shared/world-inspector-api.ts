@@ -427,6 +427,7 @@ export interface WorldInspectorStateSnapshot {
 }
 
 export interface WorldInspectorStepDetail {
+  programs?: ReturnType<typeof import("../server/world-inspector-programs").inspectDecisionPrograms>;
   apiVersion: typeof WORLD_INSPECTOR_API_VERSION;
   summary: WorldInspectorStepSummary;
   committed: CommittedStep & { modelAudits: ModelExecutionAudit[] };

@@ -29,6 +29,7 @@ export interface AgentProgramState {
   instances: Array<{ snapshot: ProgramInstance; entityIds: string[] }>;
   activeInstanceId: string | null;
   lastEvidenceIds: string[];
+  planning: { inputHash: string; attempts: number; waitReason: string | null } | null;
 }
 export interface ProgramRuntimeFailure {
   ownerId: string; phase: "goal" | "program" | "utterance" | "world-rule" | "adjudication";
@@ -67,7 +68,7 @@ export function initialDecisionEventState(state: Readonly<SimulationState>, mode
     privateLibrary: new ProgramLibrary().snapshot(), worldLibrary: new WorldProgramLibrary().snapshot(),
     agents: Object.fromEntries(Object.values(state.agents).map(agent => [agent.id, {
       resources: privateProgramResources(projectAgentPerspective(state as SimulationState, agent)),
-      instances: [], activeInstanceId: null, lastEvidenceIds: Object.keys(agent.belief.evidence).sort(),
+      instances: [], activeInstanceId: null, planning: null, lastEvidenceIds: Object.keys(agent.belief.evidence).sort(),
     }])), worldResources: {}, scheduler: scheduler.snapshot(), decisionCache: null,
     modelOrdinals: { revision: state.revision, subjects: {} }, pending: [], receipts: [], coverage: [], failures: [] });
 }
@@ -92,6 +93,9 @@ export function readDecisionEventState(executionState: AlgorithmExecutionState, 
   new EventScheduler(state.truth.elapsedSeconds, value.scheduler);
   const receipts = programReceiptIndex(value), instances = new Set<string>();
   for (const [id, owner] of Object.entries(value.agents)) {
+    if (owner.planning !== null && (!/^[a-f0-9]{64}$/u.test(owner.planning.inputHash) ||
+      !Number.isSafeInteger(owner.planning.attempts) || owner.planning.attempts < 0 || owner.planning.attempts > 2 ||
+      owner.planning.waitReason !== null && typeof owner.planning.waitReason !== "string")) throw new Error("invalid program expansion budget");
     if (owner.resources.ownerId !== id) throw new Error("private program state changed owner");
     for (const entry of owner.instances) {
       const definition = library.forOwner(id).find(item => item.program.hash === entry.snapshot.definitionHash);

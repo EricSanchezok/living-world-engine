@@ -1,0 +1,22 @@
+schema_version: 14
+id: station-program-world
+name: 织星站：冷却泵检修
+version: 1.0.0
+description: 维修、资源交换与独立验收：三个有私有知识的角色必须通过真实行动和传播完成协作。
+runtime_defaults:
+  max_autonomous_span_seconds: 120
+  realtime_interval_ms: 60000
+  action_window_ms: 30000
+model_profiles:
+  perception: truth-deepseek
+  reaction_routing: truth-deepseek
+  resolution: truth-deepseek
+  transition: truth-deepseek
+  causal_verifier: truth-deepseek
+  grounding: truth-deepseek
+  observation: truth-deepseek
+  arrival: truth-deepseek
+  dynamic_agent:
+    bootstrap: agent-deepseek
+    mind: agent-deepseek
+    reaction: agent-deepseek

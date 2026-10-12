@@ -1,0 +1,16 @@
+origins:
+  - id: station-apprentice
+    title: 检修学徒
+    fantasy: 亲自协调一次有资源约束和独立验收的维修。
+    description: 在冷却泵检修窗口内协助工程师与物资员。
+    entity_kind: person
+    spawn_entity_id: service-bay
+    persona: 愿意听取现场人员说明，按事实行动的空间站学徒。
+    default_goal: 协助冷却泵完成真实维修和压力测试。
+    relationship_hooks:
+      - 工程师缺少密封组件。
+      - 物资员愿意以两个能量电池换一个密封组件。
+    risks:
+      - 未经检验的维修不能视为完成。
+    mechanics_profile_id: station-technician
+    fallback_arrival: 你进入检修舱，冷却泵发出泄漏声，三位值班人员正在附近。

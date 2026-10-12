@@ -1,0 +1,22 @@
+disclosure:
+  default_check_visibility: full
+laws:
+  - id: station-clock
+    severity: hard
+    text: 世界物理事件推进正数秒；冷却泵的安全检修窗口在第 120 秒关闭。截止事件本身不代表维修成功。
+  - id: material-conservation
+    severity: hard
+    text: 能量电池、密封组件和冷却剂只能实际转移。角色的口头承诺不会改变任何资源归属。物资员可自愿接受两个能量电池换一个密封组件，但对方必须实际接受或执行交换。
+  - id: repair-materials
+    severity: hard
+    text: 在检修舱对冷却泵完成一次 30 秒的密封维修，必须由现场工程师实际消耗自己持有的一个密封组件和两升冷却剂。维修只把泵的密封状态从 leaking
+      改成 sealed；不能自动完成压力测试或安全认证。不得用口头建议代替耗材和实际维修。
+  - id: pressure-verification
+    severity: hard
+    text: 密封完成后，现场角色可以用 10 秒运行真实压力测试。压力测试使用 pressure-test 分布；结果稳定才可写入
+      stable，结果不稳定应写入 unstable 并继续检修。安全认证必须由检查员在自己实际获知 sealed 和 stable
+      后作出；说自己已认证不能凭空改变物理测试结果。
+  - id: test-code-isolation
+    severity: hard
+    text: 压力测试面板要求操作员输入私有校验码
+      ORBIT-7。初始时只有检查员知道这个码。其他角色必须通过实际通信获知，世界裁决不能把规范状态中的密码送入角色头脑，也不能替对方回答。

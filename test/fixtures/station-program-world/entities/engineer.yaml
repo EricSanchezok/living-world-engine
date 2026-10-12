@@ -1,0 +1,83 @@
+id: engineer
+kind: person
+name: 工程师林岚
+description: 工程师林岚，在检修舱值班。
+placement: service-bay
+facts: []
+meters:
+  - id: health:engineer
+    definition_id: health
+    current: 20
+quantities:
+  - definition_id: energy-cell
+    amount: 2
+  - definition_id: coolant
+    amount: 2
+ratings:
+  - id: resolve:engineer
+    definition_id: resolve
+    value: 2
+agent:
+  id: engineer
+  model_profiles:
+    bootstrap: agent-deepseek
+    mind: agent-deepseek
+    reaction: agent-deepseek
+  character:
+    persona:
+      summary: 负责修好冷却泵，愿意交换资源和请教同事。确认收到耗材和校验码后再实施；不会把自己的请求当成对方接受。
+      voice: 准确简洁，明确区分请求、承诺与实际结果。
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: repair-and-test
+        description: 在第 120 秒前让冷却泵实际达到 sealed 和 stable；必须先取得一个密封组件并消耗两升冷却剂，之后获知校验码并做独立测试。
+        target_ids:
+          - pump
+          - supply
+          - audit
+        priority: 1
+        progress: 0
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 我
+        description: 工程师林岚
+        status: observed
+      - id: supply
+        name: 物资员杜衡
+        description: 当前同舱的已知对象。
+        status: observed
+      - id: audit
+        name: 检查员乔伊
+        description: 当前同舱的已知对象。
+        status: observed
+      - id: pump
+        name: 冷却泵
+        description: 当前同舱的已知对象。
+        status: observed
+      - id: bay
+        name: 检修舱
+        description: 当前同舱的已知对象。
+        status: observed
+    evidence: []
+    claims: []
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - engineer
+      - local_entity_id: supply
+        canonical_entity_ids:
+          - quartermaster
+      - local_entity_id: audit
+        canonical_entity_ids:
+          - inspector
+      - local_entity_id: pump
+        canonical_entity_ids:
+          - cooling-pump
+      - local_entity_id: bay
+        canonical_entity_ids:
+          - service-bay
