@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { containsStandaloneExplicitNumber, parseExplicitNumber } from "./explicit-number";
 import { worldDeltaOperationSchema } from "../contracts/llm-schemas";
 import type {
   AgentActionProposal,
@@ -645,46 +646,6 @@ const quantityAmountSourceSchema = z.discriminatedUnion("kind", [
 ]);
 
 type QuantityAmountSource = z.infer<typeof quantityAmountSourceSchema>;
-
-const chineseDigit = new Map([
-  ["零", 0], ["〇", 0], ["一", 1], ["二", 2], ["两", 2], ["三", 3], ["四", 4],
-  ["五", 5], ["六", 6], ["七", 7], ["八", 8], ["九", 9],
-]);
-const chineseUnit = new Map([["十", 10], ["百", 100], ["千", 1_000]]);
-
-function parseExplicitNumber(text: string): number | null {
-  if (/^(?:0|[1-9]\d*)(?:\.\d+)?$/.test(text)) return Number(text);
-  if (![...text].every((character) => chineseDigit.has(character) || chineseUnit.has(character))) return null;
-  if (![...text].some((character) => chineseUnit.has(character))) {
-    const digits = [...text].map((character) => chineseDigit.get(character)!);
-    return Number(digits.join(""));
-  }
-  let total = 0;
-  let current = 0;
-  for (const character of text) {
-    const digit = chineseDigit.get(character);
-    if (digit !== undefined) {
-      current = digit;
-      continue;
-    }
-    const unit = chineseUnit.get(character)!;
-    total += (current || 1) * unit;
-    current = 0;
-  }
-  return total + current;
-}
-
-function containsStandaloneExplicitNumber(source: string, quoted: string): boolean {
-  const numericCharacter = /[0-9.零〇一二两三四五六七八九十百千]/u;
-  let offset = source.indexOf(quoted);
-  while (offset >= 0) {
-    const before = offset > 0 ? source[offset - 1]! : "";
-    const after = offset + quoted.length < source.length ? source[offset + quoted.length]! : "";
-    if (!numericCharacter.test(before) && !numericCharacter.test(after)) return true;
-    offset = source.indexOf(quoted, offset + 1);
-  }
-  return false;
-}
 
 function valueAtPath(value: unknown, path: readonly string[]): unknown {
   let current = value;

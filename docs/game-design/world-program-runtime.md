@@ -16,6 +16,8 @@ Compilation closes nested predicate sources and expression reads into the progra
 
 Timing selects an authored temporal profile. Code derives fixed durations, travel rates, staged durations and open-ended checkpoints. Explicit quantities and durations must match evidence extracted from the action text. Each effect judgment sees its actual temporal plan and reads the selected profile version. An open-ended checkpoint cannot announce activity completion.
 
+Explicit quantity evidence uses a finite Arabic, Chinese or English number grammar. English cardinals and decimal digits remain exact quotations of the attempted action; the parser rejects partial number phrases and numbers embedded in identifiers. Model-provided numeric values cannot substitute for written evidence.
+
 The compiler sends each canonical collection once; atomic read keys address those records. An authored fact source aliases a current fact only while their values match; otherwise the original source is supplied separately. Repeated JSON-schema definitions use references. Stable world context precedes the attempt in the request layout. These are lossless layout choices, not removals of world evidence.
 
 ## Decisions and commits

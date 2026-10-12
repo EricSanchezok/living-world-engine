@@ -15,12 +15,12 @@ import { replayDecisionEventStep } from "../canonical";
 describe("native event runtime through SimulationEngine", () => {
   it("persists trusted numeric derivation through the canonical entry and replays it without duplication", async () => {
     const f = nativeProgramFixture();
-    f.program.nodes[0] = { ...f.program.nodes[0]!, intent: "Spend 5 seconds giving 2 spirit stones to {recipient}." } as typeof f.program.nodes[number];
+    f.program.nodes[0] = { ...f.program.nodes[0]!, intent: "Spend 5 seconds giving two spirit stones to {recipient}." } as typeof f.program.nodes[number];
     f.rule.sourceIds.push("mechanics"); f.rule.writes.push("quantities");
     f.rule.branches[0]!.mechanics = [{ id: "gift", packageId: "core-resolution", ruleId: "transfer-quantity", input: {
       definitionId: "spirit-stone", fromHolderId: { $expression: { kind: "parameter", name: "actor" } },
       toHolderId: { $expression: { kind: "parameter", name: "recipient" } },
-      amountSource: { kind: "explicit_action_amount", actionId: { $attempt: "id" }, quotedText: "2", amount: 2 },
+      amountSource: { kind: "explicit_action_amount", actionId: { $attempt: "id" }, quotedText: "two", amount: 2 },
     } }];
     await f.configured.registry.capture();
     const engine = new SimulationEngine(f.world, new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig));
