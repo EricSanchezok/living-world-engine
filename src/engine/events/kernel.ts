@@ -179,7 +179,7 @@ export function createWorldEventCandidate(state: Readonly<SimulationState>, defi
 }
 
 const collectionFor: Record<string, string> = { entity: "entities", placement: "placements", fact: "facts", meter: "meters", quantity: "quantities",
-  rating: "ratings", condition: "conditions", activity: "activities", pool: "pools", timer: "timers" };
+  rating: "ratings", condition: "conditions", activity: "activities", pool: "pools", timer: "timers", "program-actor": "agentRoster" };
 
 function privatePhysicalHash(state: Readonly<SimulationState>, agentId: string): string {
   const agent = state.agents[agentId]; if (!agent) return contentHash(null);

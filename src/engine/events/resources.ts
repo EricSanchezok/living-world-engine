@@ -71,26 +71,38 @@ export function worldProgramSources(definition: WorldRuntimeContract, state: Rea
   })) as Record<string, JsonValue>;
 }
 
+/** An absent record is proven by its owning collection; a model cannot invent an atomic read. */
+export function worldReferenceRead(state: Readonly<SimulationState>, kind: "entity" | "fact" | "meter" | "condition" | "pool", id: string): string {
+  const collections = { entity: ["entities", state.truth.entities], fact: ["facts", state.truth.facts],
+    meter: ["meters", state.truth.meters], condition: ["conditions", state.truth.conditions], pool: ["pools", state.truth.sharedActivityResourcePools] } as const;
+  const [collection, values] = collections[kind];
+  return Object.hasOwn(values, id) ? `${kind}:${id}` : collection;
+}
+
 /** Additional mechanical reads cannot be omitted by a generated declaration. */
 export function worldOperationReads(state: Readonly<SimulationState>, operation: WorldDeltaOperation): string[] {
   const keys = ["mechanics"];
+  const ref = (kind: Parameters<typeof worldReferenceRead>[1], id: string) => worldReferenceRead(state, kind, id);
+  // Known holders have pre-indexed zero/absent quantities. New holders bind the collection until creation commits.
+  const quantity = (definitionId: string, holder: string) => state.truth.entities[holder]
+    ? `quantity:${quantityId(state.worldHash, definitionId, holder)}` : "quantities";
   switch (operation.kind) {
     case "create_entity": return [...keys, "entities", "placements"];
-    case "retire_entity": return [...keys, `entity:${operation.entityId}`];
-    case "place_entity": return [...keys, `entity:${operation.entityId}`, "placements", ...(operation.placementId ? [`entity:${operation.placementId}`] : [])];
-    case "set_fact": return [...keys, "facts", "tombstones", `entity:${operation.fact.subjectId}`, ...(operation.fact.value.kind === "entity" ? [`entity:${operation.fact.value.entityId}`] : [])];
-    case "remove_fact": return [...keys, `fact:${operation.factId}`, "tombstones"];
-    case "set_meter": return [...keys, "meters", `entity:${operation.meter.entityId}`, "facts"];
-    case "adjust_meter": return [...keys, `meter:${operation.meterId}`, "facts", "entities"];
-    case "transfer_quantity": return [...keys, `entity:${operation.fromHolderId}`, `entity:${operation.toHolderId}`,
-      ...[operation.fromHolderId, operation.toHolderId].map(holder => `quantity:${quantityId(state.worldHash, operation.definitionId, holder)}`)];
-    case "produce_quantity": case "consume_quantity": return [...keys, `entity:${operation.holderId}`,
-      `quantity:${quantityId(state.worldHash, operation.definitionId, operation.holderId)}`, `law:${operation.lawId}`];
-    case "set_quantity": return [...keys, "quantities", `entity:${operation.quantity.holderId}`];
-    case "set_rating": return [...keys, "ratings", `entity:${operation.rating.entityId}`];
-    case "set_condition": return [...keys, "conditions", `entity:${operation.condition.subjectId}`];
-    case "remove_condition": return [...keys, `condition:${operation.conditionId}`];
-    case "set_shared_activity_resource_capacity": return [...keys, `pool:${operation.poolId}`, "activities"];
+    case "retire_entity": return [...keys, ref("entity", operation.entityId)];
+    case "place_entity": return [...keys, ref("entity", operation.entityId), "placements", ...(operation.placementId ? [ref("entity", operation.placementId)] : [])];
+    case "set_fact": return [...keys, "facts", "tombstones", ref("entity", operation.fact.subjectId), ...(operation.fact.value.kind === "entity" ? [ref("entity", operation.fact.value.entityId)] : [])];
+    case "remove_fact": return [...keys, ref("fact", operation.factId), "tombstones"];
+    case "set_meter": return [...keys, "meters", ref("entity", operation.meter.entityId), "facts"];
+    case "adjust_meter": return [...keys, ref("meter", operation.meterId), "facts", "entities"];
+    case "transfer_quantity": return [...keys, ref("entity", operation.fromHolderId), ref("entity", operation.toHolderId),
+      ...[operation.fromHolderId, operation.toHolderId].map(holder => quantity(operation.definitionId, holder))];
+    case "produce_quantity": case "consume_quantity": return [...keys, ref("entity", operation.holderId),
+      quantity(operation.definitionId, operation.holderId), `law:${operation.lawId}`];
+    case "set_quantity": return [...keys, "quantities", ref("entity", operation.quantity.holderId)];
+    case "set_rating": return [...keys, "ratings", ref("entity", operation.rating.entityId)];
+    case "set_condition": return [...keys, "conditions", ref("entity", operation.condition.subjectId)];
+    case "remove_condition": return [...keys, ref("condition", operation.conditionId)];
+    case "set_shared_activity_resource_capacity": return [...keys, ref("pool", operation.poolId), "activities"];
     case "create_agent": case "remove_agent": return [...keys, "entities", "agentRoster"];
     case "advance_time": throw new Error("world program cannot own time advancement");
   }

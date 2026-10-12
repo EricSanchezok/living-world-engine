@@ -19,6 +19,21 @@ import { worldMechanicContracts } from "./mechanics";
 import { worldActivityClaims } from "./activities";
 import { explicitNumberQuotes } from "../mechanics/explicit-number";
 
+/** The creation schema omits fixed Agent provider bindings; materialization supplies them. */
+function worldEffectContract() {
+  const schema = z.toJSONSchema(worldDeltaOperationSchema, { target: "draft-07", reused: "ref" });
+  const visit = (value: unknown): void => {
+    if (!value || typeof value !== "object") return;
+    const node = value as Record<string, unknown>, properties = node.properties as Record<string, unknown> | undefined;
+    if (properties?.modelProfiles && properties.character && properties.belief) {
+      delete properties.modelProfiles;
+      if (Array.isArray(node.required)) node.required = node.required.filter(key => key !== "modelProfiles");
+    }
+    Object.values(node).forEach(visit);
+  };
+  visit(schema); return schema;
+}
+
 export const worldCompilationSchema = z.object({ definition: worldProgramSchema, parameters: z.record(programKey, z.json()) }).strict();
 export interface WorldCompilationRequest extends ModelExecutionScope {
   profileId: string; invocationBase: number; definition: WorldRuntimeContract; state: Readonly<SimulationState>;
@@ -43,7 +58,7 @@ export async function compileWorldProgram(provider: StructuredModelProvider, req
     resourceAddressing: { entity: "entities[id]", placement: "placements[id]", fact: "facts[id]", meter: "meters[id]", quantity: "quantities[id]",
       rating: "ratings[id]", condition: "conditions[id]", activity: "activities[id]", pool: "pools[id]", timer: "timers[id]", law: "laws entry matching id",
       temporal: "mechanics.temporalProfiles[id]" },
-    effectContract: z.toJSONSchema(worldDeltaOperationSchema, { target: "draft-07", reused: "ref" }),
+    effectContract: worldEffectContract(),
     mechanicContracts: worldMechanicContracts(request.definition, request.rulePackages),
     resolutionContract: z.toJSONSchema(resolutionPlanSchema, { target: "draft-07", reused: "ref" }) },
     task: { attempt: request.attempt, explicitNumbers: explicitNumberQuotes([request.attempt.intent, request.attempt.utterance ?? ""].join("\n")),

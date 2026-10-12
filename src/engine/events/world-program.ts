@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { CausalSource, WorldDeltaOperation } from "../contracts/model";
+import type { CausalSource, WorldDeltaOperation, AgentState } from "../contracts/model";
 import { worldDeltaOperationSchema } from "../contracts/llm-schemas";
 import { contentHash } from "../models/model-audit";
 import { evaluateExpression, expressionDependencies, programHash, programKey, valueExpressionSchema, type ProgramResources, type ValueExpression } from "../programs/definition";
@@ -226,13 +226,17 @@ export function bindWorldProgram(program: AdmittedWorldProgram, parameters: Read
 }
 
 export function materializeWorldBranch(program: AdmittedWorldProgram, branchId: string, parameters: Readonly<Record<string, JsonValue>>,
-  resources: ProgramResources, provenance: CausalSource, attempt?: WorldAttempt): WorldDeltaOperation[] {
+  resources: ProgramResources, provenance: CausalSource, modelProfiles: AgentState["modelProfiles"], attempt?: WorldAttempt): WorldDeltaOperation[] {
   const branch = program.definition.branches.find(branch => branch.id === branchId); if (!branch) throw new Error(`unknown world branch ${branchId}`);
   return branch.effects.map(effect => {
     const fields = Object.fromEntries(Object.entries(effect.fields).map(([key, value]) => [key, evaluateWorldValue(value, parameters, resources, attempt)]));
     // Fact/condition provenance cannot smuggle extra authority through a nested object.
     for (const key of ["fact", "condition"]) if (fields[key] && typeof fields[key] === "object" && !Array.isArray(fields[key])) {
       fields[key] = { ...fields[key] as Record<string, JsonValue>, provenance: provenance.causes as unknown as JsonValue };
+    }
+    if (effect.kind === "create_agent" && fields.agent && typeof fields.agent === "object" && !Array.isArray(fields.agent)) {
+      if ("modelProfiles" in fields.agent) throw new Error("new Agent modelProfiles are engine-owned; omit the field");
+      fields.agent = { ...fields.agent, modelProfiles: structuredClone(modelProfiles) };
     }
     return worldDeltaOperationSchema.parse({ kind: effect.kind, ...fields, ...provenance });
   });

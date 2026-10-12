@@ -1,6 +1,6 @@
 # World Program Runtime
 
-The world program kernel lives in [`src/engine/events/kernel.ts`](../../src/engine/events/kernel.ts). It is independent of private Agent programs. The default `decision-event@2` producer runs through WorldHost, SimulationEngine, CanonicalCommitter and history replay. [Spec 0181](../specs/0181-jev-decision-event-engine.md) defines its replacement and qualification contract.
+The world program kernel lives in [`src/engine/events/kernel.ts`](../../src/engine/events/kernel.ts). It is independent of private Agent programs. The default `decision-event@3` producer runs through WorldHost, SimulationEngine, CanonicalCommitter and history replay. [Spec 0181](../specs/0181-jev-decision-event-engine.md) defines its replacement and qualification contract.
 
 ## Compilation and authority
 
@@ -13,6 +13,8 @@ WorldProgram v5 includes trusted `mechanics` invocations on each branch and decl
 The repository injects the same trusted rule registry into compilation, mechanical preparation, canonical commits, execution-reference persistence, instance recovery and Inspector or recorded-algorithm replay. Selected package versions must exist at every entry. Registry implementations remain server services rather than serialized model authority. Source identity arrays use stable ordering, including after content-addressed JSON persistence.
 
 The creation wire format binds each parameter beside its declaration. Entity values have the exact canonical entity domain, and admission separately requires the actual action owner and pre-authored utterance. The compiler lowers this representation to independent immutable declarations and execution bindings; placeholder words are not accepted as entity IDs.
+
+World effect references are checked in branch order during compilation. An entity may be created and referenced by a later effect in the same branch. An absent record binds the owning collection's version, while existing records retain atomic reads and known holders retain their versioned absent quantity slots. The committer rejects stale absence evidence and applies all effects atomically. Creation cannot author dynamic Agent model profiles; materialization assigns the pinned world capability profiles, and instance overrides continue to apply at invocation time.
 
 Compilation closes nested predicate sources and expression reads into the program declaration before admission. It does not invent missing facts or rule authority. Every added source still must exist in the supplied catalog. World decision batches carry shared sources once, with each question binding its own source IDs, instead of repeating the complete mechanics catalog for every question.
 

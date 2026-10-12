@@ -1,3 +1,4 @@
+import { validateWorldOperationReferences } from "./effect-references";
 import type { AgentActionProposal, MechanicInvocation, SimulationState } from "../contracts/model";
 import { createCoreRulePackageRegistry, type RulePackageRegistry, type RuleExecutionContext } from "../mechanics/rule-package";
 import type { ProgramResources } from "../programs/definition";
@@ -42,7 +43,7 @@ function mechanicalReads(invocations: MechanicInvocation[], state: Readonly<Simu
 export function materializeWorldMechanics(bound: BoundWorldProgram, branchId: string, resources: ProgramResources, context: WorldMechanicsContext) {
   const branch = bound.program.definition.branches.find(branch => branch.id === branchId);
   if (!branch) throw new Error("unknown mechanical branch");
-  const direct = materializeWorldBranch(bound.program, branchId, bound.parameters, resources, worldProvenance(bound), bound.attempt);
+  const direct = materializeWorldBranch(bound.program, branchId, bound.parameters, resources, worldProvenance(bound), context.definition.modelProfiles, bound.attempt);
   const action: AgentActionProposal = { id: bound.attempt.id, actorId: bound.attempt.actorId, baseRevision: context.state.revision,
     rawText: bound.attempt.intent, goal: bound.attempt.intent, means: bound.attempt.utterance, targetIds: [] };
   const revision = context.randomness?.plan.sourceRevision ?? context.state.revision;
@@ -73,6 +74,7 @@ export function materializeWorldMechanics(bound: BoundWorldProgram, branchId: st
   if (resolved.length) for (const key of ["facts", "placements", "ratings", "conditions", "meters", "mechanics"]) if (!reads.includes(key)) reads.push(key);
   for (const [index, receipt] of receipts.entries()) receipt.operations = mechanics.results[index]!.operations;
   const operations = [...direct, ...mechanics.operations];
+  validateWorldOperationReferences(context.state, operations);
   const actualReads = [...new Set([...reads, ...operations.flatMap(operation => worldOperationReads(context.state, operation))])];
   const writes = [...new Set(operations.flatMap(operation => worldOperationWrites(context.state, operation)))];
   return { operations, mechanics, reads: actualReads, writes, resolutionPlans: resolved.map(value => value.plan), resolutionReceipts: receipts };

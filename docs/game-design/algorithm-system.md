@@ -38,7 +38,7 @@ World instances, experiment variants, Ledger producers, preparations, replay, an
 
 ## Standard composition
 
-New ordinary instances select `decision-event@2`. Its configuration inherits separate world and Agent decision, creation and explicit context-fallback profiles from the immutable script. Explicit experiment overrides are pinned in the producer. The [program and event runtime](world-program-runtime.md) owns execution and validation; the generated catalog owns the exact registered identity. This default needs no local retrieval encoder or warmed candidate cache.
+New ordinary instances select `decision-event@3`. Its configuration inherits separate world and Agent decision, creation and explicit context-fallback profiles from the immutable script. Explicit experiment overrides are pinned in the producer. The [program and event runtime](world-program-runtime.md) owns execution and validation; the generated catalog owns the exact registered identity. This default needs no local retrieval encoder or warmed candidate cache.
 
 The explicit eager reference compositions remain available during replacement qualification. They are never an automatic fallback. The frozen baseline revision and the three-arm qualification contract are recorded in [Spec 0181](../specs/0181-jev-decision-event-engine.md). Default selection does not establish its cost, latency or task-completion targets.
 
