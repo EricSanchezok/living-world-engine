@@ -4,7 +4,7 @@ import type { ProviderAccountConfig, ResolvedModelInference } from "./model-cata
 import type { ResolvedModelBinding } from "./model-registry";
 import { contentHash } from "./model-audit";
 import { ContextLimitExceededError, ModelConfigurationError, ModelOutputError, ModelTransportError, type StructuredModelRequest } from "./model-provider";
-import { decisionOutputSchema, decisionPrompt, decisionWireContext, validateDecisionBatch } from "./decision";
+import { decisionOutputSchema, decisionPrompt, decisionWireContext, nativeDecisionBounds, validateDecisionBatch } from "./decision";
 import { runtimeEventEmitter, type RuntimeCorrelation } from "../runtime/observability";
 
 const nativeInference: ResolvedModelInference = {
@@ -20,10 +20,7 @@ function nativeContext(context: unknown) {
   // No provider tokenizer is published. UTF-8 bytes are a conservative token
   // upper bound; never silently truncate an authorized projection. The runtime
   // may partition independent dependencies or use an explicitly audited fallback.
-  const stateBound = Buffer.byteLength(JSON.stringify(wire.state), "utf8") + 256;
-  const questionBounds = Object.values(wire.questions).map(question => Buffer.byteLength(JSON.stringify(question), "utf8") + 256);
-  if (stateBound + Math.max(...questionBounds) > 32_000 ||
-    stateBound + questionBounds.reduce((sum, length) => sum + length, 0) > 64_000) {
+  if (!nativeDecisionBounds(batch).fits) {
     throw new ContextLimitExceededError("TypeSafe decision exceeds the conservative 32k per-question or 64k combined token bound");
   }
   return { batch, wire };

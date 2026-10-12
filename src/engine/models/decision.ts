@@ -101,6 +101,14 @@ export function decisionWireContext(batch: DecisionBatch) {
   };
 }
 
+export function nativeDecisionBounds(batch: DecisionBatch) {
+  const wire = decisionWireContext(batch);
+  const state = Buffer.byteLength(JSON.stringify(wire.state), "utf8") + 256;
+  const questions = Object.values(wire.questions).map(question => Buffer.byteLength(JSON.stringify(question), "utf8") + 256);
+  const longest = state + Math.max(...questions), combined = state + questions.reduce((sum, length) => sum + length, 0);
+  return { longest, combined, fits: longest <= 32_000 && combined <= 64_000 };
+}
+
 export async function executeDecision(provider: StructuredModelProvider, request: DecisionRequest): Promise<DecisionResult> {
   const batch = validateDecisionBatch(request.batch);
   if (batch.view.kind === "agent" && batch.view.agentId !== request.subjectId) {

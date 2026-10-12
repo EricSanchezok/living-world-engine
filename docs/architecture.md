@@ -52,7 +52,7 @@ The experimental [incremental intent cursor](specs/0176-incremental-intent-execu
 
 ## State and policies
 
-The model gateway also exposes the [native decision contract](game-design/model-gateway.md#协议方言与结构化结果) approved in [Spec 0181](specs/0181-jev-decision-event-engine.md). It keeps TypeSafe choice distributions and authorized input bindings in the existing scheduling and audit path, with an explicit generative context fallback. The program/event runtime replacement remains under implementation; this adapter alone does not change the default world execution algorithm.
+The model gateway also exposes the [native decision contract](game-design/model-gateway.md#协议方言与结构化结果) approved in [Spec 0181](specs/0181-jev-decision-event-engine.md). It keeps TypeSafe choice distributions and authorized input bindings in the existing scheduling and audit path, with an explicit generative context fallback. The [private program runtime](game-design/program-runtime.md) owns source-bound compilation, control-flow journals, separate goal evidence, dependency subscriptions and decision reuse. World event integration remains under implementation; these modules do not yet change the default world execution algorithm.
 
 Action Compilation specializes [empty shared-resource domains](specs/0111-specialize-empty-resource-pool-domain.md) from its bound source state; representation adapters preserve that request schema through initial and repair calls.
 
