@@ -16,6 +16,7 @@ import { decodeWorldDraft, encodeWorldDraft, worldDraftSchema } from "./creation
 import { prepareWorldRandomPlan } from "./randomness";
 import { worldMechanicContracts } from "./mechanics";
 import { worldActivityClaims } from "./activities";
+import { explicitNumberQuotes } from "../mechanics/explicit-number";
 
 export const worldCompilationSchema = z.object({ definition: worldProgramSchema, parameters: z.record(programKey, z.json()) }).strict();
 export interface WorldCompilationRequest extends ModelExecutionScope {
@@ -43,7 +44,8 @@ export async function compileWorldProgram(provider: StructuredModelProvider, req
       temporal: "mechanics.temporalProfiles[id]" },
     effectContract: z.toJSONSchema(worldDeltaOperationSchema, { target: "draft-07", reused: "ref" }),
     mechanicContracts: worldMechanicContracts(request.definition) },
-    task: { attempt: request.attempt, reason: request.reason, rejection: request.rejection ?? null, constraints: [] }, repair: null });
+    task: { attempt: request.attempt, explicitNumbers: explicitNumberQuotes([request.attempt.intent, request.attempt.utterance ?? ""].join("\n")),
+      reason: request.reason, rejection: request.rejection ?? null, constraints: [] }, repair: null });
   const sourceHash = contentHash(context);
   const validate = (output: z.infer<typeof worldCompilationSchema>) => {
     const program = admitWorldProgram(output.definition, sources); bindWorldProgram(program, output.parameters, entities);

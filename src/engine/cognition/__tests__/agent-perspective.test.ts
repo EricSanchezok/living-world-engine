@@ -45,6 +45,7 @@ describe("AgentPerspective", () => {
       },
       mechanics: {
         meters: [{ name: "生命", current: 12, min: 0, max: 20 }],
+        quantityCoverage: "complete-current-self-holdings",
         quantities: [{ name: "灵石", unit: "枚", amount: 3 }],
         ratings: [{ name: "决心", value: 2, min: -5, max: 10 }],
       },
@@ -166,7 +167,7 @@ describe("AgentPerspective", () => {
     source.agents.player.belief.evidence = {};
 
     const perspective = projectAgentPerspective(source, source.agents.player);
-    expect(perspective.mechanics).toEqual({ meters: [], quantities: [], ratings: [], conditions: [] });
+    expect(perspective.mechanics).toEqual({ meters: [], quantityCoverage: "complete-current-self-holdings", quantities: [], ratings: [], conditions: [] });
     expect(perspective.knowledge.containment).toEqual([]);
     expect(perspective.knowledge.exactFacts).toEqual([]);
     expect(perspective.knowledge.claims).toEqual([]);

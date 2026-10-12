@@ -23,6 +23,9 @@ describe("native event runtime through SimulationEngine", () => {
     const boot = await engine.bootstrapAgents();
     const program = restoreOwnerPrograms(boot.bootstrapDecisionEvent!.control, "keeper")[0]!;
     expect(program.status).toBe("waiting");
+    const assessment = boot.bootstrapDecisionEvent!.decisions.find(use => use.batch.questions.adaptation)!;
+    expect(assessment.batch.state).not.toHaveProperty("journal");
+    expect(assessment.batch.state).toMatchObject({ conditions: [{ verdict: "unknown" }], actions: [] });
     expect(program.snapshot().events.filter(event => event.kind === "predicate").map(event => event.verdict)).toEqual(["unknown"]);
     const calls = f.configured.transport.mock.calls.length;
     const policyChange = await engine.step(f.roster, { expectedRevision: 0, trigger: "manual", externalActions: [] });

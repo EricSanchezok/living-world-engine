@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { containsStandaloneExplicitNumber, parseExplicitNumber } from "./explicit-number";
+import { containsStandaloneExplicitNumber, explicitNumberQuotes, parseExplicitNumber } from "./explicit-number";
 import { worldDeltaOperationSchema } from "../contracts/llm-schemas";
 import type {
   AgentActionProposal,
@@ -665,7 +665,7 @@ function deriveQuantityAmount(
     const sourceText = action ? [action.rawText, action.goal, action.means ?? ""].join("\n") : "";
     const parsed = parseExplicitNumber(source.quotedText);
     if (!action || !containsStandaloneExplicitNumber(sourceText, source.quotedText) || parsed !== source.amount) {
-      throw new Error("explicit quantity amount is not present verbatim in its action");
+      throw new Error(`explicit quantity amount is not present verbatim in its action: quotedText=${JSON.stringify(source.quotedText)}, parsed=${parsed}, claimed=${source.amount}. Quote only the complete number, excluding units. Actual numeric quotes: ${JSON.stringify(explicitNumberQuotes(sourceText))}`);
     }
     return { amount: source.amount, assertion: null };
   }

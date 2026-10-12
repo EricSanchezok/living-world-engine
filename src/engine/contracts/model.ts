@@ -532,6 +532,7 @@ export interface AgentPerspectiveView {
   };
   mechanics: {
     meters: PerspectiveMeter[];
+    quantityCoverage: "complete-current-self-holdings";
     quantities: PerspectiveQuantity[];
     ratings: PerspectiveRating[];
     conditions: Array<{

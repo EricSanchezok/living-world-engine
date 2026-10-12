@@ -18,6 +18,8 @@ Timing selects an authored temporal profile. Code derives fixed durations, trave
 
 Explicit quantity evidence uses a finite Arabic, Chinese or English number grammar. English cardinals and decimal digits remain exact quotations of the attempted action; the parser rejects partial number phrases and numbers embedded in identifiers. Model-provided numeric values cannot substitute for written evidence.
 
+Compilation supplies code-extracted exact number quotations from the intent and utterance. Repair feedback includes the rejected quotation, its parse and the available exact quotes, without admitting classifiers as numbers. Expressions in JSON templates require an explicit `$expression` wrapper; unwrapped expression objects are rejected during admission with a targeted diagnostic.
+
 The compiler sends each canonical collection once; atomic read keys address those records. An authored fact source aliases a current fact only while their values match; otherwise the original source is supplied separately. Repeated JSON-schema definitions use references. Stable world context precedes the attempt in the request layout. These are lossless layout choices, not removals of world evidence.
 
 ## Decisions and commits
@@ -67,6 +69,8 @@ Native history encodes prepared and settled control as lossless JSON deltas, eac
 ## Observation and cognition
 
 A private frontier with no available instruction or outstanding issued attempt receives a source-bound wait assessment. Jev can retain a justified wait, preserve an unknown assessment, or request a plan revision when the owner still needs to contribute or gather evidence. Revision interrupts the program without changing its unknown predicates into false or producing world effects. The existing input-bound planning budget allows one targeted revision. Exact frontier and private-input reuse is cached; an unchanged wait creates no polling loop. Commit validation reconstructs the assessment before accepting its interruption, and rejects an arbitrary interruption without a controller change or reproducible issue failure.
+
+Wait assessment receives the complete program, present condition verdicts and actual issue/receipt chronology. Repeated predicate proofs and their hashes remain in the local journal rather than being repeated in the semantic question. The private mechanics projection declares its quantity list complete for the owner's current quantity holdings; this does not establish historical transfers, another owner's inventory, or the absence of carried entities represented by containment.
 
 `projectEventPerception` requires matching candidate and committed receipt hashes. Only explicit committed deliveries become observation packets. A known private speaker alias can be reused; an unidentified speaker receives a neutral local alias without canonical names or hidden identity claims. Hearing testimony adds evidence that words were heard and does not assert that their contents are true.
 

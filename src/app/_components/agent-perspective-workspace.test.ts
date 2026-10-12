@@ -65,7 +65,7 @@ describe("Agent Perspective relationship graph", () => {
 
   it("does not invent a meter or a relation for absent structures", () => {
     const view = perspective();
-    view.mechanics = { meters: [], quantities: [], ratings: [], conditions: [] };
+    view.mechanics = { meters: [], quantityCoverage: "complete-current-self-holdings", quantities: [], ratings: [], conditions: [] };
     view.knowledge.containment = [];
     view.knowledge.exactFacts = [];
     view.knowledge.claims = [];
@@ -74,7 +74,7 @@ describe("Agent Perspective relationship graph", () => {
     view.character.commitments = {};
 
     const graph = buildAgentPerspectiveGraph(view);
-    expect(view.mechanics).toEqual({ meters: [], quantities: [], ratings: [], conditions: [] });
+    expect(view.mechanics).toEqual({ meters: [], quantityCoverage: "complete-current-self-holdings", quantities: [], ratings: [], conditions: [] });
     expect(graph.relations).toEqual([]);
     expect(graph.nodes.map((node) => node.id)).toContain(graph.selfRef);
   });

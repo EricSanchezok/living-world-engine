@@ -1,7 +1,15 @@
 import { describe, expect, it } from "vitest";
-import { containsStandaloneExplicitNumber, parseExplicitNumber } from "../explicit-number";
+import { containsStandaloneExplicitNumber, explicitNumberQuotes, parseExplicitNumber } from "../explicit-number";
 
 describe("explicit written quantity evidence", () => {
+  it("offers exact number quotes without classifiers, units, partial phrases or invented spellings", () => {
+    expect(explicitNumberQuotes("交给对方一个组件、两升水和 2.5 kg 食物。 Give twenty-one coins and one hundred and two chips.")).toEqual([
+      { quotedText: "一", amount: 1 }, { quotedText: "两", amount: 2 }, { quotedText: "2.5", amount: 2.5 },
+      { quotedText: "twenty-one", amount: 21 }, { quotedText: "one hundred and two", amount: 102 },
+    ]);
+    expect(explicitNumberQuotes("Use -1, 1e3, x2, 一万, someone, one two or one point ten.")).toEqual([]);
+    expect(explicitNumberQuotes("Take one and leave. Take one again.")).toEqual([{ quotedText: "one", amount: 1 }]);
+  });
   it.each([
     ["one", 1], ["two", 2], ["nineteen", 19], ["twenty", 20], ["Twenty-one", 21], ["ninety nine", 99],
     ["one hundred", 100], ["two hundred and thirty-four", 234], ["one thousand and five", 1005],

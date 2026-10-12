@@ -13,8 +13,17 @@ export function programAdaptationBatch(program: ProgramInterpreter, resources: P
     program.position.some(position => position.issued) ||
     program.program.definition.goals.every(goal => !!program.completion.goals[goal.goalId])) return null;
   const keys = Object.keys(resources).filter(key => key !== "clock" || program.program.definition.reads.includes("clock")).sort();
+  const journal = program.snapshot().events;
+  const latestConditions = new Map<string, { predicateId: string; reason: string; subjectId: string; verdict: string }>();
+  for (const event of journal) if (event.kind === "predicate") latestConditions.set(`${event.reason}:${event.subjectId}`, {
+    predicateId: event.predicateId, reason: event.reason, subjectId: event.subjectId, verdict: event.verdict });
+  // Hashes, dependency proofs and repeated checks remain in the local journal. This
+  // question needs the current verdict and actual action/receipt chronology only.
+  const actions = journal.flatMap<JsonValue>(event => event.kind === "issue" ? [{ kind: event.kind, workId: event.workId, atSeconds: event.atSeconds }]
+    : event.kind === "settle" ? [{ kind: event.kind, workId: event.receipt.workId, atSeconds: event.receipt.atSeconds,
+      status: event.receipt.status, madeProgress: event.receipt.madeProgress }] : []);
   const state = JSON.parse(JSON.stringify({ definition: program.program.definition, parameters: program.parameterValues,
-    position: program.position, completion: program.completion, journal: program.snapshot().events,
+    position: program.position, completion: program.completion, conditions: [...latestConditions.values()], actions,
     resources: Object.fromEntries(keys.map(key => [key, resources[key]])) })) as JsonValue;
   return { version: 1, view: { kind: "agent", agentId: program.program.definition.owner.agentId, projectionHash: contentHash(state) },
     programHash: program.program.hash, state, dependencies: Object.fromEntries(keys.map(key => [key, resources[key]!.version])),

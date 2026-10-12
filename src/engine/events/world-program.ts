@@ -143,7 +143,10 @@ export function admitWorldProgram(input: unknown, sources: Readonly<Record<strin
       if (reserved[0] === "$expression") checkExpression(valueExpressionSchema.parse(object.$expression), definition.reads);
       if (reserved[0] === "$text") checkText(z.string().parse(object.$text));
       if (reserved[0] === "$attempt") z.enum(["id", "actorId", "actorEntityId", "intent", "utterance", "startedAtSeconds"]).parse(object.$attempt);
-    } else for (const [key, child] of Object.entries(value)) { programKey.parse(key); checkValue(child, depth + 1); }
+    } else {
+      if (valueExpressionSchema.safeParse(value).success) throw new Error("unwrapped world expression: put the expression inside a single $expression field; use $literal for actual literal object data");
+      for (const [key, child] of Object.entries(value)) { programKey.parse(key); checkValue(child, depth + 1); }
+    }
   };
   definition.reads.forEach(checkText); definition.writes.forEach(checkText);
   for (const claim of definition.sharedResources) checkValue(claim.poolId);

@@ -69,10 +69,40 @@ export function containsStandaloneExplicitNumber(source: string, quoted: string)
     const before = prefix.at(-1) ?? "", after = suffix[0] ?? "";
     const priorWord = prefix.match(/([a-z]+)(?:\s+and)?[\s-]+$/iu)?.[1]?.toLowerCase();
     const nextWord = suffix.match(/^[\s-]+(?:and\s+)?([a-z]+)/iu)?.[1]?.toLowerCase();
-    if (!numericCharacter.test(before) && !numericCharacter.test(after) && !/[a-z_]/iu.test(before) && (!wordQuote ||
+    if (!numericCharacter.test(before) && !numericCharacter.test(after) && !/[a-z_−＋/]/iu.test(before) &&
+      !/^[eE][+-]?\d/u.test(suffix) && after !== "/" && (!wordQuote ||
       !/[a-z0-9_'-]/iu.test(before) && !/[a-z0-9_'-]/iu.test(after) &&
       !numberWords.has(priorWord ?? "") && !numberWords.has(nextWord ?? ""))) return true;
     offset = source.indexOf(quoted, offset + 1);
   }
   return false;
+}
+
+/** Suggestions preserve the exact source spelling; the normal amount validator still owns admission. */
+export function explicitNumberQuotes(source: string): Array<{ quotedText: string; amount: number }> {
+  const candidates: Array<{ text: string; index: number }> = [];
+  for (const match of source.matchAll(/[0-9]+(?:\.[0-9]+)?|[零〇一二两三四五六七八九十百千万亿]+/gu)) {
+    candidates.push({ text: match[0], index: match.index });
+  }
+  const words = [...source.matchAll(/[a-z]+/giu)];
+  for (let index = 0; index < words.length; index++) {
+    const first = words[index]!;
+    if (!numberWords.has(first[0].toLowerCase())) continue;
+    let last = index;
+    while (last + 1 < words.length) {
+      const current = words[last]!, next = words[last + 1]!;
+      if (!/^[ -]+$/u.test(source.slice(current.index + current[0].length, next.index)) ||
+        !numberWords.has(next[0].toLowerCase()) && next[0].toLowerCase() !== "and") break;
+      last++;
+    }
+    const final = words[words[last]![0].toLowerCase() === "and" ? last - 1 : last]!;
+    candidates.push({ text: source.slice(first.index, final.index + final[0].length), index: first.index });
+    index = last;
+  }
+  const unique = new Map<string, number>();
+  for (const { text } of candidates.sort((a, b) => a.index - b.index)) {
+    const value = parseExplicitNumber(text);
+    if (text.length <= 64 && value !== null && Number.isFinite(value) && value > 0 && containsStandaloneExplicitNumber(source, text)) unique.set(text, value);
+  }
+  return [...unique].map(([quotedText, amount]) => ({ quotedText, amount }));
 }

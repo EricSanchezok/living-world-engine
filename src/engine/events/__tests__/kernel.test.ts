@@ -61,6 +61,27 @@ async function adjudicate(f: ReturnType<typeof fixture>, programs = [f.bound], a
 }
 
 describe("source-bound world event kernel", () => {
+  it("shows exact Chinese number evidence and repairs a classifier quote through the actual compiler", async () => {
+    const f = fixture(); f.bound.attempt.intent = "花 5 秒把两个灵石交给守门人。";
+    const input = f.raw.branches[0]!.mechanics[0]!.input as Record<string, import("../../runtime/json").JsonValue>;
+    const amount = input.amountSource as Record<string, import("../../runtime/json").JsonValue>;
+    f.raw.timing = { profileId: "explicit-duration", basis: { kind: "explicit_duration", seconds: { kind: "literal", value: 5 }, sourceText: "5 秒" } };
+    const configured = decisionTestProvider((body, attempt) => {
+      expect(JSON.stringify(body)).toContain("explicitNumbers");
+      if (attempt === 2) {
+        expect(JSON.stringify(body)).toContain("Actual numeric quotes");
+        expect(JSON.stringify(body)).toContain("excluding units");
+      }
+      amount.quotedText = attempt === 1 ? "两个" : "两";
+      return encodeWorldDraft(f.raw, f.bound.parameters);
+    });
+    const result = await compileWorldProgram(configured.gateway, { profileId: "world-test", invocationBase: 1,
+      workloadId: "numeric-evidence", batchId: "numeric-evidence", definition: f.definition, state: f.state,
+      resources: f.resources, attempt: f.bound.attempt, reason: "new-intent", runtimeIdentity: { worldHash: f.state.worldHash, revision: 0 } });
+    expect(result.status).toBe("ready"); expect(configured.transport).toHaveBeenCalledTimes(2);
+    input.fromHolderId = { kind: "parameter", name: "actor" };
+    expect(() => admitWorldProgram(f.raw, f.sources)).toThrow("unwrapped world expression");
+  });
   it("keeps authored fact sources immutable while actual fact dependencies change", () => {
     const f = fixture();
     f.state.historyBase = createHistoryReplayBase(f.state);

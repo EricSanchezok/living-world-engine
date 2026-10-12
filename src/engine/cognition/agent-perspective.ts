@@ -360,6 +360,7 @@ export function projectAgentPerspective(
           return { name: definition.name, current: meter.current, min: definition.min, max: definition.max };
         })
         .sort((left, right) => left.name.localeCompare(right.name)),
+      quantityCoverage: "complete-current-self-holdings",
       quantities: Object.values(state.truth.quantities)
         .filter((quantity) => quantity.holderId === agent.entityId)
         .map((quantity) => {
