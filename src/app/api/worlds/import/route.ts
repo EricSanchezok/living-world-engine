@@ -1,5 +1,5 @@
 import { WorldHost } from "../../../../server/world-host";
-import { MAX_ARCHIVE_BYTES } from "../../../../server/world-import";
+import { MAX_ARCHIVE_BYTES, publicWorldImportResult } from "../../../../server/world-import";
 import { createHash } from "node:crypto";
 import { json, observeHttpArchiveBody, observedRoute } from "../../h";
 
@@ -27,6 +27,6 @@ export async function POST(request: Request): Promise<Response> {
     if (file.size > MAX_ARCHIVE_BYTES) return json({ error: "archive exceeds 50 MiB" }, 413);
     buffer ??= Buffer.from(await file.arrayBuffer());
     const result = WorldHost.get().importWorld(buffer, replace, expectedWorldId);
-    return json(result, 201);
+    return json(publicWorldImportResult(result), 201);
   });
 }

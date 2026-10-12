@@ -8,11 +8,12 @@ import type { ModelExecutionAudit } from "../contracts/model";
 import type { PolicyBinding, WorldAdvanceRequest } from "../runtime/execution";
 
 export interface DecisionEventBootstrap {
-  version: 2;
+  version: 3;
   producerHash: string;
   modelCatalog: import("../models/model-catalog").ModelCatalogDocument;
   authority: WorldRuntimeContract;
   control: DecisionEventState;
+  activityAdmissionInput: PendingProgramAttempt[];
   decisions: DecisionUse[];
   modelAudits: ModelExecutionAudit[];
 }

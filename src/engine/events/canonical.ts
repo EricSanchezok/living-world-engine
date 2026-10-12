@@ -27,13 +27,18 @@ function validateAuthority(state: Readonly<SimulationState>, authority: WorldRun
 }
 
 export function applyDecisionEventBootstrap(source: Readonly<SimulationState>, proof: DecisionEventBootstrap): SimulationState {
-  if (source.revision !== 0 || source.history.length || source.bootstrapDecisionEvent || proof.version !== 2) throw new Error("native bootstrap requires a new instance");
+  if (source.revision !== 0 || source.history.length || source.bootstrapDecisionEvent || proof.version !== 3) throw new Error("native bootstrap requires a new instance");
   if (new ModelCatalog(proof.modelCatalog).hash !== proof.control.modelCatalogHash) throw new Error("native bootstrap model catalog mismatch");
   validateAuthority(source, proof.authority);
   const initial = initialDecisionEventState(source, proof.control.models, proof.control.modelCatalogHash, proof.control.registryHash);
   const roster = Object.fromEntries(Object.values(source.agents).map(agent => [agent.id, {
     kind: "model" as const, agentId: agent.id, profiles: agent.modelProfiles,
   }]));
+  const admitted = replayActivityAdmissions(source, proof.authority, worldResources(source, proof.authority),
+    proof.activityAdmissionInput, [], proof.decisions);
+  if (!equal(admitted.activities, proof.control.activities) || !equal(admitted.pending, proof.control.pending)) {
+    throw new Error("bootstrap coverage differs from deterministic activity admission");
+  }
   validateControlTransition(source, initial, proof.control, proof.authority, proof.producerHash, proof.decisions, proof.modelAudits, roster);
   const state = structuredClone(source) as SimulationState;
   state.historyBase ??= createHistoryReplayBase(state);

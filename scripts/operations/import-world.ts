@@ -19,6 +19,8 @@ if (!archive) {
         replace,
       );
       process.stdout.write(`${result.id}: ${result.replaced ? "replaced" : "imported"}\n`);
+      process.stdout.write(`Active goals: ${result.programCoverage.summary.activeGoals}; programs compile during instance initialization.\n`);
+      for (const goal of result.programCoverage.goals) process.stdout.write(`${goal.ownerId}/${goal.goalId}: ${goal.status}\n`);
     } finally {
       database.close();
     }

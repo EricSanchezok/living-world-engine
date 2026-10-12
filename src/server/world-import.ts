@@ -106,6 +106,18 @@ export interface WorldImportResult {
   name: string;
   description: string;
   replaced: boolean;
+  programCoverage: ImportProgramCoverage;
+}
+
+export interface ImportProgramCoverage {
+  summary: { activeGoals: number; startable: number; waiting: number; needsGeneration: number };
+  goals: Array<{ ownerId: string; goalId: string; status: "needs-generation" }>;
+}
+
+/** Ordinary import responses expose counts; private goal identities remain in the trusted local import receipt. */
+export function publicWorldImportResult(result: WorldImportResult) {
+  return { id: result.id, name: result.name, description: result.description, replaced: result.replaced,
+    programCoverage: result.programCoverage.summary };
 }
 
 export interface ParsedWorldArchive {
@@ -115,6 +127,7 @@ export interface ParsedWorldArchive {
   version: string;
   description: string;
   contentHash: string;
+  programCoverage: ImportProgramCoverage;
 }
 
 export function parseWorldArchive(
@@ -132,6 +145,9 @@ export function parseWorldArchive(
     } catch (error) {
       throw new WorldScriptError(source, error instanceof Error ? error.message : String(error));
     }
+    const goals = Object.values(definition.initialState.agents).flatMap(agent => Object.values(agent.character.goals)
+      .filter(goal => goal.status === "active").map(goal => ({ ownerId: agent.id, goalId: goal.id, status: "needs-generation" as const })))
+      .sort((a, b) => a.ownerId.localeCompare(b.ownerId) || a.goalId.localeCompare(b.goalId));
     return {
       template,
       id: definition.id,
@@ -139,6 +155,7 @@ export function parseWorldArchive(
       version: definition.manifestVersion,
       description: definition.description,
       contentHash: definition.contentHash,
+      programCoverage: { summary: { activeGoals: goals.length, startable: 0, waiting: 0, needsGeneration: goals.length }, goals },
     };
   } catch (error) {
     if (error instanceof WorldImportError) throw error;

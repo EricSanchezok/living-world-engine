@@ -287,3 +287,7 @@ Origin 定义身份幻想、出生位置、初始 persona、默认 goal、关系
 loader 验证 Entity、placement 无环、Fact、Agent self binding、character/belief 局部引用、全部 Mechanics Profile 与 shared-resource definition/pool 引用及范围、random distribution、模型 Profile、Origin spawn/mechanics/image、数量和所有 ID 唯一性。初始 Agent 的 `nextAction` 由引擎设为 null；初始 lifecycle、Fact provenance、character 时间戳和运行时身份由引擎注入。
 
 loader 只接受 `schema_version: 14`。旧世界包、状态和存档直接拒绝，不提供迁移或兼容层。
+
+## 程序覆盖报告
+
+导入回执按初始角色的实际 active 目标列出程序覆盖需求。导入只完成剧本校验；这些目标标为 `needs-generation`，不把法则、机制或已有文字算成可执行计划。CLI 显示目标明细，普通导入 API 只返回汇总数量。新实例初始化会生成私有计划、编译已发出的首批世界动作并完成资源预约；Inspector 按实际程序位置、已编译规则、排队与失败状态展示执行覆盖。

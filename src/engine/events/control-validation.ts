@@ -13,7 +13,8 @@ import { validateModelAudit } from "../runtime/transaction";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import { issueProgramAttempt } from "./attempt";
 import { readDecisionEventState, programReceiptIndex, type DecisionEventState } from "./runtime-state";
-import { programWorldResources } from "./resources";
+import { worldProgramSources, programWorldResources } from "./resources";
+import { admitWorldProgram } from "./world-program";
 import { externalWorldAttempt } from "./external-action";
 import { adaptationQuestionVersion, adaptationReasonPrefix, programAdaptationBatch } from "../programs/adaptation";
 
@@ -69,6 +70,14 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
   for (const entry of before.worldLibrary.entries) {
     const current = after.worldLibrary.entries.find(value => value.signature === entry.signature);
     if (!current) throw new Error("a world program disappeared from the library");
+  }
+  const worldSources = worldProgramSources(authority, source);
+  for (const entry of after.worldLibrary.entries) if (!before.worldLibrary.entries.some(old => equal(old, entry))) {
+    const admitted = admitWorldProgram(entry.definition, worldSources);
+    if (admitted.hash !== entry.programHash || !equal(admitted.sourceHashes, entry.sourceHashes) ||
+      !creationEvidence(audits, "world", { definition: entry.definition, parameters: entry.parameters }, after.models.creation, entry.invocationIds)) {
+      throw new Error("new world program has no source-bound creation evidence");
+    }
   }
   const receipts = programReceiptIndex(before), actualIssued = new Map<string, ReturnType<typeof issueProgramAttempt>>();
   for (const agent of Object.values(source.agents)) {

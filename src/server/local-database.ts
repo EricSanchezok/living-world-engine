@@ -1862,6 +1862,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
         name: archive.name,
         description: archive.description,
         replaced: Boolean(current),
+        programCoverage: archive.programCoverage,
       };
     })();
   }

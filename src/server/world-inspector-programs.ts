@@ -1,5 +1,5 @@
 import type { CommittedStep, SimulationState } from "../engine/contracts/model";
-import { restoreOwnerPrograms } from "../engine/events/runtime-state";
+import { programExecutionCoverage, restoreOwnerPrograms } from "../engine/events/runtime-state";
 import { estimateModelCost } from "../engine/models/model-cost";
 import { restoreDecisionEventStep } from "../engine/events/journal";
 
@@ -28,7 +28,8 @@ export function inspectDecisionPrograms(before: SimulationState, step: Committed
     invocations: audit.invocations.map(invocation => ({ id: invocation.id, disposition: invocation.outputDisposition,
       usage: invocation.tokenUsage, transports: invocation.transports.length, cost: estimateModelCost(audit, invocation) })) }));
   const costs = calls.flatMap(call => call.invocations.map(invocation => invocation.cost));
-  return { models: control.models, coverage: control.coverage, programs, wakes, activities: control.activities, pending: control.pending.map(pending => ({
+  return { models: control.models, coverage: control.coverage, worldCoverage: programExecutionCoverage(control),
+    programs, wakes, activities: control.activities, pending: control.pending.map(pending => ({
     actorId: pending.attempt.actorId, intent: pending.attempt.intent, atSeconds: pending.atSeconds, failure: pending.failure,
     ruleHash: pending.bound?.program.hash ?? null,
   })), decisions, calls, failures: control.failures, cost: {

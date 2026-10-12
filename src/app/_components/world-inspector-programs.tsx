@@ -5,7 +5,8 @@ import { JsonInspector } from "./world-inspector-json";
 
 type Programs = NonNullable<WorldInspectorStepDetail["programs"]>;
 const statusLabels: Record<string, string> = { running: "执行中", waiting: "等待证据", interrupted: "已中断", ended: "程序已结束",
-  "needs-expansion": "需要新计划", completed: "目标已有完成证据", startable: "可执行", "needs-generation": "需要生成计划", "needs-decision": "等待判断" };
+  "needs-expansion": "需要新计划", completed: "目标已有完成证据", startable: "可执行", "needs-generation": "需要生成计划", "needs-decision": "等待判断",
+  queued: "排队", "compilation-required": "需要生成或修复" };
 
 export function WorldInspectorPrograms({ value, actorId }: { value: Programs; actorId: string }) {
   const relevant = (id: string) => actorId === "world" || actorId === id;
@@ -21,9 +22,10 @@ export function WorldInspectorPrograms({ value, actorId }: { value: Programs; ac
       已知用量估算 ¥{knownCost.toFixed(4)}{unknown ? `；${unknown} 项费用不完整` : ""}。费用按固定预算价格估算，包含修复请求。</p>
     <JsonInspector label="模型配置、调用用量与价格依据" value={{ models: value.models, calls }} />
     <div className="cg-inspector-slot-table-wrap"><table className="cg-inspector-slot-table">
-      <caption>实际角色目标覆盖</caption><thead><tr><th scope="col">角色</th><th scope="col">目标</th><th scope="col">状态</th><th scope="col">依据</th></tr></thead>
-      <tbody>{value.coverage.filter(row => relevant(row.ownerId)).map(row => <tr key={`${row.ownerId}:${row.goalId}`}>
-        <td>{row.ownerId}</td><td>{row.goalId}</td><td>{statusLabels[row.status] ?? row.status}</td><td>{row.reasons.join("；")}</td>
+      <caption>实际角色目标覆盖</caption><thead><tr><th scope="col">角色</th><th scope="col">目标</th><th scope="col">私有计划</th><th scope="col">世界执行</th><th scope="col">依据</th></tr></thead>
+      <tbody>{value.worldCoverage.filter(row => relevant(row.ownerId)).map(row => <tr key={`${row.ownerId}:${row.goalId}`}>
+        <td>{row.ownerId}</td><td>{row.goalId}</td><td>{statusLabels[row.status] ?? row.status}</td>
+        <td>{statusLabels[row.executionStatus] ?? row.executionStatus}</td><td>{[...row.reasons, ...row.attempts.flatMap(attempt => attempt.failure ? [attempt.failure] : [])].join("；")}</td>
       </tr>)}</tbody>
     </table></div>
     {programs.map(program => <details key={program.instanceId} open={program.active}>

@@ -17,7 +17,7 @@ import { createWorldEventCandidate, type WorldEventCandidate } from "./kernel";
 import { advanceProgramControls } from "./program-control";
 import { authorizeWorldRandomness, prepareWorldRandomPlan, reserveWorldRandomness, worldRandomResources, type WorldRandomCommitment } from "./randomness";
 import { settleRandomReservation } from "./random-reservation";
-import { worldProgramSources, worldResources, programWorldResources } from "./resources";
+import { worldProgramSources, programWorldResources } from "./resources";
 import { EventScheduler } from "./scheduler";
 import { collectDecisionAudits, collectDecisionUses, initialDecisionEventState, invocationAllocator, readDecisionEventState, sealDecisionEventState,
   type DecisionEventModels, type DecisionEventState } from "./runtime-state";
@@ -63,13 +63,16 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     const result = await advanceProgramControls(this.provider, input.state, initial, roster, context.modelScope, {
       maxDependencyRounds: this.config.maxDependencyRounds, nextInvocation: allocator.next,
     });
-    result.control.worldResources = worldResources(input.state, authority);
-    result.control.modelOrdinals = allocator.ordinals;
-    const control = sealDecisionEventState(result.control);
+    const prepared = await prepareProgramWorldWork(this.provider, authority, input.state, result.control, context.modelScope, allocator.next, "initial-coverage");
+    prepared.control.modelOrdinals = allocator.ordinals;
+    const control = sealDecisionEventState(prepared.control);
+    const modelAudits = collectDecisionAudits([...result.modelAudits, ...prepared.modelAudits]);
     return { schemaVersion: WORLD_STEP_CANDIDATE_SCHEMA_VERSION, sourceStateHash: contentHash(input.state), agentCommits: [],
-      modelAudits: result.modelAudits, diagnostics: { activatedAgentIds: result.activatedAgentIds, reusedAgentIds: [], mindFallbackAgentIds: [] },
-      decisionEvent: { version: 2 as const, producerHash: this.manifest.hash, modelCatalog: this.provider.catalog.snapshot(), authority, control,
-        decisions: result.decisions, modelAudits: result.modelAudits } };
+      modelAudits, diagnostics: { activatedAgentIds: result.activatedAgentIds, reusedAgentIds: [], mindFallbackAgentIds: [] },
+      decisionEvent: { version: 3 as const, producerHash: this.manifest.hash, modelCatalog: this.provider.catalog.snapshot(), authority, control,
+        activityAdmissionInput: prepared.activityAdmissionInput,
+        decisions: collectDecisionUses([...result.decisions, ...prepared.decisions]), modelAudits } };
+
   }
   async prepareStep(input: Readonly<WorldStepInput>, context: ExecutionContext): Promise<WorldStepPreparation> {
     const source = input.state;

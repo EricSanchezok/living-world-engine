@@ -15,7 +15,7 @@ import { admitProgramActivities } from "./activities";
 /** Compile or bind only previously unhandled attempts. A failed input waits for an actual physical dependency change. */
 export async function prepareProgramWorldWork(provider: StructuredModelProvider, definition: WorldRuntimeContract,
   state: Readonly<SimulationState>, initial: DecisionEventState, scope: ModelExecutionScope,
-  nextInvocation: (subjectId: string, slots?: number) => number) {
+  nextInvocation: (subjectId: string, slots?: number) => number, reason: "initial-coverage" | "new-intent" = "new-intent") {
   if (provider.catalog.hash !== initial.modelCatalogHash) throw new Error("world program model binding changed");
   const control = structuredClone(initial), library = new WorldProgramLibrary(control.worldLibrary);
   const resources = worldResources(state, definition, control.worldResources), sources = worldProgramSources(definition, state);
@@ -41,7 +41,7 @@ export async function prepareProgramWorldWork(provider: StructuredModelProvider,
     else {
       const result = await compileWorldProgram(provider, { ...scope, profileId: control.models.creation,
         invocationBase: nextInvocation("world", 2), definition, state, resources, attempt: pending.attempt,
-        reason: rejection ? "revision" : "new-intent", ...(rejection ? { rejection } : {}) });
+        reason: rejection ? "revision" : reason, ...(rejection ? { rejection } : {}) });
       if (result.audit) audits.push(result.audit);
       if (result.status === "failed") {
         pending.bound = null;

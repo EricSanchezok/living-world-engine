@@ -156,6 +156,19 @@ export function ownedProgramEntityIds(state: Readonly<SimulationState>, ownerId:
   const agent = state.agents[ownerId]; if (!agent) throw new Error("program owner has retired");
   return privateProgramEntityIds(projectAgentPerspective(state as SimulationState, agent));
 }
+/** Coverage binds private goals to actual compiled and scheduled world work. */
+export function programExecutionCoverage(control: DecisionEventState) {
+  return control.coverage.map(row => {
+    const pending = control.pending.filter(value => value.attempt.actorId === row.ownerId &&
+      value.attempt.program && row.programHashes.includes(value.attempt.program.definitionHash));
+    const executionStatus = row.status === "completed" ? "completed" :
+      pending.some(value => value.bound && !value.failure && value.atSeconds !== null) ? "running" :
+      pending.some(value => value.bound && !value.failure && value.atSeconds === null) ? "queued" :
+      pending.length ? "compilation-required" : row.status === "startable" || row.status === "needs-generation" ? "compilation-required" : row.status;
+    return { ...row, executionStatus, attempts: pending.map(value => ({ id: value.attempt.id,
+      ruleHash: value.bound?.program.hash ?? null, atSeconds: value.atSeconds, failure: value.failure })) };
+  });
+}
 export function collectDecisionAudits(audits: ModelExecutionAudit[]): ModelExecutionAudit[] {
   const unique = new Map<string, ModelExecutionAudit>();
   for (const audit of audits) {
