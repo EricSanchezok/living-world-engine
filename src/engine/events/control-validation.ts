@@ -154,8 +154,9 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
     }
   }
   for (const pending of before.pending) if (!after.pending.some(value => value.attempt.id === pending.attempt.id)) {
-    const changed = before.policyKinds[pending.attempt.actorId] !== after.policyKinds[pending.attempt.actorId];
-    const interruptible = !pending.bound || source.truth.mechanics.temporalProfiles[pending.bound.program.definition.timing.profileId]?.interruptible;
+    const changed = before.policyKinds[pending.attempt.actorId] !== after.policyKinds[pending.attempt.actorId] ||
+      externalActions.some(action => action.agentId === pending.attempt.actorId);
+    const interruptible = pending.failure || !pending.bound || source.truth.mechanics.temporalProfiles[pending.bound.program.definition.timing.profileId]?.interruptible;
     if (!changed || roster[pending.attempt.actorId]?.kind === "model" || !interruptible) throw new Error("pending action disappeared without authorized interruption");
   }
 }

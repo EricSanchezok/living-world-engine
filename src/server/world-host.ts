@@ -51,6 +51,8 @@ import {
 } from "../engine/runtime/observability";
 import { quantityId } from "../engine/runtime/runtime-id";
 import { SimulationEngine } from "../engine/runtime/simulation";
+import { WorldQuiescentError } from "../engine/runtime/execution";
+import type { DecisionEventState } from "../engine/events/runtime-state";
 import {
   toWorldRuntimeContract,
   validateWorldModelProfiles,
@@ -315,6 +317,12 @@ function currentRun(document: WorldInstanceDocument): WorldRunRecord | undefined
 }
 
 function externalDecisionAgentIds(document: WorldInstanceDocument): string[] {
+  if (document.state.executionState?.data.kind === "decision-event") {
+    const control = document.state.executionState.data as unknown as DecisionEventState;
+    const busy = new Set(control.pending.filter(pending => !pending.failure).map(pending => pending.attempt.actorId));
+    return Object.values(document.policyBindings).filter(binding => binding.kind === "external" && !busy.has(binding.agentId))
+      .map(binding => binding.agentId).sort();
+  }
   const decisionAgents = new Set(document.state.history.at(-1)?.decisionPoints.map((point) => point.agentId) ?? []);
   const busyAgents = new Set(Object.values(document.state.truth.activities)
     .filter((activity) => activity.status === "active" || activity.status === "paused" ||
@@ -414,7 +422,7 @@ function conversationFor(
     const run = document.runs[intent.runId];
     const committedSteps = (run?.committedRevisions ?? []).flatMap((revision) => {
       const committed = document.state.history.find((step) => step.revision === revision);
-      return committed ? [committed] : [];
+      return committed && committed.temporalBoundary.deltaSeconds > 0 ? [committed] : [];
     });
     const responses = committedSteps.map((committed) => {
       const summaries = committed.observations
@@ -2073,8 +2081,13 @@ export class WorldHost {
         ).toISOString();
       }
       const requestedComplete = runRecord.requestedBoundaryCount !== null &&
-        runRecord.committedRevisions.length >= runRecord.requestedBoundaryCount;
-      const rootComplete = runRecord.activityIds.length > 0 && runRecord.activityIds.every((activityId) => {
+        runRecord.committedRevisions.filter(revision => document.state.history.some(step => step.revision === revision &&
+          step.temporalBoundary.deltaSeconds > 0)).length >= runRecord.requestedBoundaryCount;
+      const nativeRootComplete = result.committed.decisionEvent && runRecord.rootIntents.length > 0 &&
+        runRecord.rootIntents.every(intent => document.state.history.some(step => runRecord.committedRevisions.includes(step.revision) &&
+          step.decisionEvent?.event?.programs.some(program => program.attempt.program === null &&
+            program.attempt.actorId === intent.agentId && program.attempt.intent === intent.rawText)));
+      const rootComplete = nativeRootComplete || runRecord.activityIds.length > 0 && runRecord.activityIds.every((activityId) => {
         const status = document.state.truth.activities[activityId]?.status;
         return status !== "active" && status !== "paused" && status !== "queued" && status !== "ready";
       });
@@ -2187,6 +2200,22 @@ export class WorldHost {
     } catch (error) {
       this.runControllers.delete(runId);
       this.debugStageGates.delete(runId);
+      if (error instanceof WorldQuiescentError) {
+        const latest = this.read(document.id), waiting = structuredClone(latest.document);
+        const waitingRun = waiting.runs[runId];
+        if (!waitingRun || waitingRun.generation !== runGeneration || waiting.state.revision !== request.expectedRevision) return latest;
+        waitingRun.status = "paused"; waitingRun.stopReason = "waiting-for-event"; delete waitingRun.error;
+        waitingRun.updatedAt = this.now().toISOString(); waiting.updatedAt = waitingRun.updatedAt; waiting.actionWindow = null;
+        waiting.scheduler = { mode: "paused", generation: waiting.scheduler.generation + 1, nextTickAt: null };
+        execution?.trace.emit({ event: "step.waiting", attributes: { reason: "no-new-event-or-evidence" },
+          hashes: { state: contentHash(waiting.state) } });
+        execution?.trace.flush();
+        const finish: FinishExecutionInput = { status: "succeeded", stateHash: contentHash(waiting.state) };
+        if (execution && this.options.ledger && isAtomicStore(this.options.store)) return this.options.store.compareAndSwapInstanceAndFinishExecution(
+          document.id, latest.generation, waiting, execution.id, finish, "instance").instance;
+        if (execution) this.options.ledger?.finishExecution(execution.id, finish);
+        return this.persist(latest, waiting);
+      }
       if (atomicStageEntered && !(error instanceof Error && error.name === "AbortError")) {
         const stage = executionStage("atomic-commit");
         execution?.trace.emit({

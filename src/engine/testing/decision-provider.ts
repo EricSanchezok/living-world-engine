@@ -11,10 +11,10 @@ export function decisionQuestionIds(body: Record<string, unknown>): string[] {
 }
 
 /** Only remote HTTP is replaced; model identities, schemas, audits and queueing use the real gateway. */
-export function decisionTestProvider(output?: (body: Record<string, unknown>, attempt: number) => unknown) {
-  const base = createTestModelCatalog(["world-test"]);
+export function decisionTestProvider(output?: (body: Record<string, unknown>, attempt: number) => unknown, profileIds = ["world-test"]) {
+  const base = createTestModelCatalog(profileIds);
   const catalog = parseModelCatalog({ schema_version: 3, scheduler: base.scheduler, registry: base.registry, accounts: base.accounts,
-    profiles: { "world-test": { ...base.profile("world-test"), allowed_roles: ["decision", "creation"] } } });
+    profiles: { ...base.profiles, "world-test": { ...base.profile("world-test"), allowed_roles: ["decision", "creation"] } } });
   const registry = createTestModelRegistry(catalog); let calls = 0;
   const transport = vi.fn<typeof fetch>(async (_url, init) => {
     const body = JSON.parse(String(init?.body));

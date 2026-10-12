@@ -4,7 +4,7 @@ import type { StructuredModelProvider } from "../models/model-provider";
 import { DecisionRuntime, type DecisionUse } from "../programs/decision-runtime";
 import {
   defineAlgorithmManifest, algorithmRef, WORLD_STEP_CANDIDATE_SCHEMA_VERSION, WORLD_STEP_PREPARATION_SCHEMA_VERSION,
-  StepPreparationInvalidatedError, type BootstrapInput, type ExecutionContext, type ExternalReactionInput, type WorldExecutionAlgorithm,
+  WorldQuiescentError, StepPreparationInvalidatedError, type BootstrapInput, type ExecutionContext, type ExternalReactionInput, type WorldExecutionAlgorithm,
   type WorldStepInput, type WorldStepPreparation, type PolicyBinding,
 } from "../runtime/execution";
 import type { JsonObject } from "../runtime/json";
@@ -32,10 +32,7 @@ export const decisionEventManifest = (config: DecisionEventConfig = JEV_EVENT_CO
   defineAlgorithmManifest({ id: "decision-event", version: "1", config: config as unknown as JsonObject });
 export const decisionEventAlgorithmRef = (config: DecisionEventConfig = JEV_EVENT_CONFIG) => algorithmRef(decisionEventManifest(config));
 
-/** Persisted no-work is an idle world, never a reason to mint another empty revision. */
-export class WorldQuiescentError extends Error {
-  constructor(readonly failures: DecisionEventState["failures"]) { super("world is waiting for new input or evidence"); this.name = "WorldQuiescentError"; }
-}
+export { WorldQuiescentError } from "../runtime/execution";
 interface PreparedNative {
   control: DecisionEventState; event: WorldEventCandidate | null; decisions: DecisionUse[]; activatedAgentIds: string[];
 }
@@ -80,7 +77,17 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     if (new Set(input.request.externalActions.map(action => action.agentId)).size !== input.request.externalActions.length) throw new Error("duplicate external actor submission");
     for (const action of input.request.externalActions) {
       if (input.policyRoster[action.agentId]?.kind !== "external") throw new Error("external action cannot control this Agent");
-      if (controlled.control.pending.some(pending => pending.attempt.actorId === action.agentId)) throw new Error("the actor is completing noninterruptible work");
+      const replacing = controlled.control.pending.filter(pending => pending.attempt.actorId === action.agentId);
+      if (replacing.some(pending => !pending.failure && pending.bound &&
+        !source.truth.mechanics.temporalProfiles[pending.bound.program.definition.timing.profileId]?.interruptible)) {
+        throw new Error("the actor is completing noninterruptible work");
+      }
+      const cancelled = new Set(replacing.map(pending => pending.attempt.id));
+      const externalSchedule = new EventScheduler(source.truth.elapsedSeconds, controlled.control.scheduler);
+      for (const queued of externalSchedule.snapshot().pending) if (queued.kind === "world" &&
+        cancelled.has((queued.payload as { attemptId: string }).attemptId)) externalSchedule.cancel(queued.id);
+      controlled.control.scheduler = externalSchedule.snapshot();
+      controlled.control.pending = controlled.control.pending.filter(pending => !cancelled.has(pending.attempt.id));
       const authored = await authorExternalAction(this.provider, source, action, { ...context.modelScope,
         runtimeIdentity: { worldHash: source.worldHash, revision: source.revision }, modelRegistrySnapshotHash: initial.registryHash,
         profileId: initial.models.creation, invocationBase: allocator.next(action.agentId, 2) });

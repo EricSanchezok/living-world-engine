@@ -70,6 +70,13 @@ export const ENGINE_OPERATION_CONTRACT_VERSION = 1 as const;
 export const WORLD_STEP_CANDIDATE_SCHEMA_VERSION = 9 as const;
 export const WORLD_STEP_PREPARATION_SCHEMA_VERSION = 7 as const;
 
+/** A stable idle frontier is a successful wait, with no new canonical revision. */
+export class WorldQuiescentError extends Error {
+  constructor(readonly failures: readonly { ownerId: string; phase: string; inputHash: string; reason: string; recoverable: true }[]) {
+    super("world is waiting for new input or evidence"); this.name = "WorldQuiescentError";
+  }
+}
+
 export class StepPreparationInvalidatedError extends Error {
   constructor(message = "step preparation no longer matches its execution inputs") {
     super(message);

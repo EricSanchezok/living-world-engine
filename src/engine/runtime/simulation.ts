@@ -13,7 +13,7 @@ import type {
   WorldStepCandidate,
   WorldStepPreparation,
 } from "./execution";
-import { algorithmRef, decisionEligibleAgentIds, resolutionObservations } from "./execution";
+import { WorldQuiescentError, algorithmRef, decisionEligibleAgentIds, resolutionObservations } from "./execution";
 import { createHistoryReplayBase } from "./history-replay";
 import { validateAlgorithmExecutionState } from "./execution-state";
 import type { CommittedStep, SimulationState } from "../contracts/model";
@@ -772,6 +772,11 @@ export class SimulationEngine {
         decisionRequests: structuredClone(result.committed.decisionRequests),
       };
     } catch (error) {
+      if (error instanceof WorldQuiescentError) {
+        trace.emit({ event: "step.waiting", attributes: { reason: "no-new-event-or-evidence" }, hashes: { state: contentHash(source) } });
+        trace.flush();
+        throw error;
+      }
       const currentStage = context.stages?.current;
       if (currentStage && context.stages && !(error instanceof Error && error.name === "AbortError")) {
         context.stages.failed(currentStage, serializeRuntimeError(error));
