@@ -1,6 +1,6 @@
 # Decision and behavior program runtime
 
-[Spec 0181](../specs/0181-jev-decision-event-engine.md) defines the replacement engine contract. The current program foundation lives in `src/engine/programs/`; integration with world event adjudication and the default instance path remains in progress.
+[Spec 0181](../specs/0181-jev-decision-event-engine.md) defines the replacement engine contract. The program runtime lives in `src/engine/programs/` and runs through the registered world event candidate; default instance replacement remains in progress.
 
 ## Private program boundary
 
@@ -10,7 +10,7 @@
 
 `compileAgentProgram` uses the creation profile through ModelGateway, checks the actual owner, goals, sources, parameters and control graph, and permits one targeted repair. The rejected candidate and issues use the existing logical repair binding and tail layout. Exhaustion returns a recoverable failure with both invocation audits. It never substitutes an empty successful plan.
 
-The creation wire contract is a nested behavior tree with inline conditions and typed parameter values. The compiler derives control-node identities, interns identical conditions, binds the requesting owner and closes read/source dependencies. Entity parameter values use the actual private entity domain in the wire schema. The normalized executable definition remains the immutable runtime contract; the gateway retains both raw creation output and its normalized hash. Repairs retain the original rejected output and, when possible, a lossless tree rendering of it. No graph topology or semantic condition is guessed from an invalid response.
+The creation wire contract is a nested behavior tree with inline conditions and typed parameter values. The compiler derives control-node identities, interns identical conditions, binds the requesting owner and closes read/source dependencies. Entity values, resource keys, source IDs and goal IDs use their actual authorized domains in the wire schema, including conditions nested inside the tree. The normalized executable definition remains the immutable runtime contract; the gateway retains both raw creation output and its normalized hash. Repairs retain the original rejected output and, when possible, a lossless tree rendering of it. No graph topology or semantic condition is guessed from an invalid response.
 
 ## Execution and recovery
 

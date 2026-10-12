@@ -135,7 +135,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     await context.stages?.after(executionStage("temporal-dependency"));
     await context.stages?.before(executionStage("truth-resolution"));
     const resources = randomness ? worldRandomResources(control.worldResources, randomness) : control.worldResources;
-    const adjudication = programs.length && !randomDeferral ? await adjudicateWorldPrograms(runtime, programs, resources, worldProgramSources(authority, source), scoped())
+    const adjudication = programs.length && !randomDeferral ? await adjudicateWorldPrograms(runtime, programs, resources, worldProgramSources(authority, source), scoped(), { state: physical, definition: authority, randomness })
       : { records: [], evidence: [], calls: [] };
     decisions.push(...adjudication.calls); audits.push(...adjudication.calls.filter(call => !call.reused).map(call => call.result.audit));
     await context.stages?.after(executionStage("truth-resolution"));

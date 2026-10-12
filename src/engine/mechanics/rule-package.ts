@@ -296,7 +296,7 @@ export class RulePackageRegistry {
    * projection intentionally omits package configuration and executable code;
    * it is safe to include in model context and remains script-driven.
    */
-  promptContracts(references: readonly RulePackageReference[]): MechanicPromptContract[] {
+  promptContracts(references: readonly RulePackageReference[], vocabulary: "model" | "runtime" = "model"): MechanicPromptContract[] {
     return references.flatMap((reference) => {
       const rulePackage = this.packages.get(reference.id);
       if (!rulePackage || rulePackage.version !== reference.version) {
@@ -307,7 +307,8 @@ export class RulePackageRegistry {
         version: rulePackage.version,
         ruleId: rule.id,
         description: rule.description,
-        inputSchema: projectMechanicInputSchema(z.toJSONSchema(rule.inputSchema, { target: "draft-07" })),
+        inputSchema: vocabulary === "model" ? projectMechanicInputSchema(z.toJSONSchema(rule.inputSchema, { target: "draft-07" }))
+          : z.toJSONSchema(rule.inputSchema, { target: "draft-07" }),
       }));
     }).sort((left, right) =>
       `${left.packageId}:${left.ruleId}`.localeCompare(`${right.packageId}:${right.ruleId}`));

@@ -15,32 +15,38 @@ export type BehaviorNode = Attempt
   | { kind: "wait"; condition: ConditionDraft; deadlineSeconds: number | null }
   | { kind: "finish" };
 
-const behaviorNodeSchema: z.ZodType<BehaviorNode> = z.lazy(() => z.discriminatedUnion("kind", [
+function behaviorSchema(condition: z.ZodType<ConditionDraft>): z.ZodType<BehaviorNode> {
+  const behaviorNodeSchema: z.ZodType<BehaviorNode> = z.lazy(() => z.discriminatedUnion("kind", [
   programNodeSchema.options[0].omit({ id: true }),
   z.object({ kind: z.literal("sequence"), children: z.array(behaviorNodeSchema).min(1) }).strict(),
   z.object({ kind: z.literal("parallel"), children: z.array(behaviorNodeSchema).min(2) }).strict(),
-  z.object({ kind: z.literal("branch"), condition: conditionSchema, yes: behaviorNodeSchema, no: behaviorNodeSchema }).strict(),
-  z.object({ kind: z.literal("repeat"), condition: conditionSchema, body: behaviorNodeSchema }).strict(),
-  z.object({ kind: z.literal("wait"), condition: conditionSchema, deadlineSeconds: z.number().int().positive().safe().nullable() }).strict(),
+  z.object({ kind: z.literal("branch"), condition, yes: behaviorNodeSchema, no: behaviorNodeSchema }).strict(),
+  z.object({ kind: z.literal("repeat"), condition, body: behaviorNodeSchema }).strict(),
+  z.object({ kind: z.literal("wait"), condition, deadlineSeconds: z.number().int().positive().safe().nullable() }).strict(),
   z.object({ kind: z.literal("finish") }).strict(),
 ]));
+  return behaviorNodeSchema;
+}
 
 /** The creation model writes a structured tree. It never assigns graph IDs or duplicates parameter bindings. */
-export function programDraftSchema(entityIds: readonly string[]) {
+export function programDraftSchema(entityIds: readonly string[], catalogs?: { resources: string[]; sources: string[]; goals: string[] }) {
   const entity = entityIds.length ? z.enum([...entityIds] as [string, ...string[]]) : z.never();
   const description = z.string().trim().min(1);
+  const domain = (values?: string[]) => values ? values.length ? z.enum(values as [string, ...string[]]) : z.never() : z.string().min(1);
+  const resource = domain(catalogs?.resources), source = domain(catalogs?.sources), goal = domain(catalogs?.goals);
+  const condition = conditionSchema.extend({ reads: z.array(resource).min(1), sourceIds: z.array(source).min(1) });
   return z.object({
     version: z.literal(1), name: description, description,
-    sourceIds: z.array(programKey).min(1), dependencies: z.array(z.string().min(1)), writes: z.array(z.string().min(1)),
+    sourceIds: z.array(source).min(1), dependencies: z.array(resource), writes: z.array(resource),
     parameters: z.record(programKey, z.discriminatedUnion("kind", [
       z.object({ kind: z.literal("entity"), description, value: entity }).strict(),
       z.object({ kind: z.literal("text"), description, value: z.string() }).strict(),
       z.object({ kind: z.literal("number"), description, value: z.number().finite() }).strict(),
     ])),
-    start: conditionSchema, interrupts: z.array(conditionSchema),
-    milestones: z.array(z.object({ id: programKey, condition: conditionSchema }).strict()),
-    goals: z.array(z.object({ goalId: z.string().min(1), condition: conditionSchema }).strict()).min(1),
-    body: behaviorNodeSchema,
+    start: condition, interrupts: z.array(condition),
+    milestones: z.array(z.object({ id: programKey, condition }).strict()),
+    goals: z.array(z.object({ goalId: goal, condition }).strict()).min(1),
+    body: behaviorSchema(condition),
   }).strict();
 }
 export type ProgramDraft = z.infer<ReturnType<typeof programDraftSchema>>;

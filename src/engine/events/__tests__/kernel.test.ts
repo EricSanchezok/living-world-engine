@@ -23,24 +23,24 @@ function fixture() {
   const state = structuredClone(definition.initialState), sources = worldProgramSources(definition, state), resources = worldResources(state, definition);
   const from = `quantity:${quantityId(state.worldHash, "spirit-stone", "player")}`;
   const to = `quantity:${quantityId(state.worldHash, "spirit-stone", "keeper")}`;
-  const raw: WorldProgramDefinition = { version: 1, namespace: "world", id: "voluntary-gift", description: "Transfer the actor's offered stones to a nearby recipient.",
-    sourceIds: ["world", "law:no-free-spirit-stones"], parameters: { actor: { kind: "entity", description: "Giver" }, recipient: { kind: "entity", description: "Recipient" }, amount: { kind: "number", description: "Offered amount" } },
+  const raw: WorldProgramDefinition = { version: 2, namespace: "world", id: "voluntary-gift", description: "Transfer the actor's offered stones to a nearby recipient.",
+    sourceIds: ["world", "law:no-free-spirit-stones", "mechanics"], parameters: { actor: { kind: "entity", description: "Giver" }, recipient: { kind: "entity", description: "Recipient" }, amount: { kind: "number", description: "Offered amount" } },
     reads: ["entity:{actor}", "entity:{recipient}", "placement:{actor}", "placement:{recipient}", from, to], writes: ["quantities"],
     timing: { profileId: "explicit-duration", basis: { kind: "explicit_duration", seconds: { kind: "literal", value: 5 }, sourceText: "5 seconds" } }, random: [],
     predicates: [{ id: "authorized", description: "The actor voluntarily offers their own stones to this reachable recipient.", reads: ["placement:{actor}", "placement:{recipient}"], sourceIds: ["world"],
       test: { kind: "semantic", instructions: "Check the actual offer and reach. Do not fabricate acceptance or an exchange promised in return." }, unknown: "wait" }],
     branches: [{ id: "give", when: [{ predicateId: "authorized", equals: "yes" }], outcome: "succeeded", acknowledgement: "attempted", description: "A voluntary transfer occurs.",
-      effects: [{ kind: "transfer_quantity", fields: {
+      effects: [], mechanics: [{ id: "gift", packageId: "core-resolution", ruleId: "transfer-quantity", input: {
         definitionId: "spirit-stone",
         fromHolderId: { $expression: { kind: "parameter", name: "actor" } },
         toHolderId: { $expression: { kind: "parameter", name: "recipient" } },
-        amount: { $expression: { kind: "parameter", name: "amount" } },
+        amountSource: { kind: "explicit_action_amount", actionId: { $attempt: "id" }, quotedText: "2", amount: { $expression: { kind: "parameter", name: "amount" } } },
       } }], deliveries: [] }],
   };
   const program = admitWorldProgram(raw, sources);
   const bound: BoundWorldProgram = { program, parameters: { actor: "player", recipient: "keeper", amount: 2 }, attempt: {
     id: runtimeId({ worldHash: state.worldHash, revision: 0, kind: "action", stage: "program", owner: "player", round: 0, ordinal: 0 }),
-    actorId: "player", actorEntityId: "player", intent: "Spend 5 seconds giving the keeper two of my stones as a gift.", utterance: null, targetEntityIds: ["keeper"], startedAtSeconds: 0,
+    actorId: "player", actorEntityId: "player", intent: "Spend 5 seconds giving the keeper 2 of my stones as a gift.", utterance: null, targetEntityIds: ["keeper"], startedAtSeconds: 0,
     program: { instanceId: "gift-1", definitionHash: contentHash("private"), nodeId: "give", parameterHash: contentHash("parameters"),
       workId: contentHash("work"), requestHash: contentHash("request") },
   } };
@@ -54,11 +54,35 @@ async function adjudicate(f: ReturnType<typeof fixture>, programs = [f.bound], a
   const result = await adjudicateWorldPrograms(new DecisionRuntime(configured.gateway), programs, f.resources, f.sources, {
     profileId: "world-test", workloadId: "world-event-test", batchId: "world-event-test", modelRegistrySnapshotHash: registry.hash,
     runtimeIdentity: { worldHash: f.state.worldHash, revision: f.state.revision }, nextInvocation: () => ++ordinal,
-  });
+  }, { state: f.state, definition: f.definition });
   return { result, configured };
 }
 
 describe("source-bound world event kernel", () => {
+  it("closes explicitly referenced nested sources before admission without inventing rule authority", async () => {
+    const f = fixture(), fact = Object.keys(f.sources).find(id => id.startsWith("fact:"))!;
+    f.raw.predicates[0]!.sourceIds.push(fact);
+    const configured = decisionTestProvider(() => ({ definition: f.raw, parameters: f.bound.parameters }));
+    const result = await compileWorldProgram(configured.gateway, { profileId: "world-test", invocationBase: 1,
+      workloadId: "source-closure", batchId: "source-closure", definition: f.definition, state: f.state,
+      resources: f.resources, attempt: f.bound.attempt, reason: "initial-coverage", runtimeIdentity: { worldHash: f.state.worldHash, revision: 0 } });
+    if (result.status !== "ready") throw new Error(result.reason);
+    expect(result.bound.program.definition.sourceIds).toContain(fact);
+    expect(result.bound.program.sourceHashes[fact]).toBe(contentHash(f.sources[fact]));
+    expect(configured.transport).toHaveBeenCalledTimes(1);
+  });
+  it("rejects raw numeric effects and amounts that are absent from the actual action", async () => {
+    const f = fixture();
+    f.raw.branches[0]!.mechanics = [];
+    f.raw.branches[0]!.effects = [{ kind: "transfer_quantity", fields: {
+      definitionId: "spirit-stone", fromHolderId: "player", toHolderId: "keeper", amount: 2,
+    } }];
+    f.bound.program = admitWorldProgram(f.raw, f.sources);
+    await expect(adjudicate(f)).rejects.toThrow("trusted core-resolution rule");
+    const invented = fixture(); invented.bound.parameters.amount = 3;
+    await expect(adjudicate(invented)).rejects.toThrow("not present verbatim");
+    expect(invented.state.truth.quantities[quantityId(invented.state.worldHash, "spirit-stone", "player")]!.amount).toBe(3);
+  });
   it("requires semantic effect authorization even when every branch prerequisite is mechanical", async () => {
     const f = fixture();
     f.raw.predicates[0]!.test = { kind: "mechanical", operator: "eq", left: { kind: "literal", value: true }, right: { kind: "literal", value: true } };
@@ -124,6 +148,7 @@ describe("source-bound world event kernel", () => {
     const f = fixture(), { result, configured } = await adjudicate(f);
     expect(configured.transport).toHaveBeenCalledTimes(1);
     const candidate = createWorldEventCandidate(f.state, f.definition, f.resources, [f.bound], result, 5);
+    expect(candidate.mechanicResults[0]).toMatchObject({ code: "quantity-transfer-derived", data: { amount: 2, provenance: "explicit_action_amount" } });
     const options = { earliestPendingSeconds: 5, receipts: new Map() };
     const committed = commitWorldEvent(f.state, f.definition, f.resources, candidate, options);
     expect(committed.state.truth.quantities[quantityId(f.state.worldHash, "spirit-stone", "player")]!.amount).toBe(1);
@@ -181,6 +206,7 @@ describe("source-bound world event kernel", () => {
   });
   it("does not label a no-op effect as committed progress", async () => {
     const f = fixture(); f.raw.writes = ["placements"];
+    f.raw.branches[0]!.mechanics = [];
     f.raw.branches[0]!.effects = [{ kind: "place_entity", fields: { entityId: { $expression: { kind: "parameter", name: "actor" } }, placementId: "courtyard" } }];
     f.bound.program = admitWorldProgram(f.raw, f.sources);
     const { result } = await adjudicate(f), candidate = createWorldEventCandidate(f.state, f.definition, f.resources, [f.bound], result, 5);
@@ -189,6 +215,7 @@ describe("source-bound world event kernel", () => {
   });
   it("does not reveal hidden outcomes or hidden progress through a private program receipt", async () => {
     const f = fixture(); f.raw.writes = ["facts"];
+    f.raw.branches[0]!.mechanics = [];
     f.raw.branches[0]!.outcome = "failed";
     f.raw.branches[0]!.effects = [{ kind: "set_fact", fields: { fact: { id: "hidden-result", subjectId: "keeper", predicate: "secret-result",
       value: { kind: "text", value: "failure" }, description: "An unobserved result.", access: { kind: "private" } } } }];
@@ -213,7 +240,7 @@ describe("source-bound world event kernel", () => {
     expect(() => worldProgramDuration(f.bound, f.resources)).toThrow("authored temporal profile");
   });
   it("projects only committed deliveries without exposing a speaker's hidden identity", async () => {
-    const f = fixture(); f.raw.writes = []; f.raw.branches[0]!.effects = [];
+    const f = fixture(); f.raw.writes = []; f.raw.branches[0]!.effects = []; f.raw.branches[0]!.mechanics = [];
     f.bound.attempt.utterance = "I am the rightful king.";
     f.raw.branches[0]!.deliveries = [{ recipientParameter: "recipient", kind: "speech", text: f.bound.attempt.utterance }];
     f.bound.program = admitWorldProgram(f.raw, f.sources);
@@ -262,9 +289,10 @@ describe("source-bound world event kernel", () => {
     f.definition.randomDistributions = [{ id: "gift-size", description: "An offered gift uses one or two stones with equal chance.",
       steps: [{ id: "amount", count: 1, outcomes: [1, 2], aggregate: "first", when: null }] }];
     f.sources = worldProgramSources(f.definition, f.state); f.resources = worldResources(f.state, f.definition);
-    f.raw.sourceIds.push("mechanics"); f.raw.random = [{ id: "gift", distributionId: "gift-size", purpose: "Choose the offered gift amount." }];
+    f.raw.random = [{ id: "gift", distributionId: "gift-size", purpose: "Choose the offered gift amount." }];
     f.raw.reads.push("random:{actor}:gift");
-    f.raw.branches[0]!.effects[0]!.fields.amount = { $expression: { kind: "read", resource: "random:{actor}:gift", path: ["steps", "0", "aggregate"] } };
+    (f.raw.branches[0]!.mechanics[0]!.input as Record<string, import("../../runtime/json").JsonValue>).amountSource = {
+      kind: "random_result", requestId: { $expression: { kind: "read", resource: "random:{actor}:gift", path: ["requestId"] } }, stepId: "amount" };
     f.bound.attempt.intent = "Spend 5 seconds giving the keeper the authored randomly sized gift.";
     f.bound.program = admitWorldProgram(f.raw, f.sources);
     const plan = prepareWorldRandomPlan(f.state, f.definition, f.resources, [f.bound])!;
@@ -279,7 +307,7 @@ describe("source-bound world event kernel", () => {
     expect(f.state.truth.rng).toEqual(plan.before); expect(commitment.after.draws).toBe(plan.before.draws + 1);
     const expanded = validateWorldRandomness(f.state, f.definition, f.resources, [f.bound], commitment);
     expect(expanded).toEqual(worldRandomResources(f.resources, commitment));
-    const judgments = await adjudicateWorldPrograms(runtime, [f.bound], expanded, f.sources, scope);
+    const judgments = await adjudicateWorldPrograms(runtime, [f.bound], expanded, f.sources, scope, { state: f.state, definition: f.definition, randomness: commitment });
     const candidate = createWorldEventCandidate(f.state, f.definition, expanded, [f.bound], judgments, 5, commitment);
     const result = commitWorldEvent(f.state, f.definition, f.resources, candidate, { earliestPendingSeconds: 5, receipts: new Map() });
     const amount = commitment.results[0]!.steps[0]!.aggregate as number;

@@ -43,7 +43,7 @@ export async function compileAgentProgram(provider: StructuredModelProvider, inp
   const admission: ProgramAdmission = { ownerId: input.ownerId, sources: new Map(Object.entries(input.sources).map(([id, source]) => [id, contentHash(source)])),
     resources: new Set(Object.keys(input.resources)), goalIds: new Set(input.goalIds) };
   const entities = new Set(input.entityIds);
-  const draftSchema = programDraftSchema(input.entityIds);
+  const draftSchema = programDraftSchema(input.entityIds, { resources: Object.keys(input.resources).sort(), sources: Object.keys(input.sources).sort(), goals: input.goalIds });
   const wireJsonSchema = z.toJSONSchema(draftSchema, { target: "draft-07", reused: "ref" });
   const validate = (value: z.infer<typeof programCreationSchema>) => {
     const program = admitProgram(value.definition, admission);

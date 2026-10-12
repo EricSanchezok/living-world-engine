@@ -11,8 +11,9 @@ import { frozenClone, type JsonValue } from "../runtime/json";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import { worldProgramDuration, worldQuestionWork, type BoundWorldProgram, type WorldAttempt } from "./adjudication";
 import { captureReads, worldProgramSources } from "./resources";
-import { admitWorldProgram, bindWorldProgram, renderWorldText, worldProgramSchema } from "./world-program";
+import { admitWorldProgram, bindWorldProgram, closeWorldProgramReferences, renderWorldText, worldProgramSchema } from "./world-program";
 import { prepareWorldRandomPlan } from "./randomness";
+import { worldMechanicContracts } from "./mechanics";
 
 export const worldCompilationSchema = z.object({ definition: worldProgramSchema, parameters: z.record(programKey, z.json()) }).strict();
 export interface WorldCompilationRequest extends ModelExecutionScope {
@@ -38,7 +39,8 @@ export async function compileWorldProgram(provider: StructuredModelProvider, req
     resourceAddressing: { entity: "entities[id]", placement: "placements[id]", fact: "facts[id]", meter: "meters[id]", quantity: "quantities[id]",
       rating: "ratings[id]", condition: "conditions[id]", activity: "activities[id]", pool: "pools[id]", timer: "timers[id]", law: "laws entry matching id",
       temporal: "mechanics.temporalProfiles[id]" },
-    effectContract: z.toJSONSchema(worldDeltaOperationSchema, { target: "draft-07", reused: "ref" }) },
+    effectContract: z.toJSONSchema(worldDeltaOperationSchema, { target: "draft-07", reused: "ref" }),
+    mechanicContracts: worldMechanicContracts(request.definition) },
     task: { attempt: request.attempt, reason: request.reason, rejection: request.rejection ?? null, constraints: [] }, repair: null });
   const sourceHash = contentHash(context);
   const validate = (output: z.infer<typeof worldCompilationSchema>) => {
@@ -53,11 +55,11 @@ export async function compileWorldProgram(provider: StructuredModelProvider, req
     captureReads(request.resources, program.definition.reads.filter(key => !key.startsWith("random:")).map(key => renderWorldText(key, bound.parameters)));
     worldProgramDuration(bound, request.resources);
     // Build every branch before accepting it, so malformed effect shapes get the single targeted repair.
-    if (!program.definition.random.length) worldQuestionWork(bound, request.resources);
+    if (!program.definition.random.length) worldQuestionWork(bound, request.resources, { state: request.state, definition: request.definition });
     else prepareWorldRandomPlan(request.state, request.definition, request.resources, [bound]);
   };
   const system = loadPromptAsset("system/world-program-creation.md"), userPrompt = loadPromptAsset("user/world-program-creation.md");
-  const promptVersion = `world-program-creation-${contentHash({ system, userPrompt, contract: 1, repair: LOGICAL_CANDIDATE_REPAIR_VERSION, layout: "logical-tail-v1" })}`;
+  const promptVersion = `world-program-creation-${contentHash({ system, userPrompt, contract: 2, repair: LOGICAL_CANDIDATE_REPAIR_VERSION, layout: "logical-tail-v1" })}`;
   const logicalInvocationId = modelInvocationIdentity(request, "creation", "world", request.invocationBase).modelInvocationId;
   const scope = { workloadId: request.workloadId, batchId: request.batchId, runtimeIdentity: request.runtimeIdentity,
     modelRegistrySnapshotHash: request.modelRegistrySnapshotHash, observer: request.observer, abortSignal: request.abortSignal,
@@ -68,11 +70,15 @@ export async function compileWorldProgram(provider: StructuredModelProvider, req
       logicalInvocationId, validate, invoke: async repair => {
         const identity = modelInvocationIdentity(request, "creation", "world", request.invocationBase + repair.attempt);
         return provider.generateStructured({ ...scope, ...identity, profileId: request.profileId, subjectId: "world", role: "creation",
-          schemaName: "WorldProgramV1", schema: worldCompilationSchema, system, userPrompt, promptVersion, jsonExamplePolicy: "omit",
+          schemaName: "WorldProgramV2", schema: worldCompilationSchema, system, userPrompt, promptVersion, jsonExamplePolicy: "omit",
+          preprocessOutput: raw => {
+            const parsed = worldCompilationSchema.parse(raw);
+            return { value: { ...parsed, definition: closeWorldProgramReferences(parsed.definition) }, symbolRepairs: [] };
+          },
           ...(repair.attempt > 0 ? { repairContextPlacement: "logical-tail-v1" as const } : {}),
           correlation: modelInvocationCorrelation(request, "creation", "world", identity, { logicalInvocationId,
             semanticRepairAttempt: repair.attempt, ...(repair.parentInvocationId ? { parentInvocationId: repair.parentInvocationId } : {}), ...(repair.repairOf ? { repairOf: repair.repairOf } : {}) }),
-          context: logicalRepairContext({ ...context, repair: { issues: repair.issues } }, repair, sourceHash, "WorldProgramV1"),
+          context: logicalRepairContext({ ...context, repair: { issues: repair.issues } }, repair, sourceHash, "WorldProgramV2"),
         });
       } });
     return { status: "ready", sourceHash, bound: { program: admitWorldProgram(result.value.definition, sources),

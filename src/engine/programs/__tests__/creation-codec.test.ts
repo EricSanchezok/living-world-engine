@@ -33,4 +33,13 @@ describe("structured behavior creation codec", () => {
     draft.start.reads.push("another-agent:hidden");
     expect(() => admitProgram(lowerProgramDraft(draft, "agent-a").definition, f.admission)).toThrow();
   });
+  it("binds nested wire references to the exact authorized resource, source and goal catalogs", () => {
+    const f = programFixture(), draft = encodeProgramDraft(f.definition, f.parameters);
+    const schema = programDraftSchema([...f.entities], { resources: [...f.admission.resources], sources: [...f.admission.sources.keys()], goals: [...f.admission.goalIds] });
+    expect(() => schema.parse(draft)).not.toThrow();
+    draft.body = { kind: "wait", condition: { ...draft.start, reads: ["self.location"] }, deadlineSeconds: null };
+    expect(() => schema.parse(draft)).toThrow();
+    draft.body = { kind: "wait", condition: { ...draft.start, sourceIds: ["foreign-source"] }, deadlineSeconds: null };
+    expect(() => schema.parse(draft)).toThrow();
+  });
 });

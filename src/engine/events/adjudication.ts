@@ -7,7 +7,8 @@ import { evaluateExpression, type ProgramResources } from "../programs/definitio
 import { loadPromptAsset } from "../prompts";
 import { frozenClone, type JsonValue } from "../runtime/json";
 import { validateModelAudit } from "../runtime/transaction";
-import { bindWorldExpression, materializeWorldBranch, renderWorldText, type AdmittedWorldProgram } from "./world-program";
+import { bindWorldExpression, renderWorldText, type AdmittedWorldProgram } from "./world-program";
+import { materializeWorldMechanics, type WorldMechanicsContext } from "./mechanics";
 import { captureReads, type ReadSet } from "./resources";
 
 export interface WorldAttempt {
@@ -96,7 +97,7 @@ export function physicalReadKeys(component: readonly WorldAttempt[], resources: 
   return [...keys];
 }
 
-export function worldQuestionWork(bound: BoundWorldProgram, resources: ProgramResources): QuestionWork[] {
+export function worldQuestionWork(bound: BoundWorldProgram, resources: ProgramResources, context: WorldMechanicsContext): QuestionWork[] {
   const instruction = loadPromptAsset("shared/world-program-decision.md"), definition = bound.program.definition;
   const questions: QuestionWork[] = definition.predicates.filter(condition => condition.test.kind === "semantic").map(condition => ({
     bound, id: condition.id, reads: actualKeys(bound, condition.reads), payload: { condition },
@@ -104,9 +105,11 @@ export function worldQuestionWork(bound: BoundWorldProgram, resources: ProgramRe
     version: contentHash(condition),
   }));
   for (const branch of definition.branches) {
-    questions.push({ bound, id: `effect:${branch.id}`, reads: [...actualKeys(bound, definition.reads), `temporal:${definition.timing.profileId}`],
+    const mechanical = materializeWorldMechanics(bound, branch.id, resources, context);
+    questions.push({ bound, id: `effect:${branch.id}`, reads: [...actualKeys(bound, definition.reads), ...mechanical.reads, `temporal:${definition.timing.profileId}`],
       payload: { branch, timing: worldProgramTiming(bound, resources) as unknown as JsonValue, durationSeconds: worldProgramDuration(bound, resources),
-        operations: JSON.parse(JSON.stringify(materializeWorldBranch(bound.program, branch.id, bound.parameters, resources, worldProvenance(bound)))) as JsonValue,
+        operations: JSON.parse(JSON.stringify(mechanical.operations)) as JsonValue,
+        mechanics: JSON.parse(JSON.stringify(mechanical.mechanics)) as JsonValue,
         deliveries: branch.deliveries.map(delivery => ({ recipientEntityId: bound.parameters[delivery.recipientParameter]!,
           text: renderWorldText(delivery.text, bound.parameters), kind: delivery.kind })) },
       instructions: `${instruction}\n\nAre all candidate effects, delivery, duration, and the outcome justified if the listed branch conditions hold? Evaluate this exact branch for the actual attempt.`,
@@ -123,9 +126,10 @@ export function makeWorldDecisionBatch(work: QuestionWork[], component: readonly
   captureReads(resources, keys);
   const state = { attempts: component as unknown as JsonValue,
     resources: Object.fromEntries(keys.map(key => [key, resources[key]!])),
+    sources: Object.fromEntries([...new Set(work.flatMap(item => Object.keys(item.bound.program.sourceHashes)))].map(id => [id, sources[id]!])),
     questions: Object.fromEntries(work.map((item, index) => [`q${index}`, { attemptId: item.bound.attempt.id,
       parameters: item.bound.parameters, rule: { id: item.bound.program.definition.id, description: item.bound.program.definition.description },
-      sources: Object.fromEntries(Object.keys(item.bound.program.sourceHashes).map(id => [id, sources[id]!])), payload: item.payload }])) };
+      sourceIds: Object.keys(item.bound.program.sourceHashes), payload: item.payload }])) };
   return { version: 1, view: { kind: "world", projectionHash: contentHash(state) },
     programHash: contentHash(work.map(item => item.bound.program.hash)), state: state as unknown as JsonValue,
     dependencies: Object.fromEntries(keys.map(key => [key, resources[key]!.version])),
@@ -151,7 +155,7 @@ export function validateWorldEvidence(evidence: WorldDecisionEvidence): void {
 }
 
 export async function adjudicateWorldPrograms(runtime: DecisionRuntime, programs: BoundWorldProgram[], resources: ProgramResources,
-  sources: Readonly<Record<string, JsonValue>>, scope: ProgramDecisionScope): Promise<WorldAdjudication> {
+  sources: Readonly<Record<string, JsonValue>>, scope: ProgramDecisionScope, context: WorldMechanicsContext): Promise<WorldAdjudication> {
   if (!programs.length) throw new Error("cannot adjudicate an empty component");
   const records: WorldConditionRecord[] = [], evidence: WorldDecisionEvidence[] = [], calls: DecisionUse[] = [];
   for (const bound of programs) for (const condition of bound.program.definition.predicates) {
@@ -162,7 +166,7 @@ export async function adjudicateWorldPrograms(runtime: DecisionRuntime, programs
       records.push({ ...record, evidenceHash: contentHash({ evaluator: "world-mechanical-v1", ...record }) });
     }
   }
-  const component = programs.map(program => program.attempt), all = programs.flatMap(bound => worldQuestionWork(bound, resources));
+  const component = programs.map(program => program.attempt), all = programs.flatMap(bound => worldQuestionWork(bound, resources, context));
   const partitions: QuestionWork[][] = []; let current: QuestionWork[] = [];
   for (const work of all) {
     const next = [...current, work];

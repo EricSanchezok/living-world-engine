@@ -45,7 +45,7 @@ async function main() {
     let ordinal = 1;
     const adjudication = await adjudicateWorldPrograms(new DecisionRuntime(runtime.gateway), [compiled.bound], resources, worldProgramSources(world, state), {
       ...scope, profileId: "decision-jev", fallbackProfileId: "decision-deepseek", nextInvocation: () => ordinal++,
-    }); evidence.adjudication = adjudication;
+    }, { state, definition: world }); evidence.adjudication = adjudication;
     const atSeconds = worldProgramDuration(compiled.bound, resources);
     const candidate = createWorldEventCandidate(state, world, resources, [compiled.bound], adjudication, atSeconds); evidence.candidate = candidate;
     const committed = commitWorldEvent(state, world, resources, candidate, { earliestPendingSeconds: atSeconds, receipts: new Map() });

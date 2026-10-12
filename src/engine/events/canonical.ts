@@ -98,7 +98,7 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
     decisionPoints: [...new Set(observations.map(packet => packet.observerId))].map(agentId => ({
       agentId, reason: "activity_completed", activityId: null, timerId: null })),
     checkRequests: [], checks: [], randomRequests: event?.randomness?.plan.requests ?? [], randomResults: event?.randomness?.results ?? [],
-    commitmentRounds: [], outcomes, mechanicInvocations: [], mechanicResults: [], causalAssertionResults: [],
+    commitmentRounds: [], outcomes, mechanicInvocations: event?.mechanicInvocations ?? [], mechanicResults: event?.mechanicResults ?? [], causalAssertionResults: [],
     causalVerification: { verdict: "accept", findings: [] }, events: state.truth.events.slice(source.truth.events.length),
     observations, operations: event?.effects ?? [], decisionRequests: [], beliefPatches, characterPatches, nextActions: [],
   };
@@ -115,11 +115,11 @@ export function nativeCandidate(source: Readonly<SimulationState>, proof: Decisi
   const candidate: WorldStepCandidate = {
     decisionEvent: proof, executionState: step.executionState, schemaVersion: WORLD_STEP_CANDIDATE_SCHEMA_VERSION,
     sourceStateHash: contentHash(source), onsetPerception: { targets: [], receipts: [], requests: [], checks: [], commitmentRounds: [], rng: structuredClone(source.truth.rng) },
-    resolution: { proposal: { baseRevision: source.revision, outcomes: step.outcomes, mechanicInvocations: [], operations: step.operations,
+    resolution: { proposal: { baseRevision: source.revision, outcomes: step.outcomes, mechanicInvocations: step.mechanicInvocations, operations: step.operations,
       events: step.events, observations: step.observations, decisionRequests: step.decisionRequests }, initialActions: step.initialActions, actions: step.actions,
       reactionRequests: [], reactionDecisions: [], stimulusObservations: [], requests: [], checks: [], randomRequests: step.randomRequests,
       randomResults: step.randomResults, commitmentRounds: [], resolutionPlans: [], resolutionReceipts: [], rng: step.rngAfter,
-      mechanicResults: [], causalAssertionResults: [], causalVerification: step.causalVerification },
+      mechanicResults: step.mechanicResults, causalAssertionResults: [], causalVerification: step.causalVerification },
     finalCausalReview: { contentHash: "", evidenceHash: contentHash(proof.event?.adjudication ?? {}), promptVersion: "source-bound-decision-v1",
       invocationIds: proof.event?.adjudication.evidence.flatMap(evidence => evidence.result.audit.invocations.map(invocation => invocation.id)) ?? [] },
     mindCommits: [], modelAudits: proof.modelAudits, interactionDependencies: [],

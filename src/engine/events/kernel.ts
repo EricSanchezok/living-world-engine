@@ -1,4 +1,4 @@
-import type { SimulationState, WorldDeltaOperation, WorldEvent } from "../contracts/model";
+import type { MechanicInvocation, MechanicResult, SimulationState, WorldDeltaOperation, WorldEvent } from "../contracts/model";
 import { evaluateCausalAssertion } from "../mechanics/causality";
 import { contentHash } from "../models/model-audit";
 import type { ProgramReceipt } from "../programs/interpreter";
@@ -10,7 +10,8 @@ import type { WorldRuntimeContract } from "../runtime/world-definition";
 import { makeWorldDecisionBatch, mechanicalWorldCondition, validateWorldEvidence, worldProgramDuration, worldProgramTiming, worldProvenance, worldQuestionWork,
   type BoundWorldProgram, type WorldAdjudication, type WorldConditionRecord } from "./adjudication";
 import { captureReads, validateReads, worldProgramSources, worldResources, type ReadSet } from "./resources";
-import { admitWorldProgram, bindWorldProgram, materializeWorldBranch, renderWorldText } from "./world-program";
+import { admitWorldProgram, bindWorldProgram, renderWorldText } from "./world-program";
+import { materializeWorldMechanics, type WorldMechanicsContext } from "./mechanics";
 import { validateWorldRandomness, type WorldRandomCommitment } from "./randomness";
 import { worldClockBoundary, type WorldClockBoundary } from "./clock-boundary";
 import { projectAgentPerspective } from "../cognition/agent-perspective";
@@ -26,6 +27,8 @@ export interface WorldEventCandidate {
   adjudication: Omit<WorldAdjudication, "calls">;
   reads: ReadSet;
   effects: WorldDeltaOperation[];
+  mechanicInvocations: MechanicInvocation[];
+  mechanicResults: MechanicResult[];
   deliveries: WorldDelivery[];
   randomness: WorldRandomCommitment | null;
   clockBoundary: WorldClockBoundary;
@@ -40,10 +43,10 @@ function conditionKey(record: Pick<WorldConditionRecord, "attemptHash" | "ruleHa
   return contentHash([record.attemptHash, record.ruleHash, record.conditionId]);
 }
 function verifyAdjudication(programs: BoundWorldProgram[], adjudication: Omit<WorldAdjudication, "calls">,
-  resources: ProgramResources, sources: Record<string, JsonValue>): Map<string, WorldConditionRecord> {
+  resources: ProgramResources, sources: Record<string, JsonValue>, context: WorldMechanicsContext): Map<string, WorldConditionRecord> {
   const records = new Map(adjudication.records.map(record => [conditionKey(record), record]));
   if (records.size !== adjudication.records.length) throw new Error("duplicate world condition record");
-  const expected = programs.flatMap(bound => worldQuestionWork(bound, resources));
+  const expected = programs.flatMap(bound => worldQuestionWork(bound, resources, context));
   const claimed = new Set<string>();
   const evidenceHashes = new Set<string>();
   for (const evidence of adjudication.evidence) {
@@ -103,8 +106,9 @@ function operationReads(state: Readonly<SimulationState>, operation: WorldDeltaO
   }
 }
 
-function materialize(programs: BoundWorldProgram[], records: Map<string, WorldConditionRecord>, resources: ProgramResources) {
+function materialize(programs: BoundWorldProgram[], records: Map<string, WorldConditionRecord>, resources: ProgramResources, context: WorldMechanicsContext) {
   const selections: WorldEventCandidate["selections"] = [], effects: WorldDeltaOperation[] = [], deliveries: WorldDelivery[] = [];
+  const mechanicInvocations: MechanicInvocation[] = [], mechanicResults: MechanicResult[] = [];
   for (const bound of programs) {
     const verdict = (id: string) => records.get(conditionKey({ ruleHash: bound.program.hash, attemptHash: contentHash(bound.attempt), conditionId: id }))?.verdict;
     const branches = bound.program.definition.branches.filter(branch => branch.when.every(condition => verdict(condition.predicateId) === condition.equals) && verdict(`effect:${branch.id}`) === "yes");
@@ -118,7 +122,9 @@ function materialize(programs: BoundWorldProgram[], records: Map<string, WorldCo
       throw new Error("an ongoing activity checkpoint cannot prove activity completion");
     }
     selections.push({ attemptId: bound.attempt.id, branchId: branch.id });
-    effects.push(...materializeWorldBranch(bound.program, branch.id, bound.parameters, resources, worldProvenance(bound)));
+    const mechanical = materializeWorldMechanics(bound, branch.id, resources, context);
+    effects.push(...mechanical.operations);
+    mechanicInvocations.push(...mechanical.mechanics.invocations); mechanicResults.push(...mechanical.mechanics.results);
     for (const delivery of branch.deliveries) {
       const recipient = bound.parameters[delivery.recipientParameter]; if (typeof recipient !== "string") throw new Error("invalid delivery recipient");
       const text = renderWorldText(delivery.text, bound.parameters);
@@ -127,7 +133,7 @@ function materialize(programs: BoundWorldProgram[], records: Map<string, WorldCo
       deliveries.push({ attemptId: bound.attempt.id, recipientEntityId: recipient, text, kind: delivery.kind });
     }
   }
-  return { selections, effects, deliveries };
+  return { selections, effects, deliveries, mechanicInvocations, mechanicResults };
 }
 
 export function createWorldEventCandidate(state: Readonly<SimulationState>, definition: WorldRuntimeContract, resources: ProgramResources,
@@ -149,8 +155,9 @@ export function createWorldEventCandidate(state: Readonly<SimulationState>, defi
   if (!Number.isSafeInteger(atSeconds) || atSeconds <= state.truth.elapsedSeconds) throw new Error("physical world event must advance time");
   if (programs.length && atSeconds !== Math.max(...programs.map(bound => bound.attempt.startedAtSeconds + worldProgramDuration(bound, resources)))) throw new Error("world event time differs from its execution boundary");
   const proof = { records: adjudication.records, evidence: adjudication.evidence };
-  const records = verifyAdjudication(programs, proof, resources, sources);
-  const value = materialize(programs, records, resources);
+  const context = { state, definition, randomness };
+  const records = verifyAdjudication(programs, proof, resources, sources, context);
+  const value = materialize(programs, records, resources, context);
   const reads = captureReads(resources, [...new Set([
     ...proof.records.flatMap(record => Object.keys(record.readSet)),
     ...programs.flatMap(bound => [ `entity:${bound.attempt.actorEntityId}`, ...bound.program.definition.reads.map(key => renderWorldText(key, bound.parameters)) ]),
@@ -188,8 +195,9 @@ export function commitWorldEvent(source: Readonly<SimulationState>, definition: 
   const next = structuredClone(source) as SimulationState;
   if (candidate.randomness) next.truth.rng = structuredClone(candidate.randomness.after);
   // All programs in this component were jointly adjudicated. Resource competition is still checked against the evolving transaction clone.
+  const randomResults = new Map(candidate.randomness?.results.map(result => [result.requestId, result]) ?? []);
   for (const operation of candidate.effects) {
-    for (const assertion of operation.assertions) if (!evaluateCausalAssertion(source, assertion).passed) throw new Error("world effect causal assertion failed");
+    for (const assertion of operation.assertions) if (!evaluateCausalAssertion(source, assertion, new Map(), randomResults).passed) throw new Error("world effect causal assertion failed");
     applyWorldDeltaOperation(next, operation);
   }
   // Transfers cannot create resources. Production/consumption require the existing code-owned quantity laws.

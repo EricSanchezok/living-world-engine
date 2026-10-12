@@ -7,9 +7,31 @@ import { registerBuiltinAlgorithms } from "../../algorithms/registry";
 import { restoreOwnerPrograms, readDecisionEventState } from "../runtime-state";
 import type { PolicyBinding } from "../../runtime/execution";
 import { contentHash } from "../../models/model-audit";
+import { quantityId } from "../../runtime/runtime-id";
 
 
 describe("native event runtime through SimulationEngine", () => {
+  it("persists trusted numeric derivation through the canonical entry and replays it without duplication", async () => {
+    const f = nativeProgramFixture();
+    f.program.nodes[0] = { ...f.program.nodes[0]!, intent: "Spend 5 seconds giving 2 spirit stones to {recipient}." } as typeof f.program.nodes[number];
+    f.rule.sourceIds.push("mechanics"); f.rule.writes.push("quantities");
+    f.rule.branches[0]!.mechanics = [{ id: "gift", packageId: "core-resolution", ruleId: "transfer-quantity", input: {
+      definitionId: "spirit-stone", fromHolderId: { $expression: { kind: "parameter", name: "actor" } },
+      toHolderId: { $expression: { kind: "parameter", name: "recipient" } },
+      amountSource: { kind: "explicit_action_amount", actionId: { $attempt: "id" }, quotedText: "2", amount: 2 },
+    } }];
+    await f.configured.registry.capture();
+    const engine = new SimulationEngine(f.world, new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig));
+    const boot = await engine.bootstrapAgents();
+    const result = await engine.step(f.roster, { expectedRevision: 0, trigger: "manual", externalActions: [] });
+    const holder = quantityId(boot.worldHash, "spirit-stone", "keeper");
+    expect(result.state.truth.quantities[holder]!.amount).toBe(boot.truth.quantities[holder]!.amount - 2);
+    expect(result.committed.mechanicResults[0]!.code).toBe("quantity-transfer-derived");
+    expect(result.committed.mechanicInvocations[0]!.input).toMatchObject({ amountSource: { actionId: result.committed.actions[0]!.id } });
+    const calls = f.configured.transport.mock.calls.length;
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+    expect(f.configured.transport).toHaveBeenCalledTimes(calls);
+  });
   it("reuses an immutable plan after new private evidence without requiring its original admission environment", async () => {
     const options = { reuse: false };
     const f = nativeProgramFixture(options); await f.configured.registry.capture();

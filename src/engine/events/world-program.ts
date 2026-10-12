@@ -4,6 +4,7 @@ import { worldDeltaOperationSchema } from "../contracts/llm-schemas";
 import { contentHash } from "../models/model-audit";
 import { evaluateExpression, expressionDependencies, programHash, programKey, valueExpressionSchema, type ProgramResources, type ValueExpression } from "../programs/definition";
 import { assertJsonValue, frozenClone, type JsonValue } from "../runtime/json";
+import type { WorldAttempt } from "./adjudication";
 
 const text = z.string().trim().min(1);
 export type WorldValue = JsonValue;
@@ -21,7 +22,7 @@ const timing = z.object({ profileId: programKey, basis: z.discriminatedUnion("ki
   z.object({ kind: z.literal("explicit_quantity"), amount: valueExpressionSchema, unit: text, sourceText: text }).strict(),
 ]) }).strict();
 export const worldProgramSchema = z.object({
-  version: z.literal(1), namespace: z.literal("world"), id: programKey, description: text,
+  version: z.literal(2), namespace: z.literal("world"), id: programKey, description: text,
   sourceIds: z.array(programKey).min(1), parameters: z.record(programKey, z.object({ kind: z.enum(["entity", "text", "number"]), description: text }).strict()),
   reads: z.array(text).min(1), writes: z.array(text), timing,
   random: z.array(z.object({ id: programKey, distributionId: programKey, purpose: text }).strict()).max(32),
@@ -30,6 +31,7 @@ export const worldProgramSchema = z.object({
     when: z.array(z.object({ predicateId: programKey, equals: z.enum(["yes", "no"]) }).strict()).min(1),
     outcome: z.enum(["succeeded", "partial", "failed", "blocked"]), description: text,
     acknowledgement: z.enum(["attempted", "observed-outcome"]),
+    mechanics: z.array(z.object({ id: programKey, packageId: programKey, ruleId: programKey, input: worldValueSchema }).strict()),
     effects: z.array(z.object({ kind: z.enum(["create_entity", "retire_entity", "place_entity", "set_fact", "remove_fact", "set_meter", "adjust_meter",
       "transfer_quantity", "produce_quantity", "consume_quantity", "set_rating", "set_condition", "remove_condition", "set_shared_activity_resource_capacity",
       "create_agent", "remove_agent"]), fields: z.record(programKey, worldValueSchema) }).strict()),
@@ -39,6 +41,36 @@ export const worldProgramSchema = z.object({
 }).strict();
 export type WorldProgramDefinition = z.infer<typeof worldProgramSchema>;
 export interface AdmittedWorldProgram { definition: WorldProgramDefinition; sourceHashes: Record<string, string>; hash: string }
+
+/** Lower the explicit nested references to a complete dependency declaration. */
+export function closeWorldProgramReferences(input: WorldProgramDefinition): WorldProgramDefinition {
+  const definition = structuredClone(input), reads = new Set(definition.reads), sources = new Set(definition.sourceIds);
+  const collect = (value: WorldValue): void => {
+    if (!value || typeof value !== "object") return;
+    if (Array.isArray(value)) { value.forEach(collect); return; }
+    const object = value as Readonly<Record<string, JsonValue>>;
+    if (Object.hasOwn(object, "$literal")) return;
+    if (Object.hasOwn(object, "$expression")) {
+      for (const key of expressionDependencies(valueExpressionSchema.parse(object.$expression)).reads) reads.add(key);
+    } else Object.values(value).forEach(collect);
+  };
+  for (const predicate of definition.predicates) {
+    if (predicate.test.kind === "mechanical") predicate.reads = [...new Set([...predicate.reads,
+      ...expressionDependencies(predicate.test.left).reads, ...expressionDependencies(predicate.test.right).reads])];
+    predicate.reads.forEach(key => reads.add(key)); predicate.sourceIds.forEach(id => sources.add(id));
+  }
+  for (const branch of definition.branches) {
+    for (const effect of branch.effects) Object.values(effect.fields).forEach(collect);
+    for (const mechanic of branch.mechanics) collect(mechanic.input);
+    if (branch.mechanics.length) sources.add("mechanics");
+  }
+  if (definition.timing.basis.kind !== "profile") {
+    const basis = definition.timing.basis;
+    expressionDependencies(basis.kind === "explicit_duration" ? basis.seconds : basis.amount).reads.forEach(key => reads.add(key));
+  }
+  definition.reads = [...reads]; definition.sourceIds = [...sources];
+  return definition;
+}
 
 const templateParameters = (template: string) => [...template.matchAll(/\{([a-zA-Z0-9_.:-]+)\}/gu)].map(match => match[1]!);
 export function renderWorldText(template: string, parameters: Readonly<Record<string, JsonValue>>): string {
@@ -52,14 +84,19 @@ export function bindWorldExpression(expression: ValueExpression, parameters: Rea
   if (expression.kind === "arithmetic") return { ...expression, values: expression.values.map(value => bindWorldExpression(value, parameters)) };
   return expression;
 }
-export function evaluateWorldValue(value: WorldValue, parameters: Readonly<Record<string, JsonValue>>, resources: ProgramResources): JsonValue {
+export function evaluateWorldValue(value: WorldValue, parameters: Readonly<Record<string, JsonValue>>, resources: ProgramResources, attempt?: WorldAttempt): JsonValue {
   if (value === null || typeof value !== "object") return value;
-  if (Array.isArray(value)) return value.map(item => evaluateWorldValue(item, parameters, resources));
+  if (Array.isArray(value)) return value.map(item => evaluateWorldValue(item, parameters, resources, attempt));
   const object = value as Readonly<Record<string, JsonValue>>;
   if (Object.hasOwn(object, "$literal")) return object.$literal!;
+  if (Object.hasOwn(object, "$attempt")) {
+    const key = z.enum(["id", "actorId", "actorEntityId", "intent", "utterance", "startedAtSeconds"]).parse(object.$attempt);
+    if (!attempt) throw new Error("world value requires its actual attempt");
+    return attempt[key];
+  }
   if (Object.hasOwn(object, "$text")) return renderWorldText(z.string().parse(object.$text), parameters);
   if (Object.hasOwn(object, "$expression")) return evaluateExpression(bindWorldExpression(valueExpressionSchema.parse(object.$expression), parameters), parameters, resources);
-  return Object.fromEntries(Object.entries(object).map(([key, field]) => [key, evaluateWorldValue(field, parameters, resources)]));
+  return Object.fromEntries(Object.entries(object).map(([key, field]) => [key, evaluateWorldValue(field, parameters, resources, attempt)]));
 }
 
 /** Only declaration syntax is admitted here. Each execution separately proves rule applicability and every candidate effect. */
@@ -96,9 +133,10 @@ export function admitWorldProgram(input: unknown, sources: Readonly<Record<strin
     const object = value as Readonly<Record<string, JsonValue>>;
     const reserved = Object.keys(object).filter(key => key.startsWith("$"));
     if (reserved.length) {
-      if (Object.keys(value).length !== 1 || !["$expression", "$text", "$literal"].includes(reserved[0]!)) throw new Error("invalid world value operator");
+      if (Object.keys(value).length !== 1 || !["$expression", "$text", "$literal", "$attempt"].includes(reserved[0]!)) throw new Error("invalid world value operator");
       if (reserved[0] === "$expression") checkExpression(valueExpressionSchema.parse(object.$expression), definition.reads);
       if (reserved[0] === "$text") checkText(z.string().parse(object.$text));
+      if (reserved[0] === "$attempt") z.enum(["id", "actorId", "actorEntityId", "intent", "utterance", "startedAtSeconds"]).parse(object.$attempt);
     } else for (const [key, child] of Object.entries(value)) { programKey.parse(key); checkValue(child, depth + 1); }
   };
   definition.reads.forEach(checkText); definition.writes.forEach(checkText);
@@ -119,6 +157,14 @@ export function admitWorldProgram(input: unknown, sources: Readonly<Record<strin
     }
   }
   for (const branch of definition.branches) {
+    unique(branch.mechanics.map(value => value.id), "branch mechanic");
+    if (branch.mechanics.length && !definition.sourceIds.includes("mechanics")) throw new Error("mechanical effects require the authored mechanics source");
+    for (const mechanic of branch.mechanics) {
+      if (mechanic.packageId === "core-resolution" && ["advance-conditions", "apply-receipt"].includes(mechanic.ruleId)) {
+        throw new Error("condition advancement and resolution receipts are owned by the event kernel");
+      }
+      checkValue(mechanic.input);
+    }
     unique(branch.when.map(value => value.predicateId), "branch condition"); checkText(branch.description);
     // Every branch receives the mandatory kernel-owned effect/applicability question,
     // including branches whose declared prerequisites are entirely mechanical.
@@ -148,10 +194,10 @@ export function bindWorldProgram(program: AdmittedWorldProgram, parameters: Read
 }
 
 export function materializeWorldBranch(program: AdmittedWorldProgram, branchId: string, parameters: Readonly<Record<string, JsonValue>>,
-  resources: ProgramResources, provenance: CausalSource): WorldDeltaOperation[] {
+  resources: ProgramResources, provenance: CausalSource, attempt?: WorldAttempt): WorldDeltaOperation[] {
   const branch = program.definition.branches.find(branch => branch.id === branchId); if (!branch) throw new Error(`unknown world branch ${branchId}`);
   return branch.effects.map(effect => {
-    const fields = Object.fromEntries(Object.entries(effect.fields).map(([key, value]) => [key, evaluateWorldValue(value, parameters, resources)]));
+    const fields = Object.fromEntries(Object.entries(effect.fields).map(([key, value]) => [key, evaluateWorldValue(value, parameters, resources, attempt)]));
     // Fact/condition provenance cannot smuggle extra authority through a nested object.
     for (const key of ["fact", "condition"]) if (fields[key] && typeof fields[key] === "object" && !Array.isArray(fields[key])) {
       fields[key] = { ...fields[key] as Record<string, JsonValue>, provenance: provenance.causes as unknown as JsonValue };
