@@ -22,7 +22,7 @@ const timing = z.object({ profileId: programKey, basis: z.discriminatedUnion("ki
   z.object({ kind: z.literal("explicit_quantity"), amount: valueExpressionSchema, unit: text, sourceText: text }).strict(),
 ]) }).strict();
 export const worldProgramSchema = z.object({
-  version: z.literal(3), namespace: z.literal("world"), id: programKey, description: text,
+  version: z.literal(4), namespace: z.literal("world"), id: programKey, description: text,
   sourceIds: z.array(programKey).min(1), parameters: z.record(programKey, z.object({ kind: z.enum(["entity", "text", "number"]), description: text }).strict()),
   reads: z.array(text).min(1), writes: z.array(text), timing,
   sharedResources: z.array(z.object({ poolId: worldValueSchema, basis: z.discriminatedUnion("kind", [
@@ -30,11 +30,13 @@ export const worldProgramSchema = z.object({
     z.object({ kind: z.literal("explicit_quantity"), amount: z.number().positive(), unit: text, sourceText: text }).strict(),
   ]) }).strict()),
   random: z.array(z.object({ id: programKey, distributionId: programKey, purpose: text }).strict()).max(32),
+  resolutions: z.array(z.object({ id: programKey, plan: worldValueSchema }).strict()).max(32),
   predicates: z.array(predicate).min(1),
   branches: z.array(z.object({ id: programKey,
     when: z.array(z.object({ predicateId: programKey, equals: z.enum(["yes", "no"]) }).strict()).min(1),
     outcome: z.enum(["succeeded", "partial", "failed", "blocked"]), description: text,
     acknowledgement: z.enum(["attempted", "observed-outcome"]),
+    resolutions: z.array(programKey),
     mechanics: z.array(z.object({ id: programKey, packageId: programKey, ruleId: programKey, input: worldValueSchema }).strict()),
     effects: z.array(z.object({ kind: z.enum(["create_entity", "retire_entity", "place_entity", "set_fact", "remove_fact", "set_meter", "adjust_meter",
       "transfer_quantity", "produce_quantity", "consume_quantity", "set_rating", "set_condition", "remove_condition", "set_shared_activity_resource_capacity",
@@ -69,6 +71,8 @@ export function closeWorldProgramReferences(input: WorldProgramDefinition): Worl
     if (branch.mechanics.length) sources.add("mechanics");
   }
   for (const claim of definition.sharedResources) collect(claim.poolId);
+  for (const resolution of definition.resolutions) collect(resolution.plan);
+  if (definition.resolutions.length) sources.add("mechanics");
   if (definition.sharedResources.length) sources.add("mechanics");
   if (definition.timing.basis.kind !== "profile") {
     const basis = definition.timing.basis;
@@ -113,8 +117,9 @@ export function admitWorldProgram(input: unknown, sources: Readonly<Record<strin
   unique(definition.sourceIds, "world source"); unique(definition.reads, "world read"); unique(definition.writes, "world write");
   unique(definition.predicates.map(value => value.id), "world predicate"); unique(definition.branches.map(value => value.id), "world branch");
   unique(definition.random.map(value => value.id), "world random request");
+  unique(definition.resolutions.map(value => value.id), "named resolution");
   if (definition.random.length && !definition.sourceIds.includes("mechanics")) throw new Error("world randomness requires an authored mechanics source");
-  if (definition.reads.includes("rng") || definition.writes.some(key => key === "rng" || key.startsWith("random:"))) {
+  if (definition.reads.includes("rng") || definition.writes.some(key => key === "rng" || key.startsWith("random:") || key.startsWith("check:"))) {
     throw new Error("RNG state and random results are owned by the engine");
   }
   if (definition.parameters.actor?.kind !== "entity") throw new Error("world programs require the actor entity parameter");
@@ -150,6 +155,14 @@ export function admitWorldProgram(input: unknown, sources: Readonly<Record<strin
   };
   definition.reads.forEach(checkText); definition.writes.forEach(checkText);
   for (const claim of definition.sharedResources) checkValue(claim.poolId);
+  for (const resolution of definition.resolutions) {
+    checkValue(resolution.plan);
+    if (!definition.sourceIds.includes("mechanics")) throw new Error("named resolution requires the authored mechanics source");
+    if (!definition.branches.some(branch => branch.resolutions.includes(resolution.id))) throw new Error("named resolution has no executable branch");
+  }
+  for (const read of definition.reads.filter(key => key.startsWith("check:"))) {
+    if (!definition.resolutions.some(resolution => read === `check:{actor}:${resolution.id}`)) throw new Error("undeclared named check read");
+  }
   for (const read of definition.reads.filter(key => key.startsWith("random:"))) {
     if (!definition.random.some(request => read === `random:{actor}:${request.id}`)) throw new Error("undeclared world random read");
   }
@@ -167,6 +180,8 @@ export function admitWorldProgram(input: unknown, sources: Readonly<Record<strin
     }
   }
   for (const branch of definition.branches) {
+    unique(branch.resolutions, "branch resolution");
+    if (branch.resolutions.some(id => !definition.resolutions.some(resolution => resolution.id === id))) throw new Error("branch refers to an unknown named resolution");
     unique(branch.mechanics.map(value => value.id), "branch mechanic");
     if (branch.mechanics.length && !definition.sourceIds.includes("mechanics")) throw new Error("mechanical effects require the authored mechanics source");
     for (const mechanic of branch.mechanics) {

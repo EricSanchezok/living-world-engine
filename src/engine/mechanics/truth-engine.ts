@@ -1,3 +1,5 @@
+import { resolutionEvidenceIndex } from "./resolution-evidence";
+export { resolutionEvidenceIndex } from "./resolution-evidence";
 import { materializeOnsetPerceptionReceipts, type OnsetPerceptionReceipt } from "./onset-receipts";
 import { repeatedPerceptionChecks } from "./perception-commitments";
 export { materializeObservationPackets } from "../cognition/observation-materialization";
@@ -775,24 +777,6 @@ async function runOnsetPerceptionStage(input: Readonly<OnsetPerceptionInput> & {
   };
 }
 
-export function resolutionEvidenceIndex(
-  state: SimulationState,
-  actions: readonly AgentActionProposal[],
-  laws: readonly { id: string }[],
-): ResolutionEvidenceIndex {
-  return {
-    actions: new Set(actions.map((action) => action.id)),
-    entities: new Set(Object.keys(state.truth.entities)),
-    facts: new Set(Object.keys(state.truth.facts)),
-    conditions: new Set(Object.keys(state.truth.conditions)),
-    conditionOwners: new Map(Object.values(state.truth.conditions)
-      .map((condition) => [condition.id, condition.subjectId])),
-    laws: new Set(laws.map((law) => law.id)),
-    placements: new Set(Object.keys(state.truth.placements)),
-    ratingOwners: new Map(Object.values(state.truth.ratings).map((rating) => [rating.id, rating.entityId])),
-    ratingValues: new Map(Object.values(state.truth.ratings).map((rating) => [rating.id, rating.value])),
-  };
-}
 
 function groundingContainsSource(grounding: InteractionDependency, source: ResolutionSourceRef): boolean {
   if (grounding.globalFallback || source.kind === "action" || source.kind === "law") return true;

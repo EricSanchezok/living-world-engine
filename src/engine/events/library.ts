@@ -46,7 +46,7 @@ export class WorldProgramLibrary {
     const parameters = structuredClone(entry.parameters);
     if (attempt.utterance !== null && program.definition.parameters.utterance?.kind === "text") parameters.utterance = attempt.utterance;
     bindWorldProgram(program, parameters, entities);
-    captureReads(resources, program.definition.reads.filter(key => !key.startsWith("random:")).map(key => renderWorldText(key, parameters)));
+    captureReads(resources, program.definition.reads.filter(key => !/^(random|check):/u.test(key)).map(key => renderWorldText(key, parameters)));
     return { program, parameters, attempt: structuredClone(attempt) };
   }
   snapshot() {

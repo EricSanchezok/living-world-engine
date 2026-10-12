@@ -1,5 +1,6 @@
-import type { DiscreteRandomRequest, DiscreteRandomResult, SeededRngState, SimulationState } from "../contracts/model";
-import { resolveDiscreteRandomRequests, validateDiscreteRandomCommitmentBudget } from "../mechanics/random";
+import type { D20CheckRequest, D20CheckResult, DiscreteRandomRequest, DiscreteRandomResult, SeededRngState, SimulationState } from "../contracts/model";
+import { resolveD20Checks, resolveDiscreteRandomRequests, validateDiscreteRandomCommitmentBudget } from "../mechanics/random";
+import { MAX_RANDOM_RNG_WORDS_PER_STEP } from "../mechanics/random-limits";
 import { contentHash } from "../models/model-audit";
 import type { DecisionBatch, DecisionResult } from "../models/decision";
 import { DecisionRuntime, type DecisionUse, type ProgramDecisionScope } from "../programs/decision-runtime";
@@ -11,14 +12,16 @@ import { runtimeId } from "../runtime/runtime-id";
 import { physicalReadKeys, validateWorldEvidence, worldProvenance, type BoundWorldProgram } from "./adjudication";
 import { admitWorldProgram, bindWorldProgram, renderWorldText } from "./world-program";
 import { captureReads, validateReads, worldProgramSources, type ReadSet } from "./resources";
+import { materializeWorldResolutions } from "./resolutions";
 
 export interface WorldRandomPlan {
-  version: 1; hash: string; before: SeededRngState; programHashes: string[]; attemptHashes: string[];
+  version: 2; hash: string; sourceRevision: number; before: SeededRngState; programHashes: string[]; attemptHashes: string[];
   requests: DiscreteRandomRequest[]; resourceKeys: string[]; reads: ReadSet; batch: DecisionBatch;
+  checkRequests: D20CheckRequest[]; checkKeys: string[];
 }
 export interface WorldRandomCommitment {
-  version: 1; hash: string; plan: WorldRandomPlan; authorization: DecisionResult;
-  after: SeededRngState; results: DiscreteRandomResult[];
+  version: 2; hash: string; plan: WorldRandomPlan; authorization: DecisionResult;
+  after: SeededRngState; results: DiscreteRandomResult[]; checks: D20CheckResult[];
 }
 export interface WorldRandomReservation {
   version: 1; hash: string; sourceRevision: number; atSeconds: number; commitment: WorldRandomCommitment;
@@ -36,8 +39,8 @@ export function validateRandomReservation(reservation: WorldRandomReservation): 
   const { hash: commitmentHash, ...commitment } = reservation.commitment;
   if (commitmentHash !== contentHash(commitment)) throw new Error("edited reserved random commitment");
   verifyAuthorization(commitment.plan, commitment.authorization);
-  const outcome = resolveDiscreteRandomRequests(commitment.plan.before, commitment.plan.requests);
-  if (contentHash(outcome.rng) !== contentHash(commitment.after) || contentHash(outcome.results) !== contentHash(commitment.results)) {
+  const outcome = drawWorldRandomPlan(commitment.plan);
+  if (contentHash(outcome.rng) !== contentHash(commitment.after) || contentHash(outcome.results) !== contentHash(commitment.results) || contentHash(outcome.checks) !== contentHash(commitment.checks)) {
     throw new Error("reserved random result does not replay");
   }
 }
@@ -52,7 +55,11 @@ export function activeRandomReservation(state: Readonly<SimulationState>): World
 /** Fix stakes and source distributions without extracting or exposing any RNG word. */
 export function prepareWorldRandomPlan(state: Readonly<SimulationState>, definition: WorldRuntimeContract,
   resources: ProgramResources, programs: BoundWorldProgram[]): WorldRandomPlan | null {
-  if (!programs.some(bound => bound.program.definition.random.length)) return null;
+  const resolutions = programs.flatMap(bound => materializeWorldResolutions(state, definition, resources, bound)
+    .map(value => ({ ...value, actor: bound.attempt.actorEntityId })));
+  const checks = resolutions.filter(value => value.check);
+  if (!programs.some(bound => bound.program.definition.random.length) && !checks.length) return null;
+  if (checks.length > 32) throw new Error("world check commitment exceeds the named resolution budget");
   const sources = worldProgramSources(definition, state), entities = new Set(Object.keys(state.truth.entities));
   const requests: DiscreteRandomRequest[] = [], resourceKeys: string[] = [];
   for (const bound of programs) {
@@ -71,20 +78,29 @@ export function prepareWorldRandomPlan(state: Readonly<SimulationState>, definit
   if (new Set(resourceKeys).size !== resourceKeys.length) throw new Error("random program resources collide");
   validateDiscreteRandomCommitmentBudget(requests);
   const keys = [...new Set([...physicalReadKeys(programs.map(bound => bound.attempt), resources), "distributions",
-    ...programs.flatMap(bound => bound.program.definition.reads.filter(key => !key.startsWith("random:")).map(key => renderWorldText(key, bound.parameters)))])].sort();
+    ...(resolutions.length ? ["mechanics", "entities", "placements", "facts", "ratings", "conditions", "meters"] : []),
+    ...programs.flatMap(bound => bound.program.definition.reads.filter(key => !/^(random|check):/u.test(key)).map(key => renderWorldText(key, bound.parameters)))])].sort();
   const reads = captureReads(resources, [...keys, "rng"]), instruction = loadPromptAsset("shared/world-program-random.md");
-  const input = JSON.parse(JSON.stringify({ programs, requests, resources: Object.fromEntries(keys.map(key => [key, resources[key]])),
+  const input = JSON.parse(JSON.stringify({ programs, requests, resolutions, resources: Object.fromEntries(keys.map(key => [key, resources[key]])),
     sources: Object.fromEntries([...new Set(programs.flatMap(bound => Object.keys(bound.program.sourceHashes)))].map(id => [id, sources[id]])) })) as JsonValue;
   const batch: DecisionBatch = { version: 1, view: { kind: "world", projectionHash: contentHash(input) }, state: input,
     programHash: contentHash(programs.map(bound => bound.program.hash)), dependencies: Object.fromEntries(keys.map(key => [key, resources[key]!.version])),
-    questions: Object.fromEntries(programs.filter(bound => bound.program.definition.random.length).map((bound, index) => [`q${index}`, {
+    questions: Object.fromEntries(programs.filter(bound => bound.program.definition.random.length || resolutions.some(value => value.plan.actionId === bound.attempt.id && value.check)).map((bound, index) => [`q${index}`, {
       version: contentHash({ instruction, program: bound.program.hash }), instructions: `${instruction}\nEvaluate the random requests and complete stakes for attempt ${bound.attempt.id}.`,
       criteria: { yes: "The authored sources and actual attempt justify these exact random requests and their complete branch stakes.",
         no: "A distribution, applicability condition or proposed stake contradicts the authored world or attempt.",
         unknown: "Required applicability or stakes evidence is missing; do not draw." }, sources: Object.keys(bound.program.sourceHashes) }])) };
-  const body = { version: 1 as const, before: structuredClone(state.truth.rng), programHashes: programs.map(bound => bound.program.hash),
-    attemptHashes: programs.map(bound => contentHash(bound.attempt)), requests, resourceKeys, reads, batch };
+  const body = { version: 2 as const, sourceRevision: state.revision, before: structuredClone(state.truth.rng), programHashes: programs.map(bound => bound.program.hash),
+    attemptHashes: programs.map(bound => contentHash(bound.attempt)), requests, resourceKeys, reads, batch,
+    checkRequests: checks.map(value => value.check!), checkKeys: checks.map(value => `check:${value.actor}:${value.key}`) };
+  if (new Set(body.checkKeys).size !== body.checkKeys.length) throw new Error("named check resources collide");
   return frozenClone({ ...body, hash: contentHash(body) });
+}
+
+function drawWorldRandomPlan(plan: WorldRandomPlan) {
+  const checked = resolveD20Checks(plan.before, plan.checkRequests), random = resolveDiscreteRandomRequests(checked.rng, plan.requests);
+  if (random.rng.draws - plan.before.draws > MAX_RANDOM_RNG_WORDS_PER_STEP) throw new Error("combined random commitment exceeds RNG budget");
+  return { ...random, checks: checked.results };
 }
 
 function verifyAuthorization(plan: WorldRandomPlan, authorization: DecisionResult): void {
@@ -103,8 +119,8 @@ Promise<{ commitment: WorldRandomCommitment | null; call: DecisionUse; dispositi
     return { commitment: null, call, disposition: Object.values(call.result.answers).some(answer => answer.choice === "no") ? "expand" : "wait" };
   }
   verifyAuthorization(plan, call.result);
-  const outcome = resolveDiscreteRandomRequests(plan.before, plan.requests);
-  const body = { version: 1 as const, plan, authorization: call.result, after: outcome.rng, results: outcome.results };
+  const outcome = drawWorldRandomPlan(plan);
+  const body = { version: 2 as const, plan, authorization: call.result, after: outcome.rng, results: outcome.results, checks: outcome.checks };
   return { commitment: frozenClone({ ...body, hash: contentHash(body) }), call, disposition: "authorized" };
 }
 
@@ -131,14 +147,15 @@ export function validateWorldRandomness(state: Readonly<SimulationState>, defini
   const { hash, ...body } = commitment;
   if (hash !== contentHash(body) || contentHash(plan) !== contentHash(commitment.plan)) throw new Error("stale or edited world random commitment");
   validateReads(resources, plan.reads); verifyAuthorization(plan, commitment.authorization);
-  const expected = resolveDiscreteRandomRequests(plan.before, plan.requests);
-  if (contentHash(expected.rng) !== contentHash(commitment.after) || contentHash(expected.results) !== contentHash(commitment.results)) throw new Error("world random result does not replay");
+  const expected = drawWorldRandomPlan(plan);
+  if (contentHash(expected.rng) !== contentHash(commitment.after) || contentHash(expected.results) !== contentHash(commitment.results) || contentHash(expected.checks) !== contentHash(commitment.checks)) throw new Error("world random result does not replay");
   return worldRandomResources(resources, commitment);
 }
 
 export function worldRandomResources(resources: ProgramResources, commitment: WorldRandomCommitment): ProgramResources {
   const { hash, ...body } = commitment;
   if (hash !== contentHash(body)) throw new Error("world random commitment checksum mismatch");
-  return { ...resources, ...Object.fromEntries(commitment.plan.resourceKeys.map((key, index) => [key,
-    { version: commitment.plan.before.draws, value: JSON.parse(JSON.stringify(commitment.results[index])) as JsonValue }])) };
+  return { ...resources, ...Object.fromEntries([...commitment.plan.resourceKeys.map((key, index) => [key, commitment.results[index]] as const),
+    ...commitment.plan.checkKeys.map((key, index) => [key, commitment.checks[index]] as const)].map(([key, result]) => [key,
+    { version: commitment.plan.before.draws, value: JSON.parse(JSON.stringify(result)) as JsonValue }])) };
 }

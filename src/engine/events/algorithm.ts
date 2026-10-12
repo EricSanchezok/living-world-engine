@@ -157,7 +157,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
         event = createWorldEventCandidate(physical, authority, control.worldResources, programs, adjudication, atSeconds, randomness);
       } catch (error) {
         if (!(error instanceof Error) || !/world rule awaits evidence or expansion|ambiguous world branches require expansion/u.test(error.message)) throw error;
-        const unsupported = randomDeferral ? programs.filter(bound => bound.program.definition.random.length > 0)
+        const unsupported = randomDeferral ? programs.filter(bound => bound.program.definition.random.length > 0 || bound.program.definition.resolutions.length > 0)
           : programs.filter(bound => selectableWorldBranches(bound, adjudication.records).length !== 1);
         if (!unsupported.length) throw error;
         for (const bound of unsupported) {

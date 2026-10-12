@@ -3,9 +3,10 @@ import { createCoreRulePackageRegistry, type RuleExecutionContext } from "../mec
 import type { ProgramResources } from "../programs/definition";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import { quantityId, runtimeId } from "../runtime/runtime-id";
-import { worldProvenance, type BoundWorldProgram } from "./adjudication";
+import { worldProgramDuration, worldProvenance, type BoundWorldProgram } from "./adjudication";
 import { evaluateWorldValue, materializeWorldBranch } from "./world-program";
 import type { WorldRandomCommitment } from "./randomness";
+import { materializeWorldResolutions, worldResolutionReceipt } from "./resolutions";
 
 export interface WorldMechanicsContext { state: Readonly<SimulationState>; definition: WorldRuntimeContract; randomness?: WorldRandomCommitment | null }
 const registry = createCoreRulePackageRegistry();
@@ -43,16 +44,32 @@ export function materializeWorldMechanics(bound: BoundWorldProgram, branchId: st
   const direct = materializeWorldBranch(bound.program, branchId, bound.parameters, resources, worldProvenance(bound), bound.attempt);
   const action: AgentActionProposal = { id: bound.attempt.id, actorId: bound.attempt.actorId, baseRevision: context.state.revision,
     rawText: bound.attempt.intent, goal: bound.attempt.intent, means: bound.attempt.utterance, targetIds: [] };
-  const invocations: MechanicInvocation[] = branch.mechanics.map((template, ordinal) => ({
+  const revision = context.randomness?.plan.sourceRevision ?? context.state.revision;
+  const resolved = materializeWorldResolutions(context.state, context.definition, resources, bound, revision);
+  const receipts = resolved.filter(value => branch.resolutions.includes(value.key)).map((value, ordinal) => worldResolutionReceipt(
+    context.state, context.definition, value.plan, value.check,
+    value.check ? context.randomness?.checks.find(result => result.requestId === value.check!.id) ?? null : null, ordinal, revision));
+  const derived: MechanicInvocation[] = receipts.map((receipt, ordinal) => ({
+    id: runtimeId({ worldHash: context.state.worldHash, revision: context.state.revision, kind: "mechanic", stage: "world-program-resolution",
+      owner: [bound.attempt.id, receipt.id], round: 0, ordinal }),
+    packageId: "core-resolution", ruleId: "apply-receipt", input: { receiptId: receipt.id }, ...worldProvenance(bound),
+    causes: [...worldProvenance(bound).causes, ...(receipt.checkRequestId ? [{ kind: "check" as const, id: receipt.checkRequestId }] : [])],
+  }));
+  const invocations: MechanicInvocation[] = [...derived, ...branch.mechanics.map((template, ordinal) => ({
     id: runtimeId({ worldHash: context.state.worldHash, revision: context.state.revision, kind: "mechanic", stage: "world-program",
       owner: [bound.attempt.id, bound.program.hash, branchId, template.id], round: 0, ordinal }),
     packageId: template.packageId, ruleId: template.ruleId,
     input: evaluateWorldValue(template.input, bound.parameters, resources, bound.attempt), ...worldProvenance(bound),
     causes: [...worldProvenance(bound).causes, ...(context.randomness?.plan.requests.map(request => ({ kind: "random" as const, id: request.id })) ?? [])],
-  }));
-  const input: RuleExecutionContext = { state: context.state as SimulationState, actions: [action], resolutionPlans: [], resolutionReceipts: [],
-    checkRequests: [], checkResults: [], randomRequests: context.randomness?.plan.requests ?? [], randomResults: context.randomness?.results ?? [] };
+  }))];
+  const effectState = { ...context.state, truth: { ...context.state.truth,
+    elapsedSeconds: bound.attempt.startedAtSeconds + worldProgramDuration(bound, resources) } } as SimulationState;
+  const input: RuleExecutionContext = { state: effectState, actions: [action], resolutionPlans: resolved.map(value => value.plan), resolutionReceipts: receipts,
+    checkRequests: context.randomness?.plan.checkRequests ?? [], checkResults: context.randomness?.checks ?? [],
+    randomRequests: context.randomness?.plan.requests ?? [], randomResults: context.randomness?.results ?? [] };
   const mechanics = registry.resolve(context.definition.rulePackages, input, invocations, direct);
   const reads = mechanicalReads(mechanics.invocations, context.state);
-  return { operations: [...direct, ...mechanics.operations], mechanics, reads };
+  if (resolved.length) for (const key of ["facts", "placements", "ratings", "conditions", "meters", "mechanics"]) if (!reads.includes(key)) reads.push(key);
+  for (const [index, receipt] of receipts.entries()) receipt.operations = mechanics.results[index]!.operations;
+  return { operations: [...direct, ...mechanics.operations], mechanics, reads, resolutionPlans: resolved.map(value => value.plan), resolutionReceipts: receipts };
 }

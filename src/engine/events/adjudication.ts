@@ -133,6 +133,7 @@ export function worldQuestionWork(bound: BoundWorldProgram, resources: ProgramRe
       payload: { branch, timing: worldProgramTiming(bound, resources) as unknown as JsonValue, durationSeconds: worldProgramDuration(bound, resources),
         operations: JSON.parse(JSON.stringify(mechanical.operations)) as JsonValue,
         mechanics: JSON.parse(JSON.stringify(mechanical.mechanics)) as JsonValue,
+        resolutions: JSON.parse(JSON.stringify({ plans: mechanical.resolutionPlans, receipts: mechanical.resolutionReceipts })) as JsonValue,
         deliveries: branch.deliveries.map(delivery => ({ recipientEntityId: bound.parameters[delivery.recipientParameter]!,
           text: renderWorldText(delivery.text, bound.parameters), kind: delivery.kind })) },
       instructions: `${instruction}\n\nAre all candidate effects, delivery, duration, and the outcome justified if the listed branch conditions hold? Evaluate this exact branch for the actual attempt.`,

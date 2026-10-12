@@ -25,14 +25,14 @@ function fixture() {
   const state = structuredClone(definition.initialState), sources = worldProgramSources(definition, state), resources = worldResources(state, definition);
   const from = `quantity:${quantityId(state.worldHash, "spirit-stone", "player")}`;
   const to = `quantity:${quantityId(state.worldHash, "spirit-stone", "keeper")}`;
-  const raw: WorldProgramDefinition = { version: 3, namespace: "world", id: "voluntary-gift", description: "Transfer the actor's offered stones to a nearby recipient.",
+  const raw: WorldProgramDefinition = { version: 4, namespace: "world", id: "voluntary-gift", description: "Transfer the actor's offered stones to a nearby recipient.",
     sourceIds: ["world", "law:no-free-spirit-stones", "mechanics"], parameters: { actor: { kind: "entity", description: "Giver" }, recipient: { kind: "entity", description: "Recipient" }, amount: { kind: "number", description: "Offered amount" } },
     reads: ["entity:{actor}", "entity:{recipient}", "placement:{actor}", "placement:{recipient}", from, to], writes: ["quantities"],
-    timing: { profileId: "explicit-duration", basis: { kind: "explicit_duration", seconds: { kind: "literal", value: 5 }, sourceText: "5 seconds" } }, random: [], sharedResources: [],
+    timing: { profileId: "explicit-duration", basis: { kind: "explicit_duration", seconds: { kind: "literal", value: 5 }, sourceText: "5 seconds" } }, random: [], resolutions: [], sharedResources: [],
     predicates: [{ id: "authorized", description: "The actor voluntarily offers their own stones to this reachable recipient.", reads: ["placement:{actor}", "placement:{recipient}"], sourceIds: ["world"],
       test: { kind: "semantic", instructions: "Check the actual offer and reach. Do not fabricate acceptance or an exchange promised in return." }, unknown: "wait" }],
     branches: [{ id: "give", when: [{ predicateId: "authorized", equals: "yes" }], outcome: "succeeded", acknowledgement: "attempted", description: "A voluntary transfer occurs.",
-      effects: [], mechanics: [{ id: "gift", packageId: "core-resolution", ruleId: "transfer-quantity", input: {
+      resolutions: [], effects: [], mechanics: [{ id: "gift", packageId: "core-resolution", ruleId: "transfer-quantity", input: {
         definitionId: "spirit-stone",
         fromHolderId: { $expression: { kind: "parameter", name: "actor" } },
         toHolderId: { $expression: { kind: "parameter", name: "recipient" } },

@@ -17,6 +17,7 @@ import { activeRandomReservation, validateWorldRandomness, type WorldRandomCommi
 import { worldClockBoundary, type WorldClockBoundary } from "./clock-boundary";
 import { projectAgentPerspective } from "../cognition/agent-perspective";
 import { privateProgramResources } from "../programs/private-resources";
+import type { ResolutionPlan, ResolutionReceipt } from "../mechanics/resolution";
 
 export interface WorldDelivery { attemptId: string; recipientEntityId: string; kind: "speech" | "observation"; text: string }
 export interface WorldEventCandidate {
@@ -31,6 +32,8 @@ export interface WorldEventCandidate {
   effects: WorldDeltaOperation[];
   mechanicInvocations: MechanicInvocation[];
   mechanicResults: MechanicResult[];
+  resolutionPlans: ResolutionPlan[];
+  resolutionReceipts: ResolutionReceipt[];
   deliveries: WorldDelivery[];
   randomness: WorldRandomCommitment | null;
   clockBoundary: WorldClockBoundary;
@@ -111,6 +114,7 @@ function operationReads(state: Readonly<SimulationState>, operation: WorldDeltaO
 function materialize(programs: BoundWorldProgram[], records: Map<string, WorldConditionRecord>, resources: ProgramResources, context: WorldMechanicsContext) {
   const selections: WorldEventCandidate["selections"] = [], effects: WorldDeltaOperation[] = [], deliveries: WorldDelivery[] = [];
   const mechanicInvocations: MechanicInvocation[] = [], mechanicResults: MechanicResult[] = [];
+  const resolutionPlans: ResolutionPlan[] = [], resolutionReceipts: ResolutionReceipt[] = [];
   for (const bound of programs) {
     const branches = selectableWorldBranches(bound, [...records.values()]);
     if (branches.length !== 1) throw new Error(branches.length ? "ambiguous world branches require expansion" : "world rule awaits evidence or expansion");
@@ -126,6 +130,7 @@ function materialize(programs: BoundWorldProgram[], records: Map<string, WorldCo
     const mechanical = materializeWorldMechanics(bound, branch.id, resources, context);
     effects.push(...mechanical.operations);
     mechanicInvocations.push(...mechanical.mechanics.invocations); mechanicResults.push(...mechanical.mechanics.results);
+    resolutionPlans.push(...mechanical.resolutionPlans); resolutionReceipts.push(...mechanical.resolutionReceipts);
     for (const delivery of branch.deliveries) {
       const recipient = bound.parameters[delivery.recipientParameter]; if (typeof recipient !== "string") throw new Error("invalid delivery recipient");
       const text = renderWorldText(delivery.text, bound.parameters);
@@ -134,7 +139,7 @@ function materialize(programs: BoundWorldProgram[], records: Map<string, WorldCo
       deliveries.push({ attemptId: bound.attempt.id, recipientEntityId: recipient, text, kind: delivery.kind });
     }
   }
-  return { selections, effects, deliveries, mechanicInvocations, mechanicResults };
+  return { selections, effects, deliveries, mechanicInvocations, mechanicResults, resolutionPlans, resolutionReceipts };
 }
 
 export function createWorldEventCandidate(state: Readonly<SimulationState>, definition: WorldRuntimeContract, resources: ProgramResources,
@@ -161,7 +166,7 @@ export function createWorldEventCandidate(state: Readonly<SimulationState>, defi
   // A persisted draw cannot be repaired into different stakes after its result is known.
   // An unresolved joint frontier ends with blocked receipts and no fabricated effects.
   const unresolved = Boolean(activeRandomReservation(state) && programs.some(bound => selectableWorldBranches(bound, [...records.values()]).length !== 1));
-  const value = unresolved ? { selections: [], effects: [], deliveries: [], mechanicInvocations: [], mechanicResults: [] } : materialize(programs, records, resources, context);
+  const value = unresolved ? { selections: [], effects: [], deliveries: [], mechanicInvocations: [], mechanicResults: [], resolutionPlans: [], resolutionReceipts: [] } : materialize(programs, records, resources, context);
   const reads = captureReads(resources, [...new Set([
     ...proof.records.flatMap(record => Object.keys(record.readSet)),
     ...programs.flatMap(bound => [ `entity:${bound.attempt.actorEntityId}`, ...bound.program.definition.reads.map(key => renderWorldText(key, bound.parameters)) ]),
@@ -191,7 +196,7 @@ export function commitWorldEvent(source: Readonly<SimulationState>, definition: 
   const existing = options.receipts.get(id);
   if (existing) return { state: structuredClone(source) as SimulationState, resources, receipt: structuredClone(existing), replayed: true };
   if (candidate.atSeconds !== options.earliestPendingSeconds) throw new Error("cannot commit past an unsettled earlier world event");
-  const physicalResources = worldResources(source, definition, Object.fromEntries(Object.entries(resources).filter(([key]) => !key.startsWith("random:"))));
+  const physicalResources = worldResources(source, definition, Object.fromEntries(Object.entries(resources).filter(([key]) => !/^(random|check):/u.test(key))));
   resources = validateWorldRandomness(source, definition, physicalResources, candidate.programs, candidate.randomness);
   validateReads(resources, candidate.reads);
   const canonical = createWorldEventCandidate(source, definition, resources, candidate.programs, { ...candidate.adjudication, calls: [] }, candidate.atSeconds, candidate.randomness);
@@ -200,8 +205,9 @@ export function commitWorldEvent(source: Readonly<SimulationState>, definition: 
   if (candidate.randomness) next.truth.rng = structuredClone(candidate.randomness.after);
   // All programs in this component were jointly adjudicated. Resource competition is still checked against the evolving transaction clone.
   const randomResults = new Map(candidate.randomness?.results.map(result => [result.requestId, result]) ?? []);
+  const checks = new Map(candidate.randomness?.checks.map(result => [result.requestId, result]) ?? []);
   for (const operation of candidate.effects) {
-    for (const assertion of operation.assertions) if (!evaluateCausalAssertion(source, assertion, new Map(), randomResults).passed) throw new Error("world effect causal assertion failed");
+    for (const assertion of operation.assertions) if (!evaluateCausalAssertion(source, assertion, checks, randomResults).passed) throw new Error("world effect causal assertion failed");
     applyWorldDeltaOperation(next, operation);
   }
   // Transfers cannot create resources. Production/consumption require the existing code-owned quantity laws.
