@@ -523,7 +523,7 @@ describe("open world kernel", () => {
       conditionProfileId: null,
       stackingKey: null,
       remainingUses: null,
-      expiresAtElapsedSeconds: 1,
+      nextImpactAtElapsedSeconds: null, expiresAtElapsedSeconds: 1,
       access: { kind: "private" },
       provenance: causalAction,
     };

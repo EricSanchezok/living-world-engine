@@ -316,6 +316,7 @@ const temporalReasonLabel = {
   activity_completion: "活动完成",
   timer: "定时器到期",
   condition_expiry: "条件检查",
+  condition_impact: "周期影响",
   activity_assertion: "活动前提检查",
   safety_horizon: "无人干预推进上限",
 } as const;
@@ -369,7 +370,7 @@ function TemporalAudit({ actorId, detail }: { actorId: string; detail: WorldInsp
             const subject = reason.kind === "activity_checkpoint" || reason.kind === "activity_completion"
               ? reason.activityId
               : reason.kind === "timer" ? reason.timerId
-                : reason.kind === "condition_expiry" ? reason.conditionId : null;
+                : (reason.kind === "condition_expiry" || reason.kind === "condition_impact") ? reason.conditionId : null;
             return <li key={`${reason.kind}:${subject ?? index}`}><Clock3 aria-hidden="true" /><span><strong>{temporalReasonLabel[reason.kind]}</strong><small>{subject ?? "没有更早的活动、定时器或语义事件"}</small></span></li>;
           })}
         </ul>

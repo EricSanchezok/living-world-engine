@@ -1734,7 +1734,7 @@ describe("eager reference safeguards", () => {
       conditionProfileId: null,
       stackingKey: null,
       remainingUses: null,
-      expiresAtElapsedSeconds: 1,
+      nextImpactAtElapsedSeconds: null, expiresAtElapsedSeconds: 1,
       access: { kind: "public" },
       provenance: [{ kind: "law", id: definition.laws[0]!.id }],
     };

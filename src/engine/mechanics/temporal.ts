@@ -235,6 +235,7 @@ export type TemporalBoundaryReason =
   | { kind: "activity_completion"; activityId: string }
   | { kind: "timer"; timerId: string }
   | { kind: "condition_expiry"; conditionId: string }
+  | { kind: "condition_impact"; conditionId: string }
   | { kind: "activity_assertion"; activityId: string }
   | { kind: "safety_horizon" };
 

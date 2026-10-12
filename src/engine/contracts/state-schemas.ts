@@ -393,6 +393,7 @@ export const conditionStateSchema = z.strictObject({
   stackingKey: semanticIdSchema.nullable(),
   remainingUses: z.number().int().nonnegative().nullable(),
   expiresAtElapsedSeconds: z.number().int().nonnegative().nullable(),
+  nextImpactAtElapsedSeconds: z.number().int().nonnegative().nullable(),
   access: accessSchema,
   provenance: z.array(causalRefSchema).min(1),
 }) as z.ZodType<ConditionState>;

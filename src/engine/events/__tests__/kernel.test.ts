@@ -92,6 +92,7 @@ describe("source-bound world event kernel", () => {
     expect(large.result.evidence).toHaveLength(2);
     for (const proof of large.result.evidence) expect((proof.batch.state as { attempts: unknown[] }).attempts).toHaveLength(1);
     const candidate = createWorldEventCandidate(f.state, f.definition, f.resources, programs, large.result, 5);
+    expect(candidate.components).toHaveLength(2);
     expect(commitWorldEvent(f.state, f.definition, f.resources, candidate,
       { earliestPendingSeconds: 5, receipts: new Map() }).state.truth.elapsedSeconds).toBe(5);
     other.attempt.targetEntityIds = ["player"];

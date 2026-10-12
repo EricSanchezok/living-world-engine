@@ -185,6 +185,7 @@ export interface ConditionProfileDefinition {
   stackingKey: string | null;
   defaultDurationProfileId: string;
   recurringImpactProfileId: string | null;
+  recurringIntervalSeconds: number | null;
   recovery: string | null;
   thresholds: Array<{
     at: MagnitudeBand;
@@ -220,6 +221,7 @@ export interface ConditionState {
   stackingKey: string | null;
   remainingUses: number | null;
   expiresAtElapsedSeconds: number | null;
+  nextImpactAtElapsedSeconds: number | null;
   access: WorldFact["access"];
   provenance: CausalRef[];
 }
@@ -626,6 +628,7 @@ export function materializeCondition(input: {
     conditionProfileId: input.profile?.id ?? null,
     stackingKey: input.profile?.stackingKey ?? null,
     remainingUses: input.duration.kind === "uses" ? input.duration.uses : null,
+    nextImpactAtElapsedSeconds: input.profile?.recurringIntervalSeconds ? input.elapsedSeconds + input.profile.recurringIntervalSeconds : null,
     expiresAtElapsedSeconds: input.duration.kind === "elapsed" ? input.elapsedSeconds + input.duration.seconds : null,
     access: structuredClone(input.intent.access),
     provenance: structuredClone(input.provenance),
@@ -658,6 +661,8 @@ export function mergeCondition(
     ...structuredClone(incoming),
     id: previous.id,
     magnitude,
+    nextImpactAtElapsedSeconds: previous.conditionProfileId === incoming.conditionProfileId
+      ? previous.nextImpactAtElapsedSeconds : incoming.nextImpactAtElapsedSeconds,
     provenance,
   };
   const conditions = existing.map((condition) => structuredClone(condition));

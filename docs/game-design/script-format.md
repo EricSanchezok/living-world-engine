@@ -156,6 +156,7 @@ condition_profiles:
     stacking_key: obscured-vision
     default_duration_profile_id: brief
     recurring_impact_profile_id: null
+    recurring_interval_seconds: null
     recovery: 清理眼睛或等待干扰散去。
     thresholds: []
 entity_mechanics_profiles:
@@ -177,6 +178,8 @@ random_distributions: []
 `rule_packages` 必须包含 `core-resolution@2.0.0`，并可追加服务端注册的精确版本；世界不能提供规则代码。Meter 阈值可以设置 lifecycle 或 Fact。Quantity 的生产与消耗分别由法则授权，转移保持守恒。Rating 是通用 aptitude 或对抗强度；一次检定最多使用一个归属于 actor 的 Rating，number Fact 不会自动成为 modifier。
 
 所有剧本共享 `none | minor | standard | major | decisive` 效果档。`impact_profiles` 将档位映射为 Meter 的确定性增减并在边界 clamp；`duration_profiles` 只定义 Condition 的使用次数、模拟秒数或持续至解除；`condition_profiles` 可为重要自由语义状态声明 stacking key、持续影响、恢复说明和阈值。没有 profile 的状态仍可存在并参与后续语义裁决。`entity_mechanics_profiles` 是出生角色的 Meter、Quantity、Rating 模板，`adjudication_calibrations` 同时约束 planner、verifier 与测试，不是动作白名单。
+
+`recurring_impact_profile_id` 与 `recurring_interval_seconds` 必须同时为空，或同时指定已定义的效果 profile 和正整数秒数。周期从 Condition 建立时开始；同一 profile 的状态叠加保持已有下一次生效时间，并刷新持续时间。Blackmarsh 的 burning 明确采用每 60 秒一次影响。
 
 `activity_resources` 声明每名 Agent 可被活动占用的通用容量；引擎不内置手、移动、战斗或治疗槽位。`shared_activity_resources` 声明多个 Agent 可竞争的 typed pool 种类：正数默认 claim、单位、是否允许行动原文明示数量、`reject | queue | adjudicate` 争用策略，以及 pause 时 `retain | release`。它不在这里声明总容量；每个 Entity 实例化自己的 pool。混合 claims 按 `adjudicate > queue > reject` 选择路线，但最终必须全部满足，模型不能借此修改容量或 claim 数量。
 

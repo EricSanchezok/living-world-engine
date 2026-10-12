@@ -204,6 +204,7 @@ condition_profiles:
     stacking_key: burning
     default_duration_profile_id: scene
     recurring_impact_profile_id: harm
+    recurring_interval_seconds: 60
     recovery: 扑灭火焰、浸水或得到他人协助。
     thresholds:
       - { at: major, description: 火势已足以迅速危及生命与装备。 }

@@ -17,7 +17,7 @@ function fixture() {
   const condition = (id: string, subjectId = "player"): ConditionState => ({
     id, subjectId, label: "Ready", description: "The subject is ready.", magnitude: "minor",
     durationProfileId: "brief", conditionProfileId: null, stackingKey: null,
-    remainingUses: null, expiresAtElapsedSeconds: 10, access: { kind: "public" },
+    remainingUses: null, nextImpactAtElapsedSeconds: null, expiresAtElapsedSeconds: 10, access: { kind: "public" },
     provenance: [{ kind: "law", id: "time-passes" }],
   });
   state.truth.conditions.existing = condition("existing");

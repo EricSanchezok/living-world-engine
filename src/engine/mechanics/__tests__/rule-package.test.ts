@@ -53,7 +53,7 @@ describe("core-resolution trusted rules", () => {
     state.truth.mechanics.durationProfiles["test-charge"] = { id: "test-charge", name: "Test charge", kind: "uses", uses: remainingUses };
     state.truth.conditions["test-charge"] = { id: "test-charge", subjectId: "player", label: "Charged focus", description: "A finite-use supporting focus.",
       magnitude: "minor", durationProfileId: "test-charge", conditionProfileId: null, stackingKey: null, remainingUses,
-      expiresAtElapsedSeconds: null, access: { kind: "public" }, provenance: [{ kind: "action", id: playerAction.id }] };
+      nextImpactAtElapsedSeconds: null, expiresAtElapsedSeconds: null, access: { kind: "public" }, provenance: [{ kind: "action", id: playerAction.id }] };
     const source = { kind: "condition" as const, id: "test-charge" };
     const planId = runtimeId({ worldHash: definition.contentHash, revision: 0, kind: "resolution-plan", stage: "test", owner: playerAction.id, round: 0, ordinal: 0 });
     const base: ResolutionPlan = { id: planId, actionId: playerAction.id, actorId: "player", targetIds: ["player"], goal: "Use the focus while observing.",
@@ -532,7 +532,7 @@ describe("core-resolution trusted rules", () => {
       name: "燃烧",
       stackingKey: "burning",
       defaultDurationProfileId: "moment",
-      recurringImpactProfileId: "harm",
+      recurringImpactProfileId: "harm", recurringIntervalSeconds: 30,
       recovery: "扑灭火焰",
       thresholds: [],
     };
@@ -546,7 +546,7 @@ describe("core-resolution trusted rules", () => {
       conditionProfileId: "burning",
       stackingKey: "burning",
       remainingUses: null,
-      expiresAtElapsedSeconds: 30,
+      nextImpactAtElapsedSeconds: 30, expiresAtElapsedSeconds: 30,
       access: { kind: "public" },
       provenance: [{ kind: "action", id: playerAction.id }],
     };

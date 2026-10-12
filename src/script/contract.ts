@@ -244,6 +244,7 @@ export const mechanicsFileSchema = z.object({
     stacking_key: safeIdSchema.nullable().default(null),
     default_duration_profile_id: safeIdSchema,
     recurring_impact_profile_id: safeIdSchema.nullable().default(null),
+    recurring_interval_seconds: z.number().int().positive().nullable().default(null),
     recovery: z.string().min(1).nullable().default(null),
     thresholds: z.array(z.object({
       at: magnitudeBandSchema,

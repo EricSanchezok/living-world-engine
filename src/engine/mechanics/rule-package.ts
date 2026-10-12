@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { deriveConditionAdvance } from "./condition-time";
 import { containsStandaloneExplicitNumber, explicitNumberQuotes, parseExplicitNumber } from "./explicit-number";
 import { worldDeltaOperationSchema } from "../contracts/llm-schemas";
 import type {
@@ -569,51 +570,9 @@ const advanceConditions: MechanicRule = {
   inputSchema: advanceConditionsInputSchema,
   resolve: (context, _config, input, invocation) => {
     const { seconds } = input as z.infer<typeof advanceConditionsInputSchema>;
-    const conditions = projectedConditions(context);
-    const meterCurrents = projectedMeterCurrents(context);
-    const operations: WorldDeltaOperation[] = [];
     const end = context.state.truth.elapsedSeconds + seconds;
-    for (const condition of [...conditions.values()].sort((left, right) => left.id.localeCompare(right.id))) {
-      const profile = condition.conditionProfileId
-        ? context.state.truth.mechanics.conditionProfiles[condition.conditionProfileId]
-        : null;
-      if (profile?.recurringImpactProfileId) {
-        const impact = context.state.truth.mechanics.impactProfiles[profile.recurringImpactProfileId];
-        const meter = Object.values(context.state.truth.meters).find((candidate) =>
-          candidate.entityId === condition.subjectId && candidate.definitionId === impact?.meterDefinitionId);
-        const definition = meter ? context.state.truth.mechanics.meters[meter.definitionId] : null;
-        if (!impact || !meter || !definition) {
-          throw new Error(`condition ${condition.id} has no meter for recurring impact`);
-        }
-        const current = meterCurrents.get(meter.id);
-        if (current === undefined) throw new Error(`condition ${condition.id} has no projected meter state`);
-        const unsigned = impact.amounts[condition.magnitude];
-        const desired = impact.direction === "increase" ? unsigned : -unsigned;
-        const amount = deriveClampedMeterDelta(current, definition.min, definition.max, desired);
-        if (amount !== 0) {
-          operations.push({
-            kind: "adjust_meter",
-            meterId: meter.id,
-            amount,
-            causes: structuredClone(invocation.causes),
-            assertions: [{ kind: "meter_compare", meterId: meter.id, operator: "eq", value: current }],
-          });
-          meterCurrents.set(meter.id, current + amount);
-        }
-      }
-      if (condition.expiresAtElapsedSeconds !== null && condition.expiresAtElapsedSeconds <= end) {
-        operations.push({
-          kind: "remove_condition",
-          conditionId: condition.id,
-          causes: structuredClone(invocation.causes),
-          assertions: [{
-            kind: "elapsed_seconds_compare",
-            operator: "eq",
-            value: context.state.truth.elapsedSeconds,
-          }],
-        });
-      }
-    }
+    const operations = deriveConditionAdvance({ state: context.state, endElapsedSeconds: end,
+      conditions: [...projectedConditions(context).values()], meterCurrents: projectedMeterCurrents(context), causes: invocation.causes });
     return {
       code: operations.length === 0 ? "conditions-unchanged" : "conditions-advanced",
       data: { seconds, endElapsedSeconds: end, operationCount: operations.length },

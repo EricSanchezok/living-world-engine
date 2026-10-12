@@ -1,4 +1,5 @@
 import type { MechanicInvocation, MechanicResult, SimulationState, WorldDeltaOperation, WorldEvent } from "../contracts/model";
+import { deriveConditionAdvance } from "../mechanics/condition-time";
 import { evaluateCausalAssertion } from "../mechanics/causality";
 import { contentHash } from "../models/model-audit";
 import type { ProgramReceipt } from "../programs/interpreter";
@@ -24,6 +25,7 @@ export interface WorldEventCandidate {
   version: 1;
   unresolved: boolean;
   continuingAttemptIds: string[];
+  components: string[][];
   id: string;
   atSeconds: number;
   programs: BoundWorldProgram[];
@@ -38,6 +40,7 @@ export interface WorldEventCandidate {
   deliveries: WorldDelivery[];
   randomness: WorldRandomCommitment | null;
   clockBoundary: WorldClockBoundary;
+  clockEffects: WorldDeltaOperation[];
 }
 export interface CommitReceipt {
   version: 1; id: string; candidateId: string; beforeHash: string; afterHash: string;
@@ -126,7 +129,7 @@ export function createWorldEventCandidate(state: Readonly<SimulationState>, defi
   resources = validateWorldRandomness(state, definition, resources, programs, randomness);
   const sources = worldProgramSources(definition, state), entityIds = new Set(Object.keys(state.truth.entities));
   const clockBoundary = worldClockBoundary(state, atSeconds);
-  if ((!programs.length && !clockBoundary.timers.length && !clockBoundary.conditions.length && !clockBoundary.programDeadlines.length) ||
+  if ((!programs.length && !clockBoundary.timers.length && !clockBoundary.conditions.length && !clockBoundary.impacts.length && !clockBoundary.programDeadlines.length) ||
     new Set(programs.map(bound => bound.attempt.id)).size !== programs.length) throw new Error("event requires distinct attempts or an actual clock boundary");
   for (const bound of programs) {
     const admitted = admitWorldProgram(bound.program.definition, sources);
@@ -149,15 +152,28 @@ export function createWorldEventCandidate(state: Readonly<SimulationState>, defi
   const continuingAttemptIds = unresolved ? [] : programs.filter(bound => worldProgramTiming(bound, resources).completionAtSeconds === null &&
     bound.program.definition.branches.find(branch => branch.id === value.selections.find(selection => selection.attemptId === bound.attempt.id)!.branchId)!.outcome === "partial")
     .map(bound => bound.attempt.id);
+  const clockEffects = (() => {
+    if (!clockBoundary.impacts.length && !clockBoundary.conditions.length) return [];
+    const projected = structuredClone(state) as SimulationState;
+    for (const operation of value.effects) applyWorldDeltaOperation(projected, operation);
+    return deriveConditionAdvance({ state: projected, endElapsedSeconds: atSeconds });
+  })();
   const reads = captureReads(resources, [...new Set([
     ...proof.records.flatMap(record => Object.keys(record.readSet)),
     ...programs.flatMap(bound => [ `entity:${bound.attempt.actorEntityId}`, ...bound.program.definition.reads.map(key => renderWorldText(key, bound.parameters)) ]),
-    ...value.effects.flatMap(operation => worldOperationReads(state, operation)),
+    ...[...value.effects, ...clockEffects].flatMap(operation => worldOperationReads(state, operation)),
     ...Object.keys(randomness?.plan.reads ?? {}),
     ...programs.map(bound => `program-actor:${bound.attempt.actorEntityId}`).filter(key => resources[key]),
-    ...clockBoundary.timers.map(timer => `timer:${timer.id}`), ...clockBoundary.conditions.map(id => `condition:${id}`),
+    ...clockBoundary.timers.map(timer => `timer:${timer.id}`), ...[...clockBoundary.conditions, ...clockBoundary.impacts].map(id => `condition:${id}`),
+    ...clockBoundary.impacts.flatMap(id => {
+      const condition = state.truth.conditions[id]!, profile = condition.conditionProfileId && state.truth.mechanics.conditionProfiles[condition.conditionProfileId];
+      const impact = profile && profile.recurringImpactProfileId && state.truth.mechanics.impactProfiles[profile.recurringImpactProfileId];
+      return ["mechanics", ...Object.values(state.truth.meters).filter(meter => impact && meter.entityId === condition.subjectId &&
+        meter.definitionId === impact.meterDefinitionId).map(meter => `meter:${meter.id}`)];
+    }),
   ])]);
-  const body = { version: 1 as const, unresolved, continuingAttemptIds, atSeconds, programs, adjudication: proof, ...value, reads, randomness, clockBoundary };
+  const components = worldProgramComponents(programs, resources, context).map(component => component.map(bound => bound.attempt.id));
+  const body = { version: 1 as const, unresolved, continuingAttemptIds, components, atSeconds, programs, adjudication: proof, ...value, reads, randomness, clockBoundary, clockEffects };
   return frozenClone({ ...body, id: contentHash(body) });
 }
 
@@ -197,14 +213,18 @@ export function commitWorldEvent(source: Readonly<SimulationState>, definition: 
   for (const quantity of Object.values(next.truth.quantities)) {
     if (quantity.id !== quantityId(next.worldHash, quantity.definitionId, quantity.holderId) || quantity.amount < 0) throw new Error("world quantity invariant failed");
   }
-  next.truth.elapsedSeconds = candidate.atSeconds;
-  const expired = new Set<string>();
-  for (const conditionId of candidate.clockBoundary.conditions) {
-    const current = next.truth.conditions[conditionId];
-    if (!current || current.expiresAtElapsedSeconds !== null && current.expiresAtElapsedSeconds <= candidate.atSeconds) {
-      expired.add(`condition:${conditionId}`); delete next.truth.conditions[conditionId];
-    }
+  const declared = new Set(candidate.programs.flatMap(bound => bound.program.definition.writes.map(key => renderWorldText(key, bound.parameters))));
+  const programOnly = worldResources(next, definition, physicalResources);
+  for (const write of Object.keys(programOnly).filter(key => (key.includes(":") || key === "agentRoster") &&
+    contentHash(programOnly[key]?.value) !== contentHash(physicalResources[key]?.value ?? null))) {
+    const collection = collectionFor[write.slice(0, write.indexOf(":"))];
+    if (!declared.has(write) && !declared.has(collection!)) throw new Error(`world program wrote an undeclared resource ${write}`);
   }
+  for (const operation of candidate.clockEffects) {
+    for (const assertion of operation.assertions) if (!evaluateCausalAssertion(next, assertion).passed) throw new Error("condition clock assertion failed");
+    applyWorldDeltaOperation(next, operation);
+  }
+  next.truth.elapsedSeconds = candidate.atSeconds;
   for (const timer of candidate.clockBoundary.timers) next.truth.timers[timer.id]!.status = timer.status;
   next.revision += 1; next.step += 1;
   for (const [agentId, agent] of Object.entries(next.agents)) {
@@ -228,15 +248,7 @@ export function commitWorldEvent(source: Readonly<SimulationState>, definition: 
   const updated = worldResources(next, definition, physicalResources);
   const writes = Object.keys(updated).filter(key => (key.includes(":") || key === "agentRoster" || key === "rng") &&
     contentHash(updated[key]?.value) !== contentHash(physicalResources[key]?.value ?? null));
-  const declared = new Set(candidate.programs.flatMap(bound => bound.program.definition.writes.map(key => renderWorldText(key, bound.parameters))));
-  for (const write of writes) {
-    const collection = collectionFor[write.slice(0, write.indexOf(":"))];
-    if (write !== "rng" && !candidate.clockBoundary.timers.some(timer => write === `timer:${timer.id}`) &&
-      !declared.has(write) && !declared.has(collection!) && !expired.has(write)) {
-      throw new Error(`world program wrote an undeclared resource ${write}`);
-    }
-  }
-  const effectHash = contentHash({ operations: candidate.effects, deliveries: candidate.deliveries, randomness: candidate.randomness?.hash ?? null });
+  const effectHash = contentHash({ operations: [...candidate.effects, ...candidate.clockEffects], deliveries: candidate.deliveries, randomness: candidate.randomness?.hash ?? null });
   const programReceipts: ProgramReceipt[] = candidate.programs.flatMap((bound, ordinal) => {
     if (!bound.attempt.program) return [];
     const branch = bound.program.definition.branches.find(value => value.id === candidate.selections.find(value => value.attemptId === bound.attempt.id)?.branchId);

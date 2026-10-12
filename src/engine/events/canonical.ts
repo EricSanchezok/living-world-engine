@@ -111,8 +111,9 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
   const temporalBoundary: CommittedStep["temporalBoundary"] = { fromElapsedSeconds: source.truth.elapsedSeconds,
     toElapsedSeconds: state.truth.elapsedSeconds, deltaSeconds: state.truth.elapsedSeconds - source.truth.elapsedSeconds,
     reasons: [...(event?.clockBoundary.timers.map(timer => ({ kind: "timer" as const, timerId: timer.id })) ?? []),
+      ...(event?.clockBoundary.impacts.map(conditionId => ({ kind: "condition_impact" as const, conditionId })) ?? []),
       ...(event?.clockBoundary.conditions.map(conditionId => ({ kind: "condition_expiry" as const, conditionId })) ?? [])],
-    dueActivityIds: [], dueTimerIds: event?.clockBoundary.timers.map(timer => timer.id) ?? [], dueConditionIds: event?.clockBoundary.conditions ?? [] };
+    dueActivityIds: [], dueTimerIds: event?.clockBoundary.timers.map(timer => timer.id) ?? [], dueConditionIds: [...new Set([...(event?.clockBoundary.conditions ?? []), ...(event?.clockBoundary.impacts ?? [])])] };
   const payload: Omit<CommittedStep, "contentHash" | "semanticHash"> = {
     decisionEvent: storeDecisionEventStep(source, proof), executionState: { producerHash,
       data: { kind: "decision-event-reference", hash: proof.finalControl.hash } },
@@ -130,7 +131,7 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
     randomResults: !before.randomReservation ? proof.preparedControl.randomReservation?.commitment.results ?? [] : [],
     commitmentRounds: [], outcomes, mechanicInvocations: event?.mechanicInvocations ?? [], mechanicResults: event?.mechanicResults ?? [], causalAssertionResults: [],
     causalVerification: { verdict: "accept", findings: [] }, events: state.truth.events.slice(source.truth.events.length),
-    observations, operations: event?.effects ?? [], decisionRequests: [], beliefPatches, characterPatches, nextActions: [],
+    observations, operations: [...(event?.effects ?? []), ...(event?.clockEffects ?? [])], decisionRequests: [], beliefPatches, characterPatches, nextActions: [],
   };
   const semantic = { ...payload, semanticHash: contentHash(payload) };
   const committed: CommittedStep = { ...semantic, contentHash: contentHash(semantic) };
@@ -154,7 +155,7 @@ export function nativeCandidate(source: Readonly<SimulationState>, proof: Decisi
       invocationIds: proof.event?.adjudication.evidence.flatMap(evidence => evidence.result.audit.invocations.map(invocation => invocation.id)) ?? [] },
     mindCommits: [], modelAudits: proof.modelAudits, interactionDependencies: [],
     diagnostics: { activatedAgentIds, reusedAgentIds: Object.keys(source.agents).filter(id => !activatedAgentIds.includes(id)), mindFallbackAgentIds: [],
-      dependencyComponents: step.actions.length ? [step.actions.map(action => action.id)] : [], globalReadjudication: false },
+      dependencyComponents: proof.event?.components ?? [], globalReadjudication: false },
     temporalPlans: step.temporalPlans, temporalBoundary: step.temporalBoundary, temporalState: step.temporalState, activityTransitions: [],
     activityDispositions: [], sharedResourceAdmissions: [], decisionPoints: step.decisionPoints,
   };

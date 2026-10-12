@@ -183,7 +183,7 @@ describe("AgentPerspective", () => {
       conditionProfileId: null,
       stackingKey: null,
       remainingUses: 1,
-      expiresAtElapsedSeconds: null,
+      nextImpactAtElapsedSeconds: null, expiresAtElapsedSeconds: null,
       provenance: [{ kind: "action" as const, id: "condition-test" }],
     };
     source.truth.conditions.visible = {

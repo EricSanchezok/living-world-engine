@@ -405,7 +405,7 @@ const engineStableTelemetryFields: Record<EngineStableRuntimeEventInput["event"]
     attributes: ["reasonKind"],
     counts: [],
     attributeValues: {
-      reasonKind: ["activity_checkpoint", "activity_completion", "timer", "condition_expiry", "safety_horizon"],
+      reasonKind: ["activity_checkpoint", "activity_completion", "timer", "condition_expiry", "condition_impact", "safety_horizon"],
     },
   },
   "temporal.activity.transition": {

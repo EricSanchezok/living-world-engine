@@ -1038,6 +1038,8 @@ export function validateSimulationState(state: SimulationState, requireNextActio
   }
   for (const [id, profile] of Object.entries(state.truth.mechanics.conditionProfiles)) {
     if (profile.id !== id || !state.truth.mechanics.durationProfiles[profile.defaultDurationProfileId] ||
+      (profile.recurringImpactProfileId === null) !== (profile.recurringIntervalSeconds === null) ||
+      (profile.recurringIntervalSeconds !== null && (!Number.isSafeInteger(profile.recurringIntervalSeconds) || profile.recurringIntervalSeconds <= 0)) ||
       (profile.recurringImpactProfileId !== null && !state.truth.mechanics.impactProfiles[profile.recurringImpactProfileId])) {
       throw new Error(`invalid condition profile ${id}`);
     }
@@ -1121,6 +1123,11 @@ export function validateSimulationState(state: SimulationState, requireNextActio
   }
   for (const [id, condition] of Object.entries(state.truth.conditions)) {
     conditionStateSchema.parse(condition);
+    const periodic = condition.conditionProfileId ? state.truth.mechanics.conditionProfiles[condition.conditionProfileId]?.recurringIntervalSeconds : null;
+    if ((condition.nextImpactAtElapsedSeconds === null) !== !periodic ||
+      (condition.nextImpactAtElapsedSeconds !== null && condition.nextImpactAtElapsedSeconds <= state.truth.elapsedSeconds)) {
+      throw new Error(`invalid recurring condition clock ${id}`);
+    }
     if (condition.id !== id || !state.truth.entities[condition.subjectId] ||
       !state.truth.mechanics.durationProfiles[condition.durationProfileId] ||
       (condition.conditionProfileId !== null && !state.truth.mechanics.conditionProfiles[condition.conditionProfileId]) ||

@@ -181,6 +181,7 @@ function mechanicsCatalog(document: MechanicsDocument): MechanicsCatalog {
     stackingKey: profile.stacking_key,
     defaultDurationProfileId: profile.default_duration_profile_id,
     recurringImpactProfileId: profile.recurring_impact_profile_id,
+    recurringIntervalSeconds: profile.recurring_interval_seconds,
     recovery: profile.recovery,
     thresholds: structuredClone(profile.thresholds),
   }));
@@ -245,6 +246,9 @@ function mechanicsCatalog(document: MechanicsDocument): MechanicsCatalog {
   for (const profile of Object.values(catalog.conditionProfiles)) {
     if (!catalog.durationProfiles[profile.defaultDurationProfileId]) {
       throw new Error(`condition profile ${profile.id} has unknown duration ${profile.defaultDurationProfileId}`);
+    }
+    if ((profile.recurringImpactProfileId === null) !== (profile.recurringIntervalSeconds === null)) {
+      throw new Error(`condition profile ${profile.id} requires a paired recurring impact and interval`);
     }
     if (profile.recurringImpactProfileId && !catalog.impactProfiles[profile.recurringImpactProfileId]) {
       throw new Error(`condition profile ${profile.id} has unknown recurring impact ${profile.recurringImpactProfileId}`);

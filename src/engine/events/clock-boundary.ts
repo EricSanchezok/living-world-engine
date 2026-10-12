@@ -5,6 +5,7 @@ import { EventScheduler } from "./scheduler";
 export interface WorldClockBoundary {
   timers: Array<{ id: string; status: "fired" | "cancelled"; wakeAgentIds: string[] }>;
   conditions: string[];
+  impacts: string[];
   programDeadlines: Array<{ eventId: string; agentId: string }>;
 }
 
@@ -18,6 +19,7 @@ export function nextWorldClockBoundary(state: Readonly<SimulationState>): number
   const times = [
     ...Object.values(state.truth.timers).filter(timer => timer.status === "scheduled").map(timer => timer.dueAtSeconds),
     ...Object.values(state.truth.conditions).flatMap(condition => condition.expiresAtElapsedSeconds === null ? [] : [condition.expiresAtElapsedSeconds]),
+    ...Object.values(state.truth.conditions).flatMap(condition => condition.nextImpactAtElapsedSeconds === null ? [] : [condition.nextImpactAtElapsedSeconds]),
     ...programSchedule(state).filter(event => event.kind === "world" || event.kind === "deadline").map(event => event.atSeconds),
   ];
   return times.length ? Math.min(...times) : null;
@@ -33,6 +35,7 @@ export function worldClockBoundary(state: Readonly<SimulationState>, atSeconds: 
         const fires = timer.assertions.every(assertion => evaluateCausalAssertion(timed, assertion).passed);
         return { id: timer.id, status: fires ? "fired" as const : "cancelled" as const, wakeAgentIds: fires ? timer.wakeAgentIds.slice() : [] };
       }),
+    impacts: Object.values(state.truth.conditions).filter(condition => condition.nextImpactAtElapsedSeconds === atSeconds).map(condition => condition.id).sort(),
     conditions: Object.values(state.truth.conditions).filter(condition => condition.expiresAtElapsedSeconds === atSeconds).map(condition => condition.id).sort(),
     programDeadlines: programSchedule(state).filter(event => event.kind === "deadline" && event.atSeconds === atSeconds &&
       event.subjectId !== null && state.agents[event.subjectId]).map(event => ({ eventId: event.id, agentId: event.subjectId! }))

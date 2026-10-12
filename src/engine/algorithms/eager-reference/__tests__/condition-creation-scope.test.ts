@@ -53,7 +53,7 @@ it.each([{ reader: false, repair: false }, { reader: true, repair: false }, { re
   definition.initialState.truth.conditions["existing-player-condition"] = {
     id: "existing-player-condition", subjectId: "player", label: "Standing", description: "The player is standing.",
     magnitude: "minor", durationProfileId: "brief", conditionProfileId: null, stackingKey: null,
-    remainingUses: 1, expiresAtElapsedSeconds: null, access: { kind: "public" }, provenance: [{ kind: "law", id: "time-passes" }],
+    remainingUses: 1, nextImpactAtElapsedSeconds: null, expiresAtElapsedSeconds: null, access: { kind: "public" }, provenance: [{ kind: "law", id: "time-passes" }],
   };
   definition.historyBaseHash = historyReplayBaseHash(definition.initialState);
   const delegate = new EagerReferenceAlgorithm(provider);
