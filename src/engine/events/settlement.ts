@@ -33,6 +33,7 @@ export function settleProgramWorldEvent(source: Readonly<SimulationState>, prepa
   if (committed.replayed) throw new Error("a completed event cannot create another canonical revision");
   const perception = projectEventPerception(committed.state, event, committed.receipt), state = committed.state;
   state.agents = perception.agents;
+  const goals = applyProgramGoalEvidence(state, prepared, source.revision);
   if (new Set(beliefs.map(revision => revision.agentId)).size !== beliefs.length) throw new Error("duplicate Agent belief revision");
   for (const revision of beliefs) {
     const delivered = perception.beliefPatches.find(patch => patch.agentId === revision.agentId)?.operations
@@ -40,7 +41,6 @@ export function settleProgramWorldEvent(source: Readonly<SimulationState>, prepa
     if (contentHash(delivered.slice().sort()) !== contentHash(revision.evidenceIds.slice().sort())) throw new Error("belief revision does not bind this Agent's actual deliveries");
     state.agents[revision.agentId] = applyEventBeliefs(state, revision, prepared.agents[revision.agentId]?.resources);
   }
-  const goals = applyProgramGoalEvidence(state, prepared, source.revision);
   const control = structuredClone(prepared);
   control.receipts.push(committed.receipt);
   const canonicalReceipts = programReceiptIndex(control);
@@ -80,5 +80,6 @@ export function settleProgramWorldEvent(source: Readonly<SimulationState>, prepa
   const sealed = sealDecisionEventState(control);
   state.executionState = { producerHash, data: sealed as unknown as JsonObject };
   return { state, control: sealed, receipt: committed.receipt, observations: perception.observations,
+    perceptionBeliefPatches: perception.beliefPatches,
     beliefPatches: [...perception.beliefPatches, ...beliefs.map(revision => revision.patch), ...goals.beliefPatches], characterPatches: goals.characterPatches };
 }

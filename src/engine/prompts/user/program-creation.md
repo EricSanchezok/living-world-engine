@@ -1,1 +1,1 @@
-Create a reusable behavior program and initial parameter bindings for the requested goal and intent. Use the complete authorized input and the declared catalogs. Return only the requested JSON object.
+Create a reusable nested behavior tree with inline conditions and typed parameter values for the requested goal and intent. Use the complete authorized input and the declared catalogs. Return only the requested JSON object.

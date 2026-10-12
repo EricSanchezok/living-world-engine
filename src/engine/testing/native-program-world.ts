@@ -1,4 +1,5 @@
 import path from "node:path";
+import { encodeProgramDraft } from "../programs/creation-codec";
 import { loadWorldScript } from "../../script/world-loader";
 import { createTestModelCatalog } from "./model-provider";
 import { decisionQuestionIds, decisionTestProvider } from "./decision-provider";
@@ -29,7 +30,7 @@ export function nativeProgramFixture(options: { goalVerdict?: "yes" | "no" | "un
       description: "The keeper asks a question.", effects: [], deliveries: [{ kind: "speech", recipientParameter: "recipient", text: "{utterance}" }] }] };
   const configured = decisionTestProvider(body => {
     const wire = (body.messages as Array<{ content: string }>).map(message => message.content).join("\n");
-    if (wire.includes("Compile a reusable private behavior program")) return { definition: program, parameters: { recipient: "traveler" } };
+    if (wire.includes("Compile a reusable private behavior program")) return encodeProgramDraft(program, { recipient: "traveler" });
     if (wire.includes("You compile authored world sources")) return { definition: rule, parameters: wire.includes("Hello keeper") ?
       { actor: "player", recipient: "keeper", utterance: "Hello keeper" } : { actor: "keeper", recipient: "player", utterance: "Why are you here?" } };
     if (wire.includes("Render the player's submitted action.")) return { utterance: "Hello keeper" };

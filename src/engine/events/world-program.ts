@@ -120,9 +120,8 @@ export function admitWorldProgram(input: unknown, sources: Readonly<Record<strin
   }
   for (const branch of definition.branches) {
     unique(branch.when.map(value => value.predicateId), "branch condition"); checkText(branch.description);
-    if (!branch.when.some(value => definition.predicates.find(predicate => predicate.id === value.predicateId)?.test.kind === "semantic")) {
-      throw new Error("world branches require source-bound semantic applicability");
-    }
+    // Every branch receives the mandatory kernel-owned effect/applicability question,
+    // including branches whose declared prerequisites are entirely mechanical.
     for (const condition of branch.when) if (!definition.predicates.some(value => value.id === condition.predicateId)) throw new Error(`unknown branch predicate ${condition.predicateId}`);
     for (const effect of branch.effects) {
       if (["kind", "causes", "assertions"].some(key => Object.hasOwn(effect.fields, key))) throw new Error("effect provenance is owned by the kernel");

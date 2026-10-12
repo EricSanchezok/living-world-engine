@@ -59,6 +59,19 @@ async function adjudicate(f: ReturnType<typeof fixture>, programs = [f.bound], a
 }
 
 describe("source-bound world event kernel", () => {
+  it("requires semantic effect authorization even when every branch prerequisite is mechanical", async () => {
+    const f = fixture();
+    f.raw.predicates[0]!.test = { kind: "mechanical", operator: "eq", left: { kind: "literal", value: true }, right: { kind: "literal", value: true } };
+    f.bound.program = admitWorldProgram(f.raw, f.sources);
+    const unknown = await adjudicate(f, [f.bound], () => "unknown");
+    expect(unknown.result.evidence[0]!.batch.questions.q0!.instructions).toContain("Are all candidate effects");
+    expect(() => createWorldEventCandidate(f.state, f.definition, f.resources, [f.bound], unknown.result, 5)).toThrow("awaits evidence");
+    const accepted = await adjudicate(f);
+    const missing = structuredClone(accepted.result); missing.evidence = [];
+    expect(() => createWorldEventCandidate(f.state, f.definition, f.resources, [f.bound], missing, 5)).toThrow("incomplete");
+    const candidate = createWorldEventCandidate(f.state, f.definition, f.resources, [f.bound], accepted.result, 5);
+    expect(commitWorldEvent(f.state, f.definition, f.resources, candidate, { earliestPendingSeconds: 5, receipts: new Map() }).state.step).toBe(1);
+  });
   it("compiles through real gateway validation with one repair and no private cognition in the world prompt", async () => {
     const f = fixture();
     const configured = decisionTestProvider((body, attempt) => {

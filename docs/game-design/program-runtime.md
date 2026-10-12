@@ -10,6 +10,8 @@
 
 `compileAgentProgram` uses the creation profile through ModelGateway, checks the actual owner, goals, sources, parameters and control graph, and permits one targeted repair. The rejected candidate and issues use the existing logical repair binding and tail layout. Exhaustion returns a recoverable failure with both invocation audits. It never substitutes an empty successful plan.
 
+The creation wire contract is a nested behavior tree with inline conditions and typed parameter values. The compiler derives control-node identities, interns identical conditions, binds the requesting owner and closes read/source dependencies. Entity parameter values use the actual private entity domain in the wire schema. The normalized executable definition remains the immutable runtime contract; the gateway retains both raw creation output and its normalized hash. Repairs retain the original rejected output and, when possible, a lossless tree rendering of it. No graph topology or semantic condition is guessed from an invalid response.
+
 ## Execution and recovery
 
 `ProgramInterpreter` persists a version 2 event journal and derives its exact control position by replay. Each activated node has a deterministic work identity. Issued attempts bind a request hash; only a matching receipt from the canonical receipt collection can settle them. Restoring an instance requires the same immutable definition and the recorded canonical receipts. Duplicate settlement fails. Partial completion and failure either wait for changed dependencies or request expansion, according to the program.

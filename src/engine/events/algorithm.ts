@@ -179,7 +179,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     let finalControl = prepared.control;
     if (prepared.event) {
       const preview = settleProgramWorldEvent(input.state, prepared.control, prepared.event, authority, this.manifest.hash);
-      const revised = await Promise.allSettled(preview.beliefPatches.map(async patch => {
+      const revised = await Promise.allSettled(preview.perceptionBeliefPatches.map(async patch => {
         const evidenceIds = patch.operations.flatMap(operation => operation.kind === "upsert_evidence" ? [operation.evidence.id] : []);
         return reviseEventBeliefs(runtime, preview.state, patch.agentId, evidenceIds, prepared.control.agents[patch.agentId]?.resources,
           { ...context.modelScope, modelRegistrySnapshotHash: prepared.control.registryHash,

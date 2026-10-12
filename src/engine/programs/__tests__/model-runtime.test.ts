@@ -14,6 +14,7 @@ import { ProgramInterpreter, type ProgramPredicateWork } from "../interpreter";
 import type { DecisionBatch } from "../../models/decision";
 import { ProgramLibrary } from "../library";
 import { admitProgram } from "../definition";
+import { encodeProgramDraft, lowerProgramDraft } from "../creation-codec";
 
 function provider(output: (body: Record<string, unknown>, attempt: number) => unknown) {
   const base = createTestModelCatalog(["program-test"]);
@@ -48,10 +49,11 @@ function batch(): DecisionBatch {
 describe("program compilation through the model gateway", () => {
   it("indexes only the owner's immutable programs and reports actual startup coverage", async () => {
     const fixture = programFixture();
-    const configured = provider(() => ({ definition: fixture.definition, parameters: fixture.parameters }));
+    const configured = provider(() => encodeProgramDraft(fixture.definition, fixture.parameters));
     const result = await compileAgentProgram(configured.gateway, compilation());
     if (result.status !== "ready") throw new Error(result.reason);
     const library = new ProgramLibrary(); library.add(result);
+    fixture.interpreter = new ProgramInterpreter(result.program, "instance-a", result.parameters, fixture.entities);
     expect(library.forOwner("agent-b")).toEqual([]);
     expect(() => library.get("agent-b", result.program.hash, fixture.admission, fixture.entities)).toThrow("unavailable");
     expect(library.coverage("agent-a", ["deliver", "uncovered"], [fixture.interpreter], fixture.resources, 0).map(row => row.status))
@@ -68,19 +70,19 @@ describe("program compilation through the model gateway", () => {
     const fixture = programFixture();
     const { gateway, transport } = provider((body, attempt) => {
       if (attempt === 2) {
-        expect(JSON.stringify(body.messages)).toContain("invalid entity parameter recipient");
+        expect(JSON.stringify(body.messages)).toContain("local:recipient");
         expect(JSON.stringify(body.messages)).toContain("claim-not-an-entity");
       }
-      return { definition: fixture.definition, parameters: { recipient: attempt === 1 ? "claim-not-an-entity" : "local:recipient" } };
+      return encodeProgramDraft(fixture.definition, { recipient: attempt === 1 ? "claim-not-an-entity" : "local:recipient" });
     });
     const result = await compileAgentProgram(gateway, compilation());
     expect(result.status).toBe("ready"); expect(transport).toHaveBeenCalledTimes(2);
     expect(result.audit?.invocations.map(invocation => invocation.outputDisposition)).toEqual(["rejected", "llm-repaired"]);
-    if (result.status === "ready") expect(result.program.hash).toBe(fixture.program.hash);
+    if (result.status === "ready") expect(result.program.hash).toBe(admitProgram(lowerProgramDraft(encodeProgramDraft(fixture.definition, fixture.parameters), "agent-a").definition, fixture.admission).hash);
   });
   it("retains a recoverable failure after one unsuccessful repair and rejects foreign perspective before dispatch", async () => {
     const fixture = programFixture();
-    const { gateway, transport } = provider(() => ({ definition: fixture.definition, parameters: { recipient: "invalid" } }));
+    const { gateway, transport } = provider(() => encodeProgramDraft(fixture.definition, { recipient: "invalid" }));
     const result = await compileAgentProgram(gateway, compilation());
     expect(result).toMatchObject({ status: "failed", recoverable: true, ownerId: "agent-a", goalId: "deliver" });
     expect(result.audit?.invocations).toHaveLength(2); expect(transport).toHaveBeenCalledTimes(2);

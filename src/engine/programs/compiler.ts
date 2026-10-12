@@ -7,6 +7,7 @@ import { loadPromptAsset } from "../prompts";
 import { logicalRepairContext, LOGICAL_CANDIDATE_REPAIR_VERSION } from "../prompts/logical-repair-context";
 import { assertJsonValue, frozenClone, type JsonValue } from "../runtime/json";
 import { admitProgram, bindProgram, programDefinitionSchema, programKey, type AdmittedProgram, type ProgramAdmission } from "./definition";
+import { encodeProgramDraft, lowerProgramDraft, programDraftSchema } from "./creation-codec";
 
 export const programCreationSchema = z.object({ definition: programDefinitionSchema, parameters: z.record(programKey, z.json()) }).strict();
 export interface ProgramCompilationRequest extends ModelExecutionScope {
@@ -42,13 +43,15 @@ export async function compileAgentProgram(provider: StructuredModelProvider, inp
   const admission: ProgramAdmission = { ownerId: input.ownerId, sources: new Map(Object.entries(input.sources).map(([id, source]) => [id, contentHash(source)])),
     resources: new Set(Object.keys(input.resources)), goalIds: new Set(input.goalIds) };
   const entities = new Set(input.entityIds);
+  const draftSchema = programDraftSchema(input.entityIds);
+  const wireJsonSchema = z.toJSONSchema(draftSchema, { target: "draft-07", reused: "ref" });
   const validate = (value: z.infer<typeof programCreationSchema>) => {
     const program = admitProgram(value.definition, admission);
     if (!program.definition.goals.some(goal => goal.goalId === input.goalId)) throw new Error("generated program does not cover the requested goal");
     bindProgram(program, value.parameters, entities);
   };
   const system = loadPromptAsset("system/program-creation.md"), userPrompt = loadPromptAsset("user/program-creation.md");
-  const promptVersion = `program-creation-${contentHash({ system, userPrompt, contract: 1, repair: LOGICAL_CANDIDATE_REPAIR_VERSION, layout: "logical-tail-v1" })}`;
+  const promptVersion = `program-creation-${contentHash({ system, userPrompt, contract: 2, wireJsonSchema, repair: LOGICAL_CANDIDATE_REPAIR_VERSION, layout: "logical-tail-v1" })}`;
   const logicalInvocationId = modelInvocationIdentity(input, "creation", input.ownerId, input.invocationBase).modelInvocationId;
   try {
     const result = await runSemanticRepairLoop({ role: "creation", repairScope: "invocation", targetIds: [input.goalId], maxRepairs: 1,
@@ -56,13 +59,19 @@ export async function compileAgentProgram(provider: StructuredModelProvider, inp
       invoke: async repair => {
         if (sourceHash !== contentHash(context)) throw new Error("program source changed during compilation");
         const identity = modelInvocationIdentity(input, "creation", input.ownerId, input.invocationBase + repair.attempt);
+        const previous = programCreationSchema.safeParse(repair.previousOutput);
+        let wireRepairCandidate: unknown = null;
+        if (previous.success) {
+          try { wireRepairCandidate = encodeProgramDraft(previous.data.definition, previous.data.parameters); } catch { /* Original rejection evidence is retained. */ }
+        }
         return provider.generateStructured({ ...input, ...identity, role: "creation", subjectId: input.ownerId,
-          schemaName: "AgentProgramV1", schema: programCreationSchema, system, userPrompt, promptVersion, jsonExamplePolicy: "omit",
+          schemaName: "AgentBehaviorTreeV1", schema: programCreationSchema, wireJsonSchema, system, userPrompt, promptVersion, jsonExamplePolicy: "omit",
+          preprocessOutput: raw => ({ value: lowerProgramDraft(draftSchema.parse(raw), input.ownerId), symbolRepairs: [] }),
           ...(repair.attempt > 0 ? { repairContextPlacement: "logical-tail-v1" as const } : {}),
           correlation: modelInvocationCorrelation(input, "creation", input.ownerId, identity, { logicalInvocationId,
             semanticRepairAttempt: repair.attempt, ...(repair.parentInvocationId ? { parentInvocationId: repair.parentInvocationId } : {}),
             ...(repair.repairOf ? { repairOf: repair.repairOf } : {}) }),
-          context: logicalRepairContext({ ...context, repair: { issues: repair.issues } }, repair, sourceHash, "AgentProgramV1"),
+          context: logicalRepairContext({ ...context, wireRepairCandidate, repair: { issues: repair.issues } }, repair, sourceHash, "AgentBehaviorTreeV1"),
         });
       },
     });

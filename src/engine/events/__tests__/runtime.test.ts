@@ -10,6 +10,21 @@ import { contentHash } from "../../models/model-audit";
 
 
 describe("native event runtime through SimulationEngine", () => {
+  it("keeps a new private goal conclusion separate from simultaneous delivered observations", async () => {
+    const options: { goalVerdict: "yes" | "unknown" } = { goalVerdict: "unknown" };
+    const f = nativeProgramFixture(options); await f.configured.registry.capture();
+    const engine = new SimulationEngine(f.world, new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig));
+    await engine.bootstrapAgents();
+    const heard = await engine.step(f.roster, { expectedRevision: 0, trigger: "manual", externalActions: [] });
+    options.goalVerdict = "yes";
+    const keeperRef = Object.values(heard.state.agents.player!.bindings).find(binding => binding.canonicalEntityIds[0] === "keeper")!.localEntityId;
+    const result = await engine.step(f.roster, { expectedRevision: 1, trigger: "participant_action", externalActions: [{ agentId: "player",
+      submissionId: "goal-and-speech", rawText: 'Spend 5 seconds saying "Hello keeper" to the keeper.', goal: "Greet", means: null, targetIds: [keeperRef] }] });
+    expect(result.state.agents.keeper!.character.goals["guard-gate"]!.status).toBe("completed");
+    expect(result.committed.characterPatches.flatMap(patch => patch.operations).some(operation => operation.kind === "set_goal_status")).toBe(true);
+    expect(result.committed.decisionEvent!.beliefRevisions.filter(revision => revision.agentId === "keeper")).toHaveLength(1);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("persists a separately proved goal judgment as private cognition without claiming a physical effect", async () => {
     const f = nativeProgramFixture({ goalVerdict: "yes" }); await f.configured.registry.capture();
     const engine = new SimulationEngine(f.world, new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig));

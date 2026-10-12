@@ -1,4 +1,5 @@
 import path from "node:path";
+import { encodeProgramDraft } from "../../programs/creation-codec";
 import { describe, expect, it } from "vitest";
 import { loadWorldScript } from "../../../script/world-loader";
 import { createTestModelCatalog } from "../../testing/model-provider";
@@ -42,7 +43,7 @@ describe("durable private program control", () => {
     let interrupt = false;
     const configured = decisionTestProvider(body => {
       const wire = JSON.stringify(body);
-      if (wire.includes("Compile a reusable private behavior program")) return { definition: f.definition, parameters: { recipient: "traveler" } };
+      if (wire.includes("Compile a reusable private behavior program")) return encodeProgramDraft(f.definition, { recipient: "traveler" });
       if (wire.includes("Write the exact words this Agent")) return { text: "Why are you here?" };
       if (wire.includes("Choose which actual active goal")) return { answers: { goal: { choice: "g0" } } };
       return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: interrupt ? "yes" : "no" }])) };
@@ -74,7 +75,7 @@ describe("durable private program control", () => {
       if (wire.includes("Compile a reusable private behavior program")) {
         created += 1;
         if (created > 1) expect(wire).toContain("priorProgram");
-        return { definition: { ...f.definition, id: `plan-${created}` }, parameters: { recipient: "traveler" } };
+        return encodeProgramDraft(f.definition, { recipient: "traveler" });
       }
       if (wire.includes("Choose which actual active goal")) return { answers: { goal: { choice: "g0" } } };
       return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: "unknown" }])) };
@@ -99,7 +100,7 @@ describe("durable private program control", () => {
     const configured = decisionTestProvider(body => {
       const wire = JSON.stringify(body);
       if (wire.includes("Compile a reusable private behavior program")) {
-        created += 1; return { definition: f.definition, parameters: { recipient: "traveler" } };
+        created += 1; return encodeProgramDraft(f.definition, { recipient: "traveler" });
       }
       if (wire.includes("Choose which actual active goal")) return { answers: { goal: { choice: reuse ? "p0" : "g0" } } };
       return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: "unknown" }])) };
@@ -120,7 +121,7 @@ describe("durable private program control", () => {
     const f = fixture();
     const configured = decisionTestProvider(body => {
       const wire = JSON.stringify(body); expect(wire).not.toContain("key-is-authentic"); expect(wire).not.toContain("canonicalEntityIds");
-      if (wire.includes("Compile a reusable private behavior program")) return { definition: f.definition, parameters: { recipient: "traveler" } };
+      if (wire.includes("Compile a reusable private behavior program")) return encodeProgramDraft(f.definition, { recipient: "traveler" });
       if (wire.includes("Write the exact words this Agent")) return { text: "Why are you here?" };
       if (wire.includes("Choose which actual active goal")) return { answers: { goal: { choice: "g0" } } };
       return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: "unknown" }])) };

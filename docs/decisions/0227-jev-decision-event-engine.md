@@ -31,6 +31,10 @@ Program termination, milestone satisfaction and persistent goal completion are s
 
 The maintained implementation uses one default execution path. A frozen Git revision supplies the legacy experimental baseline; a second decision provider in the same new architecture isolates model effects from architecture effects.
 
+### Program creation representation
+
+Creation uses a nested behavior tree with inline conditions and typed bound parameters. Code lowers it to the flat immutable runtime graph and derives identities and dependency closure. Live development runs repeatedly produced missing predicates, shared structural parents and unreachable nodes when models authored the graph directly. A nested tree preserves sequence, branching, parallelism and explicit repeats while making those structural errors unrepresentable. The alternative of repeated full graph repair adds calls without increasing semantic freedom. Raw and normalized outputs remain auditable; invalid entities or sources still require the bounded targeted repair.
+
 ## Pros and Cons of the Options
 
 1. Reuse and local scheduling remove repeated work and preserve open expansion, but require new contracts, careful program admission and independent outcome qualification.
