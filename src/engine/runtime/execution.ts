@@ -493,6 +493,7 @@ export interface ActionCompilationDraft {
 }
 
 export interface WorldExecutionAlgorithm {
+  readonly rulePackages?: RulePackageRegistry;
   readonly manifest: AlgorithmManifest;
 
   bootstrap(

@@ -1,3 +1,4 @@
+import type { RulePackageRegistry } from "../mechanics/rule-package";
 import type { ModelExecutionAudit, SimulationState } from "../contracts/model";
 import { contentHash } from "../models/model-audit";
 import type { ModelExecutionScope, StructuredModelProvider } from "../models/model-provider";
@@ -15,7 +16,7 @@ import { admitProgramActivities } from "./activities";
 /** Compile or bind only previously unhandled attempts. A failed input waits for an actual physical dependency change. */
 export async function prepareProgramWorldWork(provider: StructuredModelProvider, definition: WorldRuntimeContract,
   state: Readonly<SimulationState>, initial: DecisionEventState, scope: ModelExecutionScope,
-  nextInvocation: (subjectId: string, slots?: number) => number, reason: "initial-coverage" | "new-intent" = "new-intent") {
+  nextInvocation: (subjectId: string, slots?: number) => number, reason: "initial-coverage" | "new-intent" = "new-intent", rulePackages?: RulePackageRegistry) {
   if (provider.catalog.hash !== initial.modelCatalogHash) throw new Error("world program model binding changed");
   const control = structuredClone(initial), library = new WorldProgramLibrary(control.worldLibrary);
   const resources = worldResources(state, definition, control.worldResources), sources = worldProgramSources(definition, state);
@@ -40,7 +41,7 @@ export async function prepareProgramWorldWork(provider: StructuredModelProvider,
     if (cached && !pending.recovery?.rejectedProgramHashes.includes(cached.program.hash)) { pending.bound = cached; pending.failure = null; }
     else {
       const result = await compileWorldProgram(provider, { ...scope, profileId: control.models.creation,
-        invocationBase: nextInvocation("world", 2), definition, state, resources, attempt: pending.attempt,
+        invocationBase: nextInvocation("world", 2), definition, state, resources, rulePackages, attempt: pending.attempt,
         reason: rejection ? "revision" : reason, ...(rejection ? { rejection } : {}) });
       if (result.audit) audits.push(result.audit);
       if (result.status === "failed") {

@@ -1,3 +1,4 @@
+import type { RulePackageRegistry } from "../mechanics/rule-package";
 import type { SimulationState } from "../contracts/model";
 import { projectAgentPerspective } from "../cognition/agent-perspective";
 import { privateProgramResources } from "../programs/private-resources";
@@ -17,7 +18,7 @@ import { worldProgramDuration } from "./adjudication";
 
 /** One deterministic implementation is shared by speculative preparation, canonical commit and replay. */
 export function settleProgramWorldEvent(source: Readonly<SimulationState>, prepared: DecisionEventState,
-  event: WorldEventCandidate, definition: WorldRuntimeContract, producerHash: string, beliefs: BeliefRevision[] = []) {
+  event: WorldEventCandidate, definition: WorldRuntimeContract, producerHash: string, beliefs: BeliefRevision[] = [], rulePackages?: RulePackageRegistry) {
   const physicalSource = structuredClone(source) as SimulationState;
   physicalSource.executionState = { producerHash, data: structuredClone(prepared) as unknown as JsonObject };
   readDecisionEventState(physicalSource.executionState, physicalSource);
@@ -30,7 +31,7 @@ export function settleProgramWorldEvent(source: Readonly<SimulationState>, prepa
   const boundaries = [scheduler.nextTime, nextWorldClockBoundary(physicalSource)].filter((value): value is number => value !== null);
   if (!boundaries.length) throw new Error("world event has no persisted execution boundary");
   const committed = commitWorldEvent(physicalSource, definition, prepared.worldResources, event, {
-    earliestPendingSeconds: Math.min(...boundaries), receipts: new Map(prepared.receipts.map(receipt => [receipt.candidateId, receipt])),
+    rulePackages, earliestPendingSeconds: Math.min(...boundaries), receipts: new Map(prepared.receipts.map(receipt => [receipt.candidateId, receipt])),
   });
   if (committed.replayed) throw new Error("a completed event cannot create another canonical revision");
   const perception = projectEventPerception(committed.state, event, committed.receipt), state = committed.state;

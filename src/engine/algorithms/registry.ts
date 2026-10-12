@@ -767,7 +767,7 @@ export function registerBuiltinAlgorithms(
     role: "world-execution", id: "decision-event", version: "1", contractVersion: 12, maturity: "candidate",
     configSchema: z.strictObject({ decision: z.string().min(1), creation: z.string().min(1), fallback: z.string().min(1), maxDependencyRounds: z.number().int().positive() }),
     children: [],
-    create: ({ ref, services }) => new DecisionEventAlgorithm(services.provider, ref.config as unknown as import("../events/algorithm").DecisionEventConfig),
+    create: ({ ref, services }) => new DecisionEventAlgorithm(services.provider, ref.config as unknown as import("../events/algorithm").DecisionEventConfig, services.rulePackages),
   });
   if (registry.has(DEFAULT_ALGORITHM_REF)) return registry;
   for (const definition of definitions) registry.registerAlgorithmDefinition(definition);

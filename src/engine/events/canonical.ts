@@ -1,3 +1,4 @@
+import type { RulePackageRegistry } from "../mechanics/rule-package";
 import type { ActionOutcome, AgentActionProposal, CommittedStep, SimulationState } from "../contracts/model";
 import { contentHash } from "../models/model-audit";
 import { ModelCatalog } from "../models/model-catalog";
@@ -51,7 +52,7 @@ export function applyDecisionEventBootstrap(source: Readonly<SimulationState>, p
 }
 
 /** Derive both durable state and the existing read-side presentation from native evidence. */
-export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof: DecisionEventStep, producerHash: string, verifyControl = true) {
+export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof: DecisionEventStep, producerHash: string, verifyControl = true, rulePackages?: RulePackageRegistry) {
   validateAuthority(source, proof.authority);
   if (!source.executionState || source.executionState.producerHash !== producerHash || proof.version !== 1 ||
     proof.request.expectedRevision !== source.revision) throw new Error("event execution source changed");
@@ -84,7 +85,7 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
     if (proof.event.randomness && (!before.randomReservation || before.randomReservation.commitment.hash !== proof.event.randomness.hash)) {
       throw new Error("random outcomes must be durably committed before world adjudication");
     }
-    const settled = settleProgramWorldEvent(source, proof.preparedControl, proof.event, proof.authority, producerHash, proof.beliefRevisions);
+    const settled = settleProgramWorldEvent(source, proof.preparedControl, proof.event, proof.authority, producerHash, proof.beliefRevisions, rulePackages);
     state = settled.state; computed = settled.control; observations = settled.observations; beliefPatches = settled.beliefPatches; characterPatches = settled.characterPatches;
   } else {
     if (proof.beliefRevisions.length) throw new Error("a control revision cannot fabricate new observation evidence");
@@ -153,8 +154,8 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
 }
 
 export function nativeCandidate(source: Readonly<SimulationState>, proof: DecisionEventStep, producerHash: string,
-  activatedAgentIds: string[]): WorldStepCandidate {
-  const { committed: step } = deriveDecisionEventStep(source, proof, producerHash, false);
+  activatedAgentIds: string[], rulePackages?: RulePackageRegistry): WorldStepCandidate {
+  const { committed: step } = deriveDecisionEventStep(source, proof, producerHash, false, rulePackages);
   const candidate: WorldStepCandidate = {
     decisionEvent: proof, executionState: { producerHash, data: structuredClone(proof.finalControl) as unknown as JsonObject }, schemaVersion: WORLD_STEP_CANDIDATE_SCHEMA_VERSION,
     sourceStateHash: contentHash(source), onsetPerception: { targets: [], receipts: [], requests: [], checks: [], commitmentRounds: [], rng: structuredClone(source.truth.rng) },
@@ -183,9 +184,9 @@ export function commitDecisionEventBootstrap(source: Readonly<SimulationState>, 
   return applyDecisionEventBootstrap(source, candidate.decisionEvent);
 }
 
-export function replayDecisionEventStep(source: Readonly<SimulationState>, step: CommittedStep) {
+export function replayDecisionEventStep(source: Readonly<SimulationState>, step: CommittedStep, rulePackages?: RulePackageRegistry) {
   if (!step.decisionEvent || !step.executionState) throw new Error("native replay proof missing");
-  const result = deriveDecisionEventStep(source, restoreDecisionEventStep(source, step.decisionEvent), step.executionState.producerHash);
+  const result = deriveDecisionEventStep(source, restoreDecisionEventStep(source, step.decisionEvent), step.executionState.producerHash, true, rulePackages);
   const withoutEnvelope = (value: CommittedStep) => {
     const copy = { ...value }; delete copy.executionRef; return { ...copy, contentHash: "" };
   };

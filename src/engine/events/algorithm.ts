@@ -1,3 +1,4 @@
+import type { RulePackageRegistry } from "../mechanics/rule-package";
 import type { ModelExecutionAudit } from "../contracts/model";
 import { contentHash } from "../models/model-audit";
 import type { StructuredModelProvider } from "../models/model-provider";
@@ -44,7 +45,7 @@ interface PreparedNative {
 
 export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
   readonly manifest;
-  constructor(private readonly provider: StructuredModelProvider, readonly config: DecisionEventConfig = JEV_EVENT_CONFIG) {
+  constructor(private readonly provider: StructuredModelProvider, readonly config: DecisionEventConfig = JEV_EVENT_CONFIG, readonly rulePackages?: RulePackageRegistry) {
     this.manifest = decisionEventManifest(config);
     if (!Number.isSafeInteger(config.maxDependencyRounds) || config.maxDependencyRounds < 1) throw new Error("invalid program round budget");
     for (const profile of [config.decision, config.creation, config.fallback]) provider.catalog.profile(profile);
@@ -63,7 +64,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     const result = await advanceProgramControls(this.provider, input.state, initial, roster, context.modelScope, {
       maxDependencyRounds: this.config.maxDependencyRounds, nextInvocation: allocator.next,
     });
-    const prepared = await prepareProgramWorldWork(this.provider, authority, input.state, result.control, context.modelScope, allocator.next, "initial-coverage");
+    const prepared = await prepareProgramWorldWork(this.provider, authority, input.state, result.control, context.modelScope, allocator.next, "initial-coverage", this.rulePackages);
     prepared.control.modelOrdinals = allocator.ordinals;
     const control = sealDecisionEventState(prepared.control);
     const modelAudits = collectDecisionAudits([...result.modelAudits, ...prepared.modelAudits]);
@@ -109,7 +110,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     }
     await context.stages?.after(executionStage("action-compilation"));
     await context.stages?.before(executionStage("grounding-resource-admission"));
-    const prepared = await prepareProgramWorldWork(this.provider, authority, source, controlled.control, context.modelScope, allocator.next);
+    const prepared = await prepareProgramWorldWork(this.provider, authority, source, controlled.control, context.modelScope, allocator.next, "new-intent", this.rulePackages);
     await context.stages?.after(executionStage("grounding-resource-admission"));
     await context.stages?.before(executionStage("reaction-perception"));
     const control = prepared.control, decisions = [...controlled.decisions, ...prepared.decisions], audits = [...controlled.modelAudits, ...prepared.modelAudits];
@@ -149,7 +150,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     await context.stages?.after(executionStage("temporal-dependency"));
     await context.stages?.before(executionStage("truth-resolution"));
     const resources = randomness ? worldRandomResources(control.worldResources, randomness) : control.worldResources;
-    const adjudication = programs.length && !randomDeferral && !reservationCreated ? await adjudicateWorldPrograms(runtime, programs, resources, worldProgramSources(authority, source), scoped(), { state: physical, definition: authority, randomness })
+    const adjudication = programs.length && !randomDeferral && !reservationCreated ? await adjudicateWorldPrograms(runtime, programs, resources, worldProgramSources(authority, source), scoped(), { state: physical, definition: authority, randomness, rulePackages: this.rulePackages })
       : { records: [], evidence: [], calls: [] };
     decisions.push(...adjudication.calls); audits.push(...adjudication.calls.filter(call => !call.reused).map(call => call.result.audit));
     await context.stages?.after(executionStage("truth-resolution"));
@@ -157,7 +158,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     if (atSeconds !== null && atSeconds > source.truth.elapsedSeconds && !reservationCreated) {
       try {
         if (randomDeferral) throw new Error(randomDeferral);
-        event = createWorldEventCandidate(physical, authority, control.worldResources, programs, adjudication, atSeconds, randomness);
+        event = createWorldEventCandidate(physical, authority, control.worldResources, programs, adjudication, atSeconds, randomness, this.rulePackages);
       } catch (error) {
         if (!(error instanceof Error) || !/world rule awaits evidence or expansion|ambiguous world branches require expansion/u.test(error.message)) throw error;
         const unsupported = randomDeferral ? programs.filter(bound => bound.program.definition.random.length > 0 || bound.program.definition.resolutions.length > 0)
@@ -203,7 +204,7 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
     const beliefRevisions: DecisionEventStep["beliefRevisions"] = [];
     let finalControl = settleRandomReservation(input.state, prepared.control, authority, decisions).control;
     if (prepared.event) {
-      const preview = settleProgramWorldEvent(input.state, prepared.control, prepared.event, authority, this.manifest.hash);
+      const preview = settleProgramWorldEvent(input.state, prepared.control, prepared.event, authority, this.manifest.hash, [], this.rulePackages);
       const revised = await Promise.allSettled(preview.perceptionBeliefPatches.map(async patch => {
         const evidenceIds = patch.operations.flatMap(operation => operation.kind === "upsert_evidence" ? [operation.evidence.id] : []);
         return reviseEventBeliefs(runtime, preview.state, patch.agentId, evidenceIds, prepared.control.agents[patch.agentId]?.resources,
@@ -218,13 +219,13 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
         beliefRevisions.push(result.value.revision); decisions.push(...result.value.calls);
         audits.push(...result.value.calls.filter(call => !call.reused).map(call => call.result.audit), ...result.value.creationAudits);
       }
-      finalControl = settleProgramWorldEvent(input.state, prepared.control, prepared.event, authority, this.manifest.hash, beliefRevisions).control;
+      finalControl = settleProgramWorldEvent(input.state, prepared.control, prepared.event, authority, this.manifest.hash, beliefRevisions, this.rulePackages).control;
     }
     finalControl = sealDecisionEventState({ ...finalControl, modelOrdinals: allocator.ordinals, decisionCache: runtime.snapshot() as unknown as JsonObject });
     await context.stages?.after(executionStage("observation-agent-mind"));
     const proof: DecisionEventStep = { version: 1, authority, preparedControl: prepared.control, activityAdmissionInput: prepared.activityAdmissionInput,
       event: prepared.event, beliefRevisions, finalControl,
       decisions: collectDecisionUses(decisions), modelAudits: collectDecisionAudits(audits), policyRoster: structuredClone(input.policyRoster), request: structuredClone(input.request) };
-    return nativeCandidate(input.state, proof, this.manifest.hash, prepared.activatedAgentIds);
+    return nativeCandidate(input.state, proof, this.manifest.hash, prepared.activatedAgentIds, this.rulePackages);
   }
 }

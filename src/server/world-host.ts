@@ -566,7 +566,7 @@ export class WorldHost {
   private readonly registry: WorldExecutionAlgorithmRegistry;
   private readonly defaultAlgorithmRef: AlgorithmRef;
   private readonly experiments: AlgorithmExperimentRegistry;
-  private readonly committer = new CanonicalCommitter();
+  private readonly committer: CanonicalCommitter;
   private readonly now: () => Date;
   private readonly idFactory: () => string;
   private readonly maxActiveParticipants: number;
@@ -587,6 +587,7 @@ export class WorldHost {
   readonly runtimeObserver: RuntimeObserver;
 
   constructor(private readonly options: WorldHostOptions) {
+    this.committer = new CanonicalCommitter(options.repository.rulePackages);
     if (options.ledger && !isAtomicStore(options.store)) {
       throw new Error("Execution Ledger requires atomic instance/execution persistence");
     }
@@ -1267,7 +1268,7 @@ export class WorldHost {
     const inputKey = JSON.stringify(input);
     const cached = this.inspectorWindowProjections.get(id);
     if (cached?.sourceKey === snapshot.key && cached.inputKey === inputKey) return cached.value;
-    const value = buildWorldInspectorWindow(stored.document, snapshot.records, snapshot.events, input);
+    const value = buildWorldInspectorWindow(stored.document, snapshot.records, snapshot.events, input, this.options.repository.rulePackages);
     this.inspectorWindowProjections.set(id, { inputKey, sourceKey: snapshot.key, value });
     return value;
   }
@@ -1279,6 +1280,7 @@ export class WorldHost {
       stored.document,
       revision,
       snapshot.events,
+      this.options.repository.rulePackages,
     );
     if (!detail) throw new WorldHostError(`committed revision not found: ${revision}`, 404);
     return detail;

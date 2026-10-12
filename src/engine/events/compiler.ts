@@ -1,3 +1,4 @@
+import type { RulePackageRegistry } from "../mechanics/rule-package";
 import { z } from "zod";
 import { worldDeltaOperationSchema, resolutionPlanSchema } from "../contracts/llm-schemas";
 import type { ModelExecutionAudit, SimulationState } from "../contracts/model";
@@ -21,7 +22,7 @@ import { explicitNumberQuotes } from "../mechanics/explicit-number";
 export const worldCompilationSchema = z.object({ definition: worldProgramSchema, parameters: z.record(programKey, z.json()) }).strict();
 export interface WorldCompilationRequest extends ModelExecutionScope {
   profileId: string; invocationBase: number; definition: WorldRuntimeContract; state: Readonly<SimulationState>;
-  resources: ProgramResources; attempt: WorldAttempt; reason: "initial-coverage" | "new-intent" | "revision";
+  rulePackages?: RulePackageRegistry; resources: ProgramResources; attempt: WorldAttempt; reason: "initial-coverage" | "new-intent" | "revision";
   rejection?: { reason: string; program: BoundWorldProgram | null; evidenceHashes: string[] };
 }
 export type WorldCompilation =
@@ -43,7 +44,7 @@ export async function compileWorldProgram(provider: StructuredModelProvider, req
       rating: "ratings[id]", condition: "conditions[id]", activity: "activities[id]", pool: "pools[id]", timer: "timers[id]", law: "laws entry matching id",
       temporal: "mechanics.temporalProfiles[id]" },
     effectContract: z.toJSONSchema(worldDeltaOperationSchema, { target: "draft-07", reused: "ref" }),
-    mechanicContracts: worldMechanicContracts(request.definition),
+    mechanicContracts: worldMechanicContracts(request.definition, request.rulePackages),
     resolutionContract: z.toJSONSchema(resolutionPlanSchema, { target: "draft-07", reused: "ref" }) },
     task: { attempt: request.attempt, explicitNumbers: explicitNumberQuotes([request.attempt.intent, request.attempt.utterance ?? ""].join("\n")),
       reason: request.reason, rejection: request.rejection ?? null, constraints: [] }, repair: null });
@@ -62,7 +63,7 @@ export async function compileWorldProgram(provider: StructuredModelProvider, req
     worldActivityClaims(bound, request.state, request.resources);
     // Build every branch before accepting it, so malformed effect shapes get the single targeted repair.
     if (!prepareWorldRandomPlan(request.state, request.definition, request.resources, [bound]))
-      worldQuestionWork(bound, request.resources, { state: request.state, definition: request.definition });
+      worldQuestionWork(bound, request.resources, { state: request.state, definition: request.definition, rulePackages: request.rulePackages });
   };
   const system = loadPromptAsset("system/world-program-creation.md"), userPrompt = loadPromptAsset("user/world-program-creation.md");
   const promptVersion = `world-program-creation-${contentHash({ system, userPrompt, contract: 5, repair: LOGICAL_CANDIDATE_REPAIR_VERSION, layout: "logical-tail-v1" })}`;

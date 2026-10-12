@@ -1,3 +1,5 @@
+import { z } from "zod";
+import { coreResolutionRulePackage, RulePackageRegistry } from "../../engine/mechanics/rule-package";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -13,6 +15,50 @@ import { WorldHost } from "../world-host";
 import { replayThroughAlgorithm } from "../../../scripts/operations/execution-command";
 
 describe("decision programs through the persistent WorldHost", () => {
+  it("uses the same injected trusted rules for native compilation, commits, recovery and offline replay", async () => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-native-rules-")), filename = path.join(root, "livingworld.sqlite");
+    const f = nativeProgramFixture();
+    const rulePackages = new RulePackageRegistry([coreResolutionRulePackage, {
+      id: "test-rules", version: "1.0.0", configSchema: z.strictObject({}), adjudication: "Record this test action.",
+      rules: [{ id: "record", description: "Record that an admitted question was asked.", inputSchema: z.strictObject({}),
+        resolve: (_context, _config, _input, invocation) => ({ code: "recorded", data: {}, operations: [{
+          kind: "set_fact", fact: { id: "question-recorded", subjectId: "keeper", predicate: "asked",
+            value: { kind: "boolean", value: true }, description: "The question occurred.", access: { kind: "private" },
+            provenance: invocation.causes }, causes: invocation.causes, assertions: invocation.assertions,
+        }] }) }],
+    }]);
+    f.world.rulePackages = rulePackages.validate([...f.world.rulePackages, { id: "test-rules", version: "1.0.0", config: {} }]);
+    f.rule.sourceIds.push("mechanics"); f.rule.writes = ["facts"];
+    f.rule.branches[0]!.mechanics = [{ id: "record", packageId: "test-rules", ruleId: "record", input: {} }];
+    await f.configured.registry.capture();
+    let database = new LocalDatabase(filename, { heartbeat: false, rulePackages });
+    const repository = new MemoryWorldRepository({ [f.world.id]: f.world }, rulePackages);
+    const makeHost = () => new WorldHost({ repository, store: database, ledger: database, provider: f.configured.gateway,
+      defaultAlgorithmRef: decisionEventAlgorithmRef(nativeProgramTestConfig) });
+    try {
+      const host = makeHost(), created = await host.createInstance({ worldId: f.world.id, start: { kind: "observer" } }), id = created.summary.id;
+      await host.advance(id, { expectedRevision: 0, trigger: "batch", steps: 1 });
+      for (let i = 0; i < 200 && host.instance(id).run?.status === "running"; i++) await new Promise(resolve => setTimeout(resolve, 5));
+      expect(host.instance(id).run?.status, JSON.stringify(database.executions({ instanceId: id }).map(record => ({ id: record.id, status: record.status, error: record.errorArtifactHash ? database.artifact(record.errorArtifactHash)?.value : null })))).toBe("completed");
+      const state = database.readInstance(id).document.state;
+      expect(state.truth.facts["question-recorded"]!.value).toEqual({ kind: "boolean", value: true });
+      expect(state.history[0]!.mechanicResults[0]).toMatchObject({ packageId: "test-rules", code: "recorded" });
+      expect(replaySimulationState(state, state.revision, rulePackages)).toEqual(state);
+      expect(() => replaySimulationState(state)).toThrow("test-rules@1.0.0");
+      expect(host.inspectorStep(id, 1).committed.mechanicResults[0]!.code).toBe("recorded");
+      const calls = f.configured.transport.mock.calls.length;
+      const recordedInput = database.executionEvents(state.history[0]!.executionRef!.executionId).find(event => event.event === "step.started")!.payload as { state: typeof state };
+      expect(recordedInput.state).toEqual(replaySimulationState(state, 0, rulePackages));
+      for (const executionId of [state.bootstrapExecutionRef!.executionId, state.history[0]!.executionRef!.executionId]) {
+        const replay = await replayThroughAlgorithm(database, database.execution(executionId)!, database.executionEvents(executionId));
+        expect(replay.replayStatus).toBe("succeeded"); expect(replay.stateHash).toBe(database.execution(executionId)!.stateHash);
+      }
+      database.close(); database = new LocalDatabase(filename, { heartbeat: false, rulePackages });
+      expect(makeHost().instance(id).summary.revision).toBe(1);
+      expect(database.readInstance(id).document.state).toEqual(state);
+      expect(f.configured.transport).toHaveBeenCalledTimes(calls);
+    } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+  });
   it("persists a queued parallel instruction and starts it after restart without consuming time while queued", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-native-queue-")), filename = path.join(root, "livingworld.sqlite");
     const fixture = nativeProgramFixture(), attempt = fixture.program.nodes[0]!;

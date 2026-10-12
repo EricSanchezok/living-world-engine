@@ -59,7 +59,7 @@ function batch(state: Readonly<SimulationState>, definition: WorldRuntimeContrac
         instructions: `For attempts[${index}], are its temporal profile, participant resource claims and ALL required shared resource claims justified and complete for this exact executable attempt? An addressed listener does not perform or reserve the speaker's work. Asking about a resource does not occupy it. Check authored laws for required facilities. Do not judge future success, consent or eventual goal completion.`,
         criteria: { yes: "The duration profile and complete claims match the actual attempt and authored rules.",
           no: "The profile or claims violate a rule, or a required claim is omitted.", unknown: "Required evidence for interpreting the activity is absent." },
-        sources: Object.keys(bound.program.sourceHashes) }])) };
+        sources: Object.keys(bound.program.sourceHashes).sort() }])) };
 }
 
 function shortage(candidate: ProgramActivity, active: ProgramActivity[], state: Readonly<SimulationState>) {

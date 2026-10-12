@@ -956,7 +956,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
   private readonly interactionGroundingRecovery: Readonly<OutputRecoveryCapability>;
   private readonly provider: StructuredModelProvider;
   private readonly selectActions?: EagerActionSelection;
-  private readonly rulePackages: RulePackageRegistry;
+  readonly rulePackages: RulePackageRegistry;
   private readonly actionCompilationRetrieval?: CandidateSelectionCapability;
   private readonly orderedComponentRandom: boolean;
 

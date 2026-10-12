@@ -1,3 +1,4 @@
+import type { RulePackageRegistry } from "../mechanics/rule-package";
 import { validateAlgorithmExecutionState } from "./execution-state";
 import { z } from "zod";
 import type { ExecutionRef } from "./execution";
@@ -796,6 +797,7 @@ function validateCommittedStepShape(step: CommittedStep, state: SimulationState)
 export function replaySimulationState(
   state: SimulationState,
   throughRevision = state.revision,
+  rulePackages?: RulePackageRegistry,
 ): SimulationState {
   if (!Number.isSafeInteger(throughRevision) || throughRevision < 0 || throughRevision > state.revision) {
     throw new Error("replay target revision is outside the state history");
@@ -843,7 +845,7 @@ export function replaySimulationState(
     const step = entry.value;
     validateCommittedStepShape(step, replay);
     if (step.decisionEvent) {
-      Object.assign(replay, replayDecisionEventStep(replay, step));
+      Object.assign(replay, replayDecisionEventStep(replay, step, rulePackages));
       continue;
     }
     if (step.baseRevision !== replay.revision || step.revision !== replay.revision + 1 || step.step !== replay.step + 1) {
@@ -928,8 +930,8 @@ export function replaySimulationState(
   return replay;
 }
 
-export function replayCommittedHistory(state: SimulationState): void {
-  const replay = replaySimulationState(state);
+export function replayCommittedHistory(state: SimulationState, rulePackages?: RulePackageRegistry): void {
+  const replay = replaySimulationState(state, state.revision, rulePackages);
   const core = (value: SimulationState) => ({
     revision: value.revision,
     executionState: value.executionState,
@@ -971,7 +973,7 @@ export function validateModelAudit(
   }
 }
 
-export function validateSimulationState(state: SimulationState, requireNextActions = false, requireHistoryAlignment = false): void {
+export function validateSimulationState(state: SimulationState, requireNextActions = false, requireHistoryAlignment = false, rulePackages?: RulePackageRegistry): void {
   assertExactKeys(state, [
     "schemaVersion", "executionState", "worldId", "worldHash", "lawIds", "revision", "step", "truth", "agents", "admissions", "history",
     "bootstrapAgentCommits",
@@ -1249,7 +1251,7 @@ export function validateSimulationState(state: SimulationState, requireNextActio
     assertExactKeys(state.historyBase, ["truth", "agents", "executionState"], [], "history replay base");
     validateAlgorithmExecutionState(state.historyBase.executionState);
   }
-  if (requireHistoryAlignment) replayCommittedHistory(state);
+  if (requireHistoryAlignment) replayCommittedHistory(state, rulePackages);
 }
 
 export const simulationStateSchema = z.unknown().transform((value, context) => {

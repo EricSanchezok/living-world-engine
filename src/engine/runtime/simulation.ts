@@ -525,7 +525,7 @@ export class SimulationEngine {
   readonly definition: WorldDefinition;
   private state: SimulationState;
   private readonly algorithm: WorldExecutionAlgorithm;
-  private readonly committer = new CanonicalCommitter();
+  private readonly committer: CanonicalCommitter;
   private bootstrapAudits: ModelExecutionAudit[] = [];
 
   constructor(
@@ -536,9 +536,10 @@ export class SimulationEngine {
     this.definition = definition;
     validateWorldDefinition(definition);
     this.algorithm = algorithm;
+    this.committer = new CanonicalCommitter(algorithm.rulePackages);
     this.state = structuredClone(initialState);
     if (this.state.worldId !== definition.id) throw new Error("simulation state belongs to another world");
-    if (!consumeValidatedSnapshot(this.state)) validateSimulationState(this.state, false, true);
+    if (!consumeValidatedSnapshot(this.state)) validateSimulationState(this.state, false, true, algorithm.rulePackages);
     validateAlgorithmExecutionState(this.state.executionState, algorithm.manifest.hash);
     this.state.historyBase ??= createHistoryReplayBase(definition.initialState);
   }

@@ -1,3 +1,4 @@
+import type { RulePackageRegistry } from "../engine/mechanics/rule-package";
 import { inspectDecisionPrograms } from "./world-inspector-programs";
 import type {
   ActionCompilationReferenceAudit,
@@ -1180,6 +1181,7 @@ export function buildWorldInspectorWindow(
   records: readonly ExecutionRecord[],
   runtimeEvents: readonly RuntimeEvent[],
   input: { beforeRevision?: number; limit: number },
+  rulePackages?: RulePackageRegistry,
 ): WorldInspectorWindow {
   const invocationNodeByPublicId = new Map<string, string>();
   const invocationLineageEdges = new Map<string, { source: string; targetPublicId: string; label: string }>();
@@ -1192,7 +1194,7 @@ export function buildWorldInspectorWindow(
   const actorIds = new Set(actors.map((actor) => actor.id));
   const entityActors = new Map(actors.map((actor) => [actor.entityId, actor.id]));
   const projected = selected.map((step) => {
-    const after = replaySimulationState(document.state, step.revision);
+    const after = replaySimulationState(document.state, step.revision, rulePackages);
     const stepEvents = step.executionRef?.executionId
       ? eventsForExecution.get(step.executionRef.executionId) ?? []
       : runtimeEvents;
@@ -1469,11 +1471,12 @@ export function buildWorldInspectorStepDetail(
   document: WorldInstanceDocument,
   revision: number,
   runtimeEvents: readonly RuntimeEvent[],
+  rulePackages?: RulePackageRegistry,
 ): WorldInspectorStepDetail | undefined {
   const committed = document.state.history.find((step) => step.revision === revision);
   if (!committed) return undefined;
-  const before = replaySimulationState(document.state, committed.baseRevision);
-  const after = replaySimulationState(document.state, committed.revision);
+  const before = replaySimulationState(document.state, committed.baseRevision, rulePackages);
+  const after = replaySimulationState(document.state, committed.revision, rulePackages);
   const audits = modelAuditsForStep(runtimeEvents, committed);
   const actors = actorsFor(document);
   const projection = projectStep(

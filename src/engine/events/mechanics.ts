@@ -1,5 +1,5 @@
 import type { AgentActionProposal, MechanicInvocation, SimulationState } from "../contracts/model";
-import { createCoreRulePackageRegistry, type RuleExecutionContext } from "../mechanics/rule-package";
+import { createCoreRulePackageRegistry, type RulePackageRegistry, type RuleExecutionContext } from "../mechanics/rule-package";
 import type { ProgramResources } from "../programs/definition";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import { quantityId, runtimeId } from "../runtime/runtime-id";
@@ -9,11 +9,11 @@ import type { WorldRandomCommitment } from "./randomness";
 import { worldOperationReads, worldOperationWrites } from "./resources";
 import { materializeWorldResolutions, worldResolutionReceipt } from "./resolutions";
 
-export interface WorldMechanicsContext { state: Readonly<SimulationState>; definition: WorldRuntimeContract; randomness?: WorldRandomCommitment | null }
+export interface WorldMechanicsContext { state: Readonly<SimulationState>; definition: WorldRuntimeContract; randomness?: WorldRandomCommitment | null; rulePackages?: RulePackageRegistry }
 const registry = createCoreRulePackageRegistry();
 
-export function worldMechanicContracts(definition: WorldRuntimeContract) {
-  return registry.promptContracts(definition.rulePackages, "runtime")
+export function worldMechanicContracts(definition: WorldRuntimeContract, rulePackages: RulePackageRegistry = registry) {
+  return rulePackages.promptContracts(definition.rulePackages, "runtime")
     .filter(contract => !["advance-conditions", "apply-receipt"].includes(contract.ruleId));
 }
 
@@ -68,7 +68,7 @@ export function materializeWorldMechanics(bound: BoundWorldProgram, branchId: st
   const input: RuleExecutionContext = { state: effectState, actions: [action], resolutionPlans: resolved.map(value => value.plan), resolutionReceipts: receipts,
     checkRequests: context.randomness?.plan.checkRequests ?? [], checkResults: context.randomness?.checks ?? [],
     randomRequests: context.randomness?.plan.requests ?? [], randomResults: context.randomness?.results ?? [] };
-  const mechanics = registry.resolve(context.definition.rulePackages, input, invocations, direct);
+  const mechanics = (context.rulePackages ?? registry).resolve(context.definition.rulePackages, input, invocations, direct);
   const reads = mechanicalReads(mechanics.invocations, context.state);
   if (resolved.length) for (const key of ["facts", "placements", "ratings", "conditions", "meters", "mechanics"]) if (!reads.includes(key)) reads.push(key);
   for (const [index, receipt] of receipts.entries()) receipt.operations = mechanics.results[index]!.operations;

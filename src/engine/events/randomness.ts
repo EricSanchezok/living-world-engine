@@ -82,14 +82,14 @@ export function prepareWorldRandomPlan(state: Readonly<SimulationState>, definit
     ...programs.flatMap(bound => bound.program.definition.reads.filter(key => !/^(random|check):/u.test(key)).map(key => renderWorldText(key, bound.parameters)))])].sort();
   const reads = captureReads(resources, [...keys, "rng"]), instruction = loadPromptAsset("shared/world-program-random.md");
   const input = JSON.parse(JSON.stringify({ programs, requests, resolutions, resources: Object.fromEntries(keys.map(key => [key, resources[key]])),
-    sources: Object.fromEntries([...new Set(programs.flatMap(bound => Object.keys(bound.program.sourceHashes)))].map(id => [id, sources[id]])) })) as JsonValue;
+    sources: Object.fromEntries([...new Set(programs.flatMap(bound => Object.keys(bound.program.sourceHashes).sort()))].map(id => [id, sources[id]])) })) as JsonValue;
   const batch: DecisionBatch = { version: 1, view: { kind: "world", projectionHash: contentHash(input) }, state: input,
     programHash: contentHash(programs.map(bound => bound.program.hash)), dependencies: Object.fromEntries(keys.map(key => [key, resources[key]!.version])),
     questions: Object.fromEntries(programs.filter(bound => bound.program.definition.random.length || resolutions.some(value => value.plan.actionId === bound.attempt.id && value.check)).map((bound, index) => [`q${index}`, {
       version: contentHash({ instruction, program: bound.program.hash }), instructions: `${instruction}\nEvaluate the random requests and complete stakes for attempt ${bound.attempt.id}.`,
       criteria: { yes: "The authored sources and actual attempt justify these exact random requests and their complete branch stakes.",
         no: "A distribution, applicability condition or proposed stake contradicts the authored world or attempt.",
-        unknown: "Required applicability or stakes evidence is missing; do not draw." }, sources: Object.keys(bound.program.sourceHashes) }])) };
+        unknown: "Required applicability or stakes evidence is missing; do not draw." }, sources: Object.keys(bound.program.sourceHashes).sort() }])) };
   const body = { version: 2 as const, sourceRevision: state.revision, before: structuredClone(state.truth.rng), programHashes: programs.map(bound => bound.program.hash),
     attemptHashes: programs.map(bound => contentHash(bound.attempt)), requests, resourceKeys, reads, batch,
     checkRequests: checks.map(value => value.check!), checkKeys: checks.map(value => `check:${value.actor}:${value.key}`) };

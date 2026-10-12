@@ -1,3 +1,4 @@
+import type { RulePackageRegistry } from "../mechanics/rule-package";
 import type { MechanicInvocation, MechanicResult, SimulationState, WorldDeltaOperation, WorldEvent } from "../contracts/model";
 import { deriveConditionAdvance } from "../mechanics/condition-time";
 import { evaluateCausalAssertion } from "../mechanics/causality";
@@ -125,7 +126,7 @@ function materialize(programs: BoundWorldProgram[], records: Map<string, WorldCo
 }
 
 export function createWorldEventCandidate(state: Readonly<SimulationState>, definition: WorldRuntimeContract, resources: ProgramResources,
-  programs: BoundWorldProgram[], adjudication: WorldAdjudication, atSeconds: number, randomness: WorldRandomCommitment | null = null): WorldEventCandidate {
+  programs: BoundWorldProgram[], adjudication: WorldAdjudication, atSeconds: number, randomness: WorldRandomCommitment | null = null, rulePackages?: RulePackageRegistry): WorldEventCandidate {
   resources = validateWorldRandomness(state, definition, resources, programs, randomness);
   const sources = worldProgramSources(definition, state), entityIds = new Set(Object.keys(state.truth.entities));
   const clockBoundary = worldClockBoundary(state, atSeconds);
@@ -143,7 +144,7 @@ export function createWorldEventCandidate(state: Readonly<SimulationState>, defi
   if (!Number.isSafeInteger(atSeconds) || atSeconds <= state.truth.elapsedSeconds) throw new Error("physical world event must advance time");
   if (programs.length && atSeconds !== Math.max(...programs.map(bound => worldProgramBoundary(bound, resources)))) throw new Error("world event time differs from its execution boundary");
   const proof = { records: adjudication.records, evidence: adjudication.evidence };
-  const context = { state, definition, randomness };
+  const context = { state, definition, randomness, rulePackages };
   const records = verifyAdjudication(programs, proof, resources, sources, context);
   // A persisted draw cannot be repaired into different stakes after its result is known.
   // An unresolved joint frontier ends with blocked receipts and no fabricated effects.
@@ -188,7 +189,7 @@ function privatePhysicalHash(state: Readonly<SimulationState>, agentId: string):
 
 /** Atomic deterministic commit. Semantic evidence is replayed, never replaced with a causal-verifier call token. */
 export function commitWorldEvent(source: Readonly<SimulationState>, definition: WorldRuntimeContract, resources: ProgramResources,
-  candidate: WorldEventCandidate, options: { earliestPendingSeconds: number; receipts: ReadonlyMap<string, CommitReceipt> }) {
+  candidate: WorldEventCandidate, options: { earliestPendingSeconds: number; receipts: ReadonlyMap<string, CommitReceipt>; rulePackages?: RulePackageRegistry }) {
   assertJsonValue(candidate as unknown, "world event candidate");
   const { id, ...body } = candidate;
   if (id !== contentHash(body)) throw new Error("world event candidate checksum mismatch");
@@ -198,7 +199,7 @@ export function commitWorldEvent(source: Readonly<SimulationState>, definition: 
   const physicalResources = worldResources(source, definition, Object.fromEntries(Object.entries(resources).filter(([key]) => !/^(random|check):/u.test(key))));
   resources = validateWorldRandomness(source, definition, physicalResources, candidate.programs, candidate.randomness);
   validateReads(resources, candidate.reads);
-  const canonical = createWorldEventCandidate(source, definition, resources, candidate.programs, { ...candidate.adjudication, calls: [] }, candidate.atSeconds, candidate.randomness);
+  const canonical = createWorldEventCandidate(source, definition, resources, candidate.programs, { ...candidate.adjudication, calls: [] }, candidate.atSeconds, candidate.randomness, options.rulePackages);
   if (contentHash(canonical) !== contentHash(candidate)) throw new Error("world candidate effects differ from the admitted program");
   const next = structuredClone(source) as SimulationState;
   if (candidate.randomness) next.truth.rng = structuredClone(candidate.randomness.after);

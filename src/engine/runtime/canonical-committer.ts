@@ -1,3 +1,4 @@
+import type { RulePackageRegistry } from "../mechanics/rule-package";
 import { validateAlgorithmExecutionState } from "./execution-state";
 import { validateOnsetPerceptionReceipts } from "../mechanics/onset-receipts";
 import type { WorldDefinition } from "./world-definition";
@@ -84,6 +85,7 @@ export function attachExecutionRef(
   state: Readonly<SimulationState>,
   reference: Readonly<ExecutionRef>,
   phase: "bootstrap" | "step" | "admission",
+  rulePackages?: RulePackageRegistry,
 ): SimulationState {
   const finalized = structuredClone(state) as SimulationState;
   if (phase === "bootstrap") {
@@ -104,7 +106,7 @@ export function attachExecutionRef(
     delete payload.contentHash;
     admission.contentHash = contentHash(payload);
   }
-  validateSimulationState(finalized, false, true);
+  validateSimulationState(finalized, false, true, rulePackages);
   return finalized;
 }
 
@@ -852,6 +854,7 @@ function validateCandidateBoundary(
 }
 
 export class CanonicalCommitter {
+  constructor(private readonly rulePackages?: RulePackageRegistry) {}
   admit(sourceState: Readonly<SimulationState>, candidate: Readonly<{
     entity: WorldEntity;
     placementId: string | null;
@@ -887,7 +890,7 @@ export class CanonicalCommitter {
     delete payload.contentHash;
     committed.contentHash = contentHash(payload);
     applyAdmissionCommit(source, committed);
-    validateSimulationState(source, false, true);
+    validateSimulationState(source, false, true, this.rulePackages);
     return { committed: structuredClone(committed), state: source };
   }
 
@@ -956,10 +959,10 @@ export class CanonicalCommitter {
         preparation.requestHash !== contentHash(proof.request) || contentHash(proof.authority) !== contentHash(toWorldRuntimeContract(authority.definition)) ||
         contentHash(proof.preparedControl) !== contentHash(preparation.executionState?.data) ||
         contentHash(proof.event) !== contentHash(preparation.payload.event)) throw new Error("native commit differs from frozen preparation");
-      const expected = nativeCandidate(source, proof, preparation.algorithmManifestHash, candidate.diagnostics.activatedAgentIds);
+      const expected = nativeCandidate(source, proof, preparation.algorithmManifestHash, candidate.diagnostics.activatedAgentIds, this.rulePackages);
       if (contentHash(candidate) !== contentHash(expected)) throw new Error("native candidate presentation changed after preparation");
-      const result = deriveDecisionEventStep(source, proof, preparation.algorithmManifestHash);
-      validateSimulationState(result.state, false, true);
+      const result = deriveDecisionEventStep(source, proof, preparation.algorithmManifestHash, true, this.rulePackages);
+      validateSimulationState(result.state, false, true, this.rulePackages);
       return result;
     }
     validateAlgorithmExecutionState(source.executionState, authority.preparation.algorithmManifestHash);

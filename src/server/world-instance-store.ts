@@ -1,3 +1,4 @@
+import type { RulePackageRegistry } from "../engine/mechanics/rule-package";
 import { validateAlgorithmRef, type PolicyBinding } from "../engine/runtime/execution";
 import { EXECUTION_STAGES } from "../engine/runtime/stages";
 import { reactionRequestSchema } from "../engine/contracts/llm-schemas";
@@ -236,7 +237,7 @@ function validateActionWindow(document: WorldInstanceDocument): void {
   }
 }
 
-export function validateWorldInstanceDocument(document: WorldInstanceDocument): void {
+export function validateWorldInstanceDocument(document: WorldInstanceDocument, rulePackages?: RulePackageRegistry): void {
   if (document.schemaVersion !== 23) throw new Error("world instance schema v23 required");
   requireText(document.id, "instance id");
   requireText(document.title, "instance title");
@@ -250,7 +251,7 @@ export function validateWorldInstanceDocument(document: WorldInstanceDocument): 
   if (!Number.isFinite(Date.parse(document.createdAt)) || !Number.isFinite(Date.parse(document.updatedAt))) {
     throw new Error("instance timestamps must be ISO dates");
   }
-  validateSimulationState(document.state, false, true);
+  validateSimulationState(document.state, false, true, rulePackages);
   if (document.state.worldId !== document.world.id || document.state.worldHash !== document.world.contentHash) {
     throw new Error("instance state does not match its pinned world");
   }
@@ -410,14 +411,14 @@ export function validateWorldInstanceDocument(document: WorldInstanceDocument): 
   }
 }
 
-export function serializeWorldInstanceDocument(document: WorldInstanceDocument): string {
-  validateWorldInstanceDocument(document);
+export function serializeWorldInstanceDocument(document: WorldInstanceDocument, rulePackages?: RulePackageRegistry): string {
+  validateWorldInstanceDocument(document, rulePackages);
   return JSON.stringify(document);
 }
 
-export function parseWorldInstanceDocument(serialized: string, expectedId: string): WorldInstanceDocument {
+export function parseWorldInstanceDocument(serialized: string, expectedId: string, rulePackages?: RulePackageRegistry): WorldInstanceDocument {
   const value = JSON.parse(serialized) as WorldInstanceDocument;
-  validateWorldInstanceDocument(value);
+  validateWorldInstanceDocument(value, rulePackages);
   if (value.id !== expectedId) throw new Error("world instance id mismatch");
   return value;
 }

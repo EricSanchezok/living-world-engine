@@ -1885,7 +1885,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
   createInstance(document: WorldInstanceDocument, correlation?: RuntimeCorrelation): StoredWorldInstance {
     this.assertWritable();
     const startedAt = Date.now();
-    const serialized = serializeWorldInstanceDocument(document);
+    const serialized = serializeWorldInstanceDocument(document, this.rulePackages);
     try {
       this.connection.transaction(() => {
         this.assertInstanceLease();
@@ -1945,6 +1945,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
     const document = parseWorldInstanceDocument(
       row.document_json,
       instanceId,
+      this.rulePackages,
     );
     this.cacheValidatedInstance(instanceId, row.generation, row.document_json, document);
     return {
@@ -1962,7 +1963,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
     this.assertWritable();
     if (document.id !== instanceId) throw new Error("instance document id mismatch");
     const startedAt = Date.now();
-    const serialized = serializeWorldInstanceDocument(document);
+    const serialized = serializeWorldInstanceDocument(document, this.rulePackages);
     try {
       this.connection.transaction(() => {
         this.assertInstanceLease();
@@ -2050,7 +2051,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
       });
       const expectedRef = this.currentExecutionRef(executionId);
       const finalizedDocument = structuredClone(document);
-      finalizedDocument.state = attachExecutionRef(finalizedDocument.state, expectedRef, "bootstrap");
+      finalizedDocument.state = attachExecutionRef(finalizedDocument.state, expectedRef, "bootstrap", this.rulePackages);
       const documentUtf8Bytes = Buffer.byteLength(JSON.stringify(canonicalize(finalizedDocument)), "utf8");
       const writeStartedAt = performance.now();
       const instance = this.createInstance(finalizedDocument, correlation);
@@ -2084,7 +2085,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
       const expectedRef = this.currentExecutionRef(executionId);
       const finalizedDocument = structuredClone(document);
       if (phase !== "instance") {
-        finalizedDocument.state = attachExecutionRef(finalizedDocument.state, expectedRef, phase);
+        finalizedDocument.state = attachExecutionRef(finalizedDocument.state, expectedRef, phase, this.rulePackages);
       }
       const documentUtf8Bytes = Buffer.byteLength(JSON.stringify(canonicalize(finalizedDocument)), "utf8");
       const writeStartedAt = performance.now();
@@ -2124,6 +2125,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
       const document = parseWorldInstanceDocument(
         row.document_json,
         row.id,
+        this.rulePackages,
       );
       misses.push({ row, document });
       return { generation: row.generation, document };

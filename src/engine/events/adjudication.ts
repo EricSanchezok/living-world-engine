@@ -40,7 +40,7 @@ export interface WorldAdjudication {
 }
 export function worldProvenance(bound: BoundWorldProgram): CausalSource {
   return { causes: [{ kind: "action", id: bound.attempt.id },
-    ...Object.keys(bound.program.sourceHashes).filter(id => id.startsWith("law:")).map(id => ({ kind: "law" as const, id: id.slice(4) }))],
+    ...Object.keys(bound.program.sourceHashes).sort().filter(id => id.startsWith("law:")).map(id => ({ kind: "law" as const, id: id.slice(4) }))],
     assertions: [{ kind: "entity_lifecycle", entityId: bound.attempt.actorEntityId, expected: "active" }] };
 }
 export function worldProgramTiming(bound: BoundWorldProgram, resources: ProgramResources) {
@@ -177,10 +177,10 @@ export function makeWorldDecisionBatch(work: QuestionWork[], component: readonly
   captureReads(resources, keys);
   const state = { attempts: component as unknown as JsonValue,
     resources: Object.fromEntries(keys.map(key => [key, resources[key]!])),
-    sources: Object.fromEntries([...new Set(work.flatMap(item => Object.keys(item.bound.program.sourceHashes)))].map(id => [id, sources[id]!])),
+    sources: Object.fromEntries([...new Set(work.flatMap(item => Object.keys(item.bound.program.sourceHashes).sort()))].map(id => [id, sources[id]!])),
     questions: Object.fromEntries(work.map((item, index) => [`q${index}`, { attemptId: item.bound.attempt.id,
       parameters: item.bound.parameters, rule: { id: item.bound.program.definition.id, description: item.bound.program.definition.description },
-      sourceIds: Object.keys(item.bound.program.sourceHashes), payload: item.payload }])) };
+      sourceIds: Object.keys(item.bound.program.sourceHashes).sort(), payload: item.payload }])) };
   return { version: 1, view: { kind: "world", projectionHash: contentHash(state) },
     programHash: contentHash(work.map(item => item.bound.program.hash)), state: state as unknown as JsonValue,
     dependencies: Object.fromEntries(keys.map(key => [key, resources[key]!.version])),
@@ -189,7 +189,7 @@ export function makeWorldDecisionBatch(work: QuestionWork[], component: readonly
       criteria: { yes: "The sources and evidence support this specific condition or complete candidate effect.",
         no: "The sources or evidence contradict it, or the candidate claims an unsupported effect.",
         unknown: "Required evidence is absent; do not assume consent, completion, or information delivery." },
-      sources: Object.keys(item.bound.program.sourceHashes) }])) };
+      sources: Object.keys(item.bound.program.sourceHashes).sort() }])) };
 }
 
 export function validateWorldEvidence(evidence: WorldDecisionEvidence): void {
