@@ -16,6 +16,8 @@ A 使用独立冻结的旧引擎 checkout；B 使用新架构及 DeepSeek 决策
 
 运行终止、程序结束和长期任务成功分别处理。有来源的非空观察仅标记为候选反馈；只有独立核对持久化事实、实际传播和任务禁止项后，才可以标记为有用反馈。未执行、失败、超时和预算删失样本保留在原始样本集合中；未完成的 A 样本不产生成功任务费用比或虚构提速比例。
 
+[汇总工具](../../scripts/experiments/jev-qualification-report.ts) 从同一预算链的请求序号区间统计实际 Jev、DeepSeek、其他请求及费用，包含修复与被拒绝输出，避免重复使用样本标签导致跨批次混计。语义审查绑定完整结果哈希、持久化证据引用和具体反馈 revision；没有实际送达观察的响应不能计为有用反馈。缺少审查、未执行样本、未结算调用及不完整确认集均不会通过验收。成功任务费用包含该臂冷启动；未能记录的冷启动精确耗时保持空值。当前汇总只在 A、C 所有任务成功且每次输入都有审查确认的有效反馈时给出费用和时延降幅，避免删失样本产生虚假比例。
+
 首批冻结于 `b21729ed` 的三个 canary 组共九臂均在模型注册表预检阶段终止：未参与实验的 Kimi provider 元数据缺失导致整个全量目录不能捕获。没有新增付费 HTTP 请求，九臂的 27 次输入均未执行；这些是基础设施失败，不能作为任务完成率或模型质量证据。驱动将实际所需的原始 profile 和 account 原样投影到独立目录，以排除无关 provider 的可用性影响；修复后使用新证据批次。目标完成率、Jev 占比、费用和反馈等待时间的目标保持未验证。
 
 第二批的 B/C 引擎冻结于 `c4ed0a37`。第一组 A、B 均创建了完整 49 主体，玩家到达后 revision 为 1、step 为 0、历史为空；驱动错误地要求 revision 为 0，因此没有提交玩家输入。暂停后续样本后，只修正测量与行政恢复代码，保留两个实例及原始失败记录，允许通过 `--resume-arrivals` 继续相同输入。恢复不重复初始化、不改引擎生产者或模型输出；原驱动未保存的冷启动精确耗时标记为不可用，已发生费用全部保留。该修复用独立驱动提交记录，不将测量错误伪装成任务结果。
@@ -23,3 +25,5 @@ A 使用独立冻结的旧引擎 checkout；B 使用新架构及 DeepSeek 决策
 ## 运行方式
 
 先提交已经检查的实现，然后执行 `npx tsx scripts/experiments/jev-qualification.ts --mode prepare --root <new-evidence-directory> --baseline-root <frozen-checkout> --budget-root <existing-cumulative-budget-directory> --cache-root <existing-local-retrieval-cache>`。该步骤不调用付费模型，固定生产者提交、模型目录、世界内容及协议。随后对同一证据目录分别执行 `--mode canary --root <evidence-directory>` 和 `--mode confirmation --root <evidence-directory>`。任何生产者或协议修改都要求新的证据目录；已有的部分样本不允许静默重抽。
+
+全部付费 worker 关闭后，执行 `npx tsx scripts/experiments/jev-qualification-report.ts --root <evidence-directory> --phase canary --output <new-report-file>` 生成不可覆盖的汇总；确认集使用 `--phase confirmation`。独立语义审查以 `--reviews <review-json>` 输入，格式由 [审查契约](../../scripts/experiments/jev-qualification-analysis.ts) 定义。没有审查文件时仍输出实际费用与调用量，验收状态保持未通过。
