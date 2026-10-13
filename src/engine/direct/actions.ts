@@ -7,7 +7,7 @@ import { loadPromptAsset } from "../prompts";
 import { contentHash } from "../models/model-audit";
 import type { DecisionQuestionV2 } from "../models/decision-v2";
 import { runtimeId } from "../runtime/runtime-id";
-import { agentEventModels } from "../events/model-bindings";
+import { agentCapabilityModels } from "../models/capability-bindings";
 import { privateActionView } from "./views";
 import { DirectDecisions, selected } from "./decisions";
 import type { ActionFrame, ActionKind, DirectRuntimeState } from "./contracts";
@@ -52,7 +52,8 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   decisions: DirectDecisions; agentId: string; external?: ExternalActionInput; creationEnabled: boolean }) {
   const { state, control, decisions, agentId, external } = input;
   const agent = state.agents[agentId]!, intent = control.intents[agentId]!, view = privateActionView(state, agentId);
-  const profiles = agentEventModels(state, control, agentId);
+  if (external) intent.activeSubmission = structuredClone(external);
+  const profiles = agentCapabilityModels(state, control, agentId);
   const goals = orderedValues(agent.character.goals).filter(goal => goal.status === "active");
   const text = external?.rawText ?? "";
   const quotes = literalUtterances(text);

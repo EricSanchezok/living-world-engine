@@ -2,7 +2,7 @@
 
 ## Status
 
-Proposed
+Accepted
 Class: architecture
 
 ## Context and Problem Statement
@@ -39,6 +39,7 @@ The previous implementation is preserved by Git. Its failed experiments remain e
 ## Links
 
 - [Previous architecture](0227-jev-decision-event-engine.md).
+- [Current implementation contract](../game-design/direct-runtime.md).
 - [Game first principles](0004-game-first-principles.md).
 - [TypeSafe API](https://docs.typesafe.ai/api).
 - [Function selection and parameter decisions](https://docs.typesafe.ai/cookbooks/function_calling).

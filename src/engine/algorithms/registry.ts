@@ -769,12 +769,6 @@ export function registerBuiltinAlgorithms(
     configSchema: z.strictObject({ decision: z.string().min(1).nullable(), creation: z.string().min(1).nullable(), fallback: z.string().min(1).nullable(), creationEnabled: z.boolean() }),
     children: [], create: ({ ref, services }) => new DirectWorldAlgorithm(services.provider, ref.config as unknown as import("../direct/algorithm").DirectWorldConfig, services.rulePackages),
   });
-  if (!registry.has(decisionEventAlgorithmRef())) registry.registerDefinition({
-    role: "world-execution", id: "decision-event", version: "7", contractVersion: 12, maturity: "candidate",
-    configSchema: z.strictObject({ decision: z.string().min(1).nullable(), creation: z.string().min(1).nullable(), fallback: z.string().min(1).nullable(), maxDependencyRounds: z.number().int().positive() }),
-    children: [],
-    create: ({ ref, services }) => new DecisionEventAlgorithm(services.provider, ref.config as unknown as import("../events/algorithm").DecisionEventConfig, services.rulePackages),
-  });
   if (registry.has(FULL_CATALOG_ALGORITHM_REF)) return registry;
   for (const definition of definitions) registry.registerAlgorithmDefinition(definition);
   registry.registerDefinition({
@@ -794,5 +788,4 @@ export function registerBuiltinAlgorithms(
   if (!registry.has(FULL_CATALOG_ALGORITHM_REF) || !registry.has(DEFAULT_ALGORITHM_REF)) throw new Error("built-in composition did not register");
   return registry;
 }
-import { DecisionEventAlgorithm, decisionEventAlgorithmRef } from "../events/algorithm";
 import { DirectWorldAlgorithm, directWorldAlgorithmRef } from "../direct/algorithm";

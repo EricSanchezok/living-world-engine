@@ -901,10 +901,6 @@ export class CanonicalCommitter {
         candidate.directWorld.authorityHash !== contentHash(toWorldRuntimeContract(definition))) throw new Error("direct bootstrap changed world authority");
       return applyDirectBootstrap(sourceState, candidate.directWorld);
     }
-    if (candidate.decisionEvent) {
-      if (!definition || contentHash(candidate.decisionEvent.authority) !== contentHash(toWorldRuntimeContract(definition))) throw new Error("native bootstrap changed world authority");
-      return commitDecisionEventBootstrap(sourceState, candidate);
-    }
     const source = structuredClone(sourceState) as SimulationState;
     if (candidate.schemaVersion !== WORLD_STEP_CANDIDATE_SCHEMA_VERSION) {
       throw new Error(`bootstrap candidate schema v${WORLD_STEP_CANDIDATE_SCHEMA_VERSION} required`);
@@ -967,19 +963,6 @@ export class CanonicalCommitter {
       const expected = directCandidate(source, candidate.directEvent, result.committed, candidate.diagnostics.activatedAgentIds);
       if (contentHash(candidate) !== contentHash(expected)) throw new Error("direct candidate presentation changed");
       validateSimulationState(result.state, false, true, this.rulePackages); return result;
-    }
-    if (candidate.decisionEvent) {
-      const proof = candidate.decisionEvent, preparation = authority.preparation;
-      if (candidate.sourceStateHash !== contentHash(source) || preparation.sourceStateHash !== contentHash(source) ||
-        preparation.policyRosterHash !== contentHash(policyRoster) || contentHash(proof.policyRoster) !== contentHash(policyRoster) ||
-        preparation.requestHash !== contentHash(proof.request) || contentHash(proof.authority) !== contentHash(toWorldRuntimeContract(authority.definition)) ||
-        contentHash(proof.preparedControl) !== contentHash(preparation.executionState?.data) ||
-        contentHash(proof.event) !== contentHash(preparation.payload.event)) throw new Error("native commit differs from frozen preparation");
-      const result = deriveDecisionEventStep(source, proof, preparation.algorithmManifestHash, true, this.rulePackages);
-      const expected = nativeCandidateFromStep(source, proof, preparation.algorithmManifestHash, candidate.diagnostics.activatedAgentIds, result.committed);
-      if (contentHash(candidate) !== contentHash(expected)) throw new Error("native candidate presentation changed after preparation");
-      validateSimulationState(result.state, false, true, this.rulePackages);
-      return result;
     }
     validateAlgorithmExecutionState(source.executionState, authority.preparation.algorithmManifestHash);
     validateAlgorithmExecutionState(candidate.executionState, authority.preparation.algorithmManifestHash);
@@ -1113,5 +1096,4 @@ export class CanonicalCommitter {
     return { committed: structuredClone(committed), state: transitioned };
   }
 }
-import { commitDecisionEventBootstrap, deriveDecisionEventStep, nativeCandidateFromStep } from "../events/canonical";
 import { toWorldRuntimeContract } from "./world-definition";

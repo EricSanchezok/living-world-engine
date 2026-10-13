@@ -12,7 +12,7 @@ import { readDependency, readDirectState } from "./state";
 import { applyDirectCognition } from "./cognition";
 import { resolveDiscreteRandomRequests } from "../mechanics/random";
 import { evaluateCausalAssertion } from "../mechanics/causality";
-import { nextWorldClockBoundary } from "../events/clock-boundary";
+import { nextWorldClockBoundary } from "./clock";
 
 export function applyDirectBootstrap(source: Readonly<SimulationState>, bootstrap: DirectBootstrap): SimulationState {
   if (source.revision !== 0 || source.executionState || source.history.length || bootstrap.version !== 1) throw new Error("direct bootstrap requires an initial world");

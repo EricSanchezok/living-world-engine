@@ -1,1 +1,0 @@
-Compile a source-bound world program and concrete parameters for the supplied attempt. Include every dependency required to decide and materialize its branches. The engine will decide rule applicability and effect authorization independently, then validate and commit actual effects.

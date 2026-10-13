@@ -350,10 +350,10 @@ describe("provider account protocol matrix", () => {
     const state = { ready: true };
     const native = await gateway.decide({ workloadId: "native-matrix", batchId: "native-matrix", profileId: "decision-jev",
       subjectId: "world", runtimeIdentity: { worldHash: TEST_WORLD_HASH, revision: 0 },
-      batch: { version: 1, view: { kind: "world", projectionHash: contentHash(state) }, programHash: contentHash("matrix"),
-        dependencies: { ready: 1 }, state, questions: { ready: { version: "1", instructions: "Is ready explicitly true?",
+      batch: { version: 2, view: { kind: "world", projectionHash: contentHash(state) },
+        dependencies: { ready: 1 }, state, questions: { ready: { type: "choice", version: "1", instructions: "Is ready explicitly true?",
           criteria: { yes: "Ready", unknown: "Not established" }, sources: ["fixture:ready"] } } } });
-    expect(native.audit.structuredOutputMode).toBe("native-decision");
+    expect(native.audits[0]!.structuredOutputMode).toBe("native-decision");
     expect(calls).toHaveLength(Object.keys(profileModels).length + 1);
     for (const call of calls.filter((candidate) => candidate.url.includes("bigmodel.cn"))) {
       const responseFormat = call.body.response_format as { type?: unknown } | undefined;

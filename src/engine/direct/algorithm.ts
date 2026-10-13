@@ -11,8 +11,8 @@ import { executionStage } from "../runtime/stages";
 import { runtimeId } from "../runtime/runtime-id";
 import type { JsonObject } from "../runtime/json";
 import { toWorldRuntimeContract } from "../runtime/world-definition";
-import { resolveEventModels, type DecisionEventModelOverrides } from "../events/model-bindings";
-import { nextWorldClockBoundary } from "../events/clock-boundary";
+import { resolveCapabilityModels, type CapabilityModelOverrides } from "../models/capability-bindings";
+import { nextWorldClockBoundary } from "./clock";
 import { captureDependencies, readDependency, readDirectState, readyIntent, sealDirectState, wakeIntent } from "./state";
 import type { ActionFrame, DirectCognitiveUpdate, DirectStepRecord } from "./contracts";
 import { DirectDecisions } from "./decisions";
@@ -23,7 +23,7 @@ import { activityBoundary, admitActivities } from "./activities";
 import { directPerception } from "./perception";
 import { commitDirectRecord, directCandidate, sealDirectRecord } from "./canonical";
 
-export interface DirectWorldConfig extends DecisionEventModelOverrides { creationEnabled: boolean }
+export interface DirectWorldConfig extends CapabilityModelOverrides { creationEnabled: boolean }
 export const DIRECT_WORLD_CONFIG: DirectWorldConfig = { decision: null, creation: null, fallback: null, creationEnabled: true };
 export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "1", config: config as unknown as JsonObject });
 export const directWorldAlgorithmRef = (config = DIRECT_WORLD_CONFIG) => algorithmRef(directWorldManifest(config));
@@ -52,7 +52,7 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
     if (!registryHash) throw new Error("direct runtime requires the captured model registry");
     const modelOverrides = { decision: this.config.decision, creation: this.config.creation, fallback: this.config.fallback };
     const control = sealDirectState({ kind: "direct-world", version: 1, worldHash: input.state.worldHash,
-      modelCatalogHash: this.provider.catalog.hash, registryHash, models: resolveEventModels(input.definition.modelProfiles, modelOverrides), modelOverrides,
+      modelCatalogHash: this.provider.catalog.hash, registryHash, models: resolveCapabilityModels(input.definition.modelProfiles, modelOverrides), modelOverrides,
       intents: Object.fromEntries(Object.keys(input.state.agents).sort().map(id => [id, readyIntent()])),
       activities: [], prepared: {}, capabilities: [], cache: [], dependencies: {}, completedSubmissionIds: [] });
     return { schemaVersion: WORLD_STEP_CANDIDATE_SCHEMA_VERSION, sourceStateHash: contentHash(input.state), agentCommits: [], modelAudits: [],
@@ -90,16 +90,18 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
       if (activity?.temporalProfileId && !source.truth.mechanics.temporalProfiles[activity.temporalProfileId]?.interruptible) throw new Error("activity cannot be interrupted");
       control.activities = control.activities.filter(frame => frame.actorId !== action.agentId);
       if (activity) delete control.prepared[activity.id];
-      control.intents[action.agentId] = { ...control.intents[action.agentId]!, status: "ready", activityId: null, wakeReasons: ["player-action"] };
+      control.intents[action.agentId] = { ...control.intents[action.agentId]!, status: "ready", activityId: null, wakeReasons: ["player-action"], noProgressCount: 0, activeSubmission: action };
     }
     const ready = Object.entries(control.intents).filter(([id, intent]) => input.policyRoster[id]?.kind === "model" && intent.status === "ready")
       .sort(([a, left], [b, right]) => right.urgency - left.urgency || a.localeCompare(b));
     const reactions = ready.filter(([, intent]) => intent.causeActionId !== null);
+    const pendingPlayers = Object.entries(control.intents).filter(([id, intent]) => input.policyRoster[id]?.kind === "external" && intent.status === "ready" && intent.activeSubmission).map(([id]) => id);
     // A submitted player action does not wait for unrelated initial NPC work.
-    const owners = submissions.length ? submissions.map(action => action.agentId) : (reactions.length ? reactions : ready).map(([id]) => id);
+    const owners = submissions.length ? submissions.map(action => action.agentId) : reactions.length ? reactions.map(([id]) => id)
+      : pendingPlayers.length ? pendingPlayers : ready.map(([id]) => id);
     const selected = await Promise.allSettled(owners.map(async agentId => ({ agentId,
       result: await chooseAction({ state: source, definition: authority, control, decisions, agentId,
-        external: submissions.find(action => action.agentId === agentId), creationEnabled: this.config.creationEnabled }) })));
+        external: submissions.find(action => action.agentId === agentId) ?? control.intents[agentId]!.activeSubmission ?? undefined, creationEnabled: this.config.creationEnabled }) })));
     selected.forEach((result, index) => {
       const id = owners[index]!; activatedAgentIds.push(id);
       if (result.status === "fulfilled") {
@@ -182,7 +184,10 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
       intent.status = intent.activityId ? "active" : "waiting";
       intent.wait = { entityIds: frame.targetEntityId ? [frame.targetEntityId] : [], untilSeconds: null, reason: intent.noProgressCount >= 2 ? "no-progress" : "action-settled" };
       intent.recentOutcomeIds = [outcome.id]; intent.causeActionId = null;
-      if (frame.submissionId) control.completedSubmissionIds.push(frame.submissionId);
+      const continueSubmission = frame.submissionId && control.prepared[frame.id]!.requestProgress === "continue" &&
+        ["succeeded", "partial"].includes(outcome.status) && intent.noProgressCount < 2 && !intent.activityId;
+      if (frame.submissionId && !continueSubmission) { control.completedSubmissionIds.push(frame.submissionId); intent.activeSubmission = null; }
+      if (continueSubmission) wakeIntent(control, frame.actorId, "submission-progress");
       if (!intent.activityId && input.policyRoster[frame.actorId]?.kind === "model" && intent.noProgressCount < 2 &&
         Object.values(source.agents[frame.actorId]!.character.goals).some(goal => goal.status === "active")) wakeIntent(control, frame.actorId, "action-result");
       if (!intent.activityId) delete control.prepared[frame.id];

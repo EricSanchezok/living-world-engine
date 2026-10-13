@@ -1,4 +1,4 @@
-# 世界剧本格式 v15
+# 世界剧本格式 v16
 
 世界包定义初始世界、法则、机制和可选的参与方式。它不定义玩家动作，不携带可执行代码，也不能提供自定义客户端 UI。
 
@@ -23,7 +23,7 @@ world-id/
 ## `script.yaml`
 
 ```yaml
-schema_version: 15
+schema_version: 16
 id: immortal-realms
 name: 万域修途
 version: 1.0.0
@@ -277,7 +277,7 @@ Origin 定义身份幻想、出生位置、初始 persona、默认 goal、关系
 
 loader 验证 Entity、placement 无环、Fact、Agent self binding、character/belief 局部引用、全部 Mechanics Profile 与 shared-resource definition/pool 引用及范围、random distribution、模型 Profile、Origin spawn/mechanics/image、数量和所有 ID 唯一性。初始 Agent 的 `nextAction` 由引擎设为 null；初始 lifecycle、Fact provenance、character 时间戳和运行时身份由引擎注入。
 
-loader 只接受 `schema_version: 15`。旧世界包、状态和存档直接拒绝，不提供迁移或兼容层。
+loader 只接受 `schema_version: 16`。旧世界包、状态和存档直接拒绝，不提供迁移或兼容层。
 
 ## 程序覆盖报告
 

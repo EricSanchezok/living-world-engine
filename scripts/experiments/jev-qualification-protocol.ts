@@ -16,8 +16,8 @@ export function qualificationCatalogDocument(source: ModelCatalog, arm: JevArm) 
 }
 export const JEV_QUALIFICATION_LIMITS = { maxDispatchMs: 600_000, maxCommitsPerLease: 6, pollMs: 250 } as const;
 export const JEV_QUALIFICATION_PROTOCOL = {
-  id: "jev-engine-three-arm-v1", tasks: E3_TASKS, limits: JEV_QUALIFICATION_LIMITS,
-  initialization: "Independent complete initialization per arm, including all 48 autonomous subjects and the same player origin. Initialization is charged separately; no bootstrap or model output is copied between producers.",
+  id: "jev-direct-world-three-arm-v2", tasks: E3_TASKS, limits: JEV_QUALIFICATION_LIMITS,
+  initialization: "Independent initialization per arm, including all 48 autonomous subjects and the same player origin. Initial NPC work may be a persistent runtime task in the direct architecture. Cold initialization and subsequent runtime requests are charged separately; no bootstrap or model output is copied between producers.",
   evaluation: "All planned trials and inputs remain in the denominator. A terminal run or program is not task success. Review durable world state and delivered observations against each task goal and forbidden behavior. Candidate feedback latency requires independent semantic review before it becomes useful-feedback latency. Unfinished or censored baseline trials have no speedup or successful-task cost ratio. No source or prompt tuning inside a frozen cohort.",
   counting: "Count actual paid HTTP requests, including failed generation, repair, context fallback and rejected output. Runtime excludes cold bootstrap and player arrival, reported separately. Replays must make zero model requests. Do not split questions to inflate the Jev share.",
   producerBindings: "Schema versions, model capabilities, core rule implementation and explicit condition cadence are producer-bound and retained separately. Shared authored content is compared after removing those fields. New condition cadence is an architectural difference, not proof of identical temporal semantics; any affected task requires explicit review.",

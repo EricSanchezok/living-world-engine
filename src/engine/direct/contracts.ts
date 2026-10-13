@@ -28,6 +28,7 @@ export interface AgentIntentState {
   noProgressCount: number;
   goalProgress: Record<string, "partial" | "completed" | "unchanged" | "unknown">;
   dependencies: Record<string, string>;
+  activeSubmission: import("../runtime/execution").ExternalActionInput | null;
   failure: { inputHash: string; message: string; recoverable: true } | null;
 }
 export interface DirectDecisionUse { batch: DecisionBatchV2; result: DecisionResultV2; reused: boolean }
@@ -50,6 +51,7 @@ export interface PreparedDirectAction {
   randomBindings: Array<{ factId: string; requestId: string; stepId: string }>;
   sharedClaims: Array<{ poolId: string; amount: number }>;
   ongoing: boolean;
+  requestProgress: "complete" | "continue" | "wait";
 }
 export interface DirectRuntimeState {
   kind: "direct-world"; version: 1; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;

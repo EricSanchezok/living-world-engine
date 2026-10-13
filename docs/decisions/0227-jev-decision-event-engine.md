@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Superseded by [0228](0228-jev-direct-world-runtime.md).
 Class: architecture
 
 ## Context and Problem Statement

@@ -52,8 +52,8 @@ async function worker(mode: string) {
   if (mode !== "binding" && !trial) throw new Error("unknown frozen trial");
   const built = builder.buildIntegratedPlayerWorld(source, trial?.seed ?? 20260922, catalog);
   const registryModule = await importAt(engineRoot, "src/engine/algorithms/registry.ts") as typeof import("../../src/engine/algorithms/registry");
-  const native = arm === "A" ? undefined : await importAt(engineRoot, "src/engine/events/algorithm.ts") as typeof import("../../src/engine/events/algorithm");
-  const algorithm = native ? native.decisionEventAlgorithmRef({ ...native.JEV_EVENT_CONFIG,
+  const native = arm === "A" ? undefined : await importAt(engineRoot, "src/engine/direct/algorithm.ts") as typeof import("../../src/engine/direct/algorithm");
+  const algorithm = native ? native.directWorldAlgorithmRef({ ...native.DIRECT_WORLD_CONFIG,
     decision: arm === "B" ? "decision-deepseek" : "decision-jev" }) : registryModule.DEFAULT_ALGORITHM_REF;
   const binding: Binding = { head, worldHash: built.world.contentHash, semanticHash: semanticWorldHash(built.candidate), catalogHash: catalog.hash,
     agents: Object.keys(built.world.initialState.agents).length, algorithm,
@@ -141,7 +141,7 @@ async function worker(mode: string) {
     report.initialization = { elapsedMs: recovering ? null : performance.now() - started,
       timingStatus: recovering ? "original cold timing unavailable after measurement failure" : "measured",
       beforeBudget: recovering ? prior!.beforeBudget : beforeCold, afterBudget: recovering ? prior!.afterBudget : live.budget.summary,
-      stateHash: contentHash(initial.state), coverage: initial.state.bootstrapDecisionEvent?.control.coverage };
+      stateHash: contentHash(initial.state), intentions: initial.state.bootstrapDirect?.control.intents };
     assertQualificationInitialState({ subjects: Object.keys(initial.state.agents).length, revision: initial.state.revision,
       step: initial.state.step, historyLength: initial.state.history.length });
     if (contentHash(initial.executionAlgorithm) !== contentHash(algorithm) || initial.state.worldHash !== built.world.contentHash) throw new Error("arrival producer or world differs");

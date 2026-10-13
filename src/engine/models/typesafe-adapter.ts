@@ -3,8 +3,7 @@ import type { ModelAdapterResult, ModelProviderAdapter } from "./model-adapter";
 import type { ProviderAccountConfig, ResolvedModelInference } from "./model-catalog";
 import type { ResolvedModelBinding } from "./model-registry";
 import { contentHash } from "./model-audit";
-import { ContextLimitExceededError, NativeDecisionContextLimitError, ModelConfigurationError, ModelOutputError, ModelTransportError, type StructuredModelRequest } from "./model-provider";
-import { decisionOutputSchema, decisionPrompt, decisionWireContext, nativeDecisionBounds, validateDecisionBatch } from "./decision";
+import { NativeDecisionContextLimitError, ModelConfigurationError, ModelOutputError, ModelTransportError, type StructuredModelRequest } from "./model-provider";
 import { decisionOutputV2Schema, decisionPromptV2, decisionWireContextV2, validateDecisionBatchV2 } from "./decision-v2";
 import { runtimeEventEmitter, type RuntimeCorrelation } from "../runtime/observability";
 
@@ -16,19 +15,8 @@ const usageSchema = z.object({ input_tokens: z.number().int().nonnegative().safe
 
 function nativeContext(context: unknown) {
   const envelope = z.object({ decision: z.unknown() }).strict().parse(context);
-  if ((envelope.decision as { version?: number })?.version === 2) {
-    const batch = validateDecisionBatchV2(envelope.decision);
-    return { batch, wire: decisionWireContextV2(batch) };
-  }
-  const batch = validateDecisionBatch(envelope.decision);
-  const wire = decisionWireContext(batch);
-  // No provider tokenizer is published. UTF-8 bytes are a conservative token
-  // upper bound; never silently truncate an authorized projection. The runtime
-  // may partition independent dependencies or use an explicitly audited fallback.
-  if (!nativeDecisionBounds(batch).fits) {
-    throw new ContextLimitExceededError("TypeSafe decision exceeds the conservative 32k per-question or 64k combined token bound");
-  }
-  return { batch, wire };
+  const batch = validateDecisionBatchV2(envelope.decision);
+  return { batch, wire: decisionWireContextV2(batch) };
 }
 
 /** Native TypeSafe transport. Scheduling, retries and durable audits are owned by ModelGateway. */
@@ -43,8 +31,8 @@ export class TypeSafeModelAdapter implements ModelProviderAdapter {
   }
 
   describe<T>(binding: ResolvedModelBinding, request: StructuredModelRequest<T>) {
-    const prompt = request.schemaName === "DecisionBatchV2" ? decisionPromptV2() : decisionPrompt();
-    if (request.role !== "decision" || !["DecisionBatchV1", "DecisionBatchV2"].includes(request.schemaName) || request.structuredOutputMode ||
+    const prompt = decisionPromptV2();
+    if (request.role !== "decision" || request.schemaName !== "DecisionBatchV2" || request.structuredOutputMode ||
       request.preprocessOutput || request.jsonSyntaxRecovery || binding.profile.response_transport ||
       request.system !== prompt.system || request.userPrompt !== prompt.userPrompt || request.promptVersion !== prompt.version) {
       throw new ModelConfigurationError("TypeSafe accepts only native decision batches");
@@ -98,7 +86,7 @@ export class TypeSafeModelAdapter implements ModelProviderAdapter {
     try {
       if (!usage.success) throw new Error("TypeSafe response has no valid usage");
       if (envelope?.model !== binding.modelId) throw new Error("TypeSafe response model differs from the pinned model");
-      const parsed = (batch.version === 2 ? decisionOutputV2Schema(batch, true) : decisionOutputSchema(batch, true)).parse({ answers: envelope.answers });
+      const parsed = decisionOutputV2Schema(batch, true).parse({ answers: envelope.answers });
       return { ...description, ...completion, value: parsed, rawValueHash: contentHash(value), symbolRepairs: [], jsonRecovery: "strict" };
     } catch (cause) {
       throw new ModelOutputError("TypeSafe returned an invalid decision", undefined, { cause, rawValue: value, completion });

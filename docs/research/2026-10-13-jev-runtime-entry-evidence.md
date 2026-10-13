@@ -13,7 +13,7 @@
 - 玩家自然语言和预先生成的对白经过实际传播，成为另一角色的观察。
 - 完整入口检查曾通过 350 个测试文件、2,131 项测试；后续的程序复用、扩展和 Inspector 改动另外执行检查。
 
-测试入口为 [原生运行时测试](../../src/engine/events/__tests__/runtime.test.ts) 和 [持久化实例测试](../../src/server/__tests__/decision-world-host.test.ts)。这些自动化检查替换远程 HTTP，保留模型网关、程序生成契约、裁决和持久化实现。
+测试入口为 [原生运行时测试](https://github.com/EricSanchezok/living-world-engine/blob/05d273f7/src/engine/events/__tests__/runtime.test.ts) 和 [持久化实例测试](https://github.com/EricSanchezok/living-world-engine/blob/05d273f7/src/server/__tests__/decision-world-host.test.ts)。这些自动化检查替换远程 HTTP，保留模型网关、程序生成契约、裁决和持久化实现。
 
 ## 空间站真实联调
 

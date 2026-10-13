@@ -10,7 +10,7 @@ export function orderedValues<T extends { id: string }>(record: Readonly<Record<
 
 export function readyIntent(reason = "initial-decision"): AgentIntentState {
   return { goalId: null, status: "ready", wakeReasons: [reason], activityId: null, causeActionId: null,
-    wait: null, lastInputHash: null, lastActionHash: null, recentOutcomeIds: [], failure: null, urgency: 0, noProgressCount: 0, goalProgress: {}, dependencies: {} };
+    wait: null, lastInputHash: null, lastActionHash: null, recentOutcomeIds: [], failure: null, urgency: 0, noProgressCount: 0, goalProgress: {}, dependencies: {}, activeSubmission: null };
 }
 export function sealDirectState(value: Omit<DirectRuntimeState, "hash"> | DirectRuntimeState): DirectRuntimeState {
   const body = { ...value, hash: "" };

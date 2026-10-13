@@ -34,7 +34,6 @@ The executable registry is authoritative. Maturity describes enrollment policy a
 | `work-batching` | `shared-context-slot-batching@2` | 1 | reference | — |
 | `work-batching` | `shared-state-first-slot-batching@1` | 1 | reference | — |
 | `work-scheduling` | `bounded-concurrency@1` | 1 | reference | — |
-| `world-execution` | `decision-event@7` | 12 | candidate | — |
 | `world-execution` | `direct-world@1` | 12 | candidate | — |
 | `world-execution` | `eager-reference@29` | 12 | reference | `agentCognition` → `agent-cognition`<br>`actionCompilation` → `action-compilation`<br>`interactionGrounding` → `interaction-grounding`<br>`reactionResolution` → `reaction-resolution`<br>`truthResolution` → `truth-resolution`<br>`observationRendering` → `observation-rendering` |
 

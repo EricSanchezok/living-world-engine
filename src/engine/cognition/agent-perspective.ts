@@ -160,8 +160,7 @@ function projectHistory(
   const seenActions = new Set<string>();
   return state.history.map((entry) => {
     const action = entry.actions.find((candidate) => candidate.actorId === agent.id) ?? null;
-    const continuing = Boolean(action && entry.decisionEvent?.event?.continuingAttemptIds.includes(action.id));
-    const repeatedCheckpoint = Boolean(continuing && seenActions.has(action!.id));
+    const repeatedCheckpoint = Boolean(action && entry.directEvent && seenActions.has(action.id));
     if (action) seenActions.add(action.id);
     const outcome = action
       ? entry.outcomes.find((candidate) => candidate.proposalId === action.id) ?? null

@@ -59,6 +59,10 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         failed: "The attempt fails or the other party explicitly refuses", unknown: "Insufficient evidence; do not assume consent or success" });
     questions[`${prefix}_duration`] = question("required total duration, respecting explicit rules and the actual activity", frame as unknown as JsonValue,
       { planned: `Use the proposed ${frame.durationSeconds} seconds`, ...Object.fromEntries(durations.map(seconds => [`s${seconds}`, `${seconds} seconds`])) });
+    if (frame.submissionId) questions[`${prefix}_request_progress`] = question("coverage of the player's whole submitted intent by this immediate action", frame as unknown as JsonValue,
+      { complete: "This attempt handles the submitted action; any long-term goal remains separate",
+        continue: "Only a prerequisite is handled; another concrete step is already authorized by this input",
+        wait: "The next step needs an actual reply, new evidence or a new player decision" });
     const focus = frame.kind === "observe" && (!frame.targetEntityId || frame.targetEntityId === frame.actorEntityId) ? state.truth.placements[frame.actorEntityId] : frame.targetEntityId;
     const targetFacts = orderedValues(state.truth.facts).filter(fact => fact.subjectId === (focus ?? frame.actorEntityId));
     if (["use", "change"].includes(frame.kind)) {
@@ -225,7 +229,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       visibleEntityIds: ["succeeded", "partial"].includes(status) ? visibleEntities.map(entity => entity.id) : [], deliveredToEntityIds,
       randomRequests: operations.length ? randomRequests : [], randomBindings: operations.length ? randomBindings : [],
       sharedClaims: [...claims].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "claim").map(([, claim]) => claim),
-      ongoing: frame.temporalProfileId ? state.truth.mechanics.temporalProfiles[frame.temporalProfileId]?.kind === "ongoing" && !/\d+\s*(秒|分钟|小时|seconds?|minutes?|hours?)/iu.test(frame.proposal.rawText) : false });
+      ongoing: frame.temporalProfileId ? state.truth.mechanics.temporalProfiles[frame.temporalProfileId]?.kind === "ongoing" && !/\d+\s*(秒|分钟|小时|seconds?|minutes?|hours?)/iu.test(frame.proposal.rawText) : false,
+      requestProgress: frame.submissionId ? selected(answers, `${prefix}_request_progress`) as PreparedDirectAction["requestProgress"] : "complete" });
   }
   return { prepared, reads: view.reads };
 }

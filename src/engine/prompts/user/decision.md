@@ -1,1 +1,0 @@
-Answer every question once, using its exact question key and one of its exact criterion keys. Return an object with an answers object containing {"choice":"criterion-key"} for each question. Do not report invented probabilities or confidence scores.

@@ -5,7 +5,7 @@ Tests are executable evidence that a meaningful regression becomes visible befor
 ## Test topology
 
 - Vitest tests are colocated as `src/**/__tests__/*.test.ts`, `src/**/*.test.tsx`, and focused library tests under `src/app/_lib/__tests__/`; `vitest.config.ts` selects the unit project and `test/setup.ts` owns shared jsdom setup.
-- `test/fixtures/open-world-script/` is the shared schema v14 world fixture. It proves the generic contract and is not built-in playable content.
+- `test/fixtures/open-world-script/` is the shared schema v16 world fixture. It proves the generic contract and is not built-in playable content.
 - Playwright flows live under `e2e/flows/`, accessibility coverage under `e2e/a11y/`, shared support under `e2e/support/`, and platform-specific visual baselines beside the owning visual flow. `playwright.config.ts` selects the e2e and a11y projects.
 - `worlds/blackmarsh/` is the real reference-world entry used for structural and live compatibility checks.
 
@@ -25,7 +25,11 @@ Visual snapshots keep separate operating-system baselines with the same strict p
 - `npm run test:live:qwen:batching`, `npm run test:live:glm:batching`, and `npm run test:live:deepseek:batching` are the credentialed eager-reference batching smokes. They execute real Blackmarsh Agent bootstrap and step preparation for their respective Profile sets, assert the default `12/8` limits, zero singleton failures, and invocation-ID uniqueness, and deliberately stop before the unchanged Truth-resolution boundary. The matching non-batching command remains the broader end-to-end smoke.
 - A regression test fails for the escaped behavior before the fix and passes afterward, unless an existing deterministic reproduction already owns the contract.
 
-## Algorithm composition and `eager-reference@16`
+## Direct runtime
+
+Direct entry tests cover zero-inference startup, full Blackmarsh 49-subject admission, authorized private decisions, ordinary actions with creation disabled, exact material consumption, partial goal evidence, reusable capabilities, shared-resource queues, earlier deadlines, saved continuous activity, committed randomness, local model failure, no-progress waits, restart and recorded replay. Only the external model transport is replaced. Live qualification uses the same cumulative budget and records failed or censored tasks without claiming speedups. See [Spec 0182](specs/0182-jev-direct-world-runtime.md#verification).
+
+## Reference algorithm compositions
 
 - Composition tests prove recursive hash determinism, exact child schemas, strict canonical configuration, Role/version lookup, fresh instances, stable node paths, and independent child substitution. Catalog tests account for runtime and benchmark-only Algorithms; the static gate rejects generated-document drift and concrete Algorithm imports from fixed runtime, mechanics, or cognition code.
 

@@ -6,24 +6,28 @@ Living World Engine maintains one canonical world and multiple Agents with priva
 
 | Layer | Location | Responsibility |
 |---|---|---|
-| World contract | `src/script/` | Read schema v15 world packages, validate temporal/mechanics/resource profiles and assets, and construct `WorldDefinition` and `SimulationState` v17 |
+| World contract | `src/script/` | Read schema v16 world packages, validate temporal/mechanics/resource profiles and assets, and construct `WorldDefinition` and `SimulationState` v18 |
 | Execution algorithms | `src/engine/algorithms/` | Typed Roles, strict versioned definitions, recursive Compositions, generated discovery, and pinned producer resolution |
 | Model gateway | `src/engine/models/` | Trusted provider accounts, models.dev snapshots, deterministic Profile resolution, protocol drivers, vendor dialects, external prompt bundles, strict structured output, fair scheduling, and invocation audit |
 | Cognition | `src/engine/cognition/` | Agent perspective, private belief/character updates, observations, information boundaries, and mind commits |
 | Mechanics | `src/engine/mechanics/` | Temporal, resolution, causality, random, interaction-dependency graphs, Truth Engine, rule packages, and shared-resource mechanics |
 | Fixed runtime | `src/engine/runtime/` | Execution contract, SimulationEngine, CanonicalCommitter, transactions, lifecycle evidence, IDs, replay, and world runtime definitions |
-| Program execution | `src/engine/programs/`, `src/engine/events/` | Private programs, native decisions, world rule compilation, event commits and default `decision-event@7` execution; see [runtime contract](game-design/world-program-runtime.md) |
+| Direct execution | `src/engine/direct/` | Private intentions, typed Jev actions, local adjudication, saved activities, mechanical settlement and default `direct-world@1`; see [runtime contract](game-design/direct-runtime.md) |
 | Prompt resources | `src/engine/prompts/` | Server-loaded English role/task/transport Markdown, content-addressed bundle versions, and unified task/context serialization |
 | Shared contracts | `src/engine/contracts/` | Semantic state types, model-output schemas, and prompt/context contracts shared across owners |
 | Benchmarks | `src/engine/benchmarks/` | Benchmark-only code and evidence generators kept off the product execution path |
-| Instance host | `src/server/world-host.ts` | `WorldInstanceDocument` v24, immutable experiment enrollment, pinned recursive `AlgorithmRef`, persistent WorldRuns, Participants, decision/reaction windows, Preparation v5 artifacts, leases, recovery, and generation fencing |
+| Instance host | `src/server/world-host.ts` | `WorldInstanceDocument` v25, immutable experiment enrollment, pinned recursive `AlgorithmRef`, persistent WorldRuns, Participants, decision/reaction windows, Preparation v5 artifacts, leases, recovery, and generation fencing |
 | Execution evidence | `src/server/execution-ledger.ts` | The sole persisted source for executions, events, artifacts, experiments, replay, and Inspector data |
 | HTTP and browser | `src/app/` | Public API v12, world library, assistant-ui sessions, decision/reaction controls, unified Agent Perspective HUD, control orb, and read-only Inspector API v13 with local Debug routes |
 | Shared browser contracts | `src/shared/` | Browser-safe DTOs and trusted-local Inspector DTOs |
 
 Dependencies flow browser → Route Handler → WorldHost → SimulationEngine → WorldExecutionAlgorithm → CanonicalCommitter. WorldHost resolves the complete instance-pinned Composition through the internal registry, and replay resolves the recorded tree through the same mechanism. Algorithms return candidates but never hold authority to mutate canonical state or define stable telemetry. The engine and world YAML load only on the server. [Algorithm system](game-design/algorithm-system.md) defines the replaceability boundary.
 
-The benchmark-only [perception evidence reader](specs/0155-demand-read-perception-evidence.md) separates a complete immutable source from explicitly loaded wire records. Its read transcript and actual HTTP bodies account for the additional inference calls; the original gateway and canonical materializers retain full-source validation. Default perception continues to receive its complete context. The isolated [paired demonstrations](specs/0162-paired-perception-demonstration-screen.md) append authored cases to the system prompt while preserving the full source, output protocol and validators.
+## Reference and benchmark compositions
+
+These explicitly selected compositions retain research baselines and diagnostic screens. The default direct runtime has its own state and execution contract below.
+
+The benchmark-only [perception evidence reader](specs/0155-demand-read-perception-evidence.md) separates a complete immutable source from explicitly loaded wire records. Its read transcript and actual HTTP bodies account for the additional inference calls; the original gateway and canonical materializers retain full-source validation. Reference perception receives its complete context. The isolated [paired demonstrations](specs/0162-paired-perception-demonstration-screen.md) append authored cases to the system prompt while preserving the full source, output protocol and validators.
 
 The benchmark-only [source-authored speech producer](specs/0163-source-authored-speech-screen.md) offers exact current utterances alongside unrestricted open actions. Its descriptor binds the speaker to the materialized actor and leaves delivery unadjudicated; the world runtime and cognition owners retain all authority.
 
@@ -53,7 +57,7 @@ The experimental [incremental intent cursor](specs/0176-incremental-intent-execu
 
 ## State and policies
 
-The model gateway also exposes the [native decision contract](game-design/model-gateway.md#协议方言与结构化结果) approved in [Spec 0181](specs/0181-jev-decision-event-engine.md). It keeps TypeSafe choice distributions and authorized input bindings in the existing scheduling and audit path, with an explicit generative context fallback. The [private program runtime](game-design/program-runtime.md) owns source-bound compilation, control-flow journals, separate goal evidence, dependency subscriptions and decision reuse. The [world program runtime](game-design/world-program-runtime.md) owns source-bound effect templates, condition evidence, read-set validation, atomic event commits and local scheduling. New World Instances use this decision-event execution path.
+The model gateway exposes [Choice, Noul and Score decisions](game-design/model-gateway.md#协议方言与结构化结果), authorized perspectives and pinned model bindings. The [direct runtime](game-design/direct-runtime.md) owns Agent intentions, ActionFrames, local adjudication, saved activity effects and canonical event commits under [Spec 0182](specs/0182-jev-direct-world-runtime.md).
 
 Action Compilation specializes [empty shared-resource domains](specs/0111-specialize-empty-resource-pool-domain.md) from its bound source state; representation adapters preserve that request schema through initial and repair calls.
 
@@ -69,13 +73,11 @@ The indexed reviewed Truth child can opt into [event-sourced outcome summaries](
 
 Models produce semantic drafts only. Agent, Entity, Fact, Meter, Rating, Condition, and subject-private cognition records use world semantic IDs. The engine deterministically assigns runtime identities for actions, Resolution Plans and Receipts, TemporalPlans, Activities, shared-resource pools, checks, random draws, mechanics, events, outcomes, observations, and apparent claims. It materializes revisions, steps, phases, lifecycle, progress, clock deltas, provenance, Profiles, and timestamps.
 
-## Program and event execution
+## Action and event execution
 
-An Agent's private interpreter retains the position, conditions, subscriptions and receipts of reusable behavior. Jev evaluates concrete source-bound questions from the Agent's own perspective or the authorized world projection. DeepSeek generates a new program or exact utterance only when expansion is needed. The [program runtime](game-design/program-runtime.md) and [world event runtime](game-design/world-program-runtime.md) own these contracts.
+WorldHost invokes the instance-pinned producer. Initial state and ready intentions are saved without NPC inference. Typed private decisions build concrete actions; authorized local world decisions bind their actual effects. The [direct runtime](game-design/direct-runtime.md) owns progression, perception, compound submissions, learned capabilities and local recovery.
 
-WorldHost invokes the instance-pinned producer. Same-time control records update private planning; physical events select the earliest pending boundary and advance time positively. Connected actions share adjudication evidence. CanonicalCommitter re-derives mechanics, actual reads, effects, observations and private progress before committing atomically. Restored instances reuse their durable programs, bindings and receipts.
-
-A failed model, validation or persistence operation leaves the committed world unchanged and retains its execution evidence. Unknown conditions and exhausted bounded repairs remain recoverable waits. The frozen legacy comparison and runtime qualification criteria belong to [Spec 0181](specs/0181-jev-decision-event-engine.md).
+Same-time control records save decisions and random commitments. Physical settlement respects the earliest admitted activity, timer or condition boundary and advances time positively. CanonicalCommitter checks actual read dependencies and mechanical consistency before atomic persistence. Replay consumes recorded events. Failed local tasks retain their evidence while independent work continues.
 
 ## World Instance and Participant
 
@@ -93,23 +95,20 @@ A Participant session projects persisted Arrival, Participant intent, every comm
 
 Normalized world content receives a SHA-256 covering the manifest, laws, mechanics, entities, participation configuration, and static-asset identities. An instance pins its `WorldRuntimeContract` and world content hash, and reconstruction verifies both against the content-addressed version.
 
-World versions, instances, and the Execution Ledger live in `LIVINGWORLD_DATA_ROOT/livingworld.sqlite`; content-addressed model-registry snapshots live beside it under `model-registry/`. The default v24 directory is `.livingworld-v24/`. Disposable local encoder assets and candidate vectors live separately under `LIVINGWORLD_CACHE_ROOT`, which defaults to `.livingworld-cache/`; a world content hash and encoder fingerprint partition the embedding SQLite files, and an exact passage hash addresses each checksummed Float32 vector. Operational entrypoints are grouped under `scripts/experiments/` and `scripts/operations/`, while repo-seed governance scripts retain their managed root paths. Canonical SQLite uses WAL, `synchronous=FULL`, strict tables, process leases, write transactions, and generation compare-and-swap. Old schemas are not migrated; a different contract uses a new data root.
+World versions, instances, and the Execution Ledger live in `LIVINGWORLD_DATA_ROOT/livingworld.sqlite`; content-addressed model-registry snapshots live beside it under `model-registry/`. The default v25 directory is `.livingworld-v25/`. Disposable local encoder assets and candidate vectors live separately under `LIVINGWORLD_CACHE_ROOT`, which defaults to `.livingworld-cache/`; a world content hash and encoder fingerprint partition the embedding SQLite files, and an exact passage hash addresses each checksummed Float32 vector. Operational entrypoints are grouped under `scripts/experiments/` and `scripts/operations/`, while repo-seed governance scripts retain their managed root paths. Canonical SQLite uses WAL, `synchronous=FULL`, strict tables, process leases, write transactions, and generation compare-and-swap. Old schemas are not migrated; a different contract uses a new data root.
 
 ## Hard invariants
 
-- Action text expresses an attempt, never a state delta.
-- Every Agent appears exactly once in the policy roster, and every final joint action has exactly one outcome.
-- Every step contains exactly one engine-injected positive time advance equal to its earliest temporal boundary delta.
-- Activity completion effects cannot precede completion; unrelated earlier boundaries do not move an Activity's absolute checkpoint.
-- An Activity acquires all shared-resource claims or none; active holders, retaining pauses, and ready reservations never exceed the capacity of an active Entity pool, and queues cannot skip an unsatisfied connected head.
-- Observation authorization and private text use observer-local IDs; only decision-eligible model Agents run AgentMind.
-- Numeric writes are trusted-rule derived: Quantities use explicit provenance and conserve unless a world law authorizes production or consumption; Meter impacts clamp to script ranges; Ratings remain in script ranges.
-- Every action pins one ResolutionPlan before resolution randomness, and every plan pins one deterministic ResolutionReceipt whose operations are part of the same atomic step.
-- Placement is acyclic; an Agent binds an active Entity and owns one self binding.
-- Causes and assertions for operations, mechanics, events, and outcomes resolve and hold before writes.
-- External, idle, and occupied Agents do not run AgentMind; each eligible model Agent and Agent created in the step commits exactly one mind update.
-- Ordinary world APIs never expose canonical truth, bindings, another Agent's cognition, model configuration, or internal error material. The local model-registry diagnostics defined by Spec 0007 expose only non-secret account status and resolved identities; they omit endpoints, dialect configuration, selectors, inference configuration, and credentials.
-- Algorithms can emit only declared diagnostics; runtime event schema v4, stable lifecycle events, metric dimensions, aggregation semantics, and automatic Composition-node attribution remain engine-owned.
+- Natural-language actions express attempts. Typed model answers enter owned materializers; player text is never a state delta.
+- Canonical truth, each Agent's beliefs and participant knowledge have separate owners and authorized views.
+- Physical events advance positive time; control-only revisions preserve time. Admitted earlier boundaries cannot be skipped.
+- Transactions check actual reads, valid references, finite numbers, quantities, conservation, capacity and atomicity. Resource shortage yields a local blocked result.
+- Script rules take precedence; uncovered ordinary behavior permits common-sense adjudication. Sources remain auditable without requiring a generated proof tree.
+- Random stakes persist before extraction. Recorded results and effects replay without provider work or duplicate delivery.
+- Dialogue exists before actual delivery. Testimony, acceptance, immediate effects and long-term goal completion have distinct evidence.
+- Instance producer, model registry, world content and save contracts are pinned. Old saves use their archived data roots.
+- Ordinary APIs preserve cognitive isolation. The trusted local Inspector exposes full non-secret diagnostic evidence.
+- Runtime event schemas, telemetry, leases and generation fencing remain engine-owned.
 
 World package, runtime, algorithm, presentation, benchmark, and Ledger details live in [Script format](game-design/script-format.md), [Engine runtime](game-design/engine-runtime.md), [Algorithm system](game-design/algorithm-system.md), [Presentation](game-design/presentation.md), [Causal Activity benchmark](game-design/causal-activity-benchmark.md), and [Runtime observability](game-design/runtime-observability.md). Architectural rationale lives in [0061](decisions/0061-unified-agent-and-external-policy.md), [0063](decisions/0063-eager-reference-execution.md), [0064](decisions/0064-conversation-core-and-agent-perspective-observer.md), [0067](decisions/0067-open-semantic-resolution-plans.md), [0068](decisions/0068-unified-agent-perspective.md), [0070](decisions/0070-event-boundary-temporal-runtime.md), [0071](decisions/0071-pin-algorithms-and-own-telemetry-in-the-engine.md), [0073](decisions/0073-stage-reactions-before-temporal-boundary-selection.md), [0074](decisions/0074-enforce-script-owned-shared-resource-pools.md), [0075](decisions/0075-pin-configured-execution-algorithms.md), [0098](decisions/0098-content-addressed-embedding-cache-and-immutable-canary-enrollment.md), and [0099](decisions/0099-typed-hierarchical-algorithm-composition.md).
 

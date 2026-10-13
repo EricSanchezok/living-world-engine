@@ -1,7 +1,7 @@
 # Jev Decision Event Engine
 
 Artifact-Version: 1
-Status: Approved
+Status: Superseded by [0182](0182-jev-direct-world-runtime.md)
 
 ## Intent
 

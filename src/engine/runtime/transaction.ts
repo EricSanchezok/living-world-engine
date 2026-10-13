@@ -588,7 +588,7 @@ function validateCommittedStepShape(step: CommittedStep, state: SimulationState)
   delete payload.contentHash;
   if (step.contentHash !== contentHash(payload)) throw new Error(`step ${step.step} content hash mismatch`);
   if (step.executionRef) validateExecutionRef(step.executionRef, `step ${step.step} executionRef`);
-  if (step.decisionEvent || step.directEvent) return;
+  if (step.directEvent) return;
   step.initialActions.forEach((action) => actionProposalSchema.parse(action));
   step.actions.forEach((action) => actionProposalSchema.parse(action));
   step.reactionRequests.forEach((request) => reactionRequestSchema.parse(request));
@@ -831,7 +831,6 @@ export function replaySimulationState(
     if (!agent) throw new Error(`bootstrap commit targets unknown Agent ${commit.agentId}`);
     replay.agents[commit.agentId] = applyMindCommit(agent, commit, 0, [], []);
   }
-  if (state.bootstrapDecisionEvent) Object.assign(replay, applyDecisionEventBootstrap(replay, state.bootstrapDecisionEvent));
   if (state.bootstrapDirect) Object.assign(replay, applyDirectBootstrap(replay, state.bootstrapDirect));
   const entries = [
     ...state.history.map((step) => ({ kind: "step" as const, revision: step.revision, value: step })),
@@ -847,10 +846,6 @@ export function replaySimulationState(
     const step = entry.value;
     validateCommittedStepShape(step, replay);
     if (step.directEvent) { Object.assign(replay, replayDirectStep(replay, step)); continue; }
-    if (step.decisionEvent) {
-      Object.assign(replay, replayDecisionEventStep(replay, step, rulePackages));
-      continue;
-    }
     if (step.baseRevision !== replay.revision || step.revision !== replay.revision + 1 || step.step !== replay.step + 1) {
       throw new Error(`history step ${step.step} is not contiguous`);
     }
@@ -940,7 +935,7 @@ const REPLAY_VALIDATION_CACHE_LIMIT = 8;
 export function replayCommittedHistory(state: SimulationState, rulePackages?: RulePackageRegistry): void {
   // Only an exact complete native state validated under these fixed core rules
   // may reuse a successful replay. Explicit replaySimulationState always runs.
-  const identity = state.executionState?.data.kind === "decision-event"
+  const identity = state.executionState?.data.kind === "direct-world"
     ? rulePackages ? rulePackages.replayValidationCacheIdentity : defaultCoreReplayCacheIdentity : undefined;
   const stateHash = identity ? contentHash(state) : null;
   const cached = identity ? replayValidationHashes.get(identity) : undefined;
@@ -996,7 +991,7 @@ export function validateSimulationState(state: SimulationState, requireNextActio
   assertExactKeys(state, [
     "schemaVersion", "executionState", "worldId", "worldHash", "lawIds", "revision", "step", "truth", "agents", "admissions", "history",
     "bootstrapAgentCommits",
-  ], ["historyBase", "bootstrapExecutionRef", "bootstrapDecisionEvent", "bootstrapDirect"], "simulation state");
+  ], ["historyBase", "bootstrapExecutionRef", "bootstrapDirect"], "simulation state");
   validateAlgorithmExecutionState(state.executionState);
   if (state.schemaVersion !== 18 || !isSemanticId(state.worldId) || !/^sha256:[a-f0-9]{64}$/.test(state.worldHash)) {
     throw new Error("invalid simulation identity");
@@ -1362,4 +1357,3 @@ export function createEmptyCharacter(summary: string, voice = ""): AgentState["c
     commitments: {},
   };
 }
-import { applyDecisionEventBootstrap, replayDecisionEventStep } from "../events/canonical";

@@ -51,7 +51,7 @@ import {
 import type { ResolvedModelBinding } from "./model-registry";
 import type { ProviderAccountConfig } from "./model-catalog";
 import { structuredPromptBytes } from "../prompts";
-import { executeDecision, type DecisionRequest, type DecisionResult } from "./decision";
+import { executeDecisionV2, type DecisionRequestV2, type DecisionResultV2 } from "./decision-v2";
 
 function referenceCatalogAudit(context: unknown): { version: number; hash: string } {
   const record = context && typeof context === "object" && !Array.isArray(context)
@@ -214,8 +214,8 @@ function executionAudit(
 }
 
 export class ModelGateway implements StructuredModelProvider {
-  decide(request: DecisionRequest): Promise<DecisionResult> {
-    return executeDecision(this, request);
+  decide(request: DecisionRequestV2): Promise<DecisionResultV2> {
+    return executeDecisionV2(this, request);
   }
 
   readonly catalog: ModelCatalog;

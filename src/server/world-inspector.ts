@@ -1,5 +1,4 @@
 import type { RulePackageRegistry } from "../engine/mechanics/rule-package";
-import { inspectDecisionPrograms } from "./world-inspector-programs";
 import { inspectDirectRuntime } from "./world-inspector-direct";
 import type {
   ActionCompilationReferenceAudit,
@@ -1493,7 +1492,6 @@ export function buildWorldInspectorStepDetail(
     summary: projection.summary,
     committed: { ...structuredClone(committed), modelAudits: audits },
     interaction: interactionEvidenceForStep(runtimeEvents, committed),
-    ...(committed.decisionEvent ? { programs: inspectDecisionPrograms(before, committed) } : {}),
     ...(committed.directEvent ? { directRuntime: inspectDirectRuntime(before, committed) } : {}),
     before: snapshot(before),
     after: snapshot(after),

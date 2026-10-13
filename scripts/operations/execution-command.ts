@@ -468,7 +468,7 @@ export async function replayThroughAlgorithm(
     .map((candidate) => candidate.payload as BootstrapCandidate | WorldStepCandidate);
   const overlay = replayOptions.probe ? validateProbeBinding(original, events, replayOptions.probe) : undefined;
   const bootstrapCandidate = candidates.find((candidate): candidate is BootstrapCandidate => !("resolution" in candidate));
-  const nativeBootstrap = stepInputs[0]?.state.bootstrapDirect ?? bootstrapCandidate?.directWorld ?? stepInputs[0]?.state.bootstrapDecisionEvent ?? bootstrapCandidate?.decisionEvent;
+  const nativeBootstrap = stepInputs[0]?.state.bootstrapDirect ?? bootstrapCandidate?.directWorld;
   const pinnedCatalog = nativeBootstrap ? new ModelCatalog(nativeBootstrap.modelCatalog) : undefined;
   if (pinnedCatalog && (pinnedCatalog.hash !== nativeBootstrap!.control.modelCatalogHash || pinnedCatalog.hash !== original.modelCatalogHash)) {
     throw new Error("recorded native model catalog differs from its pinned execution");
@@ -569,8 +569,7 @@ export async function replayThroughAlgorithm(
     const consumption = provider.assertFullyConsumed();
     const semanticHash = semanticHashes.length > 0
       ? original.kind === "benchmark" ? contentHash(semanticHashes) : semanticHashes.at(-1)!
-      : contentHash(finalState.bootstrapDirect ? finalState : finalState.bootstrapDecisionEvent ? { bootstrapDecisionEvent: finalState.bootstrapDecisionEvent }
-        : { bootstrapAgentCommits: finalState.bootstrapAgentCommits });
+      : contentHash(finalState.bootstrapDirect ? finalState : { bootstrapAgentCommits: finalState.bootstrapAgentCommits });
     const stateHash = contentHash(finalState);
     database.finishExecution(replayExecutionId, {
       status: "succeeded",
