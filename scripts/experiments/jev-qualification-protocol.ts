@@ -52,3 +52,10 @@ export function assertQualificationClock(previous: { revision: number; step: num
   } else if (physicalAdvances.length !== 1 || physicalAdvances[0]! <= 0 || current.step !== previous.step + 1 ||
     current.elapsedSeconds !== previous.elapsedSeconds + physicalAdvances[0]!) throw new Error("invalid physical world-time advance");
 }
+
+/** Participant arrival can create revision one without executing a world step. */
+export function assertQualificationInitialState(value: { subjects: number; revision: number; step: number; historyLength: number }) {
+  if (value.subjects !== 49 || !Number.isSafeInteger(value.revision) || value.revision < 0 || value.step !== 0 || value.historyLength !== 0) {
+    throw new Error("full49 initialization is incomplete or already advanced");
+  }
+}

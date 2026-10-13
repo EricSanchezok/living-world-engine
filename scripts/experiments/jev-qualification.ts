@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { createJevLiveBudget, JEV_BUDGET_POLICY, JEV_PLANNING_NANO_CNY } from "../../src/engine/benchmarks/jev/live-budget";
-import { JEV_QUALIFICATION_PROTOCOL, assertQualificationClock, semanticWorldHash, qualificationCatalogDocument, type JevArm } from "./jev-qualification-protocol";
+import { JEV_QUALIFICATION_PROTOCOL, assertQualificationClock, assertQualificationInitialState, semanticWorldHash, qualificationCatalogDocument, type JevArm } from "./jev-qualification-protocol";
 import type { StructuredModelProvider } from "../../src/engine/models/model-provider";
 
 const script = fileURLToPath(import.meta.url);
@@ -63,8 +63,15 @@ async function worker(mode: string) {
     binding.catalogHash !== manifest.bindings[arm].catalogHash || contentHash(binding.conditionCadence) !== contentHash(manifest.bindings[arm].conditionCadence) ||
     contentHash(algorithm) !== contentHash(manifest.bindings[arm].algorithm)) throw new Error("frozen producer or world changed");
   const directory = path.join(root, trial.id, arm);
-  if (existsSync(directory)) throw new Error("trial exists; never redraw a partially executed arm");
-  mkdirSync(directory, { recursive: true });
+  const recovering = mode === "resume-arrival", outputDirectory = recovering ? path.join(directory, "arrival-recovery") : directory;
+  if (existsSync(outputDirectory)) throw new Error("trial exists; never redraw a partially executed arm");
+  const prior = recovering ? JSON.parse(readFileSync(path.join(directory, "result.json"), "utf8")) as {
+    failure?: { message?: string }; instanceId?: string; actions: unknown[]; beforeBudget: unknown; afterBudget: unknown;
+  } : undefined;
+  if (recovering && (prior?.failure?.message !== "full49 initialization cardinality changed" || !prior.instanceId || prior.actions.length)) {
+    throw new Error("arrival recovery requires the original measurement error and no executed inputs");
+  }
+  mkdirSync(outputDirectory, { recursive: true });
   let stopped: string | undefined, deadline = Infinity;
   const reason = () => stopped ?? (performance.now() >= deadline ? "dispatch deadline exceeded" : undefined);
   const live = createJevLiveBudget(manifest.budgetRoot, reason), calls = new Set<Promise<unknown>>();
@@ -92,7 +99,10 @@ async function worker(mode: string) {
   const transaction = await importAt(engineRoot, "src/engine/runtime/transaction.ts") as typeof import("../../src/engine/runtime/transaction");
   let retrieval: import("../../src/server/action-compilation-retrieval-runtime").ActionCompilationRetrievalRuntimeProvider | undefined;
   let encoder: import("../../src/engine/algorithms/eager-reference/candidate-retrieval/local-encoder").LocalEncoderRuntime | undefined;
-  const report: Record<string, unknown> = { arm, trial, binding, beforeBudget: live.budget.summary, quality: "pending-semantic-review", actions: [] };
+  const report: Record<string, unknown> = { arm, trial, binding, driverHead: cleanHead(implementationRoot),
+    beforeBudget: live.budget.summary, quality: "pending-semantic-review", actions: [],
+    ...(recovering ? { administrativeRecovery: "Retain the original completed arrival; correct the revision-zero measurement assertion without any redraw.",
+      priorResult: path.join(directory, "result.json") } : {}) };
   const drain = async () => { while (calls.size) await Promise.allSettled([...calls]); await live.drain(); };
   const timer = setInterval(() => console.log(JSON.stringify({ arm, trial: trial.id, stage: report.stage,
     costCny: (live.budget.summary.estimatedPeakNanoCny + JEV_PLANNING_NANO_CNY) / 1e9, inFlight: live.budget.summary.inFlight.length })), 15_000);
@@ -119,19 +129,23 @@ async function worker(mode: string) {
     const host = new hostClass.WorldHost({ repository: new repositoryClass.MemoryWorldRepository({ [built.world.id]: built.world }),
       store: database, ledger: database, provider, defaultAlgorithmRef: algorithm, actionCompilationRetrievalProvider: retrieval,
       runLeaseMaxCommits: manifest.protocol.limits.maxCommitsPerLease });
-    report.stage = "cold-initialization"; deadline = performance.now() + manifest.protocol.limits.maxDispatchMs;
+    report.stage = recovering ? "arrival-recovery" : "cold-initialization"; deadline = performance.now() + manifest.protocol.limits.maxDispatchMs;
     live.beginTrial(`${trial.id}-${arm}-cold`);
     const started = performance.now(), beforeCold = live.budget.summary;
-    const created = await host.createInstance({ worldId: built.world.id, seed: trial.seed, title: `Jev ${trial.id} ${arm}`,
+    const created = recovering ? host.instance(prior!.instanceId!) : await host.createInstance({ worldId: built.world.id, seed: trial.seed, title: `Jev ${trial.id} ${arm}`,
       start: { kind: "origin", originId: "harbor-wayfarer", displayName: "eric", appearance: "衣着朴素，背着旅行包，刚从客船下岸。",
         motivation: "依据真实见闻在黑沼港区探索并采取行动。" } });
     await drain();
     const instanceId = created.summary.id, read = () => database.readInstance(instanceId).document;
     const initial = read(); report.instanceId = instanceId;
-    if (Object.keys(initial.state.agents).length !== 49 || initial.state.revision !== 0) throw new Error("full49 initialization cardinality changed");
-    save(path.join(directory, "initial.json"), initial);
-    report.initialization = { elapsedMs: performance.now() - started, beforeBudget: beforeCold, afterBudget: live.budget.summary,
+    report.initialization = { elapsedMs: recovering ? null : performance.now() - started,
+      timingStatus: recovering ? "original cold timing unavailable after measurement failure" : "measured",
+      beforeBudget: recovering ? prior!.beforeBudget : beforeCold, afterBudget: recovering ? prior!.afterBudget : live.budget.summary,
       stateHash: contentHash(initial.state), coverage: initial.state.bootstrapDecisionEvent?.control.coverage };
+    assertQualificationInitialState({ subjects: Object.keys(initial.state.agents).length, revision: initial.state.revision,
+      step: initial.state.step, historyLength: initial.state.history.length });
+    if (contentHash(initial.executionAlgorithm) !== contentHash(algorithm) || initial.state.worldHash !== built.world.contentHash) throw new Error("arrival producer or world differs");
+    save(path.join(outputDirectory, "initial.json"), initial);
     const participant = Object.values(initial.participants).find(value => value.status === "active");
     if (!participant) throw new Error("missing test participant");
     for (const [index, text] of manifest.protocol.tasks[trial.category]!.inputs.entries()) {
@@ -175,7 +189,7 @@ async function worker(mode: string) {
       const final = read();
       Object.assign(row, { endedElapsedMs: performance.now() - started, afterBudget: live.budget.summary,
         revision: final.state.revision, elapsedSeconds: final.state.truth.elapsedSeconds, stateHash: contentHash(final.state) });
-      save(path.join(directory, `input-${index + 1}.json`), row);
+      save(path.join(outputDirectory, `input-${index + 1}.json`), row);
       (report.actions as unknown[]).push(row);
       if (reason() || live.budget.summary.blockingUnknown.length) break;
     }
@@ -186,7 +200,7 @@ async function worker(mode: string) {
     report.final = { stateHash: contentHash(final.state), revision: final.state.revision, elapsedSeconds: final.state.truth.elapsedSeconds };
     report.unexecutedInputs = 3 - (report.actions as unknown[]).length;
     report.doctor = database.debugDoctor();
-    save(path.join(directory, "final.json"), final);
+    save(path.join(outputDirectory, "final.json"), final);
   } catch (error) {
     report.failure = error instanceof Error ? { message: error.message, stack: error.stack,
       causes: error instanceof AggregateError ? error.errors.map(value => String(value)) : [] } : String(error);
@@ -195,9 +209,9 @@ async function worker(mode: string) {
     stopped ??= "arm finished"; await drain(); clearInterval(timer);
     process.off("SIGINT", stop); process.off("SIGTERM", stop);
     report.afterBudget = live.budget.summary;
-    save(path.join(directory, "result.json"), report);
+    save(path.join(outputDirectory, "result.json"), report);
     database.close(); modelRegistry.stopBackgroundRefresh(); await encoder?.dispose?.(); live.close();
-    console.log(JSON.stringify({ arm, trial: trial.id, result: path.join(directory, "result.json"), failure: report.failure }));
+    console.log(JSON.stringify({ arm, trial: trial.id, result: path.join(outputDirectory, "result.json"), failure: report.failure }));
   }
 }
 
@@ -226,7 +240,12 @@ async function main() {
   for (const trial of manifest.protocol.trials.filter(value => value.phase === mode)) for (const arm of trial.order) {
     const file = path.join(root, trial.id, arm, "result.json");
     if (!existsSync(file) && await child("run", root, manifest.roots[arm], arm, trial.id)) throw new Error(`worker failed: ${trial.id} ${arm}`);
-    results.push(JSON.parse(readFileSync(file, "utf8")));
+    const recorded = JSON.parse(readFileSync(file, "utf8"));
+    const recovery = path.join(root, trial.id, arm, "arrival-recovery", "result.json");
+    if (args.includes("--resume-arrivals") && recorded.failure?.message === "full49 initialization cardinality changed" && !existsSync(recovery)) {
+      if (await child("resume-arrival", root, manifest.roots[arm], arm, trial.id)) throw new Error(`arrival recovery failed: ${trial.id} ${arm}`);
+    }
+    results.push(existsSync(recovery) ? JSON.parse(readFileSync(recovery, "utf8")) : recorded);
   }
   save(path.join(root, `${mode}-accounting.json`), { results, quality: "pending-independent-semantic-review", qualified: false });
 }

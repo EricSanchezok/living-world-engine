@@ -1,9 +1,16 @@
 import { describe, expect, it } from "vitest";
-import { JEV_QUALIFICATION_PROTOCOL, assertQualificationClock, semanticWorldHash, qualificationCatalogDocument } from "./jev-qualification-protocol";
+import { JEV_QUALIFICATION_PROTOCOL, assertQualificationClock, assertQualificationInitialState, semanticWorldHash, qualificationCatalogDocument } from "./jev-qualification-protocol";
 import { E3_TASKS } from "./step-e3-tasks";
 import { loadModelCatalog, parseModelCatalog } from "../../src/engine/models/model-catalog";
 
 describe("frozen Jev qualification protocol", () => {
+  it("accepts the real arrival revision while rejecting an already executed or partial world", () => {
+    const initial = { subjects: 49, revision: 1, step: 0, historyLength: 0 };
+    expect(() => assertQualificationInitialState(initial)).not.toThrow();
+    expect(() => assertQualificationInitialState({ ...initial, subjects: 48 })).toThrow("incomplete");
+    expect(() => assertQualificationInitialState({ ...initial, historyLength: 1 })).toThrow("advanced");
+    expect(() => assertQualificationInitialState({ ...initial, step: 1 })).toThrow("advanced");
+  });
   it("retains exact inference profiles without requiring unrelated account metadata", () => {
     const source = loadModelCatalog();
     for (const arm of ["A", "B", "C"] as const) {
