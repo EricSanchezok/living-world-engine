@@ -18,7 +18,11 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
   creationResponse?: unknown; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
   recipient?: string; resolvedRecipient?: string; transferAuthority?: string; reactionProgress?: string } = {}) {
   const f = directTestProvider(wire => {
-    if (!wire.questions) return options.creationResponse ?? { attempt: "复核已有证据", utterance: "观察与他人的说法需要分开核对；下一步询问消息来源。" };
+    if (!wire.questions) {
+      const context = directCreationContext(wire);
+      if (options.effectExpansion && context.chosenDirection) return { attempt: context.currentPlayerRequest, utterance: null, manner: null };
+      return options.creationResponse ?? { attempt: "复核已有证据", utterance: "观察与他人的说法需要分开核对；下一步询问消息来源。" };
+    }
     const context = wire.state as { perspective?: { agentId: string }; submittedAction?: { rawText: string }; concreteOperation?: string };
     if (options.failKeeper && context.perspective?.agentId === "keeper") return new Response("unavailable", { status: 503 });
     const selection: Record<string, string> = { operation: options.operation ?? "observe", target: options.target ?? "door", recipient: context.concreteOperation ? options.resolvedRecipient ?? "discover" : options.recipient ?? options.target ?? "none", tool: options.tool ?? "none",
@@ -59,6 +63,40 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("realizes a new player physical operation before adjudication even when the expressive-style answer is negative", async () => {
+    const f = await fixture({ operation: "use", target: "door", creationEnabled: true, expression: 0,
+      creationResponse: { attempt: "按已知步骤转动门上的控制装置，尝试开门", utterance: null, manner: null } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("条件满足后尝试打开门"));
+    expect(result.state.history[0]!.directEvent!.frames[0]!.expression?.attempt).toBe("按已知步骤转动门上的控制装置，尝试开门");
+    expect(f.transport).toHaveBeenCalledTimes(3);
+    expect(result.state.truth.facts).toEqual(f.world.initialState.truth.facts);
+  });
+  it("records a physical attempt with no admitted effects without claiming its requested result or repeating it", async () => {
+    const f = await fixture({ operation: "use", target: "door" });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("用门上的控制装置打开门"));
+    expect(result.committed.outcomes[0]).toMatchObject({ status: "partial", summary: expect.stringContaining("尚无可确认的状态变化") });
+    expect(result.state.truth.facts).toEqual(f.world.initialState.truth.facts);
+    const intent = readDirectState(result.state.executionState!, result.state).intents.player!;
+    expect(intent.status).toBe("waiting");
+    expect(JSON.stringify(result.state.agents.player!.belief.evidence)).not.toContain("行动已完成");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("gives report creation the latest observed properties without another character's private truth", async () => {
+    const options = { operation: "observe", target: "door", privateGateFact: true, creationEnabled: true, speech: "none" };
+    const f = await fixture(options); await f.engine.bootstrapAgents();
+    const observed = await f.engine.step(f.roster, f.request("查看门的状态"));
+    options.operation = "speak"; options.target = "guard"; options.speech = "create";
+    await f.engine.step(f.roster, f.request("如实报告刚才观察到的情况", 1));
+    const creations = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => !wire.questions);
+    const context = directCreationContext(creations.at(-1));
+    expect((context.currentObservedFacts as unknown[]).length).toBeGreaterThan(0);
+    expect(context.currentObservedFacts).toEqual(expect.arrayContaining(Object.values(observed.state.agents.player!.belief.claims).map(claim =>
+      expect.objectContaining({ predicate: claim.predicate, value: claim.value, stance: claim.stance }))));
+    expect(JSON.stringify(context.currentObservedFacts)).not.toContain("PRIVATE-CODE");
+    expect(replaySimulationState(f.engine.snapshot)).toEqual(f.engine.snapshot);
+  });
   it("keeps an NPC's immediate physical follow-through linked to the triggering action", async () => {
     const f = await fixture({ operation: "speak", target: "guard", speech: "create", creationEnabled: true, reactionProgress: "continue",
       creationResponse: { attempt: "准备交付物品", utterance: "现在给你。", manner: null } });

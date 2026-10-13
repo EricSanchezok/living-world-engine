@@ -77,7 +77,9 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const capabilities = control.capabilities.filter(capability => capability.knownToAgentIds.includes(agentId)).sort((a, b) => a.id.localeCompare(b.id));
   const questions: Record<string, DecisionQuestionV2> = {
     ...cognitiveQuestions(state, agentId),
-    operation: choice("operation", kinds), target: choice("target", targetCriteria), tool: choice("tool", targetCriteria),
+    operation: choice("operation", kinds),
+    target: choice("Target of the selected NEXT operation: observe inspects this object, use/change affects this object's properties, move approaches this destination. A machine operated through a control panel is the target; the panel is the tool. In 'inspect an object then report to a person', inspect the object first, not the later listener. Do not select a prerequisite object when the requested effect belongs to another known object.", targetCriteria),
+    tool: choice("Separate instrument used on the target, or the item discussed in speech. A control panel used to test a machine is a tool. Select none when no separate instrument is involved.", targetCriteria),
     observation_scope: choice("If observing, what is actually being inspected? Inspecting one's money, food or possessions selects inventory; reviewing memories selects the reflect operation.", {
       target: "The selected external object", surroundings: "The immediate surroundings", inventory: "The actor's own actual inventory and resources",
     }),
@@ -113,7 +115,16 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   if (capabilities.length) questions.capability = choice("capability", { none: "Ordinary action without a learned capability", ...Object.fromEntries(capabilities.map(capability =>
     [capability.id, { description: capability.description, applicability: capability.applicability, effect: capability.effectDescription }])) });
   if (goals.length) questions.goal = choice("goal", { none: "Respond to the situation without selecting a goal", ...Object.fromEntries(goals.map(goal => [goal.id, goal.description])) });
-  const context = { perspective: view.state, submittedAction: external ?? null, intent: { goalId: intent.goalId, wakeReasons: intent.wakeReasons,
+  const currentRequestReceipts = external ? state.history.flatMap(entry => {
+    const event = entry.directEvent;
+    if (!event) return [];
+    return event.frames.filter(frame => frame.actorId === agentId && frame.submissionId === external.submissionId).map(frame => ({
+      actionKind: frame.kind, attempted: frame.expression?.attempt ?? frame.proposal.rawText,
+      outcome: event.outcomes.find(outcome => outcome.proposalId === frame.id)?.summary ?? null,
+      observed: event.observations.filter(observation => observation.observerId === agentId).map(observation => observation.summary),
+    }));
+  }) : [];
+  const context = { perspective: view.state, submittedAction: external ?? null, currentRequestReceipts, intent: { goalId: intent.goalId, wakeReasons: intent.wakeReasons,
     recentOutcomeIds: intent.recentOutcomeIds }, latestObservedEvidence: orderedValues(agent.belief.evidence).filter(evidence => evidence.step === agent.observationCursorStep),
     actionKinds: kinds } as unknown as JsonValue;
   const inputHash = contentHash({ perspective: view.state, submittedAction: external ?? null, goal: intent.goalId });
@@ -157,6 +168,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const needsExpression = !preparatoryFor && (
     operation === "speak" && (!external || !literal) ||
     operation === "reflect" && speech === "create" ||
+    external && ["use", "change"].includes(operation) && (!questions.capability || selected(answers, "capability") === "none") ||
     answers.expression?.type === "noul" && answers.expression.noul >= 0.5);
   if (needsExpression && input.creationEnabled) {
     const system = loadPromptAsset(external ? "system/player-expression.md" : "system/direct-utterance.md"), userPrompt = loadPromptAsset("user/direct-utterance.md");
@@ -168,6 +180,8 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
           ? "Request the other person's action; do not offer payment or accept any new terms" : selected(answers, "dialogue"), playerControlled: Boolean(external),
         currentPlayerRequest: external?.rawText ?? null,
         currentHoldings: (view.state as { mechanics: { quantities: JsonValue } }).mechanics.quantities,
+        currentObservedFacts: orderedValues(agent.belief.claims).map(claim => ({ subject: agent.belief.localEntities[claim.subjectId]?.name,
+          predicate: claim.predicate, value: claim.value, description: claim.description, stance: claim.stance })) as unknown as JsonValue,
         exactQuotes: quotes, expression: operation === "reflect" ? "Private reflection; do not deliver to anyone." : "Concrete attempted behavior and actual words before execution. Outcomes are not yet decided." },
       schema: z.object({ attempt: z.string().optional(), utterance: z.string().nullable().optional(), manner: z.string().nullable().optional() }), jsonExamplePolicy: "omit" });
     expression = { attempt: generated.value.attempt?.trim() || text || actionLabels[operation as ActionKind] || "尝试行动",

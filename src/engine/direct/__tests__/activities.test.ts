@@ -1,7 +1,7 @@
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { loadWorldScript } from "../../../script/world-loader";
-import { directTestProvider, nativeAnswer } from "../../testing/direct-provider";
+import { directTestProvider, nativeAnswer, directCreationContext } from "../../testing/direct-provider";
 import { DirectWorldAlgorithm } from "../algorithm";
 import { SimulationEngine } from "../../runtime/simulation";
 import { historyReplayBaseHash } from "../../runtime/history-replay";
@@ -21,6 +21,7 @@ function option(question: DecisionQuestionV2, predicate: (value: unknown) => boo
 async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "construct" | "ongoing" | "wait" = "repair", deadline = 120) {
   let extensionUsed = false;
   const f = directTestProvider(wire => {
+    if (!wire.questions && directCreationContext(wire).chosenDirection) return { attempt: "使用材料完成请求的具体操作", utterance: null, manner: null };
     if (!wire.questions && mode === "construct") return { description: "制作可见提示牌", applicability: "有适用的材料时制作", effectDescription: "制成一块可见提示牌",
       effects: [{ kind: "object", name: "提示牌", description: "现场制作的提示牌。", placement: "target" }] };
     if (!wire.questions) return { description: "临时隔振", applicability: "用现有缓冲材料隔离设备振动", effectDescription: "设备获得可观察的临时隔振状态",
@@ -157,10 +158,12 @@ describe("direct activities use code-owned mechanics", () => {
     const f = await fixture("extend-world"); const first = await f.act("用缓冲材料临时隔离设备振动");
     expect(readDirectState(first.state.executionState!, first.state).capabilities).toHaveLength(1);
     expect(first.committed.observations.find(packet => packet.observerId === "inspector")?.summary).toContain("振动暂时隔离");
-    expect(f.transport).toHaveBeenCalledTimes(4);
+    expect(f.transport).toHaveBeenCalledTimes(5);
     const second = await f.act("复用工程师实际演示的隔振方法", "inspector");
-    expect(f.transport).toHaveBeenCalledTimes(6);
-    expect(f.transport.mock.calls.filter(([, init]) => !JSON.parse(String(init?.body)).questions)).toHaveLength(1);
+    expect(f.transport).toHaveBeenCalledTimes(7);
+    expect(f.transport.mock.calls.filter(([, init]) => {
+      const wire = JSON.parse(String(init?.body)); return !wire.questions && !directCreationContext(wire).chosenDirection;
+    })).toHaveLength(1);
     expect(replaySimulationState(second.state)).toEqual(second.state);
   });
   it("queues shared console contention and grants capacity only after the earlier action settles", async () => {

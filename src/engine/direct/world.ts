@@ -101,7 +101,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       { planned: `Use the proposed ${frame.durationSeconds} seconds`, ...Object.fromEntries(durations.map(seconds => [`s${seconds}`, `${seconds} seconds`])) });
     if (frame.kind === "move") questions[`${prefix}_movement`] = question("Does this movement enter the target as a place, or merely approach an object/person without entering its interior? Standing beside a machine does not put the actor inside it.", frame as unknown as JsonValue,
       { enter: "Enter the selected destination as a place", near: "Approach the target within its surrounding place" });
-    if (frame.submissionId || frame.causeActionId) questions[`${prefix}_request_progress`] = question("Does this single action KIND cover every immediately authorized part of the submitted request or this NPC's immediate response? Movement alone does not perform a requested gesture, repair or conversation. A non-null utterance is spoken alongside this action, including a move/change/use; never repeat those already included words. Speech also includes any simultaneous expressive gesture described in ActionExpression: waving while greeting completes both. An observation without an utterance does not speak or build. Select continue when a distinct next step is already authorized and does not need another person's reply; select wait only when new evidence or consent is genuinely required. For an NPC, continue only its concrete immediate follow-through, such as actually handing over goods after saying it is doing so; a general long-term goal or an optional future plan is not continuation of this response.", frame as unknown as JsonValue,
+    if (frame.submissionId || frame.causeActionId) questions[`${prefix}_request_progress`] = question("Assuming THIS concrete action and its admitted immediate effects have settled, does it cover the submitted request or this NPC's immediate response? An if/otherwise request has alternative branches: completing its applicable branch completes that request, without then doing the other branch. A completed repair does not authorize testing unless the current request also asks for testing; the Agent's broader goal does not authorize extra work. Movement alone does not perform a requested gesture, repair or conversation. A non-null utterance is spoken alongside this action, including a move/change/use; never repeat those already included words. Speech also includes any simultaneous expressive gesture described in ActionExpression: waving while greeting completes both. An observation without an utterance does not speak or build. Select continue only when a distinct remaining step is already authorized and does not need another person's reply; select wait only when new evidence or consent is genuinely required. For an NPC, continue only its concrete immediate follow-through, such as actually handing over goods after saying it is doing so; a general long-term goal or an optional future plan is not continuation of this response.", frame as unknown as JsonValue,
       { complete: "This attempt handles the submitted action; any long-term goal remains separate",
         continue: "Only a prerequisite is handled; another concrete step is already authorized by this input",
         wait: "The next step needs an actual reply, new evidence or a new player decision" });
@@ -256,6 +256,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     const prefix = `a${index}`, verdict = selected(answers, `${prefix}_outcome`), source = sourceFor(frame);
     const durationChoice = answers[`${prefix}_duration`] ? selected(answers, `${prefix}_duration`) : "planned";
     const duration = durationChoice === "planned" ? frame.durationSeconds : Number(durationChoice.slice(1));
+    const ongoing = Boolean(frame.temporalProfileId && state.truth.mechanics.temporalProfiles[frame.temporalProfileId]?.kind === "ongoing" &&
+      !/\d+\s*(秒|分钟|小时|seconds?|minutes?|hours?)/iu.test(frame.proposal.rawText));
     frame.durationSeconds = duration;
     frame.dueAtSeconds = Math.max(state.truth.elapsedSeconds + 1, frame.startedAtSeconds + duration);
     let status: ActionOutcome["status"] = expansionFailures.has(frame.id) || capabilityFailures.has(frame.id) ? "blocked"
@@ -354,10 +356,15 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         }
       }
       const expansion = worldExpansions.get(frame.id);
+      if (["use", "change"].includes(frame.kind)) {
+        const noConfirmedEffect = !ongoing && operations.length === 0 && randomRequests.length === 0;
+        detail = ongoing ? "你已开始持续进行这项活动。" : noConfirmedEffect ? "你作出了这次尝试，尚无可确认的状态变化。" : "本次操作已执行，具体结果以观察到的状态为准。";
+        if (noConfirmedEffect) status = "partial";
+      }
       if (expansion) { operations.push(...expansion.operations); detail += ` ${expansion.draft.description}`; }
       const transaction = structuredClone(projected);
       try { for (const operation of operations) applyWorldDeltaOperation(transaction, operation); projected = transaction; }
-      catch (error) { operations = []; status = "blocked"; detail = error instanceof Error && error.message === "insufficient quantity" ? "可用资源不足，这次转移没有发生。" : "当前状态不允许完成这次行动。"; }
+      catch (error) { operations = []; status = "blocked"; detail = error instanceof Error && error.message === "insufficient quantity" ? "可用资源不足，这次操作没有完成。" : "当前状态不允许完成这次行动。"; }
     }
     const expansion = worldExpansions.get(frame.id);
     const visibleFacts = [...visibility].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "visible").map(([, fact]) => fact);
@@ -375,7 +382,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       namedEntityIds: [...entityNames].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "named").map(([, entityId]) => entityId),
       randomRequests: operations.length ? randomRequests : [], randomBindings: operations.length ? randomBindings : [],
       sharedClaims: [...claims].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "claim").map(([, claim]) => claim),
-      ongoing: frame.temporalProfileId ? state.truth.mechanics.temporalProfiles[frame.temporalProfileId]?.kind === "ongoing" && !/\d+\s*(秒|分钟|小时|seconds?|minutes?|hours?)/iu.test(frame.proposal.rawText) : false,
+      ongoing,
       requestProgress: frame.submissionId || frame.causeActionId ? selected(answers, `${prefix}_request_progress`) as PreparedDirectAction["requestProgress"] : "complete" });
   }
   return { prepared, reads: view.reads, audits };
