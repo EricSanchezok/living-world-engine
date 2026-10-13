@@ -22,6 +22,11 @@ describe("immutable narrative paragraphs", () => {
     expect(() => renderNarrativeParagraph("[[speech-ffff]]", source)).toThrow("undelivered");
     expect(() => renderNarrativeParagraph("[[invalid]]", source)).toThrow("unresolved");
     expect(() => renderNarrativeParagraph("店主说：“我同意赊账。”", source)).toThrow("differs from delivered");
+    expect(renderNarrativeParagraph("店主说：“三枚金币；我还没同意赊账。”[[speech-ab12]]", source))
+      .toBe("店主说：“三枚金币；我还没同意赊账。”");
+    const repeated = structuredClone(source); repeated.speech.push({ ...source.speech[0]!, id: "speech-ab13" });
+    expect(renderNarrativeParagraph("[[speech-ab12]][[speech-ab13]]", repeated))
+      .toBe("“三枚金币；我还没同意赊账。”“三枚金币；我还没同意赊账。”");
   });
   it("keeps factual speech when the prose service is unavailable", () => {
     expect(narrativeFallback(source)).toBe("店主说：“三枚金币；我还没同意赊账。”");

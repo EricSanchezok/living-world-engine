@@ -148,7 +148,9 @@ export function renderNarrativeParagraph(text: string, source: ScenePacket): str
     return `“${speech.utterance}”`;
   }).trim();
   if (!rendered || /\[\[|\]\]/u.test(rendered)) throw new Error("Narrative paragraph is empty or contains an unresolved reference");
-  return rendered;
+  // A literal quote followed by its reference can produce the same utterance twice.
+  return rendered.replace(/(“[^”]+”)(?:\s*\1)+/gu, (repeated, quote: string) =>
+    source.speech.filter(speech => speech.utterance === quote.slice(1, -1)).length === 1 ? quote : repeated);
 }
 export function requireDeliveredSpeech(source: ScenePacket, paragraphs: string[]): void {
   const text = paragraphs.join("\n");
