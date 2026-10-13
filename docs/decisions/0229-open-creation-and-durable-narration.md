@@ -29,6 +29,8 @@ Development probes exposed invented props, actions and altered dialogue. The pub
 
 Player free-form interpretation uses the pinned DeepSeek decision profile when creation is enabled. This retains one typed action-selection request while giving conditional consent, compound instructions and linguistic limits to the stronger language interpreter. Native-only interpretation produced false waits after repeated matching offers in continuous play. Jev retains autonomous action selection and world adjudication. The cost is a larger DeepSeek request share and measured interpretation latency; creation-disabled ordinary-action experiments retain native interpretation. The narrator receives executed observations without the original compound request, preventing an unperformed later instruction from becoming apparent scene evidence.
 
+The language-model wire carries only selected keys and numbers. Code reconstructs answer types from the questions. Repeating type labels adds no decision information and creates avoidable serialization failures; native provider diagnostics keep their original representation.
+
 ## Pros and Cons of the Options
 
 - Templates plus paraphrasing is cheap but retains limited behavior and cannot support new interactive content.

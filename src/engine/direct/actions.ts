@@ -26,8 +26,27 @@ function choice(field: string, criteria: Record<string, string | Record<string, 
 }
 export function literalNumbers(text: string): number[] {
   const values = [...text.matchAll(/(?:^|[^\d.])(\d+(?:\.\d+)?)(?![\d.])/gu)].map(match => Number(match[1]));
-  const small: Record<string, number> = { 一: 1, 二: 2, 两: 2, 三: 3, 四: 4, 五: 5, 六: 6, 七: 7, 八: 8, 九: 9, 十: 10 };
-  for (const match of text.matchAll(/[一二两三四五六七八九十](?=[个枚块份升米单位秒分钟小时])/gu)) values.push(small[match[0]]!);
+  const digits: Record<string, number> = { 零: 0, 〇: 0, 一: 1, 二: 2, 两: 2, 三: 3, 四: 4, 五: 5, 六: 6, 七: 7, 八: 8, 九: 9 };
+  const units: Record<string, number> = { 十: 10, 百: 100, 千: 1000, 万: 10000, 亿: 100000000 };
+  // Whole numeral runs are candidates; interpretation chooses their role and unit.
+  // Do not restrict discovery to a fixed list of classifiers such as pieces or liters.
+  for (const [token] of text.matchAll(/[零〇一二两三四五六七八九十百千万亿]+(?:点[零〇一二两三四五六七八九]+)?/gu)) {
+    const [integer, fraction] = token.split("点");
+    let total = 0, section = 0, digit = 0;
+    if (!/[十百千万亿]/u.test(integer!)) total = Number([...integer!].map(char => digits[char]).join(""));
+    else {
+      for (const char of integer!) {
+        if (char in digits) { digit = digits[char]!; continue; }
+        const unit = units[char]!;
+        if (unit < 10000) section += (digit || 1) * unit;
+        else if (unit === 10000) { total += (section + digit) * unit; section = 0; }
+        else { total = (total + section + digit) * unit; section = 0; }
+        digit = 0;
+      }
+      total += section + digit;
+    }
+    values.push(total + (fraction ? Number(`0.${[...fraction].map(char => digits[char]).join("")}`) : 0));
+  }
   return [...new Set(values.filter(value => Number.isFinite(value) && value > 0))];
 }
 export function literalUtterances(text: string): string[] {
@@ -90,7 +109,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       none: "Current surroundings; no more specific known place",
       ...Object.fromEntries(known.map(([id, entity]) => [id, { name: entity.name, description: entity.description }])),
     }) } : {}),
-    amount: choice("amount", { unknown: "No established amount", ...Object.fromEntries(amounts.map((amount, index) => [`n${index}`, String(amount)])) }),
+    amount: choice("The actual quantity of the selected resource authorized by this action or its established terms. A deadline, duration, code or unrelated goal number is not a payment amount. Select unknown if the intended quantity is not among the candidates; never substitute another number.", { unknown: "No established amount", ...Object.fromEntries(amounts.map((amount, index) => [`n${index}`, String(amount)])) }),
     speech: choice("The actual words THIS speaker should say next. For an NPC answering a question, select words that answer or acknowledge it, not a verbatim copy of the received question. Existing testimony is evidence, not a script to echo.", { none: "No speech", input: "The entire player input is already the literal utterance", create: "Realize the intended utterance naturally in this speaker's voice; action instructions are not literal speech",
       ...Object.fromEntries(quotes.map((quote, index) => [`q${index}`, quote])),
       ...Object.fromEntries(spans.map((span, index) => [`span${index}`, { literalWords: span }])) }),

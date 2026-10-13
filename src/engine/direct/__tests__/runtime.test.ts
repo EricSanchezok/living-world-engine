@@ -10,7 +10,7 @@ import { quantityId } from "../../runtime/runtime-id";
 import type { PolicyBinding, WorldAdvanceRequest } from "../../runtime/execution";
 import { WorldQuiescentError } from "../../runtime/execution";
 import { readDirectState } from "../state";
-import { speechSpans } from "../actions";
+import { speechSpans, literalNumbers } from "../actions";
 import { applyDirectCognition } from "../cognition";
 
 async function fixture(options: { operation?: string; target?: string; tool?: string; amount?: string; failKeeper?: boolean;
@@ -373,14 +373,21 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.state.history[0]!.directEvent!.frames[0]!.kind).toBe("move");
     expect(f.transport).toHaveBeenCalledTimes(2);
   });
-  it("transfers resources atomically and replays/restarts without charging twice", async () => {
+  it.each(["给守门人2枚灵石", "给守门人两颗灵石"])("transfers the selected amount atomically and replays without charging twice: %s", async text => {
     const f = await fixture({ operation: "transfer", target: "guard", amount: "n1" }); await f.engine.bootstrapAgents();
-    const result = await f.engine.step(f.roster, f.request("给守门人2枚灵石"));
+    const result = await f.engine.step(f.roster, f.request(text));
     const player = quantityId(result.state.worldHash, "spirit-stone", "player"), keeper = quantityId(result.state.worldHash, "spirit-stone", "keeper");
     expect(result.state.truth.quantities[player]!.amount).toBe(1); expect(result.state.truth.quantities[keeper]!.amount).toBe(22);
     const restored = new SimulationEngine(f.world, f.algorithm, JSON.parse(JSON.stringify(result.state)));
     expect(restored.snapshot.truth.quantities[player]!.amount).toBe(1);
     expect(replaySimulationState(result.state)).toEqual(result.state); expect(f.transport).toHaveBeenCalledTimes(2);
+  });
+  it("extracts complete Chinese numerals regardless of the following classifier", () => {
+    expect(literalNumbers("两节电池，十六瓶水，二十五张纸，两百零三根线，三点五升液体"))
+      .toEqual([2, 16, 25, 203, 3.5]);
+    expect(literalNumbers("一万二千三百四十五；一亿二千万；二〇二六"))
+      .toEqual([12345, 120000000, 2026]);
+    expect(literalNumbers("两节电池，120秒截止，2个组件")) .toEqual([120, 2]);
   });
   it("turns resource shortage into a local blocked outcome with no partial debit", async () => {
     const f = await fixture({ operation: "transfer", target: "guard", amount: "n1" }); await f.engine.bootstrapAgents();

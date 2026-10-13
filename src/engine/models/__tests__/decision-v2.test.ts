@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { executeDecisionV2, validateDecisionBatchV2, type DecisionRequestV2 } from "../decision-v2";
+import { executeDecisionV2, decisionOutputV2Schema, validateDecisionBatchV2, type DecisionRequestV2 } from "../decision-v2";
 import { contentHash } from "../model-audit";
 import { directTestProvider, nativeChoice } from "../../testing/direct-provider";
 import { ModelOutputError } from "../model-provider";
@@ -23,6 +23,18 @@ function answers(questions: DecisionRequestV2["batch"]["questions"]) {
       probabilities: { "0": 0.3, "1": 0.7, "2": 0 }, confidence: 0.3 }]));
 }
 describe("direct native decisions", () => {
+  it("uses bare values for language-model decisions and restores typed answers in code", async () => {
+    const input = { ...request(), profileId: "decision-deepseek" };
+    const schema = decisionOutputV2Schema(input.batch, false);
+    expect(schema.parse({ answers: { consent: "unknown", relevance: 0.9, urgency: 0.7 } })).toBeDefined();
+    expect(schema.safeParse({ answers: { consent: "invented", relevance: 0.9, urgency: 0.7 } }).success).toBe(false);
+    expect(schema.safeParse({ answers: answers(input.batch.questions) }).success).toBe(false);
+    const f = directTestProvider(wire => answers(wire.questions));
+    const result = await executeDecisionV2(f.gateway, input);
+    expect(result.answers).toEqual({ consent: { type: "choice", choice: "unknown", probabilities: null, confidence: null },
+      relevance: { type: "noul", noul: 0.9 }, urgency: { type: "score", score: 0.7, probabilities: null, confidence: null, legend: null } });
+    expect(f.transport).toHaveBeenCalledTimes(1);
+  });
   it("sends three independent primitives with structured questions and no program binding", async () => {
     const f = directTestProvider(wire => {
       expect(wire.questions.consent!.instructions).toMatchObject({ task: { terms: ["pay", "deliver"] } });

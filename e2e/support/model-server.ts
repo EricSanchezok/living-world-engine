@@ -81,8 +81,7 @@ const server = createServer(async (request, response) => {
     const scene = context.scene as { observations?: unknown[]; speech?: Array<{ id: string; speaker: string }> } | undefined;
     const decision = context.decision as { questions: Record<string, DecisionQuestionV2> } | undefined;
     const output = decision ? { answers: Object.fromEntries(Object.entries(decisionAnswers(decision.questions))
-      .map(([id, answer]) => [id, Object.fromEntries(Object.entries(answer)
-        .filter(([key]) => ["type", "choice", "score", "noul"].includes(key)))])) }
+      .map(([id, answer]) => [id, answer[String(answer.type)]])) }
       : context.localWorld && context.requestedAction ? { description: "No additional fixture content.", entities: [], facts: [], events: [] }
       : scene?.observations ? { paragraphs: scene.speech?.length
       ? scene.speech.map(speech => `${speech.speaker}说：[[${speech.id}]]`)

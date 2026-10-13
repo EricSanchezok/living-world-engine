@@ -63,6 +63,8 @@ export function decisionOutputV2Schema(batch: DecisionBatchV2, native: boolean) 
   const probability = z.number().min(0).max(1);
   const distribution = (keys: string[]) => z.object(Object.fromEntries(keys.map(id => [id, probability]))).strict();
   return z.object({ answers: z.object(Object.fromEntries(Object.entries(batch.questions).map(([id, question]) => {
+    if (!native) return [id, question.type === "choice" ? z.enum(Object.keys(question.criteria) as [string, ...string[]])
+      : question.type === "noul" ? probability : z.number().min(0).max(question.criteria.length - 1)];
     if (question.type === "noul") return [id, z.object({ type: z.literal("noul"), noul: probability }).strict()];
     const keys = question.type === "choice" ? Object.keys(question.criteria) : question.criteria.map((_, index) => String(index));
     const fields = question.type === "choice"
@@ -104,7 +106,11 @@ export async function executeDecisionV2(provider: StructuredModelProvider, reque
         ...prompt, promptVersion: prompt.version, context: { decision: part }, schema: decisionOutputV2Schema(part, native), jsonExamplePolicy: "omit" });
       audits.push(result.audit);
       return Object.fromEntries(Object.entries(result.value.answers).map(([id, raw]) => {
-        const answer = raw as DecisionAnswerV2;
+        const question = part.questions[id]!;
+        const answer: DecisionAnswerV2 = native ? raw as DecisionAnswerV2
+          : question.type === "choice" ? { type: "choice", choice: raw as string, probabilities: null, confidence: null }
+          : question.type === "noul" ? { type: "noul", noul: raw as number }
+          : { type: "score", score: raw as number, probabilities: null, confidence: null, legend: null };
         return [id, answer.type === "noul" ? answer : { ...answer,
           probabilities: native ? answer.probabilities : null, confidence: native ? answer.confidence : null,
           ...(answer.type === "score" ? { legend: native ? answer.legend : null } : {}) }];

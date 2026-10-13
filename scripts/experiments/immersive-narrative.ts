@@ -104,7 +104,7 @@ export const NARRATIVE_CONFIRMATION_RETIRED_V4: Flow[] = [
 ];
 
 // Fifth cohort, held out until the proposal/receipt boundary fixes are frozen.
-export const NARRATIVE_CONFIRMATION: Flow[] = [
+export const NARRATIVE_CONFIRMATION_RETIRED_V5: Flow[] = [
   { id: "harbor-salute", world: "blackmarsh", inputs: ["向码头上能听见的人喊：\"劳驾，谁知道进城该往哪儿走？\"", "向实际回答的人致谢，说明我想自己走，不需要带路。", "先留意他说的方向是否有能看见的通道，不立刻进城。"] },
   { id: "private-hesitation", world: "blackmarsh", inputs: ["和石阶附近的旅人搭话，问他是否也是初来此地。", "告诉他我对这地方不熟悉，但不承诺跟随任何人。", "在心里区分他亲自看到的事和只是听来的事，不把想法说出口。"] },
   { id: "respectful-refusal", world: "blackmarsh", inputs: ["向旅人问好，问他接下来打算做什么。", "告诉他我暂时不同行，想在港边多待一会。", "安静看看周围，保持刚才不同行的决定。"] },
@@ -117,6 +117,22 @@ export const NARRATIVE_CONFIRMATION: Flow[] = [
   { id: "freestanding-marker", world: "station-program-world", inputs: ["看看舱内有没有无主的硬纸包装片，可以折成小标记。", "若已经找到，就用同一块纸片折成三角形竖在泵旁，先不赋予它任何维修效果。", "请乔伊看看这个形状是否容易辨认，不让他把标记当作维修已经完成。"] },
   { id: "spoken-code", world: "station-program-world", inputs: ["只检查设备的公开标识，不向任何人打听秘密内容。", "请乔伊告诉我现在可以公开交给我的测试信息，包括必要的校验码。", "复述他确实告诉我的信息，并说明我尚未执行测试。"] },
   { id: "reservation-withdrawn", world: "station-program-world", inputs: ["对杜衡说：\"能先给我留一个密封组件吗？我还没有决定购买。\"", "告诉他不必保留了，我撤回这个请求，物资保持原样。", "听完他的答复后，核对我还没付出电池，也没有收到组件。"] },
+];
+
+// Sixth cohort, frozen for compact language-model answers and complete numeral candidates.
+export const NARRATIVE_CONFIRMATION: Flow[] = [
+  { id: "harbor-orientation", world: "blackmarsh", inputs: ["停在石阶上，看看附近哪些人正在闲着，哪些正忙着。", "向身边确实看见的旅人问：\"你好，你也在找地方避雨吗？\"", "说明我只是问问情况，目前没有约定与他同行。"] },
+  { id: "careful-directions", world: "blackmarsh", inputs: ["留意周围能问路的人，先认清对方的外观。", "向眼前的人询问拱门那边通向哪里，不要求他陪同。", "把对方说的作为线索，暂时留在码头，不声称亲自走过。"] },
+  { id: "quiet-thought", world: "blackmarsh", inputs: ["环顾周围，辨认两家能看清招牌的店。", "只在心里比较这两家店的用途，别把想法说出口。", "向路边旅人说我打算稍后再去看看，现在仍站在这里。"] },
+  { id: "unused-cloth", world: "blackmarsh", inputs: ["在码头公共墙角找找有没有可借用的旧布，不动已有私人物品。", "若发现旧布，就先问附近的人能否借来擦一擦行囊；否则说明还没找到。", "告诉他我暂时不用了，没有拿走东西，也没有许诺报酬。"] },
+  { id: "dockside-witness", world: "blackmarsh", inputs: ["看看拱门附近是否有暂时停下活计、能交谈的普通码头工人。", "向实际看见的工人问港口今天是否一直下雨，不追问私人事务。", "感谢他回答，说明我会把他的经历与自己看到的情况分开记。"] },
+  { id: "shop-boundary", world: "blackmarsh", inputs: ["观察金匠店的招牌和面向街道的入口。", "走到金匠店门口，仍然留在店外，也不触碰商品。", "看看从门外实际能辨认哪些陈设，看不见的部分不猜测。"] },
+  { id: "two-cell-purchase", world: "station-program-world", inputs: ["向杜衡问清用能量电池换一个密封组件的条件。", "对他说：\"如果是两节能量电池换一件，我同意。请你确认。\"", "若他也已经同意这个价格，就实际交出两节能量电池；否则只问清条件。", "检查剩下的电池和已经交付的组件，不重复支付。"] },
+  { id: "repair-prerequisites", world: "station-program-world", inputs: ["查看泵目前的故障与测试状态，先不动工具。", "问乔伊在开始维修前哪些条件确实具备、哪些仍需确认。", "告诉他我理解这些条件，但此刻还没有开始检修。"] },
+  { id: "corrected-claim", world: "station-program-world", inputs: ["故意对杜衡说：\"组件你已经给我了。\"实际上我还没有取得它。", "查看我身上到底有没有密封组件，不进行任何交换。", "依据真实持有量纠正之前的话，不追加新的交易承诺。"] },
+  { id: "folded-card", world: "station-program-world", inputs: ["找一小张明确可用的废纸板，准备在安全位置做个可辨认的标记。", "若找到，就把原来的纸板折成直角，放到泵旁空处；不要改变泵的状态。", "请杜衡辨认这块折过的纸板，说明它仅是标记，不表示维修已完成。"] },
+  { id: "test-information", world: "station-program-world", inputs: ["查看压力测试设备的公开说明，先不询问私有信息。", "问乔伊愿意告诉我哪些启动要求与校验信息。", "只复述他真正透露的内容，并明确说测试尚未开始。"] },
+  { id: "no-reservation", world: "station-program-world", inputs: ["问杜衡能否替我暂存一个组件，但我还没承诺付款。", "对他说：\"我决定先不预留，刚才的请求撤回。\"", "安静查看物资是否仍归原主，不交付也不取走任何东西。"] },
 ];
 
 export const NARRATIVE_CONTINUOUS: Flow[] = [
@@ -136,7 +152,7 @@ export const NARRATIVE_CONTINUOUS: Flow[] = [
 async function main() {
   const phase = process.argv[2] ?? "development", selected = process.argv[3];
   const flows = (phase === "development" ? NARRATIVE_DEVELOPMENT : phase === "confirmation" ? NARRATIVE_CONFIRMATION
-    : phase === "regression" ? [...NARRATIVE_CONFIRMATION_RETIRED, ...NARRATIVE_CONFIRMATION_RETIRED_V2, ...NARRATIVE_CONFIRMATION_RETIRED_V3, ...NARRATIVE_CONFIRMATION_RETIRED_V4, ...NARRATIVE_CONFIRMATION, ...NARRATIVE_CONTINUOUS]
+    : phase === "regression" ? [...NARRATIVE_CONFIRMATION_RETIRED, ...NARRATIVE_CONFIRMATION_RETIRED_V2, ...NARRATIVE_CONFIRMATION_RETIRED_V3, ...NARRATIVE_CONFIRMATION_RETIRED_V4, ...NARRATIVE_CONFIRMATION_RETIRED_V5, ...NARRATIVE_CONFIRMATION, ...NARRATIVE_CONTINUOUS]
     : phase === "continuous" ? NARRATIVE_CONTINUOUS : []).filter(flow => !selected || selected.split(",").includes(flow.id));
   if (!flows.length) throw new Error("Choose development, regression, confirmation or continuous and optional comma-separated flow IDs");
   const root = path.resolve(".livingworld-benchmarks/jev-engine"), trial = `narrative-${phase}-${Date.now()}`;

@@ -1367,7 +1367,7 @@ export function deterministicModelOutput(profileId: string, context: unknown): u
   }
   const decision = (context as { decision?: { questions: Record<string, { criteria: Record<string, unknown> }> } }).decision;
   if (decision && Object.keys(decision.questions).every(key => key.startsWith("paragraph"))) return {
-    answers: Object.fromEntries(Object.keys(decision.questions).map(key => [key, { type: "choice", choice: "grounded" }])) };
+    answers: Object.fromEntries(Object.keys(decision.questions).map(key => [key, "grounded"])) };
   const scene = (context as { scene?: { observations: Array<{ summary: string }>; speech: Array<{ id: string }> } }).scene;
   if (scene) return { paragraphs: scene.speech.length ? scene.speech.map(speech => `[[${speech.id}]]`)
     : [scene.observations.map(observation => observation.summary).join("\n")] };
