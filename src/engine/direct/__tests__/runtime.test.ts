@@ -11,11 +11,12 @@ import type { PolicyBinding, WorldAdvanceRequest } from "../../runtime/execution
 import { WorldQuiescentError } from "../../runtime/execution";
 import { readDirectState } from "../state";
 import { speechSpans } from "../actions";
+import { applyDirectCognition } from "../cognition";
 
 async function fixture(options: { operation?: string; target?: string; tool?: string; amount?: string; failKeeper?: boolean;
   observationScope?: string; speech?: string; creationEnabled?: boolean; privateGateFact?: boolean; named?: boolean;
   creationResponse?: unknown; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
-  recipient?: string; resolvedRecipient?: string; transferAuthority?: string } = {}) {
+  recipient?: string; resolvedRecipient?: string; transferAuthority?: string; reactionProgress?: string } = {}) {
   const f = directTestProvider(wire => {
     if (!wire.questions) return options.creationResponse ?? { attempt: "复核已有证据", utterance: "观察与他人的说法需要分开核对；下一步询问消息来源。" };
     const context = wire.state as { perspective?: { agentId: string }; submittedAction?: { rawText: string }; concreteOperation?: string };
@@ -30,6 +31,7 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
       if (/_entity\d+_name$/u.test(id)) value = options.named ? "named" : "unnamed";
       else if (/_entity\d+$/u.test(id)) value = "visible";
       if (id.endsWith("_world_expansion")) value = options.introduce ? "introduce" : "none";
+      if (id.endsWith("_request_progress")) value = options.reactionProgress ?? "complete";
       if (id === "accept") value = "apply";
       if (id.endsWith("_expression")) value = options.effectExpansion ? "expand" : "existing";
       if (id.endsWith("_movement")) value = options.movement ?? "enter";
@@ -57,6 +59,17 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("keeps an NPC's immediate physical follow-through linked to the triggering action", async () => {
+    const f = await fixture({ operation: "speak", target: "guard", speech: "create", creationEnabled: true, reactionProgress: "continue",
+      creationResponse: { attempt: "准备交付物品", utterance: "现在给你。", manner: null } });
+    await f.engine.bootstrapAgents();
+    const first = await f.engine.step(f.roster, f.request("请交付约定的物品"));
+    const second = await f.engine.step(f.roster, { expectedRevision: first.state.revision, trigger: "batch", externalActions: [] });
+    const control = readDirectState(second.state.executionState!, second.state);
+    expect(control.intents.keeper).toMatchObject({ status: "ready", causeActionId: first.state.history[0]!.directEvent!.frames[0]!.id });
+    expect(control.intents.keeper!.wakeReasons).toContain("reaction-progress");
+    expect(replaySimulationState(second.state)).toEqual(second.state);
+  });
   it("separates a shouted action from actual words and delivers open speech to nearby people", async () => {
     const f = await fixture({ operation: "speak", target: "broadcast", speech: "create", creationEnabled: true,
       creationResponse: { attempt: "向周围大喊", utterance: "还有谁？", manner: "提高声音" } });
@@ -118,6 +131,17 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.committed.observations.find(o => o.observerId === "player")?.scene).toMatchObject({ actionKind: "move", status: "succeeded" });
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
+  it("relocates a repurposed existing tool without creating another copy", async () => {
+    const f = await fixture({ operation: "use", target: "yard", tool: "door", effectExpansion: true, creationEnabled: true,
+      creationResponse: { description: "Move an existing object into the surrounding scene", applicability: "The object can be moved",
+        effectDescription: "The same object changes position", effects: [{ kind: "placement", subject: "tool", destination: "scene" }] } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("把已有的物件放到旁边"));
+    expect(Object.keys(result.state.truth.entities)).toEqual(Object.keys(f.world.initialState.truth.entities));
+    expect(result.state.truth.placements.gate).toBe(result.state.truth.placements.player);
+    expect(result.committed.outcomes[0]?.status).toBe("succeeded");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("can discover new ordinary content when the initial observation lacks evidence", async () => {
     const f = await fixture({ operation: "observe", observationScope: "surroundings", target: "none", outcome: "unknown", introduce: true, creationEnabled: true,
       creationResponse: { description: "庭院边发现一块无主碎木。", entities: [{ key: "scrap", kind: "object", name: "碎木", label: "一块碎木", appearance: "一块断裂的废弃木片。", placement: "scene" }], facts: [{ subject: "courtyard", predicate: "scrap-discovery", value: "碎木躺在院边。", description: "院边有碎木。" }, { subject: "scrap", predicate: "appearance", value: "碎木", description: "碎木" }], events: [] } });
@@ -125,6 +149,16 @@ describe("direct world through the actual simulation entry", () => {
     const result = await f.engine.step(f.roster, f.request("找找庭院里是否有无主碎木"));
     expect(Object.values(result.state.truth.entities).some(e => e.name === "碎木")).toBe(true);
     expect(result.committed.observations.find(o => o.observerId === "player")?.scene?.status).toBe("succeeded");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("allows the exploration creator to leave an established scene unchanged", async () => {
+    const f = await fixture({ operation: "observe", observationScope: "surroundings", target: "none", creationEnabled: true,
+      creationResponse: { description: "当前场景已足够清楚。", entities: [], facts: [], events: [] } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("再看看院子里已经见过的东西"));
+    expect(result.committed.outcomes[0]?.status).toBe("succeeded");
+    expect(result.state.truth.entities).toEqual(f.world.initialState.truth.entities);
+    expect(f.transport).toHaveBeenCalledTimes(3);
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
   it("does not silently turn an unrepresented player attempt into observation", async () => {
@@ -168,6 +202,14 @@ describe("direct world through the actual simulation entry", () => {
     expect(intent.activeSubmission?.submissionId).toBe("submission-0"); expect(intent.status).toBe("ready");
     expect(f.transport).toHaveBeenCalledTimes(2); expect(replaySimulationState(result.state)).toEqual(result.state);
   });
+  it("keeps an explicit quote unspoken while still discovering its intended listener", async () => {
+    const f = await fixture({ operation: "speak", target: "none", recipient: "discover", speech: "q0" }); await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request('找附近的旅人说：“刚才的事别外传。”'));
+    expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "observe", preparatoryFor: "speak", utterance: null });
+    expect(result.committed.observations.every(o => o.scene?.speech === null)).toBe(true);
+    expect(result.committed.observations.map(o => o.observerId)).toEqual(["player"]);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("resolves an inconsistent empty speech recipient without leaking to an unintended audience", async () => {
     const f = await fixture({ operation: "speak", recipient: "none", resolvedRecipient: "guard", speech: "q0" });
     await f.engine.bootstrapAgents();
@@ -210,6 +252,24 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.state.truth.facts).toEqual(f.world.initialState.truth.facts);
     expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
     expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("retains original memories without recursively embedding them in every reflection", async () => {
+    const f = await fixture({ operation: "reflect", speech: "none" }); await f.engine.bootstrapAgents();
+    const initial = f.engine.snapshot.agents.player!.belief.evidence;
+    for (let revision = 0; revision < 5; revision++) {
+      const result = await f.engine.step(f.roster, f.request("回顾已有记录", revision));
+      expect(result.committed.observations[0]!.summary.length).toBeLessThan(100);
+      for (const [id, evidence] of Object.entries(initial)) expect(result.state.agents.player!.belief.evidence[id]).toEqual(evidence);
+      expect(replaySimulationState(result.state)).toEqual(result.state);
+    }
+  });
+  it("does not add another inference when support leaves an existing belief unchanged", async () => {
+    const f = await fixture(); const state = structuredClone(f.world.initialState);
+    const claim = Object.values(state.agents.player!.belief.claims)[0]!;
+    claim.stance = "believed";
+    const before = structuredClone(state.agents.player!.belief.evidence);
+    applyDirectCognition(state, [{ agentId: "player", decisionHash: "a".repeat(64), goals: {}, beliefs: { [claim.id]: "supported" } }], 1);
+    expect(state.agents.player!.belief.evidence).toEqual(before);
   });
   it("does not disclose private truth even when the model selects it as perceptible", async () => {
     const f = await fixture({ privateGateFact: true }); await f.engine.bootstrapAgents();

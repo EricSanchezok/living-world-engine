@@ -56,7 +56,7 @@ export const NARRATIVE_CONFIRMATION_RETIRED: Flow[] = [
 ];
 
 // A new frozen cohort after the first confirmation exposed failures. The retired cohort is regression material.
-export const NARRATIVE_CONFIRMATION: Flow[] = [
+export const NARRATIVE_CONFIRMATION_RETIRED_V2: Flow[] = [
   { id: "brief-reply", world: "blackmarsh", inputs: ["朝背着行囊的旅人问声好，问他这儿平时也这么冷吗。", "只回答一句：\"嗯，我先缓口气。\"", "安静待片刻，看看他是继续说话还是忙自己的事。"] },
   { id: "confide", world: "blackmarsh", inputs: ["走近背着行囊的旅人，小声说：\"我初来乍到，有点拿不准这里的规矩。\"", "问他有没有踩过什么坑；不认识的地方不要装作去过。", "告诉他我只想听建议，还没决定照做。"] },
   { id: "public-notice", world: "blackmarsh", inputs: ["在港口的公共区域找找有没有告示，想了解本地的安排。", "若有告示就读上面能看清的内容；没找到就向附近的人询问。", "把刚才看到或听到的线索记下来，分清告示写的和别人猜测的。"] },
@@ -69,6 +69,22 @@ export const NARRATIVE_CONFIRMATION: Flow[] = [
   { id: "label-and-reuse", world: "station-program-world", inputs: ["找一小片无主废料，想放在检修区域做醒目的临时提示。", "若确实找到，就把它放到泵旁作为提醒物；不要把提醒当作维修。", "请乔伊看看这个提示是否能让后来的人注意到泵仍待检修。"] },
   { id: "decline-delegation", world: "station-program-world", inputs: ["问乔伊能否代我完成压力测试，先听他答复。", "告诉他我暂时撤回代测请求，不要继续安排这件事。", "再问他目前我们有哪些明确完成的工作，哪些只是说过而没做。"] },
   { id: "nonverbal-coordination", world: "station-program-world", inputs: ["不说话，抬手向乔伊示意暂停操作，等他反应。", "用明确的手势请他让出操作台旁的位置；如果他没懂，就再开口说明。", "站在原地说：\"谢谢，我只是想先看清楚，现在还不操作。\""] },
+];
+
+// Third cohort, frozen before any of these complete flows is executed.
+export const NARRATIVE_CONFIRMATION: Flow[] = [
+  { id: "harbor-welcome", world: "blackmarsh", inputs: ["向背行囊的旅人挥手，问他是不是也刚到港口。", "告诉他我想先安顿下来，问他是否认识能打听住宿的人。", "对他说：\"多谢，我先记下，还不急着作决定。\""] },
+  { id: "shop-threshold", world: "blackmarsh", inputs: ["从港区看看挂着金匠招牌的店铺，认清入口。", "走到金匠店门外，只朝里面打个招呼，不跨过门槛。", "若有人回应，就问现在是否方便进来看看；无人回应就安静等一会。"] },
+  { id: "traveler-story", world: "blackmarsh", inputs: ["跟石阶边的旅人聊聊，问他今天在等什么。", "听他讲自己的打算，追问一件他刚提到的事，不替他作主。", "把他的话当作个人说法记下，告诉他我还没有亲自确认过。"] },
+  { id: "ordinary-cloth", world: "blackmarsh", inputs: ["看看码头公共角落是否有可借来擦干行囊的旧布，不拿别人的私人物品。", "若找到旧布，先问附近的人它是否可以借用；没有找到就说明没找到。", "只有明确可以借用才擦一下行囊，随后把旧布放回原处。"] },
+  { id: "dock-work", world: "blackmarsh", inputs: ["沿着停船的地方看看有没有正在理缆绳的船工。", "向实际见到的船工问好，问今天的活计是否快结束了。", "听完答复后问他如何称呼，不要求他停下手里的工作。"] },
+  { id: "weather-attempt", world: "blackmarsh", inputs: ["伸出空手，试着让眼前的雨停下来；我没有施法能力。", "看一看刚才的尝试究竟有没有改变天气，不把愿望当事实。", "收回手，找一个可以暂时避雨的公共地方。"] },
+  { id: "counteroffer", world: "station-program-world", inputs: ["向杜衡打听组件的价格，询问能否少收一节电池。", "如果他坚持原价，就明确说我还不接受；不要替我付款。", "告诉他可以保留原条件，我想先和乔伊商量下一步。"] },
+  { id: "paid-exchange", world: "station-program-world", inputs: ["问杜衡一个密封组件要多少钱，听取明确条件。", "我说：\"如果价格是两节能量电池，我接受。\"", "按双方明确接受的两节电池价格实际付款，条件不一致则先询问。", "核对手里剩下的电池和收到的组件，若组件未到就请杜衡交付。"] },
+  { id: "promise-and-result", world: "station-program-world", inputs: ["对乔伊说：\"我准备去修泵，但现在还没有动手。\"", "请他指出目前已经能观察到的故障，别把我的打算算成成果。", "复述他实际指出的问题，并确认我仍未开始维修。"] },
+  { id: "paper-marker", world: "station-program-world", inputs: ["在检修舱找一张无主的废包装片，准备用来提醒其他人泵还不能用。", "若确实找到，把它折成能立住的提醒物放在泵旁，保持泵本身不变。", "请乔伊辨认这个提醒的意思，问他是否愿意向后来的人解释。"] },
+  { id: "code-disclosure", world: "station-program-world", inputs: ["只看泵外壳的公开标识，寻找测试校验码，不读取任何人的私有记录。", "向乔伊询问这轮测试需要什么校验码，以及何时才能用。", "复述他实际告知的内容，没告知的部分就承认还不知道。"] },
+  { id: "withdraw-request", world: "station-program-world", inputs: ["请乔伊考虑稍后帮我协调测试，先听答复，暂不开始。", "告诉他我改变主意，先撤回刚才的协调请求。", "看看设备和物资有没有实际变化，再确认有哪些事只是谈过。"] },
 ];
 
 export const NARRATIVE_CONTINUOUS: Flow[] = [
@@ -88,7 +104,7 @@ export const NARRATIVE_CONTINUOUS: Flow[] = [
 async function main() {
   const phase = process.argv[2] ?? "development", selected = process.argv[3];
   const flows = (phase === "development" ? NARRATIVE_DEVELOPMENT : phase === "confirmation" ? NARRATIVE_CONFIRMATION
-    : phase === "regression" ? NARRATIVE_CONFIRMATION_RETIRED
+    : phase === "regression" ? [...NARRATIVE_CONFIRMATION_RETIRED, ...NARRATIVE_CONFIRMATION_RETIRED_V2]
     : phase === "continuous" ? NARRATIVE_CONTINUOUS : []).filter(flow => !selected || selected.split(",").includes(flow.id));
   if (!flows.length) throw new Error("Choose development, regression, confirmation or continuous and optional comma-separated flow IDs");
   const root = path.resolve(".livingworld-benchmarks/jev-engine"), trial = `narrative-${phase}-${Date.now()}`;

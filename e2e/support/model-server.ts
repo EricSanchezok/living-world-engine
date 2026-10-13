@@ -75,7 +75,10 @@ const server = createServer(async (request, response) => {
       response.end(JSON.stringify({ model, answers, usage: { input_tokens: 100, output_tokens: 10 } })); return;
     }
     const scene = context.scene as { observations?: unknown[]; speech?: Array<{ id: string; speaker: string }> } | undefined;
-    const output = scene?.observations ? { paragraphs: scene.speech?.length
+    const decision = context.decision as { questions: Record<string, unknown> } | undefined;
+    const output = decision ? { answers: Object.fromEntries(Object.keys(decision.questions).map(id => [id, { type: "choice", choice: "grounded" }])) }
+      : context.localWorld && context.requestedAction ? { description: "No additional fixture content.", entities: [], facts: [], events: [] }
+      : scene?.observations ? { paragraphs: scene.speech?.length
       ? scene.speech.map(speech => `${speech.speaker}说：[[${speech.id}]]`)
       : ["你查看了眼前的情况。石门仍在面前，随身物资也清点清楚了。"] }
       : model === "e2e-truth" ? truthOutput(context) : agentOutput(context);

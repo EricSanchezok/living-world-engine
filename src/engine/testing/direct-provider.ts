@@ -25,8 +25,11 @@ export function directTestProvider(respond: (wire: DirectTestWire, call: number)
   const transport = vi.fn<typeof fetch>(async (_url, init) => {
     const wire = JSON.parse(String(init?.body));
     calls++;
-    const response = await (!wire.questions && create ? create(wire) : respond(wire, calls));
+    const decision = !wire.questions ? directCreationContext(wire).decision as { state: unknown; questions: Record<string, DecisionQuestionV2> } | undefined : undefined;
+    let response = await (decision ? respond({ ...wire, ...decision }, calls) : !wire.questions && create ? create(wire) : respond(wire, calls));
     if (response instanceof Response) return response;
+    if (decision) response = { answers: Object.fromEntries(Object.entries(response as Record<string, Record<string, unknown>>).map(([id, answer]) =>
+      [id, Object.fromEntries(Object.entries(answer).filter(([key]) => ["type", "choice", "score", "noul"].includes(key)))])) };
     if (!wire.questions) return Response.json({ id: `direct-${calls}`, model: wire.model, created: 1,
       choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(response) }, finish_reason: "stop" }],
       usage: { prompt_tokens: 100, completion_tokens: 10, total_tokens: 110 } });

@@ -198,7 +198,10 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
         ["succeeded", "partial"].includes(outcome.status) && intent.noProgressCount < 2 && !intent.activityId;
       if (frame.submissionId && !continueSubmission) { control.completedSubmissionIds.push(frame.submissionId); intent.activeSubmission = null; }
       if (continueSubmission) wakeIntent(control, frame.actorId, "submission-progress");
-      if (!intent.activityId && input.policyRoster[frame.actorId]?.kind === "model" && intent.noProgressCount < 2 &&
+      const continueReaction = !frame.submissionId && frame.causeActionId && control.prepared[frame.id]!.requestProgress === "continue" &&
+        ["succeeded", "partial"].includes(outcome.status) && intent.noProgressCount < 2 && !intent.activityId;
+      if (continueReaction) wakeIntent(control, frame.actorId, "reaction-progress", frame.causeActionId);
+      else if (!intent.activityId && input.policyRoster[frame.actorId]?.kind === "model" && intent.noProgressCount < 2 &&
         Object.values(source.agents[frame.actorId]!.character.goals).some(goal => goal.status === "active")) wakeIntent(control, frame.actorId, "action-result");
       if (!intent.activityId) delete control.prepared[frame.id];
       if (frame.capabilityId) {

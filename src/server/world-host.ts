@@ -628,7 +628,7 @@ export class WorldHost {
       const publish = async (paragraphs: string[]) => {
         if (published >= paragraphs.length) return;
         const ready = paragraphs.slice(published).map(paragraph => renderNarrativeParagraph(paragraph, beat.source));
-        const decision = await checkNarrativeGrounding(this.options.provider, scope, beat.source, ready, models.decision, models.fallback,
+        const decision = await checkNarrativeGrounding(this.options.provider, scope, beat.source, ready, models.fallback, models.fallback,
           Number.parseInt(contentHash([beat.id, beat.attempts, prefix.length + published]).slice(0, 10), 16));
         const choices = ready.map((_, index) => {
           const answer = decision.answers[`paragraph${index}`]; return answer?.type === "choice" ? answer.choice : "added_content";
@@ -661,7 +661,8 @@ export class WorldHost {
             kind: "model-audit", stage: "scene-narrative", owner: beat.id, round: 0, ordinal: beat.attempts + 1 }),
           promptVersion: NARRATIVE_PROMPT_VERSION, schemaName: "SceneNarrativeV1",
           system: NARRATIVE_SYSTEM, userPrompt: NARRATIVE_USER,
-          context: { scene: narrativeEvidence(beat.source), publishedPrefix: prefix,
+          context: { scene: narrativeEvidence(beat.source), playerFocus: beat.source.requestedAction,
+            focusMeaning: "The player's requested focus only; it does not establish that any requested action occurred. Only scene observations establish results.", publishedPrefix: prefix,
             previousScenes: document.narratives.filter(item => item.participantId === beat.participantId && item.id !== beat.id && item.segments.length)
               .slice(-3).map(item => item.segments.map(segment => segment.text).join("\n\n")),
             repair: beat.error },

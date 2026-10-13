@@ -44,4 +44,18 @@ describe("one cumulative live model budget", () => {
     expect(() => live.close()).toThrow("unsettled"); expect(() => live.beginTrial("another")).toThrow("during dispatch");
     settle(Response.json({ usage: { input_tokens: 10, output_tokens: 20 } })); await pending; await live.drain(); live.close();
   });
+  it("preserves terminal HTTP error bodies and their cost ceiling while permitting context recovery", async () => {
+    const root = directory(), live = createJevLiveBudget(root);
+    const response = await live.transport("typesafe-api", async () => Response.json({ detail: "context token limit exceeded" }, { status: 400 }))(
+      "https://unused.test", { body: JSON.stringify({ model: "jev-1.13.0" }) });
+    expect(response.status).toBe(400); expect(await response.text()).toContain("context token limit exceeded");
+    const held = live.budget.summary.reservedNanoCny;
+    expect(held).toBeGreaterThan(0); expect(live.budget.summary.blockingUnknown).toEqual([]);
+    expect(live.budget.summary.rejectedRequests).toHaveLength(1);
+    await live.transport("deepseek-api", async () => Response.json({ usage: { prompt_tokens: 10, completion_tokens: 4, total_tokens: 14, prompt_cache_hit_tokens: 2, prompt_cache_miss_tokens: 8 } }))(
+      "https://unused.test", { body });
+    await live.drain(); expect(live.budget.summary.phases.trajectory.httpRequests).toBe(2);
+    expect(live.budget.summary.reservedNanoCny).toBe(held); live.close();
+    const restored = createJevLiveBudget(root); expect(restored.budget.summary.reservedNanoCny).toBe(held); restored.close();
+  });
 });

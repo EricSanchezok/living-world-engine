@@ -88,14 +88,20 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       "This is an OPEN world with a partial initial catalog. When the actor explores an unestablished area or seeks an ordinary person/material absent from that catalog, should local creation propose a plausible discovery or arrival? Mere absence from the catalog does not mean absence from the world. Choose introduce for such a genuine opening, including meeting a local worker or finding ordinary scrap in a suitable workplace. Choose none for familiar complete scenes, implausible requests, conserved resources or established absence. This authorizes a draft for later judgment, not instant success.",
       frame as unknown as JsonValue, { none: "Existing world content suffices", introduce: "Introduce a reasonable persistent addition to the world" });
     const capability = decisions.control.capabilities.find(capability => capability.id === frame.capabilityId && capability.knownToAgentIds.includes(frame.actorId));
-    questions[`${prefix}_outcome`] = question("feasibility of this single concrete kind and its parameters, NOT completion of proposal.goal or the whole compound proposal.rawText. Speaking succeeds when actual words can be uttered; accepting terms does not require goods already delivered. Observing attempts to inspect the selected object or immediate surroundings; separate visibility questions decide what is learned.", frame as unknown as JsonValue,
+    const transfer = frame.kind === "transfer" ? { actionId: frame.id, sender: frame.actorEntityId, recipient: frame.targetEntityId,
+      resource: frame.quantityDefinitionId, amount: frame.amount,
+      currentlyOwnedBySender: orderedValues(state.truth.quantities).filter(quantity => quantity.holderId === frame.actorEntityId && quantity.definitionId === frame.quantityDefinitionId).reduce((sum, quantity) => sum + quantity.amount, 0),
+      senderPlace: state.truth.placements[frame.actorEntityId] ?? null, recipientPlace: frame.targetEntityId ? state.truth.placements[frame.targetEntityId] ?? null : null } : null;
+    questions[`${prefix}_outcome`] = question(transfer
+      ? "Can this willing sender hand THIS listed resource amount to THIS recipient now? The sender, resource, quantity and actual inventory are explicitly bound below. Judge only this handover and applicable social or physical restrictions, not the recipient paying again or completion of the sender's entire goal. A recipient who has already spent their payment can receive goods with zero currency remaining. An established exchange permits its second leg after the first actual payment. The kernel separately enforces inventory arithmetic. Earlier failed attempts do not themselves prohibit a fresh valid handover."
+      : "feasibility of this single concrete kind and its parameters, NOT completion of proposal.goal or the whole compound proposal.rawText. Speaking succeeds when actual words can be uttered; accepting terms does not require goods already delivered. Observing attempts to inspect the selected object or immediate surroundings; separate visibility questions decide what is learned.", (transfer ?? frame) as unknown as JsonValue,
       { succeeded: "The action can achieve its specified immediate effect", partial: "Only part of that immediate effect is achieved",
         failed: "The concrete attempted action cannot occur", unknown: "Evidence required for this immediate action is absent; speech need not already be true or accepted" });
     if (["move", "use", "change"].includes(frame.kind)) questions[`${prefix}_duration`] = question("required total duration, respecting explicit rules and the actual activity", frame as unknown as JsonValue,
       { planned: `Use the proposed ${frame.durationSeconds} seconds`, ...Object.fromEntries(durations.map(seconds => [`s${seconds}`, `${seconds} seconds`])) });
     if (frame.kind === "move") questions[`${prefix}_movement`] = question("Does this movement enter the target as a place, or merely approach an object/person without entering its interior? Standing beside a machine does not put the actor inside it.", frame as unknown as JsonValue,
       { enter: "Enter the selected destination as a place", near: "Approach the target within its surrounding place" });
-    if (frame.submissionId) questions[`${prefix}_request_progress`] = question("Does this single action KIND cover every immediately authorized part of the submitted request? Movement alone does not perform a requested gesture, repair or conversation. A non-null utterance is spoken alongside this action, including a move/change/use; never repeat those already included words. Speech also includes any simultaneous expressive gesture described in ActionExpression: waving while greeting completes both. An observation without an utterance does not speak or build. Select continue when a distinct next step is already authorized and does not need another person's reply; select wait only when new evidence or consent is genuinely required.", frame as unknown as JsonValue,
+    if (frame.submissionId || frame.causeActionId) questions[`${prefix}_request_progress`] = question("Does this single action KIND cover every immediately authorized part of the submitted request or this NPC's immediate response? Movement alone does not perform a requested gesture, repair or conversation. A non-null utterance is spoken alongside this action, including a move/change/use; never repeat those already included words. Speech also includes any simultaneous expressive gesture described in ActionExpression: waving while greeting completes both. An observation without an utterance does not speak or build. Select continue when a distinct next step is already authorized and does not need another person's reply; select wait only when new evidence or consent is genuinely required. For an NPC, continue only its concrete immediate follow-through, such as actually handing over goods after saying it is doing so; a general long-term goal or an optional future plan is not continuation of this response.", frame as unknown as JsonValue,
       { complete: "This attempt handles the submitted action; any long-term goal remains separate",
         continue: "Only a prerequisite is handled; another concrete step is already authorized by this input",
         wait: "The next step needs an actual reply, new evidence or a new player decision" });
@@ -226,11 +232,13 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   }
   const worldExpansions = new Map<string, WorldExpansion>();
   const expansionFailures = new Set<string>();
-  for (const [index, frame] of frames.entries()) if (answers[`a${index}_world_expansion`] && selected(answers, `a${index}_world_expansion`) === "introduce" &&
+  for (const [index, frame] of frames.entries()) if (answers[`a${index}_world_expansion`] && (selected(answers, `a${index}_world_expansion`) === "introduce" ||
+    frame.submissionId && frame.kind === "observe" && frame.observationScope !== "inventory" && frame.targetEntityId !== frame.actorEntityId && !frame.preparatoryFor) &&
     ["succeeded", "partial", "unknown"].includes(selected(answers, `a${index}_outcome`))) {
     try {
     const generated = await createWorldExpansion(state, definition, frame, decisions, view.state);
     audits.push(...generated.audits);
+    if (!generated.expansion.operations.length) continue;
     const admitted = await decisions.ask(null, { localWorld: view.state, action: frame, addition: generated.expansion.draft } as unknown as JsonValue,
       view.reads, { accept: question("Can this particular addition actually occur here, respecting existing facts, time, materials and private knowledge? Public appearance and descriptions must not reveal an established secret. It cannot manufacture a successful player outcome.", generated.expansion.draft as unknown as JsonValue,
         { apply: "Plausible and consistent; introduce it now", reject: "Conflicts or lacks necessary means", unknown: "Insufficient basis" }) });
@@ -324,6 +332,9 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
               const subjectId = effect.subject === "actor" ? frame.actorEntityId : effect.subject === "target" ? frame.targetEntityId : frame.toolEntityId;
               if (!subjectId) { status = "blocked"; detail = "能力缺少实际作用对象。"; break; }
               if (effect.kind === "condition") addCondition(effect.profileId, subjectId);
+              else if (effect.kind === "placement") operations.push({ kind: "place_entity", entityId: subjectId,
+                placementId: effect.destination === "actor" ? frame.actorEntityId : effect.destination === "target" ? frame.targetEntityId : state.truth.placements[frame.actorEntityId] ?? null,
+                ...source });
               else {
                 operations.push({ kind: "set_fact", fact: capabilityFact(state, frame, capability, effect, ordinal)!, ...source });
               }
@@ -364,7 +375,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       randomRequests: operations.length ? randomRequests : [], randomBindings: operations.length ? randomBindings : [],
       sharedClaims: [...claims].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "claim").map(([, claim]) => claim),
       ongoing: frame.temporalProfileId ? state.truth.mechanics.temporalProfiles[frame.temporalProfileId]?.kind === "ongoing" && !/\d+\s*(秒|分钟|小时|seconds?|minutes?|hours?)/iu.test(frame.proposal.rawText) : false,
-      requestProgress: frame.submissionId ? selected(answers, `${prefix}_request_progress`) as PreparedDirectAction["requestProgress"] : "complete" });
+      requestProgress: frame.submissionId || frame.causeActionId ? selected(answers, `${prefix}_request_progress`) as PreparedDirectAction["requestProgress"] : "complete" });
   }
   return { prepared, reads: view.reads, audits };
 }

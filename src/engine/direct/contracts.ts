@@ -50,6 +50,7 @@ export interface CapabilityDefinition {
 export type CapabilityEffect =
   | { kind: "fact"; subject: "actor" | "target" | "tool"; predicate: string; value: string | boolean; description: string }
   | { kind: "condition"; subject: "actor" | "target" | "tool"; profileId: string }
+  | { kind: "placement"; subject: "actor" | "target" | "tool"; destination: "actor" | "target" | "scene" }
   | { kind: "object"; name: string; description: string; placement: "actor" | "target" };
 /** A semantic decision saved before execution. No generated control flow or proof tree. */
 export interface PreparedDirectAction {

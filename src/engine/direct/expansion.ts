@@ -79,7 +79,6 @@ export function materializeExpansion(state: Readonly<SimulationState>, definitio
     addFact(subject, `detail:${index}`, fact.predicate, fact.value, fact.description);
   }
   for (const [index, event] of draft.events.entries()) addFact(sceneId, `event:${index}`, `occurrence-${idFor(frame, String(index))}`, event, event);
-  if (!operations.length) throw new Error("Expansion must introduce actual content");
   return { draft, operations, entities, facts };
 }
 

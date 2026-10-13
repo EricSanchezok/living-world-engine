@@ -12,6 +12,7 @@ const declaration = z.object({ description: z.string().min(1), applicability: z.
   effects: z.array(z.discriminatedUnion("kind", [
     z.object({ kind: z.literal("fact"), subject, predicate: z.string().min(1), value: z.union([z.string().min(1), z.boolean()]), description: z.string().min(1) }).strict(),
     z.object({ kind: z.literal("condition"), subject, profileId: z.string().min(1) }).strict(),
+    z.object({ kind: z.literal("placement"), subject, destination: z.enum(["actor", "target", "scene"]) }).strict(),
     z.object({ kind: z.literal("object"), name: z.string().min(1), description: z.string().min(1), placement: z.enum(["actor", "target"]) }).strict(),
   ])).min(1),
 }).strict();
@@ -40,6 +41,7 @@ export async function extendCapability(input: { state: Readonly<SimulationState>
       if (effect.kind !== "object" && effect.subject === "target" && !frame.targetEntityId) repairIssues.push("The action has no target");
       if (effect.kind !== "object" && effect.subject === "tool" && !frame.toolEntityId) repairIssues.push("The action has no tool");
       if (effect.kind === "object" && effect.placement === "target" && !frame.targetEntityId) repairIssues.push("The object placement has no target");
+      if (effect.kind === "placement" && effect.destination === "target" && !frame.targetEntityId) repairIssues.push("The destination has no target");
     }
     if (repairIssues.length) continue;
     const id = `capability-${contentHash(result.value).slice(0, 24)}`;

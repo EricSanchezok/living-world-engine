@@ -55,6 +55,11 @@ const phaseBudgetsSchema = z.array(z.strictObject({
 })).min(1).max(budgetPhases.length);
 const entrySchema = z.discriminatedUnion("kind", [
   z.strictObject({
+    kind: z.literal("hold_http_rejection"), id: z.string().min(1), statusCode: z.number().int().min(400).max(599),
+    reason: z.string().min(10), evidenceHash: hashSchema,
+    budgetHash: z.string(), previousHash: z.string().nullable(),
+  }),
+  z.strictObject({
     kind: z.literal("register_model_price"), priceId: z.string().min(1), price: reviewedPriceSchema,
     reason: z.string().min(10), evidenceHash: hashSchema,
     budgetHash: z.string(), previousHash: z.string().nullable(),
@@ -110,13 +115,14 @@ export class ExperimentBudgetError extends Error {
   constructor(message: string) { super(message); this.name = "ExperimentBudgetError"; }
 }
 
-/** Unknown sends block work unless explicitly quarantined at their full reserved ceiling. */
+/** Unknown sends block work; recorded terminal HTTP rejections retain their full cost ceiling without blocking recovery. */
 export class ExperimentBudget {
   private readonly reservations = new Map<string, Reservation>();
   private readonly settlements = new Map<string, ExperimentUsage>();
   private lastHash: string | null = null;
   private readonly liveRequests = new Set<string>();
   private readonly quarantines = new Map<string, Extract<Entry, { kind: "quarantine" }>>();
+  private readonly rejectedRequests = new Map<string, Extract<Entry, { kind: "hold_http_rejection" }>>();
   private readonly reconciledOverruns = new Set<string>();
   private readonly reviewedPrices = new Map<string, ExperimentPrice>();
   private readonly registeredPrices = new Map<string, ExperimentPrice>();
@@ -191,7 +197,8 @@ export class ExperimentBudget {
       phases, unsettled, reservedNanoCny,
       inFlight: unsettled.filter((id) => this.liveRequests.has(id)),
       unknown: unsettled.filter((id) => !this.liveRequests.has(id)),
-      blockingUnknown: unsettled.filter((id) => !this.liveRequests.has(id) && !this.quarantines.has(id)),
+      blockingUnknown: unsettled.filter((id) => !this.liveRequests.has(id) && !this.quarantines.has(id) && !this.rejectedRequests.has(id)),
+      rejectedRequests: [...this.rejectedRequests.values()].map(entry => structuredClone(entry)),
       quarantinedUnknown: unsettled.filter((id) => this.quarantines.has(id)),
       reconciledOverruns: [...this.reconciledOverruns],
       originalEstimatedPeakNanoCny, priceReviews: structuredClone(this.priceReviews),
@@ -238,7 +245,7 @@ export class ExperimentBudget {
       }
     } else if (entry.kind === "authorize_tranche") {
       const totals = this.summary;
-      if (totals.unsettled.some(id => !this.quarantines.has(id))) throw new ExperimentBudgetError("drain and resolve unknown usage before authorization");
+      if (totals.unsettled.some(id => !this.quarantines.has(id) && !this.rejectedRequests.has(id))) throw new ExperimentBudgetError("drain and resolve unknown usage before authorization");
       if (this.authorizations.some(item => item.id === entry.id || item.evidenceHash === entry.evidenceHash)) throw new ExperimentBudgetError("duplicate budget authorization");
       if (entry.priorExposureNanoCny !== totals.estimatedPeakNanoCny + totals.reservedNanoCny) throw new ExperimentBudgetError("authorization exposure binding mismatch");
       if (!Number.isSafeInteger(this.maximumNanoCny + entry.amountNanoCny)) throw new ExperimentBudgetError("authorization amount overflow");
@@ -262,7 +269,7 @@ export class ExperimentBudget {
       }
     } else if (entry.kind === "reallocate_phases") {
       const totals = this.summary;
-      if (totals.unsettled.some(id => !this.quarantines.has(id))) {
+      if (totals.unsettled.some(id => !this.quarantines.has(id) && !this.rejectedRequests.has(id))) {
         throw new ExperimentBudgetError("drain and resolve unknown usage before phase reallocation");
       }
       const original = (this.policy.phaseBudgets ?? []).flatMap(group => group.phases).sort();
@@ -294,7 +301,7 @@ export class ExperimentBudget {
         throw new ExperimentBudgetError("legacy budget cannot accept a model price binding");
       }
       const totals = this.summary;
-      if (totals.unsettled.filter((id) => !this.quarantines.has(id)).length >= (this.policy.maxConcurrentRequests ?? 1)) {
+      if (totals.unsettled.filter((id) => !this.quarantines.has(id) && !this.rejectedRequests.has(id)).length >= (this.policy.maxConcurrentRequests ?? 1)) {
         throw new ExperimentBudgetError("unsettled provider usage fills the request concurrency limit");
       }
       if ([...this.quarantines.keys()].some((id) => this.reservations.get(id)!.trialId === entry.trialId)) {
@@ -334,6 +341,10 @@ export class ExperimentBudget {
       }
       if (entry.kind === "reconcile_overrun" && !overrun) throw new ExperimentBudgetError("reviewed usage does not exceed the reservation");
       this.charge(entry.usage.input, entry.usage.output, entry.usage.cacheHit, reservation);
+    } else if (entry.kind === "hold_http_rejection") {
+      if (!this.reservations.has(entry.id) || this.settlements.has(entry.id) || this.rejectedRequests.has(entry.id) || this.quarantines.has(entry.id)) {
+        throw new ExperimentBudgetError("HTTP rejection requires an unresolved request and retained response evidence");
+      }
     } else if (!this.reservations.has(entry.id) || this.settlements.has(entry.id) || this.quarantines.has(entry.id)) {
       throw new ExperimentBudgetError("quarantine requires an unresolved, unquarantined request");
     }
@@ -359,6 +370,7 @@ export class ExperimentBudget {
       this.settlements.set(entry.id, entry.usage);
       if (entry.kind === "reconcile_overrun") this.reconciledOverruns.add(entry.id);
     }
+    else if (entry.kind === "hold_http_rejection") this.rejectedRequests.set(entry.id, entry);
     else this.quarantines.set(entry.id, entry);
     this.lastHash = contentHash(entry);
   }
@@ -383,6 +395,12 @@ export class ExperimentBudget {
 
   markUnknown(id: string): void {
     if (!this.reservations.has(id) || this.settlements.has(id)) throw new ExperimentBudgetError("unknown or already settled HTTP request");
+    this.liveRequests.delete(id);
+  }
+
+  /** A terminal response proves the send ended; absent usage remains reserved, never recorded as zero. */
+  holdHttpRejection(id: string, evidence: { statusCode: number; reason: string; evidenceHash: string }): void {
+    this.persist(entrySchema.parse({ kind: "hold_http_rejection", id, ...evidence, budgetHash: this.policyHash, previousHash: this.lastHash }));
     this.liveRequests.delete(id);
   }
 

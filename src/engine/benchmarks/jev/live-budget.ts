@@ -3,6 +3,7 @@ import { mkdirSync, openSync, closeSync, unlinkSync, writeFileSync } from "node:
 import path from "node:path";
 import { randomUUID } from "node:crypto";
 import { DECISION_MODEL_PRICES } from "../../models/model-cost";
+import { contentHash } from "../../models/model-audit";
 import { ExperimentBudget, deepSeekExperimentUsage, type ExperimentBudgetPolicy } from "../action-compilation/experiment-budget";
 
 /** Conservative conversion for the entire qualification, including the planning probes. */
@@ -55,13 +56,20 @@ export function createJevLiveBudget(root: string, stopReason: () => string | und
                 return observed.response;
               }
               const raw = await response.clone().text();
+              if (!response.ok) {
+                const evidence = { id, trialId, accountId, model: body.model, requestHash: contentHash(body), statusCode: response.status, body: raw };
+                mkdirSync(path.join(root, "http-rejections"), { recursive: true });
+                writeFileSync(path.join(root, "http-rejections", `${id}.json`), JSON.stringify(evidence), { flag: "wx", mode: 0o600, flush: true });
+                budget.holdHttpRejection(id, { statusCode: response.status, evidenceHash: contentHash(evidence),
+                  reason: "Terminal provider rejection retained with its full reservation; no zero-usage assumption" });
+                return response;
+              }
               let value: unknown;
               if (response.headers.get("content-type")?.includes("text/event-stream")) {
                 const packets = raw.split(/\r?\n/u).filter(line => line.startsWith("data:") && !line.includes("[DONE]"))
                   .map(line => JSON.parse(line.slice(5).trim()) as { usage?: unknown });
                 value = packets.findLast(packet => packet.usage != null);
               } else value = JSON.parse(raw);
-              if (!response.ok) throw new Error(`HTTP ${response.status}; reservation retained until evidence review`);
               if (native) {
                 const usage = (value as { usage: { input_tokens: number; output_tokens: number } }).usage;
                 budget.settle(id, { input: usage.input_tokens, output: usage.output_tokens, cacheHit: 0 });

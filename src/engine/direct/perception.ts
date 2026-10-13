@@ -35,9 +35,10 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       const spoken = voiced && settlement.deliveredToEntityIds.includes(agent.entityId);
       let summary = spoken ? `${alias(agent, settlement.frame.actorEntityId, introductions).name}说：“${settlement.frame.utterance}”` :
         ownerId === settlement.frame.actorId ? `你尝试了“${concreteAttempt}”。${settlement.outcome.summary}${voiced && settlement.frame.kind !== "speak" ? `你说：“${voiced}”` : ""}` : settlement.outcome.summary;
-      if (ownerId === settlement.frame.actorId && settlement.frame.kind === "reflect") {
-        summary += `\n${settlement.frame.utterance ?? (Object.values(agent.belief.evidence).map(evidence =>
-          `${evidence.kind === "testimony" ? "听到的说法" : evidence.kind === "observation" ? "观察记录" : "已有记录"}：${evidence.description}`).join("\n") || "你还没有可供核对的记录。")}`;
+      // Existing records remain in the private evidence store. Copying them into
+      // each reflection recursively duplicates the entire history on later turns.
+      if (ownerId === settlement.frame.actorId && settlement.frame.kind === "reflect" && settlement.frame.utterance) {
+        summary += `\n${settlement.frame.utterance}`;
       }
       if (ownerId === settlement.frame.actorId && settlement.frame.kind === "observe" && settlement.frame.targetEntityId === agent.entityId &&
         ["succeeded", "partial"].includes(settlement.outcome.status)) {

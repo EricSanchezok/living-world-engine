@@ -35,19 +35,21 @@ export function cognitiveUpdate(state: Readonly<SimulationState>, agentId: strin
 export function applyDirectCognition(state: SimulationState, updates: DirectCognitiveUpdate[], evaluatedAtStep: number) {
   for (const update of updates) {
     const agent = state.agents[update.agentId]; if (!agent) throw new Error("unknown cognitive owner");
-    const changed = Object.values(update.goals).some(value => value === "completed") || Object.values(update.beliefs).some(value => value !== "unchanged");
-    if (!changed) continue;
+    const stanceFor = (verdict: string) => verdict === "supported" ? "believed" : verdict === "refuted" ? "disbelieved" : "suspected";
+    const goals = Object.entries(update.goals).filter(([goalId, verdict]) => verdict === "completed" && agent.character.goals[goalId]?.status !== "completed");
+    const beliefs = Object.entries(update.beliefs).filter(([claimId, verdict]) => verdict !== "unchanged" && agent.belief.claims[claimId]?.stance !== stanceFor(verdict));
+    if (!goals.length && !beliefs.length) continue;
     const id = runtimeId({ worldHash: state.worldHash, revision: state.revision, kind: "evidence", stage: "direct-cognition", owner: update.agentId, round: 0, ordinal: 0 });
-    agent.belief.evidence[id] = { id, kind: "inference", description: `根据已接收的观察更新判断：${JSON.stringify({ goals: update.goals, beliefs: update.beliefs })}`,
+    agent.belief.evidence[id] = { id, kind: "inference", description: `根据已接收的观察更新判断：${JSON.stringify({ goals: Object.fromEntries(goals), beliefs: Object.fromEntries(beliefs) })}`,
       sourceId: update.decisionHash, step: evaluatedAtStep };
-    for (const [goalId, verdict] of Object.entries(update.goals)) {
+    for (const [goalId, verdict] of goals) {
       const goal = agent.character.goals[goalId]; if (!goal) throw new Error("cognitive update references an unknown owned goal");
       if (verdict === "completed") { goal.status = "completed"; goal.progress = 1; goal.updatedAtStep = evaluatedAtStep; goal.evidenceIds = [...new Set([...goal.evidenceIds, id])]; }
     }
-    for (const [claimId, verdict] of Object.entries(update.beliefs)) {
+    for (const [claimId, verdict] of beliefs) {
       const claim = agent.belief.claims[claimId]; if (!claim) throw new Error("cognitive update references an unknown owned belief");
       if (verdict === "unchanged") continue;
-      claim.stance = verdict === "supported" ? "believed" : verdict === "refuted" ? "disbelieved" : "suspected";
+      claim.stance = stanceFor(verdict);
       claim.evidenceIds = [...new Set([...claim.evidenceIds, id])];
     }
   }

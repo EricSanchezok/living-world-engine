@@ -71,8 +71,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const recipients = known.filter(([id]) => view.entities[id] !== agent.entityId && Object.values(state.agents).some(other => other.entityId === view.entities[id]));
   const recipientCriteria = { none: "This branch has no intended recipient", broadcast: "Speak or shout openly to whoever can hear, without needing a named listener", discover: "No perceptible recipient is available; first find someone",
     ...Object.fromEntries(recipients.map(([id, entity]) => [id, { name: entity.name, description: entity.description }])) };
-  const spans = [...new Set([...speechSpans(text), ...orderedValues(agent.belief.evidence).flatMap(evidence => speechSpans(evidence.description)),
-    ...speechSpans(agent.character.persona.summary)])];
+  const spans = speechSpans(text);
   const resources = Object.keys(state.truth.mechanics.quantities).sort();
   const timing = orderedValues(state.truth.mechanics.temporalProfiles);
   const capabilities = control.capabilities.filter(capability => capability.knownToAgentIds.includes(agentId)).sort((a, b) => a.id.localeCompare(b.id));
@@ -103,7 +102,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   if (!external && intent.lastActionHash && intent.wakeReasons.includes("observation")) questions.relevant = { type: "noul", version: "wake-relevance-1",
     instructions: { task: loadPromptAsset("user/direct-action.md"), field: "Does the new observation require changing the prior wait or responding now?" } };
   if (resources.length) questions.resource = choice("resource", { none: "No quantified resource", ...Object.fromEntries(resources.map(id => [id, state.truth.mechanics.quantities[id]!.name])) });
-  if (external) questions.transfer_authority = choice("For the hypothetical transfer branch: does this CURRENT submission authorize the PLAYER to give their own goods now? Prior negotiations and another person's demand are not permission. Check any explicit condition against actual delivered evidence.", {
+  if (external) questions.transfer_authority = choice("For the hypothetical transfer branch: does this CURRENT submission authorize the PLAYER to give their own goods now? Prior negotiations and another person's demand alone are not permission; an explicit current instruction to pay the accepted price IS permission. Check only the player's stated prerequisites against actual delivered evidence. When the agreed sequence is payment THEN delivery, the absence of later delivery does not block the authorized payment. Do not add a delivery-first prerequisite.", {
     give: "The player explicitly authorizes their own transfer now, and its stated conditions are met",
     request: "The player asks ANOTHER person to deliver, return or give something; this is speech, not payment by the player",
     pending: "The player's transfer condition is not established, or the input does not authorize a transfer",
@@ -160,7 +159,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     operation === "reflect" && speech === "create" ||
     answers.expression?.type === "noul" && answers.expression.noul >= 0.5);
   if (needsExpression && input.creationEnabled) {
-    const system = loadPromptAsset("system/direct-utterance.md"), userPrompt = loadPromptAsset("user/direct-utterance.md");
+    const system = loadPromptAsset(external ? "system/player-expression.md" : "system/direct-utterance.md"), userPrompt = loadPromptAsset("user/direct-utterance.md");
     const generated = await decisions.provider.generateStructured({ ...decisions.scope, modelRegistrySnapshotHash: control.registryHash,
       profileId: profiles.creation, subjectId: agentId, role: "creation", modelInvocation: decisions.next(agentId),
       system, userPrompt, promptVersion: `action-expression-${contentHash({ system, userPrompt })}`, schemaName: "ActionExpressionV1",
@@ -174,7 +173,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     expression = { attempt: generated.value.attempt?.trim() || text || actionLabels[operation as ActionKind] || "尝试行动",
       utterance: literal && external && (operation === "speak" || generated.value.utterance?.trim()) ? literal : generated.value.utterance?.trim() || null, manner: generated.value.manner?.trim() || null };
     utterance = expression.utterance; audits.push(generated.audit);
-  } else if (literal && external && operation === "speak") utterance = literal;
+  } else if (literal && external && operation === "speak" && !preparatoryFor) utterance = literal;
   else if (["speak", "reflect"].includes(operation) && !preparatoryFor) {
     if (/^span\d+$/u.test(speech)) utterance = spans[Number(speech.slice(4))] ?? null;
     else if (speech === "input" && external) utterance = text;
@@ -193,7 +192,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     ...(expression ? { expression } : {}),
     proposal: { id, actorId: agentId, baseRevision: state.revision, rawText, goal: external?.goal ?? selectedGoal ?? rawText,
       means: external?.means ?? null, targetIds: target ? [targetKey] : [] }, kind, goalId: intent.goalId,
-    targetEntityId: target, toolEntityId: view.entities[selected(answers, "tool")] ?? null,
+    targetEntityId: target, toolEntityId: ["use", "change", "speak"].includes(kind) ? view.entities[selected(answers, "tool")] ?? null : null,
     quantityDefinitionId: questions.resource && selected(answers, "resource") !== "none" ? selected(answers, "resource") : null,
     amount: selected(answers, "amount") === "unknown" ? null : amounts[Number(selected(answers, "amount").slice(1))]!, utterance,
     capabilityId: questions.capability && selected(answers, "capability") !== "none" ? selected(answers, "capability") : null,

@@ -1362,6 +1362,9 @@ export function deterministicOnsetReports(context: unknown, kind: "perceived" | 
 }
 
 export function deterministicModelOutput(profileId: string, context: unknown): unknown {
+  if ((context as { localWorld?: unknown; requestedAction?: unknown }).localWorld && (context as { requestedAction?: unknown }).requestedAction) {
+    return { description: "The fixture supplies no additional world content.", entities: [], facts: [], events: [] };
+  }
   const decision = (context as { decision?: { questions: Record<string, { criteria: Record<string, unknown> }> } }).decision;
   if (decision && Object.keys(decision.questions).every(key => key.startsWith("paragraph"))) return {
     answers: Object.fromEntries(Object.keys(decision.questions).map(key => [key, { type: "choice", choice: "grounded" }])) };
