@@ -147,7 +147,10 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
     const waits = Object.values(control.intents).flatMap(intent => intent.wait?.untilSeconds !== null && intent.wait?.untilSeconds !== undefined &&
       intent.wait.untilSeconds > source.truth.elapsedSeconds ? [intent.wait.untilSeconds] : []);
     const boundaries = [...control.activities.flatMap(activityBoundary), ...(clock === null ? [] : [clock]), ...waits];
-    const atSeconds = newRandomCommitment || !boundaries.length ? source.truth.elapsedSeconds : Math.min(...boundaries);
+    // Deciding to wait is a present-time control update. Return it before advancing
+    // to an unrelated distant timer, so a player can act on the current feedback.
+    const onlyControlWork = owners.length > 0 && control.activities.length === 0;
+    const atSeconds = newRandomCommitment || onlyControlWork || !boundaries.length ? source.truth.elapsedSeconds : Math.min(...boundaries);
     const due = control.activities.filter(frame => frame.activityStatus === "active" && frame.dueAtSeconds === atSeconds);
     for (const frame of due) Object.assign(reads, control.prepared[frame.id]!.reads);
     await context.stages?.after(executionStage("temporal-dependency"));

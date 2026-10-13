@@ -18,6 +18,8 @@ The frozen `8f4aba67` producer completed its host runs and replayed its states, 
 - A generic report template could not express the inspector's known code; old evidence was also absent from later private contexts.
 - Conditional timing choices charged ordinary conversation a wait checkpoint.
 - The replacement uses typed recipient selection, discovery before addressing an unknown recipient, exact private text spans, persistent evidence and explicit immediate-action adjudication.
+- The next frozen trial completed acceptance, payment, delivery and code disclosure, but a no-action NPC decision advanced the clock to a distant deadline. A repaired fact retained its old description, and separate resource/test questions conflated testing with another repair.
+- Present-time control work now commits before future timers. Changed facts receive current descriptions, resource-law applicability is distinct from its conditional amount, and required random trials are selected independently from deterministic effect values within the same batch. Addressing an observed stranger does not require prior evidence of their willingness.
 
 ## Root cause
 
@@ -26,3 +28,5 @@ The mocks supplied mutually consistent parameter choices, hiding the fact that i
 ## Guardrails
 
 [Action regressions](../../src/engine/direct/__tests__/runtime.test.ts) cover recipient discovery, original-request continuation, exact speech spans and owned inventory. [Activity regressions](../../src/engine/direct/__tests__/activities.test.ts) preserve the inspector's private code after new observations and retain the engineer's isolation. [WorldHost regressions](../../src/server/__tests__/direct-world-host.test.ts) verify actual delivery, refusals and retryable local player failures without unrelated NPC work. [The frozen qualification protocol](../../scripts/experiments/jev-qualification-protocol.ts) requires reviewing delivered evidence and persistent state; a completed run, low request count or identical replay cannot establish task success.
+
+The activity regressions also require present-time NPC waits to preserve future timers, current fact descriptions after deterministic and random changes, and a separate mechanical random commitment before its draw. These mechanics do not claim that a real model will always choose the appropriate branch; live semantic review remains required.

@@ -11,6 +11,7 @@ import { DirectDecisions, selected } from "./decisions";
 import { localWorldView } from "./views";
 import { orderedValues } from "./state";
 import { literalNumbers } from "./actions";
+import { changedFact } from "./presentation";
 
 export interface ActionSettlement {
   frame: ActionFrame; outcome: ActionOutcome; operations: WorldDeltaOperation[]; visibleFacts: WorldFact[];
@@ -76,15 +77,19 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
           randomOptions.set(`${id}:${option}`, { distributionId: distribution.id, stepId: step.id });
           randomCriteria[option] = { committedRandomResult: distribution.id, step: step.id, meaning: distribution.description };
         }
-        questions[id] = question("resulting value of this existing fact if the action succeeds", { action: frame as unknown as JsonValue, fact: fact as unknown as JsonValue },
-          { unchanged: "This property is unaffected or evidence is insufficient", ...Object.fromEntries(values.map((value, i) => [`v${i}`, value as unknown as Record<string, JsonValue>])), ...randomCriteria });
+        if (Object.keys(randomCriteria).length) questions[`${id}_random`] = question("Does an explicit rule require an actual random trial to determine this property's result for THIS action? Select the required distribution before any draw; code will compute the result. A random test must not be replaced by the label tested or a guessed result.",
+          { actionId: frame.id, fact: fact as unknown as JsonValue }, { none: "This action does not require an authored random trial for this property", ...randomCriteria });
+        questions[id] = question("resulting value of this existing fact if the action succeeds and no random trial governs it. Unaffected properties stay unchanged.", { actionId: frame.id, fact: fact as unknown as JsonValue },
+          { unchanged: "This property is unaffected or evidence is insufficient", ...Object.fromEntries(values.map((value, i) => [`v${i}`, value as unknown as Record<string, JsonValue>])) });
       }
       for (const resource of orderedValues(state.truth.mechanics.quantities)) for (const kind of ["consume_quantity", "produce_quantity"] as const) {
         const laws = kind === "consume_quantity" ? resource.consumptionLawIds : resource.productionLawIds;
         for (const lawId of laws) {
           const id = `${prefix}_resource${resources.size}`; resources.set(id, { definitionId: resource.id, lawId, kind });
-          questions[id] = question("actual resource change required by this law; no consumption for merely talking or observing", {
-            action: frame as unknown as JsonValue, resource: resource.name, kind, lawId },
+          const data = { actionId: frame.id, resource: resource.name, kind, lawId, law: definition.laws.find(law => law.id === lawId)!.text };
+          questions[`${id}_applies`] = question("Does this resource-changing law apply to the actual operation being performed NOW? A previously completed prerequisite does not consume materials again. Inspecting, checking or testing a repaired object does not repeat its repair.", data,
+            { apply: "This concrete action actually performs the resource-changing operation described by this law", none: "This action does not perform that operation", unknown: "The operation cannot yet be established" });
+          questions[id] = question("amount required IF this resource-changing law applies; this answer is ignored when the law does not apply", data,
             { none: "No actual resource change under this law", ...Object.fromEntries(amounts.map(amount => [`n${amount}`, `${amount} ${resource.unit}`])) });
         }
       }
@@ -111,7 +116,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     }
     if (["observe", "use", "change"].includes(frame.kind)) for (const [ordinal, fact] of targetFacts.entries()) {
       const id = `${prefix}_visible${ordinal}`; visibility.set(id, fact);
-      questions[id] = question("is this fact actually observable through this action", { action: frame as unknown as JsonValue, fact: fact as unknown as JsonValue },
+      questions[id] = question("Is this PROPERTY perceptible through this action's resulting feedback? Judge access to the property, not whether its pre-action value is still true. A public visible state of the very object being handled is ordinarily perceptible; private codes and hidden mental states require their actual disclosure channel.", { actionId: frame.id, fact: fact as unknown as JsonValue },
         { visible: "The attempt reveals the resulting fact through an available perceptual channel", hidden: "The fact remains hidden", unknown: "No justified perceptual access" });
     }
     if (frame.kind === "observe") {
@@ -153,8 +158,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       }
       for (const [id, effect] of effects) {
         if (!id.startsWith(`${prefix}_`)) continue;
-        const value = selected(answers, id); if (value === "unchanged") continue;
-        const random = randomOptions.get(`${id}:${value}`);
+        const value = selected(answers, id);
+        const random = answers[`${id}_random`] ? randomOptions.get(`${id}:${selected(answers, `${id}_random`)}`) : undefined;
         if (random) {
           const distribution = definition.randomDistributions.find(item => item.id === random.distributionId)!;
           const requestId = `${frame.id}/random/${distribution.id}`;
@@ -163,11 +168,13 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
           operations.push({ kind: "set_fact", fact: { ...effect.fact, provenance: source.causes }, ...source });
           continue;
         }
+        if (value === "unchanged") continue;
         const chosen = effect.values[Number(value.slice(1))]!;
         if (contentHash(chosen) === contentHash(effect.fact.value)) continue;
-        operations.push({ kind: "set_fact", fact: { ...effect.fact, value: chosen, provenance: source.causes }, ...source });
+        operations.push({ kind: "set_fact", fact: { ...changedFact(effect.fact, chosen), provenance: source.causes }, ...source });
       }
       for (const [id, resource] of resources) if (id.startsWith(`${prefix}_`)) {
+        if (selected(answers, `${id}_applies`) !== "apply") continue;
         const amount = selected(answers, id); if (amount === "none") continue;
         operations.push({ ...resource, kind: resource.kind, holderId: frame.actorEntityId, amount: Number(amount.slice(1)),
           causes: [...source.causes, { kind: "law", id: resource.lawId }], assertions: source.assertions });

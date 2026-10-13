@@ -16,8 +16,8 @@ import { orderedValues } from "./state";
 import { extendCapability } from "./capabilities";
 
 const kinds: Record<ActionKind | "unknown" | "expand", string> = { move: "Travel to a place", observe: "Inspect, notice or investigate",
-  speak: "Communicate actual words", transfer: "Give or pay an owned resource or object", use: "Use a tool, ability or object",
-  change: "Change an existing object's state", wait: "Wait for an event or continue a long activity", unknown: "Need information to choose",
+  speak: "Ask a question, make an offer, reply, or communicate words, including to an unfamiliar visible person", transfer: "Give or pay an owned resource or object", use: "Use a tool, ability or object",
+  change: "Change an existing object's state", wait: "Wait for an event or continue a long activity", unknown: "Cannot identify any next attempt, even a question or observation",
   expand: "A missing concept or capability is required" };
 const actionLabels: Record<ActionKind, string> = { move: "前往", observe: "观察", speak: "交谈", transfer: "交付", use: "使用", change: "调整", wait: "等待" };
 function choice(field: string, criteria: Record<string, string | Record<string, JsonValue> | JsonValue[] | null>): DecisionQuestionV2 {
@@ -68,7 +68,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const known = Object.entries(view.entities).map(([localId]) => [localId, agent.belief.localEntities[localId]!] as const);
   const targetCriteria = { none: "No target or insufficient identity evidence", ...Object.fromEntries(known.map(([id, entity]) => [id, { name: entity.name, description: entity.description }])) };
   const recipients = known.filter(([id]) => view.entities[id] !== agent.entityId && Object.values(state.agents).some(other => other.entityId === view.entities[id]));
-  const recipientCriteria = { none: "No specific recipient is intended", discover: "Find a perceptible recipient first; no known recipient fits",
+  const recipientCriteria = { none: "This branch has no intended recipient", discover: "No perceptible recipient is available; first find someone",
     ...Object.fromEntries(recipients.map(([id, entity]) => [id, { name: entity.name, description: entity.description }])) };
   const spans = [...new Set([...speechSpans(text), ...orderedValues(agent.belief.evidence).flatMap(evidence => speechSpans(evidence.description)),
     ...speechSpans(agent.character.persona.summary)])];

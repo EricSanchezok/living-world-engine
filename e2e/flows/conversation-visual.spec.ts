@@ -75,7 +75,7 @@ test("the observer conversation matches light and dark responsive baselines", as
     await page.goto(`/play/${instanceId}`);
     await expect(page.getByRole("button", { name: "单步" })).toBeVisible();
     await expect(page.locator(".cg-timeline-rail")).toBeVisible();
-    await expect(page.getByLabel("你的行动")).toHaveCount(0);
+    await expect(page.getByLabel("你的行动", { exact: true })).toHaveCount(0);
     await expect(page).toHaveScreenshot(`instance-${colorScheme}-desktop.png`, screenshotOptions);
 
     await page.getByRole("button", { name: /打开游戏控制/ }).click();
@@ -115,10 +115,10 @@ test("the participant conversation, control orb and inspector stay bounded", asy
   await expect(page.locator('[data-role="assistant"] .cg-narrative').filter({ hasText: "此刻，你是小明" }).first()).toBeVisible();
   await expect(page).toHaveScreenshot("instance-participant-dark-desktop.png", screenshotOptions);
   await expect(page.locator(".cg-timeline-rail")).toBeVisible();
-  await expect(page.getByLabel("你的行动")).toBeVisible();
+  await expect(page.getByLabel("你的行动", { exact: true })).toBeVisible();
 
   // Bootstrap performs no inference. Create actual decision evidence before inspecting invocations.
-  await page.getByLabel("你的行动").fill("观察四周");
+  await page.getByLabel("你的行动", { exact: true }).fill("观察四周");
   await page.getByRole("button", { name: "发送行动" }).click();
   await expect(page.getByText(/你查看了眼前的情况/).last()).toBeVisible();
 
@@ -144,8 +144,13 @@ test("the participant conversation, control orb and inspector stay bounded", asy
   await page.keyboard.press("Escape");
 
   await page.setViewportSize({ width: 320, height: 720 });
+  // Restore the committed conversation at mobile size, without a desktop dialog's
+  // focus restoration or an in-flight message transition choosing the scroll anchor.
+  await page.reload();
+  await expect(page.getByLabel("你的行动", { exact: true })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await settleResponsiveOverlay(page);
+  await page.locator("[data-cg-thread-viewport]").evaluate(element => { element.scrollTo({ top: element.scrollHeight, behavior: "instant" }); });
   await expect(page).toHaveScreenshot("instance-participant-dark-mobile.png", screenshotOptions);
 
   const debugResponse = await page.request.get(`/api/debug?instance=${instanceId}&limit=1`);

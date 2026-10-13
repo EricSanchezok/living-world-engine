@@ -32,8 +32,9 @@ async function fixture(mode: "repair" | "test" | "extend" | "ongoing" | "wait" =
       if (id.includes("duration") && mode === "repair") answer = "s30";
       if (id.includes("duration") && mode === "test") answer = "s10";
       if (id.includes("resource") && mode === "repair") answer = info?.resource === "密封组件" ? "n1" : info?.resource === "冷却剂" ? "n2" : "none";
+      if (id.endsWith("_applies")) answer = mode === "repair" ? "apply" : "none";
       if (id.includes("fact") && mode === "repair" && info?.fact?.id === "pump-seal") answer = option(q, value => (value as { value?: string })?.value === "sealed");
-      if (id.includes("fact") && mode === "test" && info?.fact?.id === "pump-pressure") answer = option(q, value => (value as { committedRandomResult?: string })?.committedRandomResult === "pressure-test");
+      if (id.endsWith("_random")) answer = mode === "test" && info?.fact?.id === "pump-pressure" ? option(q, value => (value as { committedRandomResult?: string })?.committedRandomResult === "pressure-test") : "none";
       if (id.includes("capability")) answer = context.perspective ? option(q, value => typeof value === "object") : "apply";
       return [id, nativeAnswer(q, answer)];
     }));
@@ -65,6 +66,8 @@ describe("direct activities use code-owned mechanics", () => {
     const f = await fixture(); const result = await f.act("使用密封组件和冷却剂维修冷却泵");
     expect(result.state.truth.elapsedSeconds).toBe(30);
     expect(result.state.truth.facts["pump-seal"]!.value).toEqual({ kind: "text", value: "sealed" });
+    expect(result.state.truth.facts["pump-seal"]!.description).not.toContain("泄漏");
+    expect(result.committed.observations.find(packet => packet.observerId === "engineer")?.summary).toContain("已封闭");
     expect(result.state.truth.facts["pump-pressure"]!.value).toEqual({ kind: "text", value: "untested" });
     expect(result.state.truth.quantities[f.kit]!.amount).toBe(0);
     expect(result.state.truth.quantities[quantityId(result.state.worldHash, "coolant", "engineer")]!.amount).toBe(0);
@@ -84,7 +87,19 @@ describe("direct activities use code-owned mechanics", () => {
     expect(settled.state.truth.elapsedSeconds).toBe(10); expect(settled.state.truth.rng.draws).toBeGreaterThan(0);
     expect(settled.committed.randomResults).toHaveLength(1);
     expect(["stable", "unstable"]).toContain((settled.state.truth.facts["pump-pressure"]!.value as { value: string }).value);
+    expect(settled.state.truth.facts["pump-pressure"]!.description).not.toContain("尚未");
     expect(f.transport).toHaveBeenCalledTimes(2); expect(replaySimulationState(settled.state)).toEqual(settled.state);
+  });
+  it("records NPC waits before an unrelated future deadline advances physical time", async () => {
+    const f = await fixture("wait");
+    for (const id of Object.keys(f.roster)) f.roster[id] = { kind: "model", agentId: id, profiles: f.world.initialState.agents[id]!.modelProfiles };
+    const first = await f.advance();
+    expect(first.state.truth.elapsedSeconds).toBe(0);
+    expect(first.state.truth.timers["repair-window-end"]!.status).toBe("scheduled");
+    const next = await f.advance();
+    expect(next.state.truth.elapsedSeconds).toBe(120);
+    expect(f.transport).toHaveBeenCalledTimes(3);
+    expect(replaySimulationState(next.state)).toEqual(next.state);
   });
   it("creates one small capability and lets an observing appropriate actor reuse it", async () => {
     const f = await fixture("extend"); const first = await f.act("用缓冲材料临时隔离设备振动");

@@ -5,6 +5,7 @@ import { sourceFor } from "./world";
 import { applyWorldDeltaOperation } from "../runtime/transaction";
 import { resolveDiscreteRandomRequests } from "../mechanics/random";
 import { runtimeId } from "../runtime/runtime-id";
+import { changedFact } from "./presentation";
 
 /** Pure mechanical settlement of previously admitted semantics. No model calls or new choices. */
 export function settlePreparedActions(state: Readonly<SimulationState>, control: DirectRuntimeState, frames: ActionFrame[]) {
@@ -27,7 +28,7 @@ export function settlePreparedActions(state: Readonly<SimulationState>, control:
             : typeof result.aggregate === "number" ? { kind: "number", value: result.aggregate } : { kind: "text", value: result.aggregate };
           const operation = operations.find(operation => operation.kind === "set_fact" && operation.fact.id === binding.factId);
           if (!operation || operation.kind !== "set_fact") throw new Error("random effect has no owned fact operation");
-          operation.fact.value = value; operation.causes.push({ kind: "random", id: binding.requestId });
+          operation.fact = changedFact(operation.fact, value); operation.causes.push({ kind: "random", id: binding.requestId });
         }
         const transaction = structuredClone(projected);
         for (const operation of operations) {

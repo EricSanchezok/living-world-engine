@@ -2,6 +2,7 @@ import type { AgentState, BeliefPatch, FactValue, LocalEntity, ObservationPacket
 import { contentHash } from "../models/model-audit";
 import { runtimeId } from "../runtime/runtime-id";
 import type { ActionSettlement } from "./world";
+import { directValueLabel, observedKindLabel } from "./presentation";
 
 function alias(agent: AgentState, entityId: string, introductions: ObservationPacket["introductions"]): LocalEntity {
   const bindings = Object.values(agent.bindings).filter(binding => binding.canonicalEntityIds.length === 1 && binding.canonicalEntityIds[0] === entityId);
@@ -11,7 +12,7 @@ function alias(agent: AgentState, entityId: string, introductions: ObservationPa
   introductions.push({ localEntity, canonicalEntityId: entityId }); return localEntity;
 }
 function describeValue(agent: AgentState, value: FactValue, introductions: ObservationPacket["introductions"]): string {
-  return value.kind === "entity" ? alias(agent, value.entityId, introductions).name : value.kind === "none" ? "无" : String(value.value);
+  return value.kind === "entity" ? alias(agent, value.entityId, introductions).name : directValueLabel(value);
 }
 export function directPerception(state: Readonly<SimulationState>, settlements: ActionSettlement[], events: WorldEvent[], step: number) {
   const observations: ObservationPacket[] = [], beliefPatches: BeliefPatch[] = [];
@@ -34,12 +35,13 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       if (ownerId === settlement.frame.actorId) for (const entity of settlement.visibleEntities) {
         const local = alias(agent, entity.id, introductions);
         const introduced = introductions.find(intro => intro.localEntity.id === local.id);
-        if (introduced) { introduced.localEntity.name = entity.kind === "person" ? "附近的人" : `附近的${entity.kind}`;
+        if (introduced) { introduced.localEntity.name = observedKindLabel(entity.kind);
           introduced.localEntity.description = "这次观察确认了其存在；尚未确认名字和身份。"; }
         summary += `\n你注意到${local.name}。`;
       }
       const facts = ownerId === settlement.frame.actorId ? settlement.visibleFacts : settlement.visibleFacts.filter(fact => fact.access.kind === "public");
-      for (const fact of facts) summary += `\n${alias(agent, fact.subjectId, introductions).name}的${fact.predicate}：${describeValue(agent, fact.value, introductions)}`;
+      for (const fact of facts) summary += `\n${alias(agent, fact.subjectId, introductions).name}：${fact.value.kind === "entity"
+        ? describeValue(agent, fact.value, introductions) : fact.description}`;
       const id = runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "observation", stage: "direct-perception", owner: ownerId, round: 0, ordinal: index });
       const packet: ObservationPacket = { id, observerId: ownerId, step, kind: "outcome", summary, introductions, apparentClaims: [], sourceEventIds: [events[index]!.id] };
       const evidenceId = runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "evidence", stage: "direct-perception", owner: ownerId, round: 0, ordinal: index });
@@ -49,7 +51,7 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
         const subject = alias(agent, fact.subjectId, introductions), target = fact.value.kind === "entity" ? alias(agent, fact.value.entityId, introductions) : null;
         patch.operations.push({ kind: "upsert_claim", claim: { id: `observed-${contentHash([ownerId, fact.id]).slice(0, 24)}`, subjectId: subject.id,
           predicate: fact.predicate, value: target ? { kind: "local_entity", localEntityId: target.id } : fact.value as Exclude<FactValue, { kind: "entity" }>,
-          description: `${subject.name}的${fact.predicate}`, confidence: 1, stance: "believed", evidenceIds: [evidenceId] } });
+          description: fact.value.kind === "entity" ? `${subject.name}的关联对象` : `${subject.name}：${fact.description}`, confidence: 1, stance: "believed", evidenceIds: [evidenceId] } });
       }
       observations.push(packet); beliefPatches.push(patch);
     }
