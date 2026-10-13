@@ -64,12 +64,12 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
-  it("searches the intended recipient's known location instead of discarding it during discovery", async () => {
-    const f = await fixture({ operation: "speak", recipient: "discover", searchLocation: "yard", speech: "create" });
+  it.each([["yard", "courtyard"], ["door", "gate"]])("searches around the known %s without restricting world-defined entity kinds", async (searchLocation, entityId) => {
+    const f = await fixture({ operation: "speak", recipient: "discover", searchLocation, speech: "create" });
     await f.engine.bootstrapAgents();
     const result = await f.engine.step(f.roster, f.request("向庭院里的工人问路"));
     expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "observe", preparatoryFor: "speak",
-      targetEntityId: "courtyard", observationScope: "target", utterance: null });
+      targetEntityId: entityId, observationScope: "target", utterance: null });
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
   it("realizes a new player physical operation before adjudication even when the expressive-style answer is negative", async () => {

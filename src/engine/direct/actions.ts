@@ -75,7 +75,6 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const resources = Object.keys(state.truth.mechanics.quantities).sort();
   const timing = orderedValues(state.truth.mechanics.temporalProfiles);
   const capabilities = control.capabilities.filter(capability => capability.knownToAgentIds.includes(agentId)).sort((a, b) => a.id.localeCompare(b.id));
-  const knownLocations = known.filter(([id]) => state.truth.entities[view.entities[id]!]?.kind === "location");
   const questions: Record<string, DecisionQuestionV2> = {
     ...cognitiveQuestions(state, agentId),
     operation: choice("The next executable action actually requested. Resolve if/only-if conditions using the latest known properties, then select the authorized branch. A conditional request to operate is use/change when its stated conditions are established; do not substitute private reflection for doing it. Unknown conditions permit concrete observation or asking. Do not invent additional prerequisites.", kinds),
@@ -85,9 +84,9 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       target: "The selected external object", surroundings: "The immediate surroundings", inventory: "The actor's own actual inventory and resources",
     }),
     recipient: choice("If the next action communicates words or transfers goods, select its actual recipient. Discover a recipient before addressing an unknown person. Ignore for other operations.", recipientCriteria),
-    ...(knownLocations.length ? { search_location: choice("If the intended recipient has not yet been seen, where does this request seek them? A shopkeeper is sought in that shop, not among unrelated people in the surrounding district. Use a known place only; none means the current surroundings.", {
+    ...(known.length ? { search_location: choice("If the intended recipient has not yet been seen, where does this request seek them? A shopkeeper is sought in that shop, not among unrelated people in the surrounding district. Select a known place, shop, building or landmark to inspect or search around; none means the current surroundings. Entity kinds are world-defined and do not restrict which object can be a search focus.", {
       none: "Current surroundings; no more specific known place",
-      ...Object.fromEntries(knownLocations.map(([id, entity]) => [id, { name: entity.name, description: entity.description }])),
+      ...Object.fromEntries(known.map(([id, entity]) => [id, { name: entity.name, description: entity.description }])),
     }) } : {}),
     amount: choice("amount", { unknown: "No established amount", ...Object.fromEntries(amounts.map((amount, index) => [`n${index}`, String(amount)])) }),
     speech: choice("The actual words THIS speaker should say next. For an NPC answering a question, select words that answer or acknowledge it, not a verbatim copy of the received question. Existing testimony is evidence, not a script to echo.", { none: "No speech", input: "The entire player input is already the literal utterance", create: "Realize the intended utterance naturally in this speaker's voice; action instructions are not literal speech",
