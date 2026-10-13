@@ -1,8 +1,17 @@
 import { describe, expect, it } from "vitest";
-import { JEV_QUALIFICATION_PROTOCOL, assertQualificationClock, semanticWorldHash } from "./jev-qualification-protocol";
+import { JEV_QUALIFICATION_PROTOCOL, assertQualificationClock, semanticWorldHash, qualificationCatalogDocument } from "./jev-qualification-protocol";
 import { E3_TASKS } from "./step-e3-tasks";
+import { loadModelCatalog, parseModelCatalog } from "../../src/engine/models/model-catalog";
 
 describe("frozen Jev qualification protocol", () => {
+  it("retains exact inference profiles without requiring unrelated account metadata", () => {
+    const source = loadModelCatalog();
+    for (const arm of ["A", "B", "C"] as const) {
+      const catalog = parseModelCatalog(qualificationCatalogDocument(source, arm));
+      expect(Object.keys(catalog.accounts).sort()).toEqual(arm === "A" ? ["deepseek-api"] : ["deepseek-api", "typesafe-api"]);
+      for (const id of Object.keys(catalog.profiles)) expect(catalog.profile(id)).toEqual(source.profile(id));
+    }
+  });
   it("keeps all E3 inputs, balanced three-arm canaries and independent confirmation seeds", () => {
     expect(JEV_QUALIFICATION_PROTOCOL.tasks).toEqual(E3_TASKS);
     expect(JEV_QUALIFICATION_PROTOCOL.trials).toHaveLength(33);

@@ -1,8 +1,19 @@
 import { contentHash } from "../../src/engine/models/model-audit";
 import { E3_TASKS } from "./step-e3-tasks";
+import type { ModelCatalog } from "../../src/engine/models/model-catalog";
 
 export type JevArm = "A" | "B" | "C";
 export interface JevTrial { id: string; category: number; seed: number; order: JevArm[]; phase: "canary" | "confirmation" }
+/** Keep exact world profile values while excluding unrelated accounts from registry capture. */
+export function qualificationCatalogDocument(source: ModelCatalog, arm: JevArm) {
+  const profiles = arm === "A" ? ["truth-deepseek", "agent-deepseek"] : ["decision-jev", "decision-deepseek", "creation-deepseek"];
+  const accounts = [...new Set(profiles.map(id => source.profile(id).account_id))];
+  return { schema_version: source.schemaVersion, scheduler: source.scheduler, registry: source.registry,
+    accounts: Object.fromEntries(accounts.map(id => [id, source.account(id)])),
+    profiles: Object.fromEntries(profiles.map(id => [id, source.profile(id)])),
+    model_overrides: Object.fromEntries([...new Set(accounts.map(id => source.account(id).models_dev_provider_id))]
+      .filter(id => source.modelOverrides[id]).map(id => [id, source.modelOverrides[id]])) };
+}
 export const JEV_QUALIFICATION_LIMITS = { maxDispatchMs: 600_000, maxCommitsPerLease: 6, pollMs: 250 } as const;
 export const JEV_QUALIFICATION_PROTOCOL = {
   id: "jev-engine-three-arm-v1", tasks: E3_TASKS, limits: JEV_QUALIFICATION_LIMITS,

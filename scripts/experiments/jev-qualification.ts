@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { createJevLiveBudget, JEV_BUDGET_POLICY, JEV_PLANNING_NANO_CNY } from "../../src/engine/benchmarks/jev/live-budget";
-import { JEV_QUALIFICATION_PROTOCOL, assertQualificationClock, semanticWorldHash, type JevArm } from "./jev-qualification-protocol";
+import { JEV_QUALIFICATION_PROTOCOL, assertQualificationClock, semanticWorldHash, qualificationCatalogDocument, type JevArm } from "./jev-qualification-protocol";
 import type { StructuredModelProvider } from "../../src/engine/models/model-provider";
 
 const script = fileURLToPath(import.meta.url);
@@ -43,7 +43,7 @@ async function worker(mode: string) {
   if (!["A", "B", "C"].includes(arm) || process.cwd() !== engineRoot) throw new Error("invalid arm or producer working directory");
   const head = cleanHead(engineRoot);
   const catalogModule = await importAt(engineRoot, "src/engine/models/model-catalog.ts") as typeof import("../../src/engine/models/model-catalog");
-  const catalog = catalogModule.loadModelCatalog(path.join(engineRoot, "config/models.yaml"));
+  const catalog = catalogModule.parseModelCatalog(qualificationCatalogDocument(catalogModule.loadModelCatalog(path.join(engineRoot, "config/models.yaml")), arm));
   const loader = await importAt(engineRoot, "src/script/world-loader.ts") as typeof import("../../src/script/world-loader");
   const builder = await importAt(engineRoot, "scripts/experiments/player-integrated-world.ts") as typeof import("./player-integrated-world");
   const source = loader.loadWorldTemplate(path.join(engineRoot, "worlds/blackmarsh/world"));
