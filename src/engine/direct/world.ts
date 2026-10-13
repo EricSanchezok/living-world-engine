@@ -10,7 +10,7 @@ import { deriveClampedMeterDelta, magnitudeBands, materializeCondition } from ".
 import type { ActionFrame, CapabilityDefinition, CapabilityEffect, PreparedDirectAction } from "./contracts";
 import { DirectDecisions, selected } from "./decisions";
 import { localWorldView } from "./views";
-import { orderedValues } from "./state";
+import { orderedValues, captureDependencies, establishedEntityDirectory } from "./state";
 import { literalNumbers } from "./actions";
 import { changedFact } from "./presentation";
 import { extendCapability } from "./capabilities";
@@ -236,11 +236,12 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     frame.submissionId && frame.kind === "observe" && frame.observationScope !== "inventory" && frame.targetEntityId !== frame.actorEntityId && !frame.preparatoryFor) &&
     ["succeeded", "partial", "unknown"].includes(selected(answers, `a${index}_outcome`))) {
     try {
+    Object.assign(view.reads, captureDependencies(state, ["catalog:entities"]));
     const generated = await createWorldExpansion(state, definition, frame, decisions, view.state);
     audits.push(...generated.audits);
     if (!generated.expansion.operations.length) continue;
-    const admitted = await decisions.ask(null, { localWorld: view.state, action: frame, addition: generated.expansion.draft } as unknown as JsonValue,
-      view.reads, { accept: question("Can this particular addition actually occur here, respecting existing facts, time, materials and private knowledge? Public appearance and descriptions must not reveal an established secret. It cannot manufacture a successful player outcome.", generated.expansion.draft as unknown as JsonValue,
+    const admitted = await decisions.ask(null, { localWorld: view.state, establishedEntities: establishedEntityDirectory(state), action: frame, addition: generated.expansion.draft } as unknown as JsonValue,
+      view.reads, { accept: question("Can this particular addition actually occur here, respecting existing facts, time, materials and private knowledge? Public appearance and descriptions must not reveal an established secret. It cannot manufacture a successful player outcome. Compare establishedEntities for continuity: do not clone or relocate an already established named person or business under an abbreviated alias. Distinct ordinary items of the same generic kind are allowed. The directory is world-only context, not automatic perceptual evidence.", generated.expansion.draft as unknown as JsonValue,
         { apply: "Plausible and consistent; introduce it now", reject: "Conflicts or lacks necessary means", unknown: "Insufficient basis" }) });
     if (selected(admitted, "accept") === "apply") worldExpansions.set(frame.id, generated.expansion);
     } catch (error) {

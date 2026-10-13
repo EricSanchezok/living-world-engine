@@ -8,6 +8,7 @@ import type { ActionFrame } from "./contracts";
 import type { DirectDecisions } from "./decisions";
 import { agentCapabilityModels } from "../models/capability-bindings";
 import { ModelOutputError } from "../models/model-provider";
+import { establishedEntityDirectory } from "./state";
 
 const schema = z.object({
   description: z.string().min(1),
@@ -91,7 +92,7 @@ export async function createWorldExpansion(state: Readonly<SimulationState>, def
     try { result = await decisions.provider.generateStructured({ ...decisions.scope, modelRegistrySnapshotHash: decisions.control.registryHash,
       profileId: agentCapabilityModels(state, decisions.control, frame.actorId).creation, subjectId: "world", role: "creation", modelInvocation: decisions.next("world"),
       system, userPrompt, promptVersion: `world-expansion-${contentHash([system, userPrompt])}`, schemaName: "WorldExpansionDraftV1", schema,
-      context: { localWorld: context, requestedAction: frame, repair }, jsonExamplePolicy: "omit" }); }
+      context: { localWorld: context, establishedEntities: establishedEntityDirectory(state), requestedAction: frame, repair }, jsonExamplePolicy: "omit" }); }
     catch (error) {
       if (error instanceof ModelOutputError) {
         if (error.audit) audits.push(error.audit);

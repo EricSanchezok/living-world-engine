@@ -26,6 +26,7 @@ export function readDirectState(value: AlgorithmExecutionState, state: Readonly<
 }
 export function readDependency(state: Readonly<SimulationState>, key: string): unknown {
   const [domain, ...parts] = key.split(":"); const id = parts.join(":");
+  if (domain === "catalog" && id === "entities") return establishedEntityDirectory(state);
   if (domain === "agent") return state.agents[id] ?? null;
   if (domain === "evidence") return state.agents[id] ? orderedValues(state.agents[id]!.belief.evidence) : null;
   if (domain === "clock") return state.truth.elapsedSeconds;
@@ -43,6 +44,11 @@ export function readDependency(state: Readonly<SimulationState>, key: string): u
     condition: state.truth.conditions, timer: state.truth.timers, pool: state.truth.sharedActivityResourcePools }[domain];
   if (!table) throw new Error(`unknown dependency domain ${domain}`);
   return table[id as keyof typeof table] ?? null;
+}
+/** World creation's continuity directory, never an Agent or player projection. */
+export function establishedEntityDirectory(state: Readonly<SimulationState>) {
+  return orderedValues(state.truth.entities).map(entity => ({ id: entity.id, name: entity.name, kind: entity.kind,
+    lifecycle: entity.lifecycle, placementId: state.truth.placements[entity.id] ?? null }));
 }
 export function captureDependencies(state: Readonly<SimulationState>, keys: Iterable<string>): Record<string, string> {
   return Object.fromEntries([...new Set(keys)].sort().map(key => [key, contentHash(readDependency(state, key))]));

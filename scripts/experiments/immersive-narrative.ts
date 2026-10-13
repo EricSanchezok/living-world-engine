@@ -104,7 +104,7 @@ export const NARRATIVE_CONTINUOUS: Flow[] = [
 async function main() {
   const phase = process.argv[2] ?? "development", selected = process.argv[3];
   const flows = (phase === "development" ? NARRATIVE_DEVELOPMENT : phase === "confirmation" ? NARRATIVE_CONFIRMATION
-    : phase === "regression" ? [...NARRATIVE_CONFIRMATION_RETIRED, ...NARRATIVE_CONFIRMATION_RETIRED_V2]
+    : phase === "regression" ? [...NARRATIVE_CONFIRMATION_RETIRED, ...NARRATIVE_CONFIRMATION_RETIRED_V2, ...NARRATIVE_CONFIRMATION]
     : phase === "continuous" ? NARRATIVE_CONTINUOUS : []).filter(flow => !selected || selected.split(",").includes(flow.id));
   if (!flows.length) throw new Error("Choose development, regression, confirmation or continuous and optional comma-separated flow IDs");
   const root = path.resolve(".livingworld-benchmarks/jev-engine"), trial = `narrative-${phase}-${Date.now()}`;

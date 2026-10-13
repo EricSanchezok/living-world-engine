@@ -1,7 +1,7 @@
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { loadWorldScript } from "../../../script/world-loader";
-import { directTestProvider, nativeAnswer } from "../../testing/direct-provider";
+import { directTestProvider, nativeAnswer, directCreationContext } from "../../testing/direct-provider";
 import { DirectWorldAlgorithm } from "../algorithm";
 import { SimulationEngine } from "../../runtime/simulation";
 import { historyReplayBaseHash } from "../../runtime/history-replay";
@@ -117,6 +117,11 @@ describe("direct world through the actual simulation entry", () => {
     expect(JSON.stringify(result.state.agents.player!.belief)).not.toContain("PRIVATE-MOTIVE");
     expect(result.committed.observations[0]!.scene?.details).toContainEqual({ label: "抱木箱的人", description: "磨白的短外衣，怀里抱着木箱。" });
     expect(result.state.truth.placements[newAgent.entityId]).toBe("courtyard");
+    const wires = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body)));
+    const creation = wires.find(wire => !wire.questions);
+    expect(directCreationContext(creation).establishedEntities).toEqual(expect.arrayContaining([expect.objectContaining({ id: "gate" })]));
+    expect(wires.filter(wire => wire.questions && wire.state.perspective).every(wire => !wire.state.establishedEntities)).toBe(true);
+    expect(result.state.history[0]!.directEvent!.reads).toHaveProperty("catalog:entities");
     const replay = replaySimulationState(result.state);
     expect(replay).toEqual(result.state); expect(Object.keys(replay.agents)).toHaveLength(3);
     const restored = new SimulationEngine(f.world, f.algorithm, JSON.parse(JSON.stringify(result.state)));

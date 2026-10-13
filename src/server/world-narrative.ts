@@ -134,8 +134,13 @@ export function completeParagraphs(text: string): string[] {
   return result;
 }
 export function renderNarrativeParagraph(text: string, source: ScenePacket): string {
+  const observedText = [...source.observations.map(observation => observation.summary),
+    ...source.observations.flatMap(observation => observation.scene?.details.map(detail => `${detail.label}\n${detail.description}`) ?? []),
+    ...source.memories.map(memory => memory.description), ...source.knownEntities.map(entity => `${entity.name}\n${entity.description}`)].join("\n");
   for (const match of text.matchAll(/[“「]([^”」]+)[”」]/gu)) {
-    if (!source.speech.some(speech => speech.utterance === match[1])) throw new Error("Quote differs from delivered speech; use its supplied speech reference instead");
+    if (!source.speech.some(speech => speech.utterance === match[1]) && !observedText.includes(match[1]!)) {
+      throw new Error("Quote differs from delivered speech or observed text; use its exact supplied source instead");
+    }
   }
   const rendered = text.replace(/\[\[(speech-[a-f0-9]+)\]\]/gu, (_, id: string) => {
     const speech = source.speech.find(item => item.id === id);

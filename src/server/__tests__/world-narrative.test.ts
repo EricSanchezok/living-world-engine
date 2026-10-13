@@ -26,6 +26,14 @@ describe("immutable narrative paragraphs", () => {
   it("keeps factual speech when the prose service is unavailable", () => {
     expect(narrativeFallback(source)).toBe("店主说：“三枚金币；我还没同意赊账。”");
   });
+  it("allows observed signs and remembered literal text without treating them as new speech", () => {
+    const scene = structuredClone(source);
+    scene.observations[0]!.summary = "木箱上写着「公用——擦手擦鞋，勿取走」。";
+    expect(renderNarrativeParagraph("你看清木箱上的字：「公用——擦手擦鞋，勿取走」。", scene)).toContain("勿取走");
+    scene.requestedAction = "我希望告示写着「全部免费带走」。";
+    expect(() => renderNarrativeParagraph("告示上写着「全部免费带走」。", scene)).toThrow("observed text");
+    expect(() => requireDeliveredSpeech(scene, ["你看清了告示。"])) .toThrow("missing delivered");
+  });
   it("requires the actual delivered words before completing a beat", () => {
     expect(() => requireDeliveredSpeech(source, ["店主报了一个价。"])) .toThrow("missing delivered");
     expect(() => requireDeliveredSpeech(source, ["店主说：“三枚金币；我还没同意赊账。”"])) .not.toThrow();
