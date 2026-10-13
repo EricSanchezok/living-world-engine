@@ -326,6 +326,9 @@ export function normalizeModelsDevDocument(
       providers[providerId] = { id: providerId, name: providerId, models };
       continue;
     }
+    // An absent provider makes its own profiles unavailable. It must not prevent
+    // unrelated configured providers from capturing reproducible metadata.
+    if (!Object.hasOwn(remote, providerId)) continue;
     let provider: z.infer<typeof remoteProviderSchema>;
     try {
       provider = remoteProviderSchema.parse(remote[providerId]);
@@ -359,6 +362,7 @@ export function normalizeModelsDevDocument(
     }
     providers[providerId] = { id: provider.id, name: provider.name, models };
   }
+  if (!Object.keys(providers).length) throw new ModelRegistryError("models.dev has no configured providers with valid metadata");
   return snapshotDocumentSchema.parse({
     schemaVersion: SNAPSHOT_SCHEMA_VERSION,
     source: MODELS_DEV_API_URL,

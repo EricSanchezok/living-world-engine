@@ -141,6 +141,17 @@ function jsonResponse(body: unknown, options: ResponseInit = {}): Response {
 }
 
 describe("trusted provider transport configuration", () => {
+  it("isolates an absent unused provider without allowing malformed metadata or profile substitution", () => {
+    const source = catalog(), document = source.snapshot();
+    document.accounts.unavailable = { ...document.accounts["deepseek-api"]!, models_dev_provider_id: "unavailable" };
+    document.profiles.unavailable = { ...document.profiles.exact!, account_id: "unavailable" };
+    const configured = parseModelCatalog(document), normalized = normalizeModelsDevDocument(remoteCatalog(), configured);
+    const snapshot = { hash: "test-snapshot", document: normalized };
+    expect(resolveModelProfile(configured, snapshot, "exact").modelId).toBe("deep-stable");
+    expect(() => resolveModelProfile(configured, snapshot, "unavailable")).toThrow("has no provider unavailable");
+    expect(() => normalizeModelsDevDocument({ ...remoteCatalog(), unavailable: null }, configured)).toThrow("missing or invalid");
+    expect(() => normalizeModelsDevDocument({}, source)).toThrow("no configured providers");
+  });
   it("allows loopback HTTP for local harnesses but rejects remote plaintext endpoints", () => {
     const configured = catalog();
     const document = {
