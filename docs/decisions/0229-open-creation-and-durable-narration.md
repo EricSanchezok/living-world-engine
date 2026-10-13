@@ -1,7 +1,7 @@
 # Open creation and durable participant narration
 
 ## Status
-Proposed
+Accepted
 Class: architecture
 
 ## Context and Problem Statement
@@ -24,6 +24,8 @@ Direct execution is fast, but fixed dialogue and observation-summary projection 
 ## Decision Outcome
 
 Choose the third option, as specified in [Spec 0183](../specs/0183-open-actions-immersive-narrative.md). Jev retains semantic decisions and code retains mechanical commits. DeepSeek creates private expression, authorized local expansion and participant prose at separate input boundaries. Persisted scene segments survive reconnect and restart. The request mix is measured rather than constrained by a Jev percentage target.
+
+Development probes exposed invented props, actions and altered dialogue. The publication boundary therefore checks complete paragraphs against the frozen scene, preserves literal dialogue by reference, and uses the existing one-continuation recovery budget on factual rejection. This adds request cost and does not replace independent human evaluation of the final text.
 
 ## Pros and Cons of the Options
 

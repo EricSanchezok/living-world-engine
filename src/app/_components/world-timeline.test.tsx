@@ -248,9 +248,9 @@ describe("world timeline rail", () => {
       targetId: "turn-failed:action",
       kind: "player",
       revision: 8,
-      title: "行动未改变世界",
+      title: "回应暂未完成",
       excerpt: "冲向浓雾。",
-      outcome: "unchanged",
+      outcome: "incomplete",
     }]);
   });
 });

@@ -1,3 +1,4 @@
+import { createWorldExpansion, type WorldExpansion } from "./expansion";
 import type { ActionOutcome, CausalSource, FactValue, ModelExecutionAudit, SimulationState, WorldDeltaOperation, WorldFact, WorldEntity } from "../contracts/model";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import { loadPromptAsset } from "../prompts";
@@ -83,13 +84,18 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   const claims = new Map<string, { poolId: string; amount: number }>();
   for (const [index, frame] of frames.entries()) {
     const prefix = `a${index}`;
+    if (creationEnabled && definition.narrative.expansion) questions[`${prefix}_world_expansion`] = question(
+      "This is an OPEN world with a partial initial catalog. When the actor explores an unestablished area or seeks an ordinary person/material absent from that catalog, should local creation propose a plausible discovery or arrival? Mere absence from the catalog does not mean absence from the world. Choose introduce for such a genuine opening, including meeting a local worker or finding ordinary scrap in a suitable workplace. Choose none for familiar complete scenes, implausible requests, conserved resources or established absence. This authorizes a draft for later judgment, not instant success.",
+      frame as unknown as JsonValue, { none: "Existing world content suffices", introduce: "Introduce a reasonable persistent addition to the world" });
     const capability = decisions.control.capabilities.find(capability => capability.id === frame.capabilityId && capability.knownToAgentIds.includes(frame.actorId));
     questions[`${prefix}_outcome`] = question("feasibility of this single concrete kind and its parameters, NOT completion of proposal.goal or the whole compound proposal.rawText. Speaking succeeds when actual words can be uttered; accepting terms does not require goods already delivered. Observing attempts to inspect the selected object or immediate surroundings; separate visibility questions decide what is learned.", frame as unknown as JsonValue,
       { succeeded: "The action can achieve its specified immediate effect", partial: "Only part of that immediate effect is achieved",
         failed: "The concrete attempted action cannot occur", unknown: "Evidence required for this immediate action is absent; speech need not already be true or accepted" });
     if (["move", "use", "change"].includes(frame.kind)) questions[`${prefix}_duration`] = question("required total duration, respecting explicit rules and the actual activity", frame as unknown as JsonValue,
       { planned: `Use the proposed ${frame.durationSeconds} seconds`, ...Object.fromEntries(durations.map(seconds => [`s${seconds}`, `${seconds} seconds`])) });
-    if (frame.submissionId) questions[`${prefix}_request_progress`] = question("coverage of the player's whole submitted intent by this immediate action", frame as unknown as JsonValue,
+    if (frame.kind === "move") questions[`${prefix}_movement`] = question("Does this movement enter the target as a place, or merely approach an object/person without entering its interior? Standing beside a machine does not put the actor inside it.", frame as unknown as JsonValue,
+      { enter: "Enter the selected destination as a place", near: "Approach the target within its surrounding place" });
+    if (frame.submissionId) questions[`${prefix}_request_progress`] = question("Does this single action KIND cover every immediately authorized part of the submitted request? Movement alone does not perform a requested gesture, repair or conversation. Speech DOES include any simultaneous expressive gesture described in ActionExpression or proposal.rawText: waving while greeting completes both, and must not trigger another copy of the same utterance. Observation alone does not speak or build. Select continue when that distinct next step is already authorized and does not need another person's reply; select wait only when new evidence or consent is genuinely required.", frame as unknown as JsonValue,
       { complete: "This attempt handles the submitted action; any long-term goal remains separate",
         continue: "Only a prerequisite is handled; another concrete step is already authorized by this input",
         wait: "The next step needs an actual reply, new evidence or a new player decision" });
@@ -178,7 +184,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       }
     }
     const recipients = ["speak", "transfer"].includes(frame.kind) && frame.targetEntityId ? [frame.targetEntityId]
-      : ["use", "change", "move"].includes(frame.kind) ? orderedValues(state.agents).filter(agent => agent.id !== frame.actorId &&
+      : ["speak", "use", "change", "move"].includes(frame.kind) ? orderedValues(state.agents).filter(agent => agent.id !== frame.actorId &&
         state.truth.placements[agent.entityId] === state.truth.placements[frame.actorEntityId]).map(agent => agent.entityId) : [];
     candidates.set(prefix, recipients);
     for (const [ordinal, recipient] of recipients.entries()) questions[`${prefix}_delivery${ordinal}`] = question("can the recipient perceive this speech, transfer or physical method and effect", { action: frame as unknown as JsonValue, recipient },
@@ -186,6 +192,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   }
   let answers = await decisions.ask(null, view.state, view.reads, questions);
   const expansions = frames.flatMap((frame, index) => questions[`a${index}_expression`] && selected(answers, `a${index}_expression`) === "expand" ? [{ frame, index }] : []);
+  const capabilityFailures = new Set<string>();
   if (expansions.length) {
     if (!creationEnabled) throw new Error("This action needs a new effect concept; the creation capability is disabled");
     const expanded = await Promise.allSettled(expansions.map(async ({ frame, index }) => ({ index, frame,
@@ -194,7 +201,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         context: { action: frame.proposal.rawText, target: frame.targetEntityId ? state.truth.entities[frame.targetEntityId]!.description : null,
           tool: frame.toolEntityId ? state.truth.entities[frame.toolEntityId]!.description : null } }) })));
     const supplemental: Record<string, DecisionQuestionV2> = {};
-    for (const result of expanded) if (result.status === "fulfilled") {
+    for (const [expansionIndex, result] of expanded.entries()) if (result.status === "fulfilled") {
       const { index, frame, result: extension } = result.value, prefix = `a${index}`;
       audits.push(...extension.audits);
       supplemental[`${prefix}_capability`] = question("does this new declared capability actually apply to the already selected action", extension.capability as unknown as JsonValue,
@@ -208,14 +215,30 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
           { visible: "The resulting property is perceptible", hidden: "The property is hidden", unknown: "No justified perceptual access" });
       }
     } else {
+      capabilityFailures.add(expansions[expansionIndex]!.frame.id);
       if (result.reason?.audits) audits.push(...result.reason.audits);
       else if (result.reason?.audit) audits.push(result.reason.audit);
     }
-    const failed = expanded.find(result => result.status === "rejected");
-    if (failed?.status === "rejected") throw Object.assign(failed.reason instanceof Error ? failed.reason : new Error(String(failed.reason)), { audits });
-    try { answers = { ...answers, ...await decisions.ask(null, view.state, view.reads, supplemental) }; }
+    try { if (Object.keys(supplemental).length) answers = { ...answers, ...await decisions.ask(null, view.state, view.reads, supplemental) }; }
     catch (error) { throw Object.assign(error instanceof Error ? error : new Error(String(error)), {
       audits: [...audits, ...((error as { audits?: ModelExecutionAudit[] } | null)?.audits ?? [])] }); }
+  }
+  const worldExpansions = new Map<string, WorldExpansion>();
+  const expansionFailures = new Set<string>();
+  for (const [index, frame] of frames.entries()) if (answers[`a${index}_world_expansion`] && selected(answers, `a${index}_world_expansion`) === "introduce" &&
+    ["succeeded", "partial", "unknown"].includes(selected(answers, `a${index}_outcome`))) {
+    try {
+    const generated = await createWorldExpansion(state, definition, frame, decisions, view.state);
+    audits.push(...generated.audits);
+    const admitted = await decisions.ask(null, { localWorld: view.state, action: frame, addition: generated.expansion.draft } as unknown as JsonValue,
+      view.reads, { accept: question("Can this particular addition actually occur here, respecting existing facts, time, materials and private knowledge? Public appearance and descriptions must not reveal an established secret. It cannot manufacture a successful player outcome.", generated.expansion.draft as unknown as JsonValue,
+        { apply: "Plausible and consistent; introduce it now", reject: "Conflicts or lacks necessary means", unknown: "Insufficient basis" }) });
+    if (selected(admitted, "accept") === "apply") worldExpansions.set(frame.id, generated.expansion);
+    } catch (error) {
+      const evidence = error as { audits?: ModelExecutionAudit[]; audit?: ModelExecutionAudit };
+      audits.push(...(evidence.audits ?? (evidence.audit ? [evidence.audit] : [])));
+      expansionFailures.add(frame.id);
+    }
   }
   let projected = structuredClone(state) as SimulationState;
   const prepared: PreparedDirectAction[] = [];
@@ -225,13 +248,25 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     const duration = durationChoice === "planned" ? frame.durationSeconds : Number(durationChoice.slice(1));
     frame.durationSeconds = duration;
     frame.dueAtSeconds = Math.max(state.truth.elapsedSeconds + 1, frame.startedAtSeconds + duration);
-    let status: ActionOutcome["status"] = verdict === "unknown" ? "blocked" : verdict as ActionOutcome["status"];
+    let status: ActionOutcome["status"] = expansionFailures.has(frame.id) || capabilityFailures.has(frame.id) ? "blocked"
+      : verdict === "unknown" ? worldExpansions.has(frame.id) && frame.kind === "observe" ? "succeeded" : "blocked" : verdict as ActionOutcome["status"];
     let operations: WorldDeltaOperation[] = [];
     const randomRequests: PreparedDirectAction["randomRequests"] = [], randomBindings: PreparedDirectAction["randomBindings"] = [];
     let detail = status === "blocked" ? "还需要更多信息。" : status === "failed" ? "这次尝试未能完成。" : status === "partial" ? "这次行动取得了部分进展。"
       : frame.kind === "wait" ? "你在等待新的消息或条件变化。" : frame.kind === "observe" ? "你查看了眼前的情况。" : "行动已完成。";
     if (status === "succeeded" || status === "partial") {
-      if (frame.kind === "move" && frame.targetEntityId) operations.push({ kind: "place_entity", entityId: frame.actorEntityId, placementId: frame.targetEntityId, ...source });
+      if (frame.kind === "move" && frame.targetEntityId) {
+        const near = selected(answers, `${prefix}_movement`) === "near";
+        const placementId = near ? state.truth.placements[frame.targetEntityId] ?? frame.targetEntityId : frame.targetEntityId;
+        operations.push({ kind: "place_entity", entityId: frame.actorEntityId, placementId, ...source });
+        if (near) {
+          const fact: WorldFact = { id: directSemanticId("fact", [frame.actorEntityId, "proximity"]), subjectId: frame.actorEntityId,
+            predicate: "proximity", value: { kind: "entity", entityId: frame.targetEntityId }, access: { kind: "public" },
+            description: "来到目标附近。", provenance: source.causes };
+          operations.push({ kind: "set_fact", fact, ...source });
+          detail = "你已经来到目标附近。";
+        }
+      }
       if (frame.kind === "transfer") {
         if (frame.quantityDefinitionId && frame.targetEntityId && frame.amount !== null) operations.push({ kind: "transfer_quantity", definitionId: frame.quantityDefinitionId,
           fromHolderId: frame.actorEntityId, toHolderId: frame.targetEntityId, amount: frame.amount, ...source });
@@ -305,20 +340,25 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
           if (amount) operations.push({ kind: "adjust_meter", meterId: meter.id, amount, ...source });
         }
       }
+      const expansion = worldExpansions.get(frame.id);
+      if (expansion) { operations.push(...expansion.operations); detail += ` ${expansion.draft.description}`; }
       const transaction = structuredClone(projected);
       try { for (const operation of operations) applyWorldDeltaOperation(transaction, operation); projected = transaction; }
       catch (error) { operations = []; status = "blocked"; detail = error instanceof Error && error.message === "insufficient quantity" ? "可用资源不足，这次转移没有发生。" : "当前状态不允许完成这次行动。"; }
     }
+    const expansion = worldExpansions.get(frame.id);
     const visibleFacts = [...visibility].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "visible").map(([, fact]) => fact);
     const visibleEntities = [...entityVisibility].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "visible").map(([, entity]) => entity);
     const deliveredToEntityIds = ["succeeded", "partial"].includes(status)
       ? (candidates.get(prefix) ?? []).filter((_, ordinal) => selected(answers, `${prefix}_delivery${ordinal}`) === "delivered") : [];
-    if (frame.kind === "speak" && (!frame.utterance || !deliveredToEntityIds.length)) { status = "blocked"; detail = "话语尚未送达。"; }
-    else if (frame.kind === "speak") detail = `你说：“${frame.utterance}”话语已送达。`;
+    if (frame.kind === "speak" && !frame.utterance) { status = "blocked"; detail = "还没有形成实际话语。"; }
+    else if (frame.kind === "speak" && ["succeeded", "partial"].includes(status)) detail = deliveredToEntityIds.length
+      ? `你说：“${frame.utterance}”话语已送达。` : `你说：“${frame.utterance}”没有听众作出回应。`;
     if (!["succeeded", "partial"].includes(status)) operations = [];
     prepared.push({ actionId: frame.id, status, summary: detail, operations, reads: view.reads,
-      visibleFactIds: ["succeeded", "partial"].includes(status) ? visibleFacts.map(fact => fact.id) : [],
-      visibleEntityIds: ["succeeded", "partial"].includes(status) ? visibleEntities.map(entity => entity.id) : [], deliveredToEntityIds,
+      visibleFactIds: ["succeeded", "partial"].includes(status) ? [...visibleFacts, ...(expansion?.facts ?? []),
+        ...operations.flatMap(operation => operation.kind === "set_fact" && operation.fact.predicate === "proximity" ? [operation.fact] : [])].map(fact => fact.id) : [],
+      visibleEntityIds: ["succeeded", "partial"].includes(status) ? [...visibleEntities, ...(expansion?.entities ?? [])].map(entity => entity.id) : [], deliveredToEntityIds,
       namedEntityIds: [...entityNames].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "named").map(([, entityId]) => entityId),
       randomRequests: operations.length ? randomRequests : [], randomBindings: operations.length ? randomBindings : [],
       sharedClaims: [...claims].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "claim").map(([, claim]) => claim),

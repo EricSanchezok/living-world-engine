@@ -44,7 +44,7 @@ async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "co
       if (id.includes("capability")) answer = context.perspective ? option(q, value => typeof value === "object") : "apply";
       if (id.endsWith("_expression")) answer = mode === "extend-world" || mode === "construct" ? "expand" : "existing";
       if (id.includes("_created")) answer = id.endsWith("_name") ? "named" : "visible";
-      return [id, nativeAnswer(q, answer)];
+      return [id, nativeAnswer(q, id === "expression" ? 0 : answer)];
     }));
   });
   const world = loadWorldScript(path.resolve("test/fixtures/station-program-world"), { seed: 17, modelCatalog: f.catalog });

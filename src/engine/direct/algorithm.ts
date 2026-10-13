@@ -25,7 +25,7 @@ import { commitDirectRecord, directCandidate, sealDirectRecord } from "./canonic
 
 export interface DirectWorldConfig extends CapabilityModelOverrides { creationEnabled: boolean }
 export const DIRECT_WORLD_CONFIG: DirectWorldConfig = { decision: null, creation: null, fallback: null, creationEnabled: true };
-export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "1", config: config as unknown as JsonObject });
+export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "2", config: config as unknown as JsonObject });
 export const directWorldAlgorithmRef = (config = DIRECT_WORLD_CONFIG) => algorithmRef(directWorldManifest(config));
 
 function components(state: Readonly<SimulationState>, frames: ActionFrame[]): ActionFrame[][] {
@@ -215,6 +215,9 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
         evidence.step === owner.observationCursorStep && evidence.description === observation.summary)) wakeIntent(control, owner.id, "observation", frame.id);
     }
     const operations: WorldDeltaOperation[] = settlements.flatMap(settlement => settlement.operations);
+    for (const operation of operations) if (operation.kind === "create_agent") {
+      control.intents[operation.agent.id] = readyIntent("world-arrival");
+    }
     if (effectiveTime > source.truth.elapsedSeconds) {
       const causes = events.length ? [{ kind: "event" as const, id: events[0]!.id }] : Object.values(source.truth.timers).filter(timer => timer.dueAtSeconds === effectiveTime).flatMap(timer => timer.causes);
       if (!causes.length) causes.push(...Object.values(source.truth.conditions).flatMap(condition => condition.provenance));

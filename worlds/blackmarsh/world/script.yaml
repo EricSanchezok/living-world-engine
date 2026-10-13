@@ -1,4 +1,4 @@
-schema_version: 16
+schema_version: 17
 id: blackmarsh
 name: 黑沼边境
 version: 1.1.0
@@ -11,3 +11,7 @@ model_profiles:
   decision: decision-jev
   creation: creation-deepseek
   fallback: decision-deepseek
+narrative:
+  language: zh-CN
+  style: 中文第二人称，质朴具体的边境奇幻小说。让地方风物与人物态度从可见细节和对白中显露，日常片段简洁，重要交谈充分展开。
+  expansion: true

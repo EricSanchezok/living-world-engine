@@ -62,11 +62,11 @@ const server = createServer(async (request, response) => {
     if (native) {
       const values: Record<string, string> = { operation: "observe", target: "self", recipient: "none", tool: "none", amount: "unknown", speech: "none", timing: "default", resource: "none", goal: "none" };
       const answers = Object.fromEntries(Object.entries(body.questions as Record<string, DecisionQuestionV2>).map(([id, question]) => {
-        if (question.type === "noul") return [id, { type: "noul", noul: 1 }];
+        if (question.type === "noul") return [id, { type: "noul", noul: id === "expression" ? 0 : 1 }];
         if (question.type === "score") return [id, { type: "score", score: 1, confidence: 1,
           legend: Object.fromEntries(question.criteria.map((value, index) => [String(index), value])),
           probabilities: Object.fromEntries(question.criteria.map((_, index) => [String(index), index === 1 ? 1 : 0])) }];
-        const wanted = values[id] ?? (id.includes("outcome") ? "succeeded" : id.includes("visible") || id.includes("entity") ? "visible"
+        const wanted = values[id] ?? (id.startsWith("paragraph") ? "grounded" : id.includes("outcome") ? "succeeded" : id.includes("visible") || id.includes("entity") ? "visible"
           : id.includes("goal_status") || id.includes("belief_status") || id.includes("fact") ? "unchanged" : id.includes("request_progress") ? "complete" : "none");
         const choice = wanted in question.criteria ? wanted : ["none", "unnamed", "target"].find(key => key in question.criteria) ?? Object.keys(question.criteria)[0]!;
         return [id, { type: "choice", choice, confidence: 1, probabilities: Object.fromEntries(Object.keys(question.criteria).map(key => [key, key === choice ? 1 : 0])) }];
@@ -74,7 +74,11 @@ const server = createServer(async (request, response) => {
       response.writeHead(200, { "content-type": "application/json" });
       response.end(JSON.stringify({ model, answers, usage: { input_tokens: 100, output_tokens: 10 } })); return;
     }
-    const output = model === "e2e-truth" ? truthOutput(context) : agentOutput(context);
+    const scene = context.scene as { observations?: unknown[]; speech?: Array<{ id: string; speaker: string }> } | undefined;
+    const output = scene?.observations ? { paragraphs: scene.speech?.length
+      ? scene.speech.map(speech => `${speech.speaker}说：[[${speech.id}]]`)
+      : ["你查看了眼前的情况。石门仍在面前，随身物资也清点清楚了。"] }
+      : model === "e2e-truth" ? truthOutput(context) : agentOutput(context);
     response.writeHead(200, { "content-type": "application/json" });
     response.end(JSON.stringify({
       id: `e2e-response:${model}:${Date.now()}`,

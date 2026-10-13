@@ -525,7 +525,7 @@ export function buildWorldDefinition(
   try {
     const mechanics = mechanicsCatalog(mechanicsDocument);
     const state: SimulationState = {
-      schemaVersion: 18,
+      schemaVersion: 19,
       executionState: null,
       worldId: manifest.id,
       worldHash,
@@ -566,6 +566,11 @@ export function buildWorldDefinition(
         createdAtStep: 0,
       };
       state.truth.placements[document.id] = document.placement;
+      if (document.presentation) for (const [predicate, description] of Object.entries({ appearance: document.presentation.description, appearance_label: document.presentation.label })) {
+        const id = `appearance-${contentHash([document.id, predicate]).slice(0, 24)}`;
+        state.truth.facts[id] = { id, subjectId: document.id, predicate, value: { kind: "text", value: description }, description,
+          access: { kind: "public" }, provenance: [{ kind: "world_seed", id: worldHash }] };
+      }
       for (const fact of document.facts) {
         if (state.truth.facts[fact.id]) throw new Error(`duplicate fact id ${fact.id}`);
         state.truth.facts[fact.id] = {
@@ -683,6 +688,7 @@ export function buildWorldDefinition(
         }),
       } : null,
       contentHash: worldHash,
+      narrative: structuredClone(manifest.narrative),
       modelProfiles: structuredClone(manifest.model_profiles),
       laws: laws.laws,
       disclosure: { defaultCheckVisibility: laws.disclosure.default_check_visibility },

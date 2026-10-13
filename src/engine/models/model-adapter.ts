@@ -1,3 +1,4 @@
+import { observeResponseStream } from "./response-stream";
 import { generateText, streamText, jsonSchema, NoObjectGeneratedError, NoOutputGeneratedError, Output, tool } from "ai";
 import { JSONRepairError, jsonrepair } from "jsonrepair";
 import { z } from "zod";
@@ -478,6 +479,14 @@ function dialectFetch(
     };
     emitRawTransport(capture, "model.transport.request.raw", requestInput);
     const response = await baseFetch(input, { ...init, headers, body });
+    if (streamModelId && response.ok) {
+      if (!response.headers.get("content-type")?.startsWith("text/event-stream")) throw new Error("DeepSeek streaming response has no SSE body");
+      return observeResponseStream(response, raw => {
+        emitRawTransport(capture, "model.transport.response.raw", { url: response.url || requestInput.url,
+          status: response.status, statusText: response.statusText, headers: transportHeaders(response.headers), body: raw });
+        completeDeepSeekJsonStream(raw, streamModelId);
+      }).response;
+    }
     let responseBody: string | null = null;
     try {
       responseBody = await response.clone().text();
@@ -493,12 +502,6 @@ function dialectFetch(
       headers: transportHeaders(response.headers),
       body: responseBody,
     });
-    if (streamModelId && response.ok) {
-      if (!response.headers.get("content-type")?.startsWith("text/event-stream") || responseBody === null) {
-        throw new Error("DeepSeek streaming response has no SSE body");
-      }
-      completeDeepSeekJsonStream(responseBody, streamModelId);
-    }
     return response;
   };
 }
@@ -614,6 +617,7 @@ class ProtocolModelAdapter implements ModelProviderAdapter {
 
     if (mode === "json-object-zod") {
       let recoveryEvidence: ModelJsonRecoveryEvidence | undefined;
+      let publicationFailure: unknown;
       const layout = repairPromptLayout(request.userPrompt, contextJson, request.repairContextPlacement);
       const generation = {
         ...common,
@@ -633,8 +637,19 @@ class ProtocolModelAdapter implements ModelProviderAdapter {
             let streamError: unknown;
             const streamed = streamText({ ...generation, onError: ({ error }) => { streamError = error; } });
             try {
+              const consume = async () => {
+                let text = "";
+                for await (const chunk of streamed.textStream) {
+                  text += chunk;
+                  // A rejected paragraph must not discard the provider's final usage.
+                  if (publicationFailure === undefined) {
+                    try { await request.onOutputText?.(text); } catch (error) { publicationFailure = error; }
+                  }
+                }
+                return text;
+              };
               const [text, response, finishReason, usage] = await Promise.all([
-                streamed.text, streamed.response, streamed.finishReason, streamed.usage,
+                consume(), streamed.response, streamed.finishReason, streamed.usage,
               ]);
               if (streamError !== undefined) throw streamError;
               return { text, response, finishReason, usage };
@@ -645,6 +660,7 @@ class ProtocolModelAdapter implements ModelProviderAdapter {
           })()
         : await generateText(generation);
       return completedOutput(result, () => {
+        if (publicationFailure !== undefined) throw new ModelOutputError(`Presentation segment could not be published: ${publicationFailure instanceof Error ? publicationFailure.message : String(publicationFailure)}`, undefined, { cause: publicationFailure });
         if (!result.text.trim()) {
           throw new ModelOutputError(`${binding.accountId} returned empty JSON content`);
         }

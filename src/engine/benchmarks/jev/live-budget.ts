@@ -1,3 +1,4 @@
+import { observeResponseStream } from "../../models/response-stream";
 import { mkdirSync, openSync, closeSync, unlinkSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
@@ -42,7 +43,18 @@ export function createJevLiveBudget(root: string, stopReason: () => string | und
               inputCeiling: native ? 64000 : Buffer.byteLength(init.body, "utf8") + 4096,
               outputCeiling: native ? 4_000_000 : Number(body.max_tokens ?? body.max_output_tokens) });
             try {
-              const response = await transport(url, init), raw = await response.clone().text();
+              const response = await transport(url, init);
+              if (response.ok && response.headers.get("content-type")?.includes("text/event-stream")) {
+                const observed = observeResponseStream(response, raw => {
+                  const packets = raw.split(/\r?\n/u).filter(line => line.startsWith("data:") && !line.includes("[DONE]"))
+                    .map(line => JSON.parse(line.slice(5).trim()) as { usage?: unknown });
+                  budget.settle(id, deepSeekExperimentUsage(packets.findLast(packet => packet.usage != null)));
+                }, () => budget.markUnknown(id));
+                pending.add(observed.finished);
+                void observed.finished.finally(() => pending.delete(observed.finished)).catch(() => undefined);
+                return observed.response;
+              }
+              const raw = await response.clone().text();
               let value: unknown;
               if (response.headers.get("content-type")?.includes("text/event-stream")) {
                 const packets = raw.split(/\r?\n/u).filter(line => line.startsWith("data:") && !line.includes("[DONE]"))

@@ -1485,19 +1485,21 @@ export function buildWorldInspectorStepDetail(
     new Map(actors.map((actor) => [actor.entityId, actor.id])),
     audits,
   );
-  const executionEvents = runtimeEvents.filter((event) =>
-    event.correlation?.executionId === committed.executionRef?.executionId);
+  const narratives = document.narratives.filter(beat => beat.source.observations.some(observation => observation.revision === revision));
+  const executionIds = new Set([committed.executionRef?.executionId, ...narratives.flatMap(beat => beat.executionIds)].filter((id): id is string => Boolean(id)));
+  const executionEvents = runtimeEvents.filter((event) => event.correlation?.executionId && executionIds.has(event.correlation.executionId));
   return {
     apiVersion: WORLD_INSPECTOR_API_VERSION,
     summary: projection.summary,
     committed: { ...structuredClone(committed), modelAudits: audits },
+    narratives: structuredClone(narratives),
     interaction: interactionEvidenceForStep(runtimeEvents, committed),
     ...(committed.directEvent ? { directRuntime: inspectDirectRuntime(before, committed) } : {}),
     before: snapshot(before),
     after: snapshot(after),
     runtimeEvents: executionEvents.map(summarizeRuntimeEvent),
-    modelInvocations: modelInvocationProjection(executionEvents).map((invocation) =>
-      scopeModelInvocation(committed.executionRef?.executionId ?? `revision-${revision}`, invocation)),
+    modelInvocations: [...executionIds].flatMap(executionId => modelInvocationProjection(executionEvents.filter(event => event.correlation?.executionId === executionId))
+      .map(invocation => scopeModelInvocation(executionId, invocation))),
     trace: traceAvailability(executionEvents),
   };
 }

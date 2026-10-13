@@ -1,0 +1,27 @@
+# Open creation and participant narration
+
+This reference owns the expression and presentation boundaries approved in [Spec 0183](../specs/0183-open-actions-immersive-narrative.md), implemented by [direct execution](direct-runtime.md), [`world-narrative.ts`](../../src/server/world-narrative.ts) and WorldHost. Public API v14 exposes saved prose and separate time, source revision and activity metadata.
+
+## Creative authority
+
+`ActionExpression` contains an attempt, optional literal utterance and observable manner. Its creation context belongs to one actor: local identities, private evidence, personality, relationships, goals and the actual conversational move. NPC wording comes from the creation model. Player expression preserves explicit quotations and separates stage directions from words. Neither expression nor player input directly changes canonical state.
+
+World adjudication can request a `WorldExpansionDraft` for missing scene content. The draft names new entities, optional character settings, qualitative facts and local occurrences. Code supplies stable IDs, placements, public appearance facts and private initial cognition. One local Jev decision admits the addition against established facts, access, materials and chronology. Mechanical checks still own references, quantities and atomicity. New actors receive goals and a ready intention in the same event. Capability declarations use the existing reusable capability path.
+
+Expansion fills unsettled space or records a new arrival, discovery or occurrence. It cannot overwrite an established property through the expansion channel. Resource production and consumption use authorized mechanisms. A failed expansion remains a local blocked outcome; generated proposals are retained in the invocation evidence. The [world format](script-format.md) owns authored appearance and narrative preferences.
+
+## Frozen scenes and ordered prose
+
+World persistence registers pending `NarrativeBeat` work in the same instance transaction as the committed world result. A `ScenePacket` contains that participant's observations, perceptible details, actual delivered speech, relevant private evidence and requested action. Ordinary narration never receives the canonical world or another actor's cognition. Testimony and inference remain attributed; an NPC's words do not establish their truth.
+
+Each participant's beats retain chronological order. Fresh observations for the same submission can join an unstarted beat; a started beat freezes its source hash. Further events form the next beat. World simulation and model computation remain separate, so unrelated model work cannot retroactively write a past event.
+
+The creation gateway forwards streamed JSON text while retaining terminal provider usage. Complete paragraphs pass a focused Jev check for unsupported interactive content, changed outcomes and player agency before receiving stable sequence numbers and being persisted. This check is diagnostic evidence, not a guarantee of prose correctness. New factual errors trigger the same single continuation allowance as transport failures; harmless phrasing is allowed. SSE notifies readers only after persistence. A reconnect reads those same segments. Delivered speech references are replaced with exact utterances by code. Direct quoted utterances must match delivered words; a rewritten quote is repaired before publication. The narrator selects focus, rhythm and detail from established content, leaving new interactive objects, characters and state changes to world creation.
+
+GET, Inspector reads and SSE subscriptions create no model requests. Startup resumes pending work from its saved prefix. A failed prose attempt permits one continuation; after two attempts a factual fallback retains world outcomes and already published text. The reply deadline is held while required feedback is pending and starts when it is ready. Simulation deadlines continue to follow world time.
+
+## Evidence and measurement
+
+Inspector step detail includes frozen sources, segment status, attempt count, execution IDs, producer profile/model/prompt, publication decisions and generation errors. Narration uses separate Ledger executions; request, response, usage and price evidence remains available through the shared invocation list. Time and progress are rendered outside the prose body.
+
+[`immersive-narrative.ts`](../../scripts/experiments/immersive-narrative.ts) runs development, frozen confirmation and continuous sessions through WorldHost with persisted replay and restart checks. It records first saved paragraph and complete feedback separately, retaining full prose, world state and the same-event observation text. These timings become useful-feedback measurements only after content review. The paid transport shares the append-only browser budget; an authorized tranche does not erase historical charges or unknown reservations.

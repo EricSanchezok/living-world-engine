@@ -49,9 +49,11 @@ export async function runPlayerFeedbackAction(input: {
       const run = intent && document.runs[intent.runId];
       if (!run) throw new Error("submitted player action has no durable run");
       const turn = detail.conversation?.turns.find(turn => turn.action?.submissionId === input.submissionId);
+      if (turn?.responses?.some(response => response.text.trim())) result.firstFeedbackElapsedMs ??= observedElapsedMs;
       for (const revision of run.committedRevisions.filter(revision => revision > previous.revision)) {
         const committed = document.state.history.find(entry => entry.revision === revision);
-        const response = turn?.responses?.find(response => response.revision === revision);
+        const response = turn?.responses?.find(response => response.sourceRevisions?.includes(revision) || response.revision === revision);
+        if (!response || response.narrativeStatus === "generating" || response.narrativeStatus === "queued") break;
         if (!committed || !response?.text.trim() || turn?.action?.text !== input.text ||
           committed.revision !== previous.revision + 1 || committed.step !== previous.step + 1) {
           throw new Error("player feedback is not bound to a contiguous committed world step");
@@ -67,6 +69,10 @@ export async function runPlayerFeedbackAction(input: {
         input.onCheckpoint({ source: previous, checkpoint, committed }, observedElapsedMs);
         previous = checkpoint;
         input.onUpdate(result);
+      }
+      if (document.narratives.some(beat => beat.submissionId === input.submissionId && ["queued", "generating"].includes(beat.status))) {
+        await new Promise(resolve => setTimeout(resolve, input.pollMs ?? 250));
+        continue;
       }
       if (["failed", "preparation-invalidated", "budget-paused", "paused", "debug-paused"].includes(run.status)) {
         throw new Error(run.error ?? run.stopReason ?? run.status);

@@ -771,7 +771,7 @@ export class ModelGateway implements StructuredModelProvider {
         }
         const error = unwrapScheduledError(scheduledError);
         const outputError = isOutputError(error);
-        const retryable = transportAttempts < this.maxTransportAttempts &&
+        const retryable = !request.onOutputText && transportAttempts < this.maxTransportAttempts &&
           isRetryableTransportError(error, dispatchSignal);
         const transportCompleted = transports.some((attempt) =>
           attempt.attempt === transportAttempts && attempt.status === "succeeded");

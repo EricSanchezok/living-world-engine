@@ -38,6 +38,8 @@ export interface ModelExecutionScope {
 }
 
 export interface StructuredModelRequest<T> extends ModelExecutionScope {
+  /** Presentation-only cumulative text callback. Callers publish complete, validated segments. */
+  onOutputText?: (text: string) => Promise<void>;
   /** Server-owned physical compiler membership; never a provider generation parameter. */
   boundActionIds?: readonly string[];
   profileId: string;

@@ -173,7 +173,7 @@ function ActionSubmitConsole() {
     <div className="cg-thread-status" aria-label="行动提交状态" role="status">
       <div className="cg-thread-status__copy">
         <strong>正在确认行动</strong>
-        <span>已收到你的描述，正在把它交给世界边界。</span>
+        <span>已收到你的行动，正在等待眼前的回应。</span>
       </div>
     </div>
   );
@@ -187,22 +187,21 @@ function participantMessages(
   const messages = turns.flatMap((turn): ThreadMessageLike[] => {
     const responses = turn.responses?.length ? turn.responses : turn.response ? [turn.response] : [];
     const assistants: ThreadMessageLike[] = responses.length > 0 ? responses.map((response, index) => {
-      const temporal = response.worldTimeSeconds === undefined ? "" :
-        `\n\n世界时间 ${response.worldTimeSeconds}s${response.activity?.stage ? ` · ${response.activity.stage}` : ""}`;
       return {
-        id: `${turn.id}:world:${response.revision}:${index}`,
+        id: response.id ? `${turn.id}:world:${response.id}` : `${turn.id}:world:${response.revision}:${index}`,
         role: "assistant" as const,
         content: [{ type: "text" as const, text: response.title
-          ? `${response.title}\n\n${response.text}${temporal}`
-          : `${response.text}${temporal}` }],
+          ? `${response.title}\n\n${response.text}`
+          : response.text }],
+        metadata: { custom: { worldTimeSeconds: response.worldTimeSeconds, activityStage: response.activity?.stage } },
         createdAt: new Date(turn.createdAt),
-        status: assistantStatus(turn.status),
+        status: assistantStatus(response.narrativeStatus === "complete" || response.narrativeStatus === "fallback" ? "committed" : turn.status),
       };
     }) : [{
       id: `${turn.id}:world`,
       role: "assistant" as const,
       content: [{ type: "text" as const, text: turn.status === "failed"
-        ? "这次行动没有改变世界。你可以调整说法后重试。"
+        ? "这次尝试暂时没有得到完整回应。已经发生的变化会保留，你可以继续或重试。"
         : "世界正在推演…" }],
       createdAt: new Date(turn.createdAt),
       status: assistantStatus(turn.status),

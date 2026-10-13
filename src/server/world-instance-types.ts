@@ -1,3 +1,4 @@
+import type { NarrativeBeat } from "./world-narrative";
 import type {
   AlgorithmRef,
   ExternalActionInput,
@@ -155,7 +156,7 @@ export interface ParticipantReactionRecord {
 }
 
 export interface WorldInstanceDocument {
-  schemaVersion: 25;
+  schemaVersion: 26;
   id: string;
   world: WorldRuntimeContract;
   executionAlgorithm: AlgorithmRef;
@@ -174,6 +175,7 @@ export interface WorldInstanceDocument {
   runtime: InstanceRuntimeConfig;
   scheduler: SchedulerState;
   runs: Record<string, WorldRunRecord>;
+  narratives: NarrativeBeat[];
   participantIntents: ParticipantIntentRecord[];
   reactionSubmissions: ParticipantReactionRecord[];
 }

@@ -1225,6 +1225,7 @@ function DetailBody({ actorId, actorName, detail, instanceId, onSelectInvocation
   return (
     <div className="cg-inspector-detail-stack">
       {step.directRuntime && <WorldInspectorDirect value={step.directRuntime} actorId={actorId} />}
+      {Boolean(step.narratives?.length) && <JsonInspector label="场景来源、逐段保存、叙述调用与恢复" value={step.narratives} />}
       {actorId === "world"
         ? <WorldOverview detail={step} />
         : <ActorOverview actorId={actorId} actorName={actorName} detail={step} />}

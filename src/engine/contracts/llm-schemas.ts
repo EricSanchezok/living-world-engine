@@ -959,6 +959,9 @@ const introductionSchema = z.strictObject({
 });
 
 const observationDraftShape = {
+  scene: z.object({ actionKind: z.string(), status: z.enum(["succeeded", "partial", "failed", "blocked", "continuing"]), actor: z.string(), attempt: z.string(), outcome: z.string(), manner: z.string().nullable(),
+    speech: z.object({ speaker: z.string(), utterance: z.string() }).nullable(),
+    details: z.array(z.object({ label: z.string(), description: z.string() })) }).optional(),
   observerId: semanticIdSchema,
   summary: z.string(),
   introductions: z.array(introductionSchema),

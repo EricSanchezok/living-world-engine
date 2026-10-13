@@ -5,8 +5,14 @@ import type { AlgorithmRef } from "../runtime/execution";
 import type { JsonValue } from "../runtime/json";
 
 export type ActionKind = "move" | "observe" | "reflect" | "speak" | "transfer" | "use" | "change" | "wait";
+export interface ActionExpression {
+  attempt: string;
+  utterance: string | null;
+  manner: string | null;
+}
 export interface ActionFrame {
   version: 1; id: string; actorId: string; actorEntityId: string; submissionId: string | null;
+  expression?: ActionExpression;
   proposal: AgentActionProposal; kind: ActionKind; goalId: string | null;
   targetEntityId: string | null; toolEntityId: string | null; quantityDefinitionId: string | null;
   amount: number | null; utterance: string | null; capabilityId: string | null;

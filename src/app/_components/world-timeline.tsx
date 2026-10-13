@@ -16,7 +16,7 @@ export type TimelineEntry = {
   worldTimeSeconds?: number;
   title: string;
   excerpt: string;
-  outcome?: "unchanged" | "pending";
+  outcome?: "unchanged" | "pending" | "incomplete";
   activity?: NonNullable<PublicWorldRun["activity"]>;
 };
 
@@ -34,9 +34,9 @@ export function participantTimeline(detail: PublicInstanceDetail): TimelineEntry
         targetId: `${turn.id}:action`,
         kind: "player" as const,
         revision: turn.baseRevision,
-        title: turn.status === "failed" ? "行动未改变世界" : "你的行动",
+        title: turn.status === "failed" ? "回应暂未完成" : "你的行动",
         excerpt: turn.action.text,
-        outcome: turn.status === "failed" ? "unchanged" as const : "pending" as const,
+        outcome: turn.status === "failed" ? "incomplete" as const : "pending" as const,
       }];
     }
     const firstResponse = responses[0];
@@ -51,7 +51,7 @@ export function participantTimeline(detail: PublicInstanceDetail): TimelineEntry
     }] : [];
     const worldEntries = responses.map((response, index) => ({
       id: `timeline:${turn.id}:${response.revision}:${index}`,
-      targetId: `${turn.id}:world:${response.revision}:${index}`,
+      targetId: response.id ? `${turn.id}:world:${response.id}` : `${turn.id}:world:${response.revision}:${index}`,
       kind: "world" as const,
       step: response.step,
       revision: response.revision,
@@ -343,6 +343,7 @@ export function WorldTimelineRail({
               <p>{timelineExcerpt(previewEntry.excerpt)}</p>
               {previewEntry.outcome === "unchanged" ? <small>没有改变世界</small> : null}
               {previewEntry.outcome === "pending" ? <small>等待世界回复</small> : null}
+              {previewEntry.outcome === "incomplete" ? <small>已经发生的变化会保留</small> : null}
               {previewActivitySummary ? <small>{previewActivitySummary}</small> : null}
             </div>
           ) : null}

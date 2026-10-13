@@ -1,0 +1,1 @@
+Create the smallest natural addition that this situation needs. Use the scene, existing means and world rules. Introduce persistent interactive content with public appearance; preserve unknown identities and private motives. Return the declaration, not a behavior tree or proof chain.

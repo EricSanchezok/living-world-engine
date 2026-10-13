@@ -13,9 +13,10 @@ import { readDirectState } from "../state";
 import { speechSpans } from "../actions";
 
 async function fixture(options: { operation?: string; target?: string; tool?: string; amount?: string; failKeeper?: boolean;
-  observationScope?: string; speech?: string; creationEnabled?: boolean; privateGateFact?: boolean; named?: boolean } = {}) {
+  observationScope?: string; speech?: string; creationEnabled?: boolean; privateGateFact?: boolean; named?: boolean;
+  creationResponse?: unknown; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number } = {}) {
   const f = directTestProvider(wire => {
-    if (!wire.questions) return { type: "speak", utterance: "观察与他人的说法需要分开核对；下一步询问消息来源。" };
+    if (!wire.questions) return options.creationResponse ?? { attempt: "复核已有证据", utterance: "观察与他人的说法需要分开核对；下一步询问消息来源。" };
     const context = wire.state as { perspective?: { agentId: string }; submittedAction?: { rawText: string } };
     if (options.failKeeper && context.perspective?.agentId === "keeper") return new Response("unavailable", { status: 503 });
     const selection: Record<string, string> = { operation: options.operation ?? "observe", target: options.target ?? "door", recipient: options.target ?? "none", tool: options.tool ?? "none",
@@ -23,11 +24,15 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
       observation_scope: options.observationScope ?? "target" };
     selection.reflection = options.speech ?? "none";
     return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
-      let value = selection[id] ?? (id.includes("outcome") ? "succeeded" : id.includes("goal_status") || id.includes("belief_status") ? "unchanged" : id.includes("visible") ? "visible" : id.includes("delivery") ? "delivered" : id.includes("fact") ? "unchanged" : "none");
+      let value = selection[id] ?? (id.includes("outcome") ? options.outcome ?? "succeeded" : id.includes("goal_status") || id.includes("belief_status") ? "unchanged" : id.includes("visible") ? "visible" : id.includes("delivery") ? "delivered" : id.includes("fact") ? "unchanged" : "none");
       if (/_entity\d+_name$/u.test(id)) value = options.named ? "named" : "unnamed";
       else if (/_entity\d+$/u.test(id)) value = "visible";
+      if (id.endsWith("_world_expansion")) value = options.introduce ? "introduce" : "none";
+      if (id === "accept") value = "apply";
+      if (id.endsWith("_expression")) value = options.effectExpansion ? "expand" : "existing";
+      if (id.endsWith("_movement")) value = options.movement ?? "enter";
       if (q.type === "choice" && !(value in q.criteria)) value = "none" in q.criteria ? "none" : Object.keys(q.criteria)[0]!;
-      return [id, nativeAnswer(q, value)];
+      return [id, nativeAnswer(q, id === "expression" ? options.expression ?? 0 : value)];
     }));
   });
   const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
@@ -50,6 +55,74 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("separates a shouted action from actual words and delivers open speech to nearby people", async () => {
+    const f = await fixture({ operation: "speak", target: "broadcast", speech: "create", creationEnabled: true,
+      creationResponse: { attempt: "向周围大喊", utterance: "还有谁？", manner: "提高声音" } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("大喊一声还有谁"));
+    const frame = result.state.history[0]!.directEvent!.frames[0]!;
+    expect(frame).toMatchObject({ kind: "speak", utterance: "还有谁？", proposal: { rawText: "向周围大喊", goal: "大喊一声还有谁" } });
+    expect(result.committed.observations.find(o => o.observerId === "keeper")?.scene?.speech?.utterance).toBe("还有谁？");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("combines a requested gesture with exact quoted words in one expression", async () => {
+    const f = await fixture({ operation: "speak", target: "guard", speech: "q0", expression: 1, creationEnabled: true,
+      creationResponse: { attempt: "向守门人摆手致意并说话", utterance: "我只是问路！", manner: "摆手致意" } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request('向守门人摆手，说："我只是打个招呼。"'));
+    expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ utterance: "我只是打个招呼。", expression: { manner: "摆手致意" } });
+    expect(result.committed.observations.find(o => o.observerId === "keeper")?.scene?.speech?.utterance).toBe("我只是打个招呼。");
+  });
+  it("admits persistent new people with their own cognition and queues them without leaking private motivation", async () => {
+    const f = await fixture({ target: "none", observationScope: "surroundings", creationEnabled: true, introduce: true,
+      creationResponse: { description: "一个抱着木箱的人来到庭院。", entities: [{ key: "carrier", kind: "person", name: "洛禾",
+        label: "抱木箱的人", appearance: "磨白的短外衣，怀里抱着木箱。", placement: "scene",
+        character: { persona: "担心欠款，PRIVATE-MOTIVE", voice: "语速慢", goal: "找一份搬运工作" } }], facts: [], events: [] } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("看看庭院还有什么人"));
+    const newAgent = Object.values(result.state.agents).find(agent => !f.world.initialState.agents[agent.id])!;
+    expect(newAgent).toBeDefined(); expect(newAgent.character.persona.summary).toContain("PRIVATE-MOTIVE");
+    expect(readDirectState(result.state.executionState!, result.state).intents[newAgent.id]).toMatchObject({ status: "ready", wakeReasons: ["world-arrival"] });
+    expect(JSON.stringify(result.state.agents.player!.belief)).not.toContain("PRIVATE-MOTIVE");
+    expect(result.committed.observations[0]!.scene?.details).toContainEqual({ label: "抱木箱的人", description: "磨白的短外衣，怀里抱着木箱。" });
+    expect(result.state.truth.placements[newAgent.entityId]).toBe("courtyard");
+    const replay = replaySimulationState(result.state);
+    expect(replay).toEqual(result.state); expect(Object.keys(replay.agents)).toHaveLength(3);
+    const restored = new SimulationEngine(f.world, f.algorithm, JSON.parse(JSON.stringify(result.state)));
+    expect(Object.keys(restored.snapshot.agents)).toHaveLength(3);
+  });
+  it("approaches an object in its surrounding place rather than entering it", async () => {
+    const f = await fixture({ operation: "move", target: "guard", movement: "near" });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("走到守门人旁边"));
+    expect(result.state.truth.placements.player).toBe(result.state.truth.placements.keeper);
+    expect(result.state.truth.placements.player).not.toBe("keeper");
+    expect(result.committed.observations.find(o => o.observerId === "player")?.scene).toMatchObject({ actionKind: "move", status: "succeeded" });
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("can discover new ordinary content when the initial observation lacks evidence", async () => {
+    const f = await fixture({ operation: "observe", observationScope: "surroundings", target: "none", outcome: "unknown", introduce: true, creationEnabled: true,
+      creationResponse: { description: "庭院边发现一块无主碎木。", entities: [{ key: "scrap", kind: "object", name: "碎木", label: "一块碎木", appearance: "一块断裂的废弃木片。", placement: "scene" }], facts: [{ subject: "courtyard", predicate: "scrap-discovery", value: "碎木躺在院边。", description: "院边有碎木。" }, { subject: "scrap", predicate: "appearance", value: "碎木", description: "碎木" }], events: [] } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("找找庭院里是否有无主碎木"));
+    expect(Object.values(result.state.truth.entities).some(e => e.name === "碎木")).toBe(true);
+    expect(result.committed.observations.find(o => o.observerId === "player")?.scene?.status).toBe("succeeded");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("does not silently turn an unrepresented player attempt into observation", async () => {
+    const f = await fixture({ operation: "unknown", target: "door" }); await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("试着用门框当作杠杆的支点"));
+    expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "use", preparatoryFor: null });
+  });
+  it("contains a failed capability creation as one blocked action and keeps the instance replayable", async () => {
+    const f = await fixture({ operation: "use", target: "door", effectExpansion: true, creationEnabled: true,
+      creationResponse: new Response("unavailable", { status: 503 }) });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("为门框增加一个临时支点"));
+    expect(result.committed.outcomes[0]?.status).toBe("blocked");
+    expect(result.state.truth.entities).toEqual(f.world.initialState.truth.entities);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("preserves exact question and evidence spans as selectable dialogue", () => {
     expect(speechSpans("询问：附近有哪些住宿地点？请说明消息来源。" )).toContain("附近有哪些住宿地点？请说明消息来源。");
     expect(speechSpans("个人值班记录上的校验码为 ORBIT-7。" )).toContain("个人值班记录上的校验码为 ORBIT-7。");

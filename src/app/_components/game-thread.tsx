@@ -84,6 +84,8 @@ function AssistantMessage({
 }) {
   const id = useAuiState((state) => state.message.id);
   const isLast = useAuiState((state) => state.message.isLast);
+  const worldTime = useAuiState((state) => state.message.metadata.custom.worldTimeSeconds);
+  const activityStage = useAuiState((state) => state.message.metadata.custom.activityStage);
   return (
     <MessagePrimitive.Root
       className="animate-in fade-in slide-in-from-bottom-1 relative duration-150 motion-reduce:animate-none"
@@ -94,6 +96,7 @@ function AssistantMessage({
       <div className="cg-assistant-message">
         <MessagePrimitive.Parts components={{ Text: MessageText }} />
       </div>
+      {typeof worldTime === "number" ? <p className="cg-muted mt-2 text-xs">世界时间 {worldTime}s{typeof activityStage === "string" ? ` · ${activityStage}` : ""}</p> : null}
       <div className="ms-2 flex min-h-7.5 items-center pt-1.5">
         <ActionBarPrimitive.Root
           autohide="never"

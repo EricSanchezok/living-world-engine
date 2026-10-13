@@ -20,9 +20,19 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
     const recipients = new Set([settlement.frame.actorId, ...settlement.deliveredToEntityIds.flatMap(id => Object.values(state.agents).filter(agent => agent.entityId === id).map(agent => agent.id))]);
     for (const ownerId of recipients) {
       const agent = state.agents[ownerId]!, introductions: ObservationPacket["introductions"] = [], renamed: LocalEntity[] = [];
+      const appearanceFacts = Object.values(state.truth.facts).filter(fact =>
+        settlement.visibleEntities.some(entity => entity.id === fact.subjectId) && fact.access.kind === "public" &&
+        ["appearance", "appearance_label"].includes(fact.predicate));
+      const facts = [...new Map([...settlement.visibleFacts, ...appearanceFacts].filter(fact => fact.access.kind === "public" ||
+        fact.access.kind === "agents" && fact.access.agentIds.includes(ownerId)).map(fact => [fact.id, fact])).values()];
+      const details: Array<{ label: string; description: string }> = [];
+      const targetLabel = settlement.frame.targetEntityId ? alias(agent, settlement.frame.targetEntityId, introductions).name : "四周";
+      const concreteAttempt = settlement.frame.kind === "move" ? `走向${targetLabel}`
+        : settlement.frame.kind === "observe" ? settlement.frame.observationScope === "inventory" ? "清点随身物资" : `查看${targetLabel}`
+        : settlement.frame.expression?.attempt ?? settlement.frame.proposal.rawText;
       const spoken = settlement.frame.utterance && settlement.deliveredToEntityIds.includes(agent.entityId);
       let summary = spoken ? `${alias(agent, settlement.frame.actorEntityId, introductions).name}说：“${settlement.frame.utterance}”` :
-        ownerId === settlement.frame.actorId ? `你尝试了“${settlement.frame.proposal.rawText}”。${settlement.outcome.summary}` : settlement.outcome.summary;
+        ownerId === settlement.frame.actorId ? `你尝试了“${concreteAttempt}”。${settlement.outcome.summary}` : settlement.outcome.summary;
       if (ownerId === settlement.frame.actorId && settlement.frame.kind === "reflect") {
         summary += `\n${settlement.frame.utterance ?? (Object.values(agent.belief.evidence).map(evidence =>
           `${evidence.kind === "testimony" ? "听到的说法" : evidence.kind === "observation" ? "观察记录" : "已有记录"}：${evidence.description}`).join("\n") || "你还没有可供核对的记录。")}`;
@@ -40,19 +50,28 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
         const local = alias(agent, entity.id, introductions);
         const named = settlement.namedEntityIds.includes(entity.id);
         const introduced = introductions.find(intro => intro.localEntity.id === local.id);
-        if (introduced) { introduced.localEntity.name = named ? entity.name : observedKindLabel(entity.kind);
-          introduced.localEntity.description = named ? "这次观察确认了其存在和可辨认的名称。" : "这次观察确认了其存在；尚未确认名字和身份。"; }
-        else if (named && local.name !== entity.name) renamed.push({ ...local, name: entity.name });
-        summary += `\n你注意到${named ? entity.name : local.name}。`;
+        const appearance = facts.find(fact => fact.subjectId === entity.id && fact.predicate === "appearance")?.description;
+        const label = named ? entity.name : facts.find(fact => fact.subjectId === entity.id && fact.predicate === "appearance_label")?.description ?? local.name;
+        const next = { ...local, name: label === "附近的对象" ? observedKindLabel(entity.kind) : label,
+          description: appearance ?? local.description };
+        if (introduced) introduced.localEntity = next;
+        else if (next.name !== local.name || next.description !== local.description) renamed.push(next);
+        details.push({ label: next.name, description: next.description });
+        summary += `\n${next.name}：${appearance ?? "你能看见其所在的位置。"}`;
       }
       // A semantic visibility answer cannot grant access to another actor's private truth.
       // Delivered speech remains testimony even when it quotes that private fact correctly.
-      const facts = settlement.visibleFacts.filter(fact => fact.access.kind === "public" ||
-        fact.access.kind === "agents" && fact.access.agentIds.includes(ownerId));
       for (const fact of facts) summary += `\n${alias(agent, fact.subjectId, introductions).name}：${fact.value.kind === "entity"
         ? describeValue(agent, fact.value, introductions) : fact.description}`;
       const id = runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "observation", stage: "direct-perception", owner: ownerId, round: 0, ordinal: index });
-      const packet: ObservationPacket = { id, observerId: ownerId, step, kind: "outcome", summary, introductions, apparentClaims: [], sourceEventIds: [events[index]!.id] };
+      const completedExpression = ["succeeded", "partial"].includes(settlement.outcome.status);
+      const actorEntity = alias(agent, settlement.frame.actorEntityId, introductions);
+      const actor = ownerId === settlement.frame.actorId ? "你" : renamed.find(entity => entity.id === actorEntity.id)?.name ?? actorEntity.name;
+      const packet: ObservationPacket = { id, observerId: ownerId, step, kind: "outcome", summary, introductions, apparentClaims: [], sourceEventIds: [events[index]!.id],
+        scene: { actionKind: settlement.frame.kind, status: settlement.outcome.status, actor, attempt: ownerId === settlement.frame.actorId ? concreteAttempt : "", outcome: settlement.outcome.summary.replace(/^你/u, actor),
+          manner: completedExpression ? settlement.frame.expression?.manner ?? null : null,
+          speech: settlement.frame.kind === "speak" && completedExpression && settlement.frame.utterance &&
+            (ownerId === settlement.frame.actorId || spoken) ? { speaker: actor, utterance: settlement.frame.utterance } : null, details } };
       const evidenceId = runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "evidence", stage: "direct-perception", owner: ownerId, round: 0, ordinal: index });
       const patch: BeliefPatch = { agentId: ownerId, baseRevision: state.revision + 1, operations: [{ kind: "upsert_evidence", evidence: {
         id: evidenceId, kind: settlement.frame.kind === "reflect" ? "inference" : spoken ? "testimony" : "observation", description: summary, sourceId: id, step } },

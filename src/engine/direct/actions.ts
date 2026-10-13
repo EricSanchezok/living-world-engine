@@ -10,7 +10,7 @@ import { runtimeId } from "../runtime/runtime-id";
 import { agentCapabilityModels } from "../models/capability-bindings";
 import { privateActionView } from "./views";
 import { DirectDecisions, selected } from "./decisions";
-import type { ActionFrame, ActionKind, DirectRuntimeState } from "./contracts";
+import type { ActionExpression, ActionFrame, ActionKind, DirectRuntimeState } from "./contracts";
 import { cognitiveQuestions, cognitiveUpdate } from "./cognition";
 import { orderedValues } from "./state";
 import { extendCapability } from "./capabilities";
@@ -69,7 +69,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const known = Object.entries(view.entities).map(([localId]) => [localId, agent.belief.localEntities[localId]!] as const);
   const targetCriteria = { none: "No target or insufficient identity evidence", ...Object.fromEntries(known.map(([id, entity]) => [id, { name: entity.name, description: entity.description }])) };
   const recipients = known.filter(([id]) => view.entities[id] !== agent.entityId && Object.values(state.agents).some(other => other.entityId === view.entities[id]));
-  const recipientCriteria = { none: "This branch has no intended recipient", discover: "No perceptible recipient is available; first find someone",
+  const recipientCriteria = { none: "This branch has no intended recipient", broadcast: "Speak or shout openly to whoever can hear, without needing a named listener", discover: "No perceptible recipient is available; first find someone",
     ...Object.fromEntries(recipients.map(([id, entity]) => [id, { name: entity.name, description: entity.description }])) };
   const spans = [...new Set([...speechSpans(text), ...orderedValues(agent.belief.evidence).flatMap(evidence => speechSpans(evidence.description)),
     ...speechSpans(agent.character.persona.summary)])];
@@ -84,18 +84,20 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     }),
     recipient: choice("If the next action communicates words or transfers goods, select its actual recipient. Discover a recipient before addressing an unknown person. Ignore for other operations.", recipientCriteria),
     amount: choice("amount", { unknown: "No established amount", ...Object.fromEntries(amounts.map((amount, index) => [`n${index}`, String(amount)])) }),
-    speech: choice("The actual words THIS speaker should say next. For an NPC answering a question, select words that answer or acknowledge it, not a verbatim copy of the received question. Existing testimony is evidence, not a script to echo.", { none: "No speech", input: "The entire player input is already the literal utterance", compose: "Compose an ordinary literal speech act from typed selections", create: "Need genuinely new literal dialogue beyond the available expressions",
+    speech: choice("The actual words THIS speaker should say next. For an NPC answering a question, select words that answer or acknowledge it, not a verbatim copy of the received question. Existing testimony is evidence, not a script to echo.", { none: "No speech", input: "The entire player input is already the literal utterance", create: "Realize the intended utterance naturally in this speaker's voice; action instructions are not literal speech",
       ...Object.fromEntries(quotes.map((quote, index) => [`q${index}`, quote])),
       ...Object.fromEntries(spans.map((span, index) => [`span${index}`, { literalWords: span }])) }),
     reflection: choice("If the operation is private reflection, does the request require NEW synthesis, distinctions, a plan or a formulated question? The instruction not to speak aloud concerns delivery; it does not mean no private text is needed.", {
       none: "Only retrieve and review existing records without new conclusions or wording",
       create: "Create the requested private synthesis, analysis, plan or concrete next question from existing evidence",
     }),
-    dialogue: choice("ordinary speech act, used only when speech is compose", { ask_price: "Ask the price of the selected object", request: "Request the selected resource amount",
+    dialogue: choice("communicative intention; guides expression but does not fix wording", { ask_price: "Ask the price of the selected object", request: "Request the selected resource amount",
       offer: "Offer the selected resource amount", accept: "Explicitly accept the currently discussed terms", refuse: "Explicitly refuse the currently discussed terms",
       clarify: "Ask for clearer terms", report: "State the selected existing belief", acknowledge: "Acknowledge and wait for actual evidence", unknown_information: "Tell the questioner that this Agent does not know the requested information" }),
     timing: choice("timing", { default: "Ordinary action duration from the world", ...Object.fromEntries(timing.map(profile => [profile.id, profile.name])) }),
   };
+  questions.expression = { type: "noul", version: "action-expression-1",
+    instructions: { task: loadPromptAsset("user/direct-action.md"), field: "Does THIS selected next action need a concrete expression, accompanying gesture, or separation from a compound request? Simple observation, plain movement, unchanged work and a quotation with no stage directions need none. A quotation accompanied by a gesture needs expression, preserving its exact words." } };
   if (!external) questions.urgency = { type: "score", version: "urgency-1", instructions: { task: loadPromptAsset("user/direct-action.md"), field: "urgency of the next action" },
     criteria: ["May reasonably wait", "Should act when available", "Immediate deadline or danger"] };
   if (!external && intent.lastActionHash && intent.wakeReasons.includes("observation")) questions.relevant = { type: "noul", version: "wake-relevance-1",
@@ -126,52 +128,49 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const observationScope = selected(answers, "observation_scope") as ActionFrame["observationScope"];
   const target = operation === "observe" && observationScope === "inventory" ? agent.entityId
     : operation === "observe" && observationScope === "surroundings" ? null : view.entities[targetKey] ?? null;
-  const preparatoryFor: ActionKind | null = operation === "unknown" ? "observe" : ["speak", "transfer", "move"].includes(operation) && !target ? operation as ActionKind : null;
+  const preparatoryFor: ActionKind | null = ["speak", "transfer", "move"].includes(operation) && !target && targetKey !== "broadcast" ? operation as ActionKind : null;
   if (!external && (["wait", "unknown"].includes(operation) || answers.relevant?.type === "noul" && answers.relevant.noul < 0.5)) {
     intent.status = "waiting"; intent.wait = { entityIds: target ? [target] : [], untilSeconds: null, reason: operation };
     return { frame: null, audits: [] as ModelExecutionAudit[], reads: view.reads, cognition };
   }
   const audits: ModelExecutionAudit[] = [];
   let utterance: string | null = null;
+  let expression: ActionExpression | undefined;
   const speech = selected(answers, operation === "reflect" ? "reflection" : "speech");
-  if (["speak", "reflect"].includes(operation) && !preparatoryFor) {
-    if (/^q\d+$/u.test(speech)) utterance = quotes[Number(speech.slice(1))] ?? null;
-    else if (/^span\d+$/u.test(speech)) utterance = spans[Number(speech.slice(4))] ?? null;
+  const literal = /^q\d+$/u.test(speech) ? quotes[Number(speech.slice(1))] : undefined;
+  const needsExpression = !preparatoryFor && (
+    operation === "speak" && (!external || !literal) ||
+    operation === "reflect" && speech === "create" ||
+    answers.expression?.type === "noul" && answers.expression.noul >= 0.5);
+  if (needsExpression && input.creationEnabled) {
+    const system = loadPromptAsset("system/direct-utterance.md"), userPrompt = loadPromptAsset("user/direct-utterance.md");
+    const generated = await decisions.provider.generateStructured({ ...decisions.scope, modelRegistrySnapshotHash: control.registryHash,
+      profileId: profiles.creation, subjectId: agentId, role: "creation", modelInvocation: decisions.next(agentId),
+      system, userPrompt, promptVersion: `action-expression-${contentHash({ system, userPrompt })}`, schemaName: "ActionExpressionV1",
+      context: { ...context as Record<string, JsonValue>, language: input.definition.narrative.language, recipient: operation === "reflect" ? null : targetKey,
+        chosenDirection: operation, communicativeIntent: selected(answers, "dialogue"), playerControlled: Boolean(external),
+        exactQuotes: quotes, expression: operation === "reflect" ? "Private reflection; do not deliver to anyone." : "Concrete attempted behavior and actual words before execution. Outcomes are not yet decided." },
+      schema: z.object({ attempt: z.string().optional(), utterance: z.string().nullable().optional(), manner: z.string().nullable().optional() }), jsonExamplePolicy: "omit" });
+    expression = { attempt: generated.value.attempt?.trim() || text || actionLabels[operation as ActionKind] || "尝试行动",
+      utterance: literal && external ? literal : generated.value.utterance?.trim() || null, manner: generated.value.manner?.trim() || null };
+    utterance = expression.utterance; audits.push(generated.audit);
+  } else if (literal && external) utterance = literal;
+  else if (["speak", "reflect"].includes(operation) && !preparatoryFor) {
+    if (/^span\d+$/u.test(speech)) utterance = spans[Number(speech.slice(4))] ?? null;
     else if (speech === "input" && external) utterance = text;
-    else if (speech === "compose") {
-      const resource = questions.resource ? state.truth.mechanics.quantities[selected(answers, "resource")] : null;
-      const amount = selected(answers, "amount") === "unknown" ? null : amounts[Number(selected(answers, "amount").slice(1))];
-      const phrase = resource && amount !== null ? `${amount}${resource.unit}${resource.name}` : "所需物资";
-      const tool = agent.belief.localEntities[selected(answers, "tool")]?.name ?? "这件物品";
-      const claim = questions.claim ? agent.belief.claims[selected(answers, "claim")] : null;
-      const belief = claim ? `${agent.belief.localEntities[claim.subjectId]?.name ?? "该对象"}的${claim.predicate}是${claim.value.kind === "local_entity"
-        ? agent.belief.localEntities[claim.value.localEntityId]?.name ?? "尚不明确的对象" : claim.value.kind === "none" ? "无" : String(claim.value.value)}` : "还需要核实";
-      utterance = { ask_price: `请问${tool}的价格是多少？`, request: `请给我${phrase}。`, offer: `我愿意交付${phrase}，请确认交换条件。`,
-        accept: "我接受刚才明确提出的条件。", refuse: "我不接受刚才提出的条件。", clarify: "请明确说明条件和需要我做的事。",
-        report: belief, acknowledge: "明白，我会等待实际结果。", unknown_information: "这件事我还不知道，暂时无法给你确切的答复。" }[selected(answers, "dialogue")] ?? null;
-    }
-    else if (speech === "create") {
-      if (!input.creationEnabled) throw new Error("new dialogue requires the configured creation capability");
-      const system = loadPromptAsset("system/direct-utterance.md"), userPrompt = loadPromptAsset("user/direct-utterance.md");
-      const generated = await decisions.provider.generateStructured({ ...decisions.scope, modelRegistrySnapshotHash: control.registryHash,
-        profileId: profiles.creation, subjectId: agentId, role: "creation", modelInvocation: decisions.next(agentId),
-        system, userPrompt, promptVersion: `direct-utterance-${contentHash({ system, userPrompt })}`, schemaName: "DirectUtteranceV1",
-        context: { ...context as Record<string, JsonValue>, recipient: operation === "reflect" ? null : targetKey,
-          expression: operation === "reflect" ? "Private reflection for the actor: distinguish observed evidence from testimony, uncertainty and proposed next questions. This creates no external facts." : "Actual words addressed to the recipient" },
-        schema: z.object({ utterance: z.string().min(1) }), jsonExamplePolicy: "omit" });
-      utterance = generated.value.utterance; audits.push(generated.audit);
-    }
+    else if (operation === "speak") throw new Error("This utterance needs creation or exact player words");
   }
-  const kind: ActionKind = preparatoryFor ? "observe" : operation === "expand" ? "use" : operation === "unknown" ? "observe" : operation as ActionKind;
+  const kind: ActionKind = preparatoryFor ? "observe" : ["expand", "unknown"].includes(operation) ? "use" : operation as ActionKind;
   const proposedProfile = selected(answers, "timing") === "default" ? null : selected(answers, "timing");
   const profile = proposedProfile ? state.truth.mechanics.temporalProfiles[proposedProfile] : null;
   // Conditional checkpoints are wake subscriptions, not the duration of a spoken sentence or a look.
   const profileId = preparatoryFor || ["conditional", "goal"].includes(profile?.kind ?? "") ? null : proposedProfile;
   const selectedGoal = goals.find(goal => goal.id === intent.goalId)?.description;
-  const rawText = text || `${actionLabels[kind]}${target ? `：${agent.belief.localEntities[targetKey]?.name ?? ""}` : ""}${utterance ? `；${utterance}` : ""}`;
+  const rawText = expression?.attempt || text || `${actionLabels[kind]}${target ? `：${agent.belief.localEntities[targetKey]?.name ?? ""}` : ""}${utterance ? `；${utterance}` : ""}`;
   const id = runtimeId({ worldHash: state.worldHash, revision: state.revision, kind: "action", stage: "direct-action", owner: agentId, round: 0, ordinal: 0 });
   const durationSeconds = actionSeconds(state, profileId, preparatoryFor || ["speak", "transfer"].includes(kind) ? "" : text);
   const frame: ActionFrame = { version: 1, id, actorId: agentId, actorEntityId: agent.entityId, submissionId: external?.submissionId ?? null,
+    ...(expression ? { expression } : {}),
     proposal: { id, actorId: agentId, baseRevision: state.revision, rawText, goal: external?.goal ?? selectedGoal ?? rawText,
       means: external?.means ?? null, targetIds: target ? [targetKey] : [] }, kind, goalId: intent.goalId,
     targetEntityId: target, toolEntityId: view.entities[selected(answers, "tool")] ?? null,

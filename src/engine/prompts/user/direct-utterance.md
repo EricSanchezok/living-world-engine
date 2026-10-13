@@ -1,1 +1,1 @@
-Return the utterance field containing the actual speech or private reflection requested by expression. Create concrete content relevant to the current interaction; do not generate a program, proofs, branches or state operations.
+Realize this next action in context. Return attempt, utterance and manner; use null when no words or expressive manner are needed. Preserve character knowledge and exact player quotations.

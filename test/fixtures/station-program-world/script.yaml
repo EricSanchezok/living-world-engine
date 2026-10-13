@@ -1,4 +1,4 @@
-schema_version: 16
+schema_version: 17
 id: station-program-world
 name: 织星站：冷却泵检修
 version: 1.0.0
@@ -11,3 +11,7 @@ model_profiles:
   decision: decision-jev
   creation: creation-deepseek
   fallback: decision-deepseek
+narrative:
+  language: zh-CN
+  style: 中文第二人称，有生活质感的空间站故事。技术问题说清可见现象与实际后果，让同事在对话中显出性格；避免故作紧张和重复机器嗡鸣。
+  expansion: true

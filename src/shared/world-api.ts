@@ -1,7 +1,7 @@
 import type { AgentPerspectiveView } from "../engine/contracts/model";
 export type { AgentPerspectiveView, BeliefValue, PerspectiveFactValue } from "../engine/contracts/model";
 
-export const WORLD_API_VERSION = 13 as const;
+export const WORLD_API_VERSION = 14 as const;
 
 export interface WorldSummary {
   id: string;
@@ -137,6 +137,10 @@ export interface PublicConversationTurn {
     text: string;
   };
   response?: {
+    id?: string;
+    narrativeStatus?: "queued" | "generating" | "complete" | "fallback";
+    segmentCount?: number;
+    sourceRevisions?: number[];
     revision: number;
     step: number;
     title?: string;

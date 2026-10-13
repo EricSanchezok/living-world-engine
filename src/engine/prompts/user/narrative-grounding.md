@@ -1,0 +1,5 @@
+Judge the indexed paragraph against this participant's frozen scene. This is a narrow factual boundary check, not a literary review or another adjudication of the action.
+
+Permit rephrasing, metaphor, connective prose and harmless ways of carrying out the player's own submitted action. Existing observable details may be described naturally. Each person, usable object, possession, distinct NPC action, speech act or meaningful world change must already be supported by the scene or attributed memory. Background bystanders and incidental tools still count. The source's actual inventory and delivered speech are exact; do not supplement them from genre expectations. Earlier narration is not an independent source of new facts. Speech placeholders refer to the exact supplied utterances.
+
+Preserve the difference between testimony, inference and observed truth. A blocked attempt remains blocked; uncertainty remains uncertainty. Select added_content or contradiction only for a concrete material problem. Do not reject ordinary style, harmless visual phrasing, an unfinished story, a failed action, or the absence of drama.

@@ -46,6 +46,7 @@ export interface WorldRuntimeContract {
   name: string;
   manifestVersion: string;
   description: string;
+  narrative: { language: string; style: string; expansion: boolean };
   runtimeDefaults: WorldRuntimeDefaults;
   participation: WorldParticipation | null;
   contentHash: string;

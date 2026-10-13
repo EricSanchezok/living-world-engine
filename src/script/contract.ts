@@ -10,11 +10,16 @@ import {
 } from "../engine/contracts/state-schemas";
 
 export const scriptManifestSchema = z.object({
-  schema_version: z.literal(16),
+  schema_version: z.literal(17),
   id: z.string().regex(/^[a-z0-9][a-z0-9-]*$/),
   name: z.string().min(1),
   version: z.string().min(1),
   description: z.string().min(1),
+  narrative: z.object({
+    language: z.string().default("zh-CN"),
+    style: z.string().default("Concrete, attentive prose; adapt detail and pace to the situation."),
+    expansion: z.boolean().default(true),
+  }).default({ language: "zh-CN", style: "Concrete, attentive prose; adapt detail and pace to the situation.", expansion: true }),
   runtime_defaults: z.object({
     max_autonomous_span_seconds: z.number().int().min(1).max(2_592_000),
     realtime_interval_ms: z.number().int().min(1_000).max(86_400_000),
@@ -358,6 +363,7 @@ export const entityDocumentSchema = z.object({
   kind: z.string().min(1),
   name: z.string().min(1),
   description: z.string(),
+  presentation: z.object({ label: z.string().min(1), description: z.string().min(1) }).optional(),
   placement: safeIdSchema.nullable().default(null),
   facts: z.array(z.object({
     id: safeIdSchema,

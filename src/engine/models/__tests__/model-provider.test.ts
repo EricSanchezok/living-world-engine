@@ -222,6 +222,25 @@ function request(profileId: string) {
 }
 
 describe("model catalog and provider adapters", () => {
+  it("publishes text through the gateway before the provider sends terminal usage", async () => {
+    const configured = catalog(false, false, true), emitted = deferred<void>();
+    let stream!: ReadableStreamDefaultController<Uint8Array>;
+    const fixture = deepSeekStreamFixture(), encoder = new TextEncoder();
+    const gateway = new ModelGateway(configured, credentials, { registry: createTestModelRegistry(configured), maxTransportAttempts: 3,
+      fetch: async () => new Response(new ReadableStream({ start(controller) {
+        stream = controller;
+        for (const frame of fixture.frames.slice(0, 2)) stream.enqueue(encoder.encode(`data: ${JSON.stringify(frame)}\n\n`));
+      } }), { headers: { "content-type": "text/event-stream" } }) });
+    let finished = false, text = "";
+    const pending = gateway.generateStructured({ ...request("flash"), structuredOutputMode: "json-object-zod",
+      onOutputText: async value => { text = value; emitted.resolve(); } }).then(result => { finished = true; return result; });
+    await emitted.promise;
+    expect(text.length).toBeGreaterThan(0); expect(finished).toBe(false);
+    stream.enqueue(encoder.encode(`data: ${JSON.stringify(fixture.frames[2])}\n\ndata: [DONE]\n\n`)); stream.close();
+    const result = await pending;
+    expect(result.value).toEqual({ answer: "行动自由 🐉" });
+    expect(text).toBe('{"answer":"行动自由 🐉"}');
+  });
   it("uses native streaming with the same full JSON request and canonical output", async () => {
     const bodies: Record<string, unknown>[] = [];
     const observer = new RecordingRuntimeObserver({ mode: "full" });

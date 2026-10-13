@@ -1,3 +1,7 @@
+import { z } from "zod";
+import { loadPromptAsset } from "../engine/prompts";
+import { agentCapabilityModels } from "../engine/models/capability-bindings";
+import { enqueueNarrative, completeParagraphs, renderNarrativeParagraph, narrativeFallback, checkNarrativeGrounding, type NarrativeBeat } from "./world-narrative";
 import { randomUUID } from "node:crypto";
 import { rmSync } from "node:fs";
 import path from "node:path";
@@ -49,7 +53,7 @@ import {
   type RuntimeCorrelation,
   type RuntimeObserver,
 } from "../engine/runtime/observability";
-import { quantityId } from "../engine/runtime/runtime-id";
+import { quantityId, runtimeId } from "../engine/runtime/runtime-id";
 import { SimulationEngine } from "../engine/runtime/simulation";
 import { WorldQuiescentError } from "../engine/runtime/execution";
 import type { DirectRuntimeState } from "../engine/direct/contracts";
@@ -295,6 +299,10 @@ export class WorldHostError extends Error {
   }
 }
 
+const NARRATIVE_SYSTEM = loadPromptAsset("system/scene-narrative.md");
+const NARRATIVE_USER = loadPromptAsset("user/scene-narrative.md");
+const NARRATIVE_PROMPT_VERSION = `scene-narrative-${contentHash([NARRATIVE_SYSTEM, NARRATIVE_USER])}`;
+const NARRATIVE_MANIFEST = defineEngineOperationManifest({ id: "scene-narrative", version: "1", config: { promptVersion: NARRATIVE_PROMPT_VERSION } });
 const ARRIVAL_PROMPT = promptBundle("arrival-generator");
 
 const ARRIVAL_PRODUCER_MANIFEST = defineEngineOperationManifest({
@@ -422,34 +430,18 @@ function conversationFor(
   }];
   for (const intent of document.participantIntents.filter((entry) => entry.participantId === participant.id)) {
     const run = document.runs[intent.runId];
-    const committedSteps = (run?.committedRevisions ?? []).flatMap((revision) => {
-      const committed = document.state.history.find((step) => step.revision === revision);
-      return committed && committed.temporalBoundary.deltaSeconds > 0 ? [committed] : [];
+    const beats = document.narratives.filter(beat => beat.participantId === participant.id && beat.submissionId === intent.submissionId);
+    const responses = beats.filter(beat => beat.segments.length > 0).map(beat => {
+      const last = beat.source.observations.at(-1)!;
+      const committed = document.state.history.find(step => step.revision === last.revision);
+      const activity = Object.values(committed?.temporalState.activities ?? {})
+        .filter(item => item.actorId === intent.agentId).sort((a, b) => b.updatedAtSeconds - a.updatedAtSeconds || b.id.localeCompare(a.id))[0];
+      return { id: beat.id, revision: last.revision, step: last.step, text: beat.segments.map(segment => segment.text).join("\n\n"),
+        worldTimeSeconds: last.worldTimeSeconds, narrativeStatus: beat.status, segmentCount: beat.segments.length,
+        sourceRevisions: [...new Set(beat.source.observations.map(observation => observation.revision))],
+        activity: activity ? publicActivity(document, activity) : null };
     });
-    const responses = committedSteps.map((committed) => {
-      const summaries = committed.observations
-        .filter((observation) => observation.observerId === intent.agentId)
-        .map((observation) => observation.summary);
-      const activity = Object.values(committed.temporalState.activities)
-        .filter((candidate) => candidate.actorId === intent.agentId)
-        .sort((left, right) => right.updatedAtSeconds - left.updatedAtSeconds || right.id.localeCompare(left.id))[0];
-      const projectedActivity = activity ? publicActivity(document, activity) : null;
-      const progressText = projectedActivity?.progress
-        ? `${projectedActivity.description}：${projectedActivity.progress.current}/${projectedActivity.progress.target} ${projectedActivity.progress.unit}`
-        : projectedActivity?.status === "queued"
-          ? `${projectedActivity.description}：正在等待${projectedActivity.resourceNames.join("、") || "共享资源"}，队列第 ${projectedActivity.queuePosition ?? 1} 位。`
-          : projectedActivity?.status === "ready"
-            ? `${projectedActivity.description}：资源已预留，将在下一次时间推进开始。`
-            : projectedActivity ? `${projectedActivity.description}：${projectedActivity.status}` : "世界时间继续推进。";
-      return {
-        revision: committed.revision,
-        step: committed.step,
-        text: summaries.length > 0 ? summaries.join("\n\n") : progressText,
-        worldTimeSeconds: committed.temporalBoundary.toElapsedSeconds,
-        activity: projectedActivity,
-      };
-    });
-    const status: PublicConversationTurn["status"] = run?.status === "completed" ||
+    const status: PublicConversationTurn["status"] = beats.some(beat => ["queued", "generating"].includes(beat.status)) ? "running" : run?.status === "completed" ||
       run?.status === "awaiting-decision" && run.committedRevisions.length > 0
       ? "committed"
       : run?.status === "failed"
@@ -470,6 +462,14 @@ function conversationFor(
       ...(responses.length > 0 ? { response: responses.at(-1), responses } : {}),
     });
   }
+  for (const beat of document.narratives.filter(item => item.participantId === participant.id && !item.submissionId && item.segments.length)) {
+    const last = beat.source.observations.at(-1)!;
+    turns.push({ id: beat.id, agentId: participant.agentId, baseRevision: last.revision, createdAt: beat.createdAt,
+      status: ["queued", "generating"].includes(beat.status) ? "running" : "committed",
+      response: { id: beat.id, revision: last.revision, step: last.step, text: beat.segments.map(segment => segment.text).join("\n\n"),
+        worldTimeSeconds: last.worldTimeSeconds, narrativeStatus: beat.status, segmentCount: beat.segments.length } });
+  }
+  turns.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
   return { participantId: participant.id, agentId: participant.agentId, turns };
 }
 
@@ -564,6 +564,133 @@ function agentStateFromOrigin(
 }
 
 export class WorldHost {
+  private readonly narrativeWorkers = new Map<string, Promise<void>>();
+  private readonly instanceListeners = new Map<string, Set<() => void>>();
+
+  private notifyInstance(id: string) { for (const listener of this.instanceListeners.get(id) ?? []) listener(); }
+
+  private scheduleNarrative(document: WorldInstanceDocument): void {
+    if (this.narrativeWorkers.has(document.id) || !document.narratives.some(beat => ["queued", "generating"].includes(beat.status))) return;
+    const job = Promise.resolve().then(() => this.generateNarratives(document.id));
+    this.narrativeWorkers.set(document.id, job);
+    let failed = false;
+    void job.catch(() => { failed = true; }).finally(() => {
+      this.narrativeWorkers.delete(document.id);
+      if (!failed) try { this.scheduleNarrative(this.read(document.id).document); } catch { /* Closed/deleted instances retain their durable outbox for recovery. */ }
+    });
+  }
+
+  /** Wait for presentation work without advancing the world or creating a model request. */
+  async drainNarratives(id: string): Promise<void> {
+    while (this.narrativeWorkers.has(id)) await this.narrativeWorkers.get(id);
+  }
+
+  private updateNarrative(id: string, beatId: string, update: (beat: NarrativeBeat) => void): void {
+    const stored = this.read(id), document = structuredClone(stored.document);
+    const beat = document.narratives.find(item => item.id === beatId);
+    if (!beat) return;
+    update(beat);
+    document.updatedAt = this.now().toISOString();
+    if (document.actionWindow && document.runtime.actionWindowMs > 0 && !document.actionWindow.deadlineAt &&
+      !document.narratives.some(item => ["queued", "generating"].includes(item.status) && document.actionWindow!.requiredAgentIds.includes(item.agentId))) {
+      document.actionWindow.deadlineAt = new Date(this.now().getTime() + document.runtime.actionWindowMs).toISOString();
+    }
+    const saved = this.persist(stored, document);
+    this.scheduleWindowDeadline(saved.document);
+  }
+
+  private async generateNarratives(id: string): Promise<void> {
+    for (;;) {
+      const document = this.read(id).document;
+      const beat = document.narratives.find(item => ["queued", "generating"].includes(item.status));
+      if (!beat) return;
+      if (beat.attempts >= 2) {
+        this.updateNarrative(id, beat.id, item => {
+          const fallback = narrativeFallback(item.source, item.segments.map(segment => segment.text));
+          if (fallback) item.segments.push({ sequence: item.segments.length, text: fallback, publishedAt: this.now().toISOString() });
+          item.status = "fallback"; item.completedAt = this.now().toISOString(); item.firstParagraphAt ??= item.completedAt;
+        });
+        continue;
+      }
+      const execution = this.beginExecution(document, "interactive", "narrative", NARRATIVE_MANIFEST);
+      this.updateNarrative(id, beat.id, item => { item.status = "generating"; item.attempts += 1; if (execution) item.executionIds.push(execution.id); });
+      const prefix = beat.segments.map(segment => segment.text);
+      let published = 0;
+      const control = document.state.executionState?.data.kind === "direct-world" ? document.state.executionState.data as unknown as DirectRuntimeState : null;
+      const scope = { workloadId: `${id}:foreground`, batchId: beat.id,
+        ...(control ? { modelRegistrySnapshotHash: control.registryHash } : {}),
+        correlation: { executionId: execution?.id, instanceId: id, revision: document.state.revision },
+        observer: execution?.trace ?? this.runtimeObserver,
+        runtimeIdentity: { worldHash: document.state.worldHash, revision: document.state.revision } };
+      const models = control ? agentCapabilityModels(document.state, control, beat.agentId) : document.state.agents[beat.agentId]!.modelProfiles;
+      this.updateNarrative(id, beat.id, item => { item.producer = { profileId: models.creation, modelId: null, promptVersion: NARRATIVE_PROMPT_VERSION, registryHash: control?.registryHash ?? null }; });
+      let publication = Promise.resolve(), publicationError: unknown, scheduled = 0;
+      const publish = async (paragraphs: string[]) => {
+        if (published >= paragraphs.length) return;
+        const ready = paragraphs.slice(published).map(paragraph => renderNarrativeParagraph(paragraph, beat.source));
+        const decision = await checkNarrativeGrounding(this.options.provider, scope, beat.source, ready, models.decision, models.fallback,
+          Number.parseInt(contentHash([beat.id, beat.attempts, prefix.length + published]).slice(0, 10), 16));
+        const choices = ready.map((_, index) => {
+          const answer = decision.answers[`paragraph${index}`]; return answer?.type === "choice" ? answer.choice : "added_content";
+        });
+        this.updateNarrative(id, beat.id, item => item.grounding.push({ start: prefix.length + published, inputHash: decision.inputHash,
+          choices, invocationIds: decision.audits.flatMap(audit => audit.invocations.map(invocation => invocation.id)) }));
+        let checked = 0;
+        while (published < paragraphs.length) {
+          if (choices[checked] !== "grounded") throw new Error(`Paragraph contains ${choices[checked]}: ${ready[checked]}. Continue using only the supplied scene; omit unsupported content.`);
+          const text = ready[checked++]!;
+          this.updateNarrative(id, beat.id, item => {
+            const sequence = prefix.length + published;
+            if (item.segments.length !== sequence) throw new Error("narrative segment sequence conflict");
+            const at = this.now().toISOString();
+            item.segments.push({ sequence, text, publishedAt: at }); item.firstParagraphAt ??= at;
+          });
+          published++;
+        }
+      };
+      try {
+        const result = await this.options.provider.generateStructured({
+          ...scope, role: "creation", subjectId: beat.agentId,
+          profileId: models.creation,
+          ...(control ? { modelRegistrySnapshotHash: control.registryHash } : {}),
+          correlation: { executionId: execution?.id, instanceId: id, revision: document.state.revision },
+          observer: execution?.trace ?? this.runtimeObserver,
+          runtimeIdentity: { worldHash: document.state.worldHash, revision: document.state.revision },
+          modelInvocation: beat.attempts + 1,
+          modelInvocationId: runtimeId({ worldHash: document.state.worldHash, revision: document.state.revision,
+            kind: "model-audit", stage: "scene-narrative", owner: beat.id, round: 0, ordinal: beat.attempts + 1 }),
+          promptVersion: NARRATIVE_PROMPT_VERSION, schemaName: "SceneNarrativeV1",
+          system: NARRATIVE_SYSTEM, userPrompt: NARRATIVE_USER,
+          context: { scene: beat.source, publishedPrefix: prefix,
+            previousScenes: document.narratives.filter(item => item.participantId === beat.participantId && item.id !== beat.id && item.segments.length)
+              .slice(-3).map(item => item.segments.map(segment => segment.text).join("\n\n")),
+            repair: beat.error },
+          schema: z.object({ paragraphs: z.array(z.string().trim().min(1)).min(1) }), jsonExamplePolicy: "omit",
+          onOutputText: async text => {
+            const paragraphs = completeParagraphs(text);
+            if (paragraphs.length <= scheduled) return;
+            scheduled = paragraphs.length;
+            publication = publication.then(async () => {
+              if (publicationError === undefined) await publish(paragraphs);
+            }).catch(error => { publicationError = error; });
+          },
+        });
+        this.updateNarrative(id, beat.id, item => { if (item.producer) item.producer.modelId = result.audit.modelId; });
+        await publication;
+        if (publicationError !== undefined) throw publicationError;
+        await publish(completeParagraphs(JSON.stringify(result.value)));
+        execution?.trace.flush();
+        if (execution && this.options.ledger) this.options.ledger.finishExecution(execution.id,
+          { status: "succeeded", semanticHash: contentHash(result.value), stateHash: contentHash(this.read(id).document.state) });
+        this.updateNarrative(id, beat.id, item => { item.status = "complete"; item.error = null; item.completedAt = this.now().toISOString(); });
+      } catch (error) {
+        await publication;
+        this.failExecution(execution?.id, error);
+        this.updateNarrative(id, beat.id, item => { item.status = "queued"; item.error = error instanceof Error ? error.message : String(error); });
+      }
+    }
+  }
+
   private static singleton: WorldHost | undefined;
   private readonly registry: WorldExecutionAlgorithmRegistry;
   private readonly defaultAlgorithmRef: AlgorithmRef;
@@ -626,7 +753,7 @@ export class WorldHost {
       this.assertExecutionAlgorithmAvailable(stored.document);
       this.definition(stored.document);
     }
-    for (const stored of storedInstances) this.restoreSchedule(stored);
+    for (const stored of storedInstances) { this.restoreSchedule(stored); this.scheduleNarrative(this.read(stored.document.id).document); }
   }
 
   static get(): WorldHost {
@@ -635,7 +762,7 @@ export class WorldHost {
         /* turbopackIgnore: true */ process.env.LIVINGWORLD_MODEL_CATALOG_PATH ?? "config/models.yaml",
       ));
       const dataRoot = path.resolve(
-        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v25",
+        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v26",
       );
       const modelRegistry = new ModelRegistry(catalog, dataRoot);
       modelRegistry.startBackgroundRefresh();
@@ -811,7 +938,10 @@ export class WorldHost {
 
   private persist(stored: StoredWorldInstance, document: WorldInstanceDocument): StoredWorldInstance {
     try {
-      return this.options.store.compareAndSwapInstance(document.id, stored.generation, document, { instanceId: document.id });
+      enqueueNarrative(document, this.now().toISOString());
+      const saved = this.options.store.compareAndSwapInstance(document.id, stored.generation, document, { instanceId: document.id });
+      this.notifyInstance(document.id); this.scheduleNarrative(saved.document);
+      return saved;
     } catch (error) {
       if (error instanceof WorldInstanceConflictError) throw new WorldHostError("world instance changed concurrently", 409);
       throw error;
@@ -1115,7 +1245,7 @@ export class WorldHost {
     }
     const now = this.now().toISOString();
     const initial: WorldInstanceDocument = {
-      schemaVersion: 25,
+      schemaVersion: 26,
       id,
       world: toWorldRuntimeContract(definition),
       executionAlgorithm: structuredClone(experiment.algorithmRef),
@@ -1133,6 +1263,7 @@ export class WorldHost {
       runtime: { ...structuredClone(definition.runtimeDefaults), debugSteppingEnabled: false },
       scheduler: { mode: "paused", generation: 1, nextTickAt: null },
       runs: {},
+      narratives: [],
       participantIntents: [],
       reactionSubmissions: [],
     };
@@ -1406,9 +1537,10 @@ export class WorldHost {
 
   subscribeInstanceChanges(id: string, listener: () => void): () => void {
     this.read(id);
-    return this.options.ledger?.subscribe((event) => {
-      if (event.correlation?.instanceId === id) listener();
-    }) ?? (() => undefined);
+    const listeners = this.instanceListeners.get(id) ?? new Set<() => void>();
+    listeners.add(listener); this.instanceListeners.set(id, listeners);
+    const unsubscribe = this.options.ledger?.subscribe((event) => { if (event.correlation?.instanceId === id) listener(); });
+    return () => { unsubscribe?.(); listeners.delete(listener); if (!listeners.size) this.instanceListeners.delete(id); };
   }
 
   instance(id: string, principalId = "local"): PublicInstanceDetail {
@@ -2195,6 +2327,8 @@ export class WorldHost {
       // them with the boundary's original in-memory run snapshot.
       runRecord.debugCheckpoint = structuredClone(latestRun.debugCheckpoint);
       runRecord.lastDebugRequestId = latestRun.lastDebugRequestId;
+      document.narratives = structuredClone(latest.document.narratives);
+      enqueueNarrative(document, this.now().toISOString());
       const committed = execution && this.options.ledger && isAtomicStore(this.options.store)
         ? this.options.store.compareAndSwapInstanceAndFinishExecution(
             document.id,
@@ -2208,6 +2342,7 @@ export class WorldHost {
         this.options.ledger.finishExecution(execution.id, finish);
       }
       this.debugStageGates.delete(runId);
+      this.notifyInstance(document.id); this.scheduleNarrative(committed.document);
       return committed;
     } catch (error) {
       this.runControllers.delete(runId);
@@ -2791,7 +2926,8 @@ export class WorldHost {
         const stored = this.read(document.id);
         const next = structuredClone(stored.document);
         const window = next.actionWindow;
-        if (!window || window.id !== document.actionWindow!.id || window.status !== "open") return;
+        if (!window || window.id !== document.actionWindow!.id || window.status !== "open" ||
+          !window.deadlineAt || window.deadlineAt !== document.actionWindow!.deadlineAt) return;
         const run = currentRun(next);
         if (!run ||
           (window.kind === "decision" && run.status !== "awaiting-decision") ||

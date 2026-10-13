@@ -4,8 +4,17 @@ import { parseModelCatalog } from "../models/model-catalog";
 import { createTestModelCatalog, createTestModelRegistry } from "./model-provider";
 import type { DecisionQuestionV2 } from "../models/decision-v2";
 
-export function directTestProvider(respond: (wire: { model: string; state: unknown;
-  questions: Record<string, DecisionQuestionV2> }, call: number) => unknown | Response | Promise<unknown | Response>) {
+export interface DirectTestWire { model: string; state: unknown; questions: Record<string, DecisionQuestionV2>;
+  messages?: Array<{ role: string; content: string }> }
+
+export function directCreationContext(wire: DirectTestWire): Record<string, unknown> {
+  const prompt = wire.messages?.find(message => message.role === "user")?.content ?? "";
+  const start = prompt.indexOf("\n\n{") + 2, end = prompt.indexOf("\n\nReturn exactly one JSON object");
+  return JSON.parse(prompt.slice(start, end < 0 ? undefined : end));
+}
+
+export function directTestProvider(respond: (wire: DirectTestWire, call: number) => unknown | Response | Promise<unknown | Response>,
+  create?: (wire: DirectTestWire) => unknown | Response | Promise<unknown | Response>) {
   const source = createTestModelCatalog().snapshot();
   source.accounts.typesafe = { ...source.accounts["scripted-test"]!, protocol: "typesafe-systemone", dialect: "typesafe",
     models_dev_provider_id: "typesafe", base_url: "https://typesafe.test/v1", api_key_env: "TYPESAFE_API_KEY" };
@@ -15,7 +24,8 @@ export function directTestProvider(respond: (wire: { model: string; state: unkno
   let calls = 0;
   const transport = vi.fn<typeof fetch>(async (_url, init) => {
     const wire = JSON.parse(String(init?.body));
-    const response = await respond(wire, ++calls);
+    calls++;
+    const response = await (!wire.questions && create ? create(wire) : respond(wire, calls));
     if (response instanceof Response) return response;
     if (!wire.questions) return Response.json({ id: `direct-${calls}`, model: wire.model, created: 1,
       choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(response) }, finish_reason: "stop" }],

@@ -238,9 +238,20 @@ function validateActionWindow(document: WorldInstanceDocument): void {
 }
 
 export function validateWorldInstanceDocument(document: WorldInstanceDocument, rulePackages?: RulePackageRegistry): void {
-  if (document.schemaVersion !== 25) throw new Error("world instance schema v25 required");
+  if (document.schemaVersion !== 26) throw new Error("world instance schema v26 required");
   requireText(document.id, "instance id");
   requireText(document.title, "instance title");
+  if (!Array.isArray(document.narratives)) throw new Error("instance narrative outbox is required");
+  const beatIds = new Set<string>();
+  for (const beat of document.narratives) {
+    if (beatIds.has(beat.id) || !document.participants[beat.participantId] ||
+      document.participants[beat.participantId]!.agentId !== beat.agentId ||
+      beat.sourceHash !== contentHash(beat.source) || !["queued", "generating", "complete", "fallback"].includes(beat.status) ||
+      !Array.isArray(beat.grounding) || !Object.hasOwn(beat, "producer") ||
+      beat.segments.some((segment, index) => segment.sequence !== index || !segment.text.trim()) ||
+      !Number.isSafeInteger(beat.attempts) || beat.attempts < 0 || beat.attempts > 2) throw new Error("invalid persisted narrative beat");
+    beatIds.add(beat.id);
+  }
   validateAlgorithmRef(document.executionAlgorithm);
   validateExperimentEnrollment(document);
   validateExperimentExclusion(document);
