@@ -47,6 +47,16 @@ function ruleContext(definition: ReturnType<typeof loaded>, actions: AgentAction
 }
 
 describe("core-resolution trusted rules", () => {
+  it("validates operation shapes without reading or copying the world history", () => {
+    const definition = loaded(), registry = createCoreRulePackageRegistry();
+    const context = ruleContext(definition, []);
+    Object.defineProperty(context, "state", { get() { throw new Error("shape validation must not read world state"); } });
+    expect(registry.resolve(definition.rulePackages, context, [], [])).toEqual({ invocations: [], results: [], operations: [] });
+    const operation: WorldDeltaOperation = { kind: "set_quantity", quantity: {
+      id: quantityId(definition.contentHash, "spirit-stone", "player"), definitionId: "spirit-stone", holderId: "player", amount: 1 },
+      causes: [], assertions: [] };
+    expect(() => registry.resolve(definition.rulePackages, context, [], [operation])).toThrow("must be derived");
+  });
   it.each([1, 3])("consumes a Condition once across repeated means and evidence annotations (uses=%s)", remainingUses => {
     const definition = loaded(), registry = createCoreRulePackageRegistry(), playerAction = action(definition.contentHash);
     const state = structuredClone(definition.initialState);

@@ -162,6 +162,12 @@ export function deriveDecisionEventStep(source: Readonly<SimulationState>, proof
 export function nativeCandidate(source: Readonly<SimulationState>, proof: DecisionEventStep, producerHash: string,
   activatedAgentIds: string[], rulePackages?: RulePackageRegistry): WorldStepCandidate {
   const { committed: step } = deriveDecisionEventStep(source, proof, producerHash, false, rulePackages);
+  return nativeCandidateFromStep(source, proof, producerHash, activatedAgentIds, step);
+}
+
+/** Present an already derived step without repeating its mechanical settlement. */
+export function nativeCandidateFromStep(source: Readonly<SimulationState>, proof: DecisionEventStep, producerHash: string,
+  activatedAgentIds: string[], step: CommittedStep): WorldStepCandidate {
   const candidate: WorldStepCandidate = {
     decisionEvent: proof, executionState: { producerHash, data: structuredClone(proof.finalControl) as unknown as JsonObject }, schemaVersion: WORLD_STEP_CANDIDATE_SCHEMA_VERSION,
     sourceStateHash: contentHash(source), onsetPerception: { targets: [], receipts: [], requests: [], checks: [], commitmentRounds: [], rng: structuredClone(source.truth.rng) },

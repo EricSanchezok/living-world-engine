@@ -959,9 +959,9 @@ export class CanonicalCommitter {
         preparation.requestHash !== contentHash(proof.request) || contentHash(proof.authority) !== contentHash(toWorldRuntimeContract(authority.definition)) ||
         contentHash(proof.preparedControl) !== contentHash(preparation.executionState?.data) ||
         contentHash(proof.event) !== contentHash(preparation.payload.event)) throw new Error("native commit differs from frozen preparation");
-      const expected = nativeCandidate(source, proof, preparation.algorithmManifestHash, candidate.diagnostics.activatedAgentIds, this.rulePackages);
-      if (contentHash(candidate) !== contentHash(expected)) throw new Error("native candidate presentation changed after preparation");
       const result = deriveDecisionEventStep(source, proof, preparation.algorithmManifestHash, true, this.rulePackages);
+      const expected = nativeCandidateFromStep(source, proof, preparation.algorithmManifestHash, candidate.diagnostics.activatedAgentIds, result.committed);
+      if (contentHash(candidate) !== contentHash(expected)) throw new Error("native candidate presentation changed after preparation");
       validateSimulationState(result.state, false, true, this.rulePackages);
       return result;
     }
@@ -1097,5 +1097,5 @@ export class CanonicalCommitter {
     return { committed: structuredClone(committed), state: transitioned };
   }
 }
-import { commitDecisionEventBootstrap, deriveDecisionEventStep, nativeCandidate } from "../events/canonical";
+import { commitDecisionEventBootstrap, deriveDecisionEventStep, nativeCandidateFromStep } from "../events/canonical";
 import { toWorldRuntimeContract } from "./world-definition";

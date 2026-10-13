@@ -168,6 +168,8 @@ export interface RulePackage {
   configSchema: z.ZodType<unknown>;
   adjudication: string;
   rules: readonly MechanicRule[];
+  /** Checks that depend only on operation shapes do not receive world state. */
+  validateOperationShapes?: (config: unknown, operations: readonly WorldDeltaOperation[]) => void;
   validateDirectOperations?: (
     context: RuleExecutionContext,
     config: unknown,
@@ -372,6 +374,7 @@ export class RulePackageRegistry {
       throw new Error("direct operations cannot claim mechanic-derived provenance");
     }
     for (const entry of selected.values()) {
+      entry.definition.validateOperationShapes?.(structuredClone(entry.config), structuredClone(directOperations));
       entry.definition.validateDirectOperations?.(
         structuredClone(context),
         structuredClone(entry.config),
@@ -904,7 +907,7 @@ export const coreResolutionRulePackage: RulePackage = {
   adjudication: "先提交 ResolutionPlan，再由引擎把命名难度、风险和效果档确定性映射为 d20 检定与规则效果。模型不得提交 raw DC、modifier、Meter delta、Condition 强度或 Rating 数值。",
   configSchema: coreResolutionConfigSchema,
   rules: [applyReceipt, advanceConditions, transferQuantity, changeQuantity, instantiateEntityProfile, instantiateEntityCohort],
-  validateDirectOperations: (_context, _config, operations) => {
+  validateOperationShapes: (_config, operations) => {
     for (const operation of operations) {
       if (operation.kind === "adjust_meter" || operation.kind === "set_meter" || operation.kind === "set_rating" ||
         operation.kind === "set_condition" || operation.kind === "remove_condition") {
