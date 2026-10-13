@@ -92,7 +92,7 @@ describe("direct world through persistent WorldHost", () => {
     let calls = 0;
     const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
       const paragraphs = (wire.state as { paragraphs?: string[] }).paragraphs;
-      const choice = id.startsWith("paragraph") ? paragraphs?.[Number(id.slice(9))] === unsupported ? "added_content" : "grounded"
+      const choice = id.startsWith("paragraph") ? id.endsWith("_material") && paragraphs?.[Number(/^paragraph(\d+)/u.exec(id)?.[1])] === unsupported ? "added_content" : "grounded"
         : id === "operation" ? "observe" : id === "target" ? "self" : id.includes("outcome") ? "succeeded" : "none";
       return [id, nativeAnswer(q, id === "expression" ? 0 : choice)];
     })), wire => {

@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { loadPromptAsset } from "../engine/prompts";
 import { agentCapabilityModels } from "../engine/models/capability-bindings";
-import { enqueueNarrative, completeParagraphs, renderNarrativeParagraph, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, checkNarrativeGrounding, type NarrativeBeat } from "./world-narrative";
+import { enqueueNarrative, completeParagraphs, renderNarrativeParagraph, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, checkNarrativeGrounding, narrativeGroundingChoices, type NarrativeBeat } from "./world-narrative";
 import { randomUUID } from "node:crypto";
 import { rmSync } from "node:fs";
 import path from "node:path";
@@ -631,9 +631,7 @@ export class WorldHost {
         if (ready.every(text => !text)) { published = paragraphs.length; return; }
         const decision = await checkNarrativeGrounding(this.options.provider, scope, beat.source, ready, models.fallback, models.fallback,
           Number.parseInt(contentHash([beat.id, beat.attempts, prefix.length + published]).slice(0, 10), 16));
-        const choices = ready.map((_, index) => {
-          const answer = decision.answers[`paragraph${index}`]; return answer?.type === "choice" ? answer.choice : "added_content";
-        });
+        const choices = narrativeGroundingChoices(decision.answers, ready.length);
         this.updateNarrative(id, beat.id, item => item.grounding.push({ start: item.segments.length, inputHash: decision.inputHash,
           choices, invocationIds: decision.audits.flatMap(audit => audit.invocations.map(invocation => invocation.id)) }));
         let checked = 0;

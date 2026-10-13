@@ -151,7 +151,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       const conditions = orderedValues(state.truth.mechanics.conditionProfiles);
       if (conditions.length) questions[`${prefix}_condition`] = question("condition caused on the target", frame as unknown as JsonValue,
         { none: "No condition is created", ...Object.fromEntries(conditions.map(profile => [profile.id, profile.name])) });
-      if (capability) questions[`${prefix}_capability`] = question("does the declared capability actually apply here", capability as unknown as JsonValue,
+      if (capability) questions[`${prefix}_capability`] = question("Does this capability perform this action's immediate intended method and result? Sharing an object or general goal is insufficient. A different procedure does not authorize repeating this capability's effects or prerequisites.", { action: frame as unknown as JsonValue, capability: capability as unknown as JsonValue },
         { apply: "Apply its immediate declared effects", unavailable: "The required materials, skill or conditions are absent", unknown: "Need more evidence" });
       for (const pool of orderedValues(state.truth.sharedActivityResourcePools).filter(pool => pool.entityId in view.entities)) {
         const resource = state.truth.mechanics.sharedActivityResources[pool.definitionId]!;
@@ -199,6 +199,17 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       { delivered: "The actual words or physical method and effect are perceived", unavailable: "No actual perception", unknown: "Perception is uncertain" });
   }
   let answers = await decisions.ask(null, view.state, view.reads, questions);
+  const missingBindings: Record<string, DecisionQuestionV2> = {};
+  for (const [id, option] of randomOptions) if (selected(answers, option.applies) === "apply" && selected(answers, id) === "none") {
+    const distribution = definition.randomDistributions.find(item => item.id === option.distributionId)!;
+    missingBindings[id] = question("This procedure has actually been selected for execution. Which existing property receives its sampled physical result? Bind the result itself, not a completion label. The property's current value need not equal a possible result. Select none only if no listed property represents that result; the draw still occurs.", {
+      action: frames[Number(id.split("_")[0]!.slice(1))] as unknown as JsonValue,
+      procedure: distribution.description, step: distribution.steps.find(step => step.id === option.stepId) as unknown as JsonValue,
+    }, { none: "No listed property represents this result", ...Object.fromEntries(option.facts.map((fact, i) => [`f${i}`, {
+      property: fact.predicate, meaning: fact.description, currentValue: fact.value as unknown as JsonValue,
+    }])) });
+  }
+  if (Object.keys(missingBindings).length) answers = { ...answers, ...await decisions.ask(null, view.state, view.reads, missingBindings) };
   const expansions = frames.flatMap((frame, index) => questions[`a${index}_expression`] && selected(answers, `a${index}_expression`) === "expand" ? [{ frame, index }] : []);
   const capabilityFailures = new Set<string>();
   if (expansions.length) {
@@ -212,7 +223,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     for (const [expansionIndex, result] of expanded.entries()) if (result.status === "fulfilled") {
       const { index, frame, result: extension } = result.value, prefix = `a${index}`;
       audits.push(...extension.audits);
-      supplemental[`${prefix}_capability`] = question("does this new declared capability actually apply to the already selected action", extension.capability as unknown as JsonValue,
+      supplemental[`${prefix}_capability`] = question("Does this newly declared capability express this action's immediate intended method and result, with its conditions met? A related object or broader goal alone does not authorize its effects.", { action: frame as unknown as JsonValue, capability: extension.capability as unknown as JsonValue },
         { apply: "Apply its immediate declared effects", unavailable: "The required materials, skill or conditions are absent", unknown: "Need more evidence" });
       createdObjectQuestions(frame, prefix, extension.capability, supplemental);
       for (const [ordinal, effect] of extension.capability.effects.entries()) if (effect.kind === "fact") {
@@ -284,23 +295,26 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         else { status = "blocked"; detail = "还需要确认转移的对象、接收方或数量。"; }
       }
       const randomEffects = new Map<string, { distributionId: string; stepId: string }>();
+      for (const [ordinal, distribution] of definition.randomDistributions.entries()) if (answers[`${prefix}_random${ordinal}`] && selected(answers, `${prefix}_random${ordinal}`) === "apply") {
+        randomRequests.push({ id: `${frame.id}/random/${distribution.id}`, distributionId: distribution.id, distribution, causes: source.causes });
+      }
+      let unboundRandomEffect = false;
       for (const [id, option] of randomOptions) if (id.startsWith(`${prefix}_`) && selected(answers, option.applies) === "apply") {
         const target = selected(answers, id);
         if (target !== "none") randomEffects.set(option.facts[Number(target.slice(1))]!.id, option);
+        else unboundRandomEffect = true;
       }
       for (const [id, effect] of effects) {
         if (!id.startsWith(`${prefix}_`)) continue;
         const value = selected(answers, id);
         const random = randomEffects.get(effect.fact.id);
         if (random) {
-          const distribution = definition.randomDistributions.find(item => item.id === random.distributionId)!;
-          const requestId = `${frame.id}/random/${distribution.id}`;
-          if (!randomRequests.some(request => request.id === requestId)) randomRequests.push({ id: requestId, distributionId: distribution.id, distribution, causes: source.causes });
+          const requestId = `${frame.id}/random/${random.distributionId}`;
           randomBindings.push({ factId: effect.fact.id, requestId, stepId: random.stepId });
           operations.push({ kind: "set_fact", fact: { ...effect.fact, provenance: source.causes }, ...source });
           continue;
         }
-        if (value === "unchanged") continue;
+        if (value === "unchanged" || unboundRandomEffect) continue;
         const chosen = effect.values[Number(value.slice(1))]!;
         if (contentHash(chosen) === contentHash(effect.fact.value)) continue;
         operations.push({ kind: "set_fact", fact: { ...changedFact(effect.fact, chosen), provenance: source.causes }, ...source });
@@ -337,7 +351,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
                 placementId: effect.destination === "actor" ? frame.actorEntityId : effect.destination === "target" ? frame.targetEntityId : state.truth.placements[frame.actorEntityId] ?? null,
                 ...source });
               else {
-                operations.push({ kind: "set_fact", fact: capabilityFact(state, frame, capability, effect, ordinal)!, ...source });
+                const fact = capabilityFact(state, frame, capability, effect, ordinal)!;
+                if (!unboundRandomEffect && !randomEffects.has(fact.id)) operations.push({ kind: "set_fact", fact, ...source });
               }
             }
           }
@@ -361,6 +376,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
           ? decisions.control.capabilities.find(capability => capability.id === frame.capabilityId) : null;
         if (method && !noConfirmedEffect && !ongoing) detail = `本次已执行的方法：${method.description}。具体结果以观察到的状态为准。`;
         if (noConfirmedEffect) status = "partial";
+        if (unboundRandomEffect) { status = "partial"; detail = "本次程序已执行并记录实际抽取结果，结果对应的状态仍待确认。"; }
       }
       // The draft summary is creative intent, not an executed action receipt.
       if (expansion) operations.push(...expansion.operations);
@@ -382,7 +398,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         ...operations.flatMap(operation => operation.kind === "set_fact" && operation.fact.predicate === "proximity" ? [operation.fact] : [])].map(fact => fact.id) : [],
       visibleEntityIds: ["succeeded", "partial"].includes(status) ? [...visibleEntities, ...(expansion?.entities ?? [])].map(entity => entity.id) : [], deliveredToEntityIds,
       namedEntityIds: [...entityNames].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "named").map(([, entityId]) => entityId),
-      randomRequests: operations.length ? randomRequests : [], randomBindings: operations.length ? randomBindings : [],
+      randomRequests: ["succeeded", "partial"].includes(status) ? randomRequests : [], randomBindings: ["succeeded", "partial"].includes(status) ? randomBindings : [],
       sharedClaims: [...claims].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "claim").map(([, claim]) => claim),
       ongoing,
       requestProgress: frame.submissionId || frame.causeActionId ? selected(answers, `${prefix}_request_progress`) as PreparedDirectAction["requestProgress"] : "complete" });

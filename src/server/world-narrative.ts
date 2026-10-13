@@ -91,18 +91,32 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
     document.actionWindow!.requiredAgentIds.includes(beat.agentId))) document.actionWindow.deadlineAt = null;
 }
 
-/** A single narrow publication decision for each available batch of complete paragraphs. */
+const groundingAxes = {
+  material: "Check only material people, distinct objects and possessions. Match them to knownEntities or established scene details. Background workers, tools, wallets and storage containers require actual entries or explicit facts. An intended attempt or expressive manner alone does not establish a new prop. Harmless texture or metaphor on an existing thing is allowed.",
+  agency: "Check only performed actions and player agency. Use each scene's actor, actionKind and outcome. Attempts and requests do not prove later actions or another person's compliance. Observation does not pick up an object or perform work. A silent use/change with an executed-method receipt does perform that method. Do not make new choices or feelings for the player.",
+  evidence: "Check only results, amounts, conditions and history. Preserve observed facts, unresolved attempts and actual inventory. A speaker's claim remains attributed; a request or unsupported earlier prose is not evidence. Do not invent a prerequisite, completed test, earlier payment or prior repair.",
+  speech: "Check only dialogue and attribution. Current delivered words belong to their supplied speaker; distinguish the player's own voice from the other person's reply. Do not invent, repeat, paraphrase as a second exchange, or change speech. An empty speech list permits no new spoken dialogue. References and ordinary descriptive quotations are allowed.",
+} as const;
+
+export function narrativeGroundingChoices(answers: Record<string, { type: string; choice?: string }>, count: number): string[] {
+  return Array.from({ length: count }, (_, index) => {
+    const choices = Object.keys(groundingAxes).map(axis => answers[`paragraph${index}_${axis}`]?.choice ?? "added_content");
+    return choices.includes("contradiction") ? "contradiction" : choices.every(choice => choice === "grounded") ? "grounded" : "added_content";
+  });
+}
+
+/** Independent factual checks share one publication request per available paragraph batch. */
 export async function checkNarrativeGrounding(provider: StructuredModelProvider, scope: ModelExecutionScope,
   source: ScenePacket, paragraphs: string[], profileId: string, fallbackProfileId: string, ordinal: number) {
   const state = { scene: narrativeEvidence(source), paragraphs } as unknown as JsonValue;
-  return executeDecisionV2(provider, { ...scope, profileId, fallbackProfileId, subjectId: source.agentId,
+  return executeDecisionV2(provider, { ...scope, profileId, fallbackProfileId, subjectId: source.agentId, instructionProfile: "publication",
     modelInvocation: ordinal, batch: { version: 2, view: { kind: "agent", agentId: source.agentId, projectionHash: contentHash(state) },
-      dependencies: {}, state, questions: Object.fromEntries(paragraphs.map((_, index) => [`paragraph${index}`, {
-        type: "choice" as const, version: "narrative-grounding-1", instructions: { task: loadPromptAsset("user/narrative-grounding.md"), index },
+      dependencies: {}, state, questions: Object.fromEntries(paragraphs.flatMap((_, index) => Object.entries(groundingAxes).map(([axis, focus]) => [`paragraph${index}_${axis}`, {
+        type: "choice" as const, version: "narrative-grounding-2", instructions: { task: loadPromptAsset("user/narrative-grounding.md"), index, focus },
         criteria: { grounded: "Faithful expression of supplied facts and delivered speech; only harmless stylistic rendering is added",
           added_content: "Introduces an unsupported person, distinct usable object or possession, action, speech, result, knowledge or meaningful change",
           contradiction: "Changes a known amount, identity, outcome, commitment or evidence status; or chooses new actions or feelings for the player" },
-      }])) } });
+      }]))) } });
 }
 
 /** Publish closed strings and blank-line-delimited paragraphs inside an open string. */

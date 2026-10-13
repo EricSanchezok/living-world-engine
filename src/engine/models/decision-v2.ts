@@ -39,6 +39,7 @@ export interface DecisionResultV2 {
 }
 export interface DecisionRequestV2 extends ModelExecutionScope {
   profileId: string; fallbackProfileId?: string; subjectId: string; batch: DecisionBatchV2;
+  instructionProfile?: "publication";
   modelInvocation?: number; modelInvocationId?: string;
   allocateInvocation?: () => number;
 }
@@ -48,8 +49,8 @@ export function validateDecisionBatchV2(input: unknown): DecisionBatchV2 {
   if (batch.view.projectionHash !== contentHash(batch.state)) throw new Error("decision projection hash mismatch");
   return frozenClone(batch);
 }
-export function decisionPromptV2() {
-  const system = loadPromptAsset("system/direct-decision.md"), userPrompt = loadPromptAsset("user/direct-decision.md");
+export function decisionPromptV2(instructionProfile?: "publication") {
+  const system = loadPromptAsset(instructionProfile === "publication" ? "system/narrative-publication.md" : "system/direct-decision.md"), userPrompt = loadPromptAsset("user/direct-decision.md");
   return { system, userPrompt, version: `decision-v2-${contentHash({ system, userPrompt })}` };
 }
 export function decisionWireContextV2(batch: DecisionBatchV2) {
@@ -91,7 +92,7 @@ function nativeOverflow(error: unknown): boolean {
 
 /** Real provider overflow is split by independent question; bytes are never a token gate. */
 export async function executeDecisionV2(provider: StructuredModelProvider, request: DecisionRequestV2): Promise<DecisionResultV2> {
-  const batch = validateDecisionBatchV2(request.batch), prompt = decisionPromptV2();
+  const batch = validateDecisionBatchV2(request.batch), prompt = decisionPromptV2(request.instructionProfile);
   if (batch.view.kind === "agent" && batch.view.agentId !== request.subjectId) throw new Error("private decision subject must own its projection");
   const audits: ModelExecutionAudit[] = [], dispatches: DecisionResultV2["dispatches"] = [];
   let ordinal = request.modelInvocation ?? 1;

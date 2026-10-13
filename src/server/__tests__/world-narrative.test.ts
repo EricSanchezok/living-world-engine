@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { completeParagraphs, renderNarrativeParagraph, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, type ScenePacket } from "../world-narrative";
+import { decisionPromptV2 } from "../../engine/models/decision-v2";
+import { completeParagraphs, renderNarrativeParagraph, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, narrativeGroundingChoices, type ScenePacket } from "../world-narrative";
 
 const source: ScenePacket = {
   participantId: "reader", agentId: "traveler", submissionId: "action", submittedAt: null, requestedAction: "问价",
@@ -10,6 +11,22 @@ const source: ScenePacket = {
 };
 
 describe("immutable narrative paragraphs", () => {
+  it("uses a closed evidence policy for prose, separate from common-sense world adjudication", () => {
+    const publication = decisionPromptV2("publication"), world = decisionPromptV2();
+    expect(publication.system).toContain("closed record");
+    expect(publication.system).toContain("may lie");
+    expect(world.system).toContain("contextual common sense");
+    expect(publication.version).not.toBe(world.version);
+  });
+  it("requires each independent factual focus without additional publication requests", () => {
+    const answers = Object.fromEntries(["material", "agency", "evidence", "speech"].map(axis => [`paragraph0_${axis}`, { type: "choice", choice: "grounded" }]));
+    expect(narrativeGroundingChoices(answers, 1)).toEqual(["grounded"]);
+    answers.paragraph0_agency!.choice = "contradiction";
+    expect(narrativeGroundingChoices(answers, 1)).toEqual(["contradiction"]);
+    answers.paragraph0_agency!.choice = "grounded";
+    delete answers.paragraph0_speech;
+    expect(narrativeGroundingChoices(answers, 1)).toEqual(["added_content"]);
+  });
   it("publishes only completed strings across escaped quotes and chunk boundaries", () => {
     expect(completeParagraphs('{"paragraphs":["雨停了。", "他举起')).toEqual(["雨停了。"]);
     expect(completeParagraphs('{"paragraphs":["他说：\\"等等\\"。","仍在\\n等待。"]}')).toEqual(['他说："等等"。', "仍在\n等待。"]);

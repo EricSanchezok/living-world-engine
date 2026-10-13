@@ -10,12 +10,12 @@ import type { DirectDecisions } from "./decisions";
 const subject = z.enum(["actor", "target", "tool"]);
 const declaration = z.object({ description: z.string().min(1), applicability: z.string().min(1), effectDescription: z.string().min(1),
   effects: z.array(z.discriminatedUnion("kind", [
-    z.object({ kind: z.literal("fact"), subject, predicate: z.string().min(1), value: z.union([z.string().min(1), z.boolean()]), description: z.string().min(1) }).strict(),
-    z.object({ kind: z.literal("condition"), subject, profileId: z.string().min(1) }).strict(),
-    z.object({ kind: z.literal("placement"), subject, destination: z.enum(["actor", "target", "scene"]) }).strict(),
-    z.object({ kind: z.literal("object"), name: z.string().min(1), description: z.string().min(1), placement: z.enum(["actor", "target"]) }).strict(),
+    z.object({ kind: z.literal("fact"), subject, predicate: z.string().min(1), value: z.union([z.string().min(1), z.boolean()]), description: z.string().min(1) }),
+    z.object({ kind: z.literal("condition"), subject, profileId: z.string().min(1) }),
+    z.object({ kind: z.literal("placement"), subject, destination: z.enum(["actor", "target", "scene"]) }),
+    z.object({ kind: z.literal("object"), name: z.string().min(1), description: z.string().min(1), placement: z.enum(["actor", "target"]) }),
   ])).min(1),
-}).strict();
+});
 
 export async function extendCapability(input: { state: Readonly<SimulationState>; control: DirectRuntimeState; frame: ActionFrame;
   decisions: DirectDecisions; profileId: string; context: JsonValue }) {

@@ -137,7 +137,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const claims = orderedValues(agent.belief.claims);
   if (claims.length) questions.claim = choice("existing belief to express, used only by a report", { none: "No claim to express", ...Object.fromEntries(claims.map(claim =>
     [claim.id, { description: claim.description, value: claim.value as unknown as JsonValue, stance: claim.stance }])) });
-  if (capabilities.length) questions.capability = choice("capability", { none: "Ordinary action without a learned capability", ...Object.fromEntries(capabilities.map(capability =>
+  if (capabilities.length) questions.capability = choice("Select a learned capability only when its method and immediate result match THIS request. The same equipment or long-term goal is insufficient. A repair does not express a later test. Choose none for a different procedure or ordinary action.", { none: "Ordinary action without a matching learned capability", ...Object.fromEntries(capabilities.map(capability =>
     [capability.id, { description: capability.description, applicability: capability.applicability, effect: capability.effectDescription }])) });
   if (goals.length) questions.goal = choice("goal", { none: "Respond to the situation without selecting a goal", ...Object.fromEntries(goals.map(goal => [goal.id, goal.description])) });
   const recentActions = state.history.flatMap(entry => {
@@ -160,10 +160,14 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     currentObservedFacts, intent: { goalId: intent.goalId, wakeReasons: intent.wakeReasons,
     recentOutcomeIds: intent.recentOutcomeIds }, latestObservedEvidence: orderedValues(agent.belief.evidence).filter(evidence => evidence.step === agent.observationCursorStep),
     actionKinds: kinds } as unknown as JsonValue;
-  if (external) for (const id of ["operation", "target", "recipient", "amount"]) {
-    const item = questions[id]!;
+  if (external) for (const id of ["operation", "target", "recipient", "amount", "capability", "search_location", "observation_scope"]) {
+    const item = questions[id]; if (!item) continue;
     item.instructions = { ...item.instructions as Record<string, JsonValue>, currentPlayerRequest: external.rawText,
       settledSteps: currentRequestReceipts.map(receipt => ({ attempted: receipt.attempted, outcome: receipt.outcome })) };
+    if (["recipient", "target", "search_location"].includes(id)) item.instructions = { ...item.instructions as Record<string, JsonValue>,
+      recentRequests: recentActions.filter(action => action.submissionId !== external.submissionId).slice(-3)
+        .map(({ requested, target, outcome }) => ({ requested, target, outcome })),
+      referenceRule: "Resolve pronouns against the most recently requested person or place, even if that search failed. Do not silently switch to an older unrelated speaker. If the intended person remains unseen, use discover or an unresolved choice and search the relevant place." };
   }
   const inputHash = contentHash({ perspective: view.state, submittedAction: external ?? null, goal: intent.goalId });
   if (!external && inputHash === intent.lastInputHash) {

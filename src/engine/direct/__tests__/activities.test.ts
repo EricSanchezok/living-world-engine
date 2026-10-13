@@ -18,7 +18,7 @@ import { isSemanticId } from "../../contracts/state-schemas";
 function option(question: DecisionQuestionV2, predicate: (value: unknown) => boolean) {
   return question.type === "choice" ? Object.entries(question.criteria).find(([, value]) => predicate(value))?.[0] ?? "unchanged" : "none";
 }
-async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "construct" | "ongoing" | "wait" = "repair", deadline = 120) {
+async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "construct" | "ongoing" | "wait" = "repair", deadline = 120, randomBinding: "valid" | "recover" | "absent" = "valid") {
   let extensionUsed = false;
   let operationOverride: string | undefined;
   const f = directTestProvider(wire => {
@@ -26,7 +26,8 @@ async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "co
     if (!wire.questions && mode === "construct") return { description: "制作可见提示牌", applicability: "有适用的材料时制作", effectDescription: "制成一块可见提示牌",
       effects: [{ kind: "object", name: "提示牌", description: "现场制作的提示牌。", placement: "target" }] };
     if (!wire.questions) return { description: "临时隔振", applicability: "用现有缓冲材料隔离设备振动", effectDescription: "设备获得可观察的临时隔振状态",
-      effects: [{ kind: "fact", subject: "target", predicate: "vibration-isolation", value: "temporary", description: "缓冲材料使振动暂时隔离。" }] };
+      effects: [{ kind: "fact", subject: "target", predicate: "vibration-isolation", value: "temporary", description: "缓冲材料使振动暂时隔离。" },
+        { kind: "placement", subject: "target", destination: "scene", description: "物件留在当前场所。" }] };
     const context = wire.state as { perspective?: { agentId: string }; actions?: Array<{ proposal: { rawText: string } }> };
     const values: Record<string, string> = { operation: operationOverride ?? (mode === "wait" ? "wait" : mode === "extend" && !extensionUsed ? "expand" : "use"),
       target: "pump", tool: "none", amount: "n1", resource: "none", speech: "none", timing: mode === "ongoing" ? "ongoing-action" : "default", goal: "none" };
@@ -42,7 +43,9 @@ async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "co
       if (id.endsWith("_applies")) answer = mode === "repair" ? "apply" : "none";
       if (id.includes("fact") && mode === "repair" && info?.fact?.id === "pump-seal") answer = option(q, value => (value as { value?: string })?.value === "sealed");
       if (id.includes("_random")) answer = mode !== "test" ? "none" : id.includes("_target")
-        ? option(q, value => (value as { property?: string })?.property === "pressure") : "apply";
+        ? randomBinding === "absent" || randomBinding === "recover" && Object.keys(wire.questions).some(key => key.endsWith("_outcome")) ? "none"
+          : option(q, value => (value as { property?: string })?.property === "pressure") : "apply";
+      if (id.includes("fact") && mode === "test" && randomBinding !== "valid") answer = option(q, value => (value as { value?: string })?.value === "tested");
       if (id.includes("capability")) answer = context.perspective ? option(q, value => typeof value === "object") : "apply";
       if (id.endsWith("_expression")) answer = mode === "extend-world" || mode === "construct" ? "expand" : "existing";
       if (id.includes("_created")) answer = id.endsWith("_name") ? "named" : "visible";
@@ -73,6 +76,23 @@ async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "co
 }
 
 describe("direct activities use code-owned mechanics", () => {
+  it.each(["recover", "absent"] as const)("records an applicable draw when its initial result binding is missing: %s", async binding => {
+    const f = await fixture("test", 120, binding);
+    const admitted = await f.act("运行压力测试10秒");
+    const prepared = Object.values(readDirectState(admitted.state.executionState!, admitted.state).prepared)[0]!;
+    expect(prepared.randomRequests).toHaveLength(1);
+    expect(prepared.randomBindings).toHaveLength(binding === "recover" ? 1 : 0);
+    if (binding === "absent") expect(prepared.operations).toEqual([]);
+    expect(admitted.state.truth.rng.draws).toBe(0);
+    const restored = new SimulationEngine(f.world, f.algorithm, admitted.state);
+    const settled = await restored.step(f.roster, { expectedRevision: admitted.state.revision, trigger: "manual", externalActions: [] });
+    expect(settled.state.truth.rng.draws).toBe(1);
+    expect(settled.state.truth.facts["pump-pressure"]!.value).toEqual(binding === "recover"
+      ? { kind: "text", value: expect.stringMatching(/^(stable|unstable)$/u) } : { kind: "text", value: "untested" });
+    expect(f.transport).toHaveBeenCalledTimes(3);
+    expect(replaySimulationState(settled.state)).toEqual(settled.state);
+    expect(replaySimulationState(settled.state).truth.rng.draws).toBe(1);
+  });
   it("constructs an observable object with a valid bounded semantic identity and replays it once", async () => {
     const f = await fixture("construct"); const result = await f.act("制作一个提示牌");
     const made = Object.values(result.state.truth.entities).filter(entity => !f.world.initialState.truth.entities[entity.id]);
@@ -139,6 +159,7 @@ describe("direct activities use code-owned mechanics", () => {
     const f = await fixture("extend"); const first = await f.act("用缓冲材料临时隔离设备振动");
     const control = readDirectState(first.state.executionState!, first.state);
     expect(control.capabilities).toHaveLength(1); expect(control.capabilities[0]!.knownToAgentIds).toContain("inspector");
+    expect(control.capabilities[0]!.effects.find(effect => effect.kind === "placement")).not.toHaveProperty("description");
     expect(Object.values(first.state.truth.facts)).toContainEqual(expect.objectContaining({ predicate: "vibration-isolation", value: { kind: "text", value: "temporary" } }));
     expect(first.committed.observations.find(packet => packet.observerId === "engineer")?.summary).toContain("振动暂时隔离");
     expect(first.committed.observations.find(packet => packet.observerId === "inspector")?.summary).toContain("振动暂时隔离");
