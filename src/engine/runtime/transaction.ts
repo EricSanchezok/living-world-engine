@@ -1,4 +1,5 @@
 import type { RulePackageRegistry } from "../mechanics/rule-package";
+import { applyDirectBootstrap, replayDirectStep } from "../direct/canonical";
 import { validateAlgorithmExecutionState } from "./execution-state";
 import { z } from "zod";
 import type { ExecutionRef } from "./execution";
@@ -587,7 +588,7 @@ function validateCommittedStepShape(step: CommittedStep, state: SimulationState)
   delete payload.contentHash;
   if (step.contentHash !== contentHash(payload)) throw new Error(`step ${step.step} content hash mismatch`);
   if (step.executionRef) validateExecutionRef(step.executionRef, `step ${step.step} executionRef`);
-  if (step.decisionEvent) return;
+  if (step.decisionEvent || step.directEvent) return;
   step.initialActions.forEach((action) => actionProposalSchema.parse(action));
   step.actions.forEach((action) => actionProposalSchema.parse(action));
   step.reactionRequests.forEach((request) => reactionRequestSchema.parse(request));
@@ -831,6 +832,7 @@ export function replaySimulationState(
     replay.agents[commit.agentId] = applyMindCommit(agent, commit, 0, [], []);
   }
   if (state.bootstrapDecisionEvent) Object.assign(replay, applyDecisionEventBootstrap(replay, state.bootstrapDecisionEvent));
+  if (state.bootstrapDirect) Object.assign(replay, applyDirectBootstrap(replay, state.bootstrapDirect));
   const entries = [
     ...state.history.map((step) => ({ kind: "step" as const, revision: step.revision, value: step })),
     ...state.admissions.map((commit) => ({ kind: "admission" as const, revision: commit.revision, value: commit })),
@@ -844,6 +846,7 @@ export function replaySimulationState(
     }
     const step = entry.value;
     validateCommittedStepShape(step, replay);
+    if (step.directEvent) { Object.assign(replay, replayDirectStep(replay, step)); continue; }
     if (step.decisionEvent) {
       Object.assign(replay, replayDecisionEventStep(replay, step, rulePackages));
       continue;
@@ -993,7 +996,7 @@ export function validateSimulationState(state: SimulationState, requireNextActio
   assertExactKeys(state, [
     "schemaVersion", "executionState", "worldId", "worldHash", "lawIds", "revision", "step", "truth", "agents", "admissions", "history",
     "bootstrapAgentCommits",
-  ], ["historyBase", "bootstrapExecutionRef", "bootstrapDecisionEvent"], "simulation state");
+  ], ["historyBase", "bootstrapExecutionRef", "bootstrapDecisionEvent", "bootstrapDirect"], "simulation state");
   validateAlgorithmExecutionState(state.executionState);
   if (state.schemaVersion !== 17 || !isSemanticId(state.worldId) || !/^sha256:[a-f0-9]{64}$/.test(state.worldHash)) {
     throw new Error("invalid simulation identity");

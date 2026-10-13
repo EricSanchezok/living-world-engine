@@ -1,4 +1,5 @@
 import type { RulePackageRegistry } from "../mechanics/rule-package";
+import { applyDirectBootstrap, commitDirectRecord, directCandidate } from "../direct/canonical";
 import { validateAlgorithmExecutionState } from "./execution-state";
 import { validateOnsetPerceptionReceipts } from "../mechanics/onset-receipts";
 import type { WorldDefinition } from "./world-definition";
@@ -895,6 +896,11 @@ export class CanonicalCommitter {
   }
 
   bootstrap(sourceState: Readonly<SimulationState>, candidate: Readonly<BootstrapCandidate>, definition?: WorldDefinition): SimulationState {
+    if (candidate.directWorld) {
+      if (!definition || candidate.sourceStateHash !== contentHash(sourceState) || candidate.agentCommits.length || candidate.modelAudits.length ||
+        candidate.directWorld.authorityHash !== contentHash(toWorldRuntimeContract(definition))) throw new Error("direct bootstrap changed world authority");
+      return applyDirectBootstrap(sourceState, candidate.directWorld);
+    }
     if (candidate.decisionEvent) {
       if (!definition || contentHash(candidate.decisionEvent.authority) !== contentHash(toWorldRuntimeContract(definition))) throw new Error("native bootstrap changed world authority");
       return commitDecisionEventBootstrap(sourceState, candidate);
@@ -952,6 +958,16 @@ export class CanonicalCommitter {
   } {
     const source = structuredClone(sourceState) as SimulationState;
     const candidate = structuredClone(candidateInput);
+    if (candidate.directEvent) {
+      const preparation = authority.preparation;
+      if (candidate.sourceStateHash !== contentHash(source) || preparation.sourceStateHash !== contentHash(source) ||
+        preparation.policyRosterHash !== contentHash(policyRoster) || candidate.directEvent.authorityHash !== contentHash(toWorldRuntimeContract(authority.definition)) ||
+        contentHash(candidate.directEvent) !== contentHash(preparation.payload.record)) throw new Error("direct commit differs from frozen preparation");
+      const result = commitDirectRecord(source, candidate.directEvent);
+      const expected = directCandidate(source, candidate.directEvent, result.committed, candidate.diagnostics.activatedAgentIds);
+      if (contentHash(candidate) !== contentHash(expected)) throw new Error("direct candidate presentation changed");
+      validateSimulationState(result.state, false, true, this.rulePackages); return result;
+    }
     if (candidate.decisionEvent) {
       const proof = candidate.decisionEvent, preparation = authority.preparation;
       if (candidate.sourceStateHash !== contentHash(source) || preparation.sourceStateHash !== contentHash(source) ||
