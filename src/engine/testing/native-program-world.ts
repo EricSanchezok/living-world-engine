@@ -42,7 +42,8 @@ export function nativeProgramFixture(options: { goalVerdict?: "yes" | "no" | "un
     const wire = (body.messages as Array<{ content: string }>).map(message => message.content).join("\n");
     if (wire.includes("Compile a reusable private behavior program")) return encodeProgramDraft(program, {
       recipient: options.bothActors && /"agentId"\s*:\s*"player"/u.test(wire) ? "guard" : "traveler" });
-    if (options.bothActors && wire.includes("You compile authored world sources") && /"actorId"\s*:\s*"player"/u.test(wire)) {
+    if (options.bothActors && wire.includes("You compile authored world sources") &&
+      /"task"\s*:\s*\{\s*"attempt"\s*:\s*\{[^}]*"actorId"\s*:\s*"player"/u.test(wire)) {
       return encodeWorldDraft(rule, { actor: "player", recipient: "keeper", utterance: "Why are you here?" });
     }
     if (wire.includes("You compile authored world sources")) return encodeWorldDraft(rule, wire.includes("Hello keeper") ?

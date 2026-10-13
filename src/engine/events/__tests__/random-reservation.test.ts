@@ -7,6 +7,7 @@ import { readDecisionEventState, restoreOwnerPrograms } from "../runtime-state";
 import { restoreDecisionEventStep } from "../journal";
 import { replayDecisionEventStep } from "../canonical";
 import { quantityId } from "../../runtime/runtime-id";
+import { historyReplayBaseHash } from "../../runtime/history-replay";
 
 function fixture() {
   const options: { worldVerdict: "yes" | "unknown" } = { worldVerdict: "yes" };
@@ -25,6 +26,24 @@ function fixture() {
 }
 
 describe("durable randomness through SimulationEngine", () => {
+  it("closes a fixed draw with blocked receipts when its combined effects overdraw a quantity", async () => {
+    const f = fixture(), holder = quantityId(f.world.initialState.worldHash, "spirit-stone", "keeper");
+    f.world.initialState.truth.quantities[holder]!.amount = 3;
+    f.world.historyBaseHash = historyReplayBaseHash(f.world.initialState);
+    f.world.randomDistributions[0]!.steps[0]!.outcomes = [2, 2];
+    f.rule.branches[0]!.mechanics.push({ ...structuredClone(f.rule.branches[0]!.mechanics[0]!), id: "second-gift" });
+    await f.configured.registry.capture();
+    const algorithm = new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig), engine = new SimulationEngine(f.world, algorithm);
+    const boot = await engine.bootstrapAgents();
+    const reserved = await engine.step(f.roster, { expectedRevision: 0, trigger: "manual", externalActions: [] });
+    const result = await new SimulationEngine(f.world, algorithm, reserved.state).step(f.roster, { expectedRevision: 1, trigger: "manual", externalActions: [] });
+    expect(result.state.truth.quantities).toEqual(boot.truth.quantities);
+    expect(result.state.truth.rng).toEqual(reserved.state.truth.rng);
+    expect(result.committed.outcomes[0]!.status).toBe("blocked");
+    expect(readDecisionEventState(result.state.executionState!, result.state).randomReservation).toBeNull();
+    expect(result.committed.decisionEvent!.modelAudits.some(audit => audit.role === "creation")).toBe(false);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it.each(["yes", "unknown"] as const)("persists the draw before a %s adjudication and settles it exactly once after restart", async verdict => {
     const f = fixture(); await f.configured.registry.capture();
     const algorithm = new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig);

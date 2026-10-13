@@ -6,8 +6,48 @@ import { DecisionEventAlgorithm, WorldQuiescentError } from "../algorithm";
 import { invocationAllocator, readDecisionEventState } from "../runtime-state";
 import { prepareProgramWorldWork } from "../world-control";
 import { toWorldRuntimeContract } from "../../runtime/world-definition";
+import { quantityId } from "../../runtime/runtime-id";
+import { historyReplayBaseHash } from "../../runtime/history-replay";
 
 describe("world program recovery through the native engine", () => {
+  it("repairs a jointly oversubscribed resource before any effects or private observations commit", async () => {
+    const f = nativeProgramFixture({ bothActors: true });
+    const holder = quantityId(f.world.initialState.worldHash, "spirit-stone", "keeper");
+    f.world.initialState.truth.quantities[holder]!.amount = 3;
+    f.world.historyBaseHash = historyReplayBaseHash(f.world.initialState);
+    f.program.nodes[0] = { ...f.program.nodes[0]!, intent: "Spend 5 seconds giving all available spirit stones to the traveler." } as typeof f.program.nodes[number];
+    f.rule.sourceIds.push("mechanics"); f.rule.writes.push("quantities");
+    f.rule.branches[0]!.mechanics = [{ id: "gift", packageId: "core-resolution", ruleId: "transfer-quantity", input: {
+      definitionId: "spirit-stone", fromHolderId: "keeper", toHolderId: "player",
+      amountSource: { kind: "existing_state", quantityId: holder },
+    } }];
+    await f.configured.registry.capture();
+    const engine = new SimulationEngine(f.world, new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig));
+    const boot = await engine.bootstrapAgents();
+    expect(boot.bootstrapDecisionEvent!.control.pending).toHaveLength(2);
+    expect(boot.bootstrapDecisionEvent!.control.pending.map(value => ({ actor: value.attempt.actorId, failure: value.failure, at: value.atSeconds }))
+      .sort((a, b) => a.actor.localeCompare(b.actor))).toEqual([{ actor: "keeper", failure: null, at: 5 }, { actor: "player", failure: null, at: 5 }]);
+    const rejected = await engine.step(f.roster, { expectedRevision: 0, trigger: "manual", externalActions: [] });
+    expect(rejected.state.truth).toEqual(boot.truth);
+    const pending = readDecisionEventState(rejected.state.executionState!, rejected.state).pending;
+    expect(pending).toHaveLength(2);
+    expect(pending.every(value => value.failure?.includes("insufficient quantity") && value.recovery?.disposition === "expand")).toBe(true);
+    // The revised source-bound rule gives the owner permission and blocks the competing attempt.
+    f.rule.predicates.push({ id: "owner", description: "Only the actual owner may transfer these stones.", reads: ["entity:{actor}"],
+      sourceIds: ["world"], unknown: "wait", test: { kind: "mechanical", operator: "eq",
+        left: { kind: "parameter", name: "actor" }, right: { kind: "literal", value: "keeper" } } });
+    f.rule.branches[0]!.when.push({ predicateId: "owner", equals: "yes" });
+    f.rule.branches.push({ ...structuredClone(f.rule.branches[0]!), id: "blocked", when: [{ predicateId: "owner", equals: "no" }],
+      description: "The competing transfer is blocked.", acknowledgement: "observed-outcome", outcome: "blocked", effects: [], mechanics: [],
+      deliveries: [{ kind: "observation", recipientParameter: "actor", text: "Your competing transfer was blocked." }] });
+    const repaired = await engine.step(f.roster, { expectedRevision: rejected.state.revision, trigger: "manual", externalActions: [] });
+    expect(repaired.state.truth.quantities[holder]!.amount).toBe(0);
+    expect(repaired.committed.outcomes.map(value => value.status).sort()).toEqual(["blocked", "succeeded"]);
+    expect(readDecisionEventState(repaired.state.executionState!, repaired.state).pending).toEqual([]);
+    const calls = f.configured.transport.mock.calls.length;
+    expect(replaySimulationState(repaired.state)).toEqual(repaired.state);
+    expect(f.configured.transport).toHaveBeenCalledTimes(calls);
+  });
   it("retains a supported frontier and rejudges it after a coupled unsupported attempt exhausts repair", async () => {
     const f = nativeProgramFixture();
     f.rule.predicates.push({ id: "actor-allowed", description: "Only this compiled actor branch is available.", sourceIds: ["world"],

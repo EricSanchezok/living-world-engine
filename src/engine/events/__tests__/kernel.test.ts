@@ -282,8 +282,7 @@ describe("source-bound world event kernel", () => {
     expect(() => createWorldEventCandidate(f.state, f.definition, f.resources, [f.bound], result, 5)).toThrow("awaits evidence");
     const second = structuredClone(f.bound); second.attempt.id = runtimeId({ worldHash: f.state.worldHash, revision: 0, kind: "action", stage: "program", owner: "player", round: 0, ordinal: 1 });
     const joint = await adjudicate(f, [f.bound, second]);
-    const candidate = createWorldEventCandidate(f.state, f.definition, f.resources, [f.bound, second], joint.result, 5);
-    expect(() => commitWorldEvent(f.state, f.definition, f.resources, candidate, { earliestPendingSeconds: 5, receipts: new Map() })).toThrow("insufficient quantity");
+    expect(() => createWorldEventCandidate(f.state, f.definition, f.resources, [f.bound, second], joint.result, 5)).toThrow("insufficient quantity");
     expect(f.state.truth.quantities[quantityId(f.state.worldHash, "spirit-stone", "player")]!.amount).toBe(3);
     expect(f.state.step).toBe(0);
   });

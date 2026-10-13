@@ -12,10 +12,10 @@ import {
 import { executionStage } from "../runtime/stages";
 import type { JsonObject } from "../runtime/json";
 import { toWorldRuntimeContract } from "../runtime/world-definition";
-import { adjudicateWorldPrograms, selectableWorldBranches } from "./adjudication";
+import { adjudicateWorldPrograms, selectableWorldBranches, worldProgramComponents } from "./adjudication";
 import { reviseEventBeliefs } from "./cognition";
 import { nextWorldClockBoundary } from "./clock-boundary";
-import { createWorldEventCandidate, type WorldEventCandidate } from "./kernel";
+import { createWorldEventCandidate, WorldResourceConflictError, type WorldEventCandidate } from "./kernel";
 import { advanceProgramControls } from "./program-control";
 import { authorizeWorldRandomness, prepareWorldRandomPlan, reserveWorldRandomness, worldRandomResources, type WorldRandomCommitment } from "./randomness";
 import { settleRandomReservation } from "./random-reservation";
@@ -36,7 +36,7 @@ export const JEV_EVENT_CONFIG: DecisionEventConfig = { decision: "decision-jev",
   fallback: "decision-deepseek", maxDependencyRounds: 32 };
 export const SCRIPT_EVENT_CONFIG: DecisionEventConfig = { ...INHERIT_EVENT_MODELS, maxDependencyRounds: 32 };
 export const decisionEventManifest = (config: DecisionEventConfig = SCRIPT_EVENT_CONFIG) =>
-  defineAlgorithmManifest({ id: "decision-event", version: "4", config: config as unknown as JsonObject });
+  defineAlgorithmManifest({ id: "decision-event", version: "5", config: config as unknown as JsonObject });
 export const decisionEventAlgorithmRef = (config: DecisionEventConfig = SCRIPT_EVENT_CONFIG) => algorithmRef(decisionEventManifest(config));
 
 export { WorldQuiescentError } from "../runtime/execution";
@@ -163,8 +163,12 @@ export class DecisionEventAlgorithm implements WorldExecutionAlgorithm {
         if (randomDeferral) throw new Error(randomDeferral);
         event = createWorldEventCandidate(physical, authority, control.worldResources, programs, adjudication, atSeconds, randomness, this.rulePackages);
       } catch (error) {
-        if (!(error instanceof Error) || !/world rule awaits evidence or expansion|ambiguous world branches require expansion/u.test(error.message)) throw error;
-        const unsupported = randomDeferral ? programs.filter(bound => bound.program.definition.random.length > 0 || bound.program.definition.resolutions.length > 0)
+        if (!(error instanceof Error) || !(error instanceof WorldResourceConflictError) &&
+          !/world rule awaits evidence or expansion|ambiguous world branches require expansion/u.test(error.message)) throw error;
+        const unsupported = error instanceof WorldResourceConflictError ? worldProgramComponents(programs, resources,
+          { state: physical, definition: authority, randomness, rulePackages: this.rulePackages })
+          .filter(component => component.some(bound => error.attemptIds.includes(bound.attempt.id))).flat()
+          : randomDeferral ? programs.filter(bound => bound.program.definition.random.length > 0 || bound.program.definition.resolutions.length > 0)
           : programs.filter(bound => selectableWorldBranches(bound, adjudication.records).length !== 1);
         if (!unsupported.length) throw error;
         for (const bound of unsupported) {

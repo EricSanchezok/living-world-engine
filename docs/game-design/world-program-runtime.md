@@ -1,6 +1,6 @@
 # World Program Runtime
 
-The world program kernel lives in [`src/engine/events/kernel.ts`](../../src/engine/events/kernel.ts). It is independent of private Agent programs. The default `decision-event@4` producer runs through WorldHost, SimulationEngine, CanonicalCommitter and history replay. [Spec 0181](../specs/0181-jev-decision-event-engine.md) defines its replacement and qualification contract.
+The world program kernel lives in [`src/engine/events/kernel.ts`](../../src/engine/events/kernel.ts). It is independent of private Agent programs. The default `decision-event@5` producer runs through WorldHost, SimulationEngine, CanonicalCommitter and history replay. [Spec 0181](../specs/0181-jev-decision-event-engine.md) defines its replacement and qualification contract.
 
 ## Compilation and authority
 
@@ -91,3 +91,7 @@ BeliefRevision v2 binds both decision rounds, optional creation, source-bound pr
 Tests exercise the actual ModelGateway with only HTTP replaced, compilation/repair, quantity transfers, stale reads, unrelated updates, source/evidence tampering, unknown, atomic competition failure, exact speech, no-op progress, and scheduler restart. SimulationEngine tests also cover registered execution, natural-language player actions, actual speech delivery, same-time control commits, controller interruption, quiescence, persistent replay and recovery without repeated effects. A real-model diagnostic is available as `scripts/experiments/jev-world-smoke.ts`, consuming a successful private-program probe. It exercises the world kernel directly, not WorldHost persistence or a complete game.
 
 WorldHost lifecycle integration and the local Inspector expose native programs, coverage, wake reasons, decisions and measured call costs. World v15, SimulationState v17 and instance v24 persist the native contracts. Full A/B/C qualification is tracked in the spec evidence. Passing the runtime checks does not establish the acceptance targets.
+
+## Joint quantity recovery
+
+The kernel projects the complete authorized effect sequence on a transaction clone before admitting an event. A joint quantity overdraw retains the entire connected component for one input-bound program revision, with no partial world effects or deliveries. If a random draw has already fixed the stakes, an overdraw settles that reservation with blocked receipts and no effects; it cannot trigger a revised stake or another draw.

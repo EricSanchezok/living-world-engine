@@ -49,6 +49,32 @@ export interface CommitReceipt {
   eventIds: string[]; effectHash: string; programReceipts: ProgramReceipt[];
 }
 
+/** A supported semantic branch can still overdraw a jointly contested quantity. */
+export class WorldResourceConflictError extends Error {
+  constructor(readonly attemptIds: string[], readonly resourceId: string, readonly requested: number, readonly available: number, cause: Error) {
+    super(`insufficient quantity in joint world effects: ${resourceId}; requested ${requested}, available ${available}`, { cause });
+    this.name = "WorldResourceConflictError";
+  }
+}
+
+function projectCandidateEffects(source: Readonly<SimulationState>, effects: WorldDeltaOperation[]): SimulationState {
+  const projected = structuredClone(source) as SimulationState;
+  for (const operation of effects) {
+    try { applyWorldDeltaOperation(projected, operation); }
+    catch (error) {
+      if (error instanceof Error && error.message === "insufficient quantity" &&
+        (operation.kind === "transfer_quantity" || operation.kind === "consume_quantity")) {
+        const holder = operation.kind === "transfer_quantity" ? operation.fromHolderId : operation.holderId;
+        const id = quantityId(source.worldHash, operation.definitionId, holder);
+        throw new WorldResourceConflictError(operation.causes.flatMap(cause => cause.kind === "action" ? [cause.id] : []),
+          `quantity:${id}`, operation.amount, projected.truth.quantities[id]?.amount ?? 0, error);
+      }
+      throw error;
+    }
+  }
+  return projected;
+}
+
 function conditionKey(record: Pick<WorldConditionRecord, "attemptHash" | "ruleHash" | "conditionId">) {
   return contentHash([record.attemptHash, record.ruleHash, record.conditionId]);
 }
@@ -148,15 +174,22 @@ export function createWorldEventCandidate(state: Readonly<SimulationState>, defi
   const records = verifyAdjudication(programs, proof, resources, sources, context);
   // A persisted draw cannot be repaired into different stakes after its result is known.
   // An unresolved joint frontier ends with blocked receipts and no fabricated effects.
-  const unresolved = Boolean(activeRandomReservation(state) && programs.some(bound => selectableWorldBranches(bound, [...records.values()]).length !== 1));
-  const value = unresolved ? { selections: [], effects: [], deliveries: [], mechanicInvocations: [], mechanicResults: [], resolutionPlans: [], resolutionReceipts: [] } : materialize(programs, records, resources, context);
+  const empty = { selections: [], effects: [], deliveries: [], mechanicInvocations: [], mechanicResults: [], resolutionPlans: [], resolutionReceipts: [] };
+  let unresolved = Boolean(activeRandomReservation(state) && programs.some(bound => selectableWorldBranches(bound, [...records.values()]).length !== 1));
+  let value = unresolved ? empty : materialize(programs, records, resources, context);
+  let projected: SimulationState;
+  try { projected = projectCandidateEffects(state, value.effects); }
+  catch (error) {
+    if (!(error instanceof WorldResourceConflictError) || !activeRandomReservation(state)) throw error;
+    // The draw has already fixed the stakes. Close the whole reservation with
+    // blocked receipts instead of revising a losing result or drawing again.
+    unresolved = true; value = empty; projected = structuredClone(state) as SimulationState;
+  }
   const continuingAttemptIds = unresolved ? [] : programs.filter(bound => worldProgramTiming(bound, resources).completionAtSeconds === null &&
     bound.program.definition.branches.find(branch => branch.id === value.selections.find(selection => selection.attemptId === bound.attempt.id)!.branchId)!.outcome === "partial")
     .map(bound => bound.attempt.id);
   const clockEffects = (() => {
     if (!clockBoundary.impacts.length && !clockBoundary.conditions.length) return [];
-    const projected = structuredClone(state) as SimulationState;
-    for (const operation of value.effects) applyWorldDeltaOperation(projected, operation);
     return deriveConditionAdvance({ state: projected, endElapsedSeconds: atSeconds });
   })();
   const reads = captureReads(resources, [...new Set([
