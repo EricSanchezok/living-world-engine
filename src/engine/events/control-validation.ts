@@ -20,6 +20,7 @@ import { externalWorldAttempt } from "./external-action";
 import { adaptationQuestionVersion, adaptationReasonPrefix, programAdaptationBatch } from "../programs/adaptation";
 import { ProgramLibrary } from "../programs/library";
 import { programGoalSelection, PROGRAM_GOAL_SELECTION_HASH } from "./goal-selection";
+import { privatePlanningInput } from "../programs/planning-input";
 
 const equal = (a: unknown, b: unknown) => contentHash(a) === contentHash(b);
 function creationEvidence(audits: ModelExecutionAudit[], owner: string, output: unknown, profile: string, ids?: string[]) {
@@ -95,8 +96,7 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
     const perspective = projectAgentPerspective(source as SimulationState, agent);
     const resources = privateProgramResources(perspective, before.agents[agent.id]?.resources);
     if (!equal(owner.resources, resources)) throw new Error("private resource projection differs from the owner's knowledge");
-    const planningInput = contentHash(Object.fromEntries(Object.entries(resources.resources).filter(([key]) => key !== "clock")
-      .map(([key, value]) => [key, value.value])));
+    const planningInput = privatePlanningInput(resources.resources);
     const planned = decisions.filter(use => use.batch.programHash === PROGRAM_GOAL_SELECTION_HASH &&
       use.batch.view.kind === "agent" && use.batch.view.agentId === agent.id && use.result.answers.goal?.choice !== "wait").length;
     const priorPlanning = before.agents[agent.id]?.planning;
@@ -223,8 +223,7 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
     if (choices.length) {
       const active = validatedOldPrograms.find(program => program.instanceId === before.agents[agent.id]?.activeInstanceId);
       const attempts = priorPlanning?.inputHash === planningInput ? priorPlanning.attempts : 0;
-      const domain = programGoalSelection(agent, perspective, resources.resources, validatedOldPrograms, active,
-        new ProgramLibrary(before.privateLibrary), attempts);
+      const domain = programGoalSelection(agent, perspective, resources.resources, validatedOldPrograms, new ProgramLibrary(before.privateLibrary));
       if (roster[agent.id]?.kind !== "model" || !domain.goals.length || attempts >= 2 ||
         active && !["ended", "interrupted", "needs-expansion"].includes(active.status) ||
         before.pending.some(pending => pending.attempt.actorId === agent.id) || !equal(domain.batch, choices[0]!.batch)) {

@@ -91,7 +91,11 @@ describe("native event runtime through SimulationEngine", () => {
   });
   it("reuses an immutable plan after new private evidence without requiring its original admission environment", async () => {
     const options = { reuse: false };
-    const f = nativeProgramFixture(options); await f.configured.registry.capture();
+    const f = nativeProgramFixture(options);
+    f.program.entry = "root";
+    f.program.nodes.push({ id: "await-reply", kind: "wait", predicateId: "complete", deadlineSeconds: null },
+      { id: "root", kind: "sequence", children: ["ask", "await-reply"] });
+    await f.configured.registry.capture();
     const engine = new SimulationEngine(f.world, new DecisionEventAlgorithm(f.configured.gateway, nativeProgramTestConfig));
     await engine.bootstrapAgents();
     const first = await engine.step(f.roster, { expectedRevision: 0, trigger: "manual", externalActions: [] });

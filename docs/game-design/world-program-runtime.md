@@ -1,6 +1,8 @@
 # World Program Runtime
 
-The world program kernel lives in [`src/engine/events/kernel.ts`](../../src/engine/events/kernel.ts). It is independent of private Agent programs. The default `decision-event@5` producer runs through WorldHost, SimulationEngine, CanonicalCommitter and history replay. [Spec 0181](../specs/0181-jev-decision-event-engine.md) defines its replacement and qualification contract.
+The world program kernel lives in [`src/engine/events/kernel.ts`](../../src/engine/events/kernel.ts). It is independent of private Agent programs. The default `decision-event@6` producer runs through WorldHost, SimulationEngine, CanonicalCommitter and history replay. [Spec 0181](../specs/0181-jev-decision-event-engine.md) defines its replacement and qualification contract.
+
+Private expansion allowances renew on distinct private information. New identifiers for identical testimony or duplicate observation metadata do not renew them. The complete evidence remains available to model decisions and dependency validation. Invalidated program versions and programs that ended without visible progress or goal evidence require a revised definition; a controller pause permits reuse. World event success, program completion and goal completion remain separate.
 
 ## Compilation and authority
 

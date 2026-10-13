@@ -12,6 +12,7 @@ import { privateProgramEntityIds, privateProgramResources, privateProgramSources
 import { createProgramUtterance } from "../programs/utterance";
 import { adaptationReasonPrefix, programAdaptationBatch } from "../programs/adaptation";
 import { programRevisionContext } from "../programs/revision-context";
+import { privatePlanningInput } from "../programs/planning-input";
 import type { PolicyBinding } from "../runtime/execution";
 import type { JsonObject, JsonValue } from "../runtime/json";
 import { issueProgramAttempt } from "./attempt";
@@ -89,8 +90,7 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
     owner.resources = privateProgramResources(perspective, owner.resources);
     const resources = owner.resources.resources, interpreters = restoreOwnerPrograms(control, ownerId);
     const inputHash = contentHash(resources);
-    const planningInput = contentHash(Object.fromEntries(Object.entries(resources).filter(([key]) => key !== "clock")
-      .map(([key, value]) => [key, value.value])));
+    const planningInput = privatePlanningInput(resources);
     if (owner.planning?.inputHash !== planningInput) owner.planning = { inputHash: planningInput, attempts: 0, waitReason: null };
     if (!scheduler.beginEvaluation(ownerId, inputHash, contentHash(owner.instances), contentHash({ evidence: agent.belief.evidence,
       receipts: control.receipts.flatMap(receipt => receipt.programReceipts.filter(receipt => owner.instances.some(instance => instance.snapshot.instanceId === receipt.instanceId))) }))) return;
@@ -101,7 +101,7 @@ export async function advanceProgramControls(provider: StructuredModelProvider, 
         fallbackProfileId: models.fallback, nextInvocation: () => options.nextInvocation(ownerId) });
       resolved.decisions.forEach(record);
     }
-    const { goals, reusable, batch } = programGoalSelection(agent, perspective, resources, interpreters, active, library, owner.planning!.attempts);
+    const { goals, reusable, batch } = programGoalSelection(agent, perspective, resources, interpreters, library);
     if ((!active || active.status === "needs-expansion" || active.status === "ended" || active.status === "interrupted") && goals.length &&
       !control.pending.some(pending => pending.attempt.actorId === ownerId) && owner.planning!.attempts < 2) {
       const selected = await runtime.decide({ ...scope, profileId: models.decision, fallbackProfileId: models.fallback,

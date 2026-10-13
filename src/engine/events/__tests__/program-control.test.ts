@@ -10,6 +10,9 @@ import { advanceProgramControls } from "../program-control";
 import { initialDecisionEventState, readDecisionEventState, restoreOwnerPrograms } from "../runtime-state";
 import type { PolicyBinding } from "../../runtime/execution";
 import { EventScheduler } from "../scheduler";
+import { programGoalSelection } from "../goal-selection";
+import { projectAgentPerspective } from "../../cognition/agent-perspective";
+import { ProgramLibrary } from "../../programs/library";
 
 function fixture() {
   const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: createTestModelCatalog() });
@@ -81,6 +84,8 @@ describe("durable private program control", () => {
       return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: "unknown" }])) };
     });
     const registry = await configured.registry.capture(), source = f.world.initialState;
+    source.agents.keeper!.belief.evidence["first-report"] = { id: "first-report", step: 0,
+      kind: "testimony", description: "The traveler has made the same offer.", sourceId: null };
     const initial = initialDecisionEventState(source, { decision: "world-test", creation: "world-test", fallback: "world-test" }, configured.gateway.catalog.hash, registry.hash);
     const scope = { workloadId: "expansion", batchId: "expansion" };
     const first = await advanceProgramControls(configured.gateway, source, initial, f.roster, scope, f.options);
@@ -92,6 +97,30 @@ describe("durable private program control", () => {
     expect(created).toBe(2); expect(configured.transport).toHaveBeenCalledTimes(calls);
     expect(third.control.pending).toEqual([]);
     expect(third.control.failures.some(failure => failure.reason.includes("one targeted plan revision"))).toBe(true);
+    source.agents.keeper!.belief.evidence["duplicate-report"] = { id: "duplicate-report", step: 1,
+      kind: "testimony", description: "The traveler has made the same offer.", sourceId: null };
+    const duplicate = await advanceProgramControls(configured.gateway, source, third.control, f.roster, scope, f.options);
+    expect(created).toBe(2);
+    expect(duplicate.control.agents.keeper!.planning?.attempts).toBe(2);
+  });
+  it("excludes every invalidated version even after a fresh observation resets the revision budget", async () => {
+    const f = fixture();
+    const configured = decisionTestProvider(body => {
+      const wire = JSON.stringify(body);
+      if (wire.includes("Compile a reusable private behavior program")) return encodeProgramDraft(f.definition, { recipient: "traveler" });
+      if (wire.includes("Write the exact words this Agent")) return { text: "Why are you here?" };
+      if (wire.includes("Choose which actual active goal")) return { answers: { goal: { choice: "g0" } } };
+      return { answers: Object.fromEntries(decisionQuestionIds(body).map(id => [id, { choice: "unknown" }])) };
+    });
+    const registry = await configured.registry.capture(), source = f.world.initialState;
+    const initial = initialDecisionEventState(source, { decision: "world-test", creation: "world-test", fallback: "world-test" }, configured.gateway.catalog.hash, registry.hash);
+    const result = await advanceProgramControls(configured.gateway, source, initial, f.roster, { workloadId: "no-restart", batchId: "no-restart" }, f.options);
+    const programs = restoreOwnerPrograms(result.control, "keeper"), agent = source.agents.keeper!;
+    programs[0]!.interrupt("plan-adaptation:needs-a-different-contribution", 0);
+    const domain = programGoalSelection(agent, projectAgentPerspective(source, agent), result.control.agents.keeper!.resources.resources,
+      programs, new ProgramLibrary(result.control.privateLibrary));
+    expect(domain.reusable).toEqual([]);
+    expect(Object.keys(domain.batch.questions.goal!.criteria)).not.toContain("p0");
   });
   it("selects a previously admitted private program without generating the definition again", async () => {
     const f = fixture();

@@ -36,7 +36,7 @@ export const JEV_EVENT_CONFIG: DecisionEventConfig = { decision: "decision-jev",
   fallback: "decision-deepseek", maxDependencyRounds: 32 };
 export const SCRIPT_EVENT_CONFIG: DecisionEventConfig = { ...INHERIT_EVENT_MODELS, maxDependencyRounds: 32 };
 export const decisionEventManifest = (config: DecisionEventConfig = SCRIPT_EVENT_CONFIG) =>
-  defineAlgorithmManifest({ id: "decision-event", version: "5", config: config as unknown as JsonObject });
+  defineAlgorithmManifest({ id: "decision-event", version: "6", config: config as unknown as JsonObject });
 export const decisionEventAlgorithmRef = (config: DecisionEventConfig = SCRIPT_EVENT_CONFIG) => algorithmRef(decisionEventManifest(config));
 
 export { WorldQuiescentError } from "../runtime/execution";
