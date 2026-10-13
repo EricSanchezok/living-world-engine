@@ -69,7 +69,7 @@ describe("open world script loader", () => {
       version: "3.0.0",
       config: {},
     })]);
-    expect(definition.initialState.schemaVersion).toBe(17);
+    expect(definition.initialState.schemaVersion).toBe(18);
     expect(definition.initialState.truth.mechanics.sharedActivityResources["fixture-workbench"]).toEqual({
       id: "fixture-workbench",
       name: "庭院工作台",
@@ -224,7 +224,7 @@ describe("open world script loader", () => {
     const manifestFile = path.join(oldWorld, "script.yaml");
     writeFileSync(
       manifestFile,
-      readFileSync(manifestFile, "utf8").replace("schema_version: 15", "schema_version: 14"),
+      readFileSync(manifestFile, "utf8").replace("schema_version: 16", "schema_version: 14"),
       "utf8",
     );
     expect(() => loadWorldScript(oldWorld, { modelCatalog })).toThrow();
@@ -302,7 +302,7 @@ describe("open world script loader", () => {
       "utf8",
     );
     expect(() => loadWorldScript(missingCore, { seed: 1, rulePackages: registry, modelCatalog }))
-      .toThrow("schema v15 worlds require core-resolution@3.0.0");
+      .toThrow("schema v16 worlds require core-resolution@3.0.0");
   });
 
   it("enforces the exact canonical UTF-8 distribution budget during world loading", () => {

@@ -5,7 +5,6 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { nativeProgramFixture, nativeProgramTestConfig } from "../../engine/testing/native-program-world";
-import { DEFAULT_ALGORITHM_REF } from "../../engine/algorithms/registry";
 import { decisionEventAlgorithmRef } from "../../engine/events/algorithm";
 import { readDecisionEventState } from "../../engine/events/runtime-state";
 import { replaySimulationState } from "../../engine/runtime/transaction";
@@ -16,18 +15,18 @@ import { WorldHost } from "../world-host";
 import { replayThroughAlgorithm } from "../../../scripts/operations/execution-command";
 
 describe("decision programs through the persistent WorldHost", () => {
-  it("creates and recovers the ordinary default without a retrieval asset or an algorithm override", async () => {
+  it("recovers an explicitly selected program reference without a retrieval asset", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-native-default-"));
     const f = nativeProgramFixture(); await f.configured.registry.capture();
     const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
     const makeHost = () => new WorldHost({ repository: new MemoryWorldRepository({ [f.world.id]: f.world }),
-      store: database, ledger: database, provider: f.configured.gateway });
+      store: database, ledger: database, provider: f.configured.gateway, defaultAlgorithmRef: decisionEventAlgorithmRef() });
     try {
       const host = makeHost(), created = await host.createInstance({ worldId: f.world.id, start: { kind: "observer" } });
       const stored = database.readInstance(created.summary.id).document;
-      expect(stored.executionAlgorithm).toEqual(DEFAULT_ALGORITHM_REF);
+      expect(stored.executionAlgorithm).toEqual(decisionEventAlgorithmRef());
       expect(stored.state.bootstrapDecisionEvent!.control.models).toEqual(f.world.modelProfiles);
-      expect(host.inspectorWindow(stored.id, { limit: 1 }).algorithmComposition.root).toEqual(DEFAULT_ALGORITHM_REF);
+      expect(host.inspectorWindow(stored.id, { limit: 1 }).algorithmComposition.root).toEqual(decisionEventAlgorithmRef());
       const calls = f.configured.transport.mock.calls.length;
       expect(makeHost().instance(stored.id).summary).toEqual(created.summary);
       expect(f.configured.transport).toHaveBeenCalledTimes(calls);

@@ -40,6 +40,7 @@ export interface DecisionResultV2 {
 export interface DecisionRequestV2 extends ModelExecutionScope {
   profileId: string; fallbackProfileId?: string; subjectId: string; batch: DecisionBatchV2;
   modelInvocation?: number; modelInvocationId?: string;
+  allocateInvocation?: () => number;
 }
 export function validateDecisionBatchV2(input: unknown): DecisionBatchV2 {
   assertJsonValue(input, "decision batch v2");
@@ -97,7 +98,7 @@ export async function executeDecisionV2(provider: StructuredModelProvider, reque
     const native = provider.catalog.account(provider.catalog.profile(profileId).account_id).protocol === "typesafe-systemone";
     dispatches.push({ questionIds: Object.keys(part.questions), profileId, fallback });
     try {
-      const result = await provider.generateStructured({ ...request, modelInvocation: ordinal++,
+      const result = await provider.generateStructured({ ...request, modelInvocation: request.allocateInvocation?.() ?? ordinal++,
         // Each physical invocation receives a fresh gateway identity, including splits.
         modelInvocationId: undefined, profileId, role: "decision", schemaName: "DecisionBatchV2",
         ...prompt, promptVersion: prompt.version, context: { decision: part }, schema: decisionOutputV2Schema(part, native), jsonExamplePolicy: "omit" });

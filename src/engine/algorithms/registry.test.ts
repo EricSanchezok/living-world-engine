@@ -51,10 +51,10 @@ it("rejects historical Truth contracts and random scheduling instead of changing
 describe("built-in algorithm registry", () => {
   it("defaults to the native decision event producer with script capability bindings", () => {
     const registry = registerBuiltinAlgorithms(new WorldExecutionAlgorithmRegistry());
-    expect(DEFAULT_ALGORITHM_REF).toMatchObject({ id: "decision-event", version: "7", children: {},
-      config: { decision: null, creation: null, fallback: null, maxDependencyRounds: 32 } });
+    expect(DEFAULT_ALGORITHM_REF).toMatchObject({ id: "direct-world", version: "1", children: {},
+      config: { decision: null, creation: null, fallback: null, creationEnabled: true } });
     expect(registry.has(DEFAULT_ALGORITHM_REF)).toBe(true);
-    expect(registry.has(defineAlgorithmRef({ ...DEFAULT_ALGORITHM_REF, version: "1" }))).toBe(false);
+    expect(registry.has(defineAlgorithmRef({ ...DEFAULT_ALGORITHM_REF, version: "0" }))).toBe(false);
     expect(registerBuiltinAlgorithms(registry)).toBe(registry);
   });
   it("rejects prior execution, truth, compiler and grounding identities instead of changing pinned behavior", () => {
@@ -104,6 +104,7 @@ describe("built-in algorithm registry", () => {
       "work-batching/shared-state-first-slot-batching@1",
       "work-scheduling/bounded-concurrency@1",
       "world-execution/decision-event@7",
+      "world-execution/direct-world@1",
       "world-execution/eager-reference@29",
     ]);
   });

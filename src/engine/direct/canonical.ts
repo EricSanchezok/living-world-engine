@@ -9,6 +9,7 @@ import { applyCharacterPatch } from "../cognition/character";
 import { WORLD_STEP_CANDIDATE_SCHEMA_VERSION, finalCausalReviewContentHash, type WorldStepCandidate } from "../runtime/execution";
 import type { DirectBootstrap, DirectStepRecord } from "./contracts";
 import { readDependency, readDirectState } from "./state";
+import { applyDirectCognition } from "./cognition";
 
 export function applyDirectBootstrap(source: Readonly<SimulationState>, bootstrap: DirectBootstrap): SimulationState {
   if (source.revision !== 0 || source.executionState || source.history.length || bootstrap.version !== 1) throw new Error("direct bootstrap requires an initial world");
@@ -39,6 +40,7 @@ export function commitDirectRecord(source: Readonly<SimulationState>, record: Di
   for (const timer of Object.values(source.truth.timers)) if (timer.status === "scheduled" && timer.dueAtSeconds < record.atSeconds) throw new Error("cannot pass an earlier timer");
   const state = structuredClone(source) as SimulationState;
   state.revision += 1; if (record.atSeconds > source.truth.elapsedSeconds) state.step += 1;
+  applyDirectCognition(state, record.cognition, source.step);
   for (const operation of record.operations) applyWorldDeltaOperation(state, operation);
   if (state.truth.elapsedSeconds !== record.atSeconds) throw new Error("time operations differ from the event boundary");
   state.truth.rng = structuredClone(record.rng);

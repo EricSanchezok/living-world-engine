@@ -738,7 +738,7 @@ export const FULL_CATALOG_ALGORITHM_REF: AlgorithmRef<"world-execution"> = creat
 );
 
 export const EAGER_REFERENCE_ALGORITHM_REF: AlgorithmRef<"world-execution"> = standardEagerReferenceAlgorithmRef();
-export const DEFAULT_ALGORITHM_REF: AlgorithmRef<"world-execution"> = decisionEventAlgorithmRef();
+export const DEFAULT_ALGORITHM_REF: AlgorithmRef<"world-execution"> = directWorldAlgorithmRef();
 
 export function eagerReferenceAlgorithmRef(
   config: Readonly<EagerReferenceAlgorithmConfig>,
@@ -764,6 +764,11 @@ export function createComposedEagerReferenceAlgorithm({ ref, children, services 
 export function registerBuiltinAlgorithms(
   registry: WorldExecutionAlgorithmRegistry = new WorldExecutionAlgorithmRegistry(),
 ): WorldExecutionAlgorithmRegistry {
+  if (!registry.has(directWorldAlgorithmRef())) registry.registerDefinition({
+    role: "world-execution", id: "direct-world", version: "1", contractVersion: 12, maturity: "candidate",
+    configSchema: z.strictObject({ decision: z.string().min(1).nullable(), creation: z.string().min(1).nullable(), fallback: z.string().min(1).nullable(), creationEnabled: z.boolean() }),
+    children: [], create: ({ ref, services }) => new DirectWorldAlgorithm(services.provider, ref.config as unknown as import("../direct/algorithm").DirectWorldConfig, services.rulePackages),
+  });
   if (!registry.has(decisionEventAlgorithmRef())) registry.registerDefinition({
     role: "world-execution", id: "decision-event", version: "7", contractVersion: 12, maturity: "candidate",
     configSchema: z.strictObject({ decision: z.string().min(1).nullable(), creation: z.string().min(1).nullable(), fallback: z.string().min(1).nullable(), maxDependencyRounds: z.number().int().positive() }),
@@ -790,3 +795,4 @@ export function registerBuiltinAlgorithms(
   return registry;
 }
 import { DecisionEventAlgorithm, decisionEventAlgorithmRef } from "../events/algorithm";
+import { DirectWorldAlgorithm, directWorldAlgorithmRef } from "../direct/algorithm";

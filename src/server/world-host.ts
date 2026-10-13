@@ -54,6 +54,7 @@ import { quantityId } from "../engine/runtime/runtime-id";
 import { SimulationEngine } from "../engine/runtime/simulation";
 import { WorldQuiescentError } from "../engine/runtime/execution";
 import type { DecisionEventState } from "../engine/events/runtime-state";
+import type { DirectRuntimeState } from "../engine/direct/contracts";
 import {
   toWorldRuntimeContract,
   validateWorldModelProfiles,
@@ -318,6 +319,13 @@ function currentRun(document: WorldInstanceDocument): WorldRunRecord | undefined
 }
 
 function externalDecisionAgentIds(document: WorldInstanceDocument): string[] {
+  if (document.state.executionState?.data.kind === "direct-world") {
+    const control = document.state.executionState.data as unknown as DirectRuntimeState;
+    const busy = new Set(control.activities.map(frame => frame.actorId));
+    const reacting = Object.values(control.intents).some(intent => intent.causeActionId && intent.status === "ready");
+    if (reacting) return [];
+    return Object.values(document.policyBindings).filter(binding => binding.kind === "external" && !busy.has(binding.agentId)).map(binding => binding.agentId).sort();
+  }
   if (document.state.executionState?.data.kind === "decision-event") {
     const control = document.state.executionState.data as unknown as DecisionEventState;
     const busy = new Set(control.pending.filter(pending => !pending.failure).map(pending => pending.attempt.actorId));
@@ -634,7 +642,7 @@ export class WorldHost {
         /* turbopackIgnore: true */ process.env.LIVINGWORLD_MODEL_CATALOG_PATH ?? "config/models.yaml",
       ));
       const dataRoot = path.resolve(
-        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v24",
+        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v25",
       );
       const modelRegistry = new ModelRegistry(catalog, dataRoot);
       modelRegistry.startBackgroundRefresh();
@@ -1114,7 +1122,7 @@ export class WorldHost {
     }
     const now = this.now().toISOString();
     const initial: WorldInstanceDocument = {
-      schemaVersion: 24,
+      schemaVersion: 25,
       id,
       world: toWorldRuntimeContract(definition),
       executionAlgorithm: structuredClone(experiment.algorithmRef),
@@ -1231,7 +1239,7 @@ export class WorldHost {
           arrival: fallback,
         };
         initial.policyBindings[agentId] = { kind: "external", agentId, participantId };
-        const arrival = await this.generateArrival(initial, participantId, origin.fallbackArrival);
+        const arrival = initial.state.executionState?.data.kind === "direct-world" ? fallback : await this.generateArrival(initial, participantId, origin.fallbackArrival);
         initial.participants[participantId].arrival = {
           ...fallback,
           title: arrival.title,
@@ -2090,7 +2098,11 @@ export class WorldHost {
         runRecord.rootIntents.every(intent => document.state.history.some(step => runRecord.committedRevisions.includes(step.revision) &&
           step.decisionEvent?.event?.programs.some(program => program.attempt.program === null &&
             program.attempt.actorId === intent.agentId && program.attempt.intent === intent.rawText)));
-      const rootComplete = nativeRootComplete || runRecord.activityIds.length > 0 && runRecord.activityIds.every((activityId) => {
+      const directControl = document.state.executionState?.data.kind === "direct-world" ? document.state.executionState.data as unknown as DirectRuntimeState : null;
+      const directRootComplete = directControl && runRecord.rootIntents.length > 0 && runRecord.rootIntents.every(intent =>
+        directControl.completedSubmissionIds.includes(intent.submissionId)) &&
+        !Object.values(directControl.intents).some(intent => intent.causeActionId && (intent.status === "ready" || intent.status === "active"));
+      const rootComplete = directRootComplete || nativeRootComplete || runRecord.activityIds.length > 0 && runRecord.activityIds.every((activityId) => {
         const status = document.state.truth.activities[activityId]?.status;
         return status !== "active" && status !== "paused" && status !== "queued" && status !== "ready";
       });
@@ -2642,7 +2654,7 @@ export class WorldHost {
       document.scheduler.generation += 1;
       document.scheduler.nextTickAt = null;
       this.cancelTimer(instanceId);
-      const arrival = await this.generateArrival(document, participantId, fallbackText);
+      const arrival = document.state.executionState?.data.kind === "direct-world" ? fallback : await this.generateArrival(document, participantId, fallbackText);
       document.participants[participantId].arrival = {
         ...fallback,
         title: arrival.title,

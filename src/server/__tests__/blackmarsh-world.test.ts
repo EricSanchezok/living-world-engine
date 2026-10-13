@@ -228,7 +228,7 @@ describe("Blackmarsh reference world", () => {
       },
       rulePackages: [expect.objectContaining({ id: "core-resolution", version: "3.0.0" })],
     });
-    expect(definition.initialState.schemaVersion).toBe(17);
+    expect(definition.initialState.schemaVersion).toBe(18);
     expect(definition.description).toContain("Robert Conley");
     expect(definition.description).toContain("batintheattic.blogspot.com");
     expect(definition.description).toContain("creativecommons.org/licenses/by/4.0");

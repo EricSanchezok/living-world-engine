@@ -11,6 +11,8 @@ import { agentEventModels } from "../events/model-bindings";
 import { privateActionView } from "./views";
 import { DirectDecisions, selected } from "./decisions";
 import type { ActionFrame, ActionKind, DirectRuntimeState } from "./contracts";
+import { cognitiveQuestions, cognitiveUpdate } from "./cognition";
+import { orderedValues } from "./state";
 
 const kinds: Record<ActionKind | "unknown" | "expand", string> = { move: "Travel to a place", observe: "Inspect, notice or investigate",
   speak: "Communicate actual words", transfer: "Give or pay an owned resource or object", use: "Use a tool, ability or object",
@@ -45,39 +47,47 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const { state, control, decisions, agentId, external } = input;
   const agent = state.agents[agentId]!, intent = control.intents[agentId]!, view = privateActionView(state, agentId);
   const profiles = agentEventModels(state, control, agentId);
-  const goals = Object.values(agent.character.goals).filter(goal => goal.status === "active");
+  const goals = orderedValues(agent.character.goals).filter(goal => goal.status === "active");
   const text = external?.rawText ?? "";
   const quotes = literalUtterances(text);
-  const observedNumbers = Object.values(agent.belief.evidence).filter(evidence => evidence.step >= agent.observationCursorStep).flatMap(evidence => literalNumbers(evidence.description));
+  const observedNumbers = orderedValues(agent.belief.evidence).filter(evidence => evidence.step >= agent.observationCursorStep).flatMap(evidence => literalNumbers(evidence.description));
   const amounts = [...new Set([1, ...literalNumbers(text), ...observedNumbers])];
   const known = Object.entries(view.entities).map(([localId]) => [localId, agent.belief.localEntities[localId]!] as const);
   const targetCriteria = { none: "No target or insufficient identity evidence", ...Object.fromEntries(known.map(([id, entity]) => [id, { name: entity.name, description: entity.description }])) };
-  const ownedQuantities = Object.values(state.truth.quantities).filter(quantity => quantity.holderId === agent.entityId);
+  const ownedQuantities = orderedValues(state.truth.quantities).filter(quantity => quantity.holderId === agent.entityId);
   const resources = [...new Set(ownedQuantities.map(quantity => quantity.definitionId))];
-  const timing = Object.values(state.truth.mechanics.temporalProfiles);
+  const timing = orderedValues(state.truth.mechanics.temporalProfiles);
   const questions: Record<string, DecisionQuestionV2> = {
+    ...cognitiveQuestions(state, agentId),
     operation: choice("operation", kinds), target: choice("target", targetCriteria), tool: choice("tool", targetCriteria),
     amount: choice("amount", { unknown: "No established amount", ...Object.fromEntries(amounts.map((amount, index) => [`n${index}`, String(amount)])) }),
     speech: choice("speech", { none: "No speech", input: "The entire player input is already the literal utterance", create: "Need new literal dialogue",
       ...Object.fromEntries(quotes.map((quote, index) => [`q${index}`, quote])) }),
     timing: choice("timing", { default: "Ordinary action duration from the world", ...Object.fromEntries(timing.map(profile => [profile.id, profile.name])) }),
   };
+  if (!external) questions.urgency = { type: "score", version: "urgency-1", instructions: { task: loadPromptAsset("user/direct-action.md"), field: "urgency of the next action" },
+    criteria: ["May reasonably wait", "Should act when available", "Immediate deadline or danger"] };
+  if (!external && intent.lastActionHash && intent.wakeReasons.includes("observation")) questions.relevant = { type: "noul", version: "wake-relevance-1",
+    instructions: { task: loadPromptAsset("user/direct-action.md"), field: "Does the new observation require changing the prior wait or responding now?" } };
   if (resources.length) questions.resource = choice("resource", { none: "No quantified resource", ...Object.fromEntries(resources.map(id => [id, state.truth.mechanics.quantities[id]!.name])) });
   if (goals.length) questions.goal = choice("goal", { none: "Respond to the situation without selecting a goal", ...Object.fromEntries(goals.map(goal => [goal.id, goal.description])) });
   const context = { perspective: view.state, submittedAction: external ?? null, intent: { goalId: intent.goalId, wakeReasons: intent.wakeReasons,
     recentOutcomeIds: intent.recentOutcomeIds }, actionKinds: kinds } as unknown as JsonValue;
   const inputHash = contentHash(context);
   if (!external && inputHash === intent.lastInputHash) {
-    intent.status = "waiting"; intent.wakeReasons = []; return { frame: null, audits: [] as ModelExecutionAudit[], reads: view.reads };
+    intent.status = "waiting"; intent.wakeReasons = []; return { frame: null, audits: [] as ModelExecutionAudit[], reads: view.reads, cognition: null };
   }
   const answers = await decisions.ask(agentId, context, view.reads, questions, profiles);
+  const cognition = cognitiveUpdate(state, agentId, answers);
+  intent.goalProgress = { ...intent.goalProgress, ...cognition.goals };
+  if (answers.urgency?.type === "score") intent.urgency = answers.urgency.score;
   intent.lastInputHash = inputHash; intent.wakeReasons = []; intent.failure = null;
   const operation = selected(answers, "operation");
   intent.goalId = questions.goal && selected(answers, "goal") !== "none" ? selected(answers, "goal") : null;
   const target = view.entities[selected(answers, "target")] ?? null;
-  if (!external && ["wait", "unknown"].includes(operation)) {
+  if (!external && (["wait", "unknown"].includes(operation) || answers.relevant?.type === "noul" && answers.relevant.noul < 0.5)) {
     intent.status = "waiting"; intent.wait = { entityIds: target ? [target] : [], untilSeconds: null, reason: operation };
-    return { frame: null, audits: [] as ModelExecutionAudit[], reads: view.reads };
+    return { frame: null, audits: [] as ModelExecutionAudit[], reads: view.reads, cognition };
   }
   const audits: ModelExecutionAudit[] = [];
   let utterance: string | null = null;
@@ -109,5 +119,5 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     temporalProfileId: profileId, inputHash, causeActionId: intent.causeActionId };
   intent.status = "active"; intent.activityId = id; intent.wait = null;
   intent.lastActionHash = contentHash({ kind, target, tool: frame.toolEntityId, utterance, quantity: frame.quantityDefinitionId, amount: frame.amount });
-  return { frame, audits, reads: view.reads };
+  return { frame, audits, reads: view.reads, cognition };
 }

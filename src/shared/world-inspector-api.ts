@@ -427,6 +427,7 @@ export interface WorldInspectorStateSnapshot {
 }
 
 export interface WorldInspectorStepDetail {
+  directRuntime?: ReturnType<typeof import("../server/world-inspector-direct").inspectDirectRuntime>;
   programs?: ReturnType<typeof import("../server/world-inspector-programs").inspectDecisionPrograms>;
   apiVersion: typeof WORLD_INSPECTOR_API_VERSION;
   summary: WorldInspectorStepSummary;

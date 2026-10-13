@@ -14,7 +14,7 @@ import { toWorldRuntimeContract } from "../runtime/world-definition";
 import { resolveEventModels, type DecisionEventModelOverrides } from "../events/model-bindings";
 import { nextWorldClockBoundary } from "../events/clock-boundary";
 import { captureDependencies, readDirectState, readyIntent, sealDirectState, wakeIntent } from "./state";
-import type { ActionFrame, DirectStepRecord } from "./contracts";
+import type { ActionFrame, DirectCognitiveUpdate, DirectStepRecord } from "./contracts";
 import { DirectDecisions } from "./decisions";
 import { chooseAction } from "./actions";
 import { settleActions, type ActionSettlement } from "./world";
@@ -52,17 +52,19 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
       activities: [], capabilities: [], cache: [], dependencies: {}, completedSubmissionIds: [] });
     return { schemaVersion: WORLD_STEP_CANDIDATE_SCHEMA_VERSION, sourceStateHash: contentHash(input.state), agentCommits: [], modelAudits: [],
       diagnostics: { activatedAgentIds: [], reusedAgentIds: Object.keys(input.state.agents), mindFallbackAgentIds: [] },
-      directWorld: { version: 1 as const, producer: algorithmRef(this.manifest), authorityHash: contentHash(toWorldRuntimeContract(input.definition)), control } };
+      directWorld: { version: 1 as const, producer: algorithmRef(this.manifest), authorityHash: contentHash(toWorldRuntimeContract(input.definition)), control,
+        modelCatalog: this.provider.catalog.snapshot() } };
   }
   async prepareStep(input: Readonly<WorldStepInput>, context: ExecutionContext): Promise<WorldStepPreparation> {
     const source = input.state;
     if (!source.executionState) throw new Error("bootstrap the direct world before advancing");
     const initial = readDirectState(source.executionState, source), control = structuredClone(initial);
+    if (control.modelCatalogHash !== this.provider.catalog.hash) throw new Error("instance model catalog differs from its pinned configuration");
     const authority = toWorldRuntimeContract(input.definition);
     for (const id of Object.keys(source.agents)) control.intents[id] ??= readyIntent("admitted");
     const decisions = new DirectDecisions(this.provider, control, { ...context.modelScope,
       runtimeIdentity: { worldHash: source.worldHash, revision: source.revision }, modelRegistrySnapshotHash: control.registryHash });
-    const audits: ModelExecutionAudit[] = [], reads: Record<string, string> = {}, activatedAgentIds: string[] = [];
+    const audits: ModelExecutionAudit[] = [], reads: Record<string, string> = {}, activatedAgentIds: string[] = [], cognition: DirectCognitiveUpdate[] = [];
     for (const frame of control.activities) if (input.policyRoster[frame.actorId]?.kind === "idle") {
       control.intents[frame.actorId]!.status = "waiting"; control.intents[frame.actorId]!.activityId = null;
     }
@@ -79,7 +81,8 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
       control.activities = control.activities.filter(frame => frame.actorId !== action.agentId);
       control.intents[action.agentId] = { ...control.intents[action.agentId]!, status: "ready", activityId: null, wakeReasons: ["player-action"] };
     }
-    const ready = Object.entries(control.intents).filter(([id, intent]) => input.policyRoster[id]?.kind === "model" && intent.status === "ready");
+    const ready = Object.entries(control.intents).filter(([id, intent]) => input.policyRoster[id]?.kind === "model" && intent.status === "ready")
+      .sort(([a, left], [b, right]) => right.urgency - left.urgency || a.localeCompare(b));
     const reactions = ready.filter(([, intent]) => intent.causeActionId !== null);
     // A submitted player action does not wait for unrelated initial NPC work.
     const owners = submissions.length ? submissions.map(action => action.agentId) : (reactions.length ? reactions : ready).map(([id]) => id);
@@ -90,6 +93,7 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
       const id = owners[index]!; activatedAgentIds.push(id);
       if (result.status === "fulfilled") {
         audits.push(...result.value.result.audits); Object.assign(reads, result.value.result.reads);
+        if (result.value.result.cognition) cognition.push(result.value.result.cognition);
         if (result.value.result.frame) control.activities.push(result.value.result.frame);
       } else {
         const intent = control.intents[id]!;
@@ -162,7 +166,7 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
     const record = sealDirectRecord({ version: 1, id: "", baseRevision: source.revision, producerHash: this.manifest.hash,
       authorityHash: contentHash(authority), reads, atSeconds: effectiveTime, frames: completed, completedActionIds,
       control: sealDirectState(control), operations, events, outcomes: settlements.map(item => item.outcome), ...perception,
-      characterPatches: [], decisions: decisions.uses, modelAudits: [...decisions.audits(), ...audits], rng: source.truth.rng, timerUpdates });
+      characterPatches: [], cognition, decisions: decisions.uses, modelAudits: [...decisions.audits(), ...audits], rng: source.truth.rng, timerUpdates });
     if (!operations.length && contentHash(initial) === contentHash(record.control)) throw new WorldQuiescentError(Object.entries(control.intents).flatMap(([ownerId, intent]) =>
       intent.failure ? [{ ownerId, phase: "direct-decision", ...intent.failure, reason: intent.failure.message }] : []));
     await context.stages?.after(executionStage("transition-causal-verification"));

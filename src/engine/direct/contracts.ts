@@ -23,6 +23,9 @@ export interface AgentIntentState {
   lastInputHash: string | null;
   lastActionHash: string | null;
   recentOutcomeIds: string[];
+  urgency: number;
+  noProgressCount: number;
+  goalProgress: Record<string, "partial" | "completed" | "unchanged" | "unknown">;
   failure: { inputHash: string; message: string; recoverable: true } | null;
 }
 export interface DirectDecisionUse { batch: DecisionBatchV2; result: DecisionResultV2; reused: boolean }
@@ -44,6 +47,7 @@ export interface DirectRuntimeState {
 }
 export interface DirectBootstrap {
   version: 1; producer: AlgorithmRef; authorityHash: string; control: DirectRuntimeState;
+  modelCatalog: import("../models/model-catalog").ModelCatalogDocument;
 }
 export interface DirectStepRecord {
   version: 1; id: string; baseRevision: number; producerHash: string; authorityHash: string;
@@ -52,9 +56,15 @@ export interface DirectStepRecord {
   control: DirectRuntimeState;
   operations: WorldDeltaOperation[]; events: WorldEvent[]; outcomes: ActionOutcome[];
   observations: ObservationPacket[]; beliefPatches: BeliefPatch[]; characterPatches: CharacterPatch[];
+  cognition: DirectCognitiveUpdate[];
   decisions: DirectDecisionUse[]; modelAudits: ModelExecutionAudit[];
   rng: SimulationState["truth"]["rng"];
   timerUpdates: SimulationState["truth"]["timers"];
+}
+export interface DirectCognitiveUpdate {
+  agentId: string; decisionHash: string;
+  goals: Record<string, "completed" | "partial" | "unchanged" | "unknown">;
+  beliefs: Record<string, "supported" | "refuted" | "unresolved" | "unchanged">;
 }
 export interface DirectLocalView {
   state: JsonValue;

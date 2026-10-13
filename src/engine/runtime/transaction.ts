@@ -811,7 +811,7 @@ export function replaySimulationState(
     return structuredClone(state);
   }
   const replay: SimulationState = {
-    schemaVersion: 17,
+    schemaVersion: 18,
     executionState: structuredClone(state.historyBase.executionState),
     worldId: state.worldId,
     worldHash: state.worldHash,
@@ -998,7 +998,7 @@ export function validateSimulationState(state: SimulationState, requireNextActio
     "bootstrapAgentCommits",
   ], ["historyBase", "bootstrapExecutionRef", "bootstrapDecisionEvent", "bootstrapDirect"], "simulation state");
   validateAlgorithmExecutionState(state.executionState);
-  if (state.schemaVersion !== 17 || !isSemanticId(state.worldId) || !/^sha256:[a-f0-9]{64}$/.test(state.worldHash)) {
+  if (state.schemaVersion !== 18 || !isSemanticId(state.worldId) || !/^sha256:[a-f0-9]{64}$/.test(state.worldHash)) {
     throw new Error("invalid simulation identity");
   }
   if (state.bootstrapExecutionRef) validateExecutionRef(state.bootstrapExecutionRef, "bootstrapExecutionRef");

@@ -20,7 +20,18 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
     for (const ownerId of recipients) {
       const agent = state.agents[ownerId]!, introductions: ObservationPacket["introductions"] = [];
       const spoken = settlement.frame.utterance && settlement.deliveredToEntityIds.includes(agent.entityId);
-      let summary = spoken ? `${alias(agent, settlement.frame.actorEntityId, introductions).name}说：“${settlement.frame.utterance}”` : settlement.outcome.summary;
+      let summary = spoken ? `${alias(agent, settlement.frame.actorEntityId, introductions).name}说：“${settlement.frame.utterance}”` :
+        ownerId === settlement.frame.actorId ? `你尝试了“${settlement.frame.proposal.rawText}”。${settlement.outcome.summary}` : settlement.outcome.summary;
+      for (const operation of settlement.operations) if (operation.kind === "transfer_quantity") {
+        summary += `\n${alias(agent, operation.fromHolderId, introductions).name}向${alias(agent, operation.toHolderId, introductions).name}转移了${operation.amount}${state.truth.mechanics.quantities[operation.definitionId]!.unit}${state.truth.mechanics.quantities[operation.definitionId]!.name}。`;
+      }
+      if (ownerId === settlement.frame.actorId) for (const entity of settlement.visibleEntities) {
+        const local = alias(agent, entity.id, introductions);
+        const introduced = introductions.find(intro => intro.localEntity.id === local.id);
+        if (introduced) { introduced.localEntity.name = entity.kind === "person" ? "附近的人" : `附近的${entity.kind}`;
+          introduced.localEntity.description = "这次观察确认了其存在；尚未确认名字和身份。"; }
+        summary += `\n你注意到${local.name}。`;
+      }
       const facts = ownerId === settlement.frame.actorId ? settlement.visibleFacts : [];
       for (const fact of facts) summary += `\n${alias(agent, fact.subjectId, introductions).name}的${fact.predicate}：${describeValue(agent, fact.value, introductions)}`;
       const id = runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "observation", stage: "direct-perception", owner: ownerId, round: 0, ordinal: index });

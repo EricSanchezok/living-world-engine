@@ -4,9 +4,13 @@ import { assertJsonValue } from "../runtime/json";
 import { contentHash } from "../models/model-audit";
 import type { AgentIntentState, DirectRuntimeState } from "./contracts";
 
+export function orderedValues<T extends { id: string }>(record: Readonly<Record<string, T>>): T[] {
+  return Object.values(record).sort((left, right) => left.id.localeCompare(right.id));
+}
+
 export function readyIntent(reason = "initial-decision"): AgentIntentState {
   return { goalId: null, status: "ready", wakeReasons: [reason], activityId: null, causeActionId: null,
-    wait: null, lastInputHash: null, lastActionHash: null, recentOutcomeIds: [], failure: null };
+    wait: null, lastInputHash: null, lastActionHash: null, recentOutcomeIds: [], failure: null, urgency: 0, noProgressCount: 0, goalProgress: {} };
 }
 export function sealDirectState(value: Omit<DirectRuntimeState, "hash"> | DirectRuntimeState): DirectRuntimeState {
   const body = { ...value, hash: "" };

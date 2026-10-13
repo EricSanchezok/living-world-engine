@@ -33,6 +33,7 @@ import { formatInspectorFailureSummary } from "../_lib/world-inspector-copy";
 import { worldInspectorInvocationExecutionHint } from "../_lib/world-inspector-invocation";
 import { JsonInspector, RuntimeEventPayload } from "./world-inspector-json";
 import { WorldInspectorPrograms } from "./world-inspector-programs";
+import { WorldInspectorDirect } from "./world-inspector-direct";
 
 type Detail =
   | { kind: "step"; value: WorldInspectorStepDetail }
@@ -1225,6 +1226,7 @@ function DetailBody({ actorId, actorName, detail, instanceId, onSelectInvocation
   return (
     <div className="cg-inspector-detail-stack">
       {step.programs && <WorldInspectorPrograms value={step.programs} actorId={actorId} />}
+      {step.directRuntime && <WorldInspectorDirect value={step.directRuntime} actorId={actorId} />}
       {actorId === "world"
         ? <WorldOverview detail={step} />
         : <ActorOverview actorId={actorId} actorName={actorName} detail={step} />}

@@ -228,7 +228,7 @@ function environment(root: string) {
   const catalog = loadModelCatalog();
   const profile = catalog.profile("truth-deepseek"), account = catalog.account(profile.account_id);
   if (!process.env[account.api_key_env]?.trim()) throw new Error("captured credential is not configured in the process environment");
-  const modelRegistry = new ModelRegistry(catalog, path.resolve(".livingworld-v24"), { fetch: async () => { throw new Error("experiment cannot refresh model metadata"); } });
+  const modelRegistry = new ModelRegistry(catalog, path.resolve(".livingworld-v25"), { fetch: async () => { throw new Error("experiment cannot refresh model metadata"); } });
   const snapshot = modelRegistry.snapshot(sources.sources[0]!.registrySnapshotHash);
   const ceiling = snapshot.document.providers[account.models_dev_provider_id]?.models[AC_FP2_PROTOCOL.fixed.model]?.limit.context;
   if (!ceiling) throw new Error("missing pinned input token ceiling");
@@ -238,7 +238,7 @@ function environment(root: string) {
     outputTokenCeiling: profile.max_output_tokens, allowLowerOutputLimit: true, endpointPaths: ["/chat/completions", "/responses"],
     trialPattern: /^(?:discovery|confirmation|probes|calibration|review)-[a-zA-Z0-9-]+$/u,
     fetch: createModelFetchResolver(process.env)(profile.account_id, account) ?? fetch });
-  const providers = createConstrainedGateways(catalog, process.env, path.resolve(".livingworld-v24"), transport.fetch);
+  const providers = createConstrainedGateways(catalog, process.env, path.resolve(".livingworld-v25"), transport.fetch);
   for (const [mode, provider] of Object.entries(providers)) if (provider.catalog.hash !== frozen.manifest.catalogHashes[mode]) throw new Error("pinned experiment catalog drift");
   return { frozen, sources, catalog, budget, transport, providers };
 }

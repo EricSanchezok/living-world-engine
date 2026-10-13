@@ -19,9 +19,7 @@ export class DirectDecisions {
     const subjectId = owner ?? "world";
     const result = await executeDecisionV2(this.provider, { ...this.scope, subjectId, profileId: profiles.decision,
       fallbackProfileId: profiles.fallback, modelRegistrySnapshotHash: this.control.registryHash,
-      modelInvocation: this.next(subjectId), batch });
-    // Splits consume physical ordinals as well as the original logical request.
-    this.ordinals[subjectId] += result.dispatches.length - 1;
+      allocateInvocation: () => this.next(subjectId), batch });
     this.control.cache.push({ key, result });
     if (this.control.cache.length > 256) this.control.cache.shift();
     this.uses.push({ batch, result, reused: false }); return result.answers;
