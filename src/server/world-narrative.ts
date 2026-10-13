@@ -149,8 +149,24 @@ export function renderNarrativeParagraph(text: string, source: ScenePacket): str
   }).trim();
   if (!rendered || /\[\[|\]\]/u.test(rendered)) throw new Error("Narrative paragraph is empty or contains an unresolved reference");
   // A literal quote followed by its reference can produce the same utterance twice.
-  return rendered.replace(/(“[^”]+”)(?:\s*\1)+/gu, (repeated, quote: string) =>
+  let result = rendered.replace(/(“[^”]+”)(?:\s*\1)+/gu, (repeated, quote: string) =>
     source.speech.filter(speech => speech.utterance === quote.slice(1, -1)).length === 1 ? quote : repeated);
+  for (const speech of source.speech) if (source.speech.filter(item => item.utterance === speech.utterance).length === 1) {
+    const escaped = speech.utterance.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
+    result = result.replace(new RegExp(`${escaped}\\s*“${escaped}”`, "gu"), () => `“${speech.utterance}”`);
+  }
+  return result;
+}
+
+/** A continuation may echo its accepted prefix; published text remains immutable. */
+export function narrativeContinuation(text: string, published: string[]): string {
+  let remaining = text.trim(), previous: string;
+  do {
+    previous = remaining;
+    const echoed = published.find(paragraph => remaining.startsWith(paragraph.trim()));
+    if (echoed) remaining = remaining.slice(echoed.trim().length).trim();
+  } while (remaining !== previous);
+  return remaining;
 }
 export function requireDeliveredSpeech(source: ScenePacket, paragraphs: string[]): void {
   const text = paragraphs.join("\n");

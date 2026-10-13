@@ -14,6 +14,8 @@ World adjudication can request a `WorldExpansionDraft` for missing scene content
 
 Expansion fills unsettled space or records a new arrival, discovery or occurrence. It cannot overwrite an established property through the expansion channel. Resource production and consumption use authorized mechanisms. A failed expansion remains a local blocked outcome; generated proposals are retained in the invocation evidence. The [world format](script-format.md) owns authored appearance and narrative preferences.
 
+Expansion descriptions remain proposal audit data. Only materialized additions enter world effects and perceptible facts; the free-form description never becomes an action receipt. Preparatory observation and waiting do not establish later dialogue or gestures. The selected speaking action owns its expression request; an independent empty speech parameter cannot silently replace it with waiting.
+
 ## Frozen scenes and ordered prose
 
 World persistence registers pending `NarrativeBeat` work in the same instance transaction as the committed world result. A `ScenePacket` contains that participant's observations, perceptible details, actual delivered speech, relevant private evidence and requested action. The authoritative prose evidence excludes the original request; the prose model receives that request separately as attention guidance. The publication check receives only executed action evidence. Ordinary narration never receives the canonical world or another actor's cognition. Testimony and inference remain attributed; an NPC's words do not establish their truth.

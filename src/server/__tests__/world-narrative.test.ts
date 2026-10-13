@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { completeParagraphs, renderNarrativeParagraph, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, type ScenePacket } from "../world-narrative";
+import { completeParagraphs, renderNarrativeParagraph, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, type ScenePacket } from "../world-narrative";
 
 const source: ScenePacket = {
   participantId: "reader", agentId: "traveler", submissionId: "action", submittedAt: null, requestedAction: "问价",
@@ -24,9 +24,16 @@ describe("immutable narrative paragraphs", () => {
     expect(() => renderNarrativeParagraph("店主说：“我同意赊账。”", source)).toThrow("differs from delivered");
     expect(renderNarrativeParagraph("店主说：“三枚金币；我还没同意赊账。”[[speech-ab12]]", source))
       .toBe("店主说：“三枚金币；我还没同意赊账。”");
+    expect(renderNarrativeParagraph("店主说：三枚金币；我还没同意赊账。 [[speech-ab12]]", source))
+      .toBe("店主说：“三枚金币；我还没同意赊账。”");
     const repeated = structuredClone(source); repeated.speech.push({ ...source.speech[0]!, id: "speech-ab13" });
     expect(renderNarrativeParagraph("[[speech-ab12]][[speech-ab13]]", repeated))
       .toBe("“三枚金币；我还没同意赊账。”“三枚金币；我还没同意赊账。”");
+  });
+  it("keeps only new continuation text after an exact echo of already published paragraphs", () => {
+    expect(narrativeContinuation("价钱已经说清。 “三枚金币。”", ["价钱已经说清。"])) .toBe("“三枚金币。”");
+    expect(narrativeContinuation("价钱已经说清。", ["价钱已经说清。"])) .toBe("");
+    expect(narrativeContinuation("他又说了一遍价钱。", ["价钱已经说清。"])) .toBe("他又说了一遍价钱。");
   });
   it("keeps factual speech when the prose service is unavailable", () => {
     expect(narrativeFallback(source)).toBe("店主说：“三枚金币；我还没同意赊账。”");

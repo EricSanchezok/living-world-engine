@@ -37,7 +37,7 @@ describe("direct world through persistent WorldHost", () => {
         const context = directCreationContext(wire);
         expect(context.publishedPrefix).toEqual(["石门上还留着水迹。"]);
         expect(JSON.stringify(context.scene)).not.toContain("canonicalEntityIds");
-        return { paragraphs: ["你清点了随身物资：三枚灵石。"] };
+        return { paragraphs: ["石门上还留着水迹。", "石门上还留着水迹。 你清点了随身物资：三枚灵石。"] };
       });
     await f.registry.capture();
     const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });

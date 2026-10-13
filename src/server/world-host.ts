@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { loadPromptAsset } from "../engine/prompts";
 import { agentCapabilityModels } from "../engine/models/capability-bindings";
-import { enqueueNarrative, completeParagraphs, renderNarrativeParagraph, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, checkNarrativeGrounding, type NarrativeBeat } from "./world-narrative";
+import { enqueueNarrative, completeParagraphs, renderNarrativeParagraph, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, checkNarrativeGrounding, type NarrativeBeat } from "./world-narrative";
 import { randomUUID } from "node:crypto";
 import { rmSync } from "node:fs";
 import path from "node:path";
@@ -627,21 +627,21 @@ export class WorldHost {
       let publication = Promise.resolve(), publicationError: unknown, scheduled = 0;
       const publish = async (paragraphs: string[]) => {
         if (published >= paragraphs.length) return;
-        const ready = paragraphs.slice(published).map(paragraph => renderNarrativeParagraph(paragraph, beat.source));
+        const ready = paragraphs.slice(published).map(paragraph => narrativeContinuation(renderNarrativeParagraph(paragraph, beat.source), prefix));
+        if (ready.every(text => !text)) { published = paragraphs.length; return; }
         const decision = await checkNarrativeGrounding(this.options.provider, scope, beat.source, ready, models.fallback, models.fallback,
           Number.parseInt(contentHash([beat.id, beat.attempts, prefix.length + published]).slice(0, 10), 16));
         const choices = ready.map((_, index) => {
           const answer = decision.answers[`paragraph${index}`]; return answer?.type === "choice" ? answer.choice : "added_content";
         });
-        this.updateNarrative(id, beat.id, item => item.grounding.push({ start: prefix.length + published, inputHash: decision.inputHash,
+        this.updateNarrative(id, beat.id, item => item.grounding.push({ start: item.segments.length, inputHash: decision.inputHash,
           choices, invocationIds: decision.audits.flatMap(audit => audit.invocations.map(invocation => invocation.id)) }));
         let checked = 0;
         while (published < paragraphs.length) {
-          if (choices[checked] !== "grounded") throw new Error(`Paragraph contains ${choices[checked]}: ${ready[checked]}. Continue using only the supplied scene; omit unsupported content.`);
+          if (ready[checked] && choices[checked] !== "grounded") throw new Error(`Paragraph contains ${choices[checked]}: ${ready[checked]}. Continue using only the supplied scene; omit unsupported content.`);
           const text = ready[checked++]!;
-          this.updateNarrative(id, beat.id, item => {
-            const sequence = prefix.length + published;
-            if (item.segments.length !== sequence) throw new Error("narrative segment sequence conflict");
+          if (text) this.updateNarrative(id, beat.id, item => {
+            const sequence = item.segments.length;
             const at = this.now().toISOString();
             item.segments.push({ sequence, text, publishedAt: at }); item.firstParagraphAt ??= at;
           });

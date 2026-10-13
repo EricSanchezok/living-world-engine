@@ -29,6 +29,7 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       const targetLabel = settlement.frame.targetEntityId ? alias(agent, settlement.frame.targetEntityId, introductions).name : "四周";
       const concreteAttempt = settlement.frame.kind === "move" ? `走向${targetLabel}`
         : settlement.frame.kind === "observe" ? settlement.frame.observationScope === "inventory" ? "清点随身物资" : `查看${targetLabel}`
+        : settlement.frame.kind === "wait" ? "等候新的消息或条件变化"
         : settlement.frame.expression?.attempt ?? settlement.frame.proposal.rawText;
       const completedExpression = ["succeeded", "partial"].includes(settlement.outcome.status);
       const voiced = completedExpression && settlement.frame.kind !== "reflect" ? settlement.frame.utterance : null;

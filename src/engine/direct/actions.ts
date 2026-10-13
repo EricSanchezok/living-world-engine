@@ -153,7 +153,6 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   if (external && operation === "transfer" && selected(answers, "transfer_authority") !== "give") {
     operation = selected(answers, "transfer_authority") === "request" ? "speak" : "wait";
   }
-  if (operation === "speak" && selected(answers, "speech") === "none" && selected(answers, "recipient") !== "discover") operation = "wait";
   intent.goalId = questions.goal && selected(answers, "goal") !== "none" ? selected(answers, "goal") : null;
   let targetKey = ["speak", "transfer"].includes(operation) ? selected(answers, "recipient") : selected(answers, "target");
   if (operation === "speak" && targetKey === "none") {

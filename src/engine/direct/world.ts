@@ -364,7 +364,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         if (method && !noConfirmedEffect && !ongoing) detail = `本次已执行的方法：${method.description}。具体结果以观察到的状态为准。`;
         if (noConfirmedEffect) status = "partial";
       }
-      if (expansion) { operations.push(...expansion.operations); detail += ` ${expansion.draft.description}`; }
+      // The draft summary is creative intent, not an executed action receipt.
+      if (expansion) operations.push(...expansion.operations);
       const transaction = structuredClone(projected);
       try { for (const operation of operations) applyWorldDeltaOperation(transaction, operation); projected = transaction; }
       catch (error) { operations = []; status = "blocked"; detail = error instanceof Error && error.message === "insufficient quantity" ? "可用资源不足，这次操作没有完成。" : "当前状态不允许完成这次行动。"; }

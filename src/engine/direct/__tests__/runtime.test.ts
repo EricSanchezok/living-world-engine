@@ -64,6 +64,24 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("keeps expansion proposal summaries out of committed observations", async () => {
+    const f = await fixture({ target: "none", observationScope: "surroundings", creationEnabled: true, introduce: true,
+      creationResponse: { description: "你已经走到门外并向守门人承诺付款。", entities: [{ key: "notice", kind: "object", name: "旧木牌",
+        label: "旧木牌", appearance: "一块字迹褪色的木牌。", placement: "scene" }], facts: [], events: [] } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("先看看附近的告示，稍后再决定是否说话"));
+    expect(JSON.stringify(result.committed.observations)).not.toContain("承诺付款");
+    expect(result.committed.observations[0]!.scene?.details).toContainEqual({ label: "旧木牌", description: "一块字迹褪色的木牌。" });
+    expect(result.committed.observations.every(observation => !observation.scene?.speech)).toBe(true);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("realizes selected speech when its independent content parameter is empty", async () => {
+    const f = await fixture({ operation: "speak", target: "guard", speech: "none", creationEnabled: true,
+      creationResponse: { attempt: "向守门人询问", utterance: "请问现在能通行吗？", manner: null } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("向守门人询问现在能否通行"));
+    expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "speak", utterance: "请问现在能通行吗？" });
+  });
   it.each([["yard", "courtyard"], ["door", "gate"]])("searches around the known %s without restricting world-defined entity kinds", async (searchLocation, entityId) => {
     const f = await fixture({ operation: "speak", recipient: "discover", searchLocation, speech: "create" });
     await f.engine.bootstrapAgents();
@@ -276,9 +294,10 @@ describe("direct world through the actual simulation entry", () => {
     expect(f.transport).toHaveBeenCalledTimes(3);
   });
   it("listens without inventing an utterance or starting another discovery loop", async () => {
-    const f = await fixture({ operation: "speak", recipient: "none", speech: "none" }); await f.engine.bootstrapAgents();
+    const f = await fixture({ operation: "wait", recipient: "none", speech: "none" }); await f.engine.bootstrapAgents();
     const result = await f.engine.step(f.roster, f.request("听完对方的条件，暂时不承诺"));
     expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "wait", utterance: null, preparatoryFor: null });
+    expect(result.committed.observations[0]!.scene?.attempt).toBe("等候新的消息或条件变化");
     expect(f.transport).toHaveBeenCalledTimes(2);
   });
   it("does not pay the player's money when they asked the other person to deliver", async () => {
