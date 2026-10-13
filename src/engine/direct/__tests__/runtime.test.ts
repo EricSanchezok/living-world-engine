@@ -16,7 +16,7 @@ import { applyDirectCognition } from "../cognition";
 async function fixture(options: { operation?: string; target?: string; tool?: string; amount?: string; failKeeper?: boolean;
   observationScope?: string; speech?: string; creationEnabled?: boolean; privateGateFact?: boolean; named?: boolean;
   creationResponse?: unknown; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
-  recipient?: string; resolvedRecipient?: string; transferAuthority?: string; reactionProgress?: string } = {}) {
+  recipient?: string; resolvedRecipient?: string; searchLocation?: string; transferAuthority?: string; reactionProgress?: string } = {}) {
   const f = directTestProvider(wire => {
     if (!wire.questions) {
       const context = directCreationContext(wire);
@@ -28,6 +28,7 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
     const selection: Record<string, string> = { operation: options.operation ?? "observe", target: options.target ?? "door", recipient: context.concreteOperation ? options.resolvedRecipient ?? "discover" : options.recipient ?? options.target ?? "none", tool: options.tool ?? "none",
       amount: options.amount ?? "n0", resource: "spirit-stone", speech: options.speech ?? "q0", timing: "default", goal: "none",
       transfer_authority: options.transferAuthority ?? "give",
+      search_location: options.searchLocation ?? "none",
       observation_scope: options.observationScope ?? "target" };
     selection.reflection = options.speech ?? "none";
     return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
@@ -63,6 +64,14 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("searches the intended recipient's known location instead of discarding it during discovery", async () => {
+    const f = await fixture({ operation: "speak", recipient: "discover", searchLocation: "yard", speech: "create" });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("向庭院里的工人问路"));
+    expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "observe", preparatoryFor: "speak",
+      targetEntityId: "courtyard", observationScope: "target", utterance: null });
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("realizes a new player physical operation before adjudication even when the expressive-style answer is negative", async () => {
     const f = await fixture({ operation: "use", target: "door", creationEnabled: true, expression: 0,
       creationResponse: { attempt: "按已知步骤转动门上的控制装置，尝试开门", utterance: null, manner: null } });
@@ -95,6 +104,11 @@ describe("direct world through the actual simulation entry", () => {
     expect(context.currentObservedFacts).toEqual(expect.arrayContaining(Object.values(observed.state.agents.player!.belief.claims).map(claim =>
       expect.objectContaining({ predicate: claim.predicate, value: claim.value, stance: claim.stance }))));
     expect(JSON.stringify(context.currentObservedFacts)).not.toContain("PRIVATE-CODE");
+    const choices = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => wire.questions?.operation);
+    expect(choices.at(-1).state.currentObservedFacts).toEqual(context.currentObservedFacts);
+    expect(choices.at(-1).state.recentActions).toEqual([expect.objectContaining({ target: "door", requested: "查看门的状态", actionKind: "observe" })]);
+    expect(JSON.stringify(choices.at(-1).state.currentObservedFacts)).not.toContain("PRIVATE-CODE");
+    expect(JSON.stringify(choices.at(-1).state.recentActions)).not.toContain("canonicalEntityIds");
     expect(replaySimulationState(f.engine.snapshot)).toEqual(f.engine.snapshot);
   });
   it("keeps an NPC's immediate physical follow-through linked to the triggering action", async () => {
@@ -104,6 +118,7 @@ describe("direct world through the actual simulation entry", () => {
     const first = await f.engine.step(f.roster, f.request("请交付约定的物品"));
     const second = await f.engine.step(f.roster, { expectedRevision: first.state.revision, trigger: "batch", externalActions: [] });
     const control = readDirectState(second.state.executionState!, second.state);
+    expect(control.intents.keeper!.failure).toBeNull();
     expect(control.intents.keeper).toMatchObject({ status: "ready", causeActionId: first.state.history[0]!.directEvent!.frames[0]!.id });
     expect(control.intents.keeper!.wakeReasons).toContain("reaction-progress");
     expect(replaySimulationState(second.state)).toEqual(second.state);

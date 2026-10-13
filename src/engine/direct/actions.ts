@@ -16,7 +16,7 @@ import { orderedValues } from "./state";
 import { extendCapability } from "./capabilities";
 
 const kinds: Record<ActionKind | "unknown" | "expand", string> = { move: "Travel to a place", observe: "Inspect, notice or investigate",
-  reflect: "Review one's existing records, distinguish evidence from inference, formulate a question or think through a plan privately",
+  reflect: "Explicitly review records or formulate private thoughts when that is the requested activity; checking a condition before a requested physical action is part of choosing that action, not a separate reflection",
   speak: "Communicate actual words: ask, offer, reply or request someone else's action", transfer: "Personally give or pay an owned resource or object", use: "Use one's body, a tool, ability or object to attempt a concrete physical effect",
   change: "Change a state or access condition, including physically blocking or clearing a route", wait: "Listen without speaking, await an event or continue a long activity", unknown: "Cannot identify any next attempt, even a question or observation",
   expand: "A missing concept or capability is required" };
@@ -75,15 +75,20 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const resources = Object.keys(state.truth.mechanics.quantities).sort();
   const timing = orderedValues(state.truth.mechanics.temporalProfiles);
   const capabilities = control.capabilities.filter(capability => capability.knownToAgentIds.includes(agentId)).sort((a, b) => a.id.localeCompare(b.id));
+  const knownLocations = known.filter(([id]) => state.truth.entities[view.entities[id]!]?.kind === "location");
   const questions: Record<string, DecisionQuestionV2> = {
     ...cognitiveQuestions(state, agentId),
-    operation: choice("operation", kinds),
+    operation: choice("The next executable action actually requested. Resolve if/only-if conditions using the latest known properties, then select the authorized branch. A conditional request to operate is use/change when its stated conditions are established; do not substitute private reflection for doing it. Unknown conditions permit concrete observation or asking. Do not invent additional prerequisites.", kinds),
     target: choice("Target of the selected NEXT operation: observe inspects this object, use/change affects this object's properties, move approaches this destination. A machine operated through a control panel is the target; the panel is the tool. In 'inspect an object then report to a person', inspect the object first, not the later listener. Do not select a prerequisite object when the requested effect belongs to another known object.", targetCriteria),
     tool: choice("Separate instrument used on the target, or the item discussed in speech. A control panel used to test a machine is a tool. Select none when no separate instrument is involved.", targetCriteria),
     observation_scope: choice("If observing, what is actually being inspected? Inspecting one's money, food or possessions selects inventory; reviewing memories selects the reflect operation.", {
       target: "The selected external object", surroundings: "The immediate surroundings", inventory: "The actor's own actual inventory and resources",
     }),
     recipient: choice("If the next action communicates words or transfers goods, select its actual recipient. Discover a recipient before addressing an unknown person. Ignore for other operations.", recipientCriteria),
+    ...(knownLocations.length ? { search_location: choice("If the intended recipient has not yet been seen, where does this request seek them? A shopkeeper is sought in that shop, not among unrelated people in the surrounding district. Use a known place only; none means the current surroundings.", {
+      none: "Current surroundings; no more specific known place",
+      ...Object.fromEntries(knownLocations.map(([id, entity]) => [id, { name: entity.name, description: entity.description }])),
+    }) } : {}),
     amount: choice("amount", { unknown: "No established amount", ...Object.fromEntries(amounts.map((amount, index) => [`n${index}`, String(amount)])) }),
     speech: choice("The actual words THIS speaker should say next. For an NPC answering a question, select words that answer or acknowledge it, not a verbatim copy of the received question. Existing testimony is evidence, not a script to echo.", { none: "No speech", input: "The entire player input is already the literal utterance", create: "Realize the intended utterance naturally in this speaker's voice; action instructions are not literal speech",
       ...Object.fromEntries(quotes.map((quote, index) => [`q${index}`, quote])),
@@ -115,16 +120,24 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   if (capabilities.length) questions.capability = choice("capability", { none: "Ordinary action without a learned capability", ...Object.fromEntries(capabilities.map(capability =>
     [capability.id, { description: capability.description, applicability: capability.applicability, effect: capability.effectDescription }])) });
   if (goals.length) questions.goal = choice("goal", { none: "Respond to the situation without selecting a goal", ...Object.fromEntries(goals.map(goal => [goal.id, goal.description])) });
-  const currentRequestReceipts = external ? state.history.flatMap(entry => {
+  const recentActions = state.history.flatMap(entry => {
     const event = entry.directEvent;
     if (!event) return [];
-    return event.frames.filter(frame => frame.actorId === agentId && frame.submissionId === external.submissionId).map(frame => ({
+    return event.frames.filter(frame => frame.actorId === agentId).map(frame => ({
+      submissionId: frame.submissionId, requested: frame.proposal.goal,
+      target: Object.entries(view.entities).find(([, canonicalId]) => canonicalId === frame.targetEntityId)?.[0] ?? null,
       actionKind: frame.kind, attempted: frame.expression?.attempt ?? frame.proposal.rawText,
       outcome: event.outcomes.find(outcome => outcome.proposalId === frame.id)?.summary ?? null,
       observed: event.observations.filter(observation => observation.observerId === agentId).map(observation => observation.summary),
     }));
-  }) : [];
-  const context = { perspective: view.state, submittedAction: external ?? null, currentRequestReceipts, intent: { goalId: intent.goalId, wakeReasons: intent.wakeReasons,
+  });
+  const currentRequestReceipts = external ? recentActions.filter(action => action.submissionId === external.submissionId) : [];
+  const currentObservedFacts = claims.map(claim => ({ subject: agent.belief.localEntities[claim.subjectId]?.name,
+    localEntityId: claim.subjectId, predicate: claim.predicate, value: claim.value, description: claim.description, stance: claim.stance,
+    evidence: claim.evidenceIds.map(id => agent.belief.evidence[id]).filter(Boolean).map(item => ({ kind: item!.kind, step: item!.step })) }));
+  const context = { perspective: view.state, submittedAction: external ?? null, currentRequestReceipts,
+    recentActions: recentActions.slice(-6).map(({ requested, target, actionKind, attempted, outcome }) => ({ requested, target, actionKind, attempted, outcome })),
+    currentObservedFacts, intent: { goalId: intent.goalId, wakeReasons: intent.wakeReasons,
     recentOutcomeIds: intent.recentOutcomeIds }, latestObservedEvidence: orderedValues(agent.belief.evidence).filter(evidence => evidence.step === agent.observationCursorStep),
     actionKinds: kinds } as unknown as JsonValue;
   const inputHash = contentHash({ perspective: view.state, submittedAction: external ?? null, goal: intent.goalId });
@@ -153,9 +166,10 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     if (targetKey === "none") operation = "wait";
   }
   const observationScope = selected(answers, "observation_scope") as ActionFrame["observationScope"];
-  const target = operation === "observe" && observationScope === "inventory" ? agent.entityId
+  let target = operation === "observe" && observationScope === "inventory" ? agent.entityId
     : operation === "observe" && observationScope === "surroundings" ? null : view.entities[targetKey] ?? null;
   const preparatoryFor: ActionKind | null = ["speak", "transfer", "move"].includes(operation) && !target && targetKey !== "broadcast" ? operation as ActionKind : null;
+  if (preparatoryFor && ["speak", "transfer"].includes(preparatoryFor) && questions.search_location) target = view.entities[selected(answers, "search_location")] ?? null;
   if (!external && (["wait", "unknown"].includes(operation) || answers.relevant?.type === "noul" && answers.relevant.noul < 0.5)) {
     intent.status = "waiting"; intent.wait = { entityIds: target ? [target] : [], untilSeconds: null, reason: operation };
     return { frame: null, audits: [] as ModelExecutionAudit[], reads: view.reads, cognition };
@@ -180,8 +194,6 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
           ? "Request the other person's action; do not offer payment or accept any new terms" : selected(answers, "dialogue"), playerControlled: Boolean(external),
         currentPlayerRequest: external?.rawText ?? null,
         currentHoldings: (view.state as { mechanics: { quantities: JsonValue } }).mechanics.quantities,
-        currentObservedFacts: orderedValues(agent.belief.claims).map(claim => ({ subject: agent.belief.localEntities[claim.subjectId]?.name,
-          predicate: claim.predicate, value: claim.value, description: claim.description, stance: claim.stance })) as unknown as JsonValue,
         exactQuotes: quotes, expression: operation === "reflect" ? "Private reflection; do not deliver to anyone." : "Concrete attempted behavior and actual words before execution. Outcomes are not yet decided." },
       schema: z.object({ attempt: z.string().optional(), utterance: z.string().nullable().optional(), manner: z.string().nullable().optional() }), jsonExamplePolicy: "omit" });
     expression = { attempt: generated.value.attempt?.trim() || text || actionLabels[operation as ActionKind] || "尝试行动",
@@ -213,7 +225,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     startedAtSeconds: state.truth.elapsedSeconds, dueAtSeconds: state.truth.elapsedSeconds + durationSeconds,
     durationSeconds, progressSeconds: 0, activityStatus: "active",
     temporalProfileId: profileId, inputHash, causeActionId: intent.causeActionId, preparatoryFor,
-    observationScope: preparatoryFor ? "surroundings" : observationScope };
+    observationScope: preparatoryFor ? target ? "target" : "surroundings" : observationScope };
   if (operation === "expand") {
     if (!input.creationEnabled) throw new Error("This new capability needs creation; ordinary actions remain available");
     const created = await extendCapability({ state, control, frame, decisions, profileId: profiles.creation,

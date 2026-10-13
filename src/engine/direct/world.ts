@@ -233,7 +233,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   const worldExpansions = new Map<string, WorldExpansion>();
   const expansionFailures = new Set<string>();
   for (const [index, frame] of frames.entries()) if (answers[`a${index}_world_expansion`] && (selected(answers, `a${index}_world_expansion`) === "introduce" ||
-    frame.submissionId && frame.kind === "observe" && frame.observationScope !== "inventory" && frame.targetEntityId !== frame.actorEntityId && !frame.preparatoryFor) &&
+    frame.submissionId && frame.kind === "observe" && frame.observationScope !== "inventory" && frame.targetEntityId !== frame.actorEntityId) &&
     ["succeeded", "partial", "unknown"].includes(selected(answers, `a${index}_outcome`))) {
     try {
     Object.assign(view.reads, captureDependencies(state, ["catalog:entities"]));

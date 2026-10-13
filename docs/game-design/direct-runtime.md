@@ -16,6 +16,8 @@ World adjudication receives local entities, placement, relevant facts, resources
 
 A finite physical use or change with no admitted effect records a partial attempt with no confirmed state change. Its receipt cannot claim the requested result occurred. A distinct remaining authorized step may continue under the same request; repeated work remains subject to the no-progress wait. An admitted ongoing activity records its start and retains its activity lease. Action selection receives prior receipts for the same submission to distinguish completed prerequisites from remaining work. Target identifies the affected object; a separate instrument belongs in the tool field. Actual owned resource consumption and production enter the actor's observation alongside visible facts.
 
+The private action context also highlights recent owned actions and current claims with their evidence kinds and observation steps. Conditional instructions resolve against those records before selecting the concrete branch; incidental appearance traces do not introduce extra prerequisites. Recipient discovery retains the selected known search location, and exploration may expand that location before a recipient exists. This context does not import another character's hidden cognition or canonical identity bindings.
+
 ## Persistent activities and the timeline
 
 Bootstrap saves the world and every Agent's initial intention without model inference. Initial NPC decisions are durable ready tasks and execute when the host advances the world. A submitted player action gets priority over unrelated initial work; received observations and deadlines wake relevant NPCs.
