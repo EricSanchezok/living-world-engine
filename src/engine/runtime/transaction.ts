@@ -930,7 +930,18 @@ export function replaySimulationState(
   return replay;
 }
 
+const defaultCoreReplayCacheIdentity = {};
+const replayValidationHashes = new WeakMap<object, Set<string>>();
+const REPLAY_VALIDATION_CACHE_LIMIT = 8;
+
 export function replayCommittedHistory(state: SimulationState, rulePackages?: RulePackageRegistry): void {
+  // Only an exact complete native state validated under these fixed core rules
+  // may reuse a successful replay. Explicit replaySimulationState always runs.
+  const identity = state.executionState?.data.kind === "decision-event"
+    ? rulePackages ? rulePackages.replayValidationCacheIdentity : defaultCoreReplayCacheIdentity : undefined;
+  const stateHash = identity ? contentHash(state) : null;
+  const cached = identity ? replayValidationHashes.get(identity) : undefined;
+  if (stateHash && cached?.has(stateHash)) { cached.delete(stateHash); cached.add(stateHash); return; }
   const replay = replaySimulationState(state, state.revision, rulePackages);
   const core = (value: SimulationState) => ({
     revision: value.revision,
@@ -942,6 +953,11 @@ export function replayCommittedHistory(state: SimulationState, rulePackages?: Ru
     history: value.history,
   });
   if (contentHash(core(replay)) !== contentHash(core(state))) throw new Error("state does not match replayed history");
+  if (identity && stateHash) {
+    const values = cached ?? new Set<string>(); values.add(stateHash);
+    while (values.size > REPLAY_VALIDATION_CACHE_LIMIT) values.delete(values.values().next().value!);
+    replayValidationHashes.set(identity, values);
+  }
 }
 
 export function validateModelAudit(

@@ -55,12 +55,12 @@ export class StepReactionRequiredError extends Error {
   }
 }
 
-const validatedSnapshotHashes = new WeakMap<SimulationState, string>();
+const validatedSnapshotHashes = new WeakMap<SimulationState, { hash: string; rulePackages: WorldExecutionAlgorithm["rulePackages"] }>();
 
-function consumeValidatedSnapshot(state: SimulationState): boolean {
-  const expectedHash = validatedSnapshotHashes.get(state);
+function consumeValidatedSnapshot(state: SimulationState, copy: SimulationState, rulePackages: WorldExecutionAlgorithm["rulePackages"]): boolean {
+  const expected = validatedSnapshotHashes.get(state);
   validatedSnapshotHashes.delete(state);
-  return expectedHash !== undefined && expectedHash === contentHash(state);
+  return expected !== undefined && expected.rulePackages === rulePackages && expected.hash === contentHash(copy);
 }
 
 class ScopedTraceWriter implements ExecutionTraceWriter {
@@ -539,14 +539,14 @@ export class SimulationEngine {
     this.committer = new CanonicalCommitter(algorithm.rulePackages);
     this.state = structuredClone(initialState);
     if (this.state.worldId !== definition.id) throw new Error("simulation state belongs to another world");
-    if (!consumeValidatedSnapshot(this.state)) validateSimulationState(this.state, false, true, algorithm.rulePackages);
+    if (!consumeValidatedSnapshot(initialState, this.state, algorithm.rulePackages)) validateSimulationState(this.state, false, true, algorithm.rulePackages);
     validateAlgorithmExecutionState(this.state.executionState, algorithm.manifest.hash);
     this.state.historyBase ??= createHistoryReplayBase(definition.initialState);
   }
 
   get snapshot(): SimulationState {
     const snapshot = structuredClone(this.state);
-    validatedSnapshotHashes.set(snapshot, contentHash(snapshot));
+    validatedSnapshotHashes.set(snapshot, { hash: contentHash(snapshot), rulePackages: this.algorithm.rulePackages });
     return snapshot;
   }
 

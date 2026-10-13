@@ -248,6 +248,10 @@ function resolveInvocation(
 
 export class RulePackageRegistry {
   private readonly packages = new Map<string, RulePackage>();
+  private coreReplayCache = false;
+
+  /** Custom packages always execute their history checks; core implementations are fixed. */
+  get replayValidationCacheIdentity(): object | undefined { return this.coreReplayCache ? this : undefined; }
 
   constructor(packages: readonly RulePackage[] = []) {
     for (const rulePackage of packages) this.register(rulePackage);
@@ -260,7 +264,9 @@ export class RulePackageRegistry {
     if (ruleIds.some((id) => !id.trim()) || new Set(ruleIds).size !== ruleIds.length) {
       throw new Error(`rule package ${rulePackage.id} has invalid rule ids`);
     }
-    this.packages.set(rulePackage.id, rulePackage);
+    this.coreReplayCache = this.packages.size === 0 && rulePackage === coreResolutionRulePackage;
+    this.packages.set(rulePackage.id, Object.freeze({ ...rulePackage,
+      rules: Object.freeze(rulePackage.rules.map(rule => Object.freeze({ ...rule }))) }));
   }
 
   private select(references: readonly RulePackageReference[]): Map<string, SelectedPackage> {
@@ -901,13 +907,14 @@ const instantiateEntityCohort: MechanicRule = {
   },
 };
 
-export const coreResolutionRulePackage: RulePackage = {
+export const coreResolutionRulePackage: RulePackage = Object.freeze({
   id: "core-resolution",
   version: "3.0.0",
   adjudication: "先提交 ResolutionPlan，再由引擎把命名难度、风险和效果档确定性映射为 d20 检定与规则效果。模型不得提交 raw DC、modifier、Meter delta、Condition 强度或 Rating 数值。",
   configSchema: coreResolutionConfigSchema,
-  rules: [applyReceipt, advanceConditions, transferQuantity, changeQuantity, instantiateEntityProfile, instantiateEntityCohort],
-  validateOperationShapes: (_config, operations) => {
+  rules: Object.freeze([applyReceipt, advanceConditions, transferQuantity, changeQuantity, instantiateEntityProfile, instantiateEntityCohort]
+    .map(rule => Object.freeze({ ...rule }))),
+  validateOperationShapes: (_config: unknown, operations: readonly WorldDeltaOperation[]) => {
     for (const operation of operations) {
       if (operation.kind === "adjust_meter" || operation.kind === "set_meter" || operation.kind === "set_rating" ||
         operation.kind === "set_condition" || operation.kind === "remove_condition") {
@@ -919,7 +926,7 @@ export const coreResolutionRulePackage: RulePackage = {
       }
     }
   },
-};
+});
 
 export function deriveCoreResolutionMechanicResult(
   context: RuleExecutionContext,
