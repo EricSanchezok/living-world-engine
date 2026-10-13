@@ -45,9 +45,12 @@ function capabilityFact(state: Readonly<SimulationState>, frame: ActionFrame, ca
   const subjectId = effect.subject === "actor" ? frame.actorEntityId : effect.subject === "target" ? frame.targetEntityId : frame.toolEntityId;
   if (!subjectId) return null;
   const existing = orderedValues(state.truth.facts).find(fact => fact.subjectId === subjectId && fact.predicate === effect.predicate);
-  return { id: existing?.id ?? `${capability.id}/${subjectId}/${ordinal}`, subjectId, predicate: effect.predicate,
+  return { id: existing?.id ?? directSemanticId("fact", [capability.id, subjectId, String(ordinal)]), subjectId, predicate: effect.predicate,
     value: typeof effect.value === "boolean" ? { kind: "boolean", value: effect.value } : { kind: "text", value: effect.value },
     description: effect.description, access: existing?.access ?? { kind: "public" }, provenance: sourceFor(frame).causes };
+}
+export function directSemanticId(kind: "fact" | "object" | "condition", owners: string[]): string {
+  return `direct-${kind}-${contentHash(owners).slice(0, 40)}`;
 }
 export async function prepareActions(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frames: ActionFrame[], decisions: DirectDecisions, creationEnabled = true) {
   const audits: ModelExecutionAudit[] = [];
@@ -57,6 +60,17 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   const visibility = new Map<string, WorldFact>();
   const entityVisibility = new Map<string, WorldEntity>();
   const entityNames = new Map<string, string>();
+  const createdObjectQuestions = (frame: ActionFrame, prefix: string, capability: CapabilityDefinition, sink: Record<string, DecisionQuestionV2>) => {
+    for (const [ordinal, effect] of capability.effects.entries()) if (effect.kind === "object") {
+      const entity: WorldEntity = { id: directSemanticId("object", [frame.id, String(ordinal)]), kind: "object", name: effect.name,
+        description: effect.description, lifecycle: "active", createdAtStep: state.step + 1 };
+      const id = `${prefix}_created${ordinal}`; entityVisibility.set(id, entity); entityNames.set(`${id}_name`, entity.id);
+      sink[id] = question("If this declared construction occurs, is the created object perceptible through the resulting action?", {
+        actionId: frame.id, entity: entity as unknown as JsonValue }, { visible: "The constructed object is perceptible", hidden: "It is concealed", unknown: "No perceptual evidence" });
+      sink[`${id}_name`] = question("Is this constructed object's descriptive name recognizable from its appearance or the witnessed construction?", {
+        actionId: frame.id, entity: entity as unknown as JsonValue }, { named: "Its descriptive name is recognizable", unnamed: "Only its presence is perceptible" });
+    }
+  };
   const candidates = new Map<string, string[]>();
   const randomOptions = new Map<string, { distributionId: string; stepId: string; applies: string; facts: WorldFact[] }>();
   const durations = [...new Set([ ...frames.map(frame => frame.durationSeconds),
@@ -142,6 +156,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       }
     }
     const observableFacts = new Map(targetFacts.map(fact => [fact.id, fact]));
+    if (capability) createdObjectQuestions(frame, prefix, capability, questions);
     for (const [ordinal, effect] of capability?.effects.entries() ?? []) if (effect.kind === "fact") {
       const fact = capabilityFact(state, frame, capability!, effect, ordinal);
       if (fact) observableFacts.set(fact.id, fact);
@@ -184,6 +199,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       audits.push(...extension.audits);
       supplemental[`${prefix}_capability`] = question("does this new declared capability actually apply to the already selected action", extension.capability as unknown as JsonValue,
         { apply: "Apply its immediate declared effects", unavailable: "The required materials, skill or conditions are absent", unknown: "Need more evidence" });
+      createdObjectQuestions(frame, prefix, extension.capability, supplemental);
       for (const [ordinal, effect] of extension.capability.effects.entries()) if (effect.kind === "fact") {
         const fact = capabilityFact(state, frame, extension.capability, effect, ordinal);
         if (!fact) continue;
@@ -253,7 +269,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       const addCondition = (profileId: string, subjectId: string) => {
         const profile = state.truth.mechanics.conditionProfiles[profileId]!;
         const duration = state.truth.mechanics.durationProfiles[profile.defaultDurationProfileId]!;
-        const id = `${frame.id}/condition/${profileId}/${subjectId}`;
+        const id = directSemanticId("condition", [frame.id, profileId, subjectId]);
         const condition = materializeCondition({ intent: { kind: "condition", id, targetId: subjectId, channel: profile.id, label: profile.name,
           description: profile.name, conditionId: id, conditionProfileId: profile.id, durationProfileId: duration.id, access: { kind: "public" }, magnitude: "standard", sourceRefs: [] },
           magnitude: "standard", duration, profile, elapsedSeconds: frame.dueAtSeconds!, provenance: source.causes });
@@ -265,7 +281,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
           const capability = decisions.control.capabilities.find(capability => capability.id === frame.capabilityId)!;
           for (const [ordinal, effect] of capability.effects.entries()) {
             if (effect.kind === "object") {
-              const id = `${frame.id}/object/${ordinal}`;
+              const id = directSemanticId("object", [frame.id, String(ordinal)]);
               operations.push({ kind: "create_entity", entity: { id, kind: "object", name: effect.name, description: effect.description, lifecycle: "active", createdAtStep: state.step + 1 },
                 placementId: effect.placement === "actor" ? frame.actorEntityId : frame.targetEntityId, ...source });
             } else {

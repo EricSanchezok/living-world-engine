@@ -15,7 +15,7 @@ import { speechSpans } from "../actions";
 async function fixture(options: { operation?: string; target?: string; tool?: string; amount?: string; failKeeper?: boolean;
   observationScope?: string; speech?: string; creationEnabled?: boolean; privateGateFact?: boolean; named?: boolean } = {}) {
   const f = directTestProvider(wire => {
-    if (!wire.questions) return { utterance: "观察与他人的说法需要分开核对；下一步询问消息来源。" };
+    if (!wire.questions) return { type: "speak", utterance: "观察与他人的说法需要分开核对；下一步询问消息来源。" };
     const context = wire.state as { perspective?: { agentId: string }; submittedAction?: { rawText: string } };
     if (options.failKeeper && context.perspective?.agentId === "keeper") return new Response("unavailable", { status: 503 });
     const selection: Record<string, string> = { operation: options.operation ?? "observe", target: options.target ?? "door", recipient: options.target ?? "none", tool: options.tool ?? "none",

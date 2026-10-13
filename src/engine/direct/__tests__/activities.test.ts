@@ -12,13 +12,17 @@ import type { DecisionQuestionV2 } from "../../models/decision-v2";
 import { readDirectState } from "../state";
 import { privateActionView } from "../views";
 import { settlePreparedActions } from "../settlement";
+import { directSemanticId } from "../world";
+import { isSemanticId } from "../../contracts/state-schemas";
 
 function option(question: DecisionQuestionV2, predicate: (value: unknown) => boolean) {
   return question.type === "choice" ? Object.entries(question.criteria).find(([, value]) => predicate(value))?.[0] ?? "unchanged" : "none";
 }
-async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "ongoing" | "wait" = "repair", deadline = 120) {
+async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "construct" | "ongoing" | "wait" = "repair", deadline = 120) {
   let extensionUsed = false;
   const f = directTestProvider(wire => {
+    if (!wire.questions && mode === "construct") return { description: "制作可见提示牌", applicability: "有适用的材料时制作", effectDescription: "制成一块可见提示牌",
+      effects: [{ kind: "object", name: "提示牌", description: "现场制作的提示牌。", placement: "target" }] };
     if (!wire.questions) return { description: "临时隔振", applicability: "用现有缓冲材料隔离设备振动", effectDescription: "设备获得可观察的临时隔振状态",
       effects: [{ kind: "fact", subject: "target", predicate: "vibration-isolation", value: "temporary", description: "缓冲材料使振动暂时隔离。" }] };
     const context = wire.state as { perspective?: { agentId: string }; actions?: Array<{ proposal: { rawText: string } }> };
@@ -38,7 +42,8 @@ async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "on
       if (id.includes("_random")) answer = mode !== "test" ? "none" : id.includes("_target")
         ? option(q, value => (value as { property?: string })?.property === "pressure") : "apply";
       if (id.includes("capability")) answer = context.perspective ? option(q, value => typeof value === "object") : "apply";
-      if (id.endsWith("_expression")) answer = mode === "extend-world" ? "expand" : "existing";
+      if (id.endsWith("_expression")) answer = mode === "extend-world" || mode === "construct" ? "expand" : "existing";
+      if (id.includes("_created")) answer = id.endsWith("_name") ? "named" : "visible";
       return [id, nativeAnswer(q, answer)];
     }));
   });
@@ -48,7 +53,7 @@ async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "on
   world.initialState.truth.quantities[kit] = { id: kit, definitionId: "seal-kit", holderId: "engineer", amount: 1 };
   world.historyBaseHash = historyReplayBaseHash(world.initialState);
   await f.registry.capture();
-  const algorithm = new DirectWorldAlgorithm(f.gateway, { decision: "decision-jev", creation: "creation-deepseek", fallback: "decision-deepseek", creationEnabled: mode === "extend" || mode === "extend-world" });
+  const algorithm = new DirectWorldAlgorithm(f.gateway, { decision: "decision-jev", creation: "creation-deepseek", fallback: "decision-deepseek", creationEnabled: ["extend", "extend-world", "construct"].includes(mode) });
   const engine = new SimulationEngine(world, algorithm);
   const roster: Record<string, PolicyBinding> = Object.fromEntries(Object.keys(world.initialState.agents).map(id => [id,
     { kind: "external", agentId: id, participantId: "human" }]));
@@ -65,6 +70,14 @@ async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "on
 }
 
 describe("direct activities use code-owned mechanics", () => {
+  it("constructs an observable object with a valid bounded semantic identity and replays it once", async () => {
+    const f = await fixture("construct"); const result = await f.act("制作一个提示牌");
+    const made = Object.values(result.state.truth.entities).filter(entity => !f.world.initialState.truth.entities[entity.id]);
+    expect(made).toHaveLength(1); expect(isSemanticId(made[0]!.id)).toBe(true);
+    expect(result.committed.observations.find(packet => packet.observerId === "inspector")?.summary).toContain("提示牌");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+    for (const kind of ["fact", "object", "condition"] as const) expect(isSemanticId(directSemanticId(kind, ["rt:action:" + "a".repeat(64), "长".repeat(128)]))).toBe(true);
+  });
   it("repairs with exact consumables, partial goal evidence and rule duration with creation disabled", async () => {
     const f = await fixture(); const result = await f.act("使用密封组件和冷却剂维修冷却泵");
     expect(result.state.truth.elapsedSeconds).toBe(30);

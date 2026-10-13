@@ -158,7 +158,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
         system, userPrompt, promptVersion: `direct-utterance-${contentHash({ system, userPrompt })}`, schemaName: "DirectUtteranceV1",
         context: { ...context as Record<string, JsonValue>, recipient: operation === "reflect" ? null : targetKey,
           expression: operation === "reflect" ? "Private reflection for the actor: distinguish observed evidence from testimony, uncertainty and proposed next questions. This creates no external facts." : "Actual words addressed to the recipient" },
-        schema: z.object({ utterance: z.string().min(1) }).strict(), jsonExamplePolicy: "omit" });
+        schema: z.object({ utterance: z.string().min(1) }), jsonExamplePolicy: "omit" });
       utterance = generated.value.utterance; audits.push(generated.audit);
     }
   }

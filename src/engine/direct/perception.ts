@@ -36,7 +36,7 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       for (const operation of settlement.operations) if (operation.kind === "transfer_quantity") {
         summary += `\n${alias(agent, operation.fromHolderId, introductions).name}向${alias(agent, operation.toHolderId, introductions).name}转移了${operation.amount}${state.truth.mechanics.quantities[operation.definitionId]!.unit}${state.truth.mechanics.quantities[operation.definitionId]!.name}。`;
       }
-      if (ownerId === settlement.frame.actorId) for (const entity of settlement.visibleEntities) {
+      if (ownerId === settlement.frame.actorId || settlement.frame.kind !== "observe") for (const entity of settlement.visibleEntities) {
         const local = alias(agent, entity.id, introductions);
         const named = settlement.namedEntityIds.includes(entity.id);
         const introduced = introductions.find(intro => intro.localEntity.id === local.id);
