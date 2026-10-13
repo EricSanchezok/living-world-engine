@@ -80,8 +80,9 @@ describe("world import", () => {
     const result = database.importWorld(zipDirectory(fixture).toBuffer(), modelCatalog);
 
     expect(result).toMatchObject({ id: "open-world-fixture", replaced: false });
-    expect(result.programCoverage.goals).toContainEqual({ ownerId: "keeper", goalId: "guard-gate", status: "needs-generation" });
-    expect(result.programCoverage.summary).toMatchObject({ startable: 0, waiting: 0, needsGeneration: result.programCoverage.goals.length });
+    expect(result.activeGoalCount).toBeGreaterThan(0);
+    expect(result).not.toHaveProperty("programCoverage");
+    expect(publicWorldImportResult(result)).toHaveProperty("activeGoalCount", result.activeGoalCount);
     expect(JSON.stringify(publicWorldImportResult(result))).not.toContain("guard-gate");
     expect(database.list()).toEqual([
       expect.objectContaining({ id: "open-world-fixture", contentHash: expect.stringMatching(/^sha256:/) }),

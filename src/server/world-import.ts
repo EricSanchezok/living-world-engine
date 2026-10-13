@@ -106,18 +106,13 @@ export interface WorldImportResult {
   name: string;
   description: string;
   replaced: boolean;
-  programCoverage: ImportProgramCoverage;
+  activeGoalCount: number;
 }
 
-export interface ImportProgramCoverage {
-  summary: { activeGoals: number; startable: number; waiting: number; needsGeneration: number };
-  goals: Array<{ ownerId: string; goalId: string; status: "needs-generation" }>;
-}
-
-/** Ordinary import responses expose counts; private goal identities remain in the trusted local import receipt. */
+/** Import reports authored goal counts without exposing private goal identities. */
 export function publicWorldImportResult(result: WorldImportResult) {
   return { id: result.id, name: result.name, description: result.description, replaced: result.replaced,
-    programCoverage: result.programCoverage.summary };
+    activeGoalCount: result.activeGoalCount };
 }
 
 export interface ParsedWorldArchive {
@@ -127,7 +122,7 @@ export interface ParsedWorldArchive {
   version: string;
   description: string;
   contentHash: string;
-  programCoverage: ImportProgramCoverage;
+  activeGoalCount: number;
 }
 
 export function parseWorldArchive(
@@ -145,9 +140,8 @@ export function parseWorldArchive(
     } catch (error) {
       throw new WorldScriptError(source, error instanceof Error ? error.message : String(error));
     }
-    const goals = Object.values(definition.initialState.agents).flatMap(agent => Object.values(agent.character.goals)
-      .filter(goal => goal.status === "active").map(goal => ({ ownerId: agent.id, goalId: goal.id, status: "needs-generation" as const })))
-      .sort((a, b) => a.ownerId.localeCompare(b.ownerId) || a.goalId.localeCompare(b.goalId));
+    const activeGoalCount = Object.values(definition.initialState.agents).reduce((count, agent) => count +
+      Object.values(agent.character.goals).filter(goal => goal.status === "active").length, 0);
     return {
       template,
       id: definition.id,
@@ -155,7 +149,7 @@ export function parseWorldArchive(
       version: definition.manifestVersion,
       description: definition.description,
       contentHash: definition.contentHash,
-      programCoverage: { summary: { activeGoals: goals.length, startable: 0, waiting: 0, needsGeneration: goals.length }, goals },
+      activeGoalCount,
     };
   } catch (error) {
     if (error instanceof WorldImportError) throw error;
