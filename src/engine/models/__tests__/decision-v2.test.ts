@@ -3,6 +3,7 @@ import { executeDecisionV2, validateDecisionBatchV2, type DecisionRequestV2 } fr
 import { contentHash } from "../model-audit";
 import { directTestProvider, nativeChoice } from "../../testing/direct-provider";
 import { ModelOutputError } from "../model-provider";
+import { loadModelCatalog } from "../model-catalog";
 
 function request(): DecisionRequestV2 {
   const state = { observation: "The recipient has not replied." };
@@ -43,6 +44,15 @@ describe("direct native decisions", () => {
     const input = request(); input.batch.state = "English and Chinese 中文 ".repeat(1600); input.batch.view.projectionHash = contentHash(input.batch.state);
     const f = directTestProvider(wire => answers(wire.questions));
     await executeDecisionV2(f.gateway, input); expect(f.transport).toHaveBeenCalledTimes(1);
+  });
+  it("uses the production wire ceiling without confusing a 300 KB request with provider token overflow", async () => {
+    const input = request(); input.batch.state = "已观察到的情境。".repeat(15000); input.batch.view.projectionHash = contentHash(input.batch.state);
+    const maxInputBytes = loadModelCatalog().profile("decision-jev").max_input_bytes;
+    expect(maxInputBytes).toBe(4_000_000);
+    const f = directTestProvider(wire => answers(wire.questions), undefined, { maxInputBytes });
+    await executeDecisionV2(f.gateway, input);
+    expect(f.transport).toHaveBeenCalledTimes(1);
+    expect(Buffer.byteLength(String(f.transport.mock.calls[0]![1]!.body))).toBeGreaterThan(262_144);
   });
   it("splits only after an actual provider overflow and counts every dispatch", async () => {
     const f = directTestProvider(wire => Object.keys(wire.questions).length > 1

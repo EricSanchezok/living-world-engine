@@ -661,8 +661,7 @@ export class WorldHost {
             kind: "model-audit", stage: "scene-narrative", owner: beat.id, round: 0, ordinal: beat.attempts + 1 }),
           promptVersion: NARRATIVE_PROMPT_VERSION, schemaName: "SceneNarrativeV1",
           system: NARRATIVE_SYSTEM, userPrompt: NARRATIVE_USER,
-          context: { scene: narrativeEvidence(beat.source), playerFocus: beat.source.requestedAction,
-            focusMeaning: "The player's requested focus only; it does not establish that any requested action occurred. Only scene observations establish results.", publishedPrefix: prefix,
+          context: { scene: narrativeEvidence(beat.source), publishedPrefix: prefix,
             previousScenes: document.narratives.filter(item => item.participantId === beat.participantId && item.id !== beat.id && item.segments.length)
               .slice(-3).map(item => item.segments.map(segment => segment.text).join("\n\n")),
             repair: beat.error },

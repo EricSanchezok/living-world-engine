@@ -134,14 +134,8 @@ export function completeParagraphs(text: string): string[] {
   return result;
 }
 export function renderNarrativeParagraph(text: string, source: ScenePacket): string {
-  const observedText = [...source.observations.map(observation => observation.summary),
-    ...source.observations.flatMap(observation => observation.scene?.details.map(detail => `${detail.label}\n${detail.description}`) ?? []),
-    ...source.memories.map(memory => memory.description), ...source.knownEntities.map(entity => `${entity.name}\n${entity.description}`)].join("\n");
-  for (const match of text.matchAll(/[“「]([^”」]+)[”」]/gu)) {
-    if (!source.speech.some(speech => speech.utterance === match[1]) && !observedText.includes(match[1]!)) {
-      throw new Error("Quote differs from delivered speech or observed text; use its exact supplied source instead");
-    }
-  }
+  // Typography is not a speech act. The publication decision checks unsupported
+  // quotations; references and delivered-speech completeness remain exact.
   const rendered = text.replace(/\[\[(speech-[a-f0-9]+)\]\]/gu, (_, id: string) => {
     const speech = source.speech.find(item => item.id === id);
     if (!speech) throw new Error("Narrative referenced an undelivered utterance");
@@ -181,7 +175,9 @@ export function narrativeFallback(source: ScenePacket, published: string[] = [])
     if (!scene) return observation.summary;
     return [scene.speech ? existing.includes(scene.speech.utterance) ? "" : `${scene.speech.speaker}说：“${scene.speech.utterance}”` : scene.outcome,
       ...(published.length ? [] : scene.details.map(detail => `${detail.label}：${detail.description}`)),
-      ...observation.summary.split("\n").slice(1).filter(line => line.startsWith("随身物资：") || line.includes("转移了"))]
+      ...observation.summary.split("\n").slice(1).filter(line =>
+        line.startsWith("随身物资：") || line.includes("转移了") || line.includes("当前状态：") ||
+        line.startsWith("本次操作消耗了") || line.startsWith("本次操作产生了"))]
       .filter(text => text && !existing.includes(text)).filter((text, index, all) => all.indexOf(text) === index).join("\n");
   }).filter(text => text && !existing.includes(text));
   return paragraphs.join("\n\n") || (published.length ? "" : "眼前的情况还没有出现新的变化。");

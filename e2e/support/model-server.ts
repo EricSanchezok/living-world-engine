@@ -35,6 +35,20 @@ function contextFrom(body: Record<string, unknown>): Record<string, unknown> {
 }
 
 
+function decisionAnswers(questions: Record<string, DecisionQuestionV2>) {
+  const values: Record<string, string> = { operation: "observe", target: "self", recipient: "none", tool: "none", amount: "unknown", speech: "none", timing: "default", resource: "none", goal: "none" };
+  return Object.fromEntries(Object.entries(questions).map(([id, question]): [string, Record<string, unknown>] => {
+    if (question.type === "noul") return [id, { type: "noul", noul: id === "expression" ? 0 : 1 }];
+    if (question.type === "score") return [id, { type: "score", score: 1, confidence: 1,
+      legend: Object.fromEntries(question.criteria.map((value, index) => [String(index), value])),
+      probabilities: Object.fromEntries(question.criteria.map((_, index) => [String(index), index === 1 ? 1 : 0])) }];
+    const wanted = values[id] ?? (id.startsWith("paragraph") ? "grounded" : id.includes("outcome") ? "succeeded" : id.includes("visible") || id.includes("entity") ? "visible"
+      : id.includes("goal_status") || id.includes("belief_status") || id.includes("fact") ? "unchanged" : id.includes("request_progress") ? "complete" : "none");
+    const choice = wanted in question.criteria ? wanted : ["none", "unnamed", "target"].find(key => key in question.criteria) ?? Object.keys(question.criteria)[0]!;
+    return [id, { type: "choice", choice, confidence: 1, probabilities: Object.fromEntries(Object.keys(question.criteria).map(key => [key, key === choice ? 1 : 0])) }];
+  }));
+}
+
 const server = createServer(async (request, response) => {
   try {
     if (request.method === "GET" && request.url === "/health") {
@@ -60,23 +74,15 @@ const server = createServer(async (request, response) => {
     }
     const model = String(body.model);
     if (native) {
-      const values: Record<string, string> = { operation: "observe", target: "self", recipient: "none", tool: "none", amount: "unknown", speech: "none", timing: "default", resource: "none", goal: "none" };
-      const answers = Object.fromEntries(Object.entries(body.questions as Record<string, DecisionQuestionV2>).map(([id, question]) => {
-        if (question.type === "noul") return [id, { type: "noul", noul: id === "expression" ? 0 : 1 }];
-        if (question.type === "score") return [id, { type: "score", score: 1, confidence: 1,
-          legend: Object.fromEntries(question.criteria.map((value, index) => [String(index), value])),
-          probabilities: Object.fromEntries(question.criteria.map((_, index) => [String(index), index === 1 ? 1 : 0])) }];
-        const wanted = values[id] ?? (id.startsWith("paragraph") ? "grounded" : id.includes("outcome") ? "succeeded" : id.includes("visible") || id.includes("entity") ? "visible"
-          : id.includes("goal_status") || id.includes("belief_status") || id.includes("fact") ? "unchanged" : id.includes("request_progress") ? "complete" : "none");
-        const choice = wanted in question.criteria ? wanted : ["none", "unnamed", "target"].find(key => key in question.criteria) ?? Object.keys(question.criteria)[0]!;
-        return [id, { type: "choice", choice, confidence: 1, probabilities: Object.fromEntries(Object.keys(question.criteria).map(key => [key, key === choice ? 1 : 0])) }];
-      }));
+      const answers = decisionAnswers(body.questions as Record<string, DecisionQuestionV2>);
       response.writeHead(200, { "content-type": "application/json" });
       response.end(JSON.stringify({ model, answers, usage: { input_tokens: 100, output_tokens: 10 } })); return;
     }
     const scene = context.scene as { observations?: unknown[]; speech?: Array<{ id: string; speaker: string }> } | undefined;
-    const decision = context.decision as { questions: Record<string, unknown> } | undefined;
-    const output = decision ? { answers: Object.fromEntries(Object.keys(decision.questions).map(id => [id, { type: "choice", choice: "grounded" }])) }
+    const decision = context.decision as { questions: Record<string, DecisionQuestionV2> } | undefined;
+    const output = decision ? { answers: Object.fromEntries(Object.entries(decisionAnswers(decision.questions))
+      .map(([id, answer]) => [id, Object.fromEntries(Object.entries(answer)
+        .filter(([key]) => ["type", "choice", "score", "noul"].includes(key)))])) }
       : context.localWorld && context.requestedAction ? { description: "No additional fixture content.", entities: [], facts: [], events: [] }
       : scene?.observations ? { paragraphs: scene.speech?.length
       ? scene.speech.map(speech => `${speech.speaker}说：[[${speech.id}]]`)

@@ -112,7 +112,7 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
         const intent = control.intents[id]!;
         intent.status = "failed"; intent.activityId = null; intent.wakeReasons = [];
         intent.failure = { inputHash: contentHash({ agent: source.agents[id], submission: submissions.find(action => action.agentId === id) ?? null }),
-          message: result.reason instanceof Error ? result.reason.message : String(result.reason), recoverable: true };
+          message: (result.reason instanceof Error ? result.reason.message || result.reason.name : String(result.reason)) || "Model task failed without a diagnostic message", recoverable: true };
         if (result.reason?.audit) audits.push(result.reason.audit);
         if (result.reason?.audits) audits.push(...result.reason.audits);
       }
@@ -143,7 +143,7 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
         if (result.reason?.audits) audits.push(...result.reason.audits);
         for (const frame of groups[index]!) {
         const intent = control.intents[frame.actorId]!; intent.status = "failed"; intent.activityId = null;
-        intent.failure = { inputHash: frame.inputHash, message: result.reason instanceof Error ? result.reason.message : String(result.reason), recoverable: true };
+        intent.failure = { inputHash: frame.inputHash, message: (result.reason instanceof Error ? result.reason.message || result.reason.name : String(result.reason)) || "Model task failed without a diagnostic message", recoverable: true };
         control.activities = control.activities.filter(activity => activity.id !== frame.id); delete control.prepared[frame.id];
         }
       }

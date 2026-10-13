@@ -109,8 +109,9 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       : frame.kind === "observe" && (!frame.targetEntityId || frame.targetEntityId === frame.actorEntityId) ? state.truth.placements[frame.actorEntityId] : frame.targetEntityId;
     const targetFacts = orderedValues(state.truth.facts).filter(fact => fact.subjectId === (focus ?? frame.actorEntityId));
     if (["use", "change"].includes(frame.kind)) {
-      if (!capability) questions[`${prefix}_expression`] = question("Can the existing properties and mechanical effects actually represent this action's intended immediate effect? A new ordinary combination can use existing properties, but an absent property or constructed object needs a small capability declaration; do not report a represented effect when none can be written.", {
-        action: frame as unknown as JsonValue, existingProperties: targetFacts as unknown as JsonValue }, {
+      if (!capability) questions[`${prefix}_expression`] = question("Can the existing properties and authored mechanical procedures represent the requested immediate RESULT? Choose existing when an available procedure or property change expresses that result, including a random outcome. Operating steps, tool handling, taking readings, or a differently worded method do not themselves require a new capability. Expand only for a genuinely missing result concept or new constructed object; never invent a second success property alongside an existing authored result.", {
+        action: frame as unknown as JsonValue, existingProperties: targetFacts as unknown as JsonValue,
+        authoredProcedures: definition.randomDistributions as unknown as JsonValue }, {
         existing: "Existing properties and mechanical operations express the immediate effect, or this attempt has no justified effect",
         expand: "A plausible new qualitative property, construct or capability is needed to express the actual intended effect",
       });

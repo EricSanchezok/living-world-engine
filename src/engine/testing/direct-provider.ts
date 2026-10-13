@@ -13,12 +13,17 @@ export function directCreationContext(wire: DirectTestWire): Record<string, unkn
   return JSON.parse(prompt.slice(start, end < 0 ? undefined : end));
 }
 
+export function directDecisionContext(wire: DirectTestWire): Pick<DirectTestWire, "state" | "questions"> | undefined {
+  return wire.questions ? wire : directCreationContext(wire).decision as Pick<DirectTestWire, "state" | "questions"> | undefined;
+}
+
 export function directTestProvider(respond: (wire: DirectTestWire, call: number) => unknown | Response | Promise<unknown | Response>,
-  create?: (wire: DirectTestWire) => unknown | Response | Promise<unknown | Response>) {
+  create?: (wire: DirectTestWire) => unknown | Response | Promise<unknown | Response>, options: { maxInputBytes?: number } = {}) {
   const source = createTestModelCatalog().snapshot();
   source.accounts.typesafe = { ...source.accounts["scripted-test"]!, protocol: "typesafe-systemone", dialect: "typesafe",
     models_dev_provider_id: "typesafe", base_url: "https://typesafe.test/v1", api_key_env: "TYPESAFE_API_KEY" };
   source.profiles["decision-jev"] = { ...source.profiles["decision-jev"]!, account_id: "typesafe",
+    ...(options.maxInputBytes ? { max_input_bytes: options.maxInputBytes } : {}),
     selector: { kind: "exact", model_id: "jev-1.13.0" } };
   const catalog = parseModelCatalog(source), registry = createTestModelRegistry(catalog);
   let calls = 0;

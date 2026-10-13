@@ -21,7 +21,8 @@ describe("immutable narrative paragraphs", () => {
     expect(renderNarrativeParagraph("店主回答：[[speech-ab12]]", source)).toBe("店主回答：“三枚金币；我还没同意赊账。”");
     expect(() => renderNarrativeParagraph("[[speech-ffff]]", source)).toThrow("undelivered");
     expect(() => renderNarrativeParagraph("[[invalid]]", source)).toThrow("unresolved");
-    expect(() => renderNarrativeParagraph("店主说：“我同意赊账。”", source)).toThrow("differs from delivered");
+    expect(() => requireDeliveredSpeech(source, [renderNarrativeParagraph("店主说：“我同意赊账。”", source)]))
+      .toThrow("missing delivered");
     expect(renderNarrativeParagraph("店主说：“三枚金币；我还没同意赊账。”[[speech-ab12]]", source))
       .toBe("店主说：“三枚金币；我还没同意赊账。”");
     expect(renderNarrativeParagraph("店主说：三枚金币；我还没同意赊账。 [[speech-ab12]]", source))
@@ -43,7 +44,8 @@ describe("immutable narrative paragraphs", () => {
     scene.observations[0]!.summary = "木箱上写着「公用——擦手擦鞋，勿取走」。";
     expect(renderNarrativeParagraph("你看清木箱上的字：「公用——擦手擦鞋，勿取走」。", scene)).toContain("勿取走");
     scene.requestedAction = "我希望告示写着「全部免费带走」。";
-    expect(() => renderNarrativeParagraph("告示上写着「全部免费带走」。", scene)).toThrow("observed text");
+    // Factual checks happen at the publication boundary, not by matching typography.
+    expect(renderNarrativeParagraph("眼前这份“公用”的意思已经清楚。", scene)).toContain("公用");
     expect(() => requireDeliveredSpeech(scene, ["你看清了告示。"])) .toThrow("missing delivered");
   });
   it("requires the actual delivered words before completing a beat", () => {
@@ -54,6 +56,14 @@ describe("immutable narrative paragraphs", () => {
     expect(narrativeEvidence(source)).not.toHaveProperty("requestedAction");
     expect(narrativeEvidence(source).speech).toEqual(source.speech);
     expect(source.requestedAction).toBe("问价");
+  });
+  it("keeps observed state and resource changes when narration fails", () => {
+    const scene = structuredClone(source);
+    scene.speech = [];
+    scene.observations[0]!.scene!.speech = null;
+    scene.observations[0]!.scene!.outcome = "操作已经结束。";
+    scene.observations[0]!.summary = "操作已经结束。\n设备：当前状态：稳定。\n本次操作消耗了2升液体。";
+    expect(narrativeFallback(scene)).toBe("操作已经结束。\n设备：当前状态：稳定。\n本次操作消耗了2升液体。");
   });
   it("does not repeat a scene tour after an already published prefix", () => {
     const detailed = structuredClone(source);

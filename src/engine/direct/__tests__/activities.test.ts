@@ -1,7 +1,7 @@
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { loadWorldScript } from "../../../script/world-loader";
-import { directTestProvider, nativeAnswer, directCreationContext } from "../../testing/direct-provider";
+import { directTestProvider, nativeAnswer, directCreationContext, directDecisionContext } from "../../testing/direct-provider";
 import { DirectWorldAlgorithm } from "../algorithm";
 import { SimulationEngine } from "../../runtime/simulation";
 import { historyReplayBaseHash } from "../../runtime/history-replay";
@@ -99,6 +99,8 @@ describe("direct activities use code-owned mechanics", () => {
   });
   it("persists random stakes before drawing, survives restart and never repeats the test draw", async () => {
     const f = await fixture("test"); const admitted = await f.act("运行压力测试10秒");
+    const wire = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).find(value => value.questions?.a0_expression);
+    expect(wire.questions.a0_expression.instructions.task.data.authoredProcedures).toHaveLength(1);
     expect(admitted.state.truth.elapsedSeconds).toBe(0); expect(admitted.state.truth.rng.draws).toBe(0);
     expect(Object.values(readDirectState(admitted.state.executionState!, admitted.state).prepared)[0]!.randomRequests).toHaveLength(1);
     const restarted = new SimulationEngine(f.world, f.algorithm, JSON.parse(JSON.stringify(admitted.state)));
@@ -146,7 +148,7 @@ describe("direct activities use code-owned mechanics", () => {
     expect(witnessed.summary).toContain("已执行的方法：临时隔振");
     expect(witnessed.summary).toMatch(/^检查员乔伊的行动结果：/u);
     expect(readDirectState(second.state.executionState!, second.state).capabilities).toHaveLength(1);
-    expect(f.transport.mock.calls.filter(([, init]) => !JSON.parse(String(init?.body)).questions)).toHaveLength(1);
+    expect(f.transport.mock.calls.filter(([, init]) => !directDecisionContext(JSON.parse(String(init?.body))))).toHaveLength(1);
     expect(replaySimulationState(second.state)).toEqual(second.state);
   });
   it("ignores a learned physical capability selected on an unused action branch", async () => {
@@ -176,7 +178,7 @@ describe("direct activities use code-owned mechanics", () => {
     const second = await f.act("复用工程师实际演示的隔振方法", "inspector");
     expect(f.transport).toHaveBeenCalledTimes(7);
     expect(f.transport.mock.calls.filter(([, init]) => {
-      const wire = JSON.parse(String(init?.body)); return !wire.questions && !directCreationContext(wire).chosenDirection;
+      const wire = JSON.parse(String(init?.body)); return !directDecisionContext(wire) && !directCreationContext(wire).chosenDirection;
     })).toHaveLength(1);
     expect(replaySimulationState(second.state)).toEqual(second.state);
   });

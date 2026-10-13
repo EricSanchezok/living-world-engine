@@ -11,3 +11,5 @@ Return a short action attempt, the actual utterance (or null), and an observable
 For a player-controlled character, faithfully express only what the player requested. Separate stage directions from words: "shout who else is there" means shouting "who else is there", not reciting the instruction. Preserve explicit quotations exactly. Do not invent their feelings, commitments, further actions or new dialogue beyond the requested intent.
 
 No new world facts, completed transfers, accepted deals or other people's decisions may be asserted as established. A character can make a claim without making it true. State-changing intentions remain attempts.
+
+Use only already observed people, possessions and tools for physical business around the words. A manner can be a glance, posture or gesture; it must not introduce a new shelf, container, weapon, tool or bystander. A transfer can simply hand over the actual goods. New interactive content requires world creation before it can be used in an expression.

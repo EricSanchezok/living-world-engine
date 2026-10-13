@@ -4,7 +4,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { loadWorldScript } from "../../script/world-loader";
 import { MemoryWorldRepository } from "../../script/world-repository";
-import { directTestProvider, nativeAnswer, directCreationContext, type DirectTestWire } from "../../engine/testing/direct-provider";
+import { directTestProvider, nativeAnswer, directCreationContext, directDecisionContext, type DirectTestWire } from "../../engine/testing/direct-provider";
 import { DEFAULT_ALGORITHM_REF } from "../../engine/algorithms/registry";
 import { replaySimulationState } from "../../engine/runtime/transaction";
 import { replayThroughAlgorithm } from "../../../scripts/operations/execution-command";
@@ -36,6 +36,8 @@ describe("direct world through persistent WorldHost", () => {
       wire => {
         const context = directCreationContext(wire);
         expect(context.publishedPrefix).toEqual(["石门上还留着水迹。"]);
+        expect(context).not.toHaveProperty("playerFocus");
+        expect(context.scene).not.toHaveProperty("requestedAction");
         expect(JSON.stringify(context.scene)).not.toContain("canonicalEntityIds");
         return { paragraphs: ["石门上还留着水迹。", "石门上还留着水迹。 你清点了随身物资：三枚灵石。"] };
       });
@@ -85,17 +87,17 @@ describe("direct world through persistent WorldHost", () => {
       expect(host.instance(id).conversation!.turns.at(-1)!.responses!.map(response => response.text)).toEqual(texts);
     } finally { interrupt(); database.close(); rmSync(root, { recursive: true, force: true }); }
   });
-  it("retains an accepted prefix and repairs a rejected factual addition without changing the world again", async () => {
+  it.each(["一位陌生船长走来。", "告示上写着「全部免费带走」。"])("retains an accepted prefix and repairs unsupported content: %s", async unsupported => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-narrative-grounding-"));
     let calls = 0;
     const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
       const paragraphs = (wire.state as { paragraphs?: string[] }).paragraphs;
-      const choice = id.startsWith("paragraph") ? paragraphs?.[Number(id.slice(9))]?.includes("陌生船长") ? "added_content" : "grounded"
+      const choice = id.startsWith("paragraph") ? paragraphs?.[Number(id.slice(9))] === unsupported ? "added_content" : "grounded"
         : id === "operation" ? "observe" : id === "target" ? "self" : id.includes("outcome") ? "succeeded" : "none";
       return [id, nativeAnswer(q, id === "expression" ? 0 : choice)];
     })), wire => {
       const context = directCreationContext(wire);
-      if (++calls === 1) return { paragraphs: ["你清点了随身物资。", "一位陌生船长走来。"] };
+      if (++calls === 1) return { paragraphs: ["你清点了随身物资。", unsupported] };
       expect(context.publishedPrefix).toEqual(["你清点了随身物资。"]);
       return { paragraphs: ["三枚灵石仍在你身上。"] };
     });
@@ -139,6 +141,7 @@ describe("direct world through persistent WorldHost", () => {
       const failed = database.readInstance(id).document;
       expect(Object.values(failed.runs).find(run => run.rootIntents.some(intent => intent.submissionId === "first-fails"))?.status).toBe("failed");
       expect(failed.state.truth).toEqual(world.initialState.truth); expect(f.transport).toHaveBeenCalledTimes(1);
+      expect(failed.actionWindow, JSON.stringify({ revision: failed.state.revision, runs: failed.runs })).not.toBeNull();
       expect(failed.actionWindow?.requiredAgentIds).toContain("player");
       expect(replaySimulationState(failed.state)).toEqual(failed.state);
       await host.submitAction(id, participant.id, { expectedRevision: 1, submissionId: "retry-observe", text: "查看自己" });
@@ -186,7 +189,7 @@ describe("direct world through persistent WorldHost", () => {
       expect(Object.values(document.runs).find(run => run.rootIntents.some(intent => intent.submissionId === "find-and-ask"))?.status).toBe("completed");
       expect(document.actionWindow?.requiredAgentIds).toContain("player");
       expect(state.truth.quantities).toEqual(world.initialState.truth.quantities);
-      expect(f.transport.mock.calls.filter(([, init]) => Object.keys(JSON.parse(String(init?.body)).questions ?? {}).some(id => id === "operation" || id.endsWith("_outcome")))).toHaveLength(6); expect(replaySimulationState(state)).toEqual(state);
+      expect(f.transport.mock.calls.filter(([, init]) => Object.keys(directDecisionContext(JSON.parse(String(init?.body)))?.questions ?? {}).some(id => id === "operation" || id.endsWith("_outcome")))).toHaveLength(6); expect(replaySimulationState(state)).toEqual(state);
       const takeover = await host.transferControl(id, { expectedRevision: state.revision, target: { kind: "agent", agentId: "keeper" } });
       expect(takeover.actionWindow?.requiredAgentIds).toContain("keeper");
       await host.submitAction(id, takeover.conversation!.participantId, { expectedRevision: state.revision, submissionId: "after-takeover", text: "拒绝交换" });

@@ -1,7 +1,7 @@
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { loadWorldScript } from "../../../script/world-loader";
-import { directTestProvider, nativeAnswer, directCreationContext } from "../../testing/direct-provider";
+import { directTestProvider, nativeAnswer, directCreationContext, directDecisionContext } from "../../testing/direct-provider";
 import { DirectWorldAlgorithm } from "../algorithm";
 import { SimulationEngine } from "../../runtime/simulation";
 import { historyReplayBaseHash } from "../../runtime/history-replay";
@@ -81,6 +81,11 @@ describe("direct world through the actual simulation entry", () => {
     await f.engine.bootstrapAgents();
     const result = await f.engine.step(f.roster, f.request("向守门人询问现在能否通行"));
     expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "speak", utterance: "请问现在能通行吗？" });
+    const uses = result.state.history[0]!.directEvent!.decisions;
+    expect(uses.filter(use => use.batch.view.kind === "agent").flatMap(use => use.result.dispatches.map(dispatch => dispatch.profileId)))
+      .toEqual(["decision-deepseek"]);
+    expect(uses.filter(use => use.batch.view.kind === "world").flatMap(use => use.result.dispatches.map(dispatch => dispatch.profileId)))
+      .toContain("decision-jev");
   });
   it.each([["yard", "courtyard"], ["door", "gate"]])("searches around the known %s without restricting world-defined entity kinds", async (searchLocation, entityId) => {
     const f = await fixture({ operation: "speak", recipient: "discover", searchLocation, speech: "create" });
@@ -116,17 +121,17 @@ describe("direct world through the actual simulation entry", () => {
     const observed = await f.engine.step(f.roster, f.request("查看门的状态"));
     options.operation = "speak"; options.target = "guard"; options.speech = "create";
     await f.engine.step(f.roster, f.request("如实报告刚才观察到的情况", 1));
-    const creations = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => !wire.questions);
+    const creations = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => !directDecisionContext(wire));
     const context = directCreationContext(creations.at(-1));
     expect((context.currentObservedFacts as unknown[]).length).toBeGreaterThan(0);
     expect(context.currentObservedFacts).toEqual(expect.arrayContaining(Object.values(observed.state.agents.player!.belief.claims).map(claim =>
       expect.objectContaining({ predicate: claim.predicate, value: claim.value, stance: claim.stance }))));
     expect(JSON.stringify(context.currentObservedFacts)).not.toContain("PRIVATE-CODE");
-    const choices = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => wire.questions?.operation);
-    expect(choices.at(-1).state.currentObservedFacts).toEqual(context.currentObservedFacts);
-    expect(choices.at(-1).state.recentActions).toEqual([expect.objectContaining({ target: "door", requested: "查看门的状态", actionKind: "observe" })]);
-    expect(JSON.stringify(choices.at(-1).state.currentObservedFacts)).not.toContain("PRIVATE-CODE");
-    expect(JSON.stringify(choices.at(-1).state.recentActions)).not.toContain("canonicalEntityIds");
+    const choices = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).map(directDecisionContext).filter(wire => wire?.questions.operation);
+    expect((choices.at(-1)!.state as Record<string, unknown>).currentObservedFacts).toEqual(context.currentObservedFacts);
+    expect((choices.at(-1)!.state as Record<string, unknown>).recentActions).toEqual([expect.objectContaining({ target: "door", requested: "查看门的状态", actionKind: "observe" })]);
+    expect(JSON.stringify((choices.at(-1)!.state as Record<string, unknown>).currentObservedFacts)).not.toContain("PRIVATE-CODE");
+    expect(JSON.stringify((choices.at(-1)!.state as Record<string, unknown>).recentActions)).not.toContain("canonicalEntityIds");
     expect(replaySimulationState(f.engine.snapshot)).toEqual(f.engine.snapshot);
   });
   it("keeps an NPC's immediate physical follow-through linked to the triggering action", async () => {
@@ -189,9 +194,9 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.committed.observations[0]!.scene?.details).toContainEqual({ label: "抱木箱的人", description: "磨白的短外衣，怀里抱着木箱。" });
     expect(result.state.truth.placements[newAgent.entityId]).toBe("courtyard");
     const wires = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body)));
-    const creation = wires.find(wire => !wire.questions);
+    const creation = wires.find(wire => !directDecisionContext(wire));
     expect(directCreationContext(creation).establishedEntities).toEqual(expect.arrayContaining([expect.objectContaining({ id: "gate" })]));
-    expect(wires.filter(wire => wire.questions && wire.state.perspective).every(wire => !wire.state.establishedEntities)).toBe(true);
+    expect(wires.map(directDecisionContext).filter(wire => (wire?.state as { perspective?: unknown })?.perspective).every(wire => !(wire!.state as { establishedEntities?: unknown }).establishedEntities)).toBe(true);
     expect(result.state.history[0]!.directEvent!.reads).toHaveProperty("catalog:entities");
     const replay = replaySimulationState(result.state);
     expect(replay).toEqual(result.state); expect(Object.keys(replay.agents)).toHaveLength(3);

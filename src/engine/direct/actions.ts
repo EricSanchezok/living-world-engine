@@ -60,7 +60,9 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const { state, control, decisions, agentId, external } = input;
   const agent = state.agents[agentId]!, intent = control.intents[agentId]!, view = privateActionView(state, agentId);
   if (external) intent.activeSubmission = structuredClone(external);
-  const profiles = agentCapabilityModels(state, control, agentId);
+  const configuredProfiles = agentCapabilityModels(state, control, agentId);
+  // Open player language needs interpretation before the world judges its effects.
+  const profiles = external && input.creationEnabled ? { ...configuredProfiles, decision: configuredProfiles.fallback } : configuredProfiles;
   const goals = orderedValues(agent.character.goals).filter(goal => goal.status === "active");
   const text = external?.rawText ?? "";
   const quotes = literalUtterances(text);
