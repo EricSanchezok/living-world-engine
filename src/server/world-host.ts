@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { loadPromptAsset } from "../engine/prompts";
 import { agentCapabilityModels } from "../engine/models/capability-bindings";
-import { enqueueNarrative, completeParagraphs, renderNarrativeParagraph, narrativeFallback, checkNarrativeGrounding, type NarrativeBeat } from "./world-narrative";
+import { enqueueNarrative, completeParagraphs, renderNarrativeParagraph, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, checkNarrativeGrounding, type NarrativeBeat } from "./world-narrative";
 import { randomUUID } from "node:crypto";
 import { rmSync } from "node:fs";
 import path from "node:path";
@@ -661,7 +661,7 @@ export class WorldHost {
             kind: "model-audit", stage: "scene-narrative", owner: beat.id, round: 0, ordinal: beat.attempts + 1 }),
           promptVersion: NARRATIVE_PROMPT_VERSION, schemaName: "SceneNarrativeV1",
           system: NARRATIVE_SYSTEM, userPrompt: NARRATIVE_USER,
-          context: { scene: beat.source, publishedPrefix: prefix,
+          context: { scene: narrativeEvidence(beat.source), publishedPrefix: prefix,
             previousScenes: document.narratives.filter(item => item.participantId === beat.participantId && item.id !== beat.id && item.segments.length)
               .slice(-3).map(item => item.segments.map(segment => segment.text).join("\n\n")),
             repair: beat.error },
@@ -679,6 +679,7 @@ export class WorldHost {
         await publication;
         if (publicationError !== undefined) throw publicationError;
         await publish(completeParagraphs(JSON.stringify(result.value)));
+        requireDeliveredSpeech(beat.source, this.read(id).document.narratives.find(item => item.id === beat.id)!.segments.map(segment => segment.text));
         execution?.trace.flush();
         if (execution && this.options.ledger) this.options.ledger.finishExecution(execution.id,
           { status: "succeeded", semanticHash: contentHash(result.value), stateHash: contentHash(this.read(id).document.state) });

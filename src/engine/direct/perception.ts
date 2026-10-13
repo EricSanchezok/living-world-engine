@@ -30,9 +30,11 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       const concreteAttempt = settlement.frame.kind === "move" ? `走向${targetLabel}`
         : settlement.frame.kind === "observe" ? settlement.frame.observationScope === "inventory" ? "清点随身物资" : `查看${targetLabel}`
         : settlement.frame.expression?.attempt ?? settlement.frame.proposal.rawText;
-      const spoken = settlement.frame.utterance && settlement.deliveredToEntityIds.includes(agent.entityId);
+      const completedExpression = ["succeeded", "partial"].includes(settlement.outcome.status);
+      const voiced = completedExpression && settlement.frame.kind !== "reflect" ? settlement.frame.utterance : null;
+      const spoken = voiced && settlement.deliveredToEntityIds.includes(agent.entityId);
       let summary = spoken ? `${alias(agent, settlement.frame.actorEntityId, introductions).name}说：“${settlement.frame.utterance}”` :
-        ownerId === settlement.frame.actorId ? `你尝试了“${concreteAttempt}”。${settlement.outcome.summary}` : settlement.outcome.summary;
+        ownerId === settlement.frame.actorId ? `你尝试了“${concreteAttempt}”。${settlement.outcome.summary}${voiced && settlement.frame.kind !== "speak" ? `你说：“${voiced}”` : ""}` : settlement.outcome.summary;
       if (ownerId === settlement.frame.actorId && settlement.frame.kind === "reflect") {
         summary += `\n${settlement.frame.utterance ?? (Object.values(agent.belief.evidence).map(evidence =>
           `${evidence.kind === "testimony" ? "听到的说法" : evidence.kind === "observation" ? "观察记录" : "已有记录"}：${evidence.description}`).join("\n") || "你还没有可供核对的记录。")}`;
@@ -64,14 +66,12 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       for (const fact of facts) summary += `\n${alias(agent, fact.subjectId, introductions).name}：${fact.value.kind === "entity"
         ? describeValue(agent, fact.value, introductions) : fact.description}`;
       const id = runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "observation", stage: "direct-perception", owner: ownerId, round: 0, ordinal: index });
-      const completedExpression = ["succeeded", "partial"].includes(settlement.outcome.status);
       const actorEntity = alias(agent, settlement.frame.actorEntityId, introductions);
       const actor = ownerId === settlement.frame.actorId ? "你" : renamed.find(entity => entity.id === actorEntity.id)?.name ?? actorEntity.name;
       const packet: ObservationPacket = { id, observerId: ownerId, step, kind: "outcome", summary, introductions, apparentClaims: [], sourceEventIds: [events[index]!.id],
         scene: { actionKind: settlement.frame.kind, status: settlement.outcome.status, actor, attempt: ownerId === settlement.frame.actorId ? concreteAttempt : "", outcome: settlement.outcome.summary.replace(/^你/u, actor),
           manner: completedExpression ? settlement.frame.expression?.manner ?? null : null,
-          speech: settlement.frame.kind === "speak" && completedExpression && settlement.frame.utterance &&
-            (ownerId === settlement.frame.actorId || spoken) ? { speaker: actor, utterance: settlement.frame.utterance } : null, details } };
+          speech: voiced && (ownerId === settlement.frame.actorId || spoken) ? { speaker: actor, utterance: voiced } : null, details } };
       const evidenceId = runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "evidence", stage: "direct-perception", owner: ownerId, round: 0, ordinal: index });
       const patch: BeliefPatch = { agentId: ownerId, baseRevision: state.revision + 1, operations: [{ kind: "upsert_evidence", evidence: {
         id: evidenceId, kind: settlement.frame.kind === "reflect" ? "inference" : spoken ? "testimony" : "observation", description: summary, sourceId: id, step } },

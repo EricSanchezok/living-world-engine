@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { completeParagraphs, renderNarrativeParagraph, narrativeFallback, type ScenePacket } from "../world-narrative";
+import { completeParagraphs, renderNarrativeParagraph, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, type ScenePacket } from "../world-narrative";
 
 const source: ScenePacket = {
   participantId: "reader", agentId: "traveler", submissionId: "action", submittedAt: null, requestedAction: "问价",
@@ -25,5 +25,20 @@ describe("immutable narrative paragraphs", () => {
   });
   it("keeps factual speech when the prose service is unavailable", () => {
     expect(narrativeFallback(source)).toBe("店主说：“三枚金币；我还没同意赊账。”");
+  });
+  it("requires the actual delivered words before completing a beat", () => {
+    expect(() => requireDeliveredSpeech(source, ["店主报了一个价。"])) .toThrow("missing delivered");
+    expect(() => requireDeliveredSpeech(source, ["店主说：“三枚金币；我还没同意赊账。”"])) .not.toThrow();
+  });
+  it("keeps the raw requested action in the audit but out of the prose evidence", () => {
+    expect(narrativeEvidence(source)).not.toHaveProperty("requestedAction");
+    expect(narrativeEvidence(source).speech).toEqual(source.speech);
+    expect(source.requestedAction).toBe("问价");
+  });
+  it("does not repeat a scene tour after an already published prefix", () => {
+    const detailed = structuredClone(source);
+    detailed.observations[0]!.scene!.details = [{ label: "店门", description: "木门开着" }];
+    detailed.observations[0]!.summary += "\n店门：木门开着\n店门：木门";
+    expect(narrativeFallback(detailed, ["木门朝街道敞开。"])) .toBe("店主说：“三枚金币；我还没同意赊账。”");
   });
 });

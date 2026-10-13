@@ -17,8 +17,8 @@ import { extendCapability } from "./capabilities";
 
 const kinds: Record<ActionKind | "unknown" | "expand", string> = { move: "Travel to a place", observe: "Inspect, notice or investigate",
   reflect: "Review one's existing records, distinguish evidence from inference, formulate a question or think through a plan privately",
-  speak: "Ask a question, make an offer, reply, or communicate words, including to an unfamiliar visible person", transfer: "Give or pay an owned resource or object", use: "Use a tool, ability or object",
-  change: "Change an existing object's state", wait: "Wait for an event or continue a long activity", unknown: "Cannot identify any next attempt, even a question or observation",
+  speak: "Communicate actual words: ask, offer, reply or request someone else's action", transfer: "Personally give or pay an owned resource or object", use: "Use one's body, a tool, ability or object to attempt a concrete physical effect",
+  change: "Change a state or access condition, including physically blocking or clearing a route", wait: "Listen without speaking, await an event or continue a long activity", unknown: "Cannot identify any next attempt, even a question or observation",
   expand: "A missing concept or capability is required" };
 const actionLabels: Record<ActionKind, string> = { move: "前往", observe: "观察", reflect: "思考", speak: "交谈", transfer: "交付", use: "使用", change: "调整", wait: "等待" };
 function choice(field: string, criteria: Record<string, string | Record<string, JsonValue> | JsonValue[] | null>): DecisionQuestionV2 {
@@ -103,6 +103,11 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   if (!external && intent.lastActionHash && intent.wakeReasons.includes("observation")) questions.relevant = { type: "noul", version: "wake-relevance-1",
     instructions: { task: loadPromptAsset("user/direct-action.md"), field: "Does the new observation require changing the prior wait or responding now?" } };
   if (resources.length) questions.resource = choice("resource", { none: "No quantified resource", ...Object.fromEntries(resources.map(id => [id, state.truth.mechanics.quantities[id]!.name])) });
+  if (external) questions.transfer_authority = choice("For the hypothetical transfer branch: does this CURRENT submission authorize the PLAYER to give their own goods now? Prior negotiations and another person's demand are not permission. Check any explicit condition against actual delivered evidence.", {
+    give: "The player explicitly authorizes their own transfer now, and its stated conditions are met",
+    request: "The player asks ANOTHER person to deliver, return or give something; this is speech, not payment by the player",
+    pending: "The player's transfer condition is not established, or the input does not authorize a transfer",
+  });
   const claims = orderedValues(agent.belief.claims);
   if (claims.length) questions.claim = choice("existing belief to express, used only by a report", { none: "No claim to express", ...Object.fromEntries(claims.map(claim =>
     [claim.id, { description: claim.description, value: claim.value as unknown as JsonValue, stance: claim.stance }])) });
@@ -122,9 +127,21 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   intent.goalProgress = { ...intent.goalProgress, ...cognition.goals };
   if (answers.urgency?.type === "score") intent.urgency = answers.urgency.score;
   intent.lastInputHash = inputHash; intent.wakeReasons = []; intent.failure = null; intent.dependencies = view.reads;
-  const operation = selected(answers, "operation");
+  let operation = selected(answers, "operation");
+  if (external && operation === "transfer" && selected(answers, "transfer_authority") !== "give") {
+    operation = selected(answers, "transfer_authority") === "request" ? "speak" : "wait";
+  }
+  if (operation === "speak" && selected(answers, "speech") === "none" && selected(answers, "recipient") !== "discover") operation = "wait";
   intent.goalId = questions.goal && selected(answers, "goal") !== "none" ? selected(answers, "goal") : null;
-  const targetKey = ["speak", "transfer"].includes(operation) ? selected(answers, "recipient") : selected(answers, "target");
+  let targetKey = ["speak", "transfer"].includes(operation) ? selected(answers, "recipient") : selected(answers, "target");
+  if (operation === "speak" && targetKey === "none") {
+    const resolved = await decisions.ask(agentId, { ...context as Record<string, JsonValue>, concreteOperation: "speak",
+      selectedSpeech: selected(answers, "speech") }, view.reads, {
+      recipient: choice("Speech has actually been selected. Resolve where THESE words are addressed. An open reminder to everyone uses broadcast. A specific unseen person uses discover. A silent listening action uses none. Do not require a known name for an open call.", recipientCriteria),
+    }, profiles);
+    targetKey = selected(resolved, "recipient");
+    if (targetKey === "none") operation = "wait";
+  }
   const observationScope = selected(answers, "observation_scope") as ActionFrame["observationScope"];
   const target = operation === "observe" && observationScope === "inventory" ? agent.entityId
     : operation === "observe" && observationScope === "surroundings" ? null : view.entities[targetKey] ?? null;
@@ -148,13 +165,16 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       profileId: profiles.creation, subjectId: agentId, role: "creation", modelInvocation: decisions.next(agentId),
       system, userPrompt, promptVersion: `action-expression-${contentHash({ system, userPrompt })}`, schemaName: "ActionExpressionV1",
       context: { ...context as Record<string, JsonValue>, language: input.definition.narrative.language, recipient: operation === "reflect" ? null : targetKey,
-        chosenDirection: operation, communicativeIntent: selected(answers, "dialogue"), playerControlled: Boolean(external),
+        chosenDirection: operation, communicativeIntent: external && selected(answers, "transfer_authority") === "request"
+          ? "Request the other person's action; do not offer payment or accept any new terms" : selected(answers, "dialogue"), playerControlled: Boolean(external),
+        currentPlayerRequest: external?.rawText ?? null,
+        currentHoldings: (view.state as { mechanics: { quantities: JsonValue } }).mechanics.quantities,
         exactQuotes: quotes, expression: operation === "reflect" ? "Private reflection; do not deliver to anyone." : "Concrete attempted behavior and actual words before execution. Outcomes are not yet decided." },
       schema: z.object({ attempt: z.string().optional(), utterance: z.string().nullable().optional(), manner: z.string().nullable().optional() }), jsonExamplePolicy: "omit" });
     expression = { attempt: generated.value.attempt?.trim() || text || actionLabels[operation as ActionKind] || "尝试行动",
-      utterance: literal && external ? literal : generated.value.utterance?.trim() || null, manner: generated.value.manner?.trim() || null };
+      utterance: literal && external && (operation === "speak" || generated.value.utterance?.trim()) ? literal : generated.value.utterance?.trim() || null, manner: generated.value.manner?.trim() || null };
     utterance = expression.utterance; audits.push(generated.audit);
-  } else if (literal && external) utterance = literal;
+  } else if (literal && external && operation === "speak") utterance = literal;
   else if (["speak", "reflect"].includes(operation) && !preparatoryFor) {
     if (/^span\d+$/u.test(speech)) utterance = spans[Number(speech.slice(4))] ?? null;
     else if (speech === "input" && external) utterance = text;

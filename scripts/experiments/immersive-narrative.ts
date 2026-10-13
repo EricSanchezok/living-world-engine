@@ -40,7 +40,7 @@ export const NARRATIVE_DEVELOPMENT: Flow[] = [
 ];
 
 // Held out from development. Freeze this file and producer before running these flows.
-export const NARRATIVE_CONFIRMATION: Flow[] = [
+export const NARRATIVE_CONFIRMATION_RETIRED: Flow[] = [
   { id: "quiet-observation", world: "blackmarsh", inputs: ["不出声，仔细看看临街金匠店的门面。", "走近招牌，确认店铺叫什么。", "暂时不进店，回头看看码头上的人。"] },
   { id: "joke", world: "blackmarsh", inputs: ["对附近的旅人笑着说：\"这地方的风是在替我们擦脸吗？\"", "问他如何称呼，愿不愿意一起找个避雨处。", "告诉他我还没想好要去哪里，先不承诺同行。"] },
   { id: "false-authority", world: "blackmarsh", inputs: ["对附近的人说：\"我是新来的港务官。\"试探他的反应，实际上我没有凭证。", "如果他要求凭证，就承认这只是个玩笑。", "向他道歉，转而认真询问进城的方向。"] },
@@ -55,6 +55,22 @@ export const NARRATIVE_CONFIRMATION: Flow[] = [
   { id: "waiting", world: "station-program-world", inputs: ["请杜衡考虑能否赊给我一个组件；没答应之前我不会拿。", "安静等三秒钟，留意他有没有实际答复。", "若仍未明确答应，就说不用为难，撤回赊账请求。"] },
 ];
 
+// A new frozen cohort after the first confirmation exposed failures. The retired cohort is regression material.
+export const NARRATIVE_CONFIRMATION: Flow[] = [
+  { id: "brief-reply", world: "blackmarsh", inputs: ["朝背着行囊的旅人问声好，问他这儿平时也这么冷吗。", "只回答一句：\"嗯，我先缓口气。\"", "安静待片刻，看看他是继续说话还是忙自己的事。"] },
+  { id: "confide", world: "blackmarsh", inputs: ["走近背着行囊的旅人，小声说：\"我初来乍到，有点拿不准这里的规矩。\"", "问他有没有踩过什么坑；不认识的地方不要装作去过。", "告诉他我只想听建议，还没决定照做。"] },
+  { id: "public-notice", world: "blackmarsh", inputs: ["在港口的公共区域找找有没有告示，想了解本地的安排。", "若有告示就读上面能看清的内容；没找到就向附近的人询问。", "把刚才看到或听到的线索记下来，分清告示写的和别人猜测的。"] },
+  { id: "missing-possession", world: "blackmarsh", inputs: ["清点我实际带来的随身物品。", "试着把我并不拥有的一盏铜灯递给旅人，看看实际上能否做到。", "若没有交出灯，就如实告诉他东西没带来，不要假装交付成功。"] },
+  { id: "courier-arrival", world: "blackmarsh", inputs: ["在码头公共通道边等一会，留意是否有路过送信的人可以问路。", "如果确实遇到了送信人，就先问他是否有空，别直接替他决定停下。", "向愿意回应的人询问哪里能打听临时住宿，不要求他立刻带路。"] },
+  { id: "revisit-signs", world: "blackmarsh", inputs: ["看清港边两家店的招牌，把名字分别记住。", "朝 Abrams Company 的门面走近，在门外停下。", "回望刚才金匠店的位置，看看两家的标识有没有记混。"] },
+  { id: "accepted-payment", world: "station-program-world", inputs: ["问杜衡密封组件的确切售价，并说明我现在还没接受。", "若条件是两节电池换一个组件，就说我接受这一条件，先别实际交货。", "按已经明确接受的两节电池价格付款；若条件尚未成立就先核对，不能超付。", "清点已经交出的电池和实际到手的组件，然后请对方补齐尚未履行的部分。"] },
+  { id: "correct-the-record", world: "station-program-world", inputs: ["对杜衡说：\"我已经把两节电池给你了。\"但实际上我还没交付，试试他会不会核对。", "查看自己的电池数量，确认刚才的话与实际物资是否相符。", "根据清点结果纠正刚才的说法，不能借道歉之机自动付款。"] },
+  { id: "conditional-certification", world: "station-program-world", inputs: ["查看泵是否密封，以及本轮压力测试是否已经稳定。", "只有两项实际完成才请求乔伊认证；否则请他说明还有哪一项没完成。", "复述尚未完成的事项，告诉他我现在不会假报修复成功。"] },
+  { id: "label-and-reuse", world: "station-program-world", inputs: ["找一小片无主废料，想放在检修区域做醒目的临时提示。", "若确实找到，就把它放到泵旁作为提醒物；不要把提醒当作维修。", "请乔伊看看这个提示是否能让后来的人注意到泵仍待检修。"] },
+  { id: "decline-delegation", world: "station-program-world", inputs: ["问乔伊能否代我完成压力测试，先听他答复。", "告诉他我暂时撤回代测请求，不要继续安排这件事。", "再问他目前我们有哪些明确完成的工作，哪些只是说过而没做。"] },
+  { id: "nonverbal-coordination", world: "station-program-world", inputs: ["不说话，抬手向乔伊示意暂停操作，等他反应。", "用明确的手势请他让出操作台旁的位置；如果他没懂，就再开口说明。", "站在原地说：\"谢谢，我只是想先看清楚，现在还不操作。\""] },
+];
+
 export const NARRATIVE_CONTINUOUS: Flow[] = [
   { id: "harbor-session", world: "blackmarsh", inputs: [
     "环顾港区，先认清周围的人与店铺。", "跟附近的旅人打招呼，问他怎么称呼。", "告诉他我刚下船，问他有没有避雨的建议。",
@@ -62,8 +78,8 @@ export const NARRATIVE_CONTINUOUS: Flow[] = [
     "观察店内是否有人，若能交谈就先打招呼，不擅自拿东西。", "询问店主是否愿意给新来者介绍这条街。", "请他推荐一个普通人负担得起的住宿去处。",
     "回想刚才旅人和店内的人分别说了什么，找出一致与不确定之处。", "离开时告别，记住尚未核实的住宿线索。" ] },
   { id: "station-session", world: "station-program-world", inputs: [
-    "看看冷却泵的现状，清点我的实际物资。", "问杜衡一个密封组件需要怎样交换。", "我说：\"一节电池换一个组件，你同意吗？\"",
-    "如果他明确同意，就实际交给他一节电池。", "请他交付约定的组件，再确认我实际收到的数量。", "向乔伊询问测试所需校验码与步骤。",
+    "看看冷却泵的现状，清点我的实际物资。", "问杜衡一个密封组件需要怎样交换。", "我说：\"两节能量电池换一个密封组件，我接受这个条件，你同意吗？\"",
+    "如果他明确同意，就实际交给他两节能量电池。", "先清点已收到的组件；若尚未交付，再请他交付约定的一件。", "向乔伊询问测试所需校验码与步骤。",
     "如果组件已收到，就用一个密封组件和两升冷却剂修复泵的密封；否则先指出缺少材料。", "查看维修后的密封状态，告诉乔伊实际观察到的结果。",
     "仅在密封已修复且已获知校验码的情况下进行压力测试，否则先补足条件。", "请乔伊独立检查本轮结果，并决定是否认证。",
     "向同事说明已完成和仍未完成的事项，清点物资并感谢他们。" ] },
@@ -72,13 +88,14 @@ export const NARRATIVE_CONTINUOUS: Flow[] = [
 async function main() {
   const phase = process.argv[2] ?? "development", selected = process.argv[3];
   const flows = (phase === "development" ? NARRATIVE_DEVELOPMENT : phase === "confirmation" ? NARRATIVE_CONFIRMATION
+    : phase === "regression" ? NARRATIVE_CONFIRMATION_RETIRED
     : phase === "continuous" ? NARRATIVE_CONTINUOUS : []).filter(flow => !selected || selected.split(",").includes(flow.id));
-  if (!flows.length) throw new Error("Choose development, confirmation or continuous and optional comma-separated flow IDs");
+  if (!flows.length) throw new Error("Choose development, regression, confirmation or continuous and optional comma-separated flow IDs");
   const root = path.resolve(".livingworld-benchmarks/jev-engine"), trial = `narrative-${phase}-${Date.now()}`;
   const directory = path.join(root, trial); mkdirSync(directory);
   const save = (name: string, value: unknown) => writeFileSync(path.join(directory, name), JSON.stringify(value, null, 2), { flag: "wx", flush: true });
   const diff = execFileSync("git", ["diff", "HEAD"], { encoding: "utf8" });
-  if (phase !== "development" && execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim()) throw new Error("Freeze a clean producer for confirmation");
+  if (["confirmation", "continuous"].includes(phase) && execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim()) throw new Error("Freeze a clean producer for confirmation");
   let stopped: string | undefined;
   const live = createJevLiveBudget(root, () => stopped ?? (phase === "development" && live.budget.summary.tranche &&
     live.budget.summary.tranche.knownNanoCny + live.budget.summary.tranche.reservedNanoCny > 9_500_000_000 ? "development probe ceiling" : undefined));

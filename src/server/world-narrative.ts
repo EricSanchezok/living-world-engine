@@ -40,6 +40,13 @@ export interface NarrativeBeat {
   grounding: Array<{ start: number; inputHash: string; choices: string[]; invocationIds: string[] }>;
 }
 
+/** The audit retains the request; prose receives only the action that actually executed. */
+export function narrativeEvidence(source: ScenePacket) {
+  const { requestedAction: _request, ...evidence } = source;
+  void _request;
+  return evidence;
+}
+
 /** Called in the world transaction. Never performs model work. */
 export function enqueueNarrative(document: WorldInstanceDocument, now: string): void {
   for (const participant of Object.values(document.participants).filter(p => p.status === "active")) {
@@ -87,7 +94,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
 /** A single narrow publication decision for each available batch of complete paragraphs. */
 export async function checkNarrativeGrounding(provider: StructuredModelProvider, scope: ModelExecutionScope,
   source: ScenePacket, paragraphs: string[], profileId: string, fallbackProfileId: string, ordinal: number) {
-  const state = { scene: source, paragraphs } as unknown as JsonValue;
+  const state = { scene: narrativeEvidence(source), paragraphs } as unknown as JsonValue;
   return executeDecisionV2(provider, { ...scope, profileId, fallbackProfileId, subjectId: source.agentId,
     modelInvocation: ordinal, batch: { version: 2, view: { kind: "agent", agentId: source.agentId, projectionHash: contentHash(state) },
       dependencies: {}, state, questions: Object.fromEntries(paragraphs.map((_, index) => [`paragraph${index}`, {
@@ -138,14 +145,21 @@ export function renderNarrativeParagraph(text: string, source: ScenePacket): str
   if (!rendered || /\[\[|\]\]/u.test(rendered)) throw new Error("Narrative paragraph is empty or contains an unresolved reference");
   return rendered;
 }
+export function requireDeliveredSpeech(source: ScenePacket, paragraphs: string[]): void {
+  const text = paragraphs.join("\n");
+  if (source.speech.some(speech => !text.includes(speech.utterance))) {
+    throw new Error("Include the missing delivered speech references after the published prefix; do not replay earlier paragraphs");
+  }
+}
 export function narrativeFallback(source: ScenePacket, published: string[] = []): string {
   const existing = published.join("\n");
   const paragraphs = source.observations.map(observation => {
     const scene = observation.scene;
     if (!scene) return observation.summary;
     return [scene.speech ? existing.includes(scene.speech.utterance) ? "" : `${scene.speech.speaker}说：“${scene.speech.utterance}”` : scene.outcome,
-      ...scene.details.map(detail => `${detail.label}：${detail.description}`),
-      ...observation.summary.split("\n").slice(1)].filter(text => text && !existing.includes(text)).filter((text, index, all) => all.indexOf(text) === index).join("\n");
+      ...(published.length ? [] : scene.details.map(detail => `${detail.label}：${detail.description}`)),
+      ...observation.summary.split("\n").slice(1).filter(line => line.startsWith("随身物资：") || line.includes("转移了"))]
+      .filter(text => text && !existing.includes(text)).filter((text, index, all) => all.indexOf(text) === index).join("\n");
   }).filter(text => text && !existing.includes(text));
   return paragraphs.join("\n\n") || (published.length ? "" : "眼前的情况还没有出现新的变化。");
 }

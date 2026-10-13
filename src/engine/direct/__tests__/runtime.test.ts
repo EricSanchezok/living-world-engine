@@ -14,13 +14,15 @@ import { speechSpans } from "../actions";
 
 async function fixture(options: { operation?: string; target?: string; tool?: string; amount?: string; failKeeper?: boolean;
   observationScope?: string; speech?: string; creationEnabled?: boolean; privateGateFact?: boolean; named?: boolean;
-  creationResponse?: unknown; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number } = {}) {
+  creationResponse?: unknown; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
+  recipient?: string; resolvedRecipient?: string; transferAuthority?: string } = {}) {
   const f = directTestProvider(wire => {
     if (!wire.questions) return options.creationResponse ?? { attempt: "复核已有证据", utterance: "观察与他人的说法需要分开核对；下一步询问消息来源。" };
-    const context = wire.state as { perspective?: { agentId: string }; submittedAction?: { rawText: string } };
+    const context = wire.state as { perspective?: { agentId: string }; submittedAction?: { rawText: string }; concreteOperation?: string };
     if (options.failKeeper && context.perspective?.agentId === "keeper") return new Response("unavailable", { status: 503 });
-    const selection: Record<string, string> = { operation: options.operation ?? "observe", target: options.target ?? "door", recipient: options.target ?? "none", tool: options.tool ?? "none",
+    const selection: Record<string, string> = { operation: options.operation ?? "observe", target: options.target ?? "door", recipient: context.concreteOperation ? options.resolvedRecipient ?? "discover" : options.recipient ?? options.target ?? "none", tool: options.tool ?? "none",
       amount: options.amount ?? "n0", resource: "spirit-stone", speech: options.speech ?? "q0", timing: "default", goal: "none",
+      transfer_authority: options.transferAuthority ?? "give",
       observation_scope: options.observationScope ?? "target" };
     selection.reflection = options.speech ?? "none";
     return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
@@ -72,6 +74,22 @@ describe("direct world through the actual simulation entry", () => {
     const result = await f.engine.step(f.roster, f.request('向守门人摆手，说："我只是打个招呼。"'));
     expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ utterance: "我只是打个招呼。", expression: { manner: "摆手致意" } });
     expect(result.committed.observations.find(o => o.observerId === "keeper")?.scene?.speech?.utterance).toBe("我只是打个招呼。");
+  });
+  it("delivers an accompanying utterance with a physical action and records it for every actual listener", async () => {
+    const f = await fixture({ operation: "change", target: "door", speech: "create", expression: 1, creationEnabled: true,
+      creationResponse: { attempt: "让开门前通道并说明还没有开门", utterance: "我还没有开门。", manner: "侧身让开" } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("让开门前通道，并说明还没有开门"));
+    for (const owner of ["player", "keeper"]) expect(result.committed.observations.find(o => o.observerId === owner)?.scene?.speech?.utterance).toBe("我还没有开门。");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("does not speak a later quoted sentence during an approach with no utterance", async () => {
+    const f = await fixture({ operation: "move", target: "guard", speech: "q0", expression: 1, creationEnabled: true,
+      creationResponse: { attempt: "走近守门人", utterance: null, manner: null } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request('先走近守门人，然后问：“门能开吗？”'));
+    expect(result.state.history[0]!.directEvent!.frames[0]!.utterance).toBeNull();
+    expect(result.committed.observations.every(o => o.scene?.speech === null)).toBe(true);
   });
   it("admits persistent new people with their own cognition and queues them without leaking private motivation", async () => {
     const f = await fixture({ target: "none", observationScope: "surroundings", creationEnabled: true, introduce: true,
@@ -143,12 +161,32 @@ describe("direct world through the actual simulation entry", () => {
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
   it("discovers a missing recipient before speech and retains the original player request", async () => {
-    const f = await fixture({ operation: "speak", target: "none" }); await f.engine.bootstrapAgents();
+    const f = await fixture({ operation: "speak", target: "none", recipient: "discover" }); await f.engine.bootstrapAgents();
     const result = await f.engine.step(f.roster, f.request("寻找能回答的人，询问附近哪里能住宿"));
     expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "observe", preparatoryFor: "speak", utterance: null });
     const intent = readDirectState(result.state.executionState!, result.state).intents.player!;
     expect(intent.activeSubmission?.submissionId).toBe("submission-0"); expect(intent.status).toBe("ready");
     expect(f.transport).toHaveBeenCalledTimes(2); expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("resolves an inconsistent empty speech recipient without leaking to an unintended audience", async () => {
+    const f = await fixture({ operation: "speak", recipient: "none", resolvedRecipient: "guard", speech: "q0" });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request('向守门人说：“请等一下。”'));
+    expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "speak", targetEntityId: "keeper", preparatoryFor: null });
+    expect(f.transport).toHaveBeenCalledTimes(3);
+  });
+  it("listens without inventing an utterance or starting another discovery loop", async () => {
+    const f = await fixture({ operation: "speak", recipient: "none", speech: "none" }); await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("听完对方的条件，暂时不承诺"));
+    expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "wait", utterance: null, preparatoryFor: null });
+    expect(f.transport).toHaveBeenCalledTimes(2);
+  });
+  it("does not pay the player's money when they asked the other person to deliver", async () => {
+    const f = await fixture({ operation: "transfer", target: "guard", transferAuthority: "request", speech: "q0" });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request('请守门人交还灵石，说：“请把东西交给我。”'));
+    expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "speak", utterance: "请把东西交给我。" });
+    expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
   });
   it("reports the actor's owned quantities during self inspection", async () => {
     const f = await fixture({ operation: "observe", target: "self" }); await f.engine.bootstrapAgents();
