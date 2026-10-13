@@ -10,6 +10,21 @@ function root() { const directory = mkdtempSync(path.join(os.tmpdir(), "jev-budg
 afterEach(() => { for (const directory of roots.splice(0)) rmSync(directory, { recursive: true, force: true }); });
 
 describe("cumulative Jev qualification budget", () => {
+  it("can increase a reviewed unknown hold without inventing usage or another request", () => {
+    const journal = path.join(root(), "budget.jsonl"), budget = new ExperimentBudget(journal, JEV_BUDGET_POLICY);
+    budget.reserve({ id: "native", trialId: "closed", phase: "trajectory", priceId: "jev", inputCeiling: 64000, outputCeiling: 4e6 });
+    budget.markUnknown("native");
+    const evidence = { reason: "Reviewed lost usage; keep a larger conservative reserve", evidenceHash: "a".repeat(64) };
+    expect(() => budget.quarantineUnknown("native", { ...evidence, retainedCeiling: { input: 63000, output: 4e6 } })).toThrow("cannot decrease");
+    budget.quarantineUnknown("native", { ...evidence, retainedCeiling: { input: 100000, output: 4e6 } });
+    const restored = new ExperimentBudget(journal, JEV_BUDGET_POLICY);
+    expect(restored.summary.reservedNanoCny).toBe(100000 * 336);
+    expect(restored.summary.estimatedPeakNanoCny).toBe(0);
+    expect(restored.summary.phases.trajectory.httpRequests).toBe(1);
+    expect(restored.summary.blockingUnknown).toEqual([]);
+    expect(restored.summary.unknown).toEqual(["native"]);
+    expect(() => restored.reserve({ id: "again", trialId: "closed", phase: "trajectory", priceId: "jev", inputCeiling: 1, outputCeiling: 1 })).toThrow("permanently closed");
+  });
   it("deducts planning probes and reserves free-output native calls against the same ceiling", () => {
     expect(JEV_BUDGET_POLICY.maximumNanoCny).toBeLessThan(100e9);
     const journal = path.join(root(), "budget.jsonl"), budget = new ExperimentBudget(journal, JEV_BUDGET_POLICY);

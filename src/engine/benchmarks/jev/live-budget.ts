@@ -4,7 +4,7 @@ import path from "node:path";
 import { randomUUID } from "node:crypto";
 import { DECISION_MODEL_PRICES } from "../../models/model-cost";
 import { contentHash } from "../../models/model-audit";
-import { ExperimentBudget, deepSeekExperimentUsage, type ExperimentBudgetPolicy } from "../action-compilation/experiment-budget";
+import { ExperimentBudget, deepSeekExperimentUsage, type ExperimentBudgetPolicy, type ExperimentUsage } from "../action-compilation/experiment-budget";
 
 /** Conservative conversion for the entire qualification, including the planning probes. */
 export const JEV_PLANNING_NANO_CNY = Math.ceil(0.035729814 * 8 * 1_000_000_000);
@@ -41,15 +41,25 @@ export function createJevLiveBudget(root: string, stopReason: () => string | und
             if (body.model !== (native ? "jev-1.13.0" : "deepseek-flash")) throw new Error("unpriced live model");
             const id = randomUUID();
             budget.reserve({ id, trialId, phase: "trajectory", priceId: native ? "jev" : "deepseek",
-              inputCeiling: native ? 64000 : Buffer.byteLength(init.body, "utf8") + 4096,
+              // https://docs.typesafe.ai/models defines the combined 64k batch budget. Bytes bound fees only, never context eligibility.
+              inputCeiling: native ? Math.max(65_536, Buffer.byteLength(init.body, "utf8") + 4096) : Buffer.byteLength(init.body, "utf8") + 4096,
               outputCeiling: native ? 4_000_000 : Number(body.max_tokens ?? body.max_output_tokens) });
+            const settleUsage = (usage: ExperimentUsage, raw: string) => {
+              try { budget.settle(id, usage); }
+              catch (error) {
+                const evidence = { id, trialId, accountId, model: body.model, requestHash: contentHash(body), responseHash: contentHash(raw), usage };
+                mkdirSync(path.join(root, "usage-errors"), { recursive: true });
+                writeFileSync(path.join(root, "usage-errors", `${id}.json`), JSON.stringify(evidence), { flag: "wx", mode: 0o600, flush: true });
+                throw error;
+              }
+            };
             try {
               const response = await transport(url, init);
               if (response.ok && response.headers.get("content-type")?.includes("text/event-stream")) {
                 const observed = observeResponseStream(response, raw => {
                   const packets = raw.split(/\r?\n/u).filter(line => line.startsWith("data:") && !line.includes("[DONE]"))
                     .map(line => JSON.parse(line.slice(5).trim()) as { usage?: unknown });
-                  budget.settle(id, deepSeekExperimentUsage(packets.findLast(packet => packet.usage != null)));
+                  settleUsage(deepSeekExperimentUsage(packets.findLast(packet => packet.usage != null)), raw);
                 }, () => budget.markUnknown(id));
                 pending.add(observed.finished);
                 void observed.finished.finally(() => pending.delete(observed.finished)).catch(() => undefined);
@@ -72,8 +82,8 @@ export function createJevLiveBudget(root: string, stopReason: () => string | und
               } else value = JSON.parse(raw);
               if (native) {
                 const usage = (value as { usage: { input_tokens: number; output_tokens: number } }).usage;
-                budget.settle(id, { input: usage.input_tokens, output: usage.output_tokens, cacheHit: 0 });
-              } else budget.settle(id, deepSeekExperimentUsage(value));
+                settleUsage({ input: usage.input_tokens, output: usage.output_tokens, cacheHit: 0 }, raw);
+              } else settleUsage(deepSeekExperimentUsage(value), raw);
               return response;
             } catch (error) { budget.markUnknown(id); throw error; }
           })();

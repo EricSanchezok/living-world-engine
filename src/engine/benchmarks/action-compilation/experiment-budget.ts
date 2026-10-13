@@ -99,6 +99,7 @@ const entrySchema = z.discriminatedUnion("kind", [
   z.strictObject({
     kind: z.literal("quarantine"), id: z.string().min(1), reason: z.string().min(10),
     evidenceHash: z.string().regex(/^[a-f0-9]{64}$/u),
+    retainedCeiling: z.strictObject({ input: integer.positive(), output: integer.positive() }).optional(),
     budgetHash: z.string(), previousHash: z.string().nullable(),
   }),
   z.strictObject({
@@ -200,6 +201,7 @@ export class ExperimentBudget {
       blockingUnknown: unsettled.filter((id) => !this.liveRequests.has(id) && !this.quarantines.has(id) && !this.rejectedRequests.has(id)),
       rejectedRequests: [...this.rejectedRequests.values()].map(entry => structuredClone(entry)),
       quarantinedUnknown: unsettled.filter((id) => this.quarantines.has(id)),
+      reviewedHolds: [...this.quarantines.values()].filter(entry => entry.retainedCeiling).map(entry => structuredClone(entry)),
       reconciledOverruns: [...this.reconciledOverruns],
       originalEstimatedPeakNanoCny, priceReviews: structuredClone(this.priceReviews),
       registeredPrices: Object.fromEntries([...this.registeredPrices].map(([id, price]) => [id, structuredClone(price)])),
@@ -347,6 +349,12 @@ export class ExperimentBudget {
       }
     } else if (!this.reservations.has(entry.id) || this.settlements.has(entry.id) || this.quarantines.has(entry.id)) {
       throw new ExperimentBudgetError("quarantine requires an unresolved, unquarantined request");
+    } else if (entry.retainedCeiling) {
+      const original = this.reservations.get(entry.id)!;
+      if (entry.retainedCeiling.input < original.inputCeiling || entry.retainedCeiling.output < original.outputCeiling) {
+        throw new ExperimentBudgetError("reviewed unknown reserve cannot decrease");
+      }
+      this.charge(entry.retainedCeiling.input, entry.retainedCeiling.output, 0, original);
     }
   }
 
@@ -371,7 +379,11 @@ export class ExperimentBudget {
       if (entry.kind === "reconcile_overrun") this.reconciledOverruns.add(entry.id);
     }
     else if (entry.kind === "hold_http_rejection") this.rejectedRequests.set(entry.id, entry);
-    else this.quarantines.set(entry.id, entry);
+    else {
+      this.quarantines.set(entry.id, entry);
+      if (entry.retainedCeiling) this.reservations.set(entry.id, { ...this.reservations.get(entry.id)!,
+        inputCeiling: entry.retainedCeiling.input, outputCeiling: entry.retainedCeiling.output });
+    }
     this.lastHash = contentHash(entry);
   }
 
@@ -441,7 +453,7 @@ export class ExperimentBudget {
   }
 
   /** Explicit evidence review closes the source trial; it neither refunds nor fabricates usage. */
-  quarantineUnknown(id: string, evidence: { reason: string; evidenceHash: string }): void {
+  quarantineUnknown(id: string, evidence: { reason: string; evidenceHash: string; retainedCeiling?: { input: number; output: number } }): void {
     if (this.liveRequests.size) throw new ExperimentBudgetError("drain all live requests before quarantine");
     this.persist(entrySchema.parse({ kind: "quarantine", id, ...evidence,
       budgetHash: this.policyHash, previousHash: this.lastHash }));

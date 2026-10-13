@@ -206,7 +206,7 @@ async function main() {
         restartNarrativeEqual: contentHash(database.readInstance(id).document.narratives) === contentHash(saved.narratives),
         extraReadCalls: live.budget.summary.phases.trajectory.httpRequests - calls });
       await host.transferControl(id, { expectedRevision: saved.state.revision, target: { kind: "observer" } });
-      if (phase === "continuous" && flow.world === "blackmarsh" && !stopped) {
+      if (phase === "continuous" && flow.world === "blackmarsh" && !stopped && !live.budget.summary.blockingUnknown.length) {
         const beforeAutonomy = live.budget.summary, autonomyStarted = performance.now();
         let failure: string | null = null;
         try { await host.advance(id, { expectedRevision: saved.state.revision, trigger: "batch", steps: 1 }); }

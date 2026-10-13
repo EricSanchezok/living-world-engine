@@ -10,6 +10,23 @@ const body = JSON.stringify({ model: "deepseek-flash", max_tokens: 20 });
 afterEach(() => { for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true }); });
 
 describe("one cumulative live model budget", () => {
+  it("reserves the full native batch boundary and the complete request without rejecting context by bytes", async () => {
+    const root = directory(), live = createJevLiveBudget(root);
+    for (const [state, input] of [["short", 65_536], ["字".repeat(30_000), 80_000]] as const) {
+      await live.transport("typesafe-api", async () => Response.json({ usage: { input_tokens: input, output_tokens: 20 } }))(
+        "https://unused.test", { body: JSON.stringify({ model: "jev-1.13.0", state }) });
+    }
+    await live.drain(); expect(live.budget.summary.unsettled).toEqual([]);
+    expect(live.budget.summary.phases.trajectory.httpRequests).toBe(2); live.close();
+  });
+  it("retains actual provider usage when a reservation overrun stops settlement", async () => {
+    const root = directory(), live = createJevLiveBudget(root);
+    await expect(live.transport("typesafe-api", async () => Response.json({ usage: { input_tokens: 90_000, output_tokens: 20 } }))(
+      "https://unused.test", { body: JSON.stringify({ model: "jev-1.13.0" }) })).rejects.toThrow("reservation ceiling");
+    await live.drain(); const id = live.budget.summary.blockingUnknown[0]!;
+    expect(JSON.parse(readFileSync(path.join(root, "usage-errors", `${id}.json`), "utf8"))).toMatchObject({ id, usage: { input: 90_000, output: 20, cacheHit: 0 } });
+    live.close();
+  });
   it("includes planning spend, excludes concurrent writers and retains arm/phase identity", async () => {
     expect(JEV_BUDGET_POLICY.maximumNanoCny + JEV_PLANNING_NANO_CNY).toBe(100_000_000_000);
     const root = directory(), live = createJevLiveBudget(root);
