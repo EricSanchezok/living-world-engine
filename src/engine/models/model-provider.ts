@@ -159,6 +159,9 @@ export class ContextLimitExceededError extends ModelConfigurationError {
   }
 }
 
+/** A native provider rejected an actual HTTP request for its context/token limit. */
+export class NativeDecisionContextLimitError extends ContextLimitExceededError {}
+
 export interface ModelSemanticRepairErrorOptions extends ErrorOptions {
   audit?: ModelExecutionAudit;
 }

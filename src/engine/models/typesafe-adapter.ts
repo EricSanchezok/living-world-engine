@@ -3,8 +3,9 @@ import type { ModelAdapterResult, ModelProviderAdapter } from "./model-adapter";
 import type { ProviderAccountConfig, ResolvedModelInference } from "./model-catalog";
 import type { ResolvedModelBinding } from "./model-registry";
 import { contentHash } from "./model-audit";
-import { ContextLimitExceededError, ModelConfigurationError, ModelOutputError, ModelTransportError, type StructuredModelRequest } from "./model-provider";
+import { ContextLimitExceededError, NativeDecisionContextLimitError, ModelConfigurationError, ModelOutputError, ModelTransportError, type StructuredModelRequest } from "./model-provider";
 import { decisionOutputSchema, decisionPrompt, decisionWireContext, nativeDecisionBounds, validateDecisionBatch } from "./decision";
+import { decisionOutputV2Schema, decisionPromptV2, decisionWireContextV2, validateDecisionBatchV2 } from "./decision-v2";
 import { runtimeEventEmitter, type RuntimeCorrelation } from "../runtime/observability";
 
 const nativeInference: ResolvedModelInference = {
@@ -15,6 +16,10 @@ const usageSchema = z.object({ input_tokens: z.number().int().nonnegative().safe
 
 function nativeContext(context: unknown) {
   const envelope = z.object({ decision: z.unknown() }).strict().parse(context);
+  if ((envelope.decision as { version?: number })?.version === 2) {
+    const batch = validateDecisionBatchV2(envelope.decision);
+    return { batch, wire: decisionWireContextV2(batch) };
+  }
   const batch = validateDecisionBatch(envelope.decision);
   const wire = decisionWireContext(batch);
   // No provider tokenizer is published. UTF-8 bytes are a conservative token
@@ -38,11 +43,11 @@ export class TypeSafeModelAdapter implements ModelProviderAdapter {
   }
 
   describe<T>(binding: ResolvedModelBinding, request: StructuredModelRequest<T>) {
-    const prompt = decisionPrompt();
-    if (request.role !== "decision" || request.schemaName !== "DecisionBatchV1" || request.structuredOutputMode ||
+    const prompt = request.schemaName === "DecisionBatchV2" ? decisionPromptV2() : decisionPrompt();
+    if (request.role !== "decision" || !["DecisionBatchV1", "DecisionBatchV2"].includes(request.schemaName) || request.structuredOutputMode ||
       request.preprocessOutput || request.jsonSyntaxRecovery || binding.profile.response_transport ||
       request.system !== prompt.system || request.userPrompt !== prompt.userPrompt || request.promptVersion !== prompt.version) {
-      throw new ModelConfigurationError("TypeSafe accepts only native DecisionBatchV1 requests");
+      throw new ModelConfigurationError("TypeSafe accepts only native decision batches");
     }
     if (Object.values(binding.profile.inference).some(value => value !== "auto")) {
       throw new ModelConfigurationError("TypeSafe does not accept generative inference parameters");
@@ -72,6 +77,9 @@ export class TypeSafeModelAdapter implements ModelProviderAdapter {
     observe?.({ event: "model.transport.response.raw", correlation: transportCorrelation,
       payload: { url, status: response.status, headers: Object.fromEntries(response.headers), body: text } });
     if (!response.ok) {
+      if ([400, 413, 422].includes(response.status) && /(?:context|token|sequence).{0,50}(?:limit|length|exceed|maximum|too long)|(?:exceed|maximum).{0,50}(?:context|token|sequence)/iu.test(text)) {
+        throw new NativeDecisionContextLimitError(`TypeSafe rejected the actual context: HTTP ${response.status}`);
+      }
       const error = new ModelTransportError(`TypeSafe returned HTTP ${response.status}`, {
         statusCode: response.status, retriable: [408, 429].includes(response.status) || response.status >= 500,
       });
@@ -90,7 +98,7 @@ export class TypeSafeModelAdapter implements ModelProviderAdapter {
     try {
       if (!usage.success) throw new Error("TypeSafe response has no valid usage");
       if (envelope?.model !== binding.modelId) throw new Error("TypeSafe response model differs from the pinned model");
-      const parsed = decisionOutputSchema(batch, true).parse({ answers: envelope.answers });
+      const parsed = (batch.version === 2 ? decisionOutputV2Schema(batch, true) : decisionOutputSchema(batch, true)).parse({ answers: envelope.answers });
       return { ...description, ...completion, value: parsed, rawValueHash: contentHash(value), symbolRepairs: [], jsonRecovery: "strict" };
     } catch (cause) {
       throw new ModelOutputError("TypeSafe returned an invalid decision", undefined, { cause, rawValue: value, completion });
