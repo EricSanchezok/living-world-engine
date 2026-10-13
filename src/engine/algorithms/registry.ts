@@ -765,7 +765,7 @@ export function registerBuiltinAlgorithms(
   registry: WorldExecutionAlgorithmRegistry = new WorldExecutionAlgorithmRegistry(),
 ): WorldExecutionAlgorithmRegistry {
   if (!registry.has(decisionEventAlgorithmRef())) registry.registerDefinition({
-    role: "world-execution", id: "decision-event", version: "3", contractVersion: 12, maturity: "candidate",
+    role: "world-execution", id: "decision-event", version: "4", contractVersion: 12, maturity: "candidate",
     configSchema: z.strictObject({ decision: z.string().min(1).nullable(), creation: z.string().min(1).nullable(), fallback: z.string().min(1).nullable(), maxDependencyRounds: z.number().int().positive() }),
     children: [],
     create: ({ ref, services }) => new DecisionEventAlgorithm(services.provider, ref.config as unknown as import("../events/algorithm").DecisionEventConfig, services.rulePackages),

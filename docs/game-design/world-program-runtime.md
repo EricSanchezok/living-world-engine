@@ -1,6 +1,6 @@
 # World Program Runtime
 
-The world program kernel lives in [`src/engine/events/kernel.ts`](../../src/engine/events/kernel.ts). It is independent of private Agent programs. The default `decision-event@3` producer runs through WorldHost, SimulationEngine, CanonicalCommitter and history replay. [Spec 0181](../specs/0181-jev-decision-event-engine.md) defines its replacement and qualification contract.
+The world program kernel lives in [`src/engine/events/kernel.ts`](../../src/engine/events/kernel.ts). It is independent of private Agent programs. The default `decision-event@4` producer runs through WorldHost, SimulationEngine, CanonicalCommitter and history replay. [Spec 0181](../specs/0181-jev-decision-event-engine.md) defines its replacement and qualification contract.
 
 ## Compilation and authority
 

@@ -18,6 +18,8 @@ import { worldProgramSources, programWorldResources } from "./resources";
 import { admitWorldProgram } from "./world-program";
 import { externalWorldAttempt } from "./external-action";
 import { adaptationQuestionVersion, adaptationReasonPrefix, programAdaptationBatch } from "../programs/adaptation";
+import { ProgramLibrary } from "../programs/library";
+import { programGoalSelection, PROGRAM_GOAL_SELECTION_HASH } from "./goal-selection";
 
 const equal = (a: unknown, b: unknown) => contentHash(a) === contentHash(b);
 function creationEvidence(audits: ModelExecutionAudit[], owner: string, output: unknown, profile: string, ids?: string[]) {
@@ -62,7 +64,7 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
         throw new Error("reused decision has no previous physical invocation");
       }
     }
-    if (use.batch.programHash === contentHash("program-goal-selection-v2")) {
+    if (use.batch.programHash === PROGRAM_GOAL_SELECTION_HASH) {
       if (use.batch.view.kind !== "agent" || !source.agents[use.batch.view.agentId]) throw new Error("goal choice has no authorized owner");
       const agent = source.agents[use.batch.view.agentId]!, input = use.batch.state as unknown as { perspective: unknown };
       if (!equal(input.perspective, projectAgentPerspective(source as SimulationState, agent))) throw new Error("goal selection used a foreign perspective");
@@ -95,12 +97,13 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
     if (!equal(owner.resources, resources)) throw new Error("private resource projection differs from the owner's knowledge");
     const planningInput = contentHash(Object.fromEntries(Object.entries(resources.resources).filter(([key]) => key !== "clock")
       .map(([key, value]) => [key, value.value])));
-    const planned = decisions.filter(use => use.batch.programHash === contentHash("program-goal-selection-v2") &&
+    const planned = decisions.filter(use => use.batch.programHash === PROGRAM_GOAL_SELECTION_HASH &&
       use.batch.view.kind === "agent" && use.batch.view.agentId === agent.id && use.result.answers.goal?.choice !== "wait").length;
     const priorPlanning = before.agents[agent.id]?.planning;
     if (planned && (owner.planning?.inputHash !== planningInput || owner.planning.attempts !==
       (priorPlanning?.inputHash === planningInput ? priorPlanning.attempts : 0) + planned)) throw new Error("private expansion budget differs from actual planning work");
     const oldInstances = before.agents[agent.id]?.instances ?? [];
+    const validatedOldPrograms: ProgramInterpreter[] = [];
     if (oldInstances.some(old => !owner.instances.some(value => value.snapshot.instanceId === old.snapshot.instanceId))) throw new Error("program history was deleted");
     for (const entry of owner.instances) {
       const previous = oldInstances.find(value => value.snapshot.instanceId === entry.snapshot.instanceId);
@@ -211,7 +214,35 @@ export function validateControlTransition(source: Readonly<SimulationState>, bef
         }
       }
       if (!equal(interpreter.snapshot(), entry.snapshot)) throw new Error("program journal does not deterministically replay");
+      if (previous) validatedOldPrograms.push(interpreter);
     }
+    const added = owner.instances.filter(entry => !oldInstances.some(old => old.snapshot.instanceId === entry.snapshot.instanceId));
+    const choices = decisions.filter(use => use.batch.programHash === PROGRAM_GOAL_SELECTION_HASH &&
+      use.batch.view.kind === "agent" && use.batch.view.agentId === agent.id);
+    if (choices.length > 1 || added.length > 1 || added.length && !choices.length) throw new Error("new private program has no actual goal decision");
+    if (choices.length) {
+      const active = validatedOldPrograms.find(program => program.instanceId === before.agents[agent.id]?.activeInstanceId);
+      const attempts = priorPlanning?.inputHash === planningInput ? priorPlanning.attempts : 0;
+      const domain = programGoalSelection(agent, perspective, resources.resources, validatedOldPrograms, active,
+        new ProgramLibrary(before.privateLibrary), attempts);
+      if (roster[agent.id]?.kind !== "model" || !domain.goals.length || attempts >= 2 ||
+        active && !["ended", "interrupted", "needs-expansion"].includes(active.status) ||
+        before.pending.some(pending => pending.attempt.actorId === agent.id) || !equal(domain.batch, choices[0]!.batch)) {
+        throw new Error("goal selection differs from the actual private domain");
+      }
+      const choice = choices[0]!.result.answers.goal!.choice;
+      if (added.length) {
+        const entry = added[0]!, definition = after.privateLibrary.entries.find(value => value.program.hash === entry.snapshot.definitionHash)!;
+        const reusable = /^p\d+$/u.test(choice) ? domain.reusable[Number(choice.slice(1))] : undefined;
+        const goal = /^g\d+$/u.test(choice) ? domain.goals[Number(choice.slice(1))] : undefined;
+        if (reusable ? definition.program.hash !== reusable.program.hash || !equal(entry.snapshot.parameters, reusable.parameters)
+          : !goal || !definition.program.definition.goals.some(value => value.goalId === goal.id)) {
+          throw new Error("private program does not implement the selected goal or reusable plan");
+        }
+      }
+    }
+    if (roster[agent.id]?.kind === "model" && owner.activeInstanceId !==
+      (added[0]?.snapshot.instanceId ?? before.agents[agent.id]?.activeInstanceId ?? null)) throw new Error("active private program changed without a selected plan");
   }
   for (const pending of after.pending) {
     const old = before.pending.find(value => value.attempt.id === pending.attempt.id);

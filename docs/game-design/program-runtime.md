@@ -41,3 +41,7 @@ The private journal also reuses an already proved predicate when a later control
 The unit checks exercise admission, real gateway transport with only HTTP replaced, bounded repair, stale predicates, invalid entity references, arithmetic, private projection, partial completion, deadlines, speech, interruption, no-progress loops and replay without duplicate settlement.
 
 `scripts/experiments/jev-native-smoke.ts` and `jev-program-smoke.ts` are live development diagnostics. They share one append-only CNY 100 budget after reserving the planning probes, use conservative budget conversion and peak tariffs, count rejected generations, and persist raw gateway evidence in the ignored benchmark directory. These diagnostics do not establish gameplay acceptance or architecture speedup.
+
+## Goal selection evidence
+
+Canonical control validation reconstructs the actual active goals, eligible reusable plans and prior program completion from the owner's private state. Each new instance must bind one decision over that exact domain and implement the selected goal or admitted plan. A valid creation audit alone cannot select a different program, and the active instance cannot change without a selected plan.
