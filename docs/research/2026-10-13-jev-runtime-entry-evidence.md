@@ -2,7 +2,7 @@
 
 ## 状态
 
-这是开发联调记录，**不是三臂性能验收**。默认执行器为 decision-event@6，世界、状态与实例分别使用 v15、v17、v24；通过 SimulationEngine 与 WorldHost 提交和重放。架构契约见 [Spec 0181](../specs/0181-jev-decision-event-engine.md)，独立冻结的对照与验收状态见 [三臂证据](2026-10-13-jev-engine-qualification.md)。
+这是开发联调记录，**不是三臂性能验收**。默认执行器为 decision-event@7，世界、状态与实例分别使用 v15、v17、v24；通过 SimulationEngine 与 WorldHost 提交和重放。架构契约见 [Spec 0181](../specs/0181-jev-decision-event-engine.md)，独立冻结的对照与验收状态见 [三臂证据](2026-10-13-jev-engine-qualification.md)。
 
 ## 已验证入口
 

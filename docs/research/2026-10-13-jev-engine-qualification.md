@@ -24,6 +24,8 @@ A 使用独立冻结的旧引擎 checkout；B 使用新架构及 DeepSeek 决策
 
 恢复后的第一组 A 首次输入耗时 372.64 秒、费用约 18.397991712 元，因 `observation for lord-maracan contains protected information` 被拒绝；没有规范提交或玩家反馈。第二次输入启动后，为给新引擎及工作台检查保留累计预算，停止新增调用并收齐在途用量，新增约 1.630776096 元；该输入记为删失，第三次未执行。A 的最终状态仍可零模型调用重放，Ledger 无孤立记录或索引缺失。该失败基线不产生速度或成功任务费用比。
 
+第一组 B 的三个输入分别用时约 289.57、269.80、331.25 秒，费用约 4.454053536、4.771603392、3.471302880 元。第一个输入因资源声明判断为 unknown 等待证据，只提交了同一时刻的控制记录；后两个输入因持续活动缺少完成条件被内核拒绝。最终 revision 为 2、世界时间为零，三个输入均无玩家观察，重放一致且无新增模型调用。这个样本没有任务完成或有效反馈证据；@7 的后续编译期修复见 [postmortem 0151](../postmortems/0151-world-branch-completion-checked-too-late.md)，冻结样本仍使用原来的 @4 生产者。
+
 ## 运行方式
 
 先提交已经检查的实现，然后执行 `npx tsx scripts/experiments/jev-qualification.ts --mode prepare --root <new-evidence-directory> --baseline-root <frozen-checkout> --budget-root <existing-cumulative-budget-directory> --cache-root <existing-local-retrieval-cache>`。该步骤不调用付费模型，固定生产者提交、模型目录、世界内容及协议。随后对同一证据目录分别执行 `--mode canary --root <evidence-directory>` 和 `--mode confirmation --root <evidence-directory>`。任何生产者或协议修改都要求新的证据目录；已有的部分样本不允许静默重抽。

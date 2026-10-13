@@ -9,7 +9,7 @@ import { assertJsonValue, frozenClone, type JsonValue } from "../runtime/json";
 import { runtimeId, quantityId } from "../runtime/runtime-id";
 import { applyWorldDeltaOperation, validateSimulationState } from "../runtime/transaction";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
-import { makeWorldDecisionBatch, mechanicalWorldCondition, validateWorldEvidence, worldProgramBoundary, worldProgramTiming, worldProvenance, worldQuestionWork,
+import { makeWorldDecisionBatch, mechanicalWorldCondition, validateWorldEvidence, validateWorldBranchContract, worldProgramBoundary, worldProgramTiming, worldProvenance, worldQuestionWork,
   selectableWorldBranches, worldProgramComponents, worldDecisionParticipants,
   type BoundWorldProgram, type WorldAdjudication, type WorldConditionRecord } from "./adjudication";
 import { captureReads, worldOperationReads, validateReads, worldProgramSources, worldResources, type ReadSet } from "./resources";
@@ -127,14 +127,7 @@ function materialize(programs: BoundWorldProgram[], records: Map<string, WorldCo
     const branches = selectableWorldBranches(bound, [...records.values()]);
     if (branches.length !== 1) throw new Error(branches.length ? "ambiguous world branches require expansion" : "world rule awaits evidence or expansion");
     const branch = branches[0]!;
-    if (branch.acknowledgement === "observed-outcome" && !branch.deliveries.some(delivery =>
-      delivery.kind === "observation" && bound.parameters[delivery.recipientParameter] === bound.attempt.actorEntityId)) {
-      throw new Error("an observed outcome acknowledgement requires a committed observation to its actor");
-    }
-    if (worldProgramTiming(bound, resources).completionAtSeconds === null && branch.outcome === "succeeded" &&
-      !branch.when.some(condition => condition.predicateId === bound.program.definition.timing.completionPredicateId && condition.equals === "yes")) {
-      throw new Error("an ongoing activity needs its declared completion predicate before it can finish");
-    }
+    validateWorldBranchContract(bound, branch, resources);
     selections.push({ attemptId: bound.attempt.id, branchId: branch.id });
     const mechanical = materializeWorldMechanics(bound, branch.id, resources, context);
     effects.push(...mechanical.operations);

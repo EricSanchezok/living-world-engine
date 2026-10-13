@@ -10,7 +10,7 @@ import { loadPromptAsset } from "../prompts";
 import { logicalRepairContext, LOGICAL_CANDIDATE_REPAIR_VERSION } from "../prompts/logical-repair-context";
 import { frozenClone, type JsonValue } from "../runtime/json";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
-import { worldProgramDuration, worldQuestionWork, type BoundWorldProgram, type WorldAttempt } from "./adjudication";
+import { validateWorldBranchContract, worldProgramDuration, worldQuestionWork, type BoundWorldProgram, type WorldAttempt } from "./adjudication";
 import { captureReads, worldProgramSources } from "./resources";
 import { admitWorldProgram, bindWorldProgram, renderWorldText, worldProgramSchema } from "./world-program";
 import { decodeWorldDraft, encodeWorldDraft, worldDraftSchema } from "./creation-codec";
@@ -76,12 +76,13 @@ export async function compileWorldProgram(provider: StructuredModelProvider, req
     captureReads(request.resources, program.definition.reads.filter(key => !/^(random|check):/u.test(key)).map(key => renderWorldText(key, bound.parameters)));
     worldProgramDuration(bound, request.resources);
     worldActivityClaims(bound, request.state, request.resources);
+    for (const branch of program.definition.branches) validateWorldBranchContract(bound, branch, request.resources);
     // Build every branch before accepting it, so malformed effect shapes get the single targeted repair.
     if (!prepareWorldRandomPlan(request.state, request.definition, request.resources, [bound]))
       worldQuestionWork(bound, request.resources, { state: request.state, definition: request.definition, rulePackages: request.rulePackages });
   };
   const system = loadPromptAsset("system/world-program-creation.md"), userPrompt = loadPromptAsset("user/world-program-creation.md");
-  const promptVersion = `world-program-creation-${contentHash({ system, userPrompt, contract: 5, repair: LOGICAL_CANDIDATE_REPAIR_VERSION, layout: "logical-tail-v1" })}`;
+  const promptVersion = `world-program-creation-${contentHash({ system, userPrompt, contract: 6, repair: LOGICAL_CANDIDATE_REPAIR_VERSION, layout: "logical-tail-v1" })}`;
   const logicalInvocationId = modelInvocationIdentity(request, "creation", "world", request.invocationBase).modelInvocationId;
   const scope = { workloadId: request.workloadId, batchId: request.batchId, runtimeIdentity: request.runtimeIdentity,
     modelRegistrySnapshotHash: request.modelRegistrySnapshotHash, observer: request.observer, abortSignal: request.abortSignal,

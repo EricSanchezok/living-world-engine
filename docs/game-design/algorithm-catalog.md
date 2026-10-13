@@ -34,7 +34,7 @@ The executable registry is authoritative. Maturity describes enrollment policy a
 | `work-batching` | `shared-context-slot-batching@2` | 1 | reference | — |
 | `work-batching` | `shared-state-first-slot-batching@1` | 1 | reference | — |
 | `work-scheduling` | `bounded-concurrency@1` | 1 | reference | — |
-| `world-execution` | `decision-event@6` | 12 | candidate | — |
+| `world-execution` | `decision-event@7` | 12 | candidate | — |
 | `world-execution` | `eager-reference@29` | 12 | reference | `agentCognition` → `agent-cognition`<br>`actionCompilation` → `action-compilation`<br>`interactionGrounding` → `interaction-grounding`<br>`reactionResolution` → `reaction-resolution`<br>`truthResolution` → `truth-resolution`<br>`observationRendering` → `observation-rendering` |
 
 ## Benchmark-only algorithms
@@ -62,8 +62,8 @@ These implementations are replaceable inside the offline evaluation harness, but
 
 ## Default composition
 
-Root hash: `8298b9a1c53e91c3bc3f362a11a133588d8941cd74928db67a9ae7edd633470e`
+Root hash: `db866d1c47481b58bcfbc49eab319f05678f1d406875fa1b83c668182957baac`
 
 | Node path | Role | Algorithm | Contract | Manifest hash |
 | --- | --- | --- | ---: | --- |
-| `root` | `world-execution` | `decision-event@6` | 12 | `8298b9a1c53e91c3bc3f362a11a133588d8941cd74928db67a9ae7edd633470e` |
+| `root` | `world-execution` | `decision-event@7` | 12 | `db866d1c47481b58bcfbc49eab319f05678f1d406875fa1b83c668182957baac` |

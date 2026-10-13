@@ -68,6 +68,19 @@ export function worldProgramDuration(bound: BoundWorldProgram, resources: Progra
   if (!Number.isSafeInteger(duration) || duration <= 0) throw new Error("world program duration must be positive integer seconds");
   return duration;
 }
+
+/** Structural acknowledgement and completion requirements do not depend on a random draw or a selected branch. */
+export function validateWorldBranchContract(bound: BoundWorldProgram,
+  branch: AdmittedWorldProgram["definition"]["branches"][number], resources: ProgramResources): void {
+  if (branch.acknowledgement === "observed-outcome" && !branch.deliveries.some(delivery =>
+    delivery.kind === "observation" && bound.parameters[delivery.recipientParameter] === bound.attempt.actorEntityId)) {
+    throw new Error("an observed outcome acknowledgement requires a committed observation to its actor");
+  }
+  if (worldProgramTiming(bound, resources).completionAtSeconds === null && branch.outcome === "succeeded" &&
+    !branch.when.some(condition => condition.predicateId === bound.program.definition.timing.completionPredicateId && condition.equals === "yes")) {
+    throw new Error("an ongoing activity needs its declared completion predicate before it can finish");
+  }
+}
 export function worldProgramBoundary(bound: BoundWorldProgram, resources: ProgramResources): number {
   const activities = resources[`program-actor:${bound.attempt.actorEntityId}`]?.value as unknown as import("./activities").ProgramActivity[] | undefined;
   const activity = activities?.find(value => value.attemptId === bound.attempt.id && value.programHash === bound.program.hash && value.status === "active");
