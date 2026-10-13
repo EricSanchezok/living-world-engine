@@ -10,12 +10,13 @@ import { quantityId } from "../../runtime/runtime-id";
 import type { PolicyBinding, WorldAdvanceRequest } from "../../runtime/execution";
 import { WorldQuiescentError } from "../../runtime/execution";
 import { readDirectState } from "../state";
+import { speechSpans } from "../actions";
 
 async function fixture(options: { operation?: string; target?: string; tool?: string; amount?: string; failKeeper?: boolean } = {}) {
   const f = directTestProvider(wire => {
     const context = wire.state as { perspective?: { agentId: string }; submittedAction?: { rawText: string } };
     if (options.failKeeper && context.perspective?.agentId === "keeper") return new Response("unavailable", { status: 503 });
-    const selection: Record<string, string> = { operation: options.operation ?? "observe", target: options.target ?? "door", tool: options.tool ?? "none",
+    const selection: Record<string, string> = { operation: options.operation ?? "observe", target: options.target ?? "door", recipient: options.target ?? "none", tool: options.tool ?? "none",
       amount: options.amount ?? "n0", resource: "spirit-stone", speech: "q0", timing: "default", goal: "none" };
     return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
       let value = selection[id] ?? (id.includes("outcome") ? "succeeded" : id.includes("goal_status") || id.includes("belief_status") ? "unchanged" : id.includes("visible") ? "visible" : id.includes("delivery") ? "delivered" : id.includes("fact") ? "unchanged" : "none");
@@ -41,6 +42,10 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("preserves exact question and evidence spans as selectable dialogue", () => {
+    expect(speechSpans("询问：附近有哪些住宿地点？请说明消息来源。" )).toContain("附近有哪些住宿地点？请说明消息来源。");
+    expect(speechSpans("个人值班记录上的校验码为 ORBIT-7。" )).toContain("个人值班记录上的校验码为 ORBIT-7。");
+  });
   it("saves initial intentions without any model request", async () => {
     const f = await fixture(); const state = await f.engine.bootstrapAgents();
     expect(f.transport).not.toHaveBeenCalled();
@@ -55,6 +60,19 @@ describe("direct world through the actual simulation entry", () => {
     expect(f.transport).toHaveBeenCalledTimes(2);
     expect(result.modelAudits.every(audit => audit.protocol === "typesafe-systemone")).toBe(true);
     expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("discovers a missing recipient before speech and retains the original player request", async () => {
+    const f = await fixture({ operation: "speak", target: "none" }); await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("寻找能回答的人，询问附近哪里能住宿"));
+    expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "observe", preparatoryFor: "speak", utterance: null });
+    const intent = readDirectState(result.state.executionState!, result.state).intents.player!;
+    expect(intent.activeSubmission?.submissionId).toBe("submission-0"); expect(intent.status).toBe("ready");
+    expect(f.transport).toHaveBeenCalledTimes(2); expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("reports the actor's owned quantities during self inspection", async () => {
+    const f = await fixture({ operation: "observe", target: "self" }); await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("检查自己持有的资源"));
+    expect(result.committed.observations.find(packet => packet.observerId === "player")?.summary).toContain("3枚灵石");
   });
   it("moves without requiring the player to specify time or a behavior program", async () => {
     const f = await fixture({ operation: "move", target: "yard" }); await f.engine.bootstrapAgents();

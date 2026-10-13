@@ -54,10 +54,10 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   const claims = new Map<string, { poolId: string; amount: number }>();
   for (const [index, frame] of frames.entries()) {
     const prefix = `a${index}`;
-    questions[`${prefix}_outcome`] = question("feasibility and outcome", frame as unknown as JsonValue,
+    questions[`${prefix}_outcome`] = question("feasibility of this single concrete kind and its parameters, NOT completion of proposal.goal or the whole compound proposal.rawText. Speaking succeeds when actual words can be uttered; accepting terms does not require goods already delivered. Observing attempts to inspect the selected object or immediate surroundings; separate visibility questions decide what is learned.", frame as unknown as JsonValue,
       { succeeded: "The action can achieve its specified immediate effect", partial: "Only part of that immediate effect is achieved",
-        failed: "The attempt fails or the other party explicitly refuses", unknown: "Insufficient evidence; do not assume consent or success" });
-    questions[`${prefix}_duration`] = question("required total duration, respecting explicit rules and the actual activity", frame as unknown as JsonValue,
+        failed: "The concrete attempted action cannot occur", unknown: "Evidence required for this immediate action is absent; speech need not already be true or accepted" });
+    if (["move", "use", "change"].includes(frame.kind)) questions[`${prefix}_duration`] = question("required total duration, respecting explicit rules and the actual activity", frame as unknown as JsonValue,
       { planned: `Use the proposed ${frame.durationSeconds} seconds`, ...Object.fromEntries(durations.map(seconds => [`s${seconds}`, `${seconds} seconds`])) });
     if (frame.submissionId) questions[`${prefix}_request_progress`] = question("coverage of the player's whole submitted intent by this immediate action", frame as unknown as JsonValue,
       { complete: "This attempt handles the submitted action; any long-term goal remains separate",
@@ -134,14 +134,15 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   const prepared: PreparedDirectAction[] = [];
   for (const [index, frame] of frames.entries()) {
     const prefix = `a${index}`, verdict = selected(answers, `${prefix}_outcome`), source = sourceFor(frame);
-    const durationChoice = selected(answers, `${prefix}_duration`);
+    const durationChoice = answers[`${prefix}_duration`] ? selected(answers, `${prefix}_duration`) : "planned";
     const duration = durationChoice === "planned" ? frame.durationSeconds : Number(durationChoice.slice(1));
     frame.durationSeconds = duration;
     frame.dueAtSeconds = Math.max(state.truth.elapsedSeconds + 1, frame.startedAtSeconds + duration);
     let status: ActionOutcome["status"] = verdict === "unknown" ? "blocked" : verdict as ActionOutcome["status"];
     let operations: WorldDeltaOperation[] = [];
     const randomRequests: PreparedDirectAction["randomRequests"] = [], randomBindings: PreparedDirectAction["randomBindings"] = [];
-    let detail = status === "blocked" ? "还需要更多信息。" : status === "failed" ? "这次尝试未能完成。" : status === "partial" ? "这次行动取得了部分进展。" : "行动已完成。";
+    let detail = status === "blocked" ? "还需要更多信息。" : status === "failed" ? "这次尝试未能完成。" : status === "partial" ? "这次行动取得了部分进展。"
+      : frame.kind === "wait" ? "你在等待新的消息或条件变化。" : frame.kind === "observe" ? "你查看了眼前的情况。" : "行动已完成。";
     if (status === "succeeded" || status === "partial") {
       if (frame.kind === "move" && frame.targetEntityId) operations.push({ kind: "place_entity", entityId: frame.actorEntityId, placementId: frame.targetEntityId, ...source });
       if (frame.kind === "transfer") {
@@ -223,6 +224,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     const deliveredToEntityIds = ["succeeded", "partial"].includes(status)
       ? (candidates.get(prefix) ?? []).filter((_, ordinal) => selected(answers, `${prefix}_delivery${ordinal}`) === "delivered") : [];
     if (frame.kind === "speak" && (!frame.utterance || !deliveredToEntityIds.length)) { status = "blocked"; detail = "话语尚未送达。"; }
+    else if (frame.kind === "speak") detail = `你说：“${frame.utterance}”话语已送达。`;
     if (!["succeeded", "partial"].includes(status)) operations = [];
     prepared.push({ actionId: frame.id, status, summary: detail, operations, reads: view.reads,
       visibleFactIds: ["succeeded", "partial"].includes(status) ? visibleFacts.map(fact => fact.id) : [],

@@ -219,7 +219,7 @@ test("a world starts in observer mode without replacing the conversation core", 
   await expect(page.getByText("世界正在发生什么")).toHaveCount(0);
 
   await page.getByRole("button", { name: "单步" }).click();
-  await expect(page.getByText("世界继续变化。").first()).toBeVisible();
+  await expect(page.getByText(/你查看了眼前的情况/).first()).toBeVisible();
 
   await page.getByRole("button", { name: "实时" }).click();
   await expect(page.getByRole("button", { name: "暂停" })).toBeVisible();
@@ -265,8 +265,8 @@ test("a Participant starts from an Origin, receives Arrival, acts, detaches and 
   expect(scrolledComposerBox).not.toBeNull();
   expect(Math.abs(scrolledComposerBox!.y - composerBox!.y)).toBeLessThanOrEqual(1);
   await page.locator(".cg-thread-messages").evaluate((element) => { element.removeAttribute("style"); });
-  await page.getByRole("button", { name: "确认当前位置" }).click();
-  await expect(composer).toHaveValue("确认当前位置");
+  await page.getByRole("button", { name: "确认自己所在的位置" }).click();
+  await expect(composer).toHaveValue("确认自己所在的位置");
   await expect(composer).toBeFocused();
   await composer.fill("我现在在哪里？");
   let releaseAction!: () => void;
@@ -291,7 +291,7 @@ test("a Participant starts from an Origin, receives Arrival, acts, detaches and 
   expect(statusFrame).toEqual(composerFrame);
   await expect(page.getByLabel("你的行动")).toHaveCount(0);
   releaseAction();
-  await expect(page.getByText("世界继续变化。").last()).toBeVisible();
+  await expect(page.getByText(/你查看了眼前的情况/).last()).toBeVisible();
   await page.unroute("**/api/instances/*/participants/*/actions");
 
   await openOrb(page);
@@ -447,7 +447,13 @@ test("failed execution stays atomic and long diagnostics never widen the inspect
   await openOrb(page);
   await page.getByRole("button", { name: "世界演化" }).click();
   const inspector = page.getByRole("dialog", { name: "世界演化" });
-  await expect(inspector.getByText("世界状态没有提交")).toBeVisible();
+  await expect(inspector.getByText("世界状态已提交")).toBeVisible();
+  const instanceId = new URL(page.url()).pathname.split("/").at(-1)!;
+  const detail = await (await page.request.get(`/api/instances/${instanceId}`)).json() as { summary: { revision: number } };
+  const step = await (await page.request.get(`/api/instances/${instanceId}/inspector/steps/${detail.summary.revision}`)).json() as {
+    directRuntime: { intents: Record<string, { failure: unknown }> };
+  };
+  expect(Object.values(step.directRuntime.intents).some(intent => intent.failure)).toBe(true);
   expect(await inspector.locator(".cg-inspector-detail").evaluate((element) => (
     element.scrollWidth <= element.clientWidth
   ))).toBe(true);

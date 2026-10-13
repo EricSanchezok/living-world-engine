@@ -10,6 +10,7 @@ import { quantityId } from "../../runtime/runtime-id";
 import type { PolicyBinding } from "../../runtime/execution";
 import type { DecisionQuestionV2 } from "../../models/decision-v2";
 import { readDirectState } from "../state";
+import { privateActionView } from "../views";
 
 function option(question: DecisionQuestionV2, predicate: (value: unknown) => boolean) {
   return question.type === "choice" ? Object.entries(question.criteria).find(([, value]) => predicate(value))?.[0] ?? "unchanged" : "none";
@@ -70,6 +71,8 @@ describe("direct activities use code-owned mechanics", () => {
     expect(result.state.agents.engineer!.character.goals["repair-and-test"]!.status).toBe("active");
     expect(readDirectState(result.state.executionState!, result.state).intents.engineer!.goalProgress["repair-and-test"]).toBe("partial");
     expect(JSON.stringify(result.state.agents.engineer!.belief)).not.toContain("ORBIT-7");
+    expect(JSON.stringify(privateActionView(result.state, "inspector").state)).toContain("ORBIT-7");
+    expect(result.state.agents.inspector!.observationCursorStep).toBeGreaterThan(0);
     expect(f.transport).toHaveBeenCalledTimes(2); expect(replaySimulationState(result.state)).toEqual(result.state);
   });
   it("persists random stakes before drawing, survives restart and never repeats the test draw", async () => {
@@ -113,7 +116,8 @@ describe("direct activities use code-owned mechanics", () => {
     expect(pending).toHaveLength(1); expect(pending[0]!.activityStatus).toBe("queued");
     const calls = f.transport.mock.calls.length;
     const second = await f.advance(); expect(second.state.truth.elapsedSeconds).toBe(20); expect(second.committed.outcomes).toHaveLength(1);
-    expect(f.transport).toHaveBeenCalledTimes(calls); expect(replaySimulationState(second.state)).toEqual(second.state);
+    // The first action delivered new evidence to the queued actor. Its affected adjudication is refreshed once.
+    expect(f.transport).toHaveBeenCalledTimes(calls + 1); expect(replaySimulationState(second.state)).toEqual(second.state);
   });
   it("stops at an earlier timer, then executes saved effects without model polling", async () => {
     const f = await fixture("repair", 5); const first = await f.act("维修冷却泵");

@@ -13,6 +13,7 @@ export interface ActionFrame {
   startedAtSeconds: number; dueAtSeconds: number | null; temporalProfileId: string | null;
   durationSeconds: number; progressSeconds: number; activityStatus: "active" | "queued" | "paused";
   inputHash: string; causeActionId: string | null;
+  preparatoryFor: ActionKind | null;
 }
 export interface AgentIntentState {
   goalId: string | null;

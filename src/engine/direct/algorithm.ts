@@ -76,7 +76,7 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
     control.activities = control.activities.filter(frame => input.policyRoster[frame.actorId]?.kind !== "idle");
     for (const id of Object.keys(control.prepared)) if (!control.activities.some(frame => frame.id === id)) delete control.prepared[id];
     for (const [id, intent] of Object.entries(control.intents)) if (["waiting", "failed"].includes(intent.status) &&
-      Object.entries(intent.dependencies).some(([key, hash]) => !key.startsWith("agent:") && contentHash(readDependency(source, key)) !== hash)) {
+      Object.entries(intent.dependencies).some(([key, hash]) => key !== "clock" && !key.startsWith("agent:") && contentHash(readDependency(source, key)) !== hash)) {
       wakeIntent(control, id, "dependency-changed");
     }
     for (const [id, intent] of Object.entries(control.intents)) if (intent.wait?.untilSeconds !== null && intent.wait?.untilSeconds !== undefined &&
@@ -177,6 +177,7 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
     for (const settlement of settlements) {
       const { frame, outcome } = settlement, intent = control.intents[frame.actorId]!;
       const changed = settlement.operations.length > 0 || frame.kind === "speak" && initial.intents[frame.actorId]?.lastActionHash !== intent.lastActionHash ||
+        settlement.visibleEntities.some(entity => !Object.values(source.agents[frame.actorId]!.bindings).some(binding => binding.canonicalEntityIds.includes(entity.id))) ||
         frame.kind === "observe" && settlement.visibleFacts.some(fact => !Object.values(source.agents[frame.actorId]!.belief.claims).some(claim =>
           claim.predicate === fact.predicate && contentHash(claim.value) === contentHash(fact.value)));
       intent.noProgressCount = changed ? 0 : intent.noProgressCount + 1;
@@ -184,7 +185,7 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
       intent.status = intent.activityId ? "active" : "waiting";
       intent.wait = { entityIds: frame.targetEntityId ? [frame.targetEntityId] : [], untilSeconds: null, reason: intent.noProgressCount >= 2 ? "no-progress" : "action-settled" };
       intent.recentOutcomeIds = [outcome.id]; intent.causeActionId = null;
-      const continueSubmission = frame.submissionId && control.prepared[frame.id]!.requestProgress === "continue" &&
+      const continueSubmission = frame.submissionId && (frame.preparatoryFor || control.prepared[frame.id]!.requestProgress === "continue") &&
         ["succeeded", "partial"].includes(outcome.status) && intent.noProgressCount < 2 && !intent.activityId;
       if (frame.submissionId && !continueSubmission) { control.completedSubmissionIds.push(frame.submissionId); intent.activeSubmission = null; }
       if (continueSubmission) wakeIntent(control, frame.actorId, "submission-progress");

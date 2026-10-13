@@ -1,5 +1,6 @@
 import { createServer } from "node:http";
 import { agentOutput, truthOutput } from "./model-output";
+import type { DecisionQuestionV2 } from "../../src/engine/models/decision-v2";
 
 const port = Number(process.env.LIVINGWORLD_E2E_MODEL_PORT ?? 32128);
 
@@ -41,12 +42,13 @@ const server = createServer(async (request, response) => {
       response.end('{"status":"ok"}');
       return;
     }
-    if (request.method !== "POST" || request.url !== "/chat/completions") {
+    if (request.method !== "POST" || !["/chat/completions", "/systemone"].includes(request.url ?? "")) {
       response.writeHead(404).end();
       return;
     }
     const body = await readBody(request);
-    const context = contextFrom(body);
+    const native = request.url === "/systemone";
+    const context = native ? body.state as Record<string, unknown> : contextFrom(body);
     const serializedContext = JSON.stringify(context);
     if (serializedContext.includes("触发 E2E 流式失败") || serializedContext.includes("触发 E2E 快速失败")) {
       if (serializedContext.includes("触发 E2E 流式失败")) {
@@ -57,6 +59,21 @@ const server = createServer(async (request, response) => {
       return;
     }
     const model = String(body.model);
+    if (native) {
+      const values: Record<string, string> = { operation: "observe", target: "self", recipient: "none", tool: "none", amount: "unknown", speech: "none", timing: "default", resource: "none", goal: "none" };
+      const answers = Object.fromEntries(Object.entries(body.questions as Record<string, DecisionQuestionV2>).map(([id, question]) => {
+        if (question.type === "noul") return [id, { type: "noul", noul: 1 }];
+        if (question.type === "score") return [id, { type: "score", score: 1, confidence: 1,
+          legend: Object.fromEntries(question.criteria.map((value, index) => [String(index), value])),
+          probabilities: Object.fromEntries(question.criteria.map((_, index) => [String(index), index === 1 ? 1 : 0])) }];
+        const wanted = values[id] ?? (id.includes("outcome") ? "succeeded" : id.includes("visible") || id.includes("entity") ? "visible"
+          : id.includes("goal_status") || id.includes("belief_status") || id.includes("fact") ? "unchanged" : id.includes("request_progress") ? "complete" : "none");
+        const choice = wanted in question.criteria ? wanted : "none" in question.criteria ? "none" : Object.keys(question.criteria)[0]!;
+        return [id, { type: "choice", choice, confidence: 1, probabilities: Object.fromEntries(Object.keys(question.criteria).map(key => [key, key === choice ? 1 : 0])) }];
+      }));
+      response.writeHead(200, { "content-type": "application/json" });
+      response.end(JSON.stringify({ model, answers, usage: { input_tokens: 100, output_tokens: 10 } })); return;
+    }
     const output = model === "e2e-truth" ? truthOutput(context) : agentOutput(context);
     response.writeHead(200, { "content-type": "application/json" });
     response.end(JSON.stringify({

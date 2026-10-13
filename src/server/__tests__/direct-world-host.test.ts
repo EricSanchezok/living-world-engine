@@ -15,6 +15,33 @@ import { SimulationEngine } from "../../engine/runtime/simulation";
 import { readDirectState } from "../../engine/direct/state";
 
 describe("direct world through persistent WorldHost", () => {
+  it("returns a failed player task for retry without running unrelated NPCs or changing physical state", async () => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-failure-"));
+    const f = directTestProvider(wire => {
+      if (JSON.stringify(wire.state).includes("fail-this-request")) return new Response("unavailable", { status: 401 });
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id, nativeAnswer(q,
+        id === "operation" ? "observe" : id === "target" ? "self" : id.includes("outcome") ? "succeeded" : "none")]));
+    });
+    await f.registry.capture();
+    const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
+    const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
+    try {
+      const host = new WorldHost({ repository: new MemoryWorldRepository({ [world.id]: world }), store: database, ledger: database, provider: f.gateway });
+      const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } }), id = created.summary.id;
+      await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });
+      const participant = Object.values(database.readInstance(id).document.participants)[0]!;
+      await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "first-fails", text: "fail-this-request" });
+      for (let i = 0; i < 100 && database.readInstance(id).document.state.revision === 0; i++) await new Promise(resolve => setTimeout(resolve, 10));
+      const failed = database.readInstance(id).document;
+      expect(Object.values(failed.runs).find(run => run.rootIntents.some(intent => intent.submissionId === "first-fails"))?.status).toBe("failed");
+      expect(failed.state.truth).toEqual(world.initialState.truth); expect(f.transport).toHaveBeenCalledTimes(1);
+      expect(failed.actionWindow?.requiredAgentIds).toContain("player");
+      expect(replaySimulationState(failed.state)).toEqual(failed.state);
+      await host.submitAction(id, participant.id, { expectedRevision: 1, submissionId: "retry-observe", text: "查看自己" });
+      for (let i = 0; i < 100 && database.readInstance(id).document.state.revision === 1; i++) await new Promise(resolve => setTimeout(resolve, 10));
+      expect(database.readInstance(id).document.state.truth.elapsedSeconds).toBe(1);
+    } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+  });
   it("continues one compound player intent and returns a delivered NPC refusal to the player", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-dialogue-")); let playerDecisions = 0;
     const f = directTestProvider(wire => {
@@ -25,7 +52,7 @@ describe("direct world through persistent WorldHost", () => {
         let choice = id.includes("outcome") ? "succeeded" : id.includes("goal_status") || id.includes("belief_status") ? "unchanged"
           : id.includes("delivery") ? "delivered" : id.includes("visible") || id.includes("entity") ? "visible" : id.includes("fact") ? "unchanged" : "none";
         if (id === "operation") choice = player && playerDecisions === 1 ? "observe" : "speak";
-        if (id === "target") choice = !player ? "traveler" : playerDecisions === 1 ? "self" : q.type === "choice"
+        if (id === "target" || id === "recipient") choice = !player ? "traveler" : playerDecisions === 1 ? "self" : q.type === "choice"
           ? Object.entries(q.criteria).find(([, value]) => (value as { name?: string })?.name === "附近的人")?.[0] ?? "none" : "none";
         if (id === "speech") choice = "compose";
         if (id === "dialogue") choice = player ? "ask_price" : "refuse";

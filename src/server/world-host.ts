@@ -1213,7 +1213,7 @@ export class WorldHost {
           id: this.idFactory(),
           revision: initial.state.revision,
           step: initial.state.step,
-          title: "你已进入世界",
+          title: `此刻，你是${displayName}`,
           scene: origin.fallbackArrival,
           possibleNextActions: ["观察四周", "确认自己所在的位置", "寻找一个可以交谈的人"],
           generated: false,
@@ -2088,6 +2088,10 @@ export class WorldHost {
         runRecord.committedRevisions.filter(revision => document.state.history.some(step => step.revision === revision &&
           step.temporalBoundary.deltaSeconds > 0)).length >= runRecord.requestedBoundaryCount;
       const directControl = document.state.executionState?.data.kind === "direct-world" ? document.state.executionState.data as unknown as DirectRuntimeState : null;
+      const directRootFailures = runRecord.rootIntents.flatMap(intent => {
+        const task = directControl?.intents[intent.agentId];
+        return task?.status === "failed" && task.failure ? [task.failure] : [];
+      });
       const directRootComplete = directControl && runRecord.rootIntents.length > 0 && runRecord.rootIntents.every(intent =>
         directControl.completedSubmissionIds.includes(intent.submissionId)) &&
         !Object.entries(directControl.intents).some(([id, intent]) => document.policyBindings[id]?.kind === "model" && intent.causeActionId && (intent.status === "ready" || intent.status === "active"));
@@ -2099,7 +2103,11 @@ export class WorldHost {
       const budgetReached = runRecord.lease.commitCount >= runRecord.lease.maxCommits ||
         this.now().getTime() - Date.parse(runRecord.lease.startedAt) -
           (runRecord.lease.suspendedDurationMs ?? 0) >= runRecord.lease.maxWallTimeMs;
-      if (requestedComplete) {
+      if (directRootFailures.length) {
+        runRecord.status = "failed"; runRecord.stopReason = "local-model-task-failed";
+        runRecord.error = directRootFailures.map(failure => failure.message).join("; ");
+        if (requiredAgentIds.length) document.actionWindow = this.openWindow(document, requiredAgentIds);
+      } else if (requestedComplete) {
         runRecord.status = "completed";
         runRecord.stopReason = "requested-boundaries-completed";
       } else if (rootComplete && runRecord.trigger === "participant_action") {

@@ -11,6 +11,15 @@ registry:
   stale_after_ms: 86400000
 
 accounts:
+  typesafe-e2e:
+    channel: api
+    region: local
+    protocol: typesafe-systemone
+    dialect: typesafe
+    models_dev_provider_id: typesafe
+    base_url: http://127.0.0.1:32128
+    api_key_env: E2E_MODEL_API_KEY
+    max_concurrency: 16
   deepseek-e2e:
     channel: api
     region: local
@@ -22,6 +31,33 @@ accounts:
     max_concurrency: 16
 
 profiles:
+  decision-jev:
+    account_id: typesafe-e2e
+    selector: { kind: exact, model_id: jev-1.13.0 }
+    description: E2E native typed decisions
+    allowed_roles: [decision]
+    request_timeout_ms: 10000
+    max_output_tokens: 8192
+    max_input_bytes: 262144
+    inference: {}
+  decision-deepseek:
+    account_id: deepseek-e2e
+    selector: { kind: exact, model_id: e2e-truth }
+    description: E2E decision comparison
+    allowed_roles: [decision]
+    request_timeout_ms: 10000
+    max_output_tokens: 8192
+    max_input_bytes: 524288
+    inference: { thinking: disabled }
+  creation-deepseek:
+    account_id: deepseek-e2e
+    selector: { kind: exact, model_id: e2e-truth }
+    description: E2E open content creation
+    allowed_roles: [creation]
+    request_timeout_ms: 10000
+    max_output_tokens: 8192
+    max_input_bytes: 524288
+    inference: { thinking: disabled }
   truth-deepseek:
     account_id: deepseek-e2e
     selector: { kind: exact, model_id: e2e-truth }

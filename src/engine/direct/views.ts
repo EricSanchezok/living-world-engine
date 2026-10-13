@@ -8,23 +8,18 @@ import { captureDependencies, orderedValues } from "./state";
 export function privateActionView(state: Readonly<SimulationState>, agentId: string): DirectLocalView {
   const agent = state.agents[agentId]; if (!agent) throw new Error("unknown decision owner");
   const perspective = projectAgentPerspective(state, agent);
-  const evidenceIds = new Set([
-    ...Object.values(agent.character.goals).filter(goal => goal.status === "active").flatMap(goal => goal.evidenceIds),
-    ...Object.values(agent.character.commitments).filter(commitment => commitment.status === "active").flatMap(commitment => commitment.evidenceIds),
-    ...Object.values(agent.belief.claims).flatMap(claim => claim.evidenceIds),
-    ...Object.values(agent.belief.evidence).filter(evidence => evidence.step >= agent.observationCursorStep).map(evidence => evidence.id),
-  ]);
   const entities = Object.fromEntries(Object.values(agent.bindings).sort((a, b) => a.localEntityId.localeCompare(b.localEntityId)).filter(binding => binding.canonicalEntityIds.length === 1 &&
     agent.belief.localEntities[binding.localEntityId]).map(binding => [binding.localEntityId, binding.canonicalEntityIds[0]!]));
-  const keys = [`agent:${agentId}`, `entity:${agent.entityId}`, `placement:${agent.entityId}`, `collections:${agent.entityId}`,
+  const keys = ["clock", `agent:${agentId}`, `entity:${agent.entityId}`, `placement:${agent.entityId}`, `collections:${agent.entityId}`,
     ...Object.values(state.truth.quantities).filter(quantity => quantity.holderId === agent.entityId).map(quantity => `quantity:${quantity.id}`),
     ...Object.values(state.truth.meters).filter(meter => meter.entityId === agent.entityId).map(meter => `meter:${meter.id}`),
     ...Object.values(state.truth.ratings).filter(rating => rating.entityId === agent.entityId).map(rating => `rating:${rating.id}`),
     ...Object.values(state.truth.facts).filter(fact => Object.values(entities).includes(fact.subjectId) &&
       (fact.access.kind === "public" || fact.access.kind === "agents" && fact.access.agentIds.includes(agentId))).map(fact => `fact:${fact.id}`)];
-  const view = { agentId: perspective.agentId, self: perspective.self, mechanics: perspective.mechanics,
+  const view = { agentId: perspective.agentId, elapsedSeconds: perspective.elapsedSeconds, self: perspective.self, mechanics: perspective.mechanics,
     knowledge: perspective.knowledge, character: perspective.character };
-  return { state: { ...view, knowledge: { ...view.knowledge, evidence: view.knowledge.evidence.filter(evidence => evidenceIds.has(evidence.id)) } } as unknown as JsonValue,
+  // Delivered evidence remains memory after the observation cursor advances.
+  return { state: view as unknown as JsonValue,
     reads: captureDependencies(state, keys), entities };
 }
 
@@ -43,11 +38,12 @@ export function localWorldView(state: Readonly<SimulationState>, definition: Wor
   const meters = orderedValues(state.truth.meters).filter(meter => ids.has(meter.entityId));
   const ratings = orderedValues(state.truth.ratings).filter(rating => ids.has(rating.entityId));
   const conditions = orderedValues(state.truth.conditions).filter(condition => ids.has(condition.subjectId));
-  const keys = [...[...ids].flatMap(id => [`entity:${id}`, `placement:${id}`, `members:${id}`, `collections:${id}`]),
+  const keys = [...frames.map(frame => `agent:${frame.actorId}`), ...[...ids].flatMap(id => [`entity:${id}`, `placement:${id}`, `members:${id}`, `collections:${id}`]),
     ...facts.map(fact => `fact:${fact.id}`), ...quantities.map(quantity => `quantity:${quantity.id}`),
     ...meters.map(meter => `meter:${meter.id}`), ...ratings.map(rating => `rating:${rating.id}`), ...conditions.map(condition => `condition:${condition.id}`)];
   return { state: { world: { name: definition.name, description: definition.description, laws: definition.laws },
-    actions: frames, entities: [...ids].map(id => state.truth.entities[id]), placements: Object.fromEntries([...ids].map(id => [id, state.truth.placements[id]])),
+    actions: frames, deliveredEvidence: Object.fromEntries(frames.map(frame => [frame.actorId, orderedValues(state.agents[frame.actorId]!.belief.evidence)])),
+    entities: [...ids].map(id => state.truth.entities[id]), placements: Object.fromEntries([...ids].map(id => [id, state.truth.placements[id]])),
     facts, quantities, meters, ratings, conditions } as unknown as JsonValue,
     reads: captureDependencies(state, keys), entities: Object.fromEntries([...ids].map(id => [id, id])) };
 }

@@ -97,7 +97,7 @@ test("the observer conversation matches light and dark responsive baselines", as
     await expect(page.getByText("正在确认你的行动", { exact: true })).toBeVisible();
     await expect(page).toHaveScreenshot(`instance-control-notice-${colorScheme}-desktop.png`, screenshotOptions);
     releaseAdvance();
-    await expect(page.getByText("世界继续变化。").first()).toBeVisible();
+    await expect(page.getByText(/你查看了眼前的情况/).first()).toBeVisible();
     await page.unroute("**/api/instances/*/advance");
 
     await page.setViewportSize({ width: 320, height: 720 });
@@ -116,6 +116,11 @@ test("the participant conversation, control orb and inspector stay bounded", asy
   await expect(page).toHaveScreenshot("instance-participant-dark-desktop.png", screenshotOptions);
   await expect(page.locator(".cg-timeline-rail")).toBeVisible();
   await expect(page.getByLabel("你的行动")).toBeVisible();
+
+  // Bootstrap performs no inference. Create actual decision evidence before inspecting invocations.
+  await page.getByLabel("你的行动").fill("观察四周");
+  await page.getByRole("button", { name: "发送行动" }).click();
+  await expect(page.getByText(/你查看了眼前的情况/).last()).toBeVisible();
 
   await page.evaluate(() => {
     localStorage.setItem("livingworld:preferences:v2", JSON.stringify({
@@ -140,6 +145,7 @@ test("the participant conversation, control orb and inspector stay bounded", asy
 
   await page.setViewportSize({ width: 320, height: 720 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await settleResponsiveOverlay(page);
   await expect(page).toHaveScreenshot("instance-participant-dark-mobile.png", screenshotOptions);
 
   const debugResponse = await page.request.get(`/api/debug?instance=${instanceId}&limit=1`);

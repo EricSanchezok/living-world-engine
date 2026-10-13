@@ -1,4 +1,3 @@
-import { execFileSync } from "node:child_process";
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { loadModelCatalog } from "../../src/engine/models/model-catalog";
@@ -26,7 +25,6 @@ function model(id: string) {
 
 export default async function globalSetup(): Promise<void> {
   const dataRoot = path.resolve(process.env.LIVINGWORLD_E2E_DATA_ROOT ?? "e2e/artifacts/runtime-data");
-  const cacheRoot = path.resolve(process.env.LIVINGWORLD_E2E_CACHE_ROOT ?? ".livingworld-cache");
   const modelCatalog = path.resolve(
     process.env.LIVINGWORLD_E2E_MODEL_CATALOG_PATH ?? "e2e/artifacts/runtime-models.yaml",
   );
@@ -34,12 +32,15 @@ export default async function globalSetup(): Promise<void> {
   rmSync(dataRoot, { recursive: true, force: true });
   mkdirSync(path.dirname(modelCatalog), { recursive: true });
   const template = readFileSync(path.resolve("e2e/support/models.yaml"), "utf8");
-  writeFileSync(modelCatalog, template.replace("http://127.0.0.1:32128", `http://127.0.0.1:${modelPort}`));
+  writeFileSync(modelCatalog, template.replaceAll("http://127.0.0.1:32128", `http://127.0.0.1:${modelPort}`));
 
   const catalog = loadModelCatalog(modelCatalog);
   const registry = new ModelRegistry(catalog, dataRoot, {
     minimumRefreshIntervalMs: 0,
     fetch: async () => new Response(JSON.stringify({
+      typesafe: { id: "typesafe", name: "E2E TypeSafe", models: { "jev-1.13.0": {
+        ...model("jev-1.13.0"), family: "jev", reasoning: false, reasoning_options: [], temperature: false,
+      } } },
       deepseek: {
         id: "deepseek",
         name: "E2E DeepSeek",
@@ -55,27 +56,4 @@ export default async function globalSetup(): Promise<void> {
   });
   await registry.refresh({ reason: "capture" });
 
-  const retrievalEnvironment = {
-    ...process.env,
-    LIVINGWORLD_CACHE_ROOT: cacheRoot,
-    LIVINGWORLD_MODEL_CATALOG_PATH: modelCatalog,
-  };
-  const runRetrievalCommand = (script: string, args: readonly string[]): void => {
-    execFileSync(process.execPath, ["--import", "tsx", script, ...args], {
-      cwd: process.cwd(),
-      env: retrievalEnvironment,
-      stdio: "inherit",
-    });
-  };
-  runRetrievalCommand("scripts/operations/retrieval-model-install.ts", [
-    "--model",
-    "multilingual-e5-base",
-  ]);
-  runRetrievalCommand("scripts/operations/retrieval-cache-command.ts", [
-    "warm",
-    "--world",
-    "test/fixtures/open-world-script",
-    "--model",
-    "multilingual-e5-base",
-  ]);
 }

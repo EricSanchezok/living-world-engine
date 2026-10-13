@@ -22,6 +22,12 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       const spoken = settlement.frame.utterance && settlement.deliveredToEntityIds.includes(agent.entityId);
       let summary = spoken ? `${alias(agent, settlement.frame.actorEntityId, introductions).name}说：“${settlement.frame.utterance}”` :
         ownerId === settlement.frame.actorId ? `你尝试了“${settlement.frame.proposal.rawText}”。${settlement.outcome.summary}` : settlement.outcome.summary;
+      if (ownerId === settlement.frame.actorId && settlement.frame.kind === "observe" && settlement.frame.targetEntityId === agent.entityId &&
+        ["succeeded", "partial"].includes(settlement.outcome.status)) {
+        const inventory = Object.values(state.truth.quantities).filter(quantity => quantity.holderId === agent.entityId && quantity.amount > 0)
+          .map(quantity => { const resource = state.truth.mechanics.quantities[quantity.definitionId]!; return `${quantity.amount}${resource.unit}${resource.name}`; });
+        summary += `\n随身物资：${inventory.join("、") || "无"}。`;
+      }
       for (const operation of settlement.operations) if (operation.kind === "transfer_quantity") {
         summary += `\n${alias(agent, operation.fromHolderId, introductions).name}向${alias(agent, operation.toHolderId, introductions).name}转移了${operation.amount}${state.truth.mechanics.quantities[operation.definitionId]!.unit}${state.truth.mechanics.quantities[operation.definitionId]!.name}。`;
       }
