@@ -221,7 +221,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     targetEntityId: target, toolEntityId: ["use", "change", "speak"].includes(kind) ? view.entities[selected(answers, "tool")] ?? null : null,
     quantityDefinitionId: questions.resource && selected(answers, "resource") !== "none" ? selected(answers, "resource") : null,
     amount: selected(answers, "amount") === "unknown" ? null : amounts[Number(selected(answers, "amount").slice(1))]!, utterance,
-    capabilityId: questions.capability && selected(answers, "capability") !== "none" ? selected(answers, "capability") : null,
+    capabilityId: ["use", "change"].includes(kind) && questions.capability && selected(answers, "capability") !== "none" ? selected(answers, "capability") : null,
     startedAtSeconds: state.truth.elapsedSeconds, dueAtSeconds: state.truth.elapsedSeconds + durationSeconds,
     durationSeconds, progressSeconds: 0, activityStatus: "active",
     temporalProfileId: profileId, inputHash, causeActionId: intent.causeActionId, preparatoryFor,

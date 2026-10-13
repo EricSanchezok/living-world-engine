@@ -33,8 +33,10 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       const completedExpression = ["succeeded", "partial"].includes(settlement.outcome.status);
       const voiced = completedExpression && settlement.frame.kind !== "reflect" ? settlement.frame.utterance : null;
       const spoken = voiced && settlement.deliveredToEntityIds.includes(agent.entityId);
+      const observedActor = ownerId === settlement.frame.actorId ? "你" : alias(agent, settlement.frame.actorEntityId, introductions).name;
       let summary = spoken ? `${alias(agent, settlement.frame.actorEntityId, introductions).name}说：“${settlement.frame.utterance}”` :
-        ownerId === settlement.frame.actorId ? `你尝试了“${concreteAttempt}”。${settlement.outcome.summary}${voiced && settlement.frame.kind !== "speak" ? `你说：“${voiced}”` : ""}` : settlement.outcome.summary;
+        ownerId === settlement.frame.actorId ? `你尝试了“${concreteAttempt}”。${settlement.outcome.summary}${voiced && settlement.frame.kind !== "speak" ? `你说：“${voiced}”` : ""}`
+          : `${observedActor}的行动结果：${settlement.outcome.summary.replace(/^你/u, observedActor)}`;
       // Existing records remain in the private evidence store. Copying them into
       // each reflection recursively duplicates the entire history on later turns.
       if (ownerId === settlement.frame.actorId && settlement.frame.kind === "reflect" && settlement.frame.utterance) {

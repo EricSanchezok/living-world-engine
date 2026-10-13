@@ -13,3 +13,5 @@ Delivered dialogue uses references: place [[speech-...]] exactly as supplied, wi
 Return one JSON object with a paragraphs array. Each string is one complete paragraph. Continue after publishedPrefix without restating or changing it. previousScenes is a rhythm/continuity reference only; unsupported details in older prose are not facts.
 
 Compare the current packet with previousScenes before choosing details. Mention an unchanged description again only when it explains a new consequence or answers the current focus. A repeated search with no discovery needs a brief unresolved result, not another tour. A delivered utterance is presented once through its reference; do not first paraphrase that same speech as another completed exchange. Do not convert incidental marks or old appearance details into new prerequisites for an activity.
+
+A current use/change event belongs to its named actor. Its executed-method receipt is evidence that the actor performed that method, even when no new words were spoken and the resulting object resembles its prior state. Do not turn silent physical work into inaction. Earlier words about waiting do not override the current event.

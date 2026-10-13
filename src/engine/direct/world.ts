@@ -359,6 +359,9 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       if (["use", "change"].includes(frame.kind)) {
         const noConfirmedEffect = !ongoing && operations.length === 0 && randomRequests.length === 0;
         detail = ongoing ? "你已开始持续进行这项活动。" : noConfirmedEffect ? "你作出了这次尝试，尚无可确认的状态变化。" : "本次操作已执行，具体结果以观察到的状态为准。";
+        const method = answers[`${prefix}_capability`] && selected(answers, `${prefix}_capability`) === "apply"
+          ? decisions.control.capabilities.find(capability => capability.id === frame.capabilityId) : null;
+        if (method && !noConfirmedEffect && !ongoing) detail = `本次已执行的方法：${method.description}。具体结果以观察到的状态为准。`;
         if (noConfirmedEffect) status = "partial";
       }
       if (expansion) { operations.push(...expansion.operations); detail += ` ${expansion.draft.description}`; }

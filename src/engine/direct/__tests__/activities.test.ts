@@ -20,6 +20,7 @@ function option(question: DecisionQuestionV2, predicate: (value: unknown) => boo
 }
 async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "construct" | "ongoing" | "wait" = "repair", deadline = 120) {
   let extensionUsed = false;
+  let operationOverride: string | undefined;
   const f = directTestProvider(wire => {
     if (!wire.questions && directCreationContext(wire).chosenDirection) return { attempt: "使用材料完成请求的具体操作", utterance: null, manner: null };
     if (!wire.questions && mode === "construct") return { description: "制作可见提示牌", applicability: "有适用的材料时制作", effectDescription: "制成一块可见提示牌",
@@ -27,7 +28,7 @@ async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "co
     if (!wire.questions) return { description: "临时隔振", applicability: "用现有缓冲材料隔离设备振动", effectDescription: "设备获得可观察的临时隔振状态",
       effects: [{ kind: "fact", subject: "target", predicate: "vibration-isolation", value: "temporary", description: "缓冲材料使振动暂时隔离。" }] };
     const context = wire.state as { perspective?: { agentId: string }; actions?: Array<{ proposal: { rawText: string } }> };
-    const values: Record<string, string> = { operation: mode === "wait" ? "wait" : mode === "extend" && !extensionUsed ? "expand" : "use",
+    const values: Record<string, string> = { operation: operationOverride ?? (mode === "wait" ? "wait" : mode === "extend" && !extensionUsed ? "expand" : "use"),
       target: "pump", tool: "none", amount: "n0", resource: "none", speech: "none", timing: mode === "ongoing" ? "ongoing-action" : "default", goal: "none" };
     if (context.perspective && mode === "extend") extensionUsed = true;
     return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
@@ -59,7 +60,8 @@ async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "co
   const roster: Record<string, PolicyBinding> = Object.fromEntries(Object.keys(world.initialState.agents).map(id => [id,
     { kind: "external", agentId: id, participantId: "human" }]));
   await engine.bootstrapAgents();
-  const act = async (text: string, owner = "engineer") => {
+  const act = async (text: string, owner = "engineer", operation?: string) => {
+    operationOverride = operation;
     const result = await engine.step(roster, { expectedRevision: engine.snapshot.revision, trigger: "participant_action",
       externalActions: [{ agentId: owner, submissionId: `submission-${engine.snapshot.revision}`, rawText: text, goal: text, means: null, targetIds: [] }] });
     const failure = readDirectState(result.state.executionState!, result.state).intents[owner]!.failure;
@@ -139,9 +141,21 @@ describe("direct activities use code-owned mechanics", () => {
     expect(first.committed.observations.find(packet => packet.observerId === "engineer")?.summary).toContain("振动暂时隔离");
     expect(first.committed.observations.find(packet => packet.observerId === "inspector")?.summary).toContain("振动暂时隔离");
     const second = await f.act("使用刚才观察到的临时隔振方法", "inspector");
+    const witnessed = second.committed.observations.find(packet => packet.observerId === "engineer")!;
+    expect(witnessed.scene).toMatchObject({ actor: "检查员乔伊", actionKind: "use", outcome: expect.stringContaining("已执行的方法：临时隔振") });
+    expect(witnessed.summary).toContain("已执行的方法：临时隔振");
+    expect(witnessed.summary).toMatch(/^检查员乔伊的行动结果：/u);
     expect(readDirectState(second.state.executionState!, second.state).capabilities).toHaveLength(1);
     expect(f.transport.mock.calls.filter(([, init]) => !JSON.parse(String(init?.body)).questions)).toHaveLength(1);
     expect(replaySimulationState(second.state)).toEqual(second.state);
+  });
+  it("ignores a learned physical capability selected on an unused action branch", async () => {
+    const f = await fixture("extend"); await f.act("用缓冲材料临时隔离设备振动");
+    const before = f.engine.snapshot;
+    const result = await f.act("先看看设备，不进行隔振", "inspector", "observe");
+    expect(result.state.history.at(-1)!.directEvent!.frames[0]!.capabilityId).toBeNull();
+    expect(result.state.truth.facts).toEqual(before.truth.facts);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
   });
   it("retains continuous work across a deadline without another model request and allows interruption", async () => {
     const f = await fixture("ongoing"); const first = await f.act("持续监控冷却泵");

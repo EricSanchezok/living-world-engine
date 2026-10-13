@@ -18,6 +18,8 @@ A finite physical use or change with no admitted effect records a partial attemp
 
 The private action context also highlights recent owned actions and current claims with their evidence kinds and observation steps. Conditional instructions resolve against those records before selecting the concrete branch; incidental appearance traces do not introduce extra prerequisites. Recipient discovery retains the selected known search location, and exploration may expand that location before a recipient exists. This context does not import another character's hidden cognition or canonical identity bindings.
 
+A performed reusable capability names its executed method in the receipt. Actual observers receive that method and the actor's local label with its visible results, including silent physical work; the source does not expose private reasoning or misattribute witnessed work to the observer. A capability answer on an unselected physical branch has no effect or knowledge propagation.
+
 ## Persistent activities and the timeline
 
 Bootstrap saves the world and every Agent's initial intention without model inference. Initial NPC decisions are durable ready tasks and execute when the host advances the world. A submitted player action gets priority over unrelated initial work; received observations and deadlines wake relevant NPCs.
