@@ -22,6 +22,8 @@ A 使用独立冻结的旧引擎 checkout；B 使用新架构及 DeepSeek 决策
 
 第二批的 B/C 引擎冻结于 `c4ed0a37`。第一组 A、B 均创建了完整 49 主体，玩家到达后 revision 为 1、step 为 0、历史为空；驱动错误地要求 revision 为 0，因此没有提交玩家输入。暂停后续样本后，只修正测量与行政恢复代码，保留两个实例及原始失败记录，允许通过 `--resume-arrivals` 继续相同输入。恢复不重复初始化、不改引擎生产者或模型输出；原驱动未保存的冷启动精确耗时标记为不可用，已发生费用全部保留。该修复用独立驱动提交记录，不将测量错误伪装成任务结果。
 
+恢复后的第一组 A 首次输入耗时 372.64 秒、费用约 18.397991712 元，因 `observation for lord-maracan contains protected information` 被拒绝；没有规范提交或玩家反馈。第二次输入启动后，为给新引擎及工作台检查保留累计预算，停止新增调用并收齐在途用量，新增约 1.630776096 元；该输入记为删失，第三次未执行。A 的最终状态仍可零模型调用重放，Ledger 无孤立记录或索引缺失。该失败基线不产生速度或成功任务费用比。
+
 ## 运行方式
 
 先提交已经检查的实现，然后执行 `npx tsx scripts/experiments/jev-qualification.ts --mode prepare --root <new-evidence-directory> --baseline-root <frozen-checkout> --budget-root <existing-cumulative-budget-directory> --cache-root <existing-local-retrieval-cache>`。该步骤不调用付费模型，固定生产者提交、模型目录、世界内容及协议。随后对同一证据目录分别执行 `--mode canary --root <evidence-directory>` 和 `--mode confirmation --root <evidence-directory>`。任何生产者或协议修改都要求新的证据目录；已有的部分样本不允许静默重抽。
