@@ -80,6 +80,18 @@ describe("direct world through persistent WorldHost", () => {
       expect(document.actionWindow?.requiredAgentIds).toContain("player");
       expect(state.truth.quantities).toEqual(world.initialState.truth.quantities);
       expect(f.transport).toHaveBeenCalledTimes(6); expect(replaySimulationState(state)).toEqual(state);
+      const takeover = await host.transferControl(id, { expectedRevision: state.revision, target: { kind: "agent", agentId: "keeper" } });
+      expect(takeover.actionWindow?.requiredAgentIds).toContain("keeper");
+      await host.submitAction(id, takeover.conversation!.participantId, { expectedRevision: state.revision, submissionId: "after-takeover", text: "拒绝交换" });
+      for (let i = 0; i < 300; i++) {
+        const latest = database.readInstance(id).document;
+        const intent = latest.participantIntents.find(value => value.submissionId === "after-takeover");
+        if (intent && !["queued", "running", "pausing"].includes(latest.runs[intent.runId]!.status)) break;
+        await new Promise(resolve => setTimeout(resolve, 10));
+      }
+      const resumed = database.readInstance(id).document;
+      expect(resumed.state.history.some(step => step.directEvent?.frames.some(frame => frame.submissionId === "after-takeover" && frame.actorId === "keeper"))).toBe(true);
+      expect(replaySimulationState(resumed.state)).toEqual(resumed.state);
     } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
   });
   it("admits the full Blackmarsh 49 subjects without calls and runs their private queued decisions", async () => {

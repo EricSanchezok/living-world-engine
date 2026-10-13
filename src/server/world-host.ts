@@ -316,13 +316,13 @@ function currentRun(document: WorldInstanceDocument): WorldRunRecord | undefined
     .sort((left, right) => right.createdAt.localeCompare(left.createdAt) || right.id.localeCompare(left.id))[0];
 }
 
-function externalDecisionAgentIds(document: WorldInstanceDocument): string[] {
+function externalDecisionAgentIds(document: WorldInstanceDocument, deferForReactions = true): string[] {
   if (document.state.executionState?.data.kind === "direct-world") {
     const control = document.state.executionState.data as unknown as DirectRuntimeState;
     const busy = new Set([...control.activities.filter(frame => frame.dueAtSeconds !== null).map(frame => frame.actorId),
       ...Object.entries(control.intents).filter(([, intent]) => intent.activeSubmission && ["ready", "active"].includes(intent.status)).map(([id]) => id)]);
     const reacting = Object.entries(control.intents).some(([id, intent]) => document.policyBindings[id]?.kind === "model" && intent.causeActionId && (intent.status === "ready" || intent.status === "active"));
-    if (reacting) return [];
+    if (reacting && deferForReactions) return [];
     return Object.values(document.policyBindings).filter(binding => binding.kind === "external" && !busy.has(binding.agentId)).map(binding => binding.agentId).sort();
   }
   const decisionAgents = new Set(document.state.history.at(-1)?.decisionPoints.map((point) => point.agentId) ?? []);
@@ -2316,7 +2316,7 @@ export class WorldHost {
       if (previousRun?.status === "preparation-invalidated" && document.actionWindow?.status === "resolving") {
         document.actionWindow = null;
       }
-      let requiredAgentIds = externalDecisionAgentIds(document);
+      let requiredAgentIds = externalDecisionAgentIds(document, !["awaiting-decision", "completed"].includes(previousRun?.status ?? "completed"));
       if (previousRun && (previousRun.status === "paused" || previousRun.status === "budget-paused" ||
         previousRun.status === "debug-paused" || previousRun.status === "failed") &&
         document.policyBindings[participant.agentId]?.kind === "external") {
@@ -2566,7 +2566,7 @@ export class WorldHost {
           }
           return null;
         }
-        const requiredAgentIds = externalDecisionAgentIds(document);
+        const requiredAgentIds = externalDecisionAgentIds(document, false);
         if (requiredAgentIds.length === 0) {
           document.actionWindow = null;
           if (activeRun?.status === "awaiting-decision") {
