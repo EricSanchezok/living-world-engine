@@ -8,8 +8,9 @@ import type { ActionFrame } from "./contracts";
 import type { DirectDecisions } from "./decisions";
 import { agentCapabilityModels } from "../models/capability-bindings";
 import { selected } from "./decisions";
-import { ModelOutputError } from "../models/model-provider";
+import { ModelOutputError, type StructuredModelResult } from "../models/model-provider";
 import { establishedEntityDirectory } from "./state";
+import type { DecisionQuestionV2 } from "../models/decision-v2";
 
 const schema = z.object({
   description: z.string().min(1),
@@ -51,15 +52,16 @@ export function materializeExpansion(state: Readonly<SimulationState>, definitio
     facts.push(fact); operations.push({ kind: "set_fact", fact, ...source });
   };
   const pending = [...draft.entities], ordered: WorldExpansionDraft["entities"] = [];
-  const available = new Set(["scene", "actor", "target", "tool"].filter(key => refs[key]));
+  const available = new Set(["scene", "actor", "target", "tool"].flatMap(key => refs[key] ? [key, refs[key]!] : []));
   while (pending.length) {
     const index = pending.findIndex(entity => available.has(entity.placement));
     if (index < 0) throw new Error("Expansion placements contain an unknown reference or cycle");
     const entity = pending.splice(index, 1)[0]!;
-    ordered.push(entity); available.add(entity.key);
+    ordered.push(entity); available.add(entity.key); available.add(refs[entity.key]!);
   }
   for (const draftEntity of ordered) {
-    const id = refs[draftEntity.key]!, placementId = refs[draftEntity.placement];
+    const id = refs[draftEntity.key]!, placementId = Object.hasOwn(refs, draftEntity.placement) ? refs[draftEntity.placement]
+      : Object.values(refs).includes(draftEntity.placement) ? draftEntity.placement : null;
     if (!placementId) throw new Error("Expansion placement has no actual target");
     const entity: WorldEntity = { id, kind: draftEntity.character ? "person" : draftEntity.kind, name: draftEntity.name,
       description: draftEntity.appearance, lifecycle: "active", createdAtStep: state.step + 1 };
@@ -97,7 +99,7 @@ export async function createWorldExpansion(state: Readonly<SimulationState>, def
   let repair: string | null = null;
   let previousDraft: WorldExpansionDraft | null = null;
   for (let attempt = 0; attempt < 2; attempt++) {
-    let result;
+    let result: StructuredModelResult<WorldExpansionDraft>;
     try { result = await decisions.provider.generateStructured({ ...decisions.scope, modelRegistrySnapshotHash: decisions.control.registryHash,
       profileId: agentCapabilityModels(state, decisions.control, frame.actorId).creation, subjectId: "world", role: "creation", modelInvocation: decisions.next("world"),
       system, userPrompt, promptVersion: `world-expansion-${contentHash([system, userPrompt])}`, schemaName: "WorldExpansionDraftV1", schema,
@@ -117,16 +119,29 @@ export async function createWorldExpansion(state: Readonly<SimulationState>, def
     catch (error) { repair = error instanceof Error ? error.message : String(error); continue; }
     try {
       if (!expansion.operations.length) return { expansion, audits };
-      const admitted = await decisions.ask(null, { localWorld: context, establishedEntities: establishedEntityDirectory(state), action: frame, addition: result.value } as unknown as JsonValue,
+      const { entities, facts, events } = result.value;
+      const passages = [
+        ...entities.map(entity => ({ owner: entity.name, text: entity.appearance, kind: entity.kind, characterRegistered: Boolean(entity.character) })),
+        ...facts.map(fact => ({ owner: fact.subject, text: `${fact.description} ${fact.value}` })),
+        ...events.map(text => ({ owner: "scene", text })),
+      ];
+      const coverage = Object.fromEntries(passages.map((passage, index): [string, DecisionQuestionV2] => [`coverage${index}`, {
+        type: "choice", version: "expansion-coverage-2",
+        instructions: { task: "Check only this passage against the declared inventory. Every newly mentioned PERSON or independent OBJECT needs an entry. Portable tools, weapons, containers, poles, food and furniture are independent even when held, worn, hanging, decorative or used only to describe a location. Body parts, ordinary clothing and integral fixed surfaces need no entry. An object mentioned inside another appearance is not thereby registered. A new person needs character settings. Existing local objects need no duplicate. Ignore claims that all content was registered; compare the actual entries.", passage,
+          declaredInventory: entities.map(entity => ({ name: entity.name, label: entity.label, key: entity.key, characterRegistered: Boolean(entity.character) })),
+          existingLocalEntities: (context as { entities?: JsonValue }).entities ?? [] },
+        criteria: { complete: "Every independent person and object in this passage is registered", missing: "At least one independent person or object in this passage lacks an entry" },
+      }]));
+      const admitted = await decisions.ask(null, { localWorld: context, establishedEntities: establishedEntityDirectory(state), action: frame, addition: { entities, facts, events } } as unknown as JsonValue,
         reads, {
           accept: { type: "choice", version: "expansion-admission-2", instructions: "Can this addition occur here, respecting existing facts, time, materials and private knowledge? Public descriptions cannot expose secrets or manufacture a successful player outcome. Do not clone or relocate an established named person or business under an alias. Ordinary distinct items of a generic kind are allowed. The continuity directory is world-only, not automatic perceptual evidence.",
             criteria: { apply: "Plausible and consistent; introduce it", reject: "Conflicts or lacks necessary means", unknown: "Insufficient basis" } },
-          coverage: { type: "choice", version: "expansion-coverage-1", instructions: "Inspect the new draft's appearances, facts and events. Does EVERY newly described person and independently usable object have an entity entry? A person also needs character settings. A clerk, loose tool, bucket, crate or food inside another description is still an independent entity. Existing objects in localWorld need no duplicate entry. Body parts, clothing worn as appearance and integral fixed surfaces need no separate entry. The description field is an audit summary, not a new fact.",
-            criteria: { complete: "All new people and independent objects have entries", missing: "An appearance, fact or event introduces a person or independent object without its entry" } },
+          ...coverage,
         });
       if (selected(admitted, "accept") !== "apply") return { expansion: null, audits };
-      if (selected(admitted, "coverage") === "complete") return { expansion, audits };
-      repair = "The admission judgment found a newly described person or independently usable object without an entity entry. Inspect previousDraft appearances, facts and events. Add the missing entries, including character settings for people, or remove unneeded new props from those descriptions. Preserve established identities. Do not introduce further undeclared objects. Return the complete corrected draft.";
+      const missing = passages.filter((_, index) => selected(admitted, `coverage${index}`) === "missing");
+      if (!missing.length) return { expansion, audits };
+      repair = `These passages mention a person or independently usable object without an entity entry: ${JSON.stringify(missing)}. Add all missing entries, including character settings for people, or remove unneeded props from those passages. Do not merely claim completeness in description; that summary is not an entity. Preserve established identities and return the complete corrected draft.`;
     }
     catch (error) { throw Object.assign(error instanceof Error ? error : new Error(String(error)), { audits }); }
   }

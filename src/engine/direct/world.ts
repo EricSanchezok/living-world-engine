@@ -257,7 +257,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       !/\d+\s*(秒|分钟|小时|seconds?|minutes?|hours?)/iu.test(frame.proposal.rawText));
     frame.durationSeconds = duration;
     frame.dueAtSeconds = Math.max(state.truth.elapsedSeconds + 1, frame.startedAtSeconds + duration);
-    let status: ActionOutcome["status"] = expansionFailures.has(frame.id) || capabilityFailures.has(frame.id) ? "blocked"
+    let status: ActionOutcome["status"] = capabilityFailures.has(frame.id) ? "blocked"
+      : expansionFailures.has(frame.id) ? frame.kind === "observe" && ["succeeded", "partial"].includes(verdict) ? "partial" : "blocked"
       : verdict === "unknown" ? worldExpansions.has(frame.id) && frame.kind === "observe" ? "succeeded" : "blocked" : verdict as ActionOutcome["status"];
     let operations: WorldDeltaOperation[] = [];
     const randomRequests: PreparedDirectAction["randomRequests"] = [], randomBindings: PreparedDirectAction["randomBindings"] = [];

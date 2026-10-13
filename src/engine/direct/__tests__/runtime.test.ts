@@ -40,7 +40,7 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
       if (id.endsWith("_world_expansion")) value = options.introduce ? "introduce" : "none";
       if (id.endsWith("_request_progress")) value = options.reactionProgress ?? "complete";
       if (id === "accept") value = "apply";
-      if (id === "coverage") value = options.missingCoverage || options.creationResponses && creations === 1 ? "missing" : "complete";
+      if (id.startsWith("coverage")) value = options.missingCoverage || options.creationResponses && creations === 1 ? "missing" : "complete";
       if (id.endsWith("_expression")) value = options.effectExpansion ? "expand" : "existing";
       if (id.endsWith("_movement")) value = options.movement ?? "enter";
       if (q.type === "choice" && !(value in q.criteria)) value = "none" in q.criteria ? "none" : Object.keys(q.criteria)[0]!;
@@ -67,21 +67,34 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
-  it.each([false, true])("repairs undeclared props and characters at most once before admission: missing=%s", async missingCoverage => {
+  it.each([[false, false], [false, true], [true, false]])("repairs undeclared props and characters at most once before admission: missing=%s, canonical=%s", async (missingCoverage, canonical) => {
     const first = { description: "A worker beside a bucket", entities: [{ key: "worker", kind: "person", name: "Worker", label: "Worker",
       appearance: "A worker standing beside a loose bucket.", placement: "scene", character: { persona: "Careful", voice: "Brief", goal: "Finish work" } }], facts: [], events: [] };
     const second = { ...first, entities: [{ key: "bucket", kind: "object", name: "Bucket", label: "Bucket", appearance: "An empty wooden bucket.", placement: "worker" }, ...first.entities] };
     const f = await fixture({ target: "none", observationScope: "surroundings", creationEnabled: true, introduce: true,
       creationResponses: [first, second], missingCoverage });
+    if (canonical) first.entities[0]!.placement = f.world.initialState.truth.placements.player!;
     await f.engine.bootstrapAgents();
     const result = await f.engine.step(f.roster, f.request("看看附近的工人与可使用的物件"));
     const creations = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => !directDecisionContext(wire));
     expect(creations).toHaveLength(2);
     expect(directCreationContext(creations[1]).previousDraft).toEqual(first);
     expect(directCreationContext(creations[1]).repair).toContain("without an entity entry");
+    const admission = f.transport.mock.calls.map(([, init]) => directDecisionContext(JSON.parse(String(init?.body))))
+      .find(wire => wire?.questions.accept)!;
+    expect(admission.state).toHaveProperty("addition.entities", first.entities);
+    expect(admission.state).not.toHaveProperty("addition.description");
+    expect(admission.questions.coverage0!.instructions).toMatchObject({ task: {
+      passage: { owner: "Worker", text: first.entities[0]!.appearance },
+      declaredInventory: [{ name: "Worker", key: "worker", characterRegistered: true }],
+    } });
     const entities = Object.values(result.state.truth.entities).filter(entity => entity.id.startsWith("expansion-"));
     expect(entities.map(entity => entity.name).sort()).toEqual(missingCoverage ? [] : ["Bucket", "Worker"]);
     expect(Object.keys(result.state.agents)).toHaveLength(missingCoverage ? 2 : 3);
+    if (missingCoverage) {
+      expect(result.committed.outcomes[0]!.status).toBe("partial");
+      expect(result.committed.observations.some(observation => observation.scene?.details.length)).toBe(true);
+    }
     if (!missingCoverage) expect(result.state.truth.placements[entities.find(entity => entity.name === "Bucket")!.id])
       .toBe(entities.find(entity => entity.name === "Worker")!.id);
     expect(replaySimulationState(result.state)).toEqual(result.state);
