@@ -29,7 +29,7 @@ async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "co
       effects: [{ kind: "fact", subject: "target", predicate: "vibration-isolation", value: "temporary", description: "缓冲材料使振动暂时隔离。" }] };
     const context = wire.state as { perspective?: { agentId: string }; actions?: Array<{ proposal: { rawText: string } }> };
     const values: Record<string, string> = { operation: operationOverride ?? (mode === "wait" ? "wait" : mode === "extend" && !extensionUsed ? "expand" : "use"),
-      target: "pump", tool: "none", amount: "n0", resource: "none", speech: "none", timing: mode === "ongoing" ? "ongoing-action" : "default", goal: "none" };
+      target: "pump", tool: "none", amount: "n1", resource: "none", speech: "none", timing: mode === "ongoing" ? "ongoing-action" : "default", goal: "none" };
     if (context.perspective && mode === "extend") extensionUsed = true;
     return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
       const info = (q.instructions as { task?: { data?: { fact?: { id: string }; resource?: string } } }).task?.data;

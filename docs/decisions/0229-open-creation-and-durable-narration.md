@@ -31,6 +31,8 @@ Player free-form interpretation uses the pinned DeepSeek decision profile when c
 
 The language-model wire carries only selected keys and numbers. Code reconstructs answer types from the questions. Repeating type labels adds no decision information and creates avoidable serialization failures; native provider diagnostics keep their original representation.
 
+New-content coverage shares the existing admission request. It identifies undeclared people and independent props in appearances or events, allowing one targeted correction instead of leaving narrative-only objects. This adds no request to a complete draft and shares the structural repair limit. Invalid generated decision fields receive one field-scoped correction; keeping independent valid answers reduces repeated work without accepting an invalid reference.
+
 ## Pros and Cons of the Options
 
 - Templates plus paraphrasing is cheap but retains limited behavior and cannot support new interactive content.

@@ -23,6 +23,23 @@ function answers(questions: DecisionRequestV2["batch"]["questions"]) {
       probabilities: { "0": 0.3, "1": 0.7, "2": 0 }, confidence: 0.3 }]));
 }
 describe("direct native decisions", () => {
+  it.each([false, true])("repairs only invalid language-model answers once, preserving independent values: fails=%s", async fails => {
+    const f = directTestProvider((wire, call) => {
+      if (call > 1) expect(Object.keys(wire.questions)).toEqual(["consent"]);
+      const value = answers(wire.questions);
+      if (call === 1 || fails) value.consent = { type: "choice", choice: "foreign-entity", probabilities: {}, confidence: 0 };
+      return value;
+    });
+    const promise = executeDecisionV2(f.gateway, { ...request(), profileId: "decision-deepseek" });
+    if (fails) await expect(promise).rejects.toBeInstanceOf(ModelOutputError);
+    else {
+      const result = await promise;
+      expect(result.answers).toMatchObject({ consent: { choice: "unknown" }, relevance: { noul: 0.9 }, urgency: { score: 0.7 } });
+      expect(result.audits).toHaveLength(2);
+      expect(result.diagnostics).toContain("One format repair for: consent");
+    }
+    expect(f.transport).toHaveBeenCalledTimes(2);
+  });
   it("uses bare values for language-model decisions and restores typed answers in code", async () => {
     const input = { ...request(), profileId: "decision-deepseek" };
     const schema = decisionOutputV2Schema(input.batch, false);

@@ -15,18 +15,20 @@ import { applyDirectCognition } from "../cognition";
 
 async function fixture(options: { operation?: string; target?: string; tool?: string; amount?: string; failKeeper?: boolean;
   observationScope?: string; speech?: string; creationEnabled?: boolean; privateGateFact?: boolean; named?: boolean;
-  creationResponse?: unknown; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
+  creationResponse?: unknown; creationResponses?: unknown[]; missingCoverage?: boolean; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
   recipient?: string; resolvedRecipient?: string; searchLocation?: string; transferAuthority?: string; reactionProgress?: string } = {}) {
+  let creations = 0;
   const f = directTestProvider(wire => {
     if (!wire.questions) {
+      creations++;
       const context = directCreationContext(wire);
       if (options.effectExpansion && context.chosenDirection) return { attempt: context.currentPlayerRequest, utterance: null, manner: null };
-      return options.creationResponse ?? { attempt: "复核已有证据", utterance: "观察与他人的说法需要分开核对；下一步询问消息来源。" };
+      return options.creationResponses?.[creations - 1] ?? options.creationResponse ?? { attempt: "复核已有证据", utterance: "观察与他人的说法需要分开核对；下一步询问消息来源。" };
     }
     const context = wire.state as { perspective?: { agentId: string }; submittedAction?: { rawText: string }; concreteOperation?: string };
     if (options.failKeeper && context.perspective?.agentId === "keeper") return new Response("unavailable", { status: 503 });
     const selection: Record<string, string> = { operation: options.operation ?? "observe", target: options.target ?? "door", recipient: context.concreteOperation ? options.resolvedRecipient ?? "discover" : options.recipient ?? options.target ?? "none", tool: options.tool ?? "none",
-      amount: options.amount ?? "n0", resource: "spirit-stone", speech: options.speech ?? "q0", timing: "default", goal: "none",
+      amount: options.amount ?? "n1", resource: "spirit-stone", speech: options.speech ?? "q0", timing: "default", goal: "none",
       transfer_authority: options.transferAuthority ?? "give",
       search_location: options.searchLocation ?? "none",
       observation_scope: options.observationScope ?? "target" };
@@ -38,6 +40,7 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
       if (id.endsWith("_world_expansion")) value = options.introduce ? "introduce" : "none";
       if (id.endsWith("_request_progress")) value = options.reactionProgress ?? "complete";
       if (id === "accept") value = "apply";
+      if (id === "coverage") value = options.missingCoverage || options.creationResponses && creations === 1 ? "missing" : "complete";
       if (id.endsWith("_expression")) value = options.effectExpansion ? "expand" : "existing";
       if (id.endsWith("_movement")) value = options.movement ?? "enter";
       if (q.type === "choice" && !(value in q.criteria)) value = "none" in q.criteria ? "none" : Object.keys(q.criteria)[0]!;
@@ -64,6 +67,36 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it.each([false, true])("repairs undeclared props and characters at most once before admission: missing=%s", async missingCoverage => {
+    const first = { description: "A worker beside a bucket", entities: [{ key: "worker", kind: "person", name: "Worker", label: "Worker",
+      appearance: "A worker standing beside a loose bucket.", placement: "scene", character: { persona: "Careful", voice: "Brief", goal: "Finish work" } }], facts: [], events: [] };
+    const second = { ...first, entities: [{ key: "bucket", kind: "object", name: "Bucket", label: "Bucket", appearance: "An empty wooden bucket.", placement: "worker" }, ...first.entities] };
+    const f = await fixture({ target: "none", observationScope: "surroundings", creationEnabled: true, introduce: true,
+      creationResponses: [first, second], missingCoverage });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("看看附近的工人与可使用的物件"));
+    const creations = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => !directDecisionContext(wire));
+    expect(creations).toHaveLength(2);
+    expect(directCreationContext(creations[1]).previousDraft).toEqual(first);
+    expect(directCreationContext(creations[1]).repair).toContain("without an entity entry");
+    const entities = Object.values(result.state.truth.entities).filter(entity => entity.id.startsWith("expansion-"));
+    expect(entities.map(entity => entity.name).sort()).toEqual(missingCoverage ? [] : ["Bucket", "Worker"]);
+    expect(Object.keys(result.state.agents)).toHaveLength(missingCoverage ? 2 : 3);
+    if (!missingCoverage) expect(result.state.truth.placements[entities.find(entity => entity.name === "Bucket")!.id])
+      .toBe(entities.find(entity => entity.name === "Worker")!.id);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("binds quantity choice keys to values regardless of unrelated candidate order", async () => {
+    const f = await fixture({ operation: "transfer", target: "guard", amount: "n2", creationEnabled: true });
+    await f.engine.bootstrapAgents();
+    const text = "截止时间120秒；现在给守门人两颗灵石";
+    const result = await f.engine.step(f.roster, f.request(text));
+    expect(result.state.history[0]!.directEvent!.frames[0]!.amount).toBe(2);
+    const wire = directDecisionContext(JSON.parse(String(f.transport.mock.calls[0]![1]!.body)))!;
+    expect(wire.questions.amount).toMatchObject({ criteria: { n2: "2", n120: "120" }, instructions: { currentPlayerRequest: text } });
+    expect(wire.questions.operation!.instructions).toMatchObject({ currentPlayerRequest: text, settledSteps: [] });
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("keeps expansion proposal summaries out of committed observations", async () => {
     const f = await fixture({ target: "none", observationScope: "surroundings", creationEnabled: true, introduce: true,
       creationResponse: { description: "你已经走到门外并向守门人承诺付款。", entities: [{ key: "notice", kind: "object", name: "旧木牌",
@@ -374,7 +407,7 @@ describe("direct world through the actual simulation entry", () => {
     expect(f.transport).toHaveBeenCalledTimes(2);
   });
   it.each(["给守门人2枚灵石", "给守门人两颗灵石"])("transfers the selected amount atomically and replays without charging twice: %s", async text => {
-    const f = await fixture({ operation: "transfer", target: "guard", amount: "n1" }); await f.engine.bootstrapAgents();
+    const f = await fixture({ operation: "transfer", target: "guard", amount: "n2" }); await f.engine.bootstrapAgents();
     const result = await f.engine.step(f.roster, f.request(text));
     const player = quantityId(result.state.worldHash, "spirit-stone", "player"), keeper = quantityId(result.state.worldHash, "spirit-stone", "keeper");
     expect(result.state.truth.quantities[player]!.amount).toBe(1); expect(result.state.truth.quantities[keeper]!.amount).toBe(22);
@@ -390,7 +423,7 @@ describe("direct world through the actual simulation entry", () => {
     expect(literalNumbers("两节电池，120秒截止，2个组件")) .toEqual([120, 2]);
   });
   it("turns resource shortage into a local blocked outcome with no partial debit", async () => {
-    const f = await fixture({ operation: "transfer", target: "guard", amount: "n1" }); await f.engine.bootstrapAgents();
+    const f = await fixture({ operation: "transfer", target: "guard", amount: "n8" }); await f.engine.bootstrapAgents();
     const result = await f.engine.step(f.roster, f.request("给守门人8枚灵石"));
     expect(result.committed.outcomes[0]!.status).toBe("blocked");
     expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);

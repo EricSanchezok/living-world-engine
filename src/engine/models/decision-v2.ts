@@ -3,7 +3,7 @@ import type { ModelExecutionAudit } from "../contracts/model";
 import { assertJsonValue, frozenClone, type JsonValue } from "../runtime/json";
 import { loadPromptAsset } from "../prompts";
 import { contentHash } from "./model-audit";
-import { NativeDecisionContextLimitError, type ModelExecutionScope, type StructuredModelProvider } from "./model-provider";
+import { ModelOutputError, NativeDecisionContextLimitError, type ModelExecutionScope, type StructuredModelProvider } from "./model-provider";
 
 const key = z.string().min(1).refine(value => !["__proto__", "constructor", "prototype"].includes(value));
 const structured = z.custom<string | Record<string, JsonValue> | JsonValue[]>(value =>
@@ -95,6 +95,12 @@ export async function executeDecisionV2(provider: StructuredModelProvider, reque
   if (batch.view.kind === "agent" && batch.view.agentId !== request.subjectId) throw new Error("private decision subject must own its projection");
   const audits: ModelExecutionAudit[] = [], dispatches: DecisionResultV2["dispatches"] = [];
   let ordinal = request.modelInvocation ?? 1;
+  const restore = (question: DecisionQuestionV2, raw: unknown): DecisionAnswerV2 => question.type === "choice"
+    ? { type: "choice", choice: raw as string, probabilities: null, confidence: null }
+    : question.type === "noul" ? { type: "noul", noul: raw as number }
+    : { type: "score", score: raw as number, probabilities: null, confidence: null, legend: null };
+  let repairUsed = false;
+  const repairDiagnostics: string[] = [];
   const run = async (part: DecisionBatchV2, profileId: string, fallback: "context-limit" | null): Promise<Record<string, DecisionAnswerV2>> => {
     provider.catalog.assertProfile(profileId, "decision");
     const native = provider.catalog.account(provider.catalog.profile(profileId).account_id).protocol === "typesafe-systemone";
@@ -107,10 +113,7 @@ export async function executeDecisionV2(provider: StructuredModelProvider, reque
       audits.push(result.audit);
       return Object.fromEntries(Object.entries(result.value.answers).map(([id, raw]) => {
         const question = part.questions[id]!;
-        const answer: DecisionAnswerV2 = native ? raw as DecisionAnswerV2
-          : question.type === "choice" ? { type: "choice", choice: raw as string, probabilities: null, confidence: null }
-          : question.type === "noul" ? { type: "noul", noul: raw as number }
-          : { type: "score", score: raw as number, probabilities: null, confidence: null, legend: null };
+        const answer: DecisionAnswerV2 = native ? raw as DecisionAnswerV2 : restore(question, raw);
         return [id, answer.type === "noul" ? answer : { ...answer,
           probabilities: native ? answer.probabilities : null, confidence: native ? answer.confidence : null,
           ...(answer.type === "score" ? { legend: native ? answer.legend : null } : {}) }];
@@ -118,6 +121,21 @@ export async function executeDecisionV2(provider: StructuredModelProvider, reque
     } catch (error) {
       const audit = (error as { audit?: ModelExecutionAudit })?.audit;
       if (audit) audits.push(audit);
+      if (!native && error instanceof ModelOutputError && !repairUsed) {
+        repairUsed = true;
+        const raw = (error.rawValue as { answers?: Record<string, unknown> } | null)?.answers;
+        const valid: Record<string, DecisionAnswerV2> = {}, invalid: Record<string, DecisionQuestionV2> = {};
+        for (const [id, question] of Object.entries(part.questions)) {
+          const parsed = decisionOutputV2Schema({ ...part, questions: { [id]: question } }, false).safeParse({ answers: { [id]: raw?.[id] } });
+          if (parsed.success) valid[id] = restore(question, parsed.data.answers[id]);
+          else invalid[id] = { ...question, instructions: { original: question.instructions,
+            correction: "The preceding answer was absent, malformed or outside this question's allowed values. Choose an exact listed key or a number on the stated scale. Do not choose an entity key belonging only to another question.",
+            rejectedAnswer: raw?.[id] as JsonValue ?? null } };
+        }
+        repairDiagnostics.push(`One format repair for: ${Object.keys(invalid).join(", ") || "unexpected extra fields"}`);
+        if (!Object.keys(invalid).length) return valid;
+        return { ...valid, ...await run({ ...part, questions: invalid }, profileId, fallback) };
+      }
       if (!nativeOverflow(error) || !native) throw error;
       const questions = Object.entries(part.questions);
       if (questions.length > 1) {
@@ -133,5 +151,5 @@ export async function executeDecisionV2(provider: StructuredModelProvider, reque
   const answers = await run(batch, request.profileId, null);
   return { version: 2, inputHash: contentHash({ batch, profileId: request.profileId, catalogHash: provider.catalog.hash,
     registryHash: request.modelRegistrySnapshotHash ?? null, promptVersion: prompt.version }), answers, audits,
-    diagnostics: diagnosticAnswers(answers), dispatches };
+    diagnostics: [...diagnosticAnswers(answers), ...repairDiagnostics], dispatches };
 }

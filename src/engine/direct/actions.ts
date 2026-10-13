@@ -109,7 +109,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       none: "Current surroundings; no more specific known place",
       ...Object.fromEntries(known.map(([id, entity]) => [id, { name: entity.name, description: entity.description }])),
     }) } : {}),
-    amount: choice("The actual quantity of the selected resource authorized by this action or its established terms. A deadline, duration, code or unrelated goal number is not a payment amount. Select unknown if the intended quantity is not among the candidates; never substitute another number.", { unknown: "No established amount", ...Object.fromEntries(amounts.map((amount, index) => [`n${index}`, String(amount)])) }),
+    amount: choice("The actual quantity of the selected resource authorized by this action or its established terms. A deadline, duration, code or unrelated goal number is not a payment amount. Select unknown if the intended quantity is not among the candidates; never substitute another number.", { unknown: "No established amount", ...Object.fromEntries(amounts.map(amount => [`n${amount}`, String(amount)])) }),
     speech: choice("The actual words THIS speaker should say next. For an NPC answering a question, select words that answer or acknowledge it, not a verbatim copy of the received question. Existing testimony is evidence, not a script to echo.", { none: "No speech", input: "The entire player input is already the literal utterance", create: "Realize the intended utterance naturally in this speaker's voice; action instructions are not literal speech",
       ...Object.fromEntries(quotes.map((quote, index) => [`q${index}`, quote])),
       ...Object.fromEntries(spans.map((span, index) => [`span${index}`, { literalWords: span }])) }),
@@ -160,6 +160,11 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     currentObservedFacts, intent: { goalId: intent.goalId, wakeReasons: intent.wakeReasons,
     recentOutcomeIds: intent.recentOutcomeIds }, latestObservedEvidence: orderedValues(agent.belief.evidence).filter(evidence => evidence.step === agent.observationCursorStep),
     actionKinds: kinds } as unknown as JsonValue;
+  if (external) for (const id of ["operation", "target", "recipient", "amount"]) {
+    const item = questions[id]!;
+    item.instructions = { ...item.instructions as Record<string, JsonValue>, currentPlayerRequest: external.rawText,
+      settledSteps: currentRequestReceipts.map(receipt => ({ attempted: receipt.attempted, outcome: receipt.outcome })) };
+  }
   const inputHash = contentHash({ perspective: view.state, submittedAction: external ?? null, goal: intent.goalId });
   if (!external && inputHash === intent.lastInputHash) {
     intent.status = "waiting"; intent.wakeReasons = []; intent.wait = { entityIds: [], untilSeconds: null, reason: "same-input" };
@@ -239,7 +244,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       means: external?.means ?? null, targetIds: target ? [targetKey] : [] }, kind, goalId: intent.goalId,
     targetEntityId: target, toolEntityId: ["use", "change", "speak"].includes(kind) ? view.entities[selected(answers, "tool")] ?? null : null,
     quantityDefinitionId: questions.resource && selected(answers, "resource") !== "none" ? selected(answers, "resource") : null,
-    amount: selected(answers, "amount") === "unknown" ? null : amounts[Number(selected(answers, "amount").slice(1))]!, utterance,
+    amount: selected(answers, "amount") === "unknown" ? null : Number(selected(answers, "amount").slice(1)), utterance,
     capabilityId: ["use", "change"].includes(kind) && questions.capability && selected(answers, "capability") !== "none" ? selected(answers, "capability") : null,
     startedAtSeconds: state.truth.elapsedSeconds, dueAtSeconds: state.truth.elapsedSeconds + durationSeconds,
     durationSeconds, progressSeconds: 0, activityStatus: "active",
