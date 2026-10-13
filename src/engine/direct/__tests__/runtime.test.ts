@@ -16,7 +16,8 @@ import { applyDirectCognition } from "../cognition";
 async function fixture(options: { operation?: string; target?: string; tool?: string; amount?: string; failKeeper?: boolean;
   observationScope?: string; speech?: string; creationEnabled?: boolean; privateGateFact?: boolean; named?: boolean;
   creationResponse?: unknown; creationResponses?: unknown[]; missingCoverage?: boolean; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
-  recipient?: string; resolvedRecipient?: string; searchLocation?: string; transferAuthority?: string; reactionProgress?: string } = {}) {
+  recipient?: string; resolvedRecipient?: string; searchLocation?: string; transferAuthority?: string; transferExecution?: string;
+  reactionProgress?: string; playerProgress?: string; duplicateIdentity?: boolean } = {}) {
   let creations = 0;
   const f = directTestProvider(wire => {
     if (!wire.questions) {
@@ -25,11 +26,12 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
       if (options.effectExpansion && context.chosenDirection) return { attempt: context.currentPlayerRequest, utterance: null, manner: null };
       return options.creationResponses?.[creations - 1] ?? options.creationResponse ?? { attempt: "复核已有证据", utterance: "观察与他人的说法需要分开核对；下一步询问消息来源。" };
     }
-    const context = wire.state as { perspective?: { agentId: string }; submittedAction?: { rawText: string }; concreteOperation?: string };
+    const context = wire.state as { perspective?: { agentId: string }; submittedAction?: { rawText: string }; concreteOperation?: string; lastSearch?: unknown };
     if (options.failKeeper && context.perspective?.agentId === "keeper") return new Response("unavailable", { status: 503 });
-    const selection: Record<string, string> = { operation: options.operation ?? "observe", target: options.target ?? "door", recipient: context.concreteOperation ? options.resolvedRecipient ?? "discover" : options.recipient ?? options.target ?? "none", tool: options.tool ?? "none",
+    const selection: Record<string, string> = { operation: options.operation ?? "observe", target: options.target ?? "door", recipient: context.concreteOperation || context.lastSearch ? options.resolvedRecipient ?? "discover" : options.recipient ?? options.target ?? "none", tool: options.tool ?? "none",
       amount: options.amount ?? "n1", resource: "spirit-stone", speech: options.speech ?? "q0", timing: "default", goal: "none",
-      transfer_authority: options.transferAuthority ?? "give",
+      transfer_authority: options.transferAuthority ?? (options.operation === "transfer" ? "give" : "pending"),
+      transfer_execution: options.transferExecution ?? "expression",
       search_location: options.searchLocation ?? "none",
       observation_scope: options.observationScope ?? "target" };
     selection.reflection = options.speech ?? "none";
@@ -39,8 +41,10 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
       else if (/_entity\d+$/u.test(id)) value = "visible";
       if (id.endsWith("_world_expansion")) value = options.introduce ? "introduce" : "none";
       if (id.endsWith("_request_progress")) value = options.reactionProgress ?? "complete";
+      if (id.startsWith("progress_")) value = options.playerProgress ?? "complete";
       if (id === "accept") value = "apply";
       if (id.startsWith("coverage")) value = options.missingCoverage || options.creationResponses && creations === 1 ? "missing" : "complete";
+      if (id.startsWith("identity")) value = options.duplicateIdentity && creations === 1 ? "duplicate" : "distinct";
       if (id.endsWith("_expression")) value = options.effectExpansion ? "expand" : "existing";
       if (id.endsWith("_movement")) value = options.movement ?? "enter";
       if (q.type === "choice" && !(value in q.criteria)) value = "none" in q.criteria ? "none" : Object.keys(q.criteria)[0]!;
@@ -67,6 +71,58 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it.each(["transfer", "expression"])("resolves contradictory payment direction without treating quoted words as consent: %s", async transferExecution => {
+    const f = await fixture({ operation: "speak", target: "guard", transferAuthority: "give", transferExecution,
+      amount: "n2", creationEnabled: true });
+    await f.engine.bootstrapAgents();
+    const text = transferExecution === "transfer" ? "现在实际交给守门人两枚灵石" : '只说：“我打算给你两枚灵石。”';
+    const result = await f.engine.step(f.roster, f.request(text));
+    expect(result.state.history[0]!.directEvent!.frames[0]!.kind).toBe(transferExecution === "transfer" ? "transfer" : "speak");
+    if (transferExecution === "expression") expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
+    else expect(Object.values(result.state.truth.quantities).find(quantity => quantity.holderId === "player")!.amount).toBe(1);
+    const wire = f.transport.mock.calls.map(([, init]) => directDecisionContext(JSON.parse(String(init?.body))))
+      .find(wire => wire?.questions.transfer_execution)!;
+    expect(wire.state).toMatchObject({ currentPlayerRequest: text, authorizedTransfer: { amount: "n2" } });
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("uses only the chosen conditional continuation from the existing player interpretation batch", async () => {
+    const f = await fixture({ operation: "move", target: "yard", creationEnabled: true, playerProgress: "continue" });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("走进院子，然后观察院子里有没有人"));
+    expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "move", requestContinuation: "continue" });
+    expect(readDirectState(result.state.executionState!, result.state).intents.player!.activeSubmission).not.toBeNull();
+    const wires = f.transport.mock.calls.map(([, init]) => directDecisionContext(JSON.parse(String(init?.body)))).filter(Boolean);
+    expect(wires[0]!.questions).toHaveProperty("progress_move");
+    expect(wires[1]!.questions).not.toHaveProperty("a0_request_progress");
+    expect(f.transport).toHaveBeenCalledTimes(2);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("keeps an unresolved most recent recipient after an unavailable-person search", async () => {
+    const options = { operation: "speak", recipient: "discover", searchLocation: "door", outcome: "unknown", speech: "q0" };
+    const f = await fixture(options); await f.engine.bootstrapAgents();
+    const first = await f.engine.step(f.roster, f.request("找门内的店主问路"));
+    options.recipient = "guard";
+    const second = await f.engine.step(f.roster, f.request('问他：“今天营业吗？”', first.state.revision));
+    expect(second.state.history.at(-1)!.directEvent!.frames[0]).toMatchObject({ kind: "observe", preparatoryFor: "speak", targetEntityId: "gate", utterance: null });
+    const resolved = f.transport.mock.calls.map(([, init]) => directDecisionContext(JSON.parse(String(init?.body))))
+      .find(wire => wire && (wire.state as { lastSearch?: unknown }).lastSearch)!;
+    expect(resolved.state).toMatchObject({ currentPlayerRequest: '问他：“今天营业吗？”', lastSearch: { requested: "找门内的店主问路", preparatoryFor: "speak" } });
+    expect(replaySimulationState(second.state)).toEqual(second.state);
+  });
+  it("repairs an actor clone while preserving a genuinely distinct new character", async () => {
+    const entity = { key: "worker", kind: "person", name: "旅人", label: "旅人", appearance: "和玩家同样外观的旅人。", placement: "scene",
+      character: { persona: "路过", voice: "简短", goal: "休息" } };
+    const first = { description: "旅人到来", entities: [entity], facts: [], events: [] };
+    const second = { ...first, entities: [{ ...entity, name: "老工人", label: "老工人", appearance: "满头白发的老工人。" }] };
+    const f = await fixture({ target: "none", observationScope: "surroundings", creationEnabled: true, introduce: true,
+      duplicateIdentity: true, creationResponses: [first, second] });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("找附近能交谈的人"));
+    expect(Object.values(result.state.truth.entities).filter(entity => entity.id.startsWith("expansion-")).map(entity => entity.name)).toEqual(["老工人"]);
+    const repair = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => !directDecisionContext(wire)).at(-1);
+    expect(directCreationContext(repair).repair).toContain("duplicate existing identities");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it.each([[false, false], [false, true], [true, false]])("repairs undeclared props and characters at most once before admission: missing=%s, canonical=%s", async (missingCoverage, canonical) => {
     const first = { description: "A worker beside a bucket", entities: [{ key: "worker", kind: "person", name: "Worker", label: "Worker",
       appearance: "A worker standing beside a loose bucket.", placement: "scene", character: { persona: "Careful", voice: "Brief", goal: "Finish work" } }], facts: [], events: [] };

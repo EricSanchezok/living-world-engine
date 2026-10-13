@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { loadPromptAsset } from "../engine/prompts";
 import { agentCapabilityModels } from "../engine/models/capability-bindings";
-import { enqueueNarrative, completeParagraphs, renderNarrativeParagraph, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, checkNarrativeGrounding, narrativeGroundingChoices, type NarrativeBeat } from "./world-narrative";
+import { enqueueNarrative, nextNarrative, completeParagraphs, renderNarrativeParagraph, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, checkNarrativeGrounding, narrativeGroundingChoices, type NarrativeBeat } from "./world-narrative";
 import { randomUUID } from "node:crypto";
 import { rmSync } from "node:fs";
 import path from "node:path";
@@ -570,7 +570,7 @@ export class WorldHost {
   private notifyInstance(id: string) { for (const listener of this.instanceListeners.get(id) ?? []) listener(); }
 
   private scheduleNarrative(document: WorldInstanceDocument): void {
-    if (this.narrativeWorkers.has(document.id) || !document.narratives.some(beat => ["queued", "generating"].includes(beat.status))) return;
+    if (this.narrativeWorkers.has(document.id) || !nextNarrative(document)) return;
     const job = Promise.resolve().then(() => this.generateNarratives(document.id));
     this.narrativeWorkers.set(document.id, job);
     let failed = false;
@@ -602,7 +602,7 @@ export class WorldHost {
   private async generateNarratives(id: string): Promise<void> {
     for (;;) {
       const document = this.read(id).document;
-      const beat = document.narratives.find(item => ["queued", "generating"].includes(item.status));
+      const beat = nextNarrative(document);
       if (!beat) return;
       if (beat.attempts >= 2) {
         this.updateNarrative(id, beat.id, item => {
@@ -659,9 +659,9 @@ export class WorldHost {
             kind: "model-audit", stage: "scene-narrative", owner: beat.id, round: 0, ordinal: beat.attempts + 1 }),
           promptVersion: NARRATIVE_PROMPT_VERSION, schemaName: "SceneNarrativeV1",
           system: NARRATIVE_SYSTEM, userPrompt: NARRATIVE_USER,
-          context: { scene: narrativeEvidence(beat.source), publishedPrefix: prefix,
-            previousScenes: document.narratives.filter(item => item.participantId === beat.participantId && item.id !== beat.id && item.segments.length)
+          context: { previousScenes: document.narratives.filter(item => item.participantId === beat.participantId && item.id !== beat.id && item.segments.length)
               .slice(-3).map(item => item.segments.map(segment => segment.text).join("\n\n")),
+            publishedPrefix: prefix, scene: narrativeEvidence(beat.source),
             repair: beat.error },
           schema: z.object({ paragraphs: z.array(z.string().trim().min(1)).min(1) }), jsonExamplePolicy: "omit",
           onOutputText: async text => {

@@ -13,6 +13,8 @@ export interface ActionExpression {
 export interface ActionFrame {
   version: 1; id: string; actorId: string; actorEntityId: string; submissionId: string | null;
   expression?: ActionExpression;
+  /** Conditional branch answer from the player-language interpretation batch. */
+  requestContinuation?: "complete" | "continue" | "wait";
   proposal: AgentActionProposal; kind: ActionKind; goalId: string | null;
   targetEntityId: string | null; toolEntityId: string | null; quantityDefinitionId: string | null;
   amount: number | null; utterance: string | null; capabilityId: string | null;

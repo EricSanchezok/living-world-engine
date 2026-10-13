@@ -74,6 +74,28 @@ describe("immutable narrative paragraphs", () => {
     expect(narrativeEvidence(source).speech).toEqual(source.speech);
     expect(source.requestedAction).toBe("问价");
   });
+  it("does not turn a spoken payment intention or its memory into an executed transfer", () => {
+    const scene = structuredClone(source);
+    scene.observations[0]!.summary = "你尝试了取出两枚金币交给店主。你说：请收下。\n随身物资：2枚金币。";
+    scene.observations[0]!.scene!.attempt = "取出两枚金币交给店主";
+    scene.memories = [{ kind: "observation", description: "尝试将物品交付", executedDescription: "说了交付的意向。" }];
+    const projected = narrativeEvidence(scene);
+    expect(projected.observations[0]!.summary).toBe("话语送达。\n随身物资：2枚金币。");
+    expect(projected.observations[0]!.scene!.attempt).toBeNull();
+    expect(projected.memories).toEqual([{ kind: "observation", description: "说了交付的意向。" }]);
+    expect(scene.observations[0]!.summary).toContain("尝试了取出");
+    expect(scene.memories[0]!.description).toBe("尝试将物品交付");
+  });
+  it("keeps blocked observation, actual quantities and latest properties as the prose evidence", () => {
+    const scene = structuredClone(source);
+    Object.assign(scene.observations[0]!.scene!, { actionKind: "observe", status: "blocked", attempt: "查看店内", outcome: "目前无法看清店内。", speech: null });
+    scene.observations[0]!.summary = "你尝试了查看店内。\n随身物资：2枚金币。";
+    scene.observedProperties = [{ subject: "泵", predicate: "seal", value: { kind: "text", value: "sealed" }, stance: "believes", description: "已封闭" }];
+    const projected = narrativeEvidence(scene);
+    expect(projected.observations[0]!.scene).toMatchObject({ actionKind: "observe", status: "blocked", attempt: "查看店内" });
+    expect(projected.observations[0]!.summary).toBe("目前无法看清店内。\n随身物资：2枚金币。");
+    expect(projected.observedProperties).toEqual(scene.observedProperties);
+  });
   it("keeps observed state and resource changes when narration fails", () => {
     const scene = structuredClone(source);
     scene.speech = [];
@@ -81,6 +103,13 @@ describe("immutable narrative paragraphs", () => {
     scene.observations[0]!.scene!.outcome = "操作已经结束。";
     scene.observations[0]!.summary = "操作已经结束。\n设备：当前状态：稳定。\n本次操作消耗了2升液体。";
     expect(narrativeFallback(scene)).toBe("操作已经结束。\n设备：当前状态：稳定。\n本次操作消耗了2升液体。");
+  });
+  it("renders a factual fallback handover in natural language with its exact amount", () => {
+    const scene = structuredClone(source);
+    scene.observations[0]!.scene!.speech = null;
+    scene.observations[0]!.scene!.outcome = "行动已完成。";
+    scene.observations[0]!.summary = "行动已完成。\n我向店主转移了2枚金币。\n店主向我转移了1件物品。";
+    expect(narrativeFallback(scene)).toBe("你把2枚金币交给了店主。\n你收到了店主交给你的1件物品。");
   });
   it("does not repeat a scene tour after an already published prefix", () => {
     const detailed = structuredClone(source);

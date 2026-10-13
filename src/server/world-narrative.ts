@@ -5,6 +5,7 @@ import { executeDecisionV2 } from "../engine/models/decision-v2";
 import type { ModelExecutionScope, StructuredModelProvider } from "../engine/models/model-provider";
 import { loadPromptAsset } from "../engine/prompts";
 import type { JsonValue } from "../engine/runtime/json";
+import type { DirectRuntimeState } from "../engine/direct/contracts";
 
 export interface ScenePacket {
   participantId: string;
@@ -18,8 +19,9 @@ export interface ScenePacket {
   observations: Array<{ id: string; revision: number; step: number; worldTimeSeconds: number;
     summary: string; scene: NonNullable<ObservationPacket["scene"]> | null; sourceEventIds: string[] }>;
   speech: Array<{ id: string; speaker: string; utterance: string }>;
-  memories: Array<{ kind: string; description: string }>;
+  memories: Array<{ kind: string; description: string; executedDescription?: string }>;
   knownEntities: Array<{ name: string; description: string }>;
+  observedProperties?: Array<{ subject: string; predicate: string; value: JsonValue; stance: string; description: string }>;
 }
 export interface NarrativeBeat {
   id: string;
@@ -40,11 +42,42 @@ export interface NarrativeBeat {
   grounding: Array<{ start: number; inputHash: string; choices: string[]; invocationIds: string[] }>;
 }
 
-/** The audit retains the request; prose receives only the action that actually executed. */
+/** Coalesce unspoken prerequisite observations while their same request continues. */
+export function nextNarrative(document: WorldInstanceDocument): NarrativeBeat | undefined {
+  const seen = new Set<string>();
+  for (const beat of document.narratives) {
+    if (!["queued", "generating"].includes(beat.status) || seen.has(beat.participantId)) continue;
+    seen.add(beat.participantId);
+    if (beat.status === "generating" || beat.attempts > 0 || !beat.submissionId) return beat;
+    const data = document.state.executionState?.data;
+    const intent = data?.kind === "direct-world" ? (data as unknown as DirectRuntimeState).intents[beat.agentId] : null;
+    const run = Object.values(document.runs).findLast(run => run.rootIntents.some(input => input.submissionId === beat.submissionId));
+    const prerequisite = beat.source.observations.every(observation => observation.scene?.actor === "你" &&
+      ["move", "observe", "reflect"].includes(observation.scene.actionKind) && !observation.scene.speech && observation.scene.status !== "continuing");
+    if (prerequisite && intent?.status === "ready" && intent.activeSubmission?.submissionId === beat.submissionId &&
+      run && ["queued", "running"].includes(run.status)) continue;
+    return beat;
+  }
+}
+
+/** An expression is an attempted procedure, not a receipt for its physical verbs. */
+export function executedDescription(observation: Pick<ObservationPacket, "summary" | "scene">): string {
+  if (!observation.scene) return observation.summary;
+  return [observation.scene.outcome, ...observation.summary.split("\n").slice(1)].filter(Boolean).join("\n");
+}
+
+/** The audit retains attempted actions; prose receives their actually executed part. */
 export function narrativeEvidence(source: ScenePacket) {
   const { requestedAction: _request, ...evidence } = source;
   void _request;
-  return evidence;
+  return { ...evidence,
+    memories: source.memories.map(memory => ({ kind: memory.kind, description: memory.executedDescription ?? memory.description })),
+    observations: source.observations.map(observation => ({ ...observation,
+      summary: executedDescription({ ...observation, scene: observation.scene ?? undefined }),
+      scene: observation.scene ? { ...observation.scene,
+        attempt: ["move", "observe", "use", "change"].includes(observation.scene.actionKind) ? observation.scene.attempt : null } : null,
+    })),
+  };
 }
 
 /** Called in the world transaction. Never performs model work. */
@@ -67,6 +100,8 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
       const self = Object.values(agent.bindings).find(binding => binding.canonicalEntityIds.length === 1 && binding.canonicalEntityIds[0] === agent.entityId);
       const place = document.state.truth.placements[agent.entityId];
       const localPlace = Object.values(agent.bindings).find(binding => binding.canonicalEntityIds.length === 1 && binding.canonicalEntityIds[0] === place);
+      const ownObservations = new Map(document.state.history.flatMap(step => step.observations
+        .filter(item => item.observerId === participant.agentId).map(item => [item.id, item] as const)));
       const source: ScenePacket = pending?.source ?? {
         participantId: participant.id, agentId: participant.agentId, submissionId,
         submittedAt: intent?.submittedAt ?? null, requestedAction: intent?.text ?? null,
@@ -74,10 +109,17 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
         playerName: self ? agent.belief.localEntities[self.localEntityId]?.name ?? participant.displayName : participant.displayName,
         location: localPlace ? agent.belief.localEntities[localPlace.localEntityId]?.name ?? null : null,
         observations: [], speech: [],
-        knownEntities: Object.values(agent.belief.localEntities).map(entity => ({ name: entity.name, description: entity.description })),
+        knownEntities: [], observedProperties: [],
         memories: Object.values(agent.belief.evidence).filter(evidence => evidence.step < observation.step)
-          .slice(-12).map(evidence => ({ kind: evidence.kind, description: evidence.description })),
+          .slice(-12).map(evidence => { const recorded = evidence.sourceId ? ownObservations.get(evidence.sourceId) : null;
+            return { kind: evidence.kind, description: evidence.description,
+              ...(recorded ? { executedDescription: executedDescription(recorded) } : {}) }; }),
       };
+      source.knownEntities = Object.values(agent.belief.localEntities).map(entity => ({ name: entity.name, description: entity.description }));
+      source.observedProperties = Object.values(agent.belief.claims).map(claim => ({
+        subject: agent.belief.localEntities[claim.subjectId]?.name ?? claim.subjectId, predicate: claim.predicate,
+        value: claim.value as unknown as JsonValue, stance: claim.stance, description: claim.description,
+      }));
       source.observations.push(observation);
       if (observation.scene?.speech) source.speech.push({ id: `speech-${contentHash(observation.id).slice(0, 16)}`, ...observation.scene.speech });
       if (pending) pending.sourceHash = contentHash(source);
@@ -108,11 +150,15 @@ export function narrativeGroundingChoices(answers: Record<string, { type: string
 /** Independent factual checks share one publication request per available paragraph batch. */
 export async function checkNarrativeGrounding(provider: StructuredModelProvider, scope: ModelExecutionScope,
   source: ScenePacket, paragraphs: string[], profileId: string, fallbackProfileId: string, ordinal: number) {
-  const state = { scene: narrativeEvidence(source), paragraphs } as unknown as JsonValue;
+  const evidence = narrativeEvidence(source);
+  const state = { paragraphs, scene: evidence } as unknown as JsonValue;
   return executeDecisionV2(provider, { ...scope, profileId, fallbackProfileId, subjectId: source.agentId, instructionProfile: "publication",
     modelInvocation: ordinal, batch: { version: 2, view: { kind: "agent", agentId: source.agentId, projectionHash: contentHash(state) },
       dependencies: {}, state, questions: Object.fromEntries(paragraphs.flatMap((_, index) => Object.entries(groundingAxes).map(([axis, focus]) => [`paragraph${index}_${axis}`, {
-        type: "choice" as const, version: "narrative-grounding-2", instructions: { task: loadPromptAsset("user/narrative-grounding.md"), index, focus },
+        type: "choice" as const, version: "narrative-grounding-3", instructions: { task: loadPromptAsset("user/narrative-grounding.md"), index, focus,
+          executedNow: evidence.observations.map(observation => ({ actor: observation.scene?.actor ?? null,
+            kind: observation.scene?.actionKind ?? null, status: observation.scene?.status ?? null, receipt: observation.summary })),
+        },
         criteria: { grounded: "Faithful expression of supplied facts and delivered speech; only harmless stylistic rendering is added",
           added_content: "Introduces an unsupported person, distinct usable object or possession, action, speech, result, knowledge or meaningful change",
           contradiction: "Changes a known amount, identity, outcome, commitment or evidence status; or chooses new actions or feelings for the player" },
@@ -187,11 +233,15 @@ export function narrativeFallback(source: ScenePacket, published: string[] = [])
   const paragraphs = source.observations.map(observation => {
     const scene = observation.scene;
     if (!scene) return observation.summary;
-    return [scene.speech ? existing.includes(scene.speech.utterance) ? "" : `${scene.speech.speaker}说：“${scene.speech.utterance}”` : scene.outcome,
+    const factualLines = observation.summary.split("\n").slice(1).filter(line =>
+      line.startsWith("随身物资：") || line.includes("转移了") || line.includes("当前状态：") ||
+      line.startsWith("本次操作消耗了") || line.startsWith("本次操作产生了"));
+    const outcome = scene.outcome === "行动已完成。" && factualLines.some(line => line.includes("转移了")) ? "" :
+      scene.outcome.replace(/^本次已执行的方法：(.+?)。+具体结果以观察到的状态为准。$/u, (_, method: string) => `${scene.actor}${method}。`);
+    return [scene.speech ? existing.includes(scene.speech.utterance) ? "" : `${scene.speech.speaker}说：“${scene.speech.utterance}”` : outcome,
       ...(published.length ? [] : scene.details.map(detail => `${detail.label}：${detail.description}`)),
-      ...observation.summary.split("\n").slice(1).filter(line =>
-        line.startsWith("随身物资：") || line.includes("转移了") || line.includes("当前状态：") ||
-        line.startsWith("本次操作消耗了") || line.startsWith("本次操作产生了"))]
+      ...factualLines.map(line => line.replace(/^我向(.+)转移了(.+)。$/u, "你把$2交给了$1。")
+        .replace(/^(.+)向我转移了(.+)。$/u, "你收到了$1交给你的$2。"))]
       .filter(text => text && !existing.includes(text)).filter((text, index, all) => all.indexOf(text) === index).join("\n");
   }).filter(text => text && !existing.includes(text));
   return paragraphs.join("\n\n") || (published.length ? "" : "眼前的情况还没有出现新的变化。");

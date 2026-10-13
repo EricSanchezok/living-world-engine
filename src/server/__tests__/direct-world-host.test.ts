@@ -168,6 +168,7 @@ describe("direct world through persistent WorldHost", () => {
         if (id === "tool") choice = "copper-key";
         if (id === "timing") choice = "default";
         if (id.includes("request_progress")) choice = context.actions?.[0]?.kind === "observe" ? "continue" : "wait";
+        if (id.startsWith("progress_")) choice = playerDecisions === 1 ? "continue" : "wait";
         return [id, nativeAnswer(q, id === "expression" ? 0 : choice)];
       }));
     }, createText);
@@ -184,6 +185,8 @@ describe("direct world through persistent WorldHost", () => {
       await host.drainNarratives(id);
       const document = database.readInstance(id).document, state = document.state;
       expect(state.history.map(step => step.actions[0]?.actorId)).toEqual(["player", "player", "keeper"]);
+      expect(document.narratives).toHaveLength(2);
+      expect(document.narratives[0]!.source.observations).toHaveLength(2);
       expect(state.history[0]!.directEvent!.control.completedSubmissionIds).not.toContain("find-and-ask");
       expect(state.history.at(-1)!.observations.find(packet => packet.observerId === "player")?.summary).toContain("不接受");
       expect(Object.values(document.runs).find(run => run.rootIntents.some(intent => intent.submissionId === "find-and-ask"))?.status).toBe("completed");

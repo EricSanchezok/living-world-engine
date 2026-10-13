@@ -130,11 +130,19 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     instructions: { task: loadPromptAsset("user/direct-action.md"), field: "Does the new observation require changing the prior wait or responding now?" } };
   if (resources.length) questions.resource = choice("resource", { none: "No quantified resource", ...Object.fromEntries(resources.map(id => [id, state.truth.mechanics.quantities[id]!.name])) });
   if (external) questions.transfer_authority = choice("For the hypothetical transfer branch: does this CURRENT submission authorize the PLAYER to give their own goods now? Prior negotiations and another person's demand alone are not permission; an explicit current instruction to pay the accepted price IS permission. Check only the player's stated prerequisites against actual delivered evidence. When the agreed sequence is payment THEN delivery, the absence of later delivery does not block the authorized payment. Do not add a delivery-first prerequisite.", {
+    pending: "The player's transfer condition is not established, or the input does not authorize a transfer",
     give: "The player explicitly authorizes their own transfer now, and its stated conditions are met",
     request: "The player asks ANOTHER person to deliver, return or give something; this is speech, not payment by the player",
-    pending: "The player's transfer condition is not established, or the input does not authorize a transfer",
   });
   const claims = orderedValues(agent.belief.claims);
+  if (external && input.creationEnabled) for (const [kind, effect] of Object.entries(kinds)) {
+    if (["unknown", "expand"].includes(kind)) continue;
+    questions[`progress_${kind}`] = choice(`Conditional branch: assume the NEXT selected operation is ${kind} (${effect}) and its immediate effect succeeds. Does that operation, together with the already settled steps, finish the current player's request? Answer this branch independently; only the actually selected branch is used. Move only approaches or enters; it does not look inside or talk. Observation inspects one focus or inventory; it does not report, thank, build or pay. Reflection does not say goodbye. Speaking includes its requested simultaneous expressive gesture but does not hand over goods. Use/change performs its immediate procedure, not an unrelated later test. An if/otherwise request runs only the applicable branch. Do not repeat settled steps or continue the character's broader goal.`, {
+      complete: "The requested immediate work is covered; no further action is authorized by this input",
+      continue: "A distinct remaining step is explicitly requested and can be attempted next without a new reply or player choice",
+      wait: "Further progress needs another person's reply, unknown evidence, consent or a new player choice",
+    });
+  }
   if (claims.length) questions.claim = choice("existing belief to express, used only by a report", { none: "No claim to express", ...Object.fromEntries(claims.map(claim =>
     [claim.id, { description: claim.description, value: claim.value as unknown as JsonValue, stance: claim.stance }])) });
   if (capabilities.length) questions.capability = choice("Select a learned capability only when its method and immediate result match THIS request. The same equipment or long-term goal is insufficient. A repair does not express a later test. Choose none for a different procedure or ordinary action.", { none: "Ordinary action without a matching learned capability", ...Object.fromEntries(capabilities.map(capability =>
@@ -147,6 +155,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       submissionId: frame.submissionId, requested: frame.proposal.goal,
       target: Object.entries(view.entities).find(([, canonicalId]) => canonicalId === frame.targetEntityId)?.[0] ?? null,
       actionKind: frame.kind, attempted: frame.expression?.attempt ?? frame.proposal.rawText,
+      preparatoryFor: frame.preparatoryFor,
       outcome: event.outcomes.find(outcome => outcome.proposalId === frame.id)?.summary ?? null,
       observed: event.observations.filter(observation => observation.observerId === agentId).map(observation => observation.summary),
     }));
@@ -156,14 +165,16 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     localEntityId: claim.subjectId, predicate: claim.predicate, value: claim.value, description: claim.description, stance: claim.stance,
     evidence: claim.evidenceIds.map(id => agent.belief.evidence[id]).filter(Boolean).map(item => ({ kind: item!.kind, step: item!.step })) }));
   const context = { perspective: view.state, submittedAction: external ?? null, currentRequestReceipts,
-    recentActions: recentActions.slice(-6).map(({ requested, target, actionKind, attempted, outcome }) => ({ requested, target, actionKind, attempted, outcome })),
+    recentActions: recentActions.slice(-6).map(({ requested, target, actionKind, attempted, outcome, preparatoryFor }) => ({ requested, target, actionKind, attempted, outcome, preparatoryFor })),
     currentObservedFacts, intent: { goalId: intent.goalId, wakeReasons: intent.wakeReasons,
     recentOutcomeIds: intent.recentOutcomeIds }, latestObservedEvidence: orderedValues(agent.belief.evidence).filter(evidence => evidence.step === agent.observationCursorStep),
     actionKinds: kinds } as unknown as JsonValue;
-  if (external) for (const id of ["operation", "target", "recipient", "amount", "capability", "search_location", "observation_scope"]) {
+  if (external) for (const id of ["operation", "target", "recipient", "amount", "resource", "transfer_authority", "capability", "search_location", "observation_scope", ...Object.keys(questions).filter(id => id.startsWith("progress_"))]) {
     const item = questions[id]; if (!item) continue;
     item.instructions = { ...item.instructions as Record<string, JsonValue>, currentPlayerRequest: external.rawText,
-      settledSteps: currentRequestReceipts.map(receipt => ({ attempted: receipt.attempted, outcome: receipt.outcome })) };
+      actualHoldings: (view.state as { mechanics: { quantities: JsonValue } }).mechanics.quantities,
+      settledSteps: currentRequestReceipts.map(receipt => ({ kind: receipt.actionKind, target: receipt.target,
+        outcome: receipt.outcome, actualObservations: receipt.observed })) };
     if (["recipient", "target", "search_location"].includes(id)) item.instructions = { ...item.instructions as Record<string, JsonValue>,
       recentRequests: recentActions.filter(action => action.submissionId !== external.submissionId).slice(-3)
         .map(({ requested, target, outcome }) => ({ requested, target, outcome })),
@@ -180,11 +191,31 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   if (answers.urgency?.type === "score") intent.urgency = answers.urgency.score;
   intent.lastInputHash = inputHash; intent.wakeReasons = []; intent.failure = null; intent.dependencies = view.reads;
   let operation = selected(answers, "operation");
+  if (external && ["speak", "wait", "reflect"].includes(operation) && selected(answers, "transfer_authority") === "give") {
+    const resolved = await decisions.ask(agentId, { currentPlayerRequest: text, perspective: view.state,
+      currentRequestReceipts, selectedOperation: operation, authorizedTransfer: { recipient: selected(answers, "recipient"),
+        resource: questions.resource ? selected(answers, "resource") : null, amount: selected(answers, "amount") } } as unknown as JsonValue, view.reads, {
+      transfer_execution: choice("The first answers disagree: they authorize an immediate transfer but select words or waiting. Resolve only this contradiction against the current request and actually delivered terms. An explicit instruction to give/pay now executes a transfer. A quotation, promise, request for the OTHER person's goods, or proposed deal alone does not. Keep unmet conditions pending.", {
+        expression: "Only the selected speech, reflection or waiting is authorized",
+        transfer: "The player authorized their own actual handover now",
+        unknown: "The condition or permission for a handover remains unknown",
+      }),
+    }, profiles);
+    if (selected(resolved, "transfer_execution") === "transfer") operation = "transfer";
+  }
   if (external && operation === "transfer" && selected(answers, "transfer_authority") !== "give") {
     operation = selected(answers, "transfer_authority") === "request" ? "speak" : "wait";
   }
   intent.goalId = questions.goal && selected(answers, "goal") !== "none" ? selected(answers, "goal") : null;
   let targetKey = ["speak", "transfer"].includes(operation) ? selected(answers, "recipient") : selected(answers, "target");
+  const priorSearch = external ? recentActions.filter(action => action.submissionId !== external.submissionId).at(-1) : null;
+  if (priorSearch?.preparatoryFor && ["speak", "transfer"].includes(operation) && recipients.some(([id]) => id === targetKey)) {
+    const resolved = await decisions.ask(agentId, { currentPlayerRequest: text, lastSearch: priorSearch,
+      proposedRecipient: targetKey } as unknown as JsonValue, view.reads, {
+      recipient: choice("Resolve the recipient after this most recent unfinished search. A pronoun can still refer to the sought person even though they were not found; choose discover in that case. An explicit switch to a known person is allowed. Do not substitute a different earlier speaker just because that person is available.", recipientCriteria),
+    }, profiles);
+    targetKey = selected(resolved, "recipient");
+  }
   if (operation === "speak" && targetKey === "none") {
     const resolved = await decisions.ask(agentId, { ...context as Record<string, JsonValue>, concreteOperation: "speak",
       selectedSpeech: selected(answers, "speech") }, view.reads, {
@@ -244,6 +275,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const durationSeconds = actionSeconds(state, profileId, preparatoryFor || ["speak", "transfer"].includes(kind) ? "" : text);
   const frame: ActionFrame = { version: 1, id, actorId: agentId, actorEntityId: agent.entityId, submissionId: external?.submissionId ?? null,
     ...(expression ? { expression } : {}),
+    ...(external && questions[`progress_${kind}`] ? { requestContinuation: selected(answers, `progress_${kind}`) as NonNullable<ActionFrame["requestContinuation"]> } : {}),
     proposal: { id, actorId: agentId, baseRevision: state.revision, rawText, goal: external?.goal ?? selectedGoal ?? rawText,
       means: external?.means ?? null, targetIds: target ? [targetKey] : [] }, kind, goalId: intent.goalId,
     targetEntityId: target, toolEntityId: ["use", "change", "speak"].includes(kind) ? view.entities[selected(answers, "tool")] ?? null : null,

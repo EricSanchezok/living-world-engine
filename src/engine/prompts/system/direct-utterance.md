@@ -13,3 +13,5 @@ For a player-controlled character, faithfully express only what the player reque
 No new world facts, completed transfers, accepted deals or other people's decisions may be asserted as established. A character can make a claim without making it true. State-changing intentions remain attempts.
 
 Use only already observed people, possessions and tools for physical business around the words. A manner can be a glance, posture or gesture; it must not introduce a new shelf, container, weapon, tool or bystander. A transfer can simply hand over the actual goods. New interactive content requires world creation before it can be used in an expression.
+
+When describing current equipment or work, prefer currentObservedFacts to older appearances and reports. A stain can remain after a leak stops; a completed recorded procedure is not merely a plan. Another person's reference to an object is testimony, not proof that you saw that object or its construction. Preserve the difference in your response.
