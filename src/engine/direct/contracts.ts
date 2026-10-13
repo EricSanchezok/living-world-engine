@@ -4,7 +4,7 @@ import type { DecisionBatchV2, DecisionResultV2 } from "../models/decision-v2";
 import type { AlgorithmRef } from "../runtime/execution";
 import type { JsonValue } from "../runtime/json";
 
-export type ActionKind = "move" | "observe" | "speak" | "transfer" | "use" | "change" | "wait";
+export type ActionKind = "move" | "observe" | "reflect" | "speak" | "transfer" | "use" | "change" | "wait";
 export interface ActionFrame {
   version: 1; id: string; actorId: string; actorEntityId: string; submissionId: string | null;
   proposal: AgentActionProposal; kind: ActionKind; goalId: string | null;
@@ -14,6 +14,7 @@ export interface ActionFrame {
   durationSeconds: number; progressSeconds: number; activityStatus: "active" | "queued" | "paused";
   inputHash: string; causeActionId: string | null;
   preparatoryFor: ActionKind | null;
+  observationScope: "target" | "surroundings" | "inventory";
 }
 export interface AgentIntentState {
   goalId: string | null;
@@ -48,6 +49,7 @@ export type CapabilityEffect =
 export interface PreparedDirectAction {
   actionId: string; reads: Record<string, string>; status: ActionOutcome["status"]; summary: string;
   operations: WorldDeltaOperation[]; visibleFactIds: string[]; visibleEntityIds: string[]; deliveredToEntityIds: string[];
+  namedEntityIds: string[];
   randomRequests: DiscreteRandomRequest[];
   randomBindings: Array<{ factId: string; requestId: string; stepId: string }>;
   sharedClaims: Array<{ poolId: string; amount: number }>;

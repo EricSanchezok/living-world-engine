@@ -122,7 +122,12 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
     await context.stages?.after(executionStage("reaction-perception"));
     await context.stages?.before(executionStage("temporal-dependency"));
     // Adjudicate once, then retain executable effects across intervening clock boundaries.
-    const needsPreparation = control.activities.filter(frame => frame.activityStatus !== "paused" && frame.dueAtSeconds !== null &&
+    for (const frame of control.activities.filter(frame => frame.kind === "reflect")) {
+      control.prepared[frame.id] = { actionId: frame.id, reads: {},
+        status: "succeeded", summary: "你复核了自己已有的记录。", operations: [], visibleFactIds: [], visibleEntityIds: [], namedEntityIds: [],
+        deliveredToEntityIds: [], randomRequests: [], randomBindings: [], sharedClaims: [], ongoing: false, requestProgress: "complete" };
+    }
+    const needsPreparation = control.activities.filter(frame => frame.kind !== "reflect" && frame.activityStatus !== "paused" && frame.dueAtSeconds !== null &&
       (!control.prepared[frame.id] || Object.entries(control.prepared[frame.id]!.reads).some(([key, hash]) => contentHash(readDependency(source, key)) !== hash)));
     const groups = components(source, needsPreparation);
     const adjudicated = await Promise.allSettled(groups.map(group => prepareActions(source, authority, group, decisions)));

@@ -19,10 +19,14 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
   for (const [index, settlement] of settlements.entries()) {
     const recipients = new Set([settlement.frame.actorId, ...settlement.deliveredToEntityIds.flatMap(id => Object.values(state.agents).filter(agent => agent.entityId === id).map(agent => agent.id))]);
     for (const ownerId of recipients) {
-      const agent = state.agents[ownerId]!, introductions: ObservationPacket["introductions"] = [];
+      const agent = state.agents[ownerId]!, introductions: ObservationPacket["introductions"] = [], renamed: LocalEntity[] = [];
       const spoken = settlement.frame.utterance && settlement.deliveredToEntityIds.includes(agent.entityId);
       let summary = spoken ? `${alias(agent, settlement.frame.actorEntityId, introductions).name}说：“${settlement.frame.utterance}”` :
         ownerId === settlement.frame.actorId ? `你尝试了“${settlement.frame.proposal.rawText}”。${settlement.outcome.summary}` : settlement.outcome.summary;
+      if (ownerId === settlement.frame.actorId && settlement.frame.kind === "reflect") {
+        summary += `\n${settlement.frame.utterance ?? (Object.values(agent.belief.evidence).map(evidence =>
+          `${evidence.kind === "testimony" ? "听到的说法" : evidence.kind === "observation" ? "观察记录" : "已有记录"}：${evidence.description}`).join("\n") || "你还没有可供核对的记录。")}`;
+      }
       if (ownerId === settlement.frame.actorId && settlement.frame.kind === "observe" && settlement.frame.targetEntityId === agent.entityId &&
         ["succeeded", "partial"].includes(settlement.outcome.status)) {
         const inventory = Object.values(state.truth.quantities).filter(quantity => quantity.holderId === agent.entityId && quantity.amount > 0)
@@ -34,19 +38,25 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       }
       if (ownerId === settlement.frame.actorId) for (const entity of settlement.visibleEntities) {
         const local = alias(agent, entity.id, introductions);
+        const named = settlement.namedEntityIds.includes(entity.id);
         const introduced = introductions.find(intro => intro.localEntity.id === local.id);
-        if (introduced) { introduced.localEntity.name = observedKindLabel(entity.kind);
-          introduced.localEntity.description = "这次观察确认了其存在；尚未确认名字和身份。"; }
-        summary += `\n你注意到${local.name}。`;
+        if (introduced) { introduced.localEntity.name = named ? entity.name : observedKindLabel(entity.kind);
+          introduced.localEntity.description = named ? "这次观察确认了其存在和可辨认的名称。" : "这次观察确认了其存在；尚未确认名字和身份。"; }
+        else if (named && local.name !== entity.name) renamed.push({ ...local, name: entity.name });
+        summary += `\n你注意到${named ? entity.name : local.name}。`;
       }
-      const facts = ownerId === settlement.frame.actorId ? settlement.visibleFacts : settlement.visibleFacts.filter(fact => fact.access.kind === "public");
+      // A semantic visibility answer cannot grant access to another actor's private truth.
+      // Delivered speech remains testimony even when it quotes that private fact correctly.
+      const facts = settlement.visibleFacts.filter(fact => fact.access.kind === "public" ||
+        fact.access.kind === "agents" && fact.access.agentIds.includes(ownerId));
       for (const fact of facts) summary += `\n${alias(agent, fact.subjectId, introductions).name}：${fact.value.kind === "entity"
         ? describeValue(agent, fact.value, introductions) : fact.description}`;
       const id = runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "observation", stage: "direct-perception", owner: ownerId, round: 0, ordinal: index });
       const packet: ObservationPacket = { id, observerId: ownerId, step, kind: "outcome", summary, introductions, apparentClaims: [], sourceEventIds: [events[index]!.id] };
       const evidenceId = runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "evidence", stage: "direct-perception", owner: ownerId, round: 0, ordinal: index });
       const patch: BeliefPatch = { agentId: ownerId, baseRevision: state.revision + 1, operations: [{ kind: "upsert_evidence", evidence: {
-        id: evidenceId, kind: spoken ? "testimony" : "observation", description: summary, sourceId: id, step } }] };
+        id: evidenceId, kind: settlement.frame.kind === "reflect" ? "inference" : spoken ? "testimony" : "observation", description: summary, sourceId: id, step } },
+        ...renamed.map(entity => ({ kind: "upsert_local_entity" as const, entity }))] };
       for (const fact of facts) {
         const subject = alias(agent, fact.subjectId, introductions), target = fact.value.kind === "entity" ? alias(agent, fact.value.entityId, introductions) : null;
         patch.operations.push({ kind: "upsert_claim", claim: { id: `observed-${contentHash([ownerId, fact.id]).slice(0, 24)}`, subjectId: subject.id,

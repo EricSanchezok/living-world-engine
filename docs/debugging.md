@@ -16,7 +16,7 @@ npm run debug -- replay '<execution-id>'
 npm run debug -- replay '<execution-id>' --probe-report '<report.json>' --trial 1
 ```
 
-Use `--database <sqlite>` when the active data root is not `.livingworld-v24/`. All commands accept `--format json` (default), `--format ndjson`, and `--format table`. Add `--payload` to `inspect` or `events`, or use `artifact --artifact <hash>`, when complete JSON evidence is required. `--output <file>` prevents large results from consuming the Agent context.
+Use `--database <sqlite>` when the active data root is not `.livingworld-v25/`. All commands accept `--format json` (default), `--format ndjson`, and `--format table`. Add `--payload` to `inspect` or `events`, or use `artifact --artifact <hash>`, when complete JSON evidence is required. `--output <file>` prevents large results from consuming the Agent context.
 
 ## Identifier contract
 

@@ -121,6 +121,8 @@ describe("direct activities use code-owned mechanics", () => {
     const control = readDirectState(first.state.executionState!, first.state);
     expect(control.capabilities).toHaveLength(1); expect(control.capabilities[0]!.knownToAgentIds).toContain("inspector");
     expect(Object.values(first.state.truth.facts)).toContainEqual(expect.objectContaining({ predicate: "vibration-isolation", value: { kind: "text", value: "temporary" } }));
+    expect(first.committed.observations.find(packet => packet.observerId === "engineer")?.summary).toContain("振动暂时隔离");
+    expect(first.committed.observations.find(packet => packet.observerId === "inspector")?.summary).toContain("振动暂时隔离");
     const second = await f.act("使用刚才观察到的临时隔振方法", "inspector");
     expect(readDirectState(second.state.executionState!, second.state).capabilities).toHaveLength(1);
     expect(f.transport.mock.calls.filter(([, init]) => !JSON.parse(String(init?.body)).questions)).toHaveLength(1);

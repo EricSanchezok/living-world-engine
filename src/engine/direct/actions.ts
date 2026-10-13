@@ -16,10 +16,11 @@ import { orderedValues } from "./state";
 import { extendCapability } from "./capabilities";
 
 const kinds: Record<ActionKind | "unknown" | "expand", string> = { move: "Travel to a place", observe: "Inspect, notice or investigate",
+  reflect: "Review one's existing records, distinguish evidence from inference, formulate a question or think through a plan privately",
   speak: "Ask a question, make an offer, reply, or communicate words, including to an unfamiliar visible person", transfer: "Give or pay an owned resource or object", use: "Use a tool, ability or object",
   change: "Change an existing object's state", wait: "Wait for an event or continue a long activity", unknown: "Cannot identify any next attempt, even a question or observation",
   expand: "A missing concept or capability is required" };
-const actionLabels: Record<ActionKind, string> = { move: "前往", observe: "观察", speak: "交谈", transfer: "交付", use: "使用", change: "调整", wait: "等待" };
+const actionLabels: Record<ActionKind, string> = { move: "前往", observe: "观察", reflect: "思考", speak: "交谈", transfer: "交付", use: "使用", change: "调整", wait: "等待" };
 function choice(field: string, criteria: Record<string, string | Record<string, JsonValue> | JsonValue[] | null>): DecisionQuestionV2 {
   return { type: "choice", version: "direct-action-1", instructions: { task: loadPromptAsset("user/direct-action.md"), field }, criteria };
 }
@@ -78,6 +79,9 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const questions: Record<string, DecisionQuestionV2> = {
     ...cognitiveQuestions(state, agentId),
     operation: choice("operation", kinds), target: choice("target", targetCriteria), tool: choice("tool", targetCriteria),
+    observation_scope: choice("If observing, what is actually being inspected? Inspecting one's money, food or possessions selects inventory; reviewing memories selects the reflect operation.", {
+      target: "The selected external object", surroundings: "The immediate surroundings", inventory: "The actor's own actual inventory and resources",
+    }),
     recipient: choice("If the next action communicates words or transfers goods, select its actual recipient. Discover a recipient before addressing an unknown person. Ignore for other operations.", recipientCriteria),
     amount: choice("amount", { unknown: "No established amount", ...Object.fromEntries(amounts.map((amount, index) => [`n${index}`, String(amount)])) }),
     speech: choice("The actual words THIS speaker should say next. For an NPC answering a question, select words that answer or acknowledge it, not a verbatim copy of the received question. Existing testimony is evidence, not a script to echo.", { none: "No speech", input: "The entire player input is already the literal utterance", compose: "Compose an ordinary literal speech act from typed selections", create: "Need genuinely new literal dialogue beyond the available expressions",
@@ -115,7 +119,9 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const operation = selected(answers, "operation");
   intent.goalId = questions.goal && selected(answers, "goal") !== "none" ? selected(answers, "goal") : null;
   const targetKey = ["speak", "transfer"].includes(operation) ? selected(answers, "recipient") : selected(answers, "target");
-  const target = view.entities[targetKey] ?? null;
+  const observationScope = selected(answers, "observation_scope") as ActionFrame["observationScope"];
+  const target = operation === "observe" && observationScope === "inventory" ? agent.entityId
+    : operation === "observe" && observationScope === "surroundings" ? null : view.entities[targetKey] ?? null;
   const preparatoryFor: ActionKind | null = operation === "unknown" ? "observe" : ["speak", "transfer", "move"].includes(operation) && !target ? operation as ActionKind : null;
   if (!external && (["wait", "unknown"].includes(operation) || answers.relevant?.type === "noul" && answers.relevant.noul < 0.5)) {
     intent.status = "waiting"; intent.wait = { entityIds: target ? [target] : [], untilSeconds: null, reason: operation };
@@ -124,7 +130,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const audits: ModelExecutionAudit[] = [];
   let utterance: string | null = null;
   const speech = selected(answers, "speech");
-  if (operation === "speak" && !preparatoryFor) {
+  if (["speak", "reflect"].includes(operation) && !preparatoryFor) {
     if (/^q\d+$/u.test(speech)) utterance = quotes[Number(speech.slice(1))] ?? null;
     else if (/^span\d+$/u.test(speech)) utterance = spans[Number(speech.slice(4))] ?? null;
     else if (speech === "input" && external) utterance = text;
@@ -146,7 +152,9 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       const generated = await decisions.provider.generateStructured({ ...decisions.scope, modelRegistrySnapshotHash: control.registryHash,
         profileId: profiles.creation, subjectId: agentId, role: "creation", modelInvocation: decisions.next(agentId),
         system, userPrompt, promptVersion: `direct-utterance-${contentHash({ system, userPrompt })}`, schemaName: "DirectUtteranceV1",
-        context: { ...context as Record<string, JsonValue>, recipient: targetKey }, schema: z.object({ utterance: z.string().min(1) }).strict(), jsonExamplePolicy: "omit" });
+        context: { ...context as Record<string, JsonValue>, recipient: operation === "reflect" ? null : targetKey,
+          expression: operation === "reflect" ? "Private reflection for the actor: distinguish observed evidence from testimony, uncertainty and proposed next questions. This creates no external facts." : "Actual words addressed to the recipient" },
+        schema: z.object({ utterance: z.string().min(1) }).strict(), jsonExamplePolicy: "omit" });
       utterance = generated.value.utterance; audits.push(generated.audit);
     }
   }
@@ -168,7 +176,8 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     capabilityId: questions.capability && selected(answers, "capability") !== "none" ? selected(answers, "capability") : null,
     startedAtSeconds: state.truth.elapsedSeconds, dueAtSeconds: state.truth.elapsedSeconds + durationSeconds,
     durationSeconds, progressSeconds: 0, activityStatus: "active",
-    temporalProfileId: profileId, inputHash, causeActionId: intent.causeActionId, preparatoryFor };
+    temporalProfileId: profileId, inputHash, causeActionId: intent.causeActionId, preparatoryFor,
+    observationScope: preparatoryFor ? "surroundings" : observationScope };
   if (operation === "expand") {
     if (!input.creationEnabled) throw new Error("This new capability needs creation; ordinary actions remain available");
     const created = await extendCapability({ state, control, frame, decisions, profileId: profiles.creation,

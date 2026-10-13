@@ -68,7 +68,7 @@ const server = createServer(async (request, response) => {
           probabilities: Object.fromEntries(question.criteria.map((_, index) => [String(index), index === 1 ? 1 : 0])) }];
         const wanted = values[id] ?? (id.includes("outcome") ? "succeeded" : id.includes("visible") || id.includes("entity") ? "visible"
           : id.includes("goal_status") || id.includes("belief_status") || id.includes("fact") ? "unchanged" : id.includes("request_progress") ? "complete" : "none");
-        const choice = wanted in question.criteria ? wanted : "none" in question.criteria ? "none" : Object.keys(question.criteria)[0]!;
+        const choice = wanted in question.criteria ? wanted : ["none", "unnamed", "target"].find(key => key in question.criteria) ?? Object.keys(question.criteria)[0]!;
         return [id, { type: "choice", choice, confidence: 1, probabilities: Object.fromEntries(Object.keys(question.criteria).map(key => [key, key === choice ? 1 : 0])) }];
       }));
       response.writeHead(200, { "content-type": "application/json" });

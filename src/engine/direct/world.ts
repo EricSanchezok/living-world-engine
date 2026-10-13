@@ -6,7 +6,7 @@ import { contentHash } from "../models/model-audit";
 import type { DecisionQuestionV2 } from "../models/decision-v2";
 import type { JsonValue } from "../runtime/json";
 import { deriveClampedMeterDelta, magnitudeBands, materializeCondition } from "../mechanics/resolution";
-import type { ActionFrame, PreparedDirectAction } from "./contracts";
+import type { ActionFrame, CapabilityDefinition, CapabilityEffect, PreparedDirectAction } from "./contracts";
 import { DirectDecisions, selected } from "./decisions";
 import { localWorldView } from "./views";
 import { orderedValues } from "./state";
@@ -16,6 +16,7 @@ import { changedFact } from "./presentation";
 export interface ActionSettlement {
   frame: ActionFrame; outcome: ActionOutcome; operations: WorldDeltaOperation[]; visibleFacts: WorldFact[];
   visibleEntities: WorldEntity[];
+  namedEntityIds: string[];
   deliveredToEntityIds: string[];
 }
 const ordinaryStates = ["open", "closed", "working", "stopped", "damaged", "repaired", "leaking", "sealed", "temporarily sealed", "tested", "untested", "available", "unavailable"];
@@ -37,12 +38,22 @@ function question(task: string, data: JsonValue, criteria: Record<string, string
 export function sourceFor(frame: ActionFrame): CausalSource {
   return { causes: [{ kind: "action", id: frame.id }], assertions: [{ kind: "entity_lifecycle", entityId: frame.actorEntityId, expected: "active" }] };
 }
+function capabilityFact(state: Readonly<SimulationState>, frame: ActionFrame, capability: CapabilityDefinition,
+  effect: Extract<CapabilityEffect, { kind: "fact" }>, ordinal: number): WorldFact | null {
+  const subjectId = effect.subject === "actor" ? frame.actorEntityId : effect.subject === "target" ? frame.targetEntityId : frame.toolEntityId;
+  if (!subjectId) return null;
+  const existing = orderedValues(state.truth.facts).find(fact => fact.subjectId === subjectId && fact.predicate === effect.predicate);
+  return { id: existing?.id ?? `${capability.id}/${subjectId}/${ordinal}`, subjectId, predicate: effect.predicate,
+    value: typeof effect.value === "boolean" ? { kind: "boolean", value: effect.value } : { kind: "text", value: effect.value },
+    description: effect.description, access: existing?.access ?? { kind: "public" }, provenance: sourceFor(frame).causes };
+}
 export async function prepareActions(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frames: ActionFrame[], decisions: DirectDecisions) {
   if (!frames.length) return { prepared: [] as PreparedDirectAction[], reads: {} as Record<string, string> };
   const view = localWorldView(state, definition, frames), questions: Record<string, DecisionQuestionV2> = {};
   const effects = new Map<string, { fact: WorldFact; values: FactValue[] }>();
   const visibility = new Map<string, WorldFact>();
   const entityVisibility = new Map<string, WorldEntity>();
+  const entityNames = new Map<string, string>();
   const candidates = new Map<string, string[]>();
   const randomOptions = new Map<string, { distributionId: string; stepId: string; applies: string; facts: WorldFact[] }>();
   const durations = [...new Set([ ...frames.map(frame => frame.durationSeconds),
@@ -55,6 +66,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   const claims = new Map<string, { poolId: string; amount: number }>();
   for (const [index, frame] of frames.entries()) {
     const prefix = `a${index}`;
+    const capability = decisions.control.capabilities.find(capability => capability.id === frame.capabilityId && capability.knownToAgentIds.includes(frame.actorId));
     questions[`${prefix}_outcome`] = question("feasibility of this single concrete kind and its parameters, NOT completion of proposal.goal or the whole compound proposal.rawText. Speaking succeeds when actual words can be uttered; accepting terms does not require goods already delivered. Observing attempts to inspect the selected object or immediate surroundings; separate visibility questions decide what is learned.", frame as unknown as JsonValue,
       { succeeded: "The action can achieve its specified immediate effect", partial: "Only part of that immediate effect is achieved",
         failed: "The concrete attempted action cannot occur", unknown: "Evidence required for this immediate action is absent; speech need not already be true or accepted" });
@@ -64,7 +76,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       { complete: "This attempt handles the submitted action; any long-term goal remains separate",
         continue: "Only a prerequisite is handled; another concrete step is already authorized by this input",
         wait: "The next step needs an actual reply, new evidence or a new player decision" });
-    const focus = frame.kind === "observe" && (!frame.targetEntityId || frame.targetEntityId === frame.actorEntityId) ? state.truth.placements[frame.actorEntityId] : frame.targetEntityId;
+    const focus = frame.kind === "observe" && frame.observationScope === "inventory" ? frame.actorEntityId
+      : frame.kind === "observe" && (!frame.targetEntityId || frame.targetEntityId === frame.actorEntityId) ? state.truth.placements[frame.actorEntityId] : frame.targetEntityId;
     const targetFacts = orderedValues(state.truth.facts).filter(fact => fact.subjectId === (focus ?? frame.actorEntityId));
     if (["use", "change"].includes(frame.kind)) {
       for (const [ordinal, fact] of targetFacts.entries()) {
@@ -103,7 +116,6 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       const conditions = orderedValues(state.truth.mechanics.conditionProfiles);
       if (conditions.length) questions[`${prefix}_condition`] = question("condition caused on the target", frame as unknown as JsonValue,
         { none: "No condition is created", ...Object.fromEntries(conditions.map(profile => [profile.id, profile.name])) });
-      const capability = decisions.control.capabilities.find(capability => capability.id === frame.capabilityId && capability.knownToAgentIds.includes(frame.actorId));
       if (capability) questions[`${prefix}_capability`] = question("does the declared capability actually apply here", capability as unknown as JsonValue,
         { apply: "Apply its immediate declared effects", unavailable: "The required materials, skill or conditions are absent", unknown: "Need more evidence" });
       for (const pool of orderedValues(state.truth.sharedActivityResourcePools).filter(pool => pool.entityId in view.entities)) {
@@ -121,15 +133,23 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
           Object.fromEntries(magnitudeBands.map(band => [band, band])));
       }
     }
-    if (["observe", "use", "change"].includes(frame.kind)) for (const [ordinal, fact] of targetFacts.entries()) {
+    const observableFacts = new Map(targetFacts.map(fact => [fact.id, fact]));
+    for (const [ordinal, effect] of capability?.effects.entries() ?? []) if (effect.kind === "fact") {
+      const fact = capabilityFact(state, frame, capability!, effect, ordinal);
+      if (fact) observableFacts.set(fact.id, fact);
+    }
+    if (["observe", "use", "change"].includes(frame.kind)) for (const [ordinal, fact] of [...observableFacts.values()].entries()) {
       const id = `${prefix}_visible${ordinal}`; visibility.set(id, fact);
       questions[id] = question("Is this PROPERTY perceptible through this action's resulting feedback? Judge access to the property, not whether its pre-action value is still true. A public visible state of the very object being handled is ordinarily perceptible; private codes and hidden mental states require their actual disclosure channel.", { actionId: frame.id, fact: fact as unknown as JsonValue },
         { visible: "The attempt reveals the resulting fact through an available perceptual channel", hidden: "The fact remains hidden", unknown: "No justified perceptual access" });
     }
-    if (frame.kind === "observe") {
+    if (frame.kind === "observe" && frame.observationScope !== "inventory") {
       const focus = frame.targetEntityId && frame.targetEntityId !== frame.actorEntityId ? frame.targetEntityId : state.truth.placements[frame.actorEntityId];
       for (const [ordinal, entity] of orderedValues(state.truth.entities).filter(entity => entity.lifecycle === "active" && entity.id !== frame.actorEntityId && state.truth.placements[entity.id] === focus).entries()) {
         const id = `${prefix}_entity${ordinal}`; entityVisibility.set(id, entity);
+        const nameId = `${id}_name`; entityNames.set(nameId, entity.id);
+        questions[nameId] = question("Can the observer actually recognize this public name, for example from a visible sign or established prior acquaintance? Seeing a person does not disclose their hidden name or identity.", {
+          actionId: frame.id, entity: entity as unknown as JsonValue }, { unnamed: "Only appearance or existence is established", named: "The actual name is perceptible or already known" });
         questions[id] = question("is this nearby entity perceptible without knowing its hidden identity", { action: frame as unknown as JsonValue, entity: entity as unknown as JsonValue },
           { visible: "Its presence is observable", hidden: "Its presence is concealed", unknown: "Insufficient perceptual evidence" });
       }
@@ -214,11 +234,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
               if (!subjectId) { status = "blocked"; detail = "能力缺少实际作用对象。"; break; }
               if (effect.kind === "condition") addCondition(effect.profileId, subjectId);
               else {
-                const existing = orderedValues(state.truth.facts).find(fact => fact.subjectId === subjectId && fact.predicate === effect.predicate);
-                const id = existing?.id ?? `${capability.id}/${subjectId}/${ordinal}`;
-                operations.push({ kind: "set_fact", fact: { id, subjectId, predicate: effect.predicate,
-                  value: typeof effect.value === "boolean" ? { kind: "boolean", value: effect.value } : { kind: "text", value: effect.value },
-                  description: effect.description, access: existing?.access ?? { kind: "public" }, provenance: source.causes }, ...source });
+                operations.push({ kind: "set_fact", fact: capabilityFact(state, frame, capability, effect, ordinal)!, ...source });
               }
             }
           }
@@ -248,6 +264,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     prepared.push({ actionId: frame.id, status, summary: detail, operations, reads: view.reads,
       visibleFactIds: ["succeeded", "partial"].includes(status) ? visibleFacts.map(fact => fact.id) : [],
       visibleEntityIds: ["succeeded", "partial"].includes(status) ? visibleEntities.map(entity => entity.id) : [], deliveredToEntityIds,
+      namedEntityIds: [...entityNames].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "named").map(([, entityId]) => entityId),
       randomRequests: operations.length ? randomRequests : [], randomBindings: operations.length ? randomBindings : [],
       sharedClaims: [...claims].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "claim").map(([, claim]) => claim),
       ongoing: frame.temporalProfileId ? state.truth.mechanics.temporalProfiles[frame.temporalProfileId]?.kind === "ongoing" && !/\d+\s*(秒|分钟|小时|seconds?|minutes?|hours?)/iu.test(frame.proposal.rawText) : false,
