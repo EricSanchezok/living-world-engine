@@ -130,10 +130,11 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
     const needsPreparation = control.activities.filter(frame => frame.kind !== "reflect" && frame.activityStatus !== "paused" && frame.dueAtSeconds !== null &&
       (!control.prepared[frame.id] || Object.entries(control.prepared[frame.id]!.reads).some(([key, hash]) => contentHash(readDependency(source, key)) !== hash)));
     const groups = components(source, needsPreparation);
-    const adjudicated = await Promise.allSettled(groups.map(group => prepareActions(source, authority, group, decisions)));
+    const adjudicated = await Promise.allSettled(groups.map(group => prepareActions(source, authority, group, decisions, this.config.creationEnabled)));
     let newRandomCommitment = false;
     adjudicated.forEach((result, index) => {
       if (result.status === "fulfilled") {
+        audits.push(...result.value.audits);
         for (const prepared of result.value.prepared) { control.prepared[prepared.actionId] = prepared; newRandomCommitment ||= prepared.randomRequests.length > 0; }
         Object.assign(reads, result.value.reads);
       }

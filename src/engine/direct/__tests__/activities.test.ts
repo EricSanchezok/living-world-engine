@@ -16,7 +16,7 @@ import { settlePreparedActions } from "../settlement";
 function option(question: DecisionQuestionV2, predicate: (value: unknown) => boolean) {
   return question.type === "choice" ? Object.entries(question.criteria).find(([, value]) => predicate(value))?.[0] ?? "unchanged" : "none";
 }
-async function fixture(mode: "repair" | "test" | "extend" | "ongoing" | "wait" = "repair", deadline = 120) {
+async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "ongoing" | "wait" = "repair", deadline = 120) {
   let extensionUsed = false;
   const f = directTestProvider(wire => {
     if (!wire.questions) return { description: "临时隔振", applicability: "用现有缓冲材料隔离设备振动", effectDescription: "设备获得可观察的临时隔振状态",
@@ -38,6 +38,7 @@ async function fixture(mode: "repair" | "test" | "extend" | "ongoing" | "wait" =
       if (id.includes("_random")) answer = mode !== "test" ? "none" : id.includes("_target")
         ? option(q, value => (value as { property?: string })?.property === "pressure") : "apply";
       if (id.includes("capability")) answer = context.perspective ? option(q, value => typeof value === "object") : "apply";
+      if (id.endsWith("_expression")) answer = mode === "extend-world" ? "expand" : "existing";
       return [id, nativeAnswer(q, answer)];
     }));
   });
@@ -47,7 +48,7 @@ async function fixture(mode: "repair" | "test" | "extend" | "ongoing" | "wait" =
   world.initialState.truth.quantities[kit] = { id: kit, definitionId: "seal-kit", holderId: "engineer", amount: 1 };
   world.historyBaseHash = historyReplayBaseHash(world.initialState);
   await f.registry.capture();
-  const algorithm = new DirectWorldAlgorithm(f.gateway, { decision: "decision-jev", creation: "creation-deepseek", fallback: "decision-deepseek", creationEnabled: mode === "extend" });
+  const algorithm = new DirectWorldAlgorithm(f.gateway, { decision: "decision-jev", creation: "creation-deepseek", fallback: "decision-deepseek", creationEnabled: mode === "extend" || mode === "extend-world" });
   const engine = new SimulationEngine(world, algorithm);
   const roster: Record<string, PolicyBinding> = Object.fromEntries(Object.keys(world.initialState.agents).map(id => [id,
     { kind: "external", agentId: id, participantId: "human" }]));
@@ -138,6 +139,16 @@ describe("direct activities use code-owned mechanics", () => {
     await f.act("停止监控，改为再次查看冷却泵");
     expect(readDirectState(f.engine.snapshot.executionState!, f.engine.snapshot).activities).toHaveLength(1);
     expect(replaySimulationState(f.engine.snapshot)).toEqual(f.engine.snapshot);
+  });
+  it("extends a missing world effect after ordinary action selection and reuses it without regeneration", async () => {
+    const f = await fixture("extend-world"); const first = await f.act("用缓冲材料临时隔离设备振动");
+    expect(readDirectState(first.state.executionState!, first.state).capabilities).toHaveLength(1);
+    expect(first.committed.observations.find(packet => packet.observerId === "inspector")?.summary).toContain("振动暂时隔离");
+    expect(f.transport).toHaveBeenCalledTimes(4);
+    const second = await f.act("复用工程师实际演示的隔振方法", "inspector");
+    expect(f.transport).toHaveBeenCalledTimes(6);
+    expect(f.transport.mock.calls.filter(([, init]) => !JSON.parse(String(init?.body)).questions)).toHaveLength(1);
+    expect(replaySimulationState(second.state)).toEqual(second.state);
   });
   it("queues shared console contention and grants capacity only after the earlier action settles", async () => {
     const f = await fixture("ongoing");

@@ -21,6 +21,7 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
     const selection: Record<string, string> = { operation: options.operation ?? "observe", target: options.target ?? "door", recipient: options.target ?? "none", tool: options.tool ?? "none",
       amount: options.amount ?? "n0", resource: "spirit-stone", speech: options.speech ?? "q0", timing: "default", goal: "none",
       observation_scope: options.observationScope ?? "target" };
+    selection.reflection = options.speech ?? "none";
     return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
       let value = selection[id] ?? (id.includes("outcome") ? "succeeded" : id.includes("goal_status") || id.includes("belief_status") ? "unchanged" : id.includes("visible") ? "visible" : id.includes("delivery") ? "delivered" : id.includes("fact") ? "unchanged" : "none");
       if (/_entity\d+_name$/u.test(id)) value = options.named ? "named" : "unnamed";

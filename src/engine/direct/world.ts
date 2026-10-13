@@ -1,4 +1,4 @@
-import type { ActionOutcome, CausalSource, FactValue, SimulationState, WorldDeltaOperation, WorldFact, WorldEntity } from "../contracts/model";
+import type { ActionOutcome, CausalSource, FactValue, ModelExecutionAudit, SimulationState, WorldDeltaOperation, WorldFact, WorldEntity } from "../contracts/model";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import { loadPromptAsset } from "../prompts";
 import { applyWorldDeltaOperation } from "../runtime/transaction";
@@ -12,6 +12,8 @@ import { localWorldView } from "./views";
 import { orderedValues } from "./state";
 import { literalNumbers } from "./actions";
 import { changedFact } from "./presentation";
+import { extendCapability } from "./capabilities";
+import { agentCapabilityModels } from "../models/capability-bindings";
 
 export interface ActionSettlement {
   frame: ActionFrame; outcome: ActionOutcome; operations: WorldDeltaOperation[]; visibleFacts: WorldFact[];
@@ -47,8 +49,9 @@ function capabilityFact(state: Readonly<SimulationState>, frame: ActionFrame, ca
     value: typeof effect.value === "boolean" ? { kind: "boolean", value: effect.value } : { kind: "text", value: effect.value },
     description: effect.description, access: existing?.access ?? { kind: "public" }, provenance: sourceFor(frame).causes };
 }
-export async function prepareActions(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frames: ActionFrame[], decisions: DirectDecisions) {
-  if (!frames.length) return { prepared: [] as PreparedDirectAction[], reads: {} as Record<string, string> };
+export async function prepareActions(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frames: ActionFrame[], decisions: DirectDecisions, creationEnabled = true) {
+  const audits: ModelExecutionAudit[] = [];
+  if (!frames.length) return { prepared: [] as PreparedDirectAction[], reads: {} as Record<string, string>, audits };
   const view = localWorldView(state, definition, frames), questions: Record<string, DecisionQuestionV2> = {};
   const effects = new Map<string, { fact: WorldFact; values: FactValue[] }>();
   const visibility = new Map<string, WorldFact>();
@@ -80,6 +83,11 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       : frame.kind === "observe" && (!frame.targetEntityId || frame.targetEntityId === frame.actorEntityId) ? state.truth.placements[frame.actorEntityId] : frame.targetEntityId;
     const targetFacts = orderedValues(state.truth.facts).filter(fact => fact.subjectId === (focus ?? frame.actorEntityId));
     if (["use", "change"].includes(frame.kind)) {
+      if (!capability) questions[`${prefix}_expression`] = question("Can the existing properties and mechanical effects actually represent this action's intended immediate effect? A new ordinary combination can use existing properties, but an absent property or constructed object needs a small capability declaration; do not report a represented effect when none can be written.", {
+        action: frame as unknown as JsonValue, existingProperties: targetFacts as unknown as JsonValue }, {
+        existing: "Existing properties and mechanical operations express the immediate effect, or this attempt has no justified effect",
+        expand: "A plausible new qualitative property, construct or capability is needed to express the actual intended effect",
+      });
       for (const [ordinal, fact] of targetFacts.entries()) {
         const id = `${prefix}_fact${ordinal}`, values = factOptions(fact, frames, state);
         effects.set(id, { fact, values });
@@ -161,7 +169,38 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     for (const [ordinal, recipient] of recipients.entries()) questions[`${prefix}_delivery${ordinal}`] = question("can the recipient perceive this speech, transfer or physical method and effect", { action: frame as unknown as JsonValue, recipient },
       { delivered: "The actual words or physical method and effect are perceived", unavailable: "No actual perception", unknown: "Perception is uncertain" });
   }
-  const answers = await decisions.ask(null, view.state, view.reads, questions);
+  let answers = await decisions.ask(null, view.state, view.reads, questions);
+  const expansions = frames.flatMap((frame, index) => questions[`a${index}_expression`] && selected(answers, `a${index}_expression`) === "expand" ? [{ frame, index }] : []);
+  if (expansions.length) {
+    if (!creationEnabled) throw new Error("This action needs a new effect concept; the creation capability is disabled");
+    const expanded = await Promise.allSettled(expansions.map(async ({ frame, index }) => ({ index, frame,
+      result: await extendCapability({ state, control: decisions.control, frame, decisions,
+        profileId: agentCapabilityModels(state, decisions.control, frame.actorId).creation,
+        context: { action: frame.proposal.rawText, target: frame.targetEntityId ? state.truth.entities[frame.targetEntityId]!.description : null,
+          tool: frame.toolEntityId ? state.truth.entities[frame.toolEntityId]!.description : null } }) })));
+    const supplemental: Record<string, DecisionQuestionV2> = {};
+    for (const result of expanded) if (result.status === "fulfilled") {
+      const { index, frame, result: extension } = result.value, prefix = `a${index}`;
+      audits.push(...extension.audits);
+      supplemental[`${prefix}_capability`] = question("does this new declared capability actually apply to the already selected action", extension.capability as unknown as JsonValue,
+        { apply: "Apply its immediate declared effects", unavailable: "The required materials, skill or conditions are absent", unknown: "Need more evidence" });
+      for (const [ordinal, effect] of extension.capability.effects.entries()) if (effect.kind === "fact") {
+        const fact = capabilityFact(state, frame, extension.capability, effect, ordinal);
+        if (!fact) continue;
+        const id = `${prefix}_extended_visible${ordinal}`; visibility.set(id, fact);
+        supplemental[id] = question("is this new property perceptible through the resulting action", { actionId: frame.id, fact: fact as unknown as JsonValue },
+          { visible: "The resulting property is perceptible", hidden: "The property is hidden", unknown: "No justified perceptual access" });
+      }
+    } else {
+      if (result.reason?.audits) audits.push(...result.reason.audits);
+      else if (result.reason?.audit) audits.push(result.reason.audit);
+    }
+    const failed = expanded.find(result => result.status === "rejected");
+    if (failed?.status === "rejected") throw Object.assign(failed.reason instanceof Error ? failed.reason : new Error(String(failed.reason)), { audits });
+    try { answers = { ...answers, ...await decisions.ask(null, view.state, view.reads, supplemental) }; }
+    catch (error) { throw Object.assign(error instanceof Error ? error : new Error(String(error)), {
+      audits: [...audits, ...((error as { audits?: ModelExecutionAudit[] } | null)?.audits ?? [])] }); }
+  }
   let projected = structuredClone(state) as SimulationState;
   const prepared: PreparedDirectAction[] = [];
   for (const [index, frame] of frames.entries()) {
@@ -270,5 +309,5 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       ongoing: frame.temporalProfileId ? state.truth.mechanics.temporalProfiles[frame.temporalProfileId]?.kind === "ongoing" && !/\d+\s*(秒|分钟|小时|seconds?|minutes?|hours?)/iu.test(frame.proposal.rawText) : false,
       requestProgress: frame.submissionId ? selected(answers, `${prefix}_request_progress`) as PreparedDirectAction["requestProgress"] : "complete" });
   }
-  return { prepared, reads: view.reads };
+  return { prepared, reads: view.reads, audits };
 }

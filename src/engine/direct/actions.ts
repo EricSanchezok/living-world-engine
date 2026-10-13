@@ -87,6 +87,10 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     speech: choice("The actual words THIS speaker should say next. For an NPC answering a question, select words that answer or acknowledge it, not a verbatim copy of the received question. Existing testimony is evidence, not a script to echo.", { none: "No speech", input: "The entire player input is already the literal utterance", compose: "Compose an ordinary literal speech act from typed selections", create: "Need genuinely new literal dialogue beyond the available expressions",
       ...Object.fromEntries(quotes.map((quote, index) => [`q${index}`, quote])),
       ...Object.fromEntries(spans.map((span, index) => [`span${index}`, { literalWords: span }])) }),
+    reflection: choice("If the operation is private reflection, does the request require NEW synthesis, distinctions, a plan or a formulated question? The instruction not to speak aloud concerns delivery; it does not mean no private text is needed.", {
+      none: "Only retrieve and review existing records without new conclusions or wording",
+      create: "Create the requested private synthesis, analysis, plan or concrete next question from existing evidence",
+    }),
     dialogue: choice("ordinary speech act, used only when speech is compose", { ask_price: "Ask the price of the selected object", request: "Request the selected resource amount",
       offer: "Offer the selected resource amount", accept: "Explicitly accept the currently discussed terms", refuse: "Explicitly refuse the currently discussed terms",
       clarify: "Ask for clearer terms", report: "State the selected existing belief", acknowledge: "Acknowledge and wait for actual evidence", unknown_information: "Tell the questioner that this Agent does not know the requested information" }),
@@ -129,7 +133,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   }
   const audits: ModelExecutionAudit[] = [];
   let utterance: string | null = null;
-  const speech = selected(answers, "speech");
+  const speech = selected(answers, operation === "reflect" ? "reflection" : "speech");
   if (["speak", "reflect"].includes(operation) && !preparatoryFor) {
     if (/^q\d+$/u.test(speech)) utterance = quotes[Number(speech.slice(1))] ?? null;
     else if (/^span\d+$/u.test(speech)) utterance = spans[Number(speech.slice(4))] ?? null;
