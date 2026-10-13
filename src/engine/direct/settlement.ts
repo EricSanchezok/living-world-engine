@@ -28,7 +28,8 @@ export function settlePreparedActions(state: Readonly<SimulationState>, control:
             : typeof result.aggregate === "number" ? { kind: "number", value: result.aggregate } : { kind: "text", value: result.aggregate };
           const operation = operations.find(operation => operation.kind === "set_fact" && operation.fact.id === binding.factId);
           if (!operation || operation.kind !== "set_fact") throw new Error("random effect has no owned fact operation");
-          operation.fact = changedFact(operation.fact, value); operation.causes.push({ kind: "random", id: binding.requestId });
+          operation.fact = changedFact(operation.fact, value);
+          operation.causes = [...operation.causes, { kind: "random", id: binding.requestId }];
         }
         const transaction = structuredClone(projected);
         for (const operation of operations) {

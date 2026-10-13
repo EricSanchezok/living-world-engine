@@ -38,7 +38,7 @@ export function localWorldView(state: Readonly<SimulationState>, definition: Wor
   const meters = orderedValues(state.truth.meters).filter(meter => ids.has(meter.entityId));
   const ratings = orderedValues(state.truth.ratings).filter(rating => ids.has(rating.entityId));
   const conditions = orderedValues(state.truth.conditions).filter(condition => ids.has(condition.subjectId));
-  const keys = [...frames.map(frame => `agent:${frame.actorId}`), ...[...ids].flatMap(id => [`entity:${id}`, `placement:${id}`, `members:${id}`, `collections:${id}`]),
+  const keys = [...frames.map(frame => `evidence:${frame.actorId}`), ...[...ids].flatMap(id => [`entity:${id}`, `placement:${id}`, `members:${id}`, `collections:${id}`]),
     ...facts.map(fact => `fact:${fact.id}`), ...quantities.map(quantity => `quantity:${quantity.id}`),
     ...meters.map(meter => `meter:${meter.id}`), ...ratings.map(rating => `rating:${rating.id}`), ...conditions.map(condition => `condition:${condition.id}`)];
   return { state: { world: { name: definition.name, description: definition.description, laws: definition.laws },

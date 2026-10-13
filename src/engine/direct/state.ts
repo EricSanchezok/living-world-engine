@@ -27,6 +27,7 @@ export function readDirectState(value: AlgorithmExecutionState, state: Readonly<
 export function readDependency(state: Readonly<SimulationState>, key: string): unknown {
   const [domain, ...parts] = key.split(":"); const id = parts.join(":");
   if (domain === "agent") return state.agents[id] ?? null;
+  if (domain === "evidence") return state.agents[id] ? orderedValues(state.agents[id]!.belief.evidence) : null;
   if (domain === "clock") return state.truth.elapsedSeconds;
   if (domain === "collections") return {
     facts: Object.values(state.truth.facts).filter(value => value.subjectId === id).map(value => value.id).sort(),

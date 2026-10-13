@@ -80,12 +80,12 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     operation: choice("operation", kinds), target: choice("target", targetCriteria), tool: choice("tool", targetCriteria),
     recipient: choice("If the next action communicates words or transfers goods, select its actual recipient. Discover a recipient before addressing an unknown person. Ignore for other operations.", recipientCriteria),
     amount: choice("amount", { unknown: "No established amount", ...Object.fromEntries(amounts.map((amount, index) => [`n${index}`, String(amount)])) }),
-    speech: choice("speech", { none: "No speech", input: "The entire player input is already the literal utterance", compose: "Compose an ordinary literal speech act from typed selections", create: "Need genuinely new literal dialogue beyond the available expressions",
+    speech: choice("The actual words THIS speaker should say next. For an NPC answering a question, select words that answer or acknowledge it, not a verbatim copy of the received question. Existing testimony is evidence, not a script to echo.", { none: "No speech", input: "The entire player input is already the literal utterance", compose: "Compose an ordinary literal speech act from typed selections", create: "Need genuinely new literal dialogue beyond the available expressions",
       ...Object.fromEntries(quotes.map((quote, index) => [`q${index}`, quote])),
       ...Object.fromEntries(spans.map((span, index) => [`span${index}`, { literalWords: span }])) }),
     dialogue: choice("ordinary speech act, used only when speech is compose", { ask_price: "Ask the price of the selected object", request: "Request the selected resource amount",
       offer: "Offer the selected resource amount", accept: "Explicitly accept the currently discussed terms", refuse: "Explicitly refuse the currently discussed terms",
-      clarify: "Ask for clearer terms", report: "State the selected existing belief", acknowledge: "Acknowledge and wait for actual evidence" }),
+      clarify: "Ask for clearer terms", report: "State the selected existing belief", acknowledge: "Acknowledge and wait for actual evidence", unknown_information: "Tell the questioner that this Agent does not know the requested information" }),
     timing: choice("timing", { default: "Ordinary action duration from the world", ...Object.fromEntries(timing.map(profile => [profile.id, profile.name])) }),
   };
   if (!external) questions.urgency = { type: "score", version: "urgency-1", instructions: { task: loadPromptAsset("user/direct-action.md"), field: "urgency of the next action" },
@@ -100,7 +100,8 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     [capability.id, { description: capability.description, applicability: capability.applicability, effect: capability.effectDescription }])) });
   if (goals.length) questions.goal = choice("goal", { none: "Respond to the situation without selecting a goal", ...Object.fromEntries(goals.map(goal => [goal.id, goal.description])) });
   const context = { perspective: view.state, submittedAction: external ?? null, intent: { goalId: intent.goalId, wakeReasons: intent.wakeReasons,
-    recentOutcomeIds: intent.recentOutcomeIds }, actionKinds: kinds } as unknown as JsonValue;
+    recentOutcomeIds: intent.recentOutcomeIds }, latestObservedEvidence: orderedValues(agent.belief.evidence).filter(evidence => evidence.step === agent.observationCursorStep),
+    actionKinds: kinds } as unknown as JsonValue;
   const inputHash = contentHash({ perspective: view.state, submittedAction: external ?? null, goal: intent.goalId });
   if (!external && inputHash === intent.lastInputHash) {
     intent.status = "waiting"; intent.wakeReasons = []; intent.wait = { entityIds: [], untilSeconds: null, reason: "same-input" };
@@ -137,7 +138,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
         ? agent.belief.localEntities[claim.value.localEntityId]?.name ?? "尚不明确的对象" : claim.value.kind === "none" ? "无" : String(claim.value.value)}` : "还需要核实";
       utterance = { ask_price: `请问${tool}的价格是多少？`, request: `请给我${phrase}。`, offer: `我愿意交付${phrase}，请确认交换条件。`,
         accept: "我接受刚才明确提出的条件。", refuse: "我不接受刚才提出的条件。", clarify: "请明确说明条件和需要我做的事。",
-        report: belief, acknowledge: "明白，我会等待实际结果。" }[selected(answers, "dialogue")] ?? null;
+        report: belief, acknowledge: "明白，我会等待实际结果。", unknown_information: "这件事我还不知道，暂时无法给你确切的答复。" }[selected(answers, "dialogue")] ?? null;
     }
     else if (speech === "create") {
       if (!input.creationEnabled) throw new Error("new dialogue requires the configured creation capability");

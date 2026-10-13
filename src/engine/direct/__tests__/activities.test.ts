@@ -11,6 +11,7 @@ import type { PolicyBinding } from "../../runtime/execution";
 import type { DecisionQuestionV2 } from "../../models/decision-v2";
 import { readDirectState } from "../state";
 import { privateActionView } from "../views";
+import { settlePreparedActions } from "../settlement";
 
 function option(question: DecisionQuestionV2, predicate: (value: unknown) => boolean) {
   return question.type === "choice" ? Object.entries(question.criteria).find(([, value]) => predicate(value))?.[0] ?? "unchanged" : "none";
@@ -34,7 +35,8 @@ async function fixture(mode: "repair" | "test" | "extend" | "ongoing" | "wait" =
       if (id.includes("resource") && mode === "repair") answer = info?.resource === "密封组件" ? "n1" : info?.resource === "冷却剂" ? "n2" : "none";
       if (id.endsWith("_applies")) answer = mode === "repair" ? "apply" : "none";
       if (id.includes("fact") && mode === "repair" && info?.fact?.id === "pump-seal") answer = option(q, value => (value as { value?: string })?.value === "sealed");
-      if (id.endsWith("_random")) answer = mode === "test" && info?.fact?.id === "pump-pressure" ? option(q, value => (value as { committedRandomResult?: string })?.committedRandomResult === "pressure-test") : "none";
+      if (id.includes("_random")) answer = mode !== "test" ? "none" : id.includes("_target")
+        ? option(q, value => (value as { property?: string })?.property === "pressure") : "apply";
       if (id.includes("capability")) answer = context.perspective ? option(q, value => typeof value === "object") : "apply";
       return [id, nativeAnswer(q, answer)];
     }));
@@ -100,6 +102,19 @@ describe("direct activities use code-owned mechanics", () => {
     expect(next.state.truth.elapsedSeconds).toBe(120);
     expect(f.transport).toHaveBeenCalledTimes(3);
     expect(replaySimulationState(next.state)).toEqual(next.state);
+  });
+  it("keeps shared random provenance immutable when one draw has several recorded bindings", async () => {
+    const f = await fixture("test"); const admitted = await f.act("运行压力测试10秒");
+    const control = readDirectState(admitted.state.executionState!, admitted.state), frame = control.activities[0]!;
+    const prepared = control.prepared[frame.id]!, first = prepared.operations.find(op => op.kind === "set_fact")!;
+    if (first.kind !== "set_fact") throw new Error("missing fixture effect");
+    prepared.operations.push({ ...first, fact: { ...first.fact, id: "pump-seal", predicate: "seal" } });
+    prepared.randomBindings.push({ ...prepared.randomBindings[0]!, factId: "pump-seal" });
+    const saved = structuredClone(control);
+    const result = settlePreparedActions(admitted.state, control, [frame]);
+    expect(result.settlements[0]!.outcome.status).toBe("succeeded");
+    expect(result.rng.draws).toBe(1); expect(control).toEqual(saved);
+    expect(result.settlements[0]!.operations.filter(op => op.kind === "set_fact").every(op => op.causes.filter(cause => cause.kind === "random").length === 1)).toBe(true);
   });
   it("creates one small capability and lets an observing appropriate actor reuse it", async () => {
     const f = await fixture("extend"); const first = await f.act("用缓冲材料临时隔离设备振动");

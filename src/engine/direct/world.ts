@@ -44,7 +44,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   const visibility = new Map<string, WorldFact>();
   const entityVisibility = new Map<string, WorldEntity>();
   const candidates = new Map<string, string[]>();
-  const randomOptions = new Map<string, { distributionId: string; stepId: string }>();
+  const randomOptions = new Map<string, { distributionId: string; stepId: string; applies: string; facts: WorldFact[] }>();
   const durations = [...new Set([ ...frames.map(frame => frame.durationSeconds),
     ...orderedValues(state.truth.mechanics.temporalProfiles).flatMap(profile => profile.kind === "fixed" ? [profile.durationSeconds] : []),
     ...definition.laws.flatMap(law => [...law.text.matchAll(/(\d+)\s*(秒|分钟|小时|seconds?|minutes?|hours?)/giu)].map(match => Number(match[1]) *
@@ -70,17 +70,24 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       for (const [ordinal, fact] of targetFacts.entries()) {
         const id = `${prefix}_fact${ordinal}`, values = factOptions(fact, frames, state);
         effects.set(id, { fact, values });
-        const randomCriteria: Record<string, Record<string, JsonValue>> = {};
-        for (const distribution of definition.randomDistributions) for (const step of distribution.steps) {
-          if (!step.outcomes.every(value => typeof value === (fact.value.kind === "boolean" ? "boolean" : fact.value.kind === "number" ? "number" : "string"))) continue;
-          const option = `random_${randomOptions.size}`;
-          randomOptions.set(`${id}:${option}`, { distributionId: distribution.id, stepId: step.id });
-          randomCriteria[option] = { committedRandomResult: distribution.id, step: step.id, meaning: distribution.description };
-        }
-        if (Object.keys(randomCriteria).length) questions[`${id}_random`] = question("Does an explicit rule require an actual random trial to determine this property's result for THIS action? Select the required distribution before any draw; code will compute the result. A random test must not be replaced by the label tested or a guessed result.",
-          { actionId: frame.id, fact: fact as unknown as JsonValue }, { none: "This action does not require an authored random trial for this property", ...randomCriteria });
         questions[id] = question("resulting value of this existing fact if the action succeeds and no random trial governs it. Unaffected properties stay unchanged.", { actionId: frame.id, fact: fact as unknown as JsonValue },
           { unchanged: "This property is unaffected or evidence is insufficient", ...Object.fromEntries(values.map((value, i) => [`v${i}`, value as unknown as Record<string, JsonValue>])) });
+      }
+      for (const [distributionIndex, distribution] of definition.randomDistributions.entries()) {
+        const applies = `${prefix}_random${distributionIndex}`;
+        questions[applies] = question("Does this actual action require this specific authored random procedure?", {
+          actionId: frame.id, procedure: distribution as unknown as JsonValue },
+          { apply: "This action performs this procedure, so its draw must occur", none: "This procedure is unrelated to this action", unknown: "Its preconditions are not established" });
+        for (const [stepIndex, step] of distribution.steps.entries()) {
+          const facts = targetFacts.filter(fact => step.outcomes.every(value => typeof value === (fact.value.kind === "boolean" ? "boolean" : fact.value.kind === "number" ? "number" : "string")));
+          if (!facts.length) continue;
+          const id = `${applies}_target${stepIndex}`;
+          randomOptions.set(id, { distributionId: distribution.id, stepId: step.id, applies, facts });
+          questions[id] = question("Which ONE existing property receives this procedure step's actual sampled value? Match the meaning of the sample to the property. Other properties remain governed by their separate effects. This answer is ignored unless the procedure is performed.", {
+            actionId: frame.id, procedure: distribution.description, step: step as unknown as JsonValue },
+            { none: "This sample does not directly set any listed property", ...Object.fromEntries(facts.map((fact, i) => [`f${i}`, {
+              property: fact.predicate, meaning: fact.description, currentValue: fact.value as unknown as JsonValue }])) });
+        }
       }
       for (const resource of orderedValues(state.truth.mechanics.quantities)) for (const kind of ["consume_quantity", "produce_quantity"] as const) {
         const laws = kind === "consume_quantity" ? resource.consumptionLawIds : resource.productionLawIds;
@@ -156,10 +163,15 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         else if (frame.toolEntityId && frame.targetEntityId) operations.push({ kind: "place_entity", entityId: frame.toolEntityId, placementId: frame.targetEntityId, ...source });
         else { status = "blocked"; detail = "还需要确认转移的对象、接收方或数量。"; }
       }
+      const randomEffects = new Map<string, { distributionId: string; stepId: string }>();
+      for (const [id, option] of randomOptions) if (id.startsWith(`${prefix}_`) && selected(answers, option.applies) === "apply") {
+        const target = selected(answers, id);
+        if (target !== "none") randomEffects.set(option.facts[Number(target.slice(1))]!.id, option);
+      }
       for (const [id, effect] of effects) {
         if (!id.startsWith(`${prefix}_`)) continue;
         const value = selected(answers, id);
-        const random = answers[`${id}_random`] ? randomOptions.get(`${id}:${selected(answers, `${id}_random`)}`) : undefined;
+        const random = randomEffects.get(effect.fact.id);
         if (random) {
           const distribution = definition.randomDistributions.find(item => item.id === random.distributionId)!;
           const requestId = `${frame.id}/random/${distribution.id}`;
