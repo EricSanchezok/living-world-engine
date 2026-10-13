@@ -28,7 +28,7 @@ import {
 import { arrivalDraftSchema } from "../engine/contracts/llm-schemas";
 import { loadModelCatalog } from "../engine/models/model-catalog";
 import { createModelGateway } from "../engine/models/model-gateway";
-import { createModelFetchResolver } from "../engine/models/model-network";
+import { qualificationModelFetchResolver } from "./jev-qualification-budget";
 import { contentHash } from "../engine/models/model-audit";
 import { AlgorithmExperimentRegistry } from "../engine/runtime/experiments";
 import { ModelRegistry } from "../engine/models/model-registry";
@@ -641,7 +641,7 @@ export class WorldHost {
       modelRegistry.startBackgroundRefresh();
       const provider = createModelGateway(catalog, process.env, {
         registry: modelRegistry,
-        fetchForAccount: createModelFetchResolver(process.env),
+        fetchForAccount: qualificationModelFetchResolver(process.env),
       });
       const databaseFile = path.join(dataRoot, "livingworld.sqlite");
       const database = new LocalDatabase(databaseFile);

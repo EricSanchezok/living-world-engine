@@ -34,4 +34,6 @@ The trusted Inspector exposes intentions, actions, saved activities, wake reason
 
 The direct runtime and the all-DeepSeek decision variant share the same execution code. [The qualification contract](../specs/0182-jev-direct-world-runtime.md#verification) owns outcomes, comparison arms and the cumulative paid budget. Deterministic transport replacement proves owned mechanics and persistence; it does not establish real model success rates or cost and latency gains.
 
+For real browser qualification, start the workbench with `LIVINGWORLD_JEV_BUDGET_ROOT=.livingworld-benchmarks/jev-engine`. Its provider transport shares the CLI experiment ledger, retained unknown reservations and CNY 100 cumulative ceiling. Only the priced Jev and DeepSeek accounts are admitted in this mode. One live writer owns the ledger; stop the workbench before starting another paid qualification process. Ordinary startup without this option uses the configured provider transport.
+
 The generated-program engine is available in [frozen source](https://github.com/EricSanchezok/living-world-engine/tree/05d273f7/src/engine/events). Its failed trials remain historical evidence. Explicitly registered reference and benchmark algorithms remain research infrastructure; new instances use the direct runtime.

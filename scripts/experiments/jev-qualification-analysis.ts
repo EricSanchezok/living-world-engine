@@ -6,7 +6,7 @@ export interface QualificationBudgetSnapshot {
   estimatedPeakNanoCny: number;
   unsettled: string[];
 }
-interface BudgetReservation { kind: string; priceId?: string }
+interface BudgetReservation { kind: string; id?: string; priceId?: string }
 export interface QualificationAction {
   index: number;
   beforeBudget: QualificationBudgetSnapshot;
@@ -56,7 +56,10 @@ export function qualificationUsage(before: QualificationBudgetSnapshot, after: Q
     else result.other++;
   }
   result.nanoCny = after.estimatedPeakNanoCny - before.estimatedPeakNanoCny;
-  result.unsettled = before.unsettled.length > 0 || after.unsettled.length > 0;
+  // Historical unknown reservations still count toward the shared spending cap,
+  // but do not turn a fully settled later trial into an unknown-cost sample.
+  const ids = new Set(reservations.slice(start, end).flatMap(value => value.id ? [value.id] : []));
+  result.unsettled = after.unsettled.some(id => ids.has(id) || !before.unsettled.includes(id));
   return result;
 }
 function addUsage(target: Usage, source: Usage) {

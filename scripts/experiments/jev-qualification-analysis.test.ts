@@ -32,6 +32,12 @@ describe("frozen Jev qualification accounting", () => {
     expect(report.metrics.medianFeedbackReduction).toBeNull();
     expect(report.qualified).toBe(false);
   });
+  it("separates a new trial's unknown usage from fully reserved historical uncertainty", () => {
+    const before = { ...snapshot(1), unsettled: ["old"] }, after = { ...snapshot(2), unsettled: ["old"] };
+    const reservations = [{ kind: "reserve", id: "old", priceId: "jev" }, { kind: "reserve", id: "new", priceId: "jev" }];
+    expect(qualificationUsage(before, after, reservations).unsettled).toBe(false);
+    expect(qualificationUsage(before, { ...after, unsettled: ["old", "new"] }, reservations).unsettled).toBe(true);
+  });
   it("binds useful feedback to actual delivered evidence and immutable result", () => {
     const value = result(), verdict = review(value);
     expect(analyzeJevQualification([trial], [value], [verdict], journal).arms.C.medianFeedbackMs).toBe(10);
