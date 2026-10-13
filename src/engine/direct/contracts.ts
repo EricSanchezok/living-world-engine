@@ -1,4 +1,4 @@
-import type { ActionOutcome, AgentActionProposal, AgentState, BeliefPatch, CharacterPatch, ModelExecutionAudit,
+import type { ActionOutcome, AgentActionProposal, AgentState, BeliefPatch, CharacterPatch, DiscreteRandomRequest, DiscreteRandomResult, ModelExecutionAudit,
   ObservationPacket, SimulationState, WorldDeltaOperation, WorldEvent } from "../contracts/model";
 import type { DecisionBatchV2, DecisionResultV2 } from "../models/decision-v2";
 import type { AlgorithmRef } from "../runtime/execution";
@@ -10,7 +10,8 @@ export interface ActionFrame {
   proposal: AgentActionProposal; kind: ActionKind; goalId: string | null;
   targetEntityId: string | null; toolEntityId: string | null; quantityDefinitionId: string | null;
   amount: number | null; utterance: string | null; capabilityId: string | null;
-  startedAtSeconds: number; dueAtSeconds: number; temporalProfileId: string | null;
+  startedAtSeconds: number; dueAtSeconds: number | null; temporalProfileId: string | null;
+  durationSeconds: number; progressSeconds: number; activityStatus: "active" | "queued" | "paused";
   inputHash: string; causeActionId: string | null;
 }
 export interface AgentIntentState {
@@ -26,6 +27,7 @@ export interface AgentIntentState {
   urgency: number;
   noProgressCount: number;
   goalProgress: Record<string, "partial" | "completed" | "unchanged" | "unknown">;
+  dependencies: Record<string, string>;
   failure: { inputHash: string; message: string; recoverable: true } | null;
 }
 export interface DirectDecisionUse { batch: DecisionBatchV2; result: DecisionResultV2; reused: boolean }
@@ -33,6 +35,21 @@ export interface CapabilityDefinition {
   id: string; description: string; kind: ActionKind; scope: "world" | "private";
   ownerId: string | null; applicability: string; effectDescription: string; sourceIds: string[];
   createdByActionId: string; version: 1;
+  effects: CapabilityEffect[];
+  knownToAgentIds: string[];
+}
+export type CapabilityEffect =
+  | { kind: "fact"; subject: "actor" | "target" | "tool"; predicate: string; value: string | boolean; description: string }
+  | { kind: "condition"; subject: "actor" | "target" | "tool"; profileId: string }
+  | { kind: "object"; name: string; description: string; placement: "actor" | "target" };
+/** A semantic decision saved before execution. No generated control flow or proof tree. */
+export interface PreparedDirectAction {
+  actionId: string; reads: Record<string, string>; status: ActionOutcome["status"]; summary: string;
+  operations: WorldDeltaOperation[]; visibleFactIds: string[]; visibleEntityIds: string[]; deliveredToEntityIds: string[];
+  randomRequests: DiscreteRandomRequest[];
+  randomBindings: Array<{ factId: string; requestId: string; stepId: string }>;
+  sharedClaims: Array<{ poolId: string; amount: number }>;
+  ongoing: boolean;
 }
 export interface DirectRuntimeState {
   kind: "direct-world"; version: 1; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
@@ -40,6 +57,7 @@ export interface DirectRuntimeState {
   modelOverrides: { decision: string | null; creation: string | null; fallback: string | null };
   intents: Record<string, AgentIntentState>;
   activities: ActionFrame[];
+  prepared: Record<string, PreparedDirectAction>;
   capabilities: CapabilityDefinition[];
   cache: Array<{ key: string; result: DecisionResultV2 }>;
   dependencies: Record<string, { version: number; hash: string }>;
@@ -59,6 +77,7 @@ export interface DirectStepRecord {
   cognition: DirectCognitiveUpdate[];
   decisions: DirectDecisionUse[]; modelAudits: ModelExecutionAudit[];
   rng: SimulationState["truth"]["rng"];
+  randomRequests: DiscreteRandomRequest[]; randomResults: DiscreteRandomResult[];
   timerUpdates: SimulationState["truth"]["timers"];
 }
 export interface DirectCognitiveUpdate {

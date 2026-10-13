@@ -4,20 +4,47 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { loadWorldScript } from "../../script/world-loader";
 import { MemoryWorldRepository } from "../../script/world-repository";
-import { directTestProvider, nativeChoice } from "../../engine/testing/direct-provider";
+import { directTestProvider, nativeAnswer } from "../../engine/testing/direct-provider";
 import { DEFAULT_ALGORITHM_REF } from "../../engine/algorithms/registry";
 import { replaySimulationState } from "../../engine/runtime/transaction";
 import { replayThroughAlgorithm } from "../../../scripts/operations/execution-command";
 import { LocalDatabase } from "../local-database";
 import { WorldHost } from "../world-host";
+import { DirectWorldAlgorithm } from "../../engine/direct/algorithm";
+import { SimulationEngine } from "../../engine/runtime/simulation";
+import { readDirectState } from "../../engine/direct/state";
 
 describe("direct world through persistent WorldHost", () => {
+  it("admits the full Blackmarsh 49 subjects without calls and runs their private queued decisions", async () => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-full49-"));
+    const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id,
+      nativeAnswer(q, id === "operation" ? "wait" : id.includes("goal_status") || id.includes("belief_status") ? "unchanged" : "none")])));
+    await f.registry.capture();
+    const world = loadWorldScript(path.resolve("worlds/blackmarsh/world"), { seed: 17, modelCatalog: f.catalog });
+    const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
+    try {
+      const repository = new MemoryWorldRepository({ [world.id]: world });
+      const host = new WorldHost({ repository, store: database, ledger: database, provider: f.gateway });
+      const created = await host.createInstance({ worldId: world.id, start: { kind: "origin", originId: world.participation!.origins[0]!.id,
+        displayName: "测试旅人", appearance: "旅人装束。", motivation: "观察周围环境。" } });
+      const document = database.readInstance(created.summary.id).document;
+      expect(Object.keys(document.state.agents)).toHaveLength(49); expect(f.transport).not.toHaveBeenCalled();
+      const pinned = repository.loadVersion(document.world.id, document.world.contentHash, document.state.historyBase!.truth.rng.seed, f.catalog);
+      const engine = new SimulationEngine(pinned, new DirectWorldAlgorithm(f.gateway), document.state);
+      const result = await engine.step(document.policyBindings, { expectedRevision: document.state.revision, trigger: "manual", externalActions: [] });
+      const control = readDirectState(result.state.executionState!, result.state);
+      expect(Object.values(control.intents).filter(intent => intent.status === "failed")).toEqual([]);
+      expect(f.transport).toHaveBeenCalledTimes(48);
+      expect(result.modelAudits.every(audit => audit.protocol === "typesafe-systemone")).toBe(true);
+      expect(replaySimulationState(result.state)).toEqual(result.state);
+    } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+  });
   it("creates and enters the ordinary default without generation, then commits natural language and recovers it", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-default-"));
     const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
       const values: Record<string, string> = { operation: "observe", target: "self", tool: "none", amount: "unknown", resource: "none", speech: "none", timing: "default", goal: "none" };
       const choice = values[id] ?? (id.includes("outcome") ? "succeeded" : id.includes("belief_status") ? "unchanged" : "unknown");
-      return [id, nativeChoice(q, choice)];
+      return [id, nativeAnswer(q, choice)];
     })));
     await f.registry.capture();
     const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });

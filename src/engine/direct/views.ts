@@ -16,7 +16,7 @@ export function privateActionView(state: Readonly<SimulationState>, agentId: str
   ]);
   const entities = Object.fromEntries(Object.values(agent.bindings).sort((a, b) => a.localEntityId.localeCompare(b.localEntityId)).filter(binding => binding.canonicalEntityIds.length === 1 &&
     agent.belief.localEntities[binding.localEntityId]).map(binding => [binding.localEntityId, binding.canonicalEntityIds[0]!]));
-  const keys = [`agent:${agentId}`, `entity:${agent.entityId}`, `placement:${agent.entityId}`,
+  const keys = [`agent:${agentId}`, `entity:${agent.entityId}`, `placement:${agent.entityId}`, `collections:${agent.entityId}`,
     ...Object.values(state.truth.quantities).filter(quantity => quantity.holderId === agent.entityId).map(quantity => `quantity:${quantity.id}`),
     ...Object.values(state.truth.meters).filter(meter => meter.entityId === agent.entityId).map(meter => `meter:${meter.id}`),
     ...Object.values(state.truth.ratings).filter(rating => rating.entityId === agent.entityId).map(rating => `rating:${rating.id}`),
@@ -43,7 +43,7 @@ export function localWorldView(state: Readonly<SimulationState>, definition: Wor
   const meters = orderedValues(state.truth.meters).filter(meter => ids.has(meter.entityId));
   const ratings = orderedValues(state.truth.ratings).filter(rating => ids.has(rating.entityId));
   const conditions = orderedValues(state.truth.conditions).filter(condition => ids.has(condition.subjectId));
-  const keys = [...[...ids].flatMap(id => [`entity:${id}`, `placement:${id}`, `members:${id}`]),
+  const keys = [...[...ids].flatMap(id => [`entity:${id}`, `placement:${id}`, `members:${id}`, `collections:${id}`]),
     ...facts.map(fact => `fact:${fact.id}`), ...quantities.map(quantity => `quantity:${quantity.id}`),
     ...meters.map(meter => `meter:${meter.id}`), ...ratings.map(rating => `rating:${rating.id}`), ...conditions.map(condition => `condition:${condition.id}`)];
   return { state: { world: { name: definition.name, description: definition.description, laws: definition.laws },

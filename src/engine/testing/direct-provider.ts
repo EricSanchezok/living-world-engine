@@ -30,3 +30,12 @@ export function nativeChoice(question: DecisionQuestionV2, choice: string) {
   if (question.type !== "choice") throw new Error("not a choice");
   return { type: "choice", choice, probabilities: Object.fromEntries(Object.keys(question.criteria).map(key => [key, key === choice ? 1 : 0])), confidence: 1 };
 }
+
+export function nativeAnswer(question: DecisionQuestionV2, choice: string | number = "none") {
+  if (question.type === "noul") return { type: "noul", noul: typeof choice === "number" ? choice : 1 };
+  if (question.type === "score") return { type: "score", score: typeof choice === "number" ? choice : 1,
+    legend: Object.fromEntries(question.criteria.map((value, index) => [String(index), value])),
+    probabilities: Object.fromEntries(question.criteria.map((_, index) => [String(index), index === 1 ? 1 : 0])), confidence: 1 };
+  const value = String(choice);
+  return nativeChoice(question, value in question.criteria ? value : "none" in question.criteria ? "none" : Object.keys(question.criteria)[0]!);
+}

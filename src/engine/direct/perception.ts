@@ -32,7 +32,7 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
           introduced.localEntity.description = "这次观察确认了其存在；尚未确认名字和身份。"; }
         summary += `\n你注意到${local.name}。`;
       }
-      const facts = ownerId === settlement.frame.actorId ? settlement.visibleFacts : [];
+      const facts = ownerId === settlement.frame.actorId ? settlement.visibleFacts : settlement.visibleFacts.filter(fact => fact.access.kind === "public");
       for (const fact of facts) summary += `\n${alias(agent, fact.subjectId, introductions).name}的${fact.predicate}：${describeValue(agent, fact.value, introductions)}`;
       const id = runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "observation", stage: "direct-perception", owner: ownerId, round: 0, ordinal: index });
       const packet: ObservationPacket = { id, observerId: ownerId, step, kind: "outcome", summary, introductions, apparentClaims: [], sourceEventIds: [events[index]!.id] };

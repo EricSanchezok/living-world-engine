@@ -10,6 +10,9 @@ import { WORLD_STEP_CANDIDATE_SCHEMA_VERSION, finalCausalReviewContentHash, type
 import type { DirectBootstrap, DirectStepRecord } from "./contracts";
 import { readDependency, readDirectState } from "./state";
 import { applyDirectCognition } from "./cognition";
+import { resolveDiscreteRandomRequests } from "../mechanics/random";
+import { evaluateCausalAssertion } from "../mechanics/causality";
+import { nextWorldClockBoundary } from "../events/clock-boundary";
 
 export function applyDirectBootstrap(source: Readonly<SimulationState>, bootstrap: DirectBootstrap): SimulationState {
   if (source.revision !== 0 || source.executionState || source.history.length || bootstrap.version !== 1) throw new Error("direct bootstrap requires an initial world");
@@ -36,8 +39,19 @@ export function commitDirectRecord(source: Readonly<SimulationState>, record: Di
   if (record.frames.some(frame => frame.dueAtSeconds !== record.atSeconds || frame.startedAtSeconds > source.truth.elapsedSeconds ||
     source.agents[frame.actorId]?.entityId !== frame.actorEntityId)) throw new Error("invalid direct activity boundary or owner");
   const beforeControl = readDirectState(source.executionState, source);
-  if (beforeControl.activities.some(frame => frame.dueAtSeconds < record.atSeconds && !record.completedActionIds.includes(frame.id))) throw new Error("cannot pass an earlier admitted activity");
+  if (beforeControl.activities.some(frame => frame.activityStatus === "active" && frame.dueAtSeconds !== null && frame.dueAtSeconds < record.atSeconds && !record.completedActionIds.includes(frame.id))) throw new Error("cannot pass an earlier admitted activity");
   for (const timer of Object.values(source.truth.timers)) if (timer.status === "scheduled" && timer.dueAtSeconds < record.atSeconds) throw new Error("cannot pass an earlier timer");
+  const clock = nextWorldClockBoundary(source);
+  if (clock !== null && clock < record.atSeconds) throw new Error("cannot pass an earlier condition boundary");
+  for (const request of record.randomRequests) if (!Object.values(beforeControl.prepared).some(preparation =>
+    preparation.randomRequests.some(committed => contentHash(committed) === contentHash(request)))) throw new Error("random stakes must be persisted before execution");
+  const random = resolveDiscreteRandomRequests(source.truth.rng, record.randomRequests);
+  if (contentHash(random.rng) !== contentHash(record.rng) || contentHash(random.results) !== contentHash(record.randomResults)) throw new Error("random receipt differs from the committed deterministic draw");
+  const timers = structuredClone(source.truth.timers), timed = { ...source, truth: { ...source.truth, elapsedSeconds: record.atSeconds } } as SimulationState;
+  for (const timer of Object.values(timers)) if (timer.status === "scheduled" && timer.dueAtSeconds === record.atSeconds) {
+    timer.status = timer.assertions.every(assertion => evaluateCausalAssertion(timed, assertion).passed) ? "fired" : "cancelled";
+  }
+  if (contentHash(timers) !== contentHash(record.timerUpdates)) throw new Error("timer updates differ from the clock boundary");
   const state = structuredClone(source) as SimulationState;
   state.revision += 1; if (record.atSeconds > source.truth.elapsedSeconds) state.step += 1;
   applyDirectCognition(state, record.cognition, source.step);
@@ -71,7 +85,7 @@ export function commitDirectRecord(source: Readonly<SimulationState>, record: Di
     temporalBoundary: { fromElapsedSeconds: source.truth.elapsedSeconds, toElapsedSeconds: record.atSeconds, deltaSeconds: record.atSeconds - source.truth.elapsedSeconds,
       reasons: [], dueActivityIds: record.completedActionIds, dueTimerIds: Object.keys(record.timerUpdates).filter(id => source.truth.timers[id]?.status !== record.timerUpdates[id]?.status), dueConditionIds: [] },
     temporalState: { activities: structuredClone(state.truth.activities), timers: structuredClone(state.truth.timers) }, activityTransitions: [], activityDispositions: [], sharedResourceAdmissions: [], decisionPoints: [],
-    checkRequests: [], checks: [], randomRequests: [], randomResults: [], commitmentRounds: [], outcomes: record.outcomes, mechanicInvocations: [], mechanicResults: [],
+    checkRequests: [], checks: [], randomRequests: record.randomRequests, randomResults: record.randomResults, commitmentRounds: [], outcomes: record.outcomes, mechanicInvocations: [], mechanicResults: [],
     causalAssertionResults: [], causalVerification: { verdict: "accept", findings: [] }, events: record.events, observations: record.observations,
     operations: record.operations, decisionRequests: [], beliefPatches: record.beliefPatches, characterPatches: record.characterPatches, nextActions: [],
   };
@@ -86,7 +100,7 @@ export function directCandidate(source: Readonly<SimulationState>, record: Direc
     onsetPerception: { targets: [], receipts: [], requests: [], checks: [], commitmentRounds: [], rng: source.truth.rng },
     resolution: { proposal: { baseRevision: source.revision, outcomes: step.outcomes, mechanicInvocations: [], operations: step.operations, events: step.events,
       observations: step.observations, decisionRequests: [] }, initialActions: step.initialActions, actions: step.actions, reactionRequests: [], reactionDecisions: [],
-      stimulusObservations: [], requests: [], checks: [], randomRequests: [], randomResults: [], commitmentRounds: [], resolutionPlans: [], resolutionReceipts: [],
+      stimulusObservations: [], requests: [], checks: [], randomRequests: record.randomRequests, randomResults: record.randomResults, commitmentRounds: [], resolutionPlans: [], resolutionReceipts: [],
       rng: step.rngAfter, mechanicResults: [], causalAssertionResults: [], causalVerification: step.causalVerification },
     finalCausalReview: { contentHash: "", evidenceHash: contentHash(record.decisions), promptVersion: "direct-world-v1", invocationIds: record.modelAudits.flatMap(audit => audit.invocations.map(invocation => invocation.id)) },
     mindCommits: [], modelAudits: record.modelAudits, interactionDependencies: [], diagnostics: { activatedAgentIds,

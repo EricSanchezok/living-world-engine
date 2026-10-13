@@ -10,7 +10,7 @@ export function orderedValues<T extends { id: string }>(record: Readonly<Record<
 
 export function readyIntent(reason = "initial-decision"): AgentIntentState {
   return { goalId: null, status: "ready", wakeReasons: [reason], activityId: null, causeActionId: null,
-    wait: null, lastInputHash: null, lastActionHash: null, recentOutcomeIds: [], failure: null, urgency: 0, noProgressCount: 0, goalProgress: {} };
+    wait: null, lastInputHash: null, lastActionHash: null, recentOutcomeIds: [], failure: null, urgency: 0, noProgressCount: 0, goalProgress: {}, dependencies: {} };
 }
 export function sealDirectState(value: Omit<DirectRuntimeState, "hash"> | DirectRuntimeState): DirectRuntimeState {
   const body = { ...value, hash: "" };
@@ -28,6 +28,11 @@ export function readDependency(state: Readonly<SimulationState>, key: string): u
   const [domain, ...parts] = key.split(":"); const id = parts.join(":");
   if (domain === "agent") return state.agents[id] ?? null;
   if (domain === "clock") return state.truth.elapsedSeconds;
+  if (domain === "collections") return {
+    facts: Object.values(state.truth.facts).filter(value => value.subjectId === id).map(value => value.id).sort(),
+    quantities: Object.values(state.truth.quantities).filter(value => value.holderId === id).map(value => value.id).sort(),
+    conditions: Object.values(state.truth.conditions).filter(value => value.subjectId === id).map(value => value.id).sort(),
+  };
   if (domain === "members") {
     // Membership of a local scene is itself a dependency, including previously empty space.
     return Object.keys(state.truth.placements).filter(entityId => state.truth.placements[entityId] === id).sort();
@@ -51,6 +56,6 @@ export function dependencyVersions(control: DirectRuntimeState, reads: Record<st
 export function wakeIntent(control: DirectRuntimeState, agentId: string, reason: string, causeActionId: string | null = null) {
   const intent = control.intents[agentId] ??= readyIntent(reason);
   if (intent.status === "active") { if (!intent.wakeReasons.includes(reason)) intent.wakeReasons.push(reason); return; }
-  intent.status = "ready"; intent.failure = null; intent.wait = null; intent.causeActionId = causeActionId;
+  intent.status = "ready"; intent.wait = null; intent.causeActionId = causeActionId;
   if (!intent.wakeReasons.includes(reason)) intent.wakeReasons.push(reason);
 }

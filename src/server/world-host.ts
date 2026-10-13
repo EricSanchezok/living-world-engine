@@ -321,8 +321,8 @@ function currentRun(document: WorldInstanceDocument): WorldRunRecord | undefined
 function externalDecisionAgentIds(document: WorldInstanceDocument): string[] {
   if (document.state.executionState?.data.kind === "direct-world") {
     const control = document.state.executionState.data as unknown as DirectRuntimeState;
-    const busy = new Set(control.activities.map(frame => frame.actorId));
-    const reacting = Object.values(control.intents).some(intent => intent.causeActionId && intent.status === "ready");
+    const busy = new Set(control.activities.filter(frame => frame.dueAtSeconds !== null).map(frame => frame.actorId));
+    const reacting = Object.values(control.intents).some(intent => intent.causeActionId && (intent.status === "ready" || intent.status === "active"));
     if (reacting) return [];
     return Object.values(document.policyBindings).filter(binding => binding.kind === "external" && !busy.has(binding.agentId)).map(binding => binding.agentId).sort();
   }

@@ -1,13 +1,14 @@
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { loadWorldScript } from "../../../script/world-loader";
-import { directTestProvider, nativeChoice } from "../../testing/direct-provider";
+import { directTestProvider, nativeAnswer } from "../../testing/direct-provider";
 import { DirectWorldAlgorithm } from "../algorithm";
 import { SimulationEngine } from "../../runtime/simulation";
 import { historyReplayBaseHash } from "../../runtime/history-replay";
 import { replaySimulationState } from "../../runtime/transaction";
 import { quantityId } from "../../runtime/runtime-id";
 import type { PolicyBinding, WorldAdvanceRequest } from "../../runtime/execution";
+import { WorldQuiescentError } from "../../runtime/execution";
 import { readDirectState } from "../state";
 
 async function fixture(options: { operation?: string; target?: string; tool?: string; amount?: string; failKeeper?: boolean } = {}) {
@@ -17,9 +18,9 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
     const selection: Record<string, string> = { operation: options.operation ?? "observe", target: options.target ?? "door", tool: options.tool ?? "none",
       amount: options.amount ?? "n0", resource: "spirit-stone", speech: "q0", timing: "default", goal: "none" };
     return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
-      let value = selection[id] ?? (id.includes("outcome") ? "succeeded" : id.includes("visible") ? "visible" : id.includes("delivery") ? "delivered" : id.includes("fact") ? "unchanged" : "none");
+      let value = selection[id] ?? (id.includes("outcome") ? "succeeded" : id.includes("goal_status") || id.includes("belief_status") ? "unchanged" : id.includes("visible") ? "visible" : id.includes("delivery") ? "delivered" : id.includes("fact") ? "unchanged" : "none");
       if (q.type === "choice" && !(value in q.criteria)) value = "none" in q.criteria ? "none" : Object.keys(q.criteria)[0]!;
-      return [id, nativeChoice(q, value)];
+      return [id, nativeAnswer(q, value)];
     }));
   });
   const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
@@ -90,5 +91,17 @@ describe("direct world through the actual simulation entry", () => {
     const privateRequests = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => wire.state.perspective);
     expect(JSON.stringify(privateRequests)).not.toContain("canonicalEntityIds");
     expect(JSON.stringify(privateRequests)).not.toContain('"truth"');
+  });
+  it("stops repeated non-progress work until relevant evidence changes", async () => {
+    const f = await fixture({ operation: "observe", target: "self" }); await f.engine.bootstrapAgents();
+    f.roster.player = { kind: "idle", agentId: "player", reason: "explicit" };
+    for (let revision = 0; revision < 3; revision++) await f.engine.step(f.roster, { expectedRevision: revision, trigger: "manual", externalActions: [] });
+    const state = f.engine.snapshot, intent = readDirectState(state.executionState!, state).intents.keeper!;
+    expect(intent.failure).toBeNull();
+    expect(intent.noProgressCount).toBeGreaterThanOrEqual(1); expect(["same-input", "no-progress"]).toContain(intent.wait!.reason);
+    const calls = f.transport.mock.calls.length;
+    await expect(f.engine.step(f.roster, { expectedRevision: state.revision, trigger: "manual", externalActions: [] })).rejects.toThrow(WorldQuiescentError);
+    expect(f.transport).toHaveBeenCalledTimes(calls);
+    expect(replaySimulationState(state)).toEqual(state);
   });
 });

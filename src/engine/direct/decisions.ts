@@ -5,14 +5,23 @@ import type { JsonValue } from "../runtime/json";
 import type { DirectDecisionUse, DirectRuntimeState } from "./contracts";
 import { dependencyVersions } from "./state";
 
+function wireValue<T>(value: T): T {
+  if (Array.isArray(value)) return value.map(wireValue) as T;
+  if (value && typeof value === "object" && Object.getPrototypeOf(value) === Object.prototype) return Object.fromEntries(
+    Object.entries(value).filter(([, child]) => child !== undefined).map(([key, child]) => [key, wireValue(child)])) as T;
+  return value;
+}
+
 export class DirectDecisions {
   readonly uses: DirectDecisionUse[] = [];
   private ordinals: Record<string, number> = {};
   constructor(readonly provider: StructuredModelProvider, readonly control: DirectRuntimeState, readonly scope: ModelExecutionScope) {}
   next(subject: string): number { return this.ordinals[subject] = (this.ordinals[subject] ?? 0) + 1; }
   async ask(owner: string | null, state: JsonValue, reads: Record<string, string>, questions: Record<string, DecisionQuestionV2>, profiles = this.control.models) {
+    // Optional TypeScript fields have the same meaning before and after JSON persistence.
+    state = wireValue(state); questions = wireValue(questions);
     const batch: DecisionBatchV2 = { version: 2, view: owner ? { kind: "agent", agentId: owner, projectionHash: contentHash(state) }
-      : { kind: "world", projectionHash: contentHash(state) }, state, questions, dependencies: dependencyVersions(this.control, reads) };
+      : { kind: "world", projectionHash: contentHash(state) }, state: structuredClone(state), questions: structuredClone(questions), dependencies: dependencyVersions(this.control, reads) };
     const key = contentHash({ batch, profiles, catalog: this.control.modelCatalogHash, registry: this.control.registryHash, prompt: decisionPromptV2().version });
     const cached = this.control.cache.find(entry => entry.key === key);
     if (cached) { this.uses.push({ batch, result: cached.result, reused: true }); return cached.result.answers; }
