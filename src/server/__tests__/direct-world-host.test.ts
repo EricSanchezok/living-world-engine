@@ -31,6 +31,64 @@ function createText(wire: DirectTestWire) {
 }
 
 describe("direct world through persistent WorldHost", () => {
+  it("finishes a requested inspection with its report despite another character's intervening remark", async () => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-inspection-report-"));
+    const words = "请检查设备，再告诉我还缺什么。";
+    const f = directTestProvider(wire => {
+      const context = wire.state as { perspective?: { agentId: string; interactions?: Array<{ relation: string; operation: string }> } };
+      const who = context.perspective?.agentId;
+      const own = context.perspective?.interactions?.filter(item => item.relation === "self") ?? [];
+      const operation = who === "inspector" ? own.some(item => item.operation === "observe") ? "speak" : "observe"
+        : who === "quartermaster" && own.some(item => item.operation === "speak") ? "wait" : "speak";
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
+        let choice = id.startsWith("paragraph") ? "grounded" : id.includes("outcome") ? "succeeded" : id.includes("delivery") ? "delivered"
+          : id.includes("visible") || id.includes("entity") ? "visible" : id.includes("status") || id.includes("fact") ? "unchanged" : "none";
+        if (id === "operation") choice = operation;
+        if (id === "target") choice = "pump";
+        if (id === "recipient") choice = who === "engineer" && q.type === "choice"
+          ? Object.entries(q.criteria).find(([, value]) => JSON.stringify(value).includes("乔伊"))?.[0] ?? "broadcast" : "broadcast";
+        if (id === "speech") choice = "create";
+        if (id === "timing") choice = "default";
+        if (id.startsWith("progress_")) choice = "complete";
+        if (id.endsWith("_request_progress")) {
+          const task = q.instructions as { task: { data: { action: { actorId: string; kind: string }; responseTo: { utterance: string } } } };
+          choice = task.task.data.action.actorId === "inspector" && task.task.data.action.kind === "observe" ? "continue" : "complete";
+          if (choice === "continue") expect(task.task.data.responseTo.utterance).toBe(words);
+        }
+        return [id, nativeAnswer(q, id === "expression" ? 0 : choice)];
+      }));
+    }, wire => {
+      const context = directCreationContext(wire);
+      if (context.scene) return createText(wire);
+      const who = (context.perspective as { agentId: string }).agentId;
+      return { attempt: "回应", utterance: context.playerControlled ? words : who === "inspector" ? "我检查过了，密封还需要处理。" : "你们先检查。", manner: null };
+    });
+    await f.registry.capture();
+    const world = loadWorldScript(path.resolve("test/fixtures/station-program-world"), { seed: 1, modelCatalog: f.catalog });
+    const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
+    try {
+      const host = new WorldHost({ repository: new MemoryWorldRepository({ [world.id]: world }), store: database, ledger: database, provider: f.gateway });
+      const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } }), id = created.summary.id;
+      await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "engineer" } });
+      const participant = Object.values(database.readInstance(id).document.participants)[0]!;
+      await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "inspect-and-report", text: words });
+      for (let i = 0; i < 400; i++) {
+        const document = database.readInstance(id).document;
+        const intent = document.participantIntents.find(item => item.submissionId === "inspect-and-report");
+        if (intent && document.runs[intent.runId]?.status === "completed") break;
+        await new Promise(resolve => setTimeout(resolve, 5));
+      }
+      await host.drainNarratives(id);
+      const document = database.readInstance(id).document;
+      const acts = document.state.history.flatMap(step => step.directEvent?.frames ?? []).filter(frame => frame.actorId === "inspector");
+      expect(acts.map(frame => frame.kind)).toEqual(["observe", "speak"]);
+      expect(acts[1]!.utterance).toBe("我检查过了，密封还需要处理。");
+      expect(acts[1]!.causeActionId).toBe(acts[0]!.causeActionId);
+      expect(document.narratives.flatMap(beat => beat.segments).some(segment => segment.text.includes(acts[1]!.utterance!))).toBe(true);
+      expect(document.actionWindow?.requiredAgentIds).toContain("engineer");
+      expect(replaySimulationState(document.state)).toEqual(document.state);
+    } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+  });
   it("opens the next player turn after direct replies while retaining overheard background conversation", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-conversation-foreground-"));
     const f = directTestProvider(wire => {

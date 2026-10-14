@@ -443,10 +443,11 @@ describe("direct world through the actual simulation entry", () => {
       .find(wire => wire?.questions.accept)!;
     expect(admission.state).toHaveProperty("addition.entities", first.entities);
     expect(admission.state).not.toHaveProperty("addition.description");
+    expect(admission.state).toHaveProperty("declaredInventory", [{ name: "Worker", label: "Worker", key: "worker", characterRegistered: true }]);
     expect(admission.questions.coverage0!.instructions).toMatchObject({ task: {
       passage: { owner: "Worker", text: first.entities[0]!.appearance },
-      declaredInventory: [{ name: "Worker", key: "worker", characterRegistered: true }],
     } });
+    expect(admission.questions.coverage0!.instructions).not.toHaveProperty("task.declaredInventory");
     const entities = Object.values(result.state.truth.entities).filter(entity => entity.id.startsWith("expansion-"));
     expect(entities.map(entity => entity.name).sort()).toEqual(missingCoverage ? [] : ["Bucket", "Worker"]);
     expect(Object.keys(result.state.agents)).toHaveLength(missingCoverage ? 2 : 3);
@@ -479,6 +480,31 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.committed.observations[0]!.scene?.details).toContainEqual(expect.objectContaining({ label: "旧木牌", description: "一块字迹褪色的木牌。", localEntityId: expect.any(String) }));
     expect(result.committed.observations.every(observation => !observation.scene?.speech)).toBe(true);
     expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("scopes expansion admission to named continuity matches while retaining the creator's directory", async () => {
+    const f = await fixture({ target: "none", observationScope: "surroundings", creationEnabled: true, introduce: true,
+      creationResponse: { description: "发现一处凹角", entities: [{ key: "nook", kind: "place", name: "北库", label: "北库墙角",
+        appearance: "北库外墙的一处凹角。", placement: "scene" }], facts: [], events: [] } });
+    for (let i = 0; i < 100; i++) f.world.initialState.truth.entities[`remote-${i}`] = {
+      id: `remote-${i}`, name: `未涉及的远方地点${i}`, kind: "place", description: "远方的地点", lifecycle: "active", createdAtStep: 0,
+    };
+    f.world.initialState.truth.entities["named-remote"] = { id: "named-remote", name: "北库商行", kind: "place",
+      description: "早已存在的商行", lifecycle: "active", createdAtStep: 0 };
+    for (const id of Object.keys(f.world.initialState.truth.entities).filter(id => id.startsWith("remote-") || id === "named-remote")) {
+      f.world.initialState.truth.placements[id] = null;
+    }
+    f.world.historyBaseHash = historyReplayBaseHash(f.world.initialState);
+    const engine = new SimulationEngine(f.world, f.algorithm);
+    await engine.bootstrapAgents();
+    await engine.step(f.roster, f.request("看看能挡雨的地方"));
+    const wires = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body)));
+    const creation = wires.filter(wire => !wire.questions).map(directCreationContext).find(context => context.establishedEntities);
+    expect(creation?.establishedEntities).toHaveLength(Object.keys(f.world.initialState.truth.entities).length);
+    const admission = wires.map(directDecisionContext).find(wire => wire?.questions.accept)!;
+    expect(admission.state).toMatchObject({ establishedEntities: [{ id: "named-remote", name: "北库商行" }],
+      localWorld: { entities: expect.arrayContaining([expect.objectContaining({ id: "player" })]) } });
+    expect(JSON.stringify(admission.state)).not.toContain("未涉及的远方地点");
+    expect(replaySimulationState(engine.snapshot)).toEqual(engine.snapshot);
   });
   it("binds player expression and action in one interpretation while Jev adjudicates the world", async () => {
     const f = await fixture({ operation: "speak", target: "guard", speech: "none", creationEnabled: true,

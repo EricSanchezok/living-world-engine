@@ -32,6 +32,17 @@ export interface WorldExpansion {
 }
 const idFor = (frame: ActionFrame, key: string) => `expansion-${contentHash([frame.id, key]).slice(0, 40)}`;
 
+/** Creation sees the directory; admission needs the identities actually named by its draft. */
+function draftContinuity(state: Readonly<SimulationState>, draft: WorldExpansionDraft) {
+  const normalized = (text: string) => text.normalize("NFKC").toLocaleLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
+  const text = normalized(JSON.stringify(draft));
+  const proposed = draft.entities.flatMap(entity => [entity.name, entity.label]).map(normalized).filter(name => name.length > 1);
+  return establishedEntityDirectory(state).filter(entity => {
+    const name = normalized(entity.name);
+    return name.length > 1 && (text.includes(name) || proposed.some(candidate => name.includes(candidate) || candidate.includes(name)));
+  });
+}
+
 /** All structural identities and private initial cognition are owned by code. */
 export function materializeExpansion(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frame: ActionFrame, draft: WorldExpansionDraft): WorldExpansion {
   const source: CausalSource = { causes: [{ kind: "action", id: frame.id }], assertions: [{ kind: "entity_lifecycle", entityId: frame.actorEntityId, expected: "active" }] };
@@ -134,14 +145,12 @@ export async function createWorldExpansion(state: Readonly<SimulationState>, def
       ];
       const coverage = Object.fromEntries(passages.map((passage, index): [string, DecisionQuestionV2] => [`coverage${index}`, {
         type: "choice", version: "expansion-coverage-2",
-        instructions: { task: "Check only NEW content in this passage against the declared inventory and existing authored scene. Newly mentioned people and independent portable objects need entries. Tools, weapons, containers, loose poles, food and furniture are independent even when held or decorative. Body parts, ordinary clothing and integral fixed surfaces need no entry. A fixed control console or fixture already authored in existing appearance facts is established; do not demand that this addition recreate it. Existing things need no duplicate. An object newly invented only inside another new appearance is not thereby registered. A new person needs character settings. Compare actual entries, not a summary's claim of completeness.", passage,
-          declaredInventory: entities.map(entity => ({ name: entity.name, label: entity.label, key: entity.key, characterRegistered: Boolean(entity.character) })),
-          existingLocalEntities: (context as { entities?: JsonValue }).entities ?? [],
-          existingAppearanceFacts: ((context as { facts?: JsonValue[] }).facts ?? [])
-            .filter(fact => fact && typeof fact === "object" && !Array.isArray(fact) && (fact as Record<string, JsonValue>).predicate === "appearance") },
+        instructions: { task: "Check only this passage's newly asserted independent people and portable objects. Compare them with state.declaredInventory and already authored state.localWorld entities/appearance facts. Existing things need no duplicate. Body parts, clothing, weather, integral architectural surfaces and fixed portions of the described place need no separate entry. A comparison such as cart-wide does not assert a cart is present. A new shelter may consist of a recess, wall and overhang without creating each surface as an object. A genuinely new carried tool, weapon, container or loose furnishing needs an entry; a new person needs character settings. Do not audit unrelated content elsewhere in the world or demand entries for things only used in a metaphor.", passage },
         criteria: { complete: "Every independent person and object in this passage is registered", missing: "At least one independent person or object in this passage lacks an entry" },
       }]));
-      const admitted = await decisions.ask(null, { localWorld: context, establishedEntities: establishedEntityDirectory(state), action: frame, addition: { entities, facts, events } } as unknown as JsonValue,
+      const admitted = await decisions.ask(null, { localWorld: context, establishedEntities: draftContinuity(state, result.value), action: frame,
+        declaredInventory: entities.map(entity => ({ name: entity.name, label: entity.label, key: entity.key, characterRegistered: Boolean(entity.character) })),
+        addition: { entities, facts, events } } as unknown as JsonValue,
         reads, {
           accept: { type: "choice", version: "expansion-admission-2", instructions: "Can this addition occur here, respecting existing facts, time, materials and private knowledge? Public descriptions cannot expose secrets or manufacture a successful player outcome. Do not clone or relocate an established named person or business under an alias. Ordinary distinct items of a generic kind are allowed. The continuity directory is world-only, not automatic perceptual evidence.",
             criteria: { apply: "Plausible and consistent; introduce it", reject: "Conflicts or lacks necessary means", unknown: "Insufficient basis" } },
