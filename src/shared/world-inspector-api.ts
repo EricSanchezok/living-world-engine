@@ -427,7 +427,7 @@ export interface WorldInspectorStateSnapshot {
 }
 
 export interface WorldInspectorStepDetail {
-  narratives?: import("../server/world-narrative").NarrativeBeat[];
+  narratives?: import("../server/narrative/contracts").NarrativeBeat[];
   directRuntime?: ReturnType<typeof import("../server/world-inspector-direct").inspectDirectRuntime>;
   apiVersion: typeof WORLD_INSPECTOR_API_VERSION;
   summary: WorldInspectorStepSummary;

@@ -16,7 +16,7 @@ import { readDirectState } from "../../engine/direct/state";
 import type { StructuredModelRequest } from "../../engine/models/model-provider";
 import { ExperimentBudgetError } from "../../engine/benchmarks/action-compilation/experiment-budget";
 import { participantReactionIds } from "../../engine/direct/foreground";
-import { nextNarrative } from "../world-narrative";
+import { nextNarrative } from "../narrative/outbox";
 import { GET as getInstanceEvents } from "../../app/api/instances/[id]/events/route";
 import { GET as getInstance } from "../../app/api/instances/[id]/route";
 

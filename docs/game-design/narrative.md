@@ -1,6 +1,8 @@
 # Open creation and participant narration
 
-This reference owns the expression and presentation boundaries approved in [Spec 0183](../specs/0183-open-actions-immersive-narrative.md) and [Spec 0184](../specs/0184-conversational-continuity-and-recovery.md), implemented by [direct execution](direct-runtime.md), [`world-narrative.ts`](../../src/server/world-narrative.ts) and WorldHost. Public API v15 exposes saved prose and separate time, source revision, activity and service-pause metadata.
+This reference owns the expression and presentation boundaries approved in [Spec 0183](../specs/0183-open-actions-immersive-narrative.md) and [Spec 0184](../specs/0184-conversational-continuity-and-recovery.md), implemented by [direct execution](direct-runtime.md), [`narrative/outbox.ts`](../../src/server/narrative/outbox.ts) and WorldHost. Public API v15 exposes saved prose and separate time, source revision, activity and service-pause metadata.
+
+Narrative ownership is divided into [saved contracts](../../src/server/narrative/contracts.ts), [authorized scene evidence](../../src/server/narrative/scene.ts), [paragraph publication](../../src/server/narrative/publication.ts) and the durable outbox. WorldHost schedules model work and persists published segments; the outbox registers and coalesces work inside world transactions without model calls. Publication checks share one instruction and receipt context per batch. Individual questions carry only their paragraph index and semantic focus; every existing check remains present.
 
 ## Creative authority
 

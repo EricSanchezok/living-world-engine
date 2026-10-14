@@ -1,4 +1,4 @@
-import type { NarrativeBeat } from "./world-narrative";
+import type { NarrativeBeat } from "./narrative/contracts";
 import type { ModelServicePause } from "../engine/models/service-failure";
 import type {
   AlgorithmRef,

@@ -10,7 +10,7 @@ import type { ParticipantDiscourse } from "../../engine/contracts/discourse";
 import { LocalDatabase } from "../local-database";
 import { WorldHost } from "../world-host";
 import { participantDiscourse } from "../world-discourse";
-import type { ScenePacket } from "../world-narrative";
+import type { ScenePacket } from "../narrative/contracts";
 
 describe("published discourse through the persistent entry path", () => {
   it("shares introduced identity across explanation, an elliptical follow-up, reload and replay", async () => {

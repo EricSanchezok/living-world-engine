@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { decisionPromptV2 } from "../../engine/models/decision-v2";
-import { completeParagraphs, renderNarrativeParagraph, renderNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeEvidence, narrativeTask, narrativeDiscourse, narrativeRepair, deliveredDialogue, narrativeGroundingChoices, narrativeOutputSchema, type ScenePacket } from "../world-narrative";
+import { completeParagraphs, renderNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeRepair, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, narrativeOutputSchema } from "../narrative/publication";
+import { narrativeEvidence, narrativeTask, narrativeDiscourse } from "../narrative/scene";
+import { type ScenePacket } from "../narrative/contracts";
 import type { ParticipantDiscourse } from "../../engine/contracts/discourse";
+import { directTestProvider, nativeChoice } from "../../engine/testing/direct-provider";
+
+const renderNarrativeParagraph = (text: string, scene: ScenePacket) => renderNarrativeSegment(text, scene).text;
 
 const source: ScenePacket = {
   participantId: "reader", agentId: "traveler", submissionId: "action", submittedAt: null, requestedAction: "问价",
@@ -13,6 +18,28 @@ const source: ScenePacket = {
 };
 
 describe("immutable narrative paragraphs", () => {
+  it("shares complete publication evidence across all paragraph checks in one real gateway request", async () => {
+    const scene = structuredClone(source);
+    scene.observations[0]!.scene!.manner = "退后一步";
+    const provider = directTestProvider(wire => {
+      expect(wire.state).toMatchObject({ publicationInstruction: expect.any(String), publicationTask: {
+        newReceipts: [{ actor: "店主", manner: "退后一步", currentMethodOrAttention: null, actualResult: "话语送达。" }],
+      } });
+      expect(Object.keys(wire.questions)).toHaveLength(12);
+      for (const question of Object.values(wire.questions)) {
+        expect(question.instructions).toMatchObject({ index: expect.any(Number), focus: expect.any(String) });
+        expect(question.instructions).not.toHaveProperty("executedNow");
+        expect(question.instructions).not.toHaveProperty("executionBoundary");
+        expect(question.instructions).not.toHaveProperty("task");
+      }
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeChoice(question, "grounded")]));
+    });
+    const result = await checkNarrativeGrounding(provider.gateway, {
+      workloadId: "narrative", batchId: "publication", runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 1 },
+    }, scene, ["店主退后一步。", "报价已传到你耳中。"], "decision-deepseek", "decision-deepseek", 1);
+    expect(narrativeGroundingChoices(result.answers, 2)).toEqual(["grounded", "grounded"]);
+    expect(provider.transport).toHaveBeenCalledTimes(1);
+  });
   const discourse: ParticipantDiscourse = { version: 1, participantId: "reader", agentId: "traveler", asOfRevision: 1,
     arrival: { id: "arrival", text: "码头在眼前。" }, entities: [{ localEntityId: "shopkeeper", label: "店主", description: "木门旁的人",
       firstMentionParagraphId: "first", lastMentionParagraphId: "first", surfaces: ["店主"] }],

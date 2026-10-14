@@ -1,6 +1,9 @@
 import { loadPromptAsset } from "../engine/prompts";
 import { agentCapabilityModels } from "../engine/models/capability-bindings";
-import { enqueueNarrative, nextNarrative, completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeEvidence, narrativeTask, narrativeDiscourse, narrativeRepair, settleQueuedNarratives, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, narrativeOutputSchema, narrativeOutputJsonSchema, type NarrativeBeat } from "./world-narrative";
+import { enqueueNarrative, nextNarrative, settleQueuedNarratives } from "./narrative/outbox";
+import { completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeRepair, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, narrativeOutputSchema, narrativeOutputJsonSchema } from "./narrative/publication";
+import { narrativeEvidence, narrativeTask, narrativeDiscourse } from "./narrative/scene";
+import { type NarrativeBeat } from "./narrative/contracts";
 import { participantDiscourse } from "./world-discourse";
 import { randomUUID } from "node:crypto";
 import { rmSync } from "node:fs";
