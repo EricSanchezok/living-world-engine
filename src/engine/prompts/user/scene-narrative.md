@@ -1,5 +1,7 @@
 Write the next scene from the supplied evidence. Preserve its degree of completion, include new speech by reference, and stop when the relevant result has been conveyed.
 
+First lay out the actual exchange in speechOrder, then add only the brief observed action or finding needed to understand it. Do not begin with a later answer and append the player's question afterward.
+
 Examples of the editing boundary (write the actual result in the world's language):
 - Evidence: the player asked a price; speech contains id speech-ab12; nothing else happened. Good output: {"paragraphs":["You ask about the price: [[speech-ab12]]"]}. No shopkeeper reaction or props until they actually occur.
 - Evidence: a stern clerk refuses; manner is level and firm; speech has id speech-cd34. Good output: {"paragraphs":["The clerk's answer is level and firm. [[speech-cd34]]"]}. Do not add gestures or alter the refusal.

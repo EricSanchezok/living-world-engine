@@ -166,7 +166,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     ...Object.fromEntries(durations.map((duration, index) => [`d${index}`, duration])),
   });
   questions.expression = { type: "noul", version: "action-expression-1",
-    instructions: { task: sharedActionPolicy, field: "Does THIS selected next action need a concrete expression, accompanying gesture, or separation from a compound request? Simple observation, plain movement, unchanged work and a quotation with no stage directions need none. A quotation accompanied by a gesture needs expression, preserving its exact words." } };
+    instructions: { task: sharedActionPolicy, field: "Does THIS selected next action need a meaningful physical delivery, gesture, tactic or separation from a compound request beyond choosing new words? Ordinary conversation and new wording alone need none. Select true for an intentional physical manner that changes this interaction, or an explicitly requested gesture. Routine glances, nods and clothing adjustments are not required by speech." } };
   if (!external) questions.urgency = { type: "score", version: "urgency-1", instructions: { task: sharedActionPolicy, field: "urgency of the next action" },
     criteria: ["May reasonably wait", "Should act when available", "Immediate deadline or danger"] };
   if (!external && intent.lastActionHash && intent.wakeReasons.includes("observation")) questions.relevant = { type: "noul", version: "wake-relevance-1",
@@ -305,6 +305,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     external && ["use", "change"].includes(operation) && (!questions.capability || selected(answers, "capability") === "none") ||
     answers.expression?.type === "noul" && answers.expression.noul >= 0.5);
   if (!reading && needsExpression && input.creationEnabled) {
+    const wordsOnly = !external && operation === "speak" && !(answers.expression?.type === "noul" && answers.expression.noul >= 0.5);
     const system = loadPromptAsset(external ? "system/player-expression.md" : "system/direct-utterance.md"), userPrompt = loadPromptAsset("user/direct-utterance.md");
     const generated = await decisions.provider.generateStructured({ ...decisions.scope, modelRegistrySnapshotHash: control.registryHash,
       profileId: profiles.creation, subjectId: agentId, role: "creation", modelInvocation: decisions.next(agentId),
@@ -314,10 +315,13 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
           ? "Request the other person's action; do not offer payment or accept any new terms" : selected(answers, "dialogue"), playerControlled: Boolean(external),
         currentPlayerRequest: external?.rawText ?? null,
         currentHoldings: (view.state as { mechanics: { quantities: JsonValue } }).mechanics.quantities,
-        exactQuotes: quotes, expression: operation === "reflect" ? "Private reflection; do not deliver to anyone." : "Concrete attempted behavior and actual words before execution. Outcomes are not yet decided." },
+        exactQuotes: quotes, expression: operation === "reflect" ? "Private reflection; do not deliver to anyone." : wordsOnly
+          ? "This action is an ordinary spoken reply. Supply its actual words; attempt and manner can be omitted. No accompanying physical gesture is selected."
+          : "Concrete attempted behavior and actual words before execution. Outcomes are not yet decided." },
       schema: z.object({ attempt: z.string().optional(), utterance: z.string().nullable().optional(), manner: z.string().nullable().optional() }), jsonExamplePolicy: "omit" });
-    expression = { attempt: generated.value.attempt?.trim() || text || actionLabels[operation as ActionKind] || "尝试行动",
-      utterance: literal && external && (operation === "speak" || generated.value.utterance?.trim()) ? literal : generated.value.utterance?.trim() || null, manner: generated.value.manner?.trim() || null };
+    expression = { attempt: (!wordsOnly ? generated.value.attempt?.trim() : null) || text || actionLabels[operation as ActionKind] || "尝试行动",
+      utterance: literal && external && (operation === "speak" || generated.value.utterance?.trim()) ? literal : generated.value.utterance?.trim() || null,
+      manner: wordsOnly ? null : generated.value.manner?.trim() || null };
     utterance = expression.utterance; audits.push(generated.audit);
   } else if (!reading && literal && external && operation === "speak" && !preparatoryFor) utterance = literal;
   else if (!reading && ["speak", "reflect"].includes(operation) && !preparatoryFor) {

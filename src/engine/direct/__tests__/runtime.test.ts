@@ -552,6 +552,18 @@ describe("direct world through the actual simulation entry", () => {
     expect(control.intents.keeper!.wakeReasons).toContain("reaction-progress");
     expect(replaySimulationState(second.state)).toEqual(second.state);
   });
+  it.each([0, 1])("keeps an ordinary reply free of unselected physical business: expression=%s", async expression => {
+    const f = await fixture({ operation: "speak", target: "broadcast", speech: "create", expression, creationEnabled: true,
+      creationResponse: { attempt: "抬手指向门边并作答", utterance: "这里可以通行。", manner: "抬手指向门边" } });
+    await f.engine.bootstrapAgents();
+    const first = await f.engine.step(f.roster, f.request("请问这里可以走吗？"));
+    const second = await f.engine.step(f.roster, { expectedRevision: first.state.revision, trigger: "batch", externalActions: [] });
+    const reply = second.state.history.at(-1)!.directEvent!.frames.find(frame => frame.actorId === "keeper")!;
+    expect(reply.utterance).toBe("这里可以通行。");
+    expect(reply.expression?.manner).toBe(expression ? "抬手指向门边" : null);
+    if (!expression) expect(reply.expression?.attempt).toBe("交谈");
+    expect(replaySimulationState(second.state)).toEqual(second.state);
+  });
   it("separates a shouted action from actual words and delivers open speech to nearby people", async () => {
     const f = await fixture({ operation: "speak", target: "broadcast", speech: "input", creationEnabled: true,
       creationResponse: { attempt: "向周围大喊", utterance: "还有谁？", manner: "提高声音" } });

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { decisionPromptV2 } from "../../engine/models/decision-v2";
-import { completeParagraphs, renderNarrativeParagraph, renderNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, narrativeFallback, narrativeEvidence, narrativeTask, narrativeGroundingChoices, type ScenePacket } from "../world-narrative";
+import { completeParagraphs, renderNarrativeParagraph, renderNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeEvidence, narrativeTask, narrativeGroundingChoices, type ScenePacket } from "../world-narrative";
 
 const source: ScenePacket = {
   participantId: "reader", agentId: "traveler", submissionId: "action", submittedAt: null, requestedAction: "问价",
@@ -121,6 +121,20 @@ describe("immutable narrative paragraphs", () => {
     expect(() => assertSpeechMultiplicity(repeated, [quoted, quoted])).not.toThrow();
     const short = structuredClone(source); short.speech[0]!.utterance = "好";
     expect(() => assertSpeechMultiplicity(short, ["“好”", "状态还好。"])) .not.toThrow();
+  });
+  it("keeps streamed questions before answers and continues from an immutable prefix", () => {
+    const scene = structuredClone(source);
+    scene.speech.unshift({ id: "speech-question", speaker: "你", utterance: "多少钱？" });
+    expect(narrativeTask(scene).speechOrder).toEqual([
+      { reference: "[[speech-question]]", speaker: "你" }, { reference: "[[speech-ab12]]", speaker: "店主" },
+    ]);
+    expect(() => assertSpeechOrder(scene, ["店主说：“三枚金币；我还没同意赊账。”"])) .toThrow("before the later reply");
+    expect(() => assertSpeechOrder(scene, ["店主说：“三枚金币；我还没同意赊账。”你问：“多少钱？”"])) .toThrow("before its later replies");
+    expect(() => assertSpeechOrder(scene, ["你问：“多少钱？”"])) .not.toThrow();
+    expect(() => assertSpeechOrder(scene, ["你问：“多少钱？”", "店主说：“三枚金币；我还没同意赊账。”"])) .not.toThrow();
+    const identical = structuredClone(scene); identical.speech[1]!.utterance = "多少钱？";
+    expect(() => assertSpeechOrder(identical, ["你问：“多少钱？”", "他重复了一遍：“多少钱？”"])) .not.toThrow();
+    expect(() => assertSpeechOrder({ ...scene, speech: [] }, ["告示上写着“多少钱？”"])) .not.toThrow();
   });
   it("keeps only new continuation text after an exact echo of already published paragraphs", () => {
     expect(narrativeContinuation("价钱已经说清。 “三枚金币。”", ["价钱已经说清。"])) .toBe("“三枚金币。”");

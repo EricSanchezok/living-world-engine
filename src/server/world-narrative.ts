@@ -120,6 +120,7 @@ export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscou
     playerCurrentHoldings: source.currentHoldings?.quantities.map(quantity => `You currently hold ${quantity.amount} ${quantity.unit} of ${quantity.name}.`) ?? [],
     backgroundUse: "Holdings and old properties constrain accuracy; mention them only when they answer the current request or changed in the new receipts.",
     newSpeech: source.speech,
+    speechOrder: source.speech.map(speech => ({ reference: `[[${speech.id}]]`, speaker: speech.speaker })),
     publishedForThisRequest: discourse?.exchanges.filter(exchange => exchange.submissionId === source.submissionId)
       .flatMap(exchange => exchange.paragraphs.map(paragraph => paragraph.text)) ?? [],
     firstAppearances: source.knownEntities.filter(entity => !discourse?.entities.some(known => known.localEntityId === entity.localEntityId))
@@ -349,6 +350,27 @@ export function assertSpeechMultiplicity(source: ScenePacket, paragraphs: string
     if (text.split(`“${utterance}”`).length - 1 > allowed) {
       throw new Error("This delivered utterance has already been published. Continue with the remaining new result without repeating its speech reference or literal words.");
     }
+  }
+}
+
+/** A streamed answer cannot precede an earlier, as-yet unpublished question. */
+export function assertSpeechOrder(source: ScenePacket, paragraphs: string[]): void {
+  const text = paragraphs.join("\n");
+  let position = 0;
+  for (let index = 0; index < source.speech.length; index++) {
+    const speech = source.speech[index]!, quote = `“${speech.utterance}”`;
+    const next = text.indexOf(quote, position);
+    if (next < 0) {
+      if (source.speech.slice(index + 1).some(later => text.indexOf(`“${later.utterance}”`, position) >= 0)) {
+        throw new Error(`Preserve the delivered dialogue order: include [[${speech.id}]] from ${speech.speaker} before the later reply. Continue after the published prefix.`);
+      }
+      return;
+    }
+    if (source.speech.slice(index + 1).some(later => {
+      const earlier = text.indexOf(`“${later.utterance}”`, position);
+      return earlier >= 0 && earlier < next;
+    })) throw new Error(`Present [[${speech.id}]] from ${speech.speaker} before its later replies. Continue after the published prefix.`);
+    position = next + quote.length;
   }
 }
 export function narrativeFallback(source: ScenePacket, published: string[] = []): string {

@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { loadPromptAsset } from "../engine/prompts";
 import { agentCapabilityModels } from "../engine/models/capability-bindings";
-import { enqueueNarrative, nextNarrative, completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, narrativeFallback, narrativeEvidence, narrativeTask, checkNarrativeGrounding, narrativeGroundingChoices, type NarrativeBeat } from "./world-narrative";
+import { enqueueNarrative, nextNarrative, completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeEvidence, narrativeTask, checkNarrativeGrounding, narrativeGroundingChoices, type NarrativeBeat } from "./world-narrative";
 import { participantDiscourse } from "./world-discourse";
 import { randomUUID } from "node:crypto";
 import { rmSync } from "node:fs";
@@ -637,7 +637,9 @@ export class WorldHost {
         const rendered = paragraphs.slice(published).map(paragraph => renderNarrativeSegment(paragraph, beat.source));
         const ready = rendered.map(paragraph => narrativeContinuation(paragraph.text, prefix));
         if (ready.every(text => !text)) { published = paragraphs.length; return; }
-        assertSpeechMultiplicity(beat.source, [...this.read(id).document.narratives.find(item => item.id === beat.id)!.segments.map(segment => segment.text), ...ready]);
+        const completeText = [...this.read(id).document.narratives.find(item => item.id === beat.id)!.segments.map(segment => segment.text), ...ready];
+        assertSpeechMultiplicity(beat.source, completeText);
+        assertSpeechOrder(beat.source, completeText);
         const decision = await checkNarrativeGrounding(this.options.provider, scope, beat.source, ready, models.fallback, models.fallback,
           Number.parseInt(contentHash([beat.id, beat.attempts, prefix.length + published]).slice(0, 10), 16),
           participantDiscourse(this.read(id).document, beat.participantId, beat.id));
