@@ -4,7 +4,7 @@ import path from "node:path";
 import { randomUUID } from "node:crypto";
 import { DECISION_MODEL_PRICES } from "../../models/model-cost";
 import { contentHash } from "../../models/model-audit";
-import { ExperimentBudget, deepSeekExperimentUsage, type ExperimentBudgetPolicy, type ExperimentUsage } from "../action-compilation/experiment-budget";
+import { ExperimentBudget, ExperimentBudgetError, deepSeekExperimentUsage, type ExperimentBudgetPolicy, type ExperimentUsage } from "../action-compilation/experiment-budget";
 
 /** Conservative conversion for the entire qualification, including the planning probes. */
 export const JEV_PLANNING_NANO_CNY = Math.ceil(0.035729814 * 8 * 1_000_000_000);
@@ -14,6 +14,18 @@ export const JEV_BUDGET_POLICY: ExperimentBudgetPolicy = {
   maxConcurrentRequests: 16, maxHttpRequests: { trajectory: 10000 }, maxKnownTokens: { trajectory: 1_000_000_000 },
   prices: DECISION_MODEL_PRICES,
 };
+
+/** Waiting for an active reservation never reserves or sends another request. */
+function awaitUsageSettlement(active: Set<Promise<void>>, signal?: AbortSignal | null): Promise<void> {
+  const next = Promise.race(active);
+  if (!signal) return next;
+  return new Promise<void>((resolve, reject) => {
+    const abort = () => { signal.removeEventListener("abort", abort); reject(signal.reason); };
+    signal.addEventListener("abort", abort, { once: true });
+    if (signal.aborted) abort();
+    void next.then(() => { signal.removeEventListener("abort", abort); resolve(); });
+  });
+}
 
 /** One writer and one cumulative ceiling across frozen engines and experiment phases. */
 export function createJevLiveBudget(root: string, stopReason: () => string | undefined = () => undefined) {
@@ -25,6 +37,7 @@ export function createJevLiveBudget(root: string, stopReason: () => string | und
     const budget = new ExperimentBudget(path.join(root, "budget.jsonl"), JEV_BUDGET_POLICY);
     let trialId = "jev-engine", closed = false;
     const pending = new Set<Promise<unknown>>();
+    const activeReservations = new Set<Promise<void>>();
     return { budget,
       beginTrial(id: string) {
         if (pending.size || closed) throw new Error("live budget trial changed during dispatch or after close");
@@ -40,10 +53,29 @@ export function createJevLiveBudget(root: string, stopReason: () => string | und
             const body = JSON.parse(init.body), native = accountId === "typesafe-api";
             if (body.model !== (native ? "jev-1.13.0" : "deepseek-flash")) throw new Error("unpriced live model");
             const id = randomUUID();
-            budget.reserve({ id, trialId, phase: "trajectory", priceId: native ? "jev" : "deepseek",
-              // https://docs.typesafe.ai/models defines the combined 64k batch budget. Bytes bound fees only, never context eligibility.
-              inputCeiling: native ? Math.max(65_536, Buffer.byteLength(init.body, "utf8") + 4096) : Buffer.byteLength(init.body, "utf8") + 4096,
-              outputCeiling: native ? 4_000_000 : Number(body.max_tokens ?? body.max_output_tokens) });
+            for (;;) {
+              const stopped = stopReason();
+              if (closed || stopped) throw new Error(stopped ?? "live budget closed");
+              init.signal?.throwIfAborted();
+              try {
+                budget.reserve({ id, trialId, phase: "trajectory", priceId: native ? "jev" : "deepseek",
+                  // https://docs.typesafe.ai/models defines the combined 64k batch budget. Bytes bound fees only, never context eligibility.
+                  inputCeiling: native ? Math.max(65_536, Buffer.byteLength(init.body, "utf8") + 4096) : Buffer.byteLength(init.body, "utf8") + 4096,
+                  outputCeiling: native ? 4_000_000 : Number(body.max_tokens ?? body.max_output_tokens) });
+                break;
+              } catch (error) {
+                // Only a currently running send can release temporary capacity.
+                // Historical holds stay charged; unknown usage and request caps fail immediately.
+                if (!(error instanceof ExperimentBudgetError) ||
+                  !["token-limit", "spending-limit"].includes(error.limitCode ?? "") || !activeReservations.size) throw error;
+                await awaitUsageSettlement(activeReservations, init.signal);
+              }
+            }
+            let finishReservation!: () => void;
+            const reservationFinished = new Promise<void>(resolve => { finishReservation = resolve; });
+            activeReservations.add(reservationFinished);
+            const releaseReservation = () => { activeReservations.delete(reservationFinished); finishReservation(); };
+            let streamed = false;
             const settleUsage = (usage: ExperimentUsage, raw: string) => {
               try { budget.settle(id, usage); }
               catch (error) {
@@ -61,8 +93,9 @@ export function createJevLiveBudget(root: string, stopReason: () => string | und
                     .map(line => JSON.parse(line.slice(5).trim()) as { usage?: unknown });
                   settleUsage(deepSeekExperimentUsage(packets.findLast(packet => packet.usage != null)), raw);
                 }, () => budget.markUnknown(id));
+                streamed = true;
                 pending.add(observed.finished);
-                void observed.finished.finally(() => pending.delete(observed.finished)).catch(() => undefined);
+                void observed.finished.finally(() => { pending.delete(observed.finished); releaseReservation(); }).catch(() => undefined);
                 return observed.response;
               }
               const raw = await response.clone().text();
@@ -86,6 +119,7 @@ export function createJevLiveBudget(root: string, stopReason: () => string | und
               } else settleUsage(deepSeekExperimentUsage(value), raw);
               return response;
             } catch (error) { budget.markUnknown(id); throw error; }
+            finally { if (!streamed) releaseReservation(); }
           })();
           pending.add(call);
           void call.finally(() => pending.delete(call)).catch(() => undefined);

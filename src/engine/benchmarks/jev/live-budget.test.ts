@@ -7,9 +7,110 @@ import { createJevLiveBudget, JEV_BUDGET_POLICY, JEV_PLANNING_NANO_CNY } from ".
 const roots: string[] = [];
 const directory = () => { const root = mkdtempSync(path.join(os.tmpdir(), "jev-budget-")); roots.push(root); return root; };
 const body = JSON.stringify({ model: "deepseek-flash", max_tokens: 20 });
+const nativeBody = JSON.stringify({ model: "jev-1.13.0" });
+function holdTokens(live: ReturnType<typeof createJevLiveBudget>, outputCeiling: number) {
+  live.budget.reserve({ id: "historical", trialId: "closed-history", phase: "trajectory", priceId: "jev", inputCeiling: 1, outputCeiling });
+  live.budget.markUnknown("historical");
+  live.budget.quarantineUnknown("historical", { reason: "Fixture retains the full unknown historical reservation", evidenceHash: "d".repeat(64) });
+}
 afterEach(() => { for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true }); });
 
 describe("one cumulative live model budget", () => {
+  it("waits for a live token reservation without changing historical holds or sending twice", async () => {
+    const live = createJevLiveBudget(directory()); holdTokens(live, 994_000_000);
+    const held = live.budget.summary.reservedNanoCny;
+    let finishFirst!: (response: Response) => void;
+    const provider = vi.fn().mockImplementationOnce(() => new Promise<Response>(resolve => { finishFirst = resolve; }))
+      .mockImplementation(async () => Response.json({ usage: { input_tokens: 10, output_tokens: 20 } }));
+    const send = () => live.transport("typesafe-api", provider)("https://unused.test", { body: nativeBody });
+    const first = send(), second = send();
+    expect(provider).toHaveBeenCalledTimes(1);
+    expect(live.budget.summary.phases.trajectory.httpRequests).toBe(2); // Historical hold and the first send.
+    finishFirst(Response.json({ usage: { input_tokens: 10, output_tokens: 20 } }));
+    await Promise.all([first, second]); await live.drain();
+    expect(provider).toHaveBeenCalledTimes(2);
+    expect(live.budget.summary.phases.trajectory.httpRequests).toBe(3);
+    expect(live.budget.summary.reservedNanoCny).toBe(held);
+    expect(live.budget.policy.maxKnownTokens.trajectory).toBe(1_000_000_000);
+    expect(live.budget.summary.quarantinedUnknown).toEqual(["historical"]); live.close();
+  });
+  it("waits for temporary monetary reservations under the same grant", async () => {
+    const live = createJevLiveBudget(directory());
+    live.budget.authorizeTranche({ id: "limited", amountNanoCny: 30_000_000, priorExposureNanoCny: 0,
+      reason: "Fixture authorizes one concurrent native reservation", evidenceHash: "e".repeat(64) });
+    let finishFirst!: (response: Response) => void;
+    const provider = vi.fn().mockImplementationOnce(() => new Promise<Response>(resolve => { finishFirst = resolve; }))
+      .mockImplementation(async () => Response.json({ usage: { input_tokens: 10, output_tokens: 20 } }));
+    const send = () => live.transport("typesafe-api", provider)("https://unused.test", { body: nativeBody });
+    const first = send(), second = send(); expect(provider).toHaveBeenCalledTimes(1);
+    finishFirst(Response.json({ usage: { input_tokens: 10, output_tokens: 20 } }));
+    await Promise.all([first, second]); await live.drain();
+    expect(provider).toHaveBeenCalledTimes(2);
+    expect(live.budget.summary.tranche).toMatchObject({ amountNanoCny: 30_000_000, knownNanoCny: 2 * 10 * 336, reservedNanoCny: 0 });
+    live.close();
+  });
+  it("does not wait on historical holds when no live reservation can free capacity", async () => {
+    const live = createJevLiveBudget(directory()); holdTokens(live, 997_000_000);
+    const provider = vi.fn();
+    await expect(live.transport("typesafe-api", provider)("https://unused.test", { body: nativeBody }))
+      .rejects.toMatchObject({ limitCode: "token-limit" });
+    await live.drain(); expect(provider).not.toHaveBeenCalled();
+    expect(live.budget.summary.phases.trajectory.httpRequests).toBe(1); live.close();
+  });
+  it("blocks a queued send if the active send ends with unknown usage", async () => {
+    const live = createJevLiveBudget(directory()); holdTokens(live, 994_000_000);
+    let failFirst!: (error: Error) => void;
+    const provider = vi.fn(() => new Promise<Response>((_, reject) => { failFirst = reject; }));
+    const send = () => live.transport("typesafe-api", provider)("https://unused.test", { body: nativeBody });
+    const first = send(), second = send();
+    const failures = Promise.all([expect(first).rejects.toThrow("connection lost"),
+      expect(second).rejects.toMatchObject({ limitCode: "usage-unresolved" })]);
+    failFirst(new Error("connection lost")); await failures; await live.drain();
+    expect(provider).toHaveBeenCalledTimes(1);
+    expect(live.budget.summary.blockingUnknown).toHaveLength(1);
+    expect(live.budget.summary.phases.trajectory.httpRequests).toBe(2); live.close();
+  });
+  it("cancels a queued send before reservation and transport", async () => {
+    const live = createJevLiveBudget(directory()); holdTokens(live, 994_000_000);
+    let finishFirst!: (response: Response) => void;
+    const provider = vi.fn(() => new Promise<Response>(resolve => { finishFirst = resolve; }));
+    const send = live.transport("typesafe-api", provider), controller = new AbortController();
+    const first = send("https://unused.test", { body: nativeBody });
+    const second = send("https://unused.test", { body: nativeBody, signal: controller.signal });
+    const cancelled = expect(second).rejects.toThrow("cancel queued send");
+    controller.abort(new Error("cancel queued send")); await cancelled;
+    expect(provider).toHaveBeenCalledTimes(1);
+    finishFirst(Response.json({ usage: { input_tokens: 10, output_tokens: 20 } })); await first; await live.drain();
+    expect(live.budget.summary.phases.trajectory.httpRequests).toBe(2); live.close();
+  });
+  it("honors a stop recorded while waiting without sending the queued request", async () => {
+    const stop = { reason: undefined as string | undefined };
+    const live = createJevLiveBudget(directory(), () => stop.reason); holdTokens(live, 994_000_000);
+    let finishFirst!: (response: Response) => void;
+    const provider = vi.fn(() => new Promise<Response>(resolve => { finishFirst = resolve; }));
+    const send = () => live.transport("typesafe-api", provider)("https://unused.test", { body: nativeBody });
+    const first = send(), second = send(), rejected = expect(second).rejects.toThrow("experiment stopped");
+    stop.reason = "experiment stopped";
+    finishFirst(Response.json({ usage: { input_tokens: 10, output_tokens: 20 } }));
+    await first; await rejected; await live.drain();
+    expect(provider).toHaveBeenCalledTimes(1);
+    expect(live.budget.summary.phases.trajectory.httpRequests).toBe(2); live.close();
+  });
+  it("holds streaming capacity until terminal usage settles", async () => {
+    const live = createJevLiveBudget(directory()); holdTokens(live, 999_993_000);
+    let stream!: ReadableStreamDefaultController<Uint8Array>;
+    const usage = { prompt_tokens: 10, completion_tokens: 4, total_tokens: 14, prompt_cache_hit_tokens: 2, prompt_cache_miss_tokens: 8 };
+    const provider = vi.fn().mockImplementationOnce(async () => new Response(new ReadableStream<Uint8Array>({ start(controller) { stream = controller; } }),
+      { headers: { "content-type": "text/event-stream" } }))
+      .mockImplementation(async () => Response.json({ usage }));
+    const send = () => live.transport("deepseek-api", provider)("https://unused.test", { body });
+    const first = await send(), second = send(); expect(provider).toHaveBeenCalledTimes(1);
+    const firstBody = first.text();
+    stream.enqueue(new TextEncoder().encode(`data: ${JSON.stringify({ usage })}\n\ndata: [DONE]\n\n`)); stream.close();
+    await firstBody; await second; await live.drain(); expect(provider).toHaveBeenCalledTimes(2);
+    expect(live.budget.summary.quarantinedUnknown).toEqual(["historical"]);
+    expect(live.budget.summary.phases.trajectory.knownTokens).toBe(28); live.close();
+  });
   it("stops at the explicit request cap before transport and resumes only under a new recorded grant", async () => {
     const root = directory(), live = createJevLiveBudget(root);
     const evidence = { reason: "Explicit bounded request capacity for newly authorized work", evidenceHash: "a".repeat(64) };
