@@ -43,11 +43,11 @@ export function runStatusPresentation(run: PublicWorldRun, hasParticipantAction 
   switch (run.status) {
     case "queued":
       title = "正在准备世界变化";
-      detail = "等待资源 → 生成 → 校验 → 提交";
+      detail = "正在整理眼前的变化。";
       break;
     case "pausing":
       title = "即将暂停";
-      detail = "完成当前边界后暂停";
+      detail = "正在保存当前进度。";
       break;
     case "paused":
       title = "世界推进已暂停";
@@ -67,11 +67,11 @@ export function runStatusPresentation(run: PublicWorldRun, hasParticipantAction 
       title = "需要重新准备";
       detail = run.debug.mode === "step"
         ? "单步证据已失效，请开始新的推演"
-        : "世界状态已变化，原方案未提交";
+        : "情境有了变化，可以重新尝试。";
       break;
     case "running":
       title = hasParticipantAction ? "正在处理你的行动" : "世界正在自主推进";
-      detail = hasParticipantAction ? "生成 → 校验 → 提交" : "计算 → 校验 → 提交";
+      detail = hasParticipantAction ? "正在等待眼前的回应。" : "周围的人和事正在继续。";
       break;
     default:
       title = "世界正在推进";
@@ -80,7 +80,8 @@ export function runStatusPresentation(run: PublicWorldRun, hasParticipantAction 
   return { title, detail: activityDescription(run) || detail };
 }
 
-export function runBoundaryLabel(run: PublicWorldRun): string {
+export function runBoundaryLabel(run: PublicWorldRun): string | undefined {
+  if (run.debug.mode !== "step") return undefined;
   const lease = run.lease;
   if (!lease) return "本轮推进准备中";
   return `本轮推进 ${lease.commitCount} / ${lease.maxCommits} 个世界边界`;

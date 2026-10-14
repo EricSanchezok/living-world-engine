@@ -36,7 +36,8 @@ describe("run status presentation", () => {
   it("explains an in-flight action even before a canonical activity exists", () => {
     const presentation = runStatusPresentation(run(), true);
     expect(presentation.title).toBe("正在处理你的行动");
-    expect(presentation.detail).toBe("生成 → 校验 → 提交");
+    expect(presentation.detail).toBe("正在等待眼前的回应。");
+    expect(runStatusPresentation(run({ status: "queued" }), true).detail).toBe("正在整理眼前的变化。");
   });
 
   it("uses real activity stage and progress without inventing a percentage", () => {
@@ -56,8 +57,11 @@ describe("run status presentation", () => {
     expect(presentation.detail).toBe("侦查 · 2.00 / 10 米");
   });
 
-  it("makes the lease budget legible", () => {
-    expect(runBoundaryLabel(run())).toBe("本轮推进 0 / 100 个世界边界");
+  it("keeps lease counters in explicit debugging, outside ordinary play", () => {
+    expect(runBoundaryLabel(run())).toBeUndefined();
+    const debugging = run();
+    debugging.debug.mode = "step";
+    expect(runBoundaryLabel(debugging)).toBe("本轮推进 0 / 100 个世界边界");
   });
 
   it("shows the current logical stage while single-step debugging is paused", () => {

@@ -94,6 +94,7 @@ function PlayerRunConsole({
   const updatedAtTimestamp = Date.parse(run.updatedAt);
   const elapsedNow = Number.isFinite(updatedAtTimestamp) ? Math.max(now, updatedAtTimestamp) : now;
   const presentation = runStatusPresentation(run, Boolean(run.status === "running" && hasParticipantAction));
+  const boundaryLabel = runBoundaryLabel(run);
   const elapsed = formatRunElapsed(
     run.lease?.startedAt,
     elapsedNow,
@@ -119,7 +120,7 @@ function PlayerRunConsole({
         <strong>{presentation.title}</strong>
         <div className="cg-thread-status__meta">
           <span>{presentation.detail}</span>
-          <span>{runBoundaryLabel(run)}</span>
+          {boundaryLabel ? <span>{boundaryLabel}</span> : null}
           {elapsed ? <span>已运行 {elapsed}</span> : null}
         </div>
       </div>
