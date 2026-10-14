@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { decisionPromptV2 } from "../../engine/models/decision-v2";
-import { completeParagraphs, renderNarrativeParagraph, renderNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, narrativeGroundingChoices, type ScenePacket } from "../world-narrative";
+import { completeParagraphs, renderNarrativeParagraph, renderNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, narrativeTask, narrativeGroundingChoices, type ScenePacket } from "../world-narrative";
 
 const source: ScenePacket = {
   participantId: "reader", agentId: "traveler", submissionId: "action", submittedAt: null, requestedAction: "问价",
@@ -12,6 +12,16 @@ const source: ScenePacket = {
 };
 
 describe("immutable narrative paragraphs", () => {
+  it("anchors a new handover to its current receipt and self-holdings instead of a preceding spoken promise", () => {
+    const scene = structuredClone(source);
+    scene.requestedAction = "按说好的办";
+    scene.speech = [];
+    scene.currentHoldings = { coverage: "complete-current-self-holdings", quantities: [{ name: "铜币", unit: "枚", amount: 0 }] };
+    Object.assign(scene.observations[0]!.scene!, { actor: "你", actorLocalId: "self", actionKind: "transfer", speech: null, outcome: "交付完成。" });
+    scene.observations[0]!.summary = "你尝试付款。\n我向店主转移了3枚铜币。";
+    expect(narrativeTask(scene)).toMatchObject({ newReceipts: [{ actor: "你", operation: "transfer", actualResult: "交付完成。\n我向店主转移了3枚铜币。" }], newSpeech: [] });
+    expect(narrativeEvidence(scene).currentHoldings).toEqual(scene.currentHoldings);
+  });
   it("retains participant-local references while inserting literal speech without interpreting its markup", () => {
     const scene = structuredClone(source);
     scene.knownEntities = [{ localEntityId: "local-person", name: "附近的人", description: "站在木门旁。" }];

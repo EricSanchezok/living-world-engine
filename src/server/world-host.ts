@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { loadPromptAsset } from "../engine/prompts";
 import { agentCapabilityModels } from "../engine/models/capability-bindings";
-import { enqueueNarrative, nextNarrative, completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, checkNarrativeGrounding, narrativeGroundingChoices, type NarrativeBeat } from "./world-narrative";
+import { enqueueNarrative, nextNarrative, completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, narrativeTask, checkNarrativeGrounding, narrativeGroundingChoices, type NarrativeBeat } from "./world-narrative";
 import { participantDiscourse } from "./world-discourse";
 import { randomUUID } from "node:crypto";
 import { rmSync } from "node:fs";
@@ -668,6 +668,7 @@ export class WorldHost {
           system: NARRATIVE_SYSTEM, userPrompt: NARRATIVE_USER,
           context: { discourse: participantDiscourse(document, beat.participantId, beat.id),
             publishedPrefix: prefix, scene: narrativeEvidence(beat.source),
+            publicationTask: narrativeTask(beat.source, participantDiscourse(document, beat.participantId, beat.id)),
             repair: beat.error },
           schema: z.object({ paragraphs: z.array(z.string().trim().min(1)).min(1) }), jsonExamplePolicy: "omit",
           onOutputText: async text => {

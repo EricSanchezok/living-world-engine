@@ -55,3 +55,7 @@ For real browser qualification, start the workbench with `LIVINGWORLD_JEV_BUDGET
 The generated-program engine is available in [frozen source](https://github.com/EricSanchezok/living-world-engine/tree/05d273f7/src/engine/events). Its failed trials remain historical evidence. Explicitly registered reference and benchmark algorithms remain research infrastructure; new instances use the direct runtime.
 
 An applicable authored random procedure queues its draw independently of whether a fact receives the sampled value. A missing result binding can receive one dependent question; an unresolved binding preserves the original facts and records a partial result with the actual draw. Ordinary property or capability effects cannot overwrite a bound random result. Capability declarations ignore extra non-executable annotations while retaining typed effects and reference checks.
+
+## Coherent player interpretation
+
+Open player language uses the joint interpretation instruction profile: operation, its parameters and one continuation describe the same next step. Settled receipts identify completed parts of the current submission. Native independent decisions bind outgoing amounts to named resource branches. The instruction profile is included in the decision cache and prompt identity. See [decision 0231](../decisions/0231-joint-language-interpretation-and-current-receipts.md).

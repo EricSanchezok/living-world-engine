@@ -25,6 +25,7 @@ export interface ScenePacket {
   speech: Array<{ id: string; speaker: string; speakerLocalId?: string; utterance: string }>;
   memories: Array<{ kind: string; description: string; executedDescription?: string }>;
   knownEntities: Array<{ localEntityId: string; name: string; description: string }>;
+  currentHoldings?: { coverage: "complete-current-self-holdings"; quantities: Array<{ name: string; unit: string; amount: number }> };
   observedProperties?: Array<{ subject: string; predicate: string; value: JsonValue; stance: string; description: string }>;
 }
 export interface NarrativeBeat {
@@ -84,6 +85,23 @@ export function narrativeEvidence(source: ScenePacket) {
   };
 }
 
+/** A publication task separates new receipts from the prose used to resolve references. */
+export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscourse) {
+  return {
+    responseTo: source.reply?.requested ?? source.requestedAction,
+    kind: source.reply?.kind ?? "newly_observed_events",
+    newReceipts: source.observations.map(observation => ({ id: observation.id,
+      actor: observation.scene?.actor ?? null, actorLocalId: observation.scene?.actorLocalId ?? null,
+      operation: observation.scene?.actionKind ?? null, status: observation.scene?.status ?? null,
+      actualResult: executedDescription({ ...observation, scene: observation.scene ?? undefined }) })),
+    newSpeech: source.speech,
+    publishedForThisRequest: discourse?.exchanges.filter(exchange => exchange.submissionId === source.submissionId)
+      .flatMap(exchange => exchange.paragraphs.map(paragraph => paragraph.text)) ?? [],
+    firstAppearances: source.knownEntities.filter(entity => !discourse?.entities.some(known => known.localEntityId === entity.localEntityId))
+      .map(entity => ({ ...entity, instruction: "If this entity is mentioned, introduce it intelligibly; the reader has not met it in published prose." })),
+  };
+}
+
 /** Called in the world transaction. Never performs model work. */
 export function enqueueNarrative(document: WorldInstanceDocument, now: string): void {
   for (const participant of Object.values(document.participants).filter(p => p.status === "active")) {
@@ -120,6 +138,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
               ...(recorded ? { executedDescription: executedDescription(recorded) } : {}) }; }),
       };
       source.knownEntities = Object.values(agent.belief.localEntities).map(entity => ({ localEntityId: entity.id, name: entity.name, description: entity.description }));
+      source.currentHoldings = { coverage: "complete-current-self-holdings", quantities: projectAgentPerspective(document.state, agent).mechanics.quantities };
       source.boundary = { revision: observation.revision, step: observation.step, worldTimeSeconds: observation.worldTimeSeconds };
       source.observedProperties = Object.values(agent.belief.claims).map(claim => ({
         subject: agent.belief.localEntities[claim.subjectId]?.name ?? claim.subjectId, predicate: claim.predicate,
@@ -154,6 +173,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
           boundary: { revision: step.revision, step: step.step, worldTimeSeconds: step.temporalBoundary.toElapsedSeconds },
           world: { name: document.world.name, language: document.world.narrative.language, style: document.world.narrative.style },
           playerName: participant.displayName, location: projectAgentPerspective(document.state, agent).self.location?.name ?? null, observations: [], speech: [],
+          currentHoldings: { coverage: "complete-current-self-holdings", quantities: projectAgentPerspective(document.state, agent).mechanics.quantities },
           knownEntities: Object.values(agent.belief.localEntities).map(entity => ({ localEntityId: entity.id, name: entity.name, description: entity.description })),
           observedProperties: Object.values(agent.belief.claims).map(claim => ({ subject: agent.belief.localEntities[claim.subjectId]?.name ?? claim.subjectId,
             predicate: claim.predicate, value: claim.value as unknown as JsonValue, stance: claim.stance, description: claim.description })),
@@ -191,7 +211,7 @@ export function narrativeGroundingChoices(answers: Record<string, { type: string
 export async function checkNarrativeGrounding(provider: StructuredModelProvider, scope: ModelExecutionScope,
   source: ScenePacket, paragraphs: string[], profileId: string, fallbackProfileId: string, ordinal: number, discourse?: ParticipantDiscourse) {
   const evidence = narrativeEvidence(source);
-  const state = { paragraphs, scene: evidence, discourse: discourse ?? null } as unknown as JsonValue;
+  const state = { paragraphs, scene: evidence, discourse: discourse ?? null, publicationTask: narrativeTask(source, discourse) } as unknown as JsonValue;
   return executeDecisionV2(provider, { ...scope, profileId, fallbackProfileId, subjectId: source.agentId, instructionProfile: "publication",
     modelInvocation: ordinal, batch: { version: 2, view: { kind: "agent", agentId: source.agentId, projectionHash: contentHash(state) },
       dependencies: {}, state, questions: Object.fromEntries(paragraphs.flatMap((_, index) => Object.entries(groundingAxes).map(([axis, focus]) => [`paragraph${index}_${axis}`, {

@@ -45,6 +45,7 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
       if (id.endsWith("_world_expansion")) value = options.introduce ? "introduce" : "none";
       if (id.endsWith("_request_progress")) value = options.reactionProgress ?? "complete";
       if (id.startsWith("progress_")) value = options.playerProgress ?? "complete";
+      if (id.startsWith("resource_amount_")) value = options.amount ?? "n1";
       if (id === "accept") value = "apply";
       if (id.startsWith("coverage")) value = options.missingCoverage || options.creationResponses && creations === 1 ? "missing" : "complete";
       if (id.startsWith("identity")) value = options.duplicateIdentity && creations === 1 ? "duplicate" : "distinct";
@@ -172,7 +173,7 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "move", requestContinuation: "continue" });
     expect(readDirectState(result.state.executionState!, result.state).intents.player!.activeSubmission).not.toBeNull();
     const wires = f.transport.mock.calls.map(([, init]) => directDecisionContext(JSON.parse(String(init?.body)))).filter(Boolean);
-    expect(wires[0]!.questions).toHaveProperty("progress_move");
+    expect(wires[0]!.questions).toHaveProperty("progress_next");
     expect(wires[1]!.questions).not.toHaveProperty("a0_request_progress");
     expect(f.transport).toHaveBeenCalledTimes(2);
     expect(replaySimulationState(result.state)).toEqual(result.state);

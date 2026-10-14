@@ -99,7 +99,8 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   if (external) intent.activeSubmission = structuredClone(external);
   const configuredProfiles = agentCapabilityModels(state, control, agentId);
   // Open player language needs interpretation before the world judges its effects.
-  const profiles = external && input.creationEnabled ? { ...configuredProfiles, decision: configuredProfiles.fallback } : configuredProfiles;
+  const jointInterpretation = Boolean(external && input.creationEnabled);
+  const profiles = jointInterpretation ? { ...configuredProfiles, decision: configuredProfiles.fallback } : configuredProfiles;
   const goals = orderedValues(agent.character.goals).filter(goal => goal.status === "active");
   const text = external?.rawText ?? "";
   if (external?.discourse && (external.discourse.agentId !== agentId ||
@@ -161,15 +162,20 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   if (!external && intent.lastActionHash && intent.wakeReasons.includes("observation")) questions.relevant = { type: "noul", version: "wake-relevance-1",
     instructions: { task: sharedActionPolicy, field: "Does the new observation require changing the prior wait or responding now?" } };
   if (resources.length) questions.resource = choice("resource", { none: "No quantified resource", ...Object.fromEntries(resources.map(id => [id, state.truth.mechanics.quantities[id]!.name])) });
+  if (!jointInterpretation) for (const [index, resourceId] of resources.entries()) {
+    const resource = state.truth.mechanics.quantities[resourceId]!;
+    const amountQuestion = questions.amount!;
+    if (amountQuestion.type !== "choice") throw new Error("amount selection requires choices");
+    questions[`resource_amount_${index}`] = choice(`For the hypothetical branch where THIS actor gives ${resource.name}: how many ${resource.unit} of ${resource.name} does the actor intend to GIVE? This is the outgoing resource, not the price received or another person's side of an exchange. Use the actual commitment and holdings for this named resource. Only used if resource selects ${resourceId}.`, amountQuestion.criteria);
+  }
   if (external) questions.transfer_authority = choice("For the hypothetical transfer branch: does this CURRENT submission authorize the PLAYER to give their own goods now? Prior negotiations and another person's demand alone are not permission; an explicit current instruction to pay the accepted price IS permission. Check only the player's stated prerequisites against actual delivered evidence. When the agreed sequence is payment THEN delivery, the absence of later delivery does not block the authorized payment. Do not add a delivery-first prerequisite.", {
     pending: "The player's transfer condition is not established, or the input does not authorize a transfer",
     give: "The player explicitly authorizes their own transfer now, and its stated conditions are met",
     request: "The player asks ANOTHER person to deliver, return or give something; this is speech, not payment by the player",
   });
   const claims = orderedValues(agent.belief.claims);
-  if (external && input.creationEnabled) for (const [kind, effect] of Object.entries(kinds)) {
-    if (["unknown", "expand"].includes(kind)) continue;
-    questions[`progress_${kind}`] = choice(`Conditional branch: assume the NEXT selected operation is ${kind} (${effect}) and its immediate effect succeeds. Does that operation, together with the already settled steps, finish the current player's request? Answer this branch independently; only the actually selected branch is used. Move only approaches or enters; it does not look inside or talk. Observation inspects one focus or inventory; it does not report, thank, build or pay. Reflection does not say goodbye. Speaking includes its requested simultaneous expressive gesture but does not hand over goods. Use/change performs its immediate procedure, not an unrelated later test. An if/otherwise request runs only the applicable branch. Do not repeat settled steps or continue the character's broader goal.`, {
+  if (jointInterpretation) {
+    questions.progress_next = choice("After the selected next operation and its immediate effects, what remains of THIS submission? Use the operation you actually selected, together with currentRequestReceipts. A distinct later step must be explicitly authorized; a question or agreement does not authorize payment. A completed wait must not be repeated. Only the applicable branch of a conditional request runs.", {
       complete: "The requested immediate work is covered; no further action is authorized by this input",
       continue: "A distinct remaining step is explicitly requested and can be attempted next without a new reply or player choice",
       wait: "Further progress needs another person's reply, unknown evidence, consent or a new player choice",
@@ -196,7 +202,8 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const currentObservedFacts = claims.map(claim => ({ subject: agent.belief.localEntities[claim.subjectId]?.name,
     localEntityId: claim.subjectId, predicate: claim.predicate, value: claim.value, description: claim.description, stance: claim.stance,
     evidence: claim.evidenceIds.map(id => agent.belief.evidence[id]).filter(Boolean).map(item => ({ kind: item!.kind, step: item!.step })) }));
-  const actionPolicy = loadPromptAsset("user/direct-action.md");
+  const actionPolicy = jointInterpretation ? "Interpret all fields jointly as one next interaction under the player-interpretation system contract. Current receipts distinguish requested steps from executed work."
+    : loadPromptAsset("user/direct-action.md");
   const context = { actionPolicy, perspective: view.state, submittedAction: external ? { ...external, discourse: undefined } : null, discourse: external?.discourse ?? null, currentRequestReceipts,
     recentActions: recentActions.slice(-6).map(({ requested, target, actionKind, attempted, outcome, preparatoryFor }) => ({ requested, target, actionKind, attempted, outcome, preparatoryFor })),
     currentObservedFacts, intent: { goalId: intent.goalId, wakeReasons: intent.wakeReasons,
@@ -218,7 +225,13 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     intent.status = "waiting"; intent.wakeReasons = []; intent.wait = { entityIds: [], untilSeconds: null, reason: "same-input" };
     return { frame: null, audits: [] as ModelExecutionAudit[], reads: view.reads, cognition: null };
   }
-  const answers = await decisions.ask(agentId, context, view.reads, questions, profiles);
+  if (jointInterpretation) for (const question of Object.values(questions)) {
+    if (typeof question.instructions === "object" && question.instructions !== null && !Array.isArray(question.instructions)) {
+      question.instructions = { ...question.instructions,
+        task: "Bind this field to the same selected next interaction, using the current input, private evidence, discourse and settled receipts." };
+    }
+  }
+  const answers = await decisions.ask(agentId, context, view.reads, questions, profiles, jointInterpretation ? "interpretation" : undefined);
   const cognition = cognitiveUpdate(state, agentId, answers);
   intent.goalProgress = { ...intent.goalProgress, ...cognition.goals };
   if (answers.urgency?.type === "score") intent.urgency = answers.urgency.score;
@@ -310,14 +323,17 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const durationChoice = questions.duration ? selected(answers, "duration") : "default";
   const selectedDuration = /^d\d+$/u.test(durationChoice) ? durations[Number(durationChoice.slice(1))]?.seconds : undefined;
   const durationSeconds = !preparatoryFor && selectedDuration !== undefined ? selectedDuration : actionSeconds(state, profileId, preparatoryFor ? "" : rawText, false);
+  const quantityDefinitionId = questions.resource && selected(answers, "resource") !== "none" ? selected(answers, "resource") : null;
+  const amountField = !jointInterpretation && quantityDefinitionId ? `resource_amount_${resources.indexOf(quantityDefinitionId)}` : "amount";
+  const amountChoice = selected(answers, amountField);
   const frame: ActionFrame = { version: 1, id, actorId: agentId, actorEntityId: agent.entityId, submissionId: external?.submissionId ?? null,
     ...(expression ? { expression } : {}),
-    ...(external && questions[`progress_${kind}`] ? { requestContinuation: selected(answers, `progress_${kind}`) as NonNullable<ActionFrame["requestContinuation"]> } : {}),
+    ...(external && questions.progress_next ? { requestContinuation: selected(answers, "progress_next") as NonNullable<ActionFrame["requestContinuation"]> } : {}),
     proposal: { id, actorId: agentId, baseRevision: state.revision, rawText, goal: external?.goal ?? selectedGoal ?? rawText,
       means: external?.means ?? null, targetIds: target ? [targetKey] : [] }, kind, goalId: intent.goalId,
     targetEntityId: target, toolEntityId: ["use", "change", "speak"].includes(kind) ? view.entities[selected(answers, "tool")] ?? null : null,
-    quantityDefinitionId: questions.resource && selected(answers, "resource") !== "none" ? selected(answers, "resource") : null,
-    amount: selected(answers, "amount") === "unknown" ? null : Number(selected(answers, "amount").slice(1)), utterance,
+    quantityDefinitionId,
+    amount: amountChoice === "unknown" ? null : Number(amountChoice.slice(1)), utterance,
     capabilityId: ["use", "change"].includes(kind) && questions.capability && selected(answers, "capability") !== "none" ? selected(answers, "capability") : null,
     startedAtSeconds: state.truth.elapsedSeconds, dueAtSeconds: state.truth.elapsedSeconds + durationSeconds,
     durationSeconds, progressSeconds: 0, activityStatus: "active",
