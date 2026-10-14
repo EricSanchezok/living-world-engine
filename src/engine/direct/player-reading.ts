@@ -32,7 +32,7 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
       authorizedSteps: z.array(z.string()).describe("Only acts actually requested by THIS input, in order. Exclude quoted history, hypothetical branches not selected, other people's acts and added strategies."),
       establishedReceipts: z.array(z.string()).describe("Which requested steps have already executed in currentRequestReceipts, with their actual result. Empty for a fresh submission."),
       remainingSteps: z.array(z.string()).describe("Still unperformed authorized steps. A missing resource does not authorize obtaining or paying for it. Do not combine a physical transition and a later observation into one observation."),
-    }),
+    }).optional().describe("Diagnostic decomposition. Missing analysis does not invalidate a correctly bound executable interaction."),
     interaction: z.enum(["clarification", "world_action", "request_complete"]),
     action: z.object({ ...fieldShape, attempt: z.string(), utterance: z.string().nullable()
       .describe("The sole actual spoken text, or explicitly requested private reflection, for this step. No stage directions or unsolicited additions; null for a purely physical action or clarification."), manner: z.string().nullable(),

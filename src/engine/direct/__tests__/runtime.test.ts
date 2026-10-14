@@ -87,6 +87,25 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("executes a valid reading even if its diagnostic decomposition is omitted", async () => {
+    const f = await fixture({ operation: "observe", target: "door", creationEnabled: true,
+      creationResponse: { description: "门已清楚可见。", entities: [], facts: [], events: [] } });
+    const transport = f.transport.getMockImplementation()!;
+    f.transport.mockImplementation(async (...args) => {
+      const response = await transport(...args);
+      const body = await response.clone().json();
+      if (!body.choices) return response;
+      const value = JSON.parse(body.choices[0].message.content);
+      delete value.requestAnalysis;
+      body.choices[0].message.content = JSON.stringify(value);
+      return Response.json(body);
+    });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("看看门"));
+    expect(result.committed.outcomes[0]?.status).toBe("succeeded");
+    expect(readDirectState(result.state.executionState!, result.state).intents.player!.failure).toBeNull();
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("updates the actor's existing posture even when a separate object is the action target", async () => {
     const f = await fixture({ operation: "change", target: "door", factValues: { kneeling: "v1" } });
     f.world.initialState.truth.facts["actor-posture"] = { ...f.world.initialState.truth.facts["gate-lock"]!,

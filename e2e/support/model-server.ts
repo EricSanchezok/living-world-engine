@@ -85,6 +85,7 @@ const server = createServer(async (request, response) => {
     const readingAnswers = reading ? decisionAnswers({ ...Object.fromEntries(Object.entries(reading.catalog).map(([id, criteria]) =>
       [id, { type: "choice" as const, version: "e2e-reading", instructions: "Scripted E2E action", criteria }])), ...reading.cognition }) : {};
     const output = reading ? { understanding: "Inspect the supplied fixture surroundings", interaction: "world_action",
+      requestAnalysis: { authorizedSteps: [requestText], establishedReceipts: [], remainingSteps: [requestText] },
       action: { ...Object.fromEntries(Object.keys(reading.catalog).map(id => [id, readingAnswers[id]!.choice])),
         attempt: requestText, utterance: null, manner: null, literalQuote: "none" },
       cognition: Object.fromEntries(Object.keys(reading.cognition).map(id => [id, readingAnswers[id]!.choice])) }
