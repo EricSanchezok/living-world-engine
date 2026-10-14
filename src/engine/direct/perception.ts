@@ -35,7 +35,8 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       const facts = [...new Map([...(ownsAction || seesActor ? settlement.visibleFacts : []), ...appearanceFacts].filter(fact => fact.access.kind === "public" ||
         fact.access.kind === "agents" && fact.access.agentIds.includes(ownerId)).map(fact => [fact.id, fact])).values()];
       const details: NonNullable<ObservationPacket["scene"]>["details"] = [];
-      const targetLabel = settlement.frame.targetEntityId ? alias(agent, settlement.frame.targetEntityId, introductions).name : "四周";
+      const targetVisible = seesActor || settlement.frame.targetEntityId === agent.entityId;
+      const targetLabel = settlement.frame.targetEntityId && targetVisible ? alias(agent, settlement.frame.targetEntityId, introductions).name : "四周";
       const concreteAttempt = settlement.frame.kind === "move" ? `走向${targetLabel}`
         : settlement.frame.kind === "observe" ? settlement.frame.observationScope === "inventory" ? "清点随身物资" : `查看${targetLabel}`
         : settlement.frame.kind === "wait" ? "等候新的消息或条件变化"
@@ -44,7 +45,7 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       const voiced = completedExpression && settlement.frame.kind !== "reflect" ? settlement.frame.utterance : null;
       const spoken = voiced && settlement.deliveredToEntityIds.includes(agent.entityId);
       const observedActor = ownerId === settlement.frame.actorId ? "你" : alias(agent, settlement.frame.actorEntityId, introductions).name;
-      let summary = spoken ? `${alias(agent, settlement.frame.actorEntityId, introductions).name}说：“${settlement.frame.utterance}”` :
+      let summary = spoken ? `${alias(agent, settlement.frame.actorEntityId, introductions).name}${settlement.frame.targetEntityId && targetVisible ? `对${settlement.frame.targetEntityId === agent.entityId ? "你" : targetLabel}` : ""}说：“${settlement.frame.utterance}”` :
         ownerId === settlement.frame.actorId ? `你尝试了“${concreteAttempt}”。${settlement.outcome.summary}${voiced && settlement.frame.kind !== "speak" ? `你说：“${voiced}”` : ""}`
           : `${observedActor}的行动结果：${settlement.outcome.summary.replace(/^你/u, observedActor)}`;
       if (completedExpression && seesActor && settlement.frame.expression?.manner) summary += `\n可见举止：${settlement.frame.expression.manner}`;
@@ -59,7 +60,8 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
           .map(quantity => { const resource = state.truth.mechanics.quantities[quantity.definitionId]!; return `${quantity.amount}${resource.unit}${resource.name}`; });
         summary += `\n随身物资：${inventory.join("、") || "无"}。`;
       }
-      for (const operation of settlement.operations) if (operation.kind === "transfer_quantity") {
+      for (const operation of settlement.operations) if (operation.kind === "transfer_quantity" &&
+        (seesActor || operation.fromHolderId === agent.entityId || operation.toHolderId === agent.entityId)) {
         summary += `\n${alias(agent, operation.fromHolderId, introductions).name}向${alias(agent, operation.toHolderId, introductions).name}转移了${operation.amount}${state.truth.mechanics.quantities[operation.definitionId]!.unit}${state.truth.mechanics.quantities[operation.definitionId]!.name}。`;
       }
       for (const operation of settlement.operations) if ((operation.kind === "consume_quantity" || operation.kind === "produce_quantity") && operation.holderId === agent.entityId) {
@@ -96,12 +98,12 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       };
       const resource = settlement.frame.quantityDefinitionId ? state.truth.mechanics.quantities[settlement.frame.quantityDefinitionId] : null;
       const packet: ObservationPacket = { id, observerId: ownerId, step, kind: "outcome", summary, introductions, apparentClaims: [], sourceEventIds: [events[index]!.id],
-        scene: { actionKind: settlement.frame.kind, status: settlement.outcome.status, actor, actorLocalId: actorEntity.id,
+        scene: { actionKind: spoken && !seesActor ? "speak" : settlement.frame.kind, status: spoken && !seesActor ? "succeeded" : settlement.outcome.status, actor, actorLocalId: actorEntity.id,
           action: { target: ownsAction || seesActor || settlement.frame.targetEntityId === agent.entityId ? knownReference(settlement.frame.targetEntityId) : null,
             tool: ownsAction || seesActor ? knownReference(settlement.frame.toolEntityId) : null,
-            resource: settlement.frame.kind === "transfer" && resource ? { name: resource.name, unit: resource.unit, amount: settlement.frame.amount } : null,
+            resource: settlement.frame.kind === "transfer" && targetVisible && resource ? { name: resource.name, unit: resource.unit, amount: settlement.frame.amount } : null,
             durationSeconds: settlement.frame.durationSeconds, addressing: voiced ? settlement.frame.targetEntityId ? "direct" : "broadcast" : "none" },
-          attempt: ownerId === settlement.frame.actorId ? concreteAttempt : "", outcome: settlement.outcome.summary.replace(/^你/u, actor),
+          attempt: ownerId === settlement.frame.actorId ? concreteAttempt : "", outcome: spoken && !seesActor ? `${actor}说：“${voiced}”` : settlement.outcome.summary.replace(/^你/u, actor),
           manner: completedExpression && seesActor ? settlement.frame.expression?.manner ?? null : null,
           speech: voiced && (ownerId === settlement.frame.actorId || spoken) ? { speaker: actor, speakerLocalId: actorEntity.id, utterance: voiced } : null, details } };
       const evidenceId = runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "evidence", stage: "direct-perception", owner: ownerId, round: 0, ordinal: index });

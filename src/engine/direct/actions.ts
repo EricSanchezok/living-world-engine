@@ -11,6 +11,7 @@ import { agentCapabilityModels } from "../models/capability-bindings";
 import { privateActionView } from "./views";
 import { DirectDecisions, selected } from "./decisions";
 import type { ActionExpression, ActionFrame, ActionKind, DirectRuntimeState } from "./contracts";
+import { readPlayerAction } from "./player-reading";
 import { cognitiveQuestions, cognitiveUpdate } from "./cognition";
 import { orderedValues } from "./state";
 import { extendCapability } from "./capabilities";
@@ -100,7 +101,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const configuredProfiles = agentCapabilityModels(state, control, agentId);
   // Open player language needs interpretation before the world judges its effects.
   const jointInterpretation = Boolean(external && input.creationEnabled);
-  const profiles = jointInterpretation ? { ...configuredProfiles, decision: configuredProfiles.fallback } : configuredProfiles;
+  const profiles = configuredProfiles;
   const goals = orderedValues(agent.character.goals).filter(goal => goal.status === "active");
   const text = external?.rawText ?? "";
   if (external?.discourse && (external.discourse.agentId !== agentId ||
@@ -120,7 +121,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const capabilities = control.capabilities.filter(capability => capability.knownToAgentIds.includes(agentId)).sort((a, b) => a.id.localeCompare(b.id));
   const questions: Record<string, DecisionQuestionV2> = {
     ...cognitiveQuestions(state, agentId),
-    operation: choice("The next executable action actually requested. Resolve if/only-if conditions using the latest known properties, then select the authorized branch. A conditional request to operate is use/change when its stated conditions are established; do not substitute private reflection for doing it. Unknown conditions permit concrete observation or asking. Do not invent additional prerequisites.", kinds),
+    operation: choice(external ? "The next executable action actually requested. Resolve if/only-if conditions using the latest known properties, then select the authorized branch. A conditional request to operate is use/change when its stated conditions are established; do not substitute private reflection for doing it. Unknown conditions permit concrete observation or asking. Do not invent additional prerequisites." : "Choose what this NPC does in response to its NEW delivered observation. A question addressed to you invites an answer, a question, a refusal, or an honest statement that you do not know. Missing knowledge is something you can say; it does not by itself require silence. Interpret the new conversational move before deciding to ignore it.", external ? kinds : { ...kinds, speak: "Speak a natural response to the person who just addressed you, including a reply, refusal, follow-up or statement of ignorance.", wait: "Deliberately remain silent or wait because of a concrete motivation, distraction or current activity; not merely because the answer is unknown." }),
     target: choice("Target of the selected NEXT operation: observe inspects this object, use/change affects this object's properties, move approaches this destination. A machine operated through a control panel is the target; the panel is the tool. In 'inspect an object then report to a person', inspect the object first, not the later listener. Do not select a prerequisite object when the requested effect belongs to another known object.", targetCriteria),
     tool: choice("Separate instrument used on the target, or the item discussed in speech. A control panel used to test a machine is a tool. Select none when no separate instrument is involved.", targetCriteria),
     observation_scope: choice("If observing, what is actually being inspected? Inspecting one's money, food or possessions selects inventory; reviewing memories selects the reflect operation.", {
@@ -160,7 +161,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   if (!external) questions.urgency = { type: "score", version: "urgency-1", instructions: { task: sharedActionPolicy, field: "urgency of the next action" },
     criteria: ["May reasonably wait", "Should act when available", "Immediate deadline or danger"] };
   if (!external && intent.lastActionHash && intent.wakeReasons.includes("observation")) questions.relevant = { type: "noul", version: "wake-relevance-1",
-    instructions: { task: sharedActionPolicy, field: "Does the new observation require changing the prior wait or responding now?" } };
+    instructions: { task: sharedActionPolicy, field: "Is there a new conversational move addressed to this NPC, or other observation requiring a response or change? A direct question, correction or received payment is relevant even if the answer is unknown. Irrelevant background observations alone need not wake the Agent." } };
   if (resources.length) questions.resource = choice("resource", { none: "No quantified resource", ...Object.fromEntries(resources.map(id => [id, state.truth.mechanics.quantities[id]!.name])) });
   if (!jointInterpretation) for (const [index, resourceId] of resources.entries()) {
     const resource = state.truth.mechanics.quantities[resourceId]!;
@@ -202,7 +203,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const currentObservedFacts = claims.map(claim => ({ subject: agent.belief.localEntities[claim.subjectId]?.name,
     localEntityId: claim.subjectId, predicate: claim.predicate, value: claim.value, description: claim.description, stance: claim.stance,
     evidence: claim.evidenceIds.map(id => agent.belief.evidence[id]).filter(Boolean).map(item => ({ kind: item!.kind, step: item!.step })) }));
-  const actionPolicy = jointInterpretation ? "Interpret all fields jointly as one next interaction under the player-interpretation system contract. Current receipts distinguish requested steps from executed work."
+  const actionPolicy = jointInterpretation ? "Interpret all fields jointly as one next interaction. Current receipts distinguish requested steps from executed work."
     : loadPromptAsset("user/direct-action.md");
   const context = { actionPolicy, perspective: view.state, submittedAction: external ? { ...external, discourse: undefined } : null, discourse: external?.discourse ?? null, currentRequestReceipts,
     recentActions: recentActions.slice(-6).map(({ requested, target, actionKind, attempted, outcome, preparatoryFor }) => ({ requested, target, actionKind, attempted, outcome, preparatoryFor })),
@@ -225,13 +226,10 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     intent.status = "waiting"; intent.wakeReasons = []; intent.wait = { entityIds: [], untilSeconds: null, reason: "same-input" };
     return { frame: null, audits: [] as ModelExecutionAudit[], reads: view.reads, cognition: null };
   }
-  if (jointInterpretation) for (const question of Object.values(questions)) {
-    if (typeof question.instructions === "object" && question.instructions !== null && !Array.isArray(question.instructions)) {
-      question.instructions = { ...question.instructions,
-        task: "Bind this field to the same selected next interaction, using the current input, private evidence, discourse and settled receipts." };
-    }
-  }
-  const answers = await decisions.ask(agentId, context, view.reads, questions, profiles, jointInterpretation ? "interpretation" : undefined);
+  const reading = jointInterpretation ? await readPlayerAction({ decisions, agentId, context, questions,
+    profileId: configuredProfiles.fallback, language: input.definition.narrative.language, quotes }) : null;
+  const answers = reading?.answers ?? await decisions.ask(agentId, context, view.reads, questions, profiles);
+  const audits: ModelExecutionAudit[] = reading ? [reading.audit] : [];
   const cognition = cognitiveUpdate(state, agentId, answers);
   intent.goalProgress = { ...intent.goalProgress, ...cognition.goals };
   if (answers.urgency?.type === "score") intent.urgency = answers.urgency.score;
@@ -245,9 +243,9 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     const presentation: PresentationReply = { agentId, submissionId: external.submissionId, kind: "clarification", requested: text,
       focusLocalEntityId: agent.belief.localEntities[target] ? target : null,
       reason: "Explain the existing scene and conversation. No new action, perception or speech has occurred." };
-    return { frame: null, audits: [] as ModelExecutionAudit[], reads: view.reads, cognition, presentation };
+    return { frame: null, audits, reads: view.reads, cognition, presentation };
   }
-  if (external && ["speak", "wait", "reflect"].includes(operation) && selected(answers, "transfer_authority") === "give") {
+  if (external && !reading && ["speak", "wait", "reflect"].includes(operation) && selected(answers, "transfer_authority") === "give") {
     const resolved = await decisions.ask(agentId, { actionPolicy, currentPlayerRequest: text, perspective: view.state,
       currentRequestReceipts, selectedOperation: operation, authorizedTransfer: { recipient: selected(answers, "recipient"),
         resource: questions.resource ? selected(answers, "resource") : null, amount: selected(answers, "amount") } } as unknown as JsonValue, view.reads, {
@@ -259,7 +257,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     }, profiles);
     if (selected(resolved, "transfer_execution") === "transfer") operation = "transfer";
   }
-  if (external && operation === "transfer" && selected(answers, "transfer_authority") !== "give") {
+  if (external && !reading && operation === "transfer" && selected(answers, "transfer_authority") !== "give") {
     operation = selected(answers, "transfer_authority") === "request" ? "speak" : "wait";
   }
   intent.goalId = questions.goal && selected(answers, "goal") !== "none" ? selected(answers, "goal") : null;
@@ -281,9 +279,8 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     intent.status = "waiting"; intent.wait = { entityIds: target ? [target] : [], untilSeconds: null, reason: operation };
     return { frame: null, audits: [] as ModelExecutionAudit[], reads: view.reads, cognition };
   }
-  const audits: ModelExecutionAudit[] = [];
-  let utterance: string | null = null;
-  let expression: ActionExpression | undefined;
+  let utterance: string | null = !preparatoryFor ? reading?.expression.utterance ?? null : null;
+  let expression: ActionExpression | undefined = !preparatoryFor ? reading?.expression : undefined;
   const speech = selected(answers, operation === "reflect" ? "reflection" : "speech");
   const literal = /^q\d+$/u.test(speech) ? quotes[Number(speech.slice(1))] : undefined;
   const needsExpression = !preparatoryFor && (
@@ -291,7 +288,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     operation === "reflect" && speech === "create" ||
     external && ["use", "change"].includes(operation) && (!questions.capability || selected(answers, "capability") === "none") ||
     answers.expression?.type === "noul" && answers.expression.noul >= 0.5);
-  if (needsExpression && input.creationEnabled) {
+  if (!reading && needsExpression && input.creationEnabled) {
     const system = loadPromptAsset(external ? "system/player-expression.md" : "system/direct-utterance.md"), userPrompt = loadPromptAsset("user/direct-utterance.md");
     const generated = await decisions.provider.generateStructured({ ...decisions.scope, modelRegistrySnapshotHash: control.registryHash,
       profileId: profiles.creation, subjectId: agentId, role: "creation", modelInvocation: decisions.next(agentId),
@@ -306,8 +303,8 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     expression = { attempt: generated.value.attempt?.trim() || text || actionLabels[operation as ActionKind] || "尝试行动",
       utterance: literal && external && (operation === "speak" || generated.value.utterance?.trim()) ? literal : generated.value.utterance?.trim() || null, manner: generated.value.manner?.trim() || null };
     utterance = expression.utterance; audits.push(generated.audit);
-  } else if (literal && external && operation === "speak" && !preparatoryFor) utterance = literal;
-  else if (["speak", "reflect"].includes(operation) && !preparatoryFor) {
+  } else if (!reading && literal && external && operation === "speak" && !preparatoryFor) utterance = literal;
+  else if (!reading && ["speak", "reflect"].includes(operation) && !preparatoryFor) {
     if (/^span\d+$/u.test(speech)) utterance = spans[Number(speech.slice(4))] ?? null;
     else if (speech === "input" && external) utterance = text;
     else if (operation === "speak") throw new Error("This utterance needs creation or exact player words");
@@ -331,7 +328,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     ...(external && questions.progress_next ? { requestContinuation: selected(answers, "progress_next") as NonNullable<ActionFrame["requestContinuation"]> } : {}),
     proposal: { id, actorId: agentId, baseRevision: state.revision, rawText, goal: external?.goal ?? selectedGoal ?? rawText,
       means: external?.means ?? null, targetIds: target ? [targetKey] : [] }, kind, goalId: intent.goalId,
-    targetEntityId: target, toolEntityId: ["use", "change", "speak"].includes(kind) ? view.entities[selected(answers, "tool")] ?? null : null,
+    targetEntityId: target, toolEntityId: ["use", "change", "speak", "transfer"].includes(kind) ? view.entities[selected(answers, "tool")] ?? null : null,
     quantityDefinitionId,
     amount: amountChoice === "unknown" ? null : Number(amountChoice.slice(1)), utterance,
     capabilityId: ["use", "change"].includes(kind) && questions.capability && selected(answers, "capability") !== "none" ? selected(answers, "capability") : null,

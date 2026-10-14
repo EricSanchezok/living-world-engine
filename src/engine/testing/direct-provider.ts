@@ -14,7 +14,20 @@ export function directCreationContext(wire: DirectTestWire): Record<string, unkn
 }
 
 export function directDecisionContext(wire: DirectTestWire): Pick<DirectTestWire, "state" | "questions"> | undefined {
-  return wire.questions ? wire : directCreationContext(wire).decision as Pick<DirectTestWire, "state" | "questions"> | undefined;
+  if (wire.questions) return wire;
+  const context = directCreationContext(wire);
+  if (context.playerReading) return readingDecision(context.playerReading as TestReading);
+  return context.decision as Pick<DirectTestWire, "state" | "questions"> | undefined;
+}
+
+interface TestReading { state: Record<string, unknown>; catalog: Record<string, Record<string, string>>;
+  cognition: Record<string, DecisionQuestionV2>; exactQuotes: Record<string, string> }
+function readingDecision(reading: TestReading): Pick<DirectTestWire, "state" | "questions"> {
+  const choice = (criteria: Record<string, string>): DecisionQuestionV2 => ({ type: "choice", version: "test-reading", instructions: "Scripted interpretation boundary", criteria });
+  return { state: reading.state, questions: { ...Object.fromEntries(Object.entries(reading.catalog).map(([id, criteria]) => [id, choice(criteria)])),
+    ...reading.cognition, interaction: choice({ world_action: "World action", clarification: "Clarification" }),
+    speech: choice({ none: "None", create: "Created words", input: "Literal input", ...reading.exactQuotes }),
+    reflection: choice({ none: "None", create: "Private synthesis" }), expression: { type: "noul", version: "test-reading", instructions: "Expressive action" } } };
 }
 
 export function directTestProvider(respond: (wire: DirectTestWire, call: number) => unknown | Response | Promise<unknown | Response>,
@@ -31,7 +44,34 @@ export function directTestProvider(respond: (wire: DirectTestWire, call: number)
     const wire = JSON.parse(String(init?.body));
     calls++;
     const decision = !wire.questions ? directCreationContext(wire).decision as { state: unknown; questions: Record<string, DecisionQuestionV2> } | undefined : undefined;
-    let response = await (decision ? respond({ ...wire, ...decision }, calls) : !wire.questions && create ? create(wire) : respond(wire, calls));
+    const reading = !wire.questions ? directCreationContext(wire).playerReading as TestReading | undefined : undefined;
+    let response: unknown;
+    if (reading) {
+      const decoded = await respond({ ...wire, ...readingDecision(reading) }, calls);
+      if (decoded instanceof Response) return decoded;
+      const raw = decoded as Record<string, Record<string, unknown>>;
+      const pick = (id: string) => String(raw[id]?.choice ?? "none");
+      const operation = pick("operation"), speech = pick(operation === "reflect" ? "reflection" : "speech");
+      const request = reading.state.submittedAction as { rawText: string };
+      const literal = reading.exactQuotes[speech];
+      const expressive = Number(raw.expression?.noul ?? 0) >= 0.5;
+      let expression: { attempt?: string; utterance?: string | null; manner?: string | null } = {
+        attempt: request.rawText, utterance: operation === "speak" ? literal ?? (speech === "input" ? request.rawText : null) : null, manner: null };
+      const prepare = ["speak", "transfer"].includes(operation) && ["none", "discover"].includes(pick("recipient"));
+      if (!prepare && (operation === "speak" && (!literal || expressive) || operation === "reflect" && speech === "create" ||
+        ["use", "change"].includes(operation) || expressive)) {
+        const context = { ...reading.state, chosenDirection: operation, playerControlled: true, currentPlayerRequest: request.rawText };
+        const synthetic = { ...wire, messages: [{ role: "user", content: `Expression fixture\n\n${JSON.stringify(context)}\n\nReturn exactly one JSON object` }] };
+        const created = await (create ? create(synthetic) : respond(synthetic, calls));
+        if (created instanceof Response) return created;
+        expression = { ...expression, ...created as typeof expression };
+      }
+      response = { understanding: "Scripted coherent player interpretation", interaction: pick("interaction"),
+        action: { ...Object.fromEntries(Object.keys(reading.catalog).map(id => [id, pick(id)])),
+          attempt: expression.attempt ?? request.rawText, utterance: expression.utterance ?? null, manner: expression.manner ?? null,
+          literalQuote: literal && operation === "speak" ? speech : "none" },
+        cognition: Object.fromEntries(Object.keys(reading.cognition).map(id => [id, pick(id)])) };
+    } else response = await (decision ? respond({ ...wire, ...decision }, calls) : !wire.questions && create ? create(wire) : respond(wire, calls));
     if (response instanceof Response) return response;
     if (decision) response = { answers: Object.fromEntries(Object.entries(response as Record<string, Record<string, unknown>>).map(([id, answer]) =>
       [id, answer[String(answer.type)]])) };

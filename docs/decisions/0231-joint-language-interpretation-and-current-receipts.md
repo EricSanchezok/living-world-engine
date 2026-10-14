@@ -23,13 +23,13 @@ A player submission has dependent semantic fields: the chosen act determines whi
 
 ## Decision Outcome
 
-Choose the third option under [Spec 0184](../specs/0184-conversational-continuity-and-recovery.md). The player interpretation profile produces one consistent operation and continuation from the complete current request and settled receipts. Native independent decisions bind outgoing quantities to each candidate resource. Narration receives current observed receipts, already published text, first-appearance references and the player's authorized current holdings. World adjudication and transaction authority remain with their existing owners.
+Choose the third option under [Spec 0184](../specs/0184-conversational-continuity-and-recovery.md). The player reading contract produces one consistent operation, expression and continuation from the complete current request and settled receipts. Native independent decisions bind outgoing quantities to each candidate resource. Narration receives current observed receipts, already published text, first-appearance references and the player's authorized current holdings. World adjudication and transaction authority remain with their existing owners.
 
 ## Pros and Cons of the Options
 
 - Reconciliation retains a uniform interface but adds requests after avoidable contradictions and allows the initial inconsistent result to influence interpretation.
 - A universal generative planner handles dependencies directly but replaces efficient native decisions even for genuinely independent predicates.
-- Separate instruction profiles preserve the typed interface and native batching while expressing the actual dependency structure. The publication task repeats a small set of critical current facts and requires tests that distinguish historical requests from executed effects.
+- A dedicated generative reading preserves native batching for independent judgments while binding the dependent fields of human language in one response. The publication task repeats a small set of critical current facts and requires tests that distinguish historical requests from executed effects.
 
 ## Links
 

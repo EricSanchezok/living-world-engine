@@ -197,9 +197,9 @@ describe("direct activities use code-owned mechanics", () => {
     const f = await fixture("extend-world"); const first = await f.act("用缓冲材料临时隔离设备振动");
     expect(readDirectState(first.state.executionState!, first.state).capabilities).toHaveLength(1);
     expect(first.committed.observations.find(packet => packet.observerId === "inspector")?.summary).toContain("振动暂时隔离");
-    expect(f.transport).toHaveBeenCalledTimes(5);
+    expect(f.transport).toHaveBeenCalledTimes(4);
     const second = await f.act("复用工程师实际演示的隔振方法", "inspector");
-    expect(f.transport).toHaveBeenCalledTimes(7);
+    expect(f.transport).toHaveBeenCalledTimes(6);
     expect(f.transport.mock.calls.filter(([, init]) => {
       const wire = JSON.parse(String(init?.body)); return !directDecisionContext(wire) && !directCreationContext(wire).chosenDirection;
     })).toHaveLength(1);

@@ -193,12 +193,13 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
           { visible: "Its presence is observable", hidden: "Its presence is concealed", unknown: "Insufficient perceptual evidence" });
       }
     }
-    const recipients = ["speak", "transfer"].includes(frame.kind) && frame.targetEntityId ? [frame.targetEntityId]
-      : frame.utterance || ["speak", "use", "change", "move"].includes(frame.kind) ? orderedValues(state.agents).filter(agent => agent.id !== frame.actorId &&
-        state.truth.placements[agent.entityId] === state.truth.placements[frame.actorEntityId]).map(agent => agent.entityId) : [];
+    const nearby = frame.utterance || ["speak", "transfer", "use", "change", "move"].includes(frame.kind) ? orderedValues(state.agents)
+      .filter(agent => agent.id !== frame.actorId && state.truth.placements[agent.entityId] === state.truth.placements[frame.actorEntityId])
+      .map(agent => agent.entityId) : [];
+    const recipients = [...new Set([...["speak", "transfer"].includes(frame.kind) && frame.targetEntityId ? [frame.targetEntityId] : [], ...nearby])];
     candidates.set(prefix, recipients);
     for (const [ordinal, recipient] of recipients.entries()) {
-      questions[`${prefix}_delivery${ordinal}`] = question("can the recipient perceive this speech, transfer or physical method and effect", { action: frame as unknown as JsonValue, recipient },
+      questions[`${prefix}_delivery${ordinal}`] = question("Can this recipient actually perceive the words or physical method and effect? The addressed recipient and nearby witnesses are different roles. Ordinary audible speech may be overheard; whispering, barriers and distance may prevent it. Mere co-location does not authorize hearing private thoughts.", { action: frame as unknown as JsonValue, recipient },
         { delivered: "The actual words or physical method and effect are perceived", unavailable: "No actual perception", unknown: "Perception is uncertain" });
       questions[`${prefix}_actor_visibility${ordinal}`] = question("Can THIS recipient see the acting person's public appearance during this event? Judge actual line of sight, placement, light and concealment. Hearing a voice through a barrier does not establish sight; an unfamiliar person standing openly nearby can be seen without knowing their name.",
         { action: frame as unknown as JsonValue, recipient }, { visible: "The recipient can see the actor", hidden: "Only another channel such as sound is available", unknown: "Sight is not established" });

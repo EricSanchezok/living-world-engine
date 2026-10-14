@@ -25,7 +25,7 @@ export function privateActionView(state: Readonly<SimulationState>, agentId: str
 
 export function localWorldView(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frames: ActionFrame[]): DirectLocalView {
   const ids = new Set(frames.flatMap(frame => [frame.actorEntityId, frame.targetEntityId, frame.toolEntityId].filter((id): id is string => id !== null)));
-  for (const frame of frames) if (frame.utterance || ["speak", "use", "change", "move"].includes(frame.kind)) {
+  for (const frame of frames) if (frame.utterance || ["speak", "transfer", "use", "change", "move"].includes(frame.kind)) {
     for (const agent of Object.values(state.agents)) if (state.truth.placements[agent.entityId] === state.truth.placements[frame.actorEntityId]) ids.add(agent.entityId);
   }
   for (const frame of frames.filter(frame => frame.kind === "observe" && frame.observationScope !== "inventory")) {

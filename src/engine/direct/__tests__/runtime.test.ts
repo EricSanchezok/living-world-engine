@@ -124,6 +124,24 @@ describe("direct world through the actual simulation entry", () => {
     expect(heard.scene?.actor).toBe(actorVisible ? "附近的人" : "一个陌生的声音");
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
+  it("keeps a heard-only bystander outside an unseen transfer's targets and quantity", async () => {
+    const f = await fixture({ operation: "transfer", target: "guard", actorVisible: false, creationEnabled: true,
+      expression: 1, creationResponse: { attempt: "交付灵石并招呼一声", utterance: "听见了吗？", manner: null } });
+    const state = f.world.initialState;
+    state.truth.entities.listener = { ...state.truth.entities.keeper!, id: "listener" };
+    state.truth.placements.listener = state.truth.placements.player!;
+    state.agents.listener = { ...structuredClone(state.agents.keeper!), id: "listener", entityId: "listener" };
+    for (const binding of Object.values(state.agents.listener.bindings)) binding.canonicalEntityIds = binding.canonicalEntityIds.map(id => id === "keeper" ? "listener" : id);
+    f.world.historyBaseHash = historyReplayBaseHash(state);
+    const engine = new SimulationEngine(f.world, f.algorithm); await engine.bootstrapAgents();
+    const result = await engine.step({ ...f.roster, listener: { kind: "idle", agentId: "listener", reason: "timeout" } }, f.request("交付一枚灵石，同时问听见了吗"));
+    const heard = result.committed.observations.find(packet => packet.observerId === "listener")!;
+    expect(heard).toBeDefined();
+    expect(heard.scene).toMatchObject({ actionKind: "speak", action: { target: null, resource: null }, speech: { utterance: "听见了吗？" } });
+    expect(heard.summary).not.toContain("转移");
+    expect(heard.introductions.some(item => item.canonicalEntityId === "keeper")).toBe(false);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("retires an idle participant's pending continuation and cannot jump to a distant timer", async () => {
     const f = await fixture({ operation: "move", target: "yard", playerProgress: "continue", timerSeconds: 36_000 });
     await f.engine.bootstrapAgents();
@@ -156,7 +174,7 @@ describe("direct world through the actual simulation entry", () => {
   });
   it.each(["transfer", "expression"])("resolves contradictory payment direction without treating quoted words as consent: %s", async transferExecution => {
     const f = await fixture({ operation: "speak", target: "guard", transferAuthority: "give", transferExecution,
-      amount: "n2", creationEnabled: true });
+      amount: "n2", creationEnabled: false });
     await f.engine.bootstrapAgents();
     const text = transferExecution === "transfer" ? "现在实际交给守门人两枚灵石" : '只说：“我打算给你两枚灵石。”';
     const result = await f.engine.step(f.roster, f.request(text));
@@ -248,8 +266,8 @@ describe("direct world through the actual simulation entry", () => {
     const result = await f.engine.step(f.roster, f.request(text));
     expect(result.state.history[0]!.directEvent!.frames[0]!.amount).toBe(2);
     const wire = directDecisionContext(JSON.parse(String(f.transport.mock.calls[0]![1]!.body)))!;
-    expect(wire.questions.amount).toMatchObject({ criteria: { n2: "2", n120: "120" }, instructions: { currentPlayerRequest: text } });
-    expect(wire.questions.operation!.instructions).toMatchObject({ currentPlayerRequest: text, settledSteps: [] });
+    expect(wire.questions.amount).toMatchObject({ criteria: { n2: "2", n120: "120" } });
+    expect(wire.state).toMatchObject({ submittedAction: { rawText: text }, currentRequestReceipts: [] });
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
   it("keeps expansion proposal summaries out of committed observations", async () => {
@@ -263,15 +281,15 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.committed.observations.every(observation => !observation.scene?.speech)).toBe(true);
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
-  it("realizes selected speech when its independent content parameter is empty", async () => {
+  it("binds player expression and action in one interpretation while Jev adjudicates the world", async () => {
     const f = await fixture({ operation: "speak", target: "guard", speech: "none", creationEnabled: true,
       creationResponse: { attempt: "向守门人询问", utterance: "请问现在能通行吗？", manner: null } });
     await f.engine.bootstrapAgents();
     const result = await f.engine.step(f.roster, f.request("向守门人询问现在能否通行"));
     expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "speak", utterance: "请问现在能通行吗？" });
     const uses = result.state.history[0]!.directEvent!.decisions;
-    expect(uses.filter(use => use.batch.view.kind === "agent").flatMap(use => use.result.dispatches.map(dispatch => dispatch.profileId)))
-      .toEqual(["decision-deepseek"]);
+    expect(result.state.history[0]!.directEvent!.modelAudits.filter(audit => audit.profileId === "decision-deepseek")).toHaveLength(1);
+    expect(f.transport).toHaveBeenCalledTimes(2);
     expect(uses.filter(use => use.batch.view.kind === "world").flatMap(use => use.result.dispatches.map(dispatch => dispatch.profileId)))
       .toContain("decision-jev");
   });
@@ -289,7 +307,7 @@ describe("direct world through the actual simulation entry", () => {
     await f.engine.bootstrapAgents();
     const result = await f.engine.step(f.roster, f.request("条件满足后尝试打开门"));
     expect(result.state.history[0]!.directEvent!.frames[0]!.expression?.attempt).toBe("按已知步骤转动门上的控制装置，尝试开门");
-    expect(f.transport).toHaveBeenCalledTimes(3);
+    expect(f.transport).toHaveBeenCalledTimes(2);
     expect(result.state.truth.facts).toEqual(f.world.initialState.truth.facts);
   });
   it("records a physical attempt with no admitted effects without claiming its requested result or repeating it", async () => {
@@ -309,8 +327,9 @@ describe("direct world through the actual simulation entry", () => {
     const observed = await f.engine.step(f.roster, f.request("查看门的状态"));
     options.operation = "speak"; options.target = "guard"; options.speech = "create";
     await f.engine.step(f.roster, f.request("如实报告刚才观察到的情况", 1));
-    const creations = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => !directDecisionContext(wire));
-    const context = directCreationContext(creations.at(-1));
+    const readings = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => !wire.questions)
+      .map(directCreationContext).filter(context => context.playerReading);
+    const context = (readings.at(-1)!.playerReading as { state: Record<string, unknown> }).state;
     expect((context.currentObservedFacts as unknown[]).length).toBeGreaterThan(0);
     expect(context.currentObservedFacts).toEqual(expect.arrayContaining(Object.values(observed.state.agents.player!.belief.claims).map(claim =>
       expect.objectContaining({ predicate: claim.predicate, value: claim.value, stance: claim.stance }))));
@@ -515,7 +534,7 @@ describe("direct world through the actual simulation entry", () => {
   it("records a created private reflection as inference without world adjudication or delivery", async () => {
     const f = await fixture({ operation: "reflect", speech: "create", creationEnabled: true }); await f.engine.bootstrapAgents();
     const result = await f.engine.step(f.roster, f.request("整理已有证据，拟定下一步问题，但不说出口"));
-    expect(f.transport).toHaveBeenCalledTimes(2);
+    expect(f.transport).toHaveBeenCalledTimes(1);
     expect(result.committed.observations.map(packet => packet.observerId)).toEqual(["player"]);
     expect(result.committed.observations[0]!.summary).toContain("下一步询问消息来源");
     expect(Object.values(result.state.agents.player!.belief.evidence)).toContainEqual(expect.objectContaining({ kind: "inference", description: expect.stringContaining("下一步询问消息来源") }));

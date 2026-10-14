@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { executeDecisionV2, decisionOutputV2Schema, decisionPromptV2, validateDecisionBatchV2, type DecisionRequestV2 } from "../decision-v2";
+import { executeDecisionV2, decisionOutputV2Schema, validateDecisionBatchV2, type DecisionRequestV2 } from "../decision-v2";
 import { contentHash } from "../model-audit";
 import { directTestProvider, nativeChoice } from "../../testing/direct-provider";
 import { ModelOutputError } from "../model-provider";
@@ -23,15 +23,6 @@ function answers(questions: DecisionRequestV2["batch"]["questions"]) {
       probabilities: { "0": 0.3, "1": 0.7, "2": 0 }, confidence: 0.3 }]));
 }
 describe("direct native decisions", () => {
-  it("uses a distinct joint interpretation contract for dependent player fields", async () => {
-    const f = directTestProvider(wire => answers(wire.questions));
-    await executeDecisionV2(f.gateway, { ...request(), profileId: "decision-deepseek", instructionProfile: "interpretation" });
-    const wire = JSON.parse(String(f.transport.mock.calls[0]![1]!.body));
-    expect(wire.messages[0].content).toContain("parts of ONE interpretation");
-    expect(wire.messages[0].content).not.toContain("other questions and their answers are unavailable");
-    expect(decisionPromptV2("interpretation").version).not.toBe(decisionPromptV2().version);
-    expect(f.transport).toHaveBeenCalledTimes(1);
-  });
   it.each([false, true])("repairs only invalid language-model answers once, preserving independent values: fails=%s", async fails => {
     const f = directTestProvider((wire, call) => {
       if (call > 1) expect(Object.keys(wire.questions)).toEqual(["consent"]);

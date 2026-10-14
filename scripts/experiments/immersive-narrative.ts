@@ -51,7 +51,7 @@ async function main() {
     .filter(file => file.endsWith(".md")).sort().map(file => [file, contentHash(readFileSync(file, "utf8"))]));
   let stopped: string | undefined;
   const live = createJevLiveBudget(root, () => stopped ?? (phase === "development" && live.budget.summary.tranche &&
-    live.budget.summary.tranche.knownNanoCny + live.budget.summary.tranche.reservedNanoCny > 9_500_000_000 ? "development probe ceiling" : undefined));
+    live.budget.summary.tranche.knownNanoCny + live.budget.summary.tranche.reservedNanoCny > 30_000_000_000 ? "development allocation ceiling" : undefined));
   if (live.budget.summary.tranche?.id !== "conversation-continuity-20261014") {
     live.close(); throw new Error("The separate conversational-continuity grant must be active");
   }
