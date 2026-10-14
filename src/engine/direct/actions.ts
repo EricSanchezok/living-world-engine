@@ -139,7 +139,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       ...Object.fromEntries(known.map(([id, entity]) => [id, { name: entity.name, description: entity.description }])),
     }) } : {}),
     amount: choice("The actual quantity of the selected resource authorized by this action or its established terms. A deadline, duration, code or unrelated goal number is not a payment amount. Select unknown if the intended quantity is not among the candidates; never substitute another number.", { unknown: "No established amount", ...Object.fromEntries(amounts.map(amount => [`n${amount}`, String(amount)])) }),
-    speech: choice("The actual words THIS speaker should say next. For an NPC answering a question, select words that answer or acknowledge it, not a verbatim copy of the received question. Existing testimony is evidence, not a script to echo.", { none: "No speech", input: "The entire player input is already the literal utterance", create: "Realize the intended utterance naturally in this speaker's voice; action instructions are not literal speech",
+    speech: choice("The actual words THIS speaker should say next. For an NPC answering a question, select words that answer or acknowledge it, not a verbatim copy of the received question. Existing testimony is evidence, not a script to echo.", { none: "No speech", input: "EVERY word of the input is itself dialogue, with NO instruction describing speaking, delivery or movement", create: "The input contains an instruction: express only its intended spoken words, separating any stage direction or physical action",
       ...Object.fromEntries(quotes.map((quote, index) => [`q${index}`, quote])),
       ...Object.fromEntries(spans.map((span, index) => [`span${index}`, { literalWords: span }])) }),
     reflection: choice("If the operation is private reflection, does the request require NEW synthesis, distinctions, a plan or a formulated question? The instruction not to speak aloud concerns delivery; it does not mean no private text is needed.", {
@@ -338,7 +338,8 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     ...(external && questions.progress_next ? { requestContinuation: selected(answers, "progress_next") as NonNullable<ActionFrame["requestContinuation"]> } : {}),
     proposal: { id, actorId: agentId, baseRevision: state.revision, rawText, goal: external?.goal ?? selectedGoal ?? rawText,
       means: external?.means ?? null, targetIds: target ? [targetKey] : [] }, kind, goalId: intent.goalId,
-    targetEntityId: target, toolEntityId: ["use", "change", "speak", "transfer"].includes(kind) ? view.entities[selected(answers, "tool")] ?? null : null,
+    targetEntityId: target, toolEntityId: ["use", "change", "speak", "transfer"].includes(kind) && view.entities[selected(answers, "tool")] !== agent.entityId
+      ? view.entities[selected(answers, "tool")] ?? null : null,
     quantityDefinitionId,
     amount: amountChoice === "unknown" ? null : Number(amountChoice.slice(1)), utterance,
     capabilityId: ["use", "change"].includes(kind) && questions.capability && selected(answers, "capability") !== "none" ? selected(answers, "capability") : null,

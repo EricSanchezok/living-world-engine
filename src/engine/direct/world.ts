@@ -199,7 +199,10 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     const recipients = [...new Set([...["speak", "transfer"].includes(frame.kind) && frame.targetEntityId ? [frame.targetEntityId] : [], ...nearby])];
     candidates.set(prefix, recipients);
     for (const [ordinal, recipient] of recipients.entries()) {
-      questions[`${prefix}_delivery${ordinal}`] = question("Can this recipient actually perceive the words or physical method and effect? The addressed recipient and nearby witnesses are different roles. Ordinary audible speech may be overheard; whispering, barriers and distance may prevent it. Mere co-location does not authorize hearing private thoughts.", { action: frame as unknown as JsonValue, recipient },
+      questions[`${prefix}_delivery${ordinal}`] = question(frame.utterance
+        ? "Can this recipient hear THESE actually spoken words? Nearby ordinary audible speech or a shout is heard unless established distance, a barrier, whispering, deafness or another concrete circumstance prevents it. Missing names, unfamiliarity, uncertainty about the claim, or not being its addressee do not prevent hearing. Judge hearing only, not whether the recipient will answer, agree or obey. Private thoughts are never spoken words."
+        : "Can this recipient perceive THIS physical method and its actual effect? Use sight and other available senses, with the established placement, concealment and barriers. Decide perception independently of willingness to respond. Private thoughts and hidden properties are not observable.",
+      { action: frame as unknown as JsonValue, recipient, samePlace: state.truth.placements[recipient] === state.truth.placements[frame.actorEntityId] },
         { delivered: "The actual words or physical method and effect are perceived", unavailable: "No actual perception", unknown: "Perception is uncertain" });
       questions[`${prefix}_actor_visibility${ordinal}`] = question("Can THIS recipient see the acting person's public appearance during this event? Judge actual line of sight, placement, light and concealment. Hearing a voice through a barrier does not establish sight; an unfamiliar person standing openly nearby can be seen without knowing their name.",
         { action: frame as unknown as JsonValue, recipient }, { visible: "The recipient can see the actor", hidden: "Only another channel such as sound is available", unknown: "Sight is not established" });
@@ -409,7 +412,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       ? (candidates.get(prefix) ?? []).filter((_, ordinal) => selected(answers, `${prefix}_delivery${ordinal}`) === "delivered") : [];
     if (frame.kind === "speak" && !frame.utterance) { status = "blocked"; detail = "还没有形成实际话语。"; }
     else if (frame.kind === "speak" && ["succeeded", "partial"].includes(status)) detail = deliveredToEntityIds.length
-      ? `你说：“${frame.utterance}”话语已送达。` : `你说：“${frame.utterance}”没有听众作出回应。`;
+      ? `你说：“${frame.utterance}”话语已送达。` : `你说：“${frame.utterance}”暂时没有听到答复。`;
     if (!["succeeded", "partial"].includes(status)) operations = [];
     prepared.push({ actionId: frame.id, status, summary: detail, operations, reads: view.reads,
       visibleFactIds: ["succeeded", "partial"].includes(status) ? [...visibleFacts, ...(expansion?.facts ?? []),

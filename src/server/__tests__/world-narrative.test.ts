@@ -17,7 +17,18 @@ describe("immutable narrative paragraphs", () => {
     scene.observations = []; scene.speech = [];
     scene.reply = { agentId: scene.agentId, submissionId: "action", kind: "recovery", requested: "等五秒", focusLocalEntityId: null, reason: "Processing failed before the wait executed." };
     expect(narrativeTask(scene)).toMatchObject({ kind: "recovery", newReceipts: [], executionBoundary: {
-      newPhysicalEffects: false, elapsedWorldTime: false, newSpeech: false, requestedButNotExecuted: "等五秒",
+      newPhysicalEffects: false, elapsedWorldTime: false, newSpeech: false, originalRequest: "等五秒", earlierCommittedSteps: [],
+    } });
+  });
+  it("keeps a completed wait distinct from the failed inspection in the same request", () => {
+    const scene = structuredClone(source); scene.observations = []; scene.speech = [];
+    scene.reply = { agentId: scene.agentId, submissionId: "action", kind: "recovery", requested: "等五秒再看", focusLocalEntityId: null, reason: "The later inspection was interrupted." };
+    scene.priorRequestReceipts = [{ ...source.observations[0]!, summary: "等待已经完成。", worldTimeSeconds: 5,
+      scene: { ...source.observations[0]!.scene!, actor: "你", actionKind: "wait", speech: null, outcome: "等待已经完成。",
+        action: { target: null, tool: null, resource: null, durationSeconds: 5, addressing: "none" } } }];
+    expect(narrativeTask(scene)).toMatchObject({ newReceipts: [], newSpeech: [], executionBoundary: {
+      originalRequest: "等五秒再看", earlierCommittedSteps: [{ operation: "wait", status: "succeeded", worldTimeSeconds: 5,
+        action: { durationSeconds: 5 }, actualResult: "等待已经完成。" }],
     } });
   });
   it("retains concrete inspection findings if prose generation cannot finish", () => {

@@ -234,14 +234,20 @@ describe("direct world through persistent WorldHost", () => {
       expect(replaySimulationState(saved.state)).toEqual(saved.state);
     } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
   });
-  it("returns a failed player task for retry without running unrelated NPCs or changing physical state", async () => {
+  it.each([false, true])("preserves committed progress when a player task fails, with a prior wait: %s", async priorWait => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-failure-"));
+    const failedText = priorWait ? "等五秒再看。" : "fail-this-request";
     const f = directTestProvider(wire => {
-      if (wire.questions.operation && JSON.stringify(wire.state).includes("fail-this-request") &&
-        (wire.state as { submittedAction?: { rawText: string } }).submittedAction?.rawText === "fail-this-request") return new Response("unavailable", { status: 401 });
+      const state = wire.state as { submittedAction?: { rawText: string }; currentRequestReceipts?: unknown[] };
+      const firstWait = wire.questions.operation && state.submittedAction?.rawText === failedText && priorWait && !state.currentRequestReceipts?.length;
+      if (wire.questions.operation && state.submittedAction?.rawText === failedText && !firstWait) return new Response("unavailable", { status: 401 });
       return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id, nativeAnswer(q,
-        id === "expression" ? 0 : id.startsWith("paragraph") ? "grounded" : id === "operation" ? "observe" : id === "target" ? "self" : id.includes("outcome") ? "succeeded" : "none")]));
-    }, wire => (directCreationContext(wire).scene as { reply?: unknown } | undefined)?.reply ? { paragraphs: ["刚才那一步还没有执行起来，眼前的情况没有因此改变。你可以重新说明想做的事。"] } : createText(wire));
+        id === "expression" ? 0 : id.startsWith("paragraph") ? "grounded" : id === "operation" ? firstWait ? "wait" : "observe" :
+          firstWait && id === "duration" ? "d0" : firstWait && id === "progress_next" ? "continue" :
+          id === "target" ? "self" : id.includes("outcome") ? "succeeded" : "none")]));
+    }, wire => (directCreationContext(wire).scene as { reply?: unknown } | undefined)?.reply ? { paragraphs: [priorWait
+      ? "五秒已经等过了，后面的查看暂时没有执行起来；你可以只重试查看这一步。"
+      : "刚才那一步还没有执行起来，眼前的情况没有因此改变。你可以重新说明想做的事。"] } : createText(wire));
     await f.registry.capture();
     const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
     const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
@@ -250,20 +256,28 @@ describe("direct world through persistent WorldHost", () => {
       const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } }), id = created.summary.id;
       await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });
       const participant = Object.values(database.readInstance(id).document.participants)[0]!;
-      await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "first-fails", text: "fail-this-request" });
-      for (let i = 0; i < 100 && database.readInstance(id).document.state.revision === 0; i++) await new Promise(resolve => setTimeout(resolve, 10));
+      await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "first-fails", text: failedText });
+      for (let i = 0; i < 200; i++) {
+        if (Object.values(database.readInstance(id).document.runs).some(run => run.status === "failed")) break;
+        await new Promise(resolve => setTimeout(resolve, 10));
+      }
       await host.drainNarratives(id);
       const failed = database.readInstance(id).document;
       expect(Object.values(failed.runs).find(run => run.rootIntents.some(intent => intent.submissionId === "first-fails"))?.status).toBe("failed");
-      expect(failed.state.truth).toEqual(world.initialState.truth); expect(f.transport).toHaveBeenCalledTimes(3);
-      expect(failed.narratives[0]).toMatchObject({ status: "complete", source: { reply: { kind: "recovery" } }, segments: [{ text: "刚才那一步还没有执行起来，眼前的情况没有因此改变。你可以重新说明想做的事。" }] });
+      expect(failed.state.truth).toEqual({ ...world.initialState.truth, elapsedSeconds: priorWait ? 5 : 0, events: failed.state.truth.events });
+      expect(failed.state.truth.events).toHaveLength(priorWait ? 1 : 0);
+      if (!priorWait) expect(f.transport).toHaveBeenCalledTimes(3);
+      const recovery = failed.narratives.find(beat => beat.source.reply?.kind === "recovery")!;
+      expect(recovery.status).toBe("complete");
+      expect(recovery.source.priorRequestReceipts).toHaveLength(priorWait ? 1 : 0);
+      if (priorWait) expect(recovery.source.priorRequestReceipts![0]).toMatchObject({ scene: { actionKind: "wait", status: "succeeded", action: { durationSeconds: 5 } } });
       expect(failed.actionWindow, JSON.stringify({ revision: failed.state.revision, runs: failed.runs })).not.toBeNull();
       expect(failed.actionWindow?.requiredAgentIds).toContain("player");
       expect(replaySimulationState(failed.state)).toEqual(failed.state);
-      await host.submitAction(id, participant.id, { expectedRevision: 1, submissionId: "retry-observe", text: "查看自己" });
-      for (let i = 0; i < 100 && database.readInstance(id).document.state.revision === 1; i++) await new Promise(resolve => setTimeout(resolve, 10));
+      await host.submitAction(id, participant.id, { expectedRevision: failed.state.revision, submissionId: "retry-observe", text: "查看自己" });
+      for (let i = 0; i < 100 && database.readInstance(id).document.state.revision === failed.state.revision; i++) await new Promise(resolve => setTimeout(resolve, 10));
       await host.drainNarratives(id);
-      expect(database.readInstance(id).document.state.truth.elapsedSeconds).toBe(1);
+      expect(database.readInstance(id).document.state.truth.elapsedSeconds).toBe(priorWait ? 6 : 1);
     } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
   });
   it("continues one compound player intent and returns a delivered NPC refusal to the player", async () => {

@@ -18,11 +18,16 @@ import { isSemanticId } from "../../contracts/state-schemas";
 function option(question: DecisionQuestionV2, predicate: (value: unknown) => boolean) {
   return question.type === "choice" ? Object.entries(question.criteria).find(([, value]) => predicate(value))?.[0] ?? "unchanged" : "none";
 }
-async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "construct" | "ongoing" | "wait" = "repair", deadline = 120, randomBinding: "valid" | "recover" | "absent" = "valid") {
+async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "construct" | "ongoing" | "wait" = "repair", deadline = 120, randomBinding: "valid" | "recover" | "absent" = "valid", invalidPlacement = false) {
   let extensionUsed = false;
   let operationOverride: string | undefined;
   const f = directTestProvider(wire => {
     if (!wire.questions && directCreationContext(wire).chosenDirection) return { attempt: "使用材料完成请求的具体操作", utterance: null, manner: null };
+    if (!wire.questions && invalidPlacement) {
+      invalidPlacement = false;
+      return { description: "调整姿势", applicability: "行动者可以调整姿势", effectDescription: "调整姿势",
+        effects: [{ kind: "placement", subject: "actor", destination: "actor" }] };
+    }
     if (!wire.questions && mode === "construct") return { description: "制作可见提示牌", applicability: "有适用的材料时制作", effectDescription: "制成一块可见提示牌",
       effects: [{ kind: "object", name: "提示牌", description: "现场制作的提示牌。", placement: "target" }] };
     if (!wire.questions) return { description: "临时隔振", applicability: "用现有缓冲材料隔离设备振动", effectDescription: "设备获得可观察的临时隔振状态",
@@ -78,6 +83,18 @@ async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "co
 }
 
 describe("direct activities use code-owned mechanics", () => {
+  it("repairs a capability that confuses a posture with placing an entity inside itself", async () => {
+    const f = await fixture("extend", 120, "valid", true);
+    const first = await f.act("调整姿势来缓冲设备振动");
+    const capability = readDirectState(first.state.executionState!, first.state).capabilities[0]!;
+    expect(capability.effects).not.toContainEqual({ kind: "placement", subject: "actor", destination: "actor" });
+    expect(first.committed.outcomes[0]!.status).toBe("succeeded");
+    const requests = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => !wire.questions)
+      .map(wire => directCreationContext(wire)).filter(context => context.roleBindings);
+    expect(requests).toHaveLength(2);
+    expect(requests[1]!.repairIssues).toEqual([expect.stringContaining("inside itself")]);
+    expect(replaySimulationState(first.state)).toEqual(first.state);
+  });
   it.each(["recover", "absent"] as const)("records an applicable draw when its initial result binding is missing: %s", async binding => {
     const f = await fixture("test", 120, binding);
     const admitted = await f.act("运行压力测试10秒");

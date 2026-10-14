@@ -27,6 +27,7 @@ export interface ScenePacket {
   knownEntities: Array<{ localEntityId: string; name: string; description: string }>;
   currentHoldings?: { coverage: "complete-current-self-holdings"; quantities: Array<{ name: string; unit: string; amount: number }> };
   observedProperties?: Array<{ subject: string; predicate: string; value: JsonValue; stance: string; description: string }>;
+  priorRequestReceipts?: ScenePacket["observations"];
 }
 export interface NarrativeBeat {
   id: string;
@@ -94,7 +95,13 @@ export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscou
     executionBoundary: source.reply ? {
       newPhysicalEffects: false, newSpeech: false, elapsedWorldTime: false,
       explanation: source.reply.reason,
-      requestedButNotExecuted: source.reply.kind === "recovery" ? source.reply.requested : null,
+      scope: "Only this failed or explanatory boundary; earlier committed steps of the same request remain executed.",
+      originalRequest: source.reply.requested,
+      earlierCommittedSteps: (source.priorRequestReceipts ?? []).map(observation => ({
+        operation: observation.scene?.actionKind ?? null, action: observation.scene?.action ?? null,
+        status: observation.scene?.status ?? null, worldTimeSeconds: observation.worldTimeSeconds,
+        actualResult: executedDescription({ ...observation, scene: observation.scene ?? undefined }),
+      })),
     } : null,
     newReceipts: source.observations.map(observation => ({ id: observation.id,
       actor: observation.scene?.actor ?? null, actorLocalId: observation.scene?.actorLocalId ?? null,
@@ -148,6 +155,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
       };
       source.knownEntities = Object.values(agent.belief.localEntities).map(entity => ({ localEntityId: entity.id, name: entity.name, description: entity.description }));
       source.currentHoldings = { coverage: "complete-current-self-holdings", quantities: projectAgentPerspective(document.state, agent).mechanics.quantities };
+      source.location = localPlace ? agent.belief.localEntities[localPlace.localEntityId]?.name ?? null : null;
       source.boundary = { revision: observation.revision, step: observation.step, worldTimeSeconds: observation.worldTimeSeconds };
       source.observedProperties = Object.values(agent.belief.claims).map(claim => ({
         subject: agent.belief.localEntities[claim.subjectId]?.name ?? claim.subjectId, predicate: claim.predicate,
@@ -169,7 +177,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
       if (failed && failed.atRevision === step.baseRevision && !failed.servicePause && intent.activeSubmission) {
         replies.push({ submissionId: intent.activeSubmission.submissionId, agentId: participant.agentId, kind: "recovery",
           requested: intent.activeSubmission.rawText, focusLocalEntityId: null,
-          reason: "Processing this requested step failed before it could submit a world result. The requested action, including any wait, did not execute in this step. Explain the processing interruption in ordinary language, preserve earlier confirmed progress, and say the person can restate or retry the pending step. Do not invent a physical obstacle or a character's refusal." });
+          reason: "Processing the next unperformed step was interrupted before it could commit. The original request may contain earlier steps that already completed: use earlierCommittedSteps to identify and preserve them, including elapsed waiting. Explain only the remaining interruption; retry only the unfinished part. Do not claim the entire original request failed or invent a physical obstacle or refusal." });
       }
       for (const reply of replies) {
         const id = `reply-${contentHash([participant.id, step.revision, reply.submissionId]).slice(0, 24)}`;
@@ -182,6 +190,9 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
           boundary: { revision: step.revision, step: step.step, worldTimeSeconds: step.temporalBoundary.toElapsedSeconds },
           world: { name: document.world.name, language: document.world.narrative.language, style: document.world.narrative.style },
           playerName: participant.displayName, location: projectAgentPerspective(document.state, agent).self.location?.name ?? null, observations: [], speech: [],
+          priorRequestReceipts: reply.kind === "recovery" ? document.narratives.filter(beat =>
+            beat.participantId === participant.id && beat.submissionId === reply.submissionId && !beat.source.reply)
+            .flatMap(beat => structuredClone(beat.source.observations)) : [],
           currentHoldings: { coverage: "complete-current-self-holdings", quantities: projectAgentPerspective(document.state, agent).mechanics.quantities },
           knownEntities: Object.values(agent.belief.localEntities).map(entity => ({ localEntityId: entity.id, name: entity.name, description: entity.description })),
           observedProperties: Object.values(agent.belief.claims).map(claim => ({ subject: agent.belief.localEntities[claim.subjectId]?.name ?? claim.subjectId,
@@ -225,7 +236,7 @@ export async function checkNarrativeGrounding(provider: StructuredModelProvider,
     modelInvocation: ordinal, batch: { version: 2, view: { kind: "agent", agentId: source.agentId, projectionHash: contentHash(state) },
       dependencies: {}, state, questions: Object.fromEntries(paragraphs.flatMap((_, index) => Object.entries(groundingAxes).map(([axis, focus]) => [`paragraph${index}_${axis}`, {
         type: "choice" as const, version: "narrative-grounding-4", instructions: { task: loadPromptAsset("user/narrative-grounding.md"), index, focus,
-          executionBoundary: source.reply ? { kind: source.reply.kind, noNewActionOrElapsedTime: true, requestedButNotExecuted: source.reply.requested } : null,
+          executionBoundary: narrativeTask(source, discourse).executionBoundary,
           executedNow: evidence.observations.map(observation => ({ actor: observation.scene?.actor ?? null,
             kind: observation.scene?.actionKind ?? null, status: observation.scene?.status ?? null, receipt: observation.summary })),
         },

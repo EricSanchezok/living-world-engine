@@ -14,10 +14,14 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   questions: Record<string, DecisionQuestionV2>; profileId: string; language: string; quotes: string[] }) {
   const { decisions, agentId, questions } = input;
   const catalog = Object.fromEntries(actionFields.flatMap(id => questions[id]?.type === "choice"
-    ? [[id, questions[id].criteria]] : []));
+    ? [[id, id === "speech" ? Object.fromEntries(Object.entries(questions[id].criteria).filter(([key]) => !key.startsWith("span")))
+      : questions[id].criteria]] : []));
   const cognition = Object.fromEntries(Object.entries(questions).filter(([id]) => /^(goal|belief)_status_/u.test(id)));
-  const enumShape = Object.fromEntries(Object.entries(catalog).map(([id, criteria]) =>
-    [id, z.enum([...new Set([...Object.keys(criteria), "none"])] as [string, ...string[]]).optional()]));
+  const enumShape = Object.fromEntries(Object.entries(catalog).map(([id, criteria]) => {
+    const instructions = questions[id]?.instructions as { field?: string } | undefined;
+    return [id, z.enum([...new Set([...Object.keys(criteria), "none"])] as [string, ...string[]])
+      .describe(instructions?.field ?? id).optional()];
+  }));
   const system = loadPromptAsset("system/player-reading.md");
   const userPrompt = "Read the current input in the supplied conversation and return one coherent next interaction. Only catalog keys may identify entities or parameter choices.";
   const state = input.context as Record<string, JsonValue>;
@@ -48,6 +52,9 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   const defaults: Record<string, string> = { timing: "default", duration: "default", observation_scope: "target", amount: "unknown" };
   for (const [id, criteria] of Object.entries(catalog)) {
     if (action[id] && Object.hasOwn(criteria, action[id]!)) continue;
+    if (["timing", "duration", "amount"].includes(id) && (!action[id] || action[id] === "none")) {
+      action[id] = defaults[id]!; continue;
+    }
     if (active.has(id) && generated.value.interaction !== "clarification") {
       throw Object.assign(new Error(`Player reading did not bind the selected action's ${id}`), { audit: generated.audit });
     }
@@ -65,9 +72,8 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   const quote = action.literalQuote === "none" ? null : input.quotes[Number(action.literalQuote!.slice(1))];
   const request = state.submittedAction as { rawText: string };
   const speechChoice = action.speech;
-  const span = speechChoice ? catalog.speech?.[speechChoice] : null;
   const literal = speechChoice === "input" ? request.rawText : /^q\d+$/u.test(speechChoice ?? "") ? input.quotes[Number(speechChoice!.slice(1))]
-    : span && typeof span === "object" && "literalWords" in span ? String(span.literalWords) : null;
+    : null;
   const expression: ActionExpression = { attempt: action.attempt!.trim(), utterance: quote ?? (operation === "speak" ? literal : null) ?? action.utterance?.trim() ?? null,
     manner: action.manner?.trim() || null };
   return { answers, expression, audit: generated.audit };

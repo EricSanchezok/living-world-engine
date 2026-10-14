@@ -103,6 +103,23 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
+  it("uses ordinary timing when an explicit duration belongs to a different clause", async () => {
+    const f = await fixture({ operation: "observe", target: "door", duration: "none", creationEnabled: true,
+      readingOverrides: { timing: "none", duration: "none" } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("他让我等五秒，我先看看门。"));
+    expect(result.state.truth.elapsedSeconds, JSON.stringify(result.state.history.at(-1)?.directEvent?.frames)).toBe(1);
+    expect(readDirectState(result.state.executionState!, result.state).intents.player!.failure).toBeNull();
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("keeps the actor's body out of the separately bound tool role", async () => {
+    const f = await fixture({ operation: "use", target: "door", tool: "self", creationEnabled: true,
+      readingOverrides: { resource: "none" }, creationResponse: { attempt: "用肩膀推门", utterance: null, manner: null } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("用肩膀推一下门"));
+    expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "use", toolEntityId: null });
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("ignores malformed auxiliary cognition and an unused observation branch without cancelling a wait", async () => {
     const f = await fixture({ operation: "wait", duration: "d0", creationEnabled: true,
       readingOverrides: { observation_scope: "none", belief_status_0: "support" } });
@@ -417,6 +434,8 @@ describe("direct world through the actual simulation entry", () => {
     const frame = result.state.history[0]!.directEvent!.frames[0]!;
     expect(frame).toMatchObject({ kind: "speak", utterance: "还有谁？", proposal: { rawText: "向周围大喊", goal: "大喊一声还有谁" } });
     expect(result.committed.observations.find(o => o.observerId === "keeper")?.scene?.speech?.utterance).toBe("还有谁？");
+    const reading = directCreationContext(JSON.parse(String(f.transport.mock.calls[0]![1]?.body))).playerReading as { catalog: { speech: Record<string, unknown> } };
+    expect(Object.keys(reading.catalog.speech).sort()).toEqual(["create", "input", "none"]);
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
   it("combines a requested gesture with exact quoted words in one expression", async () => {
@@ -634,6 +653,7 @@ describe("direct world through the actual simulation entry", () => {
     const result = await f.engine.step(f.roster, f.request("走到庭院"));
     expect(result.state.truth.placements.player).toBe("courtyard");
     expect(result.state.history[0]!.directEvent!.frames[0]!.kind).toBe("move");
+    expect(result.committed.observations.find(observation => observation.observerId === "player")!.summary).toContain("你仍在石门前庭范围内。");
     expect(f.transport).toHaveBeenCalledTimes(2);
   });
   it.each(["给守门人2枚灵石", "给守门人两颗灵石"])("transfers the selected amount atomically and replays without charging twice: %s", async text => {

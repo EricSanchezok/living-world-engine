@@ -21,13 +21,16 @@ export async function extendCapability(input: { state: Readonly<SimulationState>
   decisions: DirectDecisions; profileId: string; context: JsonValue }) {
   const { state, control, frame, decisions } = input, audits: ModelExecutionAudit[] = [];
   const system = loadPromptAsset("system/direct-capability.md"), userPrompt = loadPromptAsset("user/direct-capability.md");
+  const roleBindings = { actor: "The acting character",
+    target: !frame.targetEntityId ? null : frame.targetEntityId === frame.actorEntityId ? "The actor itself" : "A separate selected target entity",
+    tool: !frame.toolEntityId ? null : frame.toolEntityId === frame.targetEntityId ? "The same entity as target" : "A separate selected instrument entity" };
   let previous: unknown = null, repairIssues: string[] = [];
   for (let attempt = 0; attempt < 2; attempt++) {
     let result;
     try { result = await decisions.provider.generateStructured({ ...decisions.scope, modelRegistrySnapshotHash: control.registryHash,
       profileId: input.profileId, subjectId: frame.actorId, role: "creation", modelInvocation: decisions.next(frame.actorId),
       system, userPrompt, promptVersion: `direct-capability-${contentHash({ system, userPrompt })}`, schemaName: "DirectCapabilityV1", schema: declaration,
-      context: { requestedAction: input.context, conditionProfiles: state.truth.mechanics.conditionProfiles, previous, repairIssues } as unknown as JsonValue, jsonExamplePolicy: "omit" });
+      context: { requestedAction: input.context, roleBindings, conditionProfiles: state.truth.mechanics.conditionProfiles, previous, repairIssues } as unknown as JsonValue, jsonExamplePolicy: "omit" });
     } catch (error) {
       if (!(error instanceof ModelOutputError)) throw Object.assign(error instanceof Error ? error : new Error(String(error)), { audits });
       if (error.audit) audits.push(error.audit);
@@ -42,6 +45,10 @@ export async function extendCapability(input: { state: Readonly<SimulationState>
       if (effect.kind !== "object" && effect.subject === "tool" && !frame.toolEntityId) repairIssues.push("The action has no tool");
       if (effect.kind === "object" && effect.placement === "target" && !frame.targetEntityId) repairIssues.push("The object placement has no target");
       if (effect.kind === "placement" && effect.destination === "target" && !frame.targetEntityId) repairIssues.push("The destination has no target");
+      if (effect.kind === "placement") {
+        const bound = { actor: frame.actorEntityId, target: frame.targetEntityId, tool: frame.toolEntityId, scene: state.truth.placements[frame.actorEntityId] };
+        if (bound[effect.subject] && bound[effect.subject] === bound[effect.destination]) repairIssues.push("A placement cannot put an entity inside itself. Express posture or use of an appearance detail as a fact on its actual owner.");
+      }
     }
     if (repairIssues.length) continue;
     const id = `capability-${contentHash(result.value).slice(0, 24)}`;
