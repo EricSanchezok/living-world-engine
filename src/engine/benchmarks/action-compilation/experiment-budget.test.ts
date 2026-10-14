@@ -17,6 +17,45 @@ function journal(): string {
 }
 const reservation = { id: "http-1", trialId: "P01-B1-0", phase: "discovery" as const, inputCeiling: 1_000_000, outputCeiling: 131_072 };
 
+describe("explicit token-limit removal", () => {
+  const policy: ExperimentBudgetPolicy = { maximumNanoCny: 100, inputMissNanoCnyPerToken: 1,
+    inputHitNanoCnyPerToken: 1, outputNanoCnyPerToken: 1, maxHttpRequests: { discovery: 2 }, maxKnownTokens: { discovery: 10 } };
+  const evidence = { phase: "discovery" as const, reason: "User explicitly requests a full run without the aggregate token limit", evidenceHash: "f".repeat(64) };
+  const request = { ...reservation, inputCeiling: 20, outputCeiling: 2 };
+  it("retains accounting and reloads the authorization without rewriting history", () => {
+    const file = journal(), budget = new ExperimentBudget(file, policy);
+    budget.reserve({ ...request, id: "held", trialId: "old", inputCeiling: 2 }); budget.markUnknown("held");
+    budget.quarantineUnknown("held", { reason: evidence.reason, evidenceHash: evidence.evidenceHash });
+    const before = budget.summary, prefix = readFileSync(file, "utf8");
+    expect(() => budget.reserve(request)).toThrow("token reserve");
+    budget.removeTokenLimit(evidence);
+    expect(budget.summary).toMatchObject({ tokenLimits: { discovery: null }, reservedNanoCny: before.reservedNanoCny,
+      remainingNanoCny: before.remainingNanoCny, maximumNanoCny: before.maximumNanoCny });
+    expect(readFileSync(file, "utf8").startsWith(prefix)).toBe(true);
+    const reopened = new ExperimentBudget(file, policy); reopened.reserve(request);
+    reopened.settle(request.id, { input: 20, output: 2, cacheHit: 0 });
+    expect(reopened.summary.phases.discovery.knownTokens).toBe(22);
+    expect(reopened.summary.reservedNanoCny).toBe(4);
+    expect(new ExperimentBudget(file, policy).summary).toEqual(reopened.summary);
+    expect(() => reopened.reserve({ ...request, id: "third" })).toThrow("HTTP budget");
+  });
+  it("preserves the spending ceiling and rejects duplicate authorization", () => {
+    const file = journal(), budget = new ExperimentBudget(file, policy); budget.removeTokenLimit(evidence);
+    expect(() => budget.reserve({ ...request, inputCeiling: 100 })).toThrow("CNY budget");
+    expect(() => budget.removeTokenLimit(evidence)).toThrow("existing unchanged limit");
+    expect(budget.summary.authorizations).toEqual([]);
+    expect(budget.summary.phases.discovery.httpRequests).toBe(0);
+  });
+  it("requires drained sends and does not resolve unknown provider usage", () => {
+    const budget = new ExperimentBudget(journal(), policy);
+    budget.reserve({ ...request, inputCeiling: 2 });
+    expect(() => budget.removeTokenLimit(evidence)).toThrow("drain all live requests");
+    budget.markUnknown(request.id); budget.removeTokenLimit(evidence);
+    expect(() => budget.reserve({ ...request, id: "blocked" })).toThrow("unsettled provider usage");
+    expect(budget.summary.blockingUnknown).toEqual([request.id]);
+  });
+});
+
 describe("provider model cohorts in one budget", () => {
   const old = { accountId: "account", modelId: "retired", inputMissNanoCnyPerToken: 4, inputHitNanoCnyPerToken: 2,
     outputNanoCnyPerToken: 8, pricingSource: "https://example.org/tariff", pricingCheckedAt: "2026-09-09" };

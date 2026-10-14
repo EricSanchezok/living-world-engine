@@ -62,6 +62,8 @@ Native fee reservations cover at least 65,536 input tokens and expand to the com
 
 If a prospective send cannot fit token or monetary capacity while other sends are in flight, the live transport waits for an active reservation to settle and checks the same limits again. Streamed capacity is retained through terminal usage. Waiting creates no reservation or HTTP request and respects cancellation and the experiment stop condition. Historical holds are never released by this queue; unknown usage, request exhaustion and capacity that still does not fit after active sends finish retain their original failure paths.
 
+An explicit human authorization can remove a named phase's aggregate token limit through the existing append-only budget journal. Effective limits and the authorization evidence appear in its summary. Token usage and monetary holds remain measured; this operation grants no currency or request capacity and resolves no unknown usage. [Decision 0239](../decisions/0239-record-explicit-token-limit-removal.md) defines the accounting boundary.
+
 The production native profile permits a 4 MB serialized request, matching the creation/fallback wire guard. This is transport protection, not a token estimate. An actual provider context rejection transfers the complete shared-state batch to its configured fallback once. These batches do not contain per-question dependency projections, so dividing the question list cannot establish that their shared state fits. A missing fallback preserves the actual failure without resending the same oversized state. Capability expressiveness considers authored random procedures as well as properties; describing operating steps does not by itself require a second result concept.
 
 ## Receipt interpretation

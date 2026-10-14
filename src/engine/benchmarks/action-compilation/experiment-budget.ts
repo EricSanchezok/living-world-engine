@@ -56,6 +56,11 @@ const phaseBudgetsSchema = z.array(z.strictObject({
 })).min(1).max(budgetPhases.length);
 const entrySchema = z.discriminatedUnion("kind", [
   z.strictObject({
+    kind: z.literal("remove_token_limit"), phase: z.enum(budgetPhases), priorTokenLimit: integer.positive(),
+    reason: z.string().min(10), evidenceHash: hashSchema,
+    budgetHash: z.string(), previousHash: z.string().nullable(),
+  }),
+  z.strictObject({
     kind: z.literal("hold_http_rejection"), id: z.string().min(1), statusCode: z.number().int().min(400).max(599),
     reason: z.string().min(10), evidenceHash: hashSchema,
     budgetHash: z.string(), previousHash: z.string().nullable(),
@@ -139,6 +144,7 @@ export class ExperimentBudget {
   private tranche?: { entry: Extract<Entry, { kind: "authorize_tranche" }>; priorIds: Set<string> };
   private maximumNanoCny: number;
   private readonly requestLimits: Partial<Record<ExperimentPhase, number>>;
+  private readonly tokenLimitRemovals = new Map<ExperimentPhase, Extract<Entry, { kind: "remove_token_limit" }>>();
   readonly policyHash: string;
 
   constructor(private readonly journal: string, readonly policy: ExperimentBudgetPolicy = AC_FP1_BUDGET) {
@@ -202,6 +208,9 @@ export class ExperimentBudget {
     return {
       maximumNanoCny: this.maximumNanoCny, authorizations: structuredClone(this.authorizations), tranche,
       requestLimits: structuredClone(this.requestLimits),
+      tokenLimits: Object.fromEntries(budgetPhases.map(phase => [phase,
+        this.tokenLimitRemovals.has(phase) ? null : this.policy.maxKnownTokens[phase] ?? 0])),
+      tokenLimitRemovals: [...this.tokenLimitRemovals.values()].map(entry => structuredClone(entry)),
       remainingNanoCny: Math.min(this.maximumNanoCny - estimatedPeakNanoCny - reservedNanoCny, tranche?.remainingNanoCny ?? Infinity),
       phases, unsettled, reservedNanoCny,
       inFlight: unsettled.filter((id) => this.liveRequests.has(id)),
@@ -237,7 +246,11 @@ export class ExperimentBudget {
     if (entry.budgetHash !== this.policyHash || entry.previousHash !== this.lastHash) {
       throw new ExperimentBudgetError("budget policy or journal chain mismatch");
     }
-    if (entry.kind === "register_model_price") {
+    if (entry.kind === "remove_token_limit") {
+      if (this.tokenLimitRemovals.has(entry.phase) || entry.priorTokenLimit !== this.policy.maxKnownTokens[entry.phase]) {
+        throw new ExperimentBudgetError("token limit removal requires an existing unchanged limit");
+      }
+    } else if (entry.kind === "register_model_price") {
       if (!this.policy.prices || this.price(entry.priceId)) throw new ExperimentBudgetError("model price registration requires a new immutable price identifier");
     } else if (entry.kind === "reconcile_routed_usage") {
       const reservation = this.reservations.get(entry.id);
@@ -343,7 +356,7 @@ export class ExperimentBudget {
       const pending = [...this.reservations.values()].filter((reservation) => !this.settlements.has(reservation.id));
       const phaseReservedTokens = pending.filter((reservation) => reservation.phase === entry.phase)
         .reduce((sum, reservation) => sum + reservation.inputCeiling + reservation.outputCeiling, 0);
-      if (totals.phases[entry.phase].knownTokens + phaseReservedTokens + entry.inputCeiling + entry.outputCeiling >
+      if (!this.tokenLimitRemovals.has(entry.phase) && totals.phases[entry.phase].knownTokens + phaseReservedTokens + entry.inputCeiling + entry.outputCeiling >
         (this.policy.maxKnownTokens[entry.phase] ?? 0)) throw new ExperimentBudgetError("phase token reserve does not fit", "token-limit");
       const ceiling = this.charge(entry.inputCeiling, entry.outputCeiling, 0, entry);
       for (const group of this.phaseBudgets) {
@@ -381,7 +394,8 @@ export class ExperimentBudget {
 
   private apply(entry: Entry): void {
     this.validate(entry);
-    if (entry.kind === "register_model_price") this.registeredPrices.set(entry.priceId, structuredClone(entry.price));
+    if (entry.kind === "remove_token_limit") this.tokenLimitRemovals.set(entry.phase, structuredClone(entry));
+    else if (entry.kind === "register_model_price") this.registeredPrices.set(entry.priceId, structuredClone(entry.price));
     else if (entry.kind === "reconcile_routed_usage") {
       this.routedResponses.set(entry.id, structuredClone(entry));
       this.settlements.set(entry.id, entry.usage);
@@ -461,6 +475,13 @@ export class ExperimentBudget {
     requestCapacity?: Array<{ phase: ExperimentPhase; priorHttpRequests: number; additionalRequests: number }> }): void {
     if (this.liveRequests.size) throw new ExperimentBudgetError("drain all live requests before authorization");
     this.persist(entrySchema.parse({ ...input, kind: "authorize_tranche", budgetHash: this.policyHash, previousHash: this.lastHash }));
+  }
+
+  /** Explicit user authorization removes only the aggregate token gate; usage and all monetary holds remain accounted. */
+  removeTokenLimit(input: { phase: ExperimentPhase; reason: string; evidenceHash: string }): void {
+    if (this.liveRequests.size) throw new ExperimentBudgetError("drain all live requests before removing a token limit");
+    this.persist(entrySchema.parse({ ...input, kind: "remove_token_limit", priorTokenLimit: this.policy.maxKnownTokens[input.phase],
+      budgetHash: this.policyHash, previousHash: this.lastHash }));
   }
 
   /** Explicit peak-tariff review changes only named known valuations, retaining original charges and all unknown holds. */
