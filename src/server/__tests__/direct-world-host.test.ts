@@ -31,14 +31,20 @@ function createText(wire: DirectTestWire) {
 }
 
 describe("direct world through persistent WorldHost", () => {
-  it("finishes a requested inspection with its report despite another character's intervening remark", async () => {
+  it.each([{ progress: "continue", reply: "speak" }, { progress: "complete", reply: "speak" }, { progress: "complete", reply: "wait" }])(
+    "keeps a requested inspection's reply opportunity ($progress → $reply) despite an intervening remark", async ({ progress: inspectionProgress, reply }) => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-inspection-report-"));
     const words = "请检查设备，再告诉我还缺什么。";
+    let replyChoices = 0;
     const f = directTestProvider(wire => {
       const context = wire.state as { perspective?: { agentId: string; interactions?: Array<{ relation: string; operation: string }> } };
       const who = context.perspective?.agentId;
       const own = context.perspective?.interactions?.filter(item => item.relation === "self") ?? [];
-      const operation = who === "inspector" ? own.some(item => item.operation === "observe") ? "speak" : "observe"
+      if (who === "inspector" && own.some(item => item.operation === "observe")) {
+        replyChoices++;
+        expect(context.perspective).toMatchObject({ respondingTo: { utterance: words, relation: "addressed_to_self" } });
+      }
+      const operation = who === "inspector" ? own.some(item => item.operation === "observe") ? reply : "observe"
         : who === "quartermaster" && own.some(item => item.operation === "speak") ? "wait" : "speak";
       return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
         let choice = id.startsWith("paragraph") ? "grounded" : id.includes("outcome") ? "succeeded" : id.includes("delivery") ? "delivered"
@@ -52,8 +58,9 @@ describe("direct world through persistent WorldHost", () => {
         if (id.startsWith("progress_")) choice = "complete";
         if (id.endsWith("_request_progress")) {
           const task = q.instructions as { task: { data: { action: { actorId: string; kind: string }; responseTo: { utterance: string } } } };
-          choice = task.task.data.action.actorId === "inspector" && task.task.data.action.kind === "observe" ? "continue" : "complete";
-          if (choice === "continue") expect(task.task.data.responseTo.utterance).toBe(words);
+          const inspecting = task.task.data.action.actorId === "inspector" && task.task.data.action.kind === "observe";
+          choice = inspecting ? inspectionProgress : "complete";
+          if (inspecting) expect(task.task.data.responseTo.utterance).toBe(words);
         }
         return [id, nativeAnswer(q, id === "expression" ? 0 : choice)];
       }));
@@ -81,10 +88,13 @@ describe("direct world through persistent WorldHost", () => {
       await host.drainNarratives(id);
       const document = database.readInstance(id).document;
       const acts = document.state.history.flatMap(step => step.directEvent?.frames ?? []).filter(frame => frame.actorId === "inspector");
-      expect(acts.map(frame => frame.kind)).toEqual(["observe", "speak"]);
-      expect(acts[1]!.utterance).toBe("我检查过了，密封还需要处理。");
-      expect(acts[1]!.causeActionId).toBe(acts[0]!.causeActionId);
-      expect(document.narratives.flatMap(beat => beat.segments).some(segment => segment.text.includes(acts[1]!.utterance!))).toBe(true);
+      expect(replyChoices).toBeGreaterThan(0);
+      expect(acts.map(frame => frame.kind)).toEqual(reply === "speak" ? ["observe", "speak"] : ["observe"]);
+      if (reply === "speak") {
+        expect(acts[1]!.utterance).toBe("我检查过了，密封还需要处理。");
+        expect(acts[1]!.causeActionId).toBe(acts[0]!.causeActionId);
+        expect(document.narratives.flatMap(beat => beat.segments).some(segment => segment.text.includes(acts[1]!.utterance!))).toBe(true);
+      }
       expect(document.actionWindow?.requiredAgentIds).toContain("engineer");
       expect(replaySimulationState(document.state)).toEqual(document.state);
     } finally { database.close(); rmSync(root, { recursive: true, force: true }); }

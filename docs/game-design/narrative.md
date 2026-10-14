@@ -8,7 +8,13 @@ This reference owns the expression and presentation boundaries approved in [Spec
 
 Requested reports receive the character's latest observed property values and actual holdings. A recorded attempt is not evidence of its intended result. Explicitly requested deception remains expressible; ordinary reporting cannot infer completion from an attempted action alone.
 
+The first successful private inspection caused by a player's addressed or broadcast speech preserves that speech as the cause for one further NPC decision, even when the inspection's semantic progress says complete. The NPC can report, decline or wait; code does not force speech. Intervening background remarks cannot replace this retained cause. A second inspection under that same cause uses the ordinary progress and no-progress rules.
+
+The private action view identifies the received interaction being answered as `respondingTo`. It is projected only from that actor's retained observations of the causal event. Unknown or forgotten events produce no such entry; the causal pointer never imports an unheard question or another actor's hidden knowledge.
+
 With creation enabled, player-language interpretation uses the pinned fallback decision profile, DeepSeek by default, through the coherent player reading contract and private projection. Jev handles autonomous action selection and world adjudication. Disabling creation retains the native ordinary-action path. This route is recorded as a normal participant interpretation request, not a context fallback; every request remains included in usage and latency.
+
+A structurally readable interpretation with missing or invalid parameters on its selected branch receives one targeted correction against the original input and catalog. Unused branches remain exempt. Both attempts stay in the action audit, including when correction fails; transport and service-cap errors retain their existing failure handling. No effects execute before a bound reading is available.
 
 With creation enabled, a new player use/change operation without a learned capability receives a concrete expression using known procedures and tools. It remains an attempted operation for adjudication. Learned capability reuse and saved ongoing activities retain their execution path without mandatory expression generation.
 

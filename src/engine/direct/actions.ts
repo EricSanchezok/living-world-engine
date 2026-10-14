@@ -97,7 +97,7 @@ export function actionSeconds(state: Readonly<SimulationState>, profileId: strin
 export async function chooseAction(input: { state: Readonly<SimulationState>; definition: WorldRuntimeContract; control: DirectRuntimeState;
   decisions: DirectDecisions; agentId: string; external?: ExternalActionInput; creationEnabled: boolean }) {
   const { state, control, decisions, agentId, external } = input;
-  const agent = state.agents[agentId]!, intent = control.intents[agentId]!, view = privateActionView(state, agentId);
+  const agent = state.agents[agentId]!, intent = control.intents[agentId]!, view = privateActionView(state, agentId, intent.causeActionId);
   if (external) intent.activeSubmission = structuredClone(external);
   const configuredProfiles = agentCapabilityModels(state, control, agentId);
   // Open player language needs interpretation before the world judges its effects.
@@ -239,7 +239,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const reading = jointInterpretation ? await readPlayerAction({ decisions, agentId, context, questions,
     profileId: configuredProfiles.fallback, language: input.definition.narrative.language, quotes }) : null;
   const answers = reading?.answers ?? await decisions.ask(agentId, context, view.reads, questions, profiles);
-  const audits: ModelExecutionAudit[] = reading ? [reading.audit] : [];
+  const audits: ModelExecutionAudit[] = reading ? reading.audits : [];
   const cognition = cognitiveUpdate(state, agentId, answers);
   intent.goalProgress = { ...intent.goalProgress, ...cognition.goals };
   if (answers.urgency?.type === "score") intent.urgency = answers.urgency.score;

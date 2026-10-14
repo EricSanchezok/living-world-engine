@@ -87,6 +87,36 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it.each([false, true])("repairs an omitted executed operation once and retains both audits (repeat failure: %s)", async repeatFailure => {
+    const f = await fixture({ operation: "observe", target: "door", creationEnabled: true,
+      creationResponse: { description: "门在眼前。", entities: [], facts: [], events: [] } });
+    const transport = f.transport.getMockImplementation()!;
+    let readings = 0;
+    f.transport.mockImplementation(async (...args) => {
+      const wire = JSON.parse(String(args[1]?.body));
+      const context = wire.questions ? null : directCreationContext(wire);
+      const response = await transport(...args);
+      if (!context?.playerReading) return response;
+      readings++;
+      if (readings === 2) expect(context.repair).toMatchObject({ issues: ["Player reading did not bind the selected action's operation"] });
+      if (readings > 1 && !repeatFailure) return response;
+      const body = await response.clone().json(), value = JSON.parse(body.choices[0].message.content);
+      delete value.action.operation;
+      body.choices[0].message.content = JSON.stringify(value);
+      return Response.json(body);
+    });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("看看门"));
+    expect(readings).toBe(2);
+    const audits = result.state.history[0]!.directEvent!.modelAudits.filter(audit => audit.promptVersion.startsWith("player-reading-"));
+    expect(audits).toHaveLength(2);
+    expect(new Set(audits.flatMap(audit => audit.invocations.map(invocation => invocation.id))).size).toBe(2);
+    if (repeatFailure) {
+      expect(result.state.truth).toEqual(f.world.initialState.truth);
+      expect(readDirectState(result.state.executionState!, result.state).intents.player?.status).toBe("failed");
+    } else expect(result.committed.outcomes[0]?.status).toBe("succeeded");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("executes a valid reading even if its diagnostic decomposition is omitted", async () => {
     const f = await fixture({ operation: "observe", target: "door", creationEnabled: true,
       creationResponse: { description: "门已清楚可见。", entities: [], facts: [], events: [] } });
@@ -147,6 +177,10 @@ describe("direct world through the actual simulation entry", () => {
     const view = privateActionView(result.state, "keeper").state;
     expect(view).toMatchObject({ interactions: [{ relation: "addressed_to_self", operation: "speak",
       utterance: "请先检查，然后告诉我你实际看到了什么。", result: null }] });
+    const cause = result.state.history[0]!.directEvent!.frames[0]!.id;
+    expect(privateActionView(result.state, "keeper", cause).state).toMatchObject({ respondingTo: {
+      relation: "addressed_to_self", utterance: "请先检查，然后告诉我你实际看到了什么。" } });
+    expect(privateActionView(result.state, "keeper", "unobserved-action").state).toMatchObject({ respondingTo: null });
     const playerView = privateActionView(result.state, "player").state;
     expect(playerView).toMatchObject({ interactions: [{ relation: "self" }] });
     expect(JSON.stringify(playerView)).not.toContain("PRIVATE-CODE");
@@ -156,7 +190,7 @@ describe("direct world through the actual simulation entry", () => {
     for (const evidence of Object.values(forgotten.agents.keeper!.belief.evidence)) if (evidence.sourceId && keeperObservationIds.has(evidence.sourceId)) {
       delete forgotten.agents.keeper!.belief.evidence[evidence.id];
     }
-    expect(privateActionView(forgotten, "keeper").state).toMatchObject({ interactions: [] });
+    expect(privateActionView(forgotten, "keeper", cause).state).toMatchObject({ interactions: [], respondingTo: null });
   });
   it("closes an already executed submission without another action or time advance", async () => {
     const options = { operation: "wait", duration: "d0", playerProgress: "continue", interaction: "world_action",

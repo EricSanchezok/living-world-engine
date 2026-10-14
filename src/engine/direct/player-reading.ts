@@ -1,4 +1,6 @@
 import { z } from "zod";
+import type { ModelExecutionAudit } from "../contracts/model";
+import type { StructuredModelResult } from "../models/model-provider";
 import type { DecisionAnswerV2, DecisionQuestionV2 } from "../models/decision-v2";
 import { loadPromptAsset } from "../prompts";
 import { contentHash } from "../models/model-audit";
@@ -39,37 +41,57 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
       literalQuote: z.enum(["none", ...input.quotes.map((_, index) => `q${index}`)] as [string, ...string[]]) }),
     cognition: z.record(z.string(), z.unknown()).optional(),
   });
-  const generated = await decisions.provider.generateStructured({ ...decisions.scope, subjectId: agentId,
-    modelRegistrySnapshotHash: decisions.control.registryHash, modelInvocation: decisions.next(agentId),
-    profileId: input.profileId, role: "decision", schemaName: "PlayerActionReadingV4", system, userPrompt,
-    promptVersion: `player-reading-${contentHash({ system, userPrompt })}`,
-    context: { playerReading: { state: context, language: input.language, catalog, cognition,
-      exactQuotes: Object.fromEntries(input.quotes.map((quote, index) => [`q${index}`, quote])) } },
-    schema, jsonExamplePolicy: "omit" });
+  const audits: ModelExecutionAudit[] = [];
+  let repair: { previousReading: unknown; issues: string[] } | null = null;
+  let generated: StructuredModelResult<z.infer<typeof schema>>;
+  for (;;) {
+    try {
+      generated = await decisions.provider.generateStructured({ ...decisions.scope, subjectId: agentId,
+        modelRegistrySnapshotHash: decisions.control.registryHash, modelInvocation: decisions.next(agentId),
+        profileId: input.profileId, role: "decision", schemaName: "PlayerActionReadingV4", system, userPrompt,
+        promptVersion: `player-reading-${contentHash({ system, userPrompt })}`,
+        context: { playerReading: { state: context, language: input.language, catalog, cognition,
+          exactQuotes: Object.fromEntries(input.quotes.map((quote, index) => [`q${index}`, quote])) },
+          ...(repair ? { repair: { ...repair, instruction: "Correct only the reported executed-branch bindings against the same original request and catalog. Return the complete reading. Do not invent another action or alter the player's words." } } : {}) },
+        schema, jsonExamplePolicy: "omit" });
+    } catch (error) {
+      const failure = error instanceof Error ? error : new Error(String(error));
+      throw Object.assign(failure, { audits: [...audits, ...((failure as { audits?: ModelExecutionAudit[] }).audits ?? [])] });
+    }
+    audits.push(generated.audit);
+    const previousReading = structuredClone(generated.value);
+    const action = generated.value.action as Record<string, string | null>;
+    const operation = action.operation;
+    const issues: string[] = [];
+    if (generated.value.interaction === "request_complete" &&
+      (!Array.isArray(state.currentRequestReceipts) || state.currentRequestReceipts.length === 0)) {
+      issues.push("Request completion requires a receipt from this submission");
+    }
+    const active = new Set(["operation", "timing", "duration", "progress_next", "goal",
+      ...(["speak", "transfer"].includes(operation ?? "") ? ["recipient",
+        ...(action.recipient === "discover" ? ["search_location"] : [])] : ["target"]),
+      ...(operation === "observe" ? ["observation_scope"] : []),
+      ...(["use", "change", "expand", "transfer"].includes(operation ?? "") ? ["tool", "resource", "capability",
+        ...(action.resource && action.resource !== "none" ? ["amount"] : [])] : [])]);
+    const defaults: Record<string, string> = { timing: "default", duration: "default", observation_scope: "target", amount: "unknown" };
+    for (const [id, criteria] of Object.entries(catalog)) {
+      if (!active.has(id)) { action[id] = defaults[id] ?? "none"; continue; }
+      if (action[id] && Object.hasOwn(criteria, action[id]!)) continue;
+      if (["timing", "duration", "amount"].includes(id) && (!action[id] || action[id] === "none")) {
+        action[id] = defaults[id]!; continue;
+      }
+      if (active.has(id) && generated.value.interaction === "world_action") {
+        issues.push(`Player reading did not bind the selected action's ${id}`);
+      }
+      action[id] = defaults[id] ?? "none";
+    }
+
+    if (!issues.length) break;
+    if (repair) throw Object.assign(new Error(issues.join("; ")), { audits });
+    repair = { previousReading, issues };
+  }
   const action = generated.value.action as Record<string, string | null>;
   const operation = action.operation;
-  if (generated.value.interaction === "request_complete" &&
-    (!Array.isArray(state.currentRequestReceipts) || state.currentRequestReceipts.length === 0)) {
-    throw Object.assign(new Error("Request completion requires a receipt from this submission"), { audit: generated.audit });
-  }
-  const active = new Set(["operation", "timing", "duration", "progress_next", "goal",
-    ...(["speak", "transfer"].includes(operation ?? "") ? ["recipient",
-      ...(action.recipient === "discover" ? ["search_location"] : [])] : ["target"]),
-    ...(operation === "observe" ? ["observation_scope"] : []),
-    ...(["use", "change", "expand", "transfer"].includes(operation ?? "") ? ["tool", "resource", "capability",
-      ...(action.resource && action.resource !== "none" ? ["amount"] : [])] : [])]);
-  const defaults: Record<string, string> = { timing: "default", duration: "default", observation_scope: "target", amount: "unknown" };
-  for (const [id, criteria] of Object.entries(catalog)) {
-    if (!active.has(id)) { action[id] = defaults[id] ?? "none"; continue; }
-    if (action[id] && Object.hasOwn(criteria, action[id]!)) continue;
-    if (["timing", "duration", "amount"].includes(id) && (!action[id] || action[id] === "none")) {
-      action[id] = defaults[id]!; continue;
-    }
-    if (active.has(id) && generated.value.interaction === "world_action") {
-      throw Object.assign(new Error(`Player reading did not bind the selected action's ${id}`), { audit: generated.audit });
-    }
-    action[id] = defaults[id] ?? "none";
-  }
   const answer = (choice: string): DecisionAnswerV2 => ({ type: "choice", choice, probabilities: null, confidence: null });
   const answers: Record<string, DecisionAnswerV2> = Object.fromEntries(Object.keys(catalog).map(id => [id, answer(action[id]!)]));
   for (const [id, question] of Object.entries(cognition)) {
@@ -89,5 +111,5 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   if (operation === "speak" && words && utterance?.startsWith(words)) utterance = verbatim;
   const expression: ActionExpression = { attempt: action.attempt!.trim(), utterance,
     manner: action.manner?.trim() || null };
-  return { answers, expression, audit: generated.audit };
+  return { answers, expression, audits };
 }

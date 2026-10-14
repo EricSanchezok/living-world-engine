@@ -5,7 +5,7 @@ import type { WorldRuntimeContract } from "../runtime/world-definition";
 import type { ActionFrame, DirectLocalView } from "./contracts";
 import { captureDependencies, orderedValues } from "./state";
 
-export function privateActionView(state: Readonly<SimulationState>, agentId: string): DirectLocalView {
+export function privateActionView(state: Readonly<SimulationState>, agentId: string, causeActionId?: string | null): DirectLocalView {
   const agent = state.agents[agentId]; if (!agent) throw new Error("unknown decision owner");
   const perspective = projectAgentPerspective(state, agent);
   const entities = Object.fromEntries(Object.values(agent.bindings).sort((a, b) => a.localEntityId.localeCompare(b.localEntityId)).filter(binding => binding.canonicalEntityIds.length === 1 &&
@@ -16,8 +16,11 @@ export function privateActionView(state: Readonly<SimulationState>, agentId: str
     ...Object.values(state.truth.ratings).filter(rating => rating.entityId === agent.entityId).map(rating => `rating:${rating.id}`),
     ...Object.values(state.truth.facts).filter(fact => Object.values(entities).includes(fact.subjectId) &&
       (fact.access.kind === "public" || fact.access.kind === "agents" && fact.access.agentIds.includes(agentId))).map(fact => `fact:${fact.id}`)];
+  const causeEvents = causeActionId ? new Set(state.history.flatMap(step => step.events.filter(event =>
+    event.causes.some(cause => cause.kind === "action" && cause.id === causeActionId)).map(event => event.id))) : null;
   const view = { agentId: perspective.agentId, elapsedSeconds: perspective.elapsedSeconds, self: perspective.self, mechanics: perspective.mechanics,
     knowledge: perspective.knowledge, character: perspective.character,
+    respondingTo: causeEvents ? privateInteractions(state, agentId, entities, causeEvents).at(-1) ?? null : null,
     interactions: privateInteractions(state, agentId, entities) };
   // Delivered evidence remains memory after the observation cursor advances.
   return { state: view as unknown as JsonValue,
@@ -25,12 +28,12 @@ export function privateActionView(state: Readonly<SimulationState>, agentId: str
 }
 
 /** Dialogue comes from delivered, retained observations, never another subject's prose or truth. */
-function privateInteractions(state: Readonly<SimulationState>, agentId: string, entities: Record<string, string>) {
+function privateInteractions(state: Readonly<SimulationState>, agentId: string, entities: Record<string, string>, eventIds?: ReadonlySet<string>) {
   const agent = state.agents[agentId]!;
   const retained = new Set(Object.values(agent.belief.evidence).map(evidence => evidence.sourceId));
   const self = new Set(Object.entries(entities).filter(([, id]) => id === agent.entityId).map(([id]) => id));
   return state.history.flatMap(step => step.observations.filter(observation => observation.observerId === agentId &&
-    retained.has(observation.id) && observation.scene).map(observation => {
+    retained.has(observation.id) && observation.scene && (!eventIds || observation.sourceEventIds.some(id => eventIds.has(id)))).map(observation => {
     const scene = observation.scene!;
     return { step: observation.step, worldTimeSeconds: step.temporalBoundary.toElapsedSeconds,
       latest: observation.step === agent.observationCursorStep,
