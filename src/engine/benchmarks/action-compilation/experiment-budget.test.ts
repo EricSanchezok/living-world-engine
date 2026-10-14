@@ -513,3 +513,85 @@ describe("explicit additional budget tranches", () => {
     expect(new ExperimentBudget(file, policy).summary).toEqual(budget.summary);
   });
 });
+
+describe("audited request capacity on an additional grant", () => {
+  const policy: ExperimentBudgetPolicy = { maximumNanoCny: 100, inputMissNanoCnyPerToken: 1,
+    inputHitNanoCnyPerToken: 1, outputNanoCnyPerToken: 1,
+    maxHttpRequests: { discovery: 1 }, maxKnownTokens: { discovery: 10000 } };
+  const request = { ...reservation, inputCeiling: 9, outputCeiling: 1 };
+  const evidence = { reason: "New authorized experiments have an explicit bounded request allowance", evidenceHash: "a".repeat(64) };
+  const grant = { id: "conversation", amountNanoCny: 30, priorExposureNanoCny: 10, ...evidence,
+    requestCapacity: [{ phase: "discovery" as const, priorHttpRequests: 1, additionalRequests: 2 }] };
+  function exhausted() {
+    const file = journal(), budget = new ExperimentBudget(file, policy);
+    budget.reserve(request); budget.settle(request.id, { input: 9, output: 1, cacheHit: 0 });
+    return { file, budget };
+  }
+
+  it("appends a count-bound capacity grant without resetting old usage or changing the policy hash", () => {
+    const { file, budget } = exhausted(), prefix = readFileSync(file, "utf8"), policyHash = budget.policyHash;
+    expect(() => budget.reserve({ ...request, id: "blocked" })).toThrow("HTTP budget");
+    budget.authorizeTranche(grant);
+    expect(readFileSync(file, "utf8").startsWith(prefix)).toBe(true);
+    expect(budget.policyHash).toBe(policyHash);
+    expect(budget.summary).toMatchObject({ requestLimits: { discovery: 3 },
+      phases: { discovery: { httpRequests: 1 } }, tranche: { remainingNanoCny: 30 } });
+    for (const id of ["new-1", "new-2"]) {
+      budget.reserve({ ...request, id }); budget.settle(id, { input: 9, output: 1, cacheHit: 0 });
+    }
+    expect(budget.summary.remainingNanoCny).toBe(10);
+    expect(() => budget.reserve({ ...request, id: "new-3" })).toThrow("HTTP budget");
+    expect(new ExperimentBudget(file, policy).summary).toEqual(budget.summary);
+    expect(() => new ExperimentBudget(file, policy).reserve({ ...request, id: "reopened" })).toThrow("HTTP budget");
+  });
+
+  it("does not implicitly extend request capacity when only money is authorized", () => {
+    const { budget } = exhausted();
+    const { requestCapacity: _capacity, ...moneyOnly } = grant;
+    void _capacity;
+    budget.authorizeTranche(moneyOnly);
+    expect(budget.summary.remainingNanoCny).toBe(30);
+    expect(() => budget.reserve({ ...request, id: "still-blocked" })).toThrow("HTTP budget");
+  });
+
+  it("retains the independently capped money limit and exposes the actual exhausted dimension", () => {
+    const { budget } = exhausted();
+    try { budget.reserve({ ...request, id: "count" }); } catch (error) {
+      expect(error).toMatchObject({ limitCode: "request-limit" });
+    }
+    budget.authorizeTranche({ ...grant, amountNanoCny: 5 });
+    expect(() => budget.reserve({ ...request, id: "money" })).toThrow("CNY budget");
+    try { budget.reserve({ ...request, id: "money" }); } catch (error) {
+      expect(error).toMatchObject({ limitCode: "spending-limit" });
+    }
+    expect(budget.summary.phases.discovery.httpRequests).toBe(1);
+    expect(budget.summary.remainingNanoCny).toBe(5);
+  });
+
+  it("rejects wrong counts, duplicate phases, new phases and unsafe capacity before appending", () => {
+    const { file, budget } = exhausted(), prefix = readFileSync(file, "utf8");
+    for (const requestCapacity of [
+      [{ phase: "discovery" as const, priorHttpRequests: 0, additionalRequests: 2 }],
+      [{ phase: "discovery" as const, priorHttpRequests: 1, additionalRequests: 0 }],
+      [{ phase: "review" as const, priorHttpRequests: 0, additionalRequests: 2 }],
+      [{ phase: "discovery" as const, priorHttpRequests: 1, additionalRequests: Number.MAX_SAFE_INTEGER }],
+      [...grant.requestCapacity, ...grant.requestCapacity],
+    ]) {
+      expect(() => budget.authorizeTranche({ ...grant, requestCapacity })).toThrow();
+      expect(readFileSync(file, "utf8")).toBe(prefix);
+    }
+  });
+
+  it("replaces unused request capacity on the next explicit count grant and validates replay bindings", () => {
+    const { file, budget } = exhausted();
+    budget.authorizeTranche(grant);
+    budget.authorizeTranche({ ...grant, id: "next", evidenceHash: "b".repeat(64),
+      requestCapacity: [{ phase: "discovery", priorHttpRequests: 1, additionalRequests: 1 }] });
+    expect(budget.summary.requestLimits.discovery).toBe(2);
+    const frames = readFileSync(file, "utf8").trim().split("\n").map(line => JSON.parse(line));
+    frames.at(-1)!.entry.requestCapacity[0].priorHttpRequests = 0;
+    frames.at(-1)!.sha256 = contentHash(frames.at(-1)!.entry);
+    writeFileSync(file, frames.map(frame => JSON.stringify(frame)).join("\n") + "\n");
+    expect(() => new ExperimentBudget(file, policy)).toThrow("request-count binding");
+  });
+});

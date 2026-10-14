@@ -73,6 +73,8 @@ const entrySchema = z.discriminatedUnion("kind", [
   z.strictObject({
     kind: z.literal("authorize_tranche"), id: z.string().min(1), amountNanoCny: integer.positive(),
     priorExposureNanoCny: integer, reason: z.string().min(10), evidenceHash: hashSchema,
+    requestCapacity: z.array(z.strictObject({ phase: z.enum(budgetPhases), priorHttpRequests: integer,
+      additionalRequests: integer.positive() })).min(1).max(budgetPhases.length).optional(),
     budgetHash: z.string(), previousHash: z.string().nullable(),
   }),
   z.strictObject({
@@ -113,7 +115,9 @@ export type ExperimentUsage = z.infer<typeof usageSchema>;
 type Reservation = Extract<Entry, { kind: "reserve" }>;
 
 export class ExperimentBudgetError extends Error {
-  constructor(message: string) { super(message); this.name = "ExperimentBudgetError"; }
+  constructor(message: string, readonly limitCode?: "request-limit" | "spending-limit" | "token-limit" | "usage-unresolved") {
+    super(message); this.name = "ExperimentBudgetError";
+  }
 }
 
 /** Unknown sends block work; recorded terminal HTTP rejections retain their full cost ceiling without blocking recovery. */
@@ -133,6 +137,7 @@ export class ExperimentBudget {
   private readonly authorizations: Array<Extract<Entry, { kind: "authorize_tranche" }>> = [];
   private tranche?: { entry: Extract<Entry, { kind: "authorize_tranche" }>; priorIds: Set<string> };
   private maximumNanoCny: number;
+  private readonly requestLimits: Partial<Record<ExperimentPhase, number>>;
   readonly policyHash: string;
 
   constructor(private readonly journal: string, readonly policy: ExperimentBudgetPolicy = AC_FP1_BUDGET) {
@@ -141,6 +146,7 @@ export class ExperimentBudget {
       throw new ExperimentBudgetError("invalid request concurrency limit");
     }
     this.maximumNanoCny = policy.maximumNanoCny;
+    this.requestLimits = structuredClone(policy.maxHttpRequests);
     this.policyHash = contentHash(policy);
     this.phaseBudgets = structuredClone(policy.phaseBudgets ?? []);
     if (!existsSync(journal)) return;
@@ -194,6 +200,7 @@ export class ExperimentBudget {
       remainingNanoCny: this.tranche.entry.amountNanoCny - trancheKnownNanoCny - trancheReservedNanoCny } : undefined;
     return {
       maximumNanoCny: this.maximumNanoCny, authorizations: structuredClone(this.authorizations), tranche,
+      requestLimits: structuredClone(this.requestLimits),
       remainingNanoCny: Math.min(this.maximumNanoCny - estimatedPeakNanoCny - reservedNanoCny, tranche?.remainingNanoCny ?? Infinity),
       phases, unsettled, reservedNanoCny,
       inFlight: unsettled.filter((id) => this.liveRequests.has(id)),
@@ -251,6 +258,19 @@ export class ExperimentBudget {
       if (this.authorizations.some(item => item.id === entry.id || item.evidenceHash === entry.evidenceHash)) throw new ExperimentBudgetError("duplicate budget authorization");
       if (entry.priorExposureNanoCny !== totals.estimatedPeakNanoCny + totals.reservedNanoCny) throw new ExperimentBudgetError("authorization exposure binding mismatch");
       if (!Number.isSafeInteger(this.maximumNanoCny + entry.amountNanoCny)) throw new ExperimentBudgetError("authorization amount overflow");
+      const phases = new Set<ExperimentPhase>();
+      for (const capacity of entry.requestCapacity ?? []) {
+        if (phases.has(capacity.phase) || !(this.policy.maxHttpRequests[capacity.phase]! > 0)) {
+          throw new ExperimentBudgetError("request capacity requires distinct already authorized phases");
+        }
+        phases.add(capacity.phase);
+        if (capacity.priorHttpRequests !== totals.phases[capacity.phase].httpRequests) {
+          throw new ExperimentBudgetError("authorization request-count binding mismatch");
+        }
+        if (!Number.isSafeInteger(capacity.priorHttpRequests + capacity.additionalRequests)) {
+          throw new ExperimentBudgetError("authorization request capacity overflow");
+        }
+      }
     } else if (entry.kind === "review_peak_prices") {
       if (this.summary.blockingUnknown.length) throw new ExperimentBudgetError("resolve unknown usage before price review");
       const original = this.price(entry.priceId);
@@ -316,23 +336,23 @@ export class ExperimentBudget {
         throw new ExperimentBudgetError("routed response trial is permanently closed");
       }
       if (this.reservations.has(entry.id)) throw new ExperimentBudgetError("duplicate HTTP reservation");
-      if (totals.phases[entry.phase].httpRequests >= (this.policy.maxHttpRequests[entry.phase] ?? 0)) {
-        throw new ExperimentBudgetError("phase HTTP budget exhausted");
+      if (totals.phases[entry.phase].httpRequests >= (this.requestLimits[entry.phase] ?? 0)) {
+        throw new ExperimentBudgetError("phase HTTP budget exhausted", "request-limit");
       }
       const pending = [...this.reservations.values()].filter((reservation) => !this.settlements.has(reservation.id));
       const phaseReservedTokens = pending.filter((reservation) => reservation.phase === entry.phase)
         .reduce((sum, reservation) => sum + reservation.inputCeiling + reservation.outputCeiling, 0);
       if (totals.phases[entry.phase].knownTokens + phaseReservedTokens + entry.inputCeiling + entry.outputCeiling >
-        (this.policy.maxKnownTokens[entry.phase] ?? 0)) throw new ExperimentBudgetError("phase token reserve does not fit");
+        (this.policy.maxKnownTokens[entry.phase] ?? 0)) throw new ExperimentBudgetError("phase token reserve does not fit", "token-limit");
       const ceiling = this.charge(entry.inputCeiling, entry.outputCeiling, 0, entry);
       for (const group of this.phaseBudgets) {
         const groupReserved = pending.filter((reservation) => group.phases.includes(reservation.phase))
           .reduce((sum, reservation) => sum + this.charge(reservation.inputCeiling, reservation.outputCeiling, 0, reservation), 0);
         if (group.phases.includes(entry.phase) && group.phases.reduce((sum, phase) => sum + totals.phases[phase].estimatedPeakNanoCny, 0) + groupReserved + ceiling > group.maximumNanoCny) {
-          throw new ExperimentBudgetError("phase monetary reserve does not fit");
+          throw new ExperimentBudgetError("phase monetary reserve does not fit", "spending-limit");
         }
       }
-      if (ceiling > totals.remainingNanoCny) throw new ExperimentBudgetError("CNY budget exhausted");
+      if (ceiling > totals.remainingNanoCny) throw new ExperimentBudgetError("CNY budget exhausted", "spending-limit");
     } else if (entry.kind === "settle" || entry.kind === "reconcile_overrun") {
       const reservation = this.reservations.get(entry.id);
       if (!reservation || this.settlements.has(entry.id)) throw new ExperimentBudgetError("unknown or already settled HTTP request");
@@ -369,6 +389,9 @@ export class ExperimentBudget {
       this.maximumNanoCny += entry.amountNanoCny;
       this.authorizations.push(structuredClone(entry));
       this.tranche = { entry: structuredClone(entry), priorIds: new Set(this.reservations.keys()) };
+      for (const capacity of entry.requestCapacity ?? []) {
+        this.requestLimits[capacity.phase] = capacity.priorHttpRequests + capacity.additionalRequests;
+      }
     } else if (entry.kind === "review_peak_prices") {
       for (const request of entry.requests) this.reviewedPrices.set(request.id, structuredClone(entry.price));
       this.priceReviews.push({ evidenceHash: entry.evidenceHash, requests: entry.requests.length, priceHash: contentHash(entry.price) });
@@ -394,7 +417,7 @@ export class ExperimentBudget {
   }
 
   reserve(input: { id: string; trialId: string; phase: ExperimentPhase; inputCeiling: number; outputCeiling: number; priceId?: string }): void {
-    if (this.summary.blockingUnknown.length > 0) throw new ExperimentBudgetError("unsettled provider usage blocks further sends");
+    if (this.summary.blockingUnknown.length > 0) throw new ExperimentBudgetError("unsettled provider usage blocks further sends", "usage-unresolved");
     const price = this.price(input.priceId ?? "");
     this.persist(entrySchema.parse({ ...input, ...(price ? { version: 2, priceHash: contentHash(price) } : {}), kind: "reserve", budgetHash: this.policyHash, previousHash: this.lastHash }));
     this.liveRequests.add(input.id);
@@ -433,7 +456,8 @@ export class ExperimentBudget {
   }
 
   /** A new user grant caps future requests independently; prior unused funds and later historical refunds cannot enlarge it. */
-  authorizeTranche(input: { id: string; amountNanoCny: number; priorExposureNanoCny: number; reason: string; evidenceHash: string }): void {
+  authorizeTranche(input: { id: string; amountNanoCny: number; priorExposureNanoCny: number; reason: string; evidenceHash: string;
+    requestCapacity?: Array<{ phase: ExperimentPhase; priorHttpRequests: number; additionalRequests: number }> }): void {
     if (this.liveRequests.size) throw new ExperimentBudgetError("drain all live requests before authorization");
     this.persist(entrySchema.parse({ ...input, kind: "authorize_tranche", budgetHash: this.policyHash, previousHash: this.lastHash }));
   }

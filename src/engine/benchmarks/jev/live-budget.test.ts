@@ -10,6 +10,30 @@ const body = JSON.stringify({ model: "deepseek-flash", max_tokens: 20 });
 afterEach(() => { for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true }); });
 
 describe("one cumulative live model budget", () => {
+  it("stops at the explicit request cap before transport and resumes only under a new recorded grant", async () => {
+    const root = directory(), live = createJevLiveBudget(root);
+    const evidence = { reason: "Explicit bounded request capacity for newly authorized work", evidenceHash: "a".repeat(64) };
+    live.budget.authorizeTranche({ id: "first", amountNanoCny: 1_000_000_000, priorExposureNanoCny: 0,
+      ...evidence, requestCapacity: [{ phase: "trajectory", priorHttpRequests: 0, additionalRequests: 1 }] });
+    const provider = vi.fn(async () => Response.json({ usage: { input_tokens: 10, output_tokens: 20 } }));
+    const request = () => live.transport("typesafe-api", provider)("https://unused.test", { body: JSON.stringify({ model: "jev-1.13.0" }) });
+    await request(); await live.drain();
+    await expect(request()).rejects.toMatchObject({ limitCode: "request-limit" }); await live.drain();
+    expect(provider).toHaveBeenCalledTimes(1);
+    const before = live.budget.summary;
+    live.budget.authorizeTranche({ id: "second", amountNanoCny: 1_000_000_000,
+      priorExposureNanoCny: before.estimatedPeakNanoCny + before.reservedNanoCny,
+      ...evidence, evidenceHash: "b".repeat(64),
+      requestCapacity: [{ phase: "trajectory", priorHttpRequests: 1, additionalRequests: 1 }] });
+    await request(); await live.drain();
+    expect(provider).toHaveBeenCalledTimes(2);
+    expect(live.budget.summary.phases.trajectory.httpRequests).toBe(2);
+    expect(live.budget.summary.tranche?.knownNanoCny).toBe(10 * 336);
+    live.close();
+    const reopened = createJevLiveBudget(root);
+    expect(reopened.budget.summary.requestLimits.trajectory).toBe(2);
+    reopened.close();
+  });
   it("reserves the full native batch boundary and the complete request without rejecting context by bytes", async () => {
     const root = directory(), live = createJevLiveBudget(root);
     for (const [state, input] of [["short", 65_536], ["字".repeat(30_000), 80_000]] as const) {
