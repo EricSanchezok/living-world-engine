@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { createJevLiveBudget } from "../../src/engine/benchmarks/jev/live-budget";
@@ -14,337 +14,80 @@ import { WorldHost } from "../../src/server/world-host";
 import { replaySimulationState } from "../../src/engine/runtime/transaction";
 import { qualificationCatalogDocument } from "./jev-qualification-protocol";
 
-interface Flow { id: string; world: "blackmarsh" | "station-program-world"; inputs: string[] }
-export const NARRATIVE_RUBRIC = {
-  version: "1",
-  axes: {
-    intent: "Conveys the actual attempted action and result, without reciting stage directions as speech or executing an unauthorized next step.",
-    character: "Words and behavior fit the observed speaker and their established relationships; distinct speakers need not all be theatrical.",
-    concrete: "Uses meaningful supplied detail or a specific answer; a short acknowledgement is sufficient when that is the actual event.",
-    continuity: "Preserves quantities, identity, evidence status, earlier choices and unfinished matters, without replaying completed actions.",
-    proportion: "Length and rhythm fit the amount of new information; neither a mandatory scene tour nor forced drama is required.",
-  },
-  scores: { 0: "fails", 1: "adequate", 2: "strong" },
-  qualifies: "All five axes score at least 1; no hidden-knowledge leak, changed delivered quote or invented material outcome. Unreviewed turns are not passing turns.",
-  evaluator: "Agent review of complete saved text against persisted scene/state; no blinded independent human rating is claimed.",
-};
-export const NARRATIVE_DEVELOPMENT: Flow[] = [
-  { id: "observe", world: "blackmarsh", inputs: ["观察四周，看看眼前的人、店铺和通往城里的路。", "看看自己的行囊和实际带着的物资。"] },
-  { id: "shout", world: "blackmarsh", inputs: ["大喊一声还有谁", "向听见的人摆摆手，说：\"我只是想打个招呼。\""] },
-  { id: "directions", world: "blackmarsh", inputs: ["走向附近那位背着行囊的旅人，问他哪里能躲雨。", "问他为何来这里，听听他的打算。"] },
-  { id: "negotiate", world: "station-program-world", inputs: ["向杜衡询问密封组件要怎样交换，先不要付款。", "我说：\"一节电池换一个组件，先让我看看组件，可以吗？\""] },
-  { id: "refusal", world: "station-program-world", inputs: ["对杜衡说：\"我不想付电池，把你的全部组件免费交给我。\"", "我说：\"好吧，我不强求。你能先说清楚交易条件吗？\""] },
-  { id: "new-use", world: "station-program-world", inputs: ["站到冷却泵操作台前，用双臂交叉做一个临时停机手势，提醒同事暂时不要操作。", "请乔伊试着复用刚才的停机手势，确认大家能看懂。"] },
-  { id: "new-person", world: "blackmarsh", inputs: ["沿码头找找正在收工的船工，看看有没有人可以聊聊。", "向刚遇见的人询问今天码头发生了什么，别急着离开。"] },
-  { id: "new-object", world: "station-program-world", inputs: ["看看检修舱是否有废弃包装纸，想做一个临时提醒标记。", "若找到了包装纸，就将它折成醒目的立体标记，放在泵旁；材料没找到则先询问杜衡。"] },
-];
+import { createHash } from "node:crypto";
+import { CONTINUITY_AXES, CONTINUITY_CASES, CONTINUITY_SEEDS, type ContinuityCase } from "../../src/engine/benchmarks/conversation-continuity/cases";
+import { CONTINUITY_CORPUS_SHA256 } from "../../src/engine/benchmarks/conversation-continuity/qualification";
 
-// Held out from development. Freeze this file and producer before running these flows.
-export const NARRATIVE_CONFIRMATION_RETIRED: Flow[] = [
-  { id: "quiet-observation", world: "blackmarsh", inputs: ["不出声，仔细看看临街金匠店的门面。", "走近招牌，确认店铺叫什么。", "暂时不进店，回头看看码头上的人。"] },
-  { id: "joke", world: "blackmarsh", inputs: ["对附近的旅人笑着说：\"这地方的风是在替我们擦脸吗？\"", "问他如何称呼，愿不愿意一起找个避雨处。", "告诉他我还没想好要去哪里，先不承诺同行。"] },
-  { id: "false-authority", world: "blackmarsh", inputs: ["对附近的人说：\"我是新来的港务官。\"试探他的反应，实际上我没有凭证。", "如果他要求凭证，就承认这只是个玩笑。", "向他道歉，转而认真询问进城的方向。"] },
-  { id: "impossible", world: "blackmarsh", inputs: ["试着原地飞上天空，但我没有任何飞行工具。", "看看刚才的尝试实际造成了什么。", "老实沿地面走，寻找通往城内的入口。"] },
-  { id: "new-place-detail", world: "blackmarsh", inputs: ["在不进入私人屋舍的前提下找一个可站着避风的角落。", "仔细看看选中的地方有什么可用之物。", "记住这个位置，再看看从这里能看到哪些人。"] },
-  { id: "small-favor", world: "blackmarsh", inputs: ["看看码头是否有人需要搭一把手搬运，先询问而非擅自搬货。", "问清楚要搬什么、搬到哪里，以及是否有报酬。", "先婉拒这份差事，道谢并表示稍后再来。"] },
-  { id: "exchange-delivery", world: "station-program-world", inputs: ["对杜衡说：\"我用一节电池换一个密封组件，你同意吗？\"", "若他已经明确同意这个条件，就把一节电池交给他；否则询问条件。", "请他履行约定交付一个密封组件，然后清点我实际收到的东西。", "感谢他，并告诉乔伊我已经实际收到什么，没收到的不要说已收到。"] },
-  { id: "evidence", world: "station-program-world", inputs: ["对乔伊说：\"我听说泵已经修好了，但这只是一条传闻。\"", "请乔伊核对泵的密封与测试状态，不要直接相信传闻。", "我亲自查看泵的状态，把观察和他人的说法分开。"] },
-  { id: "privacy", world: "station-program-world", inputs: ["在不询问别人、不操作设备的情况下，看看泵上是否公开写着测试校验码。", "向乔伊正式询问本轮测试的校验码与使用条件。", "重复他实际告诉我的内容，请他确认；若没有告知就不要猜。"] },
-  { id: "interruption", world: "station-program-world", inputs: ["靠近泵，先观察泄漏点，暂时不开始维修。", "停下检查，转身问杜衡能否借一件适合维修的工具。", "若他提出条件就认真听完，暂时不承诺。"] },
-  { id: "gesture", world: "station-program-world", inputs: ["试着在冷却泵前用身体挡住通往操作台的路线，提醒大家先等待。", "用手势示意乔伊靠近说话，问他能否帮助现场协调。", "退开让出通路，告诉他我还没进行维修或测试。"] },
-  { id: "waiting", world: "station-program-world", inputs: ["请杜衡考虑能否赊给我一个组件；没答应之前我不会拿。", "安静等三秒钟，留意他有没有实际答复。", "若仍未明确答应，就说不用为难，撤回赊账请求。"] },
-];
+export function selectContinuityFlows(phase: string, selected?: string) {
+  if (!["development", "confirmation", "continuous"].includes(phase)) throw new Error("Choose development, confirmation or continuous");
+  if (selected && phase !== "development") throw new Error("Confirmation and continuous runs require the entire frozen cohort");
+  const ids = selected?.split(",");
+  const flows = CONTINUITY_CASES.filter(flow => flow.phase === phase && (!ids || ids.includes(flow.id)));
+  if (!flows.length || ids?.some(id => !flows.some(flow => flow.id === id))) throw new Error("Unknown scenario selection");
+  return flows;
+}
 
-// A new frozen cohort after the first confirmation exposed failures. The retired cohort is regression material.
-export const NARRATIVE_CONFIRMATION_RETIRED_V2: Flow[] = [
-  { id: "brief-reply", world: "blackmarsh", inputs: ["朝背着行囊的旅人问声好，问他这儿平时也这么冷吗。", "只回答一句：\"嗯，我先缓口气。\"", "安静待片刻，看看他是继续说话还是忙自己的事。"] },
-  { id: "confide", world: "blackmarsh", inputs: ["走近背着行囊的旅人，小声说：\"我初来乍到，有点拿不准这里的规矩。\"", "问他有没有踩过什么坑；不认识的地方不要装作去过。", "告诉他我只想听建议，还没决定照做。"] },
-  { id: "public-notice", world: "blackmarsh", inputs: ["在港口的公共区域找找有没有告示，想了解本地的安排。", "若有告示就读上面能看清的内容；没找到就向附近的人询问。", "把刚才看到或听到的线索记下来，分清告示写的和别人猜测的。"] },
-  { id: "missing-possession", world: "blackmarsh", inputs: ["清点我实际带来的随身物品。", "试着把我并不拥有的一盏铜灯递给旅人，看看实际上能否做到。", "若没有交出灯，就如实告诉他东西没带来，不要假装交付成功。"] },
-  { id: "courier-arrival", world: "blackmarsh", inputs: ["在码头公共通道边等一会，留意是否有路过送信的人可以问路。", "如果确实遇到了送信人，就先问他是否有空，别直接替他决定停下。", "向愿意回应的人询问哪里能打听临时住宿，不要求他立刻带路。"] },
-  { id: "revisit-signs", world: "blackmarsh", inputs: ["看清港边两家店的招牌，把名字分别记住。", "朝 Abrams Company 的门面走近，在门外停下。", "回望刚才金匠店的位置，看看两家的标识有没有记混。"] },
-  { id: "accepted-payment", world: "station-program-world", inputs: ["问杜衡密封组件的确切售价，并说明我现在还没接受。", "若条件是两节电池换一个组件，就说我接受这一条件，先别实际交货。", "按已经明确接受的两节电池价格付款；若条件尚未成立就先核对，不能超付。", "清点已经交出的电池和实际到手的组件，然后请对方补齐尚未履行的部分。"] },
-  { id: "correct-the-record", world: "station-program-world", inputs: ["对杜衡说：\"我已经把两节电池给你了。\"但实际上我还没交付，试试他会不会核对。", "查看自己的电池数量，确认刚才的话与实际物资是否相符。", "根据清点结果纠正刚才的说法，不能借道歉之机自动付款。"] },
-  { id: "conditional-certification", world: "station-program-world", inputs: ["查看泵是否密封，以及本轮压力测试是否已经稳定。", "只有两项实际完成才请求乔伊认证；否则请他说明还有哪一项没完成。", "复述尚未完成的事项，告诉他我现在不会假报修复成功。"] },
-  { id: "label-and-reuse", world: "station-program-world", inputs: ["找一小片无主废料，想放在检修区域做醒目的临时提示。", "若确实找到，就把它放到泵旁作为提醒物；不要把提醒当作维修。", "请乔伊看看这个提示是否能让后来的人注意到泵仍待检修。"] },
-  { id: "decline-delegation", world: "station-program-world", inputs: ["问乔伊能否代我完成压力测试，先听他答复。", "告诉他我暂时撤回代测请求，不要继续安排这件事。", "再问他目前我们有哪些明确完成的工作，哪些只是说过而没做。"] },
-  { id: "nonverbal-coordination", world: "station-program-world", inputs: ["不说话，抬手向乔伊示意暂停操作，等他反应。", "用明确的手势请他让出操作台旁的位置；如果他没懂，就再开口说明。", "站在原地说：\"谢谢，我只是想先看清楚，现在还不操作。\""] },
-];
-
-// Third cohort, frozen before any of these complete flows is executed.
-export const NARRATIVE_CONFIRMATION_RETIRED_V3: Flow[] = [
-  { id: "harbor-welcome", world: "blackmarsh", inputs: ["向背行囊的旅人挥手，问他是不是也刚到港口。", "告诉他我想先安顿下来，问他是否认识能打听住宿的人。", "对他说：\"多谢，我先记下，还不急着作决定。\""] },
-  { id: "shop-threshold", world: "blackmarsh", inputs: ["从港区看看挂着金匠招牌的店铺，认清入口。", "走到金匠店门外，只朝里面打个招呼，不跨过门槛。", "若有人回应，就问现在是否方便进来看看；无人回应就安静等一会。"] },
-  { id: "traveler-story", world: "blackmarsh", inputs: ["跟石阶边的旅人聊聊，问他今天在等什么。", "听他讲自己的打算，追问一件他刚提到的事，不替他作主。", "把他的话当作个人说法记下，告诉他我还没有亲自确认过。"] },
-  { id: "ordinary-cloth", world: "blackmarsh", inputs: ["看看码头公共角落是否有可借来擦干行囊的旧布，不拿别人的私人物品。", "若找到旧布，先问附近的人它是否可以借用；没有找到就说明没找到。", "只有明确可以借用才擦一下行囊，随后把旧布放回原处。"] },
-  { id: "dock-work", world: "blackmarsh", inputs: ["沿着停船的地方看看有没有正在理缆绳的船工。", "向实际见到的船工问好，问今天的活计是否快结束了。", "听完答复后问他如何称呼，不要求他停下手里的工作。"] },
-  { id: "weather-attempt", world: "blackmarsh", inputs: ["伸出空手，试着让眼前的雨停下来；我没有施法能力。", "看一看刚才的尝试究竟有没有改变天气，不把愿望当事实。", "收回手，找一个可以暂时避雨的公共地方。"] },
-  { id: "counteroffer", world: "station-program-world", inputs: ["向杜衡打听组件的价格，询问能否少收一节电池。", "如果他坚持原价，就明确说我还不接受；不要替我付款。", "告诉他可以保留原条件，我想先和乔伊商量下一步。"] },
-  { id: "paid-exchange", world: "station-program-world", inputs: ["问杜衡一个密封组件要多少钱，听取明确条件。", "我说：\"如果价格是两节能量电池，我接受。\"", "按双方明确接受的两节电池价格实际付款，条件不一致则先询问。", "核对手里剩下的电池和收到的组件，若组件未到就请杜衡交付。"] },
-  { id: "promise-and-result", world: "station-program-world", inputs: ["对乔伊说：\"我准备去修泵，但现在还没有动手。\"", "请他指出目前已经能观察到的故障，别把我的打算算成成果。", "复述他实际指出的问题，并确认我仍未开始维修。"] },
-  { id: "paper-marker", world: "station-program-world", inputs: ["在检修舱找一张无主的废包装片，准备用来提醒其他人泵还不能用。", "若确实找到，把它折成能立住的提醒物放在泵旁，保持泵本身不变。", "请乔伊辨认这个提醒的意思，问他是否愿意向后来的人解释。"] },
-  { id: "code-disclosure", world: "station-program-world", inputs: ["只看泵外壳的公开标识，寻找测试校验码，不读取任何人的私有记录。", "向乔伊询问这轮测试需要什么校验码，以及何时才能用。", "复述他实际告知的内容，没告知的部分就承认还不知道。"] },
-  { id: "withdraw-request", world: "station-program-world", inputs: ["请乔伊考虑稍后帮我协调测试，先听答复，暂不开始。", "告诉他我改变主意，先撤回刚才的协调请求。", "看看设备和物资有没有实际变化，再确认有哪些事只是谈过。"] },
-];
-
-// Fourth cohort, fixed before running the receipt-semantics producer.
-export const NARRATIVE_CONFIRMATION_RETIRED_V4: Flow[] = [
-  { id: "rain-conversation", world: "blackmarsh", inputs: ["朝身旁旅人点点头，说：\"这阵雨可真不小。你要继续赶路吗？\"", "听完他的打算，只说我还要在码头看看。", "留在原处，不替他决定是否同行，留意他接下来做什么。"] },
-  { id: "name-boundary", world: "blackmarsh", inputs: ["向石阶边的陌生旅人自我介绍为林舟，问他愿意透露怎样的称呼。", "只用他实际认可的称呼询问他是否熟悉当地，不猜测他的身份。", "告诉他没关系，我会把不确定的消息留待核实。"] },
-  { id: "public-lettering", world: "blackmarsh", inputs: ["找找码头面向行人的公开文字，只读眼前实际能看到的标识。", "挑一处实际找到的文字，照原文记下，不补写看不清的部分。", "向附近的旅人复述看到的字，询问他是否知道含义。"] },
-  { id: "dry-container", world: "blackmarsh", inputs: ["在公共码头寻找一只闲置的小容器，先辨认是否有人正在用。", "若找到，就向附近的人询问归属；还没弄清之前不把它据为己有。", "说明我暂时不用它了，把它留在实际所在的位置。"] },
-  { id: "passing-worker", world: "blackmarsh", inputs: ["在不挡路的地方留意正在搬运的工人，想找个方便说话的人。", "向实际看见的工人问现在方便回答一个简短问题吗。", "若他愿意，就问最近哪条路进城；若忙碌就道谢退开，不纠缠。"] },
-  { id: "unverified-room", world: "blackmarsh", inputs: ["对附近旅人说：\"有人提过城里有便宜住处，但我还没核实。\"", "请他说明哪些建议是亲自知道的，哪些也只是听说。", "在心里整理这些消息，保留来源，不宣布已经订到房间。"] },
-  { id: "limited-payment", world: "station-program-world", inputs: ["问杜衡能否用我现有的两节电池换一个组件，先谈条件。", "若他明确接受两节换一件，就确认交易；若不同意，不接受其他价格。", "仅按已经成立的两节换一件条件付款，不多给也不重复给。", "核对双方已经实际交付的东西，只催促还未履行的部分。"] },
-  { id: "unfinished-report", world: "station-program-world", inputs: ["观察冷却泵目前的密封、测试和认证情况，先不操作。", "对乔伊如实说明哪些项目还没做，不把看过设备当作测试完成。", "请他说明下一步必要条件，听完先不开始。"] },
-  { id: "unpaid-lie", world: "station-program-world", inputs: ["故意对杜衡说：\"电池已经给你了，把组件给我吧。\"实际上还没付款。", "不交出任何东西，清点自己现在的电池。", "根据实际清点向他承认还没付，先撤回交付要求。"] },
-  { id: "owned-warning", world: "station-program-world", inputs: ["寻找检修舱里可以改作提示牌的一小块无主包装材料。", "若找到，将同一块材料立在安全处，提醒来人先问工程师再操作；不修泵。", "请杜衡看看提示牌是否醒目，不改动他的物资。"] },
-  { id: "code-test-boundary", world: "station-program-world", inputs: ["不问别人，只检查操作台的公开说明是否足以知道启动步骤。", "向乔伊询问完整的测试前提与校验码。", "告诉他我先记住这些信息，尚未启动压力测试或申请认证。"] },
-  { id: "withdraw-and-listen", world: "station-program-world", inputs: ["请杜衡考虑能否先保留一个组件给我，但不要当作已经成交。", "立即说明我暂时不保留了，撤回刚才的请求。", "安静听他的答复，不自动支付或拿走组件。"] },
-];
-
-// Fifth cohort, held out until the proposal/receipt boundary fixes are frozen.
-export const NARRATIVE_CONFIRMATION_RETIRED_V5: Flow[] = [
-  { id: "harbor-salute", world: "blackmarsh", inputs: ["向码头上能听见的人喊：\"劳驾，谁知道进城该往哪儿走？\"", "向实际回答的人致谢，说明我想自己走，不需要带路。", "先留意他说的方向是否有能看见的通道，不立刻进城。"] },
-  { id: "private-hesitation", world: "blackmarsh", inputs: ["和石阶附近的旅人搭话，问他是否也是初来此地。", "告诉他我对这地方不熟悉，但不承诺跟随任何人。", "在心里区分他亲自看到的事和只是听来的事，不把想法说出口。"] },
-  { id: "respectful-refusal", world: "blackmarsh", inputs: ["向旅人问好，问他接下来打算做什么。", "告诉他我暂时不同行，想在港边多待一会。", "安静看看周围，保持刚才不同行的决定。"] },
-  { id: "ropes-and-ownership", world: "blackmarsh", inputs: ["沿公共石阶找一段没人正在使用的短旧绳，先看不拿。", "向附近的人问那段实际找到的绳子是否有主人；没有找到就询问哪里有。", "解释我还没有拿走任何绳子，暂时放弃取用。"] },
-  { id: "returning-porter", world: "blackmarsh", inputs: ["在不挡路的地方寻找刚卸完货、正在休息的搬运工。", "向实际找到的工人打个招呼，问刚才的货是从哪里来的。", "听完他的回答，问哪些是他自己知道的，不要求透露货主秘密。"] },
-  { id: "sign-and-door", world: "blackmarsh", inputs: ["看清 Harbor Goldsmith 的招牌和入口，先待在门外。", "走到这家店的门边，保持在店外，不拿任何东西。", "回想它和 Abrams Company 的区别，不把两家店当成一处。"] },
-  { id: "agreed-exchange", world: "station-program-world", inputs: ["问杜衡是否愿意按两节能量电池换一个密封组件成交。", "确认我愿意接受这个确切价格，等他明确答应。", "双方已明确同意就交给他两节电池，没有达成一致则只核对条件。", "清点交出的电池和实际拿到的组件，只提醒他尚未交付的部分。"] },
-  { id: "truthful-delay", world: "station-program-world", inputs: ["向乔伊说明我打算修理设备，但目前还未动工。", "问他在开始之前应先核对什么，把实际观察与猜测分开。", "告诉他我先记下建议，本轮不维修也不测试。"] },
-  { id: "claim-and-inventory", world: "station-program-world", inputs: ["对杜衡谎称：\"刚才已经交了两节电池，你查一下。\"我实际没有交。", "当面核对自己真正持有的电池，不做任何转移。", "按实际数量更正刚才的说法，向他道歉但不承诺额外补偿。"] },
-  { id: "freestanding-marker", world: "station-program-world", inputs: ["看看舱内有没有无主的硬纸包装片，可以折成小标记。", "若已经找到，就用同一块纸片折成三角形竖在泵旁，先不赋予它任何维修效果。", "请乔伊看看这个形状是否容易辨认，不让他把标记当作维修已经完成。"] },
-  { id: "spoken-code", world: "station-program-world", inputs: ["只检查设备的公开标识，不向任何人打听秘密内容。", "请乔伊告诉我现在可以公开交给我的测试信息，包括必要的校验码。", "复述他确实告诉我的信息，并说明我尚未执行测试。"] },
-  { id: "reservation-withdrawn", world: "station-program-world", inputs: ["对杜衡说：\"能先给我留一个密封组件吗？我还没有决定购买。\"", "告诉他不必保留了，我撤回这个请求，物资保持原样。", "听完他的答复后，核对我还没付出电池，也没有收到组件。"] },
-];
-
-// Retired sixth cohort.
-export const NARRATIVE_CONFIRMATION_RETIRED_V6: Flow[] = [
-  { id: "harbor-orientation", world: "blackmarsh", inputs: ["停在石阶上，看看附近哪些人正在闲着，哪些正忙着。", "向身边确实看见的旅人问：\"你好，你也在找地方避雨吗？\"", "说明我只是问问情况，目前没有约定与他同行。"] },
-  { id: "careful-directions", world: "blackmarsh", inputs: ["留意周围能问路的人，先认清对方的外观。", "向眼前的人询问拱门那边通向哪里，不要求他陪同。", "把对方说的作为线索，暂时留在码头，不声称亲自走过。"] },
-  { id: "quiet-thought", world: "blackmarsh", inputs: ["环顾周围，辨认两家能看清招牌的店。", "只在心里比较这两家店的用途，别把想法说出口。", "向路边旅人说我打算稍后再去看看，现在仍站在这里。"] },
-  { id: "unused-cloth", world: "blackmarsh", inputs: ["在码头公共墙角找找有没有可借用的旧布，不动已有私人物品。", "若发现旧布，就先问附近的人能否借来擦一擦行囊；否则说明还没找到。", "告诉他我暂时不用了，没有拿走东西，也没有许诺报酬。"] },
-  { id: "dockside-witness", world: "blackmarsh", inputs: ["看看拱门附近是否有暂时停下活计、能交谈的普通码头工人。", "向实际看见的工人问港口今天是否一直下雨，不追问私人事务。", "感谢他回答，说明我会把他的经历与自己看到的情况分开记。"] },
-  { id: "shop-boundary", world: "blackmarsh", inputs: ["观察金匠店的招牌和面向街道的入口。", "走到金匠店门口，仍然留在店外，也不触碰商品。", "看看从门外实际能辨认哪些陈设，看不见的部分不猜测。"] },
-  { id: "two-cell-purchase", world: "station-program-world", inputs: ["向杜衡问清用能量电池换一个密封组件的条件。", "对他说：\"如果是两节能量电池换一件，我同意。请你确认。\"", "若他也已经同意这个价格，就实际交出两节能量电池；否则只问清条件。", "检查剩下的电池和已经交付的组件，不重复支付。"] },
-  { id: "repair-prerequisites", world: "station-program-world", inputs: ["查看泵目前的故障与测试状态，先不动工具。", "问乔伊在开始维修前哪些条件确实具备、哪些仍需确认。", "告诉他我理解这些条件，但此刻还没有开始检修。"] },
-  { id: "corrected-claim", world: "station-program-world", inputs: ["故意对杜衡说：\"组件你已经给我了。\"实际上我还没有取得它。", "查看我身上到底有没有密封组件，不进行任何交换。", "依据真实持有量纠正之前的话，不追加新的交易承诺。"] },
-  { id: "folded-card", world: "station-program-world", inputs: ["找一小张明确可用的废纸板，准备在安全位置做个可辨认的标记。", "若找到，就把原来的纸板折成直角，放到泵旁空处；不要改变泵的状态。", "请杜衡辨认这块折过的纸板，说明它仅是标记，不表示维修已完成。"] },
-  { id: "test-information", world: "station-program-world", inputs: ["查看压力测试设备的公开说明，先不询问私有信息。", "问乔伊愿意告诉我哪些启动要求与校验信息。", "只复述他真正透露的内容，并明确说测试尚未开始。"] },
-  { id: "no-reservation", world: "station-program-world", inputs: ["问杜衡能否替我暂存一个组件，但我还没承诺付款。", "对他说：\"我决定先不预留，刚才的请求撤回。\"", "安静查看物资是否仍归原主，不交付也不取走任何东西。"] },
-];
-
-// Retired seventh cohort.
-export const NARRATIVE_CONFIRMATION_RETIRED_V7: Flow[] = [
-  { id: "public-question", world: "blackmarsh", inputs: ["抬高声音朝附近喊：\"有人熟悉这片港口吗？\"", "向实际回应的人道谢；没人回应就看看四周，不假定已经得到回答。", "停在原地，默想哪些事仍然没有弄清，不再喊话。"] },
-  { id: "nearby-worker", world: "blackmarsh", inputs: ["寻找岸边一个能短暂交谈的工人，注意他的样貌和手边的用具。", "向实际找到的工人问：\"这附近有什么地方适合等雨小一点？\"", "告诉他我先记住这个建议，但还没决定去那里。"] },
-  { id: "dry-scrap", world: "blackmarsh", inputs: ["在脚边公共区域找一块松散的小木片，先看清它和周围的东西。", "问附近的人这块木片是否有人要用，暂不拿走。", "说明我不取用了，保持木片在原来的地方。"] },
-  { id: "window-approach", world: "blackmarsh", inputs: ["确认 Harbor Goldsmith 店铺的招牌在哪里。", "只走到刚才看见的金匠店橱窗旁，不进店，也不说话。", "从此处查看里面能辨认的陈设与人物，看不到就说明看不到。"] },
-  { id: "no-companion", world: "blackmarsh", inputs: ["对身边旅人说：\"我暂时不打算跟任何人同行。\"", "等他回答，不追加新的同行条件。", "回顾他是否接受了我的意思，只在心里记下，不替他许诺。"] },
-  { id: "scene-detail", world: "blackmarsh", inputs: ["看看拱门边有没有正在休息的行人或刚到的小贩。", "向确实看见的人问他希望别人怎么称呼他。", "按他真正给出的称呼道别，没有说名字就沿用外观称呼。"] },
-  { id: "literal-payment", world: "station-program-world", inputs: ["询问杜衡交出一件密封组件的具体价码和先后顺序。", "明确表示我接受二枚电池换一件组件，并请他确认这个约定。", "如果他已确认该约定，现在就把二枚能量电池交到杜衡手里；未确认则先询问。", "清点实际剩余电池和收到的组件，不补付第二次。"] },
-  { id: "offer-withdrawal", world: "station-program-world", inputs: ["问杜衡是否愿意只收一枚电池，但先不把东西给他。", "告诉他我决定暂缓这笔交换，没有接受新的价格。", "检查我拥有的物资是否保持原样。"] },
-  { id: "uncertified-report", world: "station-program-world", inputs: ["检查泵的密封状态，只做检查，不维修也不测试。", "把亲眼看到的密封状态告诉乔伊，请他不要当作完工报告。", "静下来看一看现有记录：哪些是观察，哪些只是人物说法。"] },
-  { id: "paper-arrow", world: "station-program-world", inputs: ["在检修舱内找一张可以使用的废纸，确认不是仍在使用的记录。", "若已经找到，就把这同一张纸折成箭头形放在空处，仅作方向标记。", "请乔伊看看这个箭头是否容易认出，不要求他认证维修。"] },
-  { id: "limited-disclosure", world: "station-program-world", inputs: ["查看压力测试台外面公开可读的标识，不假定知道校验码。", "向乔伊询问他愿意告诉我的启动条件。", "只在心里整理他实际说过的步骤；缺失的信息保留为未知。"] },
-  { id: "retract-false-report", world: "station-program-world", inputs: ["故意对乔伊说：\"泵已经修好了。\"实际还没动手。", "再亲自查看泵的实际密封状况，不做更改。", "按这次检查结果纠正我刚才的话，不把谎话继续当作事实。"] },
-];
-
-// Retired eighth cohort.
-export const NARRATIVE_CONFIRMATION_RETIRED_V8: Flow[] = [
-  { id: "dock-call", world: "blackmarsh", inputs: ["朝码头喊一声：\"借问一下，有人在等船吗？\"", "只向确实回答的人说明我刚抵达；没有回答就留在原地听一听。", "在心里记下谁真正回应过，不把没说的话算进去。"] },
-  { id: "idle-sailor", world: "blackmarsh", inputs: ["找找岸边是否有暂时闲下来的普通水手，认清他的衣着和随身物件。", "向实际看到的水手问附近有没有供外来人歇脚的地方。", "道谢并说明我会先核实，没有答应付钱或跟随。"] },
-  { id: "loose-material", world: "blackmarsh", inputs: ["在岸边找一段松散、可辨认的废麻绳，先不捡起。", "询问附近的人这段绳子是否仍有人使用，不声称它已属于我。", "表示我先不拿了，让绳子保持原样。"] },
-  { id: "goldsmith-visit", world: "blackmarsh", inputs: ["辨认岸边金匠店的入口与临街招牌。", "走近刚才看到的店门，留在门槛外，不触碰陈设。", "从门外查看柜台一带是否有人，只描述实际可见的情况。"] },
-  { id: "own-choice", world: "blackmarsh", inputs: ["向附近旅人说：\"我想自己安排接下来的路程，暂不结伴。\"", "安静听他有什么回答，不替他作决定。", "私下整理这次谈话里真正成立的约定；没有约定就保持没有。"] },
-  { id: "passing-carrier", world: "blackmarsh", inputs: ["留意拱门外是否有放下担子休息、方便说几句话的搬运工。", "若确实见到，问他今天忙些什么；没找到就说明仍没找到，不随便换人。", "结束这次交谈，只向实际交谈的那个人道别。"] },
-  { id: "confirmed-handover", world: "station-program-world", inputs: ["向杜衡确认一个密封组件的价格，以及双方交付顺序。", "对他说：\"两颗能量电池换一个组件，这个条件我接受，请确认。\"", "在他已经明确确认的前提下，现在交出两颗能量电池，不多给；否则先问清楚。", "只清点已经实际交到我手上的东西和剩余电池，不再付款。"] },
-  { id: "price-refusal", world: "station-program-world", inputs: ["问杜衡一颗电池是否能换组件，先不付款。", "对他说：\"我暂时不按这个价格买，今天这笔先停。\"", "查看自己的电池和冷却剂有没有实际减少，不凭对话推断成交。"] },
-  { id: "honest-status", world: "station-program-world", inputs: ["查看冷却泵是否还在漏，先不取用任何材料。", "把刚才真正观察到的情况告诉乔伊，明确还没有完成维修。", "在心里区分泵的实际状态与乔伊的态度，不宣布目标已完成。"] },
-  { id: "folded-warning", world: "station-program-world", inputs: ["寻找一块可用的废包装纸片，认清它原本在哪里。", "如果确实找到，就把同一块纸片折成能立住的波浪形，放在安全空处；不改变泵。", "请杜衡看看这个纸片标记，说明它不代表检修通过。"] },
-  { id: "public-procedure", world: "station-program-world", inputs: ["查看测试台上实际可见的说明，不索取别人的私有记录。", "询问乔伊此刻能告诉我哪些测试准备要求。", "复述他已经透露的内容，并说明我还没开始测试。"] },
-  { id: "false-acceptance", world: "station-program-world", inputs: ["故意对乔伊说：\"这一轮已经通过验收。\"事实上还没检修。", "亲自检查密封和认证的实际状态，不把刚才的话当证据。", "依据检查更正我刚才的说法，不请求他直接通过。"] },
-];
-
-// Retired ninth cohort.
-export const NARRATIVE_CONFIRMATION_RETIRED_V9: Flow[] = [
-  { id: "calling-out", world: "blackmarsh", inputs: ["扬声问一句：\"这儿有人知道船什么时候再开吗？\"", "听听有没有人回话；有的话就说我并不急着走。", "先不说话，回想刚才实际得到的消息。"] },
-  { id: "dockhand-break", world: "blackmarsh", inputs: ["找一位正在歇脚的码头杂工，看看能不能聊两句。", "向找到的那位问：\"你在这儿干多久了？\"", "听完后向他道谢，暂不提出新的请求。"] },
-  { id: "discarded-wedge", world: "blackmarsh", inputs: ["看看公共石阶边有没有掉落的废木楔，先别捡。", "向附近的人问那块木楔有没有主人。", "告诉对方我现在不拿，让它留在原处。"] },
-  { id: "goldsmith-customer", world: "blackmarsh", inputs: ["看看 Harbor Goldsmith 的门口，认清这家店。", "走到它门边，看看里面有没有招呼客人的人。", "向实际看见的店内人问今天还营业吗；没人就先等一下。"] },
-  { id: "no-promise", world: "blackmarsh", inputs: ["对身旁旅人说：\"我还想一个人逛逛，不能答应跟你走。\"", "听他回应，不追加什么条件。", "默默记下谈话结果，别把客套话当成同行承诺。"] },
-  { id: "street-seller", world: "blackmarsh", inputs: ["留意拱门旁是否有刚收摊、愿意歇口气的小贩。", "若找到了就问他卖些什么，没找到则留在原地。", "只向刚才交谈的那个人说声辛苦了。"] },
-  { id: "agreed-payment", world: "station-program-world", inputs: ["问杜衡换取一套密封组件需要我拿出什么。", "告诉他二节能量电池换一套组件我接受，请他明确答复。", "如果他明确同意了二换一，现在就交给他二节电池。", "看看我剩下多少电池、有没有收到组件；缺货就请他履行，别重复付钱。"] },
-  { id: "not-buying", world: "station-program-world", inputs: ["向杜衡商量能不能只用一节电池换组件。", "告诉他我决定先不买，不要替我保留。", "清点自己的电池与冷却剂，只核对而不使用。"] },
-  { id: "observed-leak", world: "station-program-world", inputs: ["靠近冷却泵，看清密封处实际怎么样，不动维修材料。", "向乔伊描述眼前的情况，说明这是检查而非完工通知。", "静下心分清哪些情况已经看见、哪些只是打算。"] },
-  { id: "paper-support", world: "station-program-world", inputs: ["找一片无主的废硬纸，看看能否折成竖着的小提醒。", "若找到了，把这同一片纸折成可立的拱形放在泵旁，不操作泵。", "请乔伊看一下这个提醒物，说明泵还没因此修好。"] },
-  { id: "ask-procedure", world: "station-program-world", inputs: ["读一下冷却泵测试台上面向操作员的公开说明。", "问乔伊正式测试之前还需要确认什么。", "把他实际告诉我的要求复述给他，说明我尚未测试。"] },
-  { id: "corrected-boast", world: "station-program-world", inputs: ["故意对乔伊吹嘘：\"我已经把这台泵全修妥了。\"其实还没开始。", "亲自查看泵的密封和测试状态，不做操作。", "依据检查向乔伊更正这句夸口，不要求他认证。"] },
-];
-
-// Tenth cohort: frozen after receipt projection and compound-continuation corrections.
-export const NARRATIVE_CONFIRMATION: Flow[] = [
-  {
-    "id": "harbor-hail",
-    "world": "blackmarsh",
-    "inputs": [
-      "向码头周围扬声问：\"新下船的人该往哪边走？\"",
-      "听到答复后，说清楚我暂时只想认路。",
-      "安静地回顾实际听见的方向，把猜测留作未确认。"
-    ]
-  },
-  {
-    "id": "resting-messenger",
-    "world": "blackmarsh",
-    "inputs": [
-      "留意港口拱门边是否有正在等人的送信人。",
-      "若看到了就向那个人问候，问是否方便打听这条街；没有看到就说说眼前能确认的情况。",
-      "向刚才交谈的那个人道谢，不接取送信的差事。"
-    ]
-  },
-  {
-    "id": "weathered-container",
-    "world": "blackmarsh",
-    "inputs": [
-      "在公共石阶边找找废弃的小木盒，先只查看，不拿走。",
-      "询问附近的人这个盒子是不是有主的；如果没找到盒子，只问这里能否捡拾废料。",
-      "表示我今天不会带走东西，然后清点自己原来的随身物资。"
-    ]
-  },
-  {
-    "id": "shop-threshold",
-    "world": "blackmarsh",
-    "inputs": [
-      "认一下 Harbor Goldsmith 的门面和招牌。",
-      "走近这家店，并从门外看看里面是否有人接待。",
-      "向实际找到的店内人问能否借门口避一阵雨；没见到人就先留在门外。"
-    ]
-  },
-  {
-    "id": "declining-guide",
-    "world": "blackmarsh",
-    "inputs": [
-      "向身边旅人说明：\"我打算自己认路，先不请向导。\"",
-      "听完他的回应，不改变刚才的决定。",
-      "默默回顾双方有没有作出承诺，不把一般建议算成约定。"
-    ]
-  },
-  {
-    "id": "waiting-porter",
-    "world": "blackmarsh",
-    "inputs": [
-      "找一位在港区歇脚的搬运工，观察他是否方便交谈。",
-      "若见到了，就问他在港口工作最需要注意什么；没见到则环顾所在位置。",
-      "只回复我会记着这条提醒，不替他答应任何工作。"
-    ]
-  },
-  {
-    "id": "settled-exchange",
-    "world": "station-program-world",
-    "inputs": [
-      "向杜衡询问一件密封组件的交换条件，先不付款。",
-      "明确提出：\"两枚能量电池换一件密封组件，我愿意；你是否同意？\"",
-      "只要他已经明确同意，就实际付出两枚电池；随后查看我的电池和组件实际有多少。"
-    ]
-  },
-  {
-    "id": "keep-supplies",
-    "world": "station-program-world",
-    "inputs": [
-      "向杜衡问能否先借一个密封组件，而非马上购买。",
-      "表示今天先不拿组件，不接受他提出的新债务。",
-      "检查自己实际剩下的电池与冷却剂，不对泵动手。"
-    ]
-  },
-  {
-    "id": "inspection-note",
-    "world": "station-program-world",
-    "inputs": [
-      "查看冷却泵的密封和测试现状，只做检查。",
-      "如实向乔伊说清目前看到的情况，别称作维修完成。",
-      "私下整理还有哪些维修步骤没有做，不对别人说话。"
-    ]
-  },
-  {
-    "id": "folded-tent",
-    "world": "station-program-world",
-    "inputs": [
-      "看看检修舱有没有被丢弃的包装纸片，想折一个桌面提醒牌。",
-      "如果找到纸片，就把同一片折成能站住的三角形放在泵旁，保持泵原状。",
-      "请乔伊注意这个提示牌，但别把提示牌当作维修或测试已经通过。"
-    ]
-  },
-  {
-    "id": "operator-advice",
-    "world": "station-program-world",
-    "inputs": [
-      "查看压力测试操作区域已经公开的提示，不启动设备。",
-      "向乔伊问是否有只有检查员知道的操作信息，等他自己决定是否告知。",
-      "复述他实际说过的操作要求，明确我这会儿还没做测试。"
-    ]
-  },
-  {
-    "id": "admit-mistake",
-    "world": "station-program-world",
-    "inputs": [
-      "故意对乔伊说大话：\"我刚完成了整套检修。\"其实我还没修。",
-      "查看泵的真实密封和压力状态，只检查而不操作。",
-      "根据刚才看到的情况向乔伊纠正我的说法，别请求虚假认证。"
-    ]
-  }
-];
-
-export const NARRATIVE_CONTINUOUS: Flow[] = [
-  { id: "harbor-session", world: "blackmarsh", inputs: [
-    "环顾港区，先认清周围的人与店铺。", "跟附近的旅人打招呼，问他怎么称呼。", "告诉他我刚下船，问他有没有避雨的建议。",
-    "问他来这里是为了什么，听完再决定。", "向他道谢，说明我想先看看金匠店。", "走近 Harbor Goldsmith 的招牌。",
-    "观察店内是否有人，若能交谈就先打招呼，不擅自拿东西。", "询问店主是否愿意给新来者介绍这条街。", "请他推荐一个普通人负担得起的住宿去处。",
-    "回想刚才旅人和店内的人分别说了什么，找出一致与不确定之处。", "离开时告别，记住尚未核实的住宿线索。" ] },
-  { id: "station-session", world: "station-program-world", inputs: [
-    "看看冷却泵的现状，清点我的实际物资。", "问杜衡一个密封组件需要怎样交换。", "我说：\"两节能量电池换一个密封组件，我接受这个条件，你同意吗？\"",
-    "如果他明确同意，就实际交给他两节能量电池。", "先清点已收到的组件；若尚未交付，再请他交付约定的一件。", "向乔伊询问测试所需校验码与步骤。",
-    "如果组件已收到，就用一个密封组件和两升冷却剂修复泵的密封；否则先指出缺少材料。", "查看维修后的密封状态，告诉乔伊实际观察到的结果。",
-    "仅在密封已修复且已获知校验码的情况下进行压力测试，否则先补足条件。", "请乔伊独立检查本轮结果，并决定是否认证。",
-    "向同事说明已完成和仍未完成的事项，清点物资并感谢他们。" ] },
-];
+export function plannedContinuityRounds(flows: ContinuityCase[], recorded: ReadonlySet<string>) {
+  return flows.flatMap(flow => flow.turns.map(({ text, expectation }, index) => ({
+    flowId: flow.id, turn: index + 1, submissionId: `${flow.id}-${index + 1}`, text, expectation,
+    evidenceFile: `${flow.id}-${index + 1}.json`,
+    status: recorded.has(`${flow.id}-${index + 1}`) ? "recorded" : "not-run",
+  })));
+}
 
 async function main() {
   const phase = process.argv[2] ?? "development", selected = process.argv[3];
-  const flows = (phase === "development" ? NARRATIVE_DEVELOPMENT : phase === "confirmation" ? NARRATIVE_CONFIRMATION
-    : phase === "regression" ? [...NARRATIVE_CONFIRMATION_RETIRED, ...NARRATIVE_CONFIRMATION_RETIRED_V2, ...NARRATIVE_CONFIRMATION_RETIRED_V3, ...NARRATIVE_CONFIRMATION_RETIRED_V4, ...NARRATIVE_CONFIRMATION_RETIRED_V5, ...NARRATIVE_CONFIRMATION_RETIRED_V6, ...NARRATIVE_CONFIRMATION_RETIRED_V7, ...NARRATIVE_CONFIRMATION_RETIRED_V8, ...NARRATIVE_CONFIRMATION_RETIRED_V9, ...NARRATIVE_CONFIRMATION, ...NARRATIVE_CONTINUOUS]
-    : phase === "continuous" ? NARRATIVE_CONTINUOUS : []).filter(flow => !selected || selected.split(",").includes(flow.id));
-  if (!flows.length) throw new Error("Choose development, regression, confirmation or continuous and optional comma-separated flow IDs");
-  const root = path.resolve(".livingworld-benchmarks/jev-engine"), trial = `narrative-${phase}-${Date.now()}`;
+  const flows = selectContinuityFlows(phase, selected);
+  const seed = Number(process.argv[4] ?? CONTINUITY_SEEDS[0]);
+  if (!CONTINUITY_SEEDS.some(value => value === seed)) throw new Error("Use a frozen evaluation seed");
+  const corpus = readFileSync("src/engine/benchmarks/conversation-continuity/cases.ts");
+  if (createHash("sha256").update(corpus).digest("hex") !== CONTINUITY_CORPUS_SHA256) throw new Error("Frozen scenario corpus changed");
+  const root = path.resolve(".livingworld-benchmarks/jev-engine"), trial = `continuity-${phase}-${seed}-${Date.now()}`;
   const directory = path.join(root, trial); mkdirSync(directory);
   const save = (name: string, value: unknown) => writeFileSync(path.join(directory, name), JSON.stringify(value, null, 2), { flag: "wx", flush: true });
   const diff = execFileSync("git", ["diff", "HEAD"], { encoding: "utf8" });
-  if (["confirmation", "continuous"].includes(phase) && execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim()) throw new Error("Freeze a clean producer for confirmation");
+  if (phase !== "development" && execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim()) throw new Error("Freeze a clean producer for confirmation");
+  const promptHashes = Object.fromEntries(execFileSync("rg", ["--files", "src/engine/prompts"], { encoding: "utf8" }).trim().split("\n")
+    .filter(file => file.endsWith(".md")).sort().map(file => [file, contentHash(readFileSync(file, "utf8"))]));
   let stopped: string | undefined;
   const live = createJevLiveBudget(root, () => stopped ?? (phase === "development" && live.budget.summary.tranche &&
     live.budget.summary.tranche.knownNanoCny + live.budget.summary.tranche.reservedNanoCny > 9_500_000_000 ? "development probe ceiling" : undefined));
+  if (live.budget.summary.tranche?.id !== "conversation-continuity-20261014") {
+    live.close(); throw new Error("The separate conversational-continuity grant must be active");
+  }
   live.beginTrial(trial);
   const catalog = parseModelCatalog(qualificationCatalogDocument(loadModelCatalog(), "C"));
   const registry = new ModelRegistry(catalog, directory), resolver = createModelFetchResolver(process.env);
   const gateway = new ModelGateway(catalog, process.env, { registry, maxTransportAttempts: 1,
     fetchForAccount: (id, account) => live.transport(id, resolver(id, account) ?? fetch) });
   let database = new LocalDatabase(path.join(directory, "world.sqlite"), { heartbeat: false });
-  const worlds = [loadWorldScript(path.resolve("worlds/blackmarsh/world"), { seed: 20261013, modelCatalog: catalog }),
-    loadWorldScript(path.resolve("test/fixtures/station-program-world"), { seed: 20261013, modelCatalog: catalog })];
+  const worlds = [loadWorldScript(path.resolve("worlds/blackmarsh/world"), { seed, modelCatalog: catalog }),
+    loadWorldScript(path.resolve("test/fixtures/station-program-world"), { seed, modelCatalog: catalog })];
   const repository = new MemoryWorldRepository(Object.fromEntries(worlds.map(world => [world.id, world])));
-  const makeHost = () => new WorldHost({ repository, store: database, ledger: database, provider: gateway, runLeaseMaxCommits: 8 });
+  const timers = new Set<ReturnType<typeof setTimeout>>();
+  const clearHostTimers = () => { for (const timer of timers) clearTimeout(timer); timers.clear(); };
+  const makeHost = () => new WorldHost({ repository, store: database, ledger: database, provider: gateway,
+    setTimer(callback, delayMs) {
+      const timer = setTimeout(() => { timers.delete(timer); callback(); }, delayMs); timers.add(timer); return timer;
+    },
+    clearTimer(timer) { clearTimeout(timer); timers.delete(timer); },
+  });
   let host = makeHost();
   const manifest = { trial, phase, flows, head: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
     diffHash: contentHash(diff), driverHash: contentHash(readFileSync(import.meta.filename, "utf8")),
-    worlds: worlds.map(world => ({ id: world.id, hash: world.contentHash })), catalogHash: catalog.hash,
-    beforeBudget: live.budget.summary, rubric: NARRATIVE_RUBRIC, review: "Unscored until persisted state and full text are reviewed. Latency is observed presentation time, not proof of useful feedback." };
+    worlds: worlds.map(world => ({ id: world.id, hash: world.contentHash })), catalogHash: catalog.hash, promptInventoryHash: contentHash(promptHashes),
+    beforeBudget: live.budget.summary, seed, corpusHash: CONTINUITY_CORPUS_SHA256,
+    protocolHash: contentHash(readFileSync("docs/research/2026-10-14-conversation-continuity-protocol.md", "utf8")),
+    rubric: { axes: CONTINUITY_AXES, requiredRate: 0.9, perWorld: true, continuousPerSession: true }, review: "Unscored until persisted state and full text are reviewed. Latency is observed presentation time, not proof of useful feedback." };
   save("manifest.json", manifest); writeFileSync(path.join(directory, "producer.diff"), diff);
+  save("prompt-assets.json", promptHashes); save("model-catalog.json", catalog.snapshot());
   writeFileSync(path.join(directory, "driver.ts"), readFileSync(import.meta.filename));
   const reports: unknown[] = [];
   try {
     for (const flow of flows) {
+      const flowBudget = live.budget.summary;
       const coldStarted = performance.now();
-      const created = await host.createInstance({ worldId: flow.world, seed: 20261013, start: flow.world === "blackmarsh"
+      const created = await host.createInstance({ worldId: flow.world, seed, start: flow.world === "blackmarsh"
         ? { kind: "origin", originId: "harbor-wayfarer", displayName: "林舟", appearance: "穿深色旅行外衣，背着帆布包。", motivation: "认识这里的人，找到落脚之处。" }
         : { kind: "observer" } });
       const id = created.summary.id;
@@ -353,7 +96,9 @@ async function main() {
       save(`${flow.id}-initial.json`, initial);
       const rows: unknown[] = [];
       const coldMs = performance.now() - coldStarted;
-      for (const [index, text] of flow.inputs.entries()) {
+      const coldRequests = live.budget.summary.phases.trajectory.httpRequests - flowBudget.phases.trajectory.httpRequests;
+      const coldCostCny = (live.budget.summary.estimatedPeakNanoCny - flowBudget.estimatedPeakNanoCny) / 1e9;
+      for (const [index, { text, expectation }] of flow.turns.entries()) {
         const before = database.readInstance(id).document, beforeBudget = live.budget.summary;
         const submissionId = `${flow.id}-${index + 1}`, started = performance.now();
         let failure: string | null = null, firstParagraphMs: number | null = null;
@@ -365,7 +110,11 @@ async function main() {
             if (!run) throw new Error("Missing durable run");
             if (beats.some(beat => beat.segments.length)) firstParagraphMs ??= performance.now() - started;
             if (!["running", "queued", "pausing"].includes(run.status) && !beats.some(beat => ["queued", "generating"].includes(beat.status))) break;
-            if (performance.now() - started > 240_000) stopped = "trial dispatch stopped after four minutes without actionable feedback";
+            if (performance.now() - started > 240_000) {
+              stopped = "trial censored after four minutes without actionable feedback";
+              if (["running", "queued", "pausing"].includes(run.status)) await host.pauseRun(id, { runId: run.id, generation: run.generation });
+              throw new Error(stopped);
+            }
             await new Promise(resolve => setTimeout(resolve, 100));
           }
           await host.drainNarratives(id);
@@ -373,8 +122,9 @@ async function main() {
         await live.drain();
         const document = database.readInstance(id).document, intent = document.participantIntents.find(item => item.submissionId === submissionId);
         const run = intent && document.runs[intent.runId];
-        const row = { text, submissionId, failure, status: run?.status, stopReason: run?.stopReason, firstParagraphMs,
+        const row = { text, expectation, submissionId, failure, status: run?.status, stopReason: run?.stopReason, firstParagraphMs,
           completeMs: performance.now() - started, replayEqual: contentHash(replaySimulationState(document.state)) === contentHash(document.state),
+          fromWorldSeconds: before.state.truth.elapsedSeconds, toWorldSeconds: document.state.truth.elapsedSeconds,
           httpRequests: live.budget.summary.phases.trajectory.httpRequests - beforeBudget.phases.trajectory.httpRequests,
           costCny: (live.budget.summary.estimatedPeakNanoCny - beforeBudget.estimatedPeakNanoCny) / 1e9,
           reservedCny: (live.budget.summary.reservedNanoCny - beforeBudget.reservedNanoCny) / 1e9,
@@ -387,13 +137,13 @@ async function main() {
         rows.push(row); save(`${flow.id}-${index + 1}.json`, { ...row, document });
         console.log(JSON.stringify({ trial, flow: flow.id, input: index + 1, status: row.status, failure, firstParagraphMs,
           completeMs: row.completeMs, requests: row.httpRequests, costCny: row.costCny, replay: row.replayEqual }));
-        if (failure || stopped || live.budget.summary.blockingUnknown.length) break;
+        if (failure || run?.status === "failed" || stopped || live.budget.summary.blockingUnknown.length) break;
       }
       const saved = database.readInstance(id).document;
       const calls = live.budget.summary.phases.trajectory.httpRequests;
-      database.close(); database = new LocalDatabase(path.join(directory, "world.sqlite"), { heartbeat: false }); host = makeHost();
+      clearHostTimers(); database.close(); database = new LocalDatabase(path.join(directory, "world.sqlite"), { heartbeat: false }); host = makeHost();
       await host.drainNarratives(id); host.instance(id); host.instance(id); await live.drain();
-      reports.push({ id: flow.id, instanceId: id, initialSubjects: Object.keys(initial.state.agents).length, coldMs, rows,
+      reports.push({ id: flow.id, instanceId: id, initialSubjects: Object.keys(initial.state.agents).length, coldMs, coldRequests, coldCostCny, rows,
         restartStateEqual: contentHash(database.readInstance(id).document.state) === contentHash(saved.state),
         restartNarrativeEqual: contentHash(database.readInstance(id).document.narratives) === contentHash(saved.narratives),
         extraReadCalls: live.budget.summary.phases.trajectory.httpRequests - calls });
@@ -416,8 +166,11 @@ async function main() {
       if (stopped || live.budget.summary.blockingUnknown.length) break;
     }
   } finally {
-    stopped = "experiment closed"; await live.drain();
-    save("result.json", { ...manifest, reports, afterBudget: live.budget.summary, doctor: database.debugDoctor() });
+    const stopReason = stopped ?? null;
+    stopped = "experiment closed"; clearHostTimers(); await live.drain();
+    const plannedRounds = plannedContinuityRounds(flows, new Set(flows.flatMap(flow => flow.turns
+      .map((_, index) => `${flow.id}-${index + 1}`).filter(id => existsSync(path.join(directory, `${id}.json`))))));
+    save("result.json", { ...manifest, reports, plannedRounds, stopped: stopReason, afterBudget: live.budget.summary, doctor: database.debugDoctor() });
     database.close(); registry.stopBackgroundRefresh(); live.close();
     console.log(JSON.stringify({ result: path.join(directory, "result.json") }));
   }
