@@ -25,7 +25,7 @@ interface TestReading { state: Record<string, unknown>; catalog: Record<string, 
 function readingDecision(reading: TestReading): Pick<DirectTestWire, "state" | "questions"> {
   const choice = (criteria: Record<string, string>): DecisionQuestionV2 => ({ type: "choice", version: "test-reading", instructions: "Scripted interpretation boundary", criteria });
   return { state: reading.state, questions: { ...Object.fromEntries(Object.entries(reading.catalog).map(([id, criteria]) => [id, choice(criteria)])),
-    ...reading.cognition, interaction: choice({ world_action: "World action", clarification: "Clarification" }),
+    ...reading.cognition, interaction: choice({ world_action: "World action", clarification: "Clarification", request_complete: "This submission already has complete receipts" }),
     speech: choice({ none: "None", create: "Created words", input: "Literal input", ...reading.exactQuotes }),
     reflection: choice({ none: "None", create: "Private synthesis" }), expression: { type: "noul", version: "test-reading", instructions: "Expressive action" } } };
 }

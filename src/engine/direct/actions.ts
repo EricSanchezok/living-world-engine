@@ -245,6 +245,12 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   if (answers.urgency?.type === "score") intent.urgency = answers.urgency.score;
   intent.lastInputHash = inputHash; intent.wakeReasons = []; intent.failure = null; intent.dependencies = view.reads;
   let operation = selected(answers, "operation");
+  if (external && selected(answers, "interaction") === "request_complete") {
+    intent.status = "waiting"; intent.activityId = null; intent.activeSubmission = null; intent.causeActionId = null;
+    intent.wait = { entityIds: [], untilSeconds: null, reason: "request-complete" };
+    control.completedSubmissionIds.push(external.submissionId);
+    return { frame: null, audits, reads: view.reads, cognition };
+  }
   if (external && selected(answers, "interaction") === "clarification") {
     intent.status = "waiting"; intent.activityId = null; intent.activeSubmission = null; intent.causeActionId = null;
     intent.wait = { entityIds: [], untilSeconds: null, reason: "presentation-clarification" };

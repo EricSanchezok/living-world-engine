@@ -28,7 +28,7 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   void _policy; void _kinds;
   const schema = z.object({
     understanding: z.string().describe("Briefly identify the intended interaction and next unperformed step. If there is a prerequisite, state whether actual evidence supports it or it remains unknown. Do not predict a result."),
-    interaction: z.enum(["clarification", "world_action"]),
+    interaction: z.enum(["clarification", "world_action", "request_complete"]),
     action: z.object({ ...fieldShape, attempt: z.string(), utterance: z.string().nullable()
       .describe("The sole actual spoken text, or explicitly requested private reflection, for this step. No stage directions or unsolicited additions; null for a purely physical action or clarification."), manner: z.string().nullable(),
       literalQuote: z.enum(["none", ...input.quotes.map((_, index) => `q${index}`)] as [string, ...string[]]) }),
@@ -36,13 +36,17 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   });
   const generated = await decisions.provider.generateStructured({ ...decisions.scope, subjectId: agentId,
     modelRegistrySnapshotHash: decisions.control.registryHash, modelInvocation: decisions.next(agentId),
-    profileId: input.profileId, role: "decision", schemaName: "PlayerActionReadingV2", system, userPrompt,
+    profileId: input.profileId, role: "decision", schemaName: "PlayerActionReadingV3", system, userPrompt,
     promptVersion: `player-reading-${contentHash({ system, userPrompt })}`,
     context: { playerReading: { state: context, language: input.language, catalog, cognition,
       exactQuotes: Object.fromEntries(input.quotes.map((quote, index) => [`q${index}`, quote])) } },
     schema, jsonExamplePolicy: "omit" });
   const action = generated.value.action as Record<string, string | null>;
   const operation = action.operation;
+  if (generated.value.interaction === "request_complete" &&
+    (!Array.isArray(state.currentRequestReceipts) || state.currentRequestReceipts.length === 0)) {
+    throw Object.assign(new Error("Request completion requires a receipt from this submission"), { audit: generated.audit });
+  }
   const active = new Set(["operation", "timing", "duration", "progress_next", "goal",
     ...(["speak", "transfer"].includes(operation ?? "") ? ["recipient",
       ...(action.recipient === "discover" ? ["search_location"] : [])] : ["target"]),
@@ -56,7 +60,7 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
     if (["timing", "duration", "amount"].includes(id) && (!action[id] || action[id] === "none")) {
       action[id] = defaults[id]!; continue;
     }
-    if (active.has(id) && generated.value.interaction !== "clarification") {
+    if (active.has(id) && generated.value.interaction === "world_action") {
       throw Object.assign(new Error(`Player reading did not bind the selected action's ${id}`), { audit: generated.audit });
     }
     action[id] = defaults[id] ?? "none";
@@ -76,7 +80,8 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   if (utterance && quote) utterance = quote;
   // Copying the complete input does not authorize appending another player's reply.
   const verbatim = request.rawText.trim();
-  if (operation === "speak" && verbatim && utterance?.startsWith(verbatim)) utterance = verbatim;
+  const words = verbatim.replace(/[。！？.!?]+$/u, "");
+  if (operation === "speak" && words && utterance?.startsWith(words)) utterance = verbatim;
   const expression: ActionExpression = { attempt: action.attempt!.trim(), utterance,
     manner: action.manner?.trim() || null };
   return { answers, expression, audit: generated.audit };

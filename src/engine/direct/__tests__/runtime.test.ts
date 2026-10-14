@@ -81,6 +81,45 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("closes an already executed submission without another action or time advance", async () => {
+    const options = { operation: "wait", duration: "d0", playerProgress: "continue", interaction: "world_action",
+      creationEnabled: true, timerSeconds: 3600, readingOverrides: {} as Record<string, string> };
+    const f = await fixture(options);
+    f.roster.keeper = { kind: "idle", agentId: "keeper", reason: "explicit" };
+    await f.engine.bootstrapAgents();
+    const first = await f.engine.step(f.roster, f.request("安静等五秒"));
+    expect(first.state.truth.elapsedSeconds).toBe(5);
+    expect(readDirectState(first.state.executionState!, first.state).intents.player!.status).toBe("ready");
+    options.interaction = "request_complete";
+    options.readingOverrides = { operation: "none", target: "unused-invalid-reference" };
+    const calls = f.transport.mock.calls.length;
+    const second = await f.engine.step(f.roster, { expectedRevision: first.state.revision, trigger: "batch", externalActions: [] });
+    expect(second.state.truth).toEqual(first.state.truth);
+    expect(second.state.history.at(-1)!.directEvent).toMatchObject({ frames: [], events: [], observations: [], presentation: [] });
+    expect(readDirectState(second.state.executionState!, second.state)).toMatchObject({
+      completedSubmissionIds: ["submission-0"], intents: { player: { status: "waiting", activeSubmission: null, failure: null } },
+    });
+    expect(f.transport.mock.calls.length - calls).toBe(1);
+    expect(replaySimulationState(second.state)).toEqual(second.state);
+  });
+  it("does not let completion skip a fresh submission without its own receipts", async () => {
+    const f = await fixture({ interaction: "request_complete", creationEnabled: true });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("再看看门"));
+    expect(result.state.truth).toEqual(f.world.initialState.truth);
+    expect(readDirectState(result.state.executionState!, result.state).intents.player).toMatchObject({
+      status: "failed", failure: { message: "Request completion requires a receipt from this submission" },
+    });
+    expect(readDirectState(result.state.executionState!, result.state).completedSubmissionIds).toEqual([]);
+  });
+  it("does not append an invented question after changing the input's terminal punctuation", async () => {
+    const f = await fixture({ operation: "speak", recipient: "guard", creationEnabled: true,
+      creationResponse: { attempt: "纠正刚才提到的范围", utterance: "我问的是门外——那一带是什么地方？", manner: null } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("我问的是门外。"));
+    expect(result.state.history[0]!.directEvent!.frames[0]!.utterance).toBe("我问的是门外。");
+    expect(result.committed.observations.find(packet => packet.observerId === "keeper")?.scene?.speech?.utterance).toBe("我问的是门外。");
+  });
   it("preserves already worded player dialogue instead of the interpreter's added reply", async () => {
     const f = await fixture({ operation: "speak", recipient: "guard", speech: "input", creationEnabled: true,
       creationResponse: { attempt: "询问对方的来意", utterance: "你为什么来这儿？我只是问问，没什么事，也没人让我来。", manner: null } });
