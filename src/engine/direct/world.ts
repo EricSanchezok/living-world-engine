@@ -294,7 +294,9 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     if (status === "succeeded" || status === "partial") {
       if (frame.kind === "move" && frame.targetEntityId) {
         const near = selected(answers, `${prefix}_movement`) === "near";
-        const placementId = near ? state.truth.placements[frame.targetEntityId] ?? frame.targetEntityId : frame.targetEntityId;
+        const currentPlace = state.truth.placements[frame.actorEntityId];
+        const placementId = near && frame.targetEntityId !== currentPlace
+          ? state.truth.placements[frame.targetEntityId] ?? frame.targetEntityId : frame.targetEntityId;
         operations.push({ kind: "place_entity", entityId: frame.actorEntityId, placementId, ...source });
         if (near) {
           const fact: WorldFact = { id: directSemanticId("fact", [frame.actorEntityId, "proximity"]), subjectId: frame.actorEntityId,

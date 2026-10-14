@@ -17,7 +17,8 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
   observationScope?: string; speech?: string; creationEnabled?: boolean; privateGateFact?: boolean; named?: boolean;
   creationResponse?: unknown; creationResponses?: unknown[]; missingCoverage?: boolean; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
   recipient?: string; resolvedRecipient?: string; searchLocation?: string; transferAuthority?: string; transferExecution?: string;
-  reactionProgress?: string; playerProgress?: string; duplicateIdentity?: boolean; timerSeconds?: number; interaction?: string; duration?: string; actorVisible?: boolean } = {}) {
+  reactionProgress?: string; playerProgress?: string; duplicateIdentity?: boolean; timerSeconds?: number; interaction?: string; duration?: string; actorVisible?: boolean;
+  readingOverrides?: Record<string, string> } = {}) {
   let creations = 0;
   const f = directTestProvider(wire => {
     if (!wire.questions) {
@@ -52,7 +53,8 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
       if (id.endsWith("_expression")) value = options.effectExpansion ? "expand" : "existing";
       if (id.endsWith("_movement")) value = options.movement ?? "enter";
       if (q.type === "choice" && !(value in q.criteria)) value = "none" in q.criteria ? "none" : Object.keys(q.criteria)[0]!;
-      return [id, nativeAnswer(q, id === "expression" ? options.expression ?? 0 : value)];
+      return [id, wire.messages && options.readingOverrides?.[id] ? { type: "choice", choice: options.readingOverrides[id] }
+        : nativeAnswer(q, id === "expression" ? options.expression ?? 0 : value)];
     }));
   });
   const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
@@ -79,6 +81,38 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("ignores malformed auxiliary cognition and an unused observation branch without cancelling a wait", async () => {
+    const f = await fixture({ operation: "wait", duration: "d0", creationEnabled: true,
+      readingOverrides: { observation_scope: "none", belief_status_0: "support" } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("等五秒"));
+    expect(result.state.truth.elapsedSeconds).toBe(5);
+    expect(result.state.history[0]!.directEvent!.frames[0]!.kind).toBe("wait");
+    expect(Object.values(result.state.history[0]!.directEvent!.cognition[0]!.beliefs)).not.toContain("support");
+    expect(result.state.agents.player!.belief.claims[Object.keys(f.world.initialState.agents.player!.belief.claims)[0]!]!.stance)
+      .toBe(Object.values(f.world.initialState.agents.player!.belief.claims)[0]!.stance);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("still rejects an invalid parameter used by the selected action", async () => {
+    const f = await fixture({ operation: "observe", creationEnabled: true, readingOverrides: { observation_scope: "none" } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("看一下门"));
+    expect(result.state.truth).toEqual(f.world.initialState.truth);
+    expect(readDirectState(result.state.executionState!, result.state).intents.player).toMatchObject({ status: "failed" });
+  });
+  it("approaches the current location within it instead of exiting to its parent", async () => {
+    const f = await fixture({ operation: "move", target: "yard", movement: "near" });
+    const state = f.world.initialState;
+    state.truth.entities.district = { ...state.truth.entities.courtyard!, id: "district", name: "外城" };
+    state.truth.placements.district = null;
+    state.truth.placements.courtyard = "district";
+    state.truth.placements.player = "courtyard";
+    f.world.historyBaseHash = historyReplayBaseHash(state);
+    const engine = new SimulationEngine(f.world, f.algorithm); await engine.bootstrapAgents();
+    const result = await engine.step(f.roster, f.request("在院子附近挪一下"));
+    expect(result.state.truth.placements.player).toBe("courtyard");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("explains an already presented referent without speech, NPC work or physical time", async () => {
     const f = await fixture({ interaction: "clarification", target: "guard", timerSeconds: 36_000 });
     await f.engine.bootstrapAgents();

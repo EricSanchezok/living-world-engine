@@ -110,7 +110,12 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const observedNumbers = orderedValues(agent.belief.evidence).filter(evidence => evidence.step >= agent.observationCursorStep).flatMap(evidence => literalNumbers(evidence.description));
   const amounts = [...new Set([1, ...literalNumbers(text), ...observedNumbers, ...goals.flatMap(goal => literalNumbers(goal.description))])];
   const known = Object.entries(view.entities).map(([localId]) => [localId, agent.belief.localEntities[localId]!] as const);
-  const targetCriteria = { none: "No target or insufficient identity evidence", ...Object.fromEntries(known.map(([id, entity]) => [id, { name: entity.name, description: entity.description }])) };
+  const perspective = view.state as { self: { location: unknown } };
+  const targetCriteria = { none: "No target or insufficient identity evidence", ...Object.fromEntries(known.map(([id, entity]) => [id, {
+    name: entity.name, description: entity.description,
+    relationship: view.entities[id] === agent.entityId ? "self" :
+      view.entities[id] === state.truth.placements[agent.entityId] && perspective.self.location ? "current_location" : "known_entity",
+  }])) };
   const recipients = known.filter(([id]) => view.entities[id] !== agent.entityId && Object.values(state.agents).some(other => other.entityId === view.entities[id]));
   const recipientCriteria = { none: "This branch has no intended recipient", broadcast: "Speak or shout openly to whoever can hear, without needing a named listener", discover: "No perceptible recipient is available; first find someone",
     ...Object.fromEntries(recipients.map(([id, entity]) => [id, { name: entity.name, description: entity.description }])) };
@@ -206,6 +211,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const actionPolicy = jointInterpretation ? "Interpret all fields jointly as one next interaction. Current receipts distinguish requested steps from executed work."
     : loadPromptAsset("user/direct-action.md");
   const context = { actionPolicy, perspective: view.state, submittedAction: external ? { ...external, discourse: undefined } : null, discourse: external?.discourse ?? null, currentRequestReceipts,
+    requestPhase: currentRequestReceipts.length ? "Continue this same submission after its listed receipts" : "New submission: none of this input has executed. Earlier similar actions belong to other requests.",
     recentActions: recentActions.slice(-6).map(({ requested, target, actionKind, attempted, outcome, preparatoryFor }) => ({ requested, target, actionKind, attempted, outcome, preparatoryFor })),
     currentObservedFacts, intent: { goalId: intent.goalId, wakeReasons: intent.wakeReasons,
     recentOutcomeIds: intent.recentOutcomeIds }, latestObservedEvidence: orderedValues(agent.belief.evidence).filter(evidence => evidence.step === agent.observationCursorStep),
