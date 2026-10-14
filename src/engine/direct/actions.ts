@@ -112,7 +112,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const amounts = [...new Set([1, ...literalNumbers(text), ...observedNumbers, ...goals.flatMap(goal => literalNumbers(goal.description))])];
   const known = Object.entries(view.entities).map(([localId]) => [localId, agent.belief.localEntities[localId]!] as const);
   const perspective = view.state as { self: { location: unknown } };
-  const targetCriteria = { none: "No target or insufficient identity evidence", ...Object.fromEntries(known.map(([id, entity]) => [id, {
+  const targetCriteria = { none: "No separate target is needed. For move, bind the current place or an actual destination; do not leave an intended destination unspecified.", ...Object.fromEntries(known.map(([id, entity]) => [id, {
     name: entity.name, description: entity.description,
     relationship: view.entities[id] === agent.entityId ? "self" :
       view.entities[id] === state.truth.placements[agent.entityId] && perspective.self.location ? "current_location" : "known_entity",
@@ -289,7 +289,9 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const observationScope = selected(answers, "observation_scope") as ActionFrame["observationScope"];
   let target = operation === "observe" && observationScope === "inventory" ? agent.entityId
     : operation === "observe" && observationScope === "surroundings" ? null : view.entities[targetKey] ?? null;
-  const preparatoryFor: ActionKind | null = ["speak", "transfer", "move"].includes(operation) && !target && targetKey !== "broadcast" ? operation as ActionKind : null;
+  // Discovery is an explicitly selected prerequisite, never a substitute for a
+  // missing move/transfer parameter. The world can resolve an unbound attempt.
+  const preparatoryFor: ActionKind | null = ["speak", "transfer"].includes(operation) && targetKey === "discover" ? operation as ActionKind : null;
   if (preparatoryFor && ["speak", "transfer"].includes(preparatoryFor) && questions.search_location) target = view.entities[selected(answers, "search_location")] ?? null;
   if (!external && (["wait", "unknown"].includes(operation) || answers.relevant?.type === "noul" && answers.relevant.noul < 0.5)) {
     intent.status = "waiting"; intent.wait = { entityIds: target ? [target] : [], untilSeconds: null, reason: operation };
@@ -320,11 +322,23 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
         exactQuotes: quotes, expression: operation === "reflect" ? "Private reflection; do not deliver to anyone." : wordsOnly
           ? "This action is an ordinary spoken reply. Supply its actual words; attempt and manner can be omitted. No accompanying physical gesture is selected."
           : "Concrete attempted behavior and actual words before execution. Outcomes are not yet decided." },
-      schema: z.object({ attempt: z.string().optional(), utterance: z.string().nullable().optional(), manner: z.string().nullable().optional() }), jsonExamplePolicy: "omit" });
+      schema: z.object({ conversationReading: z.object({
+        currentQuestion: z.string().describe("The full question or conversational move actually addressed to you, resolving an ellipsis from the preceding shared exchange. Preserve what is being asked while replacing only its corrected subject or scope."),
+        evidenceForAnswer: z.string().describe("Your actual received evidence and its limits, including who did or said what. Do not manufacture earlier questions, promises or completed work."),
+        newContribution: z.string().describe("What this reply adds. If your previous question to this recipient is still unanswered and nothing relevant changed, do not ask it again."),
+      }).optional(), attempt: z.string().optional(), utterance: z.string().nullable().optional(), manner: z.string().nullable().optional() }), jsonExamplePolicy: "omit" });
     expression = { attempt: (!wordsOnly ? generated.value.attempt?.trim() : null) || text || actionLabels[operation as ActionKind] || "尝试行动",
       utterance: literal && external && (operation === "speak" || generated.value.utterance?.trim()) ? literal : generated.value.utterance?.trim() || null,
       manner: wordsOnly ? null : generated.value.manner?.trim() || null };
     utterance = expression.utterance; audits.push(generated.audit);
+    const awaitingReply = (view.state as { ownSpeechSinceLastRecipientReply: Array<{ recipientLocalId: string; words: string }> }).ownSpeechSinceLastRecipientReply;
+    const stimulus = (view.state as { respondingTo: { relation: string; operation: string } | null }).respondingTo;
+    const unrelatedSpeech = stimulus?.relation === "observed_other_interaction" && stimulus.operation === "speak";
+    if (wordsOnly && (!utterance || unrelatedSpeech && awaitingReply.some(item => item.recipientLocalId === targetKey && item.words.trim() === utterance!.trim()))) {
+      intent.status = "waiting"; intent.activityId = null;
+      intent.wait = { entityIds: target ? [target] : [], untilSeconds: null, reason: "awaiting-conversation" };
+      return { frame: null, audits, reads: view.reads, cognition };
+    }
   } else if (!reading && literal && external && operation === "speak" && !preparatoryFor) utterance = literal;
   else if (!reading && ["speak", "reflect"].includes(operation) && !preparatoryFor) {
     if (/^span\d+$/u.test(speech)) utterance = spans[Number(speech.slice(4))] ?? null;

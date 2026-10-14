@@ -19,8 +19,21 @@ export function privateActionView(state: Readonly<SimulationState>, agentId: str
   const causeEvents = causeActionId ? new Set(state.history.flatMap(step => step.events.filter(event =>
     event.causes.some(cause => cause.kind === "action" && cause.id === causeActionId)).map(event => event.id))) : null;
   const interactions = privateInteractions(state, agentId, entities);
+  const ownSpeechSinceLastRecipientReply: Array<{ recipientLocalId: string; words: string }> = [];
+  for (const item of interactions) {
+    if (!item.utterance) continue;
+    if (item.relation === "self" && item.action?.target) ownSpeechSinceLastRecipientReply.push({
+      recipientLocalId: item.action.target.localEntityId, words: item.utterance,
+    });
+    else if (["addressed_to_self", "broadcast_heard"].includes(item.relation)) {
+      for (let index = ownSpeechSinceLastRecipientReply.length - 1; index >= 0; index--) {
+        if (ownSpeechSinceLastRecipientReply[index]!.recipientLocalId === item.actor.localEntityId) ownSpeechSinceLastRecipientReply.splice(index, 1);
+      }
+    }
+  }
   const view = { agentId: perspective.agentId, elapsedSeconds: perspective.elapsedSeconds, self: perspective.self, mechanics: perspective.mechanics,
     knowledge: perspective.knowledge, character: perspective.character,
+    ownSpeechSinceLastRecipientReply,
     respondingTo: causeEvents ? privateInteractions(state, agentId, entities, causeEvents).at(-1) ?? null : null,
     conversation: interactions.filter(item => item.utterance).slice(-24).map(item => ({
       step: item.step, speaker: item.actor, addressee: item.action?.target ?? null,

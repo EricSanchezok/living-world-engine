@@ -1,6 +1,6 @@
 import { z } from "zod";
 import type { ModelExecutionAudit } from "../contracts/model";
-import type { StructuredModelResult } from "../models/model-provider";
+import { ModelOutputError, type StructuredModelResult } from "../models/model-provider";
 import type { DecisionAnswerV2, DecisionQuestionV2 } from "../models/decision-v2";
 import { loadPromptAsset } from "../prompts";
 import { contentHash } from "../models/model-audit";
@@ -35,6 +35,10 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   })) ?? [];
   const schema = z.object({
     understanding: z.string().describe("Briefly identify the intended interaction and next unperformed step. If there is a prerequisite, state whether actual evidence supports it or it remains unknown. Do not predict a result."),
+    conversationReading: z.object({
+      addressedTo: z.enum(["narrator", "character", "no_speech"]),
+      meaningInContext: z.string().describe("The full meaning of THIS input in the current thread. For an ellipsis, preserve the previous question and replace only the new subject/scope. Resolve the same item even when the player's premise about possession is false."),
+    }).optional(),
     requestAnalysis: z.object({
       authorizedSteps: z.array(z.string()).describe("Only acts actually requested by THIS input, in order. Exclude quoted history, hypothetical branches not selected, other people's acts and added strategies."),
       establishedReceipts: z.array(z.string()).describe("Which requested steps have already executed in currentRequestReceipts, with their actual result. Empty for a fresh submission."),
@@ -61,7 +65,14 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
           ...(repair ? { repair: { ...repair, instruction: "Correct only the reported executed-branch bindings against the same original request and catalog. Return the complete reading. Do not invent another action or alter the player's words." } } : {}) },
         schema, jsonExamplePolicy: "omit" });
     } catch (error) {
+      if (error instanceof ModelOutputError && !repair) {
+        if (error.audit) audits.push(error.audit);
+        repair = { previousReading: error.rawValue ?? null, issues: [error.message] };
+        continue;
+      }
       const failure = error instanceof Error ? error : new Error(String(error));
+      // The failing invocation remains on failure.audit; the runtime collects
+      // it separately. This array contains preceding attempts only.
       throw Object.assign(failure, { audits: [...audits, ...((failure as { audits?: ModelExecutionAudit[] }).audits ?? [])] });
     }
     audits.push(generated.audit);
@@ -69,6 +80,10 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
     const action = generated.value.action as Record<string, string | null>;
     const operation = action.operation;
     const issues: string[] = [];
+    if (generated.value.interaction === "world_action" && operation === "move" &&
+      (!action.target || action.target === "none")) {
+      issues.push("A move needs its actual destination: select the current_location catalog entry for movement within this place. If the destination is genuinely unknown, select only a search actually authorized by the request. Do not silently replace a local movement with discovery.");
+    }
     if (generated.value.interaction === "request_complete" &&
       (!Array.isArray(state.currentRequestReceipts) || state.currentRequestReceipts.length === 0)) {
       // A no-action reading of a fresh condition gets an explicit explanation,

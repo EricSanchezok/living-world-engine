@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { decisionPromptV2 } from "../../engine/models/decision-v2";
-import { completeParagraphs, renderNarrativeParagraph, renderNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeEvidence, narrativeTask, narrativeDiscourse, deliveredDialogue, narrativeGroundingChoices, type ScenePacket } from "../world-narrative";
+import { completeParagraphs, renderNarrativeParagraph, renderNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeEvidence, narrativeTask, narrativeDiscourse, deliveredDialogue, narrativeGroundingChoices, narrativeOutputSchema, type ScenePacket } from "../world-narrative";
 import type { ParticipantDiscourse } from "../../engine/contracts/discourse";
 
 const source: ScenePacket = {
@@ -140,8 +140,11 @@ describe("immutable narrative paragraphs", () => {
     expect(publication.version).not.toBe(world.version);
   });
   it("requires each independent factual focus without additional publication requests", () => {
-    const answers = Object.fromEntries(["material", "agency", "evidence", "speech", "reference"].map(axis => [`paragraph0_${axis}`, { type: "choice", choice: "grounded" }]));
+    const answers = Object.fromEntries(["continuity", "material", "agency", "evidence", "speech", "reference"].map(axis => [`paragraph0_${axis}`, { type: "choice", choice: "grounded" }]));
     expect(narrativeGroundingChoices(answers, 1)).toEqual(["grounded"]);
+    answers.paragraph0_continuity!.choice = "redundant";
+    expect(narrativeGroundingChoices(answers, 1)).toEqual(["redundant"]);
+    answers.paragraph0_continuity!.choice = "grounded";
     answers.paragraph0_agency!.choice = "contradiction";
     expect(narrativeGroundingChoices(answers, 1)).toEqual(["contradiction"]);
     answers.paragraph0_agency!.choice = "grounded";
@@ -154,6 +157,16 @@ describe("immutable narrative paragraphs", () => {
     expect(completeParagraphs('{"paragraphs":["unfinished\\"')).toEqual([]);
     expect(completeParagraphs('{"paragraphs":["第一段。\\n\\n第二段尚未结束')).toEqual(["第一段。"]);
     expect(completeParagraphs('{"paragraphs":["第一段。\\n\\n第二段。"]}')).toEqual(["第一段。", "第二段。"]);
+  });
+  it("losslessly normalizes nested paragraph arrays with the same streamed ordering", () => {
+    const value = { paragraphs: ["第一段。", ["第二段。", ["第三段。"]], "第四段。"] };
+    const parsed = narrativeOutputSchema.parse(value);
+    expect(parsed.paragraphs).toEqual(["第一段。", "第二段。", "第三段。", "第四段。"]);
+    expect(completeParagraphs(JSON.stringify(value))).toEqual(parsed.paragraphs);
+    expect(completeParagraphs('{"paragraphs":["第一段。",["第二段。","还没')).toEqual(["第一段。", "第二段。"]);
+    expect(() => narrativeOutputSchema.parse({ paragraphs: ["文字", [27]] })).toThrow();
+    expect(() => narrativeOutputSchema.parse({ paragraphs: ["文字", { text: "不得猜测对象格式" }] })).toThrow();
+    expect(narrativeOutputSchema.parse({ paragraphs: [] }).paragraphs).toEqual([]);
   });
   it("inserts the exact delivered utterance and refuses unknown speech references", () => {
     expect(renderNarrativeParagraph("店主回答：[[speech-ab12]]", source)).toBe("店主回答：“三枚金币；我还没同意赊账。”");

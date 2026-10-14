@@ -216,13 +216,12 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
         .find(previous => previous.id === frame.causeActionId) : null;
       // Obtaining private evidence is not a visible answer. Keep the original
       // request for one follow-up choice; the NPC can report, decline or wait.
-      const inspectionReply = frame.kind === "observe" && cause?.submissionId && cause.kind === "speak" &&
-        (!cause.targetEntityId || cause.targetEntityId === frame.actorEntityId) &&
+      const inspectionReply = frame.kind === "observe" && cause?.submissionId &&
         !source.history.some(step => step.directEvent?.frames.some(previous => previous.actorId === frame.actorId &&
           previous.causeActionId === frame.causeActionId && previous.kind === "observe"));
       const continueReaction = !frame.submissionId && frame.causeActionId &&
         (control.prepared[frame.id]!.requestProgress === "continue" || inspectionReply) &&
-        ["succeeded", "partial"].includes(outcome.status) && intent.noProgressCount < 2 && !intent.activityId;
+        ["succeeded", "partial"].includes(outcome.status) && (inspectionReply || intent.noProgressCount < 2) && !intent.activityId;
       if (continueReaction) wakeIntent(control, frame.actorId, "reaction-progress", frame.causeActionId);
       else if (!intent.activityId && input.policyRoster[frame.actorId]?.kind === "model" && intent.noProgressCount < 2 &&
         Object.values(source.agents[frame.actorId]!.character.goals).some(goal => goal.status === "active")) wakeIntent(control, frame.actorId, "action-result");

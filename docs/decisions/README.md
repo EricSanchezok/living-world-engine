@@ -142,3 +142,5 @@ An optional adjacent `Class:` line uses `architecture`, `process`, `testing`, `f
 - [0159 — Isolate Local Encoder Inference from the Host Event Loop](0159-isolate-local-encoder-inference.md)
 
 - [0233 — Coalesce Immediate Replies Before Prose Publication](0233-coalesce-immediate-replies-before-publication.md)
+
+- [0237 — Bind open values and published continuations](0237-open-values-and-published-continuations.md)

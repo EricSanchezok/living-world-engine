@@ -9,6 +9,7 @@ import type { DirectRuntimeState } from "../engine/direct/contracts";
 import type { DiscourseMention, ParticipantDiscourse, PresentationReply } from "../engine/contracts/discourse";
 import { projectAgentPerspective } from "../engine/cognition/agent-perspective";
 import { participantReactionIds } from "../engine/direct/foreground";
+import { z } from "zod";
 
 export interface ScenePacket {
   participantId: string;
@@ -29,6 +30,7 @@ export interface ScenePacket {
   currentHoldings?: { coverage: "complete-current-self-holdings"; quantities: Array<{ name: string; unit: string; amount: number }> };
   observedProperties?: Array<{ subject: string; predicate: string; value: JsonValue; stance: string; description: string }>;
   priorRequestReceipts?: ScenePacket["observations"];
+  knownWork?: Array<{ description: string; status: string }>;
 }
 export interface NarrativeBeat {
   id: string;
@@ -122,6 +124,7 @@ export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscou
       currentMethodOrAttention: observation.scene?.actionKind !== "speak" ? observation.scene?.attempt ?? null : null,
       manner: observation.scene?.manner ?? null, result: executedDescription({ ...observation, scene: observation.scene ?? undefined }) })),
     actionBoundary: "These receipts are the complete new action record. Earlier prose is not a new action. No extra gesture, movement, reaction or physical completion is implied by fluent dialogue or by an object's suitability for use.",
+    evidenceBoundary: "A partial outcome establishes only its listed effects and observations. It supplies no unstated cause or degree of success. No delivered report means the result is unknown, not that nobody acted. Earlier prose can resolve references but cannot establish a world fact.",
     playerCurrentHoldings: source.currentHoldings?.quantities.map(quantity => `You currently hold ${quantity.amount} ${quantity.unit} of ${quantity.name}.`) ?? [],
     backgroundUse: "Holdings and old properties constrain accuracy; mention them only when they answer the current request or changed in the new receipts.",
     newSpeech: source.speech,
@@ -196,6 +199,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
       };
       source.knownEntities = Object.values(agent.belief.localEntities).map(entity => ({ localEntityId: entity.id, name: entity.name, description: entity.description }));
       source.currentHoldings = { coverage: "complete-current-self-holdings", quantities: projectAgentPerspective(document.state, agent).mechanics.quantities };
+      source.knownWork = Object.values(agent.character.goals).map(goal => ({ description: goal.description, status: goal.status }));
       source.location = localPlace ? agent.belief.localEntities[localPlace.localEntityId]?.name ?? null : null;
       source.boundary = { revision: observation.revision, step: observation.step, worldTimeSeconds: observation.worldTimeSeconds };
       source.observedProperties = Object.values(agent.belief.claims).map(claim => ({
@@ -235,6 +239,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
             beat.participantId === participant.id && beat.submissionId === reply.submissionId && !beat.source.reply)
             .flatMap(beat => structuredClone(beat.source.observations)) : [],
           currentHoldings: { coverage: "complete-current-self-holdings", quantities: projectAgentPerspective(document.state, agent).mechanics.quantities },
+          knownWork: Object.values(agent.character.goals).map(goal => ({ description: goal.description, status: goal.status })),
           knownEntities: Object.values(agent.belief.localEntities).map(entity => ({ localEntityId: entity.id, name: entity.name, description: entity.description })),
           observedProperties: Object.values(agent.belief.claims).map(claim => ({ subject: agent.belief.localEntities[claim.subjectId]?.name ?? claim.subjectId,
             predicate: claim.predicate, value: claim.value as unknown as JsonValue, stance: claim.stance, description: claim.description })),
@@ -254,6 +259,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
 }
 
 const groundingAxes = {
+  continuity: "Compare against alreadyPublished and earlier paragraphs in this batch. Choose redundant ONLY if this entire paragraph merely paraphrases information already presented for this result and adds no new finding, speech or answer. Repeated clauses mixed with new information need a continuation repair (added_content), not dropping the new information. A requested recap or comparison may deliberately revisit old information and is grounded.",
   material: "Check only material people, distinct objects and possessions. Match them to knownEntities or established scene details. Background workers, tools, wallets and storage containers require actual entries or explicit facts. An intended attempt or expressive manner alone does not establish a new prop. Harmless texture or metaphor on an existing thing is allowed.",
   agency: "Compare each asserted bodily action against performedNow, the COMPLETE list of newly executed actions. This includes small nods, hand movements, handling a board, looking up, or taking another step: dialogue alone does not perform them. A null manner supplies no accompanying gesture. A previous paragraph's action cannot happen again without a new receipt. Observation does not perform the intended use of what was found. A silent use/change with an executed-method receipt does perform that method. Do not make new choices or feelings for the player.",
   evidence: "Check only results, amounts, conditions and history. Preserve observed facts, unresolved attempts and actual inventory. A speaker's claim remains attributed; a request or unsupported earlier prose is not evidence. Do not invent a prerequisite, completed test, earlier payment or prior repair.",
@@ -264,28 +270,44 @@ const groundingAxes = {
 export function narrativeGroundingChoices(answers: Record<string, { type: string; choice?: string }>, count: number): string[] {
   return Array.from({ length: count }, (_, index) => {
     const choices = Object.keys(groundingAxes).map(axis => answers[`paragraph${index}_${axis}`]?.choice ?? "added_content");
-    return choices.includes("contradiction") ? "contradiction" : choices.every(choice => choice === "grounded") ? "grounded" : "added_content";
+    if (choices.includes("contradiction")) return "contradiction";
+    if (choices.includes("added_content")) return "added_content";
+    return answers[`paragraph${index}_continuity`]?.choice === "redundant" ? "redundant" : choices.every(choice => choice === "grounded") ? "grounded" : "added_content";
   });
 }
 
 /** Independent factual checks share one publication request per available paragraph batch. */
 export async function checkNarrativeGrounding(provider: StructuredModelProvider, scope: ModelExecutionScope,
-  source: ScenePacket, paragraphs: string[], profileId: string, fallbackProfileId: string, ordinal: number, discourse?: ParticipantDiscourse) {
+  source: ScenePacket, paragraphs: string[], profileId: string, fallbackProfileId: string, ordinal: number, discourse?: ParticipantDiscourse, alreadyPublished: string[] = []) {
   const evidence = narrativeEvidence(source);
-  const state = { paragraphs, scene: evidence, discourse: discourse ? narrativeDiscourse(discourse) : null, publicationTask: narrativeTask(source, discourse) } as unknown as JsonValue;
+  const state = { paragraphs, alreadyPublished, scene: evidence, discourse: discourse ? narrativeDiscourse(discourse) : null, publicationTask: narrativeTask(source, discourse) } as unknown as JsonValue;
   return executeDecisionV2(provider, { ...scope, profileId, fallbackProfileId, subjectId: source.agentId, instructionProfile: "publication",
     modelInvocation: ordinal, batch: { version: 2, view: { kind: "agent", agentId: source.agentId, projectionHash: contentHash(state) },
       dependencies: {}, state, questions: Object.fromEntries(paragraphs.flatMap((_, index) => Object.entries(groundingAxes).map(([axis, focus]) => [`paragraph${index}_${axis}`, {
-        type: "choice" as const, version: "narrative-grounding-4", instructions: { task: loadPromptAsset("user/narrative-grounding.md"), index, focus,
+        type: "choice" as const, version: "narrative-grounding-5", instructions: { task: loadPromptAsset("user/narrative-grounding.md"), index, focus,
           executionBoundary: narrativeTask(source, discourse).executionBoundary,
           executedNow: evidence.observations.map(observation => ({ actor: observation.scene?.actor ?? null,
             kind: observation.scene?.actionKind ?? null, status: observation.scene?.status ?? null, receipt: observation.summary })),
         },
         criteria: { grounded: "Faithful expression of supplied facts and delivered speech; only harmless stylistic rendering is added",
           added_content: "Introduces an unsupported person, distinct usable object or possession, action, speech, result, knowledge or meaningful change",
-          contradiction: "Changes a known amount, identity, outcome, commitment or evidence status; or chooses new actions or feelings for the player" },
+          contradiction: "Changes a known amount, identity, outcome, commitment or evidence status; or chooses new actions or feelings for the player",
+          ...(axis === "continuity" ? { redundant: "This whole paragraph adds nothing beyond already published information; omit it without changing any earlier paragraph" } : {}) },
       }]))) } });
 }
+
+const flatNarrativeSchema = z.object({
+  reading: z.object({ currentResults: z.array(z.string()), remainingUnconfirmed: z.array(z.string()), dialogueSpeakersInOrder: z.array(z.string()) }).optional()
+    .describe("Brief source reading BEFORE prose: new results, limits and actual speakers. During recovery, identify only what has not already been published."),
+  paragraphs: z.array(z.string().trim().min(1)),
+});
+// A nested array of strings is the same ordered text, not a semantic error.
+// Retain nontext entries so validation still rejects a malformed response.
+export const narrativeOutputSchema = z.preprocess(value => {
+  if (!value || typeof value !== "object" || !("paragraphs" in value) || !Array.isArray(value.paragraphs)) return value;
+  return { ...value, paragraphs: value.paragraphs.flat(Infinity) };
+}, flatNarrativeSchema);
+export const narrativeOutputJsonSchema = z.toJSONSchema(flatNarrativeSchema, { target: "draft-07" });
 
 /** Publish closed strings and blank-line-delimited paragraphs inside an open string. */
 export function completeParagraphs(text: string): string[] {
@@ -293,8 +315,11 @@ export function completeParagraphs(text: string): string[] {
   if (!start) return [];
   const result: string[] = [];
   let cursor = start.index + start[0].length;
+  let depth = 1;
   while (cursor < text.length) {
     while (/\s|,/u.test(text[cursor] ?? "") && cursor < text.length) cursor++;
+    if (text[cursor] === "[") { depth++; cursor++; continue; }
+    if (text[cursor] === "]") { cursor++; if (--depth === 0) break; continue; }
     if (text[cursor] !== '"') break;
     const from = cursor++;
     let escaped = false, ended = false;

@@ -31,10 +31,11 @@ function createText(wire: DirectTestWire) {
 }
 
 describe("direct world through persistent WorldHost", () => {
-  it.each([{ progress: "continue", reply: "speak" }, { progress: "complete", reply: "speak" }, { progress: "complete", reply: "wait" }])(
-    "keeps a requested inspection's reply opportunity ($progress → $reply) despite an intervening remark", async ({ progress: inspectionProgress, reply }) => {
+  it.each([{ progress: "continue", reply: "speak", trigger: "speak" }, { progress: "complete", reply: "speak", trigger: "speak" }, { progress: "complete", reply: "wait", trigger: "speak" }, { progress: "complete", reply: "speak", trigger: "use" }])(
+    "keeps a requested inspection's reply opportunity ($trigger: $progress → $reply) despite an intervening remark", async ({ progress: inspectionProgress, reply, trigger }) => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-inspection-report-"));
-    const words = "请检查设备，再告诉我还缺什么。";
+    const words = trigger === "speak" ? "请检查设备，再告诉我还缺什么。" : "松开扶在设备上的手。";
+    const receivedWords = trigger === "speak" ? words : null;
     let replyChoices = 0;
     const f = directTestProvider(wire => {
       const context = wire.state as { perspective?: { agentId: string; interactions?: Array<{ relation: string; operation: string }> } };
@@ -42,14 +43,15 @@ describe("direct world through persistent WorldHost", () => {
       const own = context.perspective?.interactions?.filter(item => item.relation === "self") ?? [];
       if (who === "inspector" && own.some(item => item.operation === "observe")) {
         replyChoices++;
-        expect(context.perspective).toMatchObject({ respondingTo: { utterance: words, relation: "addressed_to_self" } });
+        expect(context.perspective).toMatchObject({ respondingTo: { utterance: receivedWords, operation: trigger } });
       }
       const operation = who === "inspector" ? own.some(item => item.operation === "observe") ? reply : "observe"
-        : who === "quartermaster" && own.some(item => item.operation === "speak") ? "wait" : "speak";
+        : who === "engineer" ? trigger : who === "quartermaster" && own.some(item => item.operation === "speak") ? "wait" : "speak";
       return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
         let choice = id.startsWith("paragraph") ? "grounded" : id.includes("outcome") ? "succeeded" : id.includes("delivery") ? "delivered"
           : id.includes("visible") || id.includes("entity") ? "visible" : id.includes("status") || id.includes("fact") ? "unchanged" : "none";
         if (id === "operation") choice = operation;
+        if (id.endsWith("_expression")) choice = "no_change";
         if (id === "target") choice = "pump";
         if (id === "recipient") choice = who === "engineer" && q.type === "choice"
           ? Object.entries(q.criteria).find(([, value]) => JSON.stringify(value).includes("乔伊"))?.[0] ?? "broadcast" : "broadcast";
@@ -60,7 +62,7 @@ describe("direct world through persistent WorldHost", () => {
           const task = q.instructions as { task: { data: { action: { actorId: string; kind: string }; responseTo: { utterance: string } } } };
           const inspecting = task.task.data.action.actorId === "inspector" && task.task.data.action.kind === "observe";
           choice = inspecting ? inspectionProgress : "complete";
-          if (inspecting) expect(task.task.data.responseTo.utterance).toBe(words);
+          if (inspecting) expect(task.task.data.responseTo.utterance).toBe(receivedWords);
         }
         return [id, nativeAnswer(q, id === "expression" ? 0 : choice)];
       }));
@@ -68,7 +70,7 @@ describe("direct world through persistent WorldHost", () => {
       const context = directCreationContext(wire);
       if (context.scene) return createText(wire);
       const who = (context.perspective as { agentId: string }).agentId;
-      return { attempt: "回应", utterance: context.playerControlled ? words : who === "inspector" ? "我检查过了，密封还需要处理。" : "你们先检查。", manner: null };
+      return { attempt: "回应", utterance: context.playerControlled ? trigger === "speak" ? words : null : who === "inspector" ? "我检查过了，密封还需要处理。" : "你们先检查。", manner: null };
     });
     await f.registry.capture();
     const world = loadWorldScript(path.resolve("test/fixtures/station-program-world"), { seed: 1, modelCatalog: f.catalog });
@@ -101,6 +103,7 @@ describe("direct world through persistent WorldHost", () => {
   });
   it("opens the next player turn after direct replies while retaining overheard background conversation", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-conversation-foreground-"));
+    let newBackgroundMessage = false;
     const f = directTestProvider(wire => {
       const context = wire.state as { perspective?: { agentId: string } };
       return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
@@ -117,7 +120,7 @@ describe("direct world through persistent WorldHost", () => {
     }, wire => {
       const context = directCreationContext(wire);
       if (context.scene) return createText(wire);
-      return { attempt: "回应问候", utterance: context.playerControlled ? "大家好。" : "听见了，你好。", manner: null };
+      return { attempt: "回应问候", utterance: context.playerControlled ? "大家好。" : newBackgroundMessage ? "这一班我继续值守。" : "听见了，你好。", manner: null };
     });
     await f.registry.capture();
     const world = loadWorldScript(path.resolve("test/fixtures/station-program-world"), { seed: 1, modelCatalog: f.catalog });
@@ -180,10 +183,16 @@ describe("direct world through persistent WorldHost", () => {
         expect(Object.values(state.agents[npc]!.belief.evidence).filter(item => item.description.includes("听见了，你好。")).length).toBeGreaterThan(0);
       }
       const replayed = replaySimulationState(state); expect(replayed).toEqual(state);
+      const repeated = new SimulationEngine(world, new DirectWorldAlgorithm(f.gateway), replayed);
+      const quiet = await repeated.step(document.policyBindings, { expectedRevision: state.revision, trigger: "manual", externalActions: [] });
+      expect(quiet.state.history.at(-1)!.directEvent!.frames).toEqual([]);
+      expect(replaySimulationState(quiet.state)).toEqual(quiet.state);
+      newBackgroundMessage = true;
       const engine = new SimulationEngine(world, new DirectWorldAlgorithm(f.gateway), replayed);
       const background = await engine.step(document.policyBindings, { expectedRevision: state.revision, trigger: "manual", externalActions: [] });
       expect(background.state.history.at(-1)!.directEvent!.frames.length).toBeGreaterThan(0);
       expect(replaySimulationState(background.state)).toEqual(background.state);
+      newBackgroundMessage = false;
       await host.submitAction(id, participant.id, { expectedRevision: state.revision, submissionId: "literal-greeting", text: "大家好。" });
       for (let i = 0; i < 200; i++) {
         const saved = database.readInstance(id).document;
@@ -355,6 +364,92 @@ describe("direct world through persistent WorldHost", () => {
       expect(Object.keys(saved.state.truth.entities)).toEqual(Object.keys(world.initialState.truth.entities));
       expect(replaySimulationState(saved.state)).toEqual(saved.state);
     } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+  });
+  it.each(["nested", "semantic-repeat"])("keeps narrative order through harmless format or continuation variation: %s", async mode => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-narrative-continuation-"));
+    let generations = 0;
+    const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
+      const context = wire.state as { paragraphs?: string[]; alreadyPublished?: string[] };
+      const paragraph = context.paragraphs?.[Number(/^paragraph(\d+)/u.exec(id)?.[1])];
+      let choice = id.startsWith("paragraph") ? "grounded" : id === "operation" ? "observe" : id === "target" ? "self" : id.includes("outcome") ? "succeeded" : "none";
+      if (paragraph === "你又转身跑了出去。" && id.endsWith("_agency")) choice = "added_content";
+      if (paragraph === "随身的物资已由你点过。" && id.endsWith("_continuity")) {
+        expect(context.alreadyPublished).toEqual(["你清点了随身物资。"]); choice = "redundant";
+      }
+      return [id, nativeAnswer(q, id === "expression" ? 0 : choice)];
+    })), wire => {
+      const context = directCreationContext(wire);
+      const scene = context.scene as { knownWork: unknown[] };
+      expect(scene.knownWork).toEqual(Object.values(world.initialState.agents.player!.character.goals).map(goal => ({ description: goal.description, status: goal.status })));
+      generations++;
+      if (mode === "nested") return { paragraphs: ["你清点了随身物资。", ["三枚灵石仍在你身上。"]] };
+      if (generations === 1) return { paragraphs: ["你清点了随身物资。", "你又转身跑了出去。"] };
+      expect(context.repair).toMatchObject({ immutablePublishedParagraphs: ["你清点了随身物资。"] });
+      return { paragraphs: ["随身的物资已由你点过。", "三枚灵石仍在你身上。"] };
+    });
+    await f.registry.capture();
+    const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
+    const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
+    try {
+      const host = new WorldHost({ repository: new MemoryWorldRepository({ [world.id]: world }), store: database, ledger: database, provider: f.gateway });
+      const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } }), id = created.summary.id;
+      await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });
+      const participant = Object.values(database.readInstance(id).document.participants)[0]!;
+      await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "read-inventory", text: "清点物资" });
+      for (let i = 0; i < 200 && !database.readInstance(id).document.narratives.length; i++) await new Promise(resolve => setTimeout(resolve, 5));
+      await host.drainNarratives(id);
+      const saved = database.readInstance(id).document;
+      expect(saved.narratives[0]).toMatchObject({ status: "complete", attempts: mode === "nested" ? 1 : 2,
+        segments: [{ sequence: 0, text: "你清点了随身物资。" }, { sequence: 1, text: "三枚灵石仍在你身上。" }] });
+      expect(generations).toBe(mode === "nested" ? 1 : 2);
+      expect(replaySimulationState(saved.state)).toEqual(saved.state);
+      const calls = f.transport.mock.calls.length;
+      host.instance(id); await host.drainNarratives(id); expect(f.transport.mock.calls.length).toBe(calls);
+    } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+  });
+  it("starts the first paragraph immediately and batches paragraphs completed during its check", async () => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-narrative-batch-"));
+    const paragraphs = ["你清点了物资。", "三枚灵石仍在身上。", "门前的地面没有变化。", "守门人仍在门旁。"];
+    let started!: () => void, release!: () => void;
+    const firstStarted = new Promise<void>(resolve => { started = resolve; });
+    const canFinish = new Promise<void>(resolve => { release = resolve; });
+    const batches: number[] = [];
+    const f = directTestProvider(async wire => {
+      const prose = (wire.state as { paragraphs?: string[] }).paragraphs;
+      if (prose) { batches.push(prose.length); if (batches.length === 1) { started(); await canFinish; } }
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id, nativeAnswer(q,
+        id === "expression" ? 0 : id.startsWith("paragraph") ? "grounded" : id === "operation" ? "observe" : id === "target" ? "self" : id.includes("outcome") ? "succeeded" : "none")]));
+    }, () => ({ paragraphs }));
+    await f.registry.capture();
+    const generate = async <T,>(request: StructuredModelRequest<T>) => {
+      if (request.schemaName === "SceneNarrativeV1") {
+        await request.onOutputText!(JSON.stringify({ paragraphs: paragraphs.slice(0, 1) }));
+        await firstStarted;
+        for (let length = 2; length <= paragraphs.length; length++) await request.onOutputText!(JSON.stringify({ paragraphs: paragraphs.slice(0, length) }));
+        release();
+      }
+      return f.gateway.generateStructured(request);
+    };
+    const provider = new Proxy(f.gateway, { get(target, key) {
+      if (key === "generateStructured") return generate;
+      const value = Reflect.get(target, key); return typeof value === "function" ? value.bind(target) : value;
+    } });
+    const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
+    const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
+    try {
+      const host = new WorldHost({ repository: new MemoryWorldRepository({ [world.id]: world }), store: database, ledger: database, provider });
+      const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } }), id = created.summary.id;
+      await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });
+      const participant = Object.values(database.readInstance(id).document.participants)[0]!;
+      await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "batched-prose", text: "清点物资" });
+      for (let i = 0; i < 200 && !database.readInstance(id).document.narratives.length; i++) await new Promise(resolve => setTimeout(resolve, 5));
+      await host.drainNarratives(id);
+      expect(batches).toEqual([1, 3]);
+      const saved = database.readInstance(id).document;
+      expect(saved.narratives[0]!.segments.map(segment => segment.text)).toEqual(paragraphs);
+      expect(saved.narratives[0]!.status).toBe("complete");
+      expect(replaySimulationState(saved.state)).toEqual(saved.state);
+    } finally { release(); database.close(); rmSync(root, { recursive: true, force: true }); }
   });
   it.each([false, true])("preserves committed progress when a player task fails, with a prior wait: %s", async priorWait => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-failure-"));

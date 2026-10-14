@@ -42,6 +42,12 @@ export async function extendCapability(input: { state: Readonly<SimulationState>
       throw Object.assign(error, { audits });
     }
     audits.push(result.audit); previous = result.value; repairIssues = [];
+    const required = (input.context as { requiredPropertyChanges?: Array<{ subject: "actor" | "target" | "tool"; predicate: string }> }).requiredPropertyChanges ?? [];
+    const roleIds = { actor: frame.actorEntityId, target: frame.targetEntityId, tool: frame.toolEntityId };
+    for (const property of required) if (!result.value.effects.some(effect => effect.kind === "fact" &&
+      roleIds[effect.subject] === roleIds[property.subject] && effect.predicate === property.predicate)) {
+      repairIssues.push(`The selected qualitative change needs an effect for ${property.subject}.${property.predicate}; preserve its existing predicate instead of leaving the old relation unchanged.`);
+    }
     for (const effect of result.value.effects) {
       if (effect.kind === "condition" && !state.truth.mechanics.conditionProfiles[effect.profileId]) repairIssues.push(`Unknown condition profile: ${effect.profileId}`);
       if (effect.kind !== "object" && effect.subject === "target" && !frame.targetEntityId) repairIssues.push("The action has no target");

@@ -1,7 +1,6 @@
-import { z } from "zod";
 import { loadPromptAsset } from "../engine/prompts";
 import { agentCapabilityModels } from "../engine/models/capability-bindings";
-import { enqueueNarrative, nextNarrative, completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeEvidence, narrativeTask, narrativeDiscourse, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, type NarrativeBeat } from "./world-narrative";
+import { enqueueNarrative, nextNarrative, completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeEvidence, narrativeTask, narrativeDiscourse, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, narrativeOutputSchema, narrativeOutputJsonSchema, type NarrativeBeat } from "./world-narrative";
 import { participantDiscourse } from "./world-discourse";
 import { randomUUID } from "node:crypto";
 import { rmSync } from "node:fs";
@@ -641,7 +640,8 @@ export class WorldHost {
         runtimeIdentity: { worldHash: document.state.worldHash, revision: document.state.revision } };
       const models = control ? agentCapabilityModels(document.state, control, beat.agentId) : document.state.agents[beat.agentId]!.modelProfiles;
       this.updateNarrative(id, beat.id, item => { item.producer = { profileId: models.creation, modelId: null, promptVersion: NARRATIVE_PROMPT_VERSION, registryHash: control?.registryHash ?? null }; });
-      let publication = Promise.resolve(), publicationError: unknown, scheduled = 0;
+      let publication = Promise.resolve(), publicationError: unknown, publicationRunning = false;
+      let availableParagraphs: string[] = [];
       const publish = async (paragraphs: string[]) => {
         if (published >= paragraphs.length) return;
         const rendered = paragraphs.slice(published).map(paragraph => renderNarrativeSegment(paragraph, beat.source));
@@ -652,12 +652,14 @@ export class WorldHost {
         assertSpeechOrder(beat.source, completeText);
         const decision = await checkNarrativeGrounding(this.options.provider, scope, beat.source, ready, models.fallback, models.fallback,
           Number.parseInt(contentHash([beat.id, beat.attempts, prefix.length + published]).slice(0, 10), 16),
-          participantDiscourse(this.read(id).document, beat.participantId, beat.id));
+          participantDiscourse(this.read(id).document, beat.participantId, beat.id),
+          this.read(id).document.narratives.find(item => item.id === beat.id)!.segments.map(segment => segment.text));
         const choices = narrativeGroundingChoices(decision.answers, ready.length);
         this.updateNarrative(id, beat.id, item => item.grounding.push({ start: item.segments.length, inputHash: decision.inputHash,
           choices, invocationIds: decision.audits.flatMap(audit => audit.invocations.map(invocation => invocation.id)) }));
         let checked = 0;
         while (published < paragraphs.length) {
+          if (choices[checked] === "redundant") { checked++; published++; continue; }
           if (ready[checked] && choices[checked] !== "grounded") throw new Error(`Paragraph contains ${choices[checked]}: ${ready[checked]}. Continue using only the supplied scene; omit unsupported content.`);
           const mentions = rendered[checked]!.mentions.filter(mention => ready[checked]!.includes(mention.surface));
           const text = ready[checked++]!;
@@ -685,26 +687,31 @@ export class WorldHost {
           context: { discourse: narrativeDiscourse(discourse),
             publishedPrefix: prefix, scene: narrativeEvidence(beat.source),
             publicationTask: narrativeTask(beat.source, participantDiscourse(document, beat.participantId, beat.id)),
-            repair: beat.error },
-          schema: z.object({
-            reading: z.object({ currentResults: z.array(z.string()), remainingUnconfirmed: z.array(z.string()),
-              dialogueSpeakersInOrder: z.array(z.string()) }).optional()
-              .describe("Brief source reading BEFORE prose: what these new receipts establish, what they leave unconfirmed, and actual speakers in order. This is diagnostic, not a new world event."),
-            paragraphs: z.array(z.string().trim().min(1)).min(1),
-          }), jsonExamplePolicy: "omit",
+            repair: beat.error ? { issue: beat.error, immutablePublishedParagraphs: prefix,
+              task: "Write only the missing continuation after this exact published ending. Remove the rejected assertion. Do not restart the scene or paraphrase any already presented result. Include only still-unpublished speech references. If nothing else remains, return an empty paragraphs array." } : null },
+          schema: narrativeOutputSchema, wireJsonSchema: narrativeOutputJsonSchema, jsonExamplePolicy: "omit",
           onOutputText: async text => {
             const paragraphs = completeParagraphs(text);
-            if (paragraphs.length <= scheduled) return;
-            scheduled = paragraphs.length;
-            publication = publication.then(async () => {
-              if (publicationError === undefined) await publish(paragraphs);
-            }).catch(error => { publicationError = error; });
+            if (paragraphs.length <= availableParagraphs.length) return;
+            availableParagraphs = paragraphs;
+            if (publicationRunning || publicationError !== undefined) return;
+            publicationRunning = true;
+            publication = (async () => {
+              // The first useful paragraph starts immediately. While it is
+              // checked, collect later complete paragraphs into one next batch.
+              try { while (published < availableParagraphs.length) await publish(availableParagraphs); }
+              catch (error) { publicationError = error; }
+              finally { publicationRunning = false; }
+            })();
           },
         });
         this.updateNarrative(id, beat.id, item => { if (item.producer) item.producer.modelId = result.audit.modelId; });
         await publication;
         if (publicationError !== undefined) throw publicationError;
         await publish(completeParagraphs(JSON.stringify(result.value)));
+        if (!this.read(id).document.narratives.find(item => item.id === beat.id)!.segments.length) {
+          throw new Error("No feedback has been published for this result. Write its supported result or explain what remains unknown.");
+        }
         requireDeliveredSpeech(beat.source, this.read(id).document.narratives.find(item => item.id === beat.id)!.segments.map(segment => segment.text));
         execution?.trace.flush();
         if (execution && this.options.ledger) this.options.ledger.finishExecution(execution.id,

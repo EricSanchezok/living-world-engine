@@ -130,7 +130,9 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         const id = `${prefix}_fact${ordinal}`, values = factOptions(fact, frames, state);
         effects.set(id, { fact, values });
         questions[id] = question("Resulting value of this existing property if the action succeeds and no random trial governs it. Include the actor's or tool's changed state when the method affects it. An obsolete posture or relation must cease when this action reverses it; do not preserve contradictory states. Unaffected properties stay unchanged.", { actionId: frame.id, fact: fact as unknown as JsonValue },
-          { unchanged: "This property is unaffected or evidence is insufficient", ...Object.fromEntries(values.map((value, i) => [`v${i}`, value as unknown as Record<string, JsonValue>])) });
+          { unchanged: "This property is unaffected or evidence is insufficient",
+            ...(fact.value.kind === "text" ? { new_value: "This action necessarily changes this property, but NONE of the offered values expresses the new state. Request an open qualitative effect for this exact property." } : {}),
+            ...Object.fromEntries(values.map((value, i) => [`v${i}`, value as unknown as Record<string, JsonValue>])) });
       }
       for (const [distributionIndex, distribution] of definition.randomDistributions.entries()) {
         const applies = `${prefix}_random${distributionIndex}`;
@@ -229,14 +231,22 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     }])) });
   }
   if (Object.keys(missingBindings).length) answers = { ...answers, ...await decisions.ask(null, view.state, view.reads, missingBindings) };
-  const expansions = frames.flatMap((frame, index) => questions[`a${index}_expression`] && selected(answers, `a${index}_expression`) === "expand" ? [{ frame, index }] : []);
+  const expansions = frames.flatMap((frame, index) => {
+    if (!["succeeded", "partial"].includes(selected(answers, `a${index}_outcome`))) return [];
+    const requiredPropertyChanges = [...effects].filter(([id]) => id.startsWith(`a${index}_`) && selected(answers, id) === "new_value")
+      .map(([, { fact }]) => ({ subject: fact.subjectId === frame.actorEntityId ? "actor" : fact.subjectId === frame.targetEntityId ? "target" : "tool",
+        predicate: fact.predicate, currentValue: fact.value, description: fact.description }));
+    return requiredPropertyChanges.length || questions[`a${index}_expression`] && selected(answers, `a${index}_expression`) === "expand"
+      ? [{ frame, index, requiredPropertyChanges }] : [];
+  });
   const capabilityFailures = new Set<string>();
   if (expansions.length) {
     if (!creationEnabled) throw new Error("This action needs a new effect concept; the creation capability is disabled");
-    const expanded = await Promise.allSettled(expansions.map(async ({ frame, index }) => ({ index, frame,
+    const expanded = await Promise.allSettled(expansions.map(async ({ frame, index, requiredPropertyChanges }) => ({ index, frame,
       result: await extendCapability({ state, control: decisions.control, frame, decisions,
         profileId: agentCapabilityModels(state, decisions.control, frame.actorId).creation,
-        context: { action: frame.proposal.rawText, target: frame.targetEntityId ? state.truth.entities[frame.targetEntityId]!.description : null,
+        context: { action: frame.proposal.rawText, requiredPropertyChanges: requiredPropertyChanges as unknown as JsonValue,
+          target: frame.targetEntityId ? state.truth.entities[frame.targetEntityId]!.description : null,
           tool: frame.toolEntityId ? state.truth.entities[frame.toolEntityId]!.description : null } }) })));
     const supplemental: Record<string, DecisionQuestionV2> = {};
     for (const [expansionIndex, result] of expanded.entries()) if (result.status === "fulfilled") {
@@ -344,7 +354,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
           operations.push({ kind: "set_fact", fact: { ...effect.fact, provenance: source.causes }, ...source });
           continue;
         }
-        if (value === "unchanged" || unboundRandomEffect) continue;
+        if (value === "unchanged" || value === "new_value" || unboundRandomEffect) continue;
         const chosen = effect.values[Number(value.slice(1))]!;
         if (contentHash(chosen) === contentHash(effect.fact.value)) continue;
         operations.push({ kind: "set_fact", fact: { ...changedFact(effect.fact, chosen), provenance: source.causes }, ...source });

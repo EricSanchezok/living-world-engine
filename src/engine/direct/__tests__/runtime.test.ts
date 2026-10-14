@@ -196,6 +196,82 @@ describe("direct world through the actual simulation entry", () => {
     expect(readDirectState(result.state.executionState!, result.state).intents.player!.failure).toBeNull();
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
+  it.each([false, true])("bounds empty interpretation recovery and retains both calls (repeated failure: %s)", async repeatFailure => {
+    const f = await fixture({ operation: "observe", target: "door", creationEnabled: true,
+      creationResponse: { description: "门在眼前。", entities: [], facts: [], events: [] } });
+    const transport = f.transport.getMockImplementation()!;
+    let readings = 0;
+    f.transport.mockImplementation(async (...args) => {
+      const wire = JSON.parse(String(args[1]?.body));
+      const context = wire.questions ? null : directCreationContext(wire);
+      const response = await transport(...args);
+      if (!context?.playerReading) return response;
+      readings++;
+      if (readings > 1) { expect(context.repair).toBeTruthy(); if (!repeatFailure) return response; }
+      const body = await response.clone().json(); body.choices[0].message.content = "";
+      return Response.json(body);
+    });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("检查门轴"));
+    expect(readings).toBe(2);
+    expect(result.state.history[0]!.directEvent!.frames).toHaveLength(repeatFailure ? 0 : 1);
+    if (repeatFailure) {
+      expect(result.state.truth).toEqual(f.world.initialState.truth);
+      expect(readDirectState(result.state.executionState!, result.state).intents.player!.status).toBe("failed");
+    } else expect(readDirectState(result.state.executionState!, result.state).intents.player!.failure).toBeNull();
+    expect(result.state.history[0]!.directEvent!.modelAudits.filter(audit => audit.promptVersion.startsWith("player-reading-"))).toHaveLength(2);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("repairs a missing movement target without silently searching or creating a destination", async () => {
+    const f = await fixture({ operation: "move", target: "door", movement: "approach", creationEnabled: true });
+    const transport = f.transport.getMockImplementation()!;
+    let readings = 0;
+    f.transport.mockImplementation(async (...args) => {
+      const wire = JSON.parse(String(args[1]?.body));
+      const context = wire.questions ? null : directCreationContext(wire);
+      const response = await transport(...args);
+      if (!context?.playerReading) return response;
+      readings++;
+      if (readings > 1) {
+        expect(context.repair).toMatchObject({ issues: [expect.stringContaining("A move needs its actual destination")] });
+        return response;
+      }
+      const body = await response.clone().json(), value = JSON.parse(body.choices[0].message.content);
+      value.action.target = "none"; body.choices[0].message.content = JSON.stringify(value);
+      return Response.json(body);
+    });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("挪到门旁"));
+    expect(readings).toBe(2);
+    expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "move", preparatoryFor: null });
+    expect(Object.keys(result.state.truth.entities)).toEqual(Object.keys(f.world.initialState.truth.entities));
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("expands an existing relation when its new value is outside the finite catalog", async () => {
+    const f = await fixture({ operation: "change", target: "self", creationEnabled: true, effectExpansion: true,
+      effectRepresentation: "existing", factValues: { luggage_position: "new_value" }, creationResponse: {
+        description: "起身时保持行李随身", applicability: "有随身行李", effectDescription: "行李不再位于膝上",
+        effects: [{ kind: "fact", subject: "target", predicate: "luggage_position", value: "carried at side", description: "行李随身提在身侧。" }],
+      } });
+    f.world.initialState.truth.facts["luggage-place"] = { ...f.world.initialState.truth.facts["gate-lock"]!,
+      id: "luggage-place", subjectId: f.world.initialState.agents.player!.entityId, predicate: "luggage_position",
+      value: { kind: "text", value: "on lap" }, description: "行李放在膝上。", access: { kind: "public" } };
+    f.world.historyBaseHash = historyReplayBaseHash(f.world.initialState);
+    const transport = f.transport.getMockImplementation()!;
+    f.transport.mockImplementation(async (...args) => {
+      const wire = JSON.parse(String(args[1]?.body));
+      const response = await transport(...args);
+      if (!wire.questions || !Object.keys(wire.questions).some(key => key.endsWith("_capability"))) return response;
+      const body = await response.clone().json();
+      for (const [id, question] of Object.entries(wire.questions)) if (id.endsWith("_capability")) body.answers[id] = nativeAnswer(question as Parameters<typeof nativeAnswer>[0], "apply");
+      return Response.json(body);
+    });
+    const engine = new SimulationEngine(f.world, f.algorithm);
+    await engine.bootstrapAgents();
+    const result = await engine.step(f.roster, f.request("提着行李站起来"));
+    expect(result.state.truth.facts["luggage-place"]?.value).toEqual({ kind: "text", value: "carried at side" });
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("updates the actor's existing posture even when a separate object is the action target", async () => {
     const f = await fixture({ operation: "change", target: "door", factValues: { kneeling: "v1" } });
     f.world.initialState.truth.facts["actor-posture"] = { ...f.world.initialState.truth.facts["gate-lock"]!,
