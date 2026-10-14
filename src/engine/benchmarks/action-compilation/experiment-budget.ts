@@ -167,7 +167,7 @@ export class ExperimentBudget {
   }
 
   private charge(input: number, output: number, cacheHit = 0, reservation?: Reservation, reviewed = false): number {
-    const original = this.policy.prices ? this.price(reservation?.priceId ?? "") : this.policy;
+    const original = this.policy.prices ? this.priceDefinition(reservation?.priceId ?? "") : this.policy;
     const price = (reviewed && reservation ? this.reviewedPrices.get(reservation.id) : undefined) ?? original;
     if (!price) throw new ExperimentBudgetError("missing account/model price binding");
     const value = (input - cacheHit) * price.inputMissNanoCnyPerToken +
@@ -454,8 +454,12 @@ export class ExperimentBudget {
     this.liveRequests.delete(id);
   }
 
+  private priceDefinition(id: string): ExperimentPrice | undefined {
+    return this.registeredPrices.get(id) ?? this.policy.prices?.[id];
+  }
+
   price(id: string): ExperimentPrice | undefined {
-    const price = this.registeredPrices.get(id) ?? this.policy.prices?.[id];
+    const price = this.priceDefinition(id);
     return price && structuredClone(price);
   }
 
