@@ -39,3 +39,5 @@ Preserve event-driven world execution while replacing fixed dialogue and raw obs
 ## Evidence
 
 Deterministic persistence, streaming, exact speech, expansion and restart evidence is in the [host tests](../../src/server/__tests__/direct-world-host.test.ts), [narrative tests](../../src/server/__tests__/world-narrative.test.ts), [direct runtime tests](../../src/engine/direct/__tests__/runtime.test.ts) and [stream accounting tests](../../src/engine/models/__tests__/response-stream.test.ts). Live quality and performance qualification remain separate from these checks. Historical baseline: [direct runtime evidence](../research/2026-10-13-jev-direct-world-runtime.md).
+
+Live qualification, retained failures, full transcripts and browser evidence are recorded in the [Chinese research report](../research/2026-10-14-immersive-narrative-qualification.md). The frozen final cohort qualifies 25 of 37 attempts; the 90% experience target is not met. Deterministic checks and state replay do not supersede that result.

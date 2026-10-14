@@ -1,0 +1,76 @@
+{
+  "journalEntryCount": 19895,
+  "lastJournalHash": "ead48124b066ecccb6da6d08fc1789dbb4659b341a95ddb0f1ac0fe680add25a",
+  "totalHttpRequests": 9947,
+  "remainingRequestAllowance": 53,
+  "newTranche": {
+    "id": "immersive-narrative-20261013",
+    "amountNanoCny": 100000000000,
+    "knownNanoCny": 72769365024,
+    "reservedNanoCny": 815175792,
+    "remainingNanoCny": 26415459184,
+    "httpRequests": 7084,
+    "modelRequests": {
+      "deepseek": 3947,
+      "jev": 3137
+    },
+    "unsettledRequests": 8
+  },
+  "finalBrowser": {
+    "httpRequests": 37,
+    "modelRequests": {
+      "deepseek": 25,
+      "jev": 12
+    },
+    "knownNanoCny": 570320832,
+    "unsettled": []
+  },
+  "blackmarshReload": {
+    "stateEqual": true,
+    "narrativeEqual": true,
+    "modelRequestDelta": 0,
+    "replayEqual": true
+  },
+  "stationReload": {
+    "stateEqual": true,
+    "narrativeEqual": true,
+    "modelRequestDelta": 0,
+    "replayEqual": true
+  },
+  "restart": {
+    "priorStateEqual": true,
+    "priorNarrativeEqual": true,
+    "readStateEqual": true,
+    "readNarrativeEqual": true,
+    "additionalModelRequests": 0
+  },
+  "confirmation": {
+    "attempts": 37,
+    "completed": 36,
+    "qualified": 25,
+    "qualifiedRatio": 0.6756756756756757,
+    "requests": 283,
+    "knownCny": 6.04586712,
+    "unknownReservedCny": 0.5993976,
+    "firstSavedSeconds": {
+      "0.5": 8.221,
+      "0.8": 11.07,
+      "0.95": 17.786,
+      "1": 21.564
+    },
+    "completePresentedSeconds": {
+      "0.5": 10.093,
+      "0.8": 14.326,
+      "0.95": 22.072,
+      "1": 22.38
+    },
+    "qualifiedCompleteSeconds": {
+      "0.5": 10.143,
+      "0.8": 12.557,
+      "0.95": 16.401,
+      "1": 20.126
+    },
+    "allReplayEqual": true
+  },
+  "engineHead": "45afc488a32627f457b3b981df59293ffa90191a"
+}
