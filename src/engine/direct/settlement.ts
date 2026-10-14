@@ -43,7 +43,8 @@ export function settlePreparedActions(state: Readonly<SimulationState>, control:
       }
     }
     const happened = ["succeeded", "partial"].includes(status);
-    const observedFacts = happened ? preparation.visibleFactIds.flatMap(id => projected.truth.facts[id] ? [projected.truth.facts[id]!] : []) : [];
+    // An unsuccessful effect can still reveal existing conditions. New failed effects do not exist in projected truth.
+    const observedFacts = preparation.visibleFactIds.flatMap(id => projected.truth.facts[id] ? [projected.truth.facts[id]!] : []);
     settlements.push({ frame, operations, outcome: { id: runtimeId({ worldHash: state.worldHash, revision: state.revision + 1,
       kind: "outcome", stage: "direct-world", owner: frame.actorId, round: 0, ordinal: index }), proposalId: frame.id, status,
       summary, causeRefs: source.causes, assertions: source.assertions, knownAlternatives: [] }, visibleFacts: observedFacts,

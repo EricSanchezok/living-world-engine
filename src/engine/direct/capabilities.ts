@@ -24,13 +24,16 @@ export async function extendCapability(input: { state: Readonly<SimulationState>
   const roleBindings = { actor: "The acting character",
     target: !frame.targetEntityId ? null : frame.targetEntityId === frame.actorEntityId ? "The actor itself" : "A separate selected target entity",
     tool: !frame.toolEntityId ? null : frame.toolEntityId === frame.targetEntityId ? "The same entity as target" : "A separate selected instrument entity" };
+  const roleProperties = Object.fromEntries(Object.entries({ actor: frame.actorEntityId, target: frame.targetEntityId, tool: frame.toolEntityId })
+    .map(([role, entityId]) => [role, Object.values(state.truth.facts).filter(fact => fact.subjectId === entityId && fact.access.kind === "public")
+      .map(fact => ({ predicate: fact.predicate, value: fact.value, description: fact.description }))]));
   let previous: unknown = null, repairIssues: string[] = [];
   for (let attempt = 0; attempt < 2; attempt++) {
     let result;
     try { result = await decisions.provider.generateStructured({ ...decisions.scope, modelRegistrySnapshotHash: control.registryHash,
       profileId: input.profileId, subjectId: frame.actorId, role: "creation", modelInvocation: decisions.next(frame.actorId),
       system, userPrompt, promptVersion: `direct-capability-${contentHash({ system, userPrompt })}`, schemaName: "DirectCapabilityV1", schema: declaration,
-      context: { requestedAction: input.context, roleBindings, conditionProfiles: state.truth.mechanics.conditionProfiles, previous, repairIssues } as unknown as JsonValue, jsonExamplePolicy: "omit" });
+      context: { requestedAction: input.context, roleBindings, roleProperties, conditionProfiles: state.truth.mechanics.conditionProfiles, previous, repairIssues } as unknown as JsonValue, jsonExamplePolicy: "omit" });
     } catch (error) {
       if (!(error instanceof ModelOutputError)) throw Object.assign(error instanceof Error ? error : new Error(String(error)), { audits });
       if (error.audit) audits.push(error.audit);

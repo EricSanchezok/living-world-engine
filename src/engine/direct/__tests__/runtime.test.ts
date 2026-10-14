@@ -19,7 +19,7 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
   creationResponse?: unknown; creationResponses?: unknown[]; missingCoverage?: boolean; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
   recipient?: string; resolvedRecipient?: string; searchLocation?: string; transferAuthority?: string; transferExecution?: string;
   reactionProgress?: string; playerProgress?: string; duplicateIdentity?: boolean; timerSeconds?: number; interaction?: string; duration?: string; actorVisible?: boolean;
-  readingOverrides?: Record<string, string> } = {}) {
+  readingOverrides?: Record<string, string>; factValues?: Record<string, string> } = {}) {
   let creations = 0;
   const f = directTestProvider(wire => {
     if (!wire.questions) {
@@ -53,6 +53,11 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
       if (id.startsWith("identity")) value = options.duplicateIdentity && creations === 1 ? "duplicate" : "distinct";
       if (id.endsWith("_expression")) value = options.effectExpansion ? "expand" : "existing";
       if (id.endsWith("_movement")) value = options.movement ?? "enter";
+      if (/_fact\d+$/u.test(id)) {
+        const instructions = q.instructions as { task?: { data?: { fact?: { predicate: string } } }; data?: { fact?: { predicate: string } } };
+        const fact = (instructions.task ?? instructions).data?.fact;
+        value = fact && options.factValues?.[fact.predicate] || value;
+      }
       if (q.type === "choice" && !(value in q.criteria)) value = "none" in q.criteria ? "none" : Object.keys(q.criteria)[0]!;
       return [id, wire.messages && options.readingOverrides?.[id] ? { type: "choice", choice: options.readingOverrides[id] }
         : nativeAnswer(q, id === "expression" ? options.expression ?? 0 : value)];
@@ -82,6 +87,40 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("updates the actor's existing posture even when a separate object is the action target", async () => {
+    const f = await fixture({ operation: "change", target: "door", factValues: { kneeling: "v1" } });
+    f.world.initialState.truth.facts["actor-posture"] = { ...f.world.initialState.truth.facts["gate-lock"]!,
+      id: "actor-posture", subjectId: f.world.initialState.agents.player!.entityId, predicate: "kneeling",
+      value: { kind: "boolean", value: true }, description: "正跪在门前。", access: { kind: "public" } };
+    f.world.historyBaseHash = historyReplayBaseHash(f.world.initialState);
+    const engine = new SimulationEngine(f.world, f.algorithm);
+    await engine.bootstrapAgents();
+    const result = await engine.step(f.roster, f.request("扶着门框站起来"));
+    expect(result.state.truth.facts["actor-posture"]?.value).toEqual({ kind: "boolean", value: false });
+    expect(Object.values(result.state.agents.player!.belief.claims)).toContainEqual(expect.objectContaining({ predicate: "kneeling", value: { kind: "boolean", value: false } }));
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("retains perceptible existing conditions after failure without revealing private facts", async () => {
+    const f = await fixture({ operation: "use", target: "door", outcome: "failed", privateGateFact: true });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("推开这扇封住的门"));
+    expect(result.committed.outcomes[0]?.status).toBe("failed");
+    expect(result.state.truth.facts).toEqual(f.world.initialState.truth.facts);
+    expect(Object.values(result.state.agents.player!.belief.claims)).toContainEqual(expect.objectContaining({ predicate: "lock", value: { kind: "text", value: "sealed" } }));
+    expect(JSON.stringify(result.committed.observations.filter(observation => observation.observerId === "player"))).not.toContain("PRIVATE-CODE");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("supplies public role property vocabulary to reusable capability creation", async () => {
+    const f = await fixture({ operation: "use", target: "door", effectExpansion: true, creationEnabled: true, privateGateFact: true,
+      creationResponse: { description: "轻敲门板", applicability: "门板可以触及", effectDescription: "在门板上留下敲击痕迹",
+        effects: [{ kind: "fact", subject: "target", predicate: "tapped", value: true, description: "门板有敲击痕迹。" }] } });
+    await f.engine.bootstrapAgents();
+    await f.engine.step(f.roster, f.request("敲一下门板"));
+    const creation = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => !wire.questions)
+      .map(wire => directCreationContext(wire)).find(context => context.roleProperties);
+    expect(creation?.roleProperties).toMatchObject({ target: [{ predicate: "lock", value: { kind: "text", value: "sealed" } }] });
+    expect(JSON.stringify(creation?.roleProperties)).not.toContain("PRIVATE-CODE");
+  });
   it("projects retained delivered dialogue with local speaker and addressee roles", async () => {
     const f = await fixture({ operation: "speak", recipient: "guard", speech: "input", privateGateFact: true });
     await f.engine.bootstrapAgents();

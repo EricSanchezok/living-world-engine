@@ -110,17 +110,20 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     const focus = frame.kind === "observe" && frame.observationScope === "inventory" ? frame.actorEntityId
       : frame.kind === "observe" && (!frame.targetEntityId || frame.targetEntityId === frame.actorEntityId) ? state.truth.placements[frame.actorEntityId] : frame.targetEntityId;
     const targetFacts = orderedValues(state.truth.facts).filter(fact => fact.subjectId === (focus ?? frame.actorEntityId));
+    const effectSubjects = new Set([frame.actorEntityId, frame.targetEntityId, frame.toolEntityId]);
+    const effectFacts = ["use", "change"].includes(frame.kind)
+      ? orderedValues(state.truth.facts).filter(fact => effectSubjects.has(fact.subjectId)) : targetFacts;
     if (["use", "change"].includes(frame.kind)) {
       if (!capability) questions[`${prefix}_expression`] = question("Can the existing properties and authored mechanical procedures represent the requested immediate RESULT? Choose existing when an available procedure or property change expresses that result, including a random outcome. Operating steps, tool handling, taking readings, or a differently worded method do not themselves require a new capability. Expand only for a genuinely missing result concept or new constructed object; never invent a second success property alongside an existing authored result.", {
-        action: frame as unknown as JsonValue, existingProperties: targetFacts as unknown as JsonValue,
+        action: frame as unknown as JsonValue, existingProperties: effectFacts as unknown as JsonValue,
         authoredProcedures: definition.randomDistributions as unknown as JsonValue }, {
         existing: "Existing properties and mechanical operations express the immediate effect, or this attempt has no justified effect",
         expand: "A plausible new qualitative property, construct or capability is needed to express the actual intended effect",
       });
-      for (const [ordinal, fact] of targetFacts.entries()) {
+      for (const [ordinal, fact] of effectFacts.entries()) {
         const id = `${prefix}_fact${ordinal}`, values = factOptions(fact, frames, state);
         effects.set(id, { fact, values });
-        questions[id] = question("resulting value of this existing fact if the action succeeds and no random trial governs it. Unaffected properties stay unchanged.", { actionId: frame.id, fact: fact as unknown as JsonValue },
+        questions[id] = question("Resulting value of this existing property if the action succeeds and no random trial governs it. Include the actor's or tool's changed state when the method affects it. An obsolete posture or relation must cease when this action reverses it; do not preserve contradictory states. Unaffected properties stay unchanged.", { actionId: frame.id, fact: fact as unknown as JsonValue },
           { unchanged: "This property is unaffected or evidence is insufficient", ...Object.fromEntries(values.map((value, i) => [`v${i}`, value as unknown as Record<string, JsonValue>])) });
       }
       for (const [distributionIndex, distribution] of definition.randomDistributions.entries()) {
@@ -170,7 +173,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
           Object.fromEntries(magnitudeBands.map(band => [band, band])));
       }
     }
-    const observableFacts = new Map(targetFacts.map(fact => [fact.id, fact]));
+    const observableFacts = new Map(effectFacts.map(fact => [fact.id, fact]));
     if (capability) createdObjectQuestions(frame, prefix, capability, questions);
     for (const [ordinal, effect] of capability?.effects.entries() ?? []) if (effect.kind === "fact") {
       const fact = capabilityFact(state, frame, capability!, effect, ordinal);
@@ -415,8 +418,9 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       ? `你说：“${frame.utterance}”话语已送达。` : `你说：“${frame.utterance}”暂时没有听到答复。`;
     if (!["succeeded", "partial"].includes(status)) operations = [];
     prepared.push({ actionId: frame.id, status, summary: detail, operations, reads: view.reads,
-      visibleFactIds: ["succeeded", "partial"].includes(status) ? [...visibleFacts, ...(expansion?.facts ?? []),
-        ...operations.flatMap(operation => operation.kind === "set_fact" && operation.fact.predicate === "proximity" ? [operation.fact] : [])].map(fact => fact.id) : [],
+      visibleFactIds: [...visibleFacts.filter(fact => state.truth.facts[fact.id] || ["succeeded", "partial"].includes(status)),
+        ...(["succeeded", "partial"].includes(status) ? expansion?.facts ?? [] : []),
+        ...operations.flatMap(operation => operation.kind === "set_fact" && operation.fact.predicate === "proximity" ? [operation.fact] : [])].map(fact => fact.id),
       visibleEntityIds: ["succeeded", "partial"].includes(status) ? [...visibleEntities, ...(expansion?.entities ?? [])].map(entity => entity.id) : [], deliveredToEntityIds,
       namedEntityIds: [...entityNames].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "named").map(([, entityId]) => entityId),
       actorVisibleToEntityIds: deliveredToEntityIds.filter(recipient => selected(answers,
