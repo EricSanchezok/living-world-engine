@@ -185,7 +185,8 @@ describe("direct activities use code-owned mechanics", () => {
   it("retains continuous work across a deadline without another model request and allows interruption", async () => {
     const f = await fixture("ongoing"); const first = await f.act("持续监控冷却泵");
     const active = readDirectState(first.state.executionState!, first.state).activities[0]!;
-    expect(active.dueAtSeconds).toBeNull(); expect(active.progressSeconds).toBe(60);
+    expect(first.state.truth.elapsedSeconds).toBe(1);
+    expect(active.dueAtSeconds).toBeNull(); expect(active.progressSeconds).toBe(1);
     const next = await f.advance(); expect(next.state.truth.elapsedSeconds).toBe(120);
     expect(next.state.truth.timers["repair-window-end"]!.status).toBe("fired");
     expect(f.transport).toHaveBeenCalledTimes(2);

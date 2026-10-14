@@ -7,7 +7,7 @@ import type { ActionExpression } from "./contracts";
 import type { DirectDecisions } from "./decisions";
 
 const actionFields = ["operation", "target", "recipient", "tool", "resource", "amount", "timing", "duration",
-  "observation_scope", "capability", "progress_next", "search_location", "goal"];
+  "observation_scope", "capability", "progress_next", "search_location", "goal", "speech"];
 
 /** A language reading binds dependent parameters and expression in one response. */
 export async function readPlayerAction(input: { decisions: DirectDecisions; agentId: string; context: JsonValue;
@@ -32,7 +32,7 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   });
   const generated = await decisions.provider.generateStructured({ ...decisions.scope, subjectId: agentId,
     modelRegistrySnapshotHash: decisions.control.registryHash, modelInvocation: decisions.next(agentId),
-    profileId: input.profileId, role: "decision", schemaName: "PlayerActionReadingV1", system, userPrompt,
+    profileId: input.profileId, role: "decision", schemaName: "PlayerActionReadingV2", system, userPrompt,
     promptVersion: `player-reading-${contentHash({ system, userPrompt })}`,
     context: { playerReading: { state: context, language: input.language, catalog, cognition,
       exactQuotes: Object.fromEntries(input.quotes.map((quote, index) => [`q${index}`, quote])) } },
@@ -42,7 +42,9 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   const active = new Set(["operation", "timing", "duration", "progress_next", "goal",
     ...(["speak", "transfer"].includes(operation ?? "") ? ["recipient", "search_location"] : ["target"]),
     ...(operation === "observe" ? ["observation_scope"] : []),
-    ...(["use", "change", "expand", "transfer"].includes(operation ?? "") ? ["tool", "resource", "amount", "capability"] : [])]);
+    ...(["speak", "reflect"].includes(operation ?? "") ? ["speech"] : []),
+    ...(["use", "change", "expand", "transfer"].includes(operation ?? "") ? ["tool", "resource", "capability",
+      ...(action.resource && action.resource !== "none" ? ["amount"] : [])] : [])]);
   const defaults: Record<string, string> = { timing: "default", duration: "default", observation_scope: "target", amount: "unknown" };
   for (const [id, criteria] of Object.entries(catalog)) {
     if (action[id] && Object.hasOwn(criteria, action[id]!)) continue;
@@ -58,10 +60,15 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
     answers[id] = answer(typeof value === "string" && question.type === "choice" && Object.hasOwn(question.criteria, value) ? value : "unchanged");
   }
   answers.interaction = answer(generated.value.interaction);
-  answers.speech = answer(action.utterance ? "create" : "none");
+  answers.speech = answer(action.speech ?? (action.utterance ? "create" : "none"));
   answers.reflection = answer(action.utterance ? "create" : "none");
   const quote = action.literalQuote === "none" ? null : input.quotes[Number(action.literalQuote!.slice(1))];
-  const expression: ActionExpression = { attempt: action.attempt!.trim(), utterance: quote ?? action.utterance?.trim() ?? null,
+  const request = state.submittedAction as { rawText: string };
+  const speechChoice = action.speech;
+  const span = speechChoice ? catalog.speech?.[speechChoice] : null;
+  const literal = speechChoice === "input" ? request.rawText : /^q\d+$/u.test(speechChoice ?? "") ? input.quotes[Number(speechChoice!.slice(1))]
+    : span && typeof span === "object" && "literalWords" in span ? String(span.literalWords) : null;
+  const expression: ActionExpression = { attempt: action.attempt!.trim(), utterance: quote ?? (operation === "speak" ? literal : null) ?? action.utterance?.trim() ?? null,
     manner: action.manner?.trim() || null };
   return { answers, expression, audit: generated.audit };
 }

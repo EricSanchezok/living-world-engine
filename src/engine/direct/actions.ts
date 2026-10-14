@@ -82,7 +82,8 @@ export function actionSeconds(state: Readonly<SimulationState>, profileId: strin
   const profile = profileId ? state.truth.mechanics.temporalProfiles[profileId] : null;
   if (profile?.kind === "fixed") return profile.durationSeconds;
   if (profile?.kind === "staged") return profile.stages.reduce((sum, stage) => sum + stage.durationSeconds, 0);
-  if (profile?.kind === "ongoing") return profile.checkpointSeconds;
+  // An open-ended activity starts now; its later checkpoints are not time already spent.
+  if (profile?.kind === "ongoing") return actionSeconds(state, null, "", false);
   if (profile?.kind === "rate") {
     const escaped = [profile.unit, ...profile.unitAliases].map(unit => unit.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&"));
     const quantity = raw.match(new RegExp(`(\\d+(?:\\.\\d+)?)\\s*(?:${escaped.join("|")})`, "iu"));
@@ -151,7 +152,10 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       apologize: "Apologize or acknowledge an effect on the other person", farewell: "End this conversation naturally",
       offer: "Offer the selected resource amount", accept: "Explicitly accept the currently discussed terms", refuse: "Explicitly refuse the currently discussed terms",
       clarify: "Ask for clearer terms", report: "State the selected existing belief", acknowledge: "Acknowledge and wait for actual evidence", unknown_information: "Tell the questioner that this Agent does not know the requested information" }),
-    timing: choice("timing", { default: "Ordinary action duration from the world", ...Object.fromEntries(timing.map(profile => [profile.id, profile.name])) }),
+    timing: choice("Choose timing for this concrete step. A brief look, ordinary conversation or starting to wait uses default. Select prolonged work only when the request actually authorizes it. Checkpoint intervals belong to future activity, not elapsed time at its start.", {
+      default: "Ordinary action duration from the world",
+      ...Object.fromEntries(timing.map(profile => [profile.id, { ...profile }])),
+    }),
   };
   if (external) questions.interaction = choice("What kind of response does this input seek in the actual shared conversation? Choose clarification for a reader asking which previously presented person/thing was meant, a recap, their already known location, or the meaning/status of earlier feedback without requesting a new action. Choose world_action for words directed at a character (including elliptical follow-ups), observation of NEW evidence or any actual attempt. A question is not automatically clarification: asking the recent speaker for their name is in-world speech. Use the published exchanges, addressee and current focus; no special command syntax is needed.", {
     world_action: "Act or speak in the world",

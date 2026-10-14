@@ -81,6 +81,28 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("preserves already worded player dialogue instead of the interpreter's added reply", async () => {
+    const f = await fixture({ operation: "speak", recipient: "guard", speech: "input", creationEnabled: true,
+      creationResponse: { attempt: "询问对方的来意", utterance: "你为什么来这儿？我只是问问，没什么事，也没人让我来。", manner: null } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("你为什么来这儿？"));
+    expect(result.state.history[0]!.directEvent!.frames[0]!.expression?.utterance).toBe("你为什么来这儿？");
+    const heard = result.committed.observations.find(packet => packet.observerId === "keeper")!;
+    expect(JSON.stringify(heard)).toContain("你为什么来这儿？");
+    expect(JSON.stringify(heard)).not.toContain("没人让我来");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("does not require a quantity for a physical attempt using no quantified resource", async () => {
+    const f = await fixture({ operation: "use", target: "door", creationEnabled: true,
+      readingOverrides: { resource: "none", amount: "none" },
+      creationResponse: { attempt: "伸手推门", utterance: null, manner: null } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("用手推一下门"));
+    expect(result.state.history[0]!.directEvent!.frames[0]!.kind).toBe("use");
+    expect(readDirectState(result.state.executionState!, result.state).intents.player!.failure).toBeNull();
+    expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("ignores malformed auxiliary cognition and an unused observation branch without cancelling a wait", async () => {
     const f = await fixture({ operation: "wait", duration: "d0", creationEnabled: true,
       readingOverrides: { observation_scope: "none", belief_status_0: "support" } });
