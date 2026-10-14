@@ -23,7 +23,7 @@ An ordinary use/change operation with no quantity, property or random effect was
 
 ## Decision Outcome
 
-Choose the third option under [Spec 0184](../specs/0184-conversational-continuity-and-recovery.md). The world decision distinguishes an existing property/procedure, a needed qualitative extension, and a feasible method whose purpose entails no new persistent state or whose intended condition already holds. Only a successful outcome combined with the last choice can produce a completed-method receipt without persistent changes. A partial or failed outcome stays partial or failed. An existing-representation choice with no admitted effect remains unconfirmed.
+Choose the third option under [Spec 0184](../specs/0184-conversational-continuity-and-recovery.md). The world decision distinguishes an existing property/procedure, a needed qualitative extension, a newly performed instantaneous method with no continuing state, and an already-established target state. A successful instantaneous-method outcome can produce a completed-method receipt without persistent changes. An already-established state produces a no-repeat receipt instead. Holding, posture and ongoing pressure remain continuing properties even if the wider intended benefit fails. A partial or failed outcome stays partial or failed. An existing-representation choice with no admitted effect remains unconfirmed.
 
 Familiarity does not require a concept to be prewritten: an ordinary posture or temporary relation can enter the reusable capability path. Authored mechanics and actual existing properties continue to take priority. Narrative and perception consume the admitted receipt, while replay uses the saved event without another decision.
 

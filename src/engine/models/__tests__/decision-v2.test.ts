@@ -83,13 +83,21 @@ describe("direct native decisions", () => {
     expect(f.transport).toHaveBeenCalledTimes(1);
     expect(Buffer.byteLength(String(f.transport.mock.calls[0]![1]!.body))).toBeGreaterThan(262_144);
   });
-  it("splits only after an actual provider overflow and counts every dispatch", async () => {
-    const f = directTestProvider(wire => Object.keys(wire.questions).length > 1
-      ? new Response('{"detail":"context token limit exceeded"}', { status: 422 }) : answers(wire.questions));
-    const result = await executeDecisionV2(f.gateway, request());
-    expect(Object.keys(result.answers)).toHaveLength(3); expect(result.audits).toHaveLength(3);
-    expect(result.dispatches).toHaveLength(5); expect(f.transport).toHaveBeenCalledTimes(5);
-    expect(result.dispatches.every(dispatch => dispatch.fallback === null)).toBe(true);
+  it("falls back once with the complete batch after actual shared-state overflow", async () => {
+    const f = directTestProvider(wire => wire.messages ? answers(wire.questions)
+      : new Response('{"detail":"context token limit exceeded"}', { status: 422 }));
+    const result = await executeDecisionV2(f.gateway, { ...request(), fallbackProfileId: "decision-deepseek" });
+    expect(Object.keys(result.answers)).toHaveLength(3); expect(result.audits).toHaveLength(1);
+    expect(result.dispatches).toEqual([
+      { questionIds: ["consent", "relevance", "urgency"], profileId: "decision-jev", fallback: null },
+      { questionIds: ["consent", "relevance", "urgency"], profileId: "decision-deepseek", fallback: "context-limit" },
+    ]);
+    expect(f.transport).toHaveBeenCalledTimes(2);
+  });
+  it("does not retry the same oversized shared state when no fallback is configured", async () => {
+    const f = directTestProvider(() => new Response('{"detail":"context token limit exceeded"}', { status: 422 }));
+    await expect(executeDecisionV2(f.gateway, request())).rejects.toThrow("actual context");
+    expect(f.transport).toHaveBeenCalledTimes(1);
   });
   it("rejects invalid choice domains, invalid values and foreign private owners", async () => {
     const f = directTestProvider(wire => ({ ...answers(wire.questions), relevance: { type: "noul", noul: 1.1 } }));

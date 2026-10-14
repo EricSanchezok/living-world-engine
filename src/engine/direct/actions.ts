@@ -311,6 +311,8 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       profileId: profiles.creation, subjectId: agentId, role: "creation", modelInvocation: decisions.next(agentId),
       system, userPrompt, promptVersion: `action-expression-${contentHash({ system, userPrompt })}`, schemaName: "ActionExpressionV1",
       context: { ...context as Record<string, JsonValue>, language: input.definition.narrative.language, recipient: operation === "reflect" ? null : targetKey,
+        addressee: operation === "reflect" ? null : targetKey === "broadcast" ? { audience: "everyone who can hear" }
+          : { localEntityId: targetKey, name: agent.belief.localEntities[targetKey]?.name ?? null },
         chosenDirection: operation, communicativeIntent: external && selected(answers, "transfer_authority") === "request"
           ? "Request the other person's action; do not offer payment or accept any new terms" : selected(answers, "dialogue"), playerControlled: Boolean(external),
         currentPlayerRequest: external?.rawText ?? null,

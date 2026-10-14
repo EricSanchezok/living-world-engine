@@ -92,7 +92,7 @@ function nativeOverflow(error: unknown): boolean {
   return error instanceof NativeDecisionContextLimitError || error instanceof Error && error.cause !== error && nativeOverflow(error.cause);
 }
 
-/** Real provider overflow is split by independent question; bytes are never a token gate. */
+/** A batch has one dependency-scoped state; an overflow cannot be fixed by repeating it per question. */
 export async function executeDecisionV2(provider: StructuredModelProvider, request: DecisionRequestV2): Promise<DecisionResultV2> {
   const batch = validateDecisionBatchV2(request.batch), prompt = decisionPromptV2(request.instructionProfile);
   if (batch.view.kind === "agent" && batch.view.agentId !== request.subjectId) throw new Error("private decision subject must own its projection");
@@ -140,14 +140,8 @@ export async function executeDecisionV2(provider: StructuredModelProvider, reque
         return { ...valid, ...await run({ ...part, questions: invalid }, profileId, fallback) };
       }
       if (!nativeOverflow(error) || !native) throw error;
-      const questions = Object.entries(part.questions);
-      if (questions.length > 1) {
-        const middle = Math.ceil(questions.length / 2);
-        const left = await run({ ...part, questions: Object.fromEntries(questions.slice(0, middle)) }, profileId, fallback);
-        const right = await run({ ...part, questions: Object.fromEntries(questions.slice(middle)) }, profileId, fallback);
-        return { ...left, ...right };
-      }
       if (!request.fallbackProfileId || provider.catalog.account(provider.catalog.profile(request.fallbackProfileId).account_id).protocol === "typesafe-systemone") throw error;
+      repairDiagnostics.push("Actual native context overflow: preserve the shared state and all questions in one fallback request");
       return run(part, request.fallbackProfileId, "context-limit");
     }
   };

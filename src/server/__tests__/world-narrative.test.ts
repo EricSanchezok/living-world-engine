@@ -39,6 +39,20 @@ describe("immutable narrative paragraphs", () => {
     scene.observations[0]!.scene!.details.push({ localEntityId: "shopkeeper", label: "店主", description: "衣服已经湿透" });
     expect(deliveredDialogue(scene, discourse)).toBeNull();
   });
+  it("anchors a paraphrased first appearance through the exact delivered voice", () => {
+    const scene = structuredClone(source);
+    scene.knownEntities = [{ localEntityId: "shopkeeper", name: "戴旧帽子的商人", description: "一位戴旧帽子的人。" }];
+    scene.speech[0]!.speakerLocalId = "shopkeeper";
+    for (const text of ["门边有位戴旧帽子的人，开口道：[[speech-ab12]]", "门边有位戴旧帽子的人，开口道：“三枚金币；我还没同意赊账。”"]) {
+      expect(renderNarrativeSegment(text, scene).mentions).toEqual([
+        { localEntityId: "shopkeeper", surface: "“三枚金币；我还没同意赊账。”" },
+      ]);
+    }
+    scene.speech.push({ id: "speech-other", speaker: "另一个声音", speakerLocalId: "other", utterance: scene.speech[0]!.utterance });
+    scene.knownEntities.push({ localEntityId: "other", name: "另一个声音", description: "只听见声音" });
+    expect(renderNarrativeSegment("有人说：“三枚金币；我还没同意赊账。”", scene).mentions).toEqual([]);
+    expect(renderNarrativeSegment("门旁的人说：[[speech-ab12]]", scene).mentions[0]?.localEntityId).toBe("shopkeeper");
+  });
   it("keeps literal player dialogue but sends stage directions, recovery and physical scenes to narration", () => {
     const scene = structuredClone(source);
     scene.observations[0]!.scene!.actor = "你";

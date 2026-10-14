@@ -19,7 +19,7 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
   creationResponse?: unknown; creationResponses?: unknown[]; missingCoverage?: boolean; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
   recipient?: string; resolvedRecipient?: string; searchLocation?: string; transferAuthority?: string; transferExecution?: string;
   reactionProgress?: string; playerProgress?: string; duplicateIdentity?: boolean; timerSeconds?: number; interaction?: string; duration?: string; actorVisible?: boolean;
-  readingOverrides?: Record<string, string>; factValues?: Record<string, string>; effectRepresentation?: "existing" | "no_change" | "expand" } = {}) {
+  readingOverrides?: Record<string, string>; factValues?: Record<string, string>; effectRepresentation?: "existing" | "no_change" | "already" | "expand" } = {}) {
   let creations = 0;
   const f = directTestProvider(wire => {
     if (!wire.questions) {
@@ -129,6 +129,24 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
+  it("explains an already satisfied state without a repeated performed-method receipt", async () => {
+    const f = await fixture({ operation: "use", target: "door", effectRepresentation: "already" });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("让门保持原样"));
+    expect(result.committed.outcomes[0]).toMatchObject({ status: "succeeded", summary: "当前已经处于所要求的状态，没有再次执行这个动作。" });
+    expect(result.state.truth.facts).toEqual(f.world.initialState.truth.facts);
+    expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("retains the owner's specific inspection focus without exposing it as another observer's intention", async () => {
+    const f = await fixture({ operation: "observe", target: "door", creationEnabled: true });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("检查门铰链有没有松动"));
+    expect(result.committed.observations.find(item => item.observerId === "player")?.scene?.attempt).toBe("检查门铰链有没有松动");
+    for (const observation of result.committed.observations.filter(item => item.observerId !== "player")) {
+      expect(observation.scene?.attempt).toBe("");
+    }
+  });
   it.each([false, true])("repairs an omitted executed operation once and retains both audits (repeat failure: %s)", async repeatFailure => {
     const f = await fixture({ operation: "observe", target: "door", creationEnabled: true,
       creationResponse: { description: "门在眼前。", entities: [], facts: [], events: [] } });
@@ -218,7 +236,8 @@ describe("direct world through the actual simulation entry", () => {
     const result = await f.engine.step(f.roster, f.request("请先检查，然后告诉我你实际看到了什么。"));
     const view = privateActionView(result.state, "keeper").state;
     expect(view).toMatchObject({ interactions: [{ relation: "addressed_to_self", operation: "speak",
-      utterance: "请先检查，然后告诉我你实际看到了什么。", result: null }] });
+      utterance: "请先检查，然后告诉我你实际看到了什么。", result: null }],
+      conversation: [{ relation: "addressed_to_self", words: "请先检查，然后告诉我你实际看到了什么。" }] });
     const cause = result.state.history[0]!.directEvent!.frames[0]!.id;
     expect(privateActionView(result.state, "keeper", cause).state).toMatchObject({ respondingTo: {
       relation: "addressed_to_self", utterance: "请先检查，然后告诉我你实际看到了什么。" } });
@@ -232,7 +251,7 @@ describe("direct world through the actual simulation entry", () => {
     for (const evidence of Object.values(forgotten.agents.keeper!.belief.evidence)) if (evidence.sourceId && keeperObservationIds.has(evidence.sourceId)) {
       delete forgotten.agents.keeper!.belief.evidence[evidence.id];
     }
-    expect(privateActionView(forgotten, "keeper", cause).state).toMatchObject({ interactions: [], respondingTo: null });
+    expect(privateActionView(forgotten, "keeper", cause).state).toMatchObject({ interactions: [], conversation: [], respondingTo: null });
   });
   it("closes an already executed submission without another action or time advance", async () => {
     const options = { operation: "wait", duration: "d0", playerProgress: "continue", interaction: "world_action",
@@ -261,9 +280,19 @@ describe("direct world through the actual simulation entry", () => {
     const result = await f.engine.step(f.roster, f.request("再看看门"));
     expect(result.state.truth).toEqual(f.world.initialState.truth);
     expect(readDirectState(result.state.executionState!, result.state).intents.player).toMatchObject({
-      status: "failed", failure: { message: "Request completion requires a receipt from this submission" },
+      status: "failed", failure: { message: "Request completion requires a receipt from this submission; use clarification for a new input that requests no executable step" },
     });
     expect(readDirectState(result.state.executionState!, result.state).completedSubmissionIds).toEqual([]);
+  });
+  it("explains a fresh no-action reading without fabricating completion or failing the service", async () => {
+    const f = await fixture({ interaction: "request_complete", readingOverrides: { operation: "none" }, creationEnabled: true });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("要是没有人在敲门，就别去开门。"));
+    expect(result.state.truth).toEqual(f.world.initialState.truth);
+    expect(result.state.history.at(-1)!.directEvent).toMatchObject({ frames: [], events: [], observations: [],
+      presentation: [{ kind: "clarification", requested: "要是没有人在敲门，就别去开门。" }] });
+    expect(readDirectState(result.state.executionState!, result.state).intents.player).toMatchObject({ status: "waiting", failure: null });
+    expect(replaySimulationState(result.state)).toEqual(result.state);
   });
   it("does not append an invented question after changing the input's terminal punctuation", async () => {
     const f = await fixture({ operation: "speak", recipient: "guard", creationEnabled: true,

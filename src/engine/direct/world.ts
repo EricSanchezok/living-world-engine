@@ -118,11 +118,12 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     const effectFacts = ["use", "change"].includes(frame.kind)
       ? orderedValues(state.truth.facts).filter(fact => effectSubjects.has(fact.subjectId)) : targetFacts;
     if (["use", "change"].includes(frame.kind)) {
-      if (!capability) questions[`${prefix}_expression`] = question("How will this immediate result be represented? existing requires a specific available property or authored procedure that actually expresses the result. An unrelated appearance or object description is insufficient. A new ordinary posture, temporary use or bodily relation can need expansion even though it is familiar common sense; it need not be an exotic ability. Use no_change only for a feasible method whose immediate purpose has no persistent effect or whose intended state already holds. Do not use it to silently drop a requested state change. A differently worded method with the same existing result needs no duplicate property.", {
+      if (!capability) questions[`${prefix}_expression`] = question("How will this immediate result be represented? existing requires a specific available property or authored procedure that actually expresses the result. An unrelated appearance or object description is insufficient. A posture, holding/contact, ongoing pressure or temporary bodily relation persists after this boundary and needs an actual property, even when its intended wider benefit fails. Use expand if that property is missing. no_change is only a newly performed instantaneous method with no continuing condition. already means evidence establishes that the requested end state already holds: no repeated method occurs. Do not silently drop a requested state change or duplicate a property for a differently worded method.", {
         action: frame as unknown as JsonValue, existingProperties: effectFacts as unknown as JsonValue,
         authoredProcedures: definition.randomDistributions as unknown as JsonValue }, {
         existing: "A specific existing property or authored procedure expresses the immediate effect",
-        no_change: "The method can be performed, but its immediate purpose entails no new persistent change or its intended state already holds",
+        no_change: "A new instantaneous method is performed without any continuing posture, contact or state change",
+        already: "Actual current evidence establishes the requested state already holds; no repeated physical method is needed",
         expand: "A plausible new qualitative property, construct or capability is needed to express the actual intended effect",
       });
       for (const [ordinal, fact] of effectFacts.entries()) {
@@ -292,7 +293,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     let operations: WorldDeltaOperation[] = [];
     const randomRequests: PreparedDirectAction["randomRequests"] = [], randomBindings: PreparedDirectAction["randomBindings"] = [];
     let detail = status === "blocked" ? "还需要更多信息。" : status === "failed" ? "这次尝试未能完成。" : status === "partial" ? "这次行动取得了部分进展。"
-      : frame.kind === "wait" ? "你在等待新的消息或条件变化。" : frame.kind === "observe" ? "你查看了眼前的情况。" : "行动已完成。";
+      : frame.kind === "wait" ? `这段等候已过去${frame.durationSeconds}秒。` : frame.kind === "observe" ? "你查看了眼前的情况。" : "行动已完成。";
     if (frame.kind === "transfer" && frame.quantityDefinitionId && frame.amount !== null) {
       const held = orderedValues(projected.truth.quantities).filter(quantity => quantity.holderId === frame.actorEntityId &&
         quantity.definitionId === frame.quantityDefinitionId).reduce((sum, quantity) => sum + quantity.amount, 0);
@@ -404,8 +405,10 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         const method = answers[`${prefix}_capability`] && selected(answers, `${prefix}_capability`) === "apply"
           ? decisions.control.capabilities.find(capability => capability.id === frame.capabilityId) : null;
         if (method && !noConfirmedEffect && !ongoing) detail = `本次已执行的方法：${method.description}。具体结果以观察到的状态为准。`;
-        const completedWithoutChange = noConfirmedEffect && status === "succeeded" && selected(answers, `${prefix}_expression`) === "no_change";
+        const representation = answers[`${prefix}_expression`] ? selected(answers, `${prefix}_expression`) : null;
+        const completedWithoutChange = noConfirmedEffect && status === "succeeded" && representation === "no_change";
         if (completedWithoutChange) detail = `本次已执行的方法：${frame.expression?.attempt ?? frame.proposal.rawText}。没有产生新的持续状态变化。`;
+        else if (noConfirmedEffect && status === "succeeded" && representation === "already") detail = "当前已经处于所要求的状态，没有再次执行这个动作。";
         else if (noConfirmedEffect) status = "partial";
         if (unboundRandomEffect) { status = "partial"; detail = "本次程序已执行并记录实际抽取结果，结果对应的状态仍待确认。"; }
       }

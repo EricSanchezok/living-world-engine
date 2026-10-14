@@ -7,6 +7,7 @@ import { contentHash } from "../models/model-audit";
 import type { JsonValue } from "../runtime/json";
 import type { ActionExpression } from "./contracts";
 import type { DirectDecisions } from "./decisions";
+import type { ParticipantDiscourse } from "../contracts/discourse";
 
 const actionFields = ["operation", "target", "recipient", "tool", "resource", "amount", "timing", "duration",
   "observation_scope", "capability", "progress_next", "search_location", "goal"];
@@ -28,6 +29,10 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   const state = input.context as Record<string, JsonValue>;
   const { actionPolicy: _policy, actionKinds: _kinds, ...context } = state;
   void _policy; void _kinds;
+  const discourse = state.discourse as unknown as ParticipantDiscourse | null;
+  const presentedConversation = discourse?.exchanges.map(exchange => ({
+    requestedByPlayer: exchange.requested, actuallyPresented: exchange.paragraphs.map(paragraph => paragraph.text),
+  })) ?? [];
   const schema = z.object({
     understanding: z.string().describe("Briefly identify the intended interaction and next unperformed step. If there is a prerequisite, state whether actual evidence supports it or it remains unknown. Do not predict a result."),
     requestAnalysis: z.object({
@@ -39,7 +44,7 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
     action: z.object({ ...fieldShape, attempt: z.string(), utterance: z.string().nullable()
       .describe("The sole actual spoken text, or explicitly requested private reflection, for this step. No stage directions or unsolicited additions; null for a purely physical action or clarification."), manner: z.string().nullable(),
       literalQuote: z.enum(["none", "input", ...input.quotes.map((_, index) => `q${index}`)] as [string, ...string[]])
-        .describe("For ordinary dialogue or a conversational follow-up, choose input: code speaks the player's exact input and ignores generated utterance. Choose qN for an explicit quoted line. Choose none only when this is not speech or stage directions require composing the requested words.") }),
+        .describe("input means EVERY WORD in the entire submitted input is literally spoken. Never choose input if ANY part describes a gesture, delivery, addressee, instruction to ask/say, or physical action. qN copies a quoted line. Otherwise choose none and supply only the intended utterance; requested delivery/gestures belong in manner.") }),
     cognition: z.record(z.string(), z.unknown()).optional(),
   });
   const audits: ModelExecutionAudit[] = [];
@@ -51,7 +56,7 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
         modelRegistrySnapshotHash: decisions.control.registryHash, modelInvocation: decisions.next(agentId),
         profileId: input.profileId, role: "decision", schemaName: "PlayerActionReadingV4", system, userPrompt,
         promptVersion: `player-reading-${contentHash({ system, userPrompt })}`,
-        context: { playerReading: { state: context, language: input.language, catalog, cognition,
+        context: { playerReading: { state: context, language: input.language, catalog, cognition, presentedConversation,
           exactQuotes: Object.fromEntries(input.quotes.map((quote, index) => [`q${index}`, quote])) },
           ...(repair ? { repair: { ...repair, instruction: "Correct only the reported executed-branch bindings against the same original request and catalog. Return the complete reading. Do not invent another action or alter the player's words." } } : {}) },
         schema, jsonExamplePolicy: "omit" });
@@ -66,7 +71,10 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
     const issues: string[] = [];
     if (generated.value.interaction === "request_complete" &&
       (!Array.isArray(state.currentRequestReceipts) || state.currentRequestReceipts.length === 0)) {
-      issues.push("Request completion requires a receipt from this submission");
+      // A no-action reading of a fresh condition gets an explicit explanation,
+      // never silent completion, a fabricated receipt or a transport-style error.
+      if (operation === "none" && !action.utterance) generated.value.interaction = "clarification";
+      else issues.push("Request completion requires a receipt from this submission; use clarification for a new input that requests no executable step");
     }
     const active = new Set(["operation", "timing", "duration", "progress_next", "goal",
       ...(["speak", "transfer"].includes(operation ?? "") ? ["recipient",

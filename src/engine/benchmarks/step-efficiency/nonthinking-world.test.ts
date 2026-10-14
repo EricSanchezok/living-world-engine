@@ -16,6 +16,7 @@ it("imports the unchanged full world and rejects thinking, model and frozen asse
     const source = loadModelCatalog();
     const profiles = Object.fromEntries(Object.entries(source.profiles).map(([id, profile]) => [id,
       profile.account_id === "deepseek-api" || id === "decision-jev" ? { ...source.profiles["creation-deepseek"]!, allowed_roles: profile.allowed_roles,
+        inference: { ...source.profiles["creation-deepseek"]!.inference, thinking: "disabled" as const, effort: "auto" as const },
         selector: { kind: "exact" as const, model_id: STEP_E2_PROTOCOL.model } } : profile]));
     const baseline = new ModelCatalog({ schema_version: source.schemaVersion, scheduler: source.scheduler,
       registry: source.registry, accounts: source.accounts, profiles, model_overrides: source.modelOverrides });

@@ -18,10 +18,15 @@ export function privateActionView(state: Readonly<SimulationState>, agentId: str
       (fact.access.kind === "public" || fact.access.kind === "agents" && fact.access.agentIds.includes(agentId))).map(fact => `fact:${fact.id}`)];
   const causeEvents = causeActionId ? new Set(state.history.flatMap(step => step.events.filter(event =>
     event.causes.some(cause => cause.kind === "action" && cause.id === causeActionId)).map(event => event.id))) : null;
+  const interactions = privateInteractions(state, agentId, entities);
   const view = { agentId: perspective.agentId, elapsedSeconds: perspective.elapsedSeconds, self: perspective.self, mechanics: perspective.mechanics,
     knowledge: perspective.knowledge, character: perspective.character,
     respondingTo: causeEvents ? privateInteractions(state, agentId, entities, causeEvents).at(-1) ?? null : null,
-    interactions: privateInteractions(state, agentId, entities) };
+    conversation: interactions.filter(item => item.utterance).slice(-24).map(item => ({
+      step: item.step, speaker: item.actor, addressee: item.action?.target ?? null,
+      addressing: item.action?.addressing ?? "none", relation: item.relation, words: item.utterance,
+    })),
+    interactions: interactions.slice(-18) };
   // Delivered evidence remains memory after the observation cursor advances.
   return { state: view as unknown as JsonValue,
     reads: captureDependencies(state, keys), entities };
@@ -44,7 +49,7 @@ function privateInteractions(state: Readonly<SimulationState>, agentId: string, 
       utterance: scene.speech?.utterance ?? null,
       result: scene.actionKind === "speak" ? null : scene.outcome,
       observedDetails: scene.details };
-  })).slice(-18);
+  }));
 }
 
 export function localWorldView(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frames: ActionFrame[]): DirectLocalView {

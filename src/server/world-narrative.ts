@@ -119,6 +119,7 @@ export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscou
       actualResult: executedDescription({ ...observation, scene: observation.scene ?? undefined }) })),
     performedNow: source.observations.map(observation => ({ actor: observation.scene?.actor ?? null,
       operation: observation.scene?.actionKind ?? null, status: observation.scene?.status ?? null,
+      currentMethodOrAttention: observation.scene?.actionKind !== "speak" ? observation.scene?.attempt ?? null : null,
       manner: observation.scene?.manner ?? null, result: executedDescription({ ...observation, scene: observation.scene ?? undefined }) })),
     actionBoundary: "These receipts are the complete new action record. Earlier prose is not a new action. No extra gesture, movement, reaction or physical completion is implied by fluent dialogue or by an object's suitability for use.",
     playerCurrentHoldings: source.currentHoldings?.quantities.map(quantity => `You currently hold ${quantity.amount} ${quantity.unit} of ${quantity.name}.`) ?? [],
@@ -316,6 +317,12 @@ export function completeParagraphs(text: string): string[] {
 }
 export function renderNarrativeSegment(text: string, source: ScenePacket): { text: string; mentions: DiscourseMention[] } {
   const mentions: DiscourseMention[] = [];
+  const voicedMentions: DiscourseMention[] = [];
+  const bindSpeaker = (speech: ScenePacket["speech"][number]) => {
+    if (speech.speakerLocalId && source.knownEntities.some(entity => entity.localEntityId === speech.speakerLocalId)) {
+      voicedMentions.push({ localEntityId: speech.speakerLocalId, surface: `“${speech.utterance}”` });
+    }
+  };
   text = text.replace(/[“"](\[\[speech-[^\]\n]+\]\])[”"]/gu, "$1");
   if (/\[\[|\]\]/u.test(text.replace(/\[\[[^\]\n]+\]\]/gu, ""))) throw new Error("Narrative paragraph contains an unresolved reference");
   // Typography is not a speech act. The publication decision checks unsupported
@@ -332,6 +339,7 @@ export function renderNarrativeSegment(text: string, source: ScenePacket): { tex
     }
     const speech = source.speech.find(item => item.id === token);
     if (!speech) throw new Error(token.startsWith("speech-") ? "Narrative referenced an undelivered utterance" : "Narrative contains an unresolved reference");
+    bindSpeaker(speech);
     return `“${speech.utterance}”`;
   }).trim();
   if (!rendered) throw new Error("Narrative paragraph is empty");
@@ -341,8 +349,11 @@ export function renderNarrativeSegment(text: string, source: ScenePacket): { tex
   for (const speech of source.speech) if (source.speech.filter(item => item.utterance === speech.utterance).length === 1) {
     const escaped = speech.utterance.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
     result = result.replace(new RegExp(`${escaped}\\s*“${escaped}”`, "gu"), () => `“${speech.utterance}”`);
+    if (result.includes(`“${speech.utterance}”`)) bindSpeaker(speech);
   }
   for (const mention of explicitNarrativeMentions(result, source)) if (!mentions.some(existing => existing.localEntityId === mention.localEntityId)) mentions.push(mention);
+  // A delivered voice identifies its speaker even when the introduction paraphrases the display label.
+  for (const mention of voicedMentions) if (!mentions.some(existing => existing.localEntityId === mention.localEntityId)) mentions.push(mention);
   return { text: result, mentions };
 }
 export function renderNarrativeParagraph(text: string, source: ScenePacket): string {
