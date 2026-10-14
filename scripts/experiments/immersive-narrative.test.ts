@@ -1,7 +1,16 @@
 import { describe, expect, it } from "vitest";
-import { plannedContinuityRounds, selectContinuityFlows } from "./immersive-narrative";
+import { canContinueAfterLocalTaskFailure, plannedContinuityRounds, selectContinuityFlows } from "./immersive-narrative";
 
 describe("frozen live conversation runner", () => {
+  it("continues subsequent frozen inputs only after a local failure has readable feedback and a real input window", () => {
+    const recovered = { status: "failed", stopReason: "local-model-task-failed", servicePaused: false, feedbackReady: true, canAct: true };
+    expect(canContinueAfterLocalTaskFailure(recovered)).toBe(true);
+    for (const changed of [{ servicePaused: true }, { feedbackReady: false }, { canAct: false }, { status: "running" }, { stopReason: "model-service-paused" }]) {
+      expect(canContinueAfterLocalTaskFailure({ ...recovered, ...changed })).toBe(false);
+    }
+    // The earlier failed row is still recorded; neither input order nor denominator changes.
+    expect(plannedContinuityRounds(selectContinuityFlows("confirmation"), new Set(["C05-1", "C05-2"]))).toHaveLength(72);
+  });
   it("allows development probes while requiring complete confirmation and continuous cohorts", () => {
     expect(selectContinuityFlows("development", "D01,D08").map(flow => flow.id)).toEqual(["D01", "D08"]);
     expect(selectContinuityFlows("confirmation")).toHaveLength(12);

@@ -35,6 +35,13 @@ export function plannedContinuityRounds(flows: ContinuityCase[], recorded: Reado
   })));
 }
 
+/** Continue the frozen conversation only after the host actually recovered its input window. */
+export function canContinueAfterLocalTaskFailure(input: { status?: string; stopReason?: string | null;
+  servicePaused: boolean; feedbackReady: boolean; canAct: boolean }) {
+  return input.status === "failed" && input.stopReason === "local-model-task-failed" &&
+    !input.servicePaused && input.feedbackReady && input.canAct;
+}
+
 async function main() {
   const phase = process.argv[2] ?? "development", selected = process.argv[3];
   const flows = selectContinuityFlows(phase, selected);
@@ -137,7 +144,12 @@ async function main() {
         rows.push(row); save(`${flow.id}-${index + 1}.json`, { ...row, document });
         console.log(JSON.stringify({ trial, flow: flow.id, input: index + 1, status: row.status, failure, firstParagraphMs,
           completeMs: row.completeMs, requests: row.httpRequests, costCny: row.costCny, replay: row.replayEqual }));
-        if (failure || run?.status === "failed" || stopped || live.budget.summary.blockingUnknown.length) break;
+        const feedback = document.narratives.filter(beat => beat.submissionId === submissionId);
+        const recovered = canContinueAfterLocalTaskFailure({ status: run?.status, stopReason: run?.stopReason,
+          servicePaused: !!run?.servicePause,
+          feedbackReady: feedback.some(beat => beat.segments.length > 0) && feedback.every(beat => ["complete", "fallback"].includes(beat.status)),
+          canAct: document.actionWindow?.status === "open" && document.actionWindow.requiredAgentIds.includes(participant.agentId) });
+        if (failure || run?.status === "failed" && !recovered || stopped || live.budget.summary.blockingUnknown.length) break;
       }
       const saved = database.readInstance(id).document;
       const calls = live.budget.summary.phases.trajectory.httpRequests;
