@@ -1,4 +1,4 @@
-import type { AgentState, BeliefPatch, FactValue, LocalEntity, ObservationPacket, SimulationState, WorldEvent } from "../contracts/model";
+import type { AgentState, BeliefPatch, FactValue, LocalEntity, ObservationPacket, SimulationState, WorldEvent, WorldFact } from "../contracts/model";
 import { contentHash } from "../models/model-audit";
 import { runtimeId } from "../runtime/runtime-id";
 import type { ActionSettlement } from "./world";
@@ -15,6 +15,9 @@ function alias(agent: AgentState, entityId: string, introductions: ObservationPa
 }
 function describeValue(agent: AgentState, value: FactValue, introductions: ObservationPacket["introductions"]): string {
   return value.kind === "entity" ? alias(agent, value.entityId, introductions).name : directValueLabel(value);
+}
+function describeFact(agent: AgentState, fact: WorldFact, introductions: ObservationPacket["introductions"]): string {
+  return ["entity", "none"].includes(fact.value.kind) ? `${fact.predicate}（${describeValue(agent, fact.value, introductions)}）` : fact.description;
 }
 export function directPerception(state: Readonly<SimulationState>, settlements: ActionSettlement[], events: WorldEvent[], step: number) {
   const observations: ObservationPacket[] = [], beliefPatches: BeliefPatch[] = [];
@@ -95,8 +98,7 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       }
       // A semantic visibility answer cannot grant access to another actor's private truth.
       // Delivered speech remains testimony even when it quotes that private fact correctly.
-      for (const fact of facts) summary += `\n${alias(agent, fact.subjectId, introductions).name}：${fact.value.kind === "entity"
-        ? describeValue(agent, fact.value, introductions) : fact.description}`;
+      for (const fact of facts) summary += `\n${alias(agent, fact.subjectId, introductions).name}：${describeFact(agent, fact, introductions)}`;
       const id = runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "observation", stage: "direct-perception", owner: ownerId, round: 0, ordinal: index });
       const actorEntity = alias(agent, settlement.frame.actorEntityId, introductions);
       const actor = ownerId === settlement.frame.actorId ? "你" : renamed.find(entity => entity.id === actorEntity.id)?.name ?? actorEntity.name;
@@ -124,7 +126,7 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
         const subject = alias(agent, fact.subjectId, introductions), target = fact.value.kind === "entity" ? alias(agent, fact.value.entityId, introductions) : null;
         patch.operations.push({ kind: "upsert_claim", claim: { id: `observed-${contentHash([ownerId, fact.id]).slice(0, 24)}`, subjectId: subject.id,
           predicate: fact.predicate, value: target ? { kind: "local_entity", localEntityId: target.id } : fact.value as Exclude<FactValue, { kind: "entity" }>,
-          description: fact.value.kind === "entity" ? `${subject.name}的关联对象` : `${subject.name}：${fact.description}`, confidence: 1, stance: "believed", evidenceIds: [evidenceId] } });
+          description: `${subject.name}：${describeFact(agent, fact, introductions)}`, confidence: 1, stance: "believed", evidenceIds: [evidenceId] } });
       }
       observations.push(packet); beliefPatches.push(patch);
     }

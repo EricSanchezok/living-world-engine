@@ -288,11 +288,11 @@ describe("direct world through the actual simulation entry", () => {
     expect(Object.keys(result.state.truth.entities)).toEqual(Object.keys(f.world.initialState.truth.entities));
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
-  it("expands an existing relation when its new value is outside the finite catalog", async () => {
-    const f = await fixture({ operation: "change", target: "self", creationEnabled: true, effectExpansion: true,
+  it.each(["change", "move"])("expands an existing relation outside the finite catalog during %s", async operation => {
+    const f = await fixture({ operation, target: operation === "move" ? "yard" : "self", creationEnabled: true, effectExpansion: true,
       effectRepresentation: "existing", factValues: { luggage_position: "new_value" }, creationResponse: {
         description: "起身时保持行李随身", applicability: "有随身行李", effectDescription: "行李不再位于膝上",
-        effects: [{ kind: "fact", subject: "target", predicate: "luggage_position", value: "carried at side", description: "行李随身提在身侧。" }],
+        effects: [{ kind: "fact", subject: "actor", predicate: "luggage_position", value: "carried at side", description: "行李随身提在身侧。" }],
       } });
     f.world.initialState.truth.facts["luggage-place"] = { ...f.world.initialState.truth.facts["gate-lock"]!,
       id: "luggage-place", subjectId: f.world.initialState.agents.player!.entityId, predicate: "luggage_position",
@@ -313,8 +313,8 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.state.truth.facts["luggage-place"]?.value).toEqual({ kind: "text", value: "carried at side" });
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
-  it("updates the actor's existing posture even when a separate object is the action target", async () => {
-    const f = await fixture({ operation: "change", target: "door", factValues: { kneeling: "v1" } });
+  it.each(["change", "move"])("updates the actor's existing posture with a separate target during %s", async operation => {
+    const f = await fixture({ operation, target: "door", factValues: { kneeling: "v1" } });
     f.world.initialState.truth.facts["actor-posture"] = { ...f.world.initialState.truth.facts["gate-lock"]!,
       id: "actor-posture", subjectId: f.world.initialState.agents.player!.entityId, predicate: "kneeling",
       value: { kind: "boolean", value: true }, description: "正跪在门前。", access: { kind: "public" } };
@@ -325,6 +325,47 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.state.truth.facts["actor-posture"]?.value).toEqual({ kind: "boolean", value: false });
     expect(Object.values(result.state.agents.player!.belief.claims)).toContainEqual(expect.objectContaining({ predicate: "kneeling", value: { kind: "boolean", value: false } }));
     expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("keeps an approach to an enclosing destination inside that destination", async () => {
+    const f = await fixture({ operation: "move", target: "yard", movement: "near", factValues: { proximity: "v1" } });
+    f.world.initialState.truth.entities.region = { ...f.world.initialState.truth.entities.courtyard!, id: "region", name: "外区" };
+    Object.assign(f.world.initialState.truth.placements, { player: "gate", gate: "courtyard", courtyard: "region", region: null });
+    f.world.initialState.truth.facts["actor-proximity"] = { ...f.world.initialState.truth.facts["gate-lock"]!, id: "actor-proximity",
+      subjectId: "player", predicate: "proximity", value: { kind: "entity", entityId: "gate" }, description: "在石门旁。", access: { kind: "public" } };
+    f.world.historyBaseHash = historyReplayBaseHash(f.world.initialState);
+    const engine = new SimulationEngine(f.world, f.algorithm);
+    await engine.bootstrapAgents();
+    const result = await engine.step(f.roster, f.request("朝院内退开两步"));
+    expect(result.state.truth.placements.player).toBe("courtyard");
+    expect(Object.values(result.state.truth.facts).filter(fact => fact.subjectId === "player" && fact.predicate === "proximity"))
+      .toMatchObject([{ id: "actor-proximity", value: { kind: "entity", entityId: "courtyard" } }]);
+    expect(result.committed.observations.find(observation => observation.observerId === "player")?.summary).not.toContain("外区");
+    const proximity = Object.values(result.state.agents.player!.belief.claims).find(claim => claim.predicate === "proximity");
+    expect(proximity).toMatchObject({ value: { kind: "local_entity", localEntityId: "yard" }, description: `我：proximity（${f.world.initialState.truth.entities.courtyard!.name}）` });
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("can clear and reestablish a contact relation without a new capability", async () => {
+    const options = { operation: "move", target: "yard", factValues: { contact: "v1" } };
+    const f = await fixture(options);
+    f.world.initialState.truth.facts["actor-contact"] = { ...f.world.initialState.truth.facts["gate-lock"]!,
+      id: "actor-contact", subjectId: "player", predicate: "contact", value: { kind: "entity", entityId: "gate" },
+      description: "扶着门框。", access: { kind: "public" } };
+    f.world.historyBaseHash = historyReplayBaseHash(f.world.initialState);
+    const engine = new SimulationEngine(f.world, f.algorithm);
+    await engine.bootstrapAgents();
+    const result = await engine.step(f.roster, f.request("松开扶着门框的手，走到院子里"));
+    expect(result.state.truth.facts["actor-contact"]?.value).toEqual({ kind: "none" });
+    expect(Object.values(result.state.agents.player!.belief.claims)).toContainEqual(expect.objectContaining({ predicate: "contact", value: { kind: "none" }, description: "我：contact（无）" }));
+    expect(f.transport).toHaveBeenCalledTimes(2);
+    expect(readDirectState(result.state.executionState!, result.state).capabilities).toHaveLength(0);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+    Object.assign(options, { operation: "change", target: "door", factValues: { contact: "v2" } });
+    const restored = await engine.step(f.roster, f.request("再次用手扶住门框", result.state.revision));
+    expect(restored.state.truth.facts["actor-contact"]?.value).toEqual({ kind: "entity", entityId: "gate" });
+    expect(Object.values(restored.state.agents.player!.belief.claims)).toContainEqual(expect.objectContaining({ predicate: "contact", value: { kind: "local_entity", localEntityId: "door" } }));
+    expect(f.transport).toHaveBeenCalledTimes(4);
+    expect(readDirectState(restored.state.executionState!, restored.state).capabilities).toHaveLength(0);
+    expect(replaySimulationState(restored.state)).toEqual(restored.state);
   });
   it("retains perceptible existing conditions after failure without revealing private facts", async () => {
     const f = await fixture({ operation: "use", target: "door", outcome: "failed", privateGateFact: true });

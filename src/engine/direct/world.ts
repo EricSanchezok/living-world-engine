@@ -26,6 +26,12 @@ export interface ActionSettlement {
 const ordinaryStates = ["open", "closed", "working", "stopped", "damaged", "repaired", "leaking", "sealed", "temporarily sealed", "tested", "untested", "available", "unavailable"];
 function factOptions(fact: WorldFact, frames: ActionFrame[], state: Readonly<SimulationState>): FactValue[] {
   if (fact.value.kind === "boolean") return [{ kind: "boolean", value: true }, { kind: "boolean", value: false }];
+  if (fact.value.kind === "entity" || fact.value.kind === "none") {
+    const previous = fact.value.kind === "entity" ? fact.value.entityId : null;
+    const related = new Set(frames.flatMap(frame => [frame.actorEntityId, frame.targetEntityId, frame.toolEntityId])
+      .filter((id): id is string => id !== null && id !== previous));
+    return [fact.value, ...(previous ? [{ kind: "none" as const }] : []), ...[...related].map(entityId => ({ kind: "entity" as const, entityId }))];
+  }
   if (fact.value.kind === "text") {
     const values = orderedValues(state.truth.facts).filter(value => value.predicate === fact.predicate && value.value.kind === "text")
       .map(value => (value.value as { kind: "text"; value: string }).value);
@@ -115,8 +121,16 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       : frame.kind === "observe" && (!frame.targetEntityId || frame.targetEntityId === frame.actorEntityId) ? state.truth.placements[frame.actorEntityId] : frame.targetEntityId;
     const targetFacts = orderedValues(state.truth.facts).filter(fact => fact.subjectId === (focus ?? frame.actorEntityId));
     const effectSubjects = new Set([frame.actorEntityId, frame.targetEntityId, frame.toolEntityId]);
-    const effectFacts = ["use", "change"].includes(frame.kind)
+    const effectFacts = ["move", "use", "change"].includes(frame.kind)
       ? orderedValues(state.truth.facts).filter(fact => effectSubjects.has(fact.subjectId)) : targetFacts;
+    if (["move", "use", "change"].includes(frame.kind)) for (const [ordinal, fact] of effectFacts.entries()) {
+      const id = `${prefix}_fact${ordinal}`, values = factOptions(fact, frames, state);
+      effects.set(id, { fact, values });
+      questions[id] = question("Resulting value of this existing property if the action succeeds and no random trial governs it. Include necessary changes to the actor's or tool's state caused by this immediate method, including movement. An obsolete posture or relation must cease when this action reverses it; do not preserve contradictory states. Unaffected properties stay unchanged. Necessary state consequences do not authorize extra voluntary actions.", { actionId: frame.id, fact: fact as unknown as JsonValue },
+        { unchanged: "This property is unaffected or evidence is insufficient",
+          ...(fact.value.kind === "text" ? { new_value: "This action necessarily changes this property, but NONE of the offered values expresses the new state. Request an open qualitative effect for this exact property." } : {}),
+          ...Object.fromEntries(values.map((value, i) => [`v${i}`, value as unknown as Record<string, JsonValue>])) });
+    }
     if (["use", "change"].includes(frame.kind)) {
       if (!capability) questions[`${prefix}_expression`] = question("How will this immediate result be represented? existing requires a specific available property or authored procedure that actually expresses the result. An unrelated appearance or object description is insufficient. A posture, holding/contact, ongoing pressure or temporary bodily relation persists after this boundary and needs an actual property, even when its intended wider benefit fails. Use expand if that property is missing. no_change is only a newly performed instantaneous method with no continuing condition. already means evidence establishes that the requested end state already holds: no repeated method occurs. Do not silently drop a requested state change or duplicate a property for a differently worded method.", {
         action: frame as unknown as JsonValue, existingProperties: effectFacts as unknown as JsonValue,
@@ -126,14 +140,6 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         already: "Actual current evidence establishes the requested state already holds; no repeated physical method is needed",
         expand: "A plausible new qualitative property, construct or capability is needed to express the actual intended effect",
       });
-      for (const [ordinal, fact] of effectFacts.entries()) {
-        const id = `${prefix}_fact${ordinal}`, values = factOptions(fact, frames, state);
-        effects.set(id, { fact, values });
-        questions[id] = question("Resulting value of this existing property if the action succeeds and no random trial governs it. Include the actor's or tool's changed state when the method affects it. An obsolete posture or relation must cease when this action reverses it; do not preserve contradictory states. Unaffected properties stay unchanged.", { actionId: frame.id, fact: fact as unknown as JsonValue },
-          { unchanged: "This property is unaffected or evidence is insufficient",
-            ...(fact.value.kind === "text" ? { new_value: "This action necessarily changes this property, but NONE of the offered values expresses the new state. Request an open qualitative effect for this exact property." } : {}),
-            ...Object.fromEntries(values.map((value, i) => [`v${i}`, value as unknown as Record<string, JsonValue>])) });
-      }
       for (const [distributionIndex, distribution] of definition.randomDistributions.entries()) {
         const applies = `${prefix}_random${distributionIndex}`;
         questions[applies] = question("Does this actual action require this specific authored random procedure?", {
@@ -187,7 +193,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       const fact = capabilityFact(state, frame, capability!, effect, ordinal);
       if (fact) observableFacts.set(fact.id, fact);
     }
-    if (["observe", "use", "change"].includes(frame.kind)) for (const [ordinal, fact] of [...observableFacts.values()].entries()) {
+    if (["observe", "move", "use", "change"].includes(frame.kind)) for (const [ordinal, fact] of [...observableFacts.values()].entries()) {
       const id = `${prefix}_visible${ordinal}`; visibility.set(id, fact);
       questions[id] = question("Is this PROPERTY perceptible through this action's resulting feedback? Judge access to the property, not whether its pre-action value is still true. A public visible state of the very object being handled is ordinarily perceptible; private codes and hidden mental states require their actual disclosure channel.", { actionId: frame.id, fact: fact as unknown as JsonValue },
         { visible: "The attempt reveals the resulting fact through an available perceptual channel", hidden: "The fact remains hidden", unknown: "No justified perceptual access" });
@@ -245,7 +251,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     const expanded = await Promise.allSettled(expansions.map(async ({ frame, index, requiredPropertyChanges }) => ({ index, frame,
       result: await extendCapability({ state, control: decisions.control, frame, decisions,
         profileId: agentCapabilityModels(state, decisions.control, frame.actorId).creation,
-        context: { action: frame.proposal.rawText, requiredPropertyChanges: requiredPropertyChanges as unknown as JsonValue,
+        context: { action: frame.expression?.attempt ?? frame.proposal.rawText, operation: frame.kind,
+          requiredPropertyChanges: requiredPropertyChanges as unknown as JsonValue,
           target: frame.targetEntityId ? state.truth.entities[frame.targetEntityId]!.description : null,
           tool: frame.toolEntityId ? state.truth.entities[frame.toolEntityId]!.description : null } }) })));
     const supplemental: Record<string, DecisionQuestionV2> = {};
@@ -317,12 +324,16 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       if (frame.kind === "move" && frame.targetEntityId) {
         const near = selected(answers, `${prefix}_movement`) === "near";
         const currentPlace = state.truth.placements[frame.actorEntityId];
-        const placementId = near && frame.targetEntityId !== currentPlace
+        const containingPlaces = new Set<string>();
+        for (let place = currentPlace; place && !containingPlaces.has(place); place = state.truth.placements[place]) containingPlaces.add(place);
+        // Approaching an enclosing destination cannot move outside that destination.
+        const placementId = near && !containingPlaces.has(frame.targetEntityId)
           ? state.truth.placements[frame.targetEntityId] ?? frame.targetEntityId : frame.targetEntityId;
         operations.push({ kind: "place_entity", entityId: frame.actorEntityId, placementId, ...source });
         if (near) {
-          const fact: WorldFact = { id: directSemanticId("fact", [frame.actorEntityId, "proximity"]), subjectId: frame.actorEntityId,
-            predicate: "proximity", value: { kind: "entity", entityId: frame.targetEntityId }, access: { kind: "public" },
+          const existing = orderedValues(state.truth.facts).find(fact => fact.subjectId === frame.actorEntityId && fact.predicate === "proximity");
+          const fact: WorldFact = { id: existing?.id ?? directSemanticId("fact", [frame.actorEntityId, "proximity"]), subjectId: frame.actorEntityId,
+            predicate: "proximity", value: { kind: "entity", entityId: frame.targetEntityId }, access: existing?.access ?? { kind: "public" },
             description: "来到目标附近。", provenance: source.causes };
           operations.push({ kind: "set_fact", fact, ...source });
           detail = "你已经来到目标附近。";
@@ -346,6 +357,9 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       }
       for (const [id, effect] of effects) {
         if (!id.startsWith(`${prefix}_`)) continue;
+        // The admitted approach already supplies its exact new proximity.
+        if (frame.kind === "move" && selected(answers, `${prefix}_movement`) === "near" &&
+          effect.fact.subjectId === frame.actorEntityId && effect.fact.predicate === "proximity") continue;
         const value = selected(answers, id);
         const random = randomEffects.get(effect.fact.id);
         if (random) {
