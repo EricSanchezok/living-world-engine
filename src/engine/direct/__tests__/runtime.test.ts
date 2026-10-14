@@ -92,6 +92,16 @@ describe("direct world through the actual simulation entry", () => {
     expect(JSON.stringify(heard)).not.toContain("没人让我来");
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
+  it("ignores an invalid unused tool reference while still delivering the requested question", async () => {
+    const f = await fixture({ operation: "speak", recipient: "guard", speech: "input", creationEnabled: true,
+      readingOverrides: { tool: "spirit-stone", search_location: "missing-place", observation_scope: "invented-scope" },
+      creationResponse: { attempt: "向守门人询问意见", utterance: "你也看看，这样合适吗？", manner: null } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("你也看看，这样合适吗？"));
+    expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "speak", toolEntityId: null });
+    expect(result.committed.observations.find(packet => packet.observerId === "keeper")?.scene?.speech?.utterance).toBe("你也看看，这样合适吗？");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("does not require a quantity for a physical attempt using no quantified resource", async () => {
     const f = await fixture({ operation: "use", target: "door", creationEnabled: true,
       readingOverrides: { resource: "none", amount: "none" },
@@ -427,7 +437,7 @@ describe("direct world through the actual simulation entry", () => {
     expect(replaySimulationState(second.state)).toEqual(second.state);
   });
   it("separates a shouted action from actual words and delivers open speech to nearby people", async () => {
-    const f = await fixture({ operation: "speak", target: "broadcast", speech: "create", creationEnabled: true,
+    const f = await fixture({ operation: "speak", target: "broadcast", speech: "input", creationEnabled: true,
       creationResponse: { attempt: "向周围大喊", utterance: "还有谁？", manner: "提高声音" } });
     await f.engine.bootstrapAgents();
     const result = await f.engine.step(f.roster, f.request("大喊一声还有谁"));
@@ -435,7 +445,7 @@ describe("direct world through the actual simulation entry", () => {
     expect(frame).toMatchObject({ kind: "speak", utterance: "还有谁？", proposal: { rawText: "向周围大喊", goal: "大喊一声还有谁" } });
     expect(result.committed.observations.find(o => o.observerId === "keeper")?.scene?.speech?.utterance).toBe("还有谁？");
     const reading = directCreationContext(JSON.parse(String(f.transport.mock.calls[0]![1]?.body))).playerReading as { catalog: { speech: Record<string, unknown> } };
-    expect(Object.keys(reading.catalog.speech).sort()).toEqual(["create", "input", "none"]);
+    expect(reading.catalog).not.toHaveProperty("speech");
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
   it("combines a requested gesture with exact quoted words in one expression", async () => {
