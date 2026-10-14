@@ -17,10 +17,31 @@ export function privateActionView(state: Readonly<SimulationState>, agentId: str
     ...Object.values(state.truth.facts).filter(fact => Object.values(entities).includes(fact.subjectId) &&
       (fact.access.kind === "public" || fact.access.kind === "agents" && fact.access.agentIds.includes(agentId))).map(fact => `fact:${fact.id}`)];
   const view = { agentId: perspective.agentId, elapsedSeconds: perspective.elapsedSeconds, self: perspective.self, mechanics: perspective.mechanics,
-    knowledge: perspective.knowledge, character: perspective.character };
+    knowledge: perspective.knowledge, character: perspective.character,
+    interactions: privateInteractions(state, agentId, entities) };
   // Delivered evidence remains memory after the observation cursor advances.
   return { state: view as unknown as JsonValue,
     reads: captureDependencies(state, keys), entities };
+}
+
+/** Dialogue comes from delivered, retained observations, never another subject's prose or truth. */
+function privateInteractions(state: Readonly<SimulationState>, agentId: string, entities: Record<string, string>) {
+  const agent = state.agents[agentId]!;
+  const retained = new Set(Object.values(agent.belief.evidence).map(evidence => evidence.sourceId));
+  const self = new Set(Object.entries(entities).filter(([, id]) => id === agent.entityId).map(([id]) => id));
+  return state.history.flatMap(step => step.observations.filter(observation => observation.observerId === agentId &&
+    retained.has(observation.id) && observation.scene).map(observation => {
+    const scene = observation.scene!;
+    return { step: observation.step, worldTimeSeconds: step.temporalBoundary.toElapsedSeconds,
+      latest: observation.step === agent.observationCursorStep,
+      actor: { localEntityId: scene.actorLocalId ?? null, label: scene.actor },
+      relation: scene.actorLocalId && self.has(scene.actorLocalId) ? "self" : scene.action?.target && self.has(scene.action.target.localEntityId)
+        ? "addressed_to_self" : scene.action?.addressing === "broadcast" ? "broadcast_heard" : "observed_other_interaction",
+      action: scene.action, operation: scene.actionKind, status: scene.status,
+      utterance: scene.speech?.utterance ?? null,
+      result: scene.actionKind === "speak" ? null : scene.outcome,
+      observedDetails: scene.details };
+  })).slice(-18);
 }
 
 export function localWorldView(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frames: ActionFrame[]): DirectLocalView {

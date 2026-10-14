@@ -28,6 +28,11 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   void _policy; void _kinds;
   const schema = z.object({
     understanding: z.string().describe("Briefly identify the intended interaction and next unperformed step. If there is a prerequisite, state whether actual evidence supports it or it remains unknown. Do not predict a result."),
+    requestAnalysis: z.object({
+      authorizedSteps: z.array(z.string()).describe("Only acts actually requested by THIS input, in order. Exclude quoted history, hypothetical branches not selected, other people's acts and added strategies."),
+      establishedReceipts: z.array(z.string()).describe("Which requested steps have already executed in currentRequestReceipts, with their actual result. Empty for a fresh submission."),
+      remainingSteps: z.array(z.string()).describe("Still unperformed authorized steps. A missing resource does not authorize obtaining or paying for it. Do not combine a physical transition and a later observation into one observation."),
+    }),
     interaction: z.enum(["clarification", "world_action", "request_complete"]),
     action: z.object({ ...fieldShape, attempt: z.string(), utterance: z.string().nullable()
       .describe("The sole actual spoken text, or explicitly requested private reflection, for this step. No stage directions or unsolicited additions; null for a purely physical action or clarification."), manner: z.string().nullable(),
@@ -36,7 +41,7 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   });
   const generated = await decisions.provider.generateStructured({ ...decisions.scope, subjectId: agentId,
     modelRegistrySnapshotHash: decisions.control.registryHash, modelInvocation: decisions.next(agentId),
-    profileId: input.profileId, role: "decision", schemaName: "PlayerActionReadingV3", system, userPrompt,
+    profileId: input.profileId, role: "decision", schemaName: "PlayerActionReadingV4", system, userPrompt,
     promptVersion: `player-reading-${contentHash({ system, userPrompt })}`,
     context: { playerReading: { state: context, language: input.language, catalog, cognition,
       exactQuotes: Object.fromEntries(input.quotes.map((quote, index) => [`q${index}`, quote])) } },

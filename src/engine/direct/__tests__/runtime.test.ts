@@ -12,6 +12,7 @@ import { WorldQuiescentError } from "../../runtime/execution";
 import { readDirectState } from "../state";
 import { speechSpans, literalNumbers, literalDurations } from "../actions";
 import { applyDirectCognition } from "../cognition";
+import { privateActionView } from "../views";
 
 async function fixture(options: { operation?: string; target?: string; tool?: string; amount?: string; failKeeper?: boolean;
   observationScope?: string; speech?: string; creationEnabled?: boolean; privateGateFact?: boolean; named?: boolean;
@@ -81,6 +82,24 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("projects retained delivered dialogue with local speaker and addressee roles", async () => {
+    const f = await fixture({ operation: "speak", recipient: "guard", speech: "input", privateGateFact: true });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("请先检查，然后告诉我你实际看到了什么。"));
+    const view = privateActionView(result.state, "keeper").state;
+    expect(view).toMatchObject({ interactions: [{ relation: "addressed_to_self", operation: "speak",
+      utterance: "请先检查，然后告诉我你实际看到了什么。", result: null }] });
+    const playerView = privateActionView(result.state, "player").state;
+    expect(playerView).toMatchObject({ interactions: [{ relation: "self" }] });
+    expect(JSON.stringify(playerView)).not.toContain("PRIVATE-CODE");
+    const forgotten = structuredClone(result.state);
+    const keeperObservationIds = new Set(forgotten.history.flatMap(step => step.observations)
+      .filter(observation => observation.observerId === "keeper").map(observation => observation.id));
+    for (const evidence of Object.values(forgotten.agents.keeper!.belief.evidence)) if (evidence.sourceId && keeperObservationIds.has(evidence.sourceId)) {
+      delete forgotten.agents.keeper!.belief.evidence[evidence.id];
+    }
+    expect(privateActionView(forgotten, "keeper").state).toMatchObject({ interactions: [] });
+  });
   it("closes an already executed submission without another action or time advance", async () => {
     const options = { operation: "wait", duration: "d0", playerProgress: "continue", interaction: "world_action",
       creationEnabled: true, timerSeconds: 3600, readingOverrides: {} as Record<string, string> };

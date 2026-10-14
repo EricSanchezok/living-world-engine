@@ -67,6 +67,7 @@ export function directTestProvider(respond: (wire: DirectTestWire, call: number)
         expression = { ...expression, ...created as typeof expression };
       }
       response = { understanding: "Scripted coherent player interpretation", interaction: pick("interaction"),
+        requestAnalysis: { authorizedSteps: [request.rawText], establishedReceipts: [], remainingSteps: [request.rawText] },
         action: { ...Object.fromEntries(Object.keys(reading.catalog).map(id => [id, pick(id)])),
           attempt: expression.attempt ?? request.rawText, utterance: expression.utterance ?? null, manner: expression.manner ?? null,
           literalQuote: literal && operation === "speak" ? speech : "none" },
