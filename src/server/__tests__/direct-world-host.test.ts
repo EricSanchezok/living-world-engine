@@ -174,6 +174,23 @@ describe("direct world through persistent WorldHost", () => {
       const background = await engine.step(document.policyBindings, { expectedRevision: state.revision, trigger: "manual", externalActions: [] });
       expect(background.state.history.at(-1)!.directEvent!.frames.length).toBeGreaterThan(0);
       expect(replaySimulationState(background.state)).toEqual(background.state);
+      await host.submitAction(id, participant.id, { expectedRevision: state.revision, submissionId: "literal-greeting", text: "大家好。" });
+      for (let i = 0; i < 200; i++) {
+        const saved = database.readInstance(id).document;
+        const input = saved.participantIntents.find(item => item.submissionId === "literal-greeting");
+        if (input && saved.runs[input.runId]?.status === "completed") break;
+        await new Promise(resolve => setTimeout(resolve, 5));
+      }
+      await host.drainNarratives(id);
+      const delivered = database.readInstance(id).document.narratives.filter(beat => beat.submissionId === "literal-greeting");
+      expect(delivered.length).toBeGreaterThan(0);
+      expect(delivered.every(beat => beat.status === "complete" && beat.attempts === 0 && beat.producer === null)).toBe(true);
+      expect(delivered.flatMap(beat => beat.segments).every(segment => segment.text.includes("：“"))).toBe(true);
+      const callsAfterDelivery = f.transport.mock.calls.length, savedDialogue = host.instance(id).conversation;
+      const restarted = new WorldHost({ repository: new MemoryWorldRepository({ [world.id]: world }), store: database, ledger: database, provider: f.gateway });
+      expect(restarted.instance(id).conversation).toEqual(savedDialogue);
+      await restarted.drainNarratives(id);
+      expect(f.transport.mock.calls.length).toBe(callsAfterDelivery);
     } finally { for (const connection of connections) connection.abort(); WorldHost.setForTests(undefined); database.close(); rmSync(root, { recursive: true, force: true }); }
   });
   it.each(["decision", "narrative"])("persists a %s service pause across reads and restart, then resumes only after a new player request", async phase => {

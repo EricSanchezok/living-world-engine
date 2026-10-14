@@ -84,7 +84,7 @@ export function narrativeEvidence(source: ScenePacket) {
   const { requestedAction: _request, ...evidence } = source;
   void _request;
   return { ...evidence,
-    memories: source.memories.map(memory => ({ kind: memory.kind, description: memory.executedDescription ?? memory.description })),
+    memories: source.reply ? source.memories.map(memory => ({ kind: memory.kind, description: memory.executedDescription ?? memory.description })) : [],
     observations: source.observations.map(observation => ({ ...observation,
       summary: executedDescription({ ...observation, scene: observation.scene ?? undefined }),
       scene: observation.scene ? { ...observation.scene,
@@ -97,7 +97,7 @@ export function narrativeEvidence(source: ScenePacket) {
 export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscourse) {
   return {
     viewpoint: "The participant is the player. Address their character as you in second person; other characters remain third person.",
-    responseTo: source.reply?.requested ?? source.requestedAction,
+    responseTo: source.reply?.requested ?? null,
     kind: source.reply?.kind ?? "newly_observed_events",
     ownSpeechOnly: source.observations.length > 0 && source.observations.every(observation =>
       observation.scene?.actor === "你" && observation.scene.actionKind === "speak"),
@@ -117,6 +117,10 @@ export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscou
       operation: observation.scene?.actionKind ?? null, status: observation.scene?.status ?? null,
       action: observation.scene?.action ?? null,
       actualResult: executedDescription({ ...observation, scene: observation.scene ?? undefined }) })),
+    performedNow: source.observations.map(observation => ({ actor: observation.scene?.actor ?? null,
+      operation: observation.scene?.actionKind ?? null, status: observation.scene?.status ?? null,
+      manner: observation.scene?.manner ?? null, result: executedDescription({ ...observation, scene: observation.scene ?? undefined }) })),
+    actionBoundary: "These receipts are the complete new action record. Earlier prose is not a new action. No extra gesture, movement, reaction or physical completion is implied by fluent dialogue or by an object's suitability for use.",
     playerCurrentHoldings: source.currentHoldings?.quantities.map(quantity => `You currently hold ${quantity.amount} ${quantity.unit} of ${quantity.name}.`) ?? [],
     backgroundUse: "Holdings and old properties constrain accuracy; mention them only when they answer the current request or changed in the new receipts.",
     newSpeech: source.speech,
@@ -126,6 +130,32 @@ export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscou
     firstAppearances: source.knownEntities.filter(entity => !discourse?.entities.some(known => known.localEntityId === entity.localEntityId))
       .map(entity => ({ ...entity, instruction: "If this entity is mentioned, introduce it intelligibly; the reader has not met it in published prose." })),
   };
+}
+
+/** Published words resolve references; historic player requests are not new execution evidence. */
+export function narrativeDiscourse(discourse: ParticipantDiscourse) {
+  return { ...discourse, exchanges: discourse.exchanges.map(({ requested: _requested, ...exchange }) => {
+    void _requested; return exchange;
+  }), unresolved: discourse.unresolved.map(({ requested: _requested, ...item }) => { void _requested; return item; }) };
+}
+
+/** Already introduced speakers need no second creative pass to repeat their delivered words. */
+export function deliveredDialogue(source: ScenePacket, discourse: ParticipantDiscourse) {
+  if (source.reply || !source.speech.length || source.observations.length !== source.speech.length) return null;
+  if (source.observations.some(observation => !observation.scene || observation.scene.actionKind !== "speak" ||
+    observation.scene.status !== "succeeded" || observation.scene.manner || !observation.scene.speech)) return null;
+  const own = source.observations.filter(observation => observation.scene!.actor === "你");
+  // Stage directions and compound player expressions retain their creative scene rendering.
+  if (own.length && (own.length !== 1 || own[0]!.scene!.speech!.utterance.trim() !== source.requestedAction?.trim())) return null;
+  for (const observation of source.observations) {
+    const scene = observation.scene!;
+    if (scene.actor !== "你" && !discourse.entities.some(entity => entity.localEntityId === scene.actorLocalId)) return null;
+    if (scene.details.some(detail => !discourse.entities.some(entity => entity.localEntityId === detail.localEntityId &&
+      entity.description === detail.description))) return null;
+  }
+  return source.speech.map(speech => ({ text: `${speech.speaker}：“${speech.utterance}”`,
+    mentions: speech.speakerLocalId && source.knownEntities.some(entity => entity.localEntityId === speech.speakerLocalId)
+      ? [{ localEntityId: speech.speakerLocalId, surface: speech.speaker }] : [] }));
 }
 
 /** Called in the world transaction. Never performs model work. */
@@ -224,7 +254,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
 
 const groundingAxes = {
   material: "Check only material people, distinct objects and possessions. Match them to knownEntities or established scene details. Background workers, tools, wallets and storage containers require actual entries or explicit facts. An intended attempt or expressive manner alone does not establish a new prop. Harmless texture or metaphor on an existing thing is allowed.",
-  agency: "Check only performed actions and player agency. Use each scene's actor, actionKind and outcome. Attempts and requests do not prove later actions or another person's compliance. Observation does not pick up an object or perform work. A silent use/change with an executed-method receipt does perform that method. Do not make new choices or feelings for the player.",
+  agency: "Compare each asserted bodily action against performedNow, the COMPLETE list of newly executed actions. This includes small nods, hand movements, handling a board, looking up, or taking another step: dialogue alone does not perform them. A null manner supplies no accompanying gesture. A previous paragraph's action cannot happen again without a new receipt. Observation does not perform the intended use of what was found. A silent use/change with an executed-method receipt does perform that method. Do not make new choices or feelings for the player.",
   evidence: "Check only results, amounts, conditions and history. Preserve observed facts, unresolved attempts and actual inventory. A speaker's claim remains attributed; a request or unsupported earlier prose is not evidence. Do not invent a prerequisite, completed test, earlier payment or prior repair.",
   speech: "Check only dialogue and attribution. Current delivered words belong to their supplied speaker; distinguish the player's own voice from the other person's reply. Do not invent, repeat, paraphrase as a second exchange, or change speech. An empty speech list permits no new spoken dialogue. References and ordinary descriptive quotations are allowed.",
   reference: "Check whether a reader can identify each person or thing referred to using published discourse, this paragraph, and earlier paragraphs in this batch. First appearances need an intelligible introduction using available description or the source of a voice. Do not start with an unexplained definite pronoun as if the reader already met someone. Familiar local identities stay the same across pronouns, name revelations, corrections and topic changes. Clarification may explain earlier words but cannot invent new perception or dialogue.",
@@ -241,7 +271,7 @@ export function narrativeGroundingChoices(answers: Record<string, { type: string
 export async function checkNarrativeGrounding(provider: StructuredModelProvider, scope: ModelExecutionScope,
   source: ScenePacket, paragraphs: string[], profileId: string, fallbackProfileId: string, ordinal: number, discourse?: ParticipantDiscourse) {
   const evidence = narrativeEvidence(source);
-  const state = { paragraphs, scene: evidence, discourse: discourse ?? null, publicationTask: narrativeTask(source, discourse) } as unknown as JsonValue;
+  const state = { paragraphs, scene: evidence, discourse: discourse ? narrativeDiscourse(discourse) : null, publicationTask: narrativeTask(source, discourse) } as unknown as JsonValue;
   return executeDecisionV2(provider, { ...scope, profileId, fallbackProfileId, subjectId: source.agentId, instructionProfile: "publication",
     modelInvocation: ordinal, batch: { version: 2, view: { kind: "agent", agentId: source.agentId, projectionHash: contentHash(state) },
       dependencies: {}, state, questions: Object.fromEntries(paragraphs.flatMap((_, index) => Object.entries(groundingAxes).map(([axis, focus]) => [`paragraph${index}_${axis}`, {

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { decisionPromptV2 } from "../../engine/models/decision-v2";
-import { completeParagraphs, renderNarrativeParagraph, renderNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeEvidence, narrativeTask, narrativeGroundingChoices, type ScenePacket } from "../world-narrative";
+import { completeParagraphs, renderNarrativeParagraph, renderNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeEvidence, narrativeTask, narrativeDiscourse, deliveredDialogue, narrativeGroundingChoices, type ScenePacket } from "../world-narrative";
+import type { ParticipantDiscourse } from "../../engine/contracts/discourse";
 
 const source: ScenePacket = {
   participantId: "reader", agentId: "traveler", submissionId: "action", submittedAt: null, requestedAction: "问价",
@@ -12,6 +13,47 @@ const source: ScenePacket = {
 };
 
 describe("immutable narrative paragraphs", () => {
+  const discourse: ParticipantDiscourse = { version: 1, participantId: "reader", agentId: "traveler", asOfRevision: 1,
+    arrival: { id: "arrival", text: "码头在眼前。" }, entities: [{ localEntityId: "shopkeeper", label: "店主", description: "木门旁的人",
+      firstMentionParagraphId: "first", lastMentionParagraphId: "first", surfaces: ["店主"] }],
+    exchanges: [{ id: "first", submissionId: "previous", requested: "拿起木箱再问价", paragraphs: [{ id: "p1", text: "店主在木门旁。", mentions: [] }], speakers: [] }],
+    unresolved: [{ submissionId: "previous", requested: "拿起木箱再问价", status: "pending", receipts: ["没有拿起木箱。"] }], hash: "discourse" };
+  it("retains published antecedents without passing historic requests as execution evidence", () => {
+    const projected = narrativeDiscourse(discourse);
+    expect(projected.exchanges[0]).not.toHaveProperty("requested");
+    expect(projected.unresolved[0]).not.toHaveProperty("requested");
+    expect(projected.exchanges[0]!.paragraphs).toEqual(discourse.exchanges[0]!.paragraphs);
+    expect(discourse.exchanges[0]!.requested).toBe("拿起木箱再问价");
+    expect(narrativeTask(source).responseTo).toBeNull();
+  });
+  it("renders delivered words of an introduced speaker directly with stable identity", () => {
+    const scene = structuredClone(source);
+    scene.observations[0]!.scene!.actorLocalId = "shopkeeper";
+    scene.speech[0]!.speakerLocalId = "shopkeeper";
+    scene.knownEntities = [{ localEntityId: "shopkeeper", name: "店主", description: "木门旁的人" }];
+    expect(deliveredDialogue(scene, discourse)).toEqual([{ text: "店主：“三枚金币；我还没同意赊账。”", mentions: [{ localEntityId: "shopkeeper", surface: "店主" }] }]);
+    expect(deliveredDialogue(scene, { ...discourse, entities: [] })).toBeNull();
+    scene.observations[0]!.scene!.manner = "退后一步";
+    expect(deliveredDialogue(scene, discourse)).toBeNull();
+    scene.observations[0]!.scene!.manner = null;
+    scene.observations[0]!.scene!.details.push({ localEntityId: "shopkeeper", label: "店主", description: "衣服已经湿透" });
+    expect(deliveredDialogue(scene, discourse)).toBeNull();
+  });
+  it("keeps literal player dialogue but sends stage directions, recovery and physical scenes to narration", () => {
+    const scene = structuredClone(source);
+    scene.observations[0]!.scene!.actor = "你";
+    scene.requestedAction = scene.observations[0]!.scene!.speech!.utterance;
+    scene.speech[0]!.speaker = "你";
+    expect(deliveredDialogue(scene, discourse)?.[0]!.text).toBe(`你：“${scene.requestedAction}”`);
+    scene.requestedAction = `大声说：${scene.requestedAction}`;
+    expect(deliveredDialogue(scene, discourse)).toBeNull();
+    scene.requestedAction = scene.observations[0]!.scene!.speech!.utterance;
+    scene.observations[0]!.scene!.actionKind = "transfer";
+    expect(deliveredDialogue(scene, discourse)).toBeNull();
+    scene.observations[0]!.scene!.actionKind = "speak";
+    scene.reply = { kind: "recovery", agentId: "traveler", submissionId: "action", requested: "问价", focusLocalEntityId: null, reason: "Interrupted" };
+    expect(deliveredDialogue(scene, discourse)).toBeNull();
+  });
   it("limits an own-speech packet without treating an absent listener receipt as a reaction", () => {
     const scene = structuredClone(source);
     scene.observations[0]!.scene!.actor = "你";
@@ -170,7 +212,9 @@ describe("immutable narrative paragraphs", () => {
     const projected = narrativeEvidence(scene);
     expect(projected.observations[0]!.summary).toBe("话语送达。\n随身物资：2枚金币。");
     expect(projected.observations[0]!.scene!.attempt).toBeNull();
-    expect(projected.memories).toEqual([{ kind: "observation", description: "说了交付的意向。" }]);
+    expect(projected.memories).toEqual([]);
+    scene.reply = { kind: "clarification", agentId: "traveler", submissionId: "action", requested: "刚才付款了吗？", focusLocalEntityId: null, reason: "Explain the recorded progress." };
+    expect(narrativeEvidence(scene).memories).toEqual([{ kind: "observation", description: "说了交付的意向。" }]);
     expect(scene.observations[0]!.summary).toContain("尝试了取出");
     expect(scene.memories[0]!.description).toBe("尝试将物品交付");
   });

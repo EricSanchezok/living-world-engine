@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { loadPromptAsset } from "../engine/prompts";
 import { agentCapabilityModels } from "../engine/models/capability-bindings";
-import { enqueueNarrative, nextNarrative, completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeEvidence, narrativeTask, checkNarrativeGrounding, narrativeGroundingChoices, type NarrativeBeat } from "./world-narrative";
+import { enqueueNarrative, nextNarrative, completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeEvidence, narrativeTask, narrativeDiscourse, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, type NarrativeBeat } from "./world-narrative";
 import { participantDiscourse } from "./world-discourse";
 import { randomUUID } from "node:crypto";
 import { rmSync } from "node:fs";
@@ -611,6 +611,16 @@ export class WorldHost {
       if (currentRun(document)?.servicePause) return;
       const beat = nextNarrative(document);
       if (!beat) return;
+      const discourse = participantDiscourse(document, beat.participantId, beat.id);
+      const dialogue = beat.attempts === 0 && !beat.segments.length ? deliveredDialogue(beat.source, discourse) : null;
+      if (dialogue) {
+        this.updateNarrative(id, beat.id, item => {
+          const at = this.now().toISOString();
+          item.segments = dialogue.map((paragraph, sequence) => ({ ...paragraph, sequence, publishedAt: at }));
+          item.status = "complete"; item.error = null; item.firstParagraphAt = at; item.completedAt = at;
+        });
+        continue;
+      }
       if (beat.attempts >= 2) {
         this.updateNarrative(id, beat.id, item => {
           const fallback = narrativeFallback(item.source, item.segments.map(segment => segment.text));
@@ -672,11 +682,16 @@ export class WorldHost {
             kind: "model-audit", stage: "scene-narrative", owner: beat.id, round: 0, ordinal: beat.attempts + 1 }),
           promptVersion: NARRATIVE_PROMPT_VERSION, schemaName: "SceneNarrativeV1",
           system: NARRATIVE_SYSTEM, userPrompt: NARRATIVE_USER,
-          context: { discourse: participantDiscourse(document, beat.participantId, beat.id),
+          context: { discourse: narrativeDiscourse(discourse),
             publishedPrefix: prefix, scene: narrativeEvidence(beat.source),
             publicationTask: narrativeTask(beat.source, participantDiscourse(document, beat.participantId, beat.id)),
             repair: beat.error },
-          schema: z.object({ paragraphs: z.array(z.string().trim().min(1)).min(1) }), jsonExamplePolicy: "omit",
+          schema: z.object({
+            reading: z.object({ currentResults: z.array(z.string()), remainingUnconfirmed: z.array(z.string()),
+              dialogueSpeakersInOrder: z.array(z.string()) }).optional()
+              .describe("Brief source reading BEFORE prose: what these new receipts establish, what they leave unconfirmed, and actual speakers in order. This is diagnostic, not a new world event."),
+            paragraphs: z.array(z.string().trim().min(1)).min(1),
+          }), jsonExamplePolicy: "omit",
           onOutputText: async text => {
             const paragraphs = completeParagraphs(text);
             if (paragraphs.length <= scheduled) return;
