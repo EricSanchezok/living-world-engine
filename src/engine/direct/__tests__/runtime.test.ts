@@ -118,6 +118,8 @@ describe("direct world through the actual simulation entry", () => {
     const heard = result.committed.observations.find(packet => packet.observerId === "keeper")!;
     expect(heard.scene?.speech).toMatchObject({ utterance: "还在吗？", speakerLocalId: expect.any(String) });
     expect(heard.scene?.manner).toBe(actorVisible ? "抬手示意" : null);
+    expect(heard.summary.includes("可见举止：抬手示意")).toBe(actorVisible);
+    expect(heard.scene?.action).toMatchObject({ addressing: "direct", target: { localEntityId: expect.any(String) } });
     expect(JSON.stringify(heard).includes("袖口有一道白线")).toBe(actorVisible);
     expect(heard.scene?.actor).toBe(actorVisible ? "附近的人" : "一个陌生的声音");
     expect(replaySimulationState(result.state)).toEqual(result.state);
@@ -586,6 +588,8 @@ describe("direct world through the actual simulation entry", () => {
     const f = await fixture({ operation: "transfer", target: "guard", amount: "n8" }); await f.engine.bootstrapAgents();
     const result = await f.engine.step(f.roster, f.request("给守门人8枚灵石"));
     expect(result.committed.outcomes[0]!.status).toBe("blocked");
+    expect(result.committed.outcomes[0]!.summary).toContain("不足以交付所尝试的8");
+    expect(result.committed.observations[0]!.scene?.action).toMatchObject({ target: { localEntityId: "guard" }, resource: { amount: 8 } });
     expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });

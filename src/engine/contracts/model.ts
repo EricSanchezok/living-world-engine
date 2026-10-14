@@ -720,6 +720,13 @@ export interface ObservationScene {
   status: ActionOutcome["status"];
   actor: string;
   actorLocalId?: string;
+  action?: {
+    target: { localEntityId: string; label: string } | null;
+    tool: { localEntityId: string; label: string } | null;
+    resource: { name: string; unit: string; amount: number | null } | null;
+    durationSeconds: number;
+    addressing: "direct" | "broadcast" | "none";
+  };
   attempt: string;
   outcome: string;
   manner: string | null;

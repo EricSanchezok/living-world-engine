@@ -281,6 +281,15 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     const randomRequests: PreparedDirectAction["randomRequests"] = [], randomBindings: PreparedDirectAction["randomBindings"] = [];
     let detail = status === "blocked" ? "还需要更多信息。" : status === "failed" ? "这次尝试未能完成。" : status === "partial" ? "这次行动取得了部分进展。"
       : frame.kind === "wait" ? "你在等待新的消息或条件变化。" : frame.kind === "observe" ? "你查看了眼前的情况。" : "行动已完成。";
+    if (frame.kind === "transfer" && frame.quantityDefinitionId && frame.amount !== null) {
+      const held = orderedValues(projected.truth.quantities).filter(quantity => quantity.holderId === frame.actorEntityId &&
+        quantity.definitionId === frame.quantityDefinitionId).reduce((sum, quantity) => sum + quantity.amount, 0);
+      if (held < frame.amount) {
+        const resource = state.truth.mechanics.quantities[frame.quantityDefinitionId]!;
+        status = "blocked";
+        detail = `你当前持有${held}${resource.unit}${resource.name}，不足以交付所尝试的${frame.amount}${resource.unit}；没有发生转移。`;
+      }
+    }
     if (status === "succeeded" || status === "partial") {
       if (frame.kind === "move" && frame.targetEntityId) {
         const near = selected(answers, `${prefix}_movement`) === "near";

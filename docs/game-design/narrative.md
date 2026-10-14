@@ -59,3 +59,7 @@ An unstarted beat containing only the player's unspoken approach, observation or
 ### Current publication task
 
 The narrator and publication check share a task containing new observed receipts, current delivered speech, text already published for the submission and local identities requiring a first introduction. ScenePacket snapshots complete current self-holdings through the authorized participant perspective. Current receipts and observed properties establish facts; published discourse resolves references and supplies continuity. Earlier requests and prose do not authorize new actions or override current inventory.
+
+## Perceived action relations
+
+Each scene receipt retains locally known action targets, instruments, quantities, duration and addressing. These relations distinguish a speaker from their addressee without importing canonical identities. Actual observers receive an admitted expressive gesture in their evidence; unheard or unseen expression stays outside their perception. Narrative publication uses current holdings and concrete shortage receipts, keeps exact delivered words once per delivery, and addresses the participant in second person.

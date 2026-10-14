@@ -47,6 +47,7 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       let summary = spoken ? `${alias(agent, settlement.frame.actorEntityId, introductions).name}说：“${settlement.frame.utterance}”` :
         ownerId === settlement.frame.actorId ? `你尝试了“${concreteAttempt}”。${settlement.outcome.summary}${voiced && settlement.frame.kind !== "speak" ? `你说：“${voiced}”` : ""}`
           : `${observedActor}的行动结果：${settlement.outcome.summary.replace(/^你/u, observedActor)}`;
+      if (completedExpression && seesActor && settlement.frame.expression?.manner) summary += `\n可见举止：${settlement.frame.expression.manner}`;
       // Existing records remain in the private evidence store. Copying them into
       // each reflection recursively duplicates the entire history on later turns.
       if (ownerId === settlement.frame.actorId && settlement.frame.kind === "reflect" && settlement.frame.utterance) {
@@ -87,8 +88,19 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       const id = runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "observation", stage: "direct-perception", owner: ownerId, round: 0, ordinal: index });
       const actorEntity = alias(agent, settlement.frame.actorEntityId, introductions);
       const actor = ownerId === settlement.frame.actorId ? "你" : renamed.find(entity => entity.id === actorEntity.id)?.name ?? actorEntity.name;
+      const knownReference = (entityId: string | null) => {
+        if (!entityId) return null;
+        const known = Object.values(agent.bindings).find(binding => binding.canonicalEntityIds.length === 1 && binding.canonicalEntityIds[0] === entityId);
+        const local = known ? agent.belief.localEntities[known.localEntityId] : introductions.find(item => item.canonicalEntityId === entityId)?.localEntity;
+        return local ? { localEntityId: local.id, label: renamed.find(item => item.id === local.id)?.name ?? local.name } : null;
+      };
+      const resource = settlement.frame.quantityDefinitionId ? state.truth.mechanics.quantities[settlement.frame.quantityDefinitionId] : null;
       const packet: ObservationPacket = { id, observerId: ownerId, step, kind: "outcome", summary, introductions, apparentClaims: [], sourceEventIds: [events[index]!.id],
         scene: { actionKind: settlement.frame.kind, status: settlement.outcome.status, actor, actorLocalId: actorEntity.id,
+          action: { target: ownsAction || seesActor || settlement.frame.targetEntityId === agent.entityId ? knownReference(settlement.frame.targetEntityId) : null,
+            tool: ownsAction || seesActor ? knownReference(settlement.frame.toolEntityId) : null,
+            resource: settlement.frame.kind === "transfer" && resource ? { name: resource.name, unit: resource.unit, amount: settlement.frame.amount } : null,
+            durationSeconds: settlement.frame.durationSeconds, addressing: voiced ? settlement.frame.targetEntityId ? "direct" : "broadcast" : "none" },
           attempt: ownerId === settlement.frame.actorId ? concreteAttempt : "", outcome: settlement.outcome.summary.replace(/^你/u, actor),
           manner: completedExpression && seesActor ? settlement.frame.expression?.manner ?? null : null,
           speech: voiced && (ownerId === settlement.frame.actorId || spoken) ? { speaker: actor, speakerLocalId: actorEntity.id, utterance: voiced } : null, details } };

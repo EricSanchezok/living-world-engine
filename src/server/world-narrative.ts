@@ -80,7 +80,7 @@ export function narrativeEvidence(source: ScenePacket) {
     observations: source.observations.map(observation => ({ ...observation,
       summary: executedDescription({ ...observation, scene: observation.scene ?? undefined }),
       scene: observation.scene ? { ...observation.scene,
-        attempt: ["move", "observe", "use", "change"].includes(observation.scene.actionKind) ? observation.scene.attempt : null } : null,
+        attempt: observation.scene.actionKind !== "speak" ? observation.scene.attempt : null } : null,
     })),
   };
 }
@@ -88,12 +88,15 @@ export function narrativeEvidence(source: ScenePacket) {
 /** A publication task separates new receipts from the prose used to resolve references. */
 export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscourse) {
   return {
+    viewpoint: "The participant is the player. Address their character as you in second person; other characters remain third person.",
     responseTo: source.reply?.requested ?? source.requestedAction,
     kind: source.reply?.kind ?? "newly_observed_events",
     newReceipts: source.observations.map(observation => ({ id: observation.id,
       actor: observation.scene?.actor ?? null, actorLocalId: observation.scene?.actorLocalId ?? null,
       operation: observation.scene?.actionKind ?? null, status: observation.scene?.status ?? null,
+      action: observation.scene?.action ?? null,
       actualResult: executedDescription({ ...observation, scene: observation.scene ?? undefined }) })),
+    playerCurrentHoldings: source.currentHoldings?.quantities.map(quantity => `You currently hold ${quantity.amount} ${quantity.unit} of ${quantity.name}.`) ?? [],
     newSpeech: source.speech,
     publishedForThisRequest: discourse?.exchanges.filter(exchange => exchange.submissionId === source.submissionId)
       .flatMap(exchange => exchange.paragraphs.map(paragraph => paragraph.text)) ?? [],
@@ -255,6 +258,7 @@ export function completeParagraphs(text: string): string[] {
 }
 export function renderNarrativeSegment(text: string, source: ScenePacket): { text: string; mentions: DiscourseMention[] } {
   const mentions: DiscourseMention[] = [];
+  text = text.replace(/[“"](\[\[speech-[^\]\n]+\]\])[”"]/gu, "$1");
   if (/\[\[|\]\]/u.test(text.replace(/\[\[[^\]\n]+\]\]/gu, ""))) throw new Error("Narrative paragraph contains an unresolved reference");
   // Typography is not a speech act. The publication decision checks unsupported
   // quotations; references and delivered-speech completeness remain exact.
@@ -303,6 +307,17 @@ export function requireDeliveredSpeech(source: ScenePacket, paragraphs: string[]
   const text = paragraphs.join("\n");
   if (source.speech.some(speech => !text.includes(speech.utterance))) {
     throw new Error("Include the missing delivered speech references after the published prefix; do not replay earlier paragraphs");
+  }
+}
+
+/** Recovered streams cannot publish a delivered utterance more often than its source events. */
+export function assertSpeechMultiplicity(source: ScenePacket, paragraphs: string[]): void {
+  const text = paragraphs.join("\n");
+  for (const utterance of new Set(source.speech.map(speech => speech.utterance))) {
+    const allowed = source.speech.filter(speech => speech.utterance === utterance).length;
+    if (text.split(`“${utterance}”`).length - 1 > allowed) {
+      throw new Error("This delivered utterance has already been published. Continue with the remaining new result without repeating its speech reference or literal words.");
+    }
   }
 }
 export function narrativeFallback(source: ScenePacket, published: string[] = []): string {

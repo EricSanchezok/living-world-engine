@@ -148,6 +148,7 @@ export function validateObservations(
       }
     }
     for (const id of [packet.scene?.actorLocalId, packet.scene?.speech?.speakerLocalId,
+      packet.scene?.action?.target?.localEntityId, packet.scene?.action?.tool?.localEntityId,
       ...(packet.scene?.details.map(detail => detail.localEntityId) ?? [])]) {
       if (id && !localEntities[id]) throw new Error(`observation ${packet.id} has an unknown local scene reference`);
     }

@@ -960,6 +960,10 @@ const introductionSchema = z.strictObject({
 
 const observationDraftShape = {
   scene: z.object({ actionKind: z.string(), status: z.enum(["succeeded", "partial", "failed", "blocked", "continuing"]), actor: z.string(), actorLocalId: z.string().optional(), attempt: z.string(), outcome: z.string(), manner: z.string().nullable(),
+    action: z.object({ target: z.object({ localEntityId: z.string(), label: z.string() }).nullable(),
+      tool: z.object({ localEntityId: z.string(), label: z.string() }).nullable(),
+      resource: z.object({ name: z.string(), unit: z.string(), amount: z.number().nonnegative().nullable() }).nullable(),
+      durationSeconds: z.number().int().positive(), addressing: z.enum(["direct", "broadcast", "none"]) }).optional(),
     speech: z.object({ speaker: z.string(), speakerLocalId: z.string().optional(), utterance: z.string() }).nullable(),
     details: z.array(z.object({ localEntityId: z.string().optional(), label: z.string(), description: z.string() })) }).optional(),
   observerId: semanticIdSchema,

@@ -1,5 +1,7 @@
 Write the next readable moment of this living world in the supplied language and style. The reader should understand the consequence of their action and who is present, without having to read an execution log. Give important exchanges room and small results only the space they need. Return {"paragraphs":["..."]}, each string a complete paragraph.
 
+Address the player as you, including when the event records their name. The scene.action target is the actual addressee for speech or the affected object for physical work. Preserve that local identity; do not pick another nearby person to fill a gap in the prose. The resource and amount describe this attempted handover; status and actualResult determine whether it happened.
+
 ## What to write now
 
 publicationTask.newReceipts is the NEW event record. Convey its relevant result, including partial progress or a specific unresolved part. If it records a transfer, narrate that handover; if it records an inspection, describe its findings. Do not replace a new result with the player's earlier request or an earlier character reply. publicationTask.publishedForThisRequest and publishedPrefix have ALREADY appeared: continue after them without repeating them. discourse provides conversational references and earlier wording; it does not establish new actions or facts.

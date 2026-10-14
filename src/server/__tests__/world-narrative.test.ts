@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { decisionPromptV2 } from "../../engine/models/decision-v2";
-import { completeParagraphs, renderNarrativeParagraph, renderNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, narrativeTask, narrativeGroundingChoices, type ScenePacket } from "../world-narrative";
+import { completeParagraphs, renderNarrativeParagraph, renderNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, narrativeFallback, narrativeEvidence, narrativeTask, narrativeGroundingChoices, type ScenePacket } from "../world-narrative";
 
 const source: ScenePacket = {
   participantId: "reader", agentId: "traveler", submissionId: "action", submittedAt: null, requestedAction: "问价",
@@ -58,6 +58,7 @@ describe("immutable narrative paragraphs", () => {
   });
   it("inserts the exact delivered utterance and refuses unknown speech references", () => {
     expect(renderNarrativeParagraph("店主回答：[[speech-ab12]]", source)).toBe("店主回答：“三枚金币；我还没同意赊账。”");
+    expect(renderNarrativeParagraph('店主回答：“[[speech-ab12]]”', source)).toBe("店主回答：“三枚金币；我还没同意赊账。”");
     expect(() => renderNarrativeParagraph("[[speech-ffff]]", source)).toThrow("undelivered");
     expect(() => renderNarrativeParagraph("[[invalid]]", source)).toThrow("unresolved");
     expect(() => requireDeliveredSpeech(source, [renderNarrativeParagraph("店主说：“我同意赊账。”", source)]))
@@ -69,6 +70,14 @@ describe("immutable narrative paragraphs", () => {
     const repeated = structuredClone(source); repeated.speech.push({ ...source.speech[0]!, id: "speech-ab13" });
     expect(renderNarrativeParagraph("[[speech-ab12]][[speech-ab13]]", repeated))
       .toBe("“三枚金币；我还没同意赊账。”“三枚金币；我还没同意赊账。”");
+  });
+  it("checks literal delivery multiplicity across accepted and recovered paragraphs", () => {
+    const quoted = renderNarrativeParagraph("[[speech-ab12]]", source);
+    expect(() => assertSpeechMultiplicity(source, [quoted, `店主又说：${quoted}`])).toThrow("already been published");
+    const repeated = structuredClone(source); repeated.speech.push({ ...source.speech[0]!, id: "speech-ab13" });
+    expect(() => assertSpeechMultiplicity(repeated, [quoted, quoted])).not.toThrow();
+    const short = structuredClone(source); short.speech[0]!.utterance = "好";
+    expect(() => assertSpeechMultiplicity(short, ["“好”", "状态还好。"])) .not.toThrow();
   });
   it("keeps only new continuation text after an exact echo of already published paragraphs", () => {
     expect(narrativeContinuation("价钱已经说清。 “三枚金币。”", ["价钱已经说清。"])) .toBe("“三枚金币。”");
