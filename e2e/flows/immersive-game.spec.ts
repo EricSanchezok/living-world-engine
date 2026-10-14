@@ -434,7 +434,9 @@ test("failed execution stays atomic and long diagnostics never widen the inspect
   await startOrigin(page);
   await page.getByLabel("你的行动").fill("触发 E2E 快速失败");
   await page.getByRole("button", { name: "发送行动" }).click();
-  await expect(page.getByText("这次尝试暂时没有得到完整回应。已经发生的变化会保留，你可以继续或重试。")).toBeVisible();
+  await expect(page.getByText("这一步的动作判定中断了，还没有产生新的变化。你仍在庭院里，可以接着说明想做的事。")).toBeVisible();
+  await expect(page.getByText("这次尝试暂时没有得到完整回应。已经发生的变化会保留，你可以继续或重试。")).toHaveCount(0);
+  await expect(page.getByText("世界时间 0s", { exact: true })).toBeVisible();
 
   await page.evaluate(() => {
     localStorage.setItem("livingworld:preferences:v2", JSON.stringify({

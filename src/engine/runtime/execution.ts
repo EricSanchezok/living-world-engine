@@ -288,6 +288,7 @@ export interface ExternalActionInput {
   goal: string;
   means: string | null;
   targetIds: string[];
+  discourse?: import("../contracts/discourse").ParticipantDiscourse;
 }
 
 export type ExternalReactionInput =

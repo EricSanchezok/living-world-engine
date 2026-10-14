@@ -49,6 +49,7 @@ export function settlePreparedActions(state: Readonly<SimulationState>, control:
       summary, causeRefs: source.causes, assertions: source.assertions, knownAlternatives: [] }, visibleFacts: observedFacts,
       visibleEntities: happened ? preparation.visibleEntityIds.flatMap(id => projected.truth.entities[id] ? [projected.truth.entities[id]!] : []) : [],
       namedEntityIds: happened ? preparation.namedEntityIds : [],
+      actorVisibleToEntityIds: happened ? preparation.actorVisibleToEntityIds ?? [] : [],
       deliveredToEntityIds: happened ? preparation.deliveredToEntityIds : [] });
   }
   return { settlements, rng, randomRequests, randomResults };

@@ -37,6 +37,7 @@ export interface ParticipantArrivalRecord {
   possibleNextActions: [string, string, string];
   generated: boolean;
   createdAt: string;
+  knownEntities: Array<{ localEntityId: string; name: string; description: string }>;
   executionId?: string;
 }
 

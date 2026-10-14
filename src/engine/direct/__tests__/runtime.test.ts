@@ -10,14 +10,14 @@ import { quantityId } from "../../runtime/runtime-id";
 import type { PolicyBinding, WorldAdvanceRequest } from "../../runtime/execution";
 import { WorldQuiescentError } from "../../runtime/execution";
 import { readDirectState } from "../state";
-import { speechSpans, literalNumbers } from "../actions";
+import { speechSpans, literalNumbers, literalDurations } from "../actions";
 import { applyDirectCognition } from "../cognition";
 
 async function fixture(options: { operation?: string; target?: string; tool?: string; amount?: string; failKeeper?: boolean;
   observationScope?: string; speech?: string; creationEnabled?: boolean; privateGateFact?: boolean; named?: boolean;
   creationResponse?: unknown; creationResponses?: unknown[]; missingCoverage?: boolean; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
   recipient?: string; resolvedRecipient?: string; searchLocation?: string; transferAuthority?: string; transferExecution?: string;
-  reactionProgress?: string; playerProgress?: string; duplicateIdentity?: boolean; timerSeconds?: number } = {}) {
+  reactionProgress?: string; playerProgress?: string; duplicateIdentity?: boolean; timerSeconds?: number; interaction?: string; duration?: string; actorVisible?: boolean } = {}) {
   let creations = 0;
   const f = directTestProvider(wire => {
     if (!wire.questions) {
@@ -32,6 +32,8 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
       amount: options.amount ?? "n1", resource: "spirit-stone", speech: options.speech ?? "q0", timing: "default", goal: "none",
       transfer_authority: options.transferAuthority ?? (options.operation === "transfer" ? "give" : "pending"),
       transfer_execution: options.transferExecution ?? "expression",
+      interaction: options.interaction ?? "world_action",
+      duration: options.duration ?? "default",
       search_location: options.searchLocation ?? "none",
       observation_scope: options.observationScope ?? "target" };
     selection.reflection = options.speech ?? "none";
@@ -39,6 +41,7 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
       let value = selection[id] ?? (id.includes("outcome") ? options.outcome ?? "succeeded" : id.includes("goal_status") || id.includes("belief_status") ? "unchanged" : id.includes("visible") ? "visible" : id.includes("delivery") ? "delivered" : id.includes("fact") ? "unchanged" : "none");
       if (/_entity\d+_name$/u.test(id)) value = options.named ? "named" : "unnamed";
       else if (/_entity\d+$/u.test(id)) value = "visible";
+      if (id.includes("actor_visibility")) value = options.actorVisible === false ? "hidden" : "visible";
       if (id.endsWith("_world_expansion")) value = options.introduce ? "introduce" : "none";
       if (id.endsWith("_request_progress")) value = options.reactionProgress ?? "complete";
       if (id.startsWith("progress_")) value = options.playerProgress ?? "complete";
@@ -75,6 +78,49 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("explains an already presented referent without speech, NPC work or physical time", async () => {
+    const f = await fixture({ interaction: "clarification", target: "guard", timerSeconds: 36_000 });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("你刚才说的人是指哪位？"));
+    expect(result.state.truth).toEqual(f.world.initialState.truth);
+    expect(result.committed.observations).toEqual([]);
+    expect(result.state.history[0]!.directEvent).toMatchObject({ frames: [], presentation: [{ kind: "clarification", focusLocalEntityId: "guard", requested: "你刚才说的人是指哪位？" }] });
+    expect(readDirectState(result.state.executionState!, result.state).completedSubmissionIds).toContain("submission-0");
+    expect(f.transport).toHaveBeenCalledTimes(1);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("binds an explicit wait duration once and ignores quoted deadlines on a later observation", async () => {
+    const options = { operation: "wait", target: "self", duration: "d0", playerProgress: "continue", creationEnabled: true };
+    const f = await fixture(options); await f.engine.bootstrapAgents();
+    const first = await f.engine.step(f.roster, f.request("等半分钟，再看看这里的情况"));
+    expect(first.state.truth.elapsedSeconds).toBe(30);
+    options.operation = "observe"; options.duration = "default"; options.playerProgress = "complete";
+    const second = await f.engine.step(f.roster, { expectedRevision: first.state.revision, trigger: "participant_action", externalActions: [] });
+    expect(second.state.truth.elapsedSeconds).toBe(31);
+    expect(second.state.history.at(-1)!.directEvent!.frames[0]!.durationSeconds).toBe(1);
+    const third = await f.engine.step(f.roster, f.request("牌子上说十分钟以后截止，先看一下牌子", second.state.revision));
+    expect(third.state.truth.elapsedSeconds, JSON.stringify(third.state.history.at(-1)!.directEvent!.control.intents.player)).toBe(32);
+    expect(replaySimulationState(third.state)).toEqual(third.state);
+  });
+  it.each([false, true])("keeps hearing distinct from seeing a speaker: visible=%s", async actorVisible => {
+    const f = await fixture({ operation: "speak", target: "guard", actorVisible, creationEnabled: true, expression: 1,
+      creationResponse: { attempt: "说一声", utterance: "还在吗？", manner: "抬手示意" } });
+    const keeper = f.world.initialState.agents.keeper!;
+    for (const [id, binding] of Object.entries(keeper.bindings)) if (binding.canonicalEntityIds.includes("player")) {
+      delete keeper.bindings[id];
+    }
+    f.world.initialState.truth.facts["player-appearance"] = { ...f.world.initialState.truth.facts["gate-lock"]!, id: "player-appearance",
+      subjectId: "player", predicate: "appearance", value: { kind: "text", value: "袖口有一道白线" }, description: "袖口有一道白线", access: { kind: "public" } };
+    f.world.historyBaseHash = historyReplayBaseHash(f.world.initialState);
+    const engine = new SimulationEngine(f.world, f.algorithm); await engine.bootstrapAgents();
+    const result = await engine.step(f.roster, f.request('向守门人说：“还在吗？”'));
+    const heard = result.committed.observations.find(packet => packet.observerId === "keeper")!;
+    expect(heard.scene?.speech).toMatchObject({ utterance: "还在吗？", speakerLocalId: expect.any(String) });
+    expect(heard.scene?.manner).toBe(actorVisible ? "抬手示意" : null);
+    expect(JSON.stringify(heard).includes("袖口有一道白线")).toBe(actorVisible);
+    expect(heard.scene?.actor).toBe(actorVisible ? "附近的人" : "一个陌生的声音");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("retires an idle participant's pending continuation and cannot jump to a distant timer", async () => {
     const f = await fixture({ operation: "move", target: "yard", playerProgress: "continue", timerSeconds: 36_000 });
     await f.engine.bootstrapAgents();
@@ -100,7 +146,7 @@ describe("direct world through the actual simulation entry", () => {
     const result = await timed.engine.step(timed.roster, { expectedRevision: 0, trigger: "participant_action", externalActions: [], autonomousUntilSeconds: 30 });
     expect(result.state.truth.elapsedSeconds).toBe(20);
     expect(result.state.truth.timers["test-deadline"]!.status).toBe("fired");
-    const waiting = await fixture({ operation: "wait", target: "self", speech: "none" }); await waiting.engine.bootstrapAgents();
+    const waiting = await fixture({ operation: "wait", target: "self", speech: "none", duration: "d0" }); await waiting.engine.bootstrapAgents();
     const long = await waiting.engine.step(waiting.roster, waiting.request("原地等待3600秒"));
     expect(long.state.truth.elapsedSeconds).toBe(3600);
     expect(replaySimulationState(long.state)).toEqual(long.state);
@@ -131,16 +177,19 @@ describe("direct world through the actual simulation entry", () => {
     expect(f.transport).toHaveBeenCalledTimes(2);
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
-  it("keeps an unresolved most recent recipient after an unavailable-person search", async () => {
+  it("supplies an unresolved search to ordinary reference resolution without a forced recipient override", async () => {
     const options = { operation: "speak", recipient: "discover", searchLocation: "door", outcome: "unknown", speech: "q0" };
     const f = await fixture(options); await f.engine.bootstrapAgents();
     const first = await f.engine.step(f.roster, f.request("找门内的店主问路"));
-    options.recipient = "guard";
     const second = await f.engine.step(f.roster, f.request('问他：“今天营业吗？”', first.state.revision));
     expect(second.state.history.at(-1)!.directEvent!.frames[0]).toMatchObject({ kind: "observe", preparatoryFor: "speak", targetEntityId: "gate", utterance: null });
     const resolved = f.transport.mock.calls.map(([, init]) => directDecisionContext(JSON.parse(String(init?.body))))
-      .find(wire => wire && (wire.state as { lastSearch?: unknown }).lastSearch)!;
-    expect(resolved.state).toMatchObject({ currentPlayerRequest: '问他：“今天营业吗？”', lastSearch: { requested: "找门内的店主问路", preparatoryFor: "speak" } });
+      .filter(wire => wire?.questions.operation).at(-1)!;
+    expect(resolved.state).toMatchObject({ submittedAction: { rawText: '问他：“今天营业吗？”' }, recentActions: [{ requested: "找门内的店主问路", preparatoryFor: "speak" }] });
+    options.recipient = "guard";
+    const corrected = await f.engine.step(f.roster, f.request('不找店主了，问守门人：“今天营业吗？”', second.state.revision));
+    expect(corrected.state.history.at(-1)!.directEvent!.frames[0]).toMatchObject({ kind: "speak", targetEntityId: "keeper", utterance: "今天营业吗？" });
+    expect(replaySimulationState(corrected.state)).toEqual(corrected.state);
     expect(replaySimulationState(second.state)).toEqual(second.state);
   });
   it("repairs an actor clone while preserving a genuinely distinct new character", async () => {
@@ -207,7 +256,7 @@ describe("direct world through the actual simulation entry", () => {
     await f.engine.bootstrapAgents();
     const result = await f.engine.step(f.roster, f.request("先看看附近的告示，稍后再决定是否说话"));
     expect(JSON.stringify(result.committed.observations)).not.toContain("承诺付款");
-    expect(result.committed.observations[0]!.scene?.details).toContainEqual({ label: "旧木牌", description: "一块字迹褪色的木牌。" });
+    expect(result.committed.observations[0]!.scene?.details).toContainEqual(expect.objectContaining({ label: "旧木牌", description: "一块字迹褪色的木牌。", localEntityId: expect.any(String) }));
     expect(result.committed.observations.every(observation => !observation.scene?.speech)).toBe(true);
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
@@ -327,7 +376,7 @@ describe("direct world through the actual simulation entry", () => {
     expect(newAgent).toBeDefined(); expect(newAgent.character.persona.summary).toContain("PRIVATE-MOTIVE");
     expect(readDirectState(result.state.executionState!, result.state).intents[newAgent.id]).toMatchObject({ status: "ready", wakeReasons: ["world-arrival"] });
     expect(JSON.stringify(result.state.agents.player!.belief)).not.toContain("PRIVATE-MOTIVE");
-    expect(result.committed.observations[0]!.scene?.details).toContainEqual({ label: "抱木箱的人", description: "磨白的短外衣，怀里抱着木箱。" });
+    expect(result.committed.observations[0]!.scene?.details).toContainEqual(expect.objectContaining({ label: "抱木箱的人", description: "磨白的短外衣，怀里抱着木箱。", localEntityId: expect.any(String) }));
     expect(result.state.truth.placements[newAgent.entityId]).toBe("courtyard");
     const wires = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body)));
     const creation = wires.find(wire => !directDecisionContext(wire));
@@ -524,6 +573,13 @@ describe("direct world through the actual simulation entry", () => {
     expect(literalNumbers("一万二千三百四十五；一亿二千万；二〇二六"))
       .toEqual([12345, 120000000, 2026]);
     expect(literalNumbers("两节电池，120秒截止，2个组件")) .toEqual([120, 2]);
+  });
+  it("extracts exact duration candidates without deciding their conversational role", () => {
+    expect(literalDurations("等五秒；半分钟；一分半；1小时30分钟；两小时又十五分钟"))
+      .toEqual([{ text: "五秒", seconds: 5 }, { text: "半分钟", seconds: 30 }, { text: "一分半", seconds: 90 },
+        { text: "1小时30分钟", seconds: 5400 }, { text: "两小时又十五分钟", seconds: 8100 }]);
+    expect(literalDurations("她说截止还剩十分钟，我只等三秒"))
+      .toEqual([{ text: "十分钟", seconds: 600 }, { text: "三秒", seconds: 3 }]);
   });
   it("turns resource shortage into a local blocked outcome with no partial debit", async () => {
     const f = await fixture({ operation: "transfer", target: "guard", amount: "n8" }); await f.engine.bootstrapAgents();

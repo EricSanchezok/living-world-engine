@@ -248,7 +248,9 @@ export function validateWorldInstanceDocument(document: WorldInstanceDocument, r
       document.participants[beat.participantId]!.agentId !== beat.agentId ||
       beat.sourceHash !== contentHash(beat.source) || !["queued", "generating", "complete", "fallback"].includes(beat.status) ||
       !Array.isArray(beat.grounding) || !Object.hasOwn(beat, "producer") ||
-      beat.segments.some((segment, index) => segment.sequence !== index || !segment.text.trim()) ||
+      beat.segments.some((segment, index) => segment.sequence !== index || !segment.text.trim() || !Array.isArray(segment.mentions) ||
+        segment.mentions.some(mention => !mention.surface.trim() || !segment.text.includes(mention.surface) ||
+          !beat.source.knownEntities.some(entity => entity.localEntityId === mention.localEntityId))) ||
       !Number.isSafeInteger(beat.attempts) || beat.attempts < 0 || beat.attempts > 2) throw new Error("invalid persisted narrative beat");
     beatIds.add(beat.id);
   }

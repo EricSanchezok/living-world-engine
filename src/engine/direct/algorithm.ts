@@ -20,6 +20,7 @@ import { DirectDecisions } from "./decisions";
 import { chooseAction } from "./actions";
 import { prepareActions } from "./world";
 import { settlePreparedActions } from "./settlement";
+import type { PresentationReply } from "../contracts/discourse";
 import { activityBoundary, admitActivities } from "./activities";
 import { directPerception } from "./perception";
 import { commitDirectRecord, directCandidate, sealDirectRecord } from "./canonical";
@@ -71,6 +72,7 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
     const decisions = new DirectDecisions(this.provider, control, { ...context.modelScope,
       runtimeIdentity: { worldHash: source.worldHash, revision: source.revision }, modelRegistrySnapshotHash: control.registryHash });
     const audits: ModelExecutionAudit[] = [], reads: Record<string, string> = {}, activatedAgentIds: string[] = [], cognition: DirectCognitiveUpdate[] = [];
+    const presentation: PresentationReply[] = [];
     for (const [id, intent] of Object.entries(control.intents)) if (input.policyRoster[id]?.kind === "idle") {
       intent.status = "waiting"; intent.activityId = null; intent.activeSubmission = null;
       intent.causeActionId = null; intent.wakeReasons = [];
@@ -109,6 +111,7 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
       if (result.status === "fulfilled") {
         audits.push(...result.value.result.audits); Object.assign(reads, result.value.result.reads);
         if (result.value.result.cognition) cognition.push(result.value.result.cognition);
+        if (result.value.result.presentation) presentation.push(result.value.result.presentation);
         if (result.value.result.frame) control.activities.push(result.value.result.frame);
       } else {
         const intent = control.intents[id]!;
@@ -162,7 +165,7 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
       .filter(time => horizon === undefined || time <= horizon);
     // Deciding to wait is a present-time control update. Return it before advancing
     // to an unrelated distant timer, so a player can act on the current feedback.
-    const onlyControlWork = owners.length > 0 && control.activities.length === 0;
+    const onlyControlWork = owners.length > 0 && (control.activities.length === 0 || presentation.length === owners.length);
     const atSeconds = newRandomCommitment || onlyControlWork || !boundaries.length ? source.truth.elapsedSeconds : Math.min(...boundaries);
     const due = control.activities.filter(frame => frame.activityStatus === "active" && frame.dueAtSeconds === atSeconds);
     for (const frame of due) Object.assign(reads, control.prepared[frame.id]!.reads);
@@ -245,7 +248,7 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
     const record = sealDirectRecord({ version: 1, id: "", baseRevision: source.revision, producerHash: this.manifest.hash,
       authorityHash: contentHash(authority), reads, atSeconds: effectiveTime, frames: completed, completedActionIds,
       control: sealDirectState(control), operations, events, outcomes: settlements.map(item => item.outcome), ...perception,
-      characterPatches: [], cognition, decisions: decisions.uses, modelAudits: [...decisions.audits(), ...audits].sort((a, b) => contentHash(a).localeCompare(contentHash(b))),
+      characterPatches: [], cognition, presentation, decisions: decisions.uses, modelAudits: [...decisions.audits(), ...audits].sort((a, b) => contentHash(a).localeCompare(contentHash(b))),
       rng, randomRequests, randomResults, timerUpdates });
     if (!operations.length && contentHash(initial) === contentHash(record.control)) throw new WorldQuiescentError(Object.entries(control.intents).flatMap(([ownerId, intent]) =>
       intent.failure ? [{ ownerId, phase: "direct-decision", ...intent.failure, reason: intent.failure.message }] : []));

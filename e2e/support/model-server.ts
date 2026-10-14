@@ -36,7 +36,7 @@ function contextFrom(body: Record<string, unknown>): Record<string, unknown> {
 
 
 function decisionAnswers(questions: Record<string, DecisionQuestionV2>) {
-  const values: Record<string, string> = { operation: "observe", target: "self", recipient: "none", tool: "none", amount: "unknown", speech: "none", timing: "default", resource: "none", goal: "none" };
+  const values: Record<string, string> = { operation: "observe", interaction: "world_action", target: "self", recipient: "none", tool: "none", amount: "unknown", speech: "none", timing: "default", resource: "none", goal: "none" };
   return Object.fromEntries(Object.entries(questions).map(([id, question]): [string, Record<string, unknown>] => {
     if (question.type === "noul") return [id, { type: "noul", noul: id === "expression" ? 0 : 1 }];
     if (question.type === "score") return [id, { type: "score", score: 1, confidence: 1,
@@ -63,9 +63,10 @@ const server = createServer(async (request, response) => {
     const body = await readBody(request);
     const native = request.url === "/systemone";
     const context = native ? body.state as Record<string, unknown> : contextFrom(body);
-    const serializedContext = JSON.stringify(context);
-    if (serializedContext.includes("触发 E2E 流式失败") || serializedContext.includes("触发 E2E 快速失败")) {
-      if (serializedContext.includes("触发 E2E 流式失败")) {
+    const decision = context.decision as { state: unknown; questions: Record<string, DecisionQuestionV2> } | undefined;
+    const requestText = ((native ? context : decision?.state) as { submittedAction?: { rawText?: string } } | undefined)?.submittedAction?.rawText ?? "";
+    if (requestText.includes("触发 E2E 流式失败") || requestText.includes("触发 E2E 快速失败")) {
+      if (requestText.includes("触发 E2E 流式失败")) {
         await new Promise<void>((resolve) => setTimeout(resolve, 1_000));
       }
       response.writeHead(401, { "content-type": "application/json" });
@@ -78,11 +79,11 @@ const server = createServer(async (request, response) => {
       response.writeHead(200, { "content-type": "application/json" });
       response.end(JSON.stringify({ model, answers, usage: { input_tokens: 100, output_tokens: 10 } })); return;
     }
-    const scene = context.scene as { observations?: unknown[]; speech?: Array<{ id: string; speaker: string }> } | undefined;
-    const decision = context.decision as { questions: Record<string, DecisionQuestionV2> } | undefined;
+    const scene = context.scene as { reply?: { kind: string }; observations?: unknown[]; speech?: Array<{ id: string; speaker: string }> } | undefined;
     const output = decision ? { answers: Object.fromEntries(Object.entries(decisionAnswers(decision.questions))
       .map(([id, answer]) => [id, answer[String(answer.type)]])) }
       : context.localWorld && context.requestedAction ? { description: "No additional fixture content.", entities: [], facts: [], events: [] }
+      : scene?.reply?.kind === "recovery" ? { paragraphs: ["这一步的动作判定中断了，还没有产生新的变化。你仍在庭院里，可以接着说明想做的事。"] }
       : scene?.observations ? { paragraphs: scene.speech?.length
       ? scene.speech.map(speech => `${speech.speaker}说：[[${speech.id}]]`)
       : ["你查看了眼前的情况。石门仍在面前，随身物资也清点清楚了。"] }

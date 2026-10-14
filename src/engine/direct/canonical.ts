@@ -39,6 +39,12 @@ export function commitDirectRecord(source: Readonly<SimulationState>, record: Di
   if (record.frames.some(frame => frame.dueAtSeconds !== record.atSeconds || frame.startedAtSeconds > source.truth.elapsedSeconds ||
     source.agents[frame.actorId]?.entityId !== frame.actorEntityId)) throw new Error("invalid direct activity boundary or owner");
   const beforeControl = readDirectState(source.executionState, source);
+  for (const reply of record.presentation ?? []) {
+    const owner = source.agents[reply.agentId];
+    if (!owner || !reply.requested.trim() || !record.control.completedSubmissionIds.includes(reply.submissionId) ||
+      reply.focusLocalEntityId && !owner.belief.localEntities[reply.focusLocalEntityId] ||
+      record.frames.some(frame => frame.actorId === reply.agentId)) throw new Error("invalid presentation-only reply");
+  }
   if (beforeControl.activities.some(frame => frame.activityStatus === "active" && frame.dueAtSeconds !== null && frame.dueAtSeconds < record.atSeconds && !record.completedActionIds.includes(frame.id))) throw new Error("cannot pass an earlier admitted activity");
   for (const timer of Object.values(source.truth.timers)) if (timer.status === "scheduled" && timer.dueAtSeconds < record.atSeconds) throw new Error("cannot pass an earlier timer");
   const clock = nextWorldClockBoundary(source);

@@ -719,11 +719,12 @@ export interface ObservationScene {
   actionKind: string;
   status: ActionOutcome["status"];
   actor: string;
+  actorLocalId?: string;
   attempt: string;
   outcome: string;
   manner: string | null;
-  speech: { speaker: string; utterance: string } | null;
-  details: Array<{ label: string; description: string }>;
+  speech: { speaker: string; speakerLocalId?: string; utterance: string } | null;
+  details: Array<{ localEntityId?: string; label: string; description: string }>;
 }
 export interface ObservationPacket {
   id: string;

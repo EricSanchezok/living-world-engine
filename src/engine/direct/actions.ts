@@ -14,6 +14,7 @@ import type { ActionExpression, ActionFrame, ActionKind, DirectRuntimeState } fr
 import { cognitiveQuestions, cognitiveUpdate } from "./cognition";
 import { orderedValues } from "./state";
 import { extendCapability } from "./capabilities";
+import type { PresentationReply } from "../contracts/discourse";
 
 const kinds: Record<ActionKind | "unknown" | "expand", string> = { move: "Travel to a place", observe: "Inspect, notice or investigate",
   reflect: "Explicitly review records or formulate private thoughts when that is the requested activity; checking a condition before a requested physical action is part of choosing that action, not a separate reflection",
@@ -21,8 +22,9 @@ const kinds: Record<ActionKind | "unknown" | "expand", string> = { move: "Travel
   change: "Change a state or access condition, including physically blocking or clearing a route", wait: "Listen without speaking, await an event or continue a long activity", unknown: "Cannot identify any next attempt, even a question or observation",
   expand: "A missing concept or capability is required" };
 const actionLabels: Record<ActionKind, string> = { move: "前往", observe: "观察", reflect: "思考", speak: "交谈", transfer: "交付", use: "使用", change: "调整", wait: "等待" };
+const sharedActionPolicy = "Apply state.actionPolicy and the current request/settled receipts in state. Answer this field independently; only the selected operation's parameters execute.";
 function choice(field: string, criteria: Record<string, string | Record<string, JsonValue> | JsonValue[] | null>): DecisionQuestionV2 {
-  return { type: "choice", version: "direct-action-1", instructions: { task: loadPromptAsset("user/direct-action.md"), field }, criteria };
+  return { type: "choice", version: "direct-action-2", instructions: { task: sharedActionPolicy, field }, criteria };
 }
 export function literalNumbers(text: string): number[] {
   const values = [...text.matchAll(/(?:^|[^\d.])(\d+(?:\.\d+)?)(?![\d.])/gu)].map(match => Number(match[1]));
@@ -57,9 +59,25 @@ export function speechSpans(text: string): string[] {
   return [...new Set([text, ...text.split(/(?<=[。！？!?；;])|\n/gu), ...text.split(/[：:]/u).slice(1)]
     .map(value => value.trim()).filter(Boolean))];
 }
-export function actionSeconds(state: Readonly<SimulationState>, profileId: string | null, raw: string): number {
-  const duration = raw.match(/(\d+(?:\.\d+)?)\s*(seconds?|minutes?|hours?|秒|分钟|小时)/iu);
-  if (duration) return Math.max(1, Math.ceil(Number(duration[1]) * (/hours?|小时/iu.test(duration[2]!) ? 3600 : /minutes?|分钟/iu.test(duration[2]!) ? 60 : 1)));
+/** Exact duration spans are candidates; the language decision binds one to the selected step. */
+export function literalDurations(text: string): Array<{ text: string; seconds: number }> {
+  const matches = [...text.matchAll(/(\d+(?:\.\d+)?|[零〇一二两三四五六七八九十百千万亿]+(?:点[零〇一二两三四五六七八九]+)?|半)\s*(seconds?|minutes?|hours?|秒钟?|分钟?|小时)(半)?/giu)];
+  const spans: Array<{ text: string; seconds: number; end: number }> = [];
+  for (const match of matches) {
+    const value = match[1] === "半" ? 0.5 : literalNumbers(match[1]!)[0];
+    if (value === undefined) continue;
+    const seconds = Math.ceil((value + (match[3] ? 0.5 : 0)) * (/hours?|小时/iu.test(match[2]!) ? 3600 : /minutes?|分/iu.test(match[2]!) ? 60 : 1));
+    if (!Number.isSafeInteger(seconds) || seconds < 1) continue;
+    const prior = spans.at(-1), separator = prior ? text.slice(prior.end, match.index) : null;
+    if (prior && separator !== null && /^(?:\s|零|又|and)*$/iu.test(separator)) {
+      prior.text += separator + match[0]; prior.seconds += seconds; prior.end = match.index + match[0].length;
+    } else spans.push({ text: match[0], seconds, end: match.index + match[0].length });
+  }
+  return spans.map(({ text, seconds }) => ({ text, seconds }));
+}
+export function actionSeconds(state: Readonly<SimulationState>, profileId: string | null, raw: string, explicitDuration = true): number {
+  const duration = explicitDuration ? literalDurations(raw)[0] : undefined;
+  if (duration) return duration.seconds;
   const profile = profileId ? state.truth.mechanics.temporalProfiles[profileId] : null;
   if (profile?.kind === "fixed") return profile.durationSeconds;
   if (profile?.kind === "staged") return profile.stages.reduce((sum, stage) => sum + stage.durationSeconds, 0);
@@ -84,6 +102,8 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const profiles = external && input.creationEnabled ? { ...configuredProfiles, decision: configuredProfiles.fallback } : configuredProfiles;
   const goals = orderedValues(agent.character.goals).filter(goal => goal.status === "active");
   const text = external?.rawText ?? "";
+  if (external?.discourse && (external.discourse.agentId !== agentId ||
+    external.discourse.hash !== contentHash({ ...external.discourse, hash: "" }))) throw new Error("Player discourse does not belong to this perspective");
   const quotes = literalUtterances(text);
   const observedNumbers = orderedValues(agent.belief.evidence).filter(evidence => evidence.step >= agent.observationCursorStep).flatMap(evidence => literalNumbers(evidence.description));
   const amounts = [...new Set([1, ...literalNumbers(text), ...observedNumbers, ...goals.flatMap(goal => literalNumbers(goal.description))])];
@@ -95,6 +115,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const spans = speechSpans(text);
   const resources = Object.keys(state.truth.mechanics.quantities).sort();
   const timing = orderedValues(state.truth.mechanics.temporalProfiles);
+  const durations = literalDurations(text);
   const capabilities = control.capabilities.filter(capability => capability.knownToAgentIds.includes(agentId)).sort((a, b) => a.id.localeCompare(b.id));
   const questions: Record<string, DecisionQuestionV2> = {
     ...cognitiveQuestions(state, agentId),
@@ -117,17 +138,28 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       none: "Only retrieve and review existing records without new conclusions or wording",
       create: "Create the requested private synthesis, analysis, plan or concrete next question from existing evidence",
     }),
-    dialogue: choice("communicative intention; guides expression but does not fix wording", { ask_price: "Ask the price of the selected object", request: "Request the selected resource amount",
+    dialogue: choice("communicative intention; guides expression but does not fix wording", { ask_price: "Ask the price of the selected object", request: "Ask the other person to do something without claiming they already did it",
+      ask_information: "Ask a question about the present conversation or scene", answer: "Answer the question actually received, including multiple parts",
+      greet: "Greet or introduce oneself", explain: "Explain an experience, situation or reason", correct: "Correct a misunderstanding or earlier words",
+      apologize: "Apologize or acknowledge an effect on the other person", farewell: "End this conversation naturally",
       offer: "Offer the selected resource amount", accept: "Explicitly accept the currently discussed terms", refuse: "Explicitly refuse the currently discussed terms",
       clarify: "Ask for clearer terms", report: "State the selected existing belief", acknowledge: "Acknowledge and wait for actual evidence", unknown_information: "Tell the questioner that this Agent does not know the requested information" }),
     timing: choice("timing", { default: "Ordinary action duration from the world", ...Object.fromEntries(timing.map(profile => [profile.id, profile.name])) }),
   };
+  if (external) questions.interaction = choice("What kind of response does this input seek in the actual shared conversation? Choose clarification for a reader asking which previously presented person/thing was meant, a recap, their already known location, or the meaning/status of earlier feedback without requesting a new action. Choose world_action for words directed at a character (including elliptical follow-ups), observation of NEW evidence or any actual attempt. A question is not automatically clarification: asking the recent speaker for their name is in-world speech. Use the published exchanges, addressee and current focus; no special command syntax is needed.", {
+    world_action: "Act or speak in the world",
+    clarification: "Explain already available information without new speech, observation or elapsed world time",
+  });
+  if (durations.length) questions.duration = choice("Which explicit duration belongs to THIS next concrete step? Distinguish an instructed wait or activity duration from a quoted deadline, remaining time, another person's commitment or a future clause. After a completed wait, later observation does not repeat that duration. Questions about how long something takes do not authorize waiting that long.", {
+    default: "No explicit duration belongs to this next step; use its ordinary world timing",
+    ...Object.fromEntries(durations.map((duration, index) => [`d${index}`, duration])),
+  });
   questions.expression = { type: "noul", version: "action-expression-1",
-    instructions: { task: loadPromptAsset("user/direct-action.md"), field: "Does THIS selected next action need a concrete expression, accompanying gesture, or separation from a compound request? Simple observation, plain movement, unchanged work and a quotation with no stage directions need none. A quotation accompanied by a gesture needs expression, preserving its exact words." } };
-  if (!external) questions.urgency = { type: "score", version: "urgency-1", instructions: { task: loadPromptAsset("user/direct-action.md"), field: "urgency of the next action" },
+    instructions: { task: sharedActionPolicy, field: "Does THIS selected next action need a concrete expression, accompanying gesture, or separation from a compound request? Simple observation, plain movement, unchanged work and a quotation with no stage directions need none. A quotation accompanied by a gesture needs expression, preserving its exact words." } };
+  if (!external) questions.urgency = { type: "score", version: "urgency-1", instructions: { task: sharedActionPolicy, field: "urgency of the next action" },
     criteria: ["May reasonably wait", "Should act when available", "Immediate deadline or danger"] };
   if (!external && intent.lastActionHash && intent.wakeReasons.includes("observation")) questions.relevant = { type: "noul", version: "wake-relevance-1",
-    instructions: { task: loadPromptAsset("user/direct-action.md"), field: "Does the new observation require changing the prior wait or responding now?" } };
+    instructions: { task: sharedActionPolicy, field: "Does the new observation require changing the prior wait or responding now?" } };
   if (resources.length) questions.resource = choice("resource", { none: "No quantified resource", ...Object.fromEntries(resources.map(id => [id, state.truth.mechanics.quantities[id]!.name])) });
   if (external) questions.transfer_authority = choice("For the hypothetical transfer branch: does this CURRENT submission authorize the PLAYER to give their own goods now? Prior negotiations and another person's demand alone are not permission; an explicit current instruction to pay the accepted price IS permission. Check only the player's stated prerequisites against actual delivered evidence. When the agreed sequence is payment THEN delivery, the absence of later delivery does not block the authorized payment. Do not add a delivery-first prerequisite.", {
     pending: "The player's transfer condition is not established, or the input does not authorize a transfer",
@@ -164,7 +196,8 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const currentObservedFacts = claims.map(claim => ({ subject: agent.belief.localEntities[claim.subjectId]?.name,
     localEntityId: claim.subjectId, predicate: claim.predicate, value: claim.value, description: claim.description, stance: claim.stance,
     evidence: claim.evidenceIds.map(id => agent.belief.evidence[id]).filter(Boolean).map(item => ({ kind: item!.kind, step: item!.step })) }));
-  const context = { perspective: view.state, submittedAction: external ?? null, currentRequestReceipts,
+  const actionPolicy = loadPromptAsset("user/direct-action.md");
+  const context = { actionPolicy, perspective: view.state, submittedAction: external ? { ...external, discourse: undefined } : null, discourse: external?.discourse ?? null, currentRequestReceipts,
     recentActions: recentActions.slice(-6).map(({ requested, target, actionKind, attempted, outcome, preparatoryFor }) => ({ requested, target, actionKind, attempted, outcome, preparatoryFor })),
     currentObservedFacts, intent: { goalId: intent.goalId, wakeReasons: intent.wakeReasons,
     recentOutcomeIds: intent.recentOutcomeIds }, latestObservedEvidence: orderedValues(agent.belief.evidence).filter(evidence => evidence.step === agent.observationCursorStep),
@@ -178,7 +211,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     if (["recipient", "target", "search_location"].includes(id)) item.instructions = { ...item.instructions as Record<string, JsonValue>,
       recentRequests: recentActions.filter(action => action.submissionId !== external.submissionId).slice(-3)
         .map(({ requested, target, outcome }) => ({ requested, target, outcome })),
-      referenceRule: "Resolve pronouns against the most recently requested person or place, even if that search failed. Do not silently switch to an older unrelated speaker. If the intended person remains unseen, use discover or an unresolved choice and search the relevant place." };
+      referenceRule: "Resolve the intended local identity against the actual published exchanges, their stable mentions and delivered speakers. Corrections may replace a preceding focus. A prior unsuccessful search does not automatically override the current conversational addressee. If more than one interpretation genuinely remains, preserve uncertainty instead of substituting another person." };
   }
   const inputHash = contentHash({ perspective: view.state, submittedAction: external ?? null, goal: intent.goalId });
   if (!external && inputHash === intent.lastInputHash) {
@@ -191,8 +224,18 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   if (answers.urgency?.type === "score") intent.urgency = answers.urgency.score;
   intent.lastInputHash = inputHash; intent.wakeReasons = []; intent.failure = null; intent.dependencies = view.reads;
   let operation = selected(answers, "operation");
+  if (external && selected(answers, "interaction") === "clarification") {
+    intent.status = "waiting"; intent.activityId = null; intent.activeSubmission = null; intent.causeActionId = null;
+    intent.wait = { entityIds: [], untilSeconds: null, reason: "presentation-clarification" };
+    control.completedSubmissionIds.push(external.submissionId);
+    const target = selected(answers, "target");
+    const presentation: PresentationReply = { agentId, submissionId: external.submissionId, kind: "clarification", requested: text,
+      focusLocalEntityId: agent.belief.localEntities[target] ? target : null,
+      reason: "Explain the existing scene and conversation. No new action, perception or speech has occurred." };
+    return { frame: null, audits: [] as ModelExecutionAudit[], reads: view.reads, cognition, presentation };
+  }
   if (external && ["speak", "wait", "reflect"].includes(operation) && selected(answers, "transfer_authority") === "give") {
-    const resolved = await decisions.ask(agentId, { currentPlayerRequest: text, perspective: view.state,
+    const resolved = await decisions.ask(agentId, { actionPolicy, currentPlayerRequest: text, perspective: view.state,
       currentRequestReceipts, selectedOperation: operation, authorizedTransfer: { recipient: selected(answers, "recipient"),
         resource: questions.resource ? selected(answers, "resource") : null, amount: selected(answers, "amount") } } as unknown as JsonValue, view.reads, {
       transfer_execution: choice("The first answers disagree: they authorize an immediate transfer but select words or waiting. Resolve only this contradiction against the current request and actually delivered terms. An explicit instruction to give/pay now executes a transfer. A quotation, promise, request for the OTHER person's goods, or proposed deal alone does not. Keep unmet conditions pending.", {
@@ -208,14 +251,6 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   }
   intent.goalId = questions.goal && selected(answers, "goal") !== "none" ? selected(answers, "goal") : null;
   let targetKey = ["speak", "transfer"].includes(operation) ? selected(answers, "recipient") : selected(answers, "target");
-  const priorSearch = external ? recentActions.filter(action => action.submissionId !== external.submissionId).at(-1) : null;
-  if (priorSearch?.preparatoryFor && ["speak", "transfer"].includes(operation) && recipients.some(([id]) => id === targetKey)) {
-    const resolved = await decisions.ask(agentId, { currentPlayerRequest: text, lastSearch: priorSearch,
-      proposedRecipient: targetKey } as unknown as JsonValue, view.reads, {
-      recipient: choice("Resolve the recipient after this most recent unfinished search. A pronoun can still refer to the sought person even though they were not found; choose discover in that case. An explicit switch to a known person is allowed. Do not substitute a different earlier speaker just because that person is available.", recipientCriteria),
-    }, profiles);
-    targetKey = selected(resolved, "recipient");
-  }
   if (operation === "speak" && targetKey === "none") {
     const resolved = await decisions.ask(agentId, { ...context as Record<string, JsonValue>, concreteOperation: "speak",
       selectedSpeech: selected(answers, "speech") }, view.reads, {
@@ -272,7 +307,9 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const selectedGoal = goals.find(goal => goal.id === intent.goalId)?.description;
   const rawText = expression?.attempt || text || `${actionLabels[kind]}${target ? `：${agent.belief.localEntities[targetKey]?.name ?? ""}` : ""}${utterance ? `；${utterance}` : ""}`;
   const id = runtimeId({ worldHash: state.worldHash, revision: state.revision, kind: "action", stage: "direct-action", owner: agentId, round: 0, ordinal: 0 });
-  const durationSeconds = actionSeconds(state, profileId, preparatoryFor || ["speak", "transfer"].includes(kind) ? "" : text);
+  const durationChoice = questions.duration ? selected(answers, "duration") : "default";
+  const selectedDuration = /^d\d+$/u.test(durationChoice) ? durations[Number(durationChoice.slice(1))]?.seconds : undefined;
+  const durationSeconds = !preparatoryFor && selectedDuration !== undefined ? selectedDuration : actionSeconds(state, profileId, preparatoryFor ? "" : rawText, false);
   const frame: ActionFrame = { version: 1, id, actorId: agentId, actorEntityId: agent.entityId, submissionId: external?.submissionId ?? null,
     ...(expression ? { expression } : {}),
     ...(external && questions[`progress_${kind}`] ? { requestContinuation: selected(answers, `progress_${kind}`) as NonNullable<ActionFrame["requestContinuation"]> } : {}),

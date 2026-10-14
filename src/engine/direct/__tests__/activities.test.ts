@@ -39,6 +39,8 @@ async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "co
         : id.includes("duration") ? "planned" : id.includes("pool") ? "claim" : id.includes("fact") ? "unchanged" : "none");
       if (id.includes("duration") && mode === "repair") answer = "s30";
       if (id.includes("duration") && mode === "test") answer = "s10";
+      if (id === "duration") answer = q.type === "choice" && "d0" in q.criteria ? "d0" : "default";
+      if (id.includes("actor_visibility")) answer = "visible";
       if (id.includes("resource") && mode === "repair") answer = info?.resource === "密封组件" ? "n1" : info?.resource === "冷却剂" ? "n2" : "none";
       if (id.endsWith("_applies")) answer = mode === "repair" ? "apply" : "none";
       if (id.includes("fact") && mode === "repair" && info?.fact?.id === "pump-seal") answer = option(q, value => (value as { value?: string })?.value === "sealed");
@@ -207,7 +209,7 @@ describe("direct activities use code-owned mechanics", () => {
     const f = await fixture("ongoing");
     const first = await f.engine.step(f.roster, { expectedRevision: 0, trigger: "participant_action", externalActions: ["engineer", "inspector"].map(agentId =>
       ({ agentId, submissionId: `shared-${agentId}`, rawText: "操作冷却泵面板10秒", goal: "完成本次操作", means: null, targetIds: [] })) });
-    expect(first.state.truth.elapsedSeconds).toBe(10); expect(first.committed.outcomes).toHaveLength(1);
+    expect(first.state.truth.elapsedSeconds, JSON.stringify(Object.values(readDirectState(first.state.executionState!, first.state).intents).map(intent => intent.failure))).toBe(10); expect(first.committed.outcomes).toHaveLength(1);
     const pending = readDirectState(first.state.executionState!, first.state).activities;
     expect(pending).toHaveLength(1); expect(pending[0]!.activityStatus).toBe("queued");
     const calls = f.transport.mock.calls.length;

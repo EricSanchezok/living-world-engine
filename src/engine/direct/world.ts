@@ -21,6 +21,7 @@ export interface ActionSettlement {
   visibleEntities: WorldEntity[];
   namedEntityIds: string[];
   deliveredToEntityIds: string[];
+  actorVisibleToEntityIds?: string[];
 }
 const ordinaryStates = ["open", "closed", "working", "stopped", "damaged", "repaired", "leaking", "sealed", "temporarily sealed", "tested", "untested", "available", "unavailable"];
 function factOptions(fact: WorldFact, frames: ActionFrame[], state: Readonly<SimulationState>): FactValue[] {
@@ -36,7 +37,7 @@ function factOptions(fact: WorldFact, frames: ActionFrame[], state: Readonly<Sim
   return [fact.value];
 }
 function question(task: string, data: JsonValue, criteria: Record<string, string | Record<string, JsonValue>>): DecisionQuestionV2 {
-  return { type: "choice", version: "direct-world-1", instructions: { task: loadPromptAsset("user/direct-world.md"), field: task, data }, criteria };
+  return { type: "choice", version: "direct-world-2", instructions: { task: "Apply state.adjudicationPolicy to this question's actual action and local evidence.", field: task, data }, criteria };
 }
 export function sourceFor(frame: ActionFrame): CausalSource {
   return { causes: [{ kind: "action", id: frame.id }], assertions: [{ kind: "entity_lifecycle", entityId: frame.actorEntityId, expected: "active" }] };
@@ -57,6 +58,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   const audits: ModelExecutionAudit[] = [];
   if (!frames.length) return { prepared: [] as PreparedDirectAction[], reads: {} as Record<string, string>, audits };
   const view = localWorldView(state, definition, frames), questions: Record<string, DecisionQuestionV2> = {};
+  view.state = { ...view.state as Record<string, JsonValue>, adjudicationPolicy: loadPromptAsset("user/direct-world.md") };
   const effects = new Map<string, { fact: WorldFact; values: FactValue[] }>();
   const visibility = new Map<string, WorldFact>();
   const entityVisibility = new Map<string, WorldEntity>();
@@ -195,8 +197,12 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       : frame.utterance || ["speak", "use", "change", "move"].includes(frame.kind) ? orderedValues(state.agents).filter(agent => agent.id !== frame.actorId &&
         state.truth.placements[agent.entityId] === state.truth.placements[frame.actorEntityId]).map(agent => agent.entityId) : [];
     candidates.set(prefix, recipients);
-    for (const [ordinal, recipient] of recipients.entries()) questions[`${prefix}_delivery${ordinal}`] = question("can the recipient perceive this speech, transfer or physical method and effect", { action: frame as unknown as JsonValue, recipient },
-      { delivered: "The actual words or physical method and effect are perceived", unavailable: "No actual perception", unknown: "Perception is uncertain" });
+    for (const [ordinal, recipient] of recipients.entries()) {
+      questions[`${prefix}_delivery${ordinal}`] = question("can the recipient perceive this speech, transfer or physical method and effect", { action: frame as unknown as JsonValue, recipient },
+        { delivered: "The actual words or physical method and effect are perceived", unavailable: "No actual perception", unknown: "Perception is uncertain" });
+      questions[`${prefix}_actor_visibility${ordinal}`] = question("Can THIS recipient see the acting person's public appearance during this event? Judge actual line of sight, placement, light and concealment. Hearing a voice through a barrier does not establish sight; an unfamiliar person standing openly nearby can be seen without knowing their name.",
+        { action: frame as unknown as JsonValue, recipient }, { visible: "The recipient can see the actor", hidden: "Only another channel such as sound is available", unknown: "Sight is not established" });
+    }
   }
   let answers = await decisions.ask(null, view.state, view.reads, questions);
   const missingBindings: Record<string, DecisionQuestionV2> = {};
@@ -398,6 +404,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         ...operations.flatMap(operation => operation.kind === "set_fact" && operation.fact.predicate === "proximity" ? [operation.fact] : [])].map(fact => fact.id) : [],
       visibleEntityIds: ["succeeded", "partial"].includes(status) ? [...visibleEntities, ...(expansion?.entities ?? [])].map(entity => entity.id) : [], deliveredToEntityIds,
       namedEntityIds: [...entityNames].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "named").map(([, entityId]) => entityId),
+      actorVisibleToEntityIds: deliveredToEntityIds.filter(recipient => selected(answers,
+        `${prefix}_actor_visibility${(candidates.get(prefix) ?? []).indexOf(recipient)}`) === "visible"),
       randomRequests: ["succeeded", "partial"].includes(status) ? randomRequests : [], randomBindings: ["succeeded", "partial"].includes(status) ? randomBindings : [],
       sharedClaims: [...claims].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "claim").map(([, claim]) => claim),
       ongoing,

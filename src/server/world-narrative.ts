@@ -6,6 +6,8 @@ import type { ModelExecutionScope, StructuredModelProvider } from "../engine/mod
 import { loadPromptAsset } from "../engine/prompts";
 import type { JsonValue } from "../engine/runtime/json";
 import type { DirectRuntimeState } from "../engine/direct/contracts";
+import type { DiscourseMention, ParticipantDiscourse, PresentationReply } from "../engine/contracts/discourse";
+import { projectAgentPerspective } from "../engine/cognition/agent-perspective";
 
 export interface ScenePacket {
   participantId: string;
@@ -16,11 +18,13 @@ export interface ScenePacket {
   world: { name: string; language: string; style: string };
   playerName: string;
   location: string | null;
+  boundary: { revision: number; step: number; worldTimeSeconds: number };
+  reply: PresentationReply | null;
   observations: Array<{ id: string; revision: number; step: number; worldTimeSeconds: number;
     summary: string; scene: NonNullable<ObservationPacket["scene"]> | null; sourceEventIds: string[] }>;
-  speech: Array<{ id: string; speaker: string; utterance: string }>;
+  speech: Array<{ id: string; speaker: string; speakerLocalId?: string; utterance: string }>;
   memories: Array<{ kind: string; description: string; executedDescription?: string }>;
-  knownEntities: Array<{ name: string; description: string }>;
+  knownEntities: Array<{ localEntityId: string; name: string; description: string }>;
   observedProperties?: Array<{ subject: string; predicate: string; value: JsonValue; stance: string; description: string }>;
 }
 export interface NarrativeBeat {
@@ -31,7 +35,7 @@ export interface NarrativeBeat {
   status: "queued" | "generating" | "complete" | "fallback";
   source: ScenePacket;
   sourceHash: string;
-  segments: Array<{ sequence: number; text: string; publishedAt: string }>;
+  segments: Array<{ sequence: number; text: string; mentions: DiscourseMention[]; publishedAt: string }>;
   attempts: number;
   executionIds: string[];
   createdAt: string;
@@ -89,13 +93,12 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
       .flatMap(step => step.observations.filter(o => o.observerId === participant.agentId && !covered.has(o.id))
         .map(o => ({ id: o.id, revision: step.revision, step: step.step, worldTimeSeconds: step.temporalBoundary.toElapsedSeconds,
           summary: o.summary, scene: o.scene ?? null, sourceEventIds: [...o.sourceEventIds] })));
-    if (!fresh.length) continue;
     const intents = document.participantIntents.filter(intent => intent.participantId === participant.id);
     for (const observation of fresh) {
       const intent = intents.findLast(item => document.runs[item.runId]?.committedRevisions.includes(observation.revision)) ??
         intents.findLast(item => item.revision < observation.revision);
       const submissionId = intent?.submissionId ?? null;
-      const pending = document.narratives.findLast(beat => beat.participantId === participant.id && beat.submissionId === submissionId && beat.status === "queued" && beat.attempts === 0);
+      const pending = document.narratives.findLast(beat => beat.participantId === participant.id && beat.submissionId === submissionId && !beat.source.reply && beat.status === "queued" && beat.attempts === 0);
       const agent = document.state.agents[participant.agentId]!;
       const self = Object.values(agent.bindings).find(binding => binding.canonicalEntityIds.length === 1 && binding.canonicalEntityIds[0] === agent.entityId);
       const place = document.state.truth.placements[agent.entityId];
@@ -108,6 +111,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
         world: { name: document.world.name, language: document.world.narrative.language, style: document.world.narrative.style },
         playerName: self ? agent.belief.localEntities[self.localEntityId]?.name ?? participant.displayName : participant.displayName,
         location: localPlace ? agent.belief.localEntities[localPlace.localEntityId]?.name ?? null : null,
+        boundary: { revision: observation.revision, step: observation.step, worldTimeSeconds: observation.worldTimeSeconds }, reply: null,
         observations: [], speech: [],
         knownEntities: [], observedProperties: [],
         memories: Object.values(agent.belief.evidence).filter(evidence => evidence.step < observation.step)
@@ -115,7 +119,8 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
             return { kind: evidence.kind, description: evidence.description,
               ...(recorded ? { executedDescription: executedDescription(recorded) } : {}) }; }),
       };
-      source.knownEntities = Object.values(agent.belief.localEntities).map(entity => ({ name: entity.name, description: entity.description }));
+      source.knownEntities = Object.values(agent.belief.localEntities).map(entity => ({ localEntityId: entity.id, name: entity.name, description: entity.description }));
+      source.boundary = { revision: observation.revision, step: observation.step, worldTimeSeconds: observation.worldTimeSeconds };
       source.observedProperties = Object.values(agent.belief.claims).map(claim => ({
         subject: agent.belief.localEntities[claim.subjectId]?.name ?? claim.subjectId, predicate: claim.predicate,
         value: claim.value as unknown as JsonValue, stance: claim.stance, description: claim.description,
@@ -128,6 +133,40 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
         sourceHash: contentHash(source), segments: [], attempts: 0, executionIds: [], createdAt: now,
         firstParagraphAt: null, completedAt: null, error: null, producer: null, grounding: [] });
     }
+    for (const step of document.state.history.filter(item => item.revision > participant.controlledSinceRevision)) {
+      const record = step.directEvent; if (!record) continue;
+      const intent = record.control.intents[participant.agentId];
+      const replies = [...(record.presentation ?? []).filter(reply => reply.agentId === participant.agentId)];
+      const failed = intent?.failure;
+      if (failed && failed.atRevision === step.baseRevision && !failed.servicePause && intent.activeSubmission) {
+        replies.push({ submissionId: intent.activeSubmission.submissionId, agentId: participant.agentId, kind: "recovery",
+          requested: intent.activeSubmission.rawText, focusLocalEntityId: null,
+          reason: "The interpretation or adjudication of this step was interrupted. This failed step submitted no new physical effect. Explain the actual saved progress and what remains unresolved without inventing a world obstacle or a diagnosis." });
+      }
+      for (const reply of replies) {
+        const id = `reply-${contentHash([participant.id, step.revision, reply.submissionId]).slice(0, 24)}`;
+        if (document.narratives.some(beat => beat.id === id)) continue;
+        const agent = document.state.agents[participant.agentId]!;
+        const participantIntent = document.participantIntents.find(item => item.participantId === participant.id && item.submissionId === reply.submissionId);
+        const source: ScenePacket = {
+          participantId: participant.id, agentId: participant.agentId, submissionId: reply.submissionId,
+          submittedAt: participantIntent?.submittedAt ?? null, requestedAction: reply.requested, reply: structuredClone(reply),
+          boundary: { revision: step.revision, step: step.step, worldTimeSeconds: step.temporalBoundary.toElapsedSeconds },
+          world: { name: document.world.name, language: document.world.narrative.language, style: document.world.narrative.style },
+          playerName: participant.displayName, location: projectAgentPerspective(document.state, agent).self.location?.name ?? null, observations: [], speech: [],
+          knownEntities: Object.values(agent.belief.localEntities).map(entity => ({ localEntityId: entity.id, name: entity.name, description: entity.description })),
+          observedProperties: Object.values(agent.belief.claims).map(claim => ({ subject: agent.belief.localEntities[claim.subjectId]?.name ?? claim.subjectId,
+            predicate: claim.predicate, value: claim.value as unknown as JsonValue, stance: claim.stance, description: claim.description })),
+          memories: Object.values(agent.belief.evidence).map(evidence => {
+            const observation = document.state.history.flatMap(item => item.observations).find(item => item.id === evidence.sourceId && item.observerId === participant.agentId);
+            return { kind: evidence.kind, description: observation ? executedDescription(observation) : evidence.description };
+          }).slice(-16),
+        };
+        document.narratives.push({ id, participantId: participant.id, agentId: participant.agentId, submissionId: reply.submissionId,
+          status: "queued", source, sourceHash: contentHash(source), segments: [], attempts: 0, executionIds: [], createdAt: now,
+          firstParagraphAt: null, completedAt: null, error: null, producer: null, grounding: [] });
+      }
+    }
   }
   if (document.actionWindow && document.narratives.some(beat => ["queued", "generating"].includes(beat.status) &&
     document.actionWindow!.requiredAgentIds.includes(beat.agentId))) document.actionWindow.deadlineAt = null;
@@ -138,6 +177,7 @@ const groundingAxes = {
   agency: "Check only performed actions and player agency. Use each scene's actor, actionKind and outcome. Attempts and requests do not prove later actions or another person's compliance. Observation does not pick up an object or perform work. A silent use/change with an executed-method receipt does perform that method. Do not make new choices or feelings for the player.",
   evidence: "Check only results, amounts, conditions and history. Preserve observed facts, unresolved attempts and actual inventory. A speaker's claim remains attributed; a request or unsupported earlier prose is not evidence. Do not invent a prerequisite, completed test, earlier payment or prior repair.",
   speech: "Check only dialogue and attribution. Current delivered words belong to their supplied speaker; distinguish the player's own voice from the other person's reply. Do not invent, repeat, paraphrase as a second exchange, or change speech. An empty speech list permits no new spoken dialogue. References and ordinary descriptive quotations are allowed.",
+  reference: "Check whether a reader can identify each person or thing referred to using published discourse, this paragraph, and earlier paragraphs in this batch. First appearances need an intelligible introduction using available description or the source of a voice. Do not start with an unexplained definite pronoun as if the reader already met someone. Familiar local identities stay the same across pronouns, name revelations, corrections and topic changes. Clarification may explain earlier words but cannot invent new perception or dialogue.",
 } as const;
 
 export function narrativeGroundingChoices(answers: Record<string, { type: string; choice?: string }>, count: number): string[] {
@@ -149,13 +189,13 @@ export function narrativeGroundingChoices(answers: Record<string, { type: string
 
 /** Independent factual checks share one publication request per available paragraph batch. */
 export async function checkNarrativeGrounding(provider: StructuredModelProvider, scope: ModelExecutionScope,
-  source: ScenePacket, paragraphs: string[], profileId: string, fallbackProfileId: string, ordinal: number) {
+  source: ScenePacket, paragraphs: string[], profileId: string, fallbackProfileId: string, ordinal: number, discourse?: ParticipantDiscourse) {
   const evidence = narrativeEvidence(source);
-  const state = { paragraphs, scene: evidence } as unknown as JsonValue;
+  const state = { paragraphs, scene: evidence, discourse: discourse ?? null } as unknown as JsonValue;
   return executeDecisionV2(provider, { ...scope, profileId, fallbackProfileId, subjectId: source.agentId, instructionProfile: "publication",
     modelInvocation: ordinal, batch: { version: 2, view: { kind: "agent", agentId: source.agentId, projectionHash: contentHash(state) },
       dependencies: {}, state, questions: Object.fromEntries(paragraphs.flatMap((_, index) => Object.entries(groundingAxes).map(([axis, focus]) => [`paragraph${index}_${axis}`, {
-        type: "choice" as const, version: "narrative-grounding-3", instructions: { task: loadPromptAsset("user/narrative-grounding.md"), index, focus,
+        type: "choice" as const, version: "narrative-grounding-4", instructions: { task: loadPromptAsset("user/narrative-grounding.md"), index, focus,
           executedNow: evidence.observations.map(observation => ({ actor: observation.scene?.actor ?? null,
             kind: observation.scene?.actionKind ?? null, status: observation.scene?.status ?? null, receipt: observation.summary })),
         },
@@ -193,15 +233,22 @@ export function completeParagraphs(text: string): string[] {
   }
   return result;
 }
-export function renderNarrativeParagraph(text: string, source: ScenePacket): string {
+export function renderNarrativeSegment(text: string, source: ScenePacket): { text: string; mentions: DiscourseMention[] } {
+  const mentions: DiscourseMention[] = [];
+  if (/\[\[|\]\]/u.test(text.replace(/\[\[[^\]\n]+\]\]/gu, ""))) throw new Error("Narrative paragraph contains an unresolved reference");
   // Typography is not a speech act. The publication decision checks unsupported
   // quotations; references and delivered-speech completeness remain exact.
-  const rendered = text.replace(/\[\[(speech-[a-f0-9]+)\]\]/gu, (_, id: string) => {
-    const speech = source.speech.find(item => item.id === id);
-    if (!speech) throw new Error("Narrative referenced an undelivered utterance");
+  const rendered = text.replace(/\[\[([^\]\n]+)\]\]/gu, (_, token: string) => {
+    if (token.startsWith("entity:")) {
+      const separator = token.indexOf("|"), localEntityId = token.slice(7, separator), surface = token.slice(separator + 1).trim();
+      if (separator < 8 || !surface || !source.knownEntities.some(entity => entity.localEntityId === localEntityId)) throw new Error("Narrative referenced an unknown local entity");
+      mentions.push({ localEntityId, surface }); return surface;
+    }
+    const speech = source.speech.find(item => item.id === token);
+    if (!speech) throw new Error(token.startsWith("speech-") ? "Narrative referenced an undelivered utterance" : "Narrative contains an unresolved reference");
     return `“${speech.utterance}”`;
   }).trim();
-  if (!rendered || /\[\[|\]\]/u.test(rendered)) throw new Error("Narrative paragraph is empty or contains an unresolved reference");
+  if (!rendered) throw new Error("Narrative paragraph is empty");
   // A literal quote followed by its reference can produce the same utterance twice.
   let result = rendered.replace(/(“[^”]+”)(?:\s*\1)+/gu, (repeated, quote: string) =>
     source.speech.filter(speech => speech.utterance === quote.slice(1, -1)).length === 1 ? quote : repeated);
@@ -209,7 +256,17 @@ export function renderNarrativeParagraph(text: string, source: ScenePacket): str
     const escaped = speech.utterance.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
     result = result.replace(new RegExp(`${escaped}\\s*“${escaped}”`, "gu"), () => `“${speech.utterance}”`);
   }
-  return result;
+  for (const mention of explicitNarrativeMentions(result, source)) if (!mentions.some(existing => existing.localEntityId === mention.localEntityId)) mentions.push(mention);
+  return { text: result, mentions };
+}
+export function renderNarrativeParagraph(text: string, source: ScenePacket): string {
+  return renderNarrativeSegment(text, source).text;
+}
+/** Literal unique labels establish references in code-owned factual fallbacks as well. */
+export function explicitNarrativeMentions(text: string, source: ScenePacket): DiscourseMention[] {
+  return source.knownEntities.filter(entity => entity.name.length > 1 && text.includes(entity.name) &&
+    source.knownEntities.filter(other => other.name === entity.name).length === 1)
+    .map(entity => ({ localEntityId: entity.localEntityId, surface: entity.name }));
 }
 
 /** A continuation may echo its accepted prefix; published text remains immutable. */
@@ -244,5 +301,7 @@ export function narrativeFallback(source: ScenePacket, published: string[] = [])
         .replace(/^(.+)向我转移了(.+)。$/u, "你收到了$1交给你的$2。"))]
       .filter(text => text && !existing.includes(text)).filter((text, index, all) => all.indexOf(text) === index).join("\n");
   }).filter(text => text && !existing.includes(text));
-  return paragraphs.join("\n\n") || (published.length ? "" : "眼前的情况还没有出现新的变化。");
+  return paragraphs.join("\n\n") || (published.length ? "" : source.reply?.kind === "recovery"
+    ? "这一步的回应中断了，已确认的进展仍然保留。你可以接着说明刚才的意思。"
+    : source.reply ? "现有记录还不足以清楚回答这个问题。" : "眼前的情况还没有出现新的变化。");
 }

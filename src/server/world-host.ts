@@ -1,7 +1,8 @@
 import { z } from "zod";
 import { loadPromptAsset } from "../engine/prompts";
 import { agentCapabilityModels } from "../engine/models/capability-bindings";
-import { enqueueNarrative, nextNarrative, completeParagraphs, renderNarrativeParagraph, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, checkNarrativeGrounding, narrativeGroundingChoices, type NarrativeBeat } from "./world-narrative";
+import { enqueueNarrative, nextNarrative, completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, checkNarrativeGrounding, narrativeGroundingChoices, type NarrativeBeat } from "./world-narrative";
+import { participantDiscourse } from "./world-discourse";
 import { randomUUID } from "node:crypto";
 import { rmSync } from "node:fs";
 import path from "node:path";
@@ -433,7 +434,7 @@ function conversationFor(
     const run = document.runs[intent.runId];
     const beats = document.narratives.filter(beat => beat.participantId === participant.id && beat.submissionId === intent.submissionId);
     const responses = beats.filter(beat => beat.segments.length > 0).map(beat => {
-      const last = beat.source.observations.at(-1)!;
+      const last = beat.source.boundary;
       const committed = document.state.history.find(step => step.revision === last.revision);
       const activity = Object.values(committed?.temporalState.activities ?? {})
         .filter(item => item.actorId === intent.agentId).sort((a, b) => b.updatedAtSeconds - a.updatedAtSeconds || b.id.localeCompare(a.id))[0];
@@ -465,7 +466,7 @@ function conversationFor(
     });
   }
   for (const beat of document.narratives.filter(item => item.participantId === participant.id && !item.submissionId && item.segments.length)) {
-    const last = beat.source.observations.at(-1)!;
+    const last = beat.source.boundary;
     turns.push({ id: beat.id, agentId: participant.agentId, baseRevision: last.revision, createdAt: beat.createdAt,
       status: ["queued", "generating"].includes(beat.status) ? "running" : "committed",
       response: { id: beat.id, revision: last.revision, step: last.step, text: beat.segments.map(segment => segment.text).join("\n\n"),
@@ -610,7 +611,7 @@ export class WorldHost {
       if (beat.attempts >= 2) {
         this.updateNarrative(id, beat.id, item => {
           const fallback = narrativeFallback(item.source, item.segments.map(segment => segment.text));
-          if (fallback) item.segments.push({ sequence: item.segments.length, text: fallback, publishedAt: this.now().toISOString() });
+          if (fallback) item.segments.push({ sequence: item.segments.length, text: fallback, mentions: explicitNarrativeMentions(fallback, item.source), publishedAt: this.now().toISOString() });
           item.status = "fallback"; item.completedAt = this.now().toISOString(); item.firstParagraphAt ??= item.completedAt;
         });
         continue;
@@ -630,21 +631,24 @@ export class WorldHost {
       let publication = Promise.resolve(), publicationError: unknown, scheduled = 0;
       const publish = async (paragraphs: string[]) => {
         if (published >= paragraphs.length) return;
-        const ready = paragraphs.slice(published).map(paragraph => narrativeContinuation(renderNarrativeParagraph(paragraph, beat.source), prefix));
+        const rendered = paragraphs.slice(published).map(paragraph => renderNarrativeSegment(paragraph, beat.source));
+        const ready = rendered.map(paragraph => narrativeContinuation(paragraph.text, prefix));
         if (ready.every(text => !text)) { published = paragraphs.length; return; }
         const decision = await checkNarrativeGrounding(this.options.provider, scope, beat.source, ready, models.fallback, models.fallback,
-          Number.parseInt(contentHash([beat.id, beat.attempts, prefix.length + published]).slice(0, 10), 16));
+          Number.parseInt(contentHash([beat.id, beat.attempts, prefix.length + published]).slice(0, 10), 16),
+          participantDiscourse(this.read(id).document, beat.participantId, beat.id));
         const choices = narrativeGroundingChoices(decision.answers, ready.length);
         this.updateNarrative(id, beat.id, item => item.grounding.push({ start: item.segments.length, inputHash: decision.inputHash,
           choices, invocationIds: decision.audits.flatMap(audit => audit.invocations.map(invocation => invocation.id)) }));
         let checked = 0;
         while (published < paragraphs.length) {
           if (ready[checked] && choices[checked] !== "grounded") throw new Error(`Paragraph contains ${choices[checked]}: ${ready[checked]}. Continue using only the supplied scene; omit unsupported content.`);
+          const mentions = rendered[checked]!.mentions.filter(mention => ready[checked]!.includes(mention.surface));
           const text = ready[checked++]!;
           if (text) this.updateNarrative(id, beat.id, item => {
             const sequence = item.segments.length;
             const at = this.now().toISOString();
-            item.segments.push({ sequence, text, publishedAt: at }); item.firstParagraphAt ??= at;
+            item.segments.push({ sequence, text, mentions, publishedAt: at }); item.firstParagraphAt ??= at;
           });
           published++;
         }
@@ -662,8 +666,7 @@ export class WorldHost {
             kind: "model-audit", stage: "scene-narrative", owner: beat.id, round: 0, ordinal: beat.attempts + 1 }),
           promptVersion: NARRATIVE_PROMPT_VERSION, schemaName: "SceneNarrativeV1",
           system: NARRATIVE_SYSTEM, userPrompt: NARRATIVE_USER,
-          context: { previousScenes: document.narratives.filter(item => item.participantId === beat.participantId && item.id !== beat.id && item.segments.length)
-              .slice(-3).map(item => item.segments.map(segment => segment.text).join("\n\n")),
+          context: { discourse: participantDiscourse(document, beat.participantId, beat.id),
             publishedPrefix: prefix, scene: narrativeEvidence(beat.source),
             repair: beat.error },
           schema: z.object({ paragraphs: z.array(z.string().trim().min(1)).min(1) }), jsonExamplePolicy: "omit",
@@ -694,7 +697,7 @@ export class WorldHost {
           const item = paused.narratives.find(value => value.id === beat.id)!;
           const fallback = narrativeFallback(item.source, item.segments.map(segment => segment.text));
           const at = this.now().toISOString();
-          if (fallback) item.segments.push({ sequence: item.segments.length, text: fallback, publishedAt: at });
+          if (fallback) item.segments.push({ sequence: item.segments.length, text: fallback, mentions: explicitNarrativeMentions(fallback, item.source), publishedAt: at });
           item.status = "fallback"; item.error = error instanceof Error ? error.message : String(error);
           item.completedAt = at; if (item.segments.length) item.firstParagraphAt ??= at;
           const origin = paused.participantIntents.find(intent => intent.submissionId === beat.submissionId)?.runId;
@@ -1380,6 +1383,7 @@ export class WorldHost {
           step: initial.state.step,
           title: `此刻，你是${displayName}`,
           scene: origin.fallbackArrival,
+          knownEntities: Object.values(agent.belief.localEntities).map(entity => ({ localEntityId: entity.id, name: entity.name, description: entity.description })),
           possibleNextActions: ["观察四周", "确认自己所在的位置", "寻找一个可以交谈的人"],
           generated: false,
           createdAt: joinedAt,
@@ -2536,6 +2540,7 @@ export class WorldHost {
         goal: text,
         means: null,
         targetIds: [],
+        discourse: participantDiscourse(document, participant.id),
       };
       window.generation += 1;
       document.participantIntents.push({
@@ -2812,6 +2817,7 @@ export class WorldHost {
         step: document.state.step,
         title: `此刻，你是${entity.name}`,
         scene: fallbackText,
+        knownEntities: Object.values(agent.belief.localEntities).map(entity => ({ localEntityId: entity.id, name: entity.name, description: entity.description })),
         possibleNextActions: ["观察四周", "回想刚才发生的事", "确认自己接下来要做什么"],
         generated: false,
         createdAt: joinedAt,

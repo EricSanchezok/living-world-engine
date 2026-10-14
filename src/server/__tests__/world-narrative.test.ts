@@ -1,16 +1,28 @@
 import { describe, expect, it } from "vitest";
 import { decisionPromptV2 } from "../../engine/models/decision-v2";
-import { completeParagraphs, renderNarrativeParagraph, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, narrativeGroundingChoices, type ScenePacket } from "../world-narrative";
+import { completeParagraphs, renderNarrativeParagraph, renderNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, narrativeFallback, narrativeEvidence, narrativeGroundingChoices, type ScenePacket } from "../world-narrative";
 
 const source: ScenePacket = {
   participantId: "reader", agentId: "traveler", submissionId: "action", submittedAt: null, requestedAction: "问价",
   world: { name: "港口", language: "zh-CN", style: "具体自然" }, playerName: "旅人", location: "码头", memories: [], knownEntities: [],
+  boundary: { revision: 1, step: 1, worldTimeSeconds: 2 }, reply: null,
   observations: [{ id: "heard", revision: 1, step: 1, worldTimeSeconds: 2, sourceEventIds: ["uttered"], summary: "听到报价",
     scene: { actionKind: "speak", status: "succeeded", actor: "店主", attempt: "", manner: null, outcome: "话语送达。", details: [], speech: { speaker: "店主", utterance: "三枚金币；我还没同意赊账。" } } }],
   speech: [{ id: "speech-ab12", speaker: "店主", utterance: "三枚金币；我还没同意赊账。" }],
 };
 
 describe("immutable narrative paragraphs", () => {
+  it("retains participant-local references while inserting literal speech without interpreting its markup", () => {
+    const scene = structuredClone(source);
+    scene.knownEntities = [{ localEntityId: "local-person", name: "附近的人", description: "站在木门旁。" }];
+    scene.speech[0]!.utterance = "标记写的是[[entity:untrusted|某人]]，不是我的名字。";
+    expect(renderNarrativeSegment("[[entity:local-person|木门旁有个人]]说：[[speech-ab12]]", scene)).toEqual({
+      text: "木门旁有个人说：“标记写的是[[entity:untrusted|某人]]，不是我的名字。”",
+      mentions: [{ localEntityId: "local-person", surface: "木门旁有个人" }],
+    });
+    expect(() => renderNarrativeSegment("[[entity:someone-else|他]]", scene)).toThrow();
+    expect(() => renderNarrativeSegment("[[entity:local-person|]]", scene)).toThrow();
+  });
   it("uses a closed evidence policy for prose, separate from common-sense world adjudication", () => {
     const publication = decisionPromptV2("publication"), world = decisionPromptV2();
     expect(publication.system).toContain("closed record");
@@ -19,7 +31,7 @@ describe("immutable narrative paragraphs", () => {
     expect(publication.version).not.toBe(world.version);
   });
   it("requires each independent factual focus without additional publication requests", () => {
-    const answers = Object.fromEntries(["material", "agency", "evidence", "speech"].map(axis => [`paragraph0_${axis}`, { type: "choice", choice: "grounded" }]));
+    const answers = Object.fromEntries(["material", "agency", "evidence", "speech", "reference"].map(axis => [`paragraph0_${axis}`, { type: "choice", choice: "grounded" }]));
     expect(narrativeGroundingChoices(answers, 1)).toEqual(["grounded"]);
     answers.paragraph0_agency!.choice = "contradiction";
     expect(narrativeGroundingChoices(answers, 1)).toEqual(["contradiction"]);

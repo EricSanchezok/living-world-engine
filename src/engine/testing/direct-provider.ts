@@ -55,5 +55,5 @@ export function nativeAnswer(question: DecisionQuestionV2, choice: string | numb
     legend: Object.fromEntries(question.criteria.map((value, index) => [String(index), value])),
     probabilities: Object.fromEntries(question.criteria.map((_, index) => [String(index), index === 1 ? 1 : 0])), confidence: 1 };
   const value = String(choice);
-  return nativeChoice(question, value in question.criteria ? value : ["none", "unnamed", "target"].find(key => key in question.criteria) ?? Object.keys(question.criteria)[0]!);
+  return nativeChoice(question, value in question.criteria ? value : ["world_action", "none", "unnamed", "target"].find(key => key in question.criteria) ?? Object.keys(question.criteria)[0]!);
 }

@@ -1,7 +1,7 @@
 # Shared discourse and explicit interaction recovery
 
 ## Status
-Proposed
+Accepted
 Class: architecture
 
 ## Context and Problem Statement
@@ -23,7 +23,7 @@ An observation projection identifies world objects, while readable prose establi
 
 ## Decision Outcome
 
-Propose the third option under [Spec 0184](../specs/0184-conversational-continuity-and-recovery.md). Published text, local entity references and actual speech provide the shared presentation context. Canonical bindings and other minds remain owned by their existing boundaries. An explicit outcome distinguishes semantic results, unresolved components and service status; narration explains the former, while code accurately exposes the latter. Interactive time progression uses a bounded horizon instead of inferring permission from an empty action queue.
+Choose the third option under [Spec 0184](../specs/0184-conversational-continuity-and-recovery.md). Published text, local entity references and actual speech provide the shared presentation context. Canonical bindings and other minds remain owned by their existing boundaries. An explicit outcome distinguishes semantic results, unresolved components and service status; narration explains the former, while code accurately exposes the latter. Interactive time progression uses a bounded horizon instead of inferring permission from an empty action queue.
 
 ## Pros and Cons of the Options
 

@@ -4,11 +4,13 @@ import { runtimeId } from "../runtime/runtime-id";
 import type { ActionSettlement } from "./world";
 import { directValueLabel, observedKindLabel } from "./presentation";
 
-function alias(agent: AgentState, entityId: string, introductions: ObservationPacket["introductions"]): LocalEntity {
+function alias(agent: AgentState, entityId: string, introductions: ObservationPacket["introductions"], contact?: "heard" | "seen"): LocalEntity {
   const bindings = Object.values(agent.bindings).filter(binding => binding.canonicalEntityIds.length === 1 && binding.canonicalEntityIds[0] === entityId);
   if (bindings.length === 1 && agent.belief.localEntities[bindings[0]!.localEntityId]) return agent.belief.localEntities[bindings[0]!.localEntityId]!;
   const prior = introductions.find(intro => intro.canonicalEntityId === entityId); if (prior) return prior.localEntity;
-  const localEntity: LocalEntity = { id: `seen-${contentHash([agent.id, entityId]).slice(0, 24)}`, name: "附近的对象", description: "通过本次观察接触的对象，身份尚未确认。", status: "observed" };
+  const localEntity: LocalEntity = { id: `seen-${contentHash([agent.id, entityId]).slice(0, 24)}`,
+    name: contact === "heard" ? "一个陌生的声音" : contact === "seen" ? "附近的人" : "附近的对象",
+    description: contact === "heard" ? "听到了说话声，尚未辨认说话者的外貌和身份。" : "通过本次观察接触的对象，身份尚未确认。", status: "observed" };
   introductions.push({ localEntity, canonicalEntityId: entityId }); return localEntity;
 }
 function describeValue(agent: AgentState, value: FactValue, introductions: ObservationPacket["introductions"]): string {
@@ -20,12 +22,19 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
     const recipients = new Set([settlement.frame.actorId, ...settlement.deliveredToEntityIds.flatMap(id => Object.values(state.agents).filter(agent => agent.entityId === id).map(agent => agent.id))]);
     for (const ownerId of recipients) {
       const agent = state.agents[ownerId]!, introductions: ObservationPacket["introductions"] = [], renamed: LocalEntity[] = [];
+      const ownsAction = ownerId === settlement.frame.actorId;
+      const seesActor = ownsAction || settlement.actorVisibleToEntityIds?.includes(agent.entityId) === true;
+      alias(agent, settlement.frame.actorEntityId, introductions, seesActor ? "seen" : "heard");
+      const visibleEntities = ownsAction || seesActor ? [...settlement.visibleEntities] : [];
+      if (!ownsAction && seesActor && !visibleEntities.some(entity => entity.id === settlement.frame.actorEntityId)) {
+        visibleEntities.push(state.truth.entities[settlement.frame.actorEntityId]!);
+      }
       const appearanceFacts = Object.values(state.truth.facts).filter(fact =>
-        settlement.visibleEntities.some(entity => entity.id === fact.subjectId) && fact.access.kind === "public" &&
+        visibleEntities.some(entity => entity.id === fact.subjectId) && fact.access.kind === "public" &&
         ["appearance", "appearance_label"].includes(fact.predicate));
-      const facts = [...new Map([...settlement.visibleFacts, ...appearanceFacts].filter(fact => fact.access.kind === "public" ||
+      const facts = [...new Map([...(ownsAction || seesActor ? settlement.visibleFacts : []), ...appearanceFacts].filter(fact => fact.access.kind === "public" ||
         fact.access.kind === "agents" && fact.access.agentIds.includes(ownerId)).map(fact => [fact.id, fact])).values()];
-      const details: Array<{ label: string; description: string }> = [];
+      const details: NonNullable<ObservationPacket["scene"]>["details"] = [];
       const targetLabel = settlement.frame.targetEntityId ? alias(agent, settlement.frame.targetEntityId, introductions).name : "四周";
       const concreteAttempt = settlement.frame.kind === "move" ? `走向${targetLabel}`
         : settlement.frame.kind === "observe" ? settlement.frame.observationScope === "inventory" ? "清点随身物资" : `查看${targetLabel}`
@@ -56,17 +65,19 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
         const resource = state.truth.mechanics.quantities[operation.definitionId]!;
         summary += `\n本次操作${operation.kind === "consume_quantity" ? "消耗" : "产出"}了${operation.amount}${resource.unit}${resource.name}。`;
       }
-      if (ownerId === settlement.frame.actorId || settlement.frame.kind !== "observe") for (const entity of settlement.visibleEntities) {
+      if (ownerId === settlement.frame.actorId || settlement.frame.kind !== "observe") for (const entity of visibleEntities) {
         const local = alias(agent, entity.id, introductions);
         const named = settlement.namedEntityIds.includes(entity.id);
         const introduced = introductions.find(intro => intro.localEntity.id === local.id);
         const appearance = facts.find(fact => fact.subjectId === entity.id && fact.predicate === "appearance")?.description;
-        const label = named ? entity.name : facts.find(fact => fact.subjectId === entity.id && fact.predicate === "appearance_label")?.description ?? local.name;
-        const next = { ...local, name: label === "附近的对象" ? observedKindLabel(entity.kind) : label,
-          description: appearance ?? local.description };
+        const generic = ["附近的对象", "附近的人", "一个陌生的声音"].includes(local.name);
+        const label = named ? entity.name : generic
+          ? facts.find(fact => fact.subjectId === entity.id && fact.predicate === "appearance_label")?.description ?? local.name : local.name;
+        const next = { ...local, name: ["附近的对象", "一个陌生的声音"].includes(label) ? observedKindLabel(entity.kind) : label,
+          description: appearance ?? (local.name === "一个陌生的声音" ? "现在可以看见说话的人，但身份还没有确认。" : local.description) };
         if (introduced) introduced.localEntity = next;
         else if (next.name !== local.name || next.description !== local.description) renamed.push(next);
-        details.push({ label: next.name, description: next.description });
+        details.push({ localEntityId: next.id, label: next.name, description: next.description });
         summary += `\n${next.name}：${appearance ?? "你能看见其所在的位置。"}`;
       }
       // A semantic visibility answer cannot grant access to another actor's private truth.
@@ -77,9 +88,10 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       const actorEntity = alias(agent, settlement.frame.actorEntityId, introductions);
       const actor = ownerId === settlement.frame.actorId ? "你" : renamed.find(entity => entity.id === actorEntity.id)?.name ?? actorEntity.name;
       const packet: ObservationPacket = { id, observerId: ownerId, step, kind: "outcome", summary, introductions, apparentClaims: [], sourceEventIds: [events[index]!.id],
-        scene: { actionKind: settlement.frame.kind, status: settlement.outcome.status, actor, attempt: ownerId === settlement.frame.actorId ? concreteAttempt : "", outcome: settlement.outcome.summary.replace(/^你/u, actor),
-          manner: completedExpression ? settlement.frame.expression?.manner ?? null : null,
-          speech: voiced && (ownerId === settlement.frame.actorId || spoken) ? { speaker: actor, utterance: voiced } : null, details } };
+        scene: { actionKind: settlement.frame.kind, status: settlement.outcome.status, actor, actorLocalId: actorEntity.id,
+          attempt: ownerId === settlement.frame.actorId ? concreteAttempt : "", outcome: settlement.outcome.summary.replace(/^你/u, actor),
+          manner: completedExpression && seesActor ? settlement.frame.expression?.manner ?? null : null,
+          speech: voiced && (ownerId === settlement.frame.actorId || spoken) ? { speaker: actor, speakerLocalId: actorEntity.id, utterance: voiced } : null, details } };
       const evidenceId = runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "evidence", stage: "direct-perception", owner: ownerId, round: 0, ordinal: index });
       const patch: BeliefPatch = { agentId: ownerId, baseRevision: state.revision + 1, operations: [{ kind: "upsert_evidence", evidence: {
         id: evidenceId, kind: settlement.frame.kind === "reflect" ? "inference" : spoken ? "testimony" : "observation", description: summary, sourceId: id, step } },

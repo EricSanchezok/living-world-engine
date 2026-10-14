@@ -60,6 +60,8 @@ export interface PreparedDirectAction {
   actionId: string; reads: Record<string, string>; status: ActionOutcome["status"]; summary: string;
   operations: WorldDeltaOperation[]; visibleFactIds: string[]; visibleEntityIds: string[]; deliveredToEntityIds: string[];
   namedEntityIds: string[];
+  /** Recipients who can see the actor, independently of hearing the utterance. */
+  actorVisibleToEntityIds?: string[];
   randomRequests: DiscreteRandomRequest[];
   randomBindings: Array<{ factId: string; requestId: string; stepId: string }>;
   sharedClaims: Array<{ poolId: string; amount: number }>;
@@ -90,6 +92,7 @@ export interface DirectStepRecord {
   operations: WorldDeltaOperation[]; events: WorldEvent[]; outcomes: ActionOutcome[];
   observations: ObservationPacket[]; beliefPatches: BeliefPatch[]; characterPatches: CharacterPatch[];
   cognition: DirectCognitiveUpdate[];
+  presentation?: import("../contracts/discourse").PresentationReply[];
   decisions: DirectDecisionUse[]; modelAudits: ModelExecutionAudit[];
   rng: SimulationState["truth"]["rng"];
   randomRequests: DiscreteRandomRequest[]; randomResults: DiscreteRandomResult[];

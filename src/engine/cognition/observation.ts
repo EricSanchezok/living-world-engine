@@ -147,6 +147,10 @@ export function validateObservations(
         throw new Error(`observation ${packet.id} introduces unknown canonical entity`);
       }
     }
+    for (const id of [packet.scene?.actorLocalId, packet.scene?.speech?.speakerLocalId,
+      ...(packet.scene?.details.map(detail => detail.localEntityId) ?? [])]) {
+      if (id && !localEntities[id]) throw new Error(`observation ${packet.id} has an unknown local scene reference`);
+    }
     for (const claim of packet.apparentClaims) {
       const binding = `${claim.subjectId}\u0000${claim.predicate}`;
       if (identityLedger.claimBindings.has(claim.id)) {

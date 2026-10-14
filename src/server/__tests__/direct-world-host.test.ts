@@ -183,10 +183,11 @@ describe("direct world through persistent WorldHost", () => {
   it("returns a failed player task for retry without running unrelated NPCs or changing physical state", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-failure-"));
     const f = directTestProvider(wire => {
-      if (JSON.stringify(wire.state).includes("fail-this-request")) return new Response("unavailable", { status: 401 });
+      if (wire.questions.operation && JSON.stringify(wire.state).includes("fail-this-request") &&
+        (wire.state as { submittedAction?: { rawText: string } }).submittedAction?.rawText === "fail-this-request") return new Response("unavailable", { status: 401 });
       return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id, nativeAnswer(q,
         id === "expression" ? 0 : id.startsWith("paragraph") ? "grounded" : id === "operation" ? "observe" : id === "target" ? "self" : id.includes("outcome") ? "succeeded" : "none")]));
-    }, createText);
+    }, wire => (directCreationContext(wire).scene as { reply?: unknown } | undefined)?.reply ? { paragraphs: ["刚才那一步还没有执行起来，眼前的情况没有因此改变。你可以重新说明想做的事。"] } : createText(wire));
     await f.registry.capture();
     const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
     const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
@@ -197,9 +198,11 @@ describe("direct world through persistent WorldHost", () => {
       const participant = Object.values(database.readInstance(id).document.participants)[0]!;
       await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "first-fails", text: "fail-this-request" });
       for (let i = 0; i < 100 && database.readInstance(id).document.state.revision === 0; i++) await new Promise(resolve => setTimeout(resolve, 10));
+      await host.drainNarratives(id);
       const failed = database.readInstance(id).document;
       expect(Object.values(failed.runs).find(run => run.rootIntents.some(intent => intent.submissionId === "first-fails"))?.status).toBe("failed");
-      expect(failed.state.truth).toEqual(world.initialState.truth); expect(f.transport).toHaveBeenCalledTimes(1);
+      expect(failed.state.truth).toEqual(world.initialState.truth); expect(f.transport).toHaveBeenCalledTimes(3);
+      expect(failed.narratives[0]).toMatchObject({ status: "complete", source: { reply: { kind: "recovery" } }, segments: [{ text: "刚才那一步还没有执行起来，眼前的情况没有因此改变。你可以重新说明想做的事。" }] });
       expect(failed.actionWindow, JSON.stringify({ revision: failed.state.revision, runs: failed.runs })).not.toBeNull();
       expect(failed.actionWindow?.requiredAgentIds).toContain("player");
       expect(replaySimulationState(failed.state)).toEqual(failed.state);
@@ -217,7 +220,7 @@ describe("direct world through persistent WorldHost", () => {
       const player = context.perspective?.agentId === "player";
       return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
         let choice = id.includes("outcome") ? "succeeded" : id.includes("goal_status") || id.includes("belief_status") ? "unchanged"
-          : id.includes("delivery") ? "delivered" : id.includes("visible") || id.includes("entity") ? "visible" : id.includes("fact") ? "unchanged" : "none";
+          : id.includes("delivery") ? "delivered" : id.includes("visible") || id.includes("actor_visibility") || id.includes("entity") ? "visible" : id.includes("fact") ? "unchanged" : "none";
         if (id.startsWith("paragraph")) choice = "grounded";
         if (id === "operation") choice = player && playerDecisions === 1 ? "observe" : "speak";
         if (id === "target" || id === "recipient") choice = !player ? "traveler" : playerDecisions === 1 ? "self" : q.type === "choice"
@@ -243,7 +246,7 @@ describe("direct world through persistent WorldHost", () => {
       for (let i = 0; i < 300 && database.readInstance(id).document.state.revision < 3; i++) await new Promise(resolve => setTimeout(resolve, 10));
       await host.drainNarratives(id);
       const document = database.readInstance(id).document, state = document.state;
-      expect(state.history.map(step => step.actions[0]?.actorId)).toEqual(["player", "player", "keeper"]);
+      expect(state.history.map(step => step.actions[0]?.actorId), JSON.stringify({ control: state.executionState, runs: document.runs })).toEqual(["player", "player", "keeper"]);
       expect(document.narratives).toHaveLength(2);
       expect(document.narratives[0]!.source.observations).toHaveLength(2);
       expect(state.history[0]!.directEvent!.control.completedSubmissionIds).not.toContain("find-and-ask");
