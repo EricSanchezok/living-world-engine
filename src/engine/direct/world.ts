@@ -118,10 +118,11 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     const effectFacts = ["use", "change"].includes(frame.kind)
       ? orderedValues(state.truth.facts).filter(fact => effectSubjects.has(fact.subjectId)) : targetFacts;
     if (["use", "change"].includes(frame.kind)) {
-      if (!capability) questions[`${prefix}_expression`] = question("Can the existing properties and authored mechanical procedures represent the requested immediate RESULT? Choose existing when an available procedure or property change expresses that result, including a random outcome. Operating steps, tool handling, taking readings, or a differently worded method do not themselves require a new capability. Expand only for a genuinely missing result concept or new constructed object; never invent a second success property alongside an existing authored result.", {
+      if (!capability) questions[`${prefix}_expression`] = question("How will this immediate result be represented? existing requires a specific available property or authored procedure that actually expresses the result. An unrelated appearance or object description is insufficient. A new ordinary posture, temporary use or bodily relation can need expansion even though it is familiar common sense; it need not be an exotic ability. Use no_change only for a feasible method whose immediate purpose has no persistent effect or whose intended state already holds. Do not use it to silently drop a requested state change. A differently worded method with the same existing result needs no duplicate property.", {
         action: frame as unknown as JsonValue, existingProperties: effectFacts as unknown as JsonValue,
         authoredProcedures: definition.randomDistributions as unknown as JsonValue }, {
-        existing: "Existing properties and mechanical operations express the immediate effect, or this attempt has no justified effect",
+        existing: "A specific existing property or authored procedure expresses the immediate effect",
+        no_change: "The method can be performed, but its immediate purpose entails no new persistent change or its intended state already holds",
         expand: "A plausible new qualitative property, construct or capability is needed to express the actual intended effect",
       });
       for (const [ordinal, fact] of effectFacts.entries()) {
@@ -403,7 +404,9 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         const method = answers[`${prefix}_capability`] && selected(answers, `${prefix}_capability`) === "apply"
           ? decisions.control.capabilities.find(capability => capability.id === frame.capabilityId) : null;
         if (method && !noConfirmedEffect && !ongoing) detail = `本次已执行的方法：${method.description}。具体结果以观察到的状态为准。`;
-        if (noConfirmedEffect) status = "partial";
+        const completedWithoutChange = noConfirmedEffect && status === "succeeded" && selected(answers, `${prefix}_expression`) === "no_change";
+        if (completedWithoutChange) detail = `本次已执行的方法：${frame.expression?.attempt ?? frame.proposal.rawText}。没有产生新的持续状态变化。`;
+        else if (noConfirmedEffect) status = "partial";
         if (unboundRandomEffect) { status = "partial"; detail = "本次程序已执行并记录实际抽取结果，结果对应的状态仍待确认。"; }
       }
       // The draft summary is creative intent, not an executed action receipt.

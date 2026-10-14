@@ -38,7 +38,8 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
     interaction: z.enum(["clarification", "world_action", "request_complete"]),
     action: z.object({ ...fieldShape, attempt: z.string(), utterance: z.string().nullable()
       .describe("The sole actual spoken text, or explicitly requested private reflection, for this step. No stage directions or unsolicited additions; null for a purely physical action or clarification."), manner: z.string().nullable(),
-      literalQuote: z.enum(["none", ...input.quotes.map((_, index) => `q${index}`)] as [string, ...string[]]) }),
+      literalQuote: z.enum(["none", "input", ...input.quotes.map((_, index) => `q${index}`)] as [string, ...string[]])
+        .describe("For ordinary dialogue or a conversational follow-up, choose input: code speaks the player's exact input and ignores generated utterance. Choose qN for an explicit quoted line. Choose none only when this is not speech or stage directions require composing the requested words.") }),
     cognition: z.record(z.string(), z.unknown()).optional(),
   });
   const audits: ModelExecutionAudit[] = [];
@@ -92,6 +93,8 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   }
   const action = generated.value.action as Record<string, string | null>;
   const operation = action.operation;
+  const request = state.submittedAction as { rawText: string };
+  if (operation === "speak" && action.literalQuote === "input") action.utterance = request.rawText;
   const answer = (choice: string): DecisionAnswerV2 => ({ type: "choice", choice, probabilities: null, confidence: null });
   const answers: Record<string, DecisionAnswerV2> = Object.fromEntries(Object.keys(catalog).map(id => [id, answer(action[id]!)]));
   for (const [id, question] of Object.entries(cognition)) {
@@ -101,8 +104,7 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   answers.interaction = answer(generated.value.interaction);
   answers.speech = answer(action.utterance ? "create" : "none");
   answers.reflection = answer(action.utterance ? "create" : "none");
-  const quote = action.literalQuote === "none" ? null : input.quotes[Number(action.literalQuote!.slice(1))];
-  const request = state.submittedAction as { rawText: string };
+  const quote = ["none", "input"].includes(action.literalQuote ?? "none") ? null : input.quotes[Number(action.literalQuote!.slice(1))];
   let utterance = action.utterance?.trim() || null;
   if (utterance && quote) utterance = quote;
   // Copying the complete input does not authorize appending another player's reply.

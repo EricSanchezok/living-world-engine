@@ -19,7 +19,7 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
   creationResponse?: unknown; creationResponses?: unknown[]; missingCoverage?: boolean; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
   recipient?: string; resolvedRecipient?: string; searchLocation?: string; transferAuthority?: string; transferExecution?: string;
   reactionProgress?: string; playerProgress?: string; duplicateIdentity?: boolean; timerSeconds?: number; interaction?: string; duration?: string; actorVisible?: boolean;
-  readingOverrides?: Record<string, string>; factValues?: Record<string, string> } = {}) {
+  readingOverrides?: Record<string, string>; factValues?: Record<string, string>; effectRepresentation?: "existing" | "no_change" | "expand" } = {}) {
   let creations = 0;
   const f = directTestProvider(wire => {
     if (!wire.questions) {
@@ -51,7 +51,7 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
       if (id === "accept") value = "apply";
       if (id.startsWith("coverage")) value = options.missingCoverage || options.creationResponses && creations === 1 ? "missing" : "complete";
       if (id.startsWith("identity")) value = options.duplicateIdentity && creations === 1 ? "duplicate" : "distinct";
-      if (id.endsWith("_expression")) value = options.effectExpansion ? "expand" : "existing";
+      if (id.endsWith("_expression")) value = options.effectRepresentation ?? (options.effectExpansion ? "expand" : "existing");
       if (id.endsWith("_movement")) value = options.movement ?? "enter";
       if (/_fact\d+$/u.test(id)) {
         const instructions = q.instructions as { task?: { data?: { fact?: { predicate: string } } }; data?: { fact?: { predicate: string } } };
@@ -87,6 +87,48 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("selects the literal input independently of an unauthorized generated speech expansion", async () => {
+    const words = "刚才那个问题，麻烦继续说。";
+    const f = await fixture({ operation: "speak", recipient: "guard", creationEnabled: true,
+      creationResponse: { attempt: "请对方继续", utterance: "我先付钱，再替你把门修好。", manner: null } });
+    const transport = f.transport.getMockImplementation()!;
+    f.transport.mockImplementation(async (...args) => {
+      const wire = JSON.parse(String(args[1]?.body));
+      const response = await transport(...args);
+      if (wire.questions || !directCreationContext(wire).playerReading) return response;
+      const body = await response.clone().json(), value = JSON.parse(body.choices[0].message.content);
+      value.action.literalQuote = "input";
+      body.choices[0].message.content = JSON.stringify(value);
+      return Response.json(body);
+    });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request(words));
+    expect(result.state.history[0]!.directEvent!.frames[0]!.utterance).toBe(words);
+    expect(result.committed.observations.find(observation => observation.observerId === "keeper")?.scene?.speech?.utterance).toBe(words);
+    expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("represents an ordinary new posture on the actor through the reusable effect path", async () => {
+    const f = await fixture({ operation: "change", target: "door", effectExpansion: true, creationEnabled: true,
+      creationResponse: { description: "Crouch beside the target", applicability: "The actor can crouch in this space",
+        effectDescription: "The actor is crouching", effects: [{ kind: "fact", subject: "actor", predicate: "posture", value: "crouching", description: "蹲在目标旁边。" }] } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("在门旁蹲下"));
+    expect(Object.values(result.state.truth.facts)).toContainEqual(expect.objectContaining({ subjectId: "player", predicate: "posture", value: { kind: "text", value: "crouching" } }));
+    expect(result.committed.outcomes[0]?.status).toBe("succeeded");
+    expect(Object.keys(result.state.truth.entities)).toEqual(Object.keys(f.world.initialState.truth.entities));
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it.each(["succeeded", "partial", "failed"])("distinguishes an admitted method without persistent effects from an unconfirmed result: %s", async outcome => {
+    const f = await fixture({ operation: "use", target: "door", effectRepresentation: "no_change", outcome });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("用指尖轻敲一下门"));
+    expect(result.committed.outcomes[0]?.status).toBe(outcome);
+    expect(result.committed.outcomes[0]!.summary.includes("本次已执行的方法")).toBe(outcome === "succeeded");
+    expect(result.state.truth.facts).toEqual(f.world.initialState.truth.facts);
+    expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it.each([false, true])("repairs an omitted executed operation once and retains both audits (repeat failure: %s)", async repeatFailure => {
     const f = await fixture({ operation: "observe", target: "door", creationEnabled: true,
       creationResponse: { description: "门在眼前。", entities: [], facts: [], events: [] } });
