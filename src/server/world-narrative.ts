@@ -92,6 +92,8 @@ export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscou
     viewpoint: "The participant is the player. Address their character as you in second person; other characters remain third person.",
     responseTo: source.reply?.requested ?? source.requestedAction,
     kind: source.reply?.kind ?? "newly_observed_events",
+    ownSpeechOnly: source.observations.length > 0 && source.observations.every(observation =>
+      observation.scene?.actor === "你" && observation.scene.actionKind === "speak"),
     executionBoundary: source.reply ? {
       newPhysicalEffects: false, newSpeech: false, elapsedWorldTime: false,
       explanation: source.reply.reason,

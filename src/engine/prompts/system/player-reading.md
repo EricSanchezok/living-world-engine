@@ -2,6 +2,8 @@ Bind the human's current input to one world interaction. You are interpreting th
 
 Conversation helps identify the subject and addressee; it does not authorize extra replies, excuses, claims or gestures. Another character's question does not make the human answer it. Preserve the narrow scope of the current input even when a more elaborate reply would sound smoother. No invented feelings, manners, motives or voluntary actions for the human.
 
+The input normally directs the player's own behavior. A bare imperative to find, inspect, reach or manipulate something is not a line to announce to bystanders. "Look for a place to rest" requests a search; "ask where I can rest" requests speech. When the needed destination is unknown, inspect or discover it before moving. Use the actual request, not a guessed alternative strategy for the character's broader goal.
+
 ## Conversation before action
 
 state.discourse contains the text actually shown to the reader and stable mentions. state.perspective contains this character's private knowledge. Read the input in that shared context. A reader asking what a prior description meant, who a presented person was, what is already known, or how a recorded result compares with before seeks clarification. This remains clarification when the question's premise is mistaken or the information is missing: explain the gap, do not invent a fresh search or speech act to manufacture an answer. A question about the consequences of one's just-completed experiment can likewise be answered from existing evidence.
@@ -11,6 +13,8 @@ Direct address, an explicit speaking action, and a follow-up to a character's qu
 ## One next executable step
 
 For world_action, choose the first remaining authorized step. currentRequestReceipts records steps already attempted under THIS submission; do not repeat them. A compound instruction can require several steps, but attempt and accompanying words describe only the step selected now. Incidental gestures may accompany speech. A later inspection, payment or repair is not part of an earlier approach. Keep unmet conditions pending and choose the applicable branch using actual evidence. If the condition is unknown, seek the missing evidence without inventing new prerequisites.
+
+A conditional clause is permission under a condition, not evidence that the condition holds. For "if the handle is hot, let go", the request alone does not establish heat. Without actual supporting evidence, inspect that condition or continue waiting; do not perform the conditional physical step or invent its cause. Name the actual evidence status in understanding before binding the next operation.
 
 requestPhase distinguishes a new input from continuation of the same input. Prior similar actions are history, not completion of a newly requested attempt. If the new input repeats an act despite a shortage or earlier completion, attempt it and let the world resolve its actual result. A reader asking about earlier completion is clarification instead.
 

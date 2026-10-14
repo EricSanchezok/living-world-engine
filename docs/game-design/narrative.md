@@ -60,6 +60,8 @@ An unstarted beat containing only the player's unspoken approach, observation or
 
 The narrator and publication check share a task containing new observed receipts, current delivered speech, text already published for the submission and local identities requiring a first introduction. ScenePacket snapshots complete current self-holdings through the authorized participant perspective. Current receipts and observed properties establish facts; published discourse resolves references and supplies continuity. Earlier requests and prose do not authorize new actions or override current inventory.
 
+A packet containing only the participant's speech explicitly marks that scope for narration and publication. It supplies the actual words and their requested delivery; reactions, silence and refusal require separate observed evidence. First narrative mention identifies an existing person without implying a new arrival. Player interpretation distinguishes a direction to perform an act from an instruction to say something, and establishes a conditional request's prerequisite from evidence before selecting its physical branch.
+
 A recovery packet also retains preceding committed observations from the same submission. Its no-new-action boundary applies only to the interrupted next step; the narrator preserves earlier elapsed waits, payments and other effects and identifies the remaining part for retry. Pending merged scenes refresh their location alongside their latest boundary and properties. Hearing actual speech is adjudicated separately from willingness to answer; a lack of confirmed delivery does not establish deliberate refusal.
 
 ## Perceived action relations

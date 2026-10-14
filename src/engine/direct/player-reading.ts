@@ -27,10 +27,10 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   const { actionPolicy: _policy, actionKinds: _kinds, ...context } = state;
   void _policy; void _kinds;
   const schema = z.object({
-    understanding: z.string().describe("Brief semantic summary of the requested interaction and the next unperformed step, not a predicted result."),
+    understanding: z.string().describe("Briefly identify the intended interaction and next unperformed step. If there is a prerequisite, state whether actual evidence supports it or it remains unknown. Do not predict a result."),
     interaction: z.enum(["clarification", "world_action"]),
     action: z.object({ ...fieldShape, attempt: z.string(), utterance: z.string().nullable()
-      .describe("The sole actual spoken text for this step, without stage directions or unsolicited additions; null when no speech is requested."), manner: z.string().nullable(),
+      .describe("The sole actual spoken text, or explicitly requested private reflection, for this step. No stage directions or unsolicited additions; null for a purely physical action or clarification."), manner: z.string().nullable(),
       literalQuote: z.enum(["none", ...input.quotes.map((_, index) => `q${index}`)] as [string, ...string[]]) }),
     cognition: z.record(z.string(), z.unknown()).optional(),
   });

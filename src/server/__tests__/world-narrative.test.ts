@@ -12,6 +12,15 @@ const source: ScenePacket = {
 };
 
 describe("immutable narrative paragraphs", () => {
+  it("limits an own-speech packet without treating an absent listener receipt as a reaction", () => {
+    const scene = structuredClone(source);
+    scene.observations[0]!.scene!.actor = "你";
+    expect(narrativeTask(scene)).toMatchObject({ ownSpeechOnly: true });
+    scene.observations.push(structuredClone(source.observations[0]!));
+    expect(narrativeTask(scene)).toMatchObject({ ownSpeechOnly: false });
+    scene.observations = [];
+    expect(narrativeTask(scene)).toMatchObject({ ownSpeechOnly: false });
+  });
   it("makes recovery's unexecuted request distinct from actual event receipts", () => {
     const scene = structuredClone(source);
     scene.observations = []; scene.speech = [];
