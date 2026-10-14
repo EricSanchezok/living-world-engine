@@ -59,6 +59,7 @@ import { quantityId, runtimeId } from "../engine/runtime/runtime-id";
 import { SimulationEngine } from "../engine/runtime/simulation";
 import { WorldQuiescentError } from "../engine/runtime/execution";
 import type { DirectRuntimeState } from "../engine/direct/contracts";
+import { participantReactionIds } from "../engine/direct/foreground";
 import {
   toWorldRuntimeContract,
   validateWorldModelProfiles,
@@ -331,8 +332,10 @@ function externalDecisionAgentIds(document: WorldInstanceDocument, deferForReact
     const control = document.state.executionState.data as unknown as DirectRuntimeState;
     const busy = new Set([...control.activities.filter(frame => frame.dueAtSeconds !== null).map(frame => frame.actorId),
       ...Object.entries(control.intents).filter(([, intent]) => intent.activeSubmission && ["ready", "active"].includes(intent.status)).map(([id]) => id)]);
-    const reacting = Object.entries(control.intents).some(([id, intent]) => document.policyBindings[id]?.kind === "model" && intent.causeActionId && (intent.status === "ready" || intent.status === "active"));
-    if (reacting && deferForReactions) return [];
+    const participants = Object.values(document.policyBindings).filter(binding => binding.kind === "external").map(binding => binding.agentId);
+    const roots = currentRun(document)?.rootIntents;
+    const reacting = participantReactionIds(document.state, control, participants, roots?.length ? roots.map(root => root.submissionId) : undefined);
+    if ([...reacting].some(id => document.policyBindings[id]?.kind === "model") && deferForReactions) return [];
     return Object.values(document.policyBindings).filter(binding => binding.kind === "external" && !busy.has(binding.agentId)).map(binding => binding.agentId).sort();
   }
   const decisionAgents = new Set(document.state.history.at(-1)?.decisionPoints.map((point) => point.agentId) ?? []);
@@ -2272,7 +2275,8 @@ export class WorldHost {
         intent.failure?.atRevision === document.state.revision - 1 && intent.failure.servicePause)?.failure?.servicePause;
       const directRootComplete = directControl && runRecord.rootIntents.length > 0 && runRecord.rootIntents.every(intent =>
         directControl.completedSubmissionIds.includes(intent.submissionId)) &&
-        !Object.entries(directControl.intents).some(([id, intent]) => document.policyBindings[id]?.kind === "model" && intent.causeActionId && (intent.status === "ready" || intent.status === "active"));
+        ![...participantReactionIds(document.state, directControl, runRecord.rootIntents.map(intent => intent.agentId),
+          runRecord.rootIntents.map(intent => intent.submissionId))].some(id => document.policyBindings[id]?.kind === "model");
       const rootComplete = directRootComplete || runRecord.activityIds.length > 0 && runRecord.activityIds.every((activityId) => {
         const status = document.state.truth.activities[activityId]?.status;
         return status !== "active" && status !== "paused" && status !== "queued" && status !== "ready";

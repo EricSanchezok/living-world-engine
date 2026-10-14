@@ -24,6 +24,7 @@ import type { PresentationReply } from "../contracts/discourse";
 import { activityBoundary, admitActivities } from "./activities";
 import { directPerception } from "./perception";
 import { commitDirectRecord, directCandidate, sealDirectRecord } from "./canonical";
+import { participantReactionIds } from "./foreground";
 
 export interface DirectWorldConfig extends CapabilityModelOverrides { creationEnabled: boolean }
 export const DIRECT_WORLD_CONFIG: DirectWorldConfig = { decision: null, creation: null, fallback: null, creationEnabled: true };
@@ -98,7 +99,9 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
     }
     const ready = Object.entries(control.intents).filter(([id, intent]) => input.policyRoster[id]?.kind === "model" && intent.status === "ready")
       .sort(([a, left], [b, right]) => right.urgency - left.urgency || a.localeCompare(b));
-    const reactions = ready.filter(([, intent]) => intent.causeActionId !== null);
+    const foreground = participantReactionIds(source, control, Object.entries(input.policyRoster)
+      .filter(([, policy]) => policy.kind === "external").map(([id]) => id));
+    const reactions = ready.filter(([id]) => foreground.has(id));
     const pendingPlayers = Object.entries(control.intents).filter(([id, intent]) => input.policyRoster[id]?.kind === "external" && intent.status === "ready" && intent.activeSubmission).map(([id]) => id);
     // A submitted player action does not wait for unrelated initial NPC work.
     const owners = submissions.length ? submissions.map(action => action.agentId) : reactions.length ? reactions.map(([id]) => id)
@@ -225,7 +228,11 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
       const owner = source.agents[observation.observerId]!;
       const index = events.findIndex(event => observation.sourceEventIds.includes(event.id)); const frame = settlements[index]?.frame;
       if (frame && frame.actorId !== owner.id && !Object.values(owner.belief.evidence).some(evidence =>
-        evidence.step === owner.observationCursorStep && evidence.description === observation.summary)) wakeIntent(control, owner.id, "observation", frame.id);
+        evidence.step === owner.observationCursorStep && evidence.description === observation.summary)) {
+        const intent = control.intents[owner.id]!;
+        const continuing = !frame.submissionId && intent.wakeReasons.includes("reaction-progress");
+        wakeIntent(control, owner.id, "observation", continuing ? intent.causeActionId : frame.id);
+      }
     }
     const operations: WorldDeltaOperation[] = settlements.flatMap(settlement => settlement.operations);
     for (const operation of operations) if (operation.kind === "create_agent") {

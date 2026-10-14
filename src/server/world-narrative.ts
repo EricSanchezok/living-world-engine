@@ -91,12 +91,18 @@ export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscou
     viewpoint: "The participant is the player. Address their character as you in second person; other characters remain third person.",
     responseTo: source.reply?.requested ?? source.requestedAction,
     kind: source.reply?.kind ?? "newly_observed_events",
+    executionBoundary: source.reply ? {
+      newPhysicalEffects: false, newSpeech: false, elapsedWorldTime: false,
+      explanation: source.reply.reason,
+      requestedButNotExecuted: source.reply.kind === "recovery" ? source.reply.requested : null,
+    } : null,
     newReceipts: source.observations.map(observation => ({ id: observation.id,
       actor: observation.scene?.actor ?? null, actorLocalId: observation.scene?.actorLocalId ?? null,
       operation: observation.scene?.actionKind ?? null, status: observation.scene?.status ?? null,
       action: observation.scene?.action ?? null,
       actualResult: executedDescription({ ...observation, scene: observation.scene ?? undefined }) })),
     playerCurrentHoldings: source.currentHoldings?.quantities.map(quantity => `You currently hold ${quantity.amount} ${quantity.unit} of ${quantity.name}.`) ?? [],
+    backgroundUse: "Holdings and old properties constrain accuracy; mention them only when they answer the current request or changed in the new receipts.",
     newSpeech: source.speech,
     publishedForThisRequest: discourse?.exchanges.filter(exchange => exchange.submissionId === source.submissionId)
       .flatMap(exchange => exchange.paragraphs.map(paragraph => paragraph.text)) ?? [],
@@ -163,7 +169,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
       if (failed && failed.atRevision === step.baseRevision && !failed.servicePause && intent.activeSubmission) {
         replies.push({ submissionId: intent.activeSubmission.submissionId, agentId: participant.agentId, kind: "recovery",
           requested: intent.activeSubmission.rawText, focusLocalEntityId: null,
-          reason: "The interpretation or adjudication of this step was interrupted. This failed step submitted no new physical effect. Explain the actual saved progress and what remains unresolved without inventing a world obstacle or a diagnosis." });
+          reason: "Processing this requested step failed before it could submit a world result. The requested action, including any wait, did not execute in this step. Explain the processing interruption in ordinary language, preserve earlier confirmed progress, and say the person can restate or retry the pending step. Do not invent a physical obstacle or a character's refusal." });
       }
       for (const reply of replies) {
         const id = `reply-${contentHash([participant.id, step.revision, reply.submissionId]).slice(0, 24)}`;
@@ -219,6 +225,7 @@ export async function checkNarrativeGrounding(provider: StructuredModelProvider,
     modelInvocation: ordinal, batch: { version: 2, view: { kind: "agent", agentId: source.agentId, projectionHash: contentHash(state) },
       dependencies: {}, state, questions: Object.fromEntries(paragraphs.flatMap((_, index) => Object.entries(groundingAxes).map(([axis, focus]) => [`paragraph${index}_${axis}`, {
         type: "choice" as const, version: "narrative-grounding-4", instructions: { task: loadPromptAsset("user/narrative-grounding.md"), index, focus,
+          executionBoundary: source.reply ? { kind: source.reply.kind, noNewActionOrElapsedTime: true, requestedButNotExecuted: source.reply.requested } : null,
           executedNow: evidence.observations.map(observation => ({ actor: observation.scene?.actor ?? null,
             kind: observation.scene?.actionKind ?? null, status: observation.scene?.status ?? null, receipt: observation.summary })),
         },
@@ -263,10 +270,14 @@ export function renderNarrativeSegment(text: string, source: ScenePacket): { tex
   // Typography is not a speech act. The publication decision checks unsupported
   // quotations; references and delivered-speech completeness remain exact.
   const rendered = text.replace(/\[\[([^\]\n]+)\]\]/gu, (_, token: string) => {
-    if (token.startsWith("entity:")) {
-      const separator = token.indexOf("|"), localEntityId = token.slice(7, separator), surface = token.slice(separator + 1).trim();
-      if (separator < 8 || !surface || !source.knownEntities.some(entity => entity.localEntityId === localEntityId)) throw new Error("Narrative referenced an unknown local entity");
-      mentions.push({ localEntityId, surface }); return surface;
+    if (token.includes("|") && !token.startsWith("speech-")) {
+      const separator = token.indexOf("|"), reference = token.slice(0, separator), surface = token.slice(separator + 1).trim();
+      const key = reference.slice(reference.lastIndexOf(":") + 1);
+      const exact = source.knownEntities.find(entity => entity.localEntityId === key);
+      const named = source.knownEntities.filter(entity => entity.name === key);
+      const entity = exact ?? (named.length === 1 ? named[0] : undefined);
+      if (!surface || !entity) throw new Error("Narrative referenced an unknown local entity");
+      mentions.push({ localEntityId: entity.localEntityId, surface }); return surface;
     }
     const speech = source.speech.find(item => item.id === token);
     if (!speech) throw new Error(token.startsWith("speech-") ? "Narrative referenced an undelivered utterance" : "Narrative contains an unresolved reference");
@@ -327,7 +338,8 @@ export function narrativeFallback(source: ScenePacket, published: string[] = [])
     if (!scene) return observation.summary;
     const factualLines = observation.summary.split("\n").slice(1).filter(line =>
       line.startsWith("随身物资：") || line.includes("转移了") || line.includes("当前状态：") ||
-      line.startsWith("本次操作消耗了") || line.startsWith("本次操作产生了"));
+      line.startsWith("本次操作消耗了") || line.startsWith("本次操作产生了") ||
+      scene.actionKind === "observe" && scene.action?.target && line.startsWith(`${scene.action.target.label}：`));
     const outcome = scene.outcome === "行动已完成。" && factualLines.some(line => line.includes("转移了")) ? "" :
       scene.outcome.replace(/^本次已执行的方法：(.+?)。+具体结果以观察到的状态为准。$/u, (_, method: string) => `${scene.actor}${method}。`);
     return [scene.speech ? existing.includes(scene.speech.utterance) ? "" : `${scene.speech.speaker}说：“${scene.speech.utterance}”` : outcome,

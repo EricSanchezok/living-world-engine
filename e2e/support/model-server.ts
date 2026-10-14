@@ -64,7 +64,9 @@ const server = createServer(async (request, response) => {
     const native = request.url === "/systemone";
     const context = native ? body.state as Record<string, unknown> : contextFrom(body);
     const decision = context.decision as { state: unknown; questions: Record<string, DecisionQuestionV2> } | undefined;
-    const requestText = ((native ? context : decision?.state) as { submittedAction?: { rawText?: string } } | undefined)?.submittedAction?.rawText ?? "";
+    const reading = context.playerReading as { state: unknown; catalog: Record<string, Record<string, string>>;
+      cognition: Record<string, DecisionQuestionV2> } | undefined;
+    const requestText = ((native ? context : reading?.state ?? decision?.state) as { submittedAction?: { rawText?: string } } | undefined)?.submittedAction?.rawText ?? "";
     if (requestText.includes("触发 E2E 流式失败") || requestText.includes("触发 E2E 快速失败")) {
       if (requestText.includes("触发 E2E 流式失败")) {
         await new Promise<void>((resolve) => setTimeout(resolve, 1_000));
@@ -80,7 +82,13 @@ const server = createServer(async (request, response) => {
       response.end(JSON.stringify({ model, answers, usage: { input_tokens: 100, output_tokens: 10 } })); return;
     }
     const scene = context.scene as { reply?: { kind: string }; observations?: unknown[]; speech?: Array<{ id: string; speaker: string }> } | undefined;
-    const output = decision ? { answers: Object.fromEntries(Object.entries(decisionAnswers(decision.questions))
+    const readingAnswers = reading ? decisionAnswers({ ...Object.fromEntries(Object.entries(reading.catalog).map(([id, criteria]) =>
+      [id, { type: "choice" as const, version: "e2e-reading", instructions: "Scripted E2E action", criteria }])), ...reading.cognition }) : {};
+    const output = reading ? { understanding: "Inspect the supplied fixture surroundings", interaction: "world_action",
+      action: { ...Object.fromEntries(Object.keys(reading.catalog).map(id => [id, readingAnswers[id]!.choice])),
+        attempt: requestText, utterance: null, manner: null, literalQuote: "none" },
+      cognition: Object.fromEntries(Object.keys(reading.cognition).map(id => [id, readingAnswers[id]!.choice])) }
+      : decision ? { answers: Object.fromEntries(Object.entries(decisionAnswers(decision.questions))
       .map(([id, answer]) => [id, answer[String(answer.type)]])) }
       : context.localWorld && context.requestedAction ? { description: "No additional fixture content.", entities: [], facts: [], events: [] }
       : scene?.reply?.kind === "recovery" ? { paragraphs: ["这一步的动作判定中断了，还没有产生新的变化。你仍在庭院里，可以接着说明想做的事。"] }

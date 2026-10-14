@@ -6,6 +6,8 @@ describe("frozen live conversation runner", () => {
     expect(selectContinuityFlows("development", "D01,D08").map(flow => flow.id)).toEqual(["D01", "D08"]);
     expect(selectContinuityFlows("confirmation")).toHaveLength(12);
     expect(selectContinuityFlows("continuous")).toHaveLength(2);
+    expect(selectContinuityFlows("development", "")).toHaveLength(8);
+    expect(selectContinuityFlows("confirmation", "")).toHaveLength(12);
     expect(() => selectContinuityFlows("confirmation", "C01")).toThrow("entire frozen cohort");
     expect(() => selectContinuityFlows("continuous", "L02")).toThrow("entire frozen cohort");
     expect(() => selectContinuityFlows("development", "D01,C01")).toThrow("Unknown");

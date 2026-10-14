@@ -21,7 +21,7 @@ import { CONTINUITY_CORPUS_SHA256 } from "../../src/engine/benchmarks/conversati
 export function selectContinuityFlows(phase: string, selected?: string) {
   if (!["development", "confirmation", "continuous"].includes(phase)) throw new Error("Choose development, confirmation or continuous");
   if (selected && phase !== "development") throw new Error("Confirmation and continuous runs require the entire frozen cohort");
-  const ids = selected?.split(",");
+  const ids = selected ? selected.split(",") : undefined;
   const flows = CONTINUITY_CASES.filter(flow => flow.phase === phase && (!ids || ids.includes(flow.id)));
   if (!flows.length || ids?.some(id => !flows.some(flow => flow.id === id))) throw new Error("Unknown scenario selection");
   return flows;

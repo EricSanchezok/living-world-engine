@@ -12,6 +12,29 @@ const source: ScenePacket = {
 };
 
 describe("immutable narrative paragraphs", () => {
+  it("makes recovery's unexecuted request distinct from actual event receipts", () => {
+    const scene = structuredClone(source);
+    scene.observations = []; scene.speech = [];
+    scene.reply = { agentId: scene.agentId, submissionId: "action", kind: "recovery", requested: "等五秒", focusLocalEntityId: null, reason: "Processing failed before the wait executed." };
+    expect(narrativeTask(scene)).toMatchObject({ kind: "recovery", newReceipts: [], executionBoundary: {
+      newPhysicalEffects: false, elapsedWorldTime: false, newSpeech: false, requestedButNotExecuted: "等五秒",
+    } });
+  });
+  it("retains concrete inspection findings if prose generation cannot finish", () => {
+    const scene = structuredClone(source); scene.speech = [];
+    scene.observations[0]!.summary = "你查看了眼前的情况。\n水管：接合处有水滴。";
+    scene.observations[0]!.scene = { ...scene.observations[0]!.scene!, actionKind: "observe", speech: null,
+      outcome: "你查看了眼前的情况。", action: { target: { localEntityId: "pipe", label: "水管" }, tool: null, resource: null, durationSeconds: 1, addressing: "none" } };
+    expect(narrativeFallback(scene)).toContain("接合处有水滴");
+  });
+  it("binds a harmless marker-format variation only to an exact authorized local name", () => {
+    const scene = structuredClone(source);
+    scene.knownEntities = [{ localEntityId: "pipe", name: "水管", description: "旧水管" }];
+    expect(renderNarrativeSegment("[[水管:水管|旧水管]]", scene)).toEqual({ text: "旧水管", mentions: [{ localEntityId: "pipe", surface: "旧水管" }] });
+    expect(() => renderNarrativeSegment("[[不存在:陌生人|他]]", scene)).toThrow("unknown local entity");
+    scene.knownEntities.push({ localEntityId: "other-pipe", name: "水管", description: "另一根水管" });
+    expect(() => renderNarrativeSegment("[[水管:水管|旧水管]]", scene)).toThrow("unknown local entity");
+  });
   it("anchors a new handover to its current receipt and self-holdings instead of a preceding spoken promise", () => {
     const scene = structuredClone(source);
     scene.requestedAction = "按说好的办";

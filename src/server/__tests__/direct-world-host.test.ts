@@ -15,6 +15,7 @@ import { SimulationEngine } from "../../engine/runtime/simulation";
 import { readDirectState } from "../../engine/direct/state";
 import type { StructuredModelRequest } from "../../engine/models/model-provider";
 import { ExperimentBudgetError } from "../../engine/benchmarks/action-compilation/experiment-budget";
+import { participantReactionIds } from "../../engine/direct/foreground";
 
 function createText(wire: DirectTestWire) {
   const context = directCreationContext(wire);
@@ -27,6 +28,59 @@ function createText(wire: DirectTestWire) {
 }
 
 describe("direct world through persistent WorldHost", () => {
+  it("opens the next player turn after direct replies while retaining overheard background conversation", async () => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-conversation-foreground-"));
+    const f = directTestProvider(wire => {
+      const context = wire.state as { perspective?: { agentId: string } };
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
+        let choice = id.startsWith("paragraph") ? "grounded" : id.includes("outcome") ? "succeeded" : id.includes("delivery") ? "delivered"
+          : id.includes("visible") || id.includes("entity") ? "visible" : id.includes("status") || id.includes("fact") ? "unchanged" : "none";
+        if (id === "operation") choice = "speak";
+        if (id === "recipient") choice = context.perspective?.agentId === "engineer" ? "broadcast" : q.type === "choice"
+          ? Object.entries(q.criteria).find(([, value]) => (value as { name?: string })?.name?.includes("林岚"))?.[0] ?? "broadcast" : "broadcast";
+        if (id === "speech") choice = "create";
+        if (id === "timing") choice = "default";
+        if (id.startsWith("progress_") || id.endsWith("_request_progress")) choice = "complete";
+        return [id, nativeAnswer(q, id === "expression" ? 0 : choice)];
+      }));
+    }, wire => {
+      const context = directCreationContext(wire);
+      if (context.scene) return createText(wire);
+      return { attempt: "回应问候", utterance: context.playerControlled ? "大家好。" : "听见了，你好。", manner: null };
+    });
+    await f.registry.capture();
+    const world = loadWorldScript(path.resolve("test/fixtures/station-program-world"), { seed: 1, modelCatalog: f.catalog });
+    const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
+    try {
+      const host = new WorldHost({ repository: new MemoryWorldRepository({ [world.id]: world }), store: database, ledger: database, provider: f.gateway });
+      const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } }), id = created.summary.id;
+      await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "engineer" } });
+      const participant = Object.values(database.readInstance(id).document.participants)[0]!;
+      await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "hello-everyone", text: "向大家问好" });
+      for (let i = 0; i < 200; i++) {
+        const document = database.readInstance(id).document;
+        const intent = document.participantIntents.find(item => item.submissionId === "hello-everyone");
+        if (intent && document.runs[intent.runId]?.status === "completed") break;
+        await new Promise(resolve => setTimeout(resolve, 5));
+      }
+      await host.drainNarratives(id);
+      const document = database.readInstance(id).document, state = document.state;
+      expect(document.actionWindow?.requiredAgentIds).toContain("engineer");
+      expect(Object.values(document.runs).find(run => run.rootIntents.some(intent => intent.submissionId === "hello-everyone"))?.status).toBe("completed");
+      expect(state.history.flatMap(step => step.directEvent?.frames ?? []).map(frame => frame.actorId).sort(), JSON.stringify(state.executionState?.data)).toEqual(["engineer", "inspector", "quartermaster"]);
+      const control = readDirectState(state.executionState!, state);
+      expect(participantReactionIds(state, control, ["engineer"])).toEqual(new Set());
+      for (const npc of ["inspector", "quartermaster"]) {
+        expect(control.intents[npc]).toMatchObject({ status: "ready", causeActionId: expect.any(String) });
+        expect(Object.values(state.agents[npc]!.belief.evidence).filter(item => item.description.includes("听见了，你好。")).length).toBeGreaterThan(0);
+      }
+      const replayed = replaySimulationState(state); expect(replayed).toEqual(state);
+      const engine = new SimulationEngine(world, new DirectWorldAlgorithm(f.gateway), replayed);
+      const background = await engine.step(document.policyBindings, { expectedRevision: state.revision, trigger: "manual", externalActions: [] });
+      expect(background.state.history.at(-1)!.directEvent!.frames.length).toBeGreaterThan(0);
+      expect(replaySimulationState(background.state)).toEqual(background.state);
+    } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+  });
   it.each(["decision", "narrative"])("persists a %s service pause across reads and restart, then resumes only after a new player request", async phase => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-service-pause-"));
     let unavailable = true, clock = Date.now();
