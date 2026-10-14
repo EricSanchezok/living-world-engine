@@ -182,6 +182,7 @@ export function deliveredDialogue(source: ScenePacket, discourse: ParticipantDis
 
 /** Called in the world transaction. Never performs model work. */
 export function enqueueNarrative(document: WorldInstanceDocument, now: string): void {
+  const actionFrames = new Map(document.state.history.flatMap(step => step.directEvent?.frames ?? []).map(frame => [frame.id, frame]));
   for (const participant of Object.values(document.participants).filter(p => p.status === "active")) {
     const existing = document.narratives.filter(beat => beat.participantId === participant.id);
     const covered = new Set(existing.flatMap(beat => beat.source.observations.map(o => o.id)));
@@ -241,6 +242,19 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
         replies.push({ submissionId: intent.activeSubmission.submissionId, agentId: participant.agentId, kind: "recovery",
           requested: intent.activeSubmission.rawText, focusLocalEntityId: null,
           reason: "Processing the next unperformed step was interrupted before it could commit. The original request may contain earlier steps that already completed: use earlierCommittedSteps to identify and preserve them, including elapsed waiting. Explain only the remaining interruption; retry only the unfinished part. Do not claim the entire original request failed or invent a physical obstacle or refusal." });
+      }
+      for (const [ownerId, other] of Object.entries(record.control.intents)) {
+        if (ownerId === participant.agentId || !other.failure || other.failure.atRevision !== step.baseRevision ||
+          other.failure.servicePause || !other.causeActionId) continue;
+        const cause = actionFrames.get(other.causeActionId);
+        if (cause?.actorId !== participant.agentId || !cause.submissionId || replies.some(reply => reply.submissionId === cause.submissionId)) continue;
+        const original = intents.find(item => item.submissionId === cause.submissionId);
+        if (!original) continue;
+        const local = Object.values(document.state.agents[participant.agentId]!.bindings).find(binding =>
+          binding.canonicalEntityIds.length === 1 && binding.canonicalEntityIds[0] === document.state.agents[ownerId]?.entityId);
+        replies.push({ submissionId: original.submissionId, agentId: participant.agentId, kind: "recovery",
+          requested: original.text, focusLocalEntityId: local?.localEntityId ?? null,
+          reason: "The player's interaction already committed. Processing a relevant character response was interrupted before that response could commit. Preserve the delivered question and all earlierCommittedSteps. Explain that the response could not be completed and the outstanding question can be continued. This is not a refusal, silence, a missed delivery, or evidence that the character did nothing. Do not invent their intended answer, motive, private activity or the technical cause." });
       }
       for (const reply of replies) {
         const id = `reply-${contentHash([participant.id, step.revision, reply.submissionId]).slice(0, 24)}`;

@@ -87,6 +87,47 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it.each(["repaired", "invalid-again", "transport"])("bounds NPC expression recovery and retains completed attempts: %s", async mode => {
+    const f = await fixture({ operation: "speak", recipient: "broadcast", creationEnabled: true,
+      creationResponse: { attempt: "回答旅人", utterance: "听见了，我在这里。", manner: null, recipientLocalId: "traveler" } });
+    const transport = f.transport.getMockImplementation()!;
+    let expressions = 0;
+    f.transport.mockImplementation(async (...args) => {
+      const wire = JSON.parse(String(args[1]?.body));
+      const context = wire.questions ? null : directCreationContext(wire);
+      const npc = context?.chosenDirection === "speak" && !context.playerControlled;
+      if (npc) {
+        expressions++;
+        expect(context!.knownRecipients).toMatchObject({ traveler: { name: "旅人" } });
+        if (expressions === 2) expect(context!.repair).toHaveProperty("issue");
+        if (mode === "transport") return new Response("unavailable", { status: 401 });
+      }
+      const response = await transport(...args);
+      if (!npc || expressions > 1 && mode === "repaired") return response;
+      const body = await response.clone().json();
+      body.choices[0].message.content = expressions === 1 ? "" : "{}";
+      return Response.json(body);
+    });
+    await f.engine.bootstrapAgents();
+    const first = await f.engine.step(f.roster, f.request('向周围说：“有人能回答吗？”'));
+    const result = await f.engine.step(f.roster, { expectedRevision: first.state.revision, trigger: "manual", externalActions: [] });
+    expect(expressions).toBe(mode === "transport" ? 1 : 2);
+    const event = result.state.history.at(-1)!.directEvent!;
+    const audits = event.modelAudits.filter(audit => audit.promptVersion.startsWith("action-expression-"));
+    // Transport failures have no completion audit; their actual send is retained
+    // by the gateway's transport evidence, not a fabricated model completion.
+    expect(audits).toHaveLength(mode === "transport" ? 0 : expressions);
+    expect(new Set(audits.flatMap(audit => audit.invocations.map(invocation => invocation.id))).size).toBe(audits.length);
+    if (mode === "repaired") {
+      expect(event.frames).toMatchObject([{ actorId: "keeper", targetEntityId: "player", utterance: "听见了，我在这里。" }]);
+      expect(result.committed.observations.find(observation => observation.observerId === "player")?.scene?.action?.addressing).toBe("direct");
+    } else {
+      expect(event.frames).toHaveLength(0);
+      expect(event.control.intents.keeper?.status).toBe("failed");
+      expect(result.state.truth).toEqual(first.state.truth);
+    }
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("selects the literal input independently of an unauthorized generated speech expansion", async () => {
     const words = "刚才那个问题，麻烦继续说。";
     const f = await fixture({ operation: "speak", recipient: "guard", creationEnabled: true,

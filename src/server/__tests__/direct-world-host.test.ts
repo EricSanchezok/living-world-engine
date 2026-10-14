@@ -270,7 +270,7 @@ describe("direct world through persistent WorldHost", () => {
       expect(replaySimulationState(final.state)).toEqual(final.state);
     } finally { clearTimers(); database.close(); rmSync(root, { recursive: true, force: true }); }
   });
-  it("publishes a committed question when service pauses before its coalesced NPC reply", async () => {
+  it.each(["service-pause", "local-failure"])("keeps a committed question visible when its NPC response cannot finish: %s", async mode => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-paused-reply-"));
     let proseCalls = 0;
     const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
@@ -282,8 +282,15 @@ describe("direct world through persistent WorldHost", () => {
       return [id, nativeAnswer(q, id === "expression" ? 0 : choice)];
     })), wire => {
       const context = directCreationContext(wire);
-      if (context.scene) { proseCalls++; return createText(wire); }
-      if (!context.playerControlled) throw new ExperimentBudgetError("unknown usage requires review", "usage-unresolved");
+      if (context.scene) {
+        proseCalls++;
+        if ((context.scene as { reply?: unknown }).reply) return { paragraphs: ["你的问题已经问出，但这次回复生成中断了。可以接着追问尚未得到回答的部分。"] };
+        return createText(wire);
+      }
+      if (!context.playerControlled) {
+        if (mode === "service-pause") throw new ExperimentBudgetError("unknown usage requires review", "usage-unresolved");
+        return new Response("unavailable", { status: 401 });
+      }
       return { attempt: "向周围问价", utterance: "请问铜钥匙多少钱？", manner: null };
     });
     await f.registry.capture();
@@ -297,16 +304,30 @@ describe("direct world through persistent WorldHost", () => {
       await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });
       const participant = Object.values(database.readInstance(id).document.participants)[0]!;
       await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "question-before-pause", text: "向周围问问铜钥匙多少钱" });
-      for (let i = 0; i < 300 && !host.instance(id).servicePause; i++) await new Promise(resolve => setTimeout(resolve, 5));
+      for (let i = 0; i < 300; i++) {
+        const run = Object.values(database.readInstance(id).document.runs).find(run => run.rootIntents.some(input => input.submissionId === "question-before-pause"));
+        if (run && ["failed", "completed"].includes(run.status)) break;
+        await new Promise(resolve => setTimeout(resolve, 5));
+      }
       await host.drainNarratives(id);
       const saved = database.readInstance(id).document;
-      expect(host.instance(id).servicePause).toMatchObject({ code: "usage-unresolved" });
-      expect(saved.narratives).toHaveLength(1);
-      expect(saved.narratives[0]).toMatchObject({ status: "fallback", attempts: 0,
-        segments: [{ sequence: 0, text: "你说：“请问铜钥匙多少钱？”" }] });
+      if (mode === "service-pause") {
+        expect(host.instance(id).servicePause).toMatchObject({ code: "usage-unresolved" });
+        expect(saved.narratives).toHaveLength(1);
+        expect(saved.narratives[0]).toMatchObject({ status: "fallback", attempts: 0,
+          segments: [{ sequence: 0, text: "你说：“请问铜钥匙多少钱？”" }] });
+        expect(saved.actionWindow?.deadlineAt).toBeNull();
+        expect(proseCalls).toBe(0);
+      } else {
+        expect(host.instance(id).servicePause).toBeUndefined();
+        expect(saved.narratives).toHaveLength(2);
+        expect(saved.narratives.every(beat => beat.status === "complete")).toBe(true);
+        expect(saved.narratives[1]!.source).toMatchObject({ reply: { kind: "recovery" },
+          priorRequestReceipts: [{ scene: { actor: "你", speech: { utterance: "请问铜钥匙多少钱？" } } }] });
+        expect(saved.narratives[1]!.segments[0]!.text).toContain("你的问题已经问出");
+        expect(proseCalls).toBe(2);
+      }
       expect(saved.state.history.flatMap(step => step.directEvent?.frames ?? []).map(frame => frame.actorId)).toEqual(["player"]);
-      expect(saved.actionWindow?.deadlineAt).toBeNull();
-      expect(proseCalls).toBe(0);
       expect(replaySimulationState(saved.state)).toEqual(saved.state);
       const calls = f.transport.mock.calls.length;
       database.close(); database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false }); host = makeHost();

@@ -5,6 +5,7 @@ import type { WorldRuntimeContract } from "../runtime/world-definition";
 import type { JsonValue } from "../runtime/json";
 import { loadPromptAsset } from "../prompts";
 import { contentHash } from "../models/model-audit";
+import { ModelOutputError, type StructuredModelResult } from "../models/model-provider";
 import type { DecisionQuestionV2 } from "../models/decision-v2";
 import { runtimeId } from "../runtime/runtime-id";
 import { agentCapabilityModels } from "../models/capability-bindings";
@@ -309,24 +310,46 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   if (!reading && needsExpression && input.creationEnabled) {
     const wordsOnly = !external && operation === "speak" && !(answers.expression?.type === "noul" && answers.expression.noul >= 0.5);
     const system = loadPromptAsset(external ? "system/player-expression.md" : "system/direct-utterance.md"), userPrompt = loadPromptAsset("user/direct-utterance.md");
-    const generated = await decisions.provider.generateStructured({ ...decisions.scope, modelRegistrySnapshotHash: control.registryHash,
+    const schema = z.object({ conversationReading: z.object({
+      currentQuestion: z.string().describe("The full question or conversational move actually addressed to you, resolving an ellipsis from the preceding shared exchange. Preserve what is being asked while replacing only its corrected subject or scope."),
+      evidenceForAnswer: z.string().describe("Your actual received evidence and its limits, including who did or said what. Do not manufacture earlier questions, promises or completed work."),
+      newContribution: z.string().describe("What this reply adds. If your previous question to this recipient is still unanswered and nothing relevant changed, do not ask it again."),
+    }).optional(), attempt: z.string().optional(), utterance: z.string().nullable(), manner: z.string().nullable().optional(),
+      recipientLocalId: z.enum(["broadcast", ...recipients.map(([id]) => id)]).optional()
+        .describe("For an autonomous spoken reply, bind the actual listener of THESE words from knownRecipients, or broadcast. Match second-person references and names to that listener. Omit for reflection, player-controlled expression and other action kinds."),
+    });
+    const generate = (repair: { issue: string; previous: unknown } | null) => decisions.provider.generateStructured({ ...decisions.scope, modelRegistrySnapshotHash: control.registryHash,
       profileId: profiles.creation, subjectId: agentId, role: "creation", modelInvocation: decisions.next(agentId),
-      system, userPrompt, promptVersion: `action-expression-${contentHash({ system, userPrompt })}`, schemaName: "ActionExpressionV1",
+      system, userPrompt, promptVersion: `action-expression-${contentHash({ system, userPrompt })}`, schemaName: "ActionExpressionV2",
       context: { ...context as Record<string, JsonValue>, language: input.definition.narrative.language, recipient: operation === "reflect" ? null : targetKey,
         addressee: operation === "reflect" ? null : targetKey === "broadcast" ? { audience: "everyone who can hear" }
           : { localEntityId: targetKey, name: agent.belief.localEntities[targetKey]?.name ?? null },
+        ...(!external && operation === "speak" ? { knownRecipients: Object.fromEntries(recipients.map(([id, entity]) =>
+          [id, { name: entity.name, description: entity.description }])) } : {}),
         chosenDirection: operation, communicativeIntent: external && selected(answers, "transfer_authority") === "request"
           ? "Request the other person's action; do not offer payment or accept any new terms" : selected(answers, "dialogue"), playerControlled: Boolean(external),
         currentPlayerRequest: external?.rawText ?? null,
         currentHoldings: (view.state as { mechanics: { quantities: JsonValue } }).mechanics.quantities,
         exactQuotes: quotes, expression: operation === "reflect" ? "Private reflection; do not deliver to anyone." : wordsOnly
           ? "This action is an ordinary spoken reply. Supply its actual words; attempt and manner can be omitted. No accompanying physical gesture is selected."
-          : "Concrete attempted behavior and actual words before execution. Outcomes are not yet decided." },
-      schema: z.object({ conversationReading: z.object({
-        currentQuestion: z.string().describe("The full question or conversational move actually addressed to you, resolving an ellipsis from the preceding shared exchange. Preserve what is being asked while replacing only its corrected subject or scope."),
-        evidenceForAnswer: z.string().describe("Your actual received evidence and its limits, including who did or said what. Do not manufacture earlier questions, promises or completed work."),
-        newContribution: z.string().describe("What this reply adds. If your previous question to this recipient is still unanswered and nothing relevant changed, do not ask it again."),
-      }).optional(), attempt: z.string().optional(), utterance: z.string().nullable().optional(), manner: z.string().nullable().optional() }), jsonExamplePolicy: "omit" });
+          : "Concrete attempted behavior and actual words before execution. Outcomes are not yet decided.",
+        ...(repair ? { repair: { ...repair, task: "Correct the response format once, preserving this same received interaction, intended words and actual listener. Explicitly return utterance=null only for intentional silence; an empty object is not a response." } } : {}) },
+      schema, jsonExamplePolicy: "omit" });
+    let generated: StructuredModelResult<z.infer<typeof schema>>;
+    try { generated = await generate(null); }
+    catch (error) {
+      if (!(error instanceof ModelOutputError)) throw error;
+      if (error.audit) audits.push(error.audit);
+      try { generated = await generate({ issue: error.message, previous: error.rawValue ?? null }); }
+      catch (failure) {
+        const final = failure instanceof Error ? failure : new Error(String(failure));
+        throw Object.assign(final, { audits: [...audits, ...((final as { audits?: ModelExecutionAudit[] }).audits ?? [])] });
+      }
+    }
+    if (!external && operation === "speak" && generated.value.recipientLocalId) {
+      targetKey = generated.value.recipientLocalId;
+      target = view.entities[targetKey] ?? null;
+    }
     expression = { attempt: (!wordsOnly ? generated.value.attempt?.trim() : null) || text || actionLabels[operation as ActionKind] || "尝试行动",
       utterance: literal && external && (operation === "speak" || generated.value.utterance?.trim()) ? literal : generated.value.utterance?.trim() || null,
       manner: wordsOnly ? null : generated.value.manner?.trim() || null };
