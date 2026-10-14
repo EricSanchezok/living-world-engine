@@ -16,6 +16,9 @@ import { readDirectState } from "../../engine/direct/state";
 import type { StructuredModelRequest } from "../../engine/models/model-provider";
 import { ExperimentBudgetError } from "../../engine/benchmarks/action-compilation/experiment-budget";
 import { participantReactionIds } from "../../engine/direct/foreground";
+import { nextNarrative } from "../world-narrative";
+import { GET as getInstanceEvents } from "../../app/api/instances/[id]/events/route";
+import { GET as getInstance } from "../../app/api/instances/[id]/route";
 
 function createText(wire: DirectTestWire) {
   const context = directCreationContext(wire);
@@ -51,12 +54,20 @@ describe("direct world through persistent WorldHost", () => {
     await f.registry.capture();
     const world = loadWorldScript(path.resolve("test/fixtures/station-program-world"), { seed: 1, modelCatalog: f.catalog });
     const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
+    const connections: AbortController[] = [];
     try {
       const host = new WorldHost({ repository: new MemoryWorldRepository({ [world.id]: world }), store: database, ledger: database, provider: f.gateway });
+      WorldHost.setForTests(host);
       const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } }), id = created.summary.id;
       await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "engineer" } });
       const participant = Object.values(database.readInstance(id).document.participants)[0]!;
+      const connected = new AbortController(); connections.push(connected);
+      const stream = await getInstanceEvents(new Request(`http://local/api/instances/${id}/events`, { signal: connected.signal }),
+        { params: Promise.resolve({ id }) });
+      const reader = stream.body!.getReader(), changed = reader.read();
       await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "hello-everyone", text: "向大家问好" });
+      expect(new TextDecoder().decode((await changed).value)).toContain("event: changed");
+      connected.abort(); await reader.cancel();
       for (let i = 0; i < 200; i++) {
         const document = database.readInstance(id).document;
         const intent = document.participantIntents.find(item => item.submissionId === "hello-everyone");
@@ -65,6 +76,32 @@ describe("direct world through persistent WorldHost", () => {
       }
       await host.drainNarratives(id);
       const document = database.readInstance(id).document, state = document.state;
+      const sceneCalls = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => !wire.questions)
+        .map(wire => directCreationContext(wire)).filter(context => context.scene);
+      expect(sceneCalls).toHaveLength(1);
+      expect(sceneCalls[0]!.scene).toMatchObject({ speech: [{ utterance: "大家好。" }, { utterance: "听见了，你好。" }, { utterance: "听见了，你好。" }] });
+      const savedText = host.instance(id).conversation, callsBeforeReconnect = f.transport.mock.calls.length;
+      const reconnect = new AbortController(); connections.push(reconnect);
+      const reconnected = await getInstanceEvents(new Request(`http://local/api/instances/${id}/events`, { signal: reconnect.signal }),
+        { params: Promise.resolve({ id }) });
+      expect(reconnected.status).toBe(200);
+      const snapshot = await getInstance(new Request(`http://local/api/instances/${id}`), { params: Promise.resolve({ id }) });
+      expect((await snapshot.json()).conversation).toEqual(savedText);
+      reconnect.abort(); await reconnected.body!.cancel();
+      await host.drainNarratives(id);
+      expect(f.transport.mock.calls.length).toBe(callsBeforeReconnect);
+      expect(database.readInstance(id).document.narratives).toEqual(document.narratives);
+      const interrupted = structuredClone(document), pending = interrupted.narratives[0]!;
+      pending.status = "queued"; pending.attempts = 0;
+      pending.source.observations = pending.source.observations.filter(observation => observation.scene?.actor === "你");
+      const pendingControl = interrupted.state.executionState!.data as unknown as ReturnType<typeof readDirectState>;
+      const actorFrame = state.history.flatMap(step => step.directEvent?.frames ?? []).find(frame => frame.actorId === "engineer")!;
+      pendingControl.intents.inspector!.status = "ready"; pendingControl.intents.inspector!.causeActionId = actorFrame.id;
+      const pendingRun = Object.values(interrupted.runs).find(run => run.rootIntents.some(input => input.submissionId === pending.submissionId))!;
+      pendingRun.status = "running";
+      expect(nextNarrative(interrupted)).toBeUndefined();
+      pendingRun.status = "failed";
+      expect(nextNarrative(interrupted)?.id).toBe(pending.id);
       expect(document.actionWindow?.requiredAgentIds).toContain("engineer");
       expect(Object.values(document.runs).find(run => run.rootIntents.some(intent => intent.submissionId === "hello-everyone"))?.status).toBe("completed");
       expect(state.history.flatMap(step => step.directEvent?.frames ?? []).map(frame => frame.actorId).sort(), JSON.stringify(state.executionState?.data)).toEqual(["engineer", "inspector", "quartermaster"]);
@@ -79,7 +116,7 @@ describe("direct world through persistent WorldHost", () => {
       const background = await engine.step(document.policyBindings, { expectedRevision: state.revision, trigger: "manual", externalActions: [] });
       expect(background.state.history.at(-1)!.directEvent!.frames.length).toBeGreaterThan(0);
       expect(replaySimulationState(background.state)).toEqual(background.state);
-    } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+    } finally { for (const connection of connections) connection.abort(); WorldHost.setForTests(undefined); database.close(); rmSync(root, { recursive: true, force: true }); }
   });
   it.each(["decision", "narrative"])("persists a %s service pause across reads and restart, then resumes only after a new player request", async phase => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-service-pause-"));

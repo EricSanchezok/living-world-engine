@@ -8,6 +8,7 @@ import type { JsonValue } from "../engine/runtime/json";
 import type { DirectRuntimeState } from "../engine/direct/contracts";
 import type { DiscourseMention, ParticipantDiscourse, PresentationReply } from "../engine/contracts/discourse";
 import { projectAgentPerspective } from "../engine/cognition/agent-perspective";
+import { participantReactionIds } from "../engine/direct/foreground";
 
 export interface ScenePacket {
   participantId: string;
@@ -48,7 +49,7 @@ export interface NarrativeBeat {
   grounding: Array<{ start: number; inputHash: string; choices: string[]; invocationIds: string[] }>;
 }
 
-/** Coalesce unspoken prerequisite observations while their same request continues. */
+/** Coalesce immediate prerequisites and replies; admitted activities and terminal runs remain publishable. */
 export function nextNarrative(document: WorldInstanceDocument): NarrativeBeat | undefined {
   const seen = new Set<string>();
   for (const beat of document.narratives) {
@@ -56,12 +57,18 @@ export function nextNarrative(document: WorldInstanceDocument): NarrativeBeat | 
     seen.add(beat.participantId);
     if (beat.status === "generating" || beat.attempts > 0 || !beat.submissionId) return beat;
     const data = document.state.executionState?.data;
-    const intent = data?.kind === "direct-world" ? (data as unknown as DirectRuntimeState).intents[beat.agentId] : null;
+    const control = data?.kind === "direct-world" ? data as unknown as DirectRuntimeState : null;
+    const intent = control?.intents[beat.agentId];
     const run = Object.values(document.runs).findLast(run => run.rootIntents.some(input => input.submissionId === beat.submissionId));
     const prerequisite = beat.source.observations.every(observation => observation.scene?.actor === "你" &&
       ["move", "observe", "reflect"].includes(observation.scene.actionKind) && !observation.scene.speech && observation.scene.status !== "continuing");
     if (prerequisite && intent?.status === "ready" && intent.activeSubmission?.submissionId === beat.submissionId &&
       run && ["queued", "running"].includes(run.status)) continue;
+    const ownSpeech = beat.source.observations.length > 0 && beat.source.observations.every(observation =>
+      observation.scene?.actor === "你" && observation.scene.actionKind === "speak");
+    if (ownSpeech && control && run && ["queued", "running"].includes(run.status) &&
+      [...participantReactionIds(document.state, control, [beat.agentId], [beat.submissionId])]
+        .some(id => document.policyBindings[id]?.kind === "model" && control.intents[id]?.status === "ready")) continue;
     return beat;
   }
 }

@@ -140,3 +140,5 @@ An optional adjacent `Class:` line uses `architecture`, `process`, `testing`, `f
 - [0099 — Typed Hierarchical Algorithm Composition](0099-typed-hierarchical-algorithm-composition.md)
 - [0100 — Promote Relational RRF and Refresh Reference Data](0100-promote-relational-rrf-and-refresh-reference-data.md)
 - [0159 — Isolate Local Encoder Inference from the Host Event Loop](0159-isolate-local-encoder-inference.md)
+
+- [0233 — Coalesce Immediate Replies Before Prose Publication](0233-coalesce-immediate-replies-before-publication.md)
