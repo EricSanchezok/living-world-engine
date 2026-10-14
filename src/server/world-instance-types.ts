@@ -1,4 +1,5 @@
 import type { NarrativeBeat } from "./world-narrative";
+import type { ModelServicePause } from "../engine/models/service-failure";
 import type {
   AlgorithmRef,
   ExternalActionInput,
@@ -114,6 +115,7 @@ export interface WorldRunRecord {
   activityIds: string[];
   requestedBoundaryCount: number | null;
   createdAt: string;
+  startedAtWorldSeconds: number;
   updatedAt: string;
   executionIds: string[];
   committedRevisions: number[];
@@ -131,6 +133,7 @@ export interface WorldRunRecord {
   } | null;
   lastDebugRequestId: string | null;
   error?: string;
+  servicePause?: ModelServicePause;
 }
 
 export interface ParticipantIntentRecord {
@@ -156,7 +159,7 @@ export interface ParticipantReactionRecord {
 }
 
 export interface WorldInstanceDocument {
-  schemaVersion: 26;
+  schemaVersion: 27;
   id: string;
   world: WorldRuntimeContract;
   executionAlgorithm: AlgorithmRef;

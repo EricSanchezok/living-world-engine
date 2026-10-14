@@ -312,6 +312,8 @@ export interface WorldAdvanceRequest {
   expectedRevision: number;
   trigger: "manual" | "batch" | "realtime" | "participant_action";
   externalActions: readonly ExternalActionInput[];
+  /** Absolute horizon for a bounded autonomous run; explicit participant work is not inferred from an expired window. */
+  autonomousUntilSeconds?: number;
 }
 
 export function decisionEligibleAgentIds(

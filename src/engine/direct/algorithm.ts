@@ -3,6 +3,7 @@ import type { RulePackageRegistry } from "../mechanics/rule-package";
 import { deriveConditionAdvance } from "../mechanics/condition-time";
 import { evaluateCausalAssertion } from "../mechanics/causality";
 import { contentHash } from "../models/model-audit";
+import { modelServicePause } from "../models/service-failure";
 import type { StructuredModelProvider } from "../models/model-provider";
 import { defineAlgorithmManifest, algorithmRef, WORLD_STEP_CANDIDATE_SCHEMA_VERSION, WORLD_STEP_PREPARATION_SCHEMA_VERSION,
   StepPreparationInvalidatedError, WorldQuiescentError, type BootstrapInput, type ExecutionContext, type ExternalReactionInput,
@@ -25,7 +26,7 @@ import { commitDirectRecord, directCandidate, sealDirectRecord } from "./canonic
 
 export interface DirectWorldConfig extends CapabilityModelOverrides { creationEnabled: boolean }
 export const DIRECT_WORLD_CONFIG: DirectWorldConfig = { decision: null, creation: null, fallback: null, creationEnabled: true };
-export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "2", config: config as unknown as JsonObject });
+export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "3", config: config as unknown as JsonObject });
 export const directWorldAlgorithmRef = (config = DIRECT_WORLD_CONFIG) => algorithmRef(directWorldManifest(config));
 
 function components(state: Readonly<SimulationState>, frames: ActionFrame[]): ActionFrame[][] {
@@ -70,8 +71,9 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
     const decisions = new DirectDecisions(this.provider, control, { ...context.modelScope,
       runtimeIdentity: { worldHash: source.worldHash, revision: source.revision }, modelRegistrySnapshotHash: control.registryHash });
     const audits: ModelExecutionAudit[] = [], reads: Record<string, string> = {}, activatedAgentIds: string[] = [], cognition: DirectCognitiveUpdate[] = [];
-    for (const frame of control.activities) if (input.policyRoster[frame.actorId]?.kind === "idle") {
-      control.intents[frame.actorId]!.status = "waiting"; control.intents[frame.actorId]!.activityId = null;
+    for (const [id, intent] of Object.entries(control.intents)) if (input.policyRoster[id]?.kind === "idle") {
+      intent.status = "waiting"; intent.activityId = null; intent.activeSubmission = null;
+      intent.causeActionId = null; intent.wakeReasons = [];
     }
     control.activities = control.activities.filter(frame => input.policyRoster[frame.actorId]?.kind !== "idle");
     for (const id of Object.keys(control.prepared)) if (!control.activities.some(frame => frame.id === id)) delete control.prepared[id];
@@ -112,7 +114,8 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
         const intent = control.intents[id]!;
         intent.status = "failed"; intent.activityId = null; intent.wakeReasons = [];
         intent.failure = { inputHash: contentHash({ agent: source.agents[id], submission: submissions.find(action => action.agentId === id) ?? null }),
-          message: (result.reason instanceof Error ? result.reason.message || result.reason.name : String(result.reason)) || "Model task failed without a diagnostic message", recoverable: true };
+          message: (result.reason instanceof Error ? result.reason.message || result.reason.name : String(result.reason)) || "Model task failed without a diagnostic message", recoverable: true,
+          atRevision: source.revision, servicePause: modelServicePause(result.reason) };
         if (result.reason?.audit) audits.push(result.reason.audit);
         if (result.reason?.audits) audits.push(...result.reason.audits);
       }
@@ -143,7 +146,8 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
         if (result.reason?.audits) audits.push(...result.reason.audits);
         for (const frame of groups[index]!) {
         const intent = control.intents[frame.actorId]!; intent.status = "failed"; intent.activityId = null;
-        intent.failure = { inputHash: frame.inputHash, message: (result.reason instanceof Error ? result.reason.message || result.reason.name : String(result.reason)) || "Model task failed without a diagnostic message", recoverable: true };
+        intent.failure = { inputHash: frame.inputHash, message: (result.reason instanceof Error ? result.reason.message || result.reason.name : String(result.reason)) || "Model task failed without a diagnostic message", recoverable: true,
+          atRevision: source.revision, servicePause: modelServicePause(result.reason) };
         control.activities = control.activities.filter(activity => activity.id !== frame.id); delete control.prepared[frame.id];
         }
       }
@@ -152,7 +156,10 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
     const clock = nextWorldClockBoundary(source);
     const waits = Object.values(control.intents).flatMap(intent => intent.wait?.untilSeconds !== null && intent.wait?.untilSeconds !== undefined &&
       intent.wait.untilSeconds > source.truth.elapsedSeconds ? [intent.wait.untilSeconds] : []);
-    const boundaries = [...control.activities.flatMap(activityBoundary), ...(clock === null ? [] : [clock]), ...waits];
+    const horizon = input.request.autonomousUntilSeconds;
+    if (horizon !== undefined && (!Number.isSafeInteger(horizon) || horizon < source.truth.elapsedSeconds)) throw new Error("invalid autonomous time horizon");
+    const boundaries = [...control.activities.flatMap(activityBoundary), ...(clock === null ? [] : [clock]), ...waits]
+      .filter(time => horizon === undefined || time <= horizon);
     // Deciding to wait is a present-time control update. Return it before advancing
     // to an unrelated distant timer, so a player can act on the current feedback.
     const onlyControlWork = owners.length > 0 && control.activities.length === 0;

@@ -1,6 +1,6 @@
 # Direct world runtime
 
-This reference owns the default `direct-world@2` execution contract, approved in [Spec 0182](../specs/0182-jev-direct-world-runtime.md). Its implementation lives in [`src/engine/direct/`](../../src/engine/direct/algorithm.ts). The script contract is v17, SimulationState is v19 and WorldInstanceDocument is v26.
+This reference owns the default `direct-world@3` execution contract, approved in [Spec 0182](../specs/0182-jev-direct-world-runtime.md). Its implementation lives in [`src/engine/direct/`](../../src/engine/direct/algorithm.ts). The script contract is v17, SimulationState is v20 and WorldInstanceDocument is v27.
 
 ## Model responsibilities
 
@@ -33,6 +33,10 @@ Intention state retains the current goal, an active submission, wake causes, own
 Adjudication is saved as prepared effects. Finite activities retain their absolute due time through earlier world timers. Continuous activities retain their active lease and elapsed progress without asking a model at every checkpoint. Shared resource claims are allocated together in stable admission order; queueing postpones the start until capacity is available. Interruption removes the superseded pending effects. Changed actual dependencies invalidate the affected preparation.
 
 The earliest activity, timer, condition expiry, recurring effect or explicit wait deadline is a barrier on the canonical timeline. Control-only records may keep the same world time. Physical commits advance by a positive number of seconds. A repeated input or repeated action without meaningful progress enters a recoverable wait. One failed model task retains its failure locally while independent admitted work and clock events can continue.
+
+Under [Spec 0184](../specs/0184-conversational-continuity-and-recovery.md), automatic interactive runs without a new participant request have an absolute horizon: the run's saved starting world time plus `maxAutonomousSpanSeconds`. Each continuation shares that horizon. Unrelated distant timers do not authorize a time jump after a reply-window timeout. An idle policy clears the participant's unfinished submission and wake cause. Explicitly requested waits and observer advances keep their chosen temporal scope.
+
+Shared request, currency and token caps and unresolved usage are typed service pauses. Their causes survive provider wrappers, appear separately from world outcomes, suspend reply clocks and stop automatic work. Saved effects and published paragraphs remain available through reads and restart. A deliberate new request can resume when service capacity is restored. A cap during narrative generation preserves the accepted prefix and adds available factual feedback without another model retry.
 
 ## Mechanical commit and replay
 

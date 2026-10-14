@@ -10,7 +10,7 @@ if (!archive) {
   process.exitCode = 2;
 } else {
   try {
-    const dataRoot = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v26");
+    const dataRoot = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v27");
     const database = new LocalDatabase(path.join(dataRoot, "livingworld.sqlite"));
     try {
       const result = database.importWorld(

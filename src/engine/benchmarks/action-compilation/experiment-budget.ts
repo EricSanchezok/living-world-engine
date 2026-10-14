@@ -1,6 +1,7 @@
 import { appendFileSync, existsSync, readFileSync } from "node:fs";
 import { z } from "zod";
 import { contentHash } from "../../models/model-audit";
+import type { ModelServiceLimitCode } from "../../models/service-failure";
 
 export const EXPERIMENT_PHASES = ["discovery", "confirmation", "probes", "calibration", "review"] as const;
 export type ExperimentPhase = typeof EXPERIMENT_PHASES[number] | "trajectory";
@@ -115,7 +116,7 @@ export type ExperimentUsage = z.infer<typeof usageSchema>;
 type Reservation = Extract<Entry, { kind: "reserve" }>;
 
 export class ExperimentBudgetError extends Error {
-  constructor(message: string, readonly limitCode?: "request-limit" | "spending-limit" | "token-limit" | "usage-unresolved") {
+  constructor(message: string, readonly limitCode?: ModelServiceLimitCode) {
     super(message); this.name = "ExperimentBudgetError";
   }
 }

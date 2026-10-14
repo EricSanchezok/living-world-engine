@@ -1,5 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import { fixtureArchive } from "../support/world-fixture";
+import type { PublicInstanceDetail, PublicModelServicePause } from "../../src/shared/world-api";
 
 async function installFixture(page: Page): Promise<void> {
   const response = await page.request.post("/api/worlds/import", {
@@ -461,6 +462,30 @@ test("failed execution stays atomic and long diagnostics never widen the inspect
   await page.setViewportSize({ width: 320, height: 720 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   expect(await inspector.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
+});
+
+test("a typed service pause preserves scene text and explains why automatic play stopped", async ({ page }) => {
+  await installFixture(page); await startOrigin(page);
+  await page.getByLabel("你的行动").fill("观察四周");
+  await page.getByRole("button", { name: "发送行动" }).click();
+  await expect(page.getByText(/你查看了眼前的情况/).last()).toBeVisible();
+  const instanceId = new URL(page.url()).pathname.split("/").at(-1)!;
+  const pause: PublicModelServicePause = { code: "request-limit", retry: "after-service-change",
+    message: "模型调用次数已达到本轮上限，世界已暂停自动推进。已有进展已保存；增加调用额度后可以继续。" };
+  // The host's transport-boundary tests own cap production. This boundary owns DTO rendering.
+  await page.route(`**/api/instances/${instanceId}`, async route => {
+    const response = await route.fetch(); const detail = await response.json() as PublicInstanceDetail;
+    detail.servicePause = pause;
+    const turn = detail.conversation!.turns.at(-1)!; turn.status = "failed"; turn.servicePause = pause;
+    await route.fulfill({ response, json: detail });
+  });
+  await page.reload();
+  await expect(page.getByText(pause.message, { exact: true })).toHaveCount(1);
+  await expect(page.getByText(/你查看了眼前的情况/).last()).toBeVisible();
+  await expect(page.getByRole("status", { name: "模型服务状态" })).toContainText("自动推进已暂停");
+  await expect(page.getByText("这次尝试暂时没有得到完整回应。已经发生的变化会保留，你可以继续或重试。")).toHaveCount(0);
+  await page.setViewportSize({ width: 320, height: 720 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 
 test("instance APIs expose only Agent-scoped views", async ({ page }) => {

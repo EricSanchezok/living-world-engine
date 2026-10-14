@@ -3,6 +3,7 @@ import type { ActionOutcome, AgentActionProposal, AgentState, BeliefPatch, Chara
 import type { DecisionBatchV2, DecisionResultV2 } from "../models/decision-v2";
 import type { AlgorithmRef } from "../runtime/execution";
 import type { JsonValue } from "../runtime/json";
+import type { ModelServicePause } from "../models/service-failure";
 
 export type ActionKind = "move" | "observe" | "reflect" | "speak" | "transfer" | "use" | "change" | "wait";
 export interface ActionExpression {
@@ -39,7 +40,7 @@ export interface AgentIntentState {
   goalProgress: Record<string, "partial" | "completed" | "unchanged" | "unknown">;
   dependencies: Record<string, string>;
   activeSubmission: import("../runtime/execution").ExternalActionInput | null;
-  failure: { inputHash: string; message: string; recoverable: true } | null;
+  failure: { inputHash: string; message: string; recoverable: true; atRevision: number; servicePause: ModelServicePause | null } | null;
 }
 export interface DirectDecisionUse { batch: DecisionBatchV2; result: DecisionResultV2; reused: boolean }
 export interface CapabilityDefinition {

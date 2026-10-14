@@ -17,7 +17,7 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
   observationScope?: string; speech?: string; creationEnabled?: boolean; privateGateFact?: boolean; named?: boolean;
   creationResponse?: unknown; creationResponses?: unknown[]; missingCoverage?: boolean; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
   recipient?: string; resolvedRecipient?: string; searchLocation?: string; transferAuthority?: string; transferExecution?: string;
-  reactionProgress?: string; playerProgress?: string; duplicateIdentity?: boolean } = {}) {
+  reactionProgress?: string; playerProgress?: string; duplicateIdentity?: boolean; timerSeconds?: number } = {}) {
   let creations = 0;
   const f = directTestProvider(wire => {
     if (!wire.questions) {
@@ -59,6 +59,10 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
     player.belief.localEntities[id!] = { id: id!, name: world.initialState.truth.entities[canonicalId!]!.name, description: "Seen nearby", status: "observed" };
     player.bindings[id!] = { localEntityId: id!, canonicalEntityIds: [canonicalId!] };
   }
+  if (options.timerSeconds) world.initialState.truth.timers["test-deadline"] = { id: "test-deadline", description: "Independent deadline",
+    createdAtSeconds: 0, dueAtSeconds: options.timerSeconds, status: "scheduled", wakeAgentIds: [],
+    causes: [{ kind: "mechanic", id: "direct-world-clock" }],
+    assertions: [{ kind: "elapsed_seconds_compare", operator: "eq", value: options.timerSeconds }] };
   world.historyBaseHash = historyReplayBaseHash(world.initialState);
   await f.registry.capture();
   const algorithm = new DirectWorldAlgorithm(f.gateway, { decision: "decision-jev", creation: "creation-deepseek", fallback: "decision-deepseek", creationEnabled: options.creationEnabled ?? false });
@@ -71,6 +75,36 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("retires an idle participant's pending continuation and cannot jump to a distant timer", async () => {
+    const f = await fixture({ operation: "move", target: "yard", playerProgress: "continue", timerSeconds: 36_000 });
+    await f.engine.bootstrapAgents();
+    const first = await f.engine.step(f.roster, f.request("走过去再观察"));
+    const calls = f.transport.mock.calls.length;
+    for (const id of Object.keys(f.roster)) f.roster[id] = { kind: "idle", agentId: id, reason: "timeout" };
+    const request = { expectedRevision: first.state.revision, trigger: "participant_action" as const, externalActions: [],
+      autonomousUntilSeconds: first.state.truth.elapsedSeconds + 30 };
+    const idle = await f.engine.step(f.roster, request);
+    expect(idle.state.truth.elapsedSeconds).toBe(first.state.truth.elapsedSeconds);
+    expect(readDirectState(idle.state.executionState!, idle.state).intents.player).toMatchObject({ status: "waiting", activeSubmission: null, causeActionId: null });
+    await expect(f.engine.step(f.roster, { ...request, expectedRevision: idle.state.revision })).rejects.toThrow(WorldQuiescentError);
+    expect(f.transport).toHaveBeenCalledTimes(calls);
+    expect(replaySimulationState(idle.state)).toEqual(idle.state);
+    const manual = await f.engine.step(f.roster, { expectedRevision: idle.state.revision, trigger: "manual", externalActions: [] });
+    expect(manual.state.truth.elapsedSeconds).toBe(36_000);
+    expect(manual.state.truth.timers["test-deadline"]!.status).toBe("fired");
+    expect(replaySimulationState(manual.state)).toEqual(manual.state);
+  });
+  it("keeps a nearer admitted deadline and explicit long participant waiting executable", async () => {
+    const timed = await fixture({ timerSeconds: 20 }); await timed.engine.bootstrapAgents();
+    for (const id of Object.keys(timed.roster)) timed.roster[id] = { kind: "idle", agentId: id, reason: "timeout" };
+    const result = await timed.engine.step(timed.roster, { expectedRevision: 0, trigger: "participant_action", externalActions: [], autonomousUntilSeconds: 30 });
+    expect(result.state.truth.elapsedSeconds).toBe(20);
+    expect(result.state.truth.timers["test-deadline"]!.status).toBe("fired");
+    const waiting = await fixture({ operation: "wait", target: "self", speech: "none" }); await waiting.engine.bootstrapAgents();
+    const long = await waiting.engine.step(waiting.roster, waiting.request("原地等待3600秒"));
+    expect(long.state.truth.elapsedSeconds).toBe(3600);
+    expect(replaySimulationState(long.state)).toEqual(long.state);
+  });
   it.each(["transfer", "expression"])("resolves contradictory payment direction without treating quoted words as consent: %s", async transferExecution => {
     const f = await fixture({ operation: "speak", target: "guard", transferAuthority: "give", transferExecution,
       amount: "n2", creationEnabled: true });

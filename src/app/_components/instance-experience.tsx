@@ -202,11 +202,15 @@ function participantMessages(
       id: `${turn.id}:world`,
       role: "assistant" as const,
       content: [{ type: "text" as const, text: turn.status === "failed"
-        ? "这次尝试暂时没有得到完整回应。已经发生的变化会保留，你可以继续或重试。"
+        ? turn.servicePause?.message ?? "这次尝试暂时没有得到完整回应。已经发生的变化会保留，你可以继续或重试。"
         : "世界正在推演…" }],
       createdAt: new Date(turn.createdAt),
       status: assistantStatus(turn.status),
     }];
+    if (responses.length && turn.servicePause) assistants.push({
+      id: `${turn.id}:service-pause`, role: "assistant", content: [{ type: "text", text: turn.servicePause.message }],
+      createdAt: new Date(turn.createdAt), status: assistantStatus("failed"),
+    });
     if (!turn.action) return assistants;
     return [{
       id: `${turn.id}:action`,
@@ -643,6 +647,13 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
             />
           ) : busy === "action" ? (
             <ActionSubmitConsole />
+          ) : detail.servicePause ? (
+            <div className="cg-thread-status" aria-label="模型服务状态" role="status">
+              <div className="cg-thread-status__copy">
+                <strong>自动推进已暂停</strong>
+                <span>{latestTurn?.servicePause ? "已有进展已保存，服务恢复后可以继续。" : detail.servicePause.message}</span>
+              </div>
+            </div>
           ) : reactionWindow ? (
             <ReactionConsole
               busy={Boolean(busy)}

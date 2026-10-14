@@ -35,7 +35,7 @@ export function eligibilityProbeOrder(sourceIds: readonly string[]) {
 }
 
 export async function loadStepCompilationProbeSources() {
-  const dataRoot = path.resolve(".livingworld-v26");
+  const dataRoot = path.resolve(".livingworld-v27");
   const database = new LocalDatabase(path.join(dataRoot, "livingworld.sqlite"), { readOnly: true });
   const events = database.executionEvents(EXECUTION);
   database.close();

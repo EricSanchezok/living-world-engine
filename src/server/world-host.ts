@@ -36,6 +36,7 @@ import { qualificationModelFetchResolver } from "./jev-qualification-budget";
 import { contentHash } from "../engine/models/model-audit";
 import { AlgorithmExperimentRegistry } from "../engine/runtime/experiments";
 import { ModelRegistry } from "../engine/models/model-registry";
+import { modelServicePause, type ModelServicePause } from "../engine/models/service-failure";
 import {
   modelInvocationCorrelation,
   modelInvocationIdentity,
@@ -458,6 +459,7 @@ function conversationFor(
       baseRevision: intent.revision,
       createdAt: intent.submittedAt,
       status,
+      ...(run?.servicePause ? { servicePause: structuredClone(run.servicePause) } : {}),
       action: { submissionId: intent.submissionId, text: intent.text },
       ...(responses.length > 0 ? { response: responses.at(-1), responses } : {}),
     });
@@ -570,7 +572,7 @@ export class WorldHost {
   private notifyInstance(id: string) { for (const listener of this.instanceListeners.get(id) ?? []) listener(); }
 
   private scheduleNarrative(document: WorldInstanceDocument): void {
-    if (this.narrativeWorkers.has(document.id) || !nextNarrative(document)) return;
+    if (currentRun(document)?.servicePause || this.narrativeWorkers.has(document.id) || !nextNarrative(document)) return;
     const job = Promise.resolve().then(() => this.generateNarratives(document.id));
     this.narrativeWorkers.set(document.id, job);
     let failed = false;
@@ -591,7 +593,7 @@ export class WorldHost {
     if (!beat) return;
     update(beat);
     document.updatedAt = this.now().toISOString();
-    if (document.actionWindow && document.runtime.actionWindowMs > 0 && !document.actionWindow.deadlineAt &&
+    if (!currentRun(document)?.servicePause && document.actionWindow && document.runtime.actionWindowMs > 0 && !document.actionWindow.deadlineAt &&
       !document.narratives.some(item => ["queued", "generating"].includes(item.status) && document.actionWindow!.requiredAgentIds.includes(item.agentId))) {
       document.actionWindow.deadlineAt = new Date(this.now().getTime() + document.runtime.actionWindowMs).toISOString();
     }
@@ -602,6 +604,7 @@ export class WorldHost {
   private async generateNarratives(id: string): Promise<void> {
     for (;;) {
       const document = this.read(id).document;
+      if (currentRun(document)?.servicePause) return;
       const beat = nextNarrative(document);
       if (!beat) return;
       if (beat.attempts >= 2) {
@@ -685,9 +688,41 @@ export class WorldHost {
       } catch (error) {
         await publication;
         this.failExecution(execution?.id, error);
+        const pause = modelServicePause(error);
+        if (pause) {
+          const stored = this.read(id), paused = structuredClone(stored.document);
+          const item = paused.narratives.find(value => value.id === beat.id)!;
+          const fallback = narrativeFallback(item.source, item.segments.map(segment => segment.text));
+          const at = this.now().toISOString();
+          if (fallback) item.segments.push({ sequence: item.segments.length, text: fallback, publishedAt: at });
+          item.status = "fallback"; item.error = error instanceof Error ? error.message : String(error);
+          item.completedAt = at; if (item.segments.length) item.firstParagraphAt ??= at;
+          const origin = paused.participantIntents.find(intent => intent.submissionId === beat.submissionId)?.runId;
+          this.pauseModelService(paused, pause, origin);
+          paused.updatedAt = at; this.persist(stored, paused);
+          return;
+        }
         this.updateNarrative(id, beat.id, item => { item.status = "queued"; item.error = error instanceof Error ? error.message : String(error); });
       }
     }
+  }
+
+  /** Preserve settled effects and fence unfinished work when a shared service cannot accept calls. */
+  private pauseModelService(document: WorldInstanceDocument, pause: ModelServicePause, originRunId?: string): void {
+    for (const run of new Set([currentRun(document), originRunId ? document.runs[originRunId] : null])) {
+      if (!run) continue;
+      if (["queued", "running", "pausing"].includes(run.status)) {
+        run.generation += 1; this.runControllers.get(run.id)?.abort();
+        const timer = this.runTimers.get(run.id);
+        if (timer) this.clearTimer(timer);
+        this.runTimers.delete(run.id);
+      }
+      run.status = "failed"; run.stopReason = "model-service-paused";
+      run.servicePause = structuredClone(pause); run.error = pause.message; run.updatedAt = this.now().toISOString();
+    }
+    document.scheduler = { mode: "paused", generation: document.scheduler.generation + 1, nextTickAt: null };
+    if (document.actionWindow) document.actionWindow.deadlineAt = null;
+    this.cancelTimer(document.id);
   }
 
   private static singleton: WorldHost | undefined;
@@ -761,7 +796,7 @@ export class WorldHost {
         /* turbopackIgnore: true */ process.env.LIVINGWORLD_MODEL_CATALOG_PATH ?? "config/models.yaml",
       ));
       const dataRoot = path.resolve(
-        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v26",
+        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v27",
       );
       const modelRegistry = new ModelRegistry(catalog, dataRoot);
       modelRegistry.startBackgroundRefresh();
@@ -1244,7 +1279,7 @@ export class WorldHost {
     }
     const now = this.now().toISOString();
     const initial: WorldInstanceDocument = {
-      schemaVersion: 26,
+      schemaVersion: 27,
       id,
       world: toWorldRuntimeContract(definition),
       executionAlgorithm: structuredClone(experiment.algorithmRef),
@@ -1712,6 +1747,7 @@ export class WorldHost {
         controlledView: agentPerspective(document, controlled.agentId),
         conversation: conversationFor(document, controlled),
       } : {}),
+      ...(run?.servicePause ? { servicePause: structuredClone(run.servicePause) } : {}),
     };
   }
 
@@ -1863,7 +1899,7 @@ export class WorldHost {
   }
 
   private openWindow(document: WorldInstanceDocument, requiredAgentIds: string[]): ActionWindow {
-    const deadlineAt = document.runtime.actionWindowMs > 0
+    const deadlineAt = !currentRun(document)?.servicePause && document.runtime.actionWindowMs > 0
       ? new Date(this.now().getTime() + document.runtime.actionWindowMs).toISOString()
       : null;
     return {
@@ -1894,6 +1930,7 @@ export class WorldHost {
       activityIds: [],
       requestedBoundaryCount,
       createdAt: now,
+      startedAtWorldSeconds: document.state.truth.elapsedSeconds,
       updatedAt: now,
       executionIds: [],
       committedRevisions: [],
@@ -2021,6 +2058,8 @@ export class WorldHost {
     const request: WorldAdvanceRequest = {
       expectedRevision: document.state.revision,
       trigger: runRecord.trigger,
+      ...(!runRecord.rootIntents.length && ["participant_action", "realtime"].includes(runRecord.trigger)
+        ? { autonomousUntilSeconds: runRecord.startedAtWorldSeconds + document.runtime.maxAutonomousSpanSeconds } : {}),
       externalActions: window?.kind === "reaction"
         ? structuredClone(window.advanceRequest.externalActions)
         : window?.kind === "decision"
@@ -2223,6 +2262,8 @@ export class WorldHost {
         const task = directControl?.intents[intent.agentId];
         return task?.status === "failed" && task.failure ? [task.failure] : [];
       });
+      const servicePause = Object.values(directControl?.intents ?? {}).find(intent =>
+        intent.failure?.atRevision === document.state.revision - 1 && intent.failure.servicePause)?.failure?.servicePause;
       const directRootComplete = directControl && runRecord.rootIntents.length > 0 && runRecord.rootIntents.every(intent =>
         directControl.completedSubmissionIds.includes(intent.submissionId)) &&
         !Object.entries(directControl.intents).some(([id, intent]) => document.policyBindings[id]?.kind === "model" && intent.causeActionId && (intent.status === "ready" || intent.status === "active"));
@@ -2234,7 +2275,13 @@ export class WorldHost {
       const budgetReached = runRecord.lease.commitCount >= runRecord.lease.maxCommits ||
         this.now().getTime() - Date.parse(runRecord.lease.startedAt) -
           (runRecord.lease.suspendedDurationMs ?? 0) >= runRecord.lease.maxWallTimeMs;
-      if (directRootFailures.length) {
+      if (servicePause) {
+        runRecord.status = "failed"; runRecord.stopReason = "model-service-paused";
+        runRecord.servicePause = structuredClone(servicePause); runRecord.error = servicePause.message;
+        document.scheduler = { mode: "paused", generation: document.scheduler.generation + 1, nextTickAt: null };
+        if (requiredAgentIds.length) document.actionWindow = this.openWindow(document, requiredAgentIds);
+        if (document.actionWindow) document.actionWindow.deadlineAt = null;
+      } else if (directRootFailures.length) {
         runRecord.status = "failed"; runRecord.stopReason = "local-model-task-failed";
         runRecord.error = directRootFailures.map(failure => failure.message).join("; ");
         if (requiredAgentIds.length) document.actionWindow = this.openWindow(document, requiredAgentIds);
@@ -2400,6 +2447,7 @@ export class WorldHost {
       const failureMessage = error instanceof Error ? error.message : String(error);
       failedRun.error = failureMessage.trim() ? failureMessage
         : error instanceof Error && error.name.trim() ? error.name : "World execution failed";
+      const servicePause = modelServicePause(error);
       failedRun.updatedAt = this.now().toISOString();
       failed.actionWindow = null;
       failed.updatedAt = failedRun.updatedAt;
@@ -2408,6 +2456,7 @@ export class WorldHost {
           this.now().getTime() + failed.runtime.realtimeIntervalMs,
         ).toISOString();
       }
+      if (servicePause) this.pauseModelService(failed, servicePause, failedRun.id);
       try {
         return this.persist(latest, failed);
       } catch {
@@ -2919,6 +2968,7 @@ export class WorldHost {
   }
 
   private scheduleWindowDeadline(document: WorldInstanceDocument): void {
+    if (currentRun(document)?.servicePause) { this.cancelTimer(document.id); return; }
     if (!document.actionWindow?.deadlineAt) return;
     this.scheduleAt(document.id, document.actionWindow.deadlineAt, async () => {
       const runId = await this.serialized(document.id, async () => {
@@ -2949,6 +2999,7 @@ export class WorldHost {
   }
 
   private scheduleRealtime(document: WorldInstanceDocument): void {
+    if (currentRun(document)?.servicePause) { this.cancelTimer(document.id); return; }
     if (document.scheduler.mode !== "realtime") return;
     const generation = document.scheduler.generation;
     const at = document.scheduler.nextTickAt ??

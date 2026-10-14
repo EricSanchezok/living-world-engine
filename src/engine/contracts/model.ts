@@ -596,7 +596,7 @@ export interface AgentAdmissionCommit {
 export type WorldEventDraft = Omit<WorldEvent, "step">;
 
 export interface SimulationState {
-  schemaVersion: 19;
+  schemaVersion: 20;
   executionState: import("../runtime/execution-state").AlgorithmExecutionState | null;
   worldId: string;
   worldHash: string;

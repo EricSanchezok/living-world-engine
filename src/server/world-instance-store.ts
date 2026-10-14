@@ -238,7 +238,7 @@ function validateActionWindow(document: WorldInstanceDocument): void {
 }
 
 export function validateWorldInstanceDocument(document: WorldInstanceDocument, rulePackages?: RulePackageRegistry): void {
-  if (document.schemaVersion !== 26) throw new Error("world instance schema v26 required");
+  if (document.schemaVersion !== 27) throw new Error("world instance schema v27 required");
   requireText(document.id, "instance id");
   requireText(document.title, "instance title");
   if (!Array.isArray(document.narratives)) throw new Error("instance narrative outbox is required");
@@ -304,6 +304,10 @@ export function validateWorldInstanceDocument(document: WorldInstanceDocument, r
     throw new Error("paused scheduler cannot have a next tick");
   }
   for (const [runId, run] of Object.entries(document.runs)) {
+    if (!Number.isSafeInteger(run.startedAtWorldSeconds) || run.startedAtWorldSeconds < 0 ||
+      run.startedAtWorldSeconds > document.state.truth.elapsedSeconds) throw new Error(`run ${runId} has invalid world-time origin`);
+    if (run.servicePause && (!["request-limit", "spending-limit", "token-limit", "usage-unresolved"].includes(run.servicePause.code) ||
+      !run.servicePause.message.trim() || run.servicePause.retry !== "after-service-change")) throw new Error(`run ${runId} has invalid service pause`);
     if (run.id !== runId) throw new Error(`run key mismatch for ${runId}`);
     if (!["queued", "running", "pausing", "paused", "debug-paused", "awaiting-decision", "awaiting-reaction",
       "preparation-invalidated", "completed", "failed", "budget-paused"]

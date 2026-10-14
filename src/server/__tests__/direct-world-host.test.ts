@@ -14,6 +14,7 @@ import { DirectWorldAlgorithm } from "../../engine/direct/algorithm";
 import { SimulationEngine } from "../../engine/runtime/simulation";
 import { readDirectState } from "../../engine/direct/state";
 import type { StructuredModelRequest } from "../../engine/models/model-provider";
+import { ExperimentBudgetError } from "../../engine/benchmarks/action-compilation/experiment-budget";
 
 function createText(wire: DirectTestWire) {
   const context = directCreationContext(wire);
@@ -26,6 +27,64 @@ function createText(wire: DirectTestWire) {
 }
 
 describe("direct world through persistent WorldHost", () => {
+  it.each(["decision", "narrative"])("persists a %s service pause across reads and restart, then resumes only after a new player request", async phase => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-service-pause-"));
+    let unavailable = true, clock = Date.now();
+    const timers = new Map<ReturnType<typeof setTimeout>, () => void>();
+    const clearTimers = () => { for (const timer of timers.keys()) clearTimeout(timer); timers.clear(); };
+    const f = directTestProvider(wire => {
+      if (unavailable && phase === "decision") throw new ExperimentBudgetError("phase HTTP budget exhausted", "request-limit");
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id, nativeAnswer(q,
+        id === "expression" ? 0 : id.startsWith("paragraph") ? "grounded" : id === "operation" ? "observe" :
+          id === "target" ? "self" : id.includes("outcome") ? "succeeded" : "none")]));
+    }, wire => {
+      if (unavailable && phase === "narrative") throw new ExperimentBudgetError("phase HTTP budget exhausted", "request-limit");
+      return createText(wire);
+    });
+    await f.registry.capture();
+    const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
+    const repository = new MemoryWorldRepository({ [world.id]: world });
+    let database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
+    const makeHost = () => new WorldHost({ repository, store: database, ledger: database, provider: f.gateway,
+      now: () => new Date(clock), setTimer: (callback, delay) => {
+        const timer = setTimeout(() => { timers.delete(timer); callback(); }, delay); timer.unref(); timers.set(timer, callback); return timer;
+      }, clearTimer: timer => { clearTimeout(timer); timers.delete(timer); } });
+    let host = makeHost();
+    try {
+      const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } }), id = created.summary.id;
+      await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });
+      const participant = Object.values(database.readInstance(id).document.participants)[0]!;
+      await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "cap-reached", text: "看看周围" });
+      for (let i = 0; i < 200 && !host.instance(id).servicePause; i++) await new Promise(resolve => setTimeout(resolve, 5));
+      const saved = database.readInstance(id).document, calls = f.transport.mock.calls.length;
+      expect(host.instance(id).servicePause, JSON.stringify({ runs: saved.runs, control: saved.state.executionState?.data })).toMatchObject({ code: "request-limit", retry: "after-service-change" });
+      expect(host.instance(id).conversation!.turns.at(-1)).toMatchObject({ status: "failed", servicePause: { code: "request-limit" } });
+      expect(saved.scheduler).toMatchObject({ mode: "paused", nextTickAt: null });
+      expect(saved.actionWindow!.deadlineAt).toBeNull(); expect(timers.size).toBe(0);
+      if (phase === "decision") expect(saved.state.truth).toEqual(world.initialState.truth);
+      else {
+        expect(saved.state.truth.elapsedSeconds).toBe(1);
+        expect(saved.narratives[0]).toMatchObject({ attempts: 1, status: "fallback" });
+        expect(saved.narratives[0]!.segments.length).toBeGreaterThan(0);
+      }
+      expect(replaySimulationState(saved.state)).toEqual(saved.state);
+      clearTimers(); database.close(); clock += 86_400_000;
+      database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false }); host = makeHost();
+      for (let i = 0; i < 3; i++) host.instance(id);
+      await host.drainNarratives(id);
+      expect(f.transport).toHaveBeenCalledTimes(calls); expect(timers.size).toBe(0);
+      expect(database.readInstance(id).document.state.truth).toEqual(saved.state.truth);
+      unavailable = false;
+      await host.submitAction(id, participant.id, { expectedRevision: saved.state.revision, submissionId: "service-recovered", text: "看看自己" });
+      for (let i = 0; i < 200 && database.readInstance(id).document.state.revision === saved.state.revision; i++) await new Promise(resolve => setTimeout(resolve, 5));
+      await host.drainNarratives(id);
+      const recovered = host.instance(id), final = database.readInstance(id).document;
+      expect(recovered.servicePause).toBeUndefined();
+      expect(recovered.conversation!.turns.find(turn => turn.action?.submissionId === "cap-reached")?.servicePause?.code).toBe("request-limit");
+      expect(final.state.truth.elapsedSeconds).toBe(saved.state.truth.elapsedSeconds + 1); expect(final.state.truth.quantities).toEqual(saved.state.truth.quantities);
+      expect(replaySimulationState(final.state)).toEqual(final.state);
+    } finally { clearTimers(); database.close(); rmSync(root, { recursive: true, force: true }); }
+  });
   it("persists streamed paragraphs, holds the reply clock, resumes after restart and never regenerates on reads", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-narrative-recovery-"));
     let paragraphsSaved!: () => void, interrupt!: () => void, narrativeCalls = 0;
@@ -248,8 +307,8 @@ describe("direct world through persistent WorldHost", () => {
       let host = makeHost();
       const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } });
       const id = created.summary.id;
-      expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 26, executionAlgorithm: DEFAULT_ALGORITHM_REF,
-        state: { schemaVersion: 19, executionState: { data: { kind: "direct-world" } } } });
+      expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 27, executionAlgorithm: DEFAULT_ALGORITHM_REF,
+        state: { schemaVersion: 20, executionState: { data: { kind: "direct-world" } } } });
       expect(f.transport).not.toHaveBeenCalled();
       await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });
       expect(f.transport).not.toHaveBeenCalled();
