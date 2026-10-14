@@ -10,7 +10,7 @@ When there is delivered dialogue, follow publicationTask.speechOrder: the questi
 
 Only the player's speech is established when publicationTask.ownSpeechOnly is true. Convey those words and their requested delivery; a later event supplies the response. When scene.speech is empty, this moment contains no new spoken words.
 
-publicationTask.publishedForThisRequest and publishedPrefix have already appeared. During repair, write only the missing continuation; do not open with another description of the same action or result. If the prefix already contains every result and delivered line, paragraphs may be empty. The published ending is immutable. Continue after them. discourse supplies antecedents and conversational history; it does not create new facts. Never replay an earlier action, sentence or movement as this moment's result.
+publicationTask.publishedForThisRequest and publishedPrefix have already appeared. A rejected draft has not appeared. Follow the repair task: with an empty publishedPrefix, write the complete scene again, preserving the actual manner and all delivered lines; with a published prefix, continue only its missing result and the listed unpublished speech. Only an already complete published result permits empty paragraphs. The published ending is immutable. discourse supplies antecedents and conversational history; it does not create new facts. Never replay an earlier action, sentence or movement as this moment's result.
 
 ## Grounded people and surroundings
 

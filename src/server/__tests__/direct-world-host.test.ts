@@ -270,6 +270,52 @@ describe("direct world through persistent WorldHost", () => {
       expect(replaySimulationState(final.state)).toEqual(final.state);
     } finally { clearTimers(); database.close(); rmSync(root, { recursive: true, force: true }); }
   });
+  it("publishes a committed question when service pauses before its coalesced NPC reply", async () => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-paused-reply-"));
+    let proseCalls = 0;
+    const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
+      const player = (wire.state as { perspective?: { agentId: string } }).perspective?.agentId === "player";
+      const choice = id === "operation" ? "speak" : id === "recipient" ? player ? "broadcast" : "traveler" :
+        id === "speech" ? "create" : id === "timing" ? "default" : id.startsWith("paragraph") ? "grounded" :
+        id.includes("outcome") ? "succeeded" : id.includes("delivery") ? "delivered" :
+        id.includes("visible") || id.includes("entity") ? "visible" : id.includes("progress") ? "complete" : "none";
+      return [id, nativeAnswer(q, id === "expression" ? 0 : choice)];
+    })), wire => {
+      const context = directCreationContext(wire);
+      if (context.scene) { proseCalls++; return createText(wire); }
+      if (!context.playerControlled) throw new ExperimentBudgetError("unknown usage requires review", "usage-unresolved");
+      return { attempt: "向周围问价", utterance: "请问铜钥匙多少钱？", manner: null };
+    });
+    await f.registry.capture();
+    const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
+    const repository = new MemoryWorldRepository({ [world.id]: world });
+    let database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
+    const makeHost = () => new WorldHost({ repository, store: database, ledger: database, provider: f.gateway });
+    let host = makeHost();
+    try {
+      const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } }), id = created.summary.id;
+      await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });
+      const participant = Object.values(database.readInstance(id).document.participants)[0]!;
+      await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "question-before-pause", text: "向周围问问铜钥匙多少钱" });
+      for (let i = 0; i < 300 && !host.instance(id).servicePause; i++) await new Promise(resolve => setTimeout(resolve, 5));
+      await host.drainNarratives(id);
+      const saved = database.readInstance(id).document;
+      expect(host.instance(id).servicePause).toMatchObject({ code: "usage-unresolved" });
+      expect(saved.narratives).toHaveLength(1);
+      expect(saved.narratives[0]).toMatchObject({ status: "fallback", attempts: 0,
+        segments: [{ sequence: 0, text: "你说：“请问铜钥匙多少钱？”" }] });
+      expect(saved.state.history.flatMap(step => step.directEvent?.frames ?? []).map(frame => frame.actorId)).toEqual(["player"]);
+      expect(saved.actionWindow?.deadlineAt).toBeNull();
+      expect(proseCalls).toBe(0);
+      expect(replaySimulationState(saved.state)).toEqual(saved.state);
+      const calls = f.transport.mock.calls.length;
+      database.close(); database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false }); host = makeHost();
+      host.instance(id); host.instance(id); await host.drainNarratives(id);
+      expect(f.transport).toHaveBeenCalledTimes(calls);
+      expect(database.readInstance(id).document.narratives).toEqual(saved.narratives);
+      expect(database.readInstance(id).document.state).toEqual(saved.state);
+    } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+  });
   it("persists streamed paragraphs, holds the reply clock, resumes after restart and never regenerates on reads", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-narrative-recovery-"));
     let paragraphsSaved!: () => void, interrupt!: () => void, narrativeCalls = 0;
@@ -280,6 +326,7 @@ describe("direct world through persistent WorldHost", () => {
       wire => {
         const context = directCreationContext(wire);
         expect(context.publishedPrefix).toEqual(["石门上还留着水迹。"]);
+        expect(context.repair).toMatchObject({ mode: "continue_published" });
         expect(context).not.toHaveProperty("playerFocus");
         expect(context.scene).not.toHaveProperty("requestedAction");
         expect(JSON.stringify(context.scene)).not.toContain("canonicalEntityIds");
@@ -331,7 +378,11 @@ describe("direct world through persistent WorldHost", () => {
       expect(host.instance(id).conversation!.turns.at(-1)!.responses!.map(response => response.text)).toEqual(texts);
     } finally { interrupt(); database.close(); rmSync(root, { recursive: true, force: true }); }
   });
-  it.each(["一位陌生船长走来。", "告示上写着「全部免费带走」。"])("retains an accepted prefix and repairs unsupported content: %s", async unsupported => {
+  it.each([
+    { unsupported: "一位陌生船长走来。", prefix: ["你清点了随身物资。"] },
+    { unsupported: "告示上写着「全部免费带走」。", prefix: ["你清点了随身物资。"] },
+    { unsupported: "你转身跑了出去。", prefix: [] },
+  ])("repairs unsupported content using only the published prefix: $unsupported", async ({ unsupported, prefix }) => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-narrative-grounding-"));
     let calls = 0;
     const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
@@ -341,8 +392,9 @@ describe("direct world through persistent WorldHost", () => {
       return [id, nativeAnswer(q, id === "expression" ? 0 : choice)];
     })), wire => {
       const context = directCreationContext(wire);
-      if (++calls === 1) return { paragraphs: ["你清点了随身物资。", unsupported] };
-      expect(context.publishedPrefix).toEqual(["你清点了随身物资。"]);
+      if (++calls === 1) return { paragraphs: [...prefix, unsupported] };
+      expect(context.publishedPrefix).toEqual(prefix);
+      expect(context.repair).toMatchObject({ mode: prefix.length ? "continue_published" : "replace_unpublished" });
       return { paragraphs: ["三枚灵石仍在你身上。"] };
     });
     await f.registry.capture();
@@ -358,7 +410,7 @@ describe("direct world through persistent WorldHost", () => {
       await host.drainNarratives(id);
       const saved = database.readInstance(id).document;
       expect(saved.narratives[0]).toMatchObject({ status: "complete", attempts: 2, segments: [
-        { sequence: 0, text: "你清点了随身物资。" }, { sequence: 1, text: "三枚灵石仍在你身上。" }] });
+        ...prefix.map((text, sequence) => ({ sequence, text })), { sequence: prefix.length, text: "三枚灵石仍在你身上。" }] });
       expect(saved.narratives[0]!.grounding.flatMap(check => check.choices)).toContain("added_content");
       expect(saved.state.truth.elapsedSeconds).toBe(1);
       expect(Object.keys(saved.state.truth.entities)).toEqual(Object.keys(world.initialState.truth.entities));

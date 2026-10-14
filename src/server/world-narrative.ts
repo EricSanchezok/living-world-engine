@@ -143,6 +143,24 @@ export function narrativeDiscourse(discourse: ParticipantDiscourse) {
   }), unresolved: discourse.unresolved.map(({ requested: _requested, ...item }) => { void _requested; return item; }) };
 }
 
+function unpublishedSpeech(source: ScenePacket, published: string[]) {
+  const text = published.join("\n"), used = new Map<string, number>();
+  return source.speech.filter(speech => {
+    const quote = `“${speech.utterance}”`, ordinal = (used.get(quote) ?? 0) + 1;
+    used.set(quote, ordinal);
+    return text.split(quote).length - 1 < ordinal;
+  });
+}
+
+/** A rejected draft is never evidence that its words reached the reader. */
+export function narrativeRepair(source: ScenePacket, published: string[], issue: string | null) {
+  return { mode: published.length ? "continue_published" : "replace_unpublished", issue,
+    immutablePublishedParagraphs: published, unpublishedSpeech: unpublishedSpeech(source, published),
+    task: published.length
+      ? "Continue after the exact published ending. Cover the still-missing result and the listed unpublished speech in order. Do not replay published content. Return no paragraphs only if nothing remains."
+      : "Nothing from the rejected draft was shown. Write the complete supported scene, including every listed delivered line in order and the actual accompanying manner. Do not treat rejected text as published history." };
+}
+
 /** Already introduced speakers need no second creative pass to repeat their delivered words. */
 export function deliveredDialogue(source: ScenePacket, discourse: ParticipantDiscourse) {
   if (source.reply || !source.speech.length || source.observations.length !== source.speech.length) return null;
@@ -402,9 +420,8 @@ export function narrativeContinuation(text: string, published: string[]): string
   return remaining;
 }
 export function requireDeliveredSpeech(source: ScenePacket, paragraphs: string[]): void {
-  const text = paragraphs.join("\n");
-  if (source.speech.some(speech => !text.includes(speech.utterance))) {
-    throw new Error("Include the missing delivered speech references after the published prefix; do not replay earlier paragraphs");
+  if (unpublishedSpeech(source, paragraphs).length) {
+    throw new Error("Include the missing delivered speech references in their original order. Only actually published paragraphs count as presented; rejected drafts do not.");
   }
 }
 
@@ -441,6 +458,7 @@ export function assertSpeechOrder(source: ScenePacket, paragraphs: string[]): vo
 }
 export function narrativeFallback(source: ScenePacket, published: string[] = []): string {
   const existing = published.join("\n");
+  const speechOccurrences = new Map<string, number>();
   const paragraphs = source.observations.map(observation => {
     const scene = observation.scene;
     if (!scene) return observation.summary;
@@ -450,13 +468,32 @@ export function narrativeFallback(source: ScenePacket, published: string[] = [])
       scene.actionKind === "observe" && scene.action?.target && line.startsWith(`${scene.action.target.label}：`));
     const outcome = scene.outcome === "行动已完成。" && factualLines.some(line => line.includes("转移了")) ? "" :
       scene.outcome.replace(/^本次已执行的方法：(.+?)。+具体结果以观察到的状态为准。$/u, (_, method: string) => `${scene.actor}${method}。`);
-    return [scene.speech ? existing.includes(scene.speech.utterance) ? "" : `${scene.speech.speaker}说：“${scene.speech.utterance}”` : outcome,
-      ...(published.length ? [] : scene.details.map(detail => `${detail.label}：${detail.description}`)),
+    const manner = scene.manner?.trim().replace(/[。.!！?？]+$/u, "");
+    const performedManner = manner ? `${manner.startsWith(scene.actor) ? "" : scene.actor}${manner}` : "";
+    const quote = scene.speech ? `“${scene.speech.utterance}”` : null;
+    const ordinal = quote ? (speechOccurrences.get(quote) ?? 0) + 1 : 0;
+    if (quote) speechOccurrences.set(quote, ordinal);
+    const speech = scene.speech && quote && existing.split(quote).length - 1 < ordinal
+      ? `${performedManner || `${scene.speech.speaker}说`}：“${scene.speech.utterance}”` : "";
+    const details = published.length ? [] : scene.details.map(detail => `你注意到${detail.label}。${detail.description}${/[。.!！?？]$/u.test(detail.description) ? "" : "。"}`);
+    return [...details,
+      scene.speech ? speech : [performedManner ? `${performedManner}。` : "", outcome].filter(Boolean).join("\n"),
       ...factualLines.map(line => line.replace(/^我向(.+)转移了(.+)。$/u, "你把$2交给了$1。")
         .replace(/^(.+)向我转移了(.+)。$/u, "你收到了$1交给你的$2。"))]
-      .filter(text => text && !existing.includes(text)).filter((text, index, all) => all.indexOf(text) === index).join("\n");
-  }).filter(text => text && !existing.includes(text));
+      .filter(text => text && (text === speech || !existing.includes(text))).filter((text, index, all) => all.indexOf(text) === index).join("\n");
+  }).filter(Boolean);
   return paragraphs.join("\n\n") || (published.length ? "" : source.reply?.kind === "recovery"
     ? "这一步的回应中断了，已确认的进展仍然保留。你可以接着说明刚才的意思。"
     : source.reply ? "现有记录还不足以清楚回答这个问题。" : "眼前的情况还没有出现新的变化。");
+}
+
+/** A paused service cannot generate prose, but its committed receipts are ready. */
+export function settleQueuedNarratives(document: WorldInstanceDocument, now: string): void {
+  for (const beat of document.narratives.filter(item => item.status === "queued")) {
+    const fallback = narrativeFallback(beat.source, beat.segments.map(segment => segment.text));
+    if (fallback) beat.segments.push({ sequence: beat.segments.length, text: fallback,
+      mentions: explicitNarrativeMentions(fallback, beat.source), publishedAt: now });
+    beat.status = "fallback"; beat.completedAt = now;
+    if (beat.segments.length) beat.firstParagraphAt ??= now;
+  }
 }

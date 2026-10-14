@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { decisionPromptV2 } from "../../engine/models/decision-v2";
-import { completeParagraphs, renderNarrativeParagraph, renderNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeEvidence, narrativeTask, narrativeDiscourse, deliveredDialogue, narrativeGroundingChoices, narrativeOutputSchema, type ScenePacket } from "../world-narrative";
+import { completeParagraphs, renderNarrativeParagraph, renderNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeEvidence, narrativeTask, narrativeDiscourse, narrativeRepair, deliveredDialogue, narrativeGroundingChoices, narrativeOutputSchema, type ScenePacket } from "../world-narrative";
 import type { ParticipantDiscourse } from "../../engine/contracts/discourse";
 
 const source: ScenePacket = {
@@ -212,6 +212,42 @@ describe("immutable narrative paragraphs", () => {
   });
   it("keeps factual speech when the prose service is unavailable", () => {
     expect(narrativeFallback(source)).toBe("店主说：“三枚金币；我还没同意赊账。”");
+  });
+  it("replaces a wholly rejected draft and continues only an actually published prefix", () => {
+    const scene = structuredClone(source);
+    scene.speech.unshift({ id: "speech-question", speaker: "你", utterance: "多少钱？" });
+    expect(narrativeRepair(scene, [], "Unsupported gesture")).toMatchObject({
+      mode: "replace_unpublished", immutablePublishedParagraphs: [], unpublishedSpeech: scene.speech,
+    });
+    expect(narrativeRepair(scene, ["你问：“多少钱？”"], "Unsupported gesture")).toMatchObject({
+      mode: "continue_published", immutablePublishedParagraphs: ["你问：“多少钱？”"], unpublishedSpeech: [scene.speech[1]],
+    });
+  });
+  it("accounts for identical delivered lines separately in repair, completion and fallback", () => {
+    const scene = structuredClone(source);
+    scene.speech.push({ ...scene.speech[0]!, id: "speech-repeat" });
+    scene.observations.push({ ...structuredClone(scene.observations[0]!), id: "heard-again" });
+    const prefix = ["店主说：“三枚金币；我还没同意赊账。”"];
+    expect(narrativeRepair(scene, prefix, null).unpublishedSpeech).toEqual([scene.speech[1]]);
+    expect(() => requireDeliveredSpeech(scene, prefix)).toThrow("missing delivered");
+    expect(narrativeFallback(scene, prefix)).toBe(prefix[0]);
+    const complete = [...prefix, narrativeFallback(scene, prefix)];
+    expect(() => requireDeliveredSpeech(scene, complete)).not.toThrow();
+    expect(() => assertSpeechMultiplicity(scene, complete)).not.toThrow();
+    expect(narrativeFallback(scene, complete)).toBe("");
+  });
+  it("keeps an executed delivery gesture and introduces the visible speaker before their reply", () => {
+    const scene = structuredClone(source);
+    const own = { ...structuredClone(scene.observations[0]!), id: "question", summary: "话语送达。" };
+    Object.assign(own.scene!, { actor: "你", manner: "抬手招呼", speech: { speaker: "你", utterance: "有人吗？" } });
+    scene.observations.unshift(own);
+    scene.speech.unshift({ id: "speech-question", ...own.scene!.speech! });
+    scene.observations[1]!.scene!.details = [{ localEntityId: "shopkeeper", label: "门边的人", description: "他穿着一件旧外衣。" }];
+    const fallback = narrativeFallback(scene);
+    expect(fallback).toContain("你抬手招呼：“有人吗？”");
+    expect(fallback.indexOf("你注意到门边的人。他穿着一件旧外衣。")).toBeLessThan(fallback.indexOf("店主说"));
+    expect(() => assertSpeechOrder(scene, [fallback])).not.toThrow();
+    expect(() => requireDeliveredSpeech(scene, [fallback])).not.toThrow();
   });
   it("allows observed signs and remembered literal text without treating them as new speech", () => {
     const scene = structuredClone(source);

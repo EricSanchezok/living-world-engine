@@ -1,6 +1,6 @@
 import { loadPromptAsset } from "../engine/prompts";
 import { agentCapabilityModels } from "../engine/models/capability-bindings";
-import { enqueueNarrative, nextNarrative, completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeEvidence, narrativeTask, narrativeDiscourse, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, narrativeOutputSchema, narrativeOutputJsonSchema, type NarrativeBeat } from "./world-narrative";
+import { enqueueNarrative, nextNarrative, completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeEvidence, narrativeTask, narrativeDiscourse, narrativeRepair, settleQueuedNarratives, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, narrativeOutputSchema, narrativeOutputJsonSchema, type NarrativeBeat } from "./world-narrative";
 import { participantDiscourse } from "./world-discourse";
 import { randomUUID } from "node:crypto";
 import { rmSync } from "node:fs";
@@ -687,8 +687,7 @@ export class WorldHost {
           context: { discourse: narrativeDiscourse(discourse),
             publishedPrefix: prefix, scene: narrativeEvidence(beat.source),
             publicationTask: narrativeTask(beat.source, participantDiscourse(document, beat.participantId, beat.id)),
-            repair: beat.error ? { issue: beat.error, immutablePublishedParagraphs: prefix,
-              task: "Write only the missing continuation after this exact published ending. Remove the rejected assertion. Do not restart the scene or paraphrase any already presented result. Include only still-unpublished speech references. If nothing else remains, return an empty paragraphs array." } : null },
+            repair: beat.error || prefix.length ? narrativeRepair(beat.source, prefix, beat.error) : null },
           schema: narrativeOutputSchema, wireJsonSchema: narrativeOutputJsonSchema, jsonExamplePolicy: "omit",
           onOutputText: async text => {
             const paragraphs = completeParagraphs(text);
@@ -1005,6 +1004,7 @@ export class WorldHost {
   private persist(stored: StoredWorldInstance, document: WorldInstanceDocument): StoredWorldInstance {
     try {
       enqueueNarrative(document, this.now().toISOString());
+      if (currentRun(document)?.servicePause) settleQueuedNarratives(document, this.now().toISOString());
       const saved = this.options.store.compareAndSwapInstance(document.id, stored.generation, document, { instanceId: document.id });
       this.notifyInstance(document.id); this.scheduleNarrative(saved.document);
       return saved;
@@ -2409,6 +2409,7 @@ export class WorldHost {
       runRecord.lastDebugRequestId = latestRun.lastDebugRequestId;
       document.narratives = structuredClone(latest.document.narratives);
       enqueueNarrative(document, this.now().toISOString());
+      if (currentRun(document)?.servicePause) settleQueuedNarratives(document, this.now().toISOString());
       const committed = execution && this.options.ledger && isAtomicStore(this.options.store)
         ? this.options.store.compareAndSwapInstanceAndFinishExecution(
             document.id,
