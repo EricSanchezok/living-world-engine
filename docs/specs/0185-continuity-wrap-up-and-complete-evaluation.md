@@ -28,4 +28,4 @@ Use budget admission regressions, narrative and host regressions, `check:fast`, 
 
 ## Evidence
 
-The prior [interrupted regressions](../research/2026-10-14-conversation-continuity-regressions.md) remain historical evidence. Final execution and integration evidence will be linked after this work completes.
+The prior [interrupted regressions](../research/2026-10-14-conversation-continuity-regressions.md) remain historical evidence. The [complete wrap-up report](../research/2026-10-15-conversation-continuity-wrap-up.md) records all 72 completed turns, quality and performance limitations, persistence checks and primary-checkout integration. The [full transcript](../research/2026-10-15-conversation-continuity-wrap-up-a1f93bef-transcript.md) retains every response and review reason.
