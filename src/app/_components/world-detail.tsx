@@ -183,10 +183,6 @@ export function WorldDetail({
     }
   }
 
-  useEffect(() => {
-    if (startStage.kind === "customize") displayNameRef.current?.focus();
-  }, [startStage.kind]);
-
   const choices: StartChoice[] = options
     ? [
         ...options.origins.map((origin) => ({ key: `origin:${origin.id}`, kind: "origin" as const, origin })),
@@ -371,12 +367,10 @@ export function WorldDetail({
                   className="cg-start-dialog cg-modal-surface"
                   data-stage={startStage.kind}
                   initial={false}
-                  layout
                   ref={startDialogRef}
                   transition={{
                     duration: 0.2,
                     ease: premiumEase,
-                    layout: { duration: 0.42, ease: premiumEase },
                   }}
                 >
                   <AnimatePresence initial={false} mode="wait">
@@ -390,11 +384,12 @@ export function WorldDetail({
                       />
                     ) : (
                       <m.div
-                        animate={{ opacity: 1, y: 0 }}
+                        animate={{ opacity: 1 }}
                         className="cg-start-dialog__setup"
-                        exit={{ opacity: 0, y: -8 }}
-                        initial={{ opacity: 1, y: 0 }}
-                        key="setup"
+                        exit={{ opacity: 0 }}
+                        initial={{ opacity: 0 }}
+                        key={startStage.kind}
+                        onAnimationComplete={() => { if (startStage.kind === "customize" && !startError) displayNameRef.current?.focus({ preventScroll: true }); }}
                         transition={{ duration: 0.15, ease: premiumEase }}
                       >
                         <header>
@@ -406,7 +401,7 @@ export function WorldDetail({
                               : "名字、外观与动机会成为角色的一部分，但不会改写这个出身的资源和处境。"}
                           </Dialog.Description>
                         </header>
-                        <div className="cg-start-dialog__content cg-modal-scroll">
+                        <div className="cg-start-dialog__content">
                           {startError ? <StartError message={startError} /> : null}
                           {!options ? <p className="cg-muted" role="status">正在准备身份…</p> : startStage.kind === "choice" ? (
                             <div className="cg-start-choice-step">
@@ -458,31 +453,33 @@ export function WorldDetail({
                             </div>
                           ) : (
                             <form className="cg-origin-form" onSubmit={(event) => { event.preventDefault(); void create(); }}>
-                              <button className="cg-start-dialog__back" onClick={() => setStartStage({ kind: "choice" })} type="button">
-                                <ArrowLeft aria-hidden="true" />重新选择身份
-                              </button>
-                              <section className="cg-selected-origin" aria-label="当前选择的身份">
-                                <span aria-hidden="true" className="cg-selected-origin__mark">{selectedOrigin?.title.slice(0, 1)}</span>
-                                <span><small>{selectedOrigin?.location}</small><strong>{selectedOrigin?.title}</strong><p>{selectedOrigin?.fantasy}</p></span>
-                              </section>
-                              <fieldset className="cg-origin-customization">
-                                <legend className="cg-sr-only">角色定制</legend>
-                                <label>
-                                  你的名字
-                                  <input
-                                    aria-describedby={nameError ? "cg-display-name-error" : undefined}
-                                    aria-invalid={Boolean(nameError) || undefined}
-                                    autoComplete="off"
-                                    maxLength={80}
-                                    onChange={(event) => { setDisplayName(event.target.value); setNameError(""); }}
-                                    ref={displayNameRef}
-                                    value={displayName}
-                                  />
-                                  {nameError ? <small id="cg-display-name-error" role="alert">{nameError}</small> : null}
-                                </label>
-                                <label>外观描述<textarea maxLength={500} onChange={(event) => setAppearance(event.target.value)} placeholder="例如：衣着、体态或引人注意的细节" rows={4} value={appearance} /></label>
-                                <label>一个自由动机<textarea maxLength={500} onChange={(event) => setMotivation(event.target.value)} placeholder="你此刻最想做成什么？" rows={4} value={motivation} /></label>
-                              </fieldset>
+                              <div className="cg-origin-form__fields cg-modal-scroll">
+                                <button className="cg-start-dialog__back" onClick={() => setStartStage({ kind: "choice" })} type="button">
+                                  <ArrowLeft aria-hidden="true" />重新选择身份
+                                </button>
+                                <section className="cg-selected-origin" aria-label="当前选择的身份">
+                                  <span aria-hidden="true" className="cg-selected-origin__mark">{selectedOrigin?.title.slice(0, 1)}</span>
+                                  <span><small>{selectedOrigin?.location}</small><strong>{selectedOrigin?.title}</strong><p>{selectedOrigin?.fantasy}</p></span>
+                                </section>
+                                <fieldset className="cg-origin-customization">
+                                  <legend className="cg-sr-only">角色定制</legend>
+                                  <label>
+                                    你的名字
+                                    <input
+                                      aria-describedby={nameError ? "cg-display-name-error" : undefined}
+                                      aria-invalid={Boolean(nameError) || undefined}
+                                      autoComplete="off"
+                                      maxLength={80}
+                                      onChange={(event) => { setDisplayName(event.target.value); setNameError(""); }}
+                                      ref={displayNameRef}
+                                      value={displayName}
+                                    />
+                                    {nameError ? <small id="cg-display-name-error" role="alert">{nameError}</small> : null}
+                                  </label>
+                                  <label>外观描述<textarea maxLength={500} onChange={(event) => setAppearance(event.target.value)} placeholder="例如：衣着、体态或引人注意的细节" rows={4} value={appearance} /></label>
+                                  <label>一个自由动机<textarea maxLength={500} onChange={(event) => setMotivation(event.target.value)} placeholder="你此刻最想做成什么？" rows={4} value={motivation} /></label>
+                                </fieldset>
+                              </div>
                               <footer className="cg-origin-form__footer">
                                 <p>角色创建后，世界会从这个身份可见的第一幕开始。</p>
                                 <button className="cg-start-dialog__confirm" disabled={Boolean(busy)} type="submit">

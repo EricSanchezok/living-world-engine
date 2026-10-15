@@ -3,6 +3,8 @@ import { expect, test, type Page } from "@playwright/test";
 import { fixtureArchive } from "../support/world-fixture";
 
 async function expectNoViolations(page: Page): Promise<void> {
+  const setup = page.locator(".cg-start-dialog__setup");
+  if (await setup.count()) await expect(setup).toHaveCSS("opacity", "1");
   const results = await new AxeBuilder({ page }).analyze();
   expect(results.violations).toEqual([]);
 }

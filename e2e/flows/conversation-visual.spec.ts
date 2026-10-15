@@ -50,6 +50,7 @@ test("the new-game identity deck and customization form have stable responsive l
   await page.getByRole("button", { name: /开始新游戏/ }).click();
   const chooser = page.getByRole("dialog", { name: "选择你的身份" });
   await expect(chooser).toBeVisible();
+  const initialDialogBox = await chooser.boundingBox();
   await expect(page).toHaveScreenshot("start-identity-deck-light-desktop.png", screenshotOptions);
 
   await page.setViewportSize({ width: 320, height: 720 });
@@ -59,7 +60,9 @@ test("the new-game identity deck and customization form have stable responsive l
 
   await chooser.locator(".cg-start-card").filter({ hasText: "庭院旅人" }).click();
   await chooser.getByRole("button", { name: "继续塑造角色" }).click();
-  await expect(page.getByRole("dialog", { name: "成为庭院旅人" })).toBeVisible();
+  const customization = page.getByRole("dialog", { name: "成为庭院旅人" });
+  await expect(customization).toBeVisible();
+  expect(await customization.boundingBox()).toEqual(initialDialogBox);
   await expect(page).toHaveScreenshot("start-customization-light-desktop.png", screenshotOptions);
 
   await page.setViewportSize({ width: 320, height: 720 });

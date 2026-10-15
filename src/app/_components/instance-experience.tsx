@@ -158,17 +158,6 @@ function ReactionConsole({
   );
 }
 
-function DecisionConsole() {
-  return (
-    <div className="cg-thread-status" aria-label="行动决策窗口" role="status">
-      <div className="cg-thread-status__copy">
-        <strong>轮到你决定下一步</strong>
-        <span>描述一个自然语言行动，世界会从当前边界继续推进。</span>
-      </div>
-    </div>
-  );
-}
-
 function ActionSubmitConsole() {
   return (
     <div className="cg-thread-status" aria-label="行动提交状态" role="status">
@@ -213,7 +202,7 @@ function participantMessages(
     });
     if (!turn.action) return assistants;
     return [{
-      id: `${turn.id}:action`,
+      id: `action:${turn.action.submissionId}`,
       role: "user",
       content: [{ type: "text", text: turn.action.text }],
       createdAt: new Date(turn.createdAt),
@@ -221,7 +210,7 @@ function participantMessages(
   });
   if (optimistic && !turns.some((turn) => turn.action?.submissionId === optimistic.id)) {
     messages.push({
-      id: `optimistic:${optimistic.id}:action`,
+      id: `action:${optimistic.id}`,
       role: "user",
       content: [{ type: "text", text: optimistic.text }],
       createdAt: new Date(optimistic.at),
@@ -586,27 +575,7 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
   const roleView = detail.controlledView ?? observer?.selected?.perspective;
   const possibleNextActions = detail.conversation?.turns.find((turn) => !turn.action)?.response?.possibleNextActions ?? [];
   const orbPhase: ControlOrbPhase = worldProcessing ? "running" : busy ? "confirming" : "saved";
-  const footerKey = !detail.controlledView
-    ? "observer"
-    : busy === "action"
-      ? "action-submit"
-      : reactionWindow
-        ? `reaction:${reactionWindow.id}`
-        : detail.run?.status === "awaiting-decision"
-          ? "decision"
-          : detail.run && [
-            "queued",
-            "running",
-            "pausing",
-            "paused",
-            "budget-paused",
-            "debug-paused",
-            "preparation-invalidated",
-          ].includes(detail.run.status)
-            ? `run:${detail.run.id}:${detail.run.status}:${detail.run.debug.stageIndex}:${detail.run.debug.stageKey ?? ""}`
-            : preferences.advancedRoleControl
-              ? "control"
-              : "none";
+
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>
@@ -617,7 +586,6 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
           actionError={error}
           busy={worldProcessing}
           composerMode={composerMode}
-          footerKey={footerKey}
           footer={!detail.controlledView ? (
             <ObserverConsole
               busy={Boolean(busy)}
@@ -662,7 +630,6 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
             />
           ) : detail.run?.status === "awaiting-decision" ? (
             <>
-              <DecisionConsole />
               {preferences.advancedRoleControl ? (
                 <button className="cg-detach-button cg-detach-button--quiet" onClick={() => void openOverlay("control")} type="button">
                   切换或离开角色

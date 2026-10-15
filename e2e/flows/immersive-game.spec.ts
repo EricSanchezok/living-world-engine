@@ -234,7 +234,7 @@ test("a Participant starts from an Origin, receives Arrival, acts, detaches and 
   await installFixture(page);
   await startOrigin(page);
 
-  const composer = page.getByLabel("你的行动");
+  const composer = page.getByRole("textbox", { name: "你的行动", exact: true });
   const lastWorldMessage = page.locator('[data-role="assistant"]').last();
   const suggestionPanel = lastWorldMessage.getByRole("region", { name: "可选的行动建议" });
   await expect(suggestionPanel).toBeVisible();
@@ -269,7 +269,7 @@ test("a Participant starts from an Origin, receives Arrival, acts, detaches and 
   await page.getByRole("button", { name: "确认自己所在的位置" }).click();
   await expect(composer).toHaveValue("确认自己所在的位置");
   await expect(composer).toBeFocused();
-  await composer.fill("我现在在哪里？");
+  await composer.fill("我现在在哪里？\n请描述眼前的环境。");
   let releaseAction!: () => void;
   let markActionStarted!: () => void;
   const actionStarted = new Promise<void>((resolve) => { markActionStarted = resolve; });
@@ -279,20 +279,63 @@ test("a Participant starts from an Origin, receives Arrival, acts, detaches and 
     await actionGate;
     await route.continue();
   });
+  const frameBefore = await page.locator(".aui-composer-shell").boundingBox();
+  await page.evaluate(() => {
+    const frame = document.querySelector(".aui-composer-shell")!;
+    const samples: Array<{ x: number; y: number; width: number; height: number; connected: boolean; text: string }> = [];
+    let running = true;
+    const sample = () => {
+      if (!running) return;
+      if (frame.querySelector('[data-mode="progress"]')) {
+        const { x, y, width, height } = frame.getBoundingClientRect();
+        samples.push({ x, y, width, height, connected: frame.isConnected, text: frame.textContent ?? "" });
+      }
+      requestAnimationFrame(sample);
+    };
+    requestAnimationFrame(sample);
+    Object.assign(window, { stopFrameSamples: () => { running = false; return samples; } });
+  });
+  await page.locator(".aui-composer-shell").evaluate(element => { element.setAttribute("data-frame-identity", "original"); });
   await page.getByRole("button", { name: "发送行动" }).click();
   await actionStarted;
+  await expect(page.locator(".aui-composer-shell")).toHaveAttribute("data-frame-identity", "original");
+  expect(await page.locator(".aui-composer-shell").boundingBox()).toEqual(frameBefore);
+  const sentAction = page.locator('[data-role="user"]').last();
+  const sentId = await sentAction.getAttribute("id");
+  expect((await sentAction.boundingBox())!.y).toBeGreaterThan(48);
+  await expect(page.locator('[data-role="assistant"]').first()).toBeInViewport();
   const submitStatus = page.getByText("正在确认行动", { exact: true });
   await expect(submitStatus).toBeVisible();
   const statusFrame = await submitStatus.locator("..").evaluate((element) => {
-    const frame = element.closest(".cg-thread-status");
+    const frame = element.closest(".aui-composer-shell");
     if (!frame) throw new Error("missing action submit frame");
     const style = getComputedStyle(frame);
     return { borderRadius: style.borderRadius, minHeight: style.minHeight };
   });
   expect(statusFrame).toEqual(composerFrame);
-  await expect(page.getByLabel("你的行动")).toHaveCount(0);
+  await expect(page.getByRole("textbox", { name: "你的行动", exact: true })).toHaveCount(0);
+  await page.locator(".cg-thread-messages").evaluate(element => { element.style.minHeight = "200vh"; });
+  await viewport.evaluate(element => { element.scrollTop = element.scrollHeight; });
+  await expect.poll(() => viewport.evaluate(element => element.scrollHeight - element.clientHeight - element.scrollTop)).toBeLessThanOrEqual(1);
+  await viewport.hover();
+  await page.mouse.wheel(0, -400);
+  await expect(page.getByRole("button", { name: "滚动到最新消息" })).toBeVisible();
+  const readingPosition = await viewport.evaluate(element => element.scrollTop);
   releaseAction();
-  await expect(page.getByText(/你查看了眼前的情况/).last()).toBeVisible();
+  await expect(page.getByText(/你查看了眼前的情况/).last()).toBeAttached();
+  await expect(page.getByRole("textbox", { name: "你的行动", exact: true })).toBeVisible();
+  expect(await viewport.evaluate(element => element.scrollTop)).toBe(readingPosition);
+  const samples = await page.evaluate(() => (window as unknown as {
+    stopFrameSamples: () => Array<{ x: number; y: number; width: number; height: number; connected: boolean; text: string }>;
+  }).stopFrameSamples());
+  expect(samples.length).toBeGreaterThan(1);
+  for (const sample of samples) {
+    expect(sample.connected).toBe(true);
+    for (const key of ["x", "y", "width", "height"] as const) expect(Math.abs(sample[key] - frameBefore![key])).toBeLessThanOrEqual(1);
+  }
+  await page.locator(".cg-thread-messages").evaluate(element => { element.style.removeProperty("min-height"); });
+  await expect(page.locator('[data-role="user"]').last()).toHaveAttribute("id", sentId!);
+  await expect(page.getByText("轮到你决定下一步")).toHaveCount(0);
   await page.unroute("**/api/instances/*/participants/*/actions");
 
   await openOrb(page);
@@ -314,7 +357,7 @@ test("a Participant starts from an Origin, receives Arrival, acts, detaches and 
   await expect(settings.getByRole("switch", { name: "高级角色控制" })).toHaveAttribute("aria-checked", "true");
   await page.keyboard.press("Escape");
   await page.reload();
-  await expect(page.getByText("轮到你决定下一步", { exact: true })).toBeVisible();
+  await expect(page.getByRole("textbox", { name: "你的行动", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "切换或离开角色" }).click();
   const control = page.getByRole("dialog", { name: "切换或离开角色" });
   await control.getByRole("button", { name: /进入观察模式/ }).click();
@@ -323,7 +366,7 @@ test("a Participant starts from an Origin, receives Arrival, acts, detaches and 
   await page.getByLabel("观察角色").selectOption("keeper");
   await page.getByRole("button", { name: "接管" }).click();
   await expect(page.locator('[data-role="assistant"] .cg-narrative').filter({ hasText: "此刻，你是守门人" }).first()).toBeVisible();
-  await expect(page.getByLabel("你的行动")).toBeVisible();
+  await expect(page.getByRole("textbox", { name: "你的行动", exact: true })).toBeVisible();
 });
 
 test("the world spirit freely drags, persists, gazes and opens a complete desktop ring", async ({ page }) => {
@@ -432,7 +475,7 @@ test("the world spirit freely drags, persists, gazes and opens a complete deskto
 test("failed execution stays atomic and long diagnostics never widen the inspector", async ({ page }) => {
   await installFixture(page);
   await startOrigin(page);
-  await page.getByLabel("你的行动").fill("触发 E2E 快速失败");
+  await page.getByRole("textbox", { name: "你的行动", exact: true }).fill("触发 E2E 快速失败");
   await page.getByRole("button", { name: "发送行动" }).click();
   await expect(page.getByText("这一步的动作判定中断了，还没有产生新的变化。你仍在庭院里，可以接着说明想做的事。")).toBeVisible();
   await expect(page.getByText("这次尝试暂时没有得到完整回应。已经发生的变化会保留，你可以继续或重试。")).toHaveCount(0);
@@ -468,7 +511,7 @@ test("failed execution stays atomic and long diagnostics never widen the inspect
 
 test("a typed service pause preserves scene text and explains why automatic play stopped", async ({ page }) => {
   await installFixture(page); await startOrigin(page);
-  await page.getByLabel("你的行动").fill("观察四周");
+  await page.getByRole("textbox", { name: "你的行动", exact: true }).fill("观察四周");
   await page.getByRole("button", { name: "发送行动" }).click();
   await expect(page.getByText(/你查看了眼前的情况/).last()).toBeVisible();
   const instanceId = new URL(page.url()).pathname.split("/").at(-1)!;

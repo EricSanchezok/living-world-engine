@@ -8,17 +8,11 @@ import {
   ThreadPrimitive,
   useAui,
   useAuiState,
+  useThreadViewportStore,
   type TextMessagePartComponent,
 } from "@assistant-ui/react";
 import { ArrowDown, ArrowUp, Check, Copy, CornerDownRight } from "lucide-react";
-import {
-  AnimatePresence,
-  LazyMotion,
-  MotionConfig,
-  useIsPresent,
-} from "motion/react";
-import * as m from "motion/react-m";
-import { useEffect, useId, useState, type ReactNode } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, type ReactNode } from "react";
 import { TooltipIconButton } from "@/components/ui/tooltip-icon-button";
 import { cn } from "@/lib/cn";
 import { WorldTimelineRail, type TimelineEntry } from "./world-timeline";
@@ -30,7 +24,6 @@ export interface GameThreadProps {
   busy: boolean;
   composerMode: ComposerMode;
   footer?: ReactNode;
-  footerKey?: string;
   readOnly?: boolean;
   reduceMotion?: boolean;
   streamWarning: string;
@@ -38,13 +31,6 @@ export interface GameThreadProps {
   timeline?: readonly TimelineEntry[];
   timelineStep?: number;
 }
-
-const loadMotionFeatures = () => import("./motion-features").then((module) => module.default);
-const consoleTransition = {
-  layout: { bounce: 0, duration: 0.3, type: "spring" },
-  opacity: { duration: 0.15, ease: [0.2, 0, 0, 1] },
-  y: { bounce: 0, duration: 0.3, type: "spring" },
-} as const;
 
 const MessageText: TextMessagePartComponent = ({ text }) => {
   const temporalMarker = /\n\n世界时间 ([^\n]+?)(?: · ([^\n]+))?$/u;
@@ -134,21 +120,10 @@ function ThreadMessage({
     : <AssistantMessage busy={busy} inputId={inputId} suggestions={suggestions} />;
 }
 
-function useDesktopAutoFocus(): boolean {
-  const [enabled, setEnabled] = useState(false);
-  useEffect(() => {
-    const query = window.matchMedia("(min-width: 48rem) and (pointer: fine)");
-    const update = () => setEnabled(query.matches);
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
-  return enabled;
-}
-
 function SuggestionFollowups({ inputId, suggestions }: { inputId: string; suggestions: readonly string[] }) {
   const aui = useAui();
-  if (suggestions.length === 0) return null;
+  const hasDraft = useAuiState((state) => state.thread.composer.text.trim().length > 0);
+  if (suggestions.length === 0 || hasDraft) return null;
   return (
     <section aria-label="可选的行动建议" className="cg-message-suggestions">
       <ul>
@@ -173,16 +148,18 @@ function SuggestionFollowups({ inputId, suggestions }: { inputId: string; sugges
   );
 }
 
-function Composer({ busy, disabled = false, inputId }: { busy: boolean; disabled?: boolean; inputId: string }) {
-  const autoFocus = useDesktopAutoFocus();
+function Composer({ busy, inputId, onSubmit }: { busy: boolean; inputId: string; onSubmit: () => void }) {
+  const viewport = useThreadViewportStore();
+  const beforeSend = () => {
+    onSubmit();
+    viewport.getState().scrollToBottom({ behavior: "instant" });
+  };
   return (
-    <ComposerPrimitive.Root className="relative flex w-full flex-col">
-      <div className="aui-composer-shell flex w-full cursor-text items-end gap-2 rounded-3xl border border-border bg-card p-2">
+    <ComposerPrimitive.Root className="relative flex w-full flex-col" onSubmitCapture={beforeSend}>
+      <div className="cg-composer-content flex w-full cursor-text items-end gap-2 p-2">
         <ComposerPrimitive.Input
           aria-label="你的行动"
-          autoFocus={autoFocus}
           className="max-h-48 min-h-10 min-w-0 flex-1 resize-none bg-transparent px-2.5 py-2 text-base leading-6 text-foreground outline-none placeholder:text-muted-foreground/70"
-          disabled={disabled}
           enterKeyHint="send"
           id={inputId}
           maxLength={4000}
@@ -194,9 +171,10 @@ function Composer({ busy, disabled = false, inputId }: { busy: boolean; disabled
         <div className="flex min-h-10 items-center justify-end">
           <ComposerPrimitive.Send asChild>
             <TooltipIconButton
+              onClickCapture={beforeSend}
               aria-label={busy ? "世界正在推演" : "发送行动"}
               className="size-8 bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground"
-              disabled={busy || disabled}
+              disabled={busy}
               tooltip={busy ? "世界正在推演" : "发送行动"}
             >
               <ArrowUp aria-hidden="true" className="size-4" />
@@ -205,42 +183,6 @@ function Composer({ busy, disabled = false, inputId }: { busy: boolean; disabled
         </div>
       </div>
     </ComposerPrimitive.Root>
-  );
-}
-
-function ConsoleStatusPresence({ children }: { children: ReactNode }) {
-  const isPresent = useIsPresent();
-  return (
-    <m.div
-      animate={{ opacity: 1, y: 0 }}
-      aria-hidden={!isPresent || undefined}
-      className="cg-thread-console__item cg-thread-console__status"
-      exit={{ opacity: 0, y: -4 }}
-      initial={{ opacity: 0, y: 8 }}
-      inert={isPresent ? undefined : true}
-      layout="position"
-      transition={consoleTransition}
-    >
-      {children}
-    </m.div>
-  );
-}
-
-function ComposerPresence({ busy, inputId }: { busy: boolean; inputId: string }) {
-  const isPresent = useIsPresent();
-  return (
-    <m.div
-      animate={{ opacity: 1 }}
-      aria-hidden={!isPresent || undefined}
-      className="cg-thread-console__item cg-thread-console__composer"
-      exit={{ opacity: 0 }}
-      initial={{ opacity: 0 }}
-      inert={isPresent ? undefined : true}
-      layout="position"
-      transition={consoleTransition}
-    >
-      <Composer busy={busy} disabled={!isPresent} inputId={inputId} />
-    </m.div>
   );
 }
 
@@ -262,7 +204,6 @@ export function GameThread({
   busy,
   composerMode,
   footer,
-  footerKey = "footer",
   readOnly = false,
   reduceMotion = false,
   streamWarning,
@@ -272,16 +213,60 @@ export function GameThread({
 }: GameThreadProps) {
   const isEmpty = useAuiState((state) => state.thread.messages.length === 0);
   const inputId = useId();
+  const rootRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const editableHeight = useRef(64);
+  const initialFocusHandled = useRef(false);
+  const canCompose = !readOnly && composerMode === "available";
+
+  useLayoutEffect(() => {
+    const footer = footerRef.current;
+    const root = rootRef.current;
+    if (!footer || !root) return;
+    const measure = () => root.style.setProperty("--cg-thread-footer-height", `${footer.getBoundingClientRect().height}px`);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
+
+  useLayoutEffect(() => {
+    const frame = frameRef.current;
+    if (!frame) return;
+    frame.style.height = canCompose ? "" : `${editableHeight.current}px`;
+    if (!canCompose) return;
+    const measure = () => { editableHeight.current = frame.getBoundingClientRect().height; };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(frame);
+    return () => observer.disconnect();
+  }, [canCompose, readOnly]);
+
+  useEffect(() => {
+    if (!canCompose || initialFocusHandled.current) return;
+    initialFocusHandled.current = true;
+    if (document.activeElement === document.body && window.matchMedia("(min-width: 48rem) and (pointer: fine)").matches) {
+      document.getElementById(inputId)?.focus({ preventScroll: true });
+    }
+  }, [canCompose, inputId]);
+
+  const captureSubmission = () => {
+    if (frameRef.current) editableHeight.current = frameRef.current.getBoundingClientRect().height;
+  };
   const activeSuggestions = readOnly || composerMode === "suppressed" ? [] : suggestions;
   return (
     <ThreadPrimitive.Root
       className="aui-root cg-thread-root flex h-full flex-col bg-background"
+      ref={rootRef}
+      data-reduce-motion={reduceMotion || undefined}
       style={{ ["--thread-max-width" as string]: "44rem" }}
     >
       <ThreadPrimitive.Viewport
-        className="relative flex flex-1 flex-col overflow-x-hidden overflow-y-auto scroll-smooth"
+        className="relative flex flex-1 flex-col overflow-x-hidden overflow-y-auto"
         data-cg-thread-viewport
-        turnAnchor="top"
+        turnAnchor="bottom"
+        scrollToBottomOnRunStart={false}
       >
         <div className={cn(
           "mx-auto flex w-full max-w-(--thread-max-width) flex-1 flex-col px-4 pt-4",
@@ -300,6 +285,7 @@ export function GameThread({
             )}</ThreadPrimitive.Messages>
           </div>
           <ThreadPrimitive.ViewportFooter
+            ref={footerRef}
             data-docked={!isEmpty}
             data-slot="aui-thread-viewport-footer"
             className={cn(
@@ -320,22 +306,16 @@ export function GameThread({
                 {actionError}
               </div>
             ) : null}
-            <LazyMotion features={loadMotionFeatures} strict>
-              <MotionConfig reducedMotion={reduceMotion ? "always" : "user"}>
-                <m.div className="cg-thread-console" layout transition={consoleTransition}>
-                  <AnimatePresence initial={false} mode="popLayout">
-                    {footer ? (
-                      <ConsoleStatusPresence key={`status:${footerKey}`}>
-                        {footer}
-                      </ConsoleStatusPresence>
-                    ) : null}
-                    {!readOnly && composerMode === "available" ? (
-                      <ComposerPresence busy={busy} inputId={inputId} key="composer" />
-                    ) : null}
-                  </AnimatePresence>
-                </m.div>
-              </MotionConfig>
-            </LazyMotion>
+            <div className="cg-thread-console">
+              {readOnly ? footer : (
+                <div className="aui-composer-shell cg-thread-console__frame" ref={frameRef}>
+                  <div className="cg-thread-console__content" data-mode={canCompose ? "input" : "progress"} key={canCompose ? "input" : "progress"}>
+                    {footer ? <div className="cg-thread-console__status">{footer}</div> : null}
+                    {canCompose ? <Composer busy={busy} inputId={inputId} onSubmit={captureSubmission} /> : null}
+                  </div>
+                </div>
+              )}
+            </div>
           </ThreadPrimitive.ViewportFooter>
         </div>
       </ThreadPrimitive.Viewport>
