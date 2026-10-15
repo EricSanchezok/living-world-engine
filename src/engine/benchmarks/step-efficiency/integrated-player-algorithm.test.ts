@@ -31,7 +31,7 @@ it.each([
   const root = mkdtempSync(path.join(tmpdir(), "integrated-player-"));
   const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
   const provider = new ScriptedModelProvider(request => {
-    if (request.role === "arrival-generator") return { title: "庭院", scene: "你站在庭院里。", possibleNextActions: ["观察四周", "查看石门", "询问守门人"] };
+    if (request.role === "arrival-generator") return { title: "庭院", scene: "你站在庭院里。" };
     if (externalReaction && request.role === "action-compilation") return deterministicActionCompilationBatch(request.profileId, request.context,
       (compilation, _slot, context) => {
         const candidates = (context as { referenceCatalog: { candidates: Array<{ kind: string; label: string; candidateKey: string }> } }).referenceCatalog.candidates;

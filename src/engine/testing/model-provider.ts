@@ -1362,6 +1362,7 @@ export function deterministicOnsetReports(context: unknown, kind: "perceived" | 
 }
 
 export function deterministicModelOutput(profileId: string, context: unknown): unknown {
+  if ((context as { task?: unknown }).task === "action-suggestions") return { items: [] };
   if ((context as { localWorld?: unknown; requestedAction?: unknown }).localWorld && (context as { requestedAction?: unknown }).requestedAction) {
     return { description: "The fixture supplies no additional world content.", entities: [], facts: [], events: [] };
   }
@@ -1499,7 +1500,6 @@ export function deterministicModelOutput(profileId: string, context: unknown): u
           scene: stateSection.perspective.self.location
             ? `你在${stateSection.perspective.self.location.name}恢复了对周围的注意。`
             : "你恢复了对周围的注意，但还不能确定当前位置。",
-          possibleNextActions: ["观察四周", "确认当前位置", "寻找可以交谈的人"],
         };
       }
       if (stateSection.entity) {
@@ -1508,7 +1508,6 @@ export function deterministicModelOutput(profileId: string, context: unknown): u
           scene: stateSection.entity.location
             ? `你在${stateSection.entity.location}恢复了对周围的注意。`
             : "你恢复了对周围的注意，但还不能确定当前位置。",
-          possibleNextActions: ["观察四周", "确认当前位置", "寻找可以交谈的人"],
         };
       }
       const observationSlots = stateSection.observationSlots ?? input.task?.observationSlots;

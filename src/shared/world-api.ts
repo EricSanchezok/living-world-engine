@@ -1,7 +1,7 @@
 import type { AgentPerspectiveView } from "../engine/contracts/model";
 export type { AgentPerspectiveView, BeliefValue, PerspectiveFactValue } from "../engine/contracts/model";
 
-export const WORLD_API_VERSION = 15 as const;
+export const WORLD_API_VERSION = 16 as const;
 
 export interface PublicModelServicePause {
   code: "request-limit" | "spending-limit" | "token-limit" | "usage-unresolved";
@@ -152,7 +152,6 @@ export interface PublicConversationTurn {
     step: number;
     title?: string;
     text: string;
-    possibleNextActions?: [string, string, string];
     generated?: boolean;
     worldTimeSeconds?: number;
     activity?: PublicWorldRun["activity"];
@@ -164,6 +163,7 @@ export interface PublicConversation {
   participantId: string;
   agentId: string;
   turns: PublicConversationTurn[];
+  suggestions: { sourceId: string; items: string[] } | null;
 }
 
 export interface PublicInstanceDetail {
@@ -265,6 +265,5 @@ export interface SubmitExternalActionInput {
 export interface ArrivalView {
   title: string;
   scene: string;
-  possibleNextActions: [string, string, string];
   generated: boolean;
 }

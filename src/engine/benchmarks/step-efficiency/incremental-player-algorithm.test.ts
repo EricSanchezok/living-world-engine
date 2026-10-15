@@ -143,7 +143,7 @@ it.each([false, true])("runs parallel work, survives a failed guard and resumes 
   let failGuard = false, guardCalls = 0;
   const provider = new ScriptedModelProvider(request => {
     if (request.schemaName.startsWith("truth_resolution_fused_commit")) return fusedDiagnosticOutput(request.profileId, request.context);
-    if (request.role === "arrival-generator") return { title: "庭院", scene: "你站在庭院里。", possibleNextActions: ["观察四周", "查看石门", "询问守门人"] };
+    if (request.role === "arrival-generator") return { title: "庭院", scene: "你站在庭院里。" };
     if (request.schemaName === "intent_guard_batch") {
       guardCalls++;
       if (failGuard) throw new Error("controlled guard inference failure");

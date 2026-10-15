@@ -1,3 +1,4 @@
+import { generateSuggestions, reconcileSuggestions, recoverSuggestions, SUGGESTIONS_MANIFEST } from "./suggestions";
 import type { WorldStepPreparation } from "../engine/runtime/execution";
 import { loadPromptAsset } from "../engine/prompts";
 import { agentCapabilityModels } from "../engine/models/capability-bindings";
@@ -314,7 +315,7 @@ const ARRIVAL_PROMPT = promptBundle("arrival-generator");
 
 const ARRIVAL_PRODUCER_MANIFEST = defineEngineOperationManifest({
   id: "arrival-generator",
-  version: "3",
+  version: "4",
   config: { promptVersion: ARRIVAL_PROMPT.version },
 });
 
@@ -434,7 +435,6 @@ function conversationFor(
       step: arrival.step,
       title: arrival.title,
       text: arrival.scene,
-      possibleNextActions: [...arrival.possibleNextActions],
       generated: arrival.generated,
     },
   }];
@@ -481,7 +481,9 @@ function conversationFor(
         worldTimeSeconds: last.worldTimeSeconds, narrativeStatus: beat.status, segmentCount: beat.segments.length } });
   }
   turns.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
-  return { participantId: participant.id, agentId: participant.agentId, turns };
+  return { participantId: participant.id, agentId: participant.agentId, turns,
+    suggestions: participant.suggestions?.status === "ready"
+      ? { sourceId: participant.suggestions.sourceId, items: [...participant.suggestions.items] } : null };
 }
 
 function observerAgent(document: WorldInstanceDocument, agentId: string): ObserverAgentSummary {
@@ -575,6 +577,83 @@ function agentStateFromOrigin(
 }
 
 export class WorldHost {
+  private readonly suggestionWorkers = new Map<string, { sourceId: string; controller: AbortController; promise: Promise<void> }>();
+  private restoring = true;
+
+  private scheduleSuggestions(document: WorldInstanceDocument): void {
+    if (this.restoring) return;
+    for (const participant of Object.values(document.participants)) {
+      const key = `${document.id}:${participant.id}`;
+      const worker = this.suggestionWorkers.get(key);
+      const record = participant.suggestions;
+      if (worker) {
+        if (record?.sourceId !== worker.sourceId || record.status === "invalidated") worker.controller.abort();
+        continue;
+      }
+      if (record?.status !== "queued") continue;
+      const controller = new AbortController();
+      const promise = Promise.resolve().then(() => this.generateParticipantSuggestions(document.id, participant.id, record.sourceId, controller.signal));
+      this.suggestionWorkers.set(key, { sourceId: record.sourceId, controller, promise });
+      void promise.catch(() => undefined).finally(() => {
+        this.suggestionWorkers.delete(key);
+        try {
+          const latest = this.read(document.id).document;
+          if (latest.participants[participant.id]?.suggestions?.sourceId !== record.sourceId) this.scheduleSuggestions(latest);
+        } catch { /* Deleted or closed instances have no presentation work. */ }
+      });
+    }
+  }
+
+  /** Await already scheduled presentation work; reads never start generation. */
+  async drainSuggestions(id: string): Promise<void> {
+    while ([...this.suggestionWorkers.keys()].some(key => key.startsWith(`${id}:`))) {
+      await Promise.all([...this.suggestionWorkers].filter(([key]) => key.startsWith(`${id}:`)).map(([, worker]) => worker.promise));
+    }
+  }
+
+  private async generateParticipantSuggestions(id: string, participantId: string, sourceId: string, signal: AbortSignal): Promise<void> {
+    let execution: ReturnType<WorldHost["beginExecution"]>;
+    try {
+      const source = await this.serialized(id, async () => {
+        const stored = this.read(id), document = structuredClone(stored.document);
+        const record = document.participants[participantId]?.suggestions;
+        if (signal.aborted || record?.sourceId !== sourceId || record.status !== "queued") return null;
+        execution = this.beginExecution(document, "interactive", "action-suggestions", SUGGESTIONS_MANIFEST);
+        record.status = "generating"; record.executionId = execution?.id ?? null;
+        return this.persist(stored, document).document;
+      });
+      if (!source) return;
+      const items = await generateSuggestions(this.options.provider, source, participantId, {
+        workloadId: `${id}:suggestions`, batchId: sourceId, abortSignal: signal,
+        correlation: { executionId: execution?.id, instanceId: id, revision: source.state.revision },
+        observer: execution?.trace ?? this.runtimeObserver,
+        runtimeIdentity: { worldHash: source.state.worldHash, revision: source.state.revision },
+      });
+      await this.serialized(id, async () => {
+        const stored = this.read(id), document = structuredClone(stored.document);
+        const record = document.participants[participantId]?.suggestions;
+        if (signal.aborted || record?.sourceId !== sourceId || record.status !== "generating") {
+          this.failExecution(execution?.id, new DOMException("Suggestion source is obsolete", "AbortError"));
+          return;
+        }
+        record.status = "ready"; record.items = items;
+        execution?.trace.emit({ event: "suggestions.generated", attributes: { status: "accepted", count: items.length }, payload: { sourceId, items } });
+        this.persist(stored, document, execution ? { id: execution.id, input: {
+          status: "succeeded", semanticHash: contentHash(items), stateHash: contentHash(document.state), commitRevision: document.state.revision,
+        } } : undefined);
+      });
+    } catch (error) {
+      this.failExecution(execution?.id, error);
+      await this.serialized(id, async () => {
+        const stored = this.read(id), document = structuredClone(stored.document);
+        const record = document.participants[participantId]?.suggestions;
+        if (record?.sourceId !== sourceId || !["queued", "generating"].includes(record.status)) return;
+        record.status = "failed"; record.items = [];
+        this.persist(stored, document);
+      });
+    }
+  }
+
   private readonly narrativeWorkers = new Map<string, Promise<void>>();
   private readonly instanceListeners = new Map<string, Set<() => void>>();
 
@@ -824,7 +903,9 @@ export class WorldHost {
       this.assertExecutionAlgorithmAvailable(stored.document);
       this.definition(stored.document);
     }
-    for (const stored of storedInstances) { this.restoreSchedule(stored); this.scheduleNarrative(this.read(stored.document.id).document); }
+    for (const stored of storedInstances) this.restoreSchedule(stored);
+    this.restoring = false;
+    for (const stored of storedInstances) this.scheduleNarrative(this.read(stored.document.id).document);
   }
 
   static get(): WorldHost {
@@ -833,7 +914,7 @@ export class WorldHost {
         /* turbopackIgnore: true */ process.env.LIVINGWORLD_MODEL_CATALOG_PATH ?? "config/models.yaml",
       ));
       const dataRoot = path.resolve(
-        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v28",
+        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v29",
       );
       const modelRegistry = new ModelRegistry(catalog, dataRoot);
       modelRegistry.startBackgroundRefresh();
@@ -1007,12 +1088,15 @@ export class WorldHost {
     return snapshot;
   }
 
-  private persist(stored: StoredWorldInstance, document: WorldInstanceDocument): StoredWorldInstance {
+  private persist(stored: StoredWorldInstance, document: WorldInstanceDocument, finish?: { id: string; input: FinishExecutionInput }): StoredWorldInstance {
     try {
       enqueueNarrative(document, this.now().toISOString());
       if (currentRun(document)?.servicePause) settleQueuedNarratives(document, this.now().toISOString());
-      const saved = this.options.store.compareAndSwapInstance(document.id, stored.generation, document, { instanceId: document.id });
-      this.notifyInstance(document.id); this.scheduleNarrative(saved.document);
+      if (!this.restoring) reconcileSuggestions(document, externalDecisionAgentIds(document));
+      const saved = finish && isAtomicStore(this.options.store)
+        ? this.options.store.compareAndSwapInstanceAndFinishExecution(document.id, stored.generation, document, finish.id, finish.input, "instance").instance
+        : this.options.store.compareAndSwapInstance(document.id, stored.generation, document, { instanceId: document.id });
+      this.notifyInstance(document.id); this.scheduleNarrative(saved.document); this.scheduleSuggestions(saved.document);
       return saved;
     } catch (error) {
       if (error instanceof WorldInstanceConflictError) throw new WorldHostError("world instance changed concurrently", 409);
@@ -1317,7 +1401,7 @@ export class WorldHost {
     }
     const now = this.now().toISOString();
     const initial: WorldInstanceDocument = {
-      schemaVersion: 28,
+      schemaVersion: 29,
       id,
       world: toWorldRuntimeContract(definition),
       executionAlgorithm: structuredClone(experiment.algorithmRef),
@@ -1419,7 +1503,6 @@ export class WorldHost {
           title: `此刻，你是${displayName}`,
           scene: origin.fallbackArrival,
           knownEntities: Object.values(agent.belief.localEntities).map(entity => ({ localEntityId: entity.id, name: entity.name, description: entity.description })),
-          possibleNextActions: ["观察四周", "确认自己所在的位置", "寻找一个可以交谈的人"],
           generated: false,
           createdAt: joinedAt,
         };
@@ -1434,6 +1517,7 @@ export class WorldHost {
           controlledSinceRevision: initial.state.revision,
           ...(agent.nextAction ? { suppressedActionId: agent.nextAction.id } : {}),
           arrival: fallback,
+          suggestions: null,
         };
         initial.policyBindings[agentId] = { kind: "external", agentId, participantId };
         const arrival = initial.state.executionState?.data.kind === "direct-world" ? fallback : await this.generateArrival(initial, participantId, origin.fallbackArrival);
@@ -1441,7 +1525,6 @@ export class WorldHost {
           ...fallback,
           title: arrival.title,
           scene: arrival.scene,
-          possibleNextActions: [...arrival.possibleNextActions],
           generated: arrival.generated,
         };
       }
@@ -1451,12 +1534,14 @@ export class WorldHost {
         stateHash: contentHash(initial.state),
         commitRevision: initial.state.revision,
       };
+      reconcileSuggestions(initial, externalDecisionAgentIds(initial));
       const stored = execution && this.options.ledger && isAtomicStore(this.options.store)
         ? this.options.store.createInstanceAndFinishExecution(initial, execution.id, finish).instance
         : this.options.store.createInstance(initial);
       if (execution && this.options.ledger && !isAtomicStore(this.options.store)) {
         this.options.ledger.finishExecution(execution.id, finish);
       }
+      this.scheduleSuggestions(stored.document);
       return this.project(stored.document, principalId);
     } catch (error) {
       this.failExecution(execution?.id, error);
@@ -1683,6 +1768,7 @@ export class WorldHost {
     const stored = this.read(id);
     this.cancelTimer(id);
     this.options.store.deleteInstance(id, stored.generation, { instanceId: id });
+    for (const [key, worker] of this.suggestionWorkers) if (key.startsWith(`${id}:`)) worker.controller.abort();
     this.inspectorLedgerSnapshots.delete(id);
     this.inspectorWindowProjections.delete(id);
     this.inspectorInvocationProjections.delete(id);
@@ -2415,8 +2501,10 @@ export class WorldHost {
       runRecord.debugCheckpoint = structuredClone(latestRun.debugCheckpoint);
       runRecord.lastDebugRequestId = latestRun.lastDebugRequestId;
       document.narratives = structuredClone(latest.document.narratives);
+      for (const participant of Object.values(document.participants)) participant.suggestions = structuredClone(latest.document.participants[participant.id]!.suggestions);
       enqueueNarrative(document, this.now().toISOString());
       if (currentRun(document)?.servicePause) settleQueuedNarratives(document, this.now().toISOString());
+      reconcileSuggestions(document, externalDecisionAgentIds(document));
       const committed = execution && this.options.ledger && isAtomicStore(this.options.store)
         ? this.options.store.compareAndSwapInstanceAndFinishExecution(
             document.id,
@@ -2430,7 +2518,7 @@ export class WorldHost {
         this.options.ledger.finishExecution(execution.id, finish);
       }
       this.debugStageGates.delete(runId);
-      this.notifyInstance(document.id); this.scheduleNarrative(committed.document);
+      this.notifyInstance(document.id); this.scheduleNarrative(committed.document); this.scheduleSuggestions(committed.document);
       return committed;
     } catch (error) {
       this.runControllers.delete(runId);
@@ -2856,7 +2944,6 @@ export class WorldHost {
         title: `此刻，你是${entity.name}`,
         scene: fallbackText,
         knownEntities: Object.values(agent.belief.localEntities).map(entity => ({ localEntityId: entity.id, name: entity.name, description: entity.description })),
-        possibleNextActions: ["观察四周", "回想刚才发生的事", "确认自己接下来要做什么"],
         generated: false,
         createdAt: joinedAt,
       };
@@ -2871,6 +2958,7 @@ export class WorldHost {
         controlledSinceRevision: document.state.revision,
         ...(agent.nextAction ? { suppressedActionId: agent.nextAction.id } : {}),
         arrival: fallback,
+        suggestions: null,
       };
       document.policyBindings[agentId] = { kind: "external", agentId, participantId };
       const runToSchedule = reconcileActionWindow();
@@ -2883,7 +2971,6 @@ export class WorldHost {
         ...fallback,
         title: arrival.title,
         scene: arrival.scene,
-          possibleNextActions: [...arrival.possibleNextActions],
         generated: arrival.generated,
       };
       document.updatedAt = this.now().toISOString();
@@ -2943,7 +3030,7 @@ export class WorldHost {
               availableHandles: referenceResolver.catalog.candidates.map((candidate) => candidate.handle),
               allowedProposalKinds: [],
             },
-            constraints: ["Write only from this Agent's private perspective; possibleNextActions are suggestions, not executed actions."],
+            constraints: ["Write only the opening scene from this Agent's private perspective."],
           },
           state: {
             perspective: projectAgentPerspectiveForModel(
@@ -2972,7 +3059,6 @@ export class WorldHost {
       return {
         title: "你已进入世界",
         scene: fallback,
-        possibleNextActions: ["观察四周", "确认自己所在的位置", "寻找一个可以交谈的人"],
         generated: false,
       };
     }
@@ -3062,7 +3148,11 @@ export class WorldHost {
   private restoreSchedule(stored: StoredWorldInstance): void {
     let current = stored;
     const recovered = structuredClone(stored.document);
-    let changed = false;
+    for (const participant of Object.values(recovered.participants)) {
+      if (participant.suggestions && ["queued", "generating"].includes(participant.suggestions.status))
+        this.failExecution(participant.suggestions.executionId ?? undefined, new DOMException("Suggestion generation interrupted by restart", "AbortError"));
+    }
+    let changed = recoverSuggestions(recovered);
     for (const run of Object.values(recovered.runs)) {
       if (!["queued", "running", "pausing", "debug-paused"].includes(run.status)) continue;
       let checkpointError = run.debugMode === "step"

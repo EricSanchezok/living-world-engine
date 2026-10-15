@@ -23,6 +23,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
   useSyncExternalStore,
 } from "react";
@@ -402,8 +403,11 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
     return next;
   }, [instanceId]);
 
+  const detailRequest = useRef(0);
   const refresh = useCallback(async () => {
+    const request = ++detailRequest.current;
     const next = await worldApi.instance(instanceId);
+    if (request !== detailRequest.current) return next;
     setDetail(next);
     if (!next.controlledView) await loadObserver(selectedAgentId || undefined);
     else setObserver(undefined);
@@ -412,8 +416,9 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
 
   useEffect(() => {
     let active = true;
+    const request = ++detailRequest.current;
     void worldApi.instance(instanceId).then(async (next) => {
-      if (!active) return;
+      if (!active || request !== detailRequest.current) return;
       setDetail(next);
       if (!next.controlledView) {
         const perspective = await worldApi.observer(instanceId);
@@ -443,7 +448,9 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
         setStreamWarning("最新进度暂时无法同步，正在自动重试。");
       });
     });
-    source.onopen = () => setStreamWarning("");
+    source.onopen = () => {
+      void refresh().then(() => setStreamWarning("")).catch(() => setStreamWarning("最新进度暂时无法同步，正在自动重试。"));
+    };
     source.onerror = () => setStreamWarning("实时更新暂时中断，正在自动重连。");
     return () => source.close();
   }, [instanceId, refresh]);
@@ -573,7 +580,7 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
   }
 
   const roleView = detail.controlledView ?? observer?.selected?.perspective;
-  const possibleNextActions = detail.conversation?.turns.find((turn) => !turn.action)?.response?.possibleNextActions ?? [];
+  const suggestions = detail.conversation?.suggestions?.items ?? [];
   const orbPhase: ControlOrbPhase = worldProcessing ? "running" : busy ? "confirming" : "saved";
 
 
@@ -684,7 +691,7 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
           readOnly={!detail.controlledView}
           reduceMotion={preferences.reduceMotion}
           streamWarning={streamWarning}
-          suggestions={possibleNextActions}
+          suggestions={suggestions}
           timeline={timeline}
           timelineStep={detail.summary.step}
         />

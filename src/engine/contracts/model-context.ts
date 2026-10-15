@@ -300,11 +300,11 @@ export function modelRoleContract(role: string): ModelRoleContract {
     },
     "arrival-generator": {
       role,
-      purpose: "write a first-person arrival scene and editable possible next actions from one Agent perspective",
-      modelOwns: ["scene prose", "voice", "possible next actions"],
+      purpose: "write a first-person arrival scene from one Agent perspective",
+      modelOwns: ["scene prose", "voice"],
       engineOwns: ["participant and Agent identity", "world state", "action identity", "persistence"],
       existingReferenceRule: "do not invent references; use the supplied perspective only",
-      proposalRule: "possibleNextActions are text possibilities, not state proposals or executed actions",
+      proposalRule: "arrival prose never proposes actions or world-state changes",
       failureRule: "fall back to a neutral scene when the perspective is insufficient",
     },
   };

@@ -1,3 +1,4 @@
+import type { ParticipantSuggestions } from "./suggestions";
 import type { NarrativeBeat } from "./narrative/contracts";
 import type { ModelServicePause } from "../engine/models/service-failure";
 import type {
@@ -26,6 +27,7 @@ export interface ParticipantRecord {
   admissionExecutionId?: string;
   suppressedActionId?: string;
   arrival: ParticipantArrivalRecord;
+  suggestions: ParticipantSuggestions | null;
 }
 
 export interface ParticipantArrivalRecord {
@@ -34,7 +36,6 @@ export interface ParticipantArrivalRecord {
   step: number;
   title: string;
   scene: string;
-  possibleNextActions: [string, string, string];
   generated: boolean;
   createdAt: string;
   knownEntities: Array<{ localEntityId: string; name: string; description: string }>;
@@ -160,7 +161,7 @@ export interface ParticipantReactionRecord {
 }
 
 export interface WorldInstanceDocument {
-  schemaVersion: 28;
+  schemaVersion: 29;
   id: string;
   world: WorldRuntimeContract;
   executionAlgorithm: AlgorithmRef;

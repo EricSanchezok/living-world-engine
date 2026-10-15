@@ -49,7 +49,7 @@ function required(argv: readonly string[], index: number, option: string): strin
 
 function parse(argv: readonly string[]): Args {
   const result: Args = {
-    database: path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v28", "livingworld.sqlite"),
+    database: path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v29", "livingworld.sqlite"),
     executionIds: [],
     sourceFiles: [],
     base: path.resolve("benchmarks/action-compilation/fullcatalog-stabilized/v1"),

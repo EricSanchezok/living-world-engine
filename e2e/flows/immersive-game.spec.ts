@@ -269,6 +269,9 @@ test("a Participant starts from an Origin, receives Arrival, acts, detaches and 
   await page.getByRole("button", { name: "确认自己所在的位置" }).click();
   await expect(composer).toHaveValue("确认自己所在的位置");
   await expect(composer).toBeFocused();
+  await expect(suggestionPanel).toHaveCount(0);
+  await composer.fill(" ");
+  await expect(suggestionPanel).toBeVisible();
   await composer.fill("我现在在哪里？\n请描述眼前的环境。");
   let releaseAction!: () => void;
   let markActionStarted!: () => void;
@@ -336,6 +339,14 @@ test("a Participant starts from an Origin, receives Arrival, acts, detaches and 
   await page.locator(".cg-thread-messages").evaluate(element => { element.style.removeProperty("min-height"); });
   await expect(page.locator('[data-role="user"]').last()).toHaveAttribute("id", sentId!);
   await expect(page.getByText("轮到你决定下一步")).toHaveCount(0);
+  const updatedSuggestions = page.getByRole("region", { name: "可选的行动建议" });
+  await expect(updatedSuggestions.getByRole("button", { name: "询问守门人石门后的道路" })).toBeVisible();
+  await expect(updatedSuggestions.getByRole("button", { name: "确认自己所在的位置" })).toHaveCount(0);
+  await composer.fill("我想自己写下一步");
+  await expect(updatedSuggestions).toHaveCount(0);
+  await page.request.get(new URL(page.url()).pathname.replace("/play/", "/api/instances/"));
+  await expect(composer).toHaveValue("我想自己写下一步");
+  await composer.fill("");
   await page.unroute("**/api/instances/*/participants/*/actions");
 
   await openOrb(page);

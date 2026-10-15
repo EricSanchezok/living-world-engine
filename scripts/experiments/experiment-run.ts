@@ -7,7 +7,7 @@ import { runtimeCodeIdentity } from "../../src/server/code-identity";
 import { parseExperimentMatrix, runDeterministicExperiment } from "./experiment-core";
 
 function extractDatabase(argv: readonly string[]): { database: string; matrixArgs: string[] } {
-  let database = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v28", "livingworld.sqlite");
+  let database = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v29", "livingworld.sqlite");
   const matrixArgs: string[] = [];
   for (let index = 0; index < argv.length; index += 1) {
     if (argv[index] === "--database") database = path.resolve(argv[++index] ?? "");

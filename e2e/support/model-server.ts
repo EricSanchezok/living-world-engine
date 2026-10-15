@@ -84,7 +84,13 @@ const server = createServer(async (request, response) => {
     const scene = context.scene as { reply?: { kind: string }; observations?: unknown[]; speech?: Array<{ id: string; speaker: string }> } | undefined;
     const readingAnswers = reading ? decisionAnswers({ ...Object.fromEntries(Object.entries(reading.catalog).map(([id, criteria]) =>
       [id, { type: "choice" as const, version: "e2e-reading", instructions: "Scripted E2E action", criteria }])), ...reading.cognition }) : {};
-    const output = reading ? { understanding: "Inspect the supplied fixture surroundings", interaction: "world_action",
+    const suggestionContext = context as { task?: string; latestRequest?: string | null; discourse?: { exchanges: unknown[] } };
+    const output = suggestionContext.task === "action-suggestions" ? { items: !suggestionContext.latestRequest
+      ? ["观察四周", "确认自己所在的位置", "寻找一个可以交谈的人"]
+      : (suggestionContext.discourse?.exchanges.length ?? 0) < 2
+        ? ["询问守门人石门后的道路", "检查石门上可见的痕迹", "整理接下来探索的打算"]
+        : ["向守门人说明来意", "寻找庭院中的其他出口", "回顾刚得到的线索"] }
+      : reading ? { understanding: "Inspect the supplied fixture surroundings", interaction: "world_action",
       requestAnalysis: { authorizedSteps: [requestText], establishedReceipts: [], remainingSteps: [requestText] },
       action: { ...Object.fromEntries(Object.keys(reading.catalog).map(id => [id, readingAnswers[id]!.choice])),
         attempt: requestText, utterance: null, manner: null, literalQuote: "none" },

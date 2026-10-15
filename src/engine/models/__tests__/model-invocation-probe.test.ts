@@ -166,7 +166,6 @@ describe("model invocation probe", () => {
     const provider = new ScriptedModelProvider(() => ({
       title: "The harbor",
       scene: "A clear morning settles over the harbor.",
-      possibleNextActions: ["Look around", "Ask the ferryman", "Enter the market"],
     }), fixture.catalog);
 
     const report = await runInvocationProbe({

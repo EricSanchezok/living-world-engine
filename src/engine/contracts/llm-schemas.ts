@@ -1247,17 +1247,11 @@ export function actionCompilationRequestSchema(slotCount: number, sharedResource
 export interface ArrivalDraft {
   title: string;
   scene: string;
-  possibleNextActions: [string, string, string];
 }
 
 export const arrivalDraftSchema = z.strictObject({
   title: z.string().trim().min(1).max(120),
   scene: z.string().trim().min(1).max(4_000),
-  possibleNextActions: z.tuple([
-    z.string().trim().min(1).max(500),
-    z.string().trim().min(1).max(500),
-    z.string().trim().min(1).max(500),
-  ]),
 });
 
 export const persistedTransitionProposalSchema = z.strictObject({

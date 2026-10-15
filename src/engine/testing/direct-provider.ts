@@ -31,7 +31,7 @@ function readingDecision(reading: TestReading): Pick<DirectTestWire, "state" | "
 }
 
 export function directTestProvider(respond: (wire: DirectTestWire, call: number) => unknown | Response | Promise<unknown | Response>,
-  create?: (wire: DirectTestWire) => unknown | Response | Promise<unknown | Response>, options: { maxInputBytes?: number } = {}) {
+  create?: (wire: DirectTestWire) => unknown | Response | Promise<unknown | Response>, options: { maxInputBytes?: number; suggestions?: (wire: DirectTestWire) => unknown | Promise<unknown> } = {}) {
   const source = createTestModelCatalog().snapshot();
   source.accounts.typesafe = { ...source.accounts["scripted-test"]!, protocol: "typesafe-systemone", dialect: "typesafe",
     models_dev_provider_id: "typesafe", base_url: "https://typesafe.test/v1", api_key_env: "TYPESAFE_API_KEY" };
@@ -46,7 +46,9 @@ export function directTestProvider(respond: (wire: DirectTestWire, call: number)
     const decision = !wire.questions ? directCreationContext(wire).decision as { state: unknown; questions: Record<string, DecisionQuestionV2> } | undefined : undefined;
     const reading = !wire.questions ? directCreationContext(wire).playerReading as TestReading | undefined : undefined;
     let response: unknown;
-    if (reading) {
+    if (!wire.questions && directCreationContext(wire).task === "action-suggestions") {
+      response = options.suggestions ? await options.suggestions(wire) : { items: [] };
+    } else if (reading) {
       const decoded = await respond({ ...wire, ...readingDecision(reading) }, calls);
       if (decoded instanceof Response) return decoded;
       const raw = decoded as Record<string, Record<string, unknown>>;

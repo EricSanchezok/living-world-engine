@@ -2,7 +2,7 @@
 
 ## 投影边界
 
-公共产品契约为 `src/shared/world-api.ts`（API v12）。Participant 的 `controlledView` 是本人所控 Agent 在当前 revision 的 `AgentPerspectiveView`；DTO 只包含 Arrival、行动、Observation、授权 Activity 进度与该 Agent 的私有状态。反应窗口只额外投影本人 stimulus，不暴露 basis、其他主体请求或 canonical binding。对话由这些持久事实投影，不保存独立聊天记录。
+公共产品契约为 `src/shared/world-api.ts`（API v16）。Participant 的 `controlledView` 是本人所控 Agent 在当前 revision 的 `AgentPerspectiveView`；DTO 只包含 Arrival、行动、Observation、授权 Activity 进度与该 Agent 的私有状态。反应窗口只额外投影本人 stimulus，不暴露 basis、其他主体请求或 canonical binding。对话由这些持久事实投影，不保存独立聊天记录。
 
 Observer 契约为 `src/shared/world-observer-api.ts`。`selected.perspective` 与 Participant 使用同一投影器，包含所选 Agent 的精确自身状态、授权关系、主观认知、角色状态和完整主观历史；切换 Agent 不形成跨主体认知聚合。
 
@@ -14,7 +14,7 @@ Observer 契约为 `src/shared/world-observer-api.ts`。`selected.perspective` �
 
 | 方法与路径 | 语义 |
 |---|---|
-| `GET /api/worlds` | 列出已安装的 schema v15 世界 |
+| `GET /api/worlds` | 列出已安装的 schema v17 世界 |
 | `POST /api/worlds/import` | 导入或显式替换世界 ZIP |
 | `DELETE /api/worlds/:id` | 在没有关联实例时卸载世界 |
 | `GET /api/worlds/:id/start-options` | 读取 Origin 与 Observer 准入选项 |
@@ -44,7 +44,7 @@ Observer 创建不生成 Participant。Observer 可以推进无人世界、选�
 
 ## Participant 会话
 
-Participant 页面使用 44rem 单轴 assistant-ui 消息流。第一条 World 消息是持久 Arrival；玩家行动为右侧自适应气泡，World Observation 为无气泡正文。Arrival 的三条建议只填入 composer。
+Participant 页面使用 44rem 单轴 assistant-ui 消息流。第一条 World 消息是持久 Arrival；玩家行动为右侧自适应气泡，World Observation 为无气泡正文。当前决策点的建议由 `conversation.suggestions` 独立投影在最新 World 回复之后，点击只填入 composer；非空草稿暂时隐藏建议，异步结果不覆盖草稿或抢焦点。
 
 composer 只负责发送、失败重试和可选的高级 detach，不提供单步、批量或实时按钮。发送行动时，服务端先持久化 intent 和当前 decision point 的 ActionWindow，再由后台 WorldRun 逐个最早时间边界推进，直到活动完成、失败、中断、需要选择、玩家暂停或运行预算耗尽。
 
@@ -81,3 +81,9 @@ Inspector 的实时更新采用“事件分类 → 合并刷新 → 局部投影
 界面只使用内置组件、Lucide 图标和 `--cg-*` token；世界包不能注入 UI。体验支持键盘、可见焦点、触控目标、320 px、200% 缩放、RTL、reduced motion、forced colors 和无图片回退。长 ID、错误与 JSON 必须在自身容器内换行或滚动，不能扩大侧栏或对话框。
 
 设计依据见 [0061](../decisions/0061-unified-agent-and-external-policy.md)、[0063](../decisions/0063-eager-reference-execution.md)、[0064](../decisions/0064-conversation-core-and-agent-perspective-observer.md)、[0068](../decisions/0068-unified-agent-perspective.md)、[0070](../decisions/0070-event-boundary-temporal-runtime.md)与 [0074](../decisions/0074-enforce-script-owned-shared-resource-pools.md)。
+
+## 情境行动建议
+
+每个稳定决策点在正文发布完成后，建议模块使用角色绑定的 creation profile 异步生成一批最多三条行动。输入只包含本人授权视角、目标、近期行动结果和已发布对话；建议表达可以尝试的方向，不保证成功。提交新行动、失去控制权或进入未完成的世界流程会使旧建议失效；发布时校验同一来源，迟到结果丢弃。失败或没有合适内容时不展示建议，不补固定文案。
+
+每个 Participant 只保存当前建议的来源、状态、内容和执行引用，完整请求与结果由 Ledger 保存。读取和刷新复用保存结果，重启将中断任务标记失败，不重试生成。建议不修改世界 revision、时间、认知或行动记录；同一决策点最多增加一次逻辑 creation 调用，传输重试沿用模型网关策略。通过现有实例通知发布，无独立轮询接口。职责取舍见[独立建议生成决策](../decisions/0241-independent-contextual-action-suggestions.md)。

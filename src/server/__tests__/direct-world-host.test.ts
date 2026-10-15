@@ -21,6 +21,13 @@ import { nextNarrative } from "../narrative/outbox";
 import { GET as getInstanceEvents } from "../../app/api/instances/[id]/events/route";
 import { GET as getInstance } from "../../app/api/instances/[id]/route";
 
+function executionCalls(calls: Array<Parameters<typeof fetch>>) {
+  return calls.filter(([, init]) => {
+    const wire = JSON.parse(String(init?.body));
+    return wire.questions || directCreationContext(wire).task !== "action-suggestions";
+  });
+}
+
 function createText(wire: DirectTestWire) {
   const context = directCreationContext(wire);
   if (context.scene) {
@@ -557,7 +564,7 @@ describe("direct world through persistent WorldHost", () => {
       expect(Object.values(failed.runs).find(run => run.rootIntents.some(intent => intent.submissionId === "first-fails"))?.status).toBe("failed");
       expect(failed.state.truth).toEqual({ ...world.initialState.truth, elapsedSeconds: priorWait ? 5 : 0, events: failed.state.truth.events });
       expect(failed.state.truth.events).toHaveLength(priorWait ? 1 : 0);
-      if (!priorWait) expect(f.transport).toHaveBeenCalledTimes(3);
+      if (!priorWait) expect(executionCalls(f.transport.mock.calls)).toHaveLength(3);
       const recovery = failed.narratives.find(beat => beat.source.reply?.kind === "recovery")!;
       expect(recovery.status).toBe("complete");
       expect(recovery.source.priorRequestReceipts).toHaveLength(priorWait ? 1 : 0);
@@ -648,7 +655,7 @@ describe("direct world through persistent WorldHost", () => {
       const result = await engine.step(document.policyBindings, { expectedRevision: document.state.revision, trigger: "manual", externalActions: [] });
       const control = readDirectState(result.state.executionState!, result.state);
       expect(Object.values(control.intents).filter(intent => intent.status === "failed")).toEqual([]);
-      expect(f.transport).toHaveBeenCalledTimes(48);
+      expect(executionCalls(f.transport.mock.calls)).toHaveLength(48);
       expect(result.modelAudits.every(audit => audit.protocol === "typesafe-systemone")).toBe(true);
       expect(replaySimulationState(result.state)).toEqual(result.state);
     } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
@@ -669,7 +676,7 @@ describe("direct world through persistent WorldHost", () => {
       let host = makeHost();
       const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } });
       const id = created.summary.id;
-      expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 28, executionAlgorithm: DEFAULT_ALGORITHM_REF,
+      expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 29, executionAlgorithm: DEFAULT_ALGORITHM_REF,
         state: { schemaVersion: 21, executionState: { data: { kind: "direct-world" } } } });
       expect(f.transport).not.toHaveBeenCalled();
       await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });
@@ -684,7 +691,7 @@ describe("direct world through persistent WorldHost", () => {
       expect(saved.history[0]!.actions[0]!.rawText).toBe("检查自己的情况");
       expect(host.inspectorStep(id, 1).directRuntime!.actions[0]!.kind).toBe("observe");
       expect(replaySimulationState(saved)).toEqual(saved);
-      expect(f.transport).toHaveBeenCalledTimes(4);
+      expect(executionCalls(f.transport.mock.calls)).toHaveLength(4);
       const executionId = saved.history[0]!.executionRef!.executionId;
       expect(candidatePartitions(database.executionEvents(executionId))).toMatchObject({
         temporal: { fromSeconds: 0, atSeconds: 1 }, resolution: { rng: saved.truth.rng },
@@ -693,12 +700,12 @@ describe("direct world through persistent WorldHost", () => {
       const candidate = (execution: string) => database.executionEvents(execution).find(event => event.event === "execution.candidate.persisted")?.payload;
       expect(candidate(replay.replayExecutionId)).toEqual(candidate(executionId));
       expect(replay.replayStatus).toBe("succeeded"); expect(replay.stateHash).toBe(database.execution(executionId)!.stateHash);
-      expect(f.transport).toHaveBeenCalledTimes(4);
+      expect(executionCalls(f.transport.mock.calls)).toHaveLength(4);
       database.close(); database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false }); host = makeHost();
       expect(host.instance(id).summary.revision).toBe(saved.revision);
       expect(database.readInstance(id).document.state).toEqual(saved);
       await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "observe-self", text: "检查自己的情况" });
-      expect(database.readInstance(id).document.state).toEqual(saved); expect(f.transport).toHaveBeenCalledTimes(4);
+      expect(database.readInstance(id).document.state).toEqual(saved); expect(executionCalls(f.transport.mock.calls)).toHaveLength(4);
     } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
   });
 });
