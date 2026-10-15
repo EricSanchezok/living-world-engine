@@ -54,8 +54,9 @@ export interface ExecutionArtifactRecord {
   executionId: string;
   kind: string;
   mediaType: string;
-  encoding: "gzip";
+  encoding: "json-blocks";
   rawBytes: number;
+  /** Compressed block bytes first inserted for this artifact; shared content is counted once. */
   storedBytes: number;
   createdAt: string;
   value: unknown;

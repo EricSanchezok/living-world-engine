@@ -1,5 +1,6 @@
 import path from "node:path";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import * as transaction from "../../runtime/transaction";
 import { loadWorldScript } from "../../../script/world-loader";
 import { directTestProvider, nativeAnswer, directCreationContext, directDecisionContext } from "../../testing/direct-provider";
 import { DirectWorldAlgorithm } from "../algorithm";
@@ -13,6 +14,8 @@ import { readDirectState } from "../state";
 import { speechSpans, literalNumbers, literalDurations } from "../actions";
 import { applyDirectCognition } from "../cognition";
 import { privateActionView } from "../views";
+import { contentHash } from "../../models/model-audit";
+import { CanonicalCommitter } from "../../runtime/canonical-committer";
 
 async function fixture(options: { operation?: string; target?: string; tool?: string; amount?: string; failKeeper?: boolean;
   observationScope?: string; speech?: string; creationEnabled?: boolean; privateGateFact?: boolean; named?: boolean;
@@ -87,6 +90,46 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("prepares native events without applying them and rejects a changed frozen event at the canonical boundary", async () => {
+    const f = await fixture({ operation: "move", target: "yard" });
+    const source = await f.engine.bootstrapAgents();
+    const request = f.request("走到院子里");
+    const preparation = await f.engine.prepareStep(f.roster, request);
+    expect(preparation.kind).toBe("direct");
+    expect(preparation).not.toHaveProperty("onsetPerception");
+    expect(preparation).not.toHaveProperty("executionState");
+    const input = { definition: f.world, state: source, policyRoster: f.roster, request, decisionEligibleAgentIds: ["player"] };
+    const before = contentHash(source);
+    const apply = vi.spyOn(transaction, "applyWorldDeltaOperation");
+    const candidate = await f.algorithm.completeStep(input, preparation, []);
+    expect(apply).not.toHaveBeenCalled();
+    expect(contentHash(source)).toBe(before);
+    expect(candidate).not.toHaveProperty("resolution");
+    const changed = structuredClone(candidate);
+    changed.record.atSeconds += 1;
+    const committer = new CanonicalCommitter();
+    expect(() => committer.step(source, changed, f.roster, 300, { definition: f.world, preparation }))
+      .toThrow("differs from frozen preparation");
+    expect(contentHash(source)).toBe(before);
+    const result = await f.engine.completePreparedStep(f.roster, request, preparation, []);
+    expect(apply).toHaveBeenCalledTimes(preparation.record.operations.length);
+    apply.mockRestore();
+    expect(result.state.revision).toBe(source.revision + 1);
+    expect(result.committed).not.toHaveProperty("executionState");
+    expect(result.committed).not.toHaveProperty("resolutionPlans");
+    expect(result.committed.directEvent).not.toHaveProperty("control");
+    expect(result.committed.directEvent).not.toHaveProperty("outcomes");
+    expect(() => committer.step(source, { ...candidate, resolution: {} } as typeof candidate, f.roster, 300, { definition: f.world, preparation }))
+      .toThrow("Direct candidate has unexpected");
+    const corrupt = structuredClone(result.state);
+    corrupt.history[0]!.directEvent.controlDelta.baseHash = "0".repeat(64);
+    expect(() => replaySimulationState(corrupt)).toThrow();
+    const control = readDirectState(result.state.executionState!, result.state);
+    expect(Object.values(control.cache).every(saved => !("audits" in saved))).toBe(true);
+
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+
   it.each(["repaired", "invalid-again", "transport"])("bounds NPC expression recovery and retains completed attempts: %s", async mode => {
     const f = await fixture({ operation: "speak", recipient: "broadcast", creationEnabled: true,
       creationResponse: { attempt: "回答旅人", utterance: "听见了，我在这里。", manner: null, recipientLocalId: "traveler" } });
@@ -123,7 +166,7 @@ describe("direct world through the actual simulation entry", () => {
       expect(result.committed.observations.find(observation => observation.observerId === "player")?.scene?.action?.addressing).toBe("direct");
     } else {
       expect(event.frames).toHaveLength(0);
-      expect(event.control.intents.keeper?.status).toBe("failed");
+      expect(readDirectState(result.state.executionState!, result.state).intents.keeper?.status).toBe("failed");
       expect(result.state.truth).toEqual(first.state.truth);
     }
     expect(replaySimulationState(result.state)).toEqual(result.state);
@@ -425,7 +468,7 @@ describe("direct world through the actual simulation entry", () => {
     const calls = f.transport.mock.calls.length;
     const second = await f.engine.step(f.roster, { expectedRevision: first.state.revision, trigger: "batch", externalActions: [] });
     expect(second.state.truth).toEqual(first.state.truth);
-    expect(second.state.history.at(-1)!.directEvent).toMatchObject({ frames: [], events: [], observations: [], presentation: [] });
+    expect(second.committed).toMatchObject({ events: [], observations: [], directEvent: { frames: [], presentation: [] } });
     expect(readDirectState(second.state.executionState!, second.state)).toMatchObject({
       completedSubmissionIds: ["submission-0"], intents: { player: { status: "waiting", activeSubmission: null, failure: null } },
     });
@@ -447,8 +490,8 @@ describe("direct world through the actual simulation entry", () => {
     await f.engine.bootstrapAgents();
     const result = await f.engine.step(f.roster, f.request("要是没有人在敲门，就别去开门。"));
     expect(result.state.truth).toEqual(f.world.initialState.truth);
-    expect(result.state.history.at(-1)!.directEvent).toMatchObject({ frames: [], events: [], observations: [],
-      presentation: [{ kind: "clarification", requested: "要是没有人在敲门，就别去开门。" }] });
+    expect(result.committed).toMatchObject({ events: [], observations: [], directEvent: { frames: [],
+      presentation: [{ kind: "clarification", requested: "要是没有人在敲门，就别去开门。" }] } });
     expect(readDirectState(result.state.executionState!, result.state).intents.player).toMatchObject({ status: "waiting", failure: null });
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
@@ -562,7 +605,7 @@ describe("direct world through the actual simulation entry", () => {
     expect(second.state.truth.elapsedSeconds).toBe(31);
     expect(second.state.history.at(-1)!.directEvent!.frames[0]!.durationSeconds).toBe(1);
     const third = await f.engine.step(f.roster, f.request("牌子上说十分钟以后截止，先看一下牌子", second.state.revision));
-    expect(third.state.truth.elapsedSeconds, JSON.stringify(third.state.history.at(-1)!.directEvent!.control.intents.player)).toBe(32);
+    expect(third.state.truth.elapsedSeconds, JSON.stringify(readDirectState(third.state.executionState!, third.state).intents.player)).toBe(32);
     expect(replaySimulationState(third.state)).toEqual(third.state);
   });
   it.each([false, true])("keeps hearing distinct from seeing a speaker: visible=%s", async actorVisible => {

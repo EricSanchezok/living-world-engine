@@ -222,7 +222,7 @@ function ActorOverview({ actorId, actorName, detail }: {
   detail: WorldInspectorStepDetail;
 }) {
   const action = detail.committed.actions.find((candidate) => candidate.actorId === actorId);
-  const nextAction = detail.committed.nextActions.find((candidate) => candidate.actorId === actorId);
+  const nextAction = !detail.committed.directEvent ? detail.committed.nextActions.find((candidate) => candidate.actorId === actorId) : undefined;
   const outcome = action
     ? detail.committed.outcomes.find((candidate) => candidate.proposalId === action.id)
     : undefined;
@@ -331,23 +331,25 @@ function formatWorldTime(seconds: number): string {
 }
 
 function TemporalAudit({ actorId, detail }: { actorId: string; detail: WorldInspectorStepDetail }) {
-  const { temporalBoundary: boundary } = detail.committed;
+  const committed = detail.committed;
+  if (committed.directEvent) return <JsonBlock label="世界时间与控制状态变化" value={{ boundary: committed.temporalBoundary, controlDelta: committed.directEvent.controlDelta }} />;
+  const { temporalBoundary: boundary } = committed;
   const relevant = (agentId: string) => actorId === "world" || agentId === actorId;
-  const plans = detail.committed.temporalPlans.filter((plan) => relevant(plan.actorId));
-  const transitions = detail.committed.activityTransitions.filter((transition) => relevant(transition.actorId));
-  const decisions = detail.committed.decisionPoints.filter((point) => relevant(point.agentId));
-  const dispositions = detail.committed.activityDispositions.filter((entry) => relevant(entry.actorId));
-  const resourceAdmissions = detail.committed.sharedResourceAdmissions.filter((admission) => {
-    const activity = detail.committed.temporalState.activities[admission.activityId] ??
+  const plans = committed.temporalPlans.filter((plan) => relevant(plan.actorId));
+  const transitions = committed.activityTransitions.filter((transition) => relevant(transition.actorId));
+  const decisions = committed.decisionPoints.filter((point) => relevant(point.agentId));
+  const dispositions = committed.activityDispositions.filter((entry) => relevant(entry.actorId));
+  const resourceAdmissions = committed.sharedResourceAdmissions.filter((admission) => {
+    const activity = committed.temporalState.activities[admission.activityId] ??
       detail.before.truth.activities[admission.activityId];
     return activity ? relevant(activity.actorId) : actorId === "world";
   });
-  const resourceActivities = Object.values(detail.committed.temporalState.activities)
+  const resourceActivities = Object.values(committed.temporalState.activities)
     .filter((activity) => activity.sharedResourceClaims.length > 0 && relevant(activity.actorId));
-  const activitySnapshots = (activities: typeof detail.committed.temporalState.activities) => Object.fromEntries(
+  const activitySnapshots = (activities: typeof committed.temporalState.activities) => Object.fromEntries(
     Object.entries(activities).filter(([, activity]) => relevant(activity.actorId)),
   );
-  const timerSnapshots = Object.fromEntries(Object.entries(detail.committed.temporalState.timers).filter(([, timer]) =>
+  const timerSnapshots = Object.fromEntries(Object.entries(committed.temporalState.timers).filter(([, timer]) =>
     actorId === "world" || timer.wakeAgentIds.includes(actorId)));
   return (
     <div className="cg-inspector-detail-stack">
@@ -457,7 +459,7 @@ function TemporalAudit({ actorId, detail }: { actorId: string; detail: WorldInsp
               actorId === "world" || timer.wakeAgentIds.includes(actorId))),
           },
           committed: {
-            activities: activitySnapshots(detail.committed.temporalState.activities),
+            activities: activitySnapshots(committed.temporalState.activities),
             timers: timerSnapshots,
           },
           after: {
@@ -472,56 +474,58 @@ function TemporalAudit({ actorId, detail }: { actorId: string; detail: WorldInsp
 }
 
 function Causality({ detail }: { detail: WorldInspectorStepDetail }) {
+  const committed = detail.committed;
+  if (committed.directEvent) return <JsonBlock label="行动、实际读取与随机承诺" value={{ frames: committed.directEvent.frames, reads: committed.directEvent.reads, requests: committed.randomRequests, results: committed.randomResults }} />;
   const stages = [
     {
       title: "Agent 反应",
       description: "主体是否因其他行动改变原计划",
       icon: Activity,
-      count: detail.committed.reactionRequests.length + detail.committed.reactionDecisions.length,
-      value: { requests: detail.committed.reactionRequests, decisions: detail.committed.reactionDecisions },
+      count: committed.reactionRequests.length + committed.reactionDecisions.length,
+      value: { requests: committed.reactionRequests, decisions: committed.reactionDecisions },
     },
     {
       title: "裁决计划与收据",
       description: "随机前固定的语义依据与确定性数值结算",
       icon: Braces,
-      count: detail.committed.resolutionPlans.length + detail.committed.resolutionReceipts.length,
+      count: committed.resolutionPlans.length + committed.resolutionReceipts.length,
       value: {
-        plans: detail.committed.resolutionPlans,
-        receipts: detail.committed.resolutionReceipts,
+        plans: committed.resolutionPlans,
+        receipts: committed.resolutionReceipts,
       },
     },
     {
       title: "能力检定",
       description: "不确定行动的难度与结果",
       icon: BadgeCheck,
-      count: detail.committed.checkRequests.length + detail.committed.checks.length,
-      value: { requests: detail.committed.checkRequests, results: detail.committed.checks },
+      count: committed.checkRequests.length + committed.checks.length,
+      value: { requests: committed.checkRequests, results: committed.checks },
     },
     {
       title: "随机承诺",
       description: "先承诺、后揭示的随机结果",
       icon: Dices,
-      count: detail.committed.randomRequests.length + detail.committed.randomResults.length,
+      count: committed.randomRequests.length + committed.randomResults.length,
       value: {
-        rounds: detail.committed.commitmentRounds,
-        requests: detail.committed.randomRequests,
-        results: detail.committed.randomResults,
+        rounds: committed.commitmentRounds,
+        requests: committed.randomRequests,
+        results: committed.randomResults,
       },
     },
     {
       title: "规则机制",
       description: "剧本机制调用及其状态操作",
       icon: Wrench,
-      count: detail.committed.mechanicInvocations.length + detail.committed.mechanicResults.length,
-      value: { invocations: detail.committed.mechanicInvocations, results: detail.committed.mechanicResults },
+      count: committed.mechanicInvocations.length + committed.mechanicResults.length,
+      value: { invocations: committed.mechanicInvocations, results: committed.mechanicResults },
     },
   ].filter((stage) => stage.count > 0);
-  const accepted = detail.committed.causalVerification.verdict === "accept";
+  const accepted = committed.causalVerification.verdict === "accept";
   return (
     <div className="cg-inspector-detail-stack">
       <section className="cg-inspector-assurance" data-status={accepted ? "accepted" : "rejected"}>
         <span><Link2 aria-hidden="true" /></span>
-        <div><strong>{accepted ? "因果复核通过" : "因果复核拒绝"}</strong><small>{detail.committed.causalAssertionResults.length} 条因果断言已校验</small></div>
+        <div><strong>{accepted ? "因果复核通过" : "因果复核拒绝"}</strong><small>{committed.causalAssertionResults.length} 条因果断言已校验</small></div>
         <b>{accepted ? "可信提交" : "需要检查"}</b>
       </section>
       {stages.length > 0
@@ -539,7 +543,7 @@ function Causality({ detail }: { detail: WorldInspectorStepDetail }) {
         : <p className="cg-inspector-inline-empty">本轮没有触发 Agent 反应、能力检定、随机承诺或规则机制。</p>}
       <JsonBlock
         label="查看因果断言与复核明细"
-        value={{ assertions: detail.committed.causalAssertionResults, verification: detail.committed.causalVerification }}
+        value={{ assertions: committed.causalAssertionResults, verification: committed.causalVerification }}
       />
     </div>
   );

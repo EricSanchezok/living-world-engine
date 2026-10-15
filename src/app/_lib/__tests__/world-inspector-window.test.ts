@@ -10,7 +10,7 @@ function inspectorWindow(
   const oldestRevision = revisions[0];
   const newestRevision = revisions.at(-1);
   return {
-    apiVersion: 13,
+    apiVersion: 14,
     algorithmComposition: {
       root: DEFAULT_ALGORITHM_REF,
       nodeCount: 1,

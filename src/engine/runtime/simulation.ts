@@ -1,3 +1,4 @@
+import type { DirectRuntimeState } from "../direct/contracts";
 import { performance } from "node:perf_hooks";
 import { interactionDependencyEdgeCount, footprintRefKey } from "../mechanics/action-dependency";
 import { CanonicalCommitter } from "./canonical-committer";
@@ -16,7 +17,7 @@ import type {
 import { WorldQuiescentError, algorithmRef, decisionEligibleAgentIds, resolutionObservations } from "./execution";
 import { createHistoryReplayBase } from "./history-replay";
 import { validateAlgorithmExecutionState } from "./execution-state";
-import type { CommittedStep, SimulationState } from "../contracts/model";
+import type { CommittedStep, ReferenceCommittedStep, SimulationState } from "../contracts/model";
 import type { ModelExecutionAudit } from "../contracts/model";
 import { contentHash } from "../models/model-audit";
 import type { ModelExecutionScope } from "../models/model-provider";
@@ -35,11 +36,12 @@ import { validateModelAudit, validateSimulationState } from "./transaction";
 import type { WorldDefinition } from "./world-definition";
 import { validateWorldDefinition } from "./world-definition";
 
-export interface WorldStepResult {
-  committed: CommittedStep;
+type AlgorithmStep<A extends WorldExecutionAlgorithm> = A extends import("../direct/contracts").DirectExecutionAlgorithm ? import("../direct/contracts").DirectCommittedStep : ReferenceCommittedStep;
+
+export interface WorldStepResult<Step extends CommittedStep = CommittedStep> {
+  committed: Step;
   modelAudits: ModelExecutionAudit[];
-  state: SimulationState;
-  decisionRequests: CommittedStep["decisionRequests"];
+  state: SimulationState<Step>;
 }
 
 export interface WorldAdvanceSequenceResult {
@@ -49,7 +51,7 @@ export interface WorldAdvanceSequenceResult {
 }
 
 export class StepReactionRequiredError extends Error {
-  constructor(readonly preparation: WorldStepPreparation) {
+  constructor(readonly preparation: import("./execution").ReferenceStepPreparation) {
     super("world step requires external reactions before completion");
     this.name = "StepReactionRequiredError";
   }
@@ -405,9 +407,9 @@ function emitBootstrapMetrics(
     counts: {
       persistentAgents: Object.keys(source.agents).length,
       eligibleAgents: Object.keys(source.agents).length,
-      activatedAgents: candidate.diagnostics.activatedAgentIds.length,
+      activatedAgents: ("kind" in candidate ? 0 : candidate.diagnostics.activatedAgentIds.length),
       skippedAgents: 0,
-      reusedAgents: candidate.diagnostics.reusedAgentIds.length,
+      reusedAgents: ("kind" in candidate ? Object.keys(source.agents).length : candidate.diagnostics.reusedAgentIds.length),
       noopAgents: 0,
       externalAgents: 0,
     },
@@ -421,7 +423,25 @@ function emitStepMetrics(
   eligibleAgentIds: readonly string[],
   trigger: WorldAdvanceRequest["trigger"],
   candidate: Readonly<WorldStepCandidate>,
+  committedState: Readonly<SimulationState>,
 ): void {
+  if ("kind" in candidate) {
+    const record = candidate.record;
+    emitEngineStableEvent(trace, { event: "algorithm.activation.completed", attributes: { phase: "step", policy: "direct-ready-intentions" },
+      counts: { persistentAgents: Object.keys(source.agents).length, eligibleAgents: eligibleAgentIds.length,
+        activatedAgents: candidate.activatedAgentIds.length, skippedAgents: 0,
+        reusedAgents: Object.keys(source.agents).length - candidate.activatedAgentIds.length, noopAgents: 0,
+        externalAgents: Object.values(policyRoster).filter(policy => policy.kind === "external").length } });
+    emitEngineStableEvent(trace, { event: "direct.candidate.completed", attributes: { phase: "step", dependencyAnalysis: "actual-read-hashes", trigger },
+      counts: { updatedAgents: record.cognition.length, observedAgents: new Set(record.observations.map(item => item.observerId)).size,
+        actions: record.frames.length, randomResults: record.randomResults.length, outcomes: record.outcomes.length,
+        operations: record.operations.length, events: record.events.length, observations: record.observations.length,
+        activeActivities: (committedState.executionState!.data as unknown as DirectRuntimeState).activities.length, dueActivities: record.completedActionIds.length,
+        temporalDeltaSeconds: record.atSeconds - source.truth.elapsedSeconds } });
+    for (const outcome of record.outcomes) emitEngineStableEvent(trace, { event: "resolution.outcome.recorded", attributes: { outcomeStatus: outcome.status } });
+    for (const operation of record.operations) emitEngineStableEvent(trace, { event: "resolution.operation.recorded", attributes: { operationKind: operation.kind } });
+    return;
+  }
   const observations = resolutionObservations(candidate.resolution);
   const policyCounts = Object.values(policyRoster).reduce((counts, binding) => {
     counts[binding.kind] = (counts[binding.kind] ?? 0) + 1;
@@ -521,16 +541,16 @@ function emitStepMetrics(
 }
 
 /** All candidate generation and commits share one algorithm/committer path. */
-export class SimulationEngine {
+export class SimulationEngine<Algorithm extends WorldExecutionAlgorithm = WorldExecutionAlgorithm> {
   readonly definition: WorldDefinition;
   private state: SimulationState;
-  private readonly algorithm: WorldExecutionAlgorithm;
+  private readonly algorithm: Algorithm;
   private readonly committer: CanonicalCommitter;
   private bootstrapAudits: ModelExecutionAudit[] = [];
 
   constructor(
     definition: WorldDefinition,
-    algorithm: WorldExecutionAlgorithm,
+    algorithm: Algorithm,
     initialState: SimulationState = definition.initialState,
   ) {
     this.definition = definition;
@@ -544,10 +564,10 @@ export class SimulationEngine {
     this.state.historyBase ??= createHistoryReplayBase(definition.initialState);
   }
 
-  get snapshot(): SimulationState {
+  get snapshot(): SimulationState<AlgorithmStep<Algorithm>> {
     const snapshot = structuredClone(this.state);
     validatedSnapshotHashes.set(snapshot, { hash: contentHash(snapshot), rulePackages: this.algorithm.rulePackages });
-    return snapshot;
+    return snapshot as SimulationState<AlgorithmStep<Algorithm>>;
   }
 
   get bootstrapModelAudits(): ModelExecutionAudit[] {
@@ -613,7 +633,7 @@ export class SimulationEngine {
       trace.emit({
         event: "instance.bootstrap.committed",
         durationMs: Math.max(0, Date.now() - startedAt),
-        counts: { activatedAgents: candidate.agentCommits.length, updatedAgents: candidate.agentCommits.length },
+        counts: { activatedAgents: ("kind" in candidate ? 0 : candidate.agentCommits.length), updatedAgents: ("kind" in candidate ? 0 : candidate.agentCommits.length) },
         hashes: { state: contentHash(committed) },
       });
       trace.flush();
@@ -647,7 +667,7 @@ export class SimulationEngine {
       preparation: WorldStepPreparation;
       reactions: readonly ExternalReactionInput[];
     }>,
-  ): Promise<WorldStepResult> {
+  ): Promise<WorldStepResult<AlgorithmStep<Algorithm>>> {
     const source = structuredClone(this.state);
     if (request.expectedRevision !== source.revision) {
       throw new Error(`world advance expected revision ${request.expectedRevision}; current revision is ${source.revision}`);
@@ -704,19 +724,22 @@ export class SimulationEngine {
         hashes: { preparation: contentHash(preparation) },
         payload: preparation,
       });
-      if (!prepared && preparation.pendingReactionRequests.length > 0) {
+      if (!prepared && !("kind" in preparation) && preparation.pendingReactionRequests.length > 0) {
         trace.flush();
         throw new StepReactionRequiredError(preparation);
       }
-      const candidate = await this.algorithm.completeStep(
-        stepInput,
-        structuredClone(preparation),
-        prepared?.reactions ?? [],
-        context,
-      );
-      validateCandidateModelAudits(candidate.modelAudits, source);
-      generatedModelCalls = candidate.modelAudits.reduce((sum, audit) => sum + audit.invocations.length, 0);
-      const generatedInvocations = candidate.modelAudits.flatMap((audit) => audit.invocations);
+      let candidate: WorldStepCandidate;
+      if (this.algorithm.protocol === "direct") {
+        if (!("kind" in preparation)) throw new Error("direct algorithm requires native preparation");
+        candidate = await this.algorithm.completeStep(stepInput, structuredClone(preparation), prepared?.reactions ?? [], context);
+      } else {
+        if ("kind" in preparation) throw new Error("reference algorithm requires reference preparation");
+        candidate = await this.algorithm.completeStep(stepInput, structuredClone(preparation), prepared?.reactions ?? [], context);
+      }
+      const modelAudits = "kind" in candidate ? candidate.record.modelAudits : candidate.modelAudits;
+      validateCandidateModelAudits(modelAudits, source);
+      generatedModelCalls = modelAudits.reduce((sum, audit) => sum + audit.invocations.length, 0);
+      const generatedInvocations = modelAudits.flatMap((audit) => audit.invocations);
       discardedInputTokens = generatedInvocations.reduce((sum, invocation) => sum + (invocation.tokenUsage.input ?? 0), 0);
       discardedOutputTokens = generatedInvocations.reduce((sum, invocation) => sum + (invocation.tokenUsage.output ?? 0), 0);
       discardedReasoningTokens = generatedInvocations.reduce((sum, invocation) =>
@@ -732,7 +755,7 @@ export class SimulationEngine {
       trace.flush();
       const validationStartedAt = performance.now();
       trace.emit({ event: "canonical.validation.started", attributes: { phase: "step" } });
-      const validationStage = executionStage("canonical-validation");
+      const validationStage = executionStage("canonical-validation", this.algorithm.protocol);
       await context.stages?.before(validationStage);
       const result = this.committer.step(
         source,
@@ -753,7 +776,7 @@ export class SimulationEngine {
         durationMs: Math.max(0, performance.now() - validationStartedAt),
         hashes: { semantic: result.committed.semanticHash, state: contentHash(result.state) },
       });
-      emitStepMetrics(trace, source, policyRoster, eligibleAgentIds, request.trigger, candidate);
+      emitStepMetrics(trace, source, policyRoster, eligibleAgentIds, request.trigger, candidate, result.state);
       this.state = result.state;
       trace.emit({
         event: "execution.resources.sampled",
@@ -768,10 +791,9 @@ export class SimulationEngine {
       });
       trace.flush();
       return {
-        committed: result.committed,
-        modelAudits: candidate.modelAudits.map((audit) => structuredClone(audit)),
+        committed: result.committed as AlgorithmStep<Algorithm>,
+        modelAudits: modelAudits.map((audit) => structuredClone(audit)),
         state: this.snapshot,
-        decisionRequests: structuredClone(result.committed.decisionRequests),
       };
     } catch (error) {
       if (error instanceof WorldQuiescentError) {
@@ -807,7 +829,7 @@ export class SimulationEngine {
     policyRoster: Readonly<Record<string, PolicyBinding>>,
     request: Readonly<WorldAdvanceRequest>,
     scope?: ModelExecutionScope,
-  ): Promise<WorldStepResult> {
+  ): Promise<WorldStepResult<AlgorithmStep<Algorithm>>> {
     return this.executeStep(policyRoster, request, scope);
   }
 
@@ -815,7 +837,7 @@ export class SimulationEngine {
     policyRoster: Readonly<Record<string, PolicyBinding>>,
     request: Readonly<WorldAdvanceRequest>,
     scope?: ModelExecutionScope,
-  ): Promise<WorldStepPreparation> {
+  ): Promise<Awaited<ReturnType<Algorithm["prepareStep"]>>> {
     const source = structuredClone(this.state);
     if (request.expectedRevision !== source.revision) {
       throw new Error(`world advance expected revision ${request.expectedRevision}; current revision is ${source.revision}`);
@@ -845,7 +867,7 @@ export class SimulationEngine {
     await context.stages?.before(stage);
     await context.stages?.after(stage);
     const preparation = await this.algorithm.prepareStep(stepInput, context);
-    validateCandidateModelAudits(preparation.modelAudits, source);
+    validateCandidateModelAudits("kind" in preparation ? preparation.record.modelAudits : preparation.modelAudits, source);
     trace.emit({
       event: "execution.preparation.persisted",
       attributes: { phase: "step" },
@@ -853,7 +875,7 @@ export class SimulationEngine {
       payload: preparation,
     });
     trace.flush();
-    return structuredClone(preparation);
+    return structuredClone(preparation) as Awaited<ReturnType<Algorithm["prepareStep"]>>;
   }
 
   async completePreparedStep(
@@ -862,7 +884,7 @@ export class SimulationEngine {
     preparation: Readonly<WorldStepPreparation>,
     reactions: readonly ExternalReactionInput[],
     scope?: ModelExecutionScope,
-  ): Promise<WorldStepResult> {
+  ): Promise<WorldStepResult<AlgorithmStep<Algorithm>>> {
     return this.executeStep(policyRoster, request, scope, {
       preparation: structuredClone(preparation),
       reactions: structuredClone(reactions),
@@ -885,7 +907,7 @@ export class SimulationEngine {
       }, scope);
       steps.push(result.committed);
       await onStep?.(result);
-      if (result.decisionRequests.length > 0) {
+      if (!result.committed.directEvent && result.committed.decisionRequests.length > 0) {
         return { status: "awaiting_external", steps, state: this.snapshot };
       }
     }

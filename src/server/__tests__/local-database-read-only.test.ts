@@ -17,7 +17,7 @@ describe("LocalDatabase read-only connections", () => {
       expect(reader.readExperimentEnrollmentStop("fixture", "1")).toBe("cache integrity failure");
       expect(() => reader.writeExperimentEnrollmentStop("fixture", "1", "changed"))
         .toThrow(LocalDatabaseReadOnlyError);
-      expect(reader.debugDoctor()).toMatchObject({ schemaVersion: 8, indexFresh: true });
+      expect(reader.debugDoctor()).toMatchObject({ schemaVersion: 9, indexFresh: true });
       expect(() => reader.debugRebuildIndex()).toThrow(LocalDatabaseReadOnlyError);
       reader.close();
 

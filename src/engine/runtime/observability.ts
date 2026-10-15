@@ -257,7 +257,7 @@ export type EngineStableRuntimeEventInput = Omit<
   event: "algorithm.activation.completed";
   attributes: Readonly<{
     phase: "bootstrap" | "step";
-    policy: "engine-bootstrap-roster" | "engine-decision-eligibility";
+    policy: "engine-bootstrap-roster" | "engine-decision-eligibility" | "direct-ready-intentions";
   }>;
   counts: Readonly<{
     persistentAgents: number;
@@ -311,6 +311,11 @@ export type EngineStableRuntimeEventInput = Omit<
     audienceCardinality: number;
   }>;
 } | {
+  event: "direct.candidate.completed";
+  attributes: Readonly<{ phase: "step"; dependencyAnalysis: "actual-read-hashes"; trigger: "manual" | "batch" | "realtime" | "participant_action" }>;
+  counts: Readonly<{ updatedAgents: number; observedAgents: number; actions: number; randomResults: number; outcomes: number;
+    operations: number; events: number; observations: number; activeActivities: number; dueActivities: number; temporalDeltaSeconds: number }>;
+} | {
   event: "temporal.boundary.reason";
   attributes: Readonly<{ reasonKind: TemporalBoundaryReason["kind"] }>;
   counts?: never;
@@ -331,6 +336,7 @@ export type EngineStableRuntimeEventInput = Omit<
 const engineOwnedStableEvents: ReadonlySet<string> = new Set<EngineStableRuntimeEventInput["event"]>([
   "algorithm.activation.completed",
   "algorithm.candidate.completed",
+  "direct.candidate.completed",
   "temporal.boundary.reason",
   "temporal.activity.transition",
   "resolution.outcome.recorded",
@@ -355,7 +361,7 @@ const engineStableTelemetryFields: Record<EngineStableRuntimeEventInput["event"]
     ],
     attributeValues: {
       phase: ["bootstrap", "step"],
-      policy: ["engine-bootstrap-roster", "engine-decision-eligibility"],
+      policy: ["engine-bootstrap-roster", "engine-decision-eligibility", "direct-ready-intentions"],
     },
   },
   "algorithm.candidate.completed": {
@@ -400,6 +406,11 @@ const engineStableTelemetryFields: Record<EngineStableRuntimeEventInput["event"]
       dependencyAnalysis: ["typed-action-dependencies"],
       trigger: ["manual", "batch", "realtime", "participant_action"],
     },
+  },
+  "direct.candidate.completed": {
+    attributes: ["phase", "dependencyAnalysis", "trigger"],
+    counts: ["updatedAgents", "observedAgents", "actions", "randomResults", "outcomes", "operations", "events", "observations", "activeActivities", "dueActivities", "temporalDeltaSeconds"],
+    attributeValues: { phase: ["step"], dependencyAnalysis: ["actual-read-hashes"], trigger: ["manual", "batch", "realtime", "participant_action"] },
   },
   "temporal.boundary.reason": {
     attributes: ["reasonKind"],

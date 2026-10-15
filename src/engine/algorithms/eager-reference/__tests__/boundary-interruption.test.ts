@@ -1,4 +1,4 @@
-import type { WorldStepPreparation } from "../../../runtime/execution";
+import type { ReferenceStepPreparation } from "../../../runtime/execution";
 import path from "node:path";
 import { expect, it } from "vitest";
 import { buildWorldDefinition, loadWorldTemplate } from "../../../../script/world-loader";
@@ -6,7 +6,7 @@ import { referenceHandleFor } from "../../../contracts/model-context";
 import { contentHash } from "../../../models/model-audit";
 import { SimulationEngine } from "../../../runtime/simulation";
 import { CanonicalCommitter } from "../../../runtime/canonical-committer";
-import type { WorldExecutionAlgorithm, WorldStepCandidate } from "../../../runtime/execution";
+import type { ReferenceWorldExecutionAlgorithm, ReferenceStepCandidate } from "../../../runtime/execution";
 import { replaySimulationState } from "../../../runtime/transaction";
 import { pauseActivity } from "../../../mechanics/temporal";
 import { deterministicActionCompilationBatch, deterministicInteractionDependency,
@@ -48,9 +48,9 @@ it.each([1, 10])("keeps possible audiences as context without an observed interr
   });
   const definition = buildWorldDefinition(template, { seed: 47, modelCatalog: provider.catalog });
   const delegate = new EagerReferenceAlgorithm(provider);
-  let candidate: WorldStepCandidate | undefined;
-  let frozenPreparation: WorldStepPreparation;
-  const algorithm: WorldExecutionAlgorithm = {
+  let candidate: ReferenceStepCandidate | undefined;
+  let frozenPreparation: ReferenceStepPreparation;
+  const algorithm: ReferenceWorldExecutionAlgorithm = { protocol: "reference",
     manifest: delegate.manifest,
     bootstrap: (input, context) => delegate.bootstrap(input, context),
     prepareStep: (input, context) => delegate.prepareStep(input, context),

@@ -14,6 +14,7 @@ function wireValue<T>(value: T): T {
 
 export class DirectDecisions {
   readonly uses: DirectDecisionUse[] = [];
+  private readonly modelAudits: import("../contracts/model").ModelExecutionAudit[] = [];
   private ordinals: Record<string, number> = {};
   constructor(readonly provider: StructuredModelProvider, readonly control: DirectRuntimeState, readonly scope: ModelExecutionScope) {}
   next(subject: string): number { return this.ordinals[subject] = (this.ordinals[subject] ?? 0) + 1; }
@@ -24,17 +25,20 @@ export class DirectDecisions {
     const batch: DecisionBatchV2 = { version: 2, view: owner ? { kind: "agent", agentId: owner, projectionHash: contentHash(state) }
       : { kind: "world", projectionHash: contentHash(state) }, state: structuredClone(state), questions: structuredClone(questions), dependencies: dependencyVersions(this.control, reads) };
     const key = contentHash({ batch, profiles, catalog: this.control.modelCatalogHash, registry: this.control.registryHash, prompt: decisionPromptV2(instructionProfile).version });
-    const cached = this.control.cache.find(entry => entry.key === key);
-    if (cached) { this.uses.push({ batch, result: cached.result, reused: true }); return cached.result.answers; }
+    const cached = this.control.cache[key];
+    if (cached) { this.uses.push({ batch, result: cached, reused: true }); return cached.answers; }
     const subjectId = owner ?? "world";
     const result = await executeDecisionV2(this.provider, { ...this.scope, subjectId, profileId: profiles.decision,
       fallbackProfileId: profiles.fallback, modelRegistrySnapshotHash: this.control.registryHash,
       allocateInvocation: () => this.next(subjectId), instructionProfile, batch });
-    this.control.cache.push({ key, result });
-    if (this.control.cache.length > 256) this.control.cache.shift();
-    this.uses.push({ batch, result, reused: false }); return result.answers;
+    const { audits, ...saved } = result;
+    this.modelAudits.push(...audits);
+    this.control.cache[key] = saved;
+    const keys = Object.keys(this.control.cache);
+    if (keys.length > 256) delete this.control.cache[keys[0]!];
+    this.uses.push({ batch, result: saved, reused: false }); return result.answers;
   }
-  audits() { return this.uses.filter(use => !use.reused).flatMap(use => use.result.audits); }
+  audits() { return this.modelAudits; }
 }
 export function selected(answers: Awaited<ReturnType<DirectDecisions["ask"]>>, key: string): string {
   const value = answers[key]; if (value?.type !== "choice") throw new Error(`missing choice ${key}`);

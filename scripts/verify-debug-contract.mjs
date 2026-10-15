@@ -34,8 +34,8 @@ export async function verifyDebugContract(repoRoot) {
   for (const table of ["execution_event_index", "execution_issue_index", "execution_invocation_index", "debug_index_meta"]) {
     if (!database.includes(`CREATE TABLE ${table}`)) errors.push(`local database does not create ${table}`);
   }
-  if (!/schema_migrations\(version, applied_at\).*8/u.test(database.replaceAll("\n", " "))) {
-    errors.push("local database does not record schema v8");
+  if (!/schema_migrations\(version, applied_at\).*9/u.test(database.replaceAll("\n", " "))) {
+    errors.push("local database does not record schema v9");
   }
   const docs = await readFile(path.join(repoRoot, "docs/debugging.md"), "utf8");
   if (!docs.includes("npm run debug -- find")) errors.push("debugging reference has no find example");

@@ -178,7 +178,7 @@ function projectHistory(
           introductions: observation.introductions.map(({ localEntity }) => structuredClone(localEntity)),
           apparentClaims: observation.apparentClaims.map((claim) => structuredClone(claim)),
         })),
-      resolutions: entry.resolutionReceipts
+      resolutions: (entry.directEvent ? [] : entry.resolutionReceipts)
         .filter((receipt) => receipt.settled)
         .map((receipt) => projectAgentResolutionReceipt(state, agent, receipt))
         .filter((receipt): receipt is AgentResolutionReceiptView => receipt !== null),

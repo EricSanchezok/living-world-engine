@@ -12,7 +12,7 @@ import type {
 import type { InteractionDependency } from "../engine/runtime/execution";
 import type { AlgorithmRef } from "../engine/algorithms/composition";
 
-export const WORLD_INSPECTOR_API_VERSION = 13 as const;
+export const WORLD_INSPECTOR_API_VERSION = 14 as const;
 
 export type WorldInspectorNodeKind =
   | "commit"
@@ -447,7 +447,7 @@ export interface WorldInspectorStepDetail {
 export interface WorldInspectorAttemptDetail {
   apiVersion: typeof WORLD_INSPECTOR_API_VERSION;
   summary: WorldInspectorAttemptSummary;
-  attemptedActions: CommittedStep["initialActions"];
+  attemptedActions: CommittedStep["actions"];
   stages: WorldInspectorAttemptStage[];
   events: WorldInspectorRuntimeEventSummary[];
   modelInvocations: WorldInspectorModelInvocationSummary[];

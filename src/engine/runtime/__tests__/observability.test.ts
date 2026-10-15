@@ -11,7 +11,7 @@ import { DeterministicModelProvider } from "../../testing/model-provider";
 import { loadWorldScript } from "../../../script/world-loader";
 import { EagerReferenceAlgorithm } from "../../algorithms/eager-reference/eager-reference";
 import { SimulationEngine } from "../simulation";
-import type { PolicyBinding, WorldExecutionAlgorithm } from "../execution";
+import type { PolicyBinding, ReferenceWorldExecutionAlgorithm } from "../execution";
 
 function modelRoster(engine: SimulationEngine): Record<string, PolicyBinding> {
   return Object.fromEntries(Object.values(engine.snapshot.agents).map((agent) => [agent.id, {
@@ -294,7 +294,7 @@ describe("model context measurements", () => {
       modelCatalog: provider.catalog,
     });
     const eager = new EagerReferenceAlgorithm(provider);
-    const failingAlgorithm: WorldExecutionAlgorithm = {
+    const failingAlgorithm: ReferenceWorldExecutionAlgorithm = { protocol: "reference",
       manifest: eager.manifest,
       bootstrap: eager.bootstrap.bind(eager),
       async prepareStep(_input, context) {

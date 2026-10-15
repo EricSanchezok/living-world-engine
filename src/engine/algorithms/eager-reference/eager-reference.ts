@@ -46,17 +46,17 @@ import { defineAlgorithmRef } from "../composition";
 import { algorithmManifest } from "../../runtime/execution";
 import type {
   InteractionDependency,
-  BootstrapCandidate,
+  ReferenceBootstrapCandidate,
   BootstrapInput,
   ExecutionContext,
   ExternalActionInput,
   ExternalReactionInput,
   JsonObject,
-  WorldExecutionAlgorithm,
+  ReferenceWorldExecutionAlgorithm,
   AlgorithmManifest,
-  WorldStepCandidate,
+  ReferenceStepCandidate,
   WorldStepInput,
-  WorldStepPreparation,
+  ReferenceStepPreparation,
 } from "../../runtime/execution";
 import {
   StepPreparationInvalidatedError,
@@ -405,7 +405,7 @@ export function createEagerReferenceAlgorithmRef(
     role: "world-execution",
     id: "eager-reference",
     version: "29",
-    contractVersion: 12,
+    contractVersion: 13,
     config: {},
     children: { agentCognition, actionCompilation, interactionGrounding, reactionResolution, truthResolution, observationRendering },
   });
@@ -589,7 +589,7 @@ interface EagerStepPreparationPayload {
 
 }
 
-function eagerPreparationPayload(preparation: Readonly<WorldStepPreparation>): EagerStepPreparationPayload {
+function eagerPreparationPayload(preparation: Readonly<ReferenceStepPreparation>): EagerStepPreparationPayload {
   const value = preparation.payload as unknown;
   if (!value || typeof value !== "object" || Array.isArray(value)) {
     throw new StepPreparationInvalidatedError("step preparation payload is not an object");
@@ -940,7 +940,8 @@ function mergeResolutions(
   };
 }
 
-export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
+export class EagerReferenceAlgorithm implements ReferenceWorldExecutionAlgorithm {
+  readonly protocol = "reference" as const;
   readonly algorithmIdentity;
   readonly manifest;
   readonly config: Readonly<NormalizedEagerReferenceAlgorithmConfig>;
@@ -1195,7 +1196,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     };
   }
 
-  async bootstrap(input: Readonly<BootstrapInput>, context: ExecutionContext): Promise<BootstrapCandidate> {
+  async bootstrap(input: Readonly<BootstrapInput>, context: ExecutionContext): Promise<ReferenceBootstrapCandidate> {
     const source = structuredClone(input.state);
     const agents = Object.values(source.agents).sort((left, right) => left.id.localeCompare(right.id));
     const mindBatch = await this.thinkBatchWithFallback(
@@ -1357,7 +1358,7 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
     return result;
   }
 
-  async prepareStep(input: Readonly<WorldStepInput>, context: ExecutionContext): Promise<WorldStepPreparation> {
+  async prepareStep(input: Readonly<WorldStepInput>, context: ExecutionContext): Promise<ReferenceStepPreparation> {
     const source = structuredClone(input.state);
     const planningState = structuredClone(source);
     const readyTemporalPlans: import("../../mechanics/temporal").TemporalPlan[] = [];
@@ -1685,10 +1686,10 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
 
   async completeStep(
     input: Readonly<WorldStepInput>,
-    preparation: Readonly<WorldStepPreparation>,
+    preparation: Readonly<ReferenceStepPreparation>,
     reactions: readonly ExternalReactionInput[],
     context: ExecutionContext,
-  ): Promise<WorldStepCandidate> {
+  ): Promise<ReferenceStepCandidate> {
     const sessions = new Set<TruthCandidateSession>();
     try {
       return await this.completeStepCandidate(input, preparation, reactions, context, sessions);
@@ -1699,11 +1700,11 @@ export class EagerReferenceAlgorithm implements WorldExecutionAlgorithm {
 
   private async completeStepCandidate(
     input: Readonly<WorldStepInput>,
-    preparation: Readonly<WorldStepPreparation>,
+    preparation: Readonly<ReferenceStepPreparation>,
     reactions: readonly ExternalReactionInput[],
     context: ExecutionContext,
     sessions: Set<TruthCandidateSession>,
-  ): Promise<WorldStepCandidate> {
+  ): Promise<ReferenceStepCandidate> {
     const source = structuredClone(input.state);
     if (preparation.schemaVersion !== WORLD_STEP_PREPARATION_SCHEMA_VERSION ||
       preparation.sourceStateHash !== contentHash(source) ||

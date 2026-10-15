@@ -70,6 +70,6 @@ describe("debug CLI", () => {
     const output = stdout();
     expect(await runDebugCommand(["doctor", "--database", seeded.file])).toBe(0);
     const report = JSON.parse(output.mock.calls.at(-1)?.[0] as string);
-    expect(report).toMatchObject({ schemaVersion: 8, indexFresh: true });
+    expect(report).toMatchObject({ schemaVersion: 9, indexFresh: true });
   });
 });

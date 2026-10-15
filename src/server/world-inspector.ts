@@ -12,7 +12,7 @@ import type {
 import { ACTION_COMPILATION_PROJECTION } from "../engine/contracts/model-context";
 import { contentHash } from "../engine/models/model-audit";
 import type { RuntimeError, RuntimeEvent } from "../engine/runtime/observability";
-import { EXECUTION_STAGES } from "../engine/runtime/stages";
+import { EXECUTION_STAGES, DIRECT_EXECUTION_STAGES, executionStages } from "../engine/runtime/stages";
 import { replaySimulationState } from "../engine/runtime/transaction";
 import {
   WORLD_INSPECTOR_API_VERSION,
@@ -191,9 +191,9 @@ function projectStep(
     }
   };
   for (const action of committed.actions) references.set(`action:${action.id}`, `action:${action.id}`);
-  for (const check of committed.checkRequests) references.set(`check:${check.id}`, `check:${check.id}`);
+  for (const check of (committed.directEvent ? [] : committed.checkRequests)) references.set(`check:${check.id}`, `check:${check.id}`);
   for (const random of committed.randomRequests) references.set(`random:${random.id}`, `random:${random.id}`);
-  for (const mechanic of committed.mechanicInvocations) references.set(`mechanic:${mechanic.id}`, `mechanic:${mechanic.id}`);
+  for (const mechanic of (committed.directEvent ? [] : committed.mechanicInvocations)) references.set(`mechanic:${mechanic.id}`, `mechanic:${mechanic.id}`);
   for (const event of committed.events) references.set(`event:${event.id}`, `event:${event.id}`);
 
   const primaryAction = committed.actions.length === 0
@@ -227,16 +227,16 @@ function projectStep(
     if (outcome) connect(outcome.causeRefs, id);
     addEdge(id, commitId, "commits", "行动结果");
   }
-  for (const request of committed.reactionRequests) {
+  for (const request of (committed.directEvent ? [] : committed.reactionRequests)) {
     const id = `reaction:${revision}:${request.agentId}`;
     nodes.push({ id, revision, laneId: request.agentId, kind: "reaction", label: "反应窗口", description: request.stimulus.summary });
     const source = references.get(`action:${request.triggerActionId}`);
     if (source) addEdge(source, id, "observes", "刺激");
     addEdge(id, commitId, "commits", "反应决定");
   }
-  for (const request of committed.checkRequests) {
+  for (const request of (committed.directEvent ? [] : committed.checkRequests)) {
     const id = `check:${request.id}`;
-    const result = committed.checks.find((candidate) => candidate.requestId === request.id);
+    const result = !committed.directEvent ? committed.checks.find((candidate) => candidate.requestId === request.id) : undefined;
     nodes.push({
       id,
       revision,
@@ -255,7 +255,7 @@ function projectStep(
     connect(request.causes, id);
     addEdge(id, commitId, "commits", "随机结果");
   }
-  for (const invocation of committed.mechanicInvocations) {
+  for (const invocation of (committed.directEvent ? [] : committed.mechanicInvocations)) {
     const id = `mechanic:${invocation.id}`;
     nodes.push({ id, revision, laneId: WORLD_LANE_ID, kind: "mechanic", label: `机制 · ${invocation.ruleId}`, description: invocation.packageId });
     connect(invocation.causes, id);
@@ -286,11 +286,11 @@ function projectStep(
   const mindActorIds = [...new Set([
     ...committed.beliefPatches.map((entry) => entry.agentId),
     ...committed.characterPatches.map((entry) => entry.agentId),
-    ...committed.nextActions.map((entry) => entry.actorId),
+    ...(committed.directEvent ? [] : committed.nextActions).map((entry) => entry.actorId),
   ])].sort();
   for (const agentId of mindActorIds) {
     const id = `mind:${revision}:${agentId}`;
-    const nextAction = committed.nextActions.find((action) => action.actorId === agentId);
+    const nextAction = !committed.directEvent ? committed.nextActions.find((action) => action.actorId === agentId) : undefined;
     nodes.push({ id, revision, laneId: agentId, kind: "mind", label: "心智演化", description: nextAction?.goal ?? "认知状态更新" });
     for (const observation of committed.observations.filter((entry) => entry.observerId === agentId)) {
       addEdge(`observation:${observation.id}`, id, "updates", "更新认知");
@@ -307,10 +307,10 @@ function projectStep(
       actorIds: committed.actions.map((action) => action.actorId).sort(),
       counts: {
         actions: committed.actions.length,
-        reactions: committed.reactionRequests.length,
-        checks: committed.checks.length,
+        reactions: committed.directEvent ? 0 : committed.reactionRequests.length,
+        checks: committed.directEvent ? 0 : committed.checks.length,
         random: committed.randomResults.length,
-        mechanics: committed.mechanicInvocations.length,
+        mechanics: committed.directEvent ? 0 : committed.mechanicInvocations.length,
         operations: committed.operations.length,
         events: committed.events.length,
         observations: committed.observations.length,
@@ -550,7 +550,7 @@ function modelInvocationProjection(events: readonly RuntimeEvent[]): WorldInspec
     const stageEvent = ordered.find((event) => event.correlation?.logicalStageIndex !== undefined || event.correlation?.logicalStageKey);
     const logicalStageIndex = stageEvent?.correlation?.logicalStageIndex ?? Number.MAX_SAFE_INTEGER;
     const logicalStageKey = stageEvent?.correlation?.logicalStageKey ?? "unclassified";
-    const logicalStageLabel = EXECUTION_STAGES.find((stage) => stage.key === logicalStageKey)?.label ?? "未分类证据";
+    const logicalStageLabel = [...EXECUTION_STAGES, ...DIRECT_EXECUTION_STAGES].find((stage) => stage.key === logicalStageKey)?.label ?? "未分类证据";
     const parallelGroupId = typeof stageEvent?.attributes?.parallelGroupId === "string"
       ? stageEvent.attributes.parallelGroupId : logicalStageIndex === Number.MAX_SAFE_INTEGER ? undefined : `stage:${logicalStageIndex}`;
     const started = ordered.find((event) => event.event === "model.invocation.started");
@@ -1010,7 +1010,8 @@ function attemptStages(events: readonly RuntimeEvent[]): WorldInspectorAttemptSt
     const failed = terminal?.event === "stage.failed" || terminal?.event === "model.semantic.rejected" ||
       terminal?.event === "model.structured_output.rejected" || terminal?.event === "model.invocation.failed";
     const error = [...ordered].reverse().find((event) => event.error)?.error;
-    const stage = EXECUTION_STAGES.find((candidate) => candidate.index === index);
+    const stageKey = ordered.find(event => event.correlation?.logicalStageKey)?.correlation?.logicalStageKey;
+    const stage = [...EXECUTION_STAGES, ...DIRECT_EXECUTION_STAGES].find(candidate => stageKey ? candidate.key === stageKey : candidate.index === index);
     const role = ordered.find((event) => event.correlation?.modelRole)?.correlation?.modelRole;
     return {
       id: `stage:${index}`,
@@ -1031,12 +1032,14 @@ function attemptStages(events: readonly RuntimeEvent[]): WorldInspectorAttemptSt
   });
 }
 
-function attemptedActions(events: readonly RuntimeEvent[]): CommittedStep["initialActions"] {
+function attemptedActions(events: readonly RuntimeEvent[]): CommittedStep["actions"] {
   const candidate = events.find((event) => event.event === "execution.candidate.persisted")?.payload as {
+    kind?: string; record?: { frames: Array<{ proposal: CommittedStep["actions"][number] }> };
     resolution?: { initialActions?: unknown };
   } | undefined;
+  if (candidate?.kind === "direct" && candidate.record) return structuredClone(candidate.record.frames.map(frame => frame.proposal));
   return Array.isArray(candidate?.resolution?.initialActions)
-    ? structuredClone(candidate.resolution.initialActions) as CommittedStep["initialActions"]
+    ? structuredClone(candidate.resolution.initialActions) as CommittedStep["actions"]
     : [];
 }
 
@@ -1082,7 +1085,7 @@ function attemptSummary(
     stages,
     rejectionCount: events.filter((event) => event.event === "model.semantic.rejected").length,
     repairCount: semanticRepairInvocationCount(events),
-    ...(failureStage ? { failureStage, failureStageLabel: EXECUTION_STAGES.find((stage) => stage.key === failureStage)?.label ?? stageLabels[failureStage] ?? failureStage } : {}),
+    ...(failureStage ? { failureStage, failureStageLabel: [...EXECUTION_STAGES, ...DIRECT_EXECUTION_STAGES].find((stage) => stage.key === failureStage)?.label ?? stageLabels[failureStage] ?? failureStage } : {}),
     ...(error?.message ? { errorMessage: diagnosticErrorMessage(error) } : {}),
   };
 }
@@ -1134,7 +1137,7 @@ function semanticGraph(
   const stageByIndex = new Map((attempt?.stages ?? []).flatMap((stage) =>
     stage.logicalStageIndex === undefined ? [] : [[stage.logicalStageIndex, stage]]));
   let previous = rootId;
-  for (const stage of EXECUTION_STAGES) {
+  for (const stage of executionStages(document.executionAlgorithm.id)) {
     const evidence = stageByIndex.get(stage.index);
     const id = `semantic:stage:${attempt?.id ?? `revision-${revision}`}:${stage.index}`;
     const status = evidence?.status ?? (attempt ? "active" : "succeeded");
@@ -1427,9 +1430,9 @@ export function buildWorldInspectorWindow(
           status: activeRun.status,
           boundaryIndex: activeRun.debugCheckpoint?.boundaryIndex ?? activeRun.committedRevisions.length,
           stageIndex: activeRun.debugCheckpoint?.stageIndex ?? 0,
-          stageCount: EXECUTION_STAGES.length,
+          stageCount: executionStages(document.executionAlgorithm.id).length,
           stageKey: activeRun.debugCheckpoint?.stageKey ?? null,
-          stageLabel: activeRun.debugCheckpoint ? EXECUTION_STAGES.find((stage) => stage.key === activeRun.debugCheckpoint?.stageKey)?.label ?? null : null,
+          stageLabel: activeRun.debugCheckpoint ? [...EXECUTION_STAGES, ...DIRECT_EXECUTION_STAGES].find((stage) => stage.key === activeRun.debugCheckpoint?.stageKey)?.label ?? null : null,
           checkpointId: activeRun.debugCheckpoint?.id ?? null,
           canAdvance: activeRun.status === "debug-paused",
         },
@@ -1678,7 +1681,7 @@ export function buildWorldInspectorReplay(
     groups.set(index, group);
   }
   const boundaryIndex = Math.max(0, (record.commitRevision ?? document.state.revision) - (record.step ?? 0) + 1);
-  const frames: WorldInspectorReplayFrame[] = EXECUTION_STAGES.map((stage, index) => {
+  const frames: WorldInspectorReplayFrame[] = executionStages(record.manifest.id).map((stage, index) => {
     const group = groups.get(index) ?? [];
     const invocationIds = [...new Set(group.flatMap((event) => event.correlation?.modelInvocationId
       ? [worldInspectorModelInvocationId(executionId, event.correlation.modelInvocationId)] : []))];

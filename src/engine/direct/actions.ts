@@ -205,8 +205,8 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       target: Object.entries(view.entities).find(([, canonicalId]) => canonicalId === frame.targetEntityId)?.[0] ?? null,
       actionKind: frame.kind, attempted: frame.expression?.attempt ?? frame.proposal.rawText,
       preparatoryFor: frame.preparatoryFor,
-      outcome: event.outcomes.find(outcome => outcome.proposalId === frame.id)?.summary ?? null,
-      observed: event.observations.filter(observation => observation.observerId === agentId).map(observation => observation.summary),
+      outcome: entry.outcomes.find(outcome => outcome.proposalId === frame.id)?.summary ?? null,
+      observed: entry.observations.filter(observation => observation.observerId === agentId).map(observation => observation.summary),
     }));
   });
   const currentRequestReceipts = external ? recentActions.filter(action => action.submissionId === external.submissionId) : [];

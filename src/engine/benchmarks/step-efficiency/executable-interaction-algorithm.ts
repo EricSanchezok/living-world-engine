@@ -162,7 +162,7 @@ export function registerExecutablePlayerAlgorithm(registry: WorldExecutionAlgori
           },
         };
       });
-      return { manifest: base.manifest, bootstrap: (input, scope) => base.bootstrap(input, scope),
+      return { protocol: "reference", manifest: base.manifest, bootstrap: (input, scope) => base.bootstrap(input, scope),
         prepareStep: async (input, scope) => {
           const retained = new Set(Object.values(input.state.truth.activities).filter(a => a.status === "active" || a.status === "paused")
             .map(a => a.sourceActionId));

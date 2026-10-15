@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-import type { WorldStepPreparation } from "../../src/engine/runtime/execution";
+import type { ReferenceStepPreparation } from "../../src/engine/runtime/execution";
 import { STEP_E2_BUDGET, STEP_E2_PROTOCOL } from "../../src/engine/benchmarks/step-efficiency/nonthinking-protocol";
 import { bindResolutionAdmission, runResolutionAdmission, type ResolutionAdmissionSource } from "../../src/engine/benchmarks/step-efficiency/resolution-admission";
 import { expandSharedBatchContexts, type SharedBatchContext } from "../../src/engine/mechanics/shared-batch-context";
@@ -41,7 +41,7 @@ export async function prepareIndexedPlanningProbe() {
     return value.value as T;
   };
   const input = artifact<{ definition: ResolutionAdmissionSource["definition"]; state: ResolutionAdmissionSource["state"] }>(hashes.input);
-  const preparation = artifact<WorldStepPreparation>(hashes.preparation);
+  const preparation = artifact<ReferenceStepPreparation>(hashes.preparation);
   const payload = preparation.payload as unknown as { planningState: ResolutionAdmissionSource["state"]; newActions: ResolutionAdmissionSource["actions"];
     dependencyResults: Array<{ dependency: ResolutionAdmissionSource["groundings"][number] }>; sharedResourceAdmissions: Array<{ kind: string }>;
     temporalPlanning: Array<{ activity: { id: string } }> };

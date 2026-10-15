@@ -1,3 +1,4 @@
+import { directControlHistory } from "../../engine/direct/canonical";
 import { contentHash } from "../../engine/models/model-audit";
 import type { WorldInstanceDocument } from "../world-instance-types";
 import type { DirectRuntimeState } from "../../engine/direct/contracts";
@@ -40,6 +41,8 @@ export function nextNarrative(document: WorldInstanceDocument): NarrativeBeat | 
 
 /** Called in the world transaction. Never performs model work. */
 export function enqueueNarrative(document: WorldInstanceDocument, now: string): void {
+  const controlHistory = new Map<number, DirectRuntimeState["intents"]>();
+  for (const [revision, control] of directControlHistory(document.state)) controlHistory.set(revision, control.intents);
   const actionFrames = new Map(document.state.history.flatMap(step => step.directEvent?.frames ?? []).map(frame => [frame.id, frame]));
   for (const participant of Object.values(document.participants).filter(p => p.status === "active")) {
     const existing = document.narratives.filter(beat => beat.participantId === participant.id);
@@ -90,7 +93,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
     }
     for (const step of document.state.history.filter(item => item.revision > participant.controlledSinceRevision)) {
       const record = step.directEvent; if (!record) continue;
-      const intent = record.control.intents[participant.agentId];
+      const intent = controlHistory.get(step.revision)![participant.agentId];
       const replies = [...(record.presentation ?? []).filter(reply => reply.agentId === participant.agentId)];
       const failed = intent?.failure;
       if (failed && failed.atRevision === step.baseRevision && !failed.servicePause && intent.activeSubmission) {
@@ -98,7 +101,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
           requested: intent.activeSubmission.rawText, focusLocalEntityId: null,
           reason: "Processing the next unperformed step was interrupted before it could commit. The original request may contain earlier steps that already completed: use earlierCommittedSteps to identify and preserve them, including elapsed waiting. Explain only the remaining interruption; retry only the unfinished part. Do not claim the entire original request failed or invent a physical obstacle or refusal." });
       }
-      for (const [ownerId, other] of Object.entries(record.control.intents)) {
+      for (const [ownerId, other] of Object.entries(controlHistory.get(step.revision)!)) {
         if (ownerId === participant.agentId || !other.failure || other.failure.atRevision !== step.baseRevision ||
           other.failure.servicePause || !other.causeActionId) continue;
         const cause = actionFrames.get(other.causeActionId);

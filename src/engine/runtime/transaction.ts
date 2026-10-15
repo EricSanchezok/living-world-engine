@@ -1,3 +1,4 @@
+import { assertExactKeys } from "./json";
 import type { RulePackageRegistry } from "../mechanics/rule-package";
 import { applyDirectBootstrap, replayDirectStep } from "../direct/canonical";
 import { validateAlgorithmExecutionState } from "./execution-state";
@@ -9,6 +10,7 @@ import type {
   AgentState,
   CausalRef,
   CommittedStep,
+  ReferenceCommittedStep,
   FactValue,
   MeterState,
   ModelExecutionAudit,
@@ -94,13 +96,6 @@ import {
   expectedRebasedActionId,
 } from "./admission-impact";
 
-function assertExactKeys(value: object, required: readonly string[], optional: readonly string[] = [], label = "object"): void {
-  const keys = Object.keys(value);
-  const allowed = new Set([...required, ...optional]);
-  if (required.some((key) => !keys.includes(key)) || keys.some((key) => !allowed.has(key))) {
-    throw new Error(`${label} has unexpected or missing fields`);
-  }
-}
 
 function assertSafeId(value: string, label: string): void {
   if (!isSafeId(value)) throw new Error(`${label} uses a reserved object key`);
@@ -520,7 +515,7 @@ export function applyAdmissionCommit(state: SimulationState, input: Readonly<Age
   state.admissions.push(commit);
 }
 
-function validateCommittedRandomTranscript(step: CommittedStep, state: SimulationState): void {
+function validateCommittedRandomTranscript(step: ReferenceCommittedStep, state: SimulationState): void {
   if (contentHash(step.rngBefore) !== contentHash(state.truth.rng)) {
     throw new Error(`step ${step.step} RNG does not continue canonical state`);
   }
@@ -582,7 +577,7 @@ function validateCommittedRandomTranscript(step: CommittedStep, state: Simulatio
 }
 
 function validateCommittedStepShape(step: CommittedStep, state: SimulationState): void {
-  validateAlgorithmExecutionState(step.executionState, state.executionState?.producerHash);
+  if (!step.directEvent) validateAlgorithmExecutionState(step.executionState, state.executionState?.producerHash);
   if (step.semanticHash !== semanticStepHash(step)) throw new Error(`step ${step.step} semantic hash mismatch`);
   const payload = structuredClone(step) as Partial<CommittedStep>;
   delete payload.contentHash;
@@ -811,7 +806,7 @@ export function replaySimulationState(
     return structuredClone(state);
   }
   const replay: SimulationState = {
-    schemaVersion: 20,
+    schemaVersion: 21,
     executionState: structuredClone(state.historyBase.executionState),
     worldId: state.worldId,
     worldHash: state.worldHash,
@@ -993,7 +988,7 @@ export function validateSimulationState(state: SimulationState, requireNextActio
     "bootstrapAgentCommits",
   ], ["historyBase", "bootstrapExecutionRef", "bootstrapDirect"], "simulation state");
   validateAlgorithmExecutionState(state.executionState);
-  if (state.schemaVersion !== 20 || !isSemanticId(state.worldId) || !/^sha256:[a-f0-9]{64}$/.test(state.worldHash)) {
+  if (state.schemaVersion !== 21 || !isSemanticId(state.worldId) || !/^sha256:[a-f0-9]{64}$/.test(state.worldHash)) {
     throw new Error("invalid simulation identity");
   }
   if (state.bootstrapExecutionRef) validateExecutionRef(state.bootstrapExecutionRef, "bootstrapExecutionRef");
@@ -1204,7 +1199,7 @@ export function validateSimulationState(state: SimulationState, requireNextActio
     entities: state.truth.entities,
   });
   const latestCommittedStep = state.history.at(-1);
-  const currentDecisionPoints = latestCommittedStep?.revision === state.revision
+  const currentDecisionPoints = latestCommittedStep?.revision === state.revision && !latestCommittedStep.directEvent
     ? latestCommittedStep.decisionPoints
     : [];
   for (const point of currentDecisionPoints) {

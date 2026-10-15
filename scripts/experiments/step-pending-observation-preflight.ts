@@ -1,3 +1,4 @@
+import { requireReferenceStep } from "../../src/engine/contracts/committed-step";
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -26,7 +27,7 @@ export async function preparePendingObservationPreflight() {
   const catalog = loadModelCatalog(path.join(worldRoot, "model-catalog.json"));
   const definition = loadWorldScript(path.join(worldRoot, "worlds/blackmarsh/world"), { seed: STEP_E2_PROTOCOL.seed, modelCatalog: catalog });
   if (definition.initialState.worldHash !== evidence.source.worldHash) throw new Error("world snapshot mismatch");
-  const step = evidence.committed;
+  const step = requireReferenceStep(evidence.committed);
   const input: ObservationRenderingInput = { definition, state: evidence.source, actions: step.actions,
     observerIds: step.observations.filter(packet => packet.kind === "outcome").map(packet => packet.observerId),
     identityOwner: "offline-pending-observation", temporalState: step.temporalState,

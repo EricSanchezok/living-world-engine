@@ -65,7 +65,7 @@ export type { AlgorithmRef } from "../algorithms/composition";
 
 export type ExecutionKind = "interactive" | "diagnostic" | "benchmark" | "replay";
 
-export const WORLD_EXECUTION_CONTRACT_VERSION = 12 as const;
+export const WORLD_EXECUTION_CONTRACT_VERSION = 13 as const;
 export const ENGINE_OPERATION_CONTRACT_VERSION = 1 as const;
 export const WORLD_STEP_CANDIDATE_SCHEMA_VERSION = 9 as const;
 export const WORLD_STEP_PREPARATION_SCHEMA_VERSION = 7 as const;
@@ -251,8 +251,7 @@ export interface BootstrapInput {
   state: SimulationState;
 }
 
-export interface BootstrapCandidate {
-  directWorld?: import("../direct/contracts").DirectBootstrap;
+export interface ReferenceBootstrapCandidate {
   schemaVersion: typeof WORLD_STEP_CANDIDATE_SCHEMA_VERSION;
   sourceStateHash: string;
   agentCommits: Array<AgentMindOutput & { agentId: string }>;
@@ -321,7 +320,8 @@ export function decisionEligibleAgentIds(
   state: Readonly<SimulationState>,
   forcedAgentIds: readonly AgentId[] = [],
 ): AgentId[] {
-  const decisionAgents = new Set(state.history.at(-1)?.decisionPoints.map((point) => point.agentId) ?? []);
+  const last = state.history.at(-1);
+  const decisionAgents = new Set(last && !last.directEvent ? last.decisionPoints.map(point => point.agentId) : []);
   forcedAgentIds.forEach((agentId) => decisionAgents.add(agentId));
   const busyAgents = new Set(Object.values(state.truth.activities)
     .filter((activity) => activity.status === "active" || activity.status === "paused" ||
@@ -391,8 +391,7 @@ export interface OnsetPerceptionTranscript {
   rng: SeededRngState;
 }
 
-export interface WorldStepCandidate {
-  directEvent?: import("../direct/contracts").DirectStepRecord;
+export interface ReferenceStepCandidate {
   executionState: import("./execution-state").AlgorithmExecutionState | null;
   onsetPerception: OnsetPerceptionTranscript;
   schemaVersion: typeof WORLD_STEP_CANDIDATE_SCHEMA_VERSION;
@@ -418,13 +417,13 @@ export interface WorldStepCandidate {
 }
 
 /** Bind reviewed world behavior independently of subsequent cognition work. */
-export function finalCausalReviewContentHash(candidate: Pick<WorldStepCandidate,
+export function finalCausalReviewContentHash(candidate: Pick<ReferenceStepCandidate,
   "sourceStateHash" | "resolution" | "temporalBoundary" | "temporalState" | "onsetPerception">): string {
   return contentHash({ sourceStateHash: candidate.sourceStateHash, resolution: candidate.resolution, onsetPerception: candidate.onsetPerception,
     temporalBoundary: candidate.temporalBoundary, temporalState: candidate.temporalState });
 }
 
-export interface WorldStepPreparation {
+export interface ReferenceStepPreparation {
   executionState: import("./execution-state").AlgorithmExecutionState | null;
   onsetPerception: OnsetPerceptionTranscript;
   reactionRequests: ReactionRequest[];
@@ -495,27 +494,34 @@ export interface ActionCompilationDraft {
   interactionDependency: ActionGroundingModelOutput;
 }
 
-export interface WorldExecutionAlgorithm {
+export interface ReferenceWorldExecutionAlgorithm {
+  readonly protocol: "reference";
   readonly rulePackages?: RulePackageRegistry;
   readonly manifest: AlgorithmManifest;
 
   bootstrap(
     input: Readonly<BootstrapInput>,
     context: ExecutionContext,
-  ): Promise<BootstrapCandidate>;
+  ): Promise<ReferenceBootstrapCandidate>;
 
   prepareStep(
     input: Readonly<WorldStepInput>,
     context: ExecutionContext,
-  ): Promise<WorldStepPreparation>;
+  ): Promise<ReferenceStepPreparation>;
 
   completeStep(
     input: Readonly<WorldStepInput>,
-    preparation: Readonly<WorldStepPreparation>,
+    preparation: Readonly<ReferenceStepPreparation>,
     reactions: readonly ExternalReactionInput[],
     context: ExecutionContext,
-  ): Promise<WorldStepCandidate>;
+  ): Promise<ReferenceStepCandidate>;
 }
+
+/** Algorithm protocols share input identity and canonical authority, not invented pipeline fields. */
+export type BootstrapCandidate = ReferenceBootstrapCandidate | import("../direct/contracts").DirectBootstrapCandidate;
+export type WorldStepPreparation = ReferenceStepPreparation | import("../direct/contracts").DirectStepPreparation;
+export type WorldStepCandidate = ReferenceStepCandidate | import("../direct/contracts").DirectStepCandidate;
+export type WorldExecutionAlgorithm = ReferenceWorldExecutionAlgorithm | import("../direct/contracts").DirectExecutionAlgorithm;
 
 export interface WorldExecutionAlgorithmServices {
   provider: StructuredModelProvider;
@@ -606,7 +612,7 @@ export class WorldExecutionAlgorithmRegistry {
     if (!algorithm || typeof algorithm !== "object") {
       throw new Error(`execution algorithm factory did not return an algorithm instance: ${key}`);
     }
-    if (typeof algorithm.bootstrap !== "function" || typeof algorithm.prepareStep !== "function" ||
+    if (!["direct", "reference"].includes(algorithm.protocol) || typeof algorithm.bootstrap !== "function" || typeof algorithm.prepareStep !== "function" ||
       typeof algorithm.completeStep !== "function") {
       throw new Error(`execution algorithm factory returned an incomplete algorithm contract: ${key}`);
     }

@@ -1,11 +1,11 @@
-import type { WorldStepPreparation } from "../../../runtime/execution";
+import type { ReferenceStepPreparation } from "../../../runtime/execution";
 import path from "node:path";
 import { expect, it } from "vitest";
 import { loadWorldScript } from "../../../../script/world-loader";
 import { contentHash } from "../../../models/model-audit";
 import { SimulationEngine } from "../../../runtime/simulation";
 import { CanonicalCommitter } from "../../../runtime/canonical-committer";
-import type { WorldExecutionAlgorithm, WorldStepCandidate } from "../../../runtime/execution";
+import type { ReferenceWorldExecutionAlgorithm, ReferenceStepCandidate } from "../../../runtime/execution";
 import { deterministicActionCompilationBatch, deterministicInteractionDependency,
   deterministicModelOutput, ScriptedModelProvider } from "../../../testing/model-provider";
 import { EagerReferenceAlgorithm } from "../eager-reference";
@@ -45,9 +45,9 @@ async function fixture(mode: "accept" | "observation" | "outcome" | "terminal") 
   }, undefined, false);
   const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 47, modelCatalog: provider.catalog });
   const delegate = new EagerReferenceAlgorithm(provider);
-  let candidate: WorldStepCandidate | undefined;
-  let frozenPreparation: WorldStepPreparation;
-  const algorithm: WorldExecutionAlgorithm = {
+  let candidate: ReferenceStepCandidate | undefined;
+  let frozenPreparation: ReferenceStepPreparation;
+  const algorithm: ReferenceWorldExecutionAlgorithm = { protocol: "reference",
     manifest: delegate.manifest,
     bootstrap: (input, context) => delegate.bootstrap(input, context),
     prepareStep: (input, context) => delegate.prepareStep(input, context),
@@ -93,10 +93,10 @@ it.each(["accept", "observation", "outcome"] as const)("reviews the exact final 
     expect(last.state.candidate.observations[1]).toEqual(first[1]);
   }
   for (const mutate of [
-    (changed: WorldStepCandidate) => { changed.resolution.proposal.observations[0]!.summary = "Unreviewed completion claim"; },
-    (changed: WorldStepCandidate) => { changed.resolution.proposal.outcomes[0]!.summary = "Unreviewed outcome"; },
-    (changed: WorldStepCandidate) => { changed.finalCausalReview.invocationIds = ["another-review"]; },
-    (changed: WorldStepCandidate) => { changed.resolution.causalVerification = { verdict: "reject", findings: [] }; },
+    (changed: ReferenceStepCandidate) => { changed.resolution.proposal.observations[0]!.summary = "Unreviewed completion claim"; },
+    (changed: ReferenceStepCandidate) => { changed.resolution.proposal.outcomes[0]!.summary = "Unreviewed outcome"; },
+    (changed: ReferenceStepCandidate) => { changed.finalCausalReview.invocationIds = ["another-review"]; },
+    (changed: ReferenceStepCandidate) => { changed.resolution.causalVerification = { verdict: "reject", findings: [] }; },
   ]) {
     const changed = structuredClone(candidate);
     mutate(changed);

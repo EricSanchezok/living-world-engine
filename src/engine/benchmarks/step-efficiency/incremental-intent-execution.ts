@@ -1,3 +1,4 @@
+import { requireReferenceStep } from "../../contracts/committed-step";
 import { z } from "zod";
 import type { EagerActionSelection } from "../../algorithms/eager-reference/eager-reference";
 import { projectAgentPerspective } from "../../cognition/agent-perspective";
@@ -48,7 +49,7 @@ export function reconcileIntentMemory(memory: IntentMemory, state: SimulationSta
       if (!work.issuedAction || settled.has(work.workId) || work.issuedAction.baseRevision >= state.revision) continue;
       const activity = Object.values(state.truth.activities).find(activity => activity.sourceActionId === work.issuedAction!.id);
       if (activity) cursor.observe(work.workId, state);
-      else if (cursor.status === "running" && state.history.some(step => step.reactionDecisions.some(decision =>
+      else if (cursor.status === "running" && state.history.map(requireReferenceStep).some(step => step.reactionDecisions.some(decision =>
         decision.originalProposalId === work.issuedAction!.id && decision.kind === "replace"))) {
         cursor.suspend("committed reaction replaced the issued attempt");
       } else if (cursor.status === "running") throw new Error("issued intention lost its committed Activity");

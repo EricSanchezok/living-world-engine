@@ -1,3 +1,4 @@
+import { requireReferenceStep } from "../../contracts/committed-step";
 import { z } from "zod";
 import type { AgentActionProposal, AgentPerspectiveView, SimulationState } from "../../contracts/model";
 import { contentHash } from "../../models/model-audit";
@@ -176,7 +177,7 @@ export class IntentExecutionCursor {
       throw new Error("committed Activity source differs from the issued attempt");
     }
     if (!["completed", "failed", "blocked", "cancelled"].includes(activity.status)) return false;
-    const commit = state.history.find(step => step.revision > action.baseRevision && step.revision <= state.revision &&
+    const commit = state.history.map(requireReferenceStep).find(step => step.revision > action.baseRevision && step.revision <= state.revision &&
       step.activityTransitions.some(transition => transition.activityId === activity.id && transition.kind === activity.status) &&
       contentHash(step.temporalState.activities[activity.id] ?? null) === contentHash(activity));
     if (!commit) throw new Error("terminal Activity has no matching committed transition evidence");

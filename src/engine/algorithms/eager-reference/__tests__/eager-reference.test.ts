@@ -1,9 +1,10 @@
-import type { WorldStepPreparation } from "../../../runtime/execution";
+import { requireReferenceStep } from "../../../contracts/committed-step";
+import type { ReferenceStepPreparation } from "../../../runtime/execution";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   resolutionObservations,
-  type WorldExecutionAlgorithm,
+  type ReferenceWorldExecutionAlgorithm,
 } from "../../../runtime/execution";
 import {
   EagerReferenceAlgorithm,
@@ -204,7 +205,7 @@ describe("eager reference safeguards", () => {
     expect(baseline.commits).toBe(4);
     expect(candidate.commits).toBe(2);
     expect(candidate.result.state.truth.rng).toEqual(baseline.result.state.truth.rng);
-    expect(candidate.result.committed.checks).toEqual(baseline.result.committed.checks);
+    expect(requireReferenceStep(candidate.result.committed).checks).toEqual(requireReferenceStep(baseline.result.committed).checks);
     expect(contentHash(candidate.result.state.truth)).toBe(contentHash(baseline.result.state.truth));
   });
 
@@ -429,9 +430,9 @@ describe("eager reference safeguards", () => {
     });
     workbenchPoolId = Object.values(definition.initialState.truth.sharedActivityResourcePools)[0]!.id;
     const delegate = new EagerReferenceAlgorithm(provider);
-    let latestCandidate: import("../../../runtime/execution").WorldStepCandidate | undefined;
-    let frozenPreparation: WorldStepPreparation;
-    const algorithm: WorldExecutionAlgorithm = {
+    let latestCandidate: import("../../../runtime/execution").ReferenceStepCandidate | undefined;
+    let frozenPreparation: ReferenceStepPreparation;
+    const algorithm: ReferenceWorldExecutionAlgorithm = { protocol: "reference",
       manifest: delegate.manifest,
       bootstrap: (input, context) => delegate.bootstrap(input, context),
       prepareStep: (input, context) => delegate.prepareStep(input, context),
@@ -1619,7 +1620,7 @@ describe("eager reference safeguards", () => {
       modelCatalog: provider.catalog,
     });
     const delegate = new EagerReferenceAlgorithm(provider);
-    const forgingAlgorithm: WorldExecutionAlgorithm = {
+    const forgingAlgorithm: ReferenceWorldExecutionAlgorithm = { protocol: "reference",
       manifest: delegate.manifest,
       bootstrap: (input, context) => delegate.bootstrap(input, context),
       prepareStep: (input, context) => delegate.prepareStep(input, context),
@@ -1771,7 +1772,7 @@ describe("eager reference safeguards", () => {
       modelCatalog: provider.catalog,
     });
     const delegate = new EagerReferenceAlgorithm(provider);
-    const forgingAlgorithm: WorldExecutionAlgorithm = {
+    const forgingAlgorithm: ReferenceWorldExecutionAlgorithm = { protocol: "reference",
       manifest: delegate.manifest,
       bootstrap: (input, context) => delegate.bootstrap(input, context),
       prepareStep: (input, context) => delegate.prepareStep(input, context),
@@ -1807,7 +1808,7 @@ describe("eager reference safeguards", () => {
       modelCatalog: provider.catalog,
     });
     const delegate = new EagerReferenceAlgorithm(provider);
-    const forgingAlgorithm: WorldExecutionAlgorithm = {
+    const forgingAlgorithm: ReferenceWorldExecutionAlgorithm = { protocol: "reference",
       manifest: delegate.manifest,
       bootstrap: (input, context) => delegate.bootstrap(input, context),
       prepareStep: (input, context) => delegate.prepareStep(input, context),
@@ -2012,9 +2013,9 @@ describe("eager reference safeguards", () => {
     definition.initialState.truth.placements[definition.initialState.agents.keeper!.entityId] = "gate";
     definition.historyBaseHash = historyReplayBaseHash(definition.initialState);
     const delegate = new EagerReferenceAlgorithm(provider);
-    let latestCandidate: import("../../../runtime/execution").WorldStepCandidate | undefined;
-    let latestPreparation: WorldStepPreparation;
-    const algorithm: WorldExecutionAlgorithm = {
+    let latestCandidate: import("../../../runtime/execution").ReferenceStepCandidate | undefined;
+    let latestPreparation: ReferenceStepPreparation;
+    const algorithm: ReferenceWorldExecutionAlgorithm = { protocol: "reference",
       manifest: delegate.manifest,
       bootstrap: (input, context) => delegate.bootstrap(input, context),
       prepareStep: (input, context) => delegate.prepareStep(input, context),

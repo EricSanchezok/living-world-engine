@@ -7,11 +7,12 @@ import { MemoryWorldRepository } from "../../script/world-repository";
 import { directTestProvider, nativeAnswer, directCreationContext, directDecisionContext, type DirectTestWire } from "../../engine/testing/direct-provider";
 import { DEFAULT_ALGORITHM_REF } from "../../engine/algorithms/registry";
 import { replaySimulationState } from "../../engine/runtime/transaction";
-import { replayThroughAlgorithm } from "../../../scripts/operations/execution-command";
+import { candidatePartitions, replayThroughAlgorithm } from "../../../scripts/operations/execution-command";
 import { LocalDatabase } from "../local-database";
 import { WorldHost } from "../world-host";
 import { DirectWorldAlgorithm } from "../../engine/direct/algorithm";
 import { SimulationEngine } from "../../engine/runtime/simulation";
+import { directControlHistory } from "../../engine/direct/canonical";
 import { readDirectState } from "../../engine/direct/state";
 import type { StructuredModelRequest } from "../../engine/models/model-provider";
 import { ExperimentBudgetError } from "../../engine/benchmarks/action-compilation/experiment-budget";
@@ -607,7 +608,7 @@ describe("direct world through persistent WorldHost", () => {
       expect(state.history.map(step => step.actions[0]?.actorId), JSON.stringify({ control: state.executionState, runs: document.runs })).toEqual(["player", "player", "keeper"]);
       expect(document.narratives).toHaveLength(2);
       expect(document.narratives[0]!.source.observations).toHaveLength(2);
-      expect(state.history[0]!.directEvent!.control.completedSubmissionIds).not.toContain("find-and-ask");
+      expect(new Map(directControlHistory(state)).get(state.history[0]!.revision)!.completedSubmissionIds).not.toContain("find-and-ask");
       expect(state.history.at(-1)!.observations.find(packet => packet.observerId === "player")?.summary).toContain("不接受");
       expect(Object.values(document.runs).find(run => run.rootIntents.some(intent => intent.submissionId === "find-and-ask"))?.status).toBe("completed");
       expect(document.actionWindow?.requiredAgentIds).toContain("player");
@@ -668,8 +669,8 @@ describe("direct world through persistent WorldHost", () => {
       let host = makeHost();
       const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } });
       const id = created.summary.id;
-      expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 27, executionAlgorithm: DEFAULT_ALGORITHM_REF,
-        state: { schemaVersion: 20, executionState: { data: { kind: "direct-world" } } } });
+      expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 28, executionAlgorithm: DEFAULT_ALGORITHM_REF,
+        state: { schemaVersion: 21, executionState: { data: { kind: "direct-world" } } } });
       expect(f.transport).not.toHaveBeenCalled();
       await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });
       expect(f.transport).not.toHaveBeenCalled();
@@ -685,6 +686,9 @@ describe("direct world through persistent WorldHost", () => {
       expect(replaySimulationState(saved)).toEqual(saved);
       expect(f.transport).toHaveBeenCalledTimes(4);
       const executionId = saved.history[0]!.executionRef!.executionId;
+      expect(candidatePartitions(database.executionEvents(executionId))).toMatchObject({
+        temporal: { fromSeconds: 0, atSeconds: 1 }, resolution: { rng: saved.truth.rng },
+      });
       const replay = await replayThroughAlgorithm(database, database.execution(executionId)!, database.executionEvents(executionId));
       const candidate = (execution: string) => database.executionEvents(execution).find(event => event.event === "execution.candidate.persisted")?.payload;
       expect(candidate(replay.replayExecutionId)).toEqual(candidate(executionId));

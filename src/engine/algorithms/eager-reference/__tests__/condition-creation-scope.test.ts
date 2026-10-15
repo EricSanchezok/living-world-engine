@@ -3,7 +3,7 @@ import { expect, it } from "vitest";
 import { loadWorldScript } from "../../../../script/world-loader";
 import { referenceHandleFor } from "../../../contracts/model-context";
 import { contentHash } from "../../../models/model-audit";
-import type { WorldStepCandidate, WorldExecutionAlgorithm } from "../../../runtime/execution";
+import type { ReferenceStepCandidate, ReferenceWorldExecutionAlgorithm } from "../../../runtime/execution";
 import { historyReplayBaseHash } from "../../../runtime/history-replay";
 import { SimulationEngine } from "../../../runtime/simulation";
 import { replaySimulationState } from "../../../runtime/transaction";
@@ -57,8 +57,8 @@ it.each([{ reader: false, repair: false }, { reader: true, repair: false }, { re
   };
   definition.historyBaseHash = historyReplayBaseHash(definition.initialState);
   const delegate = new EagerReferenceAlgorithm(provider);
-  let candidate: WorldStepCandidate | undefined;
-  const algorithm: WorldExecutionAlgorithm = {
+  let candidate: ReferenceStepCandidate | undefined;
+  const algorithm: ReferenceWorldExecutionAlgorithm = { protocol: "reference",
     manifest: delegate.manifest,
     bootstrap: (input, context) => delegate.bootstrap(input, context),
     prepareStep: (input, context) => delegate.prepareStep(input, context),

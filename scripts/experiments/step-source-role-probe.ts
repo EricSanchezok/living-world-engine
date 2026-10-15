@@ -3,7 +3,7 @@ import { closeSync, existsSync, mkdirSync, openSync, readFileSync, unlinkSync, w
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { gzipSync } from "node:zlib";
-import type { WorldStepPreparation } from "../../src/engine/runtime/execution";
+import type { ReferenceStepPreparation } from "../../src/engine/runtime/execution";
 import { bindResolutionAdmission, type ResolutionAdmissionSource } from "../../src/engine/benchmarks/step-efficiency/resolution-admission";
 import { ExperimentBudget } from "../../src/engine/benchmarks/action-compilation/experiment-budget";
 import { FirstPassExperimentTransport } from "../../src/engine/benchmarks/action-compilation/experiment-transport";
@@ -37,7 +37,7 @@ export async function prepareSourceRoleProbe() {
     if (entry.hash !== hash || contentHash(entry.value) !== hash) throw new Error("source role artifact drift"); return entry.value as T;
   };
   const input = artifact<{ definition: ResolutionAdmissionSource["definition"] }>(hashes.input);
-  const preparation = artifact<WorldStepPreparation>(hashes.preparation);
+  const preparation = artifact<ReferenceStepPreparation>(hashes.preparation);
   const payload = preparation.payload as unknown as { planningState: ResolutionAdmissionSource["state"]; newActions: ResolutionAdmissionSource["actions"]; dependencyResults: Array<{ dependency: ResolutionAdmissionSource["groundings"][number] }> };
   if (preparation.preparedReactionDecisions.length !== 7 || preparation.preparedReactionDecisions.some(value => value.kind !== "keep" || value.ongoingActivityDisposition !== "continue")) throw new Error("source reactions changed");
   const recorded = artifact<ReturnType<typeof admissionRequestEvidence>>(hashes.request);

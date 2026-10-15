@@ -196,7 +196,7 @@ registerNumericFields("counts", ["algorithm.activation.completed"], [
   ["lwe.agent.external", "externalAgents", "1", "sum"],
 ]);
 
-registerNumericFields("counts", ["algorithm.candidate.completed"], [
+registerNumericFields("counts", ["algorithm.candidate.completed", "direct.candidate.completed"], [
   ["lwe.agent.updated", "updatedAgents", "1", "sum"],
   ["lwe.agent.observed", "observedAgents", "1", "sum"],
   ["lwe.output.actions", "actions", "1", "sum"],

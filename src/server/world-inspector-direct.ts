@@ -1,3 +1,4 @@
+import { directControlAfter } from "../engine/direct/canonical";
 import type { CommittedStep, SimulationState } from "../engine/contracts/model";
 import type { DirectRuntimeState } from "../engine/direct/contracts";
 import { estimateModelCost } from "../engine/models/model-cost";
@@ -5,8 +6,10 @@ import { estimateModelCost } from "../engine/models/model-cost";
 /** Trusted local audit projection. Private views remain absent from ordinary client DTOs. */
 export function inspectDirectRuntime(before: SimulationState, step: CommittedStep) {
   if (!step.directEvent) return undefined;
-  const record = step.directEvent, control = record.control;
+  const record = step.directEvent;
   const prior = before.executionState?.data.kind === "direct-world" ? before.executionState.data as unknown as DirectRuntimeState : before.bootstrapDirect?.control;
+  if (!prior) throw new Error("direct inspection requires the preceding control state");
+  const control = directControlAfter(prior, record);
   return { models: control.models, intents: control.intents, activities: control.activities, actions: record.frames, capabilities: control.capabilities,
     wakes: Object.entries(prior?.intents ?? {}).filter(([, intent]) => intent.status === "ready").map(([ownerId, intent]) => ({ ownerId, reasons: intent.wakeReasons })),
     decisions: record.decisions.map(use => ({ view: use.batch.view, questions: use.batch.questions, answers: use.result.answers,

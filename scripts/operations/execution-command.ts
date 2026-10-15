@@ -37,7 +37,7 @@ function argumentsFor(argv: readonly string[]): {
   trial: number;
 } {
   const executionIds: string[] = [];
-  let database = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v27", "livingworld.sqlite");
+  let database = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v28", "livingworld.sqlite");
   let output: string | undefined;
   let probeReport: string | undefined;
   let trial = 1;
@@ -138,7 +138,7 @@ class RecordedModelProvider implements StructuredModelProvider {
     this.overlay = overlay;
     // Candidate audits are logical projections: several slots can share one
     // physical invocation while owning different subjects and result shapes.
-    const replayedInvocations = new Set(candidates.flatMap((candidate) => candidate.modelAudits)
+    const replayedInvocations = new Set(candidates.flatMap((candidate) => ("record" in candidate ? candidate.record.modelAudits : candidate.modelAudits))
       .flatMap((audit) => audit.invocations.map((invocation) => invocation.id)));
     const audits = events.filter((event) => event.event === "model.audit.persisted")
       .map((event) => event.payload as ModelExecutionAudit)
@@ -324,7 +324,7 @@ function validateProbeBinding(
   const candidates = events.filter((candidate) => candidate.event === "execution.candidate.persisted" &&
     candidate.attributes?.phase === replayPhase)
     .map((candidate) => candidate.payload as BootstrapCandidate | WorldStepCandidate);
-  const audits = candidates.flatMap((candidate) => candidate.modelAudits);
+  const audits = candidates.flatMap((candidate) => ("record" in candidate ? candidate.record.modelAudits : candidate.modelAudits));
   let targetAudit: ModelExecutionAudit | undefined;
   let targetInvocation: ModelInvocationAudit | undefined;
   for (const audit of audits) {
@@ -467,8 +467,8 @@ export async function replayThroughAlgorithm(
     candidate.attributes?.phase === (stepInputs.length > 0 ? "step" : "bootstrap"))
     .map((candidate) => candidate.payload as BootstrapCandidate | WorldStepCandidate);
   const overlay = replayOptions.probe ? validateProbeBinding(original, events, replayOptions.probe) : undefined;
-  const bootstrapCandidate = candidates.find((candidate): candidate is BootstrapCandidate => !("resolution" in candidate));
-  const nativeBootstrap = stepInputs[0]?.state.bootstrapDirect ?? bootstrapCandidate?.directWorld;
+  const bootstrapCandidate = candidates.find((candidate): candidate is BootstrapCandidate => !("resolution" in candidate) && !("record" in candidate));
+  const nativeBootstrap = stepInputs[0]?.state.bootstrapDirect ?? (bootstrapCandidate && "kind" in bootstrapCandidate ? bootstrapCandidate.bootstrap : undefined);
   const pinnedCatalog = nativeBootstrap ? new ModelCatalog(nativeBootstrap.modelCatalog) : undefined;
   if (pinnedCatalog && (pinnedCatalog.hash !== nativeBootstrap!.control.modelCatalogHash || pinnedCatalog.hash !== original.modelCatalogHash)) {
     throw new Error("recorded native model catalog differs from its pinned execution");
@@ -626,6 +626,18 @@ export function candidatePartitions(events: readonly RuntimeEvent[]) {
   const selected = recorded.findLast((candidate) => candidate.attributes?.phase === "step") ?? recorded.at(-1);
   if (!selected) throw new Error("recorded execution is missing execution.candidate.persisted");
   const candidate = selected.payload as WorldStepCandidate | BootstrapCandidate;
+  if ("kind" in candidate) {
+    if (!("record" in candidate)) return { bootstrap: candidate.bootstrap };
+    const record = candidate.record;
+    return {
+      resolution: { decisions: record.decisions, reads: record.reads, randomRequests: record.randomRequests, randomResults: record.randomResults, rng: record.rng },
+      temporal: { fromSeconds: record.fromSeconds, atSeconds: record.atSeconds, completedActionIds: record.completedActionIds, timers: record.timerUpdates },
+      transition: { frames: record.frames, outcomes: record.outcomes, operations: record.operations, events: record.events },
+      observation: record.observations,
+      mind: { cognition: record.cognition, beliefs: record.beliefPatches, character: record.characterPatches, presentation: record.presentation },
+      controlDelta: record.controlDelta,
+    };
+  }
   if (!("resolution" in candidate)) {
     return { bootstrap: candidate.agentCommits };
   }

@@ -1,3 +1,4 @@
+import type { WorldStepPreparation } from "../engine/runtime/execution";
 import { loadPromptAsset } from "../engine/prompts";
 import { agentCapabilityModels } from "../engine/models/capability-bindings";
 import { enqueueNarrative, nextNarrative, settleQueuedNarratives } from "./narrative/outbox";
@@ -18,7 +19,7 @@ import type {
   ExternalReactionInput,
   PolicyBinding,
   WorldAdvanceRequest,
-  WorldStepPreparation,
+  ReferenceStepPreparation,
 } from "../engine/runtime/execution";
 import {
   defineEngineOperationManifest,
@@ -27,7 +28,7 @@ import {
   WorldExecutionAlgorithmRegistry,
 } from "../engine/runtime/execution";
 import {
-  EXECUTION_STAGES,
+  executionStages,
   executionStage,
   type ExecutionStageHooks,
   type ExecutionStagePosition,
@@ -194,6 +195,7 @@ class DebugStageGate implements ExecutionStageHooks {
   constructor(
     private readonly onPause: (stage: ExecutionStagePosition) => Promise<void>,
     recoveredCompletedStageIndex?: number,
+    private readonly stages: readonly ExecutionStagePosition[] = executionStages(),
   ) {
     this.completedStageIndex = recoveredCompletedStageIndex ?? -1;
     this.authorizedStageIndex = recoveredCompletedStageIndex === undefined
@@ -248,10 +250,10 @@ class DebugStageGate implements ExecutionStageHooks {
   async after(stage: ExecutionStagePosition): Promise<void> {
     this.currentStageValue = stage;
     if (stage.index <= this.completedStageIndex) return;
-    if (stage.index >= 9) return;
-    const next = EXECUTION_STAGES[stage.index + 1];
+    if (stage.index === this.stages.length - 1) return;
+    const next = this.stages[stage.index + 1];
     if (!next) throw new Error(`debug stage ${stage.index} has no successor`);
-    await this.onPause(executionStage(next.key));
+    await this.onPause(next);
     await this.waitForPermit();
     this.authorizedStageIndex = next.index;
   }
@@ -340,7 +342,8 @@ function externalDecisionAgentIds(document: WorldInstanceDocument, deferForReact
     if ([...reacting].some(id => document.policyBindings[id]?.kind === "model") && deferForReactions) return [];
     return Object.values(document.policyBindings).filter(binding => binding.kind === "external" && !busy.has(binding.agentId)).map(binding => binding.agentId).sort();
   }
-  const decisionAgents = new Set(document.state.history.at(-1)?.decisionPoints.map((point) => point.agentId) ?? []);
+  const last = document.state.history.at(-1);
+  const decisionAgents = new Set(last && !last.directEvent ? last.decisionPoints.map(point => point.agentId) : []);
   const busyAgents = new Set(Object.values(document.state.truth.activities)
     .filter((activity) => activity.status === "active" || activity.status === "paused" ||
       activity.status === "queued" || activity.status === "ready")
@@ -441,7 +444,7 @@ function conversationFor(
     const responses = beats.filter(beat => beat.segments.length > 0).map(beat => {
       const last = beat.source.boundary;
       const committed = document.state.history.find(step => step.revision === last.revision);
-      const activity = Object.values(committed?.temporalState.activities ?? {})
+      const activity = Object.values(committed && !committed.directEvent ? committed.temporalState.activities : {})
         .filter(item => item.actorId === intent.agentId).sort((a, b) => b.updatedAtSeconds - a.updatedAtSeconds || b.id.localeCompare(a.id))[0];
       return { id: beat.id, revision: last.revision, step: last.step, text: beat.segments.map(segment => segment.text).join("\n\n"),
         worldTimeSeconds: last.worldTimeSeconds, narrativeStatus: beat.status, segmentCount: beat.segments.length,
@@ -830,7 +833,7 @@ export class WorldHost {
         /* turbopackIgnore: true */ process.env.LIVINGWORLD_MODEL_CATALOG_PATH ?? "config/models.yaml",
       ));
       const dataRoot = path.resolve(
-        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v27",
+        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v28",
       );
       const modelRegistry = new ModelRegistry(catalog, dataRoot);
       modelRegistry.startBackgroundRefresh();
@@ -1314,7 +1317,7 @@ export class WorldHost {
     }
     const now = this.now().toISOString();
     const initial: WorldInstanceDocument = {
-      schemaVersion: 27,
+      schemaVersion: 28,
       id,
       world: toWorldRuntimeContract(definition),
       executionAlgorithm: structuredClone(experiment.algorithmRef),
@@ -2130,6 +2133,7 @@ export class WorldHost {
             await this.persistDebugCheckpoint(document.id, runId, execution?.id, stage);
           },
           recovery?.completedStageIndex,
+          executionStages(algorithm.protocol),
         )
       : undefined;
     if (debugGate) this.debugStageGates.set(runId, debugGate);
@@ -2167,7 +2171,7 @@ export class WorldHost {
       let preparation: WorldStepPreparation;
       if (window?.kind === "reaction") {
         const artifact = this.options.ledger?.artifact(window.preparationArtifactHash);
-        const value = artifact?.value as WorldStepPreparation | undefined;
+        const value = artifact?.value as ReferenceStepPreparation | undefined;
         const valid = artifact?.executionId === window.preparationExecutionId && value &&
           value.schemaVersion === WORLD_STEP_PREPARATION_SCHEMA_VERSION &&
           value.id === window.preparedStepId && value.sourceStateHash === window.sourceStateHash &&
@@ -2185,7 +2189,7 @@ export class WorldHost {
         preparation = structuredClone(value);
       } else {
         preparation = await engine.prepareStep(effectiveRoster, request, modelScope);
-        if (preparation.pendingReactionRequests.length > 0) {
+        if (!("kind" in preparation) && preparation.pendingReactionRequests.length > 0) {
           if (!execution || !this.options.ledger || !isAtomicStore(this.options.store)) {
             throw new Error("external reaction preparation requires an atomic Execution Ledger");
           }
@@ -2274,7 +2278,7 @@ export class WorldHost {
         if (binding.kind === "model") delete binding.resumeFromRevision;
       }
       runRecord.committedRevisions.push(document.state.revision);
-      runRecord.activityIds = [...new Set([
+      if (!result.committed.directEvent) runRecord.activityIds = [...new Set([
         ...runRecord.activityIds,
         ...result.committed.temporalPlans.flatMap((plan) => Object.values(document.state.truth.activities)
           .filter((activity) => activity.status !== "queued" && activity.status !== "ready" &&
@@ -2353,7 +2357,7 @@ export class WorldHost {
         stateHash: contentHash(document.state),
         commitRevision: document.state.revision,
       };
-      const commitStage = executionStage("atomic-commit");
+      const commitStage = executionStage("atomic-commit", algorithm.protocol);
       if (debugGate) {
         atomicStageEntered = true;
         execution?.trace.emit({
@@ -2448,7 +2452,7 @@ export class WorldHost {
         return this.persist(latest, waiting);
       }
       if (atomicStageEntered && !(error instanceof Error && error.name === "AbortError")) {
-        const stage = executionStage("atomic-commit");
+        const stage = executionStage("atomic-commit", algorithm.protocol);
         execution?.trace.emit({
           event: "stage.failed",
           level: "error",

@@ -1,6 +1,8 @@
+import { requireReferenceStep } from "../../engine/contracts/committed-step";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import Database from "better-sqlite3";
 import { afterEach, describe, expect, it } from "vitest";
 import {
   DEFAULT_EAGER_REFERENCE_CONFIG,
@@ -19,11 +21,11 @@ import {
   defineAlgorithmManifest,
   WorldExecutionAlgorithmRegistry,
   type AlgorithmRef,
-  type BootstrapCandidate,
+  type ReferenceBootstrapCandidate,
   type BootstrapInput,
   type ExecutionContext,
-  type WorldExecutionAlgorithm,
-  type WorldStepCandidate,
+  type ReferenceWorldExecutionAlgorithm,
+  type ReferenceStepCandidate,
   type WorldStepInput,
 } from "../../engine/runtime/execution";
 import { historyReplayBaseHash } from "../../engine/runtime/history-replay";
@@ -205,6 +207,46 @@ function reactionHarness(input: {
 }
 
 describe("World Instance host", () => {
+  it("shares instance evidence with the Ledger and rolls blocks, generation and terminal status back together", async () => {
+    const { database, host, definition } = harness();
+    const sql = new Database(database.file);
+    try {
+      const created = await host.createInstance(observerStart);
+      const stored = database.readInstance(created.summary.id);
+      database.beginExecution({ id: "storage-atomicity", kind: "diagnostic", instanceId: created.summary.id,
+        manifest: defineAlgorithmManifest({ id: "storage-test", version: "1", config: {}, children: {} }),
+        worldHash: definition.initialState.worldHash, codeRevision: "test", codeDirty: true,
+        modelCatalogHash: contentHash("test-catalog"), seed: 47, runtimeConfig: {} });
+      const hash = database.putExecutionArtifact("storage-atomicity", "instance-copy", stored.document);
+      expect(database.artifact(hash)?.storedBytes).toBe(0);
+      expect(contentHash(database.artifact(hash)?.value)).toBe(contentHash(stored.document));
+      const blocks = () => sql.prepare("SELECT hash, body FROM json_blocks ORDER BY hash").all();
+      const before = blocks();
+      const changed = { ...stored.document, title: "Atomic storage checkpoint" };
+      sql.exec(`CREATE TRIGGER fail_terminal BEFORE UPDATE OF status ON executions
+        WHEN NEW.id = 'storage-atomicity' AND NEW.status = 'succeeded'
+        BEGIN SELECT RAISE(ABORT, 'injected terminal write failure'); END`);
+      expect(() => database.compareAndSwapInstanceAndFinishExecution(created.summary.id, stored.generation, changed,
+        "storage-atomicity", { status: "succeeded" }, "instance")).toThrow("injected terminal write failure");
+      expect(blocks()).toEqual(before);
+      expect(database.readInstance(created.summary.id)).toEqual(stored);
+      expect(database.execution("storage-atomicity")?.status).toBe("running");
+      expect(database.executionEvents("storage-atomicity")).toEqual([]);
+      sql.exec("DROP TRIGGER fail_terminal");
+      database.compareAndSwapInstanceAndFinishExecution(created.summary.id, stored.generation, changed,
+        "storage-atomicity", { status: "succeeded" }, "instance");
+      expect(database.execution("storage-atomicity")?.status).toBe("succeeded");
+      expect(database.readInstance(created.summary.id).document.title).toBe(changed.title);
+      expect(database.artifact(hash)?.value).toEqual(stored.document);
+      const reader = new LocalDatabase(database.file, { readOnly: true });
+      try { expect(reader.readInstance(created.summary.id).document).toEqual(changed); } finally { reader.close(); }
+      // Simulate on-disk damage beyond the foreign-key guard; a warm cache must not hide it.
+      sql.pragma("foreign_keys = OFF");
+      sql.prepare("DELETE FROM json_blocks WHERE hash = (SELECT document_hash FROM world_instances WHERE id = ?)").run(created.summary.id);
+      expect(() => database.readInstance(created.summary.id)).toThrow("missing JSON block");
+    } finally { sql.close(); database.close(); }
+  });
+
   it("accepts a new action after a failed run with an active player activity and preserves failure evidence", async () => {
     let timerId = 0;
     const timers = new Map<number, () => void | Promise<void>>();
@@ -271,7 +313,7 @@ describe("World Instance host", () => {
       expect(final.state.revision).toBe(failed.state.revision + 1);
       expect(final.state.truth.activities[active.id]!.status).toBe("cancelled");
       expect(contentHash(final.runs[failedRun.id])).toBe(failureHash);
-      expect(final.state.history.at(-1)!.initialActions).toContainEqual(expect.objectContaining({ actorId: participant.agentId, rawText: input.text }));
+      expect(requireReferenceStep(final.state.history.at(-1)!).initialActions).toContainEqual(expect.objectContaining({ actorId: participant.agentId, rawText: input.text }));
       expect(replaySimulationState(final.state)).toEqual(final.state);
       expect(database.debugDoctor()).toMatchObject({ indexFresh: true, missingIndexRows: 0, orphanedArtifacts: 0 });
     } finally { database.close(); }
@@ -460,10 +502,10 @@ describe("World Instance host", () => {
       });
       expect(advanced.summary).toMatchObject({ revision: 10, step: 10, participantCount: 0 });
       const stored = database.readInstance(created.summary.id).document;
-      expect(stored).toMatchObject({ schemaVersion: 27, experimentEnrollment: null, experimentExclusion: { reason: "no-active-experiment" } });
+      expect(stored).toMatchObject({ schemaVersion: 28, experimentEnrollment: null, experimentExclusion: { reason: "no-active-experiment" } });
       const inspector = host.inspectorWindow(created.summary.id, { limit: 24 });
       expect(inspector).toMatchObject({
-        apiVersion: 13,
+        apiVersion: 14,
         algorithmComposition: {
           nodeCount: 23,
           root: {
@@ -760,12 +802,12 @@ describe("World Instance host", () => {
         response: { possibleNextActions: expect.any(Array) },
       });
       const stored = database.readInstance(created.summary.id).document;
-      expect(stored.schemaVersion).toBe(27);
+      expect(stored.schemaVersion).toBe(28);
       expect(stored.experimentEnrollment).toBeNull();
       expect(stored.executionAlgorithm).toMatchObject({
         id: "eager-reference",
         version: "29",
-        contractVersion: 12,
+        contractVersion: 13,
         config: {},
         children: {
           actionCompilation: {
@@ -1044,7 +1086,7 @@ describe("World Instance host", () => {
         waiting.summary.revision + 1,
       );
       expect(committed.summary.revision).toBe(waiting.summary.revision + 1);
-      expect(database.readInstance(created.summary.id).document.state.history.at(-1)?.reactionDecisions)
+      expect(requireReferenceStep(database.readInstance(created.summary.id).document.state.history.at(-1)!).reactionDecisions)
         .toContainEqual(expect.objectContaining({
           requestId: request.id,
           source: "external",
@@ -1097,6 +1139,7 @@ describe("World Instance host", () => {
       expect(committed.summary.revision).toBe(waiting.summary.revision + 1);
       const boundary = database.readInstance(created.summary.id).document.state.history
         .find((step) => step.revision === committed.summary.revision)!;
+      if (boundary.directEvent) throw new Error("expected reference boundary");
       expect(boundary.reactionDecisions).toContainEqual(expect.objectContaining({
         requestId,
         source: "profile_fallback",
@@ -1372,7 +1415,7 @@ describe("World Instance host", () => {
       const source = database.readInstance(created.summary.id).document;
       const legacy = structuredClone(source);
       (legacy as unknown as { schemaVersion: number }).schemaVersion = 23;
-      expect(() => validateWorldInstanceDocument(legacy)).toThrow("world instance schema v27 required");
+      expect(() => validateWorldInstanceDocument(legacy)).toThrow("world instance schema v28 required");
 
       const missingExperimentDecision = structuredClone(source);
       missingExperimentDecision.experimentEnrollment = null;
@@ -1544,10 +1587,11 @@ describe("World Instance host", () => {
       config: {},
       children: {},
     });
-    class WrappedEager implements WorldExecutionAlgorithm {
+    class WrappedEager implements ReferenceWorldExecutionAlgorithm {
+  readonly protocol = "reference" as const;
       readonly manifest = customManifest;
       constructor(private readonly delegate: EagerReferenceAlgorithm) {}
-      bootstrap(input: Readonly<BootstrapInput>, context: ExecutionContext): Promise<BootstrapCandidate> {
+      bootstrap(input: Readonly<BootstrapInput>, context: ExecutionContext): Promise<ReferenceBootstrapCandidate> {
         return this.delegate.bootstrap(input, context);
       }
       prepareStep(input: Readonly<WorldStepInput>, context: ExecutionContext) {
@@ -1555,10 +1599,10 @@ describe("World Instance host", () => {
       }
       completeStep(
         input: Readonly<WorldStepInput>,
-        preparation: Readonly<import("../../engine/runtime/execution").WorldStepPreparation>,
+        preparation: Readonly<import("../../engine/runtime/execution").ReferenceStepPreparation>,
         reactions: readonly import("../../engine/runtime/execution").ExternalReactionInput[],
         context: ExecutionContext,
-      ): Promise<WorldStepCandidate> {
+      ): Promise<ReferenceStepCandidate> {
         return this.delegate.completeStep(input, preparation, reactions, context);
       }
     }

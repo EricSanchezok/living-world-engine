@@ -4,7 +4,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import type { SimulationState } from "../../src/engine/contracts/model";
 import type { ObservationRenderingInput } from "../../src/engine/algorithms/roles";
-import type { WorldStepCandidate } from "../../src/engine/runtime/execution";
+import type { ReferenceStepCandidate } from "../../src/engine/runtime/execution";
 import { ObservationRenderer } from "../../src/engine/cognition/observation-renderer";
 import { TruthBatchCoordinator, TRUTH_BATCH_REQUEST_CONTRACT } from "../../src/engine/mechanics/truth-batch-provider";
 import { observationEvidenceProvider, OBSERVATION_EVIDENCE_LAYOUT } from "../../src/engine/mechanics/observation-evidence-layout";
@@ -41,7 +41,7 @@ export async function runPlayerObservationDictionaryProbe(argv: string[]) {
     downstreamManifest.preparationHash !== contentHash(preparation)) throw new Error("Recorded transition source binding changed");
   const candidates = downstreamEvents.filter(event => event.event === "execution.candidate.persisted");
   if (candidates.length !== 1) throw new Error("Expected exactly one recorded candidate");
-  const candidate = candidates[0]!.payload as WorldStepCandidate;
+  const candidate = candidates[0]!.payload as ReferenceStepCandidate;
   const observationRows = (downstreamResult.requests as Array<{ ordinal: number; role: string }>).filter(row => row.role === "observation-renderer");
   const sourceRequests = observationRows.map(row => {
     const full = read(path.join(downstreamDirectory, `downstream-${row.ordinal}-request.json`));

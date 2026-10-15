@@ -118,6 +118,7 @@ it.each([
   const retrieval = createActionCompilationRetrievalRuntimeProvider();
   const algorithm = registerIntegratedPlayerAlgorithm().create(ref, { provider,
     resources: { resolve: <T,>() => retrieval.runtime(ref) as T } });
+  if (algorithm.protocol === "direct") throw new Error("benchmark requires the reference protocol");
   const pending = algorithm.bootstrap({ definition, state }, {
     modelScope: { workloadId: "world", batchId: "bootstrap", observer,
       runtimeIdentity: { worldHash: state.worldHash, revision: state.revision } }, instrumentation: { emit: () => undefined },

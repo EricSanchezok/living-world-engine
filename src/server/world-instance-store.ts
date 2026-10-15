@@ -1,6 +1,6 @@
 import type { RulePackageRegistry } from "../engine/mechanics/rule-package";
 import { validateAlgorithmRef, type PolicyBinding } from "../engine/runtime/execution";
-import { EXECUTION_STAGES } from "../engine/runtime/stages";
+import { executionStages } from "../engine/runtime/stages";
 import { reactionRequestSchema } from "../engine/contracts/llm-schemas";
 import { contentHash } from "../engine/models/model-audit";
 import type { RuntimeCorrelation } from "../engine/runtime/observability";
@@ -238,7 +238,7 @@ function validateActionWindow(document: WorldInstanceDocument): void {
 }
 
 export function validateWorldInstanceDocument(document: WorldInstanceDocument, rulePackages?: RulePackageRegistry): void {
-  if (document.schemaVersion !== 27) throw new Error("world instance schema v27 required");
+  if (document.schemaVersion !== 28) throw new Error("world instance schema v28 required");
   requireText(document.id, "instance id");
   requireText(document.title, "instance title");
   if (!Array.isArray(document.narratives)) throw new Error("instance narrative outbox is required");
@@ -376,8 +376,8 @@ export function validateWorldInstanceDocument(document: WorldInstanceDocument, r
       requireText(run.debugCheckpoint.artifactHash, `run ${runId} debug checkpoint artifact hash`);
       if (!Number.isSafeInteger(run.debugCheckpoint.boundaryIndex) || run.debugCheckpoint.boundaryIndex < 0 ||
         !Number.isSafeInteger(run.debugCheckpoint.stageIndex) || run.debugCheckpoint.stageIndex < 0 ||
-        run.debugCheckpoint.stageIndex >= EXECUTION_STAGES.length ||
-        EXECUTION_STAGES[run.debugCheckpoint.stageIndex]?.key !== run.debugCheckpoint.stageKey ||
+        run.debugCheckpoint.stageIndex >= executionStages(document.executionAlgorithm.id).length ||
+        executionStages(document.executionAlgorithm.id)[run.debugCheckpoint.stageIndex]?.key !== run.debugCheckpoint.stageKey ||
         !Number.isFinite(Date.parse(run.debugCheckpoint.updatedAt))) {
         throw new Error(`run ${runId} debug checkpoint metadata is invalid`);
       }
@@ -426,18 +426,6 @@ export function validateWorldInstanceDocument(document: WorldInstanceDocument, r
       throw new Error(`reaction submission ${reaction.submissionId} is invalid`);
     }
   }
-}
-
-export function serializeWorldInstanceDocument(document: WorldInstanceDocument, rulePackages?: RulePackageRegistry): string {
-  validateWorldInstanceDocument(document, rulePackages);
-  return JSON.stringify(document);
-}
-
-export function parseWorldInstanceDocument(serialized: string, expectedId: string, rulePackages?: RulePackageRegistry): WorldInstanceDocument {
-  const value = JSON.parse(serialized) as WorldInstanceDocument;
-  validateWorldInstanceDocument(value, rulePackages);
-  if (value.id !== expectedId) throw new Error("world instance id mismatch");
-  return value;
 }
 
 export interface WorldInstanceStore {

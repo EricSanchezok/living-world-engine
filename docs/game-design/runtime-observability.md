@@ -8,7 +8,11 @@ Execution Ledger 是正常演化、失败诊断、Inspector、实验和重放的
 
 `execution_events` 使用全局递增 sequence，保存 `traceId`、`spanId`、`parentSpanId`、links、阶段、correlation、耗时、标量属性、计数、测量、hash 与 artifact 引用。
 
-`execution_artifacts` 以 canonical JSON 的 SHA-256 寻址，以 gzip BLOB 保存完整模型请求、响应、世界定义、候选结果、验证问题和错误。凭证在进入 Ledger 前脱敏。模型请求在 transport 前、响应在返回算法前、候选在提交内核消费前必须落盘；关键写入失败会终止 execution，revision 不前进。
+`execution_artifacts` 以 canonical JSON 的 SHA-256 寻址，引用共享的 `json_blocks`，无损保存完整模型请求、响应、世界定义、候选结果、验证问题和错误。凭证在进入 Ledger 前脱敏。模型请求在 transport 前、响应在返回算法前、候选在提交内核消费前必须落盘；关键写入失败会终止 execution，revision 不前进。
+
+SQLite schema v9 的 `world_instances.document_hash` 和 `execution_artifacts.root_hash` 引用同一个不可变 JSON 块存储。超过 4 KiB 的容器按子值拆分，块内容使用 gzip，哈希覆盖重建后的 canonical JSON。更新只插入新块并替换实例根；已有历史、控制状态和叙述可被实例与 Ledger 共同引用。块的内部类型标记与用户 JSON 分离，相同值读回为独立可变对象。每次读取校验块哈希、子引用和数组顺序；缺失或损坏立即失败。外部数据库写入使实例内存缓存失效。
+
+新块、实例 generation CAS 和 execution terminal 更新在同一事务中提交或回滚。`rawBytes` 表示完整逻辑 JSON 大小，`storedBytes` 表示首次保存该 artifact 新增的压缩块字节数，已复用内容不重复计费。引用图保留历史证据；写入仍需遍历与哈希逻辑文档，不承诺常量 CPU 或内存消耗。
 
 writer 使用有界缓冲和 SQLite 批量事务。Ledger 自身的 artifact 字节、压缩字节与写入耗时直接附加到当前事件，不通过事件系统递归观测自身。进程中断遗留的 running execution 在数据库再次打开时标记为 failed。
 
@@ -16,15 +20,17 @@ execution kind 只有 `interactive | diagnostic | benchmark | replay`。Benchmar
 
 ## 执行边界
 
-Execution Contract v6 的 `WorldExecutionAlgorithm` 生成 `BootstrapCandidate`，并用 `prepareStep` / `completeStep` 生成 Preparation v5 与 Candidate v5。每个 World Instance 固定一棵完整递归算法 Composition；生产与 replay 都经校验 registry 解析每个 Role、实现版本、contract version、显式配置、子节点与 manifest hash。`CanonicalCommitter` 独立验证四类 interaction dependency、共享资源 claims/admissions/holder release/FIFO promotion、最早边界、ActivityDisposition、assertion evidence、引用、受众、单份 model audits 与 mind commits，并从 resolution 统一派生 Observation。`eager-reference@16` 在边界选择前完成有限 onset reaction 和资源准入，再以固定 Truth slot batches 进行正时间原子提交；新实例的默认候选选择节点是 `relational-rrf@2`，它固定 Encoder fingerprint、20% 比例预算及必需引用下限、typed-channel RRF 排序、coverage-aware 联合分配和严格 slot membership。`full-catalog@1` 只作为显式 reference/relabeling 算法保留，不是隐式 fallback。算法 Composition 的规范见[算法系统](algorithm-system.md)。
+Execution Contract v13 明确区分 `direct` 和 `reference` 协议。默认 [Direct runtime](direct-runtime.md) 产生原生冻结事件，由 CanonicalCommitter 独立验证并提交；显式研究 reference 使用自己的准备、反应、裁决和认知收据。两者固定完整 Composition，经同一 registry 解析 producer identity，并使用同一 Ledger 保存证据。默认选择与注册身份见[算法系统](algorithm-system.md)。
 
-WorldHost 为 bootstrap、每个 WorldRun 时间边界和 Arrival 建立 execution。成功世界推进时，World Instance CAS、WorldRun revision 列表与 execution terminal record 在同一 SQLite 事务内完成；失败、取消、暂停、repair 耗尽、迟到结果或关键记录失败均不推进 revision。World Instance document schema 为 v24，旧实例不迁移；实例创建时固定实验 manifest、variant、bucket、assignment hash 与对应完整 Composition，修改 host 默认算法、实验比例或默认调优参数不会改变已存在实例。
+WorldHost 为 bootstrap、每个 WorldRun 时间边界和 Arrival 建立 execution。成功世界推进时，World Instance CAS、WorldRun revision 列表与 execution terminal record 在同一 SQLite 事务内完成；失败、取消、暂停、repair 耗尽、迟到结果或关键记录失败均不推进 revision。World Instance document schema 为 v28，旧实例不迁移；实例创建时固定实验 manifest、variant、bucket、assignment hash 与对应完整 Composition，修改 host 默认算法、实验比例或默认调优参数不会改变已存在实例。
 
 原子事务在 terminal event 固定后生成 `{executionId, terminalEventSequence, traceHash}`。`traceHash` 覆盖事件身份、DAG、属性、计数、correlation、错误与 artifact 引用；运行时长和资源测量不进入该 hash。bootstrap 保存 `bootstrapExecutionRef`，每个 `CommittedStep` 保存自己的 `executionRef`；`contentHash` 覆盖引用，`semanticHash` 排除引用，从而分别验证证据链和算法语义。
 
 ## 事件与指标
 
 Runtime event schema v4 的稳定语义归引擎所有。算法只能通过窄型 instrumentation 上报已声明的 phase 与 degradation diagnostics，未知事件、畸形字段和算法伪报的引擎事件会失败。引擎根据调用所有者自动附加 `{path, role, id, version, manifestHash}`，算法输入不能伪造节点身份。引擎在 Candidate 通过提交验证后，从输入和候选生成 activation、eligibility、产物、temporal boundary reason、Activity transition、outcome status 与 operation kind 事件。稳定的 trace/span/parent/link 仍表达执行 DAG；在没有区间 span 证据时，导出器只报告真实根执行墙钟时间、span 数和最大深度，不声称关键路径或把父子 duration 重复相加为总 work。
+
+`direct.candidate.completed` 只报告 Direct 实际产物，不补造 reference 管线的零值阶段或收据。调试、暂停恢复和 Inspector 回放使用选定协议的阶段顺序。
 
 `MetricDefinitionRegistry` 是名称、单位、`sum | count | last | max` 聚合和允许维度的唯一登记处。Agent、Participant、Instance、Advance、Event、Component 和 invocation ID 只存在于 trace，不进入聚合指标维度；受控的 model role 可以进入指标。指标只从 Ledger 原始事件派生，不另存实验结果真相。
 
@@ -34,9 +40,9 @@ Runtime event schema v4 的稳定语义归引擎所有。算法只能通过窄�
 
 ## Inspector
 
-Inspector 服务端按 World Instance 查询 Ledger，并由可重建的 SQLite 查询投影支持精确检索；窗口和摘要不内联大型 payload。已提交图谱从 canonical history 重放派生，attempt、失败、模型调用与原始材料来自同一 Ledger。Inspector API v13 的实例窗口公开受信任的递归 Composition 树、稳定路径、严格配置和节点 hash；每个 step detail 公开 TemporalPlan、Activity/Timer snapshot、边界来源、动态 Δt、同刻到期集合、Activity 转换、决策点、完整 pool capacity、holder、claim、queue 和 admission evidence。未提交 attempt 明确保持 canonical clock、Activity progress 和资源分配不变。
+Inspector 服务端按 World Instance 查询 Ledger，并由可重建的 SQLite 查询投影支持精确检索；窗口和摘要不内联大型 payload。已提交图谱从 canonical history 重放派生，attempt、失败、模型调用与原始材料来自同一 Ledger。Inspector API v14 的实例窗口公开受信任的递归 Composition 树、稳定路径、严格配置和节点 hash；step detail 按协议公开实际证据：Direct 展示行动、意图、控制增量、实际读取与随机承诺；reference 展示 TemporalPlan、Activity/Timer snapshot、转换、决策点与资源准入收据。未提交 attempt 明确保持 canonical clock、Activity progress 和资源分配不变。
 
-Inspector API v13 还提供 `GET /api/instances/:id/inspector/model-invocations` 与单条调用详情路由，以及本地 `GET /api/debug`、`/api/debug/invocations/:id`、`/api/debug/artifacts/:hash` 和 `/api/debug/doctor`。调用投影区分 logical invocation、transport attempt、semantic rejection、repair 和 retry，并公开单次 token、request/context/response 字节数、queue/transport/parse 时间、slot/Agent 映射、候选 shortlist、缓存命中、validation code、runtime event ID、Algorithm 节点与 artifact hash。实例窗口显示可信实验归属或排除原因；调用清单和 Debug CLI 支持服务端精确查询、稳定分页、诊断码、request/trace/span、artifact 与完整 lineage；完整 payload 仅在显式请求时读取，不进入摘要。
+Inspector API v14 还提供 `GET /api/instances/:id/inspector/model-invocations` 与单条调用详情路由，以及本地 `GET /api/debug`、`/api/debug/invocations/:id`、`/api/debug/artifacts/:hash` 和 `/api/debug/doctor`。调用投影区分 logical invocation、transport attempt、semantic rejection、repair 和 retry，并公开单次 token、request/context/response 字节数、queue/transport/parse 时间、slot/Agent 映射、候选 shortlist、缓存命中、validation code、runtime event ID、Algorithm 节点与 artifact hash。实例窗口显示可信实验归属或排除原因；调用清单和 Debug CLI 支持服务端精确查询、稳定分页、诊断码、request/trace/span、artifact 与完整 lineage；完整 payload 仅在显式请求时读取，不进入摘要。
 
 Inspector 是本地受信任调试表面。公开产品 DTO 和 Participant 视角不读取 Inspector 投影，也不能获得 canonical binding 或其他主体私有认知。
 

@@ -6,20 +6,20 @@ Living World Engine maintains one canonical world and multiple Agents with priva
 
 | Layer | Location | Responsibility |
 |---|---|---|
-| World contract | `src/script/` | Read schema v17 world packages, validate temporal/mechanics/resource profiles and assets, and construct `WorldDefinition` and `SimulationState` v20 |
+| World contract | `src/script/` | Read schema v17 world packages, validate temporal/mechanics/resource profiles and assets, and construct `WorldDefinition` and `SimulationState` v21 |
 | Execution algorithms | `src/engine/algorithms/` | Typed Roles, strict versioned definitions, recursive Compositions, generated discovery, and pinned producer resolution |
 | Model gateway | `src/engine/models/` | Trusted provider accounts, models.dev snapshots, deterministic Profile resolution, protocol drivers, vendor dialects, external prompt bundles, strict structured output, fair scheduling, and invocation audit |
 | Cognition | `src/engine/cognition/` | Agent perspective, private belief/character updates, observations, information boundaries, and mind commits |
 | Mechanics | `src/engine/mechanics/` | Temporal, resolution, causality, random, interaction-dependency graphs, Truth Engine, rule packages, and shared-resource mechanics |
 | Fixed runtime | `src/engine/runtime/` | Execution contract, SimulationEngine, CanonicalCommitter, transactions, lifecycle evidence, IDs, replay, and world runtime definitions |
-| Direct execution | `src/engine/direct/` | Private intentions, typed Jev actions, local adjudication, saved activities, mechanical settlement and default `direct-world@3`; see [runtime contract](game-design/direct-runtime.md) |
+| Direct execution | `src/engine/direct/` | Private intentions, typed Jev actions, local adjudication, saved activities, mechanical settlement and default `direct-world@4`; see [runtime contract](game-design/direct-runtime.md) |
 | Prompt resources | `src/engine/prompts/` | Server-loaded English role/task/transport Markdown, content-addressed bundle versions, and unified task/context serialization |
 | Shared contracts | `src/engine/contracts/` | Semantic state types, model-output schemas, and prompt/context contracts shared across owners |
 | Benchmarks | `src/engine/benchmarks/` | Benchmark-only code and evidence generators kept off the product execution path |
 | Participant narration | `src/server/narrative/` | Separate saved contracts, authorized scene evidence, paragraph publication and durable outbox; see [narrative contract](game-design/narrative.md) |
-| Instance host | `src/server/world-host.ts` | `WorldInstanceDocument` v27, immutable experiment enrollment, pinned recursive `AlgorithmRef`, persistent WorldRuns, Participants, decision/reaction windows, Preparation v5 artifacts, leases, recovery, and generation fencing |
+| Instance host | `src/server/world-host.ts` | `WorldInstanceDocument` v27, immutable experiment enrollment, pinned recursive `AlgorithmRef`, persistent WorldRuns, Participants, decision/reaction windows, protocol-specific preparations, leases, recovery, and generation fencing |
 | Execution evidence | `src/server/execution-ledger.ts` | The sole persisted source for executions, events, artifacts, experiments, replay, and Inspector data |
-| HTTP and browser | `src/app/` | Public API v15, world library, assistant-ui sessions, decision/reaction controls, unified Agent Perspective HUD, control orb, and read-only Inspector API v13 with local Debug routes |
+| HTTP and browser | `src/app/` | Public API v15, world library, assistant-ui sessions, decision/reaction controls, unified Agent Perspective HUD, control orb, and read-only Inspector API v14 with local Debug routes |
 | Shared browser contracts | `src/shared/` | Browser-safe DTOs and trusted-local Inspector DTOs |
 
 Dependencies flow browser → Route Handler → WorldHost → SimulationEngine → WorldExecutionAlgorithm → CanonicalCommitter. WorldHost resolves the complete instance-pinned Composition through the internal registry, and replay resolves the recorded tree through the same mechanism. Algorithms return candidates but never hold authority to mutate canonical state or define stable telemetry. The engine and world YAML load only on the server. [Algorithm system](game-design/algorithm-system.md) defines the replaceability boundary.
@@ -78,7 +78,7 @@ Models produce semantic drafts only. Agent, Entity, Fact, Meter, Rating, Conditi
 
 WorldHost invokes the instance-pinned producer. Initial state and ready intentions are saved without NPC inference. Typed private decisions build concrete actions; authorized local world decisions bind their actual effects. The [direct runtime](game-design/direct-runtime.md) owns progression, perception, compound submissions, learned capabilities and local recovery.
 
-Same-time control records save decisions and random commitments. Physical settlement respects the earliest admitted activity, timer or condition boundary and advances time positively. CanonicalCommitter checks actual read dependencies and mechanical consistency before atomic persistence. Replay consumes recorded events. Failed local tasks retain their evidence while independent work continues.
+Same-time control records save decisions and random commitments. Physical settlement respects the earliest admitted activity, timer or condition boundary and advances time positively. Direct prepares a native frozen event without applying it. CanonicalCommitter checks actual read dependencies and mechanical consistency, then applies the event. Reference compositions use a separate explicit protocol. Replay consumes recorded events. Failed local tasks retain their evidence while independent work continues.
 
 ## World Instance and Participant
 
@@ -96,7 +96,7 @@ A Participant session projects persisted Arrival, Participant intent, every comm
 
 Normalized world content receives a SHA-256 covering the manifest, laws, mechanics, entities, participation configuration, and static-asset identities. An instance pins its `WorldRuntimeContract` and world content hash, and reconstruction verifies both against the content-addressed version.
 
-World versions, instances, and the Execution Ledger live in `LIVINGWORLD_DATA_ROOT/livingworld.sqlite`; content-addressed model-registry snapshots live beside it under `model-registry/`. The default v27 directory is `.livingworld-v27/`. Disposable local encoder assets and candidate vectors live separately under `LIVINGWORLD_CACHE_ROOT`, which defaults to `.livingworld-cache/`; a world content hash and encoder fingerprint partition the embedding SQLite files, and an exact passage hash addresses each checksummed Float32 vector. Operational entrypoints are grouped under `scripts/experiments/` and `scripts/operations/`, while repo-seed governance scripts retain their managed root paths. Canonical SQLite uses WAL, `synchronous=FULL`, strict tables, process leases, write transactions, and generation compare-and-swap. Old schemas are not migrated; a different contract uses a new data root.
+World versions, instances, and the Execution Ledger live in `LIVINGWORLD_DATA_ROOT/livingworld.sqlite`; content-addressed model-registry snapshots live beside it under `model-registry/`. The default v28 directory is `.livingworld-v28/`. Disposable local encoder assets and candidate vectors live separately under `LIVINGWORLD_CACHE_ROOT`, which defaults to `.livingworld-cache/`; a world content hash and encoder fingerprint partition the embedding SQLite files, and an exact passage hash addresses each checksummed Float32 vector. Operational entrypoints are grouped under `scripts/experiments/` and `scripts/operations/`, while repo-seed governance scripts retain their managed root paths. Canonical SQLite uses WAL, `synchronous=FULL`, strict tables, process leases, write transactions, and generation compare-and-swap. Instances and Ledger artifacts share immutable JSON blocks; a CAS publishes the current document root while unchanged history and narration reuse existing blocks. [Execution Ledger](game-design/runtime-observability.md#存储) owns the storage contract. Old schemas are not migrated; a different contract uses a new data root.
 
 ## Hard invariants
 

@@ -48,6 +48,7 @@ it.each([false, true])("uses restricted recovery through registered bootstrap an
   const ref = integratedPlayerAlgorithmRef(), retrieval = createActionCompilationRetrievalRuntimeProvider();
   const algorithm = registerIntegratedPlayerAlgorithm().create(ref, { provider,
     resources: { resolve: <T,>() => retrieval.runtime(ref) as T } });
+  if (algorithm.protocol === "direct") throw new Error("benchmark requires the reference protocol");
   const pending = algorithm.bootstrap({ definition, state }, {
     modelScope: { workloadId: "cognition-test", batchId: "bootstrap", observer,
       runtimeIdentity: { worldHash: state.worldHash, revision: state.revision } },

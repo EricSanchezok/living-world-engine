@@ -5,7 +5,7 @@ import { contentHash } from "../../../models/model-audit";
 import { historyReplayBaseHash } from "../../../runtime/history-replay";
 import { SimulationEngine } from "../../../runtime/simulation";
 import { replaySimulationState } from "../../../runtime/transaction";
-import type { WorldExecutionAlgorithm, WorldStepCandidate, WorldStepPreparation } from "../../../runtime/execution";
+import type { ReferenceWorldExecutionAlgorithm, ReferenceStepCandidate, ReferenceStepPreparation } from "../../../runtime/execution";
 import { ScriptedModelProvider, deterministicActionCompilationBatch, deterministicInteractionDependency,
   deterministicModelOutput, deterministicOnsetReports } from "../../../testing/model-provider";
 import { EagerReferenceAlgorithm } from "../eager-reference";
@@ -66,8 +66,8 @@ async function fixture(mode: Mode, secret = "PRIVATE_ALPHA", forge = false, exte
   initial.lawIds.push("onset-channel");
   definition.historyBaseHash = historyReplayBaseHash(initial);
   const delegate = new EagerReferenceAlgorithm(provider);
-  let candidate: WorldStepCandidate | undefined;
-  const algorithm: WorldExecutionAlgorithm = { manifest: delegate.manifest,
+  let candidate: ReferenceStepCandidate | undefined;
+  const algorithm: ReferenceWorldExecutionAlgorithm = { protocol: "reference", manifest: delegate.manifest,
     bootstrap: (input, context) => delegate.bootstrap(input, context),
     prepareStep: (input, context) => delegate.prepareStep(input, context),
     completeStep: async (input, preparation, reactions, context) => {
@@ -165,7 +165,7 @@ it("compiles a replacement against its frozen introduction after preparation res
   const test = await fixture("introduction", "PRIVATE_ALPHA", false, false, true);
   const before = contentHash(test.source);
   const preparation = await test.engine.prepareStep(test.roster, test.request);
-  const frozen = JSON.parse(JSON.stringify(preparation)) as WorldStepPreparation;
+  const frozen = JSON.parse(JSON.stringify(preparation)) as ReferenceStepPreparation;
   const stimulus = frozen.reactionRequests.find(request => request.agentId === "keeper")!.stimulus;
   const localId = stimulus.introductions[0]!.localEntity.id;
   expect(test.source.agents.keeper!.bindings[localId]).toBeUndefined();
@@ -197,7 +197,7 @@ it("restores an external reaction from the same serialized receipt without anoth
   const test = await fixture("visible", "PRIVATE_ALPHA", false, true);
   const preparation = await test.engine.prepareStep(test.roster, test.request);
   expect(preparation.pendingReactionRequests).toHaveLength(1);
-  const persisted = JSON.parse(JSON.stringify(preparation)) as WorldStepPreparation;
+  const persisted = JSON.parse(JSON.stringify(preparation)) as ReferenceStepPreparation;
   const restored = new SimulationEngine(test.definition, test.algorithm, test.source);
   const count = test.provider.requests.filter(request => request.role === "truth-perception").length;
   const result = await restored.completePreparedStep(test.roster, test.request, persisted,

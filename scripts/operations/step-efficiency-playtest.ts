@@ -1,3 +1,4 @@
+import { requireReferenceStep } from "../../src/engine/contracts/committed-step";
 import { PLANNING_CATALOG_ENCODING } from "../../src/engine/mechanics/planning-catalog-encoding";
 import { MECHANICAL_PLAN_REPAIR } from "../../src/engine/mechanics/mechanical-plan-repair";
 import { TRUTH_RESOLUTION_CONTRACT_VERSION } from "../../src/engine/algorithms/roles";
@@ -219,7 +220,7 @@ export async function runStepEfficiencyPlaytest(variant?: StepEfficiencyVariant)
   const phase = trialId.startsWith("discovery-") ? "discovery" : trialId.startsWith("trajectory-") ? "trajectory" : "confirmation";
   const root = path.resolve(protocol.root);
   const directory = path.join(root, "runs", trialId);
-  const dataRoot = path.resolve(variant?.dataRoot ?? process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v27");
+  const dataRoot = path.resolve(variant?.dataRoot ?? process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v28");
   const algorithmRef = stepEfficiencyAlgorithmRef(variant);
   const deadlineUtc = nonthinking ? null : variant?.continuation?.deadlineUtc ?? protocol.deadlineUtc;
   const deadlineReached = () => deadlineUtc !== null && Date.now() >= Date.parse(deadlineUtc);
@@ -433,7 +434,8 @@ export async function runStepEfficiencyPlaytest(variant?: StepEfficiencyVariant)
           onStop: reason => { stopRequested ??= reason; },
           onUpdate: result => { playerActions[index] = structuredClone(result); report(); },
           onCheckpoint: (evidence, observedElapsedMs) => {
-            const { source, checkpoint, committed } = evidence;
+            const { source, checkpoint } = evidence;
+            const committed = requireReferenceStep(evidence.committed);
             const previousElapsedMs = playerActions[index]?.feedback.at(-1)?.observedElapsedMs ?? 0;
             const truthHash = contentHash(checkpoint.truth);
             commits.push({ revision: checkpoint.revision, step: checkpoint.step,
@@ -477,7 +479,8 @@ export async function runStepEfficiencyPlaytest(variant?: StepEfficiencyVariant)
           throw new Error(run.error ?? run.stopReason ?? run.status);
         }
         if (document.state.revision > before.revision && run && !["queued", "running", "pausing"].includes(run.status)) {
-          const entry = document.state.history.at(-1);
+          const latest = document.state.history.at(-1);
+          const entry = latest ? requireReferenceStep(latest) : undefined;
           const advances = entry?.operations.filter((operation) => operation.kind === "advance_time") ?? [];
           if (document.state.revision !== before.revision + 1 || document.state.step !== before.step + 1 ||
             entry?.revision !== document.state.revision || entry.step !== document.state.step ||

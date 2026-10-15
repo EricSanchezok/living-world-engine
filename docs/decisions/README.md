@@ -144,3 +144,5 @@ An optional adjacent `Class:` line uses `architecture`, `process`, `testing`, `f
 - [0233 — Coalesce Immediate Replies Before Prose Publication](0233-coalesce-immediate-replies-before-publication.md)
 
 - [0237 — Bind open values and published continuations](0237-open-values-and-published-continuations.md)
+
+- [0240 — Native Direct events and instance journal](0240-native-direct-events-and-instance-journal.md)

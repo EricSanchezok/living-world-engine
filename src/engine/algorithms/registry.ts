@@ -765,14 +765,14 @@ export function registerBuiltinAlgorithms(
   registry: WorldExecutionAlgorithmRegistry = new WorldExecutionAlgorithmRegistry(),
 ): WorldExecutionAlgorithmRegistry {
   if (!registry.has(directWorldAlgorithmRef())) registry.registerDefinition({
-    role: "world-execution", id: "direct-world", version: "3", contractVersion: 12, maturity: "candidate",
+    role: "world-execution", id: "direct-world", version: "4", contractVersion: 13, maturity: "candidate",
     configSchema: z.strictObject({ decision: z.string().min(1).nullable(), creation: z.string().min(1).nullable(), fallback: z.string().min(1).nullable(), creationEnabled: z.boolean() }),
     children: [], create: ({ ref, services }) => new DirectWorldAlgorithm(services.provider, ref.config as unknown as import("../direct/algorithm").DirectWorldConfig, services.rulePackages),
   });
   if (registry.has(FULL_CATALOG_ALGORITHM_REF)) return registry;
   for (const definition of definitions) registry.registerAlgorithmDefinition(definition);
   registry.registerDefinition({
-    ...identity("world-execution", "eager-reference", "29", 12),
+    ...identity("world-execution", "eager-reference", "29", 13),
     maturity: "reference",
     configSchema: z.strictObject({}),
     children: [

@@ -1,3 +1,4 @@
+import { requireReferenceStep } from "../../contracts/committed-step";
 import path from "node:path";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -111,6 +112,7 @@ it("repairs a known action after resumed intention selection without changing ei
     const algorithm = registerIntegratedPlayerAlgorithm().create(ref, { provider, resources: {
       resolve: <T,>(kind: string) => kind === "candidate-selection-runtime" ? retrieval.runtime(ref) as T : undefined,
     } });
+  if (algorithm.protocol === "direct") throw new Error("benchmark requires the reference protocol");
     const engine = new SimulationEngine(definition, algorithm);
     await engine.bootstrapAgents();
     const source = engine.snapshot;
@@ -199,7 +201,7 @@ it.each([false, true])("runs parallel work, survives a failed guard and resumes 
     const saved = database.readInstance(created.summary.id).document;
     const initialMemory = readIntentMemory(saved.state.executionState, ref.manifestHash);
     expect(Object.keys(initialMemory.active).sort()).toEqual(["keeper", "player"]);
-    expect(saved.state.history.at(-1)!.initialActions.filter(action => ["player", "keeper"].includes(action.actorId))
+    expect(requireReferenceStep(saved.state.history.at(-1)!).initialActions.filter(action => ["player", "keeper"].includes(action.actorId))
       .every(action => action.rawText.startsWith("CURRENT_PARALLEL_ATTEMPTS_V1"))).toBe(true);
     const stateHash = contentHash(saved.state);
     const tampered = structuredClone(saved.state); tampered.executionState = null;
@@ -215,7 +217,7 @@ it.each([false, true])("runs parallel work, survives a failed guard and resumes 
     expect(resumed.failure).toBeUndefined(); expect(resumed.status).toBe("completed");
     const final = database.readInstance(created.summary.id).document;
     expect(contentHash(replaySimulationState(final.state))).toBe(contentHash(final.state));
-    expect(final.state.history.at(-1)!.initialActions.filter(action => ["player", "keeper"].includes(action.actorId))
+    expect(requireReferenceStep(final.state.history.at(-1)!).initialActions.filter(action => ["player", "keeper"].includes(action.actorId))
       .map(action => action.rawText)).toEqual(["随后整理刚才得到的信息。", "随后整理刚才得到的信息。"]);
     const finalMemory = readIntentMemory(final.state.executionState, ref.manifestHash);
     reconcileIntentMemory(finalMemory, final.state);

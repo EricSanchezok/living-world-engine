@@ -1,3 +1,5 @@
+import { assertExactKeys } from "../runtime/json";
+import { applyJsonDelta } from "../runtime/json-delta";
 import type { CommittedStep, SimulationState } from "../contracts/model";
 import { contentHash } from "../models/model-audit";
 import type { JsonObject } from "../runtime/json";
@@ -6,8 +8,7 @@ import { applyWorldDeltaOperation, validateSimulationState } from "../runtime/tr
 import { applyObservationBindings, validateObservations } from "../cognition/observation";
 import { applyBeliefPatch } from "../cognition/belief";
 import { applyCharacterPatch } from "../cognition/character";
-import { WORLD_STEP_CANDIDATE_SCHEMA_VERSION, finalCausalReviewContentHash, type WorldStepCandidate } from "../runtime/execution";
-import type { DirectBootstrap, DirectStepRecord } from "./contracts";
+import type { DirectBootstrap, DirectStepRecord, DirectCommittedStep } from "./contracts";
 import { readDependency, readDirectState } from "./state";
 import { applyDirectCognition } from "./cognition";
 import { resolveDiscreteRandomRequests } from "../mechanics/random";
@@ -15,7 +16,7 @@ import { evaluateCausalAssertion } from "../mechanics/causality";
 import { nextWorldClockBoundary } from "./clock";
 
 export function applyDirectBootstrap(source: Readonly<SimulationState>, bootstrap: DirectBootstrap): SimulationState {
-  if (source.revision !== 0 || source.executionState || source.history.length || bootstrap.version !== 1) throw new Error("direct bootstrap requires an initial world");
+  if (source.revision !== 0 || source.executionState || source.history.length || bootstrap.version !== 2) throw new Error("direct bootstrap requires an initial world");
   const state = structuredClone(source) as SimulationState;
   state.historyBase ??= createHistoryReplayBase(state);
   state.executionState = { producerHash: bootstrap.producer.manifestHash, data: structuredClone(bootstrap.control) as unknown as JsonObject };
@@ -30,18 +31,22 @@ export function sealDirectRecord(record: DirectStepRecord): DirectStepRecord {
 
 /** One mechanical transaction. Semantic answers are retained for inspection, never rerun during replay. */
 export function commitDirectRecord(source: Readonly<SimulationState>, record: DirectStepRecord) {
-  if (record.version !== 1 || record.id !== contentHash({ ...record, id: "" }) || source.revision !== record.baseRevision ||
+  assertExactKeys(record, ["version", "id", "baseRevision", "producerHash", "authorityHash", "reads", "fromSeconds", "atSeconds", "frames",
+    "completedActionIds", "controlDelta", "operations", "events", "outcomes", "observations", "beliefPatches", "characterPatches", "cognition",
+    "decisions", "modelAudits", "rng", "randomRequests", "randomResults", "timerUpdates"], ["presentation"], "Direct event");
+  if (record.version !== 2 || record.id !== contentHash({ ...record, id: "" }) || source.revision !== record.baseRevision ||
     source.executionState?.producerHash !== record.producerHash || source.bootstrapDirect?.authorityHash !== record.authorityHash) throw new Error("direct commit identity mismatch");
   if (source.history.some(step => step.directEvent?.id === record.id)) throw new Error("direct event already committed");
   for (const [key, expected] of Object.entries(record.reads)) if (contentHash(readDependency(source, key)) !== expected) throw new Error(`stale direct read ${key}`);
-  if (!Number.isSafeInteger(record.atSeconds) || record.atSeconds < source.truth.elapsedSeconds ||
+  if (record.fromSeconds !== source.truth.elapsedSeconds || !Number.isSafeInteger(record.atSeconds) || record.atSeconds < source.truth.elapsedSeconds ||
     record.frames.length && record.atSeconds <= source.truth.elapsedSeconds) throw new Error("physical event time must advance");
   if (record.frames.some(frame => frame.dueAtSeconds !== record.atSeconds || frame.startedAtSeconds > source.truth.elapsedSeconds ||
     source.agents[frame.actorId]?.entityId !== frame.actorEntityId)) throw new Error("invalid direct activity boundary or owner");
   const beforeControl = readDirectState(source.executionState, source);
+  const control = directControlAfter(beforeControl, record);
   for (const reply of record.presentation ?? []) {
     const owner = source.agents[reply.agentId];
-    if (!owner || !reply.requested.trim() || !record.control.completedSubmissionIds.includes(reply.submissionId) ||
+    if (!owner || !reply.requested.trim() || !control.completedSubmissionIds.includes(reply.submissionId) ||
       reply.focusLocalEntityId && !owner.belief.localEntities[reply.focusLocalEntityId] ||
       record.frames.some(frame => frame.actorId === reply.agentId)) throw new Error("invalid presentation-only reply");
   }
@@ -82,43 +87,49 @@ export function commitDirectRecord(source: Readonly<SimulationState>, record: Di
     agent.character = applyCharacterPatch(agent.character, agent.belief, patch, state.step,
       record.observations.filter(packet => packet.observerId === agent.id), record.events);
   }
-  state.executionState = { producerHash: record.producerHash, data: structuredClone(record.control) as unknown as JsonObject };
+  state.executionState = { producerHash: record.producerHash, data: structuredClone(control) as unknown as JsonObject };
   readDirectState(state.executionState, state);
-  const payload: Omit<CommittedStep, "semanticHash" | "contentHash"> = {
-    directEvent: structuredClone(record), executionState: structuredClone(state.executionState), baseRevision: source.revision, revision: state.revision, step: state.step,
-    initialActions: record.frames.map(frame => frame.proposal), actions: record.frames.map(frame => frame.proposal), reactionRequests: [], reactionDecisions: [],
-    rngBefore: structuredClone(source.truth.rng), rngAfter: structuredClone(state.truth.rng), resolutionPlans: [], resolutionReceipts: [], temporalPlans: [],
-    temporalBoundary: { fromElapsedSeconds: source.truth.elapsedSeconds, toElapsedSeconds: record.atSeconds, deltaSeconds: record.atSeconds - source.truth.elapsedSeconds,
-      reasons: [], dueActivityIds: record.completedActionIds, dueTimerIds: Object.keys(record.timerUpdates).filter(id => source.truth.timers[id]?.status !== record.timerUpdates[id]?.status), dueConditionIds: [] },
-    temporalState: { activities: structuredClone(state.truth.activities), timers: structuredClone(state.truth.timers) }, activityTransitions: [], activityDispositions: [], sharedResourceAdmissions: [], decisionPoints: [],
-    checkRequests: [], checks: [], randomRequests: record.randomRequests, randomResults: record.randomResults, commitmentRounds: [], outcomes: record.outcomes, mechanicInvocations: [], mechanicResults: [],
-    causalAssertionResults: [], causalVerification: { verdict: "accept", findings: [] }, events: record.events, observations: record.observations,
-    operations: record.operations, decisionRequests: [], beliefPatches: record.beliefPatches, characterPatches: record.characterPatches, nextActions: [],
+  const { operations, events, outcomes, observations, beliefPatches, characterPatches, randomRequests, randomResults,
+    rng, atSeconds, fromSeconds, ...directEvent } = structuredClone(record);
+  const payload: Omit<DirectCommittedStep, "semanticHash" | "contentHash"> = {
+    directEvent, baseRevision: source.revision, revision: state.revision, step: state.step,
+    actions: directEvent.frames.map(frame => structuredClone(frame.proposal)), operations, events, outcomes, observations, beliefPatches, characterPatches,
+    randomRequests, randomResults, rngBefore: structuredClone(source.truth.rng), rngAfter: rng,
+    temporalBoundary: { fromElapsedSeconds: fromSeconds, toElapsedSeconds: atSeconds, deltaSeconds: atSeconds - fromSeconds,
+      reasons: [], dueActivityIds: record.completedActionIds,
+      dueTimerIds: Object.keys(record.timerUpdates).filter(id => source.truth.timers[id]?.status !== record.timerUpdates[id]?.status), dueConditionIds: [] },
   };
   const semantic = { ...payload, semanticHash: contentHash(payload) };
-  const committed: CommittedStep = { ...semantic, contentHash: contentHash(semantic) };
+  const committed: DirectCommittedStep = { ...semantic, contentHash: contentHash(semantic) };
   state.history.push(committed); validateSimulationState(state, false);
   return { state, committed };
 }
-export function directCandidate(source: Readonly<SimulationState>, record: DirectStepRecord, step: CommittedStep, activatedAgentIds: string[]): WorldStepCandidate {
-  const candidate: WorldStepCandidate = {
-    directEvent: record, executionState: step.executionState, schemaVersion: WORLD_STEP_CANDIDATE_SCHEMA_VERSION, sourceStateHash: contentHash(source),
-    onsetPerception: { targets: [], receipts: [], requests: [], checks: [], commitmentRounds: [], rng: source.truth.rng },
-    resolution: { proposal: { baseRevision: source.revision, outcomes: step.outcomes, mechanicInvocations: [], operations: step.operations, events: step.events,
-      observations: step.observations, decisionRequests: [] }, initialActions: step.initialActions, actions: step.actions, reactionRequests: [], reactionDecisions: [],
-      stimulusObservations: [], requests: [], checks: [], randomRequests: record.randomRequests, randomResults: record.randomResults, commitmentRounds: [], resolutionPlans: [], resolutionReceipts: [],
-      rng: step.rngAfter, mechanicResults: [], causalAssertionResults: [], causalVerification: step.causalVerification },
-    finalCausalReview: { contentHash: "", evidenceHash: contentHash(record.decisions), promptVersion: "direct-world-v1", invocationIds: record.modelAudits.flatMap(audit => audit.invocations.map(invocation => invocation.id)) },
-    mindCommits: [], modelAudits: record.modelAudits, interactionDependencies: [], diagnostics: { activatedAgentIds,
-      reusedAgentIds: Object.keys(source.agents).filter(id => !activatedAgentIds.includes(id)), mindFallbackAgentIds: [], dependencyComponents: [], globalReadjudication: false },
-    temporalPlans: [], temporalBoundary: step.temporalBoundary, temporalState: step.temporalState, activityTransitions: [], activityDispositions: [], sharedResourceAdmissions: [], decisionPoints: [],
-  };
-  candidate.finalCausalReview.contentHash = finalCausalReviewContentHash(candidate); return candidate;
-}
 export function replayDirectStep(source: Readonly<SimulationState>, step: CommittedStep): SimulationState {
   if (!step.directEvent) throw new Error("missing direct event");
-  const result = commitDirectRecord(source, step.directEvent);
+  const result = commitDirectRecord(source, directRecord(step));
   const comparable = (value: CommittedStep) => Object.fromEntries(Object.entries(value).filter(([key]) => key !== "executionRef" && key !== "contentHash"));
   if (contentHash(comparable(result.committed)) !== contentHash(comparable(step))) throw new Error("direct replay differs from the committed receipt");
   result.state.history[result.state.history.length - 1] = structuredClone(step); return result.state;
+}
+
+export function directControlAfter(before: import("./contracts").DirectRuntimeState, record: Pick<DirectStepRecord, "controlDelta">): import("./contracts").DirectRuntimeState {
+  return applyJsonDelta(before as unknown as JsonObject, record.controlDelta) as unknown as import("./contracts").DirectRuntimeState;
+}
+
+/** Historical readers follow the same hash-bound control journal as replay. */
+export function* directControlHistory(state: Readonly<SimulationState>): Generator<[number, import("./contracts").DirectRuntimeState]> {
+  let control = state.bootstrapDirect?.control;
+  if (!control) return;
+  for (const step of state.history) {
+    if (!step.directEvent) throw new Error("direct history contains another protocol");
+    control = directControlAfter(control, step.directEvent);
+    yield [step.revision, control];
+  }
+}
+
+export function directRecord(step: DirectCommittedStep): DirectStepRecord {
+  return { ...step.directEvent, operations: step.operations, events: step.events, outcomes: step.outcomes,
+    observations: step.observations, beliefPatches: step.beliefPatches, characterPatches: step.characterPatches,
+    randomRequests: step.randomRequests, randomResults: step.randomResults, rng: step.rngAfter,
+    fromSeconds: step.temporalBoundary.fromElapsedSeconds, atSeconds: step.temporalBoundary.toElapsedSeconds };
 }

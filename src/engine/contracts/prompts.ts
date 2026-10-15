@@ -1,3 +1,4 @@
+import { requireReferenceStep } from "./committed-step";
 import { schemaValidationIssues } from "./schema-validation-issues";
 import { perceptionReferenceCatalog, projectPerceptionTargets, type PerceptionTarget } from "./perception-references";
 import { contentHash } from "../models/model-audit";
@@ -895,7 +896,7 @@ function projectModelHistory(
   state: Readonly<SimulationState>,
   resolvers: ModelReferenceResolvers,
 ): unknown[] {
-  return state.history.map((step) => ({
+  return state.history.map(requireReferenceStep).map((step) => ({
     revision: step.revision,
     step: step.step,
     actions: step.actions.map((action) => projectModelAction(action, resolvers.existing)),
@@ -1552,7 +1553,7 @@ export function createTruthReferenceResolver(input: {
       visibility: "role" as const,
       statePath: `history.${step.revision}.operations.${index}`,
     }))),
-    ...state.history.flatMap((step) => step.mechanicInvocations.map((invocation) => ({
+    ...state.history.map(requireReferenceStep).flatMap((step) => step.mechanicInvocations.map((invocation) => ({
       kind: "mechanic" as const,
       engineId: invocation.id,
       label: `${invocation.packageId}/${invocation.ruleId}`,
@@ -1561,7 +1562,7 @@ export function createTruthReferenceResolver(input: {
       visibility: "role" as const,
       statePath: `history.${step.revision}.mechanicInvocations.${invocation.id}`,
     }))),
-    ...state.history.flatMap((step) => step.resolutionPlans.map((plan) => ({
+    ...state.history.map(requireReferenceStep).flatMap((step) => step.resolutionPlans.map((plan) => ({
       kind: "plan" as const,
       engineId: plan.id,
       label: compactLabel(plan.goal),
@@ -1584,7 +1585,7 @@ export function createTruthReferenceResolver(input: {
       meaning: "a committed check result available to the current stage", allowedUses: ["cause", "assertion", "source"] as const,
       visibility: "role" as const, statePath: `execution.checks.${check.id}`,
     })),
-    ...state.history.flatMap((step) => step.checks.map((check) => ({
+    ...state.history.map(requireReferenceStep).flatMap((step) => step.checks.map((check) => ({
       kind: "check" as const,
       engineId: check.requestId,
       label: check.requestId,

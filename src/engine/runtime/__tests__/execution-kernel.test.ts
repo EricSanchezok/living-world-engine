@@ -7,13 +7,13 @@ import {
   defineAlgorithmManifest,
   WorldExecutionAlgorithmRegistry,
   type AlgorithmManifest,
-  type BootstrapCandidate,
+  type ReferenceBootstrapCandidate,
   type BootstrapInput,
   type ExecutionContext,
-  type WorldExecutionAlgorithm,
-  type WorldStepCandidate,
+  type ReferenceWorldExecutionAlgorithm,
+  type ReferenceStepCandidate,
   type WorldStepInput,
-  type WorldStepPreparation,
+  type ReferenceStepPreparation,
 } from "../execution";
 import { contentHash } from "../../models/model-audit";
 import { SimulationEngine } from "../simulation";
@@ -25,16 +25,17 @@ function algorithmManifest(id = "mutation-probe"): AlgorithmManifest {
   return defineAlgorithmManifest({ id, version: "1", config: {}, children: {} });
 }
 
-class MutatingAlgorithm implements WorldExecutionAlgorithm {
+class MutatingAlgorithm implements ReferenceWorldExecutionAlgorithm {
+  readonly protocol = "reference" as const;
   constructor(readonly manifest = algorithmManifest()) {}
 
-  async bootstrap(input: Readonly<BootstrapInput>, context: ExecutionContext): Promise<BootstrapCandidate> {
+  async bootstrap(input: Readonly<BootstrapInput>, context: ExecutionContext): Promise<ReferenceBootstrapCandidate> {
     void context;
     (input.state as { truth: { elapsedSeconds: number } }).truth.elapsedSeconds = 999;
     throw new Error("candidate generation failed");
   }
 
-  async prepareStep(input: Readonly<WorldStepInput>, context: ExecutionContext): Promise<WorldStepPreparation> {
+  async prepareStep(input: Readonly<WorldStepInput>, context: ExecutionContext): Promise<ReferenceStepPreparation> {
     void input;
     void context;
     throw new Error("unused");
@@ -42,10 +43,10 @@ class MutatingAlgorithm implements WorldExecutionAlgorithm {
 
   async completeStep(
     input: Readonly<WorldStepInput>,
-    preparation: Readonly<WorldStepPreparation>,
+    preparation: Readonly<ReferenceStepPreparation>,
     reactions: readonly import("../execution").ExternalReactionInput[],
     context: ExecutionContext,
-  ): Promise<WorldStepCandidate> {
+  ): Promise<ReferenceStepCandidate> {
     void input;
     void preparation;
     void reactions;
@@ -88,7 +89,7 @@ describe("execution kernel boundary", () => {
       role: "world-execution",
       id: "configured",
       version: "1",
-      contractVersion: 12,
+      contractVersion: 13,
       maturity: "diagnostic",
       configSchema: z.strictObject({ slots: z.number().int().positive() }),
       children: [],

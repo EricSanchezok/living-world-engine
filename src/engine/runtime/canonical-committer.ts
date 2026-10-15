@@ -1,15 +1,15 @@
+import { assertExactKeys } from "./json";
 import type { RulePackageRegistry } from "../mechanics/rule-package";
-import { applyDirectBootstrap, commitDirectRecord, directCandidate } from "../direct/canonical";
+import { applyDirectBootstrap, commitDirectRecord } from "../direct/canonical";
 import { validateAlgorithmExecutionState } from "./execution-state";
 import { validateOnsetPerceptionReceipts } from "../mechanics/onset-receipts";
 import type { WorldDefinition } from "./world-definition";
-import type { WorldStepPreparation } from "./execution";
+import type { WorldStepPreparation, WorldStepCandidate, BootstrapCandidate } from "./execution";
 import type {
   InteractionDependency,
-  BootstrapCandidate,
   ExecutionRef,
   PolicyBinding,
-  WorldStepCandidate,
+  ReferenceStepCandidate,
 } from "./execution";
 import { observedExternalInterruptions } from "../mechanics/observed-activity-interruptions";
 import {
@@ -32,6 +32,7 @@ import type {
   AgentActionProposal,
   AgentState,
   CommittedStep,
+  ReferenceCommittedStep,
   ObservationPacket,
   MeterState,
   QuantityState,
@@ -217,7 +218,7 @@ function validateStepDiagnostics(
   source: Readonly<SimulationState>,
   transitioned: Readonly<SimulationState>,
   actions: readonly AgentActionProposal[],
-  candidate: Readonly<WorldStepCandidate>,
+  candidate: Readonly<ReferenceStepCandidate>,
   policyRoster: Readonly<Record<string, PolicyBinding>>,
 ): void {
   const diagnostics = candidate.diagnostics;
@@ -335,7 +336,7 @@ export function validateSelfConsequenceIntroductions(
 
 function validateCandidateReactions(
   source: Readonly<SimulationState>,
-  candidate: Readonly<WorldStepCandidate>,
+  candidate: Readonly<ReferenceStepCandidate>,
   policyRoster: Readonly<Record<string, PolicyBinding>>,
 ): void {
   const requests = candidate.resolution.reactionRequests;
@@ -415,7 +416,7 @@ function validateCandidateReactions(
 function validateCandidateBoundary(
   source: SimulationState,
   actions: readonly AgentActionProposal[],
-  candidate: WorldStepCandidate,
+  candidate: ReferenceStepCandidate,
   transitioned: SimulationState,
   maxAutonomousSpanSeconds: number,
   observations: readonly ObservationPacket[],
@@ -896,10 +897,11 @@ export class CanonicalCommitter {
   }
 
   bootstrap(sourceState: Readonly<SimulationState>, candidate: Readonly<BootstrapCandidate>, definition?: WorldDefinition): SimulationState {
-    if (candidate.directWorld) {
-      if (!definition || candidate.sourceStateHash !== contentHash(sourceState) || candidate.agentCommits.length || candidate.modelAudits.length ||
-        candidate.directWorld.authorityHash !== contentHash(toWorldRuntimeContract(definition))) throw new Error("direct bootstrap changed world authority");
-      return applyDirectBootstrap(sourceState, candidate.directWorld);
+    if ("kind" in candidate) {
+      assertExactKeys(candidate, ["kind", "sourceStateHash", "bootstrap", "modelAudits"], [], "Direct bootstrap");
+      if (candidate.kind !== "direct" || !definition || candidate.sourceStateHash !== contentHash(sourceState) || candidate.modelAudits.length ||
+        candidate.bootstrap.authorityHash !== contentHash(toWorldRuntimeContract(definition))) throw new Error("direct bootstrap changed world authority");
+      return applyDirectBootstrap(sourceState, candidate.bootstrap);
     }
     const source = structuredClone(sourceState) as SimulationState;
     if (candidate.schemaVersion !== WORLD_STEP_CANDIDATE_SCHEMA_VERSION) {
@@ -954,16 +956,21 @@ export class CanonicalCommitter {
   } {
     const source = structuredClone(sourceState) as SimulationState;
     const candidate = structuredClone(candidateInput);
-    if (candidate.directEvent) {
+    if ("kind" in candidate) {
+      assertExactKeys(candidate, ["kind", "preparationId", "sourceStateHash", "record", "activatedAgentIds"], [], "Direct candidate");
       const preparation = authority.preparation;
-      if (candidate.sourceStateHash !== contentHash(source) || preparation.sourceStateHash !== contentHash(source) ||
-        preparation.policyRosterHash !== contentHash(policyRoster) || candidate.directEvent.authorityHash !== contentHash(toWorldRuntimeContract(authority.definition)) ||
-        contentHash(candidate.directEvent) !== contentHash(preparation.payload.record)) throw new Error("direct commit differs from frozen preparation");
-      const result = commitDirectRecord(source, candidate.directEvent);
-      const expected = directCandidate(source, candidate.directEvent, result.committed, candidate.diagnostics.activatedAgentIds);
-      if (contentHash(candidate) !== contentHash(expected)) throw new Error("direct candidate presentation changed");
-      validateSimulationState(result.state, false, true, this.rulePackages); return result;
+      assertExactKeys(preparation, ["kind", "id", "sourceStateHash", "algorithmManifestHash", "policyRosterHash", "requestHash", "record", "activatedAgentIds"], [], "Direct preparation");
+      if (candidate.kind !== "direct" || !("kind" in preparation) || preparation.kind !== "direct") throw new Error("direct candidate requires its native preparation");
+      const { id, ...body } = preparation;
+      if (id !== contentHash(body) || candidate.preparationId !== id || candidate.sourceStateHash !== contentHash(source) ||
+        preparation.sourceStateHash !== candidate.sourceStateHash || preparation.algorithmManifestHash !== candidate.record.producerHash ||
+        preparation.policyRosterHash !== contentHash(policyRoster) || candidate.record.authorityHash !== contentHash(toWorldRuntimeContract(authority.definition)) ||
+        contentHash(candidate.record) !== contentHash(preparation.record) ||
+        contentHash(candidate.activatedAgentIds) !== contentHash(preparation.activatedAgentIds)) throw new Error("direct commit differs from frozen preparation");
+      validateUniqueAgentIds(candidate.activatedAgentIds, "direct activation", new Set(Object.keys(source.agents)));
+      return commitDirectRecord(source, candidate.record);
     }
+    if ("kind" in authority.preparation) throw new Error("reference candidate requires its reference preparation");
     validateAlgorithmExecutionState(source.executionState, authority.preparation.algorithmManifestHash);
     validateAlgorithmExecutionState(candidate.executionState, authority.preparation.algorithmManifestHash);
     if (contentHash(candidate.executionState) !== contentHash(authority.preparation.executionState)) throw new Error("execution state differs from frozen preparation");
@@ -1048,7 +1055,7 @@ export class CanonicalCommitter {
     transitioned.historyBase ??= createHistoryReplayBase(source);
     transitioned.executionState = structuredClone(candidate.executionState);
     validateSimulationState(transitioned, false);
-    const semanticPayload: Omit<CommittedStep, "contentHash" | "semanticHash"> = {
+    const semanticPayload: Omit<ReferenceCommittedStep, "contentHash" | "semanticHash"> = {
       executionState: structuredClone(candidate.executionState),
       baseRevision: source.revision,
       revision: transitioned.revision,
@@ -1086,11 +1093,11 @@ export class CanonicalCommitter {
       characterPatches: mindCommits.map((commit) => structuredClone(commit.characterPatch)),
       nextActions: mindCommits.map((commit) => structuredClone(commit.nextAction)),
     };
-    const committedPayload: Omit<CommittedStep, "contentHash"> = {
+    const committedPayload: Omit<ReferenceCommittedStep, "contentHash"> = {
       semanticHash: contentHash(semanticPayload),
       ...semanticPayload,
     };
-    const committed: CommittedStep = { contentHash: contentHash(committedPayload), ...committedPayload };
+    const committed: ReferenceCommittedStep = { contentHash: contentHash(committedPayload), ...committedPayload };
     transitioned.history.push(committed);
     validateSimulationState(transitioned, false, true);
     return { committed: structuredClone(committed), state: transitioned };

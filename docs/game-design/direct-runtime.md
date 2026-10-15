@@ -1,6 +1,6 @@
 # Direct world runtime
 
-This reference owns the default `direct-world@3` execution contract, approved in [Spec 0182](../specs/0182-jev-direct-world-runtime.md). Its implementation lives in [`src/engine/direct/`](../../src/engine/direct/algorithm.ts). The script contract is v17, SimulationState is v20 and WorldInstanceDocument is v27.
+This reference owns the default `direct-world@4` execution contract, approved in [Spec 0182](../specs/0182-jev-direct-world-runtime.md). Its implementation lives in [`src/engine/direct/`](../../src/engine/direct/algorithm.ts). The script contract is v17, SimulationState is v21 and WorldInstanceDocument is v28.
 
 ## Model responsibilities
 
@@ -41,6 +41,12 @@ Under [Spec 0184](../specs/0184-conversational-continuity-and-recovery.md), auto
 Shared request, currency and token caps and unresolved usage are typed service pauses. Their causes survive provider wrappers, appear separately from world outcomes, suspend reply clocks and stop automatic work. Saved effects and published paragraphs remain available through reads and restart. A deliberate new request can resume when service capacity is restored. A cap during narrative generation preserves the accepted prefix and adds available factual feedback without another model retry.
 
 ## Mechanical commit and replay
+
+`DirectStepPreparation` freezes the source, producer, roster, request and native event under a content hash. `completeStep` verifies this binding and returns `DirectStepCandidate` without applying world operations. The canonical owner validates the frozen event and applies it once; explicit replay and persistence integrity verification use the same mechanical function. Direct does not construct reference resolution plans, reaction windows or AgentMind receipts.
+
+The current `DirectRuntimeState` is owned by `SimulationState.executionState`. Bootstrap retains its initial control state; each `DirectStepRecord` retains a lossless `controlDelta` with base and result hashes. Committed records contain shared effects and Direct metadata once, with no per-step execution-state snapshot. Inspector and narration reconstruct historical control in order. Decision cache entries retain answers and diagnostics; model audits belong to the event evidence rather than every cached answer.
+
+Direct debug stages are input binding, action selection, local adjudication, settlement, canonical validation and atomic commit. Reference pipelines expose their own stages and receipts only when explicitly selected.
 
 Code computes references, quantities, clamped numeric changes, resource conservation, time and IDs. A shortage becomes a blocked local result with no partial debit. The canonical transaction checks actual read hashes, ordered due events, producer identity, owned random commitments and replay identity, then saves the whole event atomically.
 

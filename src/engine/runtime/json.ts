@@ -60,3 +60,11 @@ export function frozenClone<T>(value: T): T {
   freeze(clone);
   return clone;
 }
+
+export function assertExactKeys(value: object, required: readonly string[], optional: readonly string[] = [], label = "object"): void {
+  const keys = Object.keys(value);
+  const allowed = new Set([...required, ...optional]);
+  if (required.some((key) => !keys.includes(key)) || keys.some((key) => !allowed.has(key))) {
+    throw new Error(`${label} has unexpected or missing fields`);
+  }
+}

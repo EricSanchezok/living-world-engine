@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import type { CompiledAction } from "../../src/engine/algorithms/roles";
-import type { WorldStepPreparation } from "../../src/engine/runtime/execution";
+import type { ReferenceStepPreparation } from "../../src/engine/runtime/execution";
 import { STEP_E2_BUDGET, STEP_E2_PROTOCOL } from "../../src/engine/benchmarks/step-efficiency/nonthinking-protocol";
 import { bindResolutionAdmission, runResolutionAdmission, type ResolutionAdmissionSource } from "../../src/engine/benchmarks/step-efficiency/resolution-admission";
 import { interactionDependencyForActivity } from "../../src/engine/mechanics/action-dependency";
@@ -27,7 +27,7 @@ const hashes = {
 type Payload = { planningState: ResolutionAdmissionSource["state"]; newActions: ResolutionAdmissionSource["actions"];
   dependencyResults: Array<{ dependency: ResolutionAdmissionSource["groundings"][number] }>;
   temporalPlanning: Array<Pick<CompiledAction, "plan" | "activity">>;
-  reactionRequests: WorldStepPreparation["pendingReactionRequests"]; sharedResourceAdmissions: Array<{ kind: string }> };
+  reactionRequests: ReferenceStepPreparation["pendingReactionRequests"]; sharedResourceAdmissions: Array<{ kind: string }> };
 const adapt = (arm: string, provider: StructuredModelProvider) => arm === "C" ? visiblePlanTargetProvider(provider) : provider;
 
 export function visibleTargetDecision(rows: ProbeRow[], incomplete: boolean) {
@@ -48,7 +48,7 @@ export async function prepareVisibleTargetProbe() {
     return value.value;
   };
   const input = artifact(hashes.input) as { definition: ResolutionAdmissionSource["definition"] };
-  const preparation = artifact(hashes.preparation) as WorldStepPreparation;
+  const preparation = artifact(hashes.preparation) as ReferenceStepPreparation;
   const payload = preparation.payload as unknown as Payload;
   const compilation = artifact(hashes.replacement) as { accepted: Array<{ key: string; result: CompiledAction }>; rejected: unknown[] };
   // Reproduce the one recorded prepared-action replacement using its accepted

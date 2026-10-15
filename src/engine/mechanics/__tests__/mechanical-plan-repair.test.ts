@@ -1,3 +1,4 @@
+import { requireReferenceStep } from "../../contracts/committed-step";
 import path from "node:path";
 import { expect, it } from "vitest";
 import { z } from "zod";
@@ -170,7 +171,7 @@ it.each(["baseline", "valid", "malformed-baseline", "malformed-valid", "wrong-ow
   } else {
     const completed = await result;
     expect(completed.state.revision).toBe(before.revision + 1);
-    expect(completed.committed.resolutionPlans).toHaveLength(2);
+    expect(requireReferenceStep(completed.committed).resolutionPlans).toHaveLength(2);
     expect(Object.values(completed.state.truth.conditions).filter(condition => condition.label === "Watching")).toHaveLength(2);
     expect(replaySimulationState(completed.state)).toEqual(completed.state);
   }

@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import Database from "better-sqlite3";
 import { describe, expect, it } from "vitest";
-import { defineAlgorithmManifest, type WorldStepCandidate } from "../../engine/runtime/execution";
+import { defineAlgorithmManifest, type ReferenceStepCandidate } from "../../engine/runtime/execution";
 import {
   aggregateMetricPoints,
   deriveExecutionWork,
@@ -517,7 +517,7 @@ describe("Execution Ledger", () => {
       if (agentCount > 1) {
         const events = ledger.executionEvents(original!.id);
         const logicalAudits = events.filter((event) => event.event === "execution.candidate.persisted" &&
-          event.attributes?.phase === "step").flatMap((event) => (event.payload as WorldStepCandidate).modelAudits);
+          event.attributes?.phase === "step").flatMap((event) => (event.payload as ReferenceStepCandidate).modelAudits);
         const physicalEvent = events.find((event) => {
           if (event.event !== "model.audit.persisted") return false;
           const physical = event.payload as ModelExecutionAudit;
@@ -550,7 +550,7 @@ describe("Execution Ledger", () => {
       const events = ledger.executionEvents(original.id);
       const candidateEvent = events.find((candidate) => candidate.event === "execution.candidate.persisted" &&
         candidate.attributes?.phase === "step")!;
-      const candidate = candidateEvent.payload as WorldStepCandidate;
+      const candidate = candidateEvent.payload as ReferenceStepCandidate;
       const outputEvent = events.find((candidateEventValue) => candidateEventValue.event === "model.structured_output.parsed" &&
         candidate.modelAudits.some((audit) => audit.invocations.some((invocation) =>
           invocation.id === candidateEventValue.correlation?.modelInvocationId)))!;

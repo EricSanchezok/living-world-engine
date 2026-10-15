@@ -42,7 +42,8 @@ export interface AgentIntentState {
   activeSubmission: import("../runtime/execution").ExternalActionInput | null;
   failure: { inputHash: string; message: string; recoverable: true; atRevision: number; servicePause: ModelServicePause | null } | null;
 }
-export interface DirectDecisionUse { batch: DecisionBatchV2; result: DecisionResultV2; reused: boolean }
+export type SavedDecisionResult = Omit<DecisionResultV2, "audits">;
+export interface DirectDecisionUse { batch: DecisionBatchV2; result: SavedDecisionResult; reused: boolean }
 export interface CapabilityDefinition {
   id: string; description: string; kind: ActionKind; scope: "world" | "private";
   ownerId: string | null; applicability: string; effectDescription: string; sourceIds: string[];
@@ -69,26 +70,26 @@ export interface PreparedDirectAction {
   requestProgress: "complete" | "continue" | "wait";
 }
 export interface DirectRuntimeState {
-  kind: "direct-world"; version: 1; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
+  kind: "direct-world"; version: 2; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
   models: { decision: string; creation: string; fallback: string };
   modelOverrides: { decision: string | null; creation: string | null; fallback: string | null };
   intents: Record<string, AgentIntentState>;
   activities: ActionFrame[];
   prepared: Record<string, PreparedDirectAction>;
   capabilities: CapabilityDefinition[];
-  cache: Array<{ key: string; result: DecisionResultV2 }>;
+  cache: Record<string, SavedDecisionResult>;
   dependencies: Record<string, { version: number; hash: string }>;
   completedSubmissionIds: string[];
 }
 export interface DirectBootstrap {
-  version: 1; producer: AlgorithmRef; authorityHash: string; control: DirectRuntimeState;
+  version: 2; producer: AlgorithmRef; authorityHash: string; control: DirectRuntimeState;
   modelCatalog: import("../models/model-catalog").ModelCatalogDocument;
 }
 export interface DirectStepRecord {
-  version: 1; id: string; baseRevision: number; producerHash: string; authorityHash: string;
-  reads: Record<string, string>; atSeconds: number;
+  version: 2; id: string; baseRevision: number; producerHash: string; authorityHash: string;
+  reads: Record<string, string>; fromSeconds: number; atSeconds: number;
   frames: ActionFrame[]; completedActionIds: string[];
-  control: DirectRuntimeState;
+  controlDelta: import("../runtime/json-delta").JsonDelta;
   operations: WorldDeltaOperation[]; events: WorldEvent[]; outcomes: ActionOutcome[];
   observations: ObservationPacket[]; beliefPatches: BeliefPatch[]; characterPatches: CharacterPatch[];
   cognition: DirectCognitiveUpdate[];
@@ -109,3 +110,62 @@ export interface DirectLocalView {
   entities: Record<string, string>;
 }
 export type AgentStateMap = Record<string, AgentState>;
+
+export interface DirectBootstrapCandidate {
+  kind: "direct";
+  sourceStateHash: string;
+  bootstrap: DirectBootstrap;
+  modelAudits: ModelExecutionAudit[];
+}
+
+export interface DirectStepPreparation {
+  kind: "direct";
+  id: string;
+  sourceStateHash: string;
+  algorithmManifestHash: string;
+  policyRosterHash: string;
+  requestHash: string;
+  record: DirectStepRecord;
+  activatedAgentIds: string[];
+}
+
+export interface DirectStepCandidate {
+  kind: "direct";
+  preparationId: string;
+  sourceStateHash: string;
+  record: DirectStepRecord;
+  activatedAgentIds: string[];
+}
+
+export interface DirectExecutionAlgorithm {
+  readonly protocol: "direct";
+  readonly manifest: import("../runtime/execution").AlgorithmManifest;
+  readonly rulePackages?: import("../mechanics/rule-package").RulePackageRegistry;
+  bootstrap(input: Readonly<import("../runtime/execution").BootstrapInput>, context: import("../runtime/execution").ExecutionContext): Promise<DirectBootstrapCandidate>;
+  prepareStep(input: Readonly<import("../runtime/execution").WorldStepInput>, context: import("../runtime/execution").ExecutionContext): Promise<DirectStepPreparation>;
+  completeStep(input: Readonly<import("../runtime/execution").WorldStepInput>, preparation: Readonly<DirectStepPreparation>,
+    reactions: readonly import("../runtime/execution").ExternalReactionInput[], context: import("../runtime/execution").ExecutionContext): Promise<DirectStepCandidate>;
+}
+
+/** Native receipt: common observable results are owned by the event exactly once. */
+export interface DirectCommittedStep {
+  directEvent: Omit<DirectStepRecord, "operations" | "events" | "outcomes" | "observations" | "beliefPatches" | "characterPatches" | "randomRequests" | "randomResults" | "rng" | "atSeconds" | "fromSeconds">;
+  actions: AgentActionProposal[];
+  operations: WorldDeltaOperation[];
+  events: WorldEvent[];
+  outcomes: ActionOutcome[];
+  observations: ObservationPacket[];
+  beliefPatches: BeliefPatch[];
+  characterPatches: CharacterPatch[];
+  randomRequests: DiscreteRandomRequest[];
+  randomResults: DiscreteRandomResult[];
+  rngBefore: SimulationState["truth"]["rng"];
+  rngAfter: SimulationState["truth"]["rng"];
+  temporalBoundary: import("../mechanics/temporal").TemporalBoundary;
+  contentHash: string;
+  semanticHash: string;
+  executionRef?: import("../runtime/execution").ExecutionRef;
+  baseRevision: number;
+  revision: number;
+  step: number;
+}

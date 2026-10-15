@@ -595,8 +595,8 @@ export interface AgentAdmissionCommit {
 
 export type WorldEventDraft = Omit<WorldEvent, "step">;
 
-export interface SimulationState {
-  schemaVersion: 20;
+export interface SimulationState<Step extends CommittedStep = CommittedStep> {
+  schemaVersion: 21;
   executionState: import("../runtime/execution-state").AlgorithmExecutionState | null;
   worldId: string;
   worldHash: string;
@@ -606,7 +606,7 @@ export interface SimulationState {
   truth: CanonicalWorldState;
   agents: Record<AgentId, AgentState>;
   admissions: AgentAdmissionCommit[];
-  history: CommittedStep[];
+  history: Step[];
   historyBase?: HistoryReplayBase;
   bootstrapAgentCommits: AgentMindCommit[];
   bootstrapDirect?: import("../direct/contracts").DirectBootstrap;
@@ -1204,8 +1204,8 @@ export interface ModelExecutionAudit {
   invocations: ModelInvocationAudit[];
 }
 
-export interface CommittedStep {
-  directEvent?: import("../direct/contracts").DirectStepRecord;
+export interface ReferenceCommittedStep {
+  directEvent?: never;
   executionState: import("../runtime/execution-state").AlgorithmExecutionState | null;
   contentHash: string;
   semanticHash: string;
@@ -1246,3 +1246,5 @@ export interface CommittedStep {
   characterPatches: CharacterPatch[];
   nextActions: AgentActionProposal[];
 }
+
+export type CommittedStep = ReferenceCommittedStep | import("../direct/contracts").DirectCommittedStep;

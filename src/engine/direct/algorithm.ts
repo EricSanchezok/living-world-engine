@@ -1,3 +1,4 @@
+import { createJsonDelta } from "../runtime/json-delta";
 import type { ModelExecutionAudit, SimulationState, WorldDeltaOperation, WorldEvent } from "../contracts/model";
 import type { RulePackageRegistry } from "../mechanics/rule-package";
 import { deriveConditionAdvance } from "../mechanics/condition-time";
@@ -5,9 +6,9 @@ import { evaluateCausalAssertion } from "../mechanics/causality";
 import { contentHash } from "../models/model-audit";
 import { modelServicePause } from "../models/service-failure";
 import type { StructuredModelProvider } from "../models/model-provider";
-import { defineAlgorithmManifest, algorithmRef, WORLD_STEP_CANDIDATE_SCHEMA_VERSION, WORLD_STEP_PREPARATION_SCHEMA_VERSION,
+import { defineAlgorithmManifest, algorithmRef,
   StepPreparationInvalidatedError, WorldQuiescentError, type BootstrapInput, type ExecutionContext, type ExternalReactionInput,
-  type WorldExecutionAlgorithm, type WorldStepInput, type WorldStepPreparation } from "../runtime/execution";
+  type WorldStepInput } from "../runtime/execution";
 import { executionStage } from "../runtime/stages";
 import { runtimeId } from "../runtime/runtime-id";
 import type { JsonObject } from "../runtime/json";
@@ -15,7 +16,7 @@ import { toWorldRuntimeContract } from "../runtime/world-definition";
 import { resolveCapabilityModels, type CapabilityModelOverrides } from "../models/capability-bindings";
 import { nextWorldClockBoundary } from "./clock";
 import { captureDependencies, readDependency, readDirectState, readyIntent, sealDirectState, wakeIntent } from "./state";
-import type { ActionFrame, DirectCognitiveUpdate, DirectStepRecord } from "./contracts";
+import type { ActionFrame, DirectCognitiveUpdate, DirectExecutionAlgorithm, DirectBootstrapCandidate, DirectStepCandidate, DirectStepPreparation } from "./contracts";
 import { DirectDecisions } from "./decisions";
 import { chooseAction } from "./actions";
 import { prepareActions } from "./world";
@@ -23,12 +24,12 @@ import { settlePreparedActions } from "./settlement";
 import type { PresentationReply } from "../contracts/discourse";
 import { activityBoundary, admitActivities } from "./activities";
 import { directPerception } from "./perception";
-import { commitDirectRecord, directCandidate, sealDirectRecord } from "./canonical";
+import { sealDirectRecord } from "./canonical";
 import { participantReactionIds } from "./foreground";
 
 export interface DirectWorldConfig extends CapabilityModelOverrides { creationEnabled: boolean }
 export const DIRECT_WORLD_CONFIG: DirectWorldConfig = { decision: null, creation: null, fallback: null, creationEnabled: true };
-export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "3", config: config as unknown as JsonObject });
+export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "4", config: config as unknown as JsonObject });
 export const directWorldAlgorithmRef = (config = DIRECT_WORLD_CONFIG) => algorithmRef(directWorldManifest(config));
 
 function components(state: Readonly<SimulationState>, frames: ActionFrame[]): ActionFrame[][] {
@@ -45,25 +46,25 @@ function components(state: Readonly<SimulationState>, frames: ActionFrame[]): Ac
   }
   return groups.map(group => group.frames);
 }
-export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
+export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
+  readonly protocol = "direct" as const;
   readonly manifest;
   constructor(readonly provider: StructuredModelProvider, readonly config: DirectWorldConfig = DIRECT_WORLD_CONFIG, readonly rulePackages?: RulePackageRegistry) {
     this.manifest = directWorldManifest(config);
   }
-  async bootstrap(input: Readonly<BootstrapInput>, context: ExecutionContext) {
+  async bootstrap(input: Readonly<BootstrapInput>, context: ExecutionContext): Promise<DirectBootstrapCandidate> {
     const registryHash = context.modelScope.modelRegistrySnapshotHash ?? (await this.provider.modelRegistryDiagnostics?.())?.registry.currentHash;
     if (!registryHash) throw new Error("direct runtime requires the captured model registry");
     const modelOverrides = { decision: this.config.decision, creation: this.config.creation, fallback: this.config.fallback };
-    const control = sealDirectState({ kind: "direct-world", version: 1, worldHash: input.state.worldHash,
+    const control = sealDirectState({ kind: "direct-world", version: 2, worldHash: input.state.worldHash,
       modelCatalogHash: this.provider.catalog.hash, registryHash, models: resolveCapabilityModels(input.definition.modelProfiles, modelOverrides), modelOverrides,
       intents: Object.fromEntries(Object.keys(input.state.agents).sort().map(id => [id, readyIntent()])),
-      activities: [], prepared: {}, capabilities: [], cache: [], dependencies: {}, completedSubmissionIds: [] });
-    return { schemaVersion: WORLD_STEP_CANDIDATE_SCHEMA_VERSION, sourceStateHash: contentHash(input.state), agentCommits: [], modelAudits: [],
-      diagnostics: { activatedAgentIds: [], reusedAgentIds: Object.keys(input.state.agents), mindFallbackAgentIds: [] },
-      directWorld: { version: 1 as const, producer: algorithmRef(this.manifest), authorityHash: contentHash(toWorldRuntimeContract(input.definition)), control,
+      activities: [], prepared: {}, capabilities: [], cache: {}, dependencies: {}, completedSubmissionIds: [] });
+    return { kind: "direct", sourceStateHash: contentHash(input.state), modelAudits: [],
+      bootstrap: { version: 2 as const, producer: algorithmRef(this.manifest), authorityHash: contentHash(toWorldRuntimeContract(input.definition)), control,
         modelCatalog: this.provider.catalog.snapshot() } };
   }
-  async prepareStep(input: Readonly<WorldStepInput>, context: ExecutionContext): Promise<WorldStepPreparation> {
+  async prepareStep(input: Readonly<WorldStepInput>, context: ExecutionContext): Promise<DirectStepPreparation> {
     const source = input.state;
     if (!source.executionState) throw new Error("bootstrap the direct world before advancing");
     const initial = readDirectState(source.executionState, source), control = structuredClone(initial);
@@ -86,7 +87,7 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
     }
     for (const [id, intent] of Object.entries(control.intents)) if (intent.wait?.untilSeconds !== null && intent.wait?.untilSeconds !== undefined &&
       intent.wait.untilSeconds <= source.truth.elapsedSeconds) wakeIntent(control, id, "deadline");
-    await context.stages?.before(executionStage("action-compilation"));
+    await context.stages?.before(executionStage("direct-action"));
     const submissions = input.request.externalActions.filter(action => !control.completedSubmissionIds.includes(action.submissionId));
     if (new Set(submissions.map(action => action.agentId)).size !== submissions.length) throw new Error("duplicate external actor");
     for (const action of submissions) {
@@ -126,10 +127,8 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
         if (result.reason?.audits) audits.push(...result.reason.audits);
       }
     });
-    await context.stages?.after(executionStage("action-compilation"));
-    await context.stages?.before(executionStage("reaction-perception"));
-    await context.stages?.after(executionStage("reaction-perception"));
-    await context.stages?.before(executionStage("temporal-dependency"));
+    await context.stages?.after(executionStage("direct-action"));
+    await context.stages?.before(executionStage("direct-adjudication"));
     // Adjudicate once, then retain executable effects across intervening clock boundaries.
     for (const frame of control.activities.filter(frame => frame.kind === "reflect")) {
       control.prepared[frame.id] = { actionId: frame.id, reads: {},
@@ -173,8 +172,8 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
     const atSeconds = newRandomCommitment || onlyControlWork || !boundaries.length ? source.truth.elapsedSeconds : Math.min(...boundaries);
     const due = control.activities.filter(frame => frame.activityStatus === "active" && frame.dueAtSeconds === atSeconds);
     for (const frame of due) Object.assign(reads, control.prepared[frame.id]!.reads);
-    await context.stages?.after(executionStage("temporal-dependency"));
-    await context.stages?.before(executionStage("truth-resolution"));
+    await context.stages?.after(executionStage("direct-adjudication"));
+    await context.stages?.before(executionStage("direct-settlement"));
     const { settlements, rng, randomRequests, randomResults } = settlePreparedActions(source, control, due);
     const completed = settlements.map(item => item.frame), completedActionIds = completed.map(frame => frame.id);
     const ongoing = completed.filter(frame => control.prepared[frame.id]!.ongoing && settlements.find(item => item.frame.id === frame.id)?.outcome.status === "succeeded");
@@ -258,32 +257,24 @@ export class DirectWorldAlgorithm implements WorldExecutionAlgorithm {
     // Completion order of independent HTTP requests cannot change persisted replay identity.
     decisions.uses.sort((a, b) => a.result.inputHash.localeCompare(b.result.inputHash));
     control.capabilities.sort((a, b) => a.id.localeCompare(b.id)); control.activities.sort((a, b) => a.id.localeCompare(b.id));
-    control.cache.sort((a, b) => a.key.localeCompare(b.key));
-    await context.stages?.after(executionStage("truth-resolution"));
-    await context.stages?.before(executionStage("transition-causal-verification"));
-    const record = sealDirectRecord({ version: 1, id: "", baseRevision: source.revision, producerHash: this.manifest.hash,
-      authorityHash: contentHash(authority), reads, atSeconds: effectiveTime, frames: completed, completedActionIds,
-      control: sealDirectState(control), operations, events, outcomes: settlements.map(item => item.outcome), ...perception,
+    await context.stages?.after(executionStage("direct-settlement"));
+    const record = sealDirectRecord({ version: 2, id: "", baseRevision: source.revision, producerHash: this.manifest.hash,
+      authorityHash: contentHash(authority), reads, fromSeconds: source.truth.elapsedSeconds, atSeconds: effectiveTime, frames: completed, completedActionIds,
+      controlDelta: createJsonDelta(initial as unknown as JsonObject, sealDirectState(control) as unknown as JsonObject), operations, events, outcomes: settlements.map(item => item.outcome), ...perception,
       characterPatches: [], cognition, presentation, decisions: decisions.uses, modelAudits: [...decisions.audits(), ...audits].sort((a, b) => contentHash(a).localeCompare(contentHash(b))),
       rng, randomRequests, randomResults, timerUpdates });
-    if (!operations.length && contentHash(initial) === contentHash(record.control)) throw new WorldQuiescentError(Object.entries(control.intents).flatMap(([ownerId, intent]) =>
+    if (!operations.length && contentHash(initial) === record.controlDelta.resultHash) throw new WorldQuiescentError(Object.entries(control.intents).flatMap(([ownerId, intent]) =>
       intent.failure ? [{ ownerId, phase: "direct-decision", ...intent.failure, reason: intent.failure.message }] : []));
-    await context.stages?.after(executionStage("transition-causal-verification"));
-    const body = { schemaVersion: WORLD_STEP_PREPARATION_SCHEMA_VERSION, sourceStateHash: contentHash(source), algorithmManifestHash: this.manifest.hash,
-      policyRosterHash: contentHash(input.policyRoster), requestHash: contentHash(input.request), executionState: { producerHash: this.manifest.hash, data: record.control as unknown as JsonObject },
-      onsetPerception: { targets: [], receipts: [], requests: [], checks: [], commitmentRounds: [], rng: source.truth.rng },
-      reactionRequests: [], pendingReactionRequests: [], preparedReactionDecisions: [], modelAudits: record.modelAudits,
-      payload: { record, activatedAgentIds } as unknown as JsonObject };
+    const body = { kind: "direct" as const, sourceStateHash: contentHash(source), algorithmManifestHash: this.manifest.hash,
+      policyRosterHash: contentHash(input.policyRoster), requestHash: contentHash(input.request), record, activatedAgentIds };
     return { ...body, id: contentHash(body) };
   }
-  async completeStep(input: Readonly<WorldStepInput>, preparation: Readonly<WorldStepPreparation>, reactions: readonly ExternalReactionInput[], context: ExecutionContext) {
+  async completeStep(input: Readonly<WorldStepInput>, preparation: Readonly<DirectStepPreparation>, reactions: readonly ExternalReactionInput[]): Promise<DirectStepCandidate> {
     const { id, ...body } = preparation;
     if (id !== contentHash(body) || preparation.sourceStateHash !== contentHash(input.state) || reactions.length ||
-      preparation.requestHash !== contentHash(input.request) || preparation.policyRosterHash !== contentHash(input.policyRoster)) throw new StepPreparationInvalidatedError();
-    await context.stages?.before(executionStage("observation-agent-mind"));
-    const record = preparation.payload.record as unknown as DirectStepRecord;
-    const { committed } = commitDirectRecord(input.state, record);
-    await context.stages?.after(executionStage("observation-agent-mind"));
-    return directCandidate(input.state, record, committed, preparation.payload.activatedAgentIds as string[]);
+      preparation.algorithmManifestHash !== this.manifest.hash || preparation.requestHash !== contentHash(input.request) ||
+      preparation.policyRosterHash !== contentHash(input.policyRoster)) throw new StepPreparationInvalidatedError();
+    return { kind: "direct", preparationId: id, sourceStateHash: preparation.sourceStateHash,
+      record: preparation.record, activatedAgentIds: preparation.activatedAgentIds };
   }
 }

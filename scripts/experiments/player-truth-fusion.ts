@@ -20,7 +20,7 @@ import { createModelFetchResolver } from "../../src/engine/models/model-network"
 import { completeDeepSeekJsonStream } from "../../src/engine/models/deepseek-json-stream";
 import { ModelRegistry } from "../../src/engine/models/model-registry";
 import { ModelConfigurationError, type ModelExecutionScope, type StructuredModelProvider } from "../../src/engine/models/model-provider";
-import type { WorldStepInput, WorldStepPreparation } from "../../src/engine/runtime/execution";
+import type { WorldStepInput, ReferenceStepPreparation } from "../../src/engine/runtime/execution";
 import { RecordingRuntimeObserver, type RuntimeEvent } from "../../src/engine/runtime/observability";
 import { createActionCompilationRetrievalRuntimeProvider } from "../../src/server/action-compilation-retrieval-runtime";
 import { isContinuationRepair } from "./player-plan-continuation";
@@ -61,7 +61,7 @@ export async function capturePlayerTruthSource(root: string) {
   const events = read<RuntimeEvent[]>(path.join(root, "run/ledger-events.json"));
   const preparationEvent = events.find(e => e.event === "step.preparation.started")!;
   const input = structuredClone(preparationEvent.payload) as unknown as WorldStepInput;
-  const preparation = structuredClone(events.find(e => e.event === "execution.preparation.persisted")!.payload) as unknown as WorldStepPreparation;
+  const preparation = structuredClone(events.find(e => e.event === "execution.preparation.persisted")!.payload) as unknown as ReferenceStepPreparation;
   const committed = read<{ committed: { actions: TruthPreparationInput["initialActions"] } }>(path.join(root, "run/step-1-evidence.json")).committed;
   if (Object.keys(input.state.agents).length !== 49 || committed.actions.length !== 49 || preparation.pendingReactionRequests.length) throw new Error("Expected the complete closed 49-Agent source");
   const catalog = loadModelCatalog(path.join(root, "models.yaml"));
@@ -94,6 +94,7 @@ export async function capturePlayerTruthSource(root: string) {
   // Exact source, policy, action, receipt and request hashes are still checked.
   preparation.algorithmManifestHash = constructed.algorithm.manifest.hash;
   try {
+    if (constructed.algorithm.protocol === "direct") throw new Error("probe requires the reference protocol");
     await constructed.algorithm.completeStep(input, preparation, [], { instrumentation: { emit: () => undefined },
       modelScope: { workloadId: "frozen-source-capture", batchId: "frozen-source-capture",
         runtimeIdentity: { worldHash: input.state.worldHash, revision: input.state.revision } } });

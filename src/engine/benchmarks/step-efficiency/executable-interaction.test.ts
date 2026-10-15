@@ -1,3 +1,4 @@
+import { requireReferenceStep } from "../../contracts/committed-step";
 import path from "node:path";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -181,6 +182,7 @@ it.each(["keep", "replace"] as const)("restores, commits and replays the diagnos
     const request = { expectedRevision: source.revision, trigger: "manual" as const, externalActions: [] };
     const scope = { workloadId: "executable-test", batchId: "executable-test", observer };
     const prepared = await engine.prepareStep(roster, request, scope);
+    if ("kind" in prepared) throw new Error("benchmark requires reference preparation");
     expect(Object.keys(prepared.executionState!.data.executableInteractions!)).toHaveLength(2);
     expect(prepared.reactionRequests).toHaveLength(2);
     const frozenHash = contentHash(prepared);
@@ -188,7 +190,7 @@ it.each(["keep", "replace"] as const)("restores, commits and replays the diagnos
     const result = await restarted.completePreparedStep(roster, request, JSON.parse(JSON.stringify(prepared)), [], scope);
     expect(result.state.executionState).toEqual(prepared.executionState);
     expect(contentHash(prepared)).toBe(frozenHash);
-    expect(result.committed.reactionDecisions.every(decision => decision.kind === reaction)).toBe(true);
+    expect(requireReferenceStep(result.committed).reactionDecisions.every(decision => decision.kind === reaction)).toBe(true);
     expect(observer.snapshot().some(e => e.event === "algorithm.executable_interaction.executed")).toBe(true);
     expect(observer.snapshot().filter(e => e.event === "algorithm.executable_interaction.fallback")).toEqual([]);
     expect(result.state.truth.events.filter(e => e.description.includes("钥匙是真的"))).toHaveLength(2);

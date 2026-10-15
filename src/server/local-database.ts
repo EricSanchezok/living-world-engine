@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { mkdirSync } from "node:fs";
 import path from "node:path";
-import { gunzipSync, gzipSync } from "node:zlib";
+import { JsonBlockStore } from "./json-block-store";
 import Database from "better-sqlite3";
 import { canonicalize, contentHash } from "../engine/models/model-audit";
 import { attachExecutionRef } from "../engine/runtime/canonical-committer";
@@ -27,8 +27,7 @@ import { buildWorldDefinition, hashWorldTemplate, parseWorldTemplate } from "../
 import type { WorldCatalogEntry, WorldRepository } from "../script/world-repository";
 import { parseWorldArchive, WorldImportError, type WorldImportResult } from "./world-import";
 import {
-  parseWorldInstanceDocument,
-  serializeWorldInstanceDocument,
+  validateWorldInstanceDocument,
   WorldInstanceConflictError,
   WorldInstanceNotFoundError,
   type WorldInstanceStore,
@@ -104,7 +103,7 @@ interface WorldRow {
 
 interface InstanceRow {
   generation: number;
-  document_json: string;
+  document_hash: string;
 }
 
 interface ListedInstanceRow extends InstanceRow {
@@ -113,7 +112,7 @@ interface ListedInstanceRow extends InstanceRow {
 
 interface ValidatedInstanceCacheEntry {
   generation: number;
-  serialized: string;
+  documentHash: string;
   documentUtf8Bytes: number;
   document: WorldInstanceDocument;
 }
@@ -161,10 +160,10 @@ interface ExecutionArtifactRow {
   execution_id: string;
   kind: string;
   media_type: string;
-  encoding: "gzip";
+  encoding: "json-blocks";
   raw_bytes: number;
   stored_bytes: number;
-  body: Buffer;
+  root_hash: string;
   created_at: string;
 }
 
@@ -372,6 +371,8 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
   readonly created: boolean;
   readonly rulePackages: RulePackageRegistry;
   private readonly connection: Database.Database;
+  private readonly blocks: JsonBlockStore;
+  private dataVersion = 0;
   private readonly ownerId: string;
   private readonly readOnly: boolean;
   private readonly now: () => number;
@@ -391,6 +392,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
       timeout: 5_000,
       ...(this.readOnly ? { readonly: true, fileMustExist: true } : {}),
     });
+    this.blocks = new JsonBlockStore(this.connection);
     this.ownerId = options.ownerId ?? `${process.pid}:${randomUUID()}`;
     this.now = options.now ?? Date.now;
     this.isProcessAlive = options.isProcessAlive ?? isLocalProcessAlive;
@@ -413,15 +415,28 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
         this.recoverInterruptedExecutions();
       } else {
         this.created = false;
+        this.requireSchemaVersion();
       }
     } catch (error) {
       this.connection.close();
       throw error;
     }
+    this.dataVersion = this.connection.pragma("data_version", { simple: true }) as number;
     if (!this.readOnly && options.heartbeat !== false) {
       this.heartbeatTimer = setInterval(() => this.renewInstanceLease(), INSTANCE_HEARTBEAT_MS);
       this.heartbeatTimer.unref();
     }
+  }
+
+  private requireSchemaVersion(): void {
+    const row = this.connection.prepare("SELECT MAX(version) AS version FROM schema_migrations").get() as { version: number };
+    if (row.version !== 9) throw new Error("local database schema v9 required; use a new LIVINGWORLD_DATA_ROOT");
+  }
+
+  private invalidateExternalChanges(): void {
+    const version = this.connection.pragma("data_version", { simple: true }) as number;
+    if (version !== this.dataVersion) this.validatedInstances.clear();
+    this.dataVersion = version;
   }
 
   private assertWritable(): void {
@@ -431,13 +446,13 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
   private cacheValidatedInstance(
     instanceId: string,
     generation: number,
-    serialized: string,
+    documentHash: string,
     document: WorldInstanceDocument,
   ): ValidatedInstanceCacheEntry {
     const entry = {
       generation,
-      serialized,
-      documentUtf8Bytes: Buffer.byteLength(serialized, "utf8"),
+      documentHash,
+      documentUtf8Bytes: Buffer.byteLength(JSON.stringify(document), "utf8"),
       document: structuredClone(document),
     };
     this.validatedInstances.delete(instanceId);
@@ -456,7 +471,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
     promote = true,
   ): ValidatedInstanceCacheEntry | undefined {
     const cached = this.validatedInstances.get(instanceId);
-    if (!cached || cached.generation !== row.generation || cached.serialized !== row.document_json) {
+    if (!cached || cached.generation !== row.generation || cached.documentHash !== row.document_hash) {
       if (cached) this.validatedInstances.delete(instanceId);
       return undefined;
     }
@@ -497,9 +512,9 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
       const current = this.connection.prepare("SELECT MAX(version) AS version FROM schema_migrations")
         .get() as { version: number | null };
       const currentVersion = current.version ?? 0;
-      if (currentVersion > 8) throw new Error("local database schema is newer than this application");
-      if (currentVersion > 0 && currentVersion < 8) {
-        throw new Error("local database schema is older than v8; use a new LIVINGWORLD_DATA_ROOT");
+      if (currentVersion > 9) throw new Error("local database schema is newer than this application");
+      if (currentVersion > 0 && currentVersion < 9) {
+        throw new Error("local database schema is older than v9; use a new LIVINGWORLD_DATA_ROOT");
       }
       if (currentVersion === 0) this.connection.exec(`
         CREATE TABLE instance_lock (
@@ -555,15 +570,19 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
         ) STRICT;
         CREATE INDEX executions_instance_step ON executions(instance_id, step, started_at);
         CREATE INDEX executions_parent ON executions(parent_execution_id, started_at);
+        CREATE TABLE json_blocks (
+          hash TEXT PRIMARY KEY,
+          body BLOB NOT NULL
+        ) STRICT;
         CREATE TABLE execution_artifacts (
           hash TEXT PRIMARY KEY,
           execution_id TEXT NOT NULL,
           kind TEXT NOT NULL,
           media_type TEXT NOT NULL,
-          encoding TEXT NOT NULL CHECK (encoding = 'gzip'),
+          encoding TEXT NOT NULL CHECK (encoding = 'json-blocks'),
           raw_bytes INTEGER NOT NULL CHECK (raw_bytes >= 0),
           stored_bytes INTEGER NOT NULL CHECK (stored_bytes >= 0),
-          body BLOB NOT NULL,
+          root_hash TEXT NOT NULL REFERENCES json_blocks(hash),
           created_at TEXT NOT NULL,
           FOREIGN KEY (execution_id) REFERENCES executions(id)
         ) STRICT;
@@ -684,7 +703,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
           generation INTEGER NOT NULL CHECK (generation > 0),
           world_id TEXT NOT NULL,
           world_hash TEXT NOT NULL,
-          document_json TEXT NOT NULL,
+          document_hash TEXT NOT NULL REFERENCES json_blocks(hash),
           created_at TEXT NOT NULL,
           updated_at TEXT NOT NULL
         ) STRICT;
@@ -698,7 +717,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
         ) STRICT;
       `);
       if (currentVersion === 0) {
-        this.connection.prepare("INSERT INTO schema_migrations(version, applied_at) VALUES (8, ?)")
+        this.connection.prepare("INSERT INTO schema_migrations(version, applied_at) VALUES (9, ?)")
           .run(new Date(this.now()).toISOString());
         this.connection.prepare("INSERT INTO debug_index_meta(singleton, version, rebuilt_at) VALUES (1, ?, ?)")
           .run(DEBUG_INDEX_VERSION, new Date(this.now()).toISOString());
@@ -786,24 +805,13 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
   private persistExecutionArtifact(executionId: string, kind: string, value: unknown): string {
     if (!kind.trim()) throw new Error("execution artifact kind cannot be empty");
     const normalized = canonicalize(value);
-    const serialized = JSON.stringify(normalized);
-    if (serialized === undefined) throw new Error("execution artifact must be JSON serializable");
-    const raw = Buffer.from(serialized, "utf8");
+    const stored = this.blocks.put(normalized);
     const hash = contentHash(normalized);
-    const compressed = gzipSync(raw);
     this.connection.prepare(`
       INSERT OR IGNORE INTO execution_artifacts(
-        hash, execution_id, kind, media_type, encoding, raw_bytes, stored_bytes, body, created_at
-      ) VALUES (?, ?, ?, 'application/json', 'gzip', ?, ?, ?, ?)
-    `).run(
-      hash,
-      executionId,
-      kind,
-      raw.byteLength,
-      compressed.byteLength,
-      compressed,
-      new Date(this.now()).toISOString(),
-    );
+        hash, execution_id, kind, media_type, encoding, raw_bytes, stored_bytes, root_hash, created_at
+      ) VALUES (?, ?, ?, 'application/json', 'json-blocks', ?, ?, ?, ?)
+    `).run(hash, executionId, kind, stored.rawBytes, stored.writtenBytes, stored.hash, new Date(this.now()).toISOString());
     return hash;
   }
 
@@ -1655,7 +1663,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
       WHERE execution.id IS NULL
     `);
     const warnings: string[] = [];
-    if (schemaVersion !== 8) warnings.push(`expected database schema v8, found v${schemaVersion}`);
+    if (schemaVersion !== 9) warnings.push(`expected database schema v9, found v${schemaVersion}`);
     if (indexVersion !== DEBUG_INDEX_VERSION) warnings.push(`expected debug index v${DEBUG_INDEX_VERSION}, found v${indexVersion}`);
     if (indexedEventCount !== eventCount) warnings.push(`event index count ${indexedEventCount} differs from Ledger count ${eventCount}`);
     if (orphanedIndexRows > 0) warnings.push(`${orphanedIndexRows} orphaned debug index row(s)`);
@@ -1684,6 +1692,8 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
     const row = this.connection.prepare("SELECT * FROM execution_artifacts WHERE hash = ?")
       .get(hash) as ExecutionArtifactRow | undefined;
     if (!row) return undefined;
+    const value = this.blocks.read(row.root_hash);
+    if (contentHash(value) !== row.hash) throw new Error(`execution artifact hash mismatch ${hash}`);
     return {
       hash: row.hash,
       executionId: row.execution_id,
@@ -1693,7 +1703,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
       rawBytes: row.raw_bytes,
       storedBytes: row.stored_bytes,
       createdAt: row.created_at,
-      value: JSON.parse(gunzipSync(row.body).toString("utf8")),
+      value,
     };
   }
 
@@ -1885,20 +1895,22 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
   createInstance(document: WorldInstanceDocument, correlation?: RuntimeCorrelation): StoredWorldInstance {
     this.assertWritable();
     const startedAt = Date.now();
-    const serialized = serializeWorldInstanceDocument(document, this.rulePackages);
+    validateWorldInstanceDocument(document, this.rulePackages);
+    let documentHash = "";
     try {
       this.connection.transaction(() => {
         this.assertInstanceLease();
+        documentHash = this.blocks.put(document).hash;
         try {
           this.connection.prepare(`
             INSERT INTO world_instances(
-              id, generation, world_id, world_hash, document_json, created_at, updated_at
+              id, generation, world_id, world_hash, document_hash, created_at, updated_at
             ) VALUES (?, 1, ?, ?, ?, ?, ?)
           `).run(
             document.id,
             document.world.id,
             document.world.contentHash,
-            serialized,
+            documentHash,
             document.createdAt,
             document.updatedAt,
           );
@@ -1909,12 +1921,12 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
           throw error;
         }
       })();
-      const cached = this.cacheValidatedInstance(document.id, 1, serialized, document);
+      const cached = this.cacheValidatedInstance(document.id, 1, documentHash, document);
       this.observe?.({
         event: "persistence.write.completed",
         correlation: { ...correlation, instanceId: document.id },
         durationMs: Math.max(0, Date.now() - startedAt),
-        measurements: { documentUtf8Bytes: Buffer.byteLength(serialized, "utf8") },
+        measurements: { documentUtf8Bytes: cached.documentUtf8Bytes },
         attributes: { sink: "sqlite", operation: "create" },
       });
       return { generation: 1, document: structuredClone(cached.document) };
@@ -1931,10 +1943,18 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
     }
   }
 
+  private readInstanceDocument(hash: string, expectedId: string): WorldInstanceDocument {
+    const document = this.blocks.read(hash) as unknown as WorldInstanceDocument;
+    validateWorldInstanceDocument(document, this.rulePackages);
+    if (document.id !== expectedId) throw new Error("world instance id mismatch");
+    return document;
+  }
+
   readInstance(instanceId: string, correlation?: RuntimeCorrelation): StoredWorldInstance {
+    this.invalidateExternalChanges();
     const startedAt = Date.now();
     const row = this.connection.prepare(
-      "SELECT generation, document_json FROM world_instances WHERE id = ?",
+      "SELECT generation, document_hash FROM world_instances WHERE id = ?",
     ).get(instanceId) as InstanceRow | undefined;
     if (!row) throw new WorldInstanceNotFoundError(instanceId);
     const cached = this.cachedInstance(instanceId, row);
@@ -1942,12 +1962,8 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
       this.observeCachedRead(instanceId, cached, startedAt, correlation);
       return { generation: cached.generation, document: structuredClone(cached.document) };
     }
-    const document = parseWorldInstanceDocument(
-      row.document_json,
-      instanceId,
-      this.rulePackages,
-    );
-    this.cacheValidatedInstance(instanceId, row.generation, row.document_json, document);
+    const document = this.readInstanceDocument(row.document_hash, instanceId);
+    this.cacheValidatedInstance(instanceId, row.generation, row.document_hash, document);
     return {
       generation: row.generation,
       document,
@@ -1963,22 +1979,24 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
     this.assertWritable();
     if (document.id !== instanceId) throw new Error("instance document id mismatch");
     const startedAt = Date.now();
-    const serialized = serializeWorldInstanceDocument(document, this.rulePackages);
+    validateWorldInstanceDocument(document, this.rulePackages);
+    let documentHash = "";
     try {
       this.connection.transaction(() => {
         this.assertInstanceLease();
+        documentHash = this.blocks.put(document).hash;
         const result = this.connection.prepare(`
           UPDATE world_instances
           SET generation = generation + 1,
               world_id = ?,
               world_hash = ?,
-              document_json = ?,
+              document_hash = ?,
               updated_at = ?
           WHERE id = ? AND generation = ?
         `).run(
           document.world.id,
           document.world.contentHash,
-          serialized,
+          documentHash,
           document.updatedAt,
           instanceId,
           expectedGeneration,
@@ -1990,12 +2008,12 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
         }
       })();
       const generation = expectedGeneration + 1;
-      const cached = this.cacheValidatedInstance(instanceId, generation, serialized, document);
+      const cached = this.cacheValidatedInstance(instanceId, generation, documentHash, document);
       this.observe?.({
         event: "persistence.write.completed",
         correlation: { ...correlation, instanceId },
         durationMs: Math.max(0, Date.now() - startedAt),
-        measurements: { documentUtf8Bytes: Buffer.byteLength(serialized, "utf8") },
+        measurements: { documentUtf8Bytes: cached.documentUtf8Bytes },
         attributes: { sink: "sqlite", operation: "compare_and_swap" },
       });
       return { generation, document: structuredClone(cached.document) };
@@ -2107,8 +2125,9 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
   }
 
   listInstances(correlation?: RuntimeCorrelation): StoredWorldInstance[] {
+    this.invalidateExternalChanges();
     const rows = this.connection.prepare(
-      "SELECT id, generation, document_json FROM world_instances ORDER BY id",
+      "SELECT id, generation, document_hash FROM world_instances ORDER BY id",
     ).all() as ListedInstanceRow[];
     const persistedIds = new Set(rows.map((row) => row.id));
     for (const instanceId of this.validatedInstances.keys()) {
@@ -2122,17 +2141,13 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
         this.observeCachedRead(row.id, cached, startedAt, correlation);
         return { generation: cached.generation, document: structuredClone(cached.document) };
       }
-      const document = parseWorldInstanceDocument(
-        row.document_json,
-        row.id,
-        this.rulePackages,
-      );
+      const document = this.readInstanceDocument(row.document_hash, row.id);
       misses.push({ row, document });
       return { generation: row.generation, document };
     });
     for (const { row, document } of misses) {
       if (this.validatedInstances.size >= VALIDATED_INSTANCE_CACHE_LIMIT) break;
-      this.cacheValidatedInstance(row.id, row.generation, row.document_json, document);
+      this.cacheValidatedInstance(row.id, row.generation, row.document_hash, document);
     }
     return instances;
   }

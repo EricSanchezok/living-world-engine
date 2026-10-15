@@ -13,14 +13,14 @@ export function readyIntent(reason = "initial-decision"): AgentIntentState {
     wait: null, lastInputHash: null, lastActionHash: null, recentOutcomeIds: [], failure: null, urgency: 0, noProgressCount: 0, goalProgress: {}, dependencies: {}, activeSubmission: null };
 }
 export function sealDirectState(value: Omit<DirectRuntimeState, "hash"> | DirectRuntimeState): DirectRuntimeState {
-  const body = { ...value, hash: "" };
+  const body = { ...value, cache: Object.fromEntries(Object.entries(value.cache).sort(([left], [right]) => left.localeCompare(right))), hash: "" };
   const hash = contentHash(body);
   assertJsonValue(body, "direct runtime state");
   return Object.assign(structuredClone(body), { hash }) as DirectRuntimeState;
 }
 export function readDirectState(value: AlgorithmExecutionState, state: Readonly<SimulationState>): DirectRuntimeState {
   const data = value.data as unknown as DirectRuntimeState;
-  if (data.kind !== "direct-world" || data.version !== 1 || data.worldHash !== state.worldHash ||
+  if (data.kind !== "direct-world" || data.version !== 2 || data.worldHash !== state.worldHash ||
     data.hash !== contentHash({ ...data, hash: "" })) throw new Error("invalid direct runtime state");
   return structuredClone(data);
 }

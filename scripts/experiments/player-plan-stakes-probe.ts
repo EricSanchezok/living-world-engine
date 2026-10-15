@@ -9,7 +9,7 @@ import { planningActionFramesRequest, PLANNING_ACTION_FRAMES } from "../../src/e
 import { planningDecisionOrderRequest, PLANNING_DECISION_ORDER } from "../../src/engine/benchmarks/step-efficiency/planning-decision-order";
 import { factorChoiceProductsRequest, FACTOR_CHOICE_PRODUCTS } from "../../src/engine/benchmarks/step-efficiency/factor-choice-products";
 import { EAGER_REFERENCE_ALGORITHM_REF, registerBuiltinAlgorithms } from "../../src/engine/algorithms/registry";
-import { algorithmRef, type AlgorithmManifest, type WorldStepInput, type WorldStepPreparation } from "../../src/engine/runtime/execution";
+import { algorithmRef, type AlgorithmManifest, type WorldStepInput, type ReferenceStepPreparation } from "../../src/engine/runtime/execution";
 import { RecordingRuntimeObserver, type RuntimeEvent } from "../../src/engine/runtime/observability";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { loadModelCatalog } from "../../src/engine/models/model-catalog";
@@ -45,7 +45,7 @@ export function reconstructPreparedPlayerStep(source: SourceExport, counterfactu
   if (!first) throw new Error("Source has no first physical planning request");
   const recorded = first.payload as SourceRequest;
   const recordedInput = source.events.find(event => event.event === "step.preparation.started")?.payload as WorldStepInput;
-  const recordedPreparation = source.events.filter(event => event.event === "execution.preparation.persisted" && event.sequence < first.sequence).at(-1)?.payload as WorldStepPreparation;
+  const recordedPreparation = source.events.filter(event => event.event === "execution.preparation.persisted" && event.sequence < first.sequence).at(-1)?.payload as ReferenceStepPreparation;
   if (!recordedInput || !recordedPreparation || Object.keys(recordedInput.state.agents).length !== 49 || Object.values(recordedInput.policyRoster).filter(policy => policy.kind === "external").length !== 1) throw new Error("Expected a complete 48 NPC plus one player source");
   const input = structuredClone(recordedInput), preparation = structuredClone(recordedPreparation);
   const recordedRef = algorithmRef(source.execution.manifest);
@@ -143,6 +143,7 @@ export async function runPlayerPlanStakesProbe(argv: string[]) {
     const started = performance.now();
     let error: string | null = null;
     try {
+      if (algorithm.protocol === "direct") throw new Error("probe requires the reference protocol");
       await algorithm.completeStep(input, preparation, [], { modelScope: {
         workloadId: recorded.workloadId, batchId: recorded.batchId, modelRegistrySnapshotHash: recorded.registrySnapshotHash,
         observer, runtimeIdentity: { worldHash: input.state.worldHash, revision: input.state.revision }, executionAlgorithmRef: ref,

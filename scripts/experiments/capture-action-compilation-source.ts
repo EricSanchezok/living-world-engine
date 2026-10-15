@@ -27,7 +27,7 @@ function required(argv: readonly string[], index: number, option: string): strin
 
 function parse(argv: readonly string[]): Args {
   const result: Args = {
-    database: path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v27", "livingworld.sqlite"),
+    database: path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v28", "livingworld.sqlite"),
     executionIds: [],
     output: path.resolve(".livingworld-benchmarks/source/action-compilation"),
     dryRun: false,
