@@ -136,9 +136,9 @@ html[data-cg-scale="large"] { --cg-scale: 1.12; }
     font-optical-sizing: auto;
   }
   button, textarea, input { font: inherit; }
+  input, textarea { outline: none; }
   button, a { -webkit-tap-highlight-color: var(--cg-transparent); }
   a, button { color: inherit; }
-  button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visible, summary:focus-visible { outline: none; }
   ::selection { background: var(--cg-primary); color: var(--cg-primary-foreground); }
 }
 
@@ -383,9 +383,8 @@ html[data-cg-scale="large"] { --cg-scale: 1.12; }
 .cg-inspector-toolbar__button:disabled { cursor: not-allowed; opacity: 0.38; }
 .cg-inspector-actor-toggle { display: none; }
 .cg-inspector-search { min-width: 10rem; min-height: 36px; flex: 1 1 20rem; display: flex; align-items: center; gap: 0.45rem; border: 1px solid var(--cg-border); border-radius: var(--cg-radius); background: var(--cg-background); padding-inline: 0.7rem; }
-.cg-inspector-search:has(input:focus-visible) { box-shadow: 0 0 0 3px color-mix(in oklab, var(--cg-ring) 26%, var(--cg-transparent)); }
 .cg-inspector-search svg { width: 0.9rem; flex: 0 0 auto; color: var(--cg-muted-foreground); }
-.cg-inspector-search input { min-width: 0; width: 100%; border: 0; outline: 0; background: var(--cg-transparent); color: var(--cg-foreground); font-size: 0.8rem; }
+.cg-inspector-search input { min-width: 0; width: 100%; border: 0; background: var(--cg-transparent); color: var(--cg-foreground); font-size: 0.8rem; }
 .cg-inspector-search input::placeholder { color: var(--cg-muted-foreground); }
 .cg-inspector-live { min-width: max-content; display: inline-flex; align-items: center; gap: 0.4rem; padding-inline: 0.35rem; color: var(--cg-muted-foreground); font-family: var(--font-ibm-plex-mono), monospace; font-size: 0.68rem; }
 .cg-inspector-live svg { width: 0.65rem; fill: currentColor; }
@@ -1292,7 +1291,6 @@ html[data-cg-motion="reduced"] *, html[data-cg-motion="reduced"] *::before, html
 .aui-user-message-bubble .cg-narrative { font-size: 0.94rem; line-height: 1.55; }
 .cg-thread-root [data-role="assistant"] .ms-2 { margin-inline-start: 0; }
 .cg-thread-root [data-role="assistant"] .ms-2 button { opacity: 0.56; }
-.aui-composer-shell textarea:focus-visible { box-shadow: none; }
 .aui-composer-shell { border-color: color-mix(in oklab, var(--cg-border) 88%, var(--cg-muted)); background: color-mix(in oklab, var(--cg-card) 94%, var(--cg-background)); box-shadow: 0 12px 30px color-mix(in oklab, var(--cg-overlay) 8%, var(--cg-transparent)); }
 .cg-thread-status-message { border: 1px solid var(--cg-border); border-radius: var(--cg-radius); background: var(--cg-card); padding: 0.55rem 0.75rem; color: var(--cg-muted-foreground); font-size: 0.75rem; line-height: 1.45; }
 .cg-thread-error { border: 1px solid var(--cg-destructive); border-radius: var(--cg-radius); background: var(--cg-destructive-soft); padding: 0.55rem 0.75rem; color: var(--cg-foreground); font-size: 0.75rem; line-height: 1.45; }
@@ -1786,10 +1784,9 @@ html[data-cg-motion="reduced"] .cg-perspective-workspace *, html[data-cg-motion=
   .cg-observer-console { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visible, summary:focus-visible, [role="separator"]:focus-visible { outline: 2px solid var(--cg-foreground); outline-offset: 2px; }
-@media (forced-colors: none) {
-  .aui-composer-shell textarea:focus-visible, .cg-inspector-search input:focus-visible { outline: none; }
-}
+button:focus-visible, a:focus-visible,
+input:where([type="button"], [type="submit"], [type="reset"], [type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"]):focus-visible,
+summary:focus-visible, [role="separator"]:focus-visible { outline: 2px solid var(--cg-foreground); outline-offset: 2px; }
 
 @media (forced-colors: active) {
   .aui-composer-shell, .cg-thread-status, .cg-thread-status__action, .cg-thread-status-message, .cg-thread-error, .cg-timeline-rail__preview, .cg-button--quiet, .cg-icon-button, .cg-launcher__action, .cg-world-nav a, .cg-import-world, .cg-switch, .cg-orb__trigger, .cg-orb__action-surface, .cg-orb__status, .cg-orb__notice, .cg-orb__confirm, .cg-modal-surface, .cg-workspace, .cg-inspector-node__button, .cg-inspector-log__surface, .cg-inspector-log__replay, .cg-inspector-resizer, .cg-inspector-invocation, .cg-inspector-detail-group, .cg-inspector-related-invocation, .cg-inspector-slot-table-wrap, .cg-json-inspector, .cg-runtime-event, .cg-start-card__surface, .cg-start-deck__toolbar button, .cg-selected-origin { border-color: var(--cg-forced-border); }
@@ -1813,7 +1810,9 @@ button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visib
     color: var(--cg-forced-accent-foreground);
   }
   .cg-start-card > input:focus-visible + .cg-start-card__surface { outline-color: Highlight; }
-  button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visible, summary:focus-visible, [role="separator"]:focus-visible, .cg-import-world:has(input:focus-visible) {
+  button:focus-visible, a:focus-visible,
+  input:where([type="button"], [type="submit"], [type="reset"], [type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"]):focus-visible,
+  summary:focus-visible, [role="separator"]:focus-visible, .cg-import-world:has(input:focus-visible) {
     outline: 2px solid Highlight;
     outline-offset: 2px;
     box-shadow: none;
