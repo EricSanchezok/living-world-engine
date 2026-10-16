@@ -339,6 +339,11 @@ test("a Participant starts from an Origin, receives Arrival, acts, detaches and 
   await page.locator(".cg-thread-messages").evaluate(element => { element.style.removeProperty("min-height"); });
   await expect(page.locator('[data-role="user"]').last()).toHaveAttribute("id", sentId!);
   await expect(page.getByText("轮到你决定下一步")).toHaveCount(0);
+  await expect(page.getByText("世界推进已暂停", { exact: true })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "恢复", exact: true })).toHaveCount(0);
+  const idle = await (await page.request.get(new URL(page.url()).pathname.replace("/play/", "/api/instances/"))).json() as PublicInstanceDetail;
+  expect(idle.run?.status).toBe("awaiting-decision");
+  expect(idle.actionWindow?.deadlineAt).toBeNull();
   const updatedSuggestions = page.getByRole("region", { name: "可选的行动建议" });
   await expect(updatedSuggestions.getByRole("button", { name: "询问守门人石门后的道路" })).toBeVisible();
   await expect(updatedSuggestions.getByRole("button", { name: "确认自己所在的位置" })).toHaveCount(0);

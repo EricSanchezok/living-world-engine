@@ -681,9 +681,9 @@ export class WorldHost {
     if (!beat) return;
     update(beat);
     document.updatedAt = this.now().toISOString();
-    if (!currentRun(document)?.servicePause && document.actionWindow && document.runtime.actionWindowMs > 0 && !document.actionWindow.deadlineAt &&
+    if (document.actionWindow && !document.actionWindow.deadlineAt &&
       !document.narratives.some(item => ["queued", "generating"].includes(item.status) && document.actionWindow!.requiredAgentIds.includes(item.agentId))) {
-      document.actionWindow.deadlineAt = new Date(this.now().getTime() + document.runtime.actionWindowMs).toISOString();
+      document.actionWindow.deadlineAt = this.windowDeadline(document, document.actionWindow.kind);
     }
     const saved = this.persist(stored, document);
     this.scheduleWindowDeadline(saved.document);
@@ -2023,10 +2023,14 @@ export class WorldHost {
     return this.project(document, principalId);
   }
 
+  private windowDeadline(document: WorldInstanceDocument, kind: ActionWindow["kind"]): string | null {
+    if (currentRun(document)?.servicePause || document.runtime.actionWindowMs <= 0) return null;
+    // Ordinary solo reading has no deadline; reactions and shared collection do.
+    if (kind === "decision" && activeParticipants(document).length < 2) return null;
+    return new Date(this.now().getTime() + document.runtime.actionWindowMs).toISOString();
+  }
+
   private openWindow(document: WorldInstanceDocument, requiredAgentIds: string[]): ActionWindow {
-    const deadlineAt = !currentRun(document)?.servicePause && document.runtime.actionWindowMs > 0
-      ? new Date(this.now().getTime() + document.runtime.actionWindowMs).toISOString()
-      : null;
     return {
       kind: "decision",
       id: this.idFactory(),
@@ -2034,7 +2038,7 @@ export class WorldHost {
       baseRevision: document.state.revision,
       requiredAgentIds,
       submissions: {},
-      deadlineAt,
+      deadlineAt: this.windowDeadline(document, "decision"),
       status: "open",
     };
   }
@@ -2285,9 +2289,6 @@ export class WorldHost {
             preparation,
           );
           const requiredAgentIds = preparation.pendingReactionRequests.map((entry) => entry.agentId).sort();
-          const deadlineAt = document.runtime.actionWindowMs > 0
-            ? new Date(this.now().getTime() + document.runtime.actionWindowMs).toISOString()
-            : null;
           document.actionWindow = {
             kind: "reaction",
             id: this.idFactory(),
@@ -2295,7 +2296,7 @@ export class WorldHost {
             baseRevision: document.state.revision,
             requiredAgentIds,
             submissions: {},
-            deadlineAt,
+            deadlineAt: this.windowDeadline(document, "reaction"),
             status: "open",
             preparedStepId: preparation.id,
             preparationArtifactHash: artifactHash,
@@ -2527,17 +2528,19 @@ export class WorldHost {
         const latest = this.read(document.id), waiting = structuredClone(latest.document);
         const waitingRun = waiting.runs[runId];
         if (!waitingRun || waitingRun.generation !== runGeneration || waiting.state.revision !== request.expectedRevision) return latest;
-        waitingRun.status = "paused"; waitingRun.stopReason = "waiting-for-event"; delete waitingRun.error;
+        waitingRun.status = activeParticipants(waiting).length ? "awaiting-decision" : "completed";
+        waitingRun.stopReason = "waiting-for-event";
+        waitingRun.lease = null;
+        if (execution && !waitingRun.executionIds.includes(execution.id)) waitingRun.executionIds.push(execution.id);
+        delete waitingRun.error;
         waitingRun.updatedAt = this.now().toISOString(); waiting.updatedAt = waitingRun.updatedAt; waiting.actionWindow = null;
         waiting.scheduler = { mode: "paused", generation: waiting.scheduler.generation + 1, nextTickAt: null };
         execution?.trace.emit({ event: "step.waiting", attributes: { reason: "no-new-event-or-evidence" },
           hashes: { state: contentHash(waiting.state) } });
         execution?.trace.flush();
         const finish: FinishExecutionInput = { status: "succeeded", stateHash: contentHash(waiting.state) };
-        if (execution && this.options.ledger && isAtomicStore(this.options.store)) return this.options.store.compareAndSwapInstanceAndFinishExecution(
-          document.id, latest.generation, waiting, execution.id, finish, "instance").instance;
-        if (execution) this.options.ledger?.finishExecution(execution.id, finish);
-        return this.persist(latest, waiting);
+        if (execution && !isAtomicStore(this.options.store)) this.options.ledger?.finishExecution(execution.id, finish);
+        return this.persist(latest, waiting, execution ? { id: execution.id, input: finish } : undefined);
       }
       if (atomicStageEntered && !(error instanceof Error && error.name === "AbortError")) {
         const stage = executionStage("atomic-commit", algorithm.protocol);
@@ -2631,17 +2634,18 @@ export class WorldHost {
       }
       let requiredAgentIds = externalDecisionAgentIds(document, !["awaiting-decision", "completed"].includes(previousRun?.status ?? "completed"));
       if (previousRun && (previousRun.status === "paused" || previousRun.status === "budget-paused" ||
-        previousRun.status === "debug-paused" || previousRun.status === "failed") &&
+        previousRun.status === "debug-paused" || previousRun.status === "failed" || previousRun.stopReason === "waiting-for-event") &&
         document.policyBindings[participant.agentId]?.kind === "external") {
-        // A terminal failure can leave the participant's Activity busy.
-        // Accept a distinct intent without rewriting the failed run's evidence.
+        // A stopped run can retain an ongoing intent. New input is adjudicated
+        // normally; a failed run keeps its original diagnostic evidence.
+        const quiescent = previousRun.stopReason === "waiting-for-event";
         if (previousRun.status !== "failed") {
           previousRun.status = "completed";
           previousRun.stopReason = "replaced-by-external-action";
           previousRun.updatedAt = this.now().toISOString();
         }
         document.actionWindow = null;
-        requiredAgentIds = [participant.agentId];
+        requiredAgentIds = quiescent ? [...new Set([...requiredAgentIds, participant.agentId])].sort() : [participant.agentId];
         this.createRun(document, "participant_action", null, "awaiting-decision");
       }
       if (!requiredAgentIds.includes(participant.agentId)) {
@@ -2891,6 +2895,7 @@ export class WorldHost {
           return null;
         }
         window.requiredAgentIds = requiredAgentIds;
+        if (activeParticipants(document).length < 2) window.deadlineAt = null;
         window.submissions = Object.fromEntries(Object.entries(window.submissions)
           .filter(([agentId]) => requiredAgentIds.includes(agentId)));
         window.generation += 1;

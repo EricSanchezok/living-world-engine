@@ -136,13 +136,15 @@ type ActionWindow = {
 };
 ```
 
-required Agent 的提交以 `submissionId` 幂等。相同 ID 与相同内容重试返回既有状态；同一 Agent 的不同提交冲突。决策超时把缺失槽位变为 timeout idle；反应超时保留其他回答，并按原 Activity 的 `reaction_fallback` 确定性处理。反应窗口的 generation 在独立参与者提交期间保持稳定，只在窗口结构改变时提高；window ID、prepared step ID、generation 与 base revision 共同拒绝陈旧窗口。
+required Agent 的提交以 `submissionId` 幂等。相同 ID 与相同内容重试返回既有状态；同一 Agent 的不同提交冲突。单人普通决策窗口没有现实时间期限，阅读、输入和刷新不会自行推进世界；多人决策收集仍使用配置的期限，超时把缺失槽位变为 timeout idle。反应超时保留其他回答，并按原 Activity 的 `reaction_fallback` 确定性处理。反应窗口的 generation 在独立参与者提交期间保持稳定，只在窗口结构改变时提高；window ID、prepared step ID、generation 与 base revision 共同拒绝陈旧窗口。
 
 普通 API 只向控制目标 Agent 的 Participant 投影其反应 stimulus，不投影 basis、其他 Agent 请求、canonical binding 或完整准备 artifact。active Activity 的玩家不在每个检查点重新输入；只有可感知且仍可改变未来的 onset interaction 才打开反应窗口。batch 在 external 决策或反应处停止，realtime 严格串行且只安排现实唤醒；scheduler generation 使暂停、重新启用和重启前的 timer 失效，重启不补算离线时间。
 
 ## WorldRun 与暂停恢复
 
 一个 Participant intent 对应一个持久 WorldRun，能够连续提交多个 TemporalBoundary。状态为 `queued | running | pausing | paused | awaiting-decision | awaiting-reaction | preparation-invalidated | completed | failed | budget-paused`；记录 generation、根行动、Activity、execution、已提交 revisions、停止原因和当前 lease。
+
+没有可处理的新事件或证据时，执行以 succeeded 结束但不提交 canonical revision，保留 `waiting-for-event` 诊断及执行引用。有控制角色时回到 `awaiting-decision`，Observer 运行进入 `completed`；两者均不提供恢复操作，也不安排自动重试。下一个明确行动通过正常语义裁决启动推演，仍在等待的原 intent 可以被新行动改变。`paused` 用于明确暂停或进程中断恢复，不表示世界自然等待。
 
 运行失败后，即使该玩家的 Activity 仍处于执行中，持有 external 策略的原 Participant 也可以提交一个不同 ID 的新行动。宿主先验证 principal、revision 与幂等身份，再创建新的 WorldRun；原失败状态、错误和执行证据保持不变。接收输入本身不改 canonical state，旧活动只在新步骤实际提交时按中断规则处理，旧运行的迟到回调不能恢复执行。
 

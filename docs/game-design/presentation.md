@@ -50,7 +50,7 @@ composer 只负责发送、失败重试和可选的高级 detach，不提供单�
 
 Participant 底部由一个外框承载输入与运行状态。普通输入最小高度为 64px，多行编辑可增高；提交后锁定编辑高度，运行阶段与计时原位更新，返回输入时恢复自适应。`queued`、`running`、`pausing` 或提交请求处理中不挂载 composer，仅在同框显示运行状态与暂停控制。正常等待输入没有额外决策提示。`paused`、`budget-paused`、`preparation-invalidated` 和 `awaiting-decision` 允许重新提交自然语言行动；未提交的 reaction window 同时显示 stimulus、输入框和“保持当前行动”控制。Observer 始终使用只读消息流，不挂载 composer。
 
-同一个 Participant intent 可以投影多条 committed Observation；每条显示对应世界时间、Activity 阶段和授权进度。`queued` 显示经过权限过滤的资源名称与队列位置，`ready` 显示资源已预留且会在下一次时间推进开始；两者都不暴露其他持有者的 canonical 身份。WorldRun 自动执行时 composer 切换为运行控制台并提供暂停；paused 后可以恢复，也可以发送普通自然语言行动取消或改变当前 Activity。刷新、重复提交和服务重启不会新增消息或重复行动，进程恢复后的 run 保持 paused。
+同一个 Participant intent 可以投影多条 committed Observation；每条显示对应世界时间、Activity 阶段和授权进度。`queued` 显示经过权限过滤的资源名称与队列位置，`ready` 显示资源已预留且会在下一次时间推进开始；两者都不暴露其他持有者的 canonical 身份。WorldRun 自动执行时 composer 切换为运行控制台并提供暂停；paused 后可以恢复，也可以发送普通自然语言行动取消或改变当前 Activity。自然等待只显示普通输入框，没有暂停说明、恢复按钮或单人输入倒计时。刷新与重复提交不会新增消息或重复行动；服务重启只将执行中的 run 转为 paused，已经等待输入的 run 保持原状态。状态和期限由[运行时契约](engine-runtime.md#worldrun-与暂停恢复)定义。
 
 消息按自然顺序接续；手动上翻停止自动跟随，主动发送或回到最新恢复跟随。乐观行动与已确认行动共用消息身份。消息底部按实际底栏高度加 24px 避让；后台更新不重新聚焦输入框。桌面会话在消息轴外提供消息时间线轨道。每个当前权限投影中的世界回复对应一个可聚焦刻度；刻度点击只滚动同一会话 viewport，并可显示该回复的标题、摘要、step、revision 和授权 Activity 进度。轨道不读取 canonical truth，不显示其他主体认知，也不替代原生滚动条。移动端隐藏轨道。
 

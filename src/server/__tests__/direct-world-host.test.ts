@@ -39,6 +39,61 @@ function createText(wire: DirectTestWire) {
 }
 
 describe("direct world through persistent WorldHost", () => {
+  it.each([0, 2])("settles quiescence without a pause or commit with %i external policies, and accepts the next action", async externalCount => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-quiescent-host-"));
+    let clock = Date.now(), timerId = 0, operation = "wait";
+    const timers = new Map<number, { delay: number; run: () => void }>();
+    const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id, nativeAnswer(q,
+      id === "expression" ? 0 : id.startsWith("paragraph") ? "grounded" : id === "operation" ? operation :
+        id === "target" ? "self" : id.includes("outcome") ? "succeeded" : "none")])), createText);
+    await f.registry.capture();
+    const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
+    const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
+    const host = new WorldHost({ repository: new MemoryWorldRepository({ [world.id]: world }), store: database, ledger: database,
+      provider: f.gateway, maxActiveParticipants: 2, now: () => new Date(clock),
+      setTimer: (run, delay) => { timers.set(++timerId, { delay, run }); return timerId as unknown as ReturnType<typeof setTimeout>; },
+      clearTimer: timer => { timers.delete(timer as unknown as number); } });
+    try {
+      const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } }), id = created.summary.id;
+      if (externalCount) {
+        await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } }, "first");
+        await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "keeper" } }, "second");
+      }
+      const changes: string[] = [];
+      const unsubscribe = host.subscribeInstanceChanges(id, () => { changes.push(host.instance(id).run?.status ?? "none"); });
+      await host.advance(id, { expectedRevision: 0, trigger: "manual" });
+      const flushTimer = async () => {
+        const entry = timers.entries().next().value;
+        expect(entry).toBeDefined();
+        const [key, timer] = entry!; timers.delete(key); clock += timer.delay + 1;
+        await timer.run(); await host.drainNarratives(id); await host.drainSuggestions(id);
+      };
+      for (let i = 0; i < 8 && host.instance(id).run?.stopReason !== "waiting-for-event"; i++) await flushTimer();
+      const waiting = host.instance(id), saved = database.readInstance(id).document;
+      const status = externalCount ? "awaiting-decision" : "completed";
+      expect(waiting.run).toMatchObject({ status, stopReason: "waiting-for-event" });
+      expect(waiting.actionWindow).toBeNull(); expect(timers.size).toBe(0);
+      expect(changes).toContain(status); unsubscribe();
+      const execution = database.execution(saved.runs[waiting.run!.id]!.executionIds.at(-1)!)!;
+      expect(execution.status).toBe("succeeded"); expect(execution.commitRevision).toBeUndefined();
+      expect(database.executionEvents(execution.id).some(event => event.event === "step.waiting")).toBe(true);
+      const calls = f.transport.mock.calls.length;
+      clock += 86_400_000;
+      host.instance(id); await host.drainNarratives(id); await host.drainSuggestions(id);
+      expect(database.readInstance(id).document.state).toEqual(saved.state); expect(f.transport).toHaveBeenCalledTimes(calls);
+      await expect(host.resumeRun(id, { runId: waiting.run!.id, generation: waiting.run!.generation })).rejects.toThrow("cannot be resumed");
+      if (externalCount) {
+        operation = "observe";
+        for (const principal of ["first", "second"]) {
+          const participant = Object.values(saved.participants).find(item => item.principalId === principal)!;
+          await host.submitAction(id, participant.id, { expectedRevision: saved.state.revision, submissionId: `after-wait-${principal}`, text: "看看周围" }, principal);
+        }
+        for (let i = 0; i < 4 && host.instance(id).summary.elapsedSeconds === saved.state.truth.elapsedSeconds; i++) await flushTimer();
+        expect(host.instance(id).summary.elapsedSeconds).toBeGreaterThan(saved.state.truth.elapsedSeconds);
+        expect(replaySimulationState(database.readInstance(id).document.state)).toEqual(database.readInstance(id).document.state);
+      }
+    } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+  });
   it.each([{ progress: "continue", reply: "speak", trigger: "speak" }, { progress: "complete", reply: "speak", trigger: "speak" }, { progress: "complete", reply: "wait", trigger: "speak" }, { progress: "complete", reply: "speak", trigger: "use" }])(
     "keeps a requested inspection's reply opportunity ($trigger: $progress → $reply) despite an intervening remark", async ({ progress: inspectionProgress, reply, trigger }) => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-inspection-report-"));
@@ -347,6 +402,7 @@ describe("direct world through persistent WorldHost", () => {
   });
   it("persists streamed paragraphs, holds the reply clock, resumes after restart and never regenerates on reads", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-narrative-recovery-"));
+    const scheduledDelays: number[] = [];
     let paragraphsSaved!: () => void, interrupt!: () => void, narrativeCalls = 0;
     const savedParagraph = new Promise<void>(resolve => { paragraphsSaved = resolve; });
     const interrupted = new Promise<void>(resolve => { interrupt = resolve; });
@@ -376,7 +432,8 @@ describe("direct world through persistent WorldHost", () => {
       const value = Reflect.get(target, key); return typeof value === "function" ? value.bind(target) : value;
     } });
     let database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
-    const makeHost = () => new WorldHost({ repository, store: database, ledger: database, provider });
+    const makeHost = () => new WorldHost({ repository, store: database, ledger: database, provider,
+      setTimer: (callback, delay) => { scheduledDelays.push(delay); const timer = setTimeout(callback, delay); timer.unref(); return timer; } });
     let host = makeHost();
     try {
       const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } }), id = created.summary.id;
@@ -398,7 +455,8 @@ describe("direct world through persistent WorldHost", () => {
       expect(narrativeCalls).toBe(2);
       expect(recovered.narratives[0]).toMatchObject({ status: "complete", attempts: 2, segments: [
         { sequence: 0, text: "石门上还留着水迹。" }, { sequence: 1, text: "你清点了随身物资：三枚灵石。" }] });
-      expect(Date.parse(recovered.actionWindow!.deadlineAt!)).toBeGreaterThan(Date.now() + 25_000);
+      expect(recovered.actionWindow).toMatchObject({ kind: "decision", deadlineAt: null, status: "open" });
+      expect(scheduledDelays.filter(delay => delay > 0)).toEqual([]);
       expect(recovered.state.truth).toEqual(pending.state.truth);
       expect(replaySimulationState(recovered.state)).toEqual(recovered.state);
       const texts = host.instance(id).conversation!.turns.at(-1)!.responses!.map(response => response.text);
