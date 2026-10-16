@@ -1,7 +1,7 @@
 # Natural waiting and Origin identity
 
 Artifact-Version: 1
-Status: Approved
+Status: Implemented
 
 ## Intent
 
@@ -25,4 +25,7 @@ Cover idle reading, restart, quiescence without a commit, new input after waitin
 
 ## Evidence
 
-Implementation evidence is recorded after the regression and live checks complete.
+- [Direct host regressions](../../src/server/__tests__/direct-world-host.test.ts) cover successful quiescence, notification and execution linkage, later input, deadline-free solo reading and restart, and one Origin admission alongside the complete autonomous cast. [Host lifecycle regressions](../../src/server/__tests__/world-instance-host.test.ts) preserve explicit pause/resume and timed reaction fallback.
+- [Narrative publication tests](../../src/server/__tests__/world-narrative.test.ts) cover both annotation edges, exact observed repetition, distinct identities, word boundaries and literal speech. [World content tests](../../src/server/__tests__/blackmarsh-world.test.ts) and [snapshot preparation tests](../../scripts/experiments/step-checkpoint-world.test.ts) preserve the complete source world without the obsolete reserved player.
+- [Participant browser flow](../../e2e/flows/immersive-game.spec.ts) verifies normal input has neither a pause label nor a resume button. `check:fast` passes with 2,381 tests across 360 files; `check:ui` passes with 12 browser flows and four accessibility checks. Blackmarsh validation reports 231 initial entities and 47 autonomous Agents.
+- Fresh Blackmarsh 1.2.0 live qualification on 2026-10-16 used TypeSafe `jev-1.13.0` and DeepSeek `deepseek-flash`. Three actions published complete narration on their first presentation attempt. One admission created the sole controlled identity; no legacy player or predefined NPC binding remained. Explicit pause cancelled the in-flight request, resume committed the action once, and canonical replay matched. After the second turn, 65 seconds of idle time and three reads preserved revision, world time, suggestion source and the model invocation count. The previous data root remains archived locally.

@@ -33,9 +33,6 @@ export function prepareNonthinkingWorld(root: string, base: ModelCatalog = loadM
   const source = path.resolve("worlds/blackmarsh/world"), worldsRoot = path.join(root, "worlds");
   const sourceWorld = loadWorldScript(source, { seed: STEP_E2_PROTOCOL.seed, modelCatalog: catalog });
   const profiles = assertNonthinkingWorld(sourceWorld, catalog);
-  if (Object.keys(sourceWorld.initialState.agents).length !== 48 || Object.keys(sourceWorld.initialState.truth.entities).length !== 232) {
-    throw new Error("full-world cardinality drift");
-  }
   const files = new Map<string, Buffer>(), assetHashes: Record<string, string> = {};
   const collect = (directory: string, relative: string) => {
     for (const entry of readdirSync(directory, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
@@ -53,7 +50,7 @@ export function prepareNonthinkingWorld(root: string, base: ModelCatalog = loadM
     sourceCatalogHash: base.hash, catalogHash: catalog.hash, assetHashes, worldHash: sourceWorld.contentHash,
     initialStateHash: contentHash(sourceWorld.initialState), profiles: profiles.map((id) => ({ id, profile: catalog.profile(id) })),
     allowedChanges: ["deepseek-api.network.dns_over_https_url", "deepseek-api.network.socket_connect_attempts"],
-    thinking: "disabled", agents: 48, entities: 232 };
+    thinking: "disabled", agents: Object.keys(sourceWorld.initialState.agents).length, entities: Object.keys(sourceWorld.initialState.truth.entities).length };
   const catalogPath = path.join(root, "model-catalog.json");
   files.set(catalogPath, Buffer.from(JSON.stringify(document, null, 2)));
   files.set(path.join(root, "variant.json"), Buffer.from(JSON.stringify(manifest, null, 2)));

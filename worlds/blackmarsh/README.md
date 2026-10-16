@@ -4,7 +4,7 @@
 
 ## 目录
 
-- [`world/`](world/)：可直接校验、打包和导入的 schema v14 世界目录。
+- [`world/`](world/)：可直接校验、打包和导入的 schema v17 世界目录。
 - [`docs/design-brief.md`](docs/design-brief.md)：玩家位置、创作边界、核心矛盾与动态世界原则。
 - [`docs/source-ledger.md`](docs/source-ledger.md)：原始版本、校验和、逐章提取范围和排除项。
 - [`docs/world-bible.md`](docs/world-bible.md)：统一历史、Viz、文明格局和超自然底层。

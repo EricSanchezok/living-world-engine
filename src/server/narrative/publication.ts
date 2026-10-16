@@ -125,6 +125,17 @@ export function completeParagraphs(text: string): string[] {
   }
   return result;
 }
+/** Only annotation-adjacent literal phrases are redundant; ordinary repetition is prose. */
+function repeatsEntitySurface(literal: string, surface: string, side: "before" | "after"): boolean {
+  if ([...surface].length < 2) return false;
+  const before = side === "before";
+  if (before ? !literal.endsWith(surface) : !literal.startsWith(surface)) return false;
+  const rest = before ? literal.slice(0, -surface.length) : literal.slice(surface.length);
+  const edge = before ? [...surface][0]! : [...surface].at(-1)!;
+  const neighbor = before ? [...rest].at(-1) ?? "" : [...rest][0] ?? "";
+  return !/[\p{Script=Latin}\p{N}_]/u.test(edge) || !/[\p{L}\p{N}_]/u.test(neighbor);
+}
+
 export function renderNarrativeSegment(text: string, source: ScenePacket): { text: string; mentions: DiscourseMention[] } {
   const mentions: DiscourseMention[] = [];
   const voicedMentions: DiscourseMention[] = [];
@@ -137,7 +148,12 @@ export function renderNarrativeSegment(text: string, source: ScenePacket): { tex
   if (/\[\[|\]\]/u.test(text.replace(/\[\[[^\]\n]+\]\]/gu, ""))) throw new Error("Narrative paragraph contains an unresolved reference");
   // Typography is not a speech act. The publication decision checks unsupported
   // quotations; references and delivered-speech completeness remain exact.
-  const rendered = text.replace(/\[\[([^\]\n]+)\]\]/gu, (_, token: string) => {
+  const parts: string[] = [];
+  let cursor = 0;
+  for (const match of text.matchAll(/\[\[([^\]\n]+)\]\]/gu)) {
+    const token = match[1]!;
+    let literal = text.slice(cursor, match.index);
+    cursor = match.index + match[0].length;
     if (token.includes("|") && !token.startsWith("speech-")) {
       const separator = token.indexOf("|"), reference = token.slice(0, separator), surface = token.slice(separator + 1).trim();
       const key = reference.slice(reference.lastIndexOf(":") + 1);
@@ -145,13 +161,18 @@ export function renderNarrativeSegment(text: string, source: ScenePacket): { tex
       const named = source.knownEntities.filter(entity => entity.name === key);
       const entity = exact ?? (named.length === 1 ? named[0] : undefined);
       if (!surface || !entity) throw new Error("Narrative referenced an unknown local entity");
-      mentions.push({ localEntityId: entity.localEntityId, surface }); return surface;
+      if (repeatsEntitySurface(literal, surface, "before")) literal = literal.slice(0, -surface.length);
+      if (repeatsEntitySurface(text.slice(cursor), surface, "after")) cursor += surface.length;
+      mentions.push({ localEntityId: entity.localEntityId, surface });
+      parts.push(literal, surface);
+      continue;
     }
     const speech = source.speech.find(item => item.id === token);
     if (!speech) throw new Error(token.startsWith("speech-") ? "Narrative referenced an undelivered utterance" : "Narrative contains an unresolved reference");
     bindSpeaker(speech);
-    return `“${speech.utterance}”`;
-  }).trim();
+    parts.push(literal, `“${speech.utterance}”`);
+  }
+  const rendered = parts.join("").concat(text.slice(cursor)).trim();
   if (!rendered) throw new Error("Narrative paragraph is empty");
   // A literal quote followed by its reference can produce the same utterance twice.
   let result = rendered.replace(/(“[^”]+”)(?:\s*\1)+/gu, (repeated, quote: string) =>

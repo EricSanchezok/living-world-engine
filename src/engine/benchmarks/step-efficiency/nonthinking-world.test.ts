@@ -27,8 +27,8 @@ it("imports the unchanged full world and rejects thinking, model and frozen asse
     expect(installBundledWorlds(database, catalog, frozen.worldsRoot)).toHaveLength(1);
     const world = database.load("blackmarsh", STEP_E2_PROTOCOL.seed, catalog);
     expect(world.contentHash).toBe(frozen.worldHash);
-    expect(Object.keys(world.initialState.agents)).toHaveLength(48);
-    expect(Object.keys(world.initialState.truth.entities)).toHaveLength(232);
+    expect(Object.keys(world.initialState.agents)).toHaveLength(47);
+    expect(Object.keys(world.initialState.truth.entities)).toHaveLength(231);
     expect(assertNonthinkingWorld(world, catalog)).toEqual(frozen.profileIds);
     expect(world.initialState).toEqual(loadWorldScript(path.resolve("worlds/blackmarsh/world"), { seed: STEP_E2_PROTOCOL.seed, modelCatalog: catalog }).initialState);
     const original = JSON.parse(readFileSync(frozen.catalogPath, "utf8"));

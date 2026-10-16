@@ -31,7 +31,7 @@ describe("bundled world installation", () => {
       expect.objectContaining({ id: "blackmarsh", name: "黑沼边境", replaced: false }),
     ]);
     expect(database.list()).toEqual([
-      expect.objectContaining({ id: "blackmarsh", version: "1.1.0" }),
+      expect.objectContaining({ id: "blackmarsh", version: "1.2.0" }),
     ]);
     database.close();
   });

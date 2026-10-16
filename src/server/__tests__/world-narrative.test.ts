@@ -18,6 +18,32 @@ const source: ScenePacket = {
 };
 
 describe("immutable narrative paragraphs", () => {
+  it.each([
+    ["旅人[[entity:subject|旅人]]站在石阶旁。", "旅人站在石阶旁。"],
+    ["旧木雨棚[[entity:subject|雨棚]]挡住了雨。", "旧木雨棚挡住了雨。"],
+    ["[[entity:subject|旅人]]旅人站在石阶旁。", "旅人站在石阶旁。"],
+    ["旅人[[entity:subject|旅人]]旅人站在石阶旁。", "旅人站在石阶旁。"],
+    ["The guard[[entity:subject|guard]] waits.", "The guard waits."],
+    ["The [[entity:subject|guard]]guard waits.", "The guard waits."],
+    ["The blackguard[[entity:subject|guard]] waits.", "The blackguardguard waits."],
+    ["[[entity:subject|guard]]guardhouse", "guardguardhouse"],
+    ["人人都认识[[entity:subject|爸爸]]。", "人人都认识爸爸。"],
+    ["旅人旅人，看看[[entity:subject|雨棚]]。", "旅人旅人，看看雨棚。"],
+    ["[[entity:subject|爸]]爸", "爸爸"],
+  ])("renders an entity annotation once without rewriting unannotated prose: %s", (draft, expected) => {
+    const scene = structuredClone(source);
+    scene.knownEntities = [{ localEntityId: "subject", name: "眼前的对象", description: "已观察到。" }];
+    const result = renderNarrativeSegment(draft, scene);
+    expect(result.text).toBe(expected);
+    expect(result.mentions).toEqual([{ localEntityId: "subject", surface: draft.match(/\|([^\]]+)\]\]/u)![1] }]);
+  });
+  it("keeps separate adjacent identities even when their visible labels match", () => {
+    const scene = structuredClone(source);
+    scene.knownEntities = ["first", "second"].map(localEntityId => ({ localEntityId, name: "旅人", description: "站在路旁。" }));
+    expect(renderNarrativeSegment("[[entity:first|旅人]][[entity:second|旅人]]", scene)).toEqual({ text: "旅人旅人", mentions: [
+      { localEntityId: "first", surface: "旅人" }, { localEntityId: "second", surface: "旅人" },
+    ] });
+  });
   it("shares complete publication evidence across all paragraph checks in one real gateway request", async () => {
     const scene = structuredClone(source);
     scene.observations[0]!.scene!.manner = "退后一步";
@@ -151,9 +177,9 @@ describe("immutable narrative paragraphs", () => {
   it("retains participant-local references while inserting literal speech without interpreting its markup", () => {
     const scene = structuredClone(source);
     scene.knownEntities = [{ localEntityId: "local-person", name: "附近的人", description: "站在木门旁。" }];
-    scene.speech[0]!.utterance = "标记写的是[[entity:untrusted|某人]]，不是我的名字。";
+    scene.speech[0]!.utterance = "旅人旅人，标记写的是[[entity:untrusted|某人]]，不是我的名字。";
     expect(renderNarrativeSegment("[[entity:local-person|木门旁有个人]]说：[[speech-ab12]]", scene)).toEqual({
-      text: "木门旁有个人说：“标记写的是[[entity:untrusted|某人]]，不是我的名字。”",
+      text: "木门旁有个人说：“旅人旅人，标记写的是[[entity:untrusted|某人]]，不是我的名字。”",
       mentions: [{ localEntityId: "local-person", surface: "木门旁有个人" }],
     });
     expect(() => renderNarrativeSegment("[[entity:someone-else|他]]", scene)).toThrow();

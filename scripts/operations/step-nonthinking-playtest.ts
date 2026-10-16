@@ -10,7 +10,7 @@ async function main() {
   const variant = prepareNonthinkingWorld(variantRoot);
   await runStepEfficiencyPlaytest({ ...variant, nonthinkingBaseline: true,
     dataRoot: path.join(variantRoot, "game-data", trialId), groundingProfileId: "truth-deepseek", sourceInventory: true,
-    label: "Full 48-Agent current production foundation, all thinking disabled, with source-faithful shortlist evidence, bounded duration evidence and early causal/effect validation. Independent source review required after each commit." });
+    label: "Full-world current production foundation, all thinking disabled, with source-faithful shortlist evidence, bounded duration evidence and early causal/effect validation. Independent source review required after each commit." });
 }
 
 void main().catch((error: unknown) => { console.error(error);process.exitCode = 1; });

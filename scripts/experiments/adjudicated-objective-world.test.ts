@@ -11,12 +11,12 @@ import { adjudicatedObjectiveState, adjudicatedObjectiveWorld, ADJUDICATED_OBJEC
 
 const options = { seed: 47, modelCatalog: createTestModelCatalog() };
 
-it("preserves the complete 48-agent world and every ordered field except two authored kinds", () => {
+it("preserves the complete autonomous cast and every ordered field except two authored kinds", () => {
   const source = checkpointWorldTemplate(finiteWorkWorldTemplate(loadWorldTemplate("worlds/blackmarsh/world")));
   const text = JSON.stringify(source), candidate = adjudicatedObjectiveWorld(source, ADJUDICATED_OBJECTIVE_PROFILES);
   expect(JSON.stringify(source)).toBe(text);
   const before = buildWorldDefinition(source, options), after = buildWorldDefinition(candidate, options);
-  expect(Object.keys(after.initialState.agents)).toHaveLength(48);
+  expect(Object.keys(after.initialState.agents)).toHaveLength(47);
   const state = { ...structuredClone(before.initialState), revision: 1, historyBase: createHistoryReplayBase(before.initialState) };
   const overlay = adjudicatedObjectiveState(state, before, after, ADJUDICATED_OBJECTIVE_PROFILES);
   expect(overlay.state.agents).toEqual(state.agents);

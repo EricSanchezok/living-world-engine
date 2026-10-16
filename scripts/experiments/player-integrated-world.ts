@@ -12,7 +12,6 @@ export function buildIntegratedPlayerWorld(source: NormalizedWorldTemplate, seed
   assertFiniteWorkWorld(candidate);
   const baseline = buildWorldDefinition(source, { seed, modelCatalog });
   const world = buildWorldDefinition(candidate, { seed, modelCatalog });
-  if (Object.keys(world.initialState.agents).length !== 48 ||
-    contentHash(world.initialState.agents) !== contentHash(baseline.initialState.agents)) throw new Error("Source Agent set changed");
+  if (contentHash(world.initialState.agents) !== contentHash(baseline.initialState.agents)) throw new Error("Source Agent set changed");
   return { candidate, baseline, world };
 }

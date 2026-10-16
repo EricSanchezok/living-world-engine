@@ -139,7 +139,7 @@ function smokeWaitTimeoutMs(): number {
   const configured = Number(process.env.LIVINGWORLD_SMOKE_TIMEOUT_MS ?? "");
   if (Number.isSafeInteger(configured) && configured >= 60_000) return configured;
   // GLM Coding Plan can legitimately spend several minutes on a full
-  // Blackmarsh step (48 Agents plus observation/repair passes).  A short
+  // Blackmarsh step (47 Agents plus observation/repair passes).  A short
   // harness timeout would report a false failure while the execution is still
   // healthy and durable.
   return 45 * 60 * 1_000;

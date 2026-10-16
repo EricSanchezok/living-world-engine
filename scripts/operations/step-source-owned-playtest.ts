@@ -30,7 +30,7 @@ export async function prepareSourceOwnedPlaytestVariant(trialId: string): Promis
     manifestHash: contentHash(design.manifest), groundingProfileId: "truth-deepseek", nonthinkingBaseline: true, sourceInventory: true,
     compilation: "source-owned-visible-choice-v1",
     admissionEvidence: { trialId: manifest.trialId, reportHash: contentHash(report), preflightHash: contentHash(manifest) },
-    label: "Full48-Agent finite-goal candidate with AT, exact source-owned descriptions, root-pinned retrieval, exact physical cardinality and visible profile choice evidence; all thinking disabled. Compiler diagnostic is limited evidence; actual world effects require independent review after each commit." };
+    label: "Full-world finite-goal candidate with AT, exact source-owned descriptions, root-pinned retrieval, exact physical cardinality and visible profile choice evidence; all thinking disabled. Compiler diagnostic is limited evidence; actual world effects require independent review after each commit." };
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) void main().catch((error: unknown) => {
   console.error(error);process.exitCode = 1;

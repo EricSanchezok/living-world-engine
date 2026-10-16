@@ -30,7 +30,7 @@ it("prepares and reloads a complete immutable world with only two declared timin
     writeFileSync(path.join(sourceDirectory, "mechanics.yaml"), stringify(finiteWork.mechanics));
     const result = prepareCheckpointWorld({ sourceRoot, destination });
     expect(prepareCheckpointWorld({ sourceRoot, destination })).toEqual(result);
-    expect(result.manifest).toMatchObject({ paidHttp: 0, agents: 48, entities: 232, runtimePromoted: false });
+    expect(result.manifest).toMatchObject({ paidHttp: 0, agents: 47, entities: 231, runtimePromoted: false });
     const source = loadWorldTemplate(path.join(sourceRoot, "worlds/blackmarsh/world"));
     const candidate = loadWorldTemplate(path.join(destination, "worlds/blackmarsh/world"));
     expect(candidate.mechanics.temporal_profiles).toHaveLength(source.mechanics.temporal_profiles.length);

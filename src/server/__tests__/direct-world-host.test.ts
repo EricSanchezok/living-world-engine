@@ -694,12 +694,19 @@ describe("direct world through persistent WorldHost", () => {
       expect(replaySimulationState(resumed.state)).toEqual(resumed.state);
     } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
   });
-  it("admits the full Blackmarsh 49 subjects without calls and runs their private queued decisions", async () => {
-    const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-full49-"));
+  it("admits one Blackmarsh Origin alongside 47 autonomous subjects without a reserved player or advance knowledge", async () => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-blackmarsh-origin-"));
     const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id,
       nativeAnswer(q, id === "operation" ? "wait" : id.includes("goal_status") || id.includes("belief_status") ? "unchanged" : "none")])));
     await f.registry.capture();
     const world = loadWorldScript(path.resolve("worlds/blackmarsh/world"), { seed: 17, modelCatalog: f.catalog });
+    expect(Object.keys(world.initialState.agents)).toHaveLength(47);
+    expect(world.initialState.truth.entities).not.toHaveProperty("player");
+    for (const agent of Object.values(world.initialState.agents)) {
+      expect(agent.belief.localEntities).not.toHaveProperty("newcomer");
+      expect(agent.bindings).not.toHaveProperty("newcomer");
+      expect(Object.values(agent.bindings).flatMap(binding => binding.canonicalEntityIds)).not.toContain("player");
+    }
     const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
     try {
       const repository = new MemoryWorldRepository({ [world.id]: world });
@@ -707,13 +714,19 @@ describe("direct world through persistent WorldHost", () => {
       const created = await host.createInstance({ worldId: world.id, start: { kind: "origin", originId: world.participation!.origins[0]!.id,
         displayName: "测试旅人", appearance: "旅人装束。", motivation: "观察周围环境。" } });
       const document = database.readInstance(created.summary.id).document;
-      expect(Object.keys(document.state.agents)).toHaveLength(49); expect(f.transport).not.toHaveBeenCalled();
+      const participant = created.participants[0]!;
+      expect(Object.keys(document.state.agents)).toHaveLength(48); expect(f.transport).not.toHaveBeenCalled();
+      expect(Object.keys(document.state.agents).filter(id => !world.initialState.agents[id])).toEqual([participant.agentId]);
+      expect(document.state.agents[participant.agentId]!.bindings[`${participant.agentId}-self`]!.canonicalEntityIds).toEqual([participant.agentId]);
+      expect(JSON.stringify(document.state.agents[participant.agentId]!.belief)).not.toContain("ragnar-ring-identity");
+      expect(document.policyBindings[participant.agentId]).toMatchObject({ kind: "external", participantId: participant.id });
+      for (const id of Object.keys(world.initialState.agents)) expect(document.state.agents[id]!.bindings).toEqual(world.initialState.agents[id]!.bindings);
       const pinned = repository.loadVersion(document.world.id, document.world.contentHash, document.state.historyBase!.truth.rng.seed, f.catalog);
       const engine = new SimulationEngine(pinned, new DirectWorldAlgorithm(f.gateway), document.state);
       const result = await engine.step(document.policyBindings, { expectedRevision: document.state.revision, trigger: "manual", externalActions: [] });
       const control = readDirectState(result.state.executionState!, result.state);
       expect(Object.values(control.intents).filter(intent => intent.status === "failed")).toEqual([]);
-      expect(executionCalls(f.transport.mock.calls)).toHaveLength(48);
+      expect(executionCalls(f.transport.mock.calls)).toHaveLength(47);
       expect(result.modelAudits.every(audit => audit.protocol === "typesafe-systemone")).toBe(true);
       expect(replaySimulationState(result.state)).toEqual(result.state);
     } finally { database.close(); rmSync(root, { recursive: true, force: true }); }

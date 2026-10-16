@@ -16,7 +16,7 @@ it("constructs and reloads the complete player experiment from the bundled world
   const catalog = createTestModelCatalog();
   const { candidate, baseline, world } = buildIntegratedPlayerWorld(source, 47, catalog);
   expect(INTEGRATED_PLAYER_WORLD_RECIPE).toBe("finite-work-then-short-checkpoints-v1");
-  expect(Object.keys(world.initialState.agents)).toHaveLength(48);
+  expect(Object.keys(world.initialState.agents)).toHaveLength(47);
   expect(world.initialState.agents).toEqual(baseline.initialState.agents);
   expect(contentHash(source)).toBe(before);
   expect(world.contentHash).not.toBe(baseline.contentHash);

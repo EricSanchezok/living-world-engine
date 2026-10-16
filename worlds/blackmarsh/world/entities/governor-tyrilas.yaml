@@ -49,10 +49,6 @@ agent:
         description: 人类复权派与外部帝国同时施压带来的持续紧张。
         intensity: 0.58
     attitudes:
-      - id: toward-player
-        subject_id: newcomer
-        description: 尚未注意到这名新来者，也没有理由信任或敌视对方。
-        intensity: 0.08
       - id: toward-causari
         subject_id: causari
         description: 尊重其守边能力，但担心复权主张破坏共同防线。
@@ -93,10 +89,6 @@ agent:
         name: Sir Causari
         description: Inuacus Keep 指挥官与人类复权派领袖。
         status: observed
-      - id: newcomer
-        name: 港口新来者
-        description: 港务名册上的陌生旅人。
-        status: reported
     evidence:
       - id: sealed-reports
         kind: observation
@@ -134,5 +126,3 @@ agent:
         canonical_entity_ids: [castle-blackmarsh-depths]
       - local_entity_id: causari
         canonical_entity_ids: [sir-causari]
-      - local_entity_id: newcomer
-        canonical_entity_ids: [player]

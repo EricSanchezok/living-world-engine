@@ -41,7 +41,6 @@ agent:
       - { id: old-dread, description: Atacyl 的记号重新出现时产生的冷静恐惧。, intensity: 0.42 }
     attitudes:
       - { id: toward-governor, subject_id: governor, description: 信任 Tyrilas 的克制，但认为长期封锁会制造黑市。, intensity: 0.66 }
-      - { id: toward-newcomer, subject_id: newcomer, description: 尚未评估其信用、能力或贪欲。, intensity: 0.12 }
     goals:
       - id: screen-dangerous-items
         description: 识别进入黑沼堡市场的 Atacyl 遗物并阻止它们流向不可靠买家。
@@ -63,7 +62,6 @@ agent:
       - { id: emporium, name: 我的商店, description: 合法遗物交易与鉴定场所。, status: observed }
       - { id: governor, name: Tyrilas, description: 负责封锁城堡下层的精灵总督。, status: observed }
       - { id: castle-depths, name: 城堡下层, description: Atacyl 留下的未清理设施。, status: observed }
-      - { id: newcomer, name: 港口新来者, description: 今日刚抵达的外来旅人。, status: reported }
     evidence:
       - { id: old-ciphers, kind: observation, description: 我亲手处理过带有 Atacyl 私人记号的封匣和机关。, sourceId: self, step: 0 }
       - { id: market-whispers, kind: testimony, description: 学徒听到地下商人正在询问无法正常估价的黑色金属器。, sourceId: null, step: 0 }
@@ -75,4 +73,3 @@ agent:
       - { local_entity_id: emporium, canonical_entity_ids: [arcane-emporium] }
       - { local_entity_id: governor, canonical_entity_ids: [governor-tyrilas] }
       - { local_entity_id: castle-depths, canonical_entity_ids: [castle-blackmarsh-depths] }
-      - { local_entity_id: newcomer, canonical_entity_ids: [player] }

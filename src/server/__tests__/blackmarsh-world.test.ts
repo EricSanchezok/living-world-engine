@@ -13,7 +13,6 @@ const worldRoot = path.resolve("worlds/blackmarsh/world");
 const blackmarshModelCatalog = loadModelCatalog();
 
 const agentIds = [
-  "player",
   "archon-devers",
   "autarch-elana",
   "azure-king",
@@ -220,7 +219,7 @@ describe("Blackmarsh reference world", () => {
 
     expect(definition).toMatchObject({
       id: "blackmarsh",
-      manifestVersion: "1.1.0",
+      manifestVersion: "1.2.0",
       runtimeDefaults: {
         maxAutonomousSpanSeconds: 300,
         realtimeIntervalMs: 300_000,
@@ -281,12 +280,12 @@ describe("Blackmarsh reference world", () => {
       expect(Object.keys(agent.character.traits).length).toBeGreaterThanOrEqual(1);
       expect(Object.keys(agent.character.values).length).toBeGreaterThanOrEqual(2);
       expect(Object.keys(agent.character.emotions).length).toBeGreaterThanOrEqual(1);
-      expect(Object.keys(agent.character.attitudes).length).toBeGreaterThanOrEqual(2);
+      expect(Object.keys(agent.character.attitudes).length).toBeGreaterThanOrEqual(1);
       expect(Object.keys(agent.character.goals).length).toBeGreaterThanOrEqual(2);
       expect(Object.keys(agent.character.commitments).length).toBeGreaterThanOrEqual(1);
       expect(Object.keys(agent.belief.localEntities).length).toBeGreaterThanOrEqual(4);
-      expect(Object.keys(agent.belief.evidence).length).toBeGreaterThanOrEqual(2);
-      expect(Object.keys(agent.belief.claims).length).toBeGreaterThanOrEqual(2);
+      expect(Object.keys(agent.belief.evidence).length).toBeGreaterThanOrEqual(1);
+      expect(Object.keys(agent.belief.claims).length).toBeGreaterThanOrEqual(1);
 
       const selfBindings = Object.values(agent.bindings).filter((binding) =>
         binding.canonicalEntityIds.includes(agent.entityId));
@@ -544,7 +543,6 @@ describe("Blackmarsh reference world", () => {
       .toEqual(["muncaester-northern-trade-road"]);
     expect(definition.initialState.agents["lord-varxis"].bindings["river-route"].canonicalEntityIds)
       .toEqual(["camden-iron-river-route"]);
-    expect(JSON.stringify(definition.initialState.agents.player.belief)).not.toContain("ragnar-ring-identity");
     expect(truth.facts["mazardan-viz-offer"].value).toEqual({ kind: "number", value: 200 });
     expect(truth.facts["ochre-expedition-mission"].value)
       .toEqual({ kind: "text", value: "find-expedition-lost-five-years-ago-not-launch-an-invasion" });
@@ -555,7 +553,7 @@ describe("Blackmarsh reference world", () => {
     expect(parseWorldArchive(zipWorld(), provider.catalog)).toMatchObject({
       id: "blackmarsh",
       name: "黑沼边境",
-      version: "1.1.0",
+      version: "1.2.0",
       contentHash: expect.stringMatching(/^sha256:[a-f0-9]{64}$/),
     });
   });
@@ -574,14 +572,14 @@ describe("Blackmarsh reference world", () => {
   });
 
   it("bootstraps all Agents and commits one deterministic open-world step", async () => {
-    // The structural 48-Agent test keeps the production twelve-slot batching
+    // The structural 47-Agent test keeps the production twelve-slot batching
     // policy while exercising observer-scoped semantic context.
     const provider = new DeterministicModelProvider(createTestModelCatalog(undefined, { maxInputBytes: 4_000_000 }));
     const definition = loadWorldScript(worldRoot, { seed: 47, modelCatalog: provider.catalog });
     const engine = new SimulationEngine(definition, new EagerReferenceAlgorithm(provider));
     await engine.bootstrapAgents();
     const state = engine.snapshot;
-    expect(Object.values(state.agents)).toHaveLength(48);
+    expect(Object.values(state.agents)).toHaveLength(47);
     expect(Object.values(state.agents).every((agent) => agent.nextAction !== null)).toBe(true);
     expect(provider.requests.filter((request) => request.role === "agent-bootstrap")).toHaveLength(6);
     expect(provider.requests.filter((request) => request.role === "agent-bootstrap").every((request) =>
@@ -620,7 +618,7 @@ describe("Blackmarsh reference world", () => {
     const invocationIds = batchedAudits.flatMap((audit) => audit.invocations.map((invocation) => invocation.id));
     expect(new Set(invocationIds).size).toBe(invocationIds.length);
     expect(provider.requests.some((request) => request.role === "truth-perception")).toBe(false);
-  // This intentionally exercises 48 Agents, profile-dependent action batches,
+  // This intentionally exercises 47 Agents, profile-dependent action batches,
   // and the full semantic Truth/observation pipeline. Keep the timeout above the
   // structural workload's normal wall time so slower CI hosts do not turn a
   // valid contract check into a flaky failure.

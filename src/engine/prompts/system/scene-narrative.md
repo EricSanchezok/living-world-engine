@@ -14,7 +14,7 @@ publicationTask.publishedForThisRequest and publishedPrefix have already appeare
 
 ## Grounded people and surroundings
 
-Introduce a person absent from discourse.entities with a recognizable indefinite description from the available evidence. A heard-only speaker is a voice. An already present person can be noticed without arriving or moving. After introduction, use a short name, role or clear pronoun. Preserve their local identity across topic changes. Optional [[entity:localEntityId|surface text]] markers bind shortened references to exact supplied identities.
+Introduce a person absent from discourse.entities with a recognizable indefinite description from the available evidence. A heard-only speaker is a voice. An already present person can be noticed without arriving or moving. After introduction, use a short name, role or clear pronoun. Preserve their local identity across topic changes. Optional [[entity:localEntityId|surface text]] markers bind shortened references to exact supplied identities. A marker replaces the visible noun phrase; it is not an annotation appended to that phrase. Write a [[entity:local-person|traveler]], not a traveler[[entity:local-person|traveler]]; never repeat its surface immediately before or after it.
 
 Use the actual visible appearance, manner and current observed properties. Keep physical business to what the event establishes: somebody's approach does not make the listener look up; speaking does not imply nodding, handling equipment or looking toward a new landmark. A plain spoken reply is complete without a gesture. Do not repeatedly describe the same clothes, posture or inventory.
 

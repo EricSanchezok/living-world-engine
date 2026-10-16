@@ -36,7 +36,6 @@ agent:
       - { id: overdue-concern, description: Muncaester 方向商队失去联络带来的专注焦虑。, intensity: 0.63 }
     attitudes:
       - { id: toward-governor, subject_id: governor, description: 尊重城邦秩序，但担心官方会因政治风险拖延道路救援。, intensity: 0.46 }
-      - { id: toward-newcomer, subject_id: newcomer, description: 可能是斥候或护卫候选人，但没有本地路线经验。, intensity: 0.18 }
     goals:
       - id: locate-overdue-caravan
         description: 查明 Muncaester 商队失联原因，救回生还者并让后续队伍避开危险。
@@ -59,7 +58,6 @@ agent:
       - { id: northern-road, name: Muncaester 北路, description: 连接 Ostrobard 市场与黑沼堡的商路。, status: observed }
       - { id: lost-caravan, name: 失联商队, description: 应在今日抵达却没有出现在沿线登记点的队伍。, status: hypothesized }
       - { id: governor, name: Tyrilas, description: 能调动城防和发布道路警示的总督。, status: observed }
-      - { id: newcomer, name: 港口新来者, description: 今日抵达且尚无雇佣记录的旅人。, status: reported }
     evidence:
       - { id: missed-waypoint, kind: observation, description: 商队没有在约定时刻向最后一处接应点报到。, sourceId: self, step: 0 }
       - { id: road-smoke-report, kind: testimony, description: 一名小贩说两英里外看见北路方向持续升起炊烟。, sourceId: null, step: 0 }
@@ -72,4 +70,3 @@ agent:
       - { local_entity_id: northern-road, canonical_entity_ids: [muncaester-northern-trade-road] }
       - { local_entity_id: lost-caravan, canonical_entity_ids: [muncaester-caravan-remains] }
       - { local_entity_id: governor, canonical_entity_ids: [governor-tyrilas] }
-      - { local_entity_id: newcomer, canonical_entity_ids: [player] }

@@ -46,6 +46,8 @@ Observer 创建不生成 Participant。Observer 可以推进无人世界、选�
 
 Participant 页面使用 44rem 单轴 assistant-ui 消息流。第一条 World 消息是持久 Arrival；玩家行动为右侧自适应气泡，World Observation 为无气泡正文。当前决策点的建议由 `conversation.suggestions` 独立投影在最新 World 回复之后，点击只填入 composer；非空草稿暂时隐藏建议，异步结果不覆盖草稿或抢焦点。
 
+旁白中的实体引用标记替代可见称呼，并保留角色私有的实体身份。发布时只消除标记前后紧邻的完整重复词组，不对普通正文全局去重，也不解析已送达对白中的标记。相同称呼绑定不同身份时保持各自引用；单字重叠和拉丁单词内部的部分匹配不自动删除。
+
 composer 只负责发送、失败重试和可选的高级 detach，不提供单步、批量或实时按钮。发送行动时，服务端先持久化 intent 和当前 decision point 的 ActionWindow，再由后台 WorldRun 逐个最早时间边界推进，直到活动完成、失败、中断、需要选择、玩家暂停或运行预算耗尽。
 
 Participant 底部由一个外框承载输入与运行状态。普通输入最小高度为 64px，多行编辑可增高；提交后锁定编辑高度，运行阶段与计时原位更新，返回输入时恢复自适应。`queued`、`running`、`pausing` 或提交请求处理中不挂载 composer，仅在同框显示运行状态与暂停控制。正常等待输入没有额外决策提示。`paused`、`budget-paused`、`preparation-invalidated` 和 `awaiting-decision` 允许重新提交自然语言行动；未提交的 reaction window 同时显示 stimulus、输入框和“保持当前行动”控制。Observer 始终使用只读消息流，不挂载 composer。

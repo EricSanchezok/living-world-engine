@@ -41,7 +41,6 @@ agent:
       - { id: storm-unease, description: 风暴与未归小船带来的克制焦虑。, intensity: 0.47 }
     attitudes:
       - { id: toward-governor, subject_id: governor, description: 认可总督维持港口秩序的能力，但反对临时征用船只。, intensity: 0.55 }
-      - { id: toward-newcomer, subject_id: newcomer, description: 只是潜在乘客、雇员或麻烦，须看推荐与目的。, intensity: 0.08 }
     goals:
       - id: secure-fleet-before-storm
         description: 在午夜前确认所有可联络小船回港或进入安全锚地。
@@ -63,7 +62,6 @@ agent:
       - { id: company, name: Abrams Company, description: 我的船队、船员和信用共同构成的企业。, status: observed }
       - { id: harbor, name: 黑沼堡港区, description: 风暴前正在收拢船只的港区。, status: observed }
       - { id: governor, name: Tyrilas, description: 可能在危机时要求船队支援的总督。, status: observed }
-      - { id: newcomer, name: 港口新来者, description: 刚下船而没有本地信用记录的旅人。, status: observed }
     evidence:
       - { id: falling-pressure, kind: observation, description: 气压、浪向和海鸟移动都符合午夜前强风暴抵达的征兆。, sourceId: self, step: 0 }
       - { id: harbor-roll, kind: observation, description: 回港名册仍缺两艘沿岸小艇的确认。, sourceId: self, step: 0 }
@@ -75,4 +73,3 @@ agent:
       - { local_entity_id: company, canonical_entity_ids: [abrams-company] }
       - { local_entity_id: harbor, canonical_entity_ids: [castle-blackmarsh-harbor] }
       - { local_entity_id: governor, canonical_entity_ids: [governor-tyrilas] }
-      - { local_entity_id: newcomer, canonical_entity_ids: [player] }

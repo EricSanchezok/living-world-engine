@@ -48,8 +48,8 @@ export function prepareCheckpointWorld(options: { sourceRoot?: string; destinati
   const baseline = buildWorldDefinition(template, { seed: STEP_E2_PROTOCOL.seed, modelCatalog: catalog });
   const world = buildWorldDefinition(candidate, { seed: STEP_E2_PROTOCOL.seed, modelCatalog: catalog });
   assertNonthinkingWorld(baseline, catalog); assertNonthinkingWorld(world, catalog);
-  if (Object.keys(world.initialState.agents).length !== 48 || Object.keys(world.initialState.truth.entities).length !== 232 ||
-    contentHash(world.initialState.agents) !== contentHash(baseline.initialState.agents)) throw new Error("complete source world changed");
+  if (contentHash(world.initialState.agents) !== contentHash(baseline.initialState.agents) ||
+    contentHash(world.initialState.truth.entities) !== contentHash(baseline.initialState.truth.entities)) throw new Error("complete source world changed");
   const files = new Map<string, Buffer>(), sourceHashes: Record<string, string> = {}, candidateHashes: Record<string, string> = {};
   const collect = (directory: string, relative: string) => {
     for (const entry of readdirSync(directory, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
@@ -68,7 +68,7 @@ export function prepareCheckpointWorld(options: { sourceRoot?: string; destinati
     seed: STEP_E2_PROTOCOL.seed, model: STEP_E2_PROTOCOL.model, thinking: "disabled", catalogHash: catalog.hash,
     sourceWorldHash: baseline.contentHash, worldHash: world.contentHash, sourceTemplateHash: contentHash(template),
     templateHash: contentHash(candidate), initialStateHash: contentHash(world.initialState), sourceHashes, candidateHashes,
-    agents: 48, entities: 232, changedProfiles: CHECKPOINT_PROFILE_IDS,
+    agents: Object.keys(world.initialState.agents).length, entities: Object.keys(world.initialState.truth.entities).length, changedProfiles: CHECKPOINT_PROFILE_IDS,
     contract: "Only the two explicitly named generic short profiles and their calibration explanations change. Their existing1/10-second boundaries become goal checkpoints. Explicit durations, rates, stages, continuation prerequisites, resources and every source action retain their contracts. Existing outcome adjudication owns completion; no kernel-inferred meaning or new online model call. This does not certify semantics or cost: spurious completion, endless no-effect continuation and extra checkpoint calls remain vetoes. No failed indexed planning trial is promoted by this preparation." };
   files.set(path.join(destination, "manifest.json"), Buffer.from(JSON.stringify(manifest, null, 2) + "\n"));
   for (const [file, bytes] of files) if (existsSync(file) && !readFileSync(file).equals(bytes)) throw new Error("frozen checkpoint world changed");

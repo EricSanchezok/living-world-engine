@@ -412,11 +412,10 @@ export async function runStepEfficiencyPlaytest(variant?: StepEfficiencyVariant)
       worldHash: initial.state.worldHash, modelProfiles: loadedWorld.modelProfiles, catalogHash: catalog.hash,
       registrySnapshotHash: registrySnapshot.hash, profileBindings, algorithmRef }, null, 2), { flag: "wx" });
     const source = loadedWorld.initialState;
-    if (Object.keys(source.agents).length !== 48 || Object.keys(source.truth.entities).length !== 232 ||
-      Object.keys(source.agents).some(id => !initial.state.agents[id]) ||
+    if (Object.keys(source.agents).some(id => !initial.state.agents[id]) ||
       Object.keys(source.truth.entities).some(id => !initial.state.truth.entities[id]) ||
-      Object.keys(initial.state.agents).length !== 48 + (variant?.playerScenario ? 1 : 0) ||
-      (!variant?.playerScenario && Object.keys(initial.state.truth.entities).length !== 232)) {
+      Object.keys(initial.state.agents).length !== Object.keys(source.agents).length + (variant?.playerScenario ? 1 : 0) ||
+      Object.keys(initial.state.truth.entities).length !== Object.keys(source.truth.entities).length + (variant?.playerScenario ? 1 : 0)) {
       throw new Error("frozen full-world fixture cardinality changed");
     }
     status = "running";

@@ -36,13 +36,12 @@ agent:
       - { id: urgent-hope, description: 求援增加而可靠队伍不足带来的急切期待。, intensity: 0.52 }
     attitudes:
       - { id: toward-governor, subject_id: governor, description: 支持封锁危险层，但要求给可信队伍明确进入路径。, intensity: 0.62 }
-      - { id: toward-newcomer, subject_id: newcomer, description: 愿意给予一次陈述来意和证明自己的机会。, intensity: 0.28 }
     goals:
       - id: form-responsible-parties
         description: 从新来者与本地志愿者中组织至少一支能承担明确求援的可靠队伍。
         priority: 0.88
         progress: 0.38
-        target_ids: [temple, newcomer]
+        target_ids: [temple]
         motivated_by_ids: [courageous-service]
       - id: keep-recommendations-credible
         description: 防止城堡探索推荐被金钱、政治压力或虚假英雄名声收买。
@@ -58,16 +57,12 @@ agent:
       - { id: temple, name: Thor 神殿, description: 治疗、集结和分派求援的神殿。, status: observed }
       - { id: fortress, name: 黑沼城堡, description: 仍有危险地下层的旧要塞。, status: observed }
       - { id: governor, name: Tyrilas, description: 对进入地下层拥有最终行政控制的总督。, status: observed }
-      - { id: newcomer, name: 港口新来者, description: 可能成为援手，也可能只追逐宝藏的旅人。, status: reported }
     evidence:
       - { id: failed-party-record, kind: observation, description: 我见过缺乏准备的队伍把同伴和救援者一同拖入危险。, sourceId: self, step: 0 }
-      - { id: harbor-arrival-report, kind: testimony, description: 神殿接待者报告港口又有一名没有本地关系的新旅人。, sourceId: null, step: 0 }
     claims:
-      - { id: recommendation-needs-trial, subjectId: newcomer, predicate: trust, value: { kind: text, value: untested }, description: 新来者尚未证明能力与责任感。, stance: believed, confidence: 0.9, evidenceIds: [harbor-arrival-report] }
       - { id: fortress-needs-outsiders, subjectId: fortress, predicate: manpower, value: { kind: text, value: requires-vetted-outsiders }, description: 驻军无法独自清理地下层，长期安全仍需要外部队伍。, stance: believed, confidence: 0.87, evidenceIds: [failed-party-record] }
     bindings:
       - { local_entity_id: self, canonical_entity_ids: [canon-brannoc] }
       - { local_entity_id: temple, canonical_entity_ids: [temple-of-thor] }
       - { local_entity_id: fortress, canonical_entity_ids: [castle-blackmarsh-fortress] }
       - { local_entity_id: governor, canonical_entity_ids: [governor-tyrilas] }
-      - { local_entity_id: newcomer, canonical_entity_ids: [player] }

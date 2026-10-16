@@ -27,7 +27,7 @@ Visual snapshots keep separate operating-system baselines with the same strict p
 
 ## Direct runtime
 
-Direct entry tests cover zero-inference startup, full Blackmarsh 49-subject admission, authorized private decisions, ordinary actions with creation disabled, exact material consumption, partial goal evidence, reusable capabilities, shared-resource queues, earlier deadlines, saved continuous activity, committed randomness, local model failure, no-progress waits, restart and recorded replay. Only the external model transport is replaced. Live qualification uses the same cumulative budget and records failed or censored tasks without claiming speedups. See [Spec 0182](specs/0182-jev-direct-world-runtime.md#verification).
+Direct entry tests cover zero-inference startup, full Blackmarsh admission with 47 autonomous Agents and one Origin-created player, authorized private decisions, ordinary actions with creation disabled, exact material consumption, partial goal evidence, reusable capabilities, shared-resource queues, earlier deadlines, saved continuous activity, committed randomness, local model failure, no-progress waits, restart and recorded replay. Only the external model transport is replaced. Live qualification uses the same cumulative budget and records failed or censored tasks without claiming speedups. See [Spec 0182](specs/0182-jev-direct-world-runtime.md#verification).
 
 ## Reference algorithm compositions
 

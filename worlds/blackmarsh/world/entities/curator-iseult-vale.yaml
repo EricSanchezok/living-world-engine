@@ -41,7 +41,6 @@ agent:
       - { id: defensive-pride, description: 神殿衰败与外界轻视引发的防御性自尊。, intensity: 0.46 }
     attitudes:
       - { id: toward-thil, subject_id: thil, description: 尊重其经验，却怀疑商人本能会影响披露判断。, intensity: 0.53 }
-      - { id: toward-newcomer, subject_id: newcomer, description: 只有提出可核问题并尊重馆藏规则才值得注意。, intensity: 0.06 }
     goals:
       - id: stabilize-library
         description: 在不出售核心馆藏的前提下筹到修缮屋顶和保存手稿的资金。
@@ -63,7 +62,6 @@ agent:
       - { id: library, name: 神殿图书馆, description: 正在衰败但无法替代的深层馆藏。, status: observed }
       - { id: sealed-index, name: 密封索引, description: 记录若干 Atacyl 研究编号的残卷。, status: observed }
       - { id: thil, name: Thil, description: 可能识别索引记号的老法师商人。, status: observed }
-      - { id: newcomer, name: 港口新来者, description: 尚未提出任何研究问题的旅人。, status: reported }
     evidence:
       - { id: index-handwriting, kind: observation, description: 索引上的记号与 Atacyl 时期被查禁文书的笔法相同。, sourceId: self, step: 0 }
       - { id: repair-estimate, kind: testimony, description: 石匠估计屋顶修缮费用远高于本季查阅收入。, sourceId: null, step: 0 }
@@ -75,4 +73,3 @@ agent:
       - { local_entity_id: library, canonical_entity_ids: [temple-of-thoth] }
       - { local_entity_id: sealed-index, canonical_entity_ids: [thoth-sealed-index] }
       - { local_entity_id: thil, canonical_entity_ids: [thil-the-cowled] }
-      - { local_entity_id: newcomer, canonical_entity_ids: [player] }
