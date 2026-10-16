@@ -4,8 +4,8 @@ import type {
   PerspectiveFactValue,
 } from "../../shared/world-api";
 
-export type RelationKind = "exact" | "believed" | "suspected" | "disbelieved";
-export type RelationSource = "location" | "containment" | "fact" | "claim" | "attitude" | "goal" | "commitment";
+export type RelationKind = "exact" | "believed" | "suspected" | "disbelieved" | "attitude";
+export type RelationSource = "location" | "containment" | "fact" | "claim" | "attitude";
 export type ViewNodeKind = "self" | "entity" | "authorized" | "unidentified" | "value";
 
 export interface PerspectiveViewNode {
@@ -102,10 +102,10 @@ export function buildAgentPerspectiveGraph(perspective: AgentPerspectiveView): {
     id: `containment:${index}`,
     source: relation.containerRef,
     target: relation.entityRef,
-    label: relation.viaUnknownContainer ? "随身范围" : relation.depth === 1 ? "随身" : "包含",
+    label: relation.viaUnknownContainer ? "随身物品" : relation.depth === 1 ? "随身" : "包含",
     description: relation.viaUnknownContainer
-      ? "这个存在处于你的随身范围内，但中间容器尚未识别。"
-      : relation.depth === 1 ? "这个存在当前直接由你携带。" : "这个存在位于你携带的容器中。",
+      ? "随身携带，但中间容器还没有辨认出来。"
+      : relation.depth === 1 ? "这件物品当前直接由你携带。" : "这件物品位于你携带的容器中。",
     kind: "exact",
     origin: "containment",
     evidenceIds: [],
@@ -149,7 +149,7 @@ export function buildAgentPerspectiveGraph(perspective: AgentPerspectiveView): {
         kind: "value",
         name: beliefValueLabel(claim.value),
         description: claim.description,
-        status: "hypothesized",
+        status: claim.stance,
         targetable: false,
       });
     }
@@ -166,70 +166,13 @@ export function buildAgentPerspectiveGraph(perspective: AgentPerspectiveView): {
     });
   });
 
-  const addCharacterRelation = (
-    id: string,
-    targets: readonly string[],
-    label: string,
-    description: string,
-    origin: RelationSource,
-    evidenceIds: string[],
-  ) => {
-    const validTargets = targets.filter((targetId) => nodeMap.has(localRef(targetId)));
-    if (validTargets.length === 0) {
-      const target = `${origin}-value:${id}`;
-      nodeMap.set(target, {
-        id: target,
-        kind: "value",
-        name: description,
-        description,
-        status: "hypothesized",
-        targetable: false,
-      });
-      relations.push({
-        id: `${origin}:${id}:untargeted`,
-        source: selfRef,
-        target,
-        label,
-        description,
-        kind: "believed",
-        origin,
-        evidenceIds,
-      });
-      return;
-    }
-    for (const targetId of validTargets) {
-      const target = localRef(targetId);
-      relations.push({
-        id: `${origin}:${id}:${targetId}`,
-        source: selfRef,
-        target,
-        label,
-        description,
-        kind: "believed",
-        origin,
-        evidenceIds,
-      });
-    }
-  };
   for (const attitude of Object.values(perspective.character.attitudes)) {
-    if (attitude.status === "active") addCharacterRelation(
-      attitude.id, [attitude.subjectId], "态度", attitude.description, "attitude", attitude.evidenceIds,
-    );
-  }
-  for (const goal of Object.values(perspective.character.goals)) {
-    if (goal.status === "active" || goal.status === "suspended") addCharacterRelation(
-      goal.id, goal.targetIds, "目标", goal.description, "goal", goal.evidenceIds,
-    );
-  }
-  for (const commitment of Object.values(perspective.character.commitments)) {
-    if (commitment.status === "active") addCharacterRelation(
-      commitment.id,
-      commitment.subjectIds,
-      "承诺",
-      commitment.description,
-      "commitment",
-      commitment.evidenceIds,
-    );
+    const target = localRef(attitude.subjectId);
+    if (attitude.status !== "active" || !nodeMap.has(target)) continue;
+    relations.push({
+      id: `attitude:${attitude.id}`, source: selfRef, target, label: "态度",
+      description: attitude.description, kind: "attitude", origin: "attitude", evidenceIds: attitude.evidenceIds,
+    });
   }
 
   return {
@@ -239,4 +182,24 @@ export function buildAgentPerspectiveGraph(perspective: AgentPerspectiveView): {
       left.source.localeCompare(right.source) || left.target.localeCompare(right.target) || left.id.localeCompare(right.id)),
     selfRef,
   };
+}
+
+export const relationLabels: Record<RelationKind, string> = {
+  attitude: "你的态度", exact: "已知事实", believed: "相信", suspected: "存疑", disbelieved: "不相信",
+};
+
+export function perspectiveNodeLabel(node: PerspectiveViewNode): string {
+  if (node.kind === "self") return "你";
+  const labels: Record<string, string> = {
+    observed: "亲自观察", reported: "他人告知", hypothesized: "尚待确认",
+    authorized: "已知信息", unidentified: "尚未辨认", ...relationLabels,
+  };
+  return labels[node.status] ?? "已知信息";
+}
+
+/** Keep all direct relations of the focused object in the auxiliary graph. */
+export function focusPerspectiveGraph(graph: ReturnType<typeof buildAgentPerspectiveGraph>, focusId: string) {
+  const relations = graph.relations.filter((relation) => relation.source === focusId || relation.target === focusId);
+  const ids = new Set([focusId, ...relations.flatMap((relation) => [relation.source, relation.target])]);
+  return { nodes: graph.nodes.filter((node) => ids.has(node.id)), relations, selfRef: focusId };
 }

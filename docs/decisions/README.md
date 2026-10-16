@@ -146,3 +146,5 @@ An optional adjacent `Class:` line uses `architecture`, `process`, `testing`, `f
 - [0237 — Bind open values and published continuations](0237-open-values-and-published-continuations.md)
 
 - [0240 — Native Direct events and instance journal](0240-native-direct-events-and-instance-journal.md)
+
+- [0243 — Grouped perspective reading with auxiliary relationships](0243-grouped-perspective-reading.md)

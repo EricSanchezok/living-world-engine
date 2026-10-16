@@ -4,7 +4,7 @@ import { projectAgentPerspective } from "../../engine/cognition/agent-perspectiv
 import type { WorldFact } from "../../engine/contracts/model";
 import { createTestModelCatalog } from "../../engine/testing/model-provider";
 import { loadWorldScript } from "../../script/world-loader";
-import { buildAgentPerspectiveGraph } from "../_lib/agent-perspective-graph";
+import { buildAgentPerspectiveGraph, focusPerspectiveGraph } from "../_lib/agent-perspective-graph";
 
 function perspective() {
   const definition = loadWorldScript(path.resolve("test/fixtures/open-world-script"), {
@@ -56,11 +56,22 @@ describe("Agent Perspective relationship graph", () => {
       kind: "suspected",
       label: "authenticity",
     }));
-    expect(graph.relations).toContainEqual(expect.objectContaining({
-      origin: "goal",
-      kind: "believed",
-      description: "找到石门后的道路",
-    }));
+    expect(graph.nodes.some((node) => node.name === "找到石门后的道路")).toBe(false);
+    expect(graph.relations.some((relation) => relation.description === "找到石门后的道路")).toBe(false);
+  });
+
+  it("labels personal attitudes without asserting a belief about the other person", () => {
+    const view = perspective();
+    view.character.attitudes.key = { id: "key", subjectId: "copper-key", description: "我想保管好这把钥匙。", intensity: 0.5, status: "active", createdAtStep: 0, updatedAtStep: 0, evidenceIds: [] };
+    expect(buildAgentPerspectiveGraph(view).relations).toContainEqual(expect.objectContaining({ origin: "attitude", kind: "attitude", target: "local:copper-key" }));
+  });
+
+  it("keeps every direct relation of the focused object without turning intentions into facts", () => {
+    const graph = buildAgentPerspectiveGraph(perspective());
+    const focused = focusPerspectiveGraph(graph, "local:copper-key");
+    expect(focused.nodes.some((node) => node.id === "local:copper-key")).toBe(true);
+    expect(focused.relations).toEqual(graph.relations.filter((relation) => relation.source === "local:copper-key" || relation.target === "local:copper-key"));
+    expect(focused.nodes.every((node) => node.id === "local:copper-key" || focused.relations.some((relation) => [relation.source, relation.target].includes(node.id)))).toBe(true);
   });
 
   it("does not invent a meter or a relation for absent structures", () => {

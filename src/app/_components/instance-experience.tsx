@@ -267,24 +267,30 @@ function WorldContext({
 
 function GameOverlay({
   children,
+  compact = false,
   description,
   onOpenChange,
   open,
   title,
 }: {
   children: React.ReactNode;
+  compact?: boolean;
   description: string;
   onOpenChange: (open: boolean) => void;
   open: boolean;
   title: string;
 }) {
+  const closeRef = useRef<HTMLButtonElement>(null);
   return (
     <Dialog.Root onOpenChange={onOpenChange} open={open}>
       <Dialog.Portal>
         <Dialog.Overlay className="cg-modal-overlay" />
         <Dialog.Content
           aria-describedby="cg-game-overlay-description"
-          className="cg-game-overlay cg-modal-surface"
+          className={`cg-game-overlay cg-modal-surface${compact ? " cg-game-overlay--compact" : ""}`}
+          onOpenAutoFocus={(event) => {
+            if (compact) { event.preventDefault(); closeRef.current?.focus(); }
+          }}
           onCloseAutoFocus={(event) => {
             event.preventDefault();
             window.setTimeout(() => {
@@ -297,7 +303,7 @@ function GameOverlay({
             <Dialog.Description id="cg-game-overlay-description">{description}</Dialog.Description>
           </header>
           <div className="cg-game-overlay__body cg-modal-scroll" tabIndex={0}>{children}</div>
-          <Dialog.Close aria-label={`关闭${title}`} className="cg-modal-close">
+          <Dialog.Close aria-label={`关闭${title}`} className="cg-modal-close" ref={closeRef}>
             <X aria-hidden="true" />
           </Dialog.Close>
         </Dialog.Content>
@@ -769,7 +775,8 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
           />
         </GameOverlay>
         <GameOverlay
-          description="这里只显示当前角色被允许知道的内容。"
+          compact
+          description="查看你的状态、随身物品，以及当前知道的事情。"
           onOpenChange={(open) => { if (!open) setOverlay(null); }}
           open={overlay === "character"}
           title="视角"

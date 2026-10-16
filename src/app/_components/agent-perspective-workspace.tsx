@@ -1,519 +1,197 @@
 "use client";
 
-import {
-  Background,
-  BackgroundVariant,
-  Controls,
-  Handle,
-  MarkerType,
-  Position,
-  ReactFlow,
-  type Edge,
-  type Node,
-  type NodeProps,
-  type ReactFlowInstance,
-} from "@xyflow/react";
-import ELK, { type ELK as ElkLayoutEngine } from "elkjs/lib/elk-api.js";
-import {
-  Box,
-  Building2,
-  CircleHelp,
-  MapPin,
-  Orbit,
-  PackageOpen,
-  UserRound,
-} from "lucide-react";
-import { useTheme } from "next-themes";
-import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type KeyboardEvent,
-} from "react";
+import { ChevronDown, MapPin, Network, Orbit, Search, UserRound } from "lucide-react";
+import { lazy, Suspense, useId, useMemo, useRef, useState, type RefObject } from "react";
 import type { AgentPerspectiveView } from "../../shared/world-api";
 import {
   buildAgentPerspectiveGraph,
+  focusPerspectiveGraph,
+  perspectiveNodeLabel,
+  relationLabels,
   type PerspectiveViewNode,
   type PerspectiveViewRelation,
-  type RelationKind,
-  type RelationSource,
-  type ViewNodeKind,
 } from "../_lib/agent-perspective-graph";
 
-interface PerspectiveNodeData extends Record<string, unknown> {
-  node: PerspectiveViewNode;
-  selected: boolean;
-}
-
-type PerspectiveFlowNode = Node<PerspectiveNodeData, "perspective">;
-
-const nodeWidth = 184;
-const nodeHeight = 78;
-const nodeHandles: NonNullable<PerspectiveFlowNode["handles"]> = [
-  { type: "target", position: Position.Left, x: -3, y: 36, width: 6, height: 6 },
-  { type: "source", position: Position.Right, x: 181, y: 36, width: 6, height: 6 },
-];
-
-const statusLabels: Record<string, string> = {
-  observed: "亲自观察",
-  reported: "他人告知",
-  hypothesized: "推测存在",
-  authorized: "关系已授权",
-  unidentified: "尚未识别",
-};
-
-const relationLabels: Record<RelationKind, string> = {
-  exact: "精确",
-  believed: "相信",
-  suspected: "怀疑",
-  disbelieved: "不相信",
-};
-
-const magnitudeLabels = {
-  none: "无",
-  minor: "轻微",
-  standard: "标准",
-  major: "重大",
-  decisive: "决定性",
-} as const;
-
-const sourceLabels: Record<RelationSource, string> = {
-  location: "当前位置",
-  containment: "随身关系",
-  fact: "精确关系",
-  claim: "主观认知",
-  attitude: "态度",
-  goal: "目标",
-  commitment: "承诺",
-};
-
-const iconByNodeKind = {
-  self: UserRound,
-  entity: Box,
-  authorized: Building2,
-  unidentified: CircleHelp,
-  value: Orbit,
-} satisfies Record<ViewNodeKind, typeof Orbit>;
-
-function moveNodeFocus(event: KeyboardEvent<HTMLButtonElement>) {
-  if (!["ArrowLeft", "ArrowUp", "ArrowRight", "ArrowDown", "Home", "End"].includes(event.key)) return;
-  const graph = event.currentTarget.closest(".cg-perspective-graph");
-  const buttons = [...(graph?.querySelectorAll<HTMLButtonElement>(".cg-perspective-node") ?? [])];
-  const current = buttons.indexOf(event.currentTarget);
-  if (current < 0 || buttons.length === 0) return;
-  const target = event.key === "Home"
-    ? 0
-    : event.key === "End"
-      ? buttons.length - 1
-      : (current + (event.key === "ArrowLeft" || event.key === "ArrowUp" ? -1 : 1) + buttons.length) % buttons.length;
-  event.preventDefault();
-  buttons[target]?.focus();
-}
-
-function PerspectiveNode({ data }: NodeProps<PerspectiveFlowNode>) {
-  const Icon = iconByNodeKind[data.node.kind];
-  return (
-    <>
-      <Handle aria-hidden="true" className="cg-perspective-node__handle" position={Position.Left} type="target" />
-      <button
-        aria-label={`${data.node.name}，${statusLabels[data.node.status] ?? data.node.status}。${data.node.description}`}
-        aria-pressed={data.selected}
-        className="cg-perspective-node nodrag"
-        data-kind={data.node.kind}
-        data-selected={data.selected || undefined}
-        onKeyDown={moveNodeFocus}
-        type="button"
-      >
-        <span className="cg-perspective-node__icon"><Icon aria-hidden="true" /></span>
-        <span className="cg-perspective-node__copy">
-          <strong>{data.node.name}</strong>
-          <small>{statusLabels[data.node.status] ?? data.node.status}</small>
-        </span>
-      </button>
-      <Handle aria-hidden="true" className="cg-perspective-node__handle" position={Position.Right} type="source" />
-    </>
-  );
-}
-
-const nodeTypes = { perspective: PerspectiveNode };
-
-function fallbackPositions(
-  nodes: readonly PerspectiveViewNode[],
-  selfRef: string,
-): Record<string, { x: number; y: number }> {
-  const positions: Record<string, { x: number; y: number }> = { [selfRef]: { x: 0, y: 0 } };
-  const surrounding = nodes.filter((node) => node.id !== selfRef);
-  surrounding.forEach((node, index) => {
-    const ring = Math.floor(index / 8);
-    const count = Math.min(8, surrounding.length - ring * 8);
-    const angle = (Math.PI * 2 * (index % 8)) / Math.max(1, count) - Math.PI / 2;
-    const radius = 250 + ring * 180;
-    positions[node.id] = {
-      x: Math.cos(angle) * radius,
-      y: Math.sin(angle) * radius,
-    };
-  });
-  return positions;
-}
-
-function PerspectiveGraph({
-  nodes: sourceNodes,
-  onSelect,
-  reduceMotion,
-  relations,
-  selectedId,
-  selfRef,
-}: {
-  nodes: PerspectiveViewNode[];
-  onSelect: (nodeId: string) => void;
-  reduceMotion: boolean;
-  relations: PerspectiveViewRelation[];
-  selectedId: string;
-  selfRef: string;
-}) {
-  const { resolvedTheme } = useTheme();
-  const graphRef = useRef<HTMLDivElement>(null);
-  const elkRef = useRef<ElkLayoutEngine | null>(null);
-  const instanceRef = useRef<ReactFlowInstance<PerspectiveFlowNode, Edge> | null>(null);
-  const [flowReady, setFlowReady] = useState(false);
-  const [positions, setPositions] = useState<Record<string, { x: number; y: number }>>(() =>
-    fallbackPositions(sourceNodes, selfRef));
-  const [settledSignature, setSettledSignature] = useState<string>();
-  const signature = useMemo(() => [
-    sourceNodes.map((node) => node.id).join("|"),
-    relations.map((relation) => relation.id).join("|"),
-  ].join("::"), [relations, sourceNodes]);
-  const fallback = useMemo(() => fallbackPositions(sourceNodes, selfRef), [selfRef, sourceNodes]);
-
-  useEffect(() => {
-    const worker = new Worker(new URL("../_workers/agent-perspective-layout.worker.ts", import.meta.url), {
-      type: "module",
-    });
-    const elk = new ELK({ algorithms: ["stress"], workerFactory: () => worker });
-    elkRef.current = elk;
-    return () => {
-      elk.terminateWorker();
-      elkRef.current = null;
-    };
-  }, []);
-
-  useEffect(() => {
-    const elk = elkRef.current;
-    if (!elk || sourceNodes.length === 0) return;
-    let cancelled = false;
-    void elk.layout({
-      id: `agent-perspective:${signature}`,
-      layoutOptions: {
-        "elk.algorithm": "stress",
-        "elk.edgeRouting": "SPLINES",
-        "elk.spacing.nodeNode": "72",
-        "elk.stress.desiredEdgeLength": "180",
-        "elk.padding": "[top=80,left=80,bottom=80,right=80]",
-      },
-      children: sourceNodes.map((node) => ({ id: node.id, width: nodeWidth, height: nodeHeight })),
-      edges: relations.map((relation) => ({
-        id: relation.id,
-        sources: [relation.source],
-        targets: [relation.target],
-      })),
-    }).then((graph) => {
-      if (cancelled) return;
-      const raw = Object.fromEntries((graph.children ?? []).map((node) => [
-        node.id,
-        { x: node.x ?? 0, y: node.y ?? 0 },
-      ]));
-      const center = raw[selfRef] ?? { x: 0, y: 0 };
-      setPositions(Object.fromEntries(Object.entries(raw).map(([id, position]) => [id, {
-        x: position.x - center.x,
-        y: position.y - center.y,
-      }])));
-      setSettledSignature(signature);
-    }).catch(() => {
-      if (cancelled) return;
-      setPositions(fallback);
-      setSettledSignature(signature);
-    });
-    return () => { cancelled = true; };
-  }, [fallback, relations, selfRef, signature, sourceNodes]);
-
-  const nodes = useMemo<PerspectiveFlowNode[]>(() => sourceNodes.map((node) => ({
-    id: node.id,
-    type: "perspective",
-    position: positions[node.id] ?? fallback[node.id] ?? { x: 0, y: 0 },
-    initialWidth: nodeWidth,
-    initialHeight: nodeHeight,
-    handles: nodeHandles,
-    draggable: false,
-    selectable: false,
-    ariaLabel: `${node.name}：${node.description}`,
-    data: { node, selected: selectedId === node.id },
-  })), [fallback, positions, selectedId, sourceNodes]);
-
-  const edges = useMemo<Edge[]>(() => relations.map((relation) => ({
-    id: relation.id,
-    source: relation.source,
-    target: relation.target,
-    label: relation.label,
-    className: `cg-perspective-edge cg-perspective-edge--${relation.kind}`,
-    markerEnd: { type: MarkerType.ArrowClosed },
-    style: { stroke: "var(--cg-foreground)" },
-    labelStyle: { fill: "var(--cg-muted-foreground)", fontSize: 10 },
-    labelBgStyle: { fill: "var(--cg-card)", fillOpacity: 0.9 },
-  })), [relations]);
-
-  const layoutReady = sourceNodes.length === 0 || settledSignature === signature;
-
-  useEffect(() => {
-    const graph = graphRef.current;
-    if (!flowReady || !layoutReady || !instanceRef.current || !graph || nodes.length === 0) return;
-    const maxX = Math.max(...nodes.map((node) => Math.abs(node.position.x) + nodeWidth));
-    const maxY = Math.max(...nodes.map((node) => Math.abs(node.position.y) + nodeHeight));
-    const zoom = Math.max(0.25, Math.min(1.05,
-      graph.clientWidth / Math.max(nodeWidth * 1.5, maxX * 2.15),
-      graph.clientHeight / Math.max(nodeHeight * 1.5, maxY * 2.15)));
-    const frame = requestAnimationFrame(() => {
-      void instanceRef.current?.setCenter(nodeWidth / 2, nodeHeight / 2, {
-        zoom,
-        duration: reduceMotion ? 0 : 240,
-      });
-    });
-    return () => cancelAnimationFrame(frame);
-  }, [flowReady, layoutReady, nodes, reduceMotion]);
-
-  return (
-    <div
-      aria-busy={!layoutReady}
-      aria-label="角色关系星图"
-      className="cg-perspective-graph"
-      ref={graphRef}
-      role="region"
-    >
-      <ReactFlow
-        colorMode={resolvedTheme === "dark" ? "dark" : "light"}
-        edges={edges}
-        maxZoom={1.55}
-        minZoom={0.25}
-        nodeTypes={nodeTypes}
-        nodes={nodes}
-        nodesConnectable={false}
-        nodesDraggable={false}
-        nodesFocusable={false}
-        onInit={(instance) => {
-          instanceRef.current = instance;
-          setFlowReady(true);
-        }}
-        onNodeClick={(_, node) => onSelect(node.id)}
-        panOnScroll
-        proOptions={{ hideAttribution: true }}
-      >
-        <Background color="var(--cg-border)" gap={26} size={1} variant={BackgroundVariant.Dots} />
-        <Controls className="cg-perspective-controls" position="bottom-left" showInteractive={false} />
-      </ReactFlow>
-    </div>
-  );
-}
+const PerspectiveGraph = lazy(() => import("./agent-perspective-graph").then((module) => ({ default: module.PerspectiveGraph })));
+const evidenceLabels = { observation: "亲自观察", testimony: "他人证词", inference: "推断", assumption: "假设" } as const;
+const magnitudeLabels = { none: "无", minor: "轻微", standard: "中等", major: "显著", decisive: "决定性" } as const;
 
 function elapsedLabel(seconds: number): string {
   if (seconds < 60) return `${seconds} 秒`;
   const minutes = Math.floor(seconds / 60);
   const remainder = seconds % 60;
   if (minutes < 60) return remainder ? `${minutes} 分 ${remainder} 秒` : `${minutes} 分`;
-  const hours = Math.floor(minutes / 60);
-  return `${hours} 时 ${minutes % 60} 分`;
+  return `${Math.floor(minutes / 60)} 时 ${minutes % 60} 分`;
 }
 
-function mechanicsExist(perspective: AgentPerspectiveView): boolean {
-  return perspective.mechanics.meters.length + perspective.mechanics.quantities.length +
-    perspective.mechanics.ratings.length + perspective.mechanics.conditions.length > 0;
+function Evidence({ ids, perspective }: { ids: readonly string[]; perspective: AgentPerspectiveView }) {
+  const evidence = perspective.knowledge.evidence.filter((item) => ids.includes(item.id));
+  if (!evidence.length) return null;
+  return <details className="cg-perspective-evidence">
+    <summary>查看依据 · {evidence.length}</summary>
+    <ul>{evidence.map((item) => <li key={item.id}>
+      <span>{evidenceLabels[item.kind]}</span><p>{item.description}</p>
+    </li>)}</ul>
+  </details>;
 }
 
-function Mechanics({ perspective }: { perspective: AgentPerspectiveView }) {
-  if (!mechanicsExist(perspective)) return null;
-  return (
-    <section aria-label="角色数值" className="cg-perspective-mechanics">
-      {perspective.mechanics.meters.map((meter) => (
-        <div className="cg-perspective-meter" key={meter.name}>
-          <span><strong>{meter.name}</strong><small>{meter.current} / {meter.max}</small></span>
-          <meter max={meter.max} min={meter.min} value={meter.current}>{meter.current}</meter>
-        </div>
-      ))}
-      {perspective.mechanics.quantities.map((quantity) => (
-        <div className="cg-perspective-stat" key={quantity.name}>
-          <small>{quantity.name}</small><strong>{quantity.amount}<span>{quantity.unit}</span></strong>
-        </div>
-      ))}
-      {perspective.mechanics.ratings.map((rating) => (
-        <div className="cg-perspective-stat" key={rating.name}>
-          <small>{rating.name}</small><strong>{rating.value}<span>{rating.min}…{rating.max}</span></strong>
-        </div>
-      ))}
-      {perspective.mechanics.conditions.map((condition, index) => (
-        <div className="cg-perspective-stat" key={`${condition.label}:${condition.duration}:${index}`}>
-          <small>当前状态 · {condition.duration}</small>
-          <strong>{condition.label}<span>{magnitudeLabels[condition.magnitude]}</span></strong>
-        </div>
-      ))}
-    </section>
-  );
+function Status({ perspective, headingRef }: { perspective: AgentPerspectiveView; headingRef: RefObject<HTMLHeadingElement | null> }) {
+  const { meters, ratings, conditions } = perspective.mechanics;
+  const ranges = new Set(ratings.map((rating) => `${rating.min} 至 ${rating.max}`));
+  return <section className="cg-perspective-section" aria-label="状态">
+    <h3 ref={headingRef} tabIndex={-1}>状态</h3>
+    {meters.length > 0 && <div className="cg-perspective-meters">{meters.map((meter) => <div className="cg-perspective-meter" key={meter.name}>
+      <span><strong>{meter.name}</strong><small>{meter.current} / {meter.max}</small></span>
+      <meter aria-label={meter.name} min={meter.min} max={meter.max} value={meter.current}>{meter.current}</meter>
+    </div>)}</div>}
+    {conditions.length > 0 && <ul className="cg-perspective-conditions">{conditions.map((condition, index) => <li key={`${condition.label}:${index}`}>
+      <strong>{condition.label}</strong><span>{condition.duration} · {magnitudeLabels[condition.magnitude]}影响</span>
+      {condition.description && <p>{condition.description}</p>}
+    </li>)}</ul>}
+    {!meters.length && !conditions.length && <p className="cg-perspective-empty">暂无身体状态记录。</p>}
+    {ratings.length > 0 && <details className="cg-perspective-disclosure">
+      <summary>能力 <span>{ratings.length} 项</span><ChevronDown aria-hidden="true" /></summary>
+      <p className="cg-perspective-note">显示当前能力值{ranges.size === 1 ? `，数值范围为 ${[...ranges][0]}` : "及各自的数值范围"}。</p>
+      <dl className="cg-perspective-ratings">{ratings.map((rating) => <div key={rating.name}>
+        <dt>{rating.name}</dt><dd>{rating.value}{ranges.size > 1 && <small>范围 {rating.min} 至 {rating.max}</small>}</dd>
+      </div>)}</dl>
+    </details>}
+    {perspective.self.description && <details className="cg-perspective-disclosure">
+      <summary>关于自己<ChevronDown aria-hidden="true" /></summary><p>{perspective.self.description}</p>
+    </details>}
+  </section>;
 }
 
-function relatedEvidence(perspective: AgentPerspectiveView, relations: readonly PerspectiveViewRelation[]) {
-  const ids = new Set(relations.flatMap((relation) => relation.evidenceIds));
-  return perspective.knowledge.evidence.filter((evidence) => ids.has(evidence.id));
-}
-
-function PerspectiveDetails({
-  node,
-  perspective,
-  relations,
-}: {
+function EntityEntry({ node, perspective, relations, register, carrying }: {
   node: PerspectiveViewNode;
   perspective: AgentPerspectiveView;
-  relations: PerspectiveViewRelation[];
+  relations: readonly PerspectiveViewRelation[];
+  register: (element: HTMLDetailsElement | null) => void;
+  carrying?: string;
 }) {
-  const related = relations.filter((relation) => relation.source === node.id || relation.target === node.id);
-  const evidence = relatedEvidence(perspective, related);
-  const localId = node.id.startsWith("local:") ? node.id.slice("local:".length) : undefined;
-  const isSelf = localId === perspective.self.localEntityId;
-  const goals = Object.values(perspective.character.goals).filter((goal) =>
-    (goal.status === "active" || goal.status === "suspended") &&
-    (isSelf || Boolean(localId && goal.targetIds.includes(localId))));
-  const commitments = Object.values(perspective.character.commitments).filter((commitment) =>
-    commitment.status === "active" &&
-    (isSelf || Boolean(localId && commitment.subjectIds.includes(localId))));
-
-  return (
-    <aside aria-label={`${node.name}详情`} className="cg-perspective-detail">
-      <p className="cg-eyebrow">当前焦点</p>
-      <h3>{node.name}</h3>
-      <p>{node.description}</p>
-      <div className="cg-perspective-tags">
-        <span>{statusLabels[node.status] ?? node.status}</span>
-        <span>{node.targetable ? "可作为行动对象" : "仅供查看"}</span>
-      </div>
-
-      <section>
-        <h4>与我有关</h4>
-        {related.length ? (
-          <ul>
-            {related.map((relation) => (
-              <li key={relation.id}>
-                <span data-relation={relation.kind}>{relationLabels[relation.kind]} · {sourceLabels[relation.origin]}</span>
-                <strong>{relation.description}</strong>
-                <p>关系标签：{relation.label}</p>
-              </li>
-            ))}
-          </ul>
-        ) : <p className="cg-muted">当前没有显式关系。</p>}
-      </section>
-
-      {(goals.length > 0 || commitments.length > 0) && (
-        <section>
-          <h4>目标与承诺</h4>
-          <ul>
-            {goals.map((goal) => <li key={goal.id}><strong>目标</strong><p>{goal.description}</p></li>)}
-            {commitments.map((commitment) => (
-              <li key={commitment.id}><strong>承诺</strong><p>{commitment.description}</p></li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {evidence.length > 0 && (
-        <section>
-          <h4>依据</h4>
-          <ul>{evidence.map((item) => (
-            <li key={item.id}><strong>{item.kind}</strong><p>{item.description}</p></li>
-          ))}</ul>
-        </section>
-      )}
-    </aside>
-  );
+  const ownRelations = relations.filter((relation) => relation.source === node.id && (relation.origin === "fact" || relation.origin === "claim"));
+  const attitudes = Object.values(perspective.character.attitudes).filter((attitude) =>
+    attitude.status === "active" && `local:${attitude.subjectId}` === node.id);
+  return <details className="cg-perspective-entity" ref={register}>
+    <summary>
+      <span className="cg-perspective-entity__title"><strong>{node.kind === "self" ? "关于自己的信息" : node.name}</strong><small>{carrying ?? perspectiveNodeLabel(node)}</small></span>
+      <ChevronDown aria-hidden="true" />
+    </summary>
+    <div className="cg-perspective-entity__body">
+      {node.kind !== "self" && node.description && <p>{node.description}</p>}
+      {attitudes.map((attitude) => <div className="cg-perspective-record" key={attitude.id}>
+        <span>你的态度</span><p>{attitude.description}</p><Evidence ids={attitude.evidenceIds} perspective={perspective} />
+      </div>)}
+      {ownRelations.map((relation) => <div className="cg-perspective-record" key={relation.id}>
+        <span>{relationLabels[relation.kind]}</span><p>{relation.description}</p>
+        <Evidence ids={relation.evidenceIds} perspective={perspective} />
+      </div>)}
+      {!node.description && !ownRelations.length && !attitudes.length && <p className="cg-perspective-empty">暂时没有更多信息。</p>}
+    </div>
+  </details>;
 }
 
-function SemanticPerspective({
-  nodes,
-  relations,
-}: {
-  nodes: PerspectiveViewNode[];
-  relations: PerspectiveViewRelation[];
-}) {
-  const byId = new Map(nodes.map((node) => [node.id, node]));
-  const groups = (["exact", "believed", "suspected", "disbelieved"] as const).map((kind) => ({
-    kind,
-    relations: relations.filter((relation) => relation.kind === kind),
-  })).filter((group) => group.relations.length > 0);
-  return (
-    <section aria-label="角色关系语义列表" className="cg-perspective-semantic">
-      <h3>关系列表</h3>
-      {groups.length === 0 ? <p>当前没有显式关系。</p> : groups.map((group) => (
-        <section key={group.kind}>
-          <h4>{relationLabels[group.kind]}</h4>
-          <ul>
-            {group.relations.map((relation) => (
-              <li key={relation.id}>
-                <strong>{byId.get(relation.source)?.name ?? "未知存在"}</strong>
-                <span>{relation.label}</span>
-                <strong>{byId.get(relation.target)?.name ?? "未知存在"}</strong>
-                <p><strong>{relation.description}</strong><br />{sourceLabels[relation.origin]} · {relationLabels[relation.kind]}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))}
-    </section>
-  );
+function Goals({ perspective }: { perspective: AgentPerspectiveView }) {
+  const goals = Object.values(perspective.character.goals).filter((goal) => goal.status === "active" || goal.status === "suspended");
+  const commitments = Object.values(perspective.character.commitments).filter((commitment) => commitment.status === "active");
+  const summary = [goals.length ? `${goals.length} 项目标` : null, commitments.length ? `${commitments.length} 项承诺` : null].filter(Boolean).join(" · ");
+  return <section className="cg-perspective-section" aria-label="目标">
+    <h3>目标 <small>{summary}</small></h3>
+    {!goals.length && !commitments.length && <p className="cg-perspective-empty">还没有记录目标或承诺。</p>}
+    <ul className="cg-perspective-goals">{goals.map((goal) => <li key={`goal:${goal.id}`}>
+      <span>{goal.status === "suspended" ? "暂缓" : "目标"}</span><div><p>{goal.description}</p><Evidence ids={goal.evidenceIds} perspective={perspective} /></div>
+    </li>)}{commitments.map((commitment) => <li key={`commitment:${commitment.id}`}>
+      <span>承诺</span><div><p>{commitment.description}</p><Evidence ids={commitment.evidenceIds} perspective={perspective} /></div>
+    </li>)}</ul>
+  </section>;
 }
 
-export function AgentPerspectiveWorkspace({
-  perspective,
-  reduceMotion,
-}: {
-  perspective: AgentPerspectiveView;
-  reduceMotion: boolean;
-}) {
+function PerspectiveContent({ perspective, reduceMotion }: { perspective: AgentPerspectiveView; reduceMotion: boolean }) {
   const graph = useMemo(() => buildAgentPerspectiveGraph(perspective), [perspective]);
+  const entries = graph.nodes.filter((node) => node.kind !== "value");
+  const carried = new Map(perspective.knowledge.containment.map((item) => [item.entityRef, item]));
+  const [query, setQuery] = useState("");
+  const [graphOpen, setGraphOpen] = useState(false);
+  const [focusId, setFocusId] = useState(graph.selfRef);
   const [selectedId, setSelectedId] = useState(graph.selfRef);
-  const effectiveSelectedId = graph.nodes.some((node) => node.id === selectedId) ? selectedId : graph.selfRef;
-  const selected = graph.nodes.find((node) => node.id === effectiveSelectedId) ?? graph.nodes[0];
-
-  return (
-    <section className="cg-perspective-workspace">
-      <header className="cg-perspective-summary">
-        <div className="cg-perspective-summary__identity">
-          <span aria-hidden="true"><UserRound /></span>
-          <div><p className="cg-eyebrow">Agent Perspective · R{perspective.revision}</p><h2>{perspective.self.name}</h2></div>
-        </div>
-        <dl>
-          <div><dt><MapPin aria-hidden="true" />地点</dt><dd>{perspective.self.location?.name ?? "位置未知"}</dd></div>
-          <div><dt><Orbit aria-hidden="true" />世界时间</dt><dd>{elapsedLabel(perspective.elapsedSeconds)}</dd></div>
-          <div><dt><PackageOpen aria-hidden="true" />随身存在</dt><dd>{perspective.knowledge.containment.length}</dd></div>
-        </dl>
-      </header>
-
-      <Mechanics perspective={perspective} />
-
-      <div className="cg-perspective-legend" aria-label="关系图图例">
-        <span data-relation="exact"><i />精确关系</span>
-        <span data-relation="believed"><i />相信</span>
-        <span data-relation="suspected"><i />怀疑</span>
-        <span data-relation="disbelieved"><i />不相信</span>
+  const currentFocus = graph.nodes.some((node) => node.id === focusId) ? focusId : graph.selfRef;
+  const nearby = useMemo(() => focusPerspectiveGraph(graph, currentFocus), [graph, currentFocus]);
+  const selected = nearby.nodes.find((node) => node.id === selectedId) ?? nearby.nodes.find((node) => node.id === currentFocus)!;
+  const entryRefs = useRef(new Map<string, HTMLDetailsElement>());
+  const statusRef = useRef<HTMLHeadingElement>(null);
+  const searchId = useId();
+  const focusSelectId = useId();
+  const search = query.trim().toLocaleLowerCase();
+  const known = entries.filter((node) => !carried.has(node.id) && (node.id !== graph.selfRef || graph.relations.some((relation) =>
+    relation.source === node.id && (relation.origin === "fact" || relation.origin === "claim"))));
+  const visible = known.filter((node) => [node.name, node.description,
+    ...graph.relations.filter((relation) => relation.source === node.id).map((relation) => relation.description),
+    ...Object.values(perspective.character.attitudes).filter((attitude) => `local:${attitude.subjectId}` === node.id).map((attitude) => attitude.description),
+  ].join(" ").toLocaleLowerCase().includes(search));
+  function register(id: string) {
+    return (element: HTMLDetailsElement | null) => {
+      if (element) entryRefs.current.set(id, element);
+      else entryRefs.current.delete(id);
+    };
+  }
+  function showSelectedDetails() {
+    const id = selected.kind === "value"
+      ? graph.relations.find((relation) => relation.target === selected.id)?.source ?? graph.selfRef
+      : selected.id;
+    setQuery("");
+    requestAnimationFrame(() => {
+      const entry = entryRefs.current.get(id);
+      if (entry) {
+        entry.open = true;
+        entry.querySelector("summary")?.focus({ preventScroll: true });
+        entry.scrollIntoView({ block: "start", behavior: reduceMotion ? "instant" : "smooth" });
+      } else {
+        statusRef.current?.focus({ preventScroll: true });
+        statusRef.current?.scrollIntoView({ block: "start", behavior: reduceMotion ? "instant" : "smooth" });
+      }
+    });
+  }
+  return <section className="cg-perspective-workspace">
+    <header className="cg-perspective-summary">
+      <div className="cg-perspective-summary__identity"><span aria-hidden="true"><UserRound /></span><h2>{perspective.self.name}</h2></div>
+      <dl><div><dt><MapPin aria-hidden="true" />地点</dt><dd>{perspective.self.location?.name ?? "位置未知"}</dd></div>
+        <div><dt><Orbit aria-hidden="true" />已过时间</dt><dd>{elapsedLabel(perspective.elapsedSeconds)}</dd></div></dl>
+    </header>
+    <div className="cg-perspective-overview">
+      <div><Status headingRef={statusRef} perspective={perspective} /></div>
+      <section className="cg-perspective-section" aria-label="物品">
+        <h3>物品</h3>
+        {perspective.mechanics.quantities.length > 0 && <dl className="cg-perspective-quantities">{perspective.mechanics.quantities.map((quantity) => <div key={quantity.name}>
+          <dt>{quantity.name}</dt><dd><strong>{quantity.amount}</strong> <span>{quantity.unit}</span></dd>
+        </div>)}</dl>}
+        {entries.filter((node) => carried.has(node.id)).map((node) => {
+          const item = carried.get(node.id)!;
+          const container = entries.find((entry) => entry.id === item.containerRef);
+          const carrying = item.viaUnknownContainer ? "随身携带 · 容器尚未辨认" : item.depth === 1 ? "随身携带" : container ? `收在${container.name}中` : "收在随身容器中";
+          return <EntityEntry key={node.id} node={node} carrying={carrying} perspective={perspective} relations={graph.relations} register={register(node.id)} />;
+        })}
+        {!perspective.mechanics.quantities.length && !carried.size && <p className="cg-perspective-empty">当前没有随身物品记录。</p>}
+      </section>
+    </div>
+    <Goals perspective={perspective} />
+    <section className="cg-perspective-section" aria-label="已知信息">
+      <div className="cg-perspective-section__heading"><h3>已知信息 <small>{known.length} 项</small></h3>
+        {known.length > 0 && <div className="cg-perspective-search"><Search aria-hidden="true" /><label className="cg-sr-only" htmlFor={searchId}>搜索已知信息</label><input id={searchId} type="search" placeholder="搜索人物、地点或线索" value={query} onChange={(event) => setQuery(event.target.value)} /></div>}
       </div>
-
-      <div className="cg-perspective-main">
-        <PerspectiveGraph
-          nodes={graph.nodes}
-          onSelect={setSelectedId}
-          reduceMotion={reduceMotion}
-          relations={graph.relations}
-          selectedId={effectiveSelectedId}
-          selfRef={graph.selfRef}
-        />
-        {selected ? <PerspectiveDetails node={selected} perspective={perspective} relations={graph.relations} /> : null}
-      </div>
-
-      <SemanticPerspective nodes={graph.nodes} relations={graph.relations} />
+      {!known.length ? <p className="cg-perspective-empty">还没有认识的人、地点或线索。</p> : !visible.length ? <p className="cg-perspective-empty" role="status">没有找到匹配的信息。试试其他关键词。</p> : <div className="cg-perspective-known">{visible.map((node) => <EntityEntry key={node.id} node={node} perspective={perspective} relations={graph.relations} register={register(node.id)} />)}</div>}
     </section>
-  );
+    <details className="cg-perspective-map cg-perspective-disclosure" onToggle={(event) => setGraphOpen(event.currentTarget.open)}>
+      <summary><Network aria-hidden="true" />关系图<span>辅助查看</span><ChevronDown aria-hidden="true" /></summary>
+      {graphOpen && <div className="cg-perspective-map__body">
+        <div className="cg-perspective-map__toolbar"><label htmlFor={focusSelectId}>围绕</label><select id={focusSelectId} value={currentFocus} onChange={(event) => { setFocusId(event.target.value); setSelectedId(event.target.value); }}>{entries.map((node) => <option key={node.id} value={node.id}>{node.name}</option>)}</select><span>显示直接联系 · 可拖动与缩放</span></div>
+        <div className="cg-perspective-legend" aria-label="关系图图例">{([...new Set(nearby.relations.map((relation) => relation.kind))]).map((kind) => <span data-relation={kind} key={kind}><i />{relationLabels[kind]}</span>)}</div>
+        <Suspense fallback={<p role="status">正在准备关系图…</p>}><PerspectiveGraph nodes={nearby.nodes} relations={nearby.relations} selfRef={currentFocus} selectedId={selected.id} onSelect={setSelectedId} reduceMotion={reduceMotion} /></Suspense>
+        <div className="cg-perspective-map__selection"><div><strong>{selected.name}</strong><p>{selected.description}</p></div><button type="button" onClick={showSelectedDetails}>查看详情</button></div>
+      </div>}
+    </details>
+  </section>;
+}
+
+export function AgentPerspectiveWorkspace(props: { perspective: AgentPerspectiveView; reduceMotion: boolean }) {
+  return <PerspectiveContent key={props.perspective.agentId} {...props} />;
 }
