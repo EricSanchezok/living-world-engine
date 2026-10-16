@@ -384,6 +384,8 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
   const [streamWarning, setStreamWarning] = useState("");
+  const [suggestionRequest, setSuggestionRequest] = useState<{ sourceId: string; pending: boolean; error: string }>();
+  const suggestionFlight = useRef(false);
   const [optimistic, setOptimistic] = useState<{ id: string; text: string; at: string }>();
   const [overlay, setOverlay] = useState<Overlay>(null);
   const [instances, setInstances] = useState<PublicInstanceSummary[]>([]);
@@ -547,6 +549,26 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
     [detail, observer],
   );
 
+  async function requestSuggestions(): Promise<void> {
+    const source = detail?.conversation?.suggestions;
+    if (!source || !participant || busy || suggestionFlight.current || source.status === "generating") return;
+    suggestionFlight.current = true;
+    setSuggestionRequest({ sourceId: source.sourceId, pending: true, error: "" });
+    let failed = false;
+    try {
+      await worldApi.requestSuggestions(instanceId, participant.id, {
+        sourceId: source.sourceId, requestId: crypto.randomUUID(), expectedRequestId: source.requestId,
+      });
+      await refresh();
+    } catch {
+      failed = true;
+      await refresh().catch(() => undefined);
+    } finally {
+      suggestionFlight.current = false;
+      setSuggestionRequest({ sourceId: source.sourceId, pending: false, error: failed ? "request-failed" : "" });
+    }
+  }
+
   async function perform(key: string, operation: () => Promise<PublicInstanceDetail>): Promise<void> {
     if (busy) return;
     setBusy(key);
@@ -580,7 +602,13 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
   }
 
   const roleView = detail.controlledView ?? observer?.selected?.perspective;
-  const suggestions = detail.conversation?.suggestions?.items ?? [];
+  const source = detail.conversation?.suggestions;
+  const suggestions = source ? {
+    state: source,
+    pending: suggestionRequest?.sourceId === source.sourceId && suggestionRequest.pending,
+    error: suggestionRequest?.sourceId === source.sourceId ? suggestionRequest.error : "",
+    onRequest: () => void requestSuggestions(),
+  } : undefined;
   const orbPhase: ControlOrbPhase = worldProcessing ? "running" : busy ? "confirming" : "saved";
 
 

@@ -222,6 +222,27 @@ function request(profileId: string) {
 }
 
 describe("model catalog and provider adapters", () => {
+  it("applies a task inference override to the pinned model and audit without mutating its profile", async () => {
+    const wires: Array<Record<string, unknown>> = [];
+    const observer = new RecordingRuntimeObserver({ mode: "full" });
+    const gateway = createGateway(credentials, { fetch: async (_url, init) => {
+      wires.push(JSON.parse(String(init?.body))); return deepSeekResponse();
+    } });
+    const before = structuredClone(gateway.catalog.profile("deep"));
+    const result = await gateway.generateStructured({ ...request("deep"), observer,
+      inferenceOverrides: { thinking: "disabled", effort: "auto" } });
+    expect(wires[0]).toMatchObject({ model: "deepseek-v4-pro", thinking: { type: "disabled" } });
+    expect(wires[0]).not.toHaveProperty("reasoning_effort");
+    expect(result.audit.resolvedInference).toMatchObject({ thinking: "disabled", effort: null });
+    expect(observer.events.find(event => event.event === "model.context.serialized")?.payload).toMatchObject({
+      inferenceOverrides: { thinking: "disabled", effort: "auto" }, profile: { inference: { thinking: "disabled" } },
+    });
+    expect(gateway.catalog.profile("deep")).toEqual(before);
+    await expect(gateway.generateStructured({ ...request("deep"), inferenceOverrides: { effort: "unsupported-effort" } }))
+      .rejects.toThrow("inference override is incompatible");
+    expect(wires).toHaveLength(1);
+  });
+
   it("publishes text through the gateway before the provider sends terminal usage", async () => {
     const configured = catalog(false, false, true), emitted = deferred<void>();
     let stream!: ReadableStreamDefaultController<Uint8Array>;

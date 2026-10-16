@@ -30,7 +30,7 @@ async function main(): Promise<void> {
     throw new Error("resume requires this playtest's explicitly stopped instance");
   }
   if (!resumeId) closeSync(openSync(path.join(root, "started.lock"), "wx"));
-  const dataRoot = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v29");
+  const dataRoot = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v30");
   const budget = new ExperimentBudget(path.join(root, "budget.jsonl"), {
     ...AC_FP3_BUDGET, maximumNanoCny: 50_000_000_000,
     phaseBudgets: [], maxHttpRequests: { trajectory: 400 },

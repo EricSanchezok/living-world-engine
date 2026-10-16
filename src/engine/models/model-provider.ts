@@ -1,5 +1,5 @@
 import type { z } from "zod";
-import type { ModelCatalog, ModelProfileSummary, ModelRole } from "./model-catalog";
+import type { ModelCatalog, ModelInferenceConfig, ModelProfileSummary, ModelRole } from "./model-catalog";
 import type {
   ModelExecutionAudit,
   ModelInvocationAudit,
@@ -38,6 +38,8 @@ export interface ModelExecutionScope {
 }
 
 export interface StructuredModelRequest<T> extends ModelExecutionScope {
+  /** Trusted task policy, validated against the pinned model and included in request evidence. */
+  inferenceOverrides?: Partial<ModelInferenceConfig>;
   /** Presentation-only cumulative text callback. Callers publish complete, validated segments. */
   onOutputText?: (text: string) => Promise<void>;
   /** Server-owned physical compiler membership; never a provider generation parameter. */

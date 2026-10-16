@@ -16,7 +16,7 @@ import type {
   ModelSelector,
   ProviderAccountConfig,
 } from "./model-catalog";
-import { modelMetadataOverrideSchema } from "./model-catalog";
+import { modelInferenceSchema, modelMetadataOverrideSchema } from "./model-catalog";
 import { canonicalize, contentHash, isSha256 } from "./model-audit";
 
 export const MODELS_DEV_API_URL = "https://models.dev/api.json";
@@ -439,6 +439,15 @@ function compatibilityIssues(
   }
   issues.push(...explicitInferenceIssues(profile.inference, model));
   return issues;
+}
+
+/** Change inference intent without changing the selected model, account or catalog. */
+export function overrideModelInference(binding: ResolvedModelBinding, overrides?: Partial<ModelInferenceConfig>): ResolvedModelBinding {
+  if (!overrides) return binding;
+  const inference = modelInferenceSchema.parse({ ...binding.profile.inference, ...overrides });
+  const issues = explicitInferenceIssues(inference, binding.model);
+  if (issues.length) throw new ModelResolutionError(`model ${binding.modelId} inference override is incompatible: ${issues.join("; ")}`);
+  return { ...binding, profile: { ...binding.profile, inference } };
 }
 
 function descendingNullableDate(left: string | null, right: string | null): number {

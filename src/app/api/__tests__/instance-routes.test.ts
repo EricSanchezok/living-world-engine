@@ -13,6 +13,7 @@ import { LocalDatabase } from "../../../server/local-database";
 import { WorldHost } from "../../../server/world-host";
 import { POST as advanceInstance } from "../instances/[id]/advance/route";
 import { GET as getInstanceEvents } from "../instances/[id]/events/route";
+import { POST as requestSuggestions } from "../instances/[id]/participants/[participantId]/suggestions/route";
 import { POST as submitAction } from "../instances/[id]/participants/[participantId]/actions/route";
 import { POST as submitReaction } from "../instances/[id]/participants/[participantId]/reactions/route";
 import { GET as getInstance } from "../instances/[id]/route";
@@ -221,9 +222,16 @@ describe("World Instance Route Handlers", () => {
     expect(origin.controlledView.self).toMatchObject({ name: "小明", location: { name: "石门前庭" } });
     expect(origin.conversation.turns[0].response).not.toHaveProperty("possibleNextActions");
     expect(origin.conversation).toHaveProperty("suggestions");
+    expect(origin.conversation.suggestions).toMatchObject({ status: "idle", requestId: null, items: [] });
+    const suggestionParams = { params: Promise.resolve({ id: origin.summary.id, participantId: origin.conversation.participantId }) };
+    const suggestionUrl = `http://local/api/instances/${origin.summary.id}/participants/${origin.conversation.participantId}/suggestions`;
+    expect((await requestSuggestions(jsonRequest(suggestionUrl, {}), suggestionParams)).status).toBe(400);
+    const suggestionInput = { sourceId: origin.conversation.suggestions.sourceId, requestId: "route-suggestions", expectedRequestId: null };
+    expect((await requestSuggestions(jsonRequest(suggestionUrl, suggestionInput), suggestionParams)).status).toBe(202);
+    expect((await requestSuggestions(jsonRequest(suggestionUrl, suggestionInput), suggestionParams)).status).toBe(202);
     await WorldHost.get().drainSuggestions(origin.summary.id);
     const suggested = await getInstance(new Request(`http://local/api/instances/${origin.summary.id}`), { params: Promise.resolve({ id: origin.summary.id }) });
-    expect((await suggested.json()).conversation.suggestions).toMatchObject({ sourceId: expect.any(String), items: [] });
+    expect((await suggested.json()).conversation.suggestions).toMatchObject({ sourceId: expect.any(String), requestId: "route-suggestions", status: "ready", items: [] });
     expect(JSON.stringify(origin)).not.toContain("canonicalEntityIds");
 
     const participant = origin.participants[0];

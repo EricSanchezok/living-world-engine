@@ -87,6 +87,7 @@ import type {
   DebugModeInput,
   DebugNextInput,
   SubmitExternalActionInput,
+  RequestSuggestionsInput,
   SubmitExternalReactionInput,
   WorldRunControlInput,
   WorldStartOptions,
@@ -482,8 +483,10 @@ function conversationFor(
   }
   turns.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
   return { participantId: participant.id, agentId: participant.agentId, turns,
-    suggestions: participant.suggestions?.status === "ready"
-      ? { sourceId: participant.suggestions.sourceId, items: [...participant.suggestions.items] } : null };
+    suggestions: participant.suggestions && participant.suggestions.status !== "invalidated"
+      ? { sourceId: participant.suggestions.sourceId, requestId: participant.suggestions.requestId,
+        status: participant.suggestions.status === "queued" ? "generating" : participant.suggestions.status,
+        items: [...participant.suggestions.items] } : null };
 }
 
 function observerAgent(document: WorldInstanceDocument, agentId: string): ObserverAgentSummary {
@@ -577,7 +580,7 @@ function agentStateFromOrigin(
 }
 
 export class WorldHost {
-  private readonly suggestionWorkers = new Map<string, { sourceId: string; controller: AbortController; promise: Promise<void> }>();
+  private readonly suggestionWorkers = new Map<string, { sourceId: string; requestId: string; controller: AbortController; promise: Promise<void> }>();
   private restoring = true;
 
   private scheduleSuggestions(document: WorldInstanceDocument): void {
@@ -587,18 +590,18 @@ export class WorldHost {
       const worker = this.suggestionWorkers.get(key);
       const record = participant.suggestions;
       if (worker) {
-        if (record?.sourceId !== worker.sourceId || record.status === "invalidated") worker.controller.abort();
+        if (record?.sourceId !== worker.sourceId || record.requestId !== worker.requestId || record.status === "invalidated") worker.controller.abort();
         continue;
       }
-      if (record?.status !== "queued") continue;
+      if (record?.status !== "queued" || !record.requestId) continue;
       const controller = new AbortController();
-      const promise = Promise.resolve().then(() => this.generateParticipantSuggestions(document.id, participant.id, record.sourceId, controller.signal));
-      this.suggestionWorkers.set(key, { sourceId: record.sourceId, controller, promise });
+      const promise = Promise.resolve().then(() => this.generateParticipantSuggestions(document.id, participant.id, record.sourceId, record.requestId!, controller.signal));
+      this.suggestionWorkers.set(key, { sourceId: record.sourceId, requestId: record.requestId, controller, promise });
       void promise.catch(() => undefined).finally(() => {
         this.suggestionWorkers.delete(key);
         try {
           const latest = this.read(document.id).document;
-          if (latest.participants[participant.id]?.suggestions?.sourceId !== record.sourceId) this.scheduleSuggestions(latest);
+          if (latest.participants[participant.id]?.suggestions?.status === "queued") this.scheduleSuggestions(latest);
         } catch { /* Deleted or closed instances have no presentation work. */ }
       });
     }
@@ -611,20 +614,20 @@ export class WorldHost {
     }
   }
 
-  private async generateParticipantSuggestions(id: string, participantId: string, sourceId: string, signal: AbortSignal): Promise<void> {
+  private async generateParticipantSuggestions(id: string, participantId: string, sourceId: string, requestId: string, signal: AbortSignal): Promise<void> {
     let execution: ReturnType<WorldHost["beginExecution"]>;
     try {
       const source = await this.serialized(id, async () => {
         const stored = this.read(id), document = structuredClone(stored.document);
         const record = document.participants[participantId]?.suggestions;
-        if (signal.aborted || record?.sourceId !== sourceId || record.status !== "queued") return null;
+        if (signal.aborted || record?.sourceId !== sourceId || record.requestId !== requestId || record.status !== "queued") return null;
         execution = this.beginExecution(document, "interactive", "action-suggestions", SUGGESTIONS_MANIFEST);
         record.status = "generating"; record.executionId = execution?.id ?? null;
         return this.persist(stored, document).document;
       });
       if (!source) return;
       const items = await generateSuggestions(this.options.provider, source, participantId, {
-        workloadId: `${id}:suggestions`, batchId: sourceId, abortSignal: signal,
+        workloadId: `${id}:suggestions`, batchId: requestId, abortSignal: signal,
         correlation: { executionId: execution?.id, instanceId: id, revision: source.state.revision },
         observer: execution?.trace ?? this.runtimeObserver,
         runtimeIdentity: { worldHash: source.state.worldHash, revision: source.state.revision },
@@ -632,12 +635,12 @@ export class WorldHost {
       await this.serialized(id, async () => {
         const stored = this.read(id), document = structuredClone(stored.document);
         const record = document.participants[participantId]?.suggestions;
-        if (signal.aborted || record?.sourceId !== sourceId || record.status !== "generating") {
+        if (signal.aborted || record?.sourceId !== sourceId || record.requestId !== requestId || record.status !== "generating") {
           this.failExecution(execution?.id, new DOMException("Suggestion source is obsolete", "AbortError"));
           return;
         }
         record.status = "ready"; record.items = items;
-        execution?.trace.emit({ event: "suggestions.generated", attributes: { status: "accepted", count: items.length }, payload: { sourceId, items } });
+        execution?.trace.emit({ event: "suggestions.generated", attributes: { status: "accepted", count: items.length }, payload: { sourceId, requestId, items } });
         this.persist(stored, document, execution ? { id: execution.id, input: {
           status: "succeeded", semanticHash: contentHash(items), stateHash: contentHash(document.state), commitRevision: document.state.revision,
         } } : undefined);
@@ -647,8 +650,8 @@ export class WorldHost {
       await this.serialized(id, async () => {
         const stored = this.read(id), document = structuredClone(stored.document);
         const record = document.participants[participantId]?.suggestions;
-        if (record?.sourceId !== sourceId || !["queued", "generating"].includes(record.status)) return;
-        record.status = "failed"; record.items = [];
+        if (record?.sourceId !== sourceId || record.requestId !== requestId || !["queued", "generating"].includes(record.status)) return;
+        record.status = "failed";
         this.persist(stored, document);
       });
     }
@@ -914,7 +917,7 @@ export class WorldHost {
         /* turbopackIgnore: true */ process.env.LIVINGWORLD_MODEL_CATALOG_PATH ?? "config/models.yaml",
       ));
       const dataRoot = path.resolve(
-        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v29",
+        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v30",
       );
       const modelRegistry = new ModelRegistry(catalog, dataRoot);
       modelRegistry.startBackgroundRefresh();
@@ -1401,7 +1404,7 @@ export class WorldHost {
     }
     const now = this.now().toISOString();
     const initial: WorldInstanceDocument = {
-      schemaVersion: 29,
+      schemaVersion: 30,
       id,
       world: toWorldRuntimeContract(definition),
       executionAlgorithm: structuredClone(experiment.algorithmRef),
@@ -2596,6 +2599,36 @@ export class WorldHost {
         throw error;
       }
     }
+  }
+
+  async requestSuggestions(
+    instanceId: string,
+    participantId: string,
+    input: RequestSuggestionsInput,
+    principalId = "local",
+  ): Promise<PublicInstanceDetail> {
+    const saved = await this.serialized(instanceId, async () => {
+      const stored = this.read(instanceId), document = structuredClone(stored.document);
+      const participant = document.participants[participantId];
+      if (!participant || participant.status !== "active" || participant.principalId !== principalId) {
+        throw new WorldHostError("active participant not found", 404);
+      }
+      if (!input.requestId?.trim() || input.requestId.length > 128) throw new WorldHostError("invalid suggestion request identity", 400);
+      reconcileSuggestions(document, externalDecisionAgentIds(document));
+      const record = participant.suggestions;
+      if (!record || record.status === "invalidated" || record.sourceId !== input.sourceId) {
+        throw new WorldHostError("suggestion source is no longer available", 409);
+      }
+      if (record.requestId === input.requestId) return stored;
+      if (record.requestId !== input.expectedRequestId || ["queued", "generating"].includes(record.status)) {
+        throw new WorldHostError("suggestion request changed concurrently", 409);
+      }
+      record.requestId = input.requestId;
+      record.status = "queued";
+      record.executionId = null;
+      return this.persist(stored, document);
+    });
+    return this.project(saved.document, principalId);
   }
 
   async submitAction(

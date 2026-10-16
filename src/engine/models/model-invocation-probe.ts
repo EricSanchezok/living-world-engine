@@ -10,8 +10,8 @@ import {
 import {
   createModelGateway,
 } from "./model-gateway";
-import { resolveModelProfile, type ModelRegistryService, type ModelRegistrySnapshot } from "./model-registry";
-import type { ModelCatalog, ModelRole } from "./model-catalog";
+import { overrideModelInference, resolveModelProfile, type ModelRegistryService, type ModelRegistrySnapshot } from "./model-registry";
+import { modelInferenceSchema, type ModelCatalog, type ModelRole } from "./model-catalog";
 import {
   ModelOutputError,
   ModelTransportError,
@@ -29,6 +29,8 @@ import {
 import type { DebugInspection, DebugEventSummary } from "../../shared/debug-api";
 
 export interface SerializedModelRequest {
+  inferenceOverrides?: StructuredModelRequest<unknown>["inferenceOverrides"];
+  jsonExamplePolicy?: "omit";
   modelCatalogHash: string;
   workloadId: string;
   batchId: string;
@@ -65,6 +67,8 @@ export interface InvocationProbeSource {
 }
 
 export interface InvocationProbeRequest {
+  inferenceOverrides?: StructuredModelRequest<unknown>["inferenceOverrides"];
+  jsonExamplePolicy?: "omit";
   profileId: string;
   role: ModelRole;
   subjectId: string;
@@ -115,6 +119,8 @@ export interface InvocationProbeTrial {
   requestHash: string | null;
   requestExactMatch: boolean | null;
   request: {
+    inferenceOverrides?: StructuredModelRequest<unknown>["inferenceOverrides"];
+    jsonExamplePolicy?: "omit";
     profileId: string;
     role: ModelRole;
     subjectId: string;
@@ -350,6 +356,8 @@ function parseSerializedRequest(value: unknown): SerializedModelRequest {
   if (!input) throw new Error("model.context.serialized payload is not an object");
   const role = requiredString(input.role, "role") as ModelRole;
   const request = {
+    ...(input.inferenceOverrides ? { inferenceOverrides: modelInferenceSchema.partial().parse(input.inferenceOverrides) } : {}),
+    ...(input.jsonExamplePolicy === "omit" ? { jsonExamplePolicy: "omit" as const } : {}),
     modelCatalogHash: requiredString(input.modelCatalogHash, "modelCatalogHash"),
     workloadId: requiredString(input.workloadId, "workloadId"),
     batchId: requiredString(input.batchId, "batchId"),
@@ -488,6 +496,8 @@ function baseProbeRequest(source: InvocationProbeSource, profileId: string): Inv
   const schema = modelSchema(source.request);
   return {
     profileId,
+    ...(source.request.inferenceOverrides ? { inferenceOverrides: structuredClone(source.request.inferenceOverrides) } : {}),
+    ...(source.request.jsonExamplePolicy ? { jsonExamplePolicy: source.request.jsonExamplePolicy } : {}),
     role: source.request.role,
     subjectId: source.request.subjectId,
     promptVersion: source.request.promptVersion,
@@ -504,7 +514,7 @@ function baseProbeRequest(source: InvocationProbeSource, profileId: string): Inv
 
 function bindingDrift(source: InvocationProbeSource, catalog: ModelCatalog, snapshot: ModelRegistrySnapshot): string[] {
   const request = source.request;
-  const binding = resolveModelProfile(catalog, snapshot, request.profileId);
+  const binding = overrideModelInference(resolveModelProfile(catalog, snapshot, request.profileId), request.inferenceOverrides);
   const drift: string[] = [];
   if (catalog.hash !== request.modelCatalogHash) drift.push("modelCatalogHash");
   if (binding.registrySnapshotHash !== request.registrySnapshotHash) drift.push("registrySnapshotHash");
@@ -581,6 +591,8 @@ function requestDiff(before: InvocationProbeRequest, after: InvocationProbeReque
 
 function requestForReport(request: InvocationProbeRequest): InvocationProbeTrial["request"] {
   return {
+    ...(request.inferenceOverrides ? { inferenceOverrides: request.inferenceOverrides } : {}),
+    ...(request.jsonExamplePolicy ? { jsonExamplePolicy: request.jsonExamplePolicy } : {}),
     profileId: request.profileId,
     role: request.role,
     subjectId: request.subjectId,

@@ -1290,7 +1290,7 @@ html[data-cg-motion="reduced"] *, html[data-cg-motion="reduced"] *::before, html
 .aui-user-message-bubble { inline-size: max-content; max-inline-size: min(85%, 34rem); border: 1px solid color-mix(in oklab, var(--cg-border) 82%, var(--cg-muted)); border-radius: 1.2rem; background: color-mix(in oklab, var(--cg-muted) 68%, var(--cg-background)); padding: 0.62rem 0.9rem; color: var(--cg-foreground); overflow-wrap: anywhere; }
 .aui-user-message-bubble .cg-narrative { font-size: 0.94rem; line-height: 1.55; }
 .cg-thread-root [data-role="assistant"] .ms-2 { margin-inline-start: 0; }
-.cg-thread-root [data-role="assistant"] .ms-2 button { opacity: 0.56; }
+.cg-thread-root [data-role="assistant"] .cg-message-copy { opacity: 0.56; }
 .aui-composer-shell { border-color: color-mix(in oklab, var(--cg-border) 88%, var(--cg-muted)); background: color-mix(in oklab, var(--cg-card) 94%, var(--cg-background)); box-shadow: 0 12px 30px color-mix(in oklab, var(--cg-overlay) 8%, var(--cg-transparent)); }
 .cg-thread-status-message { border: 1px solid var(--cg-border); border-radius: var(--cg-radius); background: var(--cg-card); padding: 0.55rem 0.75rem; color: var(--cg-muted-foreground); font-size: 0.75rem; line-height: 1.45; }
 .cg-thread-error { border: 1px solid var(--cg-destructive); border-radius: var(--cg-radius); background: var(--cg-destructive-soft); padding: 0.55rem 0.75rem; color: var(--cg-foreground); font-size: 0.75rem; line-height: 1.45; }
@@ -1509,6 +1509,10 @@ html[data-cg-motion="reduced"] *, html[data-cg-motion="reduced"] *::before, html
 }
 
 /* Conversation restoration and participant / observer surfaces */
+.cg-suggestion-trigger { min-height: 32px; min-width: 6.25rem; display: inline-flex; align-items: center; justify-content: flex-start; gap: 0.35rem; border: 0; border-radius: var(--cg-radius); background: var(--cg-transparent); color: var(--cg-muted-foreground); padding: 0.25rem 0.5rem; font-size: 0.75rem; cursor: pointer; }
+.cg-suggestion-trigger svg { width: 0.9rem; height: 0.9rem; }
+.cg-suggestion-trigger:disabled { cursor: wait; }
+.cg-suggestion-feedback { margin: 0.3rem 0.55rem; color: var(--cg-muted-foreground); font-size: 0.75rem; line-height: 1.5; }
 .cg-message-suggestions { margin: 0.15rem 0.5rem 0; }
 .cg-message-suggestions ul { display: grid; gap: 0.1rem; margin: 0; padding: 0; list-style: none; }
 .cg-message-suggestion { width: 100%; min-height: 44px; display: grid; grid-template-columns: 1rem minmax(0, 1fr); align-items: center; gap: 0.5rem; border: 0; border-radius: var(--cg-radius); background: var(--cg-transparent); color: var(--cg-muted-foreground); padding: 0.45rem 0.55rem; text-align: start; cursor: pointer; transition: background-color 150ms, color 150ms; }

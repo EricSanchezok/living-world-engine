@@ -84,8 +84,10 @@ const server = createServer(async (request, response) => {
     const scene = context.scene as { reply?: { kind: string }; observations?: unknown[]; speech?: Array<{ id: string; speaker: string }> } | undefined;
     const readingAnswers = reading ? decisionAnswers({ ...Object.fromEntries(Object.entries(reading.catalog).map(([id, criteria]) =>
       [id, { type: "choice" as const, version: "e2e-reading", instructions: "Scripted E2E action", criteria }])), ...reading.cognition }) : {};
-    const suggestionContext = context as { task?: string; latestRequest?: string | null; discourse?: { exchanges: unknown[] } };
-    const output = suggestionContext.task === "action-suggestions" ? { items: !suggestionContext.latestRequest
+    const suggestionContext = context as { task?: string; previousSuggestions?: string[]; latestRequest?: string | null; discourse?: { exchanges: unknown[] } };
+    const output = suggestionContext.task === "action-suggestions" ? { items: suggestionContext.previousSuggestions?.length
+      ? ["查看石门上可见的纹路", "走近守门人问候", "回顾刚刚看到的庭院"]
+      : !suggestionContext.latestRequest
       ? ["观察四周", "确认自己所在的位置", "寻找一个可以交谈的人"]
       : (suggestionContext.discourse?.exchanges.length ?? 0) < 2
         ? ["询问守门人石门后的道路", "检查石门上可见的痕迹", "整理接下来探索的打算"]

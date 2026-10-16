@@ -11,7 +11,8 @@ import type { ParticipantRecord, WorldInstanceDocument } from "./world-instance-
 
 export interface ParticipantSuggestions {
   sourceId: string;
-  status: "queued" | "generating" | "ready" | "failed" | "invalidated";
+  requestId: string | null;
+  status: "idle" | "queued" | "generating" | "ready" | "failed" | "invalidated";
   items: string[];
   executionId: string | null;
 }
@@ -19,33 +20,36 @@ export interface ParticipantSuggestions {
 const system = loadPromptAsset("system/action-suggestions.md");
 const userPrompt = loadPromptAsset("user/action-suggestions.md");
 const promptVersion = `action-suggestions-${contentHash([system, userPrompt])}`;
+const inferenceOverrides = { thinking: "disabled", effort: "auto", reasoning_budget_tokens: "auto" } as const;
 export const SUGGESTIONS_MANIFEST = defineEngineOperationManifest({
-  id: "action-suggestions", version: "1", config: { promptVersion },
+  id: "action-suggestions", version: "2", config: { promptVersion, inferenceOverrides },
 });
 const outputSchema = z.strictObject({ items: z.array(z.string().trim().min(1).max(120)).max(3) });
 
-/** No canonical bindings or another subject's cognition enter this presentation context. */
+/** Scene references come only from published prose; private goals express intent, not scene facts. */
 export function suggestionContext(document: WorldInstanceDocument, participant: ParticipantRecord) {
   const view = projectAgentPerspective(document.state, document.state.agents[participant.agentId]!);
   const discourse = participantDiscourse(document, participant.id);
   return {
     task: "action-suggestions",
     language: document.world.narrative.language,
-    perspective: { self: view.self, mechanics: view.mechanics, knowledge: view.knowledge, character: view.character },
-    discourse: { arrival: discourse.arrival, exchanges: discourse.exchanges, unresolved: discourse.unresolved },
-    recentActions: view.history.slice(-6),
+    perspective: { self: { name: view.self.name }, goals: Object.values(view.character.goals)
+      .filter(goal => goal.status === "active").map(goal => goal.description) },
+    discourse: { arrival: discourse.arrival.text, exchanges: discourse.exchanges.map(exchange => ({
+      requested: exchange.requested, paragraphs: exchange.paragraphs.map(paragraph => paragraph.text),
+    })) },
     latestRequest: document.participantIntents.findLast(intent => intent.participantId === participant.id)?.text ?? null,
   };
 }
 
 function sourceId(document: WorldInstanceDocument, participant: ParticipantRecord): string {
-  return contentHash({ participantId: participant.id, agentId: participant.agentId,
+  return contentHash({ participantId: participant.id, agentId: participant.agentId, revision: document.state.revision,
     controlledSinceRevision: participant.controlledSinceRevision,
     submissionId: document.participantIntents.findLast(intent => intent.participantId === participant.id)?.submissionId ?? null,
     context: suggestionContext(document, participant) });
 }
 
-/** Reconcile in the instance transaction; generation runs only after the save. */
+/** Reconcile availability and invalidate stale work without requesting inference. */
 export function reconcileSuggestions(document: WorldInstanceDocument, decisionAgentIds: readonly string[]): void {
   const run = Object.values(document.runs).sort((a, b) => b.createdAt.localeCompare(a.createdAt) || b.id.localeCompare(a.id))[0];
   for (const participant of Object.values(document.participants)) {
@@ -64,8 +68,8 @@ export function reconcileSuggestions(document: WorldInstanceDocument, decisionAg
       continue;
     }
     const nextSource = sourceId(document, participant);
-    if (participant.suggestions?.sourceId === nextSource) continue;
-    participant.suggestions = { sourceId: nextSource, status: "queued", items: [], executionId: null };
+    if (participant.suggestions?.sourceId === nextSource && participant.suggestions.status !== "invalidated") continue;
+    participant.suggestions = { sourceId: nextSource, requestId: null, status: "idle", items: [], executionId: null };
   }
 }
 
@@ -74,7 +78,6 @@ export function recoverSuggestions(document: WorldInstanceDocument): boolean {
   for (const participant of Object.values(document.participants)) {
     if (participant.suggestions && ["queued", "generating"].includes(participant.suggestions.status)) {
       participant.suggestions.status = "failed";
-      participant.suggestions.items = [];
       changed = true;
     }
   }
@@ -96,14 +99,17 @@ export async function generateSuggestions(
   const data = document.state.executionState?.data;
   const control = data?.kind === "direct-world" ? data as unknown as DirectRuntimeState : null;
   const models = control ? agentCapabilityModels(document.state, control, participant.agentId) : document.state.agents[participant.agentId]!.modelProfiles;
-  const context = suggestionContext(document, participant);
+  const previousSuggestions = participant.suggestions?.items ?? [];
+  const context = { ...suggestionContext(document, participant), previousSuggestions };
   const result = await provider.generateStructured({ ...scope,
     ...(control ? { modelRegistrySnapshotHash: control.registryHash } : {}),
     profileId: models.creation, role: "creation", subjectId: participant.agentId,
+    inferenceOverrides,
     promptVersion, schemaName: "ActionSuggestionsV1", system, userPrompt, context,
     schema: outputSchema, jsonExamplePolicy: "omit",
   });
-  const seen = new Set(document.participantIntents.filter(intent => intent.participantId === participantId).slice(-6).map(intent => normalized(intent.text)));
+  const seen = new Set([...previousSuggestions, ...document.participantIntents
+    .filter(intent => intent.participantId === participantId).slice(-6).map(intent => intent.text)].map(normalized));
   return result.value.items.filter(item => {
     const key = normalized(item);
     if (!key || seen.has(key)) return false;

@@ -2,7 +2,7 @@
 
 ## 投影边界
 
-公共产品契约为 `src/shared/world-api.ts`（API v16）。Participant 的 `controlledView` 是本人所控 Agent 在当前 revision 的 `AgentPerspectiveView`；DTO 只包含 Arrival、行动、Observation、授权 Activity 进度与该 Agent 的私有状态。反应窗口只额外投影本人 stimulus，不暴露 basis、其他主体请求或 canonical binding。对话由这些持久事实投影，不保存独立聊天记录。
+公共产品契约为 `src/shared/world-api.ts`（API v17）。Participant 的 `controlledView` 是本人所控 Agent 在当前 revision 的 `AgentPerspectiveView`；DTO 只包含 Arrival、行动、Observation、授权 Activity 进度与该 Agent 的私有状态。反应窗口只额外投影本人 stimulus，不暴露 basis、其他主体请求或 canonical binding。对话由这些持久事实投影，不保存独立聊天记录。
 
 Observer 契约为 `src/shared/world-observer-api.ts`。`selected.perspective` 与 Participant 使用同一投影器，包含所选 Agent 的精确自身状态、授权关系、主观认知、角色状态和完整主观历史；切换 Agent 不形成跨主体认知聚合。
 
@@ -26,6 +26,7 @@ Observer 契约为 `src/shared/world-observer-api.ts`。`selected.perspective` �
 | `PUT /api/instances/:id/realtime` | Observer 启停严格串行实时调度 |
 | `GET /api/instances/:id/observer` | 按 AgentId 读取单主体 Observer 投影 |
 | `GET/PUT /api/instances/:id/control` | 读取可接管 Agent 或原子转移控制权 |
+| `POST /api/instances/:id/participants/:participantId/suggestions` | 显式请求或更换当前决策点的行动建议 |
 | `POST /api/instances/:id/participants/:participantId/actions` | 幂等持久化自然语言根意图并启动逐边界 WorldRun |
 | `POST /api/instances/:id/run/pause` | 在提交边界暂停指定 generation 的 WorldRun |
 | `POST /api/instances/:id/run/resume` | 为 paused 或 budget-paused WorldRun 创建新 lease 并恢复 |
@@ -44,7 +45,7 @@ Observer 创建不生成 Participant。Observer 可以推进无人世界、选�
 
 ## Participant 会话
 
-Participant 页面使用 44rem 单轴 assistant-ui 消息流。第一条 World 消息是持久 Arrival；玩家行动为右侧自适应气泡，World Observation 为无气泡正文。当前决策点的建议由 `conversation.suggestions` 独立投影在最新 World 回复之后，点击只填入 composer；非空草稿暂时隐藏建议，异步结果不覆盖草稿或抢焦点。
+Participant 页面使用 44rem 单轴 assistant-ui 消息流。第一条 World 消息是持久 Arrival；玩家行动为右侧自适应气泡，World Observation 为无气泡正文。最新 World 回复的复制操作旁提供“行动建议”按钮，按需结果由 `conversation.suggestions` 独立投影在回复之后，点击条目只填入 composer；非空草稿暂时隐藏建议与入口，异步结果不覆盖草稿或抢焦点。
 
 旁白中的实体引用标记替代可见称呼，并保留角色私有的实体身份。发布时只消除标记前后紧邻的完整重复词组，不对普通正文全局去重，也不解析已送达对白中的标记。相同称呼绑定不同身份时保持各自引用；单字重叠和拉丁单词内部的部分匹配不自动删除。
 
@@ -86,6 +87,8 @@ Inspector 的实时更新采用“事件分类 → 合并刷新 → 局部投影
 
 ## 情境行动建议
 
-每个稳定决策点在正文发布完成后，建议模块使用角色绑定的 creation profile 异步生成一批最多三条行动。输入只包含本人授权视角、目标、近期行动结果和已发布对话；建议表达可以尝试的方向，不保证成功。提交新行动、失去控制权或进入未完成的世界流程会使旧建议失效；发布时校验同一来源，迟到结果丢弃。失败或没有合适内容时不展示建议，不补固定文案。
+正文发布完成后的稳定决策点提供“行动建议”入口；开场、回合结束、读取与刷新均不自动生成。点击后按钮原位显示“生成中…”，输入保持可用；结果整组出现。“换一组”沿用同一接口与生成器，将上一组作为避重复依据，在成功之前保留旧条目；失败可以显式重试。空结果显示简短说明，不补固定文案。建议只依据已发布的开场与对话正文、玩家行动和本人目标；未介绍的名称、位置描述、机制标签和内部结果记录不进入场景依据。目标表达意图，上一组建议也只是未执行的想法，两者均不能作为外部事实。未知目标应通过寻找或询问来探索，不预设其存在或位置。建议表达可以尝试的方向，不保证成功。
 
-每个 Participant 只保存当前建议的来源、状态、内容和执行引用，完整请求与结果由 Ledger 保存。读取和刷新复用保存结果，重启将中断任务标记失败，不重试生成。建议不修改世界 revision、时间、认知或行动记录；同一决策点最多增加一次逻辑 creation 调用，传输重试沿用模型网关策略。通过现有实例通知发布，无独立轮询接口。职责取舍见[独立建议生成决策](../decisions/0241-independent-contextual-action-suggestions.md)。
+每个 Participant 只保存当前来源、请求 ID、状态、条目和执行引用。公共接口提供 idle、generating、ready、failed；不可用来源返回 null。显式请求携带 sourceId、requestId 和 expectedRequestId；重复请求复用当前记录，过期或并发请求返回冲突。提交行动、失去控制或世界流程未结束会使旧来源失效，迟到结果同时校验来源与请求 ID。读取复用保存结果，重启将中断请求标记失败并保留已成功的条目，不重试生成。
+
+每次接受的请求最多增加一次逻辑 creation 调用，传输重试沿用网关策略。建议在角色绑定的同一模型与快照上使用经能力校验的关闭推理参数，完整请求与结果由 Ledger 保存。请求不修改世界 revision、时间、认知或行动记录；结果通过现有实例通知发布，无独立轮询接口。职责取舍见[按需建议决策](../decisions/0242-on-demand-published-context-suggestions.md)。

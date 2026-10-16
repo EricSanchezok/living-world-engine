@@ -1,7 +1,7 @@
 # Contextual action suggestions
 
 Artifact-Version: 1
-Status: Implemented
+Status: Superseded by [0190](0190-on-demand-action-suggestions.md)
 
 ## Intent
 

@@ -52,7 +52,7 @@ export function prepareSemanticFirstPass(root: string) {
   if (git(["branch", "--show-current"]) !== "synergy/ac-fp1-experiment") throw new Error("AC-FP3 requires the authorized current branch");
   const historical = readConstrainedFirstPassSources(path.resolve(".livingworld-benchmarks/experiments/ac-fp1/v1"));
   const catalog = reviewCatalog();
-  const registry = new ModelRegistry(catalog, path.resolve(".livingworld-v29"), { fetch: async () => { throw new Error("no metadata refresh in experiment"); } });
+  const registry = new ModelRegistry(catalog, path.resolve(".livingworld-v30"), { fetch: async () => { throw new Error("no metadata refresh in experiment"); } });
   const registryHash = historical.sources[0]!.registrySnapshotHash;
   const snapshot = registry.snapshot(registryHash);
   const bindings = AC_FP3_PROTOCOL.reviewers.map((reviewer) => {
@@ -121,7 +121,7 @@ async function requestReviewModel(root: string, env: ReturnType<typeof environme
     trialPattern: /^(?:probes|calibration)-[a-z0-9-]+$/u, priceBinding: { accountId: "deepseek-api", modelId: reviewer.modelId, priceId: reviewer.id },
     fetch: createModelFetchResolver(process.env)("deepseek-api", account) ?? fetch });
   transport.beginTrial(id, phase);
-  const registry = new ModelRegistry(env.catalog, path.resolve(".livingworld-v29"), { fetch: async () => { throw new Error("no metadata refresh"); } });
+  const registry = new ModelRegistry(env.catalog, path.resolve(".livingworld-v30"), { fetch: async () => { throw new Error("no metadata refresh"); } });
   const gateway = createModelGateway(env.catalog, process.env, { registry,
     fetchForAccount: (accountId) => accountId === "deepseek-api" ? transport.fetch : async () => { throw new Error("unapproved model account"); } });
   immutableJson(started, { requestHash, frozenHash: env.frame.hash, startedAt: new Date().toISOString() });

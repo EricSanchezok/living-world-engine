@@ -6,6 +6,7 @@ import type {
   ControlOptions,
   CreateInstanceInput,
   PublicInstanceDetail,
+  RequestSuggestionsInput,
   PublicInstanceSummary,
   SubmitExternalActionInput,
   SubmitExternalReactionInput,
@@ -48,6 +49,11 @@ export const worldApi = {
     requestJson<PublicInstanceDetail>(`/api/instances/${encodeURIComponent(id)}/control`, body("PUT", input)),
   controlOptions: (id: string) =>
     requestJson<ControlOptions>(`/api/instances/${encodeURIComponent(id)}/control`),
+  requestSuggestions: (id: string, participantId: string, input: RequestSuggestionsInput) =>
+    requestJson<PublicInstanceDetail>(
+      `/api/instances/${encodeURIComponent(id)}/participants/${encodeURIComponent(participantId)}/suggestions`,
+      body("POST", input),
+    ),
   submitAction: (id: string, participantId: string, input: SubmitExternalActionInput) =>
     requestJson<PublicInstanceDetail>(
       `/api/instances/${encodeURIComponent(id)}/participants/${encodeURIComponent(participantId)}/actions`,

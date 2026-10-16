@@ -151,13 +151,16 @@ function validateParticipant(
   }
   const suggestions = participant.suggestions;
   if (suggestions !== null) {
-    if (!suggestions || !["queued", "generating", "ready", "failed", "invalidated"].includes(suggestions.status))
+    if (!suggestions || !["idle", "queued", "generating", "ready", "failed", "invalidated"].includes(suggestions.status))
       throw new Error(`participant ${participantId} suggestions status is invalid`);
     requireText(suggestions.sourceId, `participant ${participantId} suggestions source`);
     if (!Array.isArray(suggestions.items) || suggestions.items.length > 3 || suggestions.items.some(item =>
       typeof item !== "string" || !item.trim() || item.length > 120) ||
-      suggestions.status !== "ready" && suggestions.items.length > 0)
+      ["idle", "invalidated"].includes(suggestions.status) && suggestions.items.length > 0)
       throw new Error(`participant ${participantId} suggestions items are invalid`);
+    if (suggestions.requestId !== null) requireText(suggestions.requestId, `participant ${participantId} suggestions request`);
+    if (["queued", "generating", "ready", "failed"].includes(suggestions.status) && !suggestions.requestId)
+      throw new Error(`participant ${participantId} suggestions request is missing`);
     if (suggestions.executionId !== null) requireText(suggestions.executionId, `participant ${participantId} suggestions execution`);
   }
   if (typeof arrival.generated !== "boolean" || !Number.isFinite(Date.parse(arrival.createdAt))) {
@@ -245,7 +248,7 @@ function validateActionWindow(document: WorldInstanceDocument): void {
 }
 
 export function validateWorldInstanceDocument(document: WorldInstanceDocument, rulePackages?: RulePackageRegistry): void {
-  if (document.schemaVersion !== 29) throw new Error("world instance schema v29 required");
+  if (document.schemaVersion !== 30) throw new Error("world instance schema v30 required");
   requireText(document.id, "instance id");
   requireText(document.title, "instance title");
   if (!Array.isArray(document.narratives)) throw new Error("instance narrative outbox is required");

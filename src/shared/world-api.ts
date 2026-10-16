@@ -1,7 +1,7 @@
 import type { AgentPerspectiveView } from "../engine/contracts/model";
 export type { AgentPerspectiveView, BeliefValue, PerspectiveFactValue } from "../engine/contracts/model";
 
-export const WORLD_API_VERSION = 16 as const;
+export const WORLD_API_VERSION = 17 as const;
 
 export interface PublicModelServicePause {
   code: "request-limit" | "spending-limit" | "token-limit" | "usage-unresolved";
@@ -159,11 +159,24 @@ export interface PublicConversationTurn {
   responses?: Array<NonNullable<PublicConversationTurn["response"]>>;
 }
 
+export interface PublicActionSuggestions {
+  sourceId: string;
+  requestId: string | null;
+  status: "idle" | "generating" | "ready" | "failed";
+  items: string[];
+}
+
+export interface RequestSuggestionsInput {
+  sourceId: string;
+  requestId: string;
+  expectedRequestId: string | null;
+}
+
 export interface PublicConversation {
   participantId: string;
   agentId: string;
   turns: PublicConversationTurn[];
-  suggestions: { sourceId: string; items: string[] } | null;
+  suggestions: PublicActionSuggestions | null;
 }
 
 export interface PublicInstanceDetail {

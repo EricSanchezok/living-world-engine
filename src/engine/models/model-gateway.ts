@@ -12,6 +12,7 @@ import {
   type ModelRegistryService,
   type ModelRegistrySnapshot,
   resolveModelProfile,
+  overrideModelInference,
 } from "./model-registry";
 import type {
   ModelExecutionAudit,
@@ -405,7 +406,7 @@ export class ModelGateway implements StructuredModelProvider {
     }
     this.catalog.assertProfile(request.profileId, request.role);
     const snapshot = await this.captureSnapshot(request);
-    const binding = resolveModelProfile(this.catalog, snapshot, request.profileId);
+    const binding = overrideModelInference(resolveModelProfile(this.catalog, snapshot, request.profileId), request.inferenceOverrides);
     const profile = binding.profile;
     const account = binding.account;
     const adapter = this.requireAdapter(binding.accountId);
@@ -454,6 +455,7 @@ export class ModelGateway implements StructuredModelProvider {
     const contextJson = promptBytes.contextJson;
     const contextAudit = preparedContext.measure(contextJson);
     const rendering = {
+      ...(request.inferenceOverrides ? { inferenceOverrides: request.inferenceOverrides } : {}),
       ...(profile.response_transport ? { responseTransport: profile.response_transport } : {}),
       ...(request.jsonObjectPostlude !== undefined ? { jsonObjectPostlude: request.jsonObjectPostlude } : {}),
       ...(request.jsonExamplePolicy ? { jsonExamplePolicy: request.jsonExamplePolicy } : {}),

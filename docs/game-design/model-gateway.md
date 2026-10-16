@@ -57,6 +57,8 @@ Accounts can independently opt into `network.dns_over_https_url`, an HTTPS endpo
 
 原生运行时的 Profile `allowed_roles` 分别授权 `decision` 与 `creation`，每次调用按精确职责校验。世界裁决与 Agent 私有决策使用各自的 Profile，具体任务仍保留独立的提示词与审计身份。`max_input_bytes` 是完整序列化模型请求的硬上限，也是 Observation 分批的 Context 预算。推理字段使用统一语义：`auto` 表示不发送该参数；显式 thinking、effort、reasoning budget、sampling 或其他控制只有在快照声明支持时才可进入 transport，不支持时在请求前失败。
 
+结构化请求可以携带服务端任务拥有的 `inferenceOverrides`。网关先按实例绑定的 Profile 和快照选择模型，再验证并应用推理覆盖；覆盖不改变账户、模型或原始目录。有效 Profile、覆盖参数和实际 inference 一起进入请求哈希与 Ledger，调用探针复用同一策略。按需建议使用此入口关闭推理；其他调用继续使用其声明的 Profile 设置。
+
 Profiles may explicitly select `response_transport: deepseek-sse-v1` for DeepSeek OpenAI Chat JSON-object generation. The SDK requests native SSE and usage while preserving the complete prompts, schema and generation settings. Runtime accepts only a complete stream with stable identity, terminal finish reason, reconciled usage and DONE; partial text never reaches canonical validation. The default remains non-streaming. See [the streamed response contract](../specs/0091-complete-streamed-json-responses.md).
 
 ## 动态模型目录

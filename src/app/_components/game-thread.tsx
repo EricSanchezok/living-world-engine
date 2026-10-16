@@ -11,13 +11,21 @@ import {
   useThreadViewportStore,
   type TextMessagePartComponent,
 } from "@assistant-ui/react";
-import { ArrowDown, ArrowUp, Check, Copy, CornerDownRight } from "lucide-react";
+import { ArrowDown, ArrowUp, Check, Copy, CornerDownRight, Lightbulb, LoaderCircle, RefreshCw } from "lucide-react";
 import { useEffect, useId, useLayoutEffect, useRef, type ReactNode } from "react";
 import { TooltipIconButton } from "@/components/ui/tooltip-icon-button";
 import { cn } from "@/lib/cn";
+import type { PublicActionSuggestions } from "../../shared/world-api";
 import { WorldTimelineRail, type TimelineEntry } from "./world-timeline";
 
 export type ComposerMode = "available" | "suppressed";
+
+export interface SuggestionControl {
+  state: PublicActionSuggestions;
+  pending: boolean;
+  error: string;
+  onRequest: () => void;
+}
 
 export interface GameThreadProps {
   actionError: string;
@@ -27,7 +35,7 @@ export interface GameThreadProps {
   readOnly?: boolean;
   reduceMotion?: boolean;
   streamWarning: string;
-  suggestions?: readonly string[];
+  suggestions?: SuggestionControl;
   timeline?: readonly TimelineEntry[];
   timelineStep?: number;
 }
@@ -66,7 +74,7 @@ function AssistantMessage({
 }: {
   busy: boolean;
   inputId: string;
-  suggestions: readonly string[];
+  suggestions?: SuggestionControl;
 }) {
   const id = useAuiState((state) => state.message.id);
   const isLast = useAuiState((state) => state.message.isLast);
@@ -89,7 +97,7 @@ function AssistantMessage({
           className="animate-in fade-in -ms-1 flex gap-1 text-muted-foreground duration-150 motion-reduce:animate-none"
         >
           <ActionBarPrimitive.Copy asChild>
-            <TooltipIconButton tooltip="复制世界回复">
+            <TooltipIconButton className="cg-message-copy" tooltip="复制世界回复">
               <AuiIf condition={(state) => state.message.isCopied}>
                 <Check aria-hidden="true" className="size-4" />
               </AuiIf>
@@ -99,8 +107,9 @@ function AssistantMessage({
             </TooltipIconButton>
           </ActionBarPrimitive.Copy>
         </ActionBarPrimitive.Root>
+        {isLast && !busy && suggestions ? <SuggestionTrigger control={suggestions} /> : null}
       </div>
-      {isLast && !busy ? <SuggestionFollowups inputId={inputId} suggestions={suggestions} /> : null}
+      {isLast && !busy && suggestions ? <SuggestionFollowups inputId={inputId} suggestions={suggestions} /> : null}
     </MessagePrimitive.Root>
   );
 }
@@ -112,7 +121,7 @@ function ThreadMessage({
 }: {
   busy: boolean;
   inputId: string;
-  suggestions: readonly string[];
+  suggestions?: SuggestionControl;
 }) {
   const role = useAuiState((state) => state.message.role);
   return role === "user"
@@ -120,14 +129,32 @@ function ThreadMessage({
     : <AssistantMessage busy={busy} inputId={inputId} suggestions={suggestions} />;
 }
 
-function SuggestionFollowups({ inputId, suggestions }: { inputId: string; suggestions: readonly string[] }) {
+function SuggestionTrigger({ control }: { control: SuggestionControl }) {
+  const hasDraft = useAuiState((state) => state.thread.composer.text.trim().length > 0);
+  if (hasDraft) return null;
+  const pending = control.pending || control.state.status === "generating";
+  const replacing = control.state.items.length > 0;
+  return (
+    <button aria-busy={pending} className="cg-suggestion-trigger" disabled={pending} onClick={control.onRequest} type="button">
+      {pending ? <LoaderCircle aria-hidden="true" className="animate-spin motion-reduce:animate-none" />
+        : replacing ? <RefreshCw aria-hidden="true" /> : <Lightbulb aria-hidden="true" />}
+      {pending ? "生成中…" : replacing ? "换一组" : "行动建议"}
+    </button>
+  );
+}
+
+function SuggestionFollowups({ inputId, suggestions }: { inputId: string; suggestions: SuggestionControl }) {
   const aui = useAui();
   const hasDraft = useAuiState((state) => state.thread.composer.text.trim().length > 0);
-  if (suggestions.length === 0 || hasDraft) return null;
+  if (hasDraft) return null;
+  const { state, pending, error } = suggestions;
+  const failed = !pending && state.status !== "generating" && (error || state.status === "failed");
+  const empty = !pending && state.status === "ready" && state.items.length === 0;
+  if (!state.items.length && !failed && !empty) return null;
   return (
     <section aria-label="可选的行动建议" className="cg-message-suggestions">
       <ul>
-        {suggestions.map((suggestion) => (
+        {state.items.map((suggestion) => (
           <li key={suggestion}>
             <button
               aria-label={suggestion}
@@ -144,6 +171,9 @@ function SuggestionFollowups({ inputId, suggestions }: { inputId: string; sugges
           </li>
         ))}
       </ul>
+      {failed || empty ? <p className="cg-suggestion-feedback" role="status">
+        {failed ? "建议暂时没能生成，可以再试一次。" : "暂时没有其他合适的建议，可以继续输入行动。"}
+      </p> : null}
     </section>
   );
 }
@@ -207,7 +237,7 @@ export function GameThread({
   readOnly = false,
   reduceMotion = false,
   streamWarning,
-  suggestions = [],
+  suggestions,
   timeline = [],
   timelineStep = 0,
 }: GameThreadProps) {
@@ -254,7 +284,7 @@ export function GameThread({
   const captureSubmission = () => {
     if (frameRef.current) editableHeight.current = frameRef.current.getBoundingClientRect().height;
   };
-  const activeSuggestions = readOnly || composerMode === "suppressed" ? [] : suggestions;
+  const activeSuggestions = readOnly || composerMode === "suppressed" ? undefined : suggestions;
   return (
     <ThreadPrimitive.Root
       className="aui-root cg-thread-root flex h-full flex-col bg-background"

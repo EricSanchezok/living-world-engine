@@ -1,7 +1,7 @@
 # Independent contextual action suggestions
 
 ## Status
-Accepted
+Superseded by [0242](0242-on-demand-published-context-suggestions.md)
 Class: architecture
 
 ## Context and Problem Statement

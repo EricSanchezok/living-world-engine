@@ -163,6 +163,8 @@ describe("model invocation probe", () => {
 
   it("replays a request through a variant without writing canonical state", async () => {
     const fixture = await source();
+    fixture.source.request.inferenceOverrides = { thinking: "auto" };
+    fixture.source.request.jsonExamplePolicy = "omit";
     const provider = new ScriptedModelProvider(() => ({
       title: "The harbor",
       scene: "A clear morning settles over the harbor.",
@@ -186,6 +188,7 @@ describe("model invocation probe", () => {
     expect(report.trials.every((trial) => trial.requestDiff.changed)).toBe(true);
     expect(report.trials.every((trial) => trial.requestExactMatch === false)).toBe(true);
     expect(provider.requests).toHaveLength(2);
+    expect(report.trials[0]?.request).toMatchObject({ inferenceOverrides: { thinking: "auto" }, jsonExamplePolicy: "omit" });
     expect(report.trials[0]?.engineSemantic).toBe("not-run");
   });
 

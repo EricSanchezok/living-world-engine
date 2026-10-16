@@ -116,6 +116,8 @@ test("the participant conversation, control orb and inspector stay bounded", asy
   await page.emulateMedia({ colorScheme: "dark", reducedMotion: "reduce" });
   await page.goto(`/play/${instanceId}`);
   await expect(page.locator('[data-role="assistant"] .cg-narrative').filter({ hasText: "此刻，你是小明" }).first()).toBeVisible();
+  await expect(page.getByRole("region", { name: "可选的行动建议" })).toHaveCount(0);
+  await page.getByRole("button", { name: "行动建议", exact: true }).click();
   await expect(page.getByRole("region", { name: "可选的行动建议" })).toBeVisible();
   await expect(page).toHaveScreenshot("instance-participant-dark-desktop.png", screenshotOptions);
   await expect(page.locator(".cg-timeline-rail")).toBeVisible();
@@ -125,6 +127,7 @@ test("the participant conversation, control orb and inspector stay bounded", asy
   await page.getByLabel("你的行动", { exact: true }).fill("观察四周");
   await page.getByRole("button", { name: "发送行动" }).click();
   await expect(page.getByText(/你查看了眼前的情况/).last()).toBeVisible();
+  await page.getByRole("button", { name: "行动建议", exact: true }).click();
   await expect(page.getByRole("button", { name: "询问守门人石门后的道路" })).toBeVisible();
 
   await page.evaluate(() => {

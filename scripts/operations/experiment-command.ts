@@ -32,7 +32,7 @@ function parseArgs(argv: readonly string[]): Options {
   let experimentId = "";
   let version: string | undefined;
   let catalog = path.resolve(process.env.LIVINGWORLD_EXPERIMENT_CATALOG_PATH ?? "config/experiments.json");
-  let database = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v29", "livingworld.sqlite");
+  let database = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v30", "livingworld.sqlite");
   for (let index = 1; index < argv.length; index += 1) {
     const argument = argv[index]!;
     if (argument === "--experiment") experimentId = required(argv, ++index, argument);
