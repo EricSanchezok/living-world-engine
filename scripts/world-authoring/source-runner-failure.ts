@@ -1,5 +1,14 @@
 import { ModelConfigurationError } from "../../src/engine/models/model-provider";
 
+/** Stop queued dispatch before a blocked account's active scheduler slot is released. */
+export function sourceRunnerAccountFetch(fetchImplementation: typeof fetch, stop: () => void): typeof fetch {
+  return async (input, init) => {
+    const response = await fetchImplementation(input, init);
+    if ([401, 402, 403].includes(response.status)) stop();
+    return response;
+  };
+}
+
 /** Check every paid dispatch, including repairs, while preserving in-flight results. */
 export async function sourceRunnerCallIfActive<T>(isStopped: () => boolean, call: () => Promise<T>):
 Promise<{ status: "stopped" } | { status: "returned"; value: T }> {
