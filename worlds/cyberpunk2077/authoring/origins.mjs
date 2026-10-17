@@ -1,5 +1,55 @@
 // These people, businesses, assets, prices, and opening events are original additions.
 export function authorOrigins(m) {
+  const roleLife = {
+    heir: {
+      value: "看重旧楼给自己与熟人留下的安稳，也想让空房长出新的用处。",
+      voice: "对邻里熟人的事有耐心，讲到新打算会兴奋；谈不拢时能直说自己的想法。",
+    },
+    lead: {
+      value: "愿意凭实干赢得客户和同事的信任，也看重团队有机会尝试新东西。",
+      voice: "安排工作简洁明快，谈到可行的新方案会来劲，和老搭档能开两句玩笑。",
+    },
+    editor: {
+      value: "在乎作品保留下来的街声与人的样子，也珍惜创作者愿意把下一部片交过来的信任。",
+      voice: "喜欢用声音、节奏和具体镜头谈想法；和熟悉的合作者说话放松，会用剪辑笑话化解紧张。",
+    },
+    apprentice: {
+      value: "很在意靠自己的手艺让常客恢复日常，也盼着林医生放心把店交给自己照看。",
+      voice: "先问对方实际哪里不方便，说到熟悉的零件便很有兴致；遇到不懂的地方肯直接请教。",
+    },
+    fleet: {
+      value: "喜欢把新路线变成团队都能过上好日子的生意，也舍不得把一起跑车的人留在麻烦里。",
+      voice: "聊路线时有画面，讲路上的人和事很起劲；和劳尔说话亲近，也愿意争一争自己的主意。",
+    },
+    medic: {
+      value: "在乎伤者能重新安心过日子，也珍惜和莉娜不用多解释就能配合的默契。",
+      voice: "对紧张的人温和具体，先回应眼前的不适；和搭档说话简短自然，有熟人之间的轻松。",
+    },
+    armorer: {
+      value: "愿意凭手艺把店经营成自己的生活，也希望利奥学会本事后有自己的选择。",
+      voice: "熟人面前干脆，带一点损人的幽默，示范手艺时耐心；不喜欢别人替自己拿主意。",
+    },
+    partner: {
+      value: "看见旧机器重新做出好东西会高兴，更看重一起干活的人能靠工坊过上稳定日子。",
+      voice: "讲技术喜欢拿眼前的零件比划，兴奋时会拉同伴一起看；谈分歧直截了当，也听得进现场经验。",
+    },
+    broker: {
+      value: "享受把货和真正用得上的买家撮合起来的成就感；长久往来与眼前利润都值得争取。",
+      voice: "谈生意先摸清对方拿货做什么，讲价爽快，熟客面前有一点轻巧的调侃。",
+    },
+    manager: {
+      value: "想把折光带到有人认真听、也付得起乐队报酬的舞台，和伙伴一起决定这支乐队会是什么样子。",
+      voice: "聊现场和歌曲时热络，会追问一段旋律为什么打动人；谈钱也直说，熟人间带点后台式的玩笑。",
+    },
+    reporter: {
+      value: "好奇街坊真正经历了什么，希望自己的署名能让读者信得过，也让愿意开口的人觉得值得。",
+      voice: "提问从具体细节起，听到意外说法会接着追问；和阿玛拉交流时敢说直觉，也会承认还没弄懂。",
+    },
+    operator: {
+      value: "想把旧接口变成能帮邻居解决麻烦的手艺，也给自己留出和旧同事聊工作以外事情的日子。",
+      voice: "讲设备会用亲手操作过的感觉打比方，和旧同事有克制的幽默；别人谈自己的打算时愿意听完。",
+    },
+  };
   const contactLife = {
     elena: ["熟悉的事直截了当，谈到姐姐留下的楼会停一下；不拿长辈身份压过具体意见。", "希望把每月跑维修的时间腾出来，去看住在别区的老朋友。"],
     marco: ["会拿店里遇到的小事打比方，先讲哪台机器停了、哪位客人要来，再谈账。", "想让洗衣店的夜班早一点结束，周末能陪女儿吃晚饭。"],
@@ -40,11 +90,11 @@ export function authorOrigins(m) {
   };
   const role = (code, id, title, name, district, homeName, workName, cash, ratings, persona, purpose) => {
     const home = `${id}-home`, work = `${id}-work`;
+    const { voice, value } = roleLife[id];
     m.entity(home, homeName, "place", district, "有床铺、洗漱设施和可锁储物柜的长期住所。访客需要住户允许。");
     m.entity(work, workName, "place", district, "可通过街区道路到达的实际营业或工作场所；营业空间与私人住所分开。");
     m.person({ id, name: `${code} ${name}｜${title}`, place: work, description: `${name}是一名成年人，在${workName}处理自己的生活和事业。`,
-      persona, voice: "按照自己的经历自然说话，能提问、拒绝或提出新的生活方向。", goal: purpose,
-      value: "珍视自主决定生活的权利，同时认真对待已有的人际关系。", cash, ratings });
+      persona, voice, goal: purpose, value, cash, ratings });
     m.fact(id, "playable-role", code, `${title}；玩家可接管这个已经在世界中生活的唯一人物。`);
     m.reference(home, "resident", id, "这位住户拥有稳定居住权，不等于拥有整栋楼。", [id]);
     m.believe(id, home, "residence", `我的住所是${homeName}，可以返回休息、接待客人或保管自己的物品。`);
