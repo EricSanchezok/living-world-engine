@@ -22,9 +22,12 @@ facts:
     value:
       kind: text
       value: 备用供电板接点间歇失效，软件日志存在重启记录。
-    description: 这是预先存在的故障；诊断揭示它，不根据玩家猜测临时改写。
+    description: 故障须通过已授权的接线诊断与接点检测才能观察；站在房间里或听说设备重启不足以确认原因。
     access:
-      kind: private
+      kind: agents
+      agentIds:
+        - operator
+        - niko
   - id: operator-pump-operational-3
     predicate: operational
     value:

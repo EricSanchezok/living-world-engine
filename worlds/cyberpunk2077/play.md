@@ -26,4 +26,4 @@
 
 共同和业务账户使用现场语音终端。需要付款时直接说出申请，例如：“我对项目账户的语音终端说：请向艾达支付 6000 欧元的首批控制器货款，使用项目资金。”核对回执与余额后再判断交易是否完成；询价、写草稿或操作其他设备都不等于已付款。
 
-世界使用 decision-jev、creation-deepseek 与 decision-deepseek-long Profile。长输出回退使用同一 DeepSeek 账号，给复杂裁决保留 32768 token 输出上限；普通请求仍走已有主 Profile。导入、初始人物建立和接管不需要模型推理；提交行动、NPC 决策及文字呈现需要这些 Profile 的服务可用。账号配置及故障检查遵循仓库的[开发说明](../../docs/development.md)和[调试参考](../../docs/debugging.md)。
+世界裁决使用 decision-deepseek-long，人物的私有行动选择使用 decision-jev，文字创作使用 creation-deepseek。DeepSeek 裁决保留 32768 token 输出上限，复杂回合可能需要较长时间；模型选择与实际验收见[真实模型记录](live-verification.md)。导入、初始人物建立和接管不需要模型推理；提交行动、NPC 决策及文字呈现需要这些 Profile 的服务可用。账号配置及故障检查遵循仓库的[开发说明](../../docs/development.md)和[调试参考](../../docs/debugging.md)。

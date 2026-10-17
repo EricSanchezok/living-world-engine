@@ -13,6 +13,7 @@ import type { SimulationState } from "../src/engine/contracts/model";
 import { parseModelCatalog } from "../src/engine/models/model-catalog";
 import { ModelGateway } from "../src/engine/models/model-gateway";
 import { createTestModelRegistry } from "../src/engine/testing/model-provider";
+import { readDirectState } from "../src/engine/direct/state";
 
 const base = path.resolve("worlds/cyberpunk2077");
 interface Role { code: string; id: string; home: string; work: string; cash: number; contacts: string[]; assets: string[]; contracts: string[] }
@@ -81,6 +82,8 @@ describe("Cyberpunk 2077 authored world through import and persistent play", () 
         expect(state.truth).toEqual(before.truth);
         expect(state.agents[role.id]).toEqual(before.agents[role.id]);
         expect(Object.values(state.agents)).toHaveLength(107);
+        expect(readDirectState(state.executionState!, state).models.decision).toBe("decision-deepseek-long");
+        expect(state.agents[role.id]!.modelProfiles.decision).toBe("decision-jev");
         expect(quantity(state, role.id)).toBe(role.cash);
         expect(state.truth.placements[role.id]).toBe(role.work);
         expect(state.truth.entities[role.home]).toBeDefined();
@@ -118,6 +121,7 @@ describe("Cyberpunk 2077 authored world through import and persistent play", () 
       expect(Object.values(state.agents.v!.bindings).some(binding => binding.canonicalEntityIds.includes("relic"))).toBe(false);
       expect(Object.values(state.agents.heir!.bindings).some(binding => binding.canonicalEntityIds.includes("johnny-engram"))).toBe(false);
       expect(JSON.stringify(projectAgentPerspective(state, state.agents.heir!))).not.toMatch(/FIA|供电板接点间歇失效|restricted-knowledge/);
+      expect(JSON.stringify(projectAgentPerspective(state, state.agents.operator!))).not.toContain("备用供电板接点间歇失效");
     } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
   }, 60000);
 

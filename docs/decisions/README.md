@@ -149,3 +149,4 @@ An optional adjacent `Class:` line uses `architecture`, `process`, `testing`, `f
 
 - [0243 — Grouped perspective reading with auxiliary relationships](0243-grouped-perspective-reading.md)
 - [0245 — Authored world lives through Agent takeover](0245-authored-world-lives-through-agent-takeover.md)
+- [0246 — Night City world adjudication profile](0246-night-city-world-adjudication-profile.md)

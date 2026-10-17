@@ -73,7 +73,7 @@ export function authorOrigins(m) {
   m.fact("heir-lease-offer","term-years",5,"当前要约的租期为五年，变更须实际提出并协商。",["heir","elena"]);
   offer(heir,"repair-offer","修缮与社区空间合作",["inez","marco","elena"],"社区合作方愿以每月 4200 欧元收入及分期修缮换取工作室使用；先核验报价、分工与验收，再签约。首笔维修可单独处理。");
   m.commitment("heir","已经承诺就重大改造听取共同产权人和租户意见。",["elena","marco","inez"]);
-  opening(heir,"埃琳娜带来两份方案，马尔科把漏水照片与 800 欧元维修报价放在桌上，伊内兹等着解释社区合作的条款。大家尚未签字。",7200,["核对维修报价并报销","协商租客保护条款","走进闲置房评估其他用途"]);
+  opening(heir,"埃琳娜带来两份方案，马尔科把漏水照片与 800 欧元维修报价放在桌上，伊内兹等着解释社区合作的条款。大家尚未签字。",7200,["核对报价并协商维修预付款","协商租客保护条款","走进闲置房评估其他用途"]);
 
   const lead = role("O02","lead","公司里仍有明天","艾登·沃克","corpo-plaza","Charter Hill 租用公寓","棱桥服务项目办公室",9000,
     {persuasion:4,craft:4,investigation:3},"原创承包商棱桥服务的项目负责人，有工作和采购权限。职位属于中型企业，不是荒坂或军用科技的高层。","处理演示系统缺陷，保住客户信任并发展团队。");
@@ -228,7 +228,7 @@ export function authorOrigins(m) {
   m.believe("operator",manual,"training","我受过 L-4 有线诊断训练，可以在目标授权后读取兼容控制器日志，写入参数须进一步核验。");
   const pump=asset(operator,"pump","社区送修的旧水泵控制柜","equipment","使用 L-4 有线协议，冷启动时状态不稳；属于社区，当前仅授权诊断，不授权出售。",null);
   m.fact(pump,"diagnostic-permission","operator may inspect; no disposal or unrestricted writes","社区交来的书面委托只允许检测与报价。",["operator","niko","mara","tessa"]);
-  m.fact(pump,"fault","备用供电板接点间歇失效，软件日志存在重启记录。","这是预先存在的故障；诊断揭示它，不根据玩家猜测临时改写。","private");
+  m.fact(pump,"fault","备用供电板接点间歇失效，软件日志存在重启记录。","故障须通过已授权的接线诊断与接点检测才能观察；站在房间里或听说设备重启不足以确认原因。",["operator","niko"]);
   const oldBoards=asset(operator,"spares","泰莎的旧型供电板库存","stock","两块待检测供电板；需核对兼容与状态。","tessa");m.quantity(oldBoards,"components",2);
   offer(operator,"repair","社区旧水泵诊断委托",["niko","mara","tessa"],"诊断费拟定 600 欧元，修复另报价；可以有偿维修、教别人维护、推荐替换或拒接，无预定成功结果。");
   opening(operator,"送修的水泵控制柜又闪了一次复位灯。尼科拿出接线图，玛拉翻找旧日志，泰莎带着两块待检测的供电板等待报价。",7200,["按授权用接口读取日志","检测备板与电源接点","商议修复、培训或替换方案"]);

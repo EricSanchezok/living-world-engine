@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
 import YAML from "yaml";
 import AdmZip from "adm-zip";
-import { createAuthoringModel, profiles } from "./model.mjs";
+import { createAuthoringModel, worldProfiles } from "./model.mjs";
 import { authorCity } from "./city.mjs";
 import { authorCast } from "./cast.mjs";
 import { authorOrigins } from "./origins.mjs";
@@ -20,9 +20,9 @@ export function buildModel() {
 }
 export function renderWorld() {
   const model=buildModel(), {laws,mechanics}=authorRules(model);
-  const manifest={schema_version:17,id:"cyberpunk2077-night-city",name:"赛博朋克 2077：夜之城众生",version:"1.0.0",
+  const manifest={schema_version:17,id:"cyberpunk2077-night-city",name:"赛博朋克 2077：夜之城众生",version:"1.0.1",
     description:"忠于《赛博朋克 2077》与《往日之影》背景的中文同人开放世界。开篇在救人行动前，十二种原创成年身份拥有实际资产、人脉与独立生活。通过观察者进入并接管具名角色；未来由实际行动产生。",
-    runtime_defaults:{max_autonomous_span_seconds:300,realtime_interval_ms:300000,action_window_ms:60000},model_profiles:profiles,
+    runtime_defaults:{max_autonomous_span_seconds:300,realtime_interval_ms:300000,action_window_ms:60000},model_profiles:worldProfiles,
     narrative:{language:"zh-CN",style:"中文第二人称，具体可感的城市小说。让技术、贫富、职业与人情从现场细节和对白显露；语气依人物而异。只叙述当前视角能知道的内容，日常简洁，重要交谈充分展开。",expansion:false}};
   const files=new Map([["script.yaml",manifest],["laws.yaml",laws],["mechanics.yaml",mechanics],
     ...[...model.entities.values()].sort((a,b)=>a.id.localeCompare(b.id,"en")).map(e=>[`entities/${e.id}.yaml`,e])]
@@ -51,7 +51,7 @@ export function build({check=false}={}) {
   const {model,files,counts}=renderWorld();
   const runtimeDigest=createHash("sha256");
   for(const [name,text] of files) runtimeDigest.update(name).update("\0").update(text);
-  const report={worldId:"cyberpunk2077-night-city",version:"1.0.0",schemaVersion:17,
+  const report={worldId:"cyberpunk2077-night-city",version:"1.0.1",schemaVersion:17,
     start:"2077, after V and Jackie's six-month montage, before The Rescue; authored simultaneous staging",
     counts,runtimeSha256:runtimeDigest.digest("hex"),narrativeExpansion:false};
   const outputs=new Map([...files].map(([name,text])=>[`world/${name}`,text]));
