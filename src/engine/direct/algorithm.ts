@@ -249,7 +249,8 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     }
     for (const settlement of settlements) {
       const { frame, outcome } = settlement, intent = control.intents[frame.actorId]!;
-      const changed = settlement.operations.length > 0 || frame.kind === "speak" && initial.intents[frame.actorId]?.lastActionHash !== intent.lastActionHash ||
+      const changed = settlement.operations.length > 0 || frame.kind === "speak" && ["succeeded", "partial"].includes(outcome.status) &&
+        initial.intents[frame.actorId]?.lastActionHash !== intent.lastActionHash ||
         settlement.visibleEntities.some(entity => !Object.values(source.agents[frame.actorId]!.bindings).some(binding => binding.canonicalEntityIds.includes(entity.id))) ||
         frame.kind === "observe" && settlement.visibleFacts.some(fact => !Object.values(source.agents[frame.actorId]!.belief.claims).some(claim =>
           claim.predicate === fact.predicate && contentHash(claim.value) === contentHash(fact.value)));
@@ -269,9 +270,11 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
       const inspectionReply = frame.kind === "observe" && cause?.submissionId &&
         !source.history.some(step => step.directEvent?.frames.some(previous => previous.actorId === frame.actorId &&
           previous.causeActionId === frame.causeActionId && previous.kind === "observe"));
+      const failedReply = cause?.submissionId && ["failed", "blocked"].includes(outcome.status) &&
+        control.prepared[frame.id]!.requestProgress === "continue" && intent.noProgressCount < 2;
       const continueReaction = !frame.submissionId && frame.causeActionId &&
-        (control.prepared[frame.id]!.requestProgress === "continue" || inspectionReply) &&
-        ["succeeded", "partial"].includes(outcome.status) && (inspectionReply || intent.noProgressCount < 2) && !intent.activityId;
+        (failedReply || (control.prepared[frame.id]!.requestProgress === "continue" || inspectionReply) &&
+          ["succeeded", "partial"].includes(outcome.status) && (inspectionReply || intent.noProgressCount < 2)) && !intent.activityId;
       if (continueReaction) wakeIntent(control, frame.actorId, "reaction-progress", frame.causeActionId);
       if (!intent.activityId && input.policyRoster[frame.actorId]?.kind === "model" && !resumePendingCause(control, frame.actorId) &&
         !continueReaction && intent.noProgressCount < 2 && Object.values(source.agents[frame.actorId]!.character.goals).some(goal => goal.status === "active")) {
