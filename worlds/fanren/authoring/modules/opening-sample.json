@@ -6,7 +6,7 @@
       "schema_version": 19,
       "id": "fanren-opening-sample",
       "name": "凡人修仙传·开篇编写样本",
-      "version": "0.5.0",
+      "version": "0.5.1",
       "description": "共同开篇时刻的九种身份试作：八种原创出身及唯一韩立。包含真实资产、相识和能力；各地区仍属局部展开，不能代替人界灵界全域完成。",
       "runtime_defaults": {
         "max_autonomous_span_seconds": 300,
@@ -6998,6 +6998,66 @@
                         "name": "老客户意向订单",
                         "description": "知道报价四十箱六百两，未收定钱；信用与补货能力均须考虑。",
                         "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-store",
+                        "name": "林记药材铺",
+                        "description": "常往来办事的自家药铺，知道从家宅沿街步行到店，再从店后院进入库房和账房。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-stockroom",
+                        "name": "林记库房",
+                        "description": "在药铺后院，去过其中搬货和点货；货物当前是否变动仍须实看。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-account-room",
+                        "name": "林记账房",
+                        "description": "药铺后院旁侧账房，出入库簿和商号钱柜平日放在那里。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-herbs",
+                        "name": "待议价药材",
+                        "description": "林记库房里成箱码放的普通药材，可逐排清点箱数；箱数不等于箱内成色已经验明。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-stock-ledger",
+                        "name": "林记出入库簿",
+                        "description": "平日放在账房，记载出入货；需真实取来或到场查阅。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-hand-lamp",
+                        "name": "林记提灯",
+                        "description": "平日在药铺放着的提灯，可用旁边的火石火绒点燃后提行。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-fire-kit",
+                        "name": "火石与火绒",
+                        "description": "药铺提灯旁的引火物。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-tea-service",
+                        "name": "前厅茶具",
+                        "description": "家宴后留在前厅桌上，需要收拾的茶具。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-firm",
+                        "name": "林记商号",
+                        "description": "长期管理的商号资产；记账与实物余额须分别核对。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-funds",
+                        "name": "商号钱柜",
+                        "description": "长期管理的商号资产；记账与实物余额须分别核对。",
+                        "status": "observed"
                       }
                     ],
                     "evidence": [
@@ -7012,6 +7072,13 @@
                         "id": "opening-night-observation",
                         "kind": "observation",
                         "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
+                      },
+                      {
+                        "id": "prior-premises-work",
+                        "kind": "observation",
+                        "description": "长期在林家和药铺办事，亲自走过店铺后院、库房和账房，使用过提灯并取送过出入库簿。",
                         "sourceId": null,
                         "step": 0
                       }
@@ -7045,6 +7112,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "opening-night-observation"
+                        ]
+                      },
+                      {
+                        "id": "known-premises-route",
+                        "subjectId": "self",
+                        "predicate": "learned-route",
+                        "value": {
+                          "kind": "text",
+                          "value": "知道从林家沿街到药铺，再从后院到库房、账房的路；日常用具和出入库簿放在熟悉位置，实际状态依新见闻核对。"
+                        },
+                        "description": "知道从林家沿街到药铺，再从后院到库房、账房的路；日常用具和出入库簿放在熟悉位置，实际状态依新见闻核对。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "prior-premises-work"
                         ]
                       }
                     ],
@@ -7107,6 +7189,66 @@
                         "local_entity_id": "known-lin-old-order",
                         "canonical_entity_ids": [
                           "lin-old-order"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-store",
+                        "canonical_entity_ids": [
+                          "lin-store"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-stockroom",
+                        "canonical_entity_ids": [
+                          "lin-stockroom"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-account-room",
+                        "canonical_entity_ids": [
+                          "lin-account-room"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-herbs",
+                        "canonical_entity_ids": [
+                          "lin-herbs"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-stock-ledger",
+                        "canonical_entity_ids": [
+                          "lin-stock-ledger"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-hand-lamp",
+                        "canonical_entity_ids": [
+                          "lin-hand-lamp"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-fire-kit",
+                        "canonical_entity_ids": [
+                          "lin-fire-kit"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-tea-service",
+                        "canonical_entity_ids": [
+                          "lin-tea-service"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-firm",
+                        "canonical_entity_ids": [
+                          "lin-firm"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-funds",
+                        "canonical_entity_ids": [
+                          "lin-funds"
                         ]
                       }
                     ]
@@ -7258,6 +7400,66 @@
                         "name": "老客户意向订单",
                         "description": "原报价每箱十五两，四十箱六百两，未收定钱；次日日间待宋济生最终确认。",
                         "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-store",
+                        "name": "林记药材铺",
+                        "description": "常往来办事的自家药铺，知道从家宅沿街步行到店，再从店后院进入库房和账房。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-stockroom",
+                        "name": "林记库房",
+                        "description": "在药铺后院，去过其中搬货和点货；货物当前是否变动仍须实看。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-account-room",
+                        "name": "林记账房",
+                        "description": "药铺后院旁侧账房，出入库簿和商号钱柜平日放在那里。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-herbs",
+                        "name": "待议价药材",
+                        "description": "林记库房里成箱码放的普通药材，可逐排清点箱数；箱数不等于箱内成色已经验明。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-stock-ledger",
+                        "name": "林记出入库簿",
+                        "description": "平日放在账房，记载出入货；需真实取来或到场查阅。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-hand-lamp",
+                        "name": "林记提灯",
+                        "description": "平日在药铺放着的提灯，可用旁边的火石火绒点燃后提行。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-fire-kit",
+                        "name": "火石与火绒",
+                        "description": "药铺提灯旁的引火物。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-tea-service",
+                        "name": "前厅茶具",
+                        "description": "家宴后留在前厅桌上，需要收拾的茶具。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-firm",
+                        "name": "林记商号",
+                        "description": "长期管理的商号资产；记账与实物余额须分别核对。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-funds",
+                        "name": "商号钱柜",
+                        "description": "长期管理的商号资产；记账与实物余额须分别核对。",
+                        "status": "observed"
                       }
                     ],
                     "evidence": [
@@ -7272,6 +7474,13 @@
                         "id": "opening-night-observation",
                         "kind": "observation",
                         "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
+                      },
+                      {
+                        "id": "prior-premises-work",
+                        "kind": "observation",
+                        "description": "长期在林家和药铺办事，亲自走过店铺后院、库房和账房，使用过提灯并取送过出入库簿。",
                         "sourceId": null,
                         "step": 0
                       }
@@ -7305,6 +7514,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "opening-night-observation"
+                        ]
+                      },
+                      {
+                        "id": "known-premises-route",
+                        "subjectId": "self",
+                        "predicate": "learned-route",
+                        "value": {
+                          "kind": "text",
+                          "value": "知道从林家沿街到药铺，再从后院到库房、账房的路；日常用具和出入库簿放在熟悉位置，实际状态依新见闻核对。"
+                        },
+                        "description": "知道从林家沿街到药铺，再从后院到库房、账房的路；日常用具和出入库簿放在熟悉位置，实际状态依新见闻核对。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "prior-premises-work"
                         ]
                       }
                     ],
@@ -7367,6 +7591,66 @@
                         "local_entity_id": "known-lin-old-order",
                         "canonical_entity_ids": [
                           "lin-old-order"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-store",
+                        "canonical_entity_ids": [
+                          "lin-store"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-stockroom",
+                        "canonical_entity_ids": [
+                          "lin-stockroom"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-account-room",
+                        "canonical_entity_ids": [
+                          "lin-account-room"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-herbs",
+                        "canonical_entity_ids": [
+                          "lin-herbs"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-stock-ledger",
+                        "canonical_entity_ids": [
+                          "lin-stock-ledger"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-hand-lamp",
+                        "canonical_entity_ids": [
+                          "lin-hand-lamp"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-fire-kit",
+                        "canonical_entity_ids": [
+                          "lin-fire-kit"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-tea-service",
+                        "canonical_entity_ids": [
+                          "lin-tea-service"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-firm",
+                        "canonical_entity_ids": [
+                          "lin-firm"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-funds",
+                        "canonical_entity_ids": [
+                          "lin-funds"
                         ]
                       }
                     ]
@@ -7772,7 +8056,7 @@
                     "goals": [
                       {
                         "id": "current-purpose",
-                        "description": "收拾茶具，询问是否还需要送一趟账册。",
+                        "description": "收拾前厅茶具；若东家或掌柜需要取送出入库簿，问清这次差事后办理。",
                         "priority": 0.5,
                         "progress": 0
                       }
@@ -7821,6 +8105,54 @@
                         "name": "阿柳本月工钱",
                         "description": "七日后付本月工钱二两，额外差事另行商议；私人赠与不自动抵销商号工资。 尚欠 2，单位 silver；到期世界秒数 604800。",
                         "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-store",
+                        "name": "林记药材铺",
+                        "description": "常往来办事的自家药铺，知道从家宅沿街步行到店，再从店后院进入库房和账房。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-stockroom",
+                        "name": "林记库房",
+                        "description": "在药铺后院，去过其中搬货和点货；货物当前是否变动仍须实看。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-account-room",
+                        "name": "林记账房",
+                        "description": "药铺后院旁侧账房，出入库簿和商号钱柜平日放在那里。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-herbs",
+                        "name": "待议价药材",
+                        "description": "林记库房里成箱码放的普通药材，可逐排清点箱数；箱数不等于箱内成色已经验明。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-stock-ledger",
+                        "name": "林记出入库簿",
+                        "description": "平日放在账房，记载出入货；需真实取来或到场查阅。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-hand-lamp",
+                        "name": "林记提灯",
+                        "description": "平日在药铺放着的提灯，可用旁边的火石火绒点燃后提行。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-fire-kit",
+                        "name": "火石与火绒",
+                        "description": "药铺提灯旁的引火物。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-lin-tea-service",
+                        "name": "前厅茶具",
+                        "description": "家宴后留在前厅桌上，需要收拾的茶具。",
+                        "status": "observed"
                       }
                     ],
                     "evidence": [
@@ -7835,6 +8167,13 @@
                         "id": "opening-night-observation",
                         "kind": "observation",
                         "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
+                      },
+                      {
+                        "id": "prior-premises-work",
+                        "kind": "observation",
+                        "description": "长期在林家和药铺办事，亲自走过店铺后院、库房和账房，使用过提灯并取送过出入库簿。",
                         "sourceId": null,
                         "step": 0
                       }
@@ -7868,6 +8207,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "opening-night-observation"
+                        ]
+                      },
+                      {
+                        "id": "known-premises-route",
+                        "subjectId": "self",
+                        "predicate": "learned-route",
+                        "value": {
+                          "kind": "text",
+                          "value": "知道从林家沿街到药铺，再从后院到库房、账房的路；日常用具和出入库簿放在熟悉位置，实际状态依新见闻核对。"
+                        },
+                        "description": "知道从林家沿街到药铺，再从后院到库房、账房的路；日常用具和出入库簿放在熟悉位置，实际状态依新见闻核对。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "prior-premises-work"
                         ]
                       }
                     ],
@@ -7912,6 +8266,54 @@
                         "local_entity_id": "known-lin-helper-wage",
                         "canonical_entity_ids": [
                           "lin-helper-wage"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-store",
+                        "canonical_entity_ids": [
+                          "lin-store"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-stockroom",
+                        "canonical_entity_ids": [
+                          "lin-stockroom"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-account-room",
+                        "canonical_entity_ids": [
+                          "lin-account-room"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-herbs",
+                        "canonical_entity_ids": [
+                          "lin-herbs"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-stock-ledger",
+                        "canonical_entity_ids": [
+                          "lin-stock-ledger"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-hand-lamp",
+                        "canonical_entity_ids": [
+                          "lin-hand-lamp"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-fire-kit",
+                        "canonical_entity_ids": [
+                          "lin-fire-kit"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-lin-tea-service",
+                        "canonical_entity_ids": [
+                          "lin-tea-service"
                         ]
                       }
                     ]
@@ -7959,7 +8361,7 @@
                 "kind": "item",
                 "name": "商号钱柜",
                 "description": "商号周转银，与私人银钱分开。",
-                "placement": "lin-store",
+                "placement": "lin-account-room",
                 "facts": [
                   {
                     "id": "lin-funds-owner",
@@ -7987,8 +8389,8 @@
                 "id": "lin-herbs",
                 "kind": "item",
                 "name": "待议价药材",
-                "description": "六十箱普通药材，清点可以核实数量。",
-                "placement": "lin-store",
+                "description": "成箱码放的普通药材，当前箱数可到库房实际清点。",
+                "placement": "lin-stockroom",
                 "facts": [
                   {
                     "id": "lin-herbs-owner",
@@ -8421,6 +8823,173 @@
                 "meters": [],
                 "quantities": [],
                 "ratings": []
+              },
+              {
+                "id": "lin-stockroom",
+                "kind": "location",
+                "name": "林记库房",
+                "description": "药铺后院的仓房；普通药材按箱码放，通道可供逐排核数。",
+                "placement": "lin-store",
+                "facts": [],
+                "meters": [],
+                "quantities": [],
+                "ratings": []
+              },
+              {
+                "id": "lin-account-room",
+                "kind": "location",
+                "name": "林记账房",
+                "description": "药铺后院的小账房，存放流水簿和商号钱柜。",
+                "placement": "lin-store",
+                "facts": [],
+                "meters": [],
+                "quantities": [],
+                "ratings": []
+              },
+              {
+                "id": "lin-stock-ledger",
+                "kind": "document",
+                "name": "林记出入库簿",
+                "description": "记录历次收货与出货的纸簿，旧记载需要同当前货物核对。",
+                "placement": "lin-account-room",
+                "facts": [
+                  {
+                    "id": "lin-stock-ledger-owned-by",
+                    "predicate": "owned-by",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "lin-firm"
+                    },
+                    "description": "林记商号公用物品，保管不改变所有权。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  },
+                  {
+                    "id": "lin-stock-ledger-last-entry",
+                    "predicate": "document-content",
+                    "value": {
+                      "kind": "text",
+                      "value": "当日日落前记入：普通药材六十箱入库，尚无出库记载。此为当时的登记，不是此刻自动更新的实点数。"
+                    },
+                    "description": "当日日落前记入：普通药材六十箱入库，尚无出库记载。此为当时的登记，不是此刻自动更新的实点数。",
+                    "access": {
+                      "kind": "discoverable",
+                      "condition": "实际取阅或得到正文展示，能在足够光照下看清文字；知道簿子在何处或转述账目不等于这次看过正文。"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [],
+                "ratings": []
+              },
+              {
+                "id": "lin-hand-lamp",
+                "kind": "item",
+                "name": "林记提灯",
+                "description": "可提行的有罩油灯，灯芯完好；点燃后可照近处箱签和纸面，不能隔墙照见库货。",
+                "placement": "lin-store",
+                "facts": [
+                  {
+                    "id": "lin-hand-lamp-owned-by",
+                    "predicate": "owned-by",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "lin-firm"
+                    },
+                    "description": "林记商号公用物品，保管不改变所有权。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  },
+                  {
+                    "id": "lin-hand-lamp-flame",
+                    "predicate": "flame",
+                    "value": {
+                      "kind": "text",
+                      "value": "未点燃"
+                    },
+                    "description": "未点燃",
+                    "access": {
+                      "kind": "public"
+                    }
+                  },
+                  {
+                    "id": "lin-hand-lamp-oil",
+                    "predicate": "prepared-oil",
+                    "value": {
+                      "kind": "text",
+                      "value": "灯内已有足够约一个时辰照明的灯油；续燃须实际添油。"
+                    },
+                    "description": "灯内已有足够约一个时辰照明的灯油；续燃须实际添油。",
+                    "access": {
+                      "kind": "public"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [],
+                "ratings": []
+              },
+              {
+                "id": "lin-fire-kit",
+                "kind": "item",
+                "name": "火石与火绒",
+                "description": "装在小袋里的常用引火物。",
+                "placement": "lin-store",
+                "facts": [
+                  {
+                    "id": "lin-fire-kit-owned-by",
+                    "predicate": "owned-by",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "lin-firm"
+                    },
+                    "description": "林记商号公用物品，保管不改变所有权。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [],
+                "ratings": []
+              },
+              {
+                "id": "lin-tea-service",
+                "kind": "item",
+                "name": "前厅茶具",
+                "description": "家宴后留在前厅桌上的茶壶、茶盏及托盘。",
+                "placement": "lin-estate",
+                "facts": [
+                  {
+                    "id": "lin-tea-service-owned-by",
+                    "predicate": "owned-by",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "lin-firm"
+                    },
+                    "description": "林记商号公用物品，保管不改变所有权。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  },
+                  {
+                    "id": "lin-tea-service-tidiness",
+                    "predicate": "tidiness",
+                    "value": {
+                      "kind": "text",
+                      "value": "茶具待收拾"
+                    },
+                    "description": "茶具待收拾",
+                    "access": {
+                      "kind": "public"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [],
+                "ratings": []
               }
             ],
             "facts": [
@@ -8531,6 +9100,84 @@
                 "access": {
                   "kind": "public"
                 }
+              },
+              {
+                "subject_id": "lin-store",
+                "id": "lin-store-route-lin-stockroom",
+                "predicate": "route-to",
+                "value": {
+                  "kind": "entity",
+                  "entityId": "lin-stockroom"
+                },
+                "description": "穿过药铺后院到库房，正常步行不到一刻；进入后才能查看其中货物。",
+                "access": {
+                  "kind": "public"
+                }
+              },
+              {
+                "subject_id": "lin-stockroom",
+                "id": "lin-stockroom-route-lin-store",
+                "predicate": "route-to",
+                "value": {
+                  "kind": "entity",
+                  "entityId": "lin-store"
+                },
+                "description": "穿过药铺后院到库房，正常步行不到一刻；进入后才能查看其中货物。",
+                "access": {
+                  "kind": "public"
+                }
+              },
+              {
+                "subject_id": "lin-store",
+                "id": "lin-store-route-lin-account-room",
+                "predicate": "route-to",
+                "value": {
+                  "kind": "entity",
+                  "entityId": "lin-account-room"
+                },
+                "description": "穿过药铺后院到旁侧账房，正常步行不到一刻。",
+                "access": {
+                  "kind": "public"
+                }
+              },
+              {
+                "subject_id": "lin-account-room",
+                "id": "lin-account-room-route-lin-store",
+                "predicate": "route-to",
+                "value": {
+                  "kind": "entity",
+                  "entityId": "lin-store"
+                },
+                "description": "穿过药铺后院到旁侧账房，正常步行不到一刻。",
+                "access": {
+                  "kind": "public"
+                }
+              },
+              {
+                "subject_id": "lin-stockroom",
+                "id": "lin-stockroom-route-lin-account-room",
+                "predicate": "route-to",
+                "value": {
+                  "kind": "entity",
+                  "entityId": "lin-account-room"
+                },
+                "description": "库房与账房同在药铺后院，沿廊步行片刻可达。",
+                "access": {
+                  "kind": "public"
+                }
+              },
+              {
+                "subject_id": "lin-account-room",
+                "id": "lin-account-room-route-lin-stockroom",
+                "predicate": "route-to",
+                "value": {
+                  "kind": "entity",
+                  "entityId": "lin-stockroom"
+                },
+                "description": "库房与账房同在药铺后院，沿廊步行片刻可达。",
+                "access": {
+                  "kind": "public"
+                }
               }
             ],
             "cognition": [
@@ -8577,7 +9224,7 @@
                     {
                       "id": "stock",
                       "name": "待议价药材",
-                      "description": "共六十箱普通药材，尚未交付。",
+                      "description": "日落前听说有六十箱普通药材待议价；当下数量与交付情况须按新见闻核对。",
                       "status": "observed"
                     },
                     {
@@ -8615,6 +9262,42 @@
                       "name": "林家前厅",
                       "description": "开篇时所在的地方。",
                       "status": "observed"
+                    },
+                    {
+                      "id": "known-lin-stockroom",
+                      "name": "林记库房",
+                      "description": "在药铺后院，去过其中搬货和点货；货物当前是否变动仍须实看。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "known-lin-account-room",
+                      "name": "林记账房",
+                      "description": "药铺后院旁侧账房，出入库簿和商号钱柜平日放在那里。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "known-lin-stock-ledger",
+                      "name": "林记出入库簿",
+                      "description": "平日放在账房，记载出入货；需真实取来或到场查阅。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "known-lin-hand-lamp",
+                      "name": "林记提灯",
+                      "description": "平日在药铺放着的提灯，可用旁边的火石火绒点燃后提行。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "known-lin-fire-kit",
+                      "name": "火石与火绒",
+                      "description": "药铺提灯旁的引火物。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "known-lin-tea-service",
+                      "name": "前厅茶具",
+                      "description": "家宴后留在前厅桌上，需要收拾的茶具。",
+                      "status": "observed"
                     }
                   ],
                   "evidence": [
@@ -8622,6 +9305,13 @@
                       "id": "opening-night-observation",
                       "kind": "observation",
                       "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                      "sourceId": null,
+                      "step": 0
+                    },
+                    {
+                      "id": "prior-premises-visit",
+                      "kind": "observation",
+                      "description": "以往随家人去过药铺后院，知道库房和账房的用途及路径。",
                       "sourceId": null,
                       "step": 0
                     }
@@ -8720,6 +9410,42 @@
                       "local_entity_id": "opening-place",
                       "canonical_entity_ids": [
                         "lin-estate"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "known-lin-stockroom",
+                      "canonical_entity_ids": [
+                        "lin-stockroom"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "known-lin-account-room",
+                      "canonical_entity_ids": [
+                        "lin-account-room"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "known-lin-stock-ledger",
+                      "canonical_entity_ids": [
+                        "lin-stock-ledger"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "known-lin-hand-lamp",
+                      "canonical_entity_ids": [
+                        "lin-hand-lamp"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "known-lin-fire-kit",
+                      "canonical_entity_ids": [
+                        "lin-fire-kit"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "known-lin-tea-service",
+                      "canonical_entity_ids": [
+                        "lin-tea-service"
                       ]
                     }
                   ]
@@ -20070,7 +20796,7 @@
                     "goals": [
                       {
                         "id": "current-purpose",
-                        "description": "登记顾清弦来访，并转告齐望舒的保全请求。",
+                        "description": "顾清弦刚到，来访已登记；向阵师前辈转告齐望舒的保全请求，随后按实际答复安排接待。",
                         "priority": 0.5,
                         "progress": 0
                       }
@@ -20107,6 +20833,24 @@
                         "name": "修补材料盒",
                         "description": "知道盒中耗材数量，可协助取用，不能自行授予他人所有权。",
                         "status": "observed"
+                      },
+                      {
+                        "id": "known-array-workroom",
+                        "name": "居所阵室",
+                        "description": "长期协助测绘的独立阵室，知道从听泉静室走过去的路。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "known-array-claimant",
+                        "name": "齐望舒",
+                        "description": "通过来访传话认识的称名，曾托你转达保全请求，未据此知晓其现在位置。",
+                        "status": "reported"
+                      },
+                      {
+                        "id": "known-array-visitor-book",
+                        "name": "听泉来访簿",
+                        "description": "自己平日保管并记录来访的册子。",
+                        "status": "observed"
                       }
                     ],
                     "evidence": [
@@ -20121,6 +20865,20 @@
                         "id": "opening-night-observation",
                         "kind": "observation",
                         "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
+                      },
+                      {
+                        "id": "opening-guest-received",
+                        "kind": "observation",
+                        "description": "在当前开篇前片刻亲自接待顾清弦进入听泉静室，并把此次来访写入来访簿；他到访这件事已经发生，但后续去留仍须按新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
+                      },
+                      {
+                        "id": "opening-preservation-message",
+                        "kind": "testimony",
+                        "description": "齐望舒先前传话请求暂时保留阵片、等她出示凭据。这是她的主张，尚未核验其权属证明。",
                         "sourceId": null,
                         "step": 0
                       }
@@ -20155,6 +20913,36 @@
                         "evidenceIds": [
                           "opening-night-observation"
                         ]
+                      },
+                      {
+                        "id": "opening-guest-registration",
+                        "subjectId": "known-array-friend",
+                        "predicate": "prior-visit",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇前片刻已到听泉静室，已登记来访。"
+                        },
+                        "description": "自己刚接待并登记过顾清弦来访。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-guest-received"
+                        ]
+                      },
+                      {
+                        "id": "received-preservation-request",
+                        "subjectId": "known-array-claimant",
+                        "predicate": "reported-request",
+                        "value": {
+                          "kind": "text",
+                          "value": "请求暂留阵片，等她出示凭据。"
+                        },
+                        "description": "收到齐望舒的保全请求，尚未查实她的权属。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-preservation-message"
+                        ]
                       }
                     ],
                     "bindings": [
@@ -20186,6 +20974,24 @@
                         "local_entity_id": "known-array-repair-stock",
                         "canonical_entity_ids": [
                           "array-repair-stock"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-array-workroom",
+                        "canonical_entity_ids": [
+                          "array-workroom"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-array-claimant",
+                        "canonical_entity_ids": [
+                          "array-claimant"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "known-array-visitor-book",
+                        "canonical_entity_ids": [
+                          "array-visitor-book"
                         ]
                       }
                     ]
@@ -20700,6 +21506,31 @@
                     "amount": 2
                   }
                 ],
+                "ratings": []
+              },
+              {
+                "id": "array-visitor-book",
+                "kind": "document",
+                "name": "听泉来访簿",
+                "description": "温砚保管的来访登记册。",
+                "placement": "array-assistant",
+                "facts": [
+                  {
+                    "id": "array-visitor-book-latest-entry",
+                    "predicate": "document-content",
+                    "value": {
+                      "kind": "text",
+                      "value": "今夜顾清弦来访，已迎入听泉静室。其阵片来历与权属另待本人说明。"
+                    },
+                    "description": "今夜顾清弦来访，已迎入听泉静室。其阵片来历与权属另待本人说明。",
+                    "access": {
+                      "kind": "discoverable",
+                      "condition": "实际取阅或得到正文展示，且光照足够看清文字。听说登记过不等于读到全文。"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [],
                 "ratings": []
               }
             ],

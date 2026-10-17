@@ -14,7 +14,7 @@ import { WorldHost } from "../../src/server/world-host";
 
 const routes = [
   ["herbal-apprentice", "herbal-north-slope", "herbal-general-shop", "herbal-receiving-stall"],
-  ["merchant-heir", "lin-old-client-shop", "lin-buyer-apothecary"],
+  ["merchant-heir", "lin-old-client-shop", "lin-buyer-apothecary", "lin-stockroom", "lin-account-room"],
   ["escort-apprentice", "escort-destination"],
   ["clan-junior", "shen-workbench"],
   ["foundation-independent", "pond-grove"],
@@ -81,6 +81,18 @@ describe("Fanren authored livelihood continuations", () => {
         expect(known).not.toContain("裂缝蓄水与成熟度使");
       } else if (originId === "merchant-heir") {
         expect(quantity("lin-buyer", "silver")).toBeGreaterThanOrEqual(1200);
+        expect(state.truth.placements["lin-herbs"]).toBe("lin-stockroom");
+        expect(state.truth.placements["lin-stock-ledger"]).toBe("lin-account-room");
+        expect(state.truth.placements["lin-funds"]).toBe("lin-account-room");
+        expect(quantity("lin-herbs", "herb-crate")).toBe(60);
+        for (const id of ["lin-father", "lin-manager", "lin-helper"]) {
+          const agent = state.agents[id]!;
+          for (const destination of ["lin-store", "lin-stockroom", "lin-account-room", "lin-herbs", "lin-stock-ledger", "lin-hand-lamp"]) {
+            expect(Object.values(agent.bindings).some(binding => binding.canonicalEntityIds.length === 1 && binding.canonicalEntityIds[0] === destination), `${id} does not know ${destination}`).toBe(true);
+          }
+          expect(Object.values(agent.belief.evidence).some(evidence => evidence.description.includes("亲自走过"))).toBe(true);
+          expect(JSON.stringify(projectAgentPerspective(state, agent))).not.toContain("当日日落前记入");
+        }
         expect(quantity("lin-old-client", "silver")).toBeGreaterThanOrEqual(600);
         expect(state.truth.facts["lin-old-order-customer"]?.value).toEqual({ kind: "entity", entityId: "lin-old-client" });
         expect(state.truth.facts["lin-helper-wage-remaining-amount"]?.value).toEqual({ kind: "number", value: 2 });
