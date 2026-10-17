@@ -9,17 +9,18 @@ import { replaySimulationState } from "../../runtime/transaction";
 import { readDirectState } from "../state";
 import type { PolicyBinding } from "../../runtime/execution";
 
-async function fixture(mode: "repair" | "repeat" | "current" | "speech" | "unknown") {
+async function fixture(mode: "repair" | "repair-stale-time" | "repeat" | "current" | "speech" | "unknown") {
   let readings = 0, selectedOperation = "wait";
   const f = directTestProvider(wire => {
     const context = wire.messages ? directCreationContext(wire) : {};
     if (context.playerReading) {
       readings++;
       const continuation = (wire.state as { currentRequestReceipts: unknown[] }).currentRequestReceipts.length > 0;
-      const operation = mode === "speech" ? "speak" : mode === "repair" && readings === 2 ? "move" : "wait";
+      const operation = mode === "speech" ? "speak" : mode.startsWith("repair") && readings === 2 ? "move" : "wait";
       selectedOperation = operation;
-      if (mode === "repair" && readings === 2) expect(context.repair).toMatchObject({ issues: [expect.stringContaining("different place")] });
+      if (mode.startsWith("repair") && readings === 2) expect(context.repair).toMatchObject({ issues: [expect.stringContaining("different place")] });
       return { understanding: "Perform the next authorized step at its required place.",
+        ...(mode === "repair-stale-time" && readings === 2 ? { durationReference: { basis: "phase_occurrence", count: 1 } } : {}),
         activitySite: mode === "current" ? "home-alias" : mode === "speech" ? "current" : mode === "unknown" ? "unresolved" : "room-ref",
         interaction: mode === "unknown" ? "clarification" : "world_action",
         action: { operation, target: "room-ref", recipient: "broadcast", tool: "none", resource: "none", amount: "unknown",
@@ -63,6 +64,18 @@ describe("player activity execution sites", () => {
     expect(rested.state.truth.elapsedSeconds).toBe(61);
     expect(rested.committed.directEvent.frames[0]!.kind).toBe("wait");
     expect(replaySimulationState(rested.state)).toEqual(rested.state);
+  });
+
+  it("rejects a repaired movement that still carries the later activity's phase reference", async () => {
+    const f = await fixture("repair-stale-time");
+    const result = await f.engine.step(f.roster, { expectedRevision: 0, trigger: "participant_action", externalActions: f.actions });
+    expect(f.readings()).toBe(2);
+    expect(result.state.truth).toEqual(f.world.initialState.truth);
+    expect(result.committed.directEvent.frames).toEqual([]);
+    const intent = readDirectState(result.state.executionState!, result.state).intents.player!;
+    expect(intent.status).toBe("failed");
+    expect(intent.failure?.message).toContain("prerequisite uses its own timing");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
   });
 
   it("rejects a second inconsistent site without committing the attempted wait", async () => {

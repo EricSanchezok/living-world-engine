@@ -27,7 +27,7 @@ import { directPerception } from "./perception";
 import { interruptActivities, interruptionCandidates } from "./interruption";
 import { sealDirectRecord } from "./canonical";
 import { participantReactionIds, prioritizeParticipantCauses } from "./foreground";
-import { hasLocalOpportunity } from "./initiative";
+import { hasLocalOpportunity, localActivityActors } from "./initiative";
 import { withFreshMemory } from "../cognition/memory";
 
 export interface DirectWorldConfig extends CapabilityModelOverrides { creationEnabled: boolean }
@@ -124,7 +124,8 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     const ready = Object.entries(control.intents).filter(([id, intent]) => input.policyRoster[id]?.kind === "model" && intent.status === "ready")
       .sort(([a, left], [b, right]) => right.urgency - left.urgency || a.localeCompare(b));
     const foreground = participantReactionIds(source, control, participantIds);
-    const reactions = ready.filter(([id]) => foreground.has(id));
+    const localActors = localActivityActors(source, control, participantIds);
+    const reactions = ready.filter(([id]) => foreground.has(id) || localActors.has(id));
     const pendingPlayers = Object.entries(control.intents).filter(([id, intent]) => input.policyRoster[id]?.kind === "external" && intent.status === "ready" && intent.activeSubmission).map(([id]) => id);
     const participantWork = foreground.size > 0 || Object.entries(control.intents).some(([id, intent]) =>
       input.policyRoster[id]?.kind === "external" && intent.activeSubmission !== null);
@@ -138,9 +139,10 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
           ? submissions.find(action => action.agentId === agentId) ?? control.intents[agentId]!.activeSubmission ?? undefined : undefined,
         creationEnabled: this.config.creationEnabled })) })));
     const selected = await select(owners);
-    if (submissions.length) {
-      const frames = selected.flatMap(result => result.status === "fulfilled" && result.value.result.frame ? [result.value.result.frame] : []);
-      const local = ready.filter(([id]) => hasLocalOpportunity(source, id, frames)).map(([id]) => id);
+    const frames = selected.flatMap(result => result.status === "fulfilled" && result.value.result.frame &&
+      participantIds.includes(result.value.agentId) ? [result.value.result.frame] : []);
+    if (frames.length) {
+      const local = ready.filter(([id]) => !owners.includes(id) && hasLocalOpportunity(source, id, frames)).map(([id]) => id);
       owners.push(...local);
       selected.push(...await select(local));
     }

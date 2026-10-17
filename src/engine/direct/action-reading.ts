@@ -33,8 +33,8 @@ export async function readAction(input: { decisions: DirectDecisions; agentId: s
   void _policy; void _kinds;
   const currentLocationKeys = Object.entries(catalog.target ?? {}).filter(([, value]) => value && typeof value === "object" &&
     !Array.isArray(value) && value.relationship === "current_location").map(([key]) => key);
-  const executionSite = { currentLocationKeys,
-    meaning: "These keys name the actual current place. A separately named room within it is not automatically the current room. Resolve the selected step's required site independently from its action target. A wait target never moves the actor. A requested activity at another place needs an actual move first, with progress_next=continue; its later rest/work has not begun. A place mentioned only in speech or a future plan does not authorize travel." };
+  const executionSite = { currentLocationKeys, currentLocations: currentLocationKeys.map(key => ({ key, ...catalog.target![key] as Record<string, JsonValue> })),
+    meaning: "These keys name the actual current place. A separately named room within it is not automatically the current room. Resolve the selected step's required site independently from its action target. A wait target never moves the actor. A requested activity at another place needs an actual move first, with progress_next=continue; its later rest/work has not begun. This prerequisite has ordinary timing: durationReference={basis:ordinary,count:null} and duration=default unless the player timed the movement itself. A place mentioned only in speech or a future plan does not authorize travel." };
   const schema = z.object({
     understanding: z.string().describe(autonomous
       ? "One brief statement of this attempt's purpose or the actual reason to wait. Name the uncertainty an inspection addresses. No private reasoning transcript or predicted success."
@@ -79,7 +79,7 @@ export async function readAction(input: { decisions: DirectDecisions; agentId: s
           exactQuotes: Object.fromEntries(input.quotes.map((quote, index) => [`q${index}`, quote])) },
           ...(repair ? { repair: { ...repair, instruction: autonomous
             ? "Resolve the reported contradictions as one complete intention using this same private situation and catalog. A deliberate wait must have a situational reason; missing speech parameters do not by themselves justify waiting. Do not claim any attempt succeeded."
-            : "Correct only the reported executed-branch bindings against the same original request and catalog. Return the complete reading. Do not invent another action or alter the player's words." } } : {}) },
+            : "Correct the reported inconsistency as one coherent next step of the same original request. Rebind every dependent field affected by the correction, not only the field named in the issue. If the next step changes from the requested activity to a prerequisite, its operation, site, durationReference, duration, timing and progress_next must all describe that prerequisite; a later phase deadline remains in remainingSteps. An ordinarily timed prerequisite uses durationReference={basis:ordinary,count:null}, duration=default and progress_next=continue. Preserve unaffected intent and return the complete reading. Do not invent an unrelated action or alter the player's words." } } : {}) },
         schema, jsonExamplePolicy: "omit" });
     } catch (error) {
       if (error instanceof ModelOutputError && !repair) {
