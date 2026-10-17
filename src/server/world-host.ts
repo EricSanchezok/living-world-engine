@@ -920,7 +920,7 @@ export class WorldHost {
       fail: (id, error) => this.failExecution(id ?? undefined, error),
     });
 
-    this.inspectorLedgerUnsubscribe = options.ledger?.subscribe((event) => {
+    this.inspectorLedgerUnsubscribe = options.ledger?.subscribeSummaries((event) => {
       const instanceId = event.correlation?.instanceId;
       if (instanceId) {
         this.inspectorLedgerSnapshots.delete(instanceId);
@@ -1729,16 +1729,16 @@ export class WorldHost {
 
   subscribeInspectorEvents(id: string, listener: (event: ReturnType<typeof summarizeRuntimeEvent>) => void): () => void {
     this.read(id);
-    return this.options.ledger?.subscribe((event) => {
-      if (event.correlation?.instanceId === id) listener(summarizeRuntimeEvent(event));
-    }) ?? (() => undefined);
+    return this.options.ledger?.subscribeSummaries((event) => {
+      listener(summarizeRuntimeEvent(event));
+    }, { instanceId: id }) ?? (() => undefined);
   }
 
   subscribeInstanceChanges(id: string, listener: () => void): () => void {
     this.read(id);
     const listeners = this.instanceListeners.get(id) ?? new Set<() => void>();
     listeners.add(listener); this.instanceListeners.set(id, listeners);
-    const unsubscribe = this.options.ledger?.subscribe((event) => { if (event.correlation?.instanceId === id) listener(); });
+    const unsubscribe = this.options.ledger?.subscribeSummaries(() => listener(), { instanceId: id });
     return () => { unsubscribe?.(); listeners.delete(listener); if (!listeners.size) this.instanceListeners.delete(id); };
   }
 

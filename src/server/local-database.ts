@@ -37,6 +37,7 @@ import type { StoredWorldInstance, WorldInstanceDocument } from "./world-instanc
 import type {
   BeginExecutionInput,
   ExecutionArtifactRecord,
+  ExecutionEventSummary,
   ExecutionLedger,
   ExecutionRecord,
   FinishExecutionInput,
@@ -403,6 +404,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
   private readonly definitionCacheByteBudget: number;
   private validatedDefinitionBytes = 0;
   private readonly executionListeners = new Set<(event: RuntimeEvent) => void>();
+  private readonly executionSummaryListeners = new Set<{ listener: (event: ExecutionEventSummary) => void; instanceId?: string }>();
   private readonly executionWriters = new Map<string, LocalExecutionTraceWriter>();
   private closed = false;
 
@@ -1124,6 +1126,19 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
           // Query projections cannot change execution persistence.
         }
       }
+      let summary: ExecutionEventSummary | undefined;
+      for (const subscription of this.executionSummaryListeners) {
+        if (subscription.instanceId !== undefined && subscription.instanceId !== event.correlation?.instanceId) continue;
+        if (!summary) {
+          const { payload, ...metadata } = event;
+          summary = { ...metadata, hasPayload: payload !== undefined };
+        }
+        try {
+          subscription.listener(structuredClone(summary));
+        } catch {
+          // A disconnected or faulty stream cannot affect another subscriber.
+        }
+      }
     }
   }
 
@@ -1138,6 +1153,12 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
   subscribe(listener: (event: RuntimeEvent) => void): () => void {
     this.executionListeners.add(listener);
     return () => this.executionListeners.delete(listener);
+  }
+
+  subscribeSummaries(listener: (event: ExecutionEventSummary) => void, filter?: { instanceId: string }): () => void {
+    const subscription = { listener, instanceId: filter?.instanceId };
+    this.executionSummaryListeners.add(subscription);
+    return () => this.executionSummaryListeners.delete(subscription);
   }
 
   finishExecution(executionId: string, input: FinishExecutionInput): import("../engine/runtime/execution").ExecutionRef {
@@ -2285,6 +2306,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
     this.closed = true;
     this.clearReadCaches();
     this.executionListeners.clear();
+    this.executionSummaryListeners.clear();
     if (this.heartbeatTimer) clearInterval(this.heartbeatTimer);
     try {
       if (!this.readOnly) {

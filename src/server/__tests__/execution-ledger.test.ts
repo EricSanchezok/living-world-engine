@@ -2,7 +2,7 @@ import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import Database from "better-sqlite3";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { defineAlgorithmManifest, type ReferenceStepCandidate } from "../../engine/runtime/execution";
 import {
   aggregateMetricPoints,
@@ -164,6 +164,63 @@ describe("Execution Ledger", () => {
     } finally {
       ledger.close();
     }
+  });
+
+  it("filters summary streams before copying and isolates notification failures and mutations", () => {
+    const ledger = database();
+    const received: Array<{ event: string; instanceId?: string; hasPayload: boolean }> = [];
+    const full: unknown[] = [];
+    const subscriptions: Array<() => void> = [];
+    try {
+      const trace = ledger.beginExecution({ id: "summary-execution", kind: "diagnostic", manifest,
+        worldHash: contentHash("world"), codeRevision: "test", codeDirty: false,
+        modelCatalogHash: contentHash("catalog"), seed: 1, runtimeConfig: {} });
+      const wrong = vi.fn();
+      subscriptions.push(ledger.subscribeSummaries(wrong, { instanceId: "other-instance" }));
+      const originalClone = globalThis.structuredClone;
+      let eventCopies = 0;
+      const spy = vi.spyOn(globalThis, "structuredClone").mockImplementation((value, options) => {
+        const item = value as Record<string, unknown> | null;
+        if (item?.schemaVersion === 4 && item?.event) eventCopies++;
+        return originalClone(value, options);
+      });
+      try {
+        trace.emit({ event: "notification.unmatched", correlation: { instanceId: "wanted-instance" }, payload: { retained: true } });
+        trace.flush();
+      } finally { spy.mockRestore(); }
+      expect(wrong).not.toHaveBeenCalled();
+      expect(eventCopies).toBe(0);
+      subscriptions.push(ledger.subscribe(event => {
+        (event.payload as { nested: { value: number } }).nested.value = 999;
+        event.correlation!.instanceId = "mutated";
+        throw new Error("disconnected full consumer");
+      }));
+      subscriptions.push(ledger.subscribe(event => full.push(event.payload)));
+      subscriptions.push(ledger.subscribeSummaries(event => {
+        event.event = "mutated"; event.correlation!.instanceId = "mutated";
+        throw new Error("disconnected summary consumer");
+      }, { instanceId: "wanted-instance" }));
+      subscriptions.push(ledger.subscribeSummaries(event => {
+        expect(event).not.toHaveProperty("payload");
+        received.push({ event: event.event, instanceId: event.correlation?.instanceId, hasPayload: event.hasPayload });
+      }, { instanceId: "wanted-instance" }));
+      const payload = { nested: { value: 7 } };
+      trace.emit({ event: "notification.complete", correlation: { instanceId: "wanted-instance" }, payload });
+      payload.nested.value = 8;
+      trace.emit({ event: "notification.null", correlation: { instanceId: "wanted-instance" }, payload: null });
+      trace.flush();
+      expect(received).toEqual([
+        { event: "notification.complete", instanceId: "wanted-instance", hasPayload: true },
+        { event: "notification.null", instanceId: "wanted-instance", hasPayload: true },
+      ]);
+      expect(full).toEqual([{ nested: { value: 7 } }, null]);
+      expect(ledger.executionEvents("summary-execution").map(event => event.payload))
+        .toEqual([{ retained: true }, { nested: { value: 7 } }, null]);
+      expect(wrong).not.toHaveBeenCalled();
+      subscriptions.forEach(stop => stop());
+      trace.emit({ event: "notification.closed", correlation: { instanceId: "wanted-instance" } }); trace.flush();
+      expect(received).toHaveLength(2);
+    } finally { subscriptions.forEach(stop => stop()); ledger.close(); }
   });
 
   it("persists full payloads as compressed content-addressed artifacts", () => {

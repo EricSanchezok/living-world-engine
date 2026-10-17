@@ -62,6 +62,11 @@ export interface ExecutionArtifactRecord {
   value: unknown;
 }
 
+/** Live query notifications omit bodies; complete payloads remain in the Ledger. */
+export interface ExecutionEventSummary extends Omit<RuntimeEvent, "payload"> {
+  hasPayload: boolean;
+}
+
 export interface ExecutionLedger {
   beginExecution(input: BeginExecutionInput): ExecutionTraceWriter;
   finishExecution(executionId: string, input: FinishExecutionInput): ExecutionRef;
@@ -74,4 +79,5 @@ export interface ExecutionLedger {
   appendExecutionEvents(executionId: string, inputs: readonly RuntimeEventInput[]): RuntimeEvent[];
   putExecutionArtifact(executionId: string, kind: string, value: unknown): string;
   subscribe(listener: (event: RuntimeEvent) => void): () => void;
+  subscribeSummaries(listener: (event: ExecutionEventSummary) => void, filter?: { instanceId: string }): () => void;
 }

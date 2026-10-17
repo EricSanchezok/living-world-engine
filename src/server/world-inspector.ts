@@ -43,7 +43,7 @@ import {
   type WorldInspectorTraceAvailability,
   type WorldInspectorWindow,
 } from "../shared/world-inspector-api";
-import type { ExecutionRecord } from "./execution-ledger";
+import type { ExecutionEventSummary, ExecutionRecord } from "./execution-ledger";
 import type { WorldInstanceDocument } from "./world-instance-types";
 
 const WORLD_LANE_ID = "world";
@@ -329,9 +329,10 @@ export function worldInspectorRuntimeEventId(event: RuntimeEvent): string {
   return `runtime-${contentHash({ executionId: event.correlation?.executionId, sequence: event.sequence })}`;
 }
 
-export function summarizeRuntimeEvent(event: RuntimeEvent): WorldInspectorRuntimeEventSummary {
-  const { payload, ...summary } = structuredClone(event);
-  return { ...summary, id: worldInspectorRuntimeEventId(event), hasPayload: payload !== undefined };
+export function summarizeRuntimeEvent(event: RuntimeEvent | ExecutionEventSummary): WorldInspectorRuntimeEventSummary {
+  const { payload, ...summary } = event as RuntimeEvent;
+  return { ...structuredClone(summary), id: worldInspectorRuntimeEventId(event),
+    hasPayload: "hasPayload" in event ? event.hasPayload : payload !== undefined };
 }
 
 function nullableMeasurement(event: RuntimeEvent | undefined, key: string): number | null {
