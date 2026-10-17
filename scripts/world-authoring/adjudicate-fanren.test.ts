@@ -80,12 +80,75 @@ async function inWorkspace(count: number, run: (context: {
 }
 
 function response(value: unknown): Response {
+  return responseText(JSON.stringify(value));
+}
+
+function responseText(content: string): Response {
   return Response.json({ id: "local-response", object: "chat.completion", created: 1, model: "deepseek-flash",
-    choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(value) }, finish_reason: "stop" }],
+    choices: [{ index: 0, message: { role: "assistant", content }, finish_reason: "stop" }],
     usage: { prompt_tokens: 100, completion_tokens: 30, total_tokens: 130 } });
 }
 
 describe("source adjudication runner through the real model gateway", () => {
+  it("recovers the exact rejected syntax locally, resumes its immutable cache with zero calls, and verifies reuse", async () => {
+    await inWorkspace(1, async ({ fixtures: [f], directory, logs, runner, gateway, testing }) => {
+      const { createAdjudicationTransport } = await import("./adjudication-transport");
+      const transport = createAdjudicationTransport(f!.report, f!.paragraphs);
+      const wire = transport.encode({ ...f!.canonical, records: f!.canonical.records.map(({ existenceAtOpening, ...rest }) => ({ existenceAtOpening, ...rest })) });
+      const raw = JSON.stringify(wire).replace('"本章没有年龄。"}', '"本章没有年龄。","}');
+      const fetch = vi.fn<typeof globalThis.fetch>(async () => responseText(raw));
+      await runner(["--max-calls", "1"], (catalog, guardFetch) => new gateway.ModelGateway(catalog, { TEST_MODEL_API_KEY: "local-test-only" },
+        { registry: testing.createTestModelRegistry(catalog), fetch: guardFetch(fetch), maxTransportAttempts: 1 }));
+      expect(fetch).toHaveBeenCalledTimes(1);
+      const reportFile = path.join(directory, `worlds/fanren/authoring/adjudications/${f!.batch.id}.json`);
+      const saved = JSON.parse(readFileSync(reportFile, "utf8"));
+      expect(saved.records).toEqual(f!.materialized.records);
+      expect(saved.approvedForRuntime).toBe(false);
+      expect(saved.localSyntaxRecovery).toMatchObject({ providerRejected: true, originalHash: contentHash(raw), cache: { attempt: 0 } });
+      expect(saved.audits[0].invocations[0]).toMatchObject({ outputDisposition: "rejected", normalizedOutputHash: null });
+      const cacheFile = path.join(directory, `.livingworld-cache/fanren-sources/adjudications/${f!.batch.id}/${saved.identity}/0.json`);
+      const originalBytes = readFileSync(cacheFile, "utf8"), cached = JSON.parse(originalBytes);
+      expect(cached).toMatchObject({ rejected: true, value: raw, wireValue: raw });
+      expect(cached).not.toHaveProperty("localSyntaxRecovery");
+      expect(logs.map(line => JSON.parse(line)).at(-1)).toMatchObject({ completed: 1, failed: 0, generationRequests: 1 });
+
+      rmSync(reportFile);
+      logs.length = 0;
+      const noGateway = vi.fn(() => { throw new Error("Cached recovery must not initialize a model gateway"); });
+      await runner(["--max-calls", "0"], noGateway);
+      expect(noGateway).not.toHaveBeenCalled();
+      const resumed = JSON.parse(readFileSync(reportFile, "utf8"));
+      expect(resumed.localSyntaxRecovery).toEqual(saved.localSyntaxRecovery);
+      expect(resumed.execution.recoveredFromCache).toBe(true);
+      expect(readFileSync(cacheFile, "utf8")).toBe(originalBytes);
+      expect(logs.map(line => JSON.parse(line)).at(-1)).toMatchObject({ completed: 1, failed: 0, generationRequests: 0 });
+
+      logs.length = 0;
+      await runner(["--plan"], noGateway);
+      expect(logs.map(line => JSON.parse(line)).at(-1)).toMatchObject({ reused: 1, pending: 0, generationRequests: 0 });
+      expect(noGateway).not.toHaveBeenCalled();
+      expect(readFileSync(cacheFile, "utf8")).toBe(originalBytes);
+    });
+  });
+
+  it("retains the existing paid fallback when local punctuation recovery fails complete coverage", async () => {
+    await inWorkspace(1, async ({ fixtures: [f], directory, runner, gateway, testing }) => {
+      const { createAdjudicationTransport } = await import("./adjudication-transport");
+      const transport = createAdjudicationTransport(f!.report, f!.paragraphs);
+      const incomplete = { ...f!.canonical, records: f!.canonical.records.slice(0, 1).map(({ existenceAtOpening, ...rest }) => ({ existenceAtOpening, ...rest })) };
+      const raw = JSON.stringify(transport.encode(incomplete)).replace('"本章没有年龄。"}', '"本章没有年龄。","}');
+      const fetch = vi.fn<typeof globalThis.fetch>(async (): Promise<Response> => fetch.mock.calls.length === 1 ? responseText(raw) : response(transport.encode(f!.canonical)));
+      await runner(["--max-calls", "2"], (catalog, guardFetch) => new gateway.ModelGateway(catalog, { TEST_MODEL_API_KEY: "local-test-only" },
+        { registry: testing.createTestModelRegistry(catalog), fetch: guardFetch(fetch), maxTransportAttempts: 1 }));
+      expect(fetch).toHaveBeenCalledTimes(2);
+      const saved = JSON.parse(readFileSync(path.join(directory, `worlds/fanren/authoring/adjudications/${f!.batch.id}.json`), "utf8"));
+      expect(saved.records).toEqual(f!.materialized.records);
+      expect(saved).not.toHaveProperty("localSyntaxRecovery");
+      expect(saved.audits[0].invocations[0].outputDisposition).toBe("rejected");
+      expect(saved.audits).toHaveLength(2);
+    });
+  });
+
   it("sends full source on all three requests and carries a rejected repair into the next targeted attempt", async () => {
     await inWorkspace(1, async ({ fixtures: [f], directory, logs, runner, gateway, testing }) => {
       const { createAdjudicationTransport } = await import("./adjudication-transport");

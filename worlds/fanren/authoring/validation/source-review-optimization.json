@@ -151,6 +151,15 @@
       "sourceRangesChecked": 181,
       "distinctRangesReadByRoot": 76,
       "runtimeApproval": false
+    },
+    "localRecoveryCheck": {
+      "exitCode": 0,
+      "testFiles": 409,
+      "tests": 2771,
+      "governanceGates": 6,
+      "existingLintWarnings": 3,
+      "logSha256": "4ad0dfeee3ed1410a914682275b9b91f5bb2c51c8beadf03293efec2e6dc37b9",
+      "scope": "包含本地格式恢复与下游证据验证；历史 source review 与 paid retry 不改写。"
     }
   },
   "liveWaves": [
@@ -385,5 +394,65 @@
       "status": "source-review-evidence-needs-editorial-disposition",
       "approvedForRuntime": false
     }
-  ]
+  ],
+  "localSyntaxRecovery": {
+    "status": "offline-replay-and-entry-tests-passed",
+    "newApiCalls": 0,
+    "policy": "source-object-terminal-separator-v1",
+    "scope": "只恢复完整且正常终止的响应中的一个已观测对象结尾标点错误；不改词句，不接受截断、多处错误或语义校验失败。",
+    "batch": "batch-0215",
+    "counts": {
+      "chapters": 6,
+      "records": 130,
+      "aliases": 35,
+      "issues": 17,
+      "omissions": 10,
+      "identities": 7
+    },
+    "citations": 383,
+    "evidence": {
+      "policy": "source-object-terminal-separator-v1",
+      "providerRejected": true,
+      "offsetEncoding": "utf-16-code-units",
+      "removed": [
+        {
+          "start": 41650,
+          "end": 41652,
+          "text": ",\""
+        }
+      ],
+      "originalHash": "1fc2d728b46c815a6a3012ff9218d82e1720de2aa14d0c682e110215d89286f3",
+      "recoveredTextHash": "8a0a1d828f79ae7d9513642678616060b3d380d570b874d1220b32e2eeeb613b",
+      "canonicalValueHash": "e99f7fab44fb6f8ecedab62c75159c13ea08e9c2e88530a5f3510c8624706af6",
+      "auditHash": "ef275802d8cb51228217f1e11554a2d6e5eb08b7dfd794936fb2054609e8bff9",
+      "cache": {
+        "identity": "81dcf3866d6e39c28072019a6f3903372396ad03f8747ecb921d08fbe75bb71e",
+        "attempt": 0,
+        "contentHash": "53c3580d49a7e4584c3c785b73568ee21ed00970bd75be023567088d2bbde07f"
+      }
+    },
+    "fullReuseValidation": "pass",
+    "sourceEvidenceConsumer": "source-semantic-evidence-produced",
+    "consumerWithoutCache": "rejected",
+    "originalCacheUnchanged": true,
+    "existingReportUnchanged": true,
+    "historicalProviderDisposition": "rejected",
+    "historicalPaidRetryRemoved": false,
+    "replayEvidence": {
+      "path": ".livingworld-cache/fanren-completion/adjudication-syntax-recovery-replay.json",
+      "sha256": "cb3dcfe2a54052039edaf8d5dc80c3edb65c22b206c02e466d870894c724038a"
+    },
+    "reportStatus": "派生报告保留原始拒绝、恢复记录和哈希，后续索引/来源使用者重放验证；不能假装原供应商已接受。",
+    "allBatchPlan": {
+      "batches": 398,
+      "reused": 220,
+      "pending": 178,
+      "failed": 0,
+      "generationRequests": 0,
+      "log": {
+        "path": ".livingworld-cache/fanren-completion/review-local-recovery-plan.log",
+        "sha256": "0b8816e5a64c84aecb416ceb0ad65637d64f0d24b3ec3e8a8bacd781633b56f7"
+      }
+    }
+  }
 }

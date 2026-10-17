@@ -16,6 +16,7 @@ import type { SourceParagraph } from "./extraction-contract";
 import { createAdjudicationTransport } from "./adjudication-transport";
 import { createAdjudicationRepair } from "./adjudication-repair";
 import { validateReusableAdjudication } from "./adjudication-reuse";
+import { recoverRejectedAdjudication, type LocalSyntaxRecovery } from "./adjudication-syntax-recovery";
 import { materializeSourceAdjudication,
   sourceAdjudicationManifest, sourceAdjudicationSchemaFor, validateSourceAdjudication, type AdjudicationInput, type SourceAdjudication } from "./source-adjudication";
 
@@ -105,7 +106,8 @@ export async function adjudicateFanren(argv = process.argv.slice(2),
     const destination = path.join(root, "adjudications", `${batch.id}.json`);
     if (!fresh && existsSync(destination)) {
       try {
-        validateReusableAdjudication(json(destination), report, batch, paragraphs, readChapter, policyHash);
+        validateReusableAdjudication(json(destination), report, batch, paragraphs, readChapter, policyHash,
+          (originalIdentity, attempt) => json(path.join(cache, "adjudications", batch.id, originalIdentity, `${attempt}.json`)));
         reused++;
         process.stdout.write(`${JSON.stringify({ batch: batch.id, status: "already-source-reviewed" })}\n`);
         return;
@@ -132,12 +134,14 @@ export async function adjudicateFanren(argv = process.argv.slice(2),
     let draft: unknown, problems: string | undefined;
     let lastRepairFailure: { value: unknown; problems: string } | undefined;
     let priorDraft: { identity: string; fileHash: string; sourceReportHash: string; auditHash: string } | undefined;
+    let localSyntaxRecovery: LocalSyntaxRecovery | undefined;
     const started = Date.now();
     function finish(value: SourceAdjudication, attempts: number, recoveredFromCache = false) {
       const result = { ...materializeSourceAdjudication(value, paragraphs), batchId: batch.id, identity,
         sourceReportHash, sourceParts: batch.parts, policyHash, schemaHash,
         generatedAt: new Date().toISOString(), durationMs: Date.now() - started, audits: [...audits],
         evidenceMode: "complete-source-paragraph-ids",
+        ...(localSyntaxRecovery ? { localSyntaxRecovery } : {}),
         ...(priorDraft ? { priorDraft } : {}),
         execution: { concurrency, accountConcurrency, profileId, baseProfileId, attempts, recoveredFromCache, fresh,
           transportVersion, transportPromptHash: contentHash(transportSystem),
@@ -158,14 +162,14 @@ export async function adjudicateFanren(argv = process.argv.slice(2),
       const currentFiles = readdirSync(currentDirectory).filter(file => /^\d+\.json$/u.test(file))
         .sort((a, b) => Number.parseInt(a) - Number.parseInt(b));
       attemptOffset = currentFiles.length ? Number.parseInt(currentFiles.at(-1)!) + 1 : 0;
-      const current = currentFiles.map(file => json(path.join(currentDirectory, file)))
-        .filter(saved => saved.identity === identity && saved.sourceReportHash === sourceReportHash && saved.schemaHash === schemaHash && saved.policyHash === policyHash);
-      const latest = current.at(-1);
+      const current = currentFiles.map(file => ({ attempt: Number.parseInt(file), saved: json(path.join(currentDirectory, file)) }))
+        .filter(({ saved }) => saved.identity === identity && saved.sourceReportHash === sourceReportHash && saved.schemaHash === schemaHash && saved.policyHash === policyHash);
+      const latest = current.at(-1)?.saved;
       if (latest && !fresh) {
         try {
           const value = schema.parse(latest.value);
           validateSourceAdjudication(value, report, paragraphs);
-          audits.push(...current.map(saved => saved.audit));
+          audits.push(...current.map(({ saved }) => saved.audit));
           finish(value, current.length, true);
           return;
         } catch (error) {
@@ -173,9 +177,19 @@ export async function adjudicateFanren(argv = process.argv.slice(2),
           draft = latest.value;
           lastRepairFailure = latest.lastRepairFailure;
           problems = sourceValidationDiagnostics(error, draft);
-          audits.push(...current.map(saved => saved.audit));
+          audits.push(...current.map(({ saved }) => saved.audit));
           priorDraft = { identity: latest.identity, fileHash: contentHash(latest), sourceReportHash,
             auditHash: contentHash(latest.audit) };
+          for (const entry of [...current].reverse()) {
+            const recovery = recoverRejectedAdjudication(entry.saved, { identity, sourceReportHash, policyHash, schemaHash },
+              entry.attempt, report, paragraphs);
+            if (!recovery) continue;
+            priorDraft = { identity: entry.saved.identity, fileHash: contentHash(entry.saved), sourceReportHash,
+              auditHash: contentHash(entry.saved.audit) };
+            localSyntaxRecovery = recovery.evidence;
+            finish(recovery.value, attemptOffset, true);
+            return;
+          }
         }
       }
     }
@@ -232,8 +246,15 @@ export async function adjudicateFanren(argv = process.argv.slice(2),
           else try { draft = repair.merge(returned); lastRepairFailure = undefined; }
           catch (mergeError) { lastRepairFailure = { value: returned, problems: sourceValidationDiagnostics(mergeError, returned) }; }
           audits.push(error.audit);
-          save(local, { identity, sourceReportHash, policyHash, schemaHash, requestIdentity, transportVersion,
-            mode: repair ? "targeted-repair" : "complete-review", value: draft, wireValue, lastRepairFailure, audit: error.audit, rejected: true });
+          const rejected = { identity, sourceReportHash, policyHash, schemaHash, requestIdentity, transportVersion,
+            mode: repair ? "targeted-repair" : "complete-review", value: draft, wireValue, lastRepairFailure, audit: error.audit, rejected: true };
+          save(local, rejected);
+          const recovery = recoverRejectedAdjudication(rejected, { identity, sourceReportHash, policyHash, schemaHash }, storedAttempt, report, paragraphs);
+          if (recovery) {
+            localSyntaxRecovery = recovery.evidence;
+            finish(recovery.value, storedAttempt + 1);
+            return;
+          }
         }
       }
       try {

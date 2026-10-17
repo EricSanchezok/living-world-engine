@@ -1,6 +1,9 @@
 import { z } from "zod";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { indexSourceReports, indexableReport, type ReadingBatch } from "./authoring-index";
+import type { SourceParagraph } from "./extraction-contract";
+import type { AdjudicationInput } from "./source-adjudication";
+import { validateLocalSyntaxRecovery, type ReadRecoveryAttempt } from "./adjudication-syntax-recovery";
 
 const auditSchema = z.object({
   subjectId: z.string(), profileId: z.string(), modelId: z.string(), modelMetadataHash: z.string(),
@@ -79,7 +82,8 @@ function sameIds(actual: string[], expected: string[]) {
   return actual.length === new Set(actual).size && [...actual].sort().join("\0") === [...expected].sort().join("\0");
 }
 
-export function buildSourceAdjudicationEvidence(input: unknown, sourceReport: unknown, batch: ReadingBatch, readChapter: (id: string) => string) {
+export function buildSourceAdjudicationEvidence(input: unknown, sourceReport: unknown, batch: ReadingBatch, readChapter: (id: string) => string,
+  recoveryAccess?: { paragraphs: SourceParagraph[]; readAttempt: ReadRecoveryAttempt }) {
   const reading = buildSourceReadingEvidence(sourceReport, batch, readChapter);
   const source = indexableReport.parse(sourceReport), report = adjudicationReportSchema.parse(input);
   if (report.batchId !== batch.id || report.sourceReportHash !== reading.reportHash ||
@@ -108,6 +112,10 @@ export function buildSourceAdjudicationEvidence(input: unknown, sourceReport: un
   const expected = contentHash({ parts: batch.parts, sourceReportHash: reading.reportHash, policyHash: report.policyHash,
     schemaHash: report.schemaHash, profileId: first.profileId, catalogHash: first.modelCatalogHash });
   if (report.identity !== expected) throw new Error("source adjudication identity drift");
+  if (report.localSyntaxRecovery !== undefined && recoveryAccess && contentHash(recoveryAccess.paragraphs.map(paragraph => ({
+    id: paragraph.id, start: paragraph.start, end: paragraph.end, sha256: paragraph.sha256,
+  }))) !== reading.source.paragraphSetHash) throw new Error("local syntax recovery source paragraph drift");
+  validateLocalSyntaxRecovery(input, sourceReport as AdjudicationInput, recoveryAccess);
   return { batchId: batch.id, status: "source-semantic-evidence-produced" as const,
     sourceParts: structuredClone(batch.parts), source: reading.source, sourceReportHash: reading.reportHash,
     adjudicationReportHash: contentHash(input), policyHash: report.policyHash, schemaHash: report.schemaHash, passes,

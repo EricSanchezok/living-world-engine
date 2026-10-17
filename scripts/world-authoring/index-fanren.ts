@@ -4,6 +4,7 @@ import { contentHash } from "../../src/engine/models/model-audit";
 import { fullyExtractedChapters, indexSourceReports, type ReadingBatch } from "./authoring-index";
 import { buildSourceAdjudicationEvidence, buildSourceReadingEvidence } from "./source-evidence";
 import { indexEditorialReading } from "./editorial-reading";
+import type { SourceParagraph } from "./extraction-contract";
 
 const root = path.resolve("worlds/fanren/authoring");
 const cache = path.resolve(".livingworld-cache/fanren-sources/chapters");
@@ -11,7 +12,7 @@ const read = (file: string) => JSON.parse(readFileSync(path.join(root, file), "u
 const save = (file: string, value: unknown) => writeFileSync(path.join(root, file), `${JSON.stringify(value, null, 2)}\n`);
 const saveLines = (file: string, value: unknown[]) => writeFileSync(path.join(root, file), value.map(row => JSON.stringify(row)).join("\n") + "\n");
 const chapters = readFileSync(path.join(root, "coverage/chapters.jsonl"), "utf8").trim().split("\n")
-  .map(line => JSON.parse(line)) as Array<{ id: string; characters: number; sha256: string; read: boolean; extracted: boolean; reviewed: boolean }>;
+  .map(line => JSON.parse(line)) as Array<{ id: string; characters: number; sha256: string; source_version?: string; read: boolean; extracted: boolean; reviewed: boolean }>;
 const chapterMap = new Map(chapters.map(chapter => [chapter.id, chapter]));
 const bodies = new Map<string, string>();
 function body(id: string) {
@@ -38,7 +39,25 @@ for (const batch of batches) {
   readingEvidence.push(buildSourceReadingEvidence(input, batch, body));
   const file = `adjudications/${batch.id}.json`;
   if (!existsSync(path.join(root, file))) continue;
-  try { adjudicationEvidence.push(buildSourceAdjudicationEvidence(read(file), input, batch, body)); }
+  try {
+    const review = read(file);
+    let recoveryAccess;
+    if (review.localSyntaxRecovery !== undefined) {
+      const paragraphs: SourceParagraph[] = [];
+      for (const part of batch.parts) {
+        let offset = part.start;
+        for (const text of [...body(part.chapter_id)].slice(part.start, part.end).join("").split("\n")) {
+          const end = offset + [...text].length;
+          if (text.trim()) paragraphs.push({ id: `${part.chapter_id}:${offset}`, chapterId: part.chapter_id, text,
+            start: offset, end, sha256: contentHash(text), sourceVersion: chapterMap.get(part.chapter_id)?.source_version });
+          offset = end + 1;
+        }
+      }
+      recoveryAccess = { paragraphs, readAttempt: (identity: string, attempt: number) =>
+        JSON.parse(readFileSync(path.join(cache, "..", "adjudications", batch.id, identity, `${attempt}.json`), "utf8")) };
+    }
+    adjudicationEvidence.push(buildSourceAdjudicationEvidence(review, input, batch, body, recoveryAccess));
+  }
   catch (error) { invalidAdjudications.push({ batchId: batch.id, status: "invalid-source-adjudication-evidence",
     message: error instanceof Error ? error.message : String(error), approvedForRuntime: false }); }
 }
