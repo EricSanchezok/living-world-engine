@@ -69,8 +69,12 @@ export function compileAuthoredModule(input: unknown, claimInput: unknown[], app
   for (const key of required) {
     if (!bundle.provenance[key]?.length) throw new Error(`missing provenance for ${key}`);
   }
+  const factTargets = template.entities.flatMap(entity => entity.facts.map(fact => `fact:${fact.id}`));
+  if (bundle.scope === "full") for (const key of factTargets) {
+    if (!bundle.provenance[key]?.length) throw new Error(`missing provenance for ${key}`);
+  }
   for (const [key, references] of Object.entries(bundle.provenance)) {
-    if (!required.includes(key)) throw new Error(`stale provenance target ${key}`);
+    if (!required.includes(key) && !factTargets.includes(key)) throw new Error(`stale provenance target ${key}`);
     for (const id of references) checkClaim(id);
   }
   return { template, receipt: { moduleId: bundle.id, scope: bundle.scope, moduleHash: approval.moduleHash,

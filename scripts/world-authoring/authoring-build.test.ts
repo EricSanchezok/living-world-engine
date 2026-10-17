@@ -39,6 +39,7 @@ describe("authored world build gates", () => {
   it("cannot infer full coverage from an empty inventory or a sample", () => {
     expect(() => assertFullCoverage({ inventory_sealed: false, domains: [], origins: [] }, [], 0)).toThrow("incomplete");
     const f = fixture(); f.bundle.scope = "full";
+    for (const entity of f.bundle.template.entities) for (const fact of entity.facts) f.bundle.provenance[`fact:${fact.id}`] = ["opening"];
     expect(() => compileAuthoredModule(f.bundle, f.claims, { ...f.approval(), scope: "full" }, () => chapter)).toThrow("unreviewed");
   });
 });

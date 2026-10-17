@@ -6,6 +6,7 @@ import { compileAuthoredModule, assertFullCoverage } from "./authoring-build";
 import { buildWorldDefinition } from "../../src/script/world-loader";
 import { loadModelCatalog } from "../../src/engine/models/model-catalog";
 import { parseWorldArchive } from "../../src/server/world-import";
+import { assembleRegionalModules } from "./regional-composition";
 import { contentHash } from "../../src/engine/models/model-audit";
 
 const root = path.resolve("worlds/fanren/authoring");
@@ -18,7 +19,14 @@ if (target === "full") {
     integrity.findings.filter((finding: { severity: string; status: string }) => finding.severity === "blocking" && finding.status !== "resolved").length);
 }
 const name = target === "sample" ? "opening-sample" : "full-world";
-const { template, receipt } = compileAuthoredModule(json(`modules/${name}.json`), json(`claims/${name}.json`), json(`reviews/${name}.json`),
+const authored = target === "full"
+  ? assembleRegionalModules(json(`modules/${name}.json`), json(`claims/${name}.json`),
+    json("coverage/regional-plan.json").modules.map((region: { id: string }) => {
+      if (!/^[a-z][a-z0-9-]*$/u.test(region.id)) throw new Error(`invalid regional identity ${region.id}`);
+      return { module: json(`regions/${region.id}/module.json`), claims: json(`regions/${region.id}/claims.json`), review: json(`regions/${region.id}/review.json`) };
+    }))
+  : { module: json(`modules/${name}.json`), claims: json(`claims/${name}.json`), receipts: [] };
+const { template, receipt } = compileAuthoredModule(authored.module, authored.claims, json(`reviews/${name}.json`),
   id => {
     if (!/^qq-\d+$/.test(id)) throw new Error(`invalid chapter identity ${id}`);
     return readFileSync(path.resolve(".livingworld-cache/fanren-sources/chapters", `${id}.txt`), "utf8");
@@ -53,7 +61,7 @@ const artifacts = path.resolve(".livingworld-cache/fanren-artifacts");
 mkdirSync(artifacts, { recursive: true });
 writeFileSync(path.join(artifacts, `${name}.zip`), archive);
 writeFileSync(path.join(root, "reviews", `${name}-build.json`), `${JSON.stringify({ ...receipt,
-  worldHash: definition.contentHash, files: Object.fromEntries([...files].map(([file, contents]) => [file, contentHash(contents)])),
+  worldHash: definition.contentHash, regionalReceipts: authored.receipts, files: Object.fromEntries([...files].map(([file, contents]) => [file, contentHash(contents)])),
   entities: Object.keys(definition.initialState.truth.entities).length, agents: Object.keys(definition.initialState.agents).length,
   originIds: definition.participation?.origins.map(origin => origin.id), archiveImportValidated: true,
 }, null, 2)}\n`);
