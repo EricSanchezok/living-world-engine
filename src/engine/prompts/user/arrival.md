@@ -1,1 +1,1 @@
-Write this character's first-person arrival from the supplied private perspective. Return the opening title and scene without action suggestions or world changes.
+Return exactly {"title":"...","scene":"..."}. Give this character a brief first-person opening in two short paragraphs about the immediate concern and a familiar relationship. Use only supplied knowledge, perform no action, add no scene fact, and include no suggestions or extra output keys.

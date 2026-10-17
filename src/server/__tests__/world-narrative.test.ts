@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { decisionPromptV2 } from "../../engine/models/decision-v2";
-import { completeParagraphs, renderNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeRepair, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, narrativeOutputSchema } from "../narrative/publication";
+import { completeParagraphs, renderNarrativeSegment, continueNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeRepair, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, narrativeOutputSchema } from "../narrative/publication";
 import { narrativeEvidence, narrativeTask, narrativeDiscourse } from "../narrative/scene";
 import { type ScenePacket } from "../narrative/contracts";
 import type { ParticipantDiscourse } from "../../engine/contracts/discourse";
@@ -40,7 +40,7 @@ describe("immutable narrative paragraphs", () => {
   it("keeps separate adjacent identities even when their visible labels match", () => {
     const scene = structuredClone(source);
     scene.knownEntities = ["first", "second"].map(localEntityId => ({ localEntityId, name: "旅人", description: "站在路旁。" }));
-    expect(renderNarrativeSegment("[[entity:first|旅人]][[entity:second|旅人]]", scene)).toEqual({ text: "旅人旅人", mentions: [
+    expect(renderNarrativeSegment("[[entity:first|旅人]][[entity:second|旅人]]", scene)).toMatchObject({ text: "旅人旅人", mentions: [
       { localEntityId: "first", surface: "旅人" }, { localEntityId: "second", surface: "旅人" },
     ] });
   });
@@ -62,7 +62,7 @@ describe("immutable narrative paragraphs", () => {
     });
     const result = await checkNarrativeGrounding(provider.gateway, {
       workloadId: "narrative", batchId: "publication", runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 1 },
-    }, scene, ["店主退后一步。", "报价已传到你耳中。"], "decision-deepseek", "decision-deepseek", 1);
+    }, scene, ["店主退后一步。", "报价已传到你耳中。"].map(text => renderNarrativeSegment(text, scene)), "decision-deepseek", "decision-deepseek", 1);
     expect(narrativeGroundingChoices(result.answers, 2)).toEqual(["grounded", "grounded"]);
     expect(provider.transport).toHaveBeenCalledTimes(1);
   });
@@ -91,6 +91,73 @@ describe("immutable narrative paragraphs", () => {
     scene.observations[0]!.scene!.manner = null;
     scene.observations[0]!.scene!.details.push({ localEntityId: "shopkeeper", label: "店主", description: "衣服已经湿透" });
     expect(deliveredDialogue(scene, discourse)).toBeNull();
+  });
+  it("attributes standalone delivered dialogue before publication without certifying its claim", async () => {
+    const scene = structuredClone(source);
+    scene.speech = [{ id: "speech-ab12", speaker: "门外的声音", speakerLocalId: "voice", utterance: "我要把你的钱拿走。" }];
+    scene.knownEntities = [{ localEntityId: "voice", name: "门外的声音", description: "只听见说话声，身份未知。" }];
+    scene.observations[0]!.scene!.speech = scene.speech[0]!;
+    const rendered = renderNarrativeSegment('  “[[speech-ab12]]”  ', scene);
+    expect(rendered.text).toBe("门外的声音：“我要把你的钱拿走。”");
+    expect(rendered.mentions).toEqual([{ localEntityId: "voice", surface: "门外的声音" }]);
+    const provider = directTestProvider(wire => {
+      expect(wire.state).toMatchObject({ paragraphs: ["门外的声音：“我要把你的钱拿走。”"],
+        paragraphRendering: [{ parts: [{ kind: "narration", text: "门外的声音：" },
+          { kind: "delivered_speech", text: "“我要把你的钱拿走。”", speechId: "speech-ab12", speaker: "门外的声音", speakerLocalId: "voice", utterance: "我要把你的钱拿走。" }] }],
+        publicationTask: { newSpeech: [{ speaker: "门外的声音", utterance: "我要把你的钱拿走。" }] } });
+      expect(Object.keys(wire.questions)).toHaveLength(6);
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeChoice(question, "grounded")]));
+    });
+    await checkNarrativeGrounding(provider.gateway, {
+      workloadId: "attributed-speech", batchId: "publication", runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 1 },
+    }, scene, [rendered], "decision-deepseek", "decision-deepseek", 1);
+    expect(provider.transport).toHaveBeenCalledTimes(1);
+    expect(scene.observations[0]!.scene!.actionKind).toBe("speak");
+    expect(renderNarrativeParagraph("门外的声音回答：[[speech-ab12]]", scene)).toBe("门外的声音回答：“我要把你的钱拿走。”");
+  });
+  it("keeps an unsupported action outside the delivered quote in the complete publication check", async () => {
+    const rendered = renderNarrativeSegment("店主没有离开门框。[[speech-ab12]]", source);
+    const provider = directTestProvider(wire => {
+      expect(wire.state).toMatchObject({ paragraphs: [rendered.text], paragraphRendering: [{ parts: [
+        { kind: "narration", text: "店主没有离开门框。" },
+        { kind: "delivered_speech", text: "“三枚金币；我还没同意赊账。”", speechId: "speech-ab12", speaker: "店主" },
+      ] }] });
+      expect(rendered.parts.map(part => part.text).join("")).toBe(rendered.text);
+      expect(Object.keys(wire.questions)).toHaveLength(6);
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeChoice(question,
+        id.endsWith("_agency") || id.endsWith("_material") ? "added_content" : "grounded")]));
+    });
+    const result = await checkNarrativeGrounding(provider.gateway, {
+      workloadId: "unsupported-prose", batchId: "publication", runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 1 },
+    }, source, [rendered], "decision-deepseek", "decision-deepseek", 1);
+    expect(narrativeGroundingChoices(result.answers, 1)).toEqual(["added_content"]);
+    expect(provider.transport).toHaveBeenCalledTimes(1);
+  });
+  it("marks only resolved references, preserving literal quotes and distinct identical speech events", () => {
+    const quote = `“${source.speech[0]!.utterance}”`;
+    const literal = renderNarrativeSegment(`店主说：${quote}${quote}`, source);
+    expect(literal.parts).toEqual([{ kind: "narration", text: literal.text }]);
+    expect(literal.text).toBe(`店主说：${quote}${quote}`);
+    const duplicate = renderNarrativeSegment(`店主说：${quote} [[speech-ab12]]`, source);
+    expect(duplicate.parts).toMatchObject([{ kind: "narration", text: "店主说：" }, { kind: "delivered_speech", speechId: "speech-ab12", text: quote }]);
+    expect(duplicate.parts.map(part => part.text).join("")).toBe(duplicate.text);
+    const scene = structuredClone(source);
+    scene.speech.push({ ...scene.speech[0]!, id: "speech-second", speaker: "旅人" });
+    const repeated = renderNarrativeSegment("[[speech-ab12]][[speech-second]]", scene);
+    expect(repeated.parts).toMatchObject([{ kind: "delivered_speech", speechId: "speech-ab12" }, { kind: "delivered_speech", speechId: "speech-second" }]);
+    expect(repeated.text).toBe(quote + quote);
+  });
+  it("trims continuation text and reference provenance together without certifying a partial quote", () => {
+    const segment = renderNarrativeSegment("旧段落。店主说：[[speech-ab12]] 后文。", source);
+    const continuation = continueNarrativeSegment(segment, ["旧段落。"]);
+    expect(continuation.text).toBe("店主说：“三枚金币；我还没同意赊账。” 后文。");
+    expect(continuation.parts).toMatchObject([{ kind: "narration", text: "店主说：" }, { kind: "delivered_speech", speechId: "speech-ab12" }, { kind: "narration", text: " 后文。" }]);
+    expect(continuation.parts.map(part => part.text).join("")).toBe(continuation.text);
+    const partial = continueNarrativeSegment(segment, ["旧段落。店主说：“三枚金币；"]);
+    expect(partial.text).toBe("我还没同意赊账。” 后文。");
+    expect(partial.parts.every(part => part.kind === "narration")).toBe(true);
+    expect(partial.parts.map(part => part.text).join("")).toBe(partial.text);
+    expect(continueNarrativeSegment(segment, [segment.text])).toEqual({ text: "", parts: [], mentions: [] });
   });
   it("anchors a paraphrased first appearance through the exact delivered voice", () => {
     const scene = structuredClone(source);
@@ -159,7 +226,7 @@ describe("immutable narrative paragraphs", () => {
   it("binds a harmless marker-format variation only to an exact authorized local name", () => {
     const scene = structuredClone(source);
     scene.knownEntities = [{ localEntityId: "pipe", name: "水管", description: "旧水管" }];
-    expect(renderNarrativeSegment("[[水管:水管|旧水管]]", scene)).toEqual({ text: "旧水管", mentions: [{ localEntityId: "pipe", surface: "旧水管" }] });
+    expect(renderNarrativeSegment("[[水管:水管|旧水管]]", scene)).toMatchObject({ text: "旧水管", mentions: [{ localEntityId: "pipe", surface: "旧水管" }] });
     expect(() => renderNarrativeSegment("[[不存在:陌生人|他]]", scene)).toThrow("unknown local entity");
     scene.knownEntities.push({ localEntityId: "other-pipe", name: "水管", description: "另一根水管" });
     expect(() => renderNarrativeSegment("[[水管:水管|旧水管]]", scene)).toThrow("unknown local entity");
@@ -178,7 +245,7 @@ describe("immutable narrative paragraphs", () => {
     const scene = structuredClone(source);
     scene.knownEntities = [{ localEntityId: "local-person", name: "附近的人", description: "站在木门旁。" }];
     scene.speech[0]!.utterance = "旅人旅人，标记写的是[[entity:untrusted|某人]]，不是我的名字。";
-    expect(renderNarrativeSegment("[[entity:local-person|木门旁有个人]]说：[[speech-ab12]]", scene)).toEqual({
+    expect(renderNarrativeSegment("[[entity:local-person|木门旁有个人]]说：[[speech-ab12]]", scene)).toMatchObject({
       text: "木门旁有个人说：“旅人旅人，标记写的是[[entity:untrusted|某人]]，不是我的名字。”",
       mentions: [{ localEntityId: "local-person", surface: "木门旁有个人" }],
     });

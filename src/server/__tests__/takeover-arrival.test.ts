@@ -73,6 +73,81 @@ describe("direct Agent takeover arrival", () => {
     } finally { f.close(); }
   });
 
+  it.each([
+    ["unexpected schemaVersion", { title: "此刻", scene: "我记起守门的职责。", schemaVersion: 1 }],
+    ["unexpected schema keyword", { title: "此刻", scene: "我记起守门的职责。", additionalProperties: false }],
+    ["empty scene", { title: "此刻", scene: "" }],
+    ["invalid JSON", '{"title":"此刻","scene":"我记起守门的职责。","}'],
+  ])("repairs %s once with the same private snapshot and records separate invocation lineage", async (_name, rejected) => {
+    const requests: Array<{ wire: DirectTestWire; context: Record<string, unknown> }> = [];
+    const f = await fixture(wire => {
+      requests.push({ wire, context: directCreationContext(wire) });
+      if (requests.length > 1) return { title: "此刻", scene: "我记起守门的职责。" };
+      return typeof rejected === "string" ? Response.json({ id: "invalid-arrival", model: wire.model,
+        choices: [{ index: 0, message: { role: "assistant", content: rejected }, finish_reason: "stop" }],
+        usage: { prompt_tokens: 100, completion_tokens: 10, total_tokens: 110 } }) : rejected;
+    });
+    try {
+      const before = f.database.readInstance(f.id);
+      const input = { expectedRevision: 0, target: { kind: "agent" as const, agentId: "keeper" } };
+      const [view, duplicate] = await Promise.all([f.host.transferControl(f.id, input), f.host.transferControl(f.id, input)]);
+      expect(duplicate).toEqual(view);
+      const saved = f.database.readInstance(f.id);
+      expect(saved.generation).toBe(before.generation + 1);
+      expect(saved.document.state).toEqual(before.document.state);
+      expect(saved.document.participants[view.conversation!.participantId]!.arrival).toMatchObject({ generated: true,
+        revision: 0, step: 0, title: "此刻", scene: "我记起守门的职责。" });
+      expect(requests).toHaveLength(2);
+      expect(requests[0]!.context.repair).toBeNull();
+      expect(requests[1]!.context.repair).toMatchObject({ previousOutput: rejected, issues: expect.any(Array) });
+      expect((requests[1]!.context.repair as { issues: unknown[] }).issues.length).toBeGreaterThan(0);
+      expect({ ...requests[1]!.context, repair: null }).toEqual(requests[0]!.context);
+      expect(requests[1]!.wire.model).toBe(requests[0]!.wire.model);
+      expect(requests[1]!.wire.messages![0]).toEqual(requests[0]!.wire.messages![0]);
+      const outputContract = (wire: DirectTestWire) => wire.messages!.find(message => message.role === "user")!.content
+        .split("\n\nReturn exactly one JSON object")[1];
+      expect(outputContract(requests[0]!.wire)).toBeTruthy();
+      expect(outputContract(requests[1]!.wire)).toBe(outputContract(requests[0]!.wire));
+      expect(JSON.stringify(requests)).not.toMatch(/TRUTH-ONLY-SECRET|OTHER-AGENT-SECRET|canonicalEntityIds/);
+      const executions = f.database.executions({ instanceId: f.id }).filter(item => item.manifest.kind === "engine-operation" && item.manifest.id === "arrival-generator");
+      expect(executions).toHaveLength(1);
+      expect(executions[0]!.status).toBe("succeeded");
+      const events = f.database.executionEvents(executions[0]!.id);
+      const attempts = events.filter(event => event.event === "model.invocation.started").map(event => event.correlation!);
+      expect(attempts).toHaveLength(2);
+      expect(attempts[0]).toMatchObject({ semanticRepairAttempt: 0, modelInvocation: 1 });
+      expect(attempts[1]).toMatchObject({ semanticRepairAttempt: 1, modelInvocation: 2,
+        logicalInvocationId: attempts[0]!.logicalInvocationId, parentInvocationId: attempts[0]!.modelInvocationId,
+        repairOf: attempts[0]!.modelInvocationId });
+      expect(attempts[1]!.modelInvocationId).not.toBe(attempts[0]!.modelInvocationId);
+      expect(events.filter(event => event.event === "arrival.generated")).toHaveLength(1);
+      expect(events.find(event => event.event === "arrival.generated")!.attributes).toMatchObject({ attempts: 2, repairs: 1 });
+      expect(f.makeHost().instance(f.id).conversation).toEqual(view.conversation);
+      expect(await f.host.transferControl(f.id, input)).toEqual(view);
+      expect(f.provider.transport).toHaveBeenCalledTimes(2);
+    } finally { f.close(); }
+  });
+
+  it("saves the existing fallback once when both format attempts fail", async () => {
+    const f = await fixture(() => ({ title: "此刻", scene: "" }));
+    try {
+      const before = f.database.readInstance(f.id);
+      const input = { expectedRevision: 0, target: { kind: "agent" as const, agentId: "keeper" } };
+      const view = await f.host.transferControl(f.id, input);
+      const saved = f.database.readInstance(f.id);
+      expect(saved.generation).toBe(before.generation + 1);
+      expect(saved.document.state).toEqual(before.document.state);
+      expect(saved.document.participants[view.conversation!.participantId]!.arrival).toMatchObject({ generated: false,
+        scene: "你把注意力放回 守门人 的此刻。" });
+      expect(saved.document.policyBindings.keeper).toMatchObject({ kind: "external", participantId: view.conversation!.participantId });
+      expect(f.database.executions({ instanceId: f.id }).filter(item => item.manifest.kind === "engine-operation" && item.manifest.id === "arrival-generator"))
+        .toEqual([expect.objectContaining({ status: "failed" })]);
+      expect(await f.host.transferControl(f.id, input)).toEqual(view);
+      expect(f.makeHost().instance(f.id).conversation).toEqual(view.conversation);
+      expect(f.provider.transport).toHaveBeenCalledTimes(2);
+    } finally { f.close(); }
+  });
+
   it("persists a neutral fallback after a failed creation call without losing control or retrying on reads", async () => {
     const f = await fixture(() => new Response("unavailable", { status: 503 }));
     try {
@@ -91,10 +166,16 @@ describe("direct Agent takeover arrival", () => {
     } finally { f.close(); }
   });
 
-  it("does not overwrite a concurrent persisted update when the arrival request loses its generation CAS", async () => {
+  it.each([false, true])("does not overwrite a concurrent persisted update when arrival loses its CAS (repair=%s)", async repair => {
     let entered!: () => void, release!: () => void;
     const started = new Promise<void>(resolve => { entered = resolve; }), gate = new Promise<void>(resolve => { release = resolve; });
-    const f = await fixture(async () => { entered(); await gate; return { title: "此刻", scene: "你记起自己守门的职责。" }; });
+    let calls = 0;
+    const f = await fixture(async () => {
+      calls++;
+      if (repair && calls === 1) return { title: "此刻", scene: "" };
+      entered(); await gate;
+      return { title: "此刻", scene: "你记起自己守门的职责。" };
+    });
     try {
       const taking = f.host.transferControl(f.id, { expectedRevision: 0, target: { kind: "agent", agentId: "keeper" } });
       await started;
@@ -107,7 +188,7 @@ describe("direct Agent takeover arrival", () => {
       expect(saved).toEqual(next);
       expect(saved.participants).toEqual({});
       expect(saved.policyBindings.keeper).toMatchObject({ kind: "model" });
-      expect(f.provider.transport).toHaveBeenCalledTimes(1);
+      expect(f.provider.transport).toHaveBeenCalledTimes(repair ? 2 : 1);
     } finally { release(); f.close(); }
   });
 });

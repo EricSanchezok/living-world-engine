@@ -8,6 +8,11 @@ import type { DiscourseMention, ParticipantDiscourse } from "../../engine/contra
 import type { ScenePacket } from "./contracts";
 import { narrativeEvidence, narrativeTask, narrativeDiscourse } from "./scene";
 
+export type NarrativePart = { kind: "narration"; text: string } | {
+  kind: "delivered_speech"; text: string; speechId: string; speaker: string; speakerLocalId?: string; utterance: string;
+};
+export interface RenderedNarrativeSegment { text: string; mentions: DiscourseMention[]; parts: NarrativePart[] }
+
 function unpublishedSpeech(source: ScenePacket, published: string[]) {
   const text = published.join("\n"), used = new Map<string, number>();
   return source.speech.filter(speech => {
@@ -65,16 +70,18 @@ export function narrativeGroundingChoices(answers: Record<string, { type: string
 
 /** Independent factual checks share one publication request per available paragraph batch. */
 export async function checkNarrativeGrounding(provider: StructuredModelProvider, scope: ModelExecutionScope,
-  source: ScenePacket, paragraphs: string[], profileId: string, fallbackProfileId: string, ordinal: number, discourse?: ParticipantDiscourse, alreadyPublished: string[] = []) {
+  source: ScenePacket, rendered: RenderedNarrativeSegment[], profileId: string, fallbackProfileId: string, ordinal: number, discourse?: ParticipantDiscourse, alreadyPublished: string[] = []) {
+  const paragraphs = rendered.map(segment => segment.text);
   const evidence = narrativeEvidence(source);
   const state = { publicationInstruction: loadPromptAsset("user/narrative-grounding.md"),
-    paragraphs, alreadyPublished, scene: evidence, discourse: discourse ? narrativeDiscourse(discourse) : null,
+    paragraphs, paragraphRendering: rendered.map(segment => ({ parts: segment.parts })),
+    alreadyPublished, scene: evidence, discourse: discourse ? narrativeDiscourse(discourse) : null,
     publicationTask: narrativeTask(source, discourse) } as unknown as JsonValue;
   return executeDecisionV2(provider, { ...scope, profileId, fallbackProfileId, subjectId: source.agentId, instructionProfile: "publication",
     inferenceOverrides: { thinking: "disabled", effort: "auto", reasoning_budget_tokens: "auto" },
     modelInvocation: ordinal, batch: { version: 2, view: { kind: "agent", agentId: source.agentId, projectionHash: contentHash(state) },
       dependencies: {}, state, questions: Object.fromEntries(paragraphs.flatMap((_, index) => Object.entries(groundingAxes).map(([axis, focus]) => [`paragraph${index}_${axis}`, {
-        type: "choice" as const, version: "narrative-grounding-6", instructions: { index, focus },
+        type: "choice" as const, version: "narrative-grounding-7", instructions: { index, focus },
         criteria: { grounded: "Faithful expression of supplied facts and delivered speech; only harmless stylistic rendering is added",
           added_content: "Introduces an unsupported person, distinct usable object or possession, action, speech, result, knowledge or meaningful change",
           contradiction: "Changes a known amount, identity, outcome, commitment or evidence status; or chooses new actions or feelings for the player",
@@ -137,7 +144,7 @@ function repeatsEntitySurface(literal: string, surface: string, side: "before" |
   return !/[\p{Script=Latin}\p{N}_]/u.test(edge) || !/[\p{L}\p{N}_]/u.test(neighbor);
 }
 
-export function renderNarrativeSegment(text: string, source: ScenePacket): { text: string; mentions: DiscourseMention[] } {
+export function renderNarrativeSegment(text: string, source: ScenePacket): RenderedNarrativeSegment {
   const mentions: DiscourseMention[] = [];
   const voicedMentions: DiscourseMention[] = [];
   const bindSpeaker = (speech: ScenePacket["speech"][number]) => {
@@ -146,10 +153,12 @@ export function renderNarrativeSegment(text: string, source: ScenePacket): { tex
     }
   };
   text = text.replace(/[“"](\[\[speech-[^\]\n]+\]\])[”"]/gu, "$1");
+  const standaloneSpeech = /^\s*\[\[speech-[^\]\n]+\]\]\s*$/u.test(text);
   if (/\[\[|\]\]/u.test(text.replace(/\[\[[^\]\n]+\]\]/gu, ""))) throw new Error("Narrative paragraph contains an unresolved reference");
   // Typography is not a speech act. The publication decision checks unsupported
   // quotations; references and delivered-speech completeness remain exact.
-  const parts: string[] = [];
+  const parts: NarrativePart[] = [];
+  const narration = (value: string) => { if (value) parts.push({ kind: "narration", text: value }); };
   let cursor = 0;
   for (const match of text.matchAll(/\[\[([^\]\n]+)\]\]/gu)) {
     const token = match[1]!;
@@ -165,28 +174,61 @@ export function renderNarrativeSegment(text: string, source: ScenePacket): { tex
       if (repeatsEntitySurface(literal, surface, "before")) literal = literal.slice(0, -surface.length);
       if (repeatsEntitySurface(text.slice(cursor), surface, "after")) cursor += surface.length;
       mentions.push({ localEntityId: entity.localEntityId, surface });
-      parts.push(literal, surface);
+      narration(literal + surface);
       continue;
     }
     const speech = source.speech.find(item => item.id === token);
     if (!speech) throw new Error(token.startsWith("speech-") ? "Narrative referenced an undelivered utterance" : "Narrative contains an unresolved reference");
     bindSpeaker(speech);
-    parts.push(literal, `“${speech.utterance}”`);
+    // A bare quote still needs its recorded speaker for the reader and publication checks.
+    narration(literal + (standaloneSpeech ? `${speech.speaker}：` : ""));
+    parts.push({ kind: "delivered_speech", text: `“${speech.utterance}”`, speechId: speech.id,
+      speaker: speech.speaker, ...(speech.speakerLocalId ? { speakerLocalId: speech.speakerLocalId } : {}), utterance: speech.utterance });
   }
-  const rendered = parts.join("").concat(text.slice(cursor)).trim();
-  if (!rendered) throw new Error("Narrative paragraph is empty");
-  // A literal quote followed by its reference can produce the same utterance twice.
-  let result = rendered.replace(/(“[^”]+”)(?:\s*\1)+/gu, (repeated, quote: string) =>
-    source.speech.filter(speech => speech.utterance === quote.slice(1, -1)).length === 1 ? quote : repeated);
+  narration(text.slice(cursor));
+  // Remove annotation-adjacent echoes without promoting literal prose to a
+  // delivered reference or editing anything inside the recorded utterance.
+  const unique = (part: NarrativePart | undefined): part is Extract<NarrativePart, { kind: "delivered_speech" }> =>
+    part?.kind === "delivered_speech" && source.speech.filter(speech => speech.utterance === part.utterance).length === 1;
+  for (const [index, part] of parts.entries()) if (part.kind === "narration") {
+    const previous = parts[index - 1], next = parts[index + 1];
+    if (unique(previous)) while (part.text.trimStart().startsWith(previous.text)) part.text = part.text.trimStart().slice(previous.text.length);
+    if (unique(next)) {
+      let last: string;
+      do {
+        last = part.text;
+        const duplicate = [next.text, next.utterance].find(value => part.text.trimEnd().endsWith(value));
+        if (duplicate) part.text = part.text.trimEnd().slice(0, -duplicate.length);
+      } while (part.text !== last);
+    }
+  }
+  const normalized: NarrativePart[] = [];
+  for (const part of parts) {
+    if (!part.text) continue;
+    if (unique(part)) {
+      const last = normalized.at(-1), previous = last?.kind === "narration" && !last.text.trim() ? normalized.at(-2) : last;
+      if (unique(previous) && previous.speechId === part.speechId) {
+        if (last !== previous) normalized.pop();
+        continue;
+      }
+    }
+    const previous = normalized.at(-1);
+    if (part.kind === "narration" && previous?.kind === "narration") previous.text += part.text;
+    else normalized.push({ ...part });
+  }
+  if (normalized[0]?.kind === "narration") normalized[0].text = normalized[0].text.trimStart();
+  const last = normalized.at(-1);
+  if (last?.kind === "narration") last.text = last.text.trimEnd();
+  const rendering = normalized.filter(part => part.text);
+  const result = rendering.map(part => part.text).join("");
+  if (!result) throw new Error("Narrative paragraph is empty");
   for (const speech of source.speech) if (source.speech.filter(item => item.utterance === speech.utterance).length === 1) {
-    const escaped = speech.utterance.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
-    result = result.replace(new RegExp(`${escaped}\\s*“${escaped}”`, "gu"), () => `“${speech.utterance}”`);
     if (result.includes(`“${speech.utterance}”`)) bindSpeaker(speech);
   }
   for (const mention of explicitNarrativeMentions(result, source)) if (!mentions.some(existing => existing.localEntityId === mention.localEntityId)) mentions.push(mention);
   // A delivered voice identifies its speaker even when the introduction paraphrases the display label.
   for (const mention of voicedMentions) if (!mentions.some(existing => existing.localEntityId === mention.localEntityId)) mentions.push(mention);
-  return { text: result, mentions };
+  return { text: result, mentions, parts: rendering };
 }
 /** Literal unique labels establish references in code-owned factual fallbacks as well. */
 export function explicitNarrativeMentions(text: string, source: ScenePacket): DiscourseMention[] {
@@ -204,6 +246,18 @@ export function narrativeContinuation(text: string, published: string[]): string
     if (echoed) remaining = remaining.slice(echoed.trim().length).trim();
   } while (remaining !== previous);
   return remaining;
+}
+
+/** Trim an immutable prefix and its provenance together; partial quotes are ordinary prose. */
+export function continueNarrativeSegment(segment: RenderedNarrativeSegment, published: string[]): RenderedNarrativeSegment {
+  const text = narrativeContinuation(segment.text, published);
+  let skip = segment.text.length - text.length;
+  const parts = segment.parts.flatMap(part => {
+    if (skip >= part.text.length) { skip -= part.text.length; return []; }
+    if (skip) { const remaining = part.text.slice(skip); skip = 0; return [{ kind: "narration" as const, text: remaining }]; }
+    return [{ ...part }];
+  });
+  return { text, parts, mentions: segment.mentions.filter(mention => text.includes(mention.surface)) };
 }
 export function requireDeliveredSpeech(source: ScenePacket, paragraphs: string[]): void {
   if (unpublishedSpeech(source, paragraphs).length) {
