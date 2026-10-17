@@ -1,0 +1,229 @@
+{
+  "formatVersion": 1,
+  "status": "naturalness-failed-full-chain-uncovered-not-release",
+  "scope": "新 Key 的受限真实游玩；修复前 direct-world@14，只提交第一条输入，不是当前 producer 15 的验收。",
+  "runId": "2026-10-17T17-11-10-945Z-v14-capped-merchant-work",
+  "instanceId": "c0c964d2-c158-4098-903e-0338726c9e86",
+  "worldHash": "sha256:e90ad25ccbcf781ae0b4c4d3c654304711fd3b781e7839735c48d02e2a4f2998",
+  "producer": {
+    "role": "world-execution",
+    "id": "direct-world",
+    "version": "14",
+    "contractVersion": 15,
+    "config": {
+      "decision": null,
+      "creation": null,
+      "fallback": null,
+      "creationEnabled": true
+    },
+    "children": {},
+    "manifestHash": "cd3a3c7e3440db4f8e70552a3302a6e45647392707784be50f8960c8b4b5e0c6"
+  },
+  "executionContractVersion": 15,
+  "directControlVersion": 6,
+  "instanceSchemaVersion": 36,
+  "submittedInputs": [
+    "我对许掌柜说：“请去库房清点现有药箱，数清后回前厅告诉我实数；如果现在不能办，也请直接告诉我原因。”我没有答应任何交易，也不搬货或付钱。"
+  ],
+  "plannedSecondInputSubmitted": false,
+  "ceiling": {
+    "httpRequests": 60,
+    "dispatchDurationMs": 360000,
+    "transportAttempts": 1,
+    "retriesCountAgainstCeiling": true
+  },
+  "actual": {
+    "httpRequests": 30,
+    "inputTokens": 479769,
+    "outputTokens": 84923,
+    "totalInputPlusOutput": 564692,
+    "knownReasoningTokensIncludedInOutput": 73489,
+    "reasoningUsageUnknownInvocations": 4,
+    "knownCacheReadTokensIncludedInInput": 32128,
+    "cacheReadUsageUnknownInvocations": 4,
+    "cacheWriteUnknownInvocations": 30,
+    "currencyCost": null,
+    "durationMs": 318014,
+    "localReviewPauseMs": 25516,
+    "dispatchDurationMs": 292498,
+    "sumParallelTransportMs": 448590,
+    "modelBreakdown": [
+      {
+        "profile": "creation-deepseek",
+        "model": "deepseek-flash",
+        "calls": 15,
+        "input": 161709,
+        "output": 6361
+      },
+      {
+        "profile": "decision-deepseek",
+        "model": "deepseek-flash",
+        "calls": 11,
+        "input": 215193,
+        "output": 74419
+      },
+      {
+        "profile": "decision-jev",
+        "model": "jev-1.13.0",
+        "calls": 4,
+        "input": 102867,
+        "output": 4143
+      }
+    ]
+  },
+  "accounting": "按 execution、invocation、ordinal 与 request/response hash 逐项核对；包含失败与回退；推理与缓存不重复加总；并发 transport 累计耗时不是墙钟耗时；未推测实际账单。",
+  "stop": {
+    "status": "stopped-needs-review",
+    "stop": {
+      "kind": "operator",
+      "message": "Reviewer closed after the first input; no second input submitted"
+    },
+    "executionFailures": [
+      {
+        "sequence": 357,
+        "executionId": "c37e61de-c10e-4d7f-b42d-e37020fb2805",
+        "payload": null
+      },
+      {
+        "sequence": 622,
+        "executionId": "030b1b47-c886-4b98-97b8-259187b2ee30",
+        "payload": null
+      },
+      {
+        "sequence": 651,
+        "executionId": "1ec8ff74-a9aa-41ef-8dd4-aa44370b0a2b",
+        "payload": null
+      }
+    ],
+    "forcedCancellation": false,
+    "pendingGenerations": 0,
+    "pendingFetches": 0,
+    "pendingExecutions": []
+  },
+  "world": {
+    "population": 15,
+    "distinctActingSubjects": 5,
+    "revision": 7,
+    "elapsedSeconds": 360,
+    "managerPlacement": "lin-stockroom",
+    "managerFrames": [
+      {
+        "id": "rt:action:5c82dedf5f09f85c2c576455c8436c70ee5be74448faaffe8e61a1a46ab3aaff",
+        "kind": "move",
+        "target": "lin-store",
+        "started": 0,
+        "due": 300,
+        "utterance": null
+      },
+      {
+        "id": "rt:action:02900ac89f044fb36ebf65e02fb0c8d54d5a032b478ef30a8741887d53e68160",
+        "kind": "move",
+        "target": "lin-stockroom",
+        "started": 300,
+        "due": 360,
+        "utterance": null
+      }
+    ],
+    "stockObservations": 0,
+    "deliveredStockReports": 0,
+    "quantitiesUnchanged": true,
+    "personalSilver": 40,
+    "personalCopper": 600,
+    "stockCrates": 60,
+    "stockOwnerEntityId": "lin-firm",
+    "replayEqual": true
+  },
+  "review": {
+    "movement": "掌柜依次从前厅走到药铺和库房，有实际移动记录。",
+    "inspectionReturnAndReport": "未覆盖；未提交后续等待，不能视为完整链路失败或通过。",
+    "cognition": "失败；玩家仅看见离场，却获知了远处药铺未变化的路线和夜间属性。定位到上游候选属性被当作实际效果，非 narrator 直接读取另一人物认知。",
+    "narrative": "失败；第二 beat 的续写重复增加五分钟，最终 fallback 重复打印远处路线属性。",
+    "naturalnessPassed": false,
+    "fullChainPassed": false,
+    "fullChainStatus": "uncovered",
+    "newProducer15LiveValidated": false,
+    "retainedTranscripts": [
+      {
+        "id": "scene-1284ef27e33abe1babc44210",
+        "status": "complete",
+        "attempts": 2,
+        "boundary": {
+          "revision": 4,
+          "step": 3,
+          "worldTimeSeconds": 60
+        },
+        "text": [
+          "姚客的语气平稳，带着生意人的客气与试探，话是对你父亲说的。“林掌柜，我此番要一批普通药材做辅料，六十箱为一批，每箱愿出二十两，共一千二百两。若府上一时凑不齐，先交二十箱也可，余下的分批再谈。只一件，货往何处去，还请府上不必对外说起。不知如今仓里存得多少？”",
+          "你把话转向许素娘。“请去库房清点现有药箱，数清后回前厅告诉我实数；如果现在不能办，也请直接告诉我原因。”"
+        ]
+      },
+      {
+        "id": "scene-f8d10dc95f703af1111e621c",
+        "status": "fallback",
+        "attempts": 2,
+        "boundary": {
+          "revision": 6,
+          "step": 5,
+          "worldTimeSeconds": 300
+        },
+        "text": [
+          "厅里静下来。约莫五分来钟，许素娘那位老掌柜没有往前厅回话，却同你父亲林敬亭一道动身往林记药材铺去了，脚步声从廊下一直远去。",
+          "行动已完成。\n林记药材铺：当地正值夜间。\n林记药材铺：route-to（林记账房）\n林记药材铺：route-to（林家前厅）\n林记药材铺：route-to（济生药铺）\n林记药材铺：route-to（林记库房）\n\n行动已完成。\n林记药材铺：当地正值夜间。\n林记药材铺：route-to（林记账房）\n林记药材铺：route-to（林家前厅）\n林记药材铺：route-to（济生药铺）\n林记药材铺：route-to（林记库房）"
+        ]
+      }
+    ],
+    "localFix": "候选属性与已提交变化分离；回归原实现失败，修复后通过；没有新增模型请求。",
+    "localFixPostmortem": "../../../../docs/postmortems/0193-effect-candidates-disclosed-destination-knowledge.md",
+    "remainingTimeError": "已存请求具有正确的时间收据与不可改写前缀，不能称缺少时间信息；未通过新一轮自然游玩。"
+  },
+  "integrity": {
+    "sourceUnchanged": true,
+    "replayEqual": true,
+    "quantitiesUnchanged": true
+  },
+  "ledgerDoctor": {
+    "apiVersion": 1,
+    "indexVersion": 1,
+    "schemaVersion": 9,
+    "indexFresh": true,
+    "executionCount": 11,
+    "eventCount": 651,
+    "artifactCount": 212,
+    "indexedEventCount": 651,
+    "indexedInvocationCount": 30,
+    "issueCount": 7,
+    "orphanedIndexRows": 0,
+    "missingIndexRows": 0,
+    "orphanedArtifacts": 0,
+    "warnings": []
+  },
+  "evidence": [
+    {
+      "path": ".livingworld-cache/fanren-completion/merchant-v14-final-accounting.json",
+      "sha256": "df885728867062a9aa2b0c613e774a82fae2e3533c7acfac5c12574b870f9213"
+    },
+    {
+      "path": ".livingworld-cache/fanren-playtests/2026-10-17T17-11-10-945Z-v14-capped-merchant-work/report.json",
+      "sha256": "f1d6f26427a93cb3b6a3cb8a543328e90bc0fb037d795bd007001d99888b2f68"
+    },
+    {
+      "path": ".livingworld-cache/fanren-playtests/2026-10-17T17-11-10-945Z-v14-capped-merchant-work/source.json",
+      "sha256": "ad0a6e15e026eeee551b5df8a8009842d82b507742021c8860f40092d18e7f3b"
+    },
+    {
+      "path": ".livingworld-cache/fanren-playtests/2026-10-17T17-11-10-945Z-v14-capped-merchant-work/events.jsonl",
+      "sha256": "33df5687fa06605a9fcb95262c97c1366dec741fa99e83425095e609c445b17b"
+    },
+    {
+      "path": ".livingworld-cache/fanren-playtests/2026-10-17T17-11-10-945Z-v14-capped-merchant-work/semantic-evidence.json",
+      "sha256": "73a77b51a8acfaf100384be0eaf3b1764102a581961b3646a54165da956749e4"
+    },
+    {
+      "path": ".livingworld-cache/fanren-completion/merchant-v14-final-doctor.json",
+      "sha256": "529f9344b6738edadf00a1e305397c7040714917626639e7a1210477378eae6e"
+    }
+  ],
+  "fullWorldAcceptance": false,
+  "mergeAllowed": false,
+  "remainingCoverage": "../coverage/local-completion-gaps.json"
+}

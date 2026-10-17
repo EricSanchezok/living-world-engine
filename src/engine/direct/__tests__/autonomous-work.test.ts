@@ -9,9 +9,10 @@ import { replaySimulationState } from "../../runtime/transaction";
 import { quantityId } from "../../runtime/runtime-id";
 import { readDirectState, sealDirectState } from "../state";
 import type { PolicyBinding } from "../../runtime/execution";
+import { contentHash } from "../../models/model-audit";
 
 type Mode = "repair" | "repeat" | "unknown" | "misbound" | "count" | "watch" | "unsupported-manner" | "supported-manner";
-async function fixture(mode: Mode, delayed = false) {
+async function fixture(mode: Mode, delayed = false, witnessedEffect?: "unchanged" | "changed" | "same-value") {
   let readings = 0;
   const f = directTestProvider(wire => {
     const context = wire.messages ? directCreationContext(wire) : {};
@@ -29,11 +30,16 @@ async function fixture(mode: Mode, delayed = false) {
           manner: mode === "unsupported-manner" ? "Hands over the ledger that was fetched from the account room." : mode === "supported-manner" ? "Raises an empty hand in greeting." : null,
           literalQuote: "none" } };
     }
-    return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeAnswer(question,
+    return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => {
+      const instructions = question.instructions as { task?: { data?: { fact?: { id: string } } }; data?: { fact?: { id: string } } };
+      const fact = (instructions.task ?? instructions).data?.fact;
+      return [id, nativeAnswer(question,
+      /_fact\d+$/u.test(id) && fact?.id === "keeper-kneeling" && witnessedEffect && witnessedEffect !== "unchanged" ? witnessedEffect === "changed" ? "v1" : "v0" :
       id.endsWith("_outcome") ? mode === "misbound" ? "unknown" : "succeeded" : id.endsWith("_manner") ? mode === "unsupported-manner" ? "unsupported" : "supported"
         : id.endsWith("_extent") ? mode === "watch" ? "ongoing" : "bounded" : id.endsWith("_duration") ? mode === "count" || delayed ? "s60" : "planned"
         : id.endsWith("_movement") ? "enter" : /_quantity\d+$/u.test(id) ? "measured"
-        : id.includes("visible") || id.includes("actor_visibility") || /_entity\d+$/u.test(id) ? "visible" : id.includes("delivery") ? "delivered" : id.includes("fact") ? "unchanged" : "none")]));
+        : id.includes("visible") || id.includes("actor_visibility") || /_entity\d+$/u.test(id) ? "visible" : id.includes("delivery") ? "delivered" : id.includes("fact") ? "unchanged" : "none")];
+    }));
   });
   const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 31, modelCatalog: f.catalog });
   const state = world.initialState;
@@ -49,6 +55,24 @@ async function fixture(mode: Mode, delayed = false) {
   state.truth.quantities[stockId] = { id: stockId, definitionId: "spirit-stone", holderId: "stock", amount: 60 };
   state.truth.facts["stock-owner"] = { id: "stock-owner", subjectId: "stock", predicate: "owner", value: { kind: "entity", entityId: "player" },
     description: "The traveler owns the stock.", access: { kind: "public" }, provenance: [{ kind: "world_seed", id: state.worldHash }] };
+  if (witnessedEffect) {
+    const base = { access: { kind: "public" as const }, provenance: [{ kind: "world_seed" as const, id: state.worldHash }] };
+    state.truth.facts["workroom-night"] = { ...base, id: "workroom-night", subjectId: "workroom", predicate: "daylight",
+      value: { kind: "text", value: "night" }, description: "The workroom is dark at night." };
+    state.truth.facts["workroom-route"] = { ...base, id: "workroom-route", subjectId: "workroom", predicate: "route-to",
+      value: { kind: "entity", entityId: "stock" }, description: "A route from the workroom leads to the stock." };
+    state.truth.facts["keeper-kneeling"] = { ...base, id: "keeper-kneeling", subjectId: "keeper", predicate: "kneeling",
+      value: { kind: "boolean", value: true }, description: "The keeper is kneeling." };
+    state.truth.facts["keeper-appearance"] = { ...base, id: "keeper-appearance", subjectId: "keeper", predicate: "appearance",
+      value: { kind: "text", value: "blue-sleeves" }, description: "The keeper wears blue sleeves." };
+    const player = state.agents.player!;
+    player.belief.localEntities["known-workroom"] = { id: "known-workroom", name: "Workroom", description: "Visited earlier.", status: "observed" };
+    player.bindings["known-workroom"] = { localEntityId: "known-workroom", canonicalEntityIds: ["workroom"] };
+    player.belief.evidence["earlier-visit"] = { id: "earlier-visit", kind: "observation", description: "It was daytime during an earlier visit.", sourceId: "earlier-visit", step: 0 };
+    const id = `observed-${contentHash(["player", "workroom-night"]).slice(0, 24)}`;
+    player.belief.claims[id] = { id, subjectId: "known-workroom", predicate: "daylight", value: { kind: "text", value: "day" },
+      description: "The workroom was in daylight during the earlier visit.", confidence: 1, stance: "believed", evidenceIds: ["earlier-visit"] };
+  }
   const agent = state.agents.keeper!;
   for (const [localId, canonicalId] of [["hall-ref", "courtyard"], ["room-ref", "workroom"], ["stock-ref", "stock"]] as const) {
     agent.belief.localEntities[localId] = { id: localId, name: state.truth.entities[canonicalId]!.name, description: "Known through earlier work.", status: "observed" };
@@ -66,6 +90,32 @@ async function fixture(mode: Mode, delayed = false) {
 }
 
 describe("autonomous local work commits actual next steps", () => {
+  it.each(["unchanged", "changed", "same-value"] as const)("keeps a departing actor's destination findings private while preserving witnessed effects: %s", async witnessedEffect => {
+    const f = await fixture("repair", false, witnessedEffect), result = await f.advance();
+    expect(result.state.truth.placements.player).toBe("courtyard");
+    expect(result.state.truth.placements.keeper).toBe("workroom");
+    const actor = result.committed.observations.find(packet => packet.observerId === "keeper")!;
+    const witness = result.committed.observations.find(packet => packet.observerId === "player")!;
+    expect(witness.scene).toMatchObject({ actionKind: "move", status: "succeeded" });
+    expect(witness.summary).toContain("blue sleeves");
+    expect(actor.summary).toContain("dark at night");
+    expect(actor.summary).toContain("route-to");
+    expect(witness.summary).not.toContain("dark at night");
+    expect(witness.summary).not.toContain("route-to");
+    const before = Object.values(f.world.initialState.agents.player!.belief.claims).find(claim => claim.predicate === "daylight")!;
+    expect(result.state.agents.player!.belief.claims[before.id]).toEqual(before);
+    const claims = Object.values(result.state.agents.player!.belief.claims);
+    expect(claims.filter(claim => claim.predicate === "daylight")).toEqual([before]);
+    expect(claims.some(claim => claim.predicate === "route-to")).toBe(false);
+    const posture = claims.find(claim => claim.predicate === "kneeling");
+    if (witnessedEffect === "changed") expect(posture?.value).toEqual({ kind: "boolean", value: false });
+    else expect(posture).toBeUndefined();
+    expect(result.state.truth.facts["keeper-kneeling"]!.value).toEqual({ kind: "boolean", value: witnessedEffect !== "changed" });
+    expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
+    expect(witness.summary).not.toContain("60");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+    expect(f.transport).toHaveBeenCalledTimes(3);
+  });
   it("repairs a remote inspection into arrival, then measures real stock without transferring it", async () => {
     const f = await fixture("repair");
     const moved = await f.advance();

@@ -17,6 +17,7 @@ export function settlePreparedActions(state: Readonly<SimulationState>, control:
   const settlements: ActionSettlement[] = [], randomRequests: DirectStepRecord["randomRequests"] = [], randomResults: DirectStepRecord["randomResults"] = [];
   for (const [index, frame] of frames.slice().sort((a, b) => a.id.localeCompare(b.id)).entries()) {
     const preparation = control.prepared[frame.id]!;
+    const previousFacts = projected.truth.facts;
     let operations = structuredClone(preparation.operations), status = preparation.status, summary = preparation.summary;
     const source = sourceFor(frame);
     if (["succeeded", "partial"].includes(status)) {
@@ -47,6 +48,11 @@ export function settlePreparedActions(state: Readonly<SimulationState>, control:
       }
     }
     const happened = ["succeeded", "partial"].includes(status);
+    // Compare this action's committed result, including random outcomes, with its
+    // own starting state; another action's effects cannot grant witness access.
+    const changedFacts = new Set(operations.flatMap(operation => operation.kind === "set_fact" &&
+      contentHash(previousFacts[operation.fact.id]?.value ?? null) !== contentHash(projected.truth.facts[operation.fact.id]?.value ?? null)
+      ? [operation.fact.id] : []));
     // An unsuccessful effect can still reveal existing conditions. New failed effects do not exist in projected truth.
     const observedFacts = [...preparation.visibleFactIds.flatMap(id => projected.truth.facts[id] ? [projected.truth.facts[id]!] : []),
       ...preparation.propertyVisibility.flatMap(binding => {
@@ -62,7 +68,7 @@ export function settlePreparedActions(state: Readonly<SimulationState>, control:
       kind: "outcome", stage: "direct-world", owner: frame.actorId, round: 0, ordinal: index }), proposalId: frame.id, status,
       summary, causeRefs: source.causes, assertions: source.assertions, knownAlternatives: [] }, visibleFacts: observedFacts,
       inspectedQuantities: happened ? preparation.inspectedQuantityIds.flatMap(id => projected.truth.quantities[id] ? [projected.truth.quantities[id]!] : []) : [],
-      actorOnlyFactIds: preparation.actorOnlyFactIds, actorOnlyEntityIds: preparation.actorOnlyEntityIds,
+      actorOnlyFactIds: preparation.actorOnlyFactIds.filter(id => !changedFacts.has(id)), actorOnlyEntityIds: preparation.actorOnlyEntityIds,
       visibleEntities: happened ? preparation.visibleEntityIds.flatMap(id => projected.truth.entities[id] ? [projected.truth.entities[id]!] : []) : [],
       namedEntityIds: happened ? preparation.namedEntityIds : [],
       actorVisibleToEntityIds: happened ? preparation.actorVisibleToEntityIds ?? [] : [],

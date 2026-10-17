@@ -278,9 +278,9 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       }
     }
     const neighborhood = perceptualNeighborhood(state, frame);
-    incidental.set(frame.id, { entities: [...neighborhood], facts: orderedValues(state.truth.facts)
-      .filter(fact => neighborhood.has(fact.subjectId) && !effectFacts.some(effect => effect.id === fact.id)).map(fact => fact.id) });
     const observableFacts = new Map([...effectFacts, ...orderedValues(state.truth.facts).filter(fact => neighborhood.has(fact.subjectId))].map(fact => [fact.id, fact]));
+    // Possible effects are still the actor's findings until settlement proves a change.
+    incidental.set(frame.id, { entities: [...neighborhood], facts: [...observableFacts.keys()] });
     if (capability) createdObjectQuestions(frame, prefix, capability, questions);
     for (const [ordinal, effect] of capability?.effects.entries() ?? []) if (effect.kind === "fact") {
       const fact = capabilityFact(state, frame, capability!, effect, ordinal);

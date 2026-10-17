@@ -34,7 +34,7 @@ The executable registry is authoritative. Maturity describes enrollment policy a
 | `work-batching` | `shared-context-slot-batching@2` | 1 | reference | — |
 | `work-batching` | `shared-state-first-slot-batching@1` | 1 | reference | — |
 | `work-scheduling` | `bounded-concurrency@1` | 1 | reference | — |
-| `world-execution` | `direct-world@14` | 15 | candidate | — |
+| `world-execution` | `direct-world@15` | 15 | candidate | — |
 | `world-execution` | `eager-reference@29` | 15 | reference | `agentCognition` → `agent-cognition`<br>`actionCompilation` → `action-compilation`<br>`interactionGrounding` → `interaction-grounding`<br>`reactionResolution` → `reaction-resolution`<br>`truthResolution` → `truth-resolution`<br>`observationRendering` → `observation-rendering` |
 
 ## Benchmark-only algorithms
@@ -62,8 +62,8 @@ These implementations are replaceable inside the offline evaluation harness, but
 
 ## Default composition
 
-Root hash: `cd3a3c7e3440db4f8e70552a3302a6e45647392707784be50f8960c8b4b5e0c6`
+Root hash: `409235683d45315d3e61a1e0e923b85242529fe9696a69fc5f65128a6c4f962a`
 
 | Node path | Role | Algorithm | Contract | Manifest hash |
 | --- | --- | --- | ---: | --- |
-| `root` | `world-execution` | `direct-world@14` | 15 | `cd3a3c7e3440db4f8e70552a3302a6e45647392707784be50f8960c8b4b5e0c6` |
+| `root` | `world-execution` | `direct-world@15` | 15 | `409235683d45315d3e61a1e0e923b85242529fe9696a69fc5f65128a6c4f962a` |

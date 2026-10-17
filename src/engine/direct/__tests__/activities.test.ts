@@ -12,7 +12,7 @@ import type { DecisionQuestionV2 } from "../../models/decision-v2";
 import { readDirectState } from "../state";
 import { privateActionView } from "../views";
 import { settlePreparedActions } from "../settlement";
-import { directSemanticId } from "../world";
+import { directSemanticId, sourceFor } from "../world";
 import { isSemanticId } from "../../contracts/state-schemas";
 
 function option(question: DecisionQuestionV2, predicate: (value: unknown) => boolean) {
@@ -175,6 +175,38 @@ describe("direct activities use code-owned mechanics", () => {
     expect(result.rng.draws).toBe(1); expect(control).toEqual(saved);
     expect(result.settlements[0]!.operations.filter(op => op.kind === "set_fact").every(op => op.causes.filter(cause => cause.kind === "random").length === 1)).toBe(true);
   });
+  it("grants witness access only to each action's own committed change after randomness and atomic validation", async () => {
+    const f = await fixture("test"), admitted = await f.act("运行压力测试10秒");
+    const control = readDirectState(admitted.state.executionState!, admitted.state), frame = control.activities[0]!;
+    const first = settlePreparedActions(admitted.state, control, [frame]).settlements[0]!;
+    const write = first.operations.find(operation => operation.kind === "set_fact" && operation.fact.id === "pump-pressure")!;
+    if (write.kind !== "set_fact") throw new Error("missing sampled property");
+    expect(first.actorOnlyFactIds).not.toContain("pump-pressure");
+
+    const unchanged = structuredClone(admitted.state);
+    unchanged.truth.facts["pump-pressure"] = structuredClone(write.fact);
+    const same = settlePreparedActions(unchanged, control, [frame]);
+    expect(same.rng.draws).toBe(1);
+    expect(same.settlements[0]!.actorOnlyFactIds).toContain("pump-pressure");
+
+    const invalid = structuredClone(control);
+    invalid.prepared[frame.id]!.operations.push({ kind: "place_entity", entityId: frame.actorEntityId,
+      placementId: frame.actorEntityId, ...sourceFor(frame) });
+    const failed = settlePreparedActions(admitted.state, invalid, [frame]);
+    expect(failed.settlements[0]!.outcome.status).toBe("blocked");
+    expect(failed.settlements[0]!.operations).toEqual([]);
+    expect(failed.settlements[0]!.actorOnlyFactIds).toContain("pump-pressure");
+    expect(failed.rng.draws).toBe(0);
+
+    const batch = structuredClone(control), second = { ...frame, id: `${frame.id}-later`, actorId: "inspector", actorEntityId: "inspector" };
+    batch.prepared[second.id] = { ...structuredClone(batch.prepared[frame.id]!), actionId: second.id, randomRequests: [], randomBindings: [],
+      operations: [{ ...structuredClone(write), ...sourceFor(second) }] };
+    const together = settlePreparedActions(admitted.state, batch, [frame, second]);
+    expect(together.settlements.map(settlement => settlement.outcome.status)).toEqual(["succeeded", "succeeded"]);
+    expect(together.settlements[0]!.actorOnlyFactIds).not.toContain("pump-pressure");
+    expect(together.settlements[1]!.actorOnlyFactIds).toContain("pump-pressure");
+    expect(f.transport).toHaveBeenCalledTimes(2);
+  });
   it("creates one small capability and lets an observing appropriate actor reuse it", async () => {
     const f = await fixture("extend"); const first = await f.act("用缓冲材料临时隔离设备振动");
     const control = readDirectState(first.state.executionState!, first.state);
@@ -186,7 +218,9 @@ describe("direct activities use code-owned mechanics", () => {
     const second = await f.act("使用刚才观察到的临时隔振方法", "inspector");
     const witnessed = second.committed.observations.find(packet => packet.observerId === "engineer")!;
     expect(witnessed.scene).toMatchObject({ actor: "检查员乔伊", actionKind: "use", outcome: "这次操作已完成。" });
-    expect(witnessed.summary).toContain("振动暂时隔离");
+    expect(witnessed.summary).not.toContain("振动暂时隔离");
+    const knownIsolation = Object.values(first.state.agents.engineer!.belief.claims).find(claim => claim.predicate === "vibration-isolation")!;
+    expect(second.state.agents.engineer!.belief.claims[knownIsolation.id]).toEqual(knownIsolation);
     expect(witnessed.summary).not.toContain("已执行的方法");
     expect(witnessed.summary).toMatch(/^检查员乔伊的行动结果：/u);
     expect(readDirectState(second.state.executionState!, second.state).capabilities).toHaveLength(1);
