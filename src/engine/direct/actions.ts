@@ -108,7 +108,8 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const quotes = literalUtterances(text);
   const { knowledge, memory } = view.state as unknown as { knowledge: AgentPerspectiveView["knowledge"];
     memory: { summary: string; important: MemoryEpisode[] } };
-  const observedNumbers = knowledge.evidence.filter(evidence => evidence.step >= agent.observationCursorStep).flatMap(evidence => literalNumbers(evidence.description));
+  // The observation cursor marks processing progress, not the end of retained memory.
+  const observedNumbers = knowledge.evidence.flatMap(evidence => literalNumbers(evidence.description));
   const rememberedNumbers = literalNumbers([memory.summary, ...memory.important.map(item => item.evidence.description)].join("\n"));
   const amounts = [...new Set([1, ...literalNumbers(text), ...observedNumbers, ...rememberedNumbers, ...goals.flatMap(goal => literalNumbers(goal.description))])];
   const known = Object.entries(view.entities).map(([localId]) => [localId, agent.belief.localEntities[localId]!] as const);
@@ -136,7 +137,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       target: "The selected entity; self inspects the actor's own possessions", surroundings: "The immediate surroundings",
       ...(external ? { inventory: "The actor's own actual inventory and resources" } : {}),
     }),
-    recipient: choice("If the next action communicates words or transfers goods, select its actual recipient. For an NPC reply, use the speaker of the latest interaction addressed to this NPC, not another person mentioned in that question or the listener in an old exchange. Discover a recipient before addressing an unknown person. Ignore for other operations.", recipientCriteria),
+    recipient: choice("If the next action communicates words or transfers goods, select its actual recipient. A transfer goes to the intended payee or beneficiary of the established request or agreement, who may differ from the person requesting it. For a spoken NPC reply, use the speaker of the latest interaction addressed to this NPC, not another person merely mentioned in that question or the listener in an old exchange. Discover a recipient before addressing an unknown person. Ignore for other operations.", recipientCriteria),
     ...(known.length ? { search_location: choice("If the intended recipient has not yet been seen, where does this request seek them? A shopkeeper is sought in that shop, not among unrelated people in the surrounding district. Select a known place, shop, building or landmark to inspect or search around; none means the current surroundings. Entity kinds are world-defined and do not restrict which object can be a search focus.", {
       none: "Current surroundings; no more specific known place",
       ...Object.fromEntries(known.map(([id, entity]) => [id, { name: entity.name, description: entity.description }])),

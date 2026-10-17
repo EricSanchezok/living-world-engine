@@ -10,8 +10,10 @@ import { replaySimulationState } from "../../runtime/transaction";
 import { quantityId } from "../../runtime/runtime-id";
 import type { PolicyBinding, WorldAdvanceRequest } from "../../runtime/execution";
 import { WorldQuiescentError } from "../../runtime/execution";
-import { readDirectState } from "../state";
-import { speechSpans, literalNumbers, literalDurations } from "../actions";
+import { readDirectState, readyIntent } from "../state";
+import { chooseAction, speechSpans, literalNumbers, literalDurations } from "../actions";
+import { DirectDecisions } from "../decisions";
+import { toWorldRuntimeContract } from "../../runtime/world-definition";
 import { applyDirectCognition } from "../cognition";
 import { privateActionView } from "../views";
 import { contentHash } from "../../models/model-audit";
@@ -1465,6 +1467,35 @@ describe("direct world through the actual simulation entry", () => {
     const restored = new SimulationEngine(f.world, f.algorithm, JSON.parse(JSON.stringify(result.state)));
     expect(restored.snapshot.truth.quantities[player]!.amount).toBe(1);
     expect(replaySimulationState(result.state)).toEqual(result.state); expect(f.transport).toHaveBeenCalledTimes(3);
+  });
+  it("retains a remembered payment amount after newer observations without reading another mind", async () => {
+    const options: Parameters<typeof fixture>[0] = { operation: "speak", target: "guard", recipient: "guard", speech: "input" };
+    const f = await fixture(options);
+    f.world.initialState.agents.keeper!.belief.evidence["agreed-price"] = {
+      id: "agreed-price", kind: "testimony", description: "先前约定向旅人支付 7 枚灵石。", sourceId: "traveler", step: 0,
+    };
+    f.world.initialState.agents.player!.belief.evidence["private-price"] = {
+      id: "private-price", kind: "observation", description: "另一个私下报价是 113 枚灵石。", sourceId: "self", step: 0,
+    };
+    f.world.historyBaseHash = historyReplayBaseHash(f.world.initialState);
+    const engine = new SimulationEngine(f.world, f.algorithm);
+    await engine.bootstrapAgents();
+    const result = await engine.step(f.roster, f.request("早上好。"));
+    const state = result.state, keeper = state.agents.keeper!;
+    expect(keeper.observationCursorStep).toBeGreaterThan(keeper.belief.evidence["agreed-price"]!.step);
+    const control = readDirectState(state.executionState!, state);
+    control.intents.keeper = readyIntent("observation");
+    Object.assign(options, { operation: "transfer", target: "traveler", recipient: "traveler", amount: "n7", keeperInitiative: true });
+    const decisions = new DirectDecisions(f.gateway, control, { workloadId: "remembered-payment", batchId: "keeper-payment",
+      runtimeIdentity: { worldHash: state.worldHash, revision: state.revision } });
+    const chosen = await chooseAction({ state, definition: toWorldRuntimeContract(f.world), control,
+      decisions, agentId: "keeper", creationEnabled: false });
+    const question = decisions.uses[0]!.batch.questions.amount!;
+    expect(question.type).toBe("choice");
+    if (question.type !== "choice") throw new Error("amount must be a choice");
+    expect(question.criteria).toHaveProperty("n7");
+    expect(question.criteria).not.toHaveProperty("n113");
+    expect(chosen.frame).toMatchObject({ kind: "transfer", targetEntityId: "player", amount: 7, quantityDefinitionId: "spirit-stone" });
   });
   it("extracts complete Chinese numerals regardless of the following classifier", () => {
     expect(literalNumbers("两节电池，十六瓶水，二十五张纸，两百零三根线，三点五升液体"))
