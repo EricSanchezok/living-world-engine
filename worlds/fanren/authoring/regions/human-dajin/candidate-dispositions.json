@@ -3,7 +3,7 @@
   "moduleId": "human-dajin",
   "queueInputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
   "status": "editorial-dispositions-not-release-approval",
-  "reviewer": "source_completion/direct-source-and-exact-reviewed-record-reuse/2026-10-17",
+  "reviewer": "source_completion/direct-source-and-exact-reviewed-record-reuse/2026-10-18",
   "records": [
     {
       "candidateId": "batch-0087-object-0003",
@@ -30663,9 +30663,13 @@
       "candidateId": "batch-0194-object-0011",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“风老怪”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-feng-laoguai",
+        "dajin-elders-at-opening",
+        "future-dajin-feng-pursuit"
+      ],
+      "reason": "与现有风老怪同一主体，不另造阴罗宗修士。此段化神显露、为被杀后裔追逐韩立月余，是韩立元婴后期的具体遭遇；开篇修为仍使用已明确标为标定的既有档案，不继承这段追杀、损耗或宝物库存。",
       "evidence": [
         {
           "chapterId": "qq-27586588",
@@ -30677,15 +30681,19 @@
         {
           "chapterId": "qq-27586588",
           "chapterSha256": "4a6d5b8edb184ebdca570bfd9435bf6ea7e6c34b3595475e3afc676200fa3627",
-          "start": 177,
-          "end": 254,
-          "anchorSha256": "154d0ced5cc1aed4ebf76b4261636b9080609089530c9aa0c7798ea274f581d4"
+          "start": 1179,
+          "end": 1205,
+          "anchorSha256": "0d3ab4f4305f1f2562bb151402e41e0621af9be9d5dc2f21678ce1f6d8003f39"
+        },
+        {
+          "chapterId": "qq-27586588",
+          "chapterSha256": "4a6d5b8edb184ebdca570bfd9435bf6ea7e6c34b3595475e3afc676200fa3627",
+          "start": 2912,
+          "end": 2970,
+          "anchorSha256": "c43fe72d3cc4ec79e0ca4b147dab288662229898e005d806719df8893c0fd055"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -31666,9 +31674,12 @@
       "candidateId": "batch-0194-fact-0047",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“风老怪”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-feng-laoguai",
+        "future-dajin-feng-pursuit"
+      ],
+      "reason": "归档后期追逐及当场伪装修为的复合事件；实际化神与显露元婴初期须区分。后期追杀不成为开篇对韩立的敌意，亦不据叙述日期否定风老怪本体早已存在。",
       "evidence": [
         {
           "chapterId": "qq-27586588",
@@ -31692,26 +31703,26 @@
           "anchorSha256": "75691fe027295fe9e2c6891bdf2ee2df2d472ee352eed9def828390196a5b6e4"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0048",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“风老怪”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-feng-laoguai",
+        "future-dajin-feng-pursuit"
+      ],
+      "reason": "原文明示被杀者是隔代后裔，因阴罗宗当次遇袭求助才获得护送及辨认秘术。本条按该次庇护事件归档，不前置后裔求助、秘术或韩立仇怨；也不由亲属关系推成风老怪加入阴罗宗，未具名后裔的开篇存亡不在此定案。",
       "evidence": [
         {
           "chapterId": "qq-27586588",
           "chapterSha256": "4a6d5b8edb184ebdca570bfd9435bf6ea7e6c34b3595475e3afc676200fa3627",
-          "start": 2728,
-          "end": 2767,
-          "anchorSha256": "12408f2fae366bb46fb2dc677efdd2b6069cbc53daa0bbb9d089e7d18b8f3f1c"
+          "start": 2606,
+          "end": 2727,
+          "anchorSha256": "27c13a25e5c6f4d61671a4d83fb0fb7cc2ab8fbfbd7b1e0c5b5c434f20a1464d"
         },
         {
           "chapterId": "qq-27586588",
@@ -31719,21 +31730,28 @@
           "start": 2768,
           "end": 2911,
           "anchorSha256": "3db542270fdee774ffc17fd8ef059dee7ff18a7e2f3e3446200583c7a323d709"
+        },
+        {
+          "chapterId": "qq-27586588",
+          "chapterSha256": "4a6d5b8edb184ebdca570bfd9435bf6ea7e6c34b3595475e3afc676200fa3627",
+          "start": 2912,
+          "end": 2970,
+          "anchorSha256": "c43fe72d3cc4ec79e0ca4b147dab288662229898e005d806719df8893c0fd055"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0194-fact-0052",
       "batchId": "batch-0194",
       "reportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-han-li",
+        "future-dajin-feng-pursuit"
+      ],
+      "reason": "这是元婴后期韩立遭遇风老怪后改变潜伏计划的当时判断。“唯一忌惮”保留为该阶段人物认识，既非世界危险上限，也不赋予十岁开篇韩立修为或相同认识。",
       "evidence": [
         {
           "chapterId": "qq-27586588",
@@ -31743,10 +31761,7 @@
           "anchorSha256": "e70497919a82d3b37909a9472405ad18db1da3d9472e7c7bc15450675eb1af1f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -31963,36 +31978,35 @@
       "candidateId": "batch-0195-object-0001",
       "batchId": "batch-0195",
       "reportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-han-li"
+      ],
+      "reason": "映射唯一韩立；候选中元婴后期、通天灵宝、灭仙珠及与向之礼等人的旧交属于该段后期状态。只合并身份，不覆盖原著开篇十岁、无后期修炼经历与装备的初始档案。",
       "evidence": [
         {
           "chapterId": "qq-27595545",
           "chapterSha256": "7300eb04cef112bae90bdce57be706eb3025a573e52390e7ba528e29082fdef2",
           "start": 26,
-          "end": 138,
-          "anchorSha256": "179ef82a811c4aec302a872fcd2501836131e292a09639507089eece7cd04c4c"
+          "end": 167,
+          "anchorSha256": "ce24a7c52cb7d318d195e8712a887b01f53e2a9800ad1bbb3ed90f7866048cd3"
         },
         {
           "chapterId": "qq-27595545",
           "chapterSha256": "7300eb04cef112bae90bdce57be706eb3025a573e52390e7ba528e29082fdef2",
-          "start": 1619,
-          "end": 1673,
-          "anchorSha256": "3d7dac1e98cd666bd29ffb00804756b39cf82b1a0d15974aae3f89d0316e8419"
+          "start": 2735,
+          "end": 2896,
+          "anchorSha256": "d5e0a410ca1ad5e16a7a94369da3b04b1e3f7274255b93c7ef12411b2211321f"
         },
         {
           "chapterId": "qq-27621026",
           "chapterSha256": "6fbc4f12452298dab6bab2a18cab3da24624175aa0bfb89d44c5c75ff407db1c",
-          "start": 377,
-          "end": 455,
-          "anchorSha256": "2824eade43145555a33425865aa7822feb3710ac1ba11bb0e37852d3ac7dfa32"
+          "start": 0,
+          "end": 128,
+          "anchorSha256": "02ede43e879c42ddbb3716a80e44fdc2afb941bf840af84f6d80faea06ada5bf"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -32136,17 +32150,12 @@
       "candidateId": "batch-0195-object-0005",
       "batchId": "batch-0195",
       "reportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“紫灵”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-ziling-captivity"
+      ],
+      "reason": "本候选叙述紫灵数年前被擒、受禁制并将被纳妾的后期处境，归档到魔陀山遭遇索引。正文为紫灵自述非自愿，且韩立现场识出禁制；不生成开篇囚禁关系或强制营救任务。本次不据事件尚未发生推断紫灵开篇未出生。",
       "evidence": [
-        {
-          "chapterId": "qq-27621026",
-          "chapterSha256": "6fbc4f12452298dab6bab2a18cab3da24624175aa0bfb89d44c5c75ff407db1c",
-          "start": 2776,
-          "end": 2879,
-          "anchorSha256": "2b20e74d6e7f4596f67e6ffdd987d41d2560cf1bff4b8a1fd9dec2587f638032"
-        },
         {
           "chapterId": "qq-27628060",
           "chapterSha256": "1f2bb943f485104f0cbe0f929e98ae862d514a781b17f602c644ede8ae63f853",
@@ -32162,10 +32171,7 @@
           "anchorSha256": "77b6b9e65f2a561e88ac2412b6046fd71345e28d9a763aed32a951eb83d8a40d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -32841,9 +32847,12 @@
       "candidateId": "batch-0195-fact-0022",
       "batchId": "batch-0195",
       "reportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“阴罗宗”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "history-only",
+      "targetIds": [
+        "dajin-yinluo-sect",
+        "dajin-yinluo-history"
+      ],
+      "reason": "保留呼庆雷回顾阴罗宗曾据魔道第一数千年的历史说法；原文此处是人物发言，不能升级为无条件旁白或复制成开篇即时排名。另章旁白说明呼庆雷一千多年前已推动天魔宗登顶，二者是先后盛衰材料，不是两个宗门永远同时第一。",
       "evidence": [
         {
           "chapterId": "qq-27615920",
@@ -32851,12 +32860,16 @@
           "start": 378,
           "end": 491,
           "anchorSha256": "c9fbfbbe1d892bd609da96c3429eb522c0a3777e43af824aa712353ddd54b031"
+        },
+        {
+          "chapterId": "qq-27609702",
+          "chapterSha256": "1540197369d8809ef3ef17d47d5bab73ed1e4ea318e385a360709ead642a2453",
+          "start": 2938,
+          "end": 3007,
+          "anchorSha256": "00b8f3a62cba95f0138becab36818f6d1c38a07c32c93787d2b08daa78bb0640"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -33106,38 +33119,40 @@
       "candidateId": "batch-0195-fact-0043",
       "batchId": "batch-0195",
       "reportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“紫灵”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-ziling-captivity"
+      ],
+      "reason": "逐句确认这是紫灵对数年前被天魔宗长老擒掠的自述，不能改写成自愿婚配。该绑缚与禁制属于元婴后期韩立赴魔宫时的处境，开篇不写入；也不把此例扩成所有魔道修士必然如此行事。",
       "evidence": [
-        {
-          "chapterId": "qq-27628060",
-          "chapterSha256": "1f2bb943f485104f0cbe0f929e98ae862d514a781b17f602c644ede8ae63f853",
-          "start": 2333,
-          "end": 2455,
-          "anchorSha256": "77b6b9e65f2a561e88ac2412b6046fd71345e28d9a763aed32a951eb83d8a40d"
-        },
         {
           "chapterId": "qq-27628060",
           "chapterSha256": "1f2bb943f485104f0cbe0f929e98ae862d514a781b17f602c644ede8ae63f853",
           "start": 1084,
           "end": 1114,
           "anchorSha256": "5f4672954316ab0d6d23304d7e9fb3ae4afe8732dfb978d4e4235fb739bf1c6f"
+        },
+        {
+          "chapterId": "qq-27628060",
+          "chapterSha256": "1f2bb943f485104f0cbe0f929e98ae862d514a781b17f602c644ede8ae63f853",
+          "start": 2333,
+          "end": 2455,
+          "anchorSha256": "77b6b9e65f2a561e88ac2412b6046fd71345e28d9a763aed32a951eb83d8a40d"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0195-fact-0050",
       "batchId": "batch-0195",
       "reportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“呼庆雷”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-hu-qinglei",
+        "future-dajin-yinluo-aftermath"
+      ],
+      "reason": "保留呼庆雷席间对未知袭击者的判断及若再次出手将介入的条件性表态。下一章向之礼传音后，他才得知韩立所为；不能把前一判断当全知事实、现行必执行事件，或提前写入开篇认知。",
       "evidence": [
         {
           "chapterId": "qq-27615920",
@@ -33145,12 +33160,16 @@
           "start": 672,
           "end": 823,
           "anchorSha256": "32185f1e7efb0c65bde8af18b00e54593af6dbbcf56c9aaf3cb0e8e5ea01e852"
+        },
+        {
+          "chapterId": "qq-27621026",
+          "chapterSha256": "6fbc4f12452298dab6bab2a18cab3da24624175aa0bfb89d44c5c75ff407db1c",
+          "start": 0,
+          "end": 128,
+          "anchorSha256": "02ede43e879c42ddbb3716a80e44fdc2afb941bf840af84f6d80faea06ada5bf"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -33374,60 +33393,33 @@
       "candidateId": "batch-0195-issue-0012",
       "batchId": "batch-0195",
       "reportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“七八名阴罗宗长老消息来源”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-dajin-yinluo-aftermath"
+      ],
+      "reason": "已直接核定发言主体：七八名元婴长老及房道友陨落的消息由锦袍大汉在席间说出，随后呼庆雷答话；此时向之礼三人尚未到席。保留其传闻性质，不再把消息来源误记为向之礼。",
       "evidence": [
         {
           "chapterId": "qq-27615920",
           "chapterSha256": "dcf6dd729da9ade52411348c7b592910f985ff9e48e58f5d78b25806328a407d",
           "start": 541,
-          "end": 671,
-          "anchorSha256": "a86afdd26f37891117770922c16a38935f569111c54fcc941282e55977e1e3ab"
+          "end": 823,
+          "anchorSha256": "db031e665e43085fa89ea4df3707e79be7ae91cf33803293e4e8b2e7b1aeeb9e"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0196-object-0001",
       "batchId": "batch-0196",
       "reportHash": "95ff4223c34cb64de100786a99953fc6677e24c93bf93b663526dd25921996fd",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
-      "evidence": [
-        {
-          "chapterId": "qq-27636819",
-          "chapterSha256": "f7ce58a98de4c6985b10e9d00f5ef9f3bc74cd8e56475e5ce1ec899954984ba3",
-          "start": 867,
-          "end": 928,
-          "anchorSha256": "a43f070dcefb79db741570ed2af7ef52cc169d1cdf53b7bf91ce24700aaec94b"
-        },
-        {
-          "chapterId": "qq-27672933",
-          "chapterSha256": "393e81541ed4497955dae91ee85a4a006a257c56551472959ee89cf8e9440e82",
-          "start": 2705,
-          "end": 2816,
-          "anchorSha256": "2333621e6b8eec02649f37056275d4ccbe5640624ad89fb5cf62f34fca07c529"
-        }
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-han-li",
+        "future-dajin-ziling-captivity"
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
-      "destinationModule": null
-    },
-    {
-      "candidateId": "batch-0196-object-0003",
-      "batchId": "batch-0196",
-      "reportHash": "95ff4223c34cb64de100786a99953fc6677e24c93bf93b663526dd25921996fd",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“呼老魔”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "reason": "仍为唯一韩立；元婴后期、救紫灵、寻找太阳精火及所持异宝均是后期阶段，不写成新的韩立实体，也不倒灌到开篇能力、物品或已完成行动。",
       "evidence": [
         {
           "chapterId": "qq-27636819",
@@ -33437,17 +33429,58 @@
           "anchorSha256": "7715ded8743a8112c03633ef66abfc09594a1d7ce3ff3146f03e72ab374c1747"
         },
         {
-          "chapterId": "qq-27638598",
-          "chapterSha256": "a4d110abcaae96b2bab5096005173d4d5e2f5c9c6f6bad48573417d5471ed902",
-          "start": 682,
-          "end": 742,
-          "anchorSha256": "abaf52eb5acd536ed05517cf49f5197a796afb52140ab1c21c7c61627904cafd"
+          "chapterId": "qq-27672933",
+          "chapterSha256": "393e81541ed4497955dae91ee85a4a006a257c56551472959ee89cf8e9440e82",
+          "start": 605,
+          "end": 651,
+          "anchorSha256": "2d97e8fdc513ff12679540d4b2c7d48a12c028319800c00aaca27e5e8f6eaf8f"
+        },
+        {
+          "chapterId": "qq-27672933",
+          "chapterSha256": "393e81541ed4497955dae91ee85a4a006a257c56551472959ee89cf8e9440e82",
+          "start": 2679,
+          "end": 2704,
+          "anchorSha256": "0421856f934b31457e6fec74095aecceab3d52bff60f1207d572c24620f96d61"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0196-object-0003",
+      "batchId": "batch-0196",
+      "reportHash": "95ff4223c34cb64de100786a99953fc6677e24c93bf93b663526dd25921996fd",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-hu-qinglei",
+        "dajin-hu-qinglei",
+        "future-dajin-ziling-captivity"
+      ],
+      "reason": "呼老魔与既有呼庆雷同一魔宫主人、天魔宗太上长老。补读交手段确认卷轴异宝在此次交手确有使用，但风老怪明确说他前不久新得；该后期器物不得仅由人物常驻身份前置为开篇装备。",
+      "evidence": [
+        {
+          "chapterId": "qq-27636819",
+          "chapterSha256": "f7ce58a98de4c6985b10e9d00f5ef9f3bc74cd8e56475e5ce1ec899954984ba3",
+          "start": 722,
+          "end": 814,
+          "anchorSha256": "7715ded8743a8112c03633ef66abfc09594a1d7ce3ff3146f03e72ab374c1747"
+        },
+        {
+          "chapterId": "qq-27648726",
+          "chapterSha256": "9cc84636174501601bb4825de5b2ec722b63a17d2c09b9637de27348975f3636",
+          "start": 105,
+          "end": 227,
+          "anchorSha256": "5ebd35269606581c8b9117946e1bf245c551c76085ca457e93358c02ce354677"
+        },
+        {
+          "chapterId": "qq-27648726",
+          "chapterSha256": "9cc84636174501601bb4825de5b2ec722b63a17d2c09b9637de27348975f3636",
+          "start": 328,
+          "end": 362,
+          "anchorSha256": "176428aeb841efa66e3ade1c6866b802853c597c79d9ecc226ba15ccb32e9dd0"
+        }
+      ],
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -33606,9 +33639,13 @@
       "candidateId": "batch-0196-object-0017",
       "batchId": "batch-0196",
       "reportHash": "95ff4223c34cb64de100786a99953fc6677e24c93bf93b663526dd25921996fd",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“魔陀山”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-motuo",
+        "dajin-hu-qinglei",
+        "future-dajin-ziling-captivity"
+      ],
+      "reason": "魔陀山复用既有地点，其魔宫与呼庆雷关系已有回溯依据。韩立携紫灵下山是后期行动，不能将地点本身误判为未来才出现，也不能将离山结果写成开篇必然剧情。",
       "evidence": [
         {
           "chapterId": "qq-27638598",
@@ -33625,10 +33662,7 @@
           "anchorSha256": "2d97e8fdc513ff12679540d4b2c7d48a12c028319800c00aaca27e5e8f6eaf8f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -34055,9 +34089,12 @@
       "candidateId": "batch-0197-object-0013",
       "batchId": "batch-0197",
       "reportHash": "87af0b18d4755873973c3c1b6c90bfc03aa0f1c92e2537c9e717099fc1f0ede3",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“紫灵”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-ziling-captivity",
+        "future-dajin-moyuan-trade"
+      ],
+      "reason": "此处紫灵只作为韩立已完成营救、随后换丹的回顾背景，沿用同一遭遇索引，不增造另一位紫灵或开篇关系。其开篇出生和所在仍不由这条后期回顾确定。",
       "evidence": [
         {
           "chapterId": "qq-27700164",
@@ -34067,48 +34104,48 @@
           "anchorSha256": "210f2cc3829a7f069749bd235a44b1a8acbc31b796f1f027d218bffaf7a5ea9f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0197-object-0014",
       "batchId": "batch-0197",
       "reportHash": "87af0b18d4755873973c3c1b6c90bfc03aa0f1c92e2537c9e717099fc1f0ede3",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“呼老魔”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-hu-qinglei",
+        "future-dajin-moyuan-trade"
+      ],
+      "reason": "呼老魔映射唯一呼庆雷；三颗魔元丹与近半玄玉的交易属于韩立后期离山前，不能自动扣入或添入开篇任一方库存，也不生成第二魔修。",
       "evidence": [
         {
           "chapterId": "qq-27700164",
           "chapterSha256": "c56034a7f468bf26d19245a2cb6055cd4dd50cd2faffa7bd6c84140d3fbb21af",
           "start": 906,
-          "end": 1005,
-          "anchorSha256": "210f2cc3829a7f069749bd235a44b1a8acbc31b796f1f027d218bffaf7a5ea9f"
+          "end": 1127,
+          "anchorSha256": "4d9357618420f69dcfc37c46cab57a2408e72a43bc477690c68e2c7e84207605"
         },
         {
           "chapterId": "qq-27700164",
           "chapterSha256": "c56034a7f468bf26d19245a2cb6055cd4dd50cd2faffa7bd6c84140d3fbb21af",
-          "start": 1035,
-          "end": 1127,
-          "anchorSha256": "6e21b953388f4e2b11bc097199c588d7a848ec02c2096e7407213811b3ac419d"
+          "start": 1198,
+          "end": 1221,
+          "anchorSha256": "11e7508cded91785282725797b03d803c29a2bbd78a5daf0a40fb08e45803d1a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0197-object-0015",
       "batchId": "batch-0197",
       "reportHash": "87af0b18d4755873973c3c1b6c90bfc03aa0f1c92e2537c9e717099fc1f0ede3",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“向之礼”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-xiang-zhili",
+        "future-dajin-moyuan-trade"
+      ],
+      "reason": "向之礼沿用既有人物身份；向韩立介绍魔元丹并见证交易是后期相交关系，不能据该候选令开篇向之礼认识韩立或已经参与交换。",
       "evidence": [
         {
           "chapterId": "qq-27700164",
@@ -34125,10 +34162,7 @@
           "anchorSha256": "11e7508cded91785282725797b03d803c29a2bbd78a5daf0a40fb08e45803d1a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -34288,9 +34322,13 @@
       "candidateId": "batch-0197-object-0061",
       "batchId": "batch-0197",
       "reportHash": "87af0b18d4755873973c3c1b6c90bfc03aa0f1c92e2537c9e717099fc1f0ede3",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“魔陀山”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-motuo",
+        "future-dajin-ziling-captivity",
+        "future-dajin-moyuan-trade"
+      ],
+      "reason": "这是既有魔陀山在营救与换丹回顾中的重复地名，不新建地点。地理存在与韩立后期到访分开；事件索引保留，开篇无已发生的营救和交易。",
       "evidence": [
         {
           "chapterId": "qq-27700164",
@@ -34300,10 +34338,7 @@
           "anchorSha256": "210f2cc3829a7f069749bd235a44b1a8acbc31b796f1f027d218bffaf7a5ea9f"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -34375,16 +34410,21 @@
       "candidateId": "batch-0197-fact-0031",
       "batchId": "batch-0197",
       "reportHash": "87af0b18d4755873973c3c1b6c90bfc03aa0f1c92e2537c9e717099fc1f0ede3",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-han-li",
+        "canon-hu-qinglei",
+        "canon-xiang-zhili",
+        "future-dajin-moyuan-trade"
+      ],
+      "reason": "确认三颗魔元丹、近半万年玄玉、向之礼在场的同一次后期交换。“近半”没有精确物量，不能转成确定数值；本次只归档交易，不更改开篇物权、库存或预设将来必须成交。",
       "evidence": [
         {
           "chapterId": "qq-27700164",
           "chapterSha256": "c56034a7f468bf26d19245a2cb6055cd4dd50cd2faffa7bd6c84140d3fbb21af",
           "start": 906,
-          "end": 1005,
-          "anchorSha256": "210f2cc3829a7f069749bd235a44b1a8acbc31b796f1f027d218bffaf7a5ea9f"
+          "end": 1127,
+          "anchorSha256": "4d9357618420f69dcfc37c46cab57a2408e72a43bc477690c68e2c7e84207605"
         },
         {
           "chapterId": "qq-27700164",
@@ -34394,10 +34434,7 @@
           "anchorSha256": "11e7508cded91785282725797b03d803c29a2bbd78a5daf0a40fb08e45803d1a"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
