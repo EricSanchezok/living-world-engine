@@ -14,7 +14,7 @@ export function directCreationContext(wire: DirectTestWire): Record<string, unkn
 }
 
 export function directDecisionContext(wire: DirectTestWire): Pick<DirectTestWire, "state" | "questions"> | undefined {
-  if (wire.questions) return wire;
+  if (wire.questions) return { ...wire, state: (wire.state as { context: unknown }).context };
   const context = directCreationContext(wire);
   if (context.playerReading) return readingDecision(context.playerReading as TestReading);
   return context.decision as Pick<DirectTestWire, "state" | "questions"> | undefined;
@@ -41,7 +41,8 @@ export function directTestProvider(respond: (wire: DirectTestWire, call: number)
   const catalog = parseModelCatalog(source), registry = createTestModelRegistry(catalog);
   let calls = 0;
   const transport = vi.fn<typeof fetch>(async (_url, init) => {
-    const wire = JSON.parse(String(init?.body));
+    const body = JSON.parse(String(init?.body));
+    const wire = body.questions ? { ...body, state: body.state.context } : body;
     calls++;
     const decision = !wire.questions ? directCreationContext(wire).decision as { state: unknown; questions: Record<string, DecisionQuestionV2> } | undefined : undefined;
     const reading = !wire.questions ? directCreationContext(wire).playerReading as TestReading | undefined : undefined;

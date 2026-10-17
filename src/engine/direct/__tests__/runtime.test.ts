@@ -117,7 +117,7 @@ describe("direct world through the actual simulation entry", () => {
     if (delivered) {
       expect(received?.scene?.speech?.speaker).toBe("一个陌生的声音");
       expect(JSON.stringify(worker.belief)).not.toContain("PRIVATE-CODE");
-      expect(privateActionView(result.state, worker.id).state).toMatchObject({ conversation: [expect.objectContaining({ words: "请问这里能歇脚吗？" })] });
+      expect(privateActionView(result.state, worker.id).state).toMatchObject({ interactions: [expect.objectContaining({ utterance: "请问这里能歇脚吗？" })] });
     }
     const intent = readDirectState(result.state.executionState!, result.state).intents[worker.id]!;
     expect(intent.causeActionId).toBe(delivered ? result.committed.directEvent.frames[0]!.id : null);
@@ -271,8 +271,8 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.state.truth.elapsedSeconds).toBe(60);
     const worldWire = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).find(wire => wire.questions?.a0_duration);
     expect(worldWire.questions.a0_duration.criteria).not.toHaveProperty("planned");
-    expect(worldWire.state.actions[0]).toMatchObject({ durationSeconds: 0, dueAtSeconds: null });
-    expect(worldWire.state.temporalCalibrations).toEqual(f.world.initialState.truth.mechanics.temporalCalibrations);
+    expect(worldWire.state.context.actions[0]).toMatchObject({ durationSeconds: 0, dueAtSeconds: null });
+    expect(worldWire.state.context.temporalCalibrations).toEqual(f.world.initialState.truth.mechanics.temporalCalibrations);
     expect(f.transport).toHaveBeenCalledTimes(3);
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
@@ -689,11 +689,12 @@ describe("direct world through the actual simulation entry", () => {
     const result = await f.engine.step(f.roster, f.request("请先检查，然后告诉我你实际看到了什么。"));
     const view = privateActionView(result.state, "keeper").state;
     expect(view).toMatchObject({ interactions: [{ relation: "addressed_to_self", operation: "speak",
-      utterance: "请先检查，然后告诉我你实际看到了什么。", result: null }],
-      conversation: [{ relation: "addressed_to_self", words: "请先检查，然后告诉我你实际看到了什么。" }] });
+      utterance: "请先检查，然后告诉我你实际看到了什么。", result: null }] });
     const cause = result.state.history[0]!.directEvent!.frames[0]!.id;
-    expect(privateActionView(result.state, "keeper", cause).state).toMatchObject({ respondingTo: {
-      relation: "addressed_to_self", utterance: "请先检查，然后告诉我你实际看到了什么。" } });
+    const responding = privateActionView(result.state, "keeper", cause).state as { respondingTo: string; interactions: Array<{ id: string; utterance: string }> };
+    expect(responding.interactions.find(item => item.id === responding.respondingTo)?.utterance).toBe("请先检查，然后告诉我你实际看到了什么。");
+    expect(responding).not.toHaveProperty("conversation");
+    expect(responding).not.toHaveProperty("ownSpeechSinceLastRecipientReply");
     expect(privateActionView(result.state, "keeper", "unobserved-action").state).toMatchObject({ respondingTo: null });
     const playerView = privateActionView(result.state, "player").state;
     expect(playerView).toMatchObject({ interactions: [{ relation: "self" }] });
@@ -704,7 +705,7 @@ describe("direct world through the actual simulation entry", () => {
     for (const evidence of Object.values(forgotten.agents.keeper!.belief.evidence)) if (evidence.sourceId && keeperObservationIds.has(evidence.sourceId)) {
       delete forgotten.agents.keeper!.belief.evidence[evidence.id];
     }
-    expect(privateActionView(forgotten, "keeper", cause).state).toMatchObject({ interactions: [], conversation: [], respondingTo: null });
+    expect(privateActionView(forgotten, "keeper", cause).state).toMatchObject({ interactions: [], respondingTo: null });
   });
   it("closes an already executed submission without another action or time advance", async () => {
     const options = { operation: "wait", duration: "d0", playerProgress: "continue", interaction: "world_action",
@@ -1113,14 +1114,17 @@ describe("direct world through the actual simulation entry", () => {
     const readings = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => !wire.questions)
       .map(directCreationContext).filter(context => context.playerReading);
     const context = (readings.at(-1)!.playerReading as { state: Record<string, unknown> }).state;
-    expect((context.currentObservedFacts as unknown[]).length).toBeGreaterThan(0);
-    expect(context.currentObservedFacts).toEqual(expect.arrayContaining(Object.values(observed.state.agents.player!.belief.claims).map(claim =>
+    const claimsOf = (value: unknown) => (value as { perspective: { knowledge: { claims: unknown[] } } }).perspective.knowledge.claims;
+    expect(claimsOf(context).length).toBeGreaterThan(0);
+    expect(context).not.toHaveProperty("currentObservedFacts");
+    expect(context).not.toHaveProperty("latestObservedEvidence");
+    expect(claimsOf(context)).toEqual(expect.arrayContaining(Object.values(observed.state.agents.player!.belief.claims).map(claim =>
       expect.objectContaining({ predicate: claim.predicate, value: claim.value, stance: claim.stance }))));
-    expect(JSON.stringify(context.currentObservedFacts)).not.toContain("PRIVATE-CODE");
+    expect(JSON.stringify(claimsOf(context))).not.toContain("PRIVATE-CODE");
     const choices = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).map(directDecisionContext).filter(wire => wire?.questions.operation);
-    expect((choices.at(-1)!.state as Record<string, unknown>).currentObservedFacts).toEqual(context.currentObservedFacts);
+    expect(claimsOf(choices.at(-1)!.state)).toEqual(claimsOf(context));
     expect((choices.at(-1)!.state as Record<string, unknown>).recentActions).toEqual([expect.objectContaining({ target: "door", requested: "查看门的状态", actionKind: "observe" })]);
-    expect(JSON.stringify((choices.at(-1)!.state as Record<string, unknown>).currentObservedFacts)).not.toContain("PRIVATE-CODE");
+    expect(JSON.stringify(claimsOf(choices.at(-1)!.state))).not.toContain("PRIVATE-CODE");
     expect(JSON.stringify((choices.at(-1)!.state as Record<string, unknown>).recentActions)).not.toContain("canonicalEntityIds");
     expect(replaySimulationState(f.engine.snapshot)).toEqual(f.engine.snapshot);
   });

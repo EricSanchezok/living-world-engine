@@ -10,7 +10,7 @@ import { ModelOutputError, type StructuredModelResult } from "../models/model-pr
 import type { DecisionQuestionV2 } from "../models/decision-v2";
 import { runtimeId } from "../runtime/runtime-id";
 import { agentCapabilityModels } from "../models/capability-bindings";
-import { privateActionView } from "./views";
+import { privateActionView, type PrivateInteraction } from "./views";
 import { DirectDecisions, selected } from "./decisions";
 import type { ActionExpression, ActionFrame, ActionKind, DirectRuntimeState } from "./contracts";
 import { readPlayerAction } from "./player-reading";
@@ -25,9 +25,8 @@ const kinds: Record<ActionKind | "unknown" | "expand", string> = { move: "Travel
   change: "Change a state or access condition, including physically blocking or clearing a route", wait: "Listen without speaking, await an event or continue a long activity", unknown: "Cannot identify any next attempt, even a question or observation",
   expand: "A missing concept or capability is required" };
 const actionLabels: Record<ActionKind, string> = { move: "前往", observe: "观察", reflect: "思考", speak: "交谈", transfer: "交付", use: "使用", change: "调整", wait: "等待" };
-const sharedActionPolicy = "Apply state.actionPolicy and the current request/settled receipts in state. Answer this field independently; only the selected operation's parameters execute.";
 function choice(field: string, criteria: Record<string, string | Record<string, JsonValue> | JsonValue[] | null>): DecisionQuestionV2 {
-  return { type: "choice", version: "direct-action-2", instructions: { task: sharedActionPolicy, field }, criteria };
+  return { type: "choice", version: "direct-action-3", instructions: { field }, criteria };
 }
 export function literalNumbers(text: string): number[] {
   const values = [...text.matchAll(/(?:^|[^\d.])(\d+(?:\.\d+)?)(?![\d.])/gu)].map(match => Number(match[1]));
@@ -175,11 +174,11 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     ...Object.fromEntries(durations.map((duration, index) => [`d${index}`, duration])),
   });
   questions.expression = { type: "noul", version: "action-expression-1",
-    instructions: { task: sharedActionPolicy, field: "Does THIS selected next action need a meaningful physical delivery, gesture, tactic or separation from a compound request beyond choosing new words? Ordinary conversation and new wording alone need none. Select true for an intentional physical manner that changes this interaction, or an explicitly requested gesture. Routine glances, nods and clothing adjustments are not required by speech." } };
-  if (!external) questions.urgency = { type: "score", version: "urgency-1", instructions: { task: sharedActionPolicy, field: "urgency of the next action" },
+    instructions: { field: "Does THIS selected next action need a meaningful physical delivery, gesture, tactic or separation from a compound request beyond choosing new words? Ordinary conversation and new wording alone need none. Select true for an intentional physical manner that changes this interaction, or an explicitly requested gesture. Routine glances, nods and clothing adjustments are not required by speech." } };
+  if (!external) questions.urgency = { type: "score", version: "urgency-1", instructions: { field: "urgency of the next action" },
     criteria: ["May reasonably wait", "Should act when available", "Immediate deadline or danger"] };
   if (!external && intent.lastActionHash && intent.wakeReasons.includes("observation")) questions.relevant = { type: "noul", version: "wake-relevance-1",
-    instructions: { task: sharedActionPolicy, field: "Does the new private situation offer a meaningful next step for this NPC's goals or commitments, or call for a response? Direct questions, corrections and received payment are relevant even if the answer is unknown. An opportunity can matter without being addressed to the NPC; unchanged background need not trigger repeated activity." } };
+    instructions: { field: "Does the new private situation offer a meaningful next step for this NPC's goals or commitments, or call for a response? Direct questions, corrections and received payment are relevant even if the answer is unknown. An opportunity can matter without being addressed to the NPC; unchanged background need not trigger repeated activity." } };
   if (resources.length) questions.resource = choice("resource", { none: "No quantified resource", ...Object.fromEntries(resources.map(id => [id, state.truth.mechanics.quantities[id]!.name])) });
   if (!jointInterpretation) for (const [index, resourceId] of resources.entries()) {
     const resource = state.truth.mechanics.quantities[resourceId]!;
@@ -218,26 +217,21 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     }));
   });
   const currentRequestReceipts = external ? recentActions.filter(action => action.submissionId === external.submissionId) : [];
-  const currentObservedFacts = claims.map(claim => ({ subject: agent.belief.localEntities[claim.subjectId]?.name,
-    localEntityId: claim.subjectId, predicate: claim.predicate, value: claim.value, description: claim.description, stance: claim.stance,
-    evidence: claim.evidenceIds.map(id => agent.belief.evidence[id]).filter(Boolean).map(item => ({ kind: item!.kind, step: item!.step })) }));
   const actionPolicy = jointInterpretation ? "Interpret all fields jointly as one next interaction. Current receipts distinguish requested steps from executed work."
     : loadPromptAsset("user/direct-action.md");
   const context = { actionPolicy, temporalCalibrations: state.truth.mechanics.temporalCalibrations, perspective: view.state, submittedAction: external ? { ...external, discourse: undefined } : null, discourse: external?.discourse ?? null, currentRequestReceipts,
     requestPhase: currentRequestReceipts.length ? "Continue this same submission after its listed receipts" : "New submission: none of this input has executed. Earlier similar actions belong to other requests.",
     recentActions: recentActions.slice(-6).map(({ requested, target, actionKind, attempted, outcome, preparatoryFor }) => ({ requested, target, actionKind, attempted, outcome, preparatoryFor })),
-    currentObservedFacts, intent: { goalId: intent.goalId, wakeReasons: intent.wakeReasons,
-    recentOutcomeIds: intent.recentOutcomeIds }, latestObservedEvidence: knowledge.evidence.filter(evidence => evidence.step === agent.observationCursorStep),
+    ...(external ? { priorRequests: recentActions.filter(action => action.submissionId !== external.submissionId).slice(-3)
+      .map(({ requested, target, outcome }) => ({ requested, target, outcome })) } : {}),
+    intent: { goalId: intent.goalId, wakeReasons: intent.wakeReasons,
+    recentOutcomeIds: intent.recentOutcomeIds }, latestEvidenceIds: knowledge.evidence.filter(evidence => evidence.step === agent.observationCursorStep).map(evidence => evidence.id),
     actionKinds: kinds } as unknown as JsonValue;
   if (external) for (const id of ["operation", "target", "recipient", "amount", "resource", "transfer_authority", "capability", "search_location", "observation_scope", ...Object.keys(questions).filter(id => id.startsWith("progress_"))]) {
     const item = questions[id]; if (!item) continue;
-    item.instructions = { ...item.instructions as Record<string, JsonValue>, currentPlayerRequest: external.rawText,
-      actualHoldings: (view.state as { mechanics: { quantities: JsonValue } }).mechanics.quantities,
-      settledSteps: currentRequestReceipts.map(receipt => ({ kind: receipt.actionKind, target: receipt.target,
-        outcome: receipt.outcome, actualObservations: receipt.observed })) };
+    item.instructions = { ...item.instructions as Record<string, JsonValue>,
+      context: "Use submittedAction.rawText, perspective.mechanics.quantities and currentRequestReceipts from the shared state; retain their restrictions and distinguish attempted from settled work." };
     if (["recipient", "target", "search_location"].includes(id)) item.instructions = { ...item.instructions as Record<string, JsonValue>,
-      recentRequests: recentActions.filter(action => action.submissionId !== external.submissionId).slice(-3)
-        .map(({ requested, target, outcome }) => ({ requested, target, outcome })),
       referenceRule: "Resolve the intended local identity against the actual published exchanges, their stable mentions and delivered speakers. Corrections may replace a preceding focus. A prior unsuccessful search does not automatically override the current conversational addressee. If more than one interpretation genuinely remains, preserve uncertainty instead of substituting another person." };
   }
   const inputHash = contentHash({ perspective: view.state, submittedAction: external ?? null, goal: intent.goalId });
@@ -344,8 +338,6 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
         selectedAction: { kind: operation, targetLocalId: view.entities[targetKey] ? targetKey : null,
           toolLocalId: view.entities[selected(answers, "tool")] ? selected(answers, "tool") : null,
           capabilityId: questions.capability && selected(answers, "capability") !== "none" ? selected(answers, "capability") : null },
-        currentPlayerRequest: external?.rawText ?? null,
-        currentHoldings: (view.state as { mechanics: { quantities: JsonValue } }).mechanics.quantities,
         exactQuotes: quotes, expression: operation === "reflect" ? "Private reflection; do not deliver to anyone." : wordsOnly
           ? "This action is an ordinary spoken reply. Supply its actual words; attempt and manner can be omitted. No accompanying physical gesture is selected."
           : "Concrete attempted behavior and actual words before execution. Outcomes are not yet decided.",
@@ -370,10 +362,11 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       utterance: literal && external && (operation === "speak" || generated.value.utterance?.trim()) ? literal : generated.value.utterance?.trim() || null,
       manner: wordsOnly ? null : generated.value.manner?.trim() || null };
     utterance = expression.utterance; audits.push(generated.audit);
-    const awaitingReply = (view.state as { ownSpeechSinceLastRecipientReply: Array<{ recipientLocalId: string; words: string }> }).ownSpeechSinceLastRecipientReply;
-    const stimulus = (view.state as { respondingTo: { relation: string; operation: string } | null }).respondingTo;
+    const thread = view.state as unknown as { awaitingReplyTo: string[]; respondingTo: string | null; interactions: PrivateInteraction[] };
+    const awaitingReply = thread.interactions.filter(item => thread.awaitingReplyTo.includes(item.id));
+    const stimulus = thread.interactions.find(item => item.id === thread.respondingTo);
     const unrelatedSpeech = stimulus?.relation === "observed_other_interaction" && stimulus.operation === "speak";
-    if (wordsOnly && (!utterance || unrelatedSpeech && awaitingReply.some(item => item.recipientLocalId === targetKey && item.words.trim() === utterance!.trim()))) {
+    if (wordsOnly && (!utterance || unrelatedSpeech && awaitingReply.some(item => item.action?.target?.localEntityId === targetKey && item.utterance?.trim() === utterance!.trim()))) {
       intent.status = "waiting"; intent.activityId = null;
       intent.wait = { entityIds: target ? [target] : [], untilSeconds: null, reason: "awaiting-conversation" };
       return { frame: null, audits, reads: view.reads, cognition };

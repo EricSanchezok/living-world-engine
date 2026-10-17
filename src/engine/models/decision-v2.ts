@@ -55,12 +55,12 @@ export function validateDecisionBatchV2(input: unknown): DecisionBatchV2 {
 export function decisionPromptV2(instructionProfile?: DecisionInstructionProfile) {
   const system = loadPromptAsset(instructionProfile === "publication" ? "system/narrative-publication.md"
     : "system/direct-decision.md"), userPrompt = loadPromptAsset("user/direct-decision.md");
-  return { system, userPrompt, version: `decision-v2-${contentHash({ system, userPrompt })}` };
+  return { system, userPrompt, version: `decision-v2-${contentHash({ system, userPrompt, nativePolicyLayout: "shared-state-v1" })}` };
 }
 export function decisionWireContextV2(batch: DecisionBatchV2) {
   const policy = decisionPromptV2().system;
-  return { state: batch.state, questions: Object.fromEntries(Object.entries(batch.questions).map(([id, question]) => [id, {
-    type: question.type, instructions: { policy, task: question.instructions },
+  return { state: { policy, context: batch.state }, questions: Object.fromEntries(Object.entries(batch.questions).map(([id, question]) => [id, {
+    type: question.type, instructions: { rules: "Apply state.policy. Task paths refer to fields inside state.context.", task: question.instructions },
     ...(question.criteria === undefined ? {} : { criteria: question.criteria }),
   }])) };
 }

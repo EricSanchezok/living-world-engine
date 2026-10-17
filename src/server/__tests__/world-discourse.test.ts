@@ -89,6 +89,11 @@ describe("published discourse through the persistent entry path", () => {
       expect(shared.arrival).toEqual(introduced.arrival);
       expect(shared.entities[0]!.localEntityId).toBe(introduced.entities[0]!.localEntityId);
       expect(shared.exchanges.map(exchange => exchange.submissionId)).toEqual(["look", "explain"]);
+      const readings = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => !wire.questions)
+        .map(directCreationContext).map(context => context.playerReading as { state: { discourse: ParticipantDiscourse; submittedAction?: { submissionId: string } } } | undefined);
+      const reading = readings.findLast(item => item?.state.submittedAction?.submissionId === "ask")!;
+      expect(reading).not.toHaveProperty("presentedConversation");
+      expect(reading.state.discourse).toEqual(shared);
       const finalDiscourse = participantDiscourse(third, participantId), calls = f.transport.mock.calls.length;
       expect(finalDiscourse.exchanges.at(-1)!.speakers.map(speaker => speaker.utterance)).toContain("我在看守这里。");
       expect(JSON.stringify(finalDiscourse)).not.toContain("canonicalEntityIds");

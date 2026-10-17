@@ -9,10 +9,12 @@ import { finishMemory, memoryMatches, memoryOutputSchema, memorySource, MemoryCo
   type AgentMemoryAccess, type MemorySource, type AgentMemory } from "../engine/cognition/memory";
 import type { DirectRuntimeState } from "../engine/direct/contracts";
 import type { WorldInstanceDocument } from "./world-instance-types";
+import { estimateTokens } from "../engine/models/context-budget";
 
 const system = loadPromptAsset("system/agent-memory.md"), userPrompt = loadPromptAsset("user/agent-memory.md");
-export const MEMORY_MANIFEST = defineEngineOperationManifest({ id: "agent-memory", version: "1",
-  config: { promptVersion: contentHash({ system, userPrompt }), triggerRatio: 0.8, recentEvidenceCount: 8 } });
+export const MEMORY_MANIFEST = defineEngineOperationManifest({ id: "agent-memory", version: "2",
+  config: { promptVersion: contentHash({ system, userPrompt }), triggerRatio: 0.8, recentEvidenceCount: 8,
+    minimumNewTokens: 2048, amortizePreviousMemory: true } });
 interface MemoryHost {
   read(id: string): WorldInstanceDocument;
   update(id: string, change: (document: WorldInstanceDocument) => boolean, finish?: { id: string; semanticHash: string }): Promise<boolean>;
@@ -44,6 +46,17 @@ export class AgentMemoryService {
           if (measurement.ratio >= 1 && checkpoint && checkpoint.version > (versions[id] ?? 0)) throw new MemoryContextChanged();
           const prefix = memorySource(source.state, id, checkpoint);
           if (!prefix) continue;
+          const newTokens = estimateTokens({
+            episodes: prefix.input.episodes.filter(item => !prefix.protectedEvidenceIds.includes(item.evidence.id)),
+            claims: prefix.input.claims.filter(item => !prefix.protectedClaimIds.includes(item.id)),
+          });
+          const minimumNewTokens = Math.max(2048, estimateTokens({ summary: prefix.input.previousSummary,
+            important: prefix.input.protectedMemories }));
+          if (measurement.ratio < 1 && newTokens < minimumNewTokens) {
+            runtimeEventEmitter(observer)?.({ event: "memory.compaction.deferred", attributes: { agentId: id, reason: "insufficient-new-history" },
+              measurements: { newTokens, minimumNewTokens, contextOccupancy: measurement.ratio } });
+            continue;
+          }
           const record = this.host.read(source.id).agentMemories[id];
           if (record?.attempt?.sourceHash === prefix.sourceHash && record.attempt.status === "failed") continue;
           jobs.push(this.start(source, prefix));

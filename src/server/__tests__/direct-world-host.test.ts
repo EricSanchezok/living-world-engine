@@ -114,12 +114,13 @@ describe("direct world through persistent WorldHost", () => {
     const receivedWords = trigger === "speak" ? words : null;
     let replyChoices = 0;
     const f = quietInitialNpcProvider(wire => {
-      const context = wire.state as { perspective?: { agentId: string; interactions?: Array<{ relation: string; operation: string }> } };
+      const context = wire.state as { perspective?: { agentId: string; respondingTo?: string | null; interactions?: Array<{ id: string; relation: string; operation: string; utterance: string | null }> } };
       const who = context.perspective?.agentId;
       const own = context.perspective?.interactions?.filter(item => item.relation === "self") ?? [];
       if (who === "inspector" && own.some(item => item.operation === "observe")) {
         replyChoices++;
-        expect(context.perspective).toMatchObject({ respondingTo: { utterance: receivedWords, operation: trigger } });
+        expect(context.perspective?.interactions?.find(item => item.id === context.perspective?.respondingTo))
+          .toMatchObject({ utterance: receivedWords, operation: trigger });
       }
       const operation = who === "inspector" ? own.some(item => item.operation === "observe") ? reply : "observe"
         : who === "engineer" ? trigger : who === "quartermaster" && own.some(item => item.operation === "speak") ? "wait" : "speak";

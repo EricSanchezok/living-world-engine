@@ -20,14 +20,42 @@ function checkRecall(speech: string) {
     deadline: /三日|三天/.test(speech) && /傍晚/.test(speech), place: /石门/.test(speech), oldCode: /青鹭归巢/.test(speech),
     newItem: /蓝(?:色)?围巾/.test(speech), newCode: /竹影九声/.test(speech) };
 }
-// A scripted prehistory exercises repeated compression using the production model capacities.
+
+function tokenEvidence(database: LocalDatabase, instanceId: string) {
+  return database.executions({ instanceId }).filter(execution => execution.kind !== "replay").flatMap(execution => {
+    const events = database.executionEvents(execution.id);
+    return events.filter(event => event.event === "model.invocation.started").map(started => {
+      const invocation = started.correlation?.modelInvocationId;
+      const completion = events.find(item => ["model.structured_output.parsed", "model.structured_output.rejected"].includes(item.event) && item.correlation?.modelInvocationId === invocation);
+      const request = events.find(item => item.event === "model.context.serialized" && item.correlation?.modelInvocationId === invocation);
+      const calibrated = events.find(item => item.event === "model.tokens.calibrated" && item.correlation?.modelInvocationId === invocation);
+      return { executionId: execution.id, invocation, producer: execution.manifest.id, ...started.attributes,
+        result: completion?.event ?? "no-completion",
+        transportAttempts: events.filter(item => item.event === "model.transport.started" && item.correlation?.modelInvocationId === invocation).length,
+        inputTokens: completion?.measurements?.inputTokens ?? null, outputTokens: completion?.measurements?.outputTokens ?? null,
+        estimate: request?.measurements?.estimatedInputTokens, occupancy: request?.measurements?.contextOccupancy,
+        ...calibrated?.measurements };
+    });
+  });
+}
+
+function tokenTotals(tokens: ReturnType<typeof tokenEvidence>) {
+  return { tokens, modelCalls: tokens.reduce((sum, item) => sum + item.transportAttempts, 0), logicalCalls: tokens.length,
+    inputTokens: tokens.reduce((sum, item) => sum + (item.inputTokens ?? 0), 0),
+    outputTokens: tokens.reduce((sum, item) => sum + (item.outputTokens ?? 0), 0),
+    missingUsage: tokens.filter(item => item.transportAttempts && item.inputTokens === null).length };
+}
+// The same prehistory and twelve actions compare pressure handling at production capacities.
 async function main() {
   if (process.argv[2] === "--verify") {
     const file = path.resolve(process.argv[3]!, "report.json"), report = JSON.parse(readFileSync(file, "utf8"));
     const last = report.turns.findLast((turn: { recall: boolean }) => turn.recall);
     report.recall = checkRecall(last?.npcLines.join("\n") ?? "");
-    report.completed = report.finalMemoryVersion >= 3 && Object.values(report.recall).every(Boolean) &&
+    report.completed = Object.values(report.recall).every(Boolean) &&
       report.replay?.replayStatus === "succeeded" && report.turns.every((turn: { failures: unknown[] }) => !turn.failures.length);
+    const database = new LocalDatabase(path.join(path.dirname(file), "livingworld.sqlite"), { readOnly: true });
+    try { report.evidence = { ...report.evidence, ...tokenTotals(tokenEvidence(database, report.instanceId)) }; }
+    finally { database.close(); }
     writeFileSync(file, JSON.stringify(report, null, 2));
     console.log(JSON.stringify({ completed: report.completed, recall: report.recall }));
     if (!report.completed) throw new Error("Recorded memory qualification did not pass");
@@ -71,10 +99,10 @@ async function main() {
     capacityOverrides: false, nativeQuestionLimit: config.profiles["decision-jev"]!.max_question_tokens, productionThreshold: 0.8, turns: [], checkpoints: [] };
   const save = () => writeFileSync(path.join(root, "report.json"), JSON.stringify(report, null, 2));
   const read = () => database.readInstance(id).document;
-  for (let round = 0; round < 24; round++) {
+  for (let round = 0; round < 12; round++) {
     const version = read().agentMemories.keeper?.checkpoint?.version ?? 0;
     // Leave enough unrelated turns to move both agreements beyond the recent raw tail.
-    const recall = round === 0 || round >= 11 && version >= 3 || round === 23;
+    const recall = round === 0 || round === 11;
     const text = recall ? "江渡，还记得我曾经怎样帮过你吗？我们之间尚未办完的约定具体是什么，何时何地办，辨认暗号又是什么？请按你记得的说，不知道的就说不知道。" + (round > 1 ? "另外，我后来告诉你的寄存物品和另一句口令是什么？分开说，不要混淆。" : "")
       : round === 1 ? "江渡，另外告诉你一件新事：我把一条蓝色围巾寄存在院子里，取回时认的口令是竹影九声。这与我们原来的借款和暗号是两回事，别混淆。"
       : `江渡，先聊聊日常吧。${[
@@ -115,18 +143,19 @@ async function main() {
     if (contentHash(replaySimulationState(document.state)) !== contentHash(document.state)) throw new Error("World replay diverged");
     if (report.turns.at(-1).failures.length) throw new Error("Direct intent failed; inspect the recorded report");
     if (recall && !npcLines.length) throw new Error("Recall has no committed NPC speech");
-    if (recall && version >= 3 && round >= 11) break;
   }
   const document = read();
   const memoryExecutions = database.executions({ instanceId: id }).filter(item => item.manifest.id === "agent-memory").map(item => {
     const events = database.executionEvents(item.id);
     const startRevision = events.find(event => event.event === "model.invocation.started")?.correlation?.revision;
-    const usage = events.find(event => event.event === "model.structured_output.parsed")?.measurements;
+    const usage = events.find(event => ["model.structured_output.parsed", "model.structured_output.rejected"].includes(event.event))?.measurements;
     return { id: item.id, status: item.status, startRevision, endRevision: item.commitRevision,
       inputTokens: usage?.inputTokens, outputTokens: usage?.outputTokens };
   });
   const elapsed = report.turns.map((turn: { elapsedMs: number }) => turn.elapsedMs).sort((a: number, b: number) => a - b);
-  report.evidence = { memoryExecutions, turnLatencyMs: { min: elapsed[0], median: elapsed[Math.floor(elapsed.length / 2)], max: elapsed.at(-1) },
+  const tokens = tokenEvidence(database, id);
+  report.evidence = { memoryExecutions, ...tokenTotals(tokens),
+    turnLatencyMs: { min: elapsed[0], median: elapsed[Math.floor(elapsed.length / 2)], max: elapsed.at(-1) },
     concurrentCompactions: memoryExecutions.filter(item => item.startRevision !== undefined && item.endRevision !== undefined && item.endRevision > item.startRevision).length };
   const executionId = Object.values(document.runs).flatMap(run => run.executionIds).findLast(id => database.executionEvents(id).some(event => event.event === "execution.candidate.persisted"));
   if (executionId) report.replay = await replayThroughAlgorithm(database, database.execution(executionId)!, database.executionEvents(executionId));
@@ -134,7 +163,7 @@ async function main() {
   const lastRecall = report.turns.findLast((turn: { recall: boolean }) => turn.recall);
   const speech = lastRecall?.npcLines.join("\n") ?? "";
   report.recall = checkRecall(speech);
-  report.completed = report.finalMemoryVersion >= 3 && Object.values(report.recall).every(Boolean) && report.replay?.replayStatus === "succeeded";
+  report.completed = Object.values(report.recall).every(Boolean) && report.replay?.replayStatus === "succeeded";
   save(); console.log(JSON.stringify({ report: path.join(root, "report.json"), memoryVersion: report.finalMemoryVersion, replay: report.replay?.replayStatus }));
   database.close();
   if (!report.completed) throw new Error("Memory qualification did not pass all recall and replay checks");

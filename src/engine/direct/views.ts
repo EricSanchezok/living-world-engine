@@ -26,28 +26,24 @@ export function privateActionView(state: Readonly<SimulationState>, agentId: str
     event.causes.some(cause => cause.kind === "action" && cause.id === causeActionId)).map(event => event.id))) : null;
   const recentSources = new Set(memory.evidence.flatMap(item => item.sourceId ? [item.sourceId] : []));
   const interactions = privateInteractions(state, agentId, entities, null, recentSources);
-  const ownSpeechSinceLastRecipientReply: Array<{ recipientLocalId: string; words: string }> = [];
+  const awaitingReplyTo: string[] = [];
   for (const item of interactions) {
     if (!item.utterance) continue;
-    if (item.relation === "self" && item.action?.target) ownSpeechSinceLastRecipientReply.push({
-      recipientLocalId: item.action.target.localEntityId, words: item.utterance,
-    });
+    if (item.relation === "self" && item.action?.target) awaitingReplyTo.push(item.id);
     else if (["addressed_to_self", "broadcast_heard"].includes(item.relation)) {
-      for (let index = ownSpeechSinceLastRecipientReply.length - 1; index >= 0; index--) {
-        if (ownSpeechSinceLastRecipientReply[index]!.recipientLocalId === item.actor.localEntityId) ownSpeechSinceLastRecipientReply.splice(index, 1);
+      for (let index = awaitingReplyTo.length - 1; index >= 0; index--) {
+        if (interactions.find(prior => prior.id === awaitingReplyTo[index])?.action?.target?.localEntityId === item.actor.localEntityId) awaitingReplyTo.splice(index, 1);
       }
     }
+  }
+  const respondingTo = causeEvents ? privateInteractions(state, agentId, entities, causeEvents).at(-1) ?? null : null;
+  if (respondingTo && !interactions.some(item => item.id === respondingTo.id)) {
+    interactions.push(respondingTo); interactions.sort((a, b) => a.step - b.step || a.id.localeCompare(b.id));
   }
   const view = { agentId: perspective.agentId, elapsedSeconds: perspective.elapsedSeconds, self: perspective.self, mechanics: perspective.mechanics,
     knowledge: perspective.knowledge, character: perspective.character,
     memory: { version: memory.version, summary: memory.summary, important: memory.important },
-    ownSpeechSinceLastRecipientReply,
-    respondingTo: causeEvents ? privateInteractions(state, agentId, entities, causeEvents).at(-1) ?? null : null,
-    conversation: interactions.filter(item => item.utterance).slice(-24).map(item => ({
-      step: item.step, speaker: item.actor, addressee: item.action?.target ?? null,
-      addressing: item.action?.addressing ?? "none", relation: item.relation, words: item.utterance,
-    })),
-    interactions: interactions.slice(-18) };
+    awaitingReplyTo, respondingTo: respondingTo?.id ?? null, interactions };
   // Delivered evidence remains memory after the observation cursor advances.
   return { state: view as unknown as JsonValue,
     reads: captureDependencies(state, keys), entities };
@@ -61,7 +57,7 @@ function privateInteractions(state: Readonly<SimulationState>, agentId: string, 
   return state.history.flatMap(step => step.observations.filter(observation => observation.observerId === agentId &&
     retained.has(observation.id) && (!sourceIds || sourceIds.has(observation.id)) && observation.scene && (!eventIds || observation.sourceEventIds.some(id => eventIds.has(id)))).map(observation => {
     const scene = observation.scene!;
-    return { step: observation.step, worldTimeSeconds: step.temporalBoundary.toElapsedSeconds,
+    return { id: observation.id, step: observation.step, worldTimeSeconds: step.temporalBoundary.toElapsedSeconds,
       latest: observation.step === agent.observationCursorStep,
       actor: { localEntityId: scene.actorLocalId ?? null, label: scene.actor },
       relation: scene.actorLocalId && self.has(scene.actorLocalId) ? "self" : scene.action?.target && self.has(scene.action.target.localEntityId)
@@ -72,6 +68,8 @@ function privateInteractions(state: Readonly<SimulationState>, agentId: string, 
       observedDetails: scene.details };
   }));
 }
+
+export type PrivateInteraction = ReturnType<typeof privateInteractions>[number];
 
 /** Adjacent interiors are candidates for sight/sound, never an automatic grant of perception. */
 export function sharesContactNeighborhood(state: Readonly<SimulationState>, left: string, right: string): boolean {

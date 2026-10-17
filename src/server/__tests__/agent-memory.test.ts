@@ -18,7 +18,7 @@ import { readDirectState } from "../../engine/direct/state";
 import { replayThroughAlgorithm } from "../../../scripts/operations/execution-command";
 
 function latch() { let release!: () => void; const promise = new Promise<void>(resolve => { release = resolve; }); return { promise, release }; }
-async function fixture(create: (context: Record<string, unknown>) => unknown | Promise<unknown>, maxInputBytes?: number, observePlayer = false) {
+async function fixture(create: (context: Record<string, unknown>) => unknown | Promise<unknown>, maxInputBytes?: number, observePlayer = false, shortTail = false) {
   const root = mkdtempSync(path.join(tmpdir(), "agent-memory-"));
   const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id, nativeAnswer(q,
     id === "operation" ? observePlayer && (wire.state as { submittedAction?: unknown }).submittedAction ? "observe" : "wait"
@@ -29,7 +29,7 @@ async function fixture(create: (context: Record<string, unknown>) => unknown | P
     const file = path.join(script, "entities", `${id}.yaml`), entity = parse(readFileSync(file, "utf8"));
     const evidence = id === "keeper" ? Array.from({ length: 20 }, (_, i) => ({
       id: `m${i.toString().padStart(2, "0")}`, step: 0, sourceId: null, kind: "testimony",
-      description: i === 0 ? "林舟救过我，三日后归还 17 枚银币，暗号青鹭归巢。" : "普通路人谈论天气。".repeat(100),
+      description: i === 0 ? "林舟救过我，三日后归还 17 枚银币，暗号青鹭归巢。" : shortTail && i >= 12 ? "今天晴天。" : "普通路人谈论天气。".repeat(100),
     })) : [{ id: "unshared", step: 0, sourceId: null, kind: "assumption", description: "PRIVATE-OTHER-SECRET" }];
     entity.agent.belief.evidence.push(...evidence); writeFileSync(file, stringify(entity));
   }
@@ -50,6 +50,32 @@ async function fixture(create: (context: Record<string, unknown>) => unknown | P
 const measurement = (ratio: number) => ({ ratio, estimatedInputTokens: Math.round(ratio * 32000), inputLimit: 32000 });
 
 describe("background memory persistence", () => {
+  it("batches small new history across restart while preserving the hard-capacity escape", async () => {
+    let compactions = 0;
+    const f = await fixture(context => {
+      if (!context.episodes) return { paragraphs: ["你看清了随身物品。"] };
+      compactions++;
+      return { summary: "普通往来已归纳。",
+        retainEvidenceIds: (context.episodes as Array<{ evidence: { id: string } }>).some(item => item.evidence.id === "m00") ? ["m00"] : [], retainClaimIds: [] };
+    }, undefined, true, true);
+    try {
+      const controlled = await f.host.transferControl(f.id, { expectedRevision: 0, target: { kind: "agent", agentId: "keeper" } });
+      const first = f.build(); await first.scope(f.read()).pressure(["keeper"], measurement(0.8)); await first.drain(f.id);
+      await f.host.submitAction(f.id, controlled.conversation!.participantId,
+        { expectedRevision: 0, submissionId: "small-new-history", text: "看看自己身上带着的物品。" });
+      await expect.poll(() => Object.values(f.read().runs).every(run => !["queued", "running"].includes(run.status))).toBe(true);
+      await f.host.drainNarratives(f.id); await f.host.drainMemories(f.id);
+      const service = f.build(), count = compactions;
+      for (let i = 0; i < 4; i++) await service.scope(f.read()).pressure(["keeper"], measurement(0.93));
+      await service.drain(f.id);
+      expect(compactions).toBe(count);
+      expect(f.read().agentMemories.keeper!.checkpoint!.version).toBe(1);
+      await expect(service.scope(f.read()).pressure(["keeper"], measurement(1), undefined, { keeper: 1 })).rejects.toBeInstanceOf(MemoryContextChanged);
+      expect(f.read().agentMemories.keeper!.checkpoint!.version).toBe(2);
+      const important = readAgentMemory(f.read().state, f.read().state.agents.keeper!, f.read().agentMemories.keeper!.checkpoint).important;
+      expect(important.some(item => item.evidence.id === "m00" && item.evidence.description.includes("青鹭归巢"))).toBe(true);
+    } finally { f.close(); }
+  });
   it("merges a frozen prefix while the same Agent receives a real new observation", async () => {
     const started = latch(), gate = latch();
     const f = await fixture(async context => {
@@ -78,7 +104,7 @@ describe("background memory persistence", () => {
     } finally { gate.release(); f.close(); }
   });
   it("compacts and retries through WorldHost's real engine observer, then replays without model calls", async () => {
-    const f = await fixture(() => ({ summary: "普通往来已归纳。", retainEvidenceIds: ["m00"], retainClaimIds: [] }), 100000);
+    const f = await fixture(() => ({ summary: "普通往来已归纳。", retainEvidenceIds: ["m00"], retainClaimIds: [] }), 60000);
     try {
       await f.host.advance(f.id, { expectedRevision: 0, trigger: "manual" });
       await f.host.drainMemories(f.id);

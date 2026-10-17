@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { executeDecisionV2, decisionOutputV2Schema, validateDecisionBatchV2, type DecisionRequestV2 } from "../decision-v2";
+import { executeDecisionV2, decisionOutputV2Schema, decisionPromptV2, validateDecisionBatchV2, type DecisionRequestV2 } from "../decision-v2";
 import { contentHash } from "../model-audit";
 import { directTestProvider, nativeChoice } from "../../testing/direct-provider";
 import { ModelOutputError } from "../model-provider";
@@ -74,6 +74,15 @@ describe("direct native decisions", () => {
     expect(result.answers.relevance).toEqual({ type: "noul", noul: 0.9 });
     expect(result.answers.urgency).toMatchObject({ type: "score", score: 0.7 });
     expect(result.audits).toHaveLength(1); expect(f.transport).toHaveBeenCalledTimes(1);
+    const body = JSON.parse(String(f.transport.mock.calls[0]![1]!.body));
+    expect(body.state).toEqual({ policy: decisionPromptV2().system, context: request().batch.state });
+    expect(Object.keys(body.questions)).toEqual(Object.keys(request().batch.questions));
+    for (const [id, question] of Object.entries(request().batch.questions)) {
+      expect(body.questions[id].instructions.task).toEqual(question.instructions);
+      expect(body.questions[id].instructions).not.toHaveProperty("policy");
+      expect(body.questions[id].criteria).toEqual(question.criteria);
+    }
+    expect(String(f.transport.mock.calls[0]![1]!.body).split(JSON.stringify(decisionPromptV2().system)).length - 1).toBe(1);
   });
   it("records probability discrepancies without blocking a valid typed selection", async () => {
     const input = request(); input.batch.questions = { consent: input.batch.questions.consent! };

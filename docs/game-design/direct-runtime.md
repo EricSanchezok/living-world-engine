@@ -1,6 +1,6 @@
 # Direct world runtime
 
-This reference owns the default `direct-world@6` execution contract, approved in [Spec 0182](../specs/0182-jev-direct-world-runtime.md). Its implementation lives in [`src/engine/direct/`](../../src/engine/direct/algorithm.ts). The script contract is v17, SimulationState is v21 and WorldInstanceDocument is v32.
+This reference owns the default `direct-world@7` execution contract, approved in [Spec 0182](../specs/0182-jev-direct-world-runtime.md). Its implementation lives in [`src/engine/direct/`](../../src/engine/direct/algorithm.ts). The script contract is v17, SimulationState is v21 and WorldInstanceDocument is v32.
 
 ## Model responsibilities
 

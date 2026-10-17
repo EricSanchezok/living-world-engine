@@ -7,7 +7,6 @@ import { contentHash } from "../models/model-audit";
 import type { JsonValue } from "../runtime/json";
 import type { ActionExpression } from "./contracts";
 import type { DirectDecisions } from "./decisions";
-import type { ParticipantDiscourse } from "../contracts/discourse";
 
 const actionFields = ["operation", "target", "recipient", "tool", "resource", "amount", "timing", "duration",
   "observation_scope", "capability", "progress_next", "search_location", "goal", "reflection_duration"];
@@ -29,10 +28,6 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
   const state = input.context as Record<string, JsonValue>;
   const { actionPolicy: _policy, actionKinds: _kinds, ...context } = state;
   void _policy; void _kinds;
-  const discourse = state.discourse as unknown as ParticipantDiscourse | null;
-  const presentedConversation = discourse?.exchanges.map(exchange => ({
-    requestedByPlayer: exchange.requested, actuallyPresented: exchange.paragraphs.map(paragraph => paragraph.text),
-  })) ?? [];
   const schema = z.object({
     understanding: z.string().describe("Briefly identify the intended interaction and next unperformed step. If there is a prerequisite, state whether actual evidence supports it or it remains unknown. Do not predict a result."),
     conversationReading: z.object({
@@ -60,7 +55,7 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
         modelRegistrySnapshotHash: decisions.control.registryHash, modelInvocation: decisions.next(agentId),
         profileId: input.profileId, role: "decision", schemaName: "PlayerActionReadingV4", system, userPrompt,
         promptVersion: `player-reading-${contentHash({ system, userPrompt })}`,
-        context: { playerReading: { state: context, language: input.language, catalog, cognition, presentedConversation,
+        context: { playerReading: { state: context, language: input.language, catalog, cognition,
           exactQuotes: Object.fromEntries(input.quotes.map((quote, index) => [`q${index}`, quote])) },
           ...(repair ? { repair: { ...repair, instruction: "Correct only the reported executed-branch bindings against the same original request and catalog. Return the complete reading. Do not invent another action or alter the player's words." } } : {}) },
         schema, jsonExamplePolicy: "omit" });

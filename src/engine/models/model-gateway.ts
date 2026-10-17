@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { requestPressure } from "./context-budget";
+import { requestPressure, TokenCalibration, tokenLanguageBand } from "./context-budget";
 import { requestMemoryVersions, MemoryContextChanged } from "../cognition/memory";
 import {
   createModelProviderAdapter,
@@ -231,7 +231,7 @@ export class ModelGateway implements StructuredModelProvider {
   private readonly observer: RuntimeObserver;
   private readonly emittedContracts = new Set<string>();
   private readonly executionSnapshots = new Map<string, Promise<ModelRegistrySnapshot>>();
-  private readonly tokenCalibration = new Map<string, number>();
+  private readonly tokenCalibration = new TokenCalibration();
   readonly registry: ModelRegistryService;
 
   constructor(
@@ -488,23 +488,25 @@ export class ModelGateway implements StructuredModelProvider {
       context,
     };
     const requestHash = contentHash(requestDocument);
-    const requestUtf8Bytes = promptBytes.requestUtf8Bytes;
-    const calibrationKey = `${binding.accountId}:${binding.modelId}`;
-    const calibration = this.tokenCalibration.get(calibrationKey) ?? 1;
-    const pressure = request.memory || request.priority === "background" ? requestPressure(binding, context, { ...promptBytes, system: request.system }, calibration) : null;
+    const decisionView = (context as { decision?: { view?: { kind?: string } } })?.decision?.view?.kind ?? "";
+    const calibrationKey = `${binding.accountId}:${binding.modelMetadataHash}:${request.schemaName}:${decisionView}:${tokenLanguageBand(promptBytes.userMessage)}`;
+    const calibrationSequence = this.tokenCalibration.next();
+    const calibration = this.tokenCalibration.factor(calibrationKey);
+    const pressure = requestPressure(binding, context, { ...promptBytes, system: request.system }, calibration);
+    const requestUtf8Bytes = pressure.requestUtf8Bytes;
     // A capacity rebuild is preflight work, not an outstanding model invocation.
     const preflightCorrelation = { ...correlation, modelInvocationId: undefined, modelInvocation: undefined };
-    if (pressure && pressure.ratio >= 0.8) observe?.({ event: "model.memory.pressure", correlation: preflightCorrelation,
+    if (pressure.ratio >= 0.8) observe?.({ event: "model.memory.pressure", correlation: preflightCorrelation,
       measurements: { contextOccupancy: pressure.ratio, estimatedInputTokens: pressure.estimatedInputTokens },
       payload: { ...pressure, inputLimit: Number.isFinite(pressure.inputLimit) ? pressure.inputLimit : null, versions: requestMemoryVersions(context) } });
-    if (pressure && request.memory) try {
+    if (request.memory) try {
       await request.memory.pressure(request.memorySubjects ?? [request.subjectId], pressure, request.abortSignal, requestMemoryVersions(context));
     } catch (error) {
       if (error instanceof MemoryContextChanged) observe?.({ event: "model.memory.context.retry", correlation: preflightCorrelation,
         payload: { modelInvocationId, versions: requestMemoryVersions(context) } });
       throw error;
     }
-    if (pressure && !request.memory && pressure.ratio >= 1) throw new ContextLimitExceededError("Background model request exceeds its input budget");
+    if (!request.memory && request.priority === "background" && pressure.ratio >= 1) throw new ContextLimitExceededError("Background model request exceeds its input budget");
     if (requestUtf8Bytes > profile.max_input_bytes) {
       throw new ContextLimitExceededError(
         `model profile ${request.profileId} request is ${requestUtf8Bytes} bytes; ` +
@@ -522,8 +524,8 @@ export class ModelGateway implements StructuredModelProvider {
         systemPromptUtf8Bytes: Buffer.byteLength(request.system, "utf8"),
         userPromptUtf8Bytes: Buffer.byteLength(request.userPrompt, "utf8"),
         requestUtf8Bytes,
-        ...(pressure ? { estimatedInputTokens: pressure.estimatedInputTokens, contextOccupancy: pressure.ratio,
-          ...(pressure.estimatedQuestionTokens ? { estimatedQuestionTokens: pressure.estimatedQuestionTokens } : {}) } : {}),
+        estimatedInputTokens: pressure.estimatedInputTokens, contextOccupancy: pressure.ratio,
+        ...(pressure.estimatedQuestionTokens ? { estimatedQuestionTokens: pressure.estimatedQuestionTokens } : {}),
       },
       counts: contextAudit.counts,
       hashes: { context: preparedContext.hash, request: requestHash, contract: contractHash },
@@ -626,10 +628,11 @@ export class ModelGateway implements StructuredModelProvider {
           attributes: { status: "succeeded" },
         });
         completedResult = scheduled.value;
-        if (pressure && scheduled.value.tokenUsage.input) {
-          this.tokenCalibration.set(calibrationKey, Math.max(this.tokenCalibration.get(calibrationKey) ?? 1,
-            scheduled.value.tokenUsage.input / pressure.estimatedInputTokens * calibration * 1.05));
-        }
+        this.tokenCalibration.observe(calibrationKey, calibrationSequence, pressure.uncalibratedInputTokens, scheduled.value.tokenUsage.input);
+        observe?.({ event: "model.tokens.calibrated", correlation,
+          measurements: { uncalibratedInputTokens: pressure.uncalibratedInputTokens, estimatedInputTokens: pressure.estimatedInputTokens,
+            actualInputTokens: scheduled.value.tokenUsage.input, calibration, nextCalibration: this.tokenCalibration.factor(calibrationKey) },
+          attributes: { calibrationKey } });
         const parseStartedAt = this.now();
         const parsedOutput = request.schema.parse(scheduled.value.value);
         const contextCatalog = request.context && typeof request.context === "object" && !Array.isArray(request.context) &&
