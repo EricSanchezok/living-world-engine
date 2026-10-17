@@ -1,3 +1,4 @@
+import { recordedMemoryAccess, MemoryContextChanged } from "../../src/engine/cognition/memory";
 import { randomUUID } from "node:crypto";
 import { writeFileSync } from "node:fs";
 import path from "node:path";
@@ -37,7 +38,7 @@ function argumentsFor(argv: readonly string[]): {
   trial: number;
 } {
   const executionIds: string[] = [];
-  let database = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v31", "livingworld.sqlite");
+  let database = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v32", "livingworld.sqlite");
   let output: string | undefined;
   let probeReport: string | undefined;
   let trial = 1;
@@ -120,6 +121,7 @@ function recordedCatalog(audits: readonly ModelExecutionAudit[]): ModelCatalog {
 }
 
 class RecordedModelProvider implements StructuredModelProvider {
+  private readonly memoryRetries: Set<string>;
   readonly catalog: ModelCatalog;
   private readonly outputs = new Map<string, RecordedOutput>();
   private readonly consumed = new Set<string>();
@@ -136,6 +138,8 @@ class RecordedModelProvider implements StructuredModelProvider {
     pinnedCatalog?: ModelCatalog,
   ) {
     this.overlay = overlay;
+    this.memoryRetries = new Set(events.filter(event => event.event === "model.memory.context.retry")
+      .map(event => (event.payload as { modelInvocationId: string }).modelInvocationId));
     // Candidate audits are logical projections: several slots can share one
     // physical invocation while owning different subjects and result shapes.
     const replayedInvocations = new Set(candidates.flatMap((candidate) => ("record" in candidate ? candidate.record.modelAudits : candidate.modelAudits))
@@ -199,6 +203,7 @@ class RecordedModelProvider implements StructuredModelProvider {
     const invocationId = request.modelInvocationId ?? (request.modelInvocation
       ? modelInvocationIdentity(request, request.role, request.subjectId, request.modelInvocation).modelInvocationId : undefined);
     if (!invocationId) throw new ModelConfigurationError("recorded replay requires canonical model invocation identity");
+    if (this.memoryRetries.delete(invocationId)) throw new MemoryContextChanged();
     const isOverlayTarget = this.overlay?.targetInvocation.id === invocationId;
     if (isOverlayTarget) {
       if (this.overlayConsumed) throw new Error(`probe overlay was consumed twice: ${invocationId}`);
@@ -533,6 +538,7 @@ export async function replayThroughAlgorithm(
       });
     }
     const semanticHashes: string[] = [];
+    const memory = recordedMemoryAccess(events);
     let finalState: SimulationState | undefined;
     if (stepInputs.length > 0) {
       for (const [index, input] of stepInputs.entries()) {
@@ -540,6 +546,7 @@ export async function replayThroughAlgorithm(
         const result = await engine.step(input.policyRoster, input.request, {
           workloadId: `replay:${original.id}`,
           batchId: `replay:${original.id}:${index + 1}`,
+          memory,
           ...(nativeBootstrap ? { modelRegistrySnapshotHash: nativeBootstrap.control.registryHash } : {}),
           correlation: {
             executionId: replayExecutionId,

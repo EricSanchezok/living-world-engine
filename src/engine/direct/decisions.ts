@@ -29,6 +29,7 @@ export class DirectDecisions {
     if (cached) { this.uses.push({ batch, result: cached, reused: true }); return cached.answers; }
     const subjectId = owner ?? "world";
     const result = await executeDecisionV2(this.provider, { ...this.scope, subjectId, profileId: profiles.decision,
+      memorySubjects: owner ? [owner] : Object.keys((state as { deliveredEvidence?: Record<string, unknown> }).deliveredEvidence ?? {}),
       fallbackProfileId: profiles.fallback, modelRegistrySnapshotHash: this.control.registryHash,
       allocateInvocation: () => this.next(subjectId), instructionProfile, batch });
     const { audits, ...saved } = result;

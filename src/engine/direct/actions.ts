@@ -1,5 +1,6 @@
 import { z } from "zod";
-import type { SimulationState, ModelExecutionAudit } from "../contracts/model";
+import type { SimulationState, ModelExecutionAudit, AgentPerspectiveView } from "../contracts/model";
+import type { MemoryEpisode } from "../cognition/memory";
 import type { ExternalActionInput } from "../runtime/execution";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import type { JsonValue } from "../runtime/json";
@@ -97,7 +98,7 @@ export function actionSeconds(state: Readonly<SimulationState>, profileId: strin
 export async function chooseAction(input: { state: Readonly<SimulationState>; definition: WorldRuntimeContract; control: DirectRuntimeState;
   decisions: DirectDecisions; agentId: string; external?: ExternalActionInput; creationEnabled: boolean }) {
   const { state, control, decisions, agentId, external } = input;
-  const agent = state.agents[agentId]!, intent = control.intents[agentId]!, view = privateActionView(state, agentId, intent.causeActionId);
+  const agent = state.agents[agentId]!, intent = control.intents[agentId]!, view = privateActionView(state, agentId, intent.causeActionId, decisions.scope.memory);
   if (external) intent.activeSubmission = structuredClone(external);
   const configuredProfiles = agentCapabilityModels(state, control, agentId);
   // Open player language needs interpretation before the world judges its effects.
@@ -108,8 +109,11 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   if (external?.discourse && (external.discourse.agentId !== agentId ||
     external.discourse.hash !== contentHash({ ...external.discourse, hash: "" }))) throw new Error("Player discourse does not belong to this perspective");
   const quotes = literalUtterances(text);
-  const observedNumbers = orderedValues(agent.belief.evidence).filter(evidence => evidence.step >= agent.observationCursorStep).flatMap(evidence => literalNumbers(evidence.description));
-  const amounts = [...new Set([1, ...literalNumbers(text), ...observedNumbers, ...goals.flatMap(goal => literalNumbers(goal.description))])];
+  const { knowledge, memory } = view.state as unknown as { knowledge: AgentPerspectiveView["knowledge"];
+    memory: { summary: string; important: MemoryEpisode[] } };
+  const observedNumbers = knowledge.evidence.filter(evidence => evidence.step >= agent.observationCursorStep).flatMap(evidence => literalNumbers(evidence.description));
+  const rememberedNumbers = literalNumbers([memory.summary, ...memory.important.map(item => item.evidence.description)].join("\n"));
+  const amounts = [...new Set([1, ...literalNumbers(text), ...observedNumbers, ...rememberedNumbers, ...goals.flatMap(goal => literalNumbers(goal.description))])];
   const known = Object.entries(view.entities).map(([localId]) => [localId, agent.belief.localEntities[localId]!] as const);
   const perspective = view.state as { self: { location: unknown } };
   const targetCriteria = { none: "No separate target is needed. For move, bind the current place or an actual destination; do not leave an intended destination unspecified.", ...Object.fromEntries(known.map(([id, entity]) => [id, {
@@ -126,7 +130,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const durations = literalDurations(text);
   const capabilities = control.capabilities.filter(capability => capability.knownToAgentIds.includes(agentId)).sort((a, b) => a.id.localeCompare(b.id));
   const questions: Record<string, DecisionQuestionV2> = {
-    ...cognitiveQuestions(state, agentId),
+    ...cognitiveQuestions(state, agentId, knowledge.claims),
     operation: choice(external ? "The next executable action actually requested. Resolve if/only-if conditions using the latest known properties, then select the authorized branch. A conditional request to operate is use/change when its stated conditions are established; do not substitute private reflection for doing it. Unknown conditions permit concrete observation or asking. Do not invent additional prerequisites." : "Choose this NPC's next action from its own goals, commitments, present opportunities and privately delivered interactions. It can pursue its affairs, approach someone, make an offer or warning, inspect, act or wait without a player asking first. Initiative needs a motive, not a compulsory interruption. Use perspective.interactions to identify actual speakers, addressees and results. An information question permits an answer, uncertainty or motivated refusal; a request to inspect or act permits actually doing that work. Saying you will check is not checking. Received materials do not establish their use. Choose an inspection when you need unknown evidence before reporting it.", kinds),
     target: choice("Target of the selected NEXT operation: observe inspects this object, use/change affects this object's properties, move approaches this destination. A machine operated through a control panel is the target; the panel is the tool. In 'inspect an object then report to a person', inspect the object first, not the later listener. Do not select a prerequisite object when the requested effect belongs to another known object.", targetCriteria),
     tool: choice("Separate instrument used on the target, or the item discussed in speech. A control panel used to test a machine is a tool. Select none when no separate instrument is involved.", targetCriteria),
@@ -188,7 +192,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     give: "The player explicitly authorizes their own transfer now, and its stated conditions are met",
     request: "The player asks ANOTHER person to deliver, return or give something; this is speech, not payment by the player",
   });
-  const claims = orderedValues(agent.belief.claims);
+  const claims = knowledge.claims;
   if (jointInterpretation) {
     questions.progress_next = choice("After the selected next operation, what remains of THIS submission's actual intent? Necessary low-risk continuity is authorized by that intent; reaching a waypoint or discovering the route need not end the request. Use currentRequestReceipts and continue feasible remaining work without repeating completed acts. New spending, commitments, voluntary speech or risk choices need authorization. Only the applicable conditional branch runs. Missing evidence that this very step can supply permits continuation; a genuinely unavailable reply or new choice requires wait.", {
       complete: "The requested immediate work is covered; no further action is authorized by this input",
@@ -223,7 +227,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     requestPhase: currentRequestReceipts.length ? "Continue this same submission after its listed receipts" : "New submission: none of this input has executed. Earlier similar actions belong to other requests.",
     recentActions: recentActions.slice(-6).map(({ requested, target, actionKind, attempted, outcome, preparatoryFor }) => ({ requested, target, actionKind, attempted, outcome, preparatoryFor })),
     currentObservedFacts, intent: { goalId: intent.goalId, wakeReasons: intent.wakeReasons,
-    recentOutcomeIds: intent.recentOutcomeIds }, latestObservedEvidence: orderedValues(agent.belief.evidence).filter(evidence => evidence.step === agent.observationCursorStep),
+    recentOutcomeIds: intent.recentOutcomeIds }, latestObservedEvidence: knowledge.evidence.filter(evidence => evidence.step === agent.observationCursorStep),
     actionKinds: kinds } as unknown as JsonValue;
   if (external) for (const id of ["operation", "target", "recipient", "amount", "resource", "transfer_authority", "capability", "search_location", "observation_scope", ...Object.keys(questions).filter(id => id.startsWith("progress_"))]) {
     const item = questions[id]; if (!item) continue;
@@ -245,7 +249,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     profileId: configuredProfiles.fallback, language: input.definition.narrative.language, quotes }) : null;
   const answers = reading?.answers ?? await decisions.ask(agentId, context, view.reads, questions, profiles);
   const audits: ModelExecutionAudit[] = reading ? reading.audits : [];
-  const cognition = cognitiveUpdate(state, agentId, answers);
+  const cognition = cognitiveUpdate(state, agentId, knowledge.claims, answers);
   intent.goalProgress = { ...intent.goalProgress, ...cognition.goals };
   if (answers.urgency?.type === "score") intent.urgency = answers.urgency.score;
   intent.lastInputHash = inputHash; intent.wakeReasons = []; intent.failure = null; intent.dependencies = view.reads;

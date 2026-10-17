@@ -17,6 +17,10 @@ import type { AlgorithmRef } from "../algorithms/composition";
 import type { PromptValidationIssue } from "../contracts/prompts";
 
 export interface ModelExecutionScope {
+  /** Derived, owner-private read context; never part of canonical state or provider parameters. */
+  memory?: import("../cognition/memory").AgentMemoryAccess;
+  memorySubjects?: readonly string[];
+  priority?: "foreground" | "background";
   workloadId: string;
   batchId: string;
   abortSignal?: AbortSignal;

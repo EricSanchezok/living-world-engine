@@ -123,6 +123,8 @@ const profileSchema = z.object({
   response_transport: z.literal("deepseek-sse-v1").optional(),
   max_output_tokens: positiveIntegerSchema,
   max_input_bytes: positiveIntegerSchema.default(262_144),
+  max_input_tokens: positiveIntegerSchema.optional(),
+  max_question_tokens: positiveIntegerSchema.optional(),
   inference: modelInferenceSchema,
 }).strict();
 

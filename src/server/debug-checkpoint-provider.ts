@@ -1,8 +1,10 @@
 import type { ModelExecutionAudit } from "../engine/contracts/model";
+import { MemoryContextChanged } from "../engine/cognition/memory";
 import { contentHash } from "../engine/models/model-audit";
 import type { ModelRole } from "../engine/models/model-catalog";
 import {
   ModelOutputError,
+  modelInvocationIdentity,
   type StructuredModelProvider,
   type StructuredModelRequest,
   type StructuredModelResult,
@@ -94,6 +96,7 @@ export function debugCheckpointReplayValidationError(
  * checkpoint. Requests from the next stage continue through the live provider.
  */
 export class DebugCheckpointModelProvider implements StructuredModelProvider {
+  private readonly memoryRetries: Set<string>;
   readonly catalog;
   private readonly outputs = new Map<string, RecordedStageOutput>();
   private readonly consumed = new Set<string>();
@@ -104,6 +107,9 @@ export class DebugCheckpointModelProvider implements StructuredModelProvider {
     completedStageIndex: number,
   ) {
     this.catalog = live.catalog;
+    this.memoryRetries = new Set(events.filter(event => event.event === "model.memory.context.retry" &&
+      (event.correlation?.logicalStageIndex ?? Number.MAX_SAFE_INTEGER) <= completedStageIndex)
+      .map(event => (event.payload as { modelInvocationId: string }).modelInvocationId));
     const audits = new Map<string, ModelExecutionAudit>();
     for (const event of events) {
       if (event.event !== "model.audit.persisted" || event.payload === undefined ||
@@ -137,7 +143,9 @@ export class DebugCheckpointModelProvider implements StructuredModelProvider {
   }
 
   async generateStructured<T>(request: StructuredModelRequest<T>): Promise<StructuredModelResult<T>> {
-    const invocationId = request.modelInvocationId;
+    const invocationId = request.modelInvocationId ?? (request.modelInvocation
+      ? modelInvocationIdentity(request, request.role, request.subjectId, request.modelInvocation).modelInvocationId : undefined);
+    if (invocationId && this.memoryRetries.delete(invocationId)) throw new MemoryContextChanged();
     const output = invocationId ? this.outputs.get(invocationId) : undefined;
     if (!invocationId || !output) return this.live.generateStructured(request);
     if (this.consumed.has(invocationId)) {

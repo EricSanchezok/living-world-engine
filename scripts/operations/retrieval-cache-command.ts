@@ -72,7 +72,7 @@ function parseArgs(argv: readonly string[]): Options {
     operation,
     cacheRoot: livingWorldCacheRoot(),
     model: "multilingual-e5-base",
-    database: path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v31", "livingworld.sqlite"),
+    database: path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v32", "livingworld.sqlite"),
   };
   for (let index = 1; index < argv.length; index += 1) {
     const argument = argv[index]!;

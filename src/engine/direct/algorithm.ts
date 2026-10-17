@@ -27,10 +27,11 @@ import { directPerception } from "./perception";
 import { sealDirectRecord } from "./canonical";
 import { participantReactionIds } from "./foreground";
 import { hasLocalOpportunity } from "./initiative";
+import { withFreshMemory } from "../cognition/memory";
 
 export interface DirectWorldConfig extends CapabilityModelOverrides { creationEnabled: boolean }
 export const DIRECT_WORLD_CONFIG: DirectWorldConfig = { decision: null, creation: null, fallback: null, creationEnabled: true };
-export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "5", config: config as unknown as JsonObject });
+export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "6", config: config as unknown as JsonObject });
 export const directWorldAlgorithmRef = (config = DIRECT_WORLD_CONFIG) => algorithmRef(directWorldManifest(config));
 
 function components(state: Readonly<SimulationState>, frames: ActionFrame[]): ActionFrame[][] {
@@ -111,8 +112,8 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     const owners = submissions.length ? submissions.map(action => action.agentId) : reactions.length ? reactions.map(([id]) => id)
       : pendingPlayers.length ? pendingPlayers : participantWork ? [] : ready.map(([id]) => id);
     const select = (ids: string[]) => Promise.allSettled(ids.map(async agentId => ({ agentId,
-      result: await chooseAction({ state: source, definition: authority, control, decisions, agentId,
-        external: submissions.find(action => action.agentId === agentId) ?? control.intents[agentId]!.activeSubmission ?? undefined, creationEnabled: this.config.creationEnabled }) })));
+      result: await withFreshMemory(() => chooseAction({ state: source, definition: authority, control, decisions, agentId,
+        external: submissions.find(action => action.agentId === agentId) ?? control.intents[agentId]!.activeSubmission ?? undefined, creationEnabled: this.config.creationEnabled })) })));
     const selected = await select(owners);
     if (submissions.length) {
       const frames = selected.flatMap(result => result.status === "fulfilled" && result.value.result.frame ? [result.value.result.frame] : []);
@@ -149,7 +150,7 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     const needsPreparation = control.activities.filter(frame => frame.kind !== "reflect" && frame.activityStatus !== "paused" && (frame.dueAtSeconds !== null || frame.durationSeconds === 0) &&
       (!control.prepared[frame.id] || Object.entries(control.prepared[frame.id]!.reads).some(([key, hash]) => contentHash(readDependency(source, key)) !== hash)));
     const groups = components(source, needsPreparation);
-    const adjudicated = await Promise.allSettled(groups.map(group => prepareActions(source, authority, group, decisions, this.config.creationEnabled)));
+    const adjudicated = await Promise.allSettled(groups.map(group => withFreshMemory(() => prepareActions(source, authority, group, decisions, this.config.creationEnabled))));
     let newRandomCommitment = false;
     adjudicated.forEach((result, index) => {
       if (result.status === "fulfilled") {

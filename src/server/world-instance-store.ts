@@ -6,6 +6,7 @@ import { contentHash } from "../engine/models/model-audit";
 import type { RuntimeCorrelation } from "../engine/runtime/observability";
 import { validateSimulationState } from "../engine/runtime/transaction";
 import type { StoredWorldInstance, WorldInstanceDocument } from "./world-instance-types";
+import { memoryRecordSchema, memoryMatches } from "../engine/cognition/memory";
 
 export class WorldInstanceNotFoundError extends Error {
   readonly status = 404;
@@ -248,7 +249,14 @@ function validateActionWindow(document: WorldInstanceDocument): void {
 }
 
 export function validateWorldInstanceDocument(document: WorldInstanceDocument, rulePackages?: RulePackageRegistry): void {
-  if (document.schemaVersion !== 31) throw new Error("world instance schema v31 required");
+  if (document.schemaVersion !== 32) throw new Error("world instance schema v32 required");
+  if (!document.agentMemories || Array.isArray(document.agentMemories)) throw new Error("instance Agent memories are required");
+  for (const [id, value] of Object.entries(document.agentMemories)) {
+    const record = memoryRecordSchema.parse(value), agent = document.state.agents[id];
+    if (!agent || record.checkpoint && (!memoryMatches(agent, record.checkpoint) || record.checkpoint.agentId !== id ||
+      record.checkpoint.protectedEvidenceIds.some(key => !record.checkpoint!.evidenceHashes[key]) ||
+      record.checkpoint.protectedClaimIds.some(key => !record.checkpoint!.claimHashes[key]))) throw new Error("invalid Agent memory source");
+  }
   requireText(document.id, "instance id");
   requireText(document.title, "instance title");
   if (!Array.isArray(document.narratives)) throw new Error("instance narrative outbox is required");

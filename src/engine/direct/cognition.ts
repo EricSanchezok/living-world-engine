@@ -1,4 +1,4 @@
-import type { SimulationState } from "../contracts/model";
+import type { SimulationState, BeliefClaim } from "../contracts/model";
 import type { DecisionQuestionV2, DecisionAnswerV2 } from "../models/decision-v2";
 import { loadPromptAsset } from "../prompts";
 import { contentHash } from "../models/model-audit";
@@ -7,7 +7,7 @@ import type { DirectCognitiveUpdate } from "./contracts";
 import type { JsonValue } from "../runtime/json";
 import { orderedValues } from "./state";
 
-export function cognitiveQuestions(state: Readonly<SimulationState>, agentId: string): Record<string, DecisionQuestionV2> {
+export function cognitiveQuestions(state: Readonly<SimulationState>, agentId: string, claims: readonly BeliefClaim[]): Record<string, DecisionQuestionV2> {
   const agent = state.agents[agentId]!, instructions = loadPromptAsset("user/direct-cognition.md");
   const questions: Record<string, DecisionQuestionV2> = {};
   orderedValues(agent.character.goals).filter(goal => goal.status === "active").forEach((goal, index) => {
@@ -15,20 +15,20 @@ export function cognitiveQuestions(state: Readonly<SimulationState>, agentId: st
       criteria: { completed: "Actual evidence establishes the entire goal", partial: "Evidence establishes only a component or milestone",
         unchanged: "No new progress", unknown: "Not enough evidence to judge completion" } };
   });
-  orderedValues(agent.belief.claims).forEach((claim, index) => {
+  claims.forEach((claim, index) => {
     questions[`belief_status_${index}`] = { type: "choice", version: "belief-update-1", instructions: { task: instructions, claim: claim as unknown as JsonValue },
       criteria: { supported: "New evidence supports this claim", refuted: "New evidence contradicts this claim",
         unresolved: "New evidence makes this uncertain", unchanged: "No relevant new evidence" } };
   });
   return questions;
 }
-export function cognitiveUpdate(state: Readonly<SimulationState>, agentId: string, answers: Record<string, DecisionAnswerV2>): DirectCognitiveUpdate {
+export function cognitiveUpdate(state: Readonly<SimulationState>, agentId: string, claims: readonly BeliefClaim[], answers: Record<string, DecisionAnswerV2>): DirectCognitiveUpdate {
   const agent = state.agents[agentId]!;
   const verdict = (id: string) => { const answer = answers[id]; if (answer?.type !== "choice") throw new Error(`missing cognitive decision ${id}`); return answer.choice; };
   return { agentId, decisionHash: contentHash(answers),
     goals: Object.fromEntries(orderedValues(agent.character.goals).filter(goal => goal.status === "active").map((goal, index) =>
       [goal.id, verdict(`goal_status_${index}`) as DirectCognitiveUpdate["goals"][string]])),
-    beliefs: Object.fromEntries(orderedValues(agent.belief.claims).map((claim, index) =>
+    beliefs: Object.fromEntries(claims.map((claim, index) =>
       [claim.id, verdict(`belief_status_${index}`) as DirectCognitiveUpdate["beliefs"][string]])) };
 }
 /** Cognition may use earlier delivered evidence at the same instant; it need not invent a new world event. */

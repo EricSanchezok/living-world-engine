@@ -19,6 +19,7 @@ export class ModelScheduledExecutionError extends Error {
 }
 
 export interface ModelScheduleRequest<T> {
+  priority?: "foreground" | "background";
   providerId: string;
   workloadId: string;
   abortSignal?: AbortSignal;
@@ -32,6 +33,7 @@ export interface ModelScheduleResult<T> {
 }
 
 interface QueuedJob {
+  priority: "foreground" | "background";
   providerId: string;
   workloadId: string;
   enqueuedAt: number;
@@ -106,6 +108,7 @@ export class FairModelScheduler {
 
     return new Promise<ModelScheduleResult<T>>((resolve, reject) => {
       const job: QueuedJob = {
+        priority: request.priority ?? "foreground",
         providerId: request.providerId,
         workloadId: request.workloadId,
         enqueuedAt: this.now(),
@@ -157,16 +160,20 @@ export class FairModelScheduler {
     const laneCount = this.rotation.length;
     if (laneCount === 0) return undefined;
     const startIndex = this.nextRotationIndex % laneCount;
+    const foregroundReady = [...this.lanes.values()].some(lane => lane.some(job => job.priority === "foreground" &&
+      (this.activeByProvider.get(job.providerId) ?? 0) < this.options.providerConcurrency[job.providerId]!));
     for (let offset = 0; offset < laneCount; offset += 1) {
       const index = (startIndex + offset) % laneCount;
       const workloadId = this.rotation[index];
       const lane = this.lanes.get(workloadId);
       if (!lane || lane.length === 0) continue;
-      const job = lane[0];
+      const position = foregroundReady ? lane.findIndex(job => job.priority === "foreground") : 0;
+      if (position < 0) continue;
+      const job = lane[position]!;
       const providerLimit = this.options.providerConcurrency[job.providerId];
       const providerActive = this.activeByProvider.get(job.providerId) ?? 0;
       if (providerActive >= providerLimit) continue;
-      lane.shift();
+      lane.splice(position, 1);
       this.queued -= 1;
       this.nextRotationIndex = index + 1;
       clearTimeout(job.timeout);

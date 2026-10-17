@@ -34,7 +34,7 @@ Options:
   --repeat <1..100>          Run independent trials (default: 1)
   --source auto|api|sqlite   Read source evidence (default: auto)
   --api-url <url>            Local workbench URL (default: http://127.0.0.1:3000)
-  --database <sqlite>        Ledger path (default: .livingworld-v31/livingworld.sqlite)
+  --database <sqlite>        Ledger path (default: .livingworld-v32/livingworld.sqlite)
   --catalog <yaml>           Model catalog path (default: config/models.yaml)
   --output <file>            Write the complete JSON report to a file
   --allow-drift              Allow a recorded-profile baseline to run after drift
@@ -59,7 +59,7 @@ function parseRepeat(value: string): number {
 function parseArguments(argv: readonly string[]): ParsedArguments {
   if (argv.includes("--help")) throw new Error(usage());
   const positional: string[] = [];
-  let dataRoot = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v31");
+  let dataRoot = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v32");
   let database = path.join(dataRoot, "livingworld.sqlite");
   let catalog = path.resolve(process.env.LIVINGWORLD_MODEL_CATALOG_PATH ?? "config/models.yaml");
   let source: ParsedArguments["source"] = "auto";

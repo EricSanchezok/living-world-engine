@@ -1,6 +1,6 @@
 # Direct world runtime
 
-This reference owns the default `direct-world@5` execution contract, approved in [Spec 0182](../specs/0182-jev-direct-world-runtime.md). Its implementation lives in [`src/engine/direct/`](../../src/engine/direct/algorithm.ts). The script contract is v17, SimulationState is v21 and WorldInstanceDocument is v31.
+This reference owns the default `direct-world@6` execution contract, approved in [Spec 0182](../specs/0182-jev-direct-world-runtime.md). Its implementation lives in [`src/engine/direct/`](../../src/engine/direct/algorithm.ts). The script contract is v17, SimulationState is v21 and WorldInstanceDocument is v32.
 
 ## Model responsibilities
 
@@ -91,3 +91,7 @@ Movement binds a concrete known destination, including the current place for loc
 A local world judgment can select a missing qualitative value for an existing text property. The ordinary capability creator receives those exact subject/predicate requirements with the public role properties, and a subsequent local decision admits the declared effects. Unaffected properties retain their values, numeric mechanisms retain their own owners, and the existing predicate is updated rather than duplicated under a synonym. [Decision 0237](../decisions/0237-open-values-and-published-continuations.md) records this boundary.
 
 An NPC's private view derives its own directed speech since each recipient's latest reply from retained delivered observations. An unrelated overheard conversation does not cause exact repeated speech to an unanswered recipient; a new direct reply or physical observation remains eligible. A creator can choose silence. A participant-caused inspection retains one follow-up decision to report, decline or wait, even when a physical change triggered the inspection or the inspection learned no new property. It cannot recursively extend the same inspection cause.
+
+## Long-term memory
+
+Private action interpretation, expression and actor evidence in adjudication use the [Agent memory reader](agent-memory.md). Model request pressure starts instance-owned background work; world commits and original cognition retain their existing owners.

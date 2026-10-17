@@ -161,7 +161,7 @@ export interface ParticipantReactionRecord {
 }
 
 export interface WorldInstanceDocument {
-  schemaVersion: 31;
+  schemaVersion: 32;
   id: string;
   world: WorldRuntimeContract;
   executionAlgorithm: AlgorithmRef;
@@ -174,6 +174,7 @@ export interface WorldInstanceDocument {
   createdAt: string;
   updatedAt: string;
   state: SimulationState;
+  agentMemories: Record<AgentId, import("../engine/cognition/memory").MemoryRecord>;
   participants: Record<ParticipantId, ParticipantRecord>;
   policyBindings: Record<AgentId, PolicyBinding>;
   actionWindow: ActionWindow | null;

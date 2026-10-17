@@ -148,6 +148,7 @@ profiles:
     max_output_tokens: 8192
     # Wire protection is independent of the provider's actual token limits.
     max_input_bytes: 4000000
+    max_question_tokens: 32000
     inference: {}
   decision-deepseek:
     account_id: deepseek-api

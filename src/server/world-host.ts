@@ -1,4 +1,6 @@
 import { generateSuggestions, reconcileSuggestions, recoverSuggestions, SUGGESTIONS_MANIFEST } from "./suggestions";
+import { AgentMemoryService, MEMORY_MANIFEST } from "./agent-memory";
+import { recordedMemoryAccess } from "../engine/cognition/memory";
 import type { WorldStepPreparation } from "../engine/runtime/execution";
 import { loadPromptAsset } from "../engine/prompts";
 import { agentCapabilityModels } from "../engine/models/capability-bindings";
@@ -581,6 +583,8 @@ function agentStateFromOrigin(
 }
 
 export class WorldHost {
+  private readonly memories: AgentMemoryService;
+  async drainMemories(id: string): Promise<void> { await this.memories.drain(id); }
   private readonly suggestionWorkers = new Map<string, { sourceId: string; requestId: string; controller: AbortController; promise: Promise<void> }>();
   private restoring = true;
 
@@ -894,6 +898,25 @@ export class WorldHost {
       throw new Error("world run lease budgets must be positive integers");
     }
     this.runtimeObserver = options.observer ?? NOOP_RUNTIME_OBSERVER;
+    this.memories = new AgentMemoryService(this.options.provider, {
+      read: id => this.read(id).document,
+      update: (id, change, finish) => this.serialized(id, async () => {
+        const stored = this.read(id), document = structuredClone(stored.document);
+        if (!change(document)) return false;
+        this.persist(stored, document, finish ? { id: finish.id, input: { status: "succeeded",
+          semanticHash: finish.semanticHash, stateHash: contentHash(document.state), commitRevision: document.state.revision } } : undefined);
+        return true;
+      }),
+      begin: (document, signal) => {
+        const execution = this.beginExecution(document, "interactive", "agent-memory", MEMORY_MANIFEST);
+        return { id: execution?.id ?? null, scope: { workloadId: `${document.id}:memory`, batchId: randomUUID(), abortSignal: signal,
+          correlation: { executionId: execution?.id, instanceId: document.id, revision: document.state.revision },
+          observer: execution?.trace ?? this.runtimeObserver,
+          runtimeIdentity: { worldHash: document.state.worldHash, revision: document.state.revision } } };
+      },
+      fail: (id, error) => this.failExecution(id ?? undefined, error),
+    });
+
     this.inspectorLedgerUnsubscribe = options.ledger?.subscribe((event) => {
       const instanceId = event.correlation?.instanceId;
       if (instanceId) {
@@ -928,7 +951,7 @@ export class WorldHost {
         /* turbopackIgnore: true */ process.env.LIVINGWORLD_MODEL_CATALOG_PATH ?? "config/models.yaml",
       ));
       const dataRoot = path.resolve(
-        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v31",
+        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v32",
       );
       const modelRegistry = new ModelRegistry(catalog, dataRoot);
       modelRegistry.startBackgroundRefresh();
@@ -1415,7 +1438,7 @@ export class WorldHost {
     }
     const now = this.now().toISOString();
     const initial: WorldInstanceDocument = {
-      schemaVersion: 31,
+      schemaVersion: 32,
       id,
       world: toWorldRuntimeContract(definition),
       executionAlgorithm: structuredClone(experiment.algorithmRef),
@@ -1427,6 +1450,7 @@ export class WorldHost {
       createdAt: now,
       updatedAt: now,
       state: structuredClone(definition.initialState),
+      agentMemories: {},
       participants: {},
       policyBindings: policyRoster(definition.initialState),
       actionWindow: null,
@@ -1783,6 +1807,7 @@ export class WorldHost {
     this.cancelTimer(id);
     this.options.store.deleteInstance(id, stored.generation, { instanceId: id });
     this.progress.clear(id);
+    this.memories.cancel(id);
     for (const [key, worker] of this.suggestionWorkers) if (key.startsWith(`${id}:`)) worker.controller.abort();
     this.inspectorLedgerSnapshots.delete(id);
     this.inspectorWindowProjections.delete(id);
@@ -2265,6 +2290,9 @@ export class WorldHost {
       observer: execution?.trace ?? this.runtimeObserver,
       abortSignal: controller.signal,
       stageHooks,
+      memory: algorithm.protocol === "direct" ? recovery && this.options.ledger
+        ? recordedMemoryAccess(this.options.ledger.executionEvents(recovery.executionId), this.memories.scope(document, execution?.trace))
+        : this.memories.scope(document, execution?.trace) : undefined,
     };
     let atomicStageEntered = false;
     try {
@@ -2527,6 +2555,7 @@ export class WorldHost {
       runRecord.debugCheckpoint = structuredClone(latestRun.debugCheckpoint);
       runRecord.lastDebugRequestId = latestRun.lastDebugRequestId;
       document.narratives = structuredClone(latest.document.narratives);
+      document.agentMemories = structuredClone(latest.document.agentMemories);
       for (const participant of Object.values(document.participants)) participant.suggestions = structuredClone(latest.document.participants[participant.id]!.suggestions);
       enqueueNarrative(document, this.now().toISOString());
       if (currentRun(document)?.servicePause) settleQueuedNarratives(document, this.now().toISOString());
@@ -3215,6 +3244,12 @@ export class WorldHost {
         this.failExecution(participant.suggestions.executionId ?? undefined, new DOMException("Suggestion generation interrupted by restart", "AbortError"));
     }
     let changed = recoverSuggestions(recovered);
+    for (const memory of Object.values(recovered.agentMemories)) if (memory.attempt?.status === "generating") {
+      this.failExecution(memory.attempt.executionId ?? undefined, new DOMException("Memory generation interrupted by restart", "AbortError"));
+      // Completed checkpoints remain; only fresh request pressure can schedule interrupted work again.
+      memory.attempt = null;
+      changed = true;
+    }
     for (const run of Object.values(recovered.runs)) {
       if (!["queued", "running", "pausing", "debug-paused"].includes(run.status)) continue;
       let checkpointError = run.debugMode === "step"

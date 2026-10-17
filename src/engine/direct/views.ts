@@ -1,14 +1,19 @@
 import type { SimulationState } from "../contracts/model";
 import { projectAgentPerspective } from "../cognition/agent-perspective";
+import { readAgentMemory, type AgentMemoryAccess } from "../cognition/memory";
 import type { JsonValue } from "../runtime/json";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import type { ActionFrame, DirectLocalView } from "./contracts";
 import { canHaveWitnesses } from "./contact";
 import { captureDependencies, orderedValues } from "./state";
 
-export function privateActionView(state: Readonly<SimulationState>, agentId: string, causeActionId?: string | null): DirectLocalView {
+export function privateActionView(state: Readonly<SimulationState>, agentId: string, causeActionId?: string | null, memories?: AgentMemoryAccess): DirectLocalView {
   const agent = state.agents[agentId]; if (!agent) throw new Error("unknown decision owner");
   const perspective = projectAgentPerspective(state, agent);
+  const checkpoint = memories?.read(agentId);
+  const memory = readAgentMemory(state, agent, checkpoint);
+  perspective.knowledge.evidence = memory.evidence;
+  perspective.knowledge.claims = memory.claims;
   const entities = Object.fromEntries(Object.values(agent.bindings).sort((a, b) => a.localEntityId.localeCompare(b.localEntityId)).filter(binding => binding.canonicalEntityIds.length === 1 &&
     agent.belief.localEntities[binding.localEntityId]).map(binding => [binding.localEntityId, binding.canonicalEntityIds[0]!]));
   const keys = ["clock", `agent:${agentId}`, `entity:${agent.entityId}`, `placement:${agent.entityId}`, `collections:${agent.entityId}`,
@@ -19,7 +24,8 @@ export function privateActionView(state: Readonly<SimulationState>, agentId: str
       (fact.access.kind === "public" || fact.access.kind === "agents" && fact.access.agentIds.includes(agentId))).map(fact => `fact:${fact.id}`)];
   const causeEvents = causeActionId ? new Set(state.history.flatMap(step => step.events.filter(event =>
     event.causes.some(cause => cause.kind === "action" && cause.id === causeActionId)).map(event => event.id))) : null;
-  const interactions = privateInteractions(state, agentId, entities);
+  const recentSources = new Set(memory.evidence.flatMap(item => item.sourceId ? [item.sourceId] : []));
+  const interactions = privateInteractions(state, agentId, entities, null, recentSources);
   const ownSpeechSinceLastRecipientReply: Array<{ recipientLocalId: string; words: string }> = [];
   for (const item of interactions) {
     if (!item.utterance) continue;
@@ -34,6 +40,7 @@ export function privateActionView(state: Readonly<SimulationState>, agentId: str
   }
   const view = { agentId: perspective.agentId, elapsedSeconds: perspective.elapsedSeconds, self: perspective.self, mechanics: perspective.mechanics,
     knowledge: perspective.knowledge, character: perspective.character,
+    memory: { version: memory.version, summary: memory.summary, important: memory.important },
     ownSpeechSinceLastRecipientReply,
     respondingTo: causeEvents ? privateInteractions(state, agentId, entities, causeEvents).at(-1) ?? null : null,
     conversation: interactions.filter(item => item.utterance).slice(-24).map(item => ({
@@ -47,12 +54,12 @@ export function privateActionView(state: Readonly<SimulationState>, agentId: str
 }
 
 /** Dialogue comes from delivered, retained observations, never another subject's prose or truth. */
-function privateInteractions(state: Readonly<SimulationState>, agentId: string, entities: Record<string, string>, eventIds?: ReadonlySet<string>) {
+function privateInteractions(state: Readonly<SimulationState>, agentId: string, entities: Record<string, string>, eventIds?: ReadonlySet<string> | null, sourceIds?: ReadonlySet<string>) {
   const agent = state.agents[agentId]!;
   const retained = new Set(Object.values(agent.belief.evidence).map(evidence => evidence.sourceId));
   const self = new Set(Object.entries(entities).filter(([, id]) => id === agent.entityId).map(([id]) => id));
   return state.history.flatMap(step => step.observations.filter(observation => observation.observerId === agentId &&
-    retained.has(observation.id) && observation.scene && (!eventIds || observation.sourceEventIds.some(id => eventIds.has(id)))).map(observation => {
+    retained.has(observation.id) && (!sourceIds || sourceIds.has(observation.id)) && observation.scene && (!eventIds || observation.sourceEventIds.some(id => eventIds.has(id)))).map(observation => {
     const scene = observation.scene!;
     return { step: observation.step, worldTimeSeconds: step.temporalBoundary.toElapsedSeconds,
       latest: observation.step === agent.observationCursorStep,
@@ -84,7 +91,7 @@ export function perceptualNeighborhood(state: Readonly<SimulationState>, frame: 
   return ids;
 }
 
-export function localWorldView(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frames: ActionFrame[]): DirectLocalView {
+export function localWorldView(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frames: ActionFrame[], memories?: AgentMemoryAccess): DirectLocalView {
   const ids = new Set(frames.flatMap(frame => [frame.actorEntityId, frame.targetEntityId, frame.toolEntityId].filter((id): id is string => id !== null)));
   for (const frame of frames) if (canHaveWitnesses(frame)) {
     for (const agent of Object.values(state.agents)) if (sharesContactNeighborhood(state, agent.entityId, frame.actorEntityId)) ids.add(agent.entityId);
@@ -102,9 +109,13 @@ export function localWorldView(state: Readonly<SimulationState>, definition: Wor
   const keys = [...frames.map(frame => `evidence:${frame.actorId}`), ...[...ids].flatMap(id => [`entity:${id}`, `placement:${id}`, `members:${id}`, `collections:${id}`]),
     ...facts.map(fact => `fact:${fact.id}`), ...quantities.map(quantity => `quantity:${quantity.id}`),
     ...meters.map(meter => `meter:${meter.id}`), ...ratings.map(rating => `rating:${rating.id}`), ...conditions.map(condition => `condition:${condition.id}`)];
+  const actorMemories = Object.fromEntries([...new Set(frames.map(frame => frame.actorId))]
+    .map(id => [id, readAgentMemory(state, state.agents[id]!, memories?.read(id))]));
   return { state: { world: { name: definition.name, description: definition.description, laws: definition.laws },
     temporalProfiles: state.truth.mechanics.temporalProfiles, temporalCalibrations: state.truth.mechanics.temporalCalibrations,
-    actions: frames, deliveredEvidence: Object.fromEntries(frames.map(frame => [frame.actorId, orderedValues(state.agents[frame.actorId]!.belief.evidence)])),
+    actions: frames, deliveredEvidence: Object.fromEntries(Object.entries(actorMemories).map(([id, memory]) => [id, memory.evidence])),
+    actorMemory: Object.fromEntries(Object.entries(actorMemories).map(([id, memory]) =>
+      [id, { version: memory.version, summary: memory.summary, important: memory.important }])),
     entities: [...ids].map(id => state.truth.entities[id]), placements: Object.fromEntries([...ids].map(id => [id, state.truth.placements[id]])),
     facts, quantities, meters, ratings, conditions } as unknown as JsonValue,
     reads: captureDependencies(state, keys), entities: Object.fromEntries([...ids].map(id => [id, id])) };

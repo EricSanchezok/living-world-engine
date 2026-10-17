@@ -1,0 +1,1 @@
+Compact the supplied frozen history prefix. Return the updated summary and the IDs of new records requiring permanent verbatim protection. Write the summary in the character's language. Retain who did what, when, to whom, and what remains unresolved. Recent records outside this input will be appended by the engine; do not invent or anticipate them.

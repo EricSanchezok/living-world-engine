@@ -8,6 +8,20 @@ function deferred<T>() {
 }
 
 describe("FairModelScheduler", () => {
+  it("dispatches queued foreground work before background memory without interrupting an active call", async () => {
+    const scheduler = new FairModelScheduler({ globalConcurrency: 1, maxQueuedRequests: 10,
+      queueTimeoutMs: 10000, providerConcurrency: { provider: 1 } });
+    const gate = deferred<void>(), started: string[] = [];
+    const active = scheduler.schedule({ providerId: "provider", workloadId: "active", priority: "background",
+      execute: async () => { started.push("active"); await gate.promise; } });
+    const submit = (label: string, priority: "foreground" | "background") => scheduler.schedule({
+      providerId: "provider", workloadId: "same-instance", priority, execute: async () => { started.push(label); },
+    });
+    const queued = [submit("memory", "background"), submit("action", "foreground"), submit("reply", "foreground")];
+    expect(started).toEqual(["active"]);
+    gate.resolve(); await Promise.all([active, ...queued]);
+    expect(started).toEqual(["active", "action", "reply", "memory"]);
+  });
   it("keeps a burst of 48 requests at or below the configured global limit of 16", async () => {
     const scheduler = new FairModelScheduler({
       globalConcurrency: 16,

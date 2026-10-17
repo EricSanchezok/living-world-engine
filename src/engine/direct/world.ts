@@ -65,7 +65,7 @@ export function directSemanticId(kind: "fact" | "object" | "condition", owners: 
 export async function prepareActions(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frames: ActionFrame[], decisions: DirectDecisions, creationEnabled = true) {
   const audits: ModelExecutionAudit[] = [];
   if (!frames.length) return { prepared: [] as PreparedDirectAction[], reads: {} as Record<string, string>, audits };
-  const view = localWorldView(state, definition, frames), questions: Record<string, DecisionQuestionV2> = {};
+  const view = localWorldView(state, definition, frames, decisions.scope.memory), questions: Record<string, DecisionQuestionV2> = {};
   view.state = { ...view.state as Record<string, JsonValue>, adjudicationPolicy: loadPromptAsset("user/direct-world.md") };
   const effects = new Map<string, { fact: WorldFact; values: FactValue[] }>();
   const visibility = new Map<string, WorldFact>();

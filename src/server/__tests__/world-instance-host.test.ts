@@ -502,7 +502,7 @@ describe("World Instance host", () => {
       });
       expect(advanced.summary).toMatchObject({ revision: 10, step: 10, participantCount: 0 });
       const stored = database.readInstance(created.summary.id).document;
-      expect(stored).toMatchObject({ schemaVersion: 31, experimentEnrollment: null, experimentExclusion: { reason: "no-active-experiment" } });
+      expect(stored).toMatchObject({ schemaVersion: 32, experimentEnrollment: null, experimentExclusion: { reason: "no-active-experiment" } });
       const inspector = host.inspectorWindow(created.summary.id, { limit: 24 });
       expect(inspector).toMatchObject({
         apiVersion: 14,
@@ -802,7 +802,7 @@ describe("World Instance host", () => {
         response: { text: expect.any(String) },
       });
       const stored = database.readInstance(created.summary.id).document;
-      expect(stored.schemaVersion).toBe(31);
+      expect(stored.schemaVersion).toBe(32);
       expect(stored.experimentEnrollment).toBeNull();
       expect(stored.executionAlgorithm).toMatchObject({
         id: "eager-reference",
@@ -1415,7 +1415,7 @@ describe("World Instance host", () => {
       const source = database.readInstance(created.summary.id).document;
       const legacy = structuredClone(source);
       (legacy as unknown as { schemaVersion: number }).schemaVersion = 23;
-      expect(() => validateWorldInstanceDocument(legacy)).toThrow("world instance schema v31 required");
+      expect(() => validateWorldInstanceDocument(legacy)).toThrow("world instance schema v32 required");
 
       const missingExperimentDecision = structuredClone(source);
       missingExperimentDecision.experimentEnrollment = null;
