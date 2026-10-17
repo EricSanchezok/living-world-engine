@@ -9,3 +9,4 @@
 ## 世界目录
 
 - [黑沼边境](blackmarsh/README.md)：随应用首次安装，由 Robert Conley 的开放沙盒设定 Blackmarsh 改编的多 Agent 奇幻边境。
+- [赛博朋克 2077](cyberpunk2077/README.md)：世界复刻的前期调研与原创出身草案，尚无可导入的运行目录。

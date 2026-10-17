@@ -1,0 +1,597 @@
+{
+  "researched_on": "2026-10-17",
+  "sources": [
+    {
+      "id": "P01",
+      "title": "Cyberpunk 2077 official overview and character profiles",
+      "url": "https://www.cyberpunk.net/us/en/cyberpunk-2077",
+      "format": "html",
+      "authority": "official",
+      "scope": "2077; biographies include later events",
+      "reviewed_locator": "Story / Characters：V、Johnny、Jackie、Judy、Panam、Adam Smasher；简介跨越后期剧情。"
+    },
+    {
+      "id": "P02",
+      "title": "Phantom Liberty official dossiers",
+      "url": "https://www.cyberpunk.net/us/en/phantom-liberty",
+      "format": "html",
+      "authority": "official",
+      "scope": "2077; expansion story reveals",
+      "reviewed_locator": "Dogtown 与 Characters：Songbird、Reed、Myers、Hansen；不是精确开局时点表。"
+    },
+    {
+      "id": "P03",
+      "title": "Ultimate Edition Game Booklet",
+      "url": "https://cp2077.ly/Booklet",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "2023 publication; game mechanics and travel guide",
+      "reviewed_locator": "PDF p9（身世），p20–29（城市），p40–49（人物）；p43 做过渲染核对。不是逐页审校全部 83 页。"
+    },
+    {
+      "id": "P04",
+      "title": "Cyberpunk: Edgerunners Mission Kit",
+      "url": "https://rtalsoriangames.com/cyberpunk-edgerunners-mission-kit/",
+      "format": "html",
+      "authority": "official",
+      "scope": "2070s; catalogue, not the full paid rules",
+      "reviewed_locator": "产品与内容范围；只取得网页，没有完整付费盒装正文。"
+    },
+    {
+      "id": "P05",
+      "title": "Edgerunners Mission Kit rule-book overview",
+      "url": "https://rtalsoriangames.com/2024/05/20/a-peek-inside-the-cyberpunk-edgerunners-mission-kit-the-rule-book/",
+      "format": "html",
+      "authority": "official",
+      "scope": "2070s tabletop rules overview",
+      "reviewed_locator": "Rule Book 概述，2070 年代 quickhack 与 direct connection 的范围；不是完整规则。"
+    },
+    {
+      "id": "P06",
+      "title": "Edgerunners Mission Kit public preview",
+      "url": "https://rtalsoriangames.com/wp-content/uploads/2023/12/CEMK-PAX-U-2023-Preview.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "2070s; 8-page promotional preview, not the full rules",
+      "reviewed_locator": "PDF p4–7：作品、角色、历史和规则方向的宣传介绍；八页预览不能冒充规则书。"
+    },
+    {
+      "id": "P07",
+      "title": "Cyberware Enhancements",
+      "url": "https://rtalsoriangames.com/wp-content/uploads/2024/08/RTG-CX-CyberwareEnhancements.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "2070s tabletop supplement",
+      "reviewed_locator": "PDF p1–2：增强组件适配与安装规则；p3 数值清单未作为本世界的数值表。"
+    },
+    {
+      "id": "P08",
+      "title": "Karaoke Night",
+      "url": "https://rtalsoriangames.com/wp-content/uploads/2024/07/RTG-CX-DLC-KaroakeNight.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "2070s tabletop scenario; do not auto-merge its events",
+      "reviewed_locator": "已获取并提取文本；本轮只确认公开场景资料身份，未审计全部事件、角色与数值。"
+    },
+    {
+      "id": "P09",
+      "title": "Night City Atlas",
+      "url": "https://rtalsoriangames.com/wp-content/uploads/2025/01/RTG-CPR-DLC-NightCityAtlasv1.01.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "2045 ONLY; historical comparison, not 2077 map",
+      "reviewed_locator": "PDF p1–2：明确 2045 与地图适用边界；未将其全部地点逐条纳入 2077。"
+    },
+    {
+      "id": "P10",
+      "title": "Update 2.0 patch notes",
+      "url": "https://www.cyberpunk.net/en/news/49060/update-2-0",
+      "format": "html",
+      "authority": "official",
+      "scope": "video-game mechanical revision",
+      "reviewed_locator": "Cyberware / Netrunning / Police / Balance：用于区分 2.0 机制与世界规律。"
+    },
+    {
+      "id": "P11",
+      "title": "What is coming in 2.0: Cyberware",
+      "url": "https://www.cyberpunk.net/en/news/49129/whats-coming-in-2-0-cyberware",
+      "format": "html",
+      "authority": "official",
+      "scope": "video-game mechanical revision",
+      "reviewed_locator": "义体容量与护甲设计说明；不等同精神失常完整理论。"
+    },
+    {
+      "id": "P12",
+      "title": "Fixers and time-sensitive gigs",
+      "url": "https://www.cyberpunk.net/en/news/39089/whats-new-in-night-city-patch-1-3-development-insight",
+      "format": "html",
+      "authority": "official",
+      "scope": "in-world framing of patch 1.3; separate jokes and mechanics",
+      "reviewed_locator": "带世界内口吻的中间人描述；排除补丁笑话、UI 和存档机制。"
+    },
+    {
+      "id": "P13",
+      "title": "Night City driving routes",
+      "url": "https://www.cyberpunk.net/en/news/50122/your-trip-to-night-city-best-routes-to-take-your-ride-for-a-spin",
+      "format": "html",
+      "authority": "official",
+      "scope": "2077 geographic descriptions",
+      "reviewed_locator": "Kabuki 到 City Center、Badlands 等驾车路线；不据此推算现实距离。"
+    },
+    {
+      "id": "P14",
+      "title": "Cyberpunk Edgerunners official overview",
+      "url": "https://www.cyberpunk.net/en/edgerunners",
+      "format": "html",
+      "authority": "official",
+      "scope": "anime; distinguish series and time periods",
+      "reviewed_locator": "动画作品的官方入口；没有逐集提取人物事件，不混入新动画公告。"
+    },
+    {
+      "id": "P15",
+      "title": "The World of Cyberpunk 2077 listing",
+      "url": "https://digital.darkhorse.com/books/fad8830964f446bca88baf637579dd49/world-of-cyberpunk-2077",
+      "format": "html",
+      "authority": "publisher-catalogue",
+      "scope": "catalogue only; full book not acquired",
+      "reviewed_locator": "出版社商品页；完整书籍正文未获取。"
+    },
+    {
+      "id": "P16",
+      "title": "Cyberpunk RED humanity rules clarification",
+      "url": "https://rtalsoriangames.com/2021/02/05/cyberpunk-from-the-mayors-desk-2-5-21/",
+      "format": "html",
+      "authority": "official",
+      "scope": "2045 tabletop mechanics; no direct conversion to 2077 capacity",
+      "reviewed_locator": "RED 义体、人性上限与治疗的规则问答；作为不同规则体系的对照。"
+    },
+    {
+      "id": "D01",
+      "title": "District feature: Watson",
+      "url": "https://forums.cdprojektred.com/index.php?threads/district-feature-watson.11033693/",
+      "format": "html",
+      "authority": "official-staff-forum",
+      "scope": "2020 pre-release overview; first staff post only",
+      "reviewed_locator": "Vattier 署名 CD PROJEKT RED 的 #1 首帖；未将玩家回复视为官方。"
+    },
+    {
+      "id": "D02",
+      "title": "District feature: Westbrook",
+      "url": "https://forums.cdprojektred.com/index.php?threads/district-feature-westbrook.11034092/",
+      "format": "html",
+      "authority": "official-staff-forum",
+      "scope": "2020 pre-release overview; first staff post only",
+      "reviewed_locator": "Vattier 署名 CD PROJEKT RED 的 #1 首帖；未将玩家回复视为官方。"
+    },
+    {
+      "id": "D03",
+      "title": "District feature: Heywood",
+      "url": "https://forums.cdprojektred.com/index.php?threads/district-feature-heywood.11034689/",
+      "format": "html",
+      "authority": "official-staff-forum",
+      "scope": "2020 pre-release overview; first staff post only",
+      "reviewed_locator": "Vattier 署名 CD PROJEKT RED 的 #1 首帖；未将玩家回复视为官方。"
+    },
+    {
+      "id": "D04",
+      "title": "District feature: Pacifica",
+      "url": "https://forums.cdprojektred.com/index.php?threads/district-feature-pacifica.11034932/",
+      "format": "html",
+      "authority": "official-staff-forum",
+      "scope": "2020 pre-expansion overview; Dogtown requires P02",
+      "reviewed_locator": "Vattier 署名 CD PROJEKT RED 的 #1 首帖；未将玩家回复视为官方。"
+    },
+    {
+      "id": "D05",
+      "title": "District feature: Santo Domingo",
+      "url": "https://forums.cdprojektred.com/index.php?threads/district-feature-santo-domingo.11034542/",
+      "format": "html",
+      "authority": "official-staff-forum",
+      "scope": "2020 pre-release overview; first staff post only",
+      "reviewed_locator": "Vattier 署名 CD PROJEKT RED 的 #1 首帖；未将玩家回复视为官方。"
+    },
+    {
+      "id": "D06",
+      "title": "District feature: City Center",
+      "url": "https://forums.cdprojektred.com/index.php?threads/district-feature-city-center.11034311/",
+      "format": "html",
+      "authority": "official-staff-forum",
+      "scope": "2020 pre-release overview; first staff post only",
+      "reviewed_locator": "Vattier 署名 CD PROJEKT RED 的 #1 首帖；未将玩家回复视为官方。"
+    },
+    {
+      "id": "S01",
+      "title": "The Rescue walkthrough",
+      "url": "https://game8.co/games/Cyberpunk-2077/archives/Quests-The-Rescue",
+      "format": "html",
+      "authority": "secondary-walkthrough",
+      "scope": "game mission sequence; cross-check in-game before production",
+      "reviewed_locator": "任务流程与 Jackie / T-Bug / Sandra / Trauma Team；需补原始游戏证据。"
+    },
+    {
+      "id": "S02",
+      "title": "The Pickup walkthrough",
+      "url": "https://www.ign.com/wikis/cyberpunk-2077/The_Pickup_Walkthrough",
+      "format": "html",
+      "authority": "secondary-walkthrough",
+      "scope": "branch-sensitive mission evidence",
+      "reviewed_locator": "Royce、Brick、Dum Dum、Meredith、Gilchrist 的任务交汇与分支；不固定其中一个结局。"
+    },
+    {
+      "id": "S03",
+      "title": "Kabuki map",
+      "url": "https://game-maps.com/C77/Kabuki-Map.asp",
+      "format": "html",
+      "authority": "secondary-map",
+      "scope": "2077 videogame map; not real travel-time scale",
+      "reviewed_locator": "Kabuki 地图与 Lizzie's Bar 描述；不把地图像素比例当真实城市尺度。"
+    },
+    {
+      "id": "S04",
+      "title": "Gangs overview",
+      "url": "https://eip.gg/cyberpunk-2077/guides/cyberpunk-2077-gangs/",
+      "format": "html",
+      "authority": "secondary-guide",
+      "scope": "Faction identities; exact territory requires official cross-check",
+      "reviewed_locator": "各帮派身份和活动概述；不采用善恶标签、伤害表与未经交叉核查的精细地理。"
+    },
+    {
+      "id": "S05",
+      "title": "Factions index",
+      "url": "https://cyberpunk2077.wiki.fextralife.com/Factions",
+      "format": "html",
+      "authority": "community-wiki",
+      "scope": "Discovery index; contains unverified gameplay generalizations",
+      "reviewed_locator": "仅用作势力检索目录；未采纳加入帮派或等级提升的泛化表述。"
+    },
+    {
+      "id": "S06",
+      "title": "All Cyberpunk Fixer Gig Rewards (Updated for Phantom Liberty)",
+      "url": "https://attackofthefanboy.com/guides/cyberpunk-2077-all-6-fixer-gig-rewards-in-patch-1-5/",
+      "format": "html",
+      "authority": "secondary-guide",
+      "scope": "Jan 2024 page; fixer locations only, reward tables excluded",
+      "cache": false,
+      "availability": "Readable text obtained via Anysearch extract; direct HTTP fetch failed.",
+      "reviewed_locator": "七位中间人的姓名、工作区域；不采用错误或过时的任务奖励表。"
+    },
+    {
+      "id": "S07",
+      "title": "The Streetkid",
+      "url": "https://game8.co/games/Cyberpunk-2077/archives/312211",
+      "format": "html",
+      "authority": "secondary-walkthrough",
+      "scope": "Branch-dependent prologue",
+      "reviewed_locator": "街头小子序章与熟人入口；不是所有 V 的共同历史。"
+    },
+    {
+      "id": "S08",
+      "title": "The Nomad",
+      "url": "https://game8.co/games/Cyberpunk-2077/archives/312213",
+      "format": "html",
+      "authority": "secondary-walkthrough",
+      "scope": "Branch-dependent prologue",
+      "reviewed_locator": "流浪者序章与入城过程；不是所有 V 的共同历史。"
+    },
+    {
+      "id": "S09",
+      "title": "The Corpo-Rat",
+      "url": "https://game8.co/games/Cyberpunk-2077/archives/312218",
+      "format": "html",
+      "authority": "secondary-walkthrough",
+      "scope": "Branch-dependent prologue",
+      "reviewed_locator": "公司员工序章与身份变化；不是所有 V 的共同历史。"
+    },
+    {
+      "id": "S10",
+      "title": "The Information",
+      "url": "https://game8.co/games/Cyberpunk-2077/archives/312847",
+      "format": "html",
+      "authority": "secondary-walkthrough",
+      "scope": "Evelyn and Judy; BD investigation",
+      "reviewed_locator": "Evelyn / Judy 会面、超梦调查；未把攻略拾取建议写成因果法则。"
+    },
+    {
+      "id": "S11",
+      "title": "The Heist",
+      "url": "https://game8.co/games/Cyberpunk-2077/archives/312849",
+      "format": "html",
+      "authority": "secondary-walkthrough",
+      "scope": "Plot events, not initial-state facts",
+      "reviewed_locator": "Konpeki 劫案任务流程、队伍与事件；其结果不进入劫案前切片。"
+    },
+    {
+      "id": "S12",
+      "title": "Blackwall",
+      "url": "https://cyberpunk.fandom.com/wiki/Blackwall",
+      "format": "html",
+      "authority": "community-wiki",
+      "scope": "Cross-era account; isolate 2077 evidence",
+      "cache": false,
+      "availability": "Full text blocked in direct and tool fetches; link retained for follow-up, not primary evidence.",
+      "reviewed_locator": "正文获取失败；不是已核事实的支撑来源。"
+    },
+    {
+      "id": "S13",
+      "title": "Trauma Team",
+      "url": "https://cyberpunk.fandom.com/wiki/Trauma_Team",
+      "format": "html",
+      "authority": "community-wiki",
+      "scope": "Cross-era account; no unverified premiums or response guarantees",
+      "cache": false,
+      "availability": "Full text blocked in direct and tool fetches; link retained for follow-up, not primary evidence.",
+      "reviewed_locator": "正文获取失败；不是已核事实的支撑来源。"
+    },
+    {
+      "id": "S14",
+      "title": "Cyberpsychosis",
+      "url": "https://cyberpunk.fandom.com/wiki/Cyberpsychosis",
+      "format": "html",
+      "authority": "community-wiki",
+      "scope": "Cross-era explanation; mechanical formulas not universal",
+      "cache": false,
+      "availability": "Full text blocked in direct and tool fetches; link retained for follow-up, not primary evidence.",
+      "reviewed_locator": "正文获取失败；不是已核事实的支撑来源。"
+    },
+    {
+      "id": "S15",
+      "title": "NetWatch",
+      "url": "https://cyberpunk.fandom.com/wiki/NetWatch",
+      "format": "html",
+      "authority": "community-wiki",
+      "scope": "Cross-era organization; verify 2077 branch contexts",
+      "cache": false,
+      "availability": "Full text blocked in direct and tool fetches; link retained for follow-up, not primary evidence.",
+      "reviewed_locator": "正文获取失败；不是已核事实的支撑来源。"
+    },
+    {
+      "id": "S16",
+      "title": "Alt Cunningham",
+      "url": "https://cyberpunk.fandom.com/wiki/Alt_Cunningham",
+      "format": "html",
+      "authority": "community-wiki",
+      "scope": "Distinguish historical human and digital entity",
+      "cache": false,
+      "availability": "Full text blocked in direct and tool fetches; link retained for follow-up, not primary evidence.",
+      "reviewed_locator": "正文获取失败；不是已核事实的支撑来源。"
+    },
+    {
+      "id": "S17",
+      "title": "Breach Protocol",
+      "url": "https://cyberpunk.fandom.com/wiki/Breach_Protocol",
+      "format": "html",
+      "authority": "community-wiki",
+      "scope": "Version-dependent game mechanic; not global magic",
+      "cache": false,
+      "availability": "Full text blocked in direct and tool fetches; link retained for follow-up, not primary evidence.",
+      "reviewed_locator": "正文获取失败；不是已核事实的支撑来源。"
+    },
+    {
+      "id": "S18",
+      "title": "Transmission walkthrough",
+      "url": "https://game8.co/games/Cyberpunk-2077/archives/313870",
+      "format": "html",
+      "authority": "secondary-walkthrough",
+      "scope": "Later-plot branch; Alt, Voodoo Boys and Blackwall",
+      "reviewed_locator": "Transmission 中 Brigitte、Blackwall、Alt 与 NetWatch 分支的具体交互；无法单独支持完整网络理论。"
+    },
+    {
+      "id": "S19",
+      "title": "Double Life walkthrough",
+      "url": "https://game8.co/games/Cyberpunk-2077/archives/313709",
+      "format": "html",
+      "authority": "secondary-walkthrough",
+      "scope": "BD evidence and Evelyn; later-plot information visibility",
+      "reviewed_locator": "Double Life 的超梦调查阶段；尚未做全部对白的逐行复核。"
+    },
+    {
+      "id": "C01",
+      "title": "V female cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/FEM_V_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C02",
+      "title": "V male cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/MALE_V_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C03",
+      "title": "Johnny Silverhand cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/JOHNNY_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C04",
+      "title": "Judy Alvarez cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/JUDY_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C05",
+      "title": "Panam Palmer cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/PANAM_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C06",
+      "title": "Alt Cunningham cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/ALT_CUNNINGHAM_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C07",
+      "title": "Viktor Vektor cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/VIKTOR_VEKTOR_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C08",
+      "title": "Jackie Welles cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/JACKIE_WELLES_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C09",
+      "title": "Young Rogue cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/YOUNG_ROGUE_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C10",
+      "title": "Rogue Amendiares cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/ROGUE_AMENDIARES_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C11",
+      "title": "Kerry Eurodyne cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/KERRY_EURODYNE_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C12",
+      "title": "Goro Takemura cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/GORO_TAKEMURA_COSPLAY_GUIDE_EN1.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C13",
+      "title": "Rita Wheeler cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/RITA_WHEELER_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C14",
+      "title": "Misty Olszewski cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/MISTY_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C15",
+      "title": "Evelyn Parker cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/EVELYN_PARKER_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C16",
+      "title": "Songbird cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/SONGBIRD_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C17",
+      "title": "Solomon Reed cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/SOLOMON_REED_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C18",
+      "title": "Rosalind Myers cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/MYERS_COSPLAY_GUIDE_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    },
+    {
+      "id": "C19",
+      "title": "Aurore Cassel cosplay guide",
+      "url": "https://cdn-s-cyberpunk.cdprojektred.com/cosplay-guides/AuroreCassel_cosplay_guide_EN.pdf",
+      "format": "pdf",
+      "authority": "official-download",
+      "scope": "appearance reference; biography may mix past and later plot",
+      "cache": false,
+      "availability": "Linked only after initial fetch exceeded the 64 MiB per-file budget; biography not reviewed.",
+      "reviewed_locator": "未取得 PDF 正文；仅核对官方服装参考入口与下载链接。"
+    }
+  ]
+}
