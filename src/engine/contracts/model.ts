@@ -575,6 +575,17 @@ export interface WorldEvent {
   assertions: CausalAssertion[];
 }
 
+export interface AdmissionAdditions {
+  entities: Array<{ entity: WorldEntity; placementId: EntityId | null }>;
+  agents: AgentState[];
+  facts: WorldFact[];
+  meters: MeterState[];
+  quantities: QuantityState[];
+  ratings: RatingState[];
+  cognition: Array<{ agentId: AgentId; belief: AgentBeliefState; bindings: AgentState["bindings"] }>;
+  sharedActivityResourcePools: import("../mechanics/shared-activity-resources").SharedActivityResourcePool[];
+}
+
 export interface AgentAdmissionCommit {
   contentHash: string;
   semanticHash: string;
@@ -589,6 +600,7 @@ export interface AgentAdmissionCommit {
   quantities: QuantityState[];
   ratings: RatingState[];
   conditions: ConditionState[];
+  additions: AdmissionAdditions;
   invalidatedActionIds: string[];
   reusedActions: AgentActionProposal[];
 }
@@ -596,7 +608,7 @@ export interface AgentAdmissionCommit {
 export type WorldEventDraft = Omit<WorldEvent, "step">;
 
 export interface SimulationState<Step extends CommittedStep = CommittedStep> {
-  schemaVersion: 21;
+  schemaVersion: 22;
   executionState: import("../runtime/execution-state").AlgorithmExecutionState | null;
   worldId: string;
   worldHash: string;

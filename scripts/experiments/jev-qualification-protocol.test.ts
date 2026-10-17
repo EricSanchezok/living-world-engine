@@ -30,7 +30,7 @@ describe("frozen Jev qualification protocol", () => {
   it("permits producer schema bindings but detects changed world semantics", () => {
     const world = { schema_version: 14, model_profiles: { perception: "truth" }, rules: [{ id: "core-resolution", version: "2.0.0" }],
       actor: { modelProfiles: { mind: "agent" }, goal: "obtain evidence", quantity: 2 } };
-    expect(semanticWorldHash(world)).toBe(semanticWorldHash({ ...world, schema_version: 17, model_profiles: { decision: "jev" },
+    expect(semanticWorldHash(world)).toBe(semanticWorldHash({ ...world, schema_version: 18, model_profiles: { decision: "jev" },
       rules: [{ id: "core-resolution", version: "3.0.0" }], actor: { ...world.actor, modelProfiles: { creation: "deepseek" } } }));
     expect(semanticWorldHash(world)).not.toBe(semanticWorldHash({ ...world, actor: { ...world.actor, quantity: 3 } }));
   });

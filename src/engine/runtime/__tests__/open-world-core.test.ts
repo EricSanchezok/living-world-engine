@@ -28,7 +28,7 @@ import { agentMindOutputSchema, characterPatchSchema } from "../../contracts/llm
 function worldState(): SimulationState {
   const workbenchPoolId = sharedActivityResourcePoolId(TEST_WORLD_HASH, "workbench", "gate");
   return {
-    schemaVersion: 21,
+    schemaVersion: 22,
     executionState: null,
     worldId: "test-world",
     worldHash: TEST_WORLD_HASH,

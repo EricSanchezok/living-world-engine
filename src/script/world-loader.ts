@@ -10,19 +10,22 @@ import type {
   MechanicsCatalog,
   SimulationState,
 } from "../engine/contracts/model";
-import { historyReplayBaseHash } from "../engine/runtime/history-replay";
+import { createHistoryReplayBase, historyReplayBaseHash } from "../engine/runtime/history-replay";
 import { createSeededRng, validateDiscreteRandomDefinitions } from "../engine/mechanics/random";
 import { validateImpactProfile } from "../engine/mechanics/resolution";
 import { validateTemporalProfile, type TemporalProfileDefinition } from "../engine/mechanics/temporal";
 import { quantityId } from "../engine/runtime/runtime-id";
 import { sharedActivityResourcePoolId } from "../engine/runtime/runtime-id";
+import { emptyAdmissionAdditions } from "../engine/runtime/admission-additions";
+import { originAdmissionCandidate } from "../engine/runtime/origin-initialization";
+import { CanonicalCommitter } from "../engine/runtime/canonical-committer";
 import {
   validateSharedActivityResourceDefinition,
   type SharedActivityResourceDefinition,
 } from "../engine/mechanics/shared-activity-resources";
 import { createCoreRulePackageRegistry, type RulePackageRegistry } from "../engine/mechanics/rule-package";
 import { validateSimulationState } from "../engine/runtime/transaction";
-import type { WorldDefinition } from "../engine/runtime/world-definition";
+import type { WorldCreatedOrigin, WorldDefinition } from "../engine/runtime/world-definition";
 import { validateWorldDefinition, validateWorldModelProfiles } from "../engine/runtime/world-definition";
 import type { ModelCatalog } from "../engine/models/model-catalog";
 import { canonicalize, contentHash } from "../engine/models/model-audit";
@@ -297,7 +300,7 @@ function randomDistributions(document: MechanicsDocument): DiscreteRandomDefinit
   return definitions;
 }
 
-function beliefFrom(document: EntityDocument["agent"]): AgentBeliefState {
+function beliefFrom(document: Pick<NonNullable<EntityDocument["agent"]>, "belief"> | undefined): AgentBeliefState {
   if (!document) return { localEntities: {}, claims: {}, evidence: {} };
   return {
     localEntities: uniqueRecord(document.belief.local_entities, "local entity"),
@@ -306,7 +309,7 @@ function beliefFrom(document: EntityDocument["agent"]): AgentBeliefState {
   };
 }
 
-function characterFrom(document: NonNullable<EntityDocument["agent"]>): AgentCharacterState {
+function characterFrom(document: Pick<NonNullable<EntityDocument["agent"]>, "character">): AgentCharacterState {
   const atStepZero = <T extends { id: string; evidence_ids: string[] }>({ evidence_ids, ...entry }: T) => ({
     ...entry,
     evidenceIds: evidence_ids,
@@ -348,6 +351,16 @@ function characterFrom(document: NonNullable<EntityDocument["agent"]>): AgentCha
   };
 }
 
+function bindingsFrom(document: Pick<NonNullable<EntityDocument["agent"]>, "belief">): AgentState["bindings"] {
+  const bindings = document.belief.bindings;
+  if (new Set(bindings.map(binding => binding.local_entity_id)).size !== bindings.length) {
+    throw new Error("duplicate local identity binding");
+  }
+  return Object.fromEntries(bindings.map(binding => [binding.local_entity_id, {
+    localEntityId: binding.local_entity_id, canonicalEntityIds: binding.canonical_entity_ids,
+  }]));
+}
+
 function agentFrom(document: EntityDocument): AgentState | undefined {
   if (!document.agent) return undefined;
   return {
@@ -356,15 +369,7 @@ function agentFrom(document: EntityDocument): AgentState | undefined {
     modelProfiles: structuredClone(document.agent.model_profiles),
     character: characterFrom(document.agent),
     belief: beliefFrom(document.agent),
-    bindings: Object.fromEntries(
-      document.agent.belief.bindings.map((binding) => [
-        binding.local_entity_id,
-        {
-          localEntityId: binding.local_entity_id,
-          canonicalEntityIds: binding.canonical_entity_ids,
-        },
-      ]),
-    ),
+    bindings: bindingsFrom(document.agent),
     observationCursorStep: 0,
     nextAction: null,
   };
@@ -514,6 +519,122 @@ export function loadWorldTemplate(scriptDir: string): NormalizedWorldTemplate {
   });
 }
 
+function seedEntityDocuments(state: SimulationState, documents: EntityDocument[]): void {
+  for (const document of documents) {
+    if (state.truth.entities[document.id]) throw new Error(`duplicate entity id ${document.id}`);
+    state.truth.entities[document.id] = {
+      id: document.id,
+      kind: document.kind,
+      name: document.name,
+      description: document.description,
+      lifecycle: "active",
+      createdAtStep: 0,
+    };
+    state.truth.placements[document.id] = document.placement;
+    if (document.presentation) for (const [predicate, description] of Object.entries({ appearance: document.presentation.description, appearance_label: document.presentation.label })) {
+      const id = `appearance-${contentHash([document.id, predicate]).slice(0, 24)}`;
+      if (state.truth.facts[id]) throw new Error(`duplicate appearance fact id ${id}`);
+      state.truth.facts[id] = { id, subjectId: document.id, predicate, value: { kind: "text", value: description }, description,
+        access: { kind: "public" }, provenance: [{ kind: "world_seed", id: state.worldHash }] };
+    }
+    for (const fact of document.facts) {
+      if (state.truth.facts[fact.id]) throw new Error(`duplicate fact id ${fact.id}`);
+      state.truth.facts[fact.id] = {
+        ...fact,
+        subjectId: document.id,
+        provenance: [{ kind: "world_seed", id: state.worldHash }],
+      };
+    }
+    for (const meter of document.meters) {
+      if (state.truth.meters[meter.id]) throw new Error(`duplicate meter id ${meter.id}`);
+      state.truth.meters[meter.id] = {
+        id: meter.id,
+        definitionId: meter.definition_id,
+        entityId: document.id,
+        current: meter.current,
+        firedThresholdIds: [],
+      };
+    }
+    for (const quantity of document.quantities) {
+      const id = quantityId(state.worldHash, quantity.definition_id, document.id);
+      if (state.truth.quantities[id]) throw new Error(`duplicate quantity id ${id}`);
+      state.truth.quantities[id] = {
+        id,
+        definitionId: quantity.definition_id,
+        holderId: document.id,
+        amount: quantity.amount,
+      };
+    }
+    for (const rating of document.ratings) {
+      if (state.truth.ratings[rating.id]) throw new Error(`duplicate rating id ${rating.id}`);
+      state.truth.ratings[rating.id] = {
+        id: rating.id,
+        definitionId: rating.definition_id,
+        entityId: document.id,
+        value: rating.value,
+      };
+    }
+    const sharedDefinitionIds = new Set<string>();
+    for (const resource of document.shared_activity_resources) {
+      if (sharedDefinitionIds.has(resource.definition_id)) {
+        throw new Error(`entity ${document.id} repeats shared activity resource ${resource.definition_id}`);
+      }
+      sharedDefinitionIds.add(resource.definition_id);
+      if (!state.truth.mechanics.sharedActivityResources[resource.definition_id]) {
+        throw new Error(`entity ${document.id} has unknown shared activity resource ${resource.definition_id}`);
+      }
+      const id = sharedActivityResourcePoolId(state.worldHash, resource.definition_id, document.id);
+      if (state.truth.sharedActivityResourcePools[id]) throw new Error(`duplicate shared activity resource pool ${id}`);
+      state.truth.sharedActivityResourcePools[id] = {
+        id,
+        definitionId: resource.definition_id,
+        entityId: document.id,
+        capacity: resource.capacity,
+      };
+    }
+    const agent = agentFrom(document);
+    if (agent) {
+      if (state.agents[agent.id]) throw new Error(`duplicate agent id ${agent.id}`);
+      state.agents[agent.id] = agent;
+    }
+  }
+}
+
+function compileOriginInitialization(
+  state: SimulationState,
+  origin: Extract<ParticipationDocument["origins"][number], { kind: "create" }>,
+): WorldCreatedOrigin["initialization"] {
+  const input = origin.initialization;
+  if (!input) return undefined;
+  if (state.truth.entities.$participant || state.agents.$participant) throw new Error("$participant is reserved for origin references");
+  const staged = structuredClone(state);
+  seedEntityDocuments(staged, input.entities);
+  const additions = emptyAdmissionAdditions();
+  const fresh = <T>(before: Record<string, T>, after: Record<string, T>): T[] =>
+    Object.entries(after).filter(([id]) => !Object.hasOwn(before, id)).map(([, value]) => value);
+  additions.entities = fresh(state.truth.entities, staged.truth.entities).map(entity => ({ entity, placementId: staged.truth.placements[entity.id] ?? null }));
+  additions.agents = fresh(state.agents, staged.agents);
+  additions.facts = fresh(state.truth.facts, staged.truth.facts);
+  additions.meters = fresh(state.truth.meters, staged.truth.meters);
+  additions.quantities = fresh(state.truth.quantities, staged.truth.quantities);
+  additions.ratings = fresh(state.truth.ratings, staged.truth.ratings);
+  additions.sharedActivityResourcePools = fresh(state.truth.sharedActivityResourcePools, staged.truth.sharedActivityResourcePools);
+  for (const { subject_id, ...fact } of input.facts) additions.facts.push({
+    ...fact, subjectId: subject_id, provenance: [{ kind: "world_seed", id: state.worldHash }],
+  });
+  additions.cognition = input.cognition.map(seed => ({
+    agentId: seed.agent_id,
+    belief: beliefFrom(seed),
+    bindings: bindingsFrom(seed),
+  }));
+  if (!input.character) return { additions };
+  const character = characterFrom({ character: {
+    ...input.character, persona: { summary: origin.persona, voice: "", evidence_ids: [] },
+  } });
+  return { additions, character: { traits: character.traits, values: character.values, emotions: character.emotions,
+    attitudes: character.attitudes, goals: character.goals, commitments: character.commitments } };
+}
+
 export function buildWorldDefinition(
   template: NormalizedWorldTemplate,
   options: LoadWorldScriptOptions,
@@ -525,7 +646,7 @@ export function buildWorldDefinition(
   try {
     const mechanics = mechanicsCatalog(mechanicsDocument);
     const state: SimulationState = {
-      schemaVersion: 21,
+      schemaVersion: 22,
       executionState: null,
       worldId: manifest.id,
       worldHash,
@@ -555,83 +676,7 @@ export function buildWorldDefinition(
       bootstrapAgentCommits: [],
     };
 
-    for (const document of documents) {
-      if (state.truth.entities[document.id]) throw new Error(`duplicate entity id ${document.id}`);
-      state.truth.entities[document.id] = {
-        id: document.id,
-        kind: document.kind,
-        name: document.name,
-        description: document.description,
-        lifecycle: "active",
-        createdAtStep: 0,
-      };
-      state.truth.placements[document.id] = document.placement;
-      if (document.presentation) for (const [predicate, description] of Object.entries({ appearance: document.presentation.description, appearance_label: document.presentation.label })) {
-        const id = `appearance-${contentHash([document.id, predicate]).slice(0, 24)}`;
-        state.truth.facts[id] = { id, subjectId: document.id, predicate, value: { kind: "text", value: description }, description,
-          access: { kind: "public" }, provenance: [{ kind: "world_seed", id: worldHash }] };
-      }
-      for (const fact of document.facts) {
-        if (state.truth.facts[fact.id]) throw new Error(`duplicate fact id ${fact.id}`);
-        state.truth.facts[fact.id] = {
-          ...fact,
-          subjectId: document.id,
-          provenance: [{ kind: "world_seed", id: worldHash }],
-        };
-      }
-      for (const meter of document.meters) {
-        if (state.truth.meters[meter.id]) throw new Error(`duplicate meter id ${meter.id}`);
-        state.truth.meters[meter.id] = {
-          id: meter.id,
-          definitionId: meter.definition_id,
-          entityId: document.id,
-          current: meter.current,
-          firedThresholdIds: [],
-        };
-      }
-      for (const quantity of document.quantities) {
-        const id = quantityId(worldHash, quantity.definition_id, document.id);
-        if (state.truth.quantities[id]) throw new Error(`duplicate quantity id ${id}`);
-        state.truth.quantities[id] = {
-          id,
-          definitionId: quantity.definition_id,
-          holderId: document.id,
-          amount: quantity.amount,
-        };
-      }
-      for (const rating of document.ratings) {
-        if (state.truth.ratings[rating.id]) throw new Error(`duplicate rating id ${rating.id}`);
-        state.truth.ratings[rating.id] = {
-          id: rating.id,
-          definitionId: rating.definition_id,
-          entityId: document.id,
-          value: rating.value,
-        };
-      }
-      const sharedDefinitionIds = new Set<string>();
-      for (const resource of document.shared_activity_resources) {
-        if (sharedDefinitionIds.has(resource.definition_id)) {
-          throw new Error(`entity ${document.id} repeats shared activity resource ${resource.definition_id}`);
-        }
-        sharedDefinitionIds.add(resource.definition_id);
-        if (!mechanics.sharedActivityResources[resource.definition_id]) {
-          throw new Error(`entity ${document.id} has unknown shared activity resource ${resource.definition_id}`);
-        }
-        const id = sharedActivityResourcePoolId(worldHash, resource.definition_id, document.id);
-        if (state.truth.sharedActivityResourcePools[id]) throw new Error(`duplicate shared activity resource pool ${id}`);
-        state.truth.sharedActivityResourcePools[id] = {
-          id,
-          definitionId: resource.definition_id,
-          entityId: document.id,
-          capacity: resource.capacity,
-        };
-      }
-      const agent = agentFrom(document);
-      if (agent) {
-        if (state.agents[agent.id]) throw new Error(`duplicate agent id ${agent.id}`);
-        state.agents[agent.id] = agent;
-      }
-    }
+    seedEntityDocuments(state, documents);
 
     for (const timer of mechanicsDocument.world_timers) {
       if (state.truth.timers[timer.id]) throw new Error(`duplicate world timer id ${timer.id}`);
@@ -669,21 +714,27 @@ export function buildWorldDefinition(
             ? template.assets.find((asset) => asset.path === origin.image!.path)
             : undefined;
           if (origin.image && !image) throw new Error(`origin ${origin.id} image not found: ${origin.image.path}`);
-          return {
+          const presentation = {
             id: origin.id,
             title: origin.title,
             fantasy: origin.fantasy,
             description: origin.description,
-            entityKind: origin.entity_kind,
-            spawnEntityId: origin.spawn_entity_id,
-            persona: origin.persona,
             defaultGoal: origin.default_goal,
             relationshipHooks: [...origin.relationship_hooks],
             risks: [...origin.risks],
-            mechanicsProfileId: origin.mechanics_profile_id,
-            modelProfiles: structuredClone(origin.model_profiles ?? manifest.model_profiles),
             ...(image ? { image: { hash: image.hash, alt: origin.image!.alt } } : {}),
             fallbackArrival: origin.fallback_arrival,
+          };
+          return origin.kind === "existing" ? {
+            ...presentation, kind: "existing" as const, agentId: origin.agent_id,
+          } : {
+            ...presentation, kind: "create" as const,
+            entityKind: origin.entity_kind,
+            spawnEntityId: origin.spawn_entity_id,
+            persona: origin.persona,
+            mechanicsProfileId: origin.mechanics_profile_id,
+            modelProfiles: structuredClone(origin.model_profiles ?? manifest.model_profiles),
+            ...(origin.initialization ? { initialization: compileOriginInitialization(state, origin) } : {}),
           };
         }),
       } : null,
@@ -708,6 +759,13 @@ export function buildWorldDefinition(
     validateWorldDefinition(definition);
     validateWorldModelProfiles(definition, options.modelCatalog);
     validateSimulationState(state, false);
+    const committer = new CanonicalCommitter(rulePackages);
+    const admissionSource = { ...state, historyBase: createHistoryReplayBase(state) };
+    for (const origin of definition.participation?.origins ?? []) {
+      if (origin.kind === "create") committer.admit(admissionSource, originAdmissionCandidate(admissionSource, origin, {
+        displayName: origin.title, appearance: "", motivation: "",
+      }));
+    }
     return definition;
   } catch (error) {
     throw new Error(error instanceof Error ? error.message : String(error));

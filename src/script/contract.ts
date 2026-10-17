@@ -10,7 +10,7 @@ import {
 } from "../engine/contracts/state-schemas";
 
 export const scriptManifestSchema = z.object({
-  schema_version: z.literal(17),
+  schema_version: z.literal(18),
   id: z.string().regex(/^[a-z0-9][a-z0-9-]*$/),
   name: z.string().min(1),
   version: z.string().min(1),
@@ -33,27 +33,37 @@ const participationImageSchema = z.object({
   alt: z.string().trim().min(1).max(300),
 }).strict();
 
-export const participationFileSchema = z.object({
-  origins: z.array(z.object({
+const originPresentationShape = {
     id: safeIdSchema,
     title: z.string().trim().min(1).max(80),
     fantasy: z.string().trim().min(1).max(160),
     description: z.string().trim().min(1).max(1_000),
-    entity_kind: safeIdSchema,
-    spawn_entity_id: safeIdSchema,
-    persona: z.string().trim().min(1).max(1_000),
     default_goal: z.string().trim().min(1).max(500),
     relationship_hooks: z.array(z.string().trim().min(1).max(300)).max(8).default([]),
     risks: z.array(z.string().trim().min(1).max(300)).max(8).default([]),
+    image: participationImageSchema.optional(),
+    fallback_arrival: z.string().trim().min(1).max(2_000),
+};
+
+export const participationFileSchema = z.object({
+  origins: z.array(z.discriminatedUnion("kind", [z.object({
+    ...originPresentationShape,
+    kind: z.literal("create"),
+    entity_kind: safeIdSchema,
+    spawn_entity_id: safeIdSchema,
+    persona: z.string().trim().min(1).max(1_000),
     mechanics_profile_id: safeIdSchema,
     model_profiles: z.object({
       creation: safeIdSchema,
       decision: safeIdSchema,
       fallback: safeIdSchema,
     }).strict().optional(),
-    image: participationImageSchema.optional(),
-    fallback_arrival: z.string().trim().min(1).max(2_000),
-  }).strict()).max(64).default([]),
+    initialization: z.lazy(() => originInitializationSchema).optional(),
+  }).strict(), z.object({
+    ...originPresentationShape,
+    kind: z.literal("existing"),
+    agent_id: safeIdSchema,
+  }).strict()])).max(64).default([]),
 }).strict();
 
 export const lawsFileSchema = z.object({
@@ -400,6 +410,13 @@ export const entityDocumentSchema = z.object({
     character: characterSeedSchema,
     belief: beliefSeedSchema,
   }).strict().optional(),
+}).strict();
+
+export const originInitializationSchema = z.object({
+  entities: z.array(entityDocumentSchema).default([]),
+  facts: z.array(entityDocumentSchema.shape.facts.unwrap().element.extend({ subject_id: safeIdSchema })).default([]),
+  cognition: z.array(z.object({ agent_id: safeIdSchema, belief: beliefSeedSchema }).strict()).default([]),
+  character: characterSeedSchema.omit({ persona: true }).optional(),
 }).strict();
 
 export type ScriptManifestDocument = z.infer<typeof scriptManifestSchema>;

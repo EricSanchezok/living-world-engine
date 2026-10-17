@@ -997,7 +997,7 @@ describe("direct world through persistent WorldHost", () => {
       const participant = created.participants[0]!;
       expect(Object.keys(document.state.agents)).toHaveLength(48); expect(f.transport).not.toHaveBeenCalled();
       expect(Object.keys(document.state.agents).filter(id => !world.initialState.agents[id])).toEqual([participant.agentId]);
-      expect(document.state.agents[participant.agentId]!.bindings[`${participant.agentId}-self`]!.canonicalEntityIds).toEqual([participant.agentId]);
+      expect(document.state.agents[participant.agentId]!.bindings.self!.canonicalEntityIds).toEqual([participant.agentId]);
       expect(JSON.stringify(document.state.agents[participant.agentId]!.belief)).not.toContain("ragnar-ring-identity");
       expect(document.policyBindings[participant.agentId]).toMatchObject({ kind: "external", participantId: participant.id });
       for (const id of Object.keys(world.initialState.agents)) expect(document.state.agents[id]!.bindings).toEqual(world.initialState.agents[id]!.bindings);
@@ -1028,7 +1028,7 @@ describe("direct world through persistent WorldHost", () => {
       const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } });
       const id = created.summary.id;
       expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 33, executionAlgorithm: DEFAULT_ALGORITHM_REF,
-        state: { schemaVersion: 21, executionState: { data: { kind: "direct-world" } } } });
+        state: { schemaVersion: 22, executionState: { data: { kind: "direct-world" } } } });
       expect(f.transport).not.toHaveBeenCalled();
       await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });
       expect(f.transport).toHaveBeenCalledTimes(1);

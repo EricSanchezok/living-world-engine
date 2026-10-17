@@ -1,4 +1,5 @@
 import { assertExactKeys } from "./json";
+import { admissionAdditionsSchema, applyAdmissionAdditions } from "./admission-additions";
 import type { RulePackageRegistry } from "../mechanics/rule-package";
 import { applyDirectBootstrap, replayDirectStep } from "../direct/canonical";
 import { validateAlgorithmExecutionState } from "./execution-state";
@@ -400,7 +401,7 @@ export function semanticAdmissionHash(commit: Readonly<AgentAdmissionCommit>): s
 function validateAdmissionShape(commit: AgentAdmissionCommit): void {
   assertExactKeys(commit, [
     "contentHash", "semanticHash", "baseRevision", "revision", "step", "entity", "placementId", "agent",
-    "meters", "quantities", "ratings", "conditions", "invalidatedActionIds", "reusedActions",
+    "meters", "quantities", "ratings", "conditions", "additions", "invalidatedActionIds", "reusedActions",
   ], ["executionRef"], `Agent admission ${commit.revision}`);
   if (commit.semanticHash !== semanticAdmissionHash(commit)) {
     throw new Error(`Agent admission revision ${commit.revision} semantic hash mismatch`);
@@ -417,6 +418,7 @@ function validateAdmissionShape(commit: AgentAdmissionCommit): void {
   commit.quantities.forEach((quantity) => quantityStateSchema.parse(quantity));
   commit.ratings.forEach((rating) => ratingSchema.parse(rating));
   commit.conditions.forEach((condition) => conditionStateSchema.parse(condition));
+  admissionAdditionsSchema.parse(commit.additions);
   assertUnique(commit.invalidatedActionIds, `Agent admission ${commit.revision} invalidated actions`);
   assertUnique(commit.reusedActions.map((action) => action.actorId), `Agent admission ${commit.revision} reused Agents`);
   assertUnique(commit.reusedActions.map((action) => action.id), `Agent admission ${commit.revision} reused actions`);
@@ -511,6 +513,7 @@ export function applyAdmissionCommit(state: SimulationState, input: Readonly<Age
   for (const action of commit.reusedActions) {
     state.agents[action.actorId]!.nextAction = structuredClone(action);
   }
+  applyAdmissionAdditions(state, commit.additions, commit.entity.id);
   state.revision = commit.revision;
   state.admissions.push(commit);
 }
@@ -806,7 +809,7 @@ export function replaySimulationState(
     return structuredClone(state);
   }
   const replay: SimulationState = {
-    schemaVersion: 21,
+    schemaVersion: 22,
     executionState: structuredClone(state.historyBase.executionState),
     worldId: state.worldId,
     worldHash: state.worldHash,
@@ -988,7 +991,7 @@ export function validateSimulationState(state: SimulationState, requireNextActio
     "bootstrapAgentCommits",
   ], ["historyBase", "bootstrapExecutionRef", "bootstrapDirect"], "simulation state");
   validateAlgorithmExecutionState(state.executionState);
-  if (state.schemaVersion !== 21 || !isSemanticId(state.worldId) || !/^sha256:[a-f0-9]{64}$/.test(state.worldHash)) {
+  if (state.schemaVersion !== 22 || !isSemanticId(state.worldId) || !/^sha256:[a-f0-9]{64}$/.test(state.worldHash)) {
     throw new Error("invalid simulation identity");
   }
   if (state.bootstrapExecutionRef) validateExecutionRef(state.bootstrapExecutionRef, "bootstrapExecutionRef");

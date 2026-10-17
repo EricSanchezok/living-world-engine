@@ -1,6 +1,34 @@
 import { expect, test, type Page } from "@playwright/test";
 import { fixtureArchive } from "../support/world-fixture";
 import type { PublicInstanceDetail, PublicModelServicePause } from "../../src/shared/world-api";
+import AdmZip from "adm-zip";
+import { parse, stringify } from "yaml";
+
+test("an authored existing identity enters directly without a duplicate character", async ({ page }) => {
+  const zip = new AdmZip(fixtureArchive());
+  const participation = parse(zip.readAsText("world/participation.yaml"));
+  participation.origins.push({ kind: "existing", id: "keeper-identity", agent_id: "keeper", title: "守门人身份",
+    fantasy: "继续自己的人生。", description: "接管现有的守门人。", default_goal: "自行决定去留。",
+    relationship_hooks: ["熟悉石门与长期值守的生活。"], risks: [], fallback_arrival: "你正在熟悉的庭院中。" });
+  zip.updateFile("world/participation.yaml", Buffer.from(stringify(participation)));
+  const imported = await page.request.post("/api/worlds/import", { multipart: {
+    file: { name: "existing-identity.zip", mimeType: "application/zip", buffer: zip.toBuffer() }, replace: "true",
+  } });
+  expect(imported.ok()).toBe(true);
+  await page.goto("/worlds/open-world-fixture");
+  await page.getByRole("button", { name: /开始新游戏/ }).click();
+  const chooser = page.getByRole("dialog", { name: "选择你的身份" });
+  await chooser.locator(".cg-start-card").filter({ hasText: "守门人身份" }).click();
+  await expect(chooser.getByLabel("你的名字")).toHaveCount(0);
+  const created = page.waitForResponse(response => response.request().method() === "POST" && response.url().endsWith("/api/instances"));
+  await chooser.getByRole("button", { name: "以此身份进入" }).click();
+  const response = await created;
+  expect(response.status()).toBe(201);
+  const detail = await response.json() as PublicInstanceDetail;
+  expect(detail.participants[0]!.agentId).toBe("keeper");
+  expect(detail.summary.revision).toBe(0);
+  await expect(page).toHaveURL(/\/play\/[^/]+$/);
+});
 
 async function installFixture(page: Page): Promise<void> {
   const response = await page.request.post("/api/worlds/import", {

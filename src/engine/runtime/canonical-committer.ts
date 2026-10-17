@@ -865,6 +865,7 @@ export class CanonicalCommitter {
     quantities: readonly QuantityState[];
     ratings: readonly RatingState[];
     conditions: readonly import("../mechanics/resolution").ConditionState[];
+    additions: import("../contracts/model").AdmissionAdditions;
   }>): { committed: AgentAdmissionCommit; state: SimulationState } {
     const source = structuredClone(sourceState) as SimulationState;
     const semantic = {
@@ -878,6 +879,7 @@ export class CanonicalCommitter {
       quantities: candidate.quantities.map((entry) => structuredClone(entry)),
       ratings: candidate.ratings.map((entry) => structuredClone(entry)),
       conditions: candidate.conditions.map((entry) => structuredClone(entry)),
+      additions: structuredClone(candidate.additions),
       invalidatedActionIds: Object.values(source.agents)
         .flatMap((agent) => agent.nextAction ? [agent.nextAction.id] : [])
         .sort(),

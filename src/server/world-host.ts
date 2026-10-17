@@ -14,6 +14,7 @@ import { rmSync } from "node:fs";
 import path from "node:path";
 import { projectAgentPerspective } from "../engine/cognition/agent-perspective";
 import { DEFAULT_ALGORITHM_REF, registerBuiltinAlgorithms } from "../engine/algorithms/registry";
+import { originAdmissionCandidate } from "../engine/runtime/origin-initialization";
 import { CanonicalCommitter } from "../engine/runtime/canonical-committer";
 import type {
   AlgorithmRef,
@@ -63,7 +64,7 @@ import {
   type RuntimeCorrelation,
   type RuntimeObserver,
 } from "../engine/runtime/observability";
-import { quantityId, runtimeId } from "../engine/runtime/runtime-id";
+import { runtimeId } from "../engine/runtime/runtime-id";
 import { SimulationEngine } from "../engine/runtime/simulation";
 import { WorldProgress } from "./world-progress";
 import { WorldQuiescentError } from "../engine/runtime/execution";
@@ -77,7 +78,7 @@ import {
   type WorldDefinition,
   type WorldOrigin,
 } from "../engine/runtime/world-definition";
-import type { AgentState, SimulationState } from "../engine/contracts/model";
+import type { SimulationState } from "../engine/contracts/model";
 import type { WorldRepository } from "../script/world-repository";
 import type {
   AdvanceWorldInput,
@@ -97,6 +98,7 @@ import type {
   SubmitExternalReactionInput,
   WorldRunControlInput,
   WorldStartOptions,
+  OriginView,
 } from "../shared/world-api";
 import { sharedResourceQueuePositions } from "../engine/mechanics/shared-resource-allocation";
 import type {
@@ -517,72 +519,22 @@ function observerPerspective(document: WorldInstanceDocument, agentId: string): 
   };
 }
 
-function agentStateFromOrigin(
-  state: Readonly<SimulationState>,
-  origin: WorldOrigin,
-  agentId: string,
-  displayName: string,
-  appearance: string,
-  motivation: string,
-): AgentState {
-  const selfId = `${agentId}-self`;
-  const locationId = `${agentId}-location`;
-  return {
-    id: agentId,
-    entityId: agentId,
-    modelProfiles: structuredClone(origin.modelProfiles),
-    character: {
-      persona: {
-        summary: appearance ? `${origin.persona}\n外观：${appearance}` : origin.persona,
-        voice: "",
-        updatedAtStep: state.step,
-        evidenceIds: [],
-      },
-      traits: {},
-      values: {},
-      emotions: {},
-      attitudes: {},
-      goals: {
-        [`${agentId}-motivation`]: {
-          id: `${agentId}-motivation`,
-          description: motivation || origin.defaultGoal,
-          priority: 0.8,
-          progress: 0,
-          targetIds: [],
-          motivatedByIds: [],
-          status: "active",
-          createdAtStep: state.step,
-          updatedAtStep: state.step,
-          evidenceIds: [],
-        },
-      },
-      commitments: {},
-    },
-    belief: {
-      localEntities: {
-        [selfId]: {
-          id: selfId,
-          name: displayName,
-          description: appearance || origin.persona,
-          status: "observed",
-        },
-        [locationId]: {
-          id: locationId,
-          name: state.truth.entities[origin.spawnEntityId].name,
-          description: state.truth.entities[origin.spawnEntityId].description,
-          status: "observed",
-        },
-      },
-      claims: {},
-      evidence: {},
-    },
-    bindings: {
-      [selfId]: { localEntityId: selfId, canonicalEntityIds: [agentId] },
-      [locationId]: { localEntityId: locationId, canonicalEntityIds: [origin.spawnEntityId] },
-    },
-    observationCursorStep: state.step,
-    nextAction: null,
-  };
+
+function originView(origin: WorldOrigin, state: Readonly<SimulationState>): OriginView {
+  let location: string;
+  let identityName: string | undefined;
+  if (origin.kind === "create") location = state.truth.entities[origin.spawnEntityId].name;
+  else {
+    const agent = state.agents[origin.agentId];
+    identityName = state.truth.entities[agent.entityId].name;
+    const placement = state.truth.placements[agent.entityId];
+    const local = Object.values(agent.bindings).find(binding => placement && binding.canonicalEntityIds.includes(placement));
+    location = local ? agent.belief.localEntities[local.localEntityId]?.name ?? "所在位置尚不明确" : "所在位置尚不明确";
+  }
+  return { id: origin.id, kind: origin.kind, ...(identityName ? { identityName } : {}), title: origin.title,
+    fantasy: origin.fantasy, description: origin.description, location,
+    relationshipHooks: [...origin.relationshipHooks], risks: [...origin.risks],
+    ...(origin.image ? { image: structuredClone(origin.image) } : {}) };
 }
 
 export class WorldHost {
@@ -1390,16 +1342,7 @@ export class WorldHost {
         description: definition.description,
         participation: definition.participation ? "open" : "headless",
       },
-      origins: (definition.participation?.origins ?? []).map((origin) => ({
-        id: origin.id,
-        title: origin.title,
-        fantasy: origin.fantasy,
-        description: origin.description,
-        location: definition.initialState.truth.entities[origin.spawnEntityId].name,
-        relationshipHooks: [...origin.relationshipHooks],
-        risks: [...origin.risks],
-        ...(origin.image ? { image: structuredClone(origin.image) } : {}),
-      })),
+      origins: (definition.participation?.origins ?? []).map(origin => originView(origin, definition.initialState)),
       observerAvailable: true,
     };
   }
@@ -1495,45 +1438,20 @@ export class WorldHost {
         if (!displayName || displayName.length > 80 || appearance.length > 500 || motivation.length > 500) {
           throw new WorldHostError("participant customization is invalid", 400);
         }
-        let ordinal = 1;
         let agentId: string;
-        do agentId = `${origin.id}-${ordinal++}`; while (initial.state.agents[agentId]);
-        const agent = agentStateFromOrigin(initial.state, origin, agentId, displayName, appearance, motivation);
-        const mechanicsProfile = initial.state.truth.mechanics.entityMechanicsProfiles[origin.mechanicsProfileId];
-        if (!mechanicsProfile) throw new WorldHostError("origin mechanics profile is unavailable", 500);
-        const admitted = this.committer.admit(initial.state, {
-          entity: {
-            id: agentId,
-            kind: origin.entityKind,
-            name: displayName,
-            description: appearance ? `${origin.description}\n外观：${appearance}` : origin.description,
-            lifecycle: "active",
-            createdAtStep: initial.state.step,
-          },
-          placementId: origin.spawnEntityId,
-          agent,
-          meters: mechanicsProfile.meters.map((entry) => ({
-            id: `${agentId}-${entry.definitionId}`,
-            definitionId: entry.definitionId,
-            entityId: agentId,
-            current: entry.current,
-            firedThresholdIds: [],
-          })),
-          quantities: mechanicsProfile.quantities.map((entry) => ({
-            id: quantityId(initial.state.worldHash, entry.definitionId, agentId),
-            definitionId: entry.definitionId,
-            holderId: agentId,
-            amount: entry.amount,
-          })),
-          ratings: mechanicsProfile.ratings.map((entry) => ({
-            id: `${agentId}-${entry.definitionId}`,
-            definitionId: entry.definitionId,
-            entityId: agentId,
-            value: entry.value,
-          })),
-          conditions: [],
-        });
-        initial.state = admitted.state;
+        if (origin.kind === "existing") {
+          const existing = initial.state.agents[origin.agentId];
+          const entity = existing ? initial.state.truth.entities[existing.entityId] : undefined;
+          if (!existing || entity?.lifecycle !== "active") throw new WorldHostError("existing identity is unavailable", 409);
+          if (displayName !== entity.name || appearance || motivation) throw new WorldHostError("existing identity uses its authored name, appearance and character; choose its actions after entering", 400);
+          agentId = existing.id;
+        } else {
+          const candidate = originAdmissionCandidate(initial.state, origin, { displayName, appearance, motivation });
+          const admitted = this.committer.admit(initial.state, candidate);
+          initial.state = admitted.state;
+          agentId = candidate.agent.id;
+        }
+        const agent = initial.state.agents[agentId]!;
         initial.policyBindings = policyRoster(initial.state);
         const participantId = this.idFactory();
         const joinedAt = this.now().toISOString();
@@ -1874,16 +1792,7 @@ export class WorldHost {
               },
             } : {}),
         } : null,
-      origins: (definition.participation?.origins ?? []).map((origin) => ({
-        id: origin.id,
-        title: origin.title,
-        fantasy: origin.fantasy,
-        description: origin.description,
-        location: document.state.truth.entities[origin.spawnEntityId].name,
-        relationshipHooks: [...origin.relationshipHooks],
-        risks: [...origin.risks],
-        ...(origin.image ? { image: structuredClone(origin.image) } : {}),
-      })),
+      origins: (definition.participation?.origins ?? []).map(origin => originView(origin, document.state)),
       ...(run ? {
         run: {
           id: run.id,

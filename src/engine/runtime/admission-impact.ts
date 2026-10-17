@@ -9,6 +9,7 @@ import { pendingObservationsFor } from "../cognition/observation";
 import { projectAgentPerspective } from "../cognition/agent-perspective";
 import { contentHash } from "../models/model-audit";
 import { runtimeId } from "./runtime-id";
+import { applyAdmissionAdditions } from "./admission-additions";
 
 export interface AdmissionCandidateState {
   entity: WorldEntity;
@@ -18,6 +19,7 @@ export interface AdmissionCandidateState {
   quantities: readonly import("../contracts/model").QuantityState[];
   ratings: readonly import("../contracts/model").RatingState[];
   conditions: readonly import("../mechanics/resolution").ConditionState[];
+  additions: import("../contracts/model").AdmissionAdditions;
 }
 
 export interface AdmissionImpactResult {
@@ -39,6 +41,7 @@ function admissionPreview(
   for (const quantity of candidate.quantities) preview.truth.quantities[quantity.id] = structuredClone(quantity);
   for (const rating of candidate.ratings) preview.truth.ratings[rating.id] = structuredClone(rating);
   for (const condition of candidate.conditions) preview.truth.conditions[condition.id] = structuredClone(condition);
+  applyAdmissionAdditions(preview, candidate.additions, candidate.entity.id);
   return preview;
 }
 
@@ -196,5 +199,6 @@ export function admissionCandidateFromCommit(
     quantities: commit.quantities,
     ratings: commit.ratings,
     conditions: commit.conditions,
+    additions: commit.additions,
   };
 }

@@ -162,7 +162,8 @@ export function WorldDetail({
   async function create(): Promise<void> {
     if (startStage.kind === "awakening") return;
     setStartError("");
-    if (startKind === "origin" && !displayName.trim()) {
+    const existing = startKind === "origin" && selectedOrigin?.kind === "existing";
+    if (startKind === "origin" && !existing && !displayName.trim()) {
       setNameError("请先为这个角色取一个名字。");
       displayNameRef.current?.focus();
       return;
@@ -171,9 +172,11 @@ export function WorldDetail({
       ? { worldId: world.id, start: { kind: "observer" } }
       : {
           worldId: world.id,
-          start: { kind: "origin", originId, displayName, appearance, motivation },
+          start: { kind: "origin", originId,
+            displayName: existing ? selectedOrigin.identityName! : displayName,
+            appearance: existing ? "" : appearance, motivation: existing ? "" : motivation },
         };
-    const awakening = beginAwakening(input, startKind === "observer" ? "choice" : "customize");
+    const awakening = beginAwakening(input, startKind === "observer" || existing ? "choice" : "customize");
     setStartStage(awakening);
     try {
       await onCreateInstance(awakening.submission);
@@ -215,7 +218,7 @@ export function WorldDetail({
   }
 
   function continueStart(): void {
-    if (startKind === "observer") {
+    if (startKind === "observer" || selectedOrigin?.kind === "existing") {
       void create();
       return;
     }
@@ -446,7 +449,7 @@ export function WorldDetail({
                                   <strong>{startKind === "observer" ? "观察世界" : selectedOrigin?.title}</strong>
                                 </p>
                                 <button className="cg-start-dialog__confirm" disabled={Boolean(busy)} onClick={continueStart} type="button">
-                                  {busy ? "正在唤醒世界…" : startKind === "observer" ? "开始观察" : "继续塑造角色"}
+                                  {busy ? "正在唤醒世界…" : startKind === "observer" ? "开始观察" : selectedOrigin?.kind === "existing" ? "以此身份进入" : "继续塑造角色"}
                                   <ArrowRight aria-hidden="true" />
                                 </button>
                               </footer>

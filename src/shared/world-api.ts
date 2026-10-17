@@ -1,7 +1,7 @@
 import type { AgentPerspectiveView } from "../engine/contracts/model";
 export type { AgentPerspectiveView, BeliefValue, PerspectiveFactValue } from "../engine/contracts/model";
 
-export const WORLD_API_VERSION = 18 as const;
+export const WORLD_API_VERSION = 19 as const;
 
 /** Live work only; stage transitions never imply a committed outcome or a percentage. */
 export interface PublicWorldProgress {
@@ -124,6 +124,8 @@ export interface ParticipantSummary {
 
 export interface OriginView {
   id: string;
+  kind: "create" | "existing";
+  identityName?: string;
   title: string;
   fantasy: string;
   description: string;

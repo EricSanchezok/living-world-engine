@@ -1,4 +1,4 @@
-# 世界剧本格式 v17
+# 世界剧本格式 v18
 
 世界包定义初始世界、法则、机制和可选的参与方式。它不定义玩家动作，不携带可执行代码，也不能提供自定义客户端 UI。
 
@@ -23,7 +23,7 @@ world-id/
 ## `script.yaml`
 
 ```yaml
-schema_version: 17
+schema_version: 18
 id: immortal-realms
 name: 万域修途
 version: 1.0.0
@@ -250,7 +250,8 @@ Character 的 persona summary 必填，其他 facets 可为空。Belief 的 loca
 
 ```yaml
 origins:
-  - id: courtyard-wanderer
+  - kind: create
+    id: courtyard-wanderer
     title: 庭院旅人
     fantasy: 带着未知来历抵达石门。
     description: 从一名没有既定历史的旅人开始。
@@ -267,7 +268,29 @@ origins:
     fallback_arrival: 你站在石门庭院里，周围的世界仍在自行运转。
 ```
 
-Origin 定义身份幻想、出生位置、初始 persona、默认 goal、关系钩子、风险、必填 Mechanics Profile、可选 Agent Profile、可选静态图片和入场生成失败时的回退文本。Participant 只能提供显示名称、外观描述和自由动机；引擎从 profile 确定性创建 Entity、Agent、goal、Meter、Quantity、Rating 和语义 ID，不让 LLM 修改出生点或数值。Observer 接管初始或运行时创建的存活 Agent 不依赖 Origin。
+`kind: create` 定义身份幻想、出生位置、初始 persona、默认 goal、关系钩子、风险、必填 Mechanics Profile、可选 Agent Profile、可选静态图片和入场回退文本。Participant 只能提供显示名称、外观描述和自由动机；引擎从 profile 确定性创建 Entity、Agent、goal、Meter、Quantity、Rating 和语义 ID，不让 LLM 修改出生点或数值。
+
+可选 `initialization` 为创建入口补充真实社会关系与资产。`entities` 使用普通 Entity 文档，可以包含新的 Agent、物品、数值和共享容量；`facts` 使用普通 Fact 文档并增加 `subject_id`；`cognition` 为 `{ agent_id, belief }` 数组，belief 沿用 Agent 的认知格式；`character` 沿用 character 的 facets，但不包含 persona。未选中的入口不物化这些资料。
+
+`$participant` 只在初始化的 canonical 引用位置代表新角色：placement、Fact subject/entity value/access agent、认知接收 Agent、binding 的 canonical IDs。它不会替换正文或局部身份。新角色已有局部身份 `self`、`location`；初始化可追加父母、师友等局部身份，并在 character 中引用这些身份。已有 Agent 的认知也只能追加，不能覆盖现有 local entity、claim、evidence 或 binding。事实使用新 ID；不能通过初始化重写已有 Entity、数值或物品。家族钱箱应建成独立 Entity，所有权和支配关系写为 Fact，不能复制成玩家库存。
+
+加载器在开篇状态的副本上试演每个创建入口，校验完整引用图、资产数量、人物自我绑定、私有认知和模型 Profile。真实入场将初始化与新角色一起原子提交并写入回放记录；失败不留下部分人物或财产。相关 Agent 已准备的行动按认知影响重新判定是否可复用。运行数据和历史版本随此合同升级，旧存档不迁移。
+
+`kind: existing` 直接指定现有 `agent_id`，与创建入口共享 title、fantasy、description、default_goal、relationship_hooks、risks、fallback_arrival 和可选 image，不声明 spawn、persona、数值 profile 或 initialization。它接管世界中唯一的已有身份，不创建新 Entity 或准入提交。姓名、外观与人物历史保持作者设定；玩家进入后通过自己的行动决定未来。普通客户端只收到显示姓名和该人物自己已知的位置，不收到 canonical binding。Observer 接管存活 Agent 不依赖 Origin。
+
+```yaml
+origins:
+  - kind: existing
+    id: gatekeeper-identity
+    agent_id: gatekeeper
+    title: 守门人
+    fantasy: 从自己熟悉的庭院开始。
+    description: 接管在石门值守的现有人物。
+    default_goal: 自己决定接下来的生活。
+    relationship_hooks: [认识长期一起值守的同伴。]
+    risks: [离岗可能影响与同伴的关系。]
+    fallback_arrival: 石门就在眼前，你可以继续值守，也可以另作打算。
+```
 
 ## 静态资源
 
@@ -279,7 +302,7 @@ Origin 定义身份幻想、出生位置、初始 persona、默认 goal、关系
 
 loader 验证 Entity、placement 无环、Fact、Agent self binding、character/belief 局部引用、全部 Mechanics Profile 与 shared-resource definition/pool 引用及范围、random distribution、模型 Profile、Origin spawn/mechanics/image、数量和所有 ID 唯一性。初始 Agent 的 `nextAction` 由引擎设为 null；初始 lifecycle、Fact provenance、character 时间戳和运行时身份由引擎注入。
 
-loader 只接受 `schema_version: 17`。旧世界包、状态和存档直接拒绝，不提供迁移或兼容层。
+loader 只接受 `schema_version: 18`。旧世界包、状态和存档直接拒绝，不提供迁移或兼容层。
 
 ## 程序覆盖报告
 

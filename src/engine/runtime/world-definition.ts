@@ -1,4 +1,4 @@
-import type { DiscreteRandomDefinition, SimulationState } from "../contracts/model";
+import type { AdmissionAdditions, AgentCharacterState, DiscreteRandomDefinition, SimulationState } from "../contracts/model";
 import { historyReplayBaseHash } from "./history-replay";
 import type { ModelCatalog } from "../models/model-catalog";
 import { validateDiscreteRandomDefinitions } from "../mechanics/random";
@@ -20,22 +20,34 @@ export interface WorldRuntimeDefaults {
   actionWindowMs: number;
 }
 
-export interface WorldOrigin {
+interface WorldOriginPresentation {
   id: string;
   title: string;
   fantasy: string;
   description: string;
-  entityKind: string;
-  spawnEntityId: string;
-  persona: string;
   defaultGoal: string;
   relationshipHooks: string[];
   risks: string[];
-  mechanicsProfileId: string;
-  modelProfiles: { creation: string; decision: string; fallback: string };
   image?: { hash: string; alt: string };
   fallbackArrival: string;
 }
+
+export interface WorldCreatedOrigin extends WorldOriginPresentation {
+  kind: "create";
+  entityKind: string;
+  spawnEntityId: string;
+  persona: string;
+  mechanicsProfileId: string;
+  modelProfiles: { creation: string; decision: string; fallback: string };
+  initialization?: { additions: AdmissionAdditions; character?: Omit<AgentCharacterState, "persona"> };
+}
+
+export interface WorldExistingOrigin extends WorldOriginPresentation {
+  kind: "existing";
+  agentId: string;
+}
+
+export type WorldOrigin = WorldCreatedOrigin | WorldExistingOrigin;
 
 export interface WorldParticipation {
   origins: WorldOrigin[];
@@ -110,7 +122,7 @@ export function validateWorldDefinition(definition: WorldDefinition): void {
   }
   const coreResolution = definition.rulePackages.find((rulePackage) => rulePackage.id === "core-resolution");
   if (coreResolution?.version !== "3.0.0") {
-    throw new Error("schema v16 worlds require core-resolution@3.0.0");
+    throw new Error("worlds require core-resolution@3.0.0");
   }
   validateDiscreteRandomDefinitions(definition.randomDistributions);
   if (definition.participation) {
@@ -118,11 +130,15 @@ export function validateWorldDefinition(definition: WorldDefinition): void {
     for (const origin of definition.participation.origins) {
       if (origins.has(origin.id)) throw new Error(`duplicate origin ${origin.id}`);
       origins.add(origin.id);
-      if (!(origin.spawnEntityId in definition.initialState.truth.entities)) {
+      if (origin.kind === "create" && !(origin.spawnEntityId in definition.initialState.truth.entities)) {
         throw new Error(`origin ${origin.id} has unknown spawn entity ${origin.spawnEntityId}`);
       }
-      if (!(origin.mechanicsProfileId in definition.initialState.truth.mechanics.entityMechanicsProfiles)) {
+      if (origin.kind === "create" && !(origin.mechanicsProfileId in definition.initialState.truth.mechanics.entityMechanicsProfiles)) {
         throw new Error(`origin ${origin.id} has unknown mechanics profile ${origin.mechanicsProfileId}`);
+      }
+      if (origin.kind === "existing") {
+        const agent = definition.initialState.agents[origin.agentId];
+        if (!agent || definition.initialState.truth.entities[agent.entityId]?.lifecycle !== "active") throw new Error(`origin ${origin.id} requires an existing active Agent`);
       }
       if (origin.image && !(origin.image.hash in definition.assetData)) {
         throw new Error(`origin ${origin.id} has unknown image ${origin.image.hash}`);
@@ -133,7 +149,8 @@ export function validateWorldDefinition(definition: WorldDefinition): void {
 
 export function validateWorldModelProfiles(definition: WorldDefinition, catalog: ModelCatalog): void {
   const bindings = [definition.modelProfiles, ...Object.values(definition.initialState.agents).map(agent => agent.modelProfiles),
-    ...(definition.participation?.origins.map(origin => origin.modelProfiles) ?? [])];
+    ...(definition.participation?.origins.flatMap(origin => origin.kind === "create" ? [origin.modelProfiles,
+      ...(origin.initialization?.additions.agents.map(agent => agent.modelProfiles) ?? [])] : []) ?? [])];
   for (const profiles of bindings) {
     catalog.assertProfile(profiles.decision, "decision");
     catalog.assertProfile(profiles.creation, "creation");
@@ -144,6 +161,7 @@ export function validateWorldModelProfiles(definition: WorldDefinition, catalog:
 export function worldModelProfileIds(definition: WorldDefinition): string[] {
   return [...new Set([ ...Object.values(definition.modelProfiles),
     ...Object.values(definition.initialState.agents).flatMap(agent => Object.values(agent.modelProfiles)),
-    ...(definition.participation?.origins.flatMap(origin => Object.values(origin.modelProfiles)) ?? []),
+    ...(definition.participation?.origins.flatMap(origin => origin.kind === "create" ? [...Object.values(origin.modelProfiles),
+      ...(origin.initialization?.additions.agents.flatMap(agent => Object.values(agent.modelProfiles)) ?? [])] : []) ?? []),
   ])].sort();
 }

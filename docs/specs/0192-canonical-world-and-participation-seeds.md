@@ -31,4 +31,4 @@ Exercise source truncation, duplicates, numbering discrepancies, supplement boun
 
 ## Evidence
 
-Implementation and whole-world qualification are in progress. The [authoring workspace](../../worlds/fanren/authoring/README.md) owns source and coverage status. No complete-world claim is made before all planned modules and the full-scale qualification pass.
+The generic participation contract is implemented and verified through persistent host creation, replay, invalid-seed rejection and browser entry. `npm run check:fast`, the production build, and the two focused Playwright entry/awakening checks pass. Whole-world authoring and qualification remain in progress. The [authoring workspace](../../worlds/fanren/authoring/README.md) owns source and coverage status. No complete-world claim is made before all planned modules and the full-scale qualification pass.

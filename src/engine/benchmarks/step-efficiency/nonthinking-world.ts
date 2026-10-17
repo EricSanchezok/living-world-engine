@@ -9,9 +9,7 @@ import { FLASH41_COHORT, STEP_E2_PROTOCOL } from "./nonthinking-protocol";
 /** Verify every world, initial-agent and selectable player-origin profile. */
 export function assertNonthinkingWorld(definition: WorldDefinition, catalog: ModelCatalog,
   expectedModel: typeof STEP_E2_PROTOCOL.model | typeof FLASH41_COHORT.model = STEP_E2_PROTOCOL.model): string[] {
-  const profiles = [...new Set([...worldModelProfileIds(definition),
-    ...(definition.participation?.origins.flatMap((origin) => Object.values(origin.modelProfiles)) ?? []),
-  ])].sort();
+  const profiles = worldModelProfileIds(definition).sort();
   for (const id of profiles) {
     const profile = catalog.profile(id);
     if (profile.account_id !== "deepseek-api" || profile.selector.kind !== "exact" || profile.selector.model_id !== expectedModel ||

@@ -4,7 +4,7 @@
 
 ## 状态边界
 
-`SimulationState` v21 是闭环仿真的持久状态：canonical world、全部 Agent 私有状态、准入提交、ResolutionPlan、ResolutionReceipt、TemporalPlan、模型执行审计与语义历史。Canonical world 持有世界时钟、带持久交互足迹的 Activity、Entity 共享资源池与 WorldTimer；`WorldInstanceDocument` v28 在其外层固定完整递归算法 Composition 与不可变实验归属或排除原因，并保存 Participant、持久 Arrival、Participant intent、PolicyBinding、判别式 ActionWindow、reference Preparation v7 artifact、调度配置和 WorldRun。
+`SimulationState` v22 是闭环仿真的持久状态：canonical world、全部 Agent 私有状态、含作者初始化资料的准入提交、ResolutionPlan、ResolutionReceipt、TemporalPlan、模型执行审计与语义历史。Canonical world 持有世界时钟、带持久交互足迹的 Activity、Entity 共享资源池与 WorldTimer；`WorldInstanceDocument` v32 在其外层固定完整递归算法 Composition 与不可变实验归属或排除原因，并保存 Participant、持久 Arrival、Participant intent、PolicyBinding、判别式 ActionWindow、reference Preparation v7 artifact、调度配置和 WorldRun。出身初始化及现有身份入口见[剧本格式](script-format.md#participationyaml)。
 
 真人与自主主体使用同一个 `AgentState`。策略表必须精确覆盖全部 Agent：
 
