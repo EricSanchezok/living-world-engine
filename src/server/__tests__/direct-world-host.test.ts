@@ -39,7 +39,8 @@ function quietInitialNpcProvider(...args: Parameters<typeof directTestProvider>)
 function executionCalls(calls: Array<Parameters<typeof fetch>>) {
   return calls.filter(([, init]) => {
     const wire = JSON.parse(String(init?.body));
-    return wire.questions || directCreationContext(wire).task !== "action-suggestions";
+    const task = wire.questions ? null : directCreationContext(wire).task;
+    return wire.questions || task !== "action-suggestions" && (task as { kind?: string } | null)?.kind !== "arrival";
   });
 }
 
@@ -908,7 +909,8 @@ describe("direct world through persistent WorldHost", () => {
         state: { schemaVersion: 21, executionState: { data: { kind: "direct-world" } } } });
       expect(f.transport).not.toHaveBeenCalled();
       await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });
-      expect(f.transport).not.toHaveBeenCalled();
+      expect(f.transport).toHaveBeenCalledTimes(1);
+      expect(executionCalls(f.transport.mock.calls)).toHaveLength(0);
       const participant = Object.values(database.readInstance(id).document.participants)[0]!;
       await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "observe-self", text: "检查自己的情况" });
       for (let i = 0; i < 100 && database.readInstance(id).document.state.revision === 0; i++) await new Promise(resolve => setTimeout(resolve, 10));

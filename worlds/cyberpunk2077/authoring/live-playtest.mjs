@@ -83,8 +83,7 @@ async function main() {
 
   function readInstance(id) {
     const document = database.readInstance(id).document;
-    if (document.schemaVersion !== 32 || !document.agentMemories || document.executionAlgorithm.id !== expectedAlgorithm.id ||
-      document.executionAlgorithm.version !== expectedAlgorithm.version) {
+    if (document.schemaVersion !== 32 || !document.agentMemories || !isDeepStrictEqual(document.executionAlgorithm, expectedAlgorithm)) {
       throw new Error(`instance ${id} must be freshly created with schema 32 and ${expectedAlgorithm.id}@${expectedAlgorithm.version}`);
     }
     return document;
@@ -152,16 +151,17 @@ async function main() {
         saveVisible(dir, 'opening', latestDetail);
         const amount = holder => Object.values(initial.truth.quantities).find(quantity => quantity.holderId === holder && quantity.definitionId === 'eurodollar')?.amount;
         session.initialChecks = { cash: amount(test.role) === role.cash, placement: initial.truth.placements[test.role] === role.work,
+          arrival: latestDetail.conversation.turns.some(turn => !turn.action && turn.response?.generated === true),
           assets: role.assets.every(id => initial.truth.entities[id] && Object.values(initial.agents[test.role].bindings).some(binding => binding.canonicalEntityIds.includes(id))),
           reciprocalContacts: role.contacts.every(id => Object.values(initial.agents[id].bindings).some(binding => binding.canonicalEntityIds.includes(test.role)) &&
             Object.values(initial.agents[test.role].bindings).some(binding => binding.canonicalEntityIds.includes(id))) };
       }
       const { instanceId: id, participantId } = session;
       save(sessionPath, session);
-      if (Object.values(session.initialChecks).some(passed => !passed)) throw new Error('initial resources or contacts differ from authored role');
+      if (Object.values(session.initialChecks).some(passed => !passed)) throw new Error('initial resources, contacts or generated arrival need inspection');
       for (const [name, text] of test.steps) {
         let prior = session.steps.find(step => step.name === name), retryOf;
-        if (prior?.finishedAt && (prior.runStatus === 'failed' || prior.localFailures?.length) && retryFailedStep === name) {
+        if (prior?.finishedAt && (prior.runStatus === 'failed' || prior.localFailures?.length || prior.narrativeFallbacks?.length) && retryFailedStep === name) {
           if (prior.text !== text) throw new Error('retry must preserve the original natural-language action');
           const archivedName = `${name}-failed-${session.steps.filter(step => step.name.startsWith(name + '-failed-')).length + 1}`;
           for (const suffix of ['before-state.json', 'state.json', 'response.json', 'evidence.json', 'visible.json', 'visible.md']) {
@@ -176,7 +176,7 @@ async function main() {
           prior = undefined;
         }
         if (prior?.finishedAt) {
-          if (!['completed', 'awaiting-decision'].includes(prior.runStatus) || prior.localFailures?.length) {
+          if (!['completed', 'awaiting-decision'].includes(prior.runStatus) || prior.localFailures?.length || prior.narrativeFallbacks?.length) {
             if (!continueAfterFailure) throw new Error(`inspect stopped ${name} before resuming`);
             session.continuedAfterFailures ??= [];
             if (!session.continuedAfterFailures.includes(name)) session.continuedAfterFailures.push(name);
@@ -227,10 +227,13 @@ async function main() {
           runStatus: latestDetail.run?.status, stopReason: latestDetail.run?.stopReason, afterRevision: document.state.revision });
         const evidence = capture(dir, name, before, document, latestDetail, submissionId);
         entry.localFailures = evidence.localFailures;
+        entry.narrativeFallbacks = latestDetail.conversation.turns.filter(turn => turn.action?.submissionId === submissionId)
+          .flatMap(turn => responsesOf(turn).filter(response => response.narrativeStatus === 'fallback'));
         save(sessionPath, session);
         log({ role: test.role, action: name, status: 'settled', revision: document.state.revision, elapsedMs: entry.elapsedMs });
         if (!['completed', 'awaiting-decision'].includes(latestDetail.run?.status)) throw new Error(`run ended ${latestDetail.run?.status}: ${latestDetail.run?.stopReason}`);
         if (entry.localFailures.length) throw new Error(`${name} contains ${entry.localFailures.length} local model failures; inspect the recorded evidence`);
+        if (entry.narrativeFallbacks.length) throw new Error(`${name} contains narrative fallback; inspect the recorded evidence`);
         activeEntry = undefined;
         activeBefore = undefined;
         monitor = undefined;
@@ -316,9 +319,10 @@ function concise(before, after) {
     }
     control = next;
   }
-  const quantities = Object.values(after.truth.quantities).flatMap(quantity => {
-    const old = before.truth.quantities[quantity.id]?.amount ?? 0;
-    return quantity.amount !== old ? [{ holder: quantity.holderId, resource: quantity.definitionId, before: old, after: quantity.amount }] : [];
+  const quantities = [...new Set([...Object.keys(before.truth.quantities), ...Object.keys(after.truth.quantities)])].flatMap(id => {
+    const previous = before.truth.quantities[id], current = after.truth.quantities[id], quantity = current ?? previous;
+    const old = previous?.amount ?? 0, amount = current?.amount ?? 0;
+    return amount !== old ? [{ holder: quantity.holderId, resource: quantity.definitionId, before: old, after: amount }] : [];
   });
   const facts = Object.values(after.truth.facts).filter(fact => JSON.stringify(fact) !== JSON.stringify(before.truth.facts[fact.id]));
   const meters = Object.values(after.truth.meters).flatMap(meter => {

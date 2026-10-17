@@ -67,6 +67,7 @@ import { WorldProgress } from "./world-progress";
 import { WorldQuiescentError } from "../engine/runtime/execution";
 import type { DirectRuntimeState } from "../engine/direct/contracts";
 import { participantReactionIds } from "../engine/direct/foreground";
+import { privateActionView } from "../engine/direct/views";
 import {
   toWorldRuntimeContract,
   validateWorldModelProfiles,
@@ -319,7 +320,7 @@ const ARRIVAL_PROMPT = promptBundle("arrival-generator");
 
 const ARRIVAL_PRODUCER_MANIFEST = defineEngineOperationManifest({
   id: "arrival-generator",
-  version: "4",
+  version: "5",
   config: { promptVersion: ARRIVAL_PROMPT.version },
 });
 
@@ -3057,7 +3058,7 @@ export class WorldHost {
       document.scheduler.generation += 1;
       document.scheduler.nextTickAt = null;
       this.cancelTimer(instanceId);
-      const arrival = document.state.executionState?.data.kind === "direct-world" ? fallback : await this.generateArrival(document, participantId, fallbackText);
+      const arrival = await this.generateArrival(document, participantId, fallbackText);
       document.participants[participantId].arrival = {
         ...fallback,
         title: arrival.title,
@@ -3077,12 +3078,16 @@ export class WorldHost {
     fallback: string,
   ): Promise<ArrivalView> {
     const participant = document.participants[participantId];
-    const creationProfile = document.state.agents[participant.agentId]!.modelProfiles.creation;
+    const control = document.state.executionState?.data.kind === "direct-world"
+      ? document.state.executionState.data as unknown as DirectRuntimeState : null;
+    const creationProfile = (control ? agentCapabilityModels(document.state, control, participant.agentId)
+      : document.state.agents[participant.agentId]!.modelProfiles).creation;
     const execution = this.beginExecution(document, "interactive", "arrival", ARRIVAL_PRODUCER_MANIFEST);
     try {
       const scope = {
         workloadId: document.id,
         batchId: `arrival:${participantId}`,
+        ...(control ? { modelRegistrySnapshotHash: control.registryHash } : {}),
         correlation: { executionId: execution?.id, instanceId: document.id, revision: document.state.revision },
         observer: execution?.trace ?? this.runtimeObserver,
         runtimeIdentity: { worldHash: document.state.worldHash, revision: document.state.revision },
@@ -3092,7 +3097,7 @@ export class WorldHost {
         logicalInvocationId: modelInvocationLogicalId(scope, "creation", participant.agentId),
         semanticRepairAttempt: 0,
       });
-      const referenceResolver = createAgentReferenceResolver(document.state.agents[participant.agentId], []);
+      const referenceResolver = control ? null : createAgentReferenceResolver(document.state.agents[participant.agentId], []);
       const result = await this.options.provider.generateStructured({
         ...scope,
         ...identity,
@@ -3117,20 +3122,23 @@ export class WorldHost {
           task: {
             kind: "arrival",
             assignment: {
-              targetHandles: [referenceResolver.handleFor("agent", participant.agentId)],
-              availableHandles: referenceResolver.catalog.candidates.map((candidate) => candidate.handle),
+              targetHandles: referenceResolver ? [referenceResolver.handleFor("agent", participant.agentId)] : [],
+              availableHandles: referenceResolver?.catalog.candidates.map((candidate) => candidate.handle) ?? [],
               allowedProposalKinds: [],
             },
-            constraints: ["Write only the opening scene from this Agent's private perspective."],
+            constraints: ["Write only the opening scene from this Agent's private perspective.",
+              "Describe the present situation and remembered relationships without inventing new actions, dialogue, perceptions or results.",
+              "Distinguish remembered information from current observation; knowing a person does not establish that they are present."],
           },
           state: {
-            perspective: projectAgentPerspectiveForModel(
+            perspective: control ? privateActionView(document.state, participant.agentId, null,
+              this.memories.scope(document, execution?.trace)).state : projectAgentPerspectiveForModel(
               document.state,
               document.state.agents[participant.agentId],
-              referenceResolver,
+              referenceResolver!,
             ),
           },
-          referenceCatalog: referenceResolver.catalog,
+          referenceCatalog: referenceResolver?.catalog ?? null,
           repair: null,
         },
         schema: arrivalDraftSchema,

@@ -76,11 +76,15 @@ describe("Cyberpunk 2077 authored world through import and persistent play", () 
       expect(imported.id).toBe("cyberpunk2077-night-city");
       const host = new WorldHost({ repository: database, store: database, ledger: database, provider: provider.gateway });
       for (const role of roles) {
+        const callsBefore = provider.transport.mock.calls.length;
         const created = await host.createInstance({ worldId: imported.id, start: { kind: "observer" } });
+        expect(provider.transport.mock.calls).toHaveLength(callsBefore);
         const id = created.summary.id, before = database.readInstance(id).document.state;
         const takeover = await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: role.id } });
         expect(takeover.conversation?.participantId).toBeTruthy();
+        expect(provider.transport.mock.calls).toHaveLength(callsBefore + 1);
         const document = database.readInstance(id).document, state = document.state;
+        expect(Object.values(document.participants)[0]!.arrival.generated).toBe(true);
         expect(state.truth).toEqual(before.truth);
         expect(state.agents[role.id]).toEqual(before.agents[role.id]);
         expect(Object.values(state.agents)).toHaveLength(coverage.counts.agents);
@@ -104,7 +108,7 @@ describe("Cyberpunk 2077 authored world through import and persistent play", () 
         }
         saved.set(id, { role, state });
       }
-      expect(provider.transport).not.toHaveBeenCalled();
+      expect(provider.transport).toHaveBeenCalledTimes(roles.length);
       database.close(); database = new LocalDatabase(filename, { heartbeat: false });
       const restored = new WorldHost({ repository: database, store: database, ledger: database, provider: provider.gateway });
       for (const [id, { role, state }] of saved) {
