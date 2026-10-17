@@ -15,6 +15,8 @@ export interface ScenePacket {
   location: string | null;
   boundary: { revision: number; step: number; worldTimeSeconds: number };
   elapsedUnits: Record<string, number>;
+  observedPeriodicTransitions: Array<{ subject: string; subjectLocalId: string; predicate: string;
+    atWorldTimeSeconds: number; from: string; to: string }>;
   reply: PresentationReply | null;
   observations: Array<{ id: string; revision: number; step: number; worldTimeSeconds: number;
     summary: string; scene: NonNullable<ObservationPacket["scene"]> | null; sourceEventIds: string[] }>;

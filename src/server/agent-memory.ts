@@ -12,9 +12,9 @@ import type { WorldInstanceDocument } from "./world-instance-types";
 import { estimateTokens } from "../engine/models/context-budget";
 
 const system = loadPromptAsset("system/agent-memory.md"), userPrompt = loadPromptAsset("user/agent-memory.md");
-export const MEMORY_MANIFEST = defineEngineOperationManifest({ id: "agent-memory", version: "2",
+export const MEMORY_MANIFEST = defineEngineOperationManifest({ id: "agent-memory", version: "3",
   config: { promptVersion: contentHash({ system, userPrompt }), triggerRatio: 0.8, recentEvidenceCount: 8,
-    minimumNewTokens: 2048, amortizePreviousMemory: true } });
+    minimumNewTokens: 2048, amortizePreviousMemory: true, hardCapacityRequiresUsefulPrefix: true } });
 interface MemoryHost {
   read(id: string): WorldInstanceDocument;
   update(id: string, change: (document: WorldInstanceDocument) => boolean, finish?: { id: string; semanticHash: string }): Promise<boolean>;
@@ -52,7 +52,7 @@ export class AgentMemoryService {
           });
           const minimumNewTokens = Math.max(2048, estimateTokens({ summary: prefix.input.previousSummary,
             important: prefix.input.protectedMemories }));
-          if (measurement.ratio < 1 && newTokens < minimumNewTokens) {
+          if (newTokens < minimumNewTokens) {
             runtimeEventEmitter(observer)?.({ event: "memory.compaction.deferred", attributes: { agentId: id, reason: "insufficient-new-history" },
               measurements: { newTokens, minimumNewTokens, contextOccupancy: measurement.ratio } });
             continue;

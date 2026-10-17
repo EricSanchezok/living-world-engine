@@ -5,7 +5,7 @@ import type { WorldStepPreparation } from "../engine/runtime/execution";
 import { loadPromptAsset } from "../engine/prompts";
 import { agentCapabilityModels } from "../engine/models/capability-bindings";
 import { enqueueNarrative, nextNarrative, settleQueuedNarratives } from "./narrative/outbox";
-import { completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, continueNarrativeSegment, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeRepair, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, narrativeOutputSchema, narrativeOutputJsonSchema } from "./narrative/publication";
+import { completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, continueNarrativeSegment, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeRepair, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, narrativeGroundingIssue, narrativeOutputSchema, narrativeOutputJsonSchema } from "./narrative/publication";
 import { narrativeEvidence, narrativeTask, narrativeDiscourse } from "./narrative/scene";
 import { type NarrativeBeat } from "./narrative/contracts";
 import { participantDiscourse } from "./world-discourse";
@@ -713,7 +713,7 @@ export class WorldHost {
         let checked = 0;
         while (published < paragraphs.length) {
           if (choices[checked] === "redundant") { checked++; published++; continue; }
-          if (ready[checked] && choices[checked] !== "grounded") throw new Error(`Paragraph contains ${choices[checked]}: ${ready[checked]}. Continue using only the supplied scene; omit unsupported content.`);
+          if (ready[checked] && choices[checked] !== "grounded") throw new Error(narrativeGroundingIssue(decision.answers, checked, ready[checked]!));
           const mentions = rendered[checked]!.mentions.filter(mention => ready[checked]!.includes(mention.surface));
           const text = ready[checked++]!;
           if (text) this.updateNarrative(id, beat.id, item => {
@@ -906,7 +906,7 @@ export class WorldHost {
         /* turbopackIgnore: true */ process.env.LIVINGWORLD_MODEL_CATALOG_PATH ?? "config/models.yaml",
       ));
       const dataRoot = path.resolve(
-        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v34",
+        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v35",
       );
       const modelRegistry = new ModelRegistry(catalog, dataRoot);
       modelRegistry.startBackgroundRefresh();
@@ -1384,7 +1384,7 @@ export class WorldHost {
     }
     const now = this.now().toISOString();
     const initial: WorldInstanceDocument = {
-      schemaVersion: 34,
+      schemaVersion: 35,
       id,
       world: toWorldRuntimeContract(definition),
       executionAlgorithm: structuredClone(experiment.algorithmRef),

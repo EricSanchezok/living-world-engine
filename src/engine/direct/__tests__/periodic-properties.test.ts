@@ -1,3 +1,5 @@
+import { observedPeriodicTransitionsAt } from "../../../server/narrative/outbox";
+import type { ScenePacket } from "../../../server/narrative/contracts";
 import path from "node:path";
 import AdmZip from "adm-zip";
 import { stringify } from "yaml";
@@ -88,6 +90,34 @@ describe("authored periodic properties through world import and simulation", () 
     expect(JSON.stringify(completed.committed.observations)).toContain("阳光照在院子里");
     expect(JSON.stringify(completed.committed.observations)).not.toContain("院子上空是夜色");
     expect(replaySimulationState(completed.state)).toEqual(completed.state);
+  });
+
+  it("publishes an observed exact public phase boundary, but not old, hidden or shadowed cycles", async () => {
+    const f = await fixture();
+    const completed = await f.engine.step(f.roster, f.request("观察院子九小时", "exact-dawn"));
+    expect(completed.state.truth.elapsedSeconds).toBe(32400);
+    const state = completed.state, agent = state.agents.player!;
+    const claims: NonNullable<ScenePacket["observedProperties"]> = Object.values(agent.belief.claims).map(claim => ({
+      subject: agent.belief.localEntities[claim.subjectId]!.name, subjectLocalId: claim.subjectId,
+      predicate: claim.predicate, value: claim.value, stance: claim.stance, description: claim.description,
+      evidenceBoundary: { revision: state.revision, step: state.step, worldTimeSeconds: state.truth.elapsedSeconds },
+    }));
+    const transitions = observedPeriodicTransitionsAt(state, agent, claims);
+    expect(transitions).toHaveLength(1);
+    expect(transitions[0]).toMatchObject({ predicate: "daylight", atWorldTimeSeconds: 32400,
+      from: "院子上空是夜色。", to: "阳光照在院子里。" });
+    expect(observedPeriodicTransitionsAt(state, agent, claims.map(claim => ({ ...claim, evidenceBoundary: null })))).toEqual([]);
+    const midPhase = structuredClone(state); midPhase.truth.elapsedSeconds++;
+    expect(observedPeriodicTransitionsAt(midPhase, midPhase.agents.player!, claims.map(claim => ({ ...claim,
+      evidenceBoundary: { revision: state.revision, step: state.step, worldTimeSeconds: midPhase.truth.elapsedSeconds } })))).toEqual([]);
+    const privateState = structuredClone(state); privateState.truth.mechanics.periodicProperties["courtyard-daylight"]!.access = { kind: "private" };
+    expect(observedPeriodicTransitionsAt(privateState, privateState.agents.player!, claims)).toEqual([]);
+    const shadowed = structuredClone(state); shadowed.truth.placements[agent.entityId] = "inner-room";
+    shadowed.truth.placements["inner-room"] = "courtyard";
+    shadowed.truth.facts["constant-light"] = { id: "constant-light", subjectId: "inner-room", predicate: "daylight",
+      access: { kind: "public" }, value: { kind: "text", value: "unchanging" }, description: "这里始终只有阴云下的微光。", provenance: [] };
+    expect(observedPeriodicTransitionsAt(shadowed, shadowed.agents.player!, claims)).toEqual([]);
+    expect(replaySimulationState(state)).toEqual(state);
   });
 
   it("rejects invalid cycles, missing references and collisions on import", async () => {

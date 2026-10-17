@@ -13,7 +13,7 @@ const source: ScenePacket = {
   participantId: "reader", agentId: "traveler", submissionId: "action", submittedAt: null, requestedAction: "问价",
   world: { name: "港口", language: "zh-CN", style: "具体自然" }, playerName: "旅人", location: "码头", memories: [], knownEntities: [],
   boundary: { revision: 1, step: 1, worldTimeSeconds: 2 }, reply: null,
-  elapsedUnits: { 小时: 3600, 时辰: 7200 },
+  elapsedUnits: { 小时: 3600, 时辰: 7200 }, observedPeriodicTransitions: [],
   observations: [{ id: "heard", revision: 1, step: 1, worldTimeSeconds: 2, sourceEventIds: ["uttered"], summary: "听到报价",
     scene: { actionKind: "speak", status: "succeeded", actor: "店主", attempt: "", manner: null, outcome: "话语送达。", details: [], speech: { speaker: "店主", utterance: "三枚金币；我还没同意赊账。" } } }],
   speech: [{ id: "speech-ab12", speaker: "店主", utterance: "三枚金币；我还没同意赊账。" }],
@@ -51,7 +51,7 @@ describe("immutable narrative paragraphs", () => {
     scene.observations[0]!.scene!.manner = "退后一步";
     const provider = directTestProvider(wire => {
       expect(wire.state).toMatchObject({ publicationInstruction: expect.any(String), publicationTask: {
-        newReceipts: [{ actor: "店主", manner: "退后一步", currentMethodOrAttention: null, actualResult: "话语送达。" }],
+        newReceipts: [{ actor: "店主", manner: "退后一步", currentMethodOrAttention: null, actualResult: null, spokenDeliveryRecord: "话语送达。" }],
       } });
       expect(Object.keys(wire.questions)).toHaveLength(12);
       for (const question of Object.values(wire.questions)) {
@@ -268,6 +268,10 @@ describe("immutable narrative paragraphs", () => {
     const ordinary = narrativeTask(scene);
     expect(ordinary).toMatchObject({ alreadyObservedForThisRequest: [{ operation: "speak", worldTimeSeconds: 2,
       deliveredSpeech: { speaker: "店主", utterance: "我不能帮你。" } }], newReceipts: [{ operation: "wait", worldTimeSeconds: 5 }], newSpeech: [] });
+    expect(narrativeEvidence(scene)).not.toHaveProperty("priorObservedReceipts");
+    expect(narrativeRepair(scene, [], "Unsupported detail")).toMatchObject({ currentObservationIds: ["later-wait"], unpublishedSpeech: [] });
+    expect(ordinary.alreadyObservedForThisRequest[0]).toMatchObject({ manner: scene.priorObservedReceipts[0]!.scene!.manner,
+      details: scene.priorObservedReceipts[0]!.scene!.details });
     scene.reply = { agentId: scene.agentId, submissionId: "action", kind: "recovery", requested: "等候后查看", focusLocalEntityId: null, reason: "The next step was interrupted." };
     const recovery = narrativeTask(scene);
     expect(recovery.alreadyObservedForThisRequest).toEqual(ordinary.alreadyObservedForThisRequest);
@@ -450,7 +454,8 @@ describe("immutable narrative paragraphs", () => {
     scene.observations[0]!.scene!.attempt = "取出两枚金币交给店主";
     scene.memories = [{ kind: "observation", description: "尝试将物品交付", executedDescription: "说了交付的意向。" }];
     const projected = narrativeEvidence(scene);
-    expect(projected.observations[0]!.summary).toBe("话语送达。\n随身物资：2枚金币。");
+    expect(projected.observations[0]!.summary).toBe("随身物资：2枚金币。");
+    expect(projected.observations[0]!.spokenDeliveryRecord).toBe("话语送达。");
     expect(projected.observations[0]!.scene!.attempt).toBeNull();
     expect(projected.memories).toEqual([]);
     scene.reply = { kind: "clarification", agentId: "traveler", submissionId: "action", requested: "刚才付款了吗？", focusLocalEntityId: null, reason: "Explain the recorded progress." };
@@ -505,6 +510,41 @@ describe("immutable narrative paragraphs", () => {
     });
     await checkNarrativeGrounding(provider.gateway, { workloadId: "narrative", batchId: "current-light",
       runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 1 } }, scene, [renderNarrativeSegment("窗外已经是日间。", scene)], "decision-deepseek", "decision-deepseek", 1);
+    expect(provider.transport).toHaveBeenCalledTimes(1);
+  });
+  it("keeps a spoken invitation separate from physical arrival without dropping its manner or surroundings", () => {
+    const scene = structuredClone(source);
+    scene.observations[0]!.scene!.outcome = "店主说：请让管事过来。";
+    scene.observations[0]!.scene!.speech = { speaker: "店主", utterance: "请让管事过来。" };
+    scene.observations[0]!.scene!.manner = "压低声音";
+    scene.observations[0]!.scene!.details = [{ label: "管事", description: "站在柜边的人。", localEntityId: "manager" }];
+    const projected = narrativeEvidence(scene), task = narrativeTask(scene);
+    expect(projected.observations[0]).toMatchObject({ summary: null, spokenDeliveryRecord: "店主说：请让管事过来。",
+      scene: { outcome: null, manner: "压低声音", details: scene.observations[0]!.scene!.details } });
+    expect(task.newReceipts[0]).toMatchObject({ actualResult: null, spokenDeliveryRecord: "店主说：请让管事过来。" });
+    expect(task.spatialEvidence.nonSpeechReceipts).toEqual([]);
+    Object.assign(scene.observations[0]!.scene!, { actionKind: "move", speech: null, outcome: "管事走进了码头。" });
+    expect(narrativeTask(scene).spatialEvidence.nonSpeechReceipts).toMatchObject([{ operation: "move", actualResult: "管事走进了码头。" }]);
+  });
+  it("calculates the same elapsed scale for creation and publication without inventing calendar transitions", async () => {
+    const scene = structuredClone(source);
+    scene.elapsedUnits = { 小时: 3600, 时辰: 7200, 天: 345600, 日: 345600, 月: 2592000 };
+    scene.observations[0]!.worldTimeSeconds = 151200;
+    Object.assign(scene.observations[0]!.scene!, { actionKind: "wait", speech: null, outcome: "等候结束。",
+      action: { target: null, tool: null, resource: null, durationSeconds: 151120, addressing: "none" } });
+    const elapsed = [{ observationId: "heard", durationSeconds: 151120, fromWorldTimeSeconds: 80, toWorldTimeSeconds: 151200,
+      equivalents: [{ terms: ["小时"], secondsPerUnit: 3600, wholeUnits: 41, remainderSeconds: 3520, approximateUnits: 41.9778 },
+        { terms: ["时辰"], secondsPerUnit: 7200, wholeUnits: 20, remainderSeconds: 7120, approximateUnits: 20.9889 },
+        { terms: ["天", "日"], secondsPerUnit: 345600, wholeUnits: 0, remainderSeconds: 151120, approximateUnits: 0.437269 }] }];
+    expect(narrativeTask(scene).time.elapsedReceipts).toEqual(elapsed);
+    expect(narrativeTask(scene).time).not.toHaveProperty("sunrises");
+    const provider = directTestProvider(wire => {
+      expect(wire.state).toMatchObject({ publicationTask: { time: { elapsedReceipts: elapsed } } });
+      expect(Object.keys(wire.questions)).toHaveLength(6);
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeChoice(question, "grounded")]));
+    });
+    await checkNarrativeGrounding(provider.gateway, { workloadId: "narrative", batchId: "long-local-night",
+      runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 1 } }, scene, [renderNarrativeSegment("静坐还不到当地一个昼夜。", scene)], "decision-deepseek", "decision-deepseek", 1);
     expect(provider.transport).toHaveBeenCalledTimes(1);
   });
   it("renders a factual fallback handover in natural language with its exact amount", () => {

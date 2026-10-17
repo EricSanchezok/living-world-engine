@@ -640,6 +640,8 @@ describe("direct world through persistent WorldHost", () => {
       if (++calls === 1) return { paragraphs: [...prefix, unsupported] };
       expect(context.publishedPrefix).toEqual(prefix);
       expect(context.repair).toMatchObject({ mode: prefix.length ? "continue_published" : "replace_unpublished" });
+      expect((context.repair as { issue: string }).issue).toContain("material (added_content)");
+      expect((context.repair as { issue: string }).issue).not.toContain("speech (grounded)");
       return { paragraphs: ["三枚灵石仍在你身上。"] };
     });
     await f.registry.capture();
@@ -963,6 +965,7 @@ describe("direct world through persistent WorldHost", () => {
       expect(rebuilt.source.priorObservedReceipts).toEqual([]);
       expect(rebuilt.source.currentHoldings).toEqual(earlierSource.currentHoldings);
       expect(rebuilt.source.elapsedUnits).toEqual(earlierSource.elapsedUnits);
+      expect(rebuilt.source.observedPeriodicTransitions).toEqual(earlierSource.observedPeriodicTransitions);
       expect(rebuilt.source.elapsedUnits.hours).toBe(3600);
       expect(rebuilt.source.observedProperties).toEqual(earlierSource.observedProperties);
       expect(rebuilt.source.observedProperties?.every(property => property.evidenceBoundary === null || property.evidenceBoundary.revision <= rebuilt.source.boundary.revision)).toBe(true);
@@ -1042,7 +1045,7 @@ describe("direct world through persistent WorldHost", () => {
       let host = makeHost();
       const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } });
       const id = created.summary.id;
-      expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 34, executionAlgorithm: DEFAULT_ALGORITHM_REF,
+      expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 35, executionAlgorithm: DEFAULT_ALGORITHM_REF,
         state: { schemaVersion: 23, executionState: { data: { kind: "direct-world" } } } });
       expect(f.transport).not.toHaveBeenCalled();
       await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });

@@ -1,3 +1,4 @@
+import { assertExactKeys } from "../engine/runtime/json";
 import type { RulePackageRegistry } from "../engine/mechanics/rule-package";
 import { validateAlgorithmRef, type PolicyBinding } from "../engine/runtime/execution";
 import { executionStages } from "../engine/runtime/stages";
@@ -249,7 +250,7 @@ function validateActionWindow(document: WorldInstanceDocument): void {
 }
 
 export function validateWorldInstanceDocument(document: WorldInstanceDocument, rulePackages?: RulePackageRegistry): void {
-  if (document.schemaVersion !== 34) throw new Error("world instance schema v34 required");
+  if (document.schemaVersion !== 35) throw new Error("world instance schema v35 required");
   if (!document.agentMemories || Array.isArray(document.agentMemories)) throw new Error("instance Agent memories are required");
   for (const [id, value] of Object.entries(document.agentMemories)) {
     const record = memoryRecordSchema.parse(value), agent = document.state.agents[id];
@@ -273,6 +274,13 @@ export function validateWorldInstanceDocument(document: WorldInstanceDocument, r
         segment.mentions.some(mention => !mention.surface.trim() || !segment.text.includes(mention.surface) ||
           !beat.source.knownEntities.some(entity => entity.localEntityId === mention.localEntityId))) ||
       !Number.isSafeInteger(beat.attempts) || beat.attempts < 0 || beat.attempts > 2) throw new Error("invalid persisted narrative beat");
+    if (!Array.isArray(beat.source.observedPeriodicTransitions)) throw new Error("narrative observed periodic transitions are required");
+    for (const transition of beat.source.observedPeriodicTransitions) {
+      assertExactKeys(transition, ["subject", "subjectLocalId", "predicate", "atWorldTimeSeconds", "from", "to"], [], "observed periodic transition");
+      for (const key of ["subject", "subjectLocalId", "predicate", "from", "to"] as const) requireText(transition[key], `periodic transition ${key}`);
+      if (transition.atWorldTimeSeconds !== beat.source.boundary.worldTimeSeconds ||
+        !beat.source.knownEntities.some(entity => entity.localEntityId === transition.subjectLocalId)) throw new Error("invalid narrative periodic transition boundary");
+    }
     beatIds.add(beat.id);
   }
   validateAlgorithmRef(document.executionAlgorithm);

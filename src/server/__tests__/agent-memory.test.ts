@@ -50,7 +50,7 @@ async function fixture(create: (context: Record<string, unknown>) => unknown | P
 const measurement = (ratio: number) => ({ ratio, estimatedInputTokens: Math.round(ratio * 32000), inputLimit: 32000 });
 
 describe("background memory persistence", () => {
-  it("batches small new history across restart while preserving the hard-capacity escape", async () => {
+  it("batches small new history across restart even at hard capacity", async () => {
     let compactions = 0;
     const f = await fixture(context => {
       if (!context.episodes) return { paragraphs: ["你看清了随身物品。"] };
@@ -70,8 +70,12 @@ describe("background memory persistence", () => {
       await service.drain(f.id);
       expect(compactions).toBe(count);
       expect(f.read().agentMemories.keeper!.checkpoint!.version).toBe(1);
-      await expect(service.scope(f.read()).pressure(["keeper"], measurement(1), undefined, { keeper: 1 })).rejects.toBeInstanceOf(MemoryContextChanged);
-      expect(f.read().agentMemories.keeper!.checkpoint!.version).toBe(2);
+      const before = contentHash(f.read().state);
+      for (let i = 0; i < 3; i++) await expect(f.build().scope(f.read()).pressure(["keeper"], measurement(1), undefined, { keeper: 1 }))
+        .rejects.toThrow("memory compaction cannot currently make room");
+      expect(compactions).toBe(count);
+      expect(contentHash(f.read().state)).toBe(before);
+      expect(f.read().agentMemories.keeper!.checkpoint!.version).toBe(1);
       const important = readAgentMemory(f.read().state, f.read().state.agents.keeper!, f.read().agentMemories.keeper!.checkpoint).important;
       expect(important.some(item => item.evidence.id === "m00" && item.evidence.description.includes("青鹭归巢"))).toBe(true);
     } finally { f.close(); }

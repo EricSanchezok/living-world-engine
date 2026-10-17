@@ -1,6 +1,6 @@
 # Direct world runtime
 
-This reference owns the default `direct-world@12` execution contract, approved in [Spec 0182](../specs/0182-jev-direct-world-runtime.md). Its implementation lives in [`src/engine/direct/`](../../src/engine/direct/algorithm.ts). The script contract is v19, SimulationState is v23 and WorldInstanceDocument is v34.
+This reference owns the default `direct-world@12` execution contract, approved in [Spec 0182](../specs/0182-jev-direct-world-runtime.md). Its implementation lives in [`src/engine/direct/`](../../src/engine/direct/algorithm.ts). The script contract is v19, SimulationState is v23 and WorldInstanceDocument is v35.
 
 Discoverable facts remain outside initial perspectives. The existing world visibility decision distinguishes a newly performed examination from recalling or reporting prior evidence. Only a successful or partial action admitted as `examined` records the exact existing value for its actor; `retained` preserves the observation-time belief without refreshing canonical truth. The access policy and canonical value remain unchanged, so future truth changes do not silently update retained belief. Private facts retain their access restriction regardless of model visibility answers. The [discovery contract](../specs/0197-action-bound-fact-discovery.md) and [simulation-entry tests](../../src/engine/direct/__tests__/runtime.test.ts) define this behavior. Discovery adds no model request and preserves deterministic replay.
 

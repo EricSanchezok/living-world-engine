@@ -29,6 +29,32 @@ function observedPropertiesAt(state: Readonly<SimulationState>, agent: AgentStat
   }));
 }
 
+/** A current observed public phase can establish its exact boundary, never a hidden schedule. */
+export function observedPeriodicTransitionsAt(state: Readonly<SimulationState>, agent: AgentState,
+  properties: NonNullable<ScenePacket["observedProperties"]>): ScenePacket["observedPeriodicTransitions"] {
+  const ancestry: string[] = [];
+  for (let place = state.truth.placements[agent.entityId]; place && !ancestry.includes(place); place = state.truth.placements[place]) ancestry.push(place);
+  return properties.flatMap(observed => {
+    if (observed.evidenceBoundary?.worldTimeSeconds !== state.truth.elapsedSeconds) return [];
+    const binding = agent.bindings[observed.subjectLocalId];
+    if (binding?.canonicalEntityIds.length !== 1) return [];
+    const subjectId = binding.canonicalEntityIds[0]!, rank = ancestry.indexOf(subjectId);
+    if (rank < 0) return [];
+    // A nearer public environment owns this property even when it is constant.
+    if (Object.values(state.truth.facts).some(fact => fact.predicate === observed.predicate && fact.access.kind === "public" &&
+      ancestry.indexOf(fact.subjectId) >= 0 && ancestry.indexOf(fact.subjectId) < rank)) return [];
+    const property = Object.values(state.truth.mechanics.periodicProperties).find(item => item.subjectId === subjectId &&
+      item.predicate === observed.predicate && item.access.kind === "public");
+    if (!property) return [];
+    const offset = Number((BigInt(state.truth.elapsedSeconds) + BigInt(property.initialPhaseSeconds)) % BigInt(property.periodSeconds));
+    const index = property.phases.findIndex(phase => phase.startsAtSeconds === offset && contentHash(phase.value) === contentHash(observed.value));
+    if (index < 0) return [];
+    return [{ subject: observed.subject, subjectLocalId: observed.subjectLocalId, predicate: observed.predicate,
+      atWorldTimeSeconds: state.truth.elapsedSeconds, from: property.phases[(index + property.phases.length - 1) % property.phases.length]!.description,
+      to: property.phases[index]!.description }];
+  });
+}
+
 function queuedBeat(id: string, source: ScenePacket, now: string): NarrativeBeat {
   return { id, participantId: source.participantId, agentId: source.agentId, submissionId: source.submissionId,
     status: "queued", source, sourceHash: contentHash(source), segments: [], attempts: 0, executionIds: [], createdAt: now,
@@ -143,6 +169,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
         location: localPlace ? agent.belief.localEntities[localPlace.localEntityId]?.name ?? null : null,
         boundary: { revision: observation.revision, step: observation.step, worldTimeSeconds: observation.worldTimeSeconds }, reply: null,
         elapsedUnits: elapsedUnitsAt(boundaryState, agent),
+        observedPeriodicTransitions: observedPeriodicTransitionsAt(boundaryState, agent, observedPropertiesAt(boundaryState, agent) ?? []),
         observations: [], speech: [],
         priorObservedReceipts: priorReceipts(participant.id, participant.agentId, submissionId, observation.revision),
         knownEntities: [], observedProperties: [],
@@ -158,6 +185,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
       source.boundary = { revision: observation.revision, step: observation.step, worldTimeSeconds: observation.worldTimeSeconds };
       source.elapsedUnits = elapsedUnitsAt(boundaryState, agent);
       source.observedProperties = observedPropertiesAt(boundaryState, agent);
+      source.observedPeriodicTransitions = observedPeriodicTransitionsAt(boundaryState, agent, source.observedProperties ?? []);
       source.observations.push(observation);
       if (observation.scene?.speech) source.speech.push({ id: `speech-${contentHash(observation.id).slice(0, 16)}`, ...observation.scene.speech });
       if (pending) pending.sourceHash = contentHash(source);
@@ -200,6 +228,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
           submittedAt: participantIntent?.submittedAt ?? null, requestedAction: reply.requested, reply: structuredClone(reply),
           boundary: { revision: step.revision, step: step.step, worldTimeSeconds: step.temporalBoundary.toElapsedSeconds },
           elapsedUnits: elapsedUnitsAt(boundaryState, agent),
+          observedPeriodicTransitions: observedPeriodicTransitionsAt(boundaryState, agent, observedPropertiesAt(boundaryState, agent) ?? []),
           world: { name: document.world.name, language: document.world.narrative.language, style: document.world.narrative.style },
           playerName: participant.displayName, location: projectAgentPerspective(boundaryState, agent).self.location?.name ?? null, observations: [], speech: [],
           priorObservedReceipts: reply.kind === "recovery"
