@@ -33,6 +33,7 @@ export interface GameThreadProps {
   composerMode: ComposerMode;
   footer?: ReactNode;
   readOnly?: boolean;
+  observerName?: string;
   reduceMotion?: boolean;
   streamWarning: string;
   suggestions?: SuggestionControl;
@@ -235,6 +236,7 @@ export function GameThread({
   composerMode,
   footer,
   readOnly = false,
+  observerName,
   reduceMotion = false,
   streamWarning,
   suggestions,
@@ -302,6 +304,10 @@ export function GameThread({
           "mx-auto flex w-full max-w-(--thread-max-width) flex-1 flex-col px-4 pt-4",
           isEmpty && "justify-center",
         )}>
+          {readOnly && observerName ? <header className="cg-observer-heading">
+            <p>正在观察 · {observerName}</p>
+            <span>这里记录这个角色的行动与见闻；世界中的其他角色也会同时行动。</span>
+          </header> : null}
           {isEmpty ? (
             <section className="mb-6 flex flex-col items-center px-4 text-center">
               <h2 className="text-2xl font-medium tracking-tight">

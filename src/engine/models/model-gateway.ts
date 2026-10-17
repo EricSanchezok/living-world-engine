@@ -499,19 +499,21 @@ export class ModelGateway implements StructuredModelProvider {
     if (pressure.ratio >= 0.8) observe?.({ event: "model.memory.pressure", correlation: preflightCorrelation,
       measurements: { contextOccupancy: pressure.ratio, estimatedInputTokens: pressure.estimatedInputTokens },
       payload: { ...pressure, inputLimit: Number.isFinite(pressure.inputLimit) ? pressure.inputLimit : null, versions: requestMemoryVersions(context) } });
-    if (request.memory) try {
-      await request.memory.pressure(request.memorySubjects ?? [request.subjectId], pressure, request.abortSignal, requestMemoryVersions(context));
+    try {
+      if (request.memory) await request.memory.pressure(request.memorySubjects ?? [request.subjectId], pressure, request.abortSignal, requestMemoryVersions(context));
+      if (!request.memory && request.priority === "background" && pressure.ratio >= 1) throw new ContextLimitExceededError("Background model request exceeds its input budget");
+      if (requestUtf8Bytes > profile.max_input_bytes) {
+        throw new ContextLimitExceededError(
+          `model profile ${request.profileId} request is ${requestUtf8Bytes} bytes; ` +
+          `maximum is ${profile.max_input_bytes} bytes`,
+        );
+      }
     } catch (error) {
       if (error instanceof MemoryContextChanged) observe?.({ event: "model.memory.context.retry", correlation: preflightCorrelation,
         payload: { modelInvocationId, versions: requestMemoryVersions(context) } });
+      if (error instanceof ContextLimitExceededError) observe?.({ event: "model.context.rejected", correlation: preflightCorrelation,
+        payload: { modelInvocationId, profileId: request.profileId, message: error.message } });
       throw error;
-    }
-    if (!request.memory && request.priority === "background" && pressure.ratio >= 1) throw new ContextLimitExceededError("Background model request exceeds its input budget");
-    if (requestUtf8Bytes > profile.max_input_bytes) {
-      throw new ContextLimitExceededError(
-        `model profile ${request.profileId} request is ${requestUtf8Bytes} bytes; ` +
-        `maximum is ${profile.max_input_bytes} bytes`,
-      );
     }
     observe?.({ event: "model.context.normalized", correlation, durationMs: normalizationMs,
       hashes: { context: preparedContext.hash } });

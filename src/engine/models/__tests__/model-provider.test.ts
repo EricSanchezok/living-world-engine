@@ -635,6 +635,11 @@ describe("model catalog and provider adapters", () => {
       runtimeIdentity: { worldHash: TEST_WORLD_HASH, revision: 7 },
     }, "agent-mind", "keeper", 2);
     expect(first).toEqual(second);
+    const scoped = { workloadId: "a", batchId: "b", runtimeIdentity: { worldHash: TEST_WORLD_HASH, revision: 7 }, modelInvocationNamespace: "component-a" };
+    expect(modelInvocationIdentity(scoped, "decision", "world", 1)).not.toEqual(
+      modelInvocationIdentity({ ...scoped, modelInvocationNamespace: "component-b" }, "decision", "world", 1));
+    expect(modelInvocationIdentity(scoped, "decision", "world", 1)).toEqual(
+      modelInvocationIdentity({ ...scoped, workloadId: "replay", batchId: "replay" }, "decision", "world", 1));
     expect(() => modelInvocationIdentity({ workloadId: "a", batchId: "b" }, "agent-mind", "keeper", 1))
       .toThrow("requires worldHash and revision");
   });

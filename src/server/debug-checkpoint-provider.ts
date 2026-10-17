@@ -3,6 +3,7 @@ import { MemoryContextChanged } from "../engine/cognition/memory";
 import { contentHash } from "../engine/models/model-audit";
 import type { ModelRole } from "../engine/models/model-catalog";
 import {
+  ContextLimitExceededError,
   ModelOutputError,
   modelInvocationIdentity,
   type StructuredModelProvider,
@@ -97,6 +98,7 @@ export function debugCheckpointReplayValidationError(
  */
 export class DebugCheckpointModelProvider implements StructuredModelProvider {
   private readonly memoryRetries: Set<string>;
+  private readonly contextRejections = new Map<string, { profileId: string; message: string }>();
   readonly catalog;
   private readonly outputs = new Map<string, RecordedStageOutput>();
   private readonly consumed = new Set<string>();
@@ -110,6 +112,11 @@ export class DebugCheckpointModelProvider implements StructuredModelProvider {
     this.memoryRetries = new Set(events.filter(event => event.event === "model.memory.context.retry" &&
       (event.correlation?.logicalStageIndex ?? Number.MAX_SAFE_INTEGER) <= completedStageIndex)
       .map(event => (event.payload as { modelInvocationId: string }).modelInvocationId));
+    for (const event of events.filter(event => event.event === "model.context.rejected" &&
+      (event.correlation?.logicalStageIndex ?? Number.MAX_SAFE_INTEGER) <= completedStageIndex)) {
+      const rejection = event.payload as { modelInvocationId: string; profileId: string; message: string };
+      this.contextRejections.set(rejection.modelInvocationId, rejection);
+    }
     const audits = new Map<string, ModelExecutionAudit>();
     for (const event of events) {
       if (event.event !== "model.audit.persisted" || event.payload === undefined ||
@@ -146,6 +153,12 @@ export class DebugCheckpointModelProvider implements StructuredModelProvider {
     const invocationId = request.modelInvocationId ?? (request.modelInvocation
       ? modelInvocationIdentity(request, request.role, request.subjectId, request.modelInvocation).modelInvocationId : undefined);
     if (invocationId && this.memoryRetries.delete(invocationId)) throw new MemoryContextChanged();
+    const rejection = invocationId ? this.contextRejections.get(invocationId) : undefined;
+    if (rejection) {
+      if (rejection.profileId !== request.profileId) throw new Error(`debug checkpoint preflight identity mismatch: ${invocationId}`);
+      this.contextRejections.delete(invocationId!);
+      throw new ContextLimitExceededError(rejection.message);
+    }
     const output = invocationId ? this.outputs.get(invocationId) : undefined;
     if (!invocationId || !output) return this.live.generateStructured(request);
     if (this.consumed.has(invocationId)) {

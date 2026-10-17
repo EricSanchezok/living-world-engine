@@ -1565,7 +1565,9 @@ html[data-cg-motion="reduced"] *, html[data-cg-motion="reduced"] *::before, html
 .cg-thread-root[data-reduce-motion] .cg-thread-console__content { animation: none; }
 @media (prefers-reduced-motion: reduce) { .cg-thread-console__content { animation: none; } }
 
-.cg-observer-console { display: grid; grid-template-columns: minmax(10rem, 1fr) repeat(5, auto); gap: 0.45rem; border-block: 1px solid var(--cg-border); background: var(--cg-transparent); padding: 0.35rem 0; }
+.cg-observer-heading { margin-block: 0.5rem 2rem; color: var(--cg-muted-foreground); font-size: 0.8rem; line-height: 1.7; }
+.cg-observer-heading p { margin: 0 0 0.3rem; color: var(--cg-foreground); font-weight: 500; }
+.cg-observer-console { display: grid; grid-template-columns: minmax(10rem, 1fr) repeat(5, auto); gap: 0.45rem; border: 1px solid var(--cg-border); border-radius: var(--cg-radius); background: var(--cg-background); padding: 0.5rem; }
 .cg-observer-console button, .cg-detach-button { min-width: 0; min-height: 44px; border: 0; border-radius: var(--cg-radius); background: var(--cg-transparent); color: var(--cg-foreground); padding-inline: 0.7rem; cursor: pointer; }
 .cg-observer-console .cg-select { width: 100%; border: 1px solid var(--cg-input); background: var(--cg-background); }
 .cg-observer-console button { display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; white-space: nowrap; }

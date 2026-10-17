@@ -103,9 +103,10 @@ const server = createServer(async (request, response) => {
     }
     const body = await readBody(request);
     const native = request.url === "/systemone";
-    const context = native ? body.state as Record<string, unknown> : contextFrom(body);
+    const context = native ? (body.state as { context: Record<string, unknown> }).context : contextFrom(body);
     const decision = context.decision as { state: unknown; questions: Record<string, DecisionQuestionV2> } | undefined;
-    const reading = context.playerReading as { state: unknown; catalog: Record<string, Record<string, string>>;
+    const autonomous = Boolean(context.autonomousReading);
+    const reading = (context.playerReading ?? context.autonomousReading) as { state: unknown; catalog: Record<string, Record<string, string>>;
       cognition: Record<string, DecisionQuestionV2> } | undefined;
     const requestText = ((native ? context : reading?.state ?? decision?.state) as { submittedAction?: { rawText?: string } } | undefined)?.submittedAction?.rawText ?? "";
     const state = (native ? context : reading?.state ?? decision?.state) as {
@@ -165,9 +166,10 @@ const server = createServer(async (request, response) => {
         ? ["询问守门人石门后的道路", "检查石门上可见的痕迹", "整理接下来探索的打算"]
         : ["向守门人说明来意", "寻找庭院中的其他出口", "回顾刚得到的线索"] }
       : reading ? { understanding: "Inspect the supplied fixture surroundings", interaction: "world_action",
+      ...(autonomous ? { urgency: 0.5 } : {}),
       requestAnalysis: { authorizedSteps: [requestText], establishedReceipts: [], remainingSteps: [requestText] },
       action: { ...Object.fromEntries(Object.keys(reading.catalog).map(id => [id, readingAnswers[id]!.choice])),
-        attempt: requestText, utterance: null, manner: null, literalQuote: "none" },
+        attempt: requestText || "清点随身物资", utterance: null, manner: null, literalQuote: "none" },
       cognition: Object.fromEntries(Object.keys(reading.cognition).map(id => [id, readingAnswers[id]!.choice])) }
       : decision ? { answers: Object.fromEntries(Object.entries(decisionAnswers(decision.questions))
       .map(([id, answer]) => [id, answer[String(answer.type)]])) }

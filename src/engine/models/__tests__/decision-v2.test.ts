@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { executeDecisionV2, decisionOutputV2Schema, decisionPromptV2, validateDecisionBatchV2, type DecisionRequestV2 } from "../decision-v2";
 import { contentHash } from "../model-audit";
 import { directTestProvider, nativeChoice } from "../../testing/direct-provider";
-import { ModelOutputError } from "../model-provider";
+import { ContextLimitExceededError, ModelOutputError } from "../model-provider";
 import { loadModelCatalog } from "../model-catalog";
 
 function request(): DecisionRequestV2 {
@@ -119,6 +119,28 @@ describe("direct native decisions", () => {
     const f = directTestProvider(() => new Response('{"detail":"context token limit exceeded"}', { status: 422 }));
     await expect(executeDecisionV2(f.gateway, request())).rejects.toThrow("actual context");
     expect(f.transport).toHaveBeenCalledTimes(1);
+  });
+  it("preserves the full batch in the existing fallback when memory preflight cannot fit native input", async () => {
+    const input = request();
+    input.batch.state = { observation: "已观察到且必须保留的事实。".repeat(1500) };
+    input.batch.view.projectionHash = contentHash(input.batch.state);
+    const f = directTestProvider(wire => answers(wire.questions), undefined, { maxInputBytes: 16_000 });
+    const pressures: number[] = [];
+    const result = await executeDecisionV2(f.gateway, { ...input, fallbackProfileId: "decision-deepseek", memory: {
+      read: () => null,
+      pressure: async (_owners, measurement) => {
+        pressures.push(measurement.ratio);
+        if (measurement.ratio >= 1) throw new ContextLimitExceededError("No eligible memory can make room");
+      },
+    } });
+    expect(pressures[0]).toBeGreaterThan(1);
+    expect(pressures[1]).toBeLessThan(1);
+    expect(result.dispatches.map(dispatch => dispatch.profileId)).toEqual(["decision-jev", "decision-deepseek"]);
+    expect(result.answers.consent).toMatchObject({ choice: "unknown" });
+    expect(f.transport).toHaveBeenCalledTimes(1);
+    const wire = JSON.parse(String(f.transport.mock.calls[0]![1]!.body));
+    expect(wire.messages[1].content).toContain(JSON.stringify(input.batch.state));
+    expect(result.dispatches[1]!.questionIds).toEqual(Object.keys(input.batch.questions));
   });
   it("rejects invalid choice domains, invalid values and foreign private owners", async () => {
     const f = directTestProvider(wire => ({ ...answers(wire.questions), relevance: { type: "noul", noul: 1.1 } }));

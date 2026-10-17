@@ -17,6 +17,7 @@ export function directDecisionContext(wire: DirectTestWire): Pick<DirectTestWire
   if (wire.questions) return { ...wire, state: (wire.state as { context: unknown }).context };
   const context = directCreationContext(wire);
   if (context.playerReading) return readingDecision(context.playerReading as TestReading);
+  if (context.autonomousReading) return readingDecision(context.autonomousReading as TestReading);
   return context.decision as Pick<DirectTestWire, "state" | "questions"> | undefined;
 }
 
@@ -31,13 +32,16 @@ function readingDecision(reading: TestReading): Pick<DirectTestWire, "state" | "
 }
 
 export function directTestProvider(respond: (wire: DirectTestWire, call: number) => unknown | Response | Promise<unknown | Response>,
-  create?: (wire: DirectTestWire) => unknown | Response | Promise<unknown | Response>, options: { maxInputBytes?: number; suggestions?: (wire: DirectTestWire) => unknown | Promise<unknown> } = {}) {
+  create?: (wire: DirectTestWire) => unknown | Response | Promise<unknown | Response>, options: { maxInputBytes?: number; maxNativeInputBytes?: number; suggestions?: (wire: DirectTestWire) => unknown | Promise<unknown> } = {}) {
   const source = createTestModelCatalog().snapshot();
   source.accounts.typesafe = { ...source.accounts["scripted-test"]!, protocol: "typesafe-systemone", dialect: "typesafe",
     models_dev_provider_id: "typesafe", base_url: "https://typesafe.test/v1", api_key_env: "TYPESAFE_API_KEY" };
   source.profiles["decision-jev"] = { ...source.profiles["decision-jev"]!, account_id: "typesafe",
-    ...(options.maxInputBytes ? { max_input_bytes: options.maxInputBytes } : {}),
+    ...(options.maxNativeInputBytes ?? options.maxInputBytes ? { max_input_bytes: options.maxNativeInputBytes ?? options.maxInputBytes } : {}),
     selector: { kind: "exact", model_id: "jev-1.13.0" } };
+  if (options.maxInputBytes) source.profiles["creation-deepseek"] = {
+    ...source.profiles["creation-deepseek"]!, max_input_bytes: options.maxInputBytes,
+  };
   const catalog = parseModelCatalog(source), registry = createTestModelRegistry(catalog);
   let calls = 0;
   const transport = vi.fn<typeof fetch>(async (_url, init) => {
@@ -45,36 +49,45 @@ export function directTestProvider(respond: (wire: DirectTestWire, call: number)
     const wire = body.questions ? { ...body, state: body.state.context } : body;
     calls++;
     const decision = !wire.questions ? directCreationContext(wire).decision as { state: unknown; questions: Record<string, DecisionQuestionV2> } | undefined : undefined;
-    const reading = !wire.questions ? directCreationContext(wire).playerReading as TestReading | undefined : undefined;
+    const creationContext = !wire.questions ? directCreationContext(wire) : {};
+    const autonomous = Boolean(creationContext.autonomousReading);
+    const reading = (creationContext.playerReading ?? creationContext.autonomousReading) as TestReading | undefined;
     let response: unknown;
     if (!wire.questions && directCreationContext(wire).task === "action-suggestions") {
       response = options.suggestions ? await options.suggestions(wire) : { items: [] };
     } else if (reading) {
       const decoded = await respond({ ...wire, ...readingDecision(reading) }, calls);
       if (decoded instanceof Response) return decoded;
-      const raw = decoded as Record<string, Record<string, unknown>>;
-      const pick = (id: string) => String(raw[id]?.choice ?? "none");
-      const operation = pick("operation"), speech = pick(operation === "reflect" ? "reflection" : "speech");
-      const request = reading.state.submittedAction as { rawText: string };
-      const literal = reading.exactQuotes[speech];
-      const expressive = Number(raw.expression?.noul ?? 0) >= 0.5;
-      let expression: { attempt?: string; utterance?: string | null; manner?: string | null } = {
-        attempt: request.rawText, utterance: operation === "speak" ? literal ?? (speech === "input" ? request.rawText : null) : null, manner: null };
-      const prepare = ["speak", "transfer"].includes(operation) && ["none", "discover"].includes(pick("recipient"));
-      if (!prepare && (operation === "speak" && (!literal || expressive) || operation === "reflect" && speech === "create" ||
-        ["use", "change"].includes(operation) || expressive)) {
-        const context = { ...reading.state, chosenDirection: operation, playerControlled: true, currentPlayerRequest: request.rawText };
-        const synthetic = { ...wire, messages: [{ role: "user", content: `Expression fixture\n\n${JSON.stringify(context)}\n\nReturn exactly one JSON object` }] };
-        const created = await (create ? create(synthetic) : respond(synthetic, calls));
-        if (created instanceof Response) return created;
-        expression = { ...expression, ...created as typeof expression };
+      if (decoded && typeof decoded === "object" && "action" in decoded) response = decoded;
+      else {
+        const raw = decoded as Record<string, Record<string, unknown>>;
+        const pick = (id: string) => String(raw[id]?.choice ?? "none");
+        const operation = pick("operation"), speech = pick(operation === "reflect" ? "reflection" : "speech");
+        const request = reading.state.submittedAction as { rawText: string } | null;
+        const text = request?.rawText ?? (operation === "wait" ? "等待相关情况变化" : `尝试${operation}`);
+        const literal = reading.exactQuotes[speech];
+        const expressive = Number(raw.expression?.noul ?? 0) >= 0.5;
+        let expression: { attempt?: string; utterance?: string | null; manner?: string | null; recipientLocalId?: string } = {
+          attempt: text, utterance: operation === "speak" ? literal ?? (speech === "input" ? text : null) : null, manner: null };
+        const prepare = ["speak", "transfer"].includes(operation) && (autonomous ? ["discover"] : ["none", "discover"]).includes(pick("recipient"));
+        if (operation !== "wait" && !prepare && (operation === "speak" && (!literal || expressive) || operation === "reflect" && speech === "create" ||
+          ["use", "change"].includes(operation) || expressive)) {
+          const context = { ...reading.state, chosenDirection: operation, playerControlled: !autonomous, currentPlayerRequest: text };
+          const synthetic = { ...wire, messages: [{ role: "user", content: `Expression fixture\n\n${JSON.stringify(context)}\n\nReturn exactly one JSON object` }] };
+          const created = await (create ? create(synthetic) : respond(synthetic, calls));
+          if (created instanceof Response) return created;
+          expression = { ...expression, ...created as typeof expression,
+            ...(autonomous && ["use", "change"].includes(operation) ? { attempt: (created as typeof expression).attempt ?? "" } : {}) };
+        }
+        response = { understanding: "Scripted coherent action", interaction: autonomous ? "world_action" : pick("interaction"),
+          ...(autonomous ? { urgency: 0.5 } : {}),
+          requestAnalysis: { authorizedSteps: [text], establishedReceipts: [], remainingSteps: [text] },
+          action: { ...Object.fromEntries(Object.keys(reading.catalog).map(id => [id, pick(id)])),
+            ...(autonomous && expression.recipientLocalId ? { recipient: expression.recipientLocalId } : {}),
+            attempt: expression.attempt ?? text, utterance: expression.utterance ?? null, manner: expression.manner ?? null,
+            literalQuote: literal && operation === "speak" ? speech : "none" },
+          cognition: Object.fromEntries(Object.keys(reading.cognition).map(id => [id, pick(id)])) };
       }
-      response = { understanding: "Scripted coherent player interpretation", interaction: pick("interaction"),
-        requestAnalysis: { authorizedSteps: [request.rawText], establishedReceipts: [], remainingSteps: [request.rawText] },
-        action: { ...Object.fromEntries(Object.keys(reading.catalog).map(id => [id, pick(id)])),
-          attempt: expression.attempt ?? request.rawText, utterance: expression.utterance ?? null, manner: expression.manner ?? null,
-          literalQuote: literal && operation === "speak" ? speech : "none" },
-        cognition: Object.fromEntries(Object.keys(reading.cognition).map(id => [id, pick(id)])) };
     } else response = await (decision ? respond({ ...wire, ...decision }, calls) : !wire.questions && create ? create(wire) : respond(wire, calls));
     if (response instanceof Response) return response;
     if (decision) response = { answers: Object.fromEntries(Object.entries(response as Record<string, Record<string, unknown>>).map(([id, answer]) =>

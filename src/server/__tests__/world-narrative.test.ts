@@ -352,6 +352,13 @@ describe("immutable narrative paragraphs", () => {
     scene.observations[0]!.summary = "操作已经结束。\n设备：当前状态：稳定。\n本次操作消耗了2升液体。";
     expect(narrativeFallback(scene)).toBe("操作已经结束。\n设备：当前状态：稳定。\n本次操作消耗了2升液体。");
   });
+  it("retains the first factual line when an observation omits its generic completion text", () => {
+    const scene = structuredClone(source);
+    scene.speech = [];
+    Object.assign(scene.observations[0]!.scene!, { actionKind: "observe", speech: null, outcome: "你查看了随身物资。" });
+    scene.observations[0]!.summary = "随身物资：2枚金币。";
+    expect(narrativeFallback(scene)).toBe("你查看了随身物资。\n随身物资：2枚金币。");
+  });
   it("renders a factual fallback handover in natural language with its exact amount", () => {
     const scene = structuredClone(source);
     scene.observations[0]!.scene!.speech = null;

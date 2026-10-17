@@ -18,7 +18,7 @@ import { ModelCatalog, type ModelCatalogDocument, type ModelRole } from "../../s
 import type { ModelExecutionAudit, ModelInvocationAudit, SimulationState } from "../../src/engine/contracts/model";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { redactRuntimePayload, type RuntimeEvent } from "../../src/engine/runtime/observability";
-import { ModelConfigurationError, ModelOutputError, modelInvocationIdentity, type StructuredModelProvider, type StructuredModelRequest, type StructuredModelResult } from
+import { ContextLimitExceededError, ModelConfigurationError, ModelOutputError, modelInvocationIdentity, type StructuredModelProvider, type StructuredModelRequest, type StructuredModelResult } from
   "../../src/engine/models/model-provider";
 import { SimulationEngine } from "../../src/engine/runtime/simulation";
 import type { WorldDefinition } from "../../src/engine/runtime/world-definition";
@@ -122,6 +122,7 @@ function recordedCatalog(audits: readonly ModelExecutionAudit[]): ModelCatalog {
 
 class RecordedModelProvider implements StructuredModelProvider {
   private readonly memoryRetries: Set<string>;
+  private readonly contextRejections = new Map<string, { profileId: string; message: string }>();
   readonly catalog: ModelCatalog;
   private readonly outputs = new Map<string, RecordedOutput>();
   private readonly consumed = new Set<string>();
@@ -140,6 +141,10 @@ class RecordedModelProvider implements StructuredModelProvider {
     this.overlay = overlay;
     this.memoryRetries = new Set(events.filter(event => event.event === "model.memory.context.retry")
       .map(event => (event.payload as { modelInvocationId: string }).modelInvocationId));
+    for (const event of events.filter(event => event.event === "model.context.rejected")) {
+      const rejection = event.payload as { modelInvocationId: string; profileId: string; message: string };
+      this.contextRejections.set(rejection.modelInvocationId, rejection);
+    }
     // Candidate audits are logical projections: several slots can share one
     // physical invocation while owning different subjects and result shapes.
     const replayedInvocations = new Set(candidates.flatMap((candidate) => ("record" in candidate ? candidate.record.modelAudits : candidate.modelAudits))
@@ -204,6 +209,12 @@ class RecordedModelProvider implements StructuredModelProvider {
       ? modelInvocationIdentity(request, request.role, request.subjectId, request.modelInvocation).modelInvocationId : undefined);
     if (!invocationId) throw new ModelConfigurationError("recorded replay requires canonical model invocation identity");
     if (this.memoryRetries.delete(invocationId)) throw new MemoryContextChanged();
+    const rejection = this.contextRejections.get(invocationId);
+    if (rejection) {
+      if (rejection.profileId !== request.profileId) throw new ModelConfigurationError(`recorded preflight identity mismatch: ${invocationId}`);
+      this.contextRejections.delete(invocationId);
+      throw new ContextLimitExceededError(rejection.message);
+    }
     const isOverlayTarget = this.overlay?.targetInvocation.id === invocationId;
     if (isOverlayTarget) {
       if (this.overlayConsumed) throw new Error(`probe overlay was consumed twice: ${invocationId}`);

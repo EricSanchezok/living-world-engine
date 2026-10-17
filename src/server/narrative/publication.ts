@@ -248,12 +248,11 @@ export function narrativeFallback(source: ScenePacket, published: string[] = [])
   const paragraphs = source.observations.map(observation => {
     const scene = observation.scene;
     if (!scene) return observation.summary;
-    const factualLines = observation.summary.split("\n").slice(1).filter(line =>
+    const factualLines = observation.summary.split("\n").filter(line =>
       line.startsWith("随身物资：") || line.includes("转移了") || line.includes("当前状态：") ||
       line.startsWith("本次操作消耗了") || line.startsWith("本次操作产生了") ||
       scene.actionKind === "observe" && scene.action?.target && line.startsWith(`${scene.action.target.label}：`));
-    const outcome = scene.outcome === "行动已完成。" && factualLines.some(line => line.includes("转移了")) ? "" :
-      scene.outcome.replace(/^本次已执行的方法：(.+?)。+具体结果以观察到的状态为准。$/u, (_, method: string) => `${scene.actor}${method}。`);
+    const outcome = scene.outcome === "行动已完成。" && factualLines.some(line => line.includes("转移了")) ? "" : scene.outcome;
     const manner = scene.manner?.trim().replace(/[。.!！?？]+$/u, "");
     const performedManner = manner ? `${manner.startsWith(scene.actor) ? "" : scene.actor}${manner}` : "";
     const quote = scene.speech ? `“${scene.speech.utterance}”` : null;

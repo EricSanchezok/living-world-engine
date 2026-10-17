@@ -20,6 +20,8 @@ import { participantReactionIds } from "../../engine/direct/foreground";
 import { nextNarrative } from "../narrative/outbox";
 import { GET as getInstanceEvents } from "../../app/api/instances/[id]/events/route";
 import { GET as getInstance } from "../../app/api/instances/[id]/route";
+import { DebugCheckpointModelProvider } from "../debug-checkpoint-provider";
+import type { SimulationState } from "../../engine/contracts/model";
 
 // Conversation scenarios start with NPCs waiting; initiative has separate concurrent coverage.
 function quietInitialNpcProvider(...args: Parameters<typeof directTestProvider>) {
@@ -52,6 +54,44 @@ function createText(wire: DirectTestWire) {
 }
 
 describe("direct world through persistent WorldHost", () => {
+  it("replays concurrent world components when their model responses finish in the opposite order", async () => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-concurrent-replay-"));
+    const f = directTestProvider(async wire => {
+      if (!wire.questions) {
+        const frame = directCreationContext(wire).requestedAction as { actorId: string };
+        return { description: "A visible detail", entities: [], events: [], facts: [
+          { subject: "actor", predicate: "visible-readiness", value: frame.actorId, description: `${frame.actorId}已经整理好衣着。` },
+        ] };
+      }
+      const context = wire.state as { perspective?: { agentId: string }; actions?: Array<{ actorId: string }> };
+      if (wire.questions.a0_outcome && context.actions?.[0]?.actorId === "keeper") await new Promise(resolve => setTimeout(resolve, 30));
+      const values: Record<string, string> = { operation: "observe", target: "self", observation_scope: "inventory", tool: "none", resource: "none", amount: "unknown", speech: "none", timing: "default", duration: "default", goal: "none" };
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
+        let value = values[id] ?? (id.includes("outcome") ? "succeeded" : id.includes("duration") ? "s1"
+          : id.endsWith("_world_expansion") ? "introduce" : id === "accept" ? "apply" : id.startsWith("coverage") ? "complete"
+            : id.includes("visible") ? "visible" : id.includes("status") || id.includes("fact") ? "unchanged" : "none");
+        if (q.type === "choice" && !(value in q.criteria)) value = "none" in q.criteria ? "none" : Object.keys(q.criteria)[0]!;
+        return [id, nativeAnswer(q, id === "expression" ? 0 : value)];
+      }));
+    });
+    await f.registry.capture();
+    const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
+    const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
+    try {
+      const host = new WorldHost({ repository: new MemoryWorldRepository({ [world.id]: world }), store: database, ledger: database, provider: f.gateway });
+      const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } });
+      await host.advance(created.summary.id, { expectedRevision: 0, trigger: "manual" });
+      const saved = database.readInstance(created.summary.id).document.state;
+      expect(saved.history[0]!.directEvent!.frames).toHaveLength(2);
+      expect(Object.values(saved.truth.facts).filter(fact => fact.predicate === "visible-readiness")).toHaveLength(2);
+      const executionId = saved.history[0]!.executionRef!.executionId;
+      const calls = f.transport.mock.calls.length;
+      const replay = await replayThroughAlgorithm(database, database.execution(executionId)!, database.executionEvents(executionId));
+      expect(replay.stateHash).toBe(database.execution(executionId)!.stateHash);
+      expect(replay.semanticHash).toBe(database.execution(executionId)!.semanticHash);
+      expect(f.transport).toHaveBeenCalledTimes(calls);
+    } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+  });
   it.each([0, 2])("settles quiescence without a pause or commit with %i external policies, and accepts the next action", async externalCount => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-quiescent-host-"));
     let clock = Date.now(), timerId = 0, operation = "wait";
@@ -136,8 +176,9 @@ describe("direct world through persistent WorldHost", () => {
         if (id === "timing") choice = "default";
         if (id.startsWith("progress_")) choice = "complete";
         if (id.endsWith("_request_progress")) {
-          const task = q.instructions as { task: { data: { action: { actorId: string; kind: string }; responseTo: { utterance: string } } } };
-          const inspecting = task.task.data.action.actorId === "inspector" && task.task.data.action.kind === "observe";
+          const task = q.instructions as { task: { data: { actionId: string; responseTo: { utterance: string } } } };
+          const action = (wire.state as { actions: Array<{ id: string; actorId: string; kind: string }> }).actions.find(item => item.id === task.task.data.actionId)!;
+          const inspecting = action.actorId === "inspector" && action.kind === "observe";
           choice = inspecting ? inspectionProgress : "complete";
           if (inspecting) expect(task.task.data.responseTo.utterance).toBe(receivedWords);
         }
@@ -741,17 +782,17 @@ describe("direct world through persistent WorldHost", () => {
       const control = readDirectState(result.state.executionState!, result.state);
       expect(Object.values(control.intents).filter(intent => intent.status === "failed")).toEqual([]);
       expect(executionCalls(f.transport.mock.calls)).toHaveLength(47);
-      expect(result.modelAudits.every(audit => audit.protocol === "typesafe-systemone")).toBe(true);
+      expect(result.modelAudits.every(audit => audit.protocol === "typesafe-systemone" || audit.promptVersion.startsWith("autonomous-action-"))).toBe(true);
       expect(replaySimulationState(result.state)).toEqual(result.state);
     } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
   });
-  it("creates and enters the ordinary default without generation, then commits natural language and recovers it", async () => {
+  it.each([false, true])("commits natural language and replays its complete decision path, with preflight fallback=%s", async preflightFallback => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-default-"));
     const f = quietInitialNpcProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
       const values: Record<string, string> = { operation: "observe", target: "self", tool: "none", amount: "unknown", resource: "none", speech: "none", timing: "default", goal: "none" };
       const choice = id.startsWith("paragraph") ? "grounded" : values[id] ?? (id.includes("outcome") ? "succeeded" : id.includes("belief_status") ? "unchanged" : "unknown");
       return [id, nativeAnswer(q, id === "expression" ? 0 : choice)];
-    })), createText);
+    })), createText, preflightFallback ? { maxNativeInputBytes: 100 } : {});
     await f.registry.capture();
     const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
     const repository = new MemoryWorldRepository({ [world.id]: world });
@@ -778,6 +819,13 @@ describe("direct world through persistent WorldHost", () => {
       expect(replaySimulationState(saved)).toEqual(saved);
       expect(executionCalls(f.transport.mock.calls)).toHaveLength(5);
       const executionId = saved.history[0]!.executionRef!.executionId;
+      const rejected = database.executionEvents(executionId).filter(event => event.event === "model.context.rejected");
+      expect(rejected.length > 0).toBe(preflightFallback);
+      for (const event of rejected) {
+        expect(event.correlation?.modelInvocationId).toBeUndefined();
+        const invocationId = (event.payload as { modelInvocationId: string }).modelInvocationId;
+        expect(database.executionEvents(executionId).some(item => item.event === "model.invocation.started" && item.correlation?.modelInvocationId === invocationId)).toBe(false);
+      }
       expect(candidatePartitions(database.executionEvents(executionId))).toMatchObject({
         temporal: { fromSeconds: 0, atSeconds: 1 }, resolution: { rng: saved.truth.rng },
       });
@@ -785,6 +833,17 @@ describe("direct world through persistent WorldHost", () => {
       const candidate = (execution: string) => database.executionEvents(execution).find(event => event.event === "execution.candidate.persisted")?.payload;
       expect(candidate(replay.replayExecutionId)).toEqual(candidate(executionId));
       expect(replay.replayStatus).toBe("succeeded"); expect(replay.stateHash).toBe(database.execution(executionId)!.stateHash);
+      if (preflightFallback) {
+        const events = database.executionEvents(executionId);
+        const input = events.find(event => event.event === "step.started")!.payload as {
+          state: SimulationState; policyRoster: Parameters<SimulationEngine["step"]>[0]; request: Parameters<SimulationEngine["step"]>[1];
+        };
+        const checkpointProvider = new DebugCheckpointModelProvider(f.gateway, events, Number.MAX_SAFE_INTEGER);
+        const resumed = await new SimulationEngine(world, new DirectWorldAlgorithm(checkpointProvider), input.state)
+          .step(input.policyRoster, input.request);
+        expect(resumed.committed.directEvent).toEqual(saved.history[0]!.directEvent);
+        expect(resumed.state.truth).toEqual(saved.truth);
+      }
       expect(executionCalls(f.transport.mock.calls)).toHaveLength(5);
       database.close(); database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false }); host = makeHost();
       expect(host.instance(id).summary.revision).toBe(saved.revision);

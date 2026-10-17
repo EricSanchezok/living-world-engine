@@ -13,7 +13,7 @@ Living World Engine maintains one canonical world and multiple Agents with priva
 | Cognition | `src/engine/cognition/` | Agent perspective, private belief/character updates, observations, information boundaries, and mind commits |
 | Mechanics | `src/engine/mechanics/` | Temporal, resolution, causality, random, interaction-dependency graphs, Truth Engine, rule packages, and shared-resource mechanics |
 | Fixed runtime | `src/engine/runtime/` | Execution contract, SimulationEngine, CanonicalCommitter, transactions, lifecycle evidence, IDs, replay, and world runtime definitions |
-| Direct execution | `src/engine/direct/` | Private intentions, typed Jev actions, local adjudication, saved activities, mechanical settlement and default `direct-world@7`; see [runtime contract](game-design/direct-runtime.md) |
+| Direct execution | `src/engine/direct/` | Coherent private intentions, bound actions, local Jev adjudication, saved activities, mechanical settlement and default `direct-world@8`; see [runtime contract](game-design/direct-runtime.md) |
 | Prompt resources | `src/engine/prompts/` | Server-loaded English role/task/transport Markdown, content-addressed bundle versions, and unified task/context serialization |
 | Shared contracts | `src/engine/contracts/` | Semantic state types, model-output schemas, and prompt/context contracts shared across owners |
 | Benchmarks | `src/engine/benchmarks/` | Benchmark-only code and evidence generators kept off the product execution path |
@@ -78,7 +78,7 @@ Models produce semantic drafts only. Agent, Entity, Fact, Meter, Rating, Conditi
 
 ## Action and event execution
 
-WorldHost invokes the instance-pinned producer. Initial state and ready intentions are saved without NPC inference. Typed private decisions build concrete actions; authorized local world decisions bind their actual effects. The [direct runtime](game-design/direct-runtime.md) owns progression, perception, compound submissions, learned capabilities and local recovery.
+WorldHost invokes the instance-pinned producer. Initial state and ready intentions are saved without NPC inference. Joint private language readings build concrete actions; authorized local world decisions bind their actual effects. The [direct runtime](game-design/direct-runtime.md) owns progression, perception, compound submissions, learned capabilities and local recovery.
 
 Same-time control records save decisions and random commitments. Physical settlement respects the earliest admitted activity, timer or condition boundary and advances time positively. Direct prepares a native frozen event without applying it. CanonicalCommitter checks actual read dependencies and mechanical consistency, then applies the event. Reference compositions use a separate explicit protocol. Replay consumes recorded events. Failed local tasks retain their evidence while independent work continues.
 

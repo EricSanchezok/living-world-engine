@@ -218,9 +218,10 @@ test("a world starts in observer mode without replacing the conversation core", 
   expect(createRequests).toBe(1);
   await expect(page.getByRole("button", { name: "单步" })).toBeVisible();
   await expect(page.getByText("世界正在发生什么")).toHaveCount(0);
+  await expect(page.locator(".cg-observer-heading")).toContainText("正在观察");
 
   await page.getByRole("button", { name: "单步" }).click();
-  await expect(page.getByText(/你查看了眼前的情况/).first()).toBeVisible();
+  await expect(page.locator('[data-role="assistant"]').first()).toContainText("随身物资");
 
   await page.getByRole("button", { name: "实时" }).click();
   await expect(page.getByRole("button", { name: "暂停" })).toBeVisible();

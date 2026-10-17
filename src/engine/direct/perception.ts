@@ -53,9 +53,16 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       const voiced = completedExpression && settlement.frame.kind !== "reflect" ? settlement.frame.utterance : null;
       const spoken = voiced && settlement.deliveredToEntityIds.includes(agent.entityId);
       const observedActor = ownerId === settlement.frame.actorId ? "你" : alias(agent, settlement.frame.actorEntityId, introductions).name;
-      let summary = spoken ? `${alias(agent, settlement.frame.actorEntityId, introductions).name}${settlement.frame.targetEntityId && targetVisible ? `对${settlement.frame.targetEntityId === agent.entityId ? "你" : targetLabel}` : ""}说：“${settlement.frame.utterance}”` :
-        ownerId === settlement.frame.actorId ? `你尝试了“${concreteAttempt}”。${settlement.outcome.summary}${voiced && settlement.frame.kind !== "speak" ? `你说：“${voiced}”` : ""}`
-          : `${observedActor}的行动结果：${settlement.outcome.summary.replace(/^你/u, observedActor)}`;
+      const speech = voiced && (ownsAction || spoken)
+        ? `${observedActor}${settlement.frame.targetEntityId && targetVisible ? `对${settlement.frame.targetEntityId === agent.entityId ? "你" : targetLabel}` : ""}说：“${voiced}”` : null;
+      const outcome = ownsAction ? settlement.outcome.summary
+        : `${observedActor}的行动结果：${settlement.outcome.summary.replace(/^你/u, observedActor)}`;
+      let summary = "";
+      if (ownsAction && settlement.frame.kind === "speak" && voiced) {
+        const reachedListener = settlement.frame.targetEntityId ? settlement.deliveredToEntityIds.includes(settlement.frame.targetEntityId)
+          : settlement.deliveredToEntityIds.length > 0;
+        if (!reachedListener) summary += settlement.frame.targetEntityId ? "没有确认对方听见。" : "没有确认有人听见。";
+      }
       if (completedExpression && seesActor && settlement.frame.expression?.manner) summary += `\n可见举止：${settlement.frame.expression.manner}`;
       if (ownsAction && settlement.frame.kind === "move" && completedExpression) {
         const movement = settlement.operations.find(operation => operation.kind === "place_entity" && operation.entityId === agent.entityId);
@@ -91,18 +98,32 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
         const introduced = introductions.find(intro => intro.localEntity.id === local.id);
         const appearance = facts.find(fact => fact.subjectId === entity.id && fact.predicate === "appearance")?.description;
         const generic = ["附近的对象", "附近的人", "一个陌生的声音"].includes(local.name);
+        const appearanceLabel = facts.find(fact => fact.subjectId === entity.id && fact.predicate === "appearance_label");
         const label = named ? entity.name : generic
-          ? facts.find(fact => fact.subjectId === entity.id && fact.predicate === "appearance_label")?.description ?? local.name : local.name;
+          ? (appearanceLabel?.value.kind === "text" ? appearanceLabel.value.value : appearanceLabel?.description) ?? local.name : local.name;
         const next = { ...local, name: ["附近的对象", "一个陌生的声音"].includes(label) ? observedKindLabel(entity.kind) : label,
           description: appearance ?? (local.name === "一个陌生的声音" ? "现在可以看见说话的人，但身份还没有确认。" : local.description) };
         if (introduced) introduced.localEntity = next;
         else if (next.name !== local.name || next.description !== local.description) renamed.push(next);
         details.push({ localEntityId: next.id, label: next.name, description: next.description });
-        summary += `\n${next.name}：${appearance ?? "你能看见其所在的位置。"}`;
+        if (appearance) summary += `\n${next.name}：${appearance}`;
+        else if (introduced) summary += `\n你看见了${next.name}。`;
       }
       // A semantic visibility answer cannot grant access to another actor's private truth.
       // Delivered speech remains testimony even when it quotes that private fact correctly.
-      for (const fact of facts) summary += `\n${alias(agent, fact.subjectId, introductions).name}：${describeFact(agent, fact, introductions)}`;
+      for (const fact of facts) {
+        const local = alias(agent, fact.subjectId, introductions);
+        const label = renamed.find(entity => entity.id === local.id)?.name ?? local.name;
+        const description = describeFact(agent, fact, introductions);
+        if (fact.predicate !== "appearance_label" && description !== label) summary += `\n${label}：${description}`;
+      }
+      const findings = [...new Set(summary.split("\n").map(line => line.trim()).filter(Boolean))];
+      // Intent is already retained in the action and scene. Present delivered
+      // speech and results once, without dropping physical or partial outcomes.
+      const omitOutcome = settlement.outcome.status === "succeeded" &&
+        (settlement.frame.kind === "observe" && findings.length > 0 || settlement.frame.kind === "speak" && speech !== null);
+      summary = [...new Set([speech, omitOutcome ? null : outcome, ...findings]
+        .filter((line): line is string => Boolean(line)))].join("\n");
       const id = runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "observation", stage: "direct-perception", owner: ownerId, round: 0, ordinal: index });
       const actorEntity = alias(agent, settlement.frame.actorEntityId, introductions);
       const actor = ownerId === settlement.frame.actorId ? "你" : renamed.find(entity => entity.id === actorEntity.id)?.name ?? actorEntity.name;

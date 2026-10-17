@@ -29,6 +29,8 @@ export interface ModelExecutionScope {
   correlation?: RuntimeCorrelation;
   observer?: RuntimeObserver;
   runtimeIdentity?: { worldHash: string; revision: number };
+  /** Stable engine-owned identity for an independent concurrent model task. */
+  modelInvocationNamespace?: string;
   /** Exact immutable Composition that produced this execution. */
   executionAlgorithmRef?: AlgorithmRef<"world-execution">;
   /** Pins benchmark/replay work to one immutable historical registry snapshot. */
@@ -346,7 +348,7 @@ export function modelInvocationIdentity(
       // workloadId/batchId are transport correlation (often instance/advance UUIDs),
       // never persisted identity coordinates. A retry of the same semantic
       // model stage must receive the same engine-owned id.
-      owner: subjectId,
+      owner: scope.modelInvocationNamespace ? JSON.stringify([subjectId, scope.modelInvocationNamespace]) : subjectId,
       round: 0,
       ordinal,
     }),

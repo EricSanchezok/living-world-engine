@@ -31,7 +31,7 @@ import { withFreshMemory } from "../cognition/memory";
 
 export interface DirectWorldConfig extends CapabilityModelOverrides { creationEnabled: boolean }
 export const DIRECT_WORLD_CONFIG: DirectWorldConfig = { decision: null, creation: null, fallback: null, creationEnabled: true };
-export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "7", config: config as unknown as JsonObject });
+export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "8", config: config as unknown as JsonObject });
 export const directWorldAlgorithmRef = (config = DIRECT_WORLD_CONFIG) => algorithmRef(directWorldManifest(config));
 
 function components(state: Readonly<SimulationState>, frames: ActionFrame[]): ActionFrame[][] {
@@ -150,7 +150,12 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     const needsPreparation = control.activities.filter(frame => frame.kind !== "reflect" && frame.activityStatus !== "paused" && (frame.dueAtSeconds !== null || frame.durationSeconds === 0) &&
       (!control.prepared[frame.id] || Object.entries(control.prepared[frame.id]!.reads).some(([key, hash]) => contentHash(readDependency(source, key)) !== hash)));
     const groups = components(source, needsPreparation);
-    const adjudicated = await Promise.allSettled(groups.map(group => withFreshMemory(() => prepareActions(source, authority, group, decisions, this.config.creationEnabled))));
+    // Each concurrent component owns its invocation sequence. Completion order
+    // must not assign another component's identity to a repair or expansion.
+    const groupDecisions = groups.map(group => new DirectDecisions(this.provider, control, { ...decisions.scope,
+      modelInvocationNamespace: contentHash(group.map(frame => frame.id).sort()) }));
+    const adjudicated = await Promise.allSettled(groups.map((group, index) => withFreshMemory(() => prepareActions(source, authority, group, groupDecisions[index]!, this.config.creationEnabled))));
+    for (const local of groupDecisions) { decisions.uses.push(...local.uses); audits.push(...local.audits()); }
     let newRandomCommitment = false;
     adjudicated.forEach((result, index) => {
       if (result.status === "fulfilled") {

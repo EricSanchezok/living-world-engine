@@ -1,13 +1,13 @@
 id: hex-2618-ochre-scout-ship
 kind: opening-sea-position
-name: Ochre 搜索舰开局海域
+name: 搜索舰所在的东南海域
 description: Grey Sea 东南侧、Ochre 搜索远征进入黑沼外海前经过的定位海域。
 placement: grey-sea
 facts:
   - id: hex-2618-coordinate
     predicate: hex-coordinate
     value: { kind: text, value: "2618" }
-    description: 搜索舰 t0 位于区域六角 2618，属于 Grey Sea。
+    description: 这片海域位于 Grey Sea，海图编号为 2618。
     access: { kind: public }
   - id: hex-2618-associated-expedition
     predicate: associated-force

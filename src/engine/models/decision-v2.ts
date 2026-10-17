@@ -3,7 +3,7 @@ import type { ModelExecutionAudit } from "../contracts/model";
 import { assertJsonValue, frozenClone, type JsonValue } from "../runtime/json";
 import { loadPromptAsset } from "../prompts";
 import { contentHash } from "./model-audit";
-import { ModelOutputError, NativeDecisionContextLimitError, type ModelExecutionScope, type StructuredModelProvider, type StructuredModelRequest } from "./model-provider";
+import { ContextLimitExceededError, ModelOutputError, NativeDecisionContextLimitError, type ModelExecutionScope, type StructuredModelProvider, type StructuredModelRequest } from "./model-provider";
 
 const key = z.string().min(1).refine(value => !["__proto__", "constructor", "prototype"].includes(value));
 const structured = z.custom<string | Record<string, JsonValue> | JsonValue[]>(value =>
@@ -93,6 +93,9 @@ function diagnosticAnswers(answers: Record<string, DecisionAnswerV2>): string[] 
 function nativeOverflow(error: unknown): boolean {
   return error instanceof NativeDecisionContextLimitError || error instanceof Error && error.cause !== error && nativeOverflow(error.cause);
 }
+function contextOverflow(error: unknown): boolean {
+  return error instanceof ContextLimitExceededError || error instanceof Error && error.cause !== error && contextOverflow(error.cause);
+}
 
 /** A batch has one dependency-scoped state; an overflow cannot be fixed by repeating it per question. */
 export async function executeDecisionV2(provider: StructuredModelProvider, request: DecisionRequestV2): Promise<DecisionResultV2> {
@@ -142,9 +145,9 @@ export async function executeDecisionV2(provider: StructuredModelProvider, reque
         if (!Object.keys(invalid).length) return valid;
         return { ...valid, ...await run({ ...part, questions: invalid }, profileId, fallback) };
       }
-      if (!nativeOverflow(error) || !native) throw error;
+      if (!contextOverflow(error) || !native) throw error;
       if (!request.fallbackProfileId || provider.catalog.account(provider.catalog.profile(request.fallbackProfileId).account_id).protocol === "typesafe-systemone") throw error;
-      repairDiagnostics.push("Actual native context overflow: preserve the shared state and all questions in one fallback request");
+      repairDiagnostics.push(`${nativeOverflow(error) ? "Actual native context overflow" : "Native input budget exhausted after preflight"}: preserve the shared state and all questions in one fallback request`);
       return run(part, request.fallbackProfileId, "context-limit");
     }
   };

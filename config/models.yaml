@@ -157,7 +157,8 @@ profiles:
     allowed_roles: [decision]
     response_transport: deepseek-sse-v1
     request_timeout_ms: 120000
-    max_output_tokens: 8192
+    # Large intact decision batches need room for both reasoning and JSON answers.
+    max_output_tokens: 32768
     max_input_bytes: 4000000
     inference: { thinking: enabled, effort: low }
   creation-deepseek:

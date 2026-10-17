@@ -347,6 +347,7 @@ function SaveManager({
 
 function ObserverConsole({
   busy,
+  running,
   detail,
   observer,
   onAdvance,
@@ -356,6 +357,7 @@ function ObserverConsole({
   onToggleRealtime,
 }: {
   busy: boolean;
+  running: boolean;
   detail: PublicInstanceDetail;
   observer?: WorldObserverDetail;
   onAdvance: (steps: number) => void;
@@ -367,16 +369,16 @@ function ObserverConsole({
   const selected = observer?.selected?.agent.id ?? "";
   return (
     <div className="cg-observer-console" aria-label="无人演化控制台">
-      <AppSelect ariaLabel="观察角色" disabled={busy || !observer} onChange={onSelectAgent} value={selected}
+      <AppSelect ariaLabel="观察角色" disabled={!observer} onChange={onSelectAgent} value={selected}
         options={observer?.agents.map((agent) => ({ value: agent.id, label: `${agent.name}${agent.location ? ` · ${agent.location}` : ""}` })) ?? []} />
-      <button disabled={busy} onClick={() => onAdvance(1)} type="button"><Play aria-hidden="true" />单步</button>
-      <button disabled={busy} onClick={() => onAdvance(10)} type="button"><FastForward aria-hidden="true" />十步</button>
+      <button disabled={busy || running} onClick={() => onAdvance(1)} title="推进全世界一个时间结算点" type="button"><Play aria-hidden="true" />单步</button>
+      <button disabled={busy || running} onClick={() => onAdvance(10)} title="推进全世界十个时间结算点" type="button"><FastForward aria-hidden="true" />十步</button>
       <button disabled={busy} onClick={onToggleRealtime} type="button">
         {detail.summary.schedulerMode === "realtime" ? <Pause aria-hidden="true" /> : <Radio aria-hidden="true" />}
         {detail.summary.schedulerMode === "realtime" ? "暂停" : "实时"}
       </button>
       <button disabled={!observer?.selected} onClick={onOpenCharacter} type="button"><UserRound aria-hidden="true" />视角</button>
-      <button className="cg-observer-console__primary" disabled={busy || !observer?.selected} onClick={onTakeOver} type="button">
+      <button className="cg-observer-console__primary" disabled={busy || running || !observer?.selected} onClick={onTakeOver} type="button">
         接管
       </button>
     </div>
@@ -387,7 +389,8 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
   const router = useRouter();
   const [detail, setDetail] = useState<PublicInstanceDetail>();
   const [observer, setObserver] = useState<WorldObserverDetail>();
-  const [selectedAgentId, setSelectedAgentId] = useState("");
+  const observerSelection = useRef<string | undefined>(undefined);
+  const observerRequest = useRef(0);
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
   const [streamWarning, setStreamWarning] = useState("");
@@ -406,9 +409,12 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
   const preferences = useMemo(() => parsePreferences(serializedPreferences), [serializedPreferences]);
 
   const loadObserver = useCallback(async (agentId?: string) => {
-    const next = await worldApi.observer(instanceId, agentId);
+    if (agentId) observerSelection.current = agentId;
+    const request = ++observerRequest.current;
+    const next = await worldApi.observer(instanceId, observerSelection.current);
+    if (request !== observerRequest.current) return next;
     setObserver(next);
-    setSelectedAgentId(next.selected?.agent.id ?? "");
+    observerSelection.current = next.selected?.agent.id;
     return next;
   }, [instanceId]);
 
@@ -418,30 +424,27 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
     const next = await worldApi.instance(instanceId);
     if (request !== detailRequest.current) return next;
     setDetail(next);
-    if (!next.controlledView) await loadObserver(selectedAgentId || undefined);
+    if (!next.controlledView) await loadObserver();
     else setObserver(undefined);
     return next;
-  }, [instanceId, loadObserver, selectedAgentId]);
+  }, [instanceId, loadObserver]);
   const progressPhase = detail ? worldProgressPhase(detail) : null;
   const needsProgressRefresh = detail?.summary.schedulerMode === "realtime" || progressPhase !== null;
 
   useEffect(() => {
     let active = true;
+    observerSelection.current = undefined;
+    ++observerRequest.current;
     const request = ++detailRequest.current;
     void worldApi.instance(instanceId).then(async (next) => {
       if (!active || request !== detailRequest.current) return;
       setDetail(next);
-      if (!next.controlledView) {
-        const perspective = await worldApi.observer(instanceId);
-        if (!active) return;
-        setObserver(perspective);
-        setSelectedAgentId(perspective.selected?.agent.id ?? "");
-      }
+      if (!next.controlledView) await loadObserver();
     }).catch(() => {
       if (active) setError("这个世界暂时无法打开。");
     });
     return () => { active = false; };
-  }, [instanceId]);
+  }, [instanceId, loadObserver]);
 
   useEffect(() => {
     if (!needsProgressRefresh) return;
@@ -593,7 +596,7 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
     try {
       const next = await operation();
       setDetail(next);
-      if (!next.controlledView) await loadObserver(selectedAgentId || undefined);
+      if (!next.controlledView) await loadObserver();
       else setObserver(undefined);
     } catch {
       setError("世界暂时无法完成这个操作，请稍后重试。");
@@ -635,12 +638,14 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
         <h1 className="cg-sr-only">{detail.summary.title}</h1>
         <WorldContext detail={detail} roleView={roleView} />
         <GameThread
+          observerName={observer?.selected?.agent.name}
           actionError={error}
           busy={worldProcessing}
           composerMode={composerMode}
           footer={!detail.controlledView ? (
             <ObserverConsole
               busy={Boolean(busy)}
+              running={worldProcessing}
               detail={detail}
               observer={observer}
               onAdvance={(steps) => void perform(steps === 1 ? "step" : "batch", () => worldApi.advance(instanceId, {
@@ -650,7 +655,6 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
               }))}
               onOpenCharacter={() => setOverlay("character")}
               onSelectAgent={(agentId) => {
-                setSelectedAgentId(agentId);
                 void loadObserver(agentId).catch(() => setError("这个角色视角暂时无法读取。"));
               }}
               onTakeOver={() => {

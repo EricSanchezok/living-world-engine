@@ -184,8 +184,9 @@ describe("direct activities use code-owned mechanics", () => {
     expect(first.committed.observations.find(packet => packet.observerId === "inspector")?.summary).toContain("振动暂时隔离");
     const second = await f.act("使用刚才观察到的临时隔振方法", "inspector");
     const witnessed = second.committed.observations.find(packet => packet.observerId === "engineer")!;
-    expect(witnessed.scene).toMatchObject({ actor: "检查员乔伊", actionKind: "use", outcome: expect.stringContaining("已执行的方法：临时隔振") });
-    expect(witnessed.summary).toContain("已执行的方法：临时隔振");
+    expect(witnessed.scene).toMatchObject({ actor: "检查员乔伊", actionKind: "use", outcome: "这次操作已完成。" });
+    expect(witnessed.summary).toContain("振动暂时隔离");
+    expect(witnessed.summary).not.toContain("已执行的方法");
     expect(witnessed.summary).toMatch(/^检查员乔伊的行动结果：/u);
     expect(readDirectState(second.state.executionState!, second.state).capabilities).toHaveLength(1);
     expect(f.transport.mock.calls.filter(([, init]) => !directDecisionContext(JSON.parse(String(init?.body))))).toHaveLength(1);
@@ -227,6 +228,18 @@ describe("direct activities use code-owned mechanics", () => {
     const f = await fixture("ongoing");
     const first = await f.engine.step(f.roster, { expectedRevision: 0, trigger: "participant_action", externalActions: ["engineer", "inspector"].map(agentId =>
       ({ agentId, submissionId: `shared-${agentId}`, rawText: "操作冷却泵面板10秒", goal: "完成本次操作", means: null, targetIds: [] })) });
+    const wire = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).find(item => item.questions?.a1_outcome);
+    const context = wire.state.context;
+    expect(context.actions.map((action: { actorId: string }) => action.actorId).sort()).toEqual(["engineer", "inspector"]);
+    const rules = Object.values(context.adjudicationRules) as string[];
+    expect(rules.filter(rule => rule.includes("feasibility of this single concrete kind"))).toHaveLength(1);
+    for (const question of Object.values(wire.questions) as Array<{ instructions: { task: { rule?: string; field?: string; data: { actionId?: string } } } }>) {
+      const task = question.instructions.task;
+      if (task.rule) expect(context.adjudicationRules[task.rule]).toBeTruthy();
+      if (task.field) expect(context.contactPolicy[task.field]).toBeTruthy();
+      if (task.data.actionId) expect(context.actions.some((action: { id: string }) => action.id === task.data.actionId)).toBe(true);
+      expect(task.data).not.toHaveProperty("action");
+    }
     expect(first.state.truth.elapsedSeconds, JSON.stringify(Object.values(readDirectState(first.state.executionState!, first.state).intents).map(intent => intent.failure))).toBe(10); expect(first.committed.outcomes).toHaveLength(1);
     const pending = readDirectState(first.state.executionState!, first.state).activities;
     expect(pending).toHaveLength(1); expect(pending[0]!.activityStatus).toBe("queued");

@@ -97,10 +97,24 @@ test("the observer conversation matches light and dark responsive baselines", as
     });
     await page.getByRole("button", { name: "单步" }).click();
     await advanceStarted;
+    await expect(page.getByRole("combobox", { name: "观察角色" })).toBeEnabled();
     await expect(page.getByText("正在确认你的行动", { exact: true })).toBeVisible();
     await expect(page).toHaveScreenshot(`instance-control-notice-${colorScheme}-desktop.png`, screenshotOptions);
+    const selector = page.getByRole("combobox", { name: "观察角色" });
+    const originalSelection = (await selector.innerText()).trim();
+    await selector.click();
+    const otherAgent = page.getByRole("option", { selected: false }).first();
+    const nextSelection = (await otherAgent.innerText()).trim();
+    await otherAgent.click();
+    await expect(selector).toHaveText(nextSelection);
     releaseAdvance();
-    await expect(page.getByText(/你查看了眼前的情况/).first()).toBeVisible();
+    await expect(page.locator('[data-role="assistant"]').first()).toContainText("随身物资");
+    await expect(page.getByRole("button", { name: "单步" })).toBeEnabled();
+    await expect(selector).toHaveText(nextSelection);
+    await selector.click();
+    await page.getByRole("option", { name: originalSelection, exact: true }).click();
+    await expect(selector).toHaveText(originalSelection);
+    await expect(page.locator('[data-role="assistant"]').first()).toContainText("随身物资");
     await page.unroute("**/api/instances/*/advance");
 
     await page.setViewportSize({ width: 320, height: 720 });

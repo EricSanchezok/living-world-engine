@@ -11,7 +11,7 @@ import { selected } from "./decisions";
 import { ModelOutputError, type StructuredModelResult } from "../models/model-provider";
 import { establishedEntityDirectory } from "./state";
 import type { DecisionQuestionV2 } from "../models/decision-v2";
-import { canHaveWitnesses, contactQuestions } from "./contact";
+import { canHaveWitnesses, contactQuestions, contactPolicy } from "./contact";
 
 const schema = z.object({
   description: z.string().min(1),
@@ -155,7 +155,8 @@ export async function createWorldExpansion(state: Readonly<SimulationState>, def
       const placements = Object.fromEntries(expansion.operations.flatMap(operation => operation.kind === "create_entity" ? [[operation.entity.id, operation.placementId]] : []));
       const contacts = canHaveWitnesses(frame) ? arrivals.map(recipient => contactQuestions(frame, recipient,
         placements[recipient] === state.truth.placements[frame.actorEntityId])) : [];
-      const admitted = await decisions.ask(null, { localWorld: context, establishedEntities: draftContinuity(state, result.value), action: frame,
+      const admitted = await decisions.ask(null, { localWorld: context, establishedEntities: draftContinuity(state, result.value), actions: [frame],
+        ...(contacts.length ? { contactPolicy } : {}),
         introducedEntities: expansion.entities, introducedPlacements: placements,
         declaredInventory: entities.map(entity => ({ name: entity.name, label: entity.label, key: entity.key, characterRegistered: Boolean(entity.character) })),
         addition: { entities, facts, events } } as unknown as JsonValue,
