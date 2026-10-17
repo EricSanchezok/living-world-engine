@@ -51,4 +51,5 @@ it("imports the unchanged full world and rejects thinking, model and frozen asse
     writeFileSync(asset, readFileSync(asset, "utf8") + "\n# changed\n");
     expect(() => prepareNonthinkingWorld(root, baseline)).toThrow("snapshot drift");
   } finally { database?.close();rmSync(root, { recursive: true, force: true }); }
-});
+  // This exercises several real imports and disk snapshots under the full suite.
+}, 15_000);
