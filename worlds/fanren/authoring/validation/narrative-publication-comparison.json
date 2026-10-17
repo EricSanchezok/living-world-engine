@@ -1,0 +1,107 @@
+{
+  "scope": "冻结九种叙事案例各重复三次，仅检验付款、等待回应和动作忠实性；不是全量世界或规模验收。",
+  "date": "2026-10-17",
+  "layout": "同一请求已交付观察与新行动分栏；两组布局相同。",
+  "qualification": "两组各27次调用、无修复生成；并发排队条件不同，队列时间不能全部归因于推理配置。",
+  "runs": {
+    "layout-confirmation": {
+      "cases": 27,
+      "correct": 21,
+      "falseAccept": 5,
+      "falseReject": 1,
+      "physicalInvocations": 27,
+      "transportAttempts": 27,
+      "transportErrors": 0,
+      "repair": null,
+      "repairNote": "Single publication decision per frozen scene; no repair generation was requested.",
+      "executionMs": {
+        "median": 1283,
+        "sum": 43127,
+        "max": 3943
+      },
+      "queueWaitMs": {
+        "median": 5847,
+        "sum": 143715,
+        "max": 9083
+      },
+      "caseElapsedMs": {
+        "median": 8400,
+        "max": 12025
+      },
+      "tokens": {
+        "input": 187152,
+        "output": 1438,
+        "reasoning": 0
+      },
+      "incorrectCases": [
+        {
+          "id": "payment-grounded",
+          "trial": 2,
+          "choice": "added_content"
+        },
+        {
+          "id": "payment-wrong-balance",
+          "trial": 1,
+          "choice": "grounded"
+        },
+        {
+          "id": "payment-wrong-balance",
+          "trial": 2,
+          "choice": "grounded"
+        },
+        {
+          "id": "payment-wrong-balance",
+          "trial": 3,
+          "choice": "grounded"
+        },
+        {
+          "id": "waiting-original-draft",
+          "trial": 2,
+          "choice": "grounded"
+        },
+        {
+          "id": "cups-original-draft",
+          "trial": 3,
+          "choice": "grounded"
+        }
+      ]
+    },
+    "layout-thinking-confirmation": {
+      "cases": 27,
+      "correct": 26,
+      "falseAccept": 0,
+      "falseReject": 1,
+      "physicalInvocations": 27,
+      "transportAttempts": 27,
+      "transportErrors": 0,
+      "repair": null,
+      "repairNote": "Single publication decision per frozen scene; no repair generation was requested.",
+      "executionMs": {
+        "median": 5979,
+        "sum": 246084,
+        "max": 36303
+      },
+      "queueWaitMs": {
+        "median": 19144,
+        "sum": 625805,
+        "max": 51479
+      },
+      "caseElapsedMs": {
+        "median": 24730,
+        "max": 66297
+      },
+      "tokens": {
+        "input": 187827,
+        "output": 37659,
+        "reasoning": 36182
+      },
+      "incorrectCases": [
+        {
+          "id": "cups-grounded",
+          "trial": 2,
+          "choice": "added_content"
+        }
+      ]
+    }
+  }
+}

@@ -15,6 +15,21 @@ function queuedBeat(id: string, source: ScenePacket, now: string): NarrativeBeat
     firstParagraphAt: null, completedAt: null, error: null, producer: null, grounding: [] };
 }
 
+/** Same-submission participant observations are history, never another subject's private receipts. */
+export function earlierRequestReceipts(beats: readonly Pick<NarrativeBeat, "participantId" | "agentId" | "submissionId" | "source">[],
+  participantId: string, agentId: string, submissionId: string | null): ScenePacket["observations"] {
+  if (!submissionId) return [];
+  const ids = new Set<string>(), events = new Set<string>();
+  return beats.filter(beat => beat.participantId === participantId && beat.agentId === agentId &&
+    beat.submissionId === submissionId && !beat.source.reply).flatMap(beat => beat.source.observations)
+    .sort((a, b) => a.worldTimeSeconds - b.worldTimeSeconds || a.revision - b.revision || a.step - b.step || a.id.localeCompare(b.id))
+    .filter(observation => {
+      const eventKey = observation.sourceEventIds.length ? [...observation.sourceEventIds].sort().join("\n") : null;
+      if (ids.has(observation.id) || eventKey && events.has(eventKey)) return false;
+      ids.add(observation.id); if (eventKey) events.add(eventKey); return true;
+    }).map(observation => structuredClone(observation));
+}
+
 /** Coalesce immediate prerequisites and replies; admitted activities and terminal runs remain publishable. */
 export function nextNarrative(document: WorldInstanceDocument): NarrativeBeat | undefined {
   const seen = new Set<string>();
@@ -66,6 +81,14 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
   for (const [revision, control] of directControlHistory(document.state)) controlHistory.set(revision, control.intents);
   const actionFrames = new Map(document.state.history.flatMap(step => step.directEvent?.frames ?? []).map(frame => [frame.id, frame]));
   const events = new Map(document.state.truth.events.map(event => [event.id, event]));
+  const priorReceipts = (participantId: string, agentId: string, submissionId: string | null): NonNullable<ScenePacket["priorObservedReceipts"]> =>
+    earlierRequestReceipts(document.narratives, participantId, agentId, submissionId).map(observation => {
+      const sourceEvents = observation.sourceEventIds.map(id => events.get(id));
+      const actionIds = sourceEvents.flatMap(event => event?.causes.filter(cause => cause.kind === "action").map(cause => cause.id) ?? []);
+      const complete = sourceEvents.length > 0 && sourceEvents.every(event => event?.causes.some(cause => cause.kind === "action"));
+      return { ...observation, requestRelation: complete && submissionId
+        ? requestRelation(actionIds, actionFrames, agentId, submissionId) : "unattributed" };
+    });
   for (const participant of Object.values(document.participants).filter(p => p.status === "active")) {
     const existing = document.narratives.filter(beat => beat.participantId === participant.id);
     const covered = new Set(existing.flatMap(beat => beat.source.observations.map(o => o.id)));
@@ -93,6 +116,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
         location: localPlace ? agent.belief.localEntities[localPlace.localEntityId]?.name ?? null : null,
         boundary: { revision: observation.revision, step: observation.step, worldTimeSeconds: observation.worldTimeSeconds }, reply: null,
         observations: [], speech: [],
+        priorObservedReceipts: priorReceipts(participant.id, participant.agentId, submissionId),
         knownEntities: [], observedProperties: [],
         memories: Object.values(agent.belief.evidence).filter(evidence => evidence.step < observation.step)
           .slice(-12).map(evidence => { const recorded = evidence.sourceId ? ownObservations.get(evidence.sourceId) : null;
@@ -147,15 +171,8 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
           boundary: { revision: step.revision, step: step.step, worldTimeSeconds: step.temporalBoundary.toElapsedSeconds },
           world: { name: document.world.name, language: document.world.narrative.language, style: document.world.narrative.style },
           playerName: participant.displayName, location: projectAgentPerspective(document.state, agent).self.location?.name ?? null, observations: [], speech: [],
-          priorObservedReceipts: reply.kind === "recovery" ? document.narratives.filter(beat =>
-            beat.participantId === participant.id && beat.submissionId === reply.submissionId && !beat.source.reply)
-            .flatMap(beat => beat.source.observations.map(observation => {
-              const sourceEvents = observation.sourceEventIds.map(id => events.get(id));
-              const actionIds = sourceEvents.flatMap(event => event?.causes.filter(cause => cause.kind === "action").map(cause => cause.id) ?? []);
-              const complete = sourceEvents.length > 0 && sourceEvents.every(event => event?.causes.some(cause => cause.kind === "action"));
-              return { ...structuredClone(observation), requestRelation: complete
-                ? requestRelation(actionIds, actionFrames, participant.agentId, reply.submissionId) : "unattributed" as const };
-            })) : [],
+          priorObservedReceipts: reply.kind === "recovery"
+            ? priorReceipts(participant.id, participant.agentId, reply.submissionId) : [],
           currentHoldings: { coverage: "complete-current-self-holdings", quantities: projectAgentPerspective(document.state, agent).mechanics.quantities },
           knownWork: Object.values(agent.character.goals).map(goal => ({ description: goal.description, status: goal.status })),
           knownEntities: Object.values(agent.belief.localEntities).map(entity => ({ localEntityId: entity.id, name: entity.name, description: entity.description })),

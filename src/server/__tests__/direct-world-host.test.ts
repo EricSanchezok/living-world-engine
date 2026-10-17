@@ -953,6 +953,7 @@ describe("direct world through persistent WorldHost", () => {
       expect(state.history.map(step => step.actions[0]?.actorId), JSON.stringify({ control: state.executionState, runs: document.runs })).toEqual(["player", "player", "keeper"]);
       expect(document.narratives).toHaveLength(2);
       expect(document.narratives[0]!.source.observations).toHaveLength(2);
+      expect(document.narratives[1]!.source.priorObservedReceipts).toEqual(document.narratives[0]!.source.observations.map(observation => ({ ...observation, requestRelation: "participant_step" })));
       expect(new Map(directControlHistory(state)).get(state.history[0]!.revision)!.completedSubmissionIds).not.toContain("find-and-ask");
       expect(state.history.at(-1)!.observations.find(packet => packet.observerId === "player")?.summary).toContain("不接受");
       expect(Object.values(document.runs).find(run => run.rootIntents.some(intent => intent.submissionId === "find-and-ask"))?.status).toBe("completed");

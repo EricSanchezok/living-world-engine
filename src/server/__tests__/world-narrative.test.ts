@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { decisionPromptV2 } from "../../engine/models/decision-v2";
 import { completeParagraphs, renderNarrativeSegment, continueNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeRepair, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, narrativeOutputSchema } from "../narrative/publication";
 import { narrativeEvidence, narrativeTask, narrativeDiscourse } from "../narrative/scene";
+import { earlierRequestReceipts } from "../narrative/outbox";
 import { type ScenePacket } from "../narrative/contracts";
 import type { ParticipantDiscourse } from "../../engine/contracts/discourse";
 import { directTestProvider, nativeChoice } from "../../engine/testing/direct-provider";
@@ -64,6 +65,7 @@ describe("immutable narrative paragraphs", () => {
       workloadId: "narrative", batchId: "publication", runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 1 },
     }, scene, ["店主退后一步。", "报价已传到你耳中。"].map(text => renderNarrativeSegment(text, scene)), "decision-deepseek", "decision-deepseek", 1);
     expect(narrativeGroundingChoices(result.answers, 2)).toEqual(["grounded", "grounded"]);
+    expect(result.audits[0]!.requestedInference).toEqual(provider.catalog.profile("decision-deepseek").inference);
     expect(provider.transport).toHaveBeenCalledTimes(1);
   });
   const discourse: ParticipantDiscourse = { version: 1, participantId: "reader", agentId: "traveler", asOfRevision: 1,
@@ -78,6 +80,27 @@ describe("immutable narrative paragraphs", () => {
     expect(projected.exchanges[0]!.paragraphs).toEqual(discourse.exchanges[0]!.paragraphs);
     expect(discourse.exchanges[0]!.requested).toBe("拿起木箱再问价");
     expect(narrativeTask(source).responseTo).toBeNull();
+  });
+  it("keeps earlier delivered refusals available when a later wait has no new dialogue", async () => {
+    const scene = structuredClone(source);
+    scene.speech = [];
+    scene.observations[0]!.scene = { actionKind: "wait", status: "succeeded", actor: "你", actorLocalId: "self",
+      attempt: "安静等候", manner: null, outcome: "等候已过去。", details: [], speech: null };
+    const history = structuredClone(discourse);
+    history.exchanges[0]!.speakers = [{ localEntityId: "shopkeeper", label: "店主", utterance: "我不能帮你。" }];
+    const provider = directTestProvider(wire => {
+      expect(wire.state).toMatchObject({ scene: { speech: [] }, publicationTask: { newSpeech: [],
+        newReceipts: [{ operation: "wait", actualResult: "等候已过去。" }] },
+        discourse: { exchanges: [{ speakers: [{ localEntityId: "shopkeeper", label: "店主", utterance: "我不能帮你。" }] }] } });
+      expect(Object.keys(wire.questions)).toHaveLength(12);
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeChoice(question,
+        id === "paragraph1_evidence" ? "contradiction" : "grounded")]));
+    });
+    const result = await checkNarrativeGrounding(provider.gateway, { workloadId: "narrative", batchId: "later-wait",
+      runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 2 } }, scene,
+      ["店主先前已拒绝帮忙，你又等了一阵。", "店主从来没有回应过你。"].map(text => renderNarrativeSegment(text, scene)), "decision-deepseek", "decision-deepseek", 1, history);
+    expect(narrativeGroundingChoices(result.answers, 2)).toEqual(["grounded", "contradiction"]);
+    expect(provider.transport).toHaveBeenCalledTimes(1);
   });
   it("renders delivered words of an introduced speaker directly with stable identity", () => {
     const scene = structuredClone(source);
@@ -215,6 +238,38 @@ describe("immutable narrative paragraphs", () => {
       originalRequest: "等五秒再看", earlierObservedEvents: [{ operation: "wait", status: "succeeded", worldTimeSeconds: 5,
         action: { durationSeconds: 5 }, actualResult: "等待已经完成。" }],
     } });
+  });
+  it("freezes ordered same-request receipts without another participant's or controlled subject's evidence", () => {
+    const scene = structuredClone(source);
+    const early = { ...structuredClone(scene.observations[0]!), id: "reply-early", worldTimeSeconds: 2, sourceEventIds: ["reply-event"] };
+    const late = { ...structuredClone(early), id: "later", worldTimeSeconds: 5, sourceEventIds: ["later-event"] };
+    const beat = { participantId: scene.participantId, agentId: scene.agentId, submissionId: scene.submissionId,
+      source: { ...scene, observations: [late, early, { ...early, id: "same-event-alias" }] } };
+    const privateReceipt = { ...early, id: "private", summary: "private evidence", sourceEventIds: ["private-event"] };
+    const other = { ...beat, source: { ...scene, observations: [privateReceipt] } };
+    const receipts = earlierRequestReceipts([beat, { ...other, participantId: "other" }, { ...other, agentId: "other-subject" },
+      { ...other, submissionId: "other-request" }, { ...beat, source: { ...scene, observations: [early] } }],
+      scene.participantId, scene.agentId, scene.submissionId);
+    expect(receipts.map(receipt => receipt.id)).toEqual(["reply-early", "later"]);
+    expect(earlierRequestReceipts([beat], scene.participantId, scene.agentId, null)).toEqual([]);
+    receipts[0]!.summary = "changed copy";
+    expect(early.summary).not.toBe("changed copy");
+  });
+  it("gives an ordinary wait continuation and recovery the same earlier refusal, separate from new speech", () => {
+    const scene = structuredClone(source);
+    scene.priorObservedReceipts = [{ ...source.observations[0]!, requestRelation: "caused_response", worldTimeSeconds: 2,
+      scene: { ...source.observations[0]!.scene!, outcome: "拒绝已送达。", speech: { speaker: "店主", utterance: "我不能帮你。" } } }];
+    scene.observations = [{ ...source.observations[0]!, id: "later-wait", worldTimeSeconds: 5, scene: {
+      actionKind: "wait", status: "succeeded", actor: "你", attempt: "等候答复", manner: null,
+      outcome: "等候已过去。", speech: null, details: [], action: { target: null, tool: null, resource: null, durationSeconds: 5, addressing: "none" } } }];
+    scene.speech = [];
+    const ordinary = narrativeTask(scene);
+    expect(ordinary).toMatchObject({ alreadyObservedForThisRequest: [{ operation: "speak", worldTimeSeconds: 2,
+      deliveredSpeech: { speaker: "店主", utterance: "我不能帮你。" } }], newReceipts: [{ operation: "wait", worldTimeSeconds: 5 }], newSpeech: [] });
+    scene.reply = { agentId: scene.agentId, submissionId: "action", kind: "recovery", requested: "等候后查看", focusLocalEntityId: null, reason: "The next step was interrupted." };
+    const recovery = narrativeTask(scene);
+    expect(recovery.alreadyObservedForThisRequest).toEqual(ordinary.alreadyObservedForThisRequest);
+    expect(recovery.executionBoundary?.earlierObservedEvents).toEqual(ordinary.alreadyObservedForThisRequest);
   });
   it("retains concrete inspection findings if prose generation cannot finish", () => {
     const scene = structuredClone(source); scene.speech = [];

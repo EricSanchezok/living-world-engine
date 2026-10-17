@@ -24,12 +24,22 @@ export function narrativeEvidence(source: ScenePacket) {
   };
 }
 
+function priorReceipt(observation: NonNullable<ScenePacket["priorObservedReceipts"]>[number]) {
+  return { id: observation.id, requestRelation: observation.requestRelation, actor: observation.scene?.actor ?? null, actorLocalId: observation.scene?.actorLocalId ?? null,
+    operation: observation.scene?.actionKind ?? null, action: observation.scene?.action ?? null,
+    status: observation.scene?.status ?? null, worldTimeSeconds: observation.worldTimeSeconds,
+    deliveredSpeech: observation.scene?.speech ?? null,
+    actualResult: executedDescription({ ...observation, scene: observation.scene ?? undefined }) };
+}
+
 /** A publication task separates new receipts from the prose used to resolve references. */
 export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscourse) {
   return {
     viewpoint: "The participant is the player. Address their character as you in second person; other characters remain third person.",
     responseTo: source.reply?.requested ?? null,
     kind: source.reply?.kind ?? "newly_observed_events",
+    alreadyObservedForThisRequest: (source.priorObservedReceipts ?? []).map(priorReceipt),
+    priorReceiptBoundary: "These earlier participant observations occurred in this request window, not necessarily because of the request. Their requestRelation distinguishes participant steps, causally related responses, independent concurrent events and unattributed events. Preserve each actual actor, action and delivered reply when describing the current result; they are not new events or new speech to repeat. A later completion can add elapsed time without erasing an earlier answer.",
     ownSpeechOnly: source.observations.length > 0 && source.observations.every(observation =>
       observation.scene?.actor === "你" && observation.scene.actionKind === "speak"),
     executionBoundary: source.reply ? {
@@ -37,15 +47,9 @@ export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscou
       explanation: source.reply.reason,
       scope: "Only this failed or explanatory boundary; earlier observed events retain their actual actors and effects. Only participant_step belongs to this request; caused_response is another actor responding through recorded causality; concurrent_event is independent; unattributed has no established request relation.",
       originalRequest: source.reply.requested,
-      earlierObservedEvents: (source.priorObservedReceipts ?? []).map(observation => ({
-        requestRelation: observation.requestRelation,
-        actor: observation.scene?.actor ?? null, actorLocalId: observation.scene?.actorLocalId ?? null,
-        operation: observation.scene?.actionKind ?? null, action: observation.scene?.action ?? null,
-        status: observation.scene?.status ?? null, worldTimeSeconds: observation.worldTimeSeconds,
-        actualResult: executedDescription({ ...observation, scene: observation.scene ?? undefined }),
-      })),
+      earlierObservedEvents: (source.priorObservedReceipts ?? []).map(priorReceipt),
     } : null,
-    newReceipts: source.observations.map(observation => ({ id: observation.id,
+    newReceipts: source.observations.map(observation => ({ id: observation.id, worldTimeSeconds: observation.worldTimeSeconds,
       actor: observation.scene?.actor ?? null, actorLocalId: observation.scene?.actorLocalId ?? null,
       operation: observation.scene?.actionKind ?? null, status: observation.scene?.status ?? null,
       action: observation.scene?.action ?? null,
