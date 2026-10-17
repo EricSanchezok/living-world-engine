@@ -13,6 +13,7 @@
 | 日期 | 主题 | 文件 |
 |---|---|---|
 | 2026-10-17 | 《赛博朋克 2077》世界资料、人物关系与多出身草案 | [研究入口](2026-10-17-cyberpunk2077-world-research.md) |
+| 2026-10-17 | 《凡人修仙传》原著还原、玩家出身与百人世界编写方法 | [调研报告](2026-10-17-fanren-canonical-world-authoring.md) |
 | 2026-10-15 | 引擎收尾、完整 72 轮确认回归与主目录交付 | [完整报告](2026-10-15-conversation-continuity-wrap-up.md) · [全部正文与评阅](2026-10-15-conversation-continuity-wrap-up-a1f93bef-transcript.md) |
 | 2026-10-14 | 自然连续交互冻结协议、首次独立确认与回归 | [协议](2026-10-14-conversation-continuity-protocol.md) · [首次确认](2026-10-14-conversation-continuity-confirmation.md) · [回归记录](2026-10-14-conversation-continuity-regressions.md) |
 | 2026-10-14 | 开放行动与沉浸式叙事实装、真实游玩及未通过验收项 | [实验报告](2026-10-14-immersive-narrative-qualification.md) |
