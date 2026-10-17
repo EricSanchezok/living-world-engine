@@ -63,7 +63,10 @@ export function directTestProvider(respond: (wire: DirectTestWire, call: number)
     } else if (reading) {
       const decoded = await respond({ ...wire, ...readingDecision(reading) }, calls);
       if (decoded instanceof Response) return decoded;
-      if (decoded && typeof decoded === "object" && "action" in decoded) response = { ...(autonomous ? {} : { activitySite: "current" }), ...decoded };
+      if (decoded && typeof decoded === "object" && "action" in decoded) {
+        const action = (decoded as { action: { operation?: string; target?: string } }).action;
+        response = { activitySite: action.operation === "move" ? action.target : "current", ...decoded };
+      }
       else {
         const raw = decoded as Record<string, Record<string, unknown>>;
         const pick = (id: string) => String(raw[id]?.choice ?? "none");
@@ -85,7 +88,8 @@ export function directTestProvider(respond: (wire: DirectTestWire, call: number)
             ...(autonomous && ["use", "change"].includes(operation) ? { attempt: (created as typeof expression).attempt ?? "" } : {}) };
         }
         response = { understanding: "Scripted coherent action", interaction: autonomous ? "world_action" : pick("interaction"),
-          ...(autonomous ? { urgency: 0.5 } : { activitySite: "current", ...(raw.durationReference ? { durationReference: raw.durationReference } : {}) }),
+          activitySite: operation === "move" ? pick("target") : "current",
+          ...(autonomous ? { urgency: 0.5 } : { ...(raw.durationReference ? { durationReference: raw.durationReference } : {}) }),
           requestAnalysis: { authorizedSteps: [text], establishedReceipts: [], remainingSteps: [text] },
           action: { ...Object.fromEntries(Object.keys(reading.catalog).map(id => [id, pick(id)])),
             ...(autonomous && expression.recipientLocalId ? { recipient: expression.recipientLocalId } : {}),

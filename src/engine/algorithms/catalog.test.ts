@@ -14,7 +14,7 @@ describe("algorithm catalog", () => {
     expect(second).toBe(first);
     expect(first).toContain("`candidate-selection`");
     expect(first).toContain("`full-catalog@1`");
-    expect(first).toContain("`direct-world@12`");
+    expect(first).toContain("`direct-world@13`");
     expect(first).toContain("`structure-encoder-hybrid@1`");
     expect(first).toContain("Benchmark-only algorithms");
     expect(flattenAlgorithmRef(DEFAULT_ALGORITHM_REF)).toHaveLength(1);

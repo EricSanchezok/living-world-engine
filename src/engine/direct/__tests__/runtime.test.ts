@@ -29,7 +29,7 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
   readingOverrides?: Record<string, string>; npcReadings?: unknown[]; factValues?: Record<string, string>; resolvedDuration?: string; resolvedDurations?: Record<string, string>; effectRepresentation?: "existing" | "no_change" | "already" | "expand";
   withMana?: boolean; meterImpacts?: Record<string, string>; inspectedStock?: number; quantityMeasured?: boolean;
   discoverableGateFact?: boolean; discoveryAdmitted?: boolean; discoveryVerdict?: "examined" | "retained" | "hidden" | "unknown";
-  multipleExactAliases?: boolean } = {}) {
+  multipleExactAliases?: boolean; referenceOnly?: boolean; referenceVisible?: boolean } = {}) {
   let creations = 0;
   let npcReadings = 0;
   let inspectedQuantityId = "";
@@ -60,7 +60,10 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
     return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
       let value = selection[id] ?? (id.includes("outcome") ? options.outcome ?? "succeeded" : id.includes("goal_status") || id.includes("belief_status") ? "unchanged" : id.includes("visible") ? "visible" : id.includes("delivery") ? "delivered" : id.includes("fact") ? "unchanged" : "none");
       if (/_entity\d+_name$/u.test(id)) value = options.named ? "named" : "unnamed";
-      else if (/_entity\d+$/u.test(id)) value = "visible";
+      else if (/_entity\d+$/u.test(id)) {
+        const instructions = q.instructions as { task?: { data?: { entityId?: string } }; data?: { entityId?: string } };
+        value = options.referenceOnly && (instructions.task ?? instructions).data?.entityId === "hidden-workroom" && !options.referenceVisible ? "hidden" : "visible";
+      }
       if (id.includes("actor_visibility")) value = options.actorVisible === false ? "hidden" : "visible";
       if (id.includes("delivery") && options.delivery === false) value = "unavailable";
       if (id.endsWith("_world_expansion")) value = options.introduce ? "introduce" : "none";
@@ -136,6 +139,13 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
     player.belief.localEntities[id!] = { id: id!, name: world.initialState.truth.entities[canonicalId!]!.name, description: "Seen nearby", status: "observed" };
     player.bindings[id!] = { localEntityId: id!, canonicalEntityIds: [canonicalId!] };
   }
+  if (options.referenceOnly) {
+    world.initialState.truth.entities["hidden-workroom"] = { ...world.initialState.truth.entities.courtyard!, id: "hidden-workroom",
+      name: "PRIVATE-ROOM-NAME", description: "PRIVATE-ROOM-DETAIL", kind: "location" };
+    world.initialState.truth.placements["hidden-workroom"] = "courtyard";
+    world.initialState.truth.facts["gate-route"] = { ...world.initialState.truth.facts["gate-lock"]!, id: "gate-route",
+      predicate: "route-to", value: { kind: "entity", entityId: "hidden-workroom" }, description: "A route leads to another place." };
+  }
   if (options.multipleExactAliases) {
     for (const id of ["old-door", "uncertain-door"]) {
       player.belief.localEntities[id] = { id, name: "曾见的门", description: "由自己的经历记得的入口", status: "observed" };
@@ -158,6 +168,27 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("keeps a relation-only reference distinct from visible presence and admits type before a private name", async () => {
+    const options = { referenceOnly: true, referenceVisible: false, named: false };
+    const f = await fixture(options);
+    await f.engine.bootstrapAgents();
+    const first = await f.engine.step(f.roster, f.request("Inspect the gate and its route."));
+    const binding = Object.values(first.state.agents.player!.bindings).find(item => item.canonicalEntityIds.includes("hidden-workroom"))!;
+    expect(binding).toBeDefined();
+    const reference = first.state.agents.player!.belief.localEntities[binding.localEntityId]!;
+    expect(reference).toMatchObject({ name: "关系所指的对象", status: "reported" });
+    expect(JSON.stringify(first.committed.observations.filter(packet => packet.observerId === "player"))).not.toContain("PRIVATE-ROOM");
+    options.referenceVisible = true;
+    const seen = await f.engine.step(f.roster, f.request("Look at the visible entrance.", first.state.revision));
+    expect(seen.state.agents.player!.belief.localEntities[binding.localEntityId]).toMatchObject({ name: "附近的地点", status: "observed" });
+    expect(JSON.stringify(seen.committed.observations.filter(packet => packet.observerId === "player"))).not.toContain("PRIVATE-ROOM");
+    options.named = true;
+    const named = await f.engine.step(f.roster, f.request("Read the room sign.", seen.state.revision));
+    expect(named.state.agents.player!.belief.localEntities[binding.localEntityId]!.name).toBe("PRIVATE-ROOM-NAME");
+    expect(JSON.stringify(named.committed.observations.filter(packet => packet.observerId === "player"))).not.toContain("PRIVATE-ROOM-DETAIL");
+    expect(replaySimulationState(named.state)).toEqual(named.state);
+  });
+
   it("reuses an exact existing alias across repeated observations without merging uncertain identities", async () => {
     const f = await fixture({ operation: "observe", target: "door", multipleExactAliases: true });
     await f.engine.bootstrapAgents();
@@ -1000,7 +1031,7 @@ describe("direct world through the actual simulation entry", () => {
       if (!context?.playerReading) return response;
       readings++;
       if (readings > 1) {
-        expect(context.repair).toMatchObject({ issues: [expect.stringContaining("A move needs its actual destination")] });
+        expect(context.repair).toMatchObject({ issues: expect.arrayContaining([expect.stringContaining("A move needs its actual destination")]) });
         return response;
       }
       const body = await response.clone().json(), value = JSON.parse(body.choices[0].message.content);

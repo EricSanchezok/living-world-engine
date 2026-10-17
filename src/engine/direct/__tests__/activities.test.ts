@@ -45,6 +45,7 @@ async function fixture(mode: "repair" | "test" | "extend" | "extend-world" | "co
       if (id.includes("duration") && mode === "repair") answer = "s30";
       if (id.includes("duration") && mode === "test") answer = "s10";
       if (id === "duration") answer = q.type === "choice" && "d0" in q.criteria ? "d0" : "default";
+      if (id.endsWith("_extent")) answer = mode === "ongoing" ? "ongoing" : "bounded";
       if (id.includes("actor_visibility")) answer = "visible";
       if (id.includes("resource") && mode === "repair") answer = info?.resource === "密封组件" ? "n1" : info?.resource === "冷却剂" ? "n2" : "none";
       if (id.endsWith("_applies")) answer = mode === "repair" ? "apply" : "none";
@@ -232,7 +233,7 @@ describe("direct activities use code-owned mechanics", () => {
     const context = wire.state.context;
     expect(context.actions.map((action: { actorId: string }) => action.actorId).sort()).toEqual(["engineer", "inspector"]);
     const rules = Object.values(context.adjudicationRules) as string[];
-    expect(rules.filter(rule => rule.includes("feasibility of this single concrete kind"))).toHaveLength(1);
+    expect(rules.filter(rule => rule.includes("Judge feasibility of THIS concrete step"))).toHaveLength(1);
     for (const question of Object.values(wire.questions) as Array<{ instructions: { task: { rule?: string; field?: string; data: { actionId?: string } } } }>) {
       const task = question.instructions.task;
       if (task.rule) expect(context.adjudicationRules[task.rule]).toBeTruthy();

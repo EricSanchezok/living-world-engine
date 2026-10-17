@@ -58,7 +58,7 @@ export function settlePreparedActions(state: Readonly<SimulationState>, control:
         const valueHash = committed ? binding.proposedValueHash : binding.previousValueHash;
         return visible && contentHash(fact.value) === valueHash ? [fact] : [];
       })];
-    settlements.push({ frame, operations, outcome: { id: runtimeId({ worldHash: state.worldHash, revision: state.revision + 1,
+    settlements.push({ frame, operations, visibleManner: happened ? preparation.visibleManner : null, outcome: { id: runtimeId({ worldHash: state.worldHash, revision: state.revision + 1,
       kind: "outcome", stage: "direct-world", owner: frame.actorId, round: 0, ordinal: index }), proposalId: frame.id, status,
       summary, causeRefs: source.causes, assertions: source.assertions, knownAlternatives: [] }, visibleFacts: observedFacts,
       inspectedQuantities: happened ? preparation.inspectedQuantityIds.flatMap(id => projected.truth.quantities[id] ? [projected.truth.quantities[id]!] : []) : [],

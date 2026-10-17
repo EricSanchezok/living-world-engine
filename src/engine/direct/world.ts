@@ -22,6 +22,7 @@ import { interruptionCandidates } from "./interruption";
 
 export interface ActionSettlement {
   frame: ActionFrame; outcome: ActionOutcome; operations: WorldDeltaOperation[]; visibleFacts: WorldFact[];
+  visibleManner: string | null;
   inspectedQuantities: SimulationState["truth"]["quantities"][string][];
   visibleEntities: WorldEntity[];
   actorOnlyFactIds: string[]; actorOnlyEntityIds: string[];
@@ -162,12 +163,16 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       senderPlace: state.truth.placements[frame.actorEntityId] ?? null, recipientPlace: frame.targetEntityId ? state.truth.placements[frame.targetEntityId] ?? null : null } : null;
     questions[`${prefix}_outcome`] = question(transfer
       ? "Can this willing sender hand THIS listed resource amount to THIS recipient now? The sender, resource, quantity and actual inventory are explicitly bound below. Judge only this handover and applicable social or physical restrictions, not the recipient paying again or completion of the sender's entire goal. A recipient who has already spent their payment can receive goods with zero currency remaining. An established exchange permits its second leg after the first actual payment. The kernel separately enforces inventory arithmetic. Earlier failed attempts do not themselves prohibit a fresh valid handover."
-      : "feasibility of this single concrete kind and its parameters, NOT completion of proposal.goal or the whole compound proposal.rawText. Speaking succeeds when actual words can be uttered; accepting terms does not require goods already delivered. Observing attempts to inspect the selected object or immediate surroundings; separate visibility questions decide what is learned.", (transfer ?? { actionId: frame.id }) as unknown as JsonValue,
+      : "Judge feasibility of THIS concrete step and whether its bound parameters actually implement the immediate attempt. Separate later parts of a compound plan: a move can reach its real destination without yet fetching or inspecting anything. But moving within the current hall does not perform an attempt to leave for a different room: if the selected target substitutes for that unestablished destination, use unknown, not success for a different easy movement. A misbound destination admits no movement effect: partial is not a fallback for substituting a different activity or claiming to have started an unknown route. Partial applies only after the immediate method and its actual target are coherent. No expression establishes its own missing prerequisites. Speech can be uttered without its claims being true; independent perception determines what is learned.", (transfer ?? { actionId: frame.id }) as unknown as JsonValue,
       { succeeded: "The action can achieve its specified immediate effect", partial: "Only part of that immediate effect is achieved",
         failed: "The concrete attempted action cannot occur", unknown: "Evidence required for this immediate action is absent; speech need not already be true or accepted" });
+    if (frame.expression?.manner) questions[`${prefix}_manner`] = question("Can THIS proposed manner be observed as a physically supported part of THIS action? Expressive tone, a feasible posture or gesture, and handling an already available object are allowed. The words alone cannot create a prop, establish prior inspection, acquire or hand over an object, or reach another place. A continuing material change must be represented by this action's actual selected operation and bound effects, not by manner. Evaluate the complete manner; unsupported or uncertain material clauses are not observed. The utterance can still be delivered and remain mistaken or deceptive.",
+      { actionId: frame.id }, { supported: "All of this manner is a supported visible part of this concrete action", unsupported: "It includes an unestablished or separately unexecuted material claim" });
     const timingProfile = frame.temporalProfileId ? state.truth.mechanics.temporalProfiles[frame.temporalProfileId] : null;
-    if (frame.durationSource !== "explicit" && !(frame.durationSeconds > 0 && ["rate", "staged", "ongoing"].includes(timingProfile?.kind ?? ""))) {
-      questions[`${prefix}_duration`] = question("Choose the realistic TOTAL duration of this concrete step. Use temporalCalibrations, explicit laws, distance, effort and the length of actual spoken words. A missing duration is not evidence of an instantaneous action. Estimate the nearest plausible authored scale; neither minimize time nor charge a later unperformed step. Concurrent actions keep independent durations.",
+    if (frame.durationSource !== "explicit" && timingProfile?.kind === "ongoing") questions[`${prefix}_extent`] = question("Does THIS immediate activity have a natural completion point, or is it deliberately sustained until a future interruption? A finite count, lookup or inspection ends once its chosen scope is examined, even if careful or repetitive; later reporting is a separate step. A broad continuing goal does not make every step endless. Active monitoring, maintaining a posture or continued practice can be ongoing. Decide from this concrete attempt, not merely the proposed profile name.",
+      { actionId: frame.id }, { bounded: "The selected finite scope finishes, allowing a subsequent report or decision", ongoing: "The selected behavior deliberately continues until interrupted" });
+    if (frame.durationSource !== "explicit" && !(frame.durationSeconds > 0 && ["rate", "staged"].includes(timingProfile?.kind ?? ""))) {
+      questions[`${prefix}_duration`] = question("Choose the realistic TOTAL duration of this concrete finite step. If the activity is deliberately sustained, choose only its initial setup or admission time; no finite total is implied. A proposed ongoing profile does not make a finite inspection instantaneous. Use temporalCalibrations, explicit laws, distance, effort and the length of actual spoken words. A missing duration is not evidence of an instantaneous action. Estimate the nearest plausible authored scale; neither minimize time nor charge a later unperformed step. Concurrent actions keep independent durations.",
         { actionId: frame.id }, { ...(frame.durationSeconds > 0 ? { planned: `Use the proposed ${frame.durationSeconds} seconds if it fits the actual activity` } : {}),
           ...Object.fromEntries(durations.map(seconds => [`s${seconds}`, `${seconds} seconds`])) });
     }
@@ -412,7 +417,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     const duration = durationChoice === "planned" ? frame.durationSeconds : Number(durationChoice.slice(1));
     if (!Number.isSafeInteger(duration) || duration < 1) throw new Error("World adjudication must resolve a positive action duration");
     const ongoing = Boolean(frame.temporalProfileId && state.truth.mechanics.temporalProfiles[frame.temporalProfileId]?.kind === "ongoing" &&
-      frame.durationSource !== "explicit");
+      frame.durationSource !== "explicit" && selected(answers, `${prefix}_extent`) === "ongoing");
     frame.durationSeconds = duration;
     frame.dueAtSeconds = Math.max(state.truth.elapsedSeconds + 1, frame.startedAtSeconds + duration);
     let status: ActionOutcome["status"] = capabilityFailures.has(frame.id) ? "blocked"
@@ -574,6 +579,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     }
     if (!["succeeded", "partial"].includes(status)) operations = [];
     prepared.push({ actionId: frame.id, status, summary: detail, operations, reads: view.reads, propertyVisibility,
+      visibleManner: frame.expression?.manner && selected(answers, `${prefix}_manner`) === "supported" ? frame.expression.manner : null,
       inspectedQuantityIds: ["succeeded", "partial"].includes(status) ? [...quantityVisibility]
         .filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "measured").map(([, id]) => id) : [],
       actorOnlyFactIds: [...new Set([...incidental.get(frame.id)!.facts, ...visibleFacts.filter(fact => fact.access.kind === "discoverable").map(fact => fact.id)])],

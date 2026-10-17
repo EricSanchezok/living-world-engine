@@ -34,7 +34,7 @@ export function interruptActivities(state: Readonly<SimulationState>, control: D
       const summary = `这项活动已进行${elapsed}秒；你按照预先说明的条件停下，剩余活动未执行。`;
       const outcome = { id: runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "outcome", stage: "direct-world", owner: frame.actorId, round: 0, ordinal }),
         proposalId: frame.id, status: "partial" as const, summary, causeRefs: source.causes, assertions: source.assertions, knownAlternatives: [] };
-      interrupted.push({ frame, outcome, operations: [], visibleFacts: [], inspectedQuantities: [], visibleEntities: [],
+      interrupted.push({ frame, outcome, visibleManner: null, operations: [], visibleFacts: [], inspectedQuantities: [], visibleEntities: [],
         actorOnlyFactIds: [], actorOnlyEntityIds: [], namedEntityIds: [], deliveredToEntityIds: [], actorVisibleToEntityIds: [] });
       interruptionEvents.push({ id: runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "event", stage: "direct-world", owner: frame.actorId, round: 0, ordinal }),
         step, description: summary, impact: "ordinary", ...source });

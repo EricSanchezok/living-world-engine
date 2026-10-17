@@ -20,7 +20,8 @@ export function sealDirectState(value: Omit<DirectRuntimeState, "hash"> | Direct
 }
 export function readDirectState(value: AlgorithmExecutionState, state: Readonly<SimulationState>): DirectRuntimeState {
   const data = value.data as unknown as DirectRuntimeState;
-  if (data.kind !== "direct-world" || data.version !== 4 || data.worldHash !== state.worldHash ||
+  if (data.kind !== "direct-world" || data.version !== 5 || data.worldHash !== state.worldHash ||
+    Object.values(data.prepared).some(prepared => prepared.visibleManner !== null && typeof prepared.visibleManner !== "string") ||
     data.hash !== contentHash({ ...data, hash: "" })) throw new Error("invalid direct runtime state");
   return structuredClone(data);
 }

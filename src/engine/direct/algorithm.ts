@@ -32,7 +32,7 @@ import { withFreshMemory } from "../cognition/memory";
 
 export interface DirectWorldConfig extends CapabilityModelOverrides { creationEnabled: boolean }
 export const DIRECT_WORLD_CONFIG: DirectWorldConfig = { decision: null, creation: null, fallback: null, creationEnabled: true };
-export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "12", config: config as unknown as JsonObject });
+export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "13", config: config as unknown as JsonObject });
 export const directWorldAlgorithmRef = (config = DIRECT_WORLD_CONFIG) => algorithmRef(directWorldManifest(config));
 
 function components(state: Readonly<SimulationState>, frames: ActionFrame[]): ActionFrame[][] {
@@ -59,7 +59,7 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     const registryHash = context.modelScope.modelRegistrySnapshotHash ?? (await this.provider.modelRegistryDiagnostics?.())?.registry.currentHash;
     if (!registryHash) throw new Error("direct runtime requires the captured model registry");
     const modelOverrides = { decision: this.config.decision, creation: this.config.creation, fallback: this.config.fallback };
-    const control = sealDirectState({ kind: "direct-world", version: 4, worldHash: input.state.worldHash,
+    const control = sealDirectState({ kind: "direct-world", version: 5, worldHash: input.state.worldHash,
       modelCatalogHash: this.provider.catalog.hash, registryHash, models: resolveCapabilityModels(input.definition.modelProfiles, modelOverrides), modelOverrides,
       intents: Object.fromEntries(Object.keys(input.state.agents).sort().map(id => [id, readyIntent()])),
       activities: [], prepared: {}, capabilities: [], cache: {}, dependencies: {}, completedSubmissionIds: [] });
@@ -172,7 +172,7 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     // Adjudicate once, then retain executable effects across intervening clock boundaries.
     for (const frame of control.activities.filter(frame => frame.kind === "reflect")) {
       control.prepared[frame.id] = { actionId: frame.id, reads: {},
-        status: "succeeded", summary: "你复核了自己已有的记录。", operations: [], visibleFactIds: [], propertyVisibility: [], visibleEntityIds: [], namedEntityIds: [], inspectedQuantityIds: [],
+        status: "succeeded", visibleManner: null, summary: "你复核了自己已有的记录。", operations: [], visibleFactIds: [], propertyVisibility: [], visibleEntityIds: [], namedEntityIds: [], inspectedQuantityIds: [],
         actorOnlyFactIds: [], actorOnlyEntityIds: [],
         deliveredToEntityIds: [], randomRequests: [], randomBindings: [], sharedClaims: [], ongoing: false, requestProgress: "complete", interruptActivityIds: [], interruptionCandidateIds: [] };
     }

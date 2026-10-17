@@ -11,8 +11,10 @@ function alias(agent: AgentState, entityId: string, introductions: ObservationPa
   if (known) return known;
   const prior = introductions.find(intro => intro.canonicalEntityId === entityId); if (prior) return prior.localEntity;
   const localEntity: LocalEntity = { id: `seen-${contentHash([agent.id, entityId]).slice(0, 24)}`,
-    name: contact === "heard" ? "一个陌生的声音" : contact === "seen" ? "附近的人" : "附近的对象",
-    description: contact === "heard" ? "听到了说话声，尚未辨认说话者的外貌和身份。" : "通过本次观察接触的对象，身份尚未确认。", status: "observed" };
+    name: contact === "heard" ? "一个陌生的声音" : contact === "seen" ? "附近的人" : "关系所指的对象",
+    description: contact === "heard" ? "听到了说话声，尚未辨认说话者的外貌和身份。"
+      : contact === "seen" ? "通过本次观察接触的对象，身份尚未确认。" : "只知道这项关系指向某个对象，尚未直接看见或辨认它。",
+    status: contact ? "observed" : "reported" };
   introductions.push({ localEntity, canonicalEntityId: entityId }); return localEntity;
 }
 function describeValue(agent: AgentState, value: FactValue, introductions: ObservationPacket["introductions"]): string {
@@ -67,7 +69,7 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
           : settlement.deliveredToEntityIds.length > 0;
         if (!reachedListener) summary += settlement.frame.targetEntityId ? "没有确认对方听见。" : "没有确认有人听见。";
       }
-      if (completedExpression && seesActor && settlement.frame.expression?.manner) summary += `\n可见举止：${settlement.frame.expression.manner}`;
+      if (completedExpression && seesActor && settlement.visibleManner) summary += `\n可见举止：${settlement.visibleManner}`;
       if (ownsAction && settlement.frame.kind === "move" && completedExpression) {
         const movement = settlement.operations.find(operation => operation.kind === "place_entity" && operation.entityId === agent.entityId);
         if (movement?.kind === "place_entity" && movement.placementId) {
@@ -101,18 +103,18 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
         summary += `\n本次操作${operation.kind === "consume_quantity" ? "消耗" : "产出"}了${operation.amount}${resource.unit}${resource.name}。`;
       }
       if (ownerId === settlement.frame.actorId || settlement.frame.kind !== "observe") for (const entity of visibleEntities) {
-        const local = alias(agent, entity.id, introductions);
+        const local = alias(agent, entity.id, introductions, "seen");
         const named = settlement.namedEntityIds.includes(entity.id);
         const introduced = introductions.find(intro => intro.localEntity.id === local.id);
         const appearance = facts.find(fact => fact.subjectId === entity.id && fact.predicate === "appearance")?.description;
-        const generic = ["附近的对象", "附近的人", "一个陌生的声音"].includes(local.name);
+        const generic = ["关系所指的对象", "附近的对象", "附近的人", "一个陌生的声音"].includes(local.name);
         const appearanceLabel = facts.find(fact => fact.subjectId === entity.id && fact.predicate === "appearance_label");
         const label = named ? entity.name : generic
-          ? (appearanceLabel?.value.kind === "text" ? appearanceLabel.value.value : appearanceLabel?.description) ?? local.name : local.name;
-        const next = { ...local, name: ["附近的对象", "一个陌生的声音"].includes(label) ? observedKindLabel(entity.kind) : label,
-          description: appearance ?? (local.name === "一个陌生的声音" ? "现在可以看见说话的人，但身份还没有确认。" : local.description) };
+          ? (appearanceLabel?.value.kind === "text" ? appearanceLabel.value.value : appearanceLabel?.description) ?? observedKindLabel(entity.kind) : local.name;
+        const next: LocalEntity = { ...local, name: label, status: "observed",
+          description: appearance ?? (generic ? "本次可以直接看见这个对象，身份以已经辨认的线索为准。" : local.description) };
         if (introduced) introduced.localEntity = next;
-        else if (next.name !== local.name || next.description !== local.description) renamed.push(next);
+        else if (next.name !== local.name || next.description !== local.description || next.status !== local.status) renamed.push(next);
         details.push({ localEntityId: next.id, label: next.name, description: next.description });
         if (appearance) summary += `\n${next.name}：${appearance}`;
         else if (introduced) summary += `\n你看见了${next.name}。`;
@@ -149,7 +151,7 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
             resource: settlement.frame.kind === "transfer" && targetVisible && resource ? { name: resource.name, unit: resource.unit, amount: settlement.frame.amount } : null,
             durationSeconds: settlement.frame.durationSeconds, addressing: voiced ? settlement.frame.targetEntityId ? "direct" : "broadcast" : "none" },
           attempt: ownerId === settlement.frame.actorId ? concreteAttempt : "", outcome: spoken && !seesActor ? `${actor}说：“${voiced}”` : settlement.outcome.summary.replace(/^你/u, actor),
-          manner: completedExpression && seesActor ? settlement.frame.expression?.manner ?? null : null,
+          manner: completedExpression && seesActor ? settlement.visibleManner : null,
           speech: voiced && (ownerId === settlement.frame.actorId || spoken) ? { speaker: actor, speakerLocalId: actorEntity.id, utterance: voiced } : null, details } };
       const evidenceId = runtimeId({ worldHash: state.worldHash, revision: state.revision + 1, kind: "evidence", stage: "direct-perception", owner: ownerId, round: 0, ordinal: index });
       const patch: BeliefPatch = { agentId: ownerId, baseRevision: state.revision + 1, operations: [{ kind: "upsert_evidence", evidence: {

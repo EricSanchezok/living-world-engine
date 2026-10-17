@@ -46,7 +46,6 @@ export async function readAction(input: { decisions: DirectDecisions; agentId: s
           .describe("Interpret THIS next step's time reference before selecting duration. ordinary has no requested interval; elapsed is a measured duration; phase_occurrence counts arrivals of a transition (next=1, second=2); relative_cycle names the current calendar cycle or a later one (today/current=0, tomorrow/following=1). Tomorrow's sunset names a cycle, not merely the next sunset. Quoted times and later steps do not time the present step."),
         count: z.number().int().nonnegative().nullable().describe("For relative_cycle, the requested number of cycles after the submission's initial cycle; for phase_occurrence, the positive occurrence number. Otherwise null. Interpret the player's reference, not the nearest candidate."),
       }),
-      activitySite: z.string().describe("Where must THIS selected next step actually execute? Use current for an unconstrained act at the current place, including speech about other places. If this step requires an explicitly named place, select its target catalog key, even when arrival has not occurred. For a move, name its destination; for a preparatory step before moving, name that preparation's actual site. Use unresolved if the required place cannot be identified. This is not the object watched, person awaited, or a place mentioned in words. Do not relabel a different requested place as current."),
       conversationReading: z.object({
         addressedTo: z.enum(["narrator", "character", "no_speech"]),
         meaningInContext: z.string().describe("The full meaning of THIS input in the current thread. For an ellipsis, preserve the previous question and replace only the new subject/scope. Resolve the same item even when the player's premise about possession is false."),
@@ -57,6 +56,7 @@ export async function readAction(input: { decisions: DirectDecisions; agentId: s
         remainingSteps: z.array(z.string()).describe("Still unperformed authorized steps. A missing resource does not authorize obtaining or paying for it. Do not combine a physical transition and a later observation into one observation."),
       }).optional().describe("Diagnostic decomposition. Missing analysis does not invalidate a correctly bound executable interaction."),
     }),
+    activitySite: z.string().describe("Where must THIS selected next step actually execute? Use current for an unconstrained act at the current place, including speech about other places. If this step requires an explicitly named place, select its target catalog key, even when arrival has not occurred. For a move, name its destination; for a preparatory step before moving, name that preparation's actual site. Use unresolved if the required place cannot be identified. This is not the object watched, person awaited, or a place mentioned in words. Do not relabel a different requested place as current."),
     interaction: autonomous ? z.literal("world_action") : z.enum(["clarification", "world_action", "request_complete"]),
     action: z.object({ ...fieldShape, attempt: z.string(), utterance: z.string().nullable()
       .describe(autonomous ? "Actual words addressed to the selected listener, or private synthesis for reflect; null for silent activity or wait. Speech is a proposal, not proof of delivery or agreement."
@@ -73,9 +73,9 @@ export async function readAction(input: { decisions: DirectDecisions; agentId: s
     try {
       generated = await decisions.provider.generateStructured({ ...decisions.scope, subjectId: agentId,
         modelRegistrySnapshotHash: decisions.control.registryHash, modelInvocation: decisions.next(agentId),
-        profileId: input.profileId, role: autonomous ? "creation" : "decision", schemaName: autonomous ? "AutonomousActionReadingV1" : "PlayerActionReadingV5", system, userPrompt,
+        profileId: input.profileId, role: autonomous ? "creation" : "decision", schemaName: autonomous ? "AutonomousActionReadingV2" : "PlayerActionReadingV5", system, userPrompt,
         promptVersion: `${autonomous ? "autonomous-action" : "player-reading"}-${contentHash({ system, userPrompt })}`,
-        context: { [autonomous ? "autonomousReading" : "playerReading"]: { ...(autonomous ? {} : { executionSite }), state: context, language: input.language, catalog, cognition,
+        context: { [autonomous ? "autonomousReading" : "playerReading"]: { executionSite, state: context, language: input.language, catalog, cognition,
           exactQuotes: Object.fromEntries(input.quotes.map((quote, index) => [`q${index}`, quote])) },
           ...(repair ? { repair: { ...repair, instruction: autonomous
             ? "Resolve the reported contradictions as one complete intention using this same private situation and catalog. A deliberate wait must have a situational reason; missing speech parameters do not by themselves justify waiting. Do not claim any attempt succeeded."
@@ -109,9 +109,14 @@ export async function readAction(input: { decisions: DirectDecisions; agentId: s
         reference.basis === "unresolved" && action.duration !== "unresolved") {
         issues.push("Bind a periodic endpoint as its entering phase plus either a relative_cycle offset (current=0, following=1) or a positive phase_occurrence number (next=1). The engine computes its exact deadline. Ordinary and elapsed timing do not select a phase. Use unresolved when the intended reference cannot be determined. A prerequisite uses its own timing, not the later activity's deadline.");
       }
+    }
+    if (generated.value.interaction === "world_action") {
       const site = generated.value.activitySite;
       if (typeof site !== "string" || site !== "current" && (!Object.hasOwn(catalog.target ?? {}, site) || site === "none")) {
         issues.push("Bind this next step's required execution site to current or a known place key. An unidentified required site needs clarification, not a substitute activity.");
+      } else if (operation === "move" && (site === "current" ? !currentLocationKeys.includes(action.target ?? "")
+        : action.target !== site && !(currentLocationKeys.includes(site) && currentLocationKeys.includes(action.target ?? "")))) {
+        issues.push("A move's actual target must be the same place as its required activitySite. Current-location aliases describe only movement within this place; they cannot stand for a different named room or an unknown destination. Seek the missing route or choose a coherent current-site action instead of claiming travel elsewhere.");
       } else if (operation !== "move" && site !== "current" && !currentLocationKeys.includes(site)) {
         issues.push("This step requires a different place from the actual current placement. Perform an authorized move there first with ordinary travel timing and progress_next=continue, or an authorized current-site prerequisite. If arrival cannot be resolved, clarify. Naming a wait target or writing the destination in the attempt does not move the actor. Do not change the requested site's meaning to evade the missing arrival.");
       }

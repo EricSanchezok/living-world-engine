@@ -765,7 +765,7 @@ export function registerBuiltinAlgorithms(
   registry: WorldExecutionAlgorithmRegistry = new WorldExecutionAlgorithmRegistry(),
 ): WorldExecutionAlgorithmRegistry {
   if (!registry.has(directWorldAlgorithmRef())) registry.registerDefinition({
-    role: "world-execution", id: "direct-world", version: "12", contractVersion: 14, maturity: "candidate",
+    role: "world-execution", id: "direct-world", version: "13", contractVersion: 14, maturity: "candidate",
     configSchema: z.strictObject({ decision: z.string().min(1).nullable(), creation: z.string().min(1).nullable(), fallback: z.string().min(1).nullable(), creationEnabled: z.boolean() }),
     children: [], create: ({ ref, services }) => new DirectWorldAlgorithm(services.provider, ref.config as unknown as import("../direct/algorithm").DirectWorldConfig, services.rulePackages),
   });
