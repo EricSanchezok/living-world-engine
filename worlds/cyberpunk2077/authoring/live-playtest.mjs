@@ -33,7 +33,7 @@ const selected = option('--roles', '').split(',').filter(Boolean);
 const cases = availableCases.filter(test => !selected.length || selected.includes(test.role));
 if (!cases.length || selected.some(id => !availableCases.some(test => test.role === id))) throw new Error('unknown role');
 const concurrency = Number(option('--concurrency', '2'));
-if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 4) throw new Error('concurrency must be 1..4');
+if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 12) throw new Error('concurrency must be 1..12');
 const actionTimeoutMinutes = Number(option('--action-timeout-minutes', '30'));
 if (!Number.isFinite(actionTimeoutMinutes) || actionTimeoutMinutes <= 0) throw new Error('action timeout must be positive minutes');
 const actionTimeoutMs = actionTimeoutMinutes * 60000;
@@ -67,7 +67,9 @@ async function main() {
     for (let attempt = 0; ; attempt++) {
       try {
         const response = await fetch(api + route, { method, headers: body ? { 'Content-Type': 'application/json' } : undefined,
-          body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(120000) });
+          // Takeover includes a real arrival call and its bounded format repair;
+          // allow provider/queue time without retrying a potentially committed mutation.
+          body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(method === 'GET' ? 120000 : 1200000) });
         const text = await response.text();
         if (!response.ok) throw Object.assign(new Error(`${method} ${route}: ${response.status}: ${text.slice(0, 800)}`), { status: response.status });
         return text ? JSON.parse(text) : null;
