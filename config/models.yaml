@@ -30,7 +30,7 @@ accounts:
     models_dev_provider_id: deepseek
     base_url: https://api.deepseek.com
     api_key_env: DEEPSEEK_API_KEY
-    max_concurrency: 4
+    max_concurrency: 16
     network:
       dns_over_https_url: https://1.1.1.1/dns-query
       socket_connect_attempts: 2

@@ -391,7 +391,7 @@ describe("complete local model definitions", () => {
       expect(binding.modelId).toBe("deepseek-flash");
       expect(binding.model.fieldSources.id).toBe("local-override");
       expect(binding.profile).toMatchObject({ inference: { thinking: "disabled" }, response_transport: "deepseek-sse-v1" });
-      expect(binding.account.max_concurrency).toBe(4);
+      expect(binding.account.max_concurrency).toBe(16);
     }
     expect(new ModelRegistry(configured, root).snapshot(snapshot.hash)).toEqual(snapshot);
   });

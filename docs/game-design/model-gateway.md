@@ -93,6 +93,8 @@ A provider absent from models.dev can be supplied by complete local metadata wit
 
 `FairModelScheduler` 将实际 HTTP 执行限制在 global concurrency 与账户 concurrency 的交集内。每个 workload 是 FIFO lane，lane 之间公平轮转；队列满或超时返回 `ModelOverloadedError`，取消同时移除待执行任务并传递给在途请求。网络错误、408、429 与 5xx 最多三次 transport attempt，遵循 `Retry-After` 或指数抖动；400/401、结构化输出失败与语义拒绝不做 transport retry。
 
+The bundled DeepSeek account admits up to 16 concurrent requests within the same 16-request process ceiling. Queue capacity remains 1024 and queue timeout remains five minutes. This bounds independent HTTP work without changing a question batch, context, inference setting or call count; see [decision 0250](../decisions/0250-align-deepseek-with-global-concurrency.md). A catalog change requires fresh instances; the runtime rejects a saved instance whose pinned catalog differs.
+
 任何失败都留在原 Profile 和账户。结构化输出或引擎语义失败可由调用层生成新的 semantic repair invocation；网络、配置、取消、Ledger 与终端错误丢弃候选并保持 canonical revision 不变。
 
 `ModelExecutionAudit` 保存账户、渠道、协议、方言、models.dev provider、selector、选定模型、catalog hash、registry snapshot hash、模型 metadata hash、请求与实际发送的 inference、结构化输出模式以及 invocation evidence。Invocation 保存规范请求/响应 hash、Context 计量、transport、token usage、finish reason、provider request ID 与语义结论。API key、原始密钥 header 与隐藏思维链不进入审计。
