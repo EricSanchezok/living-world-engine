@@ -1,7 +1,14 @@
 import type { AgentPerspectiveView } from "../engine/contracts/model";
 export type { AgentPerspectiveView, BeliefValue, PerspectiveFactValue } from "../engine/contracts/model";
 
-export const WORLD_API_VERSION = 17 as const;
+export const WORLD_API_VERSION = 18 as const;
+
+/** Live work only; stage transitions never imply a committed outcome or a percentage. */
+export interface PublicWorldProgress {
+  stage: "preparing" | "interpreting" | "resolving" | "reacting" | "settling" | "checking" | "saving" |
+    "reply-pending" | "composing" | "verifying" | "revising";
+  startedAt: string;
+}
 
 export interface PublicModelServicePause {
   code: "request-limit" | "spending-limit" | "token-limit" | "usage-unresolved";
@@ -180,6 +187,7 @@ export interface PublicConversation {
 }
 
 export interface PublicInstanceDetail {
+  progress: PublicWorldProgress | null;
   summary: PublicInstanceSummary;
   world: WorldSummary;
   publicEvents: PublicWorldEvent[];

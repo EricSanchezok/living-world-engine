@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { PublicConversation, PublicWorldRun } from "../../shared/world-api";
+import type { PublicWorldRun } from "../../shared/world-api";
 import { formatRunElapsed, isRunClockPaused, runBoundaryLabel, runStatusPresentation, worldProgressPhase } from "./run-status";
 
 function run(overrides: Partial<PublicWorldRun> = {}): PublicWorldRun {
@@ -33,46 +33,27 @@ function run(overrides: Partial<PublicWorldRun> = {}): PublicWorldRun {
 }
 
 describe("run status presentation", () => {
-  it("keeps an earlier unfinished reply in progress even when the latest turn is complete", () => {
-    const conversation: PublicConversation = { participantId: "player", agentId: "traveler", suggestions: null,
-      turns: ["running", "committed"].map((status, index) => ({ id: `turn-${index}`, agentId: "traveler",
-        baseRevision: index, createdAt: `2026-10-17T02:00:0${index}Z`, status: status as "running" | "committed" })) };
-    expect(worldProgressPhase({ run: run({ status: "awaiting-decision" }), conversation })).toBe("publishing");
-    conversation.turns[0]!.status = "committed";
-    expect(worldProgressPhase({ run: run({ status: "awaiting-decision" }), conversation })).toBeNull();
+  it("keeps pending publication active until the server releases the whole turn", () => {
+    for (const stage of ["reply-pending", "composing", "verifying", "revising"] as const) {
+      expect(worldProgressPhase({ run: run({ status: "awaiting-decision" }),
+        progress: { stage, startedAt: "2026-10-17T02:00:00Z" } })).toBe("publishing");
+    }
+    expect(worldProgressPhase({ run: run({ status: "awaiting-decision" }), progress: null })).toBeNull();
   });
 
   it("keeps execution active after a published reply but releases genuine pause boundaries", () => {
     for (const status of ["queued", "running", "pausing"] as const) {
-      expect(worldProgressPhase({ run: run({ status }) })).toBe("executing");
+      expect(worldProgressPhase({ run: run({ status }), progress: { stage: "interpreting", startedAt: "2026-10-17T02:00:00Z" } })).toBe("executing");
     }
     for (const status of ["paused", "budget-paused", "debug-paused", "preparation-invalidated", "awaiting-reaction", "failed", "completed"] as const) {
-      expect(worldProgressPhase({ run: run({ status }) })).toBeNull();
+      expect(worldProgressPhase({ run: run({ status }), progress: null })).toBeNull();
     }
   });
 
-  it("explains an in-flight action even before a canonical activity exists", () => {
-    const presentation = runStatusPresentation(run(), true);
-    expect(presentation.title).toBe("正在处理你的行动");
-    expect(presentation.detail).toBe("正在等待眼前的回应。");
-    expect(runStatusPresentation(run({ status: "queued" }), true).detail).toBe("正在整理眼前的变化。");
-  });
-
-  it("uses real activity stage and progress without inventing a percentage", () => {
-    const presentation = runStatusPresentation(run({
-      activity: {
-        id: "activity-1",
-        status: "active",
-        description: "搜寻失踪信使",
-        stage: "侦查",
-        progress: { current: 2, target: 10, unit: "米" },
-        nextBoundaryAtSeconds: 12,
-        completionAtSeconds: null,
-        queuePosition: null,
-        resourceNames: [],
-      },
-    }), true);
-    expect(presentation.detail).toBe("侦查 · 2.00 / 10 米");
+  it("describes a genuine pause and keeps recovery available", () => {
+    expect(runStatusPresentation(run({ status: "paused" }))).toEqual({
+      title: "世界推进已暂停", detail: "可恢复，或提交新行动",
+    });
   });
 
   it("keeps lease counters in explicit debugging, outside ordinary play", () => {

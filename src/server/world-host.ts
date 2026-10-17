@@ -61,6 +61,7 @@ import {
 } from "../engine/runtime/observability";
 import { quantityId, runtimeId } from "../engine/runtime/runtime-id";
 import { SimulationEngine } from "../engine/runtime/simulation";
+import { WorldProgress } from "./world-progress";
 import { WorldQuiescentError } from "../engine/runtime/execution";
 import type { DirectRuntimeState } from "../engine/direct/contracts";
 import { participantReactionIds } from "../engine/direct/foreground";
@@ -659,6 +660,7 @@ export class WorldHost {
 
   private readonly narrativeWorkers = new Map<string, Promise<void>>();
   private readonly instanceListeners = new Map<string, Set<() => void>>();
+  private readonly progress = new WorldProgress(() => this.now(), id => this.notifyInstance(id));
 
   private notifyInstance(id: string) { for (const listener of this.instanceListeners.get(id) ?? []) listener(); }
 
@@ -718,6 +720,9 @@ export class WorldHost {
       }
       const execution = this.beginExecution(document, "interactive", "narrative", NARRATIVE_MANIFEST);
       this.updateNarrative(id, beat.id, item => { item.status = "generating"; item.attempts += 1; if (execution) item.executionIds.push(execution.id); });
+      const progress = this.progress.start(id, { kind: "reply", beatId: beat.id, participantId: beat.participantId },
+        beat.attempts ? "revising" : "composing");
+      let generating = true;
       const prefix = beat.segments.map(segment => segment.text);
       let published = 0;
       const control = document.state.executionState?.data.kind === "direct-world" ? document.state.executionState.data as unknown as DirectRuntimeState : null;
@@ -738,6 +743,7 @@ export class WorldHost {
         const completeText = [...this.read(id).document.narratives.find(item => item.id === beat.id)!.segments.map(segment => segment.text), ...ready];
         assertSpeechMultiplicity(beat.source, completeText);
         assertSpeechOrder(beat.source, completeText);
+        progress.set("verifying");
         const decision = await checkNarrativeGrounding(this.options.provider, scope, beat.source, ready, models.fallback, models.fallback,
           Number.parseInt(contentHash([beat.id, beat.attempts, prefix.length + published]).slice(0, 10), 16),
           participantDiscourse(this.read(id).document, beat.participantId, beat.id),
@@ -758,6 +764,7 @@ export class WorldHost {
           });
           published++;
         }
+        if (generating) progress.set(beat.attempts ? "revising" : "composing");
       };
       try {
         const result = await this.options.provider.generateStructured({
@@ -792,6 +799,7 @@ export class WorldHost {
             })();
           },
         });
+        generating = false;
         this.updateNarrative(id, beat.id, item => { if (item.producer) item.producer.modelId = result.audit.modelId; });
         await publication;
         if (publicationError !== undefined) throw publicationError;
@@ -805,6 +813,7 @@ export class WorldHost {
           { status: "succeeded", semanticHash: contentHash(result.value), stateHash: contentHash(this.read(id).document.state) });
         this.updateNarrative(id, beat.id, item => { item.status = "complete"; item.error = null; item.completedAt = this.now().toISOString(); });
       } catch (error) {
+        generating = false;
         await publication;
         this.failExecution(execution?.id, error);
         const pause = modelServicePause(error);
@@ -822,6 +831,8 @@ export class WorldHost {
           return;
         }
         this.updateNarrative(id, beat.id, item => { item.status = "queued"; item.error = error instanceof Error ? error.message : String(error); });
+      } finally {
+        progress.finish();
       }
     }
   }
@@ -1771,6 +1782,7 @@ export class WorldHost {
     const stored = this.read(id);
     this.cancelTimer(id);
     this.options.store.deleteInstance(id, stored.generation, { instanceId: id });
+    this.progress.clear(id);
     for (const [key, worker] of this.suggestionWorkers) if (key.startsWith(`${id}:`)) worker.controller.abort();
     this.inspectorLedgerSnapshots.delete(id);
     this.inspectorWindowProjections.delete(id);
@@ -1801,6 +1813,7 @@ export class WorldHost {
       .filter((candidate) => candidate.actorId === controlled.agentId)
       .sort((left, right) => right.updatedAtSeconds - left.updatedAtSeconds || right.id.localeCompare(left.id))[0] : undefined;
     return {
+      progress: this.progress.project(document, run, controlled?.id),
       summary: publicSummary(document),
       world: publicWorld(document),
       publicEvents: document.state.truth.events
@@ -2230,6 +2243,14 @@ export class WorldHost {
         )
       : undefined;
     if (debugGate) this.debugStageGates.set(runId, debugGate);
+    const progress = this.progress.start(document.id, { kind: "run", runId, generation: runGeneration,
+      revision: document.state.revision }, "preparing");
+    const stageHooks: ExecutionStageHooks = {
+      enabled: debugGate?.enabled ?? false,
+      before: async stage => { await debugGate?.before(stage); progress.stage(stage.key); },
+      after: async stage => { await debugGate?.after(stage); },
+      failed: stage => { debugGate?.failed(stage); },
+    };
     const modelScope = {
       workloadId: document.id,
       batchId: window?.kind === "reaction"
@@ -2243,7 +2264,7 @@ export class WorldHost {
       },
       observer: execution?.trace ?? this.runtimeObserver,
       abortSignal: controller.signal,
-      ...(debugGate ? { stageHooks: debugGate } : {}),
+      stageHooks,
     };
     let atomicStageEntered = false;
     try {
@@ -2448,6 +2469,7 @@ export class WorldHost {
         commitRevision: document.state.revision,
       };
       const commitStage = executionStage("atomic-commit", algorithm.protocol);
+      progress.stage(commitStage.key);
       if (debugGate) {
         atomicStageEntered = true;
         execution?.trace.emit({
@@ -2598,6 +2620,8 @@ export class WorldHost {
       } catch {
         throw error;
       }
+    } finally {
+      progress.finish();
     }
   }
 

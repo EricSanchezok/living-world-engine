@@ -52,6 +52,7 @@ import {
   runBoundaryLabel,
   runStatusPresentation,
   worldProgressPhase,
+  worldProgressLabel,
 } from "./run-status";
 import { SettingsPanel } from "./settings-panel";
 import { observerTimeline, participantTimeline } from "./world-timeline";
@@ -76,37 +77,41 @@ function assistantStatus(status: PublicConversationTurn["status"]): ThreadMessag
 
 function PlayerRunConsole({
   busy,
-  hasParticipantAction,
   run,
+  progress,
   onPause,
   onNext,
   onResume,
 }: {
   busy: boolean;
-  hasParticipantAction?: boolean;
-  run: PublicWorldRun;
+  run?: PublicWorldRun;
+  progress: PublicInstanceDetail["progress"];
   onPause: () => void;
   onNext: () => void;
   onResume: () => void;
 }) {
-  const debugPaused = run.status === "debug-paused" && run.debug.canAdvance;
-  const resumable = run.debug.mode !== "step" && (run.status === "paused" ||
+  const debugPaused = run?.status === "debug-paused" && run.debug.canAdvance;
+  const resumable = run && run.debug.mode !== "step" && (run.status === "paused" ||
     run.status === "budget-paused" || run.status === "preparation-invalidated");
   const [now, setNow] = useState(() => Date.now());
-  const clockPaused = isRunClockPaused(run.status);
-  const updatedAtTimestamp = Date.parse(run.updatedAt);
+  const clockPaused = !progress && (!run || isRunClockPaused(run.status));
+  const updatedAtTimestamp = Date.parse(progress?.startedAt ?? run?.updatedAt ?? "");
   const elapsedNow = Number.isFinite(updatedAtTimestamp) ? Math.max(now, updatedAtTimestamp) : now;
-  const presentation = runStatusPresentation(run, Boolean(run.status === "running" && hasParticipantAction));
-  const boundaryLabel = runBoundaryLabel(run);
+  const presentation = progress && run?.debug.mode !== "step" && run?.status !== "pausing"
+    ? { title: "世界正在推演", detail: worldProgressLabel[progress.stage] }
+    : run ? runStatusPresentation(run)
+      : { title: "世界正在推演", detail: "正在等待生成回应" };
+  const boundaryLabel = run ? runBoundaryLabel(run) : undefined;
+  const startedAt = progress?.startedAt ?? run?.lease?.startedAt;
   const elapsed = formatRunElapsed(
-    run.lease?.startedAt,
+    startedAt,
     elapsedNow,
-    clockPaused ? run.updatedAt : undefined,
-    run.lease?.suspendedDurationMs ?? 0,
+    clockPaused ? run?.updatedAt : undefined,
+    progress ? 0 : run?.lease?.suspendedDurationMs ?? 0,
   );
 
   useEffect(() => {
-    if (!run.lease?.startedAt) return;
+    if (!startedAt) return;
     const refresh = window.setTimeout(() => setNow(Date.now()), 0);
     if (clockPaused) return () => window.clearTimeout(refresh);
     const timer = window.setInterval(() => setNow(Date.now()), 1_000);
@@ -114,22 +119,22 @@ function PlayerRunConsole({
       window.clearTimeout(refresh);
       window.clearInterval(timer);
     };
-  }, [clockPaused, run.lease?.startedAt]);
+  }, [clockPaused, startedAt]);
 
   return (
-    <div aria-label="世界运行控制台" className="cg-thread-status" data-run-status={run.status} role="status">
+    <div aria-label="世界运行控制台" className="cg-thread-status" data-run-status={run?.status} data-progress-stage={progress?.stage} role="group">
       <span aria-hidden="true" className="cg-thread-status__indicator" />
       <div className="cg-thread-status__copy">
         <strong>{presentation.title}</strong>
         <div className="cg-thread-status__meta">
-          <span>{presentation.detail}</span>
+          <span role="status" aria-live="polite">{presentation.detail}</span>
           {boundaryLabel ? <span>{boundaryLabel}</span> : null}
-          {elapsed ? <span>已运行 {elapsed}</span> : null}
+          {elapsed ? <span>{progress ? "本阶段" : "已运行"} {elapsed}</span> : null}
         </div>
       </div>
-      {debugPaused ? (
+      {!run ? null : debugPaused ? (
         <button className="cg-thread-status__action" disabled={busy} onClick={onNext} type="button"><FastForward aria-hidden="true" /> 下一步</button>
-      ) : run.debug.mode === "step" ? null : (
+      ) : run.debug.mode === "step" || !["queued", "running", "pausing"].includes(run.status) && !resumable ? null : (
         <button className="cg-thread-status__action" disabled={busy || run.status === "pausing"} onClick={resumable ? onResume : onPause} type="button">
           {resumable ? <Play aria-hidden="true" /> : <Pause aria-hidden="true" />}
           {run.status === "preparation-invalidated" ? "重新准备" : resumable ? "恢复" : "暂停"}
@@ -167,18 +172,6 @@ function ActionSubmitConsole() {
       <div className="cg-thread-status__copy">
         <strong>正在确认行动</strong>
         <span>已收到你的行动，正在等待眼前的回应。</span>
-      </div>
-    </div>
-  );
-}
-
-function ReplyProgressConsole() {
-  return (
-    <div className="cg-thread-status" aria-label="回应生成进度" role="status">
-      <span aria-hidden="true" className="cg-thread-status__indicator" />
-      <div className="cg-thread-status__copy">
-        <strong>世界正在推演</strong>
-        <div className="cg-thread-status__meta"><span>正在生成并校验本轮回应…</span></div>
       </div>
     </div>
   );
@@ -681,15 +674,13 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
                 <span>{latestTurn?.servicePause ? "已有进展已保存，服务恢复后可以继续。" : detail.servicePause.message}</span>
               </div>
             </div>
-          ) : progressPhase === "publishing" ? (
-            <ReplyProgressConsole />
-          ) : reactionWindow ? (
+          ) : reactionWindow && !worldProcessing ? (
             <ReactionConsole
               busy={Boolean(busy)}
               onKeep={() => void keepReaction()}
               stimulus={reactionWindow.reaction!.stimulus}
             />
-          ) : detail.run?.status === "awaiting-decision" ? (
+          ) : detail.run?.status === "awaiting-decision" && !worldProcessing ? (
             <>
               {preferences.advancedRoleControl ? (
                 <button className="cg-detach-button cg-detach-button--quiet" onClick={() => void openOverlay("control")} type="button">
@@ -697,7 +688,7 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
                 </button>
               ) : null}
             </>
-          ) : detail.run && [
+          ) : worldProcessing || detail.run && [
             "queued",
             "running",
             "pausing",
@@ -708,7 +699,7 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
           ].includes(detail.run.status) ? (
             <>
               <PlayerRunConsole
-                hasParticipantAction={Boolean(latestTurn?.action)}
+                progress={detail.progress}
                 busy={Boolean(busy)}
                 onPause={() => void perform("pause-run", () => worldApi.pauseRun(instanceId, {
                   runId: detail.run!.id,

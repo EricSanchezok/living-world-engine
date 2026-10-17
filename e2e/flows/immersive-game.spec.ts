@@ -544,6 +544,73 @@ test("failed execution stays atomic and long diagnostics never widen the inspect
   expect(await inspector.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
 });
 
+test("live stages follow actual model work in one stationary composer until publication finishes", async ({ page }) => {
+  await installFixture(page);
+  await startOrigin(page);
+  const instanceId = new URL(page.url()).pathname.split("/").at(-1)!;
+  const detailUrl = `/api/instances/${instanceId}`;
+  const initial = await (await page.request.get(detailUrl)).json() as PublicInstanceDetail;
+  const gateUrl = `http://127.0.0.1:${process.env.LIVINGWORLD_E2E_MODEL_PORT ?? 32128}/progress-gates/${initial.conversation!.participantId}`;
+  const actionText = "观察四周，留意石门。";
+  expect((await page.request.post(gateUrl, { data: { actionText } })).ok()).toBe(true);
+  const frame = page.locator(".aui-composer-shell");
+  const composer = page.getByRole("textbox", { name: "你的行动", exact: true });
+  const progress = page.getByRole("group", { name: "世界运行控制台" });
+  const phases = [
+    ["interpreting", "正在理解行动与情境"], ["resolving", "正在处理现场互动"],
+    ["composing", "正在生成本轮回应"], ["verifying", "正在核对回应内容"],
+  ];
+  try {
+    await composer.fill(actionText);
+    await frame.evaluate(element => { element.setAttribute("data-frame-identity", "original"); });
+    const originalBox = await frame.boundingBox();
+    await page.getByRole("button", { name: "发送行动" }).click();
+    for (const [stage, label] of phases) {
+      await expect(progress).toHaveAttribute("data-progress-stage", stage!);
+      await expect(progress).toContainText(label!);
+      await expect(composer).toHaveCount(0);
+      await expect(frame).toHaveAttribute("data-frame-identity", "original");
+      const currentBox = await frame.boundingBox();
+      for (const key of ["x", "y", "width", "height"] as const) {
+        expect(Math.abs(currentBox![key] - originalBox![key])).toBeLessThanOrEqual(1);
+      }
+      if (stage === "interpreting") {
+        await expect(progress).toContainText("本阶段 1 秒");
+        await expect(progress).toHaveAttribute("data-progress-stage", "interpreting");
+        await page.reload();
+        await expect(progress).toHaveAttribute("data-progress-stage", "interpreting");
+        await frame.evaluate(element => { element.setAttribute("data-frame-identity", "original"); });
+      }
+      if (stage === "composing") {
+        const detail = await (await page.request.get(detailUrl)).json() as PublicInstanceDetail;
+        expect(detail.run?.status).not.toMatch(/^(queued|running|pausing)$/);
+      }
+      expect((await page.request.delete(`${gateUrl}/${stage}`)).ok()).toBe(true);
+    }
+    await expect(composer).toBeVisible();
+    await expect(progress).toHaveCount(0);
+    const finished = await (await page.request.get(detailUrl)).json() as PublicInstanceDetail;
+    expect(finished.progress).toBeNull();
+    expect(finished.conversation!.turns.at(-1)!.status).toBe("committed");
+    await page.setViewportSize({ width: 320, height: 720 });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    expect((await page.request.post(gateUrl, { data: { actionText } })).ok()).toBe(true);
+    await composer.fill(actionText);
+    const mobileBox = await frame.boundingBox();
+    await page.getByRole("button", { name: "发送行动" }).click();
+    await expect(progress).toHaveAttribute("data-progress-stage", "interpreting");
+    await expect(progress.getByRole("status")).toHaveText("正在理解行动与情境");
+    expect(await progress.getByRole("status").evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
+    const mobileProgressBox = await frame.boundingBox();
+    for (const key of ["x", "y", "width", "height"] as const) {
+      expect(Math.abs(mobileProgressBox![key] - mobileBox![key])).toBeLessThanOrEqual(1);
+    }
+  } finally {
+    await page.request.delete(gateUrl);
+    await expect(composer).toBeVisible();
+  }
+});
+
 for (const partial of [false, true]) {
   test(`the whole turn stays in progress until ${partial ? "a partial" : "an unpublished"} reply completes, even without events`, async ({ page }) => {
     await installFixture(page);
@@ -576,9 +643,9 @@ for (const partial of [false, true]) {
           segments: detail.conversation!.turns.at(-1)!.response?.segmentCount ?? 0 };
       }).toEqual({ run: "awaiting-decision", turn: "running", segments: partial ? 1 : 0 });
 
-      const progress = page.getByRole("status", { name: "回应生成进度" });
+      const progress = page.getByRole("group", { name: "世界运行控制台" });
       await expect(progress).toContainText("世界正在推演");
-      await expect(progress).toContainText("正在生成并校验本轮回应");
+      await expect(progress).toContainText("正在生成本轮回应");
       await expect(composer).toHaveCount(0);
       await expect(page.getByRole("button", { name: /打开游戏控制；世界正在推演/ })).toBeVisible();
       await expect(frame).toHaveAttribute("data-frame-identity", "original");

@@ -2,7 +2,7 @@
 
 ## 投影边界
 
-公共产品契约为 `src/shared/world-api.ts`（API v17）。Participant 的 `controlledView` 是本人所控 Agent 在当前 revision 的 `AgentPerspectiveView`；DTO 只包含 Arrival、行动、Observation、授权 Activity 进度与该 Agent 的私有状态。反应窗口只额外投影本人 stimulus，不暴露 basis、其他主体请求或 canonical binding。对话由这些持久事实投影，不保存独立聊天记录。
+公共产品契约为 `src/shared/world-api.ts`（API v18）。Participant 的 `controlledView` 是本人所控 Agent 在当前 revision 的 `AgentPerspectiveView`；DTO 包含 Arrival、行动、Observation、授权 Activity 进度、当前执行阶段与该 Agent 的私有状态。反应窗口只额外投影本人 stimulus，不暴露 basis、其他主体请求或 canonical binding。对话由这些持久事实投影，不保存独立聊天记录。
 
 Observer 契约为 `src/shared/world-observer-api.ts`。`selected.perspective` 与 Participant 使用同一投影器，包含所选 Agent 的精确自身状态、授权关系、主观认知、角色状态和完整主观历史；切换 Agent 不形成跨主体认知聚合。
 
@@ -54,6 +54,8 @@ composer 只负责发送、失败重试和可选的高级 detach，不提供单�
 Participant 底部由一个外框承载输入与运行状态。普通输入最小高度为 64px，多行编辑可增高；提交后锁定编辑高度，运行阶段与计时原位更新，返回输入时恢复自适应。提交请求、WorldRun 执行和本轮回复发布共同构成玩家看到的推演过程。`queued`、`running`、`pausing` 或提交请求处理中不挂载 composer，在同框显示当前进度与适用的暂停控制；执行到达输入边界后，只要会话还有未完成回复，外框与控制球仍显示推演中，框内注明正在生成并校验回应，不把第一段文字出现或世界状态提交当成整轮完成。回复全部发布后，`paused`、`budget-paused`、`preparation-invalidated` 和 `awaiting-decision` 允许重新提交自然语言行动；未提交的 reaction window 同时显示 stimulus、输入框和“保持当前行动”控制。正常等待输入没有额外决策提示。Observer 始终使用只读消息流，不挂载 composer。
 
 推演进度、输入锁定和刷新兜底使用同一个会话进度判断。执行与回复发布期间，即使实时事件连接未建立或完成通知丢失，实例读取也持续同步；每次读取结束后间隔两秒再尝试，失败后继续重试，成功时清除同步警告。仅当整轮回复完成并允许下一步行动时恢复输入，不要求刷新页面或重新发送行动。
+
+实例的 `progress` 是当前实际工作阶段与阶段开始时间的临时投影，整轮完成时为 null。WorldHost 将执行阶段钩子和正文生成、校验、修正的实际边界接入同一个进度组件，通过现有实例 SSE 通知读取。执行与正文并行时优先展示执行阶段，执行停止后展示本人尚未完成的正文工作；一段文字已发布不结束整轮。界面只原位更新阶段短句与真实耗时，不显示百分比、展开日志或定时轮播文案，不增加模型调用。仅阶段文案作为无障碍实时通知，秒数变化不重复播报。运行进度校验 run、generation 和源 revision，正文进度校验 Participant 与未完成 beat；退出工作时清除，读取和刷新不重启工作。进度不写入实例存档、不改变世界 revision、时间或认知，服务重启沿用运行与正文 outbox 的既有恢复行为。
 
 同一个 Participant intent 可以投影多条 committed Observation；每条显示对应世界时间、Activity 阶段和授权进度。`queued` 显示经过权限过滤的资源名称与队列位置，`ready` 显示资源已预留且会在下一次时间推进开始；两者都不暴露其他持有者的 canonical 身份。WorldRun 自动执行时 composer 切换为运行控制台并提供暂停；paused 后可以恢复，也可以发送普通自然语言行动取消或改变当前 Activity。自然等待只显示普通输入框，没有暂停说明、恢复按钮或单人输入倒计时。刷新与重复提交不会新增消息或重复行动；服务重启只将执行中的 run 转为 paused，已经等待输入的 run 保持原状态。状态和期限由[运行时契约](engine-runtime.md#worldrun-与暂停恢复)定义。
 

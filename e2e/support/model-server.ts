@@ -4,6 +4,7 @@ import type { DecisionQuestionV2 } from "../../src/engine/models/decision-v2";
 
 const port = Number(process.env.LIVINGWORLD_E2E_MODEL_PORT ?? 32128);
 const narrativeGates = new Map<string, { partial: boolean; wait: Promise<void>; release: () => void }>();
+const progressGates = new Map<string, { actionText: string; stages: Map<string, { wait: Promise<void>; release: () => void }> }>();
 
 async function readBody(request: import("node:http").IncomingMessage): Promise<Record<string, unknown>> {
   const chunks: Buffer[] = [];
@@ -73,6 +74,29 @@ const server = createServer(async (request, response) => {
       } else response.writeHead(405).end();
       return;
     }
+    if (request.url?.startsWith("/progress-gates/")) {
+      const [participantId, stage] = request.url.slice("/progress-gates/".length).split("/");
+      if (request.method === "POST" && !stage) {
+        const body = await readBody(request);
+        for (const gate of progressGates.get(participantId!)?.stages.values() ?? []) gate.release();
+        const stages = new Map(["interpreting", "resolving", "composing", "verifying"].map(name => {
+          let release!: () => void;
+          const wait = new Promise<void>(resolve => { release = resolve; });
+          return [name, { wait, release }];
+        }));
+        progressGates.set(participantId!, { actionText: String(body.actionText), stages });
+        response.writeHead(204).end();
+      } else if (request.method === "DELETE") {
+        const active = progressGates.get(participantId!);
+        if (stage) active?.stages.get(stage)?.release();
+        else {
+          for (const gate of active?.stages.values() ?? []) gate.release();
+          progressGates.delete(participantId!);
+        }
+        response.writeHead(204).end();
+      } else response.writeHead(405).end();
+      return;
+    }
     if (request.method !== "POST" || !["/chat/completions", "/systemone"].includes(request.url ?? "")) {
       response.writeHead(404).end();
       return;
@@ -84,6 +108,19 @@ const server = createServer(async (request, response) => {
     const reading = context.playerReading as { state: unknown; catalog: Record<string, Record<string, string>>;
       cognition: Record<string, DecisionQuestionV2> } | undefined;
     const requestText = ((native ? context : reading?.state ?? decision?.state) as { submittedAction?: { rawText?: string } } | undefined)?.submittedAction?.rawText ?? "";
+    const state = (native ? context : reading?.state ?? decision?.state) as {
+      actions?: Array<{ proposal: { rawText: string } }>; scene?: { participantId: string };
+    } | undefined;
+    const questions = (native ? body.questions : decision?.questions) as Record<string, unknown> | undefined;
+    const phase = reading ? "interpreting" : questions && Object.keys(questions).some(key => key.endsWith("_outcome"))
+      ? "resolving" : questions && Object.keys(questions).some(key => key.startsWith("paragraph"))
+        ? "verifying" : context.scene ? "composing" : null;
+    for (const [participantId, gate] of progressGates) {
+      const belongs = phase === "interpreting" ? requestText === gate.actionText : phase === "resolving"
+        ? state?.actions?.some(action => action.proposal.rawText === gate.actionText)
+        : ((context.scene ?? state?.scene) as { participantId?: string } | undefined)?.participantId === participantId;
+      if (phase && belongs) await gate.stages.get(phase)?.wait;
+    }
     if (requestText.includes("触发 E2E 流式失败") || requestText.includes("触发 E2E 快速失败")) {
       if (requestText.includes("触发 E2E 流式失败")) {
         await new Promise<void>((resolve) => setTimeout(resolve, 1_000));

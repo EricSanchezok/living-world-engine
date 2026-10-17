@@ -1,12 +1,27 @@
-import type { PublicInstanceDetail, PublicWorldRun } from "../../shared/world-api";
+import type { PublicInstanceDetail, PublicWorldProgress, PublicWorldRun } from "../../shared/world-api";
 
 /** The player-facing turn includes publication after the world reaches its next input boundary. */
 export function worldProgressPhase(
-  detail: Pick<PublicInstanceDetail, "run" | "conversation">,
+  detail: Pick<PublicInstanceDetail, "run" | "progress">,
 ): "executing" | "publishing" | null {
+  if (!detail.progress) return null;
   if (detail.run && ["queued", "running", "pausing"].includes(detail.run.status)) return "executing";
-  return detail.conversation?.turns.some(turn => turn.status === "running") ? "publishing" : null;
+  return "publishing";
 }
+
+export const worldProgressLabel: Record<PublicWorldProgress["stage"], string> = {
+  preparing: "正在准备这轮推演",
+  interpreting: "正在理解行动与情境",
+  resolving: "正在处理现场互动",
+  reacting: "正在处理后续反应",
+  settling: "正在结算世界变化",
+  checking: "正在校验世界变化",
+  saving: "正在保存本轮进展",
+  "reply-pending": "正在等待生成回应",
+  composing: "正在生成本轮回应",
+  verifying: "正在核对回应内容",
+  revising: "正在修正本轮回应",
+};
 
 export type RunStatusPresentation = {
   title: string;
@@ -24,19 +39,7 @@ export function isRunClockPaused(status: PublicWorldRun["status"]): boolean {
     status === "budget-paused" || status === "preparation-invalidated";
 }
 
-function activityDescription(run: PublicWorldRun): string | undefined {
-  const activity = run.activity;
-  if (!activity) return undefined;
-  if (activity.status === "queued") {
-    return `等待${activity.resourceNames.join("、") || "资源"} · 队列 ${activity.queuePosition ?? 1}`;
-  }
-  if (activity.status === "ready") return "资源已预留 · 等待推进";
-  const stage = activity.stage ?? "活动推进中";
-  if (!activity.progress) return stage;
-  return `${stage} · ${activity.progress.current.toFixed(2)} / ${activity.progress.target} ${activity.progress.unit}`;
-}
-
-export function runStatusPresentation(run: PublicWorldRun, hasParticipantAction = false): RunStatusPresentation {
+export function runStatusPresentation(run: PublicWorldRun): RunStatusPresentation {
   if (run.debug.mode === "step" && (run.status === "queued" || run.status === "running")) {
     return run.debug.stageKey ? {
       title: `阶段 ${run.debug.stageIndex + 1} / ${run.debug.stageCount} · ${run.debug.stageLabel ?? run.debug.stageKey}`,
@@ -49,10 +52,6 @@ export function runStatusPresentation(run: PublicWorldRun, hasParticipantAction 
   let title: string;
   let detail: string;
   switch (run.status) {
-    case "queued":
-      title = "正在准备世界变化";
-      detail = "正在整理眼前的变化。";
-      break;
     case "pausing":
       title = "即将暂停";
       detail = "正在保存当前进度。";
@@ -77,15 +76,11 @@ export function runStatusPresentation(run: PublicWorldRun, hasParticipantAction 
         ? "单步证据已失效，请开始新的推演"
         : "情境有了变化，可以重新尝试。";
       break;
-    case "running":
-      title = hasParticipantAction ? "正在处理你的行动" : "世界正在自主推进";
-      detail = hasParticipantAction ? "正在等待眼前的回应。" : "周围的人和事正在继续。";
-      break;
     default:
-      title = "世界正在推进";
-      detail = "准备下一次世界变化";
+      title = "世界正在推演";
+      detail = worldProgressLabel.preparing;
   }
-  return { title, detail: activityDescription(run) || detail };
+  return { title, detail };
 }
 
 export function runBoundaryLabel(run: PublicWorldRun): string | undefined {
