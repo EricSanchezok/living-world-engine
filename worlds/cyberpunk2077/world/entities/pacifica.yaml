@@ -1,0 +1,17 @@
+id: pacifica
+kind: district
+name: 太平洲
+description: 未完成的旅游建设与被忽视的居民社区；地方网络和外来武装交错。
+placement: night-city
+facts:
+  - id: pacifica-route-1
+    predicate: route
+    value:
+      kind: entity
+      entityId: night-city
+    description: 可通过城市交通与其他片区往来，必须考虑具体路线、交通和时间。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

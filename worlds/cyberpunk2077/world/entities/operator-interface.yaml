@@ -1,0 +1,27 @@
+id: operator-interface
+kind: cyberware
+name: 已安装的旧型工业有线接口
+description: 安装在左前臂，需物理接线、正确工业协议与目标权限；不能远程接管任意系统。
+placement: operator
+facts:
+  - id: operator-interface-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: operator
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - operator
+  - id: operator-interface-installed-2
+    predicate: installed
+    value:
+      kind: boolean
+      value: true
+    description: 有完整保留设备协议；摘除需医疗操作，不是随意挪动背包物品。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

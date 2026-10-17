@@ -1,0 +1,17 @@
+id: vik-clinic
+kind: place
+name: 维克多的诊所
+description: 与米丝蒂的店相通的义体诊所；诊疗、手术与器材需要专业安排。
+placement: little-china
+facts:
+  - id: vik-clinic-passage-1
+    predicate: passage
+    value:
+      kind: entity
+      entityId: misty-shop
+    description: 两处存在可通行的连接；门禁、距离和实际条件仍需满足。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

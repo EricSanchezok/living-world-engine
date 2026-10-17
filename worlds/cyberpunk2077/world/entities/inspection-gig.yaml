@@ -1,0 +1,56 @@
+id: inspection-gig
+kind: contract
+name: 仓库设备检测邀约
+description: 供当事人阅读与协商的业务文件，内容不对路人自动公开。
+placement: muamar-garage
+facts:
+  - id: inspection-gig-terms-1
+    predicate: terms
+    value:
+      kind: text
+      value: 客户从实际持有资金中预备 3000 欧元待协商，只先邀请诊断，详细设备与范围须现场核实。可以介绍合适技师，未验收不可视为成交收入。
+    description: 仓库设备检测邀约的terms记录。
+    access:
+      kind: agents
+      agentIds: &a1
+        - gig-client
+        - muamar
+  - id: inspection-gig-status-2
+    predicate: status
+    value:
+      kind: text
+      value: pending
+    description: 条款待当事人商议；未签约不产生付款或强制结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: inspection-gig-signed-3
+    predicate: signed
+    value:
+      kind: boolean
+      value: false
+    description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: inspection-gig-party-4
+    predicate: party
+    value:
+      kind: entity
+      entityId: gig-client
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: inspection-gig-party-5
+    predicate: party
+    value:
+      kind: entity
+      entityId: muamar
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

@@ -1,0 +1,40 @@
+id: heir-building
+kind: property
+name: 榆荫楼产权及经营标的
+description: 包含六间出租公寓、洗衣店和一间闲置工作室的旧楼；资产不是随身物品。
+placement: glen
+facts:
+  - id: heir-building-authorized-user-1
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: heir
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: &a1
+        - heir
+        - elena
+  - id: heir-building-authorized-user-2
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: elena
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-building-ownership-shares-3
+    predicate: ownership-shares
+    value:
+      kind: text
+      value: heir=50%; elena=50%
+    description: 现有产权份额，出售整楼或长期改变公共用途须双方同意。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+meters: []
+quantities: []
+ratings: []

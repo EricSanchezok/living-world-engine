@@ -1,0 +1,76 @@
+id: heir-repair-offer
+kind: contract
+name: 修缮与社区空间合作
+description: 供当事人阅读与协商的业务文件，内容不对路人自动公开。
+placement: heir-work
+facts:
+  - id: heir-repair-offer-terms-1
+    predicate: terms
+    value:
+      kind: text
+      value: 社区合作方愿以每月 4200 欧元收入及分期修缮换取工作室使用；先核验报价、分工与验收，再签约。首笔维修可单独处理。
+    description: 修缮与社区空间合作的terms记录。
+    access:
+      kind: agents
+      agentIds: &a1
+        - heir
+        - inez
+        - marco
+        - elena
+  - id: heir-repair-offer-status-2
+    predicate: status
+    value:
+      kind: text
+      value: pending
+    description: 条款待当事人商议；未签约不产生付款或强制结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-repair-offer-signed-3
+    predicate: signed
+    value:
+      kind: boolean
+      value: false
+    description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-repair-offer-party-4
+    predicate: party
+    value:
+      kind: entity
+      entityId: heir
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-repair-offer-party-5
+    predicate: party
+    value:
+      kind: entity
+      entityId: inez
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-repair-offer-party-6
+    predicate: party
+    value:
+      kind: entity
+      entityId: marco
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-repair-offer-party-7
+    predicate: party
+    value:
+      kind: entity
+      entityId: elena
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

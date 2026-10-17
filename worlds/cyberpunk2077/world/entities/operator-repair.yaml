@@ -1,0 +1,76 @@
+id: operator-repair
+kind: contract
+name: 社区旧水泵诊断委托
+description: 供当事人阅读与协商的业务文件，内容不对路人自动公开。
+placement: operator-work
+facts:
+  - id: operator-repair-terms-1
+    predicate: terms
+    value:
+      kind: text
+      value: 诊断费拟定 600 欧元，修复另报价；可以有偿维修、教别人维护、推荐替换或拒接，无预定成功结果。
+    description: 社区旧水泵诊断委托的terms记录。
+    access:
+      kind: agents
+      agentIds: &a1
+        - operator
+        - niko
+        - mara
+        - tessa
+  - id: operator-repair-status-2
+    predicate: status
+    value:
+      kind: text
+      value: pending
+    description: 条款待当事人商议；未签约不产生付款或强制结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: operator-repair-signed-3
+    predicate: signed
+    value:
+      kind: boolean
+      value: false
+    description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: operator-repair-party-4
+    predicate: party
+    value:
+      kind: entity
+      entityId: operator
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: operator-repair-party-5
+    predicate: party
+    value:
+      kind: entity
+      entityId: niko
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: operator-repair-party-6
+    predicate: party
+    value:
+      kind: entity
+      entityId: mara
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: operator-repair-party-7
+    predicate: party
+    value:
+      kind: entity
+      entityId: tessa
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

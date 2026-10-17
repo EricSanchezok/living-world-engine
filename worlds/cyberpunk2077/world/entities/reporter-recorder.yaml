@@ -1,0 +1,19 @@
+id: reporter-recorder
+kind: equipment
+name: 个人采访记录设备
+description: 可录制同意范围内的新采访，存储内容有实际来源。
+placement: reporter
+facts:
+  - id: reporter-recorder-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: reporter
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - reporter
+meters: []
+quantities: []
+ratings: []

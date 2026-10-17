@@ -1,0 +1,30 @@
+id: apprentice-spare
+kind: component
+name: 兼容手部接口备件
+description: 库存中仅有的一件旧款接口备件。
+placement: apprentice-work
+facts:
+  - id: apprentice-spare-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: lin
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - lin
+  - id: apprentice-spare-clinical-use-2
+    predicate: clinical-use
+    value:
+      kind: entity
+      entityId: apprentice
+    description: 导师允许在有患者同意及维修记录的适应范围内使用。
+    access:
+      kind: agents
+      agentIds:
+        - lin
+        - apprentice
+meters: []
+quantities: []
+ratings: []

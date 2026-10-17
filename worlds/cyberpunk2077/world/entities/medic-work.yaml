@@ -1,0 +1,25 @@
+id: medic-work
+kind: place
+name: 贝尔社区运动场
+description: 可通过街区道路到达的实际营业或工作场所；营业空间与私人住所分开。
+placement: wellsprings
+facts:
+  - id: medic-work-street-access-1
+    predicate: street-access
+    value:
+      kind: entity
+      entityId: wellsprings
+    description: 工作场所通过街区道路与城市相连。
+    access:
+      kind: public
+  - id: medic-work-current-scene-2
+    predicate: current-scene
+    value:
+      kind: text
+      value: 场边支架落下后，两位清醒的伤者坐在长椅上。莉娜正在安抚，伊德里斯关掉电源，马特奥请求先核对一人的服务凭证。私人急救包就在萨姆身边。
+    description: 贝尔社区运动场的current-scene记录。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

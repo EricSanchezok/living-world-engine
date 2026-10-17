@@ -1,0 +1,19 @@
+id: smasher-weapon
+kind: weapon
+name: 义体配套重型武器
+description: 供作战义体使用的重型武器；有弹药、射界和现场风险。
+placement: smasher-body
+facts:
+  - id: smasher-weapon-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: smasher
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - smasher
+meters: []
+quantities: []
+ratings: []

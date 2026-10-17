@@ -1,0 +1,32 @@
+id: apprentice-bench
+kind: equipment
+name: 诊所维护台
+description: 可做诊断、消毒和已培训的接口维护；不能自行替代复杂神经手术。
+placement: apprentice-work
+facts:
+  - id: apprentice-bench-authorized-user-1
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: apprentice
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: &a1
+        - apprentice
+        - lin
+  - id: apprentice-bench-authorized-user-2
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: lin
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources:
+  - definition_id: workstation
+    capacity: 1

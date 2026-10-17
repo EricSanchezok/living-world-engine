@@ -1,0 +1,25 @@
+id: armorer-work
+kind: place
+name: 奥尔蒂斯装备维修店
+description: 可通过街区道路到达的实际营业或工作场所；营业空间与私人住所分开。
+placement: rancho-coronado
+facts:
+  - id: armorer-work-street-access-1
+    predicate: street-access
+    value:
+      kind: entity
+      entityId: rancho-coronado
+    description: 工作场所通过街区道路与城市相连。
+    access:
+      kind: public
+  - id: armorer-work-current-scene-2
+    predicate: current-scene
+    value:
+      kind: text
+      value: 格兰特把装备箱放上维修台，提出朋友价。利奥指给师傅看尚未磨掉的流转编号，罗莎询问是否需要联系社区保安队查账。
+    description: 奥尔蒂斯装备维修店的current-scene记录。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

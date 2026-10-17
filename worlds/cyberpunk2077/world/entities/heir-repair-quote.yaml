@@ -1,0 +1,45 @@
+id: heir-repair-quote
+kind: document
+name: 800 欧元管道维修报价单
+description: 桌上的维修报价文件，列出拟议工程范围；不是已付款发票。
+placement: heir-work
+facts:
+  - id: heir-repair-quote-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: marco
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - marco
+  - id: heir-repair-quote-quoted-amount-2
+    predicate: quoted-amount
+    value:
+      kind: number
+      value: 800
+    description: 拟议总价为 800 欧元，尚待核对工人、范围与验收。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - marco
+        - elena
+        - inez
+  - id: heir-repair-quote-paid-3
+    predicate: paid
+    value:
+      kind: boolean
+      value: false
+    description: 无人付款或垫付，现不存在本单报销债务。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - marco
+        - elena
+        - inez
+meters: []
+quantities: []
+ratings: []

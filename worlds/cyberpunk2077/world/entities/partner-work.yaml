@@ -1,0 +1,25 @@
+id: partner-work
+kind: place
+name: 再启工坊生产线
+description: 可通过街区道路到达的实际营业或工作场所；营业空间与私人住所分开。
+placement: arroyo
+facts:
+  - id: partner-work-street-access-1
+    predicate: street-access
+    value:
+      kind: entity
+      entityId: arroyo
+    description: 工作场所通过街区道路与城市相连。
+    access:
+      kind: public
+  - id: partner-work-current-scene-2
+    predicate: current-scene
+    value:
+      kind: text
+      value: 第一批壳体摆在工作台上，低负荷记录合格而高速曲线异常。玛尔塔拿来工资表，欧文等着讨论验收范围，妮拉提出先看联锁日志。
+    description: 再启工坊生产线的current-scene记录。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

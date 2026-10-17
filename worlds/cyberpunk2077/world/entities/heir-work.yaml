@@ -1,0 +1,25 @@
+id: heir-work
+kind: place
+name: 榆荫楼一楼会客室
+description: 可通过街区道路到达的实际营业或工作场所；营业空间与私人住所分开。
+placement: heir-building
+facts:
+  - id: heir-work-street-access-1
+    predicate: street-access
+    value:
+      kind: entity
+      entityId: glen
+    description: 工作场所通过街区道路与城市相连。
+    access:
+      kind: public
+  - id: heir-work-current-scene-2
+    predicate: current-scene
+    value:
+      kind: text
+      value: 埃琳娜带来两份方案，马尔科把漏水照片与 800 欧元维修报价放在桌上，伊内兹等着解释社区合作的条款。大家尚未签字。
+    description: 榆荫楼一楼会客室的current-scene记录。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

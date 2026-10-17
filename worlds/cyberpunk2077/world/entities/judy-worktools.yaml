@@ -1,0 +1,19 @@
+id: judy-worktools
+kind: equipment
+name: 专业工作设备
+description: 与使用者职业对应的工具和接口，功能需要实际权限、材料和接触路径。
+placement: judy
+facts:
+  - id: judy-worktools-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: judy
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - judy
+meters: []
+quantities: []
+ratings: []

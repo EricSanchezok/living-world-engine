@@ -1,0 +1,179 @@
+id: gig-client
+kind: person
+name: 赛拉·森
+description: 需要工业检测帮助的小企业客户。
+placement: muamar-garage
+facts:
+  - id: gig-client-local-acquaintance-1
+    predicate: local-acquaintance
+    value:
+      kind: entity
+      entityId: muamar
+    description: 初次委托正在核验，尚无成交保证。
+    access:
+      kind: agents
+      agentIds:
+        - gig-client
+        - muamar
+meters:
+  - id: gig-client-vitality
+    definition_id: vitality
+    current: 30
+  - id: gig-client-strain
+    definition_id: strain
+    current: 0
+quantities:
+  - definition_id: eurodollar
+    amount: 5400
+  - definition_id: medical-supply
+    amount: 1
+ratings:
+  - id: gig-client-persuasion
+    definition_id: persuasion
+    value: 3
+presentation:
+  label: 赛拉·森
+  description: 需要工业检测帮助的小企业客户。
+agent:
+  id: gig-client
+  model_profiles:
+    decision: decision-jev
+    creation: creation-deepseek
+    fallback: decision-deepseek-long
+  character:
+    persona:
+      summary: 需要工业检测帮助的小企业客户。
+      voice: 根据现场信息与个人利益具体交谈。
+    traits:
+      - id: temperament
+        description: 需要工业检测帮助的小企业客户。
+        strength: 0.75
+    values:
+      - id: priority
+        description: 请可靠技师核对仓库设备故障，再按合同付款。
+        strength: 0.85
+    emotions: []
+    attitudes:
+      - id: toward-muamar
+        subject_id: known-muamar
+        description: 希望往来有明确边界。
+        intensity: 0.7
+    goals:
+      - id: current-purpose
+        description: 请可靠技师核对仓库设备故障，再按合同付款。
+        priority: 0.8
+        progress: 0
+        target_ids: []
+        motivated_by_ids:
+          - priority
+      - id: consider-inspection-gig
+        description: 就仓库设备检测邀约作出符合自身利益的决定；允许修改、拒绝或延期。
+        priority: 0.65
+        progress: 0
+        target_ids:
+          - known-inspection-gig
+        motivated_by_ids:
+          - priority
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 我
+        description: 需要工业检测帮助的小企业客户。
+        status: observed
+      - id: known-muamar-garage
+        name: 老船长的车库会客点
+        description: 车辆、委托和熟人消息在这里汇合。
+        status: observed
+      - id: known-muamar
+        name: 穆阿迈尔·雷耶斯
+        description: 初次委托正在核验，尚无成交保证。 希望往来有明确边界。
+        status: observed
+      - id: known-inspection-gig
+        name: 仓库设备检测邀约
+        description: 客户从实际持有资金中预备 3000 欧元待协商，只先邀请诊断，详细设备与范围须现场核实。可以介绍合适技师，未验收不可视为成交收入。
+        status: observed
+      - id: known-rancho-coronado
+        name: 科罗纳多农场
+        description: 我所在的科罗纳多农场及通向外侧的日常路径。
+        status: observed
+      - id: known-santo-domingo
+        name: 圣多明戈
+        description: 我所在的圣多明戈及通向外侧的日常路径。
+        status: observed
+      - id: known-night-city
+        name: 夜之城
+        description: 我所在的夜之城及通向外侧的日常路径。
+        status: observed
+    evidence:
+      - id: memory-1-evidence
+        kind: observation
+        description: 初次委托正在核验，尚无成交保证。 希望往来有明确边界。
+        sourceId: self
+        step: 0
+      - id: memory-2-evidence
+        kind: observation
+        description: 客户从实际持有资金中预备 3000 欧元待协商，只先邀请诊断，详细设备与范围须现场核实。可以介绍合适技师，未验收不可视为成交收入。
+        sourceId: self
+        step: 0
+      - id: memory-3-evidence
+        kind: observation
+        description: 我有 5400 欧元个人可用资金，其他账户须按各自约定使用。
+        sourceId: self
+        step: 0
+    claims:
+      - id: memory-1
+        subjectId: known-muamar
+        predicate: local-acquaintance
+        value:
+          kind: text
+          value: 初次委托正在核验，尚无成交保证。 希望往来有明确边界。
+        description: 初次委托正在核验，尚无成交保证。 希望往来有明确边界。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-1-evidence
+      - id: memory-2
+        subjectId: known-inspection-gig
+        predicate: terms
+        value:
+          kind: text
+          value: 客户从实际持有资金中预备 3000 欧元待协商，只先邀请诊断，详细设备与范围须现场核实。可以介绍合适技师，未验收不可视为成交收入。
+        description: 客户从实际持有资金中预备 3000 欧元待协商，只先邀请诊断，详细设备与范围须现场核实。可以介绍合适技师，未验收不可视为成交收入。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-2-evidence
+      - id: memory-3
+        subjectId: self
+        predicate: available-cash
+        value:
+          kind: text
+          value: 我有 5400 欧元个人可用资金，其他账户须按各自约定使用。
+        description: 我有 5400 欧元个人可用资金，其他账户须按各自约定使用。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-3-evidence
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - gig-client
+      - local_entity_id: known-muamar-garage
+        canonical_entity_ids:
+          - muamar-garage
+      - local_entity_id: known-muamar
+        canonical_entity_ids:
+          - muamar
+      - local_entity_id: known-inspection-gig
+        canonical_entity_ids:
+          - inspection-gig
+      - local_entity_id: known-rancho-coronado
+        canonical_entity_ids:
+          - rancho-coronado
+      - local_entity_id: known-santo-domingo
+        canonical_entity_ids:
+          - santo-domingo
+      - local_entity_id: known-night-city
+        canonical_entity_ids:
+          - night-city

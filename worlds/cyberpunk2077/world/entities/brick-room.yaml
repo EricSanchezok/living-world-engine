@@ -1,0 +1,17 @@
+id: brick-room
+kind: place
+name: 工厂内的封闭房间
+description: 从厂房进入的封闭空间，不能只知道名字就隔墙接触其中的人。
+placement: all-foods
+facts:
+  - id: brick-room-passage-1
+    predicate: passage
+    value:
+      kind: entity
+      entityId: all-foods
+    description: 两处存在可通行的连接；门禁、距离和实际条件仍需满足。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

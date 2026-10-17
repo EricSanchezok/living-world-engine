@@ -1,0 +1,66 @@
+id: fleet-reefer
+kind: vehicle
+name: 三号冷藏卡车
+description: 冷却阀待修，修复前不能保证低温货物；容量四箱。
+placement: fleet-work
+facts:
+  - id: fleet-reefer-authorized-user-1
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: fleet
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: &a1
+        - fleet
+        - raul
+        - jo
+  - id: fleet-reefer-authorized-user-2
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: raul
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: fleet-reefer-authorized-user-3
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: jo
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: fleet-reefer-ownership-shares-4
+    predicate: ownership-shares
+    value:
+      kind: text
+      value: fleet=40%; raul=35%; jo=25%
+    description: 车辆共有，米卡有正常业务调度权，出售或抵押须三方同意。
+    access:
+      kind: agents
+      agentIds:
+        - fleet
+        - raul
+        - jo
+  - id: fleet-reefer-cold-chain-ready-5
+    predicate: cold-chain-ready
+    value:
+      kind: boolean
+      value: false
+    description: 冷却阀待修，尚不能承担需要低温保证的货物。
+    access:
+      kind: agents
+      agentIds:
+        - fleet
+        - raul
+        - jo
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources:
+  - definition_id: vehicle-driver
+    capacity: 1

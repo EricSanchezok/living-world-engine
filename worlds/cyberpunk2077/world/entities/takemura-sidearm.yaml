@@ -1,0 +1,19 @@
+id: takemura-sidearm
+kind: weapon
+name: 常备动能武器
+description: 可用但弹药有限的常备动能武器，需要实际瞄准、射界与弹药。
+placement: takemura
+facts:
+  - id: takemura-sidearm-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: takemura
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - takemura
+meters: []
+quantities: []
+ratings: []

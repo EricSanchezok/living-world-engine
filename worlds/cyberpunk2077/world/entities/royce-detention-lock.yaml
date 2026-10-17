@@ -1,0 +1,27 @@
+id: royce-detention-lock
+kind: equipment
+name: 布里克囚室的拘禁装置
+description: 门禁与现场危险限制离开，解除须检查线路和实际控制点。
+placement: brick-room
+facts:
+  - id: royce-detention-lock-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: royce
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - royce
+  - id: royce-detention-lock-confines-2
+    predicate: confines
+    value:
+      kind: entity
+      entityId: brick
+    description: 现场的真实拘禁约束，不会只凭口头声称自由而消失。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []

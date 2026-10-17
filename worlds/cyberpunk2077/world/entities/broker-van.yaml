@@ -1,0 +1,19 @@
+id: broker-van
+kind: vehicle
+name: 按日租赁的运输厢车
+description: 租赁车辆，准许普通货运，不能转卖；燃油与检查照常发生。
+placement: broker-work
+facts:
+  - id: broker-van-authorized-user-1
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: broker
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds:
+        - broker
+meters: []
+quantities: []
+ratings: []

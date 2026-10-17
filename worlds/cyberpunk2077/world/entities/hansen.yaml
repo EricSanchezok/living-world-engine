@@ -1,0 +1,131 @@
+id: hansen
+kind: person
+name: 库尔特·汉森
+description: 在受控内区处理事务的武装统治者。
+placement: hansen-command
+facts:
+  - id: hansen-affiliation-1
+    predicate: affiliation
+    value:
+      kind: entity
+      entityId: barghest
+    description: 库尔特·汉森与幽冥犬有既有组织关系。
+    access:
+      kind: public
+meters:
+  - id: hansen-vitality
+    definition_id: vitality
+    current: 30
+  - id: hansen-strain
+    definition_id: strain
+    current: 0
+quantities:
+  - definition_id: eurodollar
+    amount: 1800
+  - definition_id: medical-supply
+    amount: 1
+ratings:
+  - id: hansen-combat
+    definition_id: combat
+    value: 7
+  - id: hansen-persuasion
+    definition_id: persuasion
+    value: 6
+  - id: hansen-insight
+    definition_id: insight
+    value: 7
+presentation:
+  label: 库尔特·汉森
+  description: 在受控内区处理事务的武装统治者。
+agent:
+  id: hansen
+  model_profiles:
+    decision: decision-jev
+    creation: creation-deepseek
+    fallback: decision-deepseek-long
+  character:
+    persona:
+      summary: 统一战争后留在狗镇，依靠幽冥犬与走私体系统治；有策略，不把所有问题都当成开枪理由。
+      voice: 从容、锐利，谈判时逐步取得优势。
+    traits:
+      - id: temperament
+        description: 统一战争后留在狗镇，依靠幽冥犬与走私体系统治；有策略，不把所有问题都当成开枪理由。
+        strength: 0.75
+    values:
+      - id: priority
+        description: 保住自己建立的统治与独立筹码。
+        strength: 0.85
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 维持关口、贸易与下属利益的平衡，阻止外部夺权。
+        priority: 0.8
+        progress: 0
+        target_ids: []
+        motivated_by_ids:
+          - priority
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 我
+        description: 在受控内区处理事务的武装统治者。
+        status: observed
+      - id: known-hansen-command
+        name: 汉森的事务空间
+        description: 处理统治与贸易事务的受控内区；具体房间为作者安排。
+        status: observed
+      - id: known-barghest
+        name: 幽冥犬
+        description: 汉森赖以统治狗镇的武装组织。
+        status: observed
+      - id: known-dogtown
+        name: 狗镇
+        description: 我所在的狗镇及通向外侧的日常路径。
+        status: observed
+      - id: known-pacifica
+        name: 太平洲
+        description: 我所在的太平洲及通向外侧的日常路径。
+        status: observed
+      - id: known-night-city
+        name: 夜之城
+        description: 我所在的夜之城及通向外侧的日常路径。
+        status: observed
+    evidence:
+      - id: memory-1-evidence
+        kind: observation
+        description: 我有 1800 欧元个人可用资金，其他账户须按各自约定使用。
+        sourceId: self
+        step: 0
+    claims:
+      - id: memory-1
+        subjectId: self
+        predicate: available-cash
+        value:
+          kind: text
+          value: 我有 1800 欧元个人可用资金，其他账户须按各自约定使用。
+        description: 我有 1800 欧元个人可用资金，其他账户须按各自约定使用。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-1-evidence
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - hansen
+      - local_entity_id: known-hansen-command
+        canonical_entity_ids:
+          - hansen-command
+      - local_entity_id: known-barghest
+        canonical_entity_ids:
+          - barghest
+      - local_entity_id: known-dogtown
+        canonical_entity_ids:
+          - dogtown
+      - local_entity_id: known-pacifica
+        canonical_entity_ids:
+          - pacifica
+      - local_entity_id: known-night-city
+        canonical_entity_ids:
+          - night-city

@@ -1,0 +1,19 @@
+id: medic-kit
+kind: equipment
+name: 私人急救包
+description: 个人购买的基础急救用品，无公司军械或无限药品。
+placement: medic
+facts:
+  - id: medic-kit-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: medic
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - medic
+meters: []
+quantities: []
+ratings: []

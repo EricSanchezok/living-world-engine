@@ -1,0 +1,33 @@
+id: lead-terminal
+kind: terminal
+name: 项目测试终端
+description: 仅连入棱桥内部测试网，不能直接控制客户正式系统。
+placement: lead-work
+facts:
+  - id: lead-terminal-authorized-user-1
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: lead
+    description: 岗位授予测试访问权。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+  - id: lead-terminal-revocation-effective-2
+    predicate: revocation-effective
+    value:
+      kind: boolean
+      value: false
+    description: 测试节点尚不能可靠撤销缓存凭证；完成修复并验证后才成立。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+meters: []
+quantities: []
+ratings: []

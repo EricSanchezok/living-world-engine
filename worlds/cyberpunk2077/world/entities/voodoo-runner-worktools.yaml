@@ -1,0 +1,19 @@
+id: voodoo-runner-worktools
+kind: equipment
+name: 专业工作设备
+description: 与使用者职业对应的工具和接口，功能需要实际权限、材料和接触路径。
+placement: voodoo-runner
+facts:
+  - id: voodoo-runner-worktools-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: voodoo-runner
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - voodoo-runner
+meters: []
+quantities: []
+ratings: []

@@ -1,0 +1,19 @@
+id: operator-spares
+kind: stock
+name: 泰莎的旧型供电板库存
+description: 两块待检测供电板；需核对兼容与状态。
+placement: operator-work
+facts:
+  - id: operator-spares-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: tessa
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - tessa
+meters: []
+quantities: []
+ratings: []

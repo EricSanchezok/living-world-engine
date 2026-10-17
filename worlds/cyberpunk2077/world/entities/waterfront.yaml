@@ -1,0 +1,17 @@
+id: waterfront
+kind: neighborhood
+name: 荒坂滨水区
+description: 企业港口与装卸设施，进入内部需要相应授权。
+placement: watson
+facts:
+  - id: waterfront-restricted-access-1
+    predicate: restricted-access
+    value:
+      kind: boolean
+      value: true
+    description: 内区需要对应身份、许可或经过实际裁决的进入方式。知道地点名称不等于取得通行权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

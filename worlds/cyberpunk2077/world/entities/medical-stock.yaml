@@ -1,0 +1,27 @@
+id: medical-stock
+kind: stock
+name: 供应商基础医材
+description: 适合基础处理的库存，需要真实购买或取得使用同意。
+placement: wellsprings
+facts:
+  - id: medical-stock-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: clinic-supplier
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - clinic-supplier
+  - id: medical-stock-asking-price-2
+    predicate: asking-price
+    value:
+      kind: number
+      value: 90
+    description: 一份基础医材当前报价 90 欧元。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

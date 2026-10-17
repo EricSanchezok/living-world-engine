@@ -1,0 +1,19 @@
+id: river-sidearm
+kind: weapon
+name: 常备动能武器
+description: 可用但弹药有限的常备动能武器，需要实际瞄准、射界与弹药。
+placement: river
+facts:
+  - id: river-sidearm-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: river
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - river
+meters: []
+quantities: []
+ratings: []

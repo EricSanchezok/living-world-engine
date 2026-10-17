@@ -1,0 +1,248 @@
+id: grant
+kind: person
+name: 格兰特·黑尔
+description: 六街帮某小队的旧队友。
+placement: armorer-work
+facts:
+  - id: grant-affiliation-1
+    predicate: affiliation
+    value:
+      kind: entity
+      entityId: sixth-street
+    description: 这名原创小队成员属于六街帮。
+    access:
+      kind: public
+meters:
+  - id: grant-vitality
+    definition_id: vitality
+    current: 30
+  - id: grant-strain
+    definition_id: strain
+    current: 0
+quantities:
+  - definition_id: eurodollar
+    amount: 1200
+  - definition_id: medical-supply
+    amount: 1
+  - definition_id: ammunition
+    amount: 30
+ratings:
+  - id: grant-combat
+    definition_id: combat
+    value: 4
+  - id: grant-streetwise
+    definition_id: streetwise
+    value: 4
+presentation:
+  label: 格兰特·黑尔
+  description: 六街帮某小队的旧队友。
+agent:
+  id: grant
+  model_profiles:
+    decision: decision-jev
+    creation: creation-deepseek
+    fallback: decision-deepseek-long
+  character:
+    persona:
+      summary: 六街帮某小队的旧队友。 尊重技术，仍希望朋友照顾报价。
+      voice: 交谈具体，解释自己的条件，有自己的判断。
+    traits:
+      - id: temperament
+        description: 六街帮某小队的旧队友。 尊重技术，仍希望朋友照顾报价。
+        strength: 0.75
+    values:
+      - id: priority
+        description: 把带来的装备恢复可用，避免公开丢面子。
+        strength: 0.85
+    emotions: []
+    attitudes:
+      - id: toward-armorer
+        subject_id: known-armorer
+        description: 尊重技术，仍希望朋友照顾报价。
+        intensity: 0.7
+    goals:
+      - id: current-purpose
+        description: 把带来的装备恢复可用，避免公开丢面子。
+        priority: 0.8
+        progress: 0
+        target_ids: []
+        motivated_by_ids:
+          - priority
+      - id: consider-armorer-repair
+        description: 就待检器材翻修报价作出符合自身利益的决定；允许修改、拒绝或延期。
+        priority: 0.65
+        progress: 0
+        target_ids:
+          - known-armorer-repair
+        motivated_by_ids:
+          - priority
+    commitments:
+      - id: promise-1
+        description: 退出协议仍有效，阿什拒绝此单不构成重新加入小队。
+        priority: 0.75
+        subject_ids:
+          - known-armorer
+  belief:
+    local_entities:
+      - id: self
+        name: 我
+        description: 六街帮某小队的旧队友。
+        status: observed
+      - id: known-armorer-work
+        name: 奥尔蒂斯装备维修店
+        description: 可通过街区道路到达的实际营业或工作场所；营业空间与私人住所分开。
+        status: observed
+      - id: known-armorer
+        name: O07 阿什·奥尔蒂斯｜退下来的军械管理员
+        description: 退出协议允许阿什经营普通维修，不得强迫重新参战；双方仍可自愿接单。 尊重技术，仍希望朋友照顾报价。
+        status: observed
+      - id: known-armorer-crate
+        name: 格兰特带来的待检装备箱
+        description: 持有该物的所有权。
+        status: observed
+      - id: known-armorer-repair
+        name: 待检器材翻修报价
+        description: 建议先核验编号与所有权，再报价；可以只出检测报告、退货、协商归还或正常维修。
+        status: observed
+      - id: known-grant-sidearm
+        name: 常备动能武器
+        description: 持有该物的所有权。
+        status: observed
+      - id: known-rancho-coronado
+        name: 科罗纳多农场
+        description: 我所在的科罗纳多农场及通向外侧的日常路径。
+        status: observed
+      - id: known-santo-domingo
+        name: 圣多明戈
+        description: 我所在的圣多明戈及通向外侧的日常路径。
+        status: observed
+      - id: known-night-city
+        name: 夜之城
+        description: 我所在的夜之城及通向外侧的日常路径。
+        status: observed
+    evidence:
+      - id: memory-1-evidence
+        kind: observation
+        description: 退出协议允许阿什经营普通维修，不得强迫重新参战；双方仍可自愿接单。 尊重技术，仍希望朋友照顾报价。
+        sourceId: self
+        step: 0
+      - id: memory-2-evidence
+        kind: observation
+        description: 持有该物的所有权。
+        sourceId: self
+        step: 0
+      - id: memory-3-evidence
+        kind: observation
+        description: 建议先核验编号与所有权，再报价；可以只出检测报告、退货、协商归还或正常维修。
+        sourceId: self
+        step: 0
+      - id: memory-4-evidence
+        kind: observation
+        description: 格兰特把装备箱放上维修台，提出朋友价。利奥指给师傅看尚未磨掉的流转编号，罗莎询问是否需要联系社区保安队查账。
+        sourceId: self
+        step: 0
+      - id: memory-5-evidence
+        kind: observation
+        description: 持有该物的所有权。
+        sourceId: self
+        step: 0
+      - id: memory-6-evidence
+        kind: observation
+        description: 我有 1200 欧元个人可用资金，其他账户须按各自约定使用。
+        sourceId: self
+        step: 0
+    claims:
+      - id: memory-1
+        subjectId: known-armorer
+        predicate: established-contact
+        value:
+          kind: text
+          value: 退出协议允许阿什经营普通维修，不得强迫重新参战；双方仍可自愿接单。 尊重技术，仍希望朋友照顾报价。
+        description: 退出协议允许阿什经营普通维修，不得强迫重新参战；双方仍可自愿接单。 尊重技术，仍希望朋友照顾报价。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-1-evidence
+      - id: memory-2
+        subjectId: known-armorer-crate
+        predicate: ownership
+        value:
+          kind: text
+          value: 持有该物的所有权。
+        description: 持有该物的所有权。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-2-evidence
+      - id: memory-3
+        subjectId: known-armorer-repair
+        predicate: terms
+        value:
+          kind: text
+          value: 建议先核验编号与所有权，再报价；可以只出检测报告、退货、协商归还或正常维修。
+        description: 建议先核验编号与所有权，再报价；可以只出检测报告、退货、协商归还或正常维修。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-3-evidence
+      - id: memory-4
+        subjectId: known-armorer-work
+        predicate: opening-context
+        value:
+          kind: text
+          value: 格兰特把装备箱放上维修台，提出朋友价。利奥指给师傅看尚未磨掉的流转编号，罗莎询问是否需要联系社区保安队查账。
+        description: 格兰特把装备箱放上维修台，提出朋友价。利奥指给师傅看尚未磨掉的流转编号，罗莎询问是否需要联系社区保安队查账。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-4-evidence
+      - id: memory-5
+        subjectId: known-grant-sidearm
+        predicate: ownership
+        value:
+          kind: text
+          value: 持有该物的所有权。
+        description: 持有该物的所有权。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-5-evidence
+      - id: memory-6
+        subjectId: self
+        predicate: available-cash
+        value:
+          kind: text
+          value: 我有 1200 欧元个人可用资金，其他账户须按各自约定使用。
+        description: 我有 1200 欧元个人可用资金，其他账户须按各自约定使用。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-6-evidence
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - grant
+      - local_entity_id: known-armorer-work
+        canonical_entity_ids:
+          - armorer-work
+      - local_entity_id: known-armorer
+        canonical_entity_ids:
+          - armorer
+      - local_entity_id: known-armorer-crate
+        canonical_entity_ids:
+          - armorer-crate
+      - local_entity_id: known-armorer-repair
+        canonical_entity_ids:
+          - armorer-repair
+      - local_entity_id: known-grant-sidearm
+        canonical_entity_ids:
+          - grant-sidearm
+      - local_entity_id: known-rancho-coronado
+        canonical_entity_ids:
+          - rancho-coronado
+      - local_entity_id: known-santo-domingo
+        canonical_entity_ids:
+          - santo-domingo
+      - local_entity_id: known-night-city
+        canonical_entity_ids:
+          - night-city

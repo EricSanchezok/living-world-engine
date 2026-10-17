@@ -1,0 +1,17 @@
+id: konpeki-suite
+kind: place
+name: 赖宣租用的酒店套房
+description: 安保与私人事务交汇的套房；物品位置与保密不能由外人全知。
+placement: konpeki
+facts:
+  - id: konpeki-suite-restricted-access-1
+    predicate: restricted-access
+    value:
+      kind: boolean
+      value: true
+    description: 内区需要对应身份、许可或经过实际裁决的进入方式。知道地点名称不等于取得通行权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

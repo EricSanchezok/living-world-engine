@@ -1,0 +1,17 @@
+id: kabuki-market
+kind: place
+name: 歌舞伎市场
+description: 零件摊、食物、日用品与灰色交易；同一街市并非所有商户都做非法生意。
+placement: kabuki
+facts:
+  - id: kabuki-market-passage-1
+    predicate: passage
+    value:
+      kind: entity
+      entityId: lizzies
+    description: 两处存在可通行的连接；门禁、距离和实际条件仍需满足。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

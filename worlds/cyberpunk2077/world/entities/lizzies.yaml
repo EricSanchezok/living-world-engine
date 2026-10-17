@@ -1,0 +1,17 @@
+id: lizzies
+kind: place
+name: 丽姿酒吧
+description: 莫克斯经营的夜场与超梦生意；后台和工作间不是公开区域。
+placement: kabuki
+facts:
+  - id: lizzies-passage-1
+    predicate: passage
+    value:
+      kind: entity
+      entityId: kabuki-market
+    description: 两处存在可通行的连接；门禁、距离和实际条件仍需满足。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

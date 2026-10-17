@@ -1,0 +1,21 @@
+id: lead-report
+kind: data-file
+name: 权限缓存测试报告
+description: 封装的测试记录，需要项目人员打开阅读。
+placement: lead-work
+facts:
+  - id: lead-report-test-findings-1
+    predicate: test-findings
+    value:
+      kind: text
+      value: 撤销的临时用户仍能在隔离测试节点重连一次；未证实影响生产系统。
+    description: 这是可重复的本地缺陷，不是全球后门。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - pavel
+        - mina
+meters: []
+quantities: []
+ratings: []

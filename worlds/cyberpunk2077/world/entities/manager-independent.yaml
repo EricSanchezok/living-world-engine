@@ -1,0 +1,76 @@
+id: manager-independent
+kind: contract
+name: 独立小场演出选项
+description: 供当事人阅读与协商的业务文件，内容不对路人自动公开。
+placement: manager-work
+facts:
+  - id: manager-independent-terms-1
+    predicate: terms
+    value:
+      kind: text
+      value: 报价 3600 欧元，无删歌条件，场地较小；须商议档期和器材，不能与同一时段另一演出同时完成。
+    description: 独立小场演出选项的terms记录。
+    access:
+      kind: agents
+      agentIds: &a1
+        - manager
+        - rin
+        - bex
+        - paulo
+  - id: manager-independent-status-2
+    predicate: status
+    value:
+      kind: text
+      value: pending
+    description: 条款待当事人商议；未签约不产生付款或强制结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: manager-independent-signed-3
+    predicate: signed
+    value:
+      kind: boolean
+      value: false
+    description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: manager-independent-party-4
+    predicate: party
+    value:
+      kind: entity
+      entityId: manager
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: manager-independent-party-5
+    predicate: party
+    value:
+      kind: entity
+      entityId: rin
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: manager-independent-party-6
+    predicate: party
+    value:
+      kind: entity
+      entityId: bex
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: manager-independent-party-7
+    predicate: party
+    value:
+      kind: entity
+      entityId: paulo
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

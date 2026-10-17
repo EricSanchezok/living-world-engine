@@ -1,0 +1,66 @@
+id: armorer-repair
+kind: contract
+name: 待检器材翻修报价
+description: 供当事人阅读与协商的业务文件，内容不对路人自动公开。
+placement: armorer-work
+facts:
+  - id: armorer-repair-terms-1
+    predicate: terms
+    value:
+      kind: text
+      value: 建议先核验编号与所有权，再报价；可以只出检测报告、退货、协商归还或正常维修。
+    description: 待检器材翻修报价的terms记录。
+    access:
+      kind: agents
+      agentIds: &a1
+        - armorer
+        - grant
+        - leo
+  - id: armorer-repair-status-2
+    predicate: status
+    value:
+      kind: text
+      value: pending
+    description: 条款待当事人商议；未签约不产生付款或强制结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: armorer-repair-signed-3
+    predicate: signed
+    value:
+      kind: boolean
+      value: false
+    description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: armorer-repair-party-4
+    predicate: party
+    value:
+      kind: entity
+      entityId: armorer
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: armorer-repair-party-5
+    predicate: party
+    value:
+      kind: entity
+      entityId: grant
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: armorer-repair-party-6
+    predicate: party
+    value:
+      kind: entity
+      entityId: leo
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

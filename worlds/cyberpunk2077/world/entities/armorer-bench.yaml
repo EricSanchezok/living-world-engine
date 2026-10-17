@@ -1,0 +1,32 @@
+id: armorer-bench
+kind: equipment
+name: 私人维修台
+description: 有拆检工具与测量装置，需要实际零件和时间完成翻修。
+placement: armorer-work
+facts:
+  - id: armorer-bench-authorized-user-1
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: armorer
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: &a1
+        - armorer
+        - leo
+  - id: armorer-bench-authorized-user-2
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: leo
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources:
+  - definition_id: workstation
+    capacity: 1

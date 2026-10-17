@@ -1,0 +1,19 @@
+id: apprentice-tools
+kind: equipment
+name: 私人维护工具盒
+description: 绝缘探针、扭力工具和诊断线，适合基础维护。
+placement: apprentice
+facts:
+  - id: apprentice-tools-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: apprentice
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - apprentice
+meters: []
+quantities: []
+ratings: []

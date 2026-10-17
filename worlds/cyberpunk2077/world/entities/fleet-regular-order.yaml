@@ -1,0 +1,76 @@
+id: fleet-regular-order
+kind: contract
+name: 长期客户普通货运单
+description: 供当事人阅读与协商的业务文件，内容不对路人自动公开。
+placement: fleet-work
+facts:
+  - id: fleet-regular-order-terms-1
+    predicate: terms
+    value:
+      kind: text
+      value: 拟运普通工业货六箱，需平板车与厢式车配合，报酬 5200 欧元；仍可调整装车日或委托其他承运人。
+    description: 长期客户普通货运单的terms记录。
+    access:
+      kind: agents
+      agentIds: &a1
+        - fleet
+        - mei
+        - jo
+        - raul
+  - id: fleet-regular-order-status-2
+    predicate: status
+    value:
+      kind: text
+      value: pending
+    description: 条款待当事人商议；未签约不产生付款或强制结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: fleet-regular-order-signed-3
+    predicate: signed
+    value:
+      kind: boolean
+      value: false
+    description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: fleet-regular-order-party-4
+    predicate: party
+    value:
+      kind: entity
+      entityId: fleet
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: fleet-regular-order-party-5
+    predicate: party
+    value:
+      kind: entity
+      entityId: mei
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: fleet-regular-order-party-6
+    predicate: party
+    value:
+      kind: entity
+      entityId: jo
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: fleet-regular-order-party-7
+    predicate: party
+    value:
+      kind: entity
+      entityId: raul
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

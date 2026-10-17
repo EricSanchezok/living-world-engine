@@ -1,0 +1,42 @@
+id: editor-deck
+kind: equipment
+name: 双轨超梦编辑台
+description: 可查看授权录制素材、标记损坏区间并重剪，不能查看未记录的过去。
+placement: editor-work
+facts:
+  - id: editor-deck-authorized-user-1
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: editor
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: &a1
+        - editor
+        - sora
+  - id: editor-deck-authorized-user-2
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: sora
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: editor-deck-owner-3
+    predicate: owner
+    value:
+      kind: entity
+      entityId: editor
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - editor
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources:
+  - definition_id: workstation
+    capacity: 1

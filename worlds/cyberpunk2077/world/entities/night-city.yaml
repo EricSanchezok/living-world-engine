@@ -1,0 +1,73 @@
+id: night-city
+kind: region
+name: 夜之城
+description: 2077 年的沿海都市。公司高楼、居民街区、制造业、夜生活和私人武力相互依赖。时间切片在 V 与杰克共同生活半年之后、《The Rescue》之前。
+placement: null
+facts:
+  - id: night-city-epoch-1
+    predicate: epoch
+    value:
+      kind: text
+      value: 2077-pre-rescue
+    description: 过去固定，劫案与此后的任务结果尚未发生。原作没有确定的这一刻位置采用作者安排，不强制复现后续剧情。
+    access:
+      kind: public
+  - id: night-city-route-2
+    predicate: route
+    value:
+      kind: entity
+      entityId: watson
+    description: 城市道路与运输连接该片区，不代表瞬移。
+    access:
+      kind: public
+  - id: night-city-route-3
+    predicate: route
+    value:
+      kind: entity
+      entityId: westbrook
+    description: 城市道路与运输连接该片区，不代表瞬移。
+    access:
+      kind: public
+  - id: night-city-route-4
+    predicate: route
+    value:
+      kind: entity
+      entityId: city-center
+    description: 城市道路与运输连接该片区，不代表瞬移。
+    access:
+      kind: public
+  - id: night-city-route-5
+    predicate: route
+    value:
+      kind: entity
+      entityId: heywood
+    description: 城市道路与运输连接该片区，不代表瞬移。
+    access:
+      kind: public
+  - id: night-city-route-6
+    predicate: route
+    value:
+      kind: entity
+      entityId: santo-domingo
+    description: 城市道路与运输连接该片区，不代表瞬移。
+    access:
+      kind: public
+  - id: night-city-route-7
+    predicate: route
+    value:
+      kind: entity
+      entityId: pacifica
+    description: 城市道路与运输连接该片区，不代表瞬移。
+    access:
+      kind: public
+  - id: night-city-route-8
+    predicate: route
+    value:
+      kind: entity
+      entityId: badlands
+    description: 城市道路与运输连接该片区，不代表瞬移。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

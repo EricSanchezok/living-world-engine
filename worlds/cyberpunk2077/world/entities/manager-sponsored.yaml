@@ -1,0 +1,76 @@
+id: manager-sponsored
+kind: contract
+name: 赞助演出草案
+description: 供当事人阅读与协商的业务文件，内容不对路人自动公开。
+placement: manager-work
+facts:
+  - id: manager-sponsored-terms-1
+    predicate: terms
+    value:
+      kind: text
+      value: 报价 9000 欧元，要求替换一首歌并增加品牌露出；未接受，可谈只加露出或拒绝删歌。
+    description: 赞助演出草案的terms记录。
+    access:
+      kind: agents
+      agentIds: &a1
+        - manager
+        - rin
+        - bex
+        - paulo
+  - id: manager-sponsored-status-2
+    predicate: status
+    value:
+      kind: text
+      value: pending
+    description: 条款待当事人商议；未签约不产生付款或强制结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: manager-sponsored-signed-3
+    predicate: signed
+    value:
+      kind: boolean
+      value: false
+    description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: manager-sponsored-party-4
+    predicate: party
+    value:
+      kind: entity
+      entityId: manager
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: manager-sponsored-party-5
+    predicate: party
+    value:
+      kind: entity
+      entityId: rin
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: manager-sponsored-party-6
+    predicate: party
+    value:
+      kind: entity
+      entityId: bex
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: manager-sponsored-party-7
+    predicate: party
+    value:
+      kind: entity
+      entityId: paulo
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

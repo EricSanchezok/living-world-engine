@@ -1,0 +1,17 @@
+id: heir-vacant
+kind: place
+name: 榆荫楼闲置工作室
+description: 可改作办公室、诊疗合作点或排练间，现为空置。
+placement: heir-building
+facts:
+  - id: heir-vacant-property-part-1
+    predicate: property-part
+    value:
+      kind: entity
+      entityId: heir-building
+    description: 房间属于共同产权标的，租用和改造需按约协商。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

@@ -1,0 +1,27 @@
+id: food-stock
+kind: stock
+name: 摊位日用补给
+description: 可购买的食品与饮水，价格须与摊主商议。
+placement: kabuki-market
+facts:
+  - id: food-stock-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: food-vendor
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - food-vendor
+  - id: food-stock-asking-price-2
+    predicate: asking-price
+    value:
+      kind: number
+      value: 25
+    description: 一份日用补给当前报价 25 欧元，可谈批量与交换条件。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

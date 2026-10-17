@@ -1,0 +1,25 @@
+id: reporter-work
+kind: place
+name: 街区镜报编辑部
+description: 可通过街区道路到达的实际营业或工作场所；营业空间与私人住所分开。
+placement: downtown
+facts:
+  - id: reporter-work-street-access-1
+    predicate: street-access
+    value:
+      kind: entity
+      entityId: downtown
+    description: 工作场所通过街区道路与城市相连。
+    access:
+      kind: public
+  - id: reporter-work-current-scene-2
+    predicate: current-scene
+    value:
+      kind: text
+      value: 莱拉在编辑桌上标出两段矛盾证言。费利克斯带来一份维修日志副本，阿玛拉建议回现场核实；截稿将近，仍可以修改报道范围。
+    description: 街区镜报编辑部的current-scene记录。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

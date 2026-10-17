@@ -1,0 +1,19 @@
+id: operator-manual
+kind: document
+name: 旧接口手册与保留协议
+description: 记载 L-4 工业协议、维护步骤与设备归属，未记载所有厂商系统。
+placement: operator-work
+facts:
+  - id: operator-manual-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: operator
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - operator
+meters: []
+quantities: []
+ratings: []

@@ -1,0 +1,22 @@
+id: broker-batch
+kind: cargo
+name: 实际到仓的四箱 A3 控制器
+description: 包装标签为 A3，货单写 A2；升级型号是否适配需询问买家。
+placement: broker-work
+facts:
+  - id: broker-batch-buyer-acceptance-1
+    predicate: buyer-acceptance
+    value:
+      kind: boolean
+      value: false
+    description: 买家尚未接受 A3 型号代替 A2；需真实协商与检验。
+    access:
+      kind: agents
+      agentIds:
+        - broker
+        - vera
+        - jun
+        - emil
+meters: []
+quantities: []
+ratings: []

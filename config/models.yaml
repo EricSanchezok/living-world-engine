@@ -171,6 +171,16 @@ profiles:
     max_output_tokens: 32768
     max_input_bytes: 4000000
     inference: { thinking: enabled, effort: low }
+  decision-deepseek-long:
+    account_id: deepseek-api
+    selector: { kind: exact, model_id: deepseek-flash }
+    description: 多人物世界裁决的显式长输出回退
+    allowed_roles: [decision]
+    response_transport: deepseek-sse-v1
+    request_timeout_ms: 180000
+    max_output_tokens: 32768
+    max_input_bytes: 4000000
+    inference: { thinking: enabled, effort: low }
   truth-deepseek:
     account_id: deepseek-api
     selector: { kind: exact, model_id: deepseek-flash }

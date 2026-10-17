@@ -1,0 +1,27 @@
+id: parts-stock
+kind: stock
+name: 商户通用配件
+description: 可按型号交易的普通零件，不保证满足所有特殊设备。
+placement: kabuki-market
+facts:
+  - id: parts-stock-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: parts-merchant
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - parts-merchant
+  - id: parts-stock-asking-price-2
+    predicate: asking-price
+    value:
+      kind: number
+      value: 120
+    description: 一单位通用组件当前报价 120 欧元，特殊型号另询。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

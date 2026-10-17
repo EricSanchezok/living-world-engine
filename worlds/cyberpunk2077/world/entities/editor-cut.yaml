@@ -1,0 +1,56 @@
+id: editor-cut
+kind: data-file
+name: 待审核的放映剪辑版
+description: 与原始素材分开的工作剪辑，可以修改公开版本并保留原始资料。
+placement: editor-work
+facts:
+  - id: editor-cut-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: editor
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - editor
+  - id: editor-cut-derived-from-2
+    predicate: derived-from
+    value:
+      kind: entity
+      entityId: editor-footage
+    description: 由已保管素材制作的工作版，原始素材不会随剪辑自动改变。
+    access:
+      kind: agents
+      agentIds:
+        - editor
+        - sora
+        - tomas
+  - id: editor-cut-contains-address-clue-3
+    predicate: contains-address-clue
+    value:
+      kind: boolean
+      value: true
+    description: 当前工作版仍包含第 17 段地址线索；重剪可以去除，但不得声称原始录制从未存在。
+    access:
+      kind: agents
+      agentIds:
+        - editor
+        - sora
+        - tomas
+  - id: editor-cut-cleared-for-screening-4
+    predicate: cleared-for-screening
+    value:
+      kind: boolean
+      value: false
+    description: 目前尚未得到最终放映授权，须真实核对授权范围。
+    access:
+      kind: agents
+      agentIds:
+        - editor
+        - sora
+        - tomas
+        - celia
+meters: []
+quantities: []
+ratings: []

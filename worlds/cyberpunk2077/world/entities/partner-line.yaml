@@ -1,0 +1,58 @@
+id: partner-line
+kind: equipment
+name: 承租的旧工业生产线
+description: 租期十二个月，能生产普通壳体与连接件；租赁方保留所有权，合伙人有约定使用权。
+placement: partner-work
+facts:
+  - id: partner-line-authorized-user-1
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: partner
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: &a1
+        - partner
+        - marta
+  - id: partner-line-authorized-user-2
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: marta
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: partner-line-test-result-3
+    predicate: test-result
+    value:
+      kind: text
+      value: 低负荷试产合格；提高送料速度时传感器反馈不稳定，需检查而不能绕过联锁。
+    description: 可通过诊断、降速或更换组件处理的现实缺陷。
+    access:
+      kind: agents
+      agentIds:
+        - partner
+        - marta
+        - owen
+        - nela
+  - id: partner-line-safe-full-rate-4
+    predicate: safe-full-rate
+    value:
+      kind: boolean
+      value: false
+    description: 高速送料的联锁与传感反馈尚未通过验证，低负荷试产记录不等于全速合格。
+    access:
+      kind: agents
+      agentIds:
+        - partner
+        - marta
+        - owen
+        - nela
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources:
+  - definition_id: workstation
+    capacity: 1

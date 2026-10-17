@@ -1,0 +1,43 @@
+id: armorer-crate
+kind: cargo
+name: 格兰特带来的待检装备箱
+description: 三件可维修的护具与部件，外侧还能看到原有流转编号。
+placement: armorer-work
+facts:
+  - id: armorer-crate-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: grant
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - grant
+  - id: armorer-crate-provenance-mark-2
+    predicate: provenance-mark
+    value:
+      kind: text
+      value: 旧编号与社区保安队登记格式相符，但单凭格式尚不能认定盗窃。
+    description: 利奥发现的线索可进一步核验。
+    access:
+      kind: agents
+      agentIds:
+        - armorer
+        - leo
+        - grant
+  - id: armorer-crate-provenance-checked-3
+    predicate: provenance-checked
+    value:
+      kind: boolean
+      value: false
+    description: 维修方尚未独立核对现有所有权与历史流转；疑问不等于已证实盗窃。
+    access:
+      kind: agents
+      agentIds:
+        - armorer
+        - grant
+        - leo
+meters: []
+quantities: []
+ratings: []

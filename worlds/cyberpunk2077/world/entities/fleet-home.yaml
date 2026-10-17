@@ -1,0 +1,27 @@
+id: fleet-home
+kind: place
+name: 梅萨车队营地住房
+description: 有床铺、洗漱设施和可锁储物柜的长期住所。访客需要住户允许。
+placement: badlands
+facts:
+  - id: fleet-home-resident-1
+    predicate: resident
+    value:
+      kind: entity
+      entityId: fleet
+    description: 这位住户拥有稳定居住权，不等于拥有整栋楼。
+    access:
+      kind: agents
+      agentIds:
+        - fleet
+  - id: fleet-home-street-access-2
+    predicate: street-access
+    value:
+      kind: entity
+      entityId: badlands
+    description: 住所与所在街区之间有正常出入口。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

@@ -1,0 +1,76 @@
+id: reporter-publication
+kind: contract
+name: 事故调查稿编辑约定
+description: 供当事人阅读与协商的业务文件，内容不对路人自动公开。
+placement: reporter-work
+facts:
+  - id: reporter-publication-terms-1
+    predicate: terms
+    value:
+      kind: text
+      value: 事实核验后决定公开范围；可以先发确认部分、延后、寻求另一证人或不发表。消息源姓名须遵守约定。
+    description: 事故调查稿编辑约定的terms记录。
+    access:
+      kind: agents
+      agentIds: &a1
+        - reporter
+        - leila
+        - felix
+        - amara
+  - id: reporter-publication-status-2
+    predicate: status
+    value:
+      kind: text
+      value: pending
+    description: 条款待当事人商议；未签约不产生付款或强制结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: reporter-publication-signed-3
+    predicate: signed
+    value:
+      kind: boolean
+      value: false
+    description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: reporter-publication-party-4
+    predicate: party
+    value:
+      kind: entity
+      entityId: reporter
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: reporter-publication-party-5
+    predicate: party
+    value:
+      kind: entity
+      entityId: leila
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: reporter-publication-party-6
+    predicate: party
+    value:
+      kind: entity
+      entityId: felix
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: reporter-publication-party-7
+    predicate: party
+    value:
+      kind: entity
+      entityId: amara
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

@@ -1,0 +1,67 @@
+id: heir-lease-offer
+kind: contract
+name: 五年包租要约
+description: 供当事人阅读与协商的业务文件，内容不对路人自动公开。
+placement: heir-work
+facts:
+  - id: heir-lease-offer-terms-1
+    predicate: terms
+    value:
+      kind: text
+      value: 外部运营方提出为期五年、每月 7000 欧元的包租，要求完整使用闲置房及到期合法调整租约。尚未签字、无预付款；可要求现有租客保护条款。报价期限是五年，7000 是月租金额，不是租期。
+    description: 五年包租要约的terms记录。
+    access:
+      kind: agents
+      agentIds: &a1
+        - heir
+        - elena
+  - id: heir-lease-offer-status-2
+    predicate: status
+    value:
+      kind: text
+      value: pending
+    description: 条款待当事人商议；未签约不产生付款或强制结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-lease-offer-signed-3
+    predicate: signed
+    value:
+      kind: boolean
+      value: false
+    description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-lease-offer-party-4
+    predicate: party
+    value:
+      kind: entity
+      entityId: heir
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-lease-offer-party-5
+    predicate: party
+    value:
+      kind: entity
+      entityId: elena
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-lease-offer-term-years-6
+    predicate: term-years
+    value:
+      kind: number
+      value: 5
+    description: 当前要约的租期为五年，变更须实际提出并协商。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+meters: []
+quantities: []
+ratings: []

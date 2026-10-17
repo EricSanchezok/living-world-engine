@@ -1,0 +1,76 @@
+id: fleet-community-order
+kind: contract
+name: 社区水处理设备委托
+description: 供当事人阅读与协商的业务文件，内容不对路人自动公开。
+placement: fleet-work
+facts:
+  - id: fleet-community-order-terms-1
+    predicate: terms
+    value:
+      kind: text
+      value: 四箱水处理设备拟用平板车运输，报酬 2800 欧元，需与普通订单协调同一车辆；可拼货或分期交付，未发运不算完成。
+    description: 社区水处理设备委托的terms记录。
+    access:
+      kind: agents
+      agentIds: &a1
+        - fleet
+        - mei
+        - jo
+        - raul
+  - id: fleet-community-order-status-2
+    predicate: status
+    value:
+      kind: text
+      value: pending
+    description: 条款待当事人商议；未签约不产生付款或强制结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: fleet-community-order-signed-3
+    predicate: signed
+    value:
+      kind: boolean
+      value: false
+    description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: fleet-community-order-party-4
+    predicate: party
+    value:
+      kind: entity
+      entityId: fleet
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: fleet-community-order-party-5
+    predicate: party
+    value:
+      kind: entity
+      entityId: mei
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: fleet-community-order-party-6
+    predicate: party
+    value:
+      kind: entity
+      entityId: jo
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: fleet-community-order-party-7
+    predicate: party
+    value:
+      kind: entity
+      entityId: raul
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

@@ -1,0 +1,19 @@
+id: armorer-pistol
+kind: weapon
+name: 私人保养过的动能手枪
+description: 普通动能手枪，弹药有限，不具备传奇装备特效。
+placement: armorer
+facts:
+  - id: armorer-pistol-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: armorer
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - armorer
+meters: []
+quantities: []
+ratings: []

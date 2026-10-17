@@ -1,0 +1,27 @@
+id: broker-permit
+kind: document
+name: 本批普通设备货运许可
+description: 仅对应本车、本批普通工业设备及当次核验，无永久免检或军用物资豁免。
+placement: broker-work
+facts:
+  - id: broker-permit-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: broker
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - broker
+  - id: broker-permit-scope-2
+    predicate: scope
+    value:
+      kind: text
+      value: 本次四箱 A2 工业控制器，关口仍有权复核实际货物。
+    description: 许可不能用于不同型号而不申报更新。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

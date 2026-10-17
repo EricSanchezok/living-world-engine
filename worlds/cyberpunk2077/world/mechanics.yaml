@@ -1,0 +1,545 @@
+rule_packages:
+  - id: core-resolution
+    version: 3.0.0
+    config: {}
+meters:
+  - id: vitality
+    name: 可行动生命状态
+    min: 0
+    max: 30
+    thresholds:
+      - id: incapacitated
+        when:
+          operator: lte
+          value: 0
+        effects:
+          - kind: set_lifecycle
+            lifecycle: retired
+  - id: strain
+    name: 身体与精神负荷
+    min: 0
+    max: 100
+    thresholds: []
+quantities:
+  - id: eurodollar
+    name: 欧元
+    unit: €$
+    production_law_ids: []
+    consumption_law_ids: []
+  - id: provisions
+    name: 日用补给
+    unit: 份
+    production_law_ids:
+      - supply-production
+    consumption_law_ids:
+      - supply-use
+  - id: medical-supply
+    name: 基础医材
+    unit: 份
+    production_law_ids:
+      - supply-production
+    consumption_law_ids:
+      - supply-use
+  - id: components
+    name: 通用组件
+    unit: 单位
+    production_law_ids:
+      - supply-production
+    consumption_law_ids:
+      - supply-use
+  - id: fuel
+    name: 燃料
+    unit: 单位
+    production_law_ids:
+      - supply-production
+    consumption_law_ids:
+      - supply-use
+  - id: ammunition
+    name: 弹药
+    unit: 发
+    production_law_ids:
+      - supply-production
+    consumption_law_ids:
+      - supply-use
+  - id: cargo-unit
+    name: 标准装箱货物
+    unit: 箱
+    production_law_ids:
+      - supply-production
+    consumption_law_ids:
+      - supply-use
+ratings:
+  - id: combat
+    name: 作战
+    min: -3
+    max: 10
+  - id: stealth
+    name: 隐蔽
+    min: -3
+    max: 10
+  - id: streetwise
+    name: 街头经验
+    min: -3
+    max: 10
+  - id: persuasion
+    name: 交涉
+    min: -3
+    max: 10
+  - id: insight
+    name: 判断
+    min: -3
+    max: 10
+  - id: investigation
+    name: 调查
+    min: -3
+    max: 10
+  - id: craft
+    name: 制作与维修
+    min: -3
+    max: 10
+  - id: engineering
+    name: 工程技术
+    min: -3
+    max: 10
+  - id: medicine
+    name: 医疗
+    min: -3
+    max: 10
+  - id: driving
+    name: 驾驶
+    min: -3
+    max: 10
+  - id: netrunning
+    name: 网络技术
+    min: -3
+    max: 10
+  - id: braindance
+    name: 超梦编辑
+    min: -3
+    max: 10
+  - id: performance
+    name: 创作与表演
+    min: -3
+    max: 10
+impact_profiles:
+  - id: harm
+    name: 伤损
+    meter_definition_id: vitality
+    direction: decrease
+    amounts:
+      none: 0
+      minor: 2
+      standard: 5
+      major: 10
+      decisive: 30
+  - id: recovery
+    name: 恢复
+    meter_definition_id: vitality
+    direction: increase
+    amounts:
+      none: 0
+      minor: 2
+      standard: 5
+      major: 10
+      decisive: 30
+  - id: overload
+    name: 负荷增加
+    meter_definition_id: strain
+    direction: increase
+    amounts:
+      none: 0
+      minor: 2
+      standard: 5
+      major: 10
+      decisive: 30
+  - id: restoration
+    name: 负荷缓解
+    meter_definition_id: strain
+    direction: decrease
+    amounts:
+      none: 0
+      minor: 2
+      standard: 5
+      major: 10
+      decisive: 30
+duration_profiles:
+  - id: brief
+    name: 一次作用
+    kind: uses
+    uses: 1
+  - id: one-hour
+    name: 一小时
+    kind: elapsed
+    seconds: 3600
+  - id: ongoing
+    name: 持续至解除
+    kind: until_cleared
+activity_resources:
+  - id: foreground
+    name: 专注行动
+    capacity: 1
+shared_activity_resources:
+  - id: workstation
+    name: 专业工位
+    unit: 席
+    default_claim_amount: 1
+    allow_explicit_amount: false
+    contention: queue
+    paused_retention: release
+  - id: vehicle-driver
+    name: 驾驶位置
+    unit: 人
+    default_claim_amount: 1
+    allow_explicit_amount: false
+    contention: reject
+    paused_retention: retain
+temporal_profiles:
+  - id: instant
+    name: 瞬间动作
+    kind: fixed
+    duration_seconds: 1
+    checkpoint_seconds: 1
+    selection:
+      semantic_tags:
+        - instantaneous
+      evidence_requirement: none
+    interruptible: true
+    resource_claims:
+      - resource_id: foreground
+        amount: 1
+  - id: brief-action
+    name: 简短动作
+    kind: fixed
+    duration_seconds: 10
+    checkpoint_seconds: 10
+    selection:
+      semantic_tags:
+        - short
+      evidence_requirement: none
+    interruptible: true
+    resource_claims:
+      - resource_id: foreground
+        amount: 1
+  - id: conversation
+    name: 一段对话
+    kind: fixed
+    duration_seconds: 30
+    checkpoint_seconds: 30
+    selection:
+      semantic_tags:
+        - conversation
+      evidence_requirement: none
+    interruptible: true
+    resource_claims:
+      - resource_id: foreground
+        amount: 1
+  - id: inspection
+    name: 短时检查
+    kind: fixed
+    duration_seconds: 60
+    checkpoint_seconds: 60
+    selection:
+      semantic_tags:
+        - inspection
+      evidence_requirement: none
+    interruptible: true
+    resource_claims:
+      - resource_id: foreground
+        amount: 1
+  - id: explicit-duration
+    name: 明确时长
+    kind: fixed
+    duration_seconds: 300
+    checkpoint_seconds: 300
+    selection:
+      semantic_tags:
+        - explicit-duration
+      evidence_requirement: explicit_duration
+    interruptible: true
+    resource_claims:
+      - resource_id: foreground
+        amount: 1
+  - id: road-travel
+    name: 按距离道路步行
+    kind: rate
+    unit: km
+    unit_aliases:
+      - 公里
+      - 千米
+      - kilometers
+    units_per_period: 4
+    period_seconds: 3600
+    checkpoint_units: 1
+    interruptible: true
+    resource_claims:
+      - resource_id: foreground
+        amount: 1
+    selection:
+      semantic_tags:
+        - travel
+      evidence_requirement: explicit_profile_quantity
+  - id: city-trip
+    name: 按路况行程
+    kind: conditional
+    check_every_seconds: 300
+    interruptible: true
+    resource_claims:
+      - resource_id: foreground
+        amount: 1
+    selection:
+      semantic_tags:
+        - travel
+      evidence_requirement: none
+  - id: wait-until
+    name: 等待约定条件
+    kind: conditional
+    check_every_seconds: 300
+    interruptible: true
+    resource_claims:
+      - resource_id: foreground
+        amount: 1
+    selection:
+      semantic_tags:
+        - conditional-wait
+      evidence_requirement: none
+  - id: professional-work
+    name: 持续专业工作
+    kind: goal
+    check_every_seconds: 300
+    interruptible: true
+    resource_claims:
+      - resource_id: foreground
+        amount: 1
+    selection:
+      semantic_tags:
+        - repair
+        - treatment
+        - editing
+      evidence_requirement: none
+  - id: watch
+    name: 持续观察与守候
+    kind: ongoing
+    checkpoint_seconds: 300
+    interruptible: true
+    resource_claims:
+      - resource_id: foreground
+        amount: 1
+    selection:
+      semantic_tags:
+        - open-ended
+        - reconnaissance
+      evidence_requirement: none
+temporal_profile_coverage:
+  required_semantic_tags:
+    - instantaneous
+    - short
+    - conversation
+    - inspection
+    - explicit-duration
+    - travel
+    - conditional-wait
+    - repair
+    - treatment
+    - editing
+    - open-ended
+    - reconnaissance
+temporal_calibrations:
+  - id: speech-time
+    situation: 询问维修报价并听取对方意见。
+    profile_id: conversation
+    explanation: 按完整话语估计，不能把长谈压成一秒。
+  - id: repair-time
+    situation: 诊断并检修老型接口。
+    profile_id: professional-work
+    explanation: 工位、材料、同意和步骤都满足后才可能完成；不是一秒改好。
+  - id: travel-time
+    situation: 开车从海伍德到狗镇。
+    profile_id: city-trip
+    explanation: 使用具体道路、检查站、燃料与路况，不能因两地都属城市就瞬移。
+  - id: wait-time
+    situation: 在工坊等待半小时。
+    profile_id: explicit-duration
+    explanation: 明确时长仍可被先到的事件与人物行动打断。
+world_timers:
+  - id: heir-appointment
+    description: 继承了半栋楼的人：约定时间到，请当事人根据实际进展再协商。
+    due_at_seconds: 7200
+    wake_agent_ids:
+      - elena
+      - marco
+      - inez
+    law_id: appointments
+  - id: lead-appointment
+    description: 公司里仍有明天：约定时间到，请当事人根据实际进展再协商。
+    due_at_seconds: 14400
+    wake_agent_ids:
+      - mina
+      - pavel
+      - ada
+    law_id: appointments
+  - id: editor-appointment
+    description: 午夜台剪辑师：约定时间到，请当事人根据实际进展再协商。
+    due_at_seconds: 10800
+    wake_agent_ids:
+      - sora
+      - celia
+      - tomas
+    law_id: appointments
+  - id: apprentice-appointment
+    description: 义体诊所的第二把钥匙：约定时间到，请当事人根据实际进展再协商。
+    due_at_seconds: 3600
+    wake_agent_ids:
+      - lin
+      - bo
+      - ana
+    law_id: appointments
+  - id: fleet-appointment
+    description: 有三辆卡车的车队接班人：约定时间到，请当事人根据实际进展再协商。
+    due_at_seconds: 7200
+    wake_agent_ids:
+      - raul
+      - jo
+      - mei
+    law_id: appointments
+  - id: medic-appointment
+    description: 创伤小组的休假救护员：约定时间到，请当事人根据实际进展再协商。
+    due_at_seconds: 1800
+    wake_agent_ids:
+      - lena
+      - idris
+      - mateo
+    law_id: appointments
+  - id: armorer-appointment
+    description: 退下来的军械管理员：约定时间到，请当事人根据实际进展再协商。
+    due_at_seconds: 5400
+    wake_agent_ids:
+      - grant
+      - rosa
+      - leo
+    law_id: appointments
+  - id: partner-appointment
+    description: 停工厂的技术合伙人：约定时间到，请当事人根据实际进展再协商。
+    due_at_seconds: 10800
+    wake_agent_ids:
+      - marta
+      - owen
+      - nela
+    law_id: appointments
+  - id: broker-appointment
+    description: 狗镇的双边运输经纪：约定时间到，请当事人根据实际进展再协商。
+    due_at_seconds: 7200
+    wake_agent_ids:
+      - vera
+      - emil
+      - jun
+    law_id: appointments
+  - id: manager-appointment
+    description: 乐队走红前的经纪人：约定时间到，请当事人根据实际进展再协商。
+    due_at_seconds: 14400
+    wake_agent_ids:
+      - rin
+      - bex
+      - paulo
+    law_id: appointments
+  - id: reporter-appointment
+    description: 有署名权的调查记者：约定时间到，请当事人根据实际进展再协商。
+    due_at_seconds: 10800
+    wake_agent_ids:
+      - leila
+      - felix
+      - amara
+    law_id: appointments
+  - id: operator-appointment
+    description: 退役试验义体操作员：约定时间到，请当事人根据实际进展再协商。
+    due_at_seconds: 7200
+    wake_agent_ids:
+      - niko
+      - mara
+      - tessa
+    law_id: appointments
+condition_profiles:
+  - id: unstable-interface
+    name: 接口接触不稳
+    stacking_key: interface
+    default_duration_profile_id: ongoing
+    recovery: 检查、确认适配并实际维修后解除。
+  - id: stabilized
+    name: 伤势已初步稳定
+    stacking_key: stabilized
+    default_duration_profile_id: one-hour
+    recovery: 根据复查与后续治疗决定，不代表所有损伤痊愈。
+entity_mechanics_profiles: []
+random_distributions: []
+adjudication_calibrations:
+  - id: own-payment
+    situation: 有足够私人现金、收款人在场且同意的付款。
+    difficulty: automatic
+    risk: safe
+    effect: standard
+    explanation: 实际同额转账；不需要虚构失败概率，也不能凭空造钱。
+  - id: company-theft
+    situation: 要求把公司项目全部预算当私人财富。
+    difficulty: blocked
+    risk: risky
+    effect: none
+    explanation: 职位授权不支持该动作；可另外尝试有后果的盗用或谈合法分配。
+  - id: joint-sale
+    situation: 未征得共同产权人同意就出售整楼。
+    difficulty: blocked
+    risk: risky
+    effect: none
+    explanation: 个人只有一半产权；洽谈份额转让与说服共同人是另一些可行方向。
+  - id: old-interface
+    situation: 具备接线与诊断授权后读取兼容控制柜日志。
+    difficulty: easy
+    risk: safe
+    effect: standard
+    explanation: 特殊接口在明确范围内提供真实优势；不扩张成任意网络控制。
+  - id: bd-repair
+    situation: 修复仍有部分信号的旧超梦音轨。
+    difficulty: challenging
+    risk: safe
+    effect: standard
+    explanation: 技能和设备允许恢复可支持的内容，缺失信息仍可保持未知。
+  - id: medical-scope
+    situation: 学徒独自尝试复杂神经手术。
+    difficulty: hard
+    risk: dire
+    effect: minor
+    explanation: 工具与实际训练构成限制，应允许求援、转诊或拒绝。
+  - id: heavy-armor
+    situation: 普通手枪从正面射击重锤重型胸甲。
+    difficulty: hard
+    risk: dire
+    effect: minor
+    explanation: 装甲、火力、射界与对手反应决定结果，不能套用普通人中弹效果。
+  - id: sealed-relic
+    situation: 路过酒店大堂就认出套房保密载体的全部内容。
+    difficulty: blocked
+    risk: safe
+    effect: none
+    explanation: 缺乏观察、身份和访问路径，不向旁人泄露隐藏知识。
+  - id: checkpoint
+    situation: 持有本批许可但实际型号不符的车队申请通行。
+    difficulty: challenging
+    risk: risky
+    effect: minor
+    explanation: 须更新申报或协商检验；熟识文员不等于自动放行。
+  - id: investigate
+    situation: 比对两份矛盾证词与时间戳。
+    difficulty: challenging
+    risk: safe
+    effect: standard
+    explanation: 能发现支持或矛盾点，不因此直接知道完整责任链。
+  - id: leave-opening
+    situation: 角色拒绝开场合同，回家或去别处寻找工作。
+    difficulty: automatic
+    risk: safe
+    effect: standard
+    explanation: 已有生活、资产和自由仍成立；有关人物可以有自己的反应。
+  - id: future-story
+    situation: 因为攻略如此安排就让专机在此刻坠落。
+    difficulty: blocked
+    risk: safe
+    effect: none
+    explanation: 没有本次实际条件，不触发章节式固定结果。

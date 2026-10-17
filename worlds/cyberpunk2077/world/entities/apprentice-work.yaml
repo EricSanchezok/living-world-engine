@@ -1,0 +1,25 @@
+id: apprentice-work
+kind: place
+name: 雷耶斯独立义体诊所
+description: 可通过街区道路到达的实际营业或工作场所；营业空间与私人住所分开。
+placement: little-china
+facts:
+  - id: apprentice-work-street-access-1
+    predicate: street-access
+    value:
+      kind: entity
+      entityId: little-china
+    description: 工作场所通过街区道路与城市相连。
+    access:
+      kind: public
+  - id: apprentice-work-current-scene-2
+    predicate: current-scene
+    value:
+      kind: text
+      value: 安娜把工作路线单放在台边，手指的接口接触不稳。林医生正准备外出，博说明仓库最快送货时间；现有兼容备件只有一个。
+    description: 雷耶斯独立义体诊所的current-scene记录。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

@@ -1,0 +1,19 @@
+id: t-bug-worktools
+kind: equipment
+name: 专业工作设备
+description: 与使用者职业对应的工具和接口，功能需要实际权限、材料和接触路径。
+placement: t-bug
+facts:
+  - id: t-bug-worktools-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: t-bug
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - t-bug
+meters: []
+quantities: []
+ratings: []

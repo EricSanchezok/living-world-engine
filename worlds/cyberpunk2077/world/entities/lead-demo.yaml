@@ -1,0 +1,66 @@
+id: lead-demo
+kind: contract
+name: 客户试点交付草案
+description: 供当事人阅读与协商的业务文件，内容不对路人自动公开。
+placement: lead-work
+facts:
+  - id: lead-demo-terms-1
+    predicate: terms
+    value:
+      kind: text
+      value: 明日上午演示；可商议隔离试点或延期。未验收不能记为已收入，项目预算不等于个人存款。
+    description: 客户试点交付草案的terms记录。
+    access:
+      kind: agents
+      agentIds: &a1
+        - lead
+        - mina
+        - pavel
+  - id: lead-demo-status-2
+    predicate: status
+    value:
+      kind: text
+      value: pending
+    description: 条款待当事人商议；未签约不产生付款或强制结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: lead-demo-signed-3
+    predicate: signed
+    value:
+      kind: boolean
+      value: false
+    description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: lead-demo-party-4
+    predicate: party
+    value:
+      kind: entity
+      entityId: lead
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: lead-demo-party-5
+    predicate: party
+    value:
+      kind: entity
+      entityId: mina
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: lead-demo-party-6
+    predicate: party
+    value:
+      kind: entity
+      entityId: pavel
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

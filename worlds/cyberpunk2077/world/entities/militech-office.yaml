@@ -1,0 +1,17 @@
+id: militech-office
+kind: place
+name: 军用科技地区办公区
+description: 办公室、安保与调查工作分区；部门之间并不共享全部信息。
+placement: corpo-plaza
+facts:
+  - id: militech-office-restricted-access-1
+    predicate: restricted-access
+    value:
+      kind: boolean
+      value: true
+    description: 内区需要对应身份、许可或经过实际裁决的进入方式。知道地点名称不等于取得通行权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

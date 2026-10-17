@@ -148,3 +148,4 @@ An optional adjacent `Class:` line uses `architecture`, `process`, `testing`, `f
 - [0240 — Native Direct events and instance journal](0240-native-direct-events-and-instance-journal.md)
 
 - [0243 — Grouped perspective reading with auxiliary relationships](0243-grouped-perspective-reading.md)
+- [0245 — Authored world lives through Agent takeover](0245-authored-world-lives-through-agent-takeover.md)

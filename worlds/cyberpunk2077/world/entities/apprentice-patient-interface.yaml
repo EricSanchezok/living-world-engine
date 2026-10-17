@@ -1,0 +1,39 @@
+id: apprentice-patient-interface
+kind: cyberware
+name: 安娜正在使用的损坏接口
+description: 安装在安娜手部，时断时续；不能像背包物品一样直接取走。
+placement: ana
+facts:
+  - id: apprentice-patient-interface-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: ana
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - ana
+  - id: apprentice-patient-interface-installed-2
+    predicate: installed
+    value:
+      kind: boolean
+      value: true
+    description: 拆装须取得患者同意并完成医疗操作。
+    access:
+      kind: public
+  - id: apprentice-patient-interface-operational-3
+    predicate: operational
+    value:
+      kind: boolean
+      value: false
+    description: 安娜的手部接口当前接触不稳，实际检修通过后才能恢复可靠使用。
+    access:
+      kind: agents
+      agentIds:
+        - apprentice
+        - ana
+        - lin
+meters: []
+quantities: []
+ratings: []

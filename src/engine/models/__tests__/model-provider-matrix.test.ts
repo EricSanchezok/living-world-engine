@@ -220,6 +220,7 @@ describe("provider account protocol matrix", () => {
       "agent-deepseek",
       "creation-deepseek",
       "decision-deepseek",
+      "decision-deepseek-long",
       "truth-deepseek",
     ]);
     for (const [id, profile] of deepSeekProfiles) {
@@ -227,11 +228,16 @@ describe("provider account protocol matrix", () => {
         kind: "exact",
         model_id: "deepseek-flash",
       });
-      const semantic = ["creation-deepseek", "decision-deepseek"].includes(id);
+      const semantic = ["creation-deepseek", "decision-deepseek", "decision-deepseek-long"].includes(id);
       expect(profile.inference.thinking).toBe(semantic ? "enabled" : "disabled");
       expect(profile.inference.effort).toBe(semantic ? "low" : "auto");
       expect(profile.response_transport).toBe("deepseek-sse-v1");
     }
+    expect(catalog.profile("decision-deepseek-long")).toMatchObject({
+      allowed_roles: ["decision"],
+      max_output_tokens: 32_768,
+    });
+    expect(catalog.profile("decision-deepseek").max_output_tokens).toBe(8_192);
   });
 
   it("keeps vendor inference mapping inside independent dialect plugins", async () => {

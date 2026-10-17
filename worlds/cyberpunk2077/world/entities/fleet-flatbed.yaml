@@ -1,0 +1,54 @@
+id: fleet-flatbed
+kind: vehicle
+name: 一号平板卡车
+description: 状态良好，适运大型设备；货台容量八个标准货箱。
+placement: fleet-work
+facts:
+  - id: fleet-flatbed-authorized-user-1
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: fleet
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: &a1
+        - fleet
+        - raul
+        - jo
+  - id: fleet-flatbed-authorized-user-2
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: raul
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: fleet-flatbed-authorized-user-3
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: jo
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: fleet-flatbed-ownership-shares-4
+    predicate: ownership-shares
+    value:
+      kind: text
+      value: fleet=40%; raul=35%; jo=25%
+    description: 车辆共有，米卡有正常业务调度权，出售或抵押须三方同意。
+    access:
+      kind: agents
+      agentIds:
+        - fleet
+        - raul
+        - jo
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources:
+  - definition_id: vehicle-driver
+    capacity: 1

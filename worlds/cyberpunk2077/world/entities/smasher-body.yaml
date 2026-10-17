@@ -1,0 +1,35 @@
+id: smasher-body
+kind: cyberware
+name: 重锤的全身作战义体
+description: 重型装甲与作战义体，能承受普通人难以承受的伤害；不免疫所有武器，也不能隔城攻击。
+placement: smasher
+facts:
+  - id: smasher-body-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: smasher
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - smasher
+  - id: smasher-body-installed-2
+    predicate: installed
+    value:
+      kind: boolean
+      value: true
+    description: 身体的一部分；拆卸必须满足真实伤损或专业程序。
+    access:
+      kind: public
+  - id: smasher-body-armor-3
+    predicate: armor
+    value:
+      kind: text
+      value: heavy
+    description: 轻型武器效果须依据装甲和命中部位裁定，不能只比较所有人的生命上限。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

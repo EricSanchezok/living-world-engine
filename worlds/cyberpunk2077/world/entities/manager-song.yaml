@@ -1,0 +1,19 @@
+id: manager-song
+kind: data-file
+name: 未发行歌曲工作母带
+description: 存有可供排练和商议的作品；传播授权需作者明确同意。
+placement: manager-gear
+facts:
+  - id: manager-song-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: rin
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - rin
+meters: []
+quantities: []
+ratings: []

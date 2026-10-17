@@ -1,0 +1,66 @@
+id: partner-maintenance
+kind: contract
+name: 联锁维修提案
+description: 供当事人阅读与协商的业务文件，内容不对路人自动公开。
+placement: partner-work
+facts:
+  - id: partner-maintenance-terms-1
+    predicate: terms
+    value:
+      kind: text
+      value: 检查及更换传感组件初估 3800 欧元，需诊断确认；允许由本厂自修、延后或拆分范围。
+    description: 联锁维修提案的terms记录。
+    access:
+      kind: agents
+      agentIds: &a1
+        - partner
+        - nela
+        - marta
+  - id: partner-maintenance-status-2
+    predicate: status
+    value:
+      kind: text
+      value: pending
+    description: 条款待当事人商议；未签约不产生付款或强制结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: partner-maintenance-signed-3
+    predicate: signed
+    value:
+      kind: boolean
+      value: false
+    description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: partner-maintenance-party-4
+    predicate: party
+    value:
+      kind: entity
+      entityId: partner
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: partner-maintenance-party-5
+    predicate: party
+    value:
+      kind: entity
+      entityId: nela
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: partner-maintenance-party-6
+    predicate: party
+    value:
+      kind: entity
+      entityId: marta
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

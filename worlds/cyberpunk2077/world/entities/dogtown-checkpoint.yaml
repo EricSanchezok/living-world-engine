@@ -1,0 +1,25 @@
+id: dogtown-checkpoint
+kind: place
+name: 狗镇通行检查站
+description: 幽冥犬维持的通道；货物、身份、利益与武力影响通行。
+placement: dogtown
+facts:
+  - id: dogtown-checkpoint-passage-1
+    predicate: passage
+    value:
+      kind: entity
+      entityId: dogtown-market
+    description: 两处存在可通行的连接；门禁、距离和实际条件仍需满足。
+    access:
+      kind: public
+  - id: dogtown-checkpoint-restricted-access-2
+    predicate: restricted-access
+    value:
+      kind: boolean
+      value: true
+    description: 内区需要对应身份、许可或经过实际裁决的进入方式。知道地点名称不等于取得通行权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

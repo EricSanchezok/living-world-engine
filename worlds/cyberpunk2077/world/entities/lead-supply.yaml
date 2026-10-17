@@ -1,0 +1,66 @@
+id: lead-supply
+kind: contract
+name: 采购折扣提案
+description: 供当事人阅读与协商的业务文件，内容不对路人自动公开。
+placement: lead-work
+facts:
+  - id: lead-supply-terms-1
+    predicate: terms
+    value:
+      kind: text
+      value: 首批控制器报价 6000 欧元，折扣以六个月采购框架为前提；可拒绝框架按单采购或另找供应商。
+    description: 采购折扣提案的terms记录。
+    access:
+      kind: agents
+      agentIds: &a1
+        - lead
+        - ada
+        - mina
+  - id: lead-supply-status-2
+    predicate: status
+    value:
+      kind: text
+      value: pending
+    description: 条款待当事人商议；未签约不产生付款或强制结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: lead-supply-signed-3
+    predicate: signed
+    value:
+      kind: boolean
+      value: false
+    description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: lead-supply-party-4
+    predicate: party
+    value:
+      kind: entity
+      entityId: lead
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: lead-supply-party-5
+    predicate: party
+    value:
+      kind: entity
+      entityId: ada
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: lead-supply-party-6
+    predicate: party
+    value:
+      kind: entity
+      entityId: mina
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

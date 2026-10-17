@@ -1,0 +1,17 @@
+id: arasaka-office
+kind: place
+name: 荒坂地区办公区
+description: 受控的企业工作空间；职位、家族关系和行动授权各有边界。
+placement: corpo-plaza
+facts:
+  - id: arasaka-office-restricted-access-1
+    predicate: restricted-access
+    value:
+      kind: boolean
+      value: true
+    description: 内区需要对应身份、许可或经过实际裁决的进入方式。知道地点名称不等于取得通行权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

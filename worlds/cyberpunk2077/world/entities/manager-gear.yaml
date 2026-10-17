@@ -1,0 +1,39 @@
+id: manager-gear
+kind: equipment
+name: 折光乐队演出器材
+description: 音箱、电子鼓组及舞台接口共同使用；个人乐器版权和产权另计。
+placement: manager-work
+facts:
+  - id: manager-gear-authorized-user-1
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: manager
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: &a1
+        - manager
+        - rin
+        - bex
+  - id: manager-gear-authorized-user-2
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: rin
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: manager-gear-authorized-user-3
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: bex
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

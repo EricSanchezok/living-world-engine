@@ -1,0 +1,76 @@
+id: medic-handover
+kind: contract
+name: 社区事故救护记录
+description: 供当事人阅读与协商的业务文件，内容不对路人自动公开。
+placement: medic-work
+facts:
+  - id: medic-handover-terms-1
+    predicate: terms
+    value:
+      kind: text
+      value: 记录已观察伤情、本人同意和支出。正式公司服务须核实合同与调度条件；普通现场急救、联系其他机构和邻里互助另行决定。
+    description: 社区事故救护记录的terms记录。
+    access:
+      kind: agents
+      agentIds: &a1
+        - medic
+        - lena
+        - idris
+        - mateo
+  - id: medic-handover-status-2
+    predicate: status
+    value:
+      kind: text
+      value: pending
+    description: 条款待当事人商议；未签约不产生付款或强制结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: medic-handover-signed-3
+    predicate: signed
+    value:
+      kind: boolean
+      value: false
+    description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: medic-handover-party-4
+    predicate: party
+    value:
+      kind: entity
+      entityId: medic
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: medic-handover-party-5
+    predicate: party
+    value:
+      kind: entity
+      entityId: lena
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: medic-handover-party-6
+    predicate: party
+    value:
+      kind: entity
+      entityId: idris
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: medic-handover-party-7
+    predicate: party
+    value:
+      kind: entity
+      entityId: mateo
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

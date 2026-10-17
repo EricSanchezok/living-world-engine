@@ -1,0 +1,17 @@
+id: hansen-command
+kind: place
+name: 汉森的事务空间
+description: 处理统治与贸易事务的受控内区；具体房间为作者安排。
+placement: dogtown
+facts:
+  - id: hansen-command-restricted-access-1
+    predicate: restricted-access
+    value:
+      kind: boolean
+      value: true
+    description: 内区需要对应身份、许可或经过实际裁决的进入方式。知道地点名称不等于取得通行权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

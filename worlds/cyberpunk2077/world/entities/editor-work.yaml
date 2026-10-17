@@ -1,0 +1,25 @@
+id: editor-work
+kind: place
+name: 午夜台超梦剪辑室
+description: 可通过街区道路到达的实际营业或工作场所；营业空间与私人住所分开。
+placement: kabuki
+facts:
+  - id: editor-work-street-access-1
+    predicate: street-access
+    value:
+      kind: entity
+      entityId: kabuki
+    description: 工作场所通过街区道路与城市相连。
+    access:
+      kind: public
+  - id: editor-work-current-scene-2
+    predicate: current-scene
+    value:
+      kind: text
+      value: 编辑台停在第 17 段，托马斯带来受访者要求删除地址线索的消息。索拉认为可以重剪，塞莉娅需要知道今晚是否能拿到可放映版。
+    description: 午夜台超梦剪辑室的current-scene记录。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

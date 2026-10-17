@@ -1,0 +1,43 @@
+id: operator-pump
+kind: equipment
+name: 社区送修的旧水泵控制柜
+description: 使用 L-4 有线协议，冷启动时状态不稳；属于社区，当前仅授权诊断，不授权出售。
+placement: operator-work
+facts:
+  - id: operator-pump-diagnostic-permission-1
+    predicate: diagnostic-permission
+    value:
+      kind: text
+      value: operator may inspect; no disposal or unrestricted writes
+    description: 社区交来的书面委托只允许检测与报价。
+    access:
+      kind: agents
+      agentIds:
+        - operator
+        - niko
+        - mara
+        - tessa
+  - id: operator-pump-fault-2
+    predicate: fault
+    value:
+      kind: text
+      value: 备用供电板接点间歇失效，软件日志存在重启记录。
+    description: 这是预先存在的故障；诊断揭示它，不根据玩家猜测临时改写。
+    access:
+      kind: private
+  - id: operator-pump-operational-3
+    predicate: operational
+    value:
+      kind: boolean
+      value: false
+    description: 水泵控制柜存在间歇供电故障，查到日志不等于已修复；修复后须实际测试。
+    access:
+      kind: agents
+      agentIds:
+        - operator
+        - niko
+        - mara
+        - tessa
+meters: []
+quantities: []
+ratings: []

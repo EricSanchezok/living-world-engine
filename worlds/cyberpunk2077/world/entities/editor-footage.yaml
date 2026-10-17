@@ -1,0 +1,33 @@
+id: editor-footage
+kind: data-file
+name: 街头纪录片原始素材盘
+description: 封存的超梦素材盘，须在编辑台载入并核对素材授权。
+placement: editor-work
+facts:
+  - id: editor-footage-copyright-holder-1
+    predicate: copyright-holder
+    value:
+      kind: entity
+      entityId: tomas
+    description: 保管不等于取得发行全部内容的权限。
+    access:
+      kind: agents
+      agentIds:
+        - editor
+        - sora
+        - tomas
+  - id: editor-footage-consent-limit-2
+    predicate: consent-limit
+    value:
+      kind: text
+      value: 第 17 段含受访者明确要求删去的住址线索
+    description: 该段真实存在；删除公开版本不应改写原始证据。
+    access:
+      kind: agents
+      agentIds:
+        - editor
+        - tomas
+        - sora
+meters: []
+quantities: []
+ratings: []

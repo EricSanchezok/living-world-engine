@@ -1,0 +1,25 @@
+id: manager-work
+kind: place
+name: 折光乐队排练室
+description: 可通过街区道路到达的实际营业或工作场所；营业空间与私人住所分开。
+placement: japantown
+facts:
+  - id: manager-work-street-access-1
+    predicate: street-access
+    value:
+      kind: entity
+      entityId: japantown
+    description: 工作场所通过街区道路与城市相连。
+    access:
+      kind: public
+  - id: manager-work-current-scene-2
+    predicate: current-scene
+    value:
+      kind: text
+      value: 排练暂停，保罗带来大场赞助条件。林恩圈出删歌条款，贝克斯计算器材与房租，小场演出仍留着可协商的日期。
+    description: 折光乐队排练室的current-scene记录。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

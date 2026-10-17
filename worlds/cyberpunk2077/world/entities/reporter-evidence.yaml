@@ -1,0 +1,35 @@
+id: reporter-evidence
+kind: data-file
+name: 事故调查材料封存盘
+description: 记录包包含日志副本与两份相互有差异的证言，需逐份检查。
+placement: reporter-work
+facts:
+  - id: reporter-evidence-verified-content-1
+    predicate: verified-content
+    value:
+      kind: text
+      value: 检修日志显示 09:42 断电，证言甲称先听到警报，证言乙称警报在断电后；日志不能单独确定谁应负责。
+    description: 原始材料的具体内容，不能把冲突证言自动合成为确定阴谋。
+    access:
+      kind: agents
+      agentIds:
+        - reporter
+        - leila
+        - felix
+        - amara
+  - id: reporter-evidence-timeline-crosschecked-2
+    predicate: timeline-crosschecked
+    value:
+      kind: boolean
+      value: false
+    description: 冲突证言尚未完成独立交叉核验，不能直接当成已经确定的事故责任链。
+    access:
+      kind: agents
+      agentIds:
+        - reporter
+        - leila
+        - amara
+        - felix
+meters: []
+quantities: []
+ratings: []

@@ -1,0 +1,25 @@
+id: lead-work
+kind: place
+name: 棱桥服务项目办公室
+description: 可通过街区道路到达的实际营业或工作场所；营业空间与私人住所分开。
+placement: corpo-plaza
+facts:
+  - id: lead-work-street-access-1
+    predicate: street-access
+    value:
+      kind: entity
+      entityId: corpo-plaza
+    description: 工作场所通过街区道路与城市相连。
+    access:
+      kind: public
+  - id: lead-work-current-scene-2
+    predicate: current-scene
+    value:
+      kind: text
+      value: 帕维尔在隔离终端重现权限缓存缺陷。米娜想知道演示还能保留多少内容；艾达带着两种采购条款等待答复。
+    description: 棱桥服务项目办公室的current-scene记录。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

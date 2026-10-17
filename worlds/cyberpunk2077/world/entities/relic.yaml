@@ -1,0 +1,28 @@
+id: relic
+kind: data-device
+name: Relic 原型载体
+description: 置于密封温控容器中的实验性数据装置，内部内容不能从外壳直接看出。
+placement: konpeki-suite
+facts:
+  - id: relic-restricted-knowledge-1
+    predicate: restricted-knowledge
+    value:
+      kind: boolean
+      value: true
+    description: 载体内容、位置与作用是秘密；不可因作者知道就传给所有角色。
+    access:
+      kind: private
+  - id: relic-custody-2
+    predicate: custody
+    value:
+      kind: entity
+      entityId: yorinobu
+    description: 此切片安排载体处于赖宣控制的套房内，不等于合法产权。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+presentation:
+  label: 密封温控容器
+  description: 容器封闭着，外侧有温控指示；内部数据不可直接看见。

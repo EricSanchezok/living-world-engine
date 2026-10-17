@@ -1,0 +1,19 @@
+id: taxi
+kind: vehicle
+name: 娜迪亚的营运车
+description: 普通道路车辆，司机可提供有偿行程，乘客不会获得车辆产权。
+placement: downtown
+facts:
+  - id: taxi-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: taxi-driver
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - taxi-driver
+meters: []
+quantities: []
+ratings: []

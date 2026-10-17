@@ -1,0 +1,17 @@
+id: all-foods
+kind: place
+name: 全食品工厂
+description: 漩涡帮占据的工业场地，交易、武器和首领之间的冲突聚集于此。
+placement: northside
+facts:
+  - id: all-foods-passage-1
+    predicate: passage
+    value:
+      kind: entity
+      entityId: brick-room
+    description: 两处存在可通行的连接；门禁、距离和实际条件仍需满足。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

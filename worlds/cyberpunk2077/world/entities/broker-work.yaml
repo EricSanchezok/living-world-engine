@@ -1,0 +1,25 @@
+id: broker-work
+kind: place
+name: 萨迪克租用仓位
+description: 可通过街区道路到达的实际营业或工作场所；营业空间与私人住所分开。
+placement: dogtown
+facts:
+  - id: broker-work-street-access-1
+    predicate: street-access
+    value:
+      kind: entity
+      entityId: dogtown
+    description: 工作场所通过街区道路与城市相连。
+    access:
+      kind: public
+  - id: broker-work-current-scene-2
+    predicate: current-scene
+    value:
+      kind: text
+      value: 维拉拆开一箱看见 A3 标签，俊指着写 A2 的货单询问适配问题。埃米尔说明需要先更新这一批的文件；厢车停在仓位旁。
+    description: 萨迪克租用仓位的current-scene记录。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
