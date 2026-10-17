@@ -1,4 +1,12 @@
-import type { PublicWorldRun } from "../../shared/world-api";
+import type { PublicInstanceDetail, PublicWorldRun } from "../../shared/world-api";
+
+/** The player-facing turn includes publication after the world reaches its next input boundary. */
+export function worldProgressPhase(
+  detail: Pick<PublicInstanceDetail, "run" | "conversation">,
+): "executing" | "publishing" | null {
+  if (detail.run && ["queued", "running", "pausing"].includes(detail.run.status)) return "executing";
+  return detail.conversation?.turns.some(turn => turn.status === "running") ? "publishing" : null;
+}
 
 export type RunStatusPresentation = {
   title: string;

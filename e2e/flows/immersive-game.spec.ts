@@ -544,6 +544,86 @@ test("failed execution stays atomic and long diagnostics never widen the inspect
   expect(await inspector.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
 });
 
+for (const partial of [false, true]) {
+  test(`the whole turn stays in progress until ${partial ? "a partial" : "an unpublished"} reply completes, even without events`, async ({ page }) => {
+    await installFixture(page);
+    await startOrigin(page);
+    const instanceId = new URL(page.url()).pathname.split("/").at(-1)!;
+    const detailUrl = `/api/instances/${instanceId}`;
+    const readDetail = async () => (await (await page.request.get(detailUrl)).json()) as PublicInstanceDetail;
+    const initial = await readDetail();
+    const gateUrl = `http://127.0.0.1:${process.env.LIVINGWORLD_E2E_MODEL_PORT ?? 32128}/narrative-gates/${initial.conversation!.participantId}`;
+    expect((await page.request.post(gateUrl, { data: { partial } })).ok()).toBe(true);
+
+    // Hold the event transport open before its handshake: only the real GET fallback can synchronize this page.
+    let releaseEvents!: () => void;
+    const eventGate = new Promise<void>(resolve => { releaseEvents = resolve; });
+    await page.route(`**${detailUrl}/events`, async route => {
+      await eventGate;
+      await route.abort().catch(() => undefined);
+    });
+    try {
+      await page.reload();
+      const composer = page.getByRole("textbox", { name: "你的行动", exact: true });
+      await composer.fill("观察四周");
+      const frame = page.locator(".aui-composer-shell");
+      const originalBox = await frame.boundingBox();
+      await frame.evaluate(element => { element.setAttribute("data-frame-identity", "original"); });
+      await page.getByRole("button", { name: "发送行动" }).click();
+      await expect.poll(async () => {
+        const detail = await readDetail();
+        return { run: detail.run?.status, turn: detail.conversation!.turns.at(-1)!.status,
+          segments: detail.conversation!.turns.at(-1)!.response?.segmentCount ?? 0 };
+      }).toEqual({ run: "awaiting-decision", turn: "running", segments: partial ? 1 : 0 });
+
+      const progress = page.getByRole("status", { name: "回应生成进度" });
+      await expect(progress).toContainText("世界正在推演");
+      await expect(progress).toContainText("正在生成并校验本轮回应");
+      await expect(composer).toHaveCount(0);
+      await expect(page.getByRole("button", { name: /打开游戏控制；世界正在推演/ })).toBeVisible();
+      await expect(frame).toHaveAttribute("data-frame-identity", "original");
+      const progressBox = await frame.boundingBox();
+      for (const key of ["x", "y", "width", "height"] as const) {
+        expect(Math.abs(progressBox![key] - originalBox![key])).toBeLessThanOrEqual(1);
+      }
+      if (partial) await expect(page.getByText("你查看了眼前的情况。", { exact: true })).toBeVisible();
+
+      // Loading the same saved turn while prose is pending must not unlock an empty composer.
+      await page.reload();
+      await expect(progress).toBeVisible();
+      await expect(composer).toHaveCount(0);
+      await page.setViewportSize({ width: 320, height: 720 });
+      expect(await progress.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
+      await expect(progress).toBeInViewport();
+
+      // Lose one ordinary refresh as well as the completion event; the following GET must recover.
+      let failNextRead = true;
+      await page.route(`**${detailUrl}`, async route => {
+        if (failNextRead) {
+          failNextRead = false;
+          await route.fulfill({ status: 503, contentType: "application/json", body: '{"error":"temporary disconnect"}' });
+        } else await route.continue();
+      });
+      const missedRead = page.waitForResponse(response => response.url().endsWith(detailUrl) && response.status() === 503);
+      expect((await page.request.delete(gateUrl)).ok()).toBe(true);
+      await missedRead;
+      await expect(composer).toBeVisible({ timeout: 10_000 });
+      await expect(progress).toHaveCount(0);
+      await expect(page.getByRole("button", { name: /打开游戏控制；已保存/ })).toBeVisible();
+      await expect(page.getByText(/石门仍在面前，随身物资也清点清楚了/).last()).toBeVisible();
+      await expect(page.getByText("最新进度暂时无法同步，正在自动重试。", { exact: true })).toHaveCount(0);
+      await composer.fill("下一步行动草稿");
+      await expect(composer).toHaveValue("下一步行动草稿");
+      const completed = await readDetail();
+      expect(completed.conversation!.turns.at(-1)!.status).toBe("committed");
+      expect(completed.conversation!.turns.filter(turn => turn.action)).toHaveLength(1);
+    } finally {
+      releaseEvents();
+      await page.request.delete(gateUrl);
+    }
+  });
+}
+
 test("a typed service pause preserves scene text and explains why automatic play stopped", async ({ page }) => {
   await installFixture(page); await startOrigin(page);
   await page.getByRole("textbox", { name: "你的行动", exact: true }).fill("观察四周");

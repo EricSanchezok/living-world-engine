@@ -51,7 +51,9 @@ Participant 页面使用 44rem 单轴 assistant-ui 消息流。第一条 World �
 
 composer 只负责发送、失败重试和可选的高级 detach，不提供单步、批量或实时按钮。发送行动时，服务端先持久化 intent 和当前 decision point 的 ActionWindow，再由后台 WorldRun 逐个最早时间边界推进，直到活动完成、失败、中断、需要选择、玩家暂停或运行预算耗尽。
 
-Participant 底部由一个外框承载输入与运行状态。普通输入最小高度为 64px，多行编辑可增高；提交后锁定编辑高度，运行阶段与计时原位更新，返回输入时恢复自适应。`queued`、`running`、`pausing` 或提交请求处理中不挂载 composer，仅在同框显示运行状态与暂停控制。正常等待输入没有额外决策提示。`paused`、`budget-paused`、`preparation-invalidated` 和 `awaiting-decision` 允许重新提交自然语言行动；未提交的 reaction window 同时显示 stimulus、输入框和“保持当前行动”控制。Observer 始终使用只读消息流，不挂载 composer。
+Participant 底部由一个外框承载输入与运行状态。普通输入最小高度为 64px，多行编辑可增高；提交后锁定编辑高度，运行阶段与计时原位更新，返回输入时恢复自适应。提交请求、WorldRun 执行和本轮回复发布共同构成玩家看到的推演过程。`queued`、`running`、`pausing` 或提交请求处理中不挂载 composer，在同框显示当前进度与适用的暂停控制；执行到达输入边界后，只要会话还有未完成回复，外框与控制球仍显示推演中，框内注明正在生成并校验回应，不把第一段文字出现或世界状态提交当成整轮完成。回复全部发布后，`paused`、`budget-paused`、`preparation-invalidated` 和 `awaiting-decision` 允许重新提交自然语言行动；未提交的 reaction window 同时显示 stimulus、输入框和“保持当前行动”控制。正常等待输入没有额外决策提示。Observer 始终使用只读消息流，不挂载 composer。
+
+推演进度、输入锁定和刷新兜底使用同一个会话进度判断。执行与回复发布期间，即使实时事件连接未建立或完成通知丢失，实例读取也持续同步；每次读取结束后间隔两秒再尝试，失败后继续重试，成功时清除同步警告。仅当整轮回复完成并允许下一步行动时恢复输入，不要求刷新页面或重新发送行动。
 
 同一个 Participant intent 可以投影多条 committed Observation；每条显示对应世界时间、Activity 阶段和授权进度。`queued` 显示经过权限过滤的资源名称与队列位置，`ready` 显示资源已预留且会在下一次时间推进开始；两者都不暴露其他持有者的 canonical 身份。WorldRun 自动执行时 composer 切换为运行控制台并提供暂停；paused 后可以恢复，也可以发送普通自然语言行动取消或改变当前 Activity。自然等待只显示普通输入框，没有暂停说明、恢复按钮或单人输入倒计时。刷新与重复提交不会新增消息或重复行动；服务重启只将执行中的 run 转为 paused，已经等待输入的 run 保持原状态。状态和期限由[运行时契约](engine-runtime.md#worldrun-与暂停恢复)定义。
 

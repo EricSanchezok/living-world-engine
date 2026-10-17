@@ -51,6 +51,7 @@ import {
   isRunClockPaused,
   runBoundaryLabel,
   runStatusPresentation,
+  worldProgressPhase,
 } from "./run-status";
 import { SettingsPanel } from "./settings-panel";
 import { observerTimeline, participantTimeline } from "./world-timeline";
@@ -166,6 +167,18 @@ function ActionSubmitConsole() {
       <div className="cg-thread-status__copy">
         <strong>正在确认行动</strong>
         <span>已收到你的行动，正在等待眼前的回应。</span>
+      </div>
+    </div>
+  );
+}
+
+function ReplyProgressConsole() {
+  return (
+    <div className="cg-thread-status" aria-label="回应生成进度" role="status">
+      <span aria-hidden="true" className="cg-thread-status__indicator" />
+      <div className="cg-thread-status__copy">
+        <strong>世界正在推演</strong>
+        <div className="cg-thread-status__meta"><span>正在生成并校验本轮回应…</span></div>
       </div>
     </div>
   );
@@ -416,6 +429,8 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
     else setObserver(undefined);
     return next;
   }, [instanceId, loadObserver, selectedAgentId]);
+  const progressPhase = detail ? worldProgressPhase(detail) : null;
+  const needsProgressRefresh = detail?.summary.schedulerMode === "realtime" || progressPhase !== null;
 
   useEffect(() => {
     let active = true;
@@ -436,13 +451,22 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
   }, [instanceId]);
 
   useEffect(() => {
-    if (!detail || detail.summary.schedulerMode !== "realtime" &&
-      !["queued", "running", "pausing"].includes(detail.summary.runStatus ?? "")) return;
-    const timer = window.setInterval(() => {
-      void refresh().catch(() => setStreamWarning("最新进度暂时无法同步，正在自动重试。"));
-    }, 2_000);
-    return () => window.clearInterval(timer);
-  }, [detail, refresh]);
+    if (!needsProgressRefresh) return;
+    let active = true;
+    let timer: number;
+    const poll = async () => {
+      try {
+        await refresh();
+        if (active) setStreamWarning("");
+      } catch {
+        if (active) setStreamWarning("最新进度暂时无法同步，正在自动重试。");
+      } finally {
+        if (active) timer = window.setTimeout(poll, 2_000);
+      }
+    };
+    timer = window.setTimeout(poll, 2_000);
+    return () => { active = false; window.clearTimeout(timer); };
+  }, [needsProgressRefresh, refresh]);
 
   useEffect(() => {
     const source = new EventSource(worldApi.instanceEventsUrl(instanceId));
@@ -472,8 +496,7 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
     !detail.actionWindow.submittedAgentIds.includes(participant?.agentId ?? "")
     ? detail.actionWindow
     : undefined;
-  const runActive = detail?.run && ["queued", "running", "pausing"].includes(detail.run.status);
-  const worldProcessing = Boolean(!reactionWindow && (busy === "action" || runActive || latestTurn?.status === "running"));
+  const worldProcessing = busy === "action" || progressPhase !== null;
   const composerMode: ComposerMode = detail?.controlledView && !busy && !worldProcessing &&
     !(detail.run?.status === "awaiting-reaction" && !reactionWindow)
     ? "available"
@@ -658,6 +681,8 @@ export function InstanceExperience({ instanceId }: { instanceId: string }) {
                 <span>{latestTurn?.servicePause ? "已有进展已保存，服务恢复后可以继续。" : detail.servicePause.message}</span>
               </div>
             </div>
+          ) : progressPhase === "publishing" ? (
+            <ReplyProgressConsole />
           ) : reactionWindow ? (
             <ReactionConsole
               busy={Boolean(busy)}

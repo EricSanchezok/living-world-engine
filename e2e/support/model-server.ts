@@ -3,6 +3,7 @@ import { agentOutput, truthOutput } from "./model-output";
 import type { DecisionQuestionV2 } from "../../src/engine/models/decision-v2";
 
 const port = Number(process.env.LIVINGWORLD_E2E_MODEL_PORT ?? 32128);
+const narrativeGates = new Map<string, { partial: boolean; wait: Promise<void>; release: () => void }>();
 
 async function readBody(request: import("node:http").IncomingMessage): Promise<Record<string, unknown>> {
   const chunks: Buffer[] = [];
@@ -56,6 +57,22 @@ const server = createServer(async (request, response) => {
       response.end('{"status":"ok"}');
       return;
     }
+    if (request.url?.startsWith("/narrative-gates/")) {
+      const participantId = request.url.slice("/narrative-gates/".length);
+      if (request.method === "POST") {
+        const body = await readBody(request);
+        narrativeGates.get(participantId)?.release();
+        let release!: () => void;
+        const wait = new Promise<void>(resolve => { release = resolve; });
+        narrativeGates.set(participantId, { partial: body.partial === true, wait, release });
+        response.writeHead(204).end();
+      } else if (request.method === "DELETE") {
+        narrativeGates.get(participantId)?.release();
+        narrativeGates.delete(participantId);
+        response.writeHead(204).end();
+      } else response.writeHead(405).end();
+      return;
+    }
     if (request.method !== "POST" || !["/chat/completions", "/systemone"].includes(request.url ?? "")) {
       response.writeHead(404).end();
       return;
@@ -76,12 +93,30 @@ const server = createServer(async (request, response) => {
       return;
     }
     const model = String(body.model);
+    const responseId = `e2e-response:${model}:${Date.now()}`;
+    const streamChunk = (content: string, finished = false) => response.write(`data: ${JSON.stringify({
+      id: responseId, object: "chat.completion.chunk", created: 0, model,
+      choices: [{ index: 0, delta: { content }, finish_reason: finished ? "stop" : null }],
+      ...(finished ? { usage: { prompt_tokens: 100, completion_tokens: 50, total_tokens: 150,
+        prompt_cache_hit_tokens: 0, prompt_cache_miss_tokens: 100 } } : {}),
+    })}\n\n`);
     if (native) {
       const answers = decisionAnswers(body.questions as Record<string, DecisionQuestionV2>);
       response.writeHead(200, { "content-type": "application/json" });
       response.end(JSON.stringify({ model, answers, usage: { input_tokens: 100, output_tokens: 10 } })); return;
     }
-    const scene = context.scene as { reply?: { kind: string }; observations?: unknown[]; speech?: Array<{ id: string; speaker: string }> } | undefined;
+    const scene = context.scene as { participantId?: string; reply?: { kind: string }; observations?: unknown[]; speech?: Array<{ id: string; speaker: string }> } | undefined;
+    const narrativeGate = scene?.participantId ? narrativeGates.get(scene.participantId) : undefined;
+    if (narrativeGate?.partial) {
+      if (body.stream !== true) throw new Error("The partial narrative fixture requires streaming transport");
+      response.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache" });
+      streamChunk('{"paragraphs":["你查看了眼前的情况。",');
+      await narrativeGate.wait;
+      streamChunk('"石门仍在面前，随身物资也清点清楚了。"]}', true);
+      response.end("data: [DONE]\n\n");
+      return;
+    }
+    if (narrativeGate) await narrativeGate.wait;
     const readingAnswers = reading ? decisionAnswers({ ...Object.fromEntries(Object.entries(reading.catalog).map(([id, criteria]) =>
       [id, { type: "choice" as const, version: "e2e-reading", instructions: "Scripted E2E action", criteria }])), ...reading.cognition }) : {};
     const suggestionContext = context as { task?: string; previousSuggestions?: string[]; latestRequest?: string | null; discourse?: { exchanges: unknown[] } };
@@ -105,9 +140,15 @@ const server = createServer(async (request, response) => {
       ? scene.speech.map(speech => `${speech.speaker}说：[[${speech.id}]]`)
       : ["你查看了眼前的情况。石门仍在面前，随身物资也清点清楚了。"] }
       : model === "e2e-truth" ? truthOutput(context) : agentOutput(context);
+    if (body.stream === true) {
+      response.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache" });
+      streamChunk(JSON.stringify(output), true);
+      response.end("data: [DONE]\n\n");
+      return;
+    }
     response.writeHead(200, { "content-type": "application/json" });
     response.end(JSON.stringify({
-      id: `e2e-response:${model}:${Date.now()}`,
+      id: responseId,
       object: "chat.completion",
       created: Math.floor(Date.now() / 1_000),
       model,

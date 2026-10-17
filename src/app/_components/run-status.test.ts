@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { PublicWorldRun } from "../../shared/world-api";
-import { formatRunElapsed, isRunClockPaused, runBoundaryLabel, runStatusPresentation } from "./run-status";
+import type { PublicConversation, PublicWorldRun } from "../../shared/world-api";
+import { formatRunElapsed, isRunClockPaused, runBoundaryLabel, runStatusPresentation, worldProgressPhase } from "./run-status";
 
 function run(overrides: Partial<PublicWorldRun> = {}): PublicWorldRun {
   return {
@@ -33,6 +33,24 @@ function run(overrides: Partial<PublicWorldRun> = {}): PublicWorldRun {
 }
 
 describe("run status presentation", () => {
+  it("keeps an earlier unfinished reply in progress even when the latest turn is complete", () => {
+    const conversation: PublicConversation = { participantId: "player", agentId: "traveler", suggestions: null,
+      turns: ["running", "committed"].map((status, index) => ({ id: `turn-${index}`, agentId: "traveler",
+        baseRevision: index, createdAt: `2026-10-17T02:00:0${index}Z`, status: status as "running" | "committed" })) };
+    expect(worldProgressPhase({ run: run({ status: "awaiting-decision" }), conversation })).toBe("publishing");
+    conversation.turns[0]!.status = "committed";
+    expect(worldProgressPhase({ run: run({ status: "awaiting-decision" }), conversation })).toBeNull();
+  });
+
+  it("keeps execution active after a published reply but releases genuine pause boundaries", () => {
+    for (const status of ["queued", "running", "pausing"] as const) {
+      expect(worldProgressPhase({ run: run({ status }) })).toBe("executing");
+    }
+    for (const status of ["paused", "budget-paused", "debug-paused", "preparation-invalidated", "awaiting-reaction", "failed", "completed"] as const) {
+      expect(worldProgressPhase({ run: run({ status }) })).toBeNull();
+    }
+  });
+
   it("explains an in-flight action even before a canonical activity exists", () => {
     const presentation = runStatusPresentation(run(), true);
     expect(presentation.title).toBe("正在处理你的行动");
