@@ -807,7 +807,7 @@ describe("World Instance host", () => {
       expect(stored.executionAlgorithm).toMatchObject({
         id: "eager-reference",
         version: "29",
-        contractVersion: 13,
+        contractVersion: 14,
         config: {},
         children: {
           actionCompilation: {

@@ -310,7 +310,8 @@ describe("direct world through the actual simulation entry", () => {
     expect(first.state.truth.elapsedSeconds).toBe(10);
     const playerFrame = first.committed.directEvent.frames.find(frame => frame.actorId === "player")!;
     const busy = readDirectState(first.state.executionState!, first.state);
-    expect(busy.intents.keeper).toMatchObject({ status: "active", causeActionId: playerFrame.id });
+    expect(busy.intents.keeper).toMatchObject({ status: "active", causeActionId: null, pendingCauseActionIds: [playerFrame.id] });
+    expect(busy.activities.find(frame => frame.actorId === "keeper")).toMatchObject({ kind: "observe", causeActionId: null });
     expect(busy.intents.player!.activeSubmission).toBeNull();
     const calls = f.transport.mock.calls.length;
     const second = await engine.step(f.roster, { expectedRevision: first.state.revision, trigger: "participant_action", externalActions: [] });
@@ -319,7 +320,7 @@ describe("direct world through the actual simulation entry", () => {
     expect(continued.some(wire => (wire?.state as { perspective?: unknown })?.perspective)).toBe(false);
     expect(second.committed.directEvent.frames.some(frame => frame.actorId === "stranger")).toBe(false);
     expect(readDirectState(second.state.executionState!, second.state).intents.stranger!.status).toBe("ready");
-    expect(readDirectState(second.state.executionState!, second.state).intents.keeper).toMatchObject({ status: "ready", causeActionId: playerFrame.id });
+    expect(readDirectState(second.state.executionState!, second.state).intents.keeper).toMatchObject({ status: "ready", causeActionId: playerFrame.id, pendingCauseActionIds: [] });
     const third = await engine.step(f.roster, { expectedRevision: second.state.revision, trigger: "participant_action", externalActions: [] });
     expect(third.committed.directEvent.frames.find(frame => frame.actorId === "keeper")).toMatchObject({ kind: "speak", causeActionId: playerFrame.id });
     expect(replaySimulationState(third.state)).toEqual(third.state);

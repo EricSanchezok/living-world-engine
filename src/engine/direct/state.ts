@@ -9,7 +9,7 @@ export function orderedValues<T extends { id: string }>(record: Readonly<Record<
 }
 
 export function readyIntent(reason = "initial-decision"): AgentIntentState {
-  return { goalId: null, status: "ready", wakeReasons: [reason], activityId: null, causeActionId: null,
+  return { goalId: null, status: "ready", wakeReasons: [reason], activityId: null, causeActionId: null, pendingCauseActionIds: [],
     wait: null, lastInputHash: null, lastActionHash: null, recentOutcomeIds: [], failure: null, urgency: 0, noProgressCount: 0, goalProgress: {}, dependencies: {}, activeSubmission: null };
 }
 export function sealDirectState(value: Omit<DirectRuntimeState, "hash"> | DirectRuntimeState): DirectRuntimeState {
@@ -20,7 +20,7 @@ export function sealDirectState(value: Omit<DirectRuntimeState, "hash"> | Direct
 }
 export function readDirectState(value: AlgorithmExecutionState, state: Readonly<SimulationState>): DirectRuntimeState {
   const data = value.data as unknown as DirectRuntimeState;
-  if (data.kind !== "direct-world" || data.version !== 2 || data.worldHash !== state.worldHash ||
+  if (data.kind !== "direct-world" || data.version !== 3 || data.worldHash !== state.worldHash ||
     data.hash !== contentHash({ ...data, hash: "" })) throw new Error("invalid direct runtime state");
   return structuredClone(data);
 }
@@ -62,12 +62,18 @@ export function dependencyVersions(control: DirectRuntimeState, reads: Record<st
 }
 export function wakeIntent(control: DirectRuntimeState, agentId: string, reason: string, causeActionId: string | null = null) {
   const intent = control.intents[agentId] ??= readyIntent(reason);
-  if (intent.status === "active") {
-    if (!intent.wakeReasons.includes(reason)) intent.wakeReasons.push(reason);
-    // Remember a delivered interaction while existing independent work finishes.
-    intent.causeActionId ??= causeActionId;
-    return;
+  if (causeActionId && causeActionId !== intent.causeActionId && !intent.pendingCauseActionIds.includes(causeActionId)) {
+    if (intent.status !== "active" && !intent.causeActionId) intent.causeActionId = causeActionId;
+    else intent.pendingCauseActionIds.push(causeActionId);
   }
-  intent.status = "ready"; intent.wait = null; intent.causeActionId = causeActionId;
   if (!intent.wakeReasons.includes(reason)) intent.wakeReasons.push(reason);
+  if (intent.status !== "active") { intent.status = "ready"; intent.wait = null; }
+}
+
+/** An explicit wait handles its selected cause; other delivered work remains resumable. */
+export function resumePendingCause(control: DirectRuntimeState, agentId: string): boolean {
+  const intent = control.intents[agentId]!;
+  if (intent.status === "active" || intent.causeActionId || !intent.pendingCauseActionIds.length) return false;
+  wakeIntent(control, agentId, "observation", intent.pendingCauseActionIds.shift()!);
+  return true;
 }

@@ -405,7 +405,7 @@ export function createEagerReferenceAlgorithmRef(
     role: "world-execution",
     id: "eager-reference",
     version: "29",
-    contractVersion: 13,
+    contractVersion: 14,
     config: {},
     children: { agentCognition, actionCompilation, interactionGrounding, reactionResolution, truthResolution, observationRendering },
   });

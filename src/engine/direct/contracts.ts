@@ -32,6 +32,8 @@ export interface AgentIntentState {
   status: "ready" | "active" | "waiting" | "failed";
   wakeReasons: string[];
   causeActionId: string | null;
+  /** Delivered interactions retained while another cause owns the current work. */
+  pendingCauseActionIds: string[];
   activityId: string | null;
   wait: { entityIds: string[]; untilSeconds: number | null; reason: string } | null;
   lastInputHash: string | null;
@@ -73,7 +75,7 @@ export interface PreparedDirectAction {
   requestProgress: "complete" | "continue" | "wait";
 }
 export interface DirectRuntimeState {
-  kind: "direct-world"; version: 2; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
+  kind: "direct-world"; version: 3; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
   models: { decision: string; creation: string; fallback: string };
   modelOverrides: { decision: string | null; creation: string | null; fallback: string | null };
   intents: Record<string, AgentIntentState>;

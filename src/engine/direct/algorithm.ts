@@ -15,7 +15,7 @@ import type { JsonObject } from "../runtime/json";
 import { toWorldRuntimeContract } from "../runtime/world-definition";
 import { resolveCapabilityModels, type CapabilityModelOverrides } from "../models/capability-bindings";
 import { nextWorldClockBoundary } from "./clock";
-import { captureDependencies, readDependency, readDirectState, readyIntent, sealDirectState, wakeIntent } from "./state";
+import { captureDependencies, readDependency, readDirectState, readyIntent, resumePendingCause, sealDirectState, wakeIntent } from "./state";
 import type { ActionFrame, DirectCognitiveUpdate, DirectExecutionAlgorithm, DirectBootstrapCandidate, DirectStepCandidate, DirectStepPreparation } from "./contracts";
 import { DirectDecisions } from "./decisions";
 import { chooseAction } from "./actions";
@@ -25,13 +25,13 @@ import type { PresentationReply } from "../contracts/discourse";
 import { activityBoundary, admitActivities } from "./activities";
 import { directPerception } from "./perception";
 import { sealDirectRecord } from "./canonical";
-import { participantReactionIds } from "./foreground";
+import { participantReactionIds, prioritizeParticipantCauses } from "./foreground";
 import { hasLocalOpportunity } from "./initiative";
 import { withFreshMemory } from "../cognition/memory";
 
 export interface DirectWorldConfig extends CapabilityModelOverrides { creationEnabled: boolean }
 export const DIRECT_WORLD_CONFIG: DirectWorldConfig = { decision: null, creation: null, fallback: null, creationEnabled: true };
-export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "8", config: config as unknown as JsonObject });
+export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "9", config: config as unknown as JsonObject });
 export const directWorldAlgorithmRef = (config = DIRECT_WORLD_CONFIG) => algorithmRef(directWorldManifest(config));
 
 function components(state: Readonly<SimulationState>, frames: ActionFrame[]): ActionFrame[][] {
@@ -58,7 +58,7 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     const registryHash = context.modelScope.modelRegistrySnapshotHash ?? (await this.provider.modelRegistryDiagnostics?.())?.registry.currentHash;
     if (!registryHash) throw new Error("direct runtime requires the captured model registry");
     const modelOverrides = { decision: this.config.decision, creation: this.config.creation, fallback: this.config.fallback };
-    const control = sealDirectState({ kind: "direct-world", version: 2, worldHash: input.state.worldHash,
+    const control = sealDirectState({ kind: "direct-world", version: 3, worldHash: input.state.worldHash,
       modelCatalogHash: this.provider.catalog.hash, registryHash, models: resolveCapabilityModels(input.definition.modelProfiles, modelOverrides), modelOverrides,
       intents: Object.fromEntries(Object.keys(input.state.agents).sort().map(id => [id, readyIntent()])),
       activities: [], prepared: {}, capabilities: [], cache: {}, dependencies: {}, completedSubmissionIds: [] });
@@ -79,7 +79,11 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     const presentation: PresentationReply[] = [];
     for (const [id, intent] of Object.entries(control.intents)) if (input.policyRoster[id]?.kind === "idle") {
       intent.status = "waiting"; intent.activityId = null; intent.activeSubmission = null;
-      intent.causeActionId = null; intent.wakeReasons = [];
+      intent.causeActionId = null; intent.pendingCauseActionIds = []; intent.wakeReasons = [];
+    }
+    for (const [id, intent] of Object.entries(control.intents)) if (input.policyRoster[id]?.kind === "external") {
+      intent.pendingCauseActionIds = [];
+      if (!intent.activityId) intent.causeActionId = null;
     }
     control.activities = control.activities.filter(frame => input.policyRoster[frame.actorId]?.kind !== "idle");
     for (const id of Object.keys(control.prepared)) if (!control.activities.some(frame => frame.id === id)) delete control.prepared[id];
@@ -98,12 +102,14 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
       if (activity?.temporalProfileId && !source.truth.mechanics.temporalProfiles[activity.temporalProfileId]?.interruptible) throw new Error("activity cannot be interrupted");
       control.activities = control.activities.filter(frame => frame.actorId !== action.agentId);
       if (activity) delete control.prepared[activity.id];
-      control.intents[action.agentId] = { ...control.intents[action.agentId]!, status: "ready", activityId: null, wakeReasons: ["player-action"], noProgressCount: 0, activeSubmission: action };
+      control.intents[action.agentId] = { ...control.intents[action.agentId]!, status: "ready", activityId: null,
+        causeActionId: null, pendingCauseActionIds: [], wakeReasons: ["player-action"], noProgressCount: 0, activeSubmission: action };
     }
+    const participantIds = Object.entries(input.policyRoster).filter(([, policy]) => policy.kind === "external").map(([id]) => id);
+    prioritizeParticipantCauses(source, control, participantIds);
     const ready = Object.entries(control.intents).filter(([id, intent]) => input.policyRoster[id]?.kind === "model" && intent.status === "ready")
       .sort(([a, left], [b, right]) => right.urgency - left.urgency || a.localeCompare(b));
-    const foreground = participantReactionIds(source, control, Object.entries(input.policyRoster)
-      .filter(([, policy]) => policy.kind === "external").map(([id]) => id));
+    const foreground = participantReactionIds(source, control, participantIds);
     const reactions = ready.filter(([id]) => foreground.has(id));
     const pendingPlayers = Object.entries(control.intents).filter(([id, intent]) => input.policyRoster[id]?.kind === "external" && intent.status === "ready" && intent.activeSubmission).map(([id]) => id);
     const participantWork = foreground.size > 0 || Object.entries(control.intents).some(([id, intent]) =>
@@ -129,6 +135,10 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
         if (result.value.result.cognition) cognition.push(result.value.result.cognition);
         if (result.value.result.presentation) presentation.push(result.value.result.presentation);
         if (result.value.result.frame) control.activities.push(result.value.result.frame);
+        else if (input.policyRoster[id]?.kind === "model") {
+          control.intents[id]!.causeActionId = null;
+          resumePendingCause(control, id);
+        }
       } else {
         const intent = control.intents[id]!;
         intent.status = "failed"; intent.activityId = null; intent.wakeReasons = [];
@@ -216,7 +226,6 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     }
     for (const settlement of settlements) {
       const { frame, outcome } = settlement, intent = control.intents[frame.actorId]!;
-      const deferredCause = intent.causeActionId !== frame.causeActionId ? intent.causeActionId : null;
       const changed = settlement.operations.length > 0 || frame.kind === "speak" && initial.intents[frame.actorId]?.lastActionHash !== intent.lastActionHash ||
         settlement.visibleEntities.some(entity => !Object.values(source.agents[frame.actorId]!.bindings).some(binding => binding.canonicalEntityIds.includes(entity.id))) ||
         frame.kind === "observe" && settlement.visibleFacts.some(fact => !Object.values(source.agents[frame.actorId]!.belief.claims).some(claim =>
@@ -225,7 +234,7 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
       intent.activityId = ongoing.some(item => item.id === frame.id) ? frame.id : null;
       intent.status = intent.activityId ? "active" : "waiting";
       intent.wait = { entityIds: frame.targetEntityId ? [frame.targetEntityId] : [], untilSeconds: null, reason: intent.noProgressCount >= 2 ? "no-progress" : "action-settled" };
-      intent.recentOutcomeIds = [outcome.id]; intent.causeActionId = null;
+      intent.recentOutcomeIds = [outcome.id]; intent.causeActionId = intent.activityId ? frame.causeActionId : null;
       const continueSubmission = frame.submissionId && (frame.preparatoryFor || control.prepared[frame.id]!.requestProgress === "continue") &&
         ["succeeded", "partial"].includes(outcome.status) && intent.noProgressCount < 2 && !intent.activityId;
       if (frame.submissionId && !continueSubmission) { control.completedSubmissionIds.push(frame.submissionId); intent.activeSubmission = null; }
@@ -240,11 +249,11 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
       const continueReaction = !frame.submissionId && frame.causeActionId &&
         (control.prepared[frame.id]!.requestProgress === "continue" || inspectionReply) &&
         ["succeeded", "partial"].includes(outcome.status) && (inspectionReply || intent.noProgressCount < 2) && !intent.activityId;
-      if (deferredCause && !intent.activityId && input.policyRoster[frame.actorId]?.kind === "model") {
-        wakeIntent(control, frame.actorId, "observation", deferredCause);
-      } else if (continueReaction) wakeIntent(control, frame.actorId, "reaction-progress", frame.causeActionId);
-      else if (!intent.activityId && input.policyRoster[frame.actorId]?.kind === "model" && intent.noProgressCount < 2 &&
-        Object.values(source.agents[frame.actorId]!.character.goals).some(goal => goal.status === "active")) wakeIntent(control, frame.actorId, "action-result");
+      if (continueReaction) wakeIntent(control, frame.actorId, "reaction-progress", frame.causeActionId);
+      if (!intent.activityId && input.policyRoster[frame.actorId]?.kind === "model" && !resumePendingCause(control, frame.actorId) &&
+        !continueReaction && intent.noProgressCount < 2 && Object.values(source.agents[frame.actorId]!.character.goals).some(goal => goal.status === "active")) {
+        wakeIntent(control, frame.actorId, "action-result");
+      }
       if (!intent.activityId) delete control.prepared[frame.id];
       if (frame.capabilityId) {
         const capability = control.capabilities.find(capability => capability.id === frame.capabilityId)!;
@@ -264,9 +273,9 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
       const index = events.findIndex(event => observation.sourceEventIds.includes(event.id)); const frame = settlements[index]?.frame;
       if (frame && frame.actorId !== owner.id && !Object.values(owner.belief.evidence).some(evidence =>
         evidence.step === owner.observationCursorStep && evidence.description === observation.summary)) {
-        const intent = control.intents[owner.id]!;
-        const continuing = !frame.submissionId && intent.wakeReasons.includes("reaction-progress");
-        wakeIntent(control, owner.id, "observation", continuing ? intent.causeActionId : frame.id);
+        const policy = input.policyRoster[owner.id];
+        // Newly admitted Agents receive their model policy at the host commit boundary.
+        wakeIntent(control, owner.id, "observation", !policy || policy.kind === "model" ? frame.id : null);
       }
     }
     if (effectiveTime > source.truth.elapsedSeconds) {

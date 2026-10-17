@@ -23,7 +23,7 @@ Nearby witnesses retain delivered dialogue and may respond to it. Waiting for ev
 
 ## Decision Outcome
 
-Choose the third option under [Spec 0184](../specs/0184-conversational-continuity-and-recovery.md). A ready or active character task whose cause is a participant submission holds that submission's feedback window. Its explicitly continued work retains the same cause. Observing another character's subsequent action creates background work without extending the participant's immediate turn. That observation remains in private memory and the task remains scheduled. Background observations do not replace a pending response's explicit continuation cause. Already admitted activities retain their ordered world-time settlement.
+Choose the third option under [Spec 0184](../specs/0184-conversational-continuity-and-recovery.md). A ready or active character task whose selected or queued cause is a participant submission holds that submission's feedback window. Its explicitly continued work retains the same cause. Observing another character's subsequent action creates background work without extending the participant's immediate turn. That observation remains in private memory and the task remains scheduled. Delivered causes are queued independently of the active activity's cause, so neither older work nor a later observation displaces a player request. Ready selection prioritizes participant causes while retaining deferred background work. Already admitted activities retain their ordered world-time settlement. Human-controlled actors retain received evidence rather than an autonomous response backlog.
 
 ## Pros and Cons of the Options
 
