@@ -2,6 +2,7 @@ import { createWorldExpansion, type WorldExpansion } from "./expansion";
 import { canHaveWitnesses, contactQuestions, contactPolicy } from "./contact";
 import type { ActionOutcome, CausalSource, FactValue, ModelExecutionAudit, SimulationState, WorldDeltaOperation, WorldFact, WorldEntity } from "../contracts/model";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
+import type { ExternalActionInput } from "../runtime/execution";
 import { loadPromptAsset } from "../prompts";
 import { applyWorldDeltaOperation } from "../runtime/transaction";
 import { contentHash } from "../models/model-audit";
@@ -60,6 +61,11 @@ function capabilityFact(state: Readonly<SimulationState>, frame: ActionFrame, ca
 export function directSemanticId(kind: "fact" | "object" | "condition", owners: string[]): string {
   return `direct-${kind}-${contentHash(owners).slice(0, 40)}`;
 }
+export function playerAuthorizationSources(submission: ExternalActionInput | null) {
+  if (!submission) return { originalSubmission: null, referenceDiscourse: null };
+  const { discourse: referenceDiscourse = null, ...originalSubmission } = submission;
+  return { originalSubmission, referenceDiscourse };
+}
 export async function prepareActions(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frames: ActionFrame[], decisions: DirectDecisions, creationEnabled = true) {
   const audits: ModelExecutionAudit[] = [];
   const rejected: Array<{ actionId: string; reason: "outside_scope" | "unknown" }> = [];
@@ -70,7 +76,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     const started = state.history.findIndex(entry => entry.directEvent?.frames.some(previous => previous.submissionId === frame.submissionId));
     const history = started < 0 ? [] : state.history.slice(started);
     return [frame.id, {
-      originalSubmission: submission?.submissionId === frame.submissionId && submission.agentId === frame.actorId ? submission : null,
+      ...playerAuthorizationSources(submission?.submissionId === frame.submissionId && submission.agentId === frame.actorId ? submission : null),
       completedSteps: history.flatMap(entry => (entry.directEvent?.frames ?? [])
         .filter(previous => previous.actorId === frame.actorId && previous.submissionId === frame.submissionId)
         .map(previous => ({ actionId: previous.id, kind: previous.kind, attempted: previous.proposal.rawText, utterance: previous.utterance,
@@ -121,7 +127,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   for (const [index, frame] of frames.entries()) {
     const prefix = `a${index}`;
     if (frame.submissionId) questions[`${prefix}_player_authorization`] = question(
-      "Is this whole player-controlled candidate, including its actual utterance, authorized by state.playerAuthorization[actionId].originalSubmission? That immutable input, not the generated proposal or another speaker's words, owns voluntary action. Use completedSteps to identify only the still-unperformed authorized step. Delivered NPC questions, consent or requests can satisfy a player-selected condition but cannot choose an answer, new price, promise, diagnosis or strategy for the player. Necessary low-risk continuity may realize the requested act; new spending, commitments, risk choices and unsolicited dialogue need authorization. A requested factual report may use the actor's actual evidence, not a result invented by interpretation. Explicitly requested claims can be false; this is scope admission, not a requirement that speech be truthful. Judge independently of physical feasibility and other questions. If any part exceeds the request, reject the whole candidate; do not trim it or perform a substitute. Missing original input or unresolved authorization is unknown.",
+      loadPromptAsset("user/direct-player-authorization.md"),
       { actionId: frame.id }, { authorized: "The entire concrete candidate is an unperformed step authorized by the original player input",
         outside_scope: "At least one voluntary act or utterance goes beyond or contradicts that input",
         unknown: "The available input and receipts do not establish authorization for this candidate" });
