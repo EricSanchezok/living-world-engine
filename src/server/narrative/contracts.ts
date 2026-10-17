@@ -2,6 +2,8 @@ import type { ObservationPacket } from "../../engine/contracts/model";
 import type { JsonValue } from "../../engine/runtime/json";
 import type { DiscourseMention, PresentationReply } from "../../engine/contracts/discourse";
 
+export type RequestRelation = "participant_step" | "caused_response" | "concurrent_event" | "unattributed";
+
 export interface ScenePacket {
   participantId: string;
   agentId: string;
@@ -20,7 +22,7 @@ export interface ScenePacket {
   knownEntities: Array<{ localEntityId: string; name: string; description: string }>;
   currentHoldings?: { coverage: "complete-current-self-holdings"; quantities: Array<{ name: string; unit: string; amount: number }> };
   observedProperties?: Array<{ subject: string; predicate: string; value: JsonValue; stance: string; description: string }>;
-  priorRequestReceipts?: ScenePacket["observations"];
+  priorObservedReceipts?: Array<ScenePacket["observations"][number] & { requestRelation: RequestRelation }>;
   knownWork?: Array<{ description: string; status: string }>;
 }
 export interface NarrativeBeat {

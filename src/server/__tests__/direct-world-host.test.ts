@@ -544,7 +544,7 @@ describe("direct world through persistent WorldHost", () => {
         expect(saved.narratives).toHaveLength(2);
         expect(saved.narratives.every(beat => beat.status === "complete")).toBe(true);
         expect(saved.narratives[1]!.source).toMatchObject({ reply: { kind: "recovery" },
-          priorRequestReceipts: [{ scene: { actor: "你", speech: { utterance: "请问铜钥匙多少钱？" } } }] });
+          priorObservedReceipts: [{ requestRelation: "participant_step", scene: { actor: "你", speech: { utterance: "请问铜钥匙多少钱？" } } }] });
         expect(saved.narratives[1]!.segments[0]!.text).toContain("你的问题已经问出");
         expect(proseCalls).toBe(2);
       }
@@ -905,8 +905,8 @@ describe("direct world through persistent WorldHost", () => {
       if (!priorWait) expect(executionCalls(f.transport.mock.calls)).toHaveLength(3);
       const recovery = failed.narratives.find(beat => beat.source.reply?.kind === "recovery")!;
       expect(recovery.status).toBe("complete");
-      expect(recovery.source.priorRequestReceipts).toHaveLength(priorWait ? 1 : 0);
-      if (priorWait) expect(recovery.source.priorRequestReceipts![0]).toMatchObject({ scene: { actionKind: "wait", status: "succeeded", action: { durationSeconds: 5 } } });
+      expect(recovery.source.priorObservedReceipts).toHaveLength(priorWait ? 1 : 0);
+      if (priorWait) expect(recovery.source.priorObservedReceipts![0]).toMatchObject({ requestRelation: "participant_step", scene: { actionKind: "wait", status: "succeeded", action: { durationSeconds: 5 } } });
       expect(failed.actionWindow, JSON.stringify({ revision: failed.state.revision, runs: failed.runs })).not.toBeNull();
       expect(failed.actionWindow?.requiredAgentIds).toContain("player");
       expect(replaySimulationState(failed.state)).toEqual(failed.state);
@@ -1027,7 +1027,7 @@ describe("direct world through persistent WorldHost", () => {
       let host = makeHost();
       const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } });
       const id = created.summary.id;
-      expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 32, executionAlgorithm: DEFAULT_ALGORITHM_REF,
+      expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 33, executionAlgorithm: DEFAULT_ALGORITHM_REF,
         state: { schemaVersion: 21, executionState: { data: { kind: "direct-world" } } } });
       expect(f.transport).not.toHaveBeenCalled();
       await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });

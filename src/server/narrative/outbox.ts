@@ -1,11 +1,11 @@
 import { directControlHistory } from "../../engine/direct/canonical";
 import { contentHash } from "../../engine/models/model-audit";
 import type { WorldInstanceDocument } from "../world-instance-types";
-import type { DirectRuntimeState } from "../../engine/direct/contracts";
+import type { ActionFrame, DirectRuntimeState } from "../../engine/direct/contracts";
 import type { JsonValue } from "../../engine/runtime/json";
 import { projectAgentPerspective } from "../../engine/cognition/agent-perspective";
 import { participantReactionIds } from "../../engine/direct/foreground";
-import type { ScenePacket, NarrativeBeat } from "./contracts";
+import type { ScenePacket, NarrativeBeat, RequestRelation } from "./contracts";
 import { executedDescription } from "./scene";
 import { narrativeFallback, explicitNarrativeMentions } from "./publication";
 
@@ -39,11 +39,33 @@ export function nextNarrative(document: WorldInstanceDocument): NarrativeBeat | 
   }
 }
 
+/** Window membership is not request provenance; only committed frame links establish it. */
+function requestRelation(actionIds: string[], frames: Map<string, ActionFrame>, agentId: string, submissionId: string): RequestRelation {
+  const relation = (id: string): RequestRelation => {
+    const first = frames.get(id);
+    if (!first) return "unattributed";
+    if (first.actorId === agentId) return first.submissionId === submissionId ? "participant_step" : "concurrent_event";
+    const visited = new Set<string>();
+    let frame: ActionFrame | undefined = first;
+    while (frame) {
+      if (visited.has(frame.id)) return "unattributed";
+      visited.add(frame.id);
+      if (frame.actorId === agentId) return frame.submissionId === submissionId ? "caused_response" : "concurrent_event";
+      if (!frame.causeActionId) return "concurrent_event";
+      frame = frames.get(frame.causeActionId);
+    }
+    return "unattributed";
+  };
+  const relations = new Set(actionIds.map(relation));
+  return relations.size === 1 ? [...relations][0]! : "unattributed";
+}
+
 /** Called in the world transaction. Never performs model work. */
 export function enqueueNarrative(document: WorldInstanceDocument, now: string): void {
   const controlHistory = new Map<number, DirectRuntimeState["intents"]>();
   for (const [revision, control] of directControlHistory(document.state)) controlHistory.set(revision, control.intents);
   const actionFrames = new Map(document.state.history.flatMap(step => step.directEvent?.frames ?? []).map(frame => [frame.id, frame]));
+  const events = new Map(document.state.truth.events.map(event => [event.id, event]));
   for (const participant of Object.values(document.participants).filter(p => p.status === "active")) {
     const existing = document.narratives.filter(beat => beat.participantId === participant.id);
     const covered = new Set(existing.flatMap(beat => beat.source.observations.map(o => o.id)));
@@ -99,7 +121,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
       if (failed && failed.atRevision === step.baseRevision && !failed.servicePause && intent.activeSubmission) {
         replies.push({ submissionId: intent.activeSubmission.submissionId, agentId: participant.agentId, kind: "recovery",
           requested: intent.activeSubmission.rawText, focusLocalEntityId: null,
-          reason: "Processing the next unperformed step was interrupted before it could commit. The original request may contain earlier steps that already completed: use earlierCommittedSteps to identify and preserve them, including elapsed waiting. Explain only the remaining interruption; retry only the unfinished part. Do not claim the entire original request failed or invent a physical obstacle or refusal." });
+          reason: "Processing the next unperformed step was interrupted before it could commit. Use earlierObservedEvents and their requestRelation to distinguish completed participant steps, causally related responses and independent observed events; preserve each actual actor and effect, including elapsed waiting. Explain only the remaining interruption; retry only the unfinished part. Do not claim the entire original request failed or invent a physical obstacle or refusal." });
       }
       for (const [ownerId, other] of Object.entries(controlHistory.get(step.revision)!)) {
         if (ownerId === participant.agentId || !other.failure || other.failure.atRevision !== step.baseRevision ||
@@ -112,7 +134,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
           binding.canonicalEntityIds.length === 1 && binding.canonicalEntityIds[0] === document.state.agents[ownerId]?.entityId);
         replies.push({ submissionId: original.submissionId, agentId: participant.agentId, kind: "recovery",
           requested: original.text, focusLocalEntityId: local?.localEntityId ?? null,
-          reason: "The player's interaction already committed. Processing a relevant character response was interrupted before that response could commit. Preserve the delivered question and all earlierCommittedSteps. Explain that the response could not be completed and the outstanding question can be continued. This is not a refusal, silence, a missed delivery, or evidence that the character did nothing. Do not invent their intended answer, motive, private activity or the technical cause." });
+          reason: "The player's interaction already committed. Processing a relevant character response was interrupted before that response could commit. Preserve the delivered question and earlierObservedEvents according to their requestRelation and actual actor. Explain that the response could not be completed and the outstanding question can be continued. This is not a refusal, silence, a missed delivery, or evidence that the character did nothing. Do not invent their intended answer, motive, private activity or the technical cause." });
       }
       for (const reply of replies) {
         const id = `reply-${contentHash([participant.id, step.revision, reply.submissionId]).slice(0, 24)}`;
@@ -125,9 +147,15 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
           boundary: { revision: step.revision, step: step.step, worldTimeSeconds: step.temporalBoundary.toElapsedSeconds },
           world: { name: document.world.name, language: document.world.narrative.language, style: document.world.narrative.style },
           playerName: participant.displayName, location: projectAgentPerspective(document.state, agent).self.location?.name ?? null, observations: [], speech: [],
-          priorRequestReceipts: reply.kind === "recovery" ? document.narratives.filter(beat =>
+          priorObservedReceipts: reply.kind === "recovery" ? document.narratives.filter(beat =>
             beat.participantId === participant.id && beat.submissionId === reply.submissionId && !beat.source.reply)
-            .flatMap(beat => structuredClone(beat.source.observations)) : [],
+            .flatMap(beat => beat.source.observations.map(observation => {
+              const sourceEvents = observation.sourceEventIds.map(id => events.get(id));
+              const actionIds = sourceEvents.flatMap(event => event?.causes.filter(cause => cause.kind === "action").map(cause => cause.id) ?? []);
+              const complete = sourceEvents.length > 0 && sourceEvents.every(event => event?.causes.some(cause => cause.kind === "action"));
+              return { ...structuredClone(observation), requestRelation: complete
+                ? requestRelation(actionIds, actionFrames, participant.agentId, reply.submissionId) : "unattributed" as const };
+            })) : [],
           currentHoldings: { coverage: "complete-current-self-holdings", quantities: projectAgentPerspective(document.state, agent).mechanics.quantities },
           knownWork: Object.values(agent.character.goals).map(goal => ({ description: goal.description, status: goal.status })),
           knownEntities: Object.values(agent.belief.localEntities).map(entity => ({ localEntityId: entity.id, name: entity.name, description: entity.description })),

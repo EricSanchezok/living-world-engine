@@ -12,13 +12,15 @@ export function executedDescription(observation: Pick<ObservationPacket, "summar
 export function narrativeEvidence(source: ScenePacket) {
   const { requestedAction: _request, ...evidence } = source;
   void _request;
+  const observed = <T extends ScenePacket["observations"][number]>(observation: T) => ({ ...observation,
+    summary: executedDescription({ ...observation, scene: observation.scene ?? undefined }),
+    scene: observation.scene ? { ...observation.scene,
+      attempt: observation.scene.actionKind !== "speak" ? observation.scene.attempt : null } : null,
+  });
   return { ...evidence,
     memories: source.reply ? source.memories.map(memory => ({ kind: memory.kind, description: memory.executedDescription ?? memory.description })) : [],
-    observations: source.observations.map(observation => ({ ...observation,
-      summary: executedDescription({ ...observation, scene: observation.scene ?? undefined }),
-      scene: observation.scene ? { ...observation.scene,
-        attempt: observation.scene.actionKind !== "speak" ? observation.scene.attempt : null } : null,
-    })),
+    observations: source.observations.map(observed),
+    ...(source.priorObservedReceipts ? { priorObservedReceipts: source.priorObservedReceipts.map(observed) } : {}),
   };
 }
 
@@ -33,9 +35,11 @@ export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscou
     executionBoundary: source.reply ? {
       newPhysicalEffects: false, newSpeech: false, elapsedWorldTime: false,
       explanation: source.reply.reason,
-      scope: "Only this failed or explanatory boundary; earlier committed steps of the same request remain executed.",
+      scope: "Only this failed or explanatory boundary; earlier observed events retain their actual actors and effects. Only participant_step belongs to this request; caused_response is another actor responding through recorded causality; concurrent_event is independent; unattributed has no established request relation.",
       originalRequest: source.reply.requested,
-      earlierCommittedSteps: (source.priorRequestReceipts ?? []).map(observation => ({
+      earlierObservedEvents: (source.priorObservedReceipts ?? []).map(observation => ({
+        requestRelation: observation.requestRelation,
+        actor: observation.scene?.actor ?? null, actorLocalId: observation.scene?.actorLocalId ?? null,
         operation: observation.scene?.actionKind ?? null, action: observation.scene?.action ?? null,
         status: observation.scene?.status ?? null, worldTimeSeconds: observation.worldTimeSeconds,
         actualResult: executedDescription({ ...observation, scene: observation.scene ?? undefined }),
@@ -49,7 +53,7 @@ export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscou
       manner: observation.scene?.manner ?? null,
       actualResult: executedDescription({ ...observation, scene: observation.scene ?? undefined }) })),
     actionBoundary: "These receipts are the complete new action record. Earlier prose is not a new action. No extra gesture, movement, reaction or physical completion is implied by fluent dialogue or by an object's suitability for use.",
-    evidenceBoundary: "A partial outcome establishes only its listed effects and observations. It supplies no unstated cause or degree of success. No delivered report means the result is unknown, not that nobody acted. Earlier prose can resolve references but cannot establish a world fact.",
+    evidenceBoundary: "A partial outcome establishes only its listed effects and observations. It supplies no unstated cause or degree of success. No delivered report means the result is unknown, not that nobody acted or the other person lacks knowledge. A delivered instruction establishes that its actor spoke, not that the requested payment or work occurred. Earlier prose can resolve references but cannot establish a world fact.",
     playerCurrentHoldings: source.currentHoldings?.quantities.map(quantity => `You currently hold ${quantity.amount} ${quantity.unit} of ${quantity.name}.`) ?? [],
     backgroundUse: "Holdings and old properties constrain accuracy; mention them only when they answer the current request or changed in the new receipts.",
     newSpeech: source.speech,

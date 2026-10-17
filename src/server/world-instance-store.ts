@@ -249,7 +249,7 @@ function validateActionWindow(document: WorldInstanceDocument): void {
 }
 
 export function validateWorldInstanceDocument(document: WorldInstanceDocument, rulePackages?: RulePackageRegistry): void {
-  if (document.schemaVersion !== 32) throw new Error("world instance schema v32 required");
+  if (document.schemaVersion !== 33) throw new Error("world instance schema v33 required");
   if (!document.agentMemories || Array.isArray(document.agentMemories)) throw new Error("instance Agent memories are required");
   for (const [id, value] of Object.entries(document.agentMemories)) {
     const record = memoryRecordSchema.parse(value), agent = document.state.agents[id];
@@ -266,6 +266,9 @@ export function validateWorldInstanceDocument(document: WorldInstanceDocument, r
       document.participants[beat.participantId]!.agentId !== beat.agentId ||
       beat.sourceHash !== contentHash(beat.source) || !["queued", "generating", "complete", "fallback"].includes(beat.status) ||
       !Array.isArray(beat.grounding) || !Object.hasOwn(beat, "producer") ||
+      (beat.source.reply?.kind === "recovery" && !Array.isArray(beat.source.priorObservedReceipts)) ||
+      beat.source.priorObservedReceipts?.some(receipt =>
+        !["participant_step", "caused_response", "concurrent_event", "unattributed"].includes(receipt.requestRelation)) ||
       beat.segments.some((segment, index) => segment.sequence !== index || !segment.text.trim() || !Array.isArray(segment.mentions) ||
         segment.mentions.some(mention => !mention.surface.trim() || !segment.text.includes(mention.surface) ||
           !beat.source.knownEntities.some(entity => entity.localEntityId === mention.localEntityId))) ||
