@@ -1,7 +1,7 @@
 # Natural action time and world initiative
 
 Artifact-Version: 1
-Status: Approved
+Status: Implemented
 
 ## Intent
 
@@ -26,4 +26,6 @@ Exercise timing across speech, observation, work, waits and concurrent activity;
 
 ## Evidence
 
-The first work unit passes `check:fast` (2,397 tests in 362 files), world validation and [Direct entry regressions](../../src/engine/direct/__tests__/runtime.test.ts). Those regressions cover action-bound duration, model-selected ordinary timing without an extra adjudication call, incidental context ownership and recorded replay. [Activity coverage](../../src/engine/direct/__tests__/activities.test.ts) retains shared-resource queues, earlier timers and ongoing work. Local initiative and real-model qualification remain to be verified.
+The implementation passes `check:fast` (2,415 tests in 362 files), `check:ui` (16 interaction and 4 accessibility tests), bundled-world validation and [Direct entry regressions](../../src/engine/direct/__tests__/runtime.test.ts). Those regressions cover action-bound duration, model-selected ordinary timing without an extra adjudication call, incidental context ownership, bounded local initiative, new-recipient delivery, concrete NPC physical methods and recorded replay. [Activity coverage](../../src/engine/direct/__tests__/activities.test.ts) retains shared-resource queues, earlier timers and ongoing work.
+
+Real-model qualification includes two baseline turns and three tuning cycles of 3, 6 and 11 player turns through the public participant API. The final cycle reaches a destination and obtains an answer within one compound request, preserves conditional payment authority, debits one coin exactly once, records physical follow-through, advances an explicit wait by 120 seconds, and performs presentation clarification with zero elapsed world time. The third-cycle run records 119 model invocations, including one rejected output recovered through repair. These are short trajectory observations, not a controlled latency benchmark or proof of long-horizon narrative quality. Complex turns still take roughly 50–70 seconds and some exchanges require prompting; no guaranteed dramatic pacing or completion score is claimed. [Postmortem 0168](../postmortems/0168-minimum-time-and-muted-world-feedback.md) records the failures exposed by play and their permanent guards.
