@@ -31,7 +31,7 @@ import { withFreshMemory } from "../cognition/memory";
 
 export interface DirectWorldConfig extends CapabilityModelOverrides { creationEnabled: boolean }
 export const DIRECT_WORLD_CONFIG: DirectWorldConfig = { decision: null, creation: null, fallback: null, creationEnabled: true };
-export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "9", config: config as unknown as JsonObject });
+export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "11", config: config as unknown as JsonObject });
 export const directWorldAlgorithmRef = (config = DIRECT_WORLD_CONFIG) => algorithmRef(directWorldManifest(config));
 
 function components(state: Readonly<SimulationState>, frames: ActionFrame[]): ActionFrame[][] {
@@ -58,7 +58,7 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     const registryHash = context.modelScope.modelRegistrySnapshotHash ?? (await this.provider.modelRegistryDiagnostics?.())?.registry.currentHash;
     if (!registryHash) throw new Error("direct runtime requires the captured model registry");
     const modelOverrides = { decision: this.config.decision, creation: this.config.creation, fallback: this.config.fallback };
-    const control = sealDirectState({ kind: "direct-world", version: 3, worldHash: input.state.worldHash,
+    const control = sealDirectState({ kind: "direct-world", version: 4, worldHash: input.state.worldHash,
       modelCatalogHash: this.provider.catalog.hash, registryHash, models: resolveCapabilityModels(input.definition.modelProfiles, modelOverrides), modelOverrides,
       intents: Object.fromEntries(Object.keys(input.state.agents).sort().map(id => [id, readyIntent()])),
       activities: [], prepared: {}, capabilities: [], cache: {}, dependencies: {}, completedSubmissionIds: [] });
@@ -85,14 +85,27 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
       intent.pendingCauseActionIds = [];
       if (!intent.activityId) intent.causeActionId = null;
     }
+    for (const [id, intent] of Object.entries(control.intents)) if (input.policyRoster[id]?.kind === "model" && intent.activeSubmission && !intent.activityId) {
+      // Admitted work retains its original authorization until it settles.
+      // After release, that request cannot instruct a new autonomous choice.
+      intent.activeSubmission = null; intent.failure = null;
+      wakeIntent(control, id, "control-released");
+    }
+    const wakeFromWorldEvent = (id: string, reason: string, causeActionId: string | null = null) => {
+      const intent = control.intents[id];
+      // A failed interpretation is awaiting new human input. Perception still
+      // commits, but neither this boundary nor a later one may retry it.
+      if (input.policyRoster[id]?.kind === "external" && intent?.status === "failed" && intent.activeSubmission) return;
+      wakeIntent(control, id, reason, causeActionId);
+    };
     control.activities = control.activities.filter(frame => input.policyRoster[frame.actorId]?.kind !== "idle");
     for (const id of Object.keys(control.prepared)) if (!control.activities.some(frame => frame.id === id)) delete control.prepared[id];
     for (const [id, intent] of Object.entries(control.intents)) if (["waiting", "failed"].includes(intent.status) &&
       Object.entries(intent.dependencies).some(([key, hash]) => key !== "clock" && !key.startsWith("agent:") && contentHash(readDependency(source, key)) !== hash)) {
-      wakeIntent(control, id, "dependency-changed");
+      wakeFromWorldEvent(id, "dependency-changed");
     }
     for (const [id, intent] of Object.entries(control.intents)) if (intent.wait?.untilSeconds !== null && intent.wait?.untilSeconds !== undefined &&
-      intent.wait.untilSeconds <= source.truth.elapsedSeconds) wakeIntent(control, id, "deadline");
+      intent.wait.untilSeconds <= source.truth.elapsedSeconds) wakeFromWorldEvent(id, "deadline");
     await context.stages?.before(executionStage("direct-action"));
     const submissions = input.request.externalActions.filter(action => !control.completedSubmissionIds.includes(action.submissionId));
     if (new Set(submissions.map(action => action.agentId)).size !== submissions.length) throw new Error("duplicate external actor");
@@ -120,7 +133,9 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
       : pendingPlayers.length ? pendingPlayers : participantWork ? [] : ready.map(([id]) => id);
     const select = (ids: string[]) => Promise.allSettled(ids.map(async agentId => ({ agentId,
       result: await withFreshMemory(() => chooseAction({ state: source, definition: authority, control, decisions, agentId,
-        external: submissions.find(action => action.agentId === agentId) ?? control.intents[agentId]!.activeSubmission ?? undefined, creationEnabled: this.config.creationEnabled })) })));
+        external: input.policyRoster[agentId]?.kind === "external"
+          ? submissions.find(action => action.agentId === agentId) ?? control.intents[agentId]!.activeSubmission ?? undefined : undefined,
+        creationEnabled: this.config.creationEnabled })) })));
     const selected = await select(owners);
     if (submissions.length) {
       const frames = selected.flatMap(result => result.status === "fulfilled" && result.value.result.frame ? [result.value.result.frame] : []);
@@ -154,7 +169,7 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     // Adjudicate once, then retain executable effects across intervening clock boundaries.
     for (const frame of control.activities.filter(frame => frame.kind === "reflect")) {
       control.prepared[frame.id] = { actionId: frame.id, reads: {},
-        status: "succeeded", summary: "你复核了自己已有的记录。", operations: [], visibleFactIds: [], visibleEntityIds: [], namedEntityIds: [],
+        status: "succeeded", summary: "你复核了自己已有的记录。", operations: [], visibleFactIds: [], propertyVisibility: [], visibleEntityIds: [], namedEntityIds: [],
         actorOnlyFactIds: [], actorOnlyEntityIds: [],
         deliveredToEntityIds: [], randomRequests: [], randomBindings: [], sharedClaims: [], ongoing: false, requestProgress: "complete" };
     }
@@ -171,6 +186,14 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     adjudicated.forEach((result, index) => {
       if (result.status === "fulfilled") {
         audits.push(...result.value.audits);
+        for (const rejection of result.value.rejected) {
+          const frame = groups[index]!.find(item => item.id === rejection.actionId)!;
+          const intent = control.intents[frame.actorId]!;
+          intent.status = "failed"; intent.activityId = null; intent.wakeReasons = [];
+          intent.failure = { inputHash: frame.inputHash, message: `Action interpretation failed player authorization (${rejection.reason}); no candidate action was executed.`,
+            recoverable: true, atRevision: source.revision, servicePause: null };
+          control.activities = control.activities.filter(activity => activity.id !== frame.id); delete control.prepared[frame.id];
+        }
         for (const prepared of result.value.prepared) { control.prepared[prepared.actionId] = prepared; newRandomCommitment ||= prepared.randomRequests.length > 0; }
         Object.assign(reads, result.value.reads);
       }
@@ -222,7 +245,7 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
       const timed = { ...source, truth: { ...source.truth, elapsedSeconds: effectiveTime } } as SimulationState;
       timer.status = timer.assertions.every(assertion => evaluateCausalAssertion(timed, assertion).passed) ? "fired" : "cancelled";
       Object.assign(reads, captureDependencies(source, [`timer:${timer.id}`]));
-      if (timer.status === "fired") for (const id of timer.wakeAgentIds) wakeIntent(control, id, `timer:${timer.id}`);
+      if (timer.status === "fired") for (const id of timer.wakeAgentIds) wakeFromWorldEvent(id, `timer:${timer.id}`);
     }
     for (const settlement of settlements) {
       const { frame, outcome } = settlement, intent = control.intents[frame.actorId]!;
@@ -275,7 +298,7 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
         evidence.step === owner.observationCursorStep && evidence.description === observation.summary)) {
         const policy = input.policyRoster[owner.id];
         // Newly admitted Agents receive their model policy at the host commit boundary.
-        wakeIntent(control, owner.id, "observation", !policy || policy.kind === "model" ? frame.id : null);
+        wakeFromWorldEvent(owner.id, "observation", !policy || policy.kind === "model" ? frame.id : null);
       }
     }
     if (effectiveTime > source.truth.elapsedSeconds) {

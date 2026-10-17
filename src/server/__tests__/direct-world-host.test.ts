@@ -748,6 +748,128 @@ describe("direct world through persistent WorldHost", () => {
       expect(replaySimulationState(saved.state)).toEqual(saved.state);
     } finally { release(); database.close(); rmSync(root, { recursive: true, force: true }); }
   });
+  it("holds a rejected player interpretation across host ticks and reconnect until a new submission", async () => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-player-authorization-"));
+    const text = "只查看门闩，不报价。";
+    let playerReadings = 0;
+    const f = quietInitialNpcProvider(wire => {
+      const state = wire.state as { perspective?: { agentId: string }; submittedAction?: { rawText: string };
+        playerAuthorization?: Record<string, { originalSubmission: { rawText: string } }> };
+      if (state.perspective?.agentId === "player") playerReadings++;
+      const rejectedInput = state.submittedAction?.rawText === text;
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeAnswer(question,
+        id.endsWith("_player_authorization") ? Object.values(state.playerAuthorization ?? {}).some(value => value.originalSubmission.rawText === text) ? "outside_scope" : "authorized"
+          : id.startsWith("paragraph") ? "grounded" : id === "operation" ? rejectedInput ? "speak" : "observe"
+            : id === "recipient" ? "broadcast" : id === "target" ? "self" : id === "speech" ? "create"
+              : id.includes("outcome") ? "succeeded" : id.endsWith("_duration") ? "s1" : "none")]));
+    }, wire => directCreationContext(wire).scene ? { paragraphs: ["刚才那一步没有执行，你可以重新说明想做的事。"] }
+      : { attempt: "自行报价", utterance: "维护收你三枚灵石。", manner: null });
+    await f.registry.capture();
+    const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
+    const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
+    try {
+      const options = { repository: new MemoryWorldRepository({ [world.id]: world }), store: database, ledger: database, provider: f.gateway };
+      const host = new WorldHost(options);
+      const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } }), id = created.summary.id;
+      await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });
+      const participant = Object.values(database.readInstance(id).document.participants)[0]!;
+      await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "outside-scope", text });
+      for (let i = 0; i < 200; i++) {
+        if (Object.values(database.readInstance(id).document.runs).some(run => run.stopReason === "local-model-task-failed")) break;
+        await new Promise(resolve => setTimeout(resolve, 10));
+      }
+      await host.drainNarratives(id);
+      const failed = database.readInstance(id).document;
+      const run = Object.values(failed.runs).find(value => value.rootIntents.some(intent => intent.submissionId === "outside-scope"))!;
+      expect(run).toMatchObject({ status: "failed", stopReason: "local-model-task-failed", error: expect.stringContaining("player authorization") });
+      expect(failed.state.truth).toEqual(world.initialState.truth);
+      expect(failed.state.history.flatMap(step => step.directEvent?.frames ?? [])).toEqual([]);
+      expect(readDirectState(failed.state.executionState!, failed.state).intents.player).toMatchObject({ status: "failed", activeSubmission: { rawText: text } });
+      expect(playerReadings).toBe(1);
+      await expect(host.resumeRun(id, { runId: run.id, generation: run.generation })).rejects.toThrow("cannot be resumed");
+      await host.advance(id, { expectedRevision: failed.state.revision, trigger: "realtime" });
+      const restarted = new WorldHost(options);
+      expect(restarted.instance(id).run).toMatchObject({ status: "awaiting-decision", stopReason: "external-decision-required" });
+      await restarted.drainNarratives(id);
+      expect(playerReadings).toBe(1);
+      expect(database.readInstance(id).document.state).toEqual(failed.state);
+      await restarted.submitAction(id, participant.id, { expectedRevision: failed.state.revision, submissionId: "new-authorized-input", text: "查看自己" });
+      for (let i = 0; i < 200 && database.readInstance(id).document.state.revision === failed.state.revision; i++) await new Promise(resolve => setTimeout(resolve, 10));
+      await restarted.drainNarratives(id);
+      const recovered = database.readInstance(id).document.state;
+      expect(playerReadings).toBe(2);
+      expect(recovered.history.flatMap(step => step.directEvent?.frames ?? [])).toContainEqual(expect.objectContaining({ actorId: "player", kind: "observe", submissionId: "new-authorized-input" }));
+      expect(readDirectState(recovered.executionState!, recovered).intents.player?.failure).toBeNull();
+      expect(replaySimulationState(recovered)).toEqual(recovered);
+    } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+  });
+  it("retains a rejected continuation while an already admitted NPC reply finishes after reconnect", async () => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-player-scope-reaction-"));
+    let playerReadings = 0;
+    const f = quietInitialNpcProvider(wire => {
+      const state = wire.state as { perspective?: { agentId: string }; actions?: Array<{ actorId: string; utterance: string | null }> };
+      if (state.perspective?.agentId === "player") playerReadings++;
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => {
+        const action = state.actions?.[Number(id.split("_")[0]!.slice(1))];
+        const value = id.endsWith("_player_authorization") ? action?.utterance === "维修收你三枚灵石。" ? "outside_scope" : "authorized"
+          : id.endsWith("_request_progress") ? action?.actorId === "player" ? "continue" : "complete"
+            : id.endsWith("_duration") ? action?.actorId === "keeper" ? "s60" : "s1"
+              : id.startsWith("progress_") ? "continue" : id.startsWith("paragraph") ? "grounded" : id === "operation" ? "speak" : id === "recipient" ? "broadcast"
+                : id === "speech" ? "create" : id.includes("outcome") ? "succeeded" : id.includes("delivery") ? "delivered"
+                  : id.includes("visible") ? "visible" : id.includes("fact") || id.includes("status") ? "unchanged" : "none";
+        return [id, nativeAnswer(question, value)];
+      }));
+    }, wire => {
+      const context = directCreationContext(wire);
+      if (context.scene) return createText(wire);
+      return { attempt: context.playerControlled ? playerReadings === 1 ? "询问检查范围" : "自行报价" : "回复检查范围",
+        utterance: context.playerControlled ? playerReadings === 1 ? "要检查哪一处？" : "维修收你三枚灵石。" : "请先检查门闩。", manner: null };
+    });
+    await f.registry.capture();
+    const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
+    world.initialState.truth.timers["intervening-clock"] = { id: "intervening-clock", description: "Independent deadline",
+      createdAtSeconds: 0, dueAtSeconds: 2, status: "scheduled", wakeAgentIds: [],
+      causes: [{ kind: "mechanic", id: "direct-world-clock" }], assertions: [{ kind: "elapsed_seconds_compare", operator: "eq", value: 2 }] };
+    world.initialState.truth.timers["second-clock"] = { id: "second-clock", description: "Second independent deadline",
+      createdAtSeconds: 0, dueAtSeconds: 3, status: "scheduled", wakeAgentIds: [],
+      causes: [{ kind: "mechanic", id: "direct-world-clock" }], assertions: [{ kind: "elapsed_seconds_compare", operator: "eq", value: 3 }] };
+    const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
+    try {
+      const options = { repository: new MemoryWorldRepository({ [world.id]: world }), store: database, ledger: database, provider: f.gateway };
+      const host = new WorldHost(options);
+      const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } }), id = created.summary.id;
+      await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });
+      const participant = Object.values(database.readInstance(id).document.participants)[0]!;
+      await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "inspect-without-quote", text: "先问要检查哪一处，再免费检查，不报价。" });
+      for (let i = 0; i < 250; i++) {
+        if (Object.values(database.readInstance(id).document.runs).some(run => run.stopReason === "local-model-task-failed")) break;
+        await new Promise(resolve => setTimeout(resolve, 10));
+      }
+      await host.drainNarratives(id);
+      const failed = database.readInstance(id).document.state;
+      expect(playerReadings).toBe(2);
+      expect(failed.truth.elapsedSeconds).toBe(3);
+      expect(readDirectState(failed.executionState!, failed)).toMatchObject({ intents: { player: { status: "failed" } },
+        activities: [expect.objectContaining({ actorId: "keeper", dueAtSeconds: 61 })] });
+      const restarted = new WorldHost(options);
+      await restarted.advance(id, { expectedRevision: failed.revision, trigger: "realtime" });
+      for (let i = 0; i < 250; i++) {
+        if (database.readInstance(id).document.state.truth.elapsedSeconds === 61 && restarted.instance(id).run?.status === "completed") break;
+        await new Promise(resolve => setTimeout(resolve, 10));
+      }
+      await restarted.drainNarratives(id);
+      const after = database.readInstance(id).document.state;
+      expect(after.history.flatMap(step => step.directEvent?.frames ?? []).map(frame => frame.utterance)).toEqual(["要检查哪一处？", "请先检查门闩。"]);
+      expect(after.truth.elapsedSeconds).toBe(61);
+      expect(playerReadings).toBe(2);
+      expect(readDirectState(after.executionState!, after).intents.player).toMatchObject({ status: "failed", activeSubmission: { submissionId: "inspect-without-quote" } });
+      await restarted.advance(id, { expectedRevision: after.revision, trigger: "realtime" });
+      expect(restarted.instance(id).run).toMatchObject({ status: "awaiting-decision", stopReason: "external-decision-required" });
+      expect(database.readInstance(id).document.state).toEqual(after);
+      expect(playerReadings).toBe(2);
+      expect(replaySimulationState(after)).toEqual(after);
+    } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+  }, 15_000);
   it.each([false, true])("preserves committed progress when a player task fails, with a prior wait: %s", async priorWait => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-failure-"));
     const failedText = priorWait ? "等五秒再看。" : "fail-this-request";
@@ -893,7 +1015,7 @@ describe("direct world through persistent WorldHost", () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-default-"));
     const f = quietInitialNpcProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
       const values: Record<string, string> = { operation: "observe", target: "self", tool: "none", amount: "unknown", resource: "none", speech: "none", timing: "default", goal: "none" };
-      const choice = id.startsWith("paragraph") ? "grounded" : values[id] ?? (id.includes("outcome") ? "succeeded" : id.includes("belief_status") ? "unchanged" : "unknown");
+      const choice = id.endsWith("_player_authorization") ? "authorized" : id.startsWith("paragraph") ? "grounded" : values[id] ?? (id.includes("outcome") ? "succeeded" : id.includes("belief_status") ? "unchanged" : "unknown");
       return [id, nativeAnswer(q, id === "expression" ? 0 : choice)];
     })), createText, preflightFallback ? { maxNativeInputBytes: 100 } : {});
     await f.registry.capture();
@@ -920,6 +1042,14 @@ describe("direct world through persistent WorldHost", () => {
       expect(saved.revision).toBe(1); expect(saved.truth.elapsedSeconds).toBe(1);
       expect(saved.history[0]!.actions[0]!.rawText).toBe("检查自己的情况");
       expect(host.inspectorStep(id, 1).directRuntime!.actions[0]!.kind).toBe("observe");
+      const adjudication = f.transport.mock.calls.map(([, init]) => directDecisionContext(JSON.parse(String(init?.body))))
+        .find(wire => wire?.questions.a0_player_authorization)!;
+      const frame = saved.history[0]!.directEvent!.frames[0]!;
+      expect(adjudication.state).toMatchObject({ playerAuthorization: { [frame.id]: {
+        originalSubmission: { submissionId: "observe-self", rawText: "检查自己的情况" }, completedSteps: [],
+      } } });
+      expect(saved.history[0]!.directEvent!.decisions.find(use => use.batch.questions.a0_player_authorization)?.result.answers.a0_player_authorization)
+        .toMatchObject({ type: "choice", choice: "authorized" });
       expect(replaySimulationState(saved)).toEqual(saved);
       expect(executionCalls(f.transport.mock.calls)).toHaveLength(5);
       const executionId = saved.history[0]!.executionRef!.executionId;

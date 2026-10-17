@@ -1,0 +1,1 @@
+Using the bound action, existing text and the author's actual evidence, supply the complete proposed replacement for every listed property. Distinguish the content from the method used to write or change it. Preserve valid prior content according to the requested edit. Supply a separate reusable capability only when needsCapability explicitly requests one.

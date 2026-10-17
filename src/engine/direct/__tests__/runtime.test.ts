@@ -23,8 +23,10 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
   observationScope?: string; speech?: string; creationEnabled?: boolean; privateGateFact?: boolean; named?: boolean; keeperInitiative?: boolean;
   creationResponse?: unknown; creationResponses?: unknown[]; missingCoverage?: boolean; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
   recipient?: string; resolvedRecipient?: string; searchLocation?: string; transferAuthority?: string; transferExecution?: string;
-  reactionProgress?: string; playerProgress?: string; duplicateIdentity?: boolean; timerSeconds?: number; interaction?: string; duration?: string; actorVisible?: boolean; delivery?: boolean;
-  readingOverrides?: Record<string, string>; npcReadings?: unknown[]; factValues?: Record<string, string>; resolvedDuration?: string; effectRepresentation?: "existing" | "no_change" | "already" | "expand" } = {}) {
+  reactionProgress?: string; playerProgress?: string; duplicateIdentity?: boolean; timerSeconds?: number; timerWakeAgentIds?: string[]; interaction?: string; duration?: string; actorVisible?: boolean; delivery?: boolean;
+  playerAuthorization?: "authorized" | "outside_scope" | "unknown";
+  worldOutcomes?: Record<string, string>;
+  readingOverrides?: Record<string, string>; npcReadings?: unknown[]; factValues?: Record<string, string>; resolvedDuration?: string; resolvedDurations?: Record<string, string>; effectRepresentation?: "existing" | "no_change" | "already" | "expand" } = {}) {
   let creations = 0;
   let npcReadings = 0;
   const f = directTestProvider(wire => {
@@ -59,6 +61,11 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
       if (id.includes("delivery") && options.delivery === false) value = "unavailable";
       if (id.endsWith("_world_expansion")) value = options.introduce ? "introduce" : "none";
       if (id.endsWith("_request_progress")) value = options.reactionProgress ?? "complete";
+      if (id.endsWith("_player_authorization")) value = options.playerAuthorization ?? "authorized";
+      if (id.endsWith("_outcome") && options.worldOutcomes) {
+        const action = (wire.state as { actions: Array<{ actorId: string }> }).actions[Number(id.split("_")[0]!.slice(1))]!;
+        value = options.worldOutcomes[action.actorId] ?? value;
+      }
       if (id.startsWith("progress_")) value = options.playerProgress ?? "complete";
       if (id.startsWith("resource_amount_")) value = options.amount ?? "n1";
       if (id === "accept") value = "apply";
@@ -66,7 +73,10 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
       if (id.startsWith("identity")) value = options.duplicateIdentity && creations === 1 ? "duplicate" : "distinct";
       if (id.endsWith("_expression")) value = options.effectRepresentation ?? (options.effectExpansion ? "expand" : "existing");
       if (id.endsWith("_movement")) value = options.movement ?? "enter";
-      if (id.endsWith("_duration")) value = options.resolvedDuration ?? "s1";
+      if (id.endsWith("_duration")) {
+        const action = (wire.state as { actions?: Array<{ actorId: string }> }).actions?.[Number(id.split("_")[0]!.slice(1))];
+        value = action && options.resolvedDurations?.[action.actorId] || options.resolvedDuration || "s1";
+      }
       if (/_fact\d+$/u.test(id)) {
         const instructions = q.instructions as { task?: { data?: { fact?: { predicate: string } } }; data?: { fact?: { predicate: string } } };
         const fact = (instructions.task ?? instructions).data?.fact;
@@ -86,7 +96,7 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
     player.bindings[id!] = { localEntityId: id!, canonicalEntityIds: [canonicalId!] };
   }
   if (options.timerSeconds) world.initialState.truth.timers["test-deadline"] = { id: "test-deadline", description: "Independent deadline",
-    createdAtSeconds: 0, dueAtSeconds: options.timerSeconds, status: "scheduled", wakeAgentIds: [],
+    createdAtSeconds: 0, dueAtSeconds: options.timerSeconds, status: "scheduled", wakeAgentIds: options.timerWakeAgentIds ?? [],
     causes: [{ kind: "mechanic", id: "direct-world-clock" }],
     assertions: [{ kind: "elapsed_seconds_compare", operator: "eq", value: options.timerSeconds }] };
   world.historyBaseHash = historyReplayBaseHash(world.initialState);
@@ -526,6 +536,185 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
+  it.each(["outside_scope", "unknown"] as const)("rejects an unadmitted player quote as a service failure, without speaking or advancing the world: %s", async playerAuthorization => {
+    const text = "我免费检查门闩，只检查，不报价。";
+    const f = await fixture({ operation: "speak", recipient: "guard", creationEnabled: true, playerAuthorization,
+      creationResponse: { attempt: "回答检查结果并报价", utterance: "一定是门闩坏了，维修收你三枚灵石。", manner: null } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request(text));
+    expect(result.committed.directEvent.frames).toEqual([]);
+    expect(result.committed.events).toEqual([]);
+    expect(result.committed.outcomes).toEqual([]);
+    expect(result.committed.observations).toEqual([]);
+    expect(result.state.truth).toEqual(f.world.initialState.truth);
+    const control = readDirectState(result.state.executionState!, result.state);
+    expect(control.intents.player).toMatchObject({ status: "failed", activityId: null,
+      activeSubmission: { rawText: text }, failure: { recoverable: true, message: expect.stringContaining("player authorization") } });
+    expect(control.activities).toEqual([]);
+    expect(control.completedSubmissionIds).toEqual([]);
+    const batches = f.transport.mock.calls.map(([, init]) => directDecisionContext(JSON.parse(String(init?.body))))
+      .filter(wire => wire && "actions" in (wire.state as object));
+    expect(batches).toHaveLength(1);
+    expect(batches[0]!.questions).toHaveProperty("a0_outcome");
+    expect(batches[0]!.questions).toHaveProperty("a0_player_authorization");
+    const context = batches[0]!.state as { actions: Array<{ id: string }>; playerAuthorization: Record<string, unknown> };
+    expect(context.playerAuthorization[context.actions[0]!.id]).toMatchObject({ originalSubmission: { rawText: text }, completedSteps: [] });
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("rejects only the unauthorized player candidate while admitting a same-batch NPC question", async () => {
+    const question = "检查的结果怎么样？维护收多少钱？";
+    const f = await fixture({ operation: "speak", recipient: "guard", creationEnabled: true, playerAuthorization: "outside_scope",
+      keeperInitiative: true, npcReadings: [npcReading({ utterance: question })],
+      creationResponse: { attempt: "自行报价", utterance: "维修收你三枚灵石。", manner: null } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("我先免费检查门闩。"));
+    expect(result.committed.directEvent.frames).toMatchObject([{ actorId: "keeper", utterance: question }]);
+    expect(result.committed.events).toHaveLength(1);
+    expect(result.committed.outcomes).toHaveLength(1);
+    expect(result.committed.observations.every(observation => observation.scene?.speech?.utterance !== "维修收你三枚灵石。")).toBe(true);
+    expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
+    expect(readDirectState(result.state.executionState!, result.state).intents.player).toMatchObject({ status: "failed", activityId: null });
+    const batches = f.transport.mock.calls.map(([, init]) => directDecisionContext(JSON.parse(String(init?.body))))
+      .filter(wire => wire && "actions" in (wire.state as object));
+    expect(batches).toHaveLength(1);
+    expect(Object.keys(batches[0]!.questions).filter(key => key.endsWith("_player_authorization"))).toHaveLength(1);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+    const calls = f.transport.mock.calls.length;
+    await expect(f.engine.step(f.roster, { expectedRevision: result.state.revision, trigger: "realtime", externalActions: [] }))
+      .rejects.toThrow(WorldQuiescentError);
+    expect(f.transport).toHaveBeenCalledTimes(calls);
+    expect(f.engine.snapshot).toEqual(result.state);
+  });
+  it.each(["later-observation", "timer"] as const)("does not revive a failed player submission from a subsequent world event: %s", async event => {
+    const question = "你希望检查哪一处？";
+    const f = await fixture({ operation: "speak", recipient: "guard", creationEnabled: true, playerAuthorization: "outside_scope",
+      timerSeconds: 1, timerWakeAgentIds: event === "timer" ? ["player"] : [], resolvedDuration: "s60",
+      keeperInitiative: event === "later-observation", npcReadings: event === "later-observation" ? [npcReading({ utterance: question })] : undefined,
+      creationResponse: { attempt: "自行报价", utterance: "维修收你三枚灵石。", manner: null } });
+    await f.engine.bootstrapAgents();
+    const first = await f.engine.step(f.roster, f.request("我先免费检查门闩。"));
+    expect(first.committed.directEvent.frames).toEqual([]);
+    expect(readDirectState(first.state.executionState!, first.state).intents.player?.status).toBe("failed");
+    const calls = f.transport.mock.calls.length;
+    const later = await f.engine.step(f.roster, { expectedRevision: first.state.revision, trigger: "realtime", externalActions: [] });
+    expect(later.state.truth.elapsedSeconds).toBe(event === "later-observation" ? 60 : 1);
+    expect(later.committed.directEvent.frames).toEqual(event === "later-observation" ? [expect.objectContaining({ actorId: "keeper", utterance: question })] : []);
+    expect(readDirectState(later.state.executionState!, later.state).intents.player).toMatchObject({ status: "failed", activeSubmission: { submissionId: "submission-0" } });
+    expect(f.transport).toHaveBeenCalledTimes(calls);
+    await expect(f.engine.step(f.roster, { expectedRevision: later.state.revision, trigger: "realtime", externalActions: [] })).rejects.toThrow(WorldQuiescentError);
+    expect(f.transport).toHaveBeenCalledTimes(calls);
+    expect(replaySimulationState(later.state)).toEqual(later.state);
+  });
+  it("releases a rejected human submission before the character chooses autonomously", async () => {
+    const options: Parameters<typeof fixture>[0] = { operation: "speak", recipient: "guard", creationEnabled: true,
+      playerAuthorization: "outside_scope", timerSeconds: 1, timerWakeAgentIds: ["player"],
+      creationResponse: { attempt: "自行报价", utterance: "维修收你三枚灵石。", manner: null } };
+    const f = await fixture(options);
+    await f.engine.bootstrapAgents();
+    const failed = await f.engine.step(f.roster, f.request("我先免费检查门闩。"));
+    const calls = f.transport.mock.calls.length;
+    options.operation = "observe"; options.target = "door";
+    const roster: Record<string, PolicyBinding> = { ...f.roster,
+      player: { kind: "model", agentId: "player", profiles: f.world.initialState.agents.player!.modelProfiles, resumeFromRevision: 0 } };
+    const released = await f.engine.step(roster, { expectedRevision: failed.state.revision, trigger: "realtime", externalActions: [] });
+    expect(released.committed.directEvent.frames).toMatchObject([{ actorId: "player", kind: "observe", submissionId: null }]);
+    expect(readDirectState(released.state.executionState!, released.state).intents.player).toMatchObject({ activeSubmission: null, failure: null });
+    const readings = f.transport.mock.calls.slice(calls).map(([, init]) => JSON.parse(String(init?.body)))
+      .filter(wire => !wire.questions).map(directCreationContext);
+    expect(readings.some(context => context.autonomousReading)).toBe(true);
+    expect(readings.some(context => context.playerReading)).toBe(false);
+    expect(replaySimulationState(released.state)).toEqual(released.state);
+  });
+  it.each([false, true])("preserves an admitted physical activity when its player releases control, with changed evidence: %s", async changedEvidence => {
+    const f = await fixture({ operation: "observe", target: "door", timerSeconds: 1, resolvedDuration: "s60",
+      resolvedDurations: { keeper: "s1" }, keeperInitiative: changedEvidence,
+      npcReadings: changedEvidence ? [npcReading({ utterance: "门闩就在这里。" })] : undefined });
+    await f.engine.bootstrapAgents();
+    const running = await f.engine.step(f.roster, f.request("查看门闩。"));
+    expect(running.committed.directEvent.frames).toEqual(changedEvidence ? [expect.objectContaining({ actorId: "keeper", utterance: "门闩就在这里。" })] : []);
+    const activity = readDirectState(running.state.executionState!, running.state).activities[0]!;
+    const calls = f.transport.mock.calls.length;
+    const released = await f.engine.step({ ...f.roster,
+      keeper: { kind: "idle", agentId: "keeper", reason: "explicit" },
+      player: { kind: "model", agentId: "player", profiles: f.world.initialState.agents.player!.modelProfiles, resumeFromRevision: 0 } },
+    { expectedRevision: running.state.revision, trigger: "realtime", externalActions: [] });
+    expect(released.committed.directEvent.frames).toMatchObject([{ id: activity.id, actorId: "player", submissionId: "submission-0" }]);
+    expect(released.state.truth.elapsedSeconds).toBe(60);
+    expect(readDirectState(released.state.executionState!, released.state).intents.player?.activeSubmission).toBeNull();
+    expect(f.transport).toHaveBeenCalledTimes(calls + Number(changedEvidence));
+    if (changedEvidence) {
+      const rejudged = directDecisionContext(JSON.parse(String(f.transport.mock.calls.at(-1)![1]?.body)))!;
+      expect(rejudged.state).toMatchObject({ playerAuthorization: { [activity.id]: { originalSubmission: { rawText: "查看门闩。", submissionId: "submission-0" } } } });
+    }
+    expect(replaySimulationState(released.state)).toEqual(released.state);
+  });
+  it("checks native player transfer authority before any real quantity handover", async () => {
+    const f = await fixture({ operation: "transfer", recipient: "guard", amount: "n3", transferAuthority: "give",
+      playerAuthorization: "outside_scope" });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("问守门人需要几枚灵石，等他回答，不支付。"));
+    expect(result.committed.directEvent.frames).toEqual([]);
+    expect(result.committed.events).toEqual([]);
+    expect(result.committed.observations).toEqual([]);
+    expect(result.state.truth).toEqual(f.world.initialState.truth);
+    expect(readDirectState(result.state.executionState!, result.state).intents.player?.status).toBe("failed");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("does not transfer an NPC payment when its prerequisite is an unadmitted same-batch player offer", async () => {
+    const f = await fixture({ operation: "speak", recipient: "guard", creationEnabled: true, playerAuthorization: "outside_scope",
+      keeperInitiative: true, worldOutcomes: { keeper: "unknown" },
+      npcReadings: [npcReading({ operation: "transfer", resource: "spirit-stone", amount: "n1", utterance: null,
+        attempt: "只有旅人实际提出一枚灵石的有效报价，我才支付一枚；没有报价就不交钱。" })],
+      creationResponse: { attempt: "自行报价", utterance: "维修收你一枚灵石。", manner: null } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("我只免费检查门闩，不报价。"));
+    expect(readDirectState(result.state.executionState!, result.state).intents.keeper?.failure).toBeNull();
+    expect(result.committed.directEvent.frames).toMatchObject([{ actorId: "keeper", kind: "transfer" }]);
+    expect(result.committed.outcomes).toMatchObject([{ status: "blocked" }]);
+    expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
+    expect(result.committed.observations.every(observation => observation.scene?.speech?.utterance !== "维修收你一枚灵石。")).toBe(true);
+    expect(readDirectState(result.state.executionState!, result.state).intents.player?.status).toBe("failed");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("retains the original input and completed receipts when a later NPC question tempts a new player quote", async () => {
+    const text = "我免费查看门闩，检查之后做基础维护，不自行报价。";
+    const question = "检查的结果怎么样？维护收多少钱？";
+    const options: Parameters<typeof fixture>[0] = { operation: "observe", target: "door", speech: "none", creationEnabled: true,
+      keeperInitiative: true, npcReadings: [npcReading({ utterance: question })], readingOverrides: { progress_next: "continue" } };
+    const f = await fixture(options); await f.engine.bootstrapAgents();
+    const first = await f.engine.step(f.roster, f.request(text));
+    expect(first.committed.directEvent.frames.some(frame => frame.actorId === "player" && frame.kind === "observe")).toBe(true);
+    options.operation = "speak"; options.recipient = "guard"; options.speech = "create"; options.playerAuthorization = "outside_scope";
+    options.creationResponse = { attempt: "诊断并报价", utterance: "门闩坏了，维修收三枚灵石。", manner: null };
+    const second = await f.engine.step({ ...f.roster, keeper: { kind: "idle", agentId: "keeper", reason: "explicit" } },
+      { expectedRevision: first.state.revision, trigger: "manual", externalActions: [] });
+    expect(second.committed.directEvent.frames).toEqual([]);
+    expect(second.state.truth).toEqual(first.state.truth);
+    const batch = second.committed.directEvent.decisions.find(use => use.batch.view.kind === "world")!.batch;
+    const context = batch.state as { actions: Array<{ id: string }>; playerAuthorization: Record<string, unknown> };
+    expect(context.playerAuthorization[context.actions[0]!.id]).toMatchObject({
+      originalSubmission: { submissionId: "submission-0", rawText: text },
+      completedSteps: [expect.objectContaining({ kind: "observe", outcome: expect.objectContaining({ status: "succeeded" }) })],
+      deliveredSpeechSinceSubmission: expect.arrayContaining([expect.objectContaining({ speech: expect.objectContaining({ utterance: question }) })]),
+    });
+    expect(readDirectState(second.state.executionState!, second.state).intents.player!.activeSubmission?.rawText).toBe(text);
+    expect(replaySimulationState(second.state)).toEqual(second.state);
+  });
+  it("admits an authorized follow-up report without equating truthful world feasibility with player scope", async () => {
+    const text = "先检查门闩，再向守门人报告看到的状态。";
+    const options: Parameters<typeof fixture>[0] = { operation: "observe", target: "door", speech: "none", creationEnabled: true,
+      readingOverrides: { progress_next: "continue" } };
+    const f = await fixture(options); await f.engine.bootstrapAgents();
+    const first = await f.engine.step(f.roster, f.request(text));
+    options.operation = "speak"; options.recipient = "guard"; options.speech = "create"; options.readingOverrides = { progress_next: "complete" };
+    options.creationResponse = { attempt: "报告已见的门闩状态", utterance: "我看到门闩还锁着。", manner: null };
+    const second = await f.engine.step({ ...f.roster, keeper: { kind: "idle", agentId: "keeper", reason: "explicit" } },
+      { expectedRevision: first.state.revision, trigger: "manual", externalActions: [] });
+    expect(second.committed.directEvent.frames).toMatchObject([{ actorId: "player", submissionId: "submission-0", utterance: "我看到门闩还锁着。" }]);
+    expect(second.committed.observations.some(observation => observation.scene?.speech?.utterance === "我看到门闩还锁着。")).toBe(true);
+    expect(readDirectState(second.state.executionState!, second.state).completedSubmissionIds).toContain("submission-0");
+    expect(replaySimulationState(second.state)).toEqual(second.state);
+  });
   it("represents an ordinary new posture on the actor through the reusable effect path", async () => {
     const f = await fixture({ operation: "change", target: "door", effectExpansion: true, creationEnabled: true,
       creationResponse: { description: "Crouch beside the target", applicability: "The actor can crouch in this space",
@@ -671,26 +860,18 @@ describe("direct world through the actual simulation entry", () => {
   it.each(["change", "move"])("expands an existing relation outside the finite catalog during %s", async operation => {
     const f = await fixture({ operation, target: operation === "move" ? "yard" : "self", creationEnabled: true, effectExpansion: true,
       effectRepresentation: "existing", factValues: { luggage_position: "new_value" }, creationResponse: {
-        description: "起身时保持行李随身", applicability: "有随身行李", effectDescription: "行李不再位于膝上",
-        effects: [{ kind: "fact", subject: "actor", predicate: "luggage_position", value: "carried at side", description: "行李随身提在身侧。" }],
+        values: { p0: "carried at side" }, capability: null,
       } });
     f.world.initialState.truth.facts["luggage-place"] = { ...f.world.initialState.truth.facts["gate-lock"]!,
       id: "luggage-place", subjectId: f.world.initialState.agents.player!.entityId, predicate: "luggage_position",
       value: { kind: "text", value: "on lap" }, description: "行李放在膝上。", access: { kind: "public" } };
     f.world.historyBaseHash = historyReplayBaseHash(f.world.initialState);
-    const transport = f.transport.getMockImplementation()!;
-    f.transport.mockImplementation(async (...args) => {
-      const wire = JSON.parse(String(args[1]?.body));
-      const response = await transport(...args);
-      if (!wire.questions || !Object.keys(wire.questions).some(key => key.endsWith("_capability"))) return response;
-      const body = await response.clone().json();
-      for (const [id, question] of Object.entries(wire.questions)) if (id.endsWith("_capability")) body.answers[id] = nativeAnswer(question as Parameters<typeof nativeAnswer>[0], "apply");
-      return Response.json(body);
-    });
     const engine = new SimulationEngine(f.world, f.algorithm);
     await engine.bootstrapAgents();
     const result = await engine.step(f.roster, f.request("提着行李站起来"));
     expect(result.state.truth.facts["luggage-place"]?.value).toEqual({ kind: "text", value: "carried at side" });
+    expect(result.state.truth.facts["luggage-place"]?.description).not.toContain("膝上");
+    expect(result.committed.observations.find(item => item.observerId === "player")?.summary).toContain("carried at side");
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
   it.each(["change", "move"])("updates the actor's existing posture with a separate target during %s", async operation => {

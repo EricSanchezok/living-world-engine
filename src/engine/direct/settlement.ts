@@ -6,6 +6,7 @@ import { applyWorldDeltaOperation } from "../runtime/transaction";
 import { resolveDiscreteRandomRequests } from "../mechanics/random";
 import { runtimeId } from "../runtime/runtime-id";
 import { changedFact } from "./presentation";
+import { contentHash } from "../models/model-audit";
 
 /** Pure mechanical settlement of previously admitted semantics. No model calls or new choices. */
 export function settlePreparedActions(state: Readonly<SimulationState>, control: DirectRuntimeState, frames: ActionFrame[]) {
@@ -44,7 +45,16 @@ export function settlePreparedActions(state: Readonly<SimulationState>, control:
     }
     const happened = ["succeeded", "partial"].includes(status);
     // An unsuccessful effect can still reveal existing conditions. New failed effects do not exist in projected truth.
-    const observedFacts = preparation.visibleFactIds.flatMap(id => projected.truth.facts[id] ? [projected.truth.facts[id]!] : []);
+    const observedFacts = [...preparation.visibleFactIds.flatMap(id => projected.truth.facts[id] ? [projected.truth.facts[id]!] : []),
+      ...preparation.propertyVisibility.flatMap(binding => {
+        const fact = projected.truth.facts[binding.factId];
+        if (!fact) return [];
+        const committed = happened && operations.some(operation => operation.kind === "set_fact" && operation.fact.id === binding.factId &&
+          contentHash(operation.fact.value) === binding.proposedValueHash);
+        const visible = committed ? binding.proposedVisible : binding.previousVisible;
+        const valueHash = committed ? binding.proposedValueHash : binding.previousValueHash;
+        return visible && contentHash(fact.value) === valueHash ? [fact] : [];
+      })];
     settlements.push({ frame, operations, outcome: { id: runtimeId({ worldHash: state.worldHash, revision: state.revision + 1,
       kind: "outcome", stage: "direct-world", owner: frame.actorId, round: 0, ordinal: index }), proposalId: frame.id, status,
       summary, causeRefs: source.causes, assertions: source.assertions, knownAlternatives: [] }, visibleFacts: observedFacts,

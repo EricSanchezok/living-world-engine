@@ -4,6 +4,8 @@
 Accepted
 Class: architecture
 
+The existing-text creation boundary is superseded by [decision 0251](0251-action-bound-values-outside-reusable-capabilities.md). The movement and narrative continuation decisions remain in force.
+
 ## Context and Problem Statement
 
 Finite action parameters and property candidates can fail to express an otherwise ordinary attempt. Published paragraphs create a separate irreversible boundary: restarting prose generation must not replay already presented results. The [continuity regressions](../research/2026-10-14-conversation-continuity-regressions.md) identify both failures through actual execution and narrative evidence.

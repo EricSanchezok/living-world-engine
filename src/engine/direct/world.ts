@@ -10,11 +10,12 @@ import type { JsonValue } from "../runtime/json";
 import { deriveClampedMeterDelta, magnitudeBands, materializeCondition } from "../mechanics/resolution";
 import type { ActionFrame, CapabilityDefinition, CapabilityEffect, PreparedDirectAction } from "./contracts";
 import { DirectDecisions, selected } from "./decisions";
-import { localWorldView, perceptualNeighborhood, sharesContactNeighborhood } from "./views";
+import { localWorldView, perceptualNeighborhood, sharesContactNeighborhood, privateActionView } from "./views";
 import { orderedValues, captureDependencies } from "./state";
 import { literalNumbers } from "./actions";
 import { changedFact } from "./presentation";
 import { extendCapability } from "./capabilities";
+import { proposePropertyValues } from "./property-values";
 import { agentCapabilityModels } from "../models/capability-bindings";
 
 export interface ActionSettlement {
@@ -61,8 +62,25 @@ export function directSemanticId(kind: "fact" | "object" | "condition", owners: 
 }
 export async function prepareActions(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frames: ActionFrame[], decisions: DirectDecisions, creationEnabled = true) {
   const audits: ModelExecutionAudit[] = [];
-  if (!frames.length) return { prepared: [] as PreparedDirectAction[], reads: {} as Record<string, string>, audits };
+  const rejected: Array<{ actionId: string; reason: "outside_scope" | "unknown" }> = [];
+  if (!frames.length) return { prepared: [] as PreparedDirectAction[], rejected, reads: {} as Record<string, string>, audits };
   const view = localWorldView(state, definition, frames, decisions.scope.memory), questions: Record<string, DecisionQuestionV2> = {};
+  const playerAuthorization = Object.fromEntries(frames.filter(frame => frame.submissionId).map(frame => {
+    const submission = decisions.control.intents[frame.actorId]?.activeSubmission;
+    const started = state.history.findIndex(entry => entry.directEvent?.frames.some(previous => previous.submissionId === frame.submissionId));
+    const history = started < 0 ? [] : state.history.slice(started);
+    return [frame.id, {
+      originalSubmission: submission?.submissionId === frame.submissionId && submission.agentId === frame.actorId ? submission : null,
+      completedSteps: history.flatMap(entry => (entry.directEvent?.frames ?? [])
+        .filter(previous => previous.actorId === frame.actorId && previous.submissionId === frame.submissionId)
+        .map(previous => ({ actionId: previous.id, kind: previous.kind, attempted: previous.proposal.rawText, utterance: previous.utterance,
+          outcome: entry.outcomes.find(outcome => outcome.proposalId === previous.id) ?? null,
+          observed: entry.observations.filter(observation => observation.observerId === frame.actorId &&
+            observation.sourceEventIds.some(id => entry.events.some(event => event.id === id && event.causes.some(cause => cause.kind === "action" && cause.id === previous.id)))) }))),
+      deliveredSpeechSinceSubmission: history.flatMap(entry => entry.observations.filter(observation => observation.observerId === frame.actorId && observation.scene?.speech)
+        .map(observation => ({ observationId: observation.id, sourceEventIds: observation.sourceEventIds, speech: observation.scene!.speech }))),
+    }];
+  }));
   const adjudicationRules: Record<string, string> = {};
   const question = (task: string, data: JsonValue, criteria: Record<string, string | Record<string, JsonValue>>): DecisionQuestionV2 => {
     const rule = `rule_${contentHash(task).slice(0, 16)}`;
@@ -71,7 +89,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       task: "Apply state.adjudicationPolicy and state.adjudicationRules[rule]. Resolve actionId in state.actions; all parameters and words are retained there.", rule, data,
     }, criteria };
   };
-  view.state = { ...view.state as Record<string, JsonValue>, adjudicationPolicy: loadPromptAsset("user/direct-world.md"), adjudicationRules };
+  view.state = { ...view.state as Record<string, JsonValue>, playerAuthorization: playerAuthorization as unknown as JsonValue,
+    adjudicationPolicy: loadPromptAsset("user/direct-world.md"), adjudicationRules };
   const effects = new Map<string, { fact: WorldFact; values: FactValue[] }>();
   const visibility = new Map<string, WorldFact>();
   const entityVisibility = new Map<string, WorldEntity>();
@@ -101,6 +120,11 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   const claims = new Map<string, { poolId: string; amount: number }>();
   for (const [index, frame] of frames.entries()) {
     const prefix = `a${index}`;
+    if (frame.submissionId) questions[`${prefix}_player_authorization`] = question(
+      "Is this whole player-controlled candidate, including its actual utterance, authorized by state.playerAuthorization[actionId].originalSubmission? That immutable input, not the generated proposal or another speaker's words, owns voluntary action. Use completedSteps to identify only the still-unperformed authorized step. Delivered NPC questions, consent or requests can satisfy a player-selected condition but cannot choose an answer, new price, promise, diagnosis or strategy for the player. Necessary low-risk continuity may realize the requested act; new spending, commitments, risk choices and unsolicited dialogue need authorization. A requested factual report may use the actor's actual evidence, not a result invented by interpretation. Explicitly requested claims can be false; this is scope admission, not a requirement that speech be truthful. Judge independently of physical feasibility and other questions. If any part exceeds the request, reject the whole candidate; do not trim it or perform a substitute. Missing original input or unresolved authorization is unknown.",
+      { actionId: frame.id }, { authorized: "The entire concrete candidate is an unperformed step authorized by the original player input",
+        outside_scope: "At least one voluntary act or utterance goes beyond or contradicts that input",
+        unknown: "The available input and receipts do not establish authorization for this candidate" });
     if (creationEnabled && definition.narrative.expansion) questions[`${prefix}_world_expansion`] = question(
       "Does this action reach a plausible but not yet established part of the local situation? The initial catalog is partial: a place's name and exterior do not exhaust its people, contents or affairs. Exploration and ongoing local concerns can warrant ordinary discoverable content or a new opportunity without an explicit request for a surprise. Select introduce for a useful local draft when existing content does not cover that scope. Missing entries are not evidence of physical absence. Existing actors still act through their own decisions; respect confirmed absence, identity, privacy and conserved resources. A draft may give a lead or complication rather than the desired outcome. Select none for sufficient existing content or quiet continuity; do not create merely to force success.",
       { actionId: frame.id }, { none: "Existing content covers this interaction, or no plausible addition is warranted", introduce: "Develop a plausible unestablished part of the local situation for admission" });
@@ -243,8 +267,14 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   }
   if ([...candidates.values()].some(recipients => recipients.length)) Object.assign(view.state as object, { contactPolicy });
   let answers = await decisions.ask(null, view.state, view.reads, questions);
+  for (const [index, frame] of frames.entries()) if (frame.submissionId) {
+    const authorization = selected(answers, `a${index}_player_authorization`);
+    if (authorization !== "authorized") rejected.push({ actionId: frame.id, reason: authorization as "outside_scope" | "unknown" });
+  }
+  const rejectedIds = new Set(rejected.map(item => item.actionId));
   const missingBindings: Record<string, DecisionQuestionV2> = {};
-  for (const [id, option] of randomOptions) if (selected(answers, option.applies) === "apply" && selected(answers, id) === "none") {
+  for (const [id, option] of randomOptions) if (!rejectedIds.has(frames[Number(id.split("_")[0]!.slice(1))]!.id) &&
+    selected(answers, option.applies) === "apply" && selected(answers, id) === "none") {
     const distribution = definition.randomDistributions.find(item => item.id === option.distributionId)!;
     missingBindings[id] = question("This procedure has actually been selected for execution. Which existing property receives its sampled physical result? Bind the result itself, not a completion label. The property's current value need not equal a possible result. Select none only if no listed property represents that result; the draw still occurs.", {
       actionId: frames[Number(id.split("_")[0]!.slice(1))]!.id,
@@ -255,36 +285,59 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   }
   if (Object.keys(missingBindings).length) answers = { ...answers, ...await decisions.ask(null, view.state, view.reads, missingBindings) };
   const expansions = frames.flatMap((frame, index) => {
+    if (rejectedIds.has(frame.id)) return [];
     if (!["succeeded", "partial"].includes(selected(answers, `a${index}_outcome`))) return [];
-    const requiredPropertyChanges = [...effects].filter(([id]) => id.startsWith(`a${index}_`) && selected(answers, id) === "new_value")
-      .map(([, { fact }]) => ({ subject: fact.subjectId === frame.actorEntityId ? "actor" : fact.subjectId === frame.targetEntityId ? "target" : "tool",
-        predicate: fact.predicate, currentValue: fact.value, description: fact.description }));
-    return requiredPropertyChanges.length || questions[`a${index}_expression`] && selected(answers, `a${index}_expression`) === "expand"
-      ? [{ frame, index, requiredPropertyChanges }] : [];
+    const properties = [...effects].filter(([id]) => id.startsWith(`a${index}_`) && selected(answers, id) === "new_value")
+      .map(([, { fact }]) => fact);
+    const needsCapability = Boolean(questions[`a${index}_expression`] && selected(answers, `a${index}_expression`) === "expand");
+    return properties.length || needsCapability ? [{ frame, index, properties, needsCapability }] : [];
   });
   const capabilityFailures = new Set<string>();
+  const propertyValues = new Map<string, WorldFact[]>();
+  const propertyReviews = new Map<string, string>();
   if (expansions.length) {
     if (!creationEnabled) throw new Error("This action needs a new effect concept; the creation capability is disabled");
-    const expanded = await Promise.allSettled(expansions.map(async ({ frame, index, requiredPropertyChanges }) => ({ index, frame,
-      result: await extendCapability({ state, control: decisions.control, frame, decisions,
-        profileId: agentCapabilityModels(state, decisions.control, frame.actorId).creation,
+    const expanded = await Promise.allSettled(expansions.map(async ({ frame, index, properties, needsCapability }) => {
+      const profileId = agentCapabilityModels(state, decisions.control, frame.actorId).creation;
+      if (properties.length) {
+        const author = privateActionView(state, frame.actorId, frame.causeActionId, decisions.scope.memory);
+        Object.assign(view.reads, author.reads);
+        return { index, frame, result: await proposePropertyValues({ state, frame, decisions, profileId, properties,
+          authorView: author.state, laws: definition.laws as unknown as JsonValue, needsCapability }) };
+      }
+      return { index, frame, result: { ...await extendCapability({ state, control: decisions.control, frame, decisions, profileId,
         context: { action: frame.expression?.attempt ?? frame.proposal.rawText, operation: frame.kind,
-          requiredPropertyChanges: requiredPropertyChanges as unknown as JsonValue,
           target: frame.targetEntityId ? state.truth.entities[frame.targetEntityId]!.description : null,
-          tool: frame.toolEntityId ? state.truth.entities[frame.toolEntityId]!.description : null } }) })));
+          tool: frame.toolEntityId ? state.truth.entities[frame.toolEntityId]!.description : null } }), values: [] as WorldFact[] } };
+    }));
     const supplemental: Record<string, DecisionQuestionV2> = {};
     for (const [expansionIndex, result] of expanded.entries()) if (result.status === "fulfilled") {
       const { index, frame, result: extension } = result.value, prefix = `a${index}`;
       audits.push(...extension.audits);
-      supplemental[`${prefix}_capability`] = question("Does this newly declared capability express this action's immediate intended method and result, with its conditions met? A related object or broader goal alone does not authorize its effects.", { actionId: frame.id, capability: extension.capability as unknown as JsonValue },
-        { apply: "Apply its immediate declared effects", unavailable: "The required materials, skill or conditions are absent", unknown: "Need more evidence" });
-      createdObjectQuestions(frame, prefix, extension.capability, supplemental);
-      for (const [ordinal, effect] of extension.capability.effects.entries()) if (effect.kind === "fact") {
-        const fact = capabilityFact(state, frame, extension.capability, effect, ordinal);
-        if (!fact) continue;
-        const id = `${prefix}_extended_visible${ordinal}`; visibility.set(id, fact);
-        supplemental[id] = question("is this new property perceptible through the resulting action", { actionId: frame.id, fact: fact as unknown as JsonValue },
-          { visible: "The resulting property is perceptible", hidden: "The property is hidden", unknown: "No justified perceptual access" });
+      propertyValues.set(frame.id, extension.values);
+      for (const [ordinal, fact] of extension.values.entries()) {
+        const id = `${prefix}_value${ordinal}`; propertyReviews.set(id, frame.id);
+        supplemental[id] = question("Does this exact proposed replacement express the actual immediate change to the existing property? A document needs its actual readable content, not a statement that it was written or instructions to retain/add content; an empty value is valid only for an actual edit that clears the whole text. Preserve valid previous content for an append, but allow the deletion, correction or replacement actually requested. Check each concrete claim against this author's delivered evidence, actual words and access; do not insert unobserved facts, another mind's knowledge, invented measurements or completion. This candidate is not proof of its own accuracy. Reject an unsupported or placeholder replacement rather than treating the write as complete.",
+          { actionId: frame.id, previous: state.truth.facts[fact.id] as unknown as JsonValue, proposed: fact as unknown as JsonValue },
+          { accept: "This exact value is the authorized, grounded and complete immediate result", reject: "The value is unsupported, incomplete, a placeholder or inconsistent with the requested edit", unknown: "Evidence does not establish this value" });
+        const visibleId = `${id}_visible`; visibility.set(visibleId, fact);
+        supplemental[visibleId] = question("Is this proposed resulting property perceptible through the action, if its value is admitted?", { actionId: frame.id, fact: fact as unknown as JsonValue },
+          { visible: "The resulting property is perceptible", hidden: "The property remains hidden", unknown: "No justified perceptual access" });
+        supplemental[`${id}_previous_visible`] = question("If this proposed replacement is not committed, does this actual attempt reveal the existing original property value? Judge only access to the supplied original value; an intended write or a visible candidate does not reveal hidden prior contents.",
+          { actionId: frame.id, fact: state.truth.facts[fact.id] as unknown as JsonValue },
+          { visible: "The actual attempt reveals this original value", hidden: "The original value remains hidden", unknown: "No justified perceptual access to the original value" });
+      }
+      if (extension.capability) {
+        supplemental[`${prefix}_capability`] = question("Does this newly declared capability express this action's immediate intended method and result, with its conditions met? A related object or broader goal alone does not authorize its effects.", { actionId: frame.id, capability: extension.capability as unknown as JsonValue },
+          { apply: "Apply its immediate declared effects", unavailable: "The required materials, skill or conditions are absent", unknown: "Need more evidence" });
+        createdObjectQuestions(frame, prefix, extension.capability, supplemental);
+        for (const [ordinal, effect] of extension.capability.effects.entries()) if (effect.kind === "fact") {
+          const fact = capabilityFact(state, frame, extension.capability, effect, ordinal);
+          if (!fact) continue;
+          const id = `${prefix}_extended_visible${ordinal}`; visibility.set(id, fact);
+          supplemental[id] = question("is this new property perceptible through the resulting action", { actionId: frame.id, fact: fact as unknown as JsonValue },
+            { visible: "The resulting property is perceptible", hidden: "The property is hidden", unknown: "No justified perceptual access" });
+        }
       }
     } else {
       capabilityFailures.add(expansions[expansionIndex]!.frame.id);
@@ -294,10 +347,11 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     try { if (Object.keys(supplemental).length) answers = { ...answers, ...await decisions.ask(null, view.state, view.reads, supplemental) }; }
     catch (error) { throw Object.assign(error instanceof Error ? error : new Error(String(error)), {
       audits: [...audits, ...((error as { audits?: ModelExecutionAudit[] } | null)?.audits ?? [])] }); }
+    for (const [id, actionId] of propertyReviews) if (selected(answers, id) !== "accept") capabilityFailures.add(actionId);
   }
   const worldExpansions = new Map<string, WorldExpansion>();
   const expansionFailures = new Set<string>();
-  for (const [index, frame] of frames.entries()) if (answers[`a${index}_world_expansion`] && selected(answers, `a${index}_world_expansion`) === "introduce" &&
+  for (const [index, frame] of frames.entries()) if (!rejectedIds.has(frame.id) && answers[`a${index}_world_expansion`] && selected(answers, `a${index}_world_expansion`) === "introduce" &&
     ["succeeded", "partial", "unknown"].includes(selected(answers, `a${index}_outcome`))) {
     try {
     Object.assign(view.reads, captureDependencies(state, ["catalog:entities"]));
@@ -313,6 +367,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   let projected = structuredClone(state) as SimulationState;
   const prepared: PreparedDirectAction[] = [];
   for (const [index, frame] of frames.entries()) {
+    if (rejectedIds.has(frame.id)) continue;
     const prefix = `a${index}`, verdict = selected(answers, `${prefix}_outcome`), source = sourceFor(frame);
     const durationChoice = answers[`${prefix}_duration`] ? selected(answers, `${prefix}_duration`) : "planned";
     const duration = durationChoice === "planned" ? frame.durationSeconds : Number(durationChoice.slice(1));
@@ -372,6 +427,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         if (target !== "none") randomEffects.set(option.facts[Number(target.slice(1))]!.id, option);
         else unboundRandomEffect = true;
       }
+      const explicitTextValues = new Set<string>();
       for (const [id, effect] of effects) {
         if (!id.startsWith(`${prefix}_`)) continue;
         // The admitted approach already supplies its exact new proximity.
@@ -387,8 +443,13 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         }
         if (value === "unchanged" || value === "new_value" || unboundRandomEffect) continue;
         const chosen = effect.values[Number(value.slice(1))]!;
+        if (chosen.kind === "text") explicitTextValues.add(effect.fact.id);
         if (contentHash(chosen) === contentHash(effect.fact.value)) continue;
         operations.push({ kind: "set_fact", fact: { ...changedFact(effect.fact, chosen), provenance: source.causes }, ...source });
+      }
+      for (const fact of propertyValues.get(frame.id) ?? []) if (!unboundRandomEffect && !randomEffects.has(fact.id)) {
+        operations.push({ kind: "set_fact", fact: { ...fact, provenance: source.causes }, ...source });
+        explicitTextValues.add(fact.id);
       }
       for (const [id, resource] of resources) if (id.startsWith(`${prefix}_`)) {
         if (selected(answers, `${id}_applies`) !== "apply") continue;
@@ -423,7 +484,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
                 ...source });
               else {
                 const fact = capabilityFact(state, frame, capability, effect, ordinal)!;
-                if (!unboundRandomEffect && !randomEffects.has(fact.id)) operations.push({ kind: "set_fact", fact, ...source });
+                if (!unboundRandomEffect && !randomEffects.has(fact.id) && !explicitTextValues.has(fact.id)) operations.push({ kind: "set_fact", fact, ...source });
               }
             }
           }
@@ -457,7 +518,12 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       catch (error) { operations = []; status = "blocked"; detail = error instanceof Error && error.message === "insufficient quantity" ? "可用资源不足，这次操作没有完成。" : "当前状态不允许完成这次行动。"; }
     }
     const expansion = worldExpansions.get(frame.id);
-    const visibleFacts = [...visibility].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "visible").map(([, fact]) => fact);
+    const propertyVisibility = (propertyValues.get(frame.id) ?? []).map((fact, ordinal) => ({ factId: fact.id,
+      previousValueHash: contentHash(state.truth.facts[fact.id]!.value), proposedValueHash: contentHash(fact.value),
+      previousVisible: selected(answers, `${prefix}_value${ordinal}_previous_visible`) === "visible",
+      proposedVisible: selected(answers, `${prefix}_value${ordinal}_visible`) === "visible" }));
+    const boundVisibility = new Set(propertyVisibility.map(item => item.factId));
+    const visibleFacts = [...visibility].filter(([id, fact]) => id.startsWith(`${prefix}_`) && !boundVisibility.has(fact.id) && selected(answers, id) === "visible").map(([, fact]) => fact);
     const visibleEntities = [...entityVisibility].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "visible").map(([, entity]) => entity);
     const deliveredToEntityIds = ["succeeded", "partial"].includes(status)
       ? [...(candidates.get(prefix) ?? []).filter((_, ordinal) => selected(answers, `${prefix}_delivery${ordinal}`) === "delivered"),
@@ -468,7 +534,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       detail = `你说：“${frame.utterance}”${reachedListener ? "话语已送达。" : frame.targetEntityId ? "没有确认对方听见。" : "没有确认有人听见。"}`;
     }
     if (!["succeeded", "partial"].includes(status)) operations = [];
-    prepared.push({ actionId: frame.id, status, summary: detail, operations, reads: view.reads,
+    prepared.push({ actionId: frame.id, status, summary: detail, operations, reads: view.reads, propertyVisibility,
       actorOnlyFactIds: incidental.get(frame.id)!.facts, actorOnlyEntityIds: incidental.get(frame.id)!.entities,
       visibleFactIds: [...visibleFacts.filter(fact => state.truth.facts[fact.id] || ["succeeded", "partial"].includes(status)),
         ...(["succeeded", "partial"].includes(status) ? expansion?.facts ?? [] : []),
@@ -482,5 +548,5 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       ongoing,
       requestProgress: frame.requestContinuation ?? (frame.submissionId || frame.causeActionId ? selected(answers, `${prefix}_request_progress`) as PreparedDirectAction["requestProgress"] : "complete") });
   }
-  return { prepared, reads: view.reads, audits };
+  return { prepared, rejected, reads: view.reads, audits };
 }

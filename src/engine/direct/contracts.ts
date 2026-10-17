@@ -64,6 +64,8 @@ export type CapabilityEffect =
 export interface PreparedDirectAction {
   actionId: string; reads: Record<string, string>; status: ActionOutcome["status"]; summary: string;
   operations: WorldDeltaOperation[]; visibleFactIds: string[]; visibleEntityIds: string[]; deliveredToEntityIds: string[];
+  /** Perception is bound to the value that actually survives settlement. */
+  propertyVisibility: Array<{ factId: string; previousValueHash: string; proposedValueHash: string; previousVisible: boolean; proposedVisible: boolean }>;
   actorOnlyFactIds: string[]; actorOnlyEntityIds: string[];
   namedEntityIds: string[];
   /** Recipients who can see the actor, independently of hearing the utterance. */
@@ -75,7 +77,7 @@ export interface PreparedDirectAction {
   requestProgress: "complete" | "continue" | "wait";
 }
 export interface DirectRuntimeState {
-  kind: "direct-world"; version: 3; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
+  kind: "direct-world"; version: 4; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
   models: { decision: string; creation: string; fallback: string };
   modelOverrides: { decision: string | null; creation: string | null; fallback: string | null };
   intents: Record<string, AgentIntentState>;

@@ -8,7 +8,7 @@ import type { ActionFrame, CapabilityDefinition, DirectRuntimeState } from "./co
 import type { DirectDecisions } from "./decisions";
 
 const subject = z.enum(["actor", "target", "tool"]);
-const declaration = z.object({ description: z.string().min(1), applicability: z.string().min(1), effectDescription: z.string().min(1),
+export const capabilityDeclarationSchema = z.object({ description: z.string().min(1), applicability: z.string().min(1), effectDescription: z.string().min(1),
   effects: z.array(z.discriminatedUnion("kind", [
     z.object({ kind: z.literal("fact"), subject, predicate: z.string().min(1), value: z.union([z.string().min(1), z.boolean()]), description: z.string().min(1) }),
     z.object({ kind: z.literal("condition"), subject, profileId: z.string().min(1) }),
@@ -16,6 +16,32 @@ const declaration = z.object({ description: z.string().min(1), applicability: z.
     z.object({ kind: z.literal("object"), name: z.string().min(1), description: z.string().min(1), placement: z.enum(["actor", "target"]) }),
   ])).min(1),
 });
+export type CapabilityDeclaration = z.infer<typeof capabilityDeclarationSchema>;
+
+export function capabilityDeclarationIssues(value: CapabilityDeclaration, frame: ActionFrame, state: Readonly<SimulationState>): string[] {
+  const issues: string[] = [];
+  for (const effect of value.effects) {
+    if (effect.kind === "condition" && !state.truth.mechanics.conditionProfiles[effect.profileId]) issues.push(`Unknown condition profile: ${effect.profileId}`);
+    if (effect.kind !== "object" && effect.subject === "target" && !frame.targetEntityId) issues.push("The action has no target");
+    if (effect.kind !== "object" && effect.subject === "tool" && !frame.toolEntityId) issues.push("The action has no tool");
+    if (effect.kind === "object" && effect.placement === "target" && !frame.targetEntityId) issues.push("The object placement has no target");
+    if (effect.kind === "placement" && effect.destination === "target" && !frame.targetEntityId) issues.push("The destination has no target");
+    if (effect.kind === "placement") {
+      const bound = { actor: frame.actorEntityId, target: frame.targetEntityId, tool: frame.toolEntityId, scene: state.truth.placements[frame.actorEntityId] };
+      if (bound[effect.subject] && bound[effect.subject] === bound[effect.destination]) issues.push("A placement cannot put an entity inside itself. Express posture or use of an appearance detail as a fact on its actual owner.");
+    }
+  }
+  return issues;
+}
+
+export function rememberCapability(value: CapabilityDeclaration, control: DirectRuntimeState, frame: ActionFrame): CapabilityDefinition {
+  const id = `capability-${contentHash(value).slice(0, 24)}`;
+  const capability: CapabilityDefinition = { ...value, id, kind: "use", scope: "world", ownerId: null, sourceIds: [],
+    createdByActionId: frame.id, version: 1, knownToAgentIds: [frame.actorId] };
+  if (!control.capabilities.some(existing => existing.id === id)) control.capabilities.push(capability);
+  frame.capabilityId = id;
+  return capability;
+}
 
 export async function extendCapability(input: { state: Readonly<SimulationState>; control: DirectRuntimeState; frame: ActionFrame;
   decisions: DirectDecisions; profileId: string; context: JsonValue }) {
@@ -32,7 +58,7 @@ export async function extendCapability(input: { state: Readonly<SimulationState>
     let result;
     try { result = await decisions.provider.generateStructured({ ...decisions.scope, modelRegistrySnapshotHash: control.registryHash,
       profileId: input.profileId, subjectId: frame.actorId, role: "creation", modelInvocation: decisions.next(frame.actorId),
-      system, userPrompt, promptVersion: `direct-capability-${contentHash({ system, userPrompt })}`, schemaName: "DirectCapabilityV1", schema: declaration,
+      system, userPrompt, promptVersion: `direct-capability-${contentHash({ system, userPrompt })}`, schemaName: "DirectCapabilityV1", schema: capabilityDeclarationSchema,
       context: { requestedAction: input.context, roleBindings, roleProperties, conditionProfiles: state.truth.mechanics.conditionProfiles, previous, repairIssues } as unknown as JsonValue, jsonExamplePolicy: "omit" });
     } catch (error) {
       if (!(error instanceof ModelOutputError)) throw Object.assign(error instanceof Error ? error : new Error(String(error)), { audits });
@@ -42,29 +68,9 @@ export async function extendCapability(input: { state: Readonly<SimulationState>
       throw Object.assign(error, { audits });
     }
     audits.push(result.audit); previous = result.value; repairIssues = [];
-    const required = (input.context as { requiredPropertyChanges?: Array<{ subject: "actor" | "target" | "tool"; predicate: string }> }).requiredPropertyChanges ?? [];
-    const roleIds = { actor: frame.actorEntityId, target: frame.targetEntityId, tool: frame.toolEntityId };
-    for (const property of required) if (!result.value.effects.some(effect => effect.kind === "fact" &&
-      roleIds[effect.subject] === roleIds[property.subject] && effect.predicate === property.predicate)) {
-      repairIssues.push(`The selected qualitative change needs an effect for ${property.subject}.${property.predicate}; preserve its existing predicate instead of leaving the old relation unchanged.`);
-    }
-    for (const effect of result.value.effects) {
-      if (effect.kind === "condition" && !state.truth.mechanics.conditionProfiles[effect.profileId]) repairIssues.push(`Unknown condition profile: ${effect.profileId}`);
-      if (effect.kind !== "object" && effect.subject === "target" && !frame.targetEntityId) repairIssues.push("The action has no target");
-      if (effect.kind !== "object" && effect.subject === "tool" && !frame.toolEntityId) repairIssues.push("The action has no tool");
-      if (effect.kind === "object" && effect.placement === "target" && !frame.targetEntityId) repairIssues.push("The object placement has no target");
-      if (effect.kind === "placement" && effect.destination === "target" && !frame.targetEntityId) repairIssues.push("The destination has no target");
-      if (effect.kind === "placement") {
-        const bound = { actor: frame.actorEntityId, target: frame.targetEntityId, tool: frame.toolEntityId, scene: state.truth.placements[frame.actorEntityId] };
-        if (bound[effect.subject] && bound[effect.subject] === bound[effect.destination]) repairIssues.push("A placement cannot put an entity inside itself. Express posture or use of an appearance detail as a fact on its actual owner.");
-      }
-    }
+    repairIssues.push(...capabilityDeclarationIssues(result.value, frame, state));
     if (repairIssues.length) continue;
-    const id = `capability-${contentHash(result.value).slice(0, 24)}`;
-    const capability: CapabilityDefinition = { ...result.value, id, kind: "use", scope: "world", ownerId: null, sourceIds: [],
-      createdByActionId: frame.id, version: 1, knownToAgentIds: [frame.actorId] };
-    if (!control.capabilities.some(existing => existing.id === id)) control.capabilities.push(capability);
-    frame.capabilityId = id;
+    const capability = rememberCapability(result.value, control, frame);
     return { capability, audits };
   }
   const error = new Error(`Capability requires correction: ${repairIssues.join("; ")}`);
