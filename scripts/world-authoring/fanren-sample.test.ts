@@ -32,6 +32,7 @@ describe("Fanren opening sample import and entry", () => {
       if (originId === "han-li") {
         expect(player).toBe("canon-han-li"); expect(state.admissions).toHaveLength(0);
         expect(state.truth.placements[player]).toBe("han-home");
+        expect(state.agents[player]!.bindings["familiar-path"]!.canonicalEntityIds).toEqual(["village-path"]);
         expect(JSON.stringify(projectAgentPerspective(state, state.agents[player]!))).not.toContain("四属性伪灵根");
         expect(quantity(player, "grain")).toBe(0); expect(quantity("han-household-pantry", "grain")).toBe(12);
       } else if (originId === "herbal-apprentice") {

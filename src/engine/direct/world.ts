@@ -124,6 +124,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   const amounts = [...new Set([1, ...frames.flatMap(frame => literalNumbers(frame.proposal.rawText)), ...definition.laws.flatMap(law => literalNumbers(law.text))])].sort((a, b) => a - b);
   const resources = new Map<string, { definitionId: string; lawId: string; kind: "consume_quantity" | "produce_quantity" }>();
   const claims = new Map<string, { poolId: string; amount: number }>();
+  const numericImpacts = new Map<string, { meterId: string; magnitudeQuestionId: string }>();
   for (const [index, frame] of frames.entries()) {
     const prefix = `a${index}`;
     if (frame.submissionId) questions[`${prefix}_player_authorization`] = question(
@@ -223,10 +224,17 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
           { claim: "The activity requires exclusive capacity while active", none: "This action does not occupy that resource" });
       }
       const impacts = orderedValues(state.truth.mechanics.impactProfiles);
-      if (impacts.length) {
-        questions[`${prefix}_impact`] = question("authored numeric impact", { actionId: frame.id },
-          { none: "No numeric meter impact", ...Object.fromEntries(impacts.map(profile => [profile.id, profile as unknown as Record<string, JsonValue>])) });
-        questions[`${prefix}_magnitude`] = question("effect magnitude on the authored scale", { actionId: frame.id },
+      const subjects = new Set([frame.actorEntityId, frame.targetEntityId, frame.toolEntityId]);
+      for (const meter of orderedValues(state.truth.meters).filter(meter => subjects.has(meter.entityId))) {
+        const profiles = impacts.filter(profile => profile.meterDefinitionId === meter.definitionId);
+        if (!profiles.length) continue;
+        const id = `${prefix}_impact${numericImpacts.size}`, magnitudeQuestionId = `${id}_magnitude`;
+        numericImpacts.set(id, { meterId: meter.id, magnitudeQuestionId });
+        const data = { actionId: frame.id, meterId: meter.id, ownerEntityId: meter.entityId,
+          meterDefinitionId: meter.definitionId, current: meter.current };
+        questions[id] = question("Which authored impact does THIS action cause on THIS owner's meter? Judge actor costs separately from target effects; using a tool does not charge the tool for its user's effort. Select none for an unaffected meter. A cost and an effect can coexist on different meters, but each meter receives only one selected impact.", data,
+          { none: "This action does not change this owner's meter", ...Object.fromEntries(profiles.map(profile => [profile.id, profile as unknown as Record<string, JsonValue>])) });
+        questions[magnitudeQuestionId] = question("Magnitude of the selected impact on this specific meter under the authored laws and scale. A required nonzero cost cannot select none merely because it is small relative to the owner's reserve. Ignored if this meter has no selected impact.", data,
           Object.fromEntries(magnitudeBands.map(band => [band, band])));
       }
     }
@@ -496,15 +504,15 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
           }
         } else { status = "blocked"; operations = []; detail = "能力的适用条件尚未满足。"; }
       }
-      const impactChoice = answers[`${prefix}_impact`] ? selected(answers, `${prefix}_impact`) : "none";
-      if (impactChoice !== "none") {
+      for (const [id, target] of numericImpacts) {
+        if (!id.startsWith(`${prefix}_`)) continue;
+        const impactChoice = selected(answers, id);
+        if (impactChoice === "none") continue;
         const impact = state.truth.mechanics.impactProfiles[impactChoice]!;
-        const meter = Object.values(projected.truth.meters).find(meter => meter.entityId === (frame.targetEntityId ?? frame.actorEntityId) && meter.definitionId === impact.meterDefinitionId);
-        if (meter) {
-          const definition = state.truth.mechanics.meters[meter.definitionId]!, band = selected(answers, `${prefix}_magnitude`) as typeof magnitudeBands[number];
-          const amount = deriveClampedMeterDelta(meter.current, definition.min, definition.max, impact.amounts[band] * (impact.direction === "increase" ? 1 : -1));
-          if (amount) operations.push({ kind: "adjust_meter", meterId: meter.id, amount, ...source });
-        }
+        const meter = projected.truth.meters[target.meterId]!;
+        const definition = state.truth.mechanics.meters[meter.definitionId]!, band = selected(answers, target.magnitudeQuestionId) as typeof magnitudeBands[number];
+        const amount = deriveClampedMeterDelta(meter.current, definition.min, definition.max, impact.amounts[band] * (impact.direction === "increase" ? 1 : -1));
+        if (amount) operations.push({ kind: "adjust_meter", meterId: meter.id, amount, ...source });
       }
       const expansion = worldExpansions.get(frame.id);
       if (["use", "change"].includes(frame.kind)) {

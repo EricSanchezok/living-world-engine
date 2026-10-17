@@ -59,11 +59,12 @@ async function main() {
         await new Promise(resolve => setTimeout(resolve, 1000));
       }
       const after = database.readInstance(id).document;
+      const playerEntityId = after.state.agents[participant.agentId]!.entityId;
       save(`after-${actions.length + 1}.json`, after);
       actions.push({ text, beforeRevision: before.state.revision, afterRevision: after.state.revision,
         durationMs: Date.now() - actionStarted, historyEntries: after.state.history.length - before.state.history.length,
-        playerPlacement: after.state.truth.placements[participant.agentId],
-        meters: Object.values(after.state.truth.meters).filter(meter => meter.entityId === participant.agentId),
+        playerPlacement: after.state.truth.placements[playerEntityId],
+        meters: Object.values(after.state.truth.meters).filter(meter => meter.entityId === playerEntityId),
         perspective: projectAgentPerspective(after.state, after.state.agents[participant.agentId]!) });
     } catch (error) { failure = error instanceof Error ? error.message : String(error); break; }
   }

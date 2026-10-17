@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { z } from "zod";
-import { executeDecisionV2, decisionOutputV2Schema, decisionPromptV2, validateDecisionBatchV2, type DecisionRequestV2 } from "../decision-v2";
+import { executeDecisionV2, decisionOutputV2Schema, decisionPromptV2, decisionWireContextV2, validateDecisionBatchV2, type DecisionRequestV2 } from "../decision-v2";
 import { restoreDecisionBatchV2, templateDecisionBatchV2, type TemplatedDecisionBatchV2 } from "../decision-question-templates";
 import { contentHash } from "../model-audit";
 import { directCreationContext, directTestProvider, nativeChoice } from "../../testing/direct-provider";
@@ -93,6 +93,46 @@ describe("direct native decisions", () => {
     expect(encoded.questions.find(question => question.id === "data-0")).toHaveProperty("data", null);
     expect(encoded.questions.find(question => question.id === "consent")).not.toHaveProperty("data");
     expect(encoded.questions.find(question => question.id === "array")).not.toHaveProperty("data");
+  });
+  it("preserves every question and authorized fact while sharing the native policy in one request", async () => {
+    const input = request();
+    input.batch.questions = Object.fromEntries(Array.from({ length: 89 }, (_, index) => [`q${index}`, {
+      ...input.batch.questions.consent!, instructions: { question: `Question ${index}`, evidenceId: "observed-event" },
+    }]));
+    const original = structuredClone(input.batch), policy = decisionPromptV2().system;
+    const repeated = { state: input.batch.state, questions: Object.fromEntries(Object.entries(input.batch.questions).map(([id, q]) =>
+      [id, { type: q.type, instructions: { policy, task: q.instructions }, ...(q.criteria ? { criteria: q.criteria } : {}) }])) };
+    const wire = decisionWireContextV2(validateDecisionBatchV2(input.batch));
+    expect(wire.state).toEqual({ observation: "The recipient has not replied.", decisionPolicy: policy });
+    expect(Object.keys(wire.questions)).toEqual(Object.keys(input.batch.questions));
+    for (const [id, q] of Object.entries(wire.questions)) {
+      expect(q.instructions.task).toEqual(input.batch.questions[id]!.instructions);
+      expect(q.criteria).toEqual(input.batch.questions[id]!.criteria);
+      expect(q.instructions.policy).toBe("Apply the common decision policy in state.decisionPolicy.");
+    }
+    expect(input.batch).toEqual(original);
+    expect(Buffer.byteLength(JSON.stringify(wire))).toBeLessThan(Buffer.byteLength(JSON.stringify(repeated)) * 0.5);
+    const f = directTestProvider(value => answers(value.questions));
+    const result = await executeDecisionV2(f.gateway, input);
+    expect(Object.keys(result.answers)).toHaveLength(89);
+    expect(result.dispatches).toHaveLength(1);
+    expect(f.transport).toHaveBeenCalledTimes(1);
+  });
+  it("does not overwrite authorized fields when adding the shared policy", () => {
+    const input = request();
+    input.batch.state = { decisionPolicy: "An observed document title", _decisionPolicy: { privateBelief: "I am uncertain" } };
+    input.batch.view.projectionHash = contentHash(input.batch.state);
+    const wire = decisionWireContextV2(validateDecisionBatchV2(input.batch));
+    expect(wire.state).toEqual({ ...input.batch.state, __decisionPolicy: decisionPromptV2().system });
+    expect(wire.questions.consent!.instructions.policy).toBe("Apply the common decision policy in state.__decisionPolicy.");
+    expect(input.batch.state).not.toHaveProperty("__decisionPolicy");
+  });
+  it.each(["A scalar observation", ["Observed A", "Observed B"], null])("preserves non-record projection shape: %j", state => {
+    const input = request(); input.batch.state = state;
+    input.batch.view.projectionHash = contentHash(state);
+    const wire = decisionWireContextV2(validateDecisionBatchV2(input.batch));
+    expect(wire.state).toEqual(state);
+    expect(wire.questions.consent!.instructions.policy).toBe(decisionPromptV2().system);
   });
   it.each([false, true])("pins a language-only inference override through native fallback: %s", async fallback => {
     const f = directTestProvider(wire => fallback && !wire.messages

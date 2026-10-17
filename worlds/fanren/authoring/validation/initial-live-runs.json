@@ -19,23 +19,23 @@
       "known_tokens": {
         "input": {
           "known_sum": 761630,
-          "unknown_invocations": 0
+          "unknown_invocations": 1
         },
         "output": {
           "known_sum": 58619,
-          "unknown_invocations": 0
+          "unknown_invocations": 1
         },
         "reasoning": {
           "known_sum": 18472,
-          "unknown_invocations": 21
+          "unknown_invocations": 22
         },
         "cacheRead": {
           "known_sum": 48768,
-          "unknown_invocations": 21
+          "unknown_invocations": 22
         }
       },
       "cost": null,
-      "cost_note": "没有完整计费记录；不从未知用量推算费用。",
+      "cost_note": "没有完整计费记录；缺少用量的失败调用计为未知，不按零推算费用。",
       "execution_ids": [
         "3658e4d2-4413-4268-bed9-25d7974c33cf",
         "2889524b-2a42-4ad0-926e-c32f1e9d3090",
@@ -89,23 +89,23 @@
       "known_tokens": {
         "input": {
           "known_sum": 431774,
-          "unknown_invocations": 0
+          "unknown_invocations": 1
         },
         "output": {
           "known_sum": 37646,
-          "unknown_invocations": 0
+          "unknown_invocations": 1
         },
         "reasoning": {
           "known_sum": 17996,
-          "unknown_invocations": 14
+          "unknown_invocations": 15
         },
         "cacheRead": {
           "known_sum": 36096,
-          "unknown_invocations": 14
+          "unknown_invocations": 15
         }
       },
       "cost": null,
-      "cost_note": "没有完整计费记录；不从未知用量推算费用。",
+      "cost_note": "没有完整计费记录；缺少用量的失败调用计为未知，不按零推算费用。",
       "execution_ids": [
         "a9d9e279-5b08-4c6f-abf6-88fc45c2e4b1",
         "fca67248-5a9c-4c3d-808a-6eff41a337b1",
@@ -174,7 +174,7 @@
         }
       },
       "cost": null,
-      "cost_note": "没有完整计费记录；不从未知用量推算费用。",
+      "cost_note": "没有完整计费记录；缺少用量的失败调用计为未知，不按零推算费用。",
       "execution_ids": [
         "9dd00f0e-d355-400d-97ba-e96bfd1fd0ac",
         "8b32a1db-8fb2-4a5d-bc86-d985d3336e73",

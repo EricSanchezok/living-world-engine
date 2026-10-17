@@ -114,7 +114,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const amounts = [...new Set([1, ...literalNumbers(text), ...observedNumbers, ...rememberedNumbers, ...goals.flatMap(goal => literalNumbers(goal.description))])];
   const known = Object.entries(view.entities).map(([localId]) => [localId, agent.belief.localEntities[localId]!] as const);
   const perspective = view.state as { self: { location: unknown } };
-  const targetCriteria = { none: "No separate target is needed. For move, bind the current place or an actual destination; do not leave an intended destination unspecified.", ...Object.fromEntries(known.map(([id, entity]) => [id, {
+  const targetCriteria = { none: "No separate target is needed. Movement needs the actual destination. Use current_location only for movement within that place; never substitute it for an unavailable destination. Discover an unknown destination through an authorized observation or search first.", ...Object.fromEntries(known.map(([id, entity]) => [id, {
     name: entity.name, description: entity.description,
     relationship: view.entities[id] === agent.entityId ? "self" :
       view.entities[id] === state.truth.placements[agent.entityId] && perspective.self.location ? "current_location" : "known_entity",

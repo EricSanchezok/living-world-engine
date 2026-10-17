@@ -1,0 +1,195 @@
+{
+  "status": "not-qualified",
+  "interpretation": "修复了已复现的上下文重复、数值归属和样本认路问题；复合动作结束状态与完成范围仍有失败。局部成功不等于样本全部玩法或全域验收通过。",
+  "native_replay": {
+    "question_count": 89,
+    "old_compact_http_bytes": 214838,
+    "new_compact_http_bytes": 121202,
+    "native_dispatches": 1,
+    "fallback_dispatches": 0,
+    "provider_reported_input_tokens": 47076,
+    "provider_reported_output_tokens": 4128,
+    "transport_execution_ms": 890,
+    "state_preserved": true,
+    "criteria_preserved": true
+  },
+  "cases": [
+    {
+      "run_id": "2026-10-17T07-20-16-504Z-spirit-merchant",
+      "instance_id": "59944fbd-4ebe-4d30-a1ad-28ae310d4763",
+      "change_under_test": "context-only",
+      "world_hash": "sha256:02da7682ef76555be0bde00782a18b29b4e8ccfc1c8737bcdb71695b2581e7dc",
+      "agents_in_state": 15,
+      "agents_with_committed_actions": 4,
+      "acting_agent_ids": [
+        "spirit-client-one",
+        "spirit-client-two",
+        "spirit-merchant-1",
+        "spirit-supplier"
+      ],
+      "duration_ms": 82443,
+      "physical_requests": 44,
+      "logical_invocations": 44,
+      "audited_invocations": 44,
+      "known_tokens": {
+        "input": {
+          "known_sum": 634308,
+          "unknown_invocations": 0
+        },
+        "output": {
+          "known_sum": 49530,
+          "unknown_invocations": 0
+        },
+        "reasoning": {
+          "known_sum": 6522,
+          "unknown_invocations": 22
+        },
+        "cacheRead": {
+          "known_sum": 65920,
+          "unknown_invocations": 22
+        }
+      },
+      "cost": null,
+      "cost_note": "缺少完整计费凭据；未知用量不按零计费。",
+      "error_events": {},
+      "checks": [
+        {
+          "case": "御物后扣除施术者法力",
+          "result": "failed",
+          "actual_mana": 1200
+        },
+        {
+          "case": "原89题上下文请求",
+          "result": "transport-fixed-in-separate-replay",
+          "note": "只说明共享上下文可发送；不能代替实际行为正确性。"
+        }
+      ],
+      "status": "not-qualified",
+      "local_evidence": "ignored cache fanren-playtests/2026-10-17T07-20-16-504Z-spirit-merchant/livingworld.sqlite"
+    },
+    {
+      "run_id": "2026-10-17T07-26-15-290Z-han-li",
+      "instance_id": "f4e0be11-5d31-473a-8c23-f114ee6f0552",
+      "change_under_test": "route-and-context",
+      "world_hash": "sha256:3707328e868278af70880ccd577b65e4591746791056a677f5f8b81c7930321e",
+      "agents_in_state": 9,
+      "agents_with_committed_actions": 4,
+      "acting_agent_ids": [
+        "canon-han-li",
+        "han-elder-sister",
+        "han-father",
+        "han-mother"
+      ],
+      "duration_ms": 40944,
+      "physical_requests": 32,
+      "logical_invocations": 32,
+      "audited_invocations": 32,
+      "known_tokens": {
+        "input": {
+          "known_sum": 429761,
+          "unknown_invocations": 0
+        },
+        "output": {
+          "known_sum": 32302,
+          "unknown_invocations": 0
+        },
+        "reasoning": {
+          "known_sum": 1235,
+          "unknown_invocations": 20
+        },
+        "cacheRead": {
+          "known_sum": 30208,
+          "unknown_invocations": 20
+        }
+      },
+      "cost": null,
+      "cost_note": "缺少完整计费凭据；未知用量不按零计费。",
+      "error_events": {},
+      "checks": [
+        {
+          "case": "唯一韩立拒绝离村后仍能继续行动",
+          "result": "passed-limited-case",
+          "evidence": "父母回应已送达；未强制拜师；随后两步自主行动已提交。"
+        },
+        {
+          "case": "出门到村边小路",
+          "result": "passed",
+          "expected_placement": "village-path",
+          "actual_placement": "village-path"
+        }
+      ],
+      "status": "limited-case-passed",
+      "local_evidence": "ignored cache fanren-playtests/2026-10-17T07-26-15-290Z-han-li/livingworld.sqlite"
+    },
+    {
+      "run_id": "2026-10-17T07-26-15-289Z-spirit-merchant",
+      "instance_id": "6eb46754-cc72-4235-8a21-e334877fd8fb",
+      "change_under_test": "meter-owner-and-context",
+      "world_hash": "sha256:3707328e868278af70880ccd577b65e4591746791056a677f5f8b81c7930321e",
+      "agents_in_state": 15,
+      "agents_with_committed_actions": 4,
+      "acting_agent_ids": [
+        "spirit-client-one",
+        "spirit-client-two",
+        "spirit-merchant-1",
+        "spirit-supplier"
+      ],
+      "duration_ms": 63162,
+      "physical_requests": 37,
+      "logical_invocations": 37,
+      "audited_invocations": 37,
+      "known_tokens": {
+        "input": {
+          "known_sum": 521676,
+          "unknown_invocations": 0
+        },
+        "output": {
+          "known_sum": 44038,
+          "unknown_invocations": 0
+        },
+        "reasoning": {
+          "known_sum": 6309,
+          "unknown_invocations": 19
+        },
+        "cacheRead": {
+          "known_sum": 44032,
+          "unknown_invocations": 19
+        }
+      },
+      "cost": null,
+      "cost_note": "缺少完整计费凭据；未知用量不按零计费。",
+      "error_events": {},
+      "checks": [
+        {
+          "case": "施术者法力独立于施法目标",
+          "result": "passed",
+          "initial_mana": 1200,
+          "actual_mana": 1199
+        },
+        {
+          "case": "托起再收回的最终状态",
+          "result": "failed",
+          "evidence": "护身佩归于角色持有，但levitation_control仍为true，描述仍需持续灌注法力。"
+        },
+        {
+          "case": "复合清点并报告",
+          "result": "incomplete",
+          "evidence": "清点与读单有动作，但该轮没有提交玩家向岑玉和陶岐报告的发言。"
+        },
+        {
+          "case": "货物和账户守恒",
+          "result": "passed-limited-case",
+          "evidence": "17箱在店、3箱在货场的区分保留；未凭空补足，个人财产与商号款项仍分开。"
+        }
+      ],
+      "status": "not-qualified",
+      "local_evidence": "ignored cache fanren-playtests/2026-10-17T07-26-15-289Z-spirit-merchant/livingworld.sqlite"
+    }
+  ],
+  "conditions": "两次最终游玩与正文抽取并行，耗时不用于宣称严格的A/B性能增益。",
+  "scale_tests": {
+    "150": "not-run",
+    "700": "not-run",
+    "full": "not-run"
+  }
+}

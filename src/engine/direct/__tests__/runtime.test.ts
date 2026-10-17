@@ -26,7 +26,8 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
   reactionProgress?: string; playerProgress?: string; duplicateIdentity?: boolean; timerSeconds?: number; timerWakeAgentIds?: string[]; interaction?: string; duration?: string; actorVisible?: boolean; delivery?: boolean;
   playerAuthorization?: "authorized" | "outside_scope" | "unknown";
   worldOutcomes?: Record<string, string>;
-  readingOverrides?: Record<string, string>; npcReadings?: unknown[]; factValues?: Record<string, string>; resolvedDuration?: string; resolvedDurations?: Record<string, string>; effectRepresentation?: "existing" | "no_change" | "already" | "expand" } = {}) {
+  readingOverrides?: Record<string, string>; npcReadings?: unknown[]; factValues?: Record<string, string>; resolvedDuration?: string; resolvedDurations?: Record<string, string>; effectRepresentation?: "existing" | "no_change" | "already" | "expand";
+  withMana?: boolean; meterImpacts?: Record<string, string> } = {}) {
   let creations = 0;
   let npcReadings = 0;
   const f = directTestProvider(wire => {
@@ -77,6 +78,11 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
         const action = (wire.state as { actions?: Array<{ actorId: string }> }).actions?.[Number(id.split("_")[0]!.slice(1))];
         value = action && options.resolvedDurations?.[action.actorId] || options.resolvedDuration || "s1";
       }
+      if (/_impact\d+$/u.test(id)) {
+        const task = (q.instructions as { task: { data: { meterId: string } } }).task;
+        value = options.meterImpacts?.[task.data.meterId] ?? "none";
+      }
+      if (/_impact\d+_magnitude$/u.test(id)) value = "standard";
       if (/_fact\d+$/u.test(id)) {
         const instructions = q.instructions as { task?: { data?: { fact?: { predicate: string } } }; data?: { fact?: { predicate: string } } };
         const fact = (instructions.task ?? instructions).data?.fact;
@@ -89,6 +95,12 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
   });
   const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
   const player = world.initialState.agents.player!;
+  if (options.withMana) {
+    world.initialState.truth.mechanics.meters.mana = { id: "mana", name: "Mana", min: 0, max: 20, thresholds: [] };
+    world.initialState.truth.mechanics.impactProfiles["spell-cost"] = { id: "spell-cost", name: "Spell cost", meterDefinitionId: "mana",
+      direction: "decrease", amounts: { none: 0, minor: 1, standard: 3, major: 5, decisive: 10 } };
+    world.initialState.truth.meters["player-mana"] = { id: "player-mana", entityId: "player", definitionId: "mana", current: 10, firedThresholdIds: [] };
+  }
   if (options.privateGateFact) world.initialState.truth.facts["gate-secret"] = { ...world.initialState.truth.facts["gate-lock"]!,
     id: "gate-secret", predicate: "secret", value: { kind: "text", value: "PRIVATE-CODE" }, description: "PRIVATE-CODE", access: { kind: "agents", agentIds: ["keeper"] } };
   for (const [id, canonicalId] of [["door", "gate"], ["guard", "keeper"], ["yard", "courtyard"]]) {
@@ -171,6 +183,36 @@ describe("direct world through the actual simulation entry", () => {
     expect(replaySimulationState(third.state)).toEqual(third.state);
   });
 
+  it.each(["guard", "self"])("binds actor costs and target effects to real meters without double-charging a shared role: %s", async target => {
+    const options: NonNullable<Parameters<typeof fixture>[0]> = { operation: "use", target, withMana: true };
+    const f = await fixture(options);
+    const health = Object.values(f.world.initialState.truth.meters).find(meter => meter.entityId === "keeper" && meter.definitionId === "health")!;
+    options.meterImpacts = { "player-mana": "spell-cost", ...(target === "guard" ? { [health.id]: "harm" } : {}) };
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("消耗法力施放法术"));
+    expect(result.state.truth.meters["player-mana"]!.current).toBe(7);
+    expect(result.state.truth.meters[health.id]!.current).toBe(health.current - (target === "guard" ? 5 : 0));
+    expect(result.committed.operations.filter(operation => operation.kind === "adjust_meter" && operation.meterId === "player-mana")).toHaveLength(1);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("resolves every world and witness action reference from the unchanged shared action frames", async () => {
+    const f = await fixture({ operation: "move", target: "yard" });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("走进院子"));
+    expect(result.state.truth.placements.player).toBe("courtyard");
+    const wires = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body)))
+      .filter(wire => wire.questions?.a0_outcome);
+    expect(wires.length).toBeGreaterThan(0);
+    for (const wire of wires) {
+      expect(wire.state.actions.length).toBeGreaterThan(0);
+      for (const q of Object.values(wire.questions) as Array<{ instructions: { task: { data: { actionId: string; action?: unknown } } } }>) {
+        const data = q.instructions.task.data;
+        expect(data.action).toBeUndefined();
+        expect(wire.state.actions.some((frame: { id: string }) => frame.id === data.actionId)).toBe(true);
+      }
+    }
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it.each([[true, true], [false, true], [true, false]])("delivers the current event to a new actor through an admitted channel: heard=%s, admitted=%s", async (delivered, admitted) => {
     const options: Parameters<typeof fixture>[0] = { operation: "speak", recipient: "broadcast", speech: "input", creationEnabled: true,
       introduce: true, missingCoverage: !admitted, delivery: delivered, actorVisible: false, privateGateFact: true, creationResponse: {

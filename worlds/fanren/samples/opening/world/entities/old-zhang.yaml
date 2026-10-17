@@ -68,8 +68,32 @@ agent:
         name: 韩立
         description: 你曾给这个孩子取名。
         status: observed
-    evidence: []
-    claims: []
+      - id: home-village
+        name: 山边小村
+        description: 自家居住的小村，知道韩家和村边小路的来往方向。
+        status: observed
+      - id: familiar-path
+        name: 村边小路
+        description: 韩家出门可到的熟悉小路，通向村边和采柴的山坡。
+        status: observed
+    evidence:
+      - id: old-zhang-daily-routes
+        kind: observation
+        description: 开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。
+        sourceId: null
+        step: 0
+    claims:
+      - id: old-zhang-familiar-path
+        subjectId: familiar-path
+        predicate: familiar-route
+        value:
+          kind: text
+          value: 从韩家出门可以走到村边小路，再往山坡采柴。
+        description: 你熟悉这条日常道路。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - old-zhang-daily-routes
     bindings:
       - local_entity_id: self
         canonical_entity_ids:
@@ -80,3 +104,9 @@ agent:
       - local_entity_id: child
         canonical_entity_ids:
           - canon-han-li
+      - local_entity_id: home-village
+        canonical_entity_ids:
+          - han-village
+      - local_entity_id: familiar-path
+        canonical_entity_ids:
+          - village-path

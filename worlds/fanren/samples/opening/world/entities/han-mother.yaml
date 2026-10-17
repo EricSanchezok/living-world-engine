@@ -100,8 +100,32 @@ agent:
         name: 韩三叔
         description: 家中的亲戚，在镇上任掌柜，曾帮助家里。
         status: observed
-    evidence: []
-    claims: []
+      - id: home-village
+        name: 山边小村
+        description: 自家居住的小村，知道韩家和村边小路的来往方向。
+        status: observed
+      - id: familiar-path
+        name: 村边小路
+        description: 韩家出门可到的熟悉小路，通向村边和采柴的山坡。
+        status: observed
+    evidence:
+      - id: han-mother-daily-routes
+        kind: observation
+        description: 开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。
+        sourceId: null
+        step: 0
+    claims:
+      - id: han-mother-familiar-path
+        subjectId: familiar-path
+        predicate: familiar-route
+        value:
+          kind: text
+          value: 从韩家出门可以走到村边小路，再往山坡采柴。
+        description: 你熟悉这条日常道路。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - han-mother-daily-routes
     bindings:
       - local_entity_id: self
         canonical_entity_ids:
@@ -130,3 +154,9 @@ agent:
       - local_entity_id: uncle
         canonical_entity_ids:
           - han-uncle
+      - local_entity_id: home-village
+        canonical_entity_ids:
+          - han-village
+      - local_entity_id: familiar-path
+        canonical_entity_ids:
+          - village-path

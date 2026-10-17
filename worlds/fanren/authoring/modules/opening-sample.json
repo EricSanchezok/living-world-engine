@@ -1302,6 +1302,18 @@
                 "name": "韩三叔",
                 "description": "家中的亲戚，在镇上任掌柜，曾帮助家里。",
                 "status": "observed"
+              },
+              {
+                "id": "home-village",
+                "name": "山边小村",
+                "description": "自家居住的小村，知道韩家和村边小路的来往方向。",
+                "status": "observed"
+              },
+              {
+                "id": "familiar-path",
+                "name": "村边小路",
+                "description": "韩家出门可到的熟悉小路，通向村边和采柴的山坡。",
+                "status": "observed"
               }
             ],
             "evidence": [
@@ -1309,6 +1321,13 @@
                 "id": "han-outside-wish-evidence",
                 "kind": "observation",
                 "description": "开篇前亲历或长期相处所得：想看看村外世界，尚未告诉家里人。",
+                "sourceId": null,
+                "step": 0
+              },
+              {
+                "id": "canon-han-li-daily-routes",
+                "kind": "observation",
+                "description": "开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。",
                 "sourceId": null,
                 "step": 0
               }
@@ -1327,6 +1346,21 @@
                 "confidence": 1,
                 "evidenceIds": [
                   "han-outside-wish-evidence"
+                ]
+              },
+              {
+                "id": "canon-han-li-familiar-path",
+                "subjectId": "familiar-path",
+                "predicate": "familiar-route",
+                "value": {
+                  "kind": "text",
+                  "value": "从韩家出门可以走到村边小路，再往山坡采柴。"
+                },
+                "description": "你熟悉这条日常道路。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "canon-han-li-daily-routes"
                 ]
               }
             ],
@@ -1383,6 +1417,18 @@
                 "local_entity_id": "uncle",
                 "canonical_entity_ids": [
                   "han-uncle"
+                ]
+              },
+              {
+                "local_entity_id": "home-village",
+                "canonical_entity_ids": [
+                  "han-village"
+                ]
+              },
+              {
+                "local_entity_id": "familiar-path",
+                "canonical_entity_ids": [
+                  "village-path"
                 ]
               }
             ]
@@ -1525,10 +1571,46 @@
                 "name": "韩三叔",
                 "description": "家中的亲戚，在镇上任掌柜，曾帮助家里。",
                 "status": "observed"
+              },
+              {
+                "id": "home-village",
+                "name": "山边小村",
+                "description": "自家居住的小村，知道韩家和村边小路的来往方向。",
+                "status": "observed"
+              },
+              {
+                "id": "familiar-path",
+                "name": "村边小路",
+                "description": "韩家出门可到的熟悉小路，通向村边和采柴的山坡。",
+                "status": "observed"
               }
             ],
-            "evidence": [],
-            "claims": [],
+            "evidence": [
+              {
+                "id": "han-father-daily-routes",
+                "kind": "observation",
+                "description": "开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。",
+                "sourceId": null,
+                "step": 0
+              }
+            ],
+            "claims": [
+              {
+                "id": "han-father-familiar-path",
+                "subjectId": "familiar-path",
+                "predicate": "familiar-route",
+                "value": {
+                  "kind": "text",
+                  "value": "从韩家出门可以走到村边小路，再往山坡采柴。"
+                },
+                "description": "你熟悉这条日常道路。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "han-father-daily-routes"
+                ]
+              }
+            ],
             "bindings": [
               {
                 "local_entity_id": "self",
@@ -1582,6 +1664,18 @@
                 "local_entity_id": "uncle",
                 "canonical_entity_ids": [
                   "han-uncle"
+                ]
+              },
+              {
+                "local_entity_id": "home-village",
+                "canonical_entity_ids": [
+                  "han-village"
+                ]
+              },
+              {
+                "local_entity_id": "familiar-path",
+                "canonical_entity_ids": [
+                  "village-path"
                 ]
               }
             ]
@@ -1724,10 +1818,46 @@
                 "name": "韩三叔",
                 "description": "家中的亲戚，在镇上任掌柜，曾帮助家里。",
                 "status": "observed"
+              },
+              {
+                "id": "home-village",
+                "name": "山边小村",
+                "description": "自家居住的小村，知道韩家和村边小路的来往方向。",
+                "status": "observed"
+              },
+              {
+                "id": "familiar-path",
+                "name": "村边小路",
+                "description": "韩家出门可到的熟悉小路，通向村边和采柴的山坡。",
+                "status": "observed"
               }
             ],
-            "evidence": [],
-            "claims": [],
+            "evidence": [
+              {
+                "id": "han-mother-daily-routes",
+                "kind": "observation",
+                "description": "开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。",
+                "sourceId": null,
+                "step": 0
+              }
+            ],
+            "claims": [
+              {
+                "id": "han-mother-familiar-path",
+                "subjectId": "familiar-path",
+                "predicate": "familiar-route",
+                "value": {
+                  "kind": "text",
+                  "value": "从韩家出门可以走到村边小路，再往山坡采柴。"
+                },
+                "description": "你熟悉这条日常道路。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "han-mother-daily-routes"
+                ]
+              }
+            ],
             "bindings": [
               {
                 "local_entity_id": "self",
@@ -1781,6 +1911,18 @@
                 "local_entity_id": "uncle",
                 "canonical_entity_ids": [
                   "han-uncle"
+                ]
+              },
+              {
+                "local_entity_id": "home-village",
+                "canonical_entity_ids": [
+                  "han-village"
+                ]
+              },
+              {
+                "local_entity_id": "familiar-path",
+                "canonical_entity_ids": [
+                  "village-path"
                 ]
               }
             ]
@@ -1923,10 +2065,46 @@
                 "name": "韩三叔",
                 "description": "家中的亲戚，在镇上任掌柜，曾帮助家里。",
                 "status": "observed"
+              },
+              {
+                "id": "home-village",
+                "name": "山边小村",
+                "description": "自家居住的小村，知道韩家和村边小路的来往方向。",
+                "status": "observed"
+              },
+              {
+                "id": "familiar-path",
+                "name": "村边小路",
+                "description": "韩家出门可到的熟悉小路，通向村边和采柴的山坡。",
+                "status": "observed"
               }
             ],
-            "evidence": [],
-            "claims": [],
+            "evidence": [
+              {
+                "id": "han-eldest-brother-daily-routes",
+                "kind": "observation",
+                "description": "开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。",
+                "sourceId": null,
+                "step": 0
+              }
+            ],
+            "claims": [
+              {
+                "id": "han-eldest-brother-familiar-path",
+                "subjectId": "familiar-path",
+                "predicate": "familiar-route",
+                "value": {
+                  "kind": "text",
+                  "value": "从韩家出门可以走到村边小路，再往山坡采柴。"
+                },
+                "description": "你熟悉这条日常道路。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "han-eldest-brother-daily-routes"
+                ]
+              }
+            ],
             "bindings": [
               {
                 "local_entity_id": "self",
@@ -1980,6 +2158,18 @@
                 "local_entity_id": "uncle",
                 "canonical_entity_ids": [
                   "han-uncle"
+                ]
+              },
+              {
+                "local_entity_id": "home-village",
+                "canonical_entity_ids": [
+                  "han-village"
+                ]
+              },
+              {
+                "local_entity_id": "familiar-path",
+                "canonical_entity_ids": [
+                  "village-path"
                 ]
               }
             ]
@@ -2122,10 +2312,46 @@
                 "name": "韩三叔",
                 "description": "家中的亲戚，在镇上任掌柜，曾帮助家里。",
                 "status": "observed"
+              },
+              {
+                "id": "home-village",
+                "name": "山边小村",
+                "description": "自家居住的小村，知道韩家和村边小路的来往方向。",
+                "status": "observed"
+              },
+              {
+                "id": "familiar-path",
+                "name": "村边小路",
+                "description": "韩家出门可到的熟悉小路，通向村边和采柴的山坡。",
+                "status": "observed"
               }
             ],
-            "evidence": [],
-            "claims": [],
+            "evidence": [
+              {
+                "id": "han-zhu-daily-routes",
+                "kind": "observation",
+                "description": "开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。",
+                "sourceId": null,
+                "step": 0
+              }
+            ],
+            "claims": [
+              {
+                "id": "han-zhu-familiar-path",
+                "subjectId": "familiar-path",
+                "predicate": "familiar-route",
+                "value": {
+                  "kind": "text",
+                  "value": "从韩家出门可以走到村边小路，再往山坡采柴。"
+                },
+                "description": "你熟悉这条日常道路。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "han-zhu-daily-routes"
+                ]
+              }
+            ],
             "bindings": [
               {
                 "local_entity_id": "self",
@@ -2179,6 +2405,18 @@
                 "local_entity_id": "uncle",
                 "canonical_entity_ids": [
                   "han-uncle"
+                ]
+              },
+              {
+                "local_entity_id": "home-village",
+                "canonical_entity_ids": [
+                  "han-village"
+                ]
+              },
+              {
+                "local_entity_id": "familiar-path",
+                "canonical_entity_ids": [
+                  "village-path"
                 ]
               }
             ]
@@ -2321,10 +2559,46 @@
                 "name": "韩三叔",
                 "description": "家中的亲戚，在镇上任掌柜，曾帮助家里。",
                 "status": "observed"
+              },
+              {
+                "id": "home-village",
+                "name": "山边小村",
+                "description": "自家居住的小村，知道韩家和村边小路的来往方向。",
+                "status": "observed"
+              },
+              {
+                "id": "familiar-path",
+                "name": "村边小路",
+                "description": "韩家出门可到的熟悉小路，通向村边和采柴的山坡。",
+                "status": "observed"
               }
             ],
-            "evidence": [],
-            "claims": [],
+            "evidence": [
+              {
+                "id": "han-elder-sister-daily-routes",
+                "kind": "observation",
+                "description": "开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。",
+                "sourceId": null,
+                "step": 0
+              }
+            ],
+            "claims": [
+              {
+                "id": "han-elder-sister-familiar-path",
+                "subjectId": "familiar-path",
+                "predicate": "familiar-route",
+                "value": {
+                  "kind": "text",
+                  "value": "从韩家出门可以走到村边小路，再往山坡采柴。"
+                },
+                "description": "你熟悉这条日常道路。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "han-elder-sister-daily-routes"
+                ]
+              }
+            ],
             "bindings": [
               {
                 "local_entity_id": "self",
@@ -2378,6 +2652,18 @@
                 "local_entity_id": "uncle",
                 "canonical_entity_ids": [
                   "han-uncle"
+                ]
+              },
+              {
+                "local_entity_id": "home-village",
+                "canonical_entity_ids": [
+                  "han-village"
+                ]
+              },
+              {
+                "local_entity_id": "familiar-path",
+                "canonical_entity_ids": [
+                  "village-path"
                 ]
               }
             ]
@@ -2520,10 +2806,46 @@
                 "name": "韩三叔",
                 "description": "家中的亲戚，在镇上任掌柜，曾帮助家里。",
                 "status": "observed"
+              },
+              {
+                "id": "home-village",
+                "name": "山边小村",
+                "description": "自家居住的小村，知道韩家和村边小路的来往方向。",
+                "status": "observed"
+              },
+              {
+                "id": "familiar-path",
+                "name": "村边小路",
+                "description": "韩家出门可到的熟悉小路，通向村边和采柴的山坡。",
+                "status": "observed"
               }
             ],
-            "evidence": [],
-            "claims": [],
+            "evidence": [
+              {
+                "id": "han-younger-sister-daily-routes",
+                "kind": "observation",
+                "description": "开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。",
+                "sourceId": null,
+                "step": 0
+              }
+            ],
+            "claims": [
+              {
+                "id": "han-younger-sister-familiar-path",
+                "subjectId": "familiar-path",
+                "predicate": "familiar-route",
+                "value": {
+                  "kind": "text",
+                  "value": "从韩家出门可以走到村边小路，再往山坡采柴。"
+                },
+                "description": "你熟悉这条日常道路。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "han-younger-sister-daily-routes"
+                ]
+              }
+            ],
             "bindings": [
               {
                 "local_entity_id": "self",
@@ -2577,6 +2899,18 @@
                 "local_entity_id": "uncle",
                 "canonical_entity_ids": [
                   "han-uncle"
+                ]
+              },
+              {
+                "local_entity_id": "home-village",
+                "canonical_entity_ids": [
+                  "han-village"
+                ]
+              },
+              {
+                "local_entity_id": "familiar-path",
+                "canonical_entity_ids": [
+                  "village-path"
                 ]
               }
             ]
@@ -2821,10 +3155,46 @@
                 "name": "韩立",
                 "description": "你曾给这个孩子取名。",
                 "status": "observed"
+              },
+              {
+                "id": "home-village",
+                "name": "山边小村",
+                "description": "自家居住的小村，知道韩家和村边小路的来往方向。",
+                "status": "observed"
+              },
+              {
+                "id": "familiar-path",
+                "name": "村边小路",
+                "description": "韩家出门可到的熟悉小路，通向村边和采柴的山坡。",
+                "status": "observed"
               }
             ],
-            "evidence": [],
-            "claims": [],
+            "evidence": [
+              {
+                "id": "old-zhang-daily-routes",
+                "kind": "observation",
+                "description": "开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。",
+                "sourceId": null,
+                "step": 0
+              }
+            ],
+            "claims": [
+              {
+                "id": "old-zhang-familiar-path",
+                "subjectId": "familiar-path",
+                "predicate": "familiar-route",
+                "value": {
+                  "kind": "text",
+                  "value": "从韩家出门可以走到村边小路，再往山坡采柴。"
+                },
+                "description": "你熟悉这条日常道路。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "old-zhang-daily-routes"
+                ]
+              }
+            ],
             "bindings": [
               {
                 "local_entity_id": "self",
@@ -2842,6 +3212,18 @@
                 "local_entity_id": "child",
                 "canonical_entity_ids": [
                   "canon-han-li"
+                ]
+              },
+              {
+                "local_entity_id": "home-village",
+                "canonical_entity_ids": [
+                  "han-village"
+                ]
+              },
+              {
+                "local_entity_id": "familiar-path",
+                "canonical_entity_ids": [
+                  "village-path"
                 ]
               }
             ]
@@ -4824,43 +5206,50 @@
       "han-uncle",
       "sample-calibration",
       "han-roots",
-      "sample-open-future"
+      "sample-open-future",
+      "sample-originals"
     ],
     "entity:han-father": [
       "han-household",
       "han-wish",
       "han-uncle",
-      "sample-calibration"
+      "sample-calibration",
+      "sample-originals"
     ],
     "entity:han-mother": [
       "han-household",
       "han-wish",
       "han-uncle",
-      "sample-calibration"
+      "sample-calibration",
+      "sample-originals"
     ],
     "entity:han-eldest-brother": [
       "han-household",
       "han-wish",
       "han-uncle",
-      "sample-calibration"
+      "sample-calibration",
+      "sample-originals"
     ],
     "entity:han-zhu": [
       "han-household",
       "han-wish",
       "han-uncle",
-      "sample-calibration"
+      "sample-calibration",
+      "sample-originals"
     ],
     "entity:han-elder-sister": [
       "han-household",
       "han-wish",
       "han-uncle",
-      "sample-calibration"
+      "sample-calibration",
+      "sample-originals"
     ],
     "entity:han-younger-sister": [
       "han-household",
       "han-wish",
       "han-uncle",
-      "sample-calibration"
+      "sample-calibration",
+      "sample-originals"
     ],
     "entity:han-uncle": [
       "han-uncle",
@@ -4869,7 +5258,8 @@
     ],
     "entity:old-zhang": [
       "village-reader",
-      "sample-calibration"
+      "sample-calibration",
+      "sample-originals"
     ],
     "entity:han-household-pantry": [
       "han-household",
