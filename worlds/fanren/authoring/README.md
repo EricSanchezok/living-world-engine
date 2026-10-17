@@ -1,6 +1,6 @@
 # 《凡人修仙传》制作档案
 
-本目录是制作参考与进度的唯一入口。范围为本传涉及的人界、灵界及解释两界所需的关联空间；仙界不作为可探索世界。执行范围见[已批准规格](../../../docs/specs/0192-canonical-world-and-participation-seeds.md)。[前期调研](../../../docs/research/2026-10-17-fanren-canonical-world-authoring.md)保留抽读证据，不能替代本目录的完整制作状态。
+本目录是制作参考与进度的唯一入口。范围为本传涉及的人界、灵界及解释两界所需的关联空间；仙界不作为可探索世界。执行范围见[已批准规格](../../../docs/specs/0195-canonical-world-and-participation-seeds.md)。[前期调研](../../../docs/research/2026-10-17-fanren-canonical-world-authoring.md)保留抽读证据，不能替代本目录的完整制作状态。
 
 ## 时间与真实性
 

@@ -98,6 +98,62 @@ quantities:
       - resource-conservation
     consumption_law_ids:
       - resource-conservation
+  - id: salt-bag
+    name: 食盐小包
+    unit: 包
+    production_law_ids:
+      - resource-conservation
+    consumption_law_ids:
+      - resource-conservation
+  - id: lamp-oil
+    name: 灯油小瓶
+    unit: 瓶
+    production_law_ids:
+      - resource-conservation
+    consumption_law_ids:
+      - resource-conservation
+  - id: herb-stem
+    name: 鲜止血草
+    unit: 株
+    production_law_ids:
+      - resource-conservation
+    consumption_law_ids:
+      - resource-conservation
+  - id: joining-wire
+    name: 器座接纹丝
+    unit: 段
+    production_law_ids:
+      - resource-conservation
+    consumption_law_ids:
+      - resource-conservation
+  - id: prepared-material
+    name: 预处理灵材
+    unit: 份
+    production_law_ids:
+      - resource-conservation
+    consumption_law_ids:
+      - resource-conservation
+  - id: array-thread
+    name: 阵纹导线
+    unit: 段
+    production_law_ids:
+      - resource-conservation
+    consumption_law_ids:
+      - resource-conservation
+  - id: sealing-sand
+    name: 封纹砂
+    unit: 份
+    production_law_ids:
+      - resource-conservation
+    consumption_law_ids:
+      - resource-conservation
+  - id: mineral-sample
+    name: 浅层矿样
+    unit: 份
+    production_law_ids:
+      - resource-conservation
+    consumption_law_ids:
+      - resource-conservation
 ratings:
   - id: cultivation
     name: 修为层次
@@ -246,6 +302,7 @@ temporal_profiles:
       evidence_requirement: none
     kind: ongoing
     checkpoint_seconds: 300
+duration_units: []
 temporal_profile_coverage:
   required_semantic_tags:
     - short
