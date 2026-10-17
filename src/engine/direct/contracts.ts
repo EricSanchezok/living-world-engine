@@ -20,7 +20,9 @@ export interface ActionFrame {
   targetEntityId: string | null; toolEntityId: string | null; quantityDefinitionId: string | null;
   amount: number | null; utterance: string | null; capabilityId: string | null;
   startedAtSeconds: number; dueAtSeconds: number | null; temporalProfileId: string | null;
-  durationSeconds: number; progressSeconds: number; activityStatus: "active" | "queued" | "paused";
+  /** Zero with a null deadline is unresolved and cannot enter the timeline. */
+  durationSeconds: number; durationSource: "explicit" | "profile" | "judgment";
+  progressSeconds: number; activityStatus: "active" | "queued" | "paused";
   inputHash: string; causeActionId: string | null;
   preparatoryFor: ActionKind | null;
   observationScope: "target" | "surroundings" | "inventory";
@@ -60,6 +62,7 @@ export type CapabilityEffect =
 export interface PreparedDirectAction {
   actionId: string; reads: Record<string, string>; status: ActionOutcome["status"]; summary: string;
   operations: WorldDeltaOperation[]; visibleFactIds: string[]; visibleEntityIds: string[]; deliveredToEntityIds: string[];
+  actorOnlyFactIds: string[]; actorOnlyEntityIds: string[];
   namedEntityIds: string[];
   /** Recipients who can see the actor, independently of hearing the utterance. */
   actorVisibleToEntityIds?: string[];

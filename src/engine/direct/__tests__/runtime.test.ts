@@ -22,7 +22,7 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
   creationResponse?: unknown; creationResponses?: unknown[]; missingCoverage?: boolean; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
   recipient?: string; resolvedRecipient?: string; searchLocation?: string; transferAuthority?: string; transferExecution?: string;
   reactionProgress?: string; playerProgress?: string; duplicateIdentity?: boolean; timerSeconds?: number; interaction?: string; duration?: string; actorVisible?: boolean;
-  readingOverrides?: Record<string, string>; factValues?: Record<string, string>; effectRepresentation?: "existing" | "no_change" | "already" | "expand" } = {}) {
+  readingOverrides?: Record<string, string>; factValues?: Record<string, string>; resolvedDuration?: string; effectRepresentation?: "existing" | "no_change" | "already" | "expand" } = {}) {
   let creations = 0;
   const f = directTestProvider(wire => {
     if (!wire.questions) {
@@ -56,6 +56,7 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
       if (id.startsWith("identity")) value = options.duplicateIdentity && creations === 1 ? "duplicate" : "distinct";
       if (id.endsWith("_expression")) value = options.effectRepresentation ?? (options.effectExpansion ? "expand" : "existing");
       if (id.endsWith("_movement")) value = options.movement ?? "enter";
+      if (id.endsWith("_duration")) value = options.resolvedDuration ?? "s1";
       if (/_fact\d+$/u.test(id)) {
         const instructions = q.instructions as { task?: { data?: { fact?: { predicate: string } } }; data?: { fact?: { predicate: string } } };
         const fact = (instructions.task ?? instructions).data?.fact;
@@ -90,6 +91,49 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it.each(["observe", "speak", "transfer"])("adjudicates unspecified %s time instead of committing the minimum", async operation => {
+    const f = await fixture({ operation, target: "guard", recipient: "guard", speech: "input", resolvedDuration: "s60" });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("请介绍一下这里的情况。"));
+    const frame = result.committed.directEvent.frames[0]!;
+    expect(frame.durationSeconds).toBe(60);
+    expect(result.state.truth.elapsedSeconds).toBe(60);
+    const worldWire = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).find(wire => wire.questions?.a0_duration);
+    expect(worldWire.questions.a0_duration.criteria).not.toHaveProperty("planned");
+    expect(worldWire.state.actions[0]).toMatchObject({ durationSeconds: 0, dueAtSeconds: null });
+    expect(worldWire.state.temporalCalibrations).toEqual(f.world.initialState.truth.mechanics.temporalCalibrations);
+    expect(f.transport).toHaveBeenCalledTimes(2);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+
+  it("keeps explicit action-bound time authoritative over a different model scale", async () => {
+    const f = await fixture({ operation: "wait", duration: "d0", resolvedDuration: "s60" });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("等候七秒。"));
+    expect(result.state.truth.elapsedSeconds).toBe(7);
+    expect(result.committed.directEvent.frames[0]).toMatchObject({ durationSource: "explicit", durationSeconds: 7 });
+    const wires = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body)));
+    expect(wires.some(wire => wire.questions?.a0_duration)).toBe(false);
+  });
+
+  it("makes ordinary movement disclose perceptible surroundings without sharing the actor's incidental view", async () => {
+    const f = await fixture({ operation: "move", target: "yard", named: true });
+    const world = f.world.initialState;
+    world.truth.entities.notice = { id: "notice", kind: "object", name: "布告", description: "院内的布告", lifecycle: "active", createdAtStep: 0 };
+    world.truth.placements.notice = "courtyard";
+    world.truth.facts["notice-detail"] = { id: "notice-detail", subjectId: "notice", predicate: "writing", value: { kind: "text", value: "今日开放" }, description: "今日开放", access: { kind: "public" }, provenance: world.truth.facts["gate-lock"]!.provenance };
+    f.world.historyBaseHash = historyReplayBaseHash(world);
+    const engine = new SimulationEngine(f.world, f.algorithm);
+    await engine.bootstrapAgents();
+    const result = await engine.step(f.roster, f.request("走进院子"));
+    const own = result.committed.observations.find(packet => packet.observerId === "player")!;
+    expect(own.introductions.some(intro => intro.canonicalEntityId === "notice")).toBe(true);
+    expect(own.summary).toContain("今日开放");
+    for (const packet of result.committed.observations.filter(packet => packet.observerId !== "player")) {
+      expect(packet.introductions.some(intro => intro.canonicalEntityId === "notice")).toBe(false);
+    }
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("prepares native events without applying them and rejects a changed frozen event at the canonical boundary", async () => {
     const f = await fixture({ operation: "move", target: "yard" });
     const source = await f.engine.bootstrapAgents();
@@ -984,14 +1028,14 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.committed.observations.find(o => o.observerId === "player")?.scene?.status).toBe("succeeded");
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
-  it("allows the exploration creator to leave an established scene unchanged", async () => {
+  it("skips the exploration creator when existing scene content suffices", async () => {
     const f = await fixture({ operation: "observe", observationScope: "surroundings", target: "none", creationEnabled: true,
       creationResponse: { description: "当前场景已足够清楚。", entities: [], facts: [], events: [] } });
     await f.engine.bootstrapAgents();
     const result = await f.engine.step(f.roster, f.request("再看看院子里已经见过的东西"));
     expect(result.committed.outcomes[0]?.status).toBe("succeeded");
     expect(result.state.truth.entities).toEqual(f.world.initialState.truth.entities);
-    expect(f.transport).toHaveBeenCalledTimes(3);
+    expect(f.transport).toHaveBeenCalledTimes(2);
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
   it("does not silently turn an unrepresented player attempt into observation", async () => {

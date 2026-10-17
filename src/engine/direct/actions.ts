@@ -77,22 +77,21 @@ export function literalDurations(text: string): Array<{ text: string; seconds: n
   }
   return spans.map(({ text, seconds }) => ({ text, seconds }));
 }
-export function actionSeconds(state: Readonly<SimulationState>, profileId: string | null, raw: string, explicitDuration = true): number {
+export function actionSeconds(state: Readonly<SimulationState>, profileId: string | null, raw: string, explicitDuration = true): number | null {
   const duration = explicitDuration ? literalDurations(raw)[0] : undefined;
   if (duration) return duration.seconds;
   const profile = profileId ? state.truth.mechanics.temporalProfiles[profileId] : null;
   if (profile?.kind === "fixed") return profile.durationSeconds;
   if (profile?.kind === "staged") return profile.stages.reduce((sum, stage) => sum + stage.durationSeconds, 0);
   // An open-ended activity starts now; its later checkpoints are not time already spent.
-  if (profile?.kind === "ongoing") return actionSeconds(state, null, "", false);
+  if (profile?.kind === "ongoing") return 1;
   if (profile?.kind === "rate") {
     const escaped = [profile.unit, ...profile.unitAliases].map(unit => unit.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&"));
     const quantity = raw.match(new RegExp(`(\\d+(?:\\.\\d+)?)\\s*(?:${escaped.join("|")})`, "iu"));
     if (quantity) return Math.max(1, Math.ceil(Number(quantity[1]) / profile.unitsPerPeriod * profile.periodSeconds));
   }
   if (profile?.kind === "conditional" || profile?.kind === "goal") return profile.checkEverySeconds;
-  const ordinary = Object.values(state.truth.mechanics.temporalProfiles).filter(profile => profile.kind === "fixed" && profile.selection.evidenceRequirement === "none");
-  return ordinary.length ? Math.min(...ordinary.map(profile => profile.kind === "fixed" ? profile.durationSeconds : 30)) : 30;
+  return null;
 }
 
 export async function chooseAction(input: { state: Readonly<SimulationState>; definition: WorldRuntimeContract; control: DirectRuntimeState;
@@ -153,10 +152,13 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       apologize: "Apologize or acknowledge an effect on the other person", farewell: "End this conversation naturally",
       offer: "Offer the selected resource amount", accept: "Explicitly accept the currently discussed terms", refuse: "Explicitly refuse the currently discussed terms",
       clarify: "Ask for clearer terms", report: "State the selected existing belief", acknowledge: "Acknowledge and wait for actual evidence", unknown_information: "Tell the questioner that this Agent does not know the requested information" }),
-    timing: choice("Choose timing for this concrete step. A brief look, ordinary conversation or starting to wait uses default. Select prolonged work only when the request actually authorizes it. Checkpoint intervals belong to future activity, not elapsed time at its start.", {
-      default: "Ordinary action duration from the world",
+    timing: choice("Choose the temporal profile that fits THIS step's actual scope using temporalCalibrations. Consider the whole utterance, distance, effort and detail of inspection. Default asks the world to judge missing timing; it never means the shortest action. Select prolonged work only when authorized. Checkpoint intervals describe future activity, not elapsed time at its start.", {
+      default: "No applicable profile is established; adjudicate the actual duration",
       ...Object.fromEntries(timing.map(profile => [profile.id, { ...profile }])),
     }),
+    reflection_duration: choice("For private reflection only, estimate the time to perform the requested mental work using the temporal calibrations. Explicitly bound duration takes precedence. Other operations ignore this field.",
+      Object.fromEntries([...new Set([...timing.flatMap(profile => profile.kind === "fixed" ? [profile.durationSeconds] : []), 30])]
+        .sort((a, b) => a - b).map(seconds => [`s${seconds}`, `${seconds} seconds`]))),
   };
   if (external) questions.interaction = choice("What kind of response does this input seek in the actual shared conversation? Choose clarification for a reader asking which previously presented person/thing was meant, a recap, their already known location, or the meaning/status of earlier feedback without requesting a new action. Choose world_action for words directed at a character (including elliptical follow-ups), observation of NEW evidence or any actual attempt. A question is not automatically clarification: asking the recent speaker for their name is in-world speech. Use the published exchanges, addressee and current focus; no special command syntax is needed.", {
     world_action: "Act or speak in the world",
@@ -186,9 +188,9 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   });
   const claims = orderedValues(agent.belief.claims);
   if (jointInterpretation) {
-    questions.progress_next = choice("After the selected next operation and its immediate effects, what remains of THIS submission? Use the operation you actually selected, together with currentRequestReceipts. A distinct later step must be explicitly authorized; a question or agreement does not authorize payment. A completed wait must not be repeated. Only the applicable branch of a conditional request runs.", {
+    questions.progress_next = choice("After the selected next operation, what remains of THIS submission's actual intent? Necessary low-risk continuity is authorized by that intent; reaching a waypoint or discovering the route need not end the request. Use currentRequestReceipts and continue feasible remaining work without repeating completed acts. New spending, commitments, voluntary speech or risk choices need authorization. Only the applicable conditional branch runs. Missing evidence that this very step can supply permits continuation; a genuinely unavailable reply or new choice requires wait.", {
       complete: "The requested immediate work is covered; no further action is authorized by this input",
-      continue: "A distinct remaining step is explicitly requested and can be attempted next without a new reply or player choice",
+      continue: "A distinct requested step or necessary low-risk continuation can be attempted next without a new reply or player choice",
       wait: "Further progress needs another person's reply, unknown evidence, consent or a new player choice",
     });
   }
@@ -215,7 +217,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     evidence: claim.evidenceIds.map(id => agent.belief.evidence[id]).filter(Boolean).map(item => ({ kind: item!.kind, step: item!.step })) }));
   const actionPolicy = jointInterpretation ? "Interpret all fields jointly as one next interaction. Current receipts distinguish requested steps from executed work."
     : loadPromptAsset("user/direct-action.md");
-  const context = { actionPolicy, perspective: view.state, submittedAction: external ? { ...external, discourse: undefined } : null, discourse: external?.discourse ?? null, currentRequestReceipts,
+  const context = { actionPolicy, temporalCalibrations: state.truth.mechanics.temporalCalibrations, perspective: view.state, submittedAction: external ? { ...external, discourse: undefined } : null, discourse: external?.discourse ?? null, currentRequestReceipts,
     requestPhase: currentRequestReceipts.length ? "Continue this same submission after its listed receipts" : "New submission: none of this input has executed. Earlier similar actions belong to other requests.",
     recentActions: recentActions.slice(-6).map(({ requested, target, actionKind, attempted, outcome, preparatoryFor }) => ({ requested, target, actionKind, attempted, outcome, preparatoryFor })),
     currentObservedFacts, intent: { goalId: intent.goalId, wakeReasons: intent.wakeReasons,
@@ -378,7 +380,10 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const id = runtimeId({ worldHash: state.worldHash, revision: state.revision, kind: "action", stage: "direct-action", owner: agentId, round: 0, ordinal: 0 });
   const durationChoice = questions.duration ? selected(answers, "duration") : "default";
   const selectedDuration = /^d\d+$/u.test(durationChoice) ? durations[Number(durationChoice.slice(1))]?.seconds : undefined;
-  const durationSeconds = !preparatoryFor && selectedDuration !== undefined ? selectedDuration : actionSeconds(state, profileId, preparatoryFor ? "" : rawText, false);
+  const explicitSeconds = !preparatoryFor ? selectedDuration : undefined;
+  const profileSeconds = actionSeconds(state, profileId, preparatoryFor ? "" : rawText, false);
+  const durationSource = explicitSeconds !== undefined ? "explicit" : profileSeconds !== null ? "profile" : "judgment";
+  const durationSeconds = explicitSeconds ?? profileSeconds ?? (kind === "reflect" ? Number(selected(answers, "reflection_duration").slice(1)) : 0);
   const quantityDefinitionId = questions.resource && selected(answers, "resource") !== "none" ? selected(answers, "resource") : null;
   const amountField = !jointInterpretation && quantityDefinitionId ? `resource_amount_${resources.indexOf(quantityDefinitionId)}` : "amount";
   const amountChoice = selected(answers, amountField);
@@ -392,8 +397,8 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     quantityDefinitionId,
     amount: amountChoice === "unknown" ? null : Number(amountChoice.slice(1)), utterance,
     capabilityId: ["use", "change"].includes(kind) && questions.capability && selected(answers, "capability") !== "none" ? selected(answers, "capability") : null,
-    startedAtSeconds: state.truth.elapsedSeconds, dueAtSeconds: state.truth.elapsedSeconds + durationSeconds,
-    durationSeconds, progressSeconds: 0, activityStatus: "active",
+    startedAtSeconds: state.truth.elapsedSeconds, dueAtSeconds: durationSeconds ? state.truth.elapsedSeconds + durationSeconds : null,
+    durationSeconds, durationSource, progressSeconds: 0, activityStatus: "active",
     temporalProfileId: profileId, inputHash, causeActionId: intent.causeActionId, preparatoryFor,
     observationScope: preparatoryFor ? target ? "target" : "surroundings" : observationScope };
   if (operation === "expand") {

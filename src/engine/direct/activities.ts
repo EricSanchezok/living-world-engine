@@ -8,6 +8,7 @@ export function admitActivities(state: Readonly<SimulationState>, control: Direc
     a.startedAtSeconds - b.startedAtSeconds || a.id.localeCompare(b.id));
   for (const frame of frames) {
     const preparation = control.prepared[frame.id]; if (!preparation) continue;
+    if (!Number.isSafeInteger(frame.durationSeconds) || frame.durationSeconds < 1) throw new Error("An activity requires adjudicated positive duration");
     const claims = preparation.sharedClaims;
     if (frame.activityStatus === "paused") {
       for (const claim of claims) {

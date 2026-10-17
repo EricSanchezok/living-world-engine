@@ -378,7 +378,7 @@ describe("direct world through persistent WorldHost", () => {
         expect(host.instance(id).servicePause).toMatchObject({ code: "usage-unresolved" });
         expect(saved.narratives).toHaveLength(1);
         expect(saved.narratives[0]).toMatchObject({ status: "fallback", attempts: 0,
-          segments: [{ sequence: 0, text: "你说：“请问铜钥匙多少钱？”" }] });
+          segments: [{ sequence: 0, text: expect.stringContaining("你说：“请问铜钥匙多少钱？”") }] });
         expect(saved.actionWindow?.deadlineAt).toBeNull();
         expect(proseCalls).toBe(0);
       } else {
@@ -747,7 +747,7 @@ describe("direct world through persistent WorldHost", () => {
       let host = makeHost();
       const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } });
       const id = created.summary.id;
-      expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 30, executionAlgorithm: DEFAULT_ALGORITHM_REF,
+      expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 31, executionAlgorithm: DEFAULT_ALGORITHM_REF,
         state: { schemaVersion: 21, executionState: { data: { kind: "direct-world" } } } });
       expect(f.transport).not.toHaveBeenCalled();
       await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });

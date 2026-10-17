@@ -10,7 +10,7 @@ import type { DirectDecisions } from "./decisions";
 import type { ParticipantDiscourse } from "../contracts/discourse";
 
 const actionFields = ["operation", "target", "recipient", "tool", "resource", "amount", "timing", "duration",
-  "observation_scope", "capability", "progress_next", "search_location", "goal"];
+  "observation_scope", "capability", "progress_next", "search_location", "goal", "reflection_duration"];
 
 /** A language reading binds dependent parameters and expression in one response. */
 export async function readPlayerAction(input: { decisions: DirectDecisions; agentId: string; context: JsonValue;
@@ -95,6 +95,7 @@ export async function readPlayerAction(input: { decisions: DirectDecisions; agen
       ...(["speak", "transfer"].includes(operation ?? "") ? ["recipient",
         ...(action.recipient === "discover" ? ["search_location"] : [])] : ["target"]),
       ...(operation === "observe" ? ["observation_scope"] : []),
+      ...(operation === "reflect" ? ["reflection_duration"] : []),
       ...(["use", "change", "expand", "transfer"].includes(operation ?? "") ? ["tool", "resource", "capability",
         ...(action.resource && action.resource !== "none" ? ["amount"] : [])] : [])]);
     const defaults: Record<string, string> = { timing: "default", duration: "default", observation_scope: "target", amount: "unknown" };

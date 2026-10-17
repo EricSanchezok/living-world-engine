@@ -9,7 +9,7 @@ import type { JsonValue } from "../runtime/json";
 import { deriveClampedMeterDelta, magnitudeBands, materializeCondition } from "../mechanics/resolution";
 import type { ActionFrame, CapabilityDefinition, CapabilityEffect, PreparedDirectAction } from "./contracts";
 import { DirectDecisions, selected } from "./decisions";
-import { localWorldView } from "./views";
+import { localWorldView, perceptualNeighborhood } from "./views";
 import { orderedValues, captureDependencies } from "./state";
 import { literalNumbers } from "./actions";
 import { changedFact } from "./presentation";
@@ -19,6 +19,7 @@ import { agentCapabilityModels } from "../models/capability-bindings";
 export interface ActionSettlement {
   frame: ActionFrame; outcome: ActionOutcome; operations: WorldDeltaOperation[]; visibleFacts: WorldFact[];
   visibleEntities: WorldEntity[];
+  actorOnlyFactIds: string[]; actorOnlyEntityIds: string[];
   namedEntityIds: string[];
   deliveredToEntityIds: string[];
   actorVisibleToEntityIds?: string[];
@@ -69,6 +70,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   const visibility = new Map<string, WorldFact>();
   const entityVisibility = new Map<string, WorldEntity>();
   const entityNames = new Map<string, string>();
+  const incidental = new Map<string, { facts: string[]; entities: string[] }>();
   const createdObjectQuestions = (frame: ActionFrame, prefix: string, capability: CapabilityDefinition, sink: Record<string, DecisionQuestionV2>) => {
     for (const [ordinal, effect] of capability.effects.entries()) if (effect.kind === "object") {
       const entity: WorldEntity = { id: directSemanticId("object", [frame.id, String(ordinal)]), kind: "object", name: effect.name,
@@ -87,13 +89,14 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     ...definition.laws.flatMap(law => [...law.text.matchAll(/(\d+)\s*(秒|分钟|小时|seconds?|minutes?|hours?)/giu)].map(match => Number(match[1]) *
       (/小时|hours?/iu.test(match[2]!) ? 3600 : /分钟|minutes?/iu.test(match[2]!) ? 60 : 1))),
   ])].filter(value => Number.isSafeInteger(value) && value > 0).sort((a, b) => a - b);
+  if (!durations.length) durations.push(30);
   const amounts = [...new Set([1, ...frames.flatMap(frame => literalNumbers(frame.proposal.rawText)), ...definition.laws.flatMap(law => literalNumbers(law.text))])].sort((a, b) => a - b);
   const resources = new Map<string, { definitionId: string; lawId: string; kind: "consume_quantity" | "produce_quantity" }>();
   const claims = new Map<string, { poolId: string; amount: number }>();
   for (const [index, frame] of frames.entries()) {
     const prefix = `a${index}`;
     if (creationEnabled && definition.narrative.expansion) questions[`${prefix}_world_expansion`] = question(
-      "This is an OPEN world with a partial initial catalog. When the actor explores an unestablished area or seeks an ordinary person/material absent from that catalog, should local creation propose a plausible discovery or arrival? Mere absence from the catalog does not mean absence from the world. Choose introduce for such a genuine opening, including meeting a local worker or finding ordinary scrap in a suitable workplace. Choose none for familiar complete scenes, implausible requests, conserved resources or established absence. This authorizes a draft for later judgment, not instant success.",
+      "This open world's initial catalog is partial. Is there a grounded opening for local development during this action: exploration, an ordinary sought person/material, or ongoing local affairs, elapsed time or an opportunity that can now become perceptible? Such developments need not wait for an explicit search. Prefer meaningful, interactable additions supported by the situation; quiet continuity is valid. Existing actors act through their own decisions. Choose none when existing content suffices, or an addition would force drama, duplicate known content, contradict absence or fabricate conserved resources. This admits a draft for later judgment, not instant success.",
       frame as unknown as JsonValue, { none: "Existing world content suffices", introduce: "Introduce a reasonable persistent addition to the world" });
     const capability = decisions.control.capabilities.find(capability => capability.id === frame.capabilityId && capability.knownToAgentIds.includes(frame.actorId));
     const transfer = frame.kind === "transfer" ? { actionId: frame.id, sender: frame.actorEntityId, recipient: frame.targetEntityId,
@@ -105,8 +108,12 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       : "feasibility of this single concrete kind and its parameters, NOT completion of proposal.goal or the whole compound proposal.rawText. Speaking succeeds when actual words can be uttered; accepting terms does not require goods already delivered. Observing attempts to inspect the selected object or immediate surroundings; separate visibility questions decide what is learned.", (transfer ?? frame) as unknown as JsonValue,
       { succeeded: "The action can achieve its specified immediate effect", partial: "Only part of that immediate effect is achieved",
         failed: "The concrete attempted action cannot occur", unknown: "Evidence required for this immediate action is absent; speech need not already be true or accepted" });
-    if (["move", "use", "change"].includes(frame.kind)) questions[`${prefix}_duration`] = question("required total duration, respecting explicit rules and the actual activity", frame as unknown as JsonValue,
-      { planned: `Use the proposed ${frame.durationSeconds} seconds`, ...Object.fromEntries(durations.map(seconds => [`s${seconds}`, `${seconds} seconds`])) });
+    const timingProfile = frame.temporalProfileId ? state.truth.mechanics.temporalProfiles[frame.temporalProfileId] : null;
+    if (frame.durationSource !== "explicit" && !(frame.durationSeconds > 0 && ["rate", "staged", "ongoing"].includes(timingProfile?.kind ?? ""))) {
+      questions[`${prefix}_duration`] = question("Choose the realistic TOTAL duration of this concrete step. Use temporalCalibrations, explicit laws, distance, effort and the length of actual spoken words. A missing duration is not evidence of an instantaneous action. Estimate the nearest plausible authored scale; neither minimize time nor charge a later unperformed step. Concurrent actions keep independent durations.",
+        frame as unknown as JsonValue, { ...(frame.durationSeconds > 0 ? { planned: `Use the proposed ${frame.durationSeconds} seconds if it fits the actual activity` } : {}),
+          ...Object.fromEntries(durations.map(seconds => [`s${seconds}`, `${seconds} seconds`])) });
+    }
     if (frame.kind === "move") questions[`${prefix}_movement`] = question("Does this movement enter the target as a place, or merely approach an object/person without entering its interior? Standing beside a machine does not put the actor inside it.", frame as unknown as JsonValue,
       { enter: "Enter the selected destination as a place", near: "Approach the target within its surrounding place" });
     const trigger = frame.causeActionId ? state.history.flatMap(step => step.directEvent?.frames ?? [])
@@ -187,31 +194,38 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
           Object.fromEntries(magnitudeBands.map(band => [band, band])));
       }
     }
-    const observableFacts = new Map(effectFacts.map(fact => [fact.id, fact]));
+    const neighborhood = perceptualNeighborhood(state, frame);
+    incidental.set(frame.id, { entities: [...neighborhood], facts: orderedValues(state.truth.facts)
+      .filter(fact => neighborhood.has(fact.subjectId) && !effectFacts.some(effect => effect.id === fact.id)).map(fact => fact.id) });
+    const observableFacts = new Map([...effectFacts, ...orderedValues(state.truth.facts).filter(fact => neighborhood.has(fact.subjectId))].map(fact => [fact.id, fact]));
     if (capability) createdObjectQuestions(frame, prefix, capability, questions);
     for (const [ordinal, effect] of capability?.effects.entries() ?? []) if (effect.kind === "fact") {
       const fact = capabilityFact(state, frame, capability!, effect, ordinal);
       if (fact) observableFacts.set(fact.id, fact);
     }
-    if (["observe", "move", "use", "change"].includes(frame.kind)) for (const [ordinal, fact] of [...observableFacts.values()].entries()) {
+    for (const [ordinal, fact] of [...observableFacts.values()].entries()) {
       const id = `${prefix}_visible${ordinal}`; visibility.set(id, fact);
-      questions[id] = question("Is this PROPERTY perceptible through this action's resulting feedback? Judge access to the property, not whether its pre-action value is still true. A public visible state of the very object being handled is ordinarily perceptible; private codes and hidden mental states require their actual disclosure channel.", { actionId: frame.id, fact: fact as unknown as JsonValue },
+      questions[id] = question("Judge this property's perceptual access under the incidental-perception policy.", { actionId: frame.id, factId: fact.id,
+        ...(!state.truth.facts[fact.id] ? { fact: fact as unknown as JsonValue } : {}) },
         { visible: "The attempt reveals the resulting fact through an available perceptual channel", hidden: "The fact remains hidden", unknown: "No justified perceptual access" });
     }
-    if (frame.kind === "observe" && frame.observationScope !== "inventory") {
-      const focus = frame.targetEntityId && frame.targetEntityId !== frame.actorEntityId ? frame.targetEntityId : state.truth.placements[frame.actorEntityId];
-      for (const [ordinal, entity] of orderedValues(state.truth.entities).filter(entity => entity.lifecycle === "active" && entity.id !== frame.actorEntityId && state.truth.placements[entity.id] === focus).entries()) {
+    if (neighborhood.size) {
+      const actor = state.agents[frame.actorId]!;
+      const alreadySeen = new Set(Object.values(actor.bindings).filter(binding => actor.belief.localEntities[binding.localEntityId]?.status === "observed")
+        .flatMap(binding => binding.canonicalEntityIds));
+      for (const [ordinal, entity] of orderedValues(state.truth.entities).filter(entity => neighborhood.has(entity.id) && entity.id !== frame.actorEntityId &&
+        (frame.kind === "observe" || !alreadySeen.has(entity.id))).entries()) {
         const id = `${prefix}_entity${ordinal}`; entityVisibility.set(id, entity);
         const nameId = `${id}_name`; entityNames.set(nameId, entity.id);
-        questions[nameId] = question("Can the observer actually recognize this public name, for example from a visible sign or established prior acquaintance? Seeing a person does not disclose their hidden name or identity.", {
-          actionId: frame.id, entity: entity as unknown as JsonValue }, { unnamed: "Only appearance or existence is established", named: "The actual name is perceptible or already known" });
-        questions[id] = question("Is this entity's physical presence visible in the observed place? It is already located here. Public appearance supplies positive perceptual evidence unless an actual concealment or obstruction prevents it. Unknown name, private identity, deception in the submitted request, or unwillingness to speak do not hide a person's body. Judge only physical presence, not the success of the actor's later intentions.", { action: { kind: frame.kind, observationScope: frame.observationScope }, entity: entity as unknown as JsonValue,
-          publicAppearance: orderedValues(state.truth.facts).filter(fact => fact.subjectId === entity.id && fact.access.kind === "public" && ["appearance", "appearance_label"].includes(fact.predicate)) as unknown as JsonValue },
+        questions[nameId] = question("Is this name recognizable through evidence such as a sign or prior acquaintance? Seeing a body alone does not identify a person.", {
+          actionId: frame.id, entityId: entity.id }, { unnamed: "Only appearance or existence is established", named: "The actual name is perceptible or already known" });
+        questions[id] = question("Judge this entity's physical presence under the incidental-perception policy.", { actionId: frame.id, entityId: entity.id },
           { visible: "Its presence is observable", hidden: "Its presence is concealed", unknown: "Insufficient perceptual evidence" });
       }
     }
     const nearby = frame.utterance || ["speak", "transfer", "use", "change", "move"].includes(frame.kind) ? orderedValues(state.agents)
-      .filter(agent => agent.id !== frame.actorId && state.truth.placements[agent.entityId] === state.truth.placements[frame.actorEntityId])
+      .filter(agent => agent.id !== frame.actorId && (state.truth.placements[agent.entityId] === state.truth.placements[frame.actorEntityId] ||
+        frame.kind === "move" && state.truth.placements[agent.entityId] === frame.targetEntityId))
       .map(agent => agent.entityId) : [];
     const recipients = [...new Set([...["speak", "transfer"].includes(frame.kind) && frame.targetEntityId ? [frame.targetEntityId] : [], ...nearby])];
     candidates.set(prefix, recipients);
@@ -280,8 +294,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   }
   const worldExpansions = new Map<string, WorldExpansion>();
   const expansionFailures = new Set<string>();
-  for (const [index, frame] of frames.entries()) if (answers[`a${index}_world_expansion`] && (selected(answers, `a${index}_world_expansion`) === "introduce" ||
-    frame.submissionId && frame.kind === "observe" && frame.observationScope !== "inventory" && frame.targetEntityId !== frame.actorEntityId) &&
+  for (const [index, frame] of frames.entries()) if (answers[`a${index}_world_expansion`] && selected(answers, `a${index}_world_expansion`) === "introduce" &&
     ["succeeded", "partial", "unknown"].includes(selected(answers, `a${index}_outcome`))) {
     try {
     Object.assign(view.reads, captureDependencies(state, ["catalog:entities"]));
@@ -300,8 +313,9 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     const prefix = `a${index}`, verdict = selected(answers, `${prefix}_outcome`), source = sourceFor(frame);
     const durationChoice = answers[`${prefix}_duration`] ? selected(answers, `${prefix}_duration`) : "planned";
     const duration = durationChoice === "planned" ? frame.durationSeconds : Number(durationChoice.slice(1));
+    if (!Number.isSafeInteger(duration) || duration < 1) throw new Error("World adjudication must resolve a positive action duration");
     const ongoing = Boolean(frame.temporalProfileId && state.truth.mechanics.temporalProfiles[frame.temporalProfileId]?.kind === "ongoing" &&
-      !/\d+\s*(秒|分钟|小时|seconds?|minutes?|hours?)/iu.test(frame.proposal.rawText));
+      frame.durationSource !== "explicit");
     frame.durationSeconds = duration;
     frame.dueAtSeconds = Math.max(state.truth.elapsedSeconds + 1, frame.startedAtSeconds + duration);
     let status: ActionOutcome["status"] = capabilityFailures.has(frame.id) ? "blocked"
@@ -452,6 +466,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       ? `你说：“${frame.utterance}”话语已送达。` : `你说：“${frame.utterance}”暂时没有听到答复。`;
     if (!["succeeded", "partial"].includes(status)) operations = [];
     prepared.push({ actionId: frame.id, status, summary: detail, operations, reads: view.reads,
+      actorOnlyFactIds: incidental.get(frame.id)!.facts, actorOnlyEntityIds: incidental.get(frame.id)!.entities,
       visibleFactIds: [...visibleFacts.filter(fact => state.truth.facts[fact.id] || ["succeeded", "partial"].includes(status)),
         ...(["succeeded", "partial"].includes(status) ? expansion?.facts ?? [] : []),
         ...operations.flatMap(operation => operation.kind === "set_fact" && operation.fact.predicate === "proximity" ? [operation.fact] : [])].map(fact => fact.id),

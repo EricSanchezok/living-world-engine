@@ -248,7 +248,7 @@ function validateActionWindow(document: WorldInstanceDocument): void {
 }
 
 export function validateWorldInstanceDocument(document: WorldInstanceDocument, rulePackages?: RulePackageRegistry): void {
-  if (document.schemaVersion !== 30) throw new Error("world instance schema v30 required");
+  if (document.schemaVersion !== 31) throw new Error("world instance schema v31 required");
   requireText(document.id, "instance id");
   requireText(document.title, "instance title");
   if (!Array.isArray(document.narratives)) throw new Error("instance narrative outbox is required");

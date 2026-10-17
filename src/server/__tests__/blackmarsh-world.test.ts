@@ -263,6 +263,8 @@ describe("Blackmarsh reference world", () => {
     expect(truth.mechanics.temporalCalibrations.map((entry) => [entry.id, entry.profileId])).toEqual([
       ["sword-swing-time", "momentary-action"],
       ["short-interaction-time", "brief-action"],
+      ["moderate-interaction-time", "half-minute-action"],
+      ["extended-interaction-time", "minute-action"],
       ["explicit-rest-time", "explicit-duration"],
       ["road-travel-time", "road-travel"],
       ["rough-travel-time", "rough-travel"],

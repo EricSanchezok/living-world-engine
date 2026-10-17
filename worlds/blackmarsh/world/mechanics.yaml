@@ -102,6 +102,22 @@ temporal_profiles:
     selection: { semantic_tags: [short], evidence_requirement: none }
     interruptible: true
     resource_claims: [{ resource_id: foreground, amount: 1 }]
+  - id: half-minute-action
+    name: 半分钟尺度
+    kind: fixed
+    duration_seconds: 30
+    checkpoint_seconds: 30
+    selection: { semantic_tags: [moderate], evidence_requirement: none }
+    interruptible: true
+    resource_claims: [{ resource_id: foreground, amount: 1 }]
+  - id: minute-action
+    name: 分钟尺度
+    kind: fixed
+    duration_seconds: 60
+    checkpoint_seconds: 60
+    selection: { semantic_tags: [extended], evidence_requirement: none }
+    interruptible: true
+    resource_claims: [{ resource_id: foreground, amount: 1 }]
   - id: explicit-duration
     name: 明确时长行动
     kind: fixed
@@ -168,6 +184,8 @@ temporal_profile_coverage:
 temporal_calibrations:
   - { id: sword-swing-time, situation: 完成一次挥剑、格挡或闪避。, profile_id: momentary-action, explanation: 单次近战动作在一秒边界结算。 }
   - { id: short-interaction-time, situation: 完成一次简短观察、拾取或开门。, profile_id: brief-action, explanation: 普通短时交互在十秒内形成下一边界。 }
+  - { id: moderate-interaction-time, situation: 说一段较完整的话、在近处走一小段路或辨认数个细节。, profile_id: half-minute-action, explanation: 根据实际话语长度、路程和注意力估计；这是时间尺度示例，不是动作类别的固定耗时。 }
+  - { id: extended-interaction-time, situation: 较仔细地查看一处现场、说明一段复杂情况或完成稍长的近距离活动。, profile_id: minute-action, explanation: 选择符合实际内容的分钟尺度，不把所有普通行动压到一秒，也不强制拉长简短动作。 }
   - { id: explicit-rest-time, situation: 睡眠、休息或等待且行动文本明确时长。, profile_id: explicit-duration, explanation: 时长必须从行动文本验证并可被更早事件打断。 }
   - { id: road-travel-time, situation: 沿道路前往行动文本明确距离的地点。, profile_id: road-travel, explanation: 道路步行按每小时四公里和每公里检查点推进。 }
   - { id: rough-travel-time, situation: 穿越森林、丘陵、沼泽或山地且行动文本明确距离。, profile_id: rough-travel, explanation: 复杂地形采用更慢的通用速率并逐公里提交。 }

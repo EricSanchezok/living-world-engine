@@ -65,15 +65,24 @@ function privateInteractions(state: Readonly<SimulationState>, agentId: string, 
   }));
 }
 
+/** Candidate context is adjudicated for perception; inclusion alone grants no knowledge. */
+export function perceptualNeighborhood(state: Readonly<SimulationState>, frame: ActionFrame): Set<string> {
+  if (frame.kind === "reflect" || frame.kind === "observe" && frame.observationScope === "inventory") return new Set();
+  const currentPlace = state.truth.placements[frame.actorEntityId];
+  const places = new Set<string>(currentPlace ? [currentPlace] : []);
+  if (["move", "observe"].includes(frame.kind) && frame.targetEntityId !== frame.actorEntityId && frame.targetEntityId) places.add(frame.targetEntityId);
+  const ids = new Set([...places].filter((id): id is string => Boolean(id)));
+  for (const entity of orderedValues(state.truth.entities)) if (entity.lifecycle === "active" &&
+    entity.id !== frame.actorEntityId && places.has(state.truth.placements[entity.id] ?? "")) ids.add(entity.id);
+  return ids;
+}
+
 export function localWorldView(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frames: ActionFrame[]): DirectLocalView {
   const ids = new Set(frames.flatMap(frame => [frame.actorEntityId, frame.targetEntityId, frame.toolEntityId].filter((id): id is string => id !== null)));
   for (const frame of frames) if (frame.utterance || ["speak", "transfer", "use", "change", "move"].includes(frame.kind)) {
     for (const agent of Object.values(state.agents)) if (state.truth.placements[agent.entityId] === state.truth.placements[frame.actorEntityId]) ids.add(agent.entityId);
   }
-  for (const frame of frames.filter(frame => frame.kind === "observe" && frame.observationScope !== "inventory")) {
-    const focus = frame.targetEntityId && frame.targetEntityId !== frame.actorEntityId ? frame.targetEntityId : state.truth.placements[frame.actorEntityId];
-    if (focus) for (const [id, placement] of Object.entries(state.truth.placements).sort(([a], [b]) => a.localeCompare(b))) if (placement === focus) ids.add(id);
-  }
+  for (const frame of frames) for (const id of perceptualNeighborhood(state, frame)) ids.add(id);
   for (const id of [...ids]) {
     let parent = state.truth.placements[id]; const seen = new Set<string>();
     while (parent && !seen.has(parent)) { ids.add(parent); seen.add(parent); parent = state.truth.placements[parent]; }
@@ -87,6 +96,7 @@ export function localWorldView(state: Readonly<SimulationState>, definition: Wor
     ...facts.map(fact => `fact:${fact.id}`), ...quantities.map(quantity => `quantity:${quantity.id}`),
     ...meters.map(meter => `meter:${meter.id}`), ...ratings.map(rating => `rating:${rating.id}`), ...conditions.map(condition => `condition:${condition.id}`)];
   return { state: { world: { name: definition.name, description: definition.description, laws: definition.laws },
+    temporalProfiles: state.truth.mechanics.temporalProfiles, temporalCalibrations: state.truth.mechanics.temporalCalibrations,
     actions: frames, deliveredEvidence: Object.fromEntries(frames.map(frame => [frame.actorId, orderedValues(state.agents[frame.actorId]!.belief.evidence)])),
     entities: [...ids].map(id => state.truth.entities[id]), placements: Object.fromEntries([...ids].map(id => [id, state.truth.placements[id]])),
     facts, quantities, meters, ratings, conditions } as unknown as JsonValue,

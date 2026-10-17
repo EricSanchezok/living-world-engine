@@ -28,14 +28,15 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       const ownsAction = ownerId === settlement.frame.actorId;
       const seesActor = ownsAction || settlement.actorVisibleToEntityIds?.includes(agent.entityId) === true;
       alias(agent, settlement.frame.actorEntityId, introductions, seesActor ? "seen" : "heard");
-      const visibleEntities = ownsAction || seesActor ? [...settlement.visibleEntities] : [];
+      const visibleEntities = ownsAction || seesActor ? settlement.visibleEntities.filter(entity => ownsAction || !settlement.actorOnlyEntityIds.includes(entity.id)) : [];
       if (!ownsAction && seesActor && !visibleEntities.some(entity => entity.id === settlement.frame.actorEntityId)) {
         visibleEntities.push(state.truth.entities[settlement.frame.actorEntityId]!);
       }
       const appearanceFacts = Object.values(state.truth.facts).filter(fact =>
         visibleEntities.some(entity => entity.id === fact.subjectId) && fact.access.kind === "public" &&
         ["appearance", "appearance_label"].includes(fact.predicate));
-      const facts = [...new Map([...(ownsAction || seesActor ? settlement.visibleFacts : []), ...appearanceFacts].filter(fact => fact.access.kind === "public" ||
+      const eventFacts = ownsAction || seesActor ? settlement.visibleFacts.filter(fact => ownsAction || !settlement.actorOnlyFactIds.includes(fact.id)) : [];
+      const facts = [...new Map([...eventFacts, ...appearanceFacts].filter(fact => fact.access.kind === "public" ||
         fact.access.kind === "agents" && fact.access.agentIds.includes(ownerId)).map(fact => [fact.id, fact])).values()];
       const details: NonNullable<ObservationPacket["scene"]>["details"] = [];
       const targetVisible = seesActor || settlement.frame.targetEntityId === agent.entityId;

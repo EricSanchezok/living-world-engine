@@ -1,6 +1,6 @@
 # Direct world runtime
 
-This reference owns the default `direct-world@4` execution contract, approved in [Spec 0182](../specs/0182-jev-direct-world-runtime.md). Its implementation lives in [`src/engine/direct/`](../../src/engine/direct/algorithm.ts). The script contract is v17, SimulationState is v21 and WorldInstanceDocument is v28.
+This reference owns the default `direct-world@5` execution contract, approved in [Spec 0182](../specs/0182-jev-direct-world-runtime.md). Its implementation lives in [`src/engine/direct/`](../../src/engine/direct/algorithm.ts). The script contract is v17, SimulationState is v21 and WorldInstanceDocument is v31.
 
 ## Model responsibilities
 
@@ -15,6 +15,10 @@ DeepSeek creates `ActionExpression` values for new NPC dialogue and concrete exp
 A capability extension is a concise qualitative effect declaration with applicability, existing condition profiles or a constructed object. Either action selection or world adjudication can identify a missing effect concept. Code supplies references, existing public property vocabulary for the bound roles and execution structure, with one targeted structural repair. Capability knowledge propagates to actual observers of its use. [Open creation and narration](narrative.md) owns new actors, perceptible scene details and participant prose.
 
 World adjudication receives local entities, placement, relevant facts, resources, effects and explicit laws. Script rules take precedence. Uncovered ordinary behavior permits common-sense adjudication. The decision binds immediate outcome, duration, material consumption or production under an authorized law, qualitative fact effects, numeric impact profiles, condition effects, shared capacity and actual perception. Sources provide traceability; ordinary effects do not require a pre-authored rule proof.
+
+Unspecified timing enters preparation without a deadline; it cannot enter the timeline until adjudicated. Every physical action kind uses the existing adjudication call to select a plausible duration from authored scales and temporal calibrations. Action-bound explicit durations and calculated rate/staged procedures retain their durations. Private reflection chooses its scale in its existing private interpretation call. The minimum authored scale is never a default for missing timing.
+
+Ordinary actions supply their immediate neighborhood and affected place as perceptual candidates. Access decisions, not candidate membership, admit knowledge; an unentered interior or hidden identity remains undisclosed. Incidental context belongs to the actor's observation rather than every witness of that actor. Narration selects salient admitted consequences and surroundings without requiring a separate look or reciting every fact. Local creation runs only on an admitted opportunity; an unchanged scene requires no creation call.
 
 Movement, physical use and changes can update existing properties of the actor, target and tool in their ordinary world decision batch. A changed posture or relation uses the same fact identity rather than retaining a contradictory old state alongside a synonym. Entity-valued relations can retain their target, end, or bind an actual actor, target or tool from the current action component. Their perceived descriptions retain the predicate and authorized local referent; a cleared relation retains its predicate with an empty value. Perceptual admission is separate from success: a failed attempt may reveal an existing condition through its actual channel, while an uncommitted new effect supplies no fact. Fact access rules still govern every recipient.
 

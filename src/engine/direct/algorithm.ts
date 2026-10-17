@@ -29,7 +29,7 @@ import { participantReactionIds } from "./foreground";
 
 export interface DirectWorldConfig extends CapabilityModelOverrides { creationEnabled: boolean }
 export const DIRECT_WORLD_CONFIG: DirectWorldConfig = { decision: null, creation: null, fallback: null, creationEnabled: true };
-export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "4", config: config as unknown as JsonObject });
+export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "5", config: config as unknown as JsonObject });
 export const directWorldAlgorithmRef = (config = DIRECT_WORLD_CONFIG) => algorithmRef(directWorldManifest(config));
 
 function components(state: Readonly<SimulationState>, frames: ActionFrame[]): ActionFrame[][] {
@@ -133,9 +133,10 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     for (const frame of control.activities.filter(frame => frame.kind === "reflect")) {
       control.prepared[frame.id] = { actionId: frame.id, reads: {},
         status: "succeeded", summary: "你复核了自己已有的记录。", operations: [], visibleFactIds: [], visibleEntityIds: [], namedEntityIds: [],
+        actorOnlyFactIds: [], actorOnlyEntityIds: [],
         deliveredToEntityIds: [], randomRequests: [], randomBindings: [], sharedClaims: [], ongoing: false, requestProgress: "complete" };
     }
-    const needsPreparation = control.activities.filter(frame => frame.kind !== "reflect" && frame.activityStatus !== "paused" && frame.dueAtSeconds !== null &&
+    const needsPreparation = control.activities.filter(frame => frame.kind !== "reflect" && frame.activityStatus !== "paused" && (frame.dueAtSeconds !== null || frame.durationSeconds === 0) &&
       (!control.prepared[frame.id] || Object.entries(control.prepared[frame.id]!.reads).some(([key, hash]) => contentHash(readDependency(source, key)) !== hash)));
     const groups = components(source, needsPreparation);
     const adjudicated = await Promise.allSettled(groups.map(group => prepareActions(source, authority, group, decisions, this.config.creationEnabled)));
