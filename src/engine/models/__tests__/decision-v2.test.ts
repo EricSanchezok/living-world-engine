@@ -23,6 +23,18 @@ function answers(questions: DecisionRequestV2["batch"]["questions"]) {
       probabilities: { "0": 0.3, "1": 0.7, "2": 0 }, confidence: 0.3 }]));
 }
 describe("direct native decisions", () => {
+  it.each([false, true])("pins a language-only inference override through native fallback: %s", async fallback => {
+    const f = directTestProvider(wire => fallback && !wire.messages
+      ? new Response('{"detail":"context token limit exceeded"}', { status: 422 }) : answers(wire.questions));
+    const result = await executeDecisionV2(f.gateway, { ...request(),
+      profileId: fallback ? "decision-jev" : "decision-deepseek", fallbackProfileId: "decision-deepseek",
+      inferenceOverrides: { thinking: "disabled", effort: "auto", reasoning_budget_tokens: "auto" } });
+    const wires = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body)));
+    expect(wires.at(-1).thinking).toEqual({ type: "disabled" });
+    if (fallback) expect(wires[0]).not.toHaveProperty("thinking");
+    expect(result.answers.consent).toMatchObject({ choice: "unknown" });
+    expect(f.transport).toHaveBeenCalledTimes(fallback ? 2 : 1);
+  });
   it.each([false, true])("repairs only invalid language-model answers once, preserving independent values: fails=%s", async fails => {
     const f = directTestProvider((wire, call) => {
       if (call > 1) expect(Object.keys(wire.questions)).toEqual(["consent"]);

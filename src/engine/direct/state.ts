@@ -62,7 +62,12 @@ export function dependencyVersions(control: DirectRuntimeState, reads: Record<st
 }
 export function wakeIntent(control: DirectRuntimeState, agentId: string, reason: string, causeActionId: string | null = null) {
   const intent = control.intents[agentId] ??= readyIntent(reason);
-  if (intent.status === "active") { if (!intent.wakeReasons.includes(reason)) intent.wakeReasons.push(reason); return; }
+  if (intent.status === "active") {
+    if (!intent.wakeReasons.includes(reason)) intent.wakeReasons.push(reason);
+    // Remember a delivered interaction while existing independent work finishes.
+    intent.causeActionId ??= causeActionId;
+    return;
+  }
   intent.status = "ready"; intent.wait = null; intent.causeActionId = causeActionId;
   if (!intent.wakeReasons.includes(reason)) intent.wakeReasons.push(reason);
 }

@@ -127,11 +127,13 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const capabilities = control.capabilities.filter(capability => capability.knownToAgentIds.includes(agentId)).sort((a, b) => a.id.localeCompare(b.id));
   const questions: Record<string, DecisionQuestionV2> = {
     ...cognitiveQuestions(state, agentId),
-    operation: choice(external ? "The next executable action actually requested. Resolve if/only-if conditions using the latest known properties, then select the authorized branch. A conditional request to operate is use/change when its stated conditions are established; do not substitute private reflection for doing it. Unknown conditions permit concrete observation or asking. Do not invent additional prerequisites." : "Choose this NPC's response to the latest privately delivered interaction. Use perspective.interactions to identify its speaker, addressee and actual result. An information question permits an answer, uncertainty or motivated refusal; a request to inspect or act permits actually doing that work. Saying you will check is not checking. A question to somebody else does not require your answer. Received materials do not establish their use. Choose an inspection when you intend to establish an unknown condition before reporting it.", kinds),
+    operation: choice(external ? "The next executable action actually requested. Resolve if/only-if conditions using the latest known properties, then select the authorized branch. A conditional request to operate is use/change when its stated conditions are established; do not substitute private reflection for doing it. Unknown conditions permit concrete observation or asking. Do not invent additional prerequisites." : "Choose this NPC's next action from its own goals, commitments, present opportunities and privately delivered interactions. It can pursue its affairs, approach someone, make an offer or warning, inspect, act or wait without a player asking first. Initiative needs a motive, not a compulsory interruption. Use perspective.interactions to identify actual speakers, addressees and results. An information question permits an answer, uncertainty or motivated refusal; a request to inspect or act permits actually doing that work. Saying you will check is not checking. Received materials do not establish their use. Choose an inspection when you need unknown evidence before reporting it.", kinds),
     target: choice("Target of the selected NEXT operation: observe inspects this object, use/change affects this object's properties, move approaches this destination. A machine operated through a control panel is the target; the panel is the tool. In 'inspect an object then report to a person', inspect the object first, not the later listener. Do not select a prerequisite object when the requested effect belongs to another known object.", targetCriteria),
     tool: choice("Separate instrument used on the target, or the item discussed in speech. A control panel used to test a machine is a tool. Select none when no separate instrument is involved.", targetCriteria),
-    observation_scope: choice("If observing, what is actually being inspected? Inspecting one's money, food or possessions selects inventory; reviewing memories selects the reflect operation.", {
-      target: "The selected external object", surroundings: "The immediate surroundings", inventory: "The actor's own actual inventory and resources",
+    observation_scope: choice(external ? "If observing, what is actually being inspected? Inspecting one's money, food or possessions selects inventory; reviewing memories selects the reflect operation."
+      : "For observation, distinguish the selected entity from an unfocused survey. Keep a concrete target's identity: observing harbor conditions is target, not inspecting the actor. Observing one's possessions uses target=self. Reviewing memories is reflect.", {
+      target: "The selected entity; self inspects the actor's own possessions", surroundings: "The immediate surroundings",
+      ...(external ? { inventory: "The actor's own actual inventory and resources" } : {}),
     }),
     recipient: choice("If the next action communicates words or transfers goods, select its actual recipient. For an NPC reply, use the speaker of the latest interaction addressed to this NPC, not another person mentioned in that question or the listener in an old exchange. Discover a recipient before addressing an unknown person. Ignore for other operations.", recipientCriteria),
     ...(known.length ? { search_location: choice("If the intended recipient has not yet been seen, where does this request seek them? A shopkeeper is sought in that shop, not among unrelated people in the surrounding district. Select a known place, shop, building or landmark to inspect or search around; none means the current surroundings. Entity kinds are world-defined and do not restrict which object can be a search focus.", {
@@ -173,7 +175,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   if (!external) questions.urgency = { type: "score", version: "urgency-1", instructions: { task: sharedActionPolicy, field: "urgency of the next action" },
     criteria: ["May reasonably wait", "Should act when available", "Immediate deadline or danger"] };
   if (!external && intent.lastActionHash && intent.wakeReasons.includes("observation")) questions.relevant = { type: "noul", version: "wake-relevance-1",
-    instructions: { task: sharedActionPolicy, field: "Is there a new conversational move addressed to this NPC, or other observation requiring a response or change? A direct question, correction or received payment is relevant even if the answer is unknown. Irrelevant background observations alone need not wake the Agent." } };
+    instructions: { task: sharedActionPolicy, field: "Does the new private situation offer a meaningful next step for this NPC's goals or commitments, or call for a response? Direct questions, corrections and received payment are relevant even if the answer is unknown. An opportunity can matter without being addressed to the NPC; unchanged background need not trigger repeated activity." } };
   if (resources.length) questions.resource = choice("resource", { none: "No quantified resource", ...Object.fromEntries(resources.map(id => [id, state.truth.mechanics.quantities[id]!.name])) });
   if (!jointInterpretation) for (const [index, resourceId] of resources.entries()) {
     const resource = state.truth.mechanics.quantities[resourceId]!;
@@ -289,7 +291,9 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     targetKey = selected(resolved, "recipient");
     if (targetKey === "none") operation = "wait";
   }
-  const observationScope = selected(answers, "observation_scope") as ActionFrame["observationScope"];
+  // Native decisions bind self through target, so an independent scope answer cannot replace another target with self.
+  const observationScope = (!external && view.entities[targetKey] === agent.entityId ? "inventory"
+    : selected(answers, "observation_scope")) as ActionFrame["observationScope"];
   let target = operation === "observe" && observationScope === "inventory" ? agent.entityId
     : operation === "observe" && observationScope === "surroundings" ? null : view.entities[targetKey] ?? null;
   // Discovery is an explicitly selected prerequisite, never a substitute for a
@@ -313,7 +317,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     const wordsOnly = !external && operation === "speak" && !(answers.expression?.type === "noul" && answers.expression.noul >= 0.5);
     const system = loadPromptAsset(external ? "system/player-expression.md" : "system/direct-utterance.md"), userPrompt = loadPromptAsset("user/direct-utterance.md");
     const schema = z.object({ conversationReading: z.object({
-      currentQuestion: z.string().describe("The full question or conversational move actually addressed to you, resolving an ellipsis from the preceding shared exchange. Preserve what is being asked while replacing only its corrected subject or scope."),
+      currentQuestion: z.string().describe("The received conversational move, resolving ellipsis from the shared exchange; or your own motive for initiating contact when no question was received. Preserve the question while replacing only a corrected subject or scope."),
       evidenceForAnswer: z.string().describe("Your actual received evidence and its limits, including who did or said what. Do not manufacture earlier questions, promises or completed work."),
       newContribution: z.string().describe("What this reply adds. If your previous question to this recipient is still unanswered and nothing relevant changed, do not ask it again."),
     }).optional(), attempt: z.string().optional(), utterance: z.string().nullable(), manner: z.string().nullable().optional(),

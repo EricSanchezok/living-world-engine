@@ -65,6 +65,12 @@ function privateInteractions(state: Readonly<SimulationState>, agentId: string, 
   }));
 }
 
+/** Adjacent interiors are candidates for sight/sound, never an automatic grant of perception. */
+export function sharesContactNeighborhood(state: Readonly<SimulationState>, left: string, right: string): boolean {
+  const a = state.truth.placements[left], b = state.truth.placements[right];
+  return Boolean(a && b && (a === b || state.truth.placements[a] === b || state.truth.placements[b] === a));
+}
+
 /** Candidate context is adjudicated for perception; inclusion alone grants no knowledge. */
 export function perceptualNeighborhood(state: Readonly<SimulationState>, frame: ActionFrame): Set<string> {
   if (frame.kind === "reflect" || frame.kind === "observe" && frame.observationScope === "inventory") return new Set();
@@ -80,7 +86,7 @@ export function perceptualNeighborhood(state: Readonly<SimulationState>, frame: 
 export function localWorldView(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frames: ActionFrame[]): DirectLocalView {
   const ids = new Set(frames.flatMap(frame => [frame.actorEntityId, frame.targetEntityId, frame.toolEntityId].filter((id): id is string => id !== null)));
   for (const frame of frames) if (frame.utterance || ["speak", "transfer", "use", "change", "move"].includes(frame.kind)) {
-    for (const agent of Object.values(state.agents)) if (state.truth.placements[agent.entityId] === state.truth.placements[frame.actorEntityId]) ids.add(agent.entityId);
+    for (const agent of Object.values(state.agents)) if (sharesContactNeighborhood(state, agent.entityId, frame.actorEntityId)) ids.add(agent.entityId);
   }
   for (const frame of frames) for (const id of perceptualNeighborhood(state, frame)) ids.add(id);
   for (const id of [...ids]) {

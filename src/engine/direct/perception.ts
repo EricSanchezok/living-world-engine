@@ -21,10 +21,13 @@ function describeFact(agent: AgentState, fact: WorldFact, introductions: Observa
 }
 export function directPerception(state: Readonly<SimulationState>, settlements: ActionSettlement[], events: WorldEvent[], step: number) {
   const observations: ObservationPacket[] = [], beliefPatches: BeliefPatch[] = [];
+  const recipientsSoFar = new Map<string, AgentState>();
   for (const [index, settlement] of settlements.entries()) {
     const recipients = new Set([settlement.frame.actorId, ...settlement.deliveredToEntityIds.flatMap(id => Object.values(state.agents).filter(agent => agent.entityId === id).map(agent => agent.id))]);
     for (const ownerId of recipients) {
-      const agent = state.agents[ownerId]!, introductions: ObservationPacket["introductions"] = [], renamed: LocalEntity[] = [];
+      const agent = recipientsSoFar.get(ownerId) ?? structuredClone(state.agents[ownerId]!);
+      recipientsSoFar.set(ownerId, agent);
+      const introductions: ObservationPacket["introductions"] = [], renamed: LocalEntity[] = [];
       const ownsAction = ownerId === settlement.frame.actorId;
       const seesActor = ownsAction || settlement.actorVisibleToEntityIds?.includes(agent.entityId) === true;
       alias(agent, settlement.frame.actorEntityId, introductions, seesActor ? "seen" : "heard");
@@ -130,6 +133,12 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
           description: `${subject.name}：${describeFact(agent, fact, introductions)}`, confidence: 1, stance: "believed", evidenceIds: [evidenceId] } });
       }
       observations.push(packet); beliefPatches.push(patch);
+      // Concurrent outcomes share one recipient namespace, without mutating source cognition.
+      for (const introduction of introductions) {
+        agent.belief.localEntities[introduction.localEntity.id] = introduction.localEntity;
+        agent.bindings[introduction.localEntity.id] = { localEntityId: introduction.localEntity.id, canonicalEntityIds: introduction.canonicalEntityId ? [introduction.canonicalEntityId] : [] };
+      }
+      for (const entity of renamed) agent.belief.localEntities[entity.id] = entity;
     }
   }
   return { observations, beliefPatches };

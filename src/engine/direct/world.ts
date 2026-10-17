@@ -9,7 +9,7 @@ import type { JsonValue } from "../runtime/json";
 import { deriveClampedMeterDelta, magnitudeBands, materializeCondition } from "../mechanics/resolution";
 import type { ActionFrame, CapabilityDefinition, CapabilityEffect, PreparedDirectAction } from "./contracts";
 import { DirectDecisions, selected } from "./decisions";
-import { localWorldView, perceptualNeighborhood } from "./views";
+import { localWorldView, perceptualNeighborhood, sharesContactNeighborhood } from "./views";
 import { orderedValues, captureDependencies } from "./state";
 import { literalNumbers } from "./actions";
 import { changedFact } from "./presentation";
@@ -96,8 +96,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   for (const [index, frame] of frames.entries()) {
     const prefix = `a${index}`;
     if (creationEnabled && definition.narrative.expansion) questions[`${prefix}_world_expansion`] = question(
-      "This open world's initial catalog is partial. Is there a grounded opening for local development during this action: exploration, an ordinary sought person/material, or ongoing local affairs, elapsed time or an opportunity that can now become perceptible? Such developments need not wait for an explicit search. Prefer meaningful, interactable additions supported by the situation; quiet continuity is valid. Existing actors act through their own decisions. Choose none when existing content suffices, or an addition would force drama, duplicate known content, contradict absence or fabricate conserved resources. This admits a draft for later judgment, not instant success.",
-      frame as unknown as JsonValue, { none: "Existing world content suffices", introduce: "Introduce a reasonable persistent addition to the world" });
+      "Does this action reach a plausible but not yet established part of the local situation? The initial catalog is partial: a place's name and exterior do not exhaust its people, contents or affairs. Exploration and ongoing local concerns can warrant ordinary discoverable content or a new opportunity without an explicit request for a surprise. Select introduce for a useful local draft when existing content does not cover that scope. Missing entries are not evidence of physical absence. Existing actors still act through their own decisions; respect confirmed absence, identity, privacy and conserved resources. A draft may give a lead or complication rather than the desired outcome. Select none for sufficient existing content or quiet continuity; do not create merely to force success.",
+      frame as unknown as JsonValue, { none: "Existing content covers this interaction, or no plausible addition is warranted", introduce: "Develop a plausible unestablished part of the local situation for admission" });
     const capability = decisions.control.capabilities.find(capability => capability.id === frame.capabilityId && capability.knownToAgentIds.includes(frame.actorId));
     const transfer = frame.kind === "transfer" ? { actionId: frame.id, sender: frame.actorEntityId, recipient: frame.targetEntityId,
       resource: frame.quantityDefinitionId, amount: frame.amount,
@@ -224,7 +224,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       }
     }
     const nearby = frame.utterance || ["speak", "transfer", "use", "change", "move"].includes(frame.kind) ? orderedValues(state.agents)
-      .filter(agent => agent.id !== frame.actorId && (state.truth.placements[agent.entityId] === state.truth.placements[frame.actorEntityId] ||
+      .filter(agent => agent.id !== frame.actorId && (sharesContactNeighborhood(state, agent.entityId, frame.actorEntityId) ||
         frame.kind === "move" && state.truth.placements[agent.entityId] === frame.targetEntityId))
       .map(agent => agent.entityId) : [];
     const recipients = [...new Set([...["speak", "transfer"].includes(frame.kind) && frame.targetEntityId ? [frame.targetEntityId] : [], ...nearby])];

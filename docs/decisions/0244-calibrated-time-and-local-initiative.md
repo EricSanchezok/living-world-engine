@@ -1,7 +1,7 @@
 # Calibrated time and local initiative
 
 ## Status
-Proposed
+Accepted
 Class: architecture
 
 ## Context and Problem Statement

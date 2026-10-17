@@ -69,7 +69,7 @@ it("publishes real execution and reply stages without extra inference, persisten
     expect(host.instance(id).progress).toBeNull();
     expect(host.instance(id).conversation?.turns.at(-1)?.status).toBe("committed");
     expect(changes).toEqual(expect.arrayContaining([...phases, "settling", "checking", "saving", null]));
-    expect(f.transport.mock.calls.length - calls).toBe(4);
+    expect(f.transport.mock.calls.length - calls).toBe(5);
 
     const saved = database.readInstance(id).document;
     const run = Object.values(saved.runs)[0]!;
@@ -89,7 +89,7 @@ it("publishes real execution and reply stages without extra inference, persisten
     expect(tracker.project(pending, run, participant.id)?.stage).toBe("reply-pending");
     const restored = new WorldHost({ repository, store: database, ledger: database, provider: f.gateway });
     expect(restored.instance(id).progress).toBeNull();
-    expect(f.transport.mock.calls.length - calls).toBe(4);
+    expect(f.transport.mock.calls.length - calls).toBe(5);
   } finally {
     unsubscribe();
     for (const gate of Object.values(gates)) gate.release();

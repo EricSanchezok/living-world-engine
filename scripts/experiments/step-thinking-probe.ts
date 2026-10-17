@@ -62,7 +62,7 @@ export async function runThinkingStudy(study: { trialId: "probes-e1-thinking-02"
   const root = path.resolve(STEP_E1_PROTOCOL.root), directory = path.join(root, "runs", TRIAL);
   const { sources, catalog, resources, registry } = await loadStepCompilationProbeSources();
   const treatmentCatalog = thinkingCatalog(catalog, effort);
-  const treatmentRegistry = new ModelRegistry(treatmentCatalog, path.resolve(".livingworld-v30"), { fetch: async () => { throw new Error("probe cannot refresh metadata"); } });
+  const treatmentRegistry = new ModelRegistry(treatmentCatalog, path.resolve(".livingworld-v31"), { fetch: async () => { throw new Error("probe cannot refresh metadata"); } });
   for (const [selected, selectedRegistry] of [[catalog, registry], [treatmentCatalog, treatmentRegistry]] as const) {
     createModelGateway(selected, process.env, { registry: selectedRegistry,
       fetchForAccount: thinkingProbeAccountFetch(async () => { throw new ModelConfigurationError("offline preparation forbids HTTP"); }) });

@@ -26,6 +26,7 @@ import { activityBoundary, admitActivities } from "./activities";
 import { directPerception } from "./perception";
 import { sealDirectRecord } from "./canonical";
 import { participantReactionIds } from "./foreground";
+import { hasLocalOpportunity } from "./initiative";
 
 export interface DirectWorldConfig extends CapabilityModelOverrides { creationEnabled: boolean }
 export const DIRECT_WORLD_CONFIG: DirectWorldConfig = { decision: null, creation: null, fallback: null, creationEnabled: true };
@@ -104,12 +105,21 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
       .filter(([, policy]) => policy.kind === "external").map(([id]) => id));
     const reactions = ready.filter(([id]) => foreground.has(id));
     const pendingPlayers = Object.entries(control.intents).filter(([id, intent]) => input.policyRoster[id]?.kind === "external" && intent.status === "ready" && intent.activeSubmission).map(([id]) => id);
-    // A submitted player action does not wait for unrelated initial NPC work.
+    const participantWork = Object.entries(control.intents).some(([id, intent]) =>
+      input.policyRoster[id]?.kind === "external" && intent.activeSubmission !== null);
+    // Interpret first: a clarification or completed request must not launch world activity.
     const owners = submissions.length ? submissions.map(action => action.agentId) : reactions.length ? reactions.map(([id]) => id)
-      : pendingPlayers.length ? pendingPlayers : ready.map(([id]) => id);
-    const selected = await Promise.allSettled(owners.map(async agentId => ({ agentId,
+      : pendingPlayers.length ? pendingPlayers : participantWork ? [] : ready.map(([id]) => id);
+    const select = (ids: string[]) => Promise.allSettled(ids.map(async agentId => ({ agentId,
       result: await chooseAction({ state: source, definition: authority, control, decisions, agentId,
         external: submissions.find(action => action.agentId === agentId) ?? control.intents[agentId]!.activeSubmission ?? undefined, creationEnabled: this.config.creationEnabled }) })));
+    const selected = await select(owners);
+    if (submissions.length) {
+      const frames = selected.flatMap(result => result.status === "fulfilled" && result.value.result.frame ? [result.value.result.frame] : []);
+      const local = ready.filter(([id]) => hasLocalOpportunity(source, id, frames)).map(([id]) => id);
+      owners.push(...local);
+      selected.push(...await select(local));
+    }
     selected.forEach((result, index) => {
       const id = owners[index]!; activatedAgentIds.push(id);
       if (result.status === "fulfilled") {
@@ -199,6 +209,7 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     }
     for (const settlement of settlements) {
       const { frame, outcome } = settlement, intent = control.intents[frame.actorId]!;
+      const deferredCause = intent.causeActionId !== frame.causeActionId ? intent.causeActionId : null;
       const changed = settlement.operations.length > 0 || frame.kind === "speak" && initial.intents[frame.actorId]?.lastActionHash !== intent.lastActionHash ||
         settlement.visibleEntities.some(entity => !Object.values(source.agents[frame.actorId]!.bindings).some(binding => binding.canonicalEntityIds.includes(entity.id))) ||
         frame.kind === "observe" && settlement.visibleFacts.some(fact => !Object.values(source.agents[frame.actorId]!.belief.claims).some(claim =>
@@ -222,7 +233,9 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
       const continueReaction = !frame.submissionId && frame.causeActionId &&
         (control.prepared[frame.id]!.requestProgress === "continue" || inspectionReply) &&
         ["succeeded", "partial"].includes(outcome.status) && (inspectionReply || intent.noProgressCount < 2) && !intent.activityId;
-      if (continueReaction) wakeIntent(control, frame.actorId, "reaction-progress", frame.causeActionId);
+      if (deferredCause && !intent.activityId && input.policyRoster[frame.actorId]?.kind === "model") {
+        wakeIntent(control, frame.actorId, "observation", deferredCause);
+      } else if (continueReaction) wakeIntent(control, frame.actorId, "reaction-progress", frame.causeActionId);
       else if (!intent.activityId && input.policyRoster[frame.actorId]?.kind === "model" && intent.noProgressCount < 2 &&
         Object.values(source.agents[frame.actorId]!.character.goals).some(goal => goal.status === "active")) wakeIntent(control, frame.actorId, "action-result");
       if (!intent.activityId) delete control.prepared[frame.id];

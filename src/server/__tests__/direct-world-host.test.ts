@@ -21,6 +21,19 @@ import { nextNarrative } from "../narrative/outbox";
 import { GET as getInstanceEvents } from "../../app/api/instances/[id]/events/route";
 import { GET as getInstance } from "../../app/api/instances/[id]/route";
 
+// Conversation scenarios start with NPCs waiting; initiative has separate concurrent coverage.
+function quietInitialNpcProvider(...args: Parameters<typeof directTestProvider>) {
+  const [respond, ...rest] = args;
+  return directTestProvider((wire, call) => {
+    const context = wire.state as { submittedAction?: unknown; intent?: { wakeReasons: string[] } };
+    if (!context.submittedAction && context.intent?.wakeReasons.includes("initial-decision")) {
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) =>
+        [id, nativeAnswer(question, id === "operation" ? "wait" : "none")]));
+    }
+    return respond(wire, call);
+  }, ...rest);
+}
+
 function executionCalls(calls: Array<Parameters<typeof fetch>>) {
   return calls.filter(([, init]) => {
     const wire = JSON.parse(String(init?.body));
@@ -43,7 +56,7 @@ describe("direct world through persistent WorldHost", () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-quiescent-host-"));
     let clock = Date.now(), timerId = 0, operation = "wait";
     const timers = new Map<number, { delay: number; run: () => void }>();
-    const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id, nativeAnswer(q,
+    const f = quietInitialNpcProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id, nativeAnswer(q,
       id === "expression" ? 0 : id.startsWith("paragraph") ? "grounded" : id === "operation" ? operation :
         id === "target" ? "self" : id.includes("outcome") ? "succeeded" : "none")])), createText);
     await f.registry.capture();
@@ -100,7 +113,7 @@ describe("direct world through persistent WorldHost", () => {
     const words = trigger === "speak" ? "请检查设备，再告诉我还缺什么。" : "松开扶在设备上的手。";
     const receivedWords = trigger === "speak" ? words : null;
     let replyChoices = 0;
-    const f = directTestProvider(wire => {
+    const f = quietInitialNpcProvider(wire => {
       const context = wire.state as { perspective?: { agentId: string; interactions?: Array<{ relation: string; operation: string }> } };
       const who = context.perspective?.agentId;
       const own = context.perspective?.interactions?.filter(item => item.relation === "self") ?? [];
@@ -167,7 +180,7 @@ describe("direct world through persistent WorldHost", () => {
   it("opens the next player turn after direct replies while retaining overheard background conversation", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-conversation-foreground-"));
     let newBackgroundMessage = false;
-    const f = directTestProvider(wire => {
+    const f = quietInitialNpcProvider(wire => {
       const context = wire.state as { perspective?: { agentId: string } };
       return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
         let choice = id.startsWith("paragraph") ? "grounded" : id.includes("outcome") ? "succeeded" : id.includes("delivery") ? "delivered"
@@ -280,7 +293,7 @@ describe("direct world through persistent WorldHost", () => {
     let unavailable = true, clock = Date.now();
     const timers = new Map<ReturnType<typeof setTimeout>, () => void>();
     const clearTimers = () => { for (const timer of timers.keys()) clearTimeout(timer); timers.clear(); };
-    const f = directTestProvider(wire => {
+    const f = quietInitialNpcProvider(wire => {
       if (unavailable && phase === "decision") throw new ExperimentBudgetError("phase HTTP budget exhausted", "request-limit");
       return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id, nativeAnswer(q,
         id === "expression" ? 0 : id.startsWith("paragraph") ? "grounded" : id === "operation" ? "observe" :
@@ -336,7 +349,7 @@ describe("direct world through persistent WorldHost", () => {
   it.each(["service-pause", "local-failure"])("keeps a committed question visible when its NPC response cannot finish: %s", async mode => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-paused-reply-"));
     let proseCalls = 0;
-    const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
+    const f = quietInitialNpcProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
       const player = (wire.state as { perspective?: { agentId: string } }).perspective?.agentId === "player";
       const choice = id === "operation" ? "speak" : id === "recipient" ? player ? "broadcast" : "traveler" :
         id === "speech" ? "create" : id === "timing" ? "default" : id.startsWith("paragraph") ? "grounded" :
@@ -406,7 +419,7 @@ describe("direct world through persistent WorldHost", () => {
     let paragraphsSaved!: () => void, interrupt!: () => void, narrativeCalls = 0;
     const savedParagraph = new Promise<void>(resolve => { paragraphsSaved = resolve; });
     const interrupted = new Promise<void>(resolve => { interrupt = resolve; });
-    const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id, nativeAnswer(q,
+    const f = quietInitialNpcProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id, nativeAnswer(q,
       id === "expression" ? 0 : id.startsWith("paragraph") ? "grounded" : id === "operation" ? "observe" : id === "target" ? "self" : id.includes("outcome") ? "succeeded" : "none")])),
       wire => {
         const context = directCreationContext(wire);
@@ -472,7 +485,7 @@ describe("direct world through persistent WorldHost", () => {
   ])("repairs unsupported content using only the published prefix: $unsupported", async ({ unsupported, prefix }) => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-narrative-grounding-"));
     let calls = 0;
-    const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
+    const f = quietInitialNpcProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
       const paragraphs = (wire.state as { paragraphs?: string[] }).paragraphs;
       const choice = id.startsWith("paragraph") ? id.endsWith("_material") && paragraphs?.[Number(/^paragraph(\d+)/u.exec(id)?.[1])] === unsupported ? "added_content" : "grounded"
         : id === "operation" ? "observe" : id === "target" ? "self" : id.includes("outcome") ? "succeeded" : "none";
@@ -507,7 +520,7 @@ describe("direct world through persistent WorldHost", () => {
   it.each(["nested", "semantic-repeat"])("keeps narrative order through harmless format or continuation variation: %s", async mode => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-narrative-continuation-"));
     let generations = 0;
-    const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
+    const f = quietInitialNpcProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
       const context = wire.state as { paragraphs?: string[]; alreadyPublished?: string[] };
       const paragraph = context.paragraphs?.[Number(/^paragraph(\d+)/u.exec(id)?.[1])];
       let choice = id.startsWith("paragraph") ? "grounded" : id === "operation" ? "observe" : id === "target" ? "self" : id.includes("outcome") ? "succeeded" : "none";
@@ -553,7 +566,7 @@ describe("direct world through persistent WorldHost", () => {
     const firstStarted = new Promise<void>(resolve => { started = resolve; });
     const canFinish = new Promise<void>(resolve => { release = resolve; });
     const batches: number[] = [];
-    const f = directTestProvider(async wire => {
+    const f = quietInitialNpcProvider(async wire => {
       const prose = (wire.state as { paragraphs?: string[] }).paragraphs;
       if (prose) { batches.push(prose.length); if (batches.length === 1) { started(); await canFinish; } }
       return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id, nativeAnswer(q,
@@ -593,7 +606,7 @@ describe("direct world through persistent WorldHost", () => {
   it.each([false, true])("preserves committed progress when a player task fails, with a prior wait: %s", async priorWait => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-failure-"));
     const failedText = priorWait ? "等五秒再看。" : "fail-this-request";
-    const f = directTestProvider(wire => {
+    const f = quietInitialNpcProvider(wire => {
       const state = wire.state as { submittedAction?: { rawText: string }; currentRequestReceipts?: unknown[] };
       const firstWait = wire.questions.operation && state.submittedAction?.rawText === failedText && priorWait && !state.currentRequestReceipts?.length;
       if (wire.questions.operation && state.submittedAction?.rawText === failedText && !firstWait) return new Response("unavailable", { status: 401 });
@@ -638,7 +651,7 @@ describe("direct world through persistent WorldHost", () => {
   });
   it("continues one compound player intent and returns a delivered NPC refusal to the player", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-dialogue-")); let playerDecisions = 0;
-    const f = directTestProvider(wire => {
+    const f = quietInitialNpcProvider(wire => {
       const context = wire.state as { perspective?: { agentId: string }; actions?: Array<{ kind: string }> };
       if (context.perspective?.agentId === "player") playerDecisions++;
       const player = context.perspective?.agentId === "player";
@@ -678,7 +691,7 @@ describe("direct world through persistent WorldHost", () => {
       expect(Object.values(document.runs).find(run => run.rootIntents.some(intent => intent.submissionId === "find-and-ask"))?.status).toBe("completed");
       expect(document.actionWindow?.requiredAgentIds).toContain("player");
       expect(state.truth.quantities).toEqual(world.initialState.truth.quantities);
-      expect(f.transport.mock.calls.filter(([, init]) => Object.keys(directDecisionContext(JSON.parse(String(init?.body)))?.questions ?? {}).some(id => id === "operation" || id.endsWith("_outcome")))).toHaveLength(6); expect(replaySimulationState(state)).toEqual(state);
+      expect(f.transport.mock.calls.filter(([, init]) => Object.keys(directDecisionContext(JSON.parse(String(init?.body)))?.questions ?? {}).some(id => id === "operation" || id.endsWith("_outcome")))).toHaveLength(7); expect(replaySimulationState(state)).toEqual(state);
       const takeover = await host.transferControl(id, { expectedRevision: state.revision, target: { kind: "agent", agentId: "keeper" } });
       expect(takeover.actionWindow?.requiredAgentIds).toContain("keeper");
       await host.submitAction(id, takeover.conversation!.participantId, { expectedRevision: state.revision, submissionId: "after-takeover", text: "拒绝交换" });
@@ -696,7 +709,7 @@ describe("direct world through persistent WorldHost", () => {
   });
   it("admits one Blackmarsh Origin alongside 47 autonomous subjects without a reserved player or advance knowledge", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-blackmarsh-origin-"));
-    const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id,
+    const f = quietInitialNpcProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id,
       nativeAnswer(q, id === "operation" ? "wait" : id.includes("goal_status") || id.includes("belief_status") ? "unchanged" : "none")])));
     await f.registry.capture();
     const world = loadWorldScript(path.resolve("worlds/blackmarsh/world"), { seed: 17, modelCatalog: f.catalog });
@@ -733,7 +746,7 @@ describe("direct world through persistent WorldHost", () => {
   });
   it("creates and enters the ordinary default without generation, then commits natural language and recovers it", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-direct-default-"));
-    const f = directTestProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
+    const f = quietInitialNpcProvider(wire => Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
       const values: Record<string, string> = { operation: "observe", target: "self", tool: "none", amount: "unknown", resource: "none", speech: "none", timing: "default", goal: "none" };
       const choice = id.startsWith("paragraph") ? "grounded" : values[id] ?? (id.includes("outcome") ? "succeeded" : id.includes("belief_status") ? "unchanged" : "unknown");
       return [id, nativeAnswer(q, id === "expression" ? 0 : choice)];
@@ -762,7 +775,7 @@ describe("direct world through persistent WorldHost", () => {
       expect(saved.history[0]!.actions[0]!.rawText).toBe("检查自己的情况");
       expect(host.inspectorStep(id, 1).directRuntime!.actions[0]!.kind).toBe("observe");
       expect(replaySimulationState(saved)).toEqual(saved);
-      expect(executionCalls(f.transport.mock.calls)).toHaveLength(4);
+      expect(executionCalls(f.transport.mock.calls)).toHaveLength(5);
       const executionId = saved.history[0]!.executionRef!.executionId;
       expect(candidatePartitions(database.executionEvents(executionId))).toMatchObject({
         temporal: { fromSeconds: 0, atSeconds: 1 }, resolution: { rng: saved.truth.rng },
@@ -771,12 +784,12 @@ describe("direct world through persistent WorldHost", () => {
       const candidate = (execution: string) => database.executionEvents(execution).find(event => event.event === "execution.candidate.persisted")?.payload;
       expect(candidate(replay.replayExecutionId)).toEqual(candidate(executionId));
       expect(replay.replayStatus).toBe("succeeded"); expect(replay.stateHash).toBe(database.execution(executionId)!.stateHash);
-      expect(executionCalls(f.transport.mock.calls)).toHaveLength(4);
+      expect(executionCalls(f.transport.mock.calls)).toHaveLength(5);
       database.close(); database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false }); host = makeHost();
       expect(host.instance(id).summary.revision).toBe(saved.revision);
       expect(database.readInstance(id).document.state).toEqual(saved);
       await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "observe-self", text: "检查自己的情况" });
-      expect(database.readInstance(id).document.state).toEqual(saved); expect(executionCalls(f.transport.mock.calls)).toHaveLength(4);
+      expect(database.readInstance(id).document.state).toEqual(saved); expect(executionCalls(f.transport.mock.calls)).toHaveLength(5);
     } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
   });
 });

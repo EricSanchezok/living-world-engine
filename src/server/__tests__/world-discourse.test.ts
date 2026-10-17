@@ -17,8 +17,10 @@ describe("published discourse through the persistent entry path", () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-shared-discourse-"));
     let phase = "introduction";
     const f = directTestProvider(wire => {
-      const context = wire.state as { perspective?: { agentId: string } };
+      const context = wire.state as { perspective?: { agentId: string }; intent?: { wakeReasons: string[] } };
       const player = context.perspective?.agentId === "player";
+      if (!player && context.intent?.wakeReasons.includes("initial-decision")) return Object.fromEntries(Object.entries(wire.questions)
+        .map(([id, question]) => [id, nativeAnswer(question, id === "operation" ? "wait" : "none")]));
       return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => {
         let value = id.startsWith("paragraph") ? "grounded" : id.includes("outcome") ? "succeeded" :
           id.includes("delivery") ? "delivered" : id.includes("actor_visibility") || /_entity\d+$/u.test(id) ? "visible" :

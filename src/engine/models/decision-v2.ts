@@ -3,7 +3,7 @@ import type { ModelExecutionAudit } from "../contracts/model";
 import { assertJsonValue, frozenClone, type JsonValue } from "../runtime/json";
 import { loadPromptAsset } from "../prompts";
 import { contentHash } from "./model-audit";
-import { ModelOutputError, NativeDecisionContextLimitError, type ModelExecutionScope, type StructuredModelProvider } from "./model-provider";
+import { ModelOutputError, NativeDecisionContextLimitError, type ModelExecutionScope, type StructuredModelProvider, type StructuredModelRequest } from "./model-provider";
 
 const key = z.string().min(1).refine(value => !["__proto__", "constructor", "prototype"].includes(value));
 const structured = z.custom<string | Record<string, JsonValue> | JsonValue[]>(value =>
@@ -41,6 +41,8 @@ export type DecisionInstructionProfile = "publication";
 export interface DecisionRequestV2 extends ModelExecutionScope {
   profileId: string; fallbackProfileId?: string; subjectId: string; batch: DecisionBatchV2;
   instructionProfile?: DecisionInstructionProfile;
+  /** Applied only on language-model transports, including a native-context fallback. */
+  inferenceOverrides?: StructuredModelRequest<unknown>["inferenceOverrides"];
   modelInvocation?: number; modelInvocationId?: string;
   allocateInvocation?: () => number;
 }
@@ -112,6 +114,7 @@ export async function executeDecisionV2(provider: StructuredModelProvider, reque
       const result = await provider.generateStructured({ ...request, modelInvocation: request.allocateInvocation?.() ?? ordinal++,
         // Each physical invocation receives a fresh gateway identity, including splits.
         modelInvocationId: undefined, profileId, role: "decision", schemaName: "DecisionBatchV2",
+        inferenceOverrides: native ? undefined : request.inferenceOverrides,
         ...prompt, promptVersion: prompt.version, context: { decision: part }, schema: decisionOutputV2Schema(part, native), jsonExamplePolicy: "omit" });
       audits.push(result.audit);
       return Object.fromEntries(Object.entries(result.value.answers).map(([id, raw]) => {
@@ -147,6 +150,7 @@ export async function executeDecisionV2(provider: StructuredModelProvider, reque
   };
   const answers = await run(batch, request.profileId, null);
   return { version: 2, inputHash: contentHash({ batch, profileId: request.profileId, catalogHash: provider.catalog.hash,
-    registryHash: request.modelRegistrySnapshotHash ?? null, promptVersion: prompt.version }), answers, audits,
+    registryHash: request.modelRegistrySnapshotHash ?? null, promptVersion: prompt.version,
+    inferenceOverrides: request.inferenceOverrides ?? null }), answers, audits,
     diagnostics: [...diagnosticAnswers(answers), ...repairDiagnostics], dispatches };
 }
