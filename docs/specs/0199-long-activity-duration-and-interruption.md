@@ -5,7 +5,7 @@ Status: Approved
 
 ## Intent
 
-Make long rests, journeys and cultivation usable through the ordinary world runtime. The user's 2026-10-17 instruction to finish the approved world plan, exercise real play and fix the resulting failures authorizes this contract within [the world and participation scope](0195-canonical-world-and-participation-seeds.md). This contract covers elapsed duration, a participant's stated stopping condition, and causally ordered feedback. It does not grant cultivation progress, create calendar lore or suppress other characters' actions.
+Make long rests, journeys and cultivation usable through the ordinary world runtime. The user's 2026-10-17 instruction to finish the approved world plan, exercise real play and fix the resulting failures authorizes this contract within [the world and participation scope](0196-canonical-world-and-participation-seeds.md). This contract covers elapsed duration, a participant's stated stopping condition, and causally ordered feedback. It does not grant cultivation progress, create calendar lore or suppress other characters' actions.
 
 ## Contract
 
@@ -32,4 +32,4 @@ Run focused engine, loader and host tests, world validation, and `npm run check:
 
 ## Evidence
 
-The motivating live trajectory completed a requested eight-hour rest at 28,800 world seconds despite an earlier delivered direct address matching the player's stopping condition. [Long activity tests](../../src/engine/direct/__tests__/long-activities.test.ts) now cover conditional interruption, inaccessible and unrelated events, newly admitted listeners, completed work, exact intervals, restart, resource cancellation and replay. [Host tests](../../src/server/__tests__/direct-world-host.test.ts) reconstruct an earlier scene after later completion without acquiring later holdings or cognition. The [incident analysis](../postmortems/0175-long-activity-conditions-and-publication-boundaries.md) records the distinct escape mechanisms. Local Ledger evidence and model transcripts remain in the ignored validation cache until their acceptance report is complete.
+The motivating live trajectory completed a requested eight-hour rest at 28,800 world seconds despite an earlier delivered direct address matching the player's stopping condition. [Long activity tests](../../src/engine/direct/__tests__/long-activities.test.ts) now cover conditional interruption, inaccessible and unrelated events, newly admitted listeners, completed work, exact intervals, restart, resource cancellation and replay. [Host tests](../../src/server/__tests__/direct-world-host.test.ts) reconstruct an earlier scene after later completion without acquiring later holdings or cognition. The [incident analysis](../postmortems/0187-long-activity-conditions-and-publication-boundaries.md) records the distinct escape mechanisms. Local Ledger evidence and model transcripts remain in the ignored validation cache until their acceptance report is complete.

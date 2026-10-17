@@ -220,7 +220,7 @@ export async function runStepEfficiencyPlaytest(variant?: StepEfficiencyVariant)
   const phase = trialId.startsWith("discovery-") ? "discovery" : trialId.startsWith("trajectory-") ? "trajectory" : "confirmation";
   const root = path.resolve(protocol.root);
   const directory = path.join(root, "runs", trialId);
-  const dataRoot = path.resolve(variant?.dataRoot ?? process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v35");
+  const dataRoot = path.resolve(variant?.dataRoot ?? process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v36");
   const algorithmRef = stepEfficiencyAlgorithmRef(variant);
   const deadlineUtc = nonthinking ? null : variant?.continuation?.deadlineUtc ?? protocol.deadlineUtc;
   const deadlineReached = () => deadlineUtc !== null && Date.now() >= Date.parse(deadlineUtc);

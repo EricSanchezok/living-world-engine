@@ -36,6 +36,6 @@ This introduces one semantic field and a small current-site boundary in the exis
 
 ## Links
 
-- [Execution-site contract](../specs/0201-action-execution-site-binding.md)
-- [Incident and actual-model evidence](../postmortems/0177-intended-site-was-not-completed-arrival.md)
+- [Execution-site contract](../specs/0202-action-execution-site-binding.md)
+- [Incident and actual-model evidence](../postmortems/0189-intended-site-was-not-completed-arrival.md)
 - [Real-entry site regressions](../../src/engine/direct/__tests__/activity-site.test.ts)

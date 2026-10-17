@@ -17,7 +17,8 @@ const first = `${original}\n08:15，按本人现场记录，更换一只适配�
 const second = `${first}\n08:30，空载检查已完成；带负载持续试验未做。`;
 
 async function fixture(options: { missingProperty?: boolean; reject?: boolean; mixed?: boolean; quoted?: boolean; current?: boolean;
-  oldVisibility?: "visible" | "hidden"; newVisibility?: "visible" | "hidden"; pendingDebit?: boolean } = {}) {
+  oldVisibility?: "visible" | "hidden" | "examined" | "retained"; newVisibility?: "visible" | "hidden" | "examined" | "retained";
+  discoverable?: boolean; pendingDebit?: boolean } = {}) {
   let turn = 0;
   const requests: Record<string, unknown>[] = [];
   const created = { description: "把本次检修情况记在页上", applicability: "作者能操作此页", effectDescription: "记录本次检修情况",
@@ -52,6 +53,7 @@ async function fixture(options: { missingProperty?: boolean; reject?: boolean; m
       if (id.includes("visible")) value = (fact?.id ?? data?.factId) === "unobserved-code" ? "hidden" : "visible";
       if (id.includes("visible") && (fact?.id ?? data?.factId) === "work-entries") value = /_value\d+_visible$/u.test(id)
         ? options.newVisibility ?? "visible" : options.oldVisibility ?? "visible";
+      if (options.discoverable && question.type === "choice" && ["examined", "retained"].includes(String(value)) && !(value in question.criteria)) value = "visible";
       if (id.includes("actor_visibility")) value = "visible";
       if (id.includes("delivery")) value = "delivered";
       if (id.endsWith("_request_progress") || id.startsWith("progress_")) value = "complete";
@@ -84,7 +86,9 @@ async function fixture(options: { missingProperty?: boolean; reject?: boolean; m
   state.agents.keeper!.character.persona.summary = "OTHER-MIND：秘密计划";
   const provenance = state.truth.facts["gate-lock"]!.provenance;
   if (!options.missingProperty) state.truth.facts["work-entries"] = { id: "work-entries", subjectId: "gate", predicate: "entries",
-    value: { kind: "text", value: original }, description: "正文内容本身", access: { kind: "agents", agentIds: ["player"] }, provenance };
+    value: { kind: "text", value: original }, description: "正文内容本身", access: options.discoverable
+      ? { kind: "discoverable", condition: "The treated ink can be written normally but its current contents require an actual examination through the reading lens." }
+      : { kind: "agents", agentIds: ["player"] }, provenance };
   state.truth.facts["work-checked"] = { id: "work-checked", subjectId: "gate", predicate: "checked", value: { kind: "boolean", value: false },
     description: "本页检查状态", access: { kind: "public" }, provenance };
   state.truth.facts["unobserved-code"] = { id: "unobserved-code", subjectId: "gate", predicate: "secret", value: { kind: "text", value: "UNOBSERVED-CODE" },
@@ -182,12 +186,35 @@ describe("action-bound property values through the model HTTP and simulation ent
     expect(JSON.stringify(result.state.agents.player!.belief.evidence)).not.toContain(original);
   });
 
-  it.each(["visible", "hidden"] as const)("binds visibility to the original value after a later settlement debit conflict: %s", async oldVisibility => {
-    const f = await fixture({ pendingDebit: true, oldVisibility, newVisibility: oldVisibility === "visible" ? "hidden" : "visible" });
+  it("refreshes a discoverable replacement only through a fresh examination, preserving the previous finding on recall", async () => {
+    const mutable: Parameters<typeof fixture>[0] = { discoverable: true, oldVisibility: "retained", newVisibility: "examined" };
+    const f = await fixture(mutable);
+    const examined = await f.act("写入亲见的检修结果，再用阅片镜实际核读墨迹，暂不向旁人报告。");
+    const priorFinding = Object.values(examined.state.agents.player!.belief.claims).find(claim => claim.predicate === "entries")!;
+    expect(examined.entries.value).toEqual({ kind: "text", value: first });
+    expect(priorFinding).toMatchObject({ value: { kind: "text", value: first } });
+    expect(examined.committed.observations.find(item => item.observerId === "player")!.summary).toContain(first);
+    expect(JSON.stringify(examined.state.agents.keeper!.belief)).not.toContain(JSON.stringify(first).slice(1, -1));
+    mutable.newVisibility = "retained";
+    const recalled = await f.act("按亲见记录再追加空载检查；只回想上次读到的正文，不用阅片镜重新核读。");
+    expect(recalled.entries.value).toEqual({ kind: "text", value: second });
+    expect(recalled.entries.access).toEqual(examined.entries.access);
+    expect(Object.values(recalled.state.agents.player!.belief.claims).filter(claim => claim.predicate === "entries")).toEqual([priorFinding]);
+    expect(JSON.stringify(recalled.committed.observations)).not.toContain(JSON.stringify(second).slice(1, -1));
+    expect(JSON.stringify(recalled.state.agents.player!.belief.evidence)).not.toContain(JSON.stringify(second).slice(1, -1));
+    expect(JSON.stringify(recalled.state.agents.keeper!.belief)).not.toContain(JSON.stringify(second).slice(1, -1));
+    expect([examined.calls, recalled.calls]).toEqual([4, 4]);
+  });
+
+  it.each(["visible", "hidden", "examined", "retained"] as const)("binds visibility to the original value after a later settlement debit conflict: %s", async oldVisibility => {
+    const discoverable = ["examined", "retained"].includes(oldVisibility);
+    const expectedVisible = ["visible", "examined"].includes(oldVisibility);
+    const f = await fixture({ pendingDebit: true, discoverable, oldVisibility,
+      newVisibility: discoverable ? oldVisibility === "examined" ? "retained" : "examined" : oldVisibility === "visible" ? "hidden" : "visible" });
     const pending = await f.act("花一枚灵石记录检修结果，写满一分钟。");
     expect(pending.state.truth.elapsedSeconds).toBe(1);
     expect(pending.committed.outcomes).toEqual([]);
-    expect(pending.control.version).toBe(4);
+    expect(pending.control.version).toBe(6);
     const control = JSON.parse(JSON.stringify(pending.control)) as typeof pending.control;
     const frame = control.activities[0]!;
     expect(control.prepared[frame.id]!.propertyVisibility).toHaveLength(1);
@@ -200,7 +227,7 @@ describe("action-bound property values through the model HTTP and simulation ent
     expect(settled.outcome.status).toBe("blocked");
     expect(settled.operations).toEqual([]);
     expect(later.truth.facts["work-entries"]!.value).toEqual({ kind: "text", value: original });
-    expect(settled.visibleFacts.filter(fact => fact.id === "work-entries").map(fact => fact.value)).toEqual(oldVisibility === "visible" ? [{ kind: "text", value: original }] : []);
+    expect(settled.visibleFacts.filter(fact => fact.id === "work-entries").map(fact => fact.value)).toEqual(expectedVisible ? [{ kind: "text", value: original }] : []);
     expect(pending.calls).toBe(4);
   });
 

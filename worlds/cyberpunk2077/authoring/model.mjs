@@ -1,4 +1,4 @@
-// Authoring helpers emit ordinary schema-v17 data, never runtime plugins.
+// Authoring helpers emit ordinary schema-v19 data, never runtime plugins.
 export const profiles = { decision: "decision-jev", creation: "creation-deepseek", fallback: "decision-deepseek-long" };
 export const worldProfiles = { ...profiles, decision: "decision-deepseek-long" };
 

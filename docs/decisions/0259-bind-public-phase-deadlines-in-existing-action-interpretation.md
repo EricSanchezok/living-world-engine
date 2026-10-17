@@ -38,6 +38,6 @@ Identical inherited public schedules share candidates. Catalog entries carry loc
 
 ## Links
 
-- [Periodic endpoint contract](../specs/0200-periodic-phase-activity-deadlines.md)
-- [Periodic property derivation](0253-derive-periodic-properties-at-atomic-clock-boundaries.md)
+- [Periodic endpoint contract](../specs/0201-periodic-phase-activity-deadlines.md)
+- [Periodic property derivation](0258-derive-periodic-properties-at-atomic-clock-boundaries.md)
 - [Real-engine deadline regressions](../../src/engine/direct/__tests__/periodic-deadlines.test.ts)

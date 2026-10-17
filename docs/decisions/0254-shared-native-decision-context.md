@@ -37,4 +37,4 @@ A replay of the same 89-question batch reduced compact HTTP JSON from 214,838 to
 
 - [Decision transport and regressions](../../src/engine/models/__tests__/decision-v2.test.ts)
 - [Direct execution contract](../game-design/direct-runtime.md)
-- [Sample qualification failures](../postmortems/0171-shared-context-and-meter-ownership.md)
+- [Sample qualification failures](../postmortems/0183-shared-context-and-meter-ownership.md)

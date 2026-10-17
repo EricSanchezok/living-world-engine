@@ -5,7 +5,7 @@ Status: Implemented
 
 ## Intent
 
-Complete the user's approved [canonical-world contract](0195-canonical-world-and-participation-seeds.md): testing a previously unknown aptitude reveals its pre-existing state. The same mechanism supports inspecting concealed physical properties in other worlds. This implements the explicitly requested detection behavior; it does not grant access to another Agent's private cognition.
+Complete the user's approved [canonical-world contract](0196-canonical-world-and-participation-seeds.md): testing a previously unknown aptitude reveals its pre-existing state. The same mechanism supports inspecting concealed physical properties in other worlds. This implements the explicitly requested detection behavior; it does not grant access to another Agent's private cognition.
 
 ## Contract
 

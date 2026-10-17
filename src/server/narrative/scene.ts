@@ -30,7 +30,7 @@ export function narrativeEvidence(source: ScenePacket) {
 }
 
 function priorReceipt(observation: ScenePacket["observations"][number] & { requestRelation?: NonNullable<ScenePacket["priorObservedReceipts"]>[number]["requestRelation"] }) {
-  return { id: observation.id, requestRelation: observation.requestRelation, actor: observation.scene?.actor ?? null, actorLocalId: observation.scene?.actorLocalId ?? null,
+  return { id: observation.id, ...(observation.requestRelation ? { requestRelation: observation.requestRelation } : {}), actor: observation.scene?.actor ?? null, actorLocalId: observation.scene?.actorLocalId ?? null,
     operation: observation.scene?.actionKind ?? null, action: observation.scene?.action ?? null,
     status: observation.scene?.status ?? null, worldTimeSeconds: observation.worldTimeSeconds,
     manner: observation.scene?.manner ?? null, details: observation.scene?.details ?? [],

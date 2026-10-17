@@ -5,7 +5,7 @@ Status: Approved
 
 ## Intent
 
-Replace permanently frozen environmental time descriptions with deterministic authored cycles. The user's 2026-10-17 instruction to finish the approved world, repair real-play failures and validate natural long-term play authorizes this implementation within [0195](0195-canonical-world-and-participation-seeds.md). This contract supports recurring physical properties such as daylight; it does not schedule novel events, make NPC decisions or award cultivation progress.
+Replace permanently frozen environmental time descriptions with deterministic authored cycles. The user's 2026-10-17 instruction to finish the approved world, repair real-play failures and validate natural long-term play authorizes this implementation within [0196](0196-canonical-world-and-participation-seeds.md). This contract supports recurring physical properties such as daylight; it does not schedule novel events, make NPC decisions or award cultivation progress.
 
 ## Contract
 
@@ -14,7 +14,7 @@ Replace permanently frozen environmental time descriptions with deterministic au
 - Phase boundaries are meaningful clock boundaries. Execution cannot skip an earlier boundary, including during a long activity; crossing a boundary alone does not require an extra model call, force an NPC action, or grant anyone information. Existing state-dependent action validation still applies.
 - Observation uses the property's value at the actual observation boundary, after elapsed time and admitted actions. Past observations and beliefs remain evidence of their original time and are not rewritten. The ordinary authored access policy and local perceptual checks determine who learns a changed property. Knowing an astronomical rule does not grant sight through walls or access to distant locations.
 - The adjudicator receives current elapsed seconds and the relevant cycle definitions and next transitions. Clock arithmetic is deterministic, while interpretation of a proposed action remains semantic. Cycles do not automatically open a closed shop, make a worker start a shift, create speech or interrupt an activity without the ordinary causally admitted perceptual event.
-- A world can give different locations different cycles. Daylight periods are independent of elapsed-duration terms and age/year conventions; the author must make their intended relationship explicit. Empty cycle catalogs preserve ordinary worlds. This is a forward-only schema change coordinated with [0198](0198-long-activity-duration-and-interruption.md), without world-specific engine branches or save migration.
+- A world can give different locations different cycles. Daylight periods are independent of elapsed-duration terms and age/year conventions; the author must make their intended relationship explicit. Empty cycle catalogs preserve ordinary worlds. This is a forward-only schema change coordinated with [0199](0199-long-activity-duration-and-interruption.md), without world-specific engine branches or save migration.
 
 ## Plan
 

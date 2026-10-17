@@ -38,7 +38,7 @@ This avoids a new persistent cohort and scheduler invocation. It retains existin
 
 ## Links
 
-- [Local causal work contract](../specs/0202-local-causal-work-during-participant-activities.md)
+- [Local causal work contract](../specs/0203-local-causal-work-during-participant-activities.md)
 - [Scheduling implementation](../../src/engine/direct/initiative.ts)
 - [Real-entry regression tests](../../src/engine/direct/__tests__/local-activity-window.test.ts)
-- [Incident and permanent guardrails](../postmortems/0178-long-rest-starved-local-ready-work.md)
+- [Incident and permanent guardrails](../postmortems/0190-long-rest-starved-local-ready-work.md)

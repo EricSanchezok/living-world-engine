@@ -24,6 +24,6 @@ Instance `c9156797-35e7-47b2-8f8c-08b0c94e0842` completed three local actions at
 
 ## Guardrails
 
-[The local-work contract](../specs/0202-local-causal-work-during-participant-activities.md) treats long participant activities as concurrent with relevant local affairs. [The derived-window decision](../decisions/0256-derive-local-activity-work-from-existing-causal-records.md) scopes eligibility to unfinished work and current causal intent. It adds neither a global actor sweep for interpretation nor a separate scheduling model call.
+[The local-work contract](../specs/0203-local-causal-work-during-participant-activities.md) treats long participant activities as concurrent with relevant local affairs. [The derived-window decision](../decisions/0261-derive-local-activity-work-from-existing-causal-records.md) scopes eligibility to unfinished work and current causal intent. It adds neither a global actor sweep for interpretation nor a separate scheduling model call.
 
 [Real-entry tests](../../src/engine/direct/__tests__/local-activity-window.test.ts) verify a committed seller reply before the deadline, an actual departure and return across restart, equal opportunity with direct reactions, distant exclusion, quiescence and immutable replay. Repeated identical dialogue already terminates under the existing no-progress and observation mechanisms; no permanent utterance hash or new speech ban was added. Actual-model play remains necessary to evaluate dialogue quality and latency, beyond deterministic scheduling correctness.

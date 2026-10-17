@@ -37,6 +37,6 @@ Predicting exact relief could admit some useful small prefixes, but aggregate ca
 ## Links
 
 - [Memory contract](../game-design/agent-memory.md)
-- [Approved scope](../specs/0203-narrative-evidence-and-useful-memory-admission.md)
-- [Actual-play failure and guardrails](../postmortems/0179-speech-premises-local-time-and-ineffective-memory.md)
+- [Approved scope](../specs/0204-narrative-evidence-and-useful-memory-admission.md)
+- [Actual-play failure and guardrails](../postmortems/0191-speech-premises-local-time-and-ineffective-memory.md)
 - [Memory service regression](../../src/server/__tests__/agent-memory.test.ts)

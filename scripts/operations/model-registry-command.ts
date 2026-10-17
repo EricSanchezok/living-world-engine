@@ -11,7 +11,7 @@ async function main(): Promise<void> {
   const catalog = loadModelCatalog(path.resolve(
     process.env.LIVINGWORLD_MODEL_CATALOG_PATH ?? "config/models.yaml",
   ));
-  const dataRoot = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v35");
+  const dataRoot = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v36");
   const registry = new ModelRegistry(catalog, dataRoot, { minimumRefreshIntervalMs: 0 });
   const gateway = createModelGateway(catalog, process.env, { registry });
   const result = command === "refresh"

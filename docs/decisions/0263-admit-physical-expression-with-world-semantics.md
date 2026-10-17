@@ -37,6 +37,6 @@ Deleting manner would prevent this channel of unsupported claims, but would also
 
 ## Links
 
-- [Approved scope](../specs/0204-autonomous-execution-sites-and-real-local-work.md)
+- [Approved scope](../specs/0205-autonomous-execution-sites-and-real-local-work.md)
 - [Direct runtime contract](../game-design/direct-runtime.md)
-- [Escaped failure and permanent guards](../postmortems/0180-autonomous-work-without-arrival-or-inspection.md)
+- [Escaped failure and permanent guards](../postmortems/0192-autonomous-work-without-arrival-or-inspection.md)

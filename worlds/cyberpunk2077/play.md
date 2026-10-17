@@ -12,11 +12,11 @@
 2. 启动本地工作台，在世界导入入口上传 `worlds/cyberpunk2077/dist/cyberpunk2077-night-city.zip`。也可在服务未运行时使用命令行，给导入和服务指定同一个数据目录：
 
    ```sh
-   LIVINGWORLD_DATA_ROOT=.livingworld-v33 npm run world:import -- worlds/cyberpunk2077/dist/cyberpunk2077-night-city.zip
-   LIVINGWORLD_DATA_ROOT=.livingworld-v33 npm run dev
+   LIVINGWORLD_DATA_ROOT=.livingworld-v36 npm run world:import -- worlds/cyberpunk2077/dist/cyberpunk2077-night-city.zip
+   LIVINGWORLD_DATA_ROOT=.livingworld-v36 npm run dev
    ```
 
-   应用首次创建本地数据库时会安装内置世界；若已用命令行导入创建数据库，应用不会自动补装内置世界。如需保留内置内容，先启动应用，再从网页导入。已有实例是世界和执行算法的独立快照；重新导入不能更新它们，应另建实例检验新版本。当前运行时使用实例格式 v33；旧格式目录应保留为归档，在新的数据目录建立实例，不迁移旧存档。
+   应用首次创建本地数据库时会安装内置世界；若已用命令行导入创建数据库，应用不会自动补装内置世界。如需保留内置内容，先启动应用，再从网页导入。已有实例是世界和执行算法的独立快照；重新导入不能更新它们，应另建实例检验新版本。当前运行时使用实例格式 v36；旧格式目录应保留为归档，在新的数据目录建立实例，不迁移旧存档。
 
 3. 在世界列表选择“赛博朋克 2077：夜之城众生”，以观察者创建实例。在观察角色列表选择 `O01` 至 `O12` 对应的姓名，再接管角色。接管继承原有现金、物品、关系和私人认知，不会生成第二个同名角色。这一入口使用预置姓名；自由改名、外观编辑及新建出身初始化不属于本包能力。
 

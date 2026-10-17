@@ -65,7 +65,7 @@ function parseArguments(argv: readonly string[]): ParsedArguments {
   const query: DebugQuery = {};
   const positional: string[] = [];
   let format: DebugOutputFormat = "json";
-  let database = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v35", "livingworld.sqlite");
+  let database = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v36", "livingworld.sqlite");
   let output: string | undefined;
   let includePayload = false;
   let rebuildIndex = false;

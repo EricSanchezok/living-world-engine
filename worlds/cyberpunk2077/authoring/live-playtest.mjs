@@ -45,7 +45,7 @@ for (const test of cases) {
   }
 }
 const expectedAlgorithm = directWorldAlgorithmRef();
-const plan = { caseSet, concurrency, actionTimeoutMinutes, instanceSchemaVersion: 33,
+const plan = { caseSet, concurrency, actionTimeoutMinutes, instanceSchemaVersion: 36,
   algorithm: `${expectedAlgorithm.id}@${expectedAlgorithm.version}`, cases };
 
 if (args.includes('--plan')) console.log(JSON.stringify(plan, null, 2));
@@ -85,8 +85,8 @@ async function main() {
 
   function readInstance(id) {
     const document = database.readInstance(id).document;
-    if (document.schemaVersion !== 33 || !document.agentMemories || !isDeepStrictEqual(document.executionAlgorithm, expectedAlgorithm)) {
-      throw new Error(`instance ${id} must be freshly created with schema 33 and ${expectedAlgorithm.id}@${expectedAlgorithm.version}`);
+    if (document.schemaVersion !== 36 || !document.agentMemories || !isDeepStrictEqual(document.executionAlgorithm, expectedAlgorithm)) {
+      throw new Error(`instance ${id} must be freshly created with schema 36 and ${expectedAlgorithm.id}@${expectedAlgorithm.version}`);
     }
     return document;
   }

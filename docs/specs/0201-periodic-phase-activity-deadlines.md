@@ -5,7 +5,7 @@ Status: Approved
 
 ## Intent
 
-Complete natural long-activity requests whose endpoint is an authored periodic phase, such as resting until the next daylight phase. The user's 2026-10-17 instruction to finish all work and repair actual play failures authorizes this generic extension of [elapsed activities](0198-long-activity-duration-and-interruption.md) and [periodic properties](0199-authored-periodic-world-properties.md). A live request to rest until the following morning instead completed two short waits while it was still night. Explicit-hour acceptance does not cover this failure.
+Complete natural long-activity requests whose endpoint is an authored periodic phase, such as resting until the next daylight phase. The user's 2026-10-17 instruction to finish all work and repair actual play failures authorizes this generic extension of [elapsed activities](0199-long-activity-duration-and-interruption.md) and [periodic properties](0200-authored-periodic-world-properties.md). A live request to rest until the following morning instead completed two short waits while it was still night. Explicit-hour acceptance does not cover this failure.
 
 ## Contract
 

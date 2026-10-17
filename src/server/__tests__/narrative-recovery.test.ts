@@ -79,7 +79,8 @@ describe("recovery receipt provenance through persisted publication", () => {
         scene: expect.objectContaining({ actionKind: "speak", speech: expect.objectContaining({ utterance: order }) }) })]) });
       const task = scenes[0]!.publicationTask as { executionBoundary: { earlierObservedEvents: unknown[] } };
       expect(task.executionBoundary.earlierObservedEvents).toEqual(expect.arrayContaining([expect.objectContaining({ requestRelation: "concurrent_event",
-        actor: expect.any(String), actorLocalId: expect.any(String), operation: "speak", status: "succeeded", actualResult: expect.stringContaining(order) })]));
+        actor: expect.any(String), actorLocalId: expect.any(String), operation: "speak", status: "succeeded", actualResult: null,
+        deliveredSpeech: expect.objectContaining({ utterance: order }) })]));
       expect(task.executionBoundary).not.toHaveProperty("earlierCommittedSteps");
       expect(task.executionBoundary.earlierObservedEvents).toEqual(expect.arrayContaining([expect.objectContaining({
         requestRelation: "participant_step", actor: "你", operation: "wait", action: expect.objectContaining({ durationSeconds: 60 }) })]));

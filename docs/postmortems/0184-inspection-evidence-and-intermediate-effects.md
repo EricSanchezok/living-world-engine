@@ -24,7 +24,7 @@ The perception path projected quantities only for personal inventory and committ
 ## Guardrails
 
 - [Simulation-entry tests](../../src/engine/direct/__tests__/runtime.test.ts) check measured, concealed, zero and uninspected quantities, witness isolation, unchanged resource state and replay. A separate case checks a real meter cost without a lasting qualitative effect.
-- [The inspection contract](../specs/0196-quantity-inspection-and-final-action-state.md) owns the access boundary; [decision 0250](../decisions/0250-actor-scoped-quantity-inspection.md) records the choice over duplicate inventory facts.
+- [The inspection contract](../specs/0197-quantity-inspection-and-final-action-state.md) owns the access boundary; [decision 0255](../decisions/0255-actor-scoped-quantity-inspection.md) records the choice over duplicate inventory facts.
 - Player interpretation judges continuation after the selected observation. Capability declarations represent the final stage, with numeric costs independent of lasting effects.
 - [Live qualification](../../worlds/fanren/authoring/validation/followup-live-runs.json) retains failures. Prompt changes and deterministic transport replacements alone do not establish real-model semantic success.
 

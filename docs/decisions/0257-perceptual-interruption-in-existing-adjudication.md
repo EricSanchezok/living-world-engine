@@ -34,7 +34,7 @@ Fixed phrase matching is cheap but narrows open semantics and mistakes quotation
 
 ## Links
 
-- [Long activity contract](../specs/0198-long-activity-duration-and-interruption.md)
+- [Long activity contract](../specs/0199-long-activity-duration-and-interruption.md)
 - [Interruption admission and cancellation](../../src/engine/direct/interruption.ts)
 - [Real-entry long activity tests](../../src/engine/direct/__tests__/long-activities.test.ts)
-- [Long activity and publication incident](../postmortems/0175-long-activity-conditions-and-publication-boundaries.md)
+- [Long activity and publication incident](../postmortems/0187-long-activity-conditions-and-publication-boundaries.md)

@@ -83,7 +83,7 @@ export interface PreparedDirectAction {
   interruptionCandidateIds: string[];
 }
 export interface DirectRuntimeState {
-  kind: "direct-world"; version: 5; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
+  kind: "direct-world"; version: 6; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
   models: { decision: string; creation: string; fallback: string };
   modelOverrides: { decision: string | null; creation: string | null; fallback: string | null };
   intents: Record<string, AgentIntentState>;

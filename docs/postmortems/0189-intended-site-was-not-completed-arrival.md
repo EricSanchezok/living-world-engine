@@ -26,7 +26,7 @@ An action target can mean a person awaited, an object inspected or a movement de
 
 ## Guardrails
 
-[The execution-site contract](../specs/0201-action-execution-site-binding.md) separates required location from semantic target. [Action reading](../../src/engine/direct/action-reading.ts) validates that an explicitly bound nonmovement site is the actual current place, accepting all exact local aliases. Otherwise it repairs toward a genuinely authorized movement or prerequisite, or asks for clarification. Repeated contradictions commit no action. The mechanism does not infer travel from a wait target, dialogue or a future plan.
+[The execution-site contract](../specs/0202-action-execution-site-binding.md) separates required location from semantic target. [Action reading](../../src/engine/direct/action-reading.ts) validates that an explicitly bound nonmovement site is the actual current place, accepting all exact local aliases. Otherwise it repairs toward a genuinely authorized movement or prerequisite, or asks for clarification. Repeated contradictions commit no action. The mechanism does not infer travel from a wait target, dialogue or a future plan.
 
 [The real-entry tests](../../src/engine/direct/__tests__/activity-site.test.ts) replace only model HTTP and verify placement, time, continuation, rejected-state invariance and replay. A full-context live-model probe correctly handled all nine different-place, same-place and speech trials, using ten physical calls: one initial inconsistent reading was repaired. This is bounded empirical evidence rather than a guarantee against every future semantic misreading; fresh play remains a separate acceptance step.
 

@@ -19,16 +19,22 @@ async function fixture(mode: "reservation" | "repeat" | "departure" | "fairness"
       expect(JSON.stringify(reading)).not.toContain("canonicalEntityIds");
       expect(JSON.stringify(reading)).not.toContain('"truth"');
       const operation = actor === "player" ? mode === "fairness" && count === 1 ? "speak" : "wait" : mode === "departure" && actor === "seller" && [2, 3].includes(count) ? "move" : mode === "repeat" || actor === "keeper" && count === 1 || actor === "seller" && count === (mode === "departure" ? 4 : 2) ? "speak" : "wait";
-      const utterance = operation === "speak" ? actor === "keeper" ? "Can you reserve these goods?" : "I can reserve them until the next visit." : null;
+      const privateNotice = mode === "fairness" && actor === "player" && operation === "speak";
+      const utterance = operation === "speak" ? privateNotice ? "I will rest here." : actor === "keeper" ? "Can you reserve these goods?" : "I can reserve them until the next visit." : null;
       return { understanding: operation === "speak" ? "Discuss the local reservation." : "Wait for the relevant reply without repeating the exchange.",
         ...(actor === "player" ? {} : { urgency: 0.5 }), interaction: "world_action",
         action: { operation, target: operation === "move" ? count === 2 ? "store-local" : "yard-local" : "none", recipient: actor === "keeper" ? "seller-local" : "buyer-local", tool: "none", resource: "none", amount: "unknown",
           timing: "default", duration: actor === "player" && operation === "wait" ? "d0" : "default", interruption: "none", goal: "none", progress_next: mode === "fairness" && actor === "player" && count === 1 ? "continue" : "complete", observation_scope: "target",
-          attempt: operation === "speak" ? "Discuss the requested reservation." : "Rest until the requested time, or wait for a new relevant message.", utterance, manner: null, literalQuote: "none" } };
+          attempt: privateNotice ? "Whisper to the buyer that I will rest here." : operation === "speak" ? "Discuss the requested reservation." : "Rest until the requested time, or wait for a new relevant message.", utterance, manner: privateNotice ? "A quiet aside only the buyer can hear." : null, literalQuote: "none" } };
     }
-    return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeAnswer(question,
+    return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => {
+      const contact = (question.instructions as { task?: { data?: { actionId: string; recipient: string } } }).task?.data;
+      const action = (wire.state as { actions?: Array<{ id: string; actorId: string }> }).actions?.find(frame => frame.id === contact?.actionId);
+      const privateNoticeUnavailable = mode === "fairness" && action?.actorId === "player" && contact?.recipient !== "keeper";
+      return [id, nativeAnswer(question,
       id.endsWith("_duration") ? "s1" : id.endsWith("_movement") ? "enter" : id.endsWith("_request_progress") ? mode === "departure" && [2, 3].includes(reads.seller ?? 0) ? "continue" : "complete" : id.includes("outcome") ? "succeeded"
-        : id.includes("visible") ? "visible" : id.includes("delivery") ? "delivered" : id.includes("fact") ? "unchanged" : "none")]));
+        : id.includes("visible") ? "visible" : id.includes("delivery") ? privateNoticeUnavailable ? "unavailable" : "delivered" : id.includes("fact") ? "unchanged" : "none")];
+    }));
   });
   const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 27, modelCatalog: f.catalog });
   world.initialState.truth.timers = {};
@@ -79,7 +85,7 @@ describe("local causal work during participant activities", () => {
   it("batches local work with direct participant reactions between the participant's authorized steps", async () => {
     const f = await fixture("fairness");
     let result = await f.engine.step(f.roster, { expectedRevision: 0, trigger: "participant_action", externalActions: [
-      { agentId: "player", submissionId: "long-rest", rawText: "Tell the buyer I will rest, then rest quietly for 3600 seconds.", goal: "Rest", means: null, targetIds: [] },
+      { agentId: "player", submissionId: "long-rest", rawText: "Whisper to the buyer that I will rest, then rest quietly for 3600 seconds.", goal: "Rest", means: null, targetIds: [] },
     ] });
     const control = readDirectState(result.state.executionState!, result.state);
     expect(control.intents.keeper!.causeActionId).toBe(result.committed.directEvent.frames.find(frame => frame.actorId === "player")!.id);

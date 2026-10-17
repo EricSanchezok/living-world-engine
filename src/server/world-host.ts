@@ -319,7 +319,7 @@ export class WorldHostError extends Error {
 const NARRATIVE_SYSTEM = loadPromptAsset("system/scene-narrative.md");
 const NARRATIVE_USER = loadPromptAsset("user/scene-narrative.md");
 const NARRATIVE_PROMPT_VERSION = `scene-narrative-${contentHash([NARRATIVE_SYSTEM, NARRATIVE_USER])}`;
-const NARRATIVE_MANIFEST = defineEngineOperationManifest({ id: "scene-narrative", version: "3", config: { promptVersion: NARRATIVE_PROMPT_VERSION } });
+const NARRATIVE_MANIFEST = defineEngineOperationManifest({ id: "scene-narrative", version: "4", config: { promptVersion: NARRATIVE_PROMPT_VERSION } });
 const ARRIVAL_PROMPT = promptBundle("arrival-generator");
 
 const ARRIVAL_PRODUCER_MANIFEST = defineEngineOperationManifest({
@@ -906,7 +906,7 @@ export class WorldHost {
         /* turbopackIgnore: true */ process.env.LIVINGWORLD_MODEL_CATALOG_PATH ?? "config/models.yaml",
       ));
       const dataRoot = path.resolve(
-        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v35",
+        /* turbopackIgnore: true */ process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v36",
       );
       const modelRegistry = new ModelRegistry(catalog, dataRoot);
       modelRegistry.startBackgroundRefresh();
@@ -1384,7 +1384,7 @@ export class WorldHost {
     }
     const now = this.now().toISOString();
     const initial: WorldInstanceDocument = {
-      schemaVersion: 35,
+      schemaVersion: 36,
       id,
       world: toWorldRuntimeContract(definition),
       executionAlgorithm: structuredClone(experiment.algorithmRef),

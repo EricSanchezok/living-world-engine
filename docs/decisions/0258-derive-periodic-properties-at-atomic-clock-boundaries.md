@@ -38,6 +38,6 @@ This gives up freely changing a cycle during play. Seasons with changing periods
 
 ## Links
 
-- [Periodic property contract](../specs/0199-authored-periodic-world-properties.md)
-- [Long activity and elapsed-unit contract](../specs/0198-long-activity-duration-and-interruption.md)
+- [Periodic property contract](../specs/0200-authored-periodic-world-properties.md)
+- [Long activity and elapsed-unit contract](../specs/0199-long-activity-duration-and-interruption.md)
 - [Import, simulation and replay regressions](../../src/engine/direct/__tests__/periodic-properties.test.ts)

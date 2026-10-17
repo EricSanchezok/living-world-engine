@@ -34,6 +34,6 @@ A fresh spirit run (`df507673-2194-4b9c-89d0-02fd526c600b`) then exposed a repai
 
 ## Guardrails
 
-[Spec 0203](../specs/0203-narrative-evidence-and-useful-memory-admission.md) defines the three corrections. [Decision 0257](../decisions/0257-keep-memory-amortization-at-hard-capacity.md) records the hard-limit tradeoff.
+[Spec 0204](../specs/0204-narrative-evidence-and-useful-memory-admission.md) defines the three corrections. [Decision 0262](../decisions/0262-keep-memory-amortization-at-hard-capacity.md) records the hard-limit tradeoff.
 
 [Narrative projection tests](../../src/server/__tests__/world-narrative.test.ts) retain genuine movement, spoken manner, independent observed inventory and exact elapsed equivalents in the same six-question publication batch. [Memory-host tests](../../src/server/__tests__/agent-memory.test.ts) prove that insufficient new history causes no repeated calls across restart or hard pressure, while the original world and checkpoint remain unchanged. Existing substantial-prefix, concurrent append and immutable replay tests remain required. Actual-model paired probes and fresh original-profile play are retained alongside the complete original Ledger; deterministic tests alone do not establish literary quality or end-to-end latency.
