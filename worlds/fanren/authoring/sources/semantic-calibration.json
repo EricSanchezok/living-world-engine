@@ -1,0 +1,138 @@
+{
+  "format_version": 1,
+  "scope": "scoped-counterexample-not-full-batch-approval",
+  "reviewer": "Codex source editor, 2026-10-17",
+  "cases": [
+    {
+      "batch_id": "batch-0003",
+      "record_id": "batch-0003-object-0009",
+      "report_identity": "913307a8d9120331d525bb4ff75b259fe07c9fd88f32dd980e786698209cea52",
+      "report_sha256": "626fd44e1a29a0374cb5ba49b5341cc76d25ae2c7a2942b3416c7048f887fe47",
+      "model": "deepseek-v4-pro",
+      "effort": "high",
+      "finding": "审校沿用候选的“谎称”前提，错误断言供奉不存在。正文后段明示韩立所言不假，只是其武功不足令对方高估。应修正候选，保留未具名供奉待跨批关联，不能直接删除人物。",
+      "source": {
+        "chapter_id": "qq-4803876",
+        "start": 932,
+        "end": 1012,
+        "span_sha256": "6a2fbe056b4da2413bdde40005fe5278837e98a5361c7de9615bfb84b6695314"
+      },
+      "disposition": "calibration-failure-upgrade-independent-model",
+      "runtime_approved": false
+    },
+    {
+      "batch_id": "batch-0003",
+      "record_id": "batch-0003-object-0009",
+      "report_identity": "160383efc72c23d2d2b71cc77972e42ddd50f63a5886336163691ae13fc781fe",
+      "report_sha256": "1fcb87c1ef9fed1c2f7f2c2099d898f84ba61f2466d0f2a7325e381d90c88f50",
+      "model": "deepseek-v4-pro",
+      "effort": "max",
+      "finding": "最高注册推理档位仍沿用候选的虚构前提，即使引用段落含“所说虽然不假”仍称正文明确其为谎言。直接阅读前后段确认：韩立没有报供奉姓名，供奉弟子身份是真的，水货指其武功与别人对其武艺的高估；不得据此删除供奉对象。",
+      "source": {
+        "chapter_id": "qq-4803876",
+        "start": 932,
+        "end": 1012,
+        "span_sha256": "6a2fbe056b4da2413bdde40005fe5278837e98a5361c7de9615bfb84b6695314"
+      },
+      "disposition": "semantic-calibration-failure-requires-direct-editorial-source-review",
+      "runtime_approved": false
+    },
+    {
+      "batch_id": "batch-0039",
+      "record_id": "batch-0039-fact-0017",
+      "report_identity": "0f29def838f942e52c3ce6188f3b05132aaf82f9721c6449deb26600f018c164",
+      "report_sha256": "b1d16741cf255f57e29dfd29afe2b866159e14a4d9e7169ffd1038bebb82f3bd",
+      "model": "deepseek-v4-pro",
+      "effort": "max",
+      "finding": "直接复核战斗段及随后韩立继续行动，确认同归于尽的是一次性墨蛟雏角法器和宣乐护甲；Pro/max 本条已正确指出候选句主语歧义并建议修正。该单项通过不批准整批。",
+      "source": {
+        "chapter_id": "qq-21255176",
+        "start": 1400,
+        "end": 1832,
+        "span_sha256": "fd88f5112665c36f4def613cb4ec0baf5176ee67428bddc649342539124ed473"
+      },
+      "disposition": "scoped-counterexample-corrected-not-full-batch-approval",
+      "runtime_approved": false
+    },
+    {
+      "batch_id": "batch-0083",
+      "report_identity": "2e290d197fac62e2e5b42111c894c2ba470048484bb2eca0abf837fcd370ec71",
+      "report_sha256": "291251639f9191b1771fa562cdc8b56d724dd14ad74b5f2b81c14fde34ff44e7",
+      "model": "deepseek-v4-pro",
+      "effort": "max",
+      "sample_method": "预先按记录序号0/10/20/30/50/70/90/110等距抽取8条，直接读所引完整正文段；不是整批最终审定。",
+      "finding": "行动、对白与器物的8个抽样项均有相应段落，但0011的开篇理由仍写“此境界关系尚未出现”，应只指韩立此时的猜想尚未发生；0031须保留双方实力悬殊等条件，并将对当前九级裂风兽的描述与全体九级妖兽绝对战力规则分开。objects的存在状态没有被后期使用事件直接覆盖，但大量unknown仍须跨章回溯。",
+      "record_ids": [
+        "batch-0083-fact-0001",
+        "batch-0083-fact-0011",
+        "batch-0083-fact-0021",
+        "batch-0083-fact-0031",
+        "batch-0083-fact-0051",
+        "batch-0083-object-0008",
+        "batch-0083-object-0028",
+        "batch-0083-object-0048"
+      ],
+      "disposition": "scoped-sample-with-residual-qualification-and-time-issues",
+      "runtime_approved": false
+    },
+    {
+      "batch_id": "batch-0040",
+      "record_id": "batch-0040-object-0011",
+      "report_identity": "8fda1c8dab265877169c59af5b0f12f584997f60d9996d456ab2355b99813aad",
+      "report_sha256": "53f0e4066c5401392cf332a835976853694f3186eec64fd918421752b5e39d1d",
+      "model": "deepseek-v4-pro",
+      "effort": "max",
+      "finding": "直接对照qq-21325829:3076任务指派以及qq-21329806:2353韩立说明李仙师是家师，两处共同支持李化元/李仙师的同一性，未仅按姓氏合并。报告仍把角色状态的opening理由写成后文出现，存在状态unknown必须继续跨批回溯；本项只验证身份链，不批准开篇人物卡。",
+      "disposition": "scoped-identity-binding-pass-with-time-review-outstanding",
+      "runtime_approved": false
+    },
+    {
+      "batch_id": "batch-0230",
+      "report_identity": "bac78bc3af38dda68912e8203016ae02c95c86464c276a23bec837689acdf6e9",
+      "report_sha256": "62e0ab99605f1642627c8255f7ccb5cca8717ec47640f077b27f8e6cae4e047a",
+      "model": "deepseek-v4-pro",
+      "effort": "max",
+      "sample_method": "灵界未见批次按序号0/15/30/45/65/80/100/120抽取8条，逐条直接阅读所引正文段落。",
+      "finding": "地渊分层、八千玄鬼与八鬼王计划、夜绿族圣子伤亡等抽样断言有正文段落支撑；韩立人物存在与后期天鹏圣子身份已分开。对地理/术法的开篇理由仍多写未在开篇出现，不能据此排除稳定地理或已存在传承；须由跨章历史与区域编写进行回溯。数量计划不得生成已完成军队，人物后期伤亡不得提前。",
+      "record_ids": [
+        "batch-0230-fact-0001",
+        "batch-0230-fact-0016",
+        "batch-0230-fact-0031",
+        "batch-0230-fact-0046",
+        "batch-0230-object-0001",
+        "batch-0230-object-0016",
+        "batch-0230-object-0036",
+        "batch-0230-object-0056"
+      ],
+      "disposition": "scoped-spirit-sample-with-cross-chapter-time-work-outstanding",
+      "runtime_approved": false
+    }
+  ],
+  "unavailable_alternatives": [
+    {
+      "account": "openai-api",
+      "model": "gpt-6-astra",
+      "effort": "high",
+      "result": "missing-required-environment-configuration",
+      "message": "model account openai-api requires OPENAI_API_KEY",
+      "model_called": false
+    },
+    {
+      "account": "zhipu-coding-plan",
+      "model": "glm-5.3",
+      "effort": "high",
+      "result": "provider-resource-rejection",
+      "message": "余额不足或无可用资源包,请充值。",
+      "source_review_produced": false
+    },
+    {
+      "account": "zhipu-coding-plan",
+      "model": "glm-5.3-flash",
+      "effort": "high",
+      "result": "provider-resource-rejection",
+      "message": "余额不足或无可用资源包,请充值。",
+      "source_review_produced": false
+    }
+  ],
+  "production_policy": "独立审校报告保留为候选证据。已知主体、否定句及存在时间误判须进入直接原文编辑复核；结构有效或同模型多轮一致不构成最终采纳。"
+}

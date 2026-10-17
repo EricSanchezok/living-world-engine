@@ -3,6 +3,7 @@ import path from "node:path";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { fullyExtractedChapters, indexSourceReports, type ReadingBatch } from "./authoring-index";
 import { buildSourceAdjudicationEvidence, buildSourceReadingEvidence } from "./source-evidence";
+import { indexEditorialReading } from "./editorial-reading";
 
 const root = path.resolve("worlds/fanren/authoring");
 const cache = path.resolve(".livingworld-cache/fanren-sources/chapters");
@@ -44,6 +45,13 @@ for (const batch of batches) {
 const readingByBatch = new Map(readingEvidence.map(row => [row.batchId, row]));
 const adjudicationByBatch = new Map(adjudicationEvidence.map(row => [row.batchId, row]));
 const invalidByBatch = new Map(invalidAdjudications.map(row => [row.batchId, row]));
+const editorialReading = indexEditorialReading(readdirSync(path.join(root, "regions"), { withFileTypes: true })
+  .filter(entry => entry.isDirectory() && existsSync(path.join(root, "regions", entry.name, "source-reading.json")))
+  .sort((left, right) => left.name.localeCompare(right.name)).map(entry => {
+    const file = `regions/${entry.name}/source-reading.json`;
+    return { moduleId: entry.name, file, report: read(file) };
+  }), body);
+saveLines("coverage/editorial-source-reading.jsonl", editorialReading.entries);
 saveLines("coverage/source-reading.jsonl", batches.map(batch => readingByBatch.get(batch.id) ?? {
   batchId: batch.id, status: "awaiting-source-extraction", sourceParts: batch.parts, approvedForRuntime: false }));
 saveLines("coverage/source-adjudication.jsonl", batches.map(batch => adjudicationByBatch.get(batch.id) ?? invalidByBatch.get(batch.id) ?? {
@@ -65,7 +73,10 @@ const sourceEvidence = { format_version: 1, status: "source-evidence-not-editori
       unresolvedIssues: adjudicationEvidence.reduce((sum, row) => sum + row.residual.unresolvedIssues, 0),
       unresolvedIdentities: adjudicationEvidence.reduce((sum, row) => sum + row.residual.unresolvedIdentities, 0),
       omissions: adjudicationEvidence.reduce((sum, row) => sum + row.residual.omissions, 0) } },
-  note: "完整输入和调用证据与逐条来源裁决分别记录；均不改变 read/reviewed，也不授予开篇事实或运行批准。剩余问题须由具体编辑处置解决。" };
+  editorialReading: { fingerprintBoundEntries: editorialReading.entries.length,
+    uniqueFingerprintBoundChapters: editorialReading.uniqueFingerprintBoundChapters,
+    invalidEntries: editorialReading.invalid, unboundMentions: editorialReading.unbound },
+  note: "完整输入、模型裁决与编辑直接阅读声明分别记录；指纹验证绑定所读版本，不将所用锚点二读等同全章事实审定。均不改变 read/reviewed，也不授予开篇事实或运行批准。剩余问题须由具体编辑处置解决。" };
 save("coverage/source-status.json", sourceEvidence);
 const regions = read("coverage/regional-plan.json") as { modules: Array<{ id: string; realm: string; search_terms: string[] }> };
 const mentions = regions.modules.map(region => ({ moduleId: region.id, status: "lexical-leads-not-reviewed-facts",
@@ -96,6 +107,8 @@ const summary = { format_version: 1, status: "provisional-not-canonical", accept
   reviewedChapters: chapters.filter(chapter => chapter.reviewed).length, candidateSubjects: index.subjects.length,
   sourceReadingBatches: readingEvidence.length, sourceAdjudicationBatches: adjudicationEvidence.length,
   invalidSourceAdjudications: invalidAdjudications.length,
+  editorialReadingChapters: editorialReading.uniqueFingerprintBoundChapters,
+  invalidEditorialReadingEntries: editorialReading.invalid.length,
   candidateFacts: index.facts.length, issues: index.issues.length, canonicalSubjects: 0,
   namesWithMultipleCandidates: index.names.filter(name => name.candidateIds.length > 1).length,
   regionalModules: regions.modules.length, regionQueriesNotFound: mentions.flatMap(region => region.terms.filter(term => term.matchingChapters === 0).map(term => ({ moduleId: region.moduleId, term: term.term }))),

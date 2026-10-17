@@ -1,0 +1,253 @@
+{
+  "format_version": 1,
+  "repairs": [
+    {
+      "id": "missing-opening-1077",
+      "chapter_id": "qq-26497309",
+      "status": "adopted-working-text",
+      "working_version": "candidate-2fc16984+hjwzw-1077-prefix-v1",
+      "base_sha256": "e289d15fdbca7a946134fa91dc83d6a4a00d4d3f2f22a4d44847a99a73272431",
+      "reviewer": "Codex source editor: paragraph collation on 2026-10-17",
+      "reviewed_at": "2026-10-17",
+      "notes": [
+        "逐段阅读HJWZW的26段开头、官方预览、fundgao对应缺段，并检查与候选冰墙描写的连接处；此条审定仅限缺段插入，不代表全书版本审定。",
+        "插入原始繁体字节对应的Unicode区间，保留异写；不进行模型润色、繁简转换或猜测性纠错。原候选2197字全部保留。",
+        "官方预览仅覆盖开头约300字，可确认访问白瑶怡、任姓修士引路和传音符；其余开头以HJWZW与fundgao交叉对照，版本独立性没有证明。",
+        "HJWZW有“心神沉浸火芒忙中”“第一到北冥岛”“收獲了。。”等可见异写；fundgao有“岁在下”“在宅异常”等错写，且后段重复和截断，因此不整章采用fundgao。",
+        "HJWZW后文与原候选在措辞、标点和分段上有差异；本修补仅填补缺失开头，余下差异没有静默抹平。"
+      ],
+      "insertions": [
+        {
+          "at": 0,
+          "source": {
+            "id": "hjwzw-1077",
+            "path": "hjwzw-1077.txt",
+            "sha256": "594eb8100aaa9267e40fb9ab1f24d876066c004fc1266a10965bb79f2a1f412b"
+          },
+          "start": 0,
+          "end": 1038,
+          "sha256": "f3eb71016fb5da776ec63fd46b60ebc19e49df60496507b7e8e84d15bb0c2729"
+        }
+      ],
+      "result_sha256": "04714158d1589601f32c4ccc22e0d86768f5e9831ca1e830e88120af2a0862e5"
+    },
+    {
+      "id": "missing-ending-1117",
+      "chapter_id": "qq-26772204",
+      "status": "adopted-working-text",
+      "working_version": "candidate-2fc16984+quanben-1117-tail-v1",
+      "base_sha256": "2f420413c50c2338f20d07932e4ae6c3621ff87395fb7f0ef1a757d9f66a3509",
+      "reviewer": "Codex source editor: paragraph collation on 2026-10-17",
+      "reviewed_at": "2026-10-17",
+      "notes": [
+        "逐段阅读全本小说网第1117章末尾12段，并与fundgao-1202合并章前段对照：候选在冰凤发动攻击处突然结束，缺少张口喷出白濛濛劲风、乾蓝冰焰融化冰锥、巨爪与巨浪相撞、火龙束缚冰爪的连续动作。第1118章开头的惊咦及后续空间神通因此失去前文衔接。",
+        "仅采用公开第三来源缺失结尾595个Unicode字符（含段间换行），候选全部2596个Unicode字符保持原样；采用范围不包含第1118章。原候选字节以SHA命名存入chapters/revisions/qq-26772204/，修补后仅batch-0175的正文区间及摘要指纹改变。",
+        "fundgao对应块把第1118章标题写为“第一干一百一十八章空间神通”并与前章合并，是对照源的边界问题；但边界问题之外确有候选漏文，两类问题分别记录。第三来源与fundgao的独立性未证明，不称官方完整版本。",
+        "保留第三来源原始“紫萌萌”“三十余丈搞的巨浪”“韩力”等异写，不用模型纠错覆盖来源；这些字词须在事实采纳时明确核对对象与上下文。官方仅有开头预览，目录字数只能作缺段线索，不能独立证明尾段文字。"
+      ],
+      "insertions": [
+        {
+          "at": 2596,
+          "source": {
+            "id": "quanben-1117",
+            "path": "quanben-1117.txt",
+            "sha256": "6beba3679a4fa41452902ce3321e686d24dafa61ae1bda12e9c2e78bb4387a30"
+          },
+          "start": 2485,
+          "end": 3080,
+          "sha256": "45da663526d5a13d4d2e30cfd4ae7a15d3f0df409f97178edc78deae7211e602"
+        }
+      ],
+      "result_sha256": "cb9f341081d233c1b76459902c06e95f3fae0540cad35cb9df1b449181e9ddde"
+    },
+    {
+      "id": "missing-segment-499",
+      "chapter_id": "qq-22454418",
+      "status": "adopted-working-text",
+      "working_version": "candidate-2fc16984+collated-499-gap-v1",
+      "base_sha256": "cd8625c1620d333f0f096655cee978353b7e043b9eae7ea50316a48355e006fe",
+      "reviewer": "Codex source editor: paragraph collation on 2026-10-17",
+      "reviewed_at": "2026-10-17",
+      "notes": [
+        "缺少停遁、观察港口攻防的三句，原候选直接从赶路跳到“看这声势”；原样插入，不改其后的上千修士、阵法和双方战斗叙述。",
+        "逐句阅读候选缺口前后、fundgao额外片段及标题核验后的全本小说网同章正文。插入范围之外的原候选保持原样，原始字节、来源段落和异写均可追溯。两对照源独立性未证明，不宣称官方全文或全书完成校勘。"
+      ],
+      "insertions": [
+        {
+          "at": 2200,
+          "source": {
+            "id": "quanben-499",
+            "path": "quanben-priority/qq-22454418-501.txt",
+            "sha256": "cc7aff6f418e6da781184363ba4bac9f1034f601dea5bd0d5063664b22e49225"
+          },
+          "start": 2158,
+          "end": 2240,
+          "sha256": "f2015887941349c288868a9bf9022ba20b1760f92ca38e4aa984f1f63628fb12"
+        }
+      ],
+      "result_sha256": "b1963c9983e3cfaf07d12d9f8d2a94a8b27e7b6e25cad2f1dabf78c647efce34"
+    },
+    {
+      "id": "missing-segment-635",
+      "chapter_id": "qq-23223484",
+      "status": "adopted-working-text",
+      "working_version": "candidate-2fc16984+collated-635-gap-v1",
+      "base_sha256": "a523b0359125f78574dcb42cf3c803154eb12ed974e38a0ca142494bc25d3806",
+      "reviewer": "Codex source editor: paragraph collation on 2026-10-17",
+      "reviewed_at": "2026-10-17",
+      "notes": [
+        "缺少百里内修士承受结婴灵压、炼气期呼吸困难、打坐抗拒及区域外感应的五段。fundgao与全本637页均有此内容；选fundgao原始片段保留“震荡”，全本对应字被替为星号。候选总述“有成千上万的修仙者也发现了异常”保留。",
+        "逐句阅读候选缺口前后、fundgao额外片段及标题核验后的全本小说网同章正文。插入范围之外的原候选保持原样，原始字节、来源段落和异写均可追溯。两对照源独立性未证明，不宣称官方全文或全书完成校勘。"
+      ],
+      "insertions": [
+        {
+          "at": 393,
+          "source": {
+            "id": "fundgao-635-segment",
+            "path": "fundgao-comparison/chapters/fundgao-0684.txt",
+            "sha256": "089305747988e52f125289940149128e33403154a8d987844ec9a40d5b08393e"
+          },
+          "start": 423,
+          "end": 682,
+          "sha256": "1c5bb9d1c24e23c49539647853ba91d7edd1a250956f4cfba626511062cb10e3"
+        }
+      ],
+      "result_sha256": "dc4907319e042420f61021d3d4a1831681b31715e4a08c5aa3d4014388ea018a"
+    },
+    {
+      "id": "missing-segment-818",
+      "chapter_id": "qq-24559787",
+      "status": "adopted-working-text",
+      "working_version": "candidate-2fc16984+collated-818-gap-v1",
+      "base_sha256": "90663e3239ab7a0bb871500903099f6604cccb749ad398ba0770cec57fbca972",
+      "reviewer": "Codex source editor: paragraph collation on 2026-10-17",
+      "reviewed_at": "2026-10-17",
+      "notes": [
+        "候选从“两片光霞”开头而缺其先行对象；第三来源和fundgao均明确火蟾断首与躯体伤口放出两片光霞。仅补开篇一段。",
+        "逐句阅读候选缺口前后、fundgao额外片段及标题核验后的全本小说网同章正文。插入范围之外的原候选保持原样，原始字节、来源段落和异写均可追溯。两对照源独立性未证明，不宣称官方全文或全书完成校勘。"
+      ],
+      "insertions": [
+        {
+          "at": 0,
+          "source": {
+            "id": "quanben-818",
+            "path": "quanben-priority/qq-24559787-820.txt",
+            "sha256": "fe339f93178d5f9e5bce23d82da2d793ffe8db21ef07bad21bc21762621acc9c"
+          },
+          "start": 0,
+          "end": 74,
+          "sha256": "9a9fd5df4da20a21333b39bdba3c48c82faf900ea96bedf736c1370b3962654f"
+        }
+      ],
+      "result_sha256": "b0b6266aa29bbb4093b9fa62e2c310c69b53b0c2dd4e31d39743508f76a67d64"
+    },
+    {
+      "id": "missing-segment-1068",
+      "chapter_id": "qq-26431671",
+      "status": "adopted-working-text",
+      "working_version": "candidate-2fc16984+collated-1068-gap-v1",
+      "base_sha256": "44717d25633adc6c457b7651f92755b1c1dcf09eafcef63942ce6090dbd70180",
+      "reviewer": "Codex source editor: paragraph collation on 2026-10-17",
+      "reviewed_at": "2026-10-17",
+      "notes": [
+        "缺少爆裂声、韩立飞往祭坛、运转明清灵目穿透魔气及黑色深洞的五段，导致候选“此骷髅”缺先行对象。保留来源“遗落”“百余长广”“黑骷髅”“期内”等异写，相关器物/地形不可据错字新增骷髅实体；该处后续“黑渊”也须语义核对。",
+        "逐句阅读候选缺口前后、fundgao额外片段及标题核验后的全本小说网同章正文。插入范围之外的原候选保持原样，原始字节、来源段落和异写均可追溯。两对照源独立性未证明，不宣称官方全文或全书完成校勘。"
+      ],
+      "insertions": [
+        {
+          "at": 578,
+          "source": {
+            "id": "quanben-1068",
+            "path": "quanben-priority/qq-26431671-1071.txt",
+            "sha256": "3671707dc34e25b12137b979002459346e3a754faa1abd38791a88bfaa8145c2"
+          },
+          "start": 555,
+          "end": 731,
+          "sha256": "3d436d2d6030c0924164cbd0889fee80b8046791f4b477439d7ae2993b7ba700"
+        }
+      ],
+      "result_sha256": "d96c5c03108de899525cdc00211dd011f5731b093c262806f136eb8980e5b3b5"
+    },
+    {
+      "id": "missing-segment-1106",
+      "chapter_id": "qq-26717131",
+      "status": "adopted-working-text",
+      "working_version": "candidate-2fc16984+collated-1106-gap-v1",
+      "base_sha256": "54320d7ff04f67ac6ec8a2bcc4992cc4fa8322217045469ea06dae6ec05f0546",
+      "reviewer": "Codex source editor: paragraph collation on 2026-10-17",
+      "reviewed_at": "2026-10-17",
+      "notes": [
+        "候选在韩立“略一犹豫后”直接接“化为一枚…球”，漏掉搓手、辟邪神雷缠绕并禁锢黑焰的完整动作，导致主语和资源动作不明。只补漏段；第三来源上文也另有漏文，故不整章替换。原候选“死球”与两对照源“丝球”的异文保留登记。",
+        "逐句阅读候选缺口前后、fundgao额外片段及标题核验后的全本小说网同章正文。插入范围之外的原候选保持原样，原始字节、来源段落和异写均可追溯。两对照源独立性未证明，不宣称官方全文或全书完成校勘。"
+      ],
+      "insertions": [
+        {
+          "at": 1145,
+          "source": {
+            "id": "quanben-1106",
+            "path": "quanben-priority/qq-26717131-1109.txt",
+            "sha256": "c718b4f703d1c0be0ec448333531b17d9636dcc72d3471ae906259c761745a24"
+          },
+          "start": 1051,
+          "end": 1102,
+          "sha256": "ec4c4dca05df34f197832ee79869b6489c5d95901b7fae358bf6ea343e02c4b9"
+        }
+      ],
+      "result_sha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da"
+    },
+    {
+      "id": "missing-segment-1165",
+      "chapter_id": "qq-27092278",
+      "status": "adopted-working-text",
+      "working_version": "candidate-2fc16984+collated-1165-gap-v1",
+      "base_sha256": "bf412ad20cbd59211ac96ec3979393c599cb1a1b5c3619a6a86641fe3055f5c6",
+      "reviewer": "Codex source editor: paragraph collation on 2026-10-17",
+      "reviewed_at": "2026-10-17",
+      "notes": [
+        "候选从“古传送阵”直接接“未被激发的时候”，缺少反弹法器、众人吃惊和“若是古传送阵”的条件引导；该漏段影响传送阵是否能被破坏的适用条件，必须补齐。",
+        "逐句阅读候选缺口前后、fundgao额外片段及标题核验后的全本小说网同章正文。插入范围之外的原候选保持原样，原始字节、来源段落和异写均可追溯。两对照源独立性未证明，不宣称官方全文或全书完成校勘。"
+      ],
+      "insertions": [
+        {
+          "at": 1223,
+          "source": {
+            "id": "quanben-1165",
+            "path": "quanben-priority/qq-27092278-1168.txt",
+            "sha256": "d9fb268ac64c6b0a8b5fa89bad5fbe39d3526318f94d2fe129ce4b331c84c803"
+          },
+          "start": 1172,
+          "end": 1235,
+          "sha256": "f00afbc853f65f18fce71da6b094c115cbf1bd6c0b7295d9a4b6f515f89fbcaa"
+        }
+      ],
+      "result_sha256": "282c722c517d46f92ed93872b0f80b544b6ed031b59239c83441154d46c46fdf"
+    },
+    {
+      "id": "missing-segment-1944",
+      "chapter_id": "qq-35529001",
+      "status": "adopted-working-text",
+      "working_version": "candidate-2fc16984+collated-1944-gap-v1",
+      "base_sha256": "79502645fb55572b0a409b1f459e5ce01c92bc2e3ec2cb0ac62665ef9173c965",
+      "reviewer": "Codex source editor: paragraph collation on 2026-10-17",
+      "reviewed_at": "2026-10-17",
+      "notes": [
+        "缺少大汉质疑提取混沌之气方法的一句对白，导致下一句“你这话什么意思”失去回应对象。此章尚未提取；修补后必须按新指纹读取。",
+        "逐句阅读候选缺口前后、fundgao额外片段及标题核验后的全本小说网同章正文。插入范围之外的原候选保持原样，原始字节、来源段落和异写均可追溯。两对照源独立性未证明，不宣称官方全文或全书完成校勘。"
+      ],
+      "insertions": [
+        {
+          "at": 2022,
+          "source": {
+            "id": "quanben-1944",
+            "path": "quanben-priority/qq-35529001-1947.txt",
+            "sha256": "5930cd52b2a25c965b6ad81c4c1c0863883579823f5f9a80eb7141c6b1d258fa"
+          },
+          "start": 1946,
+          "end": 2000,
+          "sha256": "51f677c706b662b3556fbe1f3a86245986573e9ec223ac0c116c4b506652d93d"
+        }
+      ],
+      "result_sha256": "e8ec6f25ab6ff697463bfa0094f650927a8e458c114a32ab41e56514df3ce926"
+    }
+  ]
+}

@@ -1,0 +1,2509 @@
+{
+  "format_version": 1,
+  "reviewer": "Codex source editor, 2026-10-17",
+  "scope": "source-quality-disposition-not-canonical-approval",
+  "cases": [
+    {
+      "chapter_id": "qq-25827752",
+      "comparison_id": "fundgao-1045",
+      "comparison_body_sha256": "16f80d752352f12db61a7cedf9f4991820c111dca0bcefbb238e3ee98547d5c1",
+      "comparison_characters": 5,
+      "review_scope": "entire-short-comparison-body",
+      "kind": "book-title-only",
+      "status": "comparison-body-excluded-from-literary-evidence",
+      "working_text_changed": false
+    },
+    {
+      "chapter_id": "qq-39833059",
+      "comparison_id": "fundgao-2278",
+      "comparison_body_sha256": "11b4817b368f04939cec132b2decdd44c12e873131bb291dbd9e3d16b6a7f2ee",
+      "comparison_characters": 22,
+      "review_scope": "entire-short-comparison-body",
+      "kind": "site-status-message",
+      "status": "comparison-body-excluded-from-literary-evidence",
+      "working_text_changed": false
+    },
+    {
+      "chapter_id": "qq-40593355",
+      "comparison_id": "fundgao-2325",
+      "comparison_body_sha256": "ee33b68bd7583c5f3347a2b05184c1768423d82ec6ce0fe3886230a8ad8b2974",
+      "comparison_characters": 11,
+      "review_scope": "entire-short-comparison-body",
+      "kind": "volume-title-only",
+      "status": "comparison-body-excluded-from-literary-evidence",
+      "working_text_changed": false
+    },
+    {
+      "chapter_id": "qq-26790881",
+      "kind": "disputed-extra-techniques",
+      "status": "retain-working-text-after-scoped-collation",
+      "review_scope": "identified-substantive-comparison-differences-and-adjacent-context",
+      "observation": "fundgao 在第1120章额外插入破天剑、伤灵剑和破天诛仙等长段；逐句阅读候选、该插段以及标题核对后的第三来源，第三来源对应段与候选连贯且不含额外神通。保留候选，本项不采纳额外招式作为原著事实；两对照源独立性未证明，不宣称官方否定。",
+      "secondary_comparison": {
+        "chapter_id": "qq-26790881",
+        "number": 1123,
+        "url": "https://www.quanben.io/n/fanrenxiuxianzhuan/1123.html",
+        "title": "第1120章 传送之战",
+        "html_sha256": "ccc3486322b504d9decfa5f6bc8a6d2d7774399680afde0a5561ccab927b0918",
+        "body_sha256": "5b3b6262f4ba8f8bd60f61fd1d4af9d2686fdfb97dc658c8dd1ed85da60d0cdc",
+        "characters": 3135,
+        "status": "unreviewed-public-comparison"
+      },
+      "difference_references": [
+        {
+          "comparison_id": "fundgao-1204",
+          "normalized_span": [
+            1884,
+            2301
+          ],
+          "span_sha256": "eab181f19a9e2c69f102c2f0c1645867aaae0b88a23d6414d76a6e3ad8d8fcad"
+        },
+        {
+          "comparison_id": "fundgao-1204",
+          "normalized_span": [
+            2800,
+            2842
+          ],
+          "span_sha256": "49fd3c9883cd302b5d1a5bff05d67c1752076382e124fb6461f9e97fd4d7a438"
+        }
+      ],
+      "working_text_changed": false
+    },
+    {
+      "chapter_id": "qq-27568481",
+      "kind": "mixed-or-rewritten-battle",
+      "status": "retain-working-text-after-scoped-collation",
+      "review_scope": "identified-substantive-comparison-differences-and-adjacent-context",
+      "observation": "fundgao 对第1229章有大量五子魔、飞天魔尸、血魂镯等扩写和错位；精确锚点涉及前章，第三来源同章对话及动作结构支持候选顺序。保留候选，不把额外长段直接并入世界事实；尚不据此判定整份版本来源。",
+      "secondary_comparison": {
+        "chapter_id": "qq-27568481",
+        "number": 1231,
+        "url": "https://www.quanben.io/n/fanrenxiuxianzhuan/1231.html",
+        "title": "第1229章 斩杀大修",
+        "html_sha256": "460a1cbdedbbea78da67b0e9762b0332d8b3b02f06566b40481525c9f6462147",
+        "body_sha256": "569f2747a5c3fcff3ea8c696a892e7ec3147aa89342b488cb2e356307a6bab5e",
+        "characters": 3215,
+        "status": "unreviewed-public-comparison"
+      },
+      "difference_references": [
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            95,
+            241
+          ],
+          "span_sha256": "4c534e72c087398e114d0136b92aaf8859be5a4a31cb362e975acbb5c1b8decc"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            263,
+            314
+          ],
+          "span_sha256": "80ec889bf8c752d12e90332aba7b961e49a800af34c5fdefeb7613b1f58896b1"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            383,
+            455
+          ],
+          "span_sha256": "652de4d1751792e5925b42a583bde21b5f911ca0f697684cf2adecc0d596f046"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            473,
+            568
+          ],
+          "span_sha256": "a90b780dd9f7bd6d0eaf0d6b2ef0148c7c44f4831328f8de1616422fcc11b341"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            611,
+            681
+          ],
+          "span_sha256": "92970fe50d4180965131138d64304f65a598a208aa248dcaa042f2addd4ac6fa"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            683,
+            894
+          ],
+          "span_sha256": "c1e6ce84838c29ccadcf01006cda02b646b9002ec58e0f3f8dd018e8a06f1a62"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            1026,
+            1095
+          ],
+          "span_sha256": "3fe2c76a470ef045440656f668a15e0db0e93a8f65913a5a972ae99792bbc75e"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            1103,
+            1242
+          ],
+          "span_sha256": "589e35cad8210b645d06b97b0fde6d040b284e3bddd18f05d1cbf92c139b75b2"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            1327,
+            1441
+          ],
+          "span_sha256": "b427a58b52bbb72a968bfc3854ffdd1da9d4cc4d00e0d3cab04ffdb05ce4f8cb"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            1443,
+            1554
+          ],
+          "span_sha256": "d63e5e3c0f490cfc5f7998aa58dde2f76bf5e2be9380d1464bc5df0f1338b4ab"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            1612,
+            1666
+          ],
+          "span_sha256": "e345cfc572df98b288c6b88f9c4f0e7454cd3a5c158241a14dfb467405e30a5d"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            1673,
+            1717
+          ],
+          "span_sha256": "0db171c120f73e595d3c4632fa9c489f58b8241388a88c7d3646211c72ce5ef5"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            1734,
+            1832
+          ],
+          "span_sha256": "f936c053b768e2304d2605950132123d4b515507b94c97f694d64bb37d9e53e2"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            1849,
+            2102
+          ],
+          "span_sha256": "c3ca493c8466e7431fd36c2bf749d3247c3fa74957a0522daf8e66dce3240c78"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            2217,
+            2384
+          ],
+          "span_sha256": "1f0384ee62d095e3cd751e76a548293d18b3fa5f676e740bf8c8405dd87ea523"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            2415,
+            2561
+          ],
+          "span_sha256": "8c2a2029ede808438d4abec76035cb9901e6585cf3bbd7cda0b420c81b1df183"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            2596,
+            2637
+          ],
+          "span_sha256": "4ad2515bda9a6e3d0b4c5aac9ab730d0ddc53e14cf51f2391e1863bb1d819d15"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            2638,
+            2704
+          ],
+          "span_sha256": "07405348bc33e4df79ff61b0f604647fa54394a9ced210339a29ea54c66f55fc"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            2706,
+            2748
+          ],
+          "span_sha256": "f62a2a00e2c6387ca81f4ab692d804dca9d16f4f3a2210d99bbcc033e1360664"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            2749,
+            2881
+          ],
+          "span_sha256": "0cd5fcfc503b00b6e3ebbe9366ef8d762d6c591085d83558767dc0cf1d71a058"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            2901,
+            2981
+          ],
+          "span_sha256": "927f6f6d42e3c7ac7ab11e5bb14a93d556e9565831790894d54c5213636b8654"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            2983,
+            3050
+          ],
+          "span_sha256": "78d64ad2526deb23e769cd6b0a16b500712b4e854c38f46b304b272f550d8a23"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            3122,
+            3301
+          ],
+          "span_sha256": "5e71a3096f6205a0e58336363a3b9cf48a4823177d5c1d04d0d72db490b49db1"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            3349,
+            3907
+          ],
+          "span_sha256": "288291ab60c16cca364c60d7aa892394f053b4217a084507101836430f028b8a"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            3983,
+            4037
+          ],
+          "span_sha256": "e5a7946142c251cfa7cbb008849c3424b18fd0417c46ddfba87c316f3d3234b3"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            4053,
+            4212
+          ],
+          "span_sha256": "ace579c71976e108a0f381ff648b2e797141b523473b045b1e888f036b6e0484"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            4270,
+            4324
+          ],
+          "span_sha256": "9f7ef39cc7bed49aac65004841a2f551063e7b325acc5958269168e558b60b13"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            4440,
+            4498
+          ],
+          "span_sha256": "ae7e50ff57c1f97426b2b782744fb610c9fbb8f239d80ed7baa9fbce4ed05637"
+        },
+        {
+          "comparison_id": "fundgao-1314",
+          "normalized_span": [
+            4500,
+            4566
+          ],
+          "span_sha256": "2ea31b9324f5b5e8789a5f8bea998a8a802a22f4a03c0bf253e2527647835892"
+        }
+      ],
+      "working_text_changed": false
+    },
+    {
+      "chapter_id": "qq-27320320",
+      "kind": "duplicate-dialogue",
+      "status": "retain-working-text-after-scoped-collation",
+      "review_scope": "identified-substantive-comparison-differences-and-adjacent-context",
+      "observation": "fundgao 和第三来源重复同一轮鬼灵门是否知道木灵珠弊处的问答，候选保留一次；两对照源还同时少了此前一段。读取对应上下文后拒绝将重复问答补入候选；不以两个相似网页证明独立证据。",
+      "secondary_comparison": {
+        "chapter_id": "qq-27320320",
+        "number": 1198,
+        "url": "https://www.quanben.io/n/fanrenxiuxianzhuan/1198.html",
+        "title": "第1195章 木生珠",
+        "html_sha256": "44e76a846caf519c8177071d16f4829f2b92eee5b14a5426bbe6660bb1a65257",
+        "body_sha256": "2366e8deb0c00b71845bfc8000706ea1176ad24ac0375e87bbaf409ac153dde0",
+        "characters": 3146,
+        "status": "unreviewed-public-comparison"
+      },
+      "difference_references": [
+        {
+          "comparison_id": "fundgao-1281",
+          "normalized_span": [
+            1321,
+            1417
+          ],
+          "span_sha256": "eb90c2d3ca36812055646eaa953c909df48c5c66f228a727db57904ac596e00c"
+        },
+        {
+          "comparison_id": "fundgao-1281",
+          "normalized_span": [
+            1418,
+            1478
+          ],
+          "span_sha256": "25debfae4ca1ad0e92ce937cf95052aedd35e0ff23c8afb44e25d7dd55a8e18c"
+        }
+      ],
+      "working_text_changed": false
+    },
+    {
+      "chapter_id": "qq-31940840",
+      "kind": "following-chapter-merged",
+      "status": "retain-working-text-after-scoped-collation",
+      "review_scope": "identified-substantive-comparison-differences-and-adjacent-context",
+      "observation": "fundgao 第1695章尾部合并下一章的大段破禁与分宝叙事，第三来源同章终点支持候选边界；不把下一章重复插入本章。该裁决仅确定所查边界，不批准整章全部异写。",
+      "secondary_comparison": {
+        "chapter_id": "qq-31940840",
+        "number": 1701,
+        "url": "https://www.quanben.io/n/fanrenxiuxianzhuan/1701.html",
+        "title": "第1695章 破禁",
+        "html_sha256": "77916f6ba1ca218acb9c1d3e94d826c93b87e77e619105d5b3350ca8e650daf0",
+        "body_sha256": "b0207b371bb79c3802b6b122aeaa62c10ac7aac59f203adbab3f9c5789cdbaa1",
+        "characters": 3104,
+        "status": "unreviewed-public-comparison"
+      },
+      "difference_references": [
+        {
+          "comparison_id": "fundgao-1782",
+          "normalized_span": [
+            2701,
+            2807
+          ],
+          "span_sha256": "3b6f86223734a12da03d35acd13e61d8ed417fa8cd284c7a466b0a04caba53f4"
+        },
+        {
+          "comparison_id": "fundgao-1782",
+          "normalized_span": [
+            2817,
+            2877
+          ],
+          "span_sha256": "42f25eac7cdd1c79c7c757ffc36ca36d35aa31facf48885a5dff2fec0f493908"
+        },
+        {
+          "comparison_id": "fundgao-1782",
+          "normalized_span": [
+            2906,
+            2978
+          ],
+          "span_sha256": "badd2406b13695cf190f691c32309aa37c3711c90f7770c5890a9da153ffd41d"
+        },
+        {
+          "comparison_id": "fundgao-1782",
+          "normalized_span": [
+            2982,
+            5511
+          ],
+          "span_sha256": "da5caeee6f41022066b35639c88749110ef9c639575c641a20085e851af2098a"
+        }
+      ],
+      "working_text_changed": false
+    },
+    {
+      "kind": "same-character-name-variant",
+      "chapter_ids": [
+        "qq-26844480",
+        "qq-27018482"
+      ],
+      "names": [
+        "凌天雷",
+        "凌啸风"
+      ],
+      "status": "preserve-single-identity-with-name-variant",
+      "review_scope": "named-paragraphs-and-surrounding-spousal-lineage-context",
+      "observation": "前章天星双圣男方自称凌天雷，后章温青把夫君介绍为凌啸风；夫妻、女儿玉灵、元磁神光与元磁山及星宫主背景衔接一致。本项保留同一角色与原文异名，不能因姓名变化生成两名双圣。名字差异在同一工作版本内部存在，尚未据此判定哪个版本修改为正名。",
+      "evidence": [
+        {
+          "chapter_id": "qq-26844480",
+          "source_sha256": "3ba737a217d168d978eb5bbaf6b6801d9154af7c514660ecac0974bbff1f1e28",
+          "start": 357,
+          "end": 683,
+          "span_sha256": "c9d955fc39ea2136f0fbb8c7d89535558147ec3d1352ae689224884cc9d3cc76"
+        },
+        {
+          "chapter_id": "qq-27018482",
+          "source_sha256": "b72fec3457428bc4f0d55e9aded8804ceb3edc243a536b8fb6dbe8dd56a93dc5",
+          "start": 371,
+          "end": 466,
+          "span_sha256": "30a24964eac9012a2e274683954d314192b57187b9314a5440446f5035568346"
+        }
+      ],
+      "working_text_changed": false,
+      "runtime_approved": false
+    },
+    {
+      "chapter_id": "qq-30333785",
+      "kind": "speaker-designation-anomaly",
+      "status": "retain-source-anomaly-with-scoped-world-interpretation",
+      "review_scope": "anomalous-phrase-and-adjacent-dialogue-or-description",
+      "observation": "工作版与第二版均写吕夫人，问万妙丹前后连续主体是绿肤人，未发现另一名吕夫人到场证据。保留原文异常，不据此新建女性角色；原绿肤人身份由连续对话关联。",
+      "source_evidence": [
+        {
+          "source": "working",
+          "chapter_id": "qq-30333785",
+          "source_sha256": "4f3e9ca9dcedb086e786c09cfcba6a5f5d32eb7dd8455d44c4ec0396ff2ce51d",
+          "start": 356,
+          "end": 701,
+          "span_sha256": "53cd60fcf3785de709c4263381d7ea4dfac1fcd316c3b738c8076666b63eb9cb"
+        },
+        {
+          "source": "fundgao",
+          "chapter_id": "fundgao-1646",
+          "source_sha256": "a489ae1b0f5d5d7bd4fd586dedf84c921514501295c7835e09b0e19ac046ecc7",
+          "start": 270,
+          "end": 686,
+          "span_sha256": "a43d17593fff7edc9abfcf86dc5b8a3e2e482207fa04f97e986e684f7ca03ec1"
+        }
+      ],
+      "working_text_changed": false,
+      "runtime_approved": false
+    },
+    {
+      "chapter_id": "qq-30551671",
+      "kind": "reader-extraneous-label-anomaly",
+      "status": "retain-source-anomaly-with-scoped-world-interpretation",
+      "review_scope": "anomalous-phrase-and-adjacent-dialogue-or-description",
+      "observation": "工作版与第二版同写挑拣典籍的玩家，紧接着称这几名异族。世界只采用可被上下文支持的异族顾客身份，不据此引入游戏玩家或系统设定；不静默改正文。",
+      "source_evidence": [
+        {
+          "source": "working",
+          "chapter_id": "qq-30551671",
+          "source_sha256": "955f7d7e0b5eadfd543979b0e6feb4e7e65bbdcd07cb85bf559a3211dcf8e77a",
+          "start": 2050,
+          "end": 2345,
+          "span_sha256": "9de8f080583548940016b145dba82510b3cbf1aca95bb2ae85f1c856ec642f19"
+        },
+        {
+          "source": "fundgao",
+          "chapter_id": "fundgao-1667",
+          "source_sha256": "cdf4d6a3ddf939947e6581d92caae976d270078034ea0c5b5c07620025f51d01",
+          "start": 2104,
+          "end": 2408,
+          "span_sha256": "ddc20e3d7a32a739ca9db3b30fa6e1d065cc61dae2f839463e734807a9abafd5"
+        }
+      ],
+      "working_text_changed": false,
+      "runtime_approved": false
+    },
+    {
+      "chapter_id": "qq-30586228",
+      "kind": "quantity-anomaly-unresolved",
+      "status": "retain-source-anomaly-with-scoped-world-interpretation",
+      "review_scope": "anomalous-phrase-and-adjacent-dialogue-or-description",
+      "observation": "工作版与第二版均写数百椅子，目前没有可靠证据改为数把椅子。保留数量疑点，不由座椅数推导洞府常住人口、侍从或参与者数量。",
+      "source_evidence": [
+        {
+          "source": "working",
+          "chapter_id": "qq-30586228",
+          "source_sha256": "36f46330d927891ab715889f335df76292833b7d5377c91a1cc269f0d2a414a8",
+          "start": 2747,
+          "end": 3065,
+          "span_sha256": "8a9059f2bbd60710218b5e741eace9b11aa429127134e8010b251b0a9aff56eb"
+        },
+        {
+          "source": "fundgao",
+          "chapter_id": "fundgao-1670",
+          "source_sha256": "52c81fadb34e58a59ed5c2f5d48799e5018750c255d704521869ab2d9fe3afd8",
+          "start": 2837,
+          "end": 3152,
+          "span_sha256": "3073667da008e3b76f77556d7badcbdf85603e7a4f690f2a518d5eccd50d26d8"
+        }
+      ],
+      "working_text_changed": false,
+      "runtime_approved": false
+    },
+    {
+      "chapter_id": "qq-32030806",
+      "related_chapter_ids": [
+        "qq-31514996",
+        "qq-31587180",
+        "qq-32045304"
+      ],
+      "kind": "soul-versus-borrowed-body-identity-anomaly",
+      "status": "retain-source-anomaly-with-scoped-world-interpretation",
+      "review_scope": "target paragraph and earlier explicit identity narrative in both editions",
+      "working_text_changed": false,
+      "observation": "工作版与 fundgao-1791 均写“芝仙元神所化的曲儿”，不是两版异文。qq-31587180 与 fundgao-1754 则明确女童为九曲灵参元神、韩立命名曲儿；芝仙兵解后留下躯壳，曲儿能够进入该躯壳代炼灵力。qq-32045304 的白兔回述亦一致。保留原文异常，人物身份采用明确来历链：曲儿/九曲灵参与芝仙为不同主体，寄居同一躯壳不自动合并身份；本项不前置曲儿化形、芝仙兵解或躯壳归属至T0。",
+      "source_evidence": [
+        {
+          "chapter_id": "qq-32030806",
+          "role": "working",
+          "source_sha256": "77da7a052f5d24d5d1d3d51b3adeec82e8c653701dfffae73e20a31672058358",
+          "start": 2668,
+          "end": 2711,
+          "span_sha256": "3dac9d0665e75e959a695299f36300e7b2372eacd05f6e9d6642d43697932968"
+        },
+        {
+          "chapter_id": "qq-32030806",
+          "role": "comparison",
+          "source_sha256": "cc73a82d4f9484fd40df3ba963110cf8d094e908fcdcd08c9b80134828e57d15",
+          "start": 2781,
+          "end": 2823,
+          "span_sha256": "467eefe8ec7bcd1b318e08bc82bb77333933318d8114318abbfb28b5aa425958"
+        },
+        {
+          "chapter_id": "qq-31587180",
+          "role": "working",
+          "source_sha256": "55458dcfd0cdcf67cb544cc753e9cd504b44dd39a2ea42407877b4d2b1672014",
+          "start": 2477,
+          "end": 2526,
+          "span_sha256": "54a76f667b794e126fd68115b76b6fd6e533b461d594c8584907eac832e31256"
+        },
+        {
+          "chapter_id": "qq-31587180",
+          "role": "comparison",
+          "source_sha256": "8599edc2d0cb706f81495cefa554711a8e5e0693f807784160136c6e593425af",
+          "start": 2560,
+          "end": 2579,
+          "span_sha256": "8fdee1ba5133be304c998e949f7400220cc7f16c84b5a099cf3dd8b1e4ad552f"
+        },
+        {
+          "chapter_id": "qq-31587180",
+          "role": "working",
+          "source_sha256": "55458dcfd0cdcf67cb544cc753e9cd504b44dd39a2ea42407877b4d2b1672014",
+          "start": 2614,
+          "end": 2656,
+          "span_sha256": "b81870bfbbaf8e72425912900d6899d06db4873c902e2657ed7286dd9387fae7"
+        },
+        {
+          "chapter_id": "qq-31587180",
+          "role": "comparison",
+          "source_sha256": "8599edc2d0cb706f81495cefa554711a8e5e0693f807784160136c6e593425af",
+          "start": 2708,
+          "end": 2749,
+          "span_sha256": "ee49f0301b17d8e98aa28c354fb91cdccce02efccff6868ec6448dca28a5c487"
+        },
+        {
+          "chapter_id": "qq-31587180",
+          "role": "working",
+          "source_sha256": "55458dcfd0cdcf67cb544cc753e9cd504b44dd39a2ea42407877b4d2b1672014",
+          "start": 2657,
+          "end": 2744,
+          "span_sha256": "92bb131bdfeaef97d12e272335c91b3fdf82a688ebcb8a5e8b8cc9dec26381ff"
+        },
+        {
+          "chapter_id": "qq-32045304",
+          "role": "working",
+          "source_sha256": "a33b9e2142607290aca5d7fd3df631d78148fd7324707e15241dbbbb4ff24a46",
+          "start": 442,
+          "end": 514,
+          "span_sha256": "3ec1aaef682c28442103dcf5cf48b43474f509452f5289a7be71fedecd8eaec3"
+        }
+      ]
+    },
+    {
+      "chapter_id": "qq-32119986",
+      "kind": "remote-mentor-speaking-name-anomaly",
+      "status": "retain-source-anomaly-with-scoped-world-interpretation",
+      "review_scope": "complete working chapter plus comparison dialogue context",
+      "working_text_changed": false,
+      "observation": "工作版与 fundgao-1800 均在韩立、柳水儿、石昆三人分宝场景将一句说话者写作彩流罂。该句称家师和段前辈，前文又说明彩流罂和段天刃为远方索取材料的两位前辈，后文继续三人分宝及柳水儿/石昆探屏风。保留源文指称异常；运行叙事中不据此新增彩流罂在场、移动或跨界事件。若需归属该台词，按连续弟子语境推定柳水儿并显式标注推定，不宣称原字已校定。",
+      "source_evidence": [
+        {
+          "chapter_id": "qq-32119986",
+          "role": "working",
+          "source_sha256": "73d9c2c2a43844f0cf852769fab6dfa35a3c4202427138201e89d6b8778afdb8",
+          "start": 1599,
+          "end": 1654,
+          "span_sha256": "d013ccc4a4396e3cf2bc360b7f8ea5da68a1f9bd06c3b8072619250fab6edb66"
+        },
+        {
+          "chapter_id": "qq-32119986",
+          "role": "working",
+          "source_sha256": "73d9c2c2a43844f0cf852769fab6dfa35a3c4202427138201e89d6b8778afdb8",
+          "start": 1785,
+          "end": 1847,
+          "span_sha256": "6ffa7b3b5a4271ebd36b853c5a2dbb523794739608fa3a9fb3c4ec2ca62112b1"
+        },
+        {
+          "chapter_id": "qq-32119986",
+          "role": "working",
+          "source_sha256": "73d9c2c2a43844f0cf852769fab6dfa35a3c4202427138201e89d6b8778afdb8",
+          "start": 1895,
+          "end": 1920,
+          "span_sha256": "68da2b2dde2b9469f595b53e76f186892f05324b312889f8ab3f03a72b727609"
+        },
+        {
+          "chapter_id": "qq-32119986",
+          "role": "working",
+          "source_sha256": "73d9c2c2a43844f0cf852769fab6dfa35a3c4202427138201e89d6b8778afdb8",
+          "start": 2386,
+          "end": 2410,
+          "span_sha256": "12041cddb81b394ff2ffb8b21efca4ca5533a79044e9814701c667173d4ea498"
+        },
+        {
+          "chapter_id": "qq-32119986",
+          "role": "comparison",
+          "source_sha256": "bf897fc4d0555d2f1107feb2faa4854507da7de49db1618e6dc2687bb066dfc4",
+          "start": 1686,
+          "end": 1742,
+          "span_sha256": "26f09bbbdaf9a7db468ea08abe448732f4c62b4d9e5556a32b20a075723a62da"
+        },
+        {
+          "chapter_id": "qq-32119986",
+          "role": "comparison",
+          "source_sha256": "bf897fc4d0555d2f1107feb2faa4854507da7de49db1618e6dc2687bb066dfc4",
+          "start": 1885,
+          "end": 1947,
+          "span_sha256": "10a2329ddd6aadb25d50ebc0a36a8bbedbfa34e71203841a8b473995babdacc5"
+        },
+        {
+          "chapter_id": "qq-32119986",
+          "role": "comparison",
+          "source_sha256": "bf897fc4d0555d2f1107feb2faa4854507da7de49db1618e6dc2687bb066dfc4",
+          "start": 1999,
+          "end": 2023,
+          "span_sha256": "ba297533d056a28f4b9aafdfb8c44afabf1e57b6dba42cbd29b4b88115fe7670"
+        },
+        {
+          "chapter_id": "qq-32119986",
+          "role": "comparison",
+          "source_sha256": "bf897fc4d0555d2f1107feb2faa4854507da7de49db1618e6dc2687bb066dfc4",
+          "start": 2513,
+          "end": 2536,
+          "span_sha256": "955b126004dc75556620e22ca7044500d36230c0b51ce603d265e72cf90af2d8"
+        }
+      ]
+    }
+  ],
+  "boundary_leads": [
+    {
+      "chapter_id": "qq-34491060",
+      "comparison_id": "fundgao-1985",
+      "probable_content_chapter_id": "qq-34499545",
+      "status": "needs-chapter-boundary-collation"
+    },
+    {
+      "chapter_id": "qq-40630536",
+      "comparison_id": "fundgao-2326",
+      "probable_content_chapter_id": "qq-40593355",
+      "status": "needs-chapter-boundary-collation"
+    },
+    {
+      "chapter_id": "qq-45869180",
+      "comparison_id": "fundgao-2543",
+      "probable_content_chapter_id": "qq-45848465",
+      "status": "needs-chapter-boundary-collation"
+    },
+    {
+      "chapter_id": "qq-39423089",
+      "comparison_id": "fundgao-2258",
+      "probable_content_chapter_id": "qq-38553586",
+      "status": "needs-chapter-boundary-collation"
+    },
+    {
+      "chapter_id": "qq-39590639",
+      "comparison_id": "fundgao-2266",
+      "probable_content_chapter_id": "qq-38553586",
+      "status": "needs-chapter-boundary-collation"
+    },
+    {
+      "chapter_id": "qq-21288316",
+      "comparison_id": "fundgao-0321",
+      "probable_content_chapter_id": "qq-21395190",
+      "status": "needs-chapter-boundary-collation"
+    },
+    {
+      "chapter_id": "qq-27568481",
+      "comparison_id": "fundgao-1314",
+      "probable_content_chapter_id": "qq-27561987",
+      "status": "needs-chapter-boundary-collation"
+    }
+  ],
+  "phrase_checks": [
+    {
+      "chapter_id": "qq-4751679",
+      "scope": "one-numerical-phrase-not-whole-chapter",
+      "decision": "retain-working-phrase-supported-by-official-text",
+      "official_url": "https://fanrenxiuxianzhuan.bookresource.qq.com/chapter/107580/4751679/",
+      "official_html_sha256": "7a0681e0ea166625d415e57978b3f0ea6fa099d7ae911e096dccac3c90b9dedf",
+      "official_content_sha256": "237f2d15f4fb27a3d46c447e027cf5342472a900a7df9f0c31a65d320a9fcb31",
+      "official_content_span": [
+        81,
+        83
+      ],
+      "anchor_sha256": "eea9e3f390a0dd5733a7e8b6401beec7cc19520647f88d9e2fc845d539d6ade1",
+      "comparison_normalized_difference": {
+        "operation": "delete",
+        "candidate_start": 77,
+        "candidate_end": 79,
+        "comparison_start": 77,
+        "comparison_end": 77,
+        "candidate_sha256": "eea9e3f390a0dd5733a7e8b6401beec7cc19520647f88d9e2fc845d539d6ade1",
+        "comparison_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "category": "number-unit-or-time-token-needs-review"
+      },
+      "working_text_changed": false
+    },
+    {
+      "chapter_id": "qq-20019237",
+      "scope": "one-numerical-phrase-not-whole-chapter",
+      "decision": "retain-working-phrase-supported-by-official-text",
+      "official_url": "https://fanrenxiuxianzhuan.bookresource.qq.com/chapter/107580/20019237/",
+      "official_html_sha256": "8d71f420dbc3681389648379f48b617c60af627326b298895c924c4c2c1dfefd",
+      "official_content_sha256": "3bf659ed615e75bff4ec8aa96bc12ad8a9877b15804ddc8f4620556f9f2be40f",
+      "official_content_span": [
+        252,
+        254
+      ],
+      "anchor_sha256": "eea9e3f390a0dd5733a7e8b6401beec7cc19520647f88d9e2fc845d539d6ade1",
+      "comparison_normalized_difference": {
+        "operation": "delete",
+        "candidate_start": 222,
+        "candidate_end": 224,
+        "comparison_start": 220,
+        "comparison_end": 220,
+        "candidate_sha256": "eea9e3f390a0dd5733a7e8b6401beec7cc19520647f88d9e2fc845d539d6ade1",
+        "comparison_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "category": "number-unit-or-time-token-needs-review"
+      },
+      "working_text_changed": false
+    }
+  ],
+  "paratext_dispositions": {
+    "reviewer": "Codex source editor, 2026-10-17",
+    "method": "逐条阅读所有列出的完整差异片段，认定作者更新说明、求票、荐书、读者活动、平台页脚或 HTML 残片；不按相似度批准正文，不删除原始来源。normalized_span 使用 comparison-fundgao.json 中已记录的比较规范化算法。",
+    "count": 120,
+    "items": [
+      {
+        "chapter_id": "qq-20818444",
+        "comparison_id": "fundgao-0178",
+        "body_sha256": "d5c5b6710c9a5d64e98c033841e15a99ad9039a3aeeed0dc239351ceb02766a2",
+        "normalized_span": [
+          2133,
+          2191
+        ],
+        "normalized_span_sha256": "5db0046f4c589a92205a5686a98199b62c1bb887dbcb5dc5addf5c53b53b279a",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-20847141",
+        "comparison_id": "fundgao-0184",
+        "body_sha256": "701af4af279b996ecd0391c440f1dd698b0aff614637ca29e5a45f670db652bd",
+        "normalized_span": [
+          2150,
+          2202
+        ],
+        "normalized_span_sha256": "e07d6d083e0f31b9feb7e253ee4b236a795e394cdeea93340078f14a9d427750",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-20955351",
+        "comparison_id": "fundgao-0203",
+        "body_sha256": "1d5fc976c93ac355e3d2cdd830e7573920de6d8a20a44ca486937f09af68f61d",
+        "normalized_span": [
+          0,
+          41
+        ],
+        "normalized_span_sha256": "3dde4f210da88cb2b2e5ae16164b9ebbc9ecf06b236850ef51604dd22a33e381",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-21271384",
+        "comparison_id": "fundgao-0298",
+        "body_sha256": "dc0f3a7b86d8ba61ed9eeeb12dd75ca55a4f5869e98e1589cbafa831d33acd2e",
+        "normalized_span": [
+          2417,
+          2473
+        ],
+        "normalized_span_sha256": "3fc1b4f636ddf97d4c2f4ea5e8f399dd5b19f3edb3be03807e74e00dc7c73933",
+        "kind": "html-entity-or-markup-debris",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-21279326",
+        "comparison_id": "fundgao-0299",
+        "body_sha256": "4270fa5ea9b7b86da142404acd35d5f1fec797e4a69092d64053d7116c9c8eeb",
+        "normalized_span": [
+          2394,
+          2450
+        ],
+        "normalized_span_sha256": "3fc1b4f636ddf97d4c2f4ea5e8f399dd5b19f3edb3be03807e74e00dc7c73933",
+        "kind": "html-entity-or-markup-debris",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-22461244",
+        "comparison_id": "fundgao-0549",
+        "body_sha256": "9dca7d44c142cba64df2b20d4451dcc72423125c73cca98ad483bb1822ff374e",
+        "normalized_span": [
+          1412,
+          1706
+        ],
+        "normalized_span_sha256": "15804c888857c22818b5035be1875add999dd00ef1eb28af1e5b1b4c71f4d958",
+        "kind": "html-entity-or-markup-debris",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-23356666",
+        "comparison_id": "fundgao-0704",
+        "body_sha256": "59be4f52445e5985e2d0bec72d50e4348537ab0ff6632da3fbce71e907e693e0",
+        "normalized_span": [
+          2559,
+          2619
+        ],
+        "normalized_span_sha256": "f64732f492b1cf3a3cab51a8f770f5954691b4f4eff84b49f8b044ff420a1d08",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-23402160",
+        "comparison_id": "fundgao-0711",
+        "body_sha256": "db38da8fe2cb7fbb3fa13baf11f65f27fc1dcc6d1f3faeebbfb81b4bdeaabc53",
+        "normalized_span": [
+          2477,
+          2548
+        ],
+        "normalized_span_sha256": "12cac72ffc40de457ab1d23f1d79f1f7508225e7be0c43f29bb2eeed9ac13f1d",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-23413848",
+        "comparison_id": "fundgao-0713",
+        "body_sha256": "ef5b6793cbd1a7be8583a58c9da53957cabcb3a04ffeea2caa7e83d03ee17d94",
+        "normalized_span": [
+          2410,
+          2471
+        ],
+        "normalized_span_sha256": "5613b6976443e5c636cdd777df42b3b97c8275a6eddfbbb13dc96d79ad828954",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-23551923",
+        "comparison_id": "fundgao-0734",
+        "body_sha256": "f41f4923afe119323aeb5406158c43744c052e882636087fb4baca877f805283",
+        "normalized_span": [
+          2408,
+          2455
+        ],
+        "normalized_span_sha256": "d1da43278af092b63a4d90df463b93ef780e4d3a6e2684b1b61f7df718c10c4e",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-23725436",
+        "comparison_id": "fundgao-0759",
+        "body_sha256": "c385794e21e72b757cdebb971aa1e8aaeb9a92701b766a4cb1661521715342b3",
+        "normalized_span": [
+          2383,
+          2432
+        ],
+        "normalized_span_sha256": "470d2ec5aa6f38b6b9cd7513d2337b90f0225937b1054c34ab138bb11eba505a",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-23748963",
+        "comparison_id": "fundgao-0762",
+        "body_sha256": "f06b620780b3e7ca4e93f7c71a8aa24413a1b0bba5300e495d0cb09a4f179eb6",
+        "normalized_span": [
+          2373,
+          2449
+        ],
+        "normalized_span_sha256": "46ea2271b8635cbeaf4544eeeec5295a653921f214813391fad298dd19b6d910",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-24584081",
+        "comparison_id": "fundgao-0870",
+        "body_sha256": "c766b7ef3d3b1597b1fb407bb711a995459a7389384eb74b61934f2a75a32cc4",
+        "normalized_span": [
+          2744,
+          2893
+        ],
+        "normalized_span_sha256": "a684bd7361ea718557b26639cd2388a65902526d2bbed8f3e2d1026f35a70750",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-25089266",
+        "comparison_id": "fundgao-0940",
+        "body_sha256": "c3e1919f42047c3bec6b7dec2244b6208582ab24fc2417a953645aac94227c46",
+        "normalized_span": [
+          3061,
+          3116
+        ],
+        "normalized_span_sha256": "9c2a1ade5f2271e0b33362b7ef3a2662c3b8781ecf2164625848bf6c5d081730",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-25181260",
+        "comparison_id": "fundgao-0952",
+        "body_sha256": "fdaeade8dce617228d64fc47b5f11b6fc3b8ff3de4f8ea08803de6d7f16b02d6",
+        "normalized_span": [
+          2777,
+          2848
+        ],
+        "normalized_span_sha256": "e82d89548a8fe5dccc382761563aa61ea9dfb2892f9c8a3c67f7135ac5d75b1b",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-25201048",
+        "comparison_id": "fundgao-0955",
+        "body_sha256": "3bf86317b85a20ea8cc311b86901f353a62d5bb3b8b22bdbda1c08b6d8da0409",
+        "normalized_span": [
+          2728,
+          3098
+        ],
+        "normalized_span_sha256": "eac9fcfedaf5351ee0a68dd260234deee232e32856beca44d1dcd14d4096f2a1",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-25224470",
+        "comparison_id": "fundgao-0960",
+        "body_sha256": "cbfa4190945824a9caf9c714273cf08be2c016e63cd99527e1ac1684f0d327f3",
+        "normalized_span": [
+          2638,
+          2742
+        ],
+        "normalized_span_sha256": "b2b78de5f0d2c75c63a5e7cc40de07f0038e74a18b2e62e18cd2712075dd422e",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-25229107",
+        "comparison_id": "fundgao-0961",
+        "body_sha256": "0ed9b950176db528154faaa13aeca1033f814ad43fa97419a9bb874fc1f9ce72",
+        "normalized_span": [
+          2684,
+          2868
+        ],
+        "normalized_span_sha256": "dd52e6863ae7ff6467b8d78ed7c8bc6ad8a665074725602ca3436a0856c1ac63",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-25249977",
+        "comparison_id": "fundgao-0965",
+        "body_sha256": "04775dd557ba834760854964655d859e66244c3ea215398171d905f4cb524eca",
+        "normalized_span": [
+          2682,
+          2966
+        ],
+        "normalized_span_sha256": "eea6fec4354f19947cc4aec2f519667b5beb67cabb5f0a15b2ac26e00071fd9b",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-25253814",
+        "comparison_id": "fundgao-0967",
+        "body_sha256": "5b40d510967f2a4da488fdc2a80cc8d1899be66a9e12c7c1517faf227c3f8cfb",
+        "normalized_span": [
+          2799,
+          2890
+        ],
+        "normalized_span_sha256": "bdea022d940a73f253e02591af497fca3b4608d9014ca21023018687199f7149",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-25285408",
+        "comparison_id": "fundgao-0971",
+        "body_sha256": "886522f429d2c4c6293fdab75f40ffe6cb87f5a3eaf6aa1ced3a502ab3f2c7ee",
+        "normalized_span": [
+          2661,
+          2764
+        ],
+        "normalized_span_sha256": "b3ab068cb7ee23834acac19b8a2f1a8d25d86ce8293f3525f6563479e7878b54",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-25376305",
+        "comparison_id": "fundgao-0985",
+        "body_sha256": "76eca22f708c22cf8726c9e70224efca9dfa4ee29e741bbba6e6835c35cf6f3d",
+        "normalized_span": [
+          2728,
+          2797
+        ],
+        "normalized_span_sha256": "3506165c276d31439c0cf4cb7cfa8231bf84d86cf30bc2737417a594c1a3eace",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-25395636",
+        "comparison_id": "fundgao-0987",
+        "body_sha256": "c52186d2c4a99ee9353d7f156d58f87948469cc76a15aa59c42f1dcdc929225d",
+        "normalized_span": [
+          2715,
+          2785
+        ],
+        "normalized_span_sha256": "72a523e0b68325da8a50a3c2d9c108ac6835226322ebba8d3b92ea9dee9783dd",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-25783898",
+        "comparison_id": "fundgao-1039",
+        "body_sha256": "126bfeb0e68a45c922b9a48bea7eac761da5254041aff7c1cbdc179a5ead42a2",
+        "normalized_span": [
+          2685,
+          2728
+        ],
+        "normalized_span_sha256": "b7c8482c0aa508aad5eb8f9bdb7ef74274bf0425fe38ef828d41d849560c45ed",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-25922743",
+        "comparison_id": "fundgao-1061",
+        "body_sha256": "ef76936a7404fca7d44ebd26e4699c023a75ee8cc02281314c92ef1b6b60e51d",
+        "normalized_span": [
+          2766,
+          2835
+        ],
+        "normalized_span_sha256": "c21c0e0d1afd355cb74c7162301b9c62c1972ba90ade7bff0c7cdf6fdf9d4d13",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-25943726",
+        "comparison_id": "fundgao-1065",
+        "body_sha256": "ff781db94f0ceeb048b5301c2485f1af3ab644dfd2ab0baa42f17d864da96d05",
+        "normalized_span": [
+          2730,
+          2778
+        ],
+        "normalized_span_sha256": "2822f1913712773ec042f5916f62688496569a66f0ba512604016cd2262b5d3a",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-25976113",
+        "comparison_id": "fundgao-1071",
+        "body_sha256": "293ed9b45b8baba6fb85e92dcacc84f17c0f9ba588212d9b7318f2281a8e2032",
+        "normalized_span": [
+          2754,
+          2864
+        ],
+        "normalized_span_sha256": "0c05ce0a904a2b9a04bf3d3c120d3cebe5b892c0945ccd7532c3814dacd383ff",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-26019765",
+        "comparison_id": "fundgao-1081",
+        "body_sha256": "e40579a92cebd740b3116657b646a9bc60dc4a6093115b7438bd15ab77638fbc",
+        "normalized_span": [
+          2774,
+          2822
+        ],
+        "normalized_span_sha256": "7123e1e77bdda2cf9892badc0d5908ed1d1e4605527b3d75d1a74ea2decc72a7",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-26044551",
+        "comparison_id": "fundgao-1085",
+        "body_sha256": "c10e19f370389d8bd9de7306460dae6f7e6b448100ad5bba665018d4b657bea5",
+        "normalized_span": [
+          2729,
+          2795
+        ],
+        "normalized_span_sha256": "7d21326638725ee0d75b5380d4256427daffbfa51f9e8adb7d0dcb2a46f7b2f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-26062445",
+        "comparison_id": "fundgao-1087",
+        "body_sha256": "94197f7406b670beb99d7482aaa7f1075037d418edcb0f76cf2c92617fac0f54",
+        "normalized_span": [
+          2674,
+          2714
+        ],
+        "normalized_span_sha256": "6a96d63b3cacb2939beb26a2fdd3512c478482e80b99f8b4fb39f7e3de2a3248",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-26097942",
+        "comparison_id": "fundgao-1095",
+        "body_sha256": "f90341ec880e5efdf126257147150e524efc0cabb673bce44e24e53a9e5a5ea1",
+        "normalized_span": [
+          2623,
+          2697
+        ],
+        "normalized_span_sha256": "5203f78b85a5a65c626f65fcafb6d55fa19bc1441e5de46237604be2c18da0c2",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-26115136",
+        "comparison_id": "fundgao-1096",
+        "body_sha256": "242828bd83399860e51f5ef7df080e0ba4ee82bc8d58e0a1dfa5cab53c0680dd",
+        "normalized_span": [
+          2693,
+          2828
+        ],
+        "normalized_span_sha256": "32b244fba768bec88e957e06a16c63c020ef3fa346b966e8bd5a40b9748d98a0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-26169235",
+        "comparison_id": "fundgao-1106",
+        "body_sha256": "b84e8ff532c4a8f09b064b27fa1b32016246e1c6ac37b70643d1d6e07f8b01db",
+        "normalized_span": [
+          2702,
+          2758
+        ],
+        "normalized_span_sha256": "1299b89fd9fee09c150d1a61db808d3faf38fe5cd823a03fbe8dd3edcbd78fde",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-26183671",
+        "comparison_id": "fundgao-1111",
+        "body_sha256": "fac244dfb4f6088c0086be6cda7713bc6e4634b79b9329c53f7192a10ac09dff",
+        "normalized_span": [
+          2643,
+          2699
+        ],
+        "normalized_span_sha256": "dcdd4a31626e421cf3386fdf5ec782273f1a018b25c727964e742da8bbcbf798",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-26241215",
+        "comparison_id": "fundgao-1121",
+        "body_sha256": "76541002757216410668d7dab5af2554f6c4c1ff33b3e21a29cccd024594f073",
+        "normalized_span": [
+          2682,
+          2740
+        ],
+        "normalized_span_sha256": "9646903e947cf767225cb0287e94a4dce9d68f303af2b4fcc3fb606c111913f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-26248373",
+        "comparison_id": "fundgao-1122",
+        "body_sha256": "09af1173a3fb2ec6a263407f82b30e1d0822b77fe9c8b18607182c1794a51f4f",
+        "normalized_span": [
+          2679,
+          2743
+        ],
+        "normalized_span_sha256": "6b02f08c80c6af9058a330a8d40fc561373698d8f3e9f4954c15de5d202d05b5",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-26256883",
+        "comparison_id": "fundgao-1123",
+        "body_sha256": "e490774a987c6e8c26f343db36978a2a83b54101a0056e415094a59aea5b87e2",
+        "normalized_span": [
+          2705,
+          2866
+        ],
+        "normalized_span_sha256": "6b63de96974f94166ce73c9f60970d01e011a34f20c0f85a2fe955d8339dce98",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-26278179",
+        "comparison_id": "fundgao-1127",
+        "body_sha256": "e0d38181abcb45997655d33db0c7277b2e7dcff17066f875dea35ca3019121bc",
+        "normalized_span": [
+          2710,
+          2772
+        ],
+        "normalized_span_sha256": "ad712458668be78c5839c5c230a6f0000d4509537c382b8190369e8bbd3d8487",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-26323024",
+        "comparison_id": "fundgao-1134",
+        "body_sha256": "d198be20f0ffb00c1346993ce69abb032edc260e12f2f0a4ab51e01036375aad",
+        "normalized_span": [
+          2758,
+          2837
+        ],
+        "normalized_span_sha256": "22d506ee6e5291cace9373a388d2539fdbc99dfe16b9b763e64c0af1d22ab2a8",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-26631435",
+        "comparison_id": "fundgao-1180",
+        "body_sha256": "f1699c1f15df244111996c236b41a9e3faa66d90e031d228ef26720e6d0d28eb",
+        "normalized_span": [
+          2820,
+          2980
+        ],
+        "normalized_span_sha256": "faf64d68ddbf09f0488b85df3833a8ddb08ed526f0cbb958de3dc87ca2d0fac6",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-26983046",
+        "comparison_id": "fundgao-1233",
+        "body_sha256": "3e5e948fa5803241ecfc3f38776733faa3b7a84312dec7c77de77aa4fa0642a1",
+        "normalized_span": [
+          2745,
+          2800
+        ],
+        "normalized_span_sha256": "21206977e59cf5c3724c1a1f5e55c6fa002c94504ec3fdc149ee0938fc817264",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-27138078",
+        "comparison_id": "fundgao-1255",
+        "body_sha256": "d9c08934a90ee11985854c475c49a6219f273dcf33dfacd4cfcfd1700109096b",
+        "normalized_span": [
+          2720,
+          2813
+        ],
+        "normalized_span_sha256": "3806c79eb3e9fc4896bee5d6528353d8e60c70251dff949b36f1bd71c09b563b",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-27343785",
+        "comparison_id": "fundgao-1284",
+        "body_sha256": "13ade8e42c3bc5d1a82f80788a2f3d84173c1f4e3299bc35fac61bd9c997d90a",
+        "normalized_span": [
+          2800,
+          2843
+        ],
+        "normalized_span_sha256": "68b66b75f6741aa4f1b1f691f5bd452373e4dd32760bcbc43f969d7fe35e10e5",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-27553146",
+        "comparison_id": "fundgao-1312",
+        "body_sha256": "c9573522d521bccf40a155e09ead789833939622942421f01a4ebf144f6c2e96",
+        "normalized_span": [
+          2821,
+          2885
+        ],
+        "normalized_span_sha256": "be55aa9df12afd7343c85debda5293d0d1213cd6019c41af9a74afed09071c18",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-27653210",
+        "comparison_id": "fundgao-1327",
+        "body_sha256": "372d86167f16a8f844e15684a9ecbaa69bbcdaa6e134415208191577fc61d2c1",
+        "normalized_span": [
+          2671,
+          2721
+        ],
+        "normalized_span_sha256": "4444dde02e59875c4366245fa0e2377df7225340a04afa13d2c658e61a657a20",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-28023729",
+        "comparison_id": "fundgao-1375",
+        "body_sha256": "6b97ae804a875522c242482b80a38a120a144259d0869ae65a552fd2ac198d5b",
+        "normalized_span": [
+          2759,
+          2805
+        ],
+        "normalized_span_sha256": "a997343473b7243d154560d6cf279bacf4c85b3bbde39b239710a652697409df",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-28144444",
+        "comparison_id": "fundgao-1389",
+        "body_sha256": "ed40733835a77ee695a68f30c9df5a2b9c0adb41e6fadcf9ea1989763a1f76a7",
+        "normalized_span": [
+          3002,
+          3110
+        ],
+        "normalized_span_sha256": "678a78ab1fd8a44fe1d052f11dd6ca34aadbbaaff7f00a481c769b144e97f09e",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-28417303",
+        "comparison_id": "fundgao-1421",
+        "body_sha256": "62bd29ae906c354bd4531e41b7739784b11e94f74748cc8923330730d67a0c6b",
+        "normalized_span": [
+          2664,
+          2841
+        ],
+        "normalized_span_sha256": "e6bf0d871806e9ba355af93c62abe04173791ac04d305ca872969eccd3e809f2",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-28503620",
+        "comparison_id": "fundgao-1428",
+        "body_sha256": "1fe399c990e93d069f7dc75b283f8de30b0cac2bdd9bdac2d92f278b99f8a41e",
+        "normalized_span": [
+          2847,
+          3067
+        ],
+        "normalized_span_sha256": "815652d765fc993b19f1d607b01e0bdf1df029da796d00b1be564f2e4e5595db",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-28711247",
+        "comparison_id": "fundgao-1446",
+        "body_sha256": "624ed8c8b34bcd05ec411adb15b8075d6a050a7311fab5c1e98c95f82dfd5688",
+        "normalized_span": [
+          2704,
+          2756
+        ],
+        "normalized_span_sha256": "7132590b8b4d8494f8a19a45bde753a472e0b539b115e507b6d328fc24b8e0ac",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-29006788",
+        "comparison_id": "fundgao-1482",
+        "body_sha256": "610f31d027004fbdb75608c2f0abb3758f80a39302fe891fc5c3cfcb2b4a008d",
+        "normalized_span": [
+          2683,
+          2734
+        ],
+        "normalized_span_sha256": "be42b85a440b6e1a105c4ff8e8156012babead5bed86101fd406c0fc6e0b32f3",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-30930256",
+        "comparison_id": "fundgao-1692",
+        "body_sha256": "e26562e8c86867fd9af9e99b831d5b34bd6189872e70a5da329f55d848493011",
+        "normalized_span": [
+          2745,
+          2791
+        ],
+        "normalized_span_sha256": "2919273c8b2b21d6700acfa14ae0085094e0f8d508008a59c61d84037645cac2",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-31180407",
+        "comparison_id": "fundgao-1710",
+        "body_sha256": "f0b49cfc9e97ca02e824d24c5fc2adaa8aeb3e71a924123e6019fc07f32f11da",
+        "normalized_span": [
+          2730,
+          2772
+        ],
+        "normalized_span_sha256": "6350d66a06a6e26cb908eea595e602f4c43f80284f9e597adc6e7bf9016ddbd9",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-31192225",
+        "comparison_id": "fundgao-1711",
+        "body_sha256": "1b38b59313e2b407ddd93e063fa5ef3b0f72f1ad84550f49f3f3fbec2a8c97aa",
+        "normalized_span": [
+          2741,
+          2817
+        ],
+        "normalized_span_sha256": "26cd22f4a78536c5532d202df73fe9ace854a128a7a450ce777886b6897c8622",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-31587180",
+        "comparison_id": "fundgao-1754",
+        "body_sha256": "8599edc2d0cb706f81495cefa554711a8e5e0693f807784160136c6e593425af",
+        "normalized_span": [
+          2803,
+          2874
+        ],
+        "normalized_span_sha256": "1256d6ab0e1ace4c778d33c32941246d3646320823369c167c331143dbda3b42",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-31660628",
+        "comparison_id": "fundgao-1762",
+        "body_sha256": "044d3e6a2cb5843c30903e7d6f63c43e6af331dff1a385f271342aec19c3b2d6",
+        "normalized_span": [
+          2813,
+          3020
+        ],
+        "normalized_span_sha256": "38ee9a792b79ed47e40ec97141d8ec62b25fa96c9339d915525e931d6e9ff055",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-31724320",
+        "comparison_id": "fundgao-1764",
+        "body_sha256": "56b6b154baf4fa136ba502ea7109864c94c6c803b7cc37a1b250d0e933403300",
+        "normalized_span": [
+          2736,
+          2808
+        ],
+        "normalized_span_sha256": "e0c2049e2be266ab6d306caa16b8b3ac94e08b680d58a9bf7e8e3c5dfa25d76f",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-32621681",
+        "comparison_id": "fundgao-1836",
+        "body_sha256": "df66b79bb4f891b6a75ddbe91528af2bb33923868c0c65b12ff34379f2a83785",
+        "normalized_span": [
+          2813,
+          2904
+        ],
+        "normalized_span_sha256": "ea24aa3e7d4380fc53af9c2740ca1ffff2d06fbd6b043c68d82375b085506863",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-34277515",
+        "comparison_id": "fundgao-1970",
+        "body_sha256": "bae1cb691fe78600fcb7321d43556296f17d5b3164a773c83fff8845fa0d24f9",
+        "normalized_span": [
+          2789,
+          2886
+        ],
+        "normalized_span_sha256": "309825df1da5d4b6da62f33ae66a7f402997cc68be25917407df0dfca431f31d",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-34456344",
+        "comparison_id": "fundgao-1981",
+        "body_sha256": "311594c857390646ea8d6b736a57d71562ec22b2ba5b92cbdf6ece712b63cc3d",
+        "normalized_span": [
+          2778,
+          2859
+        ],
+        "normalized_span_sha256": "bbbc491da45b4630862e7a0a2f31fe09b2ed5f64f3e1691ad9202f4e231eb92b",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-34480491",
+        "comparison_id": "fundgao-1983",
+        "body_sha256": "852de97a9fec3762deeec881c15f21f830d1b1880a3590d7bdd603bab748ef66",
+        "normalized_span": [
+          2859,
+          2904
+        ],
+        "normalized_span_sha256": "b091294cc65a49e324b1ba94b9f5a75a450451bdb07ad7c68b0ba217d703727f",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-34550251",
+        "comparison_id": "fundgao-1988",
+        "body_sha256": "94cbc00d34f42190117d9c2ab22801ab52b56ed9d3e2c5ca6deaad777c17bb12",
+        "normalized_span": [
+          2836,
+          2884
+        ],
+        "normalized_span_sha256": "70a7d939e54ad17c313d00f2c52ed263b8931faf60857075294d3a258c1f8ae1",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-34590769",
+        "comparison_id": "fundgao-1992",
+        "body_sha256": "46ab5c0492a9b09bf7a6cbb69bcaec1092184f4eac90718543cde6dc938a177b",
+        "normalized_span": [
+          2741,
+          2879
+        ],
+        "normalized_span_sha256": "aef3a5bc03d9e09c34c7a61be491463aad130e1b03ee95dff35e721850801d78",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-34665358",
+        "comparison_id": "fundgao-1998",
+        "body_sha256": "d012f3f12d88f169b06850477026711d97d80102d6d22df2b5b1ffca71d5000b",
+        "normalized_span": [
+          2727,
+          2837
+        ],
+        "normalized_span_sha256": "b9a12f7a56130ffd8f53829b50a436d8538ca047faac4aff2a33f05b223132eb",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-34959854",
+        "comparison_id": "fundgao-2012",
+        "body_sha256": "ecd55771f9ac7f663d511f1043b865d68fd04b5cea0dc9690e0c23602d211643",
+        "normalized_span": [
+          2788,
+          2837
+        ],
+        "normalized_span_sha256": "fdeca5fb288588ce52ae29ecd5f27c6a01103e0e17c520160406464e0279e090",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-35054586",
+        "comparison_id": "fundgao-2021",
+        "body_sha256": "162a6f28deb9232cce69495289c3c1c3ec58711eb097b0fa35f8f9c61217095b",
+        "normalized_span": [
+          2732,
+          2776
+        ],
+        "normalized_span_sha256": "d491e4851333199c700298d8fcd67812e5d90b9d26a3b43bbd5f4daa8b8c17bc",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-35653683",
+        "comparison_id": "fundgao-2078",
+        "body_sha256": "7fd1b0c32c8bfa653556bce8c750729a05ee5499e0f54cf0fab7bac4b4ecffd3",
+        "normalized_span": [
+          2762,
+          2812
+        ],
+        "normalized_span_sha256": "aa252a8ee7e4b3cb11aa7287bda96698d9a4f36ff17c83a71def412b4628664d",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-35799288",
+        "comparison_id": "fundgao-2093",
+        "body_sha256": "b0a71a956480b962ad9c042578fbdc6a0b6940352a912e5b6d79d769ec1cb0c6",
+        "normalized_span": [
+          2749,
+          2799
+        ],
+        "normalized_span_sha256": "879854a8f9876c909c37f2bbd77205012d5fb7d974beb8e386e12a67513cf8d0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-36110440",
+        "comparison_id": "fundgao-2122",
+        "body_sha256": "2abba1bea6178d13ca3d452f5f9469a9a29144902a99a4d12b34f9fa6179273a",
+        "normalized_span": [
+          2826,
+          2927
+        ],
+        "normalized_span_sha256": "a5001de839ab6cfca8d81fd05ae2c00fa2b2d955c7c26cc81d17184d058a62ac",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-36317988",
+        "comparison_id": "fundgao-2131",
+        "body_sha256": "62d122222c35e5cd700ef0b680c6be9e378679497067092285a2a80a1d5c4e87",
+        "normalized_span": [
+          2782,
+          2931
+        ],
+        "normalized_span_sha256": "5e076d18d9b9172011003238c5909f69019e69fb9d24434745fb0e77e1f86245",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-37078117",
+        "comparison_id": "fundgao-2173",
+        "body_sha256": "2352d4fdda9bd229360d39e44f230a0955b571de85922ea27d4d80b8b8196344",
+        "normalized_span": [
+          2861,
+          3035
+        ],
+        "normalized_span_sha256": "07105c413a9f7af6e373775d8f4137fa800c40f85b4c7cf27fc0c815c3cc70ae",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-38488579",
+        "comparison_id": "fundgao-2218",
+        "body_sha256": "480d945288b72883cadc062bc0ceecba7520bccba76b141186ca56e7096218f8",
+        "normalized_span": [
+          2766,
+          2849
+        ],
+        "normalized_span_sha256": "5215d78e1d9c867b40fd6af69b857cd28e67858bfe72494dce5e22577c1da2fb",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-39409975",
+        "comparison_id": "fundgao-2257",
+        "body_sha256": "4f135bf629acca907ebbc41e1eb9847d3bcdb42b3f665895cabeae8c5e094522",
+        "normalized_span": [
+          2694,
+          2824
+        ],
+        "normalized_span_sha256": "b94c4f39858fafe0d3e74cf7e5f4fcbc2c8ba418a34c6edb34e994ffab15738a",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-39727400",
+        "comparison_id": "fundgao-2273",
+        "body_sha256": "96a4b6f08e6d361cbc07336272045cac969b2fa83f05db6d5f494517a5f712f7",
+        "normalized_span": [
+          2744,
+          2843
+        ],
+        "normalized_span_sha256": "b73c195ac3cf3e4af0a05c850e32148e1b3fcece6a4fd722bd690cc2b50b0d21",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-39937775",
+        "comparison_id": "fundgao-2284",
+        "body_sha256": "ae505c61f28409a3d680f8443c8a9cc3f0f1872b36398e4f92d70ddce31d8750",
+        "normalized_span": [
+          2720,
+          2827
+        ],
+        "normalized_span_sha256": "c348dccd1a6177ae28be3b131dee083ead16bf073d0c7a179be6abcb19a8293e",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-39981425",
+        "comparison_id": "fundgao-2286",
+        "body_sha256": "c5c0c8f604c85e347bd7d86d602506dd466f7cb34e1b054c47a409171b452d47",
+        "normalized_span": [
+          2818,
+          2888
+        ],
+        "normalized_span_sha256": "a0db8424d2397fb389957dff75ce9d104f5127fdbdf6763a78d71bbaa7e8d3fd",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40001952",
+        "comparison_id": "fundgao-2287",
+        "body_sha256": "ebae87bf64a8ad4ee3544621362142803d6b105050cce7546926c6fb34c67d81",
+        "normalized_span": [
+          2785,
+          2882
+        ],
+        "normalized_span_sha256": "0c26c364ca5a742ab0e50391a6fb485127f9b3dd091c8d5a3fd721d3909b5d59",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40652095",
+        "comparison_id": "fundgao-2327",
+        "body_sha256": "7e1fb037834061f892e1d239766fc29375206b6772ca53d7e2f7802a9913fedc",
+        "normalized_span": [
+          2865,
+          2911
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40669059",
+        "comparison_id": "fundgao-2328",
+        "body_sha256": "5c30c20b728c912faf64bc022d327d7508099dfe0642a55d12a09351f68f93f7",
+        "normalized_span": [
+          2778,
+          2824
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40699682",
+        "comparison_id": "fundgao-2329",
+        "body_sha256": "1b3aa189a9267b6482a3fe797a8e9ed559fc3dd230c16f87d2833765f052f0ff",
+        "normalized_span": [
+          2787,
+          2833
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40719794",
+        "comparison_id": "fundgao-2330",
+        "body_sha256": "ab0d3df6ef3f50cfd361784679aa9cc76251b8650c7cf8334b7e2afbd6f11e9c",
+        "normalized_span": [
+          2729,
+          2775
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40736901",
+        "comparison_id": "fundgao-2331",
+        "body_sha256": "91baf4576f651f3624a53f0e53473a4e70d7b0f3c37e07cc0f206fa3a5ff5d2b",
+        "normalized_span": [
+          2733,
+          2779
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40771941",
+        "comparison_id": "fundgao-2332",
+        "body_sha256": "e7b6de00c6825d9ae07b74819592cf38725531a07be2218556bab4a7b2d4e83d",
+        "normalized_span": [
+          2729,
+          2775
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40789196",
+        "comparison_id": "fundgao-2333",
+        "body_sha256": "e1834b8b10584cd45b5c92e59dca2b6da2c5d7f4bf43fec5379992bc3f716385",
+        "normalized_span": [
+          2777,
+          2823
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40807067",
+        "comparison_id": "fundgao-2334",
+        "body_sha256": "301657ae41d9203ca2e4b0a169c0c51f9f0b740eb47ae184248e0a246f601695",
+        "normalized_span": [
+          2750,
+          2796
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40838707",
+        "comparison_id": "fundgao-2335",
+        "body_sha256": "bf093af99d24ac1349132fdb2e373c7f6293d3f7fb680b846168495c7193cb39",
+        "normalized_span": [
+          2851,
+          2897
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40861171",
+        "comparison_id": "fundgao-2336",
+        "body_sha256": "308d26b878747c42a3e070c7b4a3ab08bed848eb952779bf516b09e98284c11d",
+        "normalized_span": [
+          2741,
+          2787
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40880365",
+        "comparison_id": "fundgao-2337",
+        "body_sha256": "d287747cb6a03a5d7780e0abf2b4313fe62ddfbea75d6f1a0e0e47ffc8d1cacd",
+        "normalized_span": [
+          2791,
+          2837
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40912687",
+        "comparison_id": "fundgao-2338",
+        "body_sha256": "0c5d72122c033f9a2ddcae51a4680ba6365294a97b41f4587a92ec23c87a4355",
+        "normalized_span": [
+          3027,
+          3073
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40932094",
+        "comparison_id": "fundgao-2339",
+        "body_sha256": "3070bdaa5a5b14fc82a8d2ffd5526d74b6a939c1cd1804efe562b891b8d9c16d",
+        "normalized_span": [
+          2713,
+          2759
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40947747",
+        "comparison_id": "fundgao-2340",
+        "body_sha256": "a9dd491e41d7fb4f5a902c0822ebf74b47394ee1a1e7e62546ebbd859478fab6",
+        "normalized_span": [
+          2741,
+          2787
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40976088",
+        "comparison_id": "fundgao-2341",
+        "body_sha256": "1a5cb15391170a39b346a0b48ae2bcb8ed72043ed2119840c44691a34962f733",
+        "normalized_span": [
+          2832,
+          2878
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-40995864",
+        "comparison_id": "fundgao-2342",
+        "body_sha256": "0ecb6d827098a076d04c3779bf35b4003f050ca2b659501bbf2df681a77de1c9",
+        "normalized_span": [
+          2727,
+          2773
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-41032016",
+        "comparison_id": "fundgao-2343",
+        "body_sha256": "a1c817de404671ddf7d400d4273d1a5df60ecc7387a3d40043f39afd2426d965",
+        "normalized_span": [
+          2780,
+          2826
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-41043828",
+        "comparison_id": "fundgao-2344",
+        "body_sha256": "f7ae6d896559c8797998f73a036a08bd829920ec9816050afca3becbaa6898a9",
+        "normalized_span": [
+          2760,
+          2806
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-41068176",
+        "comparison_id": "fundgao-2345",
+        "body_sha256": "7866069c7d82f29ac3328f0b9d7f95d801b8c2ca20c11bdb8102a3393e399050",
+        "normalized_span": [
+          2762,
+          2808
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-41102899",
+        "comparison_id": "fundgao-2346",
+        "body_sha256": "7e0f59e39a7e15f2b2b4bf09d66fe10bf03f317bb3003cee536d88c722912921",
+        "normalized_span": [
+          2761,
+          2807
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-41118261",
+        "comparison_id": "fundgao-2347",
+        "body_sha256": "cc9ffdd163a0776b9d6c997bd179f61ce5e2c996d65536b687ff8cba2dfa1ee0",
+        "normalized_span": [
+          2739,
+          2785
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-41131625",
+        "comparison_id": "fundgao-2348",
+        "body_sha256": "3eca3c25bad3a8566f3a0b2316442498c1460593432fb4c0eda7a8efcf8b299c",
+        "normalized_span": [
+          2796,
+          2841
+        ],
+        "normalized_span_sha256": "629cf75ea507d26826f8f92764618769ae08149445d179d1ac31b98306c9c364",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-41193542",
+        "comparison_id": "fundgao-2351",
+        "body_sha256": "63c072dd8ffffe9dd8e1aabb62c1e17fd3d902ef63cae85f0aaccde5955d43e6",
+        "normalized_span": [
+          2749,
+          2795
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-41234624",
+        "comparison_id": "fundgao-2353",
+        "body_sha256": "3853696580112e2041b37644c217f2a8aae1546b87d88dcbab743aa40e94dba4",
+        "normalized_span": [
+          2784,
+          2830
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-41272367",
+        "comparison_id": "fundgao-2355",
+        "body_sha256": "f1c43b91088b1b0b2566ec399d3ebc1ccb3d28b46d787dacf65ec999ed967826",
+        "normalized_span": [
+          2801,
+          2847
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-41290583",
+        "comparison_id": "fundgao-2356",
+        "body_sha256": "72414356baf0fdc6262dad4f1e4ac82ee13a3fb8e785dfb90f79a41ebefa649c",
+        "normalized_span": [
+          2734,
+          2780
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-41347092",
+        "comparison_id": "fundgao-2360",
+        "body_sha256": "2d3b967c9e23bce51b18260ae35d6ab7474b021103d32d66c248446060c02c5f",
+        "normalized_span": [
+          2685,
+          2731
+        ],
+        "normalized_span_sha256": "335f9c37271e763c15c357258e2664022f9836e93f22f0eb68de9270e72350f0",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-41502708",
+        "comparison_id": "fundgao-2367",
+        "body_sha256": "7fbbc6991c349a533c935a2434d2f7f625eae75e29e6bfd1fe6b75b350ce4fef",
+        "normalized_span": [
+          2814,
+          2880
+        ],
+        "normalized_span_sha256": "feb24977af10775d308d8e202e4c9ffca28bd23782c1aae3561f3c9117907f40",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-42088700",
+        "comparison_id": "fundgao-2397",
+        "body_sha256": "675b224d4e5a8e0b36d486464347614faa3aac4703d55deb12cafa689f9dceac",
+        "normalized_span": [
+          2810,
+          2851
+        ],
+        "normalized_span_sha256": "e0ea874107a87935a6e5863181a964ef148c4e77e0192664f84c80fac944b609",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-42151111",
+        "comparison_id": "fundgao-2400",
+        "body_sha256": "959d33d3a36a7d55feb7d76a4af7838f4a33a48f2c72035283ee72b7da48a3c6",
+        "normalized_span": [
+          2690,
+          2879
+        ],
+        "normalized_span_sha256": "0b95da8306567c341e1127f5420532d99e8989917b7e3f349c45ae877989cf0b",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-42355955",
+        "comparison_id": "fundgao-2409",
+        "body_sha256": "50d88934fbed9e347167efec2d3b11988c1cf5bdecf2743237934f688b6988e8",
+        "normalized_span": [
+          2746,
+          2921
+        ],
+        "normalized_span_sha256": "604b16302fcbb1569a558f5636bd50aab1035d1e54025a82d17f2d1ca5fb1cfd",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-42772295",
+        "comparison_id": "fundgao-2426",
+        "body_sha256": "762566aed58be99d237eb996de829aee912f7db3601829591d5d032acd6c066a",
+        "normalized_span": [
+          2791,
+          2875
+        ],
+        "normalized_span_sha256": "f7140b02ed04e00416321dfbc8510864c6331a1328c34cdb963bd3c1204e27cb",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-43235706",
+        "comparison_id": "fundgao-2444",
+        "body_sha256": "2d95bcf4590735fef0bc72453740e80b5827302720845f82a18af8686c0f4fd0",
+        "normalized_span": [
+          2716,
+          2803
+        ],
+        "normalized_span_sha256": "2ca620acb8b57c0c1297596323c98514823e43f6a837584acf303c7d8adf1346",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-43635069",
+        "comparison_id": "fundgao-2460",
+        "body_sha256": "1384ee928f5e5e61fcbb0796d62aef95458754fa0c5418133ec8389ac1b019e0",
+        "normalized_span": [
+          2906,
+          2969
+        ],
+        "normalized_span_sha256": "1686577bdeb0e18b6ee30565afe0cbcf5d72ee7c2d6845bc67a775cf62f0bb95",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-44182468",
+        "comparison_id": "fundgao-2481",
+        "body_sha256": "b56a3c671a74f79d9f93d0718539a9c149727a5368d3a9eefb30f8c10d83e3f8",
+        "normalized_span": [
+          2782,
+          2835
+        ],
+        "normalized_span_sha256": "ba14012c4388b908fd2567d9917836beb6d798d3baf7369fbe59f11c8b56ccdf",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-44541144",
+        "comparison_id": "fundgao-2491",
+        "body_sha256": "d88da273ecd2dc26e5f697aedf7c1b6cded0b4b3626a793a220a7fc7e7dab38b",
+        "normalized_span": [
+          2723,
+          2881
+        ],
+        "normalized_span_sha256": "274ea8214ec32740e67767b0b2154bb642aa1367e9b165ea67061207fb8f2c58",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-44839020",
+        "comparison_id": "fundgao-2500",
+        "body_sha256": "3c6829531520cd01c7f5a0ad95d15cffc1a942f393a77b1f95d27d3d2972fe83",
+        "normalized_span": [
+          2721,
+          2825
+        ],
+        "normalized_span_sha256": "08c9f9f65aaa869c3bf5213c27e22d7b021aeb7a441865f7d5b13c46a96ef11b",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-44870756",
+        "comparison_id": "fundgao-2501",
+        "body_sha256": "4c630e7a036889085020d74110a89fbda18efd9bfe7408d37e8a017bd7bd4a50",
+        "normalized_span": [
+          2721,
+          2788
+        ],
+        "normalized_span_sha256": "487466ff5160bd939ce22550f28dfa11409d013a385c252b8f6785237da41d85",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-44972348",
+        "comparison_id": "fundgao-2504",
+        "body_sha256": "b9846dfeb2a14a2697344d68c333898509d31c3536de7f8bb7bb7b292aa21d17",
+        "normalized_span": [
+          2658,
+          2704
+        ],
+        "normalized_span_sha256": "95a53353409cf0c3a3ddfb697a48e86adde3f60930350ffabf4a8a4921ca701b",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-45110486",
+        "comparison_id": "fundgao-2509",
+        "body_sha256": "ba98c750c3fd94e7955b5bc59af014302e4ae9bb18b921ae07baf2c887936869",
+        "normalized_span": [
+          2698,
+          2738
+        ],
+        "normalized_span_sha256": "f87b179206c5bd79fd6dde986c592802e094fb8eb10f06e1a8e8d9e94e881bd5",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-45944373",
+        "comparison_id": "fundgao-2546",
+        "body_sha256": "fb4feba72c60e3dddc5928cd453de7717aebd7bc01ed58631cb0af9014304481",
+        "normalized_span": [
+          2729,
+          2799
+        ],
+        "normalized_span_sha256": "954a4c412b59041ca408e8c7570998d4c880bab2039191516602d3e1c8718e51",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-46107735",
+        "comparison_id": "fundgao-2553",
+        "body_sha256": "e29a2654e9637f4aa8258baca9608a9f131dc69cb65de8800ec5838ddbe30d6b",
+        "normalized_span": [
+          2749,
+          2902
+        ],
+        "normalized_span_sha256": "ece1424f09e8b083b181123ea35805b0341292a933a54d30ff6058583e2491ec",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      },
+      {
+        "chapter_id": "qq-47872196",
+        "comparison_id": "fundgao-2612",
+        "body_sha256": "6356997357d00caa07b8e93c8cc976e326bb17a04703e874cb0ead5a8b7d8e94",
+        "normalized_span": [
+          2701,
+          2918
+        ],
+        "normalized_span_sha256": "d35923d9ca91fef8f9f5f922c184f14cd7d8cb7cb1da47e36a506c556b7118c1",
+        "kind": "author-afterword-advertisement-or-platform-footer",
+        "review_scope": "complete-normalized-extra-span",
+        "decision": "retain-as-source-paratext-exclude-from-world-facts",
+        "working_text_changed": false
+      }
+    ]
+  },
+  "edition_notices": [
+    {
+      "chapter_id": "qq-39409975",
+      "comparison_id": "fundgao-2257",
+      "scope": "author-afterword-reports-revision",
+      "affected_main_chapter_number": 2017,
+      "observation": "作者附记称第2017章天泣、鹤颜部分随后续构思修改。仅作为版本风险线索，不能自动决定何版为最终文本。",
+      "status": "working-version-selected-with-explicit-variant",
+      "affected_chapter_id": "qq-37002072",
+      "third_comparison": {
+        "number": 2020,
+        "url": "https://www.quanben.io/n/fanrenxiuxianzhuan/2020.html",
+        "title": "第2017章 天泣和鹤颜",
+        "html_sha256": "512dcc3874a2a8dcd744038b450f022532e9ac7076998378a8e81a67d1750ef5",
+        "body_sha256": "37d4c47d34639f59fe0a1e2b47077b97d351310d0f0ef76c64e4cab86fe4db51",
+        "characters": 3120,
+        "status": "unreviewed-public-comparison"
+      },
+      "comparison_result": "第三来源与fundgao同属未修订或另一叙述版本，不能用网页数量表决版本。",
+      "material_difference": "候选称天泣、鹤颜不是始祖；两个对照版本称二人为比宝花更早的始祖。",
+      "working_disposition": "采用候选所载非始祖的版本；第2017章有修订附记，后文qq-39649365称二魔名气不在三大始祖之下，qq-39409975称曾与宝花争位，均与非始祖版本相容。保留旧版异文，不合成两套职位。",
+      "corroborating_chapters": [
+        "qq-39649365",
+        "qq-39409975",
+        "qq-40088128"
+      ]
+    },
+    {
+      "chapter_id": "qq-41131625",
+      "comparison_id": "fundgao-2348",
+      "scope": "author-afterword-reports-revision",
+      "affected_main_chapter_number": 2173,
+      "observation": "作者附记称第2173章经书友指出漏洞后修改。保留版本线索，具体冲突须据正文审定。",
+      "status": "working-version-retained-with-explicit-variant",
+      "affected_chapter_id": "qq-41102899",
+      "third_comparison": {
+        "number": 2176,
+        "url": "https://www.quanben.io/n/fanrenxiuxianzhuan/2176.html",
+        "title": "第2173章 第三座极山",
+        "html_sha256": "145f92bfab55956a4867b25484b0a338d3c452025a63f7d32b7b470a656661a8",
+        "body_sha256": "2600a52cdbf97c14f8fa6ae3a11f34ec385da32fd2cec1906a8cc258fa489918",
+        "characters": 3082,
+        "status": "unreviewed-public-comparison"
+      },
+      "comparison_result": "第三来源与fundgao同属未修订或另一叙述版本，不能用网页数量表决版本。",
+      "material_difference": "候选包含十余年修炼炼神术第二层、神念七八万里与炼化青鸾真血整段；两个对照版本均缺该段。",
+      "working_disposition": "保留原候选及其新增修炼段，不将缺段版本拼接覆盖。附记证明该章存在修订，但未取得足以证明全部改动方向的官方全文；涉及神念范围的规则只能以此工作版及特定人物阶段引用，不能泛化为所有修士。"
+    }
+  ]
+}

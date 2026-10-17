@@ -1,20 +1,19 @@
 {
   "version": 1,
   "status": "incomplete-collation",
-  "blocked_chapters": [
-    "qq-26497309"
-  ],
+  "blocked_chapters": [],
   "findings": [
     {
       "id": "missing-opening-1077",
       "chapter_id": "qq-26497309",
       "severity": "blocking",
-      "status": "unresolved",
-      "observation": "候选文本缺少官方预览与第二版本均出现的开头对话，约一千字；第二版本此章又有重复和尾部截断，不能整章替换。",
+      "status": "resolved-by-traceable-working-insertion",
+      "observation": "原候选缺失的开头已逐段对照官方预览、HJWZW全文和fundgao片段。采用HJWZW原始26段1038字插入候选开头，保留候选全部2197字及繁体异写；合成工作章3235字，精确出处和指纹见repairs.json。此项解决工作版本缺段，不证明全书无异文。",
       "sources": [
         "https://fanrenxiuxianzhuan.bookresource.qq.com/chapter/107580/26497309/",
         "https://github.com/fundgao/xiuxian/tree/b75ea20180a209ffd7eba6f5ac4559324be0b763/凡人修仙传"
-      ]
+      ],
+      "repair_id": "missing-opening-1077"
     },
     {
       "id": "preview-limit",
@@ -39,8 +38,8 @@
     {
       "id": "public-copy-repeats-missing-opening",
       "chapter_id": "qq-26497309",
-      "severity": "blocking",
-      "status": "unresolved",
+      "severity": "variant",
+      "status": "superseded-by-traceable-working-insertion",
       "observation": "另一个公开页面也从冰墙描写开始，仍缺前段对话，不能作为独立完整证据。Webnovel官方预览可再次证实缺失的开头，但后文需登录解锁。中华武侠搜索结果含开头和结尾，直接页面不可读取，尚未形成可固定指纹的完整对校版本。",
       "sources": [
         "https://www.bidutuijian.com/books/FanRenXiuXianChuan/1081.html",
@@ -52,10 +51,99 @@
       "id": "additional-full-1077-candidate",
       "chapter_id": "qq-26497309",
       "severity": "variant",
-      "status": "awaiting-segment-collation",
-      "observation": "已取得可固定指纹的另一公开整章候选，含缺失开头及宫殿结尾，共3115字。文本为繁体且有可见异写，尚未逐段完成三版本对校，当前工作正文没有静默替换。原阻塞项继续保留。",
+      "status": "prefix-adopted-after-segment-collation",
+      "observation": "已逐段校对并采用此版本前26段填补缺失开头，后文仍保留原候选。繁体、错写、版本独立性限制均列入repairs.json；不称官方全本。",
       "sources": [
         "https://tw.hjwzw.com/Book/Read/1644,581026"
+      ]
+    },
+    {
+      "id": "missing-ending-1117",
+      "chapter_id": "qq-26772204",
+      "severity": "blocking",
+      "status": "resolved-by-traceable-working-insertion",
+      "repair_id": "missing-ending-1117",
+      "observation": "原候选缺少冰凤发动攻击后的595字结尾。逐段对照公开第三来源与fundgao合并章，采用第三来源原始尾段补齐；旧正文保留，batch-0175必须重建提取与后续引用。具体异写、边界与出处见repairs.json。",
+      "sources": [
+        "https://www.quanben.io/n/fanrenxiuxianzhuan/1120.html",
+        "https://github.com/fundgao/xiuxian/tree/b75ea20180a209ffd7eba6f5ac4559324be0b763/凡人修仙传"
+      ]
+    },
+    {
+      "id": "missing-segment-499",
+      "chapter_id": "qq-22454418",
+      "severity": "blocking",
+      "status": "resolved-by-traceable-working-insertion",
+      "repair_id": "missing-segment-499",
+      "observation": "缺少停遁、观察港口攻防的三句，原候选直接从赶路跳到“看这声势”；原样插入，不改其后的上千修士、阵法和双方战斗叙述。",
+      "sources": [
+        "https://www.quanben.io/n/fanrenxiuxianzhuan/501.html"
+      ]
+    },
+    {
+      "id": "missing-segment-635",
+      "chapter_id": "qq-23223484",
+      "severity": "blocking",
+      "status": "resolved-by-traceable-working-insertion",
+      "repair_id": "missing-segment-635",
+      "observation": "缺少百里内修士承受结婴灵压、炼气期呼吸困难、打坐抗拒及区域外感应的五段。fundgao与全本637页均有此内容；选fundgao原始片段保留“震荡”，全本对应字被替为星号。候选总述“有成千上万的修仙者也发现了异常”保留。",
+      "sources": [
+        "https://www.quanben.io/n/fanrenxiuxianzhuan/637.html"
+      ]
+    },
+    {
+      "id": "missing-segment-818",
+      "chapter_id": "qq-24559787",
+      "severity": "blocking",
+      "status": "resolved-by-traceable-working-insertion",
+      "repair_id": "missing-segment-818",
+      "observation": "候选从“两片光霞”开头而缺其先行对象；第三来源和fundgao均明确火蟾断首与躯体伤口放出两片光霞。仅补开篇一段。",
+      "sources": [
+        "https://www.quanben.io/n/fanrenxiuxianzhuan/820.html"
+      ]
+    },
+    {
+      "id": "missing-segment-1068",
+      "chapter_id": "qq-26431671",
+      "severity": "blocking",
+      "status": "resolved-by-traceable-working-insertion",
+      "repair_id": "missing-segment-1068",
+      "observation": "缺少爆裂声、韩立飞往祭坛、运转明清灵目穿透魔气及黑色深洞的五段，导致候选“此骷髅”缺先行对象。保留来源“遗落”“百余长广”“黑骷髅”“期内”等异写，相关器物/地形不可据错字新增骷髅实体；该处后续“黑渊”也须语义核对。",
+      "sources": [
+        "https://www.quanben.io/n/fanrenxiuxianzhuan/1071.html"
+      ]
+    },
+    {
+      "id": "missing-segment-1106",
+      "chapter_id": "qq-26717131",
+      "severity": "blocking",
+      "status": "resolved-by-traceable-working-insertion",
+      "repair_id": "missing-segment-1106",
+      "observation": "候选在韩立“略一犹豫后”直接接“化为一枚…球”，漏掉搓手、辟邪神雷缠绕并禁锢黑焰的完整动作，导致主语和资源动作不明。只补漏段；第三来源上文也另有漏文，故不整章替换。原候选“死球”与两对照源“丝球”的异文保留登记。",
+      "sources": [
+        "https://www.quanben.io/n/fanrenxiuxianzhuan/1109.html"
+      ]
+    },
+    {
+      "id": "missing-segment-1165",
+      "chapter_id": "qq-27092278",
+      "severity": "blocking",
+      "status": "resolved-by-traceable-working-insertion",
+      "repair_id": "missing-segment-1165",
+      "observation": "候选从“古传送阵”直接接“未被激发的时候”，缺少反弹法器、众人吃惊和“若是古传送阵”的条件引导；该漏段影响传送阵是否能被破坏的适用条件，必须补齐。",
+      "sources": [
+        "https://www.quanben.io/n/fanrenxiuxianzhuan/1168.html"
+      ]
+    },
+    {
+      "id": "missing-segment-1944",
+      "chapter_id": "qq-35529001",
+      "severity": "blocking",
+      "status": "resolved-by-traceable-working-insertion",
+      "repair_id": "missing-segment-1944",
+      "observation": "缺少大汉质疑提取混沌之气方法的一句对白，导致下一句“你这话什么意思”失去回应对象。此章尚未提取；修补后必须按新指纹读取。",
+      "sources": [
+        "https://www.quanben.io/n/fanrenxiuxianzhuan/1947.html"
       ]
     }
   ],
@@ -85,7 +173,108 @@
       "html_sha256": "10bb88c6b28aa0684b92bfa7c3ad68e7f184b32d49f9ceb6d3d913c0526cea08",
       "body_sha256": "594eb8100aaa9267e40fb9ab1f24d876066c004fc1266a10965bb79f2a1f412b",
       "body_characters_without_final_newline": 3115,
-      "status": "full-chapter-comparison-candidate-traditional-not-adopted"
+      "status": "prefix-adopted-with-source-span-provenance"
+    },
+    {
+      "id": "quanben-1117",
+      "url": "https://www.quanben.io/n/fanrenxiuxianzhuan/1120.html",
+      "acquired_at": "2026-10-17",
+      "html_sha256": "67c0f1d489aeeb41c05162b0620126c9dcffaf99b194683714cb3b08aceacc94",
+      "body_sha256": "6beba3679a4fa41452902ce3321e686d24dafa61ae1bda12e9c2e78bb4387a30",
+      "body_characters_with_final_newline": 3081,
+      "extraction": "Decode HTML entities in div#content paragraph elements; omit initial chapter-title paragraph; join paragraphs with LF and append LF. Preserve spelling.",
+      "status": "tail-adopted-with-source-span-provenance"
+    },
+    {
+      "chapter_id": "qq-22454418",
+      "number": 501,
+      "url": "https://www.quanben.io/n/fanrenxiuxianzhuan/501.html",
+      "title": "第499章 南明岛",
+      "html_sha256": "2484c0fcc590ad25c29fe0309cad9a0bc1add539130e53cc817a816576159763",
+      "body_sha256": "cc7aff6f418e6da781184363ba4bac9f1034f601dea5bd0d5063664b22e49225",
+      "characters": 2938,
+      "status": "segment-adopted-with-source-span-provenance",
+      "id": "quanben-499",
+      "acquired_at": "2026-10-17",
+      "extraction": "Decode HTML entities in div#content paragraph elements; omit initial chapter-title paragraph; join paragraphs with LF and append LF. Preserve spelling."
+    },
+    {
+      "chapter_id": "qq-23223484",
+      "number": 637,
+      "url": "https://www.quanben.io/n/fanrenxiuxianzhuan/637.html",
+      "title": "第635章 结婴(中)",
+      "html_sha256": "4c30dfef6c3cd0b1ebdd22a841af3e2904f0cef80313adab7097eb61913e531a",
+      "body_sha256": "9500df850c93c85dd9e74e35d3a0d34b0c0771e7f764673390782345f8ab2e8f",
+      "characters": 2792,
+      "status": "scoped-paragraph-comparison",
+      "id": "quanben-635",
+      "acquired_at": "2026-10-17",
+      "extraction": "Decode HTML entities in div#content paragraph elements; omit initial chapter-title paragraph; join paragraphs with LF and append LF. Preserve spelling."
+    },
+    {
+      "chapter_id": "qq-24559787",
+      "number": 820,
+      "url": "https://www.quanben.io/n/fanrenxiuxianzhuan/820.html",
+      "title": "第818章 古修遗骸",
+      "html_sha256": "44e08355f82e249aeab173b24a8bf4f39540c3701aa8432f3b98083cc2bca48b",
+      "body_sha256": "fe339f93178d5f9e5bce23d82da2d793ffe8db21ef07bad21bc21762621acc9c",
+      "characters": 3101,
+      "status": "segment-adopted-with-source-span-provenance",
+      "id": "quanben-818",
+      "acquired_at": "2026-10-17",
+      "extraction": "Decode HTML entities in div#content paragraph elements; omit initial chapter-title paragraph; join paragraphs with LF and append LF. Preserve spelling."
+    },
+    {
+      "chapter_id": "qq-26431671",
+      "number": 1071,
+      "url": "https://www.quanben.io/n/fanrenxiuxianzhuan/1071.html",
+      "title": "第1068章 封印",
+      "html_sha256": "ee858ff64f9968f25a1f75258a99d77c9cec5a5801e0ed3a49b1f06d9f99370c",
+      "body_sha256": "3671707dc34e25b12137b979002459346e3a754faa1abd38791a88bfaa8145c2",
+      "characters": 3130,
+      "status": "segment-adopted-with-source-span-provenance",
+      "id": "quanben-1068",
+      "acquired_at": "2026-10-17",
+      "extraction": "Decode HTML entities in div#content paragraph elements; omit initial chapter-title paragraph; join paragraphs with LF and append LF. Preserve spelling."
+    },
+    {
+      "chapter_id": "qq-26717131",
+      "number": 1109,
+      "url": "https://www.quanben.io/n/fanrenxiuxianzhuan/1109.html",
+      "title": "第1106章 收焰",
+      "html_sha256": "3c96fddc66111e81528c55b96db32d2df12fba9d8a08cb0c1fca5a59deac98c2",
+      "body_sha256": "c718b4f703d1c0be0ec448333531b17d9636dcc72d3471ae906259c761745a24",
+      "characters": 3112,
+      "status": "segment-adopted-with-source-span-provenance",
+      "id": "quanben-1106",
+      "acquired_at": "2026-10-17",
+      "extraction": "Decode HTML entities in div#content paragraph elements; omit initial chapter-title paragraph; join paragraphs with LF and append LF. Preserve spelling."
+    },
+    {
+      "chapter_id": "qq-27092278",
+      "number": 1168,
+      "url": "https://www.quanben.io/n/fanrenxiuxianzhuan/1168.html",
+      "title": "第1165章 盘问",
+      "html_sha256": "1ab6a3778a79b8d030f98b8995ae9e477d9f05b302295a2c11a236f2b1312fb0",
+      "body_sha256": "d9fb268ac64c6b0a8b5fa89bad5fbe39d3526318f94d2fe129ce4b331c84c803",
+      "characters": 3108,
+      "status": "segment-adopted-with-source-span-provenance",
+      "id": "quanben-1165",
+      "acquired_at": "2026-10-17",
+      "extraction": "Decode HTML entities in div#content paragraph elements; omit initial chapter-title paragraph; join paragraphs with LF and append LF. Preserve spelling."
+    },
+    {
+      "chapter_id": "qq-35529001",
+      "number": 1948,
+      "url": "https://www.quanben.io/n/fanrenxiuxianzhuan/1948.html",
+      "title": "第1945章 魔女现",
+      "html_sha256": "e2024edc4ddc029376816ce264252576c83576b5657295a29760e70a64185715",
+      "body_sha256": "1b2a8d133db224d03761e1a7067f5fed81d1010e6223144752d0e35e4ef36a2c",
+      "characters": 3089,
+      "status": "segment-adopted-with-source-span-provenance",
+      "id": "quanben-1944",
+      "acquired_at": "2026-10-17",
+      "extraction": "Decode HTML entities in div#content paragraph elements; omit initial chapter-title paragraph; join paragraphs with LF and append LF. Preserve spelling."
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "format_version": 1,
-  "audited_at": "2026-10-17T06:16:08.935825+00:00",
+  "audited_at": "2026-10-17T11:43:56.827923+00:00",
   "candidate": {
     "url": "https://raw.githubusercontent.com/qiuliw/Books/094be1bb8dd4c8ed26bc2b298ec2351b6d22fa03/%E3%80%8A%E5%87%A1%E4%BA%BA%E4%BF%AE%E4%BB%99%E4%BC%A0%E3%80%8B%EF%BC%88%E6%A0%A1%E5%AF%B9%E7%89%88%E5%85%A8%E6%9C%AC%2B%E7%95%AA%E5%A4%96%EF%BC%89%E4%BD%9C%E8%80%85%EF%BC%9A%E5%BF%98%E8%AF%AD.txt",
     "git_revision": "094be1bb8dd4c8ed26bc2b298ec2351b6d22fa03",
@@ -22,6 +22,53 @@
   },
   "main_chapters": 2451,
   "aligned_chapters": 2451,
+  "working_repairs": [
+    {
+      "id": "missing-opening-1077",
+      "chapter_id": "qq-26497309",
+      "result_sha256": "04714158d1589601f32c4ccc22e0d86768f5e9831ca1e830e88120af2a0862e5"
+    },
+    {
+      "id": "missing-ending-1117",
+      "chapter_id": "qq-26772204",
+      "result_sha256": "cb9f341081d233c1b76459902c06e95f3fae0540cad35cb9df1b449181e9ddde"
+    },
+    {
+      "id": "missing-segment-499",
+      "chapter_id": "qq-22454418",
+      "result_sha256": "b1963c9983e3cfaf07d12d9f8d2a94a8b27e7b6e25cad2f1dabf78c647efce34"
+    },
+    {
+      "id": "missing-segment-635",
+      "chapter_id": "qq-23223484",
+      "result_sha256": "dc4907319e042420f61021d3d4a1831681b31715e4a08c5aa3d4014388ea018a"
+    },
+    {
+      "id": "missing-segment-818",
+      "chapter_id": "qq-24559787",
+      "result_sha256": "b0b6266aa29bbb4093b9fa62e2c310c69b53b0c2dd4e31d39743508f76a67d64"
+    },
+    {
+      "id": "missing-segment-1068",
+      "chapter_id": "qq-26431671",
+      "result_sha256": "d96c5c03108de899525cdc00211dd011f5731b093c262806f136eb8980e5b3b5"
+    },
+    {
+      "id": "missing-segment-1106",
+      "chapter_id": "qq-26717131",
+      "result_sha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da"
+    },
+    {
+      "id": "missing-segment-1165",
+      "chapter_id": "qq-27092278",
+      "result_sha256": "282c722c517d46f92ed93872b0f80b544b6ed031b59239c83441154d46c46fdf"
+    },
+    {
+      "id": "missing-segment-1944",
+      "chapter_id": "qq-35529001",
+      "result_sha256": "e8ec6f25ab6ff697463bfa0094f650927a8e458c114a32ab41e56514df3ce926"
+    }
+  ],
   "excluded_supplements": [
     {
       "title": "凡人外传·仙界篇 一",
@@ -42,12 +89,12 @@
   },
   "issues": {
     "title_difference": 55,
-    "text_difference": 22
+    "text_difference": 21
   },
-  "batches": 397,
+  "batches": 398,
   "semantic_progress": {
     "read": 15,
-    "extracted": 32,
+    "extracted": 2451,
     "reviewed": 0
   }
 }
