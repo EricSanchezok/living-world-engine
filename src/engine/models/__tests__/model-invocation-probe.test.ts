@@ -192,8 +192,37 @@ describe("model invocation probe", () => {
     expect(report.trials[0]?.engineSemantic).toBe("not-run");
   });
 
-  it("extracts the exact request and persisted audit hash from debug evidence", () => {
+  it("records added and removed context entries without failing before dispatch", async () => {
+    const fixture = await source();
+    fixture.source.request.context = { location: "harbor", weather: "clear", addedItem: ["one"], removedItem: ["one", "two"] };
+    const provider = new ScriptedModelProvider(() => ({ title: "The harbor", scene: "A clear morning settles over the harbor." }), fixture.catalog);
+    const report = await runInvocationProbe({
+      source: fixture.source, catalog: fixture.catalog, registry: fixture.registry, provider, repeat: 1,
+      variant: { transformRequest: () => ({ context: { location: "harbor", time: "morning", addedItem: ["one", "two"], removedItem: ["one"] } }) },
+    });
+
+    expect(provider.requests).toHaveLength(1);
+    expect(report.summary).toMatchObject({ total: 1, accepted: 1 });
+    expect(report.trials[0]?.requestDiff).toEqual({
+      changed: true, changedFields: ["context"], truncated: false,
+      changes: [
+        { path: ["context", "addedItem", 1], before: undefined, after: "two" },
+        { path: ["context", "removedItem", 1], before: "two", after: undefined },
+        { path: ["context", "time"], before: undefined, after: "morning" },
+        { path: ["context", "weather"], before: "clear", after: undefined },
+      ],
+    });
+  });
+
+  it.each([
+    { inferenceOverrides: undefined, error: undefined },
+    { inferenceOverrides: { thinking: "disabled", effort: "auto" }, error: undefined },
+    { inferenceOverrides: { temperature: 0.3 }, error: undefined },
+    { inferenceOverrides: { temperature: 0.3, top_p: 0.8 }, error: "configure temperature or top_p, not both" },
+    { inferenceOverrides: { unknown: "value" }, error: "Unrecognized key" },
+  ])("extracts exact inference overrides without inserting defaults: $inferenceOverrides", ({ inferenceOverrides, error }) => {
     const request = {
+      ...(inferenceOverrides ? { inferenceOverrides } : {}),
       modelCatalogHash: "catalog",
       workloadId: "workload",
       batchId: "batch",
@@ -259,6 +288,10 @@ describe("model invocation probe", () => {
       diagnostics: [],
     } satisfies DebugInspection;
 
+    if (error) {
+      expect(() => sourceFromInspection("execution::invocation", inspection)).toThrow(error);
+      return;
+    }
     const result = sourceFromInspection("execution::invocation", inspection);
     expect(result.request).toEqual(request);
     expect(result.requestHash).toBe("persisted-request-hash");

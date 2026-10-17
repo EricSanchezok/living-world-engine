@@ -355,8 +355,12 @@ function parseSerializedRequest(value: unknown): SerializedModelRequest {
   const input = record(value);
   if (!input) throw new Error("model.context.serialized payload is not an object");
   const role = requiredString(input.role, "role") as ModelRole;
+  const parsedOverrides = input.inferenceOverrides ? modelInferenceSchema.parse(input.inferenceOverrides) : undefined;
+  // Validate cross-field constraints without turning omitted overrides into explicit auto values.
+  const inferenceOverrides = parsedOverrides ? Object.fromEntries(Object.keys(input.inferenceOverrides as object)
+    .map(key => [key, parsedOverrides[key as keyof typeof parsedOverrides]])) : undefined;
   const request = {
-    ...(input.inferenceOverrides ? { inferenceOverrides: modelInferenceSchema.partial().parse(input.inferenceOverrides) } : {}),
+    ...(inferenceOverrides ? { inferenceOverrides } : {}),
     ...(input.jsonExamplePolicy === "omit" ? { jsonExamplePolicy: "omit" as const } : {}),
     modelCatalogHash: requiredString(input.modelCatalogHash, "modelCatalogHash"),
     workloadId: requiredString(input.workloadId, "workloadId"),
@@ -551,7 +555,7 @@ function eventProjection(event: RuntimeEvent): ProbeEvent {
 
 function collectDiff(before: unknown, after: unknown, pathValue: Array<string | number>, changes: Array<{ path: Array<string | number>; before: unknown; after: unknown }>, limit: number): boolean {
   if (changes.length >= limit) return true;
-  if (contentHash(before) === contentHash(after)) return false;
+  if (before === after || before !== undefined && after !== undefined && contentHash(before) === contentHash(after)) return false;
   if (Array.isArray(before) && Array.isArray(after)) {
     const length = Math.max(before.length, after.length);
     for (let index = 0; index < length; index += 1) {
