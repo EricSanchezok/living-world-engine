@@ -1,0 +1,83 @@
+{
+  "identity": "ddae232fca77cb588aeebd0c716a23196b588a0f1ce5cb4b5ded2132740b2f3a",
+  "expectedDraftHash": "ff62b4e5a77fffae5d277e178bd3927f510fa9a0488bd71ca02d79da5a0a0300",
+  "reviewer": "Codex：原文引文与相邻段落定点校核",
+  "scope": "targeted-corrections-not-runtime-approval",
+  "corrections": [
+    {
+      "collection": "objects",
+      "index": 15,
+      "expectedRecordHash": "5c23e6113110a71561a0b9d956cbcc479e681e432f933ac63633755442dddd9f",
+      "fields": {},
+      "citations": [
+        {
+          "index": 1,
+          "paragraph": "qq-20588159:2298",
+          "start": 2,
+          "end": 11
+        }
+      ],
+      "reason": "补回到了中的了。"
+    },
+    {
+      "collection": "objects",
+      "index": 37,
+      "expectedRecordHash": "ccf7d17f2257d4f0926302518f3920deba14f78a43ca31cb92e2a856072a1502",
+      "fields": {},
+      "citations": [
+        {
+          "index": 1,
+          "paragraph": "qq-20588159:1964",
+          "start": 8,
+          "end": 20
+        }
+      ],
+      "reason": "选用实际连续话语，避免跨越内引号拼接。"
+    },
+    {
+      "collection": "facts",
+      "index": 32,
+      "expectedRecordHash": "38121a4346992b74ea87e4f6973f7359f1d7f40017c532484ccda465b106d320",
+      "fields": {},
+      "citations": [
+        {
+          "index": 1,
+          "paragraph": "qq-20588159:1298",
+          "start": 24,
+          "end": 33
+        }
+      ],
+      "reason": "按原文使用有的而非有些。"
+    },
+    {
+      "collection": "issues",
+      "index": 4,
+      "expectedRecordHash": "50a8a77b5538001ddf01d5147e238fdf981b6e8db73b522ecaead780983bfeae",
+      "fields": {},
+      "citations": [
+        {
+          "index": 1,
+          "paragraph": "qq-20588159:1298",
+          "start": 24,
+          "end": 33
+        }
+      ],
+      "reason": "同一处引用按原文更正。"
+    },
+    {
+      "collection": "issues",
+      "index": 7,
+      "expectedRecordHash": "e5116b98eff36b3a289a09839e3c3691886806bd29e3aec0ebde570a51d78adb",
+      "fields": {},
+      "citations": [
+        {
+          "index": 1,
+          "paragraph": "qq-20588159:1964",
+          "start": 8,
+          "end": 20
+        }
+      ],
+      "reason": "保留连续原句，未改变身份判断。"
+    }
+  ]
+}

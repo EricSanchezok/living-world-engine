@@ -1,0 +1,38 @@
+{
+  "identity": "530d2333d3b536bb71e2a700699f34e28c870b71d05f38d079c97734b5fd906d",
+  "expectedDraftHash": "77bbb1e92418e8ee9ad625b27535f4b6f95f5dfb2110e5cf5dde36f6427dfe29",
+  "reviewer": "Codex：原文引文与相邻段落定点校核",
+  "scope": "targeted-corrections-not-runtime-approval",
+  "corrections": [
+    {
+      "collection": "objects",
+      "index": 11,
+      "expectedRecordHash": "f28de8eff804444f1966f0fe26927f9eb9ebcd8f5b4d72c5e951b2a291552870",
+      "fields": {},
+      "citations": [
+        {
+          "index": 0,
+          "paragraph": "qq-20467738:710",
+          "start": 7,
+          "end": 14
+        }
+      ],
+      "reason": "定位到实际发出牵马指令的段落。"
+    },
+    {
+      "collection": "facts",
+      "index": 62,
+      "expectedRecordHash": "f7875b5ff0fb483f5ddaf2246fa1f4cd41a2dcbc0ddde6b5dc946d53c5406d3c",
+      "fields": {},
+      "citations": [
+        {
+          "index": 2,
+          "paragraph": "qq-20486271:1264",
+          "start": 31,
+          "end": 43
+        }
+      ],
+      "reason": "恢复被漏掉的一些二字，保持实际原文连续引文。"
+    }
+  ]
+}
