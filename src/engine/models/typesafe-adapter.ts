@@ -5,7 +5,7 @@ import type { ProviderAccountConfig, ResolvedModelInference } from "./model-cata
 import type { ResolvedModelBinding } from "./model-registry";
 import { contentHash } from "./model-audit";
 import { NativeDecisionContextLimitError, ModelConfigurationError, ModelOutputError, ModelTransportError, type StructuredModelRequest } from "./model-provider";
-import { decisionOutputV2Schema, decisionPromptV2, decisionWireContextV2, validateDecisionBatchV2 } from "./decision-v2";
+import { decisionOutputV2Schema, decisionPromptV2, decisionWireContextV2, validateDecisionBatchV2, type DecisionInstructionProfile } from "./decision-v2";
 import { runtimeEventEmitter, type RuntimeCorrelation } from "../runtime/observability";
 
 const nativeInference: ResolvedModelInference = {
@@ -14,10 +14,18 @@ const nativeInference: ResolvedModelInference = {
 };
 const usageSchema = z.object({ input_tokens: z.number().int().nonnegative().safe(), output_tokens: z.number().int().nonnegative().safe() });
 
-function nativeContext(context: unknown) {
+function nativeInstructionProfile(request: Pick<StructuredModelRequest<unknown>, "system" | "userPrompt" | "promptVersion">) {
+  for (const profile of [undefined, "publication"] as const) {
+    const prompt = decisionPromptV2(profile);
+    if (request.system === prompt.system && request.userPrompt === prompt.userPrompt && request.promptVersion === prompt.version) return { profile };
+  }
+  throw new ModelConfigurationError("TypeSafe accepts only native decision batches");
+}
+
+function nativeContext(context: unknown, instructionProfile?: DecisionInstructionProfile) {
   const envelope = z.object({ decision: z.unknown() }).strict().parse(context);
   const batch = validateDecisionBatchV2(envelope.decision);
-  return { batch, wire: decisionWireContextV2(batch) };
+  return { batch, wire: decisionWireContextV2(batch, instructionProfile) };
 }
 
 /** Native TypeSafe transport. Scheduling, retries and durable audits are owned by ModelGateway. */
@@ -32,16 +40,15 @@ export class TypeSafeModelAdapter implements ModelProviderAdapter {
   }
 
   describe<T>(binding: ResolvedModelBinding, request: StructuredModelRequest<T>) {
-    const prompt = decisionPromptV2();
     if (request.role !== "decision" || request.schemaName !== "DecisionBatchV2" || request.structuredOutputMode ||
-      request.preprocessOutput || request.jsonSyntaxRecovery || binding.profile.response_transport ||
-      request.system !== prompt.system || request.userPrompt !== prompt.userPrompt || request.promptVersion !== prompt.version) {
+      request.preprocessOutput || request.jsonSyntaxRecovery || binding.profile.response_transport) {
       throw new ModelConfigurationError("TypeSafe accepts only native decision batches");
     }
+    const { profile } = nativeInstructionProfile(request);
     if (Object.values(binding.profile.inference).some(value => value !== "auto")) {
       throw new ModelConfigurationError("TypeSafe does not accept generative inference parameters");
     }
-    const { batch } = nativeContext(request.context);
+    const { batch } = nativeContext(request.context, profile);
     if (batch.view.kind === "agent" && batch.view.agentId !== request.subjectId) {
       throw new ModelConfigurationError("native private decision requires the owning subject");
     }
@@ -57,7 +64,7 @@ export class TypeSafeModelAdapter implements ModelProviderAdapter {
   private async generateWithinDeadline<T>(binding: ResolvedModelBinding, request: StructuredModelRequest<T>, contextJson: string,
     signal: AbortSignal, transportCorrelation?: RuntimeCorrelation): Promise<ModelAdapterResult> {
     const description = this.describe(binding, request);
-    const { batch, wire } = nativeContext(JSON.parse(contextJson));
+    const { batch, wire } = nativeContext(JSON.parse(contextJson), nativeInstructionProfile(request).profile);
     const url = `${this.account.base_url.replace(/\/$/u, "")}/systemone`;
     const body = JSON.stringify({ model: binding.modelId, ...wire });
     const observe = request.observer?.mode === "full" ? runtimeEventEmitter(request.observer) : undefined;

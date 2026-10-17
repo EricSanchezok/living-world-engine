@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { decisionPromptV2 } from "../../engine/models/decision-v2";
 import { completeParagraphs, renderNarrativeSegment, continueNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeRepair, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, narrativeOutputSchema } from "../narrative/publication";
 import { narrativeEvidence, narrativeTask, narrativeDiscourse } from "../narrative/scene";
@@ -67,7 +67,54 @@ describe("immutable narrative paragraphs", () => {
     }, scene, ["店主退后一步。", "报价已传到你耳中。"].map(text => renderNarrativeSegment(text, scene)), "decision-deepseek", "decision-deepseek", 1);
     expect(narrativeGroundingChoices(result.answers, 2)).toEqual(["grounded", "grounded"]);
     expect(result.audits[0]!.requestedInference).toEqual(provider.catalog.profile("decision-deepseek").inference);
+    expect(result.audits[0]!.resolvedInference).toMatchObject({ thinking: null, effort: null, reasoningBudgetTokens: null });
+    const body = JSON.parse(String(provider.transport.mock.calls[0]![1]?.body));
+    expect(body).not.toHaveProperty("thinking");
+    expect(body).not.toHaveProperty("reasoning_effort");
     expect(provider.transport).toHaveBeenCalledTimes(1);
+  });
+  it.each([false, true])("keeps the selected profile settings through native publication and language fallback: %s", async overflow => {
+    const states: unknown[] = [], questions: unknown[] = [];
+    const provider = directTestProvider(wire => {
+      states.push(wire.state);
+      questions.push(Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, {
+        type: question.type, criteria: question.criteria, instructions: wire.messages ? question.instructions
+          : (question.instructions as { task: unknown }).task,
+      }])));
+      expect(Object.keys(wire.questions)).toHaveLength(6);
+      if (overflow && !wire.messages) return new Response('{"detail":"context token limit exceeded"}', { status: 422 });
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeChoice(question, "grounded")]));
+    });
+    const prefix = ["你停在柜边。"];
+    const generate = vi.spyOn(provider.gateway, "generateStructured");
+    const result = await checkNarrativeGrounding(provider.gateway, { workloadId: "narrative", batchId: "native-publication",
+      runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 1 } }, source,
+      [renderNarrativeSegment("店主报出了价钱。", source)], "decision-jev", "decision-deepseek", 1, undefined, prefix);
+    const bodies = provider.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body)));
+    expect(bodies[0]).not.toHaveProperty("thinking");
+    expect(bodies[0].state.policy).toBe(decisionPromptV2("publication").system);
+    if (!overflow) expect(result.audits[0]!.requestedInference).toEqual(provider.catalog.profile("decision-jev").inference);
+    expect(states[0]).toMatchObject({ alreadyPublished: prefix, scene: narrativeEvidence(source), publicationTask: narrativeTask(source) });
+    expect(narrativeGroundingChoices(result.answers, 1)).toEqual(["grounded"]);
+    expect(result.dispatches.map(dispatch => dispatch.questionIds)).toEqual(Array.from({ length: overflow ? 2 : 1 }, () => [
+      "paragraph0_continuity", "paragraph0_material", "paragraph0_agency", "paragraph0_evidence", "paragraph0_speech", "paragraph0_reference",
+    ]));
+    if (overflow) {
+      expect(states[1]).toEqual(states[0]);
+      expect(questions[1]).toEqual(questions[0]);
+      expect(bodies[1]).not.toHaveProperty("thinking");
+      expect(bodies[1]).not.toHaveProperty("reasoning_effort");
+      const audit = result.audits.find(audit => audit.profileId === "decision-deepseek")!;
+      expect(audit.requestedInference).toEqual(provider.catalog.profile("decision-deepseek").inference);
+      expect(audit.resolvedInference).toMatchObject({ thinking: null, effort: null, reasoningBudgetTokens: null });
+      expect(result.dispatches[1]).toMatchObject({ profileId: "decision-deepseek", fallback: "context-limit" });
+    }
+    const nativeRequest = generate.mock.calls[0]![0];
+    for (const drift of [{ system: "An unregistered native instruction" }, { promptVersion: "unregistered-version" },
+      { system: decisionPromptV2().system }]) {
+      await expect(provider.gateway.generateStructured({ ...nativeRequest, ...drift })).rejects.toThrow("TypeSafe accepts only native decision batches");
+    }
+    expect(provider.transport).toHaveBeenCalledTimes(overflow ? 2 : 1);
   });
   const discourse: ParticipantDiscourse = { version: 1, participantId: "reader", agentId: "traveler", asOfRevision: 1,
     arrival: { id: "arrival", text: "码头在眼前。" }, entities: [{ localEntityId: "shopkeeper", label: "店主", description: "木门旁的人",

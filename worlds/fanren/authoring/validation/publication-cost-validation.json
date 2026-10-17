@@ -1,0 +1,121 @@
+{
+  "formatVersion": 1,
+  "status": "configuration-verified-quality-unqualified-disabled-mode-not-promoted",
+  "scope": "一次现有 publication 真实入口的成本优化探针，冻结旧 producer14 的 source/prefix；不执行新版世界，不证明自然游玩。",
+  "paidCalls": 1,
+  "maximumHttpRequests": 1,
+  "transportAttempts": 1,
+  "model": "deepseek-flash",
+  "requestedInference": {
+    "thinking": "disabled",
+    "effort": "auto",
+    "reasoning_budget_tokens": "auto",
+    "reasoning_summary": "auto",
+    "text_verbosity": "auto",
+    "temperature": "auto",
+    "top_p": "auto"
+  },
+  "resolvedInference": {
+    "thinking": "disabled",
+    "effort": null,
+    "reasoningBudgetTokens": null,
+    "reasoningSummary": null,
+    "textVerbosity": null,
+    "temperature": null,
+    "topP": null
+  },
+  "tokens": {
+    "input": 13940,
+    "output": 102,
+    "reasoning": 0,
+    "cacheRead": 0,
+    "cacheWrite": null
+  },
+  "totalInputPlusOutput": 14042,
+  "transportMs": 1739,
+  "requestHash": "6635b194dce3eb1d8084151d931031016b152a0d4392e66764b107752c8b328c",
+  "responseHash": "32e3a159254a662abf11d07c36f5e6edba3d107ada62ef36d433eb79e49f5aff",
+  "sourceHash": "61c0591c56a7d7ab8ec7941a7538d0b09263469c2c6f23ff5f5fd11525691d48",
+  "sourceBoundary": {
+    "revision": 6,
+    "step": 5,
+    "worldTimeSeconds": 300
+  },
+  "contextPreservedExceptComparisonParagraphs": true,
+  "prefix": [
+    "厅里静下来。约莫五分来钟，许素娘那位老掌柜没有往前厅回话，却同你父亲林敬亭一道动身往林记药材铺去了，脚步声从廊下一直远去。"
+  ],
+  "paragraphs": [
+    "许素娘与林敬亭已经到了林记药材铺，库房药箱的实数仍没有报到你耳中。",
+    "又过了五分来钟，廊下那串远去的脚步声已在林记药材铺那头停下——许素娘与林敬亭都已到了铺子里。铺中时值夜间，后院一边是库房，一边是账房，出入库簿平日就搁在账房；再往外，是通往济生药铺和回家的路。库房里的实数还没人报到前厅来。"
+  ],
+  "answers": {
+    "paragraph0_continuity": "added_content",
+    "paragraph0_material": "grounded",
+    "paragraph0_agency": "grounded",
+    "paragraph0_evidence": "grounded",
+    "paragraph0_speech": "grounded",
+    "paragraph0_reference": "grounded",
+    "paragraph1_continuity": "added_content",
+    "paragraph1_material": "added_content",
+    "paragraph1_agency": "grounded",
+    "paragraph1_evidence": "grounded",
+    "paragraph1_speech": "grounded",
+    "paragraph1_reference": "grounded"
+  },
+  "semanticReview": {
+    "firstParagraph": "事实有据，但再次提到尚未回话，与 prefix 重复；continuity 规则要求修复重复与新信息的混合，因此不是可确定必过的纯净对照，也不能断言误拦。",
+    "secondParagraph": "仍在t300，两个并行0→300回执不支持再次增加五分钟；evidence返回grounded，未检出这条已知错误。其他轴的拒绝不能证明时间检查通过。",
+    "qualityEquivalent": false,
+    "controlledSameInputComparison": false,
+    "qualification": "未通过；不推广关闭思考。不能把双段新请求与历史单段请求差异严格归因于推理开关。",
+    "effectivePolicy": "保留Flash/low；保留严格native profile连接与本地/无损复核优化，不继续付费重试。"
+  },
+  "historicalPublication": {
+    "calls": 6,
+    "inputTokens": 65336,
+    "outputTokens": 23851,
+    "reasoningIncludedInOutput": 23527,
+    "evidence": {
+      "path": ".livingworld-cache/fanren-completion/publication-inference-drift-evidence.json",
+      "sha256": "5129da6442754234ba465d13eb5e4000732f211f5113446b1bea3f4d2910fa10"
+    },
+    "singleOriginalInvocation": {
+      "id": "1ec8ff74-a9aa-41ef-8dd4-aa44370b0a2b::rt:model-audit:8ffd9cb19cf75c721c5b84866cec114314c80b03dc51afed708aeec2e2330d32",
+      "requestHash": "7e44ed050b29ab152dadfd931c7168555923b68603f31ad2223337243b58698b",
+      "usage": {
+        "cacheRead": 3968,
+        "cacheWrite": null,
+        "input": 12044,
+        "output": 7177,
+        "reasoning": 7123
+      }
+    },
+    "conclusion": "成本线索，不是禁用思考的等质验证，也不是全世界费用预测。"
+  },
+  "evidence": [
+    {
+      "path": ".livingworld-cache/fanren-completion/publication-disabled-probe-live.json",
+      "sha256": "06b5b812889c8417743868257e548b3d383fc5409953ad6a456404d842f8ac66"
+    },
+    {
+      "path": ".livingworld-cache/fanren-completion/publication-disabled-probe.ts",
+      "sha256": "212dee5ccda86506be64d80cebc253efda3a7c0903394ec6c46a1f0434891d15"
+    },
+    {
+      "path": ".livingworld-cache/fanren-completion/publication-disabled-probe.md",
+      "sha256": "9a73264e0d8dad643bd6c4a45de92e08428b3d5739faa727890c0a4a7f9c724b"
+    }
+  ],
+  "fullWorldAcceptance": false,
+  "newProducer15LiveValidated": false,
+  "mergeAllowed": false,
+  "finalLocalChecks": {
+    "realModelCalls": 0,
+    "testFiles": 2,
+    "tests": 81,
+    "passed": true,
+    "logSha256": "de000b940b45a12c0b229b65599b876ebe7181cfc96c8544a646e5f5fd206302",
+    "scope": "最终保留既定Profile的入口测试；native成功、native上下文回退与未知prompt拒绝。"
+  }
+}

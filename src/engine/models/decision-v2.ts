@@ -58,8 +58,8 @@ export function decisionPromptV2(instructionProfile?: DecisionInstructionProfile
     : "system/direct-decision.md"), userPrompt = loadPromptAsset("user/direct-decision.md");
   return { system, userPrompt, version: `decision-v2-${contentHash({ system, userPrompt, nativePolicyLayout: "shared-state-v1", decisionQuestionLayout })}` };
 }
-export function decisionWireContextV2(batch: DecisionBatchV2) {
-  const policy = decisionPromptV2().system;
+export function decisionWireContextV2(batch: DecisionBatchV2, instructionProfile?: DecisionInstructionProfile) {
+  const policy = decisionPromptV2(instructionProfile).system;
   return { state: { policy, context: batch.state }, questions: Object.fromEntries(Object.entries(batch.questions).map(([id, question]) => [id, {
     type: question.type, instructions: { rules: "Apply state.policy. Task paths refer to fields inside state.context.", task: question.instructions },
     ...(question.criteria === undefined ? {} : { criteria: question.criteria }),
