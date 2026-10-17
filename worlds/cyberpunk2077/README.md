@@ -6,7 +6,7 @@
 
 游玩从[导入与接管指南](play.md)开始，选择[十二种身份](roles.md)之一，或接管世界中的 V 等现有人物。未被接管的人物仍有自己的目标和模型控制策略。每种原创身份均有住所、实际现金、设备或使用权、三名双向熟人、业务文件和正在发生的开场处境。
 
-[制作边界](authoring/README.md)解释原作依据、时间安排、原创补充与数值标定；[覆盖清单](authoring/coverage.json)由构建器生成，记录实体、人物、关系和内容摘要。维护者修改 authoring 下的源文件后运行 `node worlds/cyberpunk2077/authoring/build.mjs`，不要手改生成的 world、角色表和 JSON 清单。运行验证见[首版记录](verification.md)与[真实模型验收](live-verification.md)。
+[制作边界](authoring/README.md)解释原作依据、时间安排、原创补充与数值标定；[覆盖清单](authoring/coverage.json)由构建器生成，记录实体、人物、关系和内容摘要。维护者修改 authoring 下的源文件后运行 `node worlds/cyberpunk2077/authoring/build.mjs`，不要手改生成的 world、角色表和 JSON 清单。当前状态见 [1.1.0 验收与收尾](live-verification-1.1.md)：最新全量实模验收未通过，已停止继续调用。另保留[首版记录](verification.md)与 [1.0.1 实模历史记录](live-verification.md)。
 
 研究资料从[调研总览](research/README.md)进入，证据缺口集中在[待核问题](research/gaps.md)。未核实的地图精度、支线人物和后期分支不能因运行包存在而视为已经完成。
 
