@@ -29,6 +29,15 @@ describe("Fanren opening sample import and entry", () => {
       expect(Object.values(state.truth.entities).filter(entity => entity.id === "canon-han-li")).toHaveLength(1);
       expect(state.truth.entities).not.toHaveProperty("small-green-bottle");
       expect(replaySimulationState(state)).toEqual(state);
+      const rootFact = Object.values(state.truth.facts).find(fact => fact.subjectId === player && fact.predicate === "spirit-root");
+      expect(rootFact?.access.kind).toBe("discoverable");
+      const rootBelief = Object.values(state.agents[player]!.belief.claims).find(claim => claim.predicate === "spirit-root");
+      if (["han-li", "herbal-apprentice", "merchant-heir"].includes(originId)) {
+        expect(rootBelief).toBeUndefined();
+      } else {
+        expect(rootBelief?.value).toEqual(rootFact?.value);
+        expect(rootBelief?.evidenceIds).toContain("prior-root-examination");
+      }
       if (originId === "han-li") {
         expect(player).toBe("canon-han-li"); expect(state.admissions).toHaveLength(0);
         expect(state.truth.placements[player]).toBe("han-home");

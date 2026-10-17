@@ -6,7 +6,7 @@
       "schema_version": 18,
       "id": "fanren-opening-sample",
       "name": "凡人修仙传·开篇编写样本",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "共同开篇时刻的九种身份试作：八种原创出身及唯一韩立。包含真实资产、相识和能力；各地区仍属局部展开，不能代替人界灵界全域完成。",
       "runtime_defaults": {
         "max_autonomous_span_seconds": 300,
@@ -51,7 +51,7 @@
         },
         {
           "id": "root-discovery",
-          "text": "灵根检测揭示既有资质，不能按愿望重写。尚未测过不等于无灵根；普通修炼需要相应资质、功法和时间。",
+          "text": "灵根检测揭示既有资质，不能按愿望重写。尚未测过不等于无灵根；普通修炼需要相应资质、功法和时间。 本样本详写的近身验灵手艺需要检查者已经学会、有可消耗法力并实际接触受检者完成检查，不能只凭声称或外观判断。检测结果首先属于检查者的观察，需另行报告才传给其他人。此具体手艺、持有人和消耗为原创运行补写。",
           "severity": "hard"
         },
         {
@@ -1525,11 +1525,12 @@
             "predicate": "spirit-root",
             "value": {
               "kind": "text",
-              "value": "木水火土四属性伪灵根；本人及家人尚不知情。"
+              "value": "木水火土四属性伪灵根。"
             },
-            "description": "木水火土四属性伪灵根；本人及家人尚不知情。",
+            "description": "木水火土四属性伪灵根。",
             "access": {
-              "kind": "private"
+              "kind": "discoverable",
+              "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
             }
           },
           {
@@ -4557,7 +4558,8 @@
                     },
                     "description": "本批异常主要由成熟度与晒制差异造成，不预置仙草。",
                     "access": {
-                      "kind": "private"
+                      "kind": "discoverable",
+                      "condition": "能实际接触这批药材与采晒记录，并以已学辨药手艺对照成熟度、晒制和药性；单看普通外观或听报价不足以判断原因。"
                     }
                   }
                 ],
@@ -4625,11 +4627,12 @@
                 "predicate": "spirit-root",
                 "value": {
                   "kind": "text",
-                  "value": "金木水土四属性灵根，客观存在但从未检测。"
+                  "value": "金木水土四属性灵根。"
                 },
-                "description": "金木水土四属性灵根，客观存在但从未检测。",
+                "description": "金木水土四属性灵根。",
                 "access": {
-                  "kind": "private"
+                  "kind": "discoverable",
+                  "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
                 },
                 "subject_id": "$participant"
               },
@@ -5106,6 +5109,21 @@
                     "access": {
                       "kind": "private"
                     }
+                  },
+                  {
+                    "id": "lin-buyer-root-examination-skill",
+                    "predicate": "learned-skill",
+                    "value": {
+                      "kind": "text",
+                      "value": "已经学会近身验灵手艺：以少量法力接触受检者检查既有灵根；需要实际接触、足够法力且检查未被阻断。只能获得资质结果，不能创造或改变灵根，不能读取他人的思想。"
+                    },
+                    "description": "已经学会近身验灵手艺：以少量法力接触受检者检查既有灵根；需要实际接触、足够法力且检查未被阻断。只能获得资质结果，不能创造或改变灵根，不能读取他人的思想。",
+                    "access": {
+                      "kind": "agents",
+                      "agentIds": [
+                        "lin-buyer"
+                      ]
+                    }
                   }
                 ],
                 "meters": [
@@ -5217,8 +5235,32 @@
                         "status": "observed"
                       }
                     ],
-                    "evidence": [],
-                    "claims": [],
+                    "evidence": [
+                      {
+                        "id": "prior-examination-training",
+                        "kind": "observation",
+                        "description": "从前已学会并练习过近身验灵手艺。",
+                        "sourceId": null,
+                        "step": 0
+                      }
+                    ],
+                    "claims": [
+                      {
+                        "id": "known-examination-method",
+                        "subjectId": "self",
+                        "predicate": "learned-skill",
+                        "value": {
+                          "kind": "text",
+                          "value": "已经学会近身验灵手艺：以少量法力接触受检者检查既有灵根；需要实际接触、足够法力且检查未被阻断。只能获得资质结果，不能创造或改变灵根，不能读取他人的思想。"
+                        },
+                        "description": "已经学会近身验灵手艺：以少量法力接触受检者检查既有灵根；需要实际接触、足够法力且检查未被阻断。只能获得资质结果，不能创造或改变灵根，不能读取他人的思想。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "prior-examination-training"
+                        ]
+                      }
+                    ],
                     "bindings": [
                       {
                         "local_entity_id": "self",
@@ -5532,7 +5574,8 @@
                     },
                     "description": "原有意向订单为四十箱。",
                     "access": {
-                      "kind": "private"
+                      "kind": "discoverable",
+                      "condition": "取得阅读这张订单的实际视线与足够光照，识字并检查其中的数量记载；仅见持有人不等于读过订单。"
                     }
                   },
                   {
@@ -5563,7 +5606,8 @@
                 },
                 "description": "木水火属性灵根。",
                 "access": {
-                  "kind": "private"
+                  "kind": "discoverable",
+                  "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
                 },
                 "subject_id": "$participant"
               },
@@ -6080,6 +6124,21 @@
                     "access": {
                       "kind": "private"
                     }
+                  },
+                  {
+                    "id": "escort-cultivator-root-examination-skill",
+                    "predicate": "learned-skill",
+                    "value": {
+                      "kind": "text",
+                      "value": "已经学会近身验灵手艺：以少量法力接触受检者检查既有灵根；需要实际接触、足够法力且检查未被阻断。只能获得资质结果，不能创造或改变灵根，不能读取他人的思想。"
+                    },
+                    "description": "已经学会近身验灵手艺：以少量法力接触受检者检查既有灵根；需要实际接触、足够法力且检查未被阻断。只能获得资质结果，不能创造或改变灵根，不能读取他人的思想。",
+                    "access": {
+                      "kind": "agents",
+                      "agentIds": [
+                        "escort-cultivator"
+                      ]
+                    }
                   }
                 ],
                 "meters": [
@@ -6169,8 +6228,32 @@
                         "status": "observed"
                       }
                     ],
-                    "evidence": [],
-                    "claims": [],
+                    "evidence": [
+                      {
+                        "id": "prior-examination-training",
+                        "kind": "observation",
+                        "description": "从前已学会并练习过近身验灵手艺。",
+                        "sourceId": null,
+                        "step": 0
+                      }
+                    ],
+                    "claims": [
+                      {
+                        "id": "known-examination-method",
+                        "subjectId": "self",
+                        "predicate": "learned-skill",
+                        "value": {
+                          "kind": "text",
+                          "value": "已经学会近身验灵手艺：以少量法力接触受检者检查既有灵根；需要实际接触、足够法力且检查未被阻断。只能获得资质结果，不能创造或改变灵根，不能读取他人的思想。"
+                        },
+                        "description": "已经学会近身验灵手艺：以少量法力接触受检者检查既有灵根；需要实际接触、足够法力且检查未被阻断。只能获得资质结果，不能创造或改变灵根，不能读取他人的思想。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "prior-examination-training"
+                        ]
+                      }
+                    ],
                     "bindings": [
                       {
                         "local_entity_id": "self",
@@ -6508,7 +6591,8 @@
                     },
                     "description": "箱内为十二件普通精钢器坯，并非神器或危险灵物。",
                     "access": {
-                      "kind": "private"
+                      "kind": "discoverable",
+                      "condition": "箱盖已经实际开启或有已建立的穿透检查能力，能够检视内部器物；只看完整封签不能知晓内容。打开与否及权限另行裁决。"
                     }
                   }
                 ],
@@ -6619,14 +6703,12 @@
                 "predicate": "spirit-root",
                 "value": {
                   "kind": "text",
-                  "value": "无灵根，曾经程简检测确认；不因许愿或人情改变。"
+                  "value": "无灵根。"
                 },
-                "description": "无灵根，曾经程简检测确认；不因许愿或人情改变。",
+                "description": "无灵根。",
                 "access": {
-                  "kind": "agents",
-                  "agentIds": [
-                    "$participant"
-                  ]
+                  "kind": "discoverable",
+                  "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
                 },
                 "subject_id": "$participant"
               },
@@ -6733,8 +6815,32 @@
                       "status": "observed"
                     }
                   ],
-                  "evidence": [],
-                  "claims": [],
+                  "evidence": [
+                    {
+                      "id": "prior-root-examination",
+                      "kind": "observation",
+                      "description": "此前已经接受过有效资质检查，并知晓检查结果。",
+                      "sourceId": null,
+                      "step": 0
+                    }
+                  ],
+                  "claims": [
+                    {
+                      "id": "known-root-attributes",
+                      "subjectId": "self",
+                      "predicate": "spirit-root",
+                      "value": {
+                        "kind": "text",
+                        "value": "无灵根。"
+                      },
+                      "description": "无灵根。",
+                      "stance": "believed",
+                      "confidence": 1,
+                      "evidenceIds": [
+                        "prior-root-examination"
+                      ]
+                    }
+                  ],
                   "bindings": [
                     {
                       "local_entity_id": "master",
@@ -7319,7 +7425,8 @@
                     },
                     "description": "可识别三种接点；缺失承压段图样，不能据此修复所有法器。",
                     "access": {
-                      "kind": "private"
+                      "kind": "discoverable",
+                      "condition": "实际读取可辨认的残谱页，理解其图样；没有的页面和知识不能从阅读中补出。"
                     }
                   }
                 ],
@@ -7355,7 +7462,8 @@
                     },
                     "description": "一处外圈接点断开；内承压环完好，是否与失页同源仍无证据。",
                     "access": {
-                      "kind": "private"
+                      "kind": "discoverable",
+                      "condition": "实际近距离检查器座接点与内环，并具备已经学会的接点识别技艺及必要工具；看见外观相似不足以确认内部状态。"
                     }
                   }
                 ],
@@ -7566,10 +7674,8 @@
                 },
                 "description": "金土水属性灵根。",
                 "access": {
-                  "kind": "agents",
-                  "agentIds": [
-                    "$participant"
-                  ]
+                  "kind": "discoverable",
+                  "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
                 },
                 "subject_id": "$participant"
               },
@@ -7670,8 +7776,32 @@
                       "status": "observed"
                     }
                   ],
-                  "evidence": [],
-                  "claims": [],
+                  "evidence": [
+                    {
+                      "id": "prior-root-examination",
+                      "kind": "observation",
+                      "description": "此前已经接受过有效资质检查，并知晓检查结果。",
+                      "sourceId": null,
+                      "step": 0
+                    }
+                  ],
+                  "claims": [
+                    {
+                      "id": "known-root-attributes",
+                      "subjectId": "self",
+                      "predicate": "spirit-root",
+                      "value": {
+                        "kind": "text",
+                        "value": "金土水属性灵根。"
+                      },
+                      "description": "金土水属性灵根。",
+                      "stance": "believed",
+                      "confidence": 1,
+                      "evidenceIds": [
+                        "prior-root-examination"
+                      ]
+                    }
+                  ],
                   "bindings": [
                     {
                       "local_entity_id": "mother",
@@ -8346,10 +8476,8 @@
                 },
                 "description": "木水土属性灵根。",
                 "access": {
-                  "kind": "agents",
-                  "agentIds": [
-                    "$participant"
-                  ]
+                  "kind": "discoverable",
+                  "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
                 },
                 "subject_id": "$participant"
               },
@@ -8444,8 +8572,32 @@
                       "status": "observed"
                     }
                   ],
-                  "evidence": [],
-                  "claims": [],
+                  "evidence": [
+                    {
+                      "id": "prior-root-examination",
+                      "kind": "observation",
+                      "description": "此前已经接受过有效资质检查，并知晓检查结果。",
+                      "sourceId": null,
+                      "step": 0
+                    }
+                  ],
+                  "claims": [
+                    {
+                      "id": "known-root-attributes",
+                      "subjectId": "self",
+                      "predicate": "spirit-root",
+                      "value": {
+                        "kind": "text",
+                        "value": "木水土属性灵根。"
+                      },
+                      "description": "木水土属性灵根。",
+                      "stance": "believed",
+                      "confidence": 1,
+                      "evidenceIds": [
+                        "prior-root-examination"
+                      ]
+                    }
+                  ],
                   "bindings": [
                     {
                       "local_entity_id": "qinghe",
@@ -9094,7 +9246,8 @@
                     },
                     "description": "每期拟供三十份，不是已经完成的生产或交付。",
                     "access": {
-                      "kind": "private"
+                      "kind": "discoverable",
+                      "condition": "实际阅读这份交易提案中可辨认的用料记录；提案数字不代表族人已经同意或已经交货。"
                     }
                   }
                 ],
@@ -9113,10 +9266,8 @@
                 },
                 "description": "火土属性灵根。",
                 "access": {
-                  "kind": "agents",
-                  "agentIds": [
-                    "$participant"
-                  ]
+                  "kind": "discoverable",
+                  "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
                 },
                 "subject_id": "$participant"
               },
@@ -9242,8 +9393,32 @@
                       "status": "observed"
                     }
                   ],
-                  "evidence": [],
-                  "claims": [],
+                  "evidence": [
+                    {
+                      "id": "prior-root-examination",
+                      "kind": "observation",
+                      "description": "此前已经接受过有效资质检查，并知晓检查结果。",
+                      "sourceId": null,
+                      "step": 0
+                    }
+                  ],
+                  "claims": [
+                    {
+                      "id": "known-root-attributes",
+                      "subjectId": "self",
+                      "predicate": "spirit-root",
+                      "value": {
+                        "kind": "text",
+                        "value": "火土属性灵根。"
+                      },
+                      "description": "火土属性灵根。",
+                      "stance": "believed",
+                      "confidence": 1,
+                      "evidenceIds": [
+                        "prior-root-examination"
+                      ]
+                    }
+                  ],
                   "bindings": [
                     {
                       "local_entity_id": "manager",
@@ -10352,11 +10527,12 @@
                 "predicate": "spirit-root",
                 "value": {
                   "kind": "text",
-                  "value": "木水双属性灵根，早已知晓。"
+                  "value": "木水双属性灵根。"
                 },
-                "description": "木水双属性灵根，早已知晓。",
+                "description": "木水双属性灵根。",
                 "access": {
-                  "kind": "private"
+                  "kind": "discoverable",
+                  "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
                 },
                 "subject_id": "$participant"
               },
@@ -10450,6 +10626,13 @@
                       "description": "多年修炼并经营商行的亲历。",
                       "sourceId": null,
                       "step": 0
+                    },
+                    {
+                      "id": "prior-root-examination",
+                      "kind": "observation",
+                      "description": "此前已经接受过有效资质检查，并知晓检查结果。",
+                      "sourceId": null,
+                      "step": 0
                     }
                   ],
                   "claims": [
@@ -10481,6 +10664,21 @@
                       "confidence": 1,
                       "evidenceIds": [
                         "prior-training"
+                      ]
+                    },
+                    {
+                      "id": "known-root-attributes",
+                      "subjectId": "self",
+                      "predicate": "spirit-root",
+                      "value": {
+                        "kind": "text",
+                        "value": "木水双属性灵根。"
+                      },
+                      "description": "木水双属性灵根。",
+                      "stance": "believed",
+                      "confidence": 1,
+                      "evidenceIds": [
+                        "prior-root-examination"
                       ]
                     }
                   ],
@@ -11075,7 +11273,8 @@
                     },
                     "description": "外环第四接点断裂，与残传已知的回环接法相符；核心用途仍缺图样。",
                     "access": {
-                      "kind": "private"
+                      "kind": "discoverable",
+                      "condition": "用已经掌握的阵法识别方法近距离检查阵片外环与接点；只能得知现有结构，无法补出缺失的核心用途。"
                     }
                   }
                 ],
@@ -11111,7 +11310,8 @@
                     },
                     "description": "凭据只授权借用测绘，不载明所有权转让；不能单独证明每个中间环节。",
                     "access": {
-                      "kind": "private"
+                      "kind": "discoverable",
+                      "condition": "凭据的正文已经向检查者实际展示，或检查者实际持有并读清全文；只听持有人主张不足以知晓文字。"
                     }
                   }
                 ],
@@ -11130,10 +11330,8 @@
                 },
                 "description": "金木水火土属性灵根。",
                 "access": {
-                  "kind": "agents",
-                  "agentIds": [
-                    "$participant"
-                  ]
+                  "kind": "discoverable",
+                  "condition": "以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。"
                 },
                 "subject_id": "$participant"
               },
@@ -11240,8 +11438,32 @@
                       "status": "observed"
                     }
                   ],
-                  "evidence": [],
-                  "claims": [],
+                  "evidence": [
+                    {
+                      "id": "prior-root-examination",
+                      "kind": "observation",
+                      "description": "此前已经接受过有效资质检查，并知晓检查结果。",
+                      "sourceId": null,
+                      "step": 0
+                    }
+                  ],
+                  "claims": [
+                    {
+                      "id": "known-root-attributes",
+                      "subjectId": "self",
+                      "predicate": "spirit-root",
+                      "value": {
+                        "kind": "text",
+                        "value": "金木水火土属性灵根。"
+                      },
+                      "description": "金木水火土属性灵根。",
+                      "stance": "believed",
+                      "confidence": 1,
+                      "evidenceIds": [
+                        "prior-root-examination"
+                      ]
+                    }
+                  ],
                   "bindings": [
                     {
                       "local_entity_id": "friend",
@@ -11398,7 +11620,10 @@
       "sample-calibration",
       "han-roots",
       "sample-open-future",
-      "sample-originals"
+      "sample-originals",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "entity:han-father": [
       "han-household",
@@ -11502,7 +11727,10 @@
       "sample-calibration",
       "sample-economy",
       "root-rule",
-      "sample-spell"
+      "sample-spell",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "law:learned-means": [
       "sample-open-future",
@@ -11543,7 +11771,10 @@
       "sample-originals",
       "sample-calibration",
       "sample-economy",
-      "root-rule"
+      "root-rule",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "origin:spirit-merchant": [
       "sample-originals",
@@ -11552,14 +11783,20 @@
       "sample-spell",
       "tianyuan-exists",
       "native-spirit",
-      "spirit-dwellings"
+      "spirit-dwellings",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "origin:han-li": [
       "han-household",
       "han-wish",
       "han-uncle",
       "han-roots",
-      "sample-open-future"
+      "sample-open-future",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "entity:lin-estate": [
       "sample-originals",
@@ -11623,28 +11860,40 @@
       "sample-calibration",
       "sample-economy",
       "root-rule",
-      "extended-origin-abilities"
+      "extended-origin-abilities",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "origin:escort-apprentice": [
       "sample-originals",
       "sample-calibration",
       "sample-economy",
       "root-rule",
-      "extended-origin-abilities"
+      "extended-origin-abilities",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "origin:clan-junior": [
       "sample-originals",
       "sample-calibration",
       "sample-economy",
       "root-rule",
-      "extended-origin-abilities"
+      "extended-origin-abilities",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "origin:foundation-independent": [
       "sample-originals",
       "sample-calibration",
       "sample-economy",
       "root-rule",
-      "extended-origin-abilities"
+      "extended-origin-abilities",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "origin:core-clan-elder": [
       "sample-originals",
@@ -11652,7 +11901,10 @@
       "sample-economy",
       "root-rule",
       "extended-origin-abilities",
-      "dajin-backprojection"
+      "dajin-backprojection",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "origin:spirit-array-master": [
       "sample-originals",
@@ -11663,7 +11915,10 @@
       "tianyuan-exists",
       "native-spirit",
       "spirit-dwellings",
-      "void-five-elements"
+      "void-five-elements",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ]
   }
 }

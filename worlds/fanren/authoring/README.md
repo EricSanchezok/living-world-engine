@@ -38,6 +38,12 @@
 
 [新增六入口实测](validation/nine-origin-first-runs.json)验证了无灵根身份施法失败、私财资助不动族库、合作提议不改变族产、筑基与炼虚实际御物。筑基与旁支各有一次初始叙事被拒绝，随后修复通过，终态无降级呈现。[富商付款复测](validation/merchant-payment-retest.json)验证“五两”按五两守恒转移，商号资金未动；该轮首段叙事仍使用了保底呈现。这些单项结果不代表各身份的全部生活与修炼玩法已经通过。
 
+[检测与调查实测](validation/discovery-live-runs.json)验证样本 v0.3.0：普通目测不泄露灵根；原创修士实际验灵、消耗法力后获知既有属性，再用对话报告给玩家；炼虚阵师检查阵片只发现已写入的结构。验灵轮仍有一段叙事使用保底呈现。检测手艺和原创器物的检查条件明确标为原创补写，不能冒充原著指定方法。
+
+[150 人与 700 人规模试验](validation/population-probes.json)均完成一次真实自治推进，分别有 150 / 700 人决策、143 / 693 人实际行动。新增居民是试验用原创人物；任务主要是清点自己的财物，关系事实保留但未进行复杂关系冲突。长期演化、高冲突场景、九入口在大规模中的运行及完整两界人口仍未验证。两轮实际调用量、token、耗时、Ledger 完整性和限制均写入记录，未取得的费用保持未知。
+
+[实现检查记录](validation/implementation-checks.json)记录整套仓库检查、局部样本验证、此前超时及完整构建的预期拒绝。测试通过不改变全域资料仍待制作的状态。
+
 ## 抽取与构建工具
 
 [抽取规则](extraction-policy.md)用于每批两遍正文对照。`npx tsx scripts/world-authoring/extract-fanren.ts --start batch-0001 --count 1` 调用已配置模型，原始输出与调用证据保存在忽略缓存中；[抽取候选](extractions/batch-0001.json)保留定位指纹，不携带原文段落，也不自动获得运行许可。精确引文失败会阻止产物，必要的编辑修改另存[绑定来源和草稿指纹的修订记录](reviews/batch-0001-corrections.json)。机器提取可以先于人工逐章通读；`extracted` 不意味着 `reviewed`。
@@ -48,6 +54,8 @@
 npx tsx scripts/world-authoring/build-fanren.ts sample
 npm run world:validate -- worlds/fanren/samples/opening/world
 npx tsx scripts/world-authoring/play-fanren-sample.ts herbal-apprentice
+npx tsx scripts/world-authoring/play-fanren-sample.ts merchant-root
+npx tsx scripts/world-authoring/scale-fanren-sample.ts 150
 ```
 
 完整目标使用 `build-fanren.ts full`；当章节、两界目录、身份或正文完整性仍有未决项时，该命令拒绝发布。原文、原始调用和 ZIP 位于忽略缓存，受版本管理的世界 YAML 与构建回执可以独立检验。

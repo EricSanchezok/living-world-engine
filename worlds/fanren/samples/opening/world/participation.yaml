@@ -302,7 +302,8 @@ origins:
                 value: 本批异常主要由成熟度与晒制差异造成，不预置仙草。
               description: 本批异常主要由成熟度与晒制差异造成，不预置仙草。
               access:
-                kind: private
+                kind: discoverable
+                condition: 能实际接触这批药材与采晒记录，并以已学辨药手艺对照成熟度、晒制和药性；单看普通外观或听报价不足以判断原因。
           meters: []
           quantities:
             - definition_id: herb-packet
@@ -350,10 +351,11 @@ origins:
           predicate: spirit-root
           value:
             kind: text
-            value: 金木水土四属性灵根，客观存在但从未检测。
-          description: 金木水土四属性灵根，客观存在但从未检测。
+            value: 金木水土四属性灵根。
+          description: 金木水土四属性灵根。
           access:
-            kind: private
+            kind: discoverable
+            condition: 以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。
           subject_id: $participant
         - id: herbal-player-age
           predicate: age
@@ -673,6 +675,16 @@ origins:
               description: 为散修药房收集普通药材作辅料，不是已知仙草。
               access:
                 kind: private
+            - id: lin-buyer-root-examination-skill
+              predicate: learned-skill
+              value:
+                kind: text
+                value: 已经学会近身验灵手艺：以少量法力接触受检者检查既有灵根；需要实际接触、足够法力且检查未被阻断。只能获得资质结果，不能创造或改变灵根，不能读取他人的思想。
+              description: 已经学会近身验灵手艺：以少量法力接触受检者检查既有灵根；需要实际接触、足够法力且检查未被阻断。只能获得资质结果，不能创造或改变灵根，不能读取他人的思想。
+              access:
+                kind: agents
+                agentIds:
+                  - lin-buyer
           meters:
             - id: lin-buyer-health
               definition_id: health
@@ -753,8 +765,24 @@ origins:
                   name: 阿柳
                   description: 在已有往来中认识；对方未向你公开的秘密仍未知。
                   status: observed
-              evidence: []
-              claims: []
+              evidence:
+                - id: prior-examination-training
+                  kind: observation
+                  description: 从前已学会并练习过近身验灵手艺。
+                  sourceId: null
+                  step: 0
+              claims:
+                - id: known-examination-method
+                  subjectId: self
+                  predicate: learned-skill
+                  value:
+                    kind: text
+                    value: 已经学会近身验灵手艺：以少量法力接触受检者检查既有灵根；需要实际接触、足够法力且检查未被阻断。只能获得资质结果，不能创造或改变灵根，不能读取他人的思想。
+                  description: 已经学会近身验灵手艺：以少量法力接触受检者检查既有灵根；需要实际接触、足够法力且检查未被阻断。只能获得资质结果，不能创造或改变灵根，不能读取他人的思想。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - prior-examination-training
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -964,7 +992,8 @@ origins:
                 value: 40
               description: 原有意向订单为四十箱。
               access:
-                kind: private
+                kind: discoverable
+                condition: 取得阅读这张订单的实际视线与足够光照，识字并检查其中的数量记载；仅见持有人不等于读过订单。
             - id: lin-order-obligation
               predicate: obligation
               value:
@@ -985,7 +1014,8 @@ origins:
             value: 木水火属性灵根。
           description: 木水火属性灵根。
           access:
-            kind: private
+            kind: discoverable
+            condition: 以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。
           subject_id: $participant
         - id: merchant-heir-age
           predicate: age
@@ -1330,6 +1360,16 @@ origins:
               description: 尚未兑现，联系需要实际传话。
               access:
                 kind: private
+            - id: escort-cultivator-root-examination-skill
+              predicate: learned-skill
+              value:
+                kind: text
+                value: 已经学会近身验灵手艺：以少量法力接触受检者检查既有灵根；需要实际接触、足够法力且检查未被阻断。只能获得资质结果，不能创造或改变灵根，不能读取他人的思想。
+              description: 已经学会近身验灵手艺：以少量法力接触受检者检查既有灵根；需要实际接触、足够法力且检查未被阻断。只能获得资质结果，不能创造或改变灵根，不能读取他人的思想。
+              access:
+                kind: agents
+                agentIds:
+                  - escort-cultivator
           meters:
             - id: escort-cultivator-health
               definition_id: health
@@ -1396,8 +1436,24 @@ origins:
                   name: 旧恩人
                   description: 曾帮你避开追踪，你已确认对方无灵根。
                   status: observed
-              evidence: []
-              claims: []
+              evidence:
+                - id: prior-examination-training
+                  kind: observation
+                  description: 从前已学会并练习过近身验灵手艺。
+                  sourceId: null
+                  step: 0
+              claims:
+                - id: known-examination-method
+                  subjectId: self
+                  predicate: learned-skill
+                  value:
+                    kind: text
+                    value: 已经学会近身验灵手艺：以少量法力接触受检者检查既有灵根；需要实际接触、足够法力且检查未被阻断。只能获得资质结果，不能创造或改变灵根，不能读取他人的思想。
+                  description: 已经学会近身验灵手艺：以少量法力接触受检者检查既有灵根；需要实际接触、足够法力且检查未被阻断。只能获得资质结果，不能创造或改变灵根，不能读取他人的思想。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - prior-examination-training
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -1629,7 +1685,8 @@ origins:
                 value: 箱内为十二件普通精钢器坯，并非神器或危险灵物。
               description: 箱内为十二件普通精钢器坯，并非神器或危险灵物。
               access:
-                kind: private
+                kind: discoverable
+                condition: 箱盖已经实际开启或有已建立的穿透检查能力，能够检视内部器物；只看完整封签不能知晓内容。打开与否及权限另行裁决。
           meters: []
           quantities: []
           ratings: []
@@ -1711,12 +1768,11 @@ origins:
           predicate: spirit-root
           value:
             kind: text
-            value: 无灵根，曾经程简检测确认；不因许愿或人情改变。
-          description: 无灵根，曾经程简检测确认；不因许愿或人情改变。
+            value: 无灵根。
+          description: 无灵根。
           access:
-            kind: agents
-            agentIds:
-              - $participant
+            kind: discoverable
+            condition: 以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。
           subject_id: $participant
         - id: escort-apprentice-age
           predicate: age
@@ -1787,8 +1843,24 @@ origins:
                 name: 驿路
                 description: 熟悉院门到驿路的走法。
                 status: observed
-            evidence: []
-            claims: []
+            evidence:
+              - id: prior-root-examination
+                kind: observation
+                description: 此前已经接受过有效资质检查，并知晓检查结果。
+                sourceId: null
+                step: 0
+            claims:
+              - id: known-root-attributes
+                subjectId: self
+                predicate: spirit-root
+                value:
+                  kind: text
+                  value: 无灵根。
+                description: 无灵根。
+                stance: believed
+                confidence: 1
+                evidenceIds:
+                  - prior-root-examination
             bindings:
               - local_entity_id: master
                 canonical_entity_ids:
@@ -2186,7 +2258,8 @@ origins:
                 value: 可识别三种接点；缺失承压段图样，不能据此修复所有法器。
               description: 可识别三种接点；缺失承压段图样，不能据此修复所有法器。
               access:
-                kind: private
+                kind: discoverable
+                condition: 实际读取可辨认的残谱页，理解其图样；没有的页面和知识不能从阅读中补出。
           meters: []
           quantities: []
           ratings: []
@@ -2212,7 +2285,8 @@ origins:
                 value: 一处外圈接点断开；内承压环完好，是否与失页同源仍无证据。
               description: 一处外圈接点断开；内承压环完好，是否与失页同源仍无证据。
               access:
-                kind: private
+                kind: discoverable
+                condition: 实际近距离检查器座接点与内环，并具备已经学会的接点识别技艺及必要工具；看见外观相似不足以确认内部状态。
           meters: []
           quantities: []
           ratings: []
@@ -2369,9 +2443,8 @@ origins:
             value: 金土水属性灵根。
           description: 金土水属性灵根。
           access:
-            kind: agents
-            agentIds:
-              - $participant
+            kind: discoverable
+            condition: 以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。
           subject_id: $participant
         - id: clan-junior-age
           predicate: age
@@ -2438,8 +2511,24 @@ origins:
                 name: 支谷生活区
                 description: 熟悉库房外的生活区。
                 status: observed
-            evidence: []
-            claims: []
+            evidence:
+              - id: prior-root-examination
+                kind: observation
+                description: 此前已经接受过有效资质检查，并知晓检查结果。
+                sourceId: null
+                step: 0
+            claims:
+              - id: known-root-attributes
+                subjectId: self
+                predicate: spirit-root
+                value:
+                  kind: text
+                  value: 金土水属性灵根。
+                description: 金土水属性灵根。
+                stance: believed
+                confidence: 1
+                evidenceIds:
+                  - prior-root-examination
             bindings:
               - local_entity_id: mother
                 canonical_entity_ids:
@@ -2900,9 +2989,8 @@ origins:
             value: 木水土属性灵根。
           description: 木水土属性灵根。
           access:
-            kind: agents
-            agentIds:
-              - $participant
+            kind: discoverable
+            condition: 以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。
           subject_id: $participant
         - id: foundation-independent-age
           predicate: age
@@ -2965,8 +3053,24 @@ origins:
                 name: 药圃
                 description: 洞府有小药圃，熟悉道路。
                 status: observed
-            evidence: []
-            claims: []
+            evidence:
+              - id: prior-root-examination
+                kind: observation
+                description: 此前已经接受过有效资质检查，并知晓检查结果。
+                sourceId: null
+                step: 0
+            claims:
+              - id: known-root-attributes
+                subjectId: self
+                predicate: spirit-root
+                value:
+                  kind: text
+                  value: 木水土属性灵根。
+                description: 木水土属性灵根。
+                stance: believed
+                confidence: 1
+                evidenceIds:
+                  - prior-root-examination
             bindings:
               - local_entity_id: qinghe
                 canonical_entity_ids:
@@ -3414,7 +3518,8 @@ origins:
                 value: 30
               description: 每期拟供三十份，不是已经完成的生产或交付。
               access:
-                kind: private
+                kind: discoverable
+                condition: 实际阅读这份交易提案中可辨认的用料记录；提案数字不代表族人已经同意或已经交货。
           meters: []
           quantities: []
           ratings: []
@@ -3427,9 +3532,8 @@ origins:
             value: 火土属性灵根。
           description: 火土属性灵根。
           access:
-            kind: agents
-            agentIds:
-              - $participant
+            kind: discoverable
+            condition: 以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。
           subject_id: $participant
         - id: core-clan-elder-age
           predicate: age
@@ -3513,8 +3617,24 @@ origins:
                 name: 聚落
                 description: 熟悉厅外道路。
                 status: observed
-            evidence: []
-            claims: []
+            evidence:
+              - id: prior-root-examination
+                kind: observation
+                description: 此前已经接受过有效资质检查，并知晓检查结果。
+                sourceId: null
+                step: 0
+            claims:
+              - id: known-root-attributes
+                subjectId: self
+                predicate: spirit-root
+                value:
+                  kind: text
+                  value: 火土属性灵根。
+                description: 火土属性灵根。
+                stance: believed
+                confidence: 1
+                evidenceIds:
+                  - prior-root-examination
             bindings:
               - local_entity_id: manager
                 canonical_entity_ids:
@@ -4286,10 +4406,11 @@ origins:
           predicate: spirit-root
           value:
             kind: text
-            value: 木水双属性灵根，早已知晓。
-          description: 木水双属性灵根，早已知晓。
+            value: 木水双属性灵根。
+          description: 木水双属性灵根。
           access:
-            kind: private
+            kind: discoverable
+            condition: 以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。
           subject_id: $participant
         - id: merchant-skills
           predicate: learned-skill
@@ -4352,6 +4473,11 @@ origins:
                 description: 多年修炼并经营商行的亲历。
                 sourceId: null
                 step: 0
+              - id: prior-root-examination
+                kind: observation
+                description: 此前已经接受过有效资质检查，并知晓检查结果。
+                sourceId: null
+                step: 0
             claims:
               - id: known-cultivation
                 subjectId: self
@@ -4375,6 +4501,17 @@ origins:
                 confidence: 1
                 evidenceIds:
                   - prior-training
+              - id: known-root-attributes
+                subjectId: self
+                predicate: spirit-root
+                value:
+                  kind: text
+                  value: 木水双属性灵根。
+                description: 木水双属性灵根。
+                stance: believed
+                confidence: 1
+                evidenceIds:
+                  - prior-root-examination
             bindings:
               - local_entity_id: manager
                 canonical_entity_ids:
@@ -4787,7 +4924,8 @@ origins:
                 value: 外环第四接点断裂，与残传已知的回环接法相符；核心用途仍缺图样。
               description: 外环第四接点断裂，与残传已知的回环接法相符；核心用途仍缺图样。
               access:
-                kind: private
+                kind: discoverable
+                condition: 用已经掌握的阵法识别方法近距离检查阵片外环与接点；只能得知现有结构，无法补出缺失的核心用途。
           meters: []
           quantities: []
           ratings: []
@@ -4813,7 +4951,8 @@ origins:
                 value: 凭据只授权借用测绘，不载明所有权转让；不能单独证明每个中间环节。
               description: 凭据只授权借用测绘，不载明所有权转让；不能单独证明每个中间环节。
               access:
-                kind: private
+                kind: discoverable
+                condition: 凭据的正文已经向检查者实际展示，或检查者实际持有并读清全文；只听持有人主张不足以知晓文字。
           meters: []
           quantities: []
           ratings: []
@@ -4826,9 +4965,8 @@ origins:
             value: 金木水火土属性灵根。
           description: 金木水火土属性灵根。
           access:
-            kind: agents
-            agentIds:
-              - $participant
+            kind: discoverable
+            condition: 以已经建立的验灵方法和实际可用能力完成检查，满足该方法的接触、距离及遮蔽条件。目测、闲谈、愿望和旧记录本身不触发发现；检查只揭示当前既有属性。
           subject_id: $participant
         - id: spirit-array-master-age
           predicate: age
@@ -4899,8 +5037,24 @@ origins:
                 name: 天渊城生活区
                 description: 熟悉居所附近的公共道路。
                 status: observed
-            evidence: []
-            claims: []
+            evidence:
+              - id: prior-root-examination
+                kind: observation
+                description: 此前已经接受过有效资质检查，并知晓检查结果。
+                sourceId: null
+                step: 0
+            claims:
+              - id: known-root-attributes
+                subjectId: self
+                predicate: spirit-root
+                value:
+                  kind: text
+                  value: 金木水火土属性灵根。
+                description: 金木水火土属性灵根。
+                stance: believed
+                confidence: 1
+                evidenceIds:
+                  - prior-root-examination
             bindings:
               - local_entity_id: friend
                 canonical_entity_ids:

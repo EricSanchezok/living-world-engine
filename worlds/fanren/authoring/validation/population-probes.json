@@ -1,0 +1,237 @@
+{
+  "status": "bounded-probes-not-full-scale-qualification",
+  "protocol": {
+    "source": "fanren-opening-sample@0.3.0",
+    "mode": "observer",
+    "boundaries": 1,
+    "resident_goal": "清点自己的灵石一次，不转移财物。",
+    "synthetic_relations": "每名新增居民有合作与亲属两个有向事实及本人的对应认知，未验证双方互认或关系冲突。",
+    "population_counts": "9 名样本基础 Agent，加 141 或 691 名明确原创的试验居民；未选取 Origin。",
+    "timing": "创建实例开始，到导出状态、事件并核对回放结束；不包含事前构建与导入。",
+    "reproduction": "npx tsx scripts/world-authoring/scale-fanren-sample.ts 150|700",
+    "reproduction_note": "实测先使用忽略缓存原型，原始 ZIP 与指纹保留。受版本管理的生成器已修正试验院落描述把天渊城误写为天元城的问题，当前生成内容指纹因此不同；没有把修改后的包冒称为已经实测。"
+  },
+  "runs": [
+    {
+      "runId": "2026-10-17T09-01-36-126Z-scale-150",
+      "instanceId": "f505447e-7fbb-4e09-8cf4-7cfc3e49c114",
+      "population": 150,
+      "worldHash": "sha256:050155020dc140e4627fb17dc242f6a1b9f59c691117314010bfa99f064af79b",
+      "producer": {
+        "role": "world-execution",
+        "id": "direct-world",
+        "version": "8",
+        "contractVersion": 13,
+        "config": {
+          "decision": null,
+          "creation": null,
+          "fallback": null,
+          "creationEnabled": true
+        },
+        "children": {},
+        "manifestHash": "d9a02dac5cd25062083f66c54fe339b379cc751669d2d7f459674fb6d32a19d2"
+      },
+      "durationMs": 39072,
+      "failure": null,
+      "runStatuses": [
+        {
+          "status": "completed",
+          "stopReason": "requested-boundaries-completed"
+        }
+      ],
+      "decisionSubjects": 150,
+      "actorsWithCommittedActions": 143,
+      "committedFrames": 143,
+      "pendingActivities": 0,
+      "failedIntents": [],
+      "physicalRequests": 293,
+      "auditedInvocations": 293,
+      "tokens": {
+        "input": {
+          "knownSum": 2892333,
+          "unknownInvocations": 0
+        },
+        "output": {
+          "knownSum": 237361,
+          "unknownInvocations": 0
+        },
+        "reasoning": {
+          "knownSum": 0,
+          "unknownInvocations": 293
+        },
+        "cacheRead": {
+          "knownSum": 0,
+          "unknownInvocations": 293
+        }
+      },
+      "cost": null,
+      "errors": [],
+      "checks": {
+        "population": true,
+        "canonicalHanCount": 1,
+        "quantitiesUnchanged": true,
+        "relationsPreserved": true,
+        "replayEqual": true
+      },
+      "limitations": [
+        "Single autonomous world checkpoint, not a long-run stability qualification.",
+        "Synthetic extra residents do not count as canonical world coverage.",
+        "Observer mode does not test player narration or all nine Origins.",
+        "Costs are unknown where complete billing evidence is unavailable.",
+        "历史试验院落的说明误写天元城，放置身份仍正确引用天渊城；当前生成器取用实际地点名称。该轮不能作为原著地理准确性验证。"
+      ],
+      "status": "passed-single-low-conflict-checkpoint",
+      "fixture": {
+        "sourceModuleHash": "40365c4bbea26e3437392727cff77f69810c3580c6f1d75e83207eb49103a8b2",
+        "population": 150,
+        "baseAgents": 9,
+        "syntheticAgents": 141,
+        "relationFacts": 282,
+        "scope": "synthetic-scale-probe-not-canonical-coverage",
+        "worldHash": "sha256:050155020dc140e4627fb17dc242f6a1b9f59c691117314010bfa99f064af79b"
+      },
+      "relationship_conflict_trials": 0,
+      "relationship_conflicts": null,
+      "repair_invocations": 0,
+      "doctor": {
+        "apiVersion": 1,
+        "indexVersion": 1,
+        "schemaVersion": 9,
+        "indexFresh": true,
+        "executionCount": 2,
+        "eventCount": 4000,
+        "artifactCount": 1486,
+        "indexedEventCount": 4000,
+        "indexedInvocationCount": 293,
+        "issueCount": 0,
+        "orphanedIndexRows": 0,
+        "missingIndexRows": 0,
+        "orphanedArtifacts": 0,
+        "warnings": []
+      },
+      "local_evidence": "ignored cache fanren-playtests/2026-10-17T09-01-36-126Z-scale-150/livingworld.sqlite",
+      "evidence_files_sha256": {
+        "fixture.json": "4f03e27678bf7208c5fa0eb16bd39a750ab6dec2ba663af30780aef5588a9269",
+        "initial.json": "d9b8fd764297b9b2340663adfaa0895a592821b9aef5c025a88779573efda086",
+        "final.json": "0b1938609947d9714b47a1a8a340056d791863ac4977ac4fcc66ee2f285bb5f0",
+        "events.json": "a0ba907cab7e41efe5563f997d0f286a359c3562f5b63369691b80c9981efde5",
+        "report.json": "5cdc078db661e783649ce86bf102ebec7d5993899afdf51d61716d96d06c4e9c",
+        "world.zip": "c56ca1e77d0067f132dd8d184749d146a372abd2be7f1515529fbcc1807931e4"
+      }
+    },
+    {
+      "runId": "2026-10-17T09-03-38-309Z-scale-700",
+      "instanceId": "b97113bc-1638-42f1-921a-5634cbbd82a1",
+      "population": 700,
+      "worldHash": "sha256:41580aa8189ec71303d295423540a8f5954507ba74e1d15167f720752d460498",
+      "producer": {
+        "role": "world-execution",
+        "id": "direct-world",
+        "version": "8",
+        "contractVersion": 13,
+        "config": {
+          "decision": null,
+          "creation": null,
+          "fallback": null,
+          "creationEnabled": true
+        },
+        "children": {},
+        "manifestHash": "d9a02dac5cd25062083f66c54fe339b379cc751669d2d7f459674fb6d32a19d2"
+      },
+      "durationMs": 324895,
+      "failure": null,
+      "runStatuses": [
+        {
+          "status": "completed",
+          "stopReason": "requested-boundaries-completed"
+        }
+      ],
+      "decisionSubjects": 700,
+      "actorsWithCommittedActions": 693,
+      "committedFrames": 693,
+      "pendingActivities": 0,
+      "failedIntents": [],
+      "physicalRequests": 1393,
+      "auditedInvocations": 1393,
+      "tokens": {
+        "input": {
+          "knownSum": 13611007,
+          "unknownInvocations": 0
+        },
+        "output": {
+          "knownSum": 1104377,
+          "unknownInvocations": 0
+        },
+        "reasoning": {
+          "knownSum": 0,
+          "unknownInvocations": 1393
+        },
+        "cacheRead": {
+          "knownSum": 0,
+          "unknownInvocations": 1393
+        }
+      },
+      "cost": null,
+      "errors": [],
+      "checks": {
+        "population": true,
+        "canonicalHanCount": 1,
+        "quantitiesUnchanged": true,
+        "relationsPreserved": true,
+        "replayEqual": true
+      },
+      "limitations": [
+        "Single autonomous world checkpoint, not a long-run stability qualification.",
+        "Synthetic extra residents do not count as canonical world coverage.",
+        "Observer mode does not test player narration or all nine Origins.",
+        "Costs are unknown where complete billing evidence is unavailable.",
+        "历史试验院落的说明误写天元城，放置身份仍正确引用天渊城；当前生成器取用实际地点名称。该轮不能作为原著地理准确性验证。"
+      ],
+      "status": "passed-single-low-conflict-checkpoint",
+      "fixture": {
+        "sourceModuleHash": "6b444dfb4f8ec4949fb50fbdd2df03be188bee4ea2b4ea6f42d62c5ee3aa791b",
+        "population": 700,
+        "baseAgents": 9,
+        "syntheticAgents": 691,
+        "relationFacts": 1382,
+        "scope": "synthetic-scale-probe-not-canonical-coverage",
+        "worldHash": "sha256:41580aa8189ec71303d295423540a8f5954507ba74e1d15167f720752d460498"
+      },
+      "relationship_conflict_trials": 0,
+      "relationship_conflicts": null,
+      "repair_invocations": 0,
+      "doctor": {
+        "apiVersion": 1,
+        "indexVersion": 1,
+        "schemaVersion": 9,
+        "indexFresh": true,
+        "executionCount": 2,
+        "eventCount": 18850,
+        "artifactCount": 6983,
+        "indexedEventCount": 18850,
+        "indexedInvocationCount": 1393,
+        "issueCount": 0,
+        "orphanedIndexRows": 0,
+        "missingIndexRows": 0,
+        "orphanedArtifacts": 0,
+        "warnings": []
+      },
+      "local_evidence": "ignored cache fanren-playtests/2026-10-17T09-03-38-309Z-scale-700/livingworld.sqlite",
+      "evidence_files_sha256": {
+        "fixture.json": "ca8d86d7fe79f2e08ba5b8d0bf054c20bf66754c6bd73af87de67b7450afaeaf",
+        "initial.json": "86c85a7117a5637e0e785d3e842d646e7883e92f6ee04baee6dfc3a1c6a7d0e9",
+        "final.json": "3761313bb911fd87e7c5241cec68a6faf916e32493fb96c39c39d6a33026aca1",
+        "events.json": "87315c7546cfb9494e5fcf050823f12065b06bc12624e14d79841d5ecdce0b01",
+        "report.json": "7a571ab1e050282b8b3660ac8c2c5714110f04738e9bf99eb772367945dc9b18",
+        "world.zip": "9f5cab95b0c2ddb40fe48c1b00e079099be4e3f36a74f71fc0fe971105ee42ed"
+      }
+    }
+  ],
+  "not_tested": [
+    "高冲突贸易、债务与关系变化",
+    "长期自治与多轮资源竞争",
+    "玩家叙事及九入口在大规模世界中同时运行",
+    "完整两界最终人口包"
+  ],
+  "cost_note": "输入输出 token 来自实际调用；缺少完整计费资料，cost 为 null。"
+}

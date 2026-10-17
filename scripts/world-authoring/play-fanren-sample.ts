@@ -19,11 +19,14 @@ const scenarios: Record<string, string[]> = {
   "foundation-independent": ["我用已经掌握的御物法诀，把随身飞行法器托到眼前检查外观，再收回手中。"],
   "core-clan-elder": ["我从自己的积蓄里取出一百枚低阶灵石交给许澄，说明这是我自愿给后辈修习的资助，不从族库支出。"],
   "spirit-array-master": ["我催动已学的御物法诀，把自己的定潮法盘托到眼前，再收回手中。顾清弦带来的阵片仍由他暂持，等双方提供凭据。"],
+  "merchant-root": ["我看看自己的手心与脸色，不施术，也不请任何人检查。", "我对姚客说：我想知道自己能否修仙。倘若你会验灵且愿意帮忙，我同意你现在近身检查，并请把结果如实告诉我。买卖的事仍由父亲和许掌柜商议，不作交换承诺。"],
+  "array-inspection": ["我以已经掌握的阵法知识，使用自己的验阵工具，近距离仔细检查顾清弦暂持的阵片外环与接点，先确认能看清的结构，不接管阵片，也不尝试修补。"],
 };
 
 async function main() {
   const scenario = process.argv[2];
   if (!scenario || !scenarios[scenario]) throw new Error(`usage: npx tsx scripts/world-authoring/play-fanren-sample.ts ${Object.keys(scenarios).join("|")}`);
+  const originId = ({ "merchant-root": "merchant-heir", "array-inspection": "spirit-array-master" } as Record<string, string>)[scenario] ?? scenario;
   const runId = `${new Date().toISOString().replaceAll(/[:.]/g, "-")}-${scenario}`;
   const root = path.resolve(".livingworld-cache/fanren-playtests", runId);
   mkdirSync(root, { recursive: true });
@@ -36,7 +39,7 @@ async function main() {
   const host = new WorldHost({ repository: database, store: database, ledger: database, provider });
   const startedAt = Date.now();
   const instance = await host.createInstance({ worldId: imported.id, title: `凡人样本实测：${scenario}`, seed: 20261017,
-    start: { kind: "origin", originId: scenario, displayName: scenario === "han-li" ? "韩立" : "林知远", appearance: "", motivation: "" } });
+    start: { kind: "origin", originId, displayName: originId === "han-li" ? "韩立" : "林知远", appearance: "", motivation: "" } });
   const id = instance.summary.id, participant = instance.participants[0]!;
   const actions: unknown[] = [];
   const save = (file: string, value: unknown) => writeFileSync(path.join(root, file), `${JSON.stringify(value, null, 2)}\n`);

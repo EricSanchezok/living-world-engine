@@ -422,5 +422,62 @@
       "root-rule"
     ],
     "evidence": []
+  },
+  {
+    "id": "root-testing-evidence",
+    "statement": "原文存在由修士测试灵根属性、随后再次测试并得到相同结论的事例。检测与改变资质是不同事情；原文此处没有交代可一概套用的具体手诀和仪器。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "读者在黄枫谷阶段获知，开篇人物不因此获知韩立属性。",
+    "openingReason": "检测既有资质作为世界机制回溯；不提前建立王师叔与韩立的认识或测试经历。",
+    "status": "reviewed-for-sample",
+    "dependencies": [
+      "root-rule"
+    ],
+    "evidence": [
+      {
+        "chapterId": "qq-20599517",
+        "chapterSha256": "525610b34ed485aa718089c6f25b262bff38e059d69d43a5ab8b9ce7bcea180f",
+        "start": 2367,
+        "end": 2379,
+        "anchorSha256": "0d4499f80bbfb0d630e5336c450e50b4959775ead13c03c7d757188741f360a4"
+      },
+      {
+        "chapterId": "qq-20790929",
+        "chapterSha256": "d28d5077a9d5902a032cb4a2c68ad1ed49d220df2a749b4c027aff7e4a723c40",
+        "start": 2502,
+        "end": 2526,
+        "anchorSha256": "7b5350d7f044d39f61a3d3c3bec2365bbde5f839c96934226178ac6e0eb1e0a1"
+      }
+    ]
+  },
+  {
+    "id": "original-root-examination-method",
+    "statement": "样本原创近身验灵手艺由姚客和程简掌握，需要法力和实际接触；条件满足后检查当前既有灵根。各已入门原创身份及无灵根镖局学徒保有过去检查的个人记忆；未知身份不预先知道结果。具体手艺、能力分配与消耗不是原著原文。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "相应原创人物过去的学习和个人经历。",
+    "openingReason": "为用户批准的资质检测玩法补齐可执行条件；不赋予凡人直接施术或改造灵根的能力。",
+    "status": "reviewed-for-sample",
+    "dependencies": [
+      "root-testing-evidence",
+      "sample-calibration",
+      "extended-origin-abilities"
+    ],
+    "evidence": []
+  },
+  {
+    "id": "original-inspection-conditions",
+    "statement": "原创药材、订单、货箱、残谱、器座、交易提案、阵片与凭据具有明确检查条件。检查可以揭示已写入的内容或结构；不把观察当作取得所有权、自动修复、补足传承或达成协议。条件由作者逐项补写，不代表原著指定同名器物。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "各检查实际发生后由检查者获知；其他人通过独立渠道获知。",
+    "openingReason": "补齐已批准原创出身的调查玩法，使用既有物件和既有状态。",
+    "status": "reviewed-for-sample",
+    "dependencies": [
+      "sample-originals",
+      "extended-origin-abilities"
+    ],
+    "evidence": []
   }
 ]

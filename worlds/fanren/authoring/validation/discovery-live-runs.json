@@ -1,0 +1,178 @@
+{
+  "status": "bounded-live-evidence-not-full-qualification",
+  "sample_version": "0.3.0",
+  "runs": [
+    {
+      "run_id": "2026-10-17T08-53-57-978Z-merchant-root",
+      "instance_id": "a6992696-daa4-4110-a936-91ee8c4239cc",
+      "world_hash": "sha256:1b13e9284f6f63c8a80bbfc20ff3a559a3be3c5297841e3a33f71671670d81b9",
+      "producer": {
+        "role": "world-execution",
+        "id": "direct-world",
+        "version": "8",
+        "contractVersion": 13,
+        "config": {
+          "decision": null,
+          "creation": null,
+          "fallback": null,
+          "creationEnabled": true
+        },
+        "children": {},
+        "manifestHash": "d9a02dac5cd25062083f66c54fe339b379cc751669d2d7f459674fb6d32a19d2"
+      },
+      "population": 14,
+      "agents_with_committed_actions": 5,
+      "duration_ms": 164165,
+      "physical_requests": 37,
+      "audited_invocations": 37,
+      "tokens": {
+        "input": {
+          "known_sum": 432524,
+          "unknown_invocations": 0
+        },
+        "output": {
+          "known_sum": 34536,
+          "unknown_invocations": 0
+        },
+        "reasoning": {
+          "known_sum": 6398,
+          "unknown_invocations": 19
+        },
+        "cacheRead": {
+          "known_sum": 47232,
+          "unknown_invocations": 19
+        },
+        "cacheWrite": {
+          "known_sum": 0,
+          "unknown_invocations": 37
+        }
+      },
+      "cost": null,
+      "error_events": {
+        "execution.failed": 3
+      },
+      "narrative_terminal_statuses": {
+        "complete": 3,
+        "fallback": 1
+      },
+      "narrative_retry_beats": 2,
+      "local_evidence": "ignored cache fanren-playtests/2026-10-17T08-53-57-978Z-merchant-root/livingworld.sqlite",
+      "evidence_files_sha256": {
+        "initial.json": "00bea5d0486cecfbf6266685d1c42dec379ab5a1e4a53586b0d8b5343072730c",
+        "final.json": "ee084be3a6487cb24c478f71d0b06b06a04432bf927e30b46a64e967b133f96f",
+        "events.json": "1e02067f0d7dc0197dc0987ffba218fcbcce074c30780eddad931f861da635bc",
+        "report.json": "33c32ddd0702f1e2a10d63e644adc49da53a1bc50b60efa8765188b565ab7132"
+      },
+      "status": "state-and-report-passed-presentation-fallback",
+      "checks": [
+        {
+          "case": "目测不发现灵根",
+          "result": "passed-limited-case",
+          "player_root_claims_after_glance": 0
+        },
+        {
+          "case": "实际验灵读取原有资质",
+          "result": "passed-limited-case",
+          "examiner": "lin-buyer",
+          "value": "木水火属性灵根。",
+          "canonical_fact_unchanged": true,
+          "mana_before": 40,
+          "mana_after": 39
+        },
+        {
+          "case": "检测与报告分开",
+          "result": "passed-limited-case",
+          "examiner_observed_claims": 1,
+          "player_direct_root_claims": 0,
+          "player_received_testimony": 1,
+          "note": "玩家保存对话证据；没有把他人报告改成玩家亲自观察所得的属性事实。"
+        }
+      ],
+      "limitations": [
+        "一次检测与报告，未覆盖重复检测、遮蔽、反制和所有出身。",
+        "一段呈现重试后通过，另一段两次被拒绝后使用保底呈现，不能算全部呈现通过。",
+        "验灵之后的交谈曾再次被语义可见性判断选中，值未改变；不得据此宣称所有无关行动都已通过实测。"
+      ]
+    },
+    {
+      "run_id": "2026-10-17T08-53-57-980Z-array-inspection",
+      "instance_id": "ff0c0010-23c2-4ae0-ba5b-99d65a1e235f",
+      "world_hash": "sha256:1b13e9284f6f63c8a80bbfc20ff3a559a3be3c5297841e3a33f71671670d81b9",
+      "producer": {
+        "role": "world-execution",
+        "id": "direct-world",
+        "version": "8",
+        "contractVersion": 13,
+        "config": {
+          "decision": null,
+          "creation": null,
+          "fallback": null,
+          "creationEnabled": true
+        },
+        "children": {},
+        "manifestHash": "d9a02dac5cd25062083f66c54fe339b379cc751669d2d7f459674fb6d32a19d2"
+      },
+      "population": 13,
+      "agents_with_committed_actions": 1,
+      "duration_ms": 21332,
+      "physical_requests": 12,
+      "audited_invocations": 12,
+      "tokens": {
+        "input": {
+          "known_sum": 97483,
+          "unknown_invocations": 0
+        },
+        "output": {
+          "known_sum": 7013,
+          "unknown_invocations": 0
+        },
+        "reasoning": {
+          "known_sum": 618,
+          "unknown_invocations": 7
+        },
+        "cacheRead": {
+          "known_sum": 14720,
+          "unknown_invocations": 7
+        },
+        "cacheWrite": {
+          "known_sum": 0,
+          "unknown_invocations": 12
+        }
+      },
+      "cost": null,
+      "error_events": {},
+      "narrative_terminal_statuses": {
+        "complete": 1
+      },
+      "narrative_retry_beats": 0,
+      "local_evidence": "ignored cache fanren-playtests/2026-10-17T08-53-57-980Z-array-inspection/livingworld.sqlite",
+      "evidence_files_sha256": {
+        "initial.json": "501b54401166f64d94881655f80a6b872f40d860fce904ee922cb4a69bf13fd9",
+        "final.json": "9bd8563ee04f958b5060be66e79f793ee96f34a09f81540a6141f3100d72e609",
+        "events.json": "e32e2543c4d4a88efc65a19f2fed74a98191f852ca019e84017bcd8b3c657757",
+        "report.json": "7f8c18b6f9af838bb93c1b49fdea4f05ece6e0ef7cc4b8d954a02810ba3c0f19"
+      },
+      "status": "passed-limited-case",
+      "checks": [
+        {
+          "case": "已学阵法检查已存在阵片",
+          "result": "passed-limited-case",
+          "observed": "外环第四接点断裂；核心用途仍缺图样。",
+          "canonical_fact_unchanged": true,
+          "holder": "array-friend",
+          "ownership_still_disputed": true,
+          "repaired": false
+        }
+      ],
+      "limitations": [
+        "只验证结构检查，没有验证修复、竞价或所有权争议解决。"
+      ]
+    }
+  ],
+  "cost_note": "缺少完整计费凭据，未知项保持 null，不计作零成本。",
+  "retry_count_rule": "attempts 为生成次数；只有大于 1 才算发生重试，0 可以是已送达对话直接呈现。",
+  "reproduce": [
+    "npx tsx scripts/world-authoring/play-fanren-sample.ts merchant-root",
+    "npx tsx scripts/world-authoring/play-fanren-sample.ts array-inspection"
+  ]
+}

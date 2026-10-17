@@ -1,8 +1,8 @@
 {
   "moduleId": "opening-sample",
   "scope": "sample",
-  "moduleHash": "282db21e7a2e49a54bcda3364c381191266a575b4e7f5dc4f047015109769d33",
-  "claimsHash": "3b437928cd390cd5fde98d66856a6f2b49774e1d62859fb604107d4eadf8a460",
+  "moduleHash": "91639b66727047b713c327517ae75a4cdc02edf24d8ea4c16070ed298f2394d6",
+  "claimsHash": "71f5b1bff9f945e3f4f9ef5ed1ab87fd05d3d980b0d14d4a0ab1e0092424f690",
   "usedClaimIds": [
     "cultivation-stages",
     "dajin-backprojection",
@@ -13,9 +13,12 @@
     "han-wish",
     "native-spirit",
     "opening-night",
+    "original-inspection-conditions",
+    "original-root-examination-method",
     "qingniu",
     "qixuan-local",
     "root-rule",
+    "root-testing-evidence",
     "sample-calibration",
     "sample-economy",
     "sample-open-future",
@@ -100,7 +103,10 @@
       "sample-calibration",
       "han-roots",
       "sample-open-future",
-      "sample-originals"
+      "sample-originals",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "entity:han-father": [
       "han-household",
@@ -204,7 +210,10 @@
       "sample-calibration",
       "sample-economy",
       "root-rule",
-      "sample-spell"
+      "sample-spell",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "law:learned-means": [
       "sample-open-future",
@@ -245,7 +254,10 @@
       "sample-originals",
       "sample-calibration",
       "sample-economy",
-      "root-rule"
+      "root-rule",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "origin:spirit-merchant": [
       "sample-originals",
@@ -254,14 +266,20 @@
       "sample-spell",
       "tianyuan-exists",
       "native-spirit",
-      "spirit-dwellings"
+      "spirit-dwellings",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "origin:han-li": [
       "han-household",
       "han-wish",
       "han-uncle",
       "han-roots",
-      "sample-open-future"
+      "sample-open-future",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "entity:lin-estate": [
       "sample-originals",
@@ -325,28 +343,40 @@
       "sample-calibration",
       "sample-economy",
       "root-rule",
-      "extended-origin-abilities"
+      "extended-origin-abilities",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "origin:escort-apprentice": [
       "sample-originals",
       "sample-calibration",
       "sample-economy",
       "root-rule",
-      "extended-origin-abilities"
+      "extended-origin-abilities",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "origin:clan-junior": [
       "sample-originals",
       "sample-calibration",
       "sample-economy",
       "root-rule",
-      "extended-origin-abilities"
+      "extended-origin-abilities",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "origin:foundation-independent": [
       "sample-originals",
       "sample-calibration",
       "sample-economy",
       "root-rule",
-      "extended-origin-abilities"
+      "extended-origin-abilities",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "origin:core-clan-elder": [
       "sample-originals",
@@ -354,7 +384,10 @@
       "sample-economy",
       "root-rule",
       "extended-origin-abilities",
-      "dajin-backprojection"
+      "dajin-backprojection",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ],
     "origin:spirit-array-master": [
       "sample-originals",
@@ -365,23 +398,26 @@
       "tianyuan-exists",
       "native-spirit",
       "spirit-dwellings",
-      "void-five-elements"
+      "void-five-elements",
+      "root-testing-evidence",
+      "original-root-examination-method",
+      "original-inspection-conditions"
     ]
   },
   "limitations": [
     "九入口位于局部据点，不代表人界灵界全域完成。",
     "除选定来源外，全文尚未审定；原创地点、人物、资产、能力与数值保持分类。",
-    "导入与初始化校验不能代替各出身真实行动、灵根检测、跨区和规模验证。",
+    "导入与初始化校验不能代替各出身完整玩法、跨区和长期规模验证。已完成的检测与调查仅按具体实测范围记录。",
     "未知古阵功能、未决权属和未建设地区不由编译器补全。"
   ],
-  "worldHash": "sha256:67a86cd5038eee72c18a93e41b3d11744e6883303b512cc1cf77cf30a6a0078c",
+  "worldHash": "sha256:1b13e9284f6f63c8a80bbfc20ff3a559a3be3c5297841e3a33f71671670d81b9",
   "files": {
-    "script.yaml": "fa23f143c422c6950576384bc28236709356fae3ea14347700e95d8166951ca3",
-    "laws.yaml": "b2f9f8dc780c5c093963f77430b7b4b82b8ae16e7f5a28e86696d262660d5d8b",
+    "script.yaml": "c8bbc387312a7fbef982277e27c01ecdd3acfccbd1d22be7630b03ed33bd405a",
+    "laws.yaml": "15280de228061b9a5a3f65b2f8b788d8122f540642f91a455daf722055e75a06",
     "mechanics.yaml": "164e4e378cc948bb0a99a2ac45ff6232be11ebed01aa454d134e3e148b6b3eb7",
-    "participation.yaml": "2956721026591b1b810e521f7ba6271c4cb263f6f5b95e833d37f0c33982d9e3",
+    "participation.yaml": "8bfb87d3669f0b475444ddae49b532fd93421f0070153ea81e9e6c7d349ec365",
     "entities/array-workroom.yaml": "bc0c161c44d4d20e1b710643409692281f7f6725c0ef7ffafffda98a051b803c",
-    "entities/canon-han-li.yaml": "b1a2d4db174de6de4da860b717876aadde9b53fa53fd019b728de5aca7bc08bd",
+    "entities/canon-han-li.yaml": "66223e1037e180b00bb7128cec699070dbb15b40c431da6af9f30e553e93bd11",
     "entities/chunxiang-inn.yaml": "965a96833e4904dcaac1c1042ac452f9b5972292aa3c38058bd39ace9fb2ec88",
     "entities/han-elder-sister.yaml": "0732f7735597b80e3d7c2575b2cd55c1d085540881011e8a0ca9e61c7bbf4e03",
     "entities/han-eldest-brother.yaml": "7cc820a4d6a6822bd708d45b40d86f861b04722969a347c56d9e5defbe99a6cd",

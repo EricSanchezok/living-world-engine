@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-17",
+  "status": "implementation-and-sample-checks-passed-full-delivery-incomplete",
+  "check_fast": {
+    "exit_code": 0,
+    "test_files": 369,
+    "tests": 2484,
+    "vitest_duration_seconds": 317.1,
+    "lint_errors": 0,
+    "existing_lint_warnings": 3,
+    "governance_gates": 6,
+    "log_sha256": "7c6def7ee6b644615470cb24bb70df3b511d259b6b7e978bd9c3dad756f04076"
+  },
+  "additional_checks": [
+    "样本世界格式校验与构建 ZIP 回读通过",
+    "九入口宿主初始化及认知、资产、回放检查通过",
+    "修正规模夹具院落地名后，两档实际导入测试通过，类型及 ESLint 检查通过",
+    "正文核对工具 6 项原始微型用例通过"
+  ],
+  "earlier_failures": {
+    "description": "整套检查早期遇到三项默认 5 秒超时；单独复跑均通过。",
+    "changes": "两项反复导入完整世界的 I/O 测试改为 15 秒，未删改断言；宿主重启测试保持原有时限。停止并发规模试验后的完整检查通过。",
+    "does_not_prove": "未据此判断内存不足或宣称引擎性能改善。"
+  },
+  "full_build": {
+    "status": "correctly-rejected",
+    "error": "full-world coverage is incomplete; sample qualification cannot release the full world",
+    "reason": "章节审定、两界全域展开和正文完整性问题尚未完成。"
+  },
+  "limits": [
+    "通用检测能力与样本单项通过不代表所有门派、修炼、交易或高阶机制已制作。",
+    "规模试验仅完成一轮低冲突自治，完整人口与长期关系稳定性未验收。",
+    "验灵与此前付款实测仍有叙事保底呈现，未标记为完整呈现通过。"
+  ]
+}
