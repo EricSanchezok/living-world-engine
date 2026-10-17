@@ -19,6 +19,7 @@ The pre-change real-model instance `1e466910-0b30-4bdb-a68a-0339f725da11` consum
 5. Follow-up corrections narrowed opportunity anchors, admitted adjacent contact candidates with semantic access checks, preserved interactions delivered during independent work, and removed the conflicting native inventory selector. Language publication retains all six factual checks with thinking disabled and a recorded inference override.
 
 6. Third-cycle play in `51601adc-31dc-414d-8ab2-551f95a69838` created a nearby listener during the player's speech, but recipient enumeration only included pre-existing actors. The player had to repeat the question. Admission now batches new-actor perceptual access with its existing checks, and settlement installs admitted recipients before constructing observations and waking causal responses.
+7. The same session completed payment but produced no fulfillment. Invocation `1750de7e-2ff2-4478-a148-4ccecf6d3166::rt:model-audit:75ce21f4845a204f296811b10f565c6858cad436e13510a54d71f291d34c37c8` selected physical use with a 0.47 optional-expression score. Revision 17 consequently submitted only a generic operation label to adjudication. Open physical actions now require a concrete method independently of optional manner, with missing methods rejected through the existing repair boundary.
 
 ## Root cause
 
@@ -26,9 +27,11 @@ An absent duration had been treated as a request for the smallest fixed profile.
 
 Existing tests emphasized valid commits, cognitive isolation, literal dialogue and reply completion. Their scripted actors reacted only after contact; they did not qualify ordinary play across several real-model turns. Passing those invariants did not establish a coherent, responsive experience. The original publication model profile also allowed reasoning to consume the entire output budget for closed evidence comparison.
 
+The physical-method path was mandatory for player requests but conditional on an optional expression vote for NPCs. This conflated the semantic method with decorative manner: an NPC could select useful work without expressing what to execute. A valid operation enum alone was insufficient evidence of an executable intent.
+
 ## Guardrails
 
-- [Direct entry regressions](../../src/engine/direct/__tests__/runtime.test.ts) cover non-minimal timing, explicit waits, bounded locality, private context, adjacent perceptual access, duplicate introductions, independent activity with deferred replies, new-actor hearing and response, rejected creation, and replay.
+- [Direct entry regressions](../../src/engine/direct/__tests__/runtime.test.ts) cover non-minimal timing, explicit waits, bounded locality, private context, adjacent perceptual access, duplicate introductions, independent activity with deferred replies, new-actor hearing and response, rejected creation, concrete NPC physical methods, bounded missing-method failure, and replay.
 - [Persistent host tests](../../src/server/__tests__/direct-world-host.test.ts) retain causal foreground completion, background continuation and no model work during reads or restart.
 - [Decision transport tests](../../src/engine/models/__tests__/decision-v2.test.ts) verify the language-only inference override and native fallback without extra inference.
 - [Spec 0191](../specs/0191-natural-action-time-and-world-initiative.md) requires real-model trajectory qualification and latency/call-count evidence alongside structural checks. [Decision 0244](../decisions/0244-calibrated-time-and-local-initiative.md) records the bounded scope and rejected architectural alternatives.

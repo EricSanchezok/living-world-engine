@@ -345,6 +345,43 @@ describe("direct world through the actual simulation entry", () => {
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
 
+  it.each(["use", "change"])("realizes an NPC's concrete %s method independently of optional manner", async operation => {
+    const options: Parameters<typeof fixture>[0] = { operation: "speak", recipient: "guard", speech: "input", creationEnabled: true,
+      expression: 0, creationResponse: { utterance: "请让一下通道。", manner: null } };
+    const f = await fixture(options);
+    await f.engine.bootstrapAgents();
+    const first = await f.engine.step(f.roster, f.request("请让一下通道。"));
+    options.operation = operation; options.target = "self";
+    options.creationResponse = { attempt: "侧身让出眼前的通道", utterance: null, manner: null };
+    const result = await f.engine.step(f.roster, { expectedRevision: first.state.revision, trigger: "manual", externalActions: [] });
+    const frame = result.committed.directEvent.frames.find(frame => frame.actorId === "keeper")!;
+    expect(frame).toMatchObject({ kind: operation, targetEntityId: "keeper", expression: { attempt: "侧身让出眼前的通道", manner: null },
+      proposal: { rawText: "侧身让出眼前的通道" } });
+    const requests = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body)));
+    const expressions = requests.filter(wire => !wire.questions).map(directCreationContext)
+      .filter(context => context.chosenDirection === operation && !context.playerControlled);
+    expect(expressions).toHaveLength(1);
+    expect(expressions[0]).toMatchObject({ selectedAction: { kind: operation, targetLocalId: "self", toolLocalId: null, capabilityId: null } });
+    expect(requests.some(wire => wire.questions?.a0_outcome && JSON.stringify(wire.state).includes("侧身让出眼前的通道"))).toBe(true);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+
+  it.each([undefined, "   "])("rejects an unexpressed NPC physical method without committing an empty action: %s", async attempt => {
+    const options: Parameters<typeof fixture>[0] = { operation: "speak", recipient: "guard", speech: "input", creationEnabled: true,
+      creationResponse: { utterance: "请让一下通道。", manner: null } };
+    const f = await fixture(options);
+    await f.engine.bootstrapAgents();
+    const first = await f.engine.step(f.roster, f.request("请让一下通道。"));
+    options.operation = "use"; options.target = "self";
+    options.creationResponse = { attempt, utterance: null, manner: null };
+    const result = await f.engine.step(f.roster, { expectedRevision: first.state.revision, trigger: "manual", externalActions: [] });
+    expect(result.committed.directEvent.frames).toHaveLength(0);
+    expect(result.state.truth).toEqual(first.state.truth);
+    expect(readDirectState(result.state.executionState!, result.state).intents.keeper?.status).toBe("failed");
+    expect(result.committed.directEvent.modelAudits.filter(audit => audit.promptVersion.startsWith("action-expression-"))).toHaveLength(2);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+
   it.each(["repaired", "invalid-again", "transport"])("bounds NPC expression recovery and retains completed attempts: %s", async mode => {
     const f = await fixture({ operation: "speak", recipient: "broadcast", creationEnabled: true,
       creationResponse: { attempt: "回答旅人", utterance: "听见了，我在这里。", manner: null, recipientLocalId: "traveler" } });

@@ -18,6 +18,8 @@ Make an offer or useful lead actionable from what you actually know, possess or 
 
 Express only the chosenDirection action happening next. For a compound request, a move describes the approach only; save repair, interaction or further steps for later decisions. Speech can include its accompanying expressive gesture, performed together. Do not append a private strategy or unrelated long-term goal to an otherwise completed player input.
 
+For use/change, selectedAction binds the chosen target and tool. State the concrete next method and intended immediate effect in attempt; a generic label such as "use" or "adjust" leaves the world nothing to adjudicate. Let actual commitments and received results inform that method without claiming it already succeeded. An optional manner is not the method itself. Use only the character's known means; an unknown condition may still limit the result.
+
 Return a short action attempt, the actual utterance (or null), and an observable manner (or null). Gestures and tactics are proposals awaiting world adjudication, never accomplished outcomes. Routine actions need no theatrical flourish. Private reflection stays private and distinguishes evidence, testimony and inference.
 
 When expression specifies an ordinary spoken reply, provide the utterance alone, with manner=null and no physical business. Let personality appear through vocabulary, what the speaker chooses to disclose and how they answer. A physical manner belongs only to an action that actually selected one. A quoted price or your own demand does not mean the listener previously agreed; describe terms as proposed until their actual assent is recorded.

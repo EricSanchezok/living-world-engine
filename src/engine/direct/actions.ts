@@ -308,10 +308,12 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   let expression: ActionExpression | undefined = !preparatoryFor ? reading?.expression : undefined;
   const speech = selected(answers, operation === "reflect" ? "reflection" : "speech");
   const literal = /^q\d+$/u.test(speech) ? quotes[Number(speech.slice(1))] : undefined;
+  // An open physical action needs a method; the manner vote only controls optional expression.
+  const needsMethod = ["use", "change"].includes(operation) && (!questions.capability || selected(answers, "capability") === "none");
   const needsExpression = !preparatoryFor && (
     operation === "speak" && (!external || !literal) ||
     operation === "reflect" && speech === "create" ||
-    external && ["use", "change"].includes(operation) && (!questions.capability || selected(answers, "capability") === "none") ||
+    needsMethod ||
     answers.expression?.type === "noul" && answers.expression.noul >= 0.5);
   if (!reading && needsExpression && input.creationEnabled) {
     const wordsOnly = !external && operation === "speak" && !(answers.expression?.type === "noul" && answers.expression.noul >= 0.5);
@@ -320,7 +322,8 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       currentQuestion: z.string().describe("The received conversational move, resolving ellipsis from the shared exchange; or your own motive for initiating contact when no question was received. Preserve the question while replacing only a corrected subject or scope."),
       evidenceForAnswer: z.string().describe("Your actual received evidence and its limits, including who did or said what. Do not manufacture earlier questions, promises or completed work."),
       newContribution: z.string().describe("What this reply adds. If your previous question to this recipient is still unanswered and nothing relevant changed, do not ask it again."),
-    }).optional(), attempt: z.string().optional(), utterance: z.string().nullable(), manner: z.string().nullable().optional(),
+    }).optional(), attempt: needsMethod ? z.string().trim().min(1).describe("The concrete next physical method and intended immediate effect, not a generic operation label or completed result") : z.string().optional(),
+      utterance: z.string().nullable(), manner: z.string().nullable().optional(),
       recipientLocalId: z.enum(["broadcast", ...recipients.map(([id]) => id)]).optional()
         .describe("For an autonomous spoken reply, bind the actual listener of THESE words from knownRecipients, or broadcast. Match second-person references and names to that listener. Omit for reflection, player-controlled expression and other action kinds."),
     });
@@ -334,6 +337,9 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
           [id, { name: entity.name, description: entity.description }])) } : {}),
         chosenDirection: operation, communicativeIntent: external && selected(answers, "transfer_authority") === "request"
           ? "Request the other person's action; do not offer payment or accept any new terms" : selected(answers, "dialogue"), playerControlled: Boolean(external),
+        selectedAction: { kind: operation, targetLocalId: view.entities[targetKey] ? targetKey : null,
+          toolLocalId: view.entities[selected(answers, "tool")] ? selected(answers, "tool") : null,
+          capabilityId: questions.capability && selected(answers, "capability") !== "none" ? selected(answers, "capability") : null },
         currentPlayerRequest: external?.rawText ?? null,
         currentHoldings: (view.state as { mechanics: { quantities: JsonValue } }).mechanics.quantities,
         exactQuotes: quotes, expression: operation === "reflect" ? "Private reflection; do not deliver to anyone." : wordsOnly
