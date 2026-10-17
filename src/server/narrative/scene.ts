@@ -5,6 +5,9 @@ import type { ScenePacket } from "./contracts";
 /** An expression is an attempted procedure, not a receipt for its physical verbs. */
 export function executedDescription(observation: Pick<ObservationPacket, "summary" | "scene">): string {
   if (!observation.scene) return observation.summary;
+  if (observation.scene.actionKind === "observe" && ["succeeded", "partial"].includes(observation.scene.status)) {
+    return [...new Set([observation.scene.outcome, ...observation.summary.split("\n")].filter(Boolean))].join("\n");
+  }
   return [observation.scene.outcome, ...observation.summary.split("\n").slice(1)].filter(Boolean).join("\n");
 }
 
@@ -38,6 +41,10 @@ export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscou
     viewpoint: "The participant is the player. Address their character as you in second person; other characters remain third person.",
     responseTo: source.reply?.requested ?? null,
     kind: source.reply?.kind ?? "newly_observed_events",
+    time: { boundary: source.boundary, elapsedUnits: source.elapsedUnits,
+      interpretation: "Action durations are elapsed seconds. Convert only with these exact local term-to-seconds values; an hour and an authored traditional unit are not interchangeable. Local days may differ from 24 hours. A stopping condition can end an activity before its requested duration; state only the actual elapsed receipt. Calendar phases are observed properties, not inferred from a generic day length." },
+    propertyHistory: { observations: source.observedProperties ?? [],
+      interpretation: "These are last-known properties of separate local subjects, with their actual evidence boundary when available. They do not all describe the current location or current time. New receipts supersede older observations of the same subject; a prior night's description or another place's older state cannot override a fresh observation here. No new observation means the present property may remain unknown." },
     alreadyObservedForThisRequest: (source.priorObservedReceipts ?? []).map(priorReceipt),
     priorReceiptBoundary: "These earlier participant observations occurred in this request window, not necessarily because of the request. Their requestRelation distinguishes participant steps, causally related responses, independent concurrent events and unattributed events. Preserve each actual actor, action and delivered reply when describing the current result; they are not new events or new speech to repeat. A later completion can add elapsed time without erasing an earlier answer.",
     ownSpeechOnly: source.observations.length > 0 && source.observations.every(observation =>

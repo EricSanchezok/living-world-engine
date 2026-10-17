@@ -3,10 +3,10 @@
   "scope": "sample",
   "template": {
     "manifest": {
-      "schema_version": 18,
+      "schema_version": 19,
       "id": "fanren-opening-sample",
       "name": "凡人修仙传·开篇编写样本",
-      "version": "0.4.3",
+      "version": "0.5.0",
       "description": "共同开篇时刻的九种身份试作：八种原创出身及唯一韩立。包含真实资产、相识和能力；各地区仍属局部展开，不能代替人界灵界全域完成。",
       "runtime_defaults": {
         "max_autonomous_span_seconds": 300,
@@ -82,6 +82,11 @@
         {
           "id": "authored-workflows",
           "text": "原创交易、工钱、债务、加工、调查与采集以实体、文书、库存和本人已知手艺为准。报价不等于成交；收到款或货物才能减少相应义务。到期只形成履约压力，不自动转移财产或强制人物接受条件。加工须扣除真实材料并经过工时，不能仅凭叙述生成产物。未知状态保持未知；可以拒绝委托或离开，并承受实际因果。",
+          "severity": "hard"
+        },
+        {
+          "id": "daylight-and-illumination",
+          "text": "昼夜时段与眼前照明分别判断。日间不意味着密室或洞穴有天光；夜间也可能有月光、灯火与照明法术。观察远处和辨认细节须满足真实光照、遮蔽、距离与观察者能力。",
           "severity": "hard"
         }
       ]
@@ -968,6 +973,829 @@
           "profile_id": "brief",
           "explanation": "短动作仍需时间；施法另消耗法力。"
         }
+      ],
+      "periodic_properties": [
+        {
+          "id": "human-realm-daylight",
+          "subject_id": "human-realm",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "spirit-realm-daylight",
+          "subject_id": "spirit-realm",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 345600,
+          "initial_phase_seconds": 194400,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 172800,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "han-village-daylight",
+          "subject_id": "han-village",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "han-home-daylight",
+          "subject_id": "han-home",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "village-path-daylight",
+          "subject_id": "village-path",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "qingniu-town-daylight",
+          "subject_id": "qingniu-town",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "chunxiang-inn-daylight",
+          "subject_id": "chunxiang-inn",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "smith-workshop-daylight",
+          "subject_id": "smith-workshop",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "songxi-hamlet-daylight",
+          "subject_id": "songxi-hamlet",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "herbal-yard-daylight",
+          "subject_id": "herbal-yard",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "tianyuan-city-daylight",
+          "subject_id": "tianyuan-city",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 345600,
+          "initial_phase_seconds": 194400,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 172800,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "qinghe-store-daylight",
+          "subject_id": "qinghe-store",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 345600,
+          "initial_phase_seconds": 194400,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 172800,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "qinghe-study-daylight",
+          "subject_id": "qinghe-study",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 345600,
+          "initial_phase_seconds": 194400,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 172800,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "spirit-wharf-daylight",
+          "subject_id": "spirit-wharf",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 345600,
+          "initial_phase_seconds": 194400,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 172800,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "lin-estate-daylight",
+          "subject_id": "lin-estate",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "lin-store-daylight",
+          "subject_id": "lin-store",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "yuanan-yard-daylight",
+          "subject_id": "yuanan-yard",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "yuanan-road-daylight",
+          "subject_id": "yuanan-road",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "shen-valley-daylight",
+          "subject_id": "shen-valley",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "shen-store-daylight",
+          "subject_id": "shen-store",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "stone-pond-daylight",
+          "subject_id": "stone-pond",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "stone-garden-daylight",
+          "subject_id": "stone-garden",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "xu-settlement-daylight",
+          "subject_id": "xu-settlement",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "xu-hall-daylight",
+          "subject_id": "xu-hall",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "xu-workshop-daylight",
+          "subject_id": "xu-workshop",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 86400,
+          "initial_phase_seconds": 54000,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 43200,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "listening-spring-daylight",
+          "subject_id": "listening-spring",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 345600,
+          "initial_phase_seconds": 194400,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 172800,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        },
+        {
+          "id": "array-workroom-daylight",
+          "subject_id": "array-workroom",
+          "predicate": "daylight",
+          "access": {
+            "kind": "public"
+          },
+          "period_seconds": 345600,
+          "initial_phase_seconds": 194400,
+          "phases": [
+            {
+              "starts_at_seconds": 0,
+              "value": {
+                "kind": "text",
+                "value": "day"
+              },
+              "description": "当地正值日间。"
+            },
+            {
+              "starts_at_seconds": 172800,
+              "value": {
+                "kind": "text",
+                "value": "night"
+              },
+              "description": "当地正值夜间。"
+            }
+          ]
+        }
+      ],
+      "duration_units": [
+        {
+          "id": "common-day",
+          "terms": [
+            "天",
+            "日",
+            "昼夜",
+            "day",
+            "days"
+          ],
+          "seconds": 86400,
+          "location_ids": []
+        },
+        {
+          "id": "spirit-day",
+          "terms": [
+            "天",
+            "日",
+            "昼夜",
+            "day",
+            "days"
+          ],
+          "seconds": 345600,
+          "location_ids": [
+            "spirit-realm"
+          ]
+        },
+        {
+          "id": "common-month",
+          "terms": [
+            "月",
+            "个月",
+            "month",
+            "months"
+          ],
+          "seconds": 2592000,
+          "location_ids": []
+        },
+        {
+          "id": "common-year",
+          "terms": [
+            "年",
+            "year",
+            "years"
+          ],
+          "seconds": 31536000,
+          "location_ids": []
+        },
+        {
+          "id": "common-shichen",
+          "terms": [
+            "时辰"
+          ],
+          "seconds": 7200,
+          "location_ids": []
+        },
+        {
+          "id": "explicit-spirit-month",
+          "terms": [
+            "灵界本地月"
+          ],
+          "seconds": 10368000,
+          "location_ids": []
+        }
       ]
     },
     "entities": [
@@ -977,20 +1805,7 @@
         "name": "人界",
         "description": "凡人城镇、江湖门派与修仙势力共处的界面。",
         "placement": null,
-        "facts": [
-          {
-            "id": "human-realm-night",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "当地夜间，光线和作息受夜色影响。"
-            },
-            "description": "当地夜间，光线和作息受夜色影响。",
-            "access": {
-              "kind": "public"
-            }
-          }
-        ],
+        "facts": [],
         "meters": [],
         "quantities": [],
         "ratings": []
@@ -1001,20 +1816,7 @@
         "name": "灵界",
         "description": "与人界分离的界面；当前展开天渊城商号与阵师居所，不能普通行路跨界。",
         "placement": null,
-        "facts": [
-          {
-            "id": "spirit-realm-night",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "当地夜间，光线和作息受夜色影响。"
-            },
-            "description": "当地夜间，光线和作息受夜色影响。",
-            "access": {
-              "kind": "public"
-            }
-          }
-        ],
+        "facts": [],
         "meters": [],
         "quantities": [],
         "ratings": []
@@ -1026,18 +1828,6 @@
         "description": "依山而居的小村，泥屋和农田散在山边。",
         "placement": "human-realm",
         "facts": [
-          {
-            "id": "han-village-night",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "当地夜间，光线和作息受夜色影响。"
-            },
-            "description": "当地夜间，光线和作息受夜色影响。",
-            "access": {
-              "kind": "public"
-            }
-          },
           {
             "id": "han-village-route-village-path",
             "predicate": "route-to",
@@ -1075,18 +1865,6 @@
         "placement": "han-village",
         "facts": [
           {
-            "id": "han-home-night",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "当地夜间，光线和作息受夜色影响。"
-            },
-            "description": "当地夜间，光线和作息受夜色影响。",
-            "access": {
-              "kind": "public"
-            }
-          },
-          {
             "id": "han-home-route-village-path",
             "predicate": "route-to",
             "value": {
@@ -1110,18 +1888,6 @@
         "description": "村边通向山坡和其他农家的土路。",
         "placement": "han-village",
         "facts": [
-          {
-            "id": "village-path-night",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "当地夜间，光线和作息受夜色影响。"
-            },
-            "description": "当地夜间，光线和作息受夜色影响。",
-            "access": {
-              "kind": "public"
-            }
-          },
           {
             "id": "village-path-route-han-home",
             "predicate": "route-to",
@@ -1158,18 +1924,6 @@
         "description": "山民有时称这里为青牛城，东西主街贯穿镇子。",
         "placement": "human-realm",
         "facts": [
-          {
-            "id": "qingniu-town-night",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "当地夜间，光线和作息受夜色影响。"
-            },
-            "description": "当地夜间，光线和作息受夜色影响。",
-            "access": {
-              "kind": "public"
-            }
-          },
           {
             "id": "qingniu-town-route-han-village",
             "predicate": "route-to",
@@ -1255,18 +2009,6 @@
         "placement": "qingniu-town",
         "facts": [
           {
-            "id": "chunxiang-inn-night",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "当地夜间，光线和作息受夜色影响。"
-            },
-            "description": "当地夜间，光线和作息受夜色影响。",
-            "access": {
-              "kind": "public"
-            }
-          },
-          {
             "id": "chunxiang-inn-route-qingniu-town",
             "predicate": "route-to",
             "value": {
@@ -1291,18 +2033,6 @@
         "placement": "qingniu-town",
         "facts": [
           {
-            "id": "smith-workshop-night",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "当地夜间，光线和作息受夜色影响。"
-            },
-            "description": "当地夜间，光线和作息受夜色影响。",
-            "access": {
-              "kind": "public"
-            }
-          },
-          {
             "id": "smith-workshop-route-qingniu-town",
             "predicate": "route-to",
             "value": {
@@ -1326,18 +2056,6 @@
         "description": "青牛镇周边的小村。乡医、农户与收药人保持生计往来。",
         "placement": "human-realm",
         "facts": [
-          {
-            "id": "songxi-hamlet-night",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "当地夜间，光线和作息受夜色影响。"
-            },
-            "description": "当地夜间，光线和作息受夜色影响。",
-            "access": {
-              "kind": "public"
-            }
-          },
           {
             "id": "songxi-hamlet-route-qingniu-town",
             "predicate": "route-to",
@@ -1375,18 +2093,6 @@
         "placement": "songxi-hamlet",
         "facts": [
           {
-            "id": "herbal-yard-night",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "当地夜间，光线和作息受夜色影响。"
-            },
-            "description": "当地夜间，光线和作息受夜色影响。",
-            "access": {
-              "kind": "public"
-            }
-          },
-          {
             "id": "herbal-yard-route-songxi-hamlet",
             "predicate": "route-to",
             "value": {
@@ -1411,18 +2117,6 @@
         "placement": "spirit-realm",
         "facts": [
           {
-            "id": "tianyuan-city-night",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "当地夜间，光线和作息受夜色影响。"
-            },
-            "description": "当地夜间，光线和作息受夜色影响。",
-            "access": {
-              "kind": "public"
-            }
-          },
-          {
             "id": "tianyuan-city-route-listening-spring",
             "predicate": "route-to",
             "value": {
@@ -1446,18 +2140,6 @@
         "description": "商号的验货、议价处。账房与私人修炼处所用途不同。",
         "placement": "tianyuan-city",
         "facts": [
-          {
-            "id": "qinghe-store-night",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "当地夜间，光线和作息受夜色影响。"
-            },
-            "description": "当地夜间，光线和作息受夜色影响。",
-            "access": {
-              "kind": "public"
-            }
-          },
           {
             "id": "qinghe-store-route-qinghe-study",
             "predicate": "route-to",
@@ -1495,18 +2177,6 @@
         "placement": "tianyuan-city",
         "facts": [
           {
-            "id": "qinghe-study-night",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "当地夜间，光线和作息受夜色影响。"
-            },
-            "description": "当地夜间，光线和作息受夜色影响。",
-            "access": {
-              "kind": "public"
-            }
-          },
-          {
             "id": "qinghe-study-route-qinghe-store",
             "predicate": "route-to",
             "value": {
@@ -1530,18 +2200,6 @@
         "description": "转运节点；货物停放与交接需要实际核对。",
         "placement": "tianyuan-city",
         "facts": [
-          {
-            "id": "spirit-wharf-night",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "当地夜间，光线和作息受夜色影响。"
-            },
-            "description": "当地夜间，光线和作息受夜色影响。",
-            "access": {
-              "kind": "public"
-            }
-          },
           {
             "id": "spirit-wharf-route-qinghe-store",
             "predicate": "route-to",
@@ -1783,6 +2441,13 @@
                 "description": "开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。",
                 "sourceId": null,
                 "step": 0
+              },
+              {
+                "id": "opening-night-observation",
+                "kind": "observation",
+                "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                "sourceId": null,
+                "step": 0
               }
             ],
             "claims": [
@@ -1814,6 +2479,21 @@
                 "confidence": 1,
                 "evidenceIds": [
                   "canon-han-li-daily-routes"
+                ]
+              },
+              {
+                "id": "opening-night-memory",
+                "subjectId": "location",
+                "predicate": "opening-observation",
+                "value": {
+                  "kind": "text",
+                  "value": "开篇时此地已入夜。"
+                },
+                "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "opening-night-observation"
                 ]
               }
             ],
@@ -2045,6 +2725,13 @@
                 "description": "开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。",
                 "sourceId": null,
                 "step": 0
+              },
+              {
+                "id": "opening-night-observation",
+                "kind": "observation",
+                "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                "sourceId": null,
+                "step": 0
               }
             ],
             "claims": [
@@ -2061,6 +2748,21 @@
                 "confidence": 1,
                 "evidenceIds": [
                   "han-father-daily-routes"
+                ]
+              },
+              {
+                "id": "opening-night-memory",
+                "subjectId": "location",
+                "predicate": "opening-observation",
+                "value": {
+                  "kind": "text",
+                  "value": "开篇时此地已入夜。"
+                },
+                "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "opening-night-observation"
                 ]
               }
             ],
@@ -2292,6 +2994,13 @@
                 "description": "开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。",
                 "sourceId": null,
                 "step": 0
+              },
+              {
+                "id": "opening-night-observation",
+                "kind": "observation",
+                "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                "sourceId": null,
+                "step": 0
               }
             ],
             "claims": [
@@ -2308,6 +3017,21 @@
                 "confidence": 1,
                 "evidenceIds": [
                   "han-mother-daily-routes"
+                ]
+              },
+              {
+                "id": "opening-night-memory",
+                "subjectId": "location",
+                "predicate": "opening-observation",
+                "value": {
+                  "kind": "text",
+                  "value": "开篇时此地已入夜。"
+                },
+                "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "opening-night-observation"
                 ]
               }
             ],
@@ -2539,6 +3263,13 @@
                 "description": "开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。",
                 "sourceId": null,
                 "step": 0
+              },
+              {
+                "id": "opening-night-observation",
+                "kind": "observation",
+                "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                "sourceId": null,
+                "step": 0
               }
             ],
             "claims": [
@@ -2555,6 +3286,21 @@
                 "confidence": 1,
                 "evidenceIds": [
                   "han-eldest-brother-daily-routes"
+                ]
+              },
+              {
+                "id": "opening-night-memory",
+                "subjectId": "location",
+                "predicate": "opening-observation",
+                "value": {
+                  "kind": "text",
+                  "value": "开篇时此地已入夜。"
+                },
+                "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "opening-night-observation"
                 ]
               }
             ],
@@ -2786,6 +3532,13 @@
                 "description": "开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。",
                 "sourceId": null,
                 "step": 0
+              },
+              {
+                "id": "opening-night-observation",
+                "kind": "observation",
+                "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                "sourceId": null,
+                "step": 0
               }
             ],
             "claims": [
@@ -2802,6 +3555,21 @@
                 "confidence": 1,
                 "evidenceIds": [
                   "han-zhu-daily-routes"
+                ]
+              },
+              {
+                "id": "opening-night-memory",
+                "subjectId": "location",
+                "predicate": "opening-observation",
+                "value": {
+                  "kind": "text",
+                  "value": "开篇时此地已入夜。"
+                },
+                "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "opening-night-observation"
                 ]
               }
             ],
@@ -3033,6 +3801,13 @@
                 "description": "开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。",
                 "sourceId": null,
                 "step": 0
+              },
+              {
+                "id": "opening-night-observation",
+                "kind": "observation",
+                "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                "sourceId": null,
+                "step": 0
               }
             ],
             "claims": [
@@ -3049,6 +3824,21 @@
                 "confidence": 1,
                 "evidenceIds": [
                   "han-elder-sister-daily-routes"
+                ]
+              },
+              {
+                "id": "opening-night-memory",
+                "subjectId": "location",
+                "predicate": "opening-observation",
+                "value": {
+                  "kind": "text",
+                  "value": "开篇时此地已入夜。"
+                },
+                "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "opening-night-observation"
                 ]
               }
             ],
@@ -3280,6 +4070,13 @@
                 "description": "开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。",
                 "sourceId": null,
                 "step": 0
+              },
+              {
+                "id": "opening-night-observation",
+                "kind": "observation",
+                "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                "sourceId": null,
+                "step": 0
               }
             ],
             "claims": [
@@ -3296,6 +4093,21 @@
                 "confidence": 1,
                 "evidenceIds": [
                   "han-younger-sister-daily-routes"
+                ]
+              },
+              {
+                "id": "opening-night-memory",
+                "subjectId": "location",
+                "predicate": "opening-observation",
+                "value": {
+                  "kind": "text",
+                  "value": "开篇时此地已入夜。"
+                },
+                "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "opening-night-observation"
                 ]
               }
             ],
@@ -3490,8 +4302,32 @@
                 "status": "observed"
               }
             ],
-            "evidence": [],
-            "claims": [],
+            "evidence": [
+              {
+                "id": "opening-night-observation",
+                "kind": "observation",
+                "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                "sourceId": null,
+                "step": 0
+              }
+            ],
+            "claims": [
+              {
+                "id": "opening-night-memory",
+                "subjectId": "location",
+                "predicate": "opening-observation",
+                "value": {
+                  "kind": "text",
+                  "value": "开篇时此地已入夜。"
+                },
+                "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "opening-night-observation"
+                ]
+              }
+            ],
             "bindings": [
               {
                 "local_entity_id": "self",
@@ -3629,6 +4465,13 @@
                 "description": "开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。",
                 "sourceId": null,
                 "step": 0
+              },
+              {
+                "id": "opening-night-observation",
+                "kind": "observation",
+                "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                "sourceId": null,
+                "step": 0
               }
             ],
             "claims": [
@@ -3645,6 +4488,21 @@
                 "confidence": 1,
                 "evidenceIds": [
                   "old-zhang-daily-routes"
+                ]
+              },
+              {
+                "id": "opening-night-memory",
+                "subjectId": "location",
+                "predicate": "opening-observation",
+                "value": {
+                  "kind": "text",
+                  "value": "开篇时此地已入夜。"
+                },
+                "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "opening-night-observation"
                 ]
               }
             ],
@@ -3720,18 +4578,6 @@
         "placement": "qingniu-town",
         "facts": [
           {
-            "id": "lin-estate-time",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "与共同开篇同一时刻；此地按夜间场景标定。"
-            },
-            "description": "当地夜间。",
-            "access": {
-              "kind": "public"
-            }
-          },
-          {
             "id": "lin-estate-route-lin-store",
             "predicate": "route-to",
             "value": {
@@ -3768,18 +4614,6 @@
         "placement": "qingniu-town",
         "facts": [
           {
-            "id": "lin-store-time",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "与共同开篇同一时刻；此地按夜间场景标定。"
-            },
-            "description": "当地夜间。",
-            "access": {
-              "kind": "public"
-            }
-          },
-          {
             "id": "lin-store-route-lin-estate",
             "predicate": "route-to",
             "value": {
@@ -3804,18 +4638,6 @@
         "placement": "human-realm",
         "facts": [
           {
-            "id": "yuanan-yard-time",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "与共同开篇同一时刻；此地按夜间场景标定。"
-            },
-            "description": "当地夜间。",
-            "access": {
-              "kind": "public"
-            }
-          },
-          {
             "id": "yuanan-yard-route-yuanan-road",
             "predicate": "route-to",
             "value": {
@@ -3839,18 +4661,6 @@
         "description": "商路路段，夜行须照明并留意路况。",
         "placement": "human-realm",
         "facts": [
-          {
-            "id": "yuanan-road-time",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "与共同开篇同一时刻；此地按夜间场景标定。"
-            },
-            "description": "当地夜间。",
-            "access": {
-              "kind": "public"
-            }
-          },
           {
             "id": "yuanan-road-route-yuanan-yard",
             "predicate": "route-to",
@@ -3888,18 +4698,6 @@
         "placement": "human-realm",
         "facts": [
           {
-            "id": "shen-valley-time",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "与共同开篇同一时刻；此地按夜间场景标定。"
-            },
-            "description": "当地夜间。",
-            "access": {
-              "kind": "public"
-            }
-          },
-          {
             "id": "shen-valley-route-shen-store",
             "predicate": "route-to",
             "value": {
@@ -3923,18 +4721,6 @@
         "description": "旧法器、维修材料和待售清单分别存放；保留族产须商议。",
         "placement": "shen-valley",
         "facts": [
-          {
-            "id": "shen-store-time",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "与共同开篇同一时刻；此地按夜间场景标定。"
-            },
-            "description": "当地夜间。",
-            "access": {
-              "kind": "public"
-            }
-          },
           {
             "id": "shen-store-route-shen-valley",
             "predicate": "route-to",
@@ -3960,18 +4746,6 @@
         "placement": "human-realm",
         "facts": [
           {
-            "id": "stone-pond-time",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "与共同开篇同一时刻；此地按夜间场景标定。"
-            },
-            "description": "当地夜间。",
-            "access": {
-              "kind": "public"
-            }
-          },
-          {
             "id": "stone-pond-route-stone-garden",
             "predicate": "route-to",
             "value": {
@@ -3996,18 +4770,6 @@
         "placement": "stone-pond",
         "facts": [
           {
-            "id": "stone-garden-time",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "与共同开篇同一时刻；此地按夜间场景标定。"
-            },
-            "description": "当地夜间。",
-            "access": {
-              "kind": "public"
-            }
-          },
-          {
             "id": "stone-garden-route-stone-pond",
             "predicate": "route-to",
             "value": {
@@ -4031,18 +4793,6 @@
         "description": "大晋山地中的修仙家族聚落，议事厅和工坊分据坡地两侧。",
         "placement": "human-realm",
         "facts": [
-          {
-            "id": "xu-settlement-time",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "与共同开篇同一时刻；此地按夜间场景标定。"
-            },
-            "description": "当地夜间。",
-            "access": {
-              "kind": "public"
-            }
-          },
           {
             "id": "xu-settlement-route-xu-hall",
             "predicate": "route-to",
@@ -4080,18 +4830,6 @@
         "placement": "xu-settlement",
         "facts": [
           {
-            "id": "xu-hall-time",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "与共同开篇同一时刻；此地按夜间场景标定。"
-            },
-            "description": "当地夜间。",
-            "access": {
-              "kind": "public"
-            }
-          },
-          {
             "id": "xu-hall-route-xu-settlement",
             "predicate": "route-to",
             "value": {
@@ -4116,18 +4854,6 @@
         "placement": "xu-settlement",
         "facts": [
           {
-            "id": "xu-workshop-time",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "与共同开篇同一时刻；此地按夜间场景标定。"
-            },
-            "description": "当地夜间。",
-            "access": {
-              "kind": "public"
-            }
-          },
-          {
             "id": "xu-workshop-route-xu-settlement",
             "predicate": "route-to",
             "value": {
@@ -4151,18 +4877,6 @@
         "description": "天渊城修士生活范围中的炼虚阵师居所，具备独立研究室。",
         "placement": "tianyuan-city",
         "facts": [
-          {
-            "id": "listening-spring-time",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "与共同开篇同一时刻；此地按夜间场景标定。"
-            },
-            "description": "当地夜间。",
-            "access": {
-              "kind": "public"
-            }
-          },
           {
             "id": "listening-spring-route-array-workroom",
             "predicate": "route-to",
@@ -4199,18 +4913,6 @@
         "description": "案台、测绘架和有界限的试验空间；不自带无限材料或完整古阵。",
         "placement": "listening-spring",
         "facts": [
-          {
-            "id": "array-workroom-time",
-            "predicate": "local-time",
-            "value": {
-              "kind": "text",
-              "value": "与共同开篇同一时刻；此地按夜间场景标定。"
-            },
-            "description": "当地夜间。",
-            "access": {
-              "kind": "public"
-            }
-          },
           {
             "id": "array-workroom-route-listening-spring",
             "predicate": "route-to",
@@ -4403,6 +5105,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -4419,6 +5128,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -4629,6 +5353,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -4645,6 +5376,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -4857,6 +5603,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -4873,6 +5626,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -5230,6 +5998,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -5246,6 +6021,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ]
@@ -5397,6 +6187,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -5413,6 +6210,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ]
@@ -5876,10 +6688,40 @@
                       "name": "标记止血草",
                       "description": "周荃私下问的正是药包里的这一株；它仍归师父。",
                       "status": "observed"
+                    },
+                    {
+                      "id": "opening-place",
+                      "name": "陈守拙的药院",
+                      "description": "开篇时所在的地方。",
+                      "status": "observed"
                     }
                   ],
-                  "evidence": [],
-                  "claims": [],
+                  "evidence": [
+                    {
+                      "id": "opening-night-observation",
+                      "kind": "observation",
+                      "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                      "sourceId": null,
+                      "step": 0
+                    }
+                  ],
+                  "claims": [
+                    {
+                      "id": "opening-night-memory",
+                      "subjectId": "opening-place",
+                      "predicate": "opening-observation",
+                      "value": {
+                        "kind": "text",
+                        "value": "开篇时此地已入夜。"
+                      },
+                      "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                      "stance": "believed",
+                      "confidence": 1,
+                      "evidenceIds": [
+                        "opening-night-observation"
+                      ]
+                    }
+                  ],
                   "bindings": [
                     {
                       "local_entity_id": "mother",
@@ -5957,6 +6799,12 @@
                       "local_entity_id": "known-herbal-marked-stem",
                       "canonical_entity_ids": [
                         "herbal-marked-stem"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "opening-place",
+                      "canonical_entity_ids": [
+                        "herbal-yard"
                       ]
                     }
                   ]
@@ -6159,6 +7007,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -6175,6 +7030,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -6397,6 +7267,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -6413,6 +7290,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -6693,6 +7585,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -6724,6 +7623,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -6916,6 +7830,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -6932,6 +7853,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -7310,6 +8246,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -7326,6 +8269,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ]
@@ -7651,10 +8609,40 @@
                       "name": "阿柳本月工钱",
                       "description": "七日后付本月工钱二两，额外差事另行商议；私人赠与不自动抵销商号工资。 尚欠 2，单位 silver；到期世界秒数 604800。",
                       "status": "observed"
+                    },
+                    {
+                      "id": "opening-place",
+                      "name": "林家前厅",
+                      "description": "开篇时所在的地方。",
+                      "status": "observed"
                     }
                   ],
-                  "evidence": [],
-                  "claims": [],
+                  "evidence": [
+                    {
+                      "id": "opening-night-observation",
+                      "kind": "observation",
+                      "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                      "sourceId": null,
+                      "step": 0
+                    }
+                  ],
+                  "claims": [
+                    {
+                      "id": "opening-night-memory",
+                      "subjectId": "opening-place",
+                      "predicate": "opening-observation",
+                      "value": {
+                        "kind": "text",
+                        "value": "开篇时此地已入夜。"
+                      },
+                      "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                      "stance": "believed",
+                      "confidence": 1,
+                      "evidenceIds": [
+                        "opening-night-observation"
+                      ]
+                    }
+                  ],
                   "bindings": [
                     {
                       "local_entity_id": "father",
@@ -7726,6 +8714,12 @@
                       "local_entity_id": "known-lin-helper-wage",
                       "canonical_entity_ids": [
                         "lin-helper-wage"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "opening-place",
+                      "canonical_entity_ids": [
+                        "lin-estate"
                       ]
                     }
                   ]
@@ -7947,6 +8941,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -7963,6 +8964,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -8179,6 +9195,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -8195,6 +9218,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -8426,6 +9464,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -8457,6 +9502,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -8612,6 +9672,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -8628,6 +9695,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -8801,6 +9883,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -8817,6 +9906,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -9183,6 +10287,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -9199,6 +10310,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ]
@@ -9357,6 +10483,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -9373,6 +10506,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ]
@@ -9699,6 +10847,12 @@
                       "name": "黄长顺",
                       "description": "约定收货人，可核验封签并签回执。",
                       "status": "observed"
+                    },
+                    {
+                      "id": "opening-place",
+                      "name": "远安镖队驻院",
+                      "description": "开篇时所在的地方。",
+                      "status": "observed"
                     }
                   ],
                   "evidence": [
@@ -9706,6 +10860,13 @@
                       "id": "prior-root-examination",
                       "kind": "observation",
                       "description": "此前已经接受过有效资质检查，并知晓检查结果。",
+                      "sourceId": null,
+                      "step": 0
+                    },
+                    {
+                      "id": "opening-night-observation",
+                      "kind": "observation",
+                      "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
                       "sourceId": null,
                       "step": 0
                     }
@@ -9724,6 +10885,21 @@
                       "confidence": 1,
                       "evidenceIds": [
                         "prior-root-examination"
+                      ]
+                    },
+                    {
+                      "id": "opening-night-memory",
+                      "subjectId": "opening-place",
+                      "predicate": "opening-observation",
+                      "value": {
+                        "kind": "text",
+                        "value": "开篇时此地已入夜。"
+                      },
+                      "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                      "stance": "believed",
+                      "confidence": 1,
+                      "evidenceIds": [
+                        "opening-night-observation"
                       ]
                     }
                   ],
@@ -9810,6 +10986,12 @@
                       "local_entity_id": "known-escort-recipient",
                       "canonical_entity_ids": [
                         "escort-recipient"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "opening-place",
+                      "canonical_entity_ids": [
+                        "yuanan-yard"
                       ]
                     }
                   ]
@@ -9988,6 +11170,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -10004,6 +11193,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -10190,6 +11394,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -10206,6 +11417,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -10409,6 +11635,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -10425,6 +11658,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -11018,6 +12266,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -11034,6 +12289,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ]
@@ -11279,6 +12549,12 @@
                       "name": "支谷修补台",
                       "description": "熟悉库房外修补台，可用自己的工具工作。",
                       "status": "observed"
+                    },
+                    {
+                      "id": "opening-place",
+                      "name": "沈家库房",
+                      "description": "开篇时所在的地方。",
+                      "status": "observed"
                     }
                   ],
                   "evidence": [
@@ -11286,6 +12562,13 @@
                       "id": "prior-root-examination",
                       "kind": "observation",
                       "description": "此前已经接受过有效资质检查，并知晓检查结果。",
+                      "sourceId": null,
+                      "step": 0
+                    },
+                    {
+                      "id": "opening-night-observation",
+                      "kind": "observation",
+                      "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
                       "sourceId": null,
                       "step": 0
                     }
@@ -11304,6 +12587,21 @@
                       "confidence": 1,
                       "evidenceIds": [
                         "prior-root-examination"
+                      ]
+                    },
+                    {
+                      "id": "opening-night-memory",
+                      "subjectId": "opening-place",
+                      "predicate": "opening-observation",
+                      "value": {
+                        "kind": "text",
+                        "value": "开篇时此地已入夜。"
+                      },
+                      "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                      "stance": "believed",
+                      "confidence": 1,
+                      "evidenceIds": [
+                        "opening-night-observation"
                       ]
                     }
                   ],
@@ -11372,6 +12670,12 @@
                       "local_entity_id": "known-shen-workbench",
                       "canonical_entity_ids": [
                         "shen-workbench"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "opening-place",
+                      "canonical_entity_ids": [
+                        "shen-store"
                       ]
                     }
                   ]
@@ -11544,6 +12848,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -11560,6 +12871,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -11752,6 +13078,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -11768,6 +13101,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -11965,6 +13313,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -11981,6 +13336,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -12446,6 +13816,12 @@
                       "name": "青石岭",
                       "description": "知道洞府外常走山路，不知道闻慎新见药地的精确位置。",
                       "status": "observed"
+                    },
+                    {
+                      "id": "opening-place",
+                      "name": "小石潭洞府",
+                      "description": "开篇时所在的地方。",
+                      "status": "observed"
                     }
                   ],
                   "evidence": [
@@ -12453,6 +13829,13 @@
                       "id": "prior-root-examination",
                       "kind": "observation",
                       "description": "此前已经接受过有效资质检查，并知晓检查结果。",
+                      "sourceId": null,
+                      "step": 0
+                    },
+                    {
+                      "id": "opening-night-observation",
+                      "kind": "observation",
+                      "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
                       "sourceId": null,
                       "step": 0
                     }
@@ -12471,6 +13854,21 @@
                       "confidence": 1,
                       "evidenceIds": [
                         "prior-root-examination"
+                      ]
+                    },
+                    {
+                      "id": "opening-night-memory",
+                      "subjectId": "opening-place",
+                      "predicate": "opening-observation",
+                      "value": {
+                        "kind": "text",
+                        "value": "开篇时此地已入夜。"
+                      },
+                      "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                      "stance": "believed",
+                      "confidence": 1,
+                      "evidenceIds": [
+                        "opening-night-observation"
                       ]
                     }
                   ],
@@ -12521,6 +13919,12 @@
                       "local_entity_id": "known-pond-ridge",
                       "canonical_entity_ids": [
                         "pond-ridge"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "opening-place",
+                      "canonical_entity_ids": [
+                        "stone-pond"
                       ]
                     }
                   ]
@@ -12737,6 +14141,13 @@
                         "description": "亲自参加本月预算议事，记得通过的配给与试供范围。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -12768,6 +14179,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-budget-meeting"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -13045,6 +14471,13 @@
                         "description": "亲自参加本月预算议事，记得通过的配给与试供范围。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -13076,6 +14509,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-budget-meeting"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -13303,6 +14751,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -13319,6 +14774,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -13895,6 +15365,13 @@
                         "description": "幼时入门前由族中修士检测，并当面得知自己的资质。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -13926,6 +15403,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "childhood-root-test"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ]
@@ -14137,6 +15629,13 @@
                         "description": "幼时入门前由族中修士检测，并当面得知自己的资质。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -14168,6 +15667,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "childhood-root-test"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ]
@@ -14379,6 +15893,13 @@
                         "description": "幼时入门前由族中修士检测，并当面得知自己的资质。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -14410,6 +15931,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "childhood-root-test"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ]
@@ -14621,6 +16157,13 @@
                         "description": "幼时入门前由族中修士检测，并当面得知自己的资质。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -14652,6 +16195,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "childhood-root-test"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ]
@@ -14863,6 +16421,13 @@
                         "description": "幼时入门前由族中修士检测，并当面得知自己的资质。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -14894,6 +16459,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "childhood-root-test"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ]
@@ -15105,6 +16685,13 @@
                         "description": "幼时入门前由族中修士检测，并当面得知自己的资质。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -15136,6 +16723,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "childhood-root-test"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ]
@@ -15439,6 +17041,12 @@
                       "name": "许青宁",
                       "description": "15岁的许氏族人，炼气2层。在药圃帮忙，学过照料低阶药草，对族中年长者亲近但拘谨。",
                       "status": "observed"
+                    },
+                    {
+                      "id": "opening-place",
+                      "name": "许氏议事厅",
+                      "description": "开篇时所在的地方。",
+                      "status": "observed"
                     }
                   ],
                   "evidence": [
@@ -15453,6 +17061,13 @@
                       "id": "prior-budget-meeting",
                       "kind": "observation",
                       "description": "此前族议已经确认本月三十份后辈配给和三十份工坊试供的安排权限，自己参加了会议。",
+                      "sourceId": null,
+                      "step": 0
+                    },
+                    {
+                      "id": "opening-night-observation",
+                      "kind": "observation",
+                      "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
                       "sourceId": null,
                       "step": 0
                     }
@@ -15486,6 +17101,21 @@
                       "confidence": 1,
                       "evidenceIds": [
                         "prior-budget-meeting"
+                      ]
+                    },
+                    {
+                      "id": "opening-night-memory",
+                      "subjectId": "opening-place",
+                      "predicate": "opening-observation",
+                      "value": {
+                        "kind": "text",
+                        "value": "开篇时此地已入夜。"
+                      },
+                      "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                      "stance": "believed",
+                      "confidence": 1,
+                      "evidenceIds": [
+                        "opening-night-observation"
                       ]
                     }
                   ],
@@ -15596,6 +17226,12 @@
                       "local_entity_id": "known-xu-qingning",
                       "canonical_entity_ids": [
                         "xu-qingning"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "opening-place",
+                      "canonical_entity_ids": [
+                        "xu-hall"
                       ]
                     }
                   ]
@@ -15797,7 +17433,7 @@
                       {
                         "id": "known-spirit-manager-wage",
                         "name": "岑玉当期报酬",
-                        "description": "三日后支付岑玉当期报酬三十枚低阶灵石，商号周转资金承担。 尚欠 30，单位 low-stone；到期世界秒数 259200。",
+                        "description": "三日后支付岑玉当期报酬三十枚低阶灵石，商号周转资金承担。 尚欠 30，单位 low-stone；到期世界秒数 1036800。",
                         "status": "observed"
                       },
                       {
@@ -15820,6 +17456,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -15836,6 +17479,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -16061,6 +17719,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -16077,6 +17742,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -16266,6 +17946,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -16282,6 +17969,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -16471,6 +18173,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -16487,6 +18196,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -16649,6 +18373,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -16665,6 +18396,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -17102,7 +18848,7 @@
                     "predicate": "expiry-world-second",
                     "value": {
                       "kind": "number",
-                      "value": 2592000
+                      "value": 10368000
                     },
                     "description": "尚余三十个当地日，时钟到期后须按真实约定另议续约。",
                     "access": {
@@ -17300,7 +19046,7 @@
                     "predicate": "due-world-second",
                     "value": {
                       "kind": "number",
-                      "value": 259200
+                      "value": 1036800
                     },
                     "description": "以本世界共同开篇时刻为零点的到期秒数。",
                     "access": {
@@ -17534,7 +19280,7 @@
                     {
                       "id": "known-spirit-manager-wage",
                       "name": "岑玉当期报酬",
-                      "description": "三日后支付岑玉当期报酬三十枚低阶灵石，商号周转资金承担。 尚欠 30，单位 low-stone；到期世界秒数 259200。",
+                      "description": "三日后支付岑玉当期报酬三十枚低阶灵石，商号周转资金承担。 尚欠 30，单位 low-stone；到期世界秒数 1036800。",
                       "status": "observed"
                     },
                     {
@@ -17547,6 +19293,12 @@
                       "id": "known-spirit-order-two",
                       "name": "十二箱订单",
                       "description": "约次日午前交货，款已结清；变更交期与分批须双方同意。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "opening-place",
+                      "name": "青禾灵材行仓院",
+                      "description": "开篇时所在的地方。",
                       "status": "observed"
                     }
                   ],
@@ -17562,6 +19314,13 @@
                       "id": "prior-root-examination",
                       "kind": "observation",
                       "description": "此前已经接受过有效资质检查，并知晓检查结果。",
+                      "sourceId": null,
+                      "step": 0
+                    },
+                    {
+                      "id": "opening-night-observation",
+                      "kind": "observation",
+                      "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
                       "sourceId": null,
                       "step": 0
                     }
@@ -17610,6 +19369,21 @@
                       "confidence": 1,
                       "evidenceIds": [
                         "prior-root-examination"
+                      ]
+                    },
+                    {
+                      "id": "opening-night-memory",
+                      "subjectId": "opening-place",
+                      "predicate": "opening-observation",
+                      "value": {
+                        "kind": "text",
+                        "value": "开篇时此地已入夜。"
+                      },
+                      "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                      "stance": "believed",
+                      "confidence": 1,
+                      "evidenceIds": [
+                        "opening-night-observation"
                       ]
                     }
                   ],
@@ -17708,6 +19482,12 @@
                       "local_entity_id": "known-spirit-order-two",
                       "canonical_entity_ids": [
                         "spirit-order-two"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "opening-place",
+                      "canonical_entity_ids": [
+                        "qinghe-store"
                       ]
                     }
                   ]
@@ -17907,6 +19687,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -17923,6 +19710,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -18108,6 +19910,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -18124,6 +19933,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -18292,6 +20116,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -18308,6 +20139,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ],
@@ -18705,6 +20551,13 @@
                         "description": "亲身学习并反复使用这些手艺，知道自己的能力边界。",
                         "sourceId": null,
                         "step": 0
+                      },
+                      {
+                        "id": "opening-night-observation",
+                        "kind": "observation",
+                        "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
+                        "sourceId": null,
+                        "step": 0
                       }
                     ],
                     "claims": [
@@ -18721,6 +20574,21 @@
                         "confidence": 1,
                         "evidenceIds": [
                           "prior-practice"
+                        ]
+                      },
+                      {
+                        "id": "opening-night-memory",
+                        "subjectId": "location",
+                        "predicate": "opening-observation",
+                        "value": {
+                          "kind": "text",
+                          "value": "开篇时此地已入夜。"
+                        },
+                        "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                        "stance": "believed",
+                        "confidence": 1,
+                        "evidenceIds": [
+                          "opening-night-observation"
                         ]
                       }
                     ]
@@ -18983,6 +20851,12 @@
                       "name": "修补材料盒",
                       "description": "阵室私人盒有三段导线和两份封纹砂；外环修补会耗料，核心图样仍缺。",
                       "status": "observed"
+                    },
+                    {
+                      "id": "opening-place",
+                      "name": "听泉静室",
+                      "description": "开篇时所在的地方。",
+                      "status": "observed"
                     }
                   ],
                   "evidence": [
@@ -18990,6 +20864,13 @@
                       "id": "prior-root-examination",
                       "kind": "observation",
                       "description": "此前已经接受过有效资质检查，并知晓检查结果。",
+                      "sourceId": null,
+                      "step": 0
+                    },
+                    {
+                      "id": "opening-night-observation",
+                      "kind": "observation",
+                      "description": "开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。",
                       "sourceId": null,
                       "step": 0
                     }
@@ -19008,6 +20889,21 @@
                       "confidence": 1,
                       "evidenceIds": [
                         "prior-root-examination"
+                      ]
+                    },
+                    {
+                      "id": "opening-night-memory",
+                      "subjectId": "opening-place",
+                      "predicate": "opening-observation",
+                      "value": {
+                        "kind": "text",
+                        "value": "开篇时此地已入夜。"
+                      },
+                      "description": "记得开篇时已经入夜，不会把当夜误认作尚未天黑。",
+                      "stance": "believed",
+                      "confidence": 1,
+                      "evidenceIds": [
+                        "opening-night-observation"
                       ]
                     }
                   ],
@@ -19070,6 +20966,12 @@
                       "local_entity_id": "known-array-repair-stock",
                       "canonical_entity_ids": [
                         "array-repair-stock"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "opening-place",
+                      "canonical_entity_ids": [
+                        "listening-spring"
                       ]
                     }
                   ]
@@ -19176,59 +21078,68 @@
       "sample-originals",
       "root-testing-evidence",
       "original-root-examination-method",
-      "original-inspection-conditions"
+      "original-inspection-conditions",
+      "sample-local-calendar"
     ],
     "entity:han-father": [
       "han-household",
       "han-wish",
       "han-uncle",
       "sample-calibration",
-      "sample-originals"
+      "sample-originals",
+      "sample-local-calendar"
     ],
     "entity:han-mother": [
       "han-household",
       "han-wish",
       "han-uncle",
       "sample-calibration",
-      "sample-originals"
+      "sample-originals",
+      "sample-local-calendar"
     ],
     "entity:han-eldest-brother": [
       "han-household",
       "han-wish",
       "han-uncle",
       "sample-calibration",
-      "sample-originals"
+      "sample-originals",
+      "sample-local-calendar"
     ],
     "entity:han-zhu": [
       "han-household",
       "han-wish",
       "han-uncle",
       "sample-calibration",
-      "sample-originals"
+      "sample-originals",
+      "sample-local-calendar"
     ],
     "entity:han-elder-sister": [
       "han-household",
       "han-wish",
       "han-uncle",
       "sample-calibration",
-      "sample-originals"
+      "sample-originals",
+      "sample-local-calendar"
     ],
     "entity:han-younger-sister": [
       "han-household",
       "han-wish",
       "han-uncle",
       "sample-calibration",
-      "sample-originals"
+      "sample-originals",
+      "sample-local-calendar"
     ],
     "entity:han-uncle": [
       "han-uncle",
       "sample-calibration",
-      "sample-open-future"
+      "sample-open-future",
+      "sample-local-calendar"
     ],
     "entity:old-zhang": [
       "village-reader",
       "sample-calibration",
-      "sample-originals"
+      "sample-originals",
+      "sample-local-calendar"
     ],
     "entity:han-household-pantry": [
       "han-household",
@@ -19238,7 +21149,8 @@
     "manifest": [
       "opening-night",
       "sample-originals",
-      "sample-open-future"
+      "sample-open-future",
+      "sample-local-calendar"
     ],
     "mechanics": [
       "sample-calibration",
@@ -19246,7 +21158,8 @@
       "cultivation-stages",
       "sample-spell",
       "extended-origin-abilities",
-      "original-complete-livelihoods"
+      "original-complete-livelihoods",
+      "sample-local-calendar"
     ],
     "law:positive-time": [
       "sample-open-future",
@@ -19330,7 +21243,8 @@
       "original-root-examination-method",
       "original-inspection-conditions",
       "original-complete-livelihoods",
-      "original-livelihood-herbal-apprentice"
+      "original-livelihood-herbal-apprentice",
+      "sample-local-calendar"
     ],
     "origin:spirit-merchant": [
       "sample-originals",
@@ -19344,7 +21258,8 @@
       "original-root-examination-method",
       "original-inspection-conditions",
       "original-complete-livelihoods",
-      "original-livelihood-spirit-merchant"
+      "original-livelihood-spirit-merchant",
+      "sample-local-calendar"
     ],
     "origin:han-li": [
       "han-household",
@@ -19354,7 +21269,8 @@
       "sample-open-future",
       "root-testing-evidence",
       "original-root-examination-method",
-      "original-inspection-conditions"
+      "original-inspection-conditions",
+      "sample-local-calendar"
     ],
     "entity:lin-estate": [
       "sample-originals",
@@ -19423,7 +21339,8 @@
       "original-root-examination-method",
       "original-inspection-conditions",
       "original-complete-livelihoods",
-      "original-livelihood-merchant-heir"
+      "original-livelihood-merchant-heir",
+      "sample-local-calendar"
     ],
     "origin:escort-apprentice": [
       "sample-originals",
@@ -19435,7 +21352,8 @@
       "original-root-examination-method",
       "original-inspection-conditions",
       "original-complete-livelihoods",
-      "original-livelihood-escort-apprentice"
+      "original-livelihood-escort-apprentice",
+      "sample-local-calendar"
     ],
     "origin:clan-junior": [
       "sample-originals",
@@ -19447,7 +21365,8 @@
       "original-root-examination-method",
       "original-inspection-conditions",
       "original-complete-livelihoods",
-      "original-livelihood-clan-junior"
+      "original-livelihood-clan-junior",
+      "sample-local-calendar"
     ],
     "origin:foundation-independent": [
       "sample-originals",
@@ -19459,7 +21378,8 @@
       "original-root-examination-method",
       "original-inspection-conditions",
       "original-complete-livelihoods",
-      "original-livelihood-foundation-independent"
+      "original-livelihood-foundation-independent",
+      "sample-local-calendar"
     ],
     "origin:core-clan-elder": [
       "sample-originals",
@@ -19472,7 +21392,8 @@
       "original-root-examination-method",
       "original-inspection-conditions",
       "original-complete-livelihoods",
-      "original-livelihood-core-clan-elder"
+      "original-livelihood-core-clan-elder",
+      "sample-local-calendar"
     ],
     "origin:spirit-array-master": [
       "sample-originals",
@@ -19488,12 +21409,16 @@
       "original-root-examination-method",
       "original-inspection-conditions",
       "original-complete-livelihoods",
-      "original-livelihood-spirit-array-master"
+      "original-livelihood-spirit-array-master",
+      "sample-local-calendar"
     ],
     "law:authored-workflows": [
       "sample-economy",
       "sample-calibration",
       "original-complete-livelihoods"
+    ],
+    "law:daylight-and-illumination": [
+      "sample-local-calendar"
     ]
   }
 }

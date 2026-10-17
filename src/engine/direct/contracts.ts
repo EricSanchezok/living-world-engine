@@ -23,6 +23,8 @@ export interface ActionFrame {
   /** Zero with a null deadline is unresolved and cannot enter the timeline. */
   durationSeconds: number; durationSource: "explicit" | "profile" | "judgment";
   progressSeconds: number; activityStatus: "active" | "queued" | "paused";
+  interruptCondition: string | null;
+  interruptedByEventIds?: string[];
   inputHash: string; causeActionId: string | null;
   preparatoryFor: ActionKind | null;
   observationScope: "target" | "surroundings" | "inventory";
@@ -76,6 +78,8 @@ export interface PreparedDirectAction {
   sharedClaims: Array<{ poolId: string; amount: number }>;
   ongoing: boolean;
   requestProgress: "complete" | "continue" | "wait";
+  interruptActivityIds: string[];
+  interruptionCandidateIds: string[];
 }
 export interface DirectRuntimeState {
   kind: "direct-world"; version: 4; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;

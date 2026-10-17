@@ -1,3 +1,4 @@
+import { replaySimulationState } from "../../engine/runtime/transaction";
 import { directControlHistory } from "../../engine/direct/canonical";
 import { contentHash } from "../../engine/models/model-audit";
 import type { WorldInstanceDocument } from "../world-instance-types";
@@ -8,6 +9,25 @@ import { participantReactionIds } from "../../engine/direct/foreground";
 import type { ScenePacket, NarrativeBeat, RequestRelation } from "./contracts";
 import { executedDescription } from "./scene";
 import { narrativeFallback, explicitNarrativeMentions } from "./publication";
+import type { AgentState, SimulationState } from "../../engine/contracts/model";
+import { resolveDurationUnits, standardDurationUnits } from "../../engine/mechanics/duration-units";
+
+function elapsedUnitsAt(state: Readonly<SimulationState>, agent: AgentState) {
+  return { ...standardDurationUnits, ...resolveDurationUnits(state.truth.mechanics.durationUnits, state.truth.placements, agent.entityId) };
+}
+
+function observedPropertiesAt(state: Readonly<SimulationState>, agent: AgentState): ScenePacket["observedProperties"] {
+  const observations = new Map(state.history.flatMap(step => step.observations.filter(observation => observation.observerId === agent.id)
+    .map(observation => [observation.id, { revision: step.revision, step: step.step, worldTimeSeconds: step.temporalBoundary.toElapsedSeconds }] as const)));
+  return Object.values(agent.belief.claims).map(claim => ({
+    subject: agent.belief.localEntities[claim.subjectId]?.name ?? claim.subjectId, subjectLocalId: claim.subjectId,
+    predicate: claim.predicate, value: claim.value as unknown as JsonValue, stance: claim.stance, description: claim.description,
+    evidenceBoundary: claim.evidenceIds.flatMap(id => {
+      const source = agent.belief.evidence[id]?.sourceId, boundary = source ? observations.get(source) : undefined;
+      return boundary ? [boundary] : [];
+    }).sort((left, right) => right.revision - left.revision)[0] ?? null,
+  }));
+}
 
 function queuedBeat(id: string, source: ScenePacket, now: string): NarrativeBeat {
   return { id, participantId: source.participantId, agentId: source.agentId, submissionId: source.submissionId,
@@ -17,11 +37,11 @@ function queuedBeat(id: string, source: ScenePacket, now: string): NarrativeBeat
 
 /** Same-submission participant observations are history, never another subject's private receipts. */
 export function earlierRequestReceipts(beats: readonly Pick<NarrativeBeat, "participantId" | "agentId" | "submissionId" | "source">[],
-  participantId: string, agentId: string, submissionId: string | null): ScenePacket["observations"] {
+  participantId: string, agentId: string, submissionId: string | null, throughRevision = Number.MAX_SAFE_INTEGER): ScenePacket["observations"] {
   if (!submissionId) return [];
   const ids = new Set<string>(), events = new Set<string>();
   return beats.filter(beat => beat.participantId === participantId && beat.agentId === agentId &&
-    beat.submissionId === submissionId && !beat.source.reply).flatMap(beat => beat.source.observations)
+    beat.submissionId === submissionId && !beat.source.reply).flatMap(beat => beat.source.observations).filter(observation => observation.revision <= throughRevision)
     .sort((a, b) => a.worldTimeSeconds - b.worldTimeSeconds || a.revision - b.revision || a.step - b.step || a.id.localeCompare(b.id))
     .filter(observation => {
       const eventKey = observation.sourceEventIds.length ? [...observation.sourceEventIds].sort().join("\n") : null;
@@ -77,12 +97,18 @@ function requestRelation(actionIds: string[], frames: Map<string, ActionFrame>, 
 
 /** Called in the world transaction. Never performs model work. */
 export function enqueueNarrative(document: WorldInstanceDocument, now: string): void {
+  const boundaryStates = new Map([[document.state.revision, document.state]]);
+  const stateAt = (revision: number) => {
+    let state = boundaryStates.get(revision);
+    if (!state) { state = replaySimulationState(document.state, revision); boundaryStates.set(revision, state); }
+    return state;
+  };
   const controlHistory = new Map<number, DirectRuntimeState["intents"]>();
   for (const [revision, control] of directControlHistory(document.state)) controlHistory.set(revision, control.intents);
   const actionFrames = new Map(document.state.history.flatMap(step => step.directEvent?.frames ?? []).map(frame => [frame.id, frame]));
   const events = new Map(document.state.truth.events.map(event => [event.id, event]));
-  const priorReceipts = (participantId: string, agentId: string, submissionId: string | null): NonNullable<ScenePacket["priorObservedReceipts"]> =>
-    earlierRequestReceipts(document.narratives, participantId, agentId, submissionId).map(observation => {
+  const priorReceipts = (participantId: string, agentId: string, submissionId: string | null, throughRevision: number): NonNullable<ScenePacket["priorObservedReceipts"]> =>
+    earlierRequestReceipts(document.narratives, participantId, agentId, submissionId, throughRevision).map(observation => {
       const sourceEvents = observation.sourceEventIds.map(id => events.get(id));
       const actionIds = sourceEvents.flatMap(event => event?.causes.filter(cause => cause.kind === "action").map(cause => cause.id) ?? []);
       const complete = sourceEvents.length > 0 && sourceEvents.every(event => event?.causes.some(cause => cause.kind === "action"));
@@ -102,11 +128,12 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
         intents.findLast(item => item.revision < observation.revision);
       const submissionId = intent?.submissionId ?? null;
       const pending = document.narratives.findLast(beat => beat.participantId === participant.id && beat.submissionId === submissionId && !beat.source.reply && beat.status === "queued" && beat.attempts === 0);
-      const agent = document.state.agents[participant.agentId]!;
+      const boundaryState = stateAt(observation.revision);
+      const agent = boundaryState.agents[participant.agentId]!;
       const self = Object.values(agent.bindings).find(binding => binding.canonicalEntityIds.length === 1 && binding.canonicalEntityIds[0] === agent.entityId);
-      const place = document.state.truth.placements[agent.entityId];
+      const place = boundaryState.truth.placements[agent.entityId];
       const localPlace = Object.values(agent.bindings).find(binding => binding.canonicalEntityIds.length === 1 && binding.canonicalEntityIds[0] === place);
-      const ownObservations = new Map(document.state.history.flatMap(step => step.observations
+      const ownObservations = new Map(boundaryState.history.flatMap(step => step.observations
         .filter(item => item.observerId === participant.agentId).map(item => [item.id, item] as const)));
       const source: ScenePacket = pending?.source ?? {
         participantId: participant.id, agentId: participant.agentId, submissionId,
@@ -115,8 +142,9 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
         playerName: self ? agent.belief.localEntities[self.localEntityId]?.name ?? participant.displayName : participant.displayName,
         location: localPlace ? agent.belief.localEntities[localPlace.localEntityId]?.name ?? null : null,
         boundary: { revision: observation.revision, step: observation.step, worldTimeSeconds: observation.worldTimeSeconds }, reply: null,
+        elapsedUnits: elapsedUnitsAt(boundaryState, agent),
         observations: [], speech: [],
-        priorObservedReceipts: priorReceipts(participant.id, participant.agentId, submissionId),
+        priorObservedReceipts: priorReceipts(participant.id, participant.agentId, submissionId, observation.revision),
         knownEntities: [], observedProperties: [],
         memories: Object.values(agent.belief.evidence).filter(evidence => evidence.step < observation.step)
           .slice(-12).map(evidence => { const recorded = evidence.sourceId ? ownObservations.get(evidence.sourceId) : null;
@@ -124,14 +152,12 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
               ...(recorded ? { executedDescription: executedDescription(recorded) } : {}) }; }),
       };
       source.knownEntities = Object.values(agent.belief.localEntities).map(entity => ({ localEntityId: entity.id, name: entity.name, description: entity.description }));
-      source.currentHoldings = { coverage: "complete-current-self-holdings", quantities: projectAgentPerspective(document.state, agent).mechanics.quantities };
+      source.currentHoldings = { coverage: "complete-current-self-holdings", quantities: projectAgentPerspective(boundaryState, agent).mechanics.quantities };
       source.knownWork = Object.values(agent.character.goals).map(goal => ({ description: goal.description, status: goal.status }));
       source.location = localPlace ? agent.belief.localEntities[localPlace.localEntityId]?.name ?? null : null;
       source.boundary = { revision: observation.revision, step: observation.step, worldTimeSeconds: observation.worldTimeSeconds };
-      source.observedProperties = Object.values(agent.belief.claims).map(claim => ({
-        subject: agent.belief.localEntities[claim.subjectId]?.name ?? claim.subjectId, predicate: claim.predicate,
-        value: claim.value as unknown as JsonValue, stance: claim.stance, description: claim.description,
-      }));
+      source.elapsedUnits = elapsedUnitsAt(boundaryState, agent);
+      source.observedProperties = observedPropertiesAt(boundaryState, agent);
       source.observations.push(observation);
       if (observation.scene?.speech) source.speech.push({ id: `speech-${contentHash(observation.id).slice(0, 16)}`, ...observation.scene.speech });
       if (pending) pending.sourceHash = contentHash(source);
@@ -154,8 +180,11 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
         if (cause?.actorId !== participant.agentId || !cause.submissionId || replies.some(reply => reply.submissionId === cause.submissionId)) continue;
         const original = intents.find(item => item.submissionId === cause.submissionId);
         if (!original) continue;
-        const local = Object.values(document.state.agents[participant.agentId]!.bindings).find(binding =>
-          binding.canonicalEntityIds.length === 1 && binding.canonicalEntityIds[0] === document.state.agents[ownerId]?.entityId);
+        const replyId = `reply-${contentHash([participant.id, step.revision, original.submissionId]).slice(0, 24)}`;
+        if (document.narratives.some(beat => beat.id === replyId)) continue;
+        const boundaryState = stateAt(step.revision);
+        const local = Object.values(boundaryState.agents[participant.agentId]!.bindings).find(binding =>
+          binding.canonicalEntityIds.length === 1 && binding.canonicalEntityIds[0] === boundaryState.agents[ownerId]?.entityId);
         replies.push({ submissionId: original.submissionId, agentId: participant.agentId, kind: "recovery",
           requested: original.text, focusLocalEntityId: local?.localEntityId ?? null,
           reason: "The player's interaction already committed. Processing a relevant character response was interrupted before that response could commit. Preserve the delivered question and earlierObservedEvents according to their requestRelation and actual actor. Explain that the response could not be completed and the outstanding question can be continued. This is not a refusal, silence, a missed delivery, or evidence that the character did nothing. Do not invent their intended answer, motive, private activity or the technical cause." });
@@ -163,23 +192,24 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
       for (const reply of replies) {
         const id = `reply-${contentHash([participant.id, step.revision, reply.submissionId]).slice(0, 24)}`;
         if (document.narratives.some(beat => beat.id === id)) continue;
-        const agent = document.state.agents[participant.agentId]!;
+        const boundaryState = stateAt(step.revision);
+        const agent = boundaryState.agents[participant.agentId]!;
         const participantIntent = document.participantIntents.find(item => item.participantId === participant.id && item.submissionId === reply.submissionId);
         const source: ScenePacket = {
           participantId: participant.id, agentId: participant.agentId, submissionId: reply.submissionId,
           submittedAt: participantIntent?.submittedAt ?? null, requestedAction: reply.requested, reply: structuredClone(reply),
           boundary: { revision: step.revision, step: step.step, worldTimeSeconds: step.temporalBoundary.toElapsedSeconds },
+          elapsedUnits: elapsedUnitsAt(boundaryState, agent),
           world: { name: document.world.name, language: document.world.narrative.language, style: document.world.narrative.style },
-          playerName: participant.displayName, location: projectAgentPerspective(document.state, agent).self.location?.name ?? null, observations: [], speech: [],
+          playerName: participant.displayName, location: projectAgentPerspective(boundaryState, agent).self.location?.name ?? null, observations: [], speech: [],
           priorObservedReceipts: reply.kind === "recovery"
-            ? priorReceipts(participant.id, participant.agentId, reply.submissionId) : [],
-          currentHoldings: { coverage: "complete-current-self-holdings", quantities: projectAgentPerspective(document.state, agent).mechanics.quantities },
+            ? priorReceipts(participant.id, participant.agentId, reply.submissionId, step.revision) : [],
+          currentHoldings: { coverage: "complete-current-self-holdings", quantities: projectAgentPerspective(boundaryState, agent).mechanics.quantities },
           knownWork: Object.values(agent.character.goals).map(goal => ({ description: goal.description, status: goal.status })),
           knownEntities: Object.values(agent.belief.localEntities).map(entity => ({ localEntityId: entity.id, name: entity.name, description: entity.description })),
-          observedProperties: Object.values(agent.belief.claims).map(claim => ({ subject: agent.belief.localEntities[claim.subjectId]?.name ?? claim.subjectId,
-            predicate: claim.predicate, value: claim.value as unknown as JsonValue, stance: claim.stance, description: claim.description })),
+          observedProperties: observedPropertiesAt(boundaryState, agent),
           memories: Object.values(agent.belief.evidence).map(evidence => {
-            const observation = document.state.history.flatMap(item => item.observations).find(item => item.id === evidence.sourceId && item.observerId === participant.agentId);
+            const observation = boundaryState.history.flatMap(item => item.observations).find(item => item.id === evidence.sourceId && item.observerId === participant.agentId);
             return { kind: evidence.kind, description: observation ? executedDescription(observation) : evidence.description };
           }).slice(-16),
         };

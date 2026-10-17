@@ -4,14 +4,6 @@ name: 林记药材铺
 description: 家族经营的普通药材与杂货铺，库存、商号资金和私人月例分别管理。
 placement: qingniu-town
 facts:
-  - id: lin-store-time
-    predicate: local-time
-    value:
-      kind: text
-      value: 与共同开篇同一时刻；此地按夜间场景标定。
-    description: 当地夜间。
-    access:
-      kind: public
   - id: lin-store-route-lin-estate
     predicate: route-to
     value:

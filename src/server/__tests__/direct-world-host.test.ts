@@ -17,7 +17,7 @@ import { readDirectState } from "../../engine/direct/state";
 import type { StructuredModelRequest } from "../../engine/models/model-provider";
 import { ExperimentBudgetError } from "../../engine/benchmarks/action-compilation/experiment-budget";
 import { participantReactionIds } from "../../engine/direct/foreground";
-import { nextNarrative } from "../narrative/outbox";
+import { enqueueNarrative, nextNarrative } from "../narrative/outbox";
 import { GET as getInstanceEvents } from "../../app/api/instances/[id]/events/route";
 import { GET as getInstance } from "../../app/api/instances/[id]/route";
 import { DebugCheckpointModelProvider } from "../debug-checkpoint-provider";
@@ -954,6 +954,20 @@ describe("direct world through persistent WorldHost", () => {
       expect(document.narratives).toHaveLength(2);
       expect(document.narratives[0]!.source.observations).toHaveLength(2);
       expect(document.narratives[1]!.source.priorObservedReceipts).toEqual(document.narratives[0]!.source.observations.map(observation => ({ ...observation, requestRelation: "participant_step" })));
+      const repairQueue = structuredClone(document), earlierSource = document.narratives[0]!.source;
+      repairQueue.narratives = [structuredClone(document.narratives[1]!)];
+      repairQueue.narratives[0]!.status = "complete";
+      enqueueNarrative(repairQueue, new Date().toISOString());
+      const rebuilt = repairQueue.narratives.find(beat => beat.source.observations.some(observation => observation.id === earlierSource.observations[0]!.id))!;
+      expect(rebuilt.source.boundary).toEqual(earlierSource.boundary);
+      expect(rebuilt.source.priorObservedReceipts).toEqual([]);
+      expect(rebuilt.source.currentHoldings).toEqual(earlierSource.currentHoldings);
+      expect(rebuilt.source.elapsedUnits).toEqual(earlierSource.elapsedUnits);
+      expect(rebuilt.source.elapsedUnits.hours).toBe(3600);
+      expect(rebuilt.source.observedProperties).toEqual(earlierSource.observedProperties);
+      expect(rebuilt.source.observedProperties?.every(property => property.evidenceBoundary === null || property.evidenceBoundary.revision <= rebuilt.source.boundary.revision)).toBe(true);
+      expect(JSON.stringify(rebuilt.source.memories)).not.toContain("不接受");
+      expect(document.narratives[0]!.source).toEqual(earlierSource);
       expect(new Map(directControlHistory(state)).get(state.history[0]!.revision)!.completedSubmissionIds).not.toContain("find-and-ask");
       expect(state.history.at(-1)!.observations.find(packet => packet.observerId === "player")?.summary).toContain("不接受");
       expect(Object.values(document.runs).find(run => run.rootIntents.some(intent => intent.submissionId === "find-and-ask"))?.status).toBe("completed");
@@ -1028,8 +1042,8 @@ describe("direct world through persistent WorldHost", () => {
       let host = makeHost();
       const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } });
       const id = created.summary.id;
-      expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 33, executionAlgorithm: DEFAULT_ALGORITHM_REF,
-        state: { schemaVersion: 22, executionState: { data: { kind: "direct-world" } } } });
+      expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 34, executionAlgorithm: DEFAULT_ALGORITHM_REF,
+        state: { schemaVersion: 23, executionState: { data: { kind: "direct-world" } } } });
       expect(f.transport).not.toHaveBeenCalled();
       await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });
       expect(f.transport).toHaveBeenCalledTimes(1);

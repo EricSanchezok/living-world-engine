@@ -129,6 +129,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -141,6 +146,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -282,6 +298,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -294,6 +315,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -433,6 +465,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -445,6 +482,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -675,6 +723,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -687,6 +740,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -799,6 +863,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -811,6 +880,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -1139,8 +1219,28 @@ origins:
                 name: 标记止血草
                 description: 周荃私下问的正是药包里的这一株；它仍归师父。
                 status: observed
-            evidence: []
-            claims: []
+              - id: opening-place
+                name: 陈守拙的药院
+                description: 开篇时所在的地方。
+                status: observed
+            evidence:
+              - id: opening-night-observation
+                kind: observation
+                description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                sourceId: null
+                step: 0
+            claims:
+              - id: opening-night-memory
+                subjectId: opening-place
+                predicate: opening-observation
+                value:
+                  kind: text
+                  value: 开篇时此地已入夜。
+                description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                stance: believed
+                confidence: 1
+                evidenceIds:
+                  - opening-night-observation
             bindings:
               - local_entity_id: mother
                 canonical_entity_ids:
@@ -1181,6 +1281,9 @@ origins:
               - local_entity_id: known-herbal-marked-stem
                 canonical_entity_ids:
                   - herbal-marked-stem
+              - local_entity_id: opening-place
+                canonical_entity_ids:
+                  - herbal-yard
   - id: merchant-heir
     title: 富商继承人
     fantasy: 家族渠道偶尔接触隐藏身份的低阶修士。信任可能带来引荐，也可能只维持普通生意；银两不会自动变成灵石、修为或入门资格。
@@ -1325,6 +1428,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -1337,6 +1445,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -1482,6 +1601,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -1494,6 +1618,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -1676,6 +1811,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-examination-method
                   subjectId: self
@@ -1699,6 +1839,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -1826,6 +1977,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -1838,6 +1994,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -2080,6 +2247,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -2092,6 +2264,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -2328,8 +2511,28 @@ origins:
                 name: 阿柳本月工钱
                 description: 七日后付本月工钱二两，额外差事另行商议；私人赠与不自动抵销商号工资。 尚欠 2，单位 silver；到期世界秒数 604800。
                 status: observed
-            evidence: []
-            claims: []
+              - id: opening-place
+                name: 林家前厅
+                description: 开篇时所在的地方。
+                status: observed
+            evidence:
+              - id: opening-night-observation
+                kind: observation
+                description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                sourceId: null
+                step: 0
+            claims:
+              - id: opening-night-memory
+                subjectId: opening-place
+                predicate: opening-observation
+                value:
+                  kind: text
+                  value: 开篇时此地已入夜。
+                description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                stance: believed
+                confidence: 1
+                evidenceIds:
+                  - opening-night-observation
             bindings:
               - local_entity_id: father
                 canonical_entity_ids:
@@ -2367,6 +2570,9 @@ origins:
               - local_entity_id: known-lin-helper-wage
                 canonical_entity_ids:
                   - lin-helper-wage
+              - local_entity_id: opening-place
+                canonical_entity_ids:
+                  - lin-estate
   - id: escort-apprentice
     title: 镖局学徒
     fantasy: 信物可用于请人传话，联络耗时。承诺不是召唤令或强制服从；兑现人情不等于获得灵根。若发现原著确有适用的特殊机制，须另行满足条件，不能从出身奖励直接解锁。
@@ -2523,6 +2729,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -2535,6 +2746,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -2676,6 +2898,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -2688,6 +2915,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -2839,6 +3077,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-examination-method
                   subjectId: self
@@ -2862,6 +3105,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -2968,6 +3222,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -2980,6 +3239,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -3097,6 +3367,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -3109,6 +3384,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -3356,6 +3642,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -3368,6 +3659,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -3476,6 +3778,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -3488,6 +3795,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -3719,10 +4037,19 @@ origins:
                 name: 黄长顺
                 description: 约定收货人，可核验封签并签回执。
                 status: observed
+              - id: opening-place
+                name: 远安镖队驻院
+                description: 开篇时所在的地方。
+                status: observed
             evidence:
               - id: prior-root-examination
                 kind: observation
                 description: 此前已经接受过有效资质检查，并知晓检查结果。
+                sourceId: null
+                step: 0
+              - id: opening-night-observation
+                kind: observation
+                description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
                 sourceId: null
                 step: 0
             claims:
@@ -3737,6 +4064,17 @@ origins:
                 confidence: 1
                 evidenceIds:
                   - prior-root-examination
+              - id: opening-night-memory
+                subjectId: opening-place
+                predicate: opening-observation
+                value:
+                  kind: text
+                  value: 开篇时此地已入夜。
+                description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                stance: believed
+                confidence: 1
+                evidenceIds:
+                  - opening-night-observation
             bindings:
               - local_entity_id: master
                 canonical_entity_ids:
@@ -3780,6 +4118,9 @@ origins:
               - local_entity_id: known-escort-recipient
                 canonical_entity_ids:
                   - escort-recipient
+              - local_entity_id: opening-place
+                canonical_entity_ids:
+                  - yuanan-yard
   - id: clan-junior
     title: 修仙家族旁支
     fantasy: 掌握修补一种低阶器座断线与接点的残技。旧器中一件与残谱图样相似，但未查验前不能认定它就是传承遗物，也不能修复所有法器。
@@ -3909,6 +4250,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -3921,6 +4267,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -4047,6 +4404,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -4059,6 +4421,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -4193,6 +4566,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -4205,6 +4583,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -4616,6 +5005,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -4628,6 +5022,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -4803,10 +5208,19 @@ origins:
                 name: 支谷修补台
                 description: 熟悉库房外修补台，可用自己的工具工作。
                 status: observed
+              - id: opening-place
+                name: 沈家库房
+                description: 开篇时所在的地方。
+                status: observed
             evidence:
               - id: prior-root-examination
                 kind: observation
                 description: 此前已经接受过有效资质检查，并知晓检查结果。
+                sourceId: null
+                step: 0
+              - id: opening-night-observation
+                kind: observation
+                description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
                 sourceId: null
                 step: 0
             claims:
@@ -4821,6 +5235,17 @@ origins:
                 confidence: 1
                 evidenceIds:
                   - prior-root-examination
+              - id: opening-night-memory
+                subjectId: opening-place
+                predicate: opening-observation
+                value:
+                  kind: text
+                  value: 开篇时此地已入夜。
+                description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                stance: believed
+                confidence: 1
+                evidenceIds:
+                  - opening-night-observation
             bindings:
               - local_entity_id: mother
                 canonical_entity_ids:
@@ -4855,6 +5280,9 @@ origins:
               - local_entity_id: known-shen-workbench
                 canonical_entity_ids:
                   - shen-workbench
+              - local_entity_id: opening-place
+                canonical_entity_ids:
+                  - shen-store
   - id: foundation-independent
     title: 筑基散修
     fantasy: 藏风阵器可拆装携带，用于有限隐蔽与防护。布置需要时间、完整阵基和灵石；高阶侦察、阵基破坏和耗材不足都可能使保护失效。三处磨损是真实初始状态。
@@ -4980,6 +5408,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -4992,6 +5425,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -5123,6 +5567,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -5137,6 +5586,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -5269,6 +5729,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -5283,6 +5748,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -5601,10 +6077,19 @@ origins:
                 name: 青石岭
                 description: 知道洞府外常走山路，不知道闻慎新见药地的精确位置。
                 status: observed
+              - id: opening-place
+                name: 小石潭洞府
+                description: 开篇时所在的地方。
+                status: observed
             evidence:
               - id: prior-root-examination
                 kind: observation
                 description: 此前已经接受过有效资质检查，并知晓检查结果。
+                sourceId: null
+                step: 0
+              - id: opening-night-observation
+                kind: observation
+                description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
                 sourceId: null
                 step: 0
             claims:
@@ -5619,6 +6104,17 @@ origins:
                 confidence: 1
                 evidenceIds:
                   - prior-root-examination
+              - id: opening-night-memory
+                subjectId: opening-place
+                predicate: opening-observation
+                value:
+                  kind: text
+                  value: 开篇时此地已入夜。
+                description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                stance: believed
+                confidence: 1
+                evidenceIds:
+                  - opening-night-observation
             bindings:
               - local_entity_id: qinghe
                 canonical_entity_ids:
@@ -5644,6 +6140,9 @@ origins:
               - local_entity_id: known-pond-ridge
                 canonical_entity_ids:
                   - pond-ridge
+              - local_entity_id: opening-place
+                canonical_entity_ids:
+                  - stone-pond
   - id: core-clan-elder
     title: 结丹家族长者
     fantasy: 掌握的完整灵材预处理手艺，仍需真实消耗原料。私人外缘图只给出一条可能进入遗址的通路，不保证藏宝、安全或完整传承。
@@ -5801,6 +6300,11 @@ origins:
                   description: 亲自参加本月预算议事，记得通过的配给与试供范围。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -5826,6 +6330,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-budget-meeting
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -6006,6 +6521,11 @@ origins:
                   description: 亲自参加本月预算议事，记得通过的配给与试供范围。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -6031,6 +6551,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-budget-meeting
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -6176,6 +6707,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -6190,6 +6726,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -6576,6 +7123,11 @@ origins:
                   description: 幼时入门前由族中修士检测，并当面得知自己的资质。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-skills
                   subjectId: self
@@ -6599,6 +7151,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - childhood-root-test
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -6743,6 +7306,11 @@ origins:
                   description: 幼时入门前由族中修士检测，并当面得知自己的资质。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-skills
                   subjectId: self
@@ -6766,6 +7334,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - childhood-root-test
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -6910,6 +7489,11 @@ origins:
                   description: 幼时入门前由族中修士检测，并当面得知自己的资质。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-skills
                   subjectId: self
@@ -6933,6 +7517,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - childhood-root-test
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -7077,6 +7672,11 @@ origins:
                   description: 幼时入门前由族中修士检测，并当面得知自己的资质。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-skills
                   subjectId: self
@@ -7100,6 +7700,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - childhood-root-test
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -7244,6 +7855,11 @@ origins:
                   description: 幼时入门前由族中修士检测，并当面得知自己的资质。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-skills
                   subjectId: self
@@ -7267,6 +7883,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - childhood-root-test
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -7411,6 +8038,11 @@ origins:
                   description: 幼时入门前由族中修士检测，并当面得知自己的资质。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-skills
                   subjectId: self
@@ -7434,6 +8066,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - childhood-root-test
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -7656,6 +8299,10 @@ origins:
                 name: 许青宁
                 description: 15岁的许氏族人，炼气2层。在药圃帮忙，学过照料低阶药草，对族中年长者亲近但拘谨。
                 status: observed
+              - id: opening-place
+                name: 许氏议事厅
+                description: 开篇时所在的地方。
+                status: observed
             evidence:
               - id: prior-root-examination
                 kind: observation
@@ -7665,6 +8312,11 @@ origins:
               - id: prior-budget-meeting
                 kind: observation
                 description: 此前族议已经确认本月三十份后辈配给和三十份工坊试供的安排权限，自己参加了会议。
+                sourceId: null
+                step: 0
+              - id: opening-night-observation
+                kind: observation
+                description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
                 sourceId: null
                 step: 0
             claims:
@@ -7690,6 +8342,17 @@ origins:
                 confidence: 1
                 evidenceIds:
                   - prior-budget-meeting
+              - id: opening-night-memory
+                subjectId: opening-place
+                predicate: opening-observation
+                value:
+                  kind: text
+                  value: 开篇时此地已入夜。
+                description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                stance: believed
+                confidence: 1
+                evidenceIds:
+                  - opening-night-observation
             bindings:
               - local_entity_id: manager
                 canonical_entity_ids:
@@ -7745,6 +8408,9 @@ origins:
               - local_entity_id: known-xu-qingning
                 canonical_entity_ids:
                   - xu-qingning
+              - local_entity_id: opening-place
+                canonical_entity_ids:
+                  - xu-hall
   - id: spirit-merchant
     title: 灵界化神商行东家
     fantasy: 已有修为、商号与人脉，决定如何处理一场真实的交付争议。
@@ -7892,7 +8558,7 @@ origins:
                   status: observed
                 - id: known-spirit-manager-wage
                   name: 岑玉当期报酬
-                  description: 三日后支付岑玉当期报酬三十枚低阶灵石，商号周转资金承担。 尚欠 30，单位 low-stone；到期世界秒数 259200。
+                  description: 三日后支付岑玉当期报酬三十枚低阶灵石，商号周转资金承担。 尚欠 30，单位 low-stone；到期世界秒数 1036800。
                   status: observed
                 - id: known-spirit-order-one
                   name: 八箱订单
@@ -7906,6 +8572,11 @@ origins:
                 - id: prior-practice
                   kind: observation
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
+                  sourceId: null
+                  step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
                   sourceId: null
                   step: 0
               claims:
@@ -7922,6 +8593,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -8072,6 +8754,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -8086,6 +8773,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -8218,6 +8916,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -8232,6 +8935,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -8364,6 +9078,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -8378,6 +9097,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -8489,6 +9219,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -8501,6 +9236,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -8799,7 +9545,7 @@ origins:
               predicate: expiry-world-second
               value:
                 kind: number
-                value: 2592000
+                value: 10368000
               description: 尚余三十个当地日，时钟到期后须按真实约定另议续约。
               access:
                 kind: private
@@ -8944,7 +9690,7 @@ origins:
               predicate: due-world-second
               value:
                 kind: number
-                value: 259200
+                value: 1036800
               description: 以本世界共同开篇时刻为零点的到期秒数。
               access:
                 kind: private
@@ -9103,7 +9849,7 @@ origins:
                 status: observed
               - id: known-spirit-manager-wage
                 name: 岑玉当期报酬
-                description: 三日后支付岑玉当期报酬三十枚低阶灵石，商号周转资金承担。 尚欠 30，单位 low-stone；到期世界秒数 259200。
+                description: 三日后支付岑玉当期报酬三十枚低阶灵石，商号周转资金承担。 尚欠 30，单位 low-stone；到期世界秒数 1036800。
                 status: observed
               - id: known-spirit-order-one
                 name: 八箱订单
@@ -9112,6 +9858,10 @@ origins:
               - id: known-spirit-order-two
                 name: 十二箱订单
                 description: 约次日午前交货，款已结清；变更交期与分批须双方同意。
+                status: observed
+              - id: opening-place
+                name: 青禾灵材行仓院
+                description: 开篇时所在的地方。
                 status: observed
             evidence:
               - id: prior-training
@@ -9122,6 +9872,11 @@ origins:
               - id: prior-root-examination
                 kind: observation
                 description: 此前已经接受过有效资质检查，并知晓检查结果。
+                sourceId: null
+                step: 0
+              - id: opening-night-observation
+                kind: observation
+                description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
                 sourceId: null
                 step: 0
             claims:
@@ -9158,6 +9913,17 @@ origins:
                 confidence: 1
                 evidenceIds:
                   - prior-root-examination
+              - id: opening-night-memory
+                subjectId: opening-place
+                predicate: opening-observation
+                value:
+                  kind: text
+                  value: 开篇时此地已入夜。
+                description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                stance: believed
+                confidence: 1
+                evidenceIds:
+                  - opening-night-observation
             bindings:
               - local_entity_id: manager
                 canonical_entity_ids:
@@ -9207,6 +9973,9 @@ origins:
               - local_entity_id: known-spirit-order-two
                 canonical_entity_ids:
                   - spirit-order-two
+              - local_entity_id: opening-place
+                canonical_entity_ids:
+                  - qinghe-store
       character:
         traits: []
         values: []
@@ -9358,6 +10127,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -9372,6 +10146,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -9496,6 +10281,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -9510,6 +10300,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -9626,6 +10427,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -9642,6 +10448,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -9901,6 +10718,11 @@ origins:
                   description: 亲身学习并反复使用这些手艺，知道自己的能力边界。
                   sourceId: null
                   step: 0
+                - id: opening-night-observation
+                  kind: observation
+                  description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+                  sourceId: null
+                  step: 0
               claims:
                 - id: known-practiced-skills
                   subjectId: self
@@ -9913,6 +10735,17 @@ origins:
                   confidence: 1
                   evidenceIds:
                     - prior-practice
+                - id: opening-night-memory
+                  subjectId: location
+                  predicate: opening-observation
+                  value:
+                    kind: text
+                    value: 开篇时此地已入夜。
+                  description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                  stance: believed
+                  confidence: 1
+                  evidenceIds:
+                    - opening-night-observation
               bindings:
                 - local_entity_id: self
                   canonical_entity_ids:
@@ -10107,10 +10940,19 @@ origins:
                 name: 修补材料盒
                 description: 阵室私人盒有三段导线和两份封纹砂；外环修补会耗料，核心图样仍缺。
                 status: observed
+              - id: opening-place
+                name: 听泉静室
+                description: 开篇时所在的地方。
+                status: observed
             evidence:
               - id: prior-root-examination
                 kind: observation
                 description: 此前已经接受过有效资质检查，并知晓检查结果。
+                sourceId: null
+                step: 0
+              - id: opening-night-observation
+                kind: observation
+                description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
                 sourceId: null
                 step: 0
             claims:
@@ -10125,6 +10967,17 @@ origins:
                 confidence: 1
                 evidenceIds:
                   - prior-root-examination
+              - id: opening-night-memory
+                subjectId: opening-place
+                predicate: opening-observation
+                value:
+                  kind: text
+                  value: 开篇时此地已入夜。
+                description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+                stance: believed
+                confidence: 1
+                evidenceIds:
+                  - opening-night-observation
             bindings:
               - local_entity_id: friend
                 canonical_entity_ids:
@@ -10156,6 +11009,9 @@ origins:
               - local_entity_id: known-array-repair-stock
                 canonical_entity_ids:
                   - array-repair-stock
+              - local_entity_id: opening-place
+                canonical_entity_ids:
+                  - listening-spring
   - id: han-li
     title: 韩立
     fantasy: 从十岁那一夜接过自己的人生，下一条路由你决定。

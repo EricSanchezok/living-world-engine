@@ -214,6 +214,493 @@ duration_profiles:
   - id: ongoing
     name: 持续至解除
     kind: until_cleared
+periodic_properties:
+  - id: human-realm-daylight
+    subject_id: human-realm
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: spirit-realm-daylight
+    subject_id: spirit-realm
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 345600
+    initial_phase_seconds: 194400
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 172800
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: han-village-daylight
+    subject_id: han-village
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: han-home-daylight
+    subject_id: han-home
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: village-path-daylight
+    subject_id: village-path
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: qingniu-town-daylight
+    subject_id: qingniu-town
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: chunxiang-inn-daylight
+    subject_id: chunxiang-inn
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: smith-workshop-daylight
+    subject_id: smith-workshop
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: songxi-hamlet-daylight
+    subject_id: songxi-hamlet
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: herbal-yard-daylight
+    subject_id: herbal-yard
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: tianyuan-city-daylight
+    subject_id: tianyuan-city
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 345600
+    initial_phase_seconds: 194400
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 172800
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: qinghe-store-daylight
+    subject_id: qinghe-store
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 345600
+    initial_phase_seconds: 194400
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 172800
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: qinghe-study-daylight
+    subject_id: qinghe-study
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 345600
+    initial_phase_seconds: 194400
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 172800
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: spirit-wharf-daylight
+    subject_id: spirit-wharf
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 345600
+    initial_phase_seconds: 194400
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 172800
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: lin-estate-daylight
+    subject_id: lin-estate
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: lin-store-daylight
+    subject_id: lin-store
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: yuanan-yard-daylight
+    subject_id: yuanan-yard
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: yuanan-road-daylight
+    subject_id: yuanan-road
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: shen-valley-daylight
+    subject_id: shen-valley
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: shen-store-daylight
+    subject_id: shen-store
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: stone-pond-daylight
+    subject_id: stone-pond
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: stone-garden-daylight
+    subject_id: stone-garden
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: xu-settlement-daylight
+    subject_id: xu-settlement
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: xu-hall-daylight
+    subject_id: xu-hall
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: xu-workshop-daylight
+    subject_id: xu-workshop
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 86400
+    initial_phase_seconds: 54000
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 43200
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: listening-spring-daylight
+    subject_id: listening-spring
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 345600
+    initial_phase_seconds: 194400
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 172800
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
+  - id: array-workroom-daylight
+    subject_id: array-workroom
+    predicate: daylight
+    access:
+      kind: public
+    period_seconds: 345600
+    initial_phase_seconds: 194400
+    phases:
+      - starts_at_seconds: 0
+        value:
+          kind: text
+          value: day
+        description: 当地正值日间。
+      - starts_at_seconds: 172800
+        value:
+          kind: text
+          value: night
+        description: 当地正值夜间。
 activity_resources:
   - id: foreground
     name: 专注行动
@@ -302,7 +789,51 @@ temporal_profiles:
       evidence_requirement: none
     kind: ongoing
     checkpoint_seconds: 300
-duration_units: []
+duration_units:
+  - id: common-day
+    terms:
+      - 天
+      - 日
+      - 昼夜
+      - day
+      - days
+    seconds: 86400
+    location_ids: []
+  - id: spirit-day
+    terms:
+      - 天
+      - 日
+      - 昼夜
+      - day
+      - days
+    seconds: 345600
+    location_ids:
+      - spirit-realm
+  - id: common-month
+    terms:
+      - 月
+      - 个月
+      - month
+      - months
+    seconds: 2592000
+    location_ids: []
+  - id: common-year
+    terms:
+      - 年
+      - year
+      - years
+    seconds: 31536000
+    location_ids: []
+  - id: common-shichen
+    terms:
+      - 时辰
+    seconds: 7200
+    location_ids: []
+  - id: explicit-spirit-month
+    terms:
+      - 灵界本地月
+    seconds: 10368000
+    location_ids: []
 temporal_profile_coverage:
   required_semantic_tags:
     - short

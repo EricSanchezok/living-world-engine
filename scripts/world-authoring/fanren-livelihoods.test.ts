@@ -52,6 +52,10 @@ describe("Fanren authored livelihood continuations", () => {
       const state = database.readInstance(created.summary.id).document.state;
       const actor = created.participants[0]!.agentId;
       const known = JSON.stringify(projectAgentPerspective(state, state.agents[actor]!));
+      expect(known).toContain("开篇时此地已入夜");
+      expect(Object.values(state.truth.facts).some(fact => fact.predicate === "local-time")).toBe(false);
+      expect(state.truth.facts["human-realm-daylight"]?.value).toEqual({ kind: "text", value: "night" });
+      expect(state.truth.facts["spirit-realm-daylight"]?.value).toEqual({ kind: "text", value: "night" });
       const quantity = (owner: string, kind: string) => state.truth.quantities[quantityId(state.worldHash, kind, owner)]?.amount ?? 0;
       const reached = new Set([state.truth.placements[actor]!]);
       let grew = true;
@@ -100,6 +104,8 @@ describe("Fanren authored livelihood continuations", () => {
         expect(quantity("xu-kiln-remnant", "craft-material")).toBe(2);
         expect(known).not.toContain("炉芯已经碎裂");
       } else if (originId === "spirit-merchant") {
+        expect(state.truth.facts["spirit-concession-expiry-world-second"]?.value).toEqual({ kind: "number", value: 10368000 });
+        expect(state.truth.facts["spirit-manager-wage-due-world-second"]?.value).toEqual({ kind: "number", value: 1036800 });
         expect(quantity("spirit-stock", "material-crate") + quantity("spirit-missing-cargo", "material-crate")).toBe(20);
         expect(state.truth.placements["spirit-carrier-receipt"]).toBe("spirit-carrier");
         expect(state.truth.placements["spirit-loading-record"]).toBe("spirit-supplier");

@@ -1,4 +1,5 @@
 import { assertExactKeys } from "./json";
+import { assertPeriodicFactWritable, refreshPeriodicFacts, validatePeriodicFacts } from "../mechanics/periodic-properties";
 import { admissionAdditionsSchema, applyAdmissionAdditions } from "./admission-additions";
 import type { RulePackageRegistry } from "../mechanics/rule-package";
 import { applyDirectBootstrap, replayDirectStep } from "../direct/canonical";
@@ -77,6 +78,7 @@ import {
 } from "../contracts/state-schemas";
 import { isRuntimeId, quantityId, runtimeId } from "./runtime-id";
 import { validateImpactProfile } from "../mechanics/resolution";
+import { validateDurationUnits } from "../mechanics/duration-units";
 import {
   validateActivityResources,
   validateActivityState,
@@ -216,6 +218,7 @@ export function applyWorldDeltaOperation(state: SimulationState, operation: Worl
       state.truth.placements[operation.entityId] = operation.placementId;
       return;
     case "set_fact":
+      assertPeriodicFactWritable(state.truth, operation.fact);
       assertSemanticId(operation.fact.id, "fact id");
       if (state.truth.factTombstones.includes(operation.fact.id)) throw new Error(`fact identity is tombstoned: ${operation.fact.id}`);
       if (!state.truth.entities[operation.fact.subjectId]) throw new Error(`unknown fact subject ${operation.fact.subjectId}`);
@@ -229,6 +232,7 @@ export function applyWorldDeltaOperation(state: SimulationState, operation: Worl
       return;
     case "remove_fact":
       if (!state.truth.facts[operation.factId]) throw new Error(`unknown fact ${operation.factId}`);
+      assertPeriodicFactWritable(state.truth, state.truth.facts[operation.factId]!);
       delete state.truth.facts[operation.factId];
       state.truth.factTombstones.push(operation.factId);
       return;
@@ -328,7 +332,9 @@ export function applyWorldDeltaOperation(state: SimulationState, operation: Worl
     }
     case "advance_time":
       if (!Number.isSafeInteger(operation.seconds) || operation.seconds <= 0) throw new Error("time advance must be positive seconds");
+      if (!Number.isSafeInteger(state.truth.elapsedSeconds + operation.seconds)) throw new Error("world clock overflow");
       state.truth.elapsedSeconds += operation.seconds;
+      refreshPeriodicFacts(state.truth);
       return;
     case "create_agent": {
       assertSemanticId(operation.agent.id, "agent id");
@@ -809,7 +815,7 @@ export function replaySimulationState(
     return structuredClone(state);
   }
   const replay: SimulationState = {
-    schemaVersion: 22,
+    schemaVersion: 23,
     executionState: structuredClone(state.historyBase.executionState),
     worldId: state.worldId,
     worldHash: state.worldHash,
@@ -991,7 +997,7 @@ export function validateSimulationState(state: SimulationState, requireNextActio
     "bootstrapAgentCommits",
   ], ["historyBase", "bootstrapExecutionRef", "bootstrapDirect"], "simulation state");
   validateAlgorithmExecutionState(state.executionState);
-  if (state.schemaVersion !== 22 || !isSemanticId(state.worldId) || !/^sha256:[a-f0-9]{64}$/.test(state.worldHash)) {
+  if (state.schemaVersion !== 23 || !isSemanticId(state.worldId) || !/^sha256:[a-f0-9]{64}$/.test(state.worldHash)) {
     throw new Error("invalid simulation identity");
   }
   if (state.bootstrapExecutionRef) validateExecutionRef(state.bootstrapExecutionRef, "bootstrapExecutionRef");
@@ -1004,7 +1010,7 @@ export function validateSimulationState(state: SimulationState, requireNextActio
   assertExactKeys(state.truth.mechanics, [
     "meters", "quantities", "ratings", "impactProfiles", "durationProfiles", "conditionProfiles",
     "entityMechanicsProfiles", "adjudicationCalibrations", "activityResources", "temporalProfiles",
-    "sharedActivityResources", "temporalCalibrations",
+    "sharedActivityResources", "temporalCalibrations", "durationUnits", "periodicProperties",
   ], [], "mechanics catalog");
   for (const [id, definition] of Object.entries(state.truth.mechanics.meters)) {
     if (definition.id !== id || !definition.name.trim() || !Number.isFinite(definition.min) ||
@@ -1030,6 +1036,8 @@ export function validateSimulationState(state: SimulationState, requireNextActio
     if (profile.id !== id) throw new Error(`temporal profile key mismatch ${id}`);
     validateTemporalProfile(profile, state.truth.mechanics.activityResources);
   }
+  validateDurationUnits(state.truth.mechanics.durationUnits, new Set(Object.keys(state.truth.entities)));
+  validatePeriodicFacts(state.truth);
   assertUnique(state.truth.mechanics.temporalCalibrations.map((entry) => entry.id), "temporal calibrations");
   for (const calibration of state.truth.mechanics.temporalCalibrations) {
     if (!calibration.id.trim() || !calibration.situation.trim() || !calibration.explanation.trim() ||

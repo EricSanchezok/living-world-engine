@@ -13,6 +13,7 @@ const source: ScenePacket = {
   participantId: "reader", agentId: "traveler", submissionId: "action", submittedAt: null, requestedAction: "问价",
   world: { name: "港口", language: "zh-CN", style: "具体自然" }, playerName: "旅人", location: "码头", memories: [], knownEntities: [],
   boundary: { revision: 1, step: 1, worldTimeSeconds: 2 }, reply: null,
+  elapsedUnits: { 小时: 3600, 时辰: 7200 },
   observations: [{ id: "heard", revision: 1, step: 1, worldTimeSeconds: 2, sourceEventIds: ["uttered"], summary: "听到报价",
     scene: { actionKind: "speak", status: "succeeded", actor: "店主", attempt: "", manner: null, outcome: "话语送达。", details: [], speech: { speaker: "店主", utterance: "三枚金币；我还没同意赊账。" } } }],
   speech: [{ id: "speech-ab12", speaker: "店主", utterance: "三枚金币；我还没同意赊账。" }],
@@ -242,7 +243,7 @@ describe("immutable narrative paragraphs", () => {
   it("freezes ordered same-request receipts without another participant's or controlled subject's evidence", () => {
     const scene = structuredClone(source);
     const early = { ...structuredClone(scene.observations[0]!), id: "reply-early", worldTimeSeconds: 2, sourceEventIds: ["reply-event"] };
-    const late = { ...structuredClone(early), id: "later", worldTimeSeconds: 5, sourceEventIds: ["later-event"] };
+    const late = { ...structuredClone(early), id: "later", revision: 2, worldTimeSeconds: 5, sourceEventIds: ["later-event"] };
     const beat = { participantId: scene.participantId, agentId: scene.agentId, submissionId: scene.submissionId,
       source: { ...scene, observations: [late, early, { ...early, id: "same-event-alias" }] } };
     const privateReceipt = { ...early, id: "private", summary: "private evidence", sourceEventIds: ["private-event"] };
@@ -252,6 +253,7 @@ describe("immutable narrative paragraphs", () => {
       scene.participantId, scene.agentId, scene.submissionId);
     expect(receipts.map(receipt => receipt.id)).toEqual(["reply-early", "later"]);
     expect(earlierRequestReceipts([beat], scene.participantId, scene.agentId, null)).toEqual([]);
+    expect(earlierRequestReceipts([beat], scene.participantId, scene.agentId, scene.submissionId, 1).map(receipt => receipt.id)).toEqual(["reply-early"]);
     receipts[0]!.summary = "changed copy";
     expect(early.summary).not.toBe("changed copy");
   });
@@ -460,7 +462,7 @@ describe("immutable narrative paragraphs", () => {
     const scene = structuredClone(source);
     Object.assign(scene.observations[0]!.scene!, { actionKind: "observe", status: "blocked", attempt: "查看店内", outcome: "目前无法看清店内。", speech: null });
     scene.observations[0]!.summary = "你尝试了查看店内。\n随身物资：2枚金币。";
-    scene.observedProperties = [{ subject: "泵", predicate: "seal", value: { kind: "text", value: "sealed" }, stance: "believes", description: "已封闭" }];
+    scene.observedProperties = [{ subject: "泵", subjectLocalId: "pump", predicate: "seal", value: { kind: "text", value: "sealed" }, stance: "believes", description: "已封闭", evidenceBoundary: null }];
     const projected = narrativeEvidence(scene);
     expect(projected.observations[0]!.scene).toMatchObject({ actionKind: "observe", status: "blocked", attempt: "查看店内" });
     expect(projected.observations[0]!.summary).toBe("目前无法看清店内。\n随身物资：2枚金币。");
@@ -481,12 +483,56 @@ describe("immutable narrative paragraphs", () => {
     scene.observations[0]!.summary = "随身物资：2枚金币。";
     expect(narrativeFallback(scene)).toBe("你查看了随身物资。\n随身物资：2枚金币。");
   });
+  it("retains a new first-line finding ahead of older properties in creation, publication and fallback", async () => {
+    const scene = structuredClone(source);
+    scene.speech = [];
+    Object.assign(scene.observations[0]!.scene!, { actionKind: "observe", status: "succeeded", speech: null,
+      outcome: "你查看了眼前的情况。", attempt: "辨认窗外的天色", action: { target: null, tool: null, resource: null, durationSeconds: 10, addressing: "none" } });
+    scene.observations[0]!.summary = "阵室：当地正值日间。";
+    scene.observedProperties = [{ subject: "阵室", subjectLocalId: "room", predicate: "daylight", value: { kind: "text", value: "day" },
+      stance: "believed", description: "日间", evidenceBoundary: scene.boundary },
+    { subject: "曾到过的庭院", subjectLocalId: "courtyard", predicate: "daylight", value: { kind: "text", value: "night" },
+      stance: "believed", description: "夜间", evidenceBoundary: { revision: 0, step: 0, worldTimeSeconds: 0 } }];
+    const resultText = "你查看了眼前的情况。\n阵室：当地正值日间。";
+    expect(narrativeEvidence(scene).observations[0]!.summary).toBe(resultText);
+    expect(narrativeTask(scene).newReceipts[0]!.actualResult).toBe(resultText);
+    expect(narrativeFallback(scene)).toBe(resultText);
+    const provider = directTestProvider(wire => {
+      expect(wire.state).toMatchObject({ publicationTask: { time: { elapsedUnits: { 小时: 3600, 时辰: 7200 } },
+        newReceipts: [{ actualResult: resultText }], propertyHistory: { observations: scene.observedProperties } } });
+      expect(Object.keys(wire.questions)).toHaveLength(6);
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeChoice(question, "grounded")]));
+    });
+    await checkNarrativeGrounding(provider.gateway, { workloadId: "narrative", batchId: "current-light",
+      runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 1 } }, scene, [renderNarrativeSegment("窗外已经是日间。", scene)], "decision-deepseek", "decision-deepseek", 1);
+    expect(provider.transport).toHaveBeenCalledTimes(1);
+  });
   it("renders a factual fallback handover in natural language with its exact amount", () => {
     const scene = structuredClone(source);
     scene.observations[0]!.scene!.speech = null;
     scene.observations[0]!.scene!.outcome = "行动已完成。";
     scene.observations[0]!.summary = "行动已完成。\n我向店主转移了2枚金币。\n店主向我转移了1件物品。";
     expect(narrativeFallback(scene)).toBe("你把2枚金币交给了店主。\n你收到了店主交给你的1件物品。");
+  });
+  it("retains a phase observed on wait completion when narration falls back", () => {
+    const scene = structuredClone(source);
+    scene.speech = [];
+    Object.assign(scene.observations[0]!.scene!, { actionKind: "wait", status: "succeeded", speech: null,
+      outcome: "这段等候已过去151200秒。", attempt: "等待下一次明亮阶段", details: [] });
+    scene.observations[0]!.summary = "这段等候已过去151200秒。\n阵室：当地正值日间。";
+    const actual = "这段等候已过去151200秒。\n阵室：当地正值日间。";
+    expect(narrativeTask(scene).newReceipts[0]!.actualResult).toBe(actual);
+    expect(narrativeFallback(scene)).toBe(actual);
+    expect(narrativeFallback(scene, ["这段等候已过去151200秒。"])).toBe("阵室：当地正值日间。");
+  });
+  it("does not publish a failed attempted result when preserving accompanying findings", () => {
+    const scene = structuredClone(source);
+    scene.speech = [];
+    Object.assign(scene.observations[0]!.scene!, { actionKind: "observe", status: "blocked", speech: null,
+      outcome: "目前无法看清店内。", attempt: "推门进店查看货架", details: [] });
+    scene.observations[0]!.summary = "你尝试了推门进店查看货架。\n店门：仍然紧闭。";
+    expect(narrativeFallback(scene)).toBe("目前无法看清店内。\n店门：仍然紧闭。");
+    expect(narrativeFallback(scene)).not.toContain("推门");
   });
   it("does not repeat a scene tour after an already published prefix", () => {
     const detailed = structuredClone(source);

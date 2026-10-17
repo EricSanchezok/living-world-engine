@@ -24,7 +24,7 @@ it("publishes real execution and reply stages without extra inference, persisten
     else if (Object.keys(wire.questions).some(key => key.startsWith("paragraph"))) await hold("verifying");
     else if (Object.keys(wire.questions).some(key => key.endsWith("_outcome"))) await hold("resolving");
     return Object.fromEntries(Object.entries(wire.questions).map(([id, q]) => [id, nativeAnswer(q,
-      id === "expression" ? 0 : id.startsWith("paragraph") ? "grounded" : id === "operation" ? "observe" :
+      id === "expression" ? 0 : id === "duration" ? "default" : id.startsWith("paragraph") ? "grounded" : id === "operation" ? "observe" :
         id === "target" ? "self" : id.includes("outcome") ? "succeeded" : "none")]));
   }, async () => { await hold("composing"); return { paragraphs: ["石门仍在眼前。"] }; });
   await f.registry.capture();
@@ -49,7 +49,7 @@ it("publishes real execution and reply stages without extra inference, persisten
     unsubscribe = host.subscribeInstanceChanges(id, () => changes.push(host.instance(id).progress?.stage ?? null));
     await host.submitAction(id, participant.id, { expectedRevision: 0, submissionId: "live-progress", text: "观察四周" });
     for (const phase of phases) {
-      await expect.poll(() => started.has(phase)).toBe(true);
+      await expect.poll(() => started.has(phase), { message: `phase ${phase}; started ${[...started].join(",")}` }).toBe(true);
       const detail = host.instance(id);
       expect(detail.progress).toMatchObject({ stage: phase });
       expect(Object.keys(detail.progress!).sort()).toEqual(["stage", "startedAt"]);

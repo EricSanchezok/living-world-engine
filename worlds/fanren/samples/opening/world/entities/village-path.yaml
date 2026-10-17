@@ -4,14 +4,6 @@ name: 村边小路
 description: 村边通向山坡和其他农家的土路。
 placement: han-village
 facts:
-  - id: village-path-night
-    predicate: local-time
-    value:
-      kind: text
-      value: 当地夜间，光线和作息受夜色影响。
-    description: 当地夜间，光线和作息受夜色影响。
-    access:
-      kind: public
   - id: village-path-route-han-home
     predicate: route-to
     value:

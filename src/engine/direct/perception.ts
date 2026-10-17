@@ -6,7 +6,9 @@ import { directValueLabel, observedKindLabel } from "./presentation";
 
 function alias(agent: AgentState, entityId: string, introductions: ObservationPacket["introductions"], contact?: "heard" | "seen"): LocalEntity {
   const bindings = Object.values(agent.bindings).filter(binding => binding.canonicalEntityIds.length === 1 && binding.canonicalEntityIds[0] === entityId);
-  if (bindings.length === 1 && agent.belief.localEntities[bindings[0]!.localEntityId]) return agent.belief.localEntities[bindings[0]!.localEntityId]!;
+  const known = bindings.map(binding => agent.belief.localEntities[binding.localEntityId]).filter((entity): entity is LocalEntity => Boolean(entity))
+    .sort((left, right) => left.id.localeCompare(right.id))[0];
+  if (known) return known;
   const prior = introductions.find(intro => intro.canonicalEntityId === entityId); if (prior) return prior.localEntity;
   const localEntity: LocalEntity = { id: `seen-${contentHash([agent.id, entityId]).slice(0, 24)}`,
     name: contact === "heard" ? "一个陌生的声音" : contact === "seen" ? "附近的人" : "附近的对象",

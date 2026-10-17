@@ -88,8 +88,24 @@ agent:
         name: 兄长
         description: 韩立的父亲，家计清苦。
         status: observed
-    evidence: []
-    claims: []
+    evidence:
+      - id: opening-night-observation
+        kind: observation
+        description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+        sourceId: null
+        step: 0
+    claims:
+      - id: opening-night-memory
+        subjectId: location
+        predicate: opening-observation
+        value:
+          kind: text
+          value: 开篇时此地已入夜。
+        description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - opening-night-observation
     bindings:
       - local_entity_id: self
         canonical_entity_ids:

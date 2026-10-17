@@ -7,10 +7,13 @@ import { resolveDiscreteRandomRequests } from "../mechanics/random";
 import { runtimeId } from "../runtime/runtime-id";
 import { changedFact } from "./presentation";
 import { contentHash } from "../models/model-audit";
+import { refreshPeriodicFacts } from "../mechanics/periodic-properties";
 
 /** Pure mechanical settlement of previously admitted semantics. No model calls or new choices. */
-export function settlePreparedActions(state: Readonly<SimulationState>, control: DirectRuntimeState, frames: ActionFrame[]) {
+export function settlePreparedActions(state: Readonly<SimulationState>, control: DirectRuntimeState, frames: ActionFrame[], atSeconds = state.truth.elapsedSeconds) {
   let projected = structuredClone(state) as SimulationState, rng = structuredClone(state.truth.rng);
+  projected.truth.elapsedSeconds = atSeconds;
+  refreshPeriodicFacts(projected.truth);
   const settlements: ActionSettlement[] = [], randomRequests: DirectStepRecord["randomRequests"] = [], randomResults: DirectStepRecord["randomResults"] = [];
   for (const [index, frame] of frames.slice().sort((a, b) => a.id.localeCompare(b.id)).entries()) {
     const preparation = control.prepared[frame.id]!;

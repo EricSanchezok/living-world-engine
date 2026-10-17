@@ -4,14 +4,6 @@ name: 城中转运货场
 description: 转运节点；货物停放与交接需要实际核对。
 placement: tianyuan-city
 facts:
-  - id: spirit-wharf-night
-    predicate: local-time
-    value:
-      kind: text
-      value: 当地夜间，光线和作息受夜色影响。
-    description: 当地夜间，光线和作息受夜色影响。
-    access:
-      kind: public
   - id: spirit-wharf-route-qinghe-store
     predicate: route-to
     value:

@@ -4,14 +4,6 @@ name: 沈家库房
 description: 旧法器、维修材料和待售清单分别存放；保留族产须商议。
 placement: shen-valley
 facts:
-  - id: shen-store-time
-    predicate: local-time
-    value:
-      kind: text
-      value: 与共同开篇同一时刻；此地按夜间场景标定。
-    description: 当地夜间。
-    access:
-      kind: public
   - id: shen-store-route-shen-valley
     predicate: route-to
     value:

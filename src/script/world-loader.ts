@@ -14,6 +14,7 @@ import { createHistoryReplayBase, historyReplayBaseHash } from "../engine/runtim
 import { createSeededRng, validateDiscreteRandomDefinitions } from "../engine/mechanics/random";
 import { validateImpactProfile } from "../engine/mechanics/resolution";
 import { validateTemporalProfile, type TemporalProfileDefinition } from "../engine/mechanics/temporal";
+import { validateDurationUnits } from "../engine/mechanics/duration-units";
 import { quantityId } from "../engine/runtime/runtime-id";
 import { sharedActivityResourcePoolId } from "../engine/runtime/runtime-id";
 import { emptyAdmissionAdditions } from "../engine/runtime/admission-additions";
@@ -29,6 +30,7 @@ import type { WorldCreatedOrigin, WorldDefinition } from "../engine/runtime/worl
 import { validateWorldDefinition, validateWorldModelProfiles } from "../engine/runtime/world-definition";
 import type { ModelCatalog } from "../engine/models/model-catalog";
 import { canonicalize, contentHash } from "../engine/models/model-audit";
+import { initializePeriodicFacts } from "../engine/mechanics/periodic-properties";
 import {
   entityDocumentSchema,
   lawsFileSchema,
@@ -223,6 +225,12 @@ function mechanicsCatalog(document: MechanicsDocument): MechanicsCatalog {
     activityResources: activityResourceRecord,
     sharedActivityResources: sharedActivityResourceRecord,
     temporalProfiles: temporalProfileRecord,
+    durationUnits: uniqueRecord(document.duration_units.map(unit => ({ id: unit.id, terms: unit.terms, seconds: unit.seconds, locationIds: unit.location_ids })), "duration unit"),
+    periodicProperties: uniqueRecord(document.periodic_properties.map(property => ({
+      id: property.id, subjectId: property.subject_id, predicate: property.predicate, access: property.access,
+      periodSeconds: property.period_seconds, initialPhaseSeconds: property.initial_phase_seconds,
+      phases: property.phases.map(phase => ({ startsAtSeconds: phase.starts_at_seconds, value: phase.value, description: phase.description })),
+    })), "periodic property"),
     temporalCalibrations: document.temporal_calibrations.map((calibration) => ({
       id: calibration.id,
       situation: calibration.situation,
@@ -231,6 +239,7 @@ function mechanicsCatalog(document: MechanicsDocument): MechanicsCatalog {
     })),
   };
   const calibrationIds = catalog.adjudicationCalibrations.map((calibration) => calibration.id);
+  validateDurationUnits(catalog.durationUnits);
   if (new Set(calibrationIds).size !== calibrationIds.length) throw new Error("duplicate adjudication calibration id");
   const temporalCalibrationIds = catalog.temporalCalibrations.map((calibration) => calibration.id);
   if (new Set(temporalCalibrationIds).size !== temporalCalibrationIds.length) {
@@ -646,7 +655,7 @@ export function buildWorldDefinition(
   try {
     const mechanics = mechanicsCatalog(mechanicsDocument);
     const state: SimulationState = {
-      schemaVersion: 22,
+      schemaVersion: 23,
       executionState: null,
       worldId: manifest.id,
       worldHash,
@@ -677,6 +686,7 @@ export function buildWorldDefinition(
     };
 
     seedEntityDocuments(state, documents);
+    initializePeriodicFacts(state.truth);
 
     for (const timer of mechanicsDocument.world_timers) {
       if (state.truth.timers[timer.id]) throw new Error(`duplicate world timer id ${timer.id}`);

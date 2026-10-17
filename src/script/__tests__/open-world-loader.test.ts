@@ -32,6 +32,15 @@ function copiedFixture(): string {
 }
 
 describe("open world script loader", () => {
+  it("loads authored duration units and rejects unresolved location scopes", () => {
+    const root = copiedFixture(), file = path.join(root, "mechanics.yaml");
+    const initial = readFileSync(file, "utf8");
+    writeFileSync(file, `${initial}\nduration_units:\n  - id: local-day\n    terms: [天, day, days]\n    seconds: 86400\n    location_ids: [courtyard]\n`);
+    const definition = loadWorldScript(root, { seed: 91, modelCatalog });
+    expect(definition.initialState.truth.mechanics.durationUnits["local-day"]).toEqual({ id: "local-day", terms: ["天", "day", "days"], seconds: 86400, locationIds: ["courtyard"] });
+    writeFileSync(file, readFileSync(file, "utf8").replace("location_ids: [courtyard]", "location_ids: [missing-place]"));
+    expect(() => loadWorldScript(root, { seed: 91, modelCatalog })).toThrow("unknown location");
+  });
   it("loads open facts, numeric mechanics, Agents and private knowledge", () => {
     const definition = loadWorldScript(fixture, { seed: 91, modelCatalog });
 
@@ -69,7 +78,7 @@ describe("open world script loader", () => {
       version: "3.0.0",
       config: {},
     })]);
-    expect(definition.initialState.schemaVersion).toBe(22);
+    expect(definition.initialState.schemaVersion).toBe(23);
     expect(definition.initialState.truth.mechanics.sharedActivityResources["fixture-workbench"]).toEqual({
       id: "fixture-workbench",
       name: "庭院工作台",
@@ -224,7 +233,7 @@ describe("open world script loader", () => {
     const manifestFile = path.join(oldWorld, "script.yaml");
     writeFileSync(
       manifestFile,
-      readFileSync(manifestFile, "utf8").replace("schema_version: 18", "schema_version: 14"),
+      readFileSync(manifestFile, "utf8").replace("schema_version: 19", "schema_version: 14"),
       "utf8",
     );
     expect(() => loadWorldScript(oldWorld, { modelCatalog })).toThrow();

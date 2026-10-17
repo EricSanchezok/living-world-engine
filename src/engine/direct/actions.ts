@@ -12,10 +12,12 @@ import { privateActionView, type PrivateInteraction } from "./views";
 import { DirectDecisions, selected } from "./decisions";
 import type { ActionExpression, ActionFrame, ActionKind, DirectRuntimeState } from "./contracts";
 import { readAction } from "./action-reading";
+import { resolveDurationUnits, standardDurationUnits } from "../mechanics/duration-units";
 import { cognitiveQuestions, cognitiveUpdate } from "./cognition";
 import { orderedValues } from "./state";
 import { extendCapability } from "./capabilities";
 import type { PresentationReply } from "../contracts/discourse";
+import { periodicDeadlineCandidates, periodicDeadlineSeconds } from "./periodic-deadlines";
 
 const kinds: Record<ActionKind | "unknown" | "expand", string> = { move: "Travel to a place", observe: "Inspect, notice or investigate",
   reflect: "Explicitly review records or formulate private thoughts when that is the requested activity; checking a condition before a requested physical action is part of choosing that action, not a separate reflection",
@@ -67,21 +69,30 @@ export function speechSpans(text: string): string[] {
   return [...new Set([text, ...text.split(/(?<=[。！？!?；;])|\n/gu), ...text.split(/[：:]/u).slice(1)]
     .map(value => value.trim()).filter(Boolean))];
 }
-/** Exact duration spans are candidates; the language decision binds one to the selected step. */
-export function literalDurations(text: string): Array<{ text: string; seconds: number }> {
-  const matches = [...text.matchAll(/(\d+(?:\.\d+)?|[零〇一二两三四五六七八九十百千万亿]+(?:点[零〇一二两三四五六七八九]+)?|半)\s*(seconds?|minutes?|hours?|秒钟?|分钟?|小时)(半)?/giu)];
-  const spans: Array<{ text: string; seconds: number; end: number }> = [];
-  for (const match of matches) {
+const calendarTerms = ["day", "days", "week", "weeks", "month", "months", "year", "years", "天", "日", "周", "星期", "月", "年", "夜", "时辰"];
+/** Exact source spans retain unresolved calendar units for semantic binding and clarification. */
+export function durationSpans(text: string, authoredUnits: Readonly<Record<string, number>> = {}): Array<{ text: string; seconds: number | null }> {
+  const units = { ...standardDurationUnits, ...authoredUnits };
+  const terms = [...new Set([...Object.keys(units), ...calendarTerms])].sort((a, b) => b.length - a.length)
+    .map(term => term.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&") + (/[a-z]$/iu.test(term) ? "(?![a-z])" : ""));
+  const pattern = new RegExp(`(\\d+(?:\\.\\d+)?|[零〇一二两三四五六七八九十百千万亿]+(?:点[零〇一二两三四五六七八九]+)?|半)\\s*(?:个\\s*)?(${terms.join("|")})(半)?`, "giu");
+  const spans: Array<{ text: string; seconds: number | null; end: number }> = [];
+  for (const match of text.matchAll(pattern)) {
     const value = match[1] === "半" ? 0.5 : literalNumbers(match[1]!)[0];
     if (value === undefined) continue;
-    const seconds = Math.ceil((value + (match[3] ? 0.5 : 0)) * (/hours?|小时/iu.test(match[2]!) ? 3600 : /minutes?|分/iu.test(match[2]!) ? 60 : 1));
-    if (!Number.isSafeInteger(seconds) || seconds < 1) continue;
+    const scale = units[match[2]!.toLocaleLowerCase("en-US")];
+    const candidate = scale === undefined ? null : Math.ceil((value + (match[3] ? 0.5 : 0)) * scale);
+    const seconds = candidate !== null && Number.isSafeInteger(candidate) && candidate > 0 ? candidate : null;
     const prior = spans.at(-1), separator = prior ? text.slice(prior.end, match.index) : null;
     if (prior && separator !== null && /^(?:\s|零|又|and)*$/iu.test(separator)) {
-      prior.text += separator + match[0]; prior.seconds += seconds; prior.end = match.index + match[0].length;
+      const combined = prior.seconds === null || seconds === null ? null : prior.seconds + seconds;
+      prior.text += separator + match[0]; prior.seconds = combined !== null && Number.isSafeInteger(combined) ? combined : null; prior.end = match.index + match[0].length;
     } else spans.push({ text: match[0], seconds, end: match.index + match[0].length });
   }
   return spans.map(({ text, seconds }) => ({ text, seconds }));
+}
+export function literalDurations(text: string, units: Readonly<Record<string, number>> = {}): Array<{ text: string; seconds: number }> {
+  return durationSpans(text, units).filter((span): span is { text: string; seconds: number } => span.seconds !== null);
 }
 export function actionSeconds(state: Readonly<SimulationState>, profileId: string | null, raw: string, explicitDuration = true): number | null {
   const duration = explicitDuration ? literalDurations(raw)[0] : undefined;
@@ -134,7 +145,12 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const spans = speechSpans(text);
   const resources = Object.keys(state.truth.mechanics.quantities).sort();
   const timing = orderedValues(state.truth.mechanics.temporalProfiles);
-  const durations = literalDurations(text);
+  const durationUnits = resolveDurationUnits(state.truth.mechanics.durationUnits, state.truth.placements, agent.entityId);
+  const durations = durationSpans(text, durationUnits);
+  const priorRequestFrames = external ? state.history.flatMap(step => step.directEvent?.frames ?? [])
+    .filter(frame => frame.actorId === agentId && frame.submissionId === external.submissionId) : [];
+  const requestAnchor = priorRequestFrames.length ? Math.min(...priorRequestFrames.map(frame => frame.startedAtSeconds)) : state.truth.elapsedSeconds;
+  const phaseDeadlines = external && jointInterpretation ? periodicDeadlineCandidates(state, agentId, requestAnchor, [1]) : [];
   const capabilities = control.capabilities.filter(capability => capability.knownToAgentIds.includes(agentId)).sort((a, b) => a.id.localeCompare(b.id));
   const questions: Record<string, DecisionQuestionV2> = {
     ...cognitiveQuestions(state, agentId, knowledge.claims),
@@ -173,13 +189,19 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
       Object.fromEntries([...new Set([...timing.flatMap(profile => profile.kind === "fixed" ? [profile.durationSeconds] : []), 30])]
         .sort((a, b) => a - b).map(seconds => [`s${seconds}`, `${seconds} seconds`]))),
   };
+  if (external) questions.interruption = choice("Does THIS next activity have an explicit condition for stopping before its requested duration ends? Preserve that condition from the original request. An ordinary contingency for a later action, a quoted instruction, or merely wanting a result does not authorize interrupting this activity.", {
+    none: "No conditional early stop was requested for this step",
+    request: "The original request explicitly says to stop this activity when a future perceived condition occurs",
+  });
   if (external) questions.interaction = choice("What kind of response does this input seek in the actual shared conversation? Choose clarification for a reader asking which previously presented person/thing was meant, a recap, their already known location, or the meaning/status of earlier feedback without requesting a new action. Choose world_action for words directed at a character (including elliptical follow-ups), observation of NEW evidence or any actual attempt. A question is not automatically clarification: asking the recent speaker for their name is in-world speech. Use the published exchanges, addressee and current focus; no special command syntax is needed.", {
     world_action: "Act or speak in the world",
     clarification: "Explain already available information without new speech, observation or elapsed world time",
   });
-  if (durations.length) questions.duration = choice("Which explicit duration belongs to THIS next concrete step? Distinguish an instructed wait or activity duration from a quoted deadline, remaining time, another person's commitment or a future clause. After a completed wait, later observation does not repeat that duration. Questions about how long something takes do not authorize waiting that long.", {
+  if (external || durations.length) questions.duration = choice("Which duration or periodic phase endpoint belongs to THIS next concrete step? Bind an instructed wait/activity interval or public phase endpoint, not a quoted deadline, another person's commitment, incidental numeral or future clause. For a periodic endpoint, select only the transition whose TO phase is requested; durationReference separately specifies its relative calendar cycle or occurrence. Each transition appears once. Its shown next-arrival time is context, not a restriction to that occurrence. Use requestCycle, phaseAtRequest and transition.from/to rather than old narrative time descriptions. The engine computes the deadline from the bound phase and reference, anchored to this submission's initial boundary. After a completed wait, a later observation does not repeat that wait. Questions about time do not authorize waiting. Select unresolved when an actual requested endpoint has no matching known schedule/candidate, is ambiguous, already passed or unrepresentable. Never substitute ordinary short timing for an unresolved requested endpoint.", {
     default: "No explicit duration belongs to this next step; use its ordinary world timing",
+    unresolved: "This step requests a temporal endpoint that cannot be bound to a supplied exact interval or public cycle",
     ...Object.fromEntries(durations.map((duration, index) => [`d${index}`, duration])),
+    ...Object.fromEntries(phaseDeadlines.map((deadline, index) => [`phase${index}`, deadline])),
   });
   questions.expression = { type: "noul", version: "action-expression-1",
     instructions: { field: "Does THIS selected next action need a meaningful physical delivery, gesture, tactic or separation from a compound request beyond choosing new words? Ordinary conversation and new wording alone need none. Select true for an intentional physical manner that changes this interaction, or an explicitly requested gesture. Routine glances, nods and clothing adjustments are not required by speech." } };
@@ -336,8 +358,23 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   const rawText = expression?.attempt || text || `${actionLabels[kind]}${target ? `：${agent.belief.localEntities[targetKey]?.name ?? ""}` : ""}${utterance ? `；${utterance}` : ""}`;
   const id = runtimeId({ worldHash: state.worldHash, revision: state.revision, kind: "action", stage: "direct-action", owner: agentId, round: 0, ordinal: 0 });
   const durationChoice = questions.duration ? selected(answers, "duration") : "default";
-  const selectedDuration = /^d\d+$/u.test(durationChoice) ? durations[Number(durationChoice.slice(1))]?.seconds : undefined;
-  const explicitSeconds = !preparatoryFor ? selectedDuration : undefined;
+  const selectedDuration = /^d\d+$/u.test(durationChoice) ? durations[Number(durationChoice.slice(1))]?.seconds
+    : /^phase\d+$/u.test(durationChoice) ? periodicDeadlineSeconds(phaseDeadlines[Number(durationChoice.slice(5))], reading?.durationReference ?? null, requestAnchor, state.truth.elapsedSeconds)
+      : durationChoice === "unresolved" ? null : undefined;
+  const unsupportedDuration = selectedDuration === null || typeof selectedDuration === "number" && !Number.isSafeInteger(state.truth.elapsedSeconds + selectedDuration);
+  const interruptCondition = external && !preparatoryFor && selected(answers, "interruption") === "request" ? external.rawText : null;
+  const cannotInterrupt = interruptCondition !== null && profileId !== null && profile?.interruptible === false;
+  if (external && !preparatoryFor && (unsupportedDuration || cannotInterrupt)) {
+    intent.status = "waiting"; intent.activityId = null; intent.activeSubmission = null; intent.causeActionId = null;
+    intent.wait = { entityIds: [], untilSeconds: null, reason: cannotInterrupt ? "noninterruptible-activity" : "undefined-duration-unit" };
+    control.completedSubmissionIds.push(external.submissionId);
+    const presentation: PresentationReply = { agentId, submissionId: external.submissionId, kind: "clarification", requested: text,
+      focusLocalEntityId: null, reason: cannotInterrupt
+        ? "The selected activity cannot be interrupted under its established temporal rules, but the request requires an early stopping condition. Clarify an alternative activity or whether to proceed without that condition. No physical activity or elapsed time has occurred. Do not silently remove the condition."
+        : "The requested elapsed interval or phase endpoint is undefined, ambiguous, already reached during this request, or outside the exact clock range. The current observation of a restricted property does not reveal its future schedule. Ask for a resolvable endpoint or an explicit representable duration in hours or another defined unit. No physical activity or elapsed time has occurred; do not substitute a short checkpoint." };
+    return { frame: null, audits, reads: view.reads, cognition, presentation };
+  }
+  const explicitSeconds = !preparatoryFor ? selectedDuration ?? undefined : undefined;
   const profileSeconds = actionSeconds(state, profileId, preparatoryFor ? "" : rawText, false);
   const durationSource = explicitSeconds !== undefined ? "explicit" : profileSeconds !== null ? "profile" : "judgment";
   const durationSeconds = explicitSeconds ?? profileSeconds ?? (kind === "reflect" ? Number(selected(answers, "reflection_duration").slice(1)) : 0);
@@ -356,7 +393,7 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     capabilityId: ["use", "change"].includes(kind) && questions.capability && selected(answers, "capability") !== "none" ? selected(answers, "capability") : null,
     startedAtSeconds: state.truth.elapsedSeconds, dueAtSeconds: durationSeconds ? state.truth.elapsedSeconds + durationSeconds : null,
     durationSeconds, durationSource, progressSeconds: 0, activityStatus: "active",
-    temporalProfileId: profileId, inputHash, causeActionId: intent.causeActionId, preparatoryFor,
+    temporalProfileId: profileId, interruptCondition, inputHash, causeActionId: intent.causeActionId, preparatoryFor,
     observationScope: preparatoryFor ? target ? "target" : "surroundings" : observationScope };
   if (operation === "expand") {
     if (!input.creationEnabled) throw new Error("This new capability needs creation; ordinary actions remain available");

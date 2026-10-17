@@ -169,6 +169,8 @@ export interface MechanicsCatalog {
   activityResources: Record<string, ActivityResourceDefinition>;
   sharedActivityResources: Record<string, SharedActivityResourceDefinition>;
   temporalProfiles: Record<string, TemporalProfileDefinition>;
+  durationUnits: Record<string, import("../mechanics/duration-units").DurationUnitDefinition>;
+  periodicProperties: Record<string, import("../mechanics/periodic-properties").PeriodicPropertyDefinition>;
   temporalCalibrations: TemporalCalibration[];
 }
 
@@ -609,7 +611,7 @@ export interface AgentAdmissionCommit {
 export type WorldEventDraft = Omit<WorldEvent, "step">;
 
 export interface SimulationState<Step extends CommittedStep = CommittedStep> {
-  schemaVersion: 22;
+  schemaVersion: 23;
   executionState: import("../runtime/execution-state").AlgorithmExecutionState | null;
   worldId: string;
   worldHash: string;

@@ -6,6 +6,7 @@ import type { WorldRuntimeContract } from "../runtime/world-definition";
 import type { ActionFrame, DirectLocalView } from "./contracts";
 import { canHaveWitnesses } from "./contact";
 import { captureDependencies, orderedValues } from "./state";
+import { nextPeriodicBoundary } from "../mechanics/periodic-properties";
 
 export function privateActionView(state: Readonly<SimulationState>, agentId: string, causeActionId?: string | null, memories?: AgentMemoryAccess): DirectLocalView {
   const agent = state.agents[agentId]; if (!agent) throw new Error("unknown decision owner");
@@ -110,6 +111,9 @@ export function localWorldView(state: Readonly<SimulationState>, definition: Wor
   const actorMemories = Object.fromEntries([...new Set(frames.map(frame => frame.actorId))]
     .map(id => [id, readAgentMemory(state, state.agents[id]!, memories?.read(id))]));
   return { state: { world: { name: definition.name, description: definition.description, laws: definition.laws },
+    elapsedSeconds: state.truth.elapsedSeconds,
+    periodicProperties: Object.values(state.truth.mechanics.periodicProperties).filter(property => ids.has(property.subjectId))
+      .map(property => ({ ...property, nextTransitionAtSeconds: nextPeriodicBoundary(property, state.truth.elapsedSeconds) })),
     temporalProfiles: state.truth.mechanics.temporalProfiles, temporalCalibrations: state.truth.mechanics.temporalCalibrations,
     actions: frames, deliveredEvidence: Object.fromEntries(Object.entries(actorMemories).map(([id, memory]) => [id, memory.evidence])),
     actorMemory: Object.fromEntries(Object.entries(actorMemories).map(([id, memory]) =>

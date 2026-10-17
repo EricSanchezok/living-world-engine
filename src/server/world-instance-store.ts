@@ -249,7 +249,7 @@ function validateActionWindow(document: WorldInstanceDocument): void {
 }
 
 export function validateWorldInstanceDocument(document: WorldInstanceDocument, rulePackages?: RulePackageRegistry): void {
-  if (document.schemaVersion !== 33) throw new Error("world instance schema v33 required");
+  if (document.schemaVersion !== 34) throw new Error("world instance schema v34 required");
   if (!document.agentMemories || Array.isArray(document.agentMemories)) throw new Error("instance Agent memories are required");
   for (const [id, value] of Object.entries(document.agentMemories)) {
     const record = memoryRecordSchema.parse(value), agent = document.state.agents[id];

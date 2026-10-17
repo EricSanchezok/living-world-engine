@@ -18,6 +18,7 @@ import { changedFact } from "./presentation";
 import { extendCapability } from "./capabilities";
 import { proposePropertyValues } from "./property-values";
 import { agentCapabilityModels } from "../models/capability-bindings";
+import { interruptionCandidates } from "./interruption";
 
 export interface ActionSettlement {
   frame: ActionFrame; outcome: ActionOutcome; operations: WorldDeltaOperation[]; visibleFacts: WorldFact[];
@@ -134,6 +135,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   const amounts = [...new Set([1, ...frames.flatMap(frame => literalNumbers(frame.proposal.rawText, quantityUnits)), ...definition.laws.flatMap(law => literalNumbers(law.text, quantityUnits))])].sort((a, b) => a - b);
   const resources = new Map<string, { definitionId: string; lawId: string; kind: "consume_quantity" | "produce_quantity" }>();
   const claims = new Map<string, { poolId: string; amount: number }>();
+  const interruptions = new Map<string, string>();
   const numericImpacts = new Map<string, { meterId: string; magnitudeQuestionId: string }>();
   for (const [index, frame] of frames.entries()) {
     const prefix = `a${index}`;
@@ -142,6 +144,14 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       { actionId: frame.id }, { authorized: "The entire concrete candidate is an unperformed step authorized by the original player input",
         outside_scope: "At least one voluntary act or utterance goes beyond or contradicts that input",
         unknown: "The available input and receipts do not establish authorization for this candidate" });
+    for (const [ordinal, activity] of interruptionCandidates(state, decisions.control, frame).entries()) {
+      const id = `${prefix}_interrupt${ordinal}`;
+      interruptions.set(id, activity.id);
+      questions[id] = question("If this action actually occurs and its result is delivered to the activity owner, does the newly perceived event satisfy an EXPLICIT early-stopping condition in the original activity request? Judge only what this recipient can actually hear or see through this action. A hypothetical future event, another recipient's private result, merely mentioning danger, or unrelated conversation does not satisfy the condition. This does not authorize an answer or another action by the owner.", {
+        actionId: frame.id, ownerEntityId: activity.actorEntityId, originalActivityRequest: activity.interruptCondition,
+        currentActivity: activity.expression?.attempt ?? activity.proposal.rawText,
+      }, { continue: "The stated stopping condition is not established", stop: "This action's actually delivered event satisfies the stated stopping condition" });
+    }
     if (creationEnabled && definition.narrative.expansion) questions[`${prefix}_world_expansion`] = question(
       "Does this action reach a plausible but not yet established part of the local situation? The initial catalog is partial: a place's name and exterior do not exhaust its people, contents or affairs. Exploration and ongoing local concerns can warrant ordinary discoverable content or a new opportunity without an explicit request for a surprise. Select introduce for a useful local draft when existing content does not cover that scope. Missing entries are not evidence of physical absence. Existing actors still act through their own decisions; respect confirmed absence, identity, privacy and conserved resources. A draft may give a lead or complication rather than the desired outcome. Select none for sufficient existing content or quiet continuity; do not create merely to force success.",
       { actionId: frame.id }, { none: "Existing content covers this interaction, or no plausible addition is warranted", introduce: "Develop a plausible unestablished part of the local situation for admission" });
@@ -578,7 +588,9 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       randomRequests: ["succeeded", "partial"].includes(status) ? randomRequests : [], randomBindings: ["succeeded", "partial"].includes(status) ? randomBindings : [],
       sharedClaims: [...claims].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "claim").map(([, claim]) => claim),
       ongoing,
-      requestProgress: frame.requestContinuation ?? (frame.submissionId || frame.causeActionId ? selected(answers, `${prefix}_request_progress`) as PreparedDirectAction["requestProgress"] : "complete") });
+      requestProgress: frame.requestContinuation ?? (frame.submissionId || frame.causeActionId ? selected(answers, `${prefix}_request_progress`) as PreparedDirectAction["requestProgress"] : "complete"),
+      interruptActivityIds: [...interruptions].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "stop").map(([, id]) => id),
+      interruptionCandidateIds: [...interruptions].filter(([id]) => id.startsWith(`${prefix}_`)).map(([, id]) => id) });
   }
   return { prepared, rejected, reads: view.reads, audits };
 }

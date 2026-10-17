@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { durationUnitSchema } from "./duration-unit-contract";
+import { periodicPropertySchema } from "./periodic-property-contract";
 import {
   accessSchema,
   beliefClaimSchema,
@@ -10,7 +12,7 @@ import {
 } from "../engine/contracts/state-schemas";
 
 export const scriptManifestSchema = z.object({
-  schema_version: z.literal(18),
+  schema_version: z.literal(19),
   id: z.string().regex(/^[a-z0-9][a-z0-9-]*$/),
   name: z.string().min(1),
   version: z.string().min(1),
@@ -208,6 +210,7 @@ export const mechanicsFileSchema = z.object({
     }).strict(),
   }).strict()),
   duration_profiles: z.array(durationProfileSchema),
+  periodic_properties: z.array(periodicPropertySchema).default([]),
   activity_resources: z.array(z.object({
     id: safeIdSchema,
     name: z.string().min(1),
@@ -223,6 +226,7 @@ export const mechanicsFileSchema = z.object({
     paused_retention: z.enum(["retain", "release"]),
   }).strict()).default([]),
   temporal_profiles: z.array(temporalProfileSchema).min(1),
+  duration_units: z.array(durationUnitSchema).default([]),
   temporal_profile_coverage: z.object({
     required_semantic_tags: z.array(safeIdSchema).min(1),
   }).strict(),

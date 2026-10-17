@@ -4,14 +4,6 @@ name: 小石潭药圃
 description: 洞府附属小药圃，只有少量现有药草，生长与收获需要时间。
 placement: stone-pond
 facts:
-  - id: stone-garden-time
-    predicate: local-time
-    value:
-      kind: text
-      value: 与共同开篇同一时刻；此地按夜间场景标定。
-    description: 当地夜间。
-    access:
-      kind: public
   - id: stone-garden-route-stone-pond
     predicate: route-to
     value:

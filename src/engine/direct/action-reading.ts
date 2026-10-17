@@ -9,7 +9,7 @@ import type { ActionExpression } from "./contracts";
 import type { DirectDecisions } from "./decisions";
 
 const actionFields = ["operation", "target", "recipient", "tool", "resource", "amount", "timing", "duration",
-  "observation_scope", "capability", "progress_next", "search_location", "goal", "reflection_duration"];
+  "observation_scope", "capability", "progress_next", "search_location", "goal", "reflection_duration", "interruption"];
 
 /** A language reading binds dependent parameters and expression in one response. */
 export async function readAction(input: { decisions: DirectDecisions; agentId: string; context: JsonValue;
@@ -31,12 +31,22 @@ export async function readAction(input: { decisions: DirectDecisions; agentId: s
   const state = input.context as Record<string, JsonValue>;
   const { actionPolicy: _policy, actionKinds: _kinds, ...context } = state;
   void _policy; void _kinds;
+  const currentLocationKeys = Object.entries(catalog.target ?? {}).filter(([, value]) => value && typeof value === "object" &&
+    !Array.isArray(value) && value.relationship === "current_location").map(([key]) => key);
+  const executionSite = { currentLocationKeys,
+    meaning: "These keys name the actual current place. A separately named room within it is not automatically the current room. Resolve the selected step's required site independently from its action target. A wait target never moves the actor. A requested activity at another place needs an actual move first, with progress_next=continue; its later rest/work has not begun. A place mentioned only in speech or a future plan does not authorize travel." };
   const schema = z.object({
     understanding: z.string().describe(autonomous
       ? "One brief statement of this attempt's purpose or the actual reason to wait. Name the uncertainty an inspection addresses. No private reasoning transcript or predicted success."
       : "Briefly identify the intended interaction and next unperformed step. If there is a prerequisite, state whether actual evidence supports it or it remains unknown. Do not predict a result."),
     ...(autonomous ? { urgency: z.number().min(0).max(1).describe("Urgency of this actual attempt: 0 can wait, 1 immediate danger or deadline.") } : {}),
     ...(autonomous ? {} : {
+      durationReference: z.object({
+        basis: z.enum(["ordinary", "elapsed", "phase_occurrence", "relative_cycle", "unresolved"])
+          .describe("Interpret THIS next step's time reference before selecting duration. ordinary has no requested interval; elapsed is a measured duration; phase_occurrence counts arrivals of a transition (next=1, second=2); relative_cycle names the current calendar cycle or a later one (today/current=0, tomorrow/following=1). Tomorrow's sunset names a cycle, not merely the next sunset. Quoted times and later steps do not time the present step."),
+        count: z.number().int().nonnegative().nullable().describe("For relative_cycle, the requested number of cycles after the submission's initial cycle; for phase_occurrence, the positive occurrence number. Otherwise null. Interpret the player's reference, not the nearest candidate."),
+      }),
+      activitySite: z.string().describe("Where must THIS selected next step actually execute? Use current for an unconstrained act at the current place, including speech about other places. If this step requires an explicitly named place, select its target catalog key, even when arrival has not occurred. For a move, name its destination; for a preparatory step before moving, name that preparation's actual site. Use unresolved if the required place cannot be identified. This is not the object watched, person awaited, or a place mentioned in words. Do not relabel a different requested place as current."),
       conversationReading: z.object({
         addressedTo: z.enum(["narrator", "character", "no_speech"]),
         meaningInContext: z.string().describe("The full meaning of THIS input in the current thread. For an ellipsis, preserve the previous question and replace only the new subject/scope. Resolve the same item even when the player's premise about possession is false."),
@@ -63,9 +73,9 @@ export async function readAction(input: { decisions: DirectDecisions; agentId: s
     try {
       generated = await decisions.provider.generateStructured({ ...decisions.scope, subjectId: agentId,
         modelRegistrySnapshotHash: decisions.control.registryHash, modelInvocation: decisions.next(agentId),
-        profileId: input.profileId, role: autonomous ? "creation" : "decision", schemaName: autonomous ? "AutonomousActionReadingV1" : "PlayerActionReadingV4", system, userPrompt,
+        profileId: input.profileId, role: autonomous ? "creation" : "decision", schemaName: autonomous ? "AutonomousActionReadingV1" : "PlayerActionReadingV5", system, userPrompt,
         promptVersion: `${autonomous ? "autonomous-action" : "player-reading"}-${contentHash({ system, userPrompt })}`,
-        context: { [autonomous ? "autonomousReading" : "playerReading"]: { state: context, language: input.language, catalog, cognition,
+        context: { [autonomous ? "autonomousReading" : "playerReading"]: { ...(autonomous ? {} : { executionSite }), state: context, language: input.language, catalog, cognition,
           exactQuotes: Object.fromEntries(input.quotes.map((quote, index) => [`q${index}`, quote])) },
           ...(repair ? { repair: { ...repair, instruction: autonomous
             ? "Resolve the reported contradictions as one complete intention using this same private situation and catalog. A deliberate wait must have a situational reason; missing speech parameters do not by themselves justify waiting. Do not claim any attempt succeeded."
@@ -87,6 +97,25 @@ export async function readAction(input: { decisions: DirectDecisions; agentId: s
     const action = generated.value.action as Record<string, string | null>;
     const operation = action.operation;
     const issues: string[] = [];
+    if (!autonomous && generated.value.interaction === "world_action") {
+      const reference = generated.value.durationReference as { basis: string; count: number | null };
+      const duration = catalog.duration?.[action.duration ?? "default"];
+      const candidate = duration && typeof duration === "object" && !Array.isArray(duration) ? duration : null;
+      if (candidate?.transition !== undefined && (!["relative_cycle", "phase_occurrence"].includes(reference.basis) || reference.count === null ||
+          !Number.isSafeInteger(reference.count) || reference.basis === "phase_occurrence" && reference.count < 1) ||
+        ["relative_cycle", "phase_occurrence"].includes(reference.basis) && candidate?.transition === undefined && action.duration !== "unresolved" ||
+        reference.basis === "ordinary" && candidate !== null ||
+        reference.basis === "elapsed" && (!candidate || candidate.transition !== undefined) ||
+        reference.basis === "unresolved" && action.duration !== "unresolved") {
+        issues.push("Bind a periodic endpoint as its entering phase plus either a relative_cycle offset (current=0, following=1) or a positive phase_occurrence number (next=1). The engine computes its exact deadline. Ordinary and elapsed timing do not select a phase. Use unresolved when the intended reference cannot be determined. A prerequisite uses its own timing, not the later activity's deadline.");
+      }
+      const site = generated.value.activitySite;
+      if (typeof site !== "string" || site !== "current" && (!Object.hasOwn(catalog.target ?? {}, site) || site === "none")) {
+        issues.push("Bind this next step's required execution site to current or a known place key. An unidentified required site needs clarification, not a substitute activity.");
+      } else if (operation !== "move" && site !== "current" && !currentLocationKeys.includes(site)) {
+        issues.push("This step requires a different place from the actual current placement. Perform an authorized move there first with ordinary travel timing and progress_next=continue, or an authorized current-site prerequisite. If arrival cannot be resolved, clarify. Naming a wait target or writing the destination in the attempt does not move the actor. Do not change the requested site's meaning to evade the missing arrival.");
+      }
+    }
     if (autonomous) {
       if (!action.attempt?.trim()) issues.push("Supply the concrete attempted behavior, or the situation being awaited.");
       if (action.literalQuote !== "none") issues.push("An autonomous character has no player input to quote; author the actual utterance and select literalQuote=none.");
@@ -109,7 +138,7 @@ export async function readAction(input: { decisions: DirectDecisions; agentId: s
       if (operation === "none" && !action.utterance) generated.value.interaction = "clarification";
       else issues.push("Request completion requires a receipt from this submission; use clarification for a new input that requests no executable step");
     }
-    const active = new Set(["operation", "timing", "duration", "progress_next", "goal",
+    const active = new Set(["operation", "timing", "duration", "progress_next", "goal", "interruption",
       ...(["speak", "transfer"].includes(operation ?? "") ? ["recipient",
         ...(action.recipient === "discover" ? ["search_location"] : [])] : ["target"]),
       ...(operation === "observe" ? ["observation_scope"] : []),
@@ -156,5 +185,5 @@ export async function readAction(input: { decisions: DirectDecisions; agentId: s
   if (operation === "speak" && words && utterance?.startsWith(words)) utterance = verbatim;
   const expression: ActionExpression = { attempt: action.attempt!.trim(), utterance,
     manner: action.manner?.trim() || null };
-  return { answers, expression, audits };
+  return { answers, expression, audits, durationReference: autonomous ? null : generated.value.durationReference as { basis: string; count: number | null } };
 }

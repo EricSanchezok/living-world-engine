@@ -63,7 +63,7 @@ export function directTestProvider(respond: (wire: DirectTestWire, call: number)
     } else if (reading) {
       const decoded = await respond({ ...wire, ...readingDecision(reading) }, calls);
       if (decoded instanceof Response) return decoded;
-      if (decoded && typeof decoded === "object" && "action" in decoded) response = decoded;
+      if (decoded && typeof decoded === "object" && "action" in decoded) response = { ...(autonomous ? {} : { activitySite: "current" }), ...decoded };
       else {
         const raw = decoded as Record<string, Record<string, unknown>>;
         const pick = (id: string) => String(raw[id]?.choice ?? "none");
@@ -85,13 +85,19 @@ export function directTestProvider(respond: (wire: DirectTestWire, call: number)
             ...(autonomous && ["use", "change"].includes(operation) ? { attempt: (created as typeof expression).attempt ?? "" } : {}) };
         }
         response = { understanding: "Scripted coherent action", interaction: autonomous ? "world_action" : pick("interaction"),
-          ...(autonomous ? { urgency: 0.5 } : {}),
+          ...(autonomous ? { urgency: 0.5 } : { activitySite: "current", ...(raw.durationReference ? { durationReference: raw.durationReference } : {}) }),
           requestAnalysis: { authorizedSteps: [text], establishedReceipts: [], remainingSteps: [text] },
           action: { ...Object.fromEntries(Object.keys(reading.catalog).map(id => [id, pick(id)])),
             ...(autonomous && expression.recipientLocalId ? { recipient: expression.recipientLocalId } : {}),
             attempt: expression.attempt ?? text, utterance: expression.utterance ?? null, manner: expression.manner ?? null,
             literalQuote: literal && operation === "speak" ? speech : "none" },
           cognition: Object.fromEntries(Object.keys(reading.cognition).map(id => [id, pick(id)])) };
+      }
+      if (!autonomous && response && typeof response === "object") {
+        const duration = (response as { action: { duration?: string } }).action.duration ?? "default";
+        const candidate = reading.catalog.duration?.[duration] as unknown as { transition?: unknown } | undefined;
+        response = { durationReference: { basis: candidate?.transition ? "phase_occurrence" : /^d\d+$/u.test(duration) ? "elapsed" : duration === "unresolved" ? "unresolved" : "ordinary",
+          count: candidate?.transition ? 1 : null }, ...response };
       }
     } else response = await (decision ? respond({ ...wire, ...decision }, calls) : !wire.questions && create ? create(wire) : respond(wire, calls));
     if (response instanceof Response) return response;

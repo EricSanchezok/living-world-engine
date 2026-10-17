@@ -1,8 +1,8 @@
 {
   "moduleId": "opening-sample",
   "scope": "sample",
-  "moduleHash": "154fb2d8a7f1146ffe77634b45a69e9b9b272009920b7a0943589700e00c4cc9",
-  "claimsHash": "1ca4f537653093c3380f58f7b3b0e868816d98a5412bf964ea61cfeb40ec5842",
+  "moduleHash": "4d60c985cac7044e4a38604540d6e338abf9916fcc043930c31db8fd6e3e0a7c",
+  "claimsHash": "cc62cea2b094885c75b932b4758d2d4ab1395e9a780c2b4093e0fa27a4675bec",
   "usedClaimIds": [
     "cultivation-stages",
     "dajin-backprojection",
@@ -30,6 +30,7 @@
     "root-testing-evidence",
     "sample-calibration",
     "sample-economy",
+    "sample-local-calendar",
     "sample-open-future",
     "sample-originals",
     "sample-spell",
@@ -115,59 +116,68 @@
       "sample-originals",
       "root-testing-evidence",
       "original-root-examination-method",
-      "original-inspection-conditions"
+      "original-inspection-conditions",
+      "sample-local-calendar"
     ],
     "entity:han-father": [
       "han-household",
       "han-wish",
       "han-uncle",
       "sample-calibration",
-      "sample-originals"
+      "sample-originals",
+      "sample-local-calendar"
     ],
     "entity:han-mother": [
       "han-household",
       "han-wish",
       "han-uncle",
       "sample-calibration",
-      "sample-originals"
+      "sample-originals",
+      "sample-local-calendar"
     ],
     "entity:han-eldest-brother": [
       "han-household",
       "han-wish",
       "han-uncle",
       "sample-calibration",
-      "sample-originals"
+      "sample-originals",
+      "sample-local-calendar"
     ],
     "entity:han-zhu": [
       "han-household",
       "han-wish",
       "han-uncle",
       "sample-calibration",
-      "sample-originals"
+      "sample-originals",
+      "sample-local-calendar"
     ],
     "entity:han-elder-sister": [
       "han-household",
       "han-wish",
       "han-uncle",
       "sample-calibration",
-      "sample-originals"
+      "sample-originals",
+      "sample-local-calendar"
     ],
     "entity:han-younger-sister": [
       "han-household",
       "han-wish",
       "han-uncle",
       "sample-calibration",
-      "sample-originals"
+      "sample-originals",
+      "sample-local-calendar"
     ],
     "entity:han-uncle": [
       "han-uncle",
       "sample-calibration",
-      "sample-open-future"
+      "sample-open-future",
+      "sample-local-calendar"
     ],
     "entity:old-zhang": [
       "village-reader",
       "sample-calibration",
-      "sample-originals"
+      "sample-originals",
+      "sample-local-calendar"
     ],
     "entity:han-household-pantry": [
       "han-household",
@@ -177,7 +187,8 @@
     "manifest": [
       "opening-night",
       "sample-originals",
-      "sample-open-future"
+      "sample-open-future",
+      "sample-local-calendar"
     ],
     "mechanics": [
       "sample-calibration",
@@ -185,7 +196,8 @@
       "cultivation-stages",
       "sample-spell",
       "extended-origin-abilities",
-      "original-complete-livelihoods"
+      "original-complete-livelihoods",
+      "sample-local-calendar"
     ],
     "law:positive-time": [
       "sample-open-future",
@@ -269,7 +281,8 @@
       "original-root-examination-method",
       "original-inspection-conditions",
       "original-complete-livelihoods",
-      "original-livelihood-herbal-apprentice"
+      "original-livelihood-herbal-apprentice",
+      "sample-local-calendar"
     ],
     "origin:spirit-merchant": [
       "sample-originals",
@@ -283,7 +296,8 @@
       "original-root-examination-method",
       "original-inspection-conditions",
       "original-complete-livelihoods",
-      "original-livelihood-spirit-merchant"
+      "original-livelihood-spirit-merchant",
+      "sample-local-calendar"
     ],
     "origin:han-li": [
       "han-household",
@@ -293,7 +307,8 @@
       "sample-open-future",
       "root-testing-evidence",
       "original-root-examination-method",
-      "original-inspection-conditions"
+      "original-inspection-conditions",
+      "sample-local-calendar"
     ],
     "entity:lin-estate": [
       "sample-originals",
@@ -362,7 +377,8 @@
       "original-root-examination-method",
       "original-inspection-conditions",
       "original-complete-livelihoods",
-      "original-livelihood-merchant-heir"
+      "original-livelihood-merchant-heir",
+      "sample-local-calendar"
     ],
     "origin:escort-apprentice": [
       "sample-originals",
@@ -374,7 +390,8 @@
       "original-root-examination-method",
       "original-inspection-conditions",
       "original-complete-livelihoods",
-      "original-livelihood-escort-apprentice"
+      "original-livelihood-escort-apprentice",
+      "sample-local-calendar"
     ],
     "origin:clan-junior": [
       "sample-originals",
@@ -386,7 +403,8 @@
       "original-root-examination-method",
       "original-inspection-conditions",
       "original-complete-livelihoods",
-      "original-livelihood-clan-junior"
+      "original-livelihood-clan-junior",
+      "sample-local-calendar"
     ],
     "origin:foundation-independent": [
       "sample-originals",
@@ -398,7 +416,8 @@
       "original-root-examination-method",
       "original-inspection-conditions",
       "original-complete-livelihoods",
-      "original-livelihood-foundation-independent"
+      "original-livelihood-foundation-independent",
+      "sample-local-calendar"
     ],
     "origin:core-clan-elder": [
       "sample-originals",
@@ -411,7 +430,8 @@
       "original-root-examination-method",
       "original-inspection-conditions",
       "original-complete-livelihoods",
-      "original-livelihood-core-clan-elder"
+      "original-livelihood-core-clan-elder",
+      "sample-local-calendar"
     ],
     "origin:spirit-array-master": [
       "sample-originals",
@@ -427,12 +447,16 @@
       "original-root-examination-method",
       "original-inspection-conditions",
       "original-complete-livelihoods",
-      "original-livelihood-spirit-array-master"
+      "original-livelihood-spirit-array-master",
+      "sample-local-calendar"
     ],
     "law:authored-workflows": [
       "sample-economy",
       "sample-calibration",
       "original-complete-livelihoods"
+    ],
+    "law:daylight-and-illumination": [
+      "sample-local-calendar"
     ]
   },
   "limitations": [
@@ -441,52 +465,52 @@
     "合同接受、物品交付、维修、调查及人物反应由实际行动决定；静态审定不保证任何结果必然发生。",
     "无资料的原著地区与未知传承保持未制作或未知；首轮完整路径真实游玩尚待验收。"
   ],
-  "worldHash": "sha256:36606b847737017e3e8637e9f878de7509b67c86733430637243a4f57f81b0fc",
+  "worldHash": "sha256:dc97bc60e4d76c1ab53e3a570af07b75d3a61f5c1cc5223c1af5fa6a5721e290",
   "regionalReceipts": [],
   "files": {
-    "script.yaml": "b24f01f5721b8ec4bcbd1a5a73e3784fa85abf04aff5373e1f62a0d68b715baf",
-    "laws.yaml": "62a10c04394513b03df40e561fb11faa8412b7011ddcc566aeb519a6aa7ba5be",
-    "mechanics.yaml": "434ca06bf769ae58986dc99026e12868c72ebb100f19269304fa5710a8692941",
-    "participation.yaml": "b9cbefabf773bf27fbdedcb76ca7753a42f9199dc906a715de1c9968505416cf",
-    "entities/array-workroom.yaml": "bc0c161c44d4d20e1b710643409692281f7f6725c0ef7ffafffda98a051b803c",
-    "entities/canon-han-li.yaml": "66223e1037e180b00bb7128cec699070dbb15b40c431da6af9f30e553e93bd11",
-    "entities/chunxiang-inn.yaml": "965a96833e4904dcaac1c1042ac452f9b5972292aa3c38058bd39ace9fb2ec88",
-    "entities/han-elder-sister.yaml": "6ea06ce3198245a80a8ff9400255d2ef93d4bc1d36bd3c96c205545e2838bb67",
-    "entities/han-eldest-brother.yaml": "a287f5a60e0af858e0c257eceab16d54911e8c412a5ea683dea3b51f0639357c",
-    "entities/han-father.yaml": "87b95d94913ada806de90242786ae4e5dd8ef3c409887c362012f72762495fbf",
-    "entities/han-home.yaml": "e080e0c59053ea25e39ac4f0e5d3ef8ebbd2363954693269eb2aae03900aa5f3",
+    "script.yaml": "a1289084d6725afdb54c8abee78562fd5e64b3c28dddf27ca81fb9c982ad2c24",
+    "laws.yaml": "f11fbe04d51c6259c579cdad04ed2d6f964b35537003ddc15839c5267bc101ac",
+    "mechanics.yaml": "daff3a7bf4115e9a099eb4c51936b5fd74ad7cbdffe1b6d53819a7c6eee69666",
+    "participation.yaml": "d0eea208f0c64b66d8b66a3e7dc33a5d5811e2c514a8466a876d20126a8482f1",
+    "entities/array-workroom.yaml": "e247e3e24036c18a58f3fd00457ddb87355c621ff17ce8470440061cc3fa3066",
+    "entities/canon-han-li.yaml": "77231c279a8b935c5027a52df94a40ec255a9ac522d44d6ca523f0c846444d9d",
+    "entities/chunxiang-inn.yaml": "1ff86a6f9d11b1122c437e569a4c6ac732b6b12a47949af7212cc7e4ca028ff7",
+    "entities/han-elder-sister.yaml": "3c1158294e79496f2d1f145130c53f6facecd87c606a7369531afb73c3ff33a7",
+    "entities/han-eldest-brother.yaml": "39d965c40e8de74ae87438df2291e7dfffbb4423b89ba1eba3040259c4675833",
+    "entities/han-father.yaml": "a1f61f9f1fc9a27a68fd6f05c5163378911cff011c12e424d4686386898070ea",
+    "entities/han-home.yaml": "4b43d5ecb42bbfcf59314669c36f68163fe9af2d4b60ed7d4dac75d51bdf0e57",
     "entities/han-household-pantry.yaml": "13006db23c2553c9facb165c640d640f0947129ccb8c7a5d16ec8410680567c9",
-    "entities/han-mother.yaml": "fa8a7438daaaabadea05f82e72f33d8c45192f8f63b057cb49093d07c5e63610",
-    "entities/han-uncle.yaml": "ce274dd691882274abae8da70b14c9203d8fdcd95d237d4d2d5790f4c9e14828",
-    "entities/han-village.yaml": "1e62dd608fcb773a6021f82bc1eb53dc6af6f09e6054cb174ac42c53a8013757",
-    "entities/han-younger-sister.yaml": "fab5be1f8fbaa125391e285317f55491d24425891247a209187a1cfd17e2938b",
-    "entities/han-zhu.yaml": "56386f324a9cac208bac44d73ffb46d4a6d27022830a2d865a9b1aee216fcabb",
-    "entities/herbal-yard.yaml": "70fe99258bf238d4b3c0908640019aa00c5f86c4fa9b356d7e3037f3e80ad140",
-    "entities/human-realm.yaml": "60d19f0fe9bfc3fdefd2cbe37730c5618ae26cfda4e80cc91e63c6d3d70a008b",
-    "entities/lin-estate.yaml": "3a09af1a7a1066c2cd746a7deef4784e4821df2a70d2786657ca4df254ce1108",
-    "entities/lin-store.yaml": "746481345c7f24e4b448eafb67bd0c23e5f7cc9c49c96c21a31e204dd9b81b54",
-    "entities/listening-spring.yaml": "a36c5f696d786f0101c72bb0647de148e370508fa80f196aa5a883411e9bb266",
-    "entities/old-zhang.yaml": "8e4d9e309890b6ce870cd8bab7dc336da5941b577ff854cf2e3d647ef5088fd3",
-    "entities/qinghe-store.yaml": "41576a5a11208757a90c61f00a177c5dfa6f2a1a76e8a1e7250acbc08615b32a",
-    "entities/qinghe-study.yaml": "87c04f11da384189d81b2b33d94a30a5b7d0cd4443093976f15ddac2111ea057",
-    "entities/qingniu-town.yaml": "4d29af1237ab7afb5e3695fed466e3291d8c690e44fc920bc4bfea030bdc2200",
+    "entities/han-mother.yaml": "3d99c29a20e01c210ef597b6255f876505d858b218d01ff4e199dbc488288921",
+    "entities/han-uncle.yaml": "5887ca1abb996b29fae8ea190e7af7c1fcc426678496677e730a3521700afa90",
+    "entities/han-village.yaml": "4ee993e9210c5638189640afa68a51e8dfd011008c43f7aa2c9eaa33fd310693",
+    "entities/han-younger-sister.yaml": "32e110f3a9d7cd4c42db88bb3e97fcfca0b6786d6b77536f39b046b6f1c72f36",
+    "entities/han-zhu.yaml": "f37668e6336d0967e314a3308cbd39f70e3a38a19d9397f63bdbee0e9adc3c81",
+    "entities/herbal-yard.yaml": "5c466e1b4669ab476b269f28ee31bf56e4d605081be70b7dcf8eb5a49ffab503",
+    "entities/human-realm.yaml": "34aebbca7b45a421c4266d75c6f3b8a73b89d8b33763b7d957e36b8a53ba9e66",
+    "entities/lin-estate.yaml": "44313fb150bc7a2d4c2c024c4ad85212636942394bfa6c224b894d1d11cb9de3",
+    "entities/lin-store.yaml": "12669a87047a823cd76d10d549cbe17210321986b6f52e0d8b53a4a9a192c83c",
+    "entities/listening-spring.yaml": "cdde4d1036d207ee54689532b9135822d8483d21976282e082316678de5431eb",
+    "entities/old-zhang.yaml": "fa6b2acc118ca711293ed0423166c92cc89420fb19c033a60c509b9864e815ba",
+    "entities/qinghe-store.yaml": "7fbc2f9667ced6ff4280858cf0e62d0f5468111435e9c08f89800c71836fab2c",
+    "entities/qinghe-study.yaml": "c7c32789b2a0c7fc4ae05bb7988f39490ed4238970aa0a7d1d443280f7184dde",
+    "entities/qingniu-town.yaml": "535a6575a22fe469bad6da5ccc4ddd0661d099ca992dfd654b17ccabd8816597",
     "entities/qixuan-sect.yaml": "e50fbbd722080705841c4202fe000dba8b0f641fed096eb73e6fe4aef83d2927",
-    "entities/shen-store.yaml": "4f83cdda9ac96a37a5b5e5ba07cb5c2ee5a208be6bd62c17c3c51b8d1ed59d05",
-    "entities/shen-valley.yaml": "88825f06cd8874e243a1ca5ad38a7502f8cd7fd89d0f51fedb825791cf6a5b90",
-    "entities/smith-workshop.yaml": "d3514cd9a00e69e0d8fd02afb3885a16bc44285f822294cb55abf653a3a13888",
-    "entities/songxi-hamlet.yaml": "6f51bb92df25495494efb6ec1c2c02b8f9f5a45eed43d5ebb766343d1ce6c39f",
-    "entities/spirit-realm.yaml": "ce66ae7f0c2d4a29e0bef207bf2e3801e6c5a5a398fd83ade2a837fff2d08691",
-    "entities/spirit-wharf.yaml": "bdcaddc8671bbf3868ae928b627bfb1e8a926704e1a59d3951d7dcd28e9be4b7",
-    "entities/stone-garden.yaml": "9638446d0f3e215d2d457db3c998004736edd1f104a165d6313b7486d7290fcc",
-    "entities/stone-pond.yaml": "1542b386e4789b3884ecbcc61a422abb605dc034382b564df8716cbe1221d001",
-    "entities/tianyuan-city.yaml": "09d536b2f9b294060d97bec1847ebf06dc8fa6f7b36ad173a3925f7c63110052",
-    "entities/village-path.yaml": "dcaaf46a3d6d1a7939f512694be4889c62c30ae8532f0a736e208487a4e861fa",
+    "entities/shen-store.yaml": "98388df30cf51b97b6a89b1daff0b40a07f8036d9728858e567f5b2246cb0bff",
+    "entities/shen-valley.yaml": "f3165d8651b5f58c7a819d2cb82d72af690a6b93edf4861c193791963ed0d496",
+    "entities/smith-workshop.yaml": "155aa759cb0c506f5d73acffa7f1499447808467b1bc66add4cf97fd0958e00a",
+    "entities/songxi-hamlet.yaml": "ea9acc1d46120721d04580842d71086466b6f1e4909651d8e59635bdbb6e2ba4",
+    "entities/spirit-realm.yaml": "fd9db29b5ff2cbf445835c22ce177d24fb921850de4c79ecf311378c22fb700d",
+    "entities/spirit-wharf.yaml": "2a36585ff5f175378b0d21c2610191415b872c703048a573c29594693fbffee7",
+    "entities/stone-garden.yaml": "25a022c2080b4f6ba572036b9a9f9067d19c7e7b442c27dfdce1027b1e843195",
+    "entities/stone-pond.yaml": "3478d6197f6eaea80ef8b8d70ba5ad84daf7f956f0e4e2d6e7616e5ee8c2335c",
+    "entities/tianyuan-city.yaml": "01bdbc3ca42aaa20a19d434257c9883d32e655a8d87273b10f3cfcd1023ef1b8",
+    "entities/village-path.yaml": "c6a58934dd46077f82c0b1647df65b7cb54807ebbcefa0185131d47b96d59aa6",
     "entities/wild-wolf-gang.yaml": "bc63ba0b5134c971c07545c4153e812b3456e3a313c5a4d43b4fa137d461b559",
-    "entities/xu-hall.yaml": "026b204aa4f2947efaca28e82256d0ad9f1548bbc87ef8ca16b3d8eee5d7a13c",
-    "entities/xu-settlement.yaml": "47836a644b476352a4111baed76511f6b63a5a96e94311d5d5524175b293203d",
-    "entities/xu-workshop.yaml": "2c3dcd9e3dbb74105a98e75d8368038f124a1957871c5276a1ded97aead99713",
-    "entities/yuanan-road.yaml": "760c8971ad5c405d8259c061d2d28078108c83ea3bea74b116c5ab87320e4076",
-    "entities/yuanan-yard.yaml": "8927e97618f33a1a029debe434b8bd4741049c222bbfdf0c879b0f8969a3ba1e"
+    "entities/xu-hall.yaml": "66fde4b04adf1aca6ae7be64ad46f94bf35897a755324902b1211eade3a8f2c1",
+    "entities/xu-settlement.yaml": "2388d896107901b871a14c710f9998468606491ad8b81ed84cb134488692efd6",
+    "entities/xu-workshop.yaml": "ce19e90413087d6c811ca2bf051bbbfdda09a82cc36c802671bca818bd310642",
+    "entities/yuanan-road.yaml": "2789bb6d1943889d2ce31c7f8cb06f35fc31729b07b2d8b7dd68d243245ee28d",
+    "entities/yuanan-yard.yaml": "5ac2cfc35458154884334a28b95c036c5afa90a992dbd3c58a8701d5a0c8aaec"
   },
   "entities": 39,
   "agents": 9,

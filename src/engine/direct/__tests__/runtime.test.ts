@@ -28,7 +28,8 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
   worldOutcomes?: Record<string, string>;
   readingOverrides?: Record<string, string>; npcReadings?: unknown[]; factValues?: Record<string, string>; resolvedDuration?: string; resolvedDurations?: Record<string, string>; effectRepresentation?: "existing" | "no_change" | "already" | "expand";
   withMana?: boolean; meterImpacts?: Record<string, string>; inspectedStock?: number; quantityMeasured?: boolean;
-  discoverableGateFact?: boolean; discoveryAdmitted?: boolean; discoveryVerdict?: "examined" | "retained" | "hidden" | "unknown" } = {}) {
+  discoverableGateFact?: boolean; discoveryAdmitted?: boolean; discoveryVerdict?: "examined" | "retained" | "hidden" | "unknown";
+  multipleExactAliases?: boolean } = {}) {
   let creations = 0;
   let npcReadings = 0;
   let inspectedQuantityId = "";
@@ -135,6 +136,12 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
     player.belief.localEntities[id!] = { id: id!, name: world.initialState.truth.entities[canonicalId!]!.name, description: "Seen nearby", status: "observed" };
     player.bindings[id!] = { localEntityId: id!, canonicalEntityIds: [canonicalId!] };
   }
+  if (options.multipleExactAliases) {
+    for (const id of ["old-door", "uncertain-door"]) {
+      player.belief.localEntities[id] = { id, name: "曾见的门", description: "由自己的经历记得的入口", status: "observed" };
+      player.bindings[id] = { localEntityId: id, canonicalEntityIds: id === "old-door" ? ["gate"] : ["gate", "courtyard"] };
+    }
+  }
   if (options.timerSeconds) world.initialState.truth.timers["test-deadline"] = { id: "test-deadline", description: "Independent deadline",
     createdAtSeconds: 0, dueAtSeconds: options.timerSeconds, status: "scheduled", wakeAgentIds: options.timerWakeAgentIds ?? [],
     causes: [{ kind: "mechanic", id: "direct-world-clock" }],
@@ -151,6 +158,17 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it("reuses an exact existing alias across repeated observations without merging uncertain identities", async () => {
+    const f = await fixture({ operation: "observe", target: "door", multipleExactAliases: true });
+    await f.engine.bootstrapAgents();
+    const first = await f.engine.step(f.roster, f.request("查看这扇门的状态"));
+    const next = await f.engine.step(f.roster, f.request("再看一遍这扇门", first.state.revision));
+    expect(next.state.agents.player!.bindings["uncertain-door"]!.canonicalEntityIds).toEqual(["gate", "courtyard"]);
+    expect(next.state.agents.player!.belief.localEntities["old-door"]).toEqual(first.state.agents.player!.belief.localEntities["old-door"]);
+    expect(next.state.history.flatMap(step => step.observations.filter(observation => observation.observerId === "player")
+      .flatMap(observation => observation.introductions)).filter(introduction => introduction.canonicalEntityId === "gate")).toEqual([]);
+    expect(replaySimulationState(next.state)).toEqual(next.state);
+  });
   const npcReading = (action: Record<string, unknown>) => ({
     understanding: "Resolve the current uncertainty before deciding whether to admit the traveler.",
     interaction: "world_action", urgency: 0.5,

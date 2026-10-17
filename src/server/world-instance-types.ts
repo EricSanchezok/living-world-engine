@@ -161,7 +161,7 @@ export interface ParticipantReactionRecord {
 }
 
 export interface WorldInstanceDocument {
-  schemaVersion: 33;
+  schemaVersion: 34;
   id: string;
   world: WorldRuntimeContract;
   executionAlgorithm: AlgorithmRef;

@@ -114,6 +114,11 @@ agent:
         description: 开篇前的日常生活使你熟悉村落、韩家与村边采柴小路的来往方向。
         sourceId: null
         step: 0
+      - id: opening-night-observation
+        kind: observation
+        description: 开篇时亲身经历当地入夜，记得此时正是夜里；这是当时的观察，后来须按实际经过的时间和新见闻判断。
+        sourceId: null
+        step: 0
     claims:
       - id: han-father-familiar-path
         subjectId: familiar-path
@@ -126,6 +131,17 @@ agent:
         confidence: 1
         evidenceIds:
           - han-father-daily-routes
+      - id: opening-night-memory
+        subjectId: location
+        predicate: opening-observation
+        value:
+          kind: text
+          value: 开篇时此地已入夜。
+        description: 记得开篇时已经入夜，不会把当夜误认作尚未天黑。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - opening-night-observation
     bindings:
       - local_entity_id: self
         canonical_entity_ids:

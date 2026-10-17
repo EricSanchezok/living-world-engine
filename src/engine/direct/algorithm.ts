@@ -24,6 +24,7 @@ import { settlePreparedActions } from "./settlement";
 import type { PresentationReply } from "../contracts/discourse";
 import { activityBoundary, admitActivities } from "./activities";
 import { directPerception } from "./perception";
+import { interruptActivities, interruptionCandidates } from "./interruption";
 import { sealDirectRecord } from "./canonical";
 import { participantReactionIds, prioritizeParticipantCauses } from "./foreground";
 import { hasLocalOpportunity } from "./initiative";
@@ -171,10 +172,11 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
       control.prepared[frame.id] = { actionId: frame.id, reads: {},
         status: "succeeded", summary: "你复核了自己已有的记录。", operations: [], visibleFactIds: [], propertyVisibility: [], visibleEntityIds: [], namedEntityIds: [], inspectedQuantityIds: [],
         actorOnlyFactIds: [], actorOnlyEntityIds: [],
-        deliveredToEntityIds: [], randomRequests: [], randomBindings: [], sharedClaims: [], ongoing: false, requestProgress: "complete" };
+        deliveredToEntityIds: [], randomRequests: [], randomBindings: [], sharedClaims: [], ongoing: false, requestProgress: "complete", interruptActivityIds: [], interruptionCandidateIds: [] };
     }
     const needsPreparation = control.activities.filter(frame => frame.kind !== "reflect" && frame.activityStatus !== "paused" && (frame.dueAtSeconds !== null || frame.durationSeconds === 0) &&
-      (!control.prepared[frame.id] || Object.entries(control.prepared[frame.id]!.reads).some(([key, hash]) => contentHash(readDependency(source, key)) !== hash)));
+      (!control.prepared[frame.id] || Object.entries(control.prepared[frame.id]!.reads).some(([key, hash]) => contentHash(readDependency(source, key)) !== hash) ||
+        interruptionCandidates(source, control, frame).some(activity => !control.prepared[frame.id]!.interruptionCandidateIds.includes(activity.id))));
     const groups = components(source, needsPreparation);
     // Each concurrent component owns its invocation sequence. Completion order
     // must not assign another component's identity to a repair or expansion.
@@ -225,7 +227,8 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     for (const frame of due) Object.assign(reads, control.prepared[frame.id]!.reads);
     await context.stages?.after(executionStage("direct-adjudication"));
     await context.stages?.before(executionStage("direct-settlement"));
-    const { settlements, rng, randomRequests, randomResults } = settlePreparedActions(source, control, due);
+    const { settlements, rng, randomRequests, randomResults } = settlePreparedActions(source, control, due, atSeconds);
+    const deliveredInterruptionCandidates = Object.fromEntries(settlements.map(item => [item.frame.id, control.prepared[item.frame.id]!.interruptActivityIds]));
     const completed = settlements.map(item => item.frame), completedActionIds = completed.map(frame => frame.id);
     const ongoing = completed.filter(frame => control.prepared[frame.id]!.ongoing && settlements.find(item => item.frame.id === frame.id)?.outcome.status === "succeeded");
     control.activities = control.activities.filter(frame => !completedActionIds.includes(frame.id) || ongoing.some(item => item.id === frame.id)).map(frame => structuredClone(frame));
@@ -293,7 +296,7 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
       perceptionState.agents[operation.agent.id] = operation.agent;
       control.intents[operation.agent.id] = readyIntent("world-arrival");
     }
-    const perception = directPerception(perceptionState, settlements, events, step);
+    let perception = directPerception(perceptionState, settlements, events, step);
     for (const observation of perception.observations) {
       const owner = perceptionState.agents[observation.observerId]!;
       const index = events.findIndex(event => observation.sourceEventIds.includes(event.id)); const frame = settlements[index]?.frame;
@@ -303,6 +306,13 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
         // Newly admitted Agents receive their model policy at the host commit boundary.
         wakeFromWorldEvent(owner.id, "observation", !policy || policy.kind === "model" ? frame.id : null);
       }
+    }
+    const interrupted = interruptActivities(source, control, deliveredInterruptionCandidates, settlements, events, perception.observations, effectiveTime, step);
+    if (interrupted.settlements.length) {
+      settlements.push(...interrupted.settlements); events.push(...interrupted.events);
+      completed.push(...interrupted.settlements.map(item => item.frame));
+      completedActionIds.push(...interrupted.settlements.map(item => item.frame.id));
+      perception = directPerception(perceptionState, settlements, events, step);
     }
     if (effectiveTime > source.truth.elapsedSeconds) {
       const causes = events.length ? [{ kind: "event" as const, id: events[0]!.id }] : Object.values(source.truth.timers).filter(timer => timer.dueAtSeconds === effectiveTime).flatMap(timer => timer.causes);
