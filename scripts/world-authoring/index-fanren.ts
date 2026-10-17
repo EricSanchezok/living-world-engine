@@ -1,7 +1,8 @@
-import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { fullyExtractedChapters, indexSourceReports, type ReadingBatch } from "./authoring-index";
+import { buildSourceAdjudicationEvidence, buildSourceReadingEvidence } from "./source-evidence";
 
 const root = path.resolve("worlds/fanren/authoring");
 const cache = path.resolve(".livingworld-cache/fanren-sources/chapters");
@@ -26,6 +27,46 @@ const batches = read("coverage/batches.json") as Array<ReadingBatch & { extracte
 const inputs = readdirSync(path.join(root, "extractions")).filter(file => /^batch-\d+\.json$/u.test(file)).sort()
   .map(file => read(`extractions/${file}`));
 const index = indexSourceReports(inputs, batches, body);
+const inputsByBatch = new Map(inputs.map(input => [input.batchId as string, input]));
+const readingEvidence: Array<ReturnType<typeof buildSourceReadingEvidence>> = [];
+const adjudicationEvidence: Array<ReturnType<typeof buildSourceAdjudicationEvidence>> = [];
+const invalidAdjudications: Array<{ batchId: string; status: "invalid-source-adjudication-evidence"; message: string; approvedForRuntime: false }> = [];
+for (const batch of batches) {
+  const input = inputsByBatch.get(batch.id);
+  if (!input) continue;
+  readingEvidence.push(buildSourceReadingEvidence(input, batch, body));
+  const file = `adjudications/${batch.id}.json`;
+  if (!existsSync(path.join(root, file))) continue;
+  try { adjudicationEvidence.push(buildSourceAdjudicationEvidence(read(file), input, batch, body)); }
+  catch (error) { invalidAdjudications.push({ batchId: batch.id, status: "invalid-source-adjudication-evidence",
+    message: error instanceof Error ? error.message : String(error), approvedForRuntime: false }); }
+}
+const readingByBatch = new Map(readingEvidence.map(row => [row.batchId, row]));
+const adjudicationByBatch = new Map(adjudicationEvidence.map(row => [row.batchId, row]));
+const invalidByBatch = new Map(invalidAdjudications.map(row => [row.batchId, row]));
+saveLines("coverage/source-reading.jsonl", batches.map(batch => readingByBatch.get(batch.id) ?? {
+  batchId: batch.id, status: "awaiting-source-extraction", sourceParts: batch.parts, approvedForRuntime: false }));
+saveLines("coverage/source-adjudication.jsonl", batches.map(batch => adjudicationByBatch.get(batch.id) ?? invalidByBatch.get(batch.id) ?? {
+  batchId: batch.id, status: readingByBatch.has(batch.id) ? "awaiting-independent-source-adjudication" : "awaiting-source-extraction",
+  sourceParts: batch.parts, approvedForRuntime: false }));
+const sourceEvidence = { format_version: 1, status: "source-evidence-not-editorial-approval", plannedBatches: batches.length,
+  reading: { completeBatches: readingEvidence.length,
+    fullyCoveredChapters: fullyExtractedChapters(batches, [...readingByBatch.keys()], chapters).size,
+    missingBatchIds: batches.filter(batch => !readingByBatch.has(batch.id)).map(batch => batch.id),
+    residualSourceIssues: readingEvidence.reduce((sum, row) => sum + row.residualSourceIssues, 0) },
+  adjudication: { completeBatches: adjudicationEvidence.length,
+    fullyCoveredChapters: fullyExtractedChapters(batches, [...adjudicationByBatch.keys()], chapters).size,
+    missingBatchIds: batches.filter(batch => !adjudicationByBatch.has(batch.id)).map(batch => batch.id),
+    invalidReports: invalidAdjudications,
+    judgments: { supported: adjudicationEvidence.reduce((sum, row) => sum + row.judgments.supported, 0),
+      unsupported: adjudicationEvidence.reduce((sum, row) => sum + row.judgments.unsupported, 0),
+      ambiguous: adjudicationEvidence.reduce((sum, row) => sum + row.judgments.ambiguous, 0) },
+    residual: { unresolvedAliases: adjudicationEvidence.reduce((sum, row) => sum + row.residual.unresolvedAliases, 0),
+      unresolvedIssues: adjudicationEvidence.reduce((sum, row) => sum + row.residual.unresolvedIssues, 0),
+      unresolvedIdentities: adjudicationEvidence.reduce((sum, row) => sum + row.residual.unresolvedIdentities, 0),
+      omissions: adjudicationEvidence.reduce((sum, row) => sum + row.residual.omissions, 0) } },
+  note: "完整输入和调用证据与逐条来源裁决分别记录；均不改变 read/reviewed，也不授予开篇事实或运行批准。剩余问题须由具体编辑处置解决。" };
+save("coverage/source-status.json", sourceEvidence);
 const regions = read("coverage/regional-plan.json") as { modules: Array<{ id: string; realm: string; search_terms: string[] }> };
 const mentions = regions.modules.map(region => ({ moduleId: region.id, status: "lexical-leads-not-reviewed-facts",
   terms: region.search_terms.map(term => {
@@ -53,6 +94,8 @@ save("coverage/batches.json", batches);
 const summary = { format_version: 1, status: "provisional-not-canonical", acceptedBatchIds: index.acceptedBatchIds,
   mainChapters: chapters.length, fullyExtractedChapters: extracted.size, readChapters: chapters.filter(chapter => chapter.read).length,
   reviewedChapters: chapters.filter(chapter => chapter.reviewed).length, candidateSubjects: index.subjects.length,
+  sourceReadingBatches: readingEvidence.length, sourceAdjudicationBatches: adjudicationEvidence.length,
+  invalidSourceAdjudications: invalidAdjudications.length,
   candidateFacts: index.facts.length, issues: index.issues.length, canonicalSubjects: 0,
   namesWithMultipleCandidates: index.names.filter(name => name.candidateIds.length > 1).length,
   regionalModules: regions.modules.length, regionQueriesNotFound: mentions.flatMap(region => region.terms.filter(term => term.matchingChapters === 0).map(term => ({ moduleId: region.moduleId, term: term.term }))),

@@ -21,7 +21,7 @@ export const extractionSchema = z.strictObject({
 });
 
 export type Extraction = z.infer<typeof extractionSchema>;
-export interface SourceParagraph { id: string; chapterId: string; start: number; end: number; text: string; sha256: string }
+export interface SourceParagraph { id: string; chapterId: string; start: number; end: number; text: string; sha256: string; sourceVersion?: string }
 
 export function validateExtraction(value: Extraction, paragraphs: SourceParagraph[], chapters: string[]): void {
   if (new Set(value.chapters).size !== value.chapters.length ||
@@ -44,7 +44,7 @@ export function materializeExtraction(batchId: string, value: Extraction, paragr
     const paragraph = byId.get(ref.paragraph)!;
     const start = paragraph.start + [...paragraph.text.slice(0, paragraph.text.indexOf(ref.anchor))].length;
     return { chapterId: paragraph.chapterId, paragraphId: paragraph.id, paragraphSha256: paragraph.sha256,
-      start, end: start + [...ref.anchor].length, anchorSha256: contentHash(ref.anchor), sourceVersion: "candidate-2fc16984" };
+      start, end: start + [...ref.anchor].length, anchorSha256: contentHash(ref.anchor), sourceVersion: paragraph.sourceVersion ?? "candidate-2fc16984" };
   });
   const records = <T extends { evidence: z.infer<typeof citation>[] }>(items: T[], kind: string) => items.map((item, index) => ({
     ...item, id: `${batchId}-${kind}-${String(index + 1).padStart(4, "0")}`, evidence: sourceRefs(item.evidence),

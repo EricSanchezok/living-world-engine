@@ -169,6 +169,142 @@ def batch_parts(chapters, max_chapters=8, max_characters=20_000):
              "read": False, "extracted": False, "reviewed": False} for index, parts in enumerate(batches, 1)]
 
 
+def revised_batch_parts(chapters, previous_batches, previous_rows, max_chapters=8, max_characters=20_000):
+    """Rebuild changed reading units without renumbering unrelated evidence."""
+    if not previous_batches:
+        return batch_parts(chapters, max_chapters, max_characters)
+    bodies = {chapter["id"]: chapter["body"] for chapter in chapters}
+    covered_ids = {part["chapter_id"] for batch in previous_batches for part in batch["parts"]}
+    if set(bodies) != covered_ids:
+        raise ValueError("source chapter inventory changed; explicit batch replan required")
+    identities = [batch["id"] for batch in previous_batches]
+    if len(set(identities)) != len(identities) or any(not re.fullmatch(r"batch-\d+", identity) for identity in identities):
+        raise ValueError("invalid previous reading batch identities")
+    next_id = max(int(identity.split("-")[1]) for identity in identities) + 1
+    changed = {identity for identity, body in bodies.items() if previous_rows.get(identity, {}).get("sha256") != digest(body)}
+    output = []
+    for batch in previous_batches:
+        parts = batch["parts"]
+        if not any(part["chapter_id"] in changed for part in parts):
+            if any(digest(bodies[part["chapter_id"]][part["start"]:part["end"]]) != part["sha256"] for part in parts):
+                raise ValueError("unchanged reading part fingerprint drift")
+            output.append(batch)
+            continue
+        chunks, offsets = [], {}
+        for part in parts:
+            identity = part["chapter_id"]
+            if identity in offsets:
+                raise ValueError("repeated chapter in a changed batch requires explicit replan")
+            if identity in changed:
+                if part["start"] != 0 or part["end"] != previous_rows.get(identity, {}).get("characters"):
+                    raise ValueError("changed split chapter requires explicit source-span replan")
+                body, start = bodies[identity], 0
+            else:
+                start = part["start"]
+                body = bodies[identity][start:part["end"]]
+                if digest(body) != part["sha256"]:
+                    raise ValueError("unchanged reading part fingerprint drift")
+            chunks.append({"id": identity, "body": body})
+            offsets[identity] = start
+        for index, revised in enumerate(batch_parts(chunks, max_chapters, max_characters)):
+            revised["id"] = batch["id"] if index == 0 else f"batch-{next_id:04}"
+            if index:
+                next_id += 1
+            for part in revised["parts"]:
+                part["start"] += offsets[part["chapter_id"]]
+                part["end"] += offsets[part["chapter_id"]]
+            output.append(revised)
+    for batch in output:
+        if batch["characters"] > max_characters or len({part["chapter_id"] for part in batch["parts"]}) > max_chapters:
+            raise ValueError("revised reading batch exceeds source-input limits")
+    return output
+
+
+def apply_source_repairs(chapter_id, body, manifest, cache):
+    """Apply reviewed insertions without changing or discarding candidate bytes.
+
+    A repair binds the complete input, complete auxiliary source, selected span,
+    and complete output. Lineage uses Unicode code-point offsets throughout.
+    """
+    if manifest.get("format_version") != 1:
+        raise ValueError("unsupported source repair manifest")
+    repairs = [repair for repair in manifest.get("repairs", []) if repair["chapter_id"] == chapter_id]
+    if len(repairs) > 1:
+        raise ValueError(f"duplicate source repair {chapter_id}")
+    base_hash = digest(body)
+    base_segment = {"kind": "candidate", "source_sha256": base_hash, "source_start": 0,
+                    "source_end": len(body), "start": 0, "end": len(body)}
+    if not repairs:
+        return body, {"version": "candidate-2fc16984", "segments": [base_segment]}
+    repair = repairs[0]
+    if repair.get("status") != "adopted-working-text" or repair.get("base_sha256") != base_hash:
+        raise ValueError(f"source repair is unapproved or stale: {chapter_id}")
+    if not repair.get("reviewer") or not repair.get("notes"):
+        raise ValueError("source repair needs reviewer and collation notes")
+    result, segments, consumed, output_offset = [], [], 0, 0
+    seen_positions = set()
+    operations = repair.get("insertions", [])
+    if not operations:
+        raise ValueError("source repair contains no insertions")
+    for insertion in operations:
+        at = insertion["at"]
+        if not isinstance(at, int) or at < consumed or at > len(body) or at in seen_positions:
+            raise ValueError("invalid or unordered source insertion")
+        seen_positions.add(at)
+        if at > consumed:
+            chunk = body[consumed:at]
+            result.append(chunk)
+            segments.append({"kind": "candidate", "source_sha256": base_hash, "source_start": consumed,
+                             "source_end": at, "start": output_offset, "end": output_offset + len(chunk)})
+            output_offset += len(chunk)
+        source = insertion["source"]
+        source_path = (cache / source["path"]).resolve()
+        if not source_path.is_relative_to(cache.resolve()):
+            raise ValueError("source insertion escapes the cache")
+        raw = source_path.read_bytes()
+        if digest(raw) != source["sha256"]:
+            raise ValueError("source insertion file fingerprint mismatch")
+        text = raw.decode("utf-8")
+        start, end = insertion["start"], insertion["end"]
+        if not isinstance(start, int) or not isinstance(end, int) or start < 0 or end <= start or end > len(text):
+            raise ValueError("invalid source insertion span")
+        chunk = text[start:end]
+        if digest(chunk) != insertion["sha256"]:
+            raise ValueError("source insertion span fingerprint mismatch")
+        result.append(chunk)
+        segments.append({"kind": "comparison-source", "source_id": source["id"], "source_sha256": source["sha256"],
+                         "source_start": start, "source_end": end, "start": output_offset, "end": output_offset + len(chunk)})
+        output_offset += len(chunk)
+        consumed = at
+    if consumed < len(body):
+        chunk = body[consumed:]
+        result.append(chunk)
+        segments.append({"kind": "candidate", "source_sha256": base_hash, "source_start": consumed,
+                         "source_end": len(body), "start": output_offset, "end": output_offset + len(chunk)})
+    value = "".join(result)
+    if digest(value) != repair["result_sha256"]:
+        raise ValueError("source repair output fingerprint mismatch")
+    return value, {"version": repair["working_version"], "repair_id": repair["id"], "segments": segments}
+
+
+def store_working_chapter(path, body):
+    """Retain every superseded byte sequence before advancing a working source."""
+    raw = body.encode("utf-8")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if path.exists():
+        previous = path.read_bytes()
+        if previous == raw:
+            return
+        revision = path.parent / "revisions" / path.stem / f"{digest(previous)}.txt"
+        revision.parent.mkdir(parents=True, exist_ok=True)
+        if revision.exists() and revision.read_bytes() != previous:
+            raise ValueError("archived source fingerprint collision")
+        revision.write_bytes(previous)
+    temporary = path.with_suffix(".txt.tmp")
+    temporary.write_bytes(raw)
+    temporary.replace(path)
+
+
 def acquire():
     fetch(INDEX_URL, CACHE / "qq-index.html")
     raw = fetch(TEXT_URL, CACHE / "fanren-candidate.txt")
@@ -215,24 +351,31 @@ def audit():
     matches, issues = align(chapters, [entry for entry in entries if entry["kind"] == "main"])
     old_path = AUTHORING / "coverage/chapters.jsonl"
     previous = {row["id"]: row for row in map(json.loads, old_path.read_text().splitlines())} if old_path.exists() else {}
+    batch_path = AUTHORING / "coverage/batches.json"
+    previous_batches = json.loads(batch_path.read_text()) if batch_path.exists() else []
+    repair_path = AUTHORING / "sources/repairs.json"
+    repairs = json.loads(repair_path.read_text()) if repair_path.exists() else {"format_version": 1, "repairs": []}
     rows, bodies = [], []
     hashes = Counter(chapter["sha256"] for chapter in chapters)
     for index, chapter in enumerate(chapters):
         entry = matches.get(index)
         identity = entry["id"] if entry else f"candidate-{index + 1:04}"
+        body, lineage = apply_source_repairs(identity, chapter["body"], repairs, CACHE)
+        working_hash = digest(body)
         body_path = CACHE / "chapters" / f"{identity}.txt"
-        body_path.parent.mkdir(exist_ok=True)
-        body_path.write_text(chapter["body"], encoding="utf-8")
+        store_working_chapter(body_path, body)
         reference_path = CACHE / f"qq-{entry['source_id']}.html" if entry else None
         comparison = None
         if reference_path and reference_path.exists():
             info = page_data(reference_path.read_text())["chapterInfo"]
-            comparison = compare_source(chapter["body"], info.get("content", ""), info["actualWords"])
+            comparison = compare_source(body, info.get("content", ""), info["actualWords"])
         previous_row = previous.get(identity, {})
-        unchanged = previous_row.get("sha256") == chapter["sha256"]
+        unchanged = previous_row.get("sha256") == working_hash
         row = {"id": identity, "ordinal": index + 1, "candidate_title": chapter["title"],
                "catalogue_title": entry["title"] if entry else None,
-               "characters": len(chapter["body"]), "sha256": chapter["sha256"],
+               "characters": len(body), "sha256": working_hash,
+               "candidate_sha256": chapter["sha256"], "source_version": lineage["version"],
+               "source_segments": lineage["segments"],
                "acquired": True, "catalogue_aligned": entry is not None, "reference_comparison": comparison,
                "read": previous_row.get("read", False) if unchanged else False,
                "extracted": previous_row.get("extracted", False) if unchanged else False,
@@ -244,19 +387,12 @@ def audit():
         if comparison and comparison["similarity"] is not None and comparison["similarity"] < 0.9:
             issues.append({"kind": "text_difference", "chapter_id": identity, "comparison": comparison, "status": "unresolved"})
         rows.append(row)
-        bodies.append({"id": identity, "body": chapter["body"]})
+        bodies.append({"id": identity, "body": body})
     write_json(AUTHORING / "sources/catalogue.json", entries)
     old_path.parent.mkdir(parents=True, exist_ok=True)
     old_path.write_text("".join(json.dumps(row, ensure_ascii=False, separators=(",", ":")) + "\n" for row in rows), encoding="utf-8")
     # Keep source changes from silently preserving review against different bytes.
-    batches = batch_parts(bodies)
-    batch_path = AUTHORING / "coverage/batches.json"
-    old_batches = {row["id"]: row for row in json.loads(batch_path.read_text())} if batch_path.exists() else {}
-    for batch in batches:
-        old = old_batches.get(batch["id"], {})
-        if old.get("parts") == batch["parts"]:
-            for field in ["read", "extracted", "reviewed"]:
-                batch[field] = old.get(field, False)
+    batches = revised_batch_parts(bodies, previous_batches, previous)
     write_json(batch_path, batches)
     write_json(AUTHORING / "sources/discrepancies.json", issues)
     report = {"format_version": 1, "audited_at": datetime.now(timezone.utc).isoformat(),
@@ -266,6 +402,8 @@ def audit():
                             "main_items": sum(entry["kind"] == "main" for entry in entries)},
               "qidian_catalogue": {"url": "https://www.qidian.com/book/107580/catalog/", "status": "http_202_challenge"},
               "main_chapters": len(chapters), "aligned_chapters": len(matches),
+              "working_repairs": [{"id": repair["id"], "chapter_id": repair["chapter_id"],
+                                   "result_sha256": repair["result_sha256"]} for repair in repairs["repairs"]],
               "excluded_supplements": [{"title": part["title"], "sha256": part["sha256"]} for part in supplements],
               "reference_comparisons": dict(Counter(row["reference_comparison"]["kind"] if row["reference_comparison"] else "not_acquired" for row in rows)),
               "issues": dict(Counter(issue["kind"] for issue in issues)), "batches": len(batches),
