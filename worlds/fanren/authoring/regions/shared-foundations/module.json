@@ -1,0 +1,203 @@
+{
+  "id": "shared-foundations",
+  "entities": [],
+  "existingEntityFacts": [],
+  "placements": [],
+  "entityDescriptions": [],
+  "laws": [
+    {
+      "id": "cultivation-stages",
+      "text": "修炼层级依次为炼气、筑基、结丹、元婴、化神、炼虚、合体、大乘，最终渡劫飞升。境界与功法层数分别记录；改变境界须实际完成相应修炼与突破。数值评价不能替代具体功法、伤势、法宝、经验与环境，也不使高境界者自动知晓秘密。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-roots",
+      "text": "常规修炼需要已存在的灵根、适用功法与实际学习。五行灵根及变异灵根影响功法适性和修炼效率；四五属性称伪灵根，二三属性称真灵根，单一属性称天灵根。伪灵根不是不能修炼或不能突破的物理禁令。血缘只影响可能性，不能据亲属关系重掷已经确定的灵根。检测与改变灵根是不同的行动。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-lifespan",
+      "text": "境界提升通常延长自然寿命，常见估计为筑基两百余年、结丹四五百年、元婴约千年。实际年龄、伤损、消耗寿元的秘术及明确延寿手段影响个体状态；这些常见范围不能生成统一的必死日，也不能凭一句突破宣言恢复已耗寿元。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-stone-energy",
+      "text": "灵石可用于交易、修炼、施法补充与法阵供能。使用须有实物、可用剩余灵力和相合的手段；耗尽的灵石不能继续作为未消耗的库存使用。灵石分低阶、中阶、高阶及更高等级，并有属性差异。持有灵石不等于自动学会法术，也不能无成本复制灵石或瞬时获得任意境界。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-stone-exchange",
+      "text": "人界常见报价以一枚中阶灵石比一百枚低阶灵石，但实际兑换需要交易双方同意和真实库存。高阶灵石的稀缺、供能优势和当地需求会影响成交；报价不是自动兑换接口，不能把账面比值当成凭空生成另一档灵石的工序。",
+      "severity": "soft"
+    },
+    {
+      "id": "cultivation-foundation-bottleneck",
+      "text": "突破须有已达到的修为基础、相应功法、足够时间与真实辅助条件。筑基丹是越国常用的突破辅助和重要资源；丹药供给、宗门资格与招生年龄是具体社会制度，不能改成全世界唯一的修炼入口。服丹不保证突破，不服丹也不能只凭愿望宣称已突破；特殊路径须具备已经建立的依据与代价。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-five-elements",
+      "text": "化神修士冲击炼虚须解决五行合一，并具备修为、功法和突破条件。可通过相应兼修、改修或已成立的特殊手段达成；多属性修炼仍耗费时间与资源。满足五行条件、获得辅助丹药或读到秘术，都不是自动突破成功。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-substitute-roots",
+      "text": "丹灵根需要特制材料与秘术，并以施用者已有灵根和炼化能力为前提；它不能给无灵根凡人直接赋予修炼资格。器灵根须具备具体传承、器物、炼化过程与风险，不是普遍可购的免费天赋。未知方法保持未知，不因玩家填写背景而成立。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-spirit-tribulations",
+      "text": "灵界元婴与化神通常有三百年周期的小天劫，炼虚、合体与大乘通常有三千年周期的大天劫。计算以个人已有修炼和渡劫历史为依据，不能从玩家入场统一重置周期。劫难强度受个人阶段和历次经历影响，通常后一次更强；特殊干预可改变后续时机。天劫不是原著剧情清单，实际渡劫结果取决于当时手段、准备和世界条件。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-void-longevity",
+      "text": "炼虚以上在天地元气供应充分时可不受普通自然寿元上限制约，但仍会受伤、遭劫和死亡。不能据寿元长久获得无敌、无限法力、全知或免除资源需求；也不能为制造开场困难而无原因降低现有境界。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-ascension-residue",
+      "text": "下界飞升者与灵界土生居民的经历不同。异界气息、灭尘丹使用与渡劫记录按人物事实处理；不能因为人在灵界就一律要求服药或加入天渊卫。服药须有真实药物和过程；供药条件由对应组织制度与实际协商约束，不能免费自动获取。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-spiritual-perception",
+      "text": "神识探查需要实际使用已有能力，并受距离、禁制、隐匿器物、对方修为及专门手段限制。看见传音或察觉施法不等于听见内容、确认收件人或知道私念。强行突破遮蔽和暗中探查可能暴露自身行为；发现结果只进入实际感知者的认知，再由其行动传播。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-storage",
+      "text": "储物器具有真实容量、收取方法和内部物品。普通储物袋以灵力收取物品，不能存放存活生灵；灵兽袋等专门器具按自身已知功能处理。低阶袋通常没有认主保护，持有人可能取出其中物品，但取得袋子不抹除物品原有权属、债务或失窃后果。袋中未被取出或实际探明的东西，不因同场出现而公开。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-alchemy",
+      "text": "炼丹需要已获得的丹方知识、足够且合用的原料、能承受火候的丹炉、适用火源、时间与操作者。某些真火要求可由合适的地火设施满足，不能把“自己没有筑基真火”自动判为永远不能炼丹。药性、年份、份量、火候和手艺影响成败；失败也消耗材料。丹药效果按具体丹方和身体状态生效，驻颜不自动延寿或精进修为，连续服药也不能消除适性与瓶颈。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-crafting",
+      "text": "炼器与修补须具备对应手艺、合适材料、工具和可持续的火力、法力与工时。材料原有硬度、灵性和属性会影响可制之物；废料不能仅改名字就等同成品。长期工序逐段记录已消耗材料、在制品和进展，中断须按当时工序判断可否保全，不能一边保留原料一边获得成品。制成、掌握驱动方法与日后培炼是不同阶段。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-talismans",
+      "text": "绘符需要掌握该种符图、实际符材和丹砂、适用笔具、灵力控制与时间。外形相似、初现灵光或练成另一种符箓，不证明本符成功；失败可能废纸、泄灵或燃毁，材料仍被耗用。封存法术的符箓与辅助施展符术的符纸分开处理，后者还须使用者懂得相应法诀。使用效果、次数和消耗由该张符箓的已成立性质决定。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-talisman-treasure",
+      "text": "通常符宝由结丹以上修士将自身法宝的部分威能封入特制符纸；制作会耗损原宝威能和自身元气，不能无限连造。低阶修士可使用，但是否掌握凝炼方法影响可发挥的力量。符宝须记录剩余封存威能，使用会损耗，耗尽即失效；不能用普通回气把已耗威能补满。符宝、普通符箓和法宝分别记录，原宝的强弱不能简化为全部符宝同一个固定伤害值。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-natal-treasure",
+      "text": "本命法宝与主人存在经祭炼形成的联系，受损可能反噬主人。实际占有、社会所有权、灵性认主和可驱使程度是不同状态；拾取或夺取不自动完成洗炼、认主和掌握。原主人留下的禁制、神识和秘法依具体器物处理，特殊夺宝、破禁和重新祭炼必须具有已成立的手段与代价。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-transmission",
+      "text": "传送需要可工作的法阵、真实能源、有效连接和适合乘员的保护；被破坏、未修复或目的地不明的阵法不能直接当成通行路线。短距与远距的风险不同，大挪移令和传送符按各自保护范围及次数生效，不能凭知道地名生成坐标或瞬移。收费、通行许可、护送和管制是运营者的制度，须与法阵的物理可用性分开。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-possession",
+      "text": "普通人界夺舍须有可行动的元神、可承受的修士肉身及胜过对方反抗的力量。对无修为凡人的强行夺舍有肉身崩溃风险，已夺舍次数也构成约束。离体元神会耗损，藏入他人躯体可能遭同化，不能无代价无限换身。玄魂炼妖、特定族群天赋等特殊附身手段须另具传承、修为、形态和目标条件，不能仅说“用秘术”就取消限制。肉身破坏、元神被灭与人物死亡须分别查明。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-soul-restoration",
+      "text": "保住魂魄、养魂、夺舍、还魂与完整复生不是同一件事。还魂须有尚存且可用的魂魄、合适的新死躯体、对应秘术与法阵、场所和施术者，可能重损修为。养魂宝物不能自动消除所有神智损害；已彻底消散的元神不能因为存在还魂术就无依据恢复。具体成功、失败或反噬由现场条件决定，原著中曾经成功或失败不保证重演。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-nascent-soul",
+      "text": "元婴修士可在具备相应能力时使元婴离体；离体时本体、随身物、元婴和可用法力分别保留真实状态。特殊遁术有元气消耗与可被拘禁、围捕的条件，不是无限距离和必定成功的逃生。肉身被毁不自动等于元婴已灭，元婴未灭也不意味着原有肉身与全部能力立即复原。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-calendar-observation",
+      "text": "人界与灵界共享连续经过时间，但当地天象与昼夜不同。灵界的七曜在白昼炽热、入夜清冷，昼夜显著长于人界；洞窟、秘境、阵法遮蔽或当地天气可影响能否看见天象。初始时段只描述入场那一刻，后续光线必须按所在地的历法与经过时间判断，人物只能从其实际感知或已有钟历知识获知。",
+      "severity": "hard"
+    },
+    {
+      "id": "cultivation-calendar-calibration",
+      "text": "世界计时以秒连续累计。运行标定：人界一昼夜86400秒，灵界当地一昼夜345600秒；两界一时辰均为7200秒。人界T0为夜间21时；灵界T0为当地入夜后的第3个时辰。人界日出06时、日落18时，灵界昼夜各172800秒，按各自循环推算。普通约定的“明日、三日后”按签约当地昼夜；跨界合同须说明采用哪一地。修士岁龄、典籍中的年数和天劫年限采用统一人界年365日；一月作为时长用30个人界日。明确说“灵界本地月”才取30个灵界昼夜。计时不会自动使工序成功、资源到账或未来剧情发生。",
+      "severity": "hard"
+    }
+  ],
+  "provenance": {
+    "law:cultivation-stages": [
+      "foundation-stages"
+    ],
+    "law:cultivation-roots": [
+      "foundation-roots"
+    ],
+    "law:cultivation-lifespan": [
+      "foundation-lifespan"
+    ],
+    "law:cultivation-stone-energy": [
+      "foundation-stone-energy"
+    ],
+    "law:cultivation-stone-exchange": [
+      "foundation-stone-exchange"
+    ],
+    "law:cultivation-foundation-bottleneck": [
+      "foundation-foundation-bottleneck"
+    ],
+    "law:cultivation-five-elements": [
+      "foundation-five-elements"
+    ],
+    "law:cultivation-substitute-roots": [
+      "foundation-substitute-roots"
+    ],
+    "law:cultivation-spirit-tribulations": [
+      "foundation-spirit-tribulations"
+    ],
+    "law:cultivation-void-longevity": [
+      "foundation-void-longevity"
+    ],
+    "law:cultivation-ascension-residue": [
+      "foundation-ascension-residue"
+    ],
+    "law:cultivation-spiritual-perception": [
+      "foundation-spiritual-perception"
+    ],
+    "law:cultivation-storage": [
+      "foundation-storage"
+    ],
+    "law:cultivation-alchemy": [
+      "foundation-alchemy"
+    ],
+    "law:cultivation-crafting": [
+      "foundation-crafting"
+    ],
+    "law:cultivation-talismans": [
+      "foundation-talismans"
+    ],
+    "law:cultivation-talisman-treasure": [
+      "foundation-talisman-treasure"
+    ],
+    "law:cultivation-natal-treasure": [
+      "foundation-natal-treasure"
+    ],
+    "law:cultivation-transmission": [
+      "foundation-transmission"
+    ],
+    "law:cultivation-possession": [
+      "foundation-possession"
+    ],
+    "law:cultivation-soul-restoration": [
+      "foundation-soul-restoration"
+    ],
+    "law:cultivation-nascent-soul": [
+      "foundation-nascent-soul"
+    ],
+    "law:cultivation-calendar-observation": [
+      "foundation-calendar-observation"
+    ],
+    "law:cultivation-calendar-calibration": [
+      "foundation-calendar-calibration"
+    ]
+  }
+}
