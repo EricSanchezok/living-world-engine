@@ -1,0 +1,163 @@
+{
+  "formatVersion": 1,
+  "status": "local-optimization-verified-full-world-incomplete",
+  "implementationCommit": "840df619fc0b97ac09e39d351bae2a0f9e9724c4",
+  "mainBaseline": "16b97d40caa2b1ee1d935369d3e33a05ea43cb1f",
+  "producer": "direct-world@15",
+  "executionContractVersion": 15,
+  "directControlVersion": 6,
+  "instanceSchemaVersion": 36,
+  "checkFast": {
+    "passed": true,
+    "testFiles": 409,
+    "tests": 2771,
+    "existingLintWarnings": 3,
+    "promptAssets": 155,
+    "governanceGates": 6,
+    "evidence": {
+      "path": ".livingworld-cache/fanren-completion/optimized-review-final-check-fast.log",
+      "sha256": "4ad0dfeee3ed1410a914682275b9b91f5bb2c51c8beadf03293efec2e6dc37b9"
+    }
+  },
+  "finalPublicationProfileChecks": {
+    "passed": true,
+    "testFiles": 2,
+    "tests": 81,
+    "modelCalls": 0,
+    "evidence": {
+      "path": ".livingworld-cache/fanren-completion/publication-policy-final-tests.log",
+      "sha256": "de000b940b45a12c0b229b65599b876ebe7181cfc96c8544a646e5f5fd206302"
+    },
+    "scope": "撤回未合格的disabled试验后，对最终继承Profile行为重新验证；同批完整证据和native回退不变。"
+  },
+  "bundledWorldValidation": {
+    "world": "blackmarsh",
+    "passed": true,
+    "entities": 231,
+    "agents": 47
+  },
+  "sourcePlan": {
+    "batches": 398,
+    "validReused": 220,
+    "pending": 178,
+    "invalid": 0,
+    "modelCalls": 0,
+    "evidence": {
+      "path": ".livingworld-cache/fanren-completion/review-local-recovery-plan.log",
+      "sha256": "0b8816e5a64c84aecb416ceb0ad65637d64f0d24b3ec3e8a8bacd781633b56f7"
+    }
+  },
+  "fullBuild": {
+    "accepted": false,
+    "expectedCoverageRejection": true,
+    "evidence": {
+      "path": ".livingworld-cache/fanren-completion/full-build-final-gate.log",
+      "sha256": "69ebc0ea7498368fa5e67ba17b80b8e819cfaf0b5fcf621281ef2d7b6e894aae"
+    }
+  },
+  "startup": {
+    "dataRoot": ".livingworld-v36",
+    "routes": [
+      {
+        "route": "/",
+        "status": 200
+      },
+      {
+        "route": "/api/worlds",
+        "status": 200
+      },
+      {
+        "route": "/api/instances",
+        "status": 200
+      },
+      {
+        "route": "/worlds/fanren-opening-sample",
+        "status": 200
+      }
+    ],
+    "worlds": [
+      {
+        "id": "blackmarsh",
+        "version": "1.2.0",
+        "contentHash": "sha256:472f2fe0cdb30739ef4b26d37076e4cbad48c32a85519ec6d86d8239ba40bbcf"
+      },
+      {
+        "id": "fanren-opening-sample",
+        "version": "0.5.1",
+        "contentHash": "sha256:e90ad25ccbcf781ae0b4c4d3c654304711fd3b781e7839735c48d02e2a4f2998"
+      }
+    ],
+    "instanceCount": 0,
+    "deletedInstanceIds": [],
+    "savedDataPreserved": true,
+    "developmentCacheBackup": ".livingworld-cache/fanren-completion/next-before-v15-20261017T174040Z",
+    "modelTestsRunning": false,
+    "newGameplayStarted": false,
+    "serviceLeftRunning": true,
+    "browserVisualValidation": "not-performed-browser-control-disabled-in-Work-settings",
+    "evidence": [
+      {
+        "path": ".livingworld-cache/fanren-completion/startup-v15-health.json",
+        "sha256": "9b77c5150a482d7620cd5b79794388f203bcbb17e5a9a2811330c00018eee0e3"
+      },
+      {
+        "path": ".livingworld-cache/fanren-completion/startup-v15-doctor.json",
+        "sha256": "f9bf7a111a30068e83ee01b5e759485f2f0eb2f1c7ec0fa6dcac741fadf3e818"
+      }
+    ]
+  },
+  "newWorkAccounting": {
+    "httpRequests": 43,
+    "inputTokens": 1094513,
+    "outputTokens": 560649,
+    "inputPlusOutputTokens": 1655162,
+    "sourceReview": {
+      "calls": 12,
+      "input": 600804,
+      "output": 475624,
+      "report": "source-review-optimization.json"
+    },
+    "livePlay": {
+      "calls": 30,
+      "input": 479769,
+      "output": 84923,
+      "report": "../reviews/bounded-closing-runtime-v14.json"
+    },
+    "publicationExperiment": {
+      "calls": 1,
+      "input": 13940,
+      "output": 102,
+      "report": "publication-cost-validation.json"
+    },
+    "models": [
+      {
+        "model": "deepseek-flash",
+        "calls": 39,
+        "inputPlusOutputTokens": 1548152
+      },
+      {
+        "model": "jev-1.13.0",
+        "calls": 4,
+        "inputPlusOutputTokens": 107010
+      }
+    ],
+    "includesFailedAndRetriedCalls": true,
+    "reasoningAndCacheNotDoubleCounted": true,
+    "actualCurrencyCharge": null
+  },
+  "runtimeLiveAcceptance": false,
+  "fullWorldAcceptance": false,
+  "mergeAllowed": false,
+  "pushed": false,
+  "remainingCoverage": "../coverage/local-completion-gaps.json",
+  "implementationFiles": {
+    "scripts/world-authoring/adjudicate-fanren.ts": "e3905202be59abe1cc60bc4a8a1f6c22090c735d7344ab10fd0beb43f1e8b1f2",
+    "scripts/world-authoring/adjudication-syntax-recovery.ts": "9e7eada2c01f01344c4450ab9ed90371c86a64be506231de01564092853097a7",
+    "src/engine/direct/world.ts": "72e6c5be4b80d4d6a80614ad70950f31add3e09c1e3a49335455747b8b3e02b4",
+    "src/engine/direct/settlement.ts": "1b4f833028ee85b3006371ea3cc7af72549a7ec35baff5c9d466d6d9020ea32b",
+    "src/engine/direct/algorithm.ts": "9b7f6eab2b63dcf9ff2feb70e8b4775a9b43a29d3a9567c6d2ad5a05f3a1067a",
+    "src/server/narrative/publication.ts": "705c9aa371d7ce47028aee971a6a1f29cfeecd3221a4694d23a3ebff3ba30fea",
+    "src/engine/models/typesafe-adapter.ts": "df51ab30b8fe204a01a99d70ae7bcab4bb37ff401904c3f2b9effce16738b2cb",
+    "src/engine/models/decision-v2.ts": "76f7423b333f303ef7f9f1dbecde6bbab04a5bc452a80f3acfa325c61e0af8ea"
+  }
+}
