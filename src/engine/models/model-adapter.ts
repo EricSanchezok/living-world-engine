@@ -1,3 +1,4 @@
+import { withModelRequestDeadline } from "./model-request-deadline";
 import { observeResponseStream } from "./response-stream";
 import { generateText, streamText, jsonSchema, NoObjectGeneratedError, NoOutputGeneratedError, Output, tool } from "ai";
 import { JSONRepairError, jsonrepair } from "jsonrepair";
@@ -548,6 +549,16 @@ class ProtocolModelAdapter implements ModelProviderAdapter {
     contextJson: string,
     transportCorrelation?: RuntimeCorrelation,
   ): Promise<ModelAdapterResult> {
+    return withModelRequestDeadline(binding.profile.request_timeout_ms, request.abortSignal,
+      signal => this.generateWithinDeadline(binding, { ...request, abortSignal: signal }, contextJson, transportCorrelation));
+  }
+
+  private async generateWithinDeadline<T>(
+    binding: ResolvedModelBinding,
+    request: StructuredModelRequest<T>,
+    contextJson: string,
+    transportCorrelation?: RuntimeCorrelation,
+  ): Promise<ModelAdapterResult> {
     if (binding.accountId !== this.accountId) {
       throw new Error(`model adapter ${this.accountId} received binding for ${binding.accountId}`);
     }
@@ -588,7 +599,6 @@ class ProtocolModelAdapter implements ModelProviderAdapter {
       temperature: plan.inference.temperature ?? undefined,
       topP: plan.inference.topP ?? undefined,
       maxRetries: 0,
-      timeout: binding.profile.request_timeout_ms,
       abortSignal: request.abortSignal,
     } as const;
 

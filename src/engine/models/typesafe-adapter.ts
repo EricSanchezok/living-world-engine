@@ -1,3 +1,4 @@
+import { readModelResponseText, withModelRequestDeadline } from "./model-request-deadline";
 import { z } from "zod";
 import type { ModelAdapterResult, ModelProviderAdapter } from "./model-adapter";
 import type { ProviderAccountConfig, ResolvedModelInference } from "./model-catalog";
@@ -49,11 +50,16 @@ export class TypeSafeModelAdapter implements ModelProviderAdapter {
 
   async generate<T>(binding: ResolvedModelBinding, request: StructuredModelRequest<T>, contextJson: string,
     transportCorrelation?: RuntimeCorrelation): Promise<ModelAdapterResult> {
+    return withModelRequestDeadline(binding.profile.request_timeout_ms, request.abortSignal,
+      signal => this.generateWithinDeadline(binding, request, contextJson, signal, transportCorrelation));
+  }
+
+  private async generateWithinDeadline<T>(binding: ResolvedModelBinding, request: StructuredModelRequest<T>, contextJson: string,
+    signal: AbortSignal, transportCorrelation?: RuntimeCorrelation): Promise<ModelAdapterResult> {
     const description = this.describe(binding, request);
     const { batch, wire } = nativeContext(JSON.parse(contextJson));
     const url = `${this.account.base_url.replace(/\/$/u, "")}/systemone`;
     const body = JSON.stringify({ model: binding.modelId, ...wire });
-    const signal = AbortSignal.any([AbortSignal.timeout(binding.profile.request_timeout_ms), ...(request.abortSignal ? [request.abortSignal] : [])]);
     const observe = request.observer?.mode === "full" ? runtimeEventEmitter(request.observer) : undefined;
     observe?.({ event: "model.transport.request.raw", correlation: transportCorrelation,
       payload: { url, method: "POST", headers: { "content-type": "application/json", authorization: "[redacted]" }, body } });
@@ -61,7 +67,7 @@ export class TypeSafeModelAdapter implements ModelProviderAdapter {
       method: "POST", headers: { Authorization: `Bearer ${this.apiKey}`, "Content-Type": "application/json" },
       body, signal, redirect: "error",
     });
-    const text = await response.text();
+    const text = await readModelResponseText(response, signal);
     observe?.({ event: "model.transport.response.raw", correlation: transportCorrelation,
       payload: { url, status: response.status, headers: Object.fromEntries(response.headers), body: text } });
     if (!response.ok) {
