@@ -106,9 +106,10 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
       .filter(([, policy]) => policy.kind === "external").map(([id]) => id));
     const reactions = ready.filter(([id]) => foreground.has(id));
     const pendingPlayers = Object.entries(control.intents).filter(([id, intent]) => input.policyRoster[id]?.kind === "external" && intent.status === "ready" && intent.activeSubmission).map(([id]) => id);
-    const participantWork = Object.entries(control.intents).some(([id, intent]) =>
+    const participantWork = foreground.size > 0 || Object.entries(control.intents).some(([id, intent]) =>
       input.policyRoster[id]?.kind === "external" && intent.activeSubmission !== null);
-    // Interpret first: a clarification or completed request must not launch world activity.
+    // Active replies still hold the turn after the player's own action settles.
+    // Their next clock boundary must not admit unrelated ready agents.
     const owners = submissions.length ? submissions.map(action => action.agentId) : reactions.length ? reactions.map(([id]) => id)
       : pendingPlayers.length ? pendingPlayers : participantWork ? [] : ready.map(([id]) => id);
     const select = (ids: string[]) => Promise.allSettled(ids.map(async agentId => ({ agentId,

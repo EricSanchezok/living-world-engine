@@ -285,9 +285,22 @@ describe("direct world through the actual simulation entry", () => {
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
 
-  it("keeps a question delivered during independent NPC activity pending until it can respond", async () => {
+  it("settles an active participant reply without starting unrelated ready agents", async () => {
     const f = await fixture({ operation: "speak", target: "self", recipient: "broadcast", duration: "d0", resolvedDuration: "s60",
       keeperInitiative: true, creationEnabled: true, creationResponse: { utterance: "听见了，我忙完就答复。", manner: null } });
+    const source = f.world.initialState;
+    source.truth.entities.remote = { ...source.truth.entities.courtyard!, id: "remote", name: "远处" };
+    source.truth.entities.stranger = { ...source.truth.entities.keeper!, id: "stranger", name: "远处的人" };
+    source.truth.placements.remote = null;
+    source.truth.placements.stranger = "remote";
+    const stranger = structuredClone(source.agents.keeper!);
+    stranger.id = "stranger"; stranger.entityId = "stranger";
+    stranger.bindings.self!.canonicalEntityIds = ["stranger"];
+    stranger.character.goals = {};
+    source.agents.stranger = stranger;
+    f.roster.stranger = { kind: "model", agentId: "stranger", profiles: stranger.modelProfiles };
+    f.world.historyBaseHash = historyReplayBaseHash(source);
+    const engine = new SimulationEngine(f.world, f.algorithm);
     const respond = f.transport.getMockImplementation()!;
     f.transport.mockImplementation(async (...args) => {
       const wire = JSON.parse(String(args[1]?.body));
@@ -299,16 +312,22 @@ describe("direct world through the actual simulation entry", () => {
       body.answers.target = nativeAnswer(wire.questions.target, "self");
       return Response.json(body);
     });
-    await f.engine.bootstrapAgents();
-    const first = await f.engine.step(f.roster, f.request('用十秒说：“你好，能回答吗？”'));
+    await engine.bootstrapAgents();
+    const first = await engine.step(f.roster, f.request('用十秒说：“你好，能回答吗？”'));
     expect(first.state.truth.elapsedSeconds).toBe(10);
     const playerFrame = first.committed.directEvent.frames.find(frame => frame.actorId === "player")!;
     const busy = readDirectState(first.state.executionState!, first.state);
     expect(busy.intents.keeper).toMatchObject({ status: "active", causeActionId: playerFrame.id });
-    const second = await f.engine.step(f.roster, { expectedRevision: first.state.revision, trigger: "participant_action", externalActions: [] });
+    expect(busy.intents.player!.activeSubmission).toBeNull();
+    const calls = f.transport.mock.calls.length;
+    const second = await engine.step(f.roster, { expectedRevision: first.state.revision, trigger: "participant_action", externalActions: [] });
     expect(second.state.truth.elapsedSeconds).toBe(60);
+    const continued = f.transport.mock.calls.slice(calls).map(([, init]) => directDecisionContext(JSON.parse(String(init?.body))));
+    expect(continued.some(wire => (wire?.state as { perspective?: unknown })?.perspective)).toBe(false);
+    expect(second.committed.directEvent.frames.some(frame => frame.actorId === "stranger")).toBe(false);
+    expect(readDirectState(second.state.executionState!, second.state).intents.stranger!.status).toBe("ready");
     expect(readDirectState(second.state.executionState!, second.state).intents.keeper).toMatchObject({ status: "ready", causeActionId: playerFrame.id });
-    const third = await f.engine.step(f.roster, { expectedRevision: second.state.revision, trigger: "participant_action", externalActions: [] });
+    const third = await engine.step(f.roster, { expectedRevision: second.state.revision, trigger: "participant_action", externalActions: [] });
     expect(third.committed.directEvent.frames.find(frame => frame.actorId === "keeper")).toMatchObject({ kind: "speak", causeActionId: playerFrame.id });
     expect(replaySimulationState(third.state)).toEqual(third.state);
   });
@@ -858,6 +877,34 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.state.history[0]!.directEvent!.frames[0]!.kind).toBe("use");
     expect(readDirectState(result.state.executionState!, result.state).intents.player!.failure).toBeNull();
     expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it.each(["speak", "observe"])("validates nullable catalog fields only on the executed %s branch", async operation => {
+    const f = await fixture({ operation, recipient: "guard", speech: "input", creationEnabled: true,
+      creationResponse: { attempt: "征求检查同意", utterance: "可以先检查吗？", manner: null } });
+    const respond = f.transport.getMockImplementation()!;
+    let readings = 0;
+    f.transport.mockImplementation(async (...args) => {
+      const wire = JSON.parse(String(args[1]?.body));
+      const response = await respond(...args);
+      if (wire.questions || !directCreationContext(wire).playerReading) return response;
+      readings++;
+      const body = await response.json();
+      const reading = JSON.parse(body.choices[0].message.content);
+      reading.action[operation === "speak" ? "tool" : "observation_scope"] = null;
+      body.choices[0].message.content = JSON.stringify(reading);
+      return Response.json(body);
+    });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("可以先检查吗？"));
+    if (operation === "speak") {
+      expect(readings).toBe(1);
+      expect(result.committed.directEvent.frames[0]).toMatchObject({ kind: "speak", toolEntityId: null });
+      expect(result.committed.observations.find(packet => packet.observerId === "keeper")?.scene?.speech?.utterance).toBe("可以先检查吗？");
+    } else {
+      expect(result.state.truth).toEqual(f.world.initialState.truth);
+      expect(readDirectState(result.state.executionState!, result.state).intents.player!.status).toBe("failed");
+    }
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
   it("uses ordinary timing when an explicit duration belongs to a different clause", async () => {

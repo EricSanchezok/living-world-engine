@@ -22,7 +22,7 @@ export async function readAction(input: { decisions: DirectDecisions; agentId: s
   const fieldShape = Object.fromEntries(Object.entries(catalog).map(([id, criteria]) => {
     const instructions = questions[id]?.instructions as { field?: string } | undefined;
     // Validate only the selected branch below. An unused field cannot veto speech.
-    return [id, z.string().describe(`${instructions?.field ?? id} Allowed catalog keys: ${Object.keys(criteria).join(", ")}. Use none for an unused field.`).optional()];
+    return [id, z.string().nullable().describe(`${instructions?.field ?? id} Allowed catalog keys: ${Object.keys(criteria).join(", ")}. Use none for an unused field.`).optional()];
   }));
   const system = loadPromptAsset(autonomous ? "system/autonomous-action.md" : "system/player-reading.md");
   const userPrompt = autonomous
