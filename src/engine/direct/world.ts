@@ -123,7 +123,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       (/小时|hours?/iu.test(match[2]!) ? 3600 : /分钟|minutes?/iu.test(match[2]!) ? 60 : 1))),
   ])].filter(value => Number.isSafeInteger(value) && value > 0).sort((a, b) => a - b);
   if (!durations.length) durations.push(30);
-  const amounts = [...new Set([1, ...frames.flatMap(frame => literalNumbers(frame.proposal.rawText)), ...definition.laws.flatMap(law => literalNumbers(law.text))])].sort((a, b) => a - b);
+  const quantityUnits = orderedValues(state.truth.mechanics.quantities).map(resource => resource.unit);
+  const amounts = [...new Set([1, ...frames.flatMap(frame => literalNumbers(frame.proposal.rawText, quantityUnits)), ...definition.laws.flatMap(law => literalNumbers(law.text, quantityUnits))])].sort((a, b) => a - b);
   const resources = new Map<string, { definitionId: string; lawId: string; kind: "consume_quantity" | "produce_quantity" }>();
   const claims = new Map<string, { poolId: string; amount: number }>();
   const numericImpacts = new Map<string, { meterId: string; magnitudeQuestionId: string }>();

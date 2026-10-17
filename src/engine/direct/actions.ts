@@ -26,8 +26,16 @@ const actionLabels: Record<ActionKind, string> = { move: "前往", observe: "观
 function choice(field: string, criteria: Record<string, string | Record<string, JsonValue> | JsonValue[] | null>): DecisionQuestionV2 {
   return { type: "choice", version: "direct-action-3", instructions: { field }, criteria };
 }
-export function literalNumbers(text: string): number[] {
+export function literalNumbers(text: string, knownUnits: readonly string[] = []): number[] {
   const values = [...text.matchAll(/(?:^|[^\d.])(\d+(?:\.\d+)?)(?![\d.])/gu)].map(match => Number(match[1]));
+  // A resource unit can itself be a numeral, such as 两. Keep the complete
+  // numeral candidate and add the source span ending before that known unit;
+  // semantic choice still determines which amount the action authorizes.
+  for (const unit of new Set(knownUnits.filter(Boolean))) {
+    const escaped = unit.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
+    const pattern = new RegExp(`(\\d+(?:\\.\\d+)?|[零〇一二两三四五六七八九十百千万亿]+(?:点[零〇一二两三四五六七八九]+)?)\\s*${escaped}(?![\\d零〇一二两三四五六七八九十百千万亿点])`, "gu");
+    for (const match of text.matchAll(pattern)) values.push(...literalNumbers(match[1]!));
+  }
   const digits: Record<string, number> = { 零: 0, 〇: 0, 一: 1, 二: 2, 两: 2, 三: 3, 四: 4, 五: 5, 六: 6, 七: 7, 八: 8, 九: 9 };
   const units: Record<string, number> = { 十: 10, 百: 100, 千: 1000, 万: 10000, 亿: 100000000 };
   // Whole numeral runs are candidates; interpretation chooses their role and unit.
@@ -106,12 +114,13 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
   if (external?.discourse && (external.discourse.agentId !== agentId ||
     external.discourse.hash !== contentHash({ ...external.discourse, hash: "" }))) throw new Error("Player discourse does not belong to this perspective");
   const quotes = literalUtterances(text);
+  const quantityUnits = orderedValues(state.truth.mechanics.quantities).map(resource => resource.unit);
   const { knowledge, memory } = view.state as unknown as { knowledge: AgentPerspectiveView["knowledge"];
     memory: { summary: string; important: MemoryEpisode[] } };
   // The observation cursor marks processing progress, not the end of retained memory.
-  const observedNumbers = knowledge.evidence.flatMap(evidence => literalNumbers(evidence.description));
-  const rememberedNumbers = literalNumbers([memory.summary, ...memory.important.map(item => item.evidence.description)].join("\n"));
-  const amounts = [...new Set([1, ...literalNumbers(text), ...observedNumbers, ...rememberedNumbers, ...goals.flatMap(goal => literalNumbers(goal.description))])];
+  const observedNumbers = knowledge.evidence.flatMap(evidence => literalNumbers(evidence.description, quantityUnits));
+  const rememberedNumbers = literalNumbers([memory.summary, ...memory.important.map(item => item.evidence.description)].join("\n"), quantityUnits);
+  const amounts = [...new Set([1, ...literalNumbers(text, quantityUnits), ...observedNumbers, ...rememberedNumbers, ...goals.flatMap(goal => literalNumbers(goal.description, quantityUnits))])];
   const known = Object.entries(view.entities).map(([localId]) => [localId, agent.belief.localEntities[localId]!] as const);
   const perspective = view.state as { self: { location: unknown } };
   const targetCriteria = { none: "No separate target is needed. Movement needs the actual destination. Use current_location only for movement within that place; never substitute it for an unavailable destination. Discover an unknown destination through an authorized observation or search first.", ...Object.fromEntries(known.map(([id, entity]) => [id, {

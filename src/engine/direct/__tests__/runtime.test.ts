@@ -19,7 +19,7 @@ import { privateActionView } from "../views";
 import { contentHash } from "../../models/model-audit";
 import { CanonicalCommitter } from "../../runtime/canonical-committer";
 
-async function fixture(options: { operation?: string; target?: string; tool?: string; amount?: string; failKeeper?: boolean;
+async function fixture(options: { resourceUnit?: string; openingQuantity?: number; operation?: string; target?: string; tool?: string; amount?: string; failKeeper?: boolean;
   observationScope?: string; speech?: string; creationEnabled?: boolean; privateGateFact?: boolean; named?: boolean; keeperInitiative?: boolean;
   creationResponse?: unknown; creationResponses?: unknown[]; missingCoverage?: boolean; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
   recipient?: string; resolvedRecipient?: string; searchLocation?: string; transferAuthority?: string; transferExecution?: string;
@@ -100,6 +100,8 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
   });
   const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
   const player = world.initialState.agents.player!;
+  if (options.resourceUnit) world.initialState.truth.mechanics.quantities["spirit-stone"]!.unit = options.resourceUnit;
+  if (options.openingQuantity !== undefined) world.initialState.truth.quantities[quantityId(world.initialState.worldHash, "spirit-stone", "player")]!.amount = options.openingQuantity;
   if (options.inspectedStock !== undefined) {
     world.initialState.truth.mechanics.quantities["sealed-gold"] = { id: "sealed-gold", name: "封存金砂", unit: "袋", productionLawIds: [], consumptionLawIds: [] };
     inspectedQuantityId = quantityId(world.initialState.worldHash, "spirit-stone", "gate");
@@ -1802,6 +1804,21 @@ describe("direct world through the actual simulation entry", () => {
     expect(readings[0]!.catalog.amount).toHaveProperty("n7");
     expect(readings[0]!.catalog.amount).not.toHaveProperty("n113");
     expect(chosen.frame).toMatchObject({ kind: "transfer", targetEntityId: "player", amount: 7, quantityDefinitionId: "spirit-stone" });
+  });
+  it("transfers five units when a script's unit is also a Chinese numeral", async () => {
+    const f = await fixture({ operation: "transfer", target: "guard", amount: "n5", resourceUnit: "两", openingQuantity: 40 });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("从自己的钱中给守门人五两灵石"));
+    expect(result.state.truth.quantities[quantityId(result.state.worldHash, "spirit-stone", "player")]!.amount).toBe(35);
+    expect(result.state.truth.quantities[quantityId(result.state.worldHash, "spirit-stone", "keeper")]!.amount).toBe(25);
+    expect(result.state.history[0]!.directEvent!.frames[0]!.amount).toBe(5);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+    expect(f.transport).toHaveBeenCalledTimes(3);
+  });
+  it("offers unit-bounded amounts without reinterpreting a complete numeral's middle unit", () => {
+    expect(literalNumbers("五两银，三十两银", ["两"])).toEqual([5, 30, 52, 32]);
+    expect(literalNumbers("一万两千枚灵石", ["两", "枚"])).toEqual([12000]);
+    expect(literalNumbers("5箱与三份", ["箱", "份"])).toEqual([5, 3]);
   });
   it("extracts complete Chinese numerals regardless of the following classifier", () => {
     expect(literalNumbers("两节电池，十六瓶水，二十五张纸，两百零三根线，三点五升液体"))
