@@ -80,7 +80,7 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
       if (ownerId === settlement.frame.actorId && settlement.frame.kind === "reflect" && settlement.frame.utterance) {
         summary += `\n${settlement.frame.utterance}`;
       }
-      if (ownerId === settlement.frame.actorId && settlement.frame.kind === "observe" && settlement.frame.targetEntityId === agent.entityId &&
+      if (ownerId === settlement.frame.actorId && settlement.frame.kind === "observe" && settlement.frame.observationScope === "inventory" && settlement.frame.targetEntityId === agent.entityId &&
         ["succeeded", "partial"].includes(settlement.outcome.status)) {
         const inventory = Object.values(state.truth.quantities).filter(quantity => quantity.holderId === agent.entityId && quantity.amount > 0)
           .map(quantity => { const resource = state.truth.mechanics.quantities[quantity.definitionId]!; return `${quantity.amount}${resource.unit}${resource.name}`; });

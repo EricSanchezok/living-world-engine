@@ -103,12 +103,12 @@ describe("direct native decisions", () => {
     const repeated = { state: input.batch.state, questions: Object.fromEntries(Object.entries(input.batch.questions).map(([id, q]) =>
       [id, { type: q.type, instructions: { policy, task: q.instructions }, ...(q.criteria ? { criteria: q.criteria } : {}) }])) };
     const wire = decisionWireContextV2(validateDecisionBatchV2(input.batch));
-    expect(wire.state).toEqual({ observation: "The recipient has not replied.", decisionPolicy: policy });
+    expect(wire.state).toEqual({ policy, context: input.batch.state });
     expect(Object.keys(wire.questions)).toEqual(Object.keys(input.batch.questions));
     for (const [id, q] of Object.entries(wire.questions)) {
       expect(q.instructions.task).toEqual(input.batch.questions[id]!.instructions);
       expect(q.criteria).toEqual(input.batch.questions[id]!.criteria);
-      expect(q.instructions.policy).toBe("Apply the common decision policy in state.decisionPolicy.");
+      expect(q.instructions.rules).toBe("Apply state.policy. Task paths refer to fields inside state.context.");
     }
     expect(input.batch).toEqual(original);
     expect(Buffer.byteLength(JSON.stringify(wire))).toBeLessThan(Buffer.byteLength(JSON.stringify(repeated)) * 0.5);
@@ -123,16 +123,16 @@ describe("direct native decisions", () => {
     input.batch.state = { decisionPolicy: "An observed document title", _decisionPolicy: { privateBelief: "I am uncertain" } };
     input.batch.view.projectionHash = contentHash(input.batch.state);
     const wire = decisionWireContextV2(validateDecisionBatchV2(input.batch));
-    expect(wire.state).toEqual({ ...input.batch.state, __decisionPolicy: decisionPromptV2().system });
-    expect(wire.questions.consent!.instructions.policy).toBe("Apply the common decision policy in state.__decisionPolicy.");
+    expect(wire.state).toEqual({ policy: decisionPromptV2().system, context: input.batch.state });
+    expect(wire.questions.consent!.instructions.rules).toBe("Apply state.policy. Task paths refer to fields inside state.context.");
     expect(input.batch.state).not.toHaveProperty("__decisionPolicy");
   });
   it.each(["A scalar observation", ["Observed A", "Observed B"], null])("preserves non-record projection shape: %j", state => {
     const input = request(); input.batch.state = state;
     input.batch.view.projectionHash = contentHash(state);
     const wire = decisionWireContextV2(validateDecisionBatchV2(input.batch));
-    expect(wire.state).toEqual(state);
-    expect(wire.questions.consent!.instructions.policy).toBe(decisionPromptV2().system);
+    expect(wire.state).toEqual({ policy: decisionPromptV2().system, context: state });
+    expect(wire.questions.consent!.instructions.rules).toBe("Apply state.policy. Task paths refer to fields inside state.context.");
   });
   it.each([false, true])("pins a language-only inference override through native fallback: %s", async fallback => {
     const f = directTestProvider(wire => fallback && !wire.messages

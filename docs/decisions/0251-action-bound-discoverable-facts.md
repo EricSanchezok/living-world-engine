@@ -31,7 +31,7 @@ Public properties require no new schema but leak before examination. Adding the 
 
 ## Links
 
-- [Action-bound discovery contract](../specs/0194-action-bound-fact-discovery.md)
+- [Action-bound discovery contract](../specs/0197-action-bound-fact-discovery.md)
 - [Private information checks](0172-check-private-information-by-source-relation.md)
-- [Origin initialization](0245-origin-admission-as-an-authored-transaction.md)
+- [Origin initialization](0248-origin-admission-as-an-authored-transaction.md)
 - [Direct perception](../../src/engine/direct/perception.ts)

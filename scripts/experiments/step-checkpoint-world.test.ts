@@ -46,7 +46,7 @@ it("prepares and reloads a complete immutable world with only two declared timin
     expect(() => prepareCheckpointWorld({ sourceRoot, destination })).toThrow("frozen checkpoint world changed");
   } finally { rmSync(root, { recursive: true, force: true }); }
   // Repeated full-world imports verify frozen content, not a five-second I/O SLA.
-}, 15_000);
+}, 30_000);
 
 it("makes a wrong short selection a checkpoint while preserving brief completion and explicit duration", () => {
   const template = loadWorldTemplate(path.resolve("worlds/blackmarsh/world"));

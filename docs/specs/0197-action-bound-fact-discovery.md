@@ -5,7 +5,7 @@ Status: Implemented
 
 ## Intent
 
-Complete the user's approved [canonical-world contract](0192-canonical-world-and-participation-seeds.md): testing a previously unknown aptitude reveals its pre-existing state. The same mechanism supports inspecting concealed physical properties in other worlds. This implements the explicitly requested detection behavior; it does not grant access to another Agent's private cognition.
+Complete the user's approved [canonical-world contract](0195-canonical-world-and-participation-seeds.md): testing a previously unknown aptitude reveals its pre-existing state. The same mechanism supports inspecting concealed physical properties in other worlds. This implements the explicitly requested detection behavior; it does not grant access to another Agent's private cognition.
 
 ## Contract
 
@@ -23,6 +23,8 @@ Extend fact access validation and model transport, qualify discovery in world ad
 ## Verification
 
 Exercise the actual simulation boundary with hidden initial properties, valid discovery, unavailable methods, failed actions, private facts and witnesses. Assert canonical state preservation, exact actor beliefs, no automatic future updates and replay equality. Import the authored sample and execute a live aptitude inspection with the configured provider; retain Ledger evidence and distinguish state qualification from presentation quality. Run focused tests and `npm run check:fast` before the local checkpoint.
+
+The visibility decision distinguishes an actual examination (`examined`) from recalled or reported evidence (`retained`). Only the former admits a fresh finding. Repeating testimony cannot refresh a retained belief from changed canonical truth; speech can still accompany a genuine examination when the authored method permits it.
 
 ## Evidence
 

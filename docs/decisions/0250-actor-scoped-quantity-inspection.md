@@ -31,7 +31,7 @@ Fact copies fit the existing perception path but drift from transfers and produc
 
 ## Links
 
-- [Approved behavior](../specs/0193-quantity-inspection-and-final-action-state.md)
+- [Approved behavior](../specs/0196-quantity-inspection-and-final-action-state.md)
 - [Runtime implementation](../../src/engine/direct/world.ts)
 - [Simulation-entry regressions](../../src/engine/direct/__tests__/runtime.test.ts)
 - [Actual sample failures](../../worlds/fanren/authoring/validation/followup-live-runs.json)

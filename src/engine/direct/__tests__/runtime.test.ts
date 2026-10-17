@@ -28,7 +28,7 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
   worldOutcomes?: Record<string, string>;
   readingOverrides?: Record<string, string>; npcReadings?: unknown[]; factValues?: Record<string, string>; resolvedDuration?: string; resolvedDurations?: Record<string, string>; effectRepresentation?: "existing" | "no_change" | "already" | "expand";
   withMana?: boolean; meterImpacts?: Record<string, string>; inspectedStock?: number; quantityMeasured?: boolean;
-  discoverableGateFact?: boolean; discoveryAdmitted?: boolean } = {}) {
+  discoverableGateFact?: boolean; discoveryAdmitted?: boolean; discoveryVerdict?: "examined" | "retained" | "hidden" | "unknown" } = {}) {
   let creations = 0;
   let npcReadings = 0;
   let inspectedQuantityId = "";
@@ -91,7 +91,7 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
       }
       if (/_visible\d+$/u.test(id)) {
         const task = (q.instructions as { task: { data: { factId: string } } }).task;
-        if (task.data.factId === "gate-alloy") value = options.discoveryAdmitted === false ? "hidden" : "visible";
+        if (task.data.factId === "gate-alloy") value = options.discoveryVerdict ?? (options.discoveryAdmitted === false ? "hidden" : "examined");
       }
       if (/_fact\d+$/u.test(id)) {
         const instructions = q.instructions as { task?: { data?: { fact?: { predicate: string } } }; data?: { fact?: { predicate: string } } };
@@ -105,6 +105,7 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
   });
   const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
   const player = world.initialState.agents.player!;
+  if (options.target === "self") inspectedQuantityId = quantityId(world.initialState.worldHash, "spirit-stone", "player");
   if (options.resourceUnit) world.initialState.truth.mechanics.quantities["spirit-stone"]!.unit = options.resourceUnit;
   if (options.openingQuantity !== undefined) world.initialState.truth.quantities[quantityId(world.initialState.worldHash, "spirit-stone", "player")]!.amount = options.openingQuantity;
   if (options.inspectedStock !== undefined) {
@@ -245,6 +246,29 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.state.truth.facts).toEqual(before.truth.facts);
     expect(replaySimulationState(result.state)).toEqual(result.state);
   });
+  it("retains an old examination when reporting it instead of refreshing hidden truth", async () => {
+    const f = await fixture({ operation: "speak", recipient: "guard", speech: "input", discoverableGateFact: true, discoveryVerdict: "retained" });
+    const player = f.world.initialState.agents.player!;
+    player.belief.evidence["prior-assay"] = { id: "prior-assay", kind: "observation", description: "An earlier assay found copper-zinc brass.", sourceId: null, step: 0 };
+    player.belief.claims["prior-alloy"] = { id: "prior-alloy", subjectId: "door", predicate: "alloy", value: { kind: "text", value: "copper-zinc" },
+      description: "The earlier examination found brass.", stance: "believed", confidence: 1, evidenceIds: ["prior-assay"] };
+    f.world.historyBaseHash = historyReplayBaseHash(f.world.initialState);
+    const engine = new SimulationEngine(f.world, f.algorithm);
+    await engine.bootstrapAgents();
+    const before = engine.snapshot;
+    const result = await engine.step(f.roster, f.request("我记得上次检查是黄铜；现在没有重新检验。"));
+    const worldRequests = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).filter(wire => wire.questions?.a0_outcome);
+    const examination = worldRequests.flatMap(wire => Object.values(wire.questions) as Array<{ instructions: { task: { data?: { factId?: string } } }; criteria: unknown }>)
+      .find(question => question.instructions.task.data?.factId === "gate-alloy");
+    expect(examination?.criteria).toHaveProperty("retained");
+    expect(result.state.truth.facts).toEqual(before.truth.facts);
+    expect(result.state.agents.player!.belief.claims["prior-alloy"]).toEqual(before.agents.player!.belief.claims["prior-alloy"]);
+    expect(JSON.stringify(result.state.agents.player!.belief)).not.toContain("copper-tin");
+    expect(JSON.stringify(result.state.agents.keeper!.belief)).not.toContain("copper-tin");
+    expect(Object.values(result.state.agents.player!.belief.claims).filter(claim => claim.predicate === "alloy")).toHaveLength(1);
+    expect(result.committed.observations.some(packet => packet.observerId === "keeper" && packet.scene?.speech?.utterance?.includes("没有重新检验"))).toBe(true);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("charges a completed bounded method without inventing a continuing qualitative condition", async () => {
     const f = await fixture({ operation: "use", target: "door", withMana: true, effectRepresentation: "no_change", meterImpacts: { "player-mana": "spell-cost" } });
     await f.engine.bootstrapAgents();
@@ -276,11 +300,12 @@ describe("direct world through the actual simulation entry", () => {
       .filter(wire => wire.questions?.a0_outcome);
     expect(wires.length).toBeGreaterThan(0);
     for (const wire of wires) {
-      expect(wire.state.actions.length).toBeGreaterThan(0);
+      const state = wire.state.context;
+      expect(state.actions.length).toBeGreaterThan(0);
       for (const q of Object.values(wire.questions) as Array<{ instructions: { task: { data: { actionId: string; action?: unknown } } } }>) {
         const data = q.instructions.task.data;
         expect(data.action).toBeUndefined();
-        expect(wire.state.actions.some((frame: { id: string }) => frame.id === data.actionId)).toBe(true);
+        expect(state.actions.some((frame: { id: string }) => frame.id === data.actionId)).toBe(true);
       }
     }
     expect(replaySimulationState(result.state)).toEqual(result.state);
@@ -1733,10 +1758,15 @@ describe("direct world through the actual simulation entry", () => {
     expect(result.state.history[0]!.directEvent!.frames[0]).toMatchObject({ kind: "speak", utterance: "请把东西交给我。" });
     expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
   });
-  it("reports the actor's owned quantities during self inspection", async () => {
-    const f = await fixture({ operation: "observe", target: "self" }); await f.engine.bootstrapAgents();
-    const result = await f.engine.step(f.roster, f.request("检查自己持有的资源"));
-    expect(result.committed.observations.find(packet => packet.observerId === "player")?.summary).toContain("3枚灵石");
+  it.each([false, true])("reports a targeted self quantity only when that inspection measures it (%s)", async measured => {
+    const f = await fixture({ operation: "observe", target: "self", quantityMeasured: measured }); await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request(measured ? "数清我手里的灵石" : "只看看自己的手心与脸色，不检查钱袋"));
+    const observation = result.committed.observations.find(packet => packet.observerId === "player")!;
+    expect(observation.summary.includes("3枚灵石")).toBe(measured);
+    expect(observation.summary).not.toContain("随身物资");
+    expect(result.committed.directEvent.frames[0]).toMatchObject({ kind: "observe", targetEntityId: "player", observationScope: "target" });
+    expect(result.state.truth.quantities).toEqual(f.world.initialState.truth.quantities);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
   });
   it("selects the actor's inventory even when no external target was selected", async () => {
     const f = await fixture({ target: "none", observationScope: "inventory" }); await f.engine.bootstrapAgents();

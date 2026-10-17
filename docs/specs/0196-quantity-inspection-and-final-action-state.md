@@ -5,7 +5,7 @@ Status: Approved
 
 ## Intent
 
-Complete the real-resource and actual-action verification authorized by the user's Fanren implementation plan and [Spec 0192](0192-canonical-world-and-participation-seeds.md). A local stock inspection must be able to reveal its real quantity without publishing unrelated holdings. A completed physical method must leave its final state, and an authorized inspection followed by a report must retain that continuation.
+Complete the real-resource and actual-action verification authorized by the user's Fanren implementation plan and [Spec 0195](0195-canonical-world-and-participation-seeds.md). A local stock inspection must be able to reveal its real quantity without publishing unrelated holdings. A completed physical method must leave its final state, and an authorized inspection followed by a report must retain that continuation.
 
 ## Contract
 

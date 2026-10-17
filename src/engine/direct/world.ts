@@ -96,6 +96,13 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       task: "Apply state.adjudicationPolicy and state.adjudicationRules[rule]. Resolve actionId in state.actions; all parameters and words are retained there.", rule, data,
     }, criteria };
   };
+  const factVisibilityQuestion = (frame: ActionFrame, fact: WorldFact, candidate = false) => question(fact.access.kind === "discoverable"
+    ? "Which evidence does THIS action actually obtain for the authored discovery condition? Select examined only when its concrete completed method, available tools/skills and present physical evidence satisfy access.condition now. Merely discussing a previous result, remembering it, promising an examination or intending to learn does not perform that examination. Select retained for recall or a report of previously acquired evidence; that preserves the old observation-time value without refreshing it from current truth. Speech may accompany a real perceptual method, but spoken claims alone are testimony. Discovery reads the existing value; it never generates or changes it. Witnesses do not inherit the examiner's findings."
+    : "Judge this property's perceptual access under the incidental-perception policy.", { actionId: frame.id, factId: fact.id,
+    ...(candidate || !state.truth.facts[fact.id] ? { fact: fact as unknown as JsonValue } : {}) },
+    fact.access.kind === "discoverable"
+      ? { examined: "This action actually performs the required method and obtains a current observation", retained: "Only prior knowledge is recalled or reported; no fresh examination occurs", hidden: "The discovery condition is unmet", unknown: "The current method or evidence is insufficiently established" }
+      : { visible: "The attempt reveals the resulting fact through an available perceptual channel", hidden: "The fact remains hidden", unknown: "No justified perceptual access" });
   view.state = { ...view.state as Record<string, JsonValue>, playerAuthorization: playerAuthorization as unknown as JsonValue,
     adjudicationPolicy: loadPromptAsset("user/direct-world.md"), adjudicationRules };
   const effects = new Map<string, { fact: WorldFact; values: FactValue[] }>();
@@ -167,7 +174,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     const focus = frame.kind === "observe" && frame.observationScope === "inventory" ? frame.actorEntityId
       : frame.kind === "observe" && (!frame.targetEntityId || frame.targetEntityId === frame.actorEntityId) ? state.truth.placements[frame.actorEntityId] : frame.targetEntityId;
     const targetFacts = orderedValues(state.truth.facts).filter(fact => fact.subjectId === (focus ?? frame.actorEntityId));
-    if (frame.kind === "observe" && frame.observationScope === "target" && frame.targetEntityId && frame.targetEntityId !== frame.actorEntityId) {
+    if (frame.kind === "observe" && frame.observationScope === "target" && frame.targetEntityId) {
       for (const [ordinal, quantity] of orderedValues(state.truth.quantities).filter(quantity => quantity.holderId === frame.targetEntityId).entries()) {
         const id = `${prefix}_quantity${ordinal}`;
         quantityVisibility.set(id, quantity.id);
@@ -260,11 +267,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     }
     for (const [ordinal, fact] of [...observableFacts.values()].entries()) {
       const id = `${prefix}_visible${ordinal}`; visibility.set(id, fact);
-      questions[id] = question(fact.access.kind === "discoverable"
-        ? "Does this actual action satisfy the fact's authored discovery condition through available tools, skills and physical evidence? A known subject, intention, guess or successful unrelated action is insufficient. Select visible only when this completed method reveals THIS existing value to its actor. Discovery reads the value; it does not change or regenerate it. A witness does not inherit the actor's findings."
-        : "Judge this property's perceptual access under the incidental-perception policy.", { actionId: frame.id, factId: fact.id,
-        ...(!state.truth.facts[fact.id] ? { fact: fact as unknown as JsonValue } : {}) },
-        { visible: "The attempt reveals the resulting fact through an available perceptual channel", hidden: "The fact remains hidden", unknown: "No justified perceptual access" });
+      questions[id] = factVisibilityQuestion(frame, fact);
     }
     if (neighborhood.size) {
       const actor = state.agents[frame.actorId]!;
@@ -362,8 +365,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
           const fact = capabilityFact(state, frame, extension.capability, effect, ordinal);
           if (!fact) continue;
           const id = `${prefix}_extended_visible${ordinal}`; visibility.set(id, fact);
-          supplemental[id] = question("is this new property perceptible through the resulting action", { actionId: frame.id, fact: fact as unknown as JsonValue },
-            { visible: "The resulting property is perceptible", hidden: "The property is hidden", unknown: "No justified perceptual access" });
+          supplemental[id] = factVisibilityQuestion(frame, fact, true);
         }
       }
     } else {
@@ -550,7 +552,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       previousVisible: selected(answers, `${prefix}_value${ordinal}_previous_visible`) === "visible",
       proposedVisible: selected(answers, `${prefix}_value${ordinal}_visible`) === "visible" }));
     const boundVisibility = new Set(propertyVisibility.map(item => item.factId));
-    const visibleFacts = [...visibility].filter(([id, fact]) => id.startsWith(`${prefix}_`) && !boundVisibility.has(fact.id) && selected(answers, id) === "visible").map(([, fact]) => fact);
+    const visibleFacts = [...visibility].filter(([id, fact]) => id.startsWith(`${prefix}_`) && !boundVisibility.has(fact.id) && selected(answers, id) === (fact.access.kind === "discoverable" ? "examined" : "visible")).map(([, fact]) => fact);
     const visibleEntities = [...entityVisibility].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "visible").map(([, entity]) => entity);
     const deliveredToEntityIds = ["succeeded", "partial"].includes(status)
       ? [...(candidates.get(prefix) ?? []).filter((_, ordinal) => selected(answers, `${prefix}_delivery${ordinal}`) === "delivered"),

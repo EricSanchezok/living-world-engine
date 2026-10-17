@@ -36,7 +36,7 @@ The client selects an Origin and supplies bounded cosmetic text and current moti
 
 ## Links
 
-- [Approved world and participation scope](../specs/0192-canonical-world-and-participation-seeds.md)
+- [Approved world and participation scope](../specs/0195-canonical-world-and-participation-seeds.md)
 - [Canonical committer](../../src/engine/runtime/canonical-committer.ts)
 - [Admission impact proof](../../src/engine/runtime/admission-impact.ts)
 - [Script format](../game-design/script-format.md)
