@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
-  "generatedAt": "2026-10-17T16:55:58.809592+00:00",
+  "generatedAt": "2026-10-17T17:15:18.605320+00:00",
   "status": "transport-validated-live-calibration-editorial-work-in-progress",
-  "scope": "正文独立复核的传输、复用、修复与两批实测；不代表全域剧本验收。",
+  "scope": "正文独立复核的传输、复用、修复、两批校准与后续六批受限续跑；不代表全域剧本验收。",
   "offline": {
     "networkGenerationCalls": 0,
     "acceptedReviewReuse": {
@@ -127,7 +127,7 @@
   "limitations": [
     "字节数与可定位的修复行数不是实测token或费用节省率。",
     "两批内容不同；high两次共221277 token，low一次95624 token，不构成同一任务的受控质量或成本比较。",
-    "high批次输出截断后完整重试；本次两批尚未给出真实局部修复成功率。",
+    "续跑中两次局部修复均通过完整源校验，输出合计1160 token；样本量不足以推断总体成功率。0215格式损坏当时走完整重写，失败初稿与重写费用均已计入。",
     "模型引用和结构正确不保证语义正确；编辑发现的范围、身份与时间问题另存修订，不改写原始模型输出。",
     "正文、开篇定位、地域落点、资源关系与真实游玩仍有待办；不得将这些数据升级为完整世界批准。"
   ],
@@ -152,5 +152,238 @@
       "distinctRangesReadByRoot": 76,
       "runtimeApproval": false
     }
-  }
+  },
+  "liveWaves": [
+    {
+      "batches": [
+        "batch-0207",
+        "batch-0209",
+        "batch-0212",
+        "batch-0213",
+        "batch-0214",
+        "batch-0215"
+      ],
+      "model": "deepseek-flash",
+      "effort": "low",
+      "generationCalls": 9,
+      "tokens": {
+        "input": 437924,
+        "output": 321603,
+        "reasoning": 154277,
+        "cacheRead": 140800
+      },
+      "totalInputPlusOutput": 759527,
+      "executionMsSum": 1319724,
+      "durationNote": "并发调用耗时之和，不是墙钟耗时。0215的两次调用均计入。",
+      "firstDraftAcceptedBatches": 3,
+      "targetedRepairs": 2,
+      "fullFallbackRepairs": 1,
+      "finalValidatedBatches": 6,
+      "targetedRepairTokens": {
+        "input": 92277,
+        "output": 1160,
+        "reasoning": 982,
+        "cacheRead": 88320
+      },
+      "failedDraftTokens": {
+        "input": 138540,
+        "output": 153641,
+        "reasoning": 81180,
+        "cacheRead": 4608
+      },
+      "calls": [
+        {
+          "batchId": "batch-0207",
+          "attemptIndex": 0,
+          "requestHash": "cebb236bab7e5fbc93470718da1c763df5bef10a25081e1e98116845cc231390",
+          "responseHash": "0a4f11a02206456622dfd7938a7bef3780f881307386343228fc26c4efd4e994",
+          "auditHash": "33eef7add53359751b522b6305c055a6fa29636cbee2c4da4d53129404ff7534",
+          "tokenUsage": {
+            "input": 45329,
+            "output": 42383,
+            "reasoning": 18874,
+            "cacheRead": 1536,
+            "cacheWrite": null
+          },
+          "gatewayOutputDisposition": "accepted",
+          "fullValidatorAccepted": true,
+          "failureCostCategory": null,
+          "mode": "complete-review"
+        },
+        {
+          "batchId": "batch-0209",
+          "attemptIndex": 0,
+          "requestHash": "b3ee51051d35aba9f0de95a7d20f89a452c1c8c430abe0d2d2cd09b4921716f6",
+          "responseHash": "39d6681f95235f896d71707c1e022d382dc4818fb2408b263830d8218cd8e9af",
+          "auditHash": "a6f38dd7853061d96c358f8f557e223c0558ffe4d7f9aab84527be7b519f2a9c",
+          "tokenUsage": {
+            "input": 45813,
+            "output": 43026,
+            "reasoning": 20172,
+            "cacheRead": 1536,
+            "cacheWrite": null
+          },
+          "gatewayOutputDisposition": "accepted",
+          "fullValidatorAccepted": false,
+          "failureCostCategory": "full-validator-rejected-draft",
+          "mode": "complete-review"
+        },
+        {
+          "batchId": "batch-0209",
+          "attemptIndex": 1,
+          "requestHash": "f7acc7f011b9e0c66499aaf58551b6a85d1e2324fee079c77afa56943339c7f6",
+          "responseHash": "c68ed96c3bd36f091f4367dae635dd4c26cc2aa47176114a523e62caa3971907",
+          "auditHash": "ab4d5a98ab409d001d02154df5720625b2cde05321a076fbe7b5871d2ec8e275",
+          "tokenUsage": {
+            "input": 45246,
+            "output": 772,
+            "reasoning": 691,
+            "cacheRead": 43392,
+            "cacheWrite": null
+          },
+          "gatewayOutputDisposition": "accepted",
+          "fullValidatorAccepted": true,
+          "failureCostCategory": null,
+          "mode": "targeted-repair"
+        },
+        {
+          "batchId": "batch-0212",
+          "attemptIndex": 0,
+          "requestHash": "a08ef6ed57fb20888ba09d66b93c0caa63a8a9a880c1356fe2ae6c016605be0b",
+          "responseHash": "22adaf9b731b2da95d1bf143406ea1d3bd035dc31fa25dab02646727c9362be0",
+          "auditHash": "b60a6385d51bc250810141526e4dc0080cec56cbc93e5e219212d08ec7fe4207",
+          "tokenUsage": {
+            "input": 42077,
+            "output": 43678,
+            "reasoning": 22656,
+            "cacheRead": 1536,
+            "cacheWrite": null
+          },
+          "gatewayOutputDisposition": "accepted",
+          "fullValidatorAccepted": true,
+          "failureCostCategory": null,
+          "mode": "complete-review"
+        },
+        {
+          "batchId": "batch-0213",
+          "attemptIndex": 0,
+          "requestHash": "3a0852a8a1607c0e453a551b1e14e27e05fea54f58f1c0d3597aeb54d451a173",
+          "responseHash": "ea7c3e3b45d8fe70b7f48a4c8ec6012b7ebc4cf1501bb3b47491ba6eac554fb1",
+          "auditHash": "cf1ac2fcbca0e28f9373842ba926261617583d79134da2362807082781b58f8a",
+          "tokenUsage": {
+            "input": 47375,
+            "output": 55376,
+            "reasoning": 30363,
+            "cacheRead": 1536,
+            "cacheWrite": null
+          },
+          "gatewayOutputDisposition": "rejected",
+          "fullValidatorAccepted": false,
+          "failureCostCategory": "rejected-complete-draft",
+          "mode": "complete-review"
+        },
+        {
+          "batchId": "batch-0213",
+          "attemptIndex": 1,
+          "requestHash": "d8dabdaa9b670b2155ab1bdd60bb32ab5240f0710ff23909ef1fb55a8f541b09",
+          "responseHash": "7ba1f2552a68d938ea26140c0bf139c1efab6881a58c339769a0445fe85e86ca",
+          "auditHash": "586234944e6ccda4ab122274c297f89dc53251a9ed4009b1b1cef9fe867926cd",
+          "tokenUsage": {
+            "input": 47031,
+            "output": 388,
+            "reasoning": 291,
+            "cacheRead": 44928,
+            "cacheWrite": null
+          },
+          "gatewayOutputDisposition": "accepted",
+          "fullValidatorAccepted": true,
+          "failureCostCategory": null,
+          "mode": "targeted-repair"
+        },
+        {
+          "batchId": "batch-0214",
+          "attemptIndex": 0,
+          "requestHash": "602dac8115d016e5d1d05c0d05c9790543ac7b30ff893d8d6e9426f09b128e59",
+          "responseHash": "b72f03e117f5eb2617ac584559b9c7a381a0259fe5a4d7ae086c8efdcf6a32ef",
+          "auditHash": "f9fc2b6c59749f813be99e4e4008f0ecd62205506eddf893bd293d3db38317b0",
+          "tokenUsage": {
+            "input": 44377,
+            "output": 49047,
+            "reasoning": 23642,
+            "cacheRead": 1536,
+            "cacheWrite": null
+          },
+          "gatewayOutputDisposition": "accepted",
+          "fullValidatorAccepted": true,
+          "failureCostCategory": null,
+          "mode": "complete-review"
+        },
+        {
+          "batchId": "batch-0215",
+          "attemptIndex": 0,
+          "requestHash": "359d2f78a26e94bc3f8044606efb6eab19cf871e5c2752295e6c491c960b7db3",
+          "responseHash": "1fc2d728b46c815a6a3012ff9218d82e1720de2aa14d0c682e110215d89286f3",
+          "auditHash": "ef275802d8cb51228217f1e11554a2d6e5eb08b7dfd794936fb2054609e8bff9",
+          "tokenUsage": {
+            "input": 45352,
+            "output": 55239,
+            "reasoning": 30645,
+            "cacheRead": 1536,
+            "cacheWrite": null
+          },
+          "gatewayOutputDisposition": "rejected",
+          "fullValidatorAccepted": false,
+          "failureCostCategory": "rejected-complete-draft",
+          "mode": "complete-review"
+        },
+        {
+          "batchId": "batch-0215",
+          "attemptIndex": 1,
+          "requestHash": "007ed06158d684b166ecb5a384b108305cda388a2cff56d288b1de0c3f84ef25",
+          "responseHash": "75b12b15724c04fbad3b4d50437ac17312407dfbe2100fe59501f2a2f788693e",
+          "auditHash": "9cad0f5955a40093a3d712c9a184c0d7b9c520e91d021130db579f967496f90c",
+          "tokenUsage": {
+            "input": 75324,
+            "output": 31694,
+            "reasoning": 6943,
+            "cacheRead": 43264,
+            "cacheWrite": null
+          },
+          "gatewayOutputDisposition": "accepted",
+          "fullValidatorAccepted": true,
+          "failureCostCategory": null,
+          "mode": "complete-review"
+        }
+      ],
+      "reports": [
+        {
+          "report": "../adjudications/batch-0207.json",
+          "fileSha256": "1444ca9410eb8225a607d64360ea94a831e52fa35dc55078bc7bbc9b4119ddc8"
+        },
+        {
+          "report": "../adjudications/batch-0209.json",
+          "fileSha256": "05fc7e6eed893a81acd73044543432dbd559c42f00591c3f1632b28c199ea6e3"
+        },
+        {
+          "report": "../adjudications/batch-0212.json",
+          "fileSha256": "feb87a3a898ba1c7026ced074af29d5ce188ea91645796dc03f24573aa14e289"
+        },
+        {
+          "report": "../adjudications/batch-0213.json",
+          "fileSha256": "ffd373308895c4b2bb61428e9a9f6f2e98ce792884c12c36797dc941aee198df"
+        },
+        {
+          "report": "../adjudications/batch-0214.json",
+          "fileSha256": "ed2e20c2cc7c5db4140b91bde761578ab4049eeef8fc597ef3e57891f63fe9e2"
+        },
+        {
+          "report": "../adjudications/batch-0215.json",
+          "fileSha256": "6cc70e759b6980863d560979ff51e99ebdfacbf3e1f2a25c9b9638d3557a3385"
+        }
+      ],
+      "accountingFileSha256": "e30cc282f58146927ce56f336651490f44ff6715a4059af9188208fc5fb9f182",
+      "status": "source-review-evidence-needs-editorial-disposition",
+      "approvedForRuntime": false
+    }
+  ]
 }

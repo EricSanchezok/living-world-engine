@@ -3,28 +3,43 @@
   "status": "remaining-full-scope-gates-not-phase-completion",
   "paidCalls": 0,
   "sourceAdjudication": {
-    "pendingBatches": 186,
-    "coveredBatches": 212,
+    "pendingBatches": 178,
+    "coveredBatches": 220,
     "unsupported": 58,
-    "ambiguous": 300,
+    "ambiguous": 361,
     "residual": {
-      "unresolvedAliases": 146,
-      "unresolvedIssues": 1508,
-      "unresolvedIdentities": 385,
-      "omissions": 1339
+      "unresolvedAliases": 160,
+      "unresolvedIssues": 1576,
+      "unresolvedIdentities": 420,
+      "omissions": 1401
     },
-    "note": "这些类别可能重叠，不相加为独立工作数；模型supported也不自动批准开篇事实。"
+    "note": "这些类别可能重叠，不相加为独立工作数；模型supported也不自动批准开篇事实。",
+    "source": "source-status.json#/adjudication"
   },
   "candidateInventory": {
     "allExtractedCandidates": 53818,
     "regionalQueueMemberships": 29257,
     "uniqueCandidatesInRegionalQueues": 24378,
     "unassignedCandidates": 29440,
-    "strictlyDisposedMemberships": 771,
-    "uniqueStrictDisposedCandidates": 628,
+    "strictlyDisposedMemberships": 789,
+    "uniqueStrictDisposedCandidates": 646,
     "exactCrossRegionReuseProgressMemberships": 129,
     "existingOtherClassificationRecords": 1090,
-    "note": "跨地区复用是已有候选的重复归属处置，不增加独立事实数；候选断言不能等同需要新增人物。"
+    "note": "跨地区复用是已有候选的重复归属处置，不增加独立事实数；候选断言不能等同需要新增人物。",
+    "strictDispositionSources": [
+      "../regions/associated-yinming/candidate-dispositions.json",
+      "../regions/human-boundless/candidate-dispositions.json",
+      "../regions/human-dajin/candidate-dispositions.json",
+      "../regions/human-far-seas/candidate-dispositions.json",
+      "../regions/human-inner-star/candidate-dispositions.json",
+      "../regions/human-north/candidate-dispositions.json",
+      "../regions/human-south-kunwu/candidate-dispositions.json",
+      "../regions/human-ten-thousand/candidate-dispositions.json",
+      "../regions/human-void-hall/candidate-dispositions.json",
+      "../regions/human-yue/candidate-dispositions.json",
+      "../regions/spirit-blood/candidate-dispositions.json"
+    ],
+    "regionalQueueSource": "regional-queues/status.json"
   },
   "sourceEvidenceAbsentIssueIds": [
     "batch-0113-issue-0014",
@@ -36,7 +51,7 @@
   ],
   "nonMechanicalDecisions": [
     "未分区候选需要按正文语义归属、去重或归档；不能仅换检索词批量批准。",
-    "大晋1114项当前pending，以及其他区域候选中的身份、存亡、主体和时间适用性，需要具体编辑决定。",
+    "大晋及其他区域候选中的身份、存亡、主体和时间适用性，需要具体编辑决定；大晋数量见 regionalEditorialStatus，不由索引重建自动审定。",
     "1090条旧编辑分类需要核对原来的判断范围、源锚点及目标绑定；不是改字段即可宣称严格审定。",
     "无引文的问题项保留待审；不能伪造原文锚点满足合同。",
     "当前模块及其候选队列不封闭全域制作清单；完整范围、资源关系、出身、规模和实际游玩仍分别验收。"
@@ -45,7 +60,15 @@
     "来源和编辑阅读指纹重建；read/reviewed未批量提升。",
     "过期地区制作阶段按当前模块/审签/锚点实证同步。",
     "172条相同候选和报告指纹复用已记录，1条地区专属判断没有照搬。",
-    "北域449项与万妖谷95项当前队列均有严格处置；大晋已采用断言对应138项已处理。"
+    "北域449项与万妖谷95项当前队列均有严格处置；大晋当前已处置数量及来源见 regionalEditorialStatus。"
   ],
-  "approvedForRuntime": false
+  "approvedForRuntime": false,
+  "regionalEditorialStatus": {
+    "human-dajin": {
+      "completedCandidates": 156,
+      "pendingCandidates": 1096,
+      "totalCandidates": 1252,
+      "source": "../regions/human-dajin/candidate-dispositions.json"
+    }
+  }
 }
