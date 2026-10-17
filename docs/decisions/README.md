@@ -150,3 +150,4 @@ An optional adjacent `Class:` line uses `architecture`, `process`, `testing`, `f
 - [0243 — Grouped perspective reading with auxiliary relationships](0243-grouped-perspective-reading.md)
 - [0248 — Authored world lives through Agent takeover](0248-authored-world-lives-through-agent-takeover.md)
 - [0249 — Night City world adjudication profile](0249-night-city-world-adjudication-profile.md)
+- [0252 — Bound validated local read caches by size](0252-bound-validated-local-read-caches-by-size.md)

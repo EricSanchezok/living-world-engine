@@ -64,10 +64,10 @@ export interface WorldDefinition extends WorldRuntimeContract {
 }
 
 export function toWorldRuntimeContract(definition: WorldDefinition): WorldRuntimeContract {
-  const contract = structuredClone(definition);
-  delete (contract as Partial<WorldDefinition>).initialState;
-  delete (contract as Partial<WorldDefinition>).assetData;
-  return contract;
+  const { initialState, assetData, ...contract } = definition;
+  void initialState;
+  void assetData;
+  return structuredClone(contract);
 }
 
 export function validateWorldDefinition(definition: WorldDefinition): void {

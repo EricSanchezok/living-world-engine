@@ -24,6 +24,7 @@ import {
 import type { ExecutionTraceWriter } from "../engine/runtime/execution";
 import { createCoreRulePackageRegistry, type RulePackageRegistry } from "../engine/mechanics/rule-package";
 import { buildWorldDefinition, hashWorldTemplate, parseWorldTemplate } from "../script/world-loader";
+import type { WorldDefinition } from "../engine/runtime/world-definition";
 import type { WorldCatalogEntry, WorldRepository } from "../script/world-repository";
 import { parseWorldArchive, WorldImportError, type WorldImportResult } from "./world-import";
 import {
@@ -62,7 +63,10 @@ import { currentRuntimeCorrelation } from "./request-context";
 
 const INSTANCE_HEARTBEAT_MS = 5_000;
 const INSTANCE_LEASE_MS = 15_000;
-const VALIDATED_INSTANCE_CACHE_LIMIT = 8;
+const VALIDATED_INSTANCE_CACHE_LIMIT = 64;
+const VALIDATED_INSTANCE_CACHE_BYTES = 128 * 1_024 * 1_024;
+const VALIDATED_DEFINITION_CACHE_LIMIT = 16;
+const VALIDATED_DEFINITION_CACHE_BYTES = 32 * 1_024 * 1_024;
 const MAX_PENDING_EXECUTION_EVENTS = 64;
 const EXECUTION_ROOT_EVENTS = new Set([
   "benchmark.matrix.started",
@@ -90,6 +94,10 @@ interface LocalDatabaseOptions {
   isProcessAlive?: (pid: number) => boolean;
   rulePackages?: RulePackageRegistry;
   observer?: RuntimeObserver;
+  /** May lower the process-local instance cache budget for constrained readers. */
+  instanceCacheByteBudget?: number;
+  /** May lower the process-local definition cache budget for constrained readers. */
+  definitionCacheByteBudget?: number;
 }
 
 interface WorldRow {
@@ -115,6 +123,14 @@ interface ValidatedInstanceCacheEntry {
   documentHash: string;
   documentUtf8Bytes: number;
   document: WorldInstanceDocument;
+}
+
+interface ValidatedDefinitionCacheEntry {
+  sourceJson: string;
+  runtimeIdentity: object;
+  rulePackageHash: string;
+  utf8Bytes: number;
+  definition: WorldDefinition;
 }
 
 interface LockRow {
@@ -381,11 +397,26 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
   private readonly observer: RuntimeObserver;
   private readonly observe: ReturnType<typeof runtimeEventEmitter>;
   private readonly validatedInstances = new Map<string, ValidatedInstanceCacheEntry>();
+  private readonly instanceCacheByteBudget: number;
+  private validatedInstanceBytes = 0;
+  private readonly validatedDefinitions = new Map<string, ValidatedDefinitionCacheEntry>();
+  private readonly definitionCacheByteBudget: number;
+  private validatedDefinitionBytes = 0;
   private readonly executionListeners = new Set<(event: RuntimeEvent) => void>();
   private readonly executionWriters = new Map<string, LocalExecutionTraceWriter>();
   private closed = false;
 
   constructor(readonly file: string, options: LocalDatabaseOptions = {}) {
+    this.instanceCacheByteBudget = options.instanceCacheByteBudget ?? VALIDATED_INSTANCE_CACHE_BYTES;
+    if (!Number.isSafeInteger(this.instanceCacheByteBudget) || this.instanceCacheByteBudget <= 0 ||
+      this.instanceCacheByteBudget > VALIDATED_INSTANCE_CACHE_BYTES) {
+      throw new Error("instance cache byte budget must be a positive integer at most 128 MiB");
+    }
+    this.definitionCacheByteBudget = options.definitionCacheByteBudget ?? VALIDATED_DEFINITION_CACHE_BYTES;
+    if (!Number.isSafeInteger(this.definitionCacheByteBudget) || this.definitionCacheByteBudget <= 0 ||
+      this.definitionCacheByteBudget > VALIDATED_DEFINITION_CACHE_BYTES) {
+      throw new Error("definition cache byte budget must be a positive integer at most 32 MiB");
+    }
     this.readOnly = options.readOnly === true;
     if (!this.readOnly) mkdirSync(path.dirname(file), { recursive: true });
     this.connection = new Database(file, {
@@ -435,8 +466,22 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
 
   private invalidateExternalChanges(): void {
     const version = this.connection.pragma("data_version", { simple: true }) as number;
-    if (version !== this.dataVersion) this.validatedInstances.clear();
+    if (version !== this.dataVersion) this.clearReadCaches();
     this.dataVersion = version;
+  }
+
+  private clearReadCaches(): void {
+    this.validatedInstances.clear();
+    this.validatedInstanceBytes = 0;
+    this.validatedDefinitions.clear();
+    this.validatedDefinitionBytes = 0;
+  }
+
+  private removeCachedInstance(instanceId: string): void {
+    const entry = this.validatedInstances.get(instanceId);
+    if (!entry) return;
+    this.validatedInstanceBytes -= entry.documentUtf8Bytes;
+    this.validatedInstances.delete(instanceId);
   }
 
   private assertWritable(): void {
@@ -448,19 +493,27 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
     generation: number,
     documentHash: string,
     document: WorldInstanceDocument,
+    evict = true,
   ): ValidatedInstanceCacheEntry {
+    const documentUtf8Bytes = Buffer.byteLength(JSON.stringify(document), "utf8");
     const entry = {
       generation,
       documentHash,
-      documentUtf8Bytes: Buffer.byteLength(JSON.stringify(document), "utf8"),
-      document: structuredClone(document),
+      documentUtf8Bytes,
+      document,
     };
-    this.validatedInstances.delete(instanceId);
+    this.removeCachedInstance(instanceId);
+    if (documentUtf8Bytes > this.instanceCacheByteBudget || (!evict &&
+      (this.validatedInstances.size >= VALIDATED_INSTANCE_CACHE_LIMIT ||
+        this.validatedInstanceBytes + documentUtf8Bytes > this.instanceCacheByteBudget))) return entry;
+    entry.document = structuredClone(document);
     this.validatedInstances.set(instanceId, entry);
-    while (this.validatedInstances.size > VALIDATED_INSTANCE_CACHE_LIMIT) {
+    this.validatedInstanceBytes += documentUtf8Bytes;
+    while (this.validatedInstances.size > VALIDATED_INSTANCE_CACHE_LIMIT ||
+      this.validatedInstanceBytes > this.instanceCacheByteBudget) {
       const oldestInstanceId = this.validatedInstances.keys().next().value;
       if (oldestInstanceId === undefined) break;
-      this.validatedInstances.delete(oldestInstanceId);
+      this.removeCachedInstance(oldestInstanceId);
     }
     return entry;
   }
@@ -472,7 +525,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
   ): ValidatedInstanceCacheEntry | undefined {
     const cached = this.validatedInstances.get(instanceId);
     if (!cached || cached.generation !== row.generation || cached.documentHash !== row.document_hash) {
-      if (cached) this.validatedInstances.delete(instanceId);
+      if (cached) this.removeCachedInstance(instanceId);
       return undefined;
     }
     if (promote) {
@@ -482,17 +535,18 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
     return cached;
   }
 
-  private observeCachedRead(
+  private observeInstanceRead(
     instanceId: string,
     cached: ValidatedInstanceCacheEntry,
     startedAt: number,
+    cacheHit: boolean,
     correlation?: RuntimeCorrelation,
   ): void {
     this.observe?.({
       event: "persistence.read.completed",
       correlation: { ...correlation, instanceId },
       durationMs: Math.max(0, Date.now() - startedAt),
-      attributes: { sink: "sqlite", cacheHit: true },
+      attributes: { sink: "sqlite", cacheHit },
       measurements: { documentUtf8Bytes: cached.documentUtf8Bytes },
       counts: {
         history: cached.document.state.history.length,
@@ -1781,6 +1835,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
   }
 
   load(worldId: string, seed: number | undefined, modelCatalog: ModelCatalog) {
+    this.invalidateExternalChanges();
     const row = this.connection.prepare(`
       SELECT versions.world_id AS id,
              versions.name,
@@ -1804,6 +1859,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
     seed: number | undefined,
     modelCatalog: ModelCatalog,
   ) {
+    this.invalidateExternalChanges();
     const row = this.connection.prepare(`
       SELECT world_id AS id,
              name,
@@ -1823,9 +1879,41 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
     seed: number | undefined,
     modelCatalog: ModelCatalog,
   ) {
+    const key = JSON.stringify([row.id, row.content_hash, seed ?? 1, modelCatalog.hash]);
+    const runtimeIdentity = this.rulePackages.replayValidationCacheIdentity;
+    const cached = this.validatedDefinitions.get(key);
+    if (cached && runtimeIdentity && cached.runtimeIdentity === runtimeIdentity && cached.sourceJson === row.template_json) {
+      const packages = this.rulePackages.validate(cached.definition.rulePackages);
+      if (contentHash(packages) === cached.rulePackageHash) {
+        this.validatedDefinitions.delete(key);
+        this.validatedDefinitions.set(key, cached);
+        return structuredClone(cached.definition);
+      }
+    }
+    if (cached) {
+      this.validatedDefinitionBytes -= cached.utf8Bytes;
+      this.validatedDefinitions.delete(key);
+    }
     const template = parseWorldTemplate(JSON.parse(row.template_json));
     if (hashWorldTemplate(template) !== row.content_hash) throw new Error(`world ${row.id} content hash mismatch`);
-    return buildWorldDefinition(template, { seed, modelCatalog, rulePackages: this.rulePackages });
+    const definition = buildWorldDefinition(template, { seed, modelCatalog, rulePackages: this.rulePackages });
+    // Custom rule validators can contain mutable closures. Rebuild those definitions.
+    if (runtimeIdentity) {
+      const utf8Bytes = Buffer.byteLength(row.template_json, "utf8") + Buffer.byteLength(JSON.stringify(definition), "utf8");
+      if (utf8Bytes <= this.definitionCacheByteBudget) {
+        this.validatedDefinitions.set(key, { sourceJson: row.template_json, runtimeIdentity,
+          rulePackageHash: contentHash(definition.rulePackages), utf8Bytes, definition: structuredClone(definition) });
+        this.validatedDefinitionBytes += utf8Bytes;
+        while (this.validatedDefinitions.size > VALIDATED_DEFINITION_CACHE_LIMIT ||
+          this.validatedDefinitionBytes > this.definitionCacheByteBudget) {
+          const oldest = this.validatedDefinitions.keys().next().value;
+          if (oldest === undefined) break;
+          this.validatedDefinitionBytes -= this.validatedDefinitions.get(oldest)!.utf8Bytes;
+          this.validatedDefinitions.delete(oldest);
+        }
+      }
+    }
+    return definition;
   }
 
   importWorld(
@@ -1959,11 +2047,13 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
     if (!row) throw new WorldInstanceNotFoundError(instanceId);
     const cached = this.cachedInstance(instanceId, row);
     if (cached) {
-      this.observeCachedRead(instanceId, cached, startedAt, correlation);
-      return { generation: cached.generation, document: structuredClone(cached.document) };
+      const document = structuredClone(cached.document);
+      this.observeInstanceRead(instanceId, cached, startedAt, true, correlation);
+      return { generation: cached.generation, document };
     }
     const document = this.readInstanceDocument(row.document_hash, instanceId);
-    this.cacheValidatedInstance(instanceId, row.generation, row.document_hash, document);
+    const entry = this.cacheValidatedInstance(instanceId, row.generation, row.document_hash, document);
+    this.observeInstanceRead(instanceId, entry, startedAt, false, correlation);
     return {
       generation: row.generation,
       document,
@@ -2131,23 +2221,25 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
     ).all() as ListedInstanceRow[];
     const persistedIds = new Set(rows.map((row) => row.id));
     for (const instanceId of this.validatedInstances.keys()) {
-      if (!persistedIds.has(instanceId)) this.validatedInstances.delete(instanceId);
+      if (!persistedIds.has(instanceId)) this.removeCachedInstance(instanceId);
     }
     const misses: Array<{ row: ListedInstanceRow; document: WorldInstanceDocument }> = [];
     const instances = rows.map((row): StoredWorldInstance => {
       const startedAt = Date.now();
       const cached = this.cachedInstance(row.id, row, false);
       if (cached) {
-        this.observeCachedRead(row.id, cached, startedAt, correlation);
-        return { generation: cached.generation, document: structuredClone(cached.document) };
+        const document = structuredClone(cached.document);
+        this.observeInstanceRead(row.id, cached, startedAt, true, correlation);
+        return { generation: cached.generation, document };
       }
       const document = this.readInstanceDocument(row.document_hash, row.id);
       misses.push({ row, document });
+      this.observeInstanceRead(row.id, { generation: row.generation, documentHash: row.document_hash,
+        documentUtf8Bytes: Buffer.byteLength(JSON.stringify(document), "utf8"), document }, startedAt, false, correlation);
       return { generation: row.generation, document };
     });
     for (const { row, document } of misses) {
-      if (this.validatedInstances.size >= VALIDATED_INSTANCE_CACHE_LIMIT) break;
-      this.cacheValidatedInstance(row.id, row.generation, row.document_hash, document);
+      this.cacheValidatedInstance(row.id, row.generation, row.document_hash, document, false);
     }
     return instances;
   }
@@ -2166,7 +2258,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
         if (!exists) throw new WorldInstanceNotFoundError(instanceId);
         throw new WorldInstanceConflictError(instanceId);
       })();
-      this.validatedInstances.delete(instanceId);
+      this.removeCachedInstance(instanceId);
       this.observe?.({
         event: "persistence.delete.completed",
         correlation: { ...correlation, instanceId },
@@ -2191,7 +2283,7 @@ export class LocalDatabase implements WorldRepository, WorldInstanceStore, Execu
     for (const writer of this.executionWriters.values()) writer.flush();
     this.executionWriters.clear();
     this.closed = true;
-    this.validatedInstances.clear();
+    this.clearReadCaches();
     this.executionListeners.clear();
     if (this.heartbeatTimer) clearInterval(this.heartbeatTimer);
     try {
