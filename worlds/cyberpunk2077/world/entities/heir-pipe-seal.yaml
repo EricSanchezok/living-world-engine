@@ -1,0 +1,22 @@
+id: heir-pipe-seal
+kind: component
+name: 活接内部的现用密封垫
+description: 安装在活接内部的密封件，须隔离水路并打开检修位置才能检查表面。
+placement: heir-service-pipe
+facts:
+  - id: heir-pipe-seal-fault-1
+    predicate: fault
+    value:
+      kind: text
+      value: 活接内部的兼容密封垫老化，现有管体和隔离阀没有破裂。
+    description: 需现场检查并在隔离水路后检查密封面才可确认，漏水照片本身不能证明故障原因。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+meters: []
+quantities: []
+ratings: []

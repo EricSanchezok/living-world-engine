@@ -118,6 +118,14 @@ agent:
           - known-apprentice-service
         motivated_by_ids:
           - priority
+      - id: consider-apprentice-parts-offer
+        description: 就H-17备件取货待议单作出符合自身利益的决定；允许修改、拒绝或延期。
+        priority: 0.65
+        progress: 0
+        target_ids:
+          - known-apprentice-parts-offer
+        motivated_by_ids:
+          - priority
     commitments: []
   belief:
     local_entities:
@@ -164,6 +172,26 @@ agent:
       - id: known-apprentice-service
         name: 安娜的接口维护单
         description: 先诊断和报价；可使用库存维修、向供应商订货或转诊。患者同意前不得扣费或拆除植入物。
+        status: observed
+      - id: known-apprentice-clinical-record
+        name: 安娜接口维护记录
+        description: 持有该物的所有权。
+        status: observed
+      - id: known-apprentice-parts-depot
+        name: 诺瓦克歌舞伎零件小库
+        description: 博租用的独立零件库，门锁由他保管；现有一枚封装的H-17接口备件。需随博实际到库或等他实际取货，诊所里不会直接出现第二件。
+        status: observed
+      - id: known-apprentice-supplier-spare
+        name: 博的H-17兼容接口备件
+        description: 一枚独立编号BR-H17-01的封装备件，位于博的小库。它与诊所中林医生的那一枚库存是不同实物。
+        status: observed
+      - id: known-apprentice-parts-offer
+        name: H-17备件取货待议单
+        description: 博的小库有一枚BR-H17-01，报价420欧元；需确认付款人、实际取货与当面验件后交付。诊所里林医生的旧库存仍独立存在，不能把两枚混记或重复出售。患者的检修、费用同意和病历不由这张零件报价代替。
+        status: observed
+      - id: known-apprentice-delivery-cart
+        name: 诊所可借用的轻型折叠推车
+        description: 林医生的一辆普通轻型折叠推车，轮子完好，适合短程搬运；能否帮助安娜配送要根据她的实际状态试用，不会替代手部检修。
         status: observed
       - id: known-little-china
         name: 小唐人街
@@ -239,6 +267,31 @@ agent:
         sourceId: self
         step: 0
       - id: memory-13-evidence
+        kind: observation
+        description: 持有该物的所有权。
+        sourceId: self
+        step: 0
+      - id: memory-14-evidence
+        kind: observation
+        description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+        sourceId: self
+        step: 0
+      - id: memory-15-evidence
+        kind: observation
+        description: 这是可供本次工作使用的安娜接口维护记录，现在尚未填写。分开记录安娜的实际同意、接口诊断、已做维护、备件用量和复查；供应商不能自动读取病人的记录。
+        sourceId: self
+        step: 0
+      - id: memory-16-evidence
+        kind: observation
+        description: 博的小库有一枚BR-H17-01，报价420欧元；需确认付款人、实际取货与当面验件后交付。诊所里林医生的旧库存仍独立存在，不能把两枚混记或重复出售。患者的检修、费用同意和病历不由这张零件报价代替。
+        sourceId: self
+        step: 0
+      - id: memory-17-evidence
+        kind: observation
+        description: 诊所有这辆实际推车，能向林医生商议短程外借；安娜是否适合使用仍要听她的症状和意愿。
+        sourceId: self
+        step: 0
+      - id: memory-18-evidence
         kind: observation
         description: 我有 4200 欧元个人可用资金，其他账户须按各自约定使用。
         sourceId: self
@@ -377,6 +430,61 @@ agent:
         evidenceIds:
           - memory-12-evidence
       - id: memory-13
+        subjectId: known-apprentice-clinical-record
+        predicate: ownership
+        value:
+          kind: text
+          value: 持有该物的所有权。
+        description: 持有该物的所有权。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-13-evidence
+      - id: memory-14
+        subjectId: known-apprentice-clinical-record
+        predicate: familiar-equipment
+        value:
+          kind: text
+          value: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+        description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-14-evidence
+      - id: memory-15
+        subjectId: known-apprentice-clinical-record
+        predicate: work-record
+        value:
+          kind: text
+          value: 这是可供本次工作使用的安娜接口维护记录，现在尚未填写。分开记录安娜的实际同意、接口诊断、已做维护、备件用量和复查；供应商不能自动读取病人的记录。
+        description: 这是可供本次工作使用的安娜接口维护记录，现在尚未填写。分开记录安娜的实际同意、接口诊断、已做维护、备件用量和复查；供应商不能自动读取病人的记录。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-15-evidence
+      - id: memory-16
+        subjectId: known-apprentice-parts-offer
+        predicate: terms
+        value:
+          kind: text
+          value: 博的小库有一枚BR-H17-01，报价420欧元；需确认付款人、实际取货与当面验件后交付。诊所里林医生的旧库存仍独立存在，不能把两枚混记或重复出售。患者的检修、费用同意和病历不由这张零件报价代替。
+        description: 博的小库有一枚BR-H17-01，报价420欧元；需确认付款人、实际取货与当面验件后交付。诊所里林医生的旧库存仍独立存在，不能把两枚混记或重复出售。患者的检修、费用同意和病历不由这张零件报价代替。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-16-evidence
+      - id: memory-17
+        subjectId: known-apprentice-delivery-cart
+        predicate: possible-loan
+        value:
+          kind: text
+          value: 诊所有这辆实际推车，能向林医生商议短程外借；安娜是否适合使用仍要听她的症状和意愿。
+        description: 诊所有这辆实际推车，能向林医生商议短程外借；安娜是否适合使用仍要听她的症状和意愿。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-17-evidence
+      - id: memory-18
         subjectId: self
         predicate: available-cash
         value:
@@ -386,7 +494,7 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-13-evidence
+          - memory-18-evidence
     bindings:
       - local_entity_id: self
         canonical_entity_ids:
@@ -421,6 +529,21 @@ agent:
       - local_entity_id: known-apprentice-service
         canonical_entity_ids:
           - apprentice-service
+      - local_entity_id: known-apprentice-clinical-record
+        canonical_entity_ids:
+          - apprentice-clinical-record
+      - local_entity_id: known-apprentice-parts-depot
+        canonical_entity_ids:
+          - apprentice-parts-depot
+      - local_entity_id: known-apprentice-supplier-spare
+        canonical_entity_ids:
+          - apprentice-supplier-spare
+      - local_entity_id: known-apprentice-parts-offer
+        canonical_entity_ids:
+          - apprentice-parts-offer
+      - local_entity_id: known-apprentice-delivery-cart
+        canonical_entity_ids:
+          - apprentice-delivery-cart
       - local_entity_id: known-little-china
         canonical_entity_ids:
           - little-china

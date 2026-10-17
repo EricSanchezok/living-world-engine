@@ -1,0 +1,55 @@
+id: medic-service-card
+kind: document
+name: 伊娃随身的个人服务凭证
+description: 伊娃随身保存的个人凭证，需要先得到她出示与核对的同意；不能隔着衣物或只凭她的身份标签读取。
+placement: injured-subscriber
+facts:
+  - id: medic-service-card-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: injured-subscriber
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - injured-subscriber
+  - id: medic-service-card-encoded-record-2
+    predicate: encoded-record
+    value:
+      kind: entity
+      entityId: medic-credential-payload
+    description: 出示后可使用工作核验器读取这一具体记录，不是访问所有患者资料。
+    access:
+      kind: agents
+      agentIds:
+        - injured-subscriber
+        - medic
+        - mateo
+  - id: medic-service-card-verification-state-3
+    predicate: verification-state
+    value:
+      kind: text
+      value: unchecked
+    description: 尚未完成本次现场核对。
+    access:
+      kind: agents
+      agentIds:
+        - injured-subscriber
+        - medic
+        - mateo
+  - id: medic-service-card-verification-result-4
+    predicate: verification-result
+    value:
+      kind: text
+      value: 未核验
+    description: 当场结果只记录实际凭证、身份与有效期核对，不生成诊断或调度结论。
+    access:
+      kind: agents
+      agentIds:
+        - injured-subscriber
+        - medic
+        - mateo
+meters: []
+quantities: []
+ratings: []

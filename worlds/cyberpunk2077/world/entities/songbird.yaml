@@ -51,7 +51,7 @@ agent:
     attitudes:
       - id: toward-reed
         subject_id: known-reed
-        description: 记得他的培养，也有不愿说出的过去。
+        description: 记得他的培养和当年自己参与的背叛，没有可靠的近期联系。
         intensity: 0.7
       - id: toward-myers
         subject_id: known-myers
@@ -78,7 +78,7 @@ agent:
         status: observed
       - id: known-reed
         name: 所罗门·李德
-        description: 李德招募过宋昭美，两人有共同特工经历。 记得他的培养，也有不愿说出的过去。
+        description: 李德招募过宋昭美，两人有共同特工经历。 记得他的培养和当年自己参与的背叛，没有可靠的近期联系。
         status: observed
       - id: known-myers
         name: 罗莎琳德·迈尔斯
@@ -95,7 +95,7 @@ agent:
     evidence:
       - id: memory-1-evidence
         kind: observation
-        description: 李德招募过宋昭美，两人有共同特工经历。 记得他的培养，也有不愿说出的过去。
+        description: 李德招募过宋昭美，两人有共同特工经历。 记得他的培养和当年自己参与的背叛，没有可靠的近期联系。
         sourceId: self
         step: 0
       - id: memory-2-evidence
@@ -104,6 +104,11 @@ agent:
         sourceId: self
         step: 0
       - id: memory-3-evidence
+        kind: observation
+        description: 我在当年撤离时参与了对李德的背叛；这不是能对普通人解释的往事，我没有他的可靠近况。
+        sourceId: self
+        step: 0
+      - id: memory-4-evidence
         kind: observation
         description: 我有 1800 欧元个人可用资金，其他账户须按各自约定使用。
         sourceId: self
@@ -114,8 +119,8 @@ agent:
         predicate: recruiter-and-recruit
         value:
           kind: text
-          value: 李德招募过宋昭美，两人有共同特工经历。 记得他的培养，也有不愿说出的过去。
-        description: 李德招募过宋昭美，两人有共同特工经历。 记得他的培养，也有不愿说出的过去。
+          value: 李德招募过宋昭美，两人有共同特工经历。 记得他的培养和当年自己参与的背叛，没有可靠的近期联系。
+        description: 李德招募过宋昭美，两人有共同特工经历。 记得他的培养和当年自己参与的背叛，没有可靠的近期联系。
         stance: believed
         confidence: 0.95
         evidenceIds:
@@ -132,6 +137,17 @@ agent:
         evidenceIds:
           - memory-2-evidence
       - id: memory-3
+        subjectId: known-reed
+        predicate: last-known-fate
+        value:
+          kind: text
+          value: 我在当年撤离时参与了对李德的背叛；这不是能对普通人解释的往事，我没有他的可靠近况。
+        description: 我在当年撤离时参与了对李德的背叛；这不是能对普通人解释的往事，我没有他的可靠近况。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-3-evidence
+      - id: memory-4
         subjectId: self
         predicate: available-cash
         value:
@@ -141,7 +157,7 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-3-evidence
+          - memory-4-evidence
     bindings:
       - local_entity_id: self
         canonical_entity_ids:

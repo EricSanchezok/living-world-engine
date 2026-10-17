@@ -171,6 +171,22 @@ agent:
         name: 事故调查稿编辑约定
         description: 事实核验后决定公开范围；可以先发确认部分、延后、寻求另一证人或不发表。消息源姓名须遵守约定。
         status: observed
+      - id: known-reporter-accident-site
+        name: 阿罗约东侧事故检修区
+        description: 这宗材料对应阿罗约东侧事故检修区，阿玛拉知道可先到厂外联络一位当班司机。
+        status: observed
+      - id: known-reporter-draft
+        name: 事故调查待审核稿
+        description: 编辑部已有的空稿件文件，可以根据核验后的材料撰写；正文和标题都尚未形成。
+        status: observed
+      - id: known-reporter-publication-slot
+        name: 街区镜报本次报道发布栏
+        description: 编辑部现有的发布终端，可向读者发布已经批准的稿件；目前本篇尚未发布。
+        status: observed
+      - id: known-reporter-notebook
+        name: 事故调查内部核验笔记
+        description: 持有该物的所有权。
+        status: observed
       - id: known-taxi-driver
         name: 娜迪亚·沃克
         description: 送过记者采访，按里程和等待时间议价。 只对已有经历作判断，不自动信任对方所有要求。
@@ -240,20 +256,45 @@ agent:
         step: 0
       - id: memory-11-evidence
         kind: observation
-        description: 莱拉在编辑桌上标出两段矛盾证言。费利克斯带来一份维修日志副本，阿玛拉建议回现场核实；截稿将近，仍可以修改报道范围。
+        description: 编辑部已有的空稿件文件，可以根据核验后的材料撰写；正文和标题都尚未形成。
         sourceId: self
         step: 0
       - id: memory-12-evidence
         kind: observation
-        description: 送过记者采访，按里程和等待时间议价。 只对已有经历作判断，不自动信任对方所有要求。
+        description: 编辑部现有的发布终端，可向读者发布已经批准的稿件；目前本篇尚未发布。
         sourceId: self
         step: 0
       - id: memory-13-evidence
         kind: observation
-        description: 我有 6000 欧元个人可用资金，其他账户须按各自约定使用。
+        description: 莱拉在编辑桌上标出两段矛盾证言。费利克斯带来一份维修日志副本，阿玛拉建议回现场核实；截稿将近，仍可以修改报道范围。
         sourceId: self
         step: 0
       - id: memory-14-evidence
+        kind: observation
+        description: 持有该物的所有权。
+        sourceId: self
+        step: 0
+      - id: memory-15-evidence
+        kind: observation
+        description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+        sourceId: self
+        step: 0
+      - id: memory-16-evidence
+        kind: observation
+        description: 这是可供本次工作使用的事故调查内部核验笔记，现在尚未填写。记录实际读取的时间戳、证言差异、出处与尚待核查的问题；笔记不改原始证据，不把费利克斯身份公开，不把矛盾等同于定罪。
+        sourceId: self
+        step: 0
+      - id: memory-17-evidence
+        kind: observation
+        description: 送过记者采访，按里程和等待时间议价。 只对已有经历作判断，不自动信任对方所有要求。
+        sourceId: self
+        step: 0
+      - id: memory-18-evidence
+        kind: observation
+        description: 我有 6000 欧元个人可用资金，其他账户须按各自约定使用。
+        sourceId: self
+        step: 0
+      - id: memory-19-evidence
         kind: observation
         description: 这个账户的现场业务由语音终端受理。我可以直接对它说出具体金额、收款人和用途；操作别的设备或只写下草稿不等于已经通知它。
         sourceId: self
@@ -370,6 +411,28 @@ agent:
         evidenceIds:
           - memory-10-evidence
       - id: memory-11
+        subjectId: known-reporter-draft
+        predicate: familiar-equipment
+        value:
+          kind: text
+          value: 编辑部已有的空稿件文件，可以根据核验后的材料撰写；正文和标题都尚未形成。
+        description: 编辑部已有的空稿件文件，可以根据核验后的材料撰写；正文和标题都尚未形成。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-11-evidence
+      - id: memory-12
+        subjectId: known-reporter-publication-slot
+        predicate: familiar-equipment
+        value:
+          kind: text
+          value: 编辑部现有的发布终端，可向读者发布已经批准的稿件；目前本篇尚未发布。
+        description: 编辑部现有的发布终端，可向读者发布已经批准的稿件；目前本篇尚未发布。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-12-evidence
+      - id: memory-13
         subjectId: known-reporter-work
         predicate: opening-context
         value:
@@ -379,8 +442,41 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-11-evidence
-      - id: memory-12
+          - memory-13-evidence
+      - id: memory-14
+        subjectId: known-reporter-notebook
+        predicate: ownership
+        value:
+          kind: text
+          value: 持有该物的所有权。
+        description: 持有该物的所有权。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-14-evidence
+      - id: memory-15
+        subjectId: known-reporter-notebook
+        predicate: familiar-equipment
+        value:
+          kind: text
+          value: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+        description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-15-evidence
+      - id: memory-16
+        subjectId: known-reporter-notebook
+        predicate: work-record
+        value:
+          kind: text
+          value: 这是可供本次工作使用的事故调查内部核验笔记，现在尚未填写。记录实际读取的时间戳、证言差异、出处与尚待核查的问题；笔记不改原始证据，不把费利克斯身份公开，不把矛盾等同于定罪。
+        description: 这是可供本次工作使用的事故调查内部核验笔记，现在尚未填写。记录实际读取的时间戳、证言差异、出处与尚待核查的问题；笔记不改原始证据，不把费利克斯身份公开，不把矛盾等同于定罪。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-16-evidence
+      - id: memory-17
         subjectId: known-taxi-driver
         predicate: local-acquaintance
         value:
@@ -390,8 +486,8 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-12-evidence
-      - id: memory-13
+          - memory-17-evidence
+      - id: memory-18
         subjectId: self
         predicate: available-cash
         value:
@@ -401,8 +497,8 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-13-evidence
-      - id: memory-14
+          - memory-18-evidence
+      - id: memory-19
         subjectId: known-reporter-expenses
         predicate: voice-service
         value:
@@ -412,7 +508,7 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-14-evidence
+          - memory-19-evidence
     bindings:
       - local_entity_id: self
         canonical_entity_ids:
@@ -444,6 +540,18 @@ agent:
       - local_entity_id: known-reporter-publication
         canonical_entity_ids:
           - reporter-publication
+      - local_entity_id: known-reporter-accident-site
+        canonical_entity_ids:
+          - reporter-accident-site
+      - local_entity_id: known-reporter-draft
+        canonical_entity_ids:
+          - reporter-draft
+      - local_entity_id: known-reporter-publication-slot
+        canonical_entity_ids:
+          - reporter-publication-slot
+      - local_entity_id: known-reporter-notebook
+        canonical_entity_ids:
+          - reporter-notebook
       - local_entity_id: known-taxi-driver
         canonical_entity_ids:
           - taxi-driver

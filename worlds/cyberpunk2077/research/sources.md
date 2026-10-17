@@ -1,6 +1,6 @@
 # 来源清单与阅读定位
 
-调研日期：2026-10-17。共 60 项来源：34 项直接下载，1 项通过网页提取工具保存正文；另有 19 个大体积官方服装 PDF 只保留链接，6 个 Wiki 页面正文未取得。成功缓存包含 5 份官方 PDF；原始下载共 44,269,369 字节（约 42.2 MiB），不含工具提取文本与预览图。
+调研日期：2026-10-17。共 64 项来源：35 项直接下载，4 项保存了网页工具返回的正文或索引段落；另有 19 个大体积官方服装 PDF 只保留链接，6 个早期 Wiki 页面正文未取得。成功缓存包含 5 份官方 PDF；原始下载共 44,402,360 字节（约 42.3 MiB），不含工具提取文本与预览图。S21/S22 只有检索工具返回的可读段落，不能据此声称完整页面或其引用书籍已通读。
 
 缓存状态、最终地址、时间与哈希见 [cache-manifest.json](cache-manifest.json)，机器目录见 [sources.json](sources.json)。缓存成功不等于通读；下面逐项说明本轮实际使用范围。
 
@@ -493,3 +493,37 @@
 - 来源类型：官方公开下载；获取状态：仅链接；首次获取超过 64 MiB 上限。
 - 适用范围：appearance reference; biography may mix past and later plot。
 - 本轮阅读定位：未取得 PDF 正文；仅核对官方服装参考入口与下载链接。
+
+## 本轮正典收口补充
+
+### S20
+
+[GameStar：Reed 的日常掩护及 Paweł Sasko 访谈](https://www.gamestar.de/artikel/cyberpunk-2077-wichtiger-charakter-im-hauptspiel,3413739.html)
+
+- 来源类型：媒体场景报道及具名开发者答复，2024-05-26 更新；直接请求失败，网页工具取得正文节选并缓存。
+- 适用范围：Phantom Liberty 触发前的保安工作，以及 Reed 能往返狗镇的叙事设计。
+- 本轮阅读定位：`Wo findet ihr Reed?` 指向迪诺的 Electric Orgasm；`Wie ist es dazu gekommen?` 与 `Unterwegs auf Schleichwegen` 的 Sasko 答复解释掩护和私人关系网。没有把报道中的 NPC 不响应枪击现象当作人物性格规则，也没有编造具体暗道或通关证。
+
+### S21
+
+[Electric Orgasm：地点与数据库条目线索](https://cyberpunk.fandom.com/wiki/Electric_Orgasm)
+
+- 来源类型：社区 Wiki；直接全文访问不可用，检索工具返回的正文段落已保存；二级初核。
+- 适用范围：Downtown 的酒吧、迪诺的所有权、Reed 的保安岗位。
+- 本轮阅读定位：`Information / Overview / Phantom Liberty / Database Entry`。与 S20 交叉核对酒吧与工作关系；数据库引文仍是社区转录，未声称读取了本地游戏数据库。其完整 CEMK 参考书未取得。
+
+### S22
+
+[Solomon Reed：死亡掩护与同僚知情](https://cyberpunk.fandom.com/wiki/Solomon_Reed)
+
+- 来源类型：社区 Wiki；直接全文访问不可用，检索工具返回的正文段落已保存；二级初核。
+- 适用范围：统一战争后至 DLC 复出前的经历；后期分支不用于开局。
+- 本轮阅读定位：`Unification War / 2077` 中存活、NUSA 宣告其死亡及 Alex 收到掩护消息的段落。用于修正 Alex 的旧信念，不能因此让她知道 Reed 当前工作位置。
+
+### S23
+
+[The Damned：The Moth 酒吧与 Alex 重聚流程](https://www.powerpyx.com/cyberpunk-2077-phantom-liberty-the-damned-walkthrough/)
+
+- 来源类型：二级任务攻略；已直接下载并提取正文。
+- 适用范围：DLC 后期相对当前 T0 的人物重聚；不提前执行任务。
+- 本轮阅读定位：`Go to the Moth bar / Answer Reed’s call / Talk to Alex / Talk to Reed`。只补酒吧正式检索名与重聚的时间边界，不采用攻略将对话分支标为相同结果的玩法归并。

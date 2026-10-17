@@ -1,0 +1,21 @@
+id: fleet-valve-stock
+kind: stock
+name: 车队备用冷却阀零件盒
+description: 一只已按三号冷藏车接口核对的备用冷却阀，属于车队常备材料，由劳尔保管；安装会消耗这只现货。
+placement: fleet-work
+facts:
+  - id: fleet-valve-stock-custodian-1
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: raul
+    description: 劳尔保管车队的这件兼容备件，可按共同维修授权领用。
+    access:
+      kind: agents
+      agentIds:
+        - fleet
+        - raul
+        - jo
+meters: []
+quantities: []
+ratings: []

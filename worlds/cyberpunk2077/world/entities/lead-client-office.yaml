@@ -1,0 +1,17 @@
+id: lead-client-office
+kind: place
+name: 澄线设施管理试点室
+description: 原创客户澄线设施管理的普通办公室及隔离演示工位。维奥拉在这里负责试点验收，可以当面商议演示范围与时间。
+placement: charter-hill
+facts:
+  - id: lead-client-office-street-access-1
+    predicate: street-access
+    value:
+      kind: entity
+      entityId: charter-hill
+    description: 可沿所在街区的普通道路到达营业入口；前往和返回都需要实际行程。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

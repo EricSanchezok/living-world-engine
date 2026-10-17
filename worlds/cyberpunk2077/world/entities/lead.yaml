@@ -45,6 +45,35 @@ facts:
       agentIds:
         - lead
         - ada
+  - id: lead-employer-5
+    predicate: employer
+    value:
+      kind: entity
+      entityId: crownbridge-services
+    description: 艾登受雇于公司并持有项目岗位授权，职位不等于拥有企业资产。
+    access:
+      kind: public
+  - id: lead-established-business-contact-6
+    predicate: established-business-contact
+    value:
+      kind: entity
+      entityId: lead-client-representative
+    description: 艾登与维奥拉见面讨论过这次楼宇设备试点，客户尚未验收。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - lead-client-representative
+  - id: lead-storage-control-unit-7
+    predicate: storage-control-unit
+    value:
+      kind: entity
+      entityId: lead-received-stock
+    description: 该类登记物资的实际存放处；保管不改变产权，远离存放处不能隔空交货。
+    access:
+      kind: agents
+      agentIds:
+        - lead
 meters:
   - id: lead-vitality
     definition_id: vitality
@@ -57,6 +86,8 @@ quantities:
     amount: 9000
   - definition_id: medical-supply
     amount: 1
+  - definition_id: control-unit
+    amount: 0
 ratings:
   - id: lead-persuasion
     definition_id: persuasion
@@ -101,6 +132,10 @@ agent:
       - id: toward-ada
         subject_id: known-ada
         description: 可以谈价格，也要防止被长期条款套住。
+        intensity: 0.7
+      - id: toward-lead-client-representative
+        subject_id: known-lead-client-representative
+        description: 知道她在宪章山的试点室，可以带着实际版本去谈。
         intensity: 0.7
     goals:
       - id: current-purpose
@@ -153,6 +188,10 @@ agent:
         name: 艾达·桑兹
         description: 已有采购往来，没有私下回扣承诺。 可以谈价格，也要防止被长期条款套住。
         status: observed
+      - id: known-crownbridge-services
+        name: 棱桥服务
+        description: 这次项目的采购与交付主体是棱桥服务，艾登代表公司办事，不是用公司钱买私人器材。
+        status: observed
       - id: known-lead-terminal
         name: 项目测试终端
         description: 仅连入棱桥内部测试网，不能直接控制客户正式系统。
@@ -171,7 +210,35 @@ agent:
         status: observed
       - id: known-lead-supply
         name: 采购折扣提案
-        description: 首批控制器报价 6000 欧元，折扣以六个月采购框架为前提；可拒绝框架按单采购或另找供应商。
+        description: 首批六台控制器普通按单报价合计 6000 欧元；六个月采购框架下的折扣另行协商，不以签框架作为这笔普通采购的前提。尚未付款或移交，也可另找供应商。
+        status: observed
+      - id: known-lead-controllers
+        name: 艾达的首批控制器运输箱
+        description: 箱内最初有六台独立标签的测试网用控制器，现由艾达保管且未付款交接；运输箱归艾达，交付台数依真实库存变化。
+        status: observed
+      - id: known-lead-received-stock
+        name: 棱桥项目控制器收货柜
+        description: 公司办公室的空收货柜；本批控制器真实移交后在此存放，由艾登代公司登记保管，不进入他的私人财产。
+        status: observed
+      - id: known-lead-delivery-record
+        name: 控制器清点与隔离验证记录
+        description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+        status: observed
+      - id: known-lead-client-office
+        name: 澄线设施管理试点室
+        description: 原创客户澄线设施管理的普通办公室及隔离演示工位。维奥拉在这里负责试点验收，可以当面商议演示范围与时间。
+        status: observed
+      - id: known-lead-client-representative
+        name: 维奥拉·格林
+        description: 艾登与维奥拉见面讨论过这次楼宇设备试点，客户尚未验收。 知道她在宪章山的试点室，可以带着实际版本去谈。
+        status: observed
+      - id: known-lead-client-company
+        name: 澄线设施管理
+        description: 这次试点草案的客户是澄线设施管理，由维奥拉负责核对范围与实际演示。
+        status: observed
+      - id: known-lead-demo-package
+        name: 待编制的试点演示包
+        description: 已有的空白演示包文件，用于整理实际版本、操作步骤和已知限制；当前没有交付内容。
         status: observed
       - id: known-corpo-plaza
         name: 公司广场
@@ -238,20 +305,60 @@ agent:
         step: 0
       - id: memory-11-evidence
         kind: observation
-        description: 首批控制器报价 6000 欧元，折扣以六个月采购框架为前提；可拒绝框架按单采购或另找供应商。
+        description: 首批六台控制器普通按单报价合计 6000 欧元；六个月采购框架下的折扣另行协商，不以签框架作为这笔普通采购的前提。尚未付款或移交，也可另找供应商。
         sourceId: self
         step: 0
       - id: memory-12-evidence
         kind: observation
-        description: 帕维尔在隔离终端重现权限缓存缺陷。米娜想知道演示还能保留多少内容；艾达带着两种采购条款等待答复。
+        description: 箱内最初有六台独立标签的测试网用控制器，现由艾达保管且未付款交接；运输箱归艾达，交付台数依真实库存变化。
         sourceId: self
         step: 0
       - id: memory-13-evidence
         kind: observation
-        description: 我有 9000 欧元个人可用资金，其他账户须按各自约定使用。
+        description: 公司办公室的空收货柜；本批控制器真实移交后在此存放，由艾登代公司登记保管，不进入他的私人财产。
         sourceId: self
         step: 0
       - id: memory-14-evidence
+        kind: observation
+        description: 艾达带来六台控制器，每台 1000 欧元、按单采购合计 6000；真实到账后可以清点并移交，不用先签六个月框架。控制器到货本身不会修复权限缓存。
+        sourceId: self
+        step: 0
+      - id: memory-15-evidence
+        kind: observation
+        description: 公司控制器收货柜目前为空。付款后的实物可由艾达逐台交给艾登、登记到公司柜内；艾登是保管人，棱桥服务才是采购入库器材的所有者。
+        sourceId: self
+        step: 0
+      - id: memory-16-evidence
+        kind: observation
+        description: 帕维尔在隔离终端重现权限缓存缺陷。米娜想知道演示还能保留多少内容；艾达带着两种采购条款等待答复。
+        sourceId: self
+        step: 0
+      - id: memory-17-evidence
+        kind: observation
+        description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+        sourceId: self
+        step: 0
+      - id: memory-18-evidence
+        kind: observation
+        description: 这是可供本次工作使用的控制器清点与隔离验证记录，现在尚未填写。记录本批付款凭据、控制器移交台数和隔离测试结果；采购归公司，艾登仅保管，到货不代替缓存缺陷修复。
+        sourceId: self
+        step: 0
+      - id: memory-19-evidence
+        kind: observation
+        description: 艾登与维奥拉见面讨论过这次楼宇设备试点，客户尚未验收。 知道她在宪章山的试点室，可以带着实际版本去谈。
+        sourceId: self
+        step: 0
+      - id: memory-20-evidence
+        kind: observation
+        description: 我负责保管的 control-unit 在这里，取用、交付和消耗须满足现场与授权条件。
+        sourceId: self
+        step: 0
+      - id: memory-21-evidence
+        kind: observation
+        description: 我有 9000 欧元个人可用资金，其他账户须按各自约定使用。
+        sourceId: self
+        step: 0
+      - id: memory-22-evidence
         kind: observation
         description: 这个账户的现场业务由语音终端受理。我可以直接对它说出具体金额、收款人和用途；操作别的设备或只写下草稿不等于已经通知它。
         sourceId: self
@@ -372,13 +479,57 @@ agent:
         predicate: terms
         value:
           kind: text
-          value: 首批控制器报价 6000 欧元，折扣以六个月采购框架为前提；可拒绝框架按单采购或另找供应商。
-        description: 首批控制器报价 6000 欧元，折扣以六个月采购框架为前提；可拒绝框架按单采购或另找供应商。
+          value: 首批六台控制器普通按单报价合计 6000 欧元；六个月采购框架下的折扣另行协商，不以签框架作为这笔普通采购的前提。尚未付款或移交，也可另找供应商。
+        description: 首批六台控制器普通按单报价合计 6000 欧元；六个月采购框架下的折扣另行协商，不以签框架作为这笔普通采购的前提。尚未付款或移交，也可另找供应商。
         stance: believed
         confidence: 0.95
         evidenceIds:
           - memory-11-evidence
       - id: memory-12
+        subjectId: known-lead-controllers
+        predicate: familiar-equipment
+        value:
+          kind: text
+          value: 箱内最初有六台独立标签的测试网用控制器，现由艾达保管且未付款交接；运输箱归艾达，交付台数依真实库存变化。
+        description: 箱内最初有六台独立标签的测试网用控制器，现由艾达保管且未付款交接；运输箱归艾达，交付台数依真实库存变化。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-12-evidence
+      - id: memory-13
+        subjectId: known-lead-received-stock
+        predicate: familiar-equipment
+        value:
+          kind: text
+          value: 公司办公室的空收货柜；本批控制器真实移交后在此存放，由艾登代公司登记保管，不进入他的私人财产。
+        description: 公司办公室的空收货柜；本批控制器真实移交后在此存放，由艾登代公司登记保管，不进入他的私人财产。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-13-evidence
+      - id: memory-14
+        subjectId: known-lead-controllers
+        predicate: procurement-batch
+        value:
+          kind: text
+          value: 艾达带来六台控制器，每台 1000 欧元、按单采购合计 6000；真实到账后可以清点并移交，不用先签六个月框架。控制器到货本身不会修复权限缓存。
+        description: 艾达带来六台控制器，每台 1000 欧元、按单采购合计 6000；真实到账后可以清点并移交，不用先签六个月框架。控制器到货本身不会修复权限缓存。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-14-evidence
+      - id: memory-15
+        subjectId: known-lead-received-stock
+        predicate: company-custody
+        value:
+          kind: text
+          value: 公司控制器收货柜目前为空。付款后的实物可由艾达逐台交给艾登、登记到公司柜内；艾登是保管人，棱桥服务才是采购入库器材的所有者。
+        description: 公司控制器收货柜目前为空。付款后的实物可由艾达逐台交给艾登、登记到公司柜内；艾登是保管人，棱桥服务才是采购入库器材的所有者。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-15-evidence
+      - id: memory-16
         subjectId: known-lead-work
         predicate: opening-context
         value:
@@ -388,8 +539,52 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-12-evidence
-      - id: memory-13
+          - memory-16-evidence
+      - id: memory-17
+        subjectId: known-lead-delivery-record
+        predicate: familiar-equipment
+        value:
+          kind: text
+          value: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+        description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-17-evidence
+      - id: memory-18
+        subjectId: known-lead-delivery-record
+        predicate: work-record
+        value:
+          kind: text
+          value: 这是可供本次工作使用的控制器清点与隔离验证记录，现在尚未填写。记录本批付款凭据、控制器移交台数和隔离测试结果；采购归公司，艾登仅保管，到货不代替缓存缺陷修复。
+        description: 这是可供本次工作使用的控制器清点与隔离验证记录，现在尚未填写。记录本批付款凭据、控制器移交台数和隔离测试结果；采购归公司，艾登仅保管，到货不代替缓存缺陷修复。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-18-evidence
+      - id: memory-19
+        subjectId: known-lead-client-representative
+        predicate: established-business-contact
+        value:
+          kind: text
+          value: 艾登与维奥拉见面讨论过这次楼宇设备试点，客户尚未验收。 知道她在宪章山的试点室，可以带着实际版本去谈。
+        description: 艾登与维奥拉见面讨论过这次楼宇设备试点，客户尚未验收。 知道她在宪章山的试点室，可以带着实际版本去谈。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-19-evidence
+      - id: memory-20
+        subjectId: known-lead-received-stock
+        predicate: stored-resources
+        value:
+          kind: text
+          value: 我负责保管的 control-unit 在这里，取用、交付和消耗须满足现场与授权条件。
+        description: 我负责保管的 control-unit 在这里，取用、交付和消耗须满足现场与授权条件。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-20-evidence
+      - id: memory-21
         subjectId: self
         predicate: available-cash
         value:
@@ -399,8 +594,8 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-13-evidence
-      - id: memory-14
+          - memory-21-evidence
+      - id: memory-22
         subjectId: known-lead-budget
         predicate: voice-service
         value:
@@ -410,7 +605,7 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-14-evidence
+          - memory-22-evidence
     bindings:
       - local_entity_id: self
         canonical_entity_ids:
@@ -430,6 +625,9 @@ agent:
       - local_entity_id: known-ada
         canonical_entity_ids:
           - ada
+      - local_entity_id: known-crownbridge-services
+        canonical_entity_ids:
+          - crownbridge-services
       - local_entity_id: known-lead-terminal
         canonical_entity_ids:
           - lead-terminal
@@ -445,6 +643,27 @@ agent:
       - local_entity_id: known-lead-supply
         canonical_entity_ids:
           - lead-supply
+      - local_entity_id: known-lead-controllers
+        canonical_entity_ids:
+          - lead-controllers
+      - local_entity_id: known-lead-received-stock
+        canonical_entity_ids:
+          - lead-received-stock
+      - local_entity_id: known-lead-delivery-record
+        canonical_entity_ids:
+          - lead-delivery-record
+      - local_entity_id: known-lead-client-office
+        canonical_entity_ids:
+          - lead-client-office
+      - local_entity_id: known-lead-client-representative
+        canonical_entity_ids:
+          - lead-client-representative
+      - local_entity_id: known-lead-client-company
+        canonical_entity_ids:
+          - lead-client-company
+      - local_entity_id: known-lead-demo-package
+        canonical_entity_ids:
+          - lead-demo-package
       - local_entity_id: known-corpo-plaza
         canonical_entity_ids:
           - corpo-plaza

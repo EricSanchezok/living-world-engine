@@ -1,0 +1,43 @@
+id: apprentice-delivery-cart
+kind: equipment
+name: 诊所可借用的轻型折叠推车
+description: 林医生的一辆普通轻型折叠推车，轮子完好，适合短程搬运；能否帮助安娜配送要根据她的实际状态试用，不会替代手部检修。
+placement: apprentice-work
+facts:
+  - id: apprentice-delivery-cart-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: lin
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - lin
+  - id: apprentice-delivery-cart-loan-approved-2
+    predicate: loan-approved
+    value:
+      kind: boolean
+      value: false
+    description: 还没有同意本次外借，须与林医生谈妥使用者、归还时间和实际用途。
+    access:
+      kind: agents
+      agentIds:
+        - apprentice
+        - lin
+        - ana
+  - id: apprentice-delivery-cart-checked-out-3
+    predicate: checked-out
+    value:
+      kind: boolean
+      value: false
+    description: 推车仍在诊所，不能只在对话里称借到便移走。
+    access:
+      kind: agents
+      agentIds:
+        - apprentice
+        - lin
+        - ana
+meters: []
+quantities: []
+ratings: []

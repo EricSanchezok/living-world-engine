@@ -1,0 +1,17 @@
+id: reporter-accident-site
+kind: place
+name: 阿罗约东侧事故检修区
+description: 此次报道涉及的原创工厂外侧检修区；对外采访点与厂内受控设备分开，事故痕迹仍需按实际接近和取证条件查看。
+placement: arroyo
+facts:
+  - id: reporter-accident-site-street-access-1
+    predicate: street-access
+    value:
+      kind: entity
+      entityId: arroyo
+    description: 记者可沿道路到厂外联络与观察，进入受控设备区需取得现场许可。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

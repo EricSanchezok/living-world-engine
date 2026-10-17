@@ -1,19 +1,22 @@
 id: armorer-crate
 kind: cargo
 name: 格兰特带来的待检装备箱
-description: 三件可维修的护具与部件，外侧还能看到原有流转编号。
+description: 三件可维修的护具与部件，外侧还能看到原有流转编号；格兰特带来并保管它们，真实产权仍待核对。
 placement: armorer-work
 facts:
-  - id: armorer-crate-owner-1
-    predicate: owner
+  - id: armorer-crate-custodian-1
+    predicate: custodian
     value:
       kind: entity
       entityId: grant
-    description: 持有该物的所有权。
+    description: 仅明确当前保管与送检人，不据此认定内装器材的真实所有权。
     access:
       kind: agents
       agentIds:
+        - armorer
         - grant
+        - leo
+        - rosa
   - id: armorer-crate-provenance-mark-2
     predicate: provenance-mark
     value:
@@ -26,7 +29,43 @@ facts:
         - armorer
         - leo
         - grant
-  - id: armorer-crate-provenance-checked-3
+  - id: armorer-crate-serial-labels-3
+    predicate: serial-labels
+    value:
+      kind: text
+      value: GC-14, GC-15, GC-16
+    description: 这三件装备的实际流转编号，可与独立记录逐一比对。
+    access:
+      kind: agents
+      agentIds:
+        - armorer
+        - leo
+        - grant
+        - rosa
+        - watch-registrar
+  - id: armorer-crate-owner-4
+    predicate: owner
+    value:
+      kind: entity
+      entityId: rancho-community-watch
+    description: 三件借出装备实际归社区守望队；此权属须经真实记录或有权人说明才能被送检方确认。
+    access:
+      kind: agents
+      agentIds:
+        - watch-registrar
+  - id: armorer-crate-returned-to-owner-5
+    predicate: returned-to-owner
+    value:
+      kind: boolean
+      value: false
+    description: 装备尚在维修店送检，未实际归还登记窗口。
+    access:
+      kind: agents
+      agentIds:
+        - armorer
+        - grant
+        - watch-registrar
+  - id: armorer-crate-provenance-checked-6
     predicate: provenance-checked
     value:
       kind: boolean

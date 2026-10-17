@@ -4,7 +4,19 @@ name: 权限缓存测试报告
 description: 封装的测试记录，需要项目人员打开阅读。
 placement: lead-work
 facts:
-  - id: lead-report-test-findings-1
+  - id: lead-report-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: crownbridge-services
+    description: 棱桥服务的公司财产，艾登与同事只有岗位使用和保管权限。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+  - id: lead-report-test-findings-2
     predicate: test-findings
     value:
       kind: text

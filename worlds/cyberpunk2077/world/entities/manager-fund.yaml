@@ -123,6 +123,10 @@ agent:
         name: 保罗·里德
         description: 保罗·里德是已登记的业务收款人。
         status: observed
+      - id: known-manager-venue-settlement
+        name: 保罗场地的演出结算账户
+        description: 保罗场地的演出结算账户的现场语音支付终端。对它直接说出收款人、金额及用途，即可申请办理；权限取决于账户约定。
+        status: observed
     evidence:
       - id: memory-1-evidence
         kind: observation
@@ -160,3 +164,6 @@ agent:
       - local_entity_id: known-paulo
         canonical_entity_ids:
           - paulo
+      - local_entity_id: known-manager-venue-settlement
+        canonical_entity_ids:
+          - manager-venue-settlement

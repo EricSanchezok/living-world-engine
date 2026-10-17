@@ -16,7 +16,19 @@ facts:
         - lead
         - mina
         - pavel
-  - id: lead-terminal-revocation-effective-2
+  - id: lead-terminal-owner-2
+    predicate: owner
+    value:
+      kind: entity
+      entityId: crownbridge-services
+    description: 棱桥服务的公司财产，艾登与同事只有岗位使用和保管权限。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+  - id: lead-terminal-revocation-effective-3
     predicate: revocation-effective
     value:
       kind: boolean

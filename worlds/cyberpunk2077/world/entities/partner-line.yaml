@@ -37,7 +37,20 @@ facts:
         - marta
         - owen
         - nela
-  - id: partner-line-safe-full-rate-4
+  - id: partner-line-low-load-process-4
+    predicate: low-load-process
+    value:
+      kind: text
+      value: 一份 industrial-blank 经实际低速成形加工成为一件 trial-housing；留在成品周转盘，待尺寸检查与客户验收。
+    description: 这个工艺只生产普通试制壳体，不把消耗的原料重新登记成同一种通用组件。
+    access:
+      kind: agents
+      agentIds:
+        - partner
+        - marta
+        - owen
+        - nela
+  - id: partner-line-safe-full-rate-5
     predicate: safe-full-rate
     value:
       kind: boolean

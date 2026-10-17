@@ -22,6 +22,32 @@ facts:
     description: 许可不能用于不同型号而不申报更新。
     access:
       kind: public
+  - id: broker-permit-approval-status-3
+    predicate: approval-status
+    value:
+      kind: text
+      value: valid-for-A2-only
+    description: 当前许可仍只对应A2；埃米尔按职权核对实物与更新材料后才能办理本批A3许可，不自动放行。
+    access:
+      kind: agents
+      agentIds:
+        - broker
+        - jun
+        - emil
+        - broker-supplier
+  - id: broker-permit-authorized-writer-4
+    predicate: authorized-writer
+    value:
+      kind: entity
+      entityId: emil
+    description: 本批文件的有权核验文员；卢卡提交差异记录不等于自己签发许可。
+    access:
+      kind: agents
+      agentIds:
+        - broker
+        - jun
+        - emil
+        - broker-supplier
 meters: []
 quantities: []
 ratings: []

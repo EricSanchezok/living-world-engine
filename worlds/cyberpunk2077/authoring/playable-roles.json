@@ -14,18 +14,34 @@
     "assets": [
       "heir-building",
       "heir-vacant",
+      "heir-utility-room",
+      "heir-service-pipe",
+      "heir-plumbing-tools",
+      "heir-seal-stock",
       "heir-fund",
-      "heir-repair-quote"
+      "heir-repair-quote",
+      "heir-maintenance-log",
+      "heir-lease-office",
+      "heir-community-office",
+      "heir-rent-account",
+      "heir-lease-settlement",
+      "heir-community-settlement",
+      "heir-plumber-work"
     ],
     "contracts": [
       "heir-lease-offer",
-      "heir-repair-offer"
+      "heir-repair-offer",
+      "heir-plumbing-order"
     ],
     "opening": "埃琳娜带来两份方案，马尔科把漏水照片与 800 欧元维修报价放在桌上，伊内兹等着解释社区合作的条款。大家尚未签字。",
     "options": [
       "核对报价并协商维修预付款",
       "协商租客保护条款",
       "走进闲置房评估其他用途"
+    ],
+    "supportingContacts": [
+      "heir-lease-agent",
+      "heir-plumber"
     ]
   },
   {
@@ -43,7 +59,12 @@
     "assets": [
       "lead-terminal",
       "lead-budget",
-      "lead-report"
+      "lead-report",
+      "lead-controllers",
+      "lead-received-stock",
+      "lead-delivery-record",
+      "lead-client-office",
+      "lead-demo-package"
     ],
     "contracts": [
       "lead-demo",
@@ -54,6 +75,9 @@
       "请技术员复现并拟修复方案",
       "谈隔离试点",
       "比较采购与自修成本"
+    ],
+    "supportingContacts": [
+      "lead-client-representative"
     ]
   },
   {
@@ -71,7 +95,10 @@
     "assets": [
       "editor-deck",
       "editor-footage",
-      "editor-cut"
+      "editor-settlement",
+      "editor-cut",
+      "editor-edit-log",
+      "editor-release-file"
     ],
     "contracts": [
       "editor-screening"
@@ -99,10 +126,15 @@
       "apprentice-bench",
       "apprentice-tools",
       "apprentice-spare",
-      "apprentice-patient-interface"
+      "apprentice-patient-interface",
+      "apprentice-clinical-record",
+      "apprentice-parts-depot",
+      "apprentice-supplier-spare",
+      "apprentice-delivery-cart"
     ],
     "contracts": [
-      "apprentice-service"
+      "apprentice-service",
+      "apprentice-parts-offer"
     ],
     "opening": "安娜把工作路线单放在台边，手指的接口接触不稳。林医生正准备外出，博说明仓库最快送货时间；现有兼容备件只有一个。",
     "options": [
@@ -128,7 +160,13 @@
       "fleet-boxtruck",
       "fleet-reefer",
       "fleet-reserve",
-      "fleet-cargo"
+      "fleet-tools",
+      "fleet-valve-stock",
+      "fleet-client-settlement",
+      "fleet-cargo",
+      "fleet-regular-cargo",
+      "fleet-maintenance-log",
+      "fleet-delivery-log"
     ],
     "contracts": [
       "fleet-regular-order",
@@ -154,7 +192,10 @@
       "mateo"
     ],
     "assets": [
-      "medic-kit"
+      "medic-kit",
+      "medic-care-log",
+      "medic-service-card",
+      "medic-credential-reader"
     ],
     "contracts": [
       "medic-handover"
@@ -181,7 +222,8 @@
     "assets": [
       "armorer-bench",
       "armorer-pistol",
-      "armorer-crate"
+      "armorer-crate",
+      "armorer-test-log"
     ],
     "contracts": [
       "armorer-repair"
@@ -208,15 +250,20 @@
     "assets": [
       "partner-line",
       "partner-wages",
-      "partner-stock"
+      "partner-stock",
+      "partner-output",
+      "partner-sensor-stock",
+      "partner-customer-stock",
+      "partner-customer-settlement",
+      "partner-batch-log"
     ],
     "contracts": [
       "partner-trial",
       "partner-maintenance"
     ],
-    "opening": "第一批壳体摆在工作台上，低负荷记录合格而高速曲线异常。玛尔塔拿来工资表，欧文等着讨论验收范围，妮拉提出先看联锁日志。",
+    "opening": "空的成品周转盘摆在工作台上，先前低负荷记录合格而高速曲线异常。玛尔塔拿来工资表，欧文等着讨论验收范围，妮拉提出先看联锁日志。",
     "options": [
-      "复查日志并低速复测",
+      "用一份坯料低速试制并记录成品",
       "谈小批量交付",
       "预算维修与工资的先后"
     ]
@@ -236,7 +283,10 @@
     "assets": [
       "broker-van",
       "broker-permit",
-      "broker-batch"
+      "broker-batch",
+      "broker-received-stock",
+      "broker-customer-settlement",
+      "broker-discrepancy-log"
     ],
     "contracts": [
       "broker-delivery"
@@ -263,7 +313,10 @@
     "assets": [
       "manager-gear",
       "manager-fund",
-      "manager-song"
+      "manager-song",
+      "manager-venue-settlement",
+      "manager-test-report",
+      "manager-show-log"
     ],
     "contracts": [
       "manager-sponsored",
@@ -291,7 +344,10 @@
     "assets": [
       "reporter-recorder",
       "reporter-evidence",
-      "reporter-expenses"
+      "reporter-expenses",
+      "reporter-draft",
+      "reporter-publication-slot",
+      "reporter-notebook"
     ],
     "contracts": [
       "reporter-publication"
@@ -319,7 +375,9 @@
       "operator-interface",
       "operator-manual",
       "operator-pump",
-      "operator-spares"
+      "operator-spares",
+      "operator-community-fund",
+      "operator-diagnostic-log"
     ],
     "contracts": [
       "operator-repair"

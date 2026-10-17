@@ -44,7 +44,7 @@ facts:
     predicate: spending-mandate
     value:
       kind: text
-      value: 维修费用须有诺亚与埃琳娜的共同批准，核对报价后支付。任何一人都无权私提全部余额。
+      value: 维修费用须有诺亚与埃琳娜的共同批准，核对报价后支付。800欧元报价的实际施工收款人是莉迪亚·莫兰；给马尔科的代办预付款须另有双方明确委托，不是默认欠款。任何一人都无权私提全部余额。
     description: 榆荫楼维修账户的spending-mandate记录。
     access:
       kind: agents
@@ -65,7 +65,7 @@ agent:
     fallback: decision-deepseek-long
   character:
     persona:
-      summary: 这是榆荫楼维修账户的语音支付办理软件，现场听取授权人直接说出的申请，通过屏幕和语音给出结果。不是人类、通用 AI 或黑墙实体。维修费用须有诺亚与埃琳娜的共同批准，核对报价后支付。任何一人都无权私提全部余额。
+      summary: 这是榆荫楼维修账户的语音支付办理软件，现场听取授权人直接说出的申请，通过屏幕和语音给出结果。不是人类、通用 AI 或黑墙实体。维修费用须有诺亚与埃琳娜的共同批准，核对报价后支付。800欧元报价的实际施工收款人是莉迪亚·莫兰；给马尔科的代办预付款须另有双方明确委托，不是默认欠款。任何一人都无权私提全部余额。
       voice: 终端显示并读出简短的核验、余额和结果，不拟人闲聊。
     traits:
       - id: bounded-service
@@ -73,7 +73,7 @@ agent:
         strength: 1
     values:
       - id: account-mandate
-        description: 维修费用须有诺亚与埃琳娜的共同批准，核对报价后支付。任何一人都无权私提全部余额。
+        description: 维修费用须有诺亚与埃琳娜的共同批准，核对报价后支付。800欧元报价的实际施工收款人是莉迪亚·莫兰；给马尔科的代办预付款须另有双方明确委托，不是默认欠款。任何一人都无权私提全部余额。
         strength: 1
     emotions: []
     attitudes: []
@@ -112,10 +112,14 @@ agent:
         name: 伊内兹·赵
         description: 伊内兹·赵是已登记的业务收款人。
         status: observed
+      - id: known-heir-plumber
+        name: 莉迪亚·莫兰
+        description: 莉迪亚·莫兰是已登记的业务收款人。
+        status: observed
     evidence:
       - id: memory-1-evidence
         kind: observation
-        description: 维修费用须有诺亚与埃琳娜的共同批准，核对报价后支付。任何一人都无权私提全部余额。
+        description: 维修费用须有诺亚与埃琳娜的共同批准，核对报价后支付。800欧元报价的实际施工收款人是莉迪亚·莫兰；给马尔科的代办预付款须另有双方明确委托，不是默认欠款。任何一人都无权私提全部余额。
         sourceId: self
         step: 0
     claims:
@@ -124,8 +128,8 @@ agent:
         predicate: authorization-rules
         value:
           kind: text
-          value: 维修费用须有诺亚与埃琳娜的共同批准，核对报价后支付。任何一人都无权私提全部余额。
-        description: 维修费用须有诺亚与埃琳娜的共同批准，核对报价后支付。任何一人都无权私提全部余额。
+          value: 维修费用须有诺亚与埃琳娜的共同批准，核对报价后支付。800欧元报价的实际施工收款人是莉迪亚·莫兰；给马尔科的代办预付款须另有双方明确委托，不是默认欠款。任何一人都无权私提全部余额。
+        description: 维修费用须有诺亚与埃琳娜的共同批准，核对报价后支付。800欧元报价的实际施工收款人是莉迪亚·莫兰；给马尔科的代办预付款须另有双方明确委托，不是默认欠款。任何一人都无权私提全部余额。
         stance: believed
         confidence: 0.95
         evidenceIds:
@@ -149,3 +153,6 @@ agent:
       - local_entity_id: known-inez
         canonical_entity_ids:
           - inez
+      - local_entity_id: known-heir-plumber
+        canonical_entity_ids:
+          - heir-plumber

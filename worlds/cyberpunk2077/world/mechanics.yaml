@@ -26,6 +26,42 @@ quantities:
     unit: €$
     production_law_ids: []
     consumption_law_ids: []
+  - id: control-unit
+    name: 本批测试控制器
+    unit: 台
+    production_law_ids: []
+    consumption_law_ids:
+      - supply-use
+  - id: industrial-freight-unit
+    name: 本批普通工业货
+    unit: 箱
+    production_law_ids: []
+    consumption_law_ids:
+      - supply-use
+  - id: cooling-valve
+    name: 适配冷却阀
+    unit: 只
+    production_law_ids: []
+    consumption_law_ids:
+      - supply-use
+  - id: interlock-sensor
+    name: RT-7适配传感组件
+    unit: 件
+    production_law_ids: []
+    consumption_law_ids:
+      - supply-use
+  - id: watch-gear-unit
+    name: GC系列借出护具
+    unit: 件
+    production_law_ids: []
+    consumption_law_ids:
+      - supply-use
+  - id: control-cargo-unit
+    name: 本批A3控制器货箱
+    unit: 箱
+    production_law_ids: []
+    consumption_law_ids:
+      - supply-use
   - id: provisions
     name: 日用补给
     unit: 份
@@ -41,8 +77,22 @@ quantities:
     consumption_law_ids:
       - supply-use
   - id: components
-    name: 通用组件
+    name: 通用维修组件
     unit: 单位
+    production_law_ids:
+      - supply-production
+    consumption_law_ids:
+      - supply-use
+  - id: industrial-blank
+    name: 工业壳体坯料
+    unit: 份
+    production_law_ids:
+      - supply-production
+    consumption_law_ids:
+      - supply-use
+  - id: trial-housing
+    name: 待检试制壳体
+    unit: 件
     production_law_ids:
       - supply-production
     consumption_law_ids:

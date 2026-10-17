@@ -27,6 +27,8 @@
 | Lizzie's Bar / 丽姿酒吧 | 歌舞伎区；莫克斯活动中心，朱迪工作场所 | 入口与后台权限、具体员工、营业时段 | [S03](sources.md#s03)、[P01](sources.md#p01)、[S10](sources.md#s10) |
 | Misty's Esoterica / 米丝蒂的店 | 与维克多诊所存在通行联系 | 精确街道、门与院子连接、私人空间 | [P03](sources.md#p03) p43 |
 | Viktor's Clinic / 维克多诊所 | 义体医疗与熟人支持节点 | 库存、手术条件、预约、病历的知情边界 | [P03](sources.md#p03) p43 |
+| Electric Orgasm | Downtown；迪诺的酒吧与 Reed 的日常保安岗位 | 店内分区采用作者安排；不由保安工作推定客人知道特工身份或能借用狗镇通行渠道 | [S20](sources.md#s20)、[S21](sources.md#s21) |
+| The Moth | 狗镇酒吧，Alex 的掩护生活场所 | 具体房间布局与营业细节不冒充逐门复刻；DLC 重聚尚未发生 | [P03](sources.md#p03) p48、[S23](sources.md#s23) |
 | Afterlife / 来生 | 罗格经营的中间人与佣兵网络节点 | 入口规矩、酒保和其他熟客、谈生意的空间 | [P03](sources.md#p03) p46、[P12](sources.md#p12)、[S11](sources.md#s11) |
 | Konpeki Plaza / 绀碧大厦 | 劫案发生的酒店与安全系统场景 | 初始住客名单、办公室权限、套房与检修通路 | [S11](sources.md#s11)；具体地理待实机复核 |
 | All Foods 场地 | 《拿货》漩涡帮交易与控制空间 | 入口、囚禁地点、仓库和网络；T0 的控制者 | [S02](sources.md#s02) |
@@ -40,7 +42,7 @@
 | Longshore Stacks | 狗镇生活空间，手册有设计说明 | 居民、商户和实际道路；避免把狗镇只写成军营 | [P03](sources.md#p03) p28 |
 | 恶土道路与营地 | 城市外交通和流浪者生活基础 | 营地会迁移，水、燃料、车辆和驻扎权都需要明确 | [P13](sources.md#p13)、[P03](sources.md#p03) p29 |
 
-第二轮补齐：Megabuilding H10、El Coyote Cojo、Clouds、Jig-Jig Street、Atlantis 的历史位置、Embers、Heavy Hearts、Black Sapphire、EBM Petrochem Stadium、The Moth、狗镇诊所、阿德卡多各阶段营地与关键企业设施。这里只列目标，不把未核准的营业状态和门禁写进初始化。
+按新增玩法需要进一步核查：Megabuilding H10、El Coyote Cojo、Clouds、Jig-Jig Street、Atlantis 的历史位置、Embers、Heavy Hearts、Black Sapphire、EBM Petrochem Stadium、狗镇诊所、阿德卡多各阶段营地与关键企业设施。这些是全游戏空间覆盖目标，不是当前可玩包尚未存在的开场场景；不把未核准的营业状态和门禁写进初始化。
 
 ## 空间建模提案
 
@@ -51,3 +53,5 @@
 地图上的快旅点属于电子游戏交互，不能自动赋予瞬移能力。距离、交通时间和城市规模需要单独选定模型；电子游戏压缩地图与现实尺度不能交替使用。第一轮空间精度优先服务可信行动：能否到达、经过哪里、需要什么、会被谁看见。
 
 每片区都要有日常生活节点：住房、食品、交通、维修、医疗、工作和熟人。危险场所只是其中一部分；如果地图只剩帮派据点，医生、记者、技师和富裕身份都会被迫变回战斗佣兵。
+
+当前实现把 `electric-orgasm` 作为 Downtown 酒吧，将 `dino-office` 作为其内部会客节点；Reed 在酒吧值班。P03 p48 的狗镇潜伏概述没有精确定位他的工作地，S20 的开发者答复明确保留其夜之城掩护与狗镇关系网。因而不能从“在狗镇潜伏”推出“保安岗位就在狗镇”。这项改动没有给所有玩家增加一条绕关卡的通路。

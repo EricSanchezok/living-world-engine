@@ -1,0 +1,108 @@
+id: heir-maintenance-log
+kind: data-file
+name: 榆荫楼维修工作簿
+description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+placement: heir-work
+facts:
+  - id: heir-maintenance-log-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: heir
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+  - id: heir-maintenance-log-entries-2
+    predicate: entries
+    value:
+      kind: text
+      value: 空白：尚未记录本次工作的观察、操作或结果。
+    description: 本次工作记录的正文；只能由实际观察和已发生的操作形成。
+    access:
+      kind: agents
+      agentIds: &a1
+        - heir
+        - elena
+        - marco
+        - inez
+  - id: heir-maintenance-log-record-state-3
+    predicate: record-state
+    value:
+      kind: text
+      value: blank
+    description: 空白、草稿或已复核依实际填写与复核改变；文档存在不代表工作完成。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-maintenance-log-record-purpose-4
+    predicate: record-purpose
+    value:
+      kind: text
+      value: 分开记下现场漏点、隔离与维修、密封垫用量、复压检查及真实预付款；关水或转账都不是修缮已完成。
+    description: 榆荫楼维修工作簿的record-purpose记录。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-maintenance-log-authorized-writer-5
+    predicate: authorized-writer
+    value:
+      kind: entity
+      entityId: heir
+    description: 本人可以据实填写，修改记录不改变原始材料或独立验收结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-maintenance-log-record-subject-6
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: heir-building
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-maintenance-log-record-subject-7
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: heir-repair-quote
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-maintenance-log-record-subject-8
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: heir-service-pipe
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-maintenance-log-record-subject-9
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: heir-plumbing-tools
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-maintenance-log-record-subject-10
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: heir-plumbing-order
+    description: 单独记录实际委托、付款和验收，不把初步报价写成欠款。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - inez
+meters: []
+quantities: []
+ratings: []

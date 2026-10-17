@@ -18,6 +18,7 @@ import { readDirectState } from "../src/engine/direct/state";
 const base = path.resolve("worlds/cyberpunk2077");
 interface Role { code: string; id: string; home: string; work: string; cash: number; contacts: string[]; assets: string[]; contracts: string[] }
 const roles = JSON.parse(readFileSync(path.join(base, "authoring/playable-roles.json"), "utf8")) as Role[];
+const coverage = JSON.parse(readFileSync(path.join(base, "authoring/coverage.json"), "utf8")) as { counts: { agents: number; automatedServices: number; people: number } };
 const quantity = (state: SimulationState, holder: string, definition = "eurodollar") =>
   Object.values(state.truth.quantities).find(item => item.holderId === holder && item.definitionId === definition)?.amount;
 const archive = () => { const zip = new AdmZip(); zip.addLocalFolder(path.join(base, "world")); return zip.toBuffer(); };
@@ -60,7 +61,8 @@ function makeProvider(company = false) {
 describe("Cyberpunk 2077 authored world through import and persistent play", () => {
   it("keeps generated runtime and role documentation reproducible", () => {
     const report = JSON.parse(execFileSync(process.execPath, [path.join(base, "authoring/build.mjs"), "--check"], { encoding: "utf8" }));
-    expect(report.counts).toMatchObject({ people: 101, agents: 107, automatedServices: 6, playableRoles: 12, organizations: 22 });
+    expect(report.counts).toMatchObject({ playableRoles: 12 });
+    expect(report.counts.agents).toBe(report.counts.people + report.counts.automatedServices);
     expect(report.narrativeExpansion).toBe(false);
   });
 
@@ -81,14 +83,14 @@ describe("Cyberpunk 2077 authored world through import and persistent play", () 
         const document = database.readInstance(id).document, state = document.state;
         expect(state.truth).toEqual(before.truth);
         expect(state.agents[role.id]).toEqual(before.agents[role.id]);
-        expect(Object.values(state.agents)).toHaveLength(107);
+        expect(Object.values(state.agents)).toHaveLength(coverage.counts.agents);
         expect(readDirectState(state.executionState!, state).models.decision).toBe("decision-deepseek-long");
         expect(state.agents[role.id]!.modelProfiles.decision).toBe("decision-jev");
         expect(quantity(state, role.id)).toBe(role.cash);
         expect(state.truth.placements[role.id]).toBe(role.work);
         expect(state.truth.entities[role.home]).toBeDefined();
         expect(document.policyBindings[role.id]?.kind).toBe("external");
-        expect(Object.values(document.policyBindings).filter(policy => policy.kind === "model")).toHaveLength(106);
+        expect(Object.values(document.policyBindings).filter(policy => policy.kind === "model")).toHaveLength(coverage.counts.agents - 1);
         for (const contact of role.contacts) {
           expect(Object.values(state.agents[role.id]!.bindings).some(binding => binding.canonicalEntityIds.includes(contact))).toBe(true);
           expect(Object.values(state.agents[contact]!.bindings).some(binding => binding.canonicalEntityIds.includes(role.id))).toBe(true);
@@ -124,6 +126,122 @@ describe("Cyberpunk 2077 authored world through import and persistent play", () 
       expect(JSON.stringify(projectAgentPerspective(state, state.agents.operator!))).not.toContain("备用供电板接点间歇失效");
     } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
   }, 60000);
+
+  it("imports distinct production stocks, funded commissions and blank work records without inventing results", async () => {
+    const root = mkdtempSync(path.join(tmpdir(), "night-city-work-products-"));
+    const provider = makeProvider(); await provider.registry.capture();
+    const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
+    try {
+      const encoded = execFileSync(process.execPath, ["--input-type=module", "-e",
+        "import { renderWorld, worldArchive } from './worlds/cyberpunk2077/authoring/build.mjs'; process.stdout.write(worldArchive(renderWorld().files).toString('base64'));"], { encoding: "utf8" });
+      const imported = database.importWorld(Buffer.from(encoded, "base64"), provider.catalog);
+      const host = new WorldHost({ repository: database, store: database, ledger: database, provider: provider.gateway });
+      const created = await host.createInstance({ worldId: imported.id, start: { kind: "observer" } });
+      const state = database.readInstance(created.summary.id).document.state;
+      const fact = (subjectId: string, predicate: string) => Object.values(state.truth.facts).find(value => value.subjectId === subjectId && value.predicate === predicate);
+      expect(state.truth.placements.reed).toBe("electric-orgasm");
+      expect(state.truth.placements["dino-office"]).toBe("electric-orgasm");
+      expect(JSON.stringify(projectAgentPerspective(state, state.agents.dino!))).not.toMatch(/FIA|所罗门|李德/);
+      const alexView = JSON.stringify(projectAgentPerspective(state, state.agents.alex!));
+      expect(alexView).toContain("李德当年已经死亡");
+      expect(alexView).not.toContain("survived-cover-death");
+      for (const actor of ["rogue", "kerry"]) {
+        expect(state.agents[actor]!.belief.localEntities["remembered-johnny"]?.name).toBe("记忆中的强尼");
+        expect(state.agents[actor]!.bindings["remembered-johnny"]?.canonicalEntityIds).toEqual([]);
+      }
+      expect(state.truth.placements["heir-service-pipe"]).toBe("heir-utility-room");
+      expect(state.truth.placements["heir-plumbing-tools"]).toBe("heir-utility-room");
+      expect(fact("heir-service-pipe", "leaking")?.value).toEqual({ kind: "boolean", value: true });
+      expect(fact("heir-service-pipe", "supply-isolated")?.value).toEqual({ kind: "boolean", value: false });
+      expect(fact("heir-service-pipe", "pressure-tested")?.value).toEqual({ kind: "boolean", value: false });
+      expect(quantity(state, "heir", "components")).toBe(2);
+      expect(fact("heir", "storage-components")?.value).toEqual({ kind: "entity", entityId: "heir-seal-stock" });
+      expect(JSON.stringify(projectAgentPerspective(state, state.agents.heir!))).not.toContain("活接内部的兼容密封垫老化");
+      expect(quantity(state, "partner", "industrial-blank")).toBe(36);
+      expect(quantity(state, "partner", "trial-housing")).toBe(0);
+      expect(quantity(state, "partner", "components")).toBeUndefined();
+      expect(quantity(state, "partner-stock", "industrial-blank")).toBeUndefined();
+      expect(fact("partner", "storage-industrial-blank")?.value).toEqual({ kind: "entity", entityId: "partner-stock" });
+      expect(fact("partner", "storage-trial-housing")?.value).toEqual({ kind: "entity", entityId: "partner-output" });
+      expect(fact("partner-output", "customer-accepted")?.value).toEqual({ kind: "boolean", value: false });
+      expect(fact("partner-line", "safe-full-rate")?.value).toEqual({ kind: "boolean", value: false });
+      expect(quantity(state, "owen", "trial-housing")).toBe(0);
+      expect(fact("partner-customer-stock", "owner")?.value).toEqual({ kind: "entity", entityId: "grille-equipment" });
+      expect(quantity(state, "ada", "control-unit")).toBe(6);
+      expect(quantity(state, "lead", "control-unit")).toBe(0);
+      expect(fact("ada", "storage-control-unit")?.value).toEqual({ kind: "entity", entityId: "lead-controllers" });
+      expect(fact("lead-controllers", "owner")?.value).toEqual({ kind: "entity", entityId: "ada" });
+      expect(fact("lead", "storage-control-unit")?.value).toEqual({ kind: "entity", entityId: "lead-received-stock" });
+      expect(fact("lead-received-stock", "owner")?.value).toEqual({ kind: "entity", entityId: "crownbridge-services" });
+      expect(fact("lead-budget", "owner")?.value).toEqual({ kind: "entity", entityId: "crownbridge-services" });
+      expect(fact("lead-received-stock", "received-for-project")?.value).toEqual({ kind: "boolean", value: false });
+      for (const [account, representative, balance, payee] of [
+        ["editor-settlement", "celia", 4800, "editor"],
+        ["fleet-client-settlement", "mei", 8000, "fleet-reserve"],
+        ["manager-venue-settlement", "paulo", 10000, "manager-fund"],
+        ["partner-customer-settlement", "owen", 2400, "partner-wages"],
+        ["operator-community-fund", "pump-commissioner", 1800, "operator"],
+        ["broker-customer-settlement", "jun", 8000, "broker-supplier"],
+      ] as const) {
+        expect(quantity(state, account)).toBe(balance);
+        expect(quantity(state, representative)).toBe(1200);
+        expect(fact(account, "automated-service")?.value).toEqual({ kind: "boolean", value: true });
+        expect(Object.values(state.agents[account]!.bindings).some(binding => binding.canonicalEntityIds.includes(payee))).toBe(true);
+      }
+      const records = [
+        ["heir", "heir-maintenance-log"], ["lead", "lead-delivery-record"], ["editor", "editor-edit-log"],
+        ["apprentice", "apprentice-clinical-record"], ["fleet", "fleet-maintenance-log"], ["medic", "medic-care-log"],
+        ["fleet", "fleet-delivery-log"], ["manager", "manager-show-log"],
+        ["armorer", "armorer-test-log"], ["partner", "partner-batch-log"], ["broker", "broker-discrepancy-log"],
+        ["manager", "manager-test-report"], ["reporter", "reporter-notebook"], ["operator", "operator-diagnostic-log"],
+      ];
+      for (const [owner, record] of records) {
+        expect(state.truth.entities[record!]!.kind).toBe("data-file");
+        expect(fact(record!, "record-state")?.value).toEqual({ kind: "text", value: "blank" });
+        expect(fact(record!, "entries")?.access.kind).toBe("agents");
+        expect(fact(record!, "authorized-writer")?.value).toEqual({ kind: "entity", entityId: owner });
+        expect(Object.values(state.agents[owner!]!.bindings).some(binding => binding.canonicalEntityIds.includes(record!))).toBe(true);
+      }
+      expect(fact("reporter-notebook", "entries")?.access).toEqual({ kind: "agents", agentIds: ["reporter", "leila", "amara"] });
+      expect(fact("apprentice-clinical-record", "entries")?.access).toEqual({ kind: "agents", agentIds: ["apprentice", "lin", "ana"] });
+      expect(JSON.stringify(projectAgentPerspective(state, state.agents.heir!))).not.toContain("事故调查内部核验笔记");
+      expect(JSON.stringify(projectAgentPerspective(state, state.agents.bo!))).not.toContain("安娜接口维护记录");
+      expect(state.truth.entities["fleet-tools"]).toBeDefined();
+      expect(quantity(state, "fleet", "cargo-unit")).toBe(4);
+      expect(quantity(state, "fleet", "industrial-freight-unit")).toBe(6);
+      expect(quantity(state, "freight-receiver", "cargo-unit")).toBe(0);
+      expect(quantity(state, "freight-receiver", "industrial-freight-unit")).toBe(0);
+      expect(state.truth.placements["freight-receiver"]).toBe("fleet-destination");
+      expect(fact("fleet-cargo", "delivery-destination")?.value).toEqual({ kind: "entity", entityId: "fleet-destination" });
+      expect(fact("fleet-regular-cargo", "delivery-accepted")?.value).toEqual({ kind: "boolean", value: false });
+      expect(fact("armorer-crate", "owner")?.value).toEqual({ kind: "entity", entityId: "rancho-community-watch" });
+      expect(fact("armorer-crate", "owner")?.access).toEqual({ kind: "agents", agentIds: ["watch-registrar"] });
+      expect(fact("armorer-crate", "custodian")?.value).toEqual({ kind: "entity", entityId: "grant" });
+      expect(quantity(state, "grant", "watch-gear-unit")).toBe(3);
+      expect(quantity(state, "watch-registrar", "watch-gear-unit")).toBe(0);
+      expect(JSON.stringify(projectAgentPerspective(state, state.agents.armorer!))).not.toContain("GC-14、GC-15、GC-16归社区守望队");
+      expect(quantity(state, "raul", "cooling-valve")).toBe(1);
+      expect(quantity(state, "nela", "interlock-sensor")).toBe(1);
+      expect(quantity(state, "broker", "control-cargo-unit")).toBe(4);
+      expect(quantity(state, "broker", "cargo-unit")).toBeUndefined();
+      expect(quantity(state, "freight-receiver", "control-cargo-unit")).toBe(0);
+      expect(fact("broker-batch", "consignor")?.value).toEqual({ kind: "entity", entityId: "broker-supplier" });
+      expect(state.truth.placements["manager-stage"]).toBe("manager-venue");
+      expect(state.truth.placements["venue-listener"]).toBe("manager-venue");
+      expect(fact("manager-show", "performance-completed")?.value).toEqual({ kind: "boolean", value: false });
+      expect(fact("manager-show", "settled")?.value).toEqual({ kind: "boolean", value: false });
+      expect(fact("operator-pump", "owner")?.value).toEqual({ kind: "entity", entityId: "northside-water-coop" });
+      expect(state.truth.placements["pump-commissioner"]).toBe("operator-work");
+      expect(state.truth.placements["accident-witness"]).toBe("reporter-accident-site");
+      expect(fact("reporter-draft", "editor-approved")?.value).toEqual({ kind: "boolean", value: false });
+      expect(fact("reporter-publication-slot", "published")?.value).toEqual({ kind: "boolean", value: false });
+      expect(fact("reporter-publication-slot", "published-copy")?.access.kind).toBe("public");
+      expect(fact("reporter-draft", "body")?.access.kind).toBe("agents");
+      expect(Object.values(state.truth.facts).filter(value => value.predicate === "signed").every(value => value.value.kind === "boolean" && !value.value.value)).toBe(true);
+      expect(provider.transport).not.toHaveBeenCalled();
+      expect(replaySimulationState(state)).toEqual(state);
+    } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+  }, 30000);
 
   it.each([false, true])("commits an actual payment from the correct personal or company holder and restores it (company=%s)", async company => {
     const root = mkdtempSync(path.join(tmpdir(), "night-city-payment-")), filename = path.join(root, "world.sqlite");

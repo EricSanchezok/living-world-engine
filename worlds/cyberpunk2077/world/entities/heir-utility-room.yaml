@@ -1,0 +1,17 @@
+id: heir-utility-room
+kind: place
+name: 榆荫楼公共管线间
+description: 一楼会客室沿楼内走廊可到的检修间。共有人和受委托维修者可进入；狭窄走道有接水盘，不能在会客室隔空修管。
+placement: heir-building
+facts:
+  - id: heir-utility-room-property-part-1
+    predicate: property-part
+    value:
+      kind: entity
+      entityId: heir-building
+    description: 公共管线间随共同产权经营，不是可单独出售的私人储物室。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

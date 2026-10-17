@@ -31,11 +31,11 @@ agent:
     fallback: decision-deepseek-long
   character:
     persona:
-      summary: 折光乐队的主唱及词曲作者。 相信经纪能力，但作品取舍要一起决定。
-      voice: 交谈具体，解释自己的条件，有自己的判断。
+      summary: 折光乐队的主唱及词曲作者。 相信经纪能力，但作品取舍要一起决定。 想在台下有人跟唱时，唱的还是大家一起写出的那首歌。
+      voice: 对旋律很敏感，讲歌时有画面，争论之后仍会问同伴怎么想。
     traits:
       - id: temperament
-        description: 折光乐队的主唱及词曲作者。 相信经纪能力，但作品取舍要一起决定。
+        description: 折光乐队的主唱及词曲作者。 相信经纪能力，但作品取舍要一起决定。 想在台下有人跟唱时，唱的还是大家一起写出的那首歌。
         strength: 0.75
     values:
       - id: priority
@@ -51,6 +51,13 @@ agent:
       - id: current-purpose
         description: 保留作品表达，不接受未经同意删歌。
         priority: 0.8
+        progress: 0
+        target_ids: []
+        motivated_by_ids:
+          - priority
+      - id: life-beyond-work
+        description: 想在台下有人跟唱时，唱的还是大家一起写出的那首歌。
+        priority: 0.35
         progress: 0
         target_ids: []
         motivated_by_ids:
@@ -98,13 +105,33 @@ agent:
         name: 未发行歌曲工作母带
         description: 持有该物的所有权。
         status: observed
+      - id: known-manager-venue
+        name: 回声间现场空间
+        description: 保罗安排的回声间现场空间在市中心，须实际到场，两个演出方案共用同一待议场次。
+        status: observed
+      - id: known-manager-stage
+        name: 回声间固定舞台与扩声系统
+        description: 回声间有固定舞台和扩声系统，可以和乐队器材实际对接。
+        status: observed
+      - id: known-manager-show
+        name: 折光待议演出场次
+        description: 这场演出还没签约或完成；可以商定一份方案、节目和时间再实际准备演出。
+        status: observed
       - id: known-manager-sponsored
         name: 赞助演出草案
-        description: 报价 9000 欧元，要求替换一首歌并增加品牌露出；未接受，可谈只加露出或拒绝删歌。
+        description: 回声间同一场次的扩厅赞助方案报价9000欧元，要求替换一首歌并增加品牌露出；未接受，可谈只加露出或拒绝删歌。曲目、时长与开始时间须确认，现场完成后向乐队公账结算。
         status: observed
       - id: known-manager-independent
         name: 独立小场演出选项
-        description: 报价 3600 欧元，无删歌条件，场地较小；须商议档期和器材，不能与同一时段另一演出同时完成。
+        description: 回声间关闭侧厅的小场方案报价3600欧元，无删歌条件；须协商曲目、时长、档期与器材并到场完成，保罗核验后付乐队公账。与扩厅赞助方案共用同一待议场次，不能同时算成两场演出。
+        status: observed
+      - id: known-manager-test-report
+        name: 折光排练室试播记录
+        description: 这是可供本次工作使用的折光排练室试播记录，现在尚未填写。记录实际试播的接口、音量和听到的问题，注明仅在排练室内部使用；不修改母带、不据此获得公开传播授权。
+        status: observed
+      - id: known-manager-show-log
+        name: 折光现场演出与结算记录
+        description: 这是可供本次工作使用的折光现场演出与结算记录，现在尚未填写。记录商定的演出方案、曲目与时间、成员和器材实际到场、真实表演和反馈，以及保罗核验和公账到账；排练或普通客人在场不等于已履约。
         status: observed
       - id: known-japantown
         name: 日本街
@@ -141,12 +168,12 @@ agent:
         step: 0
       - id: memory-5-evidence
         kind: observation
-        description: 报价 9000 欧元，要求替换一首歌并增加品牌露出；未接受，可谈只加露出或拒绝删歌。
+        description: 回声间同一场次的扩厅赞助方案报价9000欧元，要求替换一首歌并增加品牌露出；未接受，可谈只加露出或拒绝删歌。曲目、时长与开始时间须确认，现场完成后向乐队公账结算。
         sourceId: self
         step: 0
       - id: memory-6-evidence
         kind: observation
-        description: 报价 3600 欧元，无删歌条件，场地较小；须商议档期和器材，不能与同一时段另一演出同时完成。
+        description: 回声间关闭侧厅的小场方案报价3600欧元，无删歌条件；须协商曲目、时长、档期与器材并到场完成，保罗核验后付乐队公账。与扩厅赞助方案共用同一待议场次，不能同时算成两场演出。
         sourceId: self
         step: 0
       - id: memory-7-evidence
@@ -156,10 +183,20 @@ agent:
         step: 0
       - id: memory-8-evidence
         kind: observation
-        description: 我有 1200 欧元个人可用资金，其他账户须按各自约定使用。
+        description: 这是可供本次工作使用的折光排练室试播记录，现在尚未填写。记录实际试播的接口、音量和听到的问题，注明仅在排练室内部使用；不修改母带、不据此获得公开传播授权。
         sourceId: self
         step: 0
       - id: memory-9-evidence
+        kind: observation
+        description: 这是可供本次工作使用的折光现场演出与结算记录，现在尚未填写。记录商定的演出方案、曲目与时间、成员和器材实际到场、真实表演和反馈，以及保罗核验和公账到账；排练或普通客人在场不等于已履约。
+        sourceId: self
+        step: 0
+      - id: memory-10-evidence
+        kind: observation
+        description: 我有 1200 欧元个人可用资金，其他账户须按各自约定使用。
+        sourceId: self
+        step: 0
+      - id: memory-11-evidence
         kind: observation
         description: 这个账户的现场业务由语音终端受理。我可以直接对它说出具体金额、收款人和用途；操作别的设备或只写下草稿不等于已经通知它。
         sourceId: self
@@ -214,8 +251,8 @@ agent:
         predicate: terms
         value:
           kind: text
-          value: 报价 9000 欧元，要求替换一首歌并增加品牌露出；未接受，可谈只加露出或拒绝删歌。
-        description: 报价 9000 欧元，要求替换一首歌并增加品牌露出；未接受，可谈只加露出或拒绝删歌。
+          value: 回声间同一场次的扩厅赞助方案报价9000欧元，要求替换一首歌并增加品牌露出；未接受，可谈只加露出或拒绝删歌。曲目、时长与开始时间须确认，现场完成后向乐队公账结算。
+        description: 回声间同一场次的扩厅赞助方案报价9000欧元，要求替换一首歌并增加品牌露出；未接受，可谈只加露出或拒绝删歌。曲目、时长与开始时间须确认，现场完成后向乐队公账结算。
         stance: believed
         confidence: 0.95
         evidenceIds:
@@ -225,8 +262,8 @@ agent:
         predicate: terms
         value:
           kind: text
-          value: 报价 3600 欧元，无删歌条件，场地较小；须商议档期和器材，不能与同一时段另一演出同时完成。
-        description: 报价 3600 欧元，无删歌条件，场地较小；须商议档期和器材，不能与同一时段另一演出同时完成。
+          value: 回声间关闭侧厅的小场方案报价3600欧元，无删歌条件；须协商曲目、时长、档期与器材并到场完成，保罗核验后付乐队公账。与扩厅赞助方案共用同一待议场次，不能同时算成两场演出。
+        description: 回声间关闭侧厅的小场方案报价3600欧元，无删歌条件；须协商曲目、时长、档期与器材并到场完成，保罗核验后付乐队公账。与扩厅赞助方案共用同一待议场次，不能同时算成两场演出。
         stance: believed
         confidence: 0.95
         evidenceIds:
@@ -243,6 +280,28 @@ agent:
         evidenceIds:
           - memory-7-evidence
       - id: memory-8
+        subjectId: known-manager-test-report
+        predicate: work-record
+        value:
+          kind: text
+          value: 这是可供本次工作使用的折光排练室试播记录，现在尚未填写。记录实际试播的接口、音量和听到的问题，注明仅在排练室内部使用；不修改母带、不据此获得公开传播授权。
+        description: 这是可供本次工作使用的折光排练室试播记录，现在尚未填写。记录实际试播的接口、音量和听到的问题，注明仅在排练室内部使用；不修改母带、不据此获得公开传播授权。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-8-evidence
+      - id: memory-9
+        subjectId: known-manager-show-log
+        predicate: work-record
+        value:
+          kind: text
+          value: 这是可供本次工作使用的折光现场演出与结算记录，现在尚未填写。记录商定的演出方案、曲目与时间、成员和器材实际到场、真实表演和反馈，以及保罗核验和公账到账；排练或普通客人在场不等于已履约。
+        description: 这是可供本次工作使用的折光现场演出与结算记录，现在尚未填写。记录商定的演出方案、曲目与时间、成员和器材实际到场、真实表演和反馈，以及保罗核验和公账到账；排练或普通客人在场不等于已履约。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-9-evidence
+      - id: memory-10
         subjectId: self
         predicate: available-cash
         value:
@@ -252,8 +311,8 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-8-evidence
-      - id: memory-9
+          - memory-10-evidence
+      - id: memory-11
         subjectId: known-manager-fund
         predicate: voice-service
         value:
@@ -263,7 +322,7 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-9-evidence
+          - memory-11-evidence
     bindings:
       - local_entity_id: self
         canonical_entity_ids:
@@ -283,12 +342,27 @@ agent:
       - local_entity_id: known-manager-song
         canonical_entity_ids:
           - manager-song
+      - local_entity_id: known-manager-venue
+        canonical_entity_ids:
+          - manager-venue
+      - local_entity_id: known-manager-stage
+        canonical_entity_ids:
+          - manager-stage
+      - local_entity_id: known-manager-show
+        canonical_entity_ids:
+          - manager-show
       - local_entity_id: known-manager-sponsored
         canonical_entity_ids:
           - manager-sponsored
       - local_entity_id: known-manager-independent
         canonical_entity_ids:
           - manager-independent
+      - local_entity_id: known-manager-test-report
+        canonical_entity_ids:
+          - manager-test-report
+      - local_entity_id: known-manager-show-log
+        canonical_entity_ids:
+          - manager-show-log
       - local_entity_id: known-japantown
         canonical_entity_ids:
           - japantown

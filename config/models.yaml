@@ -174,7 +174,7 @@ profiles:
   decision-deepseek-long:
     account_id: deepseek-api
     selector: { kind: exact, model_id: deepseek-flash }
-    description: 多人物世界裁决的显式长输出回退
+    description: 多人物世界裁决，保留完整输出额度与较长请求时限
     allowed_roles: [decision]
     response_transport: deepseek-sse-v1
     request_timeout_ms: 180000

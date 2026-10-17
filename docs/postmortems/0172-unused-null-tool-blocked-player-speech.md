@@ -24,4 +24,4 @@ The branch validator intentionally discards fields that the selected operation d
 ## Guardrails
 
 - [Simulation-entry regressions](../../src/engine/direct/__tests__/runtime.test.ts): “validates nullable catalog fields only on the executed … branch” verifies delivered speech with one reading, rejection of an invalid active observation scope, unchanged truth on failure and exact replay.
-- [Player reading validator](../../src/engine/direct/player-reading.ts) retains one executed-branch validation path; accepting absence never selects an entity, grants permission or commits an action parameter.
+- [Action reading validator](../../src/engine/direct/action-reading.ts) retains one executed-branch validation path; accepting absence never selects an entity, grants permission or commits an action parameter.

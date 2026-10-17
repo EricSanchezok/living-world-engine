@@ -1,0 +1,39 @@
+id: fleet-tools
+kind: equipment
+name: 车队共用检修工具车
+description: 压力表、检漏工具、绝缘手工具与空载测试接口；可检查和维护，不包含能凭空替换的冷却阀。
+placement: fleet-work
+facts:
+  - id: fleet-tools-authorized-user-1
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: fleet
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: &a1
+        - fleet
+        - raul
+        - jo
+  - id: fleet-tools-authorized-user-2
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: raul
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: fleet-tools-authorized-user-3
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: jo
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

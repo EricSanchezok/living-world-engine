@@ -1,0 +1,25 @@
+id: manager-venue
+kind: place
+name: 回声间现场空间
+description: 原创营业场地，有道路入口、固定舞台、散座与可开闭的侧厅；保罗负责排期。当前有普通酒吧客人，没有已经成立的折光演出。
+placement: downtown
+facts:
+  - id: manager-venue-street-access-1
+    predicate: street-access
+    value:
+      kind: entity
+      entityId: downtown
+    description: 从日本街排练室到此须实际出行，乐队成员和器材不能靠口头选方案瞬移。
+    access:
+      kind: public
+  - id: manager-venue-manager-2
+    predicate: manager
+    value:
+      kind: entity
+      entityId: paulo
+    description: 保罗有场地排期和本批演出预算权限，不能替词曲作者授予作品版权。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

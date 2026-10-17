@@ -45,6 +45,38 @@ facts:
       agentIds:
         - heir
         - inez
+  - id: heir-established-business-contact-5
+    predicate: established-business-contact
+    value:
+      kind: entity
+      entityId: heir-lease-agent
+    description: 萨娜此前与诺亚和埃琳娜一起看过楼，提出书面方案，双方尚未签约。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - heir-lease-agent
+  - id: heir-established-business-contact-6
+    predicate: established-business-contact
+    value:
+      kind: entity
+      entityId: heir-plumber
+    description: 马尔科向诺亚介绍过莉迪亚的店，桌上的800欧元文件是她的初步报价，双方未下单。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - heir-plumber
+  - id: heir-storage-components-7
+    predicate: storage-components
+    value:
+      kind: entity
+      entityId: heir-seal-stock
+    description: 该类登记物资的实际存放处；保管不改变产权，远离存放处不能隔空交货。
+    access:
+      kind: agents
+      agentIds:
+        - heir
 meters:
   - id: heir-vitality
     definition_id: vitality
@@ -57,6 +89,8 @@ quantities:
     amount: 18000
   - definition_id: medical-supply
     amount: 1
+  - definition_id: components
+    amount: 2
 ratings:
   - id: heir-persuasion
     definition_id: persuasion
@@ -102,6 +136,14 @@ agent:
         subject_id: known-inez
         description: 相信她懂邻里需要，仍要审视预算。
         intensity: 0.7
+      - id: toward-heir-lease-agent
+        subject_id: known-heir-lease-agent
+        description: 知道她在格伦的办公室，可以带着修改意见去谈。
+        intensity: 0.7
+      - id: toward-heir-plumber
+        subject_id: known-heir-plumber
+        description: 可以到维修间确认报价，也可以按已有权限自己处理基础维护。
+        intensity: 0.7
     goals:
       - id: current-purpose
         description: 让旧楼带来可持续的生活，决定如何利用闲置空间。
@@ -124,6 +166,14 @@ agent:
         progress: 0
         target_ids:
           - known-heir-repair-offer
+        motivated_by_ids:
+          - priority
+      - id: consider-heir-plumbing-order
+        description: 就榆荫楼基础止漏待议施工单作出符合自身利益的决定；允许修改、拒绝或延期。
+        priority: 0.65
+        progress: 0
+        target_ids:
+          - known-heir-plumbing-order
         motivated_by_ids:
           - priority
     commitments:
@@ -168,6 +218,22 @@ agent:
         name: 榆荫楼闲置工作室
         description: 可改作办公室、诊疗合作点或排练间，现为空置。
         status: observed
+      - id: known-heir-utility-room
+        name: 榆荫楼公共管线间
+        description: 一楼会客室沿楼内走廊可到的检修间。共有人和受委托维修者可进入；狭窄走道有接水盘，不能在会客室隔空修管。
+        status: observed
+      - id: known-heir-service-pipe
+        name: 漏水的公共冷水管活接
+        description: 公共冷水立管上的活接，底部接水盘可见持续水滴；检修需先靠近、确认水路和实际隔离。
+        status: observed
+      - id: known-heir-plumbing-tools
+        name: 榆荫楼管线检修工具
+        description: 活动扳手、绝缘照明灯、接水盘和水压表，能支持这段冷水管的现场检查及基础维护。
+        status: observed
+      - id: known-heir-seal-stock
+        name: 榆荫楼兼容密封垫小盒
+        description: 两枚与该冷水管活接规格相容的常备密封垫，归共同维修物资；更换一枚须实际消耗一单位登记组件。
+        status: observed
       - id: known-heir-fund
         name: 榆荫楼维修账户
         description: 专项维修资金，双方知情后可支付实际工程。
@@ -183,6 +249,54 @@ agent:
       - id: known-heir-repair-offer
         name: 修缮与社区空间合作
         description: 社区合作方愿以每月 4200 欧元收入及分期修缮换取工作室使用；先核验报价、分工与验收，再签约。首笔维修可单独处理。
+        status: observed
+      - id: known-heir-maintenance-log
+        name: 榆荫楼维修工作簿
+        description: 持有该物的所有权。
+        status: observed
+      - id: known-heir-lease-office
+        name: 嘉衡物业格伦办事处
+        description: 一家原创小型物业运营商的营业办公室。萨娜在这里接待预约，桌边有办理本次首月租金的支付终端。
+        status: observed
+      - id: known-heir-lease-agent
+        name: 萨娜·贝克
+        description: 萨娜此前与诺亚和埃琳娜一起看过楼，提出书面方案，双方尚未签约。 知道她在格伦的办公室，可以带着修改意见去谈。
+        status: observed
+      - id: known-heir-lease-company
+        name: 嘉衡物业运营
+        description: 五年包租要约的实际提案方是嘉衡物业运营。
+        status: observed
+      - id: known-heir-community-office
+        name: 榆荫邻里合作社小办公室
+        description: 邻里合作社在格伦租用的既有办公室，准备社区空间合作并保管自己的业务资料；它还没有取得榆荫楼工作室使用权。
+        status: observed
+      - id: known-heir-community-coop
+        name: 榆荫邻里合作社
+        description: 社区空间提案来自榆荫邻里合作社，伊内兹是本次受托代表。
+        status: observed
+      - id: known-heir-rent-account
+        name: 榆荫楼共同经营收款账户
+        description: 两位共有人接收实际租金的共同账户，初始没有本次提案收入；收款不改变各半产权。
+        status: observed
+      - id: known-heir-lease-settlement
+        name: 嘉衡本次首月租金账户
+        description: 已有的首月业务资金与代表私人现金分开；真实签约并完成约定空间交接后，代表才能在此终端申请本期付款。
+        status: observed
+      - id: known-heir-community-settlement
+        name: 邻里合作社首月空间款账户
+        description: 已有的首月业务资金与代表私人现金分开；真实签约并完成约定空间交接后，代表才能在此终端申请本期付款。
+        status: observed
+      - id: known-heir-plumber-work
+        name: 莫兰管线维修间
+        description: 莉迪亚的独立维修间，门口有营业时段和可现场确认的预约本；可以前来核对800欧元报价，再商议上门时间。
+        status: observed
+      - id: known-heir-plumber
+        name: 莉迪亚·莫兰
+        description: 马尔科向诺亚介绍过莉迪亚的店，桌上的800欧元文件是她的初步报价，双方未下单。 可以到维修间确认报价，也可以按已有权限自己处理基础维护。
+        status: observed
+      - id: known-heir-plumbing-order
+        name: 榆荫楼基础止漏待议施工单
+        description: 莉迪亚拟以800欧元核对漏点、隔离这段水路、在适配时使用楼内一枚常备密封垫完成基础更换并复压；范围须现场确认。两位共有人与施工方尚未签约，未付款、未施工。可协商有明确金额的预付款与验收尾款；马尔科代办须另有明确委托，自修不自动欠莉迪亚800欧元。
         status: observed
       - id: known-glen
         name: 谷地区
@@ -230,45 +344,130 @@ agent:
         step: 0
       - id: memory-8-evidence
         kind: observation
-        description: 专项维修资金，双方知情后可支付实际工程。
+        description: 一楼会客室沿楼内走廊可到的检修间。共有人和受委托维修者可进入；狭窄走道有接水盘，不能在会客室隔空修管。
         sourceId: self
         step: 0
       - id: memory-9-evidence
         kind: observation
-        description: 专项维修资金，双方知情后可支付实际工程。 我有约定使用权，没有单独处分全部资产的权限。
+        description: 公共冷水立管上的活接，底部接水盘可见持续水滴；检修需先靠近、确认水路和实际隔离。
         sourceId: self
         step: 0
       - id: memory-10-evidence
         kind: observation
-        description: 桌上的维修报价文件，列出拟议工程范围；不是已付款发票。
+        description: 公共冷水立管上的活接，底部接水盘可见持续水滴；检修需先靠近、确认水路和实际隔离。 我有约定使用权，没有单独处分全部资产的权限。
         sourceId: self
         step: 0
       - id: memory-11-evidence
         kind: observation
-        description: 800 欧元是尚未核验、未付款且未垫付的管道维修报价，不能说成已经欠下的报销款。
+        description: 活动扳手、绝缘照明灯、接水盘和水压表，能支持这段冷水管的现场检查及基础维护。
         sourceId: self
         step: 0
       - id: memory-12-evidence
         kind: observation
-        description: 外部运营方提出为期五年、每月 7000 欧元的包租，要求完整使用闲置房及到期合法调整租约。尚未签字、无预付款；可要求现有租客保护条款。报价期限是五年，7000 是月租金额，不是租期。
+        description: 活动扳手、绝缘照明灯、接水盘和水压表，能支持这段冷水管的现场检查及基础维护。 我有约定使用权，没有单独处分全部资产的权限。
         sourceId: self
         step: 0
       - id: memory-13-evidence
         kind: observation
-        description: 社区合作方愿以每月 4200 欧元收入及分期修缮换取工作室使用；先核验报价、分工与验收，再签约。首笔维修可单独处理。
+        description: 两枚与该冷水管活接规格相容的常备密封垫，归共同维修物资；更换一枚须实际消耗一单位登记组件。
         sourceId: self
         step: 0
       - id: memory-14-evidence
         kind: observation
-        description: 埃琳娜带来两份方案，马尔科把漏水照片与 800 欧元维修报价放在桌上，伊内兹等着解释社区合作的条款。大家尚未签字。
+        description: 两枚与该冷水管活接规格相容的常备密封垫，归共同维修物资；更换一枚须实际消耗一单位登记组件。 我有约定使用权，没有单独处分全部资产的权限。
         sourceId: self
         step: 0
       - id: memory-15-evidence
         kind: observation
-        description: 我有 18000 欧元个人可用资金，其他账户须按各自约定使用。
+        description: 公共管线间里的冷水管活接正在滴水；可以去现场确认漏点，照片还不能告诉我们内部原因。
         sourceId: self
         step: 0
       - id: memory-16-evidence
+        kind: observation
+        description: 专项维修资金，双方知情后可支付实际工程。
+        sourceId: self
+        step: 0
+      - id: memory-17-evidence
+        kind: observation
+        description: 专项维修资金，双方知情后可支付实际工程。 我有约定使用权，没有单独处分全部资产的权限。
+        sourceId: self
+        step: 0
+      - id: memory-18-evidence
+        kind: observation
+        description: 桌上的维修报价文件，列出拟议工程范围；不是已付款发票。
+        sourceId: self
+        step: 0
+      - id: memory-19-evidence
+        kind: observation
+        description: 800 欧元是尚未核验、未付款且未垫付的管道维修报价，不能说成已经欠下的报销款。
+        sourceId: self
+        step: 0
+      - id: memory-20-evidence
+        kind: observation
+        description: 外部运营方提出为期五年、每月 7000 欧元的包租，要求完整使用闲置房及到期合法调整租约。尚未签字、无预付款；可要求现有租客保护条款。报价期限是五年，7000 是月租金额，不是租期。
+        sourceId: self
+        step: 0
+      - id: memory-21-evidence
+        kind: observation
+        description: 社区合作方愿以每月 4200 欧元收入及分期修缮换取工作室使用；先核验报价、分工与验收，再签约。首笔维修可单独处理。
+        sourceId: self
+        step: 0
+      - id: memory-22-evidence
+        kind: observation
+        description: 埃琳娜带来两份方案，马尔科把漏水照片与 800 欧元维修报价放在桌上，伊内兹等着解释社区合作的条款。大家尚未签字。
+        sourceId: self
+        step: 0
+      - id: memory-23-evidence
+        kind: observation
+        description: 持有该物的所有权。
+        sourceId: self
+        step: 0
+      - id: memory-24-evidence
+        kind: observation
+        description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+        sourceId: self
+        step: 0
+      - id: memory-25-evidence
+        kind: observation
+        description: 这是可供本次工作使用的榆荫楼维修工作簿，现在尚未填写。分开记下现场漏点、隔离与维修、密封垫用量、复压检查及真实预付款；关水或转账都不是修缮已完成。
+        sourceId: self
+        step: 0
+      - id: memory-26-evidence
+        kind: observation
+        description: 萨娜此前与诺亚和埃琳娜一起看过楼，提出书面方案，双方尚未签约。 知道她在格伦的办公室，可以带着修改意见去谈。
+        sourceId: self
+        step: 0
+      - id: memory-27-evidence
+        kind: observation
+        description: 马尔科向诺亚介绍过莉迪亚的店，桌上的800欧元文件是她的初步报价，双方未下单。 可以到维修间确认报价，也可以按已有权限自己处理基础维护。
+        sourceId: self
+        step: 0
+      - id: memory-28-evidence
+        kind: observation
+        description: 莉迪亚拟以800欧元核对漏点、隔离这段水路、在适配时使用楼内一枚常备密封垫完成基础更换并复压；范围须现场确认。两位共有人与施工方尚未签约，未付款、未施工。可协商有明确金额的预付款与验收尾款；马尔科代办须另有明确委托，自修不自动欠莉迪亚800欧元。
+        sourceId: self
+        step: 0
+      - id: memory-29-evidence
+        kind: observation
+        description: 我负责保管的 components 在这里，取用、交付和消耗须满足现场与授权条件。
+        sourceId: self
+        step: 0
+      - id: memory-30-evidence
+        kind: observation
+        description: 我有 18000 欧元个人可用资金，其他账户须按各自约定使用。
+        sourceId: self
+        step: 0
+      - id: memory-31-evidence
+        kind: observation
+        description: 这个账户的现场业务由语音终端受理。我可以直接对它说出具体金额、收款人和用途；操作别的设备或只写下草稿不等于已经通知它。
+        sourceId: self
+        step: 0
+      - id: memory-32-evidence
+        kind: observation
+        description: 这个账户的现场业务由语音终端受理。我可以直接对它说出具体金额、收款人和用途；操作别的设备或只写下草稿不等于已经通知它。
+        sourceId: self
+        step: 0
+      - id: memory-33-evidence
         kind: observation
         description: 这个账户的现场业务由语音终端受理。我可以直接对它说出具体金额、收款人和用途；操作别的设备或只写下草稿不等于已经通知它。
         sourceId: self
@@ -352,6 +551,94 @@ agent:
         evidenceIds:
           - memory-7-evidence
       - id: memory-8
+        subjectId: known-heir-utility-room
+        predicate: familiar-equipment
+        value:
+          kind: text
+          value: 一楼会客室沿楼内走廊可到的检修间。共有人和受委托维修者可进入；狭窄走道有接水盘，不能在会客室隔空修管。
+        description: 一楼会客室沿楼内走廊可到的检修间。共有人和受委托维修者可进入；狭窄走道有接水盘，不能在会客室隔空修管。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-8-evidence
+      - id: memory-9
+        subjectId: known-heir-service-pipe
+        predicate: familiar-equipment
+        value:
+          kind: text
+          value: 公共冷水立管上的活接，底部接水盘可见持续水滴；检修需先靠近、确认水路和实际隔离。
+        description: 公共冷水立管上的活接，底部接水盘可见持续水滴；检修需先靠近、确认水路和实际隔离。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-9-evidence
+      - id: memory-10
+        subjectId: known-heir-service-pipe
+        predicate: shared-use
+        value:
+          kind: text
+          value: 公共冷水立管上的活接，底部接水盘可见持续水滴；检修需先靠近、确认水路和实际隔离。 我有约定使用权，没有单独处分全部资产的权限。
+        description: 公共冷水立管上的活接，底部接水盘可见持续水滴；检修需先靠近、确认水路和实际隔离。 我有约定使用权，没有单独处分全部资产的权限。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-10-evidence
+      - id: memory-11
+        subjectId: known-heir-plumbing-tools
+        predicate: familiar-equipment
+        value:
+          kind: text
+          value: 活动扳手、绝缘照明灯、接水盘和水压表，能支持这段冷水管的现场检查及基础维护。
+        description: 活动扳手、绝缘照明灯、接水盘和水压表，能支持这段冷水管的现场检查及基础维护。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-11-evidence
+      - id: memory-12
+        subjectId: known-heir-plumbing-tools
+        predicate: shared-use
+        value:
+          kind: text
+          value: 活动扳手、绝缘照明灯、接水盘和水压表，能支持这段冷水管的现场检查及基础维护。 我有约定使用权，没有单独处分全部资产的权限。
+        description: 活动扳手、绝缘照明灯、接水盘和水压表，能支持这段冷水管的现场检查及基础维护。 我有约定使用权，没有单独处分全部资产的权限。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-12-evidence
+      - id: memory-13
+        subjectId: known-heir-seal-stock
+        predicate: familiar-equipment
+        value:
+          kind: text
+          value: 两枚与该冷水管活接规格相容的常备密封垫，归共同维修物资；更换一枚须实际消耗一单位登记组件。
+        description: 两枚与该冷水管活接规格相容的常备密封垫，归共同维修物资；更换一枚须实际消耗一单位登记组件。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-13-evidence
+      - id: memory-14
+        subjectId: known-heir-seal-stock
+        predicate: shared-use
+        value:
+          kind: text
+          value: 两枚与该冷水管活接规格相容的常备密封垫，归共同维修物资；更换一枚须实际消耗一单位登记组件。 我有约定使用权，没有单独处分全部资产的权限。
+        description: 两枚与该冷水管活接规格相容的常备密封垫，归共同维修物资；更换一枚须实际消耗一单位登记组件。 我有约定使用权，没有单独处分全部资产的权限。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-14-evidence
+      - id: memory-15
+        subjectId: known-heir-service-pipe
+        predicate: known-leak
+        value:
+          kind: text
+          value: 公共管线间里的冷水管活接正在滴水；可以去现场确认漏点，照片还不能告诉我们内部原因。
+        description: 公共管线间里的冷水管活接正在滴水；可以去现场确认漏点，照片还不能告诉我们内部原因。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-15-evidence
+      - id: memory-16
         subjectId: known-heir-fund
         predicate: familiar-equipment
         value:
@@ -361,8 +648,8 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-8-evidence
-      - id: memory-9
+          - memory-16-evidence
+      - id: memory-17
         subjectId: known-heir-fund
         predicate: shared-use
         value:
@@ -372,8 +659,8 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-9-evidence
-      - id: memory-10
+          - memory-17-evidence
+      - id: memory-18
         subjectId: known-heir-repair-quote
         predicate: familiar-equipment
         value:
@@ -383,8 +670,8 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-10-evidence
-      - id: memory-11
+          - memory-18-evidence
+      - id: memory-19
         subjectId: known-heir-repair-quote
         predicate: unpaid-quote
         value:
@@ -394,8 +681,8 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-11-evidence
-      - id: memory-12
+          - memory-19-evidence
+      - id: memory-20
         subjectId: known-heir-lease-offer
         predicate: terms
         value:
@@ -405,8 +692,8 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-12-evidence
-      - id: memory-13
+          - memory-20-evidence
+      - id: memory-21
         subjectId: known-heir-repair-offer
         predicate: terms
         value:
@@ -416,8 +703,8 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-13-evidence
-      - id: memory-14
+          - memory-21-evidence
+      - id: memory-22
         subjectId: known-heir-work
         predicate: opening-context
         value:
@@ -427,8 +714,85 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-14-evidence
-      - id: memory-15
+          - memory-22-evidence
+      - id: memory-23
+        subjectId: known-heir-maintenance-log
+        predicate: ownership
+        value:
+          kind: text
+          value: 持有该物的所有权。
+        description: 持有该物的所有权。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-23-evidence
+      - id: memory-24
+        subjectId: known-heir-maintenance-log
+        predicate: familiar-equipment
+        value:
+          kind: text
+          value: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+        description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-24-evidence
+      - id: memory-25
+        subjectId: known-heir-maintenance-log
+        predicate: work-record
+        value:
+          kind: text
+          value: 这是可供本次工作使用的榆荫楼维修工作簿，现在尚未填写。分开记下现场漏点、隔离与维修、密封垫用量、复压检查及真实预付款；关水或转账都不是修缮已完成。
+        description: 这是可供本次工作使用的榆荫楼维修工作簿，现在尚未填写。分开记下现场漏点、隔离与维修、密封垫用量、复压检查及真实预付款；关水或转账都不是修缮已完成。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-25-evidence
+      - id: memory-26
+        subjectId: known-heir-lease-agent
+        predicate: established-business-contact
+        value:
+          kind: text
+          value: 萨娜此前与诺亚和埃琳娜一起看过楼，提出书面方案，双方尚未签约。 知道她在格伦的办公室，可以带着修改意见去谈。
+        description: 萨娜此前与诺亚和埃琳娜一起看过楼，提出书面方案，双方尚未签约。 知道她在格伦的办公室，可以带着修改意见去谈。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-26-evidence
+      - id: memory-27
+        subjectId: known-heir-plumber
+        predicate: established-business-contact
+        value:
+          kind: text
+          value: 马尔科向诺亚介绍过莉迪亚的店，桌上的800欧元文件是她的初步报价，双方未下单。 可以到维修间确认报价，也可以按已有权限自己处理基础维护。
+        description: 马尔科向诺亚介绍过莉迪亚的店，桌上的800欧元文件是她的初步报价，双方未下单。 可以到维修间确认报价，也可以按已有权限自己处理基础维护。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-27-evidence
+      - id: memory-28
+        subjectId: known-heir-plumbing-order
+        predicate: terms
+        value:
+          kind: text
+          value: 莉迪亚拟以800欧元核对漏点、隔离这段水路、在适配时使用楼内一枚常备密封垫完成基础更换并复压；范围须现场确认。两位共有人与施工方尚未签约，未付款、未施工。可协商有明确金额的预付款与验收尾款；马尔科代办须另有明确委托，自修不自动欠莉迪亚800欧元。
+        description: 莉迪亚拟以800欧元核对漏点、隔离这段水路、在适配时使用楼内一枚常备密封垫完成基础更换并复压；范围须现场确认。两位共有人与施工方尚未签约，未付款、未施工。可协商有明确金额的预付款与验收尾款；马尔科代办须另有明确委托，自修不自动欠莉迪亚800欧元。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-28-evidence
+      - id: memory-29
+        subjectId: known-heir-seal-stock
+        predicate: stored-resources
+        value:
+          kind: text
+          value: 我负责保管的 components 在这里，取用、交付和消耗须满足现场与授权条件。
+        description: 我负责保管的 components 在这里，取用、交付和消耗须满足现场与授权条件。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-29-evidence
+      - id: memory-30
         subjectId: self
         predicate: available-cash
         value:
@@ -438,8 +802,8 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-15-evidence
-      - id: memory-16
+          - memory-30-evidence
+      - id: memory-31
         subjectId: known-heir-fund
         predicate: voice-service
         value:
@@ -449,7 +813,29 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-16-evidence
+          - memory-31-evidence
+      - id: memory-32
+        subjectId: known-heir-rent-account
+        predicate: voice-service
+        value:
+          kind: text
+          value: 这个账户的现场业务由语音终端受理。我可以直接对它说出具体金额、收款人和用途；操作别的设备或只写下草稿不等于已经通知它。
+        description: 这个账户的现场业务由语音终端受理。我可以直接对它说出具体金额、收款人和用途；操作别的设备或只写下草稿不等于已经通知它。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-32-evidence
+      - id: memory-33
+        subjectId: known-heir-rent-account
+        predicate: voice-service
+        value:
+          kind: text
+          value: 这个账户的现场业务由语音终端受理。我可以直接对它说出具体金额、收款人和用途；操作别的设备或只写下草稿不等于已经通知它。
+        description: 这个账户的现场业务由语音终端受理。我可以直接对它说出具体金额、收款人和用途；操作别的设备或只写下草稿不等于已经通知它。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-33-evidence
     bindings:
       - local_entity_id: self
         canonical_entity_ids:
@@ -475,6 +861,18 @@ agent:
       - local_entity_id: known-heir-vacant
         canonical_entity_ids:
           - heir-vacant
+      - local_entity_id: known-heir-utility-room
+        canonical_entity_ids:
+          - heir-utility-room
+      - local_entity_id: known-heir-service-pipe
+        canonical_entity_ids:
+          - heir-service-pipe
+      - local_entity_id: known-heir-plumbing-tools
+        canonical_entity_ids:
+          - heir-plumbing-tools
+      - local_entity_id: known-heir-seal-stock
+        canonical_entity_ids:
+          - heir-seal-stock
       - local_entity_id: known-heir-fund
         canonical_entity_ids:
           - heir-fund
@@ -487,6 +885,42 @@ agent:
       - local_entity_id: known-heir-repair-offer
         canonical_entity_ids:
           - heir-repair-offer
+      - local_entity_id: known-heir-maintenance-log
+        canonical_entity_ids:
+          - heir-maintenance-log
+      - local_entity_id: known-heir-lease-office
+        canonical_entity_ids:
+          - heir-lease-office
+      - local_entity_id: known-heir-lease-agent
+        canonical_entity_ids:
+          - heir-lease-agent
+      - local_entity_id: known-heir-lease-company
+        canonical_entity_ids:
+          - heir-lease-company
+      - local_entity_id: known-heir-community-office
+        canonical_entity_ids:
+          - heir-community-office
+      - local_entity_id: known-heir-community-coop
+        canonical_entity_ids:
+          - heir-community-coop
+      - local_entity_id: known-heir-rent-account
+        canonical_entity_ids:
+          - heir-rent-account
+      - local_entity_id: known-heir-lease-settlement
+        canonical_entity_ids:
+          - heir-lease-settlement
+      - local_entity_id: known-heir-community-settlement
+        canonical_entity_ids:
+          - heir-community-settlement
+      - local_entity_id: known-heir-plumber-work
+        canonical_entity_ids:
+          - heir-plumber-work
+      - local_entity_id: known-heir-plumber
+        canonical_entity_ids:
+          - heir-plumber
+      - local_entity_id: known-heir-plumbing-order
+        canonical_entity_ids:
+          - heir-plumbing-order
       - local_entity_id: known-glen
         canonical_entity_ids:
           - glen

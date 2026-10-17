@@ -44,7 +44,8 @@ export function authorCity(m) {
     ["konpeki-suite", "赖宣租用的酒店套房", "konpeki", "安保与私人事务交汇的套房；物品位置与保密不能由外人全知。", "S10; S11"],
     ["regina-office", "瑞吉娜的办公点", "kabuki", "用于联络客户、核实消息与安排委托的办公空间。", "S06"],
     ["wakako-office", "和歌子的会客处", "japantown", "日本街中间人接洽委托的场所。", "S06; author-interior"],
-    ["dino-office", "迪诺的业务会客区", "downtown", "中间人处理客户、表演圈和城区生意的会客空间。", "S06; author-interior"],
+    ["electric-orgasm", "Electric Orgasm 酒吧", "downtown", "迪诺经营的酒吧，客人来喝酒，也有人接洽佣兵生意；入口有值班保安。", "S20; S21"],
+    ["dino-office", "迪诺的业务会客区", "electric-orgasm", "酒吧内供迪诺接洽客户的空间；具体内部划分为作者安排。", "S06; S21; author-interior"],
     ["padre-office", "神父的街区会客点", "glen", "供伊巴拉与熟人及客户谈事的空间。", "P12; author-interior"],
     ["muamar-garage", "老船长的车库会客点", "rancho-coronado", "车辆、委托和熟人消息在这里汇合。", "S06; author-interior"],
     ["dakota-garage", "达科塔的车库", "badlands", "车队和城市客户交换消息、安排运输的场所。", "S06; P06 p4"],
@@ -55,8 +56,7 @@ export function authorCity(m) {
     ["dogtown-market", "狗镇市场", "dogtown", "商户、居民与走私运输的交接场所。", "P02; author-interior"],
     ["dogtown-checkpoint", "狗镇通行检查站", "dogtown", "幽冥犬维持的通道；货物、身份、利益与武力影响通行。", "P02; author-interior"],
     ["hansen-command", "汉森的事务空间", "dogtown", "处理统治与贸易事务的受控内区；具体房间为作者安排。", "P02; author-interior"],
-    ["alex-bar", "亚历克斯经营的酒吧", "dogtown", "居民能在这里点饮料、交换日常消息；经营者的秘密职业不写在招牌上。", "P03 p48"],
-    ["reed-club", "李德工作的夜场", "dogtown", "夜场入口与值班区；普通客人只知道这里有一位保安。", "P03 p48; author-interior"],
+    ["alex-bar", "The Moth 酒吧", "dogtown", "居民能在这里点饮料、交换日常消息；经营者的秘密职业不写在招牌上。", "P03 p48; S23"],
     ["hands-office", "汉兹的私人会客室", "dogtown", "须有约定才能进入的会客场所；房间为作者安排。", "P03 p49; author-interior"],
     ["nomad-camp", "城外车队临时驻地", "badlands", "原创的临时停靠与维修节点；不声称是原作阿德卡多固定营地坐标。", "original"],
     ["panam-stop", "帕南暂住的车旅停靠点", "badlands", "用于这一时点的原创落脚空间，保留她与家族的关系。", "P01; author-staging"],
@@ -97,7 +97,7 @@ export function authorCity(m) {
     m.reference(id, "route", "night-city", "可通过城市交通与其他片区往来，必须考虑具体路线、交通和时间。");
     m.reference("night-city", "route", id, "城市道路与运输连接该片区，不代表瞬移。");
   }
-  for (const [left, right] of [["misty-shop", "vik-clinic"], ["kabuki-market", "lizzies"], ["all-foods", "brick-room"], ["dogtown-checkpoint", "dogtown-market"], ["nomad-camp", "dakota-garage"]]) {
+  for (const [left, right] of [["electric-orgasm", "dino-office"], ["misty-shop", "vik-clinic"], ["kabuki-market", "lizzies"], ["all-foods", "brick-room"], ["dogtown-checkpoint", "dogtown-market"], ["nomad-camp", "dakota-garage"]]) {
     m.reference(left, "passage", right, "两处存在可通行的连接；门禁、距离和实际条件仍需满足。");
     m.reference(right, "passage", left, "两处存在可通行的连接；门禁、距离和实际条件仍需满足。");
   }

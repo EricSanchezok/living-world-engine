@@ -51,6 +51,19 @@ facts:
         - sora
         - tomas
         - celia
+  - id: editor-cut-authorization-source-5
+    predicate: authorization-source
+    value:
+      kind: entity
+      entityId: editor-release-file
+    description: 工作版需符合这份有限授权；原始素材不因删改公开版而被抹除。
+    access:
+      kind: agents
+      agentIds:
+        - editor
+        - tomas
+        - sora
+        - celia
 meters: []
 quantities: []
 ratings: []

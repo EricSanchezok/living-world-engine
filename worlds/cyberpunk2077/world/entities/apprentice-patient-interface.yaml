@@ -34,6 +34,18 @@ facts:
         - apprentice
         - ana
         - lin
+  - id: apprentice-patient-interface-interface-model-4
+    predicate: interface-model
+    value:
+      kind: text
+      value: H-17
+    description: 型号是可以通过编号核对的外部信息，不直接揭示患者内部状况。
+    access:
+      kind: agents
+      agentIds:
+        - apprentice
+        - lin
+        - ana
 meters: []
 quantities: []
 ratings: []

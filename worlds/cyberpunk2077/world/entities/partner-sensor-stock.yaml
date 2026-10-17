@@ -1,0 +1,31 @@
+id: partner-sensor-stock
+kind: stock
+name: 妮拉的 RT-7 适配传感组件
+description: 一件可适配该旧线送料段的RT-7组件，妮拉带来用于核对和正式维修；它是承包商的现货，未赠与工坊。
+placement: partner-work
+facts:
+  - id: partner-sensor-stock-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: nela
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - nela
+  - id: partner-sensor-stock-maintenance-quote-2
+    predicate: maintenance-quote
+    value:
+      kind: text
+      value: 3800欧元的维护提案含这一件组件及实际更换、校准和受控复测；须先确认诊断与范围。
+    description: 不是另藏的免费库存，也不能拿工业壳体坯料替代传感件。
+    access:
+      kind: agents
+      agentIds:
+        - partner
+        - marta
+        - nela
+meters: []
+quantities: []
+ratings: []

@@ -1,0 +1,128 @@
+id: heir-plumbing-order
+kind: contract
+name: 榆荫楼基础止漏待议施工单
+description: 供当事人阅读与协商的业务文件，内容不对路人自动公开。
+placement: heir-work
+facts:
+  - id: heir-plumbing-order-terms-1
+    predicate: terms
+    value:
+      kind: text
+      value: 莉迪亚拟以800欧元核对漏点、隔离这段水路、在适配时使用楼内一枚常备密封垫完成基础更换并复压；范围须现场确认。两位共有人与施工方尚未签约，未付款、未施工。可协商有明确金额的预付款与验收尾款；马尔科代办须另有明确委托，自修不自动欠莉迪亚800欧元。
+    description: 榆荫楼基础止漏待议施工单的terms记录。
+    access:
+      kind: agents
+      agentIds: &a1
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+  - id: heir-plumbing-order-status-2
+    predicate: status
+    value:
+      kind: text
+      value: pending
+    description: 条款待当事人商议；未签约不产生付款或强制结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-plumbing-order-signed-3
+    predicate: signed
+    value:
+      kind: boolean
+      value: false
+    description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-plumbing-order-party-4
+    predicate: party
+    value:
+      kind: entity
+      entityId: heir
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-plumbing-order-party-5
+    predicate: party
+    value:
+      kind: entity
+      entityId: elena
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-plumbing-order-party-6
+    predicate: party
+    value:
+      kind: entity
+      entityId: marco
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-plumbing-order-party-7
+    predicate: party
+    value:
+      kind: entity
+      entityId: heir-plumber
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: heir-plumbing-order-worksite-8
+    predicate: worksite
+    value:
+      kind: entity
+      entityId: heir-utility-room
+    description: 施工发生在真实公共管线间，不在报价桌上隔空完成。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+  - id: heir-plumbing-order-payee-9
+    predicate: payee
+    value:
+      kind: entity
+      entityId: heir-plumber
+    description: 实际施工价款的收款人；报价本身不产生付款。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+  - id: heir-plumbing-order-work-accepted-10
+    predicate: work-accepted
+    value:
+      kind: boolean
+      value: false
+    description: 尚未进行本次维修后的复压验收。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+  - id: heir-plumbing-order-paid-amount-11
+    predicate: paid-amount
+    value:
+      kind: number
+      value: 0
+    description: 本次施工没有实际到账，不把报价、签字或关水计为支付。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+meters: []
+quantities: []
+ratings: []

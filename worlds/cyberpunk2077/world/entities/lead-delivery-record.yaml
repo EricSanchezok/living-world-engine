@@ -1,0 +1,107 @@
+id: lead-delivery-record
+kind: data-file
+name: 控制器清点与隔离验证记录
+description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+placement: lead-work
+facts:
+  - id: lead-delivery-record-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: crownbridge-services
+    description: 本记录属于实际委托主体；岗位作者可据实填写，不能把机构资料当私人财产处置。
+    access:
+      kind: agents
+      agentIds: &a1
+        - lead
+        - mina
+        - pavel
+        - ada
+  - id: lead-delivery-record-entries-2
+    predicate: entries
+    value:
+      kind: text
+      value: 空白：尚未记录本次工作的观察、操作或结果。
+    description: 本次工作记录的正文；只能由实际观察和已发生的操作形成。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: lead-delivery-record-record-state-3
+    predicate: record-state
+    value:
+      kind: text
+      value: blank
+    description: 空白、草稿或已复核依实际填写与复核改变；文档存在不代表工作完成。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: lead-delivery-record-record-purpose-4
+    predicate: record-purpose
+    value:
+      kind: text
+      value: 记录本批付款凭据、控制器移交台数和隔离测试结果；采购归公司，艾登仅保管，到货不代替缓存缺陷修复。
+    description: 控制器清点与隔离验证记录的record-purpose记录。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: lead-delivery-record-authorized-writer-5
+    predicate: authorized-writer
+    value:
+      kind: entity
+      entityId: lead
+    description: 本人可以据实填写，修改记录不改变原始材料或独立验收结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: lead-delivery-record-record-subject-6
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: lead-controllers
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: lead-delivery-record-record-subject-7
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: lead-received-stock
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: lead-delivery-record-record-subject-8
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: lead-terminal
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: lead-delivery-record-record-subject-9
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: lead-report
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: lead-delivery-record-record-subject-10
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: lead-demo-package
+    description: 采购交接和试点交付分别记录，不能以到货代替软件修复。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - ada
+meters: []
+quantities: []
+ratings: []

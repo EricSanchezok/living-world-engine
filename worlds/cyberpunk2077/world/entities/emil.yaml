@@ -39,11 +39,11 @@ agent:
     fallback: decision-deepseek-long
   character:
     persona:
-      summary: 关口货运文员，今日来核对货单。 认可往来记录，仍需核对新批次。
-      voice: 交谈具体，解释自己的条件，有自己的判断。
+      summary: 关口货运文员，今日来核对货单。 认可往来记录，仍需核对新批次。 希望这班结束前把积压的几张货单弄清楚。
+      voice: 说流程不摆官腔，能指出下一步该补哪一格，忙起来则明显不耐烦。
     traits:
       - id: temperament
-        description: 关口货运文员，今日来核对货单。 认可往来记录，仍需核对新批次。
+        description: 关口货运文员，今日来核对货单。 认可往来记录，仍需核对新批次。 希望这班结束前把积压的几张货单弄清楚。
         strength: 0.75
     values:
       - id: priority
@@ -59,6 +59,13 @@ agent:
       - id: current-purpose
         description: 按自己的职责核验批次和通行文件。
         priority: 0.8
+        progress: 0
+        target_ids: []
+        motivated_by_ids:
+          - priority
+      - id: life-beyond-work
+        description: 希望这班结束前把积压的几张货单弄清楚。
+        priority: 0.35
         progress: 0
         target_ids: []
         motivated_by_ids:
@@ -86,9 +93,25 @@ agent:
         name: O09 卢卡·萨迪克｜狗镇的双边运输经纪
         description: 曾办过三次正常货运手续，不存在无限通融承诺。 认可往来记录，仍需核对新批次。
         status: observed
+      - id: known-jun-workshop
+        name: 晨线设备作坊
+        description: 俊代表晨线设备作坊核对这批采购，资金和货物不属于经纪人个人。
+        status: observed
+      - id: known-broker-supplier
+        name: 奥斯卡·纳赛尔
+        description: 奥斯卡是四箱A3的真实供货方，可以协商变更或退回现货。
+        status: observed
+      - id: known-fleet-destination
+        name: 阿罗约货运交接仓
+        description: 选定买方的实际交付点在阿罗约货运交接仓，需要从狗镇实际运输过去。
+        status: observed
       - id: known-broker-delivery
         name: A2 设备交付订单待变更单
-        description: 货单标 A2，实际为 A3；未验收和过关。可退运、变更型号、安排检测或重新撮合，货物不能同时交给两名买家。
+        description: 原拟四箱A2按批8000欧元，供货商7600、经纪费400；现货A3须由奥斯卡与选定买方重新确认型号适配、价格和归属。若俊代表晨线作坊接受，先更新本批许可、实际运至阿罗约仓由黛娜清点，俊核验后从专户分别付货款与经纪费。维拉可提出另购，但不能把同批货卖两遍；未签变更、未过关、未交付、未收款。
+        status: observed
+      - id: known-broker-discrepancy-log
+        name: 本批控制器型号核对记录
+        description: 这是可供本次工作使用的本批控制器型号核对记录，现在尚未填写。记录逐箱核对结果、A2/A3差异、买家的实际答复和许可办理进展；文件更正草稿不代表已经批准过关。
         status: observed
       - id: known-barghest
         name: 幽冥犬
@@ -114,7 +137,7 @@ agent:
         step: 0
       - id: memory-2-evidence
         kind: observation
-        description: 货单标 A2，实际为 A3；未验收和过关。可退运、变更型号、安排检测或重新撮合，货物不能同时交给两名买家。
+        description: 原拟四箱A2按批8000欧元，供货商7600、经纪费400；现货A3须由奥斯卡与选定买方重新确认型号适配、价格和归属。若俊代表晨线作坊接受，先更新本批许可、实际运至阿罗约仓由黛娜清点，俊核验后从专户分别付货款与经纪费。维拉可提出另购，但不能把同批货卖两遍；未签变更、未过关、未交付、未收款。
         sourceId: self
         step: 0
       - id: memory-3-evidence
@@ -124,10 +147,15 @@ agent:
         step: 0
       - id: memory-4-evidence
         kind: observation
-        description: 我与这个组织有工作或成员关系，只拥有具体职责的权限。
+        description: 这是可供本次工作使用的本批控制器型号核对记录，现在尚未填写。记录逐箱核对结果、A2/A3差异、买家的实际答复和许可办理进展；文件更正草稿不代表已经批准过关。
         sourceId: self
         step: 0
       - id: memory-5-evidence
+        kind: observation
+        description: 我与这个组织有工作或成员关系，只拥有具体职责的权限。
+        sourceId: self
+        step: 0
+      - id: memory-6-evidence
         kind: observation
         description: 我有 1200 欧元个人可用资金，其他账户须按各自约定使用。
         sourceId: self
@@ -149,8 +177,8 @@ agent:
         predicate: terms
         value:
           kind: text
-          value: 货单标 A2，实际为 A3；未验收和过关。可退运、变更型号、安排检测或重新撮合，货物不能同时交给两名买家。
-        description: 货单标 A2，实际为 A3；未验收和过关。可退运、变更型号、安排检测或重新撮合，货物不能同时交给两名买家。
+          value: 原拟四箱A2按批8000欧元，供货商7600、经纪费400；现货A3须由奥斯卡与选定买方重新确认型号适配、价格和归属。若俊代表晨线作坊接受，先更新本批许可、实际运至阿罗约仓由黛娜清点，俊核验后从专户分别付货款与经纪费。维拉可提出另购，但不能把同批货卖两遍；未签变更、未过关、未交付、未收款。
+        description: 原拟四箱A2按批8000欧元，供货商7600、经纪费400；现货A3须由奥斯卡与选定买方重新确认型号适配、价格和归属。若俊代表晨线作坊接受，先更新本批许可、实际运至阿罗约仓由黛娜清点，俊核验后从专户分别付货款与经纪费。维拉可提出另购，但不能把同批货卖两遍；未签变更、未过关、未交付、未收款。
         stance: believed
         confidence: 0.95
         evidenceIds:
@@ -167,6 +195,17 @@ agent:
         evidenceIds:
           - memory-3-evidence
       - id: memory-4
+        subjectId: known-broker-discrepancy-log
+        predicate: work-record
+        value:
+          kind: text
+          value: 这是可供本次工作使用的本批控制器型号核对记录，现在尚未填写。记录逐箱核对结果、A2/A3差异、买家的实际答复和许可办理进展；文件更正草稿不代表已经批准过关。
+        description: 这是可供本次工作使用的本批控制器型号核对记录，现在尚未填写。记录逐箱核对结果、A2/A3差异、买家的实际答复和许可办理进展；文件更正草稿不代表已经批准过关。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-4-evidence
+      - id: memory-5
         subjectId: known-barghest
         predicate: affiliation
         value:
@@ -176,8 +215,8 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-4-evidence
-      - id: memory-5
+          - memory-5-evidence
+      - id: memory-6
         subjectId: self
         predicate: available-cash
         value:
@@ -187,7 +226,7 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-5-evidence
+          - memory-6-evidence
     bindings:
       - local_entity_id: self
         canonical_entity_ids:
@@ -198,9 +237,21 @@ agent:
       - local_entity_id: known-broker
         canonical_entity_ids:
           - broker
+      - local_entity_id: known-jun-workshop
+        canonical_entity_ids:
+          - jun-workshop
+      - local_entity_id: known-broker-supplier
+        canonical_entity_ids:
+          - broker-supplier
+      - local_entity_id: known-fleet-destination
+        canonical_entity_ids:
+          - fleet-destination
       - local_entity_id: known-broker-delivery
         canonical_entity_ids:
           - broker-delivery
+      - local_entity_id: known-broker-discrepancy-log
+        canonical_entity_ids:
+          - broker-discrepancy-log
       - local_entity_id: known-barghest
         canonical_entity_ids:
           - barghest

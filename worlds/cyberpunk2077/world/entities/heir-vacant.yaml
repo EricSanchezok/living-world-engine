@@ -12,6 +12,19 @@ facts:
     description: 房间属于共同产权标的，租用和改造需按约协商。
     access:
       kind: public
+  - id: heir-vacant-contractual-occupant-2
+    predicate: contractual-occupant
+    value:
+      kind: text
+      value: 尚无本轮合同入住方
+    description: 闲置工作室尚未交给嘉衡或合作社；改变用途、钥匙保管和期限都要有实际约定。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - inez
+        - heir-lease-agent
 meters: []
 quantities: []
 ratings: []

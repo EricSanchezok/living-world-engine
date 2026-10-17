@@ -1,0 +1,48 @@
+id: lead-received-stock
+kind: stock
+name: 棱桥项目控制器收货柜
+description: 公司办公室的空收货柜；本批控制器真实移交后在此存放，由艾登代公司登记保管，不进入他的私人财产。
+placement: lead-work
+facts:
+  - id: lead-received-stock-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: crownbridge-services
+    description: 收货柜及公司实际采购入库的控制器归棱桥服务；艾登的数量登记表示保管。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - ada
+  - id: lead-received-stock-custodian-2
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: lead
+    description: 艾登负责本项目的现场清点、保管与交付记录。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - ada
+  - id: lead-received-stock-received-for-project-3
+    predicate: received-for-project
+    value:
+      kind: boolean
+      value: false
+    description: 当前无控制器入库；只有实际付款与清点移交后才记录相应采购入库，不因申请付款而提前确认。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - ada
+meters: []
+quantities: []
+ratings: []

@@ -8,7 +8,7 @@ facts:
     predicate: terms
     value:
       kind: text
-      value: 拟运普通工业货六箱，需平板车与厢式车配合，报酬 5200 欧元；仍可调整装车日或委托其他承运人。
+      value: 拟运现场R-01至R-06普通工业货六箱至阿罗约货运交接仓，黛娜实际清点签收后由梅向车队公账结算5200欧元；平板或厢式车可按实装容量调度，不需冷链。仍须商定窗口并确认接单，可改日或转包；尚未交付付款。
     description: 长期客户普通货运单的terms记录。
     access:
       kind: agents
@@ -17,6 +17,7 @@ facts:
         - mei
         - jo
         - raul
+        - freight-receiver
   - id: fleet-regular-order-status-2
     predicate: status
     value:
@@ -67,6 +68,15 @@ facts:
     value:
       kind: entity
       entityId: raul
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: fleet-regular-order-party-8
+    predicate: party
+    value:
+      kind: entity
+      entityId: freight-receiver
     description: 该人是此文件的当事人。
     access:
       kind: agents

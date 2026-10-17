@@ -1,0 +1,109 @@
+id: medic-care-log
+kind: data-file
+name: 现场急救处置明细
+description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+placement: medic-work
+facts:
+  - id: medic-care-log-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: medic
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - medic
+  - id: medic-care-log-entries-2
+    predicate: entries
+    value:
+      kind: text
+      value: 空白：尚未记录本次工作的观察、操作或结果。
+    description: 本次工作记录的正文；只能由实际观察和已发生的操作形成。
+    access:
+      kind: agents
+      agentIds: &a1
+        - medic
+        - lena
+        - mateo
+  - id: medic-care-log-record-state-3
+    predicate: record-state
+    value:
+      kind: text
+      value: blank
+    description: 空白、草稿或已复核依实际填写与复核改变；文档存在不代表工作完成。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: medic-care-log-record-purpose-4
+    predicate: record-purpose
+    value:
+      kind: text
+      value: 逐人记录本人同意、观察到的伤情、已完成的处置、每次实际医材消耗及复查；保持两名伤者分列，初步稳定不等于痊愈。
+    description: 现场急救处置明细的record-purpose记录。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: medic-care-log-authorized-writer-5
+    predicate: authorized-writer
+    value:
+      kind: entity
+      entityId: medic
+    description: 本人可以据实填写，修改记录不改变原始材料或独立验收结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: medic-care-log-record-subject-6
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: injured-subscriber
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: medic-care-log-record-subject-7
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: injured-neighbor
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: medic-care-log-record-subject-8
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: medic-kit
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: medic-care-log-record-subject-9
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: medic-service-card
+    description: 逐人记录实际同意和核验结果，不把伊娃的合同复制给另一名伤者。
+    access:
+      kind: agents
+      agentIds:
+        - medic
+        - lena
+        - mateo
+  - id: medic-care-log-record-subject-10
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: medic-credential-reader
+    description: 核验步骤和实际救护处置分开记录。
+    access:
+      kind: agents
+      agentIds:
+        - medic
+        - lena
+        - mateo
+meters: []
+quantities: []
+ratings: []

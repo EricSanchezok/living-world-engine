@@ -31,11 +31,11 @@ agent:
     fallback: decision-deepseek-long
   character:
     persona:
-      summary: 邻居兼运动场经营者。 愿承担合理费用，需要救护员具体指导。
-      voice: 交谈具体，解释自己的条件，有自己的判断。
+      summary: 邻居兼运动场经营者。 愿承担合理费用，需要救护员具体指导。 想把运动场重新变成邻居愿意放心带家人来的地方。
+      voice: 着急时说得碎，会主动去找毛巾和水，听到明确安排就去做。
     traits:
       - id: temperament
-        description: 邻居兼运动场经营者。 愿承担合理费用，需要救护员具体指导。
+        description: 邻居兼运动场经营者。 愿承担合理费用，需要救护员具体指导。 想把运动场重新变成邻居愿意放心带家人来的地方。
         strength: 0.75
     values:
       - id: priority
@@ -51,6 +51,13 @@ agent:
       - id: current-purpose
         description: 先照顾伤者并找出器材为何脱落。
         priority: 0.8
+        progress: 0
+        target_ids: []
+        motivated_by_ids:
+          - priority
+      - id: life-beyond-work
+        description: 想把运动场重新变成邻居愿意放心带家人来的地方。
+        priority: 0.35
         progress: 0
         target_ids: []
         motivated_by_ids:

@@ -12,10 +12,11 @@ facts:
     description: 客户试点交付草案的terms记录。
     access:
       kind: agents
-      agentIds: &a1
+      agentIds:
         - lead
         - mina
         - pavel
+        - lead-client-representative
   - id: lead-demo-status-2
     predicate: status
     value:
@@ -24,7 +25,11 @@ facts:
     description: 条款待当事人商议；未签约不产生付款或强制结果。
     access:
       kind: agents
-      agentIds: *a1
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - lead-client-representative
   - id: lead-demo-signed-3
     predicate: signed
     value:
@@ -33,7 +38,11 @@ facts:
     description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
     access:
       kind: agents
-      agentIds: *a1
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - lead-client-representative
   - id: lead-demo-party-4
     predicate: party
     value:
@@ -42,7 +51,11 @@ facts:
     description: 该人是此文件的当事人。
     access:
       kind: agents
-      agentIds: *a1
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - lead-client-representative
   - id: lead-demo-party-5
     predicate: party
     value:
@@ -51,7 +64,11 @@ facts:
     description: 该人是此文件的当事人。
     access:
       kind: agents
-      agentIds: *a1
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - lead-client-representative
   - id: lead-demo-party-6
     predicate: party
     value:
@@ -60,7 +77,89 @@ facts:
     description: 该人是此文件的当事人。
     access:
       kind: agents
-      agentIds: *a1
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - lead-client-representative
+  - id: lead-demo-party-7
+    predicate: party
+    value:
+      kind: entity
+      entityId: lead-client-representative
+    description: 这名代表参与本次待议合同；列为当事人不等于已经签约。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - lead-client-representative
+  - id: lead-demo-client-8
+    predicate: client
+    value:
+      kind: entity
+      entityId: lead-client-company
+    description: 本次试点有具体客户，不是由项目人员替不存在的客户宣布验收。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - lead-client-representative
+  - id: lead-demo-delivery-place-9
+    predicate: delivery-place
+    value:
+      kind: entity
+      entityId: lead-client-office
+    description: 可携带实际演示版本到试点室，在隔离环境展示；不允许通过此约定访问正式生产网。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - lead-client-representative
+  - id: lead-demo-acceptance-representative-10
+    predicate: acceptance-representative
+    value:
+      kind: entity
+      entityId: lead-client-representative
+    description: 客户代表实际查看约定范围和结果后才作接受、修正或延期决定。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - lead-client-representative
+  - id: lead-demo-client-accepted-11
+    predicate: client-accepted
+    value:
+      kind: boolean
+      value: false
+    description: 客户未看本次成果，尚未验收。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - lead-client-representative
+  - id: lead-demo-acceptance-scope-12
+    predicate: acceptance-scope
+    value:
+      kind: text
+      value: 待商议的隔离试点：说明演示范围，重现临时用户撤销与重连结果，列出尚未修复的限制；只接受实际展示且客户明确认可的范围。
+    description: 范围可以缩小或延期；预定演示不是正式上线授权。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - lead-client-representative
 meters: []
 quantities: []
 ratings: []

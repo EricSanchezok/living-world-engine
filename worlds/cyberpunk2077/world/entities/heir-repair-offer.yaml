@@ -71,6 +71,104 @@ facts:
     access:
       kind: agents
       agentIds: *a1
+  - id: heir-repair-offer-contracting-principal-8
+    predicate: contracting-principal
+    value:
+      kind: entity
+      entityId: heir-community-coop
+    description: 这份现有提案的实际经营主体。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - inez
+  - id: heir-repair-offer-settlement-account-9
+    predicate: settlement-account
+    value:
+      kind: entity
+      entityId: heir-community-settlement
+    description: 首月款已有真实余额；以后各期需届时实际筹得资金并履约，不能由定时器造钱。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - inez
+  - id: heir-repair-offer-receiving-account-10
+    predicate: receiving-account
+    value:
+      kind: entity
+      entityId: heir-rent-account
+    description: 本次实际租金进入两位共有人共同经营账户。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - inez
+  - id: heir-repair-offer-premises-handed-over-11
+    predicate: premises-handed-over
+    value:
+      kind: boolean
+      value: false
+    description: 约定空间尚未交接；签约与交接是不同的实际行动。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - inez
+  - id: heir-repair-offer-first-period-paid-12
+    predicate: first-period-paid
+    value:
+      kind: boolean
+      value: false
+    description: 没有支付本提案的首月款，不能把资金准备当成到账。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - inez
+  - id: heir-repair-offer-first-period-amount-13
+    predicate: first-period-amount
+    value:
+      kind: number
+      value: 4200
+    description: 当前提案第一月拟付金额，真实变更须当事人明确商议。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - inez
+  - id: heir-repair-offer-authorized-representative-14
+    predicate: authorized-representative
+    value:
+      kind: entity
+      entityId: inez
+    description: 伊内兹代表合作社商议此提案，不代表两位产权人提前同意。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - inez
+        - marco
+  - id: heir-repair-offer-exclusive-alternative-15
+    predicate: exclusive-alternative
+    value:
+      kind: entity
+      entityId: heir-lease-offer
+    description: 社区方案尚未取得工作室，不与同一空间的包租交接重复履行。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - inez
+        - marco
 meters: []
 quantities: []
 ratings: []

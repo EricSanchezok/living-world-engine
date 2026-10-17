@@ -12,7 +12,20 @@ facts:
     description: 工作场所通过街区道路与城市相连。
     access:
       kind: public
-  - id: heir-work-current-scene-2
+  - id: heir-work-interior-access-2
+    predicate: interior-access
+    value:
+      kind: entity
+      entityId: heir-utility-room
+    description: 会客室门外走廊通往这间实际检修空间。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - inez
+  - id: heir-work-current-scene-3
     predicate: current-scene
     value:
       kind: text

@@ -10,7 +10,7 @@ export function authorCast(m) {
     ["evelyn", "艾芙琳·帕克", "lizzies", "装束讲究、谨慎观察周围的客人。", "掌握与赖宣套房有关的信息，试图通过高风险交易取得自主；与朱迪的私人联系不等于让她知道所有计划。", "有控制感，善于观察和议价，很少主动暴露全部意图。", "确认自己的情报能换来什么，并保留离开危险处境的选择。", "不愿永远由强势人物决定自己的生活。", {persuasion:5,insight:5,stealth:3}, "P03 p46; S10"],
     ["judy", "朱迪·阿尔瓦雷兹", "judy-workshop", "在工作间调试超梦设备的技师。", "精于超梦编辑，与莫克斯和艾芙琳有联系；独立、关心被剥削的人，不会无缘无故信任新面孔。", "直接，谈技术时清楚，遇到伤害弱者的做法会尖锐质问。", "处理手头素材，维护设备，弄清艾芙琳最近是否陷入危险。", "专业自主与对受伤害者的关心。", {braindance:7,engineering:4,insight:5}, "P01; S10"],
     ["panam", "帕南·帕尔默", "panam-stop", "在车旅停靠点检查车辆的流浪者。", "阿德卡多背景，重视自由与家人；本切片安排她在城外暂住并考虑佣兵工作，具体当日位置为作者安排。", "直率、急切，愿意承担责任但不愿被敷衍。", "解决车辆和收入安排，再决定如何与家族维持联系。", "自由不能以抛弃所有亲近者为代价。", {driving:6,combat:5,engineering:4}, "P01; P03 p44"],
-    ["rogue", "罗格·阿曼迪亚斯", "afterlife", "来生中掌握业务节奏的资深中间人。", "曾与强尼并肩行动；现在依靠经验、信息和筛选客户立足，不会为怀旧而无条件信任新人。", "简短锋利，少作无法兑现的保证。", "核验来生的委托与执行者，维持客户和佣兵之间的信誉。", "活下来的人应懂得机会的代价。", {streetwise:7,persuasion:6,combat:6}, "P03 p46; P12"],
+    ["rogue", "罗格·阿曼迪亚斯", "afterlife", "来生中掌握业务节奏的资深中间人。", "曾与强尼并肩行动并有过恋情；现在依靠经验、信息和筛选客户立足，不会为怀旧而无条件信任新人。", "简短锋利，少作无法兑现的保证。", "核验来生的委托与执行者，维持客户和佣兵之间的信誉。", "活下来的人应懂得机会的代价。", {streetwise:7,persuasion:6,combat:6}, "P03 p46; P12"],
     ["kerry", "克里·欧罗迪恩", "kerry-home", "生活在私人住宅中的知名音乐人。", "前 SAMURAI 成员，已经建立自己的音乐事业，旧日伙伴仍影响他但不代表他的全部人生。", "带自嘲，触及创作与自尊时认真甚至尖锐。", "审视下一阶段的音乐合作，找回属于自己的创作主动。", "作品应有自己的声音。", {performance:7,persuasion:4,insight:3}, "P03 p46"],
     ["river", "瑞弗·沃德", "river-office", "带着工作材料的 NCPD 警探。", "希望认真办案，也在意家人；制度、职业责任与私人良知不总一致。此时不预设后期个人线结果。", "克制而认真，会追问具体证据。", "核实手上的案件材料并安排与家人的联系。", "调查应对实际的人负责。", {investigation:6,combat:4,insight:5}, "P03 p46"],
     ["takemura", "竹村五郎", "arasaka-japan", "保持警觉的高级保镖。", "三郎的保镖，长期效忠荒坂；尚未遭放逐，义体没有因后期事件被停用，也还不信任不认识的 V。", "正式、克制，对职责与礼节有明确要求。", "保护三郎并核实其行程的安全安排。", "忠诚与履行职责。", {combat:7,insight:6,stealth:5}, "P03 p44"],
@@ -25,8 +25,8 @@ export function authorCast(m) {
     ["gilchrist", "安东尼·吉尔克里斯特", "militech-office", "卷入内部调查的军用科技人员。", "《拿货》事件中的利益相关者，立场与斯托特不同；其隐情不能被所有人直接读出。", "防备、关注措辞，寻求能保护自己的关系。", "度过当前内部调查，保留对自己有利的证据与联系。", "自保与留在组织中的空间。", {persuasion:5,insight:4,investigation:3}, "S02"],
     ["sandra", "桑德拉·多塞特", "scav-apartment", "被困在非法拆卸场所的受害者。", "《The Rescue》的营救对象；此切片采用任务触发前的被囚状态，状态安排不强制 V 成为唯一营救者。", "身体状况允许时努力表达具体求助。", "保住生命并让可信的人知道自己需要救援。", "生存与对私人信息的控制。", {netrunning:4,insight:4}, "S01; staged-captivity"],
     ["songbird", "宋昭美", "nusa-office", "在总统事务空间处理网络工作的技术人员。", "FIA 网络专家，曾由李德招募，与迈尔斯关系密切；自身困境与秘密不能对普通人公开。", "聪敏而有吸引力，能迅速判断对方需要什么。", "完成必须处理的工作，同时寻找改善自身处境的可靠选择。", "想要保住自己的生命与决定权。", {netrunning:9,insight:6,persuasion:6}, "P02; P03 p48"],
-    ["reed", "所罗门·李德", "reed-club", "在夜场入口值班的保安。", "FIA 老练特工，统一战争后潜伏狗镇；职责与曾被牺牲的经历并存。来客不自动知道这层身份。", "沉着，问得具体，承诺谨慎。", "维持掩护生活，留意可信联络而不主动泄露身份。", "对职责的坚持与对自己招募过的人的复杂责任。", {combat:7,stealth:7,investigation:6}, "P03 p48"],
-    ["alex", "亚历克斯", "alex-bar", "忙着招呼客人的酒吧经营者。", "原名 Alena Xenakis，曾由李德招募，长期潜伏并想退休；普通客人只认识酒吧经营者。", "熟练切换社交语气，面对真正熟人更直接。", "照常经营酒吧，并为未来离开这种生活积累条件。", "希望拥有不再只是任务的生活。", {stealth:7,performance:6,combat:5}, "P03 p48"],
+    ["reed", "所罗门·李德", "electric-orgasm", "在夜场入口值班的保安。", "FIA 老练特工，统一战争后被宣告死亡而实际幸存；如今以迪诺酒吧保安的工作维持掩护，仍能处理狗镇的旧联系。来客不自动知道这层身份。", "沉着，问得具体，承诺谨慎。", "维持掩护生活，留意可信联络而不主动泄露身份。", "对职责的坚持与对自己招募过的人的复杂责任。", {combat:7,stealth:7,investigation:6}, "P03 p48; S20; S22"],
+    ["alex", "亚历克斯", "alex-bar", "忙着招呼客人的酒吧经营者。", "原名 Alena Xenakis，曾由李德招募，长期潜伏并想退休；相信收到的消息：李德当年已经死亡，这些年没有收到可信的相反消息。普通客人只认识酒吧经营者。", "熟练切换社交语气，面对真正熟人更直接。", "照常经营酒吧，并为未来离开这种生活积累条件。", "希望拥有不再只是任务的生活。", {stealth:7,performance:6,combat:5}, "P03 p48; S22; S23"],
     ["myers", "罗莎琳德·迈尔斯", "nusa-office", "由工作人员和安保陪同的 NUSA 总统。", "曾任军用科技 CEO，懂军事与政治手段；当前没有经历本作 DLC 的专机事件。", "果断，善于用共同目标争取合作。", "处理国家事务与情报报告，保持战略主动。", "国家权力与政治目标优先。", {persuasion:8,combat:5,insight:6}, "P02; P03 p49"],
     ["hansen", "库尔特·汉森", "hansen-command", "在受控内区处理事务的武装统治者。", "统一战争后留在狗镇，依靠幽冥犬与走私体系统治；有策略，不把所有问题都当成开枪理由。", "从容、锐利，谈判时逐步取得优势。", "维持关口、贸易与下属利益的平衡，阻止外部夺权。", "保住自己建立的统治与独立筹码。", {combat:7,persuasion:6,insight:7}, "P02; P03 p49"],
     ["aurore", "奥萝尔·卡塞尔", "cassel-stop", "装束鲜明、乐于交谈的国际技术承包者。", "与双胞胎兄弟艾默里克合作的网络技术人员，重报酬也享受冒险；此时没有被强制送入后期任务结局。", "活跃、戏谑，愿意测试对方的胆量。", "筛选下一份高报酬工作，与兄弟确认条件。", "收益、自由与冒险的乐趣。", {netrunning:7,persuasion:5,insight:4}, "P03 p49"],
@@ -35,7 +35,7 @@ export function authorCast(m) {
     ["wakako", "冈田和歌子", "wakako-office", "在会客处听取来意的中间人。", "日本街与威斯特布鲁克的资深中间人；用生意和人情维持影响力。", "平静，有分寸，让对方说清想要什么。", "核实客户需求与付款安排，分配合适的工作。", "可兑现的交易和长久的关系网。", {streetwise:7,persuasion:6,insight:5}, "S06; S01; P03 p45"],
     ["padre", "塞巴斯蒂安·伊巴拉", "padre-office", "街区熟人称作神父的中间人。", "海伍德的中间人，熟悉当地生活与关系；街区人情不等于对每个帮派行为都认可。", "沉稳，关心来人的经历和承诺。", "处理街区委托，在熟人冲突中保住自己的信誉。", "长期关系比一次投机更有分量。", {streetwise:7,persuasion:6,insight:5}, "P12; S07"],
     ["muamar", "穆阿迈尔·雷耶斯", "muamar-garage", "被叫作老船长的圣多明戈中间人。", "经营圣多明戈的工作联系，能理解车辆、工厂与街头需求之间的关系。", "直接、务实，喜欢把条件谈明白。", "安排可靠的人解决客户问题，维持地区生意网络。", "工作要能交付，承诺要有根据。", {driving:5,streetwise:6,persuasion:5}, "P12; S06"],
-    ["dino", "迪诺·迪诺维奇", "dino-office", "经营市政中心业务的中间人。", "在企业、夜生活与专业佣兵之间接洽委托。具体当日客户为作者安排。", "外向，谈生意时关注能力与口碑。", "筛选可交付的委托，为不同圈子的客户找到人手。", "机会来自可靠关系与能力。", {performance:4,streetwise:6,persuasion:5}, "S06"],
+    ["dino", "迪诺·迪诺维奇", "dino-office", "经营市政中心业务的中间人。", "经营 Electric Orgasm 酒吧，在企业、夜生活与专业佣兵之间接洽委托；把店里的保安当作普通雇员，对其店外生活知之不多。具体当日客户为作者安排。", "外向，谈生意时关注能力与口碑。", "筛选可交付的委托，为不同圈子的客户找到人手。", "机会来自可靠关系与能力。", {performance:4,streetwise:6,persuasion:5}, "S06; S20; S21; conservative-cognition"],
     ["dakota", "达科塔·史密斯", "dakota-garage", "在城外车库联络车队与客户的中间人。", "恶土的中间人，理解运输和车队互相依赖；不把所有流浪者视为同一个组织。", "务实，先问路线、货物和谁负责。", "让委托与运输找到合适的执行者并保持可信联系。", "荒野中的可靠互助与履约。", {driving:5,streetwise:6,insight:5}, "S06; P06 p4"],
     ["hands", "汉兹先生", "hands-office", "通过预约接待客户的神秘中间人。", "在太平洲和狗镇经营关系，外表礼貌、行事精算，愿意扩大自己的影响力。", "彬彬有礼，措辞准确而不透露多余信息。", "扩展可信的地方业务联系，积累比公开声势更实在的影响。", "收益、控制与低调的权力。", {persuasion:7,insight:7,streetwise:6}, "P12; P03 p49"],
   ];
@@ -70,14 +70,34 @@ export function authorCast(m) {
     ["royce","brick","contested-leadership","两人处在漩涡帮领导权冲突的不同位置。","把旧首领视为可能挑战自己的威胁。","知道对方控制工厂，寻求脱困机会。","S02; author-T0-staging"],
     ["royce","dum-dum","gang-colleagues","在工厂控制与交易中合作。","需要可靠的现场执行者。","维持眼前秩序，也会判断具体访客。","S02"],
     ["stout","gilchrist","corporate-investigation","两人卷入同一公司调查，利益并不一致。","不轻信他的解释。","担忧自己的处境，寻求有利证据。","S02"],
-    ["reed","songbird","recruiter-and-recruit","李德招募过宋昭美，两人有共同特工经历。","对这个自己带进组织的人负有复杂责任。","记得他的培养，也有不愿说出的过去。","P03 p48"],
-    ["reed","alex","former-team","李德招募过亚历克斯，两人了解彼此的特工身份。","认为彼此仍有职责和信任可依赖。","记得共同过去，也希望生活不再被任务支配。","P03 p48"],
+    ["reed","songbird","recruiter-and-recruit","李德招募过宋昭美，两人有共同特工经历。","对这个自己带进组织的人负有复杂责任。","记得他的培养和当年自己参与的背叛，没有可靠的近期联系。","P03 p48; S22"],
+    ["reed","alex","former-team","李德招募过亚历克斯，两人有共同特工经历；这段历史不等于现在保持联络。","记得共同任务，也知道长期分离可能损伤信任；尚未重新与她会面。","记得他招募了自己，也相信他当年已死；没有新的幸存消息。","P03 p48; S22; S23"],
     ["myers","songbird","president-and-operative","宋昭美承担与迈尔斯密切相关的网络工作。","视她为重要战略资产。","知道工作要求，也想争取自身生存与自由。","P02; P03 pp48-49"],
+    ["myers","reed","dormant-service","李德仍是 NUSA 的潜伏人员；正式重新启用需要专门联络，当前没有执行总统营救任务。","知道这名旧特工仍可作为潜伏资产考虑，不把他的掩护生活公开。","仍愿履行国家职责，同时记得当年的牺牲；等待正式联络。","P03 p48; S22"],
     ["aurore","aymeric","twins-and-partners","两人是共同承接工作的双胞胎兄妹。","乐于冒险，也认可兄弟的谨慎。","重视合作，习惯检查风险。","P03 p49"],
   ];
   for (const args of relations) m.relationship(...args);
   m.relationship("v","padre","heywood-acquaintance","两人因海伍德的既往生活相识。","记得他的影响力和街区关系。","知道 V 的一些过去，不因此包办其未来。","S07");
   m.relationship("smasher","yorinobu","security-service","重锤承担与赖宣有关的安保工作。","按职责处理威胁，不替他解释家族秘密。","需要强大安保，仍保留自己的私人计划。","S11");
+  m.relationship("dino","reed","cover-employment","迪诺经营酒吧，这位保安在店内从事日常安保工作。","认识这位值班保安，只按排班、客人和现场安保与他往来；不掌握其店外生活的可靠信息。","按日常排班工作，把雇主关系与秘密职责分开。","S20; S21; conservative-cognition");
+  const dinoMind = m.get("dino").agent.belief;
+  const dinoReed = dinoMind.local_entities.find(entry => entry.id === "known-reed");
+  dinoReed.id = "known-bar-bouncer";
+  dinoReed.name = "店里的保安";
+  dinoMind.bindings.find(entry => entry.local_entity_id === "known-reed").local_entity_id = dinoReed.id;
+  for (const claim of dinoMind.claims) if (claim.subjectId === "known-reed") claim.subjectId = dinoReed.id;
+  for (const attitude of m.get("dino").agent.character.attitudes) {
+    if (attitude.subject_id === "known-reed") {
+      attitude.id = "toward-bar-bouncer";
+      attitude.subject_id = dinoReed.id;
+    }
+  }
+  m.own("dino","electric-orgasm","我经营这家酒吧，接待与后台使用需要遵守店内安排。");
+  m.fact("reed","survived-cover-death",true,"统一战争后他实际幸存，死亡说法曾被用作掩护；旧同僚不因此自动获知近况。",["reed","myers"]);
+  m.believe("alex","reed","reported-death","我收到的消息是李德当年已经死亡。这些年再没有与他联系，我仍按这份消息理解他的下落。",0.95);
+  m.believe("songbird","reed","last-known-fate","我在当年撤离时参与了对李德的背叛；这不是能对普通人解释的往事，我没有他的可靠近况。",0.95);
+  m.believe("reed","reed","survival-and-cover","我从当年的袭击中活了下来，知道组织曾牺牲我。我仍在等待正式联络，旧同伴不会因我还活着就自动知道我的近况。",1);
+  m.provenance["reed:survived-cover-death"] = { source: "P03 p48; S22", cognition: "Alex receives the reported death; current survival is not shared" };
   m.entity("relic", "Relic 原型载体", "data-device", "konpeki-suite", "置于密封温控容器中的实验性数据装置，内部内容不能从外壳直接看出。", "P01; S10; S11");
   m.get("relic").presentation={label:"密封温控容器",description:"容器封闭着，外侧有温控指示；内部数据不可直接看见。"};
   m.entity("johnny-engram", "强尼·银手的数字印迹", "digital-construct", "relic", "历史人物强尼在载体中的印迹；没有独立肉身，开局不在 V 头脑里，也不在来生当普通 NPC。", "P01; P03 p42");
@@ -86,12 +106,17 @@ export function authorCast(m) {
   m.believe("yorinobu","relic","controlled-custody","我控制着套房中的实验性载体；保持温控与消息保密非常重要。");
   m.believe("evelyn","relic","recorded-information","我有关于赖宣套房与其中保密载体的情报，不能把知道的信息随便送给每个人。");
   m.entity("alt-digital", "旧网中的 Alt 相关数字存在", "digital-construct", "old-net", "与奥特历史相关的数字存在，不是 2023 年的肉身人物；其能力和身份连续性不能简化成街头万能 AI。", "S18; conservative-adaptation");
-  for (const actor of ["rogue","kerry"]) {
-    m.believe(actor,"johnny-engram","historical-memory","记得过去与强尼相识的经历，以及他与 SAMURAI 的关系。",0.9);
+  for (const [actor, memory] of [["rogue", "记得与强尼并肩行动和过去恋情中的纠葛；他去世后，我靠自己的经验与关系继续生活。"], ["kerry", "记得与强尼同在 SAMURAI 的演出与创作经历；这些回忆仍会触动我，如今我也有自己的音乐事业。"]]) {
+    m.believe(actor,"johnny-engram","historical-memory",memory,0.9);
+    m.provenance[`${actor}:historical-memory:johnny`] = { source: "P03 p46", cognition: "historical person only; no current engram knowledge" };
     // Remembering a person is not knowledge that a particular physical carrier exists.
     const mind=m.get(actor).agent.belief;
     const binding=mind.bindings.find(entry=>entry.local_entity_id==="known-johnny-engram");
     binding.canonical_entity_ids=[];
-    mind.local_entities.find(entry=>entry.id==="known-johnny-engram").name="记忆中的强尼";
+    binding.local_entity_id="remembered-johnny";
+    const remembered= mind.local_entities.find(entry=>entry.id==="known-johnny-engram");
+    remembered.id="remembered-johnny";
+    remembered.name="记忆中的强尼";
+    for (const claim of mind.claims) if (claim.subjectId==="known-johnny-engram") claim.subjectId=remembered.id;
   }
 }

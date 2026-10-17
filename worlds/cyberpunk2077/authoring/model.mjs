@@ -77,7 +77,7 @@ export function createAuthoringModel() {
       const subject_id = believe(actor, target, predicate, `${shared} ${view}`);
       get(actor).agent.character.attitudes.push({ id: `toward-${target}`, subject_id, description: view, intensity: 0.7 });
     }
-    provenance[`${left}:${predicate}:${right}`] = { source, cognition: "individual-interpretation" };
+    provenance[`${left}:${predicate}:${right}`] = { source, kind: "relationship", cognition: "individual-interpretation" };
   };
   const own = (owner, asset, description = "持有该物的所有权。") => {
     reference(asset, "owner", owner, description, [owner]);

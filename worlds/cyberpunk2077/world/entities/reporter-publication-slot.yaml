@@ -1,0 +1,49 @@
+id: reporter-publication-slot
+kind: terminal
+name: 街区镜报本次报道发布栏
+description: 编辑部现有的发布终端，可向读者发布已经批准的稿件；目前本篇尚未发布。
+placement: reporter-work
+facts:
+  - id: reporter-publication-slot-published-1
+    predicate: published
+    value:
+      kind: boolean
+      value: false
+    description: 没有向读者公开这篇报道；写稿、批准或内部查看都不等于点击发布。
+    access:
+      kind: public
+  - id: reporter-publication-slot-published-copy-2
+    predicate: published-copy
+    value:
+      kind: text
+      value: 空白：本栏当前没有本篇公开内容。
+    description: 只保存实际批准并发布的版本，原始证据和私人笔记不自动同步到公开端。
+    access:
+      kind: public
+  - id: reporter-publication-slot-authorized-publisher-3
+    predicate: authorized-publisher
+    value:
+      kind: entity
+      entityId: leila
+    description: 编辑可批准最终公开范围并实际操作发布；记者有署名和提出修改的权利，不替消息源作公开同意。
+    access:
+      kind: agents
+      agentIds:
+        - reporter
+        - leila
+        - amara
+  - id: reporter-publication-slot-working-draft-4
+    predicate: working-draft
+    value:
+      kind: entity
+      entityId: reporter-draft
+    description: 本次待审核稿是可能发布的来源，初始还没有正文。
+    access:
+      kind: agents
+      agentIds:
+        - reporter
+        - leila
+        - amara
+meters: []
+quantities: []
+ratings: []

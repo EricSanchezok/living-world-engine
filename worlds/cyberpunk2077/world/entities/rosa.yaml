@@ -3,7 +3,18 @@ kind: person
 name: 罗莎·金
 description: 楼下杂货店店主兼转介客户的邻居。
 placement: armorer-work
-facts: []
+facts:
+  - id: rosa-neighborhood-register-contact-1
+    predicate: neighborhood-register-contact
+    value:
+      kind: entity
+      entityId: watch-registrar
+    description: 两人曾核对过邻里借用的公共器材。
+    access:
+      kind: agents
+      agentIds:
+        - rosa
+        - watch-registrar
 meters:
   - id: rosa-vitality
     definition_id: vitality
@@ -31,11 +42,11 @@ agent:
     fallback: decision-deepseek-long
   character:
     persona:
-      summary: 楼下杂货店店主兼转介客户的邻居。 支持维修店独立经营，不愿卷入暴力冲突。
-      voice: 交谈具体，解释自己的条件，有自己的判断。
+      summary: 楼下杂货店店主兼转介客户的邻居。 支持维修店独立经营，不愿卷入暴力冲突。 想让楼下店铺继续互相照应，晚上关门时不用提心吊胆。
+      voice: 消息灵通但不把听说当证据，提醒完风险还会问对方午饭吃了没。
     traits:
       - id: temperament
-        description: 楼下杂货店店主兼转介客户的邻居。 支持维修店独立经营，不愿卷入暴力冲突。
+        description: 楼下杂货店店主兼转介客户的邻居。 支持维修店独立经营，不愿卷入暴力冲突。 想让楼下店铺继续互相照应，晚上关门时不用提心吊胆。
         strength: 0.75
     values:
       - id: priority
@@ -47,10 +58,21 @@ agent:
         subject_id: known-armorer
         description: 支持维修店独立经营，不愿卷入暴力冲突。
         intensity: 0.7
+      - id: toward-watch-registrar
+        subject_id: known-watch-registrar
+        description: 可以带来具体编号询问她。
+        intensity: 0.7
     goals:
       - id: current-purpose
         description: 维持安全生意，避免争议赃物招来麻烦。
         priority: 0.8
+        progress: 0
+        target_ids: []
+        motivated_by_ids:
+          - priority
+      - id: life-beyond-work
+        description: 想让楼下店铺继续互相照应，晚上关门时不用提心吊胆。
+        priority: 0.35
         progress: 0
         target_ids: []
         motivated_by_ids:
@@ -69,6 +91,18 @@ agent:
       - id: known-armorer
         name: O07 阿什·奥尔蒂斯｜退下来的军械管理员
         description: 彼此转介客户，不收保护费。 支持维修店独立经营，不愿卷入暴力冲突。
+        status: observed
+      - id: known-watch-registrar
+        name: 妮娅·门德斯
+        description: 两人曾核对过邻里借用的公共器材。 可以带来具体编号询问她。
+        status: observed
+      - id: known-armorer-registry-office
+        name: 社区守望队登记室
+        description: 罗莎知道社区守望队的登记窗口，可按编号去查询或安排实际归还。
+        status: observed
+      - id: known-armorer-test-log
+        name: 装备非破坏性检测记录
+        description: 这是可供本次工作使用的装备非破坏性检测记录，现在尚未填写。记录校准、实测读数和保留的流转编号；检测性能和核对原始所有权是不同结论。
         status: observed
       - id: known-rancho-coronado
         name: 科罗纳多农场
@@ -90,10 +124,20 @@ agent:
         step: 0
       - id: memory-2-evidence
         kind: observation
-        description: 格兰特把装备箱放上维修台，提出朋友价。利奥指给师傅看尚未磨掉的流转编号，罗莎询问是否需要联系社区保安队查账。
+        description: 两人曾核对过邻里借用的公共器材。 可以带来具体编号询问她。
         sourceId: self
         step: 0
       - id: memory-3-evidence
+        kind: observation
+        description: 格兰特把装备箱放上维修台，提出朋友价。利奥指给师傅看尚未磨掉的流转编号，罗莎询问是否需要联系社区保安队查账。
+        sourceId: self
+        step: 0
+      - id: memory-4-evidence
+        kind: observation
+        description: 这是可供本次工作使用的装备非破坏性检测记录，现在尚未填写。记录校准、实测读数和保留的流转编号；检测性能和核对原始所有权是不同结论。
+        sourceId: self
+        step: 0
+      - id: memory-5-evidence
         kind: observation
         description: 我有 1200 欧元个人可用资金，其他账户须按各自约定使用。
         sourceId: self
@@ -111,6 +155,17 @@ agent:
         evidenceIds:
           - memory-1-evidence
       - id: memory-2
+        subjectId: known-watch-registrar
+        predicate: neighborhood-register-contact
+        value:
+          kind: text
+          value: 两人曾核对过邻里借用的公共器材。 可以带来具体编号询问她。
+        description: 两人曾核对过邻里借用的公共器材。 可以带来具体编号询问她。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-2-evidence
+      - id: memory-3
         subjectId: known-armorer-work
         predicate: opening-context
         value:
@@ -120,8 +175,19 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-2-evidence
-      - id: memory-3
+          - memory-3-evidence
+      - id: memory-4
+        subjectId: known-armorer-test-log
+        predicate: work-record
+        value:
+          kind: text
+          value: 这是可供本次工作使用的装备非破坏性检测记录，现在尚未填写。记录校准、实测读数和保留的流转编号；检测性能和核对原始所有权是不同结论。
+        description: 这是可供本次工作使用的装备非破坏性检测记录，现在尚未填写。记录校准、实测读数和保留的流转编号；检测性能和核对原始所有权是不同结论。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-4-evidence
+      - id: memory-5
         subjectId: self
         predicate: available-cash
         value:
@@ -131,7 +197,7 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-3-evidence
+          - memory-5-evidence
     bindings:
       - local_entity_id: self
         canonical_entity_ids:
@@ -142,6 +208,15 @@ agent:
       - local_entity_id: known-armorer
         canonical_entity_ids:
           - armorer
+      - local_entity_id: known-watch-registrar
+        canonical_entity_ids:
+          - watch-registrar
+      - local_entity_id: known-armorer-registry-office
+        canonical_entity_ids:
+          - armorer-registry-office
+      - local_entity_id: known-armorer-test-log
+        canonical_entity_ids:
+          - armorer-test-log
       - local_entity_id: known-rancho-coronado
         canonical_entity_ids:
           - rancho-coronado

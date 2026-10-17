@@ -8,7 +8,7 @@ facts:
     predicate: terms
     value:
       kind: text
-      value: 货单标 A2，实际为 A3；未验收和过关。可退运、变更型号、安排检测或重新撮合，货物不能同时交给两名买家。
+      value: 原拟四箱A2按批8000欧元，供货商7600、经纪费400；现货A3须由奥斯卡与选定买方重新确认型号适配、价格和归属。若俊代表晨线作坊接受，先更新本批许可、实际运至阿罗约仓由黛娜清点，俊核验后从专户分别付货款与经纪费。维拉可提出另购，但不能把同批货卖两遍；未签变更、未过关、未交付、未收款。
     description: A2 设备交付订单待变更单的terms记录。
     access:
       kind: agents
@@ -17,6 +17,8 @@ facts:
         - vera
         - jun
         - emil
+        - broker-supplier
+        - freight-receiver
   - id: broker-delivery-status-2
     predicate: status
     value:
@@ -67,6 +69,24 @@ facts:
     value:
       kind: entity
       entityId: emil
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: broker-delivery-party-8
+    predicate: party
+    value:
+      kind: entity
+      entityId: broker-supplier
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: broker-delivery-party-9
+    predicate: party
+    value:
+      kind: entity
+      entityId: freight-receiver
     description: 该人是此文件的当事人。
     access:
       kind: agents

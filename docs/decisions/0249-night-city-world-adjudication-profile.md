@@ -20,11 +20,11 @@ Night City includes institutional permissions, shared funds and bounded payment-
 
 - Retain native world judgments with revised transfer instructions or evidence layout.
 - Add an extra language-model review after a rejected payment.
-- Select the existing language-model decision profile for this world's adjudication while retaining native Agent decisions.
+- Select the existing language-model decision profile for this world's adjudication independently of each Agent's capability bindings.
 
 ## Decision Outcome
 
-Night City's manifest selects `decision-deepseek-long` for world decisions. Authored Agents retain `decision-jev` for their private action choices; both retain their explicit creation and fallback profiles. The implementation uses the existing world-versus-Agent capability bindings, with no framework branch for a franchise, account kind or successful payment.
+Night City's manifest selects `decision-deepseek-long` for world decisions. Authored Agents declare `decision-jev`, `creation-deepseek` and `decision-deepseek-long` as their decision, creation and fallback bindings. The direct runtime's coherent autonomous action reader uses the actor's creation binding under [decision 0247](0247-coherent-autonomous-action-reading.md); a declared decision Profile does not imply every private action uses that Profile. The implementation uses the existing world-versus-Agent capability bindings, with no framework branch for a franchise, account kind or successful payment.
 
 Each world judgment still receives the complete applicable action batch and authoritative local evidence. This choice neither divides the batch nor adds a second judgment after every rejection. Permission remains a semantic judgment and committed quantities remain kernel-owned. The source package and newly created instances pin this choice; existing instances keep their original world snapshot.
 
@@ -38,5 +38,5 @@ Each world judgment still receives the complete applicable action batch and auth
 
 - [Live acceptance evidence](../../worlds/cyberpunk2077/live-verification.md)
 - [World authoring and model bindings](../../worlds/cyberpunk2077/authoring/README.md)
-- [Authored world lives](0245-authored-world-lives-through-agent-takeover.md)
+- [Authored world lives](0248-authored-world-lives-through-agent-takeover.md)
 - [Direct runtime model responsibilities](../game-design/direct-runtime.md#model-responsibilities)

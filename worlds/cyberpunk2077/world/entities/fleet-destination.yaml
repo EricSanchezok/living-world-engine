@@ -1,0 +1,17 @@
+id: fleet-destination
+kind: place
+name: 阿罗约货运交接仓
+description: 有正常道路入口、可泊车的卸货区及分开的工业货与社区设备收货位；接受按约到达的货运，不允许从营地隔空签收。
+placement: arroyo
+facts:
+  - id: fleet-destination-street-access-1
+    predicate: street-access
+    value:
+      kind: entity
+      entityId: arroyo
+    description: 车辆可通过城市道路抵达，仍须实际行车和付出燃料、时间。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

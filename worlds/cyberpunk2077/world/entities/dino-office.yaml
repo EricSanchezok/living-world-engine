@@ -1,9 +1,17 @@
 id: dino-office
 kind: place
 name: 迪诺的业务会客区
-description: 中间人处理客户、表演圈和城区生意的会客空间。
-placement: downtown
-facts: []
+description: 酒吧内供迪诺接洽客户的空间；具体内部划分为作者安排。
+placement: electric-orgasm
+facts:
+  - id: dino-office-passage-1
+    predicate: passage
+    value:
+      kind: entity
+      entityId: electric-orgasm
+    description: 两处存在可通行的连接；门禁、距离和实际条件仍需满足。
+    access:
+      kind: public
 meters: []
 quantities: []
 ratings: []

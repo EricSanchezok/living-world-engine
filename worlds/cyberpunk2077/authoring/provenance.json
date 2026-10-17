@@ -184,8 +184,13 @@
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
   },
+  "electric-orgasm": {
+    "source": "S20; S21",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
   "dino-office": {
-    "source": "S06; author-interior",
+    "source": "S06; S21; author-interior",
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
   },
@@ -240,12 +245,7 @@
     "mechanics": "original-calibration"
   },
   "alex-bar": {
-    "source": "P03 p48",
-    "placement": "author-staged-at-T0",
-    "mechanics": "original-calibration"
-  },
-  "reed-club": {
-    "source": "P03 p48; author-interior",
+    "source": "P03 p48; S23",
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
   },
@@ -530,12 +530,12 @@
     "mechanics": "original-calibration"
   },
   "reed": {
-    "source": "P03 p48",
+    "source": "P03 p48; S20; S22",
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
   },
   "alex": {
-    "source": "P03 p48",
+    "source": "P03 p48; S22; S23",
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
   },
@@ -580,7 +580,7 @@
     "mechanics": "original-calibration"
   },
   "dino": {
-    "source": "S06",
+    "source": "S06; S20; S21; conservative-cognition",
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
   },
@@ -596,87 +596,122 @@
   },
   "jackie:partners:misty": {
     "source": "P03 p43",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "v:companions:jackie": {
     "source": "P03 p43; S01",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "v:known-patient:vik": {
     "source": "P03 p43",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "misty:neighbors-and-support:vik": {
     "source": "P03 p43",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "v:professional-partners:t-bug": {
     "source": "S01",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "jackie:professional-partners:t-bug": {
     "source": "S01",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "judy:personal-connection:evelyn": {
     "source": "S10; P03 pp44,46",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "dex:negotiating-client:evelyn": {
     "source": "S10; S11; author-T0-staging",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "saburo:employer-and-bodyguard:takemura": {
     "source": "P03 p44",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "saburo:father-and-son:yorinobu": {
     "source": "P03 p46",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "saburo:father-and-daughter:hanako": {
     "source": "P03 p46",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "hanako:siblings:yorinobu": {
     "source": "P03 p46",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "royce:contested-leadership:brick": {
     "source": "S02; author-T0-staging",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "royce:gang-colleagues:dum-dum": {
     "source": "S02",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "stout:corporate-investigation:gilchrist": {
     "source": "S02",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "reed:recruiter-and-recruit:songbird": {
-    "source": "P03 p48",
+    "source": "P03 p48; S22",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "reed:former-team:alex": {
-    "source": "P03 p48",
+    "source": "P03 p48; S22; S23",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "myers:president-and-operative:songbird": {
     "source": "P02; P03 pp48-49",
+    "kind": "relationship",
+    "cognition": "individual-interpretation"
+  },
+  "myers:dormant-service:reed": {
+    "source": "P03 p48; S22",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "aurore:twins-and-partners:aymeric": {
     "source": "P03 p49",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "v:heywood-acquaintance:padre": {
     "source": "S07",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "smasher:security-service:yorinobu": {
     "source": "S11",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
+  },
+  "dino:cover-employment:reed": {
+    "source": "S20; S21; conservative-cognition",
+    "kind": "relationship",
+    "cognition": "individual-interpretation"
+  },
+  "reed:survived-cover-death": {
+    "source": "P03 p48; S22",
+    "cognition": "Alex receives the reported death; current survival is not shared"
   },
   "relic": {
     "source": "P01; S10; S11",
@@ -692,6 +727,14 @@
     "source": "S18; conservative-adaptation",
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
+  },
+  "rogue:historical-memory:johnny": {
+    "source": "P03 p46",
+    "cognition": "historical person only; no current engram knowledge"
+  },
+  "kerry:historical-memory:johnny": {
+    "source": "P03 p46",
+    "cognition": "historical person only; no current engram knowledge"
   },
   "heir-home": {
     "source": "original",
@@ -715,6 +758,7 @@
   },
   "heir:established-contact:elena": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "marco": {
@@ -724,6 +768,7 @@
   },
   "heir:established-contact:marco": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "inez": {
@@ -733,6 +778,7 @@
   },
   "heir:established-contact:inez": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "heir-building": {
@@ -741,6 +787,31 @@
     "mechanics": "original-calibration"
   },
   "heir-vacant": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "heir-utility-room": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "heir-service-pipe": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "heir-pipe-seal": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "heir-plumbing-tools": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "heir-seal-stock": {
     "source": "original",
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
@@ -788,6 +859,7 @@
   },
   "lead:established-contact:mina": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "pavel": {
@@ -797,6 +869,7 @@
   },
   "lead:established-contact:pavel": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "ada": {
@@ -806,7 +879,13 @@
   },
   "lead:established-contact:ada": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
+  },
+  "crownbridge-services": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
   },
   "lead-terminal": {
     "source": "original",
@@ -834,6 +913,16 @@
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
   },
+  "lead-controllers": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "lead-received-stock": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
   "editor-home": {
     "source": "original",
     "placement": "author-staged-at-T0",
@@ -856,6 +945,7 @@
   },
   "editor:established-contact:sora": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "celia": {
@@ -865,6 +955,7 @@
   },
   "editor:established-contact:celia": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "tomas": {
@@ -874,6 +965,7 @@
   },
   "editor:established-contact:tomas": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "editor-deck": {
@@ -890,6 +982,12 @@
     "source": "original",
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
+  },
+  "editor-settlement": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration",
+    "service": "original-bounded-payment-program"
   },
   "apprentice-home": {
     "source": "original",
@@ -913,6 +1011,7 @@
   },
   "apprentice:established-contact:lin": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "bo": {
@@ -922,6 +1021,7 @@
   },
   "apprentice:established-contact:bo": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "ana": {
@@ -931,6 +1031,7 @@
   },
   "apprentice:established-contact:ana": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "apprentice-bench": {
@@ -980,6 +1081,7 @@
   },
   "fleet:established-contact:raul": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "jo": {
@@ -989,6 +1091,7 @@
   },
   "fleet:established-contact:jo": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "mei": {
@@ -998,6 +1101,7 @@
   },
   "fleet:established-contact:mei": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "fleet-flatbed": {
@@ -1021,10 +1125,51 @@
     "mechanics": "original-calibration",
     "service": "original-bounded-payment-program"
   },
+  "fleet-tools": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "fleet-valve-stock": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "fleet-client-settlement": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration",
+    "service": "original-bounded-payment-program"
+  },
   "fleet-cargo": {
     "source": "original",
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
+  },
+  "fleet-regular-cargo": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "fleet-destination": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "freight-receiver": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "fleet:warehouse-contact:freight-receiver": {
+    "source": "original",
+    "kind": "relationship",
+    "cognition": "individual-interpretation"
+  },
+  "mei:warehouse-colleagues:freight-receiver": {
+    "source": "original",
+    "kind": "relationship",
+    "cognition": "individual-interpretation"
   },
   "fleet-regular-order": {
     "source": "original",
@@ -1058,6 +1203,7 @@
   },
   "medic:established-contact:lena": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "idris": {
@@ -1067,6 +1213,7 @@
   },
   "medic:established-contact:idris": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "mateo": {
@@ -1076,6 +1223,7 @@
   },
   "medic:established-contact:mateo": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "medic-kit": {
@@ -1120,6 +1268,7 @@
   },
   "armorer:established-contact:grant": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "rosa": {
@@ -1129,6 +1278,7 @@
   },
   "armorer:established-contact:rosa": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "leo": {
@@ -1138,6 +1288,7 @@
   },
   "armorer:established-contact:leo": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "armorer-bench": {
@@ -1154,6 +1305,31 @@
     "source": "original",
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
+  },
+  "rancho-community-watch": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "armorer-registry-office": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "watch-registrar": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "armorer-loan-register": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "rosa:neighborhood-register-contact:watch-registrar": {
+    "source": "original",
+    "kind": "relationship",
+    "cognition": "individual-interpretation"
   },
   "armorer-repair": {
     "source": "original",
@@ -1182,6 +1358,7 @@
   },
   "partner:established-contact:marta": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "owen": {
@@ -1191,6 +1368,7 @@
   },
   "partner:established-contact:owen": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "nela": {
@@ -1200,6 +1378,7 @@
   },
   "partner:established-contact:nela": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "partner-line": {
@@ -1213,10 +1392,46 @@
     "mechanics": "original-calibration",
     "service": "original-bounded-payment-program"
   },
+  "restart-workshop": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "grille-equipment": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
   "partner-stock": {
     "source": "original",
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
+  },
+  "partner-output": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "partner-feed-sensor": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "partner-sensor-stock": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "partner-customer-stock": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "partner-customer-settlement": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration",
+    "service": "original-bounded-payment-program"
   },
   "partner-trial": {
     "source": "original",
@@ -1250,6 +1465,7 @@
   },
   "broker:established-contact:vera": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "emil": {
@@ -1259,6 +1475,7 @@
   },
   "broker:established-contact:emil": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "jun": {
@@ -1268,6 +1485,7 @@
   },
   "broker:established-contact:jun": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "broker-van": {
@@ -1280,10 +1498,41 @@
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
   },
+  "broker-supplier": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "jun-workshop": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
   "broker-batch": {
     "source": "original",
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
+  },
+  "broker-received-stock": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "broker-customer-settlement": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration",
+    "service": "original-bounded-payment-program"
+  },
+  "broker:consignment-client:broker-supplier": {
+    "source": "original",
+    "kind": "relationship",
+    "cognition": "individual-interpretation"
+  },
+  "broker:freight-receiving-contact:freight-receiver": {
+    "source": "original",
+    "kind": "relationship",
+    "cognition": "individual-interpretation"
   },
   "broker-delivery": {
     "source": "original",
@@ -1312,6 +1561,7 @@
   },
   "manager:established-contact:rin": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "bex": {
@@ -1321,6 +1571,7 @@
   },
   "manager:established-contact:bex": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "paulo": {
@@ -1330,6 +1581,7 @@
   },
   "manager:established-contact:paulo": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "manager-gear": {
@@ -1348,6 +1600,26 @@
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
   },
+  "manager-venue": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "manager-stage": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "manager-show": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "venue-listener": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
   "manager-sponsored": {
     "source": "original",
     "placement": "author-staged-at-T0",
@@ -1357,6 +1629,12 @@
     "source": "original",
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
+  },
+  "manager-venue-settlement": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration",
+    "service": "original-bounded-payment-program"
   },
   "reporter-home": {
     "source": "original",
@@ -1380,6 +1658,7 @@
   },
   "reporter:established-contact:leila": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "felix": {
@@ -1389,6 +1668,7 @@
   },
   "reporter:established-contact:felix": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "amara": {
@@ -1398,6 +1678,7 @@
   },
   "reporter:established-contact:amara": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "reporter-recorder": {
@@ -1417,6 +1698,31 @@
     "service": "original-bounded-payment-program"
   },
   "reporter-publication": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "reporter-accident-site": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "accident-witness": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "amara:interview-lead:accident-witness": {
+    "source": "original",
+    "kind": "relationship",
+    "cognition": "individual-interpretation"
+  },
+  "reporter-draft": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "reporter-publication-slot": {
     "source": "original",
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
@@ -1443,6 +1749,7 @@
   },
   "operator:established-contact:niko": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "mara": {
@@ -1452,6 +1759,7 @@
   },
   "operator:established-contact:mara": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "tessa": {
@@ -1461,6 +1769,7 @@
   },
   "operator:established-contact:tessa": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "operator-interface": {
@@ -1483,12 +1792,256 @@
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
   },
+  "northside-water-coop": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "pump-commissioner": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "operator:diagnostic-client:pump-commissioner": {
+    "source": "original",
+    "kind": "relationship",
+    "cognition": "individual-interpretation"
+  },
+  "operator-community-fund": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration",
+    "service": "original-bounded-payment-program"
+  },
   "operator-repair": {
     "source": "original",
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
   },
   "editor-cut": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "heir-maintenance-log": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "lead-delivery-record": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "editor-edit-log": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "apprentice-clinical-record": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "fleet-maintenance-log": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "fleet-delivery-log": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "medic-care-log": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "armorer-test-log": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "partner-batch-log": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "broker-discrepancy-log": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "manager-test-report": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "manager-show-log": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "reporter-notebook": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "operator-diagnostic-log": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "heir-lease-office": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "heir-lease-company": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "heir-lease-agent": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "heir:established-business-contact:heir-lease-agent": {
+    "source": "original",
+    "kind": "relationship",
+    "cognition": "individual-interpretation"
+  },
+  "elena:property-negotiation:heir-lease-agent": {
+    "source": "original",
+    "kind": "relationship",
+    "cognition": "individual-interpretation"
+  },
+  "heir-community-office": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "heir-community-coop": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "heir-rent-account": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration",
+    "service": "original-bounded-payment-program"
+  },
+  "heir-lease-settlement": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration",
+    "service": "original-bounded-payment-program"
+  },
+  "heir-community-settlement": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration",
+    "service": "original-bounded-payment-program"
+  },
+  "heir-plumber-work": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "heir-plumber": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "heir:established-business-contact:heir-plumber": {
+    "source": "original",
+    "kind": "relationship",
+    "cognition": "individual-interpretation"
+  },
+  "marco:local-trades-contact:heir-plumber": {
+    "source": "original",
+    "kind": "relationship",
+    "cognition": "individual-interpretation"
+  },
+  "heir-plumbing-order": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "lead-client-office": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "lead-client-company": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "lead-client-representative": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "lead:established-business-contact:lead-client-representative": {
+    "source": "original",
+    "kind": "relationship",
+    "cognition": "individual-interpretation"
+  },
+  "mina:pilot-business-contact:lead-client-representative": {
+    "source": "original",
+    "kind": "relationship",
+    "cognition": "individual-interpretation"
+  },
+  "lead-demo-package": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "editor-release-file": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "editor-signed-release": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "apprentice-parts-depot": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "apprentice-supplier-spare": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "apprentice-parts-offer": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "apprentice-delivery-cart": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "medic-service-card": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "medic-credential-payload": {
+    "source": "original",
+    "placement": "author-staged-at-T0",
+    "mechanics": "original-calibration"
+  },
+  "medic-credential-reader": {
     "source": "original",
     "placement": "author-staged-at-T0",
     "mechanics": "original-calibration"
@@ -1565,58 +2118,72 @@
   },
   "food-vendor:local-acquaintance:editor": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "parts-merchant:local-acquaintance:bo": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "taxi-driver:local-acquaintance:reporter": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "housing-agent:local-acquaintance:elena": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "clinic-supplier:local-acquaintance:lena": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "public-clerk:local-acquaintance:river": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "gig-client:local-acquaintance:muamar": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "mox-worker:local-acquaintance:judy": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "voodoo-runner:local-acquaintance:parts-merchant": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "tyger-collector:local-acquaintance:wakako": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "animal-guard:local-acquaintance:broker": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "netwatch-analyst:local-acquaintance:river": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "scav-lookout:local-acquaintance:parts-merchant": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "wraith-scout:local-acquaintance:animal-guard": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "food-stock": {
@@ -1646,38 +2213,47 @@
   },
   "lin:professional-channel:vik": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "raul:professional-channel:dakota": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "celia:professional-channel:mox-worker": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "leila:professional-channel:regina": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "paulo:professional-channel:dino": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "vera:professional-channel:hands": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "nela:professional-channel:muamar": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "mei:professional-channel:jun": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "marta:professional-channel:felix": {
     "source": "original",
+    "kind": "relationship",
     "cognition": "individual-interpretation"
   },
   "v-sidearm": {

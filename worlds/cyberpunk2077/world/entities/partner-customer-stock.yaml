@@ -1,0 +1,21 @@
+id: partner-customer-stock
+kind: stock
+name: 欧文的客户收货周转箱
+description: 工坊交接台旁的空箱，供欧文逐件验收并代表客户接收本批合格壳体；未经接受仍属工坊。
+placement: partner-work
+facts:
+  - id: partner-customer-stock-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: grille-equipment
+    description: 客户的周转箱与实际采购接收物，欧文仅代表客户保管。
+    access:
+      kind: agents
+      agentIds:
+        - partner
+        - marta
+        - owen
+meters: []
+quantities: []
+ratings: []

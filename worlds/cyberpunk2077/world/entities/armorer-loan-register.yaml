@@ -1,0 +1,23 @@
+id: armorer-loan-register
+kind: data-file
+name: GC 系列护具原始借出登记
+description: 登记室内的原始借出记录，公开窗口外无法直接看见内容。
+placement: armorer-registry-office
+facts:
+  - id: armorer-loan-register-registered-content-1
+    predicate: registered-content
+    value:
+      kind: text
+      value: GC-14、GC-15、GC-16归社区守望队；为一次物资护送借给格兰特保管，尚未登记归还或出售。
+    description: 能证明这三件的登记来路与当前权属，不把登记缺页或外观相似认定成所有盗窃事实。
+    access:
+      kind: agents
+      agentIds:
+        - watch-registrar
+        - armorer
+        - leo
+        - grant
+        - rosa
+meters: []
+quantities: []
+ratings: []

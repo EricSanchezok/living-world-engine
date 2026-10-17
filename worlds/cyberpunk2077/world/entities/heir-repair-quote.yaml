@@ -14,6 +14,7 @@ facts:
       kind: agents
       agentIds:
         - marco
+        - heir-plumber
   - id: heir-repair-quote-quoted-amount-2
     predicate: quoted-amount
     value:
@@ -27,6 +28,7 @@ facts:
         - marco
         - elena
         - inez
+        - heir-plumber
   - id: heir-repair-quote-paid-3
     predicate: paid
     value:
@@ -40,6 +42,20 @@ facts:
         - marco
         - elena
         - inez
+        - heir-plumber
+  - id: heir-repair-quote-contractor-4
+    predicate: contractor
+    value:
+      kind: entity
+      entityId: heir-plumber
+    description: 800欧元报价由莉迪亚提出；马尔科转交文件不使他成为施工费债权人。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
 meters: []
 quantities: []
 ratings: []

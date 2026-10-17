@@ -45,11 +45,21 @@ facts:
       agentIds:
         - partner
         - nela
-  - id: partner-storage-components-5
-    predicate: storage-components
+  - id: partner-storage-industrial-blank-5
+    predicate: storage-industrial-blank
     value:
       kind: entity
       entityId: partner-stock
+    description: 该类登记物资的实际存放处；保管不改变产权，远离存放处不能隔空交货。
+    access:
+      kind: agents
+      agentIds:
+        - partner
+  - id: partner-storage-trial-housing-6
+    predicate: storage-trial-housing
+    value:
+      kind: entity
+      entityId: partner-output
     description: 该类登记物资的实际存放处；保管不改变产权，远离存放处不能隔空交货。
     access:
       kind: agents
@@ -67,8 +77,10 @@ quantities:
     amount: 7200
   - definition_id: medical-supply
     amount: 1
-  - definition_id: components
+  - definition_id: industrial-blank
     amount: 36
+  - definition_id: trial-housing
+    amount: 0
 ratings:
   - id: partner-craft
     definition_id: craft
@@ -174,16 +186,44 @@ agent:
         description: 优先用于合同工资与已议定维护；大额用途需合伙人协商。
         status: observed
       - id: known-partner-stock
-        name: 工坊合法采购的材料
-        description: 可加工的普通工业材料，完成产品会消耗库存。
+        name: 工坊合法采购的壳体坯料
+        description: 三十六份可加工壳体坯料，存放于工坊原料架；每件试制壳体消耗一份坯料，与维修通用组件分账。
+        status: observed
+      - id: known-partner-output
+        name: 工坊试制壳体周转盘
+        description: 当前为空，用于放置本轮实际生产出的试制壳体；待检品不是已验收商品。
+        status: observed
+      - id: known-partner-sensor-stock
+        name: 妮拉的 RT-7 适配传感组件
+        description: 一件可适配该旧线送料段的RT-7组件，妮拉带来用于核对和正式维修；它是承包商的现货，未赠与工坊。
+        status: observed
+      - id: known-partner-customer-stock
+        name: 欧文的客户收货周转箱
+        description: 工坊交接台旁的空箱，供欧文逐件验收并代表客户接收本批合格壳体；未经接受仍属工坊。
+        status: observed
+      - id: known-partner-customer-settlement
+        name: 格栅设备首批采购结算账户
+        description: 客户预留的本批业务资金，欧文只能在首批采购授权内、按实际交付验收申请付款。
+        status: observed
+      - id: known-restart-workshop
+        name: 再启工坊合伙经营体
+        description: 再启工坊是实际经营与收款主体。
+        status: observed
+      - id: known-grille-equipment
+        name: 格栅设备供货社
+        description: 格栅设备是本次试产的采购意向方，欧文按本批授权核验。
         status: observed
       - id: known-partner-trial
         name: 小批量试产采购意向
-        description: 客户提出验收后按批付款，可协商降低首批产量；意向不等于订单已经付清，也不能直接增加现金。
+        description: 格栅设备拟采购首批四件普通壳体，报价每件600欧元、整批2400；尺寸和交期须双方确认，允许低负荷生产，不要求未验证的高速。欧文代表客户实际检验并接收后，从客户专户付至工坊工资及维护账户；可商议缩量或延期，初始未签、未验收、未付款。
         status: observed
       - id: known-partner-maintenance
         name: 联锁维修提案
         description: 检查及更换传感组件初估 3800 欧元，需诊断确认；允许由本厂自修、延后或拆分范围。
+        status: observed
+      - id: known-partner-batch-log
+        name: 低负荷试制批次记录
+        description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
         status: observed
       - id: known-arroyo
         name: 河谷区
@@ -240,35 +280,75 @@ agent:
         step: 0
       - id: memory-9-evidence
         kind: observation
-        description: 可加工的普通工业材料，完成产品会消耗库存。
+        description: 三十六份可加工壳体坯料，存放于工坊原料架；每件试制壳体消耗一份坯料，与维修通用组件分账。
         sourceId: self
         step: 0
       - id: memory-10-evidence
         kind: observation
-        description: 客户提出验收后按批付款，可协商降低首批产量；意向不等于订单已经付清，也不能直接增加现金。
+        description: 当前为空，用于放置本轮实际生产出的试制壳体；待检品不是已验收商品。
         sourceId: self
         step: 0
       - id: memory-11-evidence
         kind: observation
-        description: 检查及更换传感组件初估 3800 欧元，需诊断确认；允许由本厂自修、延后或拆分范围。
+        description: 一件可适配该旧线送料段的RT-7组件，妮拉带来用于核对和正式维修；它是承包商的现货，未赠与工坊。
         sourceId: self
         step: 0
       - id: memory-12-evidence
         kind: observation
-        description: 第一批壳体摆在工作台上，低负荷记录合格而高速曲线异常。玛尔塔拿来工资表，欧文等着讨论验收范围，妮拉提出先看联锁日志。
+        description: 低速试制每件壳体消耗一份原料架上的工业坯料，实际产出一件单独登记的试制壳体，放进空的成品周转盘；这个结果不证明高速联锁通过或客户接受。
         sourceId: self
         step: 0
       - id: memory-13-evidence
         kind: observation
-        description: 我负责保管的 components 在这里，取用、交付和消耗须满足现场与授权条件。
+        description: 工坊交接台旁的空箱，供欧文逐件验收并代表客户接收本批合格壳体；未经接受仍属工坊。
         sourceId: self
         step: 0
       - id: memory-14-evidence
         kind: observation
-        description: 我有 7200 欧元个人可用资金，其他账户须按各自约定使用。
+        description: 客户预留的本批业务资金，欧文只能在首批采购授权内、按实际交付验收申请付款。
         sourceId: self
         step: 0
       - id: memory-15-evidence
+        kind: observation
+        description: 格栅设备拟采购首批四件普通壳体，报价每件600欧元、整批2400；尺寸和交期须双方确认，允许低负荷生产，不要求未验证的高速。欧文代表客户实际检验并接收后，从客户专户付至工坊工资及维护账户；可商议缩量或延期，初始未签、未验收、未付款。
+        sourceId: self
+        step: 0
+      - id: memory-16-evidence
+        kind: observation
+        description: 检查及更换传感组件初估 3800 欧元，需诊断确认；允许由本厂自修、延后或拆分范围。
+        sourceId: self
+        step: 0
+      - id: memory-17-evidence
+        kind: observation
+        description: 空的成品周转盘摆在工作台上，先前低负荷记录合格而高速曲线异常。玛尔塔拿来工资表，欧文等着讨论验收范围，妮拉提出先看联锁日志。
+        sourceId: self
+        step: 0
+      - id: memory-18-evidence
+        kind: observation
+        description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+        sourceId: self
+        step: 0
+      - id: memory-19-evidence
+        kind: observation
+        description: 这是可供本次工作使用的低负荷试制批次记录，现在尚未填写。逐批记录实际消耗的工业坯料、实际产出的试制壳体、尺寸与联锁反馈；原料与成品分别记账，客户验收与到账另核。
+        sourceId: self
+        step: 0
+      - id: memory-20-evidence
+        kind: observation
+        description: 我负责保管的 industrial-blank 在这里，取用、交付和消耗须满足现场与授权条件。
+        sourceId: self
+        step: 0
+      - id: memory-21-evidence
+        kind: observation
+        description: 我负责保管的 trial-housing 在这里，取用、交付和消耗须满足现场与授权条件。
+        sourceId: self
+        step: 0
+      - id: memory-22-evidence
+        kind: observation
+        description: 我有 7200 欧元个人可用资金，其他账户须按各自约定使用。
+        sourceId: self
+        step: 0
+      - id: memory-23-evidence
         kind: observation
         description: 这个账户的现场业务由语音终端受理。我可以直接对它说出具体金额、收款人和用途；操作别的设备或只写下草稿不等于已经通知它。
         sourceId: self
@@ -367,24 +447,79 @@ agent:
         predicate: familiar-equipment
         value:
           kind: text
-          value: 可加工的普通工业材料，完成产品会消耗库存。
-        description: 可加工的普通工业材料，完成产品会消耗库存。
+          value: 三十六份可加工壳体坯料，存放于工坊原料架；每件试制壳体消耗一份坯料，与维修通用组件分账。
+        description: 三十六份可加工壳体坯料，存放于工坊原料架；每件试制壳体消耗一份坯料，与维修通用组件分账。
         stance: believed
         confidence: 0.95
         evidenceIds:
           - memory-9-evidence
       - id: memory-10
-        subjectId: known-partner-trial
-        predicate: terms
+        subjectId: known-partner-output
+        predicate: familiar-equipment
         value:
           kind: text
-          value: 客户提出验收后按批付款，可协商降低首批产量；意向不等于订单已经付清，也不能直接增加现金。
-        description: 客户提出验收后按批付款，可协商降低首批产量；意向不等于订单已经付清，也不能直接增加现金。
+          value: 当前为空，用于放置本轮实际生产出的试制壳体；待检品不是已验收商品。
+        description: 当前为空，用于放置本轮实际生产出的试制壳体；待检品不是已验收商品。
         stance: believed
         confidence: 0.95
         evidenceIds:
           - memory-10-evidence
       - id: memory-11
+        subjectId: known-partner-sensor-stock
+        predicate: familiar-equipment
+        value:
+          kind: text
+          value: 一件可适配该旧线送料段的RT-7组件，妮拉带来用于核对和正式维修；它是承包商的现货，未赠与工坊。
+        description: 一件可适配该旧线送料段的RT-7组件，妮拉带来用于核对和正式维修；它是承包商的现货，未赠与工坊。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-11-evidence
+      - id: memory-12
+        subjectId: known-partner-line
+        predicate: trial-material-flow
+        value:
+          kind: text
+          value: 低速试制每件壳体消耗一份原料架上的工业坯料，实际产出一件单独登记的试制壳体，放进空的成品周转盘；这个结果不证明高速联锁通过或客户接受。
+        description: 低速试制每件壳体消耗一份原料架上的工业坯料，实际产出一件单独登记的试制壳体，放进空的成品周转盘；这个结果不证明高速联锁通过或客户接受。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-12-evidence
+      - id: memory-13
+        subjectId: known-partner-customer-stock
+        predicate: familiar-equipment
+        value:
+          kind: text
+          value: 工坊交接台旁的空箱，供欧文逐件验收并代表客户接收本批合格壳体；未经接受仍属工坊。
+        description: 工坊交接台旁的空箱，供欧文逐件验收并代表客户接收本批合格壳体；未经接受仍属工坊。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-13-evidence
+      - id: memory-14
+        subjectId: known-partner-customer-settlement
+        predicate: familiar-equipment
+        value:
+          kind: text
+          value: 客户预留的本批业务资金，欧文只能在首批采购授权内、按实际交付验收申请付款。
+        description: 客户预留的本批业务资金，欧文只能在首批采购授权内、按实际交付验收申请付款。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-14-evidence
+      - id: memory-15
+        subjectId: known-partner-trial
+        predicate: terms
+        value:
+          kind: text
+          value: 格栅设备拟采购首批四件普通壳体，报价每件600欧元、整批2400；尺寸和交期须双方确认，允许低负荷生产，不要求未验证的高速。欧文代表客户实际检验并接收后，从客户专户付至工坊工资及维护账户；可商议缩量或延期，初始未签、未验收、未付款。
+        description: 格栅设备拟采购首批四件普通壳体，报价每件600欧元、整批2400；尺寸和交期须双方确认，允许低负荷生产，不要求未验证的高速。欧文代表客户实际检验并接收后，从客户专户付至工坊工资及维护账户；可商议缩量或延期，初始未签、未验收、未付款。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-15-evidence
+      - id: memory-16
         subjectId: known-partner-maintenance
         predicate: terms
         value:
@@ -394,30 +529,63 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-11-evidence
-      - id: memory-12
+          - memory-16-evidence
+      - id: memory-17
         subjectId: known-partner-work
         predicate: opening-context
         value:
           kind: text
-          value: 第一批壳体摆在工作台上，低负荷记录合格而高速曲线异常。玛尔塔拿来工资表，欧文等着讨论验收范围，妮拉提出先看联锁日志。
-        description: 第一批壳体摆在工作台上，低负荷记录合格而高速曲线异常。玛尔塔拿来工资表，欧文等着讨论验收范围，妮拉提出先看联锁日志。
+          value: 空的成品周转盘摆在工作台上，先前低负荷记录合格而高速曲线异常。玛尔塔拿来工资表，欧文等着讨论验收范围，妮拉提出先看联锁日志。
+        description: 空的成品周转盘摆在工作台上，先前低负荷记录合格而高速曲线异常。玛尔塔拿来工资表，欧文等着讨论验收范围，妮拉提出先看联锁日志。
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-12-evidence
-      - id: memory-13
+          - memory-17-evidence
+      - id: memory-18
+        subjectId: known-partner-batch-log
+        predicate: familiar-equipment
+        value:
+          kind: text
+          value: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+        description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-18-evidence
+      - id: memory-19
+        subjectId: known-partner-batch-log
+        predicate: work-record
+        value:
+          kind: text
+          value: 这是可供本次工作使用的低负荷试制批次记录，现在尚未填写。逐批记录实际消耗的工业坯料、实际产出的试制壳体、尺寸与联锁反馈；原料与成品分别记账，客户验收与到账另核。
+        description: 这是可供本次工作使用的低负荷试制批次记录，现在尚未填写。逐批记录实际消耗的工业坯料、实际产出的试制壳体、尺寸与联锁反馈；原料与成品分别记账，客户验收与到账另核。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-19-evidence
+      - id: memory-20
         subjectId: known-partner-stock
         predicate: stored-resources
         value:
           kind: text
-          value: 我负责保管的 components 在这里，取用、交付和消耗须满足现场与授权条件。
-        description: 我负责保管的 components 在这里，取用、交付和消耗须满足现场与授权条件。
+          value: 我负责保管的 industrial-blank 在这里，取用、交付和消耗须满足现场与授权条件。
+        description: 我负责保管的 industrial-blank 在这里，取用、交付和消耗须满足现场与授权条件。
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-13-evidence
-      - id: memory-14
+          - memory-20-evidence
+      - id: memory-21
+        subjectId: known-partner-output
+        predicate: stored-resources
+        value:
+          kind: text
+          value: 我负责保管的 trial-housing 在这里，取用、交付和消耗须满足现场与授权条件。
+        description: 我负责保管的 trial-housing 在这里，取用、交付和消耗须满足现场与授权条件。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-21-evidence
+      - id: memory-22
         subjectId: self
         predicate: available-cash
         value:
@@ -427,8 +595,8 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-14-evidence
-      - id: memory-15
+          - memory-22-evidence
+      - id: memory-23
         subjectId: known-partner-wages
         predicate: voice-service
         value:
@@ -438,7 +606,7 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-15-evidence
+          - memory-23-evidence
     bindings:
       - local_entity_id: self
         canonical_entity_ids:
@@ -467,12 +635,33 @@ agent:
       - local_entity_id: known-partner-stock
         canonical_entity_ids:
           - partner-stock
+      - local_entity_id: known-partner-output
+        canonical_entity_ids:
+          - partner-output
+      - local_entity_id: known-partner-sensor-stock
+        canonical_entity_ids:
+          - partner-sensor-stock
+      - local_entity_id: known-partner-customer-stock
+        canonical_entity_ids:
+          - partner-customer-stock
+      - local_entity_id: known-partner-customer-settlement
+        canonical_entity_ids:
+          - partner-customer-settlement
+      - local_entity_id: known-restart-workshop
+        canonical_entity_ids:
+          - restart-workshop
+      - local_entity_id: known-grille-equipment
+        canonical_entity_ids:
+          - grille-equipment
       - local_entity_id: known-partner-trial
         canonical_entity_ids:
           - partner-trial
       - local_entity_id: known-partner-maintenance
         canonical_entity_ids:
           - partner-maintenance
+      - local_entity_id: known-partner-batch-log
+        canonical_entity_ids:
+          - partner-batch-log
       - local_entity_id: known-arroyo
         canonical_entity_ids:
           - arroyo

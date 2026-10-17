@@ -68,9 +68,9 @@ agent:
         name: 克里的住宅
         description: 音乐人的私人住宅；名望不等于允许任意陌生人闯入。
         status: observed
-      - id: known-johnny-engram
+      - id: remembered-johnny
         name: 记忆中的强尼
-        description: 记得过去与强尼相识的经历，以及他与 SAMURAI 的关系。
+        description: 记得与强尼同在 SAMURAI 的演出与创作经历；这些回忆仍会触动我，如今我也有自己的音乐事业。
         status: observed
       - id: known-north-oak
         name: 北橡区
@@ -87,7 +87,7 @@ agent:
     evidence:
       - id: memory-1-evidence
         kind: observation
-        description: 记得过去与强尼相识的经历，以及他与 SAMURAI 的关系。
+        description: 记得与强尼同在 SAMURAI 的演出与创作经历；这些回忆仍会触动我，如今我也有自己的音乐事业。
         sourceId: self
         step: 0
       - id: memory-2-evidence
@@ -97,12 +97,12 @@ agent:
         step: 0
     claims:
       - id: memory-1
-        subjectId: known-johnny-engram
+        subjectId: remembered-johnny
         predicate: historical-memory
         value:
           kind: text
-          value: 记得过去与强尼相识的经历，以及他与 SAMURAI 的关系。
-        description: 记得过去与强尼相识的经历，以及他与 SAMURAI 的关系。
+          value: 记得与强尼同在 SAMURAI 的演出与创作经历；这些回忆仍会触动我，如今我也有自己的音乐事业。
+        description: 记得与强尼同在 SAMURAI 的演出与创作经历；这些回忆仍会触动我，如今我也有自己的音乐事业。
         stance: believed
         confidence: 0.9
         evidenceIds:
@@ -125,7 +125,7 @@ agent:
       - local_entity_id: known-kerry-home
         canonical_entity_ids:
           - kerry-home
-      - local_entity_id: known-johnny-engram
+      - local_entity_id: remembered-johnny
         canonical_entity_ids: []
       - local_entity_id: known-north-oak
         canonical_entity_ids:

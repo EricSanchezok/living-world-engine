@@ -1,0 +1,60 @@
+id: partner-output
+kind: stock
+name: 工坊试制壳体周转盘
+description: 当前为空，用于放置本轮实际生产出的试制壳体；待检品不是已验收商品。
+placement: partner-work
+facts:
+  - id: partner-output-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: restart-workshop
+    description: 工坊的材料及待交付产品，朱尔斯登记保管不表示个人所有。
+    access:
+      kind: agents
+      agentIds:
+        - partner
+        - marta
+        - owen
+        - nela
+  - id: partner-output-custodian-2
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: partner
+    description: 朱尔斯负责登记与保管；库存属于工坊业务，不是可以私吞的现金或材料。
+    access:
+      kind: agents
+      agentIds:
+        - partner
+        - marta
+        - owen
+        - nela
+  - id: partner-output-authorized-user-3
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: marta
+    description: 工长可核对现场库存与生产记录。
+    access:
+      kind: agents
+      agentIds:
+        - partner
+        - marta
+        - owen
+        - nela
+  - id: partner-output-customer-accepted-4
+    predicate: customer-accepted
+    value:
+      kind: boolean
+      value: false
+    description: 试制壳体初始为零；尺寸记录和客户实际验收才可能改变交付状态，不因产出即成为已收款成品。
+    access:
+      kind: agents
+      agentIds:
+        - partner
+        - marta
+        - owen
+meters: []
+quantities: []
+ratings: []

@@ -1,0 +1,94 @@
+id: partner-batch-log
+kind: data-file
+name: 低负荷试制批次记录
+description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+placement: partner-work
+facts:
+  - id: partner-batch-log-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: restart-workshop
+    description: 本记录属于实际委托主体；岗位作者可据实填写，不能把机构资料当私人财产处置。
+    access:
+      kind: agents
+      agentIds: &a1
+        - partner
+        - marta
+        - owen
+        - nela
+  - id: partner-batch-log-entries-2
+    predicate: entries
+    value:
+      kind: text
+      value: 空白：尚未记录本次工作的观察、操作或结果。
+    description: 本次工作记录的正文；只能由实际观察和已发生的操作形成。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: partner-batch-log-record-state-3
+    predicate: record-state
+    value:
+      kind: text
+      value: blank
+    description: 空白、草稿或已复核依实际填写与复核改变；文档存在不代表工作完成。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: partner-batch-log-record-purpose-4
+    predicate: record-purpose
+    value:
+      kind: text
+      value: 逐批记录实际消耗的工业坯料、实际产出的试制壳体、尺寸与联锁反馈；原料与成品分别记账，客户验收与到账另核。
+    description: 低负荷试制批次记录的record-purpose记录。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: partner-batch-log-authorized-writer-5
+    predicate: authorized-writer
+    value:
+      kind: entity
+      entityId: partner
+    description: 本人可以据实填写，修改记录不改变原始材料或独立验收结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: partner-batch-log-record-subject-6
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: partner-line
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: partner-batch-log-record-subject-7
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: partner-stock
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: partner-batch-log-record-subject-8
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: partner-output
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: partner-batch-log-record-subject-9
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: partner-customer-stock
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

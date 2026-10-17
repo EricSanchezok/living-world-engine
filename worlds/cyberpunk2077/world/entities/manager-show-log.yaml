@@ -1,0 +1,86 @@
+id: manager-show-log
+kind: data-file
+name: 折光现场演出与结算记录
+description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+placement: manager-work
+facts:
+  - id: manager-show-log-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: manager
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - manager
+  - id: manager-show-log-entries-2
+    predicate: entries
+    value:
+      kind: text
+      value: 空白：尚未记录本次工作的观察、操作或结果。
+    description: 本次工作记录的正文；只能由实际观察和已发生的操作形成。
+    access:
+      kind: agents
+      agentIds: &a1
+        - manager
+        - rin
+        - bex
+        - paulo
+  - id: manager-show-log-record-state-3
+    predicate: record-state
+    value:
+      kind: text
+      value: blank
+    description: 空白、草稿或已复核依实际填写与复核改变；文档存在不代表工作完成。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: manager-show-log-record-purpose-4
+    predicate: record-purpose
+    value:
+      kind: text
+      value: 记录商定的演出方案、曲目与时间、成员和器材实际到场、真实表演和反馈，以及保罗核验和公账到账；排练或普通客人在场不等于已履约。
+    description: 折光现场演出与结算记录的record-purpose记录。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: manager-show-log-authorized-writer-5
+    predicate: authorized-writer
+    value:
+      kind: entity
+      entityId: manager
+    description: 本人可以据实填写，修改记录不改变原始材料或独立验收结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: manager-show-log-record-subject-6
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: manager-venue
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: manager-show-log-record-subject-7
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: manager-stage
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: manager-show-log-record-subject-8
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: manager-show
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

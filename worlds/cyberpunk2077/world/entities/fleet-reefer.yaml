@@ -46,7 +46,19 @@ facts:
         - fleet
         - raul
         - jo
-  - id: fleet-reefer-cold-chain-ready-5
+  - id: fleet-reefer-repair-scope-5
+    predicate: repair-scope
+    value:
+      kind: text
+      value: 原冷却阀回位不稳，可检查确认后用真实兼容阀更换；须重新做制冷与保压检查才能决定可承运条件。
+    description: 清洁与空载试验可以获得证据，不能从工具车里凭空拿出新阀。
+    access:
+      kind: agents
+      agentIds:
+        - fleet
+        - raul
+        - jo
+  - id: fleet-reefer-cold-chain-ready-6
     predicate: cold-chain-ready
     value:
       kind: boolean

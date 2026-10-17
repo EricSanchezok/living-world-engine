@@ -1,0 +1,41 @@
+id: manager-show
+kind: event
+name: 折光待议演出场次
+description: 回声间为折光保留的一次待商议机会，赞助扩厅和独立小场是同一场次的两种方案。
+placement: manager-venue
+facts:
+  - id: manager-show-agreed-format-1
+    predicate: agreed-format
+    value:
+      kind: text
+      value: undecided
+    description: 尚未选定并签署方案；可协商曲目、时长和开始时间，没有自动生效的演出。
+    access:
+      kind: public
+  - id: manager-show-performance-started-2
+    predicate: performance-started
+    value:
+      kind: boolean
+      value: false
+    description: 成员尚未在此实际开始约定演出，排练室试播不是这场演出。
+    access:
+      kind: public
+  - id: manager-show-performance-completed-3
+    predicate: performance-completed
+    value:
+      kind: boolean
+      value: false
+    description: 只有在场地完成实际约定节目且核验履约后才成立，叫好、试音或签约都不是演出完成。
+    access:
+      kind: public
+  - id: manager-show-settled-4
+    predicate: settled
+    value:
+      kind: boolean
+      value: false
+    description: 当前尚无演出费转账；结算应对应实际账户付款凭据。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []

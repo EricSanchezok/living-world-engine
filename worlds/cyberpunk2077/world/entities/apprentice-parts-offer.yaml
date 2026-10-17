@@ -1,0 +1,102 @@
+id: apprentice-parts-offer
+kind: contract
+name: H-17备件取货待议单
+description: 供当事人阅读与协商的业务文件，内容不对路人自动公开。
+placement: apprentice-work
+facts:
+  - id: apprentice-parts-offer-terms-1
+    predicate: terms
+    value:
+      kind: text
+      value: 博的小库有一枚BR-H17-01，报价420欧元；需确认付款人、实际取货与当面验件后交付。诊所里林医生的旧库存仍独立存在，不能把两枚混记或重复出售。患者的检修、费用同意和病历不由这张零件报价代替。
+    description: H-17备件取货待议单的terms记录。
+    access:
+      kind: agents
+      agentIds: &a1
+        - apprentice
+        - lin
+        - bo
+  - id: apprentice-parts-offer-status-2
+    predicate: status
+    value:
+      kind: text
+      value: pending
+    description: 条款待当事人商议；未签约不产生付款或强制结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: apprentice-parts-offer-signed-3
+    predicate: signed
+    value:
+      kind: boolean
+      value: false
+    description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: apprentice-parts-offer-party-4
+    predicate: party
+    value:
+      kind: entity
+      entityId: apprentice
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: apprentice-parts-offer-party-5
+    predicate: party
+    value:
+      kind: entity
+      entityId: lin
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: apprentice-parts-offer-party-6
+    predicate: party
+    value:
+      kind: entity
+      entityId: bo
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: apprentice-parts-offer-offered-item-7
+    predicate: offered-item
+    value:
+      kind: entity
+      entityId: apprentice-supplier-spare
+    description: 交易对象是一枚现有实物，不是无限订货权限。
+    access:
+      kind: agents
+      agentIds:
+        - apprentice
+        - lin
+        - bo
+  - id: apprentice-parts-offer-collection-place-8
+    predicate: collection-place
+    value:
+      kind: entity
+      entityId: apprentice-parts-depot
+    description: 付款或等待一句话不会把库内备件移到诊所。
+    access:
+      kind: agents
+      agentIds:
+        - apprentice
+        - lin
+        - bo
+  - id: apprentice-parts-offer-paid-9
+    predicate: paid
+    value:
+      kind: boolean
+      value: false
+    description: 本单尚未付款。
+    access:
+      kind: agents
+      agentIds:
+        - apprentice
+        - lin
+        - bo
+meters: []
+quantities: []
+ratings: []

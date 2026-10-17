@@ -1,0 +1,29 @@
+id: apprentice-parts-depot
+kind: place
+name: 诺瓦克歌舞伎零件小库
+description: 博租用的独立零件库，门锁由他保管；现有一枚封装的H-17接口备件。需随博实际到库或等他实际取货，诊所里不会直接出现第二件。
+placement: kabuki
+facts:
+  - id: apprentice-parts-depot-street-access-1
+    predicate: street-access
+    value:
+      kind: entity
+      entityId: kabuki
+    description: 可沿所在街区的普通道路到达营业入口；前往和返回都需要实际行程。
+    access:
+      kind: public
+  - id: apprentice-parts-depot-custodian-2
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: bo
+    description: 博管理自己的小库；知道地址不等于可以私自进入或取货。
+    access:
+      kind: agents
+      agentIds:
+        - bo
+        - lin
+        - apprentice
+meters: []
+quantities: []
+ratings: []

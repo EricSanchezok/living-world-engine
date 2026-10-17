@@ -1,0 +1,139 @@
+id: heir-service-pipe
+kind: equipment
+name: 漏水的公共冷水管活接
+description: 公共冷水立管上的活接，底部接水盘可见持续水滴；检修需先靠近、确认水路和实际隔离。
+placement: heir-utility-room
+facts:
+  - id: heir-service-pipe-authorized-user-1
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: heir
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+  - id: heir-service-pipe-authorized-user-2
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: elena
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+  - id: heir-service-pipe-authorized-user-3
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: marco
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+  - id: heir-service-pipe-installed-4
+    predicate: installed
+    value:
+      kind: boolean
+      value: true
+    description: 固定于楼内管线，不能当随身物品带走。
+    access:
+      kind: public
+  - id: heir-service-pipe-leaking-5
+    predicate: leaking
+    value:
+      kind: boolean
+      value: true
+    description: 活接仍在滴水；必须实际处理漏点并复压检查才可认定止漏。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - inez
+        - heir-plumber
+  - id: heir-service-pipe-supply-isolated-6
+    predicate: supply-isolated
+    value:
+      kind: boolean
+      value: false
+    description: 当前仍有供水；实际检修前须辨认阀门并隔离这段水路。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+  - id: heir-service-pipe-pressure-tested-7
+    predicate: pressure-tested
+    value:
+      kind: boolean
+      value: false
+    description: 尚未完成本次维修后的复压检查，暂时关水不代表修好。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - inez
+        - heir-plumber
+  - id: heir-service-pipe-internal-component-8
+    predicate: internal-component
+    value:
+      kind: entity
+      entityId: heir-pipe-seal
+    description: 正常结构包含这枚密封件，知道结构不等于知道内部现状。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+  - id: heir-service-pipe-maintenance-permission-9
+    predicate: maintenance-permission
+    value:
+      kind: text
+      value: 共有人已允许现场检查、隔离止漏及使用现有兼容密封垫做基础维护；改造管路和追加付费工程须另行协商。
+    description: 这是既有的小额维护权限，不是工程已付款或已完成。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+  - id: heir-service-pipe-conditional-contractor-10
+    predicate: conditional-contractor
+    value:
+      kind: entity
+      entityId: heir-plumber
+    description: 到场并取得本次明确施工委托后，可以在约定范围使用工位、工具和材料；未签约不自动开始拆修。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources:
+  - definition_id: workstation
+    capacity: 1

@@ -1,0 +1,87 @@
+id: operator-diagnostic-log
+kind: data-file
+name: L-4 接口诊断记录
+description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+placement: operator-work
+facts:
+  - id: operator-diagnostic-log-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: operator
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - operator
+  - id: operator-diagnostic-log-entries-2
+    predicate: entries
+    value:
+      kind: text
+      value: 空白：尚未记录本次工作的观察、操作或结果。
+    description: 本次工作记录的正文；只能由实际观察和已发生的操作形成。
+    access:
+      kind: agents
+      agentIds: &a1
+        - operator
+        - niko
+        - mara
+        - tessa
+        - pump-commissioner
+  - id: operator-diagnostic-log-record-state-3
+    predicate: record-state
+    value:
+      kind: text
+      value: blank
+    description: 空白、草稿或已复核依实际填写与复核改变；文档存在不代表工作完成。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: operator-diagnostic-log-record-purpose-4
+    predicate: record-purpose
+    value:
+      kind: text
+      value: 记录实际接线、读取到的日志和已检查的接点，区分诊断、报价、获准维修及复测；读到故障不代表修复，阿黛拉可据真实交付记录核验诊断费。
+    description: L-4 接口诊断记录的record-purpose记录。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: operator-diagnostic-log-authorized-writer-5
+    predicate: authorized-writer
+    value:
+      kind: entity
+      entityId: operator
+    description: 本人可以据实填写，修改记录不改变原始材料或独立验收结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: operator-diagnostic-log-record-subject-6
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: operator-pump
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: operator-diagnostic-log-record-subject-7
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: operator-interface
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: operator-diagnostic-log-record-subject-8
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: operator-manual
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

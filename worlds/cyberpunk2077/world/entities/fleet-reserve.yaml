@@ -127,6 +127,10 @@ agent:
         name: 奥马尔·里德
         description: 奥马尔·里德是已登记的业务收款人。
         status: observed
+      - id: known-fleet-client-settlement
+        name: 仓库客户运费结算账户
+        description: 仓库客户运费结算账户的现场语音支付终端。对它直接说出收款人、金额及用途，即可申请办理；权限取决于账户约定。
+        status: observed
     evidence:
       - id: memory-1-evidence
         kind: observation
@@ -167,3 +171,6 @@ agent:
       - local_entity_id: known-parts-merchant
         canonical_entity_ids:
           - parts-merchant
+      - local_entity_id: known-fleet-client-settlement
+        canonical_entity_ids:
+          - fleet-client-settlement

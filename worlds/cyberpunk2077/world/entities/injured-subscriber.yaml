@@ -16,6 +16,18 @@ facts:
         - injured-subscriber
         - medic
         - mateo
+  - id: injured-subscriber-credential-check-consent-2
+    predicate: credential-check-consent
+    value:
+      kind: boolean
+      value: false
+    description: 伊娃尚未为本次现场凭证核对明确表示同意；她能自行决定出示。
+    access:
+      kind: agents
+      agentIds:
+        - injured-subscriber
+        - medic
+        - mateo
 meters:
   - id: injured-subscriber-vitality
     definition_id: vitality
@@ -74,6 +86,10 @@ agent:
         name: 贝尔社区运动场
         description: 可通过街区道路到达的实际营业或工作场所；营业空间与私人住所分开。
         status: observed
+      - id: known-medic-service-card
+        name: 伊娃随身的个人服务凭证
+        description: 伊娃随身保存的个人凭证，需要先得到她出示与核对的同意；不能隔着衣物或只凭她的身份标签读取。
+        status: observed
       - id: known-wellsprings
         name: 美泉区
         description: 我所在的美泉区及通向外侧的日常路径。
@@ -89,11 +105,43 @@ agent:
     evidence:
       - id: memory-1-evidence
         kind: observation
+        description: 持有该物的所有权。
+        sourceId: self
+        step: 0
+      - id: memory-2-evidence
+        kind: observation
+        description: 我的个人凭证在身上，可以先听对方解释再决定是否拿出来；他们还没有完成今天现场的核对。
+        sourceId: self
+        step: 0
+      - id: memory-3-evidence
+        kind: observation
         description: 我有 600 欧元个人可用资金，其他账户须按各自约定使用。
         sourceId: self
         step: 0
     claims:
       - id: memory-1
+        subjectId: known-medic-service-card
+        predicate: ownership
+        value:
+          kind: text
+          value: 持有该物的所有权。
+        description: 持有该物的所有权。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-1-evidence
+      - id: memory-2
+        subjectId: known-medic-service-card
+        predicate: held-credential
+        value:
+          kind: text
+          value: 我的个人凭证在身上，可以先听对方解释再决定是否拿出来；他们还没有完成今天现场的核对。
+        description: 我的个人凭证在身上，可以先听对方解释再决定是否拿出来；他们还没有完成今天现场的核对。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-2-evidence
+      - id: memory-3
         subjectId: self
         predicate: available-cash
         value:
@@ -103,7 +151,7 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-1-evidence
+          - memory-3-evidence
     bindings:
       - local_entity_id: self
         canonical_entity_ids:
@@ -111,6 +159,9 @@ agent:
       - local_entity_id: known-medic-work
         canonical_entity_ids:
           - medic-work
+      - local_entity_id: known-medic-service-card
+        canonical_entity_ids:
+          - medic-service-card
       - local_entity_id: known-wellsprings
         canonical_entity_ids:
           - wellsprings

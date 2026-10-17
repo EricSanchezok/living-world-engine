@@ -15,7 +15,17 @@ facts:
       agentIds:
         - raul
         - dakota
-  - id: raul-storage-fuel-2
+  - id: raul-storage-cooling-valve-2
+    predicate: storage-cooling-valve
+    value:
+      kind: entity
+      entityId: fleet-valve-stock
+    description: 该类登记物资的实际存放处；保管不改变产权，远离存放处不能隔空交货。
+    access:
+      kind: agents
+      agentIds:
+        - raul
+  - id: raul-storage-fuel-3
     predicate: storage-fuel
     value:
       kind: entity
@@ -37,6 +47,8 @@ quantities:
     amount: 1200
   - definition_id: medical-supply
     amount: 1
+  - definition_id: cooling-valve
+    amount: 1
   - definition_id: fuel
     amount: 40
 ratings:
@@ -57,11 +69,11 @@ agent:
     fallback: decision-deepseek-long
   character:
     persona:
-      summary: 姨父兼资深维修工，持有车队份额。 支持晚辈经营，但拒绝不顾维护拉车上路。
-      voice: 交谈具体，解释自己的条件，有自己的判断。
+      summary: 姨父兼资深维修工，持有车队份额。 支持晚辈经营，但拒绝不顾维护拉车上路。 想把维修经验教给下一班人，自己偶尔能坐副驾驶看看风景。
+      voice: 慢条斯理，喜欢让人摸摸管线再解释；对车有感情，对晚辈也有耐心。
     traits:
       - id: temperament
-        description: 姨父兼资深维修工，持有车队份额。 支持晚辈经营，但拒绝不顾维护拉车上路。
+        description: 姨父兼资深维修工，持有车队份额。 支持晚辈经营，但拒绝不顾维护拉车上路。 想把维修经验教给下一班人，自己偶尔能坐副驾驶看看风景。
         strength: 0.75
     values:
       - id: priority
@@ -81,6 +93,13 @@ agent:
       - id: current-purpose
         description: 先修冷藏车冷却阀，再承担长途单。
         priority: 0.8
+        progress: 0
+        target_ids: []
+        motivated_by_ids:
+          - priority
+      - id: life-beyond-work
+        description: 想把维修经验教给下一班人，自己偶尔能坐副驾驶看看风景。
+        priority: 0.35
         progress: 0
         target_ids: []
         motivated_by_ids:
@@ -132,13 +151,41 @@ agent:
         name: 车队共同储备账户
         description: 支付燃料、维修及约定分红，不能作为私人无条件提款。 我有约定使用权，没有单独处分全部资产的权限。
         status: observed
+      - id: known-fleet-tools
+        name: 车队共用检修工具车
+        description: 压力表、检漏工具、绝缘手工具与空载测试接口；可检查和维护，不包含能凭空替换的冷却阀。 我有约定使用权，没有单独处分全部资产的权限。
+        status: observed
+      - id: known-fleet-valve-stock
+        name: 车队备用冷却阀零件盒
+        description: 劳尔保管的一只兼容备用阀在装卸坪，维修时可以实际领用并记账。
+        status: observed
+      - id: known-fleet-destination
+        name: 阿罗约货运交接仓
+        description: 这两单的实际目的地是阿罗约货运交接仓，可沿公路到达，黛娜负责现场收货。
+        status: observed
+      - id: known-fleet-cargo
+        name: 已装箱的水处理设备
+        description: 四箱社区水处理设备，独立于普通工业货的一批。
+        status: observed
+      - id: known-fleet-regular-cargo
+        name: 待运的六箱普通工业货
+        description: 六箱普通工业货，R-01至R-06，不要求低温运输。
+        status: observed
       - id: known-fleet-regular-order
         name: 长期客户普通货运单
-        description: 拟运普通工业货六箱，需平板车与厢式车配合，报酬 5200 欧元；仍可调整装车日或委托其他承运人。
+        description: 拟运现场R-01至R-06普通工业货六箱至阿罗约货运交接仓，黛娜实际清点签收后由梅向车队公账结算5200欧元；平板或厢式车可按实装容量调度，不需冷链。仍须商定窗口并确认接单，可改日或转包；尚未交付付款。
         status: observed
       - id: known-fleet-community-order
         name: 社区水处理设备委托
-        description: 四箱水处理设备拟用平板车运输，报酬 2800 欧元，需与普通订单协调同一车辆；可拼货或分期交付，未发运不算完成。
+        description: 四箱水处理设备拟用平板车运至阿罗约货运交接仓的社区设备收货位，由黛娜单独签收，梅据此向车队公账结算2800欧元；可拼货或分期交付，窗口和接单待协商，普通货物的签收不能代替本批。
+        status: observed
+      - id: known-fleet-maintenance-log
+        name: 车队检修与空载试验记录
+        description: 这是可供本次工作使用的车队检修与空载试验记录，现在尚未填写。记录实际检查、材料和温度试验；可及部位清洁或一次空载结果不自动构成长途冷链验收。
+        status: observed
+      - id: known-fleet-delivery-log
+        name: 车队分批交付与签收记录
+        description: 这是可供本次工作使用的车队分批交付与签收记录，现在尚未填写。分别记录两批装车、道路运输、到仓箱数及黛娜真实签收；梅依据真实签收办理对应运费，不能把四箱社区设备当作六箱普通货。
         status: observed
       - id: known-dakota
         name: 达科塔·史密斯
@@ -180,35 +227,55 @@ agent:
         step: 0
       - id: memory-6-evidence
         kind: observation
-        description: 拟运普通工业货六箱，需平板车与厢式车配合，报酬 5200 欧元；仍可调整装车日或委托其他承运人。
+        description: 压力表、检漏工具、绝缘手工具与空载测试接口；可检查和维护，不包含能凭空替换的冷却阀。 我有约定使用权，没有单独处分全部资产的权限。
         sourceId: self
         step: 0
       - id: memory-7-evidence
         kind: observation
-        description: 四箱水处理设备拟用平板车运输，报酬 2800 欧元，需与普通订单协调同一车辆；可拼货或分期交付，未发运不算完成。
+        description: 拟运现场R-01至R-06普通工业货六箱至阿罗约货运交接仓，黛娜实际清点签收后由梅向车队公账结算5200欧元；平板或厢式车可按实装容量调度，不需冷链。仍须商定窗口并确认接单，可改日或转包；尚未交付付款。
         sourceId: self
         step: 0
       - id: memory-8-evidence
         kind: observation
-        description: 两份订单摊在三辆卡车之间的折叠桌上。劳尔指出冷藏车阀门待修，乔提出拼货，梅来确认下一次仓库接货窗口。
+        description: 四箱水处理设备拟用平板车运至阿罗约货运交接仓的社区设备收货位，由黛娜单独签收，梅据此向车队公账结算2800欧元；可拼货或分期交付，窗口和接单待协商，普通货物的签收不能代替本批。
         sourceId: self
         step: 0
       - id: memory-9-evidence
         kind: observation
-        description: 曾通过达科塔核实城外货运机会，无永久优先权。 愿继续有边界的职业合作。
+        description: 两份订单摊在三辆卡车之间的折叠桌上。劳尔指出冷藏车阀门待修，乔提出拼货，梅来确认下一次仓库接货窗口。
         sourceId: self
         step: 0
       - id: memory-10-evidence
         kind: observation
-        description: 我负责保管的 fuel 在这里，取用、交付和消耗须满足现场与授权条件。
+        description: 这是可供本次工作使用的车队检修与空载试验记录，现在尚未填写。记录实际检查、材料和温度试验；可及部位清洁或一次空载结果不自动构成长途冷链验收。
         sourceId: self
         step: 0
       - id: memory-11-evidence
         kind: observation
-        description: 我有 1200 欧元个人可用资金，其他账户须按各自约定使用。
+        description: 这是可供本次工作使用的车队分批交付与签收记录，现在尚未填写。分别记录两批装车、道路运输、到仓箱数及黛娜真实签收；梅依据真实签收办理对应运费，不能把四箱社区设备当作六箱普通货。
         sourceId: self
         step: 0
       - id: memory-12-evidence
+        kind: observation
+        description: 曾通过达科塔核实城外货运机会，无永久优先权。 愿继续有边界的职业合作。
+        sourceId: self
+        step: 0
+      - id: memory-13-evidence
+        kind: observation
+        description: 我负责保管的 cooling-valve 在这里，取用、交付和消耗须满足现场与授权条件。
+        sourceId: self
+        step: 0
+      - id: memory-14-evidence
+        kind: observation
+        description: 我负责保管的 fuel 在这里，取用、交付和消耗须满足现场与授权条件。
+        sourceId: self
+        step: 0
+      - id: memory-15-evidence
+        kind: observation
+        description: 我有 1200 欧元个人可用资金，其他账户须按各自约定使用。
+        sourceId: self
+        step: 0
+      - id: memory-16-evidence
         kind: observation
         description: 这个账户的现场业务由语音终端受理。我可以直接对它说出具体金额、收款人和用途；操作别的设备或只写下草稿不等于已经通知它。
         sourceId: self
@@ -270,28 +337,39 @@ agent:
         evidenceIds:
           - memory-5-evidence
       - id: memory-6
-        subjectId: known-fleet-regular-order
-        predicate: terms
+        subjectId: known-fleet-tools
+        predicate: shared-use
         value:
           kind: text
-          value: 拟运普通工业货六箱，需平板车与厢式车配合，报酬 5200 欧元；仍可调整装车日或委托其他承运人。
-        description: 拟运普通工业货六箱，需平板车与厢式车配合，报酬 5200 欧元；仍可调整装车日或委托其他承运人。
+          value: 压力表、检漏工具、绝缘手工具与空载测试接口；可检查和维护，不包含能凭空替换的冷却阀。 我有约定使用权，没有单独处分全部资产的权限。
+        description: 压力表、检漏工具、绝缘手工具与空载测试接口；可检查和维护，不包含能凭空替换的冷却阀。 我有约定使用权，没有单独处分全部资产的权限。
         stance: believed
         confidence: 0.95
         evidenceIds:
           - memory-6-evidence
       - id: memory-7
-        subjectId: known-fleet-community-order
+        subjectId: known-fleet-regular-order
         predicate: terms
         value:
           kind: text
-          value: 四箱水处理设备拟用平板车运输，报酬 2800 欧元，需与普通订单协调同一车辆；可拼货或分期交付，未发运不算完成。
-        description: 四箱水处理设备拟用平板车运输，报酬 2800 欧元，需与普通订单协调同一车辆；可拼货或分期交付，未发运不算完成。
+          value: 拟运现场R-01至R-06普通工业货六箱至阿罗约货运交接仓，黛娜实际清点签收后由梅向车队公账结算5200欧元；平板或厢式车可按实装容量调度，不需冷链。仍须商定窗口并确认接单，可改日或转包；尚未交付付款。
+        description: 拟运现场R-01至R-06普通工业货六箱至阿罗约货运交接仓，黛娜实际清点签收后由梅向车队公账结算5200欧元；平板或厢式车可按实装容量调度，不需冷链。仍须商定窗口并确认接单，可改日或转包；尚未交付付款。
         stance: believed
         confidence: 0.95
         evidenceIds:
           - memory-7-evidence
       - id: memory-8
+        subjectId: known-fleet-community-order
+        predicate: terms
+        value:
+          kind: text
+          value: 四箱水处理设备拟用平板车运至阿罗约货运交接仓的社区设备收货位，由黛娜单独签收，梅据此向车队公账结算2800欧元；可拼货或分期交付，窗口和接单待协商，普通货物的签收不能代替本批。
+        description: 四箱水处理设备拟用平板车运至阿罗约货运交接仓的社区设备收货位，由黛娜单独签收，梅据此向车队公账结算2800欧元；可拼货或分期交付，窗口和接单待协商，普通货物的签收不能代替本批。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-8-evidence
+      - id: memory-9
         subjectId: known-fleet-work
         predicate: opening-context
         value:
@@ -301,8 +379,30 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-8-evidence
-      - id: memory-9
+          - memory-9-evidence
+      - id: memory-10
+        subjectId: known-fleet-maintenance-log
+        predicate: work-record
+        value:
+          kind: text
+          value: 这是可供本次工作使用的车队检修与空载试验记录，现在尚未填写。记录实际检查、材料和温度试验；可及部位清洁或一次空载结果不自动构成长途冷链验收。
+        description: 这是可供本次工作使用的车队检修与空载试验记录，现在尚未填写。记录实际检查、材料和温度试验；可及部位清洁或一次空载结果不自动构成长途冷链验收。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-10-evidence
+      - id: memory-11
+        subjectId: known-fleet-delivery-log
+        predicate: work-record
+        value:
+          kind: text
+          value: 这是可供本次工作使用的车队分批交付与签收记录，现在尚未填写。分别记录两批装车、道路运输、到仓箱数及黛娜真实签收；梅依据真实签收办理对应运费，不能把四箱社区设备当作六箱普通货。
+        description: 这是可供本次工作使用的车队分批交付与签收记录，现在尚未填写。分别记录两批装车、道路运输、到仓箱数及黛娜真实签收；梅依据真实签收办理对应运费，不能把四箱社区设备当作六箱普通货。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-11-evidence
+      - id: memory-12
         subjectId: known-dakota
         predicate: professional-channel
         value:
@@ -312,8 +412,19 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-9-evidence
-      - id: memory-10
+          - memory-12-evidence
+      - id: memory-13
+        subjectId: known-fleet-valve-stock
+        predicate: stored-resources
+        value:
+          kind: text
+          value: 我负责保管的 cooling-valve 在这里，取用、交付和消耗须满足现场与授权条件。
+        description: 我负责保管的 cooling-valve 在这里，取用、交付和消耗须满足现场与授权条件。
+        stance: believed
+        confidence: 0.95
+        evidenceIds:
+          - memory-13-evidence
+      - id: memory-14
         subjectId: known-fleet-reefer
         predicate: stored-resources
         value:
@@ -323,8 +434,8 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-10-evidence
-      - id: memory-11
+          - memory-14-evidence
+      - id: memory-15
         subjectId: self
         predicate: available-cash
         value:
@@ -334,8 +445,8 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-11-evidence
-      - id: memory-12
+          - memory-15-evidence
+      - id: memory-16
         subjectId: known-fleet-reserve
         predicate: voice-service
         value:
@@ -345,7 +456,7 @@ agent:
         stance: believed
         confidence: 0.95
         evidenceIds:
-          - memory-12-evidence
+          - memory-16-evidence
     bindings:
       - local_entity_id: self
         canonical_entity_ids:
@@ -368,12 +479,33 @@ agent:
       - local_entity_id: known-fleet-reserve
         canonical_entity_ids:
           - fleet-reserve
+      - local_entity_id: known-fleet-tools
+        canonical_entity_ids:
+          - fleet-tools
+      - local_entity_id: known-fleet-valve-stock
+        canonical_entity_ids:
+          - fleet-valve-stock
+      - local_entity_id: known-fleet-destination
+        canonical_entity_ids:
+          - fleet-destination
+      - local_entity_id: known-fleet-cargo
+        canonical_entity_ids:
+          - fleet-cargo
+      - local_entity_id: known-fleet-regular-cargo
+        canonical_entity_ids:
+          - fleet-regular-cargo
       - local_entity_id: known-fleet-regular-order
         canonical_entity_ids:
           - fleet-regular-order
       - local_entity_id: known-fleet-community-order
         canonical_entity_ids:
           - fleet-community-order
+      - local_entity_id: known-fleet-maintenance-log
+        canonical_entity_ids:
+          - fleet-maintenance-log
+      - local_entity_id: known-fleet-delivery-log
+        canonical_entity_ids:
+          - fleet-delivery-log
       - local_entity_id: known-dakota
         canonical_entity_ids:
           - dakota

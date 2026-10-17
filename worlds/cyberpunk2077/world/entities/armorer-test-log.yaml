@@ -1,0 +1,77 @@
+id: armorer-test-log
+kind: data-file
+name: 装备非破坏性检测记录
+description: 已有的本地工作记录文件；需要打开才能读取内容，可以在授权范围内续写。
+placement: armorer-work
+facts:
+  - id: armorer-test-log-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: armorer
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - armorer
+  - id: armorer-test-log-entries-2
+    predicate: entries
+    value:
+      kind: text
+      value: 空白：尚未记录本次工作的观察、操作或结果。
+    description: 本次工作记录的正文；只能由实际观察和已发生的操作形成。
+    access:
+      kind: agents
+      agentIds: &a1
+        - armorer
+        - grant
+        - leo
+        - rosa
+  - id: armorer-test-log-record-state-3
+    predicate: record-state
+    value:
+      kind: text
+      value: blank
+    description: 空白、草稿或已复核依实际填写与复核改变；文档存在不代表工作完成。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: armorer-test-log-record-purpose-4
+    predicate: record-purpose
+    value:
+      kind: text
+      value: 记录校准、实测读数和保留的流转编号；检测性能和核对原始所有权是不同结论。
+    description: 装备非破坏性检测记录的record-purpose记录。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: armorer-test-log-authorized-writer-5
+    predicate: authorized-writer
+    value:
+      kind: entity
+      entityId: armorer
+    description: 本人可以据实填写，修改记录不改变原始材料或独立验收结果。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: armorer-test-log-record-subject-6
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: armorer-crate
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: armorer-test-log-record-subject-7
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: armorer-bench
+    description: 这份记录对应的实物、原始文件或工作对象。
+    access:
+      kind: agents
+      agentIds: *a1
+meters: []
+quantities: []
+ratings: []

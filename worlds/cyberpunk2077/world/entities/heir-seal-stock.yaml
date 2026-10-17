@@ -1,0 +1,61 @@
+id: heir-seal-stock
+kind: stock
+name: 榆荫楼兼容密封垫小盒
+description: 两枚与该冷水管活接规格相容的常备密封垫，归共同维修物资；更换一枚须实际消耗一单位登记组件。
+placement: heir-utility-room
+facts:
+  - id: heir-seal-stock-authorized-user-1
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: heir
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+  - id: heir-seal-stock-authorized-user-2
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: elena
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+  - id: heir-seal-stock-authorized-user-3
+    predicate: authorized-user
+    value:
+      kind: entity
+      entityId: marco
+    description: 依约使用；不能据此出售或独占共同资产。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+  - id: heir-seal-stock-conditional-contractor-4
+    predicate: conditional-contractor
+    value:
+      kind: entity
+      entityId: heir-plumber
+    description: 到场并取得本次明确施工委托后，可以在约定范围使用工位、工具和材料；未签约不自动开始拆修。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - marco
+        - heir-plumber
+meters: []
+quantities: []
+ratings: []

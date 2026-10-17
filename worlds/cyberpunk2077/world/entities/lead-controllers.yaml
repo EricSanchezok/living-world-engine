@@ -1,0 +1,57 @@
+id: lead-controllers
+kind: stock
+name: 艾达的首批控制器运输箱
+description: 箱内最初有六台独立标签的测试网用控制器，现由艾达保管且未付款交接；运输箱归艾达，交付台数依真实库存变化。
+placement: lead-work
+facts:
+  - id: lead-controllers-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: ada
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - ada
+  - id: lead-controllers-unit-price-2
+    predicate: unit-price
+    value:
+      kind: number
+      value: 1000
+    description: 本次按单采购为六台、每台 1000 欧元，共 6000；框架折扣需另行协商。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - ada
+  - id: lead-controllers-delivery-status-3
+    predicate: delivery-status
+    value:
+      kind: text
+      value: awaiting-payment-and-handover
+    description: 现货可在核对本批实际到账后交付；付款、移交保管、确认归属和安装分别发生。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - ada
+  - id: lead-controllers-batch-labels-4
+    predicate: batch-labels
+    value:
+      kind: text
+      value: CB-01, CB-02, CB-03, CB-04, CB-05, CB-06
+    description: 本批控制器的实物标签；不能复制标签增发第二批库存。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+        - ada
+meters: []
+quantities: []
+ratings: []

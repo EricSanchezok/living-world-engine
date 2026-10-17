@@ -12,9 +12,10 @@ facts:
     description: 五年包租要约的terms记录。
     access:
       kind: agents
-      agentIds: &a1
+      agentIds:
         - heir
         - elena
+        - heir-lease-agent
   - id: heir-lease-offer-status-2
     predicate: status
     value:
@@ -23,7 +24,10 @@ facts:
     description: 条款待当事人商议；未签约不产生付款或强制结果。
     access:
       kind: agents
-      agentIds: *a1
+      agentIds:
+        - heir
+        - elena
+        - heir-lease-agent
   - id: heir-lease-offer-signed-3
     predicate: signed
     value:
@@ -32,7 +36,10 @@ facts:
     description: 相关当事人尚未共同签署；只有实际同意和签署才能改变。
     access:
       kind: agents
-      agentIds: *a1
+      agentIds:
+        - heir
+        - elena
+        - heir-lease-agent
   - id: heir-lease-offer-party-4
     predicate: party
     value:
@@ -41,7 +48,10 @@ facts:
     description: 该人是此文件的当事人。
     access:
       kind: agents
-      agentIds: *a1
+      agentIds:
+        - heir
+        - elena
+        - heir-lease-agent
   - id: heir-lease-offer-party-5
     predicate: party
     value:
@@ -50,7 +60,10 @@ facts:
     description: 该人是此文件的当事人。
     access:
       kind: agents
-      agentIds: *a1
+      agentIds:
+        - heir
+        - elena
+        - heir-lease-agent
   - id: heir-lease-offer-term-years-6
     predicate: term-years
     value:
@@ -62,6 +75,104 @@ facts:
       agentIds:
         - heir
         - elena
+        - heir-lease-agent
+  - id: heir-lease-offer-contracting-principal-7
+    predicate: contracting-principal
+    value:
+      kind: entity
+      entityId: heir-lease-company
+    description: 这份现有提案的实际经营主体。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - heir-lease-agent
+  - id: heir-lease-offer-settlement-account-8
+    predicate: settlement-account
+    value:
+      kind: entity
+      entityId: heir-lease-settlement
+    description: 首月款已有真实余额；以后各期需届时实际筹得资金并履约，不能由定时器造钱。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - heir-lease-agent
+  - id: heir-lease-offer-receiving-account-9
+    predicate: receiving-account
+    value:
+      kind: entity
+      entityId: heir-rent-account
+    description: 本次实际租金进入两位共有人共同经营账户。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - heir-lease-agent
+  - id: heir-lease-offer-premises-handed-over-10
+    predicate: premises-handed-over
+    value:
+      kind: boolean
+      value: false
+    description: 约定空间尚未交接；签约与交接是不同的实际行动。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - heir-lease-agent
+  - id: heir-lease-offer-first-period-paid-11
+    predicate: first-period-paid
+    value:
+      kind: boolean
+      value: false
+    description: 没有支付本提案的首月款，不能把资金准备当成到账。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - heir-lease-agent
+  - id: heir-lease-offer-first-period-amount-12
+    predicate: first-period-amount
+    value:
+      kind: number
+      value: 7000
+    description: 当前提案第一月拟付金额，真实变更须当事人明确商议。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - heir-lease-agent
+  - id: heir-lease-offer-party-13
+    predicate: party
+    value:
+      kind: entity
+      entityId: heir-lease-agent
+    description: 这名代表参与本次待议合同；列为当事人不等于已经签约。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - heir-lease-agent
+  - id: heir-lease-offer-exclusive-alternative-14
+    predicate: exclusive-alternative
+    value:
+      kind: entity
+      entityId: heir-repair-offer
+    description: 两方案争用同一间闲置工作室；同一使用期不能交给两方。改为兼容方案须重新明确空间、期限和费用。
+    access:
+      kind: agents
+      agentIds:
+        - heir
+        - elena
+        - heir-lease-agent
+        - inez
 meters: []
 quantities: []
 ratings: []

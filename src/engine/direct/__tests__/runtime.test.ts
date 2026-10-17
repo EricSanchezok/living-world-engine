@@ -287,7 +287,11 @@ describe("direct world through the actual simulation entry", () => {
 
   it("settles an active participant reply without starting unrelated ready agents", async () => {
     const f = await fixture({ operation: "speak", target: "self", recipient: "broadcast", duration: "d0", resolvedDuration: "s60",
-      keeperInitiative: true, creationEnabled: true, creationResponse: { utterance: "听见了，我忙完就答复。", manner: null } });
+      keeperInitiative: true, creationEnabled: true, creationResponse: { utterance: "听见了，我忙完就答复。", manner: null },
+      npcReadings: [
+        npcReading({ operation: "observe", target: "self", recipient: "none", goal: "none", attempt: "检查随身的值守物品", utterance: null }),
+        npcReading({ goal: "none", utterance: "现在忙完了，你有什么问题？" }),
+      ] });
     const source = f.world.initialState;
     source.truth.entities.remote = { ...source.truth.entities.courtyard!, id: "remote", name: "远处" };
     source.truth.entities.stranger = { ...source.truth.entities.keeper!, id: "stranger", name: "远处的人" };
@@ -301,17 +305,6 @@ describe("direct world through the actual simulation entry", () => {
     f.roster.stranger = { kind: "model", agentId: "stranger", profiles: stranger.modelProfiles };
     f.world.historyBaseHash = historyReplayBaseHash(source);
     const engine = new SimulationEngine(f.world, f.algorithm);
-    const respond = f.transport.getMockImplementation()!;
-    f.transport.mockImplementation(async (...args) => {
-      const wire = JSON.parse(String(args[1]?.body));
-      const context = wire.state as { perspective?: { agentId: string }; intent?: { wakeReasons: string[] } } | undefined;
-      const response = await respond(...args);
-      if (context?.perspective?.agentId !== "keeper" || !context.intent?.wakeReasons.includes("initial-decision")) return response;
-      const body = await response.json();
-      body.answers.operation = nativeAnswer(wire.questions.operation, "observe");
-      body.answers.target = nativeAnswer(wire.questions.target, "self");
-      return Response.json(body);
-    });
     await engine.bootstrapAgents();
     const first = await engine.step(f.roster, f.request('用十秒说：“你好，能回答吗？”'));
     expect(first.state.truth.elapsedSeconds).toBe(10);
@@ -1535,13 +1528,14 @@ describe("direct world through the actual simulation entry", () => {
     Object.assign(options, { operation: "transfer", target: "traveler", recipient: "traveler", amount: "n7", keeperInitiative: true });
     const decisions = new DirectDecisions(f.gateway, control, { workloadId: "remembered-payment", batchId: "keeper-payment",
       runtimeIdentity: { worldHash: state.worldHash, revision: state.revision } });
+    const calls = f.transport.mock.calls.length;
     const chosen = await chooseAction({ state, definition: toWorldRuntimeContract(f.world), control,
       decisions, agentId: "keeper", creationEnabled: false });
-    const question = decisions.uses[0]!.batch.questions.amount!;
-    expect(question.type).toBe("choice");
-    if (question.type !== "choice") throw new Error("amount must be a choice");
-    expect(question.criteria).toHaveProperty("n7");
-    expect(question.criteria).not.toHaveProperty("n113");
+    const readings = f.transport.mock.calls.slice(calls).map(([, init]) => directCreationContext(JSON.parse(String(init?.body))))
+      .map(context => context.autonomousReading as { catalog: { amount: Record<string, unknown> } } | undefined).filter(Boolean);
+    expect(readings).toHaveLength(1);
+    expect(readings[0]!.catalog.amount).toHaveProperty("n7");
+    expect(readings[0]!.catalog.amount).not.toHaveProperty("n113");
     expect(chosen.frame).toMatchObject({ kind: "transfer", targetEntityId: "player", amount: 7, quantityDefinitionId: "spirit-stone" });
   });
   it("extracts complete Chinese numerals regardless of the following classifier", () => {

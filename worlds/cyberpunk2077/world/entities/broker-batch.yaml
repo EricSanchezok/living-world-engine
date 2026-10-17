@@ -1,10 +1,90 @@
 id: broker-batch
 kind: cargo
 name: 实际到仓的四箱 A3 控制器
-description: 包装标签为 A3，货单写 A2；升级型号是否适配需询问买家。
+description: 包装标签为 A3，货单写 A2；B-01至B-04为本批四箱，由卢卡受托保管，所有权尚属奥斯卡，适配和成交仍待核。
 placement: broker-work
 facts:
-  - id: broker-batch-buyer-acceptance-1
+  - id: broker-batch-consignor-1
+    predicate: consignor
+    value:
+      kind: entity
+      entityId: broker-supplier
+    description: 奥斯卡是这批现货的货主和原供货方，卢卡只代管并按确认条件经纪。
+    access:
+      kind: agents
+      agentIds:
+        - broker
+        - vera
+        - jun
+        - emil
+        - broker-supplier
+  - id: broker-batch-title-status-2
+    predicate: title-status
+    value:
+      kind: text
+      value: 奥斯卡持有本批货物所有权；卢卡仅受托保管。
+    description: 实际成交、交付和付款可改变权属，不能因卢卡搬动或代管而变成其私产。
+    access:
+      kind: agents
+      agentIds:
+        - broker
+        - vera
+        - jun
+        - emil
+        - broker-supplier
+  - id: broker-batch-consignment-authority-3
+    predicate: consignment-authority
+    value:
+      kind: text
+      value: 卢卡可以核对、安排检测、代表送交双方同意的变更或退运；未经奥斯卡与选定买方确认，不能擅卖或重复承诺同批货。
+    description: 原提案四箱按批8000欧元，含卢卡400欧元经纪费、供货商7600欧元货款；型号变更后的价格与适配须重新明确。
+    access:
+      kind: agents
+      agentIds:
+        - broker
+        - vera
+        - jun
+        - emil
+        - broker-supplier
+  - id: broker-batch-delivery-destination-4
+    predicate: delivery-destination
+    value:
+      kind: entity
+      entityId: fleet-destination
+    description: 本批拟向阿罗约货运交接仓交付，须先完成型号协商与实际许可更新。
+    access:
+      kind: agents
+      agentIds:
+        - broker
+        - jun
+        - emil
+        - broker-supplier
+        - freight-receiver
+  - id: broker-batch-consignee-5
+    predicate: consignee
+    value:
+      kind: entity
+      entityId: freight-receiver
+    description: 黛娜可代表晨线作坊清点收货；她的签收不替代俊的适配接受与合同确认。
+    access:
+      kind: agents
+      agentIds:
+        - broker
+        - jun
+        - freight-receiver
+  - id: broker-batch-delivery-accepted-6
+    predicate: delivery-accepted
+    value:
+      kind: boolean
+      value: false
+    description: 本批仍在狗镇仓位，尚未实际运抵收货位。
+    access:
+      kind: agents
+      agentIds:
+        - broker
+        - jun
+        - freight-receiver
+  - id: broker-batch-buyer-acceptance-7
     predicate: buyer-acceptance
     value:
       kind: boolean

@@ -28,7 +28,21 @@ facts:
       agentIds:
         - operator
         - niko
-  - id: operator-pump-operational-3
+  - id: operator-pump-owner-3
+    predicate: owner
+    value:
+      kind: entity
+      entityId: northside-water-coop
+    description: 送检设备归互助社，埃利只是受委托检测，不得出售或私吞。
+    access:
+      kind: agents
+      agentIds:
+        - operator
+        - niko
+        - mara
+        - tessa
+        - pump-commissioner
+  - id: operator-pump-operational-4
     predicate: operational
     value:
       kind: boolean

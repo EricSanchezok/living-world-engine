@@ -1,0 +1,21 @@
+id: broker-received-stock
+kind: stock
+name: 晨线作坊控制器收货位
+description: 阿罗约货运交接仓内属于晨线作坊的空收货位；黛娜受托逐箱接收实际交付的本批控制器。
+placement: fleet-destination
+facts:
+  - id: broker-received-stock-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: jun-workshop
+    description: 作坊自己的收货位与实际采购入库货物，仓库收货员只保管。
+    access:
+      kind: agents
+      agentIds:
+        - broker
+        - jun
+        - freight-receiver
+meters: []
+quantities: []
+ratings: []

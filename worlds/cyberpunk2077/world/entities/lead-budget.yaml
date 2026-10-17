@@ -24,7 +24,19 @@ facts:
     access:
       kind: agents
       agentIds: *a1
-  - id: lead-budget-automated-service-3
+  - id: lead-budget-owner-3
+    predicate: owner
+    value:
+      kind: entity
+      entityId: crownbridge-services
+    description: 棱桥服务的公司财产，艾登与同事只有岗位使用和保管权限。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - pavel
+  - id: lead-budget-automated-service-4
     predicate: automated-service
     value:
       kind: boolean
@@ -32,7 +44,7 @@ facts:
     description: 普通有范围的支付程序，没有身体行动、战斗、随意联网或机构最高权限。
     access:
       kind: public
-  - id: lead-budget-interface-mode-4
+  - id: lead-budget-interface-mode-5
     predicate: interface-mode
     value:
       kind: text
@@ -40,7 +52,7 @@ facts:
     description: 本终端通过现场对话受理业务：对它直接说出收款人、用途和金额。外部测试终端或未送出的输入草稿不算已收到申请。
     access:
       kind: public
-  - id: lead-budget-spending-mandate-5
+  - id: lead-budget-spending-mandate-6
     predicate: spending-mandate
     value:
       kind: text

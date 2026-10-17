@@ -1,0 +1,22 @@
+id: partner-feed-sensor
+kind: component
+name: 送料段现用传感组件
+description: 安装在旧线送料段内，需要停机检查其型号与实际反馈。
+placement: partner-line
+facts:
+  - id: partner-feed-sensor-fault-1
+    predicate: fault
+    value:
+      kind: text
+      value: 原送料传感器在高速振动下反馈不稳，低负荷时仍可正常读数。
+    description: 须实际停机检查和受控试验确认，单看高速曲线不等于已经更换或修复。
+    access:
+      kind: agents
+      agentIds:
+        - partner
+        - nela
+        - marta
+        - owen
+meters: []
+quantities: []
+ratings: []

@@ -3,7 +3,49 @@ kind: cargo
 name: 已装箱的水处理设备
 description: 四个可逐件清点的标准箱，社区委托人所有，车队仅负责保管与交付。
 placement: fleet-work
-facts: []
+facts:
+  - id: fleet-cargo-delivery-destination-1
+    predicate: delivery-destination
+    value:
+      kind: entity
+      entityId: fleet-destination
+    description: 两批分别在此仓交付，去往同一仓不意味着可以混淆批次。
+    access:
+      kind: agents
+      agentIds:
+        - fleet
+        - raul
+        - jo
+        - mei
+        - freight-receiver
+  - id: fleet-cargo-consignee-2
+    predicate: consignee
+    value:
+      kind: entity
+      entityId: freight-receiver
+    description: 受委托现场清点和签收的人，签收仍取决于实际到货。
+    access:
+      kind: agents
+      agentIds:
+        - fleet
+        - raul
+        - jo
+        - mei
+        - freight-receiver
+  - id: fleet-cargo-delivery-accepted-3
+    predicate: delivery-accepted
+    value:
+      kind: boolean
+      value: false
+    description: 本批尚未发运到仓或签收；装车、到门口及另一批签收不改变本批状态。
+    access:
+      kind: agents
+      agentIds:
+        - fleet
+        - raul
+        - jo
+        - mei
+        - freight-receiver
 meters: []
 quantities: []
 ratings: []

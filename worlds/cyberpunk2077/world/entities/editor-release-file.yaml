@@ -1,0 +1,61 @@
+id: editor-release-file
+kind: data-file
+name: 本次街头纪录片的受访授权夹
+description: 托马斯随素材交来的既有受访授权副本，需要打开核对具体范围；文件存在不代表当前剪辑已获最终放映确认。
+placement: editor-work
+facts:
+  - id: editor-release-file-custodian-1
+    predicate: custodian
+    value:
+      kind: entity
+      entityId: tomas
+    description: 托马斯负责保存这组本次项目的授权来源，保管副本不取得受访者身体、声音或身份的无限使用权。
+    access:
+      kind: agents
+      agentIds:
+        - editor
+        - tomas
+        - sora
+        - celia
+  - id: editor-release-file-contained-record-2
+    predicate: contained-record
+    value:
+      kind: entity
+      entityId: editor-signed-release
+    description: 授权夹里存有本次项目的签署副本，需打开具体记录核对。
+    access:
+      kind: agents
+      agentIds:
+        - editor
+        - tomas
+        - sora
+        - celia
+  - id: editor-release-file-current-cut-reviewed-3
+    predicate: current-cut-reviewed
+    value:
+      kind: boolean
+      value: false
+    description: 尚未对当前含地址线索的工作版完成最终授权核验。
+    access:
+      kind: agents
+      agentIds:
+        - editor
+        - tomas
+        - sora
+        - celia
+  - id: editor-release-file-record-subject-4
+    predicate: record-subject
+    value:
+      kind: entity
+      entityId: editor-footage
+    description: 授权对象限于当前实际交来的纪录片素材。
+    access:
+      kind: agents
+      agentIds:
+        - editor
+        - tomas
+        - sora
+        - celia
+meters: []
+quantities: []
+ratings: []

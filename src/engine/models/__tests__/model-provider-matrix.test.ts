@@ -236,8 +236,12 @@ describe("provider account protocol matrix", () => {
     expect(catalog.profile("decision-deepseek-long")).toMatchObject({
       allowed_roles: ["decision"],
       max_output_tokens: 32_768,
+      request_timeout_ms: 180_000,
     });
-    expect(catalog.profile("decision-deepseek").max_output_tokens).toBe(8_192);
+    expect(catalog.profile("decision-deepseek")).toMatchObject({
+      max_output_tokens: 32_768,
+      request_timeout_ms: 120_000,
+    });
   });
 
   it("keeps vendor inference mapping inside independent dialect plugins", async () => {

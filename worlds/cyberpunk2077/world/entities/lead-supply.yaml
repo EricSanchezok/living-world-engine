@@ -8,7 +8,7 @@ facts:
     predicate: terms
     value:
       kind: text
-      value: 首批控制器报价 6000 欧元，折扣以六个月采购框架为前提；可拒绝框架按单采购或另找供应商。
+      value: 首批六台控制器普通按单报价合计 6000 欧元；六个月采购框架下的折扣另行协商，不以签框架作为这笔普通采购的前提。尚未付款或移交，也可另找供应商。
     description: 采购折扣提案的terms记录。
     access:
       kind: agents
@@ -61,6 +61,18 @@ facts:
     access:
       kind: agents
       agentIds: *a1
+  - id: lead-supply-contracting-principal-7
+    predicate: contracting-principal
+    value:
+      kind: entity
+      entityId: crownbridge-services
+    description: 艾登在本次采购中代表公司；未签框架不影响另行达成普通按单交易。
+    access:
+      kind: agents
+      agentIds:
+        - lead
+        - mina
+        - ada
 meters: []
 quantities: []
 ratings: []

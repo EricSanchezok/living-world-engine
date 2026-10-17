@@ -1,0 +1,81 @@
+id: apprentice-supplier-spare
+kind: component
+name: 博的H-17兼容接口备件
+description: 一枚独立编号BR-H17-01的封装备件，位于博的小库。它与诊所中林医生的那一枚库存是不同实物。
+placement: apprentice-parts-depot
+facts:
+  - id: apprentice-supplier-spare-owner-1
+    predicate: owner
+    value:
+      kind: entity
+      entityId: bo
+    description: 持有该物的所有权。
+    access:
+      kind: agents
+      agentIds:
+        - bo
+  - id: apprentice-supplier-spare-serial-number-2
+    predicate: serial-number
+    value:
+      kind: text
+      value: BR-H17-01
+    description: 唯一实物编号；不能用复制记录获得第二枚。
+    access:
+      kind: agents
+      agentIds:
+        - bo
+        - lin
+        - apprentice
+  - id: apprentice-supplier-spare-interface-model-3
+    predicate: interface-model
+    value:
+      kind: text
+      value: H-17
+    description: 与诊所现有维护型号对应，安装前仍需检查实物状态与患者适配。
+    access:
+      kind: agents
+      agentIds:
+        - bo
+        - lin
+        - apprentice
+        - ana
+  - id: apprentice-supplier-spare-asking-price-4
+    predicate: asking-price
+    value:
+      kind: number
+      value: 420
+    description: 本枚备件当前报价420欧元；可谈条件，报价不是已经付款。
+    access:
+      kind: agents
+      agentIds:
+        - bo
+        - lin
+        - apprentice
+  - id: apprentice-supplier-spare-available-for-sale-5
+    predicate: available-for-sale
+    value:
+      kind: boolean
+      value: true
+    description: 当前仍属于博，未取货、未售出、未安装。
+    access:
+      kind: agents
+      agentIds:
+        - bo
+        - lin
+        - apprentice
+  - id: apprentice-supplier-spare-installed-6
+    predicate: installed
+    value:
+      kind: boolean
+      value: false
+    description: 封装件尚未安装；实际更换须取得患者同意并使用同一枚实物。
+    access:
+      kind: agents
+      agentIds:
+        - bo
+        - lin
+        - apprentice
+        - ana
+meters: []
+quantities: []
+ratings: []

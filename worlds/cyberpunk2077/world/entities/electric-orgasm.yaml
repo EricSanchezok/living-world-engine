@@ -1,0 +1,27 @@
+id: electric-orgasm
+kind: place
+name: Electric Orgasm 酒吧
+description: 迪诺经营的酒吧，客人来喝酒，也有人接洽佣兵生意；入口有值班保安。
+placement: downtown
+facts:
+  - id: electric-orgasm-passage-1
+    predicate: passage
+    value:
+      kind: entity
+      entityId: dino-office
+    description: 两处存在可通行的连接；门禁、距离和实际条件仍需满足。
+    access:
+      kind: public
+  - id: electric-orgasm-owner-2
+    predicate: owner
+    value:
+      kind: entity
+      entityId: dino
+    description: 我经营这家酒吧，接待与后台使用需要遵守店内安排。
+    access:
+      kind: agents
+      agentIds:
+        - dino
+meters: []
+quantities: []
+ratings: []

@@ -1,0 +1,51 @@
+id: fleet-regular-cargo
+kind: cargo
+name: 待运的六箱普通工业货
+description: 六箱有 R-01 至 R-06 标签的普通工业外壳，客户所有、车队保管；不需低温，与四箱水处理设备分开清点。
+placement: fleet-work
+facts:
+  - id: fleet-regular-cargo-delivery-destination-1
+    predicate: delivery-destination
+    value:
+      kind: entity
+      entityId: fleet-destination
+    description: 两批分别在此仓交付，去往同一仓不意味着可以混淆批次。
+    access:
+      kind: agents
+      agentIds:
+        - fleet
+        - raul
+        - jo
+        - mei
+        - freight-receiver
+  - id: fleet-regular-cargo-consignee-2
+    predicate: consignee
+    value:
+      kind: entity
+      entityId: freight-receiver
+    description: 受委托现场清点和签收的人，签收仍取决于实际到货。
+    access:
+      kind: agents
+      agentIds:
+        - fleet
+        - raul
+        - jo
+        - mei
+        - freight-receiver
+  - id: fleet-regular-cargo-delivery-accepted-3
+    predicate: delivery-accepted
+    value:
+      kind: boolean
+      value: false
+    description: 本批尚未发运到仓或签收；装车、到门口及另一批签收不改变本批状态。
+    access:
+      kind: agents
+      agentIds:
+        - fleet
+        - raul
+        - jo
+        - mei
+        - freight-receiver
+meters: []
+quantities: []
+ratings: []

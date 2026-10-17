@@ -8,7 +8,7 @@ facts:
     predicate: terms
     value:
       kind: text
-      value: 诊断费拟定 600 欧元，修复另报价；可以有偿维修、教别人维护、推荐替换或拒接，无预定成功结果。
+      value: 诊断费拟定600欧元，须双方确认范围、实际诊断并交付可读记录，由阿黛拉核验后从公共维护账户向埃利付款。修复另报价另批准，未修好也可以交付真实诊断；可以推荐替换、教别人维护或拒接，不预定成功。
     description: 社区旧水泵诊断委托的terms记录。
     access:
       kind: agents
@@ -17,6 +17,7 @@ facts:
         - niko
         - mara
         - tessa
+        - pump-commissioner
   - id: operator-repair-status-2
     predicate: status
     value:
@@ -67,6 +68,15 @@ facts:
     value:
       kind: entity
       entityId: tessa
+    description: 该人是此文件的当事人。
+    access:
+      kind: agents
+      agentIds: *a1
+  - id: operator-repair-party-8
+    predicate: party
+    value:
+      kind: entity
+      entityId: pump-commissioner
     description: 该人是此文件的当事人。
     access:
       kind: agents
