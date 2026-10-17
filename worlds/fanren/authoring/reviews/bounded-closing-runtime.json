@@ -42,7 +42,8 @@
       "src/engine/prompts/system/scene-narrative.md": "7014d2e09d82a4d4a6122dfb9b391d4c5a147eca49eb1c29b98dabe89742b4f8"
     },
     "additionalCallsIntroduced": 0,
-    "measuredImprovement": false
+    "measuredImprovement": false,
+    "basis": "Before the main-branch rebase; hashes and paid gameplay above remain historical evidence."
   },
   "fullWorldAcceptance": false,
   "mergeAllowed": false,
@@ -64,6 +65,75 @@
     "fullBuild": {
       "passed": false,
       "expectedRejection": "Incomplete editorial and world coverage remain a release blocker."
+    },
+    "scope": "Pre-rebase checkpoint; current integration checks are recorded separately below."
+  },
+  "rebasedIntegration": {
+    "mainCommit": "16b97d40caa2b1ee1d935369d3e33a05ea43cb1f",
+    "algorithm": "direct-world@14",
+    "executionContractVersion": 15,
+    "directControlVersion": 6,
+    "instanceSchemaVersion": 36,
+    "liveRetested": false,
+    "additionalModelRequests": 0,
+    "localOriginReport": "regional-draft-import-and-origins.json",
+    "startup": {
+      "routes": [
+        {
+          "route": "/",
+          "status": 200
+        },
+        {
+          "route": "/api/worlds",
+          "status": 200,
+          "worlds": [
+            {
+              "id": "blackmarsh",
+              "version": "1.2.0"
+            },
+            {
+              "id": "fanren-opening-sample",
+              "version": "0.5.1"
+            }
+          ]
+        },
+        {
+          "route": "/api/instances",
+          "status": 200,
+          "instanceCount": 0
+        }
+      ],
+      "dataRoot": ".livingworld-v36",
+      "previousDataPreserved": true,
+      "deletedInstanceIds": [],
+      "browser": {
+        "verifiedPage": "/worlds/fanren-opening-sample",
+        "visibleWorld": "凡人修仙传·开篇编写样本",
+        "visibleVersion": "0.5.1",
+        "instanceCount": 0,
+        "newGameplayStarted": false
+      }
+    },
+    "targetedRegressions": {
+      "propertyValuesAndRuntime": 168,
+      "narrativeAndPersistentHost": 85,
+      "recoveryProvenance": 2,
+      "cyberpunkWorldAndSettlement": 7,
+      "allPassed": true,
+      "realModelCalls": 0,
+      "instanceLifecycle": 29,
+      "localCausalWork": 4
+    },
+    "integrationCommit": "a02fecd90808564880ee10251956b956e45bb75a",
+    "checkFast": {
+      "passed": true,
+      "testFiles": 404,
+      "tests": 2719,
+      "existingLintWarnings": 3,
+      "promptAssets": 155,
+      "governanceGates": 6,
+      "logSha256": "bef3069fa20d1ca4a454e5654cf149e7825700e2b55c62abc49b5f047ca55dd4",
+      "realModelCalls": 0
     }
   }
 }
