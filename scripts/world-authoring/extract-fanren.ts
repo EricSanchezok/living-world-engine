@@ -101,8 +101,10 @@ async function main() {
       catch (error) { if (pass === "review" && !review) throw error; draftIssues = error instanceof Error ? error.message : String(error); }
       draft = result.value; audits.push(result.audit);
     }
-    let accepted: Extraction = extractionSchema.parse(draft);
-    if (review) accepted = applyEditorialCorrections(accepted, identity, review, paragraphs);
+    // Pinned source edits can repair a rejected citation's structure. The editor
+    // validates the complete corrected schema before any report is materialized.
+    const accepted: Extraction = review ? applyEditorialCorrections(draft as Extraction, identity, review, paragraphs)
+      : extractionSchema.parse(draft);
     validateExtraction(accepted, paragraphs, chapters);
     const report = { ...materializeExtraction(batch.id, accepted, paragraphs), identity, editorialReviewHash,
       method: "two-model-passes-with-deterministic-citation-validation", policyHash, schemaHash,

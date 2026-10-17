@@ -1,0 +1,48 @@
+{
+  "identity": "a57ffbc688def567166ab7c4953e8e9e3d52bc37dfa9ebf00735e847ff0a67a3",
+  "expectedDraftHash": "1bbe8bbe39bd7527f3734ec98864d729524066e783623514e61d6b6226954d2a",
+  "reviewer": "Codex：定位错误与人物认识的定点原文复核",
+  "scope": "targeted-corrections-not-runtime-approval",
+  "corrections": [
+    {
+      "collection": "objects",
+      "index": 22,
+      "expectedRecordHash": "b45bb43f5e7f3c4a5d6385579e09bc0e6d19606bbf733cf9ac999dd131a81d7d",
+      "fields": {
+        "description": "墨大夫作为尸虫丸解药给出的黑色辛辣丹药；韩立服后检查身体，认为丸药已消融，客观毒性与具体成分仍待后文核查。"
+      },
+      "citations": [
+        {
+          "index": 1,
+          "paragraph": "qq-20136594:1673",
+          "start": 41,
+          "end": 54
+        }
+      ],
+      "reason": "原引文漏掉书中引号；把解毒结论限定为韩立的当时观察与认识。"
+    },
+    {
+      "collection": "facts",
+      "index": 25,
+      "expectedRecordHash": "9b84277b40cb9e7dc44150e58e34cd0f28ecf35ef1ae1af777e7e59c89f1f1c0",
+      "fields": {
+        "statement": "墨大夫以尸虫丸及其解药控制韩立，声称将至的发作日有致死危险；韩立服下黑色辛辣丹药后检查身体，认为尸虫丸已消融。",
+        "basis": "testimony",
+        "qualifications": [
+          "丸药的真实成分、毒性和发作周期未在这些证据中证实。",
+          "墨大夫声称用毒是为督促练功。",
+          "韩立的检查与墨大夫的解释不能代替客观毒理规则。"
+        ]
+      },
+      "citations": [
+        {
+          "index": 2,
+          "paragraph": "qq-20136594:1673",
+          "start": 41,
+          "end": 54
+        }
+      ],
+      "reason": "恢复精确引号；区分胁迫说法、人物感受和客观事实。"
+    }
+  ]
+}

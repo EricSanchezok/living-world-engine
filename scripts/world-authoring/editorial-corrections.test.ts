@@ -21,6 +21,19 @@ describe("pinned editorial corrections", () => {
     expect(corrected.facts[0]!.basis).toBe("testimony");
     expect(draft.facts[0]!.basis).toBe("narration");
   });
+  it("repairs a rejected short citation only through pinned source coordinates, then validates the full result", () => {
+    const rejected = structuredClone(draft);
+    rejected.facts[0]!.evidence[0]!.anchor = "他自称";
+    expect(extractionSchema.safeParse(rejected).success).toBe(false);
+    const input = review();
+    input.expectedDraftHash = contentHash(rejected);
+    input.corrections[0]!.expectedRecordHash = contentHash(rejected.facts[0]);
+    const corrected = applyEditorialCorrections(rejected, "source-v1", input, paragraphs);
+    validateExtraction(corrected, paragraphs, ["ch"]);
+    expect(extractionSchema.safeParse(corrected).success).toBe(true);
+    input.corrections[0]!.citations[0]!.end = 3;
+    expect(() => applyEditorialCorrections(rejected, "source-v1", input, paragraphs)).toThrow();
+  });
   it.each(["source", "draft", "record", "range", "raw-evidence", "duplicate"])("rejects invalid %s correction", scenario => {
     const input = review();
     if (scenario === "source") input.identity = "another-version";

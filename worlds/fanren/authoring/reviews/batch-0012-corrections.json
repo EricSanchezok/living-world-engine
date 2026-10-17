@@ -1,0 +1,26 @@
+{
+  "identity": "86e06ba6d457ad6b1bd6d9da7265fd05e4df426872119f6ef6af21ea10b5fe86",
+  "expectedDraftHash": "e3c2fb52c59123d2ac9126fee2a7ad1c385074b718b7283cb0c3ff4194156f7b",
+  "reviewer": "Codex：精确引文长度与称谓类别定点复核",
+  "scope": "targeted-corrections-not-runtime-approval",
+  "corrections": [
+    {
+      "collection": "objects",
+      "index": 20,
+      "expectedRecordHash": "1be2066f8a0d5bef28febb97d6f1e61569c93609f00c3b9993e1cb42b78f8148",
+      "fields": {
+        "kind": "rule",
+        "description": "修仙者是有修炼经历者的称谓，并非独立物种；仙师是凡俗中的相关称呼。此处讨论凡人对修仙者的认识，不能据此另建一个种族。"
+      },
+      "citations": [
+        {
+          "index": 2,
+          "paragraph": "qq-20349170:61",
+          "start": 63,
+          "end": 72
+        }
+      ],
+      "reason": "原输出引文只有三字，不符合最小可核对长度；扩至原文连续短语。同时纠正把修仙者当成物种的分类。"
+    }
+  ]
+}

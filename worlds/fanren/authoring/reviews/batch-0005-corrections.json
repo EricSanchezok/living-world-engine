@@ -1,0 +1,67 @@
+{
+  "identity": "55da16fd77d67136b17b688cb0c3f69747fb3e24b2bbf4fb0e06f4ad3e81e15d",
+  "expectedDraftHash": "06fb51877ae82677ebf1f8a3f8c8e846845e131feece3d0da57d7f9b87e4a32d",
+  "reviewer": "Codex：定位错误与人物认识的定点原文复核",
+  "scope": "targeted-corrections-not-runtime-approval",
+  "corrections": [
+    {
+      "collection": "objects",
+      "index": 19,
+      "expectedRecordHash": "94eb1376160687efa6f4e9b9c65ffd4ec6b9cb3b01429168077669191698cf5b",
+      "fields": {
+        "description": "韩立修炼的长春功；本批他观察到记忆与感官提升，但因尚不知相应法术而苦于没有实战手段。不能据此断言功法客观上永远无法用于战斗。"
+      },
+      "citations": [
+        {
+          "index": 1,
+          "paragraph": "qq-20075791:1875",
+          "start": 32,
+          "end": 41
+        }
+      ],
+      "reason": "引文位于前一段；同时把韩立的当时认识与客观功法限制分开。"
+    },
+    {
+      "collection": "facts",
+      "index": 4,
+      "expectedRecordHash": "ff94ed5ed78cd58b889076db0f2aa746edd92c4b2d147a721aa58077a6711e30",
+      "fields": {
+        "statement": "韩立当时认为自己所练长春功缺乏能用于实战厮杀的手段，并转而期待眨眼剑法。",
+        "basis": "testimony",
+        "qualifications": [
+          "这是人物当前的认识，不是功法永远不能战斗的世界定律。"
+        ]
+      },
+      "citations": [
+        {
+          "index": 0,
+          "paragraph": "qq-20075791:1875",
+          "start": 32,
+          "end": 41
+        }
+      ],
+      "reason": "原定位落在下一段；修正人物认识被误写为客观定律。"
+    },
+    {
+      "collection": "facts",
+      "index": 54,
+      "expectedRecordHash": "c617e641f2219ca480a81f0552fd2c8b8ed9618deddf2a6d758e8f1ca334197b",
+      "fields": {},
+      "citations": [
+        {
+          "index": 0,
+          "paragraph": "qq-20102513:1739",
+          "start": 58,
+          "end": 66
+        },
+        {
+          "index": 1,
+          "paragraph": "qq-20102513:1739",
+          "start": 110,
+          "end": 122
+        }
+      ],
+      "reason": "该历史叙述在同批另一章，改正错章引用。"
+    }
+  ]
+}

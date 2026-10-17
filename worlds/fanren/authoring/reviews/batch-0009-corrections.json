@@ -1,0 +1,88 @@
+{
+  "identity": "48be796275e5228e9cc0ef4ea3e6cd685a92a27ac2cd4859e5393c7e61b803bc",
+  "expectedDraftHash": "e62278f483886cbcc1f699ebc0c6419acfcd717b90c7e06dbfa4f63b24beb85b",
+  "reviewer": "Codex：引用、别名与群体身份定点复核",
+  "scope": "targeted-corrections-not-runtime-approval",
+  "corrections": [
+    {
+      "collection": "objects",
+      "index": 9,
+      "expectedRecordHash": "c125da21297ce61779eaee0a856ec53c769203fc9a4745fb75c103af846dfc59",
+      "fields": {
+        "aliases": [],
+        "description": "李长老弟子，在现场介绍众人。相邻章节的马容称呼疑与马荣为同一人物，但身份合并仍待校核，暂不确认别名。"
+      },
+      "citations": [
+        {
+          "index": 1,
+          "paragraph": "qq-20248947:1335",
+          "start": 18,
+          "end": 26
+        }
+      ],
+      "reason": "修正段落定位，并取消尚未证实的自动别名合并。"
+    },
+    {
+      "collection": "facts",
+      "index": 11,
+      "expectedRecordHash": "84284e9d88c76eeb0493707fbd28feb155be176b5f91025e120b8d1cfb47291a",
+      "fields": {},
+      "citations": [
+        {
+          "index": 1,
+          "paragraph": "qq-20235680:640",
+          "start": 69,
+          "end": 79
+        }
+      ],
+      "reason": "引文实际在此前的伪信段落。"
+    },
+    {
+      "collection": "facts",
+      "index": 32,
+      "expectedRecordHash": "0093b48b45b72f5afbc1e8cfaed1ef546c1e104fbaa4d086c03f8c265ea75ee2",
+      "fields": {},
+      "citations": [
+        {
+          "index": 0,
+          "paragraph": "qq-20260483:880",
+          "start": 46,
+          "end": 58
+        }
+      ],
+      "reason": "引文实际在给药指令的前一段。"
+    },
+    {
+      "collection": "issues",
+      "index": 1,
+      "expectedRecordHash": "ddb07f96871c90a517d8e21b5f4aab1fdbbdabd5fd3269c2783faee374e4f127",
+      "fields": {
+        "description": "相邻章节把李长老弟子写作马荣、马容；按上下文疑为同一人异写，但尚未明示，保留待核对应而不确认别名。"
+      },
+      "citations": [
+        {
+          "index": 1,
+          "paragraph": "qq-20248947:1335",
+          "start": 18,
+          "end": 26
+        }
+      ],
+      "reason": "定位修复，并保留身份歧义。"
+    },
+    {
+      "collection": "issues",
+      "index": 11,
+      "expectedRecordHash": "5768161c02df2fc82d891cfd0933ad541745ebaa0002a104a4dc8face8245fa3",
+      "fields": {},
+      "citations": [
+        {
+          "index": 1,
+          "paragraph": "qq-20248947:1335",
+          "start": 18,
+          "end": 26
+        }
+      ],
+      "reason": "修正同一段落的重复错引。"
+    }
+  ]
+}
