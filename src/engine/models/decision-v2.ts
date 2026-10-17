@@ -3,6 +3,7 @@ import type { ModelExecutionAudit } from "../contracts/model";
 import { assertJsonValue, frozenClone, type JsonValue } from "../runtime/json";
 import { loadPromptAsset } from "../prompts";
 import { contentHash } from "./model-audit";
+import { decisionQuestionLayout, templateDecisionBatchV2 } from "./decision-question-templates";
 import { ContextLimitExceededError, ModelOutputError, NativeDecisionContextLimitError, type ModelExecutionScope, type StructuredModelProvider, type StructuredModelRequest } from "./model-provider";
 
 const key = z.string().min(1).refine(value => !["__proto__", "constructor", "prototype"].includes(value));
@@ -55,7 +56,7 @@ export function validateDecisionBatchV2(input: unknown): DecisionBatchV2 {
 export function decisionPromptV2(instructionProfile?: DecisionInstructionProfile) {
   const system = loadPromptAsset(instructionProfile === "publication" ? "system/narrative-publication.md"
     : "system/direct-decision.md"), userPrompt = loadPromptAsset("user/direct-decision.md");
-  return { system, userPrompt, version: `decision-v2-${contentHash({ system, userPrompt, nativePolicyLayout: "shared-state-v1" })}` };
+  return { system, userPrompt, version: `decision-v2-${contentHash({ system, userPrompt, nativePolicyLayout: "shared-state-v1", decisionQuestionLayout })}` };
 }
 export function decisionWireContextV2(batch: DecisionBatchV2) {
   const policy = decisionPromptV2().system;
@@ -118,7 +119,8 @@ export async function executeDecisionV2(provider: StructuredModelProvider, reque
         // Each physical invocation receives a fresh gateway identity, including splits.
         modelInvocationId: undefined, profileId, role: "decision", schemaName: "DecisionBatchV2",
         inferenceOverrides: native ? undefined : request.inferenceOverrides,
-        ...prompt, promptVersion: prompt.version, context: { decision: part }, schema: decisionOutputV2Schema(part, native), jsonExamplePolicy: "omit" });
+        ...prompt, promptVersion: prompt.version, context: { decision: native ? part : templateDecisionBatchV2(part) },
+        schema: decisionOutputV2Schema(part, native), jsonExamplePolicy: "omit" });
       audits.push(result.audit);
       return Object.fromEntries(Object.entries(result.value.answers).map(([id, raw]) => {
         const question = part.questions[id]!;

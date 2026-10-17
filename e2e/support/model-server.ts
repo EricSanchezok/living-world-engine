@@ -1,6 +1,7 @@
 import { createServer } from "node:http";
 import { agentOutput, truthOutput } from "./model-output";
 import type { DecisionQuestionV2 } from "../../src/engine/models/decision-v2";
+import { restoreDecisionBatchV2, type TemplatedDecisionBatchV2 } from "../../src/engine/models/decision-question-templates";
 
 const port = Number(process.env.LIVINGWORLD_E2E_MODEL_PORT ?? 32128);
 const narrativeGates = new Map<string, { partial: boolean; wait: Promise<void>; release: () => void }>();
@@ -104,7 +105,7 @@ const server = createServer(async (request, response) => {
     const body = await readBody(request);
     const native = request.url === "/systemone";
     const context = native ? (body.state as { context: Record<string, unknown> }).context : contextFrom(body);
-    const decision = context.decision as { state: unknown; questions: Record<string, DecisionQuestionV2> } | undefined;
+    const decision = !native && context.decision ? restoreDecisionBatchV2(context.decision as TemplatedDecisionBatchV2) : undefined;
     const autonomous = Boolean(context.autonomousReading);
     const reading = (context.playerReading ?? context.autonomousReading) as { state: unknown; catalog: Record<string, Record<string, string>>;
       cognition: Record<string, DecisionQuestionV2> } | undefined;

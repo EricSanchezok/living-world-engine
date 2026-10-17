@@ -235,8 +235,8 @@ describe("provider account protocol matrix", () => {
     }
     expect(catalog.profile("decision-deepseek-long")).toMatchObject({
       allowed_roles: ["decision"],
-      max_output_tokens: 32_768,
-      request_timeout_ms: 180_000,
+      max_output_tokens: 65_536,
+      request_timeout_ms: 300_000,
     });
     expect(catalog.profile("decision-deepseek")).toMatchObject({
       max_output_tokens: 32_768,

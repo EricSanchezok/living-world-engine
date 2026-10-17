@@ -1,7 +1,9 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { z } from "zod";
 import { executeDecisionV2, decisionOutputV2Schema, decisionPromptV2, validateDecisionBatchV2, type DecisionRequestV2 } from "../decision-v2";
+import { restoreDecisionBatchV2, templateDecisionBatchV2, type TemplatedDecisionBatchV2 } from "../decision-question-templates";
 import { contentHash } from "../model-audit";
-import { directTestProvider, nativeChoice } from "../../testing/direct-provider";
+import { directCreationContext, directTestProvider, nativeChoice } from "../../testing/direct-provider";
 import { ContextLimitExceededError, ModelOutputError } from "../model-provider";
 import { loadModelCatalog } from "../model-catalog";
 
@@ -23,6 +25,75 @@ function answers(questions: DecisionRequestV2["batch"]["questions"]) {
       probabilities: { "0": 0.3, "1": 0.7, "2": 0 }, confidence: 0.3 }]));
 }
 describe("direct native decisions", () => {
+  it.each(["initial", "repair", "fallback"] as const)("factors a complete 405-question language request without changing decisions: %s", async mode => {
+    const input = request();
+    input.subjectId = "world";
+    input.batch.view = { kind: "world", projectionHash: contentHash(input.batch.state) };
+    input.profileId = mode === "fallback" ? "decision-jev" : "decision-deepseek";
+    input.fallbackProfileId = "decision-deepseek";
+    input.batch.questions = Object.fromEntries(Array.from({ length: 405 }, (_, index) => {
+      const variant = index < 335 ? 0 : 1 + index % 6;
+      return [`a0_visible${index}`, { type: "choice" as const, version: `perception-${variant}`,
+        instructions: { task: "Judge this property's perceptual access under the incidental-perception policy.",
+          data: { actionId: "look-around", factId: `fact-${index}`, orderedEvidence: [index, 405 - index] } },
+        criteria: { visible: "The attempt reveals the resulting fact through an available perceptual channel",
+          hidden: "The fact remains hidden", unknown: "No justified perceptual access" }, sources: ["incidental-perception"] }];
+    }));
+    const original = structuredClone(input.batch), expected = validateDecisionBatchV2(input.batch);
+    const f = directTestProvider((wire, call) => {
+      if (mode === "fallback" && !wire.messages) return new Response('{"detail":"context token limit exceeded"}', { status: 422 });
+      if (mode === "repair" && call === 1) return {};
+      expect(Object.keys(wire.questions)).toEqual(Object.keys(expected.questions));
+      return answers(wire.questions);
+    });
+    const generate = vi.spyOn(f.gateway, "generateStructured");
+    const result = await executeDecisionV2(f.gateway, input);
+    const languageRequests = generate.mock.calls.map(([value]) => value)
+      .filter(value => value.profileId === "decision-deepseek");
+    expect(languageRequests).toHaveLength(mode === "repair" ? 2 : 1);
+    for (const [index, value] of languageRequests.entries()) {
+      const encoded = (value.context as { decision: TemplatedDecisionBatchV2 }).decision;
+      const restored = restoreDecisionBatchV2(encoded);
+      expect(Object.keys(encoded.questionTemplates)).toHaveLength(7);
+      expect(encoded.questions.map(question => question.id)).toEqual(Object.keys(expected.questions));
+      expect(restored.state).toEqual(expected.state);
+      expect(restored.dependencies).toEqual(expected.dependencies);
+      expect(restored.view).toEqual(expected.view);
+      if (index === 0) expect(restored).toEqual(expected);
+      else for (const [id, question] of Object.entries(restored.questions)) {
+        expect(question.instructions).toMatchObject({ original: expected.questions[id]!.instructions, rejectedAnswer: null });
+      }
+      expect(Object.values(encoded.questionTemplates).every(template => template.dataPath === (index ? "original.data" : "data"))).toBe(true);
+      expect(z.toJSONSchema(value.schema, { target: "draft-07" })).toEqual(z.toJSONSchema(decisionOutputV2Schema(expected, false), { target: "draft-07" }));
+      expect(JSON.stringify(encoded).length).toBeLessThan(JSON.stringify(restored).length * 0.55);
+    }
+    const body = JSON.parse(String(f.transport.mock.calls.at(-1)![1]!.body));
+    const physical = directCreationContext(body).decision as TemplatedDecisionBatchV2;
+    expect(physical).toEqual((languageRequests.at(-1)!.context as { decision: TemplatedDecisionBatchV2 }).decision);
+    expect(body.messages[1].content).toContain("not the template IDs");
+    expect(input.batch).toEqual(original);
+    expect(Object.keys(result.answers)).toEqual(Object.keys(expected.questions));
+    expect(result.dispatches.every(dispatch => dispatch.questionIds.length === 405)).toBe(true);
+    expect(f.transport).toHaveBeenCalledTimes(mode === "initial" ? 1 : 2);
+  });
+  it("round-trips null, primitive, array and nested data while retaining domains, sources and key order", () => {
+    const input = request().batch;
+    const values = [null, false, 0, "原始文本", [], ["one", { two: 2 }], { nested: { data: "unchanged" } }];
+    for (const [index, data] of values.entries()) input.questions[`data-${index}`] = {
+      type: "choice", version: "data-values", instructions: { before: "first", data, after: "last", original: { data: "retain this separate value" } },
+      criteria: { yes: { data: "Criterion data is not a slot" }, no: null, unknown: "Uncertain" }, sources: ["source-2", "source-1"],
+    };
+    input.questions.array = { type: "noul", version: "array-instructions", instructions: ["Do not extract array contents", { data: 4 }] };
+    input.questions.repair = { type: "score", version: "repair", instructions: { original: { before: 1, data: null, after: 2 },
+      correction: "Retain the original question", rejectedAnswer: "too-high" }, criteria: ["Low", "High"] };
+    const batch = validateDecisionBatchV2(input), encoded = templateDecisionBatchV2(batch), restored = restoreDecisionBatchV2(encoded);
+    expect(restored).toEqual(batch);
+    expect(Object.keys(restored.questions)).toEqual(Object.keys(batch.questions));
+    for (const id of Object.keys(batch.questions)) expect(JSON.stringify(restored.questions[id])).toBe(JSON.stringify(batch.questions[id]));
+    expect(encoded.questions.find(question => question.id === "data-0")).toHaveProperty("data", null);
+    expect(encoded.questions.find(question => question.id === "consent")).not.toHaveProperty("data");
+    expect(encoded.questions.find(question => question.id === "array")).not.toHaveProperty("data");
+  });
   it.each([false, true])("pins a language-only inference override through native fallback: %s", async fallback => {
     const f = directTestProvider(wire => fallback && !wire.messages
       ? new Response('{"detail":"context token limit exceeded"}', { status: 422 }) : answers(wire.questions));

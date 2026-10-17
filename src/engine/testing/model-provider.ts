@@ -1,4 +1,6 @@
 import { canonicalize, contentHash, measureModelContext } from "../models/model-audit";
+import type { DecisionBatchV2 } from "../models/decision-v2";
+import { restoreDecisionBatchV2, type TemplatedDecisionBatchV2 } from "../models/decision-question-templates";
 import { expandSharedBatchContexts, isSharedBatchContext } from "../mechanics/shared-batch-context";
 import { parseModelCatalog, modelRoles, type ModelCatalog } from "../models/model-catalog";
 import {
@@ -1366,7 +1368,8 @@ export function deterministicModelOutput(profileId: string, context: unknown): u
   if ((context as { localWorld?: unknown; requestedAction?: unknown }).localWorld && (context as { requestedAction?: unknown }).requestedAction) {
     return { description: "The fixture supplies no additional world content.", entities: [], facts: [], events: [] };
   }
-  const decision = (context as { decision?: { questions: Record<string, { criteria: Record<string, unknown> }> } }).decision;
+  const supplied = (context as { decision?: DecisionBatchV2 | TemplatedDecisionBatchV2 }).decision;
+  const decision = supplied && "questionLayout" in supplied ? restoreDecisionBatchV2(supplied) : supplied;
   if (decision && Object.keys(decision.questions).every(key => key.startsWith("paragraph"))) return {
     answers: Object.fromEntries(Object.keys(decision.questions).map(key => [key, "grounded"])) };
   const scene = (context as { scene?: { observations: Array<{ summary: string }>; speech: Array<{ id: string }> } }).scene;

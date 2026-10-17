@@ -177,8 +177,8 @@ profiles:
     description: 多人物世界裁决，保留完整输出额度与较长请求时限
     allowed_roles: [decision]
     response_transport: deepseek-sse-v1
-    request_timeout_ms: 180000
-    max_output_tokens: 32768
+    request_timeout_ms: 300000
+    max_output_tokens: 65536
     max_input_bytes: 4000000
     inference: { thinking: enabled, effort: low }
   truth-deepseek:

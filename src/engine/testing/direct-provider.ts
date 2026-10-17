@@ -3,6 +3,7 @@ import { ModelGateway } from "../models/model-gateway";
 import { parseModelCatalog } from "../models/model-catalog";
 import { createTestModelCatalog, createTestModelRegistry } from "./model-provider";
 import type { DecisionQuestionV2 } from "../models/decision-v2";
+import { restoreDecisionBatchV2, type TemplatedDecisionBatchV2 } from "../models/decision-question-templates";
 
 export interface DirectTestWire { model: string; state: unknown; questions: Record<string, DecisionQuestionV2>;
   messages?: Array<{ role: string; content: string }> }
@@ -18,7 +19,7 @@ export function directDecisionContext(wire: DirectTestWire): Pick<DirectTestWire
   const context = directCreationContext(wire);
   if (context.playerReading) return readingDecision(context.playerReading as TestReading);
   if (context.autonomousReading) return readingDecision(context.autonomousReading as TestReading);
-  return context.decision as Pick<DirectTestWire, "state" | "questions"> | undefined;
+  return context.decision ? restoreDecisionBatchV2(context.decision as TemplatedDecisionBatchV2) : undefined;
 }
 
 interface TestReading { state: Record<string, unknown>; catalog: Record<string, Record<string, string>>;
@@ -32,7 +33,9 @@ function readingDecision(reading: TestReading): Pick<DirectTestWire, "state" | "
 }
 
 export function directTestProvider(respond: (wire: DirectTestWire, call: number) => unknown | Response | Promise<unknown | Response>,
-  create?: (wire: DirectTestWire) => unknown | Response | Promise<unknown | Response>, options: { maxInputBytes?: number; maxNativeInputBytes?: number; suggestions?: (wire: DirectTestWire) => unknown | Promise<unknown> } = {}) {
+  create?: (wire: DirectTestWire) => unknown | Response | Promise<unknown | Response>, options: { maxInputBytes?: number; maxNativeInputBytes?: number;
+    suggestions?: (wire: DirectTestWire) => unknown | Promise<unknown>;
+    arrival?: (wire: DirectTestWire) => unknown | Promise<unknown> } = {}) {
   const source = createTestModelCatalog().snapshot();
   source.accounts.typesafe = { ...source.accounts["scripted-test"]!, protocol: "typesafe-systemone", dialect: "typesafe",
     models_dev_provider_id: "typesafe", base_url: "https://typesafe.test/v1", api_key_env: "TYPESAFE_API_KEY" };
@@ -48,13 +51,15 @@ export function directTestProvider(respond: (wire: DirectTestWire, call: number)
     const body = JSON.parse(String(init?.body));
     const wire = body.questions ? { ...body, state: body.state.context } : body;
     calls++;
-    const decision = !wire.questions ? directCreationContext(wire).decision as { state: unknown; questions: Record<string, DecisionQuestionV2> } | undefined : undefined;
+    const decision = !wire.questions && directCreationContext(wire).decision ? directDecisionContext(wire) : undefined;
     const creationContext = !wire.questions ? directCreationContext(wire) : {};
     const autonomous = Boolean(creationContext.autonomousReading);
     const reading = (creationContext.playerReading ?? creationContext.autonomousReading) as TestReading | undefined;
     let response: unknown;
     if (!wire.questions && directCreationContext(wire).task === "action-suggestions") {
       response = options.suggestions ? await options.suggestions(wire) : { items: [] };
+    } else if (!wire.questions && (creationContext.task as { kind?: string } | undefined)?.kind === "arrival") {
+      response = options.arrival ? await options.arrival(wire) : { title: "此刻", scene: "你把注意力放回眼前，记起自己尚未完成的事情。" };
     } else if (reading) {
       const decoded = await respond({ ...wire, ...readingDecision(reading) }, calls);
       if (decoded instanceof Response) return decoded;

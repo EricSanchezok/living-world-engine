@@ -28,7 +28,7 @@ The Cyberpunk world uses authored Agents and existing takeover. Ordinary schema-
 
 This content choice does not change the framework contract. The entry uses pre-existing names and does not offer free-form name or appearance customization. Unselected lives remain model-controlled. Startup and takeover require no model inference; subsequent action semantics retain the existing model and transaction boundaries.
 
-Shared funds use bounded payment-service Agents that hold the actual account quantities and act under authored mandates. The world selects the additive `decision-deepseek-long` fallback profile with a 32,768-token output ceiling. A recorded crowded opening exhausted an 8,192-token response entirely in reasoning after the primary provider rejected its token volume. This reserves answer capacity without shrinking the scene or changing the other worlds' profiles; it permits greater fallback output cost. Qualifying evidence and its limits belong in the world verification report.
+Shared funds use bounded payment-service Agents that hold the actual account quantities and act under authored mandates. The world selects the additive `decision-deepseek-long` profile with a 65,536-token output ceiling, a 300-second request timeout and low thinking effort. Reasoning and structured answers share the output budget; the larger ceiling reserves answer capacity for intact crowded scenes without changing the other profiles. It permits greater output cost and does not promise lower latency. Qualifying evidence and its limits belong in the world verification report.
 
 ## Pros and Cons of the Options
 
@@ -43,3 +43,4 @@ Shared funds use bounded payment-service Agents that hold the actual account qua
 - [World schema](../../src/script/contract.ts)
 - [Control transfer implementation](../../src/server/world-host.ts)
 - [Persistent world acceptance](../../test/cyberpunk2077-world.test.ts)
+- [DeepSeek completion token and thinking controls](https://api-docs.deepseek.com/api/create-chat-completion/)
