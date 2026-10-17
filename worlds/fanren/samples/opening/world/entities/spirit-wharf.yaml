@@ -1,0 +1,26 @@
+id: spirit-wharf
+kind: location
+name: 城中转运货场
+description: 原创转运节点；货物停放与交接需要实际核对。
+placement: tianyuan-city
+facts:
+  - id: spirit-wharf-night
+    predicate: local-time
+    value:
+      kind: text
+      value: 当地夜间，光线和作息受夜色影响。
+    description: 当地夜间，光线和作息受夜色影响。
+    access:
+      kind: public
+  - id: spirit-wharf-route-qinghe-store
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: qinghe-store
+    description: 有普通道路通往青禾灵材行仓院；实际行程受夜间照明、地形和交通工具约束。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

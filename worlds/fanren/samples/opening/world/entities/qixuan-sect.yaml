@@ -1,0 +1,18 @@
+id: qixuan-sect
+kind: organization
+name: 七玄门
+description: 地方江湖门派，尚未与韩立建立入门关系。
+placement: null
+facts:
+  - id: qixuan-sect-rival-of-wild-wolf-gang
+    predicate: rival-of
+    value:
+      kind: entity
+      entityId: wild-wolf-gang
+    description: 与野狼帮存在地方利益竞争，未来冲突取决于双方行动。
+    access:
+      kind: private
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

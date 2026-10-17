@@ -1,0 +1,211 @@
+{
+  "status": "not-qualified",
+  "cases": [
+    {
+      "run_id": "2026-10-17T07-04-53-958Z-spirit-merchant",
+      "instance_id": "a1c7217b-9807-4e22-ab9c-ff0ed8e0d606",
+      "scenario": "spirit-merchant",
+      "world_hash": "sha256:02da7682ef76555be0bde00782a18b29b4e8ccfc1c8737bcdb71695b2581e7dc",
+      "agents_in_state": 15,
+      "agents_with_committed_actions": 5,
+      "acting_agent_ids": [
+        "spirit-client-one",
+        "spirit-client-two",
+        "spirit-manager",
+        "spirit-merchant-1",
+        "spirit-supplier"
+      ],
+      "duration_ms": 146399,
+      "known_tokens": {
+        "input": {
+          "known_sum": 761630,
+          "unknown_invocations": 0
+        },
+        "output": {
+          "known_sum": 58619,
+          "unknown_invocations": 0
+        },
+        "reasoning": {
+          "known_sum": 18472,
+          "unknown_invocations": 21
+        },
+        "cacheRead": {
+          "known_sum": 48768,
+          "unknown_invocations": 21
+        }
+      },
+      "cost": null,
+      "cost_note": "没有完整计费记录；不从未知用量推算费用。",
+      "execution_ids": [
+        "3658e4d2-4413-4268-bed9-25d7974c33cf",
+        "2889524b-2a42-4ad0-926e-c32f1e9d3090",
+        "79395356-e670-476a-9973-48f229d851a3",
+        "68f5cc7c-ff39-4937-8968-d6c48ee12c31",
+        "8e414bb9-22bb-4933-8395-79d3c23a84b5",
+        "6885759d-c53e-451e-b7d0-7ebc33ea4638",
+        "b9f2d0bc-0530-4d13-b262-74716186529e",
+        "cf319795-d5cb-47d6-86e5-305da49fcada",
+        "72134e56-2e68-4d8e-8148-8f5feb2091b6",
+        "27d3879b-9c9b-4e1a-96c8-b3c28a50704b",
+        "b375489b-008b-49a1-8cc4-9efb219b862c",
+        "fb0002b5-943e-48be-b183-fb8d3c69b505"
+      ],
+      "action_revisions": [
+        [
+          1,
+          6
+        ],
+        [
+          6,
+          8
+        ]
+      ],
+      "status": "failed-qualification",
+      "observations": [
+        "商号实物17箱、货场3箱、交接单20箱，实际库存保持分离。",
+        "御物没有成功、法力仍1200，不能判定高阶能力通过。",
+        "主模型上下文溢出，后备8192 token输出截断，另有两次叙事校验失败。"
+      ],
+      "local_evidence": "ignored cache fanren-playtests/2026-10-17T07-04-53-958Z-spirit-merchant/livingworld.sqlite",
+      "audits_with_usage": 41,
+      "physical_requests": 42,
+      "logical_invocations": 42,
+      "transport_failures": 1,
+      "output_rejections": 1,
+      "narrative_execution_failures": 2
+    },
+    {
+      "run_id": "2026-10-17T07-05-59-926Z-han-li",
+      "instance_id": "8ad41d3c-80fc-4be4-9948-a45bfb6c706e",
+      "scenario": "han-li",
+      "world_hash": "sha256:02da7682ef76555be0bde00782a18b29b4e8ccfc1c8737bcdb71695b2581e7dc",
+      "agents_in_state": 9,
+      "agents_with_committed_actions": 2,
+      "acting_agent_ids": [
+        "canon-han-li",
+        "han-mother"
+      ],
+      "duration_ms": 132038,
+      "known_tokens": {
+        "input": {
+          "known_sum": 431774,
+          "unknown_invocations": 0
+        },
+        "output": {
+          "known_sum": 37646,
+          "unknown_invocations": 0
+        },
+        "reasoning": {
+          "known_sum": 17996,
+          "unknown_invocations": 14
+        },
+        "cacheRead": {
+          "known_sum": 36096,
+          "unknown_invocations": 14
+        }
+      },
+      "cost": null,
+      "cost_note": "没有完整计费记录；不从未知用量推算费用。",
+      "execution_ids": [
+        "a9d9e279-5b08-4c6f-abf6-88fc45c2e4b1",
+        "fca67248-5a9c-4c3d-808a-6eff41a337b1",
+        "b4cbf440-887d-4393-975d-a039e98f408e",
+        "9e0b6310-de51-4679-9d5b-023482ae0813",
+        "ca88d222-c31e-46b5-8768-8ec42189deb6",
+        "4b965b26-da58-4aea-90bd-0cdcb3f2b475",
+        "00fff7c3-b47c-402a-b730-13de8b451311",
+        "3d2a35c3-ac93-4440-9e4a-b88c08eed8c5",
+        "7b97745d-7ec4-41d5-9f08-0d2a67cfd7e6"
+      ],
+      "action_revisions": [
+        [
+          0,
+          3
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "status": "failed-qualification",
+      "observations": [
+        "唯一韩立接管与初始认知隔离通过。",
+        "拒绝外出学武的发言有记录；后续回应遭遇模型上下文溢出。",
+        "叙事称已走到村边，最终 placement 仍是 han-home，不能判定自由移动通过。"
+      ],
+      "local_evidence": "ignored cache fanren-playtests/2026-10-17T07-05-59-926Z-han-li/livingworld.sqlite",
+      "audits_with_usage": 30,
+      "physical_requests": 31,
+      "logical_invocations": 31,
+      "transport_failures": 1,
+      "output_rejections": 2,
+      "narrative_execution_failures": 0
+    },
+    {
+      "run_id": "2026-10-17T07-05-59-926Z-herbal-apprentice",
+      "instance_id": "ba03cce4-18a4-487c-9527-a34ea9be17aa",
+      "scenario": "herbal-apprentice",
+      "world_hash": "sha256:02da7682ef76555be0bde00782a18b29b4e8ccfc1c8737bcdb71695b2581e7dc",
+      "agents_in_state": 13,
+      "agents_with_committed_actions": 4,
+      "acting_agent_ids": [
+        "herbal-apprentice-1",
+        "herbal-buyer",
+        "herbal-master",
+        "herbal-mother"
+      ],
+      "duration_ms": 31020,
+      "known_tokens": {
+        "input": {
+          "known_sum": 188703,
+          "unknown_invocations": 0
+        },
+        "output": {
+          "known_sum": 12810,
+          "unknown_invocations": 0
+        },
+        "reasoning": {
+          "known_sum": 2530,
+          "unknown_invocations": 6
+        },
+        "cacheRead": {
+          "known_sum": 15488,
+          "unknown_invocations": 6
+        }
+      },
+      "cost": null,
+      "cost_note": "没有完整计费记录；不从未知用量推算费用。",
+      "execution_ids": [
+        "9dd00f0e-d355-400d-97ba-e96bfd1fd0ac",
+        "8b32a1db-8fb2-4a5d-bc86-d985d3336e73",
+        "e7c49e94-5a16-46a8-9ba7-b75452325cd7",
+        "03c11150-02f1-4348-a3c4-c503eca8cf29",
+        "60733113-ecb9-4869-9910-4633409de2ca"
+      ],
+      "action_revisions": [
+        [
+          1,
+          4
+        ]
+      ],
+      "status": "limited-case-passed",
+      "observations": [
+        "母亲、师父与药童双向认识已持久化。",
+        "报价被告知师父，12包受托药材保留且所有权未转给药童。",
+        "此单次交谈没有观察到模型调用错误；不构成全部玩法验收。"
+      ],
+      "local_evidence": "ignored cache fanren-playtests/2026-10-17T07-05-59-926Z-herbal-apprentice/livingworld.sqlite",
+      "audits_with_usage": 12,
+      "physical_requests": 12,
+      "logical_invocations": 12,
+      "transport_failures": 0,
+      "output_rejections": 0,
+      "narrative_execution_failures": 0
+    }
+  ],
+  "scale_tests": {
+    "150": "not-run",
+    "700": "not-run",
+    "full": "not-run"
+  }
+}

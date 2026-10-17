@@ -1,0 +1,132 @@
+id: han-zhu
+kind: person
+name: 韩铸
+description: 韩立的二哥，开篇在韩立身边熟睡。
+placement: han-home
+facts:
+  - id: han-zhu-family-of-canon-han-li
+    predicate: family-of
+    value:
+      kind: entity
+      entityId: canon-han-li
+    description: 与韩立属于同一个家庭。
+    access:
+      kind: private
+meters:
+  - id: han-zhu-health
+    definition_id: health
+    current: 100
+  - id: han-zhu-mana
+    definition_id: mana
+    current: 0
+quantities: []
+ratings:
+  - id: han-zhu-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: han-zhu-perception
+    definition_id: perception
+    value: 1
+  - id: han-zhu-craft
+    definition_id: craft
+    value: 1
+  - id: han-zhu-influence
+    definition_id: influence
+    value: 1
+  - id: han-zhu-force
+    definition_id: force
+    value: 1
+shared_activity_resources: []
+agent:
+  id: han-zhu
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-jev
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 韩立的二哥，开篇在韩立身边熟睡。
+      voice: 依据自己的生活经验说话，不使用游戏或编写术语。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 睡到天亮。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 韩铸
+        description: 韩立的二哥，开篇在韩立身边熟睡。
+        status: observed
+      - id: location
+        name: 韩家
+        description: 你熟悉这里的出入和用途。
+        status: observed
+      - id: family-0
+        name: 韩立
+        description: 这是你的家人，你知道其基本生活处境。
+        status: observed
+      - id: family-1
+        name: 韩父
+        description: 这是你的家人，你知道其基本生活处境。
+        status: observed
+      - id: family-2
+        name: 韩母
+        description: 这是你的家人，你知道其基本生活处境。
+        status: observed
+      - id: family-3
+        name: 韩家大哥
+        description: 这是你的家人，你知道其基本生活处境。
+        status: observed
+      - id: family-5
+        name: 韩家姐姐
+        description: 这是你的家人，你知道其基本生活处境。
+        status: observed
+      - id: family-6
+        name: 韩家小妹
+        description: 这是你的家人，你知道其基本生活处境。
+        status: observed
+      - id: uncle
+        name: 韩三叔
+        description: 家中的亲戚，在镇上任掌柜，曾帮助家里。
+        status: observed
+    evidence: []
+    claims: []
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - han-zhu
+      - local_entity_id: location
+        canonical_entity_ids:
+          - han-home
+      - local_entity_id: family-0
+        canonical_entity_ids:
+          - canon-han-li
+      - local_entity_id: family-1
+        canonical_entity_ids:
+          - han-father
+      - local_entity_id: family-2
+        canonical_entity_ids:
+          - han-mother
+      - local_entity_id: family-3
+        canonical_entity_ids:
+          - han-eldest-brother
+      - local_entity_id: family-5
+        canonical_entity_ids:
+          - han-elder-sister
+      - local_entity_id: family-6
+        canonical_entity_ids:
+          - han-younger-sister
+      - local_entity_id: uncle
+        canonical_entity_ids:
+          - han-uncle

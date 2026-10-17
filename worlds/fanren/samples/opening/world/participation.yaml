@@ -1,0 +1,1305 @@
+origins:
+  - id: herbal-apprentice
+    title: 山村药童
+    fantasy: 带着家人、师父和一份真实委托开始自己的生活。
+    description: 十二岁的乡村药童，有基本辨药手艺，尚不知道自己能否修仙。家人健在，生活拮据但正常。
+    default_goal: 决定如何处理药材、购物委托与周荃的报价。
+    relationship_hooks:
+      - 母亲林素托你买盐和灯油。
+      - 陈守拙是师父，借给你札记并托你送十二包药材。
+      - 周荃刚向你私下报价。
+    risks:
+      - 受托药材不能当作自己的财物。
+      - 札记线索需要调查，不保证遇到仙草。
+    fallback_arrival: 药包已扎好，母亲把购物单放到药篓上。夜色里，周荃又折了回来，压低声音询问能否单独买走其中一株草。师父还不知道这次私下报价。
+    kind: create
+    entity_kind: person
+    spawn_entity_id: herbal-yard
+    persona: 在乡村长大的十二岁药童，学过普通辨药和外伤处理，愿意听取亲近之人的意见；不具备修仙知识。
+    mechanics_profile_id: herbal-apprentice
+    initialization:
+      entities:
+        - id: herbal-mother
+          kind: person
+          name: 林素
+          description: 药童的母亲，靠纺织维持家计。
+          placement: herbal-yard
+          facts:
+            - id: herbal-mother-parent-of-$participant
+              predicate: parent-of
+              value:
+                kind: entity
+                entityId: $participant
+              description: 林素是药童的母亲。
+              access:
+                kind: private
+          meters:
+            - id: herbal-mother-health
+              definition_id: health
+              current: 100
+            - id: herbal-mother-mana
+              definition_id: mana
+              current: 0
+          quantities: []
+          ratings:
+            - id: herbal-mother-cultivation
+              definition_id: cultivation
+              value: 0
+            - id: herbal-mother-perception
+              definition_id: perception
+              value: 1
+            - id: herbal-mother-craft
+              definition_id: craft
+              value: 1
+            - id: herbal-mother-influence
+              definition_id: influence
+              value: 1
+            - id: herbal-mother-force
+              definition_id: force
+              value: 1
+          shared_activity_resources: []
+          agent:
+            id: herbal-mother
+            model_profiles:
+              creation: creation-deepseek
+              decision: decision-jev
+              fallback: decision-deepseek
+            character:
+              persona:
+                summary: 靠纺织维持家计，关心孩子的手艺和日常生活。
+                voice: 依据自己的生活经验说话，不使用游戏或编写术语。
+                evidence_ids: []
+              traits: []
+              values: []
+              emotions: []
+              attitudes: []
+              goals:
+                - id: current-purpose
+                  description: 把购物单交给孩子，随后回家歇息。
+                  priority: 0.5
+                  progress: 0
+                  target_ids: []
+                  motivated_by_ids: []
+                  status: active
+                  evidence_ids: []
+              commitments: []
+            belief:
+              local_entities:
+                - id: self
+                  name: 林素
+                  description: 靠纺织维持家计，关心孩子的手艺和日常生活。
+                  status: observed
+                - id: location
+                  name: 陈守拙的药院
+                  description: 你熟悉这里的出入和用途。
+                  status: observed
+                - id: child
+                  name: 孩子
+                  description: 从小一起生活，明早进镇；你不知道孩子是否有灵根。
+                  status: observed
+              evidence: []
+              claims: []
+              bindings:
+                - local_entity_id: self
+                  canonical_entity_ids:
+                    - herbal-mother
+                - local_entity_id: location
+                  canonical_entity_ids:
+                    - herbal-yard
+                - local_entity_id: child
+                  canonical_entity_ids:
+                    - $participant
+        - id: herbal-master
+          kind: person
+          name: 陈守拙
+          description: 在松溪坳行医的乡医。
+          placement: herbal-yard
+          facts:
+            - id: herbal-master-teacher-of-$participant
+              predicate: teacher-of
+              value:
+                kind: entity
+                entityId: $participant
+              description: 陈守拙已教药童辨药与处理外伤。
+              access:
+                kind: private
+          meters:
+            - id: herbal-master-health
+              definition_id: health
+              current: 100
+            - id: herbal-master-mana
+              definition_id: mana
+              current: 0
+          quantities: []
+          ratings:
+            - id: herbal-master-cultivation
+              definition_id: cultivation
+              value: 0
+            - id: herbal-master-perception
+              definition_id: perception
+              value: 1
+            - id: herbal-master-craft
+              definition_id: craft
+              value: 1
+            - id: herbal-master-influence
+              definition_id: influence
+              value: 1
+            - id: herbal-master-force
+              definition_id: force
+              value: 1
+          shared_activity_resources: []
+          agent:
+            id: herbal-master
+            model_profiles:
+              creation: creation-deepseek
+              decision: decision-jev
+              fallback: decision-deepseek
+            character:
+              persona:
+                summary: 乡医，懂普通药草和外伤处理，重视病人和交货信用。
+                voice: 依据自己的生活经验说话，不使用游戏或编写术语。
+                evidence_ids: []
+              traits: []
+              values: []
+              emotions: []
+              attitudes: []
+              goals:
+                - id: current-purpose
+                  description: 检查明早交付的十二包药材，不知道周荃刚提出的私下报价。
+                  priority: 0.5
+                  progress: 0
+                  target_ids: []
+                  motivated_by_ids: []
+                  status: active
+                  evidence_ids: []
+              commitments: []
+            belief:
+              local_entities:
+                - id: self
+                  name: 陈守拙
+                  description: 乡医，懂普通药草和外伤处理，重视病人和交货信用。
+                  status: observed
+                - id: location
+                  name: 陈守拙的药院
+                  description: 你熟悉这里的出入和用途。
+                  status: observed
+                - id: student
+                  name: 药童
+                  description: 已跟你学习辨药，受托送货，无权独自卖掉药材。
+                  status: observed
+              evidence: []
+              claims: []
+              bindings:
+                - local_entity_id: self
+                  canonical_entity_ids:
+                    - herbal-master
+                - local_entity_id: location
+                  canonical_entity_ids:
+                    - herbal-yard
+                - local_entity_id: student
+                  canonical_entity_ids:
+                    - $participant
+        - id: herbal-buyer
+          kind: person
+          name: 周荃
+          description: 来往村镇的收药人。
+          placement: herbal-yard
+          facts: []
+          meters:
+            - id: herbal-buyer-health
+              definition_id: health
+              current: 100
+            - id: herbal-buyer-mana
+              definition_id: mana
+              current: 0
+          quantities: []
+          ratings:
+            - id: herbal-buyer-cultivation
+              definition_id: cultivation
+              value: 0
+            - id: herbal-buyer-perception
+              definition_id: perception
+              value: 1
+            - id: herbal-buyer-craft
+              definition_id: craft
+              value: 1
+            - id: herbal-buyer-influence
+              definition_id: influence
+              value: 1
+            - id: herbal-buyer-force
+              definition_id: force
+              value: 1
+          shared_activity_resources: []
+          agent:
+            id: herbal-buyer
+            model_profiles:
+              creation: creation-deepseek
+              decision: decision-jev
+              fallback: decision-deepseek
+            character:
+              persona:
+                summary: 来往镇村的收药人，另有买家愿为某株草出较高价格。
+                voice: 依据自己的生活经验说话，不使用游戏或编写术语。
+                evidence_ids: []
+              traits: []
+              values: []
+              emotions: []
+              attitudes: []
+              goals:
+                - id: current-purpose
+                  description: 试探药童是否愿意单卖那株草；不强迫对方。
+                  priority: 0.5
+                  progress: 0
+                  target_ids: []
+                  motivated_by_ids: []
+                  status: active
+                  evidence_ids: []
+              commitments: []
+            belief:
+              local_entities:
+                - id: self
+                  name: 周荃
+                  description: 来往镇村的收药人，另有买家愿为某株草出较高价格。
+                  status: observed
+                - id: location
+                  name: 陈守拙的药院
+                  description: 你熟悉这里的出入和用途。
+                  status: observed
+                - id: child
+                  name: 药童
+                  description: 认识这位受陈守拙委托送货的学徒。
+                  status: observed
+              evidence: []
+              claims: []
+              bindings:
+                - local_entity_id: self
+                  canonical_entity_ids:
+                    - herbal-buyer
+                - local_entity_id: location
+                  canonical_entity_ids:
+                    - herbal-yard
+                - local_entity_id: child
+                  canonical_entity_ids:
+                    - $participant
+        - id: herbal-consignment
+          kind: goods
+          name: 待交付药材
+          description: 已包好、受托运输的普通药材。
+          placement: $participant
+          facts:
+            - id: herbal-consignment-owned-by-herbal-master
+              predicate: owned-by
+              value:
+                kind: entity
+                entityId: herbal-master
+              description: 药材归陈守拙，药童没有擅自出售的授权。
+              access:
+                kind: private
+            - id: herbal-note-cause
+              predicate: unusual-herb-cause
+              value:
+                kind: text
+                value: 本批异常主要由成熟度与晒制差异造成，不预置仙草。
+              description: 本批异常主要由成熟度与晒制差异造成，不预置仙草。
+              access:
+                kind: private
+          meters: []
+          quantities:
+            - definition_id: herb-packet
+              amount: 12
+          ratings: []
+          shared_activity_resources: []
+        - id: herbal-notebook
+          kind: item
+          name: 采药札记
+          description: 借来的采药记录，北坡某处止血草曾有异常药性，成因仍需调查。
+          placement: $participant
+          facts:
+            - id: herbal-notebook-owned-by-herbal-master
+              predicate: owned-by
+              value:
+                kind: entity
+                entityId: herbal-master
+              description: 札记是师父的，药童只有借阅权。
+              access:
+                kind: private
+          meters: []
+          quantities: []
+          ratings: []
+          shared_activity_resources: []
+        - id: herbal-tools
+          kind: item
+          name: 药篓与小药锄
+          description: 普通采药工具，可以装载或挖取药材。
+          placement: $participant
+          facts:
+            - id: herbal-tools-owned-by-$participant
+              predicate: owned-by
+              value:
+                kind: entity
+                entityId: $participant
+              description: 属于药童自己的工具。
+              access:
+                kind: private
+          meters: []
+          quantities: []
+          ratings: []
+          shared_activity_resources: []
+      facts:
+        - id: herbal-player-root
+          predicate: spirit-root
+          value:
+            kind: text
+            value: 金木水土四属性灵根，客观存在但从未检测。
+          description: 金木水土四属性灵根，客观存在但从未检测。
+          access:
+            kind: private
+          subject_id: $participant
+        - id: herbal-player-age
+          predicate: age
+          value:
+            kind: number
+            value: 12
+          description: 药童十二岁。
+          access:
+            kind: public
+          subject_id: $participant
+        - id: herbal-player-skill
+          predicate: learned-skill
+          value:
+            kind: text
+            value: 能辨认常见药草，处理轻微外伤；不会修仙法诀。
+          description: 能辨认常见药草，处理轻微外伤；不会修仙法诀。
+          access:
+            kind: public
+          subject_id: $participant
+      cognition:
+        - agent_id: $participant
+          belief:
+            local_entities:
+              - id: mother
+                name: 林素
+                description: 你的母亲，托你明早买盐和灯油。
+                status: observed
+              - id: master
+                name: 陈守拙
+                description: 教你辨药与处理外伤的乡医；已借出采药札记。
+                status: observed
+              - id: buyer
+                name: 周荃
+                description: 收药人，正私下提出高价收购一株草。
+                status: observed
+              - id: goods
+                name: 待交药材
+                description: 师父所有，共十二包；你只是受托运输。
+                status: observed
+              - id: notes
+                name: 采药札记
+                description: 师父借给你的记录，北坡药草的异常原因仍不清楚。
+                status: observed
+            evidence: []
+            claims: []
+            bindings:
+              - local_entity_id: mother
+                canonical_entity_ids:
+                  - herbal-mother
+              - local_entity_id: master
+                canonical_entity_ids:
+                  - herbal-master
+              - local_entity_id: buyer
+                canonical_entity_ids:
+                  - herbal-buyer
+              - local_entity_id: goods
+                canonical_entity_ids:
+                  - herbal-consignment
+              - local_entity_id: notes
+                canonical_entity_ids:
+                  - herbal-notebook
+  - id: spirit-merchant
+    title: 灵界化神商行东家
+    fantasy: 已有修为、商号与人脉，决定如何处理一场真实的交付争议。
+    description: 三百二十六岁的灵界本土人族化神中期修士，经营青禾灵材行，有独立修炼居所。人物与商号为原创，天渊城背景采用标明的开篇回溯。
+    default_goal: 核对到货与两份订单，自己决定经营和修炼安排。
+    relationship_hooks:
+      - 岑玉是长期雇用的验货管事。
+      - 陶岐持有供应商的装货记录。
+      - 许明照与陆闻微的订单分别为八箱与十二箱。
+    risks:
+      - 数量需要核查；境界不会替你发现未接触的事实。
+      - 商号钱财与私人库存分开，仍需履行义务。
+    fallback_arrival: 仓院里新到的货箱尚未验收完。岑玉拿着交接单向你走来，陶岐在一旁等待核对；两位客户也到了，都希望先拿到自己的货。你可以查账、验货、协商，也可以先处理别的事。
+    kind: create
+    entity_kind: person
+    spawn_entity_id: qinghe-store
+    persona: 灵界本土人族化神中期修士，长期经营灵材，熟悉本地交易、修炼和自己掌握的神识御物法诀；并不知道所有人的私事。
+    mechanics_profile_id: spirit-merchant
+    initialization:
+      entities:
+        - id: spirit-manager
+          kind: person
+          name: 岑玉
+          description: 青禾灵材行的验货管事。
+          placement: qinghe-store
+          facts:
+            - id: spirit-manager-cultivation
+              predicate: cultivation
+              value:
+                kind: text
+                value: 筑基
+              description: 筑基
+              access:
+                kind: public
+            - id: spirit-manager-business-contact-of-$participant
+              predicate: business-contact-of
+              value:
+                kind: entity
+                entityId: $participant
+              description: 与商行东家保持长期业务往来。
+              access:
+                kind: private
+          meters:
+            - id: spirit-manager-health
+              definition_id: health
+              current: 100
+            - id: spirit-manager-mana
+              definition_id: mana
+              current: 400
+          quantities: []
+          ratings:
+            - id: spirit-manager-cultivation
+              definition_id: cultivation
+              value: 2
+            - id: spirit-manager-perception
+              definition_id: perception
+              value: 2
+            - id: spirit-manager-craft
+              definition_id: craft
+              value: 1
+            - id: spirit-manager-influence
+              definition_id: influence
+              value: 1
+            - id: spirit-manager-force
+              definition_id: force
+              value: 1
+          shared_activity_resources: []
+          agent:
+            id: spirit-manager
+            model_profiles:
+              creation: creation-deepseek
+              decision: decision-jev
+              fallback: decision-deepseek
+            character:
+              persona:
+                summary: 筑基修士，负责验货，亲手点到十七箱，正准备向东家报告。
+                voice: 依据自己的生活经验说话，不使用游戏或编写术语。
+                evidence_ids: []
+              traits: []
+              values: []
+              emotions: []
+              attitudes: []
+              goals:
+                - id: current-purpose
+                  description: 查清缺货并保全交接凭据。
+                  priority: 0.5
+                  progress: 0
+                  target_ids: []
+                  motivated_by_ids: []
+                  status: active
+                  evidence_ids: []
+              commitments: []
+            belief:
+              local_entities:
+                - id: self
+                  name: 岑玉
+                  description: 筑基修士，负责验货，亲手点到十七箱，正准备向东家报告。
+                  status: observed
+                - id: location
+                  name: 青禾灵材行仓院
+                  description: 你熟悉这里的出入和用途。
+                  status: observed
+                - id: proprietor
+                  name: 商行东家
+                  description: 认识多年的化神中期本土人族修士，处理商号事务。
+                  status: observed
+              evidence: []
+              claims: []
+              bindings:
+                - local_entity_id: self
+                  canonical_entity_ids:
+                    - spirit-manager
+                - local_entity_id: location
+                  canonical_entity_ids:
+                    - qinghe-store
+                - local_entity_id: proprietor
+                  canonical_entity_ids:
+                    - $participant
+        - id: spirit-supplier
+          kind: person
+          name: 陶岐
+          description: 供应商的代表。
+          placement: qinghe-store
+          facts:
+            - id: spirit-supplier-cultivation
+              predicate: cultivation
+              value:
+                kind: text
+                value: 元婴
+              description: 元婴
+              access:
+                kind: public
+            - id: spirit-supplier-business-contact-of-$participant
+              predicate: business-contact-of
+              value:
+                kind: entity
+                entityId: $participant
+              description: 与商行东家保持长期业务往来。
+              access:
+                kind: private
+          meters:
+            - id: spirit-supplier-health
+              definition_id: health
+              current: 100
+            - id: spirit-supplier-mana
+              definition_id: mana
+              current: 800
+          quantities: []
+          ratings:
+            - id: spirit-supplier-cultivation
+              definition_id: cultivation
+              value: 4
+            - id: spirit-supplier-perception
+              definition_id: perception
+              value: 4
+            - id: spirit-supplier-craft
+              definition_id: craft
+              value: 1
+            - id: spirit-supplier-influence
+              definition_id: influence
+              value: 1
+            - id: spirit-supplier-force
+              definition_id: force
+              value: 1
+          shared_activity_resources: []
+          agent:
+            id: spirit-supplier
+            model_profiles:
+              creation: creation-deepseek
+              decision: decision-jev
+              fallback: decision-deepseek
+            character:
+              persona:
+                summary: 元婴修士，供应商代表，装货记录为二十箱，自己未全程押运。
+                voice: 依据自己的生活经验说话，不使用游戏或编写术语。
+                evidence_ids: []
+              traits: []
+              values: []
+              emotions: []
+              attitudes: []
+              goals:
+                - id: current-purpose
+                  description: 核对交接记录，查明短缺，不接受无证据的指控。
+                  priority: 0.5
+                  progress: 0
+                  target_ids: []
+                  motivated_by_ids: []
+                  status: active
+                  evidence_ids: []
+              commitments: []
+            belief:
+              local_entities:
+                - id: self
+                  name: 陶岐
+                  description: 元婴修士，供应商代表，装货记录为二十箱，自己未全程押运。
+                  status: observed
+                - id: location
+                  name: 青禾灵材行仓院
+                  description: 你熟悉这里的出入和用途。
+                  status: observed
+                - id: proprietor
+                  name: 商行东家
+                  description: 认识多年的化神中期本土人族修士，处理商号事务。
+                  status: observed
+              evidence: []
+              claims: []
+              bindings:
+                - local_entity_id: self
+                  canonical_entity_ids:
+                    - spirit-supplier
+                - local_entity_id: location
+                  canonical_entity_ids:
+                    - qinghe-store
+                - local_entity_id: proprietor
+                  canonical_entity_ids:
+                    - $participant
+        - id: spirit-client-one
+          kind: person
+          name: 许明照
+          description: 与商行往来多年的客户。
+          placement: qinghe-store
+          facts:
+            - id: spirit-client-one-cultivation
+              predicate: cultivation
+              value:
+                kind: text
+                value: 结丹
+              description: 结丹
+              access:
+                kind: public
+            - id: spirit-client-one-business-contact-of-$participant
+              predicate: business-contact-of
+              value:
+                kind: entity
+                entityId: $participant
+              description: 与商行东家保持长期业务往来。
+              access:
+                kind: private
+          meters:
+            - id: spirit-client-one-health
+              definition_id: health
+              current: 100
+            - id: spirit-client-one-mana
+              definition_id: mana
+              current: 600
+          quantities: []
+          ratings:
+            - id: spirit-client-one-cultivation
+              definition_id: cultivation
+              value: 3
+            - id: spirit-client-one-perception
+              definition_id: perception
+              value: 3
+            - id: spirit-client-one-craft
+              definition_id: craft
+              value: 1
+            - id: spirit-client-one-influence
+              definition_id: influence
+              value: 1
+            - id: spirit-client-one-force
+              definition_id: force
+              value: 1
+          shared_activity_resources: []
+          agent:
+            id: spirit-client-one
+            model_profiles:
+              creation: creation-deepseek
+              decision: decision-jev
+              fallback: decision-deepseek
+            character:
+              persona:
+                summary: 结丹修士，老客户，知道自家八箱订单，不知道库存缺货。
+                voice: 依据自己的生活经验说话，不使用游戏或编写术语。
+                evidence_ids: []
+              traits: []
+              values: []
+              emotions: []
+              attitudes: []
+              goals:
+                - id: current-purpose
+                  description: 与东家协商八箱材料的交付。
+                  priority: 0.5
+                  progress: 0
+                  target_ids: []
+                  motivated_by_ids: []
+                  status: active
+                  evidence_ids: []
+              commitments: []
+            belief:
+              local_entities:
+                - id: self
+                  name: 许明照
+                  description: 结丹修士，老客户，知道自家八箱订单，不知道库存缺货。
+                  status: observed
+                - id: location
+                  name: 青禾灵材行仓院
+                  description: 你熟悉这里的出入和用途。
+                  status: observed
+                - id: proprietor
+                  name: 商行东家
+                  description: 认识多年的化神中期本土人族修士，处理商号事务。
+                  status: observed
+              evidence: []
+              claims: []
+              bindings:
+                - local_entity_id: self
+                  canonical_entity_ids:
+                    - spirit-client-one
+                - local_entity_id: location
+                  canonical_entity_ids:
+                    - qinghe-store
+                - local_entity_id: proprietor
+                  canonical_entity_ids:
+                    - $participant
+        - id: spirit-client-two
+          kind: person
+          name: 陆闻微
+          description: 前来交涉订单的客户。
+          placement: qinghe-store
+          facts:
+            - id: spirit-client-two-cultivation
+              predicate: cultivation
+              value:
+                kind: text
+                value: 元婴
+              description: 元婴
+              access:
+                kind: public
+            - id: spirit-client-two-business-contact-of-$participant
+              predicate: business-contact-of
+              value:
+                kind: entity
+                entityId: $participant
+              description: 与商行东家保持长期业务往来。
+              access:
+                kind: private
+          meters:
+            - id: spirit-client-two-health
+              definition_id: health
+              current: 100
+            - id: spirit-client-two-mana
+              definition_id: mana
+              current: 800
+          quantities: []
+          ratings:
+            - id: spirit-client-two-cultivation
+              definition_id: cultivation
+              value: 4
+            - id: spirit-client-two-perception
+              definition_id: perception
+              value: 4
+            - id: spirit-client-two-craft
+              definition_id: craft
+              value: 1
+            - id: spirit-client-two-influence
+              definition_id: influence
+              value: 1
+            - id: spirit-client-two-force
+              definition_id: force
+              value: 1
+          shared_activity_resources: []
+          agent:
+            id: spirit-client-two
+            model_profiles:
+              creation: creation-deepseek
+              decision: decision-jev
+              fallback: decision-deepseek
+            character:
+              persona:
+                summary: 元婴修士，知道自家十二箱订单，不知道实收数量。
+                voice: 依据自己的生活经验说话，不使用游戏或编写术语。
+                evidence_ids: []
+              traits: []
+              values: []
+              emotions: []
+              attitudes: []
+              goals:
+                - id: current-purpose
+                  description: 与东家协商十二箱材料的交付。
+                  priority: 0.5
+                  progress: 0
+                  target_ids: []
+                  motivated_by_ids: []
+                  status: active
+                  evidence_ids: []
+              commitments: []
+            belief:
+              local_entities:
+                - id: self
+                  name: 陆闻微
+                  description: 元婴修士，知道自家十二箱订单，不知道实收数量。
+                  status: observed
+                - id: location
+                  name: 青禾灵材行仓院
+                  description: 你熟悉这里的出入和用途。
+                  status: observed
+                - id: proprietor
+                  name: 商行东家
+                  description: 认识多年的化神中期本土人族修士，处理商号事务。
+                  status: observed
+              evidence: []
+              claims: []
+              bindings:
+                - local_entity_id: self
+                  canonical_entity_ids:
+                    - spirit-client-two
+                - local_entity_id: location
+                  canonical_entity_ids:
+                    - qinghe-store
+                - local_entity_id: proprietor
+                  canonical_entity_ids:
+                    - $participant
+        - id: spirit-carrier
+          kind: person
+          name: 邱安
+          description: 负责货物转运的工人。
+          placement: spirit-wharf
+          facts:
+            - id: spirit-carrier-cultivation
+              predicate: cultivation
+              value:
+                kind: text
+                value: 炼气
+              description: 炼气
+              access:
+                kind: public
+          meters:
+            - id: spirit-carrier-health
+              definition_id: health
+              current: 100
+            - id: spirit-carrier-mana
+              definition_id: mana
+              current: 200
+          quantities: []
+          ratings:
+            - id: spirit-carrier-cultivation
+              definition_id: cultivation
+              value: 1
+            - id: spirit-carrier-perception
+              definition_id: perception
+              value: 1
+            - id: spirit-carrier-craft
+              definition_id: craft
+              value: 1
+            - id: spirit-carrier-influence
+              definition_id: influence
+              value: 1
+            - id: spirit-carrier-force
+              definition_id: force
+              value: 1
+          shared_activity_resources: []
+          agent:
+            id: spirit-carrier
+            model_profiles:
+              creation: creation-deepseek
+              decision: decision-jev
+              fallback: decision-deepseek
+            character:
+              persona:
+                summary: 炼气修士，转运工，知道另三箱因换车留在货场，有留置收条。
+                voice: 依据自己的生活经验说话，不使用游戏或编写术语。
+                evidence_ids: []
+              traits: []
+              values: []
+              emotions: []
+              attitudes: []
+              goals:
+                - id: current-purpose
+                  description: 等候下一辆车，将留置的三箱补送商号。
+                  priority: 0.5
+                  progress: 0
+                  target_ids: []
+                  motivated_by_ids: []
+                  status: active
+                  evidence_ids: []
+              commitments: []
+            belief:
+              local_entities:
+                - id: self
+                  name: 邱安
+                  description: 炼气修士，转运工，知道另三箱因换车留在货场，有留置收条。
+                  status: observed
+                - id: location
+                  name: 城中转运货场
+                  description: 你熟悉这里的出入和用途。
+                  status: observed
+                - id: cargo
+                  name: 待补送货物
+                  description: 三箱留在货场，尚未送达商行。
+                  status: observed
+              evidence: []
+              claims: []
+              bindings:
+                - local_entity_id: self
+                  canonical_entity_ids:
+                    - spirit-carrier
+                - local_entity_id: location
+                  canonical_entity_ids:
+                    - spirit-wharf
+                - local_entity_id: cargo
+                  canonical_entity_ids:
+                    - spirit-missing-cargo
+        - id: qinghe-business
+          kind: organization
+          name: 青禾灵材行
+          description: 独立账目的商号，雇员、客户、合同与周转资产各有归属。
+          placement: qinghe-store
+          facts:
+            - id: qinghe-business-managed-by-$participant
+              predicate: managed-by
+              value:
+                kind: entity
+                entityId: $participant
+              description: 东家有经营决策权，仍承担订单和报酬义务。
+              access:
+                kind: private
+          meters: []
+          quantities: []
+          ratings: []
+          shared_activity_resources: []
+        - id: spirit-stock
+          kind: goods
+          name: 验收中的灵材
+          description: 等待验收的新到灵材，实际数量可以通过点货查清。
+          placement: qinghe-store
+          facts:
+            - id: spirit-stock-owned-by-qinghe-business
+              predicate: owned-by
+              value:
+                kind: entity
+                entityId: qinghe-business
+              description: 归商号所有，并承载两份订单义务。
+              access:
+                kind: private
+          meters: []
+          quantities:
+            - definition_id: material-crate
+              amount: 17
+          ratings: []
+          shared_activity_resources: []
+        - id: spirit-missing-cargo
+          kind: goods
+          name: 留在货场的灵材
+          description: 留在转运货场的三箱灵材。
+          placement: spirit-wharf
+          facts:
+            - id: spirit-missing-cargo-owned-by-qinghe-business
+              predicate: owned-by
+              value:
+                kind: entity
+                entityId: qinghe-business
+              description: 属于同一批商号货物，尚未送达。
+              access:
+                kind: private
+            - id: spirit-cargo-delay
+              predicate: delay-cause
+              value:
+                kind: text
+                value: 换车时留置，转运工持有收条，未被盗走。
+              description: 换车时留置，转运工持有收条，未被盗走。
+              access:
+                kind: private
+          meters: []
+          quantities:
+            - definition_id: material-crate
+              amount: 3
+          ratings: []
+          shared_activity_resources: []
+        - id: spirit-business-funds
+          kind: container
+          name: 商号周转库
+          description: 用于经营的独立周转库存。
+          placement: qinghe-store
+          facts:
+            - id: spirit-business-funds-owned-by-qinghe-business
+              predicate: owned-by
+              value:
+                kind: entity
+                entityId: qinghe-business
+              description: 属于商号营运资产，取用会影响履约与员工报酬。
+              access:
+                kind: private
+          meters: []
+          quantities:
+            - definition_id: low-stone
+              amount: 30000
+          ratings: []
+          shared_activity_resources: []
+        - id: spirit-receipt
+          kind: document
+          name: 交接单
+          description: 交接单记载二十箱；文字记录不改变实际库存。
+          placement: spirit-manager
+          facts:
+            - id: spirit-receipt-count
+              predicate: recorded-count
+              value:
+                kind: number
+                value: 20
+              description: 记录二十箱。
+              access:
+                kind: public
+          meters: []
+          quantities: []
+          ratings: []
+          shared_activity_resources: []
+        - id: spirit-order-one
+          kind: obligation
+          name: 八箱订单
+          description: 商号与客户约定交付灵材；尚未实际完成。
+          placement: qinghe-business
+          facts:
+            - id: spirit-order-one-owed-to-spirit-client-one
+              predicate: owed-to
+              value:
+                kind: entity
+                entityId: spirit-client-one
+              description: 应向该客户交货。
+              access:
+                kind: private
+            - id: spirit-order-one-owed-by-qinghe-business
+              predicate: owed-by
+              value:
+                kind: entity
+                entityId: qinghe-business
+              description: 商号承担履约义务。
+              access:
+                kind: private
+            - id: spirit-order-one-amount
+              predicate: remaining-delivery
+              value:
+                kind: number
+                value: 8
+              description: 尚欠交付的箱数。
+              access:
+                kind: public
+            - id: spirit-order-one-status
+              predicate: status
+              value:
+                kind: text
+                value: 有效、未履行。
+              description: 有效、未履行。
+              access:
+                kind: public
+          meters: []
+          quantities: []
+          ratings: []
+          shared_activity_resources: []
+        - id: spirit-order-two
+          kind: obligation
+          name: 十二箱订单
+          description: 商号与客户约定交付灵材；尚未实际完成。
+          placement: qinghe-business
+          facts:
+            - id: spirit-order-two-owed-to-spirit-client-two
+              predicate: owed-to
+              value:
+                kind: entity
+                entityId: spirit-client-two
+              description: 应向该客户交货。
+              access:
+                kind: private
+            - id: spirit-order-two-owed-by-qinghe-business
+              predicate: owed-by
+              value:
+                kind: entity
+                entityId: qinghe-business
+              description: 商号承担履约义务。
+              access:
+                kind: private
+            - id: spirit-order-two-amount
+              predicate: remaining-delivery
+              value:
+                kind: number
+                value: 12
+              description: 尚欠交付的箱数。
+              access:
+                kind: public
+            - id: spirit-order-two-status
+              predicate: status
+              value:
+                kind: text
+                value: 有效、未履行。
+              description: 有效、未履行。
+              access:
+                kind: public
+          meters: []
+          quantities: []
+          ratings: []
+          shared_activity_resources: []
+        - id: spirit-protection
+          kind: item
+          name: 青纹护身佩
+          description: 原创自用防护法宝，需要持续法力，不能自动识破谎言或消灭一切威胁。
+          placement: $participant
+          facts:
+            - id: spirit-protection-owned-by-$participant
+              predicate: owned-by
+              value:
+                kind: entity
+                entityId: $participant
+              description: 按持有者与文书实际权属使用。
+              access:
+                kind: private
+          meters: []
+          quantities: []
+          ratings: []
+          shared_activity_resources: []
+        - id: spirit-concession
+          kind: item
+          name: 资源地经营文书
+          description: 商号取得一小块未充分勘定地块的限期经营权；不是资源凭空产出的依据。
+          placement: qinghe-business
+          facts:
+            - id: spirit-concession-owned-by-qinghe-business
+              predicate: owned-by
+              value:
+                kind: entity
+                entityId: qinghe-business
+              description: 按持有者与文书实际权属使用。
+              access:
+                kind: private
+          meters: []
+          quantities: []
+          ratings: []
+          shared_activity_resources: []
+      facts:
+        - id: merchant-stage
+          predicate: cultivation
+          value:
+            kind: text
+            value: 化神中期；本土人族修士。
+          description: 化神中期；本土人族修士。
+          access:
+            kind: public
+          subject_id: $participant
+        - id: merchant-roots
+          predicate: spirit-root
+          value:
+            kind: text
+            value: 木水双属性灵根，早已知晓。
+          description: 木水双属性灵根，早已知晓。
+          access:
+            kind: private
+          subject_id: $participant
+        - id: merchant-skills
+          predicate: learned-skill
+          value:
+            kind: text
+            value: 已学会常用神识探查、御物、飞遁与催动青纹护身佩；范围与代价依已知法诀及当前法力判断，不能读他人记忆或凭空造物。
+          description: 已学会常用神识探查、御物、飞遁与催动青纹护身佩；范围与代价依已知法诀及当前法力判断，不能读他人记忆或凭空造物。
+          access:
+            kind: agents
+            agentIds:
+              - $participant
+          subject_id: $participant
+      cognition:
+        - agent_id: $participant
+          belief:
+            local_entities:
+              - id: manager
+                name: 岑玉
+                description: 商号验货管事，多年一起做事。
+                status: observed
+              - id: supplier
+                name: 陶岐
+                description: 供应商代表，持有装货记录。
+                status: observed
+              - id: first-customer
+                name: 许明照
+                description: 老客户，约定购八箱材料。
+                status: observed
+              - id: second-customer
+                name: 陆闻微
+                description: 客户，约定购十二箱材料。
+                status: observed
+              - id: firm
+                name: 青禾灵材行
+                description: 由你经营，商号资产独立记账。
+                status: observed
+              - id: stock
+                name: 到货灵材
+                description: 货物刚到，仍在验收；交接单记二十箱，实收数量要等岑玉报告或自行核对。
+                status: observed
+              - id: receipt
+                name: 交接单
+                description: 记录二十箱，不代表你已亲手点过实物。
+                status: observed
+              - id: private-home
+                name: 自己的静室
+                description: 有独立修炼与休息处。
+                status: observed
+              - id: fund
+                name: 周转库
+                description: 商号有三万低阶灵石营运资金，不是随身私房钱。
+                status: observed
+              - id: treasure
+                name: 青纹护身佩
+                description: 自己炼化的护身法宝，可以消耗法力催动。
+                status: observed
+            evidence:
+              - id: prior-training
+                kind: observation
+                description: 多年修炼并经营商行的亲历。
+                sourceId: null
+                step: 0
+            claims:
+              - id: known-cultivation
+                subjectId: self
+                predicate: cultivation
+                value:
+                  kind: text
+                  value: 自己是化神中期本土人族修士，具有木水双灵根。
+                description: 自己是化神中期本土人族修士，具有木水双灵根。
+                stance: believed
+                confidence: 1
+                evidenceIds:
+                  - prior-training
+              - id: known-skills
+                subjectId: self
+                predicate: learned-skill
+                value:
+                  kind: text
+                  value: 已经学会常用神识探查、御物、飞遁和护身佩催动法诀；御物需要法力，不能凭空造物或读他人记忆。
+                description: 已经学会常用神识探查、御物、飞遁和护身佩催动法诀；御物需要法力，不能凭空造物或读他人记忆。
+                stance: believed
+                confidence: 1
+                evidenceIds:
+                  - prior-training
+            bindings:
+              - local_entity_id: manager
+                canonical_entity_ids:
+                  - spirit-manager
+              - local_entity_id: supplier
+                canonical_entity_ids:
+                  - spirit-supplier
+              - local_entity_id: first-customer
+                canonical_entity_ids:
+                  - spirit-client-one
+              - local_entity_id: second-customer
+                canonical_entity_ids:
+                  - spirit-client-two
+              - local_entity_id: firm
+                canonical_entity_ids:
+                  - qinghe-business
+              - local_entity_id: stock
+                canonical_entity_ids:
+                  - spirit-stock
+              - local_entity_id: receipt
+                canonical_entity_ids:
+                  - spirit-receipt
+              - local_entity_id: private-home
+                canonical_entity_ids:
+                  - qinghe-study
+              - local_entity_id: fund
+                canonical_entity_ids:
+                  - spirit-business-funds
+              - local_entity_id: treasure
+                canonical_entity_ids:
+                  - spirit-protection
+      character:
+        traits: []
+        values: []
+        emotions: []
+        attitudes: []
+        goals: []
+        commitments:
+          - id: business-responsibility
+            description: 认真处理商号订单与员工报酬，不能把商号资产视为无义务的私人战利品。
+            priority: 0.7
+            subject_ids:
+              - firm
+            status: active
+            evidence_ids: []
+  - id: han-li
+    title: 韩立
+    fantasy: 从十岁那一夜接过自己的人生，下一条路由你决定。
+    description: 你仍在山村家中，尚未拜师或修仙。三叔还没提出入门安排，也没有任何后续宝物。
+    default_goal: 自己决定明天的生活。
+    relationship_hooks:
+      - 家人是与你共同生活的真实人物。
+      - 三叔曾帮助大哥学艺，但还没向家里提出你的入门安排。
+    risks:
+      - 家境清苦，当前没有修仙功法。
+      - 后续相遇与所得不会按小说自动发生。
+    fallback_arrival: 你躺在旧被里，韩铸睡在身旁。隔着泥墙，父母还没有完全歇下。你想起明早的柴火，也惦记妹妹爱吃的浆果。村外是什么样，你还想亲眼看看。
+    kind: existing
+    agent_id: canon-han-li

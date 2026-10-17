@@ -24,4 +24,20 @@
 
 ## 交付状态
 
-正在建立正文基线和通用初始化合同。尚未交付可运行的《凡人》世界；两界全域、九种身份和三个规模档位的实际游玩验证均未完成。后续状态必须以相应台账和运行证据为依据。
+通用出身初始化与既有人物入口已经落地。[九种身份设计](origins.yaml)包含背景、资产权属、具体人物、秘密与开场选择。[开篇编写样本](../samples/opening/README.md)提供韩立、山村药童和灵界化神商行东家三个可导入入口；它是阶段产物，不是两界完整世界。正文全篇校勘、全域展开、其余身份接入以及三个规模档位的验证仍未完成。
+
+[首轮真实游玩记录](validation/initial-live-runs.json)检查持久化状态而非模型自报。样本入口、家庭认知与资产隔离通过静态及宿主测试；真实游玩发现上下文溢出、御物与移动未正确落实，整体尚未通过游玩验收。
+
+## 抽取与构建工具
+
+[抽取规则](extraction-policy.md)用于每批两遍正文对照。`npx tsx scripts/world-authoring/extract-fanren.ts --start batch-0001 --count 1` 调用已配置模型，原始输出与调用证据保存在忽略缓存中；[抽取候选](extractions/batch-0001.json)保留定位指纹，不携带原文段落，也不自动获得运行许可。精确引文失败会阻止产物，必要的编辑修改另存[绑定来源和草稿指纹的修订记录](reviews/batch-0001-corrections.json)。机器提取可以先于人工逐章通读；`extracted` 不意味着 `reviewed`。
+
+[样本事实](claims/opening-sample.json)只对选定事实作开篇审核，不能据此把整章标为复核完毕。[样本模块](modules/opening-sample.json)存完整运行合同；[审定记录](reviews/opening-sample.json)绑定模块与事实指纹。构建先检查依赖、开篇时间、原文定位与审批指纹，再执行世界格式校验及 ZIP 导入回读。构建过程不调用模型，也不填补未知。
+
+```sh
+npx tsx scripts/world-authoring/build-fanren.ts sample
+npm run world:validate -- worlds/fanren/samples/opening/world
+npx tsx scripts/world-authoring/play-fanren-sample.ts herbal-apprentice
+```
+
+完整目标使用 `build-fanren.ts full`；当章节、两界目录、身份或正文完整性仍有未决项时，该命令拒绝发布。原文、原始调用和 ZIP 位于忽略缓存，受版本管理的世界 YAML 与构建回执可以独立检验。

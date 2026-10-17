@@ -1,0 +1,164 @@
+id: canon-han-li
+kind: person
+name: 韩立
+description: 十岁的农家孩子，聪明而早熟，尚未修仙或加入任何门派。
+placement: han-home
+facts:
+  - id: han-age
+    predicate: age
+    value:
+      kind: number
+      value: 10
+    description: 开篇韩立十岁。
+    access:
+      kind: public
+  - id: han-root
+    predicate: spirit-root
+    value:
+      kind: text
+      value: 木水火土四属性伪灵根；本人及家人尚不知情。
+    description: 木水火土四属性伪灵根；本人及家人尚不知情。
+    access:
+      kind: private
+  - id: han-untrained
+    predicate: cultivation
+    value:
+      kind: text
+      value: 尚未修仙，也未拜墨大夫为师。
+    description: 尚未修仙，也未拜墨大夫为师。
+    access:
+      kind: private
+meters:
+  - id: canon-han-li-health
+    definition_id: health
+    current: 100
+  - id: canon-han-li-mana
+    definition_id: mana
+    current: 0
+quantities: []
+ratings:
+  - id: canon-han-li-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: canon-han-li-perception
+    definition_id: perception
+    value: 1
+  - id: canon-han-li-craft
+    definition_id: craft
+    value: 1
+  - id: canon-han-li-influence
+    definition_id: influence
+    value: 1
+  - id: canon-han-li-force
+    definition_id: force
+    value: 1
+shared_activity_resources: []
+agent:
+  id: canon-han-li
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-jev
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 十岁的农家孩子，聪明而早熟，尚未修仙或加入任何门派。
+      voice: 依据自己的生活经验说话，不使用游戏或编写术语。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 在夜里休息，明早准备采柴并给妹妹带些浆果。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 韩立
+        description: 十岁的农家孩子，聪明而早熟，尚未修仙或加入任何门派。
+        status: observed
+      - id: location
+        name: 韩家
+        description: 你熟悉这里的出入和用途。
+        status: observed
+      - id: family-1
+        name: 韩父
+        description: 这是你的家人，你知道其基本生活处境。
+        status: observed
+      - id: family-2
+        name: 韩母
+        description: 这是你的家人，你知道其基本生活处境。
+        status: observed
+      - id: family-3
+        name: 韩家大哥
+        description: 这是你的家人，你知道其基本生活处境。
+        status: observed
+      - id: family-4
+        name: 韩铸
+        description: 这是你的家人，你知道其基本生活处境。
+        status: observed
+      - id: family-5
+        name: 韩家姐姐
+        description: 这是你的家人，你知道其基本生活处境。
+        status: observed
+      - id: family-6
+        name: 韩家小妹
+        description: 这是你的家人，你知道其基本生活处境。
+        status: observed
+      - id: uncle
+        name: 韩三叔
+        description: 家中的亲戚，在镇上任掌柜，曾帮助家里。
+        status: observed
+    evidence:
+      - id: han-outside-wish-evidence
+        kind: observation
+        description: 开篇前亲历或长期相处所得：想看看村外世界，尚未告诉家里人。
+        sourceId: null
+        step: 0
+    claims:
+      - id: han-outside-wish
+        subjectId: self
+        predicate: private-wish
+        value:
+          kind: text
+          value: 想看看村外世界，尚未告诉家里人。
+        description: 想看看村外世界，尚未告诉家里人。
+        stance: believed
+        confidence: 1
+        evidenceIds:
+          - han-outside-wish-evidence
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - canon-han-li
+      - local_entity_id: location
+        canonical_entity_ids:
+          - han-home
+      - local_entity_id: family-1
+        canonical_entity_ids:
+          - han-father
+      - local_entity_id: family-2
+        canonical_entity_ids:
+          - han-mother
+      - local_entity_id: family-3
+        canonical_entity_ids:
+          - han-eldest-brother
+      - local_entity_id: family-4
+        canonical_entity_ids:
+          - han-zhu
+      - local_entity_id: family-5
+        canonical_entity_ids:
+          - han-elder-sister
+      - local_entity_id: family-6
+        canonical_entity_ids:
+          - han-younger-sister
+      - local_entity_id: uncle
+        canonical_entity_ids:
+          - han-uncle

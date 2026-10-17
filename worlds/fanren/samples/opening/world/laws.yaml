@@ -1,0 +1,33 @@
+disclosure:
+  default_check_visibility: full
+laws:
+  - id: positive-time
+    text: 行动需要正数时间；赶路、修炼、检查货物、交谈与制作依内容、距离和手段花费时间。
+    severity: hard
+  - id: situated-world
+    text: 只可从真实位置行动。空间包含关系不是瞬移通道；人界与灵界相互隔离，无已建立且满足条件的跨界手段不能通行。
+    severity: hard
+  - id: local-knowledge
+    text: 人物只依据自己的经历、听闻和推理行动；隐藏灵根、私人动机和异地货物不会自动成为共同知识。
+    severity: hard
+  - id: open-future
+    text: 开篇之后由行动与因果推进；没有强制加入七玄门、强制拜师、强制发现小绿瓶或必然重演小说的要求。
+    severity: hard
+  - id: root-discovery
+    text: 灵根检测揭示既有资质，不能按愿望重写。尚未测过不等于无灵根；普通修炼需要相应资质、功法和时间。
+    severity: hard
+  - id: learned-means
+    text: 境界、已学技能、当前法力、实物与位置共同决定能力。凡人不能凭自称施法；化神修士也不能读取未知事实或替代调查。
+    severity: hard
+  - id: resource-conservation
+    text: 钱币、灵石、粮食、药材和货箱只能从真实库存转移，或经已存在来源与工序生产；消耗、损坏和遗失必须有因果。记账数字不是实物数量。
+    severity: hard
+  - id: ownership-and-obligation
+    text: 持有、所有、管理与受托运输不同。只有实际授权或愿意承担后果的侵夺才能处置他人资产；违反约定产生社会后果，不等于物理上不可能。
+    severity: soft
+  - id: mana-cost
+    text: 施法须有已学手段和足够法力；本样本短程御物一次消耗至少一格法力，持续或大规模作用消耗更多。恢复须真实休息、修炼或已有丹药，不得借交易凭空恢复。
+    severity: hard
+  - id: sample-boundary
+    text: 这是有限地点的编写样本。未建立的地区、功法、特殊根骨改造和跨界通道保留未知，不用临时百科补成事实；人物仍可在已建立场景自由行动。
+    severity: hard

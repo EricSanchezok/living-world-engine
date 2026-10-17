@@ -1,0 +1,20 @@
+id: han-household-pantry
+kind: container
+name: 韩家共用粮袋
+description: 家庭共用的口粮，不能因扮演韩立便当作个人库存。
+placement: han-home
+facts:
+  - id: han-household-pantry-managed-by-han-mother
+    predicate: managed-by
+    value:
+      kind: entity
+      entityId: han-mother
+    description: 母亲管理家庭口粮，家人共同食用。
+    access:
+      kind: private
+meters: []
+quantities:
+  - definition_id: grain
+    amount: 12
+ratings: []
+shared_activity_resources: []

@@ -1,0 +1,175 @@
+version: 1
+status: designed-pending-regional-and-mechanical-review
+time: T0-opening-night
+classification: original
+calibration: 下列原创年龄、数量、价格与器物性能均是设计标定，不能标为原著数字。
+originals:
+  - id: herbal-apprentice
+    title: 山村药童
+    realm: human
+    proposed_location: 青牛镇附近的原创村落松溪坳
+    age: 12
+    cultivation: 凡人，尚未修炼
+    roots: { exists: true, attributes: [金, 木, 水, 土], known: false }
+    background: 母亲林素在家纺织，舅父林庆耕种小块田地。你跟乡医陈守拙学习辨药和处理外伤，尚不能独立诊治复杂病症。家人生活拮据，但能正常度日，希望你学得一门安稳手艺。
+    personal_assets: [{ name: 药篓与小药锄, amount: 1 }, { name: 铜钱, amount: 36 }]
+    entrusted_assets: [{ name: 待交付药材, amount: 12, unit: 包, owner: 陈守拙, authority: 受托运输，无权独自出售 }]
+    people:
+      - { name: 林素, role: 母亲, objective: 请孩子进镇买盐与灯油, knowledge: 知道明早的行程，不知道孩子的灵根 }
+      - { name: 陈守拙, role: 师父, objective: 交付药材并维持客户信用, knowledge: 知道弟子辨药的能力，并已借出旧札记 }
+      - { name: 周荃, role: 收药人, objective: 单独收购一株外观普通的药草, knowledge: 认为另有买家感兴趣，但并不知道确切药性 }
+    opportunity: 旧札记记载北坡石缝中的一种止血草曾有异常效力。季节、土壤和误认药材都可能解释这个现象；调查不保证得到仙草。札记属于师父，玩家只有借阅权。
+    opening: 药包已经扎好，母亲把购物单放在药篓上。周荃夜里折回来，提出单独买走其中一株草，价格高得反常。师父还不知道这次私下报价。
+    choices: [问明用途再告知师父, 按原约交货并观察对方, 留家行医或自行采药, 打听学艺与七玄门的消息]
+    hidden: [自身灵根, 异常药性的真正成因]
+
+  - id: merchant-heir
+    title: 富商继承人
+    realm: human
+    proposed_location: 青牛镇原创林记药材铺与家宅；不增加第二家客栈
+    age: 17
+    cultivation: 凡人，尚未修炼
+    roots: { exists: true, attributes: [木, 水, 火], known: false }
+    background: 林家经营药材铺与杂货铺，父亲仍掌大账。你有月例、住处和日常帮手，尚未正式接管家业。家业稳健，不安排强制破产或灭门。
+    personal_assets: [{ name: 私房银, amount: 40, unit: 两 }, { name: 铜钱, amount: 600 }]
+    entrusted_assets:
+      - { name: 商号周转银, amount: 1200, unit: 两, owner: 林家商号, authority: 单笔超过二十两须掌柜或父亲同意 }
+      - { name: 待议价药材, amount: 60, unit: 箱, owner: 林家商号, authority: 其中四十箱已有意向订单，尚未交付 }
+    people:
+      - { name: 林敬亭, role: 父亲与商号主事, objective: 培养接班人并维护长期信用, knowledge: 知道孩子的开支与初次旁听安排 }
+      - { name: 许素娘, role: 掌柜, objective: 保住原有订单, knowledge: 持有先前承诺和账目 }
+      - { name: 姚客, role: 隐藏修士身份的老客户, objective: 收购整批药材并隐瞒去向, knowledge: 知道药材用途，不知道玩家是否有灵根 }
+    opportunity: 家族渠道偶尔接触隐藏身份的低阶修士。信任可能带来引荐，也可能只维持普通生意；银两不会自动变成灵石、修为或入门资格。
+    opening: 家宴尚未散去，父亲让你旁听议价。姚客愿付高价包下六十箱药材，许掌柜拿出另一位老客户的四十箱订单。
+    choices: [维护原约并协商拆单, 承担毁约成本换新渠道, 查明用途与支付能力, 退出议事继续享受生活]
+    hidden: [自身灵根, 姚客的真实身份与用途]
+
+  - id: escort-apprentice
+    title: 镖局学徒
+    realm: human
+    proposed_location: 镜州普通商路上的原创远安镖队
+    age: 19
+    cultivation: 凡俗武艺学徒
+    roots: { exists: false, attributes: [], known: true }
+    background: 走过几趟短镖，会照料驮马、辨认驿路和使用普通兵刃，尚不是江湖高手。曾帮助一名受伤散修躲开追踪，对方答应偿还一次有边界的人情。
+    personal_assets: [{ name: 普通短刀, amount: 1 }, { name: 盘缠银, amount: 3, unit: 两 }, { name: 人情信物, amount: 1 }]
+    entrusted_assets: [{ name: 封签货箱, amount: 1, owner: 唐掌柜, authority: 只有运输许可，不得拆封或出售 }, { name: 驮马, amount: 2, owner: 远安镖队, authority: 受托照料 }]
+    people:
+      - { name: 杜平川, role: 师父兼镖头, objective: 按约交货并保全弟子, knowledge: 知道玩家没有灵根 }
+      - { name: 周小满, role: 同行伙伴, objective: 查清尾随者而不误报, knowledge: 看见有人在驿路口跟踪 }
+      - { name: 程简, role: 欠人情的炼气散修, objective: 守信并避免超出能力的冲突, knowledge: 记得玩家的帮助，愿商议引荐、救治或庇护 }
+    opportunity: 信物可用于请人传话，联络耗时。承诺不是召唤令或强制服从；兑现人情不等于获得灵根。若发现原著确有适用的特殊机制，须另行满足条件，不能从出身奖励直接解锁。
+    opening: 明晨出发前，一名陌生人夜访院外，愿以整趟镖资的三倍买走货箱。周小满刚发现跟踪者，师父尚未获知。
+    choices: [向师父报告并核验委托, 谈判但不处分他人货物, 寻求程简帮助, 退出差事并承担约定后果]
+    hidden: [货箱的具体内容, 陌生人与尾随者是否一伙]
+
+  - id: clan-junior
+    title: 修仙家族旁支
+    realm: human
+    proposed_location: 越国未详写山地中的原创沈家支谷
+    age: 21
+    cultivation: 炼气三层
+    roots: { exists: true, attributes: [金, 土, 水], known: true }
+    background: 与母亲住在支谷，按族规维护库房和低阶器物。配给有限，有族人看重手艺，也有人担忧保留旧物拖累账目；不把整个家族写成敌人。
+    personal_assets: [{ name: 低阶修补工具, amount: 1 }, { name: 低阶灵石, amount: 18 }, { name: 回纹器座修补残谱, amount: 1 }]
+    entrusted_assets: [{ name: 待售旧器物, amount: 9, owner: 沈氏家族, authority: 可以检查，保留须协商或以贡献换取 }]
+    people:
+      - { name: 沈玉娘, role: 母亲, objective: 维持家计并支持手艺, knowledge: 知道玩家缺配套材料 }
+      - { name: 沈从简, role: 库房管事, objective: 按期支付维护费用, knowledge: 知道旧器的权属与账面价值 }
+      - { name: 沈照, role: 竞争旧器的旁支族人, objective: 取得自己的修习材料, knowledge: 愿意考虑共同修复的建议 }
+    opportunity: 掌握修补一种低阶器座断线与接点的残技。旧器中一件与残谱图样相似，但未查验前不能认定它就是传承遗物，也不能修复所有法器。
+    opening: 明日待售清单已经贴出。你与沈照都申请留下同一件器座，管事要求提出兼顾库房开支的办法。
+    choices: [合作修复后分配收益, 以贡献换留存资格, 买普通材料先练手, 离开支谷经营修补生意或寻师]
+    hidden: [器座的内部损伤, 残谱缺页是否与此物相关]
+
+  - id: foundation-independent
+    title: 筑基散修
+    realm: human
+    proposed_location: 越国未详写山地中的原创小石潭洞府，不能侵占已知宗门领地
+    age: 86
+    cultivation: 筑基初期
+    roots: { exists: true, attributes: [木, 水, 土], known: true }
+    background: 经营小洞府，与两名受你指导的晚辈相处多年。洞府有药圃、静室和储物间，产出有限。两位晚辈各有愿望，并非自动服从的随从。
+    personal_assets: [{ name: 低阶灵石, amount: 260 }, { name: 藏风阵器, amount: 1 }, { name: 自用飞行法器, amount: 1 }]
+    entrusted_assets: [{ name: 洞府维护材料, amount: 8, unit: 份, owner: 洞府共用库房, authority: 玩家主理，取用仍影响晚辈生活与修习 }]
+    people:
+      - { name: 余青禾, role: 炼气晚辈, objective: 获得外出历练的许可和路费, knowledge: 熟悉附近路线，缺乏远行经验 }
+      - { name: 赵松, role: 炼气晚辈, objective: 修好洞府防护, knowledge: 已发现三处磨损并留下检修记录 }
+      - { name: 闻慎, role: 长期合作的筑基散修, objective: 邀请共同采集灵材, knowledge: 掌握部分地点信息，愿分担成本 }
+    opportunity: 原创藏风阵器可拆装携带，用于有限隐蔽与防护。布置需要时间、完整阵基和灵石；高阶侦察、阵基破坏和耗材不足都可能使保护失效。三处磨损是真实初始状态。
+    opening: 赵松送来检修单，余青禾请求外出，闻慎的邀约也已到达。三件事争用时间、灵石和材料。
+    choices: [先修阵再安排历练, 指导晚辈修复而自己赴约, 谢绝合作专心经营或闭关, 让晚辈带着明确边界自行历练]
+    hidden: [合作地点的完整风险]
+
+  - id: core-clan-elder
+    title: 结丹家族长者
+    realm: human
+    proposed_location: 大晋未详写地区中的原创石汀许氏聚落
+    age: 213
+    cultivation: 结丹初期
+    roots: { exists: true, attributes: [火, 土], known: true }
+    background: 你是家族结丹长者之一，有分红和议事权，日常账目由管事负责。族人期待庇护，也有权对资源安排提出意见。不占用原作人物明确拥有的职位。
+    personal_assets: [{ name: 低阶灵石, amount: 2200 }, { name: 中阶灵石, amount: 12 }, { name: 本命法宝, amount: 1 }, { name: 遗址外缘图, amount: 1 }]
+    entrusted_assets: [{ name: 族产周转灵石, amount: 9000, owner: 许氏家族, authority: 支出须经过议事程序 }, { name: 灵材加工坊, amount: 1, owner: 许氏家族, authority: 有技术和收益份额，无独占变卖权 }]
+    people:
+      - { name: 许宜, role: 家族管事, objective: 扩大长期供货获得稳定收入, knowledge: 掌握人工、订单与运输成本 }
+      - { name: 许澄, role: 筑基族人, objective: 保留材料供后辈修炼, knowledge: 清楚修炼配给缺口 }
+      - { name: 姚闻山, role: 交易相对方, objective: 获得持续供货承诺, knowledge: 有自己的需求与议价底线 }
+    opportunity: 掌握原创的完整灵材预处理手艺，仍需真实消耗原料。私人外缘图只给出一条可能进入遗址的通路，不保证藏宝、安全或完整传承。
+    opening: 许宜要求扩大供货，许澄请求保留修炼资源。双方均提出可核验账目，最后的安排需要你的意见。
+    choices: [分期履约并设置退出条件, 投入个人财产而非挪用族产, 缩减交易保障配给, 委托管事并研究遗址]
+    hidden: [遗址内部状态, 交易方全部经营状况]
+
+  - id: spirit-merchant
+    title: 灵界化神商行东家
+    realm: spirit
+    proposed_location: 天渊城商贸范围中的原创青禾灵材行；商铺与具体位置须完成开篇回溯
+    age: 326
+    cultivation: 化神中期
+    roots: { exists: true, attributes: [木, 水], known: true }
+    background: 在灵界成长的本土人族修士，经营灵材商号，有私人修炼处所和积蓄。商号独立记账，不添加初代飞升者的异界气息负担。
+    personal_assets: [{ name: 低阶灵石, amount: 8000 }, { name: 中阶灵石, amount: 80 }, { name: 自用法宝, amount: 1 }]
+    entrusted_assets:
+      - { name: 商号周转灵石, amount: 30000, owner: 青禾灵材行, authority: 可用于经营，须履行货款与员工报酬义务 }
+      - { name: 实收灵材, amount: 17, unit: 箱, owner: 青禾灵材行, authority: 交接记录记为二十箱，短缺原因未明 }
+      - { name: 资源地经营权益文书, amount: 1, owner: 青禾灵材行, authority: 只覆盖特定地块与期限，不能据此占有整片蛮荒 }
+    people:
+      - { name: 岑玉, role: 验货管事, objective: 查明短缺并保全证据, knowledge: 亲自点得十七箱，持有交接单 }
+      - { name: 陶岐, role: 供应商代表, objective: 核对交接并避免不实指控, knowledge: 有装载记录，但没有全程押运 }
+      - { name: 许明照, role: 老客户, objective: 按期取得八箱材料, knowledge: 已有付款与交期约定 }
+      - { name: 陆闻微, role: 另一客户, objective: 按期取得十二箱材料, knowledge: 不知道当前实收数量 }
+    opportunity: 商号拥有一小块未充分勘定资源地的经营权益。勘探、运输、维护与警戒均有成本；权益本身不能生成矿藏或收入。
+    opening: 同一世界时间的当地夜间，货物进入验收。两份订单合计二十箱，实物只有十七箱，两名客户都要求优先交付。
+    choices: [封存记录并核对运输, 协商部分交付, 补货并承担差价, 暂缓扩张或亲自勘探]
+    hidden: [三箱短缺的实际环节, 资源地真实产量]
+
+  - id: spirit-array-master
+    title: 灵界炼虚阵师
+    realm: spirit
+    proposed_location: 天渊城修士生活范围中的原创听泉静室；具体居所与人际圈须完成开篇回溯
+    age: 782
+    cultivation: 炼虚初期
+    roots: { exists: true, attributes: [金, 木, 水, 火, 土], known: true }
+    background: 灵界本土人族阵师，拥有独立修炼处所、相应能力、法宝与积蓄，与少数同阶旧友长期往来。不会临时废掉修为，也不要求重做凡人教程。
+    personal_assets: [{ name: 低阶灵石, amount: 20000 }, { name: 中阶灵石, amount: 220 }, { name: 高阶灵石, amount: 4 }, { name: 阵法测绘器具, amount: 1 }, { name: 自用法宝, amount: 1 }, { name: 回潮古阵残传, amount: 1 }]
+    entrusted_assets: [{ name: 来历有争议的阵片, amount: 1, owner: 待查, authority: 旧友暂时持有，玩家受邀检验，不自动获得所有权 }]
+    people:
+      - { name: 顾清弦, role: 炼虚旧友, objective: 判断阵片能否帮助修复古阵, knowledge: 记得取得阵片的过程，未确认此前所有权 }
+      - { name: 齐望舒, role: 提出所有权主张的修士, objective: 追回其认为未经许可转出的阵片, knowledge: 持有旧交易凭据，主张仍待核实 }
+      - { name: 温砚, role: 长期协助记录的晚辈, objective: 保护资料并协调来访, knowledge: 知道研究范围，不掌握全部技术 }
+    opportunity: 原创回潮古阵残传允许识别和修补特定阵纹连接；未知功能、材料缺口和试验风险仍存在。残传归玩家，阵片在旧友手中，双方掌握的信息不同。
+    opening: 你结束常规修炼，顾清弦携阵片到访。温砚刚登记来客，齐望舒的传话也已到达，请求保留阵片并等她出示凭据。
+    choices: [先测绘封存并邀请双方核对, 只做技术判断, 提出有条件合作, 拒绝介入并继续修炼]
+    hidden: [阵片完整功能, 双方凭据能否相互印证]
+
+existing:
+  id: han-li
+  kind: existing
+  entity_id: canon-han-li
+  title: 韩立
+  age: 10
+  sources: [qq-4631519]
+  status: pending-runtime-binding
+  entry: 接管世界中唯一的韩立；保留第一章当夜的家庭、资质和已有知识。
+  excluded_future: [已加入七玄门, 墨大夫师承, 张铁朋友关系, 小绿瓶到手, 储物袋, 后续功法与装备]
+  choices: [留在村中, 自行选择谋生和学艺, 以后拒绝或接受七玄门机会]

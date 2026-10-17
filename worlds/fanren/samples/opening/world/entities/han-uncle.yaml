@@ -1,0 +1,105 @@
+id: han-uncle
+kind: person
+name: 韩三叔
+description: 春香酒楼掌柜，七玄门外门弟子，关照韩家。
+placement: chunxiang-inn
+facts:
+  - id: han-uncle-uncle-of-canon-han-li
+    predicate: uncle-of
+    value:
+      kind: entity
+      entityId: canon-han-li
+    description: 韩立的亲三叔。
+    access:
+      kind: private
+  - id: han-uncle-member-of-qixuan-sect
+    predicate: member-of
+    value:
+      kind: entity
+      entityId: qixuan-sect
+    description: 已是七玄门外门弟子。
+    access:
+      kind: private
+meters:
+  - id: han-uncle-health
+    definition_id: health
+    current: 100
+  - id: han-uncle-mana
+    definition_id: mana
+    current: 0
+quantities: []
+ratings:
+  - id: han-uncle-cultivation
+    definition_id: cultivation
+    value: 0
+  - id: han-uncle-perception
+    definition_id: perception
+    value: 1
+  - id: han-uncle-craft
+    definition_id: craft
+    value: 1
+  - id: han-uncle-influence
+    definition_id: influence
+    value: 1
+  - id: han-uncle-force
+    definition_id: force
+    value: 1
+shared_activity_resources: []
+agent:
+  id: han-uncle
+  model_profiles:
+    creation: creation-deepseek
+    decision: decision-jev
+    fallback: decision-deepseek
+  character:
+    persona:
+      summary: 春香酒楼掌柜，七玄门外门弟子，关照韩家。
+      voice: 依据自己的生活经验说话，不使用游戏或编写术语。
+      evidence_ids: []
+    traits: []
+    values: []
+    emotions: []
+    attitudes: []
+    goals:
+      - id: current-purpose
+        description: 今夜料理酒楼事务；以后可考虑向亲戚介绍学艺机会，须听取韩家和孩子意见。
+        priority: 0.5
+        progress: 0
+        target_ids: []
+        motivated_by_ids: []
+        status: active
+        evidence_ids: []
+    commitments: []
+  belief:
+    local_entities:
+      - id: self
+        name: 韩三叔
+        description: 春香酒楼掌柜，七玄门外门弟子，关照韩家。
+        status: observed
+      - id: location
+        name: 春香酒楼
+        description: 你熟悉这里的出入和用途。
+        status: observed
+      - id: nephew
+        name: 韩立
+        description: 十岁的侄儿，目前还在家中生活。
+        status: observed
+      - id: brother
+        name: 兄长
+        description: 韩立的父亲，家计清苦。
+        status: observed
+    evidence: []
+    claims: []
+    bindings:
+      - local_entity_id: self
+        canonical_entity_ids:
+          - han-uncle
+      - local_entity_id: location
+        canonical_entity_ids:
+          - chunxiang-inn
+      - local_entity_id: nephew
+        canonical_entity_ids:
+          - canon-han-li
+      - local_entity_id: brother
+        canonical_entity_ids:
+          - han-father

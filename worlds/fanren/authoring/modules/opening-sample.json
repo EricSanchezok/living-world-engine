@@ -1,0 +1,4983 @@
+{
+  "id": "opening-sample",
+  "scope": "sample",
+  "template": {
+    "manifest": {
+      "schema_version": 18,
+      "id": "fanren-opening-sample",
+      "name": "凡人修仙传·开篇编写样本",
+      "version": "0.1.0",
+      "description": "人界山村与灵界原创商号的局部编写样本：韩立、药童、化神商行东家三个入口。不是两界完整世界；其余地区、六个出身和全量规模验证仍在制作。",
+      "runtime_defaults": {
+        "max_autonomous_span_seconds": 300,
+        "realtime_interval_ms": 300000,
+        "action_window_ms": 60000
+      },
+      "model_profiles": {
+        "decision": "decision-jev",
+        "creation": "creation-deepseek",
+        "fallback": "decision-deepseek"
+      },
+      "narrative": {
+        "language": "zh-CN",
+        "style": "用具体的处境、动作和对话展现人物；只描写玩家可以感知的信息，不预告小说未来。",
+        "expansion": false
+      }
+    },
+    "laws": {
+      "disclosure": {
+        "default_check_visibility": "full"
+      },
+      "laws": [
+        {
+          "id": "positive-time",
+          "text": "行动需要正数时间；赶路、修炼、检查货物、交谈与制作依内容、距离和手段花费时间。",
+          "severity": "hard"
+        },
+        {
+          "id": "situated-world",
+          "text": "只可从真实位置行动。空间包含关系不是瞬移通道；人界与灵界相互隔离，无已建立且满足条件的跨界手段不能通行。",
+          "severity": "hard"
+        },
+        {
+          "id": "local-knowledge",
+          "text": "人物只依据自己的经历、听闻和推理行动；隐藏灵根、私人动机和异地货物不会自动成为共同知识。",
+          "severity": "hard"
+        },
+        {
+          "id": "open-future",
+          "text": "开篇之后由行动与因果推进；没有强制加入七玄门、强制拜师、强制发现小绿瓶或必然重演小说的要求。",
+          "severity": "hard"
+        },
+        {
+          "id": "root-discovery",
+          "text": "灵根检测揭示既有资质，不能按愿望重写。尚未测过不等于无灵根；普通修炼需要相应资质、功法和时间。",
+          "severity": "hard"
+        },
+        {
+          "id": "learned-means",
+          "text": "境界、已学技能、当前法力、实物与位置共同决定能力。凡人不能凭自称施法；化神修士也不能读取未知事实或替代调查。",
+          "severity": "hard"
+        },
+        {
+          "id": "resource-conservation",
+          "text": "钱币、灵石、粮食、药材和货箱只能从真实库存转移，或经已存在来源与工序生产；消耗、损坏和遗失必须有因果。记账数字不是实物数量。",
+          "severity": "hard"
+        },
+        {
+          "id": "ownership-and-obligation",
+          "text": "持有、所有、管理与受托运输不同。只有实际授权或愿意承担后果的侵夺才能处置他人资产；违反约定产生社会后果，不等于物理上不可能。",
+          "severity": "soft"
+        },
+        {
+          "id": "mana-cost",
+          "text": "施法须有已学手段和足够法力；本样本短程御物一次消耗至少一格法力，持续或大规模作用消耗更多。恢复须真实休息、修炼或已有丹药，不得借交易凭空恢复。",
+          "severity": "hard"
+        },
+        {
+          "id": "sample-boundary",
+          "text": "这是有限地点的编写样本。未建立的地区、功法、特殊根骨改造和跨界通道保留未知，不用临时百科补成事实；人物仍可在已建立场景自由行动。",
+          "severity": "hard"
+        }
+      ]
+    },
+    "mechanics": {
+      "rule_packages": [
+        {
+          "id": "core-resolution",
+          "version": "3.0.0",
+          "config": {}
+        }
+      ],
+      "meters": [
+        {
+          "id": "health",
+          "name": "生命",
+          "min": 0,
+          "max": 100,
+          "thresholds": [
+            {
+              "id": "death-at-zero",
+              "when": {
+                "operator": "lte",
+                "value": 0
+              },
+              "effects": [
+                {
+                  "kind": "set_lifecycle",
+                  "lifecycle": "retired"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mana",
+          "name": "法力",
+          "min": 0,
+          "max": 2000,
+          "thresholds": []
+        }
+      ],
+      "quantities": [
+        {
+          "id": "copper",
+          "name": "铜钱",
+          "unit": "文",
+          "production_law_ids": [
+            "resource-conservation"
+          ],
+          "consumption_law_ids": [
+            "resource-conservation"
+          ]
+        },
+        {
+          "id": "low-stone",
+          "name": "低阶灵石",
+          "unit": "枚",
+          "production_law_ids": [
+            "resource-conservation"
+          ],
+          "consumption_law_ids": [
+            "resource-conservation"
+          ]
+        },
+        {
+          "id": "mid-stone",
+          "name": "中阶灵石",
+          "unit": "枚",
+          "production_law_ids": [
+            "resource-conservation"
+          ],
+          "consumption_law_ids": [
+            "resource-conservation"
+          ]
+        },
+        {
+          "id": "grain",
+          "name": "家用口粮",
+          "unit": "人日份",
+          "production_law_ids": [
+            "resource-conservation"
+          ],
+          "consumption_law_ids": [
+            "resource-conservation"
+          ]
+        },
+        {
+          "id": "herb-packet",
+          "name": "药材包",
+          "unit": "包",
+          "production_law_ids": [
+            "resource-conservation"
+          ],
+          "consumption_law_ids": [
+            "resource-conservation"
+          ]
+        },
+        {
+          "id": "material-crate",
+          "name": "灵材箱",
+          "unit": "箱",
+          "production_law_ids": [
+            "resource-conservation"
+          ],
+          "consumption_law_ids": [
+            "resource-conservation"
+          ]
+        }
+      ],
+      "ratings": [
+        {
+          "id": "cultivation",
+          "name": "修为层次",
+          "min": 0,
+          "max": 8
+        },
+        {
+          "id": "perception",
+          "name": "感知",
+          "min": 0,
+          "max": 8
+        },
+        {
+          "id": "craft",
+          "name": "手艺",
+          "min": 0,
+          "max": 8
+        },
+        {
+          "id": "influence",
+          "name": "交涉",
+          "min": 0,
+          "max": 8
+        },
+        {
+          "id": "force",
+          "name": "体力",
+          "min": 0,
+          "max": 8
+        }
+      ],
+      "impact_profiles": [
+        {
+          "id": "harm",
+          "name": "伤害",
+          "meter_definition_id": "health",
+          "direction": "decrease",
+          "amounts": {
+            "none": 0,
+            "minor": 5,
+            "standard": 15,
+            "major": 40,
+            "decisive": 100
+          }
+        },
+        {
+          "id": "recovery",
+          "name": "疗养",
+          "meter_definition_id": "health",
+          "direction": "increase",
+          "amounts": {
+            "none": 0,
+            "minor": 5,
+            "standard": 15,
+            "major": 40,
+            "decisive": 100
+          }
+        },
+        {
+          "id": "mana-use",
+          "name": "法力消耗",
+          "meter_definition_id": "mana",
+          "direction": "decrease",
+          "amounts": {
+            "none": 0,
+            "minor": 1,
+            "standard": 10,
+            "major": 50,
+            "decisive": 200
+          }
+        }
+      ],
+      "duration_profiles": [
+        {
+          "id": "brief",
+          "name": "短暂作用",
+          "kind": "uses",
+          "uses": 1
+        },
+        {
+          "id": "ongoing",
+          "name": "持续至解除",
+          "kind": "until_cleared"
+        }
+      ],
+      "activity_resources": [
+        {
+          "id": "foreground",
+          "name": "专注行动",
+          "capacity": 1
+        }
+      ],
+      "shared_activity_resources": [],
+      "condition_profiles": [],
+      "random_distributions": [],
+      "world_timers": [],
+      "entity_mechanics_profiles": [
+        {
+          "id": "herbal-apprentice",
+          "name": "山村药童",
+          "meters": [
+            {
+              "definition_id": "health",
+              "current": 100
+            },
+            {
+              "definition_id": "mana",
+              "current": 0
+            }
+          ],
+          "quantities": [
+            {
+              "definition_id": "copper",
+              "amount": 36
+            }
+          ],
+          "ratings": [
+            {
+              "definition_id": "cultivation",
+              "value": 0
+            },
+            {
+              "definition_id": "perception",
+              "value": 1
+            },
+            {
+              "definition_id": "craft",
+              "value": 2
+            },
+            {
+              "definition_id": "influence",
+              "value": 1
+            },
+            {
+              "definition_id": "force",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "spirit-merchant",
+          "name": "化神商行东家",
+          "meters": [
+            {
+              "definition_id": "health",
+              "current": 100
+            },
+            {
+              "definition_id": "mana",
+              "current": 1200
+            }
+          ],
+          "quantities": [
+            {
+              "definition_id": "low-stone",
+              "amount": 8000
+            },
+            {
+              "definition_id": "mid-stone",
+              "amount": 80
+            }
+          ],
+          "ratings": [
+            {
+              "definition_id": "cultivation",
+              "value": 5
+            },
+            {
+              "definition_id": "perception",
+              "value": 5
+            },
+            {
+              "definition_id": "craft",
+              "value": 2
+            },
+            {
+              "definition_id": "influence",
+              "value": 4
+            },
+            {
+              "definition_id": "force",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "adjudication_calibrations": [
+        {
+          "id": "honest-count",
+          "situation": "在近处逐一核对没有隐藏的货箱数量。",
+          "difficulty": "automatic",
+          "risk": "safe",
+          "effect": "standard",
+          "explanation": "真实库存给出结果，交接单的数字不能覆盖实物。"
+        },
+        {
+          "id": "known-levitation",
+          "situation": "化神东家用已学御物法诀将面前的自有护身佩移到桌上。",
+          "difficulty": "automatic",
+          "risk": "safe",
+          "effect": "standard",
+          "explanation": "需要实际法宝、距离与法力；动作消耗至少一格法力，不能复制物品。"
+        },
+        {
+          "id": "unsupported-spell",
+          "situation": "尚未修炼的药童仅凭声称便施放御物术。",
+          "difficulty": "blocked",
+          "risk": "safe",
+          "effect": "none",
+          "explanation": "没有功法、法力与学习经历作为手段。"
+        },
+        {
+          "id": "private-sale",
+          "situation": "药童未获授权便私卖师父药材。",
+          "difficulty": "opposed",
+          "risk": "risky",
+          "effect": "standard",
+          "explanation": "所有权与伙伴反应影响结果，不能把药童的自然语言声明作为授权。"
+        }
+      ],
+      "temporal_profiles": [
+        {
+          "id": "brief",
+          "name": "简短动作",
+          "kind": "fixed",
+          "duration_seconds": 10,
+          "checkpoint_seconds": 10,
+          "selection": {
+            "semantic_tags": [
+              "short"
+            ],
+            "evidence_requirement": "none"
+          },
+          "interruptible": true,
+          "resource_claims": [
+            {
+              "resource_id": "foreground",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "conversation",
+          "name": "一段交谈与检查",
+          "kind": "fixed",
+          "duration_seconds": 60,
+          "checkpoint_seconds": 60,
+          "selection": {
+            "semantic_tags": [
+              "conversation"
+            ],
+            "evidence_requirement": "none"
+          },
+          "interruptible": true,
+          "resource_claims": [
+            {
+              "resource_id": "foreground",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "explicit",
+          "name": "明确时长",
+          "kind": "fixed",
+          "duration_seconds": 300,
+          "checkpoint_seconds": 300,
+          "selection": {
+            "semantic_tags": [
+              "explicit-duration"
+            ],
+            "evidence_requirement": "explicit_duration"
+          },
+          "interruptible": true,
+          "resource_claims": [
+            {
+              "resource_id": "foreground",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "travel",
+          "name": "随条件推进的行程",
+          "kind": "conditional",
+          "selection": {
+            "semantic_tags": [
+              "travel"
+            ],
+            "evidence_requirement": "none"
+          },
+          "interruptible": true,
+          "resource_claims": [
+            {
+              "resource_id": "foreground",
+              "amount": 1
+            }
+          ],
+          "check_every_seconds": 300
+        },
+        {
+          "id": "wait",
+          "name": "等待条件",
+          "kind": "conditional",
+          "selection": {
+            "semantic_tags": [
+              "conditional-wait"
+            ],
+            "evidence_requirement": "none"
+          },
+          "interruptible": true,
+          "resource_claims": [
+            {
+              "resource_id": "foreground",
+              "amount": 1
+            }
+          ],
+          "check_every_seconds": 300
+        },
+        {
+          "id": "practice",
+          "name": "持续修炼或值守",
+          "kind": "ongoing",
+          "selection": {
+            "semantic_tags": [
+              "open-ended",
+              "reconnaissance"
+            ],
+            "evidence_requirement": "none"
+          },
+          "interruptible": true,
+          "resource_claims": [
+            {
+              "resource_id": "foreground",
+              "amount": 1
+            }
+          ],
+          "checkpoint_seconds": 300
+        }
+      ],
+      "temporal_profile_coverage": {
+        "required_semantic_tags": [
+          "short",
+          "conversation",
+          "explicit-duration",
+          "travel",
+          "conditional-wait",
+          "open-ended",
+          "reconnaissance"
+        ]
+      },
+      "temporal_calibrations": [
+        {
+          "id": "speech-time",
+          "situation": "向熟人说清一段要求或核对数个货箱。",
+          "profile_id": "conversation",
+          "explanation": "按实际话语和检查量估计，不因瞬间输入便瞬间完成。"
+        },
+        {
+          "id": "simple-time",
+          "situation": "把近处一件轻物移到身旁或看一个清晰标记。",
+          "profile_id": "brief",
+          "explanation": "短动作仍需时间；施法另消耗法力。"
+        }
+      ]
+    },
+    "entities": [
+      {
+        "id": "human-realm",
+        "kind": "location",
+        "name": "人界",
+        "description": "此处为人界空间。样本仅展开山村与青牛镇附近；其他地区尚未写实。",
+        "placement": null,
+        "facts": [
+          {
+            "id": "human-realm-night",
+            "predicate": "local-time",
+            "value": {
+              "kind": "text",
+              "value": "当地夜间，光线和作息受夜色影响。"
+            },
+            "description": "当地夜间，光线和作息受夜色影响。",
+            "access": {
+              "kind": "public"
+            }
+          }
+        ],
+        "meters": [],
+        "quantities": [],
+        "ratings": []
+      },
+      {
+        "id": "spirit-realm",
+        "kind": "location",
+        "name": "灵界",
+        "description": "与人界分离的界面；普通行路不能跨界。样本仅展开天渊城一处原创商号。",
+        "placement": null,
+        "facts": [
+          {
+            "id": "spirit-realm-night",
+            "predicate": "local-time",
+            "value": {
+              "kind": "text",
+              "value": "当地夜间，光线和作息受夜色影响。"
+            },
+            "description": "当地夜间，光线和作息受夜色影响。",
+            "access": {
+              "kind": "public"
+            }
+          }
+        ],
+        "meters": [],
+        "quantities": [],
+        "ratings": []
+      },
+      {
+        "id": "han-village",
+        "kind": "location",
+        "name": "韩立居住的小山村",
+        "description": "山村的原著正式村名未明；这里保留无名状态，不冒认别的聚落。",
+        "placement": "human-realm",
+        "facts": [
+          {
+            "id": "han-village-night",
+            "predicate": "local-time",
+            "value": {
+              "kind": "text",
+              "value": "当地夜间，光线和作息受夜色影响。"
+            },
+            "description": "当地夜间，光线和作息受夜色影响。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "han-village-route-village-path",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "village-path"
+            },
+            "description": "有普通道路通往村边小路；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "han-village-route-qingniu-town",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "qingniu-town"
+            },
+            "description": "有普通道路通往青牛镇；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          }
+        ],
+        "meters": [],
+        "quantities": [],
+        "ratings": []
+      },
+      {
+        "id": "han-home",
+        "kind": "location",
+        "name": "韩家",
+        "description": "泥墙草顶的贫寒农家，房内有旧床与旧被。",
+        "placement": "han-village",
+        "facts": [
+          {
+            "id": "han-home-night",
+            "predicate": "local-time",
+            "value": {
+              "kind": "text",
+              "value": "当地夜间，光线和作息受夜色影响。"
+            },
+            "description": "当地夜间，光线和作息受夜色影响。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "han-home-route-village-path",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "village-path"
+            },
+            "description": "有普通道路通往村边小路；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          }
+        ],
+        "meters": [],
+        "quantities": [],
+        "ratings": []
+      },
+      {
+        "id": "village-path",
+        "kind": "location",
+        "name": "村边小路",
+        "description": "村边通向山坡和其他农家的土路；路程与具体地形为样本补充。",
+        "placement": "han-village",
+        "facts": [
+          {
+            "id": "village-path-night",
+            "predicate": "local-time",
+            "value": {
+              "kind": "text",
+              "value": "当地夜间，光线和作息受夜色影响。"
+            },
+            "description": "当地夜间，光线和作息受夜色影响。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "village-path-route-han-home",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "han-home"
+            },
+            "description": "有普通道路通往韩家；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "village-path-route-han-village",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "han-village"
+            },
+            "description": "有普通道路通往韩立居住的小山村；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          }
+        ],
+        "meters": [],
+        "quantities": [],
+        "ratings": []
+      },
+      {
+        "id": "qingniu-town",
+        "kind": "location",
+        "name": "青牛镇",
+        "description": "山民有时称这里为青牛城，东西主街贯穿镇子。",
+        "placement": "human-realm",
+        "facts": [
+          {
+            "id": "qingniu-town-night",
+            "predicate": "local-time",
+            "value": {
+              "kind": "text",
+              "value": "当地夜间，光线和作息受夜色影响。"
+            },
+            "description": "当地夜间，光线和作息受夜色影响。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "qingniu-town-route-han-village",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "han-village"
+            },
+            "description": "有普通道路通往韩立居住的小山村；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "qingniu-town-route-chunxiang-inn",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "chunxiang-inn"
+            },
+            "description": "有普通道路通往春香酒楼；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "qingniu-town-route-smith-workshop",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "smith-workshop"
+            },
+            "description": "有普通道路通往镇中铁匠铺；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "qingniu-town-route-songxi-hamlet",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "songxi-hamlet"
+            },
+            "description": "有普通道路通往松溪坳；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          }
+        ],
+        "meters": [],
+        "quantities": [],
+        "ratings": []
+      },
+      {
+        "id": "chunxiang-inn",
+        "kind": "location",
+        "name": "春香酒楼",
+        "description": "七玄门经营的酒楼；三叔在此任掌柜。",
+        "placement": "qingniu-town",
+        "facts": [
+          {
+            "id": "chunxiang-inn-night",
+            "predicate": "local-time",
+            "value": {
+              "kind": "text",
+              "value": "当地夜间，光线和作息受夜色影响。"
+            },
+            "description": "当地夜间，光线和作息受夜色影响。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "chunxiang-inn-route-qingniu-town",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "qingniu-town"
+            },
+            "description": "有普通道路通往青牛镇；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          }
+        ],
+        "meters": [],
+        "quantities": [],
+        "ratings": []
+      },
+      {
+        "id": "smith-workshop",
+        "kind": "location",
+        "name": "镇中铁匠铺",
+        "description": "供韩家大哥学艺的普通铁匠作坊；精确店名与地址属于样本补充。",
+        "placement": "qingniu-town",
+        "facts": [
+          {
+            "id": "smith-workshop-night",
+            "predicate": "local-time",
+            "value": {
+              "kind": "text",
+              "value": "当地夜间，光线和作息受夜色影响。"
+            },
+            "description": "当地夜间，光线和作息受夜色影响。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "smith-workshop-route-qingniu-town",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "qingniu-town"
+            },
+            "description": "有普通道路通往青牛镇；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          }
+        ],
+        "meters": [],
+        "quantities": [],
+        "ratings": []
+      },
+      {
+        "id": "songxi-hamlet",
+        "kind": "location",
+        "name": "松溪坳",
+        "description": "青牛镇周边的原创小村。乡医、农户与收药人保持生计往来。",
+        "placement": "human-realm",
+        "facts": [
+          {
+            "id": "songxi-hamlet-night",
+            "predicate": "local-time",
+            "value": {
+              "kind": "text",
+              "value": "当地夜间，光线和作息受夜色影响。"
+            },
+            "description": "当地夜间，光线和作息受夜色影响。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "songxi-hamlet-route-qingniu-town",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "qingniu-town"
+            },
+            "description": "有普通道路通往青牛镇；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "songxi-hamlet-route-herbal-yard",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "herbal-yard"
+            },
+            "description": "有普通道路通往陈守拙的药院；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          }
+        ],
+        "meters": [],
+        "quantities": [],
+        "ratings": []
+      },
+      {
+        "id": "herbal-yard",
+        "kind": "location",
+        "name": "陈守拙的药院",
+        "description": "院里有晾药架和药房，十二包药材已备妥。",
+        "placement": "songxi-hamlet",
+        "facts": [
+          {
+            "id": "herbal-yard-night",
+            "predicate": "local-time",
+            "value": {
+              "kind": "text",
+              "value": "当地夜间，光线和作息受夜色影响。"
+            },
+            "description": "当地夜间，光线和作息受夜色影响。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "herbal-yard-route-songxi-hamlet",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "songxi-hamlet"
+            },
+            "description": "有普通道路通往松溪坳；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          }
+        ],
+        "meters": [],
+        "quantities": [],
+        "ratings": []
+      },
+      {
+        "id": "tianyuan-city",
+        "kind": "location",
+        "name": "天渊城",
+        "description": "灵界人妖两族通向蛮荒的驻守与贸易城市；样本未生成整座城市人口。",
+        "placement": "spirit-realm",
+        "facts": [
+          {
+            "id": "tianyuan-city-night",
+            "predicate": "local-time",
+            "value": {
+              "kind": "text",
+              "value": "当地夜间，光线和作息受夜色影响。"
+            },
+            "description": "当地夜间，光线和作息受夜色影响。",
+            "access": {
+              "kind": "public"
+            }
+          }
+        ],
+        "meters": [],
+        "quantities": [],
+        "ratings": []
+      },
+      {
+        "id": "qinghe-store",
+        "kind": "location",
+        "name": "青禾灵材行仓院",
+        "description": "原创商号的验货、议价处。账房与私人修炼处所用途不同。",
+        "placement": "tianyuan-city",
+        "facts": [
+          {
+            "id": "qinghe-store-night",
+            "predicate": "local-time",
+            "value": {
+              "kind": "text",
+              "value": "当地夜间，光线和作息受夜色影响。"
+            },
+            "description": "当地夜间，光线和作息受夜色影响。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "qinghe-store-route-qinghe-study",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "qinghe-study"
+            },
+            "description": "有普通道路通往东家静室；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "qinghe-store-route-spirit-wharf",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "spirit-wharf"
+            },
+            "description": "有普通道路通往城中转运货场；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          }
+        ],
+        "meters": [],
+        "quantities": [],
+        "ratings": []
+      },
+      {
+        "id": "qinghe-study",
+        "kind": "location",
+        "name": "东家静室",
+        "description": "商行东家的独立修炼居所，设有自用防护禁制。",
+        "placement": "tianyuan-city",
+        "facts": [
+          {
+            "id": "qinghe-study-night",
+            "predicate": "local-time",
+            "value": {
+              "kind": "text",
+              "value": "当地夜间，光线和作息受夜色影响。"
+            },
+            "description": "当地夜间，光线和作息受夜色影响。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "qinghe-study-route-qinghe-store",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "qinghe-store"
+            },
+            "description": "有普通道路通往青禾灵材行仓院；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          }
+        ],
+        "meters": [],
+        "quantities": [],
+        "ratings": []
+      },
+      {
+        "id": "spirit-wharf",
+        "kind": "location",
+        "name": "城中转运货场",
+        "description": "原创转运节点；货物停放与交接需要实际核对。",
+        "placement": "tianyuan-city",
+        "facts": [
+          {
+            "id": "spirit-wharf-night",
+            "predicate": "local-time",
+            "value": {
+              "kind": "text",
+              "value": "当地夜间，光线和作息受夜色影响。"
+            },
+            "description": "当地夜间，光线和作息受夜色影响。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "spirit-wharf-route-qinghe-store",
+            "predicate": "route-to",
+            "value": {
+              "kind": "entity",
+              "entityId": "qinghe-store"
+            },
+            "description": "有普通道路通往青禾灵材行仓院；实际行程受夜间照明、地形和交通工具约束。",
+            "access": {
+              "kind": "public"
+            }
+          }
+        ],
+        "meters": [],
+        "quantities": [],
+        "ratings": []
+      },
+      {
+        "id": "qixuan-sect",
+        "kind": "organization",
+        "name": "七玄门",
+        "description": "地方江湖门派，尚未与韩立建立入门关系。",
+        "placement": null,
+        "facts": [
+          {
+            "id": "qixuan-sect-rival-of-wild-wolf-gang",
+            "predicate": "rival-of",
+            "value": {
+              "kind": "entity",
+              "entityId": "wild-wolf-gang"
+            },
+            "description": "与野狼帮存在地方利益竞争，未来冲突取决于双方行动。",
+            "access": {
+              "kind": "private"
+            }
+          }
+        ],
+        "meters": [],
+        "quantities": [],
+        "ratings": []
+      },
+      {
+        "id": "wild-wolf-gang",
+        "kind": "organization",
+        "name": "野狼帮",
+        "description": "与七玄门争夺地盘和经营利益的地方势力。",
+        "placement": null,
+        "facts": [],
+        "meters": [],
+        "quantities": [],
+        "ratings": []
+      },
+      {
+        "id": "canon-han-li",
+        "kind": "person",
+        "name": "韩立",
+        "description": "十岁的农家孩子，聪明而早熟，尚未修仙或加入任何门派。",
+        "placement": "han-home",
+        "facts": [
+          {
+            "id": "han-age",
+            "predicate": "age",
+            "value": {
+              "kind": "number",
+              "value": 10
+            },
+            "description": "开篇韩立十岁。",
+            "access": {
+              "kind": "public"
+            }
+          },
+          {
+            "id": "han-root",
+            "predicate": "spirit-root",
+            "value": {
+              "kind": "text",
+              "value": "木水火土四属性伪灵根；本人及家人尚不知情。"
+            },
+            "description": "木水火土四属性伪灵根；本人及家人尚不知情。",
+            "access": {
+              "kind": "private"
+            }
+          },
+          {
+            "id": "han-untrained",
+            "predicate": "cultivation",
+            "value": {
+              "kind": "text",
+              "value": "尚未修仙，也未拜墨大夫为师。"
+            },
+            "description": "尚未修仙，也未拜墨大夫为师。",
+            "access": {
+              "kind": "private"
+            }
+          }
+        ],
+        "meters": [
+          {
+            "id": "canon-han-li-health",
+            "definition_id": "health",
+            "current": 100
+          },
+          {
+            "id": "canon-han-li-mana",
+            "definition_id": "mana",
+            "current": 0
+          }
+        ],
+        "quantities": [],
+        "ratings": [
+          {
+            "id": "canon-han-li-cultivation",
+            "definition_id": "cultivation",
+            "value": 0
+          },
+          {
+            "id": "canon-han-li-perception",
+            "definition_id": "perception",
+            "value": 1
+          },
+          {
+            "id": "canon-han-li-craft",
+            "definition_id": "craft",
+            "value": 1
+          },
+          {
+            "id": "canon-han-li-influence",
+            "definition_id": "influence",
+            "value": 1
+          },
+          {
+            "id": "canon-han-li-force",
+            "definition_id": "force",
+            "value": 1
+          }
+        ],
+        "agent": {
+          "id": "canon-han-li",
+          "model_profiles": {
+            "decision": "decision-jev",
+            "creation": "creation-deepseek",
+            "fallback": "decision-deepseek"
+          },
+          "character": {
+            "persona": {
+              "summary": "十岁的农家孩子，聪明而早熟，尚未修仙或加入任何门派。",
+              "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+            },
+            "goals": [
+              {
+                "id": "current-purpose",
+                "description": "在夜里休息，明早准备采柴并给妹妹带些浆果。",
+                "priority": 0.5,
+                "progress": 0
+              }
+            ]
+          },
+          "belief": {
+            "local_entities": [
+              {
+                "id": "self",
+                "name": "韩立",
+                "description": "十岁的农家孩子，聪明而早熟，尚未修仙或加入任何门派。",
+                "status": "observed"
+              },
+              {
+                "id": "location",
+                "name": "韩家",
+                "description": "你熟悉这里的出入和用途。",
+                "status": "observed"
+              },
+              {
+                "id": "family-1",
+                "name": "韩父",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-2",
+                "name": "韩母",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-3",
+                "name": "韩家大哥",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-4",
+                "name": "韩铸",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-5",
+                "name": "韩家姐姐",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-6",
+                "name": "韩家小妹",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "uncle",
+                "name": "韩三叔",
+                "description": "家中的亲戚，在镇上任掌柜，曾帮助家里。",
+                "status": "observed"
+              }
+            ],
+            "evidence": [
+              {
+                "id": "han-outside-wish-evidence",
+                "kind": "observation",
+                "description": "开篇前亲历或长期相处所得：想看看村外世界，尚未告诉家里人。",
+                "sourceId": null,
+                "step": 0
+              }
+            ],
+            "claims": [
+              {
+                "id": "han-outside-wish",
+                "subjectId": "self",
+                "predicate": "private-wish",
+                "value": {
+                  "kind": "text",
+                  "value": "想看看村外世界，尚未告诉家里人。"
+                },
+                "description": "想看看村外世界，尚未告诉家里人。",
+                "stance": "believed",
+                "confidence": 1,
+                "evidenceIds": [
+                  "han-outside-wish-evidence"
+                ]
+              }
+            ],
+            "bindings": [
+              {
+                "local_entity_id": "self",
+                "canonical_entity_ids": [
+                  "canon-han-li"
+                ]
+              },
+              {
+                "local_entity_id": "location",
+                "canonical_entity_ids": [
+                  "han-home"
+                ]
+              },
+              {
+                "local_entity_id": "family-1",
+                "canonical_entity_ids": [
+                  "han-father"
+                ]
+              },
+              {
+                "local_entity_id": "family-2",
+                "canonical_entity_ids": [
+                  "han-mother"
+                ]
+              },
+              {
+                "local_entity_id": "family-3",
+                "canonical_entity_ids": [
+                  "han-eldest-brother"
+                ]
+              },
+              {
+                "local_entity_id": "family-4",
+                "canonical_entity_ids": [
+                  "han-zhu"
+                ]
+              },
+              {
+                "local_entity_id": "family-5",
+                "canonical_entity_ids": [
+                  "han-elder-sister"
+                ]
+              },
+              {
+                "local_entity_id": "family-6",
+                "canonical_entity_ids": [
+                  "han-younger-sister"
+                ]
+              },
+              {
+                "local_entity_id": "uncle",
+                "canonical_entity_ids": [
+                  "han-uncle"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "han-father",
+        "kind": "person",
+        "name": "韩父",
+        "description": "韩立的父亲，操持家计，对尚未听闻的门派招收并不知情。",
+        "placement": "han-home",
+        "facts": [
+          {
+            "id": "han-father-family-of-canon-han-li",
+            "predicate": "family-of",
+            "value": {
+              "kind": "entity",
+              "entityId": "canon-han-li"
+            },
+            "description": "与韩立属于同一个家庭。",
+            "access": {
+              "kind": "private"
+            }
+          }
+        ],
+        "meters": [
+          {
+            "id": "han-father-health",
+            "definition_id": "health",
+            "current": 100
+          },
+          {
+            "id": "han-father-mana",
+            "definition_id": "mana",
+            "current": 0
+          }
+        ],
+        "quantities": [],
+        "ratings": [
+          {
+            "id": "han-father-cultivation",
+            "definition_id": "cultivation",
+            "value": 0
+          },
+          {
+            "id": "han-father-perception",
+            "definition_id": "perception",
+            "value": 1
+          },
+          {
+            "id": "han-father-craft",
+            "definition_id": "craft",
+            "value": 1
+          },
+          {
+            "id": "han-father-influence",
+            "definition_id": "influence",
+            "value": 1
+          },
+          {
+            "id": "han-father-force",
+            "definition_id": "force",
+            "value": 1
+          }
+        ],
+        "agent": {
+          "id": "han-father",
+          "model_profiles": {
+            "decision": "decision-jev",
+            "creation": "creation-deepseek",
+            "fallback": "decision-deepseek"
+          },
+          "character": {
+            "persona": {
+              "summary": "韩立的父亲，操持家计，对尚未听闻的门派招收并不知情。",
+              "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+            },
+            "goals": [
+              {
+                "id": "current-purpose",
+                "description": "休息，明日照料家庭生计。",
+                "priority": 0.5,
+                "progress": 0
+              }
+            ]
+          },
+          "belief": {
+            "local_entities": [
+              {
+                "id": "self",
+                "name": "韩父",
+                "description": "韩立的父亲，操持家计，对尚未听闻的门派招收并不知情。",
+                "status": "observed"
+              },
+              {
+                "id": "location",
+                "name": "韩家",
+                "description": "你熟悉这里的出入和用途。",
+                "status": "observed"
+              },
+              {
+                "id": "family-0",
+                "name": "韩立",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-2",
+                "name": "韩母",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-3",
+                "name": "韩家大哥",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-4",
+                "name": "韩铸",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-5",
+                "name": "韩家姐姐",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-6",
+                "name": "韩家小妹",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "uncle",
+                "name": "韩三叔",
+                "description": "家中的亲戚，在镇上任掌柜，曾帮助家里。",
+                "status": "observed"
+              }
+            ],
+            "evidence": [],
+            "claims": [],
+            "bindings": [
+              {
+                "local_entity_id": "self",
+                "canonical_entity_ids": [
+                  "han-father"
+                ]
+              },
+              {
+                "local_entity_id": "location",
+                "canonical_entity_ids": [
+                  "han-home"
+                ]
+              },
+              {
+                "local_entity_id": "family-0",
+                "canonical_entity_ids": [
+                  "canon-han-li"
+                ]
+              },
+              {
+                "local_entity_id": "family-2",
+                "canonical_entity_ids": [
+                  "han-mother"
+                ]
+              },
+              {
+                "local_entity_id": "family-3",
+                "canonical_entity_ids": [
+                  "han-eldest-brother"
+                ]
+              },
+              {
+                "local_entity_id": "family-4",
+                "canonical_entity_ids": [
+                  "han-zhu"
+                ]
+              },
+              {
+                "local_entity_id": "family-5",
+                "canonical_entity_ids": [
+                  "han-elder-sister"
+                ]
+              },
+              {
+                "local_entity_id": "family-6",
+                "canonical_entity_ids": [
+                  "han-younger-sister"
+                ]
+              },
+              {
+                "local_entity_id": "uncle",
+                "canonical_entity_ids": [
+                  "han-uncle"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "han-mother",
+        "kind": "person",
+        "name": "韩母",
+        "description": "韩立的母亲，关心孩子吃穿和身体。",
+        "placement": "han-home",
+        "facts": [
+          {
+            "id": "han-mother-family-of-canon-han-li",
+            "predicate": "family-of",
+            "value": {
+              "kind": "entity",
+              "entityId": "canon-han-li"
+            },
+            "description": "与韩立属于同一个家庭。",
+            "access": {
+              "kind": "private"
+            }
+          }
+        ],
+        "meters": [
+          {
+            "id": "han-mother-health",
+            "definition_id": "health",
+            "current": 100
+          },
+          {
+            "id": "han-mother-mana",
+            "definition_id": "mana",
+            "current": 0
+          }
+        ],
+        "quantities": [],
+        "ratings": [
+          {
+            "id": "han-mother-cultivation",
+            "definition_id": "cultivation",
+            "value": 0
+          },
+          {
+            "id": "han-mother-perception",
+            "definition_id": "perception",
+            "value": 1
+          },
+          {
+            "id": "han-mother-craft",
+            "definition_id": "craft",
+            "value": 1
+          },
+          {
+            "id": "han-mother-influence",
+            "definition_id": "influence",
+            "value": 1
+          },
+          {
+            "id": "han-mother-force",
+            "definition_id": "force",
+            "value": 1
+          }
+        ],
+        "agent": {
+          "id": "han-mother",
+          "model_profiles": {
+            "decision": "decision-jev",
+            "creation": "creation-deepseek",
+            "fallback": "decision-deepseek"
+          },
+          "character": {
+            "persona": {
+              "summary": "韩立的母亲，关心孩子吃穿和身体。",
+              "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+            },
+            "goals": [
+              {
+                "id": "current-purpose",
+                "description": "安排家用并歇息。",
+                "priority": 0.5,
+                "progress": 0
+              }
+            ]
+          },
+          "belief": {
+            "local_entities": [
+              {
+                "id": "self",
+                "name": "韩母",
+                "description": "韩立的母亲，关心孩子吃穿和身体。",
+                "status": "observed"
+              },
+              {
+                "id": "location",
+                "name": "韩家",
+                "description": "你熟悉这里的出入和用途。",
+                "status": "observed"
+              },
+              {
+                "id": "family-0",
+                "name": "韩立",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-1",
+                "name": "韩父",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-3",
+                "name": "韩家大哥",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-4",
+                "name": "韩铸",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-5",
+                "name": "韩家姐姐",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-6",
+                "name": "韩家小妹",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "uncle",
+                "name": "韩三叔",
+                "description": "家中的亲戚，在镇上任掌柜，曾帮助家里。",
+                "status": "observed"
+              }
+            ],
+            "evidence": [],
+            "claims": [],
+            "bindings": [
+              {
+                "local_entity_id": "self",
+                "canonical_entity_ids": [
+                  "han-mother"
+                ]
+              },
+              {
+                "local_entity_id": "location",
+                "canonical_entity_ids": [
+                  "han-home"
+                ]
+              },
+              {
+                "local_entity_id": "family-0",
+                "canonical_entity_ids": [
+                  "canon-han-li"
+                ]
+              },
+              {
+                "local_entity_id": "family-1",
+                "canonical_entity_ids": [
+                  "han-father"
+                ]
+              },
+              {
+                "local_entity_id": "family-3",
+                "canonical_entity_ids": [
+                  "han-eldest-brother"
+                ]
+              },
+              {
+                "local_entity_id": "family-4",
+                "canonical_entity_ids": [
+                  "han-zhu"
+                ]
+              },
+              {
+                "local_entity_id": "family-5",
+                "canonical_entity_ids": [
+                  "han-elder-sister"
+                ]
+              },
+              {
+                "local_entity_id": "family-6",
+                "canonical_entity_ids": [
+                  "han-younger-sister"
+                ]
+              },
+              {
+                "local_entity_id": "uncle",
+                "canonical_entity_ids": [
+                  "han-uncle"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "han-eldest-brother",
+        "kind": "person",
+        "name": "韩家大哥",
+        "description": "韩立的大哥，在铁匠铺学艺；原文此处没有给出姓名。",
+        "placement": "smith-workshop",
+        "facts": [
+          {
+            "id": "han-eldest-brother-family-of-canon-han-li",
+            "predicate": "family-of",
+            "value": {
+              "kind": "entity",
+              "entityId": "canon-han-li"
+            },
+            "description": "与韩立属于同一个家庭。",
+            "access": {
+              "kind": "private"
+            }
+          }
+        ],
+        "meters": [
+          {
+            "id": "han-eldest-brother-health",
+            "definition_id": "health",
+            "current": 100
+          },
+          {
+            "id": "han-eldest-brother-mana",
+            "definition_id": "mana",
+            "current": 0
+          }
+        ],
+        "quantities": [],
+        "ratings": [
+          {
+            "id": "han-eldest-brother-cultivation",
+            "definition_id": "cultivation",
+            "value": 0
+          },
+          {
+            "id": "han-eldest-brother-perception",
+            "definition_id": "perception",
+            "value": 1
+          },
+          {
+            "id": "han-eldest-brother-craft",
+            "definition_id": "craft",
+            "value": 1
+          },
+          {
+            "id": "han-eldest-brother-influence",
+            "definition_id": "influence",
+            "value": 1
+          },
+          {
+            "id": "han-eldest-brother-force",
+            "definition_id": "force",
+            "value": 1
+          }
+        ],
+        "agent": {
+          "id": "han-eldest-brother",
+          "model_profiles": {
+            "decision": "decision-jev",
+            "creation": "creation-deepseek",
+            "fallback": "decision-deepseek"
+          },
+          "character": {
+            "persona": {
+              "summary": "韩立的大哥，在铁匠铺学艺；原文此处没有给出姓名。",
+              "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+            },
+            "goals": [
+              {
+                "id": "current-purpose",
+                "description": "休息，明日继续学艺。",
+                "priority": 0.5,
+                "progress": 0
+              }
+            ]
+          },
+          "belief": {
+            "local_entities": [
+              {
+                "id": "self",
+                "name": "韩家大哥",
+                "description": "韩立的大哥，在铁匠铺学艺；原文此处没有给出姓名。",
+                "status": "observed"
+              },
+              {
+                "id": "location",
+                "name": "镇中铁匠铺",
+                "description": "你熟悉这里的出入和用途。",
+                "status": "observed"
+              },
+              {
+                "id": "family-0",
+                "name": "韩立",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-1",
+                "name": "韩父",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-2",
+                "name": "韩母",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-4",
+                "name": "韩铸",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-5",
+                "name": "韩家姐姐",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-6",
+                "name": "韩家小妹",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "uncle",
+                "name": "韩三叔",
+                "description": "家中的亲戚，在镇上任掌柜，曾帮助家里。",
+                "status": "observed"
+              }
+            ],
+            "evidence": [],
+            "claims": [],
+            "bindings": [
+              {
+                "local_entity_id": "self",
+                "canonical_entity_ids": [
+                  "han-eldest-brother"
+                ]
+              },
+              {
+                "local_entity_id": "location",
+                "canonical_entity_ids": [
+                  "smith-workshop"
+                ]
+              },
+              {
+                "local_entity_id": "family-0",
+                "canonical_entity_ids": [
+                  "canon-han-li"
+                ]
+              },
+              {
+                "local_entity_id": "family-1",
+                "canonical_entity_ids": [
+                  "han-father"
+                ]
+              },
+              {
+                "local_entity_id": "family-2",
+                "canonical_entity_ids": [
+                  "han-mother"
+                ]
+              },
+              {
+                "local_entity_id": "family-4",
+                "canonical_entity_ids": [
+                  "han-zhu"
+                ]
+              },
+              {
+                "local_entity_id": "family-5",
+                "canonical_entity_ids": [
+                  "han-elder-sister"
+                ]
+              },
+              {
+                "local_entity_id": "family-6",
+                "canonical_entity_ids": [
+                  "han-younger-sister"
+                ]
+              },
+              {
+                "local_entity_id": "uncle",
+                "canonical_entity_ids": [
+                  "han-uncle"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "han-zhu",
+        "kind": "person",
+        "name": "韩铸",
+        "description": "韩立的二哥，开篇在韩立身边熟睡。",
+        "placement": "han-home",
+        "facts": [
+          {
+            "id": "han-zhu-family-of-canon-han-li",
+            "predicate": "family-of",
+            "value": {
+              "kind": "entity",
+              "entityId": "canon-han-li"
+            },
+            "description": "与韩立属于同一个家庭。",
+            "access": {
+              "kind": "private"
+            }
+          }
+        ],
+        "meters": [
+          {
+            "id": "han-zhu-health",
+            "definition_id": "health",
+            "current": 100
+          },
+          {
+            "id": "han-zhu-mana",
+            "definition_id": "mana",
+            "current": 0
+          }
+        ],
+        "quantities": [],
+        "ratings": [
+          {
+            "id": "han-zhu-cultivation",
+            "definition_id": "cultivation",
+            "value": 0
+          },
+          {
+            "id": "han-zhu-perception",
+            "definition_id": "perception",
+            "value": 1
+          },
+          {
+            "id": "han-zhu-craft",
+            "definition_id": "craft",
+            "value": 1
+          },
+          {
+            "id": "han-zhu-influence",
+            "definition_id": "influence",
+            "value": 1
+          },
+          {
+            "id": "han-zhu-force",
+            "definition_id": "force",
+            "value": 1
+          }
+        ],
+        "agent": {
+          "id": "han-zhu",
+          "model_profiles": {
+            "decision": "decision-jev",
+            "creation": "creation-deepseek",
+            "fallback": "decision-deepseek"
+          },
+          "character": {
+            "persona": {
+              "summary": "韩立的二哥，开篇在韩立身边熟睡。",
+              "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+            },
+            "goals": [
+              {
+                "id": "current-purpose",
+                "description": "睡到天亮。",
+                "priority": 0.5,
+                "progress": 0
+              }
+            ]
+          },
+          "belief": {
+            "local_entities": [
+              {
+                "id": "self",
+                "name": "韩铸",
+                "description": "韩立的二哥，开篇在韩立身边熟睡。",
+                "status": "observed"
+              },
+              {
+                "id": "location",
+                "name": "韩家",
+                "description": "你熟悉这里的出入和用途。",
+                "status": "observed"
+              },
+              {
+                "id": "family-0",
+                "name": "韩立",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-1",
+                "name": "韩父",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-2",
+                "name": "韩母",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-3",
+                "name": "韩家大哥",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-5",
+                "name": "韩家姐姐",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-6",
+                "name": "韩家小妹",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "uncle",
+                "name": "韩三叔",
+                "description": "家中的亲戚，在镇上任掌柜，曾帮助家里。",
+                "status": "observed"
+              }
+            ],
+            "evidence": [],
+            "claims": [],
+            "bindings": [
+              {
+                "local_entity_id": "self",
+                "canonical_entity_ids": [
+                  "han-zhu"
+                ]
+              },
+              {
+                "local_entity_id": "location",
+                "canonical_entity_ids": [
+                  "han-home"
+                ]
+              },
+              {
+                "local_entity_id": "family-0",
+                "canonical_entity_ids": [
+                  "canon-han-li"
+                ]
+              },
+              {
+                "local_entity_id": "family-1",
+                "canonical_entity_ids": [
+                  "han-father"
+                ]
+              },
+              {
+                "local_entity_id": "family-2",
+                "canonical_entity_ids": [
+                  "han-mother"
+                ]
+              },
+              {
+                "local_entity_id": "family-3",
+                "canonical_entity_ids": [
+                  "han-eldest-brother"
+                ]
+              },
+              {
+                "local_entity_id": "family-5",
+                "canonical_entity_ids": [
+                  "han-elder-sister"
+                ]
+              },
+              {
+                "local_entity_id": "family-6",
+                "canonical_entity_ids": [
+                  "han-younger-sister"
+                ]
+              },
+              {
+                "local_entity_id": "uncle",
+                "canonical_entity_ids": [
+                  "han-uncle"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "han-elder-sister",
+        "kind": "person",
+        "name": "韩家姐姐",
+        "description": "韩立的姐姐，姓名与精确年龄未有开篇依据。",
+        "placement": "han-home",
+        "facts": [
+          {
+            "id": "han-elder-sister-family-of-canon-han-li",
+            "predicate": "family-of",
+            "value": {
+              "kind": "entity",
+              "entityId": "canon-han-li"
+            },
+            "description": "与韩立属于同一个家庭。",
+            "access": {
+              "kind": "private"
+            }
+          }
+        ],
+        "meters": [
+          {
+            "id": "han-elder-sister-health",
+            "definition_id": "health",
+            "current": 100
+          },
+          {
+            "id": "han-elder-sister-mana",
+            "definition_id": "mana",
+            "current": 0
+          }
+        ],
+        "quantities": [],
+        "ratings": [
+          {
+            "id": "han-elder-sister-cultivation",
+            "definition_id": "cultivation",
+            "value": 0
+          },
+          {
+            "id": "han-elder-sister-perception",
+            "definition_id": "perception",
+            "value": 1
+          },
+          {
+            "id": "han-elder-sister-craft",
+            "definition_id": "craft",
+            "value": 1
+          },
+          {
+            "id": "han-elder-sister-influence",
+            "definition_id": "influence",
+            "value": 1
+          },
+          {
+            "id": "han-elder-sister-force",
+            "definition_id": "force",
+            "value": 1
+          }
+        ],
+        "agent": {
+          "id": "han-elder-sister",
+          "model_profiles": {
+            "decision": "decision-jev",
+            "creation": "creation-deepseek",
+            "fallback": "decision-deepseek"
+          },
+          "character": {
+            "persona": {
+              "summary": "韩立的姐姐，姓名与精确年龄未有开篇依据。",
+              "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+            },
+            "goals": [
+              {
+                "id": "current-purpose",
+                "description": "休息，明日料理家务。",
+                "priority": 0.5,
+                "progress": 0
+              }
+            ]
+          },
+          "belief": {
+            "local_entities": [
+              {
+                "id": "self",
+                "name": "韩家姐姐",
+                "description": "韩立的姐姐，姓名与精确年龄未有开篇依据。",
+                "status": "observed"
+              },
+              {
+                "id": "location",
+                "name": "韩家",
+                "description": "你熟悉这里的出入和用途。",
+                "status": "observed"
+              },
+              {
+                "id": "family-0",
+                "name": "韩立",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-1",
+                "name": "韩父",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-2",
+                "name": "韩母",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-3",
+                "name": "韩家大哥",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-4",
+                "name": "韩铸",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-6",
+                "name": "韩家小妹",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "uncle",
+                "name": "韩三叔",
+                "description": "家中的亲戚，在镇上任掌柜，曾帮助家里。",
+                "status": "observed"
+              }
+            ],
+            "evidence": [],
+            "claims": [],
+            "bindings": [
+              {
+                "local_entity_id": "self",
+                "canonical_entity_ids": [
+                  "han-elder-sister"
+                ]
+              },
+              {
+                "local_entity_id": "location",
+                "canonical_entity_ids": [
+                  "han-home"
+                ]
+              },
+              {
+                "local_entity_id": "family-0",
+                "canonical_entity_ids": [
+                  "canon-han-li"
+                ]
+              },
+              {
+                "local_entity_id": "family-1",
+                "canonical_entity_ids": [
+                  "han-father"
+                ]
+              },
+              {
+                "local_entity_id": "family-2",
+                "canonical_entity_ids": [
+                  "han-mother"
+                ]
+              },
+              {
+                "local_entity_id": "family-3",
+                "canonical_entity_ids": [
+                  "han-eldest-brother"
+                ]
+              },
+              {
+                "local_entity_id": "family-4",
+                "canonical_entity_ids": [
+                  "han-zhu"
+                ]
+              },
+              {
+                "local_entity_id": "family-6",
+                "canonical_entity_ids": [
+                  "han-younger-sister"
+                ]
+              },
+              {
+                "local_entity_id": "uncle",
+                "canonical_entity_ids": [
+                  "han-uncle"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "han-younger-sister",
+        "kind": "person",
+        "name": "韩家小妹",
+        "description": "韩立的小妹，喜欢吃红浆果。",
+        "placement": "han-home",
+        "facts": [
+          {
+            "id": "han-younger-sister-family-of-canon-han-li",
+            "predicate": "family-of",
+            "value": {
+              "kind": "entity",
+              "entityId": "canon-han-li"
+            },
+            "description": "与韩立属于同一个家庭。",
+            "access": {
+              "kind": "private"
+            }
+          }
+        ],
+        "meters": [
+          {
+            "id": "han-younger-sister-health",
+            "definition_id": "health",
+            "current": 100
+          },
+          {
+            "id": "han-younger-sister-mana",
+            "definition_id": "mana",
+            "current": 0
+          }
+        ],
+        "quantities": [],
+        "ratings": [
+          {
+            "id": "han-younger-sister-cultivation",
+            "definition_id": "cultivation",
+            "value": 0
+          },
+          {
+            "id": "han-younger-sister-perception",
+            "definition_id": "perception",
+            "value": 1
+          },
+          {
+            "id": "han-younger-sister-craft",
+            "definition_id": "craft",
+            "value": 1
+          },
+          {
+            "id": "han-younger-sister-influence",
+            "definition_id": "influence",
+            "value": 1
+          },
+          {
+            "id": "han-younger-sister-force",
+            "definition_id": "force",
+            "value": 1
+          }
+        ],
+        "agent": {
+          "id": "han-younger-sister",
+          "model_profiles": {
+            "decision": "decision-jev",
+            "creation": "creation-deepseek",
+            "fallback": "decision-deepseek"
+          },
+          "character": {
+            "persona": {
+              "summary": "韩立的小妹，喜欢吃红浆果。",
+              "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+            },
+            "goals": [
+              {
+                "id": "current-purpose",
+                "description": "睡到天亮。",
+                "priority": 0.5,
+                "progress": 0
+              }
+            ]
+          },
+          "belief": {
+            "local_entities": [
+              {
+                "id": "self",
+                "name": "韩家小妹",
+                "description": "韩立的小妹，喜欢吃红浆果。",
+                "status": "observed"
+              },
+              {
+                "id": "location",
+                "name": "韩家",
+                "description": "你熟悉这里的出入和用途。",
+                "status": "observed"
+              },
+              {
+                "id": "family-0",
+                "name": "韩立",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-1",
+                "name": "韩父",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-2",
+                "name": "韩母",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-3",
+                "name": "韩家大哥",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-4",
+                "name": "韩铸",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "family-5",
+                "name": "韩家姐姐",
+                "description": "这是你的家人，你知道其基本生活处境。",
+                "status": "observed"
+              },
+              {
+                "id": "uncle",
+                "name": "韩三叔",
+                "description": "家中的亲戚，在镇上任掌柜，曾帮助家里。",
+                "status": "observed"
+              }
+            ],
+            "evidence": [],
+            "claims": [],
+            "bindings": [
+              {
+                "local_entity_id": "self",
+                "canonical_entity_ids": [
+                  "han-younger-sister"
+                ]
+              },
+              {
+                "local_entity_id": "location",
+                "canonical_entity_ids": [
+                  "han-home"
+                ]
+              },
+              {
+                "local_entity_id": "family-0",
+                "canonical_entity_ids": [
+                  "canon-han-li"
+                ]
+              },
+              {
+                "local_entity_id": "family-1",
+                "canonical_entity_ids": [
+                  "han-father"
+                ]
+              },
+              {
+                "local_entity_id": "family-2",
+                "canonical_entity_ids": [
+                  "han-mother"
+                ]
+              },
+              {
+                "local_entity_id": "family-3",
+                "canonical_entity_ids": [
+                  "han-eldest-brother"
+                ]
+              },
+              {
+                "local_entity_id": "family-4",
+                "canonical_entity_ids": [
+                  "han-zhu"
+                ]
+              },
+              {
+                "local_entity_id": "family-5",
+                "canonical_entity_ids": [
+                  "han-elder-sister"
+                ]
+              },
+              {
+                "local_entity_id": "uncle",
+                "canonical_entity_ids": [
+                  "han-uncle"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "han-uncle",
+        "kind": "person",
+        "name": "韩三叔",
+        "description": "春香酒楼掌柜，七玄门外门弟子，关照韩家。",
+        "placement": "chunxiang-inn",
+        "facts": [
+          {
+            "id": "han-uncle-uncle-of-canon-han-li",
+            "predicate": "uncle-of",
+            "value": {
+              "kind": "entity",
+              "entityId": "canon-han-li"
+            },
+            "description": "韩立的亲三叔。",
+            "access": {
+              "kind": "private"
+            }
+          },
+          {
+            "id": "han-uncle-member-of-qixuan-sect",
+            "predicate": "member-of",
+            "value": {
+              "kind": "entity",
+              "entityId": "qixuan-sect"
+            },
+            "description": "已是七玄门外门弟子。",
+            "access": {
+              "kind": "private"
+            }
+          }
+        ],
+        "meters": [
+          {
+            "id": "han-uncle-health",
+            "definition_id": "health",
+            "current": 100
+          },
+          {
+            "id": "han-uncle-mana",
+            "definition_id": "mana",
+            "current": 0
+          }
+        ],
+        "quantities": [],
+        "ratings": [
+          {
+            "id": "han-uncle-cultivation",
+            "definition_id": "cultivation",
+            "value": 0
+          },
+          {
+            "id": "han-uncle-perception",
+            "definition_id": "perception",
+            "value": 1
+          },
+          {
+            "id": "han-uncle-craft",
+            "definition_id": "craft",
+            "value": 1
+          },
+          {
+            "id": "han-uncle-influence",
+            "definition_id": "influence",
+            "value": 1
+          },
+          {
+            "id": "han-uncle-force",
+            "definition_id": "force",
+            "value": 1
+          }
+        ],
+        "agent": {
+          "id": "han-uncle",
+          "model_profiles": {
+            "decision": "decision-jev",
+            "creation": "creation-deepseek",
+            "fallback": "decision-deepseek"
+          },
+          "character": {
+            "persona": {
+              "summary": "春香酒楼掌柜，七玄门外门弟子，关照韩家。",
+              "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+            },
+            "goals": [
+              {
+                "id": "current-purpose",
+                "description": "今夜料理酒楼事务；以后可考虑向亲戚介绍学艺机会，须听取韩家和孩子意见。",
+                "priority": 0.5,
+                "progress": 0
+              }
+            ]
+          },
+          "belief": {
+            "local_entities": [
+              {
+                "id": "self",
+                "name": "韩三叔",
+                "description": "春香酒楼掌柜，七玄门外门弟子，关照韩家。",
+                "status": "observed"
+              },
+              {
+                "id": "location",
+                "name": "春香酒楼",
+                "description": "你熟悉这里的出入和用途。",
+                "status": "observed"
+              },
+              {
+                "id": "nephew",
+                "name": "韩立",
+                "description": "十岁的侄儿，目前还在家中生活。",
+                "status": "observed"
+              },
+              {
+                "id": "brother",
+                "name": "兄长",
+                "description": "韩立的父亲，家计清苦。",
+                "status": "observed"
+              }
+            ],
+            "evidence": [],
+            "claims": [],
+            "bindings": [
+              {
+                "local_entity_id": "self",
+                "canonical_entity_ids": [
+                  "han-uncle"
+                ]
+              },
+              {
+                "local_entity_id": "location",
+                "canonical_entity_ids": [
+                  "chunxiang-inn"
+                ]
+              },
+              {
+                "local_entity_id": "nephew",
+                "canonical_entity_ids": [
+                  "canon-han-li"
+                ]
+              },
+              {
+                "local_entity_id": "brother",
+                "canonical_entity_ids": [
+                  "han-father"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "old-zhang",
+        "kind": "person",
+        "name": "老张叔",
+        "description": "村中识些字的长者，曾给韩立取名。",
+        "placement": "han-village",
+        "facts": [],
+        "meters": [
+          {
+            "id": "old-zhang-health",
+            "definition_id": "health",
+            "current": 100
+          },
+          {
+            "id": "old-zhang-mana",
+            "definition_id": "mana",
+            "current": 0
+          }
+        ],
+        "quantities": [],
+        "ratings": [
+          {
+            "id": "old-zhang-cultivation",
+            "definition_id": "cultivation",
+            "value": 0
+          },
+          {
+            "id": "old-zhang-perception",
+            "definition_id": "perception",
+            "value": 1
+          },
+          {
+            "id": "old-zhang-craft",
+            "definition_id": "craft",
+            "value": 1
+          },
+          {
+            "id": "old-zhang-influence",
+            "definition_id": "influence",
+            "value": 1
+          },
+          {
+            "id": "old-zhang-force",
+            "definition_id": "force",
+            "value": 1
+          }
+        ],
+        "agent": {
+          "id": "old-zhang",
+          "model_profiles": {
+            "decision": "decision-jev",
+            "creation": "creation-deepseek",
+            "fallback": "decision-deepseek"
+          },
+          "character": {
+            "persona": {
+              "summary": "村中识些字的长者，曾给韩立取名。",
+              "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+            },
+            "goals": [
+              {
+                "id": "current-purpose",
+                "description": "夜里歇息，日间可为乡人解答识字问题。",
+                "priority": 0.5,
+                "progress": 0
+              }
+            ]
+          },
+          "belief": {
+            "local_entities": [
+              {
+                "id": "self",
+                "name": "老张叔",
+                "description": "村中识些字的长者，曾给韩立取名。",
+                "status": "observed"
+              },
+              {
+                "id": "location",
+                "name": "韩立居住的小山村",
+                "description": "你熟悉这里的出入和用途。",
+                "status": "observed"
+              },
+              {
+                "id": "child",
+                "name": "韩立",
+                "description": "你曾给这个孩子取名。",
+                "status": "observed"
+              }
+            ],
+            "evidence": [],
+            "claims": [],
+            "bindings": [
+              {
+                "local_entity_id": "self",
+                "canonical_entity_ids": [
+                  "old-zhang"
+                ]
+              },
+              {
+                "local_entity_id": "location",
+                "canonical_entity_ids": [
+                  "han-village"
+                ]
+              },
+              {
+                "local_entity_id": "child",
+                "canonical_entity_ids": [
+                  "canon-han-li"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "han-household-pantry",
+        "kind": "container",
+        "name": "韩家共用粮袋",
+        "description": "家庭共用的口粮，不能因扮演韩立便当作个人库存。",
+        "placement": "han-home",
+        "facts": [
+          {
+            "id": "han-household-pantry-managed-by-han-mother",
+            "predicate": "managed-by",
+            "value": {
+              "kind": "entity",
+              "entityId": "han-mother"
+            },
+            "description": "母亲管理家庭口粮，家人共同食用。",
+            "access": {
+              "kind": "private"
+            }
+          }
+        ],
+        "meters": [],
+        "quantities": [
+          {
+            "definition_id": "grain",
+            "amount": 12
+          }
+        ],
+        "ratings": []
+      }
+    ],
+    "assets": [],
+    "participation": {
+      "origins": [
+        {
+          "kind": "create",
+          "id": "herbal-apprentice",
+          "title": "山村药童",
+          "fantasy": "带着家人、师父和一份真实委托开始自己的生活。",
+          "description": "十二岁的乡村药童，有基本辨药手艺，尚不知道自己能否修仙。家人健在，生活拮据但正常。",
+          "entity_kind": "person",
+          "spawn_entity_id": "herbal-yard",
+          "persona": "在乡村长大的十二岁药童，学过普通辨药和外伤处理，愿意听取亲近之人的意见；不具备修仙知识。",
+          "default_goal": "决定如何处理药材、购物委托与周荃的报价。",
+          "relationship_hooks": [
+            "母亲林素托你买盐和灯油。",
+            "陈守拙是师父，借给你札记并托你送十二包药材。",
+            "周荃刚向你私下报价。"
+          ],
+          "risks": [
+            "受托药材不能当作自己的财物。",
+            "札记线索需要调查，不保证遇到仙草。"
+          ],
+          "mechanics_profile_id": "herbal-apprentice",
+          "fallback_arrival": "药包已扎好，母亲把购物单放到药篓上。夜色里，周荃又折了回来，压低声音询问能否单独买走其中一株草。师父还不知道这次私下报价。",
+          "initialization": {
+            "entities": [
+              {
+                "id": "herbal-mother",
+                "kind": "person",
+                "name": "林素",
+                "description": "药童的母亲，靠纺织维持家计。",
+                "placement": "herbal-yard",
+                "facts": [
+                  {
+                    "id": "herbal-mother-parent-of-$participant",
+                    "predicate": "parent-of",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "$participant"
+                    },
+                    "description": "林素是药童的母亲。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  }
+                ],
+                "meters": [
+                  {
+                    "id": "herbal-mother-health",
+                    "definition_id": "health",
+                    "current": 100
+                  },
+                  {
+                    "id": "herbal-mother-mana",
+                    "definition_id": "mana",
+                    "current": 0
+                  }
+                ],
+                "quantities": [],
+                "ratings": [
+                  {
+                    "id": "herbal-mother-cultivation",
+                    "definition_id": "cultivation",
+                    "value": 0
+                  },
+                  {
+                    "id": "herbal-mother-perception",
+                    "definition_id": "perception",
+                    "value": 1
+                  },
+                  {
+                    "id": "herbal-mother-craft",
+                    "definition_id": "craft",
+                    "value": 1
+                  },
+                  {
+                    "id": "herbal-mother-influence",
+                    "definition_id": "influence",
+                    "value": 1
+                  },
+                  {
+                    "id": "herbal-mother-force",
+                    "definition_id": "force",
+                    "value": 1
+                  }
+                ],
+                "agent": {
+                  "id": "herbal-mother",
+                  "model_profiles": {
+                    "decision": "decision-jev",
+                    "creation": "creation-deepseek",
+                    "fallback": "decision-deepseek"
+                  },
+                  "character": {
+                    "persona": {
+                      "summary": "靠纺织维持家计，关心孩子的手艺和日常生活。",
+                      "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+                    },
+                    "goals": [
+                      {
+                        "id": "current-purpose",
+                        "description": "把购物单交给孩子，随后回家歇息。",
+                        "priority": 0.5,
+                        "progress": 0
+                      }
+                    ]
+                  },
+                  "belief": {
+                    "local_entities": [
+                      {
+                        "id": "self",
+                        "name": "林素",
+                        "description": "靠纺织维持家计，关心孩子的手艺和日常生活。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "location",
+                        "name": "陈守拙的药院",
+                        "description": "你熟悉这里的出入和用途。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "child",
+                        "name": "孩子",
+                        "description": "从小一起生活，明早进镇；你不知道孩子是否有灵根。",
+                        "status": "observed"
+                      }
+                    ],
+                    "evidence": [],
+                    "claims": [],
+                    "bindings": [
+                      {
+                        "local_entity_id": "self",
+                        "canonical_entity_ids": [
+                          "herbal-mother"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "location",
+                        "canonical_entity_ids": [
+                          "herbal-yard"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "child",
+                        "canonical_entity_ids": [
+                          "$participant"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "id": "herbal-master",
+                "kind": "person",
+                "name": "陈守拙",
+                "description": "在松溪坳行医的乡医。",
+                "placement": "herbal-yard",
+                "facts": [
+                  {
+                    "id": "herbal-master-teacher-of-$participant",
+                    "predicate": "teacher-of",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "$participant"
+                    },
+                    "description": "陈守拙已教药童辨药与处理外伤。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  }
+                ],
+                "meters": [
+                  {
+                    "id": "herbal-master-health",
+                    "definition_id": "health",
+                    "current": 100
+                  },
+                  {
+                    "id": "herbal-master-mana",
+                    "definition_id": "mana",
+                    "current": 0
+                  }
+                ],
+                "quantities": [],
+                "ratings": [
+                  {
+                    "id": "herbal-master-cultivation",
+                    "definition_id": "cultivation",
+                    "value": 0
+                  },
+                  {
+                    "id": "herbal-master-perception",
+                    "definition_id": "perception",
+                    "value": 1
+                  },
+                  {
+                    "id": "herbal-master-craft",
+                    "definition_id": "craft",
+                    "value": 1
+                  },
+                  {
+                    "id": "herbal-master-influence",
+                    "definition_id": "influence",
+                    "value": 1
+                  },
+                  {
+                    "id": "herbal-master-force",
+                    "definition_id": "force",
+                    "value": 1
+                  }
+                ],
+                "agent": {
+                  "id": "herbal-master",
+                  "model_profiles": {
+                    "decision": "decision-jev",
+                    "creation": "creation-deepseek",
+                    "fallback": "decision-deepseek"
+                  },
+                  "character": {
+                    "persona": {
+                      "summary": "乡医，懂普通药草和外伤处理，重视病人和交货信用。",
+                      "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+                    },
+                    "goals": [
+                      {
+                        "id": "current-purpose",
+                        "description": "检查明早交付的十二包药材，不知道周荃刚提出的私下报价。",
+                        "priority": 0.5,
+                        "progress": 0
+                      }
+                    ]
+                  },
+                  "belief": {
+                    "local_entities": [
+                      {
+                        "id": "self",
+                        "name": "陈守拙",
+                        "description": "乡医，懂普通药草和外伤处理，重视病人和交货信用。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "location",
+                        "name": "陈守拙的药院",
+                        "description": "你熟悉这里的出入和用途。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "student",
+                        "name": "药童",
+                        "description": "已跟你学习辨药，受托送货，无权独自卖掉药材。",
+                        "status": "observed"
+                      }
+                    ],
+                    "evidence": [],
+                    "claims": [],
+                    "bindings": [
+                      {
+                        "local_entity_id": "self",
+                        "canonical_entity_ids": [
+                          "herbal-master"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "location",
+                        "canonical_entity_ids": [
+                          "herbal-yard"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "student",
+                        "canonical_entity_ids": [
+                          "$participant"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "id": "herbal-buyer",
+                "kind": "person",
+                "name": "周荃",
+                "description": "来往村镇的收药人。",
+                "placement": "herbal-yard",
+                "facts": [],
+                "meters": [
+                  {
+                    "id": "herbal-buyer-health",
+                    "definition_id": "health",
+                    "current": 100
+                  },
+                  {
+                    "id": "herbal-buyer-mana",
+                    "definition_id": "mana",
+                    "current": 0
+                  }
+                ],
+                "quantities": [],
+                "ratings": [
+                  {
+                    "id": "herbal-buyer-cultivation",
+                    "definition_id": "cultivation",
+                    "value": 0
+                  },
+                  {
+                    "id": "herbal-buyer-perception",
+                    "definition_id": "perception",
+                    "value": 1
+                  },
+                  {
+                    "id": "herbal-buyer-craft",
+                    "definition_id": "craft",
+                    "value": 1
+                  },
+                  {
+                    "id": "herbal-buyer-influence",
+                    "definition_id": "influence",
+                    "value": 1
+                  },
+                  {
+                    "id": "herbal-buyer-force",
+                    "definition_id": "force",
+                    "value": 1
+                  }
+                ],
+                "agent": {
+                  "id": "herbal-buyer",
+                  "model_profiles": {
+                    "decision": "decision-jev",
+                    "creation": "creation-deepseek",
+                    "fallback": "decision-deepseek"
+                  },
+                  "character": {
+                    "persona": {
+                      "summary": "来往镇村的收药人，另有买家愿为某株草出较高价格。",
+                      "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+                    },
+                    "goals": [
+                      {
+                        "id": "current-purpose",
+                        "description": "试探药童是否愿意单卖那株草；不强迫对方。",
+                        "priority": 0.5,
+                        "progress": 0
+                      }
+                    ]
+                  },
+                  "belief": {
+                    "local_entities": [
+                      {
+                        "id": "self",
+                        "name": "周荃",
+                        "description": "来往镇村的收药人，另有买家愿为某株草出较高价格。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "location",
+                        "name": "陈守拙的药院",
+                        "description": "你熟悉这里的出入和用途。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "child",
+                        "name": "药童",
+                        "description": "认识这位受陈守拙委托送货的学徒。",
+                        "status": "observed"
+                      }
+                    ],
+                    "evidence": [],
+                    "claims": [],
+                    "bindings": [
+                      {
+                        "local_entity_id": "self",
+                        "canonical_entity_ids": [
+                          "herbal-buyer"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "location",
+                        "canonical_entity_ids": [
+                          "herbal-yard"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "child",
+                        "canonical_entity_ids": [
+                          "$participant"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "id": "herbal-consignment",
+                "kind": "goods",
+                "name": "待交付药材",
+                "description": "已包好、受托运输的普通药材。",
+                "placement": "$participant",
+                "facts": [
+                  {
+                    "id": "herbal-consignment-owned-by-herbal-master",
+                    "predicate": "owned-by",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "herbal-master"
+                    },
+                    "description": "药材归陈守拙，药童没有擅自出售的授权。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  },
+                  {
+                    "id": "herbal-note-cause",
+                    "predicate": "unusual-herb-cause",
+                    "value": {
+                      "kind": "text",
+                      "value": "本批异常主要由成熟度与晒制差异造成，不预置仙草。"
+                    },
+                    "description": "本批异常主要由成熟度与晒制差异造成，不预置仙草。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [
+                  {
+                    "definition_id": "herb-packet",
+                    "amount": 12
+                  }
+                ],
+                "ratings": []
+              },
+              {
+                "id": "herbal-notebook",
+                "kind": "item",
+                "name": "采药札记",
+                "description": "借来的采药记录，北坡某处止血草曾有异常药性，成因仍需调查。",
+                "placement": "$participant",
+                "facts": [
+                  {
+                    "id": "herbal-notebook-owned-by-herbal-master",
+                    "predicate": "owned-by",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "herbal-master"
+                    },
+                    "description": "札记是师父的，药童只有借阅权。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [],
+                "ratings": []
+              },
+              {
+                "id": "herbal-tools",
+                "kind": "item",
+                "name": "药篓与小药锄",
+                "description": "普通采药工具，可以装载或挖取药材。",
+                "placement": "$participant",
+                "facts": [
+                  {
+                    "id": "herbal-tools-owned-by-$participant",
+                    "predicate": "owned-by",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "$participant"
+                    },
+                    "description": "属于药童自己的工具。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [],
+                "ratings": []
+              }
+            ],
+            "facts": [
+              {
+                "id": "herbal-player-root",
+                "predicate": "spirit-root",
+                "value": {
+                  "kind": "text",
+                  "value": "金木水土四属性灵根，客观存在但从未检测。"
+                },
+                "description": "金木水土四属性灵根，客观存在但从未检测。",
+                "access": {
+                  "kind": "private"
+                },
+                "subject_id": "$participant"
+              },
+              {
+                "id": "herbal-player-age",
+                "predicate": "age",
+                "value": {
+                  "kind": "number",
+                  "value": 12
+                },
+                "description": "药童十二岁。",
+                "access": {
+                  "kind": "public"
+                },
+                "subject_id": "$participant"
+              },
+              {
+                "id": "herbal-player-skill",
+                "predicate": "learned-skill",
+                "value": {
+                  "kind": "text",
+                  "value": "能辨认常见药草，处理轻微外伤；不会修仙法诀。"
+                },
+                "description": "能辨认常见药草，处理轻微外伤；不会修仙法诀。",
+                "access": {
+                  "kind": "public"
+                },
+                "subject_id": "$participant"
+              }
+            ],
+            "cognition": [
+              {
+                "agent_id": "$participant",
+                "belief": {
+                  "local_entities": [
+                    {
+                      "id": "mother",
+                      "name": "林素",
+                      "description": "你的母亲，托你明早买盐和灯油。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "master",
+                      "name": "陈守拙",
+                      "description": "教你辨药与处理外伤的乡医；已借出采药札记。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "buyer",
+                      "name": "周荃",
+                      "description": "收药人，正私下提出高价收购一株草。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "goods",
+                      "name": "待交药材",
+                      "description": "师父所有，共十二包；你只是受托运输。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "notes",
+                      "name": "采药札记",
+                      "description": "师父借给你的记录，北坡药草的异常原因仍不清楚。",
+                      "status": "observed"
+                    }
+                  ],
+                  "evidence": [],
+                  "claims": [],
+                  "bindings": [
+                    {
+                      "local_entity_id": "mother",
+                      "canonical_entity_ids": [
+                        "herbal-mother"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "master",
+                      "canonical_entity_ids": [
+                        "herbal-master"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "buyer",
+                      "canonical_entity_ids": [
+                        "herbal-buyer"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "goods",
+                      "canonical_entity_ids": [
+                        "herbal-consignment"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "notes",
+                      "canonical_entity_ids": [
+                        "herbal-notebook"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "create",
+          "id": "spirit-merchant",
+          "title": "灵界化神商行东家",
+          "fantasy": "已有修为、商号与人脉，决定如何处理一场真实的交付争议。",
+          "description": "三百二十六岁的灵界本土人族化神中期修士，经营青禾灵材行，有独立修炼居所。人物与商号为原创，天渊城背景采用标明的开篇回溯。",
+          "entity_kind": "person",
+          "spawn_entity_id": "qinghe-store",
+          "persona": "灵界本土人族化神中期修士，长期经营灵材，熟悉本地交易、修炼和自己掌握的神识御物法诀；并不知道所有人的私事。",
+          "default_goal": "核对到货与两份订单，自己决定经营和修炼安排。",
+          "relationship_hooks": [
+            "岑玉是长期雇用的验货管事。",
+            "陶岐持有供应商的装货记录。",
+            "许明照与陆闻微的订单分别为八箱与十二箱。"
+          ],
+          "risks": [
+            "数量需要核查；境界不会替你发现未接触的事实。",
+            "商号钱财与私人库存分开，仍需履行义务。"
+          ],
+          "mechanics_profile_id": "spirit-merchant",
+          "fallback_arrival": "仓院里新到的货箱尚未验收完。岑玉拿着交接单向你走来，陶岐在一旁等待核对；两位客户也到了，都希望先拿到自己的货。你可以查账、验货、协商，也可以先处理别的事。",
+          "initialization": {
+            "entities": [
+              {
+                "id": "spirit-manager",
+                "kind": "person",
+                "name": "岑玉",
+                "description": "青禾灵材行的验货管事。",
+                "placement": "qinghe-store",
+                "facts": [
+                  {
+                    "id": "spirit-manager-cultivation",
+                    "predicate": "cultivation",
+                    "value": {
+                      "kind": "text",
+                      "value": "筑基"
+                    },
+                    "description": "筑基",
+                    "access": {
+                      "kind": "public"
+                    }
+                  },
+                  {
+                    "id": "spirit-manager-business-contact-of-$participant",
+                    "predicate": "business-contact-of",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "$participant"
+                    },
+                    "description": "与商行东家保持长期业务往来。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  }
+                ],
+                "meters": [
+                  {
+                    "id": "spirit-manager-health",
+                    "definition_id": "health",
+                    "current": 100
+                  },
+                  {
+                    "id": "spirit-manager-mana",
+                    "definition_id": "mana",
+                    "current": 400
+                  }
+                ],
+                "quantities": [],
+                "ratings": [
+                  {
+                    "id": "spirit-manager-cultivation",
+                    "definition_id": "cultivation",
+                    "value": 2
+                  },
+                  {
+                    "id": "spirit-manager-perception",
+                    "definition_id": "perception",
+                    "value": 2
+                  },
+                  {
+                    "id": "spirit-manager-craft",
+                    "definition_id": "craft",
+                    "value": 1
+                  },
+                  {
+                    "id": "spirit-manager-influence",
+                    "definition_id": "influence",
+                    "value": 1
+                  },
+                  {
+                    "id": "spirit-manager-force",
+                    "definition_id": "force",
+                    "value": 1
+                  }
+                ],
+                "agent": {
+                  "id": "spirit-manager",
+                  "model_profiles": {
+                    "decision": "decision-jev",
+                    "creation": "creation-deepseek",
+                    "fallback": "decision-deepseek"
+                  },
+                  "character": {
+                    "persona": {
+                      "summary": "筑基修士，负责验货，亲手点到十七箱，正准备向东家报告。",
+                      "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+                    },
+                    "goals": [
+                      {
+                        "id": "current-purpose",
+                        "description": "查清缺货并保全交接凭据。",
+                        "priority": 0.5,
+                        "progress": 0
+                      }
+                    ]
+                  },
+                  "belief": {
+                    "local_entities": [
+                      {
+                        "id": "self",
+                        "name": "岑玉",
+                        "description": "筑基修士，负责验货，亲手点到十七箱，正准备向东家报告。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "location",
+                        "name": "青禾灵材行仓院",
+                        "description": "你熟悉这里的出入和用途。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "proprietor",
+                        "name": "商行东家",
+                        "description": "认识多年的化神中期本土人族修士，处理商号事务。",
+                        "status": "observed"
+                      }
+                    ],
+                    "evidence": [],
+                    "claims": [],
+                    "bindings": [
+                      {
+                        "local_entity_id": "self",
+                        "canonical_entity_ids": [
+                          "spirit-manager"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "location",
+                        "canonical_entity_ids": [
+                          "qinghe-store"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "proprietor",
+                        "canonical_entity_ids": [
+                          "$participant"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "id": "spirit-supplier",
+                "kind": "person",
+                "name": "陶岐",
+                "description": "供应商的代表。",
+                "placement": "qinghe-store",
+                "facts": [
+                  {
+                    "id": "spirit-supplier-cultivation",
+                    "predicate": "cultivation",
+                    "value": {
+                      "kind": "text",
+                      "value": "元婴"
+                    },
+                    "description": "元婴",
+                    "access": {
+                      "kind": "public"
+                    }
+                  },
+                  {
+                    "id": "spirit-supplier-business-contact-of-$participant",
+                    "predicate": "business-contact-of",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "$participant"
+                    },
+                    "description": "与商行东家保持长期业务往来。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  }
+                ],
+                "meters": [
+                  {
+                    "id": "spirit-supplier-health",
+                    "definition_id": "health",
+                    "current": 100
+                  },
+                  {
+                    "id": "spirit-supplier-mana",
+                    "definition_id": "mana",
+                    "current": 800
+                  }
+                ],
+                "quantities": [],
+                "ratings": [
+                  {
+                    "id": "spirit-supplier-cultivation",
+                    "definition_id": "cultivation",
+                    "value": 4
+                  },
+                  {
+                    "id": "spirit-supplier-perception",
+                    "definition_id": "perception",
+                    "value": 4
+                  },
+                  {
+                    "id": "spirit-supplier-craft",
+                    "definition_id": "craft",
+                    "value": 1
+                  },
+                  {
+                    "id": "spirit-supplier-influence",
+                    "definition_id": "influence",
+                    "value": 1
+                  },
+                  {
+                    "id": "spirit-supplier-force",
+                    "definition_id": "force",
+                    "value": 1
+                  }
+                ],
+                "agent": {
+                  "id": "spirit-supplier",
+                  "model_profiles": {
+                    "decision": "decision-jev",
+                    "creation": "creation-deepseek",
+                    "fallback": "decision-deepseek"
+                  },
+                  "character": {
+                    "persona": {
+                      "summary": "元婴修士，供应商代表，装货记录为二十箱，自己未全程押运。",
+                      "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+                    },
+                    "goals": [
+                      {
+                        "id": "current-purpose",
+                        "description": "核对交接记录，查明短缺，不接受无证据的指控。",
+                        "priority": 0.5,
+                        "progress": 0
+                      }
+                    ]
+                  },
+                  "belief": {
+                    "local_entities": [
+                      {
+                        "id": "self",
+                        "name": "陶岐",
+                        "description": "元婴修士，供应商代表，装货记录为二十箱，自己未全程押运。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "location",
+                        "name": "青禾灵材行仓院",
+                        "description": "你熟悉这里的出入和用途。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "proprietor",
+                        "name": "商行东家",
+                        "description": "认识多年的化神中期本土人族修士，处理商号事务。",
+                        "status": "observed"
+                      }
+                    ],
+                    "evidence": [],
+                    "claims": [],
+                    "bindings": [
+                      {
+                        "local_entity_id": "self",
+                        "canonical_entity_ids": [
+                          "spirit-supplier"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "location",
+                        "canonical_entity_ids": [
+                          "qinghe-store"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "proprietor",
+                        "canonical_entity_ids": [
+                          "$participant"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "id": "spirit-client-one",
+                "kind": "person",
+                "name": "许明照",
+                "description": "与商行往来多年的客户。",
+                "placement": "qinghe-store",
+                "facts": [
+                  {
+                    "id": "spirit-client-one-cultivation",
+                    "predicate": "cultivation",
+                    "value": {
+                      "kind": "text",
+                      "value": "结丹"
+                    },
+                    "description": "结丹",
+                    "access": {
+                      "kind": "public"
+                    }
+                  },
+                  {
+                    "id": "spirit-client-one-business-contact-of-$participant",
+                    "predicate": "business-contact-of",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "$participant"
+                    },
+                    "description": "与商行东家保持长期业务往来。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  }
+                ],
+                "meters": [
+                  {
+                    "id": "spirit-client-one-health",
+                    "definition_id": "health",
+                    "current": 100
+                  },
+                  {
+                    "id": "spirit-client-one-mana",
+                    "definition_id": "mana",
+                    "current": 600
+                  }
+                ],
+                "quantities": [],
+                "ratings": [
+                  {
+                    "id": "spirit-client-one-cultivation",
+                    "definition_id": "cultivation",
+                    "value": 3
+                  },
+                  {
+                    "id": "spirit-client-one-perception",
+                    "definition_id": "perception",
+                    "value": 3
+                  },
+                  {
+                    "id": "spirit-client-one-craft",
+                    "definition_id": "craft",
+                    "value": 1
+                  },
+                  {
+                    "id": "spirit-client-one-influence",
+                    "definition_id": "influence",
+                    "value": 1
+                  },
+                  {
+                    "id": "spirit-client-one-force",
+                    "definition_id": "force",
+                    "value": 1
+                  }
+                ],
+                "agent": {
+                  "id": "spirit-client-one",
+                  "model_profiles": {
+                    "decision": "decision-jev",
+                    "creation": "creation-deepseek",
+                    "fallback": "decision-deepseek"
+                  },
+                  "character": {
+                    "persona": {
+                      "summary": "结丹修士，老客户，知道自家八箱订单，不知道库存缺货。",
+                      "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+                    },
+                    "goals": [
+                      {
+                        "id": "current-purpose",
+                        "description": "与东家协商八箱材料的交付。",
+                        "priority": 0.5,
+                        "progress": 0
+                      }
+                    ]
+                  },
+                  "belief": {
+                    "local_entities": [
+                      {
+                        "id": "self",
+                        "name": "许明照",
+                        "description": "结丹修士，老客户，知道自家八箱订单，不知道库存缺货。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "location",
+                        "name": "青禾灵材行仓院",
+                        "description": "你熟悉这里的出入和用途。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "proprietor",
+                        "name": "商行东家",
+                        "description": "认识多年的化神中期本土人族修士，处理商号事务。",
+                        "status": "observed"
+                      }
+                    ],
+                    "evidence": [],
+                    "claims": [],
+                    "bindings": [
+                      {
+                        "local_entity_id": "self",
+                        "canonical_entity_ids": [
+                          "spirit-client-one"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "location",
+                        "canonical_entity_ids": [
+                          "qinghe-store"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "proprietor",
+                        "canonical_entity_ids": [
+                          "$participant"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "id": "spirit-client-two",
+                "kind": "person",
+                "name": "陆闻微",
+                "description": "前来交涉订单的客户。",
+                "placement": "qinghe-store",
+                "facts": [
+                  {
+                    "id": "spirit-client-two-cultivation",
+                    "predicate": "cultivation",
+                    "value": {
+                      "kind": "text",
+                      "value": "元婴"
+                    },
+                    "description": "元婴",
+                    "access": {
+                      "kind": "public"
+                    }
+                  },
+                  {
+                    "id": "spirit-client-two-business-contact-of-$participant",
+                    "predicate": "business-contact-of",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "$participant"
+                    },
+                    "description": "与商行东家保持长期业务往来。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  }
+                ],
+                "meters": [
+                  {
+                    "id": "spirit-client-two-health",
+                    "definition_id": "health",
+                    "current": 100
+                  },
+                  {
+                    "id": "spirit-client-two-mana",
+                    "definition_id": "mana",
+                    "current": 800
+                  }
+                ],
+                "quantities": [],
+                "ratings": [
+                  {
+                    "id": "spirit-client-two-cultivation",
+                    "definition_id": "cultivation",
+                    "value": 4
+                  },
+                  {
+                    "id": "spirit-client-two-perception",
+                    "definition_id": "perception",
+                    "value": 4
+                  },
+                  {
+                    "id": "spirit-client-two-craft",
+                    "definition_id": "craft",
+                    "value": 1
+                  },
+                  {
+                    "id": "spirit-client-two-influence",
+                    "definition_id": "influence",
+                    "value": 1
+                  },
+                  {
+                    "id": "spirit-client-two-force",
+                    "definition_id": "force",
+                    "value": 1
+                  }
+                ],
+                "agent": {
+                  "id": "spirit-client-two",
+                  "model_profiles": {
+                    "decision": "decision-jev",
+                    "creation": "creation-deepseek",
+                    "fallback": "decision-deepseek"
+                  },
+                  "character": {
+                    "persona": {
+                      "summary": "元婴修士，知道自家十二箱订单，不知道实收数量。",
+                      "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+                    },
+                    "goals": [
+                      {
+                        "id": "current-purpose",
+                        "description": "与东家协商十二箱材料的交付。",
+                        "priority": 0.5,
+                        "progress": 0
+                      }
+                    ]
+                  },
+                  "belief": {
+                    "local_entities": [
+                      {
+                        "id": "self",
+                        "name": "陆闻微",
+                        "description": "元婴修士，知道自家十二箱订单，不知道实收数量。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "location",
+                        "name": "青禾灵材行仓院",
+                        "description": "你熟悉这里的出入和用途。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "proprietor",
+                        "name": "商行东家",
+                        "description": "认识多年的化神中期本土人族修士，处理商号事务。",
+                        "status": "observed"
+                      }
+                    ],
+                    "evidence": [],
+                    "claims": [],
+                    "bindings": [
+                      {
+                        "local_entity_id": "self",
+                        "canonical_entity_ids": [
+                          "spirit-client-two"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "location",
+                        "canonical_entity_ids": [
+                          "qinghe-store"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "proprietor",
+                        "canonical_entity_ids": [
+                          "$participant"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "id": "spirit-carrier",
+                "kind": "person",
+                "name": "邱安",
+                "description": "负责货物转运的工人。",
+                "placement": "spirit-wharf",
+                "facts": [
+                  {
+                    "id": "spirit-carrier-cultivation",
+                    "predicate": "cultivation",
+                    "value": {
+                      "kind": "text",
+                      "value": "炼气"
+                    },
+                    "description": "炼气",
+                    "access": {
+                      "kind": "public"
+                    }
+                  }
+                ],
+                "meters": [
+                  {
+                    "id": "spirit-carrier-health",
+                    "definition_id": "health",
+                    "current": 100
+                  },
+                  {
+                    "id": "spirit-carrier-mana",
+                    "definition_id": "mana",
+                    "current": 200
+                  }
+                ],
+                "quantities": [],
+                "ratings": [
+                  {
+                    "id": "spirit-carrier-cultivation",
+                    "definition_id": "cultivation",
+                    "value": 1
+                  },
+                  {
+                    "id": "spirit-carrier-perception",
+                    "definition_id": "perception",
+                    "value": 1
+                  },
+                  {
+                    "id": "spirit-carrier-craft",
+                    "definition_id": "craft",
+                    "value": 1
+                  },
+                  {
+                    "id": "spirit-carrier-influence",
+                    "definition_id": "influence",
+                    "value": 1
+                  },
+                  {
+                    "id": "spirit-carrier-force",
+                    "definition_id": "force",
+                    "value": 1
+                  }
+                ],
+                "agent": {
+                  "id": "spirit-carrier",
+                  "model_profiles": {
+                    "decision": "decision-jev",
+                    "creation": "creation-deepseek",
+                    "fallback": "decision-deepseek"
+                  },
+                  "character": {
+                    "persona": {
+                      "summary": "炼气修士，转运工，知道另三箱因换车留在货场，有留置收条。",
+                      "voice": "依据自己的生活经验说话，不使用游戏或编写术语。"
+                    },
+                    "goals": [
+                      {
+                        "id": "current-purpose",
+                        "description": "等候下一辆车，将留置的三箱补送商号。",
+                        "priority": 0.5,
+                        "progress": 0
+                      }
+                    ]
+                  },
+                  "belief": {
+                    "local_entities": [
+                      {
+                        "id": "self",
+                        "name": "邱安",
+                        "description": "炼气修士，转运工，知道另三箱因换车留在货场，有留置收条。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "location",
+                        "name": "城中转运货场",
+                        "description": "你熟悉这里的出入和用途。",
+                        "status": "observed"
+                      },
+                      {
+                        "id": "cargo",
+                        "name": "待补送货物",
+                        "description": "三箱留在货场，尚未送达商行。",
+                        "status": "observed"
+                      }
+                    ],
+                    "evidence": [],
+                    "claims": [],
+                    "bindings": [
+                      {
+                        "local_entity_id": "self",
+                        "canonical_entity_ids": [
+                          "spirit-carrier"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "location",
+                        "canonical_entity_ids": [
+                          "spirit-wharf"
+                        ]
+                      },
+                      {
+                        "local_entity_id": "cargo",
+                        "canonical_entity_ids": [
+                          "spirit-missing-cargo"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "id": "qinghe-business",
+                "kind": "organization",
+                "name": "青禾灵材行",
+                "description": "独立账目的商号，雇员、客户、合同与周转资产各有归属。",
+                "placement": "qinghe-store",
+                "facts": [
+                  {
+                    "id": "qinghe-business-managed-by-$participant",
+                    "predicate": "managed-by",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "$participant"
+                    },
+                    "description": "东家有经营决策权，仍承担订单和报酬义务。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [],
+                "ratings": []
+              },
+              {
+                "id": "spirit-stock",
+                "kind": "goods",
+                "name": "验收中的灵材",
+                "description": "等待验收的新到灵材，实际数量可以通过点货查清。",
+                "placement": "qinghe-store",
+                "facts": [
+                  {
+                    "id": "spirit-stock-owned-by-qinghe-business",
+                    "predicate": "owned-by",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "qinghe-business"
+                    },
+                    "description": "归商号所有，并承载两份订单义务。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [
+                  {
+                    "definition_id": "material-crate",
+                    "amount": 17
+                  }
+                ],
+                "ratings": []
+              },
+              {
+                "id": "spirit-missing-cargo",
+                "kind": "goods",
+                "name": "留在货场的灵材",
+                "description": "留在转运货场的三箱灵材。",
+                "placement": "spirit-wharf",
+                "facts": [
+                  {
+                    "id": "spirit-missing-cargo-owned-by-qinghe-business",
+                    "predicate": "owned-by",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "qinghe-business"
+                    },
+                    "description": "属于同一批商号货物，尚未送达。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  },
+                  {
+                    "id": "spirit-cargo-delay",
+                    "predicate": "delay-cause",
+                    "value": {
+                      "kind": "text",
+                      "value": "换车时留置，转运工持有收条，未被盗走。"
+                    },
+                    "description": "换车时留置，转运工持有收条，未被盗走。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [
+                  {
+                    "definition_id": "material-crate",
+                    "amount": 3
+                  }
+                ],
+                "ratings": []
+              },
+              {
+                "id": "spirit-business-funds",
+                "kind": "container",
+                "name": "商号周转库",
+                "description": "用于经营的独立周转库存。",
+                "placement": "qinghe-store",
+                "facts": [
+                  {
+                    "id": "spirit-business-funds-owned-by-qinghe-business",
+                    "predicate": "owned-by",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "qinghe-business"
+                    },
+                    "description": "属于商号营运资产，取用会影响履约与员工报酬。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [
+                  {
+                    "definition_id": "low-stone",
+                    "amount": 30000
+                  }
+                ],
+                "ratings": []
+              },
+              {
+                "id": "spirit-receipt",
+                "kind": "document",
+                "name": "交接单",
+                "description": "交接单记载二十箱；文字记录不改变实际库存。",
+                "placement": "spirit-manager",
+                "facts": [
+                  {
+                    "id": "spirit-receipt-count",
+                    "predicate": "recorded-count",
+                    "value": {
+                      "kind": "number",
+                      "value": 20
+                    },
+                    "description": "记录二十箱。",
+                    "access": {
+                      "kind": "public"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [],
+                "ratings": []
+              },
+              {
+                "id": "spirit-order-one",
+                "kind": "obligation",
+                "name": "八箱订单",
+                "description": "商号与客户约定交付灵材；尚未实际完成。",
+                "placement": "qinghe-business",
+                "facts": [
+                  {
+                    "id": "spirit-order-one-owed-to-spirit-client-one",
+                    "predicate": "owed-to",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "spirit-client-one"
+                    },
+                    "description": "应向该客户交货。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  },
+                  {
+                    "id": "spirit-order-one-owed-by-qinghe-business",
+                    "predicate": "owed-by",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "qinghe-business"
+                    },
+                    "description": "商号承担履约义务。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  },
+                  {
+                    "id": "spirit-order-one-amount",
+                    "predicate": "remaining-delivery",
+                    "value": {
+                      "kind": "number",
+                      "value": 8
+                    },
+                    "description": "尚欠交付的箱数。",
+                    "access": {
+                      "kind": "public"
+                    }
+                  },
+                  {
+                    "id": "spirit-order-one-status",
+                    "predicate": "status",
+                    "value": {
+                      "kind": "text",
+                      "value": "有效、未履行。"
+                    },
+                    "description": "有效、未履行。",
+                    "access": {
+                      "kind": "public"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [],
+                "ratings": []
+              },
+              {
+                "id": "spirit-order-two",
+                "kind": "obligation",
+                "name": "十二箱订单",
+                "description": "商号与客户约定交付灵材；尚未实际完成。",
+                "placement": "qinghe-business",
+                "facts": [
+                  {
+                    "id": "spirit-order-two-owed-to-spirit-client-two",
+                    "predicate": "owed-to",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "spirit-client-two"
+                    },
+                    "description": "应向该客户交货。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  },
+                  {
+                    "id": "spirit-order-two-owed-by-qinghe-business",
+                    "predicate": "owed-by",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "qinghe-business"
+                    },
+                    "description": "商号承担履约义务。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  },
+                  {
+                    "id": "spirit-order-two-amount",
+                    "predicate": "remaining-delivery",
+                    "value": {
+                      "kind": "number",
+                      "value": 12
+                    },
+                    "description": "尚欠交付的箱数。",
+                    "access": {
+                      "kind": "public"
+                    }
+                  },
+                  {
+                    "id": "spirit-order-two-status",
+                    "predicate": "status",
+                    "value": {
+                      "kind": "text",
+                      "value": "有效、未履行。"
+                    },
+                    "description": "有效、未履行。",
+                    "access": {
+                      "kind": "public"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [],
+                "ratings": []
+              },
+              {
+                "id": "spirit-protection",
+                "kind": "item",
+                "name": "青纹护身佩",
+                "description": "原创自用防护法宝，需要持续法力，不能自动识破谎言或消灭一切威胁。",
+                "placement": "$participant",
+                "facts": [
+                  {
+                    "id": "spirit-protection-owned-by-$participant",
+                    "predicate": "owned-by",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "$participant"
+                    },
+                    "description": "按持有者与文书实际权属使用。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [],
+                "ratings": []
+              },
+              {
+                "id": "spirit-concession",
+                "kind": "item",
+                "name": "资源地经营文书",
+                "description": "商号取得一小块未充分勘定地块的限期经营权；不是资源凭空产出的依据。",
+                "placement": "qinghe-business",
+                "facts": [
+                  {
+                    "id": "spirit-concession-owned-by-qinghe-business",
+                    "predicate": "owned-by",
+                    "value": {
+                      "kind": "entity",
+                      "entityId": "qinghe-business"
+                    },
+                    "description": "按持有者与文书实际权属使用。",
+                    "access": {
+                      "kind": "private"
+                    }
+                  }
+                ],
+                "meters": [],
+                "quantities": [],
+                "ratings": []
+              }
+            ],
+            "facts": [
+              {
+                "id": "merchant-stage",
+                "predicate": "cultivation",
+                "value": {
+                  "kind": "text",
+                  "value": "化神中期；本土人族修士。"
+                },
+                "description": "化神中期；本土人族修士。",
+                "access": {
+                  "kind": "public"
+                },
+                "subject_id": "$participant"
+              },
+              {
+                "id": "merchant-roots",
+                "predicate": "spirit-root",
+                "value": {
+                  "kind": "text",
+                  "value": "木水双属性灵根，早已知晓。"
+                },
+                "description": "木水双属性灵根，早已知晓。",
+                "access": {
+                  "kind": "private"
+                },
+                "subject_id": "$participant"
+              },
+              {
+                "id": "merchant-skills",
+                "predicate": "learned-skill",
+                "value": {
+                  "kind": "text",
+                  "value": "已学会常用神识探查、御物、飞遁与催动青纹护身佩；范围与代价依已知法诀及当前法力判断，不能读他人记忆或凭空造物。"
+                },
+                "description": "已学会常用神识探查、御物、飞遁与催动青纹护身佩；范围与代价依已知法诀及当前法力判断，不能读他人记忆或凭空造物。",
+                "access": {
+                  "kind": "agents",
+                  "agentIds": [
+                    "$participant"
+                  ]
+                },
+                "subject_id": "$participant"
+              }
+            ],
+            "cognition": [
+              {
+                "agent_id": "$participant",
+                "belief": {
+                  "local_entities": [
+                    {
+                      "id": "manager",
+                      "name": "岑玉",
+                      "description": "商号验货管事，多年一起做事。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "supplier",
+                      "name": "陶岐",
+                      "description": "供应商代表，持有装货记录。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "first-customer",
+                      "name": "许明照",
+                      "description": "老客户，约定购八箱材料。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "second-customer",
+                      "name": "陆闻微",
+                      "description": "客户，约定购十二箱材料。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "firm",
+                      "name": "青禾灵材行",
+                      "description": "由你经营，商号资产独立记账。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "stock",
+                      "name": "到货灵材",
+                      "description": "货物刚到，仍在验收；交接单记二十箱，实收数量要等岑玉报告或自行核对。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "receipt",
+                      "name": "交接单",
+                      "description": "记录二十箱，不代表你已亲手点过实物。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "private-home",
+                      "name": "自己的静室",
+                      "description": "有独立修炼与休息处。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "fund",
+                      "name": "周转库",
+                      "description": "商号有三万低阶灵石营运资金，不是随身私房钱。",
+                      "status": "observed"
+                    },
+                    {
+                      "id": "treasure",
+                      "name": "青纹护身佩",
+                      "description": "自己炼化的护身法宝，可以消耗法力催动。",
+                      "status": "observed"
+                    }
+                  ],
+                  "evidence": [
+                    {
+                      "id": "prior-training",
+                      "kind": "observation",
+                      "description": "多年修炼并经营商行的亲历。",
+                      "sourceId": null,
+                      "step": 0
+                    }
+                  ],
+                  "claims": [
+                    {
+                      "id": "known-cultivation",
+                      "subjectId": "self",
+                      "predicate": "cultivation",
+                      "value": {
+                        "kind": "text",
+                        "value": "自己是化神中期本土人族修士，具有木水双灵根。"
+                      },
+                      "description": "自己是化神中期本土人族修士，具有木水双灵根。",
+                      "stance": "believed",
+                      "confidence": 1,
+                      "evidenceIds": [
+                        "prior-training"
+                      ]
+                    },
+                    {
+                      "id": "known-skills",
+                      "subjectId": "self",
+                      "predicate": "learned-skill",
+                      "value": {
+                        "kind": "text",
+                        "value": "已经学会常用神识探查、御物、飞遁和护身佩催动法诀；御物需要法力，不能凭空造物或读他人记忆。"
+                      },
+                      "description": "已经学会常用神识探查、御物、飞遁和护身佩催动法诀；御物需要法力，不能凭空造物或读他人记忆。",
+                      "stance": "believed",
+                      "confidence": 1,
+                      "evidenceIds": [
+                        "prior-training"
+                      ]
+                    }
+                  ],
+                  "bindings": [
+                    {
+                      "local_entity_id": "manager",
+                      "canonical_entity_ids": [
+                        "spirit-manager"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "supplier",
+                      "canonical_entity_ids": [
+                        "spirit-supplier"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "first-customer",
+                      "canonical_entity_ids": [
+                        "spirit-client-one"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "second-customer",
+                      "canonical_entity_ids": [
+                        "spirit-client-two"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "firm",
+                      "canonical_entity_ids": [
+                        "qinghe-business"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "stock",
+                      "canonical_entity_ids": [
+                        "spirit-stock"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "receipt",
+                      "canonical_entity_ids": [
+                        "spirit-receipt"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "private-home",
+                      "canonical_entity_ids": [
+                        "qinghe-study"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "fund",
+                      "canonical_entity_ids": [
+                        "spirit-business-funds"
+                      ]
+                    },
+                    {
+                      "local_entity_id": "treasure",
+                      "canonical_entity_ids": [
+                        "spirit-protection"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "character": {
+              "commitments": [
+                {
+                  "id": "business-responsibility",
+                  "description": "认真处理商号订单与员工报酬，不能把商号资产视为无义务的私人战利品。",
+                  "priority": 0.7,
+                  "subject_ids": [
+                    "firm"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "existing",
+          "id": "han-li",
+          "agent_id": "canon-han-li",
+          "title": "韩立",
+          "fantasy": "从十岁那一夜接过自己的人生，下一条路由你决定。",
+          "description": "你仍在山村家中，尚未拜师或修仙。三叔还没提出入门安排，也没有任何后续宝物。",
+          "default_goal": "自己决定明天的生活。",
+          "relationship_hooks": [
+            "家人是与你共同生活的真实人物。",
+            "三叔曾帮助大哥学艺，但还没向家里提出你的入门安排。"
+          ],
+          "risks": [
+            "家境清苦，当前没有修仙功法。",
+            "后续相遇与所得不会按小说自动发生。"
+          ],
+          "fallback_arrival": "你躺在旧被里，韩铸睡在身旁。隔着泥墙，父母还没有完全歇下。你想起明早的柴火，也惦记妹妹爱吃的浆果。村外是什么样，你还想亲眼看看。"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "entity:human-realm": [
+      "opening-night",
+      "sample-originals"
+    ],
+    "entity:spirit-realm": [
+      "tianyuan-exists",
+      "sample-originals"
+    ],
+    "entity:han-village": [
+      "han-household",
+      "sample-calibration"
+    ],
+    "entity:han-home": [
+      "han-household",
+      "sample-calibration"
+    ],
+    "entity:village-path": [
+      "sample-originals",
+      "sample-calibration"
+    ],
+    "entity:qingniu-town": [
+      "qingniu",
+      "sample-calibration"
+    ],
+    "entity:chunxiang-inn": [
+      "han-uncle",
+      "qingniu",
+      "sample-calibration"
+    ],
+    "entity:smith-workshop": [
+      "han-uncle",
+      "sample-calibration"
+    ],
+    "entity:songxi-hamlet": [
+      "sample-originals",
+      "sample-calibration"
+    ],
+    "entity:herbal-yard": [
+      "sample-originals",
+      "sample-calibration"
+    ],
+    "entity:tianyuan-city": [
+      "tianyuan-exists",
+      "spirit-dwellings",
+      "sample-calibration"
+    ],
+    "entity:qinghe-store": [
+      "sample-originals",
+      "sample-calibration"
+    ],
+    "entity:qinghe-study": [
+      "spirit-dwellings",
+      "sample-originals",
+      "sample-calibration"
+    ],
+    "entity:spirit-wharf": [
+      "sample-originals",
+      "sample-calibration"
+    ],
+    "entity:qixuan-sect": [
+      "qixuan-local",
+      "sample-open-future"
+    ],
+    "entity:wild-wolf-gang": [
+      "qixuan-local"
+    ],
+    "entity:canon-han-li": [
+      "han-household",
+      "han-wish",
+      "han-uncle",
+      "sample-calibration",
+      "han-roots",
+      "sample-open-future"
+    ],
+    "entity:han-father": [
+      "han-household",
+      "han-wish",
+      "han-uncle",
+      "sample-calibration"
+    ],
+    "entity:han-mother": [
+      "han-household",
+      "han-wish",
+      "han-uncle",
+      "sample-calibration"
+    ],
+    "entity:han-eldest-brother": [
+      "han-household",
+      "han-wish",
+      "han-uncle",
+      "sample-calibration"
+    ],
+    "entity:han-zhu": [
+      "han-household",
+      "han-wish",
+      "han-uncle",
+      "sample-calibration"
+    ],
+    "entity:han-elder-sister": [
+      "han-household",
+      "han-wish",
+      "han-uncle",
+      "sample-calibration"
+    ],
+    "entity:han-younger-sister": [
+      "han-household",
+      "han-wish",
+      "han-uncle",
+      "sample-calibration"
+    ],
+    "entity:han-uncle": [
+      "han-uncle",
+      "sample-calibration",
+      "sample-open-future"
+    ],
+    "entity:old-zhang": [
+      "village-reader",
+      "sample-calibration"
+    ],
+    "entity:han-household-pantry": [
+      "han-household",
+      "sample-calibration",
+      "sample-economy"
+    ],
+    "manifest": [
+      "opening-night",
+      "sample-originals",
+      "sample-open-future"
+    ],
+    "mechanics": [
+      "sample-calibration",
+      "sample-economy",
+      "cultivation-stages",
+      "sample-spell"
+    ],
+    "law:positive-time": [
+      "sample-open-future",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule",
+      "sample-spell"
+    ],
+    "law:situated-world": [
+      "sample-open-future",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule",
+      "sample-spell"
+    ],
+    "law:local-knowledge": [
+      "sample-open-future",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule",
+      "sample-spell"
+    ],
+    "law:open-future": [
+      "sample-open-future",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule",
+      "sample-spell"
+    ],
+    "law:root-discovery": [
+      "sample-open-future",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule",
+      "sample-spell"
+    ],
+    "law:learned-means": [
+      "sample-open-future",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule",
+      "sample-spell"
+    ],
+    "law:resource-conservation": [
+      "sample-open-future",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule",
+      "sample-spell"
+    ],
+    "law:ownership-and-obligation": [
+      "sample-open-future",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule",
+      "sample-spell"
+    ],
+    "law:mana-cost": [
+      "sample-open-future",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule",
+      "sample-spell"
+    ],
+    "law:sample-boundary": [
+      "sample-open-future",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule",
+      "sample-spell"
+    ],
+    "origin:herbal-apprentice": [
+      "sample-originals",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule"
+    ],
+    "origin:spirit-merchant": [
+      "sample-originals",
+      "sample-calibration",
+      "sample-economy",
+      "sample-spell",
+      "tianyuan-exists",
+      "native-spirit",
+      "spirit-dwellings"
+    ],
+    "origin:han-li": [
+      "han-household",
+      "han-wish",
+      "han-uncle",
+      "han-roots",
+      "sample-open-future"
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "status": "incomplete-collation",
+  "blocked_chapters": [
+    "qq-26497309"
+  ],
+  "findings": [
+    {
+      "id": "missing-opening-1077",
+      "chapter_id": "qq-26497309",
+      "severity": "blocking",
+      "status": "unresolved",
+      "observation": "候选文本缺少官方预览与第二版本均出现的开头对话，约一千字；第二版本此章又有重复和尾部截断，不能整章替换。",
+      "sources": [
+        "https://fanrenxiuxianzhuan.bookresource.qq.com/chapter/107580/26497309/",
+        "https://github.com/fundgao/xiuxian/tree/b75ea20180a209ffd7eba6f5ac4559324be0b763/凡人修仙传"
+      ]
+    },
+    {
+      "id": "preview-limit",
+      "severity": "blocking",
+      "status": "unresolved",
+      "observation": "2451章均与目录对齐，但官方192章为完整文本、2259章只有预览；未完成全篇跨版本校勘，不能据此宣布无删节。"
+    },
+    {
+      "id": "chapter-two-toponym",
+      "chapter_id": "qq-4631525",
+      "severity": "variant",
+      "status": "scoped",
+      "observation": "公开正文一处出现仙霞山，候选为彩霞山；同一地方其他叙述支持彩霞山。样本不另造一个仙霞山。"
+    },
+    {
+      "id": "chapter-six-stray-character",
+      "chapter_id": "qq-4748123",
+      "severity": "variant",
+      "status": "scoped",
+      "observation": "候选开头插入孤立的铁字，公开正文无此字；当前事实不使用该处。"
+    }
+  ],
+  "secondary_sources": [
+    {
+      "id": "fundgao-main-upper",
+      "revision": "b75ea20180a209ffd7eba6f5ac4559324be0b763",
+      "path": "凡人修仙传/凡人修仙传-上.txt",
+      "encoding": "gb18030",
+      "sha256": "e69e69a7542b7c5729cecd75654328db2892b6e65564c34520b707469240cbb9",
+      "bytes": 15296200,
+      "status": "comparison-only-has-duplicates-and-truncation"
+    },
+    {
+      "id": "fundgao-lower-excluded",
+      "revision": "b75ea20180a209ffd7eba6f5ac4559324be0b763",
+      "path": "凡人修仙传/凡人修仙传-下.txt",
+      "encoding": "utf-8",
+      "sha256": "4b01bac50bee0a499e94814a055b164a2a420ba715d40fe567cd575918f5ed54",
+      "bytes": 13949765,
+      "status": "excluded-immortal-sequel"
+    }
+  ]
+}
