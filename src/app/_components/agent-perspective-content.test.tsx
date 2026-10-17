@@ -27,7 +27,7 @@ function view(): AgentPerspectiveView {
 }
 
 describe("grouped perspective reading", () => {
-  it("reads evidence through the same disclosure as the entity, without a graph or duplicate intentions", () => {
+  it("opens one reading view with deduplicated evidence and returns to the card", () => {
     const perspective = view();
     const original = structuredClone(perspective);
     render(<AgentPerspectiveWorkspace perspective={perspective} reduceMotion />);
@@ -35,11 +35,15 @@ describe("grouped perspective reading", () => {
     expect(screen.getAllByText("找到今晚的住处。")).toHaveLength(1);
     expect(screen.getAllByText("把借来的钥匙还给守卫。")).toHaveLength(1);
     const known = screen.getByRole("region", { name: "已知信息" });
-    fireEvent.click(within(known).getByText("守卫"));
-    fireEvent.click(within(known).getByText("查看依据 · 1"));
-    expect(within(known).getByText("你听见守卫提醒旅客赶在日落前回来。")).toBeVisible();
-    expect(within(known).getByText("他人证词")).toBeVisible();
-    expect(within(known).getByText("存疑")).toBeVisible();
+    const card = within(known).getByRole("button", { name: "查看守卫" });
+    fireEvent.click(card);
+    const detail = screen.getByRole("region", { name: "守卫" });
+    expect(within(detail).getByText("你听见守卫提醒旅客赶在日落前回来。")).toBeVisible();
+    expect(within(detail).getByText("他人证词")).toBeVisible();
+    expect(within(detail).getByText("存疑")).toBeVisible();
+    expect(screen.getByRole("heading", { name: "守卫" })).toHaveFocus();
+    fireEvent.click(screen.getByRole("button", { name: "返回视角" }));
+    expect(card).toHaveFocus();
     expect(screen.queryByText("推测存在")).not.toBeInTheDocument();
     expect(perspective).toEqual(original);
   });
@@ -59,9 +63,23 @@ describe("grouped perspective reading", () => {
     render(<AgentPerspectiveWorkspace perspective={view()} reduceMotion />);
     expect(within(screen.getByRole("region", { name: "物品" })).getByText("0")).toBeVisible();
     expect(screen.getByText("暂无身体状态记录。")).toBeVisible();
-    const ability = screen.getByText("能力");
-    fireEvent.click(ability);
-    expect(screen.getByText("显示当前能力值，数值范围为 -3 至 8。")).toBeVisible();
+    expect(screen.getByText("数值范围 -3 至 8")).toBeVisible();
     expect(screen.queryByText("-3…8")).not.toBeInTheDocument();
   });
+  it("keeps carried objects out of known cards and preserves search after reading their evidence", () => {
+    const perspective = view();
+    perspective.knowledge.entities.push({ ref: "local:key", name: "钥匙", description: "铜质的钥匙。", status: "observed", targetable: true });
+    perspective.knowledge.containment.push({ entityRef: "local:key", containerRef: "local:self", depth: 1, viaUnknownContainer: false });
+    perspective.knowledge.claims.push({ ...perspective.knowledge.claims[0], id: "closing", description: "你不确定关门时间。" });
+    render(<AgentPerspectiveWorkspace perspective={perspective} reduceMotion />);
+    expect(within(screen.getByRole("region", { name: "物品" })).getByRole("button", { name: "查看钥匙" })).toBeVisible();
+    expect(within(screen.getByRole("region", { name: "已知信息" })).queryByRole("button", { name: "查看钥匙" })).not.toBeInTheDocument();
+    fireEvent.change(screen.getByRole("searchbox"), { target: { value: "关门" } });
+    fireEvent.click(screen.getByRole("button", { name: "查看守卫" }));
+    const evidence = screen.getByRole("region", { name: "信息依据" });
+    expect(within(evidence).getAllByRole("listitem")).toHaveLength(1);
+    fireEvent.click(screen.getByRole("button", { name: "返回视角" }));
+    expect(screen.getByRole("searchbox")).toHaveValue("关门");
+  });
+
 });

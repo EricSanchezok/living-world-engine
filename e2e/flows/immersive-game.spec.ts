@@ -364,15 +364,22 @@ test("a Participant starts from an Origin, receives Arrival, acts, detaches and 
   await expect(perspective.getByRole("button", { name: "关闭视角" })).toBeFocused();
   await expect(perspective.getByRole("region", { name: "状态", exact: true })).toBeVisible();
   await expect(perspective.getByRole("region", { name: "附近的关系图" })).toHaveCount(0);
-  await perspective.locator(".cg-perspective-map > summary").click();
+  await perspective.getByRole("button", { name: "关系图", exact: true }).click();
   await expect(perspective.getByRole("region", { name: "附近的关系图" })).toBeVisible();
-  await perspective.locator(".cg-perspective-map > summary").click();
+  await perspective.getByRole("button", { name: "卡片", exact: true }).click();
   await page.setViewportSize({ width: 320, height: 720 });
   const known = perspective.getByRole("region", { name: "已知信息", exact: true });
   await expect(known).toBeVisible();
-  const firstEntry = known.locator(".cg-perspective-entity").first();
-  await firstEntry.locator("summary").first().click();
-  await expect(firstEntry.locator(".cg-perspective-entity__body")).toBeVisible();
+  const firstEntry = known.getByRole("button", { name: /^查看/ }).first();
+  await firstEntry.scrollIntoViewIfNeeded();
+  const beforeReading = await perspective.boundingBox();
+  const readingScroll = await perspective.locator(".cg-modal-scroll").evaluate((element) => element.scrollTop);
+  await firstEntry.click();
+  await expect(perspective.getByRole("button", { name: "返回视角" })).toBeVisible();
+  expect(await perspective.boundingBox()).toEqual(beforeReading);
+  await perspective.getByRole("button", { name: "返回视角" }).click();
+  await expect(firstEntry).toBeFocused();
+  expect(await perspective.locator(".cg-modal-scroll").evaluate((element) => element.scrollTop)).toBe(readingScroll);
   expect(await perspective.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
   await page.keyboard.press("Escape");
   await page.setViewportSize({ width: 1_280, height: 720 });
@@ -390,7 +397,8 @@ test("a Participant starts from an Origin, receives Arrival, acts, detaches and 
   await control.getByRole("button", { name: /进入观察模式/ }).click();
   await expect(page.getByRole("button", { name: "接管" })).toBeVisible();
 
-  await page.getByLabel("观察角色").selectOption("keeper");
+  await page.getByRole("combobox", { name: /^观察角色/ }).click();
+  await page.getByRole("option", { name: /^守门人/ }).click();
   await page.getByRole("button", { name: "接管" }).click();
   await expect(page.locator('[data-role="assistant"] .cg-narrative').filter({ hasText: "此刻，你是守门人" }).first()).toBeVisible();
   await expect(page.getByRole("textbox", { name: "你的行动", exact: true })).toBeVisible();

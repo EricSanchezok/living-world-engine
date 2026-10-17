@@ -69,7 +69,7 @@ import { WorldInspectorDetail, type WorldInspectorSelection } from "./world-insp
 import { WorldInspectorAlgorithmComposition } from "./world-inspector-algorithm-composition";
 import { WorldInspectorGraph } from "./world-inspector-graph";
 import { WorldInspectorInvocationList, type WorldInspectorInvocationListItem } from "./world-inspector-invocation-list";
-import { WorldInspectorSelect } from "./world-inspector-select";
+import { AppSelect } from "./app-select";
 import { WorldInspectorTimeline } from "./world-inspector-timeline";
 
 const MemoizedWorldInspectorDetail = memo(WorldInspectorDetail);
@@ -1202,7 +1202,7 @@ export default function WorldInspectorDialog({
                 </button>
                 <button aria-label="下一阶段" disabled={replayFrameIndex >= replay.frames.length - 1} onClick={() => setReplayFrameIndex((index) => Math.min(replay.frames.length - 1, index + 1))} type="button"><ChevronRight aria-hidden="true" /></button>
                 <input aria-label="回放阶段" max={Math.max(0, replay.frames.length - 1)} min={0} onChange={(event) => setReplayFrameIndex(Number(event.target.value))} type="range" value={replayFrameIndex} />
-                <WorldInspectorSelect
+                <AppSelect compact
                   ariaLabel="回放速度"
                   onChange={(value) => setReplayRate(value as 1 | 4 | 16)}
                   options={[{ value: 1, label: "1x" }, { value: 4, label: "4x" }, { value: 16, label: "16x" }]}
@@ -1238,7 +1238,7 @@ export default function WorldInspectorDialog({
                   </div>
                   {graphMode === "technical" && (
                     <label>节点上限
-                      <WorldInspectorSelect
+                      <AppSelect compact
                         ariaLabel="节点上限"
                         onChange={(value) => setTechnicalNodeLimit(value as typeof technicalNodeLimit)}
                         options={[{ value: 100, label: "100" }, { value: 200, label: "200" }, { value: 500, label: "500" }, { value: 1000, label: "1000" }]}

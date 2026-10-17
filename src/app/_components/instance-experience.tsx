@@ -27,6 +27,7 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
+import { AppSelect } from "./app-select";
 import type {
   ControlCandidate,
   PublicConversationTurn,
@@ -360,14 +361,8 @@ function ObserverConsole({
   const selected = observer?.selected?.agent.id ?? "";
   return (
     <div className="cg-observer-console" aria-label="无人演化控制台">
-      <label>
-        <span className="cg-sr-only">观察角色</span>
-        <select disabled={busy || !observer} onChange={(event) => onSelectAgent(event.target.value)} value={selected}>
-          {observer?.agents.map((agent) => (
-            <option key={agent.id} value={agent.id}>{agent.name}{agent.location ? ` · ${agent.location}` : ""}</option>
-          ))}
-        </select>
-      </label>
+      <AppSelect ariaLabel="观察角色" disabled={busy || !observer} onChange={onSelectAgent} value={selected}
+        options={observer?.agents.map((agent) => ({ value: agent.id, label: `${agent.name}${agent.location ? ` · ${agent.location}` : ""}` })) ?? []} />
       <button disabled={busy} onClick={() => onAdvance(1)} type="button"><Play aria-hidden="true" />单步</button>
       <button disabled={busy} onClick={() => onAdvance(10)} type="button"><FastForward aria-hidden="true" />十步</button>
       <button disabled={busy} onClick={onToggleRealtime} type="button">

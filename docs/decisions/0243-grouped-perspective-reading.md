@@ -24,7 +24,7 @@ The perspective combines exact mechanics, quantities, containment, known entitie
 
 ## Decision Outcome
 
-Choose shared grouped reading with an optional focused graph. Status, items, goals and known information carry the primary reading flow. Native disclosures expose details and evidence through the same component on every viewport. Goals and commitments remain personal intentions, separate from factual and epistemic edges. The graph uses the same perspective, opens on demand, shows direct relationships around a selectable object, and navigates back to the existing detail entry. Layout and disclosure state are local UI state; the API, persistence and cognitive boundary remain unchanged. The current presentation contract is defined in the linked product reference.
+Choose shared grouped reading with an optional focused graph. Status, items, goals and known information carry the primary reading flow. Inventory tiles and summary cards navigate to a shared reading view on every viewport. Full descriptions, statements and deduplicated evidence are readable without nested disclosures; returning restores the original query, scroll position and focus. Goals and commitments remain personal intentions, separate from factual and epistemic edges. The graph uses the same perspective, opens on demand, shows direct relationships around a selectable object, and opens the same reading view. Layout and reading state are local UI state; the API, persistence and cognitive boundary remain unchanged. The current presentation contract is defined in the linked product reference.
 
 ## Pros and Cons of the Options
 

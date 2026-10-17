@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { WorldInspectorModelInvocationSummary } from "../../shared/world-inspector-api";
-import { WorldInspectorSelect } from "./world-inspector-select";
+import { AppSelect } from "./app-select";
 
 export type WorldInspectorInvocationListItem = WorldInspectorModelInvocationSummary & {
   /** Query results carry this routing hint; step/attempt projections may omit it because their execution is implicit. */
@@ -250,7 +250,7 @@ export function WorldInspectorInvocationList({
       <header className="cg-inspector-invocation-list__header">
         <div className="cg-inspector-invocation-list__controls" aria-label="调用排序">
           <label>排序
-            <WorldInspectorSelect
+            <AppSelect compact
               ariaLabel="排序"
               onChange={(value) => setSort(value as typeof sort)}
               options={[
