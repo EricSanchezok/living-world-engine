@@ -75,7 +75,7 @@ export function narrativeGroundingIssue(answers: Record<string, { type: string; 
     const choice = answers[`paragraph${index}_${axis}`]?.choice;
     return choice === "grounded" || choice === "redundant" ? [] : [`${axis} (${choice ?? "unverified"}): ${focus}`];
   });
-  return `Rejected paragraph: ${paragraph}\nFailed checks:\n${failed.join("\n")}\nReplace only the unsupported part using the current receipts; preserve any already published prefix.`;
+  return `Rejected paragraph: ${paragraph}\nFailed checks:\n${failed.join("\n")}\nRebuild the affected clause from the current receipts, not from the rejected wording. Omit an unsupported tool, gesture or other detail entirely when the receipts do not establish it; replacing its name with a synonym does not repair the missing evidence. A confirmed result can stand without an invented method. Preserve grounded content and any already published prefix.`;
 }
 
 /** Independent factual checks share one publication request per available paragraph batch. */
