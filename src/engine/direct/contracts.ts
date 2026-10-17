@@ -66,6 +66,7 @@ export interface PreparedDirectAction {
   operations: WorldDeltaOperation[]; visibleFactIds: string[]; visibleEntityIds: string[]; deliveredToEntityIds: string[];
   /** Perception is bound to the value that actually survives settlement. */
   propertyVisibility: Array<{ factId: string; previousValueHash: string; proposedValueHash: string; previousVisible: boolean; proposedVisible: boolean }>;
+  inspectedQuantityIds: string[];
   actorOnlyFactIds: string[]; actorOnlyEntityIds: string[];
   namedEntityIds: string[];
   /** Recipients who can see the actor, independently of hearing the utterance. */

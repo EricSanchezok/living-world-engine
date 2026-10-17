@@ -84,6 +84,10 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
           .map(quantity => { const resource = state.truth.mechanics.quantities[quantity.definitionId]!; return `${quantity.amount}${resource.unit}${resource.name}`; });
         summary += `\n随身物资：${inventory.join("、") || "无"}。`;
       }
+      if (ownsAction) for (const quantity of settlement.inspectedQuantities) {
+        const resource = state.truth.mechanics.quantities[quantity.definitionId]!;
+        summary += `\n本次清点${alias(agent, quantity.holderId, introductions).name}：${quantity.amount}${resource.unit}${resource.name}。`;
+      }
       for (const operation of settlement.operations) if (operation.kind === "transfer_quantity" &&
         (seesActor || operation.fromHolderId === agent.entityId || operation.toHolderId === agent.entityId)) {
         summary += `\n${alias(agent, operation.fromHolderId, introductions).name}向${alias(agent, operation.toHolderId, introductions).name}转移了${operation.amount}${state.truth.mechanics.quantities[operation.definitionId]!.unit}${state.truth.mechanics.quantities[operation.definitionId]!.name}。`;

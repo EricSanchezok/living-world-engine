@@ -21,6 +21,7 @@ import { agentCapabilityModels } from "../models/capability-bindings";
 
 export interface ActionSettlement {
   frame: ActionFrame; outcome: ActionOutcome; operations: WorldDeltaOperation[]; visibleFacts: WorldFact[];
+  inspectedQuantities: SimulationState["truth"]["quantities"][string][];
   visibleEntities: WorldEntity[];
   actorOnlyFactIds: string[]; actorOnlyEntityIds: string[];
   namedEntityIds: string[];
@@ -99,6 +100,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     adjudicationPolicy: loadPromptAsset("user/direct-world.md"), adjudicationRules };
   const effects = new Map<string, { fact: WorldFact; values: FactValue[] }>();
   const visibility = new Map<string, WorldFact>();
+  const quantityVisibility = new Map<string, string>();
   const entityVisibility = new Map<string, WorldEntity>();
   const entityNames = new Map<string, string>();
   const incidental = new Map<string, { facts: string[]; entities: string[] }>();
@@ -164,6 +166,14 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     const focus = frame.kind === "observe" && frame.observationScope === "inventory" ? frame.actorEntityId
       : frame.kind === "observe" && (!frame.targetEntityId || frame.targetEntityId === frame.actorEntityId) ? state.truth.placements[frame.actorEntityId] : frame.targetEntityId;
     const targetFacts = orderedValues(state.truth.facts).filter(fact => fact.subjectId === (focus ?? frame.actorEntityId));
+    if (frame.kind === "observe" && frame.observationScope === "target" && frame.targetEntityId && frame.targetEntityId !== frame.actorEntityId) {
+      for (const [ordinal, quantity] of orderedValues(state.truth.quantities).filter(quantity => quantity.holderId === frame.targetEntityId).entries()) {
+        const id = `${prefix}_quantity${ordinal}`;
+        quantityVisibility.set(id, quantity.id);
+        questions[id] = question("Can THIS inspection actually determine this held resource's exact current quantity? Judge physical access, attention, counting or measurement and the selected method. Seeing the holder alone does not reveal a hidden purse, sealed contents, distant stock or an accounting balance. An inspection may count exposed crates without opening them, but not infer their concealed contents. Select measured only for an actual available measurement; do not guess a number or publish other holdings.",
+          { actionId: frame.id, quantityId: quantity.id }, { measured: "The selected inspection measures this quantity", hidden: "This quantity remains unmeasured or inaccessible" });
+      }
+    }
     const effectSubjects = new Set([frame.actorEntityId, frame.targetEntityId, frame.toolEntityId]);
     const effectFacts = ["move", "use", "change"].includes(frame.kind)
       ? orderedValues(state.truth.facts).filter(fact => effectSubjects.has(fact.subjectId)) : targetFacts;
@@ -176,11 +186,11 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
           ...Object.fromEntries(values.map((value, i) => [`v${i}`, value as unknown as Record<string, JsonValue>])) });
     }
     if (["use", "change"].includes(frame.kind)) {
-      if (!capability) questions[`${prefix}_expression`] = question("How will this immediate result be represented? existing requires a specific available property or authored procedure that actually expresses the result. An unrelated appearance or object description is insufficient. A posture, holding/contact, ongoing pressure or temporary bodily relation persists after this boundary and needs an actual property, even when its intended wider benefit fails. Use expand if that property is missing. no_change is only a newly performed instantaneous method with no continuing condition. already means evidence establishes that the requested end state already holds: no repeated method occurs. Do not silently drop a requested state change or duplicate a property for a differently worded method.", {
+      if (!capability) questions[`${prefix}_expression`] = question("How will this immediate result be represented? existing requires a specific available property or authored procedure that actually expresses the result. An unrelated appearance or object description is insufficient. A posture, holding/contact, ongoing pressure or bodily relation that REMAINS after the final stage needs an actual property, even when its intended wider benefit fails. Do not preserve intermediate states that the same method then ends. Use expand if that property is missing. no_change is a newly performed bounded method with no continuing qualitative condition after its final stage; independent meter or resource costs can still apply. already means evidence establishes that the requested end state already holds: no repeated method occurs. Do not silently drop a requested state change or duplicate a property for a differently worded method.", {
         actionId: frame.id, existingPropertyIds: effectFacts.map(fact => fact.id),
         authoredProcedures: definition.randomDistributions as unknown as JsonValue }, {
         existing: "A specific existing property or authored procedure expresses the immediate effect",
-        no_change: "A new instantaneous method is performed without any continuing posture, contact or state change",
+        no_change: "A new bounded method finishes with no continuing qualitative state change; numeric costs remain independent",
         already: "Actual current evidence establishes the requested state already holds; no repeated physical method is needed",
         expand: "A plausible new qualitative property, construct or capability is needed to express the actual intended effect",
       });
@@ -549,6 +559,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     }
     if (!["succeeded", "partial"].includes(status)) operations = [];
     prepared.push({ actionId: frame.id, status, summary: detail, operations, reads: view.reads, propertyVisibility,
+      inspectedQuantityIds: ["succeeded", "partial"].includes(status) ? [...quantityVisibility]
+        .filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "measured").map(([, id]) => id) : [],
       actorOnlyFactIds: incidental.get(frame.id)!.facts, actorOnlyEntityIds: incidental.get(frame.id)!.entities,
       visibleFactIds: [...visibleFacts.filter(fact => state.truth.facts[fact.id] || ["succeeded", "partial"].includes(status)),
         ...(["succeeded", "partial"].includes(status) ? expansion?.facts ?? [] : []),

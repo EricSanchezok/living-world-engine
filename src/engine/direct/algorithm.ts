@@ -169,7 +169,7 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     // Adjudicate once, then retain executable effects across intervening clock boundaries.
     for (const frame of control.activities.filter(frame => frame.kind === "reflect")) {
       control.prepared[frame.id] = { actionId: frame.id, reads: {},
-        status: "succeeded", summary: "你复核了自己已有的记录。", operations: [], visibleFactIds: [], propertyVisibility: [], visibleEntityIds: [], namedEntityIds: [],
+        status: "succeeded", summary: "你复核了自己已有的记录。", operations: [], visibleFactIds: [], propertyVisibility: [], visibleEntityIds: [], namedEntityIds: [], inspectedQuantityIds: [],
         actorOnlyFactIds: [], actorOnlyEntityIds: [],
         deliveredToEntityIds: [], randomRequests: [], randomBindings: [], sharedClaims: [], ongoing: false, requestProgress: "complete" };
     }

@@ -27,9 +27,10 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
   playerAuthorization?: "authorized" | "outside_scope" | "unknown";
   worldOutcomes?: Record<string, string>;
   readingOverrides?: Record<string, string>; npcReadings?: unknown[]; factValues?: Record<string, string>; resolvedDuration?: string; resolvedDurations?: Record<string, string>; effectRepresentation?: "existing" | "no_change" | "already" | "expand";
-  withMana?: boolean; meterImpacts?: Record<string, string> } = {}) {
+  withMana?: boolean; meterImpacts?: Record<string, string>; inspectedStock?: number; quantityMeasured?: boolean } = {}) {
   let creations = 0;
   let npcReadings = 0;
+  let inspectedQuantityId = "";
   const f = directTestProvider(wire => {
     if (!wire.questions) {
       creations++;
@@ -83,6 +84,10 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
         value = options.meterImpacts?.[task.data.meterId] ?? "none";
       }
       if (/_impact\d+_magnitude$/u.test(id)) value = "standard";
+      if (/_quantity\d+$/u.test(id)) {
+        const task = (q.instructions as { task: { data: { quantityId: string } } }).task;
+        value = options.quantityMeasured !== false && task.data.quantityId === inspectedQuantityId ? "measured" : "hidden";
+      }
       if (/_fact\d+$/u.test(id)) {
         const instructions = q.instructions as { task?: { data?: { fact?: { predicate: string } } }; data?: { fact?: { predicate: string } } };
         const fact = (instructions.task ?? instructions).data?.fact;
@@ -95,6 +100,18 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
   });
   const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: f.catalog });
   const player = world.initialState.agents.player!;
+  if (options.inspectedStock !== undefined) {
+    world.initialState.truth.mechanics.quantities["sealed-gold"] = { id: "sealed-gold", name: "封存金砂", unit: "袋", productionLawIds: [], consumptionLawIds: [] };
+    inspectedQuantityId = quantityId(world.initialState.worldHash, "spirit-stone", "gate");
+    for (const quantity of [
+      { holderId: "gate", definitionId: "spirit-stone", amount: options.inspectedStock },
+      { holderId: "gate", definitionId: "sealed-gold", amount: 29 },
+      { holderId: "courtyard", definitionId: "spirit-stone", amount: 293 },
+    ]) {
+      const id = quantityId(world.initialState.worldHash, quantity.definitionId, quantity.holderId);
+      world.initialState.truth.quantities[id] = { ...quantity, id };
+    }
+  }
   if (options.withMana) {
     world.initialState.truth.mechanics.meters.mana = { id: "mana", name: "Mana", min: 0, max: 20, thresholds: [] };
     world.initialState.truth.mechanics.impactProfiles["spell-cost"] = { id: "spell-cost", name: "Spell cost", meterDefinitionId: "mana",
@@ -183,6 +200,30 @@ describe("direct world through the actual simulation entry", () => {
     expect(replaySimulationState(third.state)).toEqual(third.state);
   });
 
+  it.each([[17, true], [0, true], [17, false]] as const)("inspects only admitted target quantities without leaking them to a witness: %s / %s", async (amount, measured) => {
+    const f = await fixture({ operation: "observe", target: "door", inspectedStock: amount, quantityMeasured: measured });
+    await f.engine.bootstrapAgents();
+    const before = f.engine.snapshot;
+    const result = await f.engine.step(f.roster, f.request("清点门上陈列的灵石，暂不告诉旁人"));
+    const observations = result.committed.observations.filter(packet => packet.observerId === "player").map(packet => packet.summary).join("\n");
+    expect(observations.includes(`本次清点石门：${amount}枚灵石`)).toBe(measured);
+    expect(observations).not.toContain("29袋封存金砂");
+    expect(observations).not.toContain("293枚灵石");
+    expect(result.committed.observations.filter(packet => packet.observerId === "keeper").every(packet => !packet.summary.includes("本次清点"))).toBe(true);
+    expect(result.state.truth.quantities).toEqual(before.truth.quantities);
+    expect(result.state.truth.facts).toEqual(before.truth.facts);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+  it("charges a completed bounded method without inventing a continuing qualitative condition", async () => {
+    const f = await fixture({ operation: "use", target: "door", withMana: true, effectRepresentation: "no_change", meterImpacts: { "player-mana": "spell-cost" } });
+    await f.engine.bootstrapAgents();
+    const before = f.engine.snapshot;
+    const result = await f.engine.step(f.roster, f.request("以法力短暂托起物件，然后放回原位并停止施法"));
+    expect(result.state.truth.meters["player-mana"]!.current).toBe(7);
+    expect(result.state.truth.facts).toEqual(before.truth.facts);
+    expect(result.committed.outcomes.find(outcome => outcome.proposalId === result.committed.actions.find(action => action.actorId === "player")!.id)!.status).toBe("succeeded");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it.each(["guard", "self"])("binds actor costs and target effects to real meters without double-charging a shared role: %s", async target => {
     const options: NonNullable<Parameters<typeof fixture>[0]> = { operation: "use", target, withMana: true };
     const f = await fixture(options);

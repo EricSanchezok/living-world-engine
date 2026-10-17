@@ -1,6 +1,6 @@
 # Direct world runtime
 
-This reference owns the default `direct-world@12` execution contract, approved in [Spec 0182](../specs/0182-jev-direct-world-runtime.md). Its implementation lives in [`src/engine/direct/`](../../src/engine/direct/algorithm.ts). The script contract is v17, SimulationState is v21 and WorldInstanceDocument is v33.
+This reference owns the default `direct-world@12` execution contract, approved in [Spec 0182](../specs/0182-jev-direct-world-runtime.md). Its implementation lives in [`src/engine/direct/`](../../src/engine/direct/algorithm.ts). The script contract is v18, SimulationState is v22 and WorldInstanceDocument is v33.
 
 ## Model responsibilities
 
@@ -95,6 +95,8 @@ Each interpretation field carries its operation-specific meaning in the output s
 A continuation may close an already executed submission through `request_complete`. It requires existing receipts from that same submission and produces a control update with no additional action, speech, narrative explanation or elapsed time. A new input cannot use old receipts to skip its requested attempt. The previous step's continuation prediction does not require a fabricated follow-up when actual receipts establish completion.
 
 The immediate-response progress question includes the actual triggering action and delivered words. An inspection requested together with a report can continue into that report; the original participant cause remains attached through the follow-through even when another nearby character speaks. When an NPC's response to a participant request fails or is blocked and world adjudication requests continuation, the same cause remains available under the existing two-attempt no-progress bound. The NPC can explain the observed failure, decline or wait; the engine neither invents that explanation nor makes the failed operation succeed. A completed report releases the participant turn while unrelated background conversation remains queued. Failed player actions and rejected player authorization do not gain this NPC continuation.
+
+Target inspection can measure owned quantities through an available physical channel. The same world batch admits exact quantity identities; settlement projects their current amounts only to the inspector. No duplicate inventory fact is created, and seeing the inspector does not reveal that count. Missing resource rows remain unknown rather than measured zero. [Decision 0247](../decisions/0247-actor-scoped-quantity-inspection.md) owns the alternatives. Player continuation evaluates the result after its selected inspection; a requested later report can describe observed uncertainty. Physical method effects describe the final stage, while resource costs remain independently owned.
 
 ## Open qualitative values and conversational continuation
 

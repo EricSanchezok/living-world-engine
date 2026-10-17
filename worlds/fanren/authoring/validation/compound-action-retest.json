@@ -1,0 +1,81 @@
+{
+  "status": "limited-cases-passed",
+  "run_id": "2026-10-17T07-50-35-699Z-spirit-merchant",
+  "instance_id": "e494cd22-390d-43a9-bb94-9c9ffa4b8e78",
+  "world_hash": "sha256:3707328e868278af70880ccd577b65e4591746791056a677f5f8b81c7930321e",
+  "producer": {
+    "role": "world-execution",
+    "id": "direct-world",
+    "version": "6",
+    "contractVersion": 13,
+    "config": {
+      "decision": null,
+      "creation": null,
+      "fallback": null,
+      "creationEnabled": true
+    },
+    "children": {},
+    "manifestHash": "26d8c04c4a55f41e8db51b0cceda4aedf964a992ba9d676fe102b39feecce374"
+  },
+  "agents_in_state": 15,
+  "agents_with_committed_actions": 5,
+  "acting_agent_ids": [
+    "spirit-client-one",
+    "spirit-client-two",
+    "spirit-manager",
+    "spirit-merchant-1",
+    "spirit-supplier"
+  ],
+  "duration_ms": 55775,
+  "physical_requests": 39,
+  "logical_invocations": 39,
+  "audited_invocations": 39,
+  "known_tokens": {
+    "input": {
+      "known_sum": 623731,
+      "unknown_invocations": 0
+    },
+    "output": {
+      "known_sum": 52482,
+      "unknown_invocations": 0
+    },
+    "reasoning": {
+      "known_sum": 4583,
+      "unknown_invocations": 23
+    },
+    "cacheRead": {
+      "known_sum": 44160,
+      "unknown_invocations": 23
+    }
+  },
+  "cost": null,
+  "cost_note": "缺少完整计费凭据；未知用量不按零计费。",
+  "error_events": {},
+  "checks": [
+    {
+      "case": "清点实际数量后向两位指定对象报告",
+      "result": "passed-limited-case",
+      "actual_count": 17,
+      "document_count": 20,
+      "delivered_to": [
+        "spirit-manager",
+        "spirit-supplier"
+      ]
+    },
+    {
+      "case": "托起再收回的最终状态与法力成本",
+      "result": "passed-limited-case",
+      "initial_mana": 1200,
+      "actual_mana": 1199,
+      "actual_placement": "spirit-merchant-1",
+      "persistent_levitation_fact": false
+    },
+    {
+      "case": "库存与账户守恒",
+      "result": "passed-limited-case",
+      "evidence": "店内17箱与货场3箱保留；没有库存写入、生成或转移。"
+    }
+  ],
+  "limits": "仅检验这两个复合请求；其他玩法、九种身份和三个规模档位未据此验收。与正文提取并发，耗时不是受控A/B比较。",
+  "local_evidence": "ignored cache fanren-playtests/2026-10-17T07-50-35-699Z-spirit-merchant/livingworld.sqlite"
+}
