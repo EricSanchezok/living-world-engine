@@ -1,0 +1,156 @@
+{
+  "formatVersion": 1,
+  "generatedAt": "2026-10-17T16:55:58.809592+00:00",
+  "status": "transport-validated-live-calibration-editorial-work-in-progress",
+  "scope": "正文独立复核的传输、复用、修复与两批实测；不代表全域剧本验收。",
+  "offline": {
+    "networkGenerationCalls": 0,
+    "acceptedReviewReuse": {
+      "acceptedReportsPresent": 212,
+      "acceptedValidated": 212,
+      "acceptedRoundTripsPassed": 212,
+      "acceptedReviewRows": 39018,
+      "errors": 0
+    },
+    "pendingPlan": {
+      "batches": 186,
+      "originalContextBytes": 48158720,
+      "compactContextBytes": 27575321,
+      "originalSchemaBytes": 7435399,
+      "compactSchemaBytes": 1113229
+    },
+    "failedDraftReplay": {
+      "selectedFailedDrafts": 70,
+      "targetedRepairDrafts": 63,
+      "fullFallbackDrafts": 7,
+      "partialWithFewerOutputRows": 50,
+      "partialWithAllRowsTargeted": 13,
+      "partialTargetRows": 3006,
+      "partialFullBaselineRows": 11701
+    },
+    "replayFileSha256": "4694f75fba3fc139dee9389faeea8d87e2627063dfbd72a007a70d1b5cafbf3d"
+  },
+  "livePilots": [
+    {
+      "batchId": "batch-0200",
+      "report": "../adjudications/batch-0200.json",
+      "fileSha256": "a40378e23ed0a454e4626d6e46b49eff4cb40bb43c4ff01afcd77be07c7fb945",
+      "identity": "2541bf12d08ec6c99a5ea1c14ea7cd65eebc63a2624d16e80a5793eea6f460e8",
+      "model": "deepseek-flash",
+      "effort": "high",
+      "durationMs": 441339,
+      "generationCalls": 2,
+      "tokens": {
+        "input": 116811,
+        "output": 104466,
+        "reasoning": 53135,
+        "cacheRead": 1536
+      },
+      "invocations": [
+        {
+          "requestHash": "6b8936d4856d63b385d3e8124072029dbb13466e40c3596613df85d3821de94d",
+          "responseHash": "af9393a6642d230b41ae00f453cbc9e058a0109c71e573414e8abd747c3d2c0d",
+          "finishReason": "length",
+          "disposition": "rejected",
+          "usage": {
+            "input": 44425,
+            "output": 65535,
+            "reasoning": 42278,
+            "cacheRead": 0,
+            "cacheWrite": null
+          }
+        },
+        {
+          "requestHash": "98a0b6956f3bc869b66876475818402543d01afb4e72b7ee32e22cdbbd231e35",
+          "responseHash": "aa2e58010c1cc39a9e758c553817cb12163171f24c9ecf82657ea1645b9abd82",
+          "finishReason": "stop",
+          "disposition": "accepted",
+          "usage": {
+            "input": 72386,
+            "output": 38931,
+            "reasoning": 10857,
+            "cacheRead": 1536,
+            "cacheWrite": null
+          }
+        }
+      ],
+      "status": "source-review-evidence-needs-editorial-disposition",
+      "approvedForRuntime": false
+    },
+    {
+      "batchId": "batch-0204",
+      "report": "../adjudications/batch-0204.json",
+      "fileSha256": "6da1503c607c0c4bbcbe9e1aad9646a31f84f2a492c58b2880572c67ae009a66",
+      "identity": "54e44148ae64c91386996169300e3db29d1ff692b9e6d7b94014a18ed597eed1",
+      "model": "deepseek-flash",
+      "effort": "low",
+      "durationMs": 212328,
+      "generationCalls": 1,
+      "tokens": {
+        "input": 46069,
+        "output": 49555,
+        "reasoning": 23794,
+        "cacheRead": 0
+      },
+      "invocations": [
+        {
+          "requestHash": "6eb4c136d34658eca79998c338f3327d9d00eef579a927a9f8c3eb70faabe8c8",
+          "responseHash": "2415ab5e0b9614d5de37b5bb3cdbeff84eedb6367c8f1a3fce81069bfaa56159",
+          "finishReason": "stop",
+          "disposition": "accepted",
+          "usage": {
+            "input": 46069,
+            "output": 49555,
+            "reasoning": 23794,
+            "cacheRead": 0,
+            "cacheWrite": null
+          }
+        }
+      ],
+      "status": "source-review-evidence-needs-editorial-disposition",
+      "approvedForRuntime": false
+    }
+  ],
+  "accounting": {
+    "tokenTotal": "input + output；reasoning 已包含于 output，cacheRead 已包含于 input，不重复相加。",
+    "currencyCost": null,
+    "currencyCostReason": "未取得实际账单；不以目录价格冒充实际扣费。",
+    "deduplication": "按原始请求/响应哈希与调用顺序核对；逻辑 invocation id 可在重试间相同，不能仅据它去重。"
+  },
+  "decisions": [
+    "正文复核默认 Flash/low，每次保留完整正文、候选语义和独立断言。",
+    "只复用通过当前来源、策略、结构与覆盖检查的报告，原模型审计身份不改。",
+    "局部修复固定合格行；上下文变化放在末尾以保留公共前缀。",
+    "停止信号或认证/余额故障取消尚未派出的队列工作，保留已派出结果。",
+    "按受限批次继续，已通过的来源复核不因更换模型而重做。"
+  ],
+  "limitations": [
+    "字节数与可定位的修复行数不是实测token或费用节省率。",
+    "两批内容不同；high两次共221277 token，low一次95624 token，不构成同一任务的受控质量或成本比较。",
+    "high批次输出截断后完整重试；本次两批尚未给出真实局部修复成功率。",
+    "模型引用和结构正确不保证语义正确；编辑发现的范围、身份与时间问题另存修订，不改写原始模型输出。",
+    "正文、开篇定位、地域落点、资源关系与真实游玩仍有待办；不得将这些数据升级为完整世界批准。"
+  ],
+  "checks": {
+    "checkFast": {
+      "exitCode": 0,
+      "testFiles": 408,
+      "tests": 2739,
+      "governanceGates": 6,
+      "existingLintWarnings": 3,
+      "logSha256": "67670fa8a6dcf3b1b7c9f5002ff1db70143c1e6fd41b8ad854174bcad6dfebe9"
+    },
+    "focusedRunnerAndReuse": {
+      "testFiles": 2,
+      "tests": 6,
+      "exitCode": 0
+    },
+    "editorialCorrections": {
+      "file": "../reviews/editorial-findings.json",
+      "newCandidateCorrections": 41,
+      "sourceRangesChecked": 181,
+      "distinctRangesReadByRoot": 76,
+      "runtimeApproval": false
+    }
+  }
+}

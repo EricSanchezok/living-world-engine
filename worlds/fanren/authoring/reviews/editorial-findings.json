@@ -1,7 +1,7 @@
 {
   "formatVersion": 1,
   "reviewer": "root-source-comparison",
-  "reviewedAt": "2026-10-17T09:37:53.687688+00:00",
+  "reviewedAt": "2026-10-17T17:01:48.920765+00:00",
   "scope": "selected-facts-only",
   "chapterReadOrReviewPromotion": false,
   "findings": [
@@ -199,6 +199,2127 @@
         }
       ],
       "runtimeApproval": false
+    },
+    {
+      "candidateId": "batch-0200-issue-0006",
+      "reportHash": "6c5b6a7857e4554d4a949ab429387ee4b942230d75fddeda0829fb4d8be52676",
+      "verdict": "unsupported-conflict-resolution",
+      "correctedInterpretation": "本批反复叙述南歧子为筑基期，但取镜后的“一名炼气期修士”处于同一主体连续语境，仍可能是原文称谓歧义；不能无据断言该句一定仅是泛论。保留 still-open，筑基主陈述与炼气异常并列。",
+      "reason": "独立复读 batch-0200 后，对该候选的本次审校输出提出编辑纠正（B01）：将“一名炼气期修士都有这种东西”断言为泛论，并据此把歧义标为 resolved-in-this-batch，没有正文支持排除同一指称。该句紧接南歧子腕环取镜和韩立“这个好像”的判断，附近叙述又明确称他筑基期。可以采纳筑基期为本段反复出现的主陈述，不能宣布另一句确定不指南歧子。",
+      "evidence": [
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:517",
+          "paragraphSha256": "ac87267f572a134e6f19970fc5a43340f029fb725122f5b5337f7e37cba0c489",
+          "start": 517,
+          "end": 576,
+          "anchorSha256": "ac87267f572a134e6f19970fc5a43340f029fb725122f5b5337f7e37cba0c489",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:773",
+          "paragraphSha256": "81fae91ebfbdcbb536549d2bfaab006a09327b4b6f246238fa9dff921740e581",
+          "start": 773,
+          "end": 838,
+          "anchorSha256": "81fae91ebfbdcbb536549d2bfaab006a09327b4b6f246238fa9dff921740e581",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:854",
+          "paragraphSha256": "f3e768e5ef51681f6c4d8f44e60c13d30bc6292be1e45f8d3b79fb86d2503c89",
+          "start": 854,
+          "end": 909,
+          "anchorSha256": "f3e768e5ef51681f6c4d8f44e60c13d30bc6292be1e45f8d3b79fb86d2503c89",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:1436",
+          "paragraphSha256": "34bef002598de18f29c5711d4b4e7b0dd1af45110242f58d0d99bb7fbfbf72eb",
+          "start": 1436,
+          "end": 1491,
+          "anchorSha256": "34bef002598de18f29c5711d4b4e7b0dd1af45110242f58d0d99bb7fbfbf72eb",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:3214",
+          "paragraphSha256": "1056b18f9e41dfd22deed93911545d50c50036e4c8af17d4c4f24528af9626de",
+          "start": 3214,
+          "end": 3232,
+          "anchorSha256": "1056b18f9e41dfd22deed93911545d50c50036e4c8af17d4c4f24528af9626de",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "6f8619800637e333846b7e1117d16a167b541ccd698013615dadb36a81032728",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0200-object-0021",
+      "reportHash": "6c5b6a7857e4554d4a949ab429387ee4b942230d75fddeda0829fb4d8be52676",
+      "verdict": "scope-requires-reconciliation",
+      "correctedInterpretation": "灵界场景中小七借手套驱动灵具；天澜分身曾说杰出凡人似可抗衡修士，韩立见南歧子对自己客气后推断凡人力量不可轻侮。本批不能证明灵界修士普遍客气，也不能把这一评价回填为T0定律。",
+      "reason": "独立复读 batch-0200 后，对该候选的本次审校输出提出编辑纠正（B02）：对象汇总丢失来源限定：object-0021 以 narration/supported 写“修士对凡人也较客气”，把南歧子对这名炼体高手的个案和韩立推断扩为灵界社会规律；object-0040 以 narration/supported 写血咒制作来源与违约取魂，未保留张奎说法。对应 fact-0045 已正确要求推断限定，facts-0011/0014 已标 testimony，汇总反而升级。",
+      "evidence": [
+        {
+          "chapterId": "qq-27834461",
+          "paragraphId": "qq-27834461:110",
+          "paragraphSha256": "3a97f9146c273769f8f86b8da28653e33809b15ee532377c14c8007cf8f582ce",
+          "start": 110,
+          "end": 184,
+          "anchorSha256": "3a97f9146c273769f8f86b8da28653e33809b15ee532377c14c8007cf8f582ce",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:395",
+          "paragraphSha256": "309f8b07a92698f9f910f38ad3da6c8b0490b8d462d956f28c00a21a4f66b390",
+          "start": 395,
+          "end": 499,
+          "anchorSha256": "309f8b07a92698f9f910f38ad3da6c8b0490b8d462d956f28c00a21a4f66b390",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:577",
+          "paragraphSha256": "4d0de5fc2caa4a08d19485afe7a14b0b9a1b4c4aef65abef0a65ceefeb442971",
+          "start": 577,
+          "end": 682,
+          "anchorSha256": "4d0de5fc2caa4a08d19485afe7a14b0b9a1b4c4aef65abef0a65ceefeb442971",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:683",
+          "paragraphSha256": "dcfb27a3b1088c763187c20c245e44893e23a85788dfd18f50625da018840598",
+          "start": 683,
+          "end": 726,
+          "anchorSha256": "dcfb27a3b1088c763187c20c245e44893e23a85788dfd18f50625da018840598",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27825873",
+          "paragraphId": "qq-27825873:1821",
+          "paragraphSha256": "82ec36ac415d681d6286981dadd091f0723886eb6e87000eb9a4e302d366ae16",
+          "start": 1821,
+          "end": 1992,
+          "anchorSha256": "82ec36ac415d681d6286981dadd091f0723886eb6e87000eb9a4e302d366ae16",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27825873",
+          "paragraphId": "qq-27825873:2047",
+          "paragraphSha256": "b0e405fc3e889609e5baf066eb3dfbeae6d8c2345ca983d5b6bd93d372477a7c",
+          "start": 2047,
+          "end": 2146,
+          "anchorSha256": "b0e405fc3e889609e5baf066eb3dfbeae6d8c2345ca983d5b6bd93d372477a7c",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "6f8619800637e333846b7e1117d16a167b541ccd698013615dadb36a81032728",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0200-object-0040",
+      "reportHash": "6c5b6a7857e4554d4a949ab429387ee4b942230d75fddeda0829fb4d8be52676",
+      "verdict": "testimony-promoted-to-narration",
+      "correctedInterpretation": "血咒文书是现场使用的契约符箓；张奎称它由血咒门制作、精血与同意使契约生效，违约会取魂。韩立另判断只能约束筑基左右；未观测违约后果，不能把张奎说法当独立叙述确认。",
+      "reason": "独立复读 batch-0200 后，对该候选的本次审校输出提出编辑纠正（B02）：对象汇总丢失来源限定：object-0021 以 narration/supported 写“修士对凡人也较客气”，把南歧子对这名炼体高手的个案和韩立推断扩为灵界社会规律；object-0040 以 narration/supported 写血咒制作来源与违约取魂，未保留张奎说法。对应 fact-0045 已正确要求推断限定，facts-0011/0014 已标 testimony，汇总反而升级。",
+      "evidence": [
+        {
+          "chapterId": "qq-27834461",
+          "paragraphId": "qq-27834461:110",
+          "paragraphSha256": "3a97f9146c273769f8f86b8da28653e33809b15ee532377c14c8007cf8f582ce",
+          "start": 110,
+          "end": 184,
+          "anchorSha256": "3a97f9146c273769f8f86b8da28653e33809b15ee532377c14c8007cf8f582ce",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:395",
+          "paragraphSha256": "309f8b07a92698f9f910f38ad3da6c8b0490b8d462d956f28c00a21a4f66b390",
+          "start": 395,
+          "end": 499,
+          "anchorSha256": "309f8b07a92698f9f910f38ad3da6c8b0490b8d462d956f28c00a21a4f66b390",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:577",
+          "paragraphSha256": "4d0de5fc2caa4a08d19485afe7a14b0b9a1b4c4aef65abef0a65ceefeb442971",
+          "start": 577,
+          "end": 682,
+          "anchorSha256": "4d0de5fc2caa4a08d19485afe7a14b0b9a1b4c4aef65abef0a65ceefeb442971",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:683",
+          "paragraphSha256": "dcfb27a3b1088c763187c20c245e44893e23a85788dfd18f50625da018840598",
+          "start": 683,
+          "end": 726,
+          "anchorSha256": "dcfb27a3b1088c763187c20c245e44893e23a85788dfd18f50625da018840598",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27825873",
+          "paragraphId": "qq-27825873:1821",
+          "paragraphSha256": "82ec36ac415d681d6286981dadd091f0723886eb6e87000eb9a4e302d366ae16",
+          "start": 1821,
+          "end": 1992,
+          "anchorSha256": "82ec36ac415d681d6286981dadd091f0723886eb6e87000eb9a4e302d366ae16",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27825873",
+          "paragraphId": "qq-27825873:2047",
+          "paragraphSha256": "b0e405fc3e889609e5baf066eb3dfbeae6d8c2345ca983d5b6bd93d372477a7c",
+          "start": 2047,
+          "end": 2146,
+          "anchorSha256": "b0e405fc3e889609e5baf066eb3dfbeae6d8c2345ca983d5b6bd93d372477a7c",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "6f8619800637e333846b7e1117d16a167b541ccd698013615dadb36a81032728",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0200-object-0047",
+      "reportHash": "6c5b6a7857e4554d4a949ab429387ee4b942230d75fddeda0829fb4d8be52676",
+      "verdict": "temporal-scope-error",
+      "correctedInterpretation": "正文说明金刚诀借外界灵力强行灌体；“五大炼体秘术”来自南歧子当时评价，本批没有创制年代足以确定T0。南歧子诊断韩立经脉损伤属于后期事件，不随功法整体 backprojection。",
+      "reason": "独立复读 batch-0200 后，对该候选的本次审校输出提出编辑纠正（B03）：对象存在与描述中行动时间仍混用。object-0047 整句包括南歧子诊断韩立经脉损伤，却标 opening=backprojection/validTime=长期；“五大炼体秘术”只能说明场景时已有名称，不能单凭该称号定位至十岁韩立时点。object-0048 的韩立第四层、object-0065/0066 的韩立持有及埋藏却标 opening=unknown；同批 fact-0004/0057 已明确这些是 future。",
+      "evidence": [
+        {
+          "chapterId": "qq-27834461",
+          "paragraphId": "qq-27834461:283",
+          "paragraphSha256": "b7838f3542535246240aac18b5d6be50344a80ebefe7bafc55ae0abd62cc8a47",
+          "start": 283,
+          "end": 342,
+          "anchorSha256": "b7838f3542535246240aac18b5d6be50344a80ebefe7bafc55ae0abd62cc8a47",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27834461",
+          "paragraphId": "qq-27834461:343",
+          "paragraphSha256": "8ceb17c7885f9c25187362daef9e7c080e3624afb0f1637b269a6d8811f0f8f4",
+          "start": 343,
+          "end": 437,
+          "anchorSha256": "8ceb17c7885f9c25187362daef9e7c080e3624afb0f1637b269a6d8811f0f8f4",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:927",
+          "paragraphSha256": "47528a7b4c84067cc38029db904384c83ddc26fe91bf3654677d0bc9a2995b58",
+          "start": 927,
+          "end": 992,
+          "anchorSha256": "47528a7b4c84067cc38029db904384c83ddc26fe91bf3654677d0bc9a2995b58",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:1081",
+          "paragraphSha256": "4e8305313c6dc37113403964be322ba8f4cfb19414f4f2ce4297afac1ebb775a",
+          "start": 1081,
+          "end": 1144,
+          "anchorSha256": "4e8305313c6dc37113403964be322ba8f4cfb19414f4f2ce4297afac1ebb775a",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:1519",
+          "paragraphSha256": "3465a548752de67b12177f08c494093b6452683cf8b193f6601ac1b8cdc99ae2",
+          "start": 1519,
+          "end": 1709,
+          "anchorSha256": "3465a548752de67b12177f08c494093b6452683cf8b193f6601ac1b8cdc99ae2",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27860830",
+          "paragraphId": "qq-27860830:2079",
+          "paragraphSha256": "d44cfe288fc15ff507e7088e001f433fedf4bdede13a8699a09daca1cc5d5a08",
+          "start": 2079,
+          "end": 2196,
+          "anchorSha256": "d44cfe288fc15ff507e7088e001f433fedf4bdede13a8699a09daca1cc5d5a08",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "6f8619800637e333846b7e1117d16a167b541ccd698013615dadb36a81032728",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0200-object-0048",
+      "reportHash": "6c5b6a7857e4554d4a949ab429387ee4b942230d75fddeda0829fb4d8be52676",
+      "verdict": "temporal-scope-error",
+      "correctedInterpretation": "明王决与金刚诀是同一种功法的不同修炼方式，功法在T0存在年代仅本批未知；韩立借淬骨诀与龙鳞果辅助达到第四层明确是开篇之后的修炼结果。",
+      "reason": "独立复读 batch-0200 后，对该候选的本次审校输出提出编辑纠正（B03）：对象存在与描述中行动时间仍混用。object-0047 整句包括南歧子诊断韩立经脉损伤，却标 opening=backprojection/validTime=长期；“五大炼体秘术”只能说明场景时已有名称，不能单凭该称号定位至十岁韩立时点。object-0048 的韩立第四层、object-0065/0066 的韩立持有及埋藏却标 opening=unknown；同批 fact-0004/0057 已明确这些是 future。",
+      "evidence": [
+        {
+          "chapterId": "qq-27834461",
+          "paragraphId": "qq-27834461:283",
+          "paragraphSha256": "b7838f3542535246240aac18b5d6be50344a80ebefe7bafc55ae0abd62cc8a47",
+          "start": 283,
+          "end": 342,
+          "anchorSha256": "b7838f3542535246240aac18b5d6be50344a80ebefe7bafc55ae0abd62cc8a47",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27834461",
+          "paragraphId": "qq-27834461:343",
+          "paragraphSha256": "8ceb17c7885f9c25187362daef9e7c080e3624afb0f1637b269a6d8811f0f8f4",
+          "start": 343,
+          "end": 437,
+          "anchorSha256": "8ceb17c7885f9c25187362daef9e7c080e3624afb0f1637b269a6d8811f0f8f4",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:927",
+          "paragraphSha256": "47528a7b4c84067cc38029db904384c83ddc26fe91bf3654677d0bc9a2995b58",
+          "start": 927,
+          "end": 992,
+          "anchorSha256": "47528a7b4c84067cc38029db904384c83ddc26fe91bf3654677d0bc9a2995b58",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:1081",
+          "paragraphSha256": "4e8305313c6dc37113403964be322ba8f4cfb19414f4f2ce4297afac1ebb775a",
+          "start": 1081,
+          "end": 1144,
+          "anchorSha256": "4e8305313c6dc37113403964be322ba8f4cfb19414f4f2ce4297afac1ebb775a",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:1519",
+          "paragraphSha256": "3465a548752de67b12177f08c494093b6452683cf8b193f6601ac1b8cdc99ae2",
+          "start": 1519,
+          "end": 1709,
+          "anchorSha256": "3465a548752de67b12177f08c494093b6452683cf8b193f6601ac1b8cdc99ae2",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27860830",
+          "paragraphId": "qq-27860830:2079",
+          "paragraphSha256": "d44cfe288fc15ff507e7088e001f433fedf4bdede13a8699a09daca1cc5d5a08",
+          "start": 2079,
+          "end": 2196,
+          "anchorSha256": "d44cfe288fc15ff507e7088e001f433fedf4bdede13a8699a09daca1cc5d5a08",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "6f8619800637e333846b7e1117d16a167b541ccd698013615dadb36a81032728",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0200-object-0065",
+      "reportHash": "6c5b6a7857e4554d4a949ab429387ee4b942230d75fddeda0829fb4d8be52676",
+      "verdict": "temporal-scope-error",
+      "correctedInterpretation": "虚天鼎本体在T0是否存在，本批未给铸造年代；韩立持有并埋在青罗沙漠是后期状态，opening应按该持有与埋藏谓词标future，不能与本体存在unknown混用。",
+      "reason": "独立复读 batch-0200 后，对该候选的本次审校输出提出编辑纠正（B03）：对象存在与描述中行动时间仍混用。object-0047 整句包括南歧子诊断韩立经脉损伤，却标 opening=backprojection/validTime=长期；“五大炼体秘术”只能说明场景时已有名称，不能单凭该称号定位至十岁韩立时点。object-0048 的韩立第四层、object-0065/0066 的韩立持有及埋藏却标 opening=unknown；同批 fact-0004/0057 已明确这些是 future。",
+      "evidence": [
+        {
+          "chapterId": "qq-27834461",
+          "paragraphId": "qq-27834461:283",
+          "paragraphSha256": "b7838f3542535246240aac18b5d6be50344a80ebefe7bafc55ae0abd62cc8a47",
+          "start": 283,
+          "end": 342,
+          "anchorSha256": "b7838f3542535246240aac18b5d6be50344a80ebefe7bafc55ae0abd62cc8a47",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27834461",
+          "paragraphId": "qq-27834461:343",
+          "paragraphSha256": "8ceb17c7885f9c25187362daef9e7c080e3624afb0f1637b269a6d8811f0f8f4",
+          "start": 343,
+          "end": 437,
+          "anchorSha256": "8ceb17c7885f9c25187362daef9e7c080e3624afb0f1637b269a6d8811f0f8f4",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:927",
+          "paragraphSha256": "47528a7b4c84067cc38029db904384c83ddc26fe91bf3654677d0bc9a2995b58",
+          "start": 927,
+          "end": 992,
+          "anchorSha256": "47528a7b4c84067cc38029db904384c83ddc26fe91bf3654677d0bc9a2995b58",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:1081",
+          "paragraphSha256": "4e8305313c6dc37113403964be322ba8f4cfb19414f4f2ce4297afac1ebb775a",
+          "start": 1081,
+          "end": 1144,
+          "anchorSha256": "4e8305313c6dc37113403964be322ba8f4cfb19414f4f2ce4297afac1ebb775a",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:1519",
+          "paragraphSha256": "3465a548752de67b12177f08c494093b6452683cf8b193f6601ac1b8cdc99ae2",
+          "start": 1519,
+          "end": 1709,
+          "anchorSha256": "3465a548752de67b12177f08c494093b6452683cf8b193f6601ac1b8cdc99ae2",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27860830",
+          "paragraphId": "qq-27860830:2079",
+          "paragraphSha256": "d44cfe288fc15ff507e7088e001f433fedf4bdede13a8699a09daca1cc5d5a08",
+          "start": 2079,
+          "end": 2196,
+          "anchorSha256": "d44cfe288fc15ff507e7088e001f433fedf4bdede13a8699a09daca1cc5d5a08",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "6f8619800637e333846b7e1117d16a167b541ccd698013615dadb36a81032728",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0200-object-0066",
+      "reportHash": "6c5b6a7857e4554d4a949ab429387ee4b942230d75fddeda0829fb4d8be52676",
+      "verdict": "temporal-scope-error",
+      "correctedInterpretation": "七十二口青竹蜂云剑被韩立留在青罗沙漠是后期持有/埋藏状态；本批未给炼制年代，可将本体 existenceAtOpening 留未知，但整句行动不是unknown开篇状态。",
+      "reason": "独立复读 batch-0200 后，对该候选的本次审校输出提出编辑纠正（B03）：对象存在与描述中行动时间仍混用。object-0047 整句包括南歧子诊断韩立经脉损伤，却标 opening=backprojection/validTime=长期；“五大炼体秘术”只能说明场景时已有名称，不能单凭该称号定位至十岁韩立时点。object-0048 的韩立第四层、object-0065/0066 的韩立持有及埋藏却标 opening=unknown；同批 fact-0004/0057 已明确这些是 future。",
+      "evidence": [
+        {
+          "chapterId": "qq-27834461",
+          "paragraphId": "qq-27834461:283",
+          "paragraphSha256": "b7838f3542535246240aac18b5d6be50344a80ebefe7bafc55ae0abd62cc8a47",
+          "start": 283,
+          "end": 342,
+          "anchorSha256": "b7838f3542535246240aac18b5d6be50344a80ebefe7bafc55ae0abd62cc8a47",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27834461",
+          "paragraphId": "qq-27834461:343",
+          "paragraphSha256": "8ceb17c7885f9c25187362daef9e7c080e3624afb0f1637b269a6d8811f0f8f4",
+          "start": 343,
+          "end": 437,
+          "anchorSha256": "8ceb17c7885f9c25187362daef9e7c080e3624afb0f1637b269a6d8811f0f8f4",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:927",
+          "paragraphSha256": "47528a7b4c84067cc38029db904384c83ddc26fe91bf3654677d0bc9a2995b58",
+          "start": 927,
+          "end": 992,
+          "anchorSha256": "47528a7b4c84067cc38029db904384c83ddc26fe91bf3654677d0bc9a2995b58",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:1081",
+          "paragraphSha256": "4e8305313c6dc37113403964be322ba8f4cfb19414f4f2ce4297afac1ebb775a",
+          "start": 1081,
+          "end": 1144,
+          "anchorSha256": "4e8305313c6dc37113403964be322ba8f4cfb19414f4f2ce4297afac1ebb775a",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:1519",
+          "paragraphSha256": "3465a548752de67b12177f08c494093b6452683cf8b193f6601ac1b8cdc99ae2",
+          "start": 1519,
+          "end": 1709,
+          "anchorSha256": "3465a548752de67b12177f08c494093b6452683cf8b193f6601ac1b8cdc99ae2",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27860830",
+          "paragraphId": "qq-27860830:2079",
+          "paragraphSha256": "d44cfe288fc15ff507e7088e001f433fedf4bdede13a8699a09daca1cc5d5a08",
+          "start": 2079,
+          "end": 2196,
+          "anchorSha256": "d44cfe288fc15ff507e7088e001f433fedf4bdede13a8699a09daca1cc5d5a08",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "6f8619800637e333846b7e1117d16a167b541ccd698013615dadb36a81032728",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0200-object-0067",
+      "reportHash": "6c5b6a7857e4554d4a949ab429387ee4b942230d75fddeda0829fb4d8be52676",
+      "verdict": "inconsistent-identity-verdict",
+      "correctedInterpretation": "正文一处说随身两枚灭仙雷，另一处说两颗灭仙珠能在出其不意时重创化神妖修；连续语境疑似同物，但本次alias/identity均留待核，故对象条不能同时断言确定“又称”并无条件合并全部属性。",
+      "reason": "独立复读 batch-0200 后，对该候选的本次审校输出提出编辑纠正（B04）：同一审校产物内部互相否定：object-0067 supported 断言“灭仙雷（又称灭仙珠）”并用两段合并数量/能力；alias“灭仙珠”却 ambiguous，identity unresolved，遗漏又要求不能直接合并。当前不能把这条当作已经一致的身份裁定。",
+      "evidence": [
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:927",
+          "paragraphSha256": "47528a7b4c84067cc38029db904384c83ddc26fe91bf3654677d0bc9a2995b58",
+          "start": 927,
+          "end": 992,
+          "anchorSha256": "47528a7b4c84067cc38029db904384c83ddc26fe91bf3654677d0bc9a2995b58",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27858065",
+          "paragraphId": "qq-27858065:2569",
+          "paragraphSha256": "f9732be86e73541368af6f780acdb73277c56d083a1e0b7b9f6b69bccd222c49",
+          "start": 2569,
+          "end": 2607,
+          "anchorSha256": "f9732be86e73541368af6f780acdb73277c56d083a1e0b7b9f6b69bccd222c49",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "6f8619800637e333846b7e1117d16a167b541ccd698013615dadb36a81032728",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0200-object-0038",
+      "reportHash": "6c5b6a7857e4554d4a949ab429387ee4b942230d75fddeda0829fb4d8be52676",
+      "verdict": "unsupported-necessity",
+      "correctedInterpretation": "金莹剑为低阶灵具，镶中阶金属性灵石；小七本次戴兽皮手套成功驱动它。正文没有证明只有戴这种手套者才能驱动，不能把“可”改成必要条件“需”。",
+      "reason": "独立复读 batch-0200 后，对该候选的本次审校输出提出编辑纠正（B05）：可观测做法/局部耗用被写成更强能力边界。object-0038 把原候选“可由戴手套者驱动”改为“需戴兽皮手套者驱动”，本批仅展示这种驱动方式，韩立也只在猜测普遍条件。object-0045“阵旗威能一次用尽后不能再激发”若作为此阵固有一次性限制，会遗漏此次是拔旗抵挡蛇妖消耗完配套阵旗，非正常布阵一次必尽。",
+      "evidence": [
+        {
+          "chapterId": "qq-27834461",
+          "paragraphId": "qq-27834461:0",
+          "paragraphSha256": "33009f8082fff72ebea25decaf4dad287db9582754faf362a54979336430d64e",
+          "start": 0,
+          "end": 31,
+          "anchorSha256": "33009f8082fff72ebea25decaf4dad287db9582754faf362a54979336430d64e",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27834461",
+          "paragraphId": "qq-27834461:60",
+          "paragraphSha256": "37c2522d79e9444f0e4784b8c34c702d6ca9a90c1c0425d22500779a3fe434cb",
+          "start": 60,
+          "end": 92,
+          "anchorSha256": "37c2522d79e9444f0e4784b8c34c702d6ca9a90c1c0425d22500779a3fe434cb",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27848628",
+          "paragraphId": "qq-27848628:2381",
+          "paragraphSha256": "8cee34afe9ff60c80e3c33652bc325bb8cc56aadc015697b6816afc475ad93a6",
+          "start": 2381,
+          "end": 2452,
+          "anchorSha256": "8cee34afe9ff60c80e3c33652bc325bb8cc56aadc015697b6816afc475ad93a6",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27860830",
+          "paragraphId": "qq-27860830:291",
+          "paragraphSha256": "12febab2406c358e3d1c676acd702ecb2874312c1d33347853960de577da9ff5",
+          "start": 291,
+          "end": 343,
+          "anchorSha256": "12febab2406c358e3d1c676acd702ecb2874312c1d33347853960de577da9ff5",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27860830",
+          "paragraphId": "qq-27860830:344",
+          "paragraphSha256": "536feca50a558d80942c1065748ad97cdd1f278fd9bb88d32bf9c48720d74d42",
+          "start": 344,
+          "end": 388,
+          "anchorSha256": "536feca50a558d80942c1065748ad97cdd1f278fd9bb88d32bf9c48720d74d42",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27860830",
+          "paragraphId": "qq-27860830:2357",
+          "paragraphSha256": "d879c5921a7cbec22a63afa410012e32558448dd4f87edbdab303841bb263ac8",
+          "start": 2357,
+          "end": 2429,
+          "anchorSha256": "d879c5921a7cbec22a63afa410012e32558448dd4f87edbdab303841bb263ac8",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "6f8619800637e333846b7e1117d16a167b541ccd698013615dadb36a81032728",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0200-object-0045",
+      "reportHash": "6c5b6a7857e4554d4a949ab429387ee4b942230d75fddeda0829fb4d8be52676",
+      "verdict": "missing-activation-condition",
+      "correctedInterpretation": "小回春阵可让守卫暂时恢复体力、增力；三女拔出配套旗抵挡蛇妖后，旗的威能此次耗尽，故不能再激发本套法阵。不是所有小回春阵正常启动一次便必然耗尽；透支寿命为韩立判断。",
+      "reason": "独立复读 batch-0200 后，对该候选的本次审校输出提出编辑纠正（B05）：可观测做法/局部耗用被写成更强能力边界。object-0038 把原候选“可由戴手套者驱动”改为“需戴兽皮手套者驱动”，本批仅展示这种驱动方式，韩立也只在猜测普遍条件。object-0045“阵旗威能一次用尽后不能再激发”若作为此阵固有一次性限制，会遗漏此次是拔旗抵挡蛇妖消耗完配套阵旗，非正常布阵一次必尽。",
+      "evidence": [
+        {
+          "chapterId": "qq-27834461",
+          "paragraphId": "qq-27834461:0",
+          "paragraphSha256": "33009f8082fff72ebea25decaf4dad287db9582754faf362a54979336430d64e",
+          "start": 0,
+          "end": 31,
+          "anchorSha256": "33009f8082fff72ebea25decaf4dad287db9582754faf362a54979336430d64e",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27834461",
+          "paragraphId": "qq-27834461:60",
+          "paragraphSha256": "37c2522d79e9444f0e4784b8c34c702d6ca9a90c1c0425d22500779a3fe434cb",
+          "start": 60,
+          "end": 92,
+          "anchorSha256": "37c2522d79e9444f0e4784b8c34c702d6ca9a90c1c0425d22500779a3fe434cb",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27848628",
+          "paragraphId": "qq-27848628:2381",
+          "paragraphSha256": "8cee34afe9ff60c80e3c33652bc325bb8cc56aadc015697b6816afc475ad93a6",
+          "start": 2381,
+          "end": 2452,
+          "anchorSha256": "8cee34afe9ff60c80e3c33652bc325bb8cc56aadc015697b6816afc475ad93a6",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27860830",
+          "paragraphId": "qq-27860830:291",
+          "paragraphSha256": "12febab2406c358e3d1c676acd702ecb2874312c1d33347853960de577da9ff5",
+          "start": 291,
+          "end": 343,
+          "anchorSha256": "12febab2406c358e3d1c676acd702ecb2874312c1d33347853960de577da9ff5",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27860830",
+          "paragraphId": "qq-27860830:344",
+          "paragraphSha256": "536feca50a558d80942c1065748ad97cdd1f278fd9bb88d32bf9c48720d74d42",
+          "start": 344,
+          "end": 388,
+          "anchorSha256": "536feca50a558d80942c1065748ad97cdd1f278fd9bb88d32bf9c48720d74d42",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27860830",
+          "paragraphId": "qq-27860830:2357",
+          "paragraphSha256": "d879c5921a7cbec22a63afa410012e32558448dd4f87edbdab303841bb263ac8",
+          "start": 2357,
+          "end": 2429,
+          "anchorSha256": "d879c5921a7cbec22a63afa410012e32558448dd4f87edbdab303841bb263ac8",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "6f8619800637e333846b7e1117d16a167b541ccd698013615dadb36a81032728",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0200-fact-0057",
+      "reportHash": "6c5b6a7857e4554d4a949ab429387ee4b942230d75fddeda0829fb4d8be52676",
+      "verdict": "missing-resource-exceptions",
+      "correctedInterpretation": "韩立将储物袋及多数重宝、灵兽袋埋在沙漠，明确包括虚天鼎和七十二剑；其随身/体内仍保留两枚灭仙雷、化灵符、破灭法目及绿色小瓶。不可写为只有两枚灭仙雷例外的排他库存。",
+      "reason": "独立复读 batch-0200 后，对该候选的本次审校输出提出编辑纠正（B06）：fact-0057 的来源断言新增“除两枚灭仙雷外的宝物收入储物袋”，较原候选的“等重宝”强化为近似全称；其引文后两段明确还保留体内化灵符、破灭法目，以及随身绿色小瓶。fact-0060 正确保留了这些例外，当前两条的资产分配范围不一致。",
+      "evidence": [
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:927",
+          "paragraphSha256": "47528a7b4c84067cc38029db904384c83ddc26fe91bf3654677d0bc9a2995b58",
+          "start": 927,
+          "end": 992,
+          "anchorSha256": "47528a7b4c84067cc38029db904384c83ddc26fe91bf3654677d0bc9a2995b58",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:1081",
+          "paragraphSha256": "4e8305313c6dc37113403964be322ba8f4cfb19414f4f2ce4297afac1ebb775a",
+          "start": 1081,
+          "end": 1144,
+          "anchorSha256": "4e8305313c6dc37113403964be322ba8f4cfb19414f4f2ce4297afac1ebb775a",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:1229",
+          "paragraphSha256": "0e9455c6f88498c05649f6371a145d7ef6f994190adc0b69c3490712ab44054c",
+          "start": 1229,
+          "end": 1268,
+          "anchorSha256": "0e9455c6f88498c05649f6371a145d7ef6f994190adc0b69c3490712ab44054c",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "6f8619800637e333846b7e1117d16a167b541ccd698013615dadb36a81032728",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0200-object-0002",
+      "reportHash": "6c5b6a7857e4554d4a949ab429387ee4b942230d75fddeda0829fb4d8be52676",
+      "verdict": "introduced-name-error",
+      "correctedInterpretation": "张奎是天东商号护卫队长；柳儿称其虎霸诀第五层，他能支配金莹剑。器物名称是金莹剑，不是审校新引入的金银剑。",
+      "reason": "独立复读 batch-0200 后，对该候选的本次审校输出提出编辑纠正（N01）：sourceClaim 新写成“金银剑”，而候选与本批正文均为金莹剑；rationale/evidence 仍是金莹剑。属于审校引入的文字错误。",
+      "evidence": [
+        {
+          "chapterId": "qq-27825873",
+          "paragraphId": "qq-27825873:2827",
+          "paragraphSha256": "4a8612e2de64214369dc79d4c72566c179d7ab1d566382dc9498dc9cd64f8e3b",
+          "start": 2827,
+          "end": 2971,
+          "anchorSha256": "4a8612e2de64214369dc79d4c72566c179d7ab1d566382dc9498dc9cd64f8e3b",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27848628",
+          "paragraphId": "qq-27848628:980",
+          "paragraphSha256": "6eb1006ae1d1b4ed360c9f87c0c4276d7764dd4a93d87bc4a67041274b430b51",
+          "start": 980,
+          "end": 1059,
+          "anchorSha256": "6eb1006ae1d1b4ed360c9f87c0c4276d7764dd4a93d87bc4a67041274b430b51",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "6f8619800637e333846b7e1117d16a167b541ccd698013615dadb36a81032728",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0200-object-0059",
+      "reportHash": "6c5b6a7857e4554d4a949ab429387ee4b942230d75fddeda0829fb4d8be52676",
+      "verdict": "unsupported-type",
+      "correctedInterpretation": "柳儿所持令牌喷出蓝霞并泛赤红血芒，分别参与化去黑布和使怪虎趴伏；本批未明确该令牌是法器，明确被称低阶法器的是盖笼黑布。",
+      "reason": "独立复读 batch-0200 后，对该候选的本次审校输出提出编辑纠正（N02）：sourceClaim 增加“令牌是……法器”，本批只直接称令牌；邻近明确低阶法器的是盖笼黑布。可记录令牌动作，但不能把邻物的类别当其直接出处。",
+      "evidence": [
+        {
+          "chapterId": "qq-27848628",
+          "paragraphId": "qq-27848628:2221",
+          "paragraphSha256": "88cab30cefa6d64c151806a55d51d170c9cfbd3dfd7720e04c77762f47facf87",
+          "start": 2221,
+          "end": 2243,
+          "anchorSha256": "88cab30cefa6d64c151806a55d51d170c9cfbd3dfd7720e04c77762f47facf87",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27848628",
+          "paragraphId": "qq-27848628:2244",
+          "paragraphSha256": "e742b5559941dae26df41803dd13b8369d53eeee8ea28098e11c78f111bedacf",
+          "start": 2244,
+          "end": 2283,
+          "anchorSha256": "e742b5559941dae26df41803dd13b8369d53eeee8ea28098e11c78f111bedacf",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27848628",
+          "paragraphId": "qq-27848628:2686",
+          "paragraphSha256": "1f9b16bd4303b77c52c9edd9b9bdb0b1c72e55a573a32940d875329fbe22207c",
+          "start": 2686,
+          "end": 2726,
+          "anchorSha256": "1f9b16bd4303b77c52c9edd9b9bdb0b1c72e55a573a32940d875329fbe22207c",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "6f8619800637e333846b7e1117d16a167b541ccd698013615dadb36a81032728",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0200-object-0054",
+      "reportHash": "6c5b6a7857e4554d4a949ab429387ee4b942230d75fddeda0829fb4d8be52676",
+      "verdict": "unsupported-production-event",
+      "correctedInterpretation": "南歧子表示可用清心符稍减韩立痛苦，后来从身上掏出数张符箓施加。没有现场写制符箓的动作记录，不能据此生成一次制符生产。",
+      "reason": "独立复读 batch-0200 后，对该候选的本次审校输出提出编辑纠正（N04）：sourceClaim 写“南歧子给韩立写数道清心符”并作为已发生动作；原文先说唯有写几道，实施时写的是“从身上掏出数张符箓”，未展示现场制作。",
+      "evidence": [
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:1519",
+          "paragraphSha256": "3465a548752de67b12177f08c494093b6452683cf8b193f6601ac1b8cdc99ae2",
+          "start": 1519,
+          "end": 1709,
+          "anchorSha256": "3465a548752de67b12177f08c494093b6452683cf8b193f6601ac1b8cdc99ae2",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27838300",
+          "paragraphId": "qq-27838300:3165",
+          "paragraphSha256": "b8cb232b2e1aa22d56a17acb46a73972d96e5b2857404996f2bfd88150d0f819",
+          "start": 3165,
+          "end": 3213,
+          "anchorSha256": "b8cb232b2e1aa22d56a17acb46a73972d96e5b2857404996f2bfd88150d0f819",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "6f8619800637e333846b7e1117d16a167b541ccd698013615dadb36a81032728",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0200-fact-0063",
+      "reportHash": "6c5b6a7857e4554d4a949ab429387ee4b942230d75fddeda0829fb4d8be52676",
+      "verdict": "quantity-qualification",
+      "correctedInterpretation": "韩立听声估计车队起码有二三百人，后来观察到三十多只陆行龟和五六十名巨狼骑士；前项是估计下界，不是精确总编制。",
+      "reason": "独立复读 batch-0200 后，对该候选的本次审校输出提出编辑纠正（N03）：二三百人来自无法看清车队时的韩立估计；原文“起码有二三百人的样子”是估计下界，sourceClaim“约有二三百人”弱化“起码”，且 narration 容易被下游当精确编制。三十多龟、五六十骑是随后可见数量，信息层次不同。",
+      "evidence": [
+        {
+          "chapterId": "qq-27834461",
+          "paragraphId": "qq-27834461:2314",
+          "paragraphSha256": "e9cf2a43e93dd4006e8f851fb501b28340842882a94e40f1a5fc079301fe46b5",
+          "start": 2314,
+          "end": 2357,
+          "anchorSha256": "e9cf2a43e93dd4006e8f851fb501b28340842882a94e40f1a5fc079301fe46b5",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27848628",
+          "paragraphId": "qq-27848628:1942",
+          "paragraphSha256": "ce2378499368f62843e586d7ece8c7e34c9a9c927e4858ea94f762f7cebc41a1",
+          "start": 1942,
+          "end": 1988,
+          "anchorSha256": "ce2378499368f62843e586d7ece8c7e34c9a9c927e4858ea94f762f7cebc41a1",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27858065",
+          "paragraphId": "qq-27858065:163",
+          "paragraphSha256": "219c03e355e8dfbaa98156bc6c5c98b9ee914ea948b326c934eb19516a3e1179",
+          "start": 163,
+          "end": 238,
+          "anchorSha256": "219c03e355e8dfbaa98156bc6c5c98b9ee914ea948b326c934eb19516a3e1179",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "6f8619800637e333846b7e1117d16a167b541ccd698013615dadb36a81032728",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-fact-0033",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "temporal-scope-error",
+      "correctedInterpretation": "本批韩立重访时安远城是废墟，且与上次离开时相比多年未大变；这次重访及状态比较是后期事件，不能仅因“多年”就判断T0已为废墟。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B01）：将安远城废墟的后期重访状态 backprojection 到共同开篇；依据只是与韩立上次离开相比多年未变。object-0026 的 existenceAtOpening 又承认毁城年代未知，自相矛盾。",
+      "evidence": [
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:17",
+          "paragraphSha256": "9801b8c7d2feaa077a9c6eb33bfeed668431dd374dc825936bf35b40d0bdedd7",
+          "start": 17,
+          "end": 56,
+          "anchorSha256": "9801b8c7d2feaa077a9c6eb33bfeed668431dd374dc825936bf35b40d0bdedd7",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:180",
+          "paragraphSha256": "ba94072540f1c5f3853fec38723b9d892fa631984123dcf7778eca88800bb87b",
+          "start": 180,
+          "end": 208,
+          "anchorSha256": "ba94072540f1c5f3853fec38723b9d892fa631984123dcf7778eca88800bb87b",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:209",
+          "paragraphSha256": "fccefa8ab78ef52306ef4104187d3ebf13e15a2088bb72b1e61c7913772c2db3",
+          "start": 209,
+          "end": 236,
+          "anchorSha256": "fccefa8ab78ef52306ef4104187d3ebf13e15a2088bb72b1e61c7913772c2db3",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0026",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "temporal-scope-error",
+      "correctedInterpretation": "安远城城市存在与成为废墟的状态分开；本批未给毁城年代，T0废墟状态未知，后期韩立重访仍见废墟属于future。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B01）：将安远城废墟的后期重访状态 backprojection 到共同开篇；依据只是与韩立上次离开相比多年未变。object-0026 的 existenceAtOpening 又承认毁城年代未知，自相矛盾。",
+      "evidence": [
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:17",
+          "paragraphSha256": "9801b8c7d2feaa077a9c6eb33bfeed668431dd374dc825936bf35b40d0bdedd7",
+          "start": 17,
+          "end": 56,
+          "anchorSha256": "9801b8c7d2feaa077a9c6eb33bfeed668431dd374dc825936bf35b40d0bdedd7",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:180",
+          "paragraphSha256": "ba94072540f1c5f3853fec38723b9d892fa631984123dcf7778eca88800bb87b",
+          "start": 180,
+          "end": 208,
+          "anchorSha256": "ba94072540f1c5f3853fec38723b9d892fa631984123dcf7778eca88800bb87b",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:209",
+          "paragraphSha256": "fccefa8ab78ef52306ef4104187d3ebf13e15a2088bb72b1e61c7913772c2db3",
+          "start": 209,
+          "end": 236,
+          "anchorSha256": "fccefa8ab78ef52306ef4104187d3ebf13e15a2088bb72b1e61c7913772c2db3",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-fact-0081",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "temporal-scope-error",
+      "correctedInterpretation": "田兴称黄粱灵君居附近山中万年，当前为炼虚初期、当地第一修士。万年居住可以支持其本人T0存在，但不证明T0已有该境界或排名。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B02）：黄粱灵君居住万年可以支持其本人早于T0存在，但整句同时把后期炼虚初期、落日城第一修士、吕师妹祖辈身份一并 backprojection；没有万年前或T0已经炼虚/在任/已有该后人的证据。",
+      "evidence": [
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:739",
+          "paragraphSha256": "82b9bc925395f5e09877e65645d1a1863d3b058925d29dd871e71cda55d3baa4",
+          "start": 739,
+          "end": 835,
+          "anchorSha256": "82b9bc925395f5e09877e65645d1a1863d3b058925d29dd871e71cda55d3baa4",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:2717",
+          "paragraphSha256": "aaa5cb4ade1297b472308495169295a3e55b251cf48bdadfc8d19de82b373ad9",
+          "start": 2717,
+          "end": 2808,
+          "anchorSha256": "aaa5cb4ade1297b472308495169295a3e55b251cf48bdadfc8d19de82b373ad9",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:3033",
+          "paragraphSha256": "896914a503974db55112b07fdcddc3710d2ad4f736c3438849103a753c6e0cbc",
+          "start": 3033,
+          "end": 3125,
+          "anchorSha256": "896914a503974db55112b07fdcddc3710d2ad4f736c3438849103a753c6e0cbc",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0008",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "temporal-scope-error",
+      "correctedInterpretation": "黄粱灵君的长住万年是田兴说法，可据此回溯本人存在；炼虚初期、落日城第一修士及吕师妹家祖关系均是本场信息，其T0对应状态另须年代依据。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B02）：黄粱灵君居住万年可以支持其本人早于T0存在，但整句同时把后期炼虚初期、落日城第一修士、吕师妹祖辈身份一并 backprojection；没有万年前或T0已经炼虚/在任/已有该后人的证据。",
+      "evidence": [
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:739",
+          "paragraphSha256": "82b9bc925395f5e09877e65645d1a1863d3b058925d29dd871e71cda55d3baa4",
+          "start": 739,
+          "end": 835,
+          "anchorSha256": "82b9bc925395f5e09877e65645d1a1863d3b058925d29dd871e71cda55d3baa4",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:2717",
+          "paragraphSha256": "aaa5cb4ade1297b472308495169295a3e55b251cf48bdadfc8d19de82b373ad9",
+          "start": 2717,
+          "end": 2808,
+          "anchorSha256": "aaa5cb4ade1297b472308495169295a3e55b251cf48bdadfc8d19de82b373ad9",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:3033",
+          "paragraphSha256": "896914a503974db55112b07fdcddc3710d2ad4f736c3438849103a753c6e0cbc",
+          "start": 3033,
+          "end": 3125,
+          "anchorSha256": "896914a503974db55112b07fdcddc3710d2ad4f736c3438849103a753c6e0cbc",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-fact-0062",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "temporal-scope-error",
+      "correctedInterpretation": "叙述在该场景称三皇七妖王为合体大成；它没有交代各位T0修为或任职年代，也不能由此建立两族永恒境界上限。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B03）：把“三皇/七妖王合体大成”解释为灵界人妖族最高层且 backprojection。原文只写这些统治者的当前境界；紧邻后章明确说合体只是韩立听说的最高阶，未听过大乘渡劫可能因为接触层面低。不能由角色认知空缺建立客观最高境界，也不能无年代证据回填现任者T0境界。",
+      "evidence": [
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:2959",
+          "paragraphSha256": "f6193365ec75a511afeabbefca51306e977482425e5069f9b9771822ee3c55e6",
+          "start": 2959,
+          "end": 2989,
+          "anchorSha256": "f6193365ec75a511afeabbefca51306e977482425e5069f9b9771822ee3c55e6",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:853",
+          "paragraphSha256": "e80cebede8d184a1e57ff03e89a0850ade597757d7b1efbdfeba2dd3e692b966",
+          "start": 853,
+          "end": 936,
+          "anchorSha256": "e80cebede8d184a1e57ff03e89a0850ade597757d7b1efbdfeba2dd3e692b966",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:937",
+          "paragraphSha256": "ca3c0bb09ed3e0657700aa81f17f57a8756a393923bbdeefbe22186f4a72c231",
+          "start": 937,
+          "end": 973,
+          "anchorSha256": "ca3c0bb09ed3e0657700aa81f17f57a8756a393923bbdeefbe22186f4a72c231",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:974",
+          "paragraphSha256": "6a7b33b8b37c618e3ffc8a8c0e5fbd0e1632725ce4266e5fef437152fb1da239",
+          "start": 974,
+          "end": 1001,
+          "anchorSha256": "6a7b33b8b37c618e3ffc8a8c0e5fbd0e1632725ce4266e5fef437152fb1da239",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:1002",
+          "paragraphSha256": "eb9ee74a81cac9304c12bb1259d1c7dda89efecc9e93050a8168c39b863780f3",
+          "start": 1002,
+          "end": 1034,
+          "anchorSha256": "eb9ee74a81cac9304c12bb1259d1c7dda89efecc9e93050a8168c39b863780f3",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0051",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "unsupported-world-hierarchy",
+      "correctedInterpretation": "三皇是人族统治层的称谓，场景叙述称其合体大成；合体只是韩立当时听闻的最高境界，不能断言人族不存在更高阶强者，也不能无证回填T0现任者境界。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B03）：把“三皇/七妖王合体大成”解释为灵界人妖族最高层且 backprojection。原文只写这些统治者的当前境界；紧邻后章明确说合体只是韩立听说的最高阶，未听过大乘渡劫可能因为接触层面低。不能由角色认知空缺建立客观最高境界，也不能无年代证据回填现任者T0境界。",
+      "evidence": [
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:2959",
+          "paragraphSha256": "f6193365ec75a511afeabbefca51306e977482425e5069f9b9771822ee3c55e6",
+          "start": 2959,
+          "end": 2989,
+          "anchorSha256": "f6193365ec75a511afeabbefca51306e977482425e5069f9b9771822ee3c55e6",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:853",
+          "paragraphSha256": "e80cebede8d184a1e57ff03e89a0850ade597757d7b1efbdfeba2dd3e692b966",
+          "start": 853,
+          "end": 936,
+          "anchorSha256": "e80cebede8d184a1e57ff03e89a0850ade597757d7b1efbdfeba2dd3e692b966",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:937",
+          "paragraphSha256": "ca3c0bb09ed3e0657700aa81f17f57a8756a393923bbdeefbe22186f4a72c231",
+          "start": 937,
+          "end": 973,
+          "anchorSha256": "ca3c0bb09ed3e0657700aa81f17f57a8756a393923bbdeefbe22186f4a72c231",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:974",
+          "paragraphSha256": "6a7b33b8b37c618e3ffc8a8c0e5fbd0e1632725ce4266e5fef437152fb1da239",
+          "start": 974,
+          "end": 1001,
+          "anchorSha256": "6a7b33b8b37c618e3ffc8a8c0e5fbd0e1632725ce4266e5fef437152fb1da239",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:1002",
+          "paragraphSha256": "eb9ee74a81cac9304c12bb1259d1c7dda89efecc9e93050a8168c39b863780f3",
+          "start": 1002,
+          "end": 1034,
+          "anchorSha256": "eb9ee74a81cac9304c12bb1259d1c7dda89efecc9e93050a8168c39b863780f3",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0052",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "unsupported-world-hierarchy",
+      "correctedInterpretation": "七妖王在场景中被称合体大成；本批不证明它们是妖族客观实力最高者，也未给各任者T0修为或完整任职年代。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B03）：把“三皇/七妖王合体大成”解释为灵界人妖族最高层且 backprojection。原文只写这些统治者的当前境界；紧邻后章明确说合体只是韩立听说的最高阶，未听过大乘渡劫可能因为接触层面低。不能由角色认知空缺建立客观最高境界，也不能无年代证据回填现任者T0境界。",
+      "evidence": [
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:2959",
+          "paragraphSha256": "f6193365ec75a511afeabbefca51306e977482425e5069f9b9771822ee3c55e6",
+          "start": 2959,
+          "end": 2989,
+          "anchorSha256": "f6193365ec75a511afeabbefca51306e977482425e5069f9b9771822ee3c55e6",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:853",
+          "paragraphSha256": "e80cebede8d184a1e57ff03e89a0850ade597757d7b1efbdfeba2dd3e692b966",
+          "start": 853,
+          "end": 936,
+          "anchorSha256": "e80cebede8d184a1e57ff03e89a0850ade597757d7b1efbdfeba2dd3e692b966",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:937",
+          "paragraphSha256": "ca3c0bb09ed3e0657700aa81f17f57a8756a393923bbdeefbe22186f4a72c231",
+          "start": 937,
+          "end": 973,
+          "anchorSha256": "ca3c0bb09ed3e0657700aa81f17f57a8756a393923bbdeefbe22186f4a72c231",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:974",
+          "paragraphSha256": "6a7b33b8b37c618e3ffc8a8c0e5fbd0e1632725ce4266e5fef437152fb1da239",
+          "start": 974,
+          "end": 1001,
+          "anchorSha256": "6a7b33b8b37c618e3ffc8a8c0e5fbd0e1632725ce4266e5fef437152fb1da239",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28054565",
+          "paragraphId": "qq-28054565:1002",
+          "paragraphSha256": "eb9ee74a81cac9304c12bb1259d1c7dda89efecc9e93050a8168c39b863780f3",
+          "start": 1002,
+          "end": 1034,
+          "anchorSha256": "eb9ee74a81cac9304c12bb1259d1c7dda89efecc9e93050a8168c39b863780f3",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0013",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "temporal-scope-error",
+      "correctedInterpretation": "据传天元圣皇曾在虞阳城修炼，田兴转述拍卖宣传称其未获灵根前用过天元武具；这些旧事早于本场，但本批没有日期足以定位到共同开篇。信息源为传闻和转述。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B04）：若干回溯理由只证明早于本场，不证明早于共同开篇：圣皇早年用过天元武具无具体年代；圣塔、人族落日城以“既有”“未给晚近创建”回溯，属于以没有新建记载证明古老。天元武具条还把田兴转述的拍卖宣传写作 narration，并将即将拍卖混入长期回溯。",
+      "evidence": [
+        {
+          "chapterId": "qq-27999146",
+          "paragraphId": "qq-27999146:0",
+          "paragraphSha256": "50160f81e446c69f98898da59854bb567a6df2d06a4d4ed4a8fd5c625fa2e41f",
+          "start": 0,
+          "end": 78,
+          "anchorSha256": "50160f81e446c69f98898da59854bb567a6df2d06a4d4ed4a8fd5c625fa2e41f",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27999146",
+          "paragraphId": "qq-27999146:79",
+          "paragraphSha256": "91890071d4d3e01247a24fcbba5179fab7a237665f5bb792625e237aa8315f68",
+          "start": 79,
+          "end": 111,
+          "anchorSha256": "91890071d4d3e01247a24fcbba5179fab7a237665f5bb792625e237aa8315f68",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27999146",
+          "paragraphId": "qq-27999146:235",
+          "paragraphSha256": "891771b49f104b6053ec8f3da3310e58c0c742c1b27c24b6dab308ad503d320e",
+          "start": 235,
+          "end": 282,
+          "anchorSha256": "891771b49f104b6053ec8f3da3310e58c0c742c1b27c24b6dab308ad503d320e",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27999146",
+          "paragraphId": "qq-27999146:283",
+          "paragraphSha256": "3926d044f5c0396d80bca8cd8666e9159caa50c8e476b4a5cf438c982d0050ea",
+          "start": 283,
+          "end": 378,
+          "anchorSha256": "3926d044f5c0396d80bca8cd8666e9159caa50c8e476b4a5cf438c982d0050ea",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:364",
+          "paragraphSha256": "f14731390a3275ca8d613b52964e84a8627bab09a603d5a06c85f3ff5f75c6d3",
+          "start": 364,
+          "end": 419,
+          "anchorSha256": "f14731390a3275ca8d613b52964e84a8627bab09a603d5a06c85f3ff5f75c6d3",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:2276",
+          "paragraphSha256": "9a37c1694a68eb282c4e51f22bd0c836c3d33f7f903f3e0ba91aff75609a6c9a",
+          "start": 2276,
+          "end": 2542,
+          "anchorSha256": "9a37c1694a68eb282c4e51f22bd0c836c3d33f7f903f3e0ba91aff75609a6c9a",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:2575",
+          "paragraphSha256": "a9ee21ea0bc6c372a8711b71f145ccf38faedd5223e45f0a9c41ba60c5177033",
+          "start": 2575,
+          "end": 2613,
+          "anchorSha256": "a9ee21ea0bc6c372a8711b71f145ccf38faedd5223e45f0a9c41ba60c5177033",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0040",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "testimony-and-temporal-scope",
+      "correctedInterpretation": "田兴转述拍卖消息：一套五件天元武具据称为圣皇旧用、威力随炼体强横变化；该器物在T0是否已制成仅本批未知，即将拍卖明确是后期事件，不能整句backprojection。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B04）：若干回溯理由只证明早于本场，不证明早于共同开篇：圣皇早年用过天元武具无具体年代；圣塔、人族落日城以“既有”“未给晚近创建”回溯，属于以没有新建记载证明古老。天元武具条还把田兴转述的拍卖宣传写作 narration，并将即将拍卖混入长期回溯。",
+      "evidence": [
+        {
+          "chapterId": "qq-27999146",
+          "paragraphId": "qq-27999146:0",
+          "paragraphSha256": "50160f81e446c69f98898da59854bb567a6df2d06a4d4ed4a8fd5c625fa2e41f",
+          "start": 0,
+          "end": 78,
+          "anchorSha256": "50160f81e446c69f98898da59854bb567a6df2d06a4d4ed4a8fd5c625fa2e41f",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27999146",
+          "paragraphId": "qq-27999146:79",
+          "paragraphSha256": "91890071d4d3e01247a24fcbba5179fab7a237665f5bb792625e237aa8315f68",
+          "start": 79,
+          "end": 111,
+          "anchorSha256": "91890071d4d3e01247a24fcbba5179fab7a237665f5bb792625e237aa8315f68",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27999146",
+          "paragraphId": "qq-27999146:235",
+          "paragraphSha256": "891771b49f104b6053ec8f3da3310e58c0c742c1b27c24b6dab308ad503d320e",
+          "start": 235,
+          "end": 282,
+          "anchorSha256": "891771b49f104b6053ec8f3da3310e58c0c742c1b27c24b6dab308ad503d320e",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27999146",
+          "paragraphId": "qq-27999146:283",
+          "paragraphSha256": "3926d044f5c0396d80bca8cd8666e9159caa50c8e476b4a5cf438c982d0050ea",
+          "start": 283,
+          "end": 378,
+          "anchorSha256": "3926d044f5c0396d80bca8cd8666e9159caa50c8e476b4a5cf438c982d0050ea",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:364",
+          "paragraphSha256": "f14731390a3275ca8d613b52964e84a8627bab09a603d5a06c85f3ff5f75c6d3",
+          "start": 364,
+          "end": 419,
+          "anchorSha256": "f14731390a3275ca8d613b52964e84a8627bab09a603d5a06c85f3ff5f75c6d3",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:2276",
+          "paragraphSha256": "9a37c1694a68eb282c4e51f22bd0c836c3d33f7f903f3e0ba91aff75609a6c9a",
+          "start": 2276,
+          "end": 2542,
+          "anchorSha256": "9a37c1694a68eb282c4e51f22bd0c836c3d33f7f903f3e0ba91aff75609a6c9a",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:2575",
+          "paragraphSha256": "a9ee21ea0bc6c372a8711b71f145ccf38faedd5223e45f0a9c41ba60c5177033",
+          "start": 2575,
+          "end": 2613,
+          "anchorSha256": "a9ee21ea0bc6c372a8711b71f145ccf38faedd5223e45f0a9c41ba60c5177033",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0025",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "unsupported-backprojection",
+      "correctedInterpretation": "本批虞阳城中心有圣塔，收藏炼体法门心得；没有给塔的建造或这些收藏的起始年代，不能因城为百万年古城且未提新建而确认该设施T0已同样存在。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B04）：若干回溯理由只证明早于本场，不证明早于共同开篇：圣皇早年用过天元武具无具体年代；圣塔、人族落日城以“既有”“未给晚近创建”回溯，属于以没有新建记载证明古老。天元武具条还把田兴转述的拍卖宣传写作 narration，并将即将拍卖混入长期回溯。",
+      "evidence": [
+        {
+          "chapterId": "qq-27999146",
+          "paragraphId": "qq-27999146:0",
+          "paragraphSha256": "50160f81e446c69f98898da59854bb567a6df2d06a4d4ed4a8fd5c625fa2e41f",
+          "start": 0,
+          "end": 78,
+          "anchorSha256": "50160f81e446c69f98898da59854bb567a6df2d06a4d4ed4a8fd5c625fa2e41f",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27999146",
+          "paragraphId": "qq-27999146:79",
+          "paragraphSha256": "91890071d4d3e01247a24fcbba5179fab7a237665f5bb792625e237aa8315f68",
+          "start": 79,
+          "end": 111,
+          "anchorSha256": "91890071d4d3e01247a24fcbba5179fab7a237665f5bb792625e237aa8315f68",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27999146",
+          "paragraphId": "qq-27999146:235",
+          "paragraphSha256": "891771b49f104b6053ec8f3da3310e58c0c742c1b27c24b6dab308ad503d320e",
+          "start": 235,
+          "end": 282,
+          "anchorSha256": "891771b49f104b6053ec8f3da3310e58c0c742c1b27c24b6dab308ad503d320e",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27999146",
+          "paragraphId": "qq-27999146:283",
+          "paragraphSha256": "3926d044f5c0396d80bca8cd8666e9159caa50c8e476b4a5cf438c982d0050ea",
+          "start": 283,
+          "end": 378,
+          "anchorSha256": "3926d044f5c0396d80bca8cd8666e9159caa50c8e476b4a5cf438c982d0050ea",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:364",
+          "paragraphSha256": "f14731390a3275ca8d613b52964e84a8627bab09a603d5a06c85f3ff5f75c6d3",
+          "start": 364,
+          "end": 419,
+          "anchorSha256": "f14731390a3275ca8d613b52964e84a8627bab09a603d5a06c85f3ff5f75c6d3",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:2276",
+          "paragraphSha256": "9a37c1694a68eb282c4e51f22bd0c836c3d33f7f903f3e0ba91aff75609a6c9a",
+          "start": 2276,
+          "end": 2542,
+          "anchorSha256": "9a37c1694a68eb282c4e51f22bd0c836c3d33f7f903f3e0ba91aff75609a6c9a",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:2575",
+          "paragraphSha256": "a9ee21ea0bc6c372a8711b71f145ccf38faedd5223e45f0a9c41ba60c5177033",
+          "start": 2575,
+          "end": 2613,
+          "anchorSha256": "a9ee21ea0bc6c372a8711b71f145ccf38faedd5223e45f0a9c41ba60c5177033",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0032",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "unsupported-backprojection",
+      "correctedInterpretation": "本批人族落日城紧挨落日之墓，规模、人口实力和田兴所述八区制度可分别记录；本批未给建城年代，不能用“未记载晚近创建”证明T0已具有全部现状。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B04）：若干回溯理由只证明早于本场，不证明早于共同开篇：圣皇早年用过天元武具无具体年代；圣塔、人族落日城以“既有”“未给晚近创建”回溯，属于以没有新建记载证明古老。天元武具条还把田兴转述的拍卖宣传写作 narration，并将即将拍卖混入长期回溯。",
+      "evidence": [
+        {
+          "chapterId": "qq-27999146",
+          "paragraphId": "qq-27999146:0",
+          "paragraphSha256": "50160f81e446c69f98898da59854bb567a6df2d06a4d4ed4a8fd5c625fa2e41f",
+          "start": 0,
+          "end": 78,
+          "anchorSha256": "50160f81e446c69f98898da59854bb567a6df2d06a4d4ed4a8fd5c625fa2e41f",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27999146",
+          "paragraphId": "qq-27999146:79",
+          "paragraphSha256": "91890071d4d3e01247a24fcbba5179fab7a237665f5bb792625e237aa8315f68",
+          "start": 79,
+          "end": 111,
+          "anchorSha256": "91890071d4d3e01247a24fcbba5179fab7a237665f5bb792625e237aa8315f68",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27999146",
+          "paragraphId": "qq-27999146:235",
+          "paragraphSha256": "891771b49f104b6053ec8f3da3310e58c0c742c1b27c24b6dab308ad503d320e",
+          "start": 235,
+          "end": 282,
+          "anchorSha256": "891771b49f104b6053ec8f3da3310e58c0c742c1b27c24b6dab308ad503d320e",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27999146",
+          "paragraphId": "qq-27999146:283",
+          "paragraphSha256": "3926d044f5c0396d80bca8cd8666e9159caa50c8e476b4a5cf438c982d0050ea",
+          "start": 283,
+          "end": 378,
+          "anchorSha256": "3926d044f5c0396d80bca8cd8666e9159caa50c8e476b4a5cf438c982d0050ea",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:364",
+          "paragraphSha256": "f14731390a3275ca8d613b52964e84a8627bab09a603d5a06c85f3ff5f75c6d3",
+          "start": 364,
+          "end": 419,
+          "anchorSha256": "f14731390a3275ca8d613b52964e84a8627bab09a603d5a06c85f3ff5f75c6d3",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:2276",
+          "paragraphSha256": "9a37c1694a68eb282c4e51f22bd0c836c3d33f7f903f3e0ba91aff75609a6c9a",
+          "start": 2276,
+          "end": 2542,
+          "anchorSha256": "9a37c1694a68eb282c4e51f22bd0c836c3d33f7f903f3e0ba91aff75609a6c9a",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:2575",
+          "paragraphSha256": "a9ee21ea0bc6c372a8711b71f145ccf38faedd5223e45f0a9c41ba60c5177033",
+          "start": 2575,
+          "end": 2613,
+          "anchorSha256": "a9ee21ea0bc6c372a8711b71f145ccf38faedd5223e45f0a9c41ba60c5177033",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0027",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "inference-promoted-to-truth",
+      "correctedInterpretation": "韩立实见青罗沙漠异常寂静、禽虫不见；飞蝎与六翼霜蚣吞食其他虫兽殆尽是他的推断，并非叙述独立确认全境生物已被灭尽。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B05）：sourceClaim 写沙漠后来“后知飞蝎与六翼霜蚣吞噬了其他虫兽”，叙述 basis=narration，漏掉韩立“看来”的判断性质。同批 fact-0046 已保留“韩立后判断”，对象汇总反而升级。",
+      "evidence": [
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:1491",
+          "paragraphSha256": "5f86eaaf43beeadc8a95e92ca04f779bbbd3b33b1f8bbf6083c8ef099b09be43",
+          "start": 1491,
+          "end": 1553,
+          "anchorSha256": "5f86eaaf43beeadc8a95e92ca04f779bbbd3b33b1f8bbf6083c8ef099b09be43",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:1554",
+          "paragraphSha256": "8d238b9c9c4feea416dc27237e46e9f58e300164a2cc49636d4ee5f336849743",
+          "start": 1554,
+          "end": 1572,
+          "anchorSha256": "8d238b9c9c4feea416dc27237e46e9f58e300164a2cc49636d4ee5f336849743",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:662",
+          "paragraphSha256": "c6aa1f5f29378941c4e74151c71b7fe44c47704d2676ebdab39285f3953c469d",
+          "start": 662,
+          "end": 747,
+          "anchorSha256": "c6aa1f5f29378941c4e74151c71b7fe44c47704d2676ebdab39285f3953c469d",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:748",
+          "paragraphSha256": "e392ff623e016429cc9590a478b24d13415b410813ac7359cfc1c8546c2249f3",
+          "start": 748,
+          "end": 800,
+          "anchorSha256": "e392ff623e016429cc9590a478b24d13415b410813ac7359cfc1c8546c2249f3",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-fact-0014",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "event-scope-error",
+      "correctedInterpretation": "韩立与金玉宗取宝队未返回原人类营地/商号；同批后文说明金玉宗众人取回玉佩后返宗，韩立主动另去虞阳城。方夫人张奎等视若无睹、护卫避谈韩立，不等于客观失踪或死亡。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B06）：把“出发后没有回来”概括为取宝失踪。后文同批已明确金玉宗众人取回玉佩后返回宗门，韩立自行离开商号去虞阳城；未返回的是原人类营地/商号队伍，不能据此写成整队下落不明或让NPC获得失踪结论。",
+      "evidence": [
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:3086",
+          "paragraphSha256": "6fce6efe7195c6c08f347858e9776734b89bce619fdfec60a7441f9421a6addd",
+          "start": 3086,
+          "end": 3127,
+          "anchorSha256": "6fce6efe7195c6c08f347858e9776734b89bce619fdfec60a7441f9421a6addd",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:3128",
+          "paragraphSha256": "8d75ae40bc80942b3229df9d098348197d58e300a415582e8ef1f44b47038238",
+          "start": 3128,
+          "end": 3148,
+          "anchorSha256": "8d75ae40bc80942b3229df9d098348197d58e300a415582e8ef1f44b47038238",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:3149",
+          "paragraphSha256": "c653b644a540c5bf7537f2f11893073ca1a58f11f0487d10cf395cfb00ab9dd3",
+          "start": 3149,
+          "end": 3214,
+          "anchorSha256": "c653b644a540c5bf7537f2f11893073ca1a58f11f0487d10cf395cfb00ab9dd3",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:3215",
+          "paragraphSha256": "21308770dc6a270a09f348255215a3d9aedf400401a8a70c7f7e64dba4c86fce",
+          "start": 3215,
+          "end": 3241,
+          "anchorSha256": "21308770dc6a270a09f348255215a3d9aedf400401a8a70c7f7e64dba4c86fce",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:447",
+          "paragraphSha256": "b5df18929bc6d0c4040c29ddaf495d28467c1b21eeeb748b4181fbc10430cee4",
+          "start": 447,
+          "end": 505,
+          "anchorSha256": "b5df18929bc6d0c4040c29ddaf495d28467c1b21eeeb748b4181fbc10430cee4",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:506",
+          "paragraphSha256": "aa64c86134bfe3273cf7d9f53e84c1f425f31a616d83dd02b498a63e4435ab31",
+          "start": 506,
+          "end": 566,
+          "anchorSha256": "aa64c86134bfe3273cf7d9f53e84c1f425f31a616d83dd02b498a63e4435ab31",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0011",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "event-scope-error",
+      "correctedInterpretation": "韩立与金玉宗取宝队未返回原人类营地/商号；同批后文说明金玉宗众人取回玉佩后返宗，韩立主动另去虞阳城。方夫人张奎等视若无睹、护卫避谈韩立，不等于客观失踪或死亡。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B06）：把“出发后没有回来”概括为取宝失踪。后文同批已明确金玉宗众人取回玉佩后返回宗门，韩立自行离开商号去虞阳城；未返回的是原人类营地/商号队伍，不能据此写成整队下落不明或让NPC获得失踪结论。",
+      "evidence": [
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:3086",
+          "paragraphSha256": "6fce6efe7195c6c08f347858e9776734b89bce619fdfec60a7441f9421a6addd",
+          "start": 3086,
+          "end": 3127,
+          "anchorSha256": "6fce6efe7195c6c08f347858e9776734b89bce619fdfec60a7441f9421a6addd",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:3128",
+          "paragraphSha256": "8d75ae40bc80942b3229df9d098348197d58e300a415582e8ef1f44b47038238",
+          "start": 3128,
+          "end": 3148,
+          "anchorSha256": "8d75ae40bc80942b3229df9d098348197d58e300a415582e8ef1f44b47038238",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:3149",
+          "paragraphSha256": "c653b644a540c5bf7537f2f11893073ca1a58f11f0487d10cf395cfb00ab9dd3",
+          "start": 3149,
+          "end": 3214,
+          "anchorSha256": "c653b644a540c5bf7537f2f11893073ca1a58f11f0487d10cf395cfb00ab9dd3",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:3215",
+          "paragraphSha256": "21308770dc6a270a09f348255215a3d9aedf400401a8a70c7f7e64dba4c86fce",
+          "start": 3215,
+          "end": 3241,
+          "anchorSha256": "21308770dc6a270a09f348255215a3d9aedf400401a8a70c7f7e64dba4c86fce",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:447",
+          "paragraphSha256": "b5df18929bc6d0c4040c29ddaf495d28467c1b21eeeb748b4181fbc10430cee4",
+          "start": 447,
+          "end": 505,
+          "anchorSha256": "b5df18929bc6d0c4040c29ddaf495d28467c1b21eeeb748b4181fbc10430cee4",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:506",
+          "paragraphSha256": "aa64c86134bfe3273cf7d9f53e84c1f425f31a616d83dd02b498a63e4435ab31",
+          "start": 506,
+          "end": 566,
+          "anchorSha256": "aa64c86134bfe3273cf7d9f53e84c1f425f31a616d83dd02b498a63e4435ab31",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0012",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "event-scope-error",
+      "correctedInterpretation": "韩立与金玉宗取宝队未返回原人类营地/商号；同批后文说明金玉宗众人取回玉佩后返宗，韩立主动另去虞阳城。方夫人张奎等视若无睹、护卫避谈韩立，不等于客观失踪或死亡。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B06）：把“出发后没有回来”概括为取宝失踪。后文同批已明确金玉宗众人取回玉佩后返回宗门，韩立自行离开商号去虞阳城；未返回的是原人类营地/商号队伍，不能据此写成整队下落不明或让NPC获得失踪结论。",
+      "evidence": [
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:3086",
+          "paragraphSha256": "6fce6efe7195c6c08f347858e9776734b89bce619fdfec60a7441f9421a6addd",
+          "start": 3086,
+          "end": 3127,
+          "anchorSha256": "6fce6efe7195c6c08f347858e9776734b89bce619fdfec60a7441f9421a6addd",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:3128",
+          "paragraphSha256": "8d75ae40bc80942b3229df9d098348197d58e300a415582e8ef1f44b47038238",
+          "start": 3128,
+          "end": 3148,
+          "anchorSha256": "8d75ae40bc80942b3229df9d098348197d58e300a415582e8ef1f44b47038238",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:3149",
+          "paragraphSha256": "c653b644a540c5bf7537f2f11893073ca1a58f11f0487d10cf395cfb00ab9dd3",
+          "start": 3149,
+          "end": 3214,
+          "anchorSha256": "c653b644a540c5bf7537f2f11893073ca1a58f11f0487d10cf395cfb00ab9dd3",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:3215",
+          "paragraphSha256": "21308770dc6a270a09f348255215a3d9aedf400401a8a70c7f7e64dba4c86fce",
+          "start": 3215,
+          "end": 3241,
+          "anchorSha256": "21308770dc6a270a09f348255215a3d9aedf400401a8a70c7f7e64dba4c86fce",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:447",
+          "paragraphSha256": "b5df18929bc6d0c4040c29ddaf495d28467c1b21eeeb748b4181fbc10430cee4",
+          "start": 447,
+          "end": 505,
+          "anchorSha256": "b5df18929bc6d0c4040c29ddaf495d28467c1b21eeeb748b4181fbc10430cee4",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:506",
+          "paragraphSha256": "aa64c86134bfe3273cf7d9f53e84c1f425f31a616d83dd02b498a63e4435ab31",
+          "start": 506,
+          "end": 566,
+          "anchorSha256": "aa64c86134bfe3273cf7d9f53e84c1f425f31a616d83dd02b498a63e4435ab31",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0017",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "event-scope-error",
+      "correctedInterpretation": "韩立与金玉宗取宝队未返回原人类营地/商号；同批后文说明金玉宗众人取回玉佩后返宗，韩立主动另去虞阳城。方夫人张奎等视若无睹、护卫避谈韩立，不等于客观失踪或死亡。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B06）：把“出发后没有回来”概括为取宝失踪。后文同批已明确金玉宗众人取回玉佩后返回宗门，韩立自行离开商号去虞阳城；未返回的是原人类营地/商号队伍，不能据此写成整队下落不明或让NPC获得失踪结论。",
+      "evidence": [
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:3086",
+          "paragraphSha256": "6fce6efe7195c6c08f347858e9776734b89bce619fdfec60a7441f9421a6addd",
+          "start": 3086,
+          "end": 3127,
+          "anchorSha256": "6fce6efe7195c6c08f347858e9776734b89bce619fdfec60a7441f9421a6addd",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:3128",
+          "paragraphSha256": "8d75ae40bc80942b3229df9d098348197d58e300a415582e8ef1f44b47038238",
+          "start": 3128,
+          "end": 3148,
+          "anchorSha256": "8d75ae40bc80942b3229df9d098348197d58e300a415582e8ef1f44b47038238",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:3149",
+          "paragraphSha256": "c653b644a540c5bf7537f2f11893073ca1a58f11f0487d10cf395cfb00ab9dd3",
+          "start": 3149,
+          "end": 3214,
+          "anchorSha256": "c653b644a540c5bf7537f2f11893073ca1a58f11f0487d10cf395cfb00ab9dd3",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:3215",
+          "paragraphSha256": "21308770dc6a270a09f348255215a3d9aedf400401a8a70c7f7e64dba4c86fce",
+          "start": 3215,
+          "end": 3241,
+          "anchorSha256": "21308770dc6a270a09f348255215a3d9aedf400401a8a70c7f7e64dba4c86fce",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:447",
+          "paragraphSha256": "b5df18929bc6d0c4040c29ddaf495d28467c1b21eeeb748b4181fbc10430cee4",
+          "start": 447,
+          "end": 505,
+          "anchorSha256": "b5df18929bc6d0c4040c29ddaf495d28467c1b21eeeb748b4181fbc10430cee4",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:506",
+          "paragraphSha256": "aa64c86134bfe3273cf7d9f53e84c1f425f31a616d83dd02b498a63e4435ab31",
+          "start": 506,
+          "end": 566,
+          "anchorSha256": "aa64c86134bfe3273cf7d9f53e84c1f425f31a616d83dd02b498a63e4435ab31",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0019",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "rumor-time-not-established",
+      "correctedInterpretation": "本批只确认到访叙述时流传过有关灵族的说法，未给传闻开始年代；对象T0存在与传闻是否已被人知晓分别未知，不能把后期传闻回填开篇记忆。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B07）：灵族、上古巨人、类似真龙吼声的传闻均标 opening=backprojection，理由只有在韩立到访前流传；既未给传闻起始年代，也不能因对象名称古老而倒推这次传闻T0已流通。对象存在unknown与传闻发生时间必须分开。",
+      "evidence": [
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:2718",
+          "paragraphSha256": "9bf679ca77ada16c4f4e1a328af9a16bf3150c09e15a1647e9d51bee0e6af641",
+          "start": 2718,
+          "end": 2769,
+          "anchorSha256": "9bf679ca77ada16c4f4e1a328af9a16bf3150c09e15a1647e9d51bee0e6af641",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:2770",
+          "paragraphSha256": "a1571c833a1bc9d5095dd53d08b4685f2e7f971c22d826eea69cb12674cf6754",
+          "start": 2770,
+          "end": 2829,
+          "anchorSha256": "a1571c833a1bc9d5095dd53d08b4685f2e7f971c22d826eea69cb12674cf6754",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0020",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "rumor-time-not-established",
+      "correctedInterpretation": "本批只确认到访叙述时流传过有关上古巨人的说法，未给传闻开始年代；对象T0存在与传闻是否已被人知晓分别未知，不能把后期传闻回填开篇记忆。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B07）：灵族、上古巨人、类似真龙吼声的传闻均标 opening=backprojection，理由只有在韩立到访前流传；既未给传闻起始年代，也不能因对象名称古老而倒推这次传闻T0已流通。对象存在unknown与传闻发生时间必须分开。",
+      "evidence": [
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:2718",
+          "paragraphSha256": "9bf679ca77ada16c4f4e1a328af9a16bf3150c09e15a1647e9d51bee0e6af641",
+          "start": 2718,
+          "end": 2769,
+          "anchorSha256": "9bf679ca77ada16c4f4e1a328af9a16bf3150c09e15a1647e9d51bee0e6af641",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:2770",
+          "paragraphSha256": "a1571c833a1bc9d5095dd53d08b4685f2e7f971c22d826eea69cb12674cf6754",
+          "start": 2770,
+          "end": 2829,
+          "anchorSha256": "a1571c833a1bc9d5095dd53d08b4685f2e7f971c22d826eea69cb12674cf6754",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0022",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "rumor-time-not-established",
+      "correctedInterpretation": "本批只确认到访叙述时流传过有关类似真龙吼声的说法，未给传闻开始年代；对象T0存在与传闻是否已被人知晓分别未知，不能把后期传闻回填开篇记忆。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B07）：灵族、上古巨人、类似真龙吼声的传闻均标 opening=backprojection，理由只有在韩立到访前流传；既未给传闻起始年代，也不能因对象名称古老而倒推这次传闻T0已流通。对象存在unknown与传闻发生时间必须分开。",
+      "evidence": [
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:2718",
+          "paragraphSha256": "9bf679ca77ada16c4f4e1a328af9a16bf3150c09e15a1647e9d51bee0e6af641",
+          "start": 2718,
+          "end": 2769,
+          "anchorSha256": "9bf679ca77ada16c4f4e1a328af9a16bf3150c09e15a1647e9d51bee0e6af641",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:2770",
+          "paragraphSha256": "a1571c833a1bc9d5095dd53d08b4685f2e7f971c22d826eea69cb12674cf6754",
+          "start": 2770,
+          "end": 2829,
+          "anchorSha256": "a1571c833a1bc9d5095dd53d08b4685f2e7f971c22d826eea69cb12674cf6754",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-fact-0060",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "rumor-time-not-established",
+      "correctedInterpretation": "本批描述落日之墓当前活动族群与危险，并列灵族、巨人、真龙吼声的未证传闻；传闻在韩立到访前已流传不等于T0已经流传，开篇知闻需另证。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（B07）：灵族、上古巨人、类似真龙吼声的传闻均标 opening=backprojection，理由只有在韩立到访前流传；既未给传闻起始年代，也不能因对象名称古老而倒推这次传闻T0已流通。对象存在unknown与传闻发生时间必须分开。",
+      "evidence": [
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:2718",
+          "paragraphSha256": "9bf679ca77ada16c4f4e1a328af9a16bf3150c09e15a1647e9d51bee0e6af641",
+          "start": 2718,
+          "end": 2769,
+          "anchorSha256": "9bf679ca77ada16c4f4e1a328af9a16bf3150c09e15a1647e9d51bee0e6af641",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:2770",
+          "paragraphSha256": "a1571c833a1bc9d5095dd53d08b4685f2e7f971c22d826eea69cb12674cf6754",
+          "start": 2770,
+          "end": 2829,
+          "anchorSha256": "a1571c833a1bc9d5095dd53d08b4685f2e7f971c22d826eea69cb12674cf6754",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0044",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "unresolved-method-identity",
+      "correctedInterpretation": "韩立确以蓝芒灵目反噬少妇摄神手段；她惊称他也会迷魂大法，仅支持她的识术判断。不能据此确定韩立掌握与她完全相同的法门。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（N01）：灵目反噬是实述；“你也会迷魂大法”是少妇受挫后的惊呼。object-0044 的存在理由写“双方会使用”把对手识术等同于客观同术，证据只到灵目反制。",
+      "evidence": [
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:1271",
+          "paragraphSha256": "93b821c9c7dcd9f2f8d2b2cd4647ce60efb0064c945e3bef1cb9c06b2439a469",
+          "start": 1271,
+          "end": 1307,
+          "anchorSha256": "93b821c9c7dcd9f2f8d2b2cd4647ce60efb0064c945e3bef1cb9c06b2439a469",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:1308",
+          "paragraphSha256": "c6bafbc91641185d183a097deeb390939746f6b974c23bc4fa9d7f0551776ecf",
+          "start": 1308,
+          "end": 1343,
+          "anchorSha256": "c6bafbc91641185d183a097deeb390939746f6b974c23bc4fa9d7f0551776ecf",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:1344",
+          "paragraphSha256": "e12d7f0555921213e0001923c9957ac389c6986e9f470f73d3a52bc6e3f685b7",
+          "start": 1344,
+          "end": 1432,
+          "anchorSha256": "e12d7f0555921213e0001923c9957ac389c6986e9f470f73d3a52bc6e3f685b7",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-fact-0064",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "scope-requires-reconciliation",
+      "correctedInterpretation": "落日之墓危险，叙述称来冒险者通常不是炼气和低阶炼体士；这是人群与风险描述，不是禁止低阶进入的客观通行门禁，也未说所有机构都不得派遣。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（N02）：有几处概括丢限定：fact-0064 把危险区域冒险者的层次描述称为进入规则，理由还增添“无人敢派”；fact-0070 把前句“这些”中高阶炼体士比较改成全部炼体士；object-0046 省略修为“大半”在肉体的范围。",
+      "evidence": [
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:3192",
+          "paragraphSha256": "128b8b2921bf73cd558c522dcc069601cdfd304963e16d366dd44235eb16813d",
+          "start": 3192,
+          "end": 3248,
+          "anchorSha256": "128b8b2921bf73cd558c522dcc069601cdfd304963e16d366dd44235eb16813d",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:3249",
+          "paragraphSha256": "6cc1a6307dc78c270b2efc5066e43dbde4157da1415de626c913b3803b1b03ad",
+          "start": 3249,
+          "end": 3272,
+          "anchorSha256": "6cc1a6307dc78c270b2efc5066e43dbde4157da1415de626c913b3803b1b03ad",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:420",
+          "paragraphSha256": "e975a26bece797645d4bd8a9aa3680acfedc7d8324e95ff241507700c7cea478",
+          "start": 420,
+          "end": 508,
+          "anchorSha256": "e975a26bece797645d4bd8a9aa3680acfedc7d8324e95ff241507700c7cea478",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:509",
+          "paragraphSha256": "8cef58e3020f1526f22480439c2cf8397f3ec97423199e8a1f13225921358183",
+          "start": 509,
+          "end": 557,
+          "anchorSha256": "8cef58e3020f1526f22480439c2cf8397f3ec97423199e8a1f13225921358183",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:1915",
+          "paragraphSha256": "7a19478fa1154970fde8611003fe6c0d0915be120e4c001214b2219b0503e532",
+          "start": 1915,
+          "end": 1957,
+          "anchorSha256": "7a19478fa1154970fde8611003fe6c0d0915be120e4c001214b2219b0503e532",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-fact-0070",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "scope-requires-reconciliation",
+      "correctedInterpretation": "与筑基和结丹修士相当、人数远多于修士的描述承接前段中高阶炼体士，不应扩大到城中全部炼体士。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（N02）：有几处概括丢限定：fact-0064 把危险区域冒险者的层次描述称为进入规则，理由还增添“无人敢派”；fact-0070 把前句“这些”中高阶炼体士比较改成全部炼体士；object-0046 省略修为“大半”在肉体的范围。",
+      "evidence": [
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:3192",
+          "paragraphSha256": "128b8b2921bf73cd558c522dcc069601cdfd304963e16d366dd44235eb16813d",
+          "start": 3192,
+          "end": 3248,
+          "anchorSha256": "128b8b2921bf73cd558c522dcc069601cdfd304963e16d366dd44235eb16813d",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:3249",
+          "paragraphSha256": "6cc1a6307dc78c270b2efc5066e43dbde4157da1415de626c913b3803b1b03ad",
+          "start": 3249,
+          "end": 3272,
+          "anchorSha256": "6cc1a6307dc78c270b2efc5066e43dbde4157da1415de626c913b3803b1b03ad",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:420",
+          "paragraphSha256": "e975a26bece797645d4bd8a9aa3680acfedc7d8324e95ff241507700c7cea478",
+          "start": 420,
+          "end": 508,
+          "anchorSha256": "e975a26bece797645d4bd8a9aa3680acfedc7d8324e95ff241507700c7cea478",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:509",
+          "paragraphSha256": "8cef58e3020f1526f22480439c2cf8397f3ec97423199e8a1f13225921358183",
+          "start": 509,
+          "end": 557,
+          "anchorSha256": "8cef58e3020f1526f22480439c2cf8397f3ec97423199e8a1f13225921358183",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:1915",
+          "paragraphSha256": "7a19478fa1154970fde8611003fe6c0d0915be120e4c001214b2219b0503e532",
+          "start": 1915,
+          "end": 1957,
+          "anchorSha256": "7a19478fa1154970fde8611003fe6c0d0915be120e4c001214b2219b0503e532",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-object-0046",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "qualification-required",
+      "correctedInterpretation": "炼体士修为高低大半在肉体强横上，神念无法据此直接判断；常用危险荒野击妖冲击瓶颈，仍须保留“大半”等范围限定。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（N02）：有几处概括丢限定：fact-0064 把危险区域冒险者的层次描述称为进入规则，理由还增添“无人敢派”；fact-0070 把前句“这些”中高阶炼体士比较改成全部炼体士；object-0046 省略修为“大半”在肉体的范围。",
+      "evidence": [
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:3192",
+          "paragraphSha256": "128b8b2921bf73cd558c522dcc069601cdfd304963e16d366dd44235eb16813d",
+          "start": 3192,
+          "end": 3248,
+          "anchorSha256": "128b8b2921bf73cd558c522dcc069601cdfd304963e16d366dd44235eb16813d",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:3249",
+          "paragraphSha256": "6cc1a6307dc78c270b2efc5066e43dbde4157da1415de626c913b3803b1b03ad",
+          "start": 3249,
+          "end": 3272,
+          "anchorSha256": "6cc1a6307dc78c270b2efc5066e43dbde4157da1415de626c913b3803b1b03ad",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:420",
+          "paragraphSha256": "e975a26bece797645d4bd8a9aa3680acfedc7d8324e95ff241507700c7cea478",
+          "start": 420,
+          "end": 508,
+          "anchorSha256": "e975a26bece797645d4bd8a9aa3680acfedc7d8324e95ff241507700c7cea478",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:509",
+          "paragraphSha256": "8cef58e3020f1526f22480439c2cf8397f3ec97423199e8a1f13225921358183",
+          "start": 509,
+          "end": 557,
+          "anchorSha256": "8cef58e3020f1526f22480439c2cf8397f3ec97423199e8a1f13225921358183",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28023729",
+          "paragraphId": "qq-28023729:1915",
+          "paragraphSha256": "7a19478fa1154970fde8611003fe6c0d0915be120e4c001214b2219b0503e532",
+          "start": 1915,
+          "end": 1957,
+          "anchorSha256": "7a19478fa1154970fde8611003fe6c0d0915be120e4c001214b2219b0503e532",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-issue-0010",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "known-state-not-unknown",
+      "correctedInterpretation": "本批已明确韩立体内丝毫法力没有；仅其他境界细节及以后如何恢复未明，不应把当前法力恢复程度也列为无法判断。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（N04）：issue 仍说“法力恢复程度未明”，但本批正文直接称体内丝毫法力没有。本批不能确定的可限于境界/恢复机制与未来恢复过程。",
+      "evidence": [
+        {
+          "chapterId": "qq-28016443",
+          "paragraphId": "qq-28016443:1320",
+          "paragraphSha256": "776bb2b585e61fc553adfb51bb3aae158c2f2256edb21da1a8ec0852e3e2936e",
+          "start": 1320,
+          "end": 1382,
+          "anchorSha256": "776bb2b585e61fc553adfb51bb3aae158c2f2256edb21da1a8ec0852e3e2936e",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
+    },
+    {
+      "candidateId": "batch-0204-fact-0012",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "verdict": "invalid-locator-rendering",
+      "correctedInterpretation": "黛儿自愿随筱姑姑去妖族的本批证据规范段落为qq-27994420:1791；learnedTime中的qq-27994420:36把全批短段序号误写成字偏移。应采用语义时间或映射后的规范ID，所有类似短p索引展示需同样检查。",
+      "reason": "独立复读 batch-0204 后，对该候选的本次审校输出提出编辑纠正（N06）：短传输段索引p36/p147泄漏进自由文本，learnedTime写qq-27994420:36看似规范字偏移但36实际为全批段序号，该证据真正偏移是1791；object-0005的sourceClaim也保留p147/p146。evidence数组的规范锚点没有此错。",
+      "evidence": [
+        {
+          "chapterId": "qq-27994420",
+          "paragraphId": "qq-27994420:1791",
+          "paragraphSha256": "59eced0f667d3c931df6363af58a2e65a8292bbdec172e9cb17527c96a5b5260",
+          "start": 1791,
+          "end": 1850,
+          "anchorSha256": "59eced0f667d3c931df6363af58a2e65a8292bbdec172e9cb17527c96a5b5260",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:1011",
+          "paragraphSha256": "869fdcbd5a7cd2e99b488505fa0e4e8f26cd71e8fddf60a3ee338e0c35cb3e1f",
+          "start": 1011,
+          "end": 1046,
+          "anchorSha256": "869fdcbd5a7cd2e99b488505fa0e4e8f26cd71e8fddf60a3ee338e0c35cb3e1f",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-28009787",
+          "paragraphId": "qq-28009787:1047",
+          "paragraphSha256": "cbecada762ab1a1c2568b98497ff555fd5aa0f95e7b1a022086ea23dfc0e8f62",
+          "start": 1047,
+          "end": 1121,
+          "anchorSha256": "cbecada762ab1a1c2568b98497ff555fd5aa0f95e7b1a022086ea23dfc0e8f62",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false,
+      "adjudicationHash": "de52eb0210682206d2c12478d38be464d3718550c557b935db749c2462659310",
+      "reviewer": "world-content-source-comparison-and-root-anchor-review"
     }
   ]
 }

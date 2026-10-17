@@ -72,7 +72,7 @@ describe("adjudication semantic reuse", () => {
         path.resolve("scripts/world-authoring/adjudicate-fanren.ts"), ...args], { cwd: directory,
           env: { PATH: process.env.PATH, NODE_ENV: "test" }, encoding: "utf8" });
       const plan = run("--plan").trim().split("\n").map(line => JSON.parse(line));
-      expect(plan.at(-1)).toMatchObject({ reused: 1, pending: 0, generationRequests: 0, model: "deepseek-flash", effort: "high" });
+      expect(plan.at(-1)).toMatchObject({ reused: 1, pending: 0, generationRequests: 0, model: "deepseek-flash", effort: "low" });
       expect(readFileSync(path.join(directory, savedFile), "utf8")).toBe(JSON.stringify(f.saved));
       const fresh = run("--fresh", "--plan").trim().split("\n").map(line => JSON.parse(line));
       expect(fresh[0]).toMatchObject({ status: "planned-no-model-call", paragraphs: 1, records: 1 });

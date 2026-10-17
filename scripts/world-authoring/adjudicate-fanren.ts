@@ -42,7 +42,7 @@ export async function adjudicateFanren(argv = process.argv.slice(2),
   const concurrency = Number(argument("--concurrency", "1")), profileId = argument("--profile", "creation-deepseek");
   const baseProfileId = argument("--profile-base", profileId);
   const accountConcurrency = Number(argument("--account-concurrency", String(concurrency)));
-  const modelOverride = argument("--model", "deepseek-flash"), effortOverride = argument("--effort", "high");
+  const modelOverride = argument("--model", "deepseek-flash"), effortOverride = argument("--effort", "low");
   const thinking = argument("--thinking", "auto");
   if (!["auto", "enabled"].includes(thinking)) throw new Error("invalid adjudication thinking mode (auto, enabled)");
   if (effortOverride && !["low", "high", "max"].includes(effortOverride)) throw new Error("invalid adjudication effort (low, high, max)");

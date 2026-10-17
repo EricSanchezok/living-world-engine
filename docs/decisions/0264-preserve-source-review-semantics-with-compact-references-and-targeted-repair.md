@@ -27,7 +27,7 @@ Use reversible paragraph handles in model requests and reconstruct exact persist
 
 Reuse an accepted report only after validating its source bytes, extraction binding, semantic policy, original audit provenance, and current complete output contract. Preserve the report's original identity and audits. Execution settings and transport encoding do not invalidate an otherwise valid semantic artifact. Unaccepted drafts resume only within their original execution identity.
 
-The authoring runner defaults to Flash with high effort, supports a network-free plan, and bounds generation requests across workers. One gateway transport attempt per dispatch makes that bound observable; failed requests retain evidence for deliberate resumption. These are authoring execution choices under the [approved authoring contract](../specs/0196-canonical-world-and-participation-seeds.md), without changes to runtime authority or world approval.
+The source-review runner defaults to Flash with low effort, supports a network-free plan, and bounds generation requests across workers. Provider effort controls reasoning behavior without a guaranteed reasoning-token cap. Source review remains editorial evidence, not approval. One gateway transport attempt per dispatch makes that bound observable; failed requests retain evidence for deliberate resumption. These are authoring execution choices under the [approved authoring contract](../specs/0196-canonical-world-and-participation-seeds.md), without changes to runtime authority or world approval.
 
 ## Pros and Cons of the Options
 
@@ -38,3 +38,4 @@ Full-result retries are simple but repeat unaffected output and allow valid judg
 - [Source review workflow](../../worlds/fanren/authoring/sources/adjudication.md)
 - [Adjudication runner](../../scripts/world-authoring/adjudicate-fanren.ts)
 - [Semantic contract](../../scripts/world-authoring/source-adjudication.ts)
+- [DeepSeek thinking mode and supported effort levels](https://api-docs.deepseek.com/guides/thinking_mode/)

@@ -4,7 +4,7 @@
 
 ## 调用与费用控制
 
-`adjudicate-fanren.ts` 默认每次处理一个批次，使用 `deepseek-flash`、`high` effort、单并发。`--model`、`--effort`、`--profile` 和 `--profile-base` 可显式覆盖；实际生效模型、推理设置和用量以保存的调用 audit 为准。
+`adjudicate-fanren.ts` 默认每次处理一个批次，使用 `deepseek-flash`、`low` effort、单并发。`--model`、`--effort`、`--profile` 和 `--profile-base` 可显式覆盖；实际生效模型、推理设置和用量以保存的调用 audit 为准。低推理档位仍会消耗推理 token，不是硬性推理额度；它也不能替代编辑检查。
 
 后续地区初审工具 `propose-fanren-regions.ts` 也默认使用 Flash/high，并提供 `--model`、`--effort` 覆盖。其输出仍须由编辑对照来源处理，不能直接关闭地区制作项。
 
@@ -19,6 +19,8 @@ npx tsx scripts/world-authoring/adjudicate-fanren.ts --start batch-0001 --count 
 
 汇总中的 `generationRequests` 是准入网关的请求数，包含可能在队列中被取消的请求，用作保守上限；实际调用结果和 token 以 audit 为准，不能将排队取消计作已付费调用。
 
+[复核优化验证记录](../validation/source-review-optimization.json)保存离线回放、传输体积、实测请求及 token 账目。两批试跑并非同一任务的受控对比，不能把它们的差额当作稳定节省率或质量等价证据。
+
 ## 来源完整性与复用
 
 每次请求均带上全批原文段落和全部候选语义。短段落编号可逆映射到真实章节和偏移；候选精确引文保留，指纹及偏移在本地校验与存档。正文没有被摘要替代，段落数量在 audit 中如实记录。
@@ -32,3 +34,5 @@ npx tsx scripts/world-authoring/adjudicate-fanren.ts --start batch-0001 --count 
 初次响应仍须逐项审查所有对象、事实、别名、已有问题，并独立扫描遗漏与身份关系。局部修复仅重写可定位的错误行，已通过行和已经发现的有效遗漏保持原样。补丁不能修改非目标行、遗漏目标、重复编号或引入额外条目；合并后重新执行完整校验。无法可靠定位的损坏回退完整响应，不凭猜测合并身份。
 
 原始响应、失败和每次请求的调用证据保存在忽略的来源缓存中。缓存续跑、结构检查通过和模型判定 supported 都不能替代编辑审定、全域覆盖及真实游玩验收。
+
+编辑对照原文发现的问题写入[候选修订](../reviews/editorial-findings.json)，绑定候选、来源报告和证据定位，供地区写作接续；原模型输出与调用记录保留。单批证据无法确定开篇状态时，后续可以补充跨章依据或明确标为原创，不能把“未知”解释为“不存在”。正文定位以结构化 `evidence` 为准，模型自由文本中的段号或时间表达仍须对照原文检查。
