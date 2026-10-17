@@ -31,7 +31,7 @@ export function WorldWorkspace({ selectedWorldId }: { selectedWorldId?: string }
             onCreateInstance={create} onDeleteInstance={library.deleteInstance} onDeleteWorld={async (world) => {
               await library.deleteWorld(world); router.replace("/worlds");
             }} world={selected} /> : null}
-          {!library.loading && library.worlds.length === 0 ? <div className="cg-workspace-empty"><h1>还没有安装世界包</h1><p>导入 schema v14 ZIP 后即可开始游戏。</p></div> : null}
+          {!library.loading && library.worlds.length === 0 ? <div className="cg-workspace-empty"><h1>还没有安装世界包</h1><p>导入世界包 ZIP 后即可开始游戏。</p></div> : null}
         </div>
       </div>
       <div className="cg-toast-region" role="status">

@@ -33,14 +33,14 @@ export function WorldList({
               href={`/worlds/${encodeURIComponent(world.id)}`} key={world.id}>
               <strong>{world.name}</strong>
               <span>版本 {world.version} · {count} 个实例</span>
-              <small>{world.participation === "open" ? "可进入" : "仅无人演化"}</small>
+              <small>{world.participation === "open" ? "可进入" : "观察者开局"}</small>
             </Link>
           );
         })}
       </nav>
       <label className="cg-import-world">
         <Upload aria-hidden="true" />
-        <span><strong>{busy?.startsWith("world-import:") ? "正在导入…" : "导入世界包"}</strong><small>选择 schema v14 ZIP</small></span>
+        <span><strong>{busy?.startsWith("world-import:") ? "正在导入…" : "导入世界包"}</strong><small>选择世界包 ZIP</small></span>
         <input accept=".zip,application/zip" disabled={busy?.startsWith("world-import:")} onChange={selectFile} type="file" />
       </label>
     </aside>

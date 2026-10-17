@@ -75,8 +75,8 @@ function StartChoiceCard({
         <span className="cg-start-card__copy">
           <small>{origin?.location ?? "整个世界"}</small>
           <strong>{origin?.title ?? "观察世界"}</strong>
-          <p>{origin?.fantasy ?? "不创建玩家角色，让所有 Agent 按自己的目标继续生活。"}</p>
-          <em>{origin?.relationshipHooks[0] ?? (choice.kind === "observer" ? "之后可以接管任意空闲 Agent。" : "你的故事将从这里展开。")}</em>
+          <p>{origin?.fantasy ?? "先观察这个世界，人物各自保有生活和目标。"}</p>
+          <em>{origin?.relationshipHooks[0] ?? (choice.kind === "observer" ? "之后可以接管空闲角色，开始自己的行动。" : "你的故事将从这里展开。")}</em>
         </span>
       </span>
     </label>
@@ -243,7 +243,7 @@ export function WorldDetail({
     <section className="cg-world-detail" aria-labelledby="world-detail-title">
       <header className="cg-world-detail__intro">
         <div className="cg-world-detail__intro-copy">
-          <p className="cg-eyebrow">{world.participation === "open" ? "可参与的活世界" : "无人演化世界"}</p>
+          <p className="cg-eyebrow">{world.participation === "open" ? "可参与的活世界" : "以观察者进入世界"}</p>
           <h1 id="world-detail-title">{world.name}</h1>
           <p>{world.description}</p>
         </div>
