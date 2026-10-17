@@ -1,0 +1,26 @@
+id: stone-pond
+kind: location
+name: 小石潭洞府
+description: 越国未详写山地中的原创洞府，不占用原作人物的明确产业。
+placement: human-realm
+facts:
+  - id: stone-pond-time
+    predicate: local-time
+    value:
+      kind: text
+      value: 与共同开篇同一时刻；此地按夜间场景标定。
+    description: 当地夜间。
+    access:
+      kind: public
+  - id: stone-pond-route-stone-garden
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: stone-garden
+    description: 洞府与药圃有步道相连。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

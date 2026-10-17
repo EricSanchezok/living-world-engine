@@ -63,6 +63,41 @@ quantities:
       - resource-conservation
     consumption_law_ids:
       - resource-conservation
+  - id: silver
+    name: 银两
+    unit: 两
+    production_law_ids:
+      - resource-conservation
+    consumption_law_ids:
+      - resource-conservation
+  - id: herb-crate
+    name: 普通药材箱
+    unit: 箱
+    production_law_ids:
+      - resource-conservation
+    consumption_law_ids:
+      - resource-conservation
+  - id: maintenance-material
+    name: 阵器维护材料
+    unit: 份
+    production_law_ids:
+      - resource-conservation
+    consumption_law_ids:
+      - resource-conservation
+  - id: craft-material
+    name: 灵材原料
+    unit: 份
+    production_law_ids:
+      - resource-conservation
+    consumption_law_ids:
+      - resource-conservation
+  - id: high-stone
+    name: 高阶灵石
+    unit: 枚
+    production_law_ids:
+      - resource-conservation
+    consumption_law_ids:
+      - resource-conservation
 ratings:
   - id: cultivation
     name: 修为层次
@@ -276,6 +311,140 @@ entity_mechanics_profiles:
         value: 4
       - definition_id: force
         value: 1
+  - id: merchant-heir
+    name: 富商继承人
+    meters:
+      - definition_id: health
+        current: 100
+      - definition_id: mana
+        current: 0
+    quantities:
+      - definition_id: silver
+        amount: 40
+      - definition_id: copper
+        amount: 600
+    ratings:
+      - definition_id: cultivation
+        value: 0
+      - definition_id: perception
+        value: 1
+      - definition_id: craft
+        value: 3
+      - definition_id: influence
+        value: 2
+      - definition_id: force
+        value: 2
+  - id: escort-apprentice
+    name: 镖局学徒
+    meters:
+      - definition_id: health
+        current: 100
+      - definition_id: mana
+        current: 0
+    quantities:
+      - definition_id: silver
+        amount: 3
+    ratings:
+      - definition_id: cultivation
+        value: 0
+      - definition_id: perception
+        value: 1
+      - definition_id: craft
+        value: 3
+      - definition_id: influence
+        value: 2
+      - definition_id: force
+        value: 2
+  - id: clan-junior
+    name: 修仙家族旁支
+    meters:
+      - definition_id: health
+        current: 100
+      - definition_id: mana
+        current: 30
+    quantities:
+      - definition_id: low-stone
+        amount: 18
+    ratings:
+      - definition_id: cultivation
+        value: 1
+      - definition_id: perception
+        value: 1
+      - definition_id: craft
+        value: 2
+      - definition_id: influence
+        value: 2
+      - definition_id: force
+        value: 2
+  - id: foundation-independent
+    name: 筑基散修
+    meters:
+      - definition_id: health
+        current: 100
+      - definition_id: mana
+        current: 200
+    quantities:
+      - definition_id: low-stone
+        amount: 260
+    ratings:
+      - definition_id: cultivation
+        value: 2
+      - definition_id: perception
+        value: 2
+      - definition_id: craft
+        value: 3
+      - definition_id: influence
+        value: 2
+      - definition_id: force
+        value: 2
+  - id: core-clan-elder
+    name: 结丹家族长者
+    meters:
+      - definition_id: health
+        current: 100
+      - definition_id: mana
+        current: 500
+    quantities:
+      - definition_id: low-stone
+        amount: 2200
+      - definition_id: mid-stone
+        amount: 12
+    ratings:
+      - definition_id: cultivation
+        value: 3
+      - definition_id: perception
+        value: 3
+      - definition_id: craft
+        value: 3
+      - definition_id: influence
+        value: 2
+      - definition_id: force
+        value: 2
+  - id: spirit-array-master
+    name: 灵界炼虚阵师
+    meters:
+      - definition_id: health
+        current: 100
+      - definition_id: mana
+        current: 1800
+    quantities:
+      - definition_id: low-stone
+        amount: 20000
+      - definition_id: mid-stone
+        amount: 220
+      - definition_id: high-stone
+        amount: 4
+    ratings:
+      - definition_id: cultivation
+        value: 6
+      - definition_id: perception
+        value: 6
+      - definition_id: craft
+        value: 6
+      - definition_id: influence
+        value: 2
+      - definition_id: force
+        value: 2
 adjudication_calibrations:
   - id: honest-count
     situation: 在近处逐一核对没有隐藏的货箱数量。

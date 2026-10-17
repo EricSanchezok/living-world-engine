@@ -290,7 +290,7 @@
   },
   {
     "id": "sample-originals",
-    "statement": "松溪坳、陈守拙一家、青禾灵材行及雇员客户是原创；所有来访、库存、人情、秘密均固定为开篇事实。 村边小路的具体连接及当地居民对日常道路的已有认识是补齐生活所需的原创细节，不声称原文给出了精确地图。",
+    "statement": "松溪坳、陈守拙一家、青禾灵材行及雇员客户是原创；所有来访、库存、人情、秘密均固定为开篇事实。 村边小路的具体连接及当地居民对日常道路的已有认识是补齐生活所需的原创细节，不声称原文给出了精确地图。 林记商号、远安镖队、沈家支谷、小石潭、石汀许氏、听泉静室及其人员、财产、契约和残传均为原创；未占原著明确职位。",
     "classification": "original",
     "validAtOpening": true,
     "learnedTime": "资料编辑后文回查；不因此向角色公开",
@@ -354,6 +354,72 @@
       "cultivation-stages",
       "native-spirit",
       "sample-calibration"
+    ],
+    "evidence": []
+  },
+  {
+    "id": "dajin-backprojection",
+    "statement": "大晋作为地区早于韩立幼年已经存在；石汀许氏与具体生活圈是未详写区域的原创定位，不回填后期门派统治者。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "作者查后文历史说明，人物不因此获知未来。",
+    "openingReason": "后文谈到大晋两千年的修行历史；只回溯地区存在，不回溯后期人物职位。",
+    "status": "reviewed-for-sample",
+    "dependencies": [
+      "sample-originals"
+    ],
+    "evidence": [
+      {
+        "chapterId": "qq-25336443",
+        "chapterSha256": "2acb6eb25728565eb0ee02222e201c97c198f18c7cac03d5cfd1872903ac7018",
+        "start": 2677,
+        "end": 2684,
+        "anchorSha256": "094a687ef4e90a0dbe0ffca8adba09a90f10025efb6835b78f6ab7121d65112a"
+      }
+    ]
+  },
+  {
+    "id": "void-five-elements",
+    "statement": "后文将五行合一列为进阶炼虚的关键，并区分丹灵根适用的已有灵根修士与无法炼化的凡人；不把补足已有灵根误作无灵根出身的保证奖励。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "后文童子说明，限有相关经历的原创高阶角色掌握。",
+    "openingReason": "作为修炼制度说明回溯；阵师已具五行基础是原创设定。",
+    "status": "reviewed-for-sample",
+    "dependencies": [
+      "cultivation-stages",
+      "root-rule"
+    ],
+    "evidence": [
+      {
+        "chapterId": "qq-27461417",
+        "chapterSha256": "bd4958c995388b7e9dbfcc2532f02b9b71a50ef3e7c2419a1ec2c100dfd2d321",
+        "start": 927,
+        "end": 941,
+        "anchorSha256": "c012a08e788fb3ceb941f2bb5ac686367b54d642cb17cdcc0021757ebc9c3ec5"
+      },
+      {
+        "chapterId": "qq-27461417",
+        "chapterSha256": "bd4958c995388b7e9dbfcc2532f02b9b71a50ef3e7c2419a1ec2c100dfd2d321",
+        "start": 1642,
+        "end": 1653,
+        "anchorSha256": "79958858f3cb8a45e971fb20d3d1793e03cd5988b0a90a11810eb63c2a167d40"
+      }
+    ]
+  },
+  {
+    "id": "extended-origin-abilities",
+    "statement": "六个补充原创出身具备设计所列境界、技艺、法力、钱财及关系；器物与传承能力有范围和消耗。家产与族产单列持有主体，所有权争议保留未决，不由叙述直接裁定。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "各角色自身经历和具体开场已知信息。",
+    "openingReason": "用户批准的原创出身范围；年龄、数量、资源消耗与细分技能为运行标定。",
+    "status": "reviewed-for-sample",
+    "dependencies": [
+      "sample-originals",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule"
     ],
     "evidence": []
   }

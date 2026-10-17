@@ -1,10 +1,12 @@
 {
   "moduleId": "opening-sample",
   "scope": "sample",
-  "moduleHash": "31236455046a42009a877b1cbff9f7090dea4078e2310dd1256e535c0a9d14fe",
-  "claimsHash": "44165c7697a7ebde4649400996073f17a4adad79d878da3cddf0767bc8d34011",
+  "moduleHash": "282db21e7a2e49a54bcda3364c381191266a575b4e7f5dc4f047015109769d33",
+  "claimsHash": "3b437928cd390cd5fde98d66856a6f2b49774e1d62859fb604107d4eadf8a460",
   "usedClaimIds": [
     "cultivation-stages",
+    "dajin-backprojection",
+    "extended-origin-abilities",
     "han-household",
     "han-roots",
     "han-uncle",
@@ -21,7 +23,8 @@
     "sample-spell",
     "spirit-dwellings",
     "tianyuan-exists",
-    "village-reader"
+    "village-reader",
+    "void-five-elements"
   ],
   "provenance": {
     "entity:human-realm": [
@@ -165,7 +168,8 @@
       "sample-calibration",
       "sample-economy",
       "cultivation-stages",
-      "sample-spell"
+      "sample-spell",
+      "extended-origin-abilities"
     ],
     "law:positive-time": [
       "sample-open-future",
@@ -258,20 +262,125 @@
       "han-uncle",
       "han-roots",
       "sample-open-future"
+    ],
+    "entity:lin-estate": [
+      "sample-originals",
+      "sample-calibration"
+    ],
+    "entity:lin-store": [
+      "sample-originals",
+      "sample-calibration"
+    ],
+    "entity:yuanan-yard": [
+      "sample-originals",
+      "sample-calibration"
+    ],
+    "entity:yuanan-road": [
+      "sample-originals",
+      "sample-calibration"
+    ],
+    "entity:shen-valley": [
+      "sample-originals",
+      "sample-calibration"
+    ],
+    "entity:shen-store": [
+      "sample-originals",
+      "sample-calibration"
+    ],
+    "entity:stone-pond": [
+      "sample-originals",
+      "sample-calibration"
+    ],
+    "entity:stone-garden": [
+      "sample-originals",
+      "sample-calibration"
+    ],
+    "entity:xu-settlement": [
+      "sample-originals",
+      "sample-calibration",
+      "dajin-backprojection"
+    ],
+    "entity:xu-hall": [
+      "sample-originals",
+      "sample-calibration"
+    ],
+    "entity:xu-workshop": [
+      "sample-originals",
+      "sample-calibration"
+    ],
+    "entity:listening-spring": [
+      "sample-originals",
+      "sample-calibration",
+      "tianyuan-exists",
+      "spirit-dwellings"
+    ],
+    "entity:array-workroom": [
+      "sample-originals",
+      "sample-calibration",
+      "tianyuan-exists",
+      "spirit-dwellings"
+    ],
+    "origin:merchant-heir": [
+      "sample-originals",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule",
+      "extended-origin-abilities"
+    ],
+    "origin:escort-apprentice": [
+      "sample-originals",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule",
+      "extended-origin-abilities"
+    ],
+    "origin:clan-junior": [
+      "sample-originals",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule",
+      "extended-origin-abilities"
+    ],
+    "origin:foundation-independent": [
+      "sample-originals",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule",
+      "extended-origin-abilities"
+    ],
+    "origin:core-clan-elder": [
+      "sample-originals",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule",
+      "extended-origin-abilities",
+      "dajin-backprojection"
+    ],
+    "origin:spirit-array-master": [
+      "sample-originals",
+      "sample-calibration",
+      "sample-economy",
+      "root-rule",
+      "extended-origin-abilities",
+      "tianyuan-exists",
+      "native-spirit",
+      "spirit-dwellings",
+      "void-five-elements"
     ]
   },
   "limitations": [
-    "局部样本，只实现韩立、药童、化神商行东家三个入口。",
-    "天渊城制度采用明确标注的开篇回溯，具体商号与人物为原创。",
-    "正文全书校勘、其余地区、六种出身、150/700及全量实际运行均未完成。",
-    "运行数值为样本标定；不宣称已完整实现所有修炼规则及例外。"
+    "九入口位于局部据点，不代表人界灵界全域完成。",
+    "除选定来源外，全文尚未审定；原创地点、人物、资产、能力与数值保持分类。",
+    "导入与初始化校验不能代替各出身真实行动、灵根检测、跨区和规模验证。",
+    "未知古阵功能、未决权属和未建设地区不由编译器补全。"
   ],
-  "worldHash": "sha256:3707328e868278af70880ccd577b65e4591746791056a677f5f8b81c7930321e",
+  "worldHash": "sha256:67a86cd5038eee72c18a93e41b3d11744e6883303b512cc1cf77cf30a6a0078c",
   "files": {
-    "script.yaml": "cb13bb2bfc59bd83d19175b32069d092ccc847b7333a03f0993b5c81c05c696c",
-    "laws.yaml": "1c26f9bdc9c9c242f35ee5e543bf67b0692f0113a95aef921859cd1de62f050a",
-    "mechanics.yaml": "6f5f61019fd28c8b8c43c321e575db1b6ccbf29814940c4e92cdcfe88b740b8a",
-    "participation.yaml": "03fe3260481e829e76697b14050f7216b2215295f27e7e25cf6d1fd2385ed5f9",
+    "script.yaml": "fa23f143c422c6950576384bc28236709356fae3ea14347700e95d8166951ca3",
+    "laws.yaml": "b2f9f8dc780c5c093963f77430b7b4b82b8ae16e7f5a28e86696d262660d5d8b",
+    "mechanics.yaml": "164e4e378cc948bb0a99a2ac45ff6232be11ebed01aa454d134e3e148b6b3eb7",
+    "participation.yaml": "2956721026591b1b810e521f7ba6271c4cb263f6f5b95e833d37f0c33982d9e3",
+    "entities/array-workroom.yaml": "bc0c161c44d4d20e1b710643409692281f7f6725c0ef7ffafffda98a051b803c",
     "entities/canon-han-li.yaml": "b1a2d4db174de6de4da860b717876aadde9b53fa53fd019b728de5aca7bc08bd",
     "entities/chunxiang-inn.yaml": "965a96833e4904dcaac1c1042ac452f9b5972292aa3c38058bd39ace9fb2ec88",
     "entities/han-elder-sister.yaml": "0732f7735597b80e3d7c2575b2cd55c1d085540881011e8a0ca9e61c7bbf4e03",
@@ -285,25 +394,43 @@
     "entities/han-younger-sister.yaml": "fab5be1f8fbaa125391e285317f55491d24425891247a209187a1cfd17e2938b",
     "entities/han-zhu.yaml": "56386f324a9cac208bac44d73ffb46d4a6d27022830a2d865a9b1aee216fcabb",
     "entities/herbal-yard.yaml": "70fe99258bf238d4b3c0908640019aa00c5f86c4fa9b356d7e3037f3e80ad140",
-    "entities/human-realm.yaml": "7198b40815e61ac62d07015e96b6d281759bd934e532b1e2fefad6e95babd27b",
+    "entities/human-realm.yaml": "38ccc8f7d4f33140afdecce820033f768f37d665add84afb0cf0eb1f50c9ac1d",
+    "entities/lin-estate.yaml": "2080770bbe7adee88a569968d1758437ecb1e3e3ac601ae0f453e953d51b7480",
+    "entities/lin-store.yaml": "746481345c7f24e4b448eafb67bd0c23e5f7cc9c49c96c21a31e204dd9b81b54",
+    "entities/listening-spring.yaml": "1078270ff2917be5393da10e714ae03321819b50a273d8aa161e5e3b15423815",
     "entities/old-zhang.yaml": "8e4d9e309890b6ce870cd8bab7dc336da5941b577ff854cf2e3d647ef5088fd3",
     "entities/qinghe-store.yaml": "d36880c7da72e15250a5f7cc4a5c83de81f3241a4be891a9a44d03b451580a7e",
     "entities/qinghe-study.yaml": "87c04f11da384189d81b2b33d94a30a5b7d0cd4443093976f15ddac2111ea057",
-    "entities/qingniu-town.yaml": "4f6a7bc4296188230e0de098775692a278714f2335637008fda719fdea7b39c6",
+    "entities/qingniu-town.yaml": "4d29af1237ab7afb5e3695fed466e3291d8c690e44fc920bc4bfea030bdc2200",
     "entities/qixuan-sect.yaml": "e50fbbd722080705841c4202fe000dba8b0f641fed096eb73e6fe4aef83d2927",
+    "entities/shen-store.yaml": "4f83cdda9ac96a37a5b5e5ba07cb5c2ee5a208be6bd62c17c3c51b8d1ed59d05",
+    "entities/shen-valley.yaml": "46cbebbd14da7c6eca375ade8cbe62054b6ccf75886372fe53f278a6f8beaf93",
     "entities/smith-workshop.yaml": "fd47b96a4d3a52a1668c09c1c2e8c898ad7583e367a87d7c33153c0bb80dedc6",
     "entities/songxi-hamlet.yaml": "ba454ff16f31adf3016da944290ef97d9148836db42f31eebb9b1fafe2181e4f",
-    "entities/spirit-realm.yaml": "0f1f93cfcf2144784e44bfcdfc39a50e99f35cce383092267568b90811e7827c",
+    "entities/spirit-realm.yaml": "f150fb2283ab38848d8b13886a1b81f1750c0d10991e8394064fd6ee40c6bc12",
     "entities/spirit-wharf.yaml": "fa7bf5e66eebbc5de8a45a40c47e3968cbecdfc968ce03ae2c6252dec23fd795",
-    "entities/tianyuan-city.yaml": "869a3023d717472fb642656ae1eed7d52b28667abf324165034ed568963b1acf",
+    "entities/stone-garden.yaml": "9638446d0f3e215d2d457db3c998004736edd1f104a165d6313b7486d7290fcc",
+    "entities/stone-pond.yaml": "7c8b0e083a7e4318481bf92f4b630c5110fd3394515593b300939bfbdc1ee09a",
+    "entities/tianyuan-city.yaml": "53432d6fed19ff6bbe398ad5de95934318c3763dcf9ac70ce26185cd0cd46b33",
     "entities/village-path.yaml": "74009c7dea782d29d8462b6071afafee16f38e89548500d34a0887a08a39d115",
-    "entities/wild-wolf-gang.yaml": "bc63ba0b5134c971c07545c4153e812b3456e3a313c5a4d43b4fa137d461b559"
+    "entities/wild-wolf-gang.yaml": "bc63ba0b5134c971c07545c4153e812b3456e3a313c5a4d43b4fa137d461b559",
+    "entities/xu-hall.yaml": "026b204aa4f2947efaca28e82256d0ad9f1548bbc87ef8ca16b3d8eee5d7a13c",
+    "entities/xu-settlement.yaml": "c1c593aff3b1dcf357288866483d74007f7cc955c36fa8873f894429114d51f2",
+    "entities/xu-workshop.yaml": "2c3dcd9e3dbb74105a98e75d8368038f124a1957871c5276a1ded97aead99713",
+    "entities/yuanan-road.yaml": "13e75a3ad87f06a76b6588f43d2e60626e2fae52b98428add05ebabe2b54e577",
+    "entities/yuanan-yard.yaml": "33be090e7242b1ea396d639d5a5843953ea4f3770934ac5af35b3854d1c0459f"
   },
-  "entities": 26,
+  "entities": 39,
   "agents": 9,
   "originIds": [
     "herbal-apprentice",
+    "merchant-heir",
+    "escort-apprentice",
+    "clan-junior",
+    "foundation-independent",
+    "core-clan-elder",
     "spirit-merchant",
+    "spirit-array-master",
     "han-li"
   ],
   "archiveImportValidated": true

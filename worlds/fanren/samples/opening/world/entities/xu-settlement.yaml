@@ -1,0 +1,34 @@
+id: xu-settlement
+kind: location
+name: 石汀许氏聚落
+description: 大晋未详写地区中的原创修仙家族聚落；具体位置与家族组织属于补写。
+placement: human-realm
+facts:
+  - id: xu-settlement-time
+    predicate: local-time
+    value:
+      kind: text
+      value: 与共同开篇同一时刻；此地按夜间场景标定。
+    description: 当地夜间。
+    access:
+      kind: public
+  - id: xu-settlement-route-xu-hall
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xu-hall
+    description: 议事厅可通往聚落。
+    access:
+      kind: public
+  - id: xu-settlement-route-xu-workshop
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: xu-workshop
+    description: 聚落内有通往工坊的道路。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

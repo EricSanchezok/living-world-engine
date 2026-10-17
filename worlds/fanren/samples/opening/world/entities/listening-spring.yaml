@@ -1,0 +1,34 @@
+id: listening-spring
+kind: location
+name: 听泉静室
+description: 天渊城修士生活范围中的原创炼虚阵师居所，具备独立研究室。
+placement: tianyuan-city
+facts:
+  - id: listening-spring-time
+    predicate: local-time
+    value:
+      kind: text
+      value: 与共同开篇同一时刻；此地按夜间场景标定。
+    description: 当地夜间。
+    access:
+      kind: public
+  - id: listening-spring-route-array-workroom
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: array-workroom
+    description: 静室与阵室相邻，取用资料需实际进入。
+    access:
+      kind: public
+  - id: listening-spring-route-tianyuan-city
+    predicate: route-to
+    value:
+      kind: entity
+      entityId: tianyuan-city
+    description: 居所可经正常道路进入城市生活区。
+    access:
+      kind: public
+meters: []
+quantities: []
+ratings: []
+shared_activity_resources: []

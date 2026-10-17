@@ -13,11 +13,17 @@ const scenarios: Record<string, string[]> = {
   "han-li": ["我轻声对父母说：我现在不想离开村子拜师学武，我想留在家里学些谋生的手艺。", "我走到村边小路，看看通向山坡的路面。"],
   "herbal-apprentice": ["我把周荃刚才的报价告诉师父陈守拙，请他决定是否愿意单卖那株草；我继续保管好受托的药材。"],
   "spirit-merchant": ["我先逐箱清点仓院内已到的灵材，把实物数量同交接单核对，并把点数结果告诉岑玉和陶岐。", "我催动已学的御物法诀，将自己身上的青纹护身佩托起到眼前，再收回手中。"],
+  "merchant-heir": ["我从自己的私房银里拿出五两交给阿柳，说明这是托她明早买家用茶点的费用，余款请带回；商号钱柜不动。"],
+  "escort-apprentice": ["我保持货箱封签不动，试着像修士那样隔空把货箱托起。我想知道自己没有灵根和法力时，这样做会不会有效。"],
+  "clan-junior": ["我对沈照说：这件器座仍是族产，我愿与你合作修补，先一起向沈从简提出分担材料与收益的方案，不先把器座据为己有。"],
+  "foundation-independent": ["我用已经掌握的御物法诀，把随身飞行法器托到眼前检查外观，再收回手中。"],
+  "core-clan-elder": ["我从自己的积蓄里取出一百枚低阶灵石交给许澄，说明这是我自愿给后辈修习的资助，不从族库支出。"],
+  "spirit-array-master": ["我催动已学的御物法诀，把自己的定潮法盘托到眼前，再收回手中。顾清弦带来的阵片仍由他暂持，等双方提供凭据。"],
 };
 
 async function main() {
   const scenario = process.argv[2];
-  if (!scenario || !scenarios[scenario]) throw new Error("usage: npx tsx scripts/world-authoring/play-fanren-sample.ts han-li|herbal-apprentice|spirit-merchant");
+  if (!scenario || !scenarios[scenario]) throw new Error(`usage: npx tsx scripts/world-authoring/play-fanren-sample.ts ${Object.keys(scenarios).join("|")}`);
   const runId = `${new Date().toISOString().replaceAll(/[:.]/g, "-")}-${scenario}`;
   const root = path.resolve(".livingworld-cache/fanren-playtests", runId);
   mkdirSync(root, { recursive: true });
