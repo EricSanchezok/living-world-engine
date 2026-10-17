@@ -85,7 +85,7 @@ export function validateSourceAdjudication(value: SourceAdjudication, input: Adj
     if (identity.relation !== "unresolved" && !identity.evidence.length) errors.push("resolved identity lacks evidence");
   }
   for (const issue of value.issues) {
-    if (issue.status === "resolved-in-this-batch" && !issue.evidence.length) errors.push("resolved issue lacks evidence");
+    if (issue.status === "resolved-in-this-batch" && !issue.evidence.length) errors.push(`issue ${issue.id}: resolved-in-this-batch requires source evidence; procedural notes without a source-bound resolution must remain still-open`);
   }
   for (const record of [...value.records, ...value.aliases, ...value.issues, ...value.omissions, ...value.identities]) {
     for (const citation of record.evidence) {

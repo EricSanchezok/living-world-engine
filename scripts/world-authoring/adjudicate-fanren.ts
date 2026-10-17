@@ -2,6 +2,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSy
 import path from "node:path";
 import { loadModelCatalog } from "../../src/engine/models/model-catalog";
 import { sourceAdjudicationCatalog } from "./adjudication-catalog";
+import { sourceRunnerAccountBlock } from "./source-runner-failure";
 import { createModelGateway } from "../../src/engine/models/model-gateway";
 import { ModelRegistry } from "../../src/engine/models/model-registry";
 import { createModelFetchResolver } from "../../src/engine/models/model-network";
@@ -109,9 +110,12 @@ async function main() {
     // Reuse validated responses with the same complete source/schema/model binding
     // before scheduling another call. Rejected raw outputs remain available.
     const currentDirectory = path.join(cache, "adjudications", batch.id, identity);
+    let attemptOffset = 0;
     if (existsSync(currentDirectory)) {
-      const current = readdirSync(currentDirectory).filter(file => /^\d+\.json$/u.test(file))
-        .sort((a, b) => Number.parseInt(a) - Number.parseInt(b)).map(file => json(path.join(currentDirectory, file)))
+      const currentFiles = readdirSync(currentDirectory).filter(file => /^\d+\.json$/u.test(file))
+        .sort((a, b) => Number.parseInt(a) - Number.parseInt(b));
+      attemptOffset = currentFiles.length ? Number.parseInt(currentFiles.at(-1)!) + 1 : 0;
+      const current = currentFiles.map(file => json(path.join(currentDirectory, file)))
         .filter(saved => saved.identity === identity && saved.sourceReportHash === sourceReportHash && saved.schemaHash === schemaHash && saved.policyHash === policyHash);
       const latest = current.at(-1);
       if (latest) {
@@ -121,7 +125,14 @@ async function main() {
           audits.push(...current.map(saved => saved.audit));
           finish(value, current.length, true);
           return;
-        } catch { /* Preserve rejected drafts; the targeted model repair below remains bounded. */ }
+        } catch (error) {
+          // Resume the last source-bound draft and append attempts; never overwrite raw evidence.
+          draft = latest.value;
+          problems = error instanceof Error ? error.message : String(error);
+          audits.push(...current.map(saved => saved.audit));
+          priorDraft = { identity: latest.identity, fileHash: contentHash(latest), sourceReportHash,
+            auditHash: contentHash(latest.audit) };
+        }
       }
     }
     // Failed legacy outputs may seed a targeted repair only when their complete
@@ -133,7 +144,7 @@ async function main() {
       previousFiles.push(...readdirSync(path.join(historyDirectory, revision)).filter(file => /^\d+\.json$/u.test(file))
         .map(file => path.join(historyDirectory, revision, file)));
     }
-    for (const file of (fresh ? [] : previousFiles).filter(file => existsSync(file)).sort((a, b) => statSync(b).mtimeMs - statSync(a).mtimeMs)) {
+    for (const file of (fresh || draft ? [] : previousFiles).filter(file => existsSync(file)).sort((a, b) => statSync(b).mtimeMs - statSync(a).mtimeMs)) {
       const saved = json(file), audit = saved.audit;
       const previousPolicy = audit?.promptVersion?.match(/^fanren-source-adjudication-(.+)$/u)?.[1];
       if (!previousPolicy) continue;
@@ -147,8 +158,9 @@ async function main() {
       break;
     }
     for (let attempt = 0; attempt < 3; attempt++) {
-      const requestIdentity = contentHash({ identity, attempt, draft: draft ?? null, problems: problems ?? null });
-      const local = path.join(cache, "adjudications", batch.id, identity, `${attempt}.json`);
+      const storedAttempt = attemptOffset + attempt;
+      const requestIdentity = contentHash({ identity, attempt: storedAttempt, draft: draft ?? null, problems: problems ?? null });
+      const local = path.join(cache, "adjudications", batch.id, identity, `${storedAttempt}.json`);
       if (existsSync(local) && json(local).requestIdentity === requestIdentity) {
         const saved = json(local);
         draft = saved.value;
@@ -156,7 +168,7 @@ async function main() {
       } else {
         try {
           const result = await gateway.generateStructured({
-            profileId, role: "creation", subjectId: batch.id, workloadId: "fanren-source-adjudication", batchId: `${batch.id}-semantic-${attempt}`,
+            profileId, role: "creation", subjectId: batch.id, workloadId: "fanren-source-adjudication", batchId: `${batch.id}-semantic-${storedAttempt}`,
             promptVersion: `fanren-source-adjudication-${policyHash}`, schemaName: "fanren_source_adjudication", system,
             userPrompt: `${!draft ? "独立阅读全部正文，审查所有候选对象、事实、别名、已有问题与遗漏，返回完整裁决。" :
               "根据校验问题重新对照正文，返回完整审校记录；不要通过删掉待审条目来规避错误。"} 本批逐条判定必须包含 ${report.objects.length} 个对象和 ${report.facts.length} 个事实，共 ${report.objects.length + report.facts.length} 个输入编号。`,
@@ -178,7 +190,7 @@ async function main() {
       try {
         const value = schema.parse(draft);
         validateSourceAdjudication(value, report, paragraphs);
-        finish(value, attempt + 1);
+        finish(value, storedAttempt + 1);
         return;
       } catch (error) {
         problems = error instanceof Error ? error.message : String(error);
@@ -194,10 +206,14 @@ async function main() {
       try { await processBatch(batch); }
       catch (error) {
         failed++;
-        const failure = { batch: batch.id, status: "failed", message: error instanceof Error ? error.message : String(error),
+        const accountBlock = sourceRunnerAccountBlock(error);
+        if (accountBlock) draining = true;
+        const failure = { batch: batch.id, status: accountBlock ? "account-blocked" : "failed", accountBlock,
+          message: error instanceof Error ? error.message : String(error),
           at: new Date().toISOString(), audit: error && typeof error === "object" && "audit" in error ? error.audit : null };
         save(path.join(cache, "adjudications", `${batch.id}-failure.json`), failure);
         process.stderr.write(`${JSON.stringify(failure)}\n`);
+        if (accountBlock) process.stderr.write(`${JSON.stringify({ status: "dispatch-stopped", nextBatch: selected[next]?.id ?? null, accountBlock })}\n`);
       }
     }
   }));

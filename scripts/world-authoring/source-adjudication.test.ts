@@ -76,7 +76,7 @@ describe("source semantic adjudication evidence", () => {
     unresolved.records[1]!.evidence = [];
     expect(() => validateSourceAdjudication(unresolved, input, paragraphs)).not.toThrow();
     unresolved.issues[0]!.status = "resolved-in-this-batch";
-    expect(() => validateSourceAdjudication(unresolved, input, paragraphs)).toThrow("resolved issue lacks evidence");
+    expect(() => validateSourceAdjudication(unresolved, input, paragraphs)).toThrow("issue issue-1: resolved-in-this-batch requires source evidence");
     const identity = review();
     identity.identities.push({ left: "陈伯", right: "另一个陈伯", relation: "same-entity", rationale: "无证据不能合并", evidence: [] });
     expect(() => validateSourceAdjudication(identity, input, paragraphs)).toThrow("identity lacks evidence");
