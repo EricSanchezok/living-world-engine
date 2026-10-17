@@ -1,0 +1,971 @@
+[
+  {
+    "id": "yue-present-life",
+    "statement": "新增职员、街坊、雇佣、当期委托、设施细部和具体资产为原创；不替代有明确身份的原著人物，不强制触发小说后续事件。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "yue-values",
+    "statement": "法力数值、私人灵石、机构库存、所持普通器物、具体开篇位置、机构当前值班与日常动机属有限标定；不同所有者库存独立，数量不代表境界的全部财产。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "yue-seven-sects",
+    "statement": "越国七派为掩月宗、黄枫谷、灵兽山、清虚门、化刀坞、天阙堡、巨剑门；万小山所知掩月最强、灵兽其次是当地评价。千年前七派趁正邪俱损而联手立足，功法兼有正邪来源。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20530370",
+        "chapterSha256": "6bd211182206cdf8d4361084276620efeec64eb77c350ee4a5a195a6877e2735",
+        "start": 1006,
+        "end": 1111,
+        "anchorSha256": "5af622331d61eb8e6d17f3dc4f9b9d9953690a87c05493af657813ec51388037"
+      },
+      {
+        "chapterId": "qq-20815609",
+        "chapterSha256": "420a736b8905b6b14dca9ed212576808e128209ea8b1f63e31e750a153b48137",
+        "start": 1518,
+        "end": 1724,
+        "anchorSha256": "cc0eed2360e49a495ac499cdf3359cec89af2abbad46032b34e15f72f079a813"
+      }
+    ]
+  },
+  {
+    "id": "yue-geography",
+    "statement": "建州在越国北部、十三州中面积第二，与元武接壤；太岳在建州西部绵延数千里，黄枫谷占据中部数千年。岚州南部广贵城西有太南山，山顶太南寺、北面迷雾谷。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20599517",
+        "chapterSha256": "525610b34ed485aa718089c6f25b262bff38e059d69d43a5ab8b9ce7bcea180f",
+        "start": 0,
+        "end": 48,
+        "anchorSha256": "96690d95b67e9116ea74ea5f5ccba7ded69ae3923009f6b548f71209ad2c4599"
+      },
+      {
+        "chapterId": "qq-20527426",
+        "chapterSha256": "cbbaf6c4a22e2b6bb519c605473f6126153ecdaf0bdec9e90e9a8f0c5d7344d4",
+        "start": 0,
+        "end": 108,
+        "anchorSha256": "f861e590a11664f8280ada28f95c9e2fcdbfbaf048a428aef092e04346c74146"
+      },
+      {
+        "chapterId": "qq-20527426",
+        "chapterSha256": "cbbaf6c4a22e2b6bb519c605473f6126153ecdaf0bdec9e90e9a8f0c5d7344d4",
+        "start": 109,
+        "end": 241,
+        "anchorSha256": "234e22f90a2ebb7f642748f0707306e42dff74e5bd2e0a52bc0f16b8c532cf46"
+      },
+      {
+        "chapterId": "qq-20527426",
+        "chapterSha256": "cbbaf6c4a22e2b6bb519c605473f6126153ecdaf0bdec9e90e9a8f0c5d7344d4",
+        "start": 1394,
+        "end": 1445,
+        "anchorSha256": "cd8ff7a7cc3dd13732e6f3947f7f2dbfef230dfa1d468b85d87f31ffc72b0bc5"
+      },
+      {
+        "chapterId": "qq-20599517",
+        "chapterSha256": "525610b34ed485aa718089c6f25b262bff38e059d69d43a5ab8b9ce7bcea180f",
+        "start": 49,
+        "end": 135,
+        "anchorSha256": "45cc47ebe4bf706dd23344748a6df4e46c31099584445dca8ff12255db285411"
+      }
+    ]
+  },
+  {
+    "id": "yue-tainan",
+    "statement": "太南小会五年一次，给岚州晚辈交易；进谷不强制带货，迷阵可由谷中知情者接引，通音符是请求通行的方法。传闻中的村民受困与谷主意图不等同普遍杀人禁制。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20534804",
+        "chapterSha256": "e0bb5e8fda4b53bb159dec24f246dacc4be8a7e559049b87d9665f4a587a944b",
+        "start": 1654,
+        "end": 1802,
+        "anchorSha256": "70fe3c3b7c10a87cc4225bc291eb6b8dd8bee30eb88b6258ef276e595591b807"
+      },
+      {
+        "chapterId": "qq-20534804",
+        "chapterSha256": "e0bb5e8fda4b53bb159dec24f246dacc4be8a7e559049b87d9665f4a587a944b",
+        "start": 1613,
+        "end": 1634,
+        "anchorSha256": "fbbe5fee948a335de4a3da4d01ac381769bd5e6f670f273a7c0a8d8c582f082e"
+      },
+      {
+        "chapterId": "qq-20534804",
+        "chapterSha256": "e0bb5e8fda4b53bb159dec24f246dacc4be8a7e559049b87d9665f4a587a944b",
+        "start": 1257,
+        "end": 1326,
+        "anchorSha256": "2b701d263fa2b5201e0429d17d729a1c0fb390630c39cb1f0687fcf9b559c1bf"
+      },
+      {
+        "chapterId": "qq-20527426",
+        "chapterSha256": "cbbaf6c4a22e2b6bb519c605473f6126153ecdaf0bdec9e90e9a8f0c5d7344d4",
+        "start": 1583,
+        "end": 1703,
+        "anchorSha256": "7e16966676487f217a6d785aed6f258664ca944a41c1c812d47f4b583f11d0dc"
+      }
+    ]
+  },
+  {
+    "id": "yue-ascension",
+    "statement": "升仙大会通常十年一次，七派各取十人并各给十枚筑基丹，年龄超过四十不收；擂台伤亡为风险而非规定死亡率。黑木谈筑基丹必须性是当地认识，不能覆盖异地丹方和天灵根例外。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20558865",
+        "chapterSha256": "ec0a9109bccfcdce625a9e5f8e38a922091547e521c65e5f6e969762780462b1",
+        "start": 108,
+        "end": 170,
+        "anchorSha256": "db12a871201ec8ce0587cc8d3ea7b1243f3426ea16cfefb1d124718f956d26ae"
+      },
+      {
+        "chapterId": "qq-20558865",
+        "chapterSha256": "ec0a9109bccfcdce625a9e5f8e38a922091547e521c65e5f6e969762780462b1",
+        "start": 1629,
+        "end": 1718,
+        "anchorSha256": "8c720bcc0da00f9c514349384cf1b089b74a47e7eb3e64d5eb35c6f0c1714da9"
+      }
+    ]
+  },
+  {
+    "id": "yue-token",
+    "statement": "升仙令源于七派对功勋家族的奖励，允许转让，认令而非必须原家族；韩立来谷时黄枫遵守入门与丹药待遇，并禁止强逼让丹。金光持有的令牌与小剑符在T0不归韩立。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20588159",
+        "chapterSha256": "01f6de7f624c1a754ac262d20597a378370e58ce8ccac55017da859e819a7b85",
+        "start": 1583,
+        "end": 1685,
+        "anchorSha256": "cf7b4c8c986be3c531c79078599109fb4a52abb17f5d40da587a6963768bc566"
+      },
+      {
+        "chapterId": "qq-20599517",
+        "chapterSha256": "525610b34ed485aa718089c6f25b262bff38e059d69d43a5ab8b9ce7bcea180f",
+        "start": 2722,
+        "end": 2776,
+        "anchorSha256": "a8d95c0481c6a1947e73900fff7d8dd9d7a231b8bede37503af6806358c8c708"
+      }
+    ]
+  },
+  {
+    "id": "yue-qinye",
+    "statement": "秦叶岭秦叶两家原为姻亲，秦家衰落后金光带升仙令及小剑符逃出，后文叙述已十几年；开篇在蛮人地界道观隐居。剩余宝物被结界封住，不能凭家史直接提取。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20588159",
+        "chapterSha256": "01f6de7f624c1a754ac262d20597a378370e58ce8ccac55017da859e819a7b85",
+        "start": 2076,
+        "end": 2143,
+        "anchorSha256": "eb484ce110110fdd249111fc20fe6f521b77a07aeb4574d0a0715f7519bfa8c3"
+      },
+      {
+        "chapterId": "qq-20588159",
+        "chapterSha256": "01f6de7f624c1a754ac262d20597a378370e58ce8ccac55017da859e819a7b85",
+        "start": 2554,
+        "end": 2676,
+        "anchorSha256": "4f40485e06037c6520e9b9f7e3f6e6a71d4258cbdca06ba173261d75a2f595a1"
+      },
+      {
+        "chapterId": "qq-20588159",
+        "chapterSha256": "01f6de7f624c1a754ac262d20597a378370e58ce8ccac55017da859e819a7b85",
+        "start": 2425,
+        "end": 2553,
+        "anchorSha256": "114c2860414061e6f16e91d790926577968fd17998ef7196fc1c850b729787fb"
+      }
+    ]
+  },
+  {
+    "id": "yue-huangfeng-order",
+    "statement": "黄枫谷有执事、领事、筑基弟子及管事层级；筑基者可另辟洞府、受资助并承担门派危急时的义务。谷内十年一次三十岁以下选丹，与外界升仙会四十岁门槛不同。后一时点的一万弟子不是开篇精确点名册。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20618377",
+        "chapterSha256": "a30fb38fb2c77fdcb9937d82d0f54e091dd9bdefe518fb76f562a28db2ecf7eb",
+        "start": 2096,
+        "end": 2199,
+        "anchorSha256": "273880943c5a2bf57250a834b9fd9a903aacf85e3f634a366ed6117483d0ecea"
+      },
+      {
+        "chapterId": "qq-20618377",
+        "chapterSha256": "a30fb38fb2c77fdcb9937d82d0f54e091dd9bdefe518fb76f562a28db2ecf7eb",
+        "start": 2200,
+        "end": 2326,
+        "anchorSha256": "bf95cecfe348a6a88fd3e7eced15f81fb383e3f388ea568baededd0aa224ffe2"
+      },
+      {
+        "chapterId": "qq-20618377",
+        "chapterSha256": "a30fb38fb2c77fdcb9937d82d0f54e091dd9bdefe518fb76f562a28db2ecf7eb",
+        "start": 1879,
+        "end": 1980,
+        "anchorSha256": "e57d5f01d5a3956501144ac90a276b8057e0b5949bb265f4d0b9e30098cc1ade"
+      },
+      {
+        "chapterId": "qq-20618377",
+        "chapterSha256": "a30fb38fb2c77fdcb9937d82d0f54e091dd9bdefe518fb76f562a28db2ecf7eb",
+        "start": 2389,
+        "end": 2515,
+        "anchorSha256": "e0e309c1535162d52482541af71d2c851d51995e13e10d6239b446c422700a71"
+      }
+    ]
+  },
+  {
+    "id": "yue-huangfeng-elders",
+    "statement": "钟灵道在韩立入谷时一百余岁、筑基后期；慕容衫、叶管事、吴管事、王接引为谷内筑基管事。T0推定已在宗门修行，任职及具体小境界为必要回溯，后来韩立丹药争议尚未发生。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20599517",
+        "chapterSha256": "525610b34ed485aa718089c6f25b262bff38e059d69d43a5ab8b9ce7bcea180f",
+        "start": 297,
+        "end": 381,
+        "anchorSha256": "0f38884607984bc7d0a1e9c548f56bc24f7b18c445f43e7aa1bef031b90be4cf"
+      },
+      {
+        "chapterId": "qq-20599517",
+        "chapterSha256": "525610b34ed485aa718089c6f25b262bff38e059d69d43a5ab8b9ce7bcea180f",
+        "start": 755,
+        "end": 923,
+        "anchorSha256": "07077c63f2f8a98bf23779bdbe4c185ae7e2daa7f391c7724a3b79af9d17ba7c"
+      },
+      {
+        "chapterId": "qq-20599517",
+        "chapterSha256": "525610b34ed485aa718089c6f25b262bff38e059d69d43a5ab8b9ce7bcea180f",
+        "start": 600,
+        "end": 682,
+        "anchorSha256": "080c1d0d61e4f5901adc12e2c473a52d8c7223d70619bf3dd39cbe3272159d02"
+      },
+      {
+        "chapterId": "qq-20599517",
+        "chapterSha256": "525610b34ed485aa718089c6f25b262bff38e059d69d43a5ab8b9ce7bcea180f",
+        "start": 2223,
+        "end": 2279,
+        "anchorSha256": "6e48acceb1e7fe2518b35a7dc37e5d5baec60d6e4be92348da593ea9090f681a"
+      },
+      {
+        "chapterId": "qq-20599517",
+        "chapterSha256": "525610b34ed485aa718089c6f25b262bff38e059d69d43a5ab8b9ce7bcea180f",
+        "start": 2353,
+        "end": 2402,
+        "anchorSha256": "e69c8eec6c548f6743aaaac3314f54f29e2fce0f414385c371443242e1496b63"
+      }
+    ]
+  },
+  {
+    "id": "yue-li-ma",
+    "statement": "李化元同章亦写李华元，保留同一身份；后文为结丹长辈、绿波洞主人，马园主为黄枫谷筑基药园修士。开篇不把韩立师承、园务或赠药前置。谢师礼抽取首次贡品一半是门内不成文惯例。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-21008733",
+        "chapterSha256": "df5430f6191aa2cdbe02e16dafb7df01da4b5b71eb46a2faa470ef69e643ef8e",
+        "start": 663,
+        "end": 750,
+        "anchorSha256": "7718c0fd3d29fbe1b7d7de1b3c39ba9d917434d054292fadb4ee3e90f979ffec"
+      },
+      {
+        "chapterId": "qq-21008733",
+        "chapterSha256": "df5430f6191aa2cdbe02e16dafb7df01da4b5b71eb46a2faa470ef69e643ef8e",
+        "start": 1229,
+        "end": 1330,
+        "anchorSha256": "e537197ed8767d29565f4acbe468375404b6d39febad1b5a87e99d862eb7bd8b"
+      },
+      {
+        "chapterId": "qq-21008733",
+        "chapterSha256": "df5430f6191aa2cdbe02e16dafb7df01da4b5b71eb46a2faa470ef69e643ef8e",
+        "start": 2303,
+        "end": 2484,
+        "anchorSha256": "d3314f9e1259c9c2bcd7ee4ae94c3a1033b216523ee860cccea550681b02e4e4"
+      },
+      {
+        "chapterId": "qq-21131760",
+        "chapterSha256": "efc826853da0004fb3ba8f88a4bc938fedbfa5d9729f1eca2c612552662769bc",
+        "start": 2449,
+        "end": 2519,
+        "anchorSha256": "95d7f8acbe2d5b94cf60657030ba2d4f6d7fa2c4f2bc9b4a83014fceaf463657"
+      },
+      {
+        "chapterId": "qq-21139984",
+        "chapterSha256": "fdfac76b34b2e3a4acc118a84393af741137f7f43e12e3b903447ce9ebd602d0",
+        "start": 1442,
+        "end": 1514,
+        "anchorSha256": "3d9407a4fb36cad0c2acbe15b91fd5b311709ee40ed75e7bcf1b6472f7ab20ee"
+      }
+    ]
+  },
+  {
+    "id": "yue-lei",
+    "statement": "雷万鹤后文三百余年修行、雷属性手段和结丹身份支持开篇在世高阶；对其出手缘由与眼前丹方的判断不构成所有修士恒定行为。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-21101015",
+        "chapterSha256": "79d663d8301ed9719da3314d8d542329c1f4837b3a31646214f33dd562e085f2",
+        "start": 2055,
+        "end": 2153,
+        "anchorSha256": "999bf82282a8ccb6584bb8961b162b77039b66adb89cffc05250b727019e65a7"
+      },
+      {
+        "chapterId": "qq-21106360",
+        "chapterSha256": "31936c086ca036dcfcebbb1378376ee2ca931ce150c9ee537760336606f8bd67",
+        "start": 853,
+        "end": 917,
+        "anchorSha256": "922469f457f51a08ce0fd340ab410d81869d3e1538b3f33201068dc07699a0e5"
+      }
+    ]
+  },
+  {
+    "id": "yue-linghu",
+    "statement": "令狐老祖在后文称三百年前元婴，可回溯为T0黄枫谷唯一元婴太上。早期九百余岁传闻与后来近八百岁不一致，不写精确开篇年龄；开篇暂居及行程另作标定，不预置撤离与弃徒。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-21657402",
+        "chapterSha256": "a82f6d5eb60f840385e3d0757cb8d4727a2c3a718ebfc8d1cd415009dde85725",
+        "start": 1094,
+        "end": 1181,
+        "anchorSha256": "b0d06b8238b5f7a5397b338d2f5a79406783a1cef28e79ec0c0015e1761a875b"
+      },
+      {
+        "chapterId": "qq-20618377",
+        "chapterSha256": "a30fb38fb2c77fdcb9937d82d0f54e091dd9bdefe518fb76f562a28db2ecf7eb",
+        "start": 1693,
+        "end": 1822,
+        "anchorSha256": "c3214856e0f7eb0e5097c3c249fd63fa00a14a22818f513dbdeadc62d33d57a3"
+      },
+      {
+        "chapterId": "qq-21657402",
+        "chapterSha256": "a82f6d5eb60f840385e3d0757cb8d4727a2c3a718ebfc8d1cd415009dde85725",
+        "start": 1265,
+        "end": 1312,
+        "anchorSha256": "5030a290e6f17f28ecab72482f7e6b4aa2472dec78cecdc338a380f5352b86f8"
+      }
+    ]
+  },
+  {
+    "id": "yue-yanyue",
+    "statement": "南宫婉、霓裳与穹前辈为后期掩月修士，南宫当时已结丹且曾见各派长辈。素女轮回功数十年一轮、外形与境界不能简单互推。T0取成年非轮回阶段、结丹修行，下一轮具体相位不作原文事实。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20994729",
+        "chapterSha256": "a12e725f8e7742f7f74e74af5d0084bda4c0d3e28b344372e882adb6358faf00",
+        "start": 388,
+        "end": 480,
+        "anchorSha256": "5886d1b6999b8246baa5301b8b646b710a893b3d3cb6f32418f9181ffeed7d59"
+      },
+      {
+        "chapterId": "qq-20986076",
+        "chapterSha256": "ca0d924397b4d951ba9ad63e265793a2a0f60cb839dd46135eb87fac44d8f6a8",
+        "start": 2027,
+        "end": 2150,
+        "anchorSha256": "ac418f668d6906d76fd8b9f8c5168f1ac46ae37c1f4d3f1c71307187065ea1dd"
+      },
+      {
+        "chapterId": "qq-20818444",
+        "chapterSha256": "e555a786943cec6d815ce88a71d8dff71d3e6d75656c46392ad671ff121f1fd7",
+        "start": 672,
+        "end": 715,
+        "anchorSha256": "a4f6400dedc7a1e37c28c8b5014a9863173b3ec2240cba1859eb3d0d477cdcaa"
+      },
+      {
+        "chapterId": "qq-20815609",
+        "chapterSha256": "420a736b8905b6b14dca9ed212576808e128209ea8b1f63e31e750a153b48137",
+        "start": 0,
+        "end": 21,
+        "anchorSha256": "fc3633bef0bf07ca34924138aac711635c7beec8c674e421b69e6ef4f0709cd5"
+      }
+    ]
+  },
+  {
+    "id": "yue-blood-forbidden",
+    "statement": "越元边界方向的血色禁地有风属性古禁，每五年五天减弱需数名结丹合力暂开；内层拒绝通常筑基以上法力。后来轮回压制和隐修穿入说明不能把社会认定境界作为内核绝对封杀条件。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20696577",
+        "chapterSha256": "61fc3b1fd3243e1445ac7e16eea9cc3819dc09c59ffcf2d9baa7724f151479af",
+        "start": 473,
+        "end": 586,
+        "anchorSha256": "0fc6700f5d1029d06afa2688f4e607207fc90a8d0fd00958a44681f99a920194"
+      },
+      {
+        "chapterId": "qq-20824129",
+        "chapterSha256": "065c2c7df3f116429a7260ba559b96dfa1097a5f9ba4fea2f7a0169013892623",
+        "start": 997,
+        "end": 1084,
+        "anchorSha256": "c2d54f46e745d7e87aeeaf4f7f440df53c0729ea9037cf4360be93fc7c80ef6c"
+      },
+      {
+        "chapterId": "qq-20824129",
+        "chapterSha256": "065c2c7df3f116429a7260ba559b96dfa1097a5f9ba4fea2f7a0169013892623",
+        "start": 2047,
+        "end": 2079,
+        "anchorSha256": "7fb7574d3e5d5b92c9be583aef2bfdf4602b9f4b1d3f2469ef022da16a0b41e8"
+      },
+      {
+        "chapterId": "qq-20994729",
+        "chapterSha256": "a12e725f8e7742f7f74e74af5d0084bda4c0d3e28b344372e882adb6358faf00",
+        "start": 680,
+        "end": 760,
+        "anchorSha256": "181dba999c78bdc848791a91753fc1ada96aeffb8f7b1ff4c4ef78f948ce18c6"
+      }
+    ]
+  },
+  {
+    "id": "yue-blood-risk",
+    "statement": "禁地历年采药加剧抢夺，黄枫以实收药材多少和品质决定奖赏；近百年生还比例是后文回顾，不设固定杀人配额。玉髓芝等主药可从禁地获得，不宣称两界所有产地只有此处。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20696577",
+        "chapterSha256": "61fc3b1fd3243e1445ac7e16eea9cc3819dc09c59ffcf2d9baa7724f151479af",
+        "start": 997,
+        "end": 1108,
+        "anchorSha256": "868785dabb49ed0d90735e9fc7213708c4ad9c35e17c2f8e82cc5a9d5f7f4013"
+      },
+      {
+        "chapterId": "qq-20696577",
+        "chapterSha256": "61fc3b1fd3243e1445ac7e16eea9cc3819dc09c59ffcf2d9baa7724f151479af",
+        "start": 1405,
+        "end": 1499,
+        "anchorSha256": "5dfef544f7f078da67dbea7457b8e723e39ca1790191153393fd11b59bbcb2d0"
+      },
+      {
+        "chapterId": "qq-20994729",
+        "chapterSha256": "a12e725f8e7742f7f74e74af5d0084bda4c0d3e28b344372e882adb6358faf00",
+        "start": 1574,
+        "end": 1606,
+        "anchorSha256": "48887c317d11aa6ecf66ec369544d292e6621c82013686031e3f5e26cbac5d3f"
+      }
+    ]
+  },
+  {
+    "id": "yue-yan",
+    "statement": "燕家堡又称燕翎堡在蔺州青良城附近燕梁山；早期姑雨山燕家名称与后文地理保留出处差异，不推成两个燕家。燕家老祖结丹，玄夜参与族务。开篇不前置归附鬼灵门、王婵婚约或屠客计划。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-21139984",
+        "chapterSha256": "fdfac76b34b2e3a4acc118a84393af741137f7f43e12e3b903447ce9ebd602d0",
+        "start": 1520,
+        "end": 1660,
+        "anchorSha256": "ed9b084b563cbba2b5ceb26b1ed34e8ec6a9e388f7a81f880ca5149818084567"
+      },
+      {
+        "chapterId": "qq-20566195",
+        "chapterSha256": "84742982d14eff0acfe5816f8e3a372d0d552f918b08e791929de0d216220a2c",
+        "start": 1686,
+        "end": 1739,
+        "anchorSha256": "a414390b2d33b563db740fdf28961954bda3605a7e2b6f8e1a1a124eda5655db"
+      },
+      {
+        "chapterId": "qq-21193160",
+        "chapterSha256": "15f392728e69f2f6fd511e94041c80b0b150dbe31b3fc29ece854093721957ee",
+        "start": 508,
+        "end": 621,
+        "anchorSha256": "bbfb82145448f5687b5fad8e7c8edcb7bc0d1a067009747b1acff18b8a74f0ed"
+      },
+      {
+        "chapterId": "qq-21193160",
+        "chapterSha256": "15f392728e69f2f6fd511e94041c80b0b150dbe31b3fc29ece854093721957ee",
+        "start": 30,
+        "end": 102,
+        "anchorSha256": "7948aa5a7cf94f1799b981c59d51ba57f40138d8a87b8f2acf7e375ec3f95d27"
+      }
+    ]
+  },
+  {
+    "id": "yue-dong-secrecy",
+    "statement": "后期董萱儿自述为云露嫡传血脉、未出生便种奕梦诀；红拂早先称兄长后人不是据此可认定的完整客观血统。她当时才获知身世，开篇不能给其未来真相和韩立心魔。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-27320762",
+        "chapterSha256": "6acbec9e0438ac10357456a4e705634295a979d3b5448a6ab132cb73a4cbdb7d",
+        "start": 976,
+        "end": 1231,
+        "anchorSha256": "243953c11fb366e9a1d03f77ebb05c6dc5b0515c5b452d5434ff9d9bd63769a6"
+      }
+    ]
+  },
+  {
+    "id": "yue-craft",
+    "statement": "制符需要特制符纸和含灵气丹砂；妖兽灵毛笔或特殊炭笔可助成功，普通笔并非绝对不能用。丹药灵气需要实际炼化，过量或远超境界的药存在危险。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20566195",
+        "chapterSha256": "84742982d14eff0acfe5816f8e3a372d0d552f918b08e791929de0d216220a2c",
+        "start": 1048,
+        "end": 1186,
+        "anchorSha256": "533bc4a90c9de1f9d8cecbff603430aced4cbb348d795370295142265ab82244"
+      },
+      {
+        "chapterId": "qq-21106360",
+        "chapterSha256": "31936c086ca036dcfcebbb1378376ee2ca931ce150c9ee537760336606f8bd67",
+        "start": 327,
+        "end": 401,
+        "anchorSha256": "2f9ddb66d7611e5f567776ebd646b00dc17b480c01597959f76f589d04fa9dc7"
+      }
+    ]
+  },
+  {
+    "id": "yue-hongfu",
+    "statement": "红拂是黄枫结丹女修、李化元尊重的师姐；后来照看董萱儿的师徒关系和早年收养时点须区别。开篇让董幼年已受其照看为必要补写，未给成人风评、化春诀修炼后果或后期身世知情。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-21131760",
+        "chapterSha256": "efc826853da0004fb3ba8f88a4bc938fedbfa5d9729f1eca2c612552662769bc",
+        "start": 2645,
+        "end": 2662,
+        "anchorSha256": "0403dd0566bcccf47bd6e361ade77b3e8b5806c4d697d8309e43dc54dd08248a"
+      },
+      {
+        "chapterId": "qq-21139984",
+        "chapterSha256": "fdfac76b34b2e3a4acc118a84393af741137f7f43e12e3b903447ce9ebd602d0",
+        "start": 480,
+        "end": 593,
+        "anchorSha256": "bdb0f336d730dcac8b47f0eaf0489ada1eed00aba3fb05d9bd3ff390a2479d3e"
+      }
+    ]
+  },
+  {
+    "id": "yue-opening-young-persons",
+    "statement": "韩立T0十岁，嘉元城来访约十七八岁；据相对阶段将万小山标定八岁、菡云芝九岁、董萱儿六岁、陈巧倩十四岁、燕如嫣十岁。具体生日、家庭当期住处、低龄学艺程度属原创；尚未修行不等于无灵根，儿童没有成年恋情、法宝、未来师承与旅行记忆。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "yue-mo-household-history",
+    "statement": "墨居仁离家前已有四位在世夫人、金氏已死；金氏女玉珠、严氏女彩环、义女凤舞，严氏接管大部会权、王氏掌隐秘力量。离家时凤舞七岁、燕歌十二、赵坤十，后文遗书称近十年前；这些既有亲属和弟子可回溯T0，不提前套后来分裂。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20445735",
+        "chapterSha256": "44743c447d3d9a0c4c7b2b276522da04b3fdac7e127edbc511aae8b9631dffcc",
+        "start": 77,
+        "end": 118,
+        "anchorSha256": "564aaf2cf70300a12b1abccd734b5b04ad267cc77345eb9d94f3790f43214587"
+      },
+      {
+        "chapterId": "qq-20445735",
+        "chapterSha256": "44743c447d3d9a0c4c7b2b276522da04b3fdac7e127edbc511aae8b9631dffcc",
+        "start": 195,
+        "end": 255,
+        "anchorSha256": "f490d8ccaac09e60c36a9afe02a39115d2d96e38f739b149d294494c56882a54"
+      },
+      {
+        "chapterId": "qq-20445735",
+        "chapterSha256": "44743c447d3d9a0c4c7b2b276522da04b3fdac7e127edbc511aae8b9631dffcc",
+        "start": 256,
+        "end": 309,
+        "anchorSha256": "2d8e942d381558072e86adcff2feff83ae2c9cfba4362bdf1c2b67755fab50cc"
+      },
+      {
+        "chapterId": "qq-20445735",
+        "chapterSha256": "44743c447d3d9a0c4c7b2b276522da04b3fdac7e127edbc511aae8b9631dffcc",
+        "start": 310,
+        "end": 353,
+        "anchorSha256": "df6f8a3f0ec76f18275dcf27315586cde05c37195fc0253073c5b58e7041e19c"
+      },
+      {
+        "chapterId": "qq-20445735",
+        "chapterSha256": "44743c447d3d9a0c4c7b2b276522da04b3fdac7e127edbc511aae8b9631dffcc",
+        "start": 354,
+        "end": 391,
+        "anchorSha256": "0738d02922f815b1595a782fea2ef7fb5e3d6767b32724db43f2d31ee995e4f6"
+      },
+      {
+        "chapterId": "qq-20445735",
+        "chapterSha256": "44743c447d3d9a0c4c7b2b276522da04b3fdac7e127edbc511aae8b9631dffcc",
+        "start": 392,
+        "end": 428,
+        "anchorSha256": "7e7b9726ad2ecbf23684647f1de96e88eaaa54780aeee7bf5d5c98d4b53f9e88"
+      },
+      {
+        "chapterId": "qq-20445735",
+        "chapterSha256": "44743c447d3d9a0c4c7b2b276522da04b3fdac7e127edbc511aae8b9631dffcc",
+        "start": 581,
+        "end": 620,
+        "anchorSha256": "d7cafe2419d537e7cfa35eef830b3dd359d29b205a57a08844a58ca517038bb1"
+      }
+    ]
+  },
+  {
+    "id": "yue-jiayuan-geography",
+    "statement": "岚州在越国南部，嘉元在岚州中部，为水陆商业枢纽，乡鲁大运河从城中穿过。四平与铁拳同在西城，两码头头目后期为孙二狗、黑熊。开篇具体帮派岗位和日常资产作回溯标定，不自动发生后来毒杀。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20417649",
+        "chapterSha256": "628f1970be0653fe2c552f7a239295dd0d476f8a9b40c3859b81dad9f21aa667",
+        "start": 0,
+        "end": 104,
+        "anchorSha256": "20513c87be59d5cdc593aae32a3ff87855531cda9d50041f6c6dabc3bbbe0ada"
+      },
+      {
+        "chapterId": "qq-20417649",
+        "chapterSha256": "628f1970be0653fe2c552f7a239295dd0d476f8a9b40c3859b81dad9f21aa667",
+        "start": 105,
+        "end": 259,
+        "anchorSha256": "e27e8ab06f19f2587b1086d2a03a67343191412f2ca337b2678e7e8d16920326"
+      },
+      {
+        "chapterId": "qq-20445735",
+        "chapterSha256": "44743c447d3d9a0c4c7b2b276522da04b3fdac7e127edbc511aae8b9631dffcc",
+        "start": 1420,
+        "end": 1523,
+        "anchorSha256": "c7050e0819c5766a966f2765904e1cdcce0e53cd79e7f9ce4733b9e797133690"
+      },
+      {
+        "chapterId": "qq-20417649",
+        "chapterSha256": "628f1970be0653fe2c552f7a239295dd0d476f8a9b40c3859b81dad9f21aa667",
+        "start": 875,
+        "end": 975,
+        "anchorSha256": "4f1b3730c7dd8f773baf401201d9a8eadfc3e2a41a2607793dd6d74dba2d2bf8"
+      }
+    ]
+  },
+  {
+    "id": "yue-mo-opening-state",
+    "statement": "墨府T0：玉珠十岁、凤舞九岁、彩环八岁，燕歌十四岁、赵坤十二岁。墨夫人已接职责、马空天尚未叛离，具体年龄及尚未分裂的时点选择为必要补写，不冒充原文精确年表。普通武艺、家产及当期文书均另立有限实际状态。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "yue-nangong-ring-and-qiong-needle",
+    "statement": "南宫婉持朱雀环，是与心神相连的法宝，可放红炎与圈禁，威力受法力限制；穹前辈的无形针由五金之精和无形遁法炼成。T0已持这两器是近期开篇回溯，不提前生成后来赠韩的符宝或复制本体。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20967978",
+        "chapterSha256": "39f198aed42a29f2f5d2e547fe2d2fdd8fe000e0fc57c808b8e5e32e24d8deb5",
+        "start": 531,
+        "end": 695,
+        "anchorSha256": "2f5fd874802419a2638a5c9becfecc69473515d692812d93a50cbb0fa4177a54"
+      },
+      {
+        "chapterId": "qq-20967978",
+        "chapterSha256": "39f198aed42a29f2f5d2e547fe2d2fdd8fe000e0fc57c808b8e5e32e24d8deb5",
+        "start": 1810,
+        "end": 1852,
+        "anchorSha256": "060edb684239eadb2d26cbf019d777664edf26fbeb130b980ccd6b743c703c30"
+      },
+      {
+        "chapterId": "qq-20815609",
+        "chapterSha256": "420a736b8905b6b14dca9ed212576808e128209ea8b1f63e31e750a153b48137",
+        "start": 22,
+        "end": 78,
+        "anchorSha256": "76d2c148c8936feda935956e0452321cd0cfe221efd77c5de6eac1db94ec463e"
+      }
+    ]
+  },
+  {
+    "id": "yue-blood-central-geography",
+    "statement": "血色中心区有四铜门、外层观赏花园、第二层环形迷雾山脉与第三层百丈巨塔；三层间禁制与外围风禁不同。七派共有月阳宝珠克制雾瘴，轮流掌管；某次第三日驱雾约定不作为每次永恒时间。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20910857",
+        "chapterSha256": "06288c79bb3149fee6eb01e8cfd760726c50bb3cd9f5fb7310ddf4c6de8de2d6",
+        "start": 165,
+        "end": 285,
+        "anchorSha256": "665f665b662b5c8168961eca1d21cca989b4d4037d76a86bf43d285389def6dd"
+      },
+      {
+        "chapterId": "qq-20910857",
+        "chapterSha256": "06288c79bb3149fee6eb01e8cfd760726c50bb3cd9f5fb7310ddf4c6de8de2d6",
+        "start": 662,
+        "end": 757,
+        "anchorSha256": "b5fa5f75590832355cce8349fc9777f66c5896111328c3f28fd2da9d8c7fc91c"
+      },
+      {
+        "chapterId": "qq-20910857",
+        "chapterSha256": "06288c79bb3149fee6eb01e8cfd760726c50bb3cd9f5fb7310ddf4c6de8de2d6",
+        "start": 2205,
+        "end": 2307,
+        "anchorSha256": "0324b401a21e62a4b6318e02a034992fa4fd9bfc8b0a99e4be3fbf3d2d9883de"
+      },
+      {
+        "chapterId": "qq-20910857",
+        "chapterSha256": "06288c79bb3149fee6eb01e8cfd760726c50bb3cd9f5fb7310ddf4c6de8de2d6",
+        "start": 1664,
+        "end": 1724,
+        "anchorSha256": "725ed8d6b0e1c0ea1fda86e94199f0ad67244dc7d5694df8a314e74470b8b296"
+      }
+    ]
+  },
+  {
+    "id": "yue-blood-stone-hall",
+    "statement": "环形山盆地青石殿能抵御法器与排斥神识，厅中央阶道下达地下黑泥沼泽，白玉亭有金箱。地下有灵药与墨蛟；传说黑麟蟒是误认。开篇兽龄、药龄与未开的金箱内物不得从后期到手反推给玩家。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20962206",
+        "chapterSha256": "7ee821c1df709a26bd7634d7bb5afb81fe4173ad96464869c4e327f822c2c245",
+        "start": 0,
+        "end": 120,
+        "anchorSha256": "f809b88acc10a863909ac544dc5cd6c28383d24d07588dde994fffead18905dd"
+      },
+      {
+        "chapterId": "qq-20962206",
+        "chapterSha256": "7ee821c1df709a26bd7634d7bb5afb81fe4173ad96464869c4e327f822c2c245",
+        "start": 799,
+        "end": 919,
+        "anchorSha256": "828ef41aeb0a6376b76f8b5f41c7c7f1606d11bba5767da1d9de7a605c51212d"
+      },
+      {
+        "chapterId": "qq-20962206",
+        "chapterSha256": "7ee821c1df709a26bd7634d7bb5afb81fe4173ad96464869c4e327f822c2c245",
+        "start": 1991,
+        "end": 2053,
+        "anchorSha256": "d605f677fdf2f2030b9d59f7cc0891afd5cb9b485dba096e41614bd4f2aaff04"
+      },
+      {
+        "chapterId": "qq-20962206",
+        "chapterSha256": "7ee821c1df709a26bd7634d7bb5afb81fe4173ad96464869c4e327f822c2c245",
+        "start": 2229,
+        "end": 2313,
+        "anchorSha256": "3998a64bc58c82949b6205889df5add6c3c84a02adda6d4ec5d72619c7537cc2"
+      },
+      {
+        "chapterId": "qq-20967978",
+        "chapterSha256": "39f198aed42a29f2f5d2e547fe2d2fdd8fe000e0fc57c808b8e5e32e24d8deb5",
+        "start": 1527,
+        "end": 1571,
+        "anchorSha256": "0990534f3035301f35a2e8aace8b56ad9aebd68d95bc38b113aa3567bb63027e"
+      }
+    ]
+  },
+  {
+    "id": "yue-forbidden-current-resources",
+    "statement": "本次开篇古禁相位距五年窗口还有四共同年，弱化持续五共同日。月阳宝珠当前由掩月保管属轮值补写；墨蛟T0为尚幼一级顶阶，三株玉髓芝、两株紫猴花、两株天灵果药龄均为有限标定。金箱当前内容保持不明的封闭古物，不许无依据凭空宣布已取出。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "yue-hanyunzhi-root",
+    "statement": "御灵长老后文明确称菡云芝有木属性灵根；仅回溯含木属性，不据此推成木属性天灵根。T0她尚未独立施法，是否已知具体属性与客观资质分开。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-23311962",
+        "chapterSha256": "e72f1f3bb29e8233148e731432ecbc6ea322c29a0f9a01e93325352c3ee1ec28",
+        "start": 2204,
+        "end": 2342,
+        "anchorSha256": "4c6dbfb81fb07684d49327bc81a69865af516724f5a40b42509eaafe0ba7fee8"
+      }
+    ]
+  },
+  {
+    "id": "yue-warm-yang-jade",
+    "statement": "墨居仁家传暖阳宝玉在离家前交回家中保管。其遗书称此玉能解阴毒，独此一法属于墨的说法而非两界普遍定律；T0不生成韩立中毒、婚约或报酬承诺。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20226467",
+        "chapterSha256": "d0e34e0eb43fba75dfc348fd1deb94b78f28f5212014feee105bb0d07b7b34f6",
+        "start": 947,
+        "end": 1065,
+        "anchorSha256": "11116a3e54a986ab3a9387be44e262abbf9d7c70da8414af6fc78d41fa23c75b"
+      },
+      {
+        "chapterId": "qq-20226467",
+        "chapterSha256": "d0e34e0eb43fba75dfc348fd1deb94b78f28f5212014feee105bb0d07b7b34f6",
+        "start": 1774,
+        "end": 1833,
+        "anchorSha256": "f52e2cd383651066b72a3fd272f9240d494e4e2bf7b25e6d4a35e1b9496c9fb5"
+      }
+    ]
+  },
+  {
+    "id": "yue-warm-jade-custody",
+    "statement": "T0暖阳宝玉由墨家共同体所有，严氏在内院保管，四夫人知其可温养与驱阴寒；具体日常保管安排是必要补写，不解决正文发妻与金氏死亡先后的未明细节。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "yue-finite-foundation-stock",
+    "statement": "黄枫当期库补建十二枚筑基丹，是本次开篇储备标定，不冒充宗门总库存或小说固定发放数。批准、发放和服用均须实际消耗同一库存。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "yue-mundane-force",
+    "statement": "凡俗武功与修仙境界分开：马空天等成年人依据已写武艺有实际体术评级，少年仅有受训程度；cultivation为0不等于不能战斗。数字只描述此项身体与技艺比较，不抹掉法力与神通差距。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  }
+]

@@ -1,0 +1,566 @@
+[
+  {
+    "id": "tiannan-present-life",
+    "statement": "新增职员、街坊、雇佣、当期委托、设施细部和具体资产为原创；不替代有明确身份的原著人物，不强制触发小说后续事件。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "tiannan-values",
+    "statement": "法力数值、私人灵石、机构库存、所持普通器物、具体开篇位置、机构当前值班与日常动机属有限标定；不同所有者库存独立，数量不代表境界的全部财产。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "tiannan-opening-political-sequence",
+    "statement": "共同开篇天南仍以各国宗派并存；天罗魔道六宗、风都正道盟和九国盟已存在。天道盟明确成立于韩立去乱星海之后，故只保留未来索引；六派撤入九国、四势力互援协议及东裕后来的三方中立协议均不前置。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-21723002",
+        "chapterSha256": "3727d3ada296277c8d64a14de5481e24493cf94559dfb14c2d0e3684e800be8c",
+        "start": 998,
+        "end": 1044,
+        "anchorSha256": "3b87a2c0c70109a4be51ede23d65143fbb914ea18b3b2a4fb039833288c34d36"
+      },
+      {
+        "chapterId": "qq-22975675",
+        "chapterSha256": "1f9801646d6695b3a0bb443078970775a75231f2945e2c12cdb9a4590eb1fda1",
+        "start": 1876,
+        "end": 1981,
+        "anchorSha256": "d60b8d6d05908bba698f34033196f638a43d3262d5e05c50340264b786f3b259"
+      },
+      {
+        "chapterId": "qq-22975675",
+        "chapterSha256": "1f9801646d6695b3a0bb443078970775a75231f2945e2c12cdb9a4590eb1fda1",
+        "start": 1818,
+        "end": 1875,
+        "anchorSha256": "3b15c500ba38ab04fd21b732dfc206e55e67ceb8b56c00aba97cdb6385a0a8f8"
+      }
+    ]
+  },
+  {
+    "id": "tiannan-country-connections",
+    "statement": "越国北通元武，东西分别为天罗与风都方向，南过紫金等国可达九国盟；九国与慕兰间有近万里黄土荒地。这里只建立跨国长途方向，不能把疆域中心或任何门派直接相邻瞬移。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-21723002",
+        "chapterSha256": "3727d3ada296277c8d64a14de5481e24493cf94559dfb14c2d0e3684e800be8c",
+        "start": 448,
+        "end": 493,
+        "anchorSha256": "cd67bc43b017b8c8945a1ccd1953a5bf460913ec131065d7652b2d29240a4329"
+      },
+      {
+        "chapterId": "qq-21723002",
+        "chapterSha256": "3727d3ada296277c8d64a14de5481e24493cf94559dfb14c2d0e3684e800be8c",
+        "start": 494,
+        "end": 612,
+        "anchorSha256": "4c183a8e6bca38c013405410649b2b4d3667b29a0a1ae62d8984403a460d587e"
+      },
+      {
+        "chapterId": "qq-21723002",
+        "chapterSha256": "3727d3ada296277c8d64a14de5481e24493cf94559dfb14c2d0e3684e800be8c",
+        "start": 998,
+        "end": 1044,
+        "anchorSha256": "3b87a2c0c70109a4be51ede23d65143fbb914ea18b3b2a4fb039833288c34d36"
+      },
+      {
+        "chapterId": "qq-23551923",
+        "chapterSha256": "54eeab89dde8920d74b878146ab3e8abc241c7e615b034307bb3ee410675a214",
+        "start": 1758,
+        "end": 1883,
+        "anchorSha256": "ba78fd4edefb418ee349eaba441f7e3f7917f6b80d4009c1a7dd49e982489378"
+      }
+    ]
+  },
+  {
+    "id": "tiannan-dongyu-geography",
+    "statement": "东裕国多宗混杂、国土和资源丰富，北部昌州盆地有万岭山脉与坠魔谷；后来三方势力约定和当次探谷热潮不是T0状态。宁州紧邻昌州。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24368100",
+        "chapterSha256": "8e8dd5230409008c0e16e371e87fd4c9a0a31722ba9ac9885c8cbd563a10e0c5",
+        "start": 0,
+        "end": 126,
+        "anchorSha256": "c1be530983bbe1113ec9da436fb8399ee2d981327b3aa7372689353146873d7b"
+      },
+      {
+        "chapterId": "qq-24368100",
+        "chapterSha256": "8e8dd5230409008c0e16e371e87fd4c9a0a31722ba9ac9885c8cbd563a10e0c5",
+        "start": 476,
+        "end": 559,
+        "anchorSha256": "0920771b5550f6f2e76a4ff099a0012654839ef1ab61a5abd6cae96190f4cb66"
+      },
+      {
+        "chapterId": "qq-24844643",
+        "chapterSha256": "adda76e79384dffbe24d98c7da6be744b7a9012946d664aff3ca5c4931a84d0d",
+        "start": 0,
+        "end": 31,
+        "anchorSha256": "651016ad03e8c01c21b59e0434c27c34e53f0a9656942407330a4231f1d6dd59"
+      }
+    ]
+  },
+  {
+    "id": "tiannan-six-demonic-sects",
+    "statement": "天罗六宗为鬼灵门、御灵宗、合欢宗、魔焰门、天煞宗、千幻宗；六宗有利益联盟，也相互竞争。鬼灵擅驱鬼毒暗术，御灵山门在西部奇灵山；千幻藏匿变化传承不能等同任意改写客观身份。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-21173930",
+        "chapterSha256": "4dc3c0fdaa668dbe05aa6218811c01122a86abe498f35ba4e42a9f354fd520f8",
+        "start": 2115,
+        "end": 2190,
+        "anchorSha256": "2b070293e93445cce95c5b6e69b99527dd8e416a2103165ca3fd1e54873e60a0"
+      },
+      {
+        "chapterId": "qq-23311962",
+        "chapterSha256": "e72f1f3bb29e8233148e731432ecbc6ea322c29a0f9a01e93325352c3ee1ec28",
+        "start": 1929,
+        "end": 2003,
+        "anchorSha256": "ece2bacd59ebebc891e71c37cab88866e739d8e484e97b23f6a9b96876bc85ee"
+      },
+      {
+        "chapterId": "qq-21233615",
+        "chapterSha256": "d63df3066a184a6c8d9bf0308e39c8acf6496621e313a3fe51c1f0e63afa975a",
+        "start": 231,
+        "end": 298,
+        "anchorSha256": "b5b89c5a0b2fe91b51e8d1d74105eea3c34c0233ce84cfc2ba769ca9f4e7190c"
+      },
+      {
+        "chapterId": "qq-21214905",
+        "chapterSha256": "06e6202820b0e40c2e48b55a9bf5a53a4cda4b39077c658ec24db8d1381c24bc",
+        "start": 2565,
+        "end": 2625,
+        "anchorSha256": "c47566ae13e2471602b0aacc32f0966de3d09ea5f005eadba5df2d6820e39327"
+      },
+      {
+        "chapterId": "qq-23189107",
+        "chapterSha256": "264ff36d86452f4a78b0c5fe7c12f3307328eb8c42f07f50a89f322fbbc6d958",
+        "start": 2317,
+        "end": 2398,
+        "anchorSha256": "86405c70676bfd1885bb81aed0a61a48e39e59e6bae82c3a16564888b6613848"
+      }
+    ]
+  },
+  {
+    "id": "tiannan-old-sect-ties",
+    "statement": "御灵修士回述灵兽山立宗起一直与御灵宗保有隐秘联系；掩月与合欢有渊源但数百年前已断联系。隐秘联系是历史情报，不能直接等同当前已决定出卖七派或全宗低阶弟子知情。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-21626774",
+        "chapterSha256": "fbe283b7f1b20b16cf612bce72c4ed46d96dc335633690bf07d63a9a1da6d01f",
+        "start": 2505,
+        "end": 2706,
+        "anchorSha256": "31c88a5836f5956cb49828593f513fbeda838149e937dc3c0557b3fc4f1ccfdf"
+      },
+      {
+        "chapterId": "qq-21626774",
+        "chapterSha256": "fbe283b7f1b20b16cf612bce72c4ed46d96dc335633690bf07d63a9a1da6d01f",
+        "start": 2778,
+        "end": 2913,
+        "anchorSha256": "ddc955d7d6bd2a5254abd3817d3f3625db8305bc296eb6c80b714684c302361b"
+      }
+    ]
+  },
+  {
+    "id": "tiannan-wang-family",
+    "statement": "王天胜是鬼灵王氏宗主身份的后文正式姓名；王蝉为其子，王天古为王蝉二伯。共同开篇保留亲属、门派和修行，王蝉与燕如嫣婚约、血祭、追杀韩立均未发生。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24443900",
+        "chapterSha256": "82698b2a7495ffdb9fef65a99bb7535df95d239c0a7bfe68cb77b0c1b580d410",
+        "start": 2413,
+        "end": 2656,
+        "anchorSha256": "9b45770ca1a612459337680547707683b87894fb787b03382f6415c3c612092b"
+      },
+      {
+        "chapterId": "qq-24445870",
+        "chapterSha256": "3278ab12417e21d9c9ec181c4d584eec331fa4b53b84635008c7483323175527",
+        "start": 56,
+        "end": 116,
+        "anchorSha256": "8bdd7142d71d8a26dac5d4a828be13e831e1a68dff9c188d5dab93386aa0e487"
+      },
+      {
+        "chapterId": "qq-23551923",
+        "chapterSha256": "54eeab89dde8920d74b878146ab3e8abc241c7e615b034307bb3ee410675a214",
+        "start": 829,
+        "end": 1010,
+        "anchorSha256": "73bd22ef79288fdb5aa2db9850d0cdb42885a81534d8ecb31b0df6d9062ae69c"
+      }
+    ]
+  },
+  {
+    "id": "tiannan-major-elders",
+    "statement": "魏无涯修毒道，后期为九国盟大修士；至阳上人属太真门，静心诀能影响情绪但非改写意志；合欢老魔为历代大长老称号，当前后期叙事中的易姓黑袍修士与古姓云露不是同一主体。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-23737406",
+        "chapterSha256": "2fb9e249481f67e9d2fba6063f351afa58b67700e015c81991325281ee64ecfd",
+        "start": 675,
+        "end": 794,
+        "anchorSha256": "39504c0c0002f05afbd13a7602952b0ef91cc804124c0dd7f2ecc96cb3df7b93"
+      },
+      {
+        "chapterId": "qq-24038123",
+        "chapterSha256": "97b16339e3c1727c324c659f67ad4583bbec346e7f6858a1b0f6320f804bec61",
+        "start": 278,
+        "end": 349,
+        "anchorSha256": "94c70958f6f382fff56adb4c964e89180a4bb5c70302eb3487a0925fcc130030"
+      },
+      {
+        "chapterId": "qq-24038123",
+        "chapterSha256": "97b16339e3c1727c324c659f67ad4583bbec346e7f6858a1b0f6320f804bec61",
+        "start": 555,
+        "end": 698,
+        "anchorSha256": "4edcfb80670b47669e69193d0b3e87f78940418187293f945780b44da0b9fdb4"
+      },
+      {
+        "chapterId": "qq-24038123",
+        "chapterSha256": "97b16339e3c1727c324c659f67ad4583bbec346e7f6858a1b0f6320f804bec61",
+        "start": 699,
+        "end": 750,
+        "anchorSha256": "028a45f637e9a0594f03dacb5ac3ac2cf1aea19951b5fb97354a0dedf3dad0d0"
+      },
+      {
+        "chapterId": "qq-24027093",
+        "chapterSha256": "d1c898350c3936fcf56ba90c72806a19c9c2a3d22465b8dcfae2667499e7c7a5",
+        "start": 2545,
+        "end": 2663,
+        "anchorSha256": "44099496785caa390fbabcab7926ec5ba569ddf6509c0cdcc34e65666573d3aa"
+      }
+    ]
+  },
+  {
+    "id": "tiannan-yunlu-bloodline",
+    "statement": "董萱儿后来自述是云露嫡传血脉、出生前被种奕梦诀；不等于其开篇已经知道真相。云露自号云露真人，古姓，阴阳同体；其伤害他人的采补史是人物行为与声名，不作为正当化或全体魔修行为规则。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-27320762",
+        "chapterSha256": "6acbec9e0438ac10357456a4e705634295a979d3b5448a6ab132cb73a4cbdb7d",
+        "start": 976,
+        "end": 1231,
+        "anchorSha256": "243953c11fb366e9a1d03f77ebb05c6dc5b0515c5b452d5434ff9d9bd63769a6"
+      },
+      {
+        "chapterId": "qq-24027093",
+        "chapterSha256": "d1c898350c3936fcf56ba90c72806a19c9c2a3d22465b8dcfae2667499e7c7a5",
+        "start": 2545,
+        "end": 2663,
+        "anchorSha256": "44099496785caa390fbabcab7926ec5ba569ddf6509c0cdcc34e65666573d3aa"
+      }
+    ]
+  },
+  {
+    "id": "tiannan-yunmeng-three",
+    "statement": "溪国西部云梦山为灵脉，三派长期占山；古剑门主脉、百巧院西脉、落云宗东脉。剑道、炼器、炼丹为各自所长，入门尺度属于门规，后来某次招新和人员编制不自动复刻。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-22968396",
+        "chapterSha256": "1148f8ba9cdf149d4e42e5e36d4541adf50dc3d5ba7060e0f47a43b0003ef7c0",
+        "start": 1687,
+        "end": 1796,
+        "anchorSha256": "fd937625e212cc40a6c1989271a5a3644e67780878c611a4004a9fe1995cd464"
+      },
+      {
+        "chapterId": "qq-22978584",
+        "chapterSha256": "e89052ba88e59231e4df435eea4db3232299b99c27a78ca5a27988e69656a084",
+        "start": 154,
+        "end": 276,
+        "anchorSha256": "c0a52b2b769c6361f0ac555d159e7c28fe1b531ca741307aa3b7818a6dbd1ecd"
+      },
+      {
+        "chapterId": "qq-22978584",
+        "chapterSha256": "e89052ba88e59231e4df435eea4db3232299b99c27a78ca5a27988e69656a084",
+        "start": 459,
+        "end": 528,
+        "anchorSha256": "ae183912c75ee027a58881faa2f9ef18a9bd682ca8aaa162f177b5223ee4ecac"
+      },
+      {
+        "chapterId": "qq-22978584",
+        "chapterSha256": "e89052ba88e59231e4df435eea4db3232299b99c27a78ca5a27988e69656a084",
+        "start": 586,
+        "end": 660,
+        "anchorSha256": "f2f58f9852dfa3b9cd6f26d492e6c16361a359aa428a08e955c9a57236525734"
+      }
+    ]
+  },
+  {
+    "id": "tiannan-lingyan-tree",
+    "statement": "云梦山灵眼之树约两百年产醇液，是定灵丹等的药引；醇液不能直接服用。定灵丹帮助定心安魂和结婴，不保证结婴。树、产液位置、药方、已有液体与尚未生成产物分别建实体或状态。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-22968396",
+        "chapterSha256": "1148f8ba9cdf149d4e42e5e36d4541adf50dc3d5ba7060e0f47a43b0003ef7c0",
+        "start": 2000,
+        "end": 2092,
+        "anchorSha256": "ee041099ce2a67f20b5d804b04b4c2be47315fa33dcb232a1de839caa89defe0"
+      },
+      {
+        "chapterId": "qq-22968396",
+        "chapterSha256": "1148f8ba9cdf149d4e42e5e36d4541adf50dc3d5ba7060e0f47a43b0003ef7c0",
+        "start": 2093,
+        "end": 2180,
+        "anchorSha256": "ad9ef6eae911ff5b8ede262a6054c9e39d9d4a7a2bd156b7e9dbbe75c57f15f7"
+      }
+    ]
+  },
+  {
+    "id": "tiannan-luoyun-elder-history",
+    "statement": "程天坤为程姓银发长老正式姓名，年龄略小于令狐且后期已寿元将尽，可回溯T0成年。吕洛三百年前已结丹，师父木离上人其后坐化；千浪诀为水系功法，后期有保命神通。T0不继承未来被伏击伤势和对韩立的结识。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-23233871",
+        "chapterSha256": "dd30b5187ed42636dec169657d3cf786f0cb5938f3e76323aca8e8b31d12dd7b",
+        "start": 2780,
+        "end": 2817,
+        "anchorSha256": "320a546c531e5b013467d39ebcc27944fc87c74f91ab9a027640a109fa379fb6"
+      },
+      {
+        "chapterId": "qq-23448399",
+        "chapterSha256": "ee97aafe7d544351afc66af0305a9214f0b404c5ca28a707ba536da5f952682f",
+        "start": 1440,
+        "end": 1559,
+        "anchorSha256": "e5df5bfe9d695c62b8f815a74201d0f7498fc9bb81fc7195781012c0436d2e2f"
+      },
+      {
+        "chapterId": "qq-23459326",
+        "chapterSha256": "71a7d1a09f6cc814a41eeb6c71eaed1b592cc2e4e693f6d196f4575d570de12d",
+        "start": 2773,
+        "end": 2897,
+        "anchorSha256": "44d263dbd65e15e3be1a3fd73bd770c56c7e1626b3ff7ef3fa31d9700c91684d"
+      },
+      {
+        "chapterId": "qq-23459326",
+        "chapterSha256": "71a7d1a09f6cc814a41eeb6c71eaed1b592cc2e4e693f6d196f4575d570de12d",
+        "start": 1149,
+        "end": 1249,
+        "anchorSha256": "87f4dc49c783b201ef897358d2a25ea0195dc686576c926c7a6f8282b803dd6c"
+      }
+    ]
+  },
+  {
+    "id": "tiannan-tiantian-city",
+    "statement": "阗天城位于虞国，是九国盟总坛的石城，历史上以上元灭光阵拒敌。天南交易会原在天罗、风都轮办，改在阗天是后来的近百年变化；开篇没有凭空正在召开的全书交易会。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-23459326",
+        "chapterSha256": "71a7d1a09f6cc814a41eeb6c71eaed1b592cc2e4e693f6d196f4575d570de12d",
+        "start": 656,
+        "end": 867,
+        "anchorSha256": "40c97c7055d40ffd9beac4aae535915ba9d0a9ba22b87e802850a6efb2d8a0d1"
+      },
+      {
+        "chapterId": "qq-23459326",
+        "chapterSha256": "71a7d1a09f6cc814a41eeb6c71eaed1b592cc2e4e693f6d196f4575d570de12d",
+        "start": 868,
+        "end": 1026,
+        "anchorSha256": "50018647acdb6a49025fd15c5446b3ad13bad4d1acd6a6db986c3b256231a20b"
+      },
+      {
+        "chapterId": "qq-23448399",
+        "chapterSha256": "ee97aafe7d544351afc66af0305a9214f0b404c5ca28a707ba536da5f952682f",
+        "start": 2188,
+        "end": 2253,
+        "anchorSha256": "46820abbd3aed9a6d11b3a8010c763c32102861771d02deb8723f571f248c4e1"
+      }
+    ]
+  },
+  {
+    "id": "tiannan-opening-elder-calibration",
+    "statement": "缺逐年境界表的人物采用公开的T0回溯标定：程天坤元婴初、吕洛结丹后期、至阳/易姓合欢长老元婴中期；魏无涯依据早两百余年突破的回述另定后期、云露元婴初、王天胜及王天古结丹后期、王蝉炼气十二层。初始居处、职分、普通法宝与私有灵石均为必要补写；后期元婴名册不是开篇原文。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "tiannan-tree-phase",
+    "statement": "灵眼之树T0当期醇液尚未产出，距下一次正常分泌标定六十共同年；目前三派共有旧醇液十二滴，各库四滴。一次产出二十四滴为作者计量，不冒充原文总量；受损、迁移和生境变化可影响产液。定灵丹处方以原著效果为基础、有限材料与工时为作者可运行配方。 产液窗口标定三共同日；已采周期号、初始相位和一次上限共同阻止重复生成。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "tiannan-wei-earlier-breakthrough",
+    "statement": "魏无涯回述自己比至阳及易姓合欢长老早两百余年进入元婴后期；韩立约二百岁时后三大修士已是后期，据此回溯共同开篇魏无涯已为元婴后期。其他二人的T0小境界仍为明确标定，不把后来的寿尽、七灵岛居住及对韩立态度前置。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-27163326",
+        "chapterSha256": "372747ac098f495265ec1c51f47e6e750e08f6d837892c99f0a7cc6e8a6fc9d9",
+        "start": 597,
+        "end": 692,
+        "anchorSha256": "81964113b1e306d7386e2845eb1e86c6d0561c3bf74f8ac2ddb135a5f79ea4eb"
+      },
+      {
+        "chapterId": "qq-23233871",
+        "chapterSha256": "dd30b5187ed42636dec169657d3cf786f0cb5938f3e76323aca8e8b31d12dd7b",
+        "start": 1041,
+        "end": 1157,
+        "anchorSha256": "aaf2d4325024937666c3f1ecffaecd3fc685c6219ef960dce66d2b06889ae0e8"
+      },
+      {
+        "chapterId": "qq-23737406",
+        "chapterSha256": "2fb9e249481f67e9d2fba6063f351afa58b67700e015c81991325281ee64ecfd",
+        "start": 675,
+        "end": 794,
+        "anchorSha256": "39504c0c0002f05afbd13a7602952b0ef91cc804124c0dd7f2ecc96cb3df7b93"
+      }
+    ]
+  },
+  {
+    "id": "tiannan-wang-dark-root",
+    "statement": "燕家老祖明确称鬼灵少门主王蝉具有罕见暗灵根；本区采纳这一先天资质，不将未来双修婚约、已练血灵大法或对燕家消息的掌握前置。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-21187560",
+        "chapterSha256": "12f595ce74590753aa2d19c0103e9273a2953432d40c75aae67f7068cf36bea1",
+        "start": 38,
+        "end": 398,
+        "anchorSha256": "efa1cdb6e7c29ef2bb7fde2ae43d46d6568074487dd59f68953fb8d9e7772b86"
+      }
+    ]
+  },
+  {
+    "id": "tiannan-mu-not-born-at-opening",
+    "statement": "试剑大会将参赛者限制在三十岁以下，慕沛灵被指定直接参赛；约二十多年后韩立结婴时堪堪二百岁。因此她出生晚于韩立十岁的共同开篇，不实例化当期人物。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-23123073",
+        "chapterSha256": "f065f24b60be74e8315013c66726c3e5e1a6ac1735eda6a9ca98ddf33a440b5a",
+        "start": 2524,
+        "end": 2849,
+        "anchorSha256": "5014214b70c9bdba0768e17cb1a52e0aa50df2460b909fc921bd57a548c4387b"
+      },
+      {
+        "chapterId": "qq-23233871",
+        "chapterSha256": "dd30b5187ed42636dec169657d3cf786f0cb5938f3e76323aca8e8b31d12dd7b",
+        "start": 2049,
+        "end": 2101,
+        "anchorSha256": "212813604398a6d5c335b248cce3b46dde1397f6a492b9bfb8039c54e693ea21"
+      },
+      {
+        "chapterId": "qq-23233871",
+        "chapterSha256": "dd30b5187ed42636dec169657d3cf786f0cb5938f3e76323aca8e8b31d12dd7b",
+        "start": 1041,
+        "end": 1157,
+        "anchorSha256": "aaf2d4325024937666c3f1ecffaecd3fc685c6219ef960dce66d2b06889ae0e8"
+      }
+    ]
+  },
+  {
+    "id": "tiannan-current-city-array",
+    "statement": "阗天城上元灭光阵有正文历史依据。本次开篇的四处阵枢、值守钥、灵石维护上限及发动程序为有限玩法标定；阵威须按投入与真实攻击裁定，不保证重演历史战果。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  }
+]

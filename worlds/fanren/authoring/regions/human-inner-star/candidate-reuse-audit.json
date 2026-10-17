@@ -1,0 +1,115 @@
+{
+  "formatVersion": 1,
+  "moduleId": "human-inner-star",
+  "queueInputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
+  "status": "exact-existing-disposition-reuse-not-new-semantic-approval",
+  "records": [
+    {
+      "candidateId": "batch-0089-object-0016",
+      "extractionReportHash": "458ad693446d0a9b9df97fc0b7b0a7637ca43a9d1a594de0718cf48926b9ce28",
+      "sourceModule": "human-boundless",
+      "targetQueueModule": "human-inner-star",
+      "sourceDispositionReportHash": "b2d931007794c22655fa68f6ec62bb93ae52f83162864227edee85c8aebed20e",
+      "sourceRecordHash": "be1b60dbdc9951e87ca62802031cf5eb4e6e8031d3f5811a2c03d2b59dbbd139",
+      "disposition": "adopted",
+      "targetIds": [
+        "boundless-beast"
+      ],
+      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+    },
+    {
+      "candidateId": "batch-0089-fact-0004",
+      "extractionReportHash": "458ad693446d0a9b9df97fc0b7b0a7637ca43a9d1a594de0718cf48926b9ce28",
+      "sourceModule": "human-boundless",
+      "targetQueueModule": "human-inner-star",
+      "sourceDispositionReportHash": "b2d931007794c22655fa68f6ec62bb93ae52f83162864227edee85c8aebed20e",
+      "sourceRecordHash": "6366d10a4e753bf1a51a5431500806a7a25a28b58b7ebf4aebb95c5091780724",
+      "disposition": "adopted",
+      "targetIds": [
+        "boundless-beast"
+      ],
+      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+    },
+    {
+      "candidateId": "batch-0114-fact-0044",
+      "extractionReportHash": "5c6a27f70d617792d3429d6e14091115ac7564f1e34abfdbb263d1625c3a302d",
+      "sourceModule": "human-boundless",
+      "targetQueueModule": "human-inner-star",
+      "sourceDispositionReportHash": "b2d931007794c22655fa68f6ec62bb93ae52f83162864227edee85c8aebed20e",
+      "sourceRecordHash": "de99b78865b869f5adef6c782b2b8f1d1c115c0b035acaedd05141316d360876",
+      "disposition": "later-only",
+      "targetIds": [
+        "human-boundless"
+      ],
+      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+    },
+    {
+      "candidateId": "batch-0170-fact-0055",
+      "extractionReportHash": "17963d841c4970c9fcdc53597b06fd24fdbe4fbb4243520aca32b87933d9bf2a",
+      "sourceModule": "human-north",
+      "targetQueueModule": "human-inner-star",
+      "sourceDispositionReportHash": "0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4",
+      "sourceRecordHash": "1b7fccd512b3b13289ab3ff4136f4cfe8ba1cdc6111146382f94c79ac6add49e",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-bingpo",
+        "north-three-halls"
+      ],
+      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+    },
+    {
+      "candidateId": "batch-0176-object-0005",
+      "extractionReportHash": "1b18afd1ccd5a199b42376ee235a5af718a41e8fa9b25af1706a5df55a882f20",
+      "sourceModule": "human-north",
+      "targetQueueModule": "human-inner-star",
+      "sourceDispositionReportHash": "0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4",
+      "sourceRecordHash": "fdd9d406296867c38bd1fde11300de5a170564e3b8d134cfa62ca559be34b718",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-bingfeng",
+        "north-bingfeng-ritual",
+        "north-opening-persons"
+      ],
+      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+    },
+    {
+      "candidateId": "batch-0176-fact-0007",
+      "extractionReportHash": "1b18afd1ccd5a199b42376ee235a5af718a41e8fa9b25af1706a5df55a882f20",
+      "sourceModule": "human-dajin",
+      "targetQueueModule": "human-inner-star",
+      "sourceDispositionReportHash": "20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14",
+      "sourceRecordHash": "9ce6058fe6c00031d701ee084fa06ecb98fd9e5c59195200e97342a6dae2b175",
+      "disposition": "corrected",
+      "targetIds": [
+        "north-xuling-ancient-array",
+        "void-north-receiver",
+        "north-ancient-oneway"
+      ],
+      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+    }
+  ],
+  "skipped": [],
+  "legacyClassificationSnapshot": null,
+  "validationScope": "complete-queue-including-pending",
+  "missingSourceEvidenceIds": [],
+  "outputDispositionReportHash": "2b237afa9534aa0dce477bec2b8578d215a392ab75e954d2fb3b112ea264f559",
+  "reusedCount": 6,
+  "result": {
+    "moduleId": "human-inner-star",
+    "candidates": 2015,
+    "counts": {
+      "adopted": 2,
+      "corrected": 3,
+      "history-only": 0,
+      "later-only": 1,
+      "bounded-uncertainty": 0,
+      "transferred": 0,
+      "pending": 2009
+    },
+    "completed": 6,
+    "unresolved": 2009,
+    "boundedUncertainty": 0,
+    "approvedForRuntime": false,
+    "reportHash": "2b237afa9534aa0dce477bec2b8578d215a392ab75e954d2fb3b112ea264f559"
+  }
+}

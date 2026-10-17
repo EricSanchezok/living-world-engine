@@ -5,6 +5,31 @@
   "scope_note": "这里是有正文检索线索的制作分区，不是完整世界断言。分区名称不确定开篇疆域、存亡、当权者或可达性；共同名称不能自动合并。全书提取后仍要补入未命中的地区。关联空间按解释两界所需范围审定，仙界不开放探索。",
   "modules": [
     {
+      "id": "shared-foundations",
+      "realm": "shared",
+      "title": "两界修炼、资源与行动基础规则",
+      "search_terms": [
+        "灵根",
+        "夺舍",
+        "寿元",
+        "法宝",
+        "神识",
+        "元婴",
+        "雷劫",
+        "修炼"
+      ],
+      "dimensions": [
+        "cultivation-and-actions",
+        "society-and-resources",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/shared-foundations/module.json",
+      "review": "regions/shared-foundations/review.json",
+      "evidence": "coverage/regional-status.json"
+    },
+    {
       "id": "human-local",
       "realm": "human",
       "title": "开篇地方社会",
@@ -22,8 +47,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-local/module.json",
+      "review": "regions/human-local/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "human-yue",
@@ -43,8 +71,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-yue/module.json",
+      "review": "regions/human-yue/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "human-tiannan",
@@ -65,8 +96,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-tiannan/module.json",
+      "review": "regions/human-tiannan/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "human-steppe",
@@ -85,8 +119,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-steppe/module.json",
+      "evidence": "coverage/regional-status.json",
+      "review": "regions/human-steppe/review.json"
     },
     {
       "id": "human-boundless",
@@ -102,8 +139,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-and-current-candidate-queue",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-boundless/module.json",
+      "review": "regions/human-boundless/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "human-inner-star",
@@ -124,8 +164,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-inner-star/module.json",
+      "review": "regions/human-inner-star/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "human-outer-star",
@@ -142,8 +185,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-outer-star/module.json",
+      "review": "regions/human-outer-star/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "human-void-hall",
@@ -160,8 +206,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-void-hall/module.json",
+      "review": "regions/human-void-hall/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "human-devil-valley",
@@ -177,8 +226,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-devil-valley/module.json",
+      "review": "regions/human-devil-valley/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "human-dajin",
@@ -197,8 +249,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-dajin/module.json",
+      "review": "regions/human-dajin/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "human-south-kunwu",
@@ -215,8 +270,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-south-kunwu/module.json",
+      "review": "regions/human-south-kunwu/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "human-north",
@@ -234,8 +292,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-and-current-candidate-queue",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-north/module.json",
+      "review": "regions/human-north/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "human-ten-thousand",
@@ -251,8 +312,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-and-current-candidate-queue",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-ten-thousand/module.json",
+      "review": "regions/human-ten-thousand/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "human-far-seas",
@@ -269,8 +333,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-far-seas/module.json",
+      "review": "regions/human-far-seas/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "spirit-human-three",
@@ -289,8 +356,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/spirit-human-three/module.json",
+      "review": "regions/spirit-human-three/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "spirit-demon-seven",
@@ -308,8 +378,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/spirit-demon-seven/module.json",
+      "review": "regions/spirit-demon-seven/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "spirit-tianyuan",
@@ -327,8 +400,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/spirit-tianyuan/module.json",
+      "review": "regions/spirit-tianyuan/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "spirit-fengyuan",
@@ -347,8 +423,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/spirit-fengyuan/module.json",
+      "review": "regions/spirit-fengyuan/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "spirit-feiling",
@@ -366,8 +445,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/spirit-feiling/module.json",
+      "review": "regions/spirit-feiling/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "spirit-minghe",
@@ -383,8 +465,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/spirit-minghe/module.json",
+      "review": "regions/spirit-minghe/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "spirit-thunder",
@@ -402,8 +487,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/spirit-thunder/module.json",
+      "review": "regions/spirit-thunder/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "spirit-blood",
@@ -420,8 +508,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/spirit-blood/module.json",
+      "review": "regions/spirit-blood/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "spirit-seas",
@@ -438,8 +529,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/spirit-seas/module.json",
+      "review": "regions/spirit-seas/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "associated-guanghan",
@@ -455,8 +549,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/associated-guanghan/module.json",
+      "review": "regions/associated-guanghan/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "associated-demon",
@@ -474,8 +571,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/associated-demon/module.json",
+      "review": "regions/associated-demon/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "associated-yinming",
@@ -492,8 +592,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/associated-yinming/module.json",
+      "review": "regions/associated-yinming/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "associated-reported",
@@ -510,8 +613,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/associated-reported/module.json",
+      "review": "regions/associated-reported/review.json",
+      "evidence": "coverage/regional-status.json"
     },
     {
       "id": "associated-immortal",
@@ -528,8 +634,11 @@
         "people-and-relationships",
         "history-and-current-state"
       ],
-      "opening_status": "requires-temporal-adjudication",
-      "runtime_status": "not-built"
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/associated-immortal/module.json",
+      "review": "regions/associated-immortal/review.json",
+      "evidence": "coverage/regional-status.json"
     }
   ]
 }

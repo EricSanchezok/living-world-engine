@@ -1,0 +1,239 @@
+[
+  {
+    "id": "boundless-present-life",
+    "statement": "新增职员、街坊、雇佣、当期委托、设施细部和具体资产为原创；不替代有明确身份的原著人物，不强制触发小说后续事件。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "boundless-values",
+    "statement": "法力数值、私人灵石、机构库存、所持普通器物、具体开篇位置、机构当前值班与日常动机属有限标定；不同所有者库存独立，数量不代表境界的全部财产。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "boundless-sea",
+    "statement": "无边海在天南极北，海水浑浊、少鱼少岛，存活的海兽危险。远航消耗法力、丹药和补给；其名称不证明物理上没有尽头。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-21723002",
+        "chapterSha256": "3727d3ada296277c8d64a14de5481e24493cf94559dfb14c2d0e3684e800be8c",
+        "start": 701,
+        "end": 778,
+        "anchorSha256": "aa3c9c308415ece7af4f9de794597f536e3df6bae90ce014535c0ff251c792c1"
+      },
+      {
+        "chapterId": "qq-22959019",
+        "chapterSha256": "b04d48ff98c6ac2f601653d11806f2f5c2d47a2256102ebabd2dd3fb5a9c4fec",
+        "start": 725,
+        "end": 783,
+        "anchorSha256": "70ed399aef980a2a049dd9670554004dcaf8e588aa8131b944e25109da2ef67a"
+      }
+    ]
+  },
+  {
+    "id": "boundless-voyage-account",
+    "statement": "曾有元婴修士航行年余仍未见尽头的记述，是有限行程的传闻，不能提升为任何修士永远无法过海的自然法则。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "本条限定证据强度，不断言这次航行发生于T0之前，也不赋予开篇人物此传闻知识。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-21723002",
+        "chapterSha256": "3727d3ada296277c8d64a14de5481e24493cf94559dfb14c2d0e3684e800be8c",
+        "start": 779,
+        "end": 887,
+        "anchorSha256": "0ab3ea78b79bc275da683fe5d4188eaccd30c1e90f126c945bcb45418799b30d"
+      }
+    ]
+  },
+  {
+    "id": "boundless-shore",
+    "statement": "溪国在天南北端，分七州；闵州临海且为最大州，州府封日城。正文还出现一座未具名海边小城，其早期延续作为明确回溯。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-22959019",
+        "chapterSha256": "b04d48ff98c6ac2f601653d11806f2f5c2d47a2256102ebabd2dd3fb5a9c4fec",
+        "start": 1400,
+        "end": 1509,
+        "anchorSha256": "b76620288e6edd5c61ae7927dac3095ebd53b7a1b9a6b5d937488c49cf99cbfc"
+      },
+      {
+        "chapterId": "qq-22959019",
+        "chapterSha256": "b04d48ff98c6ac2f601653d11806f2f5c2d47a2256102ebabd2dd3fb5a9c4fec",
+        "start": 1510,
+        "end": 1553,
+        "anchorSha256": "e19f3a2819e23513c5996b166dadeeecc9288eb259df918a418b86539697ff22"
+      }
+    ]
+  },
+  {
+    "id": "boundless-beast",
+    "statement": "馨牙兽是无边海可辨识的海兽，所见个体三四丈、青鳞、腮下弯曲骨刺，胆有辛辣夹淡香；观察特征不等于知道整个海域的坐标。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-22959019",
+        "chapterSha256": "b04d48ff98c6ac2f601653d11806f2f5c2d47a2256102ebabd2dd3fb5a9c4fec",
+        "start": 0,
+        "end": 79,
+        "anchorSha256": "2ebed4b269124ad8b9bce344b2563361c89b73f85da29f9ddebef63dd4f785a9"
+      },
+      {
+        "chapterId": "qq-22959019",
+        "chapterSha256": "b04d48ff98c6ac2f601653d11806f2f5c2d47a2256102ebabd2dd3fb5a9c4fec",
+        "start": 134,
+        "end": 206,
+        "anchorSha256": "bd7bdfde980f1ca61e34d879306bb979998ec042002cef6324bbe308e54e9428"
+      }
+    ]
+  },
+  {
+    "id": "boundless-old-seal",
+    "statement": "海底有上古封魔法阵与阵眼，七处基底仍沉在海下；后期古魔损坏后出现旋涡、七岛浮起与海水净化，均未在共同开篇发生。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24865193",
+        "chapterSha256": "eab378b32051eb163aa98ce4bbc6ef27d8e5440c1d5b24bdc516b911d193c9b2",
+        "start": 476,
+        "end": 850,
+        "anchorSha256": "1e2587285e02f2608f199572a213f82762e381b6e1d9500d654c38c7388e3363"
+      },
+      {
+        "chapterId": "qq-24950849",
+        "chapterSha256": "1d66e3349b3eeca33d23eb2ea9ad0230ff45996be1c67d7fd90d287ef05f8c2a",
+        "start": 3036,
+        "end": 3189,
+        "anchorSha256": "d6f239da45f2110be2b862052ca8612fe869ce701af32c0048201af2b7ce5518"
+      }
+    ]
+  },
+  {
+    "id": "boundless-forgotten-watch",
+    "statement": "太真门源自大晋真极门的古支派，迁天南与看守海下封印有关，但传承早断；职责存于宗内秘地古籍，后期至阳才找到。真极与极真是同一出处异称，不能自动建成两个门派。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24950849",
+        "chapterSha256": "1d66e3349b3eeca33d23eb2ea9ad0230ff45996be1c67d7fd90d287ef05f8c2a",
+        "start": 3036,
+        "end": 3189,
+        "anchorSha256": "d6f239da45f2110be2b862052ca8612fe869ce701af32c0048201af2b7ce5518"
+      },
+      {
+        "chapterId": "qq-24960474",
+        "chapterSha256": "a87a6ff937696790500b42f112c9ce9eac8f39f32fbe8d3331f52324043fc880",
+        "start": 27,
+        "end": 163,
+        "anchorSha256": "5eab88dd18eeb002116bdf075d571c907ab1ca3b36ddb7d0f8da7b2b0dafc2d3"
+      },
+      {
+        "chapterId": "qq-24960474",
+        "chapterSha256": "a87a6ff937696790500b42f112c9ce9eac8f39f32fbe8d3331f52324043fc880",
+        "start": 27,
+        "end": 163,
+        "anchorSha256": "5eab88dd18eeb002116bdf075d571c907ab1ca3b36ddb7d0f8da7b2b0dafc2d3"
+      }
+    ]
+  },
+  {
+    "id": "boundless-abyss",
+    "statement": "海下魔渊的压力、魔气与神识限制形成实际进入条件；越深魔性越强，护持消耗随之增大。下部旧祭台与阵眼碑在开篇仍完整。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24865193",
+        "chapterSha256": "eab378b32051eb163aa98ce4bbc6ef27d8e5440c1d5b24bdc516b911d193c9b2",
+        "start": 476,
+        "end": 850,
+        "anchorSha256": "1e2587285e02f2608f199572a213f82762e381b6e1d9500d654c38c7388e3363"
+      },
+      {
+        "chapterId": "qq-24972253",
+        "chapterSha256": "7c945a28c8952932d5fba62b70cbabab3453e20c69fbd75812f551121ed9e25b",
+        "start": 750,
+        "end": 882,
+        "anchorSha256": "2f15bd5e9d75f0b8afa08237fdf1574282888d4189ef0a99d624d4b02b69a3f6"
+      },
+      {
+        "chapterId": "qq-24983181",
+        "chapterSha256": "a145083fc0dcf06e0a4ad67b31be3c95f3e060af4ae2d990763074bedd0c5ef2",
+        "start": 1479,
+        "end": 1572,
+        "anchorSha256": "ea622ea3edc98747fbaf0754eac545eb76ab345ee20760f5baf996aa04e66bef"
+      }
+    ]
+  },
+  {
+    "id": "boundless-crystals",
+    "statement": "上古魔气长期积存可凝成魔髓钻；后期寻得四枚，本包回溯为四枚早已成形的深藏矿物，不预先归任何玩家或未来取得者。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "千古凝结的材料回溯到开篇；四枚作为有限现存矿藏标定，并非证明整个海域只存在四枚。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24983181",
+        "chapterSha256": "a145083fc0dcf06e0a4ad67b31be3c95f3e060af4ae2d990763074bedd0c5ef2",
+        "start": 2994,
+        "end": 3118,
+        "anchorSha256": "2136161887805d402af669276ccfe1b4d977e2e26072c94fcc458802e17e8176"
+      },
+      {
+        "chapterId": "qq-24985857",
+        "chapterSha256": "3a134fc419d42b6f3ede114e0bad6d0306749bea1f27737966cabf02e5a5048e",
+        "start": 1014,
+        "end": 1060,
+        "anchorSha256": "cc8509237fa2261cfd14afb0c1baa3dc4665a7ceb7a31efc5c5b503f8e2a42ef"
+      }
+    ]
+  }
+]

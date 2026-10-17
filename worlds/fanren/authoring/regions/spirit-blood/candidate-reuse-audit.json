@@ -1,0 +1,51 @@
+{
+  "formatVersion": 1,
+  "moduleId": "spirit-blood",
+  "queueInputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
+  "status": "exact-existing-disposition-reuse-not-new-semantic-approval",
+  "records": [
+    {
+      "candidateId": "batch-0194-issue-0013",
+      "extractionReportHash": "c6055b58b3df8cfc684e9e8dcce7b30102b30b9eb6fa2acedf364121b0bf0995",
+      "sourceModule": "human-dajin",
+      "targetQueueModule": "spirit-blood",
+      "sourceDispositionReportHash": "20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14",
+      "sourceRecordHash": "a787b5a60219f4395082dcb58985046a21fa3eccc95d27fec31a46f02b24ceb0",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-dajin",
+        "north-xiaoji-palace",
+        "dajin-geography"
+      ],
+      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+    }
+  ],
+  "skipped": [],
+  "legacyClassificationSnapshot": {
+    "file": "regions/spirit-blood/candidate-editorial-classifications.json",
+    "hash": "bba3e4d69fff5b91d3455d401c1c2e8860e2d340dc69972aef21b7f33142c0d8",
+    "note": "完整保留旧编辑分类，不升级其审定状态；pending不抹去此证据。"
+  },
+  "validationScope": "complete-queue-including-pending",
+  "missingSourceEvidenceIds": [],
+  "outputDispositionReportHash": "591a1a8774aa7b6e8bc27cc6a98f47b05c841738f4ce325ed2fc907f472bc5f4",
+  "reusedCount": 1,
+  "result": {
+    "moduleId": "spirit-blood",
+    "candidates": 282,
+    "counts": {
+      "adopted": 0,
+      "corrected": 1,
+      "history-only": 0,
+      "later-only": 0,
+      "bounded-uncertainty": 0,
+      "transferred": 0,
+      "pending": 281
+    },
+    "completed": 1,
+    "unresolved": 281,
+    "boundedUncertainty": 0,
+    "approvedForRuntime": false,
+    "reportHash": "591a1a8774aa7b6e8bc27cc6a98f47b05c841738f4ce325ed2fc907f472bc5f4"
+  }
+}

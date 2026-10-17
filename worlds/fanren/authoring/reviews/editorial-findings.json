@@ -1,0 +1,204 @@
+{
+  "formatVersion": 1,
+  "reviewer": "root-source-comparison",
+  "reviewedAt": "2026-10-17T09:37:53.687688+00:00",
+  "scope": "selected-facts-only",
+  "chapterReadOrReviewPromotion": false,
+  "findings": [
+    {
+      "candidateId": "batch-0039-fact-0017",
+      "reportHash": "75be0fa11e58b9507a0198239af86a478503d3137c8a13c16378fac744142ebc",
+      "verdict": "incorrect-subject-binding",
+      "correctedInterpretation": "墨蛟雏角制成的一次性法器与对手护甲同时毁坏；韩立本人没有同归于尽。",
+      "reason": "所引段落的“同归于尽”主语是消耗法器与护甲。后一句是韩立评估该消耗是否值得，不能改写成韩立死亡。",
+      "evidence": [
+        {
+          "chapterId": "qq-21255176",
+          "paragraphId": "qq-21255176:1783",
+          "paragraphSha256": "48e7b33da3a08ef02bf70694ce8f166d3c1dcb053688c8149eef01b0175cabd8",
+          "start": 1809,
+          "end": 1816,
+          "anchorSha256": "627f7b8645f0191773133015a0c35689bccdbaaa8ffc11ee486a827fa6d71a30",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-21255176",
+          "paragraphId": "qq-21255176:1833",
+          "paragraphSha256": "9cf87ca1af76e448adbc4853a784e0c89ca5a38801b94e5ff72e61405ac059b1",
+          "start": 1869,
+          "end": 1876,
+          "anchorSha256": "6769d2d8a0075862e735e92b4e01e6728ee16d8829a7845cdc2eb8ea4cff793d",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-21255176",
+          "paragraphId": "qq-21255176:1783",
+          "paragraphSha256": "48e7b33da3a08ef02bf70694ce8f166d3c1dcb053688c8149eef01b0175cabd8",
+          "start": 1817,
+          "end": 1831,
+          "anchorSha256": "076783dc5286ebd98ab6437062ca6057621cdb522817de4613c40600c5968f56",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false
+    },
+    {
+      "candidateId": "batch-0008-fact-0006",
+      "reportHash": "6a2817b633784b54e503f3d784b62b6ec6a34df56cdda801342e8609577f2f27",
+      "verdict": "scope-requires-reconciliation",
+      "correctedInterpretation": "保留余子童经历中的修士资格说法，需与后文炼气散修、家族和交易实践交叉核对后确定适用范围。",
+      "reason": "不能仅凭这一处叙述禁止所有炼气人物进入修仙社会；称谓、组织资格与客观能力分别建档。",
+      "evidence": [
+        {
+          "chapterId": "qq-20213955",
+          "paragraphId": "qq-20213955:465",
+          "paragraphSha256": "9fa0b351714bb84fe6812073f0474b95931c2e599ccaf6285f9f18f2e4a6398c",
+          "start": 477,
+          "end": 486,
+          "anchorSha256": "faa981f19fde2f5947b240e9a9dad57e76b778f308aec89424dfaaf80b30625a",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-20213955",
+          "paragraphId": "qq-20213955:465",
+          "paragraphSha256": "9fa0b351714bb84fe6812073f0474b95931c2e599ccaf6285f9f18f2e4a6398c",
+          "start": 488,
+          "end": 497,
+          "anchorSha256": "4d88791cbfc707207f05b9614e8a2a07608398c0bf053403e87b73d88ed31af6",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false
+    },
+    {
+      "candidateId": "batch-0016-fact-0048",
+      "reportHash": "ca28dd794755c8cf973532011521eae06c801d3fdeb28ec83dcbbb5d4037a546",
+      "verdict": "qualified-testimony",
+      "correctedInterpretation": "保留筑基两百余岁、结丹四五百岁、元婴可逾千岁的常识性寿元说法；它不是各境界无条件固定死亡年龄。",
+      "reason": "原文使用可能、正常、大有指望等限制，后续延寿、损寿和死亡机制需要共同解释。",
+      "evidence": [
+        {
+          "chapterId": "qq-20530370",
+          "paragraphId": "qq-20530370:370",
+          "paragraphSha256": "320bfed856e8c9d2e5111058067b98aabde0e792fcd60e13c74bb3c8acaa00d3",
+          "start": 378,
+          "end": 386,
+          "anchorSha256": "928c6815362cb5fd2ee6966bb364c3ecb42bad252560a0153e2a29d5573d8aa9",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-20530370",
+          "paragraphId": "qq-20530370:399",
+          "paragraphSha256": "dbed9fb9f3167a59f908f01e61c48768422336d8139eaeff5bc4fa1f2d6b403f",
+          "start": 463,
+          "end": 472,
+          "anchorSha256": "f4e3ec0c29d0daa1cc2783ed8c7353ba218e3922c341545ab3886d0e24d80e49",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-20530370",
+          "paragraphId": "qq-20530370:399",
+          "paragraphSha256": "dbed9fb9f3167a59f908f01e61c48768422336d8139eaeff5bc4fa1f2d6b403f",
+          "start": 439,
+          "end": 446,
+          "anchorSha256": "19921659b6c83bb678738f9d32070224a20536b0273736378b328473503bc6fe",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false
+    },
+    {
+      "candidateId": "batch-0016-fact-0051",
+      "reportHash": "ca28dd794755c8cf973532011521eae06c801d3fdeb28ec83dcbbb5d4037a546",
+      "verdict": "qualified-testimony",
+      "correctedInterpretation": "保留灵根分类、相对修炼效率及天根结丹瓶颈的说法；伪灵根难筑基是通常处境，不是不可突破的硬上限。",
+      "reason": "所引段落有一般、基本上等限定；不能把三四层写成所有伪灵根角色的绝对等级封顶。",
+      "evidence": [
+        {
+          "chapterId": "qq-20530370",
+          "paragraphId": "qq-20530370:1546",
+          "paragraphSha256": "39892ead7ceeeddecd972b004d1ff2944d3de5f168ceeb36763236806edece30",
+          "start": 1553,
+          "end": 1573,
+          "anchorSha256": "4de0ed8f937e46c65018eded3b4c1d6ec624790d4a0586cbd74f5e7a5228f423",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-20530370",
+          "paragraphId": "qq-20530370:1738",
+          "paragraphSha256": "da85e9bd8c4e1ed92b5c3e8edba46d894b660d2785690c0a0f9bf25d5d1e2c9f",
+          "start": 1824,
+          "end": 1841,
+          "anchorSha256": "28b06a54a6efb50299895c73ede887ec0bfa3e9239e6d8b72aa0aabccdc93e72",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false
+    },
+    {
+      "candidateId": "batch-0016-fact-0052",
+      "reportHash": "ca28dd794755c8cf973532011521eae06c801d3fdeb28ec83dcbbb5d4037a546",
+      "verdict": "qualified-testimony",
+      "correctedInterpretation": "变异灵根的类型与功法匹配优势应保留；二三十年的出现频率和三四人的战力比较只作该人物所在修仙社会的概括。",
+      "reason": "来源是万小山向韩立解释；没有两界全部人口、固定时间窗或严格同阶战斗实验作为分母。",
+      "evidence": [
+        {
+          "chapterId": "qq-20530370",
+          "paragraphId": "qq-20530370:2233",
+          "paragraphSha256": "54e4b7ad1b3e7cc079e69e60026d7d08d8f2ca6695cb9d058f7aedfada6cb6c5",
+          "start": 2247,
+          "end": 2257,
+          "anchorSha256": "1f4c049f3c89d461c58d90790cbd16dadaf7e1b44cfde8359242947954db0069",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-20530370",
+          "paragraphId": "qq-20530370:2088",
+          "paragraphSha256": "13ae509ad71d22ab929d7eaadfb0b5466f2b0d9f10ec2d5b5e16fbc91a5fed3e",
+          "start": 2180,
+          "end": 2191,
+          "anchorSha256": "bfbf98351404b85a97d586ff2f46a9048d94039e5c0b2e7e0311bcbb30d37d37",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-20530370",
+          "paragraphId": "qq-20530370:2305",
+          "paragraphSha256": "3be54d669a3e2f270c77b5011f0568b6f030413cdf022d740695aa2663e6bf86",
+          "start": 2386,
+          "end": 2404,
+          "anchorSha256": "e9da5b2f33e3fc6e3a302e120a1cd701fedfbd4a58c52a2534e38d59e0714af2",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false
+    },
+    {
+      "candidateId": "batch-0016-fact-0055",
+      "reportHash": "ca28dd794755c8cf973532011521eae06c801d3fdeb28ec83dcbbb5d4037a546",
+      "verdict": "qualified-testimony",
+      "correctedInterpretation": "血缘会提高灵根出现机会；四分之一是所述常识性比率，不能推出任何现有子女必然具有或缺乏灵根。",
+      "reason": "现有人物资质必须预先写定；这一说法不能替代具体检测、也不能直接写成玩家许愿生成灵根的规则。",
+      "evidence": [
+        {
+          "chapterId": "qq-20530370",
+          "paragraphId": "qq-20530370:2695",
+          "paragraphSha256": "73186949ccea24abeebf42ec7087bb5f9f3c92daa4b2caf7f4b7a1149277dbf5",
+          "start": 2724,
+          "end": 2739,
+          "anchorSha256": "f945c4e76151a8132f86e41122fdab80dd9d52b2511299d56c19eb6774de26b2",
+          "sourceVersion": "candidate-2fc16984"
+        },
+        {
+          "chapterId": "qq-20530370",
+          "paragraphId": "qq-20530370:2816",
+          "paragraphSha256": "e142cde8607618408d509d15e1e0171ff178709d23efc967f4e0073f0a9e2cd8",
+          "start": 2852,
+          "end": 2860,
+          "anchorSha256": "b2ace18425392f77762c2e859b909e11b00021827514e2d2ce56f226365780c8",
+          "sourceVersion": "candidate-2fc16984"
+        }
+      ],
+      "runtimeApproval": false
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "formatVersion": 1,
+  "moduleId": "associated-demon",
+  "queueInputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
+  "status": "exact-existing-disposition-reuse-not-new-semantic-approval",
+  "records": [
+    {
+      "candidateId": "batch-0134-object-0014",
+      "extractionReportHash": "22f869e6d15a418031c22eb1b688472277d103518192fc2c195b4fa5efd1d6fc",
+      "sourceModule": "human-boundless",
+      "targetQueueModule": "associated-demon",
+      "sourceDispositionReportHash": "b2d931007794c22655fa68f6ec62bb93ae52f83162864227edee85c8aebed20e",
+      "sourceRecordHash": "870f43d19adb6522b24a0845e9c236ad629c13c4109fbf22d7a4c005fccf9eaa",
+      "disposition": "corrected",
+      "targetIds": [
+        "boundless-old-seal"
+      ],
+      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+    },
+    {
+      "candidateId": "batch-0171-fact-0028",
+      "extractionReportHash": "ef4ce4e28d5a6e69260aef3eabd2f66c25b59a0f09eaeae5adca3f7f555b2901",
+      "sourceModule": "human-north",
+      "targetQueueModule": "associated-demon",
+      "sourceDispositionReportHash": "0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4",
+      "sourceRecordHash": "20baf0064d514dd967de6be7c041b2f96208863dd08d2978d2cd324a193ba3ca",
+      "disposition": "later-only",
+      "targetIds": [
+        "north-not-war-script"
+      ],
+      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+    }
+  ],
+  "skipped": [],
+  "legacyClassificationSnapshot": null,
+  "validationScope": "exact-selected-records-only-not-full-queue",
+  "missingSourceEvidenceIds": [
+    "batch-0341-issue-0001"
+  ],
+  "outputDispositionReportHash": "5874cbdfd532eba73c969f8a1cf08840a18f74b1783de49e79330881acabf116",
+  "reusedCount": 2,
+  "result": {
+    "moduleId": "associated-demon",
+    "candidates": 2,
+    "counts": {
+      "adopted": 0,
+      "corrected": 1,
+      "history-only": 0,
+      "later-only": 1,
+      "bounded-uncertainty": 0,
+      "transferred": 0,
+      "pending": 0
+    },
+    "completed": 2,
+    "unresolved": 0,
+    "boundedUncertainty": 0,
+    "approvedForRuntime": false,
+    "reportHash": "5874cbdfd532eba73c969f8a1cf08840a18f74b1783de49e79330881acabf116"
+  }
+}

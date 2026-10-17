@@ -1,0 +1,3449 @@
+{
+  "id": "human-ten-thousand",
+  "entities": [
+    {
+      "id": "human-wanyao-valley",
+      "name": "万妖谷",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "古妖势力据有的山谷，外围与核心修行地并非同一权限。",
+      "facts": [
+        {
+          "id": "human-wanyao-valley-route-wanyao-gate",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-gate"
+          },
+          "description": "外围山路，陌生者需通报来意。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-wanyao-valley-travel-wanyao-gate",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "外围山路，陌生者需通报来意。"
+          },
+          "description": "外围山路，陌生者需通报来意。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-wanyao-valley-route-wanyao-banner-ground",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-banner-ground"
+          },
+          "description": "祭地由谷方控制，万妖幡不是公共可拾取物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-wanyao-valley-travel-wanyao-banner-ground",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "祭地由谷方控制，万妖幡不是公共可拾取物。"
+          },
+          "description": "祭地由谷方控制，万妖幡不是公共可拾取物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-wanyao-valley-route-wanyao-che-retreat",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-che-retreat"
+          },
+          "description": "谷主封修区，需有实际许可和足够手段。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-wanyao-valley-travel-wanyao-che-retreat",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "谷主封修区，需有实际许可和足够手段。"
+          },
+          "description": "谷主封修区，需有实际许可和足够手段。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-wanyao-valley-route-wanyao-xiong-cave",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-xiong-cave"
+          },
+          "description": "副谷主私人洞府，来者须通报。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-wanyao-valley-travel-wanyao-xiong-cave",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "副谷主私人洞府，来者须通报。"
+          },
+          "description": "副谷主私人洞府，来者须通报。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-wanyao-valley-route-wanyao-public-store",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-public-store"
+          },
+          "description": "库务核验后领物；搬运和账目可被追查。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-wanyao-valley-travel-wanyao-public-store",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "库务核验后领物；搬运和账目可被追查。"
+          },
+          "description": "库务核验后领物；搬运和账目可被追查。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-wanyao-valley-route-wanyao-qing-cave",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-qing-cave"
+          },
+          "description": "副谷主私人洞府，须通报来意和获得许可。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-wanyao-valley-travel-wanyao-qing-cave",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "副谷主私人洞府，须通报来意和获得许可。"
+          },
+          "description": "副谷主私人洞府，须通报来意和获得许可。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-wanyao-valley-route-wanyao-wu-cave",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-wu-cave"
+          },
+          "description": "谷内支路，进入私人洞室需当事人同意。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-wanyao-valley-travel-wanyao-wu-cave",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "谷内支路，进入私人洞室需当事人同意。"
+          },
+          "description": "谷内支路，进入私人洞室需当事人同意。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "wanyao-gate",
+      "name": "万妖谷外谷",
+      "kind": "location",
+      "placement": "human-wanyao-valley",
+      "description": "原创外谷入口，通报来意可争取有限交易与会面。",
+      "facts": [
+        {
+          "id": "wanyao-gate-route-human-wanyao-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-wanyao-valley"
+          },
+          "description": "外围山路，陌生者需通报来意。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "wanyao-gate-travel-human-wanyao-valley",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "外围山路，陌生者需通报来意。"
+          },
+          "description": "外围山路，陌生者需通报来意。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "wanyao-gate-route-wanyao-workshop",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-workshop"
+          },
+          "description": "交换与修器区允许被接待者进入，不能由此自动进入核心。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "wanyao-gate-travel-wanyao-workshop",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "交换与修器区允许被接待者进入，不能由此自动进入核心。"
+          },
+          "description": "交换与修器区允许被接待者进入，不能由此自动进入核心。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "wanyao-banner-ground",
+      "name": "万妖幡祭地",
+      "kind": "location",
+      "placement": "human-wanyao-valley",
+      "description": "原创具体祭地位置；唯一万妖幡在此积蓄维护。",
+      "facts": [
+        {
+          "id": "wanyao-banner-ground-route-human-wanyao-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-wanyao-valley"
+          },
+          "description": "祭地由谷方控制，万妖幡不是公共可拾取物。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "wanyao-banner-ground-travel-human-wanyao-valley",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "祭地由谷方控制，万妖幡不是公共可拾取物。"
+          },
+          "description": "祭地由谷方控制，万妖幡不是公共可拾取物。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "wanyao-che-retreat",
+      "name": "车老妖封修洞府",
+      "kind": "location",
+      "placement": "human-wanyao-valley",
+      "description": "原创当前封修处；本体有长寿和修行限制，传讯与出手需要真实手段。",
+      "facts": [
+        {
+          "id": "wanyao-che-retreat-route-human-wanyao-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-wanyao-valley"
+          },
+          "description": "谷主封修区，需有实际许可和足够手段。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "wanyao-che-retreat-travel-human-wanyao-valley",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "谷主封修区，需有实际许可和足够手段。"
+          },
+          "description": "谷主封修区，需有实际许可和足够手段。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "wanyao-xiong-cave",
+      "name": "尸熊洞府",
+      "kind": "location",
+      "placement": "human-wanyao-valley",
+      "description": "原创具体洞府，尸熊保存其私人用品。",
+      "facts": [
+        {
+          "id": "wanyao-xiong-cave-route-human-wanyao-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-wanyao-valley"
+          },
+          "description": "副谷主私人洞府，来者须通报。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "wanyao-xiong-cave-travel-human-wanyao-valley",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "副谷主私人洞府，来者须通报。"
+          },
+          "description": "副谷主私人洞府，来者须通报。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "wanyao-workshop",
+      "name": "外谷修器处",
+      "kind": "location",
+      "placement": "wanyao-gate",
+      "description": "原创器物交换和维修处，不强制把来者作为猎物。",
+      "facts": [
+        {
+          "id": "wanyao-workshop-route-wanyao-gate",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-gate"
+          },
+          "description": "交换与修器区允许被接待者进入，不能由此自动进入核心。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "wanyao-workshop-travel-wanyao-gate",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "交换与修器区允许被接待者进入，不能由此自动进入核心。"
+          },
+          "description": "交换与修器区允许被接待者进入，不能由此自动进入核心。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "wanyao-public-store",
+      "name": "谷中公库",
+      "kind": "location",
+      "placement": "human-wanyao-valley",
+      "description": "原创公共维护库，领用要找到负责者。",
+      "facts": [
+        {
+          "id": "wanyao-public-store-route-human-wanyao-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-wanyao-valley"
+          },
+          "description": "库务核验后领物；搬运和账目可被追查。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "wanyao-public-store-travel-human-wanyao-valley",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "库务核验后领物；搬运和账目可被追查。"
+          },
+          "description": "库务核验后领物；搬运和账目可被追查。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "wanyao-qing-cave",
+      "name": "青背苍狼洞府",
+      "kind": "location",
+      "placement": "human-wanyao-valley",
+      "description": "原创具体洞府，保存副谷主自身修行与往来用品。",
+      "facts": [
+        {
+          "id": "wanyao-qing-cave-route-human-wanyao-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-wanyao-valley"
+          },
+          "description": "副谷主私人洞府，须通报来意和获得许可。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "wanyao-qing-cave-travel-human-wanyao-valley",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "副谷主私人洞府，须通报来意和获得许可。"
+          },
+          "description": "副谷主私人洞府，须通报来意和获得许可。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "wanyao-wu-cave",
+      "name": "三目妖修洞室",
+      "kind": "location",
+      "placement": "human-wanyao-valley",
+      "description": "原创当期洞室，生体神通的修炼需要时间，第三目仍为身体的一部分。",
+      "facts": [
+        {
+          "id": "wanyao-wu-cave-route-human-wanyao-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-wanyao-valley"
+          },
+          "description": "谷内支路，进入私人洞室需当事人同意。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "wanyao-wu-cave-travel-human-wanyao-valley",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "谷内支路，进入私人洞室需当事人同意。"
+          },
+          "description": "谷内支路，进入私人洞室需当事人同意。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "wanyao-court",
+      "name": "万妖谷众修",
+      "kind": "organization",
+      "placement": "human-wanyao-valley",
+      "description": "有谷主、副谷主与各自修行的妖修；部属可有私产和分歧。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-che-laoyao",
+      "name": "车老妖",
+      "kind": "person",
+      "placement": "wanyao-che-retreat",
+      "description": "自上古留在人界的古妖，长久经营万妖谷，也受到寿元、封修与人族同阶威慑的约束。",
+      "facts": [
+        {
+          "id": "canon-che-laoyao-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "化神"
+          },
+          "description": "化神",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-che-laoyao"
+            ]
+          }
+        },
+        {
+          "id": "canon-che-laoyao-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "化神古妖之体、神识与已学妖术；本体封修和对外行动需权衡，确切的通道消息须实际调查得来。"
+          },
+          "description": "化神古妖之体、神识与已学妖术；本体封修和对外行动需权衡，确切的通道消息须实际调查得来。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-che-laoyao"
+            ]
+          }
+        },
+        {
+          "id": "canon-che-laoyao-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "上古妖族血脉，不用人族灵根决定修行资格。"
+          },
+          "description": "上古妖族血脉，不用人族灵根决定修行资格。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-che-laoyao"
+            ]
+          }
+        },
+        {
+          "id": "canon-che-laoyao-office",
+          "predicate": "leader-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-court"
+          },
+          "description": "leader-of",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-che-laoyao-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-che-laoyao-mana",
+          "definition_id": "mana",
+          "current": 1400
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-che-laoyao-cultivation",
+          "definition_id": "cultivation",
+          "value": 5
+        },
+        {
+          "id": "canon-che-laoyao-force",
+          "definition_id": "force",
+          "value": 5
+        },
+        {
+          "id": "canon-che-laoyao-craft",
+          "definition_id": "craft",
+          "value": 4
+        },
+        {
+          "id": "canon-che-laoyao-perception",
+          "definition_id": "perception",
+          "value": 5
+        },
+        {
+          "id": "canon-che-laoyao-influence",
+          "definition_id": "influence",
+          "value": 4
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 250
+        }
+      ],
+      "agent": {
+        "id": "canon-che-laoyao",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "自上古留在人界的古妖，长久经营万妖谷，也受到寿元、封修与人族同阶威慑的约束。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "维持封修与谷中秩序，筛选可能有助自身修行的可靠消息。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "车老妖",
+              "description": "自上古留在人界的古妖，长久经营万妖谷，也受到寿元、封修与人族同阶威慑的约束。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "车老妖封修洞府",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-che-laoyao-pouch",
+              "name": "车老妖的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-xiong-shi",
+              "name": "万年尸熊",
+              "description": "长久共处的副谷主，有自己的判断与私产。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-qingbei-canglang",
+              "name": "青背苍狼",
+              "description": "在万妖谷长期往来，有自己的修行和私产。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-wanyao-banner",
+              "name": "万妖幡",
+              "description": "谷中长期积蓄的同一件重宝，不可凭空复制。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-mixing-pearl",
+              "name": "迷形珠",
+              "description": "谷主持有的异宝，可辅助改形和遮气；吞用需压低法力，借出需真实交接。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-che-laoyao"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "wanyao-che-retreat"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-che-laoyao-pouch",
+              "canonical_entity_ids": [
+                "canon-che-laoyao-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-xiong-shi",
+              "canonical_entity_ids": [
+                "canon-xiong-shi"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-qingbei-canglang",
+              "canonical_entity_ids": [
+                "canon-qingbei-canglang"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-wanyao-banner",
+              "canonical_entity_ids": [
+                "canon-wanyao-banner"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-mixing-pearl",
+              "canonical_entity_ids": [
+                "canon-mixing-pearl"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "化神古妖之体、神识与已学妖术；本体封修和对外行动需权衡，确切的通道消息须实际调查得来。"
+              },
+              "description": "化神古妖之体、神识与已学妖术；本体封修和对外行动需权衡，确切的通道消息须实际调查得来。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "维持封修与谷中秩序，筛选可能有助自身修行的可靠消息。"
+              },
+              "description": "维持封修与谷中秩序，筛选可能有助自身修行的可靠消息。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是化神修士。"
+              },
+              "description": "自己是化神修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-che-laoyao-pouch",
+      "name": "车老妖的私用行囊",
+      "kind": "item",
+      "placement": "canon-che-laoyao",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "canon-che-laoyao-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-che-laoyao"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "canon-xiong-shi",
+      "name": "万年尸熊",
+      "kind": "person",
+      "placement": "wanyao-xiong-cave",
+      "description": "万妖谷副谷主，本体曾为随下界修士而来的灵兽，后成为炼尸；有自己的欲求与隐匿手段。",
+      "facts": [
+        {
+          "id": "canon-xiong-shi-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "元婴"
+          },
+          "description": "元婴",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-xiong-shi"
+            ]
+          }
+        },
+        {
+          "id": "canon-xiong-shi-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "元婴后期炼尸神通、尸气和隐匿之法；使用器物仍需实际持有并满足催动条件。"
+          },
+          "description": "元婴后期炼尸神通、尸气和隐匿之法；使用器物仍需实际持有并满足催动条件。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-xiong-shi"
+            ]
+          }
+        },
+        {
+          "id": "canon-xiong-shi-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "炼尸修行基础，不套用人族灵根检测。"
+          },
+          "description": "炼尸修行基础，不套用人族灵根检测。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-xiong-shi"
+            ]
+          }
+        },
+        {
+          "id": "canon-xiong-shi-office",
+          "predicate": "deputy-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-court"
+          },
+          "description": "deputy-of",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-xiong-shi-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-xiong-shi-mana",
+          "definition_id": "mana",
+          "current": 850
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-xiong-shi-cultivation",
+          "definition_id": "cultivation",
+          "value": 4
+        },
+        {
+          "id": "canon-xiong-shi-force",
+          "definition_id": "force",
+          "value": 4
+        },
+        {
+          "id": "canon-xiong-shi-craft",
+          "definition_id": "craft",
+          "value": 3
+        },
+        {
+          "id": "canon-xiong-shi-perception",
+          "definition_id": "perception",
+          "value": 4
+        },
+        {
+          "id": "canon-xiong-shi-influence",
+          "definition_id": "influence",
+          "value": 3
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 170
+        }
+      ],
+      "agent": {
+        "id": "canon-xiong-shi",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "万妖谷副谷主，本体曾为随下界修士而来的灵兽，后成为炼尸；有自己的欲求与隐匿手段。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "检查谷中来客消息与自己的器物，不把陌生者一律当作必杀目标。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "万年尸熊",
+              "description": "万妖谷副谷主，本体曾为随下界修士而来的灵兽，后成为炼尸；有自己的欲求与隐匿手段。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "尸熊洞府",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-xiong-shi-pouch",
+              "name": "万年尸熊的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-che-laoyao",
+              "name": "车老妖",
+              "description": "万妖谷谷主，重大行动会考量同阶约定与自身修行。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-qingbei-canglang",
+              "name": "青背苍狼",
+              "description": "在万妖谷长期往来，有自己的修行和私产。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-wanyao-banner",
+              "name": "万妖幡",
+              "description": "知道祭地和万妖幡的重要性，取得处置权须实际协商。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-xiong-blood-blade",
+              "name": "尸熊血刃",
+              "description": "仿制魔龙刃的血刃，催动需要实际法力；当前在尸熊手中，借用不会自动转移所有权。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-xiong-shi"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "wanyao-xiong-cave"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-xiong-shi-pouch",
+              "canonical_entity_ids": [
+                "canon-xiong-shi-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-che-laoyao",
+              "canonical_entity_ids": [
+                "canon-che-laoyao"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-qingbei-canglang",
+              "canonical_entity_ids": [
+                "canon-qingbei-canglang"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-wanyao-banner",
+              "canonical_entity_ids": [
+                "canon-wanyao-banner"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-xiong-blood-blade",
+              "canonical_entity_ids": [
+                "canon-xiong-blood-blade"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "元婴后期炼尸神通、尸气和隐匿之法；使用器物仍需实际持有并满足催动条件。"
+              },
+              "description": "元婴后期炼尸神通、尸气和隐匿之法；使用器物仍需实际持有并满足催动条件。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "检查谷中来客消息与自己的器物，不把陌生者一律当作必杀目标。"
+              },
+              "description": "检查谷中来客消息与自己的器物，不把陌生者一律当作必杀目标。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是元婴修士。"
+              },
+              "description": "自己是元婴修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-xiong-shi-pouch",
+      "name": "万年尸熊的私用行囊",
+      "kind": "item",
+      "placement": "canon-xiong-shi",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "canon-xiong-shi-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-xiong-shi"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "canon-qingbei-canglang",
+      "name": "青背苍狼",
+      "kind": "person",
+      "placement": "wanyao-qing-cave",
+      "description": "万妖谷另一副谷主，十级狼妖，对谷内事务和自身修炼各有打算。",
+      "facts": [
+        {
+          "id": "canon-qingbei-canglang-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "元婴"
+          },
+          "description": "元婴",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-qingbei-canglang"
+            ]
+          }
+        },
+        {
+          "id": "canon-qingbei-canglang-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "十级狼妖之体、妖力与已学攻防神通；同阶修士可抗衡，威慑不等于必胜。"
+          },
+          "description": "十级狼妖之体、妖力与已学攻防神通；同阶修士可抗衡，威慑不等于必胜。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-qingbei-canglang"
+            ]
+          }
+        },
+        {
+          "id": "canon-qingbei-canglang-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "狼妖血脉与长期修行。"
+          },
+          "description": "狼妖血脉与长期修行。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-qingbei-canglang"
+            ]
+          }
+        },
+        {
+          "id": "canon-qingbei-canglang-office",
+          "predicate": "deputy-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-court"
+          },
+          "description": "deputy-of",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-qingbei-canglang-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-qingbei-canglang-mana",
+          "definition_id": "mana",
+          "current": 850
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-qingbei-canglang-cultivation",
+          "definition_id": "cultivation",
+          "value": 4
+        },
+        {
+          "id": "canon-qingbei-canglang-force",
+          "definition_id": "force",
+          "value": 4
+        },
+        {
+          "id": "canon-qingbei-canglang-craft",
+          "definition_id": "craft",
+          "value": 3
+        },
+        {
+          "id": "canon-qingbei-canglang-perception",
+          "definition_id": "perception",
+          "value": 4
+        },
+        {
+          "id": "canon-qingbei-canglang-influence",
+          "definition_id": "influence",
+          "value": 3
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 150
+        }
+      ],
+      "agent": {
+        "id": "canon-qingbei-canglang",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "万妖谷另一副谷主，十级狼妖，对谷内事务和自身修炼各有打算。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "核实外谷来客和北地交易情况，避免部属擅自许下超出权限的诺言。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "青背苍狼",
+              "description": "万妖谷另一副谷主，十级狼妖，对谷内事务和自身修炼各有打算。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "青背苍狼洞府",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-qingbei-canglang-pouch",
+              "name": "青背苍狼的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-che-laoyao",
+              "name": "车老妖",
+              "description": "在谷中认识的妖修，具体请求仍须当面协商。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-xiong-shi",
+              "name": "万年尸熊",
+              "description": "在谷中认识的妖修，具体请求仍须当面协商。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-wu-three-eye",
+              "name": "吴姓三目妖修",
+              "description": "在万妖谷长期往来，有自己的修行和私产。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-qingbei-canglang"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "wanyao-qing-cave"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-qingbei-canglang-pouch",
+              "canonical_entity_ids": [
+                "canon-qingbei-canglang-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-che-laoyao",
+              "canonical_entity_ids": [
+                "canon-che-laoyao"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-xiong-shi",
+              "canonical_entity_ids": [
+                "canon-xiong-shi"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-wu-three-eye",
+              "canonical_entity_ids": [
+                "canon-wu-three-eye"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "十级狼妖之体、妖力与已学攻防神通；同阶修士可抗衡，威慑不等于必胜。"
+              },
+              "description": "十级狼妖之体、妖力与已学攻防神通；同阶修士可抗衡，威慑不等于必胜。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "核实外谷来客和北地交易情况，避免部属擅自许下超出权限的诺言。"
+              },
+              "description": "核实外谷来客和北地交易情况，避免部属擅自许下超出权限的诺言。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是元婴修士。"
+              },
+              "description": "自己是元婴修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-qingbei-canglang-pouch",
+      "name": "青背苍狼的私用行囊",
+      "kind": "item",
+      "placement": "canon-qingbei-canglang",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "canon-qingbei-canglang-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-qingbei-canglang"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "canon-wu-three-eye",
+      "name": "吴姓三目妖修",
+      "kind": "person",
+      "placement": "wanyao-wu-cave",
+      "description": "有第三目天赋的蛮荒异兽后裔，在谷中通过切磋提升修为，不是所有同族的统一代表。",
+      "facts": [
+        {
+          "id": "canon-wu-three-eye-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "元婴"
+          },
+          "description": "元婴",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-wu-three-eye"
+            ]
+          }
+        },
+        {
+          "id": "canon-wu-three-eye-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "开篇标定八级妖体和巨力，第三目已有辨察遁形天赋；后续能否精进破法天目取决于修行，不是对所有空间法术绝对克制。"
+          },
+          "description": "开篇标定八级妖体和巨力，第三目已有辨察遁形天赋；后续能否精进破法天目取决于修行，不是对所有空间法术绝对克制。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-wu-three-eye"
+            ]
+          }
+        },
+        {
+          "id": "canon-wu-three-eye-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "三目异兽血脉，第三目是仍在体内的器官。"
+          },
+          "description": "三目异兽血脉，第三目是仍在体内的器官。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-wu-three-eye"
+            ]
+          }
+        },
+        {
+          "id": "canon-wu-three-eye-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-court"
+          },
+          "description": "在万妖谷修行的妖修。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-wu-three-eye-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-wu-three-eye-mana",
+          "definition_id": "mana",
+          "current": 850
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-wu-three-eye-cultivation",
+          "definition_id": "cultivation",
+          "value": 4
+        },
+        {
+          "id": "canon-wu-three-eye-force",
+          "definition_id": "force",
+          "value": 4
+        },
+        {
+          "id": "canon-wu-three-eye-craft",
+          "definition_id": "craft",
+          "value": 3
+        },
+        {
+          "id": "canon-wu-three-eye-perception",
+          "definition_id": "perception",
+          "value": 4
+        },
+        {
+          "id": "canon-wu-three-eye-influence",
+          "definition_id": "influence",
+          "value": 3
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 60
+        }
+      ],
+      "agent": {
+        "id": "canon-wu-three-eye",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "有第三目天赋的蛮荒异兽后裔，在谷中通过切磋提升修为，不是所有同族的统一代表。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "练习控制第三目消耗，找能切磋而不损毁洞室的对手。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "吴姓三目妖修",
+              "description": "有第三目天赋的蛮荒异兽后裔，在谷中通过切磋提升修为，不是所有同族的统一代表。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "三目妖修洞室",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-wu-three-eye-pouch",
+              "name": "吴姓三目妖修的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-wanyao-court",
+              "name": "万妖谷众修",
+              "description": "在万妖谷修行的妖修。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-qingbei-canglang",
+              "name": "青背苍狼",
+              "description": "在谷中认识的妖修，具体请求仍须当面协商。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-wu-three-eye"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "wanyao-wu-cave"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-wu-three-eye-pouch",
+              "canonical_entity_ids": [
+                "canon-wu-three-eye-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-wanyao-court",
+              "canonical_entity_ids": [
+                "wanyao-court"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-qingbei-canglang",
+              "canonical_entity_ids": [
+                "canon-qingbei-canglang"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "开篇标定八级妖体和巨力，第三目已有辨察遁形天赋；后续能否精进破法天目取决于修行，不是对所有空间法术绝对克制。"
+              },
+              "description": "开篇标定八级妖体和巨力，第三目已有辨察遁形天赋；后续能否精进破法天目取决于修行，不是对所有空间法术绝对克制。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "练习控制第三目消耗，找能切磋而不损毁洞室的对手。"
+              },
+              "description": "练习控制第三目消耗，找能切磋而不损毁洞室的对手。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是元婴修士。"
+              },
+              "description": "自己是元婴修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-wu-three-eye-pouch",
+      "name": "吴姓三目妖修的私用行囊",
+      "kind": "item",
+      "placement": "canon-wu-three-eye",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "canon-wu-three-eye-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-wu-three-eye"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "wanyao-qing-yu",
+      "name": "青榆",
+      "kind": "person",
+      "placement": "wanyao-workshop",
+      "description": "八级木属妖修，会修理普通护具，对精巧的人类工艺很感兴趣。",
+      "facts": [
+        {
+          "id": "wanyao-qing-yu-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "元婴"
+          },
+          "description": "元婴",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "wanyao-qing-yu"
+            ]
+          }
+        },
+        {
+          "id": "wanyao-qing-yu-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "八级妖体、木属性法力和低阶护具修理。"
+          },
+          "description": "八级妖体、木属性法力和低阶护具修理。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "wanyao-qing-yu"
+            ]
+          }
+        },
+        {
+          "id": "wanyao-qing-yu-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "妖族血脉与自身修炼基础，不套用人族灵根。"
+          },
+          "description": "妖族血脉与自身修炼基础，不套用人族灵根。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "wanyao-qing-yu"
+            ]
+          }
+        },
+        {
+          "id": "wanyao-qing-yu-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-court"
+          },
+          "description": "在谷中承担日常职分，不因此失去私产和自主判断。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "wanyao-qing-yu-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "wanyao-qing-yu-mana",
+          "definition_id": "mana",
+          "current": 850
+        }
+      ],
+      "ratings": [
+        {
+          "id": "wanyao-qing-yu-cultivation",
+          "definition_id": "cultivation",
+          "value": 4
+        },
+        {
+          "id": "wanyao-qing-yu-force",
+          "definition_id": "force",
+          "value": 4
+        },
+        {
+          "id": "wanyao-qing-yu-craft",
+          "definition_id": "craft",
+          "value": 3
+        },
+        {
+          "id": "wanyao-qing-yu-perception",
+          "definition_id": "perception",
+          "value": 4
+        },
+        {
+          "id": "wanyao-qing-yu-influence",
+          "definition_id": "influence",
+          "value": 3
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 45
+        }
+      ],
+      "agent": {
+        "id": "wanyao-qing-yu",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "八级木属妖修，会修理普通护具，对精巧的人类工艺很感兴趣。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "查明一件护臂的材料裂痕，再决定收取多少维修费。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "青榆",
+              "description": "八级木属妖修，会修理普通护具，对精巧的人类工艺很感兴趣。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "外谷修器处",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-wanyao-qing-yu-pouch",
+              "name": "青榆的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-wanyao-court",
+              "name": "万妖谷众修",
+              "description": "在谷中承担日常职分，不因此失去私产和自主判断。",
+              "status": "observed"
+            },
+            {
+              "id": "known-wanyao-mo-yin",
+              "name": "墨荫",
+              "description": "来维修护臂的熟客。",
+              "status": "observed"
+            },
+            {
+              "id": "known-wanyao-he-ya",
+              "name": "鹤芽",
+              "description": "负责公共维护料的库务同伴。",
+              "status": "observed"
+            },
+            {
+              "id": "known-wanyao-cracked-bracer",
+              "name": "墨荫的旧护臂",
+              "description": "送修的客人物品，未获准不能擅自拆毁。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "wanyao-qing-yu"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "wanyao-workshop"
+              ]
+            },
+            {
+              "local_entity_id": "known-wanyao-qing-yu-pouch",
+              "canonical_entity_ids": [
+                "wanyao-qing-yu-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-wanyao-court",
+              "canonical_entity_ids": [
+                "wanyao-court"
+              ]
+            },
+            {
+              "local_entity_id": "known-wanyao-mo-yin",
+              "canonical_entity_ids": [
+                "wanyao-mo-yin"
+              ]
+            },
+            {
+              "local_entity_id": "known-wanyao-he-ya",
+              "canonical_entity_ids": [
+                "wanyao-he-ya"
+              ]
+            },
+            {
+              "local_entity_id": "known-wanyao-cracked-bracer",
+              "canonical_entity_ids": [
+                "wanyao-cracked-bracer"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "八级妖体、木属性法力和低阶护具修理。"
+              },
+              "description": "八级妖体、木属性法力和低阶护具修理。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "查明一件护臂的材料裂痕，再决定收取多少维修费。"
+              },
+              "description": "查明一件护臂的材料裂痕，再决定收取多少维修费。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是元婴修士。"
+              },
+              "description": "自己是元婴修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "wanyao-qing-yu-pouch",
+      "name": "青榆的私用行囊",
+      "kind": "item",
+      "placement": "wanyao-qing-yu",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "wanyao-qing-yu-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-qing-yu"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "wanyao-shi-du",
+      "name": "石渡",
+      "kind": "person",
+      "placement": "wanyao-gate",
+      "description": "八级石甲妖修，做事谨慎，守门职责不等于拥有客人物品。",
+      "facts": [
+        {
+          "id": "wanyao-shi-du-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "元婴"
+          },
+          "description": "元婴",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "wanyao-shi-du"
+            ]
+          }
+        },
+        {
+          "id": "wanyao-shi-du-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "八级妖体、感知地面震动与防护。"
+          },
+          "description": "八级妖体、感知地面震动与防护。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "wanyao-shi-du"
+            ]
+          }
+        },
+        {
+          "id": "wanyao-shi-du-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "妖族血脉与自身修炼基础，不套用人族灵根。"
+          },
+          "description": "妖族血脉与自身修炼基础，不套用人族灵根。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "wanyao-shi-du"
+            ]
+          }
+        },
+        {
+          "id": "wanyao-shi-du-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-court"
+          },
+          "description": "在谷中承担日常职分，不因此失去私产和自主判断。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "wanyao-shi-du-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "wanyao-shi-du-mana",
+          "definition_id": "mana",
+          "current": 850
+        }
+      ],
+      "ratings": [
+        {
+          "id": "wanyao-shi-du-cultivation",
+          "definition_id": "cultivation",
+          "value": 4
+        },
+        {
+          "id": "wanyao-shi-du-force",
+          "definition_id": "force",
+          "value": 4
+        },
+        {
+          "id": "wanyao-shi-du-craft",
+          "definition_id": "craft",
+          "value": 3
+        },
+        {
+          "id": "wanyao-shi-du-perception",
+          "definition_id": "perception",
+          "value": 4
+        },
+        {
+          "id": "wanyao-shi-du-influence",
+          "definition_id": "influence",
+          "value": 3
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 30
+        }
+      ],
+      "agent": {
+        "id": "wanyao-shi-du",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "八级石甲妖修，做事谨慎，守门职责不等于拥有客人物品。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "核对一位送货者的来历，并把超出权限的事交给副谷主。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "石渡",
+              "description": "八级石甲妖修，做事谨慎，守门职责不等于拥有客人物品。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "万妖谷外谷",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-wanyao-shi-du-pouch",
+              "name": "石渡的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-wanyao-court",
+              "name": "万妖谷众修",
+              "description": "在谷中承担日常职分，不因此失去私产和自主判断。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "wanyao-shi-du"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "wanyao-gate"
+              ]
+            },
+            {
+              "local_entity_id": "known-wanyao-shi-du-pouch",
+              "canonical_entity_ids": [
+                "wanyao-shi-du-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-wanyao-court",
+              "canonical_entity_ids": [
+                "wanyao-court"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "八级妖体、感知地面震动与防护。"
+              },
+              "description": "八级妖体、感知地面震动与防护。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "核对一位送货者的来历，并把超出权限的事交给副谷主。"
+              },
+              "description": "核对一位送货者的来历，并把超出权限的事交给副谷主。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是元婴修士。"
+              },
+              "description": "自己是元婴修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "wanyao-shi-du-pouch",
+      "name": "石渡的私用行囊",
+      "kind": "item",
+      "placement": "wanyao-shi-du",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "wanyao-shi-du-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-shi-du"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "wanyao-he-ya",
+      "name": "鹤芽",
+      "kind": "person",
+      "placement": "wanyao-public-store",
+      "description": "八级羽族妖修，保管公共维护材料，讨厌不记账的领用。",
+      "facts": [
+        {
+          "id": "wanyao-he-ya-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "元婴"
+          },
+          "description": "元婴",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "wanyao-he-ya"
+            ]
+          }
+        },
+        {
+          "id": "wanyao-he-ya-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "八级妖体、飞行与普通妖纹识别。"
+          },
+          "description": "八级妖体、飞行与普通妖纹识别。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "wanyao-he-ya"
+            ]
+          }
+        },
+        {
+          "id": "wanyao-he-ya-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "妖族血脉与自身修炼基础，不套用人族灵根。"
+          },
+          "description": "妖族血脉与自身修炼基础，不套用人族灵根。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "wanyao-he-ya"
+            ]
+          }
+        },
+        {
+          "id": "wanyao-he-ya-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-court"
+          },
+          "description": "在谷中承担日常职分，不因此失去私产和自主判断。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "wanyao-he-ya-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "wanyao-he-ya-mana",
+          "definition_id": "mana",
+          "current": 850
+        }
+      ],
+      "ratings": [
+        {
+          "id": "wanyao-he-ya-cultivation",
+          "definition_id": "cultivation",
+          "value": 4
+        },
+        {
+          "id": "wanyao-he-ya-force",
+          "definition_id": "force",
+          "value": 4
+        },
+        {
+          "id": "wanyao-he-ya-craft",
+          "definition_id": "craft",
+          "value": 3
+        },
+        {
+          "id": "wanyao-he-ya-perception",
+          "definition_id": "perception",
+          "value": 4
+        },
+        {
+          "id": "wanyao-he-ya-influence",
+          "definition_id": "influence",
+          "value": 3
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 40
+        }
+      ],
+      "agent": {
+        "id": "wanyao-he-ya",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "八级羽族妖修，保管公共维护材料，讨厌不记账的领用。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "补齐修器处上一批材料的领用记录。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "鹤芽",
+              "description": "八级羽族妖修，保管公共维护材料，讨厌不记账的领用。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "谷中公库",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-wanyao-he-ya-pouch",
+              "name": "鹤芽的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-wanyao-court",
+              "name": "万妖谷众修",
+              "description": "在谷中承担日常职分，不因此失去私产和自主判断。",
+              "status": "observed"
+            },
+            {
+              "id": "known-wanyao-qing-yu",
+              "name": "青榆",
+              "description": "从库中领用过材料的修器者。",
+              "status": "observed"
+            },
+            {
+              "id": "known-wanyao-common-stock",
+              "name": "万妖谷公共维护料",
+              "description": "自己实际保管的公库库存。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "wanyao-he-ya"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "wanyao-public-store"
+              ]
+            },
+            {
+              "local_entity_id": "known-wanyao-he-ya-pouch",
+              "canonical_entity_ids": [
+                "wanyao-he-ya-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-wanyao-court",
+              "canonical_entity_ids": [
+                "wanyao-court"
+              ]
+            },
+            {
+              "local_entity_id": "known-wanyao-qing-yu",
+              "canonical_entity_ids": [
+                "wanyao-qing-yu"
+              ]
+            },
+            {
+              "local_entity_id": "known-wanyao-common-stock",
+              "canonical_entity_ids": [
+                "wanyao-common-stock"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "八级妖体、飞行与普通妖纹识别。"
+              },
+              "description": "八级妖体、飞行与普通妖纹识别。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "补齐修器处上一批材料的领用记录。"
+              },
+              "description": "补齐修器处上一批材料的领用记录。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是元婴修士。"
+              },
+              "description": "自己是元婴修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "wanyao-he-ya-pouch",
+      "name": "鹤芽的私用行囊",
+      "kind": "item",
+      "placement": "wanyao-he-ya",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "wanyao-he-ya-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-he-ya"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "wanyao-mo-yin",
+      "name": "墨荫",
+      "kind": "person",
+      "placement": "wanyao-workshop",
+      "description": "八级妖修，拿自己的矿石换工具，珍惜公平的交易经验。",
+      "facts": [
+        {
+          "id": "wanyao-mo-yin-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "元婴"
+          },
+          "description": "元婴",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "wanyao-mo-yin"
+            ]
+          }
+        },
+        {
+          "id": "wanyao-mo-yin-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "八级妖体、洞穴行走与矿石辨识。"
+          },
+          "description": "八级妖体、洞穴行走与矿石辨识。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "wanyao-mo-yin"
+            ]
+          }
+        },
+        {
+          "id": "wanyao-mo-yin-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "妖族血脉与自身修炼基础，不套用人族灵根。"
+          },
+          "description": "妖族血脉与自身修炼基础，不套用人族灵根。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "wanyao-mo-yin"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "wanyao-mo-yin-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "wanyao-mo-yin-mana",
+          "definition_id": "mana",
+          "current": 850
+        }
+      ],
+      "ratings": [
+        {
+          "id": "wanyao-mo-yin-cultivation",
+          "definition_id": "cultivation",
+          "value": 4
+        },
+        {
+          "id": "wanyao-mo-yin-force",
+          "definition_id": "force",
+          "value": 4
+        },
+        {
+          "id": "wanyao-mo-yin-craft",
+          "definition_id": "craft",
+          "value": 3
+        },
+        {
+          "id": "wanyao-mo-yin-perception",
+          "definition_id": "perception",
+          "value": 4
+        },
+        {
+          "id": "wanyao-mo-yin-influence",
+          "definition_id": "influence",
+          "value": 3
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 33
+        }
+      ],
+      "agent": {
+        "id": "wanyao-mo-yin",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "八级妖修，拿自己的矿石换工具，珍惜公平的交易经验。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "问清修器是否真能解决护臂问题，不急于交出全部私货。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "墨荫",
+              "description": "八级妖修，拿自己的矿石换工具，珍惜公平的交易经验。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "外谷修器处",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-wanyao-mo-yin-pouch",
+              "name": "墨荫的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-wanyao-qing-yu",
+              "name": "青榆",
+              "description": "会修护具的同行，报价需要商量。",
+              "status": "observed"
+            },
+            {
+              "id": "known-wanyao-mo-minerals",
+              "name": "墨荫的矿料",
+              "description": "用于议价的私人矿料，放在修器处不代表已经支付。",
+              "status": "observed"
+            },
+            {
+              "id": "known-wanyao-cracked-bracer",
+              "name": "墨荫的旧护臂",
+              "description": "有一道可检查的裂痕；原因为旧伤还是材料不适需判断，不预先规定诈骗。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "wanyao-mo-yin"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "wanyao-workshop"
+              ]
+            },
+            {
+              "local_entity_id": "known-wanyao-mo-yin-pouch",
+              "canonical_entity_ids": [
+                "wanyao-mo-yin-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-wanyao-qing-yu",
+              "canonical_entity_ids": [
+                "wanyao-qing-yu"
+              ]
+            },
+            {
+              "local_entity_id": "known-wanyao-mo-minerals",
+              "canonical_entity_ids": [
+                "wanyao-mo-minerals"
+              ]
+            },
+            {
+              "local_entity_id": "known-wanyao-cracked-bracer",
+              "canonical_entity_ids": [
+                "wanyao-cracked-bracer"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "八级妖体、洞穴行走与矿石辨识。"
+              },
+              "description": "八级妖体、洞穴行走与矿石辨识。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "问清修器是否真能解决护臂问题，不急于交出全部私货。"
+              },
+              "description": "问清修器是否真能解决护臂问题，不急于交出全部私货。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是元婴修士。"
+              },
+              "description": "自己是元婴修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "wanyao-mo-yin-pouch",
+      "name": "墨荫的私用行囊",
+      "kind": "item",
+      "placement": "wanyao-mo-yin",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "wanyao-mo-yin-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-mo-yin"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "canon-wanyao-banner",
+      "name": "万妖幡",
+      "kind": "item",
+      "placement": "wanyao-banner-ground",
+      "description": "唯一万妖幡，长期由谷中妖气积蓄维护；威力受实际祭炼者、积蓄与目标影响。",
+      "facts": [
+        {
+          "id": "canon-wanyao-banner-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-court"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-mixing-pearl",
+      "name": "迷形珠",
+      "kind": "item",
+      "placement": "wanyao-che-retreat",
+      "description": "谷主持有的异宝，可辅助改形和遮气；吞用需压低法力，借出需真实交接。",
+      "facts": [
+        {
+          "id": "canon-mixing-pearl-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-che-laoyao"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-xiong-blood-blade",
+      "name": "尸熊血刃",
+      "kind": "item",
+      "placement": "wanyao-xiong-cave",
+      "description": "仿制魔龙刃的血刃，催动需要实际法力；当前在尸熊手中，借用不会自动转移所有权。",
+      "facts": [
+        {
+          "id": "canon-xiong-blood-blade-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-xiong-shi"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "wanyao-common-stock",
+      "name": "万妖谷公共维护料",
+      "kind": "item",
+      "placement": "wanyao-public-store",
+      "description": "公用材料，领用与归还要登记，副谷主也不能当作随身无限物资。",
+      "facts": [
+        {
+          "id": "wanyao-common-stock-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-court"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "maintenance-material",
+          "amount": 40
+        },
+        {
+          "definition_id": "craft-material",
+          "amount": 32
+        },
+        {
+          "definition_id": "low-stone",
+          "amount": 220
+        }
+      ]
+    },
+    {
+      "id": "wanyao-mo-minerals",
+      "name": "墨荫的矿料",
+      "kind": "item",
+      "placement": "wanyao-workshop",
+      "description": "用于议价的私人矿料，放在修器处不代表已经支付。",
+      "facts": [
+        {
+          "id": "wanyao-mo-minerals-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-mo-yin"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "craft-material",
+          "amount": 8
+        }
+      ]
+    },
+    {
+      "id": "wanyao-cracked-bracer",
+      "name": "墨荫的旧护臂",
+      "kind": "item",
+      "placement": "wanyao-workshop",
+      "description": "有一道可检查的裂痕；原因为旧伤还是材料不适需判断，不预先规定诈骗。",
+      "facts": [
+        {
+          "id": "wanyao-cracked-bracer-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "wanyao-mo-yin"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    }
+  ],
+  "existingEntityFacts": [],
+  "placements": [],
+  "entityDescriptions": [],
+  "agentCognition": [],
+  "periodicProperties": [],
+  "quantityDefinitions": [],
+  "laws": [
+    {
+      "id": "wanyao-banner-conservation",
+      "text": "万妖幡的本体、灵性投影和幡内妖气显形必须关联同一来源；不能用投影复制第二件可独立出让的幡。重凝形态、空间防护和破禁结果受实际法力、储存与攻击条件约束。",
+      "severity": "hard"
+    },
+    {
+      "id": "wanyao-treaty",
+      "text": "车老妖真身出谷与干预凡俗受到同阶政治约定和可能的联手报复约束；这不是不可跨越的物理墙。叙事应区分威慑、承诺与实际能力，是否违约由人物处境决定。",
+      "severity": "soft"
+    },
+    {
+      "id": "wanyao-not-monolith",
+      "text": "万妖谷、冰海和独立妖修不是共享全部认知的统一角色。材料、私产、指挥权、敌友和临时合作须落实到真实持有人；后期攻城联盟不能自动存在。",
+      "severity": "soft"
+    }
+  ],
+  "provenance": {
+    "entity:human-wanyao-valley": [
+      "wanyao-valley-history"
+    ],
+    "entity:wanyao-gate": [
+      "wanyao-present-life"
+    ],
+    "entity:wanyao-banner-ground": [
+      "wanyao-banner",
+      "wanyao-opening-calibration"
+    ],
+    "entity:wanyao-che-retreat": [
+      "wanyao-opening-calibration"
+    ],
+    "entity:wanyao-xiong-cave": [
+      "wanyao-present-life",
+      "wanyao-opening-calibration"
+    ],
+    "entity:wanyao-workshop": [
+      "wanyao-present-life"
+    ],
+    "entity:wanyao-public-store": [
+      "wanyao-present-life"
+    ],
+    "entity:wanyao-qing-cave": [
+      "wanyao-present-life",
+      "wanyao-additional-opening"
+    ],
+    "entity:wanyao-wu-cave": [
+      "wanyao-present-life",
+      "wanyao-additional-opening"
+    ],
+    "entity:wanyao-court": [
+      "wanyao-valley-history",
+      "wanyao-opening-calibration"
+    ],
+    "fact:human-wanyao-valley-route-wanyao-gate": [
+      "wanyao-present-life"
+    ],
+    "fact:human-wanyao-valley-travel-wanyao-gate": [
+      "wanyao-values"
+    ],
+    "fact:wanyao-gate-route-human-wanyao-valley": [
+      "wanyao-present-life"
+    ],
+    "fact:wanyao-gate-travel-human-wanyao-valley": [
+      "wanyao-values"
+    ],
+    "fact:wanyao-gate-route-wanyao-workshop": [
+      "wanyao-present-life"
+    ],
+    "fact:wanyao-gate-travel-wanyao-workshop": [
+      "wanyao-values"
+    ],
+    "fact:wanyao-workshop-route-wanyao-gate": [
+      "wanyao-present-life"
+    ],
+    "fact:wanyao-workshop-travel-wanyao-gate": [
+      "wanyao-values"
+    ],
+    "fact:human-wanyao-valley-route-wanyao-banner-ground": [
+      "wanyao-present-life"
+    ],
+    "fact:human-wanyao-valley-travel-wanyao-banner-ground": [
+      "wanyao-values"
+    ],
+    "fact:wanyao-banner-ground-route-human-wanyao-valley": [
+      "wanyao-present-life"
+    ],
+    "fact:wanyao-banner-ground-travel-human-wanyao-valley": [
+      "wanyao-values"
+    ],
+    "fact:human-wanyao-valley-route-wanyao-che-retreat": [
+      "wanyao-present-life"
+    ],
+    "fact:human-wanyao-valley-travel-wanyao-che-retreat": [
+      "wanyao-values"
+    ],
+    "fact:wanyao-che-retreat-route-human-wanyao-valley": [
+      "wanyao-present-life"
+    ],
+    "fact:wanyao-che-retreat-travel-human-wanyao-valley": [
+      "wanyao-values"
+    ],
+    "fact:human-wanyao-valley-route-wanyao-xiong-cave": [
+      "wanyao-present-life"
+    ],
+    "fact:human-wanyao-valley-travel-wanyao-xiong-cave": [
+      "wanyao-values"
+    ],
+    "fact:wanyao-xiong-cave-route-human-wanyao-valley": [
+      "wanyao-present-life"
+    ],
+    "fact:wanyao-xiong-cave-travel-human-wanyao-valley": [
+      "wanyao-values"
+    ],
+    "fact:human-wanyao-valley-route-wanyao-public-store": [
+      "wanyao-present-life"
+    ],
+    "fact:human-wanyao-valley-travel-wanyao-public-store": [
+      "wanyao-values"
+    ],
+    "fact:wanyao-public-store-route-human-wanyao-valley": [
+      "wanyao-present-life"
+    ],
+    "fact:wanyao-public-store-travel-human-wanyao-valley": [
+      "wanyao-values"
+    ],
+    "fact:human-wanyao-valley-route-wanyao-qing-cave": [
+      "wanyao-present-life"
+    ],
+    "fact:human-wanyao-valley-travel-wanyao-qing-cave": [
+      "wanyao-values"
+    ],
+    "fact:wanyao-qing-cave-route-human-wanyao-valley": [
+      "wanyao-present-life"
+    ],
+    "fact:wanyao-qing-cave-travel-human-wanyao-valley": [
+      "wanyao-values"
+    ],
+    "fact:human-wanyao-valley-route-wanyao-wu-cave": [
+      "wanyao-present-life"
+    ],
+    "fact:human-wanyao-valley-travel-wanyao-wu-cave": [
+      "wanyao-values"
+    ],
+    "fact:wanyao-wu-cave-route-human-wanyao-valley": [
+      "wanyao-present-life"
+    ],
+    "fact:wanyao-wu-cave-travel-human-wanyao-valley": [
+      "wanyao-values"
+    ],
+    "entity:canon-che-laoyao": [
+      "wanyao-valley-history",
+      "wanyao-opening-calibration",
+      "wanyao-values"
+    ],
+    "fact:canon-che-laoyao-cultivation-state": [
+      "wanyao-valley-history",
+      "wanyao-opening-calibration",
+      "wanyao-values"
+    ],
+    "fact:canon-che-laoyao-learned-skill": [
+      "wanyao-valley-history",
+      "wanyao-opening-calibration"
+    ],
+    "fact:canon-che-laoyao-spiritual-root": [
+      "wanyao-values"
+    ],
+    "entity:canon-che-laoyao-pouch": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:canon-che-laoyao-pouch-owner": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "entity:canon-xiong-shi": [
+      "wanyao-valley-history",
+      "wanyao-xiong-identity",
+      "wanyao-opening-calibration",
+      "wanyao-values"
+    ],
+    "fact:canon-xiong-shi-cultivation-state": [
+      "wanyao-valley-history",
+      "wanyao-xiong-identity",
+      "wanyao-opening-calibration",
+      "wanyao-values"
+    ],
+    "fact:canon-xiong-shi-learned-skill": [
+      "wanyao-valley-history",
+      "wanyao-xiong-identity",
+      "wanyao-opening-calibration"
+    ],
+    "fact:canon-xiong-shi-spiritual-root": [
+      "wanyao-values"
+    ],
+    "entity:canon-xiong-shi-pouch": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:canon-xiong-shi-pouch-owner": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:canon-che-laoyao-office": [
+      "wanyao-valley-history"
+    ],
+    "fact:canon-xiong-shi-office": [
+      "wanyao-valley-history"
+    ],
+    "entity:canon-qingbei-canglang": [
+      "wanyao-additional-identities",
+      "wanyao-additional-opening",
+      "wanyao-values"
+    ],
+    "fact:canon-qingbei-canglang-cultivation-state": [
+      "wanyao-additional-identities",
+      "wanyao-additional-opening",
+      "wanyao-values"
+    ],
+    "fact:canon-qingbei-canglang-learned-skill": [
+      "wanyao-additional-identities",
+      "wanyao-additional-opening"
+    ],
+    "fact:canon-qingbei-canglang-spiritual-root": [
+      "wanyao-values"
+    ],
+    "entity:canon-qingbei-canglang-pouch": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:canon-qingbei-canglang-pouch-owner": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "entity:canon-wu-three-eye": [
+      "wanyao-additional-identities",
+      "wanyao-additional-opening",
+      "wanyao-values"
+    ],
+    "fact:canon-wu-three-eye-cultivation-state": [
+      "wanyao-additional-identities",
+      "wanyao-additional-opening",
+      "wanyao-values"
+    ],
+    "fact:canon-wu-three-eye-learned-skill": [
+      "wanyao-additional-identities",
+      "wanyao-additional-opening"
+    ],
+    "fact:canon-wu-three-eye-spiritual-root": [
+      "wanyao-values"
+    ],
+    "entity:canon-wu-three-eye-pouch": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:canon-wu-three-eye-pouch-owner": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:canon-qingbei-canglang-office": [
+      "wanyao-additional-identities",
+      "wanyao-additional-opening"
+    ],
+    "fact:canon-wu-three-eye-member": [
+      "wanyao-present-life"
+    ],
+    "entity:wanyao-qing-yu": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:wanyao-qing-yu-cultivation-state": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:wanyao-qing-yu-learned-skill": [
+      "wanyao-present-life"
+    ],
+    "fact:wanyao-qing-yu-spiritual-root": [
+      "wanyao-values"
+    ],
+    "entity:wanyao-qing-yu-pouch": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:wanyao-qing-yu-pouch-owner": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "entity:wanyao-shi-du": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:wanyao-shi-du-cultivation-state": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:wanyao-shi-du-learned-skill": [
+      "wanyao-present-life"
+    ],
+    "fact:wanyao-shi-du-spiritual-root": [
+      "wanyao-values"
+    ],
+    "entity:wanyao-shi-du-pouch": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:wanyao-shi-du-pouch-owner": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "entity:wanyao-he-ya": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:wanyao-he-ya-cultivation-state": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:wanyao-he-ya-learned-skill": [
+      "wanyao-present-life"
+    ],
+    "fact:wanyao-he-ya-spiritual-root": [
+      "wanyao-values"
+    ],
+    "entity:wanyao-he-ya-pouch": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:wanyao-he-ya-pouch-owner": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "entity:wanyao-mo-yin": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:wanyao-mo-yin-cultivation-state": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:wanyao-mo-yin-learned-skill": [
+      "wanyao-present-life"
+    ],
+    "fact:wanyao-mo-yin-spiritual-root": [
+      "wanyao-values"
+    ],
+    "entity:wanyao-mo-yin-pouch": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:wanyao-mo-yin-pouch-owner": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:wanyao-qing-yu-member": [
+      "wanyao-present-life"
+    ],
+    "fact:wanyao-shi-du-member": [
+      "wanyao-present-life"
+    ],
+    "fact:wanyao-he-ya-member": [
+      "wanyao-present-life"
+    ],
+    "entity:canon-wanyao-banner": [
+      "wanyao-banner"
+    ],
+    "fact:canon-wanyao-banner-owner": [
+      "wanyao-banner"
+    ],
+    "entity:canon-mixing-pearl": [
+      "wanyao-mixing-pearl",
+      "wanyao-additional-opening"
+    ],
+    "fact:canon-mixing-pearl-owner": [
+      "wanyao-mixing-pearl",
+      "wanyao-additional-opening"
+    ],
+    "entity:canon-xiong-blood-blade": [
+      "wanyao-borrowed-blood-blade",
+      "wanyao-additional-opening"
+    ],
+    "fact:canon-xiong-blood-blade-owner": [
+      "wanyao-borrowed-blood-blade",
+      "wanyao-additional-opening"
+    ],
+    "law:wanyao-banner-conservation": [
+      "wanyao-banner-limits"
+    ],
+    "entity:wanyao-common-stock": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:wanyao-common-stock-owner": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "entity:wanyao-mo-minerals": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "fact:wanyao-mo-minerals-owner": [
+      "wanyao-present-life",
+      "wanyao-values"
+    ],
+    "entity:wanyao-cracked-bracer": [
+      "wanyao-present-life"
+    ],
+    "fact:wanyao-cracked-bracer-owner": [
+      "wanyao-present-life"
+    ],
+    "law:wanyao-treaty": [
+      "wanyao-che-treaty"
+    ],
+    "law:wanyao-not-monolith": [
+      "wanyao-ice-relations",
+      "wanyao-opening-calibration"
+    ]
+  }
+}

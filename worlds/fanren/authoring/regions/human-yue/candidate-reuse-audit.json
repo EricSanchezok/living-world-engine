@@ -1,0 +1,76 @@
+{
+  "formatVersion": 1,
+  "moduleId": "human-yue",
+  "queueInputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
+  "status": "exact-existing-disposition-reuse-not-new-semantic-approval",
+  "records": [
+    {
+      "candidateId": "batch-0053-object-0053",
+      "extractionReportHash": "5838c702b8121b01b6df2fc5fa58df6bf89757166085d9cbfa0bcb5ddeb94664",
+      "sourceModule": "human-boundless",
+      "targetQueueModule": "human-yue",
+      "sourceDispositionReportHash": "b2d931007794c22655fa68f6ec62bb93ae52f83162864227edee85c8aebed20e",
+      "sourceRecordHash": "0c118a594316255f9cf0bbdc5d3e25dfa3b957a68af8ebbff6e386aa2135bfa5",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-tiannan",
+        "human-boundless"
+      ],
+      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+    },
+    {
+      "candidateId": "batch-0089-object-0025",
+      "extractionReportHash": "458ad693446d0a9b9df97fc0b7b0a7637ca43a9d1a594de0718cf48926b9ce28",
+      "sourceModule": "human-boundless",
+      "targetQueueModule": "human-yue",
+      "sourceDispositionReportHash": "b2d931007794c22655fa68f6ec62bb93ae52f83162864227edee85c8aebed20e",
+      "sourceRecordHash": "cd0388dfc2ad30cb6735efd1ca73ee789d23106d9e36e72bc239b8b566f84937",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-xi",
+        "boundless-shore",
+        "boundless-minzhou",
+        "boundless-fengri"
+      ],
+      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+    },
+    {
+      "candidateId": "batch-0195-object-0003",
+      "extractionReportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
+      "sourceModule": "human-dajin",
+      "targetQueueModule": "human-yue",
+      "sourceDispositionReportHash": "20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14",
+      "sourceRecordHash": "0031f5180ff28212bababb9fac5ca8d32b8f9ee58eee804a358902fbb2a8d2e2",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-xiang-zhili",
+        "dajin-xiang-identity"
+      ],
+      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+    }
+  ],
+  "skipped": [],
+  "legacyClassificationSnapshot": null,
+  "validationScope": "complete-queue-including-pending",
+  "missingSourceEvidenceIds": [],
+  "outputDispositionReportHash": "ba50592e1dac57c4a19f80904b797b50bc7f03bfbf259c17d74d69a179eaf43c",
+  "reusedCount": 3,
+  "result": {
+    "moduleId": "human-yue",
+    "candidates": 1758,
+    "counts": {
+      "adopted": 2,
+      "corrected": 1,
+      "history-only": 0,
+      "later-only": 0,
+      "bounded-uncertainty": 0,
+      "transferred": 0,
+      "pending": 1755
+    },
+    "completed": 3,
+    "unresolved": 1755,
+    "boundedUncertainty": 0,
+    "approvedForRuntime": false,
+    "reportHash": "ba50592e1dac57c4a19f80904b797b50bc7f03bfbf259c17d74d69a179eaf43c"
+  }
+}

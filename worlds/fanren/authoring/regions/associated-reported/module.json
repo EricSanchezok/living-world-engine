@@ -1,0 +1,940 @@
+{
+  "id": "associated-reported",
+  "entities": [
+    {
+      "id": "associated-lingmiao-remnant",
+      "name": "灵缈园药园残骸",
+      "kind": "location",
+      "placement": "human-realm",
+      "description": "独立小空间，与人界存在隐蔽对应；数十丈间散着药圃、石亭和半截走廊，四周灰蒙，无日月轮转。父级只是世界索引归属，不能沿普通道路走入。",
+      "facts": [
+        {
+          "id": "associated-lingmiao-remnant-route-reported-garden-pavilion",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "reported-garden-pavilion"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "associated-lingmiao-remnant-condition-reported-garden-pavilion",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "同一小空间内的普通短途移动，避免踩坏药草；此路径不提供穿越空间壁的能力。"
+          },
+          "description": "同一小空间内的普通短途移动，避免踩坏药草；此路径不提供穿越空间壁的能力。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "associated-lingmiao-remnant-route-reported-garden-corridor",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "reported-garden-corridor"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "associated-lingmiao-remnant-condition-reported-garden-corridor",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "同一小空间内的普通短途移动，避免踩坏药草；此路径不提供穿越空间壁的能力。"
+          },
+          "description": "同一小空间内的普通短途移动，避免踩坏药草；此路径不提供穿越空间壁的能力。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "associated-lingmiao-remnant-route-reported-garden-beds",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "reported-garden-beds"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "associated-lingmiao-remnant-condition-reported-garden-beds",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "同一小空间内的普通短途移动，避免踩坏药草；此路径不提供穿越空间壁的能力。"
+          },
+          "description": "同一小空间内的普通短途移动，避免踩坏药草；此路径不提供穿越空间壁的能力。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "reported-garden-pavilion",
+      "name": "残园石亭",
+      "kind": "location",
+      "placement": "associated-lingmiao-remnant",
+      "description": "尚完整的古石亭，可容少数人停留；当前未住人。",
+      "facts": [
+        {
+          "id": "reported-garden-pavilion-route-associated-lingmiao-remnant",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "associated-lingmiao-remnant"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "reported-garden-pavilion-condition-associated-lingmiao-remnant",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "同一小空间内的普通短途移动，避免踩坏药草；此路径不提供穿越空间壁的能力。"
+          },
+          "description": "同一小空间内的普通短途移动，避免踩坏药草；此路径不提供穿越空间壁的能力。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "reported-garden-corridor",
+      "name": "残园半廊",
+      "kind": "location",
+      "placement": "associated-lingmiao-remnant",
+      "description": "只剩半截的走廊，通向园中药畦而不通外界。",
+      "facts": [
+        {
+          "id": "reported-garden-corridor-route-associated-lingmiao-remnant",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "associated-lingmiao-remnant"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "reported-garden-corridor-condition-associated-lingmiao-remnant",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "同一小空间内的普通短途移动，避免踩坏药草；此路径不提供穿越空间壁的能力。"
+          },
+          "description": "同一小空间内的普通短途移动，避免踩坏药草；此路径不提供穿越空间壁的能力。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "reported-garden-beds",
+      "name": "残园药畦",
+      "kind": "location",
+      "placement": "associated-lingmiao-remnant",
+      "description": "不同古药分布在数处角落；未知物种不会仅因玩家想采就自动显露药性。",
+      "facts": [
+        {
+          "id": "reported-garden-beds-route-associated-lingmiao-remnant",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "associated-lingmiao-remnant"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "reported-garden-beds-condition-associated-lingmiao-remnant",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "同一小空间内的普通短途移动，避免踩坏药草；此路径不提供穿越空间壁的能力。"
+          },
+          "description": "同一小空间内的普通短途移动，避免踩坏药草；此路径不提供穿越空间壁的能力。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "reported-garden-silver-restriction",
+      "name": "残园银色禁制",
+      "kind": "item",
+      "placement": "associated-lingmiao-remnant",
+      "description": "高空云层后的一层银纱状禁制，具有对古魔与浓烈魔气的针对性反应。",
+      "facts": [
+        {
+          "id": "reported-garden-silver-restriction-trigger-boundary",
+          "predicate": "trigger-boundary",
+          "value": {
+            "kind": "text",
+            "value": "对释放古魔魔气的闯入者可凝聚银焰攻击；普通人族曾通过无事，但破坏阵式或改变目标状态要重新判断，不能由族名保证任意行为免疫。"
+          },
+          "description": "对释放古魔魔气的闯入者可凝聚银焰攻击；普通人族曾通过无事，但破坏阵式或改变目标状态要重新判断，不能由族名保证任意行为免疫。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-garden-silver-restriction-energy-source",
+          "predicate": "energy-source",
+          "value": {
+            "kind": "text",
+            "value": "依托残骸现有阵式与环境灵气维持；大规模损伤、持续消耗会改变效能，不能当成随身无限银火源。"
+          },
+          "description": "依托残骸现有阵式与环境灵气维持；大规模损伤、持续消耗会改变效能，不能当成随身无限银火源。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "reported-garden-ground-restriction",
+      "name": "残园地底残阵",
+      "kind": "item",
+      "placement": "associated-lingmiao-remnant",
+      "description": "地底存在有缺口的残缺禁制，缺口不等于通往人界的出口。",
+      "facts": [
+        {
+          "id": "reported-garden-ground-restriction-physical-state",
+          "predicate": "physical-state",
+          "value": {
+            "kind": "text",
+            "value": "地下残阵已有缺口；沿缺口继续下遁仍是本空间地层，不直接抵达人界。"
+          },
+          "description": "地下残阵已有缺口；沿缺口继续下遁仍是本空间地层，不直接抵达人界。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "reported-garden-weak-point",
+      "name": "残园游走薄弱点",
+      "kind": "item",
+      "placement": "associated-lingmiao-remnant",
+      "description": "极小、需要精细探测的空间薄弱处，目前在半廊上方约三丈，可能缓慢游走；不是肉眼可见的常开门。",
+      "facts": [
+        {
+          "id": "reported-garden-weak-point-opening-state",
+          "predicate": "opening-state",
+          "value": {
+            "kind": "text",
+            "value": "当前闭合；通过需定位、相容的足够力量和对面落点安全条件。空间扰动可能改变位置，观察过一次不等于永远知道坐标。"
+          },
+          "description": "当前闭合；通过需定位、相容的足够力量和对面落点安全条件。空间扰动可能改变位置，观察过一次不等于永远知道坐标。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-garden-weak-point-exit-target",
+          "predicate": "exit-target",
+          "value": {
+            "kind": "text",
+            "value": "通向人界的实际落点取决于开启时对应关系，需实际核定。"
+          },
+          "description": "通向人界的实际落点取决于开启时对应关系，需实际核定。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "reported-herb-wanmeng",
+      "name": "菀梦果药丛",
+      "kind": "container",
+      "placement": "reported-garden-beds",
+      "description": "深紫果实已有万年以上药性，可谨慎采收；新生果实不自动拥有相同药龄。",
+      "facts": [
+        {
+          "id": "reported-herb-wanmeng-harvest-boundary",
+          "predicate": "harvest-boundary",
+          "value": {
+            "kind": "text",
+            "value": "常规移植仍须适合土壤和保护根系，不保证粗暴挖取成功。"
+          },
+          "description": "常规移植仍须适合土壤和保护根系，不保证粗暴挖取成功。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-wanmeng-longevity-limit",
+          "predicate": "longevity-limit",
+          "value": {
+            "kind": "text",
+            "value": "现有药种无已证延寿用途；不能仅按万年药龄推成延寿灵药。"
+          },
+          "description": "现有药种无已证延寿用途；不能仅按万年药龄推成延寿灵药。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-wanmeng-ownership-state",
+          "predicate": "ownership-state",
+          "value": {
+            "kind": "text",
+            "value": "未设开篇现存人物所有权；发现不自动转移，采收、搬运和使用必须真实行动。"
+          },
+          "description": "未设开篇现存人物所有权；发现不自动转移，采收、搬运和使用必须真实行动。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-wanmeng-regrowth",
+          "predicate": "regrowth",
+          "value": {
+            "kind": "text",
+            "value": "药用部位被采后须减少原有可采量；残留根茎或种子不会立刻补回万年药性。任何再生须真实环境、时长与资源。"
+          },
+          "description": "药用部位被采后须减少原有可采量；残留根茎或种子不会立刻补回万年药性。任何再生须真实环境、时长与资源。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "ancient-herb-portion",
+          "amount": 12
+        }
+      ]
+    },
+    {
+      "id": "reported-herb-dragon-pattern",
+      "name": "龙纹草药丛",
+      "kind": "container",
+      "placement": "reported-garden-beds",
+      "description": "有显著纹理的古草，其具体功效需要可靠药典或亲验辨认。",
+      "facts": [
+        {
+          "id": "reported-herb-dragon-pattern-harvest-boundary",
+          "predicate": "harvest-boundary",
+          "value": {
+            "kind": "text",
+            "value": "保留完整根系和相容环境才可尝试移植。"
+          },
+          "description": "保留完整根系和相容环境才可尝试移植。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-dragon-pattern-longevity-limit",
+          "predicate": "longevity-limit",
+          "value": {
+            "kind": "text",
+            "value": "现有药种无已证延寿用途；不能仅按万年药龄推成延寿灵药。"
+          },
+          "description": "现有药种无已证延寿用途；不能仅按万年药龄推成延寿灵药。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-dragon-pattern-ownership-state",
+          "predicate": "ownership-state",
+          "value": {
+            "kind": "text",
+            "value": "未设开篇现存人物所有权；发现不自动转移，采收、搬运和使用必须真实行动。"
+          },
+          "description": "未设开篇现存人物所有权；发现不自动转移，采收、搬运和使用必须真实行动。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-dragon-pattern-regrowth",
+          "predicate": "regrowth",
+          "value": {
+            "kind": "text",
+            "value": "药用部位被采后须减少原有可采量；残留根茎或种子不会立刻补回万年药性。任何再生须真实环境、时长与资源。"
+          },
+          "description": "药用部位被采后须减少原有可采量；残留根茎或种子不会立刻补回万年药性。任何再生须真实环境、时长与资源。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "ancient-herb-portion",
+          "amount": 6
+        }
+      ]
+    },
+    {
+      "id": "reported-herb-windflower",
+      "name": "风灵花药丛",
+      "kind": "container",
+      "placement": "reported-garden-beds",
+      "description": "古老灵花，当前有六份可用药材，采走即减少真实存量。",
+      "facts": [
+        {
+          "id": "reported-herb-windflower-harvest-boundary",
+          "predicate": "harvest-boundary",
+          "value": {
+            "kind": "text",
+            "value": "须按物种需要护持根叶，不能重复计作原地花和随身花。"
+          },
+          "description": "须按物种需要护持根叶，不能重复计作原地花和随身花。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-windflower-longevity-limit",
+          "predicate": "longevity-limit",
+          "value": {
+            "kind": "text",
+            "value": "现有药种无已证延寿用途；不能仅按万年药龄推成延寿灵药。"
+          },
+          "description": "现有药种无已证延寿用途；不能仅按万年药龄推成延寿灵药。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-windflower-ownership-state",
+          "predicate": "ownership-state",
+          "value": {
+            "kind": "text",
+            "value": "未设开篇现存人物所有权；发现不自动转移，采收、搬运和使用必须真实行动。"
+          },
+          "description": "未设开篇现存人物所有权；发现不自动转移，采收、搬运和使用必须真实行动。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-windflower-regrowth",
+          "predicate": "regrowth",
+          "value": {
+            "kind": "text",
+            "value": "药用部位被采后须减少原有可采量；残留根茎或种子不会立刻补回万年药性。任何再生须真实环境、时长与资源。"
+          },
+          "description": "药用部位被采后须减少原有可采量；残留根茎或种子不会立刻补回万年药性。任何再生须真实环境、时长与资源。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "ancient-herb-portion",
+          "amount": 6
+        }
+      ]
+    },
+    {
+      "id": "reported-herb-red-main-herb",
+      "name": "赤红绛云丹主药",
+      "kind": "container",
+      "placement": "reported-garden-beds",
+      "description": "赤红似焰的未具名古药，绛云丹的一种主材；当前有四份可采药用部位。",
+      "facts": [
+        {
+          "id": "reported-herb-red-main-herb-harvest-boundary",
+          "predicate": "harvest-boundary",
+          "value": {
+            "kind": "text",
+            "value": "不能移植；本版将其与移入容器自燃的一类对应，属明确解释性标定。可在原地采药，不得挖走后仍算完好株。"
+          },
+          "description": "不能移植；本版将其与移入容器自燃的一类对应，属明确解释性标定。可在原地采药，不得挖走后仍算完好株。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-red-main-herb-longevity-limit",
+          "predicate": "longevity-limit",
+          "value": {
+            "kind": "text",
+            "value": "现有药种无已证延寿用途；不能仅按万年药龄推成延寿灵药。"
+          },
+          "description": "现有药种无已证延寿用途；不能仅按万年药龄推成延寿灵药。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-red-main-herb-ownership-state",
+          "predicate": "ownership-state",
+          "value": {
+            "kind": "text",
+            "value": "未设开篇现存人物所有权；发现不自动转移，采收、搬运和使用必须真实行动。"
+          },
+          "description": "未设开篇现存人物所有权；发现不自动转移，采收、搬运和使用必须真实行动。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-red-main-herb-regrowth",
+          "predicate": "regrowth",
+          "value": {
+            "kind": "text",
+            "value": "药用部位被采后须减少原有可采量；残留根茎或种子不会立刻补回万年药性。任何再生须真实环境、时长与资源。"
+          },
+          "description": "药用部位被采后须减少原有可采量；残留根茎或种子不会立刻补回万年药性。任何再生须真实环境、时长与资源。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "ancient-herb-portion",
+          "amount": 4
+        }
+      ]
+    },
+    {
+      "id": "reported-herb-withering",
+      "name": "离地枯萎的未具名古药",
+      "kind": "container",
+      "placement": "reported-garden-beds",
+      "description": "当前有四份可采部位，药性无法只由外观确定。",
+      "facts": [
+        {
+          "id": "reported-herb-withering-harvest-boundary",
+          "predicate": "harvest-boundary",
+          "value": {
+            "kind": "text",
+            "value": "离开原栽植环境会枯萎失去药性，不能作为正常移栽品。"
+          },
+          "description": "离开原栽植环境会枯萎失去药性，不能作为正常移栽品。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-withering-longevity-limit",
+          "predicate": "longevity-limit",
+          "value": {
+            "kind": "text",
+            "value": "现有药种无已证延寿用途；不能仅按万年药龄推成延寿灵药。"
+          },
+          "description": "现有药种无已证延寿用途；不能仅按万年药龄推成延寿灵药。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-withering-ownership-state",
+          "predicate": "ownership-state",
+          "value": {
+            "kind": "text",
+            "value": "未设开篇现存人物所有权；发现不自动转移，采收、搬运和使用必须真实行动。"
+          },
+          "description": "未设开篇现存人物所有权；发现不自动转移，采收、搬运和使用必须真实行动。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-withering-regrowth",
+          "predicate": "regrowth",
+          "value": {
+            "kind": "text",
+            "value": "药用部位被采后须减少原有可采量；残留根茎或种子不会立刻补回万年药性。任何再生须真实环境、时长与资源。"
+          },
+          "description": "药用部位被采后须减少原有可采量；残留根茎或种子不会立刻补回万年药性。任何再生须真实环境、时长与资源。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "ancient-herb-portion",
+          "amount": 4
+        }
+      ]
+    },
+    {
+      "id": "reported-herb-dissolving",
+      "name": "动根化液的未具名古药",
+      "kind": "container",
+      "placement": "reported-garden-beds",
+      "description": "当前有三份可采部位，碰动根土会损坏整株。",
+      "facts": [
+        {
+          "id": "reported-herb-dissolving-harvest-boundary",
+          "predicate": "harvest-boundary",
+          "value": {
+            "kind": "text",
+            "value": "触动根部泥土即溶解化液；提取地上部分仍须实际辨认与相容手段。"
+          },
+          "description": "触动根部泥土即溶解化液；提取地上部分仍须实际辨认与相容手段。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-dissolving-longevity-limit",
+          "predicate": "longevity-limit",
+          "value": {
+            "kind": "text",
+            "value": "现有药种无已证延寿用途；不能仅按万年药龄推成延寿灵药。"
+          },
+          "description": "现有药种无已证延寿用途；不能仅按万年药龄推成延寿灵药。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-dissolving-ownership-state",
+          "predicate": "ownership-state",
+          "value": {
+            "kind": "text",
+            "value": "未设开篇现存人物所有权；发现不自动转移，采收、搬运和使用必须真实行动。"
+          },
+          "description": "未设开篇现存人物所有权；发现不自动转移，采收、搬运和使用必须真实行动。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "reported-herb-dissolving-regrowth",
+          "predicate": "regrowth",
+          "value": {
+            "kind": "text",
+            "value": "药用部位被采后须减少原有可采量；残留根茎或种子不会立刻补回万年药性。任何再生须真实环境、时长与资源。"
+          },
+          "description": "药用部位被采后须减少原有可采量；残留根茎或种子不会立刻补回万年药性。任何再生须真实环境、时长与资源。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "ancient-herb-portion",
+          "amount": 3
+        }
+      ]
+    }
+  ],
+  "existingEntityFacts": [],
+  "placements": [],
+  "entityDescriptions": [],
+  "laws": [
+    {
+      "id": "reported-reported-place",
+      "text": "人物传闻、带利益的保证、亲眼观察与解释性推论各有范围；阴司界仍为未证传闻，不能由名字生成通行地图。灰色封魔间隙与真实药园残骸是两个空间，不得合并身份或相互复制资源。",
+      "severity": "hard"
+    },
+    {
+      "id": "reported-garden-material",
+      "text": "古药当前存量有限，采收、移植和用药分别检查；三个不可移植物种保留不同损坏机制。完整丹方、辅料、火候、实际能力和风险均须成立，不能仅凭“绛云丹”名称从园中免费取得丹药。",
+      "severity": "hard"
+    },
+    {
+      "id": "reported-garden-transit",
+      "text": "残骸的普通内部移动和破界进入、退出分别判定。薄弱点会移动，破界能力与相容配合有实际成本，未来人物的二十七年修行和宁州落点不是固定流程。",
+      "severity": "hard"
+    }
+  ],
+  "provenance": {
+    "quantity:ancient-herb-portion": [
+      "reported-opening-calibration",
+      "reported-old-herbs"
+    ],
+    "entity:associated-lingmiao-remnant": [
+      "reported-garden-remnant",
+      "reported-closed-light"
+    ],
+    "entity:reported-garden-pavilion": [
+      "reported-garden-remnant"
+    ],
+    "entity:reported-garden-corridor": [
+      "reported-garden-remnant"
+    ],
+    "entity:reported-garden-beds": [
+      "reported-old-herbs",
+      "reported-opening-calibration"
+    ],
+    "fact:associated-lingmiao-remnant-route-reported-garden-pavilion": [
+      "reported-garden-remnant",
+      "reported-opening-calibration"
+    ],
+    "fact:associated-lingmiao-remnant-condition-reported-garden-pavilion": [
+      "reported-garden-remnant",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-garden-pavilion-route-associated-lingmiao-remnant": [
+      "reported-garden-remnant",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-garden-pavilion-condition-associated-lingmiao-remnant": [
+      "reported-garden-remnant",
+      "reported-opening-calibration"
+    ],
+    "fact:associated-lingmiao-remnant-route-reported-garden-corridor": [
+      "reported-garden-remnant",
+      "reported-opening-calibration"
+    ],
+    "fact:associated-lingmiao-remnant-condition-reported-garden-corridor": [
+      "reported-garden-remnant",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-garden-corridor-route-associated-lingmiao-remnant": [
+      "reported-garden-remnant",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-garden-corridor-condition-associated-lingmiao-remnant": [
+      "reported-garden-remnant",
+      "reported-opening-calibration"
+    ],
+    "fact:associated-lingmiao-remnant-route-reported-garden-beds": [
+      "reported-garden-remnant",
+      "reported-opening-calibration"
+    ],
+    "fact:associated-lingmiao-remnant-condition-reported-garden-beds": [
+      "reported-garden-remnant",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-garden-beds-route-associated-lingmiao-remnant": [
+      "reported-garden-remnant",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-garden-beds-condition-associated-lingmiao-remnant": [
+      "reported-garden-remnant",
+      "reported-opening-calibration"
+    ],
+    "entity:reported-garden-silver-restriction": [
+      "reported-silver-restriction"
+    ],
+    "fact:reported-garden-silver-restriction-trigger-boundary": [
+      "reported-silver-restriction"
+    ],
+    "fact:reported-garden-silver-restriction-energy-source": [
+      "reported-silver-restriction",
+      "reported-opening-calibration"
+    ],
+    "entity:reported-garden-ground-restriction": [
+      "reported-garden-remnant",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-garden-ground-restriction-physical-state": [
+      "reported-garden-remnant"
+    ],
+    "entity:reported-garden-weak-point": [
+      "reported-moving-weakness",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-garden-weak-point-opening-state": [
+      "reported-moving-weakness"
+    ],
+    "fact:reported-garden-weak-point-exit-target": [
+      "reported-moving-weakness",
+      "reported-opening-calibration"
+    ],
+    "entity:reported-herb-wanmeng": [
+      "reported-old-herbs",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-wanmeng-harvest-boundary": [
+      "reported-old-herbs",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-wanmeng-longevity-limit": [
+      "reported-no-longevity-herb"
+    ],
+    "fact:reported-herb-wanmeng-ownership-state": [
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-wanmeng-regrowth": [
+      "reported-old-herbs",
+      "reported-closed-light",
+      "reported-opening-calibration"
+    ],
+    "entity:reported-herb-dragon-pattern": [
+      "reported-old-herbs",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-dragon-pattern-harvest-boundary": [
+      "reported-old-herbs",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-dragon-pattern-longevity-limit": [
+      "reported-no-longevity-herb"
+    ],
+    "fact:reported-herb-dragon-pattern-ownership-state": [
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-dragon-pattern-regrowth": [
+      "reported-old-herbs",
+      "reported-closed-light",
+      "reported-opening-calibration"
+    ],
+    "entity:reported-herb-windflower": [
+      "reported-old-herbs",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-windflower-harvest-boundary": [
+      "reported-old-herbs",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-windflower-longevity-limit": [
+      "reported-no-longevity-herb"
+    ],
+    "fact:reported-herb-windflower-ownership-state": [
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-windflower-regrowth": [
+      "reported-old-herbs",
+      "reported-closed-light",
+      "reported-opening-calibration"
+    ],
+    "entity:reported-herb-red-main-herb": [
+      "reported-old-herbs",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-red-main-herb-harvest-boundary": [
+      "reported-old-herbs",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-red-main-herb-longevity-limit": [
+      "reported-no-longevity-herb"
+    ],
+    "fact:reported-herb-red-main-herb-ownership-state": [
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-red-main-herb-regrowth": [
+      "reported-old-herbs",
+      "reported-closed-light",
+      "reported-opening-calibration"
+    ],
+    "entity:reported-herb-withering": [
+      "reported-old-herbs",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-withering-harvest-boundary": [
+      "reported-old-herbs",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-withering-longevity-limit": [
+      "reported-no-longevity-herb"
+    ],
+    "fact:reported-herb-withering-ownership-state": [
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-withering-regrowth": [
+      "reported-old-herbs",
+      "reported-closed-light",
+      "reported-opening-calibration"
+    ],
+    "entity:reported-herb-dissolving": [
+      "reported-old-herbs",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-dissolving-harvest-boundary": [
+      "reported-old-herbs",
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-dissolving-longevity-limit": [
+      "reported-no-longevity-herb"
+    ],
+    "fact:reported-herb-dissolving-ownership-state": [
+      "reported-opening-calibration"
+    ],
+    "fact:reported-herb-dissolving-regrowth": [
+      "reported-old-herbs",
+      "reported-closed-light",
+      "reported-opening-calibration"
+    ],
+    "law:reported-reported-place": [
+      "reported-yin-si-rumor",
+      "reported-lingmiao-promises",
+      "reported-grey-gap-distinction"
+    ],
+    "law:reported-garden-material": [
+      "reported-old-herbs",
+      "reported-recipe-limits",
+      "reported-closed-light"
+    ],
+    "law:reported-garden-transit": [
+      "reported-moving-weakness",
+      "reported-space-access"
+    ]
+  },
+  "quantityDefinitions": [
+    {
+      "id": "ancient-herb-portion",
+      "name": "古药可采药用量",
+      "unit": "份",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    }
+  ]
+}

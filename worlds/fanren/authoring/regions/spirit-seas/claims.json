@@ -1,0 +1,856 @@
+[
+  {
+    "id": "seas-current-life",
+    "statement": "当前职务分工、精确居所、普通人物、文书关系、通行班次与生活机会均为明确原创；长寿原著人物的T0存活和当前职务仅在对应回溯claim允许处制作。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "作者设定开篇生活与数值；人物只从自己的经历、当前文书和观察得知。",
+    "openingReason": "为已证制度建立真实生活与资源，不将未来大会原样启动。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "seas-finite-values",
+    "statement": "资源、工价、修为映射、冷却与交通时长为明确有限标定。跨洲阵此配置每次24枚极品灵石及两阵芯，至多6位普通人形；不是全书统一费率。一灵界当地昼夜345600共同秒；普通月沿全局标定为30个人界日，只有明确约定的“灵界本地月”才取30个当地昼夜。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定开篇生活与数值；人物只从自己的经历、当前文书和观察得知。",
+    "openingReason": "数值服务当前配置；不凭空兑换灵石或把社会收费等同物理消耗。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "seas-league-federation",
+    "statement": "赫连商盟三大陆各有分盟，长老会由大乘组成裁争议，分盟负责人由本地长老推举；客卿仍保留原种族地位，危机时出手相助是所述义务。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "长期制度可回溯；现负责人是否已就职没有直年表，当前任命按本区原创补齐。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45162348",
+        "chapterSha256": "a0074edd99797935b059dac19f3c7c7020609ced885bf51d719e574a346045ea",
+        "start": 552,
+        "end": 746,
+        "anchorSha256": "7fec79bc83ceb7c2db5115e34bed57ab2b29de1a683be179c8028abe288a13e3"
+      },
+      {
+        "chapterId": "qq-45162348",
+        "chapterSha256": "a0074edd99797935b059dac19f3c7c7020609ced885bf51d719e574a346045ea",
+        "start": 624,
+        "end": 817,
+        "anchorSha256": "9e06cdd1295e7bd3eed45d5fcb999fbb34c031cff94d3a9c2451b61895e074a7"
+      },
+      {
+        "chapterId": "qq-45162348",
+        "chapterSha256": "a0074edd99797935b059dac19f3c7c7020609ced885bf51d719e574a346045ea",
+        "start": 741,
+        "end": 925,
+        "anchorSha256": "bc5c02821d7b8b11d2a4177efaa141411cd2e58ced7b88122c796914b8d8371a"
+      }
+    ]
+  },
+  {
+    "id": "seas-league-history",
+    "statement": "碧影说开创者为仙界仙人后裔、前身监察组织，天地大变断绝联系后扩为商盟；登天阁保存若干仙界秘术。保留为高层知悉的历史说法，不让普通雇员自动知全。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "明确叙述者与信息边界，不创造可直接联络仙界的常开设施。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45162348",
+        "chapterSha256": "a0074edd99797935b059dac19f3c7c7020609ced885bf51d719e574a346045ea",
+        "start": 2702,
+        "end": 2896,
+        "anchorSha256": "ef66a0ba63a57d4617b1aba0b32155031631860a34a8304b80af2d6080bc2e91"
+      },
+      {
+        "chapterId": "qq-45162348",
+        "chapterSha256": "a0074edd99797935b059dac19f3c7c7020609ced885bf51d719e574a346045ea",
+        "start": 2789,
+        "end": 2985,
+        "anchorSha256": "33ed56accf756359d2003ed66e4b4bb2956905316538a0d6603db494a131194b"
+      },
+      {
+        "chapterId": "qq-45162348",
+        "chapterSha256": "a0074edd99797935b059dac19f3c7c7020609ced885bf51d719e574a346045ea",
+        "start": 2578,
+        "end": 2764,
+        "anchorSha256": "e2399e21c78b315976fb133e464cd03289801aaa4b0648a182f50c824f42566d"
+      }
+    ]
+  },
+  {
+    "id": "seas-league-mobile",
+    "statement": "商盟不靠庞大本族人口与固定领土存续，机构可以分散撤离，拥有住所和法阵不等于统治其所在大陆。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "明尊说明组织形态可回溯，后来撤离未在T0发生。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-46788419",
+        "chapterSha256": "810df5ecba262e8c72b65af05f83a01718cbdd87536338aea01f348783ed188a",
+        "start": 2771,
+        "end": 2964,
+        "anchorSha256": "37c9df33f0bb834d9d48381c6ce13f84aadab5dcc0fd49775a62299f121f95c7"
+      }
+    ]
+  },
+  {
+    "id": "seas-admission-and-schedules",
+    "statement": "跨大陆名额会不定期拍卖，下一次可隔数十到二三百年；介绍与身份可作为入场途径，合体以上可直接参加。日常进入禁地仍验信物、需接引，资格不是免费传送。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "依据血魄经验与实际守卫流程；本次班次和价钱另为原创。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-44143993",
+        "chapterSha256": "30a57443e6d3729842ddbf45f89f2d641859dfda0af02a7d3764fec1110e393a",
+        "start": 1104,
+        "end": 1294,
+        "anchorSha256": "9cfb19beb6075ace19d68f967ff6756c73d681c6662e2162ad60fa9658c1d43e"
+      },
+      {
+        "chapterId": "qq-44143993",
+        "chapterSha256": "30a57443e6d3729842ddbf45f89f2d641859dfda0af02a7d3764fec1110e393a",
+        "start": 1338,
+        "end": 1529,
+        "anchorSha256": "4bdbb7c21a0ea8315af1854e55b098cb7262232fd06b8926cd2d0e505c08141c"
+      },
+      {
+        "chapterId": "qq-44686892",
+        "chapterSha256": "5a9cd37cda84474672df3a2a202ec69eece0e04ae4cbcf90da982dd7b326188d",
+        "start": 1481,
+        "end": 1667,
+        "anchorSha256": "c51e4543943a1708b2263b9e7a3a4e0c6f92ee94e75849cec61d5c3f3729bf13"
+      },
+      {
+        "chapterId": "qq-44710597",
+        "chapterSha256": "a3ff49a05417d55e51196899f471a0d06fbcafc047241f0718531185c1aa2a19",
+        "start": 1668,
+        "end": 1861,
+        "anchorSha256": "c0b3e1a0f761dccb5542d04a5868e6c6b86f1025ef909c97e16243abc0750d5d"
+      }
+    ]
+  },
+  {
+    "id": "seas-fengyuan-headquarters",
+    "statement": "赤融山脉属风元大陆灵地，黑焦峰三峰品字布列；商盟入口玄天门通地下世界，石台接引、石顶光源与林中街区存在，塔中另有拍卖洞天。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "古老设施和地形回溯；不以赤融同名认作飞灵赤融族辖地。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-44648677",
+        "chapterSha256": "e4cd5bcf6f2f9c7375402c2e00e84d8d2de78f4a8aab95864cdbd65373cc7c6c",
+        "start": 2475,
+        "end": 2664,
+        "anchorSha256": "6186c1bd456d71f4224f6b3ac7d4473f2997e7ad0a418b9eeb5bd232a0104601"
+      },
+      {
+        "chapterId": "qq-44686892",
+        "chapterSha256": "5a9cd37cda84474672df3a2a202ec69eece0e04ae4cbcf90da982dd7b326188d",
+        "start": 345,
+        "end": 535,
+        "anchorSha256": "3cd7115560cc8261dbe394cb1a900a76050f3d705c726ea7d241963874abfc94"
+      },
+      {
+        "chapterId": "qq-44710597",
+        "chapterSha256": "a3ff49a05417d55e51196899f471a0d06fbcafc047241f0718531185c1aa2a19",
+        "start": 985,
+        "end": 1175,
+        "anchorSha256": "54393ffcf8fafbbdf51f3a30c8d018b57550b30f904d99e09e3d421f40a96eda"
+      },
+      {
+        "chapterId": "qq-44812589",
+        "chapterSha256": "d8bd4de7d4acff52ba910f1bd73fff1a07d1f52350ab1953e7cf0463290fb04e",
+        "start": 574,
+        "end": 763,
+        "anchorSha256": "e001d0ff694439a7c2af0d13852e26d5a753c3d714acea5819f659fb9f35ba34"
+      }
+    ]
+  },
+  {
+    "id": "seas-league-known-people",
+    "statement": "明尊是风元主事，飞云是其接引属下，雷元为雷鸣主事；胡玉双三尾媚狐、胡老五嫡系后人，后期一年前才来风元，不能把其血天经历改成始终驻风元。当前存活修为居所为明确回溯推定。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "不把后来私下承诺、丧偶或那次拍卖主持变成T0履历。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-44710597",
+        "chapterSha256": "a3ff49a05417d55e51196899f471a0d06fbcafc047241f0718531185c1aa2a19",
+        "start": 251,
+        "end": 441,
+        "anchorSha256": "c84a06cedeb15c5cda923eb10ba884708711eadb6c3cc43a15e00ae4ed4da4eb"
+      },
+      {
+        "chapterId": "qq-45984087",
+        "chapterSha256": "23ae28c3b714c605ec1d69f1d84f6247e5dc5761f9dc37b99e83c54a434e3a7a",
+        "start": 177,
+        "end": 369,
+        "anchorSha256": "217c0d02ebe8eb88c7c99c8506f252cc970e920b50d49ead887ee3ba43e395e1"
+      },
+      {
+        "chapterId": "qq-44812589",
+        "chapterSha256": "d8bd4de7d4acff52ba910f1bd73fff1a07d1f52350ab1953e7cf0463290fb04e",
+        "start": 2360,
+        "end": 2544,
+        "anchorSha256": "687562a6cf60e4ae4a010bc5dcf9c1fdb0f08e1a3bfdcf8662b1b3babc003365"
+      },
+      {
+        "chapterId": "qq-44812589",
+        "chapterSha256": "d8bd4de7d4acff52ba910f1bd73fff1a07d1f52350ab1953e7cf0463290fb04e",
+        "start": 2775,
+        "end": 2961,
+        "anchorSha256": "d85d73506217b161ed2f82d31a217d19084dd3431162d0cc9798ba2fe7a6ea83"
+      },
+      {
+        "chapterId": "qq-44870756",
+        "chapterSha256": "3ca5e5606676565bad01f1b5d034fcaf68751e993d9998c5bd0dcb24c604f12c",
+        "start": 3014,
+        "end": 3202,
+        "anchorSha256": "da249653278ed64d21a4172eaf3a1e922c6c103fa0c71889fd2fd95183886206"
+      }
+    ]
+  },
+  {
+    "id": "seas-league-four-elders",
+    "statement": "商盟四位大乘长老后期共同闭关修一神通，其中清瘦麻衣长老姓贾；四人并非商盟全部大乘。当前四位存活和共同研习为推定，尚未执行后期拍卖警戒。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "保持未具名三位唯一身份，不冒造原著姓名。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-44870756",
+        "chapterSha256": "3ca5e5606676565bad01f1b5d034fcaf68751e993d9998c5bd0dcb24c604f12c",
+        "start": 2888,
+        "end": 3077,
+        "anchorSha256": "05ba02916adf9915af3868288642c1314a97078e76fabf0fce025c04b1480836"
+      },
+      {
+        "chapterId": "qq-44870756",
+        "chapterSha256": "3ca5e5606676565bad01f1b5d034fcaf68751e993d9998c5bd0dcb24c604f12c",
+        "start": 3075,
+        "end": 3231,
+        "anchorSha256": "01eb14c99c132085f6ce750aa2b65d42ae42df4912ee9bcc1358791b0415ea2d"
+      },
+      {
+        "chapterId": "qq-44972348",
+        "chapterSha256": "8b0ebd3c03196256c59829587b619a64afc06e07867ffe1c29b9f1677188c91b",
+        "start": 956,
+        "end": 1137,
+        "anchorSha256": "5a0ef8abd0b3487c8a3c4656d10e10acf80e156b98caf3535898fdde8b4013fa"
+      }
+    ]
+  },
+  {
+    "id": "seas-auction-resources",
+    "statement": "拍卖可要求极品灵石结算，也可对特定拍品允许宝物折算；标价并不自行定义所有级灵石兑换。青蛟冲月剑为十万年前旧物，血罡铁为血天特产；当前保管位置和小规模挂牌原创。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "旧物可在T0存在，未来成交价格不固定为世界价。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-44870756",
+        "chapterSha256": "3ca5e5606676565bad01f1b5d034fcaf68751e993d9998c5bd0dcb24c604f12c",
+        "start": 1354,
+        "end": 1540,
+        "anchorSha256": "4b114a44aedfb48279d28c73c84a3981b8211d25730ed7a2942889eb27cceee0"
+      },
+      {
+        "chapterId": "qq-44870756",
+        "chapterSha256": "3ca5e5606676565bad01f1b5d034fcaf68751e993d9998c5bd0dcb24c604f12c",
+        "start": 1943,
+        "end": 2133,
+        "anchorSha256": "9708f999fe0305bd05b8b71afcb1e291770c165acce3f2c59ef0fb43335534ef"
+      },
+      {
+        "chapterId": "qq-44908911",
+        "chapterSha256": "510a2cd4badd810db78860b686bf5223601646843cdabf9f200aa7662b3393ab",
+        "start": 2352,
+        "end": 2543,
+        "anchorSha256": "dbb7b56c91cffd6aa8c1643d02e5dd7bcdaa2e9caa63d931c34d2c9bc6a7339c"
+      }
+    ]
+  },
+  {
+    "id": "seas-fantianc-identity",
+    "statement": "翻天旗本体阴阳两杆合一才具完整玄天威能，单杆仅通天灵宝层级。后期阴旗无意得手的时点不明，T0两杆均藏于未公开旧处为明确补写，不能直接塞入当前拍卖。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "两杆是同件组合宝的不同部件；独有物不复制。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-44908911",
+        "chapterSha256": "510a2cd4badd810db78860b686bf5223601646843cdabf9f200aa7662b3393ab",
+        "start": 1272,
+        "end": 1461,
+        "anchorSha256": "8de310c3d11c181f758ff5b91129c2d1a4b46fecbfafe2dba6b672e3dfb4078f"
+      },
+      {
+        "chapterId": "qq-44908911",
+        "chapterSha256": "510a2cd4badd810db78860b686bf5223601646843cdabf9f200aa7662b3393ab",
+        "start": 1626,
+        "end": 1823,
+        "anchorSha256": "f499ae1889c6315320b58880d194e9bce150805d9cc873992264c3150482191c"
+      }
+    ]
+  },
+  {
+    "id": "seas-league-service-order",
+    "statement": "商盟存在以香女与侍从接待贵客并将人当作可移交侍役的制度，属于权力和人际处境，不是能改写本人意愿的世界物理规律。T0接待人物全为原创成年人，后期十二人不提前复制。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "只保留非情色的制度事实及个人自主反应，当前成年侍役有真实契约、技能和可争取的去向。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-44710597",
+        "chapterSha256": "a3ff49a05417d55e51196899f471a0d06fbcafc047241f0718531185c1aa2a19",
+        "start": 2897,
+        "end": 3088,
+        "anchorSha256": "c69002dc5f6e0c0e51b128f34ade7ee0a4236ac3c216f7a9efa8d07cef063233"
+      },
+      {
+        "chapterId": "qq-44710597",
+        "chapterSha256": "a3ff49a05417d55e51196899f471a0d06fbcafc047241f0718531185c1aa2a19",
+        "start": 2969,
+        "end": 3155,
+        "anchorSha256": "5221b6222d3a3323d4906f9f47137993adef4d80ce25ee9430e25021332a7d81"
+      }
+    ]
+  },
+  {
+    "id": "seas-thunder-shared-array",
+    "statement": "天云跨大陆阵由晶族、石茧族、多手族、万古族共管，使用消耗大量极品灵石并需多族商议。既有天云阵与本区商盟三端网络是不同资产，不因用途相同合并。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "严格区分授权、收费、物理消耗及多条线路。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-30599319",
+        "chapterSha256": "989c9e23a24013f988c94e44f893627ac1b46f82173eade6759a68f5b850139e",
+        "start": 3015,
+        "end": 3174,
+        "anchorSha256": "64ea3f0f50db6c1f408a09bf4102c0e2d434acefc1aefc32836a39e8e0b23876"
+      },
+      {
+        "chapterId": "qq-30668597",
+        "chapterSha256": "6862228deee234853674d0f0fa7f6b68a0f0402a8d1c0c303c0bba33a5f23ecc",
+        "start": 469,
+        "end": 655,
+        "anchorSha256": "e3d8bf4c6add3286cbd713a0d7a25e8cc3be1681189b67d7e960149d6ff98551"
+      },
+      {
+        "chapterId": "qq-30668597",
+        "chapterSha256": "6862228deee234853674d0f0fa7f6b68a0f0402a8d1c0c303c0bba33a5f23ecc",
+        "start": 517,
+        "end": 707,
+        "anchorSha256": "acd8dd0d66773a6647ffc88e5769a99f5a534fcdbbf0adfaf45a0ede022f5b92"
+      }
+    ]
+  },
+  {
+    "id": "seas-distant-tribes",
+    "statement": "甲豚族为风元大族，禁地有跨洲阵；余族与雷鸣某大族交好及有阵仅为六翼听闻后的推测，当前立族域但不按推测直接生成可靠阵线。素阴族上古以来在雷鸣，后来迁血天未发生。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "甲豚实际阵与余族传闻分层；各族T0地点为必要原创定位。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-46747941",
+        "chapterSha256": "a5b0fdf9f0eaccb1ff02e582af0e844e89af1c51dbedba272558c2cc192cf6b9",
+        "start": 1103,
+        "end": 1291,
+        "anchorSha256": "a92a32269c8107a7d7eace59df82673cbc9bd676d4ae8cf3a3b76f3901e3b415"
+      },
+      {
+        "chapterId": "qq-46747941",
+        "chapterSha256": "a5b0fdf9f0eaccb1ff02e582af0e844e89af1c51dbedba272558c2cc192cf6b9",
+        "start": 1297,
+        "end": 1489,
+        "anchorSha256": "75ab7a98a4681cb534ef80c313249a5ef8d2a9ed1ea7dc5346ed38da400aa920"
+      },
+      {
+        "chapterId": "qq-42870814",
+        "chapterSha256": "c3dd06ea08709afbcbb81de6586625db04a0066a0cdbec4cd634677ece1ea62e",
+        "start": 541,
+        "end": 728,
+        "anchorSha256": "b73b87e7c72e055de685d42e9048b94fe8a64b05f5eb40fdc9acd6af9a8682d1"
+      },
+      {
+        "chapterId": "qq-45918570",
+        "chapterSha256": "ea3d797c83b01f0d0557383281d54e35b6570242f2adcba2f2ef243c7fd7460f",
+        "start": 2956,
+        "end": 3145,
+        "anchorSha256": "289d25633165f632bf0f43aab80b2cc22e8eb98f2ce9fd0d78d2f64fd46b679b"
+      }
+    ]
+  },
+  {
+    "id": "seas-jiaochi-true-spirit-compact",
+    "statement": "角蚩长期供奉蹄龙、泰雀、阳鹿，以古契约从其他空间召来；T0三者仍独立存在，不已被马良斩杀或收服。居所与古契约当下协商条款为明确补写。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "长期供奉与异空间先于后来战事；不能将契约写成无限强召。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-46545241",
+        "chapterSha256": "4c5f63337d36ec5af061e42a84fadb77bc7c297d26d9691e40a741b7ba95677b",
+        "start": 1722,
+        "end": 1910,
+        "anchorSha256": "d7e0051f79742b9381a2c165ff668c71592c41cb64ad0592092b11017b24b699"
+      },
+      {
+        "chapterId": "qq-46545241",
+        "chapterSha256": "4c5f63337d36ec5af061e42a84fadb77bc7c297d26d9691e40a741b7ba95677b",
+        "start": 1743,
+        "end": 1932,
+        "anchorSha256": "dd5787c0f35154ddce650404b0c5555cc5a87d80d6e7102ebe6f05dc0fabc188"
+      }
+    ]
+  },
+  {
+    "id": "seas-helian-black-spirits",
+    "statement": "商盟供奉四头黑猊兽，龙首狮身，能运黑风、瞬移并有强大法体。T0维持古契约而无当次战争召灵阵；其居所和当下供奉数量为原创。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "长期供奉可回溯，未来被当炮灰的方案不成为当前关系既成事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-46788419",
+        "chapterSha256": "810df5ecba262e8c72b65af05f83a01718cbdd87536338aea01f348783ed188a",
+        "start": 2939,
+        "end": 3131,
+        "anchorSha256": "10229572213c1934a304542953ebc09b44d7632a5a9ca6c7fc0cced0511bccef"
+      },
+      {
+        "chapterId": "qq-46966989",
+        "chapterSha256": "8a689bf43d4fc67344c39f8c94e0809bc8498ac11b26acc32832b9bbef091b90",
+        "start": 2234,
+        "end": 2418,
+        "anchorSha256": "897c72650940e502b839dcd853868ba2d7737ad610d79ccd8ef12f8df59eb050"
+      },
+      {
+        "chapterId": "qq-46966989",
+        "chapterSha256": "8a689bf43d4fc67344c39f8c94e0809bc8498ac11b26acc32832b9bbef091b90",
+        "start": 2286,
+        "end": 2476,
+        "anchorSha256": "15d7f430c4efe118ad2e6b03575f832de9fd8ba22fd6cbb9eb51f1d9bbdcd811"
+      },
+      {
+        "chapterId": "qq-46966989",
+        "chapterSha256": "8a689bf43d4fc67344c39f8c94e0809bc8498ac11b26acc32832b9bbef091b90",
+        "start": 2742,
+        "end": 2929,
+        "anchorSha256": "ec810c284fc9c2b90ecf10fc82657a624b3a52e588922568c9de2bf0488e2348"
+      }
+    ]
+  },
+  {
+    "id": "seas-xuanjiuling-shadow",
+    "statement": "商盟影子为轩九灵：连续叙事中承担九劫灭真一击的唯一人物。秘术来自祖上、破真仙身需炼九真灵元神，非随手连发；T0本体存活，当前尚无完整九份炼成储备为明确补写。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "不把未来招募众修、献祭与一击成绩预置。保留本人所学与尚需代价。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-46875789",
+        "chapterSha256": "58106fd037ab45c0b581d1e0a6ae8dcdf74e895f6280a4975a8ea345161468e1",
+        "start": 1416,
+        "end": 1609,
+        "anchorSha256": "90f7d710579d7568971cfc812f3b698bf5b16378540cefb9980d3616d72ffaea"
+      },
+      {
+        "chapterId": "qq-46875789",
+        "chapterSha256": "58106fd037ab45c0b581d1e0a6ae8dcdf74e895f6280a4975a8ea345161468e1",
+        "start": 2939,
+        "end": 3130,
+        "anchorSha256": "6362f6710209c6e7afb37211f87be2d119d7f5bcc862dd298e78e12a3851dca1"
+      },
+      {
+        "chapterId": "qq-46924410",
+        "chapterSha256": "9edf357ad297de163cf50a92d0161b53e1945607447169c0174e9b47a4cf04c9",
+        "start": 107,
+        "end": 294,
+        "anchorSha256": "171056a0866d7d20104f8894701b00f862367ce8c6b700f9df7885b0fd498787"
+      },
+      {
+        "chapterId": "qq-47269026",
+        "chapterSha256": "99bc778ff050277852220d0bb772af96455a4e8f227945f12f096698c378bc08",
+        "start": 182,
+        "end": 371,
+        "anchorSha256": "e0a021ff116ea34d0348f260027b423709846b7a4fbcffec3252c7463fc35a98"
+      }
+    ]
+  },
+  {
+    "id": "seas-dragon-island-place",
+    "statement": "真龙之岛是数界之间独特空间而非灵界普通海岛；经祖辈改造，近半圆岛屿由光幕笼罩，摩柯界邻近，来客验请帖后仍受禁区限制。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "古代地理可回溯，不生成每位玩家自带有效大会请帖。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-41433636",
+        "chapterSha256": "04560b753399007c1b396c52ad128a9ea0991909ceb5d87b8bbf2a78b1dbdf0c",
+        "start": 556,
+        "end": 744,
+        "anchorSha256": "a061c0316e6a3dadba7f17ef9e78d8e9aef581d8915d1af830521168e51b08e4"
+      },
+      {
+        "chapterId": "qq-47791427",
+        "chapterSha256": "aa7fb12083111997f164136fd55eab710089862fe6e658e992ce37be7fd2d869",
+        "start": 865,
+        "end": 1058,
+        "anchorSha256": "0577a2930237a02a0510bf0505d3d8f9380198e412124cf9660d430471b0ad8c"
+      },
+      {
+        "chapterId": "qq-47791427",
+        "chapterSha256": "aa7fb12083111997f164136fd55eab710089862fe6e658e992ce37be7fd2d869",
+        "start": 2167,
+        "end": 2357,
+        "anchorSha256": "406b48e9f2172386353d4fd124df1b00f120288c8c109950a8655e7d06a36b05"
+      },
+      {
+        "chapterId": "qq-47791427",
+        "chapterSha256": "aa7fb12083111997f164136fd55eab710089862fe6e658e992ce37be7fd2d869",
+        "start": 2355,
+        "end": 2539,
+        "anchorSha256": "ae1e0d4797c8b7ff6ce9c872208c6437659168fce5d08f6641afebd82a8d7243"
+      }
+    ]
+  },
+  {
+    "id": "seas-dragon-people",
+    "statement": "樊咆子为真龙，田飞儿与后期黑袍田某为同一女性真龙；金龙大长老为族中长者。真龙有先天真灵身体，成熟需岁月，真灵飞升甚难；T0三位身份与当下居所回溯推定。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "未得到未来韩立的人情或请帖回礼，不把某届执事职永久前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45086060",
+        "chapterSha256": "600c92ee0a123c0bd3d433ba8cb1fe5a7adc2eb4118432fa7ceeb7850ff19ecb",
+        "start": 1004,
+        "end": 1199,
+        "anchorSha256": "daa553b77b128e3e4a1eaeca0e0c1d02f877b14b07404a99435d952034c70b1e"
+      },
+      {
+        "chapterId": "qq-45086060",
+        "chapterSha256": "600c92ee0a123c0bd3d433ba8cb1fe5a7adc2eb4118432fa7ceeb7850ff19ecb",
+        "start": 2853,
+        "end": 3041,
+        "anchorSha256": "8e40c6c32bd6b1b4a0a881a3fa7e203219b05e8540246d536be20da2f8231a9f"
+      },
+      {
+        "chapterId": "qq-47791427",
+        "chapterSha256": "aa7fb12083111997f164136fd55eab710089862fe6e658e992ce37be7fd2d869",
+        "start": 238,
+        "end": 433,
+        "anchorSha256": "0f74dc41e4973932d6fecfd1b7a1e7a65c16d1d8aca2e8fb4e76df545568f8cc"
+      }
+    ]
+  },
+  {
+    "id": "seas-guangling-fruit",
+    "statement": "广灵道果一次服食一枚，可在万年内形成利于修炼参悟的广灵道体，不直接增加对敌战力；七八倍等描述为田飞儿经验说法，非引擎固定万能倍数。往届约千人受邀而百余得果，未来大会不按章节自动召开。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "组织惯例与果物作用分开，当前树、未成熟果数及成熟条件为原创有限标定。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45086060",
+        "chapterSha256": "600c92ee0a123c0bd3d433ba8cb1fe5a7adc2eb4118432fa7ceeb7850ff19ecb",
+        "start": 1624,
+        "end": 1814,
+        "anchorSha256": "8c5f02ae7641c8b2d2554b58c4976a3d5b758cb967f3a7cb577b01b07b0193e1"
+      },
+      {
+        "chapterId": "qq-45086060",
+        "chapterSha256": "600c92ee0a123c0bd3d433ba8cb1fe5a7adc2eb4118432fa7ceeb7850ff19ecb",
+        "start": 1734,
+        "end": 1923,
+        "anchorSha256": "180faf6beec83d1b3bcdea3c750d311a84c949d8218194908e62871c3aedb2e7"
+      },
+      {
+        "chapterId": "qq-45086060",
+        "chapterSha256": "600c92ee0a123c0bd3d433ba8cb1fe5a7adc2eb4118432fa7ceeb7850ff19ecb",
+        "start": 1782,
+        "end": 1974,
+        "anchorSha256": "f7ed87e454d7ebdefdcfc73faba3a16a6661972d5cea49ba1a91a23c3e2b832a"
+      },
+      {
+        "chapterId": "qq-45086060",
+        "chapterSha256": "600c92ee0a123c0bd3d433ba8cb1fe5a7adc2eb4118432fa7ceeb7850ff19ecb",
+        "start": 2172,
+        "end": 2361,
+        "anchorSha256": "924bd364dba09ba4da2bb51eba5e36e5d0b70b4821561e12e8087ca321ddb3f1"
+      }
+    ]
+  },
+  {
+    "id": "seas-dragon-goods",
+    "statement": "龙岛狞马耐力强能虚空行旅，离岛繁衍后裔血脉会渐淡；风灵车用轻灵铜与风灵力。龙人店铺售风精金但库存有限，可发生售罄。当前四匹马、车、材料及经营者均另作明确原创库存。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "不把后期8000斤余货照搬为开篇，更不将车造瞬达两界通道。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-47791427",
+        "chapterSha256": "aa7fb12083111997f164136fd55eab710089862fe6e658e992ce37be7fd2d869",
+        "start": 1127,
+        "end": 1309,
+        "anchorSha256": "c3b982bd70a8079c592ac3ceba42f39c0b0db0b7170613b1171f730c8e18840a"
+      },
+      {
+        "chapterId": "qq-47791427",
+        "chapterSha256": "aa7fb12083111997f164136fd55eab710089862fe6e658e992ce37be7fd2d869",
+        "start": 1354,
+        "end": 1544,
+        "anchorSha256": "549e79e06b2cdf74ecb48dc787063c524f845f21ef5a4208443c270b12bf33d7"
+      },
+      {
+        "chapterId": "qq-47791427",
+        "chapterSha256": "aa7fb12083111997f164136fd55eab710089862fe6e658e992ce37be7fd2d869",
+        "start": 1757,
+        "end": 1945,
+        "anchorSha256": "a4a91227e1a2be964718d8fbd4f6d76f00a41e20c7521be0a6306797a43429ab"
+      },
+      {
+        "chapterId": "qq-47826477",
+        "chapterSha256": "da9025843aab0ba2b401fefc10164fba8bc62f61f7964e1f0342f714f7a30631",
+        "start": 291,
+        "end": 482,
+        "anchorSha256": "9e8cdb14902c4fa31bd50d1dda3b49df3791900cd3d1f06ea884bec17153f0c7"
+      }
+    ]
+  },
+  {
+    "id": "seas-dragon-memory",
+    "statement": "龙族真麟留影可记录飞升劫体验，每片可用三次、仅大长老知仿制术；不同生灵飞升劫仍有差异。T0七片已有记录与一瓶金桑液保管为古老积累回溯推定，不给玩家自动收益。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "后期交易未发生，学习消耗真实次数；不给外族无条件复制能力。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-47872196",
+        "chapterSha256": "1885a94636dcab4762629e1e21c277f2c8b705db731c763b25c35fe4ebb59deb",
+        "start": 619,
+        "end": 805,
+        "anchorSha256": "dfa6f48cd29141c4d96e192f3f3c18c8090a9bbed4c8112ab05e1068a2007d4a"
+      },
+      {
+        "chapterId": "qq-47872196",
+        "chapterSha256": "1885a94636dcab4762629e1e21c277f2c8b705db731c763b25c35fe4ebb59deb",
+        "start": 833,
+        "end": 1023,
+        "anchorSha256": "c5f4eab171dbe8d70fba973ab1ab1c434553b71fd4f8ccc35e4d097eafb32513"
+      },
+      {
+        "chapterId": "qq-47872196",
+        "chapterSha256": "1885a94636dcab4762629e1e21c277f2c8b705db731c763b25c35fe4ebb59deb",
+        "start": 863,
+        "end": 1055,
+        "anchorSha256": "2a4cf6a652004ee3d13d49d0dfaa5a4b78b47e58e21c4c6c9ae848cd356d8600"
+      },
+      {
+        "chapterId": "qq-47872196",
+        "chapterSha256": "1885a94636dcab4762629e1e21c277f2c8b705db731c763b25c35fe4ebb59deb",
+        "start": 989,
+        "end": 1179,
+        "anchorSha256": "08f35e0e267126f420d8affc3dbb32f08b375163d18d675c0d4f6bb5d7a7629d"
+      }
+    ]
+  },
+  {
+    "id": "seas-nightmare-blood",
+    "statement": "后期拍卖所谓祖龙之血实为魇龙之血，混乱之力可污染强行炼化者；田飞儿说只有真龙慢慢提炼且流失大，不等于喝下即飞升。T0降界与拾得时点未知，不生成八滴当前拍品。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "保留后期鉴定事实与风险，不把追索任务和未来物品前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45086060",
+        "chapterSha256": "600c92ee0a123c0bd3d433ba8cb1fe5a7adc2eb4118432fa7ceeb7850ff19ecb",
+        "start": 126,
+        "end": 319,
+        "anchorSha256": "45fb3b44b70a2b5d24474ce8d970923a4115d9f09b5664ae99f97d76f2971587"
+      },
+      {
+        "chapterId": "qq-45086060",
+        "chapterSha256": "600c92ee0a123c0bd3d433ba8cb1fe5a7adc2eb4118432fa7ceeb7850ff19ecb",
+        "start": 522,
+        "end": 716,
+        "anchorSha256": "90ba40dc0c8b0d90a9fb8cbd32cfa6e6c70e0b8205b3574d3d859001f4cba575"
+      },
+      {
+        "chapterId": "qq-45086060",
+        "chapterSha256": "600c92ee0a123c0bd3d433ba8cb1fe5a7adc2eb4118432fa7ceeb7850ff19ecb",
+        "start": 792,
+        "end": 983,
+        "anchorSha256": "4853a9aea382ba7579fc1a25867f2269559873a620cd9dd5e086cafafc687334"
+      }
+    ]
+  },
+  {
+    "id": "seas-seven-orifice-contact",
+    "statement": "七窍心音壁可跨大陆联络，并显著消耗双方施术者灵力；明尊与碧影有相互应答的实证。当前三端配对与精确消耗为原创配置，不能把一枚灵石替代全部本人法力。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "传讯技术可回溯，当前端点和操作配置另有标定。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-44770528",
+        "chapterSha256": "a1d3e77795465f42c37f44190f2b2fa27e6576a54e2444bed6d27d2d2196e250",
+        "start": 2712,
+        "end": 2904,
+        "anchorSha256": "be3241f993dac16c80fdc852fbff59a318b47233ca214ab0c07dbc5dd99222af"
+      }
+    ]
+  },
+  {
+    "id": "seas-ming-blood-oath",
+    "statement": "明尊说自己曾发毒誓此生不踏血天，碧影已经知道；具体原因未知。T0已立此誓为明确回溯推定，不让工作人员知道未公开原因。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "已有誓约回溯，未推定具体发誓年月和缘由。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-44770528",
+        "chapterSha256": "a1d3e77795465f42c37f44190f2b2fa27e6576a54e2444bed6d27d2d2196e250",
+        "start": 1535,
+        "end": 1722,
+        "anchorSha256": "e0aebf7454d665d0fe1acf9e555358fced302ec94a686a817dda1c868bf6775d"
+      }
+    ]
+  },
+  {
+    "id": "seas-wuya-sea-route",
+    "statement": "无涯海为风元相关海域，后来行舟从海上经蛮荒赴飞灵，路线需多年行程；不能将直线连接当即时移动，也不把后期韩立居所前置。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "天然海域早于开篇，既有地理与后来行动分离。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-44143993",
+        "chapterSha256": "30a57443e6d3729842ddbf45f89f2d641859dfda0af02a7d3764fec1110e393a",
+        "start": 522,
+        "end": 710,
+        "anchorSha256": "70eea146789f5cb75d22b14b0965df60426e3f9dbf4dd610ac49a737e4955ada"
+      },
+      {
+        "chapterId": "qq-44143993",
+        "chapterSha256": "30a57443e6d3729842ddbf45f89f2d641859dfda0af02a7d3764fec1110e393a",
+        "start": 608,
+        "end": 802,
+        "anchorSha256": "77abcbcb72afe98a64a8135cfb808c736ee674469996ddb480fd847c42aafa7c"
+      }
+    ]
+  },
+  {
+    "id": "seas-other-realms-visitors",
+    "statement": "丰月真君来自阎都界、天雀子来自玄未界、般若散人来自灵罗界，后期大会资料载其数万年修行；仅作为跨界历史与外部对象，不生成常驻开篇灵界的三个人。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "身份资料有叙述上下文，未把未来赴会变成当前邀请。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-47872196",
+        "chapterSha256": "1885a94636dcab4762629e1e21c277f2c8b705db731c763b25c35fe4ebb59deb",
+        "start": 2468,
+        "end": 2660,
+        "anchorSha256": "ef19a6538663a44decb9f993bd5e001648b83e9cfac481dbb7b0cbeed8d8f8e6"
+      },
+      {
+        "chapterId": "qq-47872196",
+        "chapterSha256": "1885a94636dcab4762629e1e21c277f2c8b705db731c763b25c35fe4ebb59deb",
+        "start": 2498,
+        "end": 2689,
+        "anchorSha256": "05c0c23272c4f2c3fbf21564321f38c8248ba9636464b1b3e5d6bbfa38ce3ea6"
+      },
+      {
+        "chapterId": "qq-47872196",
+        "chapterSha256": "1885a94636dcab4762629e1e21c277f2c8b705db731c763b25c35fe4ebb59deb",
+        "start": 2552,
+        "end": 2744,
+        "anchorSha256": "81c1e66c0cf78010ef7f6fcc895416c027f531334a127d6233cad2b0842e759d"
+      }
+    ]
+  }
+]

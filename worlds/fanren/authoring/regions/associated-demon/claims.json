@@ -1,0 +1,864 @@
+[
+  {
+    "id": "ad-opening-life",
+    "statement": "精确驻地、当前值守、普通居民、物资、文书、道路分段与自主生活为明确原创。魔界是解释并接通两界所需关联范围，不扩展仙界可探索地图。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "作者确定开篇状态；人物仅由自身生活、现有典籍或实际文书获知。",
+    "openingReason": "在已证地理历史之间建立真实可操作的有限状态。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "ad-finite-values",
+    "statement": "精确开篇库存、魔石报价、法力、魂力、仙灵储备、种植阶段与行程均为明确标定；一共同日86400秒，本区文书直接写共同日，未假称原著魔界昼夜倍数已核。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者确定开篇状态；人物仅由自身生活、现有典籍或实际文书获知。",
+    "openingReason": "对当前资源逐项记账，不将某角色后期报价变成统一兑换或固定概率。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "ad-ancient-seal-history",
+    "statement": "何康回述：两巡查仙使下界战螟母时遇星空巨变，界面之力剧增，两人自爆身躯重创虫母，再附魔族建封印；尝试回归失败后藏入八元锁魂阵。此为亲历者陈述，不赋普通魔族全知。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "上古历史早于开篇，仙人完整躯体并未在T0重建。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-42541812",
+        "chapterSha256": "12b0a6e7ac1bb9f8facdee1ce6c0474de8109ee04f43624ff42186fcbd7730b0",
+        "start": 1811,
+        "end": 1998,
+        "anchorSha256": "4b6f9f393e92f03377108dec7b2a335f4e1c79a45a9eede8de214daf33c8837b"
+      },
+      {
+        "chapterId": "qq-42541812",
+        "chapterSha256": "12b0a6e7ac1bb9f8facdee1ce6c0474de8109ee04f43624ff42186fcbd7730b0",
+        "start": 2001,
+        "end": 2197,
+        "anchorSha256": "d35853bd851cd1cb8e36da6bab6c42436a1ce25e45e0acfaee7b1a14c2a99725"
+      },
+      {
+        "chapterId": "qq-42507101",
+        "chapterSha256": "344640c5f781d4ab858655d5629fc1a70ba8a2c42679d13ee107d8eed5e6ed9c",
+        "start": 654,
+        "end": 840,
+        "anchorSha256": "e9c76a541465a471936e9c4af48aebcd4ca7c64163eb7818733d34b799e8d458"
+      }
+    ]
+  },
+  {
+    "id": "ad-seal-soul-identities",
+    "statement": "何康被女同伴封入黑檀钵；女同伴携玉清灯油接近螟母。后期实见女童状螟母元神与古骨壳争执、被晶核吞入，银纱女子称刚完整吞噬虫母元神。T0虫母元神与女巡查仙残魂仍独立，古骨壳只一具，不能将后来的融合提前。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "古代女仙原身已自爆，残魂寄占骨壳的精确开篇位置作保守推定；完整吞噬与重组血肉属于未来条件事件。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-42541812",
+        "chapterSha256": "12b0a6e7ac1bb9f8facdee1ce6c0474de8109ee04f43624ff42186fcbd7730b0",
+        "start": 2212,
+        "end": 2403,
+        "anchorSha256": "f175a23c79a0fbc1927359d6a21c0b57d06a502bd1e6afae00f8a31d1f3ab523"
+      },
+      {
+        "chapterId": "qq-42541812",
+        "chapterSha256": "12b0a6e7ac1bb9f8facdee1ce6c0474de8109ee04f43624ff42186fcbd7730b0",
+        "start": 2280,
+        "end": 2483,
+        "anchorSha256": "66cdbbebbe733aa7fffa3f8dc6fcefb3b147f3d4302f241f0f95118860ec88e9"
+      },
+      {
+        "chapterId": "qq-42322467",
+        "chapterSha256": "2bf4ce78f16f4c9dd9aa99cbbbf8e4d0e5d04660257bf1cf4052b78cdaa38192",
+        "start": 956,
+        "end": 1160,
+        "anchorSha256": "c3d86aa4510e0ceb01e7c4f35db054453615053c4c31bc7ce444ea2c93ad8a74"
+      },
+      {
+        "chapterId": "qq-42322467",
+        "chapterSha256": "2bf4ce78f16f4c9dd9aa99cbbbf8e4d0e5d04660257bf1cf4052b78cdaa38192",
+        "start": 2320,
+        "end": 2514,
+        "anchorSha256": "d6fb69a1781a57cb106b7f2d69e32944ef8502a2d10ac57fc32ce2e54e86d4eb"
+      },
+      {
+        "chapterId": "qq-42355955",
+        "chapterSha256": "4fdb44fc6c4446d6a7bab8d7af5f758735384f9a15f21e6cc42bea1bd5f5aed6",
+        "start": 3056,
+        "end": 3228,
+        "anchorSha256": "2f0e5a5a8c061336ff416799a80d19565c12d83ef49f0ee61e7a1f9edcfaf40e"
+      },
+      {
+        "chapterId": "qq-42372406",
+        "chapterSha256": "e31bcc028395e97dac7aaf46a3b10be8fde5fe7b3b7265f32084e48626f207fa",
+        "start": 434,
+        "end": 622,
+        "anchorSha256": "eff5a7be8da68d0e224ea46d72c16f1327fb4e6af5e2306b536b50c580e22093"
+      }
+    ]
+  },
+  {
+    "id": "ad-yuan-cha-body-and-fragment",
+    "statement": "元刹本体与上古降人界的分魂不同；其本体在魔界存活，后期与化身分别行动。T0不写入追杀韩立的后期因果，本体与人界分魂不能重复生成两个完整元刹。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "上古分魂事件与后期本体连续存在可回溯；当前闭关地点和私人事务另为原创。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-26192303",
+        "chapterSha256": "3f48017911245abf59149c21029cd456f6c973f49791899d1ea5b9f53e84ad1f",
+        "start": 1969,
+        "end": 2166,
+        "anchorSha256": "c5d6970633a0a7eadae961c5324fdd38edc8d5ee67c0ff2873aefb2ecfe2b566"
+      },
+      {
+        "chapterId": "qq-35586777",
+        "chapterSha256": "9542c9be73be4da8dbb5c7f03d193c66ddf5bdd82b49cb84fd0a03ca76c29a17",
+        "start": 47,
+        "end": 244,
+        "anchorSha256": "fa2022cee8ee4e039accb12becc982c6a5dc11b489f8c41281150c960734eb00"
+      }
+    ]
+  },
+  {
+    "id": "ad-second-waking-before-t0",
+    "statement": "元魇明确第二次苏醒在六千年前，涅槃以三涅变身与虫母两败俱伤；涅槃收回化身、本体半休眠，虫母同样暂眠。T0保留伤后静养、封印仍在与子虫局部冲隙，不前置后来封印反控、大乘被困或全界虫海。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "六千年明显早于韩立开篇，精确复苏程度与当下值守另外标定。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-39409975",
+        "chapterSha256": "937441b18ffe1702bc3238f101116c7332e7632beccfb45ce206019161c1ebb9",
+        "start": 906,
+        "end": 1092,
+        "anchorSha256": "e894dd27228ce4fd2ad354a8d8685b1a1ba806e8af0721648c0700875edd853c"
+      },
+      {
+        "chapterId": "qq-39409975",
+        "chapterSha256": "937441b18ffe1702bc3238f101116c7332e7632beccfb45ce206019161c1ebb9",
+        "start": 1086,
+        "end": 1272,
+        "anchorSha256": "2b9c39d83ccdce3a1dd6af20751c230571d26af1cd667ddb096d85e36add164e"
+      },
+      {
+        "chapterId": "qq-39409975",
+        "chapterSha256": "937441b18ffe1702bc3238f101116c7332e7632beccfb45ce206019161c1ebb9",
+        "start": 1231,
+        "end": 1427,
+        "anchorSha256": "b5292112f3fcbfedc0cf3fafe72a6f17d62df1274697902fa7ff955abdcb3fa1"
+      },
+      {
+        "chapterId": "qq-39532288",
+        "chapterSha256": "2c066014029d1636652665574dc38d8b6a0efb149dfee65448a7d9a32640a9c4",
+        "start": 39,
+        "end": 226,
+        "anchorSha256": "bd0bdab6e10c0b3a0c94828167a965501e2623a6a75be3a42c324486aab92494"
+      }
+    ]
+  },
+  {
+    "id": "ad-demon-political-motives",
+    "statement": "宝花被六极和元魇暗算失位，元魇所施梦魇血咒为既有伤因；三始祖考虑封印危机下的备选迁界计划。T0六极、元魇、涅槃在位为回溯，具体开战与侵占方案未自动执行。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "古代政变与长期对策可回溯，正文后期战争不能成为开篇定时结局。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-39293417",
+        "chapterSha256": "1c74ba0561e8166348cc8a278a29d84cce07e67fdcd6f3e6e071ce4f34511d29",
+        "start": 1464,
+        "end": 1656,
+        "anchorSha256": "84d6e185c18c18e8c50eda3aa0ceaea0c9b40f04b9631f9f43dfef1db1b23343"
+      },
+      {
+        "chapterId": "qq-39392631",
+        "chapterSha256": "1f7456dd8f567b95149d35d8dec4d378b0ce241f71df761f3095ee53ebb821b6",
+        "start": 2804,
+        "end": 2993,
+        "anchorSha256": "a6566ae7b31a8525cad1714b745122e2cfb8799bb2e34972b4ae35579a07a14b"
+      },
+      {
+        "chapterId": "qq-39409975",
+        "chapterSha256": "937441b18ffe1702bc3238f101116c7332e7632beccfb45ce206019161c1ebb9",
+        "start": 1704,
+        "end": 1898,
+        "anchorSha256": "bd8d626b4bf75dfd910cd325efdb7d3dd7733dc40d7cb96dcde7b7876e668643"
+      }
+    ]
+  },
+  {
+    "id": "ad-kuling-watch",
+    "statement": "灵王认识元魇数万年；灭情、无常曾守苦灵岛，后期元魇说近千年改由自己监看。T0安排灭情、无常值守、元魇保留上级协调为明确保守推定，不能由“近千年”直接断定共同开篇已换任。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "缺少将近千年换任换算到韩立十岁当天的精确断代，采用已证旧任并标明推定。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-39167630",
+        "chapterSha256": "490095d9a1f18c71a3cddccbec6da80d187ab68b801696e1fb570de156145f67",
+        "start": 1624,
+        "end": 1818,
+        "anchorSha256": "39e674cffea4fb24c536c4d2564986579029931b3b7bac3de5cb664012893189"
+      },
+      {
+        "chapterId": "qq-39167630",
+        "chapterSha256": "490095d9a1f18c71a3cddccbec6da80d187ab68b801696e1fb570de156145f67",
+        "start": 1795,
+        "end": 1984,
+        "anchorSha256": "de14ade923a7218906b0ead5dda98824ae5dafc53eb7892e3140b4880fb1acb8"
+      },
+      {
+        "chapterId": "qq-39167630",
+        "chapterSha256": "490095d9a1f18c71a3cddccbec6da80d187ab68b801696e1fb570de156145f67",
+        "start": 2168,
+        "end": 2352,
+        "anchorSha256": "f2cb1b62662bf113777570eaaeafa2451c5d0bd264a32030a80d9d331d619491"
+      }
+    ]
+  },
+  {
+    "id": "ad-demon-geography",
+    "statement": "血石山脉、冲月大平原、第五魔河与西行荒地为通往魔源海的不同路线；魔源海在魔界最东，城市传送需穿行受管区域，海路多海兽，幻啸沙漠需长期行路。角色对年数的估计不作任何出身固定瞬达时钟。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "天然地理和长久交通存在早于开篇，后期队伍与战时通道未前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-37028345",
+        "chapterSha256": "7758d72f2db199a731303ad4623527f43c697ee059eb2b6f386634dda72411a3",
+        "start": 610,
+        "end": 798,
+        "anchorSha256": "8c9fe5fd36ee6ea8db4f3181c29d54c664ee18c8ac3d6cff16d7131edfe54892"
+      },
+      {
+        "chapterId": "qq-37028345",
+        "chapterSha256": "7758d72f2db199a731303ad4623527f43c697ee059eb2b6f386634dda72411a3",
+        "start": 956,
+        "end": 1141,
+        "anchorSha256": "8c1cf54f41531b7fbc3ee2e4b5f4526642dc25a55ff846ea1143f69f7699b9dc"
+      },
+      {
+        "chapterId": "qq-37028345",
+        "chapterSha256": "7758d72f2db199a731303ad4623527f43c697ee059eb2b6f386634dda72411a3",
+        "start": 1352,
+        "end": 1536,
+        "anchorSha256": "6a46928e8bc0981032dddc7ccabead0c56ac3132e96b80b2512a398624ecf032"
+      },
+      {
+        "chapterId": "qq-37028345",
+        "chapterSha256": "7758d72f2db199a731303ad4623527f43c697ee059eb2b6f386634dda72411a3",
+        "start": 1721,
+        "end": 1905,
+        "anchorSha256": "1eb1fca05f3eba95b395f646331133c67dd5a034a04273deb56fdf29ff77c756"
+      }
+    ]
+  },
+  {
+    "id": "ad-huanxiao-travel",
+    "statement": "幻啸沙漠强压法力且常规遁术/宝物受限；并非绝对不能离地，正文实际可高耗低空缓飞。八足魔蜥适应沙漠、行动快但稀少，不把普通灵兽一律替代；三害为落魂风、地湮沙与幻啸魔狼。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "地区规则须包含实际例外，传闻中的“任何遁术不能用”不盖过实见。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-37028345",
+        "chapterSha256": "7758d72f2db199a731303ad4623527f43c697ee059eb2b6f386634dda72411a3",
+        "start": 1864,
+        "end": 2052,
+        "anchorSha256": "2f1443a7ccbd39ce4d924a0dddb7d3d6bc21f06acdf6c64b51a201b1f6463093"
+      },
+      {
+        "chapterId": "qq-38352557",
+        "chapterSha256": "f457ba90ca847610dc223224dfeea52f4536b5020709dbfb5eb69bd1ee5b954a",
+        "start": 1459,
+        "end": 1645,
+        "anchorSha256": "8fae74187547d0c8c20bff67a43eabf3c42081b6e30e768261dfef1f4348d68a"
+      },
+      {
+        "chapterId": "qq-37045606",
+        "chapterSha256": "e44eaf9d2a04284b46d315fea4f09cef61df4a2daa8ba11b25d9f68d3439c145",
+        "start": 120,
+        "end": 310,
+        "anchorSha256": "73353fce8781a19a2f3234b2043409609f61c0975ed5cc16a59da85ade3aa6ea"
+      },
+      {
+        "chapterId": "qq-38323649",
+        "chapterSha256": "fa8d42d0607f5a6b624f7d0795e4df46243b4ad351f02d8e26b5d403eae1d8ad",
+        "start": 0,
+        "end": 173,
+        "anchorSha256": "1ab39a49da2fd801159d0dc69f9df067fee7f0a9700b9cfbbe31793b98d9f651"
+      }
+    ]
+  },
+  {
+    "id": "ad-moyuan-environment",
+    "statement": "魔源海魔气浓却混杂混乱之气，雷电使长时间飞遁消耗巨大；并非物理上无法飞行。魔猿礁形似举臂巨猿，岛外雷海与黄金蟹相连。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "自然地形及古傀儡长期存在；现有小船与海岸工作明确原创。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-38959052",
+        "chapterSha256": "19bf204c2366d85a235c4b9f816cea9cf87c8f555f62dc765d95b1d7b02f732b",
+        "start": 84,
+        "end": 273,
+        "anchorSha256": "5996ac801f0f9978910ad916933e6ebdc1142cabecad403de7f1947be9077dfc"
+      },
+      {
+        "chapterId": "qq-38959052",
+        "chapterSha256": "19bf204c2366d85a235c4b9f816cea9cf87c8f555f62dc765d95b1d7b02f732b",
+        "start": 411,
+        "end": 602,
+        "anchorSha256": "526708e3d8c78529331d903c1d5291106cfbbf3230e0523edd819d6647eedc58"
+      },
+      {
+        "chapterId": "qq-38959052",
+        "chapterSha256": "19bf204c2366d85a235c4b9f816cea9cf87c8f555f62dc765d95b1d7b02f732b",
+        "start": 3084,
+        "end": 3219,
+        "anchorSha256": "70bbea09163e213d0a635db70a937d52456a7a811dbaaf54f832089e30dcd1c8"
+      },
+      {
+        "chapterId": "qq-39012789",
+        "chapterSha256": "4e47cc099f28f2e314a72e309f3404d426e0065013ec1ecd763ed239b7d13769",
+        "start": 0,
+        "end": 138,
+        "anchorSha256": "faa5203d1c2d4b5796461ef1935588a55b856358519721aed9e401e90c5459c6"
+      }
+    ]
+  },
+  {
+    "id": "ad-wash-space",
+    "statement": "困灵谷阵是洗灵池小空间入口；空间精纯灵气会排斥生灵，修为越高排斥越强，魔族无法进入。韩立当时至多三天为具体个案，不将三天设为所有角色统一寿限。岛上灵气压制魔修，也影响外界魔气补充。实见池水一离开池塘便失效，不能普通瓶装带走。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "已证空间规则可回溯，按个体能力和进入状态核算。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-39392631",
+        "chapterSha256": "1f7456dd8f567b95149d35d8dec4d378b0ce241f71df761f3095ee53ebb821b6",
+        "start": 1445,
+        "end": 1637,
+        "anchorSha256": "f8b7ffd7870a19d12bf1c38b5e5cd82e8f1408ca97cb16feb3c7e57e7421b403"
+      },
+      {
+        "chapterId": "qq-39392631",
+        "chapterSha256": "1f7456dd8f567b95149d35d8dec4d378b0ce241f71df761f3095ee53ebb821b6",
+        "start": 1571,
+        "end": 1764,
+        "anchorSha256": "bfe051991b26eac0ac180f89b8d657003319041badbfe432ab04fe906d9a103c"
+      },
+      {
+        "chapterId": "qq-39392631",
+        "chapterSha256": "1f7456dd8f567b95149d35d8dec4d378b0ce241f71df761f3095ee53ebb821b6",
+        "start": 1780,
+        "end": 1974,
+        "anchorSha256": "e2d8bd8638cae5ec1c51e31eeb3b597faec5052ace9a021f810ac5c929eeeae2"
+      },
+      {
+        "chapterId": "qq-39167630",
+        "chapterSha256": "490095d9a1f18c71a3cddccbec6da80d187ab68b801696e1fb570de156145f67",
+        "start": 727,
+        "end": 923,
+        "anchorSha256": "e07692595c0d645a11b5dc50fba163dee6d24b9cd59781fca76c011551b6f91e"
+      },
+      {
+        "chapterId": "qq-39467721",
+        "chapterSha256": "85191627334d5b452a52891fd11fa789fd999aca86ce642291713a2a217b987a",
+        "start": 2566,
+        "end": 2753,
+        "anchorSha256": "5e9be7e2e21d0f01ae0f8d99835e18227f0ffebd564952b30ff877a3b697c6fc"
+      }
+    ]
+  },
+  {
+    "id": "ad-lotus-growth",
+    "statement": "净灵莲仅洗灵池中诞生，未开花变色效用小；开花可持续千年，未采会归灵气，重开待数千年。池水强压并隔绝深入神识，普通种子可能自爆。T0七株阶段和开花一株是另作标定，不照搬后期具体花期。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "物种机制来自已读正文；原段七株与分阶段加总六株有数量内部歧义，T0明确另配七株。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-39423089",
+        "chapterSha256": "e1e451bcaffb521c70d86faa8b0b383391e4642ca06905a5f0fbd153142591fa",
+        "start": 1153,
+        "end": 1343,
+        "anchorSha256": "f1b2eb78360f89329de5ef0f1079879a63dea3c7cad30a06e1097b8a70d78d57"
+      },
+      {
+        "chapterId": "qq-39423089",
+        "chapterSha256": "e1e451bcaffb521c70d86faa8b0b383391e4642ca06905a5f0fbd153142591fa",
+        "start": 1204,
+        "end": 1395,
+        "anchorSha256": "e7da4db3584eeeae134192174413b6653943c361256699a17d71a4eb00db76f2"
+      },
+      {
+        "chapterId": "qq-39423089",
+        "chapterSha256": "e1e451bcaffb521c70d86faa8b0b383391e4642ca06905a5f0fbd153142591fa",
+        "start": 1539,
+        "end": 1731,
+        "anchorSha256": "870532150df23a99ab95212ca48f9c0137e26d63cbf239d6782706ef48f4d234"
+      },
+      {
+        "chapterId": "qq-39409975",
+        "chapterSha256": "937441b18ffe1702bc3238f101116c7332e7632beccfb45ce206019161c1ebb9",
+        "start": 2609,
+        "end": 2799,
+        "anchorSha256": "893d387f8b99e643ac52ddb19e5306cac4d1dd32e9ec7e06bdbf749049b22bd9"
+      }
+    ]
+  },
+  {
+    "id": "ad-wash-benefit-risk",
+    "statement": "洗灵池改造血肉骨骼，净灵莲需配合洗髓服用，效力霸道；并非直接保证大乘。宝花称既往成功不足一成、失败后无后续进阶记录是其经验说法；她给的太虚妙灵丹等风险缓解方法也有条件，不成为无条件成功公式。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "角色经验有适用边界，实际身体能力、资源、功法与隐患共同判定。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-39365324",
+        "chapterSha256": "d7c7e0cba88abe221f95eb871519f7499896abc1410e79be89d1bc345a18c03a",
+        "start": 327,
+        "end": 512,
+        "anchorSha256": "4e884ae943e0df3e83d0249ed7536faa7ca03da6b6f1aecdb8f8ccdf3816cc4a"
+      },
+      {
+        "chapterId": "qq-39365324",
+        "chapterSha256": "d7c7e0cba88abe221f95eb871519f7499896abc1410e79be89d1bc345a18c03a",
+        "start": 550,
+        "end": 744,
+        "anchorSha256": "25cd6f1fac3052dd846a6d51504c270066c07e643d1486ee4bf21ffc5b6bac8f"
+      },
+      {
+        "chapterId": "qq-39365324",
+        "chapterSha256": "d7c7e0cba88abe221f95eb871519f7499896abc1410e79be89d1bc345a18c03a",
+        "start": 2454,
+        "end": 2641,
+        "anchorSha256": "7df6c48e9babf46da2ed40860d9c1d7fbcc5a43896c289be2b29649727903091"
+      },
+      {
+        "chapterId": "qq-39449957",
+        "chapterSha256": "fcba140be73e750bb1f103167165f474d50c4af8f5a6a1d05f6b2a785f43f0e9",
+        "start": 344,
+        "end": 533,
+        "anchorSha256": "f4eb67c9ac3b181a312aeaf6f2dca6614655a6d607994f0f2e0528158f33780b"
+      },
+      {
+        "chapterId": "qq-39449957",
+        "chapterSha256": "fcba140be73e750bb1f103167165f474d50c4af8f5a6a1d05f6b2a785f43f0e9",
+        "start": 1098,
+        "end": 1283,
+        "anchorSha256": "0803bcfe9f7302c336511fdf409c4b2b64fe53ba713d846c0af0afc09e581a63"
+      }
+    ]
+  },
+  {
+    "id": "ad-bottle-spirit",
+    "statement": "池底黄色小瓶为掌天瓶脱离的瓶灵，青绿瓶躯壳与瓶灵是分离部件/灵性主体，不是两件完整掌天瓶。其遁入魔界发生在仙人坠下界时，岛方长期守卫也不知道。开篇不将瓶灵或操控诀送给韩立。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "后期搜魂与实际重逢确证先前分离，恢复过程后期未公开，不补造通用收服法。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-47634426",
+        "chapterSha256": "40faa4dedc84d41342ad161d2d880f7c2707b67832b4fdde7edf85ec7f0a1e4b",
+        "start": 2231,
+        "end": 2422,
+        "anchorSha256": "8e045e6d715d186222b86b8d328709537dce08499ee869ed99f242c0ce15a897"
+      },
+      {
+        "chapterId": "qq-47634426",
+        "chapterSha256": "40faa4dedc84d41342ad161d2d880f7c2707b67832b4fdde7edf85ec7f0a1e4b",
+        "start": 2505,
+        "end": 2702,
+        "anchorSha256": "b08c8bb474d664109bd73bca879b805327dbe048b1b6659803d34e8e3afb62dd"
+      },
+      {
+        "chapterId": "qq-47715676",
+        "chapterSha256": "68f86968276cfb35c78d4d7ff51eb7bb91049d1ea8d8f644c13dc6713fc06468",
+        "start": 1847,
+        "end": 2038,
+        "anchorSha256": "6fbfe59efbaacb94c6de5c0c28e5488129cb2040687345c38cc41639d7701e4a"
+      },
+      {
+        "chapterId": "qq-47715676",
+        "chapterSha256": "68f86968276cfb35c78d4d7ff51eb7bb91049d1ea8d8f644c13dc6713fc06468",
+        "start": 1170,
+        "end": 1366,
+        "anchorSha256": "9a3ef1e92e819f52211f70b23a1814e975cdc8b65d4acff948f74cec6d69538f"
+      },
+      {
+        "chapterId": "qq-39485616",
+        "chapterSha256": "19d101c5f7a3350c4903a2fc75ff9f5ae80d8c12fee9666507fcda60065ad1ac",
+        "start": 2459,
+        "end": 2650,
+        "anchorSha256": "17213ec14fd18a654a32eea6e61aadfa6be117cba046e1fb54c83ab04cc775fd"
+      }
+    ]
+  },
+  {
+    "id": "ad-pseudo-immortal-crab",
+    "statement": "黄金蟹是上界伪仙儡、旧主已陨，自生灵性；睡在当地节能，移动和出手需仙灵力，供物一半留作报酬，转化部件受损。三分之一效力伪露支持两全力击，半效露支持有限自由行动，都是特定供物效果；没有供物不能凭愿望无限战斗。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "黄金蟹在天泣鹤颜出世前已在雷海，足以回溯T0；后期月供韩立关系未发生。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-39590639",
+        "chapterSha256": "e64ed23f620f6557da625f629bec210a288b724d763aee5cfc006721d4bf2fa4",
+        "start": 796,
+        "end": 989,
+        "anchorSha256": "cf1ee3d66fdc0124f7f9bc1fec9df8def1f256880332a2f7dc18de1380a2a453"
+      },
+      {
+        "chapterId": "qq-39590639",
+        "chapterSha256": "e64ed23f620f6557da625f629bec210a288b724d763aee5cfc006721d4bf2fa4",
+        "start": 650,
+        "end": 838,
+        "anchorSha256": "2f1dc888388f7c3fb7b3028232c655d4b2549b897f91496b9bba04d4e48a7f05"
+      },
+      {
+        "chapterId": "qq-39590639",
+        "chapterSha256": "e64ed23f620f6557da625f629bec210a288b724d763aee5cfc006721d4bf2fa4",
+        "start": 1448,
+        "end": 1635,
+        "anchorSha256": "f41ac1d281ac949e591ccf471e5603571eb4193bc1e94c5498fa3afab20ab5cc"
+      },
+      {
+        "chapterId": "qq-39532288",
+        "chapterSha256": "2c066014029d1636652665574dc38d8b6a0efb149dfee65448a7d9a32640a9c4",
+        "start": 2858,
+        "end": 3047,
+        "anchorSha256": "024dba76166c3d6baf83e8c42cc4614cad89280047621372e3207924ff9ef651"
+      },
+      {
+        "chapterId": "qq-39604046",
+        "chapterSha256": "f7e2a3d94968f52a98e36388f9de57b7eebf7607aaf0268e92ecdc679dcad91b",
+        "start": 1823,
+        "end": 2015,
+        "anchorSha256": "8c9ceed009befa0d5b3ec45996f9043f33650f48cf08f557f2e36cdfc719cd3b"
+      }
+    ]
+  },
+  {
+    "id": "ad-he-kang-resources",
+    "statement": "何康自留玉清灯油延续魂念，黑檀钵内可经阵有限探知，有天罚雷攻击代价与可传仙界的单件宝符；宝符需远超一般大乘神念，普通来客不能一句求救激活。金阳木钗、紫芸之精是他既有物，不预赠未来角色。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "古物与受困主体先于开篇；魂力存量、初始自由程度明确标定。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-42541812",
+        "chapterSha256": "12b0a6e7ac1bb9f8facdee1ce6c0474de8109ee04f43624ff42186fcbd7730b0",
+        "start": 2363,
+        "end": 2554,
+        "anchorSha256": "9e5f46a0e1aa4222e628ee76446cf88449226398d0c15ab502d8fe6d43a94f84"
+      },
+      {
+        "chapterId": "qq-42489764",
+        "chapterSha256": "72c0fdea1db39289cac4d0288191b178d5c403e91f1d6472c689d34bea704f97",
+        "start": 1157,
+        "end": 1351,
+        "anchorSha256": "f23e6c9d62739f4cb4f41c8537d83e434420c315e9cac119c4948f10827e6d4a"
+      },
+      {
+        "chapterId": "qq-42541812",
+        "chapterSha256": "12b0a6e7ac1bb9f8facdee1ce6c0474de8109ee04f43624ff42186fcbd7730b0",
+        "start": 2672,
+        "end": 2861,
+        "anchorSha256": "44cbbc467c87a337daa6a630e5bff75e4b5b23faa1eee4e332d3ed033cb419c2"
+      },
+      {
+        "chapterId": "qq-42507101",
+        "chapterSha256": "344640c5f781d4ab858655d5629fc1a70ba8a2c42679d13ee107d8eed5e6ed9c",
+        "start": 1132,
+        "end": 1317,
+        "anchorSha256": "5a0c3efe79d1063d62e415b3c63b8f28584300fa9ab206b43da27cdaebff749c"
+      },
+      {
+        "chapterId": "qq-42560110",
+        "chapterSha256": "c984a8239ecb5161b5d1a817a12fba83d5b7c70842b29f3809aa04c329995ca4",
+        "start": 1130,
+        "end": 1323,
+        "anchorSha256": "acf17d5dcd1a6910c7bbbfcfd78b237d19e1ef04c9c3eece43755a0d4e8b104f"
+      }
+    ]
+  },
+  {
+    "id": "ad-yuan-yan-souls",
+    "statement": "元魇梦魇大法有七大滴血元神，主元神损失可由其他转主，但需重修并增加天魔劫风险。三首黑蛟是本命灵兽，同具邪龙血脉；本区生成一主体与六储备魂锚，不制造七个独立全知元魇。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "已有术法与灵兽回溯；各魂锚精确秘密位置为原创，不获黑鳄后期印记。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-39293417",
+        "chapterSha256": "1c74ba0561e8166348cc8a278a29d84cce07e67fdcd6f3e6e071ce4f34511d29",
+        "start": 1575,
+        "end": 1763,
+        "anchorSha256": "09fae2950e2d89629aa26878e5126f5ad2530d1a6beb907e0c96a90c782bc992"
+      },
+      {
+        "chapterId": "qq-39293417",
+        "chapterSha256": "1c74ba0561e8166348cc8a278a29d84cce07e67fdcd6f3e6e071ce4f34511d29",
+        "start": 1724,
+        "end": 1911,
+        "anchorSha256": "69266af8e414570d52735b3f70101f61b6ffbc3e8846828631650bfd61a60885"
+      },
+      {
+        "chapterId": "qq-39604046",
+        "chapterSha256": "f7e2a3d94968f52a98e36388f9de57b7eebf7607aaf0268e92ecdc679dcad91b",
+        "start": 329,
+        "end": 522,
+        "anchorSha256": "748f3cc72cce0c086b50f4433e868cc6a3be6d584df3bd151d0e0591594ccd8d"
+      }
+    ]
+  },
+  {
+    "id": "ad-liuji-embodiment",
+    "statement": "六极功法包括本体最多六大化身，可将门下特定修法弟子作候选；独门魔功留后手是一具体机制，不是所有师徒天然操控。其大弟子后期已数万年合体，不把后来紫灵第七弟子和其飞升前置。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "长期功法机制和大弟子经历可回溯；本区六身分工与T0大弟子为明确推定。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-39888751",
+        "chapterSha256": "353db4c9cc43f49dacdaad1b4170fe44c02faa68047ee538a4b0a9438e448d4b",
+        "start": 922,
+        "end": 1117,
+        "anchorSha256": "15055a891be4c4a1b008c1aac1038a2bcc9b8e94731e80fefcc5f4381343d8f0"
+      },
+      {
+        "chapterId": "qq-39888751",
+        "chapterSha256": "353db4c9cc43f49dacdaad1b4170fe44c02faa68047ee538a4b0a9438e448d4b",
+        "start": 1021,
+        "end": 1215,
+        "anchorSha256": "f4f416cca508dcaef2b5651bdd85a86f3b142119fecb7c7ac9ddf3fb2fbb176a"
+      },
+      {
+        "chapterId": "qq-39888751",
+        "chapterSha256": "353db4c9cc43f49dacdaad1b4170fe44c02faa68047ee538a4b0a9438e448d4b",
+        "start": 0,
+        "end": 158,
+        "anchorSha256": "9de8db2c9db463fc3836fe6685b88d1d7ee04284c63b030739c08b0239f68ccc"
+      }
+    ]
+  },
+  {
+    "id": "ad-old-enmities",
+    "statement": "天泣鹤颜为同门，鹤颜遭宝花毁肉身而夺舍老妪，天泣数化身被毁且以御雷签渡劫为念。两人在始祖称号版本差异未定处不硬称现任始祖。邪莲是宝花胞妹，与姐姐有明显隔阂但具体成因未补作原著。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "古仇明显先于此次追逐；开篇肉身状态与修法阶段必要回溯。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-39604046",
+        "chapterSha256": "f7e2a3d94968f52a98e36388f9de57b7eebf7607aaf0268e92ecdc679dcad91b",
+        "start": 1078,
+        "end": 1267,
+        "anchorSha256": "81c623d1a825be8209766a9513a1760e90fe3ff77e36b2fd919f7d0a69968d65"
+      },
+      {
+        "chapterId": "qq-39604046",
+        "chapterSha256": "f7e2a3d94968f52a98e36388f9de57b7eebf7607aaf0268e92ecdc679dcad91b",
+        "start": 1424,
+        "end": 1608,
+        "anchorSha256": "3c139ca175d8bdc3bf03fae2b2c0027fcad1f1ae40d9301465de97f050497407"
+      },
+      {
+        "chapterId": "qq-41901190",
+        "chapterSha256": "6df2836d798d98b78650592547d576535c850f0b44419276225894390d808fd2",
+        "start": 1004,
+        "end": 1190,
+        "anchorSha256": "a1cb1ed1c94e9f85ba0ffa5c88631c1cfe458d869cadb8389b483ee69c6a371b"
+      },
+      {
+        "chapterId": "qq-39409975",
+        "chapterSha256": "937441b18ffe1702bc3238f101116c7332e7632beccfb45ce206019161c1ebb9",
+        "start": 1986,
+        "end": 2177,
+        "anchorSha256": "7087bb3f8135854c004b173f1794c437d11b245a49219c9a771903c64682c6ad"
+      },
+      {
+        "chapterId": "qq-39604046",
+        "chapterSha256": "f7e2a3d94968f52a98e36388f9de57b7eebf7607aaf0268e92ecdc679dcad91b",
+        "start": 1378,
+        "end": 1570,
+        "anchorSha256": "184bbdb6ebaa6b7e246fa69bc1cded1c19e81b0ab1b018f509942d1f502e1664"
+      }
+    ]
+  },
+  {
+    "id": "ad-blood-tooth-rice",
+    "statement": "血牙米可增进精血肉身，某血法临时增强是功法特例。生长需特殊兽血，百年以上才可食；蓝瀑是主要产地，但元魇私人岛也有栽植，不能据典籍“只产蓝瀑”封死异地培育。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "将角色听闻与叙事实见并存，真实兽血、种源和多年养护不免除。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-38323649",
+        "chapterSha256": "fa8d42d0607f5a6b624f7d0795e4df46243b4ad351f02d8e26b5d403eae1d8ad",
+        "start": 2979,
+        "end": 3174,
+        "anchorSha256": "b09eff824c16d46e09df652b24c2d0bd6d0e8cee7e9c3ffa61d1f2a5836b7904"
+      },
+      {
+        "chapterId": "qq-38323649",
+        "chapterSha256": "fa8d42d0607f5a6b624f7d0795e4df46243b4ad351f02d8e26b5d403eae1d8ad",
+        "start": 2826,
+        "end": 3015,
+        "anchorSha256": "e2f772ab7d52ceb648c8eea0d5353c7ffbec9982ed3c230b08a672b25b935bd8"
+      },
+      {
+        "chapterId": "qq-38352557",
+        "chapterSha256": "f457ba90ca847610dc223224dfeea52f4536b5020709dbfb5eb69bd1ee5b954a",
+        "start": 0,
+        "end": 171,
+        "anchorSha256": "ed521ce8409e73f208d6a9ac15ff9a790dec9bfed70a7ee830c67f1ec687e7ca"
+      },
+      {
+        "chapterId": "qq-39012789",
+        "chapterSha256": "4e47cc099f28f2e314a72e309f3404d426e0065013ec1ecd763ed239b7d13769",
+        "start": 2162,
+        "end": 2356,
+        "anchorSha256": "9c426423df9bec0b98e643abab8231abd8c426d66740e7e9db2d18cf41eedacb"
+      }
+    ]
+  },
+  {
+    "id": "ad-guangyuan-knowledge",
+    "statement": "广源斋提供信息和有寿元代价的卜算，交易不代表全知，不直接插手客事且不掺和界面争斗；旧任为蓝颖祖母，后期事故与蓝颖新任不提前。T0祖母仍主持为明确回溯，姓名与普通经营事务原创。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "成立悠久与祖母旧任足以建前任机构；寿龄、事故年月缺直证不谎称确定。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-39798961",
+        "chapterSha256": "650494b3862a7ace8f41820bc2a2f4fe39e0112d4e1b28fc3a5ad00d2a5b06ef",
+        "start": 2345,
+        "end": 2534,
+        "anchorSha256": "04495a203b7382bed079af066b233832f7dbfedc62a15044d42d39c867be28e7"
+      },
+      {
+        "chapterId": "qq-39798961",
+        "chapterSha256": "650494b3862a7ace8f41820bc2a2f4fe39e0112d4e1b28fc3a5ad00d2a5b06ef",
+        "start": 2446,
+        "end": 2634,
+        "anchorSha256": "b5de672652404cbd37f0c78847d668148a7f862079b876ed1304ede73a783b8e"
+      },
+      {
+        "chapterId": "qq-39888751",
+        "chapterSha256": "353db4c9cc43f49dacdaad1b4170fe44c02faa68047ee538a4b0a9438e448d4b",
+        "start": 3052,
+        "end": 3244,
+        "anchorSha256": "35302af6b5af4b704b755881a2cba19bee1719a5ba03d13c99111a9383581d9b"
+      },
+      {
+        "chapterId": "qq-39937775",
+        "chapterSha256": "ff985672ea86d08654254f6d6f13057ef7ea91e7fc803150ce2d8214e62e95f8",
+        "start": 477,
+        "end": 666,
+        "anchorSha256": "17342b5afdb0f691919381a902d64120212a5d21eced05cbe633241bd1458755"
+      },
+      {
+        "chapterId": "qq-39856657",
+        "chapterSha256": "375b7d298ed02440f30715c0932ac738bf977b27d4520c38f3642f4e44c538dd",
+        "start": 819,
+        "end": 1002,
+        "anchorSha256": "89e41529ec6e61fc416f51fc885bb0185b58ffc1be62ee7ef78a9b8e5ab02bfc"
+      }
+    ]
+  },
+  {
+    "id": "ad-moke-transit",
+    "statement": "魔界深谷存在可破界前往摩柯的对应关系；正文实际须寻找地点并动用破界能力。该深谷不是魔源海的连续海路，也不是常开传送门。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "界面对应可回溯，当前精确位置和长程道路是明确原创，后期来客与接送未前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-47715676",
+        "chapterSha256": "68f86968276cfb35c78d4d7ff51eb7bb91049d1ea8d8f644c13dc6713fc06468",
+        "start": 2950,
+        "end": 3141,
+        "anchorSha256": "855b8a2afaa950902efb83f0822fa1907281d092a6874488b115df361de63b6e"
+      },
+      {
+        "chapterId": "qq-47715676",
+        "chapterSha256": "68f86968276cfb35c78d4d7ff51eb7bb91049d1ea8d8f644c13dc6713fc06468",
+        "start": 3005,
+        "end": 3192,
+        "anchorSha256": "b8aad2ce5aef41bcd5f13674be01710573b8baea21828970b36e3c60c3bc55a5"
+      }
+    ]
+  }
+]

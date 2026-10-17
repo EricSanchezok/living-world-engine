@@ -1,0 +1,42 @@
+[
+  {
+    "id": "far-bai-lu",
+    "label": "白鹿老怪",
+    "kind": "person",
+    "openingState": "ancient-survivor-needs-current-placement",
+    "claimIds": [
+      "far-bai-lu-temporal"
+    ],
+    "reason": "上古存在有据；具体T0实体和真实能力仍待落实，不偷用后期坐化。"
+  },
+  {
+    "id": "far-talisman-tradition",
+    "label": "五龙海石符与玉符传统",
+    "kind": "knowledge",
+    "openingState": "source-tradition-current-carrier-unresolved",
+    "claimIds": [
+      "far-ancient-talismans"
+    ],
+    "reason": "传统存在的说法有据，工匠与具体存量未编造。"
+  },
+  {
+    "id": "far-later-node",
+    "label": "五龙海后期空间节点及封印",
+    "kind": "place",
+    "openingState": "later-state-not-applied",
+    "claimIds": [
+      "far-future-node"
+    ],
+    "reason": "不生成韩立未来获知的可用入口。"
+  },
+  {
+    "id": "far-bao-reference",
+    "label": "抱还子身份交叉引用",
+    "kind": "reference",
+    "openingState": "reuse-existing-subject",
+    "claimIds": [
+      "far-bao-identity"
+    ],
+    "reason": "只引用 associated-yinming/future-yinming-bao-huanzi，不重复生成。"
+  }
+]

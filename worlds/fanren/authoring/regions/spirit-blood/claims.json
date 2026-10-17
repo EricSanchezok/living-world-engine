@@ -1,0 +1,853 @@
+[
+  {
+    "id": "blood-current-life",
+    "statement": "当前街区、普通居民、职业与私生活、物资、先任守城者，以及原文未给的T0居所均明确原创。血天本地血骨门不与人界同名门派自动合并。 城门候行空间、市场停货处、府署外堂、各洞府内外室与试验室的具体布置属于原创场景补充；不新增原著地理距离、宝物或通行特权。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇生活与运行数值；人物由自身经历、所持契约或当下观察得知。",
+    "openingReason": "填补已证地理和制度中的可交互生活，所有文书、承诺和资产分别落实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "blood-current-values",
+    "statement": "境界映射、财产、耗材、局部生物数量、研究工价与时间为有限标定；一灵界本地日345600共同秒，寿龄仍按共同年。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇生活与运行数值；人物由自身经历、所持契约或当下观察得知。",
+    "openingReason": "精确资源数量不冒称正文，私人财产不等于全宗资产。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "blood-blood-geography",
+    "statement": "血天大陆白天与其他两大陆相近、夜空泛血红；血鹤城在血骨门控制区，邻近万月山脉；齐云山脉、宇光国、穿云国、大龙国、落潮草原和天马城均存在，后期血祭未发生。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "长期地理与夜色可回溯；八国十九宗后来被灭不代表开篇空无一人。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45231312",
+        "chapterSha256": "eedca1fcf97d8a39a5df855f435bbc66c07a4f00e625cfa4468276f1ed47a5dc",
+        "start": 2974,
+        "end": 3158,
+        "anchorSha256": "50aa57bd1aa40333f87531239c4b2b8d460fdbd27f4e923c38a824ee62a97661"
+      },
+      {
+        "chapterId": "qq-45341123",
+        "chapterSha256": "98b1c07ee6fd8c4619a5ea2f70d5ca0638f7d7fce0f9e56412f11488dc6810f0",
+        "start": 97,
+        "end": 280,
+        "anchorSha256": "4172f0404090d3ec46805c22dc17eb752cec55c5edcdb6bbe8ad5a45b9490f01"
+      },
+      {
+        "chapterId": "qq-45944373",
+        "chapterSha256": "9e94a21c7132617593e61219d944395a3258ee15a65f7723fcf9a712eedb0770",
+        "start": 1396,
+        "end": 1579,
+        "anchorSha256": "782225068b6f0a6d0dd45fc5dbfab563782939a039f0a3c8b1263bafc07f8bc6"
+      },
+      {
+        "chapterId": "qq-45967022",
+        "chapterSha256": "0bbf3435f8b00c8fd2ba9124fa3d9e66d626483c3b8f77d873953d165db9dba6",
+        "start": 0,
+        "end": 119,
+        "anchorSha256": "eed86acca92eb11acf161269c289fe1cee91535fec5e3ba0c9f96be6ad12beee"
+      }
+    ]
+  },
+  {
+    "id": "blood-blood-crane-institutions",
+    "statement": "血鹤城有入城与长期居住费用、身份登记、自由交易和竞技场；对非扰乱城内的隐瞒来历一般少干预。血骨门法规严厉，城中产业多为本门与有大势力支持者经营，但不等于一律禁止私人经营。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "长期城制与社会关系回溯，具体费率和当值人原创。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45231312",
+        "chapterSha256": "eedca1fcf97d8a39a5df855f435bbc66c07a4f00e625cfa4468276f1ed47a5dc",
+        "start": 910,
+        "end": 1097,
+        "anchorSha256": "f58c636585acf95f20a76de8fa3457fb5d863652757a512d757baf03864d1795"
+      },
+      {
+        "chapterId": "qq-45231312",
+        "chapterSha256": "eedca1fcf97d8a39a5df855f435bbc66c07a4f00e625cfa4468276f1ed47a5dc",
+        "start": 2124,
+        "end": 2308,
+        "anchorSha256": "d10f0b867816a332996671531a1e8e28cb06f99cde9e462308728ccf5aac5e24"
+      }
+    ]
+  },
+  {
+    "id": "blood-xiao-office-time",
+    "statement": "萧冥又称狂魔，为血骨门大乘与阵法强者；后期说自己坐镇血鹤城仅数百年，T0不任命为城主。当前门中修行居所、大乘存活与已学阵法为明确回溯推定；后期首次用九目血蟾真血争斗并不能确定炼成日期；T0尚未炼成属于显式原创的时间定位，不作为原文已证事实。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "区分可回溯长寿身份与有相对年代限制的职务/新炼神通。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45251845",
+        "chapterSha256": "1519fe25ca17db1a61ccba15eec270daaa32fd1508dd37e474b62b36af85767c",
+        "start": 1354,
+        "end": 1537,
+        "anchorSha256": "f8c7b4bee5dc43cae403b9b9f92d37c156a6ffa33c67f2c0977f0782269d6e58"
+      },
+      {
+        "chapterId": "qq-45273995",
+        "chapterSha256": "3f99c9195121b088fdf13bc3ec001ba07cc56dfde2981208d3a8103504f3ff52",
+        "start": 2476,
+        "end": 2661,
+        "anchorSha256": "78b2f61f85bd276ad8da335cdf91d6d55937760279060d518cf061660fc3bd8c"
+      },
+      {
+        "chapterId": "qq-45394583",
+        "chapterSha256": "1fa1251787a271c6936c595be0f0239e2eb858fac7f2c545157e978eb11f8d5b",
+        "start": 1635,
+        "end": 1819,
+        "anchorSha256": "c360c84ff5fd99fbc00199dae310f7a5f1ff05c82d714feeaf3a7963cff5fd56"
+      }
+    ]
+  },
+  {
+    "id": "blood-blood-old-cultivators",
+    "statement": "万花夫人擅蚀骨魔火与斩麟魔剑，清平道人继承天鼎一脉并懂部分银蝌文，巫灵三圣为吴、余与未具名第三位大乘。其T0存活、当前修为及各自居所明确回溯推定，未来探宫协议与冲突未形成。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "保留已证传承差异和动机，精确获得年月不足处明示推定。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45273995",
+        "chapterSha256": "3f99c9195121b088fdf13bc3ec001ba07cc56dfde2981208d3a8103504f3ff52",
+        "start": 1691,
+        "end": 1875,
+        "anchorSha256": "f9c091ab21b0ce3b783257cdbf8e46182cd817ad54784ff548835dfcf7e269bb"
+      },
+      {
+        "chapterId": "qq-45341123",
+        "chapterSha256": "98b1c07ee6fd8c4619a5ea2f70d5ca0638f7d7fce0f9e56412f11488dc6810f0",
+        "start": 2361,
+        "end": 2545,
+        "anchorSha256": "bc44149a91fd9da44a0a571f4ad8dc345a59cf508a79e7641012891365d422c9"
+      },
+      {
+        "chapterId": "qq-45575178",
+        "chapterSha256": "5843108dbb69076870f77c1c1847d04a3f339c4dd10e8cba3ff0f4c4ac32d5f8",
+        "start": 40,
+        "end": 224,
+        "anchorSha256": "92319f3730e345d581588c694d6351d7bad9182ee4512c1e9802c14b402d89c4"
+      },
+      {
+        "chapterId": "qq-45688864",
+        "chapterSha256": "01e830956c3f2f29ee27419f7d43bea66239b08a3cabe20a8434eee600fa5f78",
+        "start": 0,
+        "end": 138,
+        "anchorSha256": "03eec8462e454d4d3d01256e304d6877ef6a2b9c3cdb68504c239347b38ba1c9"
+      }
+    ]
+  },
+  {
+    "id": "blood-wugou-huaxi",
+    "statement": "无垢老祖与华西仙子为成名大乘道侣；后期无垢半尸状态、华西操控嫌疑与反击属后来状态，不能仅凭后期全知写成开篇已经如此。T0采用二人尚有自主身躯但关系中有猜疑的明确补写。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "当年负伤没有足够相对时间定位；当前不强造已经发生的练功事故。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45394583",
+        "chapterSha256": "1fa1251787a271c6936c595be0f0239e2eb858fac7f2c545157e978eb11f8d5b",
+        "start": 1713,
+        "end": 1898,
+        "anchorSha256": "6ae8edc74a3175b8fdbf7f878a95cb27b6441fa1df33efb6c14cdc67cd55f4ed"
+      },
+      {
+        "chapterId": "qq-45824976",
+        "chapterSha256": "cbbb81423e42c2d9d1a933f3def4b8af9714c1349a7d63f9990b4a2c4e1e4f9b",
+        "start": 571,
+        "end": 755,
+        "anchorSha256": "4b74acaa60aa5fa307eff7e0ef3bcde00e2fa66722633abcf835958c410340cd"
+      }
+    ]
+  },
+  {
+    "id": "blood-biying-identity",
+    "statement": "碧影是赫连商盟血天负责人，方进为其后期伪装名而非另一人物。其大道初成后长期以精血祭炼天机预兆宝物；T0职务为推定，宝物完好无灾兆，不把后期破碎或死亡设为必然。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "长寿人物与长期祭炼回溯，未来交战与当次改装不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45185929",
+        "chapterSha256": "bf47c1ab9967fa093ba131d9b3ba1e6a5123e07f28a5ec4f022914bdbd2d0ce5",
+        "start": 1698,
+        "end": 1886,
+        "anchorSha256": "bd4cebdc105f9ed96375f5f6a0a84ecb7b2e368733891a1bbca410e43d37d476"
+      },
+      {
+        "chapterId": "qq-45944373",
+        "chapterSha256": "9e94a21c7132617593e61219d944395a3258ee15a65f7723fcf9a712eedb0770",
+        "start": 2812,
+        "end": 2999,
+        "anchorSha256": "caefb048d34d2b4d696760f3498433f121a880851ff15c19611146e0f24e6791"
+      }
+    ]
+  },
+  {
+    "id": "blood-league-local-structure",
+    "statement": "赫连商盟三大陆各设分盟，日常交换资源信息，大乘长老会裁争议，客卿身份通常不改变原种族地位。幻心门开派者出自商盟，文心凤兼任长老有制度来源。雷元归雷鸣分盟，不能因后期到访血天把原籍改血天。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "古老组织结构回溯，当前值守与产业原创；全洲商盟骨架由seas分区统一补足。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45162348",
+        "chapterSha256": "a0074edd99797935b059dac19f3c7c7020609ced885bf51d719e574a346045ea",
+        "start": 559,
+        "end": 746,
+        "anchorSha256": "21097caae0d194cdea76e860174bbf658505c13cdb6e37827a30a4956182808e"
+      },
+      {
+        "chapterId": "qq-45967022",
+        "chapterSha256": "0bbf3435f8b00c8fd2ba9124fa3d9e66d626483c3b8f77d873953d165db9dba6",
+        "start": 2481,
+        "end": 2665,
+        "anchorSha256": "39f4f3df20a00cd02fd5731ff77abf5780c2bb3ed2c761911cc258ef1faf82fe"
+      },
+      {
+        "chapterId": "qq-45944373",
+        "chapterSha256": "9e94a21c7132617593e61219d944395a3258ee15a65f7723fcf9a712eedb0770",
+        "start": 1920,
+        "end": 2109,
+        "anchorSha256": "c25720459d6d6326aaacff8abb4628d418e13c6024e080be9fbfdc8e077ab68f"
+      }
+    ]
+  },
+  {
+    "id": "blood-later-blood-events",
+    "statement": "百余年前发现新小世界发生在共同开篇之后；碧影的八鬼噬佛图、黄泉阴风采样、与鬼国约斗及商盟要塞不得前置。马良血祭、屠魔盟、素阴族迁入血天同样不是T0已有状态。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "明确相对年代和因果限制当前世界，保留后期内容于索引。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45162348",
+        "chapterSha256": "a0074edd99797935b059dac19f3c7c7020609ced885bf51d719e574a346045ea",
+        "start": 1175,
+        "end": 1359,
+        "anchorSha256": "a17796b95f9e1d6a18405d9bf807a100cb0892a93fd1e789cb20ef9758bd0073"
+      },
+      {
+        "chapterId": "qq-45162348",
+        "chapterSha256": "a0074edd99797935b059dac19f3c7c7020609ced885bf51d719e574a346045ea",
+        "start": 1558,
+        "end": 1748,
+        "anchorSha256": "186843d6d3b66aa29f834a68c9112b5a8c2fd7dc602be1276dd2a94d9f01ae55"
+      },
+      {
+        "chapterId": "qq-45918570",
+        "chapterSha256": "ea3d797c83b01f0d0557383281d54e35b6570242f2adcba2f2ef243c7fd7460f",
+        "start": 2956,
+        "end": 3145,
+        "anchorSha256": "289d25633165f632bf0f43aab80b2cc22e8eb98f2ce9fd0d78d2f64fd46b679b"
+      },
+      {
+        "chapterId": "qq-45944373",
+        "chapterSha256": "9e94a21c7132617593e61219d944395a3258ee15a65f7723fcf9a712eedb0770",
+        "start": 1514,
+        "end": 1697,
+        "anchorSha256": "3a7992a413c3c802f7a62819006c06c2c619fbc219b3818f073885b7d3a2f7c9"
+      }
+    ]
+  },
+  {
+    "id": "blood-bingpo-opening-location",
+    "statement": "冰魄失踪数万年，出走时刚入合体；后来证实困天鼎宫中枢、仅在韩立抵达前数年晋大乘。因此T0本体已困中枢且为合体，以修炼和研究脱困为自身行动，而非已得大乘的新同伴。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "数万年相对史与亲述困境交叉核对，T0境界不套后期。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-32882121",
+        "chapterSha256": "2821f7b9333788e9f97469443567de32d5aeed91ae29a410cde9d400045045b0",
+        "start": 2070,
+        "end": 2255,
+        "anchorSha256": "d066a39ad0a38c107ea7852a99a24c0bfa7103ff9d1a2d7dc75d19c70064b8e7"
+      },
+      {
+        "chapterId": "qq-32969533",
+        "chapterSha256": "6d85a7c28f43f05d5d7d6f4563d80ed49c995b8523f1b5c6dceb87a0e2e6c811",
+        "start": 2207,
+        "end": 2394,
+        "anchorSha256": "dcc5b4df174cb7597cc371fd250aa9e3ad16605163ba48f10364ab8ff99da4c9"
+      },
+      {
+        "chapterId": "qq-45721257",
+        "chapterSha256": "0745e10bfb4077be0ae6d08828fb7166bc60665ed72578a134f74f8fcc5dad30",
+        "start": 734,
+        "end": 921,
+        "anchorSha256": "c1497d7ff75f4d8ed129d916599b721260464573a604669037803ef82973bad9"
+      }
+    ]
+  },
+  {
+    "id": "blood-bingpo-blood-soul",
+    "statement": "冰魄以血晶上人遗法留下一缕血魂，血灵/血魂/血魄为同一分魂不同称谓。原瓶封存后由翁姓交韩立，后才唤醒并凝血躯；T0沉眠瓶由翁保管为交接链回溯推定。另一只配对瓶留许家，血魂不含完整人界记忆。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "不生成开篇已成形女修、已中血蛊或已见韩立的记忆。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-32938431",
+        "chapterSha256": "1ca1f12220a8fd9834b751d59694d94cde97f39b20d56fd164f8b7b8893385d2",
+        "start": 1381,
+        "end": 1565,
+        "anchorSha256": "ca4491a537654a5224b388fa3b1c0b952d557b167a695b68dd2b5d4abe2d16ec"
+      },
+      {
+        "chapterId": "qq-32931286",
+        "chapterSha256": "5130929713d95976c84a3caacc8660bf46a956a739d73969b62d3334970efa58",
+        "start": 465,
+        "end": 650,
+        "anchorSha256": "1c9b4393078a383414428819699bebbf83d6b65f0e037916c54e95b2d2943a56"
+      },
+      {
+        "chapterId": "qq-32983800",
+        "chapterSha256": "c0b61f69b50b95476cffc1fb4e6789b7bbe167a64e541a2051c8a330b8eb85be",
+        "start": 1098,
+        "end": 1290,
+        "anchorSha256": "c907f6001d5e1ac865226879d7667d314170989c719452c8158a5b7113b52493"
+      },
+      {
+        "chapterId": "qq-32537341",
+        "chapterSha256": "f9ede91b916b2864ef8f3a7ca82bfbe129329a1fcf0ca86c93993374f3bf648d",
+        "start": 1942,
+        "end": 2126,
+        "anchorSha256": "af08601b2044b2b8be7c0fc1fbec0d249f2efcd433d2e670c53d037d69b4de9c"
+      }
+    ]
+  },
+  {
+    "id": "blood-ding-identity-boundary",
+    "statement": "人界虚天鼎与冰魄在灵界另有的虚灵鼎必须分开。后文虚皇/虚灵/虚天称名混用保留来源异常；按连续保管链只为灵界另一仿制钥匙立一实体，T0所在暗匣明确补写，不复制人界虚天鼎。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "32537341和32983800明确区分两物，比后来孤立混称更可用于身份建档。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-32537341",
+        "chapterSha256": "f9ede91b916b2864ef8f3a7ca82bfbe129329a1fcf0ca86c93993374f3bf648d",
+        "start": 1352,
+        "end": 1541,
+        "anchorSha256": "98e02cf48247381cd89c542a916cab11539ec679a50def1a613f66e4f860ef5c"
+      },
+      {
+        "chapterId": "qq-32983800",
+        "chapterSha256": "c0b61f69b50b95476cffc1fb4e6789b7bbe167a64e541a2051c8a330b8eb85be",
+        "start": 1773,
+        "end": 1959,
+        "anchorSha256": "c3410056d2570248d4872a74afcaf439d67d8e53938887a86320344da41712bc"
+      },
+      {
+        "chapterId": "qq-45431309",
+        "chapterSha256": "2cc6f10cb3dee0b91691bc242c29be251dd7e1e74300a4db52ee233f339175cf",
+        "start": 0,
+        "end": 104,
+        "anchorSha256": "caba55316afa33be55e6188ac2af42a334104376bda12db2f083c4fd9c115e75"
+      },
+      {
+        "chapterId": "qq-45341123",
+        "chapterSha256": "98b1c07ee6fd8c4619a5ea2f70d5ca0638f7d7fce0f9e56412f11488dc6810f0",
+        "start": 2674,
+        "end": 2860,
+        "anchorSha256": "80f69cd3edd671bb2e85c48ccb30beacb8e792ae61f6c7c21d12bfc6e104ddc0"
+      }
+    ]
+  },
+  {
+    "id": "blood-tianding-palace",
+    "statement": "天鼎真人百万年前成功飞升，留下分区禁制宫殿与真钥匙、可感应部分开启的仿钥匙。天鼎宫开启一月，通常关闭时传出外人，强留可遭抹杀；中枢空间例外。当前尚未开启，未来争钥匙和夺传承不预定。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "古代宫殿与机制回溯，当前窗口和物件状态明确标定。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45313701",
+        "chapterSha256": "e51d1b5be14c9d80b144ce3600e02261e7c9c2a1c75017c8d9b1faf66a932075",
+        "start": 1975,
+        "end": 2159,
+        "anchorSha256": "506ee00074b78f953d02f4f6afafa0ec8717392df1700329459b11920582a847"
+      },
+      {
+        "chapterId": "qq-45431309",
+        "chapterSha256": "2cc6f10cb3dee0b91691bc242c29be251dd7e1e74300a4db52ee233f339175cf",
+        "start": 2783,
+        "end": 2968,
+        "anchorSha256": "7b94691ee54512ca65407d1585109313bebf2cb48961e18fc26660de16f732f7"
+      },
+      {
+        "chapterId": "qq-45613181",
+        "chapterSha256": "ffd95a12de7f6569f3de037054ef9f6c0c0b8fef8aa52f7654f6a9fd4ce6076f",
+        "start": 1262,
+        "end": 1448,
+        "anchorSha256": "4cfe1fb7a09ac3d9e1b5c202ca3d92a2b1eb5f4cf2fe2b30d3d0fa042b83aabd"
+      }
+    ]
+  },
+  {
+    "id": "blood-tianding-inner-structure",
+    "statement": "天鼎宫有上百禁制分区，幻景遮蔽楼阁，泥人、幻化冰雀和冰巨人为禁制形态不等于可带走无限傀儡。血碑中枢有银蝌文入口、受抑神识与禁空；通向冰魄庭院的阵已在旧次冲突损毁。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "旧次损毁早于T0；新闯关者破坏与后来韩立修复未发生。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45431309",
+        "chapterSha256": "2cc6f10cb3dee0b91691bc242c29be251dd7e1e74300a4db52ee233f339175cf",
+        "start": 2134,
+        "end": 2318,
+        "anchorSha256": "f1541ba570e0223aefb8d38c5532c3d2e4522c423c761b3a7366023d13a1b452"
+      },
+      {
+        "chapterId": "qq-45455600",
+        "chapterSha256": "2f078e0d1c3ea607cd3d8de9ed187a08f6690fb6eb27284a43a8b08f61315c7d",
+        "start": 2239,
+        "end": 2426,
+        "anchorSha256": "869411e5063d764130190329ba8e05862feee4cdf44f5043c5faf8d214a0317f"
+      },
+      {
+        "chapterId": "qq-45575178",
+        "chapterSha256": "5843108dbb69076870f77c1c1847d04a3f339c4dd10e8cba3ff0f4c4ac32d5f8",
+        "start": 901,
+        "end": 1085,
+        "anchorSha256": "a96ca97d6a0958d59c25c66a0092364256876922ef273a9780ef6e7a90659337"
+      },
+      {
+        "chapterId": "qq-45613181",
+        "chapterSha256": "ffd95a12de7f6569f3de037054ef9f6c0c0b8fef8aa52f7654f6a9fd4ce6076f",
+        "start": 2370,
+        "end": 2553,
+        "anchorSha256": "dace5b040371cb493eb5dfaa4fb89dd9953212b1ce05a71b1c5dd9b65353c7b7"
+      },
+      {
+        "chapterId": "qq-45668696",
+        "chapterSha256": "503928ded042f47fbcabfd000d99984217ad436f750d3449fd2c941ebf031b59",
+        "start": 1586,
+        "end": 1775,
+        "anchorSha256": "5223426a50c703a466f3241c659b66e4ff339496c885e3a51547334045ee135a"
+      }
+    ]
+  },
+  {
+    "id": "blood-tianding-treasure",
+    "statement": "中枢庭院另有雕像护持金塔，镜面反射和雕像补充共同护宝；塔内七八物含红玉简，未来取得不前置。冰魄已获的衣钵带神识血誓、未大成不能任意外传；天鼎渡多劫有关早年吞昙雷仙果种籽，不是可复制的保过劫配方。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "当前库存和领悟程度另作标定，旧主不是驻场真仙。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45740387",
+        "chapterSha256": "c8c3a3ade23a6c775ac4ce2a904dcfe4f9a345f1d179af30a8dcd0bfe9b5e00b",
+        "start": 2062,
+        "end": 2247,
+        "anchorSha256": "d466f8daa60b156ff22281b82df73e50e5ab87936a90bbb88b96169692c0b0a8"
+      },
+      {
+        "chapterId": "qq-45721257",
+        "chapterSha256": "0745e10bfb4077be0ae6d08828fb7166bc60665ed72578a134f74f8fcc5dad30",
+        "start": 2801,
+        "end": 2985,
+        "anchorSha256": "ee6bf27647a6cbdad6249ba1a53d8f1335228cc454754571ac1c0eb90d6c7166"
+      },
+      {
+        "chapterId": "qq-45760962",
+        "chapterSha256": "57382905a02969465ae832cb0a326f667268c162ed632c4bab95fa5e129631b5",
+        "start": 805,
+        "end": 989,
+        "anchorSha256": "b43e2a99041dd3413a17349059b80701dec110c82cfb95b31f2d74e80187fb07"
+      },
+      {
+        "chapterId": "qq-45760962",
+        "chapterSha256": "57382905a02969465ae832cb0a326f667268c162ed632c4bab95fa5e129631b5",
+        "start": 929,
+        "end": 1115,
+        "anchorSha256": "bcdf3542ba1d2361956c0037908a66ca68ca74a5353a5fdcc78b382fece866ac"
+      }
+    ]
+  },
+  {
+    "id": "blood-blood-prison",
+    "statement": "血狱镇压天鼎旧敌，吞骨蝶、血灵、精炼辟邪雷笼与封骨玉牌皆有真实风险；天巫半人半马尸骨当前仍被镇压，后来误取玉牌破禁才成活动煞尸。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "古代囚禁回溯，不前置巫灵三圣误触与死亡。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45575178",
+        "chapterSha256": "5843108dbb69076870f77c1c1847d04a3f339c4dd10e8cba3ff0f4c4ac32d5f8",
+        "start": 1518,
+        "end": 1702,
+        "anchorSha256": "0661c68a3b2e9a91b7601e89d310901723d1bdd0a9fa2d1f5882d99bd24e98f5"
+      },
+      {
+        "chapterId": "qq-45668696",
+        "chapterSha256": "503928ded042f47fbcabfd000d99984217ad436f750d3449fd2c941ebf031b59",
+        "start": 66,
+        "end": 250,
+        "anchorSha256": "196250fd31b826398bac36523f3d3f3dde1f69361844754b85230fc895c8f57a"
+      },
+      {
+        "chapterId": "qq-45688864",
+        "chapterSha256": "01e830956c3f2f29ee27419f7d43bea66239b08a3cabe20a8434eee600fa5f78",
+        "start": 2650,
+        "end": 2834,
+        "anchorSha256": "df9918fd56894f4317d6c9bb7c3444752b3b3b4ce809f299beb39396dfc76cfc"
+      }
+    ]
+  },
+  {
+    "id": "blood-xuehe-identity",
+    "statement": "血合五子是同一大乘元婴分五形成的五具分身，不是五个同胞兄弟。分裂发生年月不明，本包T0暂采用已分裂、五体合体层级的明确推定，资源不因分身自动复制；血狱血影与商盟外援血煞不因相似称呼合并。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "长寿本人早已存在但分裂时点无直证，推定显式记录，未来被夺舍不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45394583",
+        "chapterSha256": "1fa1251787a271c6936c595be0f0239e2eb858fac7f2c545157e978eb11f8d5b",
+        "start": 2327,
+        "end": 2514,
+        "anchorSha256": "efea8477acda12fc6bb9e0fc8c27136b459ee75b61fdccec28955d98f0300b16"
+      },
+      {
+        "chapterId": "qq-45707927",
+        "chapterSha256": "0ed1951e40dcaef8cd7eae58fc5967a48a3a5b85333a970c1639789e48026282",
+        "start": 1719,
+        "end": 1904,
+        "anchorSha256": "4e1dda2f696526a080659ac5a40eb7b9c58437ffbd0f0aa3f5e2f26dfae2bc19"
+      },
+      {
+        "chapterId": "qq-45162348",
+        "chapterSha256": "a0074edd99797935b059dac19f3c7c7020609ced885bf51d719e574a346045ea",
+        "start": 2478,
+        "end": 2664,
+        "anchorSha256": "1dd047c2de6e70ffedce16b9ed27f9ce59c2fcedbc15535302500fe8972b2417"
+      }
+    ]
+  },
+  {
+    "id": "blood-bingpo-xu-lineage",
+    "statement": "冰魄出走前已留血魂配瓶与血晶棺，灵界许家是独立人族家系；T0家中瓶、棺与封存常识保留，详细血魂秘术仍在外来封盒的玉简内。当前天元境山居、两位在世管理者与世次为明确原创，不与原创出身的许家旁支混同。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "原文祖传成对瓶与先祖亲炼血晶棺可回溯；后期许蛟、许火、许芊羽不前置成年或族长职。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-32931286",
+        "chapterSha256": "5130929713d95976c84a3caacc8660bf46a956a739d73969b62d3334970efa58",
+        "start": 465,
+        "end": 650,
+        "anchorSha256": "1c9b4393078a383414428819699bebbf83d6b65f0e037916c54e95b2d2943a56"
+      },
+      {
+        "chapterId": "qq-32931286",
+        "chapterSha256": "5130929713d95976c84a3caacc8660bf46a956a739d73969b62d3334970efa58",
+        "start": 1032,
+        "end": 1220,
+        "anchorSha256": "0ef362fd13e457f71792210db046faedcfb91495f6edd3b1e0b94241c417e29b"
+      },
+      {
+        "chapterId": "qq-32882121",
+        "chapterSha256": "2821f7b9333788e9f97469443567de32d5aeed91ae29a410cde9d400045045b0",
+        "start": 2466,
+        "end": 2649,
+        "anchorSha256": "88c832d07f0ca0350c05496b8fc70253b87f4c675e24b2850abe8ca3dfab086b"
+      }
+    ]
+  },
+  {
+    "id": "blood-prison-skeletal-hosts",
+    "statement": "血狱近入口有血色骷髅头群，称血灵，能喷血箭、侵染目标；与放绿焰的白骨吞骨蝶并非同种。巫灵三圣后来的清灭不前置。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期实见或角色自述中获知；当前人物只掌握自身经历及实际收到的消息。",
+    "openingReason": "古囚区守物可回溯；当前数量和能力标度另为标定，不把外来血影子当本地血灵。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45595710",
+        "chapterSha256": "8b22b3b836db7bd8275c83ee7efd6c0e10e50809cb0ab6c3f943b01f82ff319b",
+        "start": 278,
+        "end": 462,
+        "anchorSha256": "a6ca0784e8b5ef6325a87cc575302c6e78c242e5fef0293e5b81ecaf387479a5"
+      },
+      {
+        "chapterId": "qq-45595710",
+        "chapterSha256": "8b22b3b836db7bd8275c83ee7efd6c0e10e50809cb0ab6c3f943b01f82ff319b",
+        "start": 286,
+        "end": 472,
+        "anchorSha256": "78aed24ba9acc01deed259c3bb3a436c42cd9cdaae5dd1ac2aa9f5951aa891fd"
+      },
+      {
+        "chapterId": "qq-45595710",
+        "chapterSha256": "8b22b3b836db7bd8275c83ee7efd6c0e10e50809cb0ab6c3f943b01f82ff319b",
+        "start": 1280,
+        "end": 1469,
+        "anchorSha256": "64ce1d0d983c6a24b0d5dad2f4fd6a53e47c9339fc2544d8b4e050238c1ef66c"
+      }
+    ]
+  },
+  {
+    "id": "blood-outer-guarded-treasury",
+    "statement": "天鼎分宫长廊有金、银两具七八丈高金刚傀儡，各持同色双巨锤；古伤累累。身后朱红木门通石台列厅，存上千各样法器。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期实见或角色自述中获知；当前人物只掌握自身经历及实际收到的消息。",
+    "openingReason": "旧守卫与古库先存，后期韩立斩碎、推门与取物未发生。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45475771",
+        "chapterSha256": "7bdb1a204a7b1cdb890db1620b3a29738857b268fea67545729682842d5592b2",
+        "start": 1880,
+        "end": 2068,
+        "anchorSha256": "71b284964715307cfbd562d7acaaa69cf29820dcdf29628f09b479fd95de5c8d"
+      },
+      {
+        "chapterId": "qq-45475771",
+        "chapterSha256": "7bdb1a204a7b1cdb890db1620b3a29738857b268fea67545729682842d5592b2",
+        "start": 1912,
+        "end": 2105,
+        "anchorSha256": "43c87fca1b2e3d62f7843dcd4b94fc209cf3c9e70a513d64a48279bf47ceec4c"
+      },
+      {
+        "chapterId": "qq-45475771",
+        "chapterSha256": "7bdb1a204a7b1cdb890db1620b3a29738857b268fea67545729682842d5592b2",
+        "start": 2158,
+        "end": 2346,
+        "anchorSha256": "6c7d3d449701155d23fe010b347bd2b317693cc2ebf02ba8550850c298448889"
+      },
+      {
+        "chapterId": "qq-45475771",
+        "chapterSha256": "7bdb1a204a7b1cdb890db1620b3a29738857b268fea67545729682842d5592b2",
+        "start": 2194,
+        "end": 2379,
+        "anchorSha256": "e0e40e591b0229f57b1bd34231d9f1c105cfba2ca48d0359f91a6cbb81286c3b"
+      }
+    ]
+  },
+  {
+    "id": "blood-central-hall-remains",
+    "statement": "上层殿堂供白袍背血剑中年道人像，旁有青鹰、银螳螂像；四血甲傀儡间两死者各留断剑/碎盾扭尺，坏传送阵边另两尸留四储物镯。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期实见或角色自述中获知；当前人物只掌握自身经历及实际收到的消息。",
+    "openingReason": "与冰魄旧次入宫相关的现场早于T0；像是纪念/仪式物，叙述未证明是活灵兽或新的天鼎本人。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45668696",
+        "chapterSha256": "503928ded042f47fbcabfd000d99984217ad436f750d3449fd2c941ebf031b59",
+        "start": 1028,
+        "end": 1214,
+        "anchorSha256": "4bed7beba370009b94ef6acfe3706c3ee35c4d1bacd9e9e9ad43eb9e9771c144"
+      },
+      {
+        "chapterId": "qq-45668696",
+        "chapterSha256": "503928ded042f47fbcabfd000d99984217ad436f750d3449fd2c941ebf031b59",
+        "start": 1100,
+        "end": 1284,
+        "anchorSha256": "681f77fa11f88e1408682d8c492d1ef15edab4efc92f6db6a98ce126811cfda7"
+      },
+      {
+        "chapterId": "qq-45668696",
+        "chapterSha256": "503928ded042f47fbcabfd000d99984217ad436f750d3449fd2c941ebf031b59",
+        "start": 1339,
+        "end": 1525,
+        "anchorSha256": "ce081ddbc8fa1fb7b92bf3fdc3e1cc48a4e3395da46b01861b31396d168e7d0a"
+      },
+      {
+        "chapterId": "qq-45668696",
+        "chapterSha256": "503928ded042f47fbcabfd000d99984217ad436f750d3449fd2c941ebf031b59",
+        "start": 1391,
+        "end": 1575,
+        "anchorSha256": "42cb4c67bad68ccc361c3e74cf931a796f37c3f3a180e4e7eea4bfb870337c15"
+      },
+      {
+        "chapterId": "qq-45668696",
+        "chapterSha256": "503928ded042f47fbcabfd000d99984217ad436f750d3449fd2c941ebf031b59",
+        "start": 1828,
+        "end": 2018,
+        "anchorSha256": "e6720caa7fabbb6352226fc0d65d6218874bfb7f4cb7c302b64155da80857526"
+      }
+    ]
+  },
+  {
+    "id": "blood-xueyingzi-identity",
+    "statement": "血影子从外部黑洞进入天鼎外封印，施血影功；后来才将血合五子制成血傀儡，并夺取巫灵元婴。他是独立修炼者，与血狱血灵、血合共同主体、商盟血煞不是同一人。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期实见或角色自述中获知；当前人物只掌握自身经历及实际收到的消息。",
+    "openingReason": "T0存活且大乘层级是按后期高阶成熟经历的明确推定，精确年龄无直证；本版不设置已夺五体或已知冰魄坐标。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45475771",
+        "chapterSha256": "7bdb1a204a7b1cdb890db1620b3a29738857b268fea67545729682842d5592b2",
+        "start": 795,
+        "end": 985,
+        "anchorSha256": "87c1e69ef7ada2ca9f0aeb8a3735a11e4b6e47d9498abfbe377f776507071abc"
+      },
+      {
+        "chapterId": "qq-45475771",
+        "chapterSha256": "7bdb1a204a7b1cdb890db1620b3a29738857b268fea67545729682842d5592b2",
+        "start": 1045,
+        "end": 1229,
+        "anchorSha256": "109d3f5de7fc1ad5312a5b24eeee03f76b2abba7fe70ba2096fe97535c9293e1"
+      },
+      {
+        "chapterId": "qq-45707927",
+        "chapterSha256": "0ed1951e40dcaef8cd7eae58fc5967a48a3a5b85333a970c1639789e48026282",
+        "start": 1715,
+        "end": 1904,
+        "anchorSha256": "5e82359d8fd38571d3eac79ae1e17a11366af69b82d4c5875aa99b10108d232e"
+      }
+    ]
+  },
+  {
+    "id": "blood-chilei-identity",
+    "statement": "赤雷老祖是久负盛名的大乘，以赤雷遁法和雷霆强攻，后见赤袍、面有金雷纹；雷蛟法相和护盾是其手段，后期向血魄抢物与被杀不前置。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期实见或角色自述中获知；当前人物只掌握自身经历及实际收到的消息。",
+    "openingReason": "声名与高阶经历支持T0仍在的推定；开篇大乘、当前住处和所持防具形态另明确补写，不声称逐年已证。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45475771",
+        "chapterSha256": "7bdb1a204a7b1cdb890db1620b3a29738857b268fea67545729682842d5592b2",
+        "start": 1473,
+        "end": 1660,
+        "anchorSha256": "3ca7ef96a38bca8306895286c5959975fd6e02a9237309cdd57f36d40421caaf"
+      },
+      {
+        "chapterId": "qq-45475771",
+        "chapterSha256": "7bdb1a204a7b1cdb890db1620b3a29738857b268fea67545729682842d5592b2",
+        "start": 2682,
+        "end": 2868,
+        "anchorSha256": "a261cc6898e6926bf0aa98ea7640b2fd4b3e965d4b9370d1546e08a699ba7f94"
+      },
+      {
+        "chapterId": "qq-45517933",
+        "chapterSha256": "a876df23ded663f06823aebef8c3e5e8b0bb0f7cd5f184c6f0ff7127756d2d04",
+        "start": 633,
+        "end": 819,
+        "anchorSha256": "d0bdc855104fb085d1caa68ce7658fa2daea557d56df587774db2f8c608da47a"
+      },
+      {
+        "chapterId": "qq-45517933",
+        "chapterSha256": "a876df23ded663f06823aebef8c3e5e8b0bb0f7cd5f184c6f0ff7127756d2d04",
+        "start": 1037,
+        "end": 1226,
+        "anchorSha256": "fe4bbb5f9ef249c0365164cc31110ceb299b29301b34c4b2e8f27a78ad9b9976"
+      }
+    ]
+  },
+  {
+    "id": "blood-bone-sect-two-elders",
+    "statement": "血骨门另有两名大乘太上长老：白羽鹰鼻老者与黑纹矮胖妇人如意；后期明确同萧冥交情不深。宫外布阵截宝是后来的计划。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期实见或角色自述中获知；当前人物只掌握自身经历及实际收到的消息。",
+    "openingReason": "T0二人存活并同门为明确回溯推定，原著未给准确入门/进阶年份；本版当前差事和如意与赤雷交易为原创。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45517933",
+        "chapterSha256": "a876df23ded663f06823aebef8c3e5e8b0bb0f7cd5f184c6f0ff7127756d2d04",
+        "start": 1621,
+        "end": 1805,
+        "anchorSha256": "2544898caaf4b2bb677cff82911b7392a51dc49966a4d471e817a0af7131325e"
+      },
+      {
+        "chapterId": "qq-45517933",
+        "chapterSha256": "a876df23ded663f06823aebef8c3e5e8b0bb0f7cd5f184c6f0ff7127756d2d04",
+        "start": 1945,
+        "end": 2133,
+        "anchorSha256": "839b1fa77eb9cd1547cdda0959ff2897cf97b1425c80bb72eae791b063f0c2d5"
+      },
+      {
+        "chapterId": "qq-45517933",
+        "chapterSha256": "a876df23ded663f06823aebef8c3e5e8b0bb0f7cd5f184c6f0ff7127756d2d04",
+        "start": 1980,
+        "end": 2171,
+        "anchorSha256": "680242a997a4a0ee69edd01ceac5bc5adb5e94b730b32a2aa56047884d583c8d"
+      },
+      {
+        "chapterId": "qq-45517933",
+        "chapterSha256": "a876df23ded663f06823aebef8c3e5e8b0bb0f7cd5f184c6f0ff7127756d2d04",
+        "start": 2446,
+        "end": 2630,
+        "anchorSha256": "1ba64e60057afa8efc04763a6c1cd250966896580f0d65165b7c73161fd9047d"
+      }
+    ]
+  }
+]

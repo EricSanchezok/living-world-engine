@@ -1,0 +1,5590 @@
+{
+  "id": "human-dajin",
+  "entities": [
+    {
+      "id": "human-dajin",
+      "name": "大晋",
+      "kind": "location",
+      "placement": "human-realm",
+      "description": "一百零八州的广阔人间疆域，凡俗朝廷与修仙势力交错。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-liaozhou",
+      "name": "辽州",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "严寒而地广的州域，人口稀少，沿江聚落依赖航运。",
+      "facts": [
+        {
+          "id": "dajin-liaozhou-route-dajin-shun-river",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-shun-river"
+          },
+          "description": "州内河道及沿岸道路；顺逆水、冰情和载具影响耗时。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-liaozhou-travel-dajin-shun-river",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "州内河道及沿岸道路；顺逆水、冰情和载具影响耗时。"
+          },
+          "description": "州内河道及沿岸道路；顺逆水、冰情和载具影响耗时。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-shun-river",
+      "name": "舜江",
+      "kind": "location",
+      "placement": "dajin-liaozhou",
+      "description": "辽州第二大江；河运需船、季节判断和护送。",
+      "facts": [
+        {
+          "id": "dajin-shun-river-route-dajin-liaozhou",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-liaozhou"
+          },
+          "description": "州内河道及沿岸道路；顺逆水、冰情和载具影响耗时。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-shun-river-travel-dajin-liaozhou",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "州内河道及沿岸道路；顺逆水、冰情和载具影响耗时。"
+          },
+          "description": "州内河道及沿岸道路；顺逆水、冰情和载具影响耗时。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-shun-river-route-dajin-river-wharf",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-river-wharf"
+          },
+          "description": "靠岸需减速系缆，卸货须实际搬运。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-shun-river-travel-dajin-river-wharf",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "靠岸需减速系缆，卸货须实际搬运。"
+          },
+          "description": "靠岸需减速系缆，卸货须实际搬运。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-longzhou",
+      "name": "陇州",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "中西部交界的多山州域，瘴气和毒虫限制穿行。",
+      "facts": [
+        {
+          "id": "dajin-longzhou-route-dajin-tianyue-range",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianyue-range"
+          },
+          "description": "瘴气山路，需准备避毒与行路补给。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-longzhou-travel-dajin-tianyue-range",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "瘴气山路，需准备避毒与行路补给。"
+          },
+          "description": "瘴气山路，需准备避毒与行路补给。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianyue-range",
+      "name": "天岳山脉",
+      "kind": "location",
+      "placement": "dajin-longzhou",
+      "description": "岳阳宫据有的山脉，主峰为南天峰。",
+      "facts": [
+        {
+          "id": "dajin-tianyue-range-route-dajin-longzhou",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-longzhou"
+          },
+          "description": "瘴气山路，需准备避毒与行路补给。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-tianyue-range-travel-dajin-longzhou",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "瘴气山路，需准备避毒与行路补给。"
+          },
+          "description": "瘴气山路，需准备避毒与行路补给。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-tianyue-range-route-dajin-nantian-peak",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-nantian-peak"
+          },
+          "description": "接近山门需通报，不因陌生即强制开战。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-tianyue-range-travel-dajin-nantian-peak",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "接近山门需通报，不因陌生即强制开战。"
+          },
+          "description": "接近山门需通报，不因陌生即强制开战。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-nantian-peak",
+      "name": "南天峰",
+      "kind": "location",
+      "placement": "dajin-tianyue-range",
+      "description": "岳阳宫山门所在；来客须取得准入。",
+      "facts": [
+        {
+          "id": "dajin-nantian-peak-route-dajin-tianyue-range",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianyue-range"
+          },
+          "description": "接近山门需通报，不因陌生即强制开战。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-nantian-peak-travel-dajin-tianyue-range",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "接近山门需通报，不因陌生即强制开战。"
+          },
+          "description": "接近山门需通报，不因陌生即强制开战。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-jinjing",
+      "name": "晋京",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "大晋东部的凡俗都城，修士与凡人交错活动。",
+      "facts": [
+        {
+          "id": "dajin-jinjing-route-dajin-city-lane",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-city-lane"
+          },
+          "description": "城门和街道通行，禁飞是地方规约。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-jinjing-travel-dajin-city-lane",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "城门和街道通行，禁飞是地方规约。"
+          },
+          "description": "城门和街道通行，禁飞是地方规约。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-jinjing-route-dajin-temple-room",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-temple-room"
+          },
+          "description": "郊外道路步行或用适当载具。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-jinjing-travel-dajin-temple-room",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "郊外道路步行或用适当载具。"
+          },
+          "description": "郊外道路步行或用适当载具。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-huayun",
+      "name": "华云州",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "东部沿海州域，港口和坊市连接海外修士。",
+      "facts": [
+        {
+          "id": "dajin-huayun-route-dajin-coast-wharf",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-coast-wharf"
+          },
+          "description": "州内道路到海港，依实际距离和方式计算。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-huayun-travel-dajin-coast-wharf",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "州内道路到海港，依实际距离和方式计算。"
+          },
+          "description": "州内道路到海港，依实际距离和方式计算。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-huayun-route-dajin-kaijiang",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-kaijiang"
+          },
+          "description": "距海二百余里的内陆镇路，不能一瞬抵达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-huayun-travel-dajin-kaijiang",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "距海二百余里的内陆镇路，不能一瞬抵达。"
+          },
+          "description": "距海二百余里的内陆镇路，不能一瞬抵达。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-kaijiang",
+      "name": "开江镇",
+      "kind": "location",
+      "placement": "dajin-huayun",
+      "description": "距海二百余里的小镇，附近有白竹山。",
+      "facts": [
+        {
+          "id": "dajin-kaijiang-route-dajin-huayun",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-huayun"
+          },
+          "description": "距海二百余里的内陆镇路，不能一瞬抵达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-kaijiang-travel-dajin-huayun",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "距海二百余里的内陆镇路，不能一瞬抵达。"
+          },
+          "description": "距海二百余里的内陆镇路，不能一瞬抵达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-kaijiang-route-dajin-baizhu",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-baizhu"
+          },
+          "description": "山道通行，入天符门须经门人许可。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-kaijiang-travel-dajin-baizhu",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "山道通行，入天符门须经门人许可。"
+          },
+          "description": "山道通行，入天符门须经门人许可。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-baizhu",
+      "name": "白竹山",
+      "kind": "location",
+      "placement": "dajin-huayun",
+      "description": "低矮山地上有天符门传承，灵脉有限。",
+      "facts": [
+        {
+          "id": "dajin-baizhu-route-dajin-kaijiang",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-kaijiang"
+          },
+          "description": "山道通行，入天符门须经门人许可。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-baizhu-travel-dajin-kaijiang",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "山道通行，入天符门须经门人许可。"
+          },
+          "description": "山道通行，入天符门须经门人许可。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-zhenhuan",
+      "name": "真桓山",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "太一门控制的广大灵脉山系。",
+      "facts": [
+        {
+          "id": "dajin-zhenhuan-route-dajin-taiyi-court",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-taiyi-court"
+          },
+          "description": "山门外院允许通报来意。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-zhenhuan-travel-dajin-taiyi-court",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "山门外院允许通报来意。"
+          },
+          "description": "山门外院允许通报来意。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-zhenhuan-route-dajin-binghun",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-binghun"
+          },
+          "description": "隐秘禁地，知位置仍不等于获准进入。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-zhenhuan-travel-dajin-binghun",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "隐秘禁地，知位置仍不等于获准进入。"
+          },
+          "description": "隐秘禁地，知位置仍不等于获准进入。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-binghun",
+      "name": "冰魂谷",
+      "kind": "location",
+      "placement": "dajin-zhenhuan",
+      "description": "寒气凛冽的隐秘山谷，谷口幻阵遮蔽视线。",
+      "facts": [
+        {
+          "id": "dajin-binghun-route-dajin-zhenhuan",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-zhenhuan"
+          },
+          "description": "隐秘禁地，知位置仍不等于获准进入。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-binghun-travel-dajin-zhenhuan",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "隐秘禁地，知位置仍不等于获准进入。"
+          },
+          "description": "隐秘禁地，知位置仍不等于获准进入。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-wuyue",
+      "name": "雾月山脉",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "大晋西北两州交界的广大险峻山脉。",
+      "facts": [
+        {
+          "id": "dajin-wuyue-route-dajin-motuo",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-motuo"
+          },
+          "description": "险山与魔宫禁制，须具备到达手段并获准。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-wuyue-travel-dajin-motuo",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "险山与魔宫禁制，须具备到达手段并获准。"
+          },
+          "description": "险山与魔宫禁制，须具备到达手段并获准。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-wuyue-route-dajin-wind-retreat",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-wind-retreat"
+          },
+          "description": "山间隐修小径需确切引路，地点认知不自动共享。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-wuyue-travel-dajin-wind-retreat",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "山间隐修小径需确切引路，地点认知不自动共享。"
+          },
+          "description": "山间隐修小径需确切引路，地点认知不自动共享。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-motuo",
+      "name": "魔陀山",
+      "kind": "location",
+      "placement": "dajin-wuyue",
+      "description": "山顶魔宫有禁制隔绝外界冰雪。",
+      "facts": [
+        {
+          "id": "dajin-motuo-route-dajin-wuyue",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-wuyue"
+          },
+          "description": "险山与魔宫禁制，须具备到达手段并获准。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-motuo-travel-dajin-wuyue",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "险山与魔宫禁制，须具备到达手段并获准。"
+          },
+          "description": "险山与魔宫禁制，须具备到达手段并获准。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-river-wharf",
+      "name": "渡水埠",
+      "kind": "location",
+      "placement": "dajin-shun-river",
+      "description": "原创江埠，船工在棚下检验系缆和装卸账册。",
+      "facts": [
+        {
+          "id": "dajin-river-wharf-route-dajin-shun-river",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-shun-river"
+          },
+          "description": "靠岸需减速系缆，卸货须实际搬运。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-river-wharf-travel-dajin-shun-river",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "靠岸需减速系缆，卸货须实际搬运。"
+          },
+          "description": "靠岸需减速系缆，卸货须实际搬运。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-city-lane",
+      "name": "晋京南坊",
+      "kind": "location",
+      "placement": "dajin-jinjing",
+      "description": "原创居住与商贸街坊，茶铺、货栈和客店各有当期事务。",
+      "facts": [
+        {
+          "id": "dajin-city-lane-route-dajin-jinjing",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-jinjing"
+          },
+          "description": "城门和街道通行，禁飞是地方规约。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-city-lane-travel-dajin-jinjing",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "城门和街道通行，禁飞是地方规约。"
+          },
+          "description": "城门和街道通行，禁飞是地方规约。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-city-lane-route-dajin-auction-house",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-auction-house"
+          },
+          "description": "营业与接待按现场人员安排，不能凭空成交。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-city-lane-travel-dajin-auction-house",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "营业与接待按现场人员安排，不能凭空成交。"
+          },
+          "description": "营业与接待按现场人员安排，不能凭空成交。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-auction-house",
+      "name": "晋京鉴物楼",
+      "kind": "location",
+      "placement": "dajin-city-lane",
+      "description": "原创小型鉴物与寄售场所，不能冒充十年大拍卖的主办方。",
+      "facts": [
+        {
+          "id": "dajin-auction-house-route-dajin-city-lane",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-city-lane"
+          },
+          "description": "营业与接待按现场人员安排，不能凭空成交。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-auction-house-travel-dajin-city-lane",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "营业与接待按现场人员安排，不能凭空成交。"
+          },
+          "description": "营业与接待按现场人员安排，不能凭空成交。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-coast-wharf",
+      "name": "华云潮平码头",
+      "kind": "location",
+      "placement": "dajin-huayun",
+      "description": "原创沿海码头，接纳有确切船期和货单的海船。",
+      "facts": [
+        {
+          "id": "dajin-coast-wharf-route-dajin-huayun",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-huayun"
+          },
+          "description": "州内道路到海港，依实际距离和方式计算。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-coast-wharf-travel-dajin-huayun",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "州内道路到海港，依实际距离和方式计算。"
+          },
+          "description": "州内道路到海港，依实际距离和方式计算。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-taiyi-court",
+      "name": "太一门外院",
+      "kind": "location",
+      "placement": "dajin-zhenhuan",
+      "description": "原创日常来客外院，山门与秘谷的通行权限分开。",
+      "facts": [
+        {
+          "id": "dajin-taiyi-court-route-dajin-zhenhuan",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-zhenhuan"
+          },
+          "description": "山门外院允许通报来意。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-taiyi-court-travel-dajin-zhenhuan",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "山门外院允许通报来意。"
+          },
+          "description": "山门外院允许通报来意。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-temple-room",
+      "name": "城郊客舍",
+      "kind": "location",
+      "placement": "dajin-jinjing",
+      "description": "原创清静客舍，向之礼在此短住，平日来客稀少。",
+      "facts": [
+        {
+          "id": "dajin-temple-room-route-dajin-jinjing",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-jinjing"
+          },
+          "description": "郊外道路步行或用适当载具。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-temple-room-travel-dajin-jinjing",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "郊外道路步行或用适当载具。"
+          },
+          "description": "郊外道路步行或用适当载具。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-wind-retreat",
+      "name": "风老怪暂居山舍",
+      "kind": "location",
+      "placement": "dajin-wuyue",
+      "description": "原创当期暂居处，来者不能仅凭知道姓名便找到隐修。",
+      "facts": [
+        {
+          "id": "dajin-wind-retreat-route-dajin-wuyue",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-wuyue"
+          },
+          "description": "山间隐修小径需确切引路，地点认知不自动共享。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-wind-retreat-travel-dajin-wuyue",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "山间隐修小径需确切引路，地点认知不自动共享。"
+          },
+          "description": "山间隐修小径需确切引路，地点认知不自动共享。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-yinluo-hall",
+      "name": "阴罗宗外务馆",
+      "kind": "location",
+      "placement": "human-dajin",
+      "description": "原创驻地方外务馆，不标成未核实的宗门本山。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-taiyi-sect",
+      "name": "太一门",
+      "kind": "organization",
+      "placement": "dajin-zhenhuan",
+      "description": "大晋正道大宗，有外院、灵山和不同权限的门人。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianmo-sect",
+      "name": "天魔宗",
+      "kind": "organization",
+      "placement": "dajin-motuo",
+      "description": "大晋魔道大宗；魔宫太上长老与日常宗务并非同一岗位。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-yinluo-sect",
+      "name": "阴罗宗",
+      "kind": "organization",
+      "placement": "dajin-yinluo-hall",
+      "description": "魔道宗门，长老、宗主与各分系存在不同利益。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-yueyang",
+      "name": "岳阳宫",
+      "kind": "organization",
+      "placement": "dajin-nantian-peak",
+      "description": "陇州修仙势力。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-momu",
+      "name": "魔木宗",
+      "kind": "organization",
+      "placement": "dajin-longzhou",
+      "description": "与岳阳宫在陇州并立的宗门。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianfu",
+      "name": "天符门",
+      "kind": "organization",
+      "placement": "dajin-baizhu",
+      "description": "有悠久符箓传承的宗门，灵脉与主修功法均有限制。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-court",
+      "name": "大晋朝廷",
+      "kind": "organization",
+      "placement": "dajin-jinjing",
+      "description": "凡俗王朝，通过官员、资源和修士委托维持秩序。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-xiang-zhili",
+      "name": "向之礼",
+      "kind": "person",
+      "placement": "dajin-temple-room",
+      "description": "圆滑而谨慎的隐修，常以平常修士形貌行走，不随便向陌生人暴露底细。",
+      "facts": [
+        {
+          "id": "canon-xiang-zhili-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "化神"
+          },
+          "description": "化神",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-xiang-zhili"
+            ]
+          }
+        },
+        {
+          "id": "canon-xiang-zhili-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "化神初期修为，能运用法力、神识、隐匿与本身所学；大耗法力可能损精元，未赋予未核实的独门绝技。"
+          },
+          "description": "化神初期修为，能运用法力、神识、隐匿与本身所学；大耗法力可能损精元，未赋予未核实的独门绝技。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-xiang-zhili"
+            ]
+          }
+        },
+        {
+          "id": "canon-xiang-zhili-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-xiang-zhili"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-xiang-zhili-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-xiang-zhili-mana",
+          "definition_id": "mana",
+          "current": 1400
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-xiang-zhili-cultivation",
+          "definition_id": "cultivation",
+          "value": 5
+        },
+        {
+          "id": "canon-xiang-zhili-force",
+          "definition_id": "force",
+          "value": 5
+        },
+        {
+          "id": "canon-xiang-zhili-craft",
+          "definition_id": "craft",
+          "value": 4
+        },
+        {
+          "id": "canon-xiang-zhili-perception",
+          "definition_id": "perception",
+          "value": 5
+        },
+        {
+          "id": "canon-xiang-zhili-influence",
+          "definition_id": "influence",
+          "value": 4
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 230
+        }
+      ],
+      "agent": {
+        "id": "canon-xiang-zhili",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "圆滑而谨慎的隐修，常以平常修士形貌行走，不随便向陌生人暴露底细。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "核实一条旧时通道传闻，先听来客说法再决定行程。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "向之礼",
+              "description": "圆滑而谨慎的隐修，常以平常修士形貌行走，不随便向陌生人暴露底细。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "城郊客舍",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-xiang-zhili-pouch",
+              "name": "向之礼的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-feng-laoguai",
+              "name": "风老怪",
+              "description": "长期往来的同道；知道他重视寿元与实际利益。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-xiang-zhili"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "dajin-temple-room"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-xiang-zhili-pouch",
+              "canonical_entity_ids": [
+                "canon-xiang-zhili-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-feng-laoguai",
+              "canonical_entity_ids": [
+                "canon-feng-laoguai"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "化神初期修为，能运用法力、神识、隐匿与本身所学；大耗法力可能损精元，未赋予未核实的独门绝技。"
+              },
+              "description": "化神初期修为，能运用法力、神识、隐匿与本身所学；大耗法力可能损精元，未赋予未核实的独门绝技。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "核实一条旧时通道传闻，先听来客说法再决定行程。"
+              },
+              "description": "核实一条旧时通道传闻，先听来客说法再决定行程。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是化神修士。"
+              },
+              "description": "自己是化神修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-xiang-zhili-pouch",
+      "name": "向之礼的私用行囊",
+      "kind": "item",
+      "placement": "canon-xiang-zhili",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "canon-xiang-zhili-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-xiang-zhili"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "canon-feng-laoguai",
+      "name": "风老怪",
+      "kind": "person",
+      "placement": "dajin-wind-retreat",
+      "description": "有自己的交游与利益，重视稀有资源和寿元，不把每次冒犯都当作必须拼命的仇。",
+      "facts": [
+        {
+          "id": "canon-feng-laoguai-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "化神"
+          },
+          "description": "化神",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-feng-laoguai"
+            ]
+          }
+        },
+        {
+          "id": "canon-feng-laoguai-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "化神初期修为，能运用法力、神识、隐匿与本身所学；大耗法力可能损精元，未赋予未核实的独门绝技。"
+          },
+          "description": "化神初期修为，能运用法力、神识、隐匿与本身所学；大耗法力可能损精元，未赋予未核实的独门绝技。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-feng-laoguai"
+            ]
+          }
+        },
+        {
+          "id": "canon-feng-laoguai-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-feng-laoguai"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-feng-laoguai-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-feng-laoguai-mana",
+          "definition_id": "mana",
+          "current": 1400
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-feng-laoguai-cultivation",
+          "definition_id": "cultivation",
+          "value": 5
+        },
+        {
+          "id": "canon-feng-laoguai-force",
+          "definition_id": "force",
+          "value": 5
+        },
+        {
+          "id": "canon-feng-laoguai-craft",
+          "definition_id": "craft",
+          "value": 4
+        },
+        {
+          "id": "canon-feng-laoguai-perception",
+          "definition_id": "perception",
+          "value": 5
+        },
+        {
+          "id": "canon-feng-laoguai-influence",
+          "definition_id": "influence",
+          "value": 4
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 230
+        }
+      ],
+      "agent": {
+        "id": "canon-feng-laoguai",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "有自己的交游与利益，重视稀有资源和寿元，不把每次冒犯都当作必须拼命的仇。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "整理同道往来并衡量一次远行是否值得耗费精元。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "风老怪",
+              "description": "有自己的交游与利益，重视稀有资源和寿元，不把每次冒犯都当作必须拼命的仇。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "风老怪暂居山舍",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-feng-laoguai-pouch",
+              "name": "风老怪的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-xiang-zhili",
+              "name": "向之礼",
+              "description": "长期来往的向道友，有事会留后手。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-feng-laoguai"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "dajin-wind-retreat"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-feng-laoguai-pouch",
+              "canonical_entity_ids": [
+                "canon-feng-laoguai-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-xiang-zhili",
+              "canonical_entity_ids": [
+                "canon-xiang-zhili"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "化神初期修为，能运用法力、神识、隐匿与本身所学；大耗法力可能损精元，未赋予未核实的独门绝技。"
+              },
+              "description": "化神初期修为，能运用法力、神识、隐匿与本身所学；大耗法力可能损精元，未赋予未核实的独门绝技。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "整理同道往来并衡量一次远行是否值得耗费精元。"
+              },
+              "description": "整理同道往来并衡量一次远行是否值得耗费精元。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是化神修士。"
+              },
+              "description": "自己是化神修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-feng-laoguai-pouch",
+      "name": "风老怪的私用行囊",
+      "kind": "item",
+      "placement": "canon-feng-laoguai",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "canon-feng-laoguai-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-feng-laoguai"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "canon-hu-qinglei",
+      "name": "呼庆雷",
+      "kind": "person",
+      "placement": "dajin-motuo",
+      "description": "天魔宗太上长老，重视体面、灵药和修行，面对能提供利益的人会权衡。",
+      "facts": [
+        {
+          "id": "canon-hu-qinglei-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "化神"
+          },
+          "description": "化神",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-hu-qinglei"
+            ]
+          }
+        },
+        {
+          "id": "canon-hu-qinglei-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "化神初期修为，能运用法力、神识、隐匿与本身所学；大耗法力可能损精元，未赋予未核实的独门绝技。"
+          },
+          "description": "化神初期修为，能运用法力、神识、隐匿与本身所学；大耗法力可能损精元，未赋予未核实的独门绝技。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-hu-qinglei"
+            ]
+          }
+        },
+        {
+          "id": "canon-hu-qinglei-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-hu-qinglei"
+            ]
+          }
+        },
+        {
+          "id": "canon-hu-qinglei-affiliation",
+          "predicate": "affiliated-with",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianmo-sect"
+          },
+          "description": "affiliated-with",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-hu-qinglei-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-hu-qinglei-mana",
+          "definition_id": "mana",
+          "current": 1400
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-hu-qinglei-cultivation",
+          "definition_id": "cultivation",
+          "value": 5
+        },
+        {
+          "id": "canon-hu-qinglei-force",
+          "definition_id": "force",
+          "value": 5
+        },
+        {
+          "id": "canon-hu-qinglei-craft",
+          "definition_id": "craft",
+          "value": 4
+        },
+        {
+          "id": "canon-hu-qinglei-perception",
+          "definition_id": "perception",
+          "value": 5
+        },
+        {
+          "id": "canon-hu-qinglei-influence",
+          "definition_id": "influence",
+          "value": 4
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 230
+        }
+      ],
+      "agent": {
+        "id": "canon-hu-qinglei",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "天魔宗太上长老，重视体面、灵药和修行，面对能提供利益的人会权衡。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "审看山中灵药储备，决定是否答应同道交换。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "呼庆雷",
+              "description": "天魔宗太上长老，重视体面、灵药和修行，面对能提供利益的人会权衡。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "魔陀山",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-hu-qinglei-pouch",
+              "name": "呼庆雷的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianmo-sect",
+              "name": "天魔宗",
+              "description": "自己长期有关联的宗门；公产不等于私人财物。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-motuo-stock",
+              "name": "魔宫灵药储柜",
+              "description": "属于呼庆雷的有限药材储备；没有凭空准备好回阳真水。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-hu-qinglei"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "dajin-motuo"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-hu-qinglei-pouch",
+              "canonical_entity_ids": [
+                "canon-hu-qinglei-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianmo-sect",
+              "canonical_entity_ids": [
+                "dajin-tianmo-sect"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-motuo-stock",
+              "canonical_entity_ids": [
+                "dajin-motuo-stock"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "化神初期修为，能运用法力、神识、隐匿与本身所学；大耗法力可能损精元，未赋予未核实的独门绝技。"
+              },
+              "description": "化神初期修为，能运用法力、神识、隐匿与本身所学；大耗法力可能损精元，未赋予未核实的独门绝技。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "审看山中灵药储备，决定是否答应同道交换。"
+              },
+              "description": "审看山中灵药储备，决定是否答应同道交换。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是化神修士。"
+              },
+              "description": "自己是化神修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-hu-qinglei-pouch",
+      "name": "呼庆雷的私用行囊",
+      "kind": "item",
+      "placement": "canon-hu-qinglei",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "canon-hu-qinglei-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-hu-qinglei"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "canon-bai-laogui",
+      "name": "太一门白姓隐修",
+      "kind": "person",
+      "placement": "dajin-binghun",
+      "description": "隐居冰魂谷的化神修士，倾向修行突破，不轻易为别人的冒险离开闭关地。",
+      "facts": [
+        {
+          "id": "canon-bai-laogui-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "化神"
+          },
+          "description": "化神",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-bai-laogui"
+            ]
+          }
+        },
+        {
+          "id": "canon-bai-laogui-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "化神初期修为，能运用法力、神识、隐匿与本身所学；大耗法力可能损精元，未赋予未核实的独门绝技。"
+          },
+          "description": "化神初期修为，能运用法力、神识、隐匿与本身所学；大耗法力可能损精元，未赋予未核实的独门绝技。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-bai-laogui"
+            ]
+          }
+        },
+        {
+          "id": "canon-bai-laogui-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-bai-laogui"
+            ]
+          }
+        },
+        {
+          "id": "canon-bai-laogui-affiliation",
+          "predicate": "affiliated-with",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-taiyi-sect"
+          },
+          "description": "affiliated-with",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-bai-laogui-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-bai-laogui-mana",
+          "definition_id": "mana",
+          "current": 1400
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-bai-laogui-cultivation",
+          "definition_id": "cultivation",
+          "value": 5
+        },
+        {
+          "id": "canon-bai-laogui-force",
+          "definition_id": "force",
+          "value": 5
+        },
+        {
+          "id": "canon-bai-laogui-craft",
+          "definition_id": "craft",
+          "value": 4
+        },
+        {
+          "id": "canon-bai-laogui-perception",
+          "definition_id": "perception",
+          "value": 5
+        },
+        {
+          "id": "canon-bai-laogui-influence",
+          "definition_id": "influence",
+          "value": 4
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 230
+        }
+      ],
+      "agent": {
+        "id": "canon-bai-laogui",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "隐居冰魂谷的化神修士，倾向修行突破，不轻易为别人的冒险离开闭关地。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "研究自己的功法瓶颈，择机听取门人送来的确切消息。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "太一门白姓隐修",
+              "description": "隐居冰魂谷的化神修士，倾向修行突破，不轻易为别人的冒险离开闭关地。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "冰魂谷",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-bai-laogui-pouch",
+              "name": "太一门白姓隐修的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-taiyi-sect",
+              "name": "太一门",
+              "description": "自己长期有关联的宗门；公产不等于私人财物。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-bai-laogui"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "dajin-binghun"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-bai-laogui-pouch",
+              "canonical_entity_ids": [
+                "canon-bai-laogui-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-taiyi-sect",
+              "canonical_entity_ids": [
+                "dajin-taiyi-sect"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "化神初期修为，能运用法力、神识、隐匿与本身所学；大耗法力可能损精元，未赋予未核实的独门绝技。"
+              },
+              "description": "化神初期修为，能运用法力、神识、隐匿与本身所学；大耗法力可能损精元，未赋予未核实的独门绝技。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "研究自己的功法瓶颈，择机听取门人送来的确切消息。"
+              },
+              "description": "研究自己的功法瓶颈，择机听取门人送来的确切消息。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是化神修士。"
+              },
+              "description": "自己是化神修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-bai-laogui-pouch",
+      "name": "太一门白姓隐修的私用行囊",
+      "kind": "item",
+      "placement": "canon-bai-laogui",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "canon-bai-laogui-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-bai-laogui"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "dajin-wen-qiao",
+      "name": "温乔",
+      "kind": "person",
+      "placement": "dajin-river-wharf",
+      "description": "舜江船主，熟悉水势，爱护旧船也珍惜信用。",
+      "facts": [
+        {
+          "id": "dajin-wen-qiao-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "凡人"
+          },
+          "description": "凡人",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-wen-qiao"
+            ]
+          }
+        },
+        {
+          "id": "dajin-wen-qiao-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "行船、辨冰、货物配载和基础木作。"
+          },
+          "description": "行船、辨冰、货物配载和基础木作。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-wen-qiao"
+            ]
+          }
+        },
+        {
+          "id": "dajin-wen-qiao-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根的凡人。"
+          },
+          "description": "无灵根的凡人。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-wen-qiao"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "dajin-wen-qiao-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "dajin-wen-qiao-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "dajin-wen-qiao-force",
+          "definition_id": "force",
+          "value": 0
+        },
+        {
+          "id": "dajin-wen-qiao-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "dajin-wen-qiao-perception",
+          "definition_id": "perception",
+          "value": 0
+        },
+        {
+          "id": "dajin-wen-qiao-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 260
+        }
+      ],
+      "agent": {
+        "id": "dajin-wen-qiao",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "舜江船主，熟悉水势，爱护旧船也珍惜信用。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "确认明早能否安全开船；宁可解释延误也不藏起漏水。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "温乔",
+              "description": "舜江船主，熟悉水势，爱护旧船也珍惜信用。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "渡水埠",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-wen-qiao-pouch",
+              "name": "温乔的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-shao-lan",
+              "name": "邵兰",
+              "description": "记账合伙人，昨晚仍在核查货单。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-jiang-shuo",
+              "name": "姜朔",
+              "description": "曾谈过护航的散修。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-river-cargo",
+              "name": "药材托运箱",
+              "description": "受托运送，尚未与记账人完成交接。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-river-boat",
+              "name": "温乔的河船",
+              "description": "有旧接缝需检查的货船；并非已经损坏或保证无事。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "dajin-wen-qiao"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "dajin-river-wharf"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-wen-qiao-pouch",
+              "canonical_entity_ids": [
+                "dajin-wen-qiao-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-shao-lan",
+              "canonical_entity_ids": [
+                "dajin-shao-lan"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-jiang-shuo",
+              "canonical_entity_ids": [
+                "dajin-jiang-shuo"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-river-cargo",
+              "canonical_entity_ids": [
+                "dajin-river-cargo"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-river-boat",
+              "canonical_entity_ids": [
+                "dajin-river-boat"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "行船、辨冰、货物配载和基础木作。"
+              },
+              "description": "行船、辨冰、货物配载和基础木作。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "确认明早能否安全开船；宁可解释延误也不藏起漏水。"
+              },
+              "description": "确认明早能否安全开船；宁可解释延误也不藏起漏水。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是凡人。"
+              },
+              "description": "自己是凡人。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dajin-wen-qiao-pouch",
+      "name": "温乔的私用行囊",
+      "kind": "item",
+      "placement": "dajin-wen-qiao",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "dajin-wen-qiao-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-wen-qiao"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "dajin-shao-lan",
+      "name": "邵兰",
+      "kind": "person",
+      "placement": "dajin-river-wharf",
+      "description": "码头记账人，掌握装卸单，与船工熟识。",
+      "facts": [
+        {
+          "id": "dajin-shao-lan-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "凡人"
+          },
+          "description": "凡人",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-shao-lan"
+            ]
+          }
+        },
+        {
+          "id": "dajin-shao-lan-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "货单核对、心算、仓储记录。"
+          },
+          "description": "货单核对、心算、仓储记录。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-shao-lan"
+            ]
+          }
+        },
+        {
+          "id": "dajin-shao-lan-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根的凡人。"
+          },
+          "description": "无灵根的凡人。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-shao-lan"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "dajin-shao-lan-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "dajin-shao-lan-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "dajin-shao-lan-force",
+          "definition_id": "force",
+          "value": 0
+        },
+        {
+          "id": "dajin-shao-lan-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "dajin-shao-lan-perception",
+          "definition_id": "perception",
+          "value": 0
+        },
+        {
+          "id": "dajin-shao-lan-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 120
+        }
+      ],
+      "agent": {
+        "id": "dajin-shao-lan",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "码头记账人，掌握装卸单，与船工熟识。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "找出货单少了两包药材是抄错还是未装。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "邵兰",
+              "description": "码头记账人，掌握装卸单，与船工熟识。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "渡水埠",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-shao-lan-pouch",
+              "name": "邵兰的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-wen-qiao",
+              "name": "温乔",
+              "description": "合作船主，船况由他负责。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-he-rong",
+              "name": "贺容",
+              "description": "有交货关系的货栈掌柜。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-river-cargo",
+              "name": "药材托运箱",
+              "description": "记录列十八箱，现场待复点。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "dajin-shao-lan"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "dajin-river-wharf"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-shao-lan-pouch",
+              "canonical_entity_ids": [
+                "dajin-shao-lan-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-wen-qiao",
+              "canonical_entity_ids": [
+                "dajin-wen-qiao"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-he-rong",
+              "canonical_entity_ids": [
+                "dajin-he-rong"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-river-cargo",
+              "canonical_entity_ids": [
+                "dajin-river-cargo"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "货单核对、心算、仓储记录。"
+              },
+              "description": "货单核对、心算、仓储记录。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "找出货单少了两包药材是抄错还是未装。"
+              },
+              "description": "找出货单少了两包药材是抄错还是未装。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是凡人。"
+              },
+              "description": "自己是凡人。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dajin-shao-lan-pouch",
+      "name": "邵兰的私用行囊",
+      "kind": "item",
+      "placement": "dajin-shao-lan",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "dajin-shao-lan-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-shao-lan"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "dajin-jiang-shuo",
+      "name": "姜朔",
+      "kind": "person",
+      "placement": "dajin-river-wharf",
+      "description": "炼气护航散修，接受明确期限的护送，不替船主承担全部天气风险。",
+      "facts": [
+        {
+          "id": "dajin-jiang-shuo-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼气"
+          },
+          "description": "炼气",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-jiang-shuo"
+            ]
+          }
+        },
+        {
+          "id": "dajin-jiang-shuo-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "基础御物、防护法术和沿岸警戒。"
+          },
+          "description": "基础御物、防护法术和沿岸警戒。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-jiang-shuo"
+            ]
+          }
+        },
+        {
+          "id": "dajin-jiang-shuo-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-jiang-shuo"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "dajin-jiang-shuo-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "dajin-jiang-shuo-mana",
+          "definition_id": "mana",
+          "current": 80
+        }
+      ],
+      "ratings": [
+        {
+          "id": "dajin-jiang-shuo-cultivation",
+          "definition_id": "cultivation",
+          "value": 1
+        },
+        {
+          "id": "dajin-jiang-shuo-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "dajin-jiang-shuo-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "dajin-jiang-shuo-perception",
+          "definition_id": "perception",
+          "value": 1
+        },
+        {
+          "id": "dajin-jiang-shuo-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 35
+        }
+      ],
+      "agent": {
+        "id": "dajin-jiang-shuo",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "炼气护航散修，接受明确期限的护送，不替船主承担全部天气风险。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "和船主谈清护送期限及补给。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "姜朔",
+              "description": "炼气护航散修，接受明确期限的护送，不替船主承担全部天气风险。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "渡水埠",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-jiang-shuo-pouch",
+              "name": "姜朔的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-wen-qiao",
+              "name": "温乔",
+              "description": "正在议定护航合同的船主。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "dajin-jiang-shuo"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "dajin-river-wharf"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-jiang-shuo-pouch",
+              "canonical_entity_ids": [
+                "dajin-jiang-shuo-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-wen-qiao",
+              "canonical_entity_ids": [
+                "dajin-wen-qiao"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "基础御物、防护法术和沿岸警戒。"
+              },
+              "description": "基础御物、防护法术和沿岸警戒。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "和船主谈清护送期限及补给。"
+              },
+              "description": "和船主谈清护送期限及补给。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是炼气修士。"
+              },
+              "description": "自己是炼气修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dajin-jiang-shuo-pouch",
+      "name": "姜朔的私用行囊",
+      "kind": "item",
+      "placement": "dajin-jiang-shuo",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "dajin-jiang-shuo-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-jiang-shuo"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "dajin-he-rong",
+      "name": "贺容",
+      "kind": "person",
+      "placement": "dajin-city-lane",
+      "description": "药材货栈掌柜，知道熟客的习惯，不知道他们每个人的真实境界。",
+      "facts": [
+        {
+          "id": "dajin-he-rong-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "凡人"
+          },
+          "description": "凡人",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-he-rong"
+            ]
+          }
+        },
+        {
+          "id": "dajin-he-rong-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "药材验收、估价和日常商谈。"
+          },
+          "description": "药材验收、估价和日常商谈。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-he-rong"
+            ]
+          }
+        },
+        {
+          "id": "dajin-he-rong-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根的凡人。"
+          },
+          "description": "无灵根的凡人。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-he-rong"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "dajin-he-rong-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "dajin-he-rong-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "dajin-he-rong-force",
+          "definition_id": "force",
+          "value": 0
+        },
+        {
+          "id": "dajin-he-rong-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "dajin-he-rong-perception",
+          "definition_id": "perception",
+          "value": 0
+        },
+        {
+          "id": "dajin-he-rong-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 600
+        }
+      ],
+      "agent": {
+        "id": "dajin-he-rong",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "药材货栈掌柜，知道熟客的习惯，不知道他们每个人的真实境界。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "按账向码头核对药材交付，不误了老客户。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "贺容",
+              "description": "药材货栈掌柜，知道熟客的习惯，不知道他们每个人的真实境界。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "晋京南坊",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-he-rong-pouch",
+              "name": "贺容的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-shao-lan",
+              "name": "邵兰",
+              "description": "寄来本批货单的码头记账人。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-river-cargo",
+              "name": "药材托运箱",
+              "description": "货物归贺容，温乔只是运输；账面十八箱，当前可点验十六箱，其余是原始单据误记还是漏装须调查。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "dajin-he-rong"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "dajin-city-lane"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-he-rong-pouch",
+              "canonical_entity_ids": [
+                "dajin-he-rong-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-shao-lan",
+              "canonical_entity_ids": [
+                "dajin-shao-lan"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-river-cargo",
+              "canonical_entity_ids": [
+                "dajin-river-cargo"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "药材验收、估价和日常商谈。"
+              },
+              "description": "药材验收、估价和日常商谈。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "按账向码头核对药材交付，不误了老客户。"
+              },
+              "description": "按账向码头核对药材交付，不误了老客户。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是凡人。"
+              },
+              "description": "自己是凡人。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dajin-he-rong-pouch",
+      "name": "贺容的私用行囊",
+      "kind": "item",
+      "placement": "dajin-he-rong",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "dajin-he-rong-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-he-rong"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "dajin-qin-su",
+      "name": "秦素",
+      "kind": "person",
+      "placement": "dajin-auction-house",
+      "description": "筑基鉴物师，有说不准的东西便要求更多证据。",
+      "facts": [
+        {
+          "id": "dajin-qin-su-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "筑基"
+          },
+          "description": "筑基",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-qin-su"
+            ]
+          }
+        },
+        {
+          "id": "dajin-qin-su-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "低阶法器鉴定与阵盘维护，不能一眼识破所有古宝。"
+          },
+          "description": "低阶法器鉴定与阵盘维护，不能一眼识破所有古宝。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-qin-su"
+            ]
+          }
+        },
+        {
+          "id": "dajin-qin-su-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-qin-su"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "dajin-qin-su-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "dajin-qin-su-mana",
+          "definition_id": "mana",
+          "current": 180
+        }
+      ],
+      "ratings": [
+        {
+          "id": "dajin-qin-su-cultivation",
+          "definition_id": "cultivation",
+          "value": 2
+        },
+        {
+          "id": "dajin-qin-su-force",
+          "definition_id": "force",
+          "value": 2
+        },
+        {
+          "id": "dajin-qin-su-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "dajin-qin-su-perception",
+          "definition_id": "perception",
+          "value": 2
+        },
+        {
+          "id": "dajin-qin-su-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 65
+        }
+      ],
+      "agent": {
+        "id": "dajin-qin-su",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "筑基鉴物师，有说不准的东西便要求更多证据。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "检查寄售阵盘的旧修补痕迹，决定是否接单。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "秦素",
+              "description": "筑基鉴物师，有说不准的东西便要求更多证据。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "晋京鉴物楼",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-qin-su-pouch",
+              "name": "秦素的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-cui-yue",
+              "name": "崔越",
+              "description": "曾合作辨认海货的验货人。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "dajin-qin-su"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "dajin-auction-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-qin-su-pouch",
+              "canonical_entity_ids": [
+                "dajin-qin-su-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-cui-yue",
+              "canonical_entity_ids": [
+                "dajin-cui-yue"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "低阶法器鉴定与阵盘维护，不能一眼识破所有古宝。"
+              },
+              "description": "低阶法器鉴定与阵盘维护，不能一眼识破所有古宝。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "检查寄售阵盘的旧修补痕迹，决定是否接单。"
+              },
+              "description": "检查寄售阵盘的旧修补痕迹，决定是否接单。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是筑基修士。"
+              },
+              "description": "自己是筑基修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dajin-qin-su-pouch",
+      "name": "秦素的私用行囊",
+      "kind": "item",
+      "placement": "dajin-qin-su",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "dajin-qin-su-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-qin-su"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "dajin-liang-sheng",
+      "name": "梁笙",
+      "kind": "person",
+      "placement": "dajin-city-lane",
+      "description": "受官府雇佣的巡查修士，会记录强宗越规，但没有制服化神的力量。",
+      "facts": [
+        {
+          "id": "dajin-liang-sheng-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼气"
+          },
+          "description": "炼气",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-liang-sheng"
+            ]
+          }
+        },
+        {
+          "id": "dajin-liang-sheng-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "炼气感知、照明与基础自护。"
+          },
+          "description": "炼气感知、照明与基础自护。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-liang-sheng"
+            ]
+          }
+        },
+        {
+          "id": "dajin-liang-sheng-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-liang-sheng"
+            ]
+          }
+        },
+        {
+          "id": "dajin-liang-sheng-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-court"
+          },
+          "description": "受雇巡查，报酬来自明确雇约。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "dajin-liang-sheng-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "dajin-liang-sheng-mana",
+          "definition_id": "mana",
+          "current": 80
+        }
+      ],
+      "ratings": [
+        {
+          "id": "dajin-liang-sheng-cultivation",
+          "definition_id": "cultivation",
+          "value": 1
+        },
+        {
+          "id": "dajin-liang-sheng-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "dajin-liang-sheng-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "dajin-liang-sheng-perception",
+          "definition_id": "perception",
+          "value": 1
+        },
+        {
+          "id": "dajin-liang-sheng-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 25
+        }
+      ],
+      "agent": {
+        "id": "dajin-liang-sheng",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "受官府雇佣的巡查修士，会记录强宗越规，但没有制服化神的力量。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "交清今夜巡查记录，处理街坊噪声争执。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "梁笙",
+              "description": "受官府雇佣的巡查修士，会记录强宗越规，但没有制服化神的力量。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "晋京南坊",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-liang-sheng-pouch",
+              "name": "梁笙的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-court",
+              "name": "大晋朝廷",
+              "description": "受雇巡查，报酬来自明确雇约。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "dajin-liang-sheng"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "dajin-city-lane"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-liang-sheng-pouch",
+              "canonical_entity_ids": [
+                "dajin-liang-sheng-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-court",
+              "canonical_entity_ids": [
+                "dajin-court"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "炼气感知、照明与基础自护。"
+              },
+              "description": "炼气感知、照明与基础自护。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "交清今夜巡查记录，处理街坊噪声争执。"
+              },
+              "description": "交清今夜巡查记录，处理街坊噪声争执。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是炼气修士。"
+              },
+              "description": "自己是炼气修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dajin-liang-sheng-pouch",
+      "name": "梁笙的私用行囊",
+      "kind": "item",
+      "placement": "dajin-liang-sheng",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "dajin-liang-sheng-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-liang-sheng"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "dajin-xu-yan",
+      "name": "徐砚",
+      "kind": "person",
+      "placement": "dajin-taiyi-court",
+      "description": "太一门外院接待，熟悉通报手续，对秘谷不妄言。",
+      "facts": [
+        {
+          "id": "dajin-xu-yan-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "筑基"
+          },
+          "description": "筑基",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-xu-yan"
+            ]
+          }
+        },
+        {
+          "id": "dajin-xu-yan-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "筑基法力、门禁辨识和书信传递。"
+          },
+          "description": "筑基法力、门禁辨识和书信传递。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-xu-yan"
+            ]
+          }
+        },
+        {
+          "id": "dajin-xu-yan-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-xu-yan"
+            ]
+          }
+        },
+        {
+          "id": "dajin-xu-yan-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-taiyi-sect"
+          },
+          "description": "外院接待，不能擅自开放冰魂谷。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "dajin-xu-yan-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "dajin-xu-yan-mana",
+          "definition_id": "mana",
+          "current": 180
+        }
+      ],
+      "ratings": [
+        {
+          "id": "dajin-xu-yan-cultivation",
+          "definition_id": "cultivation",
+          "value": 2
+        },
+        {
+          "id": "dajin-xu-yan-force",
+          "definition_id": "force",
+          "value": 2
+        },
+        {
+          "id": "dajin-xu-yan-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "dajin-xu-yan-perception",
+          "definition_id": "perception",
+          "value": 2
+        },
+        {
+          "id": "dajin-xu-yan-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 40
+        }
+      ],
+      "agent": {
+        "id": "dajin-xu-yan",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "太一门外院接待，熟悉通报手续，对秘谷不妄言。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "把求见请求与随行货单逐件核实。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "徐砚",
+              "description": "太一门外院接待，熟悉通报手续，对秘谷不妄言。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "太一门外院",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-xu-yan-pouch",
+              "name": "徐砚的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-taiyi-sect",
+              "name": "太一门",
+              "description": "外院接待，不能擅自开放冰魂谷。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "dajin-xu-yan"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "dajin-taiyi-court"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-xu-yan-pouch",
+              "canonical_entity_ids": [
+                "dajin-xu-yan-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-taiyi-sect",
+              "canonical_entity_ids": [
+                "dajin-taiyi-sect"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "筑基法力、门禁辨识和书信传递。"
+              },
+              "description": "筑基法力、门禁辨识和书信传递。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "把求见请求与随行货单逐件核实。"
+              },
+              "description": "把求见请求与随行货单逐件核实。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是筑基修士。"
+              },
+              "description": "自己是筑基修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dajin-xu-yan-pouch",
+      "name": "徐砚的私用行囊",
+      "kind": "item",
+      "placement": "dajin-xu-yan",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "dajin-xu-yan-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-xu-yan"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "dajin-fu-heng",
+      "name": "傅衡",
+      "kind": "person",
+      "placement": "dajin-baizhu",
+      "description": "天符门符师，愿教肯认真处理材料的人。",
+      "facts": [
+        {
+          "id": "dajin-fu-heng-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "筑基"
+          },
+          "description": "筑基",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-fu-heng"
+            ]
+          }
+        },
+        {
+          "id": "dajin-fu-heng-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "低阶符箓制作和材料处理；不拥有失落密符的全部解法。"
+          },
+          "description": "低阶符箓制作和材料处理；不拥有失落密符的全部解法。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-fu-heng"
+            ]
+          }
+        },
+        {
+          "id": "dajin-fu-heng-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-fu-heng"
+            ]
+          }
+        },
+        {
+          "id": "dajin-fu-heng-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianfu"
+          },
+          "description": "门内符师，公库材料需记账。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "dajin-fu-heng-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "dajin-fu-heng-mana",
+          "definition_id": "mana",
+          "current": 180
+        }
+      ],
+      "ratings": [
+        {
+          "id": "dajin-fu-heng-cultivation",
+          "definition_id": "cultivation",
+          "value": 2
+        },
+        {
+          "id": "dajin-fu-heng-force",
+          "definition_id": "force",
+          "value": 2
+        },
+        {
+          "id": "dajin-fu-heng-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "dajin-fu-heng-perception",
+          "definition_id": "perception",
+          "value": 2
+        },
+        {
+          "id": "dajin-fu-heng-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 45
+        }
+      ],
+      "agent": {
+        "id": "dajin-fu-heng",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "天符门符师，愿教肯认真处理材料的人。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "修补仓内受潮符纸并争取下一批原料。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "傅衡",
+              "description": "天符门符师，愿教肯认真处理材料的人。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "白竹山",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-fu-heng-pouch",
+              "name": "傅衡的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianfu",
+              "name": "天符门",
+              "description": "门内符师，公库材料需记账。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-tianfu-stock",
+              "name": "天符门材料柜",
+              "description": "熟悉存放位置和领用登记手续。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "dajin-fu-heng"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "dajin-baizhu"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-fu-heng-pouch",
+              "canonical_entity_ids": [
+                "dajin-fu-heng-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianfu",
+              "canonical_entity_ids": [
+                "dajin-tianfu"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-tianfu-stock",
+              "canonical_entity_ids": [
+                "dajin-tianfu-stock"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "低阶符箓制作和材料处理；不拥有失落密符的全部解法。"
+              },
+              "description": "低阶符箓制作和材料处理；不拥有失落密符的全部解法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "修补仓内受潮符纸并争取下一批原料。"
+              },
+              "description": "修补仓内受潮符纸并争取下一批原料。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是筑基修士。"
+              },
+              "description": "自己是筑基修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dajin-fu-heng-pouch",
+      "name": "傅衡的私用行囊",
+      "kind": "item",
+      "placement": "dajin-fu-heng",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "dajin-fu-heng-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-fu-heng"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "dajin-cui-yue",
+      "name": "崔越",
+      "kind": "person",
+      "placement": "dajin-coast-wharf",
+      "description": "沿海验货修士，依赖到港记录，遇陌生材料会请同行复核。",
+      "facts": [
+        {
+          "id": "dajin-cui-yue-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼气"
+          },
+          "description": "炼气",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-cui-yue"
+            ]
+          }
+        },
+        {
+          "id": "dajin-cui-yue-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "低阶灵材验货和潮汐记录。"
+          },
+          "description": "低阶灵材验货和潮汐记录。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-cui-yue"
+            ]
+          }
+        },
+        {
+          "id": "dajin-cui-yue-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-cui-yue"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "dajin-cui-yue-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "dajin-cui-yue-mana",
+          "definition_id": "mana",
+          "current": 80
+        }
+      ],
+      "ratings": [
+        {
+          "id": "dajin-cui-yue-cultivation",
+          "definition_id": "cultivation",
+          "value": 1
+        },
+        {
+          "id": "dajin-cui-yue-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "dajin-cui-yue-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "dajin-cui-yue-perception",
+          "definition_id": "perception",
+          "value": 1
+        },
+        {
+          "id": "dajin-cui-yue-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 30
+        }
+      ],
+      "agent": {
+        "id": "dajin-cui-yue",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "沿海验货修士，依赖到港记录，遇陌生材料会请同行复核。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "区分客商所说的海兽材料与实际货箱。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "崔越",
+              "description": "沿海验货修士，依赖到港记录，遇陌生材料会请同行复核。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "华云潮平码头",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-cui-yue-pouch",
+              "name": "崔越的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-qin-su",
+              "name": "秦素",
+              "description": "可以付费请其鉴定法器的同行。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "dajin-cui-yue"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "dajin-coast-wharf"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-cui-yue-pouch",
+              "canonical_entity_ids": [
+                "dajin-cui-yue-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-qin-su",
+              "canonical_entity_ids": [
+                "dajin-qin-su"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "低阶灵材验货和潮汐记录。"
+              },
+              "description": "低阶灵材验货和潮汐记录。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "区分客商所说的海兽材料与实际货箱。"
+              },
+              "description": "区分客商所说的海兽材料与实际货箱。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是炼气修士。"
+              },
+              "description": "自己是炼气修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dajin-cui-yue-pouch",
+      "name": "崔越的私用行囊",
+      "kind": "item",
+      "placement": "dajin-cui-yue",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "dajin-cui-yue-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-cui-yue"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "dajin-shi-wen",
+      "name": "施文",
+      "kind": "person",
+      "placement": "dajin-yinluo-hall",
+      "description": "阴罗宗外务弟子，重视自己的差事和安全。",
+      "facts": [
+        {
+          "id": "dajin-shi-wen-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "筑基"
+          },
+          "description": "筑基",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-shi-wen"
+            ]
+          }
+        },
+        {
+          "id": "dajin-shi-wen-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "筑基法力、普通符箓和收发宗门文书。"
+          },
+          "description": "筑基法力、普通符箓和收发宗门文书。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-shi-wen"
+            ]
+          }
+        },
+        {
+          "id": "dajin-shi-wen-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "dajin-shi-wen"
+            ]
+          }
+        },
+        {
+          "id": "dajin-shi-wen-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-yinluo-sect"
+          },
+          "description": "外务职分，不知所有高层密议。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "dajin-shi-wen-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "dajin-shi-wen-mana",
+          "definition_id": "mana",
+          "current": 180
+        }
+      ],
+      "ratings": [
+        {
+          "id": "dajin-shi-wen-cultivation",
+          "definition_id": "cultivation",
+          "value": 2
+        },
+        {
+          "id": "dajin-shi-wen-force",
+          "definition_id": "force",
+          "value": 2
+        },
+        {
+          "id": "dajin-shi-wen-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "dajin-shi-wen-perception",
+          "definition_id": "perception",
+          "value": 2
+        },
+        {
+          "id": "dajin-shi-wen-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 38
+        }
+      ],
+      "agent": {
+        "id": "dajin-shi-wen",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "阴罗宗外务弟子，重视自己的差事和安全。",
+            "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "核对一笔维护材料的采购，不擅自替长老作战。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "施文",
+              "description": "阴罗宗外务弟子，重视自己的差事和安全。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "阴罗宗外务馆",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-shi-wen-pouch",
+              "name": "施文的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-yinluo-sect",
+              "name": "阴罗宗",
+              "description": "外务职分，不知所有高层密议。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "dajin-shi-wen"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "dajin-yinluo-hall"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-shi-wen-pouch",
+              "canonical_entity_ids": [
+                "dajin-shi-wen-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-yinluo-sect",
+              "canonical_entity_ids": [
+                "dajin-yinluo-sect"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "筑基法力、普通符箓和收发宗门文书。"
+              },
+              "description": "筑基法力、普通符箓和收发宗门文书。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "核对一笔维护材料的采购，不擅自替长老作战。"
+              },
+              "description": "核对一笔维护材料的采购，不擅自替长老作战。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是筑基修士。"
+              },
+              "description": "自己是筑基修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dajin-shi-wen-pouch",
+      "name": "施文的私用行囊",
+      "kind": "item",
+      "placement": "dajin-shi-wen",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "dajin-shi-wen-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-shi-wen"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "dajin-river-cargo",
+      "name": "药材托运箱",
+      "kind": "item",
+      "placement": "dajin-river-wharf",
+      "description": "货物归贺容，温乔只是运输；账面十八箱，当前可点验十六箱，其余是原始单据误记还是漏装须调查。",
+      "facts": [
+        {
+          "id": "dajin-river-cargo-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-he-rong"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "herb-crate",
+          "amount": 16
+        }
+      ]
+    },
+    {
+      "id": "dajin-river-boat",
+      "name": "温乔的河船",
+      "kind": "item",
+      "placement": "dajin-river-wharf",
+      "description": "有旧接缝需检查的货船；并非已经损坏或保证无事。",
+      "facts": [
+        {
+          "id": "dajin-river-boat-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-wen-qiao"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 30
+        },
+        {
+          "definition_id": "lamp-oil",
+          "amount": 8
+        }
+      ]
+    },
+    {
+      "id": "dajin-tianfu-stock",
+      "name": "天符门材料柜",
+      "kind": "item",
+      "placement": "dajin-baizhu",
+      "description": "门内公用原料，傅衡能经批准领用并登记损耗。",
+      "facts": [
+        {
+          "id": "dajin-tianfu-stock-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianfu"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "craft-material",
+          "amount": 24
+        },
+        {
+          "definition_id": "low-stone",
+          "amount": 110
+        }
+      ]
+    },
+    {
+      "id": "dajin-motuo-stock",
+      "name": "魔宫灵药储柜",
+      "kind": "item",
+      "placement": "dajin-motuo",
+      "description": "属于呼庆雷的有限药材储备；没有凭空准备好回阳真水。",
+      "facts": [
+        {
+          "id": "dajin-motuo-stock-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-hu-qinglei"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "herb-packet",
+          "amount": 18
+        },
+        {
+          "definition_id": "maintenance-material",
+          "amount": 20
+        }
+      ]
+    }
+  ],
+  "existingEntityFacts": [],
+  "placements": [],
+  "entityDescriptions": [],
+  "agentCognition": [],
+  "periodicProperties": [],
+  "quantityDefinitions": [],
+  "laws": [
+    {
+      "id": "dajin-political-enforcement",
+      "text": "晋京禁飞禁斗、官府巡查与化神禁约都是社会规则。违反可以引来证人、追责和同阶干预，不能被写成任何人物物理上绝无可能违反。",
+      "severity": "soft"
+    },
+    {
+      "id": "dajin-court-bargaining",
+      "text": "处理朝廷、宗门、世家和散修关系时，分别核对资源控制、职分、约定与对方掌握的信息；凡人官位不直接决定修为，修为也不自动转移国库或宗门公产。",
+      "severity": "soft"
+    }
+  ],
+  "provenance": {
+    "entity:human-dajin": [
+      "dajin-geography"
+    ],
+    "entity:dajin-liaozhou": [
+      "dajin-geography"
+    ],
+    "entity:dajin-shun-river": [
+      "dajin-geography"
+    ],
+    "entity:dajin-longzhou": [
+      "dajin-geography"
+    ],
+    "entity:dajin-tianyue-range": [
+      "dajin-longzhou-sects"
+    ],
+    "entity:dajin-nantian-peak": [
+      "dajin-longzhou-sects"
+    ],
+    "entity:dajin-jinjing": [
+      "dajin-geography",
+      "dajin-jinjing-rule"
+    ],
+    "entity:dajin-huayun": [
+      "dajin-geography"
+    ],
+    "entity:dajin-kaijiang": [
+      "dajin-tianfu-history"
+    ],
+    "entity:dajin-baizhu": [
+      "dajin-tianfu-history"
+    ],
+    "entity:dajin-zhenhuan": [
+      "dajin-taiyi"
+    ],
+    "entity:dajin-binghun": [
+      "dajin-taiyi"
+    ],
+    "entity:dajin-wuyue": [
+      "dajin-hu-qinglei"
+    ],
+    "entity:dajin-motuo": [
+      "dajin-hu-qinglei"
+    ],
+    "entity:dajin-river-wharf": [
+      "dajin-present-life"
+    ],
+    "entity:dajin-city-lane": [
+      "dajin-present-life"
+    ],
+    "entity:dajin-auction-house": [
+      "dajin-present-life"
+    ],
+    "entity:dajin-coast-wharf": [
+      "dajin-present-life"
+    ],
+    "entity:dajin-taiyi-court": [
+      "dajin-present-life"
+    ],
+    "entity:dajin-temple-room": [
+      "dajin-present-life"
+    ],
+    "entity:dajin-wind-retreat": [
+      "dajin-present-life"
+    ],
+    "entity:dajin-yinluo-hall": [
+      "dajin-present-life"
+    ],
+    "entity:dajin-taiyi-sect": [
+      "dajin-taiyi"
+    ],
+    "entity:dajin-tianmo-sect": [
+      "dajin-hu-qinglei"
+    ],
+    "entity:dajin-yinluo-sect": [
+      "dajin-yinluo-history"
+    ],
+    "entity:dajin-yueyang": [
+      "dajin-longzhou-sects"
+    ],
+    "entity:dajin-momu": [
+      "dajin-longzhou-sects"
+    ],
+    "entity:dajin-tianfu": [
+      "dajin-tianfu-history"
+    ],
+    "entity:dajin-court": [
+      "dajin-court"
+    ],
+    "fact:dajin-liaozhou-route-dajin-shun-river": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-liaozhou-travel-dajin-shun-river": [
+      "dajin-values"
+    ],
+    "fact:dajin-shun-river-route-dajin-liaozhou": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-shun-river-travel-dajin-liaozhou": [
+      "dajin-values"
+    ],
+    "fact:dajin-shun-river-route-dajin-river-wharf": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-shun-river-travel-dajin-river-wharf": [
+      "dajin-values"
+    ],
+    "fact:dajin-river-wharf-route-dajin-shun-river": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-river-wharf-travel-dajin-shun-river": [
+      "dajin-values"
+    ],
+    "fact:dajin-jinjing-route-dajin-city-lane": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-jinjing-travel-dajin-city-lane": [
+      "dajin-values"
+    ],
+    "fact:dajin-city-lane-route-dajin-jinjing": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-city-lane-travel-dajin-jinjing": [
+      "dajin-values"
+    ],
+    "fact:dajin-city-lane-route-dajin-auction-house": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-city-lane-travel-dajin-auction-house": [
+      "dajin-values"
+    ],
+    "fact:dajin-auction-house-route-dajin-city-lane": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-auction-house-travel-dajin-city-lane": [
+      "dajin-values"
+    ],
+    "fact:dajin-jinjing-route-dajin-temple-room": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-jinjing-travel-dajin-temple-room": [
+      "dajin-values"
+    ],
+    "fact:dajin-temple-room-route-dajin-jinjing": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-temple-room-travel-dajin-jinjing": [
+      "dajin-values"
+    ],
+    "fact:dajin-huayun-route-dajin-coast-wharf": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-huayun-travel-dajin-coast-wharf": [
+      "dajin-values"
+    ],
+    "fact:dajin-coast-wharf-route-dajin-huayun": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-coast-wharf-travel-dajin-huayun": [
+      "dajin-values"
+    ],
+    "fact:dajin-huayun-route-dajin-kaijiang": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-huayun-travel-dajin-kaijiang": [
+      "dajin-values"
+    ],
+    "fact:dajin-kaijiang-route-dajin-huayun": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-kaijiang-travel-dajin-huayun": [
+      "dajin-values"
+    ],
+    "fact:dajin-kaijiang-route-dajin-baizhu": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-kaijiang-travel-dajin-baizhu": [
+      "dajin-values"
+    ],
+    "fact:dajin-baizhu-route-dajin-kaijiang": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-baizhu-travel-dajin-kaijiang": [
+      "dajin-values"
+    ],
+    "fact:dajin-zhenhuan-route-dajin-taiyi-court": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-zhenhuan-travel-dajin-taiyi-court": [
+      "dajin-values"
+    ],
+    "fact:dajin-taiyi-court-route-dajin-zhenhuan": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-taiyi-court-travel-dajin-zhenhuan": [
+      "dajin-values"
+    ],
+    "fact:dajin-zhenhuan-route-dajin-binghun": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-zhenhuan-travel-dajin-binghun": [
+      "dajin-values"
+    ],
+    "fact:dajin-binghun-route-dajin-zhenhuan": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-binghun-travel-dajin-zhenhuan": [
+      "dajin-values"
+    ],
+    "fact:dajin-wuyue-route-dajin-motuo": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-wuyue-travel-dajin-motuo": [
+      "dajin-values"
+    ],
+    "fact:dajin-motuo-route-dajin-wuyue": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-motuo-travel-dajin-wuyue": [
+      "dajin-values"
+    ],
+    "fact:dajin-wuyue-route-dajin-wind-retreat": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-wuyue-travel-dajin-wind-retreat": [
+      "dajin-values"
+    ],
+    "fact:dajin-wind-retreat-route-dajin-wuyue": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-wind-retreat-travel-dajin-wuyue": [
+      "dajin-values"
+    ],
+    "fact:dajin-longzhou-route-dajin-tianyue-range": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-longzhou-travel-dajin-tianyue-range": [
+      "dajin-values"
+    ],
+    "fact:dajin-tianyue-range-route-dajin-longzhou": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-tianyue-range-travel-dajin-longzhou": [
+      "dajin-values"
+    ],
+    "fact:dajin-tianyue-range-route-dajin-nantian-peak": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-tianyue-range-travel-dajin-nantian-peak": [
+      "dajin-values"
+    ],
+    "fact:dajin-nantian-peak-route-dajin-tianyue-range": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-nantian-peak-travel-dajin-tianyue-range": [
+      "dajin-values"
+    ],
+    "entity:canon-xiang-zhili": [
+      "dajin-xiang-identity",
+      "dajin-elders-at-opening",
+      "dajin-values"
+    ],
+    "fact:canon-xiang-zhili-cultivation-state": [
+      "dajin-xiang-identity",
+      "dajin-elders-at-opening",
+      "dajin-values"
+    ],
+    "fact:canon-xiang-zhili-learned-skill": [
+      "dajin-xiang-identity",
+      "dajin-elders-at-opening"
+    ],
+    "fact:canon-xiang-zhili-spiritual-root": [
+      "dajin-values"
+    ],
+    "entity:canon-xiang-zhili-pouch": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:canon-xiang-zhili-pouch-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "entity:canon-feng-laoguai": [
+      "dajin-xiang-identity",
+      "dajin-elders-at-opening",
+      "dajin-values"
+    ],
+    "fact:canon-feng-laoguai-cultivation-state": [
+      "dajin-xiang-identity",
+      "dajin-elders-at-opening",
+      "dajin-values"
+    ],
+    "fact:canon-feng-laoguai-learned-skill": [
+      "dajin-xiang-identity",
+      "dajin-elders-at-opening"
+    ],
+    "fact:canon-feng-laoguai-spiritual-root": [
+      "dajin-values"
+    ],
+    "entity:canon-feng-laoguai-pouch": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:canon-feng-laoguai-pouch-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "entity:canon-hu-qinglei": [
+      "dajin-hu-qinglei",
+      "dajin-elders-at-opening",
+      "dajin-values"
+    ],
+    "fact:canon-hu-qinglei-cultivation-state": [
+      "dajin-hu-qinglei",
+      "dajin-elders-at-opening",
+      "dajin-values"
+    ],
+    "fact:canon-hu-qinglei-learned-skill": [
+      "dajin-hu-qinglei",
+      "dajin-elders-at-opening"
+    ],
+    "fact:canon-hu-qinglei-spiritual-root": [
+      "dajin-values"
+    ],
+    "entity:canon-hu-qinglei-pouch": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:canon-hu-qinglei-pouch-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "entity:canon-bai-laogui": [
+      "dajin-taiyi",
+      "dajin-elders-at-opening",
+      "dajin-values"
+    ],
+    "fact:canon-bai-laogui-cultivation-state": [
+      "dajin-taiyi",
+      "dajin-elders-at-opening",
+      "dajin-values"
+    ],
+    "fact:canon-bai-laogui-learned-skill": [
+      "dajin-taiyi",
+      "dajin-elders-at-opening"
+    ],
+    "fact:canon-bai-laogui-spiritual-root": [
+      "dajin-values"
+    ],
+    "entity:canon-bai-laogui-pouch": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:canon-bai-laogui-pouch-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:canon-hu-qinglei-affiliation": [
+      "dajin-hu-qinglei"
+    ],
+    "fact:canon-bai-laogui-affiliation": [
+      "dajin-taiyi"
+    ],
+    "entity:dajin-wen-qiao": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-wen-qiao-cultivation-state": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-wen-qiao-learned-skill": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-wen-qiao-spiritual-root": [
+      "dajin-values"
+    ],
+    "entity:dajin-wen-qiao-pouch": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-wen-qiao-pouch-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "entity:dajin-shao-lan": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-shao-lan-cultivation-state": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-shao-lan-learned-skill": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-shao-lan-spiritual-root": [
+      "dajin-values"
+    ],
+    "entity:dajin-shao-lan-pouch": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-shao-lan-pouch-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "entity:dajin-jiang-shuo": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-jiang-shuo-cultivation-state": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-jiang-shuo-learned-skill": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-jiang-shuo-spiritual-root": [
+      "dajin-values"
+    ],
+    "entity:dajin-jiang-shuo-pouch": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-jiang-shuo-pouch-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "entity:dajin-he-rong": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-he-rong-cultivation-state": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-he-rong-learned-skill": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-he-rong-spiritual-root": [
+      "dajin-values"
+    ],
+    "entity:dajin-he-rong-pouch": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-he-rong-pouch-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "entity:dajin-qin-su": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-qin-su-cultivation-state": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-qin-su-learned-skill": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-qin-su-spiritual-root": [
+      "dajin-values"
+    ],
+    "entity:dajin-qin-su-pouch": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-qin-su-pouch-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "entity:dajin-liang-sheng": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-liang-sheng-cultivation-state": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-liang-sheng-learned-skill": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-liang-sheng-spiritual-root": [
+      "dajin-values"
+    ],
+    "entity:dajin-liang-sheng-pouch": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-liang-sheng-pouch-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "entity:dajin-xu-yan": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-xu-yan-cultivation-state": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-xu-yan-learned-skill": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-xu-yan-spiritual-root": [
+      "dajin-values"
+    ],
+    "entity:dajin-xu-yan-pouch": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-xu-yan-pouch-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "entity:dajin-fu-heng": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-fu-heng-cultivation-state": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-fu-heng-learned-skill": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-fu-heng-spiritual-root": [
+      "dajin-values"
+    ],
+    "entity:dajin-fu-heng-pouch": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-fu-heng-pouch-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "entity:dajin-cui-yue": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-cui-yue-cultivation-state": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-cui-yue-learned-skill": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-cui-yue-spiritual-root": [
+      "dajin-values"
+    ],
+    "entity:dajin-cui-yue-pouch": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-cui-yue-pouch-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "entity:dajin-shi-wen": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-shi-wen-cultivation-state": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-shi-wen-learned-skill": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-shi-wen-spiritual-root": [
+      "dajin-values"
+    ],
+    "entity:dajin-shi-wen-pouch": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-shi-wen-pouch-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-liang-sheng-member": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-xu-yan-member": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-fu-heng-member": [
+      "dajin-present-life"
+    ],
+    "fact:dajin-shi-wen-member": [
+      "dajin-present-life"
+    ],
+    "entity:dajin-river-cargo": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-river-cargo-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "entity:dajin-river-boat": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-river-boat-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "entity:dajin-tianfu-stock": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-tianfu-stock-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "entity:dajin-motuo-stock": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "fact:dajin-motuo-stock-owner": [
+      "dajin-present-life",
+      "dajin-values"
+    ],
+    "law:dajin-political-enforcement": [
+      "dajin-jinjing-rule",
+      "dajin-huashen-restraint"
+    ],
+    "law:dajin-court-bargaining": [
+      "dajin-court"
+    ]
+  }
+}

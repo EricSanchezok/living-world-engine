@@ -1,0 +1,3650 @@
+[
+  {
+    "id": "kunwu-three-ancients",
+    "label": "昆吾三老",
+    "kind": "historical-group",
+    "openingState": "historical-only",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "kunwu-hall-and-life-tablets",
+      "kunwu-kunwu-sealed-mountain"
+    ],
+    "aliases": [],
+    "reason": "三缕残念与三人画像不是三名仍然在山中生活的古修。"
+  },
+  {
+    "id": "kunwu-kongxuan-danshi",
+    "label": "空玄丹士",
+    "kind": "historical-person",
+    "openingState": "dead-before-t0",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "kunwu-silver-winged-yaksha"
+    ],
+    "aliases": [],
+    "reason": "生前已死；尸灵银翅夜叉有残记忆，不能因此再生一具活人。"
+  },
+  {
+    "id": "kunwu-taiyin-fire-future",
+    "label": "太阴真火",
+    "kind": "future-spirit",
+    "openingState": "not-yet-born",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "kunwu-empty-refinery"
+    ],
+    "aliases": [],
+    "reason": "后来刚诞生灵性，当前仅长期温炼原料和地火设施。"
+  },
+  {
+    "id": "kunwu-future-embryo-recipe",
+    "label": "富成所得培婴丹方",
+    "kind": "future-knowledge",
+    "openingState": "not-yet-acquired",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "kunwu-embryo-pill"
+    ],
+    "aliases": [],
+    "reason": "百余年前所得相对于后期叙述，晚于共同T0，不能现在交给玩家。"
+  },
+  {
+    "id": "kunwu-future-opening",
+    "label": "昆吾破封与争宝",
+    "kind": "event",
+    "openingState": "future-conditional",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "kunwu-kunwu-sealed-mountain",
+      "kunwu-ye-long-plan"
+    ],
+    "aliases": [],
+    "reason": "叶家行动、材料研究、阻碍与外界反应改变才可发生，并无强制章节。"
+  },
+  {
+    "id": "kunwu-source-king-number-variant",
+    "label": "三皇四王／三皇七王异文",
+    "kind": "source-variant",
+    "openingState": "source-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "kunwu-inverse-disc-and-nodes"
+    ],
+    "aliases": [],
+    "reason": "相邻章节数字不同，保留差异；灵界模块按长篇已证的七妖之地，不另造缺席王。"
+  },
+  {
+    "id": "kunwu-tower-capacity-variant",
+    "label": "黑白阵乘员差异",
+    "kind": "source-variant",
+    "openingState": "bounded-calibration",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "kunwu-paired-short-teleports"
+    ],
+    "aliases": [],
+    "reason": "两阵分别设二人与四人并标定，未把单章二人话语推广到所有同类短阵。"
+  },
+  {
+    "id": "human-south-kunwu",
+    "label": "南疆",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-chaoyun",
+    "label": "潮云府",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-puyun",
+    "label": "普云府",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-zhonglou",
+    "label": "中娄府",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-jintu",
+    "label": "金图山",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-scorpion",
+    "label": "双蝎山",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-silver-snake",
+    "label": "银蛇山",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-volcano",
+    "label": "银蛇山火口",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-poison-valley",
+    "label": "万毒谷",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yin-mouth",
+    "label": "阴阳窟入口",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yin-yang-cave",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yin-forks",
+    "label": "阴阳窟岔道",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yin-yang-cave",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yin-ice",
+    "label": "古剑冰壁",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yin-yang-cave",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yin-wind",
+    "label": "黑阴风穴",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yin-yang-cave",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yin-warm",
+    "label": "暖玉沙洞",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yin-yang-cave",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yaksha-prison",
+    "label": "尸灵血柱阵",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yin-yang-cave",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-quiet-lake",
+    "label": "普云静湖",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-market",
+    "label": "回溪药市",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-market-landing",
+    "label": "回溪埠",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-market-clinic",
+    "label": "草庐医舍",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-market-store",
+    "label": "宋家杂货铺",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-market-home",
+    "label": "何阮家住屋",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-forge-hut",
+    "label": "火口工棚",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-lake-hamlet",
+    "label": "浅湾渔村",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-du-sheng-court",
+    "label": "毒圣门山门",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-du-sheng-ancestral",
+    "label": "毒圣祖师堂",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-huaxian-court",
+    "label": "化仙宗居所",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-huaxian-archive",
+    "label": "化仙旧典房",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-xumi-court",
+    "label": "须弥宗山居",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-jiuyou-court",
+    "label": "九幽宗静院",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-jiuyou-vault",
+    "label": "九幽宗器库",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-ye-estate",
+    "label": "叶家修士内院",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-ye-long-plan",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-ye-archive",
+    "label": "叶家密档室",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-ye-long-plan",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-ye-hideout",
+    "label": "叶月圣隐居处",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-ye-long-plan",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-inner",
+    "label": "阴罗宗内山",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-vault",
+    "label": "阴罗宗器库",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-taiyi-vault",
+    "label": "太一门器符库",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-tianmo-vault",
+    "label": "天魔宗传承器库",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-jurisdictions",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-du-sheng-sect",
+    "label": "毒圣门",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-two-guardian-lineages"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-huaxian-sect",
+    "label": "化仙宗",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-two-guardian-lineages"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-xumi-sect",
+    "label": "须弥宗",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-sect-tools"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-jiuyou-sect",
+    "label": "九幽宗",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-violet-pearl"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-ye-family",
+    "label": "叶氏修仙家族",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-ye-long-plan"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-sealed-mountain",
+    "label": "封印中的昆吾山",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-kunwu-sealed-mountain"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-foot",
+    "label": "昆吾山脚",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-kunwu-sealed-mountain",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-gate",
+    "label": "万修之门",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-kunwu-paths",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-cloud-stairs",
+    "label": "云雾石阶",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-cloud-and-magnetic-wood",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-stone-hall",
+    "label": "四廊石殿",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-kunwu-paths",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-square",
+    "label": "白玉广场",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-kunwu-paths",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-metal-house",
+    "label": "金石阁",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-kunwu-paths",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-cloud-house",
+    "label": "祥云殿",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-kunwu-paths",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-spirit-yard",
+    "label": "奇灵院",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-kunwu-paths",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-huiming",
+    "label": "慧明阁",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-kunwu-paths",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-jade-pool",
+    "label": "勾玉潭",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-kunwu-paths",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-forge",
+    "label": "铸灵堂",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-empty-refinery",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-forge-storage",
+    "label": "铸灵空库",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-empty-refinery",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-hualing",
+    "label": "化灵殿",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-empty-refinery",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-stone-forest",
+    "label": "昆吾殿石林",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-cloud-and-magnetic-wood",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-thunder-wall",
+    "label": "青狮雷壁",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-cloud-and-magnetic-wood",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-magnetic-grove",
+    "label": "金磁灵木道",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-cloud-and-magnetic-wood",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-hall",
+    "label": "昆吾殿",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-hall-and-life-tablets",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-rear-hall",
+    "label": "昆吾后堂",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-hall-and-life-tablets",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-treasure-house",
+    "label": "灵宝阁",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-kunwu-paths",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-tower-trench",
+    "label": "镇魔塔沟壑",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-tower-one",
+    "label": "镇魔塔一层",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-tower-two",
+    "label": "镇魔塔二层",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-tower-three",
+    "label": "镇魔塔三层",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-tower-four",
+    "label": "镇魔塔四层",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-tower-five",
+    "label": "镇魔塔五层",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-tower-six",
+    "label": "镇魔塔六层",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-tower-seven",
+    "label": "镇魔塔七层",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-tower-white",
+    "label": "第八层魂匣宫",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-tower-black",
+    "label": "第八层狼身囚室",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-tower-nine",
+    "label": "第九层真魔气封印",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-true-demon-seal",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-guiling-prison",
+    "label": "圭灵水下困阵",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-four-old-prisons",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-lion-prison",
+    "label": "狮禽旧困阵",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-four-old-prisons",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-mukui-prison",
+    "label": "木魁旧困阵",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-four-old-prisons",
+      "kunwu-opening-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-fu-cheng",
+    "label": "富成",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-embryo-pill",
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-fu-cheng-personal-stock",
+    "label": "富成的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-chang-zhifang",
+    "label": "常芷芳",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-chang-zhifang-personal-stock",
+    "label": "常芷芳的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-hua-tianqi",
+    "label": "花天奇",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-two-guardian-lineages",
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-hua-tianqi-personal-stock",
+    "label": "花天奇的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-du-sheng-yuan",
+    "label": "毒圣元长老",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-du-sheng-yuan-personal-stock",
+    "label": "毒圣元长老的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-du-sheng-miao",
+    "label": "毒圣苗长老",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-du-sheng-miao-personal-stock",
+    "label": "毒圣苗长老的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-du-sheng-grey",
+    "label": "毒圣灰发长老",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-du-sheng-grey-personal-stock",
+    "label": "毒圣灰发长老的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-du-sheng-fifth",
+    "label": "毒圣另一长老",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-du-sheng-fifth-personal-stock",
+    "label": "毒圣另一长老的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-mu-furen",
+    "label": "化仙木夫人",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-two-guardian-lineages",
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-mu-furen-personal-stock",
+    "label": "化仙木夫人的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-huaxian-shimei",
+    "label": "化仙秀丽女修",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-huaxian-shimei-personal-stock",
+    "label": "化仙秀丽女修的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-qian-laomo",
+    "label": "乾老魔",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-qian-and-five-demons",
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-qian-laomo-personal-stock",
+    "label": "乾老魔的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-yinluo-wu",
+    "label": "阴罗吴长老",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-yinluo-wu-personal-stock",
+    "label": "阴罗吴长老的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-yinluo-xiao",
+    "label": "阴罗萧长老",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-yinluo-xiao-personal-stock",
+    "label": "阴罗萧长老的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-yinluo-ge",
+    "label": "阴罗葛长老",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-yinluo-ge-personal-stock",
+    "label": "阴罗葛长老的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-yinluo-fourth",
+    "label": "阴罗第四长老",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-yinluo-fourth-personal-stock",
+    "label": "阴罗第四长老的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-ye-yuesheng",
+    "label": "叶月圣",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-ye-long-plan",
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-ye-yuesheng-personal-stock",
+    "label": "叶月圣的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-ye-elder",
+    "label": "叶家白袍修士",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-ye-long-plan",
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-ye-elder-personal-stock",
+    "label": "叶家白袍修士的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-ye-second",
+    "label": "叶家方脸修士",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-ye-second-personal-stock",
+    "label": "叶家方脸修士的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-xuanqingzi",
+    "label": "玄青子",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools",
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-xuanqingzi-personal-stock",
+    "label": "玄青子的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-qimiao-zhenren",
+    "label": "七妙真人",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools",
+      "kunwu-opening-cast-backprojection",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-qimiao-zhenren-personal-stock",
+    "label": "七妙真人的私用行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-purple-pearl",
+    "label": "紫幽珠",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-violet-pearl",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-four-image-ruler",
+    "label": "四象尺",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-sect-tools",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-huaxian-token",
+    "label": "化仙银令",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-two-guardian-lineages",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-guardian-record",
+    "label": "化仙旧训册",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-two-guardian-lineages",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-sensing-pearl",
+    "label": "感灵珠",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-two-guardian-lineages",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-xumi-wall",
+    "label": "须弥五行壁",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-sect-tools",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-poison-dragon-pearl",
+    "label": "毒龙珠",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-southern-sect-tools",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-ye-fragment",
+    "label": "叶家古碑残片",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-ye-long-plan",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-ye-map",
+    "label": "叶家探查簿",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-ye-long-plan",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-black-blood-blade",
+    "label": "黑血刃",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-separate-blood-weapons",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-mitian-bracelet",
+    "label": "弥天镯",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-separate-blood-weapons",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-qian-blood-pearl",
+    "label": "血魔珠",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-separate-blood-weapons",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-tian-a-sword",
+    "label": "天阿神剑",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-boundary-talismans",
+    "label": "破界符匣",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-demon-rings",
+    "label": "五禁魔环",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-seven-treasures",
+    "label": "七真宝囊",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-red-drum",
+    "label": "赤鸣鼓",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools",
+      "kunwu-opening-cast-backprojection"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-seven-1",
+    "label": "刀",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-seven-2",
+    "label": "剑",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-seven-3",
+    "label": "珠",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-seven-4",
+    "label": "妙音宝镜",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-seven-5",
+    "label": "未具名第五宝",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-seven-6",
+    "label": "未具名第六宝",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-seven-7",
+    "label": "未具名第七宝",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-boundary-talisman-1",
+    "label": "破界符1",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-boundary-talisman-2",
+    "label": "破界符2",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-boundary-talisman-3",
+    "label": "破界符3",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-boundary-talisman-4",
+    "label": "破界符4",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-boundary-talisman-5",
+    "label": "破界符5",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-boundary-talisman-6",
+    "label": "破界符6",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-great-sect-tools",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-silver-wing-yaksha",
+    "label": "银翅夜叉",
+    "kind": "corpse-spirit",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-silver-winged-yaksha",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-gui-ling",
+    "label": "圭灵",
+    "kind": "demon",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-old-beasts-and-blood-curse",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-shiqin-beast",
+    "label": "狮禽兽",
+    "kind": "demon",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-old-beasts-and-blood-curse",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-mu-kui",
+    "label": "木魁",
+    "kind": "demon",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-four-old-prisons",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-linglong-body",
+    "label": "昆吾双首银狼",
+    "kind": "demon",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-one-body-one-current-mind",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-corpse-wolf",
+    "label": "绿毛尸狼",
+    "kind": "corpse-spirit",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yin-cave-hidden-stock",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-seven-ghost-king",
+    "label": "塔内鬼王",
+    "kind": "ghost",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-longmeng-soul",
+    "label": "珑梦魂源",
+    "kind": "soul-component",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-one-body-one-current-mind",
+      "kunwu-cross-world-mind-cost"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-yuancha-fragment",
+    "label": "元刹分魂源",
+    "kind": "soul-component",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-one-body-one-current-mind",
+      "kunwu-cross-world-mind-cost"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-prison-array-yaksha",
+    "label": "古困灵阵",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-four-old-prisons"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-prison-array-guiling",
+    "label": "古困灵阵",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-four-old-prisons"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-prison-array-lion",
+    "label": "古困灵阵",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-four-old-prisons"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-prison-array-mukui",
+    "label": "古困灵阵",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-four-old-prisons"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yaksha-ring-1",
+    "label": "夜叉血色禁环1",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-silver-winged-yaksha"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yaksha-ring-2",
+    "label": "夜叉血色禁环2",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-silver-winged-yaksha"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yaksha-ring-3",
+    "label": "夜叉血色禁环3",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-silver-winged-yaksha"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yaksha-ring-4",
+    "label": "夜叉血色禁环4",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-silver-winged-yaksha"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yaksha-ring-5",
+    "label": "夜叉血色禁环5",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-silver-winged-yaksha"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-evil-moon-mirror",
+    "label": "邪月幻镜",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-silver-winged-yaksha"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yaksha-ore",
+    "label": "夜叉特殊金矿",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-silver-winged-yaksha",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yaksha-avatar-1",
+    "label": "尸煞化身1",
+    "kind": "controlled-body",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-silver-winged-yaksha"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yaksha-avatar-2",
+    "label": "尸煞化身2",
+    "kind": "controlled-body",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-silver-winged-yaksha"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yaksha-avatar-3",
+    "label": "尸煞化身3",
+    "kind": "controlled-body",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-silver-winged-yaksha"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-guiling-staff",
+    "label": "圭灵五金棍",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-old-beasts-and-blood-curse"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-ice-sword",
+    "label": "蓝元晶旧飞剑",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yin-cave-hidden-stock"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-wind-crystal-1",
+    "label": "黑阴风晶1",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yin-cave-hidden-stock"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-wind-crystal-2",
+    "label": "黑阴风晶2",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yin-cave-hidden-stock"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-wind-crystal-3",
+    "label": "黑阴风晶3",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yin-cave-hidden-stock"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinzhima",
+    "label": "阴芝马",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yin-cave-hidden-stock"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-life-tablet-1",
+    "label": "本命元牌1",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-hall-and-life-tablets"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-life-tablet-2",
+    "label": "本命元牌2",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-hall-and-life-tablets"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-life-tablet-3",
+    "label": "本命元牌3",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-hall-and-life-tablets"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-life-tablet-4",
+    "label": "本命元牌4",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-hall-and-life-tablets"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-moon-portrait",
+    "label": "三人望月图",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-hall-and-life-tablets",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-violet-sword",
+    "label": "紫色小剑",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-hall-and-life-tablets",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-demon-staff",
+    "label": "降魔杖",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-hall-and-life-tablets",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-red-book",
+    "label": "红色古书",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-hall-and-life-tablets",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-dragon-seal",
+    "label": "化龙玺",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-true-demon-seal",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-gate-stele",
+    "label": "昆吾山巨碑",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-crystal-backup",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-crystal-stele",
+    "label": "天晶碑",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-crystal-backup",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-main-soft-jade",
+    "label": "主控叱灵软玉碑",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-true-demon-seal",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-backup-soft-jade",
+    "label": "备用叱灵软玉碑",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-crystal-backup",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-main-altar",
+    "label": "白玉封魔祭坛",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-true-demon-seal",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-main-columns",
+    "label": "主封巨柱阵",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-true-demon-seal",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-backup-array",
+    "label": "地下备用灵柱阵",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-crystal-backup",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-true-demon-qi",
+    "label": "封存真魔气",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-true-demon-seal",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-black-wind-flag",
+    "label": "黑风旗",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-two-suppressing-treasures",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-eight-spirit-ruler",
+    "label": "八灵尺",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-two-suppressing-treasures",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-soul-casket",
+    "label": "旧魂匣",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-one-body-one-current-mind",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-star-chains",
+    "label": "大周天星辰链",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-copper-mirrors",
+    "label": "囚狼千余铜镜",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-nine-blades",
+    "label": "地下九诛魔刀坛",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-white-array",
+    "label": "七层白色传送阵",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-paired-short-teleports",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-black-array",
+    "label": "七层黑色传送阵",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-paired-short-teleports",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-white-receiver",
+    "label": "魂匣宫回阵",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-paired-short-teleports",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-black-receiver",
+    "label": "狼身室回阵",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-paired-short-teleports",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-fire-cauldron",
+    "label": "朱红炼鼎",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-empty-refinery",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-unknown-cold-stuff",
+    "label": "透明弹性炼材",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-empty-refinery",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-fire-columns",
+    "label": "十六赤蛟火柱",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-empty-refinery",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-stone-control",
+    "label": "四偏殿石灵阵",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-kunwu-paths",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-magnetic-trees",
+    "label": "金磁灵木双列",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-cloud-and-magnetic-wood",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-thunder-lions",
+    "label": "两青铜狮",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-cloud-and-magnetic-wood",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-polar-columns",
+    "label": "北极元光百柱",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-hall-and-life-tablets",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-refinery-slip-1",
+    "label": "普通炼器玉简1",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-empty-refinery"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-refinery-slip-2",
+    "label": "普通炼器玉简2",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-empty-refinery"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-refinery-slip-3",
+    "label": "普通炼器玉简3",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-empty-refinery"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-stone-guards",
+    "label": "石灵守兽",
+    "kind": "construct-group",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-kunwu-paths",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-white-guards",
+    "label": "金甲白玉石人",
+    "kind": "construct-group",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-kunwu-paths",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-five-demon-body-1",
+    "label": "同心子魔骨躯1",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-qian-and-five-demons"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-five-demon-body-2",
+    "label": "同心子魔骨躯2",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-qian-and-five-demons"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-five-demon-body-3",
+    "label": "同心子魔骨躯3",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-qian-and-five-demons"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-five-demon-body-4",
+    "label": "同心子魔骨躯4",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-qian-and-five-demons"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-five-demon-body-5",
+    "label": "同心子魔骨躯5",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-qian-and-five-demons"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-6",
+    "label": "阴罗守幡长老6",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-6-purse",
+    "label": "守幡长老私袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-7",
+    "label": "阴罗守幡长老7",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-7-purse",
+    "label": "守幡长老私袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-8",
+    "label": "阴罗守幡长老8",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-8-purse",
+    "label": "守幡长老私袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-9",
+    "label": "阴罗守幡长老9",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-9-purse",
+    "label": "守幡长老私袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-10",
+    "label": "阴罗守幡长老10",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-10-purse",
+    "label": "守幡长老私袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-11",
+    "label": "阴罗守幡长老11",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-11-purse",
+    "label": "守幡长老私袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-12",
+    "label": "阴罗守幡长老12",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-12-purse",
+    "label": "守幡长老私袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-13",
+    "label": "阴罗守幡长老13",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-13-purse",
+    "label": "守幡长老私袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-14",
+    "label": "阴罗守幡长老14",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-14-purse",
+    "label": "守幡长老私袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-15",
+    "label": "阴罗守幡长老15",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-15-purse",
+    "label": "守幡长老私袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-16",
+    "label": "阴罗守幡长老16",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-16-purse",
+    "label": "守幡长老私袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-17",
+    "label": "阴罗守幡长老17",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-17-purse",
+    "label": "守幡长老私袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-18",
+    "label": "阴罗守幡长老18",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-yinluo-custodian-18-purse",
+    "label": "守幡长老私袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-1",
+    "label": "阴罗幡1",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-2",
+    "label": "阴罗幡2",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-3",
+    "label": "阴罗幡3",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-4",
+    "label": "阴罗幡4",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-5",
+    "label": "阴罗幡5",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-6",
+    "label": "阴罗幡6",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-7",
+    "label": "阴罗幡7",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-8",
+    "label": "阴罗幡8",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-9",
+    "label": "阴罗幡9",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-10",
+    "label": "阴罗幡10",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-11",
+    "label": "阴罗幡11",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-12",
+    "label": "阴罗幡12",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-13",
+    "label": "阴罗幡13",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-14",
+    "label": "阴罗幡14",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-15",
+    "label": "阴罗幡15",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-16",
+    "label": "阴罗幡16",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-17",
+    "label": "阴罗幡17",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-yinluo-banner-18",
+    "label": "阴罗幡18",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-yinluo-stock-and-names",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-healer",
+    "label": "阮青禾",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-healer-purse",
+    "label": "阮青禾的小袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-herbalist",
+    "label": "何松年",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-herbalist-purse",
+    "label": "何松年的小袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-herb-apprentice",
+    "label": "田霁",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-herb-apprentice-purse",
+    "label": "田霁的小袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-boatkeeper",
+    "label": "葛满",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-boatkeeper-purse",
+    "label": "葛满的小袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-boat-daughter",
+    "label": "葛小宁",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-boat-daughter-purse",
+    "label": "葛小宁的小袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-merchant",
+    "label": "宋之行",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-merchant-purse",
+    "label": "宋之行的小袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-smith",
+    "label": "岳识火",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-smith-purse",
+    "label": "岳识火的小袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-smith-student",
+    "label": "陆荻",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-smith-student-purse",
+    "label": "陆荻的小袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-huaxian-steward",
+    "label": "容芷",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-huaxian-steward-purse",
+    "label": "容芷的小袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-du-sheng-gardener",
+    "label": "白沂",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-du-sheng-gardener-purse",
+    "label": "白沂的小袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-ye-scribe",
+    "label": "叶见书",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-ye-scribe-purse",
+    "label": "叶见书的小袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-xumi-keeper",
+    "label": "周穗真",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-xumi-keeper-purse",
+    "label": "周穗真的小袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-medical-stock",
+    "label": "诊房药柜",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-herbal-household",
+    "label": "何阮家日用箱",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-trade-stock",
+    "label": "乡店货柜",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-boat",
+    "label": "葛家的旧木舟",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-repair-wood",
+    "label": "小舟修缮剩料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-basket-stock",
+    "label": "葛小宁竹料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-herb-notes",
+    "label": "辨药小册",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-smith-anvil",
+    "label": "炉匠锻台",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-smith-stock",
+    "label": "炉匠材料箱",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-ye-rubbings",
+    "label": "获准誊写的残碑摹页",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "south-sect-herbs",
+    "label": "毒圣雨季药架",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-opening-life",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-iron-scorpions",
+    "label": "铁尾蝎群",
+    "kind": "animal-group",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-scorpion-hills",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-red-scorpions",
+    "label": "红线蝎群",
+    "kind": "animal-group",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-scorpion-hills",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "kunwu-shadow-snakes",
+    "label": "乌影蛇群",
+    "kind": "animal-group",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverted-tower",
+      "kunwu-bounded-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "demon-wolf-reverse-star-disc",
+    "label": "狼族逆星盘",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-with-explicit-backprojection-original-and-calibration",
+    "claimIds": [
+      "kunwu-inverse-disc-and-nodes"
+    ],
+    "aliases": []
+  }
+]

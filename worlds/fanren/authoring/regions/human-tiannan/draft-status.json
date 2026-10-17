@@ -1,0 +1,58 @@
+{
+  "id": "human-tiannan",
+  "status": "module-reviewed-coverage-open",
+  "scope": "审校边界是当前module/claims全部内容，不是整个地区或全量候选完成。",
+  "statistics": {
+    "entities": 115,
+    "agents": 18,
+    "claims": 20,
+    "anchors": 47,
+    "periodicProperties": 1
+  },
+  "localValidation": {
+    "regionalModuleSchema": "passed",
+    "authoredClaimSchema": "passed",
+    "sourceChapterAndAnchorSha256": "passed",
+    "requiredProvenance": "passed",
+    "factIdUniqueness": "passed",
+    "semanticReview": "current-module-completed",
+    "focusedWorldAssembly": "opening + human-local + shared-foundations + human-tiannan + human-yue passed",
+    "periodicBoundaryAssertions": "passed",
+    "cognitionAndOwnershipAssertions": "passed",
+    "actualGameplay": "not-run; root owns final play acceptance"
+  },
+  "candidateCoverage": {
+    "queueInputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
+    "candidateCount": 2961,
+    "status": "not-yet-reviewed-item-by-item",
+    "formalCandidateDispositions": 0,
+    "note": "采用的章据和实体已复核；未将来源采用自动换算为候选处置，不用统一兜底标签伪造全部完成。"
+  },
+  "completedCorrections": [
+    "复核全部采用锚点上下文；魏无涯依据提前两百余年突破的回述修正T0元婴后期。",
+    "王蝉暗灵根与家人已知资质落实；保留其他未确证灵根属性的未知范围。",
+    "慕沛灵依据试剑年龄限制与韩立约二百岁时间线归为开篇未出生；天道盟尚未形成。",
+    "修正沈砚已持玉简却想拒收的矛盾，去掉未实体化的客户/交易/轮班承诺；温芷请求程长老示范，自己不冒充定灵丹主炼者。",
+    "阗天上元灭光阵、联盟阵钥、现有维护库和余清操作权限明确分离；启阵需人员、法力及真实灵石。",
+    "灵眼之树二百年周期与三日标定窗口进入真实定义；产液一次上限和已采周期记录防止同轮重复生成。",
+    "三名天南资深修士互识，私有库存和机构公产未合并；全部人物认知清理作者术语与未来剧透。"
+  ],
+  "unfinished": [
+    "区域候选尚未逐项分类并绑定最终运行/历史/未来处置。",
+    "元武国仍是地理节点；辛如音、齐云霄、付家与元武三正派尚未制作，已有相关阅读不能代替内容落地。",
+    "宋玉和柳玉的T0出生、师承尚未闭合，当前仅索引而不实例化后期成人。慕沛灵已据年龄证据明确尚未出生。",
+    "魔焰门、天煞宗、千幻宗等部分宗门目前只有组织及隶属，完整岗位与驻地生活仍待展开。",
+    "天南完整国家、宗派、族群和社会网络覆盖尚未完成。",
+    "虞国绝对南北方位、御灵宗天都/天罗称名源内冲突留在来源异文台账，不制造第二宗门或静默改原文。"
+  ],
+  "files": {
+    "module.json": "47f5d9b1724850cd306dfc1e83a0791c69fa506cb7eb189c924eaaab33f822b9",
+    "claims.json": "1a9d7c332728d207c3b85fa427a9774e5b01730fe68e28ace8efecb7acaf099c",
+    "subjects.json": "a82fba74c7513ac87ae73c39af40154d314e99576b1a47841fca8640b521fd01"
+  },
+  "integrationNotes": [
+    "装配顺序human-tiannan在human-yue和human-devil-valley之前；human-yue依赖human-local的墨居仁。",
+    "review.json的full只覆盖其指纹绑定的当前模块。地区覆盖未完成须继续体现在总表。",
+    "无付费模型调用；无Git操作；根代理负责独立验收、完整包装配与真实游玩。"
+  ]
+}

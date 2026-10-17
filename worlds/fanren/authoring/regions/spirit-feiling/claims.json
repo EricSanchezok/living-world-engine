@@ -1,0 +1,519 @@
+[
+  {
+    "id": "feiling-current-life",
+    "statement": "聚落细部、当前值勤、个人关系、生活任务及有限物资为开篇原创；不将后期入侵、奴役或主角任务变成所有人的默认命运。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "编写时确定共同开篇；人物只接收自己的亲历和实际得知的消息。",
+    "openingReason": "原著未逐户说明共同开篇，以原创生活填充可交互结构。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "feiling-current-calibration",
+    "statement": "准确能力量值、库存、药材份数、报酬和时间明确标定；无逐年断代的高阶人物当前修为和职务写为回溯推定。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "编写时确定共同开篇；人物只接收自己的亲历和实际得知的消息。",
+    "openingReason": "运行必须有真实有限状态，数值不冒称正文。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "feiling-land-and-sea",
+    "statement": "飞灵族在风元大陆有七十二主支，天鹏是其中较弱一支；黑冥半岛、黑隐山脉、黑冥雾和赤魔海构成沿海地理。其内部联席机构与人妖天渊城飞灵殿是不同实体。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "长期族群和地理可回溯；韩立海外所得和后期贡单不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-29116350",
+        "chapterSha256": "da5adf9228d49b0685c48d45efcce0b3aa8b6a128311c1c733f0bf0bb293a6a1",
+        "start": 555,
+        "end": 745,
+        "anchorSha256": "9a717b8b86fcf3e35284b96d03e90e29d6a8a8c411d97434ab70e77693afee71"
+      },
+      {
+        "chapterId": "qq-29139323",
+        "chapterSha256": "a860426f6affb82eb0ae144b6a75cd6d4b5b029c99ac3f3027abc197041bd359",
+        "start": 3127,
+        "end": 3260,
+        "anchorSha256": "3ce4c75b97e837475f299470188c690db61101c4172042ed91921c6b17a7b378"
+      },
+      {
+        "chapterId": "qq-29297715",
+        "chapterSha256": "87ea6e4585b4e46ae85b77f957aa285851d9608ce867d4e0d770d6f69cec4f58",
+        "start": 84,
+        "end": 274,
+        "anchorSha256": "0dabb76179b740a2fde5dd637854c33dda4bc69e77fb468330dab494a6a4df02"
+      }
+    ]
+  },
+  {
+    "id": "feiling-living-tianpeng-saint",
+    "statement": "天鹏最后一名圣主在韩立到访前四个月遭鬇鬡兽围攻而亡；不把此事放到韩立十岁时。T0保留圣主职务主体，名讳无载；当前合体和同一任职者为明确回溯推定。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "死亡窗口明确在后期，原文未给即位年份；保持活人但不伪造有源姓名。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-29125840",
+        "chapterSha256": "448b51f75b7e64ea611313c7df56dbc7c9a47ceb831b3d608f33fec683ea8413",
+        "start": 1778,
+        "end": 1963,
+        "anchorSha256": "00cca089731b3a566cbca1f8eea2a06bb70506174c943d9c62790603f13ce27a"
+      },
+      {
+        "chapterId": "qq-29125840",
+        "chapterSha256": "448b51f75b7e64ea611313c7df56dbc7c9a47ceb831b3d608f33fec683ea8413",
+        "start": 1968,
+        "end": 2156,
+        "anchorSha256": "bb57e6f2706002623f13271c7b32b841d6a46f1aac960a0f84ed920cb239c67d"
+      }
+    ]
+  },
+  {
+    "id": "feiling-tianpeng-elders",
+    "statement": "金悦为天鹏大长老，另有胥长老、石长老和未具名美妇；五大长老为后期人数。此时五席仍在且具名三人/美妇存活合体为回溯推定，第五位当前姓名明确原创。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "合体长寿容许回溯，当前在任没有逐年直证，原文确证称名与组织。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-29172639",
+        "chapterSha256": "4380fa6aba6e3d5fa1ab2226b962525998635282627f26c17ff620e259d47c0f",
+        "start": 585,
+        "end": 771,
+        "anchorSha256": "cf8443686f8bf942a7fefe4143f8a14003ab5121808fb3859b4c1b9fe1ff55b7"
+      },
+      {
+        "chapterId": "qq-29172639",
+        "chapterSha256": "4380fa6aba6e3d5fa1ab2226b962525998635282627f26c17ff620e259d47c0f",
+        "start": 1775,
+        "end": 1961,
+        "anchorSha256": "0f59e913697a37af2f57480df68eaad7b6531173768303508446d07fc4f76972"
+      },
+      {
+        "chapterId": "qq-29274683",
+        "chapterSha256": "6da588a2ef6d84d4f45c462acd3dfcbb37e0ec35ece684151b994494e2b5d231",
+        "start": 160,
+        "end": 348,
+        "anchorSha256": "09832246b9efa7f3191746131cbd679d2438e1cb04aca8bb928fcfc3f2663636"
+      },
+      {
+        "chapterId": "qq-29203811",
+        "chapterSha256": "a514f825b6fa1ed3f558fc91dead0357dd409b8aa4d27a3ab4704e1c9d4985cd",
+        "start": 1849,
+        "end": 2036,
+        "anchorSha256": "c409becabc16ea3496bd890bd44cb4a592243bb36c922f66a1f8460cc214460e"
+      }
+    ]
+  },
+  {
+    "id": "feiling-tianpeng-oath",
+    "statement": "天鹏之誓存在正副卷与签名、解封条件；融入真血和署名具有约束，不能把任何口头承诺自动当成此誓。当前卷轴无韩立签名；后期鲲鹏真血给予韩立尚未发生。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "旧誓卷与传承长期存在；未来签署没有提前成立。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-29274683",
+        "chapterSha256": "6da588a2ef6d84d4f45c462acd3dfcbb37e0ec35ece684151b994494e2b5d231",
+        "start": 104,
+        "end": 290,
+        "anchorSha256": "cce7fa00a3fd89ee7a9454a77493158fcb33f473fa1bc985445a3162485239d5"
+      },
+      {
+        "chapterId": "qq-29274683",
+        "chapterSha256": "6da588a2ef6d84d4f45c462acd3dfcbb37e0ec35ece684151b994494e2b5d231",
+        "start": 1217,
+        "end": 1405,
+        "anchorSha256": "2f32f0a563994579d947527f919ac16dea6eb90937b1227b5c128878005a8189"
+      },
+      {
+        "chapterId": "qq-29172639",
+        "chapterSha256": "4380fa6aba6e3d5fa1ab2226b962525998635282627f26c17ff620e259d47c0f",
+        "start": 1485,
+        "end": 1674,
+        "anchorSha256": "fee88a0a3a9520b01afedf0a6784e41d134a7be6e8399922eefb98081c0b07fe"
+      }
+    ]
+  },
+  {
+    "id": "feiling-hongyun-relic",
+    "statement": "红云是第九代大长老，独创惊蛰神通而后发疯身亡，舍利存放已久且混有临终神念；不把历史人物生成为活人，也不免费把完整神通写进所有天鹏认知。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "最早存放的旧代舍利回溯至共同开篇；当前具体库位为原创。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-29203811",
+        "chapterSha256": "a514f825b6fa1ed3f558fc91dead0357dd409b8aa4d27a3ab4704e1c9d4985cd",
+        "start": 2055,
+        "end": 2241,
+        "anchorSha256": "8f8274174e57aecff5c76a55988774f72e803ac6b0d4438ad35d3904ddd64562"
+      },
+      {
+        "chapterId": "qq-29203811",
+        "chapterSha256": "a514f825b6fa1ed3f558fc91dead0357dd409b8aa4d27a3ab4704e1c9d4985cd",
+        "start": 2117,
+        "end": 2307,
+        "anchorSha256": "b28bebd02caf6ca7c049ed1778f075225ea2811fc7f41bf52c694676fe2a04b2"
+      }
+    ]
+  },
+  {
+    "id": "feiling-trials-and-ranks",
+    "statement": "地渊试炼每三百年通常举行一次，灵将约化神、灵帅约炼虚；可能依黑潮调整日期，有实际风险和不同分支竞争。当前未确定下一期日期，不能预设某圣子必死或必须参加。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "长期制度回溯，原著该次提前一年与具体阵容不是T0事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-29274683",
+        "chapterSha256": "6da588a2ef6d84d4f45c462acd3dfcbb37e0ec35ece684151b994494e2b5d231",
+        "start": 2004,
+        "end": 2194,
+        "anchorSha256": "09ea0425cec3dcbaa4fc285ddfcbad0f77c05537933b33d4c258861e35070fa6"
+      },
+      {
+        "chapterId": "qq-29172639",
+        "chapterSha256": "4380fa6aba6e3d5fa1ab2226b962525998635282627f26c17ff620e259d47c0f",
+        "start": 272,
+        "end": 463,
+        "anchorSha256": "1cafe30eea9d84a8fdae3dd83c196f795ad7352bd4a2f3dbf5c6c8056efbbd82"
+      },
+      {
+        "chapterId": "qq-29315697",
+        "chapterSha256": "9a15a44fb7e416e04c70eca3b55281c0ce0832fb152ae58089a25941b6a74756",
+        "start": 1346,
+        "end": 1534,
+        "anchorSha256": "389b7e57f1d90a323ef0a47020597c5e89fe9ddc206214b4a06b37e176d45d9e"
+      }
+    ]
+  },
+  {
+    "id": "feiling-abyss-guards",
+    "statement": "金峰为地渊守卫统领，守军与联席长老会分工；四煞化甲术依实际煞气和修行，可学习但不能无代价复制甲具。T0金峰合体在任为回溯推定，守军规模保留社会事实，不伪造数万人姓名。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "成熟边防结构与高阶长寿支持回溯；后期秦长老矿仓案不发生。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-29311824",
+        "chapterSha256": "2c07c65ee927da2e41a29e82f012e212609e6b56928563b38a52b5f288677864",
+        "start": 3030,
+        "end": 3220,
+        "anchorSha256": "c9e656d42c206426e1ae7819476b1612eaa102742880b43c401834d809f46ab2"
+      },
+      {
+        "chapterId": "qq-29315697",
+        "chapterSha256": "9a15a44fb7e416e04c70eca3b55281c0ce0832fb152ae58089a25941b6a74756",
+        "start": 2116,
+        "end": 2301,
+        "anchorSha256": "07be53f8944e94ff602c486ab47464a37c48aea2fd6c6c73d4b5709a6a41d2b1"
+      },
+      {
+        "chapterId": "qq-33930965",
+        "chapterSha256": "fa9251c57c49f91efc59c242197a623a1e098b46e729bbb5f12cf9ab849983ef",
+        "start": 1603,
+        "end": 1795,
+        "anchorSha256": "f877ffee17528133077fdd139f6cf7d798513dac2af510228c7137c2de7314c6"
+      }
+    ]
+  },
+  {
+    "id": "feiling-seven-abyss-levels",
+    "statement": "地渊有七层，第一层侵蚀较浅，可有普通凶兽；通层入口与寒风、阴气构成真实通行条件。地渊尚未被飞灵全部攻占，后来发现的最深层矿场和半封闭政策不前置。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "古老地形回溯；后期攻占和采矿明确具有事件先后。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-29336239",
+        "chapterSha256": "a9b1a8cefc480f256767b60500db258160d3032b3ee33a12e85ae5ee80562d32",
+        "start": 2368,
+        "end": 2558,
+        "anchorSha256": "fdf4f1e53a0113825fa5b7aab2acc16c42ac92cab5150de5654b0fc8ebb4a739"
+      },
+      {
+        "chapterId": "qq-33857921",
+        "chapterSha256": "6c2a16171cc717ec29515f18bc6bac78159d235c391c44c0cab75360e2f80508",
+        "start": 2510,
+        "end": 2703,
+        "anchorSha256": "ae398eee7814dabca36caecf569db3734ecedcb5cdea244d76a43349c21d7e33"
+      },
+      {
+        "chapterId": "qq-33911858",
+        "chapterSha256": "7c02829a1edd91cbc21551794cc525187e2b4868a013ad73431ed14c26881cea",
+        "start": 114,
+        "end": 303,
+        "anchorSha256": "d3c3f8af82285967d4d6e068d7ad23b8c246ec7df4de07e62655f1492568b510"
+      }
+    ]
+  },
+  {
+    "id": "feiling-four-distinct-kings",
+    "statement": "地渊四妖为六足、地血、木青、白发蓝姓鬼婆；地血同时两个血袍形体是同一主体的手段，不生成两套独立身份和资源。T0四妖合体存活为长寿回溯推定，木青/鬼婆住处参考后期但显式回溯。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "四名合体妖王与各自形态有原文；共同开篇住处和现任势力需推定。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-29503500",
+        "chapterSha256": "5703ac8fce2b8057f7e1d270e94f57ba480a589a0e09a4e152a7d864c16d660e",
+        "start": 2742,
+        "end": 2932,
+        "anchorSha256": "d7b50995ace88e434a8260517019670d85cde1e9335323132a86ceb462c84d04"
+      },
+      {
+        "chapterId": "qq-29503500",
+        "chapterSha256": "5703ac8fce2b8057f7e1d270e94f57ba480a589a0e09a4e152a7d864c16d660e",
+        "start": 313,
+        "end": 499,
+        "anchorSha256": "f2dc1c3cb149ea48da2ff574a2df06770e70c11384efcbfa1a0c29bcb64ef633"
+      },
+      {
+        "chapterId": "qq-29503500",
+        "chapterSha256": "5703ac8fce2b8057f7e1d270e94f57ba480a589a0e09a4e152a7d864c16d660e",
+        "start": 0,
+        "end": 104,
+        "anchorSha256": "d827af56e7e51b1bfb778abbc40fddc3b4e3078b394cc7c5a0e864701b79d9d2"
+      },
+      {
+        "chapterId": "qq-29514335",
+        "chapterSha256": "182d735078718b6bbd7a2fde14d02d3774584cb410b63b29d5b95ddf5034f535",
+        "start": 493,
+        "end": 677,
+        "anchorSha256": "1fb3e38b9eb71d54c88cf8c6218ec6e17f4639961da8fc277a7412a89628d9b5"
+      }
+    ]
+  },
+  {
+    "id": "feiling-muqing-cave-and-servant",
+    "statement": "木青为木灵凝形，居木仙谷并在木精洞修炼；血毒是其血蛟下属，后期高阶灵帅。T0关系沿长期修行必要回溯，血毒当前炼虚为推定，不赋予未来追杀韩立命令。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "身世与既有洞府回溯，近期血食计划需单独排除。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-29503500",
+        "chapterSha256": "5703ac8fce2b8057f7e1d270e94f57ba480a589a0e09a4e152a7d864c16d660e",
+        "start": 729,
+        "end": 918,
+        "anchorSha256": "e1a4f171070c1e92871ff3b3a89a159d08f23648a1ec3a83522beb824f3086bf"
+      },
+      {
+        "chapterId": "qq-29514963",
+        "chapterSha256": "705ea664477a131bfd48f27639ee15830aba6cb00c018d4baf3176b8c01fa548",
+        "start": 928,
+        "end": 1123,
+        "anchorSha256": "ad7152c8b13a82d633973a8dc56a6af4992675338389551c604bf8f9c851577d"
+      },
+      {
+        "chapterId": "qq-29445401",
+        "chapterSha256": "c3432afec3bcd9af9f036153cb98eee7e16ee72ef40de08fc7b83dd5dba02bd5",
+        "start": 2627,
+        "end": 2815,
+        "anchorSha256": "b0e87231a0e993aa7b2945f3bbedc55f1073ba47c2986c8173ba282645f6eb1f"
+      }
+    ]
+  },
+  {
+    "id": "feiling-no-opening-minghe-campaign",
+    "statement": "四妖后来数十年前才订冥河大计；八千玄鬼、大量傀儡、韩立雷法训练以及元瑶妍丽成为鬼婆门下均非开篇既有状态。只保留各妖旧知识和独立动机。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "计划形成的相对年月明显晚于韩立十岁，未来军队不能提前生成。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-29387723",
+        "chapterSha256": "05a59a606b4438f8c2c670555ab820cdc4cfc653a16dc4981eed4c02129881bf",
+        "start": 35,
+        "end": 223,
+        "anchorSha256": "e593e7a86a9688742d3f4d2210d6a21b827a46b0fe20aa0b01eb845043e6bc47"
+      },
+      {
+        "chapterId": "qq-29503500",
+        "chapterSha256": "5703ac8fce2b8057f7e1d270e94f57ba480a589a0e09a4e152a7d864c16d660e",
+        "start": 1960,
+        "end": 2146,
+        "anchorSha256": "fd27ac911879555bf82bb57c2bdfcbb058283d74b4d2366d4922b5095310ff6e"
+      }
+    ]
+  },
+  {
+    "id": "feiling-yuelong-and-branches",
+    "statement": "越隆为后期飞灵大乘，飞灵族长期大乘不少于三人之说来自其本人；T0越隆大乘存活为有据推定，其余无名大乘不伪造成原作具名。五光奕姓老者已离族远游，不在本区复制，由相关区域接入唯一身份。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "长期高阶势力可回溯，当前私库和住所原创；极元晶合作及下一劫期限不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-44222361",
+        "chapterSha256": "c8260b8afb30142135392d8fd6f3ffbaa94e7ef190a66ebf7afc1d705cd3a6f3",
+        "start": 1265,
+        "end": 1463,
+        "anchorSha256": "5ea7f5c84d414fe2b22c9186385e1b604cddcca1aa5ecf0f7ad2a55553ce0485"
+      },
+      {
+        "chapterId": "qq-44222361",
+        "chapterSha256": "c8260b8afb30142135392d8fd6f3ffbaa94e7ef190a66ebf7afc1d705cd3a6f3",
+        "start": 1148,
+        "end": 1333,
+        "anchorSha256": "c83af275d48c644a80af2593d81532aa496d066c8565a92cd841a3988f626d26"
+      },
+      {
+        "chapterId": "qq-44222361",
+        "chapterSha256": "c8260b8afb30142135392d8fd6f3ffbaa94e7ef190a66ebf7afc1d705cd3a6f3",
+        "start": 2991,
+        "end": 3163,
+        "anchorSha256": "66e658d3ade9171301fb26dc3715b7e5b9be7b21acffccd0c94a71b81e0b57fe"
+      }
+    ]
+  },
+  {
+    "id": "feiling-ecology-and-craft",
+    "statement": "银潮是沿海极危险天象而非每次出海必发；赤融山脉火山地貌产火属性灵石材料，喷发不是无限刷料机制。木玲/木铃花为相同上下文异写，贡品数量与奴痕丹后期个案不前置。 赤融山脉位于风元大陆，原文没有把它归入飞灵赤融支；两个同名对象不据称名建立领属。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "自然条件和资源类别可回溯；确切开篇产量与银潮日期未由来源固定。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-33857921",
+        "chapterSha256": "6c2a16171cc717ec29515f18bc6bac78159d235c391c44c0cab75360e2f80508",
+        "start": 882,
+        "end": 1069,
+        "anchorSha256": "22322bf7df3290220130b7aedd812b2d423eaeeeef5ea17f34d3a7d25d26b8f9"
+      },
+      {
+        "chapterId": "qq-44648677",
+        "chapterSha256": "e4cd5bcf6f2f9c7375402c2e00e84d8d2de78f4a8aab95864cdbd65373cc7c6c",
+        "start": 2588,
+        "end": 2779,
+        "anchorSha256": "021096d949a5b83c7728ba8de40d2a9f5a80f309b3fce3776ec957ffd32e1ab5"
+      },
+      {
+        "chapterId": "qq-29125840",
+        "chapterSha256": "448b51f75b7e64ea611313c7df56dbc7c9a47ceb831b3d608f33fec683ea8413",
+        "start": 101,
+        "end": 289,
+        "anchorSha256": "d005046719d7e1c516d0afc94801bd57f916f8cf24839cc7588c515ef8b75a2e"
+      },
+      {
+        "chapterId": "qq-44648677",
+        "chapterSha256": "e4cd5bcf6f2f9c7375402c2e00e84d8d2de78f4a8aab95864cdbd65373cc7c6c",
+        "start": 2535,
+        "end": 2735,
+        "anchorSha256": "25e44cc12c6bdd1f8984f81ea4937f23d0747f112f7603dff888f62296178b93"
+      }
+    ]
+  },
+  {
+    "id": "feiling-earlier-five-kings",
+    "statement": "四妖第一次发现冥河入口在后期数百年前，当时共五位妖王，朱姓同伴死于冥雷兽。开篇应保留尚活着的朱姓妖王；精确全名、法体、住处与能力补写，当前合体为回溯推定。六足自认蜉蝣族出身，早知有圣地而不知地渊入口。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "首次探索与死亡均晚于人界开篇，不能把后来四人名单当成初始总数。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-29586114",
+        "chapterSha256": "8d98b595ad802d2da19876263e04c90204b88109e8b7db0e94bcc7d2415979a5",
+        "start": 2653,
+        "end": 2843,
+        "anchorSha256": "d0825ad3b34120d0c5fa1eb0457930eb9b30220325effa1ebab85e006e4a730e"
+      },
+      {
+        "chapterId": "qq-29718534",
+        "chapterSha256": "9cbb800403f83ce2284d76e70979c872a5d247ea91ae42ed2c6909e8c84ada6d",
+        "start": 1800,
+        "end": 1994,
+        "anchorSha256": "b932aa8b7cedea2056a87b6ff483926ba2b7e797ae17ce32baf65b7719aaaf72"
+      },
+      {
+        "chapterId": "qq-29693770",
+        "chapterSha256": "a9800522c5aa780da9ed38e39ac905b2dccd3612381db08a9e0b78f18c1aa3c7",
+        "start": 1598,
+        "end": 1786,
+        "anchorSha256": "24facd17f2a1793dd438907937c5f2dda6bd67acd7ca42aba76e5d0530f9cd9e"
+      }
+    ]
+  },
+  {
+    "id": "feiling-golden-ape",
+    "statement": "金灵为木青身边通灵苍猿，具有灵目，后来死于五龙铡；开篇存活炼虚及既有隶属为回溯推定，不提前死亡或安排监视韩立。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "长寿妖修及后期身份支持必要回溯，准确出生与加入年份无直证。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-29623783",
+        "chapterSha256": "c7623af771f71e83587b5b24d7efa20fe40ca49b5c5792fc3b872baa8d224e3c",
+        "start": 888,
+        "end": 1075,
+        "anchorSha256": "a4c449314fc503bfa1ff8a71e917b87ab5c86309a9f2c2293cd03f4e985ef19c"
+      },
+      {
+        "chapterId": "qq-29716522",
+        "chapterSha256": "3e8f65148fac7142a7840f0831bf4f623bbc6a5af586058c0bee93e1347b4f72",
+        "start": 1532,
+        "end": 1720,
+        "anchorSha256": "4b3d91c0605711da3670bcd4cdefce6b789aa4b160e2c6331058c9285195f55c"
+      },
+      {
+        "chapterId": "qq-29732300",
+        "chapterSha256": "a8946ee2572495348b87160342381276c067be7652793d47e19bbe1bf9b3e7a3",
+        "start": 988,
+        "end": 1180,
+        "anchorSha256": "a9a019f66977786c136dcd50849e29c340d23a517a55036b03f9f2dcbfcb297e"
+      }
+    ]
+  }
+]

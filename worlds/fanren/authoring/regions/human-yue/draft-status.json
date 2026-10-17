@@ -1,0 +1,58 @@
+{
+  "id": "human-yue",
+  "status": "module-reviewed-coverage-open",
+  "scope": "审校边界是当前module/claims全部内容，不是整个地区或全量候选完成。",
+  "statistics": {
+    "entities": 211,
+    "agents": 49,
+    "claims": 33,
+    "anchors": 83,
+    "periodicProperties": 1
+  },
+  "localValidation": {
+    "regionalModuleSchema": "passed",
+    "authoredClaimSchema": "passed",
+    "sourceChapterAndAnchorSha256": "passed",
+    "requiredProvenance": "passed",
+    "factIdUniqueness": "passed",
+    "semanticReview": "current-module-completed",
+    "focusedWorldAssembly": "opening + human-local + shared-foundations + human-tiannan + human-yue passed",
+    "periodicBoundaryAssertions": "passed",
+    "cognitionAndOwnershipAssertions": "passed",
+    "actualGameplay": "not-run; root owns final play acceptance"
+  },
+  "candidateCoverage": {
+    "queueInputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
+    "candidateCount": 1758,
+    "status": "not-yet-reviewed-item-by-item",
+    "formalCandidateDispositions": 0,
+    "note": "采用的章据和实体已复核；未将来源采用自动换算为候选处置，不用统一兜底标签伪造全部完成。"
+  },
+  "completedCorrections": [
+    "复核全部采用锚点上下文，并补绿波洞/太岳地理精确锚点。",
+    "菡云芝含木属性灵根写为客观隐藏事实；不误写木天灵根或幼年已经知晓。",
+    "董萱儿出生前奕梦诀与云露血脉落实；其本人无相关未来知识，云露只记自己施术往事，未知她现在坐标。",
+    "墨府人物对墨居仁、墨居仁对家人的认知逐一写明妻女、义女、弟子和义弟身份；移除否定句中的未来元神秘密。",
+    "补暖阳宝玉及严氏保管、黄枫有限筑基丹库存、玄夜领料簿、万芸练习剑；补园务与库务人员所属及互识。",
+    "禁地五年周期及五日窗口进入真实周期定义；弱化不等于已经有人打开通路。",
+    "凡俗武艺有实际force评级，未把cultivation=0等同无能力。"
+  ],
+  "unfinished": [
+    "区域候选尚未逐项分类并绑定最终运行/历史/未来处置。",
+    "吴风、李化元诸弟子及其他七派成员的完整T0身份与关系仍待制作；不得把吴管事自动当作吴风。",
+    "嘉元已写人物与暖阳宝玉可交互，刘锋等外部关系仍只在来源或背景中出现，尚未展开其地区和主体。",
+    "黄枫灵眼石、灵泉、麒麟阁、双瞳鼠及筑基丹完整生产线未制作；新增十二枚丹匣仅是有限当期库存。",
+    "古传送阵与地下空间未接入；须保持与乱星海唯一目的地配对，不与无边海合并。",
+    "血色古塔和金匣内部来源不足，保持封闭未知，没有以原创宝物填成已验证原著。"
+  ],
+  "files": {
+    "module.json": "222b06476aedcc1a83c7e1265b08166b523d2df566e2622364396ba67931c8e6",
+    "claims.json": "77a8fe616e299d590d7ca8393345cc2e6f9cd3fc30cc57889f92b8c7c36e32cf",
+    "subjects.json": "ee88cf538b441f8d20a5ccc12e97a49ac3d70afdd9c4e6aa6e928ca3d03b2138"
+  },
+  "integrationNotes": [
+    "装配顺序human-tiannan在human-yue和human-devil-valley之前；human-yue依赖human-local的墨居仁。",
+    "review.json的full只覆盖其指纹绑定的当前模块。地区覆盖未完成须继续体现在总表。",
+    "无付费模型调用；无Git操作；根代理负责独立验收、完整包装配与真实游玩。"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "formatVersion": 1,
+  "status": "remaining-full-scope-gates-not-phase-completion",
+  "paidCalls": 0,
+  "sourceAdjudication": {
+    "pendingBatches": 186,
+    "coveredBatches": 212,
+    "unsupported": 58,
+    "ambiguous": 300,
+    "residual": {
+      "unresolvedAliases": 146,
+      "unresolvedIssues": 1508,
+      "unresolvedIdentities": 385,
+      "omissions": 1339
+    },
+    "note": "这些类别可能重叠，不相加为独立工作数；模型supported也不自动批准开篇事实。"
+  },
+  "candidateInventory": {
+    "allExtractedCandidates": 53818,
+    "regionalQueueMemberships": 29257,
+    "uniqueCandidatesInRegionalQueues": 24378,
+    "unassignedCandidates": 29440,
+    "strictlyDisposedMemberships": 771,
+    "uniqueStrictDisposedCandidates": 628,
+    "exactCrossRegionReuseProgressMemberships": 129,
+    "existingOtherClassificationRecords": 1090,
+    "note": "跨地区复用是已有候选的重复归属处置，不增加独立事实数；候选断言不能等同需要新增人物。"
+  },
+  "sourceEvidenceAbsentIssueIds": [
+    "batch-0113-issue-0014",
+    "batch-0185-issue-0009",
+    "batch-0186-issue-0001",
+    "batch-0209-issue-0001",
+    "batch-0298-issue-0010",
+    "batch-0341-issue-0001"
+  ],
+  "nonMechanicalDecisions": [
+    "未分区候选需要按正文语义归属、去重或归档；不能仅换检索词批量批准。",
+    "大晋1114项当前pending，以及其他区域候选中的身份、存亡、主体和时间适用性，需要具体编辑决定。",
+    "1090条旧编辑分类需要核对原来的判断范围、源锚点及目标绑定；不是改字段即可宣称严格审定。",
+    "无引文的问题项保留待审；不能伪造原文锚点满足合同。",
+    "当前模块及其候选队列不封闭全域制作清单；完整范围、资源关系、出身、规模和实际游玩仍分别验收。"
+  ],
+  "locallyCompleted": [
+    "来源和编辑阅读指纹重建；read/reviewed未批量提升。",
+    "过期地区制作阶段按当前模块/审签/锚点实证同步。",
+    "172条相同候选和报告指纹复用已记录，1条地区专属判断没有照搬。",
+    "北域449项与万妖谷95项当前队列均有严格处置；大晋已采用断言对应138项已处理。"
+  ],
+  "approvedForRuntime": false
+}

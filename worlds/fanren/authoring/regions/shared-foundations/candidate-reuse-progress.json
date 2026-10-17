@@ -1,0 +1,3811 @@
+{
+  "formatVersion": 1,
+  "moduleId": "shared-foundations",
+  "queueInputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
+  "status": "exact-selected-records-validated-full-queue-blocked-by-missing-source-evidence",
+  "records": [
+    {
+      "candidateId": "batch-0053-fact-0024",
+      "batchId": "batch-0053",
+      "reportHash": "5838c702b8121b01b6df2fc5fa58df6bf89757166085d9cbfa0bcb5ddeb94664",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "boundless-voyage-account"
+      ],
+      "reason": "同一候选及提取报告已由 human-boundless 审定；此处复用其 b2d931007794c22655fa68f6ec62bb93ae52f83162864227edee85c8aebed20e 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。航行年余故事不能推出人物身份、年代或海洋绝无尽头；开篇人物不自动知道此传闻。",
+      "evidence": [
+        {
+          "chapterId": "qq-21723002",
+          "chapterSha256": "3727d3ada296277c8d64a14de5481e24493cf94559dfb14c2d0e3684e800be8c",
+          "start": 779,
+          "end": 887,
+          "anchorSha256": "0ab3ea78b79bc275da683fe5d4188eaccd30c1e90f126c945bcb45418799b30d"
+        }
+      ],
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "原文未给航行者名字和相对T0日期，只能保留传闻及证据强度。"
+      },
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0134-fact-0047",
+      "batchId": "batch-0134",
+      "reportHash": "22f869e6d15a418031c22eb1b688472277d103518192fc2c195b4fa5efd1d6fc",
+      "disposition": "later-only",
+      "targetIds": [
+        "boundless-old-seal"
+      ],
+      "reason": "同一候选及提取报告已由 human-boundless 审定；此处复用其 b2d931007794c22655fa68f6ec62bb93ae52f83162864227edee85c8aebed20e 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。三修士对一小半天南的受灾估计是未来风险判断，不写为开篇既成灾害或精确自然阈值。",
+      "evidence": [
+        {
+          "chapterId": "qq-24950849",
+          "chapterSha256": "1d66e3349b3eeca33d23eb2ea9ad0230ff45996be1c67d7fd90d287ef05f8c2a",
+          "start": 2467,
+          "end": 2611,
+          "anchorSha256": "0e932387f23c0a8a3fd981820e7dda02f71a6beb6ed3ab5d6c7dae73a4a625bb"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0144-fact-0020",
+      "batchId": "batch-0144",
+      "reportHash": "b59572e2f675f25cf1339ffff26214c9cddff56afcb94f331dc86abaddf5e822",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-jinjing-rule"
+      ],
+      "reason": "同一候选及提取报告已由 human-dajin 审定；此处复用其 20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。千里禁飞禁斗与实际执行强弱同时采用，不删反例，也不把名义禁令变成世界硬法则。",
+      "evidence": [
+        {
+          "chapterId": "qq-25395636",
+          "chapterSha256": "45a33588e39fd819501fa05105235da5dc915ed8f2ca39b5fa63923520348243",
+          "start": 736,
+          "end": 828,
+          "anchorSha256": "0e4a7f6848109cd4aac0ff69581d07c95b55af040ff3612d9c1ba5396fd2e341"
+        },
+        {
+          "chapterId": "qq-25395636",
+          "chapterSha256": "45a33588e39fd819501fa05105235da5dc915ed8f2ca39b5fa63923520348243",
+          "start": 829,
+          "end": 907,
+          "anchorSha256": "c24d0e94fed5407f3939617c7caba3160bc27574a39ab36a4bfd7efd8eb58eac"
+        },
+        {
+          "chapterId": "qq-25395636",
+          "chapterSha256": "45a33588e39fd819501fa05105235da5dc915ed8f2ca39b5fa63923520348243",
+          "start": 908,
+          "end": 971,
+          "anchorSha256": "93cd903f384c965bd802aa8b5786da93838ebca3dda47fb322209ac4a921de6b"
+        },
+        {
+          "chapterId": "qq-25477206",
+          "chapterSha256": "7634bafdd22c5771066459a1116c7582bf3680d91bac494a689668a7d0a47e66",
+          "start": 1471,
+          "end": 1515,
+          "anchorSha256": "40116c63806f1080da172d72df035339d06ad1895f44772f618498f4b4c34368"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0146-object-0014",
+      "batchId": "batch-0146",
+      "reportHash": "9f336fe46d5c5c59a603717aed533751e653398018fbe84c5211dd0021c48b65",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-yinluo-sect",
+        "dajin-yinluo-history"
+      ],
+      "reason": "同一候选及提取报告已由 human-dajin 审定；此处复用其 20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。阴罗宗为既有宗门；晋京追杀韩立与当时聚集长老属于后期活动，不给T0任何人预植韩立仇怨。",
+      "evidence": [
+        {
+          "chapterId": "qq-25454727",
+          "chapterSha256": "f050a2e1404e9d73ef28e79d2586c0418377213d76aba2cee340fe45f52a8ef0",
+          "start": 3011,
+          "end": 3092,
+          "anchorSha256": "fe9e9ff3a0a2516954f11fba4c505e192e1f1c0eb296b20a0a884fd67ad41962"
+        },
+        {
+          "chapterId": "qq-25475691",
+          "chapterSha256": "610695d8330477c2f43b91fddf2a5baed88dc95aec086b6eb67b685266d9ea9e",
+          "start": 766,
+          "end": 1147,
+          "anchorSha256": "bae0509337d133d0eedc052e0aaf59311154bfbef0ec71c5f03aad362ce07b3c"
+        },
+        {
+          "chapterId": "qq-25477206",
+          "chapterSha256": "7634bafdd22c5771066459a1116c7582bf3680d91bac494a689668a7d0a47e66",
+          "start": 1017,
+          "end": 1218,
+          "anchorSha256": "ae85b17044dd1656511d5ec28d336f2ff3161552f43a7e69468e787a1d92dbd9"
+        },
+        {
+          "chapterId": "qq-25568486",
+          "chapterSha256": "bf9ed0f499d7d57d071dcf4afccbf0c591ef8a08e0a77c565ebd46e736374257",
+          "start": 322,
+          "end": 447,
+          "anchorSha256": "f9e2f10ca824a2e829fa1eb058a6fc2d43138d95700e0615f9158cc1ca424ee9"
+        },
+        {
+          "chapterId": "qq-25477206",
+          "chapterSha256": "7634bafdd22c5771066459a1116c7582bf3680d91bac494a689668a7d0a47e66",
+          "start": 1219,
+          "end": 1263,
+          "anchorSha256": "1dbc1c41f13e8421e639bbe75ec7132cb3577cb6c6c52c937afeca0284437f66"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0146-object-0042",
+      "batchId": "batch-0146",
+      "reportHash": "9f336fe46d5c5c59a603717aed533751e653398018fbe84c5211dd0021c48b65",
+      "disposition": "corrected",
+      "targetIds": [
+        "north-huiyang-recipe",
+        "north-hansui-recipe"
+      ],
+      "reason": "同一候选及提取报告已由 human-dajin 审定；此处复用其 20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。复用已逐条审定的同一候选（human-north @ 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4），非新推断。原文明确历代持方而未炼成；药方存在不因后来复制给韩立而变成未来才有。宫方传承有实体，太阳精火与辅材步骤不能省略。",
+      "evidence": [
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 2049,
+          "end": 2171,
+          "anchorSha256": "c0c5ccd28de1d6be1286f2979ea27aa5d98c81913ba39a060bc4a3fabd2f4283"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 2255,
+          "end": 2394,
+          "anchorSha256": "180c863f0009e726e85ce8aff012bed65c99419f98944b62fc71c3de876f6637"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 1802,
+          "end": 1923,
+          "anchorSha256": "211cbfbd54ae771e2ef6509050824d6460784f86d9fe38e195b962f05945645a"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 1567,
+          "end": 1740,
+          "anchorSha256": "f9a5749f60c8349e384031e5a26d3047d2f5f28e9f690a5988ca0fc43eeda353"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0146-fact-0054",
+      "batchId": "batch-0146",
+      "reportHash": "9f336fe46d5c5c59a603717aed533751e653398018fbe84c5211dd0021c48b65",
+      "disposition": "adopted",
+      "targetIds": [
+        "north-xiaoji-palace",
+        "north-ice-island"
+      ],
+      "reason": "同一候选及提取报告已由 human-dajin 审定；此处复用其 20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。复用已逐条审定的同一候选（human-north @ 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4），非新推断。长期地理和传承采用，原文称谓不授予人物全知或自动通行。",
+      "evidence": [
+        {
+          "chapterId": "qq-25477206",
+          "chapterSha256": "7634bafdd22c5771066459a1116c7582bf3680d91bac494a689668a7d0a47e66",
+          "start": 2974,
+          "end": 3134,
+          "anchorSha256": "fc34f6de43fe75dfa1f48b4e41d6f84ec5e36b788ebacd6f998276a83f246e2d"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 488,
+          "end": 823,
+          "anchorSha256": "c546446380d256d6dba85eb389ae773c4049dcade4bd0d90e60d7257940a96fd"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0148-fact-0001",
+      "batchId": "batch-0148",
+      "reportHash": "6edef532f0a03a95c7f928f80afd6d590ade95e6461dcc64ed93482e7a870281",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-huayun",
+        "dajin-geography"
+      ],
+      "reason": "同一候选及提取报告已由 human-dajin 审定；此处复用其 20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。沿海以妖兽材料换内陆资源的贸易结构采用；掌市宗门收益来自交易而非每步无因生出灵石。",
+      "evidence": [
+        {
+          "chapterId": "qq-25568486",
+          "chapterSha256": "bf9ed0f499d7d57d071dcf4afccbf0c591ef8a08e0a77c565ebd46e736374257",
+          "start": 0,
+          "end": 145,
+          "anchorSha256": "0d3ecc8ca92d8bfe94766e69104d98f9accc921662c187410421d5eb72e0da37"
+        },
+        {
+          "chapterId": "qq-25151010",
+          "chapterSha256": "cbf32a3ceaeacc95a02f9fc448918a0e08c6fa218c221c149bdbf1b19e5b11fa",
+          "start": 2835,
+          "end": 2912,
+          "anchorSha256": "77d3b101b8e54593c9ac6288f79d2cc38cf81a25d3a86bf32034098e8a18c440"
+        },
+        {
+          "chapterId": "qq-25151010",
+          "chapterSha256": "cbf32a3ceaeacc95a02f9fc448918a0e08c6fa218c221c149bdbf1b19e5b11fa",
+          "start": 2913,
+          "end": 3033,
+          "anchorSha256": "09b3b277a292de63da132d7b4ae98e287faeb2ee4138b2beda8b0f87a33751d4"
+        },
+        {
+          "chapterId": "qq-25362219",
+          "chapterSha256": "44d6f04fc246bdd5f89531fa3a1817f8568ef223f65da630004ded641867c15b",
+          "start": 0,
+          "end": 47,
+          "anchorSha256": "4163bc61d00899bbbc7043fb3c6157d604e00323dcc751242e7f911b335256f8"
+        },
+        {
+          "chapterId": "qq-25395636",
+          "chapterSha256": "45a33588e39fd819501fa05105235da5dc915ed8f2ca39b5fa63923520348243",
+          "start": 0,
+          "end": 51,
+          "anchorSha256": "c19a20e32af782cab8f99b17429a6daa0feccd40e34e64b34379309b65c16185"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0151-object-0004",
+      "batchId": "batch-0151",
+      "reportHash": "e3968103722cab7783b57586605ba36c15ea367c7d4139f5d0718bde536f98dc",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-bai-yaoyi",
+        "north-north-cast-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。白瑶怡身份唯一，后期元婴中期/外事长老/富成旧欠不前置；T0成年结丹为必要补写。",
+      "evidence": [
+        {
+          "chapterId": "qq-25725138",
+          "chapterSha256": "ab8828728d37b9cadba9c5d9e899650a85c46cd4b9e42d302d05745c95ec984f",
+          "start": 1506,
+          "end": 1571,
+          "anchorSha256": "0e50b8ff2bea3ecfb3f2dac64839ca94dae2967e3f2a79b5b2c9a4834dd65dc6"
+        },
+        {
+          "chapterId": "qq-25725138",
+          "chapterSha256": "ab8828728d37b9cadba9c5d9e899650a85c46cd4b9e42d302d05745c95ec984f",
+          "start": 1607,
+          "end": 1664,
+          "anchorSha256": "f478d7a2238bfdb6cd1c9ca2cd98ca68ed72b74d05b2918c9680bd67d2147214"
+        },
+        {
+          "chapterId": "qq-25725138",
+          "chapterSha256": "ab8828728d37b9cadba9c5d9e899650a85c46cd4b9e42d302d05745c95ec984f",
+          "start": 1468,
+          "end": 1505,
+          "anchorSha256": "58620c058db7edf940fd7e625d9577892bdaa95d2bdd3768413d9d3539ce5320"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0151-fact-0023",
+      "batchId": "batch-0151",
+      "reportHash": "e3968103722cab7783b57586605ba36c15ea367c7d4139f5d0718bde536f98dc",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-bai-yaoyi",
+        "north-north-cast-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。白瑶怡后期自述与神识观察只钉当时元婴中期及外事职务；T0采用独立明示的低阶补写。",
+      "evidence": [
+        {
+          "chapterId": "qq-25725138",
+          "chapterSha256": "ab8828728d37b9cadba9c5d9e899650a85c46cd4b9e42d302d05745c95ec984f",
+          "start": 1506,
+          "end": 1571,
+          "anchorSha256": "0e50b8ff2bea3ecfb3f2dac64839ca94dae2967e3f2a79b5b2c9a4834dd65dc6"
+        },
+        {
+          "chapterId": "qq-25725138",
+          "chapterSha256": "ab8828728d37b9cadba9c5d9e899650a85c46cd4b9e42d302d05745c95ec984f",
+          "start": 1607,
+          "end": 1664,
+          "anchorSha256": "f478d7a2238bfdb6cd1c9ca2cd98ca68ed72b74d05b2918c9680bd67d2147214"
+        },
+        {
+          "chapterId": "qq-25725138",
+          "chapterSha256": "ab8828728d37b9cadba9c5d9e899650a85c46cd4b9e42d302d05745c95ec984f",
+          "start": 1468,
+          "end": 1505,
+          "anchorSha256": "58620c058db7edf940fd7e625d9577892bdaa95d2bdd3768413d9d3539ce5320"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0152-object-0002",
+      "batchId": "batch-0152",
+      "reportHash": "08de7f2a8721f29788b7eb8c10a5ac114ceb2e33e5a9a4069df2564aea211fc3",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-bai-yaoyi",
+        "north-north-cast-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。同一白瑶怡；阴阳窟同行和后期元婴修为不写成T0经历。",
+      "evidence": [
+        {
+          "chapterId": "qq-25805370",
+          "chapterSha256": "5d74414916a7c57fa313614d05939b789af273ab6277bc9d01583d223ce7e02c",
+          "start": 2067,
+          "end": 2135,
+          "anchorSha256": "5d6c234946ce3ffc9de5da23c711be1df91f2d873a67d99f0fddfde6babd091a"
+        },
+        {
+          "chapterId": "qq-25779142",
+          "chapterSha256": "dc115dcf9d55b23c5ba17aec280e4d0e8a008654b12ce77ff044e29ce2659341",
+          "start": 2166,
+          "end": 2240,
+          "anchorSha256": "209eb5202adc9495980a12c159f12a0b42bc8b3f2f1f923a467653afb21f11e7"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0152-object-0066",
+      "batchId": "batch-0152",
+      "reportHash": "08de7f2a8721f29788b7eb8c10a5ac114ceb2e33e5a9a4069df2564aea211fc3",
+      "disposition": "adopted",
+      "targetIds": [
+        "north-xiaoji-palace",
+        "north-ice-island"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。寒地与宗门传承可回溯，北夜是称谓组成而非另造地区实体。",
+      "evidence": [
+        {
+          "chapterId": "qq-25805370",
+          "chapterSha256": "5d74414916a7c57fa313614d05939b789af273ab6277bc9d01583d223ce7e02c",
+          "start": 2067,
+          "end": 2135,
+          "anchorSha256": "5d6c234946ce3ffc9de5da23c711be1df91f2d873a67d99f0fddfde6babd091a"
+        },
+        {
+          "chapterId": "qq-25477206",
+          "chapterSha256": "7634bafdd22c5771066459a1116c7582bf3680d91bac494a689668a7d0a47e66",
+          "start": 2974,
+          "end": 3134,
+          "anchorSha256": "fc34f6de43fe75dfa1f48b4e41d6f84ec5e36b788ebacd6f998276a83f246e2d"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 488,
+          "end": 823,
+          "anchorSha256": "c546446380d256d6dba85eb389ae773c4049dcade4bd0d90e60d7257940a96fd"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0152-fact-0047",
+      "batchId": "batch-0152",
+      "reportHash": "08de7f2a8721f29788b7eb8c10a5ac114ceb2e33e5a9a4069df2564aea211fc3",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-bai-yaoyi",
+        "north-north-cast-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。未出场不是未出生，原句说明长期宗门关系；T0存活与结丹由校准声明，不能把认识时间当存在时间。",
+      "evidence": [
+        {
+          "chapterId": "qq-25805370",
+          "chapterSha256": "5d74414916a7c57fa313614d05939b789af273ab6277bc9d01583d223ce7e02c",
+          "start": 2067,
+          "end": 2135,
+          "anchorSha256": "5d6c234946ce3ffc9de5da23c711be1df91f2d873a67d99f0fddfde6babd091a"
+        },
+        {
+          "chapterId": "qq-25725138",
+          "chapterSha256": "ab8828728d37b9cadba9c5d9e899650a85c46cd4b9e42d302d05745c95ec984f",
+          "start": 1607,
+          "end": 1664,
+          "anchorSha256": "f478d7a2238bfdb6cd1c9ca2cd98ca68ed72b74d05b2918c9680bd67d2147214"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0164-object-0011",
+      "batchId": "batch-0164",
+      "reportHash": "aa57ce67d825da6490d15ab0c1de34290a1e8f925f2b03976c394c0202052a5d",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-xiong-shi",
+        "wanyao-sisan-person"
+      ],
+      "reason": "同一候选及提取报告已由 human-dajin 审定；此处复用其 20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。复用已逐条审定的同一候选（human-ten-thousand @ 4939906844390d0e6226cd4bb664ff23def270b5ba3dd9851de44fee5ba18940），非新推断。尸熊独立本体采用；四散身份是伪装，原人类是否存在原文明示不知，暗算徐等未来行动不前置。",
+      "evidence": [
+        {
+          "chapterId": "qq-26278179",
+          "chapterSha256": "c002ad0987609cd7edfc52d0fef41c50e0d575e0f614c09d0efad6d44f1fe2b1",
+          "start": 2032,
+          "end": 2086,
+          "anchorSha256": "2f3e0fe685acb6840670c41488c4411e3659cf3ec32f0f317100a62ec1f56663"
+        },
+        {
+          "chapterId": "qq-26283658",
+          "chapterSha256": "bf0f959bd548ca59905154ada886656cdb86d3970f540ee797f4a99f1afa3269",
+          "start": 2458,
+          "end": 2580,
+          "anchorSha256": "77987c4198e4f93cae7f831648b2390fb06c2657afe789b6b3e3df71865206ce"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0164-fact-0032",
+      "batchId": "batch-0164",
+      "reportHash": "aa57ce67d825da6490d15ab0c1de34290a1e8f925f2b03976c394c0202052a5d",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-xiong-shi"
+      ],
+      "reason": "同一候选及提取报告已由 human-dajin 审定；此处复用其 20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。复用已逐条审定的同一候选（human-ten-thousand @ 4939906844390d0e6226cd4bb664ff23def270b5ba3dd9851de44fee5ba18940），非新推断。韩立认出发生在未来，长期炼尸身份并不因此未来才生效；修为落点另标定。",
+      "evidence": [
+        {
+          "chapterId": "qq-26278179",
+          "chapterSha256": "c002ad0987609cd7edfc52d0fef41c50e0d575e0f614c09d0efad6d44f1fe2b1",
+          "start": 2032,
+          "end": 2086,
+          "anchorSha256": "2f3e0fe685acb6840670c41488c4411e3659cf3ec32f0f317100a62ec1f56663"
+        },
+        {
+          "chapterId": "qq-26278179",
+          "chapterSha256": "c002ad0987609cd7edfc52d0fef41c50e0d575e0f614c09d0efad6d44f1fe2b1",
+          "start": 2087,
+          "end": 2184,
+          "anchorSha256": "25bbe41bc15844e1bbccfd5c0167219212505e42736c35a1747fbd13156191c8"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0168-object-0005",
+      "batchId": "batch-0168",
+      "reportHash": "6e8b313f707dfbf5bdd7ac8b15632924d315dbf0c668532472192977d9eaed2a",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-ren-bi",
+        "canon-bai-yaoyi"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。碧师叔自称任某，1077及1078明确任碧，与白瑶怡是不同人物，不能因本批提取疑问合并。",
+      "evidence": [
+        {
+          "chapterId": "qq-26486496",
+          "chapterSha256": "af18b72fde07a01ba4f6d9ef6f22e1cbbbd08f1132b3cbed9f124ec7e9f4b923",
+          "start": 3026,
+          "end": 3060,
+          "anchorSha256": "839fce961a640f4eb071082383b1c6d0fc1a590930db0579b9c2b85ff1ce6c71"
+        },
+        {
+          "chapterId": "qq-26486496",
+          "chapterSha256": "af18b72fde07a01ba4f6d9ef6f22e1cbbbd08f1132b3cbed9f124ec7e9f4b923",
+          "start": 3167,
+          "end": 3225,
+          "anchorSha256": "df8c3438b81af9a3d33c4ac7c90b2d1d5b4d55fa95e4317b99f1caaaabd67bd9"
+        },
+        {
+          "chapterId": "qq-26507146",
+          "chapterSha256": "963771a842c992c6d455dcdee3e1749e9ff4d9e02f6ffbba354dcb19738f7bc2",
+          "start": 1257,
+          "end": 1308,
+          "anchorSha256": "85e33f8d857707742183e0141b1857b69da94e06ede7f32598e8a7a71784476f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0168-fact-0073",
+      "batchId": "batch-0168",
+      "reportHash": "6e8b313f707dfbf5bdd7ac8b15632924d315dbf0c668532472192977d9eaed2a",
+      "disposition": "later-only",
+      "targetIds": [
+        "north-xiaoji-palace"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。石云与两女接待元婴韩立是后期行动，T0用原创门房日常人员；石云出生定位另待证据。",
+      "evidence": [
+        {
+          "chapterId": "qq-26486496",
+          "chapterSha256": "af18b72fde07a01ba4f6d9ef6f22e1cbbbd08f1132b3cbed9f124ec7e9f4b923",
+          "start": 2450,
+          "end": 2517,
+          "anchorSha256": "93e7fc06167d64a5a2a3cc45081f71d21567b3d37221a151cfdb88c14a3a5abf"
+        },
+        {
+          "chapterId": "qq-26486496",
+          "chapterSha256": "af18b72fde07a01ba4f6d9ef6f22e1cbbbd08f1132b3cbed9f124ec7e9f4b923",
+          "start": 2518,
+          "end": 2598,
+          "anchorSha256": "f4b0c8767c4a52f0d9959e77e6856cf89300b1859070ce45e6375e11d6f4e28d"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0169-object-0001",
+      "batchId": "batch-0169",
+      "reportHash": "3c79c04462e79c3e4167ccc32d0ea5dc54f93a5db1943da6e3b010b57b25e371",
+      "disposition": "later-only",
+      "targetIds": [
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-dajin 审定；此处复用其 20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。复用已逐条审定的同一候选（human-north @ 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4），非新推断。这组元婴韩立、紫焰、太阴真火与虚天鼎持有状态为未来，T0韩立唯一村童实体另由开篇模块维护。",
+      "evidence": [
+        {
+          "chapterId": "qq-26497309",
+          "chapterSha256": "04714158d1589601f32c4ccc22e0d86768f5e9831ca1e830e88120af2a0862e5",
+          "start": 0,
+          "end": 33,
+          "anchorSha256": "9f33b37a27d184b0c0c5398f41c54d6f67db19f6295b4aa81485f03d79a0f3f1"
+        },
+        {
+          "chapterId": "qq-26497309",
+          "chapterSha256": "04714158d1589601f32c4ccc22e0d86768f5e9831ca1e830e88120af2a0862e5",
+          "start": 300,
+          "end": 337,
+          "anchorSha256": "231a3825295a7dd7db9c7df47fe705717c83a5e0af6a7a190d6be8f4d9cf2468"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0169-object-0003",
+      "batchId": "batch-0169",
+      "reportHash": "3c79c04462e79c3e4167ccc32d0ea5dc54f93a5db1943da6e3b010b57b25e371",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-ren-bi",
+        "north-north-cast-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。任碧与碧师叔同一；元婴中期和追求白瑶怡的当期行动不由T0结丹补写自动获得。",
+      "evidence": [
+        {
+          "chapterId": "qq-26497309",
+          "chapterSha256": "04714158d1589601f32c4ccc22e0d86768f5e9831ca1e830e88120af2a0862e5",
+          "start": 858,
+          "end": 945,
+          "anchorSha256": "80983bbce1fb3cd6c7b01e0c1f83b79093b062e1ca19b8d329e256e93036f5c1"
+        },
+        {
+          "chapterId": "qq-26507146",
+          "chapterSha256": "963771a842c992c6d455dcdee3e1749e9ff4d9e02f6ffbba354dcb19738f7bc2",
+          "start": 1053,
+          "end": 1144,
+          "anchorSha256": "a9d649b95e6f1d1da8632485298507af85ba6167b3cf58f93b108f4b3640bedb"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0169-object-0005",
+      "batchId": "batch-0169",
+      "reportHash": "3c79c04462e79c3e4167ccc32d0ea5dc54f93a5db1943da6e3b010b57b25e371",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-hanli-shangren",
+        "title-hanli-shangren",
+        "north-shixiang-identity"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。师相为具体人，寒骊上人为可复用职称，不能将历代大长老全并成一人；半步化神是后期自述。",
+      "evidence": [
+        {
+          "chapterId": "qq-26518518",
+          "chapterSha256": "48b3395d63854e12b6473e5ac0d10fc1afbac5864ef0225eb417009b849ac86f",
+          "start": 774,
+          "end": 869,
+          "anchorSha256": "7d2d8205e67e0fff01a8a6bb48e7a6236b3cc0d5c4af94c5f43e8bd56c76dd5f"
+        },
+        {
+          "chapterId": "qq-26508302",
+          "chapterSha256": "0b016c88b05df4f35cf5bbd65a3739d6fd080b93152d238acfc257e229529fb2",
+          "start": 1982,
+          "end": 2013,
+          "anchorSha256": "83c6d94f8e181133aa54249ea74d555c6d1c6092bd835799a8ed63560111fd86"
+        },
+        {
+          "chapterId": "qq-26518518",
+          "chapterSha256": "48b3395d63854e12b6473e5ac0d10fc1afbac5864ef0225eb417009b849ac86f",
+          "start": 2647,
+          "end": 2774,
+          "anchorSha256": "a3cd0af04c4f76977e4e9a448f1f206bb67e75276187fe8ef0ef9ee6d64ea713"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0169-object-0006",
+      "batchId": "batch-0169",
+      "reportHash": "3c79c04462e79c3e4167ccc32d0ea5dc54f93a5db1943da6e3b010b57b25e371",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-bai-mengxin",
+        "north-north-cast-relations"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。后续1086明确白梦馨，与堂姐二姐连续称呼同一，不另建匿名女长老。",
+      "evidence": [
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 1793,
+          "end": 1872,
+          "anchorSha256": "8d5e19a3c045ed98ffca46db9805a73808421503cfd3e554d18b54589e512c33"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 624,
+          "end": 650,
+          "anchorSha256": "111f421ba73726e1a80ea104a57220af2ffb577c422ad6908b62a70e64bdff68"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 902,
+          "end": 965,
+          "anchorSha256": "88ee4cad59cbe2eae404ae4efa04f7538676531cf122949c1478ffa35130ef87"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 651,
+          "end": 812,
+          "anchorSha256": "6e20b34ea601555a79d99e41e42727d4025b6fc499b64f8ae01e636b1d42ac4e"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 813,
+          "end": 901,
+          "anchorSha256": "46a440d17d2ba912788c113f314f35cdbcf987f71c3d5db2b934900d72f4a4ad"
+        },
+        {
+          "chapterId": "qq-26585706",
+          "chapterSha256": "06ec2ccd1c847837b703e7355cf8d19ec6b4ddbde668621e569bd4c2dfed38b2",
+          "start": 369,
+          "end": 459,
+          "anchorSha256": "c2c32ee28bacae1bc2134f8908d0124c735a30a379ab21fd34f18369dd8f82d6"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1028,
+          "end": 1101,
+          "anchorSha256": "bc6b0216dfb2457b8d1c3ca8e1e8f336b397558326bb0dc32923b792b0006c5f"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1379,
+          "end": 1423,
+          "anchorSha256": "aef923fd9cf1f312e21e2ba9d404642b03187112dd1bec706d3370c0720d6cfa"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2830,
+          "end": 2913,
+          "anchorSha256": "7ce04f825d6a64c967b4960042952786e96ba1aca651b02cb418f351694968fa"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 767,
+          "end": 878,
+          "anchorSha256": "ef6b353ffe9e87c50278f3d39933c1a394ba8b57d978f40088cf995a1aceb85f"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 591,
+          "end": 630,
+          "anchorSha256": "e5154cbc5c66426ffee6c368ab87b2f953ec41f69c140c1ed304d80a06da61c6"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0169-object-0013",
+      "batchId": "batch-0169",
+      "reportHash": "3c79c04462e79c3e4167ccc32d0ea5dc54f93a5db1943da6e3b010b57b25e371",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "north-invited-ma",
+        "north-unresolved-invitation-surnames"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。原文确称马李二道友，但后期实到摩鸠与龙夫人未有明确二姓对应。保留称谓歧义，既不按同人数合并，也不重复造一个开篇已受邀元婴。",
+      "evidence": [
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2298,
+          "end": 2455,
+          "anchorSha256": "4e7ba242620223f7d2e0565a93a82e2315bc08edfe1727aa5dfe2833ae3fbb8e"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 1985,
+          "end": 2098,
+          "anchorSha256": "1923756a86b36d72a75b20609a00a17b9890c58988e1d1ebefd5154479c07f75"
+        }
+      ],
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "原文确称马李二道友，但后期实到摩鸠与龙夫人未有明确二姓对应。保留称谓歧义，既不按同人数合并，也不重复造一个开篇已受邀元婴。"
+      },
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0169-object-0014",
+      "batchId": "batch-0169",
+      "reportHash": "3c79c04462e79c3e4167ccc32d0ea5dc54f93a5db1943da6e3b010b57b25e371",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "north-invited-li",
+        "north-unresolved-invitation-surnames"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。与马姓同处一句邀约；李姓和实际到场人物没有明示对应，邀请本身又属后期。保留指称未定，不以李姓匹配其他地域人物。",
+      "evidence": [
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2298,
+          "end": 2455,
+          "anchorSha256": "4e7ba242620223f7d2e0565a93a82e2315bc08edfe1727aa5dfe2833ae3fbb8e"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 1985,
+          "end": 2098,
+          "anchorSha256": "1923756a86b36d72a75b20609a00a17b9890c58988e1d1ebefd5154479c07f75"
+        }
+      ],
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "与马姓同处一句邀约；李姓和实际到场人物没有明示对应，邀请本身又属后期。保留指称未定，不以李姓匹配其他地域人物。"
+      },
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0169-object-0050",
+      "batchId": "batch-0169",
+      "reportHash": "3c79c04462e79c3e4167ccc32d0ea5dc54f93a5db1943da6e3b010b57b25e371",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-ouyang-north-elder",
+        "north-north-cast-relations"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。1081两人对应黑水/凤离，1086白梦馨自述凤离，1106青衫留下黑焰；连续对照黑水对应欧阳，不造第四种灭阴焰。",
+      "evidence": [
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2830,
+          "end": 2913,
+          "anchorSha256": "7ce04f825d6a64c967b4960042952786e96ba1aca651b02cb418f351694968fa"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 902,
+          "end": 965,
+          "anchorSha256": "88ee4cad59cbe2eae404ae4efa04f7538676531cf122949c1478ffa35130ef87"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 651,
+          "end": 812,
+          "anchorSha256": "6e20b34ea601555a79d99e41e42727d4025b6fc499b64f8ae01e636b1d42ac4e"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 813,
+          "end": 901,
+          "anchorSha256": "46a440d17d2ba912788c113f314f35cdbcf987f71c3d5db2b934900d72f4a4ad"
+        },
+        {
+          "chapterId": "qq-26585706",
+          "chapterSha256": "06ec2ccd1c847837b703e7355cf8d19ec6b4ddbde668621e569bd4c2dfed38b2",
+          "start": 369,
+          "end": 459,
+          "anchorSha256": "c2c32ee28bacae1bc2134f8908d0124c735a30a379ab21fd34f18369dd8f82d6"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1028,
+          "end": 1101,
+          "anchorSha256": "bc6b0216dfb2457b8d1c3ca8e1e8f336b397558326bb0dc32923b792b0006c5f"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1379,
+          "end": 1423,
+          "anchorSha256": "aef923fd9cf1f312e21e2ba9d404642b03187112dd1bec706d3370c0720d6cfa"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 767,
+          "end": 878,
+          "anchorSha256": "ef6b353ffe9e87c50278f3d39933c1a394ba8b57d978f40088cf995a1aceb85f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0169-object-0052",
+      "batchId": "batch-0169",
+      "reportHash": "3c79c04462e79c3e4167ccc32d0ea5dc54f93a5db1943da6e3b010b57b25e371",
+      "disposition": "corrected",
+      "targetIds": [
+        "north-north-cast-relations",
+        "north-hansui-supply"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。师相乾蓝及白梦馨凤离、欧阳黑水的跨章对应支持三种门内传承；需寒髓不等于从不消耗或每人共有三焰。",
+      "evidence": [
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2544,
+          "end": 2803,
+          "anchorSha256": "7c70cff0a30ed8f17ac8d45b738abb83fad9ed51504cb34771647283115774be"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 902,
+          "end": 965,
+          "anchorSha256": "88ee4cad59cbe2eae404ae4efa04f7538676531cf122949c1478ffa35130ef87"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 651,
+          "end": 812,
+          "anchorSha256": "6e20b34ea601555a79d99e41e42727d4025b6fc499b64f8ae01e636b1d42ac4e"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 813,
+          "end": 901,
+          "anchorSha256": "46a440d17d2ba912788c113f314f35cdbcf987f71c3d5db2b934900d72f4a4ad"
+        },
+        {
+          "chapterId": "qq-26585706",
+          "chapterSha256": "06ec2ccd1c847837b703e7355cf8d19ec6b4ddbde668621e569bd4c2dfed38b2",
+          "start": 369,
+          "end": 459,
+          "anchorSha256": "c2c32ee28bacae1bc2134f8908d0124c735a30a379ab21fd34f18369dd8f82d6"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1028,
+          "end": 1101,
+          "anchorSha256": "bc6b0216dfb2457b8d1c3ca8e1e8f336b397558326bb0dc32923b792b0006c5f"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1379,
+          "end": 1423,
+          "anchorSha256": "aef923fd9cf1f312e21e2ba9d404642b03187112dd1bec706d3370c0720d6cfa"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2830,
+          "end": 2913,
+          "anchorSha256": "7ce04f825d6a64c967b4960042952786e96ba1aca651b02cb418f351694968fa"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 767,
+          "end": 878,
+          "anchorSha256": "ef6b353ffe9e87c50278f3d39933c1a394ba8b57d978f40088cf995a1aceb85f"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2456,
+          "end": 2543,
+          "anchorSha256": "69d2b12d1727c8e89f56a328d2bab2fdff8775a07719436d808b40ea45460bf9"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 3077,
+          "end": 3106,
+          "anchorSha256": "6279579a9ff4b15e6561c5b3d5a63043a49f9cc2d47d723d7968cb4d094dd04d"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0169-object-0054",
+      "batchId": "batch-0169",
+      "reportHash": "3c79c04462e79c3e4167ccc32d0ea5dc54f93a5db1943da6e3b010b57b25e371",
+      "disposition": "corrected",
+      "targetIds": [
+        "north-breakthrough-notes",
+        "north-breakthrough-research",
+        "north-north-instruments-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。多古籍研究和后期成法分开；T0仅保留未完成研究札记。受术者元婴后期/冰属性/自身寒焰、五位助手条件保留，三成为师相估计而非硬概率。",
+      "evidence": [
+        {
+          "chapterId": "qq-26518518",
+          "chapterSha256": "48b3395d63854e12b6473e5ac0d10fc1afbac5864ef0225eb417009b849ac86f",
+          "start": 2818,
+          "end": 2959,
+          "anchorSha256": "9c25442fdb18ab92a8f112d4923c253777029efb47cbb4e350a01c61f476d661"
+        },
+        {
+          "chapterId": "qq-26518518",
+          "chapterSha256": "48b3395d63854e12b6473e5ac0d10fc1afbac5864ef0225eb417009b849ac86f",
+          "start": 3030,
+          "end": 3205,
+          "anchorSha256": "3fd8e4238f96917ba662d9e99f020459fb080225db631f8dee34f2f512993b27"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 1167,
+          "end": 1359,
+          "anchorSha256": "2d47e4ab55c076674ec7db8c73fbcd7f14dc2efc40d9815b839585e912095b14"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 116,
+          "end": 208,
+          "anchorSha256": "47cd8b09f0d227686d4583500b1996b498b4589709a544b96f95cd80b3dbea64"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 1985,
+          "end": 2098,
+          "anchorSha256": "1923756a86b36d72a75b20609a00a17b9890c58988e1d1ebefd5154479c07f75"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 153,
+          "end": 258,
+          "anchorSha256": "75ea7d4aa1dd1b7ff950880991b04954f1b24f6e665ccae96244f2d4982a4699"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0169-object-0056",
+      "batchId": "batch-0169",
+      "reportHash": "3c79c04462e79c3e4167ccc32d0ea5dc54f93a5db1943da6e3b010b57b25e371",
+      "disposition": "corrected",
+      "targetIds": [
+        "north-hansui-supply",
+        "north-possession-timing"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。叛徒失窃在后期宫内对话得到确认，但不能由此前用于修炼推出现仍有另一瓶；T0库存明确标定。",
+      "evidence": [
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2456,
+          "end": 2543,
+          "anchorSha256": "69d2b12d1727c8e89f56a328d2bab2fdff8775a07719436d808b40ea45460bf9"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2544,
+          "end": 2803,
+          "anchorSha256": "7c70cff0a30ed8f17ac8d45b738abb83fad9ed51504cb34771647283115774be"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 3077,
+          "end": 3106,
+          "anchorSha256": "6279579a9ff4b15e6561c5b3d5a63043a49f9cc2d47d723d7968cb4d094dd04d"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0169-fact-0008",
+      "batchId": "batch-0169",
+      "reportHash": "3c79c04462e79c3e4167ccc32d0ea5dc54f93a5db1943da6e3b010b57b25e371",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-ren-bi",
+        "north-north-cast-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。后期内宫长老及元婴中期不复制，T0结丹和在宫生活是另列补写。",
+      "evidence": [
+        {
+          "chapterId": "qq-26497309",
+          "chapterSha256": "04714158d1589601f32c4ccc22e0d86768f5e9831ca1e830e88120af2a0862e5",
+          "start": 2123,
+          "end": 2193,
+          "anchorSha256": "0ee3d501d3e571d72d20da67e772281640cc5cccc248648d43623c0659a8a536"
+        },
+        {
+          "chapterId": "qq-26508302",
+          "chapterSha256": "0b016c88b05df4f35cf5bbd65a3739d6fd080b93152d238acfc257e229529fb2",
+          "start": 602,
+          "end": 681,
+          "anchorSha256": "28729657c0bfa21b91aa3c690cbcbabdf7134601e18847ff6311ab32549dde19"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0169-fact-0014",
+      "batchId": "batch-0169",
+      "reportHash": "3c79c04462e79c3e4167ccc32d0ea5dc54f93a5db1943da6e3b010b57b25e371",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-hanli-shangren",
+        "north-opening-persons"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。三百年瓶颈可作回溯线索；数年剩寿及服丹缩身仅钉后期，不设置T0立即死亡或强制丹毒。",
+      "evidence": [
+        {
+          "chapterId": "qq-26518518",
+          "chapterSha256": "48b3395d63854e12b6473e5ac0d10fc1afbac5864ef0225eb417009b849ac86f",
+          "start": 2647,
+          "end": 2774,
+          "anchorSha256": "a3cd0af04c4f76977e4e9a448f1f206bb67e75276187fe8ef0ef9ee6d64ea713"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2298,
+          "end": 2455,
+          "anchorSha256": "4e7ba242620223f7d2e0565a93a82e2315bc08edfe1727aa5dfe2833ae3fbb8e"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0169-fact-0021",
+      "batchId": "batch-0169",
+      "reportHash": "3c79c04462e79c3e4167ccc32d0ea5dc54f93a5db1943da6e3b010b57b25e371",
+      "disposition": "corrected",
+      "targetIds": [
+        "north-hansui-supply",
+        "north-north-cast-relations"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。代代修炼属于既有传承，韩立未知不令其未来才存在；资源仍有限。",
+      "evidence": [
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2544,
+          "end": 2803,
+          "anchorSha256": "7c70cff0a30ed8f17ac8d45b738abb83fad9ed51504cb34771647283115774be"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2456,
+          "end": 2543,
+          "anchorSha256": "69d2b12d1727c8e89f56a328d2bab2fdff8775a07719436d808b40ea45460bf9"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 3077,
+          "end": 3106,
+          "anchorSha256": "6279579a9ff4b15e6561c5b3d5a63043a49f9cc2d47d723d7968cb4d094dd04d"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 902,
+          "end": 965,
+          "anchorSha256": "88ee4cad59cbe2eae404ae4efa04f7538676531cf122949c1478ffa35130ef87"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 651,
+          "end": 812,
+          "anchorSha256": "6e20b34ea601555a79d99e41e42727d4025b6fc499b64f8ae01e636b1d42ac4e"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 813,
+          "end": 901,
+          "anchorSha256": "46a440d17d2ba912788c113f314f35cdbcf987f71c3d5db2b934900d72f4a4ad"
+        },
+        {
+          "chapterId": "qq-26585706",
+          "chapterSha256": "06ec2ccd1c847837b703e7355cf8d19ec6b4ddbde668621e569bd4c2dfed38b2",
+          "start": 369,
+          "end": 459,
+          "anchorSha256": "c2c32ee28bacae1bc2134f8908d0124c735a30a379ab21fd34f18369dd8f82d6"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1028,
+          "end": 1101,
+          "anchorSha256": "bc6b0216dfb2457b8d1c3ca8e1e8f336b397558326bb0dc32923b792b0006c5f"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1379,
+          "end": 1423,
+          "anchorSha256": "aef923fd9cf1f312e21e2ba9d404642b03187112dd1bec706d3370c0720d6cfa"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2830,
+          "end": 2913,
+          "anchorSha256": "7ce04f825d6a64c967b4960042952786e96ba1aca651b02cb418f351694968fa"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 767,
+          "end": 878,
+          "anchorSha256": "ef6b353ffe9e87c50278f3d39933c1a394ba8b57d978f40088cf995a1aceb85f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0169-fact-0022",
+      "batchId": "batch-0169",
+      "reportHash": "3c79c04462e79c3e4167ccc32d0ea5dc54f93a5db1943da6e3b010b57b25e371",
+      "disposition": "corrected",
+      "targetIds": [
+        "north-hansui-supply",
+        "north-jade-mining"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。失窃被宫内对话确认但日期不明；万年冰玉洞对千年玄玉洞异文保留，不强推开篇已失窃或固定周期。",
+      "evidence": [
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2456,
+          "end": 2543,
+          "anchorSha256": "69d2b12d1727c8e89f56a328d2bab2fdff8775a07719436d808b40ea45460bf9"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2544,
+          "end": 2803,
+          "anchorSha256": "7c70cff0a30ed8f17ac8d45b738abb83fad9ed51504cb34771647283115774be"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 3077,
+          "end": 3106,
+          "anchorSha256": "6279579a9ff4b15e6561c5b3d5a63043a49f9cc2d47d723d7968cb4d094dd04d"
+        },
+        {
+          "chapterId": "qq-26593665",
+          "chapterSha256": "7cf9674c6e9d34db232249e73ca98fc16386953e2fe83f0912e46317d8fe9e05",
+          "start": 0,
+          "end": 204,
+          "anchorSha256": "3310db1b122eec349920f2e672b8311447cd21c688ae9c395943e5e95fdf5f42"
+        },
+        {
+          "chapterId": "qq-26593665",
+          "chapterSha256": "7cf9674c6e9d34db232249e73ca98fc16386953e2fe83f0912e46317d8fe9e05",
+          "start": 479,
+          "end": 530,
+          "anchorSha256": "6931834d14104b7d92f34f85b49453a3283878fb375cfdb84c148d0b745cdc68"
+        },
+        {
+          "chapterId": "qq-26593665",
+          "chapterSha256": "7cf9674c6e9d34db232249e73ca98fc16386953e2fe83f0912e46317d8fe9e05",
+          "start": 1144,
+          "end": 1261,
+          "anchorSha256": "3990f4a878c531169afc916453ab6e69935e4b3115b12a30da0534b5900ac8f3"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0169-fact-0061",
+      "batchId": "batch-0169",
+      "reportHash": "3c79c04462e79c3e4167ccc32d0ea5dc54f93a5db1943da6e3b010b57b25e371",
+      "disposition": "later-only",
+      "targetIds": [
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。马李援手到来是后期筹备；与后见龙/摩是否异名存在原文问题，不强合并、也不提前生产T0援军。",
+      "evidence": [
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2298,
+          "end": 2455,
+          "anchorSha256": "4e7ba242620223f7d2e0565a93a82e2315bc08edfe1727aa5dfe2833ae3fbb8e"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0170-object-0002",
+      "batchId": "batch-0170",
+      "reportHash": "17963d841c4970c9fcdc53597b06fd24fdbe4fbb4243520aca32b87933d9bf2a",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-bai-yaoyi",
+        "north-north-cast-relations"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。复用同一人物，堂妹关系可回溯；被追杀和与韩立的同游为后期。",
+      "evidence": [
+        {
+          "chapterId": "qq-26538781",
+          "chapterSha256": "f4f68d78e60343bec5a0f9b3597bd5b2c41534f1fa6ffbe4f432bf524d8feb39",
+          "start": 43,
+          "end": 94,
+          "anchorSha256": "f9592ac553a9da4b8fd2ee4188015f3bf8000f80b4f9fc01f6560c409850d371"
+        },
+        {
+          "chapterId": "qq-26540849",
+          "chapterSha256": "348c3748087680662875d004042cc0356705b497c72b8fae105adc2142008bc8",
+          "start": 746,
+          "end": 791,
+          "anchorSha256": "7947046ae87f111621c7914d5afc9ba42336db0f2e42de9bf2a31bed7cd5807c"
+        },
+        {
+          "chapterId": "qq-26553887",
+          "chapterSha256": "e8b52a0df428ecaad6ddb4995e0f09292e26e7c41afcb688673c46c659b3363b",
+          "start": 2400,
+          "end": 2445,
+          "anchorSha256": "7d258b82db265539c5fafa19787b7d2769ac59159ed7b137747b575ef83183cc"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 902,
+          "end": 965,
+          "anchorSha256": "88ee4cad59cbe2eae404ae4efa04f7538676531cf122949c1478ffa35130ef87"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 651,
+          "end": 812,
+          "anchorSha256": "6e20b34ea601555a79d99e41e42727d4025b6fc499b64f8ae01e636b1d42ac4e"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 813,
+          "end": 901,
+          "anchorSha256": "46a440d17d2ba912788c113f314f35cdbcf987f71c3d5db2b934900d72f4a4ad"
+        },
+        {
+          "chapterId": "qq-26585706",
+          "chapterSha256": "06ec2ccd1c847837b703e7355cf8d19ec6b4ddbde668621e569bd4c2dfed38b2",
+          "start": 369,
+          "end": 459,
+          "anchorSha256": "c2c32ee28bacae1bc2134f8908d0124c735a30a379ab21fd34f18369dd8f82d6"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1028,
+          "end": 1101,
+          "anchorSha256": "bc6b0216dfb2457b8d1c3ca8e1e8f336b397558326bb0dc32923b792b0006c5f"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1379,
+          "end": 1423,
+          "anchorSha256": "aef923fd9cf1f312e21e2ba9d404642b03187112dd1bec706d3370c0720d6cfa"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2830,
+          "end": 2913,
+          "anchorSha256": "7ce04f825d6a64c967b4960042952786e96ba1aca651b02cb418f351694968fa"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 767,
+          "end": 878,
+          "anchorSha256": "ef6b353ffe9e87c50278f3d39933c1a394ba8b57d978f40088cf995a1aceb85f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0170-object-0003",
+      "batchId": "batch-0170",
+      "reportHash": "17963d841c4970c9fcdc53597b06fd24fdbe4fbb4243520aca32b87933d9bf2a",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-bai-mengxin",
+        "north-north-cast-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。堂姐与凤离身份明确，元婴中期巅峰是后来状态，T0初期是明示补写。",
+      "evidence": [
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 474,
+          "end": 554,
+          "anchorSha256": "4091cadd145dca97d1b60acb6b28a5470c5ed7128a6013586e100eb32d63806d"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 591,
+          "end": 630,
+          "anchorSha256": "e5154cbc5c66426ffee6c368ab87b2f953ec41f69c140c1ed304d80a06da61c6"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 767,
+          "end": 878,
+          "anchorSha256": "ef6b353ffe9e87c50278f3d39933c1a394ba8b57d978f40088cf995a1aceb85f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0170-object-0004",
+      "batchId": "batch-0170",
+      "reportHash": "17963d841c4970c9fcdc53597b06fd24fdbe4fbb4243520aca32b87933d9bf2a",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-hanli-shangren",
+        "north-shixiang-identity"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。同一师相；未来冲关、剩寿与来访相识不前置。",
+      "evidence": [
+        {
+          "chapterId": "qq-26553887",
+          "chapterSha256": "e8b52a0df428ecaad6ddb4995e0f09292e26e7c41afcb688673c46c659b3363b",
+          "start": 2339,
+          "end": 2399,
+          "anchorSha256": "d007fc21e92af60de5b23df4dba63f34be7569c7603e1a8ccae3ddcf109c7bec"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 2868,
+          "end": 2955,
+          "anchorSha256": "fc09192cac320e2390a49a1803c1adb24e8210d106567afa3a61ea09774f5658"
+        },
+        {
+          "chapterId": "qq-26567752",
+          "chapterSha256": "46159b2d1b8e6f23a79b5af090e86e35d3ca83c2e8cccca2d8073cf807ba4c07",
+          "start": 832,
+          "end": 921,
+          "anchorSha256": "0dd544869b222f6ce7785c54032f63b6c61080cac232c12df666df225153638d"
+        },
+        {
+          "chapterId": "qq-26518518",
+          "chapterSha256": "48b3395d63854e12b6473e5ac0d10fc1afbac5864ef0225eb417009b849ac86f",
+          "start": 774,
+          "end": 869,
+          "anchorSha256": "7d2d8205e67e0fff01a8a6bb48e7a6236b3cc0d5c4af94c5f43e8bd56c76dd5f"
+        },
+        {
+          "chapterId": "qq-26518518",
+          "chapterSha256": "48b3395d63854e12b6473e5ac0d10fc1afbac5864ef0225eb417009b849ac86f",
+          "start": 2647,
+          "end": 2774,
+          "anchorSha256": "a3cd0af04c4f76977e4e9a448f1f206bb67e75276187fe8ef0ef9ee6d64ea713"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0170-object-0005",
+      "batchId": "batch-0170",
+      "reportHash": "17963d841c4970c9fcdc53597b06fd24fdbe4fbb4243520aca32b87933d9bf2a",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-long-liucui",
+        "north-mojiu-long-identities",
+        "north-mojiu-long-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。唯一龙夫人、柳翠派身份与特殊养声功法保留；当前结丹与派务为补写，不照搬后期元婴中期、寒焰和全部法宝。",
+      "evidence": [
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 2342,
+          "end": 2413,
+          "anchorSha256": "473e25db400e8599bcbeb813c3724d130dfe9044a01f96e89faa12db010b35df"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 1882,
+          "end": 1918,
+          "anchorSha256": "fb43c47e9f12b4ea895f14583292fd4a534a55c1cbdacd83d7ae5640c00bdcf7"
+        },
+        {
+          "chapterId": "qq-26580499",
+          "chapterSha256": "169e425e66bf8a21cbdacaf5418a713aead0913443a1779d4484321c4e6a1fa1",
+          "start": 183,
+          "end": 224,
+          "anchorSha256": "00d0050eb7fc2b794a457986dba21d89d3c4e2cb0c5186a6d2ca85998877ca27"
+        },
+        {
+          "chapterId": "qq-26675892",
+          "chapterSha256": "bf0fc383ee4ae6417c599dcdd85650688f1c274295b4e07c499639652ccb040d",
+          "start": 1004,
+          "end": 1127,
+          "anchorSha256": "b2eb1d53dd02c646923a765a45a50a5519fd3f6d8c260e247fe636b524c75303"
+        },
+        {
+          "chapterId": "qq-26675892",
+          "chapterSha256": "bf0fc383ee4ae6417c599dcdd85650688f1c274295b4e07c499639652ccb040d",
+          "start": 1173,
+          "end": 1267,
+          "anchorSha256": "3c1fa846a0b19f352f9227e353d5d56dd7c0023fe723c894592831e6b6b7fa45"
+        },
+        {
+          "chapterId": "qq-26675892",
+          "chapterSha256": "bf0fc383ee4ae6417c599dcdd85650688f1c274295b4e07c499639652ccb040d",
+          "start": 1268,
+          "end": 1324,
+          "anchorSha256": "a617a404a4b4bc2ef99d5881dad01c8d21c04d924207f306dae65c1e90052170"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0170-object-0006",
+      "batchId": "batch-0170",
+      "reportHash": "17963d841c4970c9fcdc53597b06fd24fdbe4fbb4243520aca32b87933d9bf2a",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-mojiu",
+        "north-mojiu-long-identities",
+        "north-mojiu-long-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。唯一摩鸠散修僧人；后期中期巅峰、淡绿寒焰与被邀相助不前置，T0结丹及北地行院为明示补写。",
+      "evidence": [
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 1985,
+          "end": 2098,
+          "anchorSha256": "1923756a86b36d72a75b20609a00a17b9890c58988e1d1ebefd5154479c07f75"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 1882,
+          "end": 1918,
+          "anchorSha256": "fb43c47e9f12b4ea895f14583292fd4a534a55c1cbdacd83d7ae5640c00bdcf7"
+        },
+        {
+          "chapterId": "qq-26580499",
+          "chapterSha256": "169e425e66bf8a21cbdacaf5418a713aead0913443a1779d4484321c4e6a1fa1",
+          "start": 225,
+          "end": 278,
+          "anchorSha256": "aeaca00f5e6f0ac3057a85868484435e9511342326d5ef356cbeeccca3da2765"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 2342,
+          "end": 2413,
+          "anchorSha256": "473e25db400e8599bcbeb813c3724d130dfe9044a01f96e89faa12db010b35df"
+        },
+        {
+          "chapterId": "qq-26675892",
+          "chapterSha256": "bf0fc383ee4ae6417c599dcdd85650688f1c274295b4e07c499639652ccb040d",
+          "start": 1004,
+          "end": 1127,
+          "anchorSha256": "b2eb1d53dd02c646923a765a45a50a5519fd3f6d8c260e247fe636b524c75303"
+        },
+        {
+          "chapterId": "qq-26675892",
+          "chapterSha256": "bf0fc383ee4ae6417c599dcdd85650688f1c274295b4e07c499639652ccb040d",
+          "start": 1173,
+          "end": 1267,
+          "anchorSha256": "3c1fa846a0b19f352f9227e353d5d56dd7c0023fe723c894592831e6b6b7fa45"
+        },
+        {
+          "chapterId": "qq-26675892",
+          "chapterSha256": "bf0fc383ee4ae6417c599dcdd85650688f1c274295b4e07c499639652ccb040d",
+          "start": 1268,
+          "end": 1324,
+          "anchorSha256": "a617a404a4b4bc2ef99d5881dad01c8d21c04d924207f306dae65c1e90052170"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0170-object-0007",
+      "batchId": "batch-0170",
+      "reportHash": "17963d841c4970c9fcdc53597b06fd24fdbe4fbb4243520aca32b87933d9bf2a",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-ye-north-inspector",
+        "north-council",
+        "north-north-cast-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。叶监察者与大晋叶皇家不按姓合并；后期元婴中期改为T0初期补写，监察宝类别仍不强定。",
+      "evidence": [
+        {
+          "chapterId": "qq-26567752",
+          "chapterSha256": "46159b2d1b8e6f23a79b5af090e86e35d3ca83c2e8cccca2d8073cf807ba4c07",
+          "start": 1183,
+          "end": 1322,
+          "anchorSha256": "8f2e978cafee99ffdd8654818d54febd87def29ee915c59bca5f479fcf8398e6"
+        },
+        {
+          "chapterId": "qq-26567752",
+          "chapterSha256": "46159b2d1b8e6f23a79b5af090e86e35d3ca83c2e8cccca2d8073cf807ba4c07",
+          "start": 1549,
+          "end": 1628,
+          "anchorSha256": "e61fa7ac3c8be3bb33e1d320bb5d70c06ac4535baa20c424b8f6b652fd46eb5f"
+        },
+        {
+          "chapterId": "qq-26567752",
+          "chapterSha256": "46159b2d1b8e6f23a79b5af090e86e35d3ca83c2e8cccca2d8073cf807ba4c07",
+          "start": 1675,
+          "end": 1751,
+          "anchorSha256": "c9448778c6a39407ad64cfe1306fba467c92598cc78c2209d1c2b0294e11e05a"
+        },
+        {
+          "chapterId": "qq-26507146",
+          "chapterSha256": "963771a842c992c6d455dcdee3e1749e9ff4d9e02f6ffbba354dcb19738f7bc2",
+          "start": 407,
+          "end": 518,
+          "anchorSha256": "b1ee1deb83f8cc919795566b16132460ff865cbb39aab51e02412774934cd936"
+        },
+        {
+          "chapterId": "qq-26567752",
+          "chapterSha256": "46159b2d1b8e6f23a79b5af090e86e35d3ca83c2e8cccca2d8073cf807ba4c07",
+          "start": 1813,
+          "end": 1866,
+          "anchorSha256": "0a94b268e15cf033b8850d17817e8b66f5b35fd67120ec1c48b997b236790c2f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0170-object-0008",
+      "batchId": "batch-0170",
+      "reportHash": "17963d841c4970c9fcdc53597b06fd24fdbe4fbb4243520aca32b87933d9bf2a",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-ouyang-north-elder",
+        "north-north-cast-relations"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。后续直接称欧阳，不另建匿名男修；黑水来源经跨章对应，后期冲关行动未发生。",
+      "evidence": [
+        {
+          "chapterId": "qq-26567752",
+          "chapterSha256": "46159b2d1b8e6f23a79b5af090e86e35d3ca83c2e8cccca2d8073cf807ba4c07",
+          "start": 962,
+          "end": 1075,
+          "anchorSha256": "0384777d548d1a301f96ceed8c33555f12b9371d8906e9dccf91fe5d1792ca64"
+        },
+        {
+          "chapterId": "qq-26567752",
+          "chapterSha256": "46159b2d1b8e6f23a79b5af090e86e35d3ca83c2e8cccca2d8073cf807ba4c07",
+          "start": 1076,
+          "end": 1156,
+          "anchorSha256": "4a2775209985d9a5e3a881a4531b6f051f09948477710ccdd17972e9eaa632be"
+        },
+        {
+          "chapterId": "qq-26580499",
+          "chapterSha256": "169e425e66bf8a21cbdacaf5418a713aead0913443a1779d4484321c4e6a1fa1",
+          "start": 155,
+          "end": 182,
+          "anchorSha256": "16ab787b1abd1300dda03dcb54dbce2b05e56ed31a749ff69332a508a0f8da31"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 902,
+          "end": 965,
+          "anchorSha256": "88ee4cad59cbe2eae404ae4efa04f7538676531cf122949c1478ffa35130ef87"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 651,
+          "end": 812,
+          "anchorSha256": "6e20b34ea601555a79d99e41e42727d4025b6fc499b64f8ae01e636b1d42ac4e"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 813,
+          "end": 901,
+          "anchorSha256": "46a440d17d2ba912788c113f314f35cdbcf987f71c3d5db2b934900d72f4a4ad"
+        },
+        {
+          "chapterId": "qq-26585706",
+          "chapterSha256": "06ec2ccd1c847837b703e7355cf8d19ec6b4ddbde668621e569bd4c2dfed38b2",
+          "start": 369,
+          "end": 459,
+          "anchorSha256": "c2c32ee28bacae1bc2134f8908d0124c735a30a379ab21fd34f18369dd8f82d6"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1028,
+          "end": 1101,
+          "anchorSha256": "bc6b0216dfb2457b8d1c3ca8e1e8f336b397558326bb0dc32923b792b0006c5f"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1379,
+          "end": 1423,
+          "anchorSha256": "aef923fd9cf1f312e21e2ba9d404642b03187112dd1bec706d3370c0720d6cfa"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2830,
+          "end": 2913,
+          "anchorSha256": "7ce04f825d6a64c967b4960042952786e96ba1aca651b02cb418f351694968fa"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 767,
+          "end": 878,
+          "anchorSha256": "ef6b353ffe9e87c50278f3d39933c1a394ba8b57d978f40088cf995a1aceb85f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0170-object-0034",
+      "batchId": "batch-0170",
+      "reportHash": "17963d841c4970c9fcdc53597b06fd24fdbe4fbb4243520aca32b87933d9bf2a",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-bai-mengxin",
+        "north-north-cast-relations"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。韩立试招吞噬的是当次放出的那缕白焰，不是白梦馨所有修为与寒焰永久消失；后续仍持续使用。",
+      "evidence": [
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 767,
+          "end": 878,
+          "anchorSha256": "ef6b353ffe9e87c50278f3d39933c1a394ba8b57d978f40088cf995a1aceb85f"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 1264,
+          "end": 1330,
+          "anchorSha256": "7998b3b2461c6bfd35673802ca7065184ca723f65133357a2f1aa502a0f32c24"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 902,
+          "end": 965,
+          "anchorSha256": "88ee4cad59cbe2eae404ae4efa04f7538676531cf122949c1478ffa35130ef87"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 651,
+          "end": 812,
+          "anchorSha256": "6e20b34ea601555a79d99e41e42727d4025b6fc499b64f8ae01e636b1d42ac4e"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 813,
+          "end": 901,
+          "anchorSha256": "46a440d17d2ba912788c113f314f35cdbcf987f71c3d5db2b934900d72f4a4ad"
+        },
+        {
+          "chapterId": "qq-26585706",
+          "chapterSha256": "06ec2ccd1c847837b703e7355cf8d19ec6b4ddbde668621e569bd4c2dfed38b2",
+          "start": 369,
+          "end": 459,
+          "anchorSha256": "c2c32ee28bacae1bc2134f8908d0124c735a30a379ab21fd34f18369dd8f82d6"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1028,
+          "end": 1101,
+          "anchorSha256": "bc6b0216dfb2457b8d1c3ca8e1e8f336b397558326bb0dc32923b792b0006c5f"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1379,
+          "end": 1423,
+          "anchorSha256": "aef923fd9cf1f312e21e2ba9d404642b03187112dd1bec706d3370c0720d6cfa"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2830,
+          "end": 2913,
+          "anchorSha256": "7ce04f825d6a64c967b4960042952786e96ba1aca651b02cb418f351694968fa"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0170-object-0051",
+      "batchId": "batch-0170",
+      "reportHash": "17963d841c4970c9fcdc53597b06fd24fdbe4fbb4243520aca32b87933d9bf2a",
+      "disposition": "corrected",
+      "targetIds": [
+        "north-guest-lodges",
+        "north-guest-lodges-layout"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。贵宾楼在寒骊秘境山壁旁，非虚灵殿内部；后期修炼驻留不作为T0韩立状态。",
+      "evidence": [
+        {
+          "chapterId": "qq-26553887",
+          "chapterSha256": "e8b52a0df428ecaad6ddb4995e0f09292e26e7c41afcb688673c46c659b3363b",
+          "start": 2536,
+          "end": 2630,
+          "anchorSha256": "f0a511b561ac29092a1c59596a938a26df393f9f04119bfaacd4fc50cbb46607"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 376,
+          "end": 426,
+          "anchorSha256": "062d87a1ab3df8b9ae77973be8ad5e98e8920bcb56132498bda62b97811f114f"
+        },
+        {
+          "chapterId": "qq-26508302",
+          "chapterSha256": "0b016c88b05df4f35cf5bbd65a3739d6fd080b93152d238acfc257e229529fb2",
+          "start": 862,
+          "end": 922,
+          "anchorSha256": "f7fa59c22e3310e56e178cc839a77184861a2ad0161c7649181cf5e37331681c"
+        },
+        {
+          "chapterId": "qq-26508302",
+          "chapterSha256": "0b016c88b05df4f35cf5bbd65a3739d6fd080b93152d238acfc257e229529fb2",
+          "start": 1343,
+          "end": 1406,
+          "anchorSha256": "1f4788921f46ee0abcda9dba945270a4decfca75c5ba9e4c4e0a1ab225b3e5e5"
+        },
+        {
+          "chapterId": "qq-26738607",
+          "chapterSha256": "5bc2a99624e8565520a53d7af230286f047e853df3b9d3a7b30cb5722c38ebe2",
+          "start": 2810,
+          "end": 2869,
+          "anchorSha256": "ce855abb3ff097f87c82c69f2da19cc3c07aad66b646d5f61fe9d15b5871d928"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0170-fact-0037",
+      "batchId": "batch-0170",
+      "reportHash": "17963d841c4970c9fcdc53597b06fd24fdbe4fbb4243520aca32b87933d9bf2a",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-bai-mengxin",
+        "north-north-cast-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。堂姐妹与传承归属可用，后期巅峰及官职与T0补写分别记账。",
+      "evidence": [
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 591,
+          "end": 630,
+          "anchorSha256": "e5154cbc5c66426ffee6c368ab87b2f953ec41f69c140c1ed304d80a06da61c6"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 474,
+          "end": 554,
+          "anchorSha256": "4091cadd145dca97d1b60acb6b28a5470c5ed7128a6013586e100eb32d63806d"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 555,
+          "end": 590,
+          "anchorSha256": "19aa1d87c661f7cc776fbb3be187a9c524545419f1f846017f4ef4a665d47f24"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 767,
+          "end": 878,
+          "anchorSha256": "ef6b353ffe9e87c50278f3d39933c1a394ba8b57d978f40088cf995a1aceb85f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0170-fact-0043",
+      "batchId": "batch-0170",
+      "reportHash": "17963d841c4970c9fcdc53597b06fd24fdbe4fbb4243520aca32b87933d9bf2a",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-hanli-shangren",
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。三成是师相此时自估，不是T0固定随机概率；未来后手和寿元告急不预设。",
+      "evidence": [
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 2707,
+          "end": 2867,
+          "anchorSha256": "1094bf907bfa18e7d0c7607e1264549f236ca77ac6b23e451594c501a4f726b5"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 2956,
+          "end": 3046,
+          "anchorSha256": "6450d0a711fa7214489f126daa2a120b00bd31299b5819a7b87d24e749e82b7a"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0170-fact-0046",
+      "batchId": "batch-0170",
+      "reportHash": "17963d841c4970c9fcdc53597b06fd24fdbe4fbb4243520aca32b87933d9bf2a",
+      "disposition": "later-only",
+      "targetIds": [
+        "north-council",
+        "north-north-cast-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。十六七名是后期当场集会规模，不能复制为T0名册；当前五人议事名册明确补写。",
+      "evidence": [
+        {
+          "chapterId": "qq-26567752",
+          "chapterSha256": "46159b2d1b8e6f23a79b5af090e86e35d3ca83c2e8cccca2d8073cf807ba4c07",
+          "start": 617,
+          "end": 682,
+          "anchorSha256": "5051805ca81e896b87cb59494a2950178bfdf82d9e43adc2f105dcf3d0a0f2b9"
+        },
+        {
+          "chapterId": "qq-26567752",
+          "chapterSha256": "46159b2d1b8e6f23a79b5af090e86e35d3ca83c2e8cccca2d8073cf807ba4c07",
+          "start": 683,
+          "end": 710,
+          "anchorSha256": "f34cd99ca2ec11efcd011876d5276f2301b35277d1647d34e5ac35509cc367dc"
+        },
+        {
+          "chapterId": "qq-26507146",
+          "chapterSha256": "963771a842c992c6d455dcdee3e1749e9ff4d9e02f6ffbba354dcb19738f7bc2",
+          "start": 407,
+          "end": 518,
+          "anchorSha256": "b1ee1deb83f8cc919795566b16132460ff865cbb39aab51e02412774934cd936"
+        },
+        {
+          "chapterId": "qq-26567752",
+          "chapterSha256": "46159b2d1b8e6f23a79b5af090e86e35d3ca83c2e8cccca2d8073cf807ba4c07",
+          "start": 1675,
+          "end": 1751,
+          "anchorSha256": "c9448778c6a39407ad64cfe1306fba467c92598cc78c2209d1c2b0294e11e05a"
+        },
+        {
+          "chapterId": "qq-26567752",
+          "chapterSha256": "46159b2d1b8e6f23a79b5af090e86e35d3ca83c2e8cccca2d8073cf807ba4c07",
+          "start": 1813,
+          "end": 1866,
+          "anchorSha256": "0a94b268e15cf033b8850d17817e8b66f5b35fd67120ec1c48b997b236790c2f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0170-issue-0002",
+      "batchId": "batch-0170",
+      "reportHash": "17963d841c4970c9fcdc53597b06fd24fdbe4fbb4243520aca32b87933d9bf2a",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-hanli-shangren",
+        "north-north-cast-relations"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。第五名指协助者韩立；五名辅助者（韩、白、欧阳、龙、摩鸠）加受术师相共六人，1094五色寒焰输入与光球内一人直接区分，不因一处行文五人生成身份冲突。",
+      "evidence": [
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 631,
+          "end": 713,
+          "anchorSha256": "8d76a4259f99f5bcc774452f7985cb5c7f172be2fd229c61cee925a1a5e84079"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 1985,
+          "end": 2098,
+          "anchorSha256": "1923756a86b36d72a75b20609a00a17b9890c58988e1d1ebefd5154479c07f75"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 1396,
+          "end": 1487,
+          "anchorSha256": "b3acd155af13a94887c1d33c774f836f5bb296ec561d71aa36ee6734fee373f0"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 902,
+          "end": 965,
+          "anchorSha256": "88ee4cad59cbe2eae404ae4efa04f7538676531cf122949c1478ffa35130ef87"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 651,
+          "end": 812,
+          "anchorSha256": "6e20b34ea601555a79d99e41e42727d4025b6fc499b64f8ae01e636b1d42ac4e"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 813,
+          "end": 901,
+          "anchorSha256": "46a440d17d2ba912788c113f314f35cdbcf987f71c3d5db2b934900d72f4a4ad"
+        },
+        {
+          "chapterId": "qq-26585706",
+          "chapterSha256": "06ec2ccd1c847837b703e7355cf8d19ec6b4ddbde668621e569bd4c2dfed38b2",
+          "start": 369,
+          "end": 459,
+          "anchorSha256": "c2c32ee28bacae1bc2134f8908d0124c735a30a379ab21fd34f18369dd8f82d6"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1028,
+          "end": 1101,
+          "anchorSha256": "bc6b0216dfb2457b8d1c3ca8e1e8f336b397558326bb0dc32923b792b0006c5f"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1379,
+          "end": 1423,
+          "anchorSha256": "aef923fd9cf1f312e21e2ba9d404642b03187112dd1bec706d3370c0720d6cfa"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2830,
+          "end": 2913,
+          "anchorSha256": "7ce04f825d6a64c967b4960042952786e96ba1aca651b02cb418f351694968fa"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 767,
+          "end": 878,
+          "anchorSha256": "ef6b353ffe9e87c50278f3d39933c1a394ba8b57d978f40088cf995a1aceb85f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0170-issue-0007",
+      "batchId": "batch-0170",
+      "reportHash": "17963d841c4970c9fcdc53597b06fd24fdbe4fbb4243520aca32b87933d9bf2a",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-ouyang-north-elder"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。1089已明确复姓欧阳，局部批次未命名不是全书未知，不生成重复匿名角色。",
+      "evidence": [
+        {
+          "chapterId": "qq-26567752",
+          "chapterSha256": "46159b2d1b8e6f23a79b5af090e86e35d3ca83c2e8cccca2d8073cf807ba4c07",
+          "start": 1076,
+          "end": 1156,
+          "anchorSha256": "4a2775209985d9a5e3a881a4531b6f051f09948477710ccdd17972e9eaa632be"
+        },
+        {
+          "chapterId": "qq-26580499",
+          "chapterSha256": "169e425e66bf8a21cbdacaf5418a713aead0913443a1779d4484321c4e6a1fa1",
+          "start": 155,
+          "end": 182,
+          "anchorSha256": "16ab787b1abd1300dda03dcb54dbce2b05e56ed31a749ff69332a508a0f8da31"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0171-object-0001",
+      "batchId": "batch-0171",
+      "reportHash": "ef4ce4e28d5a6e69260aef3eabd2f66c25b59a0f09eaeae5adca3f7f555b2901",
+      "disposition": "later-only",
+      "targetIds": [
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。元婴韩立及现有紫焰太阴火为后期状态；开篇唯一韩立不能继承这些。",
+      "evidence": [
+        {
+          "chapterId": "qq-26585706",
+          "chapterSha256": "06ec2ccd1c847837b703e7355cf8d19ec6b4ddbde668621e569bd4c2dfed38b2",
+          "start": 334,
+          "end": 368,
+          "anchorSha256": "bc87468d2f03b686e824cc1a984d41d9e72113e839aa6852750134499d5c8c01"
+        },
+        {
+          "chapterId": "qq-26620836",
+          "chapterSha256": "b14c44df42309244115cd0eacf4e786b280071d360f946cc0c9859eb90076e00",
+          "start": 0,
+          "end": 74,
+          "anchorSha256": "09240b6db27c55d188cc2fa8d871100ed8a323bfbc2d7df19ba1efc09f7abb57"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0171-object-0005",
+      "batchId": "batch-0171",
+      "reportHash": "ef4ce4e28d5a6e69260aef3eabd2f66c25b59a0f09eaeae5adca3f7f555b2901",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-mojiu",
+        "north-mojiu-long-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。同一摩鸠，无新主体；后期为突破助阵是未来行动而非T0雇约。",
+      "evidence": [
+        {
+          "chapterId": "qq-26593665",
+          "chapterSha256": "7cf9674c6e9d34db232249e73ca98fc16386953e2fe83f0912e46317d8fe9e05",
+          "start": 699,
+          "end": 800,
+          "anchorSha256": "864b51894ff282e2fda79d71e67cd753c1ce5365c73cbc317532ecb5d645a016"
+        },
+        {
+          "chapterId": "qq-26620836",
+          "chapterSha256": "b14c44df42309244115cd0eacf4e786b280071d360f946cc0c9859eb90076e00",
+          "start": 1303,
+          "end": 1411,
+          "anchorSha256": "ccd62853b6eed92401766da208337108883346a25f468818a907a162077b6a87"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0171-object-0006",
+      "batchId": "batch-0171",
+      "reportHash": "ef4ce4e28d5a6e69260aef3eabd2f66c25b59a0f09eaeae5adca3f7f555b2901",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-long-liucui",
+        "north-mojiu-long-opening",
+        "north-jade-mining"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。同一龙夫人；试锤取玉失效支持矿脉规则，未来夺宝与持青锤经历不前置。",
+      "evidence": [
+        {
+          "chapterId": "qq-26593665",
+          "chapterSha256": "7cf9674c6e9d34db232249e73ca98fc16386953e2fe83f0912e46317d8fe9e05",
+          "start": 234,
+          "end": 282,
+          "anchorSha256": "ef7c235fb34f830b5209bf0a572bfce0aa68404d16c5910b1a90574064812454"
+        },
+        {
+          "chapterId": "qq-26593665",
+          "chapterSha256": "7cf9674c6e9d34db232249e73ca98fc16386953e2fe83f0912e46317d8fe9e05",
+          "start": 283,
+          "end": 342,
+          "anchorSha256": "39cfaf2056860bc4087940555dffbeed732aef266e14c3121295a34b3cac7fa5"
+        },
+        {
+          "chapterId": "qq-26593665",
+          "chapterSha256": "7cf9674c6e9d34db232249e73ca98fc16386953e2fe83f0912e46317d8fe9e05",
+          "start": 0,
+          "end": 204,
+          "anchorSha256": "3310db1b122eec349920f2e672b8311447cd21c688ae9c395943e5e95fdf5f42"
+        },
+        {
+          "chapterId": "qq-26593665",
+          "chapterSha256": "7cf9674c6e9d34db232249e73ca98fc16386953e2fe83f0912e46317d8fe9e05",
+          "start": 479,
+          "end": 530,
+          "anchorSha256": "6931834d14104b7d92f34f85b49453a3283878fb375cfdb84c148d0b745cdc68"
+        },
+        {
+          "chapterId": "qq-26593665",
+          "chapterSha256": "7cf9674c6e9d34db232249e73ca98fc16386953e2fe83f0912e46317d8fe9e05",
+          "start": 1144,
+          "end": 1261,
+          "anchorSha256": "3990f4a878c531169afc916453ab6e69935e4b3115b12a30da0534b5900ac8f3"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0171-object-0033",
+      "batchId": "batch-0171",
+      "reportHash": "ef4ce4e28d5a6e69260aef3eabd2f66c25b59a0f09eaeae5adca3f7f555b2901",
+      "disposition": "adopted",
+      "targetIds": [
+        "north-hanli-realm"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。秘境为真实内宫地点，柳姓召集会议是后期事件，不复制另一议事空间。",
+      "evidence": [
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 1311,
+          "end": 1410,
+          "anchorSha256": "da86d2e0b81be6f78a3f4d0593ed048086c4ab99947cadd078a6897794d14114"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0171-fact-0040",
+      "batchId": "batch-0171",
+      "reportHash": "ef4ce4e28d5a6e69260aef3eabd2f66c25b59a0f09eaeae5adca3f7f555b2901",
+      "disposition": "corrected",
+      "targetIds": [
+        "north-jade-mining"
+      ],
+      "reason": "同一候选及提取报告已由 human-dajin 审定；此处复用其 20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。复用已逐条审定的同一候选（human-north @ 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4），非新推断。欧阳假设全取矿炼宝后实力提高，不代表已经开采或物资无限；破碎玄玉反而失效。",
+      "evidence": [
+        {
+          "chapterId": "qq-26593665",
+          "chapterSha256": "7cf9674c6e9d34db232249e73ca98fc16386953e2fe83f0912e46317d8fe9e05",
+          "start": 0,
+          "end": 204,
+          "anchorSha256": "3310db1b122eec349920f2e672b8311447cd21c688ae9c395943e5e95fdf5f42"
+        },
+        {
+          "chapterId": "qq-26593665",
+          "chapterSha256": "7cf9674c6e9d34db232249e73ca98fc16386953e2fe83f0912e46317d8fe9e05",
+          "start": 479,
+          "end": 530,
+          "anchorSha256": "6931834d14104b7d92f34f85b49453a3283878fb375cfdb84c148d0b745cdc68"
+        },
+        {
+          "chapterId": "qq-26593665",
+          "chapterSha256": "7cf9674c6e9d34db232249e73ca98fc16386953e2fe83f0912e46317d8fe9e05",
+          "start": 1144,
+          "end": 1261,
+          "anchorSha256": "3990f4a878c531169afc916453ab6e69935e4b3115b12a30da0534b5900ac8f3"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0172-object-0001",
+      "batchId": "batch-0172",
+      "reportHash": "a27eefd0fa21960a796049da8de6960e9f011d6961ecf5fb2911787f94c622dd",
+      "disposition": "later-only",
+      "targetIds": [
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。后期韩立持鼎并对峙不前置；玩家后续可以不走此路线。",
+      "evidence": [
+        {
+          "chapterId": "qq-26675892",
+          "chapterSha256": "bf0fc383ee4ae6417c599dcdd85650688f1c274295b4e07c499639652ccb040d",
+          "start": 729,
+          "end": 746,
+          "anchorSha256": "9f91b0bc3cf9e8544e8a1b2ec47912c01835692e3eda64a00ca81963110cdd13"
+        },
+        {
+          "chapterId": "qq-26664887",
+          "chapterSha256": "0c4c10b829384579326493a85e199f5b8b2019ed5e31f10e10977ad506ede99c",
+          "start": 1273,
+          "end": 1349,
+          "anchorSha256": "33a5a4f524e879f477cb6160a534d15e9c02e0d394d62861220fe5e545508c53"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0172-object-0002",
+      "batchId": "batch-0172",
+      "reportHash": "a27eefd0fa21960a796049da8de6960e9f011d6961ecf5fb2911787f94c622dd",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-hanli-shangren",
+        "north-breakthrough-research",
+        "north-later-skill-and-orb"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。同一师相身份与寒焰研究采用，浩然长歌诀由26675892摩鸠识术补足原候选未覆盖锚点；学成年月未载不预发T0该功法。冲击失败仍是后期结果，不预定未来。",
+      "evidence": [
+        {
+          "chapterId": "qq-26631435",
+          "chapterSha256": "ab3a36d11a5017ce8e7ff38a7f483ce6bba05471db9b9481b32da1a7d53b80c1",
+          "start": 1203,
+          "end": 1322,
+          "anchorSha256": "32bebbcd2818bf760d0df6cd6c11b5cb096cd4770ee5484be9faab0176e963f1"
+        },
+        {
+          "chapterId": "qq-26664887",
+          "chapterSha256": "0c4c10b829384579326493a85e199f5b8b2019ed5e31f10e10977ad506ede99c",
+          "start": 34,
+          "end": 88,
+          "anchorSha256": "cb0e8201789b2377c5a5f7fe5b8c89a59a41f08e7ed5769e235fde35710c2e6d"
+        },
+        {
+          "chapterId": "qq-26518518",
+          "chapterSha256": "48b3395d63854e12b6473e5ac0d10fc1afbac5864ef0225eb417009b849ac86f",
+          "start": 3030,
+          "end": 3205,
+          "anchorSha256": "3fd8e4238f96917ba662d9e99f020459fb080225db631f8dee34f2f512993b27"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 1167,
+          "end": 1359,
+          "anchorSha256": "2d47e4ab55c076674ec7db8c73fbcd7f14dc2efc40d9815b839585e912095b14"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 116,
+          "end": 208,
+          "anchorSha256": "47cd8b09f0d227686d4583500b1996b498b4589709a544b96f95cd80b3dbea64"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 1985,
+          "end": 2098,
+          "anchorSha256": "1923756a86b36d72a75b20609a00a17b9890c58988e1d1ebefd5154479c07f75"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 153,
+          "end": 258,
+          "anchorSha256": "75ea7d4aa1dd1b7ff950880991b04954f1b24f6e665ccae96244f2d4982a4699"
+        },
+        {
+          "chapterId": "qq-26675892",
+          "chapterSha256": "bf0fc383ee4ae6417c599dcdd85650688f1c274295b4e07c499639652ccb040d",
+          "start": 418,
+          "end": 447,
+          "anchorSha256": "97c1179d94e74541ab5f2c5d57dc3bbdd8ed59356a30f79f4c4e99a6af2ad1a5"
+        },
+        {
+          "chapterId": "qq-27583989",
+          "chapterSha256": "cce9dea0bb3b108be0059beb62475ce0f62a21951795af481eb500704bff5ad2",
+          "start": 169,
+          "end": 233,
+          "anchorSha256": "91e9eb34a18451e1de02f75be7b3c92d8cb7c979d4ccb586fb94a6a91a56841f"
+        },
+        {
+          "chapterId": "qq-27583989",
+          "chapterSha256": "cce9dea0bb3b108be0059beb62475ce0f62a21951795af481eb500704bff5ad2",
+          "start": 628,
+          "end": 709,
+          "anchorSha256": "ed2a89bdcc09fe014519d778bdb8ec0b22986406975f75676efdef344a8c0fa0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0172-object-0039",
+      "batchId": "batch-0172",
+      "reportHash": "a27eefd0fa21960a796049da8de6960e9f011d6961ecf5fb2911787f94c622dd",
+      "disposition": "adopted",
+      "targetIds": [
+        "canon-ganlan-cauldron-1",
+        "canon-ganlan-cauldron-2",
+        "north-ganlan-pair"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。乾蓝鼎明确成对、仿制虚天鼎且可供修炼乾蓝冰焰；两实体与唯一虚天鼎分别计数。",
+      "evidence": [
+        {
+          "chapterId": "qq-26631435",
+          "chapterSha256": "ab3a36d11a5017ce8e7ff38a7f483ce6bba05471db9b9481b32da1a7d53b80c1",
+          "start": 1540,
+          "end": 1641,
+          "anchorSha256": "bc73a768c46d70f6055bfac91d67211b255880ef17f1331fb60f438f7dc32e1f"
+        },
+        {
+          "chapterId": "qq-26664887",
+          "chapterSha256": "0c4c10b829384579326493a85e199f5b8b2019ed5e31f10e10977ad506ede99c",
+          "start": 1067,
+          "end": 1193,
+          "anchorSha256": "3e26144038ea643e315964c022c8145f18217d36b01330a4c15dd6cf3f9e7184"
+        },
+        {
+          "chapterId": "qq-26631435",
+          "chapterSha256": "ab3a36d11a5017ce8e7ff38a7f483ce6bba05471db9b9481b32da1a7d53b80c1",
+          "start": 1746,
+          "end": 1817,
+          "anchorSha256": "0c9f2eb8c64ab9ab1b29d291eca032d698f0a74d892e80d4a88380210f536a71"
+        },
+        {
+          "chapterId": "qq-26664887",
+          "chapterSha256": "0c4c10b829384579326493a85e199f5b8b2019ed5e31f10e10977ad506ede99c",
+          "start": 1675,
+          "end": 1865,
+          "anchorSha256": "775576ed100fc95b9e42d150ab5ecafa9f214d58e2cad6ed99f215eecf03c3e1"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0172-object-0058",
+      "batchId": "batch-0172",
+      "reportHash": "a27eefd0fa21960a796049da8de6960e9f011d6961ecf5fb2911787f94c622dd",
+      "disposition": "adopted",
+      "targetIds": [
+        "north-ganlan-pair",
+        "north-north-cast-relations"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。乾蓝焰修炼传承与持有人已区分，极寒不等于无条件绝对冻结。",
+      "evidence": [
+        {
+          "chapterId": "qq-26631435",
+          "chapterSha256": "ab3a36d11a5017ce8e7ff38a7f483ce6bba05471db9b9481b32da1a7d53b80c1",
+          "start": 1746,
+          "end": 1817,
+          "anchorSha256": "0c9f2eb8c64ab9ab1b29d291eca032d698f0a74d892e80d4a88380210f536a71"
+        },
+        {
+          "chapterId": "qq-26664887",
+          "chapterSha256": "0c4c10b829384579326493a85e199f5b8b2019ed5e31f10e10977ad506ede99c",
+          "start": 1452,
+          "end": 1629,
+          "anchorSha256": "70d1b7baa8b3d724170bce2152253a66212b5e836b3096b181a02d2d869b7095"
+        },
+        {
+          "chapterId": "qq-26664887",
+          "chapterSha256": "0c4c10b829384579326493a85e199f5b8b2019ed5e31f10e10977ad506ede99c",
+          "start": 1067,
+          "end": 1193,
+          "anchorSha256": "3e26144038ea643e315964c022c8145f18217d36b01330a4c15dd6cf3f9e7184"
+        },
+        {
+          "chapterId": "qq-26664887",
+          "chapterSha256": "0c4c10b829384579326493a85e199f5b8b2019ed5e31f10e10977ad506ede99c",
+          "start": 1675,
+          "end": 1865,
+          "anchorSha256": "775576ed100fc95b9e42d150ab5ecafa9f214d58e2cad6ed99f215eecf03c3e1"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 902,
+          "end": 965,
+          "anchorSha256": "88ee4cad59cbe2eae404ae4efa04f7538676531cf122949c1478ffa35130ef87"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 651,
+          "end": 812,
+          "anchorSha256": "6e20b34ea601555a79d99e41e42727d4025b6fc499b64f8ae01e636b1d42ac4e"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 813,
+          "end": 901,
+          "anchorSha256": "46a440d17d2ba912788c113f314f35cdbcf987f71c3d5db2b934900d72f4a4ad"
+        },
+        {
+          "chapterId": "qq-26585706",
+          "chapterSha256": "06ec2ccd1c847837b703e7355cf8d19ec6b4ddbde668621e569bd4c2dfed38b2",
+          "start": 369,
+          "end": 459,
+          "anchorSha256": "c2c32ee28bacae1bc2134f8908d0124c735a30a379ab21fd34f18369dd8f82d6"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1028,
+          "end": 1101,
+          "anchorSha256": "bc6b0216dfb2457b8d1c3ca8e1e8f336b397558326bb0dc32923b792b0006c5f"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1379,
+          "end": 1423,
+          "anchorSha256": "aef923fd9cf1f312e21e2ba9d404642b03187112dd1bec706d3370c0720d6cfa"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2830,
+          "end": 2913,
+          "anchorSha256": "7ce04f825d6a64c967b4960042952786e96ba1aca651b02cb418f351694968fa"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 767,
+          "end": 878,
+          "anchorSha256": "ef6b353ffe9e87c50278f3d39933c1a394ba8b57d978f40088cf995a1aceb85f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0172-object-0062",
+      "batchId": "batch-0172",
+      "reportHash": "a27eefd0fa21960a796049da8de6960e9f011d6961ecf5fb2911787f94c622dd",
+      "disposition": "corrected",
+      "targetIds": [
+        "north-breakthrough-notes",
+        "north-breakthrough-research"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。研究资料早已有古籍基础，不等于T0已研成后期全套；元婴离体/六色光莲和失败事件留后期参考，不预设必经。",
+      "evidence": [
+        {
+          "chapterId": "qq-26631435",
+          "chapterSha256": "ab3a36d11a5017ce8e7ff38a7f483ce6bba05471db9b9481b32da1a7d53b80c1",
+          "start": 2429,
+          "end": 2469,
+          "anchorSha256": "a5e2b777d9566aa39974cbf1c1aeaae147189cd6912e73dc6969527cbc328749"
+        },
+        {
+          "chapterId": "qq-26664887",
+          "chapterSha256": "0c4c10b829384579326493a85e199f5b8b2019ed5e31f10e10977ad506ede99c",
+          "start": 110,
+          "end": 204,
+          "anchorSha256": "eb5fea3a6cce868e80fac8151e90fabbe23e4a69cfa1c959f56db45d5ab32315"
+        },
+        {
+          "chapterId": "qq-26518518",
+          "chapterSha256": "48b3395d63854e12b6473e5ac0d10fc1afbac5864ef0225eb417009b849ac86f",
+          "start": 3030,
+          "end": 3205,
+          "anchorSha256": "3fd8e4238f96917ba662d9e99f020459fb080225db631f8dee34f2f512993b27"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 1167,
+          "end": 1359,
+          "anchorSha256": "2d47e4ab55c076674ec7db8c73fbcd7f14dc2efc40d9815b839585e912095b14"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 116,
+          "end": 208,
+          "anchorSha256": "47cd8b09f0d227686d4583500b1996b498b4589709a544b96f95cd80b3dbea64"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 1985,
+          "end": 2098,
+          "anchorSha256": "1923756a86b36d72a75b20609a00a17b9890c58988e1d1ebefd5154479c07f75"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 153,
+          "end": 258,
+          "anchorSha256": "75ea7d4aa1dd1b7ff950880991b04954f1b24f6e665ccae96244f2d4982a4699"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0172-fact-0035",
+      "batchId": "batch-0172",
+      "reportHash": "a27eefd0fa21960a796049da8de6960e9f011d6961ecf5fb2911787f94c622dd",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-liu-palace-master",
+        "north-north-cast-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。柳姓美妇唯一主体，T0宫务职分明确补写；后来议事撤离不是当前决策。",
+      "evidence": [
+        {
+          "chapterId": "qq-26641417",
+          "chapterSha256": "b8523c1aa3d2f05a16e1b5104a3af7a981dbf86ecaddd7be20e6c06cf349f685",
+          "start": 2997,
+          "end": 3080,
+          "anchorSha256": "b583695b338bf05b863a8ad3cb43636e3c67ecdaf0058a7db6efc619bdf1e1a8"
+        },
+        {
+          "chapterId": "qq-26641417",
+          "chapterSha256": "b8523c1aa3d2f05a16e1b5104a3af7a981dbf86ecaddd7be20e6c06cf349f685",
+          "start": 3081,
+          "end": 3224,
+          "anchorSha256": "4ee88d12f71344aa33783605a48bd1609cbad7e3affc6b489d62916e0bb33b1c"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0172-fact-0039",
+      "batchId": "batch-0172",
+      "reportHash": "a27eefd0fa21960a796049da8de6960e9f011d6961ecf5fb2911787f94c622dd",
+      "disposition": "corrected",
+      "targetIds": [
+        "north-ghost-mother",
+        "north-ghost-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。柳承认鬼母的帮助，五六百年给生涯线索，不能据此精确断定整个契约从五六百年前开始或T0已元婴后期。",
+      "evidence": [
+        {
+          "chapterId": "qq-26643768",
+          "chapterSha256": "651b54f84ea17bf52ee2de24b1414081e73030241812e561ca93b7a369fd42f7",
+          "start": 1232,
+          "end": 1338,
+          "anchorSha256": "4831314979c9bd597103a6ebce7973be8a1c7c4f0cd7c4fec7285f5ed3ae058b"
+        },
+        {
+          "chapterId": "qq-26643768",
+          "chapterSha256": "651b54f84ea17bf52ee2de24b1414081e73030241812e561ca93b7a369fd42f7",
+          "start": 1339,
+          "end": 1439,
+          "anchorSha256": "964629c8cb9475fbc2b83301e7eb86db7d22e1a3340aa6fd8c1fb6764454e510"
+        },
+        {
+          "chapterId": "qq-26643768",
+          "chapterSha256": "651b54f84ea17bf52ee2de24b1414081e73030241812e561ca93b7a369fd42f7",
+          "start": 1472,
+          "end": 1551,
+          "anchorSha256": "e3f82c394fa78e59e3587a362618c10b8b7850c5d0cff3120db24ad952bd8625"
+        },
+        {
+          "chapterId": "qq-26788639",
+          "chapterSha256": "496f79e9f5e3a27f3200cf7a71afc4bcefdf097370a1cb84319b382f20a3b401",
+          "start": 2100,
+          "end": 2198,
+          "anchorSha256": "1f9c8fd27fec896c57fb4b1cbce91615e23ffbebf2f6ca3f344e88cb17294628"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0172-fact-0057",
+      "batchId": "batch-0172",
+      "reportHash": "a27eefd0fa21960a796049da8de6960e9f011d6961ecf5fb2911787f94c622dd",
+      "disposition": "later-only",
+      "targetIds": [
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。柳及二长老元气受损是当场战损，不初始化为开篇已经受伤。",
+      "evidence": [
+        {
+          "chapterId": "qq-26641417",
+          "chapterSha256": "b8523c1aa3d2f05a16e1b5104a3af7a981dbf86ecaddd7be20e6c06cf349f685",
+          "start": 2997,
+          "end": 3080,
+          "anchorSha256": "b583695b338bf05b863a8ad3cb43636e3c67ecdaf0058a7db6efc619bdf1e1a8"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0172-fact-0063",
+      "batchId": "batch-0172",
+      "reportHash": "a27eefd0fa21960a796049da8de6960e9f011d6961ecf5fb2911787f94c622dd",
+      "disposition": "adopted",
+      "targetIds": [
+        "canon-ganlan-cauldron-1",
+        "canon-ganlan-cauldron-2",
+        "north-ganlan-pair"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。一对古宝与冰焰修炼功能明确，复用两实体，不生成第三鼎。",
+      "evidence": [
+        {
+          "chapterId": "qq-26664887",
+          "chapterSha256": "0c4c10b829384579326493a85e199f5b8b2019ed5e31f10e10977ad506ede99c",
+          "start": 1067,
+          "end": 1193,
+          "anchorSha256": "3e26144038ea643e315964c022c8145f18217d36b01330a4c15dd6cf3f9e7184"
+        },
+        {
+          "chapterId": "qq-26631435",
+          "chapterSha256": "ab3a36d11a5017ce8e7ff38a7f483ce6bba05471db9b9481b32da1a7d53b80c1",
+          "start": 1746,
+          "end": 1817,
+          "anchorSha256": "0c9f2eb8c64ab9ab1b29d291eca032d698f0a74d892e80d4a88380210f536a71"
+        },
+        {
+          "chapterId": "qq-26664887",
+          "chapterSha256": "0c4c10b829384579326493a85e199f5b8b2019ed5e31f10e10977ad506ede99c",
+          "start": 1675,
+          "end": 1865,
+          "anchorSha256": "775576ed100fc95b9e42d150ab5ecafa9f214d58e2cad6ed99f215eecf03c3e1"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0173-object-0003",
+      "batchId": "batch-0173",
+      "reportHash": "651d42874462dfc9de804c6207e847251cc61d659301e566239f646f130dd79b",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-hanli-shangren",
+        "north-opening-persons",
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。同一师相有T0元婴后期回溯，后来濒临突破、肉身被毁与元婴被俘均非开篇。",
+      "evidence": [
+        {
+          "chapterId": "qq-26682735",
+          "chapterSha256": "1c3b7c719179ded496c1f396fbebd3ea97a4e60d49155877fa68593258872197",
+          "start": 2135,
+          "end": 2339,
+          "anchorSha256": "d071f59195ab16b12bb677be2fc27d4d9a99f3b48e25f332840662a5a240908b"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 58,
+          "end": 110,
+          "anchorSha256": "1f9e0192f5b006f0f96b5b5ecb8f52f9341f138965b0567588e5b7d8c7f9ab41"
+        },
+        {
+          "chapterId": "qq-26682735",
+          "chapterSha256": "1c3b7c719179ded496c1f396fbebd3ea97a4e60d49155877fa68593258872197",
+          "start": 1996,
+          "end": 2134,
+          "anchorSha256": "2d2f1d1f3fbac00abc39eb51d0d5326f312ec79b7ef1e9af79450d60a3496556"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0173-object-0016",
+      "batchId": "batch-0173",
+      "reportHash": "651d42874462dfc9de804c6207e847251cc61d659301e566239f646f130dd79b",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-ganlan-cauldron-1",
+        "canon-ganlan-cauldron-2",
+        "north-ganlan-pair"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。乾蓝鼎既存与后期被太阴火缠住、韩立取走分开；本包仍宫方持有两件。",
+      "evidence": [
+        {
+          "chapterId": "qq-26706883",
+          "chapterSha256": "82b7b1cd74129bb7d4651cf54f356a21f0f3ded8899771101c5ead04d50d669d",
+          "start": 1284,
+          "end": 1310,
+          "anchorSha256": "8b9da43d9e61870a18ed19c54e84d2e52fa534d0c1c8813fdb50bd95bf7a9b1d"
+        },
+        {
+          "chapterId": "qq-26714131",
+          "chapterSha256": "51b696ae0694eca8f19c091609e5616d3c41b5ff414b529ea6ca37d2fb3b58e1",
+          "start": 1305,
+          "end": 1367,
+          "anchorSha256": "acac9673378e16c98fd89a7f62313b597c2ddf787c844683f336f0cfe91c6f82"
+        },
+        {
+          "chapterId": "qq-26664887",
+          "chapterSha256": "0c4c10b829384579326493a85e199f5b8b2019ed5e31f10e10977ad506ede99c",
+          "start": 1067,
+          "end": 1193,
+          "anchorSha256": "3e26144038ea643e315964c022c8145f18217d36b01330a4c15dd6cf3f9e7184"
+        },
+        {
+          "chapterId": "qq-26631435",
+          "chapterSha256": "ab3a36d11a5017ce8e7ff38a7f483ce6bba05471db9b9481b32da1a7d53b80c1",
+          "start": 1746,
+          "end": 1817,
+          "anchorSha256": "0c9f2eb8c64ab9ab1b29d291eca032d698f0a74d892e80d4a88380210f536a71"
+        },
+        {
+          "chapterId": "qq-26664887",
+          "chapterSha256": "0c4c10b829384579326493a85e199f5b8b2019ed5e31f10e10977ad506ede99c",
+          "start": 1675,
+          "end": 1865,
+          "anchorSha256": "775576ed100fc95b9e42d150ab5ecafa9f214d58e2cad6ed99f215eecf03c3e1"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0173-fact-0003",
+      "batchId": "batch-0173",
+      "reportHash": "651d42874462dfc9de804c6207e847251cc61d659301e566239f646f130dd79b",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-hanli-shangren",
+        "north-opening-persons"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。T0师相元婴后期已回溯；差点进化神是具体突破经过，尚未发生。",
+      "evidence": [
+        {
+          "chapterId": "qq-26706883",
+          "chapterSha256": "82b7b1cd74129bb7d4651cf54f356a21f0f3ded8899771101c5ead04d50d669d",
+          "start": 1997,
+          "end": 2071,
+          "anchorSha256": "1efc66e3589cbc35d831684b692a6c887e4b1ea619e65fac6cc8f6ad62421bae"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 58,
+          "end": 110,
+          "anchorSha256": "1f9e0192f5b006f0f96b5b5ecb8f52f9341f138965b0567588e5b7d8c7f9ab41"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0174-object-0001",
+      "batchId": "batch-0174",
+      "reportHash": "9dbca2b1590262f93279135d0ac849f10cf9571565e0e9383f449701f5b6d90e",
+      "disposition": "later-only",
+      "targetIds": [
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。此候选描述后期韩立能力和装备组合，不代替十岁山村唯一韩立初始身份。",
+      "evidence": [
+        {
+          "chapterId": "qq-26723505",
+          "chapterSha256": "f3196ed05c53768dee9f8fca37e0bc8b2e85364a841b0ba5f72912a7558d0677",
+          "start": 224,
+          "end": 356,
+          "anchorSha256": "cbf4d5614253d952d64967daba4a9484f3dc1523749645d3aa676d4869478a31"
+        },
+        {
+          "chapterId": "qq-26744657",
+          "chapterSha256": "a07c39fdf72f2694f3680e7eb81a9bdd80f69d9b74a22955973ef7ecc2638f6f",
+          "start": 3228,
+          "end": 3280,
+          "anchorSha256": "0739496db33aa409e2b374b5af2c7c2d848e3844a73a09606f2aeac4d04d8245"
+        },
+        {
+          "chapterId": "qq-26735429",
+          "chapterSha256": "414cf3b2127f15ac7f8ea2c38fdee357d35a1a2cd7c84708ffbb4b995550889d",
+          "start": 1958,
+          "end": 2024,
+          "anchorSha256": "0045e04ae6fb075f7c78c6587addcba1a51c0c99ce7bead695689ba025a3be78"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0174-object-0005",
+      "batchId": "batch-0174",
+      "reportHash": "9dbca2b1590262f93279135d0ac849f10cf9571565e0e9383f449701f5b6d90e",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-hanli-shangren",
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。师相唯一；元婴被搜魂消失和把鼎交给僧人是后期事件，不能预先移交或杀死。",
+      "evidence": [
+        {
+          "chapterId": "qq-26723505",
+          "chapterSha256": "f3196ed05c53768dee9f8fca37e0bc8b2e85364a841b0ba5f72912a7558d0677",
+          "start": 662,
+          "end": 741,
+          "anchorSha256": "82aa41b3181c20c376313c8879a4be56d5ba962e5a0cd88062dfc2675da1992d"
+        },
+        {
+          "chapterId": "qq-26738607",
+          "chapterSha256": "5bc2a99624e8565520a53d7af230286f047e853df3b9d3a7b30cb5722c38ebe2",
+          "start": 568,
+          "end": 659,
+          "anchorSha256": "53a1993286a65b2b5306c04d30546ea6eb8aae0a8c402c69a895d165ac985a69"
+        },
+        {
+          "chapterId": "qq-26735429",
+          "chapterSha256": "414cf3b2127f15ac7f8ea2c38fdee357d35a1a2cd7c84708ffbb4b995550889d",
+          "start": 2802,
+          "end": 2878,
+          "anchorSha256": "8c0f81d8cac60c78825dac339cb6c12255c054015d51112abeccd00a56fa5722"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0174-issue-0001",
+      "batchId": "batch-0174",
+      "reportHash": "9dbca2b1590262f93279135d0ac849f10cf9571565e0e9383f449701f5b6d90e",
+      "disposition": "corrected",
+      "targetIds": [
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。该批韩立后期能力不得前置，但不能因此删掉同批已长期存在的法阵、宗门与地理，已经分别回溯制作。",
+      "evidence": [
+        {
+          "chapterId": "qq-26723505",
+          "chapterSha256": "f3196ed05c53768dee9f8fca37e0bc8b2e85364a841b0ba5f72912a7558d0677",
+          "start": 662,
+          "end": 741,
+          "anchorSha256": "82aa41b3181c20c376313c8879a4be56d5ba962e5a0cd88062dfc2675da1992d"
+        },
+        {
+          "chapterId": "qq-26746216",
+          "chapterSha256": "0ae1bc056c7db3ad72c705641fd3a92ef783f89dd6958b6217978b36755fdeee",
+          "start": 412,
+          "end": 508,
+          "anchorSha256": "50e8949257c5c6a05c60cbf1decd9d50ccfe614a00f2e33ef7070243de803222"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0175-object-0001",
+      "batchId": "batch-0175",
+      "reportHash": "dd5fe3e0503e32e403fdd866374a992d43b4fc87e5202c5c8697cfeed13def17",
+      "disposition": "later-only",
+      "targetIds": [
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。候选是后期韩立离殿战斗处境和修为，不改变山村开篇状态。",
+      "evidence": [
+        {
+          "chapterId": "qq-26753425",
+          "chapterSha256": "e5d884105cb600b40a62574553e7196a21b08feb9a7990043ea80764644a1e98",
+          "start": 1971,
+          "end": 2050,
+          "anchorSha256": "6f402c0898fac9949784c46feee2694fe1d0aa5367ccf732550ea3310f4d02d8"
+        },
+        {
+          "chapterId": "qq-26759685",
+          "chapterSha256": "6d087d6b4fbae758d318899e31fa7fa27e7f954a68a69b76b49d477f515c31ac",
+          "start": 2053,
+          "end": 2127,
+          "anchorSha256": "edb9ec54c47f79d03b954278d0669bf37ff03023eb41699052c5a3fd8386b520"
+        },
+        {
+          "chapterId": "qq-26759685",
+          "chapterSha256": "6d087d6b4fbae758d318899e31fa7fa27e7f954a68a69b76b49d477f515c31ac",
+          "start": 1211,
+          "end": 1254,
+          "anchorSha256": "ff1413843fad0cc3bc5e132ce65b87e37341bfcfa991af3a9547f2be8464c57d"
+        },
+        {
+          "chapterId": "qq-26759685",
+          "chapterSha256": "6d087d6b4fbae758d318899e31fa7fa27e7f954a68a69b76b49d477f515c31ac",
+          "start": 2321,
+          "end": 2415,
+          "anchorSha256": "95a6e88fe2a37b7e5730fc8777fcd05fc139723d94c98965c499e69604ae1e6b"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0175-object-0034",
+      "batchId": "batch-0175",
+      "reportHash": "dd5fe3e0503e32e403fdd866374a992d43b4fc87e5202c5c8697cfeed13def17",
+      "disposition": "corrected",
+      "targetIds": [
+        "north-xiaoji-palace",
+        "north-council",
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-dajin 审定；此处复用其 20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。复用已逐条审定的同一候选（human-north @ 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4），非新推断。宗门、组织权限与设施可回溯；当前攻殿不作为T0进行中战争。",
+      "evidence": [
+        {
+          "chapterId": "qq-26753425",
+          "chapterSha256": "e5d884105cb600b40a62574553e7196a21b08feb9a7990043ea80764644a1e98",
+          "start": 1381,
+          "end": 1455,
+          "anchorSha256": "ceb06b0f64045e2615bb21e82c814238c83be9db566736673534a6f1e812443e"
+        },
+        {
+          "chapterId": "qq-26772204",
+          "chapterSha256": "cb9f341081d233c1b76459902c06e95f3fae0540cad35cb9df1b449181e9ddde",
+          "start": 87,
+          "end": 117,
+          "anchorSha256": "3e323a6b6df8bb92978c3c6c281afc511e076db6f2b4541d035d0b1a8b6fc63d"
+        },
+        {
+          "chapterId": "qq-26507146",
+          "chapterSha256": "963771a842c992c6d455dcdee3e1749e9ff4d9e02f6ffbba354dcb19738f7bc2",
+          "start": 407,
+          "end": 518,
+          "anchorSha256": "b1ee1deb83f8cc919795566b16132460ff865cbb39aab51e02412774934cd936"
+        },
+        {
+          "chapterId": "qq-26567752",
+          "chapterSha256": "46159b2d1b8e6f23a79b5af090e86e35d3ca83c2e8cccca2d8073cf807ba4c07",
+          "start": 1675,
+          "end": 1751,
+          "anchorSha256": "c9448778c6a39407ad64cfe1306fba467c92598cc78c2209d1c2b0294e11e05a"
+        },
+        {
+          "chapterId": "qq-26567752",
+          "chapterSha256": "46159b2d1b8e6f23a79b5af090e86e35d3ca83c2e8cccca2d8073cf807ba4c07",
+          "start": 1813,
+          "end": 1866,
+          "anchorSha256": "0a94b268e15cf033b8850d17817e8b66f5b35fd67120ec1c48b997b236790c2f"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0175-object-0038",
+      "batchId": "batch-0175",
+      "reportHash": "dd5fe3e0503e32e403fdd866374a992d43b4fc87e5202c5c8697cfeed13def17",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-ye-north-inspector",
+        "canon-liangqi-imitation",
+        "north-two-qi-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。同一灰发叶监察者；补齐真实两气瓶，开篇宫方保管和授权为显式补写，后期中期与并肩战斗不前置。",
+      "evidence": [
+        {
+          "chapterId": "qq-26753425",
+          "chapterSha256": "e5d884105cb600b40a62574553e7196a21b08feb9a7990043ea80764644a1e98",
+          "start": 1381,
+          "end": 1455,
+          "anchorSha256": "ceb06b0f64045e2615bb21e82c814238c83be9db566736673534a6f1e812443e"
+        },
+        {
+          "chapterId": "qq-26753425",
+          "chapterSha256": "e5d884105cb600b40a62574553e7196a21b08feb9a7990043ea80764644a1e98",
+          "start": 2833,
+          "end": 2886,
+          "anchorSha256": "cd76aae215e6adfdde07e75a7da4c9afff04a4ee1c1dcb6b6c0f34413d81cbcc"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0175-object-0041",
+      "batchId": "batch-0175",
+      "reportHash": "dd5fe3e0503e32e403fdd866374a992d43b4fc87e5202c5c8697cfeed13def17",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-xiong-shi"
+      ],
+      "reason": "同一候选及提取报告已由 human-ten-thousand 审定；此处复用其 4939906844390d0e6226cd4bb664ff23def270b5ba3dd9851de44fee5ba18940 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。熊师是副谷主尸熊；知道韩立神雷是后期亲历后转告，不写入T0记忆。",
+      "evidence": [
+        {
+          "chapterId": "qq-26759685",
+          "chapterSha256": "6d087d6b4fbae758d318899e31fa7fa27e7f954a68a69b76b49d477f515c31ac",
+          "start": 2443,
+          "end": 2598,
+          "anchorSha256": "57e123a58e779e5ff5a0cd614847de06196e8d376d81cb31059a40cb5989f794"
+        },
+        {
+          "chapterId": "qq-26759685",
+          "chapterSha256": "6d087d6b4fbae758d318899e31fa7fa27e7f954a68a69b76b49d477f515c31ac",
+          "start": 1377,
+          "end": 1505,
+          "anchorSha256": "c2eac5488372c0931ba20e5d0c3945484aa49d19332f8912552121d4b863526b"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0175-fact-0038",
+      "batchId": "batch-0175",
+      "reportHash": "dd5fe3e0503e32e403fdd866374a992d43b4fc87e5202c5c8697cfeed13def17",
+      "disposition": "later-only",
+      "targetIds": [
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。残尸衣饰及推断职位只属于本次后期大战，无法据此指定一位T0必死长老。",
+      "evidence": [
+        {
+          "chapterId": "qq-26772204",
+          "chapterSha256": "cb9f341081d233c1b76459902c06e95f3fae0540cad35cb9df1b449181e9ddde",
+          "start": 451,
+          "end": 524,
+          "anchorSha256": "30efa3db1aa3fb1b5d7a7683b80f26d7bde3c4f3e921183ebb26d98bca16fe9e"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0175-fact-0042",
+      "batchId": "batch-0175",
+      "reportHash": "dd5fe3e0503e32e403fdd866374a992d43b4fc87e5202c5c8697cfeed13def17",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-ye-north-inspector",
+        "north-north-cast-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。监察称谓同一叶长老，后期中期和与白瑶怡参战分离于T0明确标定。",
+      "evidence": [
+        {
+          "chapterId": "qq-26753425",
+          "chapterSha256": "e5d884105cb600b40a62574553e7196a21b08feb9a7990043ea80764644a1e98",
+          "start": 1381,
+          "end": 1455,
+          "anchorSha256": "ceb06b0f64045e2615bb21e82c814238c83be9db566736673534a6f1e812443e"
+        },
+        {
+          "chapterId": "qq-26753425",
+          "chapterSha256": "e5d884105cb600b40a62574553e7196a21b08feb9a7990043ea80764644a1e98",
+          "start": 2833,
+          "end": 2886,
+          "anchorSha256": "cd76aae215e6adfdde07e75a7da4c9afff04a4ee1c1dcb6b6c0f34413d81cbcc"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0176-object-0008",
+      "batchId": "batch-0176",
+      "reportHash": "1b18afd1ccd5a199b42376ee235a5af718a41e8fa9b25af1706a5df55a882f20",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-hanli-shangren",
+        "canon-bai-mengxin",
+        "canon-ouyang-north-elder",
+        "north-north-cast-relations"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。连续玄玉洞场景三人为师相、白梦馨、欧阳；本批未重述姓名不构成新匿名三人，死亡只属后期。",
+      "evidence": [
+        {
+          "chapterId": "qq-26788639",
+          "chapterSha256": "496f79e9f5e3a27f3200cf7a71afc4bcefdf097370a1cb84319b382f20a3b401",
+          "start": 2739,
+          "end": 2845,
+          "anchorSha256": "ca920bf9f378429fa48518847401fea43433c70d3a26e3a0cfcd36dbfcedbf3b"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 902,
+          "end": 965,
+          "anchorSha256": "88ee4cad59cbe2eae404ae4efa04f7538676531cf122949c1478ffa35130ef87"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 651,
+          "end": 812,
+          "anchorSha256": "6e20b34ea601555a79d99e41e42727d4025b6fc499b64f8ae01e636b1d42ac4e"
+        },
+        {
+          "chapterId": "qq-26529547",
+          "chapterSha256": "212285f8c8c96782b22141c6ceb10cc83a836bc6a90f0c34adae2814cd046e03",
+          "start": 813,
+          "end": 901,
+          "anchorSha256": "46a440d17d2ba912788c113f314f35cdbcf987f71c3d5db2b934900d72f4a4ad"
+        },
+        {
+          "chapterId": "qq-26585706",
+          "chapterSha256": "06ec2ccd1c847837b703e7355cf8d19ec6b4ddbde668621e569bd4c2dfed38b2",
+          "start": 369,
+          "end": 459,
+          "anchorSha256": "c2c32ee28bacae1bc2134f8908d0124c735a30a379ab21fd34f18369dd8f82d6"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1028,
+          "end": 1101,
+          "anchorSha256": "bc6b0216dfb2457b8d1c3ca8e1e8f336b397558326bb0dc32923b792b0006c5f"
+        },
+        {
+          "chapterId": "qq-26717131",
+          "chapterSha256": "e1d85f9603564a482bd0678822bd6707cd5de0a6e237ebee01e29b50805d81da",
+          "start": 1379,
+          "end": 1423,
+          "anchorSha256": "aef923fd9cf1f312e21e2ba9d404642b03187112dd1bec706d3370c0720d6cfa"
+        },
+        {
+          "chapterId": "qq-26524803",
+          "chapterSha256": "0bd67622ce43dd705fc2c4922d38417eb9c98b48c2cd0a37167419ff918f3544",
+          "start": 2830,
+          "end": 2913,
+          "anchorSha256": "7ce04f825d6a64c967b4960042952786e96ba1aca651b02cb418f351694968fa"
+        },
+        {
+          "chapterId": "qq-26563180",
+          "chapterSha256": "927c6a232193c870e86c05f00fb80814e769e8c194d34c599a5daff84d3a54a2",
+          "start": 767,
+          "end": 878,
+          "anchorSha256": "ef6b353ffe9e87c50278f3d39933c1a394ba8b57d978f40088cf995a1aceb85f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0176-object-0013",
+      "batchId": "batch-0176",
+      "reportHash": "1b18afd1ccd5a199b42376ee235a5af718a41e8fa9b25af1706a5df55a882f20",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-hanli-shangren",
+        "north-shixiang-identity"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。被搜魂者为玄玉洞同一师相，批次局部未重述不使身份重新未知；搜魂是未来行为。",
+      "evidence": [
+        {
+          "chapterId": "qq-26790881",
+          "chapterSha256": "a4a39a5f6387c6e1ec0686a0e16f149ff95a8bf20dfddcb2ccf47d01f1df6d17",
+          "start": 3035,
+          "end": 3097,
+          "anchorSha256": "21413661fa75b6eee2aaecd552367b462b8e7d76fd5dc6febac37c0230c0bd56"
+        },
+        {
+          "chapterId": "qq-26518518",
+          "chapterSha256": "48b3395d63854e12b6473e5ac0d10fc1afbac5864ef0225eb417009b849ac86f",
+          "start": 774,
+          "end": 869,
+          "anchorSha256": "7d2d8205e67e0fff01a8a6bb48e7a6236b3cc0d5c4af94c5f43e8bd56c76dd5f"
+        },
+        {
+          "chapterId": "qq-26518518",
+          "chapterSha256": "48b3395d63854e12b6473e5ac0d10fc1afbac5864ef0225eb417009b849ac86f",
+          "start": 2647,
+          "end": 2774,
+          "anchorSha256": "a3cd0af04c4f76977e4e9a448f1f206bb67e75276187fe8ef0ef9ee6d64ea713"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0176-fact-0019",
+      "batchId": "batch-0176",
+      "reportHash": "1b18afd1ccd5a199b42376ee235a5af718a41e8fa9b25af1706a5df55a882f20",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-bingfeng",
+        "north-bingfeng-ritual",
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。具体近期突破、寿元紧迫和节点消息促攻为后期处境；T0十级及长期生活另有标定，事件不强制兑现。",
+      "evidence": [
+        {
+          "chapterId": "qq-26812107",
+          "chapterSha256": "fb19c9f02391c58b7c451e03b19b94e20c9d377879cee9e0bc2f23d5857d5b87",
+          "start": 2466,
+          "end": 2558,
+          "anchorSha256": "3d88679e6a68b0703c120d36c2a63db46e74190079381e285f5b6d2b80e6f58e"
+        },
+        {
+          "chapterId": "qq-26788639",
+          "chapterSha256": "496f79e9f5e3a27f3200cf7a71afc4bcefdf097370a1cb84319b382f20a3b401",
+          "start": 1840,
+          "end": 1969,
+          "anchorSha256": "fd973439155b4972f1c0a3060f311359c25fa0c3e1af148d73156e36874adb41"
+        },
+        {
+          "chapterId": "qq-26801173",
+          "chapterSha256": "03e0741c29ba6d72b472a08e8c1f2538174f8531f7ab56555b2df6bcec7be36e",
+          "start": 1475,
+          "end": 1522,
+          "anchorSha256": "cba6350dce55553807cca2018da3af7b2d7fd67984a03404d9856b530def6020"
+        },
+        {
+          "chapterId": "qq-26812107",
+          "chapterSha256": "fb19c9f02391c58b7c451e03b19b94e20c9d377879cee9e0bc2f23d5857d5b87",
+          "start": 2559,
+          "end": 2649,
+          "anchorSha256": "873d293a24c3b02abb3da22fff2918d97a5a3d74f6212bab17283c08363d5a95"
+        },
+        {
+          "chapterId": "qq-26812107",
+          "chapterSha256": "fb19c9f02391c58b7c451e03b19b94e20c9d377879cee9e0bc2f23d5857d5b87",
+          "start": 2387,
+          "end": 2465,
+          "anchorSha256": "e6d50d4ffa31665f7e69236149a781638a08b57f3eca6af90966b349bb0c1863"
+        },
+        {
+          "chapterId": "qq-26802697",
+          "chapterSha256": "7df475772e65f3eeea551a2e4e9e47eccda6b9a58313445e46649b81352d19b0",
+          "start": 2662,
+          "end": 2770,
+          "anchorSha256": "d9a77a74faf35c8a8c2484e0e5f3f8049a833de44871df948f35a0ba2994b331"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0176-fact-0030",
+      "batchId": "batch-0176",
+      "reportHash": "1b18afd1ccd5a199b42376ee235a5af718a41e8fa9b25af1706a5df55a882f20",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-liu-palace-master",
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。柳基于韩立独出的当场猜疑依赖未来见闻，不能在开篇知道韩立或预知三人死亡。",
+      "evidence": [
+        {
+          "chapterId": "qq-26788639",
+          "chapterSha256": "496f79e9f5e3a27f3200cf7a71afc4bcefdf097370a1cb84319b382f20a3b401",
+          "start": 2883,
+          "end": 2952,
+          "anchorSha256": "cd83c6493423d806372ae1a3e3510de635b9ea11644bf33cadf7beb206ac3647"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0176-issue-0002",
+      "batchId": "batch-0176",
+      "reportHash": "1b18afd1ccd5a199b42376ee235a5af718a41e8fa9b25af1706a5df55a882f20",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-liu-palace-master",
+        "north-north-cast-opening"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。本批不固定境界的疑问可由前章明确“另一名后期修士”解决，仍仅是后期修为；T0初期补写单列。",
+      "evidence": [
+        {
+          "chapterId": "qq-26788639",
+          "chapterSha256": "496f79e9f5e3a27f3200cf7a71afc4bcefdf097370a1cb84319b382f20a3b401",
+          "start": 1568,
+          "end": 1644,
+          "anchorSha256": "2c7c2b2300331827165f013ac5cb26a449de5b0f29f7939789775ac73218d6b6"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0186-fact-0056",
+      "batchId": "batch-0186",
+      "reportHash": "21c65f2edb00025c4cb0ef3ef06d97de6e52a77c767f3604830f189b3149f643",
+      "disposition": "later-only",
+      "targetIds": [
+        "human-boundless"
+      ],
+      "reason": "同一候选及提取报告已由 human-boundless 审定；此处复用其 b2d931007794c22655fa68f6ec62bb93ae52f83162864227edee85c8aebed20e 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。该遁速比较属于韩立后来进阶后的个人状态，不给所有元婴修士硬编码近半倍率。",
+      "evidence": [
+        {
+          "chapterId": "qq-27213966",
+          "chapterSha256": "85cff6281e76bd9fd06eaebccd52d83093915339d48f9df570bfcb8826c3e33c",
+          "start": 2668,
+          "end": 2726,
+          "anchorSha256": "4a809f3d29715a02e33da620ba3a524cdd0cabb14a45505aa2c2613398b9d71c"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0193-object-0026",
+      "batchId": "batch-0193",
+      "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-hanli-shangren",
+        "north-shixiang-identity"
+      ],
+      "reason": "同一候选及提取报告已由 human-dajin 审定；此处复用其 20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。复用已逐条审定的同一候选（human-north @ 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4），非新推断。同一师相，搜魂与命丧是未来状态，T0不生成亡魂或预知死亡。",
+      "evidence": [
+        {
+          "chapterId": "qq-27515832",
+          "chapterSha256": "440361a1b137e62db7c881b4b4e292081267ebb9aeaa491976661a23a1abc770",
+          "start": 736,
+          "end": 788,
+          "anchorSha256": "64b734ad252ba80a3236a0f5bf6b82c25e331b54e8ebbbcf9b15567b7defdd82"
+        },
+        {
+          "chapterId": "qq-27535589",
+          "chapterSha256": "8cf540e58b15354fa72f5d8168361fd8998b5990a973b8ada14d34b15d6eb441",
+          "start": 217,
+          "end": 366,
+          "anchorSha256": "76314ec65e718948ee7e0e8a6ac2a73ea296baf34655d556b24a9a122dbc5cad"
+        },
+        {
+          "chapterId": "qq-26518518",
+          "chapterSha256": "48b3395d63854e12b6473e5ac0d10fc1afbac5864ef0225eb417009b849ac86f",
+          "start": 774,
+          "end": 869,
+          "anchorSha256": "7d2d8205e67e0fff01a8a6bb48e7a6236b3cc0d5c4af94c5f43e8bd56c76dd5f"
+        },
+        {
+          "chapterId": "qq-26518518",
+          "chapterSha256": "48b3395d63854e12b6473e5ac0d10fc1afbac5864ef0225eb417009b849ac86f",
+          "start": 2647,
+          "end": 2774,
+          "anchorSha256": "a3cd0af04c4f76977e4e9a448f1f206bb67e75276187fe8ef0ef9ee6d64ea713"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0193-fact-0023",
+      "batchId": "batch-0193",
+      "reportHash": "89781e6452dd8b37ecef5dd06c2586ec6993e03793d4598335ed9391418ee6a8",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-hanli-shangren",
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。韩立搜魂取得太阳精火线索依赖未来行动，不向T0韩立发放记忆。",
+      "evidence": [
+        {
+          "chapterId": "qq-27515832",
+          "chapterSha256": "440361a1b137e62db7c881b4b4e292081267ebb9aeaa491976661a23a1abc770",
+          "start": 736,
+          "end": 788,
+          "anchorSha256": "64b734ad252ba80a3236a0f5bf6b82c25e331b54e8ebbbcf9b15567b7defdd82"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0195-object-0008",
+      "batchId": "batch-0195",
+      "reportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-che-laoyao"
+      ],
+      "reason": "同一候选及提取报告已由 human-dajin 审定；此处复用其 20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。复用已逐条审定的同一候选（human-ten-thousand @ 4939906844390d0e6226cd4bb664ff23def270b5ba3dd9851de44fee5ba18940），非新推断。上古来历可回溯，后期寿元将尽和已寻节点不直接压成开篇倒计时。",
+      "evidence": [
+        {
+          "chapterId": "qq-27604103",
+          "chapterSha256": "b065b2d18c7ddff615076a8e53dd377b532dee82c79928f960b24a88ed100d92",
+          "start": 2800,
+          "end": 3033,
+          "anchorSha256": "3ebc7288437b516b86a02f5755a458f200ba78d8b634867898598943c39fd280"
+        },
+        {
+          "chapterId": "qq-27609702",
+          "chapterSha256": "1540197369d8809ef3ef17d47d5bab73ed1e4ea318e385a360709ead642a2453",
+          "start": 0,
+          "end": 41,
+          "anchorSha256": "099330e3575634558e5adb59daa13282d96144b45e8af14d40a461ab93f90b93"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0195-fact-0033",
+      "batchId": "batch-0195",
+      "reportHash": "b84c0f31ba6675e03e556ecfbcf9e523c224746a5a5d858b6b12b6f84ea66563",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "dajin-two-former-huashen",
+        "dajin-limited-census"
+      ],
+      "reason": "同一候选及提取报告已由 human-dajin 审定；此处复用其 20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。三四百年前的参照点是后期谈话，不是韩立十岁；本文未提供足以把两人死亡唯一定位T0前后的完整年链，保留死亡年代边界。",
+      "evidence": [
+        {
+          "chapterId": "qq-27604103",
+          "chapterSha256": "b065b2d18c7ddff615076a8e53dd377b532dee82c79928f960b24a88ed100d92",
+          "start": 2289,
+          "end": 2366,
+          "anchorSha256": "5263def5efb5b29c4ca6c990ae4f74bd28ba249d6e0dd99d134c1bd0a16d9782"
+        }
+      ],
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "三四百年前的参照点是后期谈话，不是韩立十岁；本文未提供足以把两人死亡唯一定位T0前后的完整年链，保留死亡年代边界。"
+      },
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0196-object-0008",
+      "batchId": "batch-0196",
+      "reportHash": "95ff4223c34cb64de100786a99953fc6677e24c93bf93b663526dd25921996fd",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-hanli-shangren",
+        "canon-ganlan-cauldron-1",
+        "canon-ganlan-cauldron-2",
+        "north-ganlan-pair"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。师相和成对乾蓝鼎复用；后文明确两只都在韩立手中，不丢失其中一只，也不把后期搜魂记忆前置。",
+      "evidence": [
+        {
+          "chapterId": "qq-27672933",
+          "chapterSha256": "393e81541ed4497955dae91ee85a4a006a257c56551472959ee89cf8e9440e82",
+          "start": 2705,
+          "end": 2816,
+          "anchorSha256": "2333621e6b8eec02649f37056275d4ccbe5640624ad89fb5cf62f34fca07c529"
+        },
+        {
+          "chapterId": "qq-27677718",
+          "chapterSha256": "2ad5da4c59db6a4d6c3726292f3279c88614d3aaf78628fff37964e010f2b7b7",
+          "start": 2788,
+          "end": 2822,
+          "anchorSha256": "084d6c80ec627f0d20efc5bec87dc5ed1973ca4df67506de98ccc990513a4809"
+        },
+        {
+          "chapterId": "qq-26664887",
+          "chapterSha256": "0c4c10b829384579326493a85e199f5b8b2019ed5e31f10e10977ad506ede99c",
+          "start": 1067,
+          "end": 1193,
+          "anchorSha256": "3e26144038ea643e315964c022c8145f18217d36b01330a4c15dd6cf3f9e7184"
+        },
+        {
+          "chapterId": "qq-26631435",
+          "chapterSha256": "ab3a36d11a5017ce8e7ff38a7f483ce6bba05471db9b9481b32da1a7d53b80c1",
+          "start": 1746,
+          "end": 1817,
+          "anchorSha256": "0c9f2eb8c64ab9ab1b29d291eca032d698f0a74d892e80d4a88380210f536a71"
+        },
+        {
+          "chapterId": "qq-26664887",
+          "chapterSha256": "0c4c10b829384579326493a85e199f5b8b2019ed5e31f10e10977ad506ede99c",
+          "start": 1675,
+          "end": 1865,
+          "anchorSha256": "775576ed100fc95b9e42d150ab5ecafa9f214d58e2cad6ed99f215eecf03c3e1"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0196-fact-0044",
+      "batchId": "batch-0196",
+      "reportHash": "95ff4223c34cb64de100786a99953fc6677e24c93bf93b663526dd25921996fd",
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-hanli-shangren",
+        "north-not-war-script"
+      ],
+      "reason": "同一候选及提取报告已由 human-north 审定；此处复用其 0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4 处置。实际实体与断言仍由原目标模块唯一维护，不新增本地副本、人物知识或全局硬规则。搜魂获知火狱线索是韩立后期经历；火狱和太阳精火本身应在大晋另立档案，不授予十岁韩立知识。",
+      "evidence": [
+        {
+          "chapterId": "qq-27672933",
+          "chapterSha256": "393e81541ed4497955dae91ee85a4a006a257c56551472959ee89cf8e9440e82",
+          "start": 2705,
+          "end": 2816,
+          "anchorSha256": "2333621e6b8eec02649f37056275d4ccbe5640624ad89fb5cf62f34fca07c529"
+        },
+        {
+          "chapterId": "qq-25486837",
+          "chapterSha256": "b27dc1c2040c186c9a9e19e83cb2b44f2fc9583b2e1bbd4a3dfc7c638817938a",
+          "start": 177,
+          "end": 466,
+          "anchorSha256": "e8d5b990441042cfca040ed7d79ea4f918296ffe68aef20a126941980ca1986b"
+        },
+        {
+          "chapterId": "qq-26609117",
+          "chapterSha256": "353e5d98e8335a6368e1713f34bc1014b5a8339f35741810b5d8b78fe1611baf",
+          "start": 2829,
+          "end": 2930,
+          "anchorSha256": "8cdf7a17f9d5beafccda9bd2f9107e2bd5b7c3d7aaf7cefa4206d7cbd6aef9c0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    }
+  ],
+  "sourceEvidenceMissingIds": [
+    "batch-0113-issue-0014",
+    "batch-0185-issue-0009",
+    "batch-0186-issue-0001",
+    "batch-0209-issue-0001"
+  ],
+  "approvedForRuntime": false
+}

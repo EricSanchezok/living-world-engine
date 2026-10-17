@@ -1,0 +1,69 @@
+{
+  "status": "partial-acceptance-not-release",
+  "paidRequestCeiling": 60,
+  "paidRequests": 59,
+  "newSourceModelRequests": 0,
+  "sourceRuns": [
+    "2026-10-17T14-32-03-684Z-v13-capped-human-work",
+    "2026-10-17T14-43-10-699Z-v13-capped-continuation-human-work"
+  ],
+  "instanceId": "04e69baf-8f20-443b-80a0-8a62b89e7f84",
+  "worldHash": "sha256:e90ad25ccbcf781ae0b4c4d3c654304711fd3b781e7839735c48d02e2a4f2998",
+  "producer": {
+    "children": {},
+    "config": {
+      "creation": null,
+      "creationEnabled": true,
+      "decision": null,
+      "fallback": null
+    },
+    "contractVersion": 13,
+    "id": "direct-world",
+    "manifestHash": "70d3bd7b49eef9ba1e391459ce24917a0d541aa89c3edf82f9406e7f195c5ddb",
+    "role": "world-execution",
+    "version": "13"
+  },
+  "population": 15,
+  "distinctActingSubjects": 5,
+  "finalWorldSeconds": 360,
+  "replayEqual": true,
+  "quantitiesUnchanged": true,
+  "pendingTransports": 0,
+  "pendingExecutions": [],
+  "tokenUsage": {
+    "input": 1038968,
+    "output": 139523,
+    "pricingNotInferred": true
+  },
+  "subsequentLocalFixes": {
+    "status": "independently-reviewed-not-live-retested",
+    "files": {
+      "src/server/narrative/publication.ts": "f594a2ace2594603d19642ab5cf25cf98e8488f54dcf4e67c86e8879443a3dad",
+      "src/engine/prompts/system/scene-narrative.md": "7014d2e09d82a4d4a6122dfb9b391d4c5a147eca49eb1c29b98dabe89742b4f8"
+    },
+    "additionalCallsIntroduced": 0,
+    "measuredImprovement": false
+  },
+  "fullWorldAcceptance": false,
+  "mergeAllowed": false,
+  "remainingCoverage": "../coverage/local-completion-gaps.json",
+  "localChecks": {
+    "checkFast": {
+      "passed": true,
+      "testFiles": 394,
+      "tests": 2631,
+      "existingLintWarnings": 3,
+      "governanceGates": 6,
+      "logSha256": "a90521de4b9b7767bed1cf7a622780b82d75240f90f56edbfb5b1f362b7a12eb"
+    },
+    "ledgerDoctor": {
+      "passed": true,
+      "orphanInvocations": 0,
+      "missingEvidence": 0
+    },
+    "fullBuild": {
+      "passed": false,
+      "expectedRejection": "Incomplete editorial and world coverage remain a release blocker."
+    }
+  }
+}

@@ -1,0 +1,3181 @@
+{
+  "id": "human-boundless",
+  "entities": [
+    {
+      "id": "human-boundless",
+      "name": "无边海",
+      "kind": "location",
+      "placement": "human-realm",
+      "description": "天南北方浑浊的大海，岸线以外难寻落脚处；地理索引包含关系不提供瞬移。",
+      "facts": [
+        {
+          "id": "human-boundless-native-beast",
+          "predicate": "native-species",
+          "value": {
+            "kind": "text",
+            "value": "馨牙兽青鳞、腮下弯曲骨刺，胆有辛辣夹淡香；现有物种记录不等于每次出海必遇，也不凭记录直接生成尸体或材料。"
+          },
+          "description": "馨牙兽青鳞、腮下弯曲骨刺，胆有辛辣夹淡香；现有物种记录不等于每次出海必遇，也不凭记录直接生成尸体或材料。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-minzhou",
+      "name": "闵州",
+      "kind": "location",
+      "placement": "human-xi",
+      "description": "溪国北方临海州，州内城镇和道路各有距离。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-fengri",
+      "name": "封日城",
+      "kind": "location",
+      "placement": "boundless-minzhou",
+      "description": "闵州州府，商旅集散和州内交易所在。",
+      "facts": [
+        {
+          "id": "boundless-fengri-route-boundless-coast-town",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-coast-town"
+          },
+          "description": "沿闵州陆路行旅，按距离和实际交通方式花费时间，不是一步跨城。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-fengri-travel-boundless-coast-town",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿闵州陆路行旅，按距离和实际交通方式花费时间，不是一步跨城。"
+          },
+          "description": "沿闵州陆路行旅，按距离和实际交通方式花费时间，不是一步跨城。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-coast-town",
+      "name": "闵州海边小城",
+      "kind": "location",
+      "placement": "boundless-minzhou",
+      "description": "城名未见正文，本地街道与生活细节为原创。",
+      "facts": [
+        {
+          "id": "boundless-coast-town-route-boundless-fengri",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-fengri"
+          },
+          "description": "沿闵州陆路行旅，按距离和实际交通方式花费时间，不是一步跨城。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-coast-town-travel-boundless-fengri",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿闵州陆路行旅，按距离和实际交通方式花费时间，不是一步跨城。"
+          },
+          "description": "沿闵州陆路行旅，按距离和实际交通方式花费时间，不是一步跨城。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-coast-town-route-boundless-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-market"
+          },
+          "description": "城中街路，普通步行可达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-coast-town-travel-boundless-market",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "城中街路，普通步行可达。"
+          },
+          "description": "城中街路，普通步行可达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-coast-town-route-boundless-shore",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-shore"
+          },
+          "description": "沿北门外坡路到海岸，步行约半个时辰为开篇标定。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-coast-town-travel-boundless-shore",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿北门外坡路到海岸，步行约半个时辰为开篇标定。"
+          },
+          "description": "沿北门外坡路到海岸，步行约半个时辰为开篇标定。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-shore",
+      "name": "小城北岸",
+      "kind": "location",
+      "placement": "boundless-coast-town",
+      "description": "礁岸下是浑水，风浪会侵蚀石阶，沿岸陆路比出海稳妥。",
+      "facts": [
+        {
+          "id": "boundless-shore-route-boundless-coast-town",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-coast-town"
+          },
+          "description": "沿北门外坡路到海岸，步行约半个时辰为开篇标定。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-shore-travel-boundless-coast-town",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿北门外坡路到海岸，步行约半个时辰为开篇标定。"
+          },
+          "description": "沿北门外坡路到海岸，步行约半个时辰为开篇标定。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-shore-route-boundless-watch",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-watch"
+          },
+          "description": "沿礁岸石阶上望棚，湿滑时须小心。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-shore-travel-boundless-watch",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿礁岸石阶上望棚，湿滑时须小心。"
+          },
+          "description": "沿礁岸石阶上望棚，湿滑时须小心。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-shore-route-boundless-deep-water",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-deep-water"
+          },
+          "description": "须具备实际航行或飞行能力、方向和足够补给；危险与耗时随路径变化。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-shore-travel-boundless-deep-water",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "须具备实际航行或飞行能力、方向和足够补给；危险与耗时随路径变化。"
+          },
+          "description": "须具备实际航行或飞行能力、方向和足够补给；危险与耗时随路径变化。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-market",
+      "name": "小城南市",
+      "kind": "location",
+      "placement": "boundless-coast-town",
+      "description": "陆路药材、绳索、布匹的交易处，海鱼不是稳定食物来源。",
+      "facts": [
+        {
+          "id": "boundless-market-route-boundless-coast-town",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-coast-town"
+          },
+          "description": "城中街路，普通步行可达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-market-travel-boundless-coast-town",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "城中街路，普通步行可达。"
+          },
+          "description": "城中街路，普通步行可达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-market-route-boundless-house",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-house"
+          },
+          "description": "穿过南市小巷，程家房门与居民意愿仍需尊重。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-market-travel-boundless-house",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "穿过南市小巷，程家房门与居民意愿仍需尊重。"
+          },
+          "description": "穿过南市小巷，程家房门与居民意愿仍需尊重。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-market-route-boundless-inn",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-inn"
+          },
+          "description": "街市旁的客舍，住宿和货物保管需协商。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-market-travel-boundless-inn",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "街市旁的客舍，住宿和货物保管需协商。"
+          },
+          "description": "街市旁的客舍，住宿和货物保管需协商。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-house",
+      "name": "程家小院",
+      "kind": "location",
+      "placement": "boundless-coast-town",
+      "description": "制绳人一家住处，院中晾着待验收的麻绳。",
+      "facts": [
+        {
+          "id": "boundless-house-route-boundless-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-market"
+          },
+          "description": "穿过南市小巷，程家房门与居民意愿仍需尊重。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-house-travel-boundless-market",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "穿过南市小巷，程家房门与居民意愿仍需尊重。"
+          },
+          "description": "穿过南市小巷，程家房门与居民意愿仍需尊重。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-inn",
+      "name": "临街客舍",
+      "kind": "location",
+      "placement": "boundless-coast-town",
+      "description": "小城的一处普通客舍，备有陆路行商带来的粮食。",
+      "facts": [
+        {
+          "id": "boundless-inn-route-boundless-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-market"
+          },
+          "description": "街市旁的客舍，住宿和货物保管需协商。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-inn-travel-boundless-market",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "街市旁的客舍，住宿和货物保管需协商。"
+          },
+          "description": "街市旁的客舍，住宿和货物保管需协商。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-watch",
+      "name": "海岸望棚",
+      "kind": "location",
+      "placement": "boundless-shore",
+      "description": "沿岸观察风浪的木棚，不能凭此看清深海。",
+      "facts": [
+        {
+          "id": "boundless-watch-route-boundless-shore",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-shore"
+          },
+          "description": "沿礁岸石阶上望棚，湿滑时须小心。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-watch-travel-boundless-shore",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿礁岸石阶上望棚，湿滑时须小心。"
+          },
+          "description": "沿礁岸石阶上望棚，湿滑时须小心。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-deep-water",
+      "name": "近岸外海",
+      "kind": "location",
+      "placement": "human-boundless",
+      "description": "远离陆地的浑浊水域，缺乏普通船只可靠停泊处。",
+      "facts": [
+        {
+          "id": "boundless-deep-water-route-boundless-shore",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-shore"
+          },
+          "description": "须具备实际航行或飞行能力、方向和足够补给；危险与耗时随路径变化。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-deep-water-travel-boundless-shore",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "须具备实际航行或飞行能力、方向和足够补给；危险与耗时随路径变化。"
+          },
+          "description": "须具备实际航行或飞行能力、方向和足够补给；危险与耗时随路径变化。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-deep-water-route-boundless-seal-depth",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-seal-depth"
+          },
+          "description": "须实际定位潜入，承受海压、缺氧和防护消耗；知识不足不能自动知道古阵坐标。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-deep-water-travel-boundless-seal-depth",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "须实际定位潜入，承受海压、缺氧和防护消耗；知识不足不能自动知道古阵坐标。"
+          },
+          "description": "须实际定位潜入，承受海压、缺氧和防护消耗；知识不足不能自动知道古阵坐标。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-seal-depth",
+      "name": "海底封禁外层",
+      "kind": "location",
+      "placement": "human-boundless",
+      "description": "深海中的上古封禁，海水和禁制共同遮挡内部。",
+      "facts": [
+        {
+          "id": "boundless-seal-depth-route-boundless-deep-water",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-deep-water"
+          },
+          "description": "须实际定位潜入，承受海压、缺氧和防护消耗；知识不足不能自动知道古阵坐标。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-seal-depth-travel-boundless-deep-water",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "须实际定位潜入，承受海压、缺氧和防护消耗；知识不足不能自动知道古阵坐标。"
+          },
+          "description": "须实际定位潜入，承受海压、缺氧和防护消耗；知识不足不能自动知道古阵坐标。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-seal-depth-route-boundless-abyss",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-abyss"
+          },
+          "description": "须定位并突破或绕过仍完好的封禁，同时抵御魔气；普通地理包含关系不是现成入口。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-seal-depth-travel-boundless-abyss",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "须定位并突破或绕过仍完好的封禁，同时抵御魔气；普通地理包含关系不是现成入口。"
+          },
+          "description": "须定位并突破或绕过仍完好的封禁，同时抵御魔气；普通地理包含关系不是现成入口。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-abyss",
+      "name": "海底封魔渊",
+      "kind": "location",
+      "placement": "boundless-seal-depth",
+      "description": "旧阵内积存浓厚魔气；这里并非天南坠魔谷。",
+      "facts": [
+        {
+          "id": "boundless-abyss-route-boundless-seal-depth",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-seal-depth"
+          },
+          "description": "须定位并突破或绕过仍完好的封禁，同时抵御魔气；普通地理包含关系不是现成入口。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-abyss-travel-boundless-seal-depth",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "须定位并突破或绕过仍完好的封禁，同时抵御魔气；普通地理包含关系不是现成入口。"
+          },
+          "description": "须定位并突破或绕过仍完好的封禁，同时抵御魔气；普通地理包含关系不是现成入口。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-abyss-route-boundless-altar",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-altar"
+          },
+          "description": "继续深入须持续护持，消耗随魔性与深度增加。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-abyss-travel-boundless-altar",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "继续深入须持续护持，消耗随魔性与深度增加。"
+          },
+          "description": "继续深入须持续护持，消耗随魔性与深度增加。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-altar",
+      "name": "魔渊古祭台",
+      "kind": "location",
+      "placement": "boundless-abyss",
+      "description": "海底魔渊中宽阔石台，中央完整石碑仍镇住阵眼。",
+      "facts": [
+        {
+          "id": "boundless-altar-route-boundless-abyss",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-abyss"
+          },
+          "description": "继续深入须持续护持，消耗随魔性与深度增加。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-altar-travel-boundless-abyss",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "继续深入须持续护持，消耗随魔性与深度增加。"
+          },
+          "description": "继续深入须持续护持，消耗随魔性与深度增加。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-taizhen-secret-archive",
+      "name": "太真秘阁",
+      "kind": "location",
+      "placement": "tiannan-taizhen-court",
+      "description": "宗门旧籍保管处，许多古卷未编入现行修学目录。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-submerged-base-1",
+      "name": "海下古阵基底1",
+      "kind": "location",
+      "placement": "boundless-seal-depth",
+      "description": "古阵七处基底之一，仍在海下，地表无人居住或经营宗门。",
+      "facts": [
+        {
+          "id": "boundless-submerged-base-1-opening-state",
+          "predicate": "physical-state",
+          "value": {
+            "kind": "text",
+            "value": "沉没、封禁尚完整；具体方位以本区域编号区分，不冒充原著方位命名。"
+          },
+          "description": "沉没、封禁尚完整；具体方位以本区域编号区分，不冒充原著方位命名。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-submerged-base-2",
+      "name": "海下古阵基底2",
+      "kind": "location",
+      "placement": "boundless-seal-depth",
+      "description": "古阵七处基底之一，仍在海下，地表无人居住或经营宗门。",
+      "facts": [
+        {
+          "id": "boundless-submerged-base-2-opening-state",
+          "predicate": "physical-state",
+          "value": {
+            "kind": "text",
+            "value": "沉没、封禁尚完整；具体方位以本区域编号区分，不冒充原著方位命名。"
+          },
+          "description": "沉没、封禁尚完整；具体方位以本区域编号区分，不冒充原著方位命名。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-submerged-base-3",
+      "name": "海下古阵基底3",
+      "kind": "location",
+      "placement": "boundless-seal-depth",
+      "description": "古阵七处基底之一，仍在海下，地表无人居住或经营宗门。",
+      "facts": [
+        {
+          "id": "boundless-submerged-base-3-opening-state",
+          "predicate": "physical-state",
+          "value": {
+            "kind": "text",
+            "value": "沉没、封禁尚完整；具体方位以本区域编号区分，不冒充原著方位命名。"
+          },
+          "description": "沉没、封禁尚完整；具体方位以本区域编号区分，不冒充原著方位命名。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-submerged-base-4",
+      "name": "海下古阵基底4",
+      "kind": "location",
+      "placement": "boundless-seal-depth",
+      "description": "古阵七处基底之一，仍在海下，地表无人居住或经营宗门。",
+      "facts": [
+        {
+          "id": "boundless-submerged-base-4-opening-state",
+          "predicate": "physical-state",
+          "value": {
+            "kind": "text",
+            "value": "沉没、封禁尚完整；具体方位以本区域编号区分，不冒充原著方位命名。"
+          },
+          "description": "沉没、封禁尚完整；具体方位以本区域编号区分，不冒充原著方位命名。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-submerged-base-5",
+      "name": "海下古阵基底5",
+      "kind": "location",
+      "placement": "boundless-seal-depth",
+      "description": "古阵七处基底之一，仍在海下，地表无人居住或经营宗门。",
+      "facts": [
+        {
+          "id": "boundless-submerged-base-5-opening-state",
+          "predicate": "physical-state",
+          "value": {
+            "kind": "text",
+            "value": "沉没、封禁尚完整；具体方位以本区域编号区分，不冒充原著方位命名。"
+          },
+          "description": "沉没、封禁尚完整；具体方位以本区域编号区分，不冒充原著方位命名。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-submerged-base-6",
+      "name": "海下古阵基底6",
+      "kind": "location",
+      "placement": "boundless-seal-depth",
+      "description": "古阵七处基底之一，仍在海下，地表无人居住或经营宗门。",
+      "facts": [
+        {
+          "id": "boundless-submerged-base-6-opening-state",
+          "predicate": "physical-state",
+          "value": {
+            "kind": "text",
+            "value": "沉没、封禁尚完整；具体方位以本区域编号区分，不冒充原著方位命名。"
+          },
+          "description": "沉没、封禁尚完整；具体方位以本区域编号区分，不冒充原著方位命名。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-submerged-base-7",
+      "name": "海下古阵基底7",
+      "kind": "location",
+      "placement": "boundless-seal-depth",
+      "description": "古阵七处基底之一，仍在海下，地表无人居住或经营宗门。",
+      "facts": [
+        {
+          "id": "boundless-submerged-base-7-opening-state",
+          "predicate": "physical-state",
+          "value": {
+            "kind": "text",
+            "value": "沉没、封禁尚完整；具体方位以本区域编号区分，不冒充原著方位命名。"
+          },
+          "description": "沉没、封禁尚完整；具体方位以本区域编号区分，不冒充原著方位命名。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-sealing-stele",
+      "name": "海底阵眼古碑",
+      "kind": "item",
+      "placement": "boundless-altar",
+      "description": "灰色旧碑带古符文，具体材质不凭外观自动识别。",
+      "facts": [
+        {
+          "id": "boundless-sealing-stele-seal-state",
+          "predicate": "physical-state",
+          "value": {
+            "kind": "text",
+            "value": "碑体完整，仍是古阵一部分；破坏、移动可能改变封魔状态。"
+          },
+          "description": "碑体完整，仍是古阵一部分；破坏、移动可能改变封魔状态。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-old-duty-record",
+      "name": "太真古代职责卷",
+      "kind": "item",
+      "placement": "boundless-taizhen-secret-archive",
+      "description": "未编目的上古卷册，读者须具备阅读古文和进入秘阁的条件。",
+      "facts": [
+        {
+          "id": "boundless-old-duty-record-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "taizhen-sect"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-old-duty-record-contents",
+          "predicate": "recorded-information",
+          "value": {
+            "kind": "text",
+            "value": "本门古代由大晋真极门支派迁来，承担看守海下封魔古阵职责；只有大概构成，并非完备修复手册。"
+          },
+          "description": "本门古代由大晋真极门支派迁来，承担看守海下封魔古阵职责；只有大概构成，并非完备修复手册。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-marrows-1",
+      "name": "深藏魔髓钻1",
+      "kind": "item",
+      "placement": "boundless-altar",
+      "description": "深藏祭台地下的幽黑晶体，未开采，须先真实探明与接近。",
+      "facts": [
+        {
+          "id": "boundless-marrows-1-buried",
+          "predicate": "physical-state",
+          "value": {
+            "kind": "text",
+            "value": "埋在石层中；无法隔着石层直接拿取或凭地名就计入库存。"
+          },
+          "description": "埋在石层中；无法隔着石层直接拿取或凭地名就计入库存。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-marrows-2",
+      "name": "深藏魔髓钻2",
+      "kind": "item",
+      "placement": "boundless-altar",
+      "description": "深藏祭台地下的幽黑晶体，未开采，须先真实探明与接近。",
+      "facts": [
+        {
+          "id": "boundless-marrows-2-buried",
+          "predicate": "physical-state",
+          "value": {
+            "kind": "text",
+            "value": "埋在石层中；无法隔着石层直接拿取或凭地名就计入库存。"
+          },
+          "description": "埋在石层中；无法隔着石层直接拿取或凭地名就计入库存。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-marrows-3",
+      "name": "深藏魔髓钻3",
+      "kind": "item",
+      "placement": "boundless-altar",
+      "description": "深藏祭台地下的幽黑晶体，未开采，须先真实探明与接近。",
+      "facts": [
+        {
+          "id": "boundless-marrows-3-buried",
+          "predicate": "physical-state",
+          "value": {
+            "kind": "text",
+            "value": "埋在石层中；无法隔着石层直接拿取或凭地名就计入库存。"
+          },
+          "description": "埋在石层中；无法隔着石层直接拿取或凭地名就计入库存。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-marrows-4",
+      "name": "深藏魔髓钻4",
+      "kind": "item",
+      "placement": "boundless-altar",
+      "description": "深藏祭台地下的幽黑晶体，未开采，须先真实探明与接近。",
+      "facts": [
+        {
+          "id": "boundless-marrows-4-buried",
+          "predicate": "physical-state",
+          "value": {
+            "kind": "text",
+            "value": "埋在石层中；无法隔着石层直接拿取或凭地名就计入库存。"
+          },
+          "description": "埋在石层中；无法隔着石层直接拿取或凭地名就计入库存。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-cheng-ji",
+      "name": "程济",
+      "kind": "person",
+      "placement": "boundless-house",
+      "description": "城南制绳匠，靠给陆路行商供绳养家。",
+      "facts": [
+        {
+          "id": "boundless-cheng-ji-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "凡人"
+          },
+          "description": "凡人",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "boundless-cheng-ji"
+            ]
+          }
+        },
+        {
+          "id": "boundless-cheng-ji-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "制绳、修理行囊和辨麻纤维。"
+          },
+          "description": "制绳、修理行囊和辨麻纤维。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "boundless-cheng-ji"
+            ]
+          }
+        },
+        {
+          "id": "boundless-cheng-ji-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根的凡人。"
+          },
+          "description": "无灵根的凡人。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "boundless-cheng-ji"
+            ]
+          }
+        },
+        {
+          "id": "boundless-cheng-ji-spouse-boundless-lin-zhen",
+          "predicate": "spouse",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-lin-zhen"
+          },
+          "description": "spouse",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-cheng-ji-child-boundless-cheng-yun",
+          "predicate": "child",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-cheng-yun"
+          },
+          "description": "child",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-cheng-ji-customer-boundless-wei-qiao",
+          "predicate": "customer",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-wei-qiao"
+          },
+          "description": "customer",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "boundless-cheng-ji-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "boundless-cheng-ji-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "boundless-cheng-ji-force",
+          "definition_id": "force",
+          "value": 0
+        },
+        {
+          "id": "boundless-cheng-ji-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "boundless-cheng-ji-perception",
+          "definition_id": "perception",
+          "value": 0
+        },
+        {
+          "id": "boundless-cheng-ji-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 70
+        }
+      ],
+      "agent": {
+        "id": "boundless-cheng-ji",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "城南制绳匠，靠给陆路行商供绳养家。",
+            "voice": "说话简洁，遇到所关心的事情会详细解释自己的理由。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "检验晾绳的受潮程度，再决定是否按期交货。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "程济",
+              "description": "城南制绳匠，靠给陆路行商供绳养家。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "程家小院",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-cheng-ji-pouch",
+              "name": "程济的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-lin-zhen",
+              "name": "林贞",
+              "description": "开篇前相识的家人或实际交易对象。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-cheng-yun",
+              "name": "程芸",
+              "description": "开篇前相识的家人或实际交易对象。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-wei-qiao",
+              "name": "卫乔",
+              "description": "开篇前相识的家人或实际交易对象。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-rope-stock",
+              "name": "程家待验麻绳",
+              "description": "晾干后才能验收的麻绳原料。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-market",
+              "name": "小城南市",
+              "description": "自己走过的城内地点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-house",
+              "name": "程家小院",
+              "description": "自己走过的城内地点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-inn",
+              "name": "临街客舍",
+              "description": "自己走过的城内地点。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "boundless-cheng-ji"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "boundless-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-cheng-ji-pouch",
+              "canonical_entity_ids": [
+                "boundless-cheng-ji-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-lin-zhen",
+              "canonical_entity_ids": [
+                "boundless-lin-zhen"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-cheng-yun",
+              "canonical_entity_ids": [
+                "boundless-cheng-yun"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-wei-qiao",
+              "canonical_entity_ids": [
+                "boundless-wei-qiao"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-rope-stock",
+              "canonical_entity_ids": [
+                "boundless-rope-stock"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-market",
+              "canonical_entity_ids": [
+                "boundless-market"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-house",
+              "canonical_entity_ids": [
+                "boundless-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-inn",
+              "canonical_entity_ids": [
+                "boundless-inn"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "制绳、修理行囊和辨麻纤维。"
+              },
+              "description": "制绳、修理行囊和辨麻纤维。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "检验晾绳的受潮程度，再决定是否按期交货。"
+              },
+              "description": "检验晾绳的受潮程度，再决定是否按期交货。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是凡人。"
+              },
+              "description": "自己是凡人。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "boundless-cheng-ji-pouch",
+      "name": "程济的私用行囊",
+      "kind": "item",
+      "placement": "boundless-cheng-ji",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "boundless-cheng-ji-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-cheng-ji"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "boundless-lin-zhen",
+      "name": "林贞",
+      "kind": "person",
+      "placement": "boundless-house",
+      "description": "程济的妻子，负责进料和家中收支。",
+      "facts": [
+        {
+          "id": "boundless-lin-zhen-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "凡人"
+          },
+          "description": "凡人",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "boundless-lin-zhen"
+            ]
+          }
+        },
+        {
+          "id": "boundless-lin-zhen-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "账目核对、买卖议价和普通炊事。"
+          },
+          "description": "账目核对、买卖议价和普通炊事。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "boundless-lin-zhen"
+            ]
+          }
+        },
+        {
+          "id": "boundless-lin-zhen-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根的凡人。"
+          },
+          "description": "无灵根的凡人。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "boundless-lin-zhen"
+            ]
+          }
+        },
+        {
+          "id": "boundless-lin-zhen-spouse-boundless-cheng-ji",
+          "predicate": "spouse",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-cheng-ji"
+          },
+          "description": "spouse",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-lin-zhen-child-boundless-cheng-yun",
+          "predicate": "child",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-cheng-yun"
+          },
+          "description": "child",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "boundless-lin-zhen-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "boundless-lin-zhen-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "boundless-lin-zhen-force",
+          "definition_id": "force",
+          "value": 0
+        },
+        {
+          "id": "boundless-lin-zhen-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "boundless-lin-zhen-perception",
+          "definition_id": "perception",
+          "value": 0
+        },
+        {
+          "id": "boundless-lin-zhen-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 70
+        }
+      ],
+      "agent": {
+        "id": "boundless-lin-zhen",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "程济的妻子，负责进料和家中收支。",
+            "voice": "说话简洁，遇到所关心的事情会详细解释自己的理由。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "核对今夜晾绳数量，准备明日带孩子去南市。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "林贞",
+              "description": "程济的妻子，负责进料和家中收支。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "程家小院",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-lin-zhen-pouch",
+              "name": "林贞的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-cheng-ji",
+              "name": "程济",
+              "description": "开篇前相识的家人或实际交易对象。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-cheng-yun",
+              "name": "程芸",
+              "description": "开篇前相识的家人或实际交易对象。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-house-grain",
+              "name": "程家粮袋",
+              "description": "家中陆路采购的粮食，非卖货本金。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-market",
+              "name": "小城南市",
+              "description": "自己走过的城内地点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-house",
+              "name": "程家小院",
+              "description": "自己走过的城内地点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-inn",
+              "name": "临街客舍",
+              "description": "自己走过的城内地点。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "boundless-lin-zhen"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "boundless-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-lin-zhen-pouch",
+              "canonical_entity_ids": [
+                "boundless-lin-zhen-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-cheng-ji",
+              "canonical_entity_ids": [
+                "boundless-cheng-ji"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-cheng-yun",
+              "canonical_entity_ids": [
+                "boundless-cheng-yun"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-house-grain",
+              "canonical_entity_ids": [
+                "boundless-house-grain"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-market",
+              "canonical_entity_ids": [
+                "boundless-market"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-house",
+              "canonical_entity_ids": [
+                "boundless-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-inn",
+              "canonical_entity_ids": [
+                "boundless-inn"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "账目核对、买卖议价和普通炊事。"
+              },
+              "description": "账目核对、买卖议价和普通炊事。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "核对今夜晾绳数量，准备明日带孩子去南市。"
+              },
+              "description": "核对今夜晾绳数量，准备明日带孩子去南市。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是凡人。"
+              },
+              "description": "自己是凡人。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "boundless-lin-zhen-pouch",
+      "name": "林贞的私用行囊",
+      "kind": "item",
+      "placement": "boundless-lin-zhen",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "boundless-lin-zhen-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-lin-zhen"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "boundless-cheng-yun",
+      "name": "程芸",
+      "kind": "person",
+      "placement": "boundless-house",
+      "description": "程家的成年女儿，想学行商，又舍不得丢下家中手艺。",
+      "facts": [
+        {
+          "id": "boundless-cheng-yun-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "凡人"
+          },
+          "description": "凡人",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "boundless-cheng-yun"
+            ]
+          }
+        },
+        {
+          "id": "boundless-cheng-yun-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "识字、制绳与步行赶路经验。"
+          },
+          "description": "识字、制绳与步行赶路经验。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "boundless-cheng-yun"
+            ]
+          }
+        },
+        {
+          "id": "boundless-cheng-yun-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根的凡人。"
+          },
+          "description": "无灵根的凡人。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "boundless-cheng-yun"
+            ]
+          }
+        },
+        {
+          "id": "boundless-cheng-yun-parent-boundless-cheng-ji",
+          "predicate": "parent",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-cheng-ji"
+          },
+          "description": "parent",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "boundless-cheng-yun-parent-boundless-lin-zhen",
+          "predicate": "parent",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-lin-zhen"
+          },
+          "description": "parent",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "boundless-cheng-yun-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "boundless-cheng-yun-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "boundless-cheng-yun-force",
+          "definition_id": "force",
+          "value": 0
+        },
+        {
+          "id": "boundless-cheng-yun-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "boundless-cheng-yun-perception",
+          "definition_id": "perception",
+          "value": 0
+        },
+        {
+          "id": "boundless-cheng-yun-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 70
+        }
+      ],
+      "agent": {
+        "id": "boundless-cheng-yun",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "程家的成年女儿，想学行商，又舍不得丢下家中手艺。",
+            "voice": "说话简洁，遇到所关心的事情会详细解释自己的理由。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "替父亲做一份交货记录，试着争取随商队去州府。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "程芸",
+              "description": "程家的成年女儿，想学行商，又舍不得丢下家中手艺。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "程家小院",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-cheng-yun-pouch",
+              "name": "程芸的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-cheng-ji",
+              "name": "程济",
+              "description": "开篇前相识的家人或实际交易对象。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-lin-zhen",
+              "name": "林贞",
+              "description": "开篇前相识的家人或实际交易对象。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-market",
+              "name": "小城南市",
+              "description": "自己走过的城内地点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-house",
+              "name": "程家小院",
+              "description": "自己走过的城内地点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-inn",
+              "name": "临街客舍",
+              "description": "自己走过的城内地点。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "boundless-cheng-yun"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "boundless-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-cheng-yun-pouch",
+              "canonical_entity_ids": [
+                "boundless-cheng-yun-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-cheng-ji",
+              "canonical_entity_ids": [
+                "boundless-cheng-ji"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-lin-zhen",
+              "canonical_entity_ids": [
+                "boundless-lin-zhen"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-market",
+              "canonical_entity_ids": [
+                "boundless-market"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-house",
+              "canonical_entity_ids": [
+                "boundless-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-inn",
+              "canonical_entity_ids": [
+                "boundless-inn"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "识字、制绳与步行赶路经验。"
+              },
+              "description": "识字、制绳与步行赶路经验。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "替父亲做一份交货记录，试着争取随商队去州府。"
+              },
+              "description": "替父亲做一份交货记录，试着争取随商队去州府。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是凡人。"
+              },
+              "description": "自己是凡人。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "boundless-cheng-yun-pouch",
+      "name": "程芸的私用行囊",
+      "kind": "item",
+      "placement": "boundless-cheng-yun",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "boundless-cheng-yun-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-cheng-yun"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "boundless-wei-qiao",
+      "name": "卫乔",
+      "kind": "person",
+      "placement": "boundless-inn",
+      "description": "途经海城的炼气散修，靠护送陆路货物赚取灵石。",
+      "facts": [
+        {
+          "id": "boundless-wei-qiao-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼气"
+          },
+          "description": "炼气",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "boundless-wei-qiao"
+            ]
+          }
+        },
+        {
+          "id": "boundless-wei-qiao-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "炼气基础、小型御物和短时护持，不能横渡深海。"
+          },
+          "description": "炼气基础、小型御物和短时护持，不能横渡深海。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "boundless-wei-qiao"
+            ]
+          }
+        },
+        {
+          "id": "boundless-wei-qiao-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+          },
+          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "boundless-wei-qiao"
+            ]
+          }
+        },
+        {
+          "id": "boundless-wei-qiao-supplier-boundless-cheng-ji",
+          "predicate": "supplier",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-cheng-ji"
+          },
+          "description": "supplier",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "boundless-wei-qiao-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "boundless-wei-qiao-mana",
+          "definition_id": "mana",
+          "current": 80
+        }
+      ],
+      "ratings": [
+        {
+          "id": "boundless-wei-qiao-cultivation",
+          "definition_id": "cultivation",
+          "value": 1
+        },
+        {
+          "id": "boundless-wei-qiao-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "boundless-wei-qiao-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "boundless-wei-qiao-perception",
+          "definition_id": "perception",
+          "value": 1
+        },
+        {
+          "id": "boundless-wei-qiao-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 30
+        }
+      ],
+      "agent": {
+        "id": "boundless-wei-qiao",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "途经海城的炼气散修，靠护送陆路货物赚取灵石。",
+            "voice": "说话简洁，遇到所关心的事情会详细解释自己的理由。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "核实所订麻绳是否适用，再与同行商量出发时辰。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "卫乔",
+              "description": "途经海城的炼气散修，靠护送陆路货物赚取灵石。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "临街客舍",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-wei-qiao-pouch",
+              "name": "卫乔的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-cheng-ji",
+              "name": "程济",
+              "description": "开篇前相识的家人或实际交易对象。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-wei-guide",
+              "name": "卫乔行旅笔记",
+              "description": "自己走过的沿岸陆路补给点、上次买绳用量和与同行约定的出发地点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-market",
+              "name": "小城南市",
+              "description": "自己走过的城内地点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-house",
+              "name": "程家小院",
+              "description": "自己走过的城内地点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-inn",
+              "name": "临街客舍",
+              "description": "自己走过的城内地点。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "boundless-wei-qiao"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "boundless-inn"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-wei-qiao-pouch",
+              "canonical_entity_ids": [
+                "boundless-wei-qiao-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-cheng-ji",
+              "canonical_entity_ids": [
+                "boundless-cheng-ji"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-wei-guide",
+              "canonical_entity_ids": [
+                "boundless-wei-guide"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-market",
+              "canonical_entity_ids": [
+                "boundless-market"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-house",
+              "canonical_entity_ids": [
+                "boundless-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-inn",
+              "canonical_entity_ids": [
+                "boundless-inn"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "炼气基础、小型御物和短时护持，不能横渡深海。"
+              },
+              "description": "炼气基础、小型御物和短时护持，不能横渡深海。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "核实所订麻绳是否适用，再与同行商量出发时辰。"
+              },
+              "description": "核实所订麻绳是否适用，再与同行商量出发时辰。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是炼气修士。"
+              },
+              "description": "自己是炼气修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "boundless-wei-qiao-pouch",
+      "name": "卫乔的私用行囊",
+      "kind": "item",
+      "placement": "boundless-wei-qiao",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "boundless-wei-qiao-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-wei-qiao"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "boundless-sun-he",
+      "name": "孙禾",
+      "kind": "person",
+      "placement": "boundless-watch",
+      "description": "望棚值守人，熟悉近岸天气，家里还种着一小块地。",
+      "facts": [
+        {
+          "id": "boundless-sun-he-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "凡人"
+          },
+          "description": "凡人",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "boundless-sun-he"
+            ]
+          }
+        },
+        {
+          "id": "boundless-sun-he-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "辨风向、修木棚与熟悉近岸地形。"
+          },
+          "description": "辨风向、修木棚与熟悉近岸地形。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "boundless-sun-he"
+            ]
+          }
+        },
+        {
+          "id": "boundless-sun-he-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根的凡人。"
+          },
+          "description": "无灵根的凡人。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "boundless-sun-he"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "boundless-sun-he-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "boundless-sun-he-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "boundless-sun-he-force",
+          "definition_id": "force",
+          "value": 0
+        },
+        {
+          "id": "boundless-sun-he-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "boundless-sun-he-perception",
+          "definition_id": "perception",
+          "value": 0
+        },
+        {
+          "id": "boundless-sun-he-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 70
+        }
+      ],
+      "agent": {
+        "id": "boundless-sun-he",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "望棚值守人，熟悉近岸天气，家里还种着一小块地。",
+            "voice": "说话简洁，遇到所关心的事情会详细解释自己的理由。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "记录今夜浪头高度，决定明早石阶是否需封一段。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "孙禾",
+              "description": "望棚值守人，熟悉近岸天气，家里还种着一小块地。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "海岸望棚",
+              "description": "自己当前所在之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-sun-he-pouch",
+              "name": "孙禾的私用行囊",
+              "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-watch-record",
+              "name": "近岸浪况簿",
+              "description": "过去十日的近岸观察，不含深海封魔阵位置。",
+              "status": "observed"
+            },
+            {
+              "id": "known-boundless-shore",
+              "name": "小城北岸",
+              "description": "每日上下望棚经过的礁岸。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "boundless-sun-he"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "boundless-watch"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-sun-he-pouch",
+              "canonical_entity_ids": [
+                "boundless-sun-he-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-watch-record",
+              "canonical_entity_ids": [
+                "boundless-watch-record"
+              ]
+            },
+            {
+              "local_entity_id": "known-boundless-shore",
+              "canonical_entity_ids": [
+                "boundless-shore"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经历、修学及明确记录的当期往来。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "辨风向、修木棚与熟悉近岸地形。"
+              },
+              "description": "辨风向、修木棚与熟悉近岸地形。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "记录今夜浪头高度，决定明早石阶是否需封一段。"
+              },
+              "description": "记录今夜浪头高度，决定明早石阶是否需封一段。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "own-rank",
+              "subjectId": "self",
+              "predicate": "own-rank",
+              "value": {
+                "kind": "text",
+                "value": "自己是凡人。"
+              },
+              "description": "自己是凡人。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "boundless-sun-he-pouch",
+      "name": "孙禾的私用行囊",
+      "kind": "item",
+      "placement": "boundless-sun-he",
+      "description": "自己保管的普通衣物、文具和日用器物，机构公库不在其中。",
+      "facts": [
+        {
+          "id": "boundless-sun-he-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-sun-he"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "boundless-rope-stock",
+      "name": "程家待验麻绳",
+      "kind": "item",
+      "placement": "boundless-house",
+      "description": "晾干后才能验收的麻绳原料。",
+      "facts": [
+        {
+          "id": "boundless-rope-stock-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-cheng-ji"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "craft-material",
+          "amount": 12
+        }
+      ]
+    },
+    {
+      "id": "boundless-house-grain",
+      "name": "程家粮袋",
+      "kind": "item",
+      "placement": "boundless-house",
+      "description": "家中陆路采购的粮食，非卖货本金。",
+      "facts": [
+        {
+          "id": "boundless-house-grain-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-lin-zhen"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 18
+        }
+      ]
+    },
+    {
+      "id": "boundless-watch-record",
+      "name": "近岸浪况簿",
+      "kind": "item",
+      "placement": "boundless-watch",
+      "description": "过去十日的近岸观察，不含深海封魔阵位置。",
+      "facts": [
+        {
+          "id": "boundless-watch-record-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-sun-he"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "boundless-wei-guide",
+      "name": "卫乔行旅笔记",
+      "kind": "item",
+      "placement": "boundless-wei-qiao",
+      "description": "自己走过的沿岸陆路补给点、上次买绳用量和与同行约定的出发地点。",
+      "facts": [
+        {
+          "id": "boundless-wei-guide-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "boundless-wei-qiao"
+          },
+          "description": "所有权不随携带或任职自动转移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    }
+  ],
+  "existingEntityFacts": [],
+  "placements": [],
+  "entityDescriptions": [],
+  "agentCognition": [],
+  "periodicProperties": [],
+  "quantityDefinitions": [],
+  "laws": [
+    {
+      "id": "boundless-no-free-crossing",
+      "text": "地理父级不提供传送。无边海航行、潜水、探阵须连续路径、实际定位、防护和有限补给。关于远航失败的传闻不能裁成永远无法过海的定律。",
+      "severity": "hard"
+    },
+    {
+      "id": "boundless-seal-causality",
+      "text": "七处海下阵基的浮现、魔气外泄及海水净化，必须由实际封印状态和后续作用引起；不得按章节时间自动发生。移走阵眼或长期损坏封禁要保留真实后果。",
+      "severity": "hard"
+    },
+    {
+      "id": "boundless-private-history",
+      "text": "秘阁旧卷和海底矿物均须真实接近、查阅或探测才能得知。太真门的古代职责不能作为全体门人先验知识，地名也不自动授予秘密位置。",
+      "severity": "hard"
+    }
+  ],
+  "provenance": {
+    "entity:human-boundless": [
+      "boundless-sea"
+    ],
+    "entity:boundless-minzhou": [
+      "boundless-shore"
+    ],
+    "entity:boundless-fengri": [
+      "boundless-shore"
+    ],
+    "entity:boundless-coast-town": [
+      "boundless-shore",
+      "boundless-present-life"
+    ],
+    "entity:boundless-shore": [
+      "boundless-sea",
+      "boundless-present-life"
+    ],
+    "entity:boundless-market": [
+      "boundless-present-life"
+    ],
+    "entity:boundless-house": [
+      "boundless-present-life"
+    ],
+    "entity:boundless-inn": [
+      "boundless-present-life"
+    ],
+    "entity:boundless-watch": [
+      "boundless-present-life"
+    ],
+    "entity:boundless-deep-water": [
+      "boundless-sea",
+      "boundless-values"
+    ],
+    "entity:boundless-seal-depth": [
+      "boundless-old-seal",
+      "boundless-abyss"
+    ],
+    "entity:boundless-abyss": [
+      "boundless-abyss"
+    ],
+    "entity:boundless-altar": [
+      "boundless-abyss"
+    ],
+    "entity:boundless-taizhen-secret-archive": [
+      "boundless-forgotten-watch",
+      "boundless-present-life"
+    ],
+    "fact:human-boundless-native-beast": [
+      "boundless-beast"
+    ],
+    "fact:boundless-fengri-route-boundless-coast-town": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-fengri-travel-boundless-coast-town": [
+      "boundless-values"
+    ],
+    "fact:boundless-coast-town-route-boundless-fengri": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-coast-town-travel-boundless-fengri": [
+      "boundless-values"
+    ],
+    "fact:boundless-coast-town-route-boundless-market": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-coast-town-travel-boundless-market": [
+      "boundless-values"
+    ],
+    "fact:boundless-market-route-boundless-coast-town": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-market-travel-boundless-coast-town": [
+      "boundless-values"
+    ],
+    "fact:boundless-coast-town-route-boundless-shore": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-coast-town-travel-boundless-shore": [
+      "boundless-values"
+    ],
+    "fact:boundless-shore-route-boundless-coast-town": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-shore-travel-boundless-coast-town": [
+      "boundless-values"
+    ],
+    "fact:boundless-market-route-boundless-house": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-market-travel-boundless-house": [
+      "boundless-values"
+    ],
+    "fact:boundless-house-route-boundless-market": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-house-travel-boundless-market": [
+      "boundless-values"
+    ],
+    "fact:boundless-market-route-boundless-inn": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-market-travel-boundless-inn": [
+      "boundless-values"
+    ],
+    "fact:boundless-inn-route-boundless-market": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-inn-travel-boundless-market": [
+      "boundless-values"
+    ],
+    "fact:boundless-shore-route-boundless-watch": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-shore-travel-boundless-watch": [
+      "boundless-values"
+    ],
+    "fact:boundless-watch-route-boundless-shore": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-watch-travel-boundless-shore": [
+      "boundless-values"
+    ],
+    "fact:boundless-shore-route-boundless-deep-water": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-shore-travel-boundless-deep-water": [
+      "boundless-values"
+    ],
+    "fact:boundless-deep-water-route-boundless-shore": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-deep-water-travel-boundless-shore": [
+      "boundless-values"
+    ],
+    "fact:boundless-deep-water-route-boundless-seal-depth": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-deep-water-travel-boundless-seal-depth": [
+      "boundless-values"
+    ],
+    "fact:boundless-seal-depth-route-boundless-deep-water": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-seal-depth-travel-boundless-deep-water": [
+      "boundless-values"
+    ],
+    "fact:boundless-seal-depth-route-boundless-abyss": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-seal-depth-travel-boundless-abyss": [
+      "boundless-values"
+    ],
+    "fact:boundless-abyss-route-boundless-seal-depth": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-abyss-travel-boundless-seal-depth": [
+      "boundless-values"
+    ],
+    "fact:boundless-abyss-route-boundless-altar": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-abyss-travel-boundless-altar": [
+      "boundless-values"
+    ],
+    "fact:boundless-altar-route-boundless-abyss": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-altar-travel-boundless-abyss": [
+      "boundless-values"
+    ],
+    "entity:boundless-submerged-base-1": [
+      "boundless-old-seal",
+      "boundless-values"
+    ],
+    "fact:boundless-submerged-base-1-opening-state": [
+      "boundless-old-seal",
+      "boundless-values"
+    ],
+    "entity:boundless-submerged-base-2": [
+      "boundless-old-seal",
+      "boundless-values"
+    ],
+    "fact:boundless-submerged-base-2-opening-state": [
+      "boundless-old-seal",
+      "boundless-values"
+    ],
+    "entity:boundless-submerged-base-3": [
+      "boundless-old-seal",
+      "boundless-values"
+    ],
+    "fact:boundless-submerged-base-3-opening-state": [
+      "boundless-old-seal",
+      "boundless-values"
+    ],
+    "entity:boundless-submerged-base-4": [
+      "boundless-old-seal",
+      "boundless-values"
+    ],
+    "fact:boundless-submerged-base-4-opening-state": [
+      "boundless-old-seal",
+      "boundless-values"
+    ],
+    "entity:boundless-submerged-base-5": [
+      "boundless-old-seal",
+      "boundless-values"
+    ],
+    "fact:boundless-submerged-base-5-opening-state": [
+      "boundless-old-seal",
+      "boundless-values"
+    ],
+    "entity:boundless-submerged-base-6": [
+      "boundless-old-seal",
+      "boundless-values"
+    ],
+    "fact:boundless-submerged-base-6-opening-state": [
+      "boundless-old-seal",
+      "boundless-values"
+    ],
+    "entity:boundless-submerged-base-7": [
+      "boundless-old-seal",
+      "boundless-values"
+    ],
+    "fact:boundless-submerged-base-7-opening-state": [
+      "boundless-old-seal",
+      "boundless-values"
+    ],
+    "entity:boundless-sealing-stele": [
+      "boundless-abyss"
+    ],
+    "fact:boundless-sealing-stele-seal-state": [
+      "boundless-abyss"
+    ],
+    "entity:boundless-old-duty-record": [
+      "boundless-forgotten-watch"
+    ],
+    "fact:boundless-old-duty-record-owner": [
+      "boundless-forgotten-watch"
+    ],
+    "fact:boundless-old-duty-record-contents": [
+      "boundless-forgotten-watch"
+    ],
+    "entity:boundless-marrows-1": [
+      "boundless-crystals",
+      "boundless-values"
+    ],
+    "fact:boundless-marrows-1-buried": [
+      "boundless-crystals",
+      "boundless-values"
+    ],
+    "entity:boundless-marrows-2": [
+      "boundless-crystals",
+      "boundless-values"
+    ],
+    "fact:boundless-marrows-2-buried": [
+      "boundless-crystals",
+      "boundless-values"
+    ],
+    "entity:boundless-marrows-3": [
+      "boundless-crystals",
+      "boundless-values"
+    ],
+    "fact:boundless-marrows-3-buried": [
+      "boundless-crystals",
+      "boundless-values"
+    ],
+    "entity:boundless-marrows-4": [
+      "boundless-crystals",
+      "boundless-values"
+    ],
+    "fact:boundless-marrows-4-buried": [
+      "boundless-crystals",
+      "boundless-values"
+    ],
+    "entity:boundless-cheng-ji": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-cheng-ji-cultivation-state": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-cheng-ji-learned-skill": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-cheng-ji-spiritual-root": [
+      "boundless-values"
+    ],
+    "entity:boundless-cheng-ji-pouch": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-cheng-ji-pouch-owner": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "entity:boundless-lin-zhen": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-lin-zhen-cultivation-state": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-lin-zhen-learned-skill": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-lin-zhen-spiritual-root": [
+      "boundless-values"
+    ],
+    "entity:boundless-lin-zhen-pouch": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-lin-zhen-pouch-owner": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "entity:boundless-cheng-yun": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-cheng-yun-cultivation-state": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-cheng-yun-learned-skill": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-cheng-yun-spiritual-root": [
+      "boundless-values"
+    ],
+    "entity:boundless-cheng-yun-pouch": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-cheng-yun-pouch-owner": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "entity:boundless-wei-qiao": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-wei-qiao-cultivation-state": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-wei-qiao-learned-skill": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-wei-qiao-spiritual-root": [
+      "boundless-values"
+    ],
+    "entity:boundless-wei-qiao-pouch": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-wei-qiao-pouch-owner": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "entity:boundless-sun-he": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-sun-he-cultivation-state": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-sun-he-learned-skill": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-sun-he-spiritual-root": [
+      "boundless-values"
+    ],
+    "entity:boundless-sun-he-pouch": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-sun-he-pouch-owner": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-cheng-ji-spouse-boundless-lin-zhen": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-lin-zhen-spouse-boundless-cheng-ji": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-cheng-ji-child-boundless-cheng-yun": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-cheng-yun-parent-boundless-cheng-ji": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-lin-zhen-child-boundless-cheng-yun": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-cheng-yun-parent-boundless-lin-zhen": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-cheng-ji-customer-boundless-wei-qiao": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-wei-qiao-supplier-boundless-cheng-ji": [
+      "boundless-present-life"
+    ],
+    "entity:boundless-rope-stock": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-rope-stock-owner": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "entity:boundless-house-grain": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "fact:boundless-house-grain-owner": [
+      "boundless-present-life",
+      "boundless-values"
+    ],
+    "entity:boundless-watch-record": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-watch-record-owner": [
+      "boundless-present-life"
+    ],
+    "entity:boundless-wei-guide": [
+      "boundless-present-life"
+    ],
+    "fact:boundless-wei-guide-owner": [
+      "boundless-present-life"
+    ],
+    "law:boundless-no-free-crossing": [
+      "boundless-sea",
+      "boundless-voyage-account"
+    ],
+    "law:boundless-seal-causality": [
+      "boundless-old-seal",
+      "boundless-abyss"
+    ],
+    "law:boundless-private-history": [
+      "boundless-forgotten-watch",
+      "boundless-crystals"
+    ]
+  }
+}

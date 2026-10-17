@@ -1,0 +1,1233 @@
+[
+  {
+    "id": "future-fengyuan-wood-ape",
+    "label": "木猿兽军群",
+    "kind": "construct-type",
+    "openingState": "future-development-unfixed",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-wood-people"
+    ],
+    "aliases": [],
+    "reason": "后期木瑞称近千年才研发，T0是否已有不能照搬数千军群，当前不生成。"
+  },
+  {
+    "id": "future-fengyuan-divine-blood",
+    "label": "神血失窃与追捕",
+    "kind": "event",
+    "openingState": "future-conditional",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-spirit-clans"
+    ],
+    "aliases": [],
+    "reason": "特定叛逆与各灵将任务尚未发生。"
+  },
+  {
+    "id": "future-fengyuan-leiluo-possession",
+    "label": "雷罗遭紫影附身",
+    "kind": "event",
+    "openingState": "future-conditional",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-leiluo-not-purple-at-opening"
+    ],
+    "aliases": [],
+    "reason": "后期百年前暗算，不前置；本体雷罗由tianyuan保留，紫影在本区独立。"
+  },
+  {
+    "id": "future-fengyuan-false-city",
+    "label": "蜃兽幻城",
+    "kind": "illusion",
+    "openingState": "not-real-city",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-wilderness-and-observation"
+    ],
+    "aliases": [],
+    "reason": "幻象不能当作另一座开篇真实聚落。"
+  },
+  {
+    "id": "future-fengyuan-imprisoned-immortal",
+    "label": "灵王封印的真仙",
+    "kind": "person-reference",
+    "openingState": "owned-other-region-history",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-ling-king-and-sanctuary"
+    ],
+    "aliases": [],
+    "reason": "开篇还在海底重铸仙躯；后期才被灵王镇压，需由spirit-seas承载，不能在此提前生成囚徒。"
+  },
+  {
+    "id": "canon-wood-grand-elder-name",
+    "label": "邹／都大长老",
+    "kind": "name-variant",
+    "openingState": "same-office-reference",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-wood-senior-identities"
+    ],
+    "aliases": [
+      "邹",
+      "都"
+    ],
+    "reason": "同章姓氏异写，维持唯一木族大长老实体，不编全名。"
+  },
+  {
+    "id": "canon-meng-xiang-alias",
+    "label": "不死王",
+    "kind": "alias",
+    "openingState": "existing-person",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-dream-and-wheel-kings"
+    ],
+    "aliases": [
+      "不死王"
+    ],
+    "reason": "梦祥的尊号，不是第二人物。"
+  },
+  {
+    "id": "future-fengyuan-black-owl-publicity",
+    "label": "黑枭王公开大乘",
+    "kind": "event",
+    "openingState": "future-conditional",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-heixiao-hidden-elder"
+    ],
+    "aliases": [],
+    "reason": "开篇隐藏已修成的修为，后期大乘庆典公开是未来行为。"
+  },
+  {
+    "id": "future-fengyuan-shadow-other",
+    "label": "赤影与绿影",
+    "kind": "rank-category",
+    "openingState": "source-category",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-shadow-capabilities"
+    ],
+    "aliases": [],
+    "reason": "颜色阶级不自动等于同一有名字主体；后期特定探子不并入紫影。"
+  },
+  {
+    "id": "fengyuan-continent",
+    "label": "风元大陆",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-northwest-geography"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-wood-domain",
+    "label": "木族族域",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-northwest-geography",
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-wood-people",
+    "label": "木族族域居民",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-northwest-geography",
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-spirit-domain",
+    "label": "灵族灵域",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-northwest-geography",
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-spirit-people",
+    "label": "灵族灵域居民",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-northwest-geography",
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-yaksha-domain",
+    "label": "夜叉族域",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-northwest-geography",
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-yaksha-people",
+    "label": "夜叉族域居民",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-northwest-geography",
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shadow-domain",
+    "label": "影族疆域",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-northwest-geography",
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shadow-people",
+    "label": "影族疆域居民",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-northwest-geography",
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-fuli-marsh",
+    "label": "浮黎沼泽",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-wilderness-and-observation"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-burial-desert",
+    "label": "葬骨沙漠",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-wilderness-and-observation"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-one-sky",
+    "label": "一线天",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-wilderness-and-observation"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-black-leaf-forest",
+    "label": "黑叶森林",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-wilderness-and-observation",
+      "fengyuan-wood-people"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-border-exchange",
+    "label": "折枝边市",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-wood-sanctuary",
+    "label": "木族圣地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-black-spirit-tree",
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-black-spirit-tree",
+    "label": "黑灵圣树",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-black-spirit-tree"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-wood-rest-grove",
+    "label": "青枝修养林",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-black-spirit-flower-1",
+    "label": "成熟黑灵花1",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-black-spirit-flower-2",
+    "label": "成熟黑灵花2",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-black-spirit-flower-3",
+    "label": "成熟黑灵花3",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-lingtian-fortress",
+    "label": "灵天要塞",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-seven-spirit-gates"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-cuiyan-city",
+    "label": "翠烟城",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-ling-king-and-sanctuary",
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-fuling-mountain",
+    "label": "伏灵山",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-ling-king-and-sanctuary"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-purple-hall",
+    "label": "紫气堂",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-ling-king-and-sanctuary"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-blackwater-lake",
+    "label": "黑水湖",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-seven-spirit-gates"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-spirit-crafts-square",
+    "label": "翠烟修器坊",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-spirit-fortress-2",
+    "label": "岚隘要塞",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-seven-spirit-gates",
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-spirit-fortress-3",
+    "label": "石扉要塞",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-seven-spirit-gates",
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-spirit-fortress-4",
+    "label": "雨屏要塞",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-seven-spirit-gates",
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-spirit-fortress-5",
+    "label": "回霞要塞",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-seven-spirit-gates",
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-spirit-fortress-6",
+    "label": "风壁要塞",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-seven-spirit-gates",
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-spirit-fortress-7",
+    "label": "青关要塞",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-seven-spirit-gates",
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-yaksha-crag-city",
+    "label": "玄崖城",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-heixiao-retreat",
+    "label": "黑崖禁居",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-yaksha-royal-court",
+    "label": "双崖议场",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shadow-town",
+    "label": "曲照集",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shadow-retreat",
+    "label": "紫影居所",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "fengyuan-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-wood-grand-elder",
+    "label": "木族大长老",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-wood-senior-identities",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-wood-grand-elder-supplies",
+    "label": "木族大长老的私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-mu-jun",
+    "label": "木君",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-wood-senior-identities",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-mu-jun-supplies",
+    "label": "木君的私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-mu-jiao",
+    "label": "木姣",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-wood-senior-identities",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-mu-jiao-supplies",
+    "label": "木姣的私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-mu-rui",
+    "label": "木瑞",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-wood-senior-identities",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-mu-rui-supplies",
+    "label": "木瑞的私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-ling-king",
+    "label": "灵王",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-ling-king-and-sanctuary",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-ling-king-supplies",
+    "label": "灵王的私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-ling-mie",
+    "label": "灵灭",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-ling-king-and-sanctuary",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-ling-mie-supplies",
+    "label": "灵灭的私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-tian-ying",
+    "label": "天樱",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-spirit-clans",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-tian-ying-supplies",
+    "label": "天樱的私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-huang-shigong",
+    "label": "黄石公",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-spirit-clans",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-huang-shigong-supplies",
+    "label": "黄石公的私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-tie-li",
+    "label": "铁利",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-spirit-clans",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-tie-li-supplies",
+    "label": "铁利的私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-chi-mie",
+    "label": "赤灭",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-spirit-clans",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-chi-mie-supplies",
+    "label": "赤灭的私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-shui-mei",
+    "label": "水魅",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-spirit-clans",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-shui-mei-supplies",
+    "label": "水魅的私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-xu-tian",
+    "label": "旭天",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-spirit-clans",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-xu-tian-supplies",
+    "label": "旭天的私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-heixiao-king",
+    "label": "黑枭王",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-heixiao-hidden-elder",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-heixiao-king-supplies",
+    "label": "黑枭王的私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-meng-xiang",
+    "label": "梦祥",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-dream-and-wheel-kings",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-meng-xiang-supplies",
+    "label": "梦祥的私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-wheel-yaksha-king",
+    "label": "转轮王",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-dream-and-wheel-kings",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-wheel-yaksha-king-supplies",
+    "label": "转轮王的私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-purple-shadow",
+    "label": "紫影",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-leiluo-not-purple-at-opening",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-purple-shadow-supplies",
+    "label": "紫影的私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-li-rong",
+    "label": "李蓉",
+    "kind": "person",
+    "openingState": "alive-wilderness-publicly-missing",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-heixiao-hidden-elder",
+      "fengyuan-lirong-missing-publicly",
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": [],
+    "reason": "三千年前蛮荒失踪公告先于开篇；当前蛮荒修行与信件为原创，未前置圣岛使者身份。"
+  },
+  {
+    "id": "fengyuan-wood-gardener",
+    "label": "青梢",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-wood-trader",
+    "label": "木岑",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-spirit-apprentice",
+    "label": "澄铃",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-yaksha-smith",
+    "label": "伏刃",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shadow-guide",
+    "label": "阙照",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shadow-sister",
+    "label": "阙微",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-wood-public-reserve",
+    "label": "木族圣地养护储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-seedling-bed",
+    "label": "青梢负责的幼枝圃",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-clean-soil",
+    "label": "圣地备用净土",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-basic-gardening-notes",
+    "label": "木姣的基础养植笔记",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-damaged-guide-marker",
+    "label": "曲照集遮光路标",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-guide-repair-stock",
+    "label": "阙微的修补材料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shadow-public-purse",
+    "label": "曲照集公共钱袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-spirit-workshop-stock",
+    "label": "翠烟修器坊材料架",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-yaksha-forge-stock",
+    "label": "伏刃的炉房储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-forge-receipt",
+    "label": "伏刃修刃交接纸",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-mengxiang-blade",
+    "label": "梦祥的修复兵刃",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-blackwater-xuanchu",
+    "label": "玄蜍兽",
+    "kind": "animal",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "fengyuan-seven-spirit-gates",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-lirong-hidden-cave",
+    "label": "蛮荒隐蔽石庵",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-lirong-missing-publicly"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-lirong-garden",
+    "label": "李蓉石庵药圃",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-lirong-repair-kit",
+    "label": "李蓉行囊与修补材料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-lirong-unsent-letter",
+    "label": "李蓉尚未送出的家书",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-yaksha-apprentice",
+    "label": "伏砧",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "fengyuan-current-life",
+      "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  }
+]

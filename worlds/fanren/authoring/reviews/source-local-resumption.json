@@ -1,0 +1,165 @@
+{
+  "formatVersion": 1,
+  "status": "local-editorial-resumption-complete-for-current-owned-unit",
+  "paidCallsSinceStop": 0,
+  "paidQueues": "stopped-no-resume",
+  "sourceEvidence": {
+    "extractionBatches": 398,
+    "extractedChapters": 2451,
+    "sourceAdjudicationBatches": 212,
+    "sourceAdjudicationPendingBatches": 186,
+    "invalidSourceAdjudications": 0,
+    "editorialReadingChapters": 683,
+    "editorialReadingInvalidEntries": 0
+  },
+  "ownedRegions": [
+    {
+      "moduleId": "human-dajin",
+      "moduleHash": "c6a02628fdffa250581328844bdc88269aee69ad5433e285cef74bcd8af356fe",
+      "claimsHash": "74281a14c56b5fba878e4485753cc6434b96b49bb23f186b715d7d0f1d3dcda9",
+      "reviewHash": "0017ad7995cab0ad586dfefe15b21e3bbe1911ae0eede27337d9aa150ac2274e",
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 34,
+        "claims": 14,
+        "entities": 61,
+        "agents": 14
+      },
+      "candidates": {
+        "status": "strict-dispositions-partial",
+        "moduleId": "human-dajin",
+        "candidates": 1252,
+        "counts": {
+          "adopted": 66,
+          "corrected": 45,
+          "history-only": 8,
+          "later-only": 16,
+          "bounded-uncertainty": 3,
+          "transferred": 0,
+          "pending": 1114
+        },
+        "completed": 138,
+        "unresolved": 1114,
+        "boundedUncertainty": 3,
+        "approvedForRuntime": false,
+        "reportHash": "20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14"
+      }
+    },
+    {
+      "moduleId": "human-north",
+      "moduleHash": "3413353ae48d9f532f921551f94c078e8a3cd1eb4d423d1b190f47e1edd06e29",
+      "claimsHash": "39f5bac95412249a4a6447f6eea2088bb9a6823acb3e9176afa5ec0a8fccc0e6",
+      "reviewHash": "8c319a48ae16fc5ec3ce518880bef5d66d2db6eca1d054b7f79a2982abcee819",
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 187,
+        "claims": 72,
+        "entities": 114,
+        "agents": 19
+      },
+      "candidates": {
+        "status": "strict-current-queue-dispositions-complete",
+        "moduleId": "human-north",
+        "candidates": 449,
+        "counts": {
+          "adopted": 89,
+          "corrected": 247,
+          "history-only": 6,
+          "later-only": 86,
+          "bounded-uncertainty": 21,
+          "transferred": 0,
+          "pending": 0
+        },
+        "completed": 449,
+        "unresolved": 0,
+        "boundedUncertainty": 21,
+        "approvedForRuntime": false,
+        "reportHash": "0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4"
+      }
+    },
+    {
+      "moduleId": "human-ten-thousand",
+      "moduleHash": "419fe854fb763ccab3da252e97ce469ab146d6111e849fc0044aa541f216a81a",
+      "claimsHash": "4307f356e2248e34c7c086400bdb7f37b0fbfc4dede39e328e8f4b16da8f267b",
+      "reviewHash": "308b01105d115e691be2cf3fb44f45c7fd730f142f856ea75957b368363ee0dd",
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 32,
+        "claims": 15,
+        "entities": 32,
+        "agents": 8
+      },
+      "candidates": {
+        "status": "strict-current-queue-dispositions-complete",
+        "moduleId": "human-ten-thousand",
+        "candidates": 95,
+        "counts": {
+          "adopted": 22,
+          "corrected": 43,
+          "history-only": 14,
+          "later-only": 14,
+          "bounded-uncertainty": 2,
+          "transferred": 0,
+          "pending": 0
+        },
+        "completed": 95,
+        "unresolved": 0,
+        "boundedUncertainty": 2,
+        "approvedForRuntime": false,
+        "reportHash": "4939906844390d0e6226cd4bb664ff23def270b5ba3dd9851de44fee5ba18940"
+      }
+    }
+  ],
+  "allRegionStateSync": {
+    "planned": 29,
+    "reviewedCurrentModules": 29,
+    "notBuilt": [],
+    "staleReviews": [],
+    "validationFailed": [],
+    "strictQueueClosures": [
+      "human-boundless",
+      "human-north",
+      "human-ten-thousand"
+    ]
+  },
+  "candidateWorkPlan": {
+    "file": "coverage/local-work-plan.json",
+    "candidateMemberships": 29257,
+    "uniqueCandidatesAcrossQueues": 24378
+  },
+  "localChecks": {
+    "sourceRunnerFocusedTests": "4 files, 19 tests passed",
+    "sourceRunnerEslint": "passed",
+    "typeScriptNoEmit": "passed",
+    "ownedRegionalSchemaSourceAndReferences": "passed",
+    "ownedStrictCandidateDispositions": "passed",
+    "fullSourceIndex": "passed"
+  },
+  "completedChanges": [
+    "已返回结果仍保留；每次首次派单和修复调用前均再次检查停止标记，停止后不再触发下一次付费调用。",
+    "北域最后51项逐条回查并绑定真实断言；当前449项全部处置，21项原文未确定边界显式保留。",
+    "大晋当前已采用地理、产权与人物断言对应候选完成处置；68项复用北域或万妖谷同一候选及报告指纹，不以同章或同名推定。",
+    "已移除大晋对昆吾四名人物的临时重复占位，引用所属模块唯一ID。",
+    "过期地区阶段按当前审签指纹、格式和出处实证同步；源码停止记录保留为历史快照。"
+  ],
+  "remainingRequiredDecisions": [
+    "大晋1114项未审候选；它们是来源断言和身份/时间问题，不等于新增1114名人物。",
+    "独立来源审校尚余186批；已产生审校中的不支持/含混与遗漏问题还需具体原文处置。",
+    "29个计划分区均有当前模块，不代表全部内容完成；全量候选归属和范围封闭见coverage/local-completion-gaps.json。",
+    "全域装配、实际运行、九种出身、规模与吸引力由根代理按实测另行验收，不由此报告批准。"
+  ],
+  "approvedForRuntime": false,
+  "exactRegionalReuse": {
+    "requested": 173,
+    "copiedToStrictFullQueueTables": 43,
+    "validatedExactSubsetProgressOnly": 129,
+    "notCopiedForRegionSpecificDecision": 1,
+    "evidence": "reviews/exact-candidate-reuse.json",
+    "paidCalls": 0
+  },
+  "postCognitionCleanup": "integration_review修复raw module审签后，全29个当前模块审签指纹、schema和采用出处锚点再次通过；只证当前文稿，非全域完成。",
+  "fullScopeGapEvidence": "coverage/local-completion-gaps.json"
+}

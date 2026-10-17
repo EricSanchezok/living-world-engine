@@ -1,0 +1,55 @@
+{
+  "id": "human-far-seas",
+  "entities": [
+    {
+      "id": "human-wulong-sea",
+      "kind": "location",
+      "name": "五龙海",
+      "description": "人界的一片海域；与乱星海及天沙大陆分别存在。",
+      "placement": "human-realm",
+      "facts": [],
+      "meters": [],
+      "quantities": [],
+      "ratings": [],
+      "shared_activity_resources": []
+    },
+    {
+      "id": "human-tiansha",
+      "kind": "location",
+      "name": "天沙大陆",
+      "description": "人界的一座巨岛，虽以大陆为名，四周仍为海水。",
+      "placement": "human-realm",
+      "facts": [],
+      "meters": [],
+      "quantities": [],
+      "ratings": [],
+      "shared_activity_resources": []
+    }
+  ],
+  "existingEntityFacts": [],
+  "placements": [],
+  "entityDescriptions": [],
+  "agentCognition": [],
+  "periodicProperties": [],
+  "quantityDefinitions": [],
+  "laws": [
+    {
+      "id": "far-seas-route-evidence",
+      "text": "五龙海、乱星海与天沙大陆是不同地理对象。知道地名不等于知道航线、传送阵坐标、阵具权限或空间节点入口；远行须具备实际路线、承载能力、资源与风险条件。后来的节点封印、值守和来客不会自动成为当前设施。",
+      "severity": "hard"
+    }
+  ],
+  "provenance": {
+    "entity:human-wulong-sea": [
+      "far-two-regions"
+    ],
+    "entity:human-tiansha": [
+      "far-two-regions",
+      "far-tiansha-island"
+    ],
+    "law:far-seas-route-evidence": [
+      "far-two-regions",
+      "far-future-node"
+    ]
+  }
+}

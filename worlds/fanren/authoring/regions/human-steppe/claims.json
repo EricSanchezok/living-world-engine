@@ -1,0 +1,521 @@
+[
+  {
+    "id": "steppe-present-life",
+    "statement": "新增职员、街坊、雇佣、当期委托、设施细部和具体资产为原创；不替代有明确身份的原著人物，不强制触发小说后续事件。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "steppe-values",
+    "statement": "法力数值、私人灵石、机构库存、所持普通器物、具体开篇位置、机构当前值班与日常动机属有限标定；不同所有者库存独立，数量不代表境界的全部财产。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "steppe-same-grassland",
+    "statement": "慕兰与天澜是同一大草原的族群称名；突兀原占南半部，慕兰与其长期分据竞争。统一全草原是后期战争结果，不是开篇状态。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-21723002",
+        "chapterSha256": "3727d3ada296277c8d64a14de5481e24493cf94559dfb14c2d0e3684e800be8c",
+        "start": 2026,
+        "end": 2138,
+        "anchorSha256": "c5877786bd6b3de5e2be77aed93b96a765a89a2d0905e2b2a4154a11bfe74391"
+      },
+      {
+        "chapterId": "qq-25006010",
+        "chapterSha256": "cec0b001df48c3e71c0df4716ecde3f261d21449ee28d1032a1d1501a1349532",
+        "start": 279,
+        "end": 360,
+        "anchorSha256": "2692e2ab5c3b369910fc5b0b8088472f6aaac77535bd6c580523a852fc5721a8"
+      }
+    ]
+  },
+  {
+    "id": "steppe-northern-border",
+    "statement": "九国盟和慕兰草原之间有近万里黄土野地，虞国不是最靠草原的国家。平时也有寻宝、斗法和夺财风险；元婴队伍大半日渡过的实例不能变成所有人的速度。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-23551923",
+        "chapterSha256": "54eeab89dde8920d74b878146ab3e8abc241c7e615b034307bb3ee410675a214",
+        "start": 1758,
+        "end": 1883,
+        "anchorSha256": "ba78fd4edefb418ee349eaba441f7e3f7917f6b80d4009c1a7dd49e982489378"
+      },
+      {
+        "chapterId": "qq-23551923",
+        "chapterSha256": "54eeab89dde8920d74b878146ab3e8abc241c7e615b034307bb3ee410675a214",
+        "start": 1884,
+        "end": 1948,
+        "anchorSha256": "73e22791dfc75942bafc9bae510a63640c9d3c3b89a8ef8befd974cfe6e54cc9"
+      },
+      {
+        "chapterId": "qq-23551923",
+        "chapterSha256": "54eeab89dde8920d74b878146ab3e8abc241c7e615b034307bb3ee410675a214",
+        "start": 2189,
+        "end": 2285,
+        "anchorSha256": "cd7341fb4401059f7753bfcb0c4da3071b8f998ff62345177648b59784b93730"
+      }
+    ]
+  },
+  {
+    "id": "steppe-resources-and-history",
+    "statement": "九国盟在长期资源冲突中成立。慕兰灵脉、灵石相对不足，部落共同体与修炼者互相依存；典籍所述人口、必战频率及族群敌视是记述和立场，不是每个人必然服从的客观定律。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-21723002",
+        "chapterSha256": "3727d3ada296277c8d64a14de5481e24493cf94559dfb14c2d0e3684e800be8c",
+        "start": 1492,
+        "end": 1569,
+        "anchorSha256": "32763ba68a4dd00b0c1b9c16d3de06b1fd63aeac87bd901839547a88f98c14df"
+      },
+      {
+        "chapterId": "qq-21723002",
+        "chapterSha256": "3727d3ada296277c8d64a14de5481e24493cf94559dfb14c2d0e3684e800be8c",
+        "start": 1738,
+        "end": 1813,
+        "anchorSha256": "dbfedd304afbe3a854874ca5592e59c575e4662f4b3064031edb7fc4d61297b9"
+      },
+      {
+        "chapterId": "qq-21723002",
+        "chapterSha256": "3727d3ada296277c8d64a14de5481e24493cf94559dfb14c2d0e3684e800be8c",
+        "start": 2349,
+        "end": 2371,
+        "anchorSha256": "4dd5d011b1a86946def474870e2f3cbda5b4ccbddddeacea94dd713df20a6d16"
+      }
+    ]
+  },
+  {
+    "id": "steppe-lingshu",
+    "statement": "法士与普通修士的基本境界和修炼相似；慕兰低阶较重五行术与地方秘术构成的灵术，不等于没有法器或人人胜同阶。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-21723002",
+        "chapterSha256": "3727d3ada296277c8d64a14de5481e24493cf94559dfb14c2d0e3684e800be8c",
+        "start": 1243,
+        "end": 1446,
+        "anchorSha256": "608426fec3a96c998e0a24acc1888f8592f65445d6a6f8e524b1406d3b57d0ac"
+      }
+    ]
+  },
+  {
+    "id": "steppe-old-tribal-assets",
+    "statement": "黄沙部历代传承三十六杆魔尘幡，有非灭族关头不得轻动的祖训；后期黄沙与天风争权、先锋指挥与须弥幼虫的具体归属不能全数前置。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-23564975",
+        "chapterSha256": "46fac23da542e17c7aead58015a1cff4f7d8e339e787f22887020bcf716f498d",
+        "start": 1963,
+        "end": 2142,
+        "anchorSha256": "6898d0bfb1997919416b8d985cde0f9a15fa70105cd52019d7e94bbddaa7f181"
+      },
+      {
+        "chapterId": "qq-23564975",
+        "chapterSha256": "46fac23da542e17c7aead58015a1cff4f7d8e339e787f22887020bcf716f498d",
+        "start": 2177,
+        "end": 2378,
+        "anchorSha256": "3d0b5377022c9291487fe81215051bc06385166627952a63e251e30553314330"
+      }
+    ]
+  },
+  {
+    "id": "steppe-zhong-duration",
+    "statement": "仲姓法士后期自述研究灵术法阵数百年，支持共同开篇已在世并从事相关修学的回溯；确切生年仍未给出。后期元婴后期和三大神师地位不能据此证明开篇已取得。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "这一情节发生在韩立约两百岁阶段；数百年的研究支持其早已修行；把他在世延续到十岁开篇属有据回溯，而非已确定出生年份。具体小境界与职务无直接断代证据，另作明确标定。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24086511",
+        "chapterSha256": "863600d408f962141fc67f1501d2cfe01d904c12ad72c86315730fa2244bbd65",
+        "start": 944,
+        "end": 1031,
+        "anchorSha256": "2a8310ecd1bf149fe9232114b06f389e577b0784e8be2a59b69233db2db3f7e2"
+      },
+      {
+        "chapterId": "qq-23953464",
+        "chapterSha256": "cd687aaaebeeaa11fb1957a3229e46fdffbfc75ccfe586b79c897c2b10d09047",
+        "start": 1475,
+        "end": 1555,
+        "anchorSha256": "99d328a0f856cda29f73504f9a6e44cbb11be284a68ca37c4c6b231029eaaa15"
+      }
+    ]
+  },
+  {
+    "id": "steppe-zhong-opening",
+    "statement": "仲姓法士开篇采用元婴初期、在北部教习石院研究阵法的可运行定位，不授后期三大神师职位。现有弟子、课题、私产与教习关系为原创；不赋予后期追杀韩立的记忆。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "steppe-lamp-stock",
+    "statement": "元明灯是慕兰传承之宝，灯油在后期已积存千余年；圣禽受点灯时长限制。传承灯及积存来源回溯开篇，数量、保管人和当前祭所明确标定。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-23953464",
+        "chapterSha256": "cd687aaaebeeaa11fb1957a3229e46fdffbfc75ccfe586b79c897c2b10d09047",
+        "start": 476,
+        "end": 682,
+        "anchorSha256": "e5337857b8f5720539273ced1ef56cd85db477738a2cc5a2bbac771f98b44530"
+      },
+      {
+        "chapterId": "qq-24086511",
+        "chapterSha256": "863600d408f962141fc67f1501d2cfe01d904c12ad72c86315730fa2244bbd65",
+        "start": 686,
+        "end": 776,
+        "anchorSha256": "319b489a5d1c29e9214219653d6a990dec7b949a65b82bc0a20b8e335b24cf51"
+      },
+      {
+        "chapterId": "qq-24086511",
+        "chapterSha256": "863600d408f962141fc67f1501d2cfe01d904c12ad72c86315730fa2244bbd65",
+        "start": 777,
+        "end": 855,
+        "anchorSha256": "c6e382dc8791f0e240e6037a1e12f650e04d6c46ed456cd333b9f723bdff1e3b"
+      }
+    ]
+  },
+  {
+    "id": "steppe-holy-bird",
+    "statement": "慕兰供奉圣禽数万年，正文召唤实例是一灯显九道灯影，经婴火、法诀、精血及供物引出孔雀形圣禽并引动天地火灵气；不是九盏复制本体。大衍解释为借宝物投影部分力量。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24179790",
+        "chapterSha256": "fc2722c6219a548d3acd12283ece2ea7ad8a5586f6e35318a01608397f9d24c3",
+        "start": 0,
+        "end": 151,
+        "anchorSha256": "91a764613fc94d57af4f82863b403afaf9de456b7c450572a9e34f1d557f73fd"
+      },
+      {
+        "chapterId": "qq-24179790",
+        "chapterSha256": "fc2722c6219a548d3acd12283ece2ea7ad8a5586f6e35318a01608397f9d24c3",
+        "start": 2542,
+        "end": 2689,
+        "anchorSha256": "f6ff7dad7b75d44d3fe3e26a6b515bb5ea9347bd358db0d3dd7142ddc71f3f3e"
+      },
+      {
+        "chapterId": "qq-25123806",
+        "chapterSha256": "514297fe7e68f2baa08e721f963708e974bbb4a6a5d24ff3c808fc747677b261",
+        "start": 744,
+        "end": 1054,
+        "anchorSha256": "236403e42891f0e19713dacf34c559c31c8514789c46ebf1da4bf8e96edd1a95"
+      }
+    ]
+  },
+  {
+    "id": "steppe-tianlan-schools",
+    "statement": "天澜圣殿由奉祀场所发展为低阶仙师培养机构；部落先检测灵根，二十年开灵日入殿受教，未经仪式私传仙术为圣殿禁令。资质不同影响收徒与回部落供奉，不是开灵凭空生成灵根。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-25006010",
+        "chapterSha256": "cec0b001df48c3e71c0df4716ecde3f261d21449ee28d1032a1d1501a1349532",
+        "start": 1006,
+        "end": 1090,
+        "anchorSha256": "1913d9334eae2acc4879834d1b3e6dffaad56f4f5391b5ec0fdae73d910543c1"
+      },
+      {
+        "chapterId": "qq-25006010",
+        "chapterSha256": "cec0b001df48c3e71c0df4716ecde3f261d21449ee28d1032a1d1501a1349532",
+        "start": 1156,
+        "end": 1265,
+        "anchorSha256": "44048df49d0b3ad816532b66024d7c511f09a46f5aab6bcafd97c5a12a6f3656"
+      }
+    ]
+  },
+  {
+    "id": "steppe-tribal-livelihood",
+    "statement": "部落需要粮食、畜力、车具和护送；凡俗劳动与仙师供奉相关，穷小部落可能重金雇护而无本族仙师。苍鹭部是后期战争后才独立的新部落，英鹭当时五十余岁、英珊十五六岁，不生成开篇成年人或苍鹭部。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-25006010",
+        "chapterSha256": "cec0b001df48c3e71c0df4716ecde3f261d21449ee28d1032a1d1501a1349532",
+        "start": 540,
+        "end": 644,
+        "anchorSha256": "c35fd16bbac91a3b3216001bdd01434d35601b63467b776982562a77b5840b04"
+      },
+      {
+        "chapterId": "qq-25006010",
+        "chapterSha256": "cec0b001df48c3e71c0df4716ecde3f261d21449ee28d1032a1d1501a1349532",
+        "start": 696,
+        "end": 833,
+        "anchorSha256": "35363ffaa0c12edca99c6b5acb7cb9e6547abbfd62de798ede320e220229ba83"
+      },
+      {
+        "chapterId": "qq-25006010",
+        "chapterSha256": "cec0b001df48c3e71c0df4716ecde3f261d21449ee28d1032a1d1501a1349532",
+        "start": 2012,
+        "end": 2130,
+        "anchorSha256": "99584dd23a19ed908614c5f9f41cd6e2620206a526ea00148e6b2be7e223de9e"
+      },
+      {
+        "chapterId": "qq-25006010",
+        "chapterSha256": "cec0b001df48c3e71c0df4716ecde3f261d21449ee28d1032a1d1501a1349532",
+        "start": 2339,
+        "end": 2449,
+        "anchorSha256": "766113a486243ac3b72cc1b987534e4b0d1dd21ede693d96f461e3b517c9869d"
+      }
+    ]
+  },
+  {
+    "id": "steppe-river-link",
+    "statement": "天水河横穿草原南部，有宽数百丈的支流，一端同大晋舜江连通且有上下游关系。原句不足单独判断哪一河全段在上游；本包不另捏流向。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-25087342",
+        "chapterSha256": "07fb12d481809ee856d67509dba8067584d97ede3faf1580de14d29faa359596",
+        "start": 2975,
+        "end": 3057,
+        "anchorSha256": "06521009b08094856beb4f9b4180b2bbb9dbebe1fd1513bff1139952b8ae6564"
+      },
+      {
+        "chapterId": "qq-25087342",
+        "chapterSha256": "07fb12d481809ee856d67509dba8067584d97ede3faf1580de14d29faa359596",
+        "start": 3166,
+        "end": 3227,
+        "anchorSha256": "d6563b99a6e8c5ebb50bb867462a852c8023707baba626546e5617b9a4646514"
+      }
+    ]
+  },
+  {
+    "id": "steppe-beast-descent",
+    "statement": "天澜圣兽后期降临是分神以媒介重铸灵身的仪式，不等于圣兽本尊落地；一例使用两头七级顶阶异种、百余中品灵石及多人法力，成败与停留仍需验证。该例不自动成为开篇既有分身或已备好祭品。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-25109203",
+        "chapterSha256": "70e77f1c40fe84bc47e5fbb501f86e65d1f5987cdfd3403e75955b0c3dda4652",
+        "start": 1565,
+        "end": 1619,
+        "anchorSha256": "c183b66600330e8bf54d7a3f55d84b43a3b575aaab167dce80940daa9f5398fd"
+      },
+      {
+        "chapterId": "qq-25109203",
+        "chapterSha256": "70e77f1c40fe84bc47e5fbb501f86e65d1f5987cdfd3403e75955b0c3dda4652",
+        "start": 2559,
+        "end": 2639,
+        "anchorSha256": "4d6130f649d08971534fd1ad89218046ff954a575d2d22662479e1a02d10ca64"
+      },
+      {
+        "chapterId": "qq-25117864",
+        "chapterSha256": "8235239c90713967fa1b0a08ea78ec9f42c4af2d15867d8c1ab3c1392bbfab1c",
+        "start": 1277,
+        "end": 1316,
+        "anchorSha256": "c2435a8b7b311787ce2cdf1458ec3dbc1f1da372668852957b058e8b5959837d"
+      },
+      {
+        "chapterId": "qq-25117864",
+        "chapterSha256": "8235239c90713967fa1b0a08ea78ec9f42c4af2d15867d8c1ab3c1392bbfab1c",
+        "start": 1545,
+        "end": 1708,
+        "anchorSha256": "17a0e7d6b9df4e887c5d91b546f410e0838f3e30c10e0abb5416121f24e71a1c"
+      },
+      {
+        "chapterId": "qq-25123806",
+        "chapterSha256": "514297fe7e68f2baa08e721f963708e974bbb4a6a5d24ff3c808fc747677b261",
+        "start": 744,
+        "end": 1054,
+        "anchorSha256": "236403e42891f0e19713dacf34c559c31c8514789c46ebf1da4bf8e96edd1a95"
+      }
+    ]
+  },
+  {
+    "id": "steppe-later-offices",
+    "statement": "林银屏、徐姓仙师、祝/毕/田锺、乐姓女子及其他后期法士的开篇境界和职务不因后期出场就成立。徐氏不到四百岁入中期、后数十年才入后期不足推出十岁韩立当夜的具体修为；本轮只为仲氏作有据存活回溯。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-25455920",
+        "chapterSha256": "83a2663788a9414f89e60a8e946521bc8bbb7c3923243d5503a62b5971486e89",
+        "start": 1389,
+        "end": 1459,
+        "anchorSha256": "24b521ff20a1a82d8edea647cc8d7babb390a86daede6c8caa496279bd59539d"
+      },
+      {
+        "chapterId": "qq-25455920",
+        "chapterSha256": "83a2663788a9414f89e60a8e946521bc8bbb7c3923243d5503a62b5971486e89",
+        "start": 1460,
+        "end": 1533,
+        "anchorSha256": "1a5e69db4cf0bab584feb8cc9327431423f30f8d2559f4a7c84837184b180d2a"
+      },
+      {
+        "chapterId": "qq-24086511",
+        "chapterSha256": "863600d408f962141fc67f1501d2cfe01d904c12ad72c86315730fa2244bbd65",
+        "start": 1679,
+        "end": 1803,
+        "anchorSha256": "25fb3d0558b7ce497504b3ab1ee5ca1bd9fa992742b18136d1f1381f8513d020"
+      }
+    ]
+  },
+  {
+    "id": "steppe-language-and-work",
+    "statement": "慕兰语言与天南有所不同；凡人能够驾驶车辆、采矿并为法士提供物资。韩立学语言快依赖自身神识，不能给陌生玩家自动通晓。战时凡人采矿的历史观察不等于开篇已组织战时抢矿。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-23678977",
+        "chapterSha256": "432f2481a23a06750c322a886dc5e404e116dc7d40c2cefec2d6a24c853e9fec",
+        "start": 1146,
+        "end": 1245,
+        "anchorSha256": "71d509517050bd5a85debd3ffe3c7bb2efbbce01bfbf7c704eae65844d882397"
+      },
+      {
+        "chapterId": "qq-23678977",
+        "chapterSha256": "432f2481a23a06750c322a886dc5e404e116dc7d40c2cefec2d6a24c853e9fec",
+        "start": 689,
+        "end": 777,
+        "anchorSha256": "d63f82debf16c911f80f280297b1d1140543367087c3a4260b5147313f6574cb"
+      }
+    ]
+  },
+  {
+    "id": "steppe-opening-concrete-life",
+    "statement": "柳汀部、石湾部、轮值分殿、部落人物及具体供奉与教学纠纷是原创开篇生活。两边均有明确资源责任、可商量条件和真实工具；地缘敌意不强迫每次遭遇变战斗，普通人也不自动知道圣兽秘仪。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "steppe-ritual-limits",
+    "statement": "元明灯库存设60份旧灵油，每点燃一份支持最多600秒投影维持；这是可核算能力上限标定，非原文换算。召请需掌法者、灯油与现场足够法力，投影不保证应答；当前掌灯人只掌握保养、青焰护身，完整召请密式封存待实证研究，不给旁观者万能召兽术。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "steppe-training-window",
+    "statement": "本分殿二十年开灵周期在开篇已过18年，下一次窗口在两个人界年后，窗口30日为本地行政标定。周期只改变报名时机；授法、收徒、缴贡与实际修为变化均须人物行动。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定共同开篇；人物只从自己的亲历、习得及实际交接获知。",
+    "openingReason": "原创或数值标定填充未详写的共同开篇，不冒充原著逐字事实。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "steppe-cangkun-placement",
+    "statement": "苍坤旧藏府位于慕兰草原边缘向西的小石山；复用既有唯一藏府，仅将其父级由人界改为草原，不公开确切坐标或改动禁制。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于所列正文获知；人物仅保有开篇前亲历与已发生传播的知识。",
+    "openingReason": "长期地理、历史或延续制度可回溯；当前具体实施与未明日期另外标定，后期剧情不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-23610628",
+        "chapterSha256": "a166c6a2f2a434f7b297508f1a3904b788ad4a52b3d78fbf4971deed127a92f8",
+        "start": 2148,
+        "end": 2222,
+        "anchorSha256": "d946b830853cc547f065fa6983c69bd272a95b10350a31fe5c2da05af7db844c"
+      },
+      {
+        "chapterId": "qq-23610628",
+        "chapterSha256": "a166c6a2f2a434f7b297508f1a3904b788ad4a52b3d78fbf4971deed127a92f8",
+        "start": 2223,
+        "end": 2279,
+        "anchorSha256": "30bf825dd91a52a451de7cba94fbe9f9aea29408d1f01c1d3f81df878c1d403d"
+      }
+    ]
+  }
+]

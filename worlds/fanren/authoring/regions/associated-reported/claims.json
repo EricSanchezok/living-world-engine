@@ -1,0 +1,472 @@
+[
+  {
+    "id": "reported-opening-calibration",
+    "statement": "残骸内具体药材数量、药用份额、当前薄弱点位置和物件状态为开篇标定；没有居民、既定来客、现成丹药或韩立物品。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者定义开篇当前库存；进入者仅从真实观察和既有知识发现，不自动获知物种、配方或出口。",
+    "openingReason": "原著给出后期观察，开篇保留古地形与物种机制，当前精确库存另行明确标定。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "reported-yin-si-rumor",
+    "statement": "阴司界是否存在，先后对话都未证实；不能因阴冥之气或罗睺腹内空间的传闻，把阴司界生成为可探索地图。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "两段对话只支持相关说法流传；读者的后期推测不能成为开篇人物已经知道的客观地理。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-22885680",
+        "chapterSha256": "91cf8ce7e889f150f523b6a4f90d3165d62de361fa822beeb258caa1b52e21ef",
+        "start": 291,
+        "end": 481,
+        "anchorSha256": "ffe61d080e983160bd16d0b1d964285c90cd8174c2408daa60aaec1c599a0ce2"
+      },
+      {
+        "chapterId": "qq-22885680",
+        "chapterSha256": "91cf8ce7e889f150f523b6a4f90d3165d62de361fa822beeb258caa1b52e21ef",
+        "start": 371,
+        "end": 563,
+        "anchorSha256": "19d71bd11de9a5d8b6ddbd1e8f99b26ab17f7f8905cca62480eb430052fd92fd"
+      },
+      {
+        "chapterId": "qq-29916466",
+        "chapterSha256": "8009aa4576e26eeaf0d3235dc35661686b28044cd99a2e047823726a1e44be95",
+        "start": 184,
+        "end": 375,
+        "anchorSha256": "6e24ba52523c2a89381a5ee0d652bce4fbafddd7d868b408cf515aaf22293651"
+      }
+    ]
+  },
+  {
+    "id": "reported-lingmiao-promises",
+    "statement": "鬼灵门主对灵缈园、坠魔谷建造目的、宗门崛起和突破化神的说法来自画轴残魂的引导并有利益动机；后来的灰色间隙并非遍地灵药的药园。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "仅记录来源可信度，开篇未发生的邀请、取画轴、入谷和交易都不预置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24594511",
+        "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+        "start": 1220,
+        "end": 1423,
+        "anchorSha256": "6982ee4faec4b76df793d836a49b5cf6b527175c9c6e5fd092dce09027981eba"
+      },
+      {
+        "chapterId": "qq-24622521",
+        "chapterSha256": "c6ac70b7d5549ec98d83da390f694a6794e172684f6d1510a95bc419325301de",
+        "start": 1658,
+        "end": 1857,
+        "anchorSha256": "9e9987b6525d992f4c4e63006d839ab4427504235d59345bd621f5ce3f277a1c"
+      },
+      {
+        "chapterId": "qq-24689251",
+        "chapterSha256": "1beafb2dd9fdbaa107060cf206c7acc0cb89ac64907476efb9a34f9667875eee",
+        "start": 700,
+        "end": 887,
+        "anchorSha256": "f42097dbf83dc3bc6a65e111d1db05e26dadccc30c6cd28b2f2ac348d43f59df"
+      }
+    ]
+  },
+  {
+    "id": "reported-grey-gap-distinction",
+    "statement": "祭坛开启的灰色间隙有黑石、灰雾、浓魔气及晶块所封古魔躯体；儒生称它也许是废弃灵缈园，甚至称灵药全部采毁，均不能盖过后来另一块药园的实见。两地点保持不同身份。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "古封印和空间先于开篇；后来参与者、战斗和毁印不回填。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24689251",
+        "chapterSha256": "1beafb2dd9fdbaa107060cf206c7acc0cb89ac64907476efb9a34f9667875eee",
+        "start": 824,
+        "end": 1009,
+        "anchorSha256": "a35e01e71175e64984b8fbb827b9f83694522aff4573661978c0037d4d40bc07"
+      },
+      {
+        "chapterId": "qq-24689251",
+        "chapterSha256": "1beafb2dd9fdbaa107060cf206c7acc0cb89ac64907476efb9a34f9667875eee",
+        "start": 2179,
+        "end": 2367,
+        "anchorSha256": "ae11e0a8cc8a612575b9913d35fd7c5c0d71a6b1eca35ccd6a1b02d7455b0370"
+      },
+      {
+        "chapterId": "qq-24689251",
+        "chapterSha256": "1beafb2dd9fdbaa107060cf206c7acc0cb89ac64907476efb9a34f9667875eee",
+        "start": 2782,
+        "end": 2973,
+        "anchorSha256": "a37109e0b93d2bf873d8014afe54904734ee34496ec7f3013b297cd874752ca0"
+      },
+      {
+        "chapterId": "qq-24830939",
+        "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+        "start": 349,
+        "end": 538,
+        "anchorSha256": "7e05189fc8153427e99a03a3b5b1ac4516b0056302764d7630cffa84dffe59ae"
+      }
+    ]
+  },
+  {
+    "id": "reported-garden-remnant",
+    "statement": "实见药园残骸只有数十丈大小，灵气浓密，有完整石亭、半截走廊与灵草；四壁和高空灰蒙。大衍对上古大神通修士借宝物开辟药园、后来分裂的解释单列为知识与推断。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "废墟和古老药草可回溯；不提前韩立发现、采药或居住经历。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24830939",
+        "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+        "start": 217,
+        "end": 406,
+        "anchorSha256": "5cc7b458e3fd77bd35efd43a24f127955859f2261631a84f1302dff12ce0d976"
+      },
+      {
+        "chapterId": "qq-24830939",
+        "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+        "start": 306,
+        "end": 499,
+        "anchorSha256": "8a1b9b4d8a943622f093a4d8bfcc034f653a26475b51373ca55e0a573e34b8b5"
+      },
+      {
+        "chapterId": "qq-24830939",
+        "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+        "start": 2113,
+        "end": 2307,
+        "anchorSha256": "e44a0a9ccdf5833e2e51d44bde1d19d543e42847504a3ed987326d290d7fca86"
+      },
+      {
+        "chapterId": "qq-24830939",
+        "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+        "start": 2258,
+        "end": 2444,
+        "anchorSha256": "352c3e0640f238e56fbcccd1bf6e1b085fe356b9c926b394b294ccd0345c0ef3"
+      },
+      {
+        "chapterId": "qq-24832527",
+        "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+        "start": 2807,
+        "end": 2989,
+        "anchorSha256": "b33a8e41e773dda1f616c71128a7fce8008fd0ccec141dc7d74b9f33f66a32ab"
+      }
+    ]
+  },
+  {
+    "id": "reported-silver-restriction",
+    "statement": "药园银色禁制后期实见消灭释放魔气的古魔、消融周围魔气，而韩立和其灵力光球通过未受伤。大衍据威能猜测灵界修士布置；不把猜测作者当成已确证身份，也不承诺任何人族行为都绝对安全。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "禁制是残骸既有设施；当前维持同类触发条件，具体应对须看目标能力与实际行为。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24830939",
+        "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+        "start": 1527,
+        "end": 1722,
+        "anchorSha256": "cd1aa93105e4daec477f60ba103d680bec0662d57c25c951a6368303c8868ecd"
+      },
+      {
+        "chapterId": "qq-24830939",
+        "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+        "start": 1971,
+        "end": 2165,
+        "anchorSha256": "bc699aa705e6b9604d789010347f34c958f849aebef77a2ca8477866e0fbce69"
+      },
+      {
+        "chapterId": "qq-24843672",
+        "chapterSha256": "cacd7106459f837cecba57f5aad7b0737eea4fc50b49d11aa880aa558a5b2078",
+        "start": 118,
+        "end": 313,
+        "anchorSha256": "71d44852ad3093739913117c15723f9dd2575f089dd00bbc5aea5a538ff30527"
+      },
+      {
+        "chapterId": "qq-24843672",
+        "chapterSha256": "cacd7106459f837cecba57f5aad7b0737eea4fc50b49d11aa880aa558a5b2078",
+        "start": 235,
+        "end": 424,
+        "anchorSha256": "19cedacf822ff096083b6bb34d88288aaa87c9dc04d1cd3d6101cd65ec3abae9"
+      }
+    ]
+  },
+  {
+    "id": "reported-old-herbs",
+    "statement": "药园实见菀梦果、龙纹草、风灵花等古药；菀梦果深紫色表示万年以上药性。三种未具名药材无法移植：移入容器自燃、离原地枯萎失药性、触动根土化液。其中一味赤红主药影响绛云丹炼制。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "物种与移植限制可回溯，开篇株数和可采药用份额明确标定。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24832527",
+        "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+        "start": 0,
+        "end": 130,
+        "anchorSha256": "16994ef2f291602c9c3111267bb94e7dfd8ae1ef2bdebf6c3a3f42e526a7401b"
+      },
+      {
+        "chapterId": "qq-24832527",
+        "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+        "start": 90,
+        "end": 273,
+        "anchorSha256": "a8e68340d4cb527d8d3908df6ce5afcc8d4064749cc6f11b9a7ccbf1837b5d85"
+      },
+      {
+        "chapterId": "qq-24832527",
+        "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+        "start": 1851,
+        "end": 2042,
+        "anchorSha256": "1780201b7d393ecaacb29b8cafaa2ae46773ed5a8e2b3f12f18aef381fa391e8"
+      },
+      {
+        "chapterId": "qq-24832527",
+        "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+        "start": 1881,
+        "end": 2065,
+        "anchorSha256": "f7ba6fdabeca498b136a7340e6d3e9da4891db13baa206aa0c5e74fe696fa582"
+      },
+      {
+        "chapterId": "qq-24832527",
+        "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+        "start": 1970,
+        "end": 2156,
+        "anchorSha256": "1a06df4fae80c9f18e62a41853f6a438eaa9302df03d5b636d3f6bf830e239bf"
+      },
+      {
+        "chapterId": "qq-24832527",
+        "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+        "start": 2084,
+        "end": 2277,
+        "anchorSha256": "8b8d5614bb3fcb6b58a785623384c02625312bd19244fcbe255b0a2267ab68dc"
+      }
+    ]
+  },
+  {
+    "id": "reported-recipe-limits",
+    "statement": "绛云丹最佳元婴中期，初期服用浪费药性且有经脉痛苦；药园材料并不能独自配齐所有丹药。雪魄丸在同章又称冰魄丸，连续语境指同一拟炼冰寒辅助丹药，保留源内称名差异，不虚构两套成品库存。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "功效与配伍限制来自丹方说明；宋姓女子后来赠玉简和韩立外界材料都未生成在园中。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24832527",
+        "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+        "start": 749,
+        "end": 936,
+        "anchorSha256": "4bc87d54cab49eacdb1a87058050b2edd79fdf9b28239f95d9835a7ed3bad6a3"
+      },
+      {
+        "chapterId": "qq-24832527",
+        "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+        "start": 629,
+        "end": 833,
+        "anchorSha256": "d3a90d873e3931926118a0219e6c47f114e6b3d921cf3c0b999bf1279697891b"
+      },
+      {
+        "chapterId": "qq-24832527",
+        "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+        "start": 831,
+        "end": 1014,
+        "anchorSha256": "9ad5239f9d9575a37131ba769ee9fb92a36ef07e922c71accd64a5110406e3ae"
+      },
+      {
+        "chapterId": "qq-24832527",
+        "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+        "start": 1341,
+        "end": 1535,
+        "anchorSha256": "6cc59e8eb731e746c97f3a6df0958f24fcb8da8362da51241ae95b914b21c593"
+      }
+    ]
+  },
+  {
+    "id": "reported-closed-light",
+    "statement": "残骸无日月星辰与昼夜之分，韩立瓶身在此不能按通常方式产生催熟液。此处无法移植的灵药不因等待、瓶名或角色愿望自动增生。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "空间环境为既有条件；不因此把人界瓶身提前放入残骸。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24832527",
+        "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+        "start": 2348,
+        "end": 2545,
+        "anchorSha256": "3c61ad213af08a48cb9ee5aff35be008f2dfcbf09bc87948b06963d4e42e0414"
+      },
+      {
+        "chapterId": "qq-24832527",
+        "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+        "start": 2432,
+        "end": 2626,
+        "anchorSha256": "52e62fea5e9039eaf6e0734762ba4165ba7c08b45353f4ac322cd9f1eda49a6c"
+      }
+    ]
+  },
+  {
+    "id": "reported-no-longevity-herb",
+    "statement": "韩立离开残园后检查所得许多灵药，没有能延长寿命者；本版当前药丛不暗中赋予延寿属性。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "药种性质回溯，后期所有权与采摘数量不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24900714",
+        "chapterSha256": "3974ec9b2bae3925b9aad0c4b5e78e1ca439f03ada9182347536a7f3d950e4c1",
+        "start": 0,
+        "end": 138,
+        "anchorSha256": "57a802ecfd9b8e3f55ba9a5e608f4bed86a12274bf5f7c26ca69cc61e88370d5"
+      }
+    ]
+  },
+  {
+    "id": "reported-moving-weakness",
+    "statement": "空间最薄弱点可能在内部任何一点并游走，不一定在四壁；后期在石亭上方发现米粒大淡蓝点。突破需准确定位、足够实际力量与相容配合，不是所有攻击机械相加；不能把后来27年修炼写成任何玩家固定出关时间。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "空间机制与既有不稳定回溯，当前薄弱点位置及强度变化另标定，未来进入和逃出由真实行动决定。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24843672",
+        "chapterSha256": "cacd7106459f837cecba57f5aad7b0737eea4fc50b49d11aa880aa558a5b2078",
+        "start": 1669,
+        "end": 1858,
+        "anchorSha256": "0894841d873cd2cfba83bf3829d013e811f9f3f2c57945203876b8e2aaa2d4b0"
+      },
+      {
+        "chapterId": "qq-24843672",
+        "chapterSha256": "cacd7106459f837cecba57f5aad7b0737eea4fc50b49d11aa880aa558a5b2078",
+        "start": 2063,
+        "end": 2247,
+        "anchorSha256": "2fb2f65e94bb3da0382590b300d0d52977245f4eb3be977c95ab78beba579368"
+      },
+      {
+        "chapterId": "qq-24843672",
+        "chapterSha256": "cacd7106459f837cecba57f5aad7b0737eea4fc50b49d11aa880aa558a5b2078",
+        "start": 2211,
+        "end": 2400,
+        "anchorSha256": "61d78af220b418736ef0ac2701299c44dee751311b04ac7294392000898f9cd6"
+      },
+      {
+        "chapterId": "qq-26266606",
+        "chapterSha256": "b2f1e7bd76a10f5bd04867d30b2f1ec49022921573696f4bb15a96f94061a3a7",
+        "start": 2617,
+        "end": 2816,
+        "anchorSha256": "d244371a23a0c8eef84a59bc9ccc88e6cd2b3be71ec63d5144d5597b39631ac2"
+      },
+      {
+        "chapterId": "qq-24844643",
+        "chapterSha256": "adda76e79384dffbe24d98c7da6be744b7a9012946d664aff3ca5c4931a84d0d",
+        "start": 3045,
+        "end": 3132,
+        "anchorSha256": "d29737711a0661bf29331e23b66235d291baf0a89a4cb94350883fc240a67641"
+      }
+    ]
+  },
+  {
+    "id": "reported-space-access",
+    "statement": "卷轴所称入口需要破界珠、持续注入法力和稳定通道；无形小鬼实见进入即毁，画轴寄体是特定保护。原魔军旧通道已碎为元刹分魂证言，不得让过去一次进入自动建立永久门户。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "通道与保护能力有条件，开篇的祭坛未被后期队伍启动。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-24686768",
+        "chapterSha256": "2eda4dbbc1de3beabc66194aa8304fe50b2cc0f9751eb86d3496380311bb18e8",
+        "start": 2450,
+        "end": 2638,
+        "anchorSha256": "f891dd1439beb782d0f8a4d6f976c73fd449527ad840a000eea2a4984d2b0b8b"
+      },
+      {
+        "chapterId": "qq-24689251",
+        "chapterSha256": "1beafb2dd9fdbaa107060cf206c7acc0cb89ac64907476efb9a34f9667875eee",
+        "start": 0,
+        "end": 134,
+        "anchorSha256": "073964348d6dc43dead6b0d571949276d83d9a3b5f1cef54a4a44639d3dd3baf"
+      },
+      {
+        "chapterId": "qq-24689251",
+        "chapterSha256": "1beafb2dd9fdbaa107060cf206c7acc0cb89ac64907476efb9a34f9667875eee",
+        "start": 114,
+        "end": 300,
+        "anchorSha256": "1c227061ae34e9a28b6b32392d18200ad2687d3bd5f536a6ff2e3e5ba1af027e"
+      },
+      {
+        "chapterId": "qq-26062445",
+        "chapterSha256": "78c2eaab1c65b908309427367499b7b7e7ae1aa6273c139623667ee5d548ba06",
+        "start": 422,
+        "end": 616,
+        "anchorSha256": "1d20f913e7511014e26738cf8c3b2494c87d96263abfe2e205af279afff573f7"
+      }
+    ]
+  },
+  {
+    "id": "reported-space-manufacture",
+    "statement": "天机阁长老介绍固定裂缝可用大量材料稳固成芥子空间，进出需传送阵；灵脉罕见、适合储物试法而非自动修炼圣地。其人数、数量与“人界绝不可能随身携带”都是当时人物知识，不能泛化成永远无例外的世界法则。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
+    "openingReason": "早已出现的技术和限制可研究，后期天机府买卖不前置；各地制度和技术掌握者由所属地区维护。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-25443818",
+        "chapterSha256": "568d2e359804aafc948072a54884782b33d642292771887178232305c5432a75",
+        "start": 170,
+        "end": 354,
+        "anchorSha256": "3fa5fe6f17192baf370a9a23c315dfdaae2197ed6cb6328d70425e26eb59c554"
+      },
+      {
+        "chapterId": "qq-25443818",
+        "chapterSha256": "568d2e359804aafc948072a54884782b33d642292771887178232305c5432a75",
+        "start": 2060,
+        "end": 2251,
+        "anchorSha256": "5b1279d814be5c32fdbe4917457f10adb58f07362edb686cc44f991bcd230919"
+      },
+      {
+        "chapterId": "qq-25443818",
+        "chapterSha256": "568d2e359804aafc948072a54884782b33d642292771887178232305c5432a75",
+        "start": 1954,
+        "end": 2145,
+        "anchorSha256": "e429689a9994d47f04a5bff5197cc5539f00f738413de5e525f71d5ad4c94119"
+      },
+      {
+        "chapterId": "qq-25443818",
+        "chapterSha256": "568d2e359804aafc948072a54884782b33d642292771887178232305c5432a75",
+        "start": 2270,
+        "end": 2463,
+        "anchorSha256": "df7b2d8fbb5516f0c24085abdd39fb896d96a885bd27290b8deece8c98501750"
+      }
+    ]
+  }
+]

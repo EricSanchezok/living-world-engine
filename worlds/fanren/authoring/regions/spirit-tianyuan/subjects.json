@@ -1,0 +1,1025 @@
+[
+  {
+    "id": "future-tianyuan-yinguang",
+    "label": "银光仙子",
+    "kind": "person",
+    "openingState": "t0-life-unplaced",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "tianyuan-council-roster"
+    ],
+    "aliases": [],
+    "reason": "后期储备长老、敖啸门下千年；T0具体入门与修为不定，不按后期状态复制。"
+  },
+  {
+    "id": "future-tianyuan-bao-yan",
+    "label": "鲍／焉道友",
+    "kind": "person",
+    "openingState": "identity-unresolved",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "tianyuan-named-elders"
+    ],
+    "aliases": [],
+    "reason": "同段黑袍金面称名差异，不能自动产生两人或强合为一人。"
+  },
+  {
+    "id": "future-tianyuan-zhao-wugui",
+    "label": "赵无归",
+    "kind": "person",
+    "openingState": "later-role-not-imported",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "tianyuan-named-elders"
+    ],
+    "aliases": [],
+    "reason": "雷罗弟子后期关系不等于T0已经成立。"
+  },
+  {
+    "id": "future-tianyuan-mowar",
+    "label": "魔劫备战",
+    "kind": "event",
+    "openingState": "future-conditional",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "tianyuan-holy-island"
+    ],
+    "aliases": [],
+    "reason": "大规模入侵、圣岛位置外泄与木棉城援助受未来条件决定，不是开篇预置结局。"
+  },
+  {
+    "id": "future-tianyuan-qiankun-monitor",
+    "label": "乾坤盘",
+    "kind": "device-type",
+    "openingState": "source-capability-index",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "tianyuan-bounded-transport"
+    ],
+    "aliases": [],
+    "reason": "监测空间波动装置有范围与实际观察；本区只部署有限配对巡检工具，不生成无界全知地图。"
+  },
+  {
+    "id": "tianyuan-council-hall",
+    "label": "天渊城议事堂",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "tianyuan-current-city-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-council-archive",
+    "label": "天渊城文案库",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "tianyuan-current-city-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-dust-dispensary",
+    "label": "飞灵殿丹药房",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "tianyuan-current-city-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-guard-yard",
+    "label": "天渊卫备勤院",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "tianyuan-current-city-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-patrol-post",
+    "label": "近界巡察哨",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "tianyuan-current-city-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-stream-gully",
+    "label": "巡察哨南侧石涧",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "tianyuan-current-city-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-vacant-cave-a",
+    "label": "翠泷山北坡甲洞",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "tianyuan-current-city-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-vacant-cave-b",
+    "label": "天韵山西坡乙洞",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "tianyuan-current-city-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-mo-retreat",
+    "label": "莫简离清修居所",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "tianyuan-current-city-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit-holy-island",
+    "label": "圣岛",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-holy-island",
+      "tianyuan-current-city-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-holy-reception",
+    "label": "圣岛使者接应处",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original",
+    "claimIds": [
+      "tianyuan-current-city-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-holy-council",
+    "label": "圣岛议事机构",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-holy-island"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-tianyuan-gu-elder",
+    "label": "谷长老",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-named-elders",
+      "tianyuan-council-roster",
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-tianyuan-gu-elder-personal-tools",
+    "label": "谷长老的随身行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-jinyue-monk",
+    "label": "金越禅师",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-named-elders",
+      "tianyuan-council-roster",
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-jinyue-monk-personal-tools",
+    "label": "金越禅师的随身行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-leiluo-zhenren",
+    "label": "雷罗真人",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-named-elders",
+      "tianyuan-council-roster",
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-leiluo-zhenren-personal-tools",
+    "label": "雷罗真人的随身行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-elder-wenshu",
+    "label": "闻枢",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-council-roster",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-elder-wenshu-personal-tools",
+    "label": "闻枢的随身行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-elder-ninglu",
+    "label": "宁露",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-council-roster",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-elder-ninglu-personal-tools",
+    "label": "宁露的随身行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-elder-duanchao",
+    "label": "段潮",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-council-roster",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-elder-duanchao-personal-tools",
+    "label": "段潮的随身行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-elder-baiyan",
+    "label": "白雁衡",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-council-roster",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-elder-baiyan-personal-tools",
+    "label": "白雁衡的随身行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-elder-yesui",
+    "label": "夜穗",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-council-roster",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-elder-yesui-personal-tools",
+    "label": "夜穗的随身行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-elder-shifeng",
+    "label": "石封",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-council-roster",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-elder-shifeng-personal-tools",
+    "label": "石封的随身行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-elder-linsu",
+    "label": "林肃",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-council-roster",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-elder-linsu-personal-tools",
+    "label": "林肃的随身行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-mo-jian-li",
+    "label": "莫简离",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-mo-ancient-life",
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-mo-personal-cache",
+    "label": "莫简离私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-council-clerk",
+    "label": "罗同尘",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-dust-physician",
+    "label": "周砚丹",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-dust-keeper",
+    "label": "吕慎",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-ascender-fengyuan",
+    "label": "冯原",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-patrol-chief",
+    "label": "沈驰",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-patrol-chief-travel-kit",
+    "label": "沈驰的行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-patrol-scout",
+    "label": "方既明",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-patrol-scout-travel-kit",
+    "label": "方既明的行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-demon-traveler",
+    "label": "乌循",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-demon-traveler-travel-kit",
+    "label": "乌循的行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-holy-envoy",
+    "label": "文见微",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-holy-envoy-travel-kit",
+    "label": "文见微的行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-holy-steward",
+    "label": "阮澄",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-holy-steward-travel-kit",
+    "label": "阮澄的行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-mo-attendant",
+    "label": "宋石泉",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-mo-attendant-travel-kit",
+    "label": "宋石泉的行囊",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-dust-stock",
+    "label": "灭尘丹封存箱",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-dust-pill-1",
+    "label": "灭尘丹封装1",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-dust-pill-2",
+    "label": "灭尘丹封装2",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-dust-pill-3",
+    "label": "灭尘丹封装3",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-dust-pill-4",
+    "label": "灭尘丹封装4",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-dust-pill-5",
+    "label": "灭尘丹封装5",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-dust-pill-6",
+    "label": "灭尘丹封装6",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-dust-register",
+    "label": "飞升者领丹簿",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-dust-replenishment-fund",
+    "label": "丹房补给预算",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-guard-maintenance-fund",
+    "label": "守卫维护预算",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-duty-board",
+    "label": "近界轮值告示",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-patrol-signal",
+    "label": "巡察哨传讯盘",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-city-signal",
+    "label": "备勤院配对盘",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-patrol-signal-stones",
+    "label": "巡察信号用石",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-traveler-cargo",
+    "label": "乌循的材料箱",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-vacant-register",
+    "label": "两处空洞登记页",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-cave-toolbox",
+    "label": "玉阙阁借用工具",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-patrol-transport",
+    "label": "巡检金庭舟",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-transport-fuel",
+    "label": "金庭舟巡检用石",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-city-transport-array",
+    "label": "备勤院传送阵",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-post-transport-array",
+    "label": "巡察哨传送阵",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-transport-pilot",
+    "label": "裴岫",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "reviewed-source-and-calibration",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-dust-outer-key",
+    "label": "丹房外锁钥匙",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-detail",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-dust-inner-key",
+    "label": "丹箱内锁钥匙",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-detail",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-holy-price-letter",
+    "label": "药材核价函",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-detail",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-holy-plan-repair",
+    "label": "修缮方案甲",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-detail",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-holy-plan-replace",
+    "label": "修缮方案乙",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-detail",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-holy-maintenance-fund",
+    "label": "圣岛接引台修缮储备",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-detail",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-mo-border-report",
+    "label": "近界巡值简报",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-detail",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "tianyuan-mo-visit-letter",
+    "label": "敖啸的询访短笺",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-detail",
+    "claimIds": [
+      "tianyuan-current-city-life",
+      "tianyuan-city-calibration"
+    ],
+    "aliases": []
+  }
+]

@@ -1,0 +1,59 @@
+{
+  "status": "module-reviewed-coverage-open",
+  "scope": "有源据的草原地理、边界、普通部落与圣殿生活模块；并非919候选全量闭环。",
+  "candidateCount": 919,
+  "candidateDisposition": "尚未逐条处置；本轮只逐条核实已采用来源与14个重要主体时间状态。",
+  "remaining": [
+    "祝/毕/田锺、乐姓、天风穆、金阳/拜火等重要人物与部落需继续做开篇断代和能力资产落点。",
+    "谷双蒲与御灵宗关系须与天南/坠魔谷的东门图主体联核，尚未实例化。",
+    "天澜圣兽上界主体位置/年代和圣鼎唯一器物未完成，不把后期召唤分身预置开篇。",
+    "黄沙魔尘幡当前为完整实物与保管/部族祖训，具体施阵威力与损伤需要更多来源，不能仅凭名字自动施展无边能力。",
+    "919词法候选未逐条人工归类；当前模块通过不代表整个地区候选已结项。"
+  ],
+  "statistics": {
+    "entities": 76,
+    "agents": 12,
+    "claims": 21,
+    "anchors": 39,
+    "fullReadChapters": 13,
+    "additionalAnchorOnlyChapters": 1,
+    "periodicProperties": 1,
+    "quantityDefinitions": 3
+  },
+  "localValidation": {
+    "region": "human-steppe",
+    "semanticAssertions": "passed",
+    "periodicBoundary": "passed",
+    "allCurrentModulesAssembly": "passed",
+    "regions": 29,
+    "entities": 3420,
+    "agents": 624,
+    "worldHash": "sha256:a8de649f7a9870abe5f6b0c79af82dccdf1e0a0c5dd3c95002ace835d68dabd6",
+    "moduleHash": "38b10bb62e7f31101a40415c04d939025172e5e7e451230b4831b0bcc982b017",
+    "claimsHash": "d9f066e6a4eaf96592726bdd95fd29f7345e149e161d6b317a58ecddc45e6dbc",
+    "regionalSchema": "passed",
+    "sourceAndAnchorSha256": "passed",
+    "requiredProvenance": 277,
+    "actualModelGameplay": "not-run; root owns final gameplay acceptance",
+    "otherModuleApprovals": "not modified; assembly used ephemeral local validation inputs only"
+  },
+  "candidateCoverage": {
+    "inputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
+    "candidateCount": 919,
+    "formalDispositions": 0,
+    "status": "not reviewed item-by-item"
+  },
+  "integrationNotes": [
+    "装配须位于 human-tiannan、human-devil-valley、human-dajin之后：依赖tiannan-border-loess、dv-cangkun-hidden-cave、dajin-shun-river。",
+    "dv-cangkun-hidden-cave placement仅把expected human-realm改到human-mulan-steppe；不改变其禁制/坐标认知，不生成第二洞。",
+    "跨区路由仅补既有entity facts；原地区文件完全未修改。",
+    "无付费API调用，无Git操作，未运行全量check:fast。"
+  ],
+  "fileSha256": {
+    "module.json": "ccbc3fc61f3c992be7f0338c28ec7bf68ca7292e72f2f8c2557d39e001927eeb",
+    "claims.json": "5d62fa6658a79c1eb07638e6ebc179e75dcf3c40a1e6dc7c910ec549a6e7f3b5",
+    "subjects.json": "8798a83016b273a7281726ffb961b42cf6bc111a9d86c78c787afdfbf5659793",
+    "source-reading.json": "c6f6dd1e3ebad4c7ffc7ebea4305388177893a916e3ea4c1e13182d0d88e4652",
+    "review.json": "3725c64ec914626260b57d89e06af2bc67dd01b067ed2ad38af306d7c8734e44"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "formatVersion": 1,
+  "moduleId": "associated-yinming",
+  "queueInputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
+  "status": "exact-existing-disposition-reuse-not-new-semantic-approval",
+  "records": [
+    {
+      "candidateId": "batch-0087-object-0014",
+      "extractionReportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
+      "sourceModule": "human-far-seas",
+      "targetQueueModule": "associated-yinming",
+      "sourceDispositionReportHash": "f8468db88fcffd10572e37cefd32f82290d5a704a3b508872ee6c3f8746caca9",
+      "sourceRecordHash": "f62c66ce381934fe814a025116a850770fcd9a1908c765eaf3095ac279dbd916",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-tiansha"
+      ],
+      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+    },
+    {
+      "candidateId": "batch-0114-fact-0044",
+      "extractionReportHash": "5c6a27f70d617792d3429d6e14091115ac7564f1e34abfdbb263d1625c3a302d",
+      "sourceModule": "human-boundless",
+      "targetQueueModule": "associated-yinming",
+      "sourceDispositionReportHash": "b2d931007794c22655fa68f6ec62bb93ae52f83162864227edee85c8aebed20e",
+      "sourceRecordHash": "de99b78865b869f5adef6c782b2b8f1d1c115c0b035acaedd05141316d360876",
+      "disposition": "later-only",
+      "targetIds": [
+        "human-boundless"
+      ],
+      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+    }
+  ],
+  "skipped": [],
+  "legacyClassificationSnapshot": null,
+  "validationScope": "complete-queue-including-pending",
+  "missingSourceEvidenceIds": [],
+  "outputDispositionReportHash": "288409d62df67c3d31d70bb8c2e75e4119edf8942189f920c380837c17636a6a",
+  "reusedCount": 2,
+  "result": {
+    "moduleId": "associated-yinming",
+    "candidates": 222,
+    "counts": {
+      "adopted": 0,
+      "corrected": 1,
+      "history-only": 0,
+      "later-only": 1,
+      "bounded-uncertainty": 0,
+      "transferred": 0,
+      "pending": 220
+    },
+    "completed": 2,
+    "unresolved": 220,
+    "boundedUncertainty": 0,
+    "approvedForRuntime": false,
+    "reportHash": "288409d62df67c3d31d70bb8c2e75e4119edf8942189f920c380837c17636a6a"
+  }
+}

@@ -1,0 +1,1006 @@
+{
+  "formatVersion": 1,
+  "status": "current-module-evidence-not-full-world-approval",
+  "checkedAt": "2026-10-17T14:55:43.652Z",
+  "paidCalls": 0,
+  "modules": [
+    {
+      "moduleId": "shared-foundations",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "b4c92016675404f0f0af8dcebf1b03062f2c8f303001b789466b3700d5571ed2",
+      "claimsHash": "facf090a2678b407994d2db3810e13bbc008e5fed67c6486c95fa1d456acc526",
+      "reviewHash": "eaaabadef0c3f67a6ba8439dd143b07efa8fef662df5508b333f2f7303c00fa6",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 54,
+        "claims": 25,
+        "entities": 0,
+        "agents": 0
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "awaiting-candidate-dispositions",
+        "candidates": 6976,
+        "approvedForRuntime": false,
+        "reuseProgress": {
+          "status": "selected-exact-records-validated-not-full-queue",
+          "file": "regions/shared-foundations/candidate-reuse-progress.json",
+          "fileHash": "911e5d48ae580700b752355fd9c36ee3dbe84ec5608c13ca1379cd789bf49c17",
+          "validatedRecords": 83,
+          "fullQueueSourceEvidenceMissingIds": [
+            "batch-0113-issue-0014",
+            "batch-0185-issue-0009",
+            "batch-0186-issue-0001",
+            "batch-0209-issue-0001"
+          ],
+          "approvedForRuntime": false
+        }
+      }
+    },
+    {
+      "moduleId": "human-local",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "234134f921aeaf127ce1c6f73faa0a59e790eae3f42d92c2a4bed927a7207557",
+      "claimsHash": "41cdefccfe5186ec674c3ef1381a5e8d140861c5f3430edcf285ac8102684075",
+      "reviewHash": "487ed5aa3d8b219974307ff8b57d1bf234cf10d435644c95ffe281008a076923",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 61,
+        "claims": 21,
+        "entities": 127,
+        "agents": 47
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "editorial-classification-records-not-strict-contract",
+        "file": "regions/human-local/candidate-dispositions.json",
+        "fileHash": "3d85142bf03f96828ff7dd4014ec39a9dfc8f002a07cb423ed596eca5d56f23a",
+        "candidates": 611,
+        "recordsWithExactIds": 275,
+        "missing": 336,
+        "duplicateIds": [],
+        "extraIds": [],
+        "reportDriftIds": [],
+        "queueFingerprintMatches": false,
+        "approvedForRuntime": false,
+        "note": "已有编辑分类不被抹去，也不由本次机械统计升级为严格出处/目标绑定通过。"
+      }
+    },
+    {
+      "moduleId": "human-yue",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "ec27945519ed4390fb371ffa1f1b133a4360097e3a06178ee22cdcb5e2d9ca0f",
+      "claimsHash": "175aba2dc1c282a713c579ec39b64aa85fb0b60b48db457d0e512ebbd791f36e",
+      "reviewHash": "8fa74c5061669a05bad6b3bd3a954c42c01c4bd740bfd6500f0652db4192eea1",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 83,
+        "claims": 33,
+        "entities": 211,
+        "agents": 49
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "strict-dispositions-partial",
+        "moduleId": "human-yue",
+        "candidates": 1758,
+        "counts": {
+          "adopted": 2,
+          "corrected": 1,
+          "history-only": 0,
+          "later-only": 0,
+          "bounded-uncertainty": 0,
+          "transferred": 0,
+          "pending": 1755
+        },
+        "completed": 3,
+        "unresolved": 1755,
+        "boundedUncertainty": 0,
+        "approvedForRuntime": false,
+        "reportHash": "ba50592e1dac57c4a19f80904b797b50bc7f03bfbf259c17d74d69a179eaf43c"
+      }
+    },
+    {
+      "moduleId": "human-tiannan",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "5b2959a99eac856afe242cc6b7954efe92ffa2fa28232b57c7bd1dac3dc967a2",
+      "claimsHash": "18a47ef1e0b90c76b0680cb04aee07531bcce2dda68b5086cfdbc6a00b893529",
+      "reviewHash": "411de5af338eb10c0ffb9869fdaf8a58e762faf4aea10f3471187fec802eca5c",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 47,
+        "claims": 20,
+        "entities": 115,
+        "agents": 18
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "awaiting-candidate-dispositions",
+        "candidates": 2961,
+        "approvedForRuntime": false,
+        "reuseProgress": {
+          "status": "selected-exact-records-validated-not-full-queue",
+          "file": "regions/human-tiannan/candidate-reuse-progress.json",
+          "fileHash": "f358dd7b32c29f31314916cfe081646547dfaa100144950f041e30cce9d42e18",
+          "validatedRecords": 34,
+          "fullQueueSourceEvidenceMissingIds": [
+            "batch-0113-issue-0014"
+          ],
+          "approvedForRuntime": false
+        }
+      }
+    },
+    {
+      "moduleId": "human-steppe",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "38b10bb62e7f31101a40415c04d939025172e5e7e451230b4831b0bcc982b017",
+      "claimsHash": "d9f066e6a4eaf96592726bdd95fd29f7345e149e161d6b317a58ecddc45e6dbc",
+      "reviewHash": "71ea799a175f8e98009960fae70ad030e7a3d61fea021c7ea7134805e4142a06",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 39,
+        "claims": 21,
+        "entities": 76,
+        "agents": 12
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "awaiting-candidate-dispositions",
+        "candidates": 919,
+        "approvedForRuntime": false
+      }
+    },
+    {
+      "moduleId": "human-boundless",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "d94c1617e6d2c814ff65ec48ec44751f4c631ac4feaebad7d34162d13d6b994a",
+      "claimsHash": "8b1f74239bae8792ea394713949a20beb6cc1ce5c1c2c852a75434736ac5b51a",
+      "reviewHash": "36e113b4e9151dcce3dafdf10f0a05152a58d7158f1f9677d2125050f743227a",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 17,
+        "claims": 10,
+        "entities": 41,
+        "agents": 5
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "strict-current-queue-dispositions-complete",
+        "moduleId": "human-boundless",
+        "candidates": 41,
+        "counts": {
+          "adopted": 14,
+          "corrected": 13,
+          "history-only": 0,
+          "later-only": 13,
+          "bounded-uncertainty": 1,
+          "transferred": 0,
+          "pending": 0
+        },
+        "completed": 41,
+        "unresolved": 0,
+        "boundedUncertainty": 1,
+        "approvedForRuntime": false,
+        "reportHash": "b2d931007794c22655fa68f6ec62bb93ae52f83162864227edee85c8aebed20e"
+      }
+    },
+    {
+      "moduleId": "human-inner-star",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "452cd1c7441e650d488d05c6434b91dcc9f11ff976135c2044a55b69943fa8f3",
+      "claimsHash": "910a5db68e611d92ad5e8374f50840d032e9a65bde2a9fbf7a3af31d4cbe3a95",
+      "reviewHash": "7efe126781eb20b4efe1aa95c37ed08e5ec58b697e3c09ed537ce99f715ac9b1",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 49,
+        "claims": 20,
+        "entities": 121,
+        "agents": 22
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "strict-dispositions-partial",
+        "moduleId": "human-inner-star",
+        "candidates": 2015,
+        "counts": {
+          "adopted": 2,
+          "corrected": 3,
+          "history-only": 0,
+          "later-only": 1,
+          "bounded-uncertainty": 0,
+          "transferred": 0,
+          "pending": 2009
+        },
+        "completed": 6,
+        "unresolved": 2009,
+        "boundedUncertainty": 0,
+        "approvedForRuntime": false,
+        "reportHash": "2b237afa9534aa0dce477bec2b8578d215a392ab75e954d2fb3b112ea264f559"
+      }
+    },
+    {
+      "moduleId": "human-outer-star",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "2c1d2ad35194247dec314544e27ddd53ec7da0830e792cffcd28763ef8b975ea",
+      "claimsHash": "ef56bc19873638b3daa739328b57e2b5305421ab5cc763bc732cfaecf2b08a5a",
+      "reviewHash": "514ed9bf096798d5779b574ade9d860d46bc17d272f6bff85803ded18a2b3089",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 47,
+        "claims": 19,
+        "entities": 140,
+        "agents": 26
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "awaiting-candidate-dispositions",
+        "candidates": 284,
+        "approvedForRuntime": false
+      }
+    },
+    {
+      "moduleId": "human-void-hall",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "aa6514bd37395462d51decaef65395113393c81e1be0562a2c0077233225e74f",
+      "claimsHash": "b1bbf6652e9f121a616a74211e71b48a82ae7f58ddef1617eed39c8030a6761a",
+      "reviewHash": "29d0a0ae18a72f04bfe8a55ac0cc12f5cff0e42ba1906c1f46afa749e96fac6b",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 73,
+        "claims": 24,
+        "entities": 191,
+        "agents": 26
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "strict-dispositions-partial",
+        "moduleId": "human-void-hall",
+        "candidates": 1191,
+        "counts": {
+          "adopted": 2,
+          "corrected": 8,
+          "history-only": 2,
+          "later-only": 5,
+          "bounded-uncertainty": 0,
+          "transferred": 0,
+          "pending": 1174
+        },
+        "completed": 17,
+        "unresolved": 1174,
+        "boundedUncertainty": 0,
+        "approvedForRuntime": false,
+        "reportHash": "bd4f5f73850458a91a095411ac4f1b714458b60e90b844e580197e75378bf487"
+      }
+    },
+    {
+      "moduleId": "human-devil-valley",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "9dd5b908fa6f442844e19e71f24646e165775b0a506f4bc503766ff7cc35b7fe",
+      "claimsHash": "bae2f8a02dfd2ccfdc31e54794e73f24ccc1d5c07f9140ec881933b0defe7b19",
+      "reviewHash": "4a2e506cbc6bfce9d9790535478110e3dffd2f6e194304f6222e8787825dac56",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 113,
+        "claims": 30,
+        "entities": 194,
+        "agents": 18
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "editorial-classification-records-not-strict-contract",
+        "file": "regions/human-devil-valley/candidate-dispositions.json",
+        "fileHash": "5e6528111c8dbdf643f9c2d32632dcf423aa9ee7fe136d2a0f52a14edb7e13e3",
+        "candidates": 747,
+        "recordsWithExactIds": 747,
+        "missing": 0,
+        "duplicateIds": [],
+        "extraIds": [],
+        "reportDriftIds": [],
+        "queueFingerprintMatches": true,
+        "approvedForRuntime": false,
+        "note": "已有编辑分类不被抹去，也不由本次机械统计升级为严格出处/目标绑定通过。"
+      }
+    },
+    {
+      "moduleId": "human-dajin",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "c6a02628fdffa250581328844bdc88269aee69ad5433e285cef74bcd8af356fe",
+      "claimsHash": "74281a14c56b5fba878e4485753cc6434b96b49bb23f186b715d7d0f1d3dcda9",
+      "reviewHash": "0017ad7995cab0ad586dfefe15b21e3bbe1911ae0eede27337d9aa150ac2274e",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 34,
+        "claims": 14,
+        "entities": 61,
+        "agents": 14
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "strict-dispositions-partial",
+        "moduleId": "human-dajin",
+        "candidates": 1252,
+        "counts": {
+          "adopted": 66,
+          "corrected": 45,
+          "history-only": 8,
+          "later-only": 16,
+          "bounded-uncertainty": 3,
+          "transferred": 0,
+          "pending": 1114
+        },
+        "completed": 138,
+        "unresolved": 1114,
+        "boundedUncertainty": 3,
+        "approvedForRuntime": false,
+        "reportHash": "20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14"
+      }
+    },
+    {
+      "moduleId": "human-south-kunwu",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "c8436a28e71b585b5772a7af999b771c42ca41daf6428fff73459972d2ea6b30",
+      "claimsHash": "2c5e0491a5d19c857e4d0eb4da668110d747f50f02bc2a3e51ab15de28057c62",
+      "reviewHash": "2728e78bdad29b442d78d0661d66e8a66eb545363151f408673bb1a6d13cad44",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 100,
+        "claims": 34,
+        "entities": 300,
+        "agents": 56
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "strict-dispositions-partial",
+        "moduleId": "human-south-kunwu",
+        "candidates": 805,
+        "counts": {
+          "adopted": 4,
+          "corrected": 5,
+          "history-only": 0,
+          "later-only": 5,
+          "bounded-uncertainty": 0,
+          "transferred": 0,
+          "pending": 791
+        },
+        "completed": 14,
+        "unresolved": 791,
+        "boundedUncertainty": 0,
+        "approvedForRuntime": false,
+        "reportHash": "c4373af8b173e2c1559acfa7daae63f0b1abc3e86c01f1d7fff4f385bc61536a"
+      }
+    },
+    {
+      "moduleId": "human-north",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "3413353ae48d9f532f921551f94c078e8a3cd1eb4d423d1b190f47e1edd06e29",
+      "claimsHash": "39f5bac95412249a4a6447f6eea2088bb9a6823acb3e9176afa5ec0a8fccc0e6",
+      "reviewHash": "8c319a48ae16fc5ec3ce518880bef5d66d2db6eca1d054b7f79a2982abcee819",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 187,
+        "claims": 72,
+        "entities": 114,
+        "agents": 19
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "strict-current-queue-dispositions-complete",
+        "moduleId": "human-north",
+        "candidates": 449,
+        "counts": {
+          "adopted": 89,
+          "corrected": 247,
+          "history-only": 6,
+          "later-only": 86,
+          "bounded-uncertainty": 21,
+          "transferred": 0,
+          "pending": 0
+        },
+        "completed": 449,
+        "unresolved": 0,
+        "boundedUncertainty": 21,
+        "approvedForRuntime": false,
+        "reportHash": "0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4"
+      }
+    },
+    {
+      "moduleId": "human-ten-thousand",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "419fe854fb763ccab3da252e97ce469ab146d6111e849fc0044aa541f216a81a",
+      "claimsHash": "4307f356e2248e34c7c086400bdb7f37b0fbfc4dede39e328e8f4b16da8f267b",
+      "reviewHash": "308b01105d115e691be2cf3fb44f45c7fd730f142f856ea75957b368363ee0dd",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 32,
+        "claims": 15,
+        "entities": 32,
+        "agents": 8
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "strict-current-queue-dispositions-complete",
+        "moduleId": "human-ten-thousand",
+        "candidates": 95,
+        "counts": {
+          "adopted": 22,
+          "corrected": 43,
+          "history-only": 14,
+          "later-only": 14,
+          "bounded-uncertainty": 2,
+          "transferred": 0,
+          "pending": 0
+        },
+        "completed": 95,
+        "unresolved": 0,
+        "boundedUncertainty": 2,
+        "approvedForRuntime": false,
+        "reportHash": "4939906844390d0e6226cd4bb664ff23def270b5ba3dd9851de44fee5ba18940"
+      }
+    },
+    {
+      "moduleId": "human-far-seas",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "200b76018cd30ca4f99b6b7a2dd8d336f6e5d5d366e3c5b128f1f7a363118358",
+      "claimsHash": "598913def063db6adffc0ab4eb1ca68b1f0e0bd6ae19d2794af6ea2729bd2ba0",
+      "reviewHash": "40b9365858216842a4d1181aafe72e0b7c8774b239267ff3602012a04d84a8b6",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 7,
+        "claims": 6,
+        "entities": 2,
+        "agents": 0
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "strict-dispositions-partial",
+        "moduleId": "human-far-seas",
+        "candidates": 71,
+        "counts": {
+          "adopted": 0,
+          "corrected": 5,
+          "history-only": 0,
+          "later-only": 0,
+          "bounded-uncertainty": 0,
+          "transferred": 0,
+          "pending": 66
+        },
+        "completed": 5,
+        "unresolved": 66,
+        "boundedUncertainty": 0,
+        "approvedForRuntime": false,
+        "reportHash": "f8468db88fcffd10572e37cefd32f82290d5a704a3b508872ee6c3f8746caca9"
+      }
+    },
+    {
+      "moduleId": "spirit-human-three",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "5830aa85a959aff15e6b0670fc584bb1de0fd29fd31ed202f697e7ed1755bb61",
+      "claimsHash": "445924003a848a8daf457d07b033c993138b39ab4c2701c7865a0cf4ba40e82f",
+      "reviewHash": "f7d974ea0ebc8e23ae2cc280dd9e796037650b56c2a4e644026c8d3f1cdf6b65",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 53,
+        "claims": 24,
+        "entities": 134,
+        "agents": 29
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "editorial-classification-records-not-strict-contract",
+        "file": "regions/spirit-human-three/candidate-dispositions.json",
+        "fileHash": "38069d6b6655cf515d1888dff09a57de1b505dc3fda03d026175457e21f8f3b3",
+        "candidates": 343,
+        "recordsWithExactIds": 0,
+        "missing": 343,
+        "duplicateIds": [],
+        "extraIds": [],
+        "reportDriftIds": [],
+        "queueFingerprintMatches": false,
+        "approvedForRuntime": false,
+        "note": "已有编辑分类不被抹去，也不由本次机械统计升级为严格出处/目标绑定通过。"
+      }
+    },
+    {
+      "moduleId": "spirit-demon-seven",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "472b8fefd7f60cb58e830ea4f4624103e68252ff40a8c75f2fecb4d5f81a833d",
+      "claimsHash": "e089f28e84cc34470ebe1c206ab22098709368d9f71b69015584529e58584f15",
+      "reviewHash": "a8b22777e0b75c77e825870693ea1fec511ae8c1cc955bb0686572b79187d3ad",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 29,
+        "claims": 12,
+        "entities": 83,
+        "agents": 18
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "editorial-classification-records-not-strict-contract",
+        "file": "regions/spirit-demon-seven/candidate-dispositions.json",
+        "fileHash": "d8d589150c01ca438e518102ada88b66ecef00b3021e9420861b4b9884f1069e",
+        "candidates": 135,
+        "recordsWithExactIds": 0,
+        "missing": 135,
+        "duplicateIds": [],
+        "extraIds": [],
+        "reportDriftIds": [],
+        "queueFingerprintMatches": false,
+        "approvedForRuntime": false,
+        "note": "已有编辑分类不被抹去，也不由本次机械统计升级为严格出处/目标绑定通过。"
+      }
+    },
+    {
+      "moduleId": "spirit-tianyuan",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "e5796f101c87dabbb4b7e449b8e25f2a30e5ae4cb808c26c05be6a8407ae426b",
+      "claimsHash": "3c24955e0f14171e37b199a5dfd46f7a0df531f5a7beedcc2268b43199f3e22a",
+      "reviewHash": "1aee4d0ed6b969f88527f1c3d6e3e49783811462cf82717682053fa214c68790",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 20,
+        "claims": 10,
+        "entities": 80,
+        "agents": 22
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "editorial-classification-records-not-strict-contract",
+        "file": "regions/spirit-tianyuan/candidate-dispositions.json",
+        "fileHash": "d8d589150c01ca438e518102ada88b66ecef00b3021e9420861b4b9884f1069e",
+        "candidates": 1333,
+        "recordsWithExactIds": 0,
+        "missing": 1333,
+        "duplicateIds": [],
+        "extraIds": [],
+        "reportDriftIds": [],
+        "queueFingerprintMatches": false,
+        "approvedForRuntime": false,
+        "note": "已有编辑分类不被抹去，也不由本次机械统计升级为严格出处/目标绑定通过。"
+      }
+    },
+    {
+      "moduleId": "spirit-fengyuan",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "bcc4cbc0a0be4144d87122c83cffde303f8e03f8190a89e2111f97353d9fb955",
+      "claimsHash": "458dbfdbc7122956f308dc2c09ac001772bf50d353d57b0b658d07936b3b8de2",
+      "reviewHash": "da97d978270536d0fb7b25572bd3e041c380c6af7a7c32b67f0016a59182a425",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 36,
+        "claims": 16,
+        "entities": 93,
+        "agents": 24
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "editorial-classification-records-not-strict-contract",
+        "file": "regions/spirit-fengyuan/candidate-dispositions.json",
+        "fileHash": "45ef56ea110c2e3f0ac9a096e232cdc97c2b8dd1c350cf89aa22fd7175493e6e",
+        "candidates": 770,
+        "recordsWithExactIds": 0,
+        "missing": 770,
+        "duplicateIds": [],
+        "extraIds": [],
+        "reportDriftIds": [],
+        "queueFingerprintMatches": false,
+        "approvedForRuntime": false,
+        "note": "已有编辑分类不被抹去，也不由本次机械统计升级为严格出处/目标绑定通过。"
+      }
+    },
+    {
+      "moduleId": "spirit-feiling",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "9e64b1122fc213f487e01281a98cf2e4553753bb084dcac585dacfa2bc39f972",
+      "claimsHash": "fb4d894512bef3d58dc58c14ba0d20f8b2c73fec00610202f137baaa349b6fbc",
+      "reviewHash": "43011becebafea4dd9056500701c880b5487e083d01a845c5056c9a9401e6f11",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 45,
+        "claims": 17,
+        "entities": 108,
+        "agents": 22
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "editorial-classification-records-not-strict-contract",
+        "file": "regions/spirit-feiling/candidate-dispositions.json",
+        "fileHash": "d8d589150c01ca438e518102ada88b66ecef00b3021e9420861b4b9884f1069e",
+        "candidates": 1213,
+        "recordsWithExactIds": 0,
+        "missing": 1213,
+        "duplicateIds": [],
+        "extraIds": [],
+        "reportDriftIds": [],
+        "queueFingerprintMatches": false,
+        "approvedForRuntime": false,
+        "note": "已有编辑分类不被抹去，也不由本次机械统计升级为严格出处/目标绑定通过。"
+      }
+    },
+    {
+      "moduleId": "spirit-minghe",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "332a185952bd474b46f0e4c52888456865885e6e5201f813a4f3e8fbdab23337",
+      "claimsHash": "4364be34e33113b1b7908020f04dc040800fffb20affea53c16a0ed9fade55d3",
+      "reviewHash": "7aed81280590e693d00f05f5b49474989ac852ad89592f15b4f627e9a9470594",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 43,
+        "claims": 19,
+        "entities": 101,
+        "agents": 18
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "editorial-classification-records-not-strict-contract",
+        "file": "regions/spirit-minghe/candidate-dispositions.json",
+        "fileHash": "d8d589150c01ca438e518102ada88b66ecef00b3021e9420861b4b9884f1069e",
+        "candidates": 416,
+        "recordsWithExactIds": 0,
+        "missing": 416,
+        "duplicateIds": [],
+        "extraIds": [],
+        "reportDriftIds": [],
+        "queueFingerprintMatches": false,
+        "approvedForRuntime": false,
+        "note": "已有编辑分类不被抹去，也不由本次机械统计升级为严格出处/目标绑定通过。"
+      }
+    },
+    {
+      "moduleId": "spirit-thunder",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "0edeb86f0cdcbb4230b69bfaaa7d3da7bfed3b74a3c95de87c4a279150a73178",
+      "claimsHash": "3dfd0c7d95ef113670ce9ebb3255d067af9f9163386c06f3e8d6519bdeb74702",
+      "reviewHash": "413d5511e033bf86c5b07f12de53c51158d64ae9bdd239e8acebe13fb43b2a61",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 58,
+        "claims": 19,
+        "entities": 194,
+        "agents": 40
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "editorial-classification-records-not-strict-contract",
+        "file": "regions/spirit-thunder/candidate-dispositions.json",
+        "fileHash": "d8d589150c01ca438e518102ada88b66ecef00b3021e9420861b4b9884f1069e",
+        "candidates": 572,
+        "recordsWithExactIds": 0,
+        "missing": 572,
+        "duplicateIds": [],
+        "extraIds": [],
+        "reportDriftIds": [],
+        "queueFingerprintMatches": false,
+        "approvedForRuntime": false,
+        "note": "已有编辑分类不被抹去，也不由本次机械统计升级为严格出处/目标绑定通过。"
+      }
+    },
+    {
+      "moduleId": "spirit-blood",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "6084acac047fba1dd9e2b2758db1571e9fd5f5dcb6485cd0edc5d2d6cfad783a",
+      "claimsHash": "73753630cc2d9f13eb3b9008da4e2c80159eb2240b8fe1b6101a5913ace67993",
+      "reviewHash": "c51d4b669298f7d229c7cc6f0d953928c9e2299ce0938dc1804de3c85441a1a3",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 79,
+        "claims": 25,
+        "entities": 215,
+        "agents": 30
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "strict-dispositions-partial",
+        "moduleId": "spirit-blood",
+        "candidates": 282,
+        "counts": {
+          "adopted": 0,
+          "corrected": 1,
+          "history-only": 0,
+          "later-only": 0,
+          "bounded-uncertainty": 0,
+          "transferred": 0,
+          "pending": 281
+        },
+        "completed": 1,
+        "unresolved": 281,
+        "boundedUncertainty": 0,
+        "approvedForRuntime": false,
+        "reportHash": "591a1a8774aa7b6e8bc27cc6a98f47b05c841738f4ce325ed2fc907f472bc5f4"
+      }
+    },
+    {
+      "moduleId": "spirit-seas",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "a22c5ced5079ca1e4bc46c2e4548c3377d0d1fd85984fa0c24f149164fa34e47",
+      "claimsHash": "dc738fab290dddcb889067311e7a6f7f93f92d7ee0bf797bfb0ccc6811ba8ae1",
+      "reviewHash": "dd548e75e6f2fee45cc4bc9708158a9afb5de7b3bfe048768cffd031055f0cab",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 76,
+        "claims": 27,
+        "entities": 178,
+        "agents": 30
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "editorial-classification-records-not-strict-contract",
+        "file": "regions/spirit-seas/candidate-dispositions.json",
+        "fileHash": "90a41312c452794c89afd5a953427743e5d68532971fc4038ca8d54da63423de",
+        "candidates": 219,
+        "recordsWithExactIds": 0,
+        "missing": 219,
+        "duplicateIds": [],
+        "extraIds": [],
+        "reportDriftIds": [],
+        "queueFingerprintMatches": true,
+        "approvedForRuntime": false,
+        "note": "已有编辑分类不被抹去，也不由本次机械统计升级为严格出处/目标绑定通过。"
+      }
+    },
+    {
+      "moduleId": "associated-guanghan",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "8ec77e470bfc0e9a82506e83e4030b700f24cd1c009e91a3152a480cd4022565",
+      "claimsHash": "4fbe5cef595626efce7b16786b28d15ca99a24e670e1d528041da981ac920c0c",
+      "reviewHash": "e771579efa65f38c1c34e41b7631b187c18f8f772d0bb134659a31b0d84acef7",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 51,
+        "claims": 15,
+        "entities": 144,
+        "agents": 5
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "editorial-classification-records-not-strict-contract",
+        "file": "regions/associated-guanghan/candidate-dispositions.json",
+        "fileHash": "fc143dceec9224241ac45c846bab4a26306dd1fa084d02ad2d75b62cffe9a5de",
+        "candidates": 528,
+        "recordsWithExactIds": 0,
+        "missing": 528,
+        "duplicateIds": [],
+        "extraIds": [],
+        "reportDriftIds": [],
+        "queueFingerprintMatches": true,
+        "approvedForRuntime": false,
+        "note": "已有编辑分类不被抹去，也不由本次机械统计升级为严格出处/目标绑定通过。"
+      }
+    },
+    {
+      "moduleId": "associated-demon",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "9f1e9287a9eed235ecc6b801840813601e5a1be22f136e8fc80007100c71504c",
+      "claimsHash": "6148db9652ab999330c5e51e0a0886b78aa074954515c819fd12aa7d3e7c10e6",
+      "reviewHash": "13b014a55b605e597919ec6804f776b058c2ad61cf5f59b972c9bc874899e1be",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 84,
+        "claims": 23,
+        "entities": 152,
+        "agents": 27
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "editorial-classification-records-not-strict-contract",
+        "file": "regions/associated-demon/candidate-dispositions.json",
+        "fileHash": "bd91c01525bf63fdb9579a1abf8c264af85d6829380dbcfca0dbbc7a1b0faed1",
+        "candidates": 1803,
+        "recordsWithExactIds": 0,
+        "missing": 1803,
+        "duplicateIds": [],
+        "extraIds": [],
+        "reportDriftIds": [],
+        "queueFingerprintMatches": true,
+        "approvedForRuntime": false,
+        "note": "已有编辑分类不被抹去，也不由本次机械统计升级为严格出处/目标绑定通过。",
+        "reuseProgress": {
+          "status": "selected-exact-records-validated-not-full-queue",
+          "file": "regions/associated-demon/candidate-reuse-progress.json",
+          "fileHash": "aedbb4a5ada695d10e6bf397cb1022e4d7319916676c8371f859b53f79fe96fb",
+          "validatedRecords": 2,
+          "fullQueueSourceEvidenceMissingIds": [
+            "batch-0341-issue-0001"
+          ],
+          "approvedForRuntime": false
+        }
+      }
+    },
+    {
+      "moduleId": "associated-yinming",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "74d2aeab646d7445455499bc45363a5d70cf1361134848f7850f7b6f76e22702",
+      "claimsHash": "3a57d5adbaaaa100ea2f1c452a23a20e99a8bc4a5fc477044d473299d8b40d15",
+      "reviewHash": "773ad428611ab073aab1511dd12f76dea828f141fc7cbe855935d498e2a9178f",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 53,
+        "claims": 16,
+        "entities": 161,
+        "agents": 30
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "strict-dispositions-partial",
+        "moduleId": "associated-yinming",
+        "candidates": 222,
+        "counts": {
+          "adopted": 0,
+          "corrected": 1,
+          "history-only": 0,
+          "later-only": 1,
+          "bounded-uncertainty": 0,
+          "transferred": 0,
+          "pending": 220
+        },
+        "completed": 2,
+        "unresolved": 220,
+        "boundedUncertainty": 0,
+        "approvedForRuntime": false,
+        "reportHash": "288409d62df67c3d31d70bb8c2e75e4119edf8942189f920c380837c17636a6a"
+      }
+    },
+    {
+      "moduleId": "associated-reported",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "0736fe2454f4428ef8a0dcb4eba97fb04f3fbde41c4ab082f9368e64bc160683",
+      "claimsHash": "202d493573f0a85ad3b6d0d76c3cd09e734d609aeec1a53062895ad11d23232f",
+      "reviewHash": "6655c31d98395459d4c76d73461027b135c44d6944e702ddcbd787b38d3a4743",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 45,
+        "claims": 13,
+        "entities": 13,
+        "agents": 0
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "editorial-classification-records-not-strict-contract",
+        "file": "regions/associated-reported/candidate-dispositions.json",
+        "fileHash": "5d74b0eaf0cc672cfac5a2cce66b04154ec0809687c44de1cda73bd93838deb0",
+        "candidates": 68,
+        "recordsWithExactIds": 68,
+        "missing": 0,
+        "duplicateIds": [],
+        "extraIds": [],
+        "reportDriftIds": [],
+        "queueFingerprintMatches": true,
+        "approvedForRuntime": false,
+        "note": "已有编辑分类不被抹去，也不由本次机械统计升级为严格出处/目标绑定通过。"
+      }
+    },
+    {
+      "moduleId": "associated-immortal",
+      "status": "reviewed-current-module-local-validation-passed",
+      "approvedForRuntime": false,
+      "moduleHash": "116222e20b6eb989007f21609c10bb28fceac8e654681331905e8d1a2f1f4d18",
+      "claimsHash": "2a2fd5ecadded1d99316811cf85ab50a65aa9569bc941bc2c3221329890b5bf3",
+      "reviewHash": "dc115a5ef26fa8d4dafd9dff1b565db19f2ad3972c1e83d93ae002ac2743eb82",
+      "validationErrors": [],
+      "moduleValidation": {
+        "schema": "passed",
+        "sourceAnchorFingerprints": "passed",
+        "anchors": 7,
+        "claims": 4,
+        "entities": 0,
+        "agents": 0
+      },
+      "reviewBound": true,
+      "candidates": {
+        "status": "awaiting-candidate-dispositions",
+        "candidates": 1178,
+        "approvedForRuntime": false,
+        "reuseProgress": {
+          "status": "selected-exact-records-validated-not-full-queue",
+          "file": "regions/associated-immortal/candidate-reuse-progress.json",
+          "fileHash": "22b4713986541de0e02c65752c0c56dbe55bd4d0f5f4c649d479e0ba293480ff",
+          "validatedRecords": 10,
+          "fullQueueSourceEvidenceMissingIds": [
+            "batch-0298-issue-0010"
+          ],
+          "approvedForRuntime": false
+        }
+      }
+    }
+  ],
+  "summary": {
+    "planned": 29,
+    "reviewedCurrentModules": 29,
+    "notBuilt": [],
+    "staleReviews": [],
+    "validationFailed": [],
+    "strictQueueClosures": [
+      "human-boundless",
+      "human-north",
+      "human-ten-thousand"
+    ]
+  },
+  "limits": [
+    "本次只验证文件合同、作者审签指纹和出处锚点；不能据此新授予内容语义、全域导入或实际游玩批准。",
+    "当前词法队列即使全部处置，也不能证明地区库存封闭或全书无遗漏。",
+    "当前全域最终装配、尚未覆盖候选、身份与时间裁决及真实游玩按各自证据验收。"
+  ]
+}

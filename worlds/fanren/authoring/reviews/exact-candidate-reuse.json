@@ -1,0 +1,87 @@
+{
+  "formatVersion": 1,
+  "status": "strict-existing-dispositions-reused-not-full-world-approval",
+  "paidCalls": 0,
+  "requested": 173,
+  "reused": 172,
+  "skipped": [
+    {
+      "moduleId": "human-south-kunwu",
+      "candidateId": "batch-0175-object-0048",
+      "reason": "原处置将昆吾山作为万妖谷叙事档案保存（history-only）；昆吾本区应区分当前封印山体与后期相遇，该地区专属归档不能机械复制。保留原处置并交昆吾作者决定。"
+    }
+  ],
+  "modules": [
+    {
+      "moduleId": "shared-foundations",
+      "reused": 83,
+      "reportHash": "d32d386d956b1220ed139deef73ecc151563109b22109202b66bcfa1f6dabe66",
+      "audit": "regions/shared-foundations/candidate-reuse-audit.json",
+      "validationScope": "exact-selected-records-only-not-full-queue"
+    },
+    {
+      "moduleId": "human-yue",
+      "reused": 3,
+      "reportHash": "ba50592e1dac57c4a19f80904b797b50bc7f03bfbf259c17d74d69a179eaf43c",
+      "audit": "regions/human-yue/candidate-reuse-audit.json",
+      "validationScope": "complete-queue-including-pending"
+    },
+    {
+      "moduleId": "human-tiannan",
+      "reused": 34,
+      "reportHash": "21ff427c1aa4c0dabaccf51bc333b9f96db4f16e07936089f65bb5381b120401",
+      "audit": "regions/human-tiannan/candidate-reuse-audit.json",
+      "validationScope": "exact-selected-records-only-not-full-queue"
+    },
+    {
+      "moduleId": "human-inner-star",
+      "reused": 6,
+      "reportHash": "2b237afa9534aa0dce477bec2b8578d215a392ab75e954d2fb3b112ea264f559",
+      "audit": "regions/human-inner-star/candidate-reuse-audit.json",
+      "validationScope": "complete-queue-including-pending"
+    },
+    {
+      "moduleId": "human-void-hall",
+      "reused": 17,
+      "reportHash": "bd4f5f73850458a91a095411ac4f1b714458b60e90b844e580197e75378bf487",
+      "audit": "regions/human-void-hall/candidate-reuse-audit.json",
+      "validationScope": "complete-queue-including-pending"
+    },
+    {
+      "moduleId": "human-south-kunwu",
+      "reused": 14,
+      "reportHash": "c4373af8b173e2c1559acfa7daae63f0b1abc3e86c01f1d7fff4f385bc61536a",
+      "audit": "regions/human-south-kunwu/candidate-reuse-audit.json",
+      "validationScope": "complete-queue-including-pending"
+    },
+    {
+      "moduleId": "spirit-blood",
+      "reused": 1,
+      "reportHash": "591a1a8774aa7b6e8bc27cc6a98f47b05c841738f4ce325ed2fc907f472bc5f4",
+      "audit": "regions/spirit-blood/candidate-reuse-audit.json",
+      "validationScope": "complete-queue-including-pending"
+    },
+    {
+      "moduleId": "associated-demon",
+      "reused": 2,
+      "reportHash": "5874cbdfd532eba73c969f8a1cf08840a18f74b1783de49e79330881acabf116",
+      "audit": "regions/associated-demon/candidate-reuse-audit.json",
+      "validationScope": "exact-selected-records-only-not-full-queue"
+    },
+    {
+      "moduleId": "associated-yinming",
+      "reused": 2,
+      "reportHash": "288409d62df67c3d31d70bb8c2e75e4119edf8942189f920c380837c17636a6a",
+      "audit": "regions/associated-yinming/candidate-reuse-audit.json",
+      "validationScope": "complete-queue-including-pending"
+    },
+    {
+      "moduleId": "associated-immortal",
+      "reused": 10,
+      "reportHash": "0b142d5c14986fae0eed2fe4a75caff09fbb777e4e322a9a0d73e7698496f29b",
+      "audit": "regions/associated-immortal/candidate-reuse-audit.json",
+      "validationScope": "exact-selected-records-only-not-full-queue"
+    }
+  ],
+  "approvedForRuntime": false
+}
