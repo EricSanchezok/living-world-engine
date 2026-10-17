@@ -245,9 +245,15 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
         capability.knownToAgentIds.sort();
       }
     }
-    const perception = directPerception(source, settlements, events, step);
+    const operations: WorldDeltaOperation[] = settlements.flatMap(settlement => settlement.operations);
+    const perceptionState = { ...source, agents: { ...source.agents } };
+    for (const operation of operations) if (operation.kind === "create_agent") {
+      perceptionState.agents[operation.agent.id] = operation.agent;
+      control.intents[operation.agent.id] = readyIntent("world-arrival");
+    }
+    const perception = directPerception(perceptionState, settlements, events, step);
     for (const observation of perception.observations) {
-      const owner = source.agents[observation.observerId]!;
+      const owner = perceptionState.agents[observation.observerId]!;
       const index = events.findIndex(event => observation.sourceEventIds.includes(event.id)); const frame = settlements[index]?.frame;
       if (frame && frame.actorId !== owner.id && !Object.values(owner.belief.evidence).some(evidence =>
         evidence.step === owner.observationCursorStep && evidence.description === observation.summary)) {
@@ -255,10 +261,6 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
         const continuing = !frame.submissionId && intent.wakeReasons.includes("reaction-progress");
         wakeIntent(control, owner.id, "observation", continuing ? intent.causeActionId : frame.id);
       }
-    }
-    const operations: WorldDeltaOperation[] = settlements.flatMap(settlement => settlement.operations);
-    for (const operation of operations) if (operation.kind === "create_agent") {
-      control.intents[operation.agent.id] = readyIntent("world-arrival");
     }
     if (effectiveTime > source.truth.elapsedSeconds) {
       const causes = events.length ? [{ kind: "event" as const, id: events[0]!.id }] : Object.values(source.truth.timers).filter(timer => timer.dueAtSeconds === effectiveTime).flatMap(timer => timer.causes);

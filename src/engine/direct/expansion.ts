@@ -11,6 +11,7 @@ import { selected } from "./decisions";
 import { ModelOutputError, type StructuredModelResult } from "../models/model-provider";
 import { establishedEntityDirectory } from "./state";
 import type { DecisionQuestionV2 } from "../models/decision-v2";
+import { canHaveWitnesses, contactQuestions } from "./contact";
 
 const schema = z.object({
   description: z.string().min(1),
@@ -29,6 +30,8 @@ export interface WorldExpansion {
   operations: WorldDeltaOperation[];
   entities: WorldEntity[];
   facts: WorldFact[];
+  deliveredToEntityIds: string[];
+  actorVisibleToEntityIds: string[];
 }
 const idFor = (frame: ActionFrame, key: string) => `expansion-${contentHash([frame.id, key]).slice(0, 40)}`;
 
@@ -101,7 +104,7 @@ export function materializeExpansion(state: Readonly<SimulationState>, definitio
     addFact(subject, `detail:${index}`, fact.predicate, fact.value, fact.description);
   }
   for (const [index, event] of draft.events.entries()) addFact(sceneId, `event:${index}`, `occurrence-${idFor(frame, String(index))}`, event, event);
-  return { draft, operations, entities, facts };
+  return { draft, operations, entities, facts, deliveredToEntityIds: [], actorVisibleToEntityIds: [] };
 }
 
 export async function createWorldExpansion(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frame: ActionFrame, decisions: DirectDecisions, context: JsonValue, reads: Record<string, string>) {
@@ -148,13 +151,19 @@ export async function createWorldExpansion(state: Readonly<SimulationState>, def
         instructions: { task: "Check only this passage's newly asserted independent people and portable objects. Compare them with state.declaredInventory and already authored state.localWorld entities/appearance facts. Existing things need no duplicate. Body parts, clothing, weather, integral architectural surfaces and fixed portions of the described place need no separate entry. A comparison such as cart-wide does not assert a cart is present. A new shelter may consist of a recess, wall and overhang without creating each surface as an object. A genuinely new carried tool, weapon, container or loose furnishing needs an entry; a new person needs character settings. Do not audit unrelated content elsewhere in the world or demand entries for things only used in a metaphor.", passage },
         criteria: { complete: "Every independent person and object in this passage is registered", missing: "At least one independent person or object in this passage lacks an entry" },
       }]));
+      const arrivals = expansion.operations.flatMap(operation => operation.kind === "create_agent" ? [operation.agent.entityId] : []);
+      const placements = Object.fromEntries(expansion.operations.flatMap(operation => operation.kind === "create_entity" ? [[operation.entity.id, operation.placementId]] : []));
+      const contacts = canHaveWitnesses(frame) ? arrivals.map(recipient => contactQuestions(frame, recipient,
+        placements[recipient] === state.truth.placements[frame.actorEntityId])) : [];
       const admitted = await decisions.ask(null, { localWorld: context, establishedEntities: draftContinuity(state, result.value), action: frame,
+        introducedEntities: expansion.entities, introducedPlacements: placements,
         declaredInventory: entities.map(entity => ({ name: entity.name, label: entity.label, key: entity.key, characterRegistered: Boolean(entity.character) })),
         addition: { entities, facts, events } } as unknown as JsonValue,
         reads, {
           accept: { type: "choice", version: "expansion-admission-2", instructions: "Can this addition occur here, respecting existing facts, time, materials and private knowledge? Public descriptions cannot expose secrets or manufacture a successful player outcome. Do not clone or relocate an established named person or business under an alias. Ordinary distinct items of a generic kind are allowed. The continuity directory is world-only, not automatic perceptual evidence.",
             criteria: { apply: "Plausible and consistent; introduce it", reject: "Conflicts or lacks necessary means", unknown: "Insufficient basis" } },
           ...coverage,
+          ...Object.fromEntries(contacts.flatMap((contact, index) => [[`delivery${index}`, contact.delivery], [`actor_visibility${index}`, contact.actorVisibility]])),
           ...Object.fromEntries(identities.map((identity, index): [string, DecisionQuestionV2] => [`identity${index}`, {
             type: "choice", version: "expansion-identity-1", instructions: { task: "Does this proposed new person duplicate an already existing individual? Compare name, appearance and role. The actor and target already exist. A legitimately distinct namesake is allowed; the same individual with added descriptive details is a duplicate, not a new arrival.",
               proposedPerson: identity.addition as unknown as JsonValue, existingPeople: identity.existing as unknown as JsonValue },
@@ -164,7 +173,11 @@ export async function createWorldExpansion(state: Readonly<SimulationState>, def
       if (selected(admitted, "accept") !== "apply") return { expansion: null, audits };
       const missing = passages.filter((_, index) => selected(admitted, `coverage${index}`) === "missing");
       const duplicates = identities.filter((_, index) => selected(admitted, `identity${index}`) === "duplicate");
-      if (!missing.length && !duplicates.length) return { expansion, audits };
+      if (!missing.length && !duplicates.length) {
+        expansion.deliveredToEntityIds = arrivals.filter((_, index) => contacts[index] && selected(admitted, `delivery${index}`) === "delivered");
+        expansion.actorVisibleToEntityIds = expansion.deliveredToEntityIds.filter(recipient => selected(admitted, `actor_visibility${arrivals.indexOf(recipient)}`) === "visible");
+        return { expansion, audits };
+      }
       repair = `${missing.length ? `These passages mention a person or independently usable object without an entity entry: ${JSON.stringify(missing)}. Add missing entries, or remove unneeded props from those passages. Existing authored fixtures need no duplicate.` : ""}
 ${duplicates.length ? `These proposed people duplicate existing identities: ${JSON.stringify(duplicates)}. Remove the clones, including any dependent content. Use actor/target for existing bound roles; introduce only distinct new people.` : ""}
 Return the complete corrected draft. This draft is not committed yet; actually update every affected field, including facts, rather than only the summary.`;

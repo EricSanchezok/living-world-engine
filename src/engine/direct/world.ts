@@ -1,4 +1,5 @@
 import { createWorldExpansion, type WorldExpansion } from "./expansion";
+import { canHaveWitnesses, contactQuestions } from "./contact";
 import type { ActionOutcome, CausalSource, FactValue, ModelExecutionAudit, SimulationState, WorldDeltaOperation, WorldFact, WorldEntity } from "../contracts/model";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import { loadPromptAsset } from "../prompts";
@@ -223,20 +224,16 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
           { visible: "Its presence is observable", hidden: "Its presence is concealed", unknown: "Insufficient perceptual evidence" });
       }
     }
-    const nearby = frame.utterance || ["speak", "transfer", "use", "change", "move"].includes(frame.kind) ? orderedValues(state.agents)
+    const nearby = canHaveWitnesses(frame) ? orderedValues(state.agents)
       .filter(agent => agent.id !== frame.actorId && (sharesContactNeighborhood(state, agent.entityId, frame.actorEntityId) ||
         frame.kind === "move" && state.truth.placements[agent.entityId] === frame.targetEntityId))
       .map(agent => agent.entityId) : [];
     const recipients = [...new Set([...["speak", "transfer"].includes(frame.kind) && frame.targetEntityId ? [frame.targetEntityId] : [], ...nearby])];
     candidates.set(prefix, recipients);
     for (const [ordinal, recipient] of recipients.entries()) {
-      questions[`${prefix}_delivery${ordinal}`] = question(frame.utterance
-        ? "Can this recipient hear THESE actually spoken words? Nearby ordinary audible speech or a shout is heard unless established distance, a barrier, whispering, deafness or another concrete circumstance prevents it. Missing names, unfamiliarity, uncertainty about the claim, or not being its addressee do not prevent hearing. Judge hearing only, not whether the recipient will answer, agree or obey. Private thoughts are never spoken words."
-        : "Can this recipient perceive THIS physical method and its actual effect? Use sight and other available senses, with the established placement, concealment and barriers. Decide perception independently of willingness to respond. Private thoughts and hidden properties are not observable.",
-      { action: frame as unknown as JsonValue, recipient, samePlace: state.truth.placements[recipient] === state.truth.placements[frame.actorEntityId] },
-        { delivered: "The actual words or physical method and effect are perceived", unavailable: "No actual perception", unknown: "Perception is uncertain" });
-      questions[`${prefix}_actor_visibility${ordinal}`] = question("Can THIS recipient see the acting person's public appearance during this event? Judge actual line of sight, placement, light and concealment. Hearing a voice through a barrier does not establish sight; an unfamiliar person standing openly nearby can be seen without knowing their name.",
-        { action: frame as unknown as JsonValue, recipient }, { visible: "The recipient can see the actor", hidden: "Only another channel such as sound is available", unknown: "Sight is not established" });
+      const contact = contactQuestions(frame, recipient, state.truth.placements[recipient] === state.truth.placements[frame.actorEntityId]);
+      questions[`${prefix}_delivery${ordinal}`] = contact.delivery;
+      questions[`${prefix}_actor_visibility${ordinal}`] = contact.actorVisibility;
     }
   }
   let answers = await decisions.ask(null, view.state, view.reads, questions);
@@ -460,7 +457,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     const visibleFacts = [...visibility].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "visible").map(([, fact]) => fact);
     const visibleEntities = [...entityVisibility].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "visible").map(([, entity]) => entity);
     const deliveredToEntityIds = ["succeeded", "partial"].includes(status)
-      ? (candidates.get(prefix) ?? []).filter((_, ordinal) => selected(answers, `${prefix}_delivery${ordinal}`) === "delivered") : [];
+      ? [...(candidates.get(prefix) ?? []).filter((_, ordinal) => selected(answers, `${prefix}_delivery${ordinal}`) === "delivered"),
+        ...(expansion?.deliveredToEntityIds ?? [])] : [];
     if (frame.kind === "speak" && !frame.utterance) { status = "blocked"; detail = "还没有形成实际话语。"; }
     else if (frame.kind === "speak" && ["succeeded", "partial"].includes(status)) detail = deliveredToEntityIds.length
       ? `你说：“${frame.utterance}”话语已送达。` : `你说：“${frame.utterance}”暂时没有听到答复。`;
@@ -472,7 +470,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         ...operations.flatMap(operation => operation.kind === "set_fact" && operation.fact.predicate === "proximity" ? [operation.fact] : [])].map(fact => fact.id),
       visibleEntityIds: ["succeeded", "partial"].includes(status) ? [...visibleEntities, ...(expansion?.entities ?? [])].map(entity => entity.id) : [], deliveredToEntityIds,
       namedEntityIds: [...entityNames].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "named").map(([, entityId]) => entityId),
-      actorVisibleToEntityIds: deliveredToEntityIds.filter(recipient => selected(answers,
+      actorVisibleToEntityIds: deliveredToEntityIds.filter(recipient => expansion?.actorVisibleToEntityIds.includes(recipient) || (candidates.get(prefix) ?? []).includes(recipient) && selected(answers,
         `${prefix}_actor_visibility${(candidates.get(prefix) ?? []).indexOf(recipient)}`) === "visible"),
       randomRequests: ["succeeded", "partial"].includes(status) ? randomRequests : [], randomBindings: ["succeeded", "partial"].includes(status) ? randomBindings : [],
       sharedClaims: [...claims].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "claim").map(([, claim]) => claim),

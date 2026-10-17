@@ -3,6 +3,7 @@ import { projectAgentPerspective } from "../cognition/agent-perspective";
 import type { JsonValue } from "../runtime/json";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import type { ActionFrame, DirectLocalView } from "./contracts";
+import { canHaveWitnesses } from "./contact";
 import { captureDependencies, orderedValues } from "./state";
 
 export function privateActionView(state: Readonly<SimulationState>, agentId: string, causeActionId?: string | null): DirectLocalView {
@@ -85,7 +86,7 @@ export function perceptualNeighborhood(state: Readonly<SimulationState>, frame: 
 
 export function localWorldView(state: Readonly<SimulationState>, definition: WorldRuntimeContract, frames: ActionFrame[]): DirectLocalView {
   const ids = new Set(frames.flatMap(frame => [frame.actorEntityId, frame.targetEntityId, frame.toolEntityId].filter((id): id is string => id !== null)));
-  for (const frame of frames) if (frame.utterance || ["speak", "transfer", "use", "change", "move"].includes(frame.kind)) {
+  for (const frame of frames) if (canHaveWitnesses(frame)) {
     for (const agent of Object.values(state.agents)) if (sharesContactNeighborhood(state, agent.entityId, frame.actorEntityId)) ids.add(agent.entityId);
   }
   for (const frame of frames) for (const id of perceptualNeighborhood(state, frame)) ids.add(id);

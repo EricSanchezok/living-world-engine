@@ -95,6 +95,45 @@ async function fixture(options: { operation?: string; target?: string; tool?: st
 }
 
 describe("direct world through the actual simulation entry", () => {
+  it.each([[true, true], [false, true], [true, false]])("delivers the current event to a new actor through an admitted channel: heard=%s, admitted=%s", async (delivered, admitted) => {
+    const options: Parameters<typeof fixture>[0] = { operation: "speak", recipient: "broadcast", speech: "input", creationEnabled: true,
+      introduce: true, missingCoverage: !admitted, delivery: delivered, actorVisible: false, privateGateFact: true, creationResponse: {
+        description: "A worker is present nearby.", entities: [{ key: "worker", kind: "person", name: "Worker", label: "Worker",
+          appearance: "A worker in a plain coat.", placement: "scene", character: { persona: "Careful", voice: "Brief", goal: "Finish work" } }], facts: [], events: [],
+      } };
+    const f = await fixture(options);
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("请问这里能歇脚吗？"));
+    const worker = Object.values(result.state.agents).find(agent => agent.id.startsWith("expansion-"))!;
+    if (!admitted) {
+      expect(worker).toBeUndefined();
+      expect(result.committed.observations.every(packet => !packet.observerId.startsWith("expansion-"))).toBe(true);
+      expect(replaySimulationState(result.state)).toEqual(result.state);
+      return;
+    }
+    expect(worker).toBeDefined();
+    const received = result.committed.observations.find(packet => packet.observerId === worker.id);
+    expect(received?.scene?.speech?.utterance).toBe(delivered ? "请问这里能歇脚吗？" : undefined);
+    if (delivered) {
+      expect(received?.scene?.speech?.speaker).toBe("一个陌生的声音");
+      expect(JSON.stringify(worker.belief)).not.toContain("PRIVATE-CODE");
+      expect(privateActionView(result.state, worker.id).state).toMatchObject({ conversation: [expect.objectContaining({ words: "请问这里能歇脚吗？" })] });
+    }
+    const intent = readDirectState(result.state.executionState!, result.state).intents[worker.id]!;
+    expect(intent.causeActionId).toBe(delivered ? result.committed.directEvent.frames[0]!.id : null);
+    expect(f.transport.mock.calls.filter(([, init]) => directDecisionContext(JSON.parse(String(init?.body)))?.questions.accept)).toHaveLength(1);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+    if (delivered) {
+      options.introduce = false;
+      options.creationResponse = { utterance: "可以在这里歇脚。", manner: null };
+      f.roster[worker.id] = { kind: "model", agentId: worker.id, profiles: worker.modelProfiles };
+      const reply = await f.engine.step(f.roster, { expectedRevision: result.state.revision, trigger: "participant_action", externalActions: [] });
+      expect(reply.committed.directEvent.frames.find(frame => frame.actorId === worker.id)).toMatchObject({ kind: "speak", causeActionId: intent.causeActionId });
+      expect(reply.committed.observations.filter(packet => packet.observerId === "player").some(packet => packet.scene?.speech?.utterance === "可以在这里歇脚。")).toBe(true);
+      expect(replaySimulationState(reply.state)).toEqual(reply.state);
+    }
+  });
+
   it("admits motivated local initiative, shares time and introduces concurrent subjects only once", async () => {
     const f = await fixture({ operation: "observe", target: "self", keeperInitiative: true });
     // Their old mentions have no identity binding; simultaneous perceptions share an alias namespace.

@@ -18,15 +18,17 @@ The pre-change real-model instance `1e466910-0b30-4bdb-a68a-0339f725da11` consum
 4. Real-model qualification exposed a parent-city opportunity expansion and missed interior/exterior contact. The revision 2 Inspector record of `2f7b846e-a85e-41e6-9149-3020ddd2fdd8` also showed an NPC's chosen harbor observation rebound to its own inventory.
 5. Follow-up corrections narrowed opportunity anchors, admitted adjacent contact candidates with semantic access checks, preserved interactions delivered during independent work, and removed the conflicting native inventory selector. Language publication retains all six factual checks with thinking disabled and a recorded inference override.
 
+6. Third-cycle play in `51601adc-31dc-414d-8ab2-551f95a69838` created a nearby listener during the player's speech, but recipient enumeration only included pre-existing actors. The player had to repeat the question. Admission now batches new-actor perceptual access with its existing checks, and settlement installs admitted recipients before constructing observations and waking causal responses.
+
 ## Root cause
 
-An absent duration had been treated as a request for the smallest fixed profile. Scheduling prioritized the participant by excluding autonomous opportunities altogether. Positive prompt permission could not make missing candidates visible to adjudication, while independently selected scope fields could override an otherwise meaningful target. Per-settlement perception constructed identities independently even when multiple outcomes shared one atomic boundary.
+An absent duration had been treated as a request for the smallest fixed profile. Scheduling prioritized the participant by excluding autonomous opportunities altogether. Positive prompt permission could not make missing candidates visible to adjudication, while independently selected scope fields could override an otherwise meaningful target. Per-settlement perception constructed identities independently even when multiple outcomes shared one atomic boundary. Recipient enumeration also ran before world expansion, so newly introduced actors could be narrated as present without hearing the event that introduced them.
 
 Existing tests emphasized valid commits, cognitive isolation, literal dialogue and reply completion. Their scripted actors reacted only after contact; they did not qualify ordinary play across several real-model turns. Passing those invariants did not establish a coherent, responsive experience. The original publication model profile also allowed reasoning to consume the entire output budget for closed evidence comparison.
 
 ## Guardrails
 
-- [Direct entry regressions](../../src/engine/direct/__tests__/runtime.test.ts) cover non-minimal timing, explicit waits, bounded locality, private context, adjacent perceptual access, duplicate introductions, independent activity with deferred replies, and replay.
+- [Direct entry regressions](../../src/engine/direct/__tests__/runtime.test.ts) cover non-minimal timing, explicit waits, bounded locality, private context, adjacent perceptual access, duplicate introductions, independent activity with deferred replies, new-actor hearing and response, rejected creation, and replay.
 - [Persistent host tests](../../src/server/__tests__/direct-world-host.test.ts) retain causal foreground completion, background continuation and no model work during reads or restart.
 - [Decision transport tests](../../src/engine/models/__tests__/decision-v2.test.ts) verify the language-only inference override and native fallback without extra inference.
 - [Spec 0191](../specs/0191-natural-action-time-and-world-initiative.md) requires real-model trajectory qualification and latency/call-count evidence alongside structural checks. [Decision 0244](../decisions/0244-calibrated-time-and-local-initiative.md) records the bounded scope and rejected architectural alternatives.
