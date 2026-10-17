@@ -22,6 +22,20 @@ export interface CandidateQueue {
   candidates: Array<{ id: string; kind: string; batchId: string; reportHash: string }>;
 }
 
+/** Only registered entities, authored claims, subjects, and module identities are targets. */
+export function candidateEditorialTargets(opening: unknown, openingClaims: unknown,
+  regions: Array<{ id: string; module: unknown; claims: unknown; subjects: unknown }>) {
+  const entries = z.array(z.object({ id: identity }).passthrough());
+  const base = z.object({ id: identity, template: z.object({ entities: entries }).passthrough() }).passthrough().parse(opening);
+  const targets = new Set<string>([base.id, ...base.template.entities.map(entry => entry.id), ...entries.parse(openingClaims).map(entry => entry.id)]);
+  for (const region of regions) {
+    targets.add(region.id);
+    const entities = z.object({ entities: entries }).passthrough().parse(region.module).entities;
+    for (const entry of [...entities, ...entries.parse(region.claims), ...entries.parse(region.subjects)]) targets.add(entry.id);
+  }
+  return targets;
+}
+
 /** Completeness is an editorial queue property, never implicit runtime approval. */
 export function validateCandidateDispositions(input: unknown, queue: CandidateQueue, context: {
   reports: ReadonlyMap<string, unknown>;

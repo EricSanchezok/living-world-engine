@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { contentHash } from "../../src/engine/models/model-audit";
-import { validateCandidateDispositions } from "./candidate-dispositions";
+import { candidateEditorialTargets, validateCandidateDispositions } from "./candidate-dispositions";
 
 function fixture() {
   const source = "甲说乙未曾来过。\r\n丙后来抵达。";
@@ -18,6 +18,12 @@ function fixture() {
 }
 
 describe("candidate editorial dispositions", () => {
+  it("resolves base identities without admitting facts or laws as editorial targets", () => {
+    const targets = candidateEditorialTargets({ id: "opening", template: { entities: [{ id: "han", facts: [{ id: "own-rank" }] }] } }, [{ id: "opening-night" }],
+      [{ id: "north", module: { entities: [{ id: "person" }], laws: [{ id: "law" }] }, claims: [{ id: "claim" }], subjects: [{ id: "historical-person" }] }]);
+    expect([...targets]).toEqual(["opening", "han", "opening-night", "north", "person", "claim", "historical-person"]);
+    expect(targets.has("own-rank")).toBe(false); expect(targets.has("law")).toBe(false);
+  });
   it("validates a complete source-bound queue without approving runtime", () => {
     const f = fixture(); expect(validateCandidateDispositions(f.input, f.queue, f.context)).toMatchObject({ completed: 1, unresolved: 0, approvedForRuntime: false });
   });

@@ -1,5 +1,12 @@
 import { ModelConfigurationError } from "../../src/engine/models/model-provider";
 
+/** Check every paid dispatch, including repairs, while preserving in-flight results. */
+export async function sourceRunnerCallIfActive<T>(isStopped: () => boolean, call: () => Promise<T>):
+Promise<{ status: "stopped" } | { status: "returned"; value: T }> {
+  if (isStopped()) return { status: "stopped" };
+  return { status: "returned", value: await call() };
+}
+
 /** Account failures stop dispatch; invalid source claims remain batch-local repairs. */
 export function sourceRunnerAccountBlock(error: unknown): "payment-required" | "account-unavailable" | "configuration" | null {
   const seen = new Set<unknown>();

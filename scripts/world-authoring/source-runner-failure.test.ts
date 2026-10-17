@@ -1,8 +1,21 @@
 import { describe, expect, it } from "vitest";
 import { ModelTransportError } from "../../src/engine/models/model-provider";
-import { sourceRunnerAccountBlock } from "./source-runner-failure";
+import { sourceRunnerAccountBlock, sourceRunnerCallIfActive } from "./source-runner-failure";
 
 describe("source runner account blocking", () => {
+  it("preserves an in-flight response but prevents the next paid repair after stopping", async () => {
+    let stopped = false, calls = 0;
+    let respond!: (value: { raw: string }) => void;
+    const first = sourceRunnerCallIfActive(() => stopped, () => {
+      calls++;
+      return new Promise<{ raw: string }>(resolve => { respond = resolve; });
+    });
+    stopped = true;
+    respond({ raw: "retain invalid response for later local review" });
+    expect(await first).toEqual({ status: "returned", value: { raw: "retain invalid response for later local review" } });
+    expect(await sourceRunnerCallIfActive(() => stopped, async () => { calls++; return "repair"; })).toEqual({ status: "stopped" });
+    expect(calls).toBe(1);
+  });
   it("retains HTTP account failure evidence through wrappers", () => {
     const payment = new ModelTransportError("provider payment required", { statusCode: 402 });
     expect(sourceRunnerAccountBlock(new Error("gateway", { cause: payment }))).toBe("payment-required");

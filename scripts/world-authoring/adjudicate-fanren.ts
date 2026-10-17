@@ -2,7 +2,8 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSy
 import path from "node:path";
 import { loadModelCatalog } from "../../src/engine/models/model-catalog";
 import { sourceAdjudicationCatalog } from "./adjudication-catalog";
-import { sourceRunnerAccountBlock } from "./source-runner-failure";
+import { sourceRunnerAccountBlock, sourceRunnerCallIfActive } from "./source-runner-failure";
+import { sourceValidationDiagnostics } from "./source-validation-diagnostics";
 import { createModelGateway } from "../../src/engine/models/model-gateway";
 import { ModelRegistry } from "../../src/engine/models/model-registry";
 import { createModelFetchResolver } from "../../src/engine/models/model-network";
@@ -128,7 +129,7 @@ async function main() {
         } catch (error) {
           // Resume the last source-bound draft and append attempts; never overwrite raw evidence.
           draft = latest.value;
-          problems = error instanceof Error ? error.message : String(error);
+          problems = sourceValidationDiagnostics(error, draft);
           audits.push(...current.map(saved => saved.audit));
           priorDraft = { identity: latest.identity, fileHash: contentHash(latest), sourceReportHash,
             auditHash: contentHash(latest.audit) };
@@ -154,7 +155,7 @@ async function main() {
       draft = saved.value;
       priorDraft = { identity: saved.identity, fileHash: contentHash(saved), sourceReportHash, auditHash: contentHash(audit) };
       try { validateSourceAdjudication(schema.parse(draft), report, paragraphs); }
-      catch (error) { problems = error instanceof Error ? error.message : String(error); }
+      catch (error) { problems = sourceValidationDiagnostics(error, draft); }
       break;
     }
     for (let attempt = 0; attempt < 3; attempt++) {
@@ -167,7 +168,7 @@ async function main() {
         audits.push(saved.audit);
       } else {
         try {
-          const result = await gateway.generateStructured({
+          const dispatch = await sourceRunnerCallIfActive(() => draining, () => gateway.generateStructured({
             profileId, role: "creation", subjectId: batch.id, workloadId: "fanren-source-adjudication", batchId: `${batch.id}-semantic-${storedAttempt}`,
             promptVersion: `fanren-source-adjudication-${policyHash}`, schemaName: "fanren_source_adjudication", system,
             userPrompt: `${!draft ? "独立阅读全部正文，审查所有候选对象、事实、别名、已有问题与遗漏，返回完整裁决。" :
@@ -176,7 +177,12 @@ async function main() {
               facts: report.facts, issues: report.issues }, ...(draft ? { draft, problems } : {}) },
             schema, runtimeIdentity: { worldHash: `sha256:${identity}`, revision: 0 },
             jsonExamplePolicy: "omit", structuredOutputMode: "json-object-zod",
-          });
+          }));
+          if (dispatch.status === "stopped") {
+            process.stdout.write(`${JSON.stringify({ batch: batch.id, status: "stopped-before-paid-repair", storedAttempt })}\n`);
+            return;
+          }
+          const result = dispatch.value;
           draft = result.value;
           audits.push(result.audit);
           save(local, { identity, sourceReportHash, policyHash, schemaHash, requestIdentity, value: draft, audit: result.audit });
@@ -193,7 +199,7 @@ async function main() {
         finish(value, storedAttempt + 1);
         return;
       } catch (error) {
-        problems = error instanceof Error ? error.message : String(error);
+        problems = sourceValidationDiagnostics(error, draft);
         if (attempt === 2) throw error;
       }
     }
