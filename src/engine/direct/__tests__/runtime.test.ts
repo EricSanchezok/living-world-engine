@@ -27,7 +27,8 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
   playerAuthorization?: "authorized" | "outside_scope" | "unknown";
   worldOutcomes?: Record<string, string>;
   readingOverrides?: Record<string, string>; npcReadings?: unknown[]; factValues?: Record<string, string>; resolvedDuration?: string; resolvedDurations?: Record<string, string>; effectRepresentation?: "existing" | "no_change" | "already" | "expand";
-  withMana?: boolean; meterImpacts?: Record<string, string>; inspectedStock?: number; quantityMeasured?: boolean } = {}) {
+  withMana?: boolean; meterImpacts?: Record<string, string>; inspectedStock?: number; quantityMeasured?: boolean;
+  discoverableGateFact?: boolean; discoveryAdmitted?: boolean } = {}) {
   let creations = 0;
   let npcReadings = 0;
   let inspectedQuantityId = "";
@@ -88,6 +89,10 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
         const task = (q.instructions as { task: { data: { quantityId: string } } }).task;
         value = options.quantityMeasured !== false && task.data.quantityId === inspectedQuantityId ? "measured" : "hidden";
       }
+      if (/_visible\d+$/u.test(id)) {
+        const task = (q.instructions as { task: { data: { factId: string } } }).task;
+        if (task.data.factId === "gate-alloy") value = options.discoveryAdmitted === false ? "hidden" : "visible";
+      }
       if (/_fact\d+$/u.test(id)) {
         const instructions = q.instructions as { task?: { data?: { fact?: { predicate: string } } }; data?: { fact?: { predicate: string } } };
         const fact = (instructions.task ?? instructions).data?.fact;
@@ -122,6 +127,9 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
   }
   if (options.privateGateFact) world.initialState.truth.facts["gate-secret"] = { ...world.initialState.truth.facts["gate-lock"]!,
     id: "gate-secret", predicate: "secret", value: { kind: "text", value: "PRIVATE-CODE" }, description: "PRIVATE-CODE", access: { kind: "agents", agentIds: ["keeper"] } };
+  if (options.discoverableGateFact) world.initialState.truth.facts["gate-alloy"] = { ...world.initialState.truth.facts["gate-lock"]!,
+    id: "gate-alloy", predicate: "alloy", value: { kind: "text", value: "copper-tin" }, description: "The tested metal is copper-tin bronze.",
+    access: { kind: "discoverable", condition: "A valid assay of the metal reveals its alloy; ordinary sight cannot identify the composition." } };
   for (const [id, canonicalId] of [["door", "gate"], ["guard", "keeper"], ["yard", "courtyard"]]) {
     player.belief.localEntities[id!] = { id: id!, name: world.initialState.truth.entities[canonicalId!]!.name, description: "Seen nearby", status: "observed" };
     player.bindings[id!] = { localEntityId: id!, canonicalEntityIds: [canonicalId!] };
@@ -202,6 +210,27 @@ describe("direct world through the actual simulation entry", () => {
     expect(replaySimulationState(third.state)).toEqual(third.state);
   });
 
+  it.each([[true, "succeeded"], [true, "partial"], [false, "succeeded"], [true, "failed"]] as const)("discovers an existing property only through a completed admitted examination: %s / %s", async (admitted, outcome) => {
+    const f = await fixture({ operation: "observe", target: "door", discoverableGateFact: true, discoveryAdmitted: admitted, outcome, privateGateFact: true });
+    await f.engine.bootstrapAgents();
+    const before = f.engine.snapshot;
+    expect(JSON.stringify(privateActionView(before, "player").state)).not.toContain("copper-tin");
+    const result = await f.engine.step(f.roster, f.request("以实际取样检验门锁金属的成分，保留检验结果，暂不向旁人报告"));
+    const revealed = admitted && ["succeeded", "partial"].includes(outcome);
+    expect(JSON.stringify(result.state.agents.player!.belief).includes("copper-tin")).toBe(revealed);
+    expect(JSON.stringify(result.state.agents.keeper!.belief)).not.toContain("copper-tin");
+    expect(JSON.stringify(result.state.agents.player!.belief)).not.toContain("PRIVATE-CODE");
+    expect(result.state.truth.facts).toEqual(before.truth.facts);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+    if (revealed) {
+      const changed = structuredClone(result.state);
+      changed.truth.facts["gate-alloy"]!.value = { kind: "text", value: "copper-zinc" };
+      changed.truth.facts["gate-alloy"]!.description = "The metal is now copper-zinc brass.";
+      const remembered = JSON.stringify(privateActionView(changed, "player").state);
+      expect(remembered).toContain("copper-tin");
+      expect(remembered).not.toContain("copper-zinc");
+    }
+  });
   it.each([[17, true], [0, true], [17, false]] as const)("inspects only admitted target quantities without leaking them to a witness: %s / %s", async (amount, measured) => {
     const f = await fixture({ operation: "observe", target: "door", inspectedStock: amount, quantityMeasured: measured });
     await f.engine.bootstrapAgents();

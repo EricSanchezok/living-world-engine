@@ -813,7 +813,7 @@ function projectModelEffect(
           durationProfileRef: modelHandle(resolvers, "mechanic", effect.durationProfileId),
           access: effect.access.kind === "agents"
             ? { kind: effect.access.kind, agentRefs: effect.access.agentIds.map((id) => modelHandle(resolvers, "agent", id)) }
-            : { kind: effect.access.kind },
+            : structuredClone(effect.access),
         }),
   };
 }

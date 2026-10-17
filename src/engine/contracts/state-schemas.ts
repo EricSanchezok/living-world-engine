@@ -259,6 +259,7 @@ export const beliefValueSchema = z.discriminatedUnion("kind", [
 export const accessSchema = z.discriminatedUnion("kind", [
   z.strictObject({ kind: z.literal("public") }),
   z.strictObject({ kind: z.literal("private") }),
+  z.strictObject({ kind: z.literal("discoverable"), condition: z.string().trim().min(1) }),
   z.strictObject({ kind: z.literal("agents"), agentIds: z.array(safeIdSchema) }),
 ]);
 

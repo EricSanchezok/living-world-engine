@@ -40,7 +40,9 @@ export function directPerception(state: Readonly<SimulationState>, settlements: 
         ["appearance", "appearance_label"].includes(fact.predicate));
       const eventFacts = ownsAction || seesActor ? settlement.visibleFacts.filter(fact => ownsAction || !settlement.actorOnlyFactIds.includes(fact.id)) : [];
       const facts = [...new Map([...eventFacts, ...appearanceFacts].filter(fact => fact.access.kind === "public" ||
-        fact.access.kind === "agents" && fact.access.agentIds.includes(ownerId)).map(fact => [fact.id, fact])).values()];
+        fact.access.kind === "agents" && fact.access.agentIds.includes(ownerId) ||
+        fact.access.kind === "discoverable" && ownsAction && ["succeeded", "partial"].includes(settlement.outcome.status))
+        .map(fact => [fact.id, fact])).values()];
       const details: NonNullable<ObservationPacket["scene"]>["details"] = [];
       const targetVisible = seesActor || settlement.frame.targetEntityId === agent.entityId;
       const targetLabel = settlement.frame.targetEntityId && targetVisible ? alias(agent, settlement.frame.targetEntityId, introductions).name : "四周";

@@ -229,7 +229,9 @@ agent:
       - { local_entity_id: self, canonical_entity_ids: [gatekeeper] }
 ```
 
-`placement` 为另一个 Entity ID 或 null。Fact value 为 text、number、boolean、entity 或 none；access 为 public、private 或指定 Agent。Meter、Quantity 和 Rating 必须引用 `mechanics.yaml` 中的定义并满足范围约束。
+`placement` 为另一个 Entity ID 或 null。Fact value 为 text、number、boolean、entity 或 none。Fact access 可为 `public`、`private`、指定 `agents`，或 `{ kind: discoverable, condition: ... }`。`discoverable` 的非空 condition 描述实际发现条件，例如取样检验、读取已解密记录或掌握相应能力后检查。此类事实不会因认识对象而进入视角；默认执行器只在成功或部分成功的行动满足条件时，将既有值记入检查者的观察与认知。旁观者和被检查者不会自动得到结果；事实的值与 access 不因被发现而改变，后续真值也不会自动更新旧认知。永久秘密与人物私有认知继续使用 `private`，不能用发现条件绕过。此发现机制目前适用于 Fact，不提供 Condition 实例的检查入口。
+
+Meter、Quantity 和 Rating 必须引用 `mechanics.yaml` 中的定义并满足范围约束。
 
 一个 Entity 以 `shared_activity_resources` 实例化自己拥有的共享 pool，例如独立的工作台 Entity 可以声明：
 

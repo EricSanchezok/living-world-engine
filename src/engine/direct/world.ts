@@ -260,7 +260,9 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     }
     for (const [ordinal, fact] of [...observableFacts.values()].entries()) {
       const id = `${prefix}_visible${ordinal}`; visibility.set(id, fact);
-      questions[id] = question("Judge this property's perceptual access under the incidental-perception policy.", { actionId: frame.id, factId: fact.id,
+      questions[id] = question(fact.access.kind === "discoverable"
+        ? "Does this actual action satisfy the fact's authored discovery condition through available tools, skills and physical evidence? A known subject, intention, guess or successful unrelated action is insufficient. Select visible only when this completed method reveals THIS existing value to its actor. Discovery reads the value; it does not change or regenerate it. A witness does not inherit the actor's findings."
+        : "Judge this property's perceptual access under the incidental-perception policy.", { actionId: frame.id, factId: fact.id,
         ...(!state.truth.facts[fact.id] ? { fact: fact as unknown as JsonValue } : {}) },
         { visible: "The attempt reveals the resulting fact through an available perceptual channel", hidden: "The fact remains hidden", unknown: "No justified perceptual access" });
     }
@@ -562,7 +564,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     prepared.push({ actionId: frame.id, status, summary: detail, operations, reads: view.reads, propertyVisibility,
       inspectedQuantityIds: ["succeeded", "partial"].includes(status) ? [...quantityVisibility]
         .filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "measured").map(([, id]) => id) : [],
-      actorOnlyFactIds: incidental.get(frame.id)!.facts, actorOnlyEntityIds: incidental.get(frame.id)!.entities,
+      actorOnlyFactIds: [...new Set([...incidental.get(frame.id)!.facts, ...visibleFacts.filter(fact => fact.access.kind === "discoverable").map(fact => fact.id)])],
+      actorOnlyEntityIds: incidental.get(frame.id)!.entities,
       visibleFactIds: [...visibleFacts.filter(fact => state.truth.facts[fact.id] || ["succeeded", "partial"].includes(status)),
         ...(["succeeded", "partial"].includes(status) ? expansion?.facts ?? [] : []),
         ...operations.flatMap(operation => operation.kind === "set_fact" && operation.fact.predicate === "proximity" ? [operation.fact] : [])].map(fact => fact.id),

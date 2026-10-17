@@ -892,7 +892,7 @@ function materializeModelFactValue(value: ModelFactValue, resolver: ReferenceRes
 }
 
 function materializeModelAccess(access: ModelAccess, resolver: ReferenceResolver): import("../contracts/model").WorldFact["access"] {
-  if (access.kind !== "agents") return { kind: access.kind };
+  if (access.kind !== "agents") return structuredClone(access);
   return {
     kind: "agents",
     agentIds: access.agentRefs.map((reference) => {

@@ -611,7 +611,7 @@ export function actionGroundingSharedContext(
   const projectAccess = (access: Readonly<SimulationState["truth"]["facts"][string]["access"]>): unknown =>
     access.kind === "agents"
       ? { kind: "agents", agentRefs: access.agentIds.map((agentId) => handle("agent", agentId)) }
-      : { kind: access.kind };
+      : structuredClone(access);
   const canonicalTruth = {
     entities: Object.values(state.truth.entities).map(({ id, kind, name, description, lifecycle }) => ({
       ref: handle("entity", id), kind, name, description, lifecycle,

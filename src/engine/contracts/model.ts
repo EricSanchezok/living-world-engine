@@ -113,6 +113,7 @@ export interface WorldFact {
   access:
     | { kind: "public" }
     | { kind: "private" }
+    | { kind: "discoverable"; condition: string }
     | { kind: "agents"; agentIds: AgentId[] };
   provenance: FactProvenanceRef[];
 }
