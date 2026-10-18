@@ -90,6 +90,30 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "human-inner-star-sea-route-innerstar-yuangui-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-yuangui-island"
+          },
+          "description": "须海船或御器渡海，并核海况与补给，非陆路。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-inner-star-sea-route-innerstar-tongtian-fog-sea",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-tongtian-fog-sea"
+          },
+          "description": "须寻找可辨航线入海，浓雾不代表无障碍安全通路。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -613,6 +637,18 @@
             "value": "需要实际行至门口并按接待情况进入。"
           },
           "description": "需要实际行至门口并按接待情况进入。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-market-route-innerstar-qinghe-teahouse",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-qinghe-teahouse"
+          },
+          "description": "沿坊市街道可步行往返。",
           "access": {
             "kind": "public"
           }
@@ -10914,6 +10950,19 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "canon-tianlei-bamboo-material-properties",
+          "predicate": "material-properties",
+          "value": {
+            "kind": "text",
+            "value": "天雷竹通常千年增长寸许；灵性年份两千以下白雷、五千以上蓝雷、万年以上淡金辟邪雷，中间细分须实际判断。带根可生长，膏玉可保灵气；当前不能仅凭期待变作万年竹。"
+          },
+          "description": "天雷竹通常千年增长寸许；灵性年份两千以下白雷、五千以上蓝雷、万年以上淡金辟邪雷，中间细分须实际判断。带根可生长，膏玉可保灵气；当前不能仅凭期待变作万年竹。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "获准检查活竹且掌握相关灵植知识，或实际读取可靠的天雷竹资料。"
+          }
         }
       ],
       "meters": [],
@@ -14552,6 +14601,673 @@
           ]
         }
       }
+    },
+    {
+      "id": "innerstar-qinghe-teahouse",
+      "name": "清河茶馆",
+      "kind": "location",
+      "placement": "innerstar-market",
+      "description": "挂茶旗的会客阁楼，茶具和房间需由经营者安排。",
+      "facts": [
+        {
+          "id": "innerstar-qinghe-teahouse-route-innerstar-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-market"
+          },
+          "description": "沿坊市街道可步行往返。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-qinghe-teahouse-route-innerstar-longxing-inn",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-longxing-inn"
+          },
+          "description": "两店沿城内街道可往返，需实际步行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-qinghe-teahouse-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-tea-keeper"
+          },
+          "description": "叶岑经营管理，租借或出售须实际协商。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-longxing-inn",
+      "name": "隆兴客栈",
+      "kind": "location",
+      "placement": "human-tianxing-city",
+      "description": "一二层供凡人住宿，三层供暂留修士；各间租用分别协商。",
+      "facts": [
+        {
+          "id": "innerstar-longxing-inn-route-innerstar-qinghe-teahouse",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-qinghe-teahouse"
+          },
+          "description": "两店沿城内街道可往返，需实际步行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-longxing-inn-route-innerstar-longxing-room",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-longxing-room"
+          },
+          "description": "沿楼梯进入二层，须经店家安排。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-longxing-inn-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-tea-keeper"
+          },
+          "description": "叶岑经营管理，租借或出售须实际协商。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-longxing-room",
+      "name": "隆兴二层空客房",
+      "kind": "location",
+      "placement": "innerstar-longxing-inn",
+      "description": "一间当前未出租的普通客房，门窗、木床和蒲席齐备。",
+      "facts": [
+        {
+          "id": "innerstar-longxing-room-route-innerstar-longxing-inn",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-longxing-inn"
+          },
+          "description": "沿楼梯进入二层，须经店家安排。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-longxing-room-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-tea-keeper"
+          },
+          "description": "叶岑经营管理，租借或出售须实际协商。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-tea-ledger",
+      "name": "清河经营款匣",
+      "kind": "container",
+      "placement": "innerstar-qinghe-teahouse",
+      "description": "清河日常收支公款。",
+      "facts": [
+        {
+          "id": "innerstar-tea-ledger-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-qinghe-teahouse"
+          },
+          "description": "经营公账，不能混作个人钱袋。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 60
+        }
+      ]
+    },
+    {
+      "id": "innerstar-inn-ledger",
+      "name": "隆兴经营款匣",
+      "kind": "container",
+      "placement": "innerstar-longxing-inn",
+      "description": "隆兴住宿收支公款。",
+      "facts": [
+        {
+          "id": "innerstar-inn-ledger-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-longxing-inn"
+          },
+          "description": "经营公账，不能混作个人钱袋。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 90
+        }
+      ]
+    },
+    {
+      "id": "innerstar-tea-leaves",
+      "name": "一包普通茶叶",
+      "kind": "item",
+      "placement": "innerstar-qinghe-teahouse",
+      "description": "装有四杯份普通干茶的小包，分取后相应减少存量。",
+      "facts": [
+        {
+          "id": "innerstar-tea-leaves-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-tea-keeper"
+          },
+          "description": "叶岑经营管理，租借或出售须实际协商。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "innerstar-dry-tea-portion",
+          "amount": 4
+        }
+      ]
+    },
+    {
+      "id": "innerstar-tea-kettle",
+      "name": "清河水壶",
+      "kind": "item",
+      "placement": "innerstar-qinghe-teahouse",
+      "description": "装有刚烧好可饮热水的铜壶，当前四杯量；后续取水、加热需要实际条件。",
+      "facts": [
+        {
+          "id": "innerstar-tea-kettle-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-tea-keeper"
+          },
+          "description": "叶岑经营管理，租借或出售须实际协商。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "innerstar-water-cup",
+          "amount": 4
+        }
+      ]
+    },
+    {
+      "id": "innerstar-tea-cup-a",
+      "name": "清河茶杯甲",
+      "kind": "item",
+      "placement": "innerstar-qinghe-teahouse",
+      "description": "清洁的空陶杯。",
+      "facts": [
+        {
+          "id": "innerstar-tea-cup-a-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-tea-keeper"
+          },
+          "description": "叶岑经营管理，租借或出售须实际协商。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-tea-cup-b",
+      "name": "清河茶杯乙",
+      "kind": "item",
+      "placement": "innerstar-qinghe-teahouse",
+      "description": "清洁的空陶杯。",
+      "facts": [
+        {
+          "id": "innerstar-tea-cup-b-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-tea-keeper"
+          },
+          "description": "叶岑经营管理，租借或出售须实际协商。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-yuangui-island",
+      "name": "元龟岛",
+      "kind": "location",
+      "placement": "human-inner-star-sea",
+      "description": "内海的一座岛屿，周边有可泊小舟的避风礁岸。",
+      "facts": [
+        {
+          "id": "innerstar-yuangui-island-route-human-inner-star-sea",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-inner-star-sea"
+          },
+          "description": "须海船或御器渡海，并核海况与补给，非陆路。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-tongtian-fog-sea",
+      "name": "通天雾海",
+      "kind": "location",
+      "placement": "human-luanxing-sea",
+      "description": "连片海雾笼罩的海域，能见度随雾况变化，实际行路须辨方向。",
+      "facts": [
+        {
+          "id": "innerstar-tongtian-fog-sea-route-human-inner-star-sea",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-inner-star-sea"
+          },
+          "description": "须寻找可辨航线入海，浓雾不代表无障碍安全通路。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-tea-keeper",
+      "name": "叶岑",
+      "kind": "person",
+      "placement": "innerstar-qinghe-teahouse",
+      "description": "清河茶馆经营者，也照料自家隆兴的小客房，认真实收款与已租房。",
+      "facts": [
+        {
+          "id": "innerstar-tea-keeper-service",
+          "predicate": "service",
+          "value": {
+            "kind": "text",
+            "value": "普通淡茶每杯5铜，隆兴二层空房一夜20铜；客人自愿，茶款入茶账，房款入客栈账。实际交房后该房不能再租给别人。"
+          },
+          "description": "普通淡茶每杯5铜，隆兴二层空房一夜20铜；客人自愿，茶款入茶账，房款入客栈账。实际交房后该房不能再租给别人。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "innerstar-tea-keeper"
+            ]
+          }
+        },
+        {
+          "id": "innerstar-tea-keeper-skill",
+          "predicate": "skill",
+          "value": {
+            "kind": "text",
+            "value": "无灵根凡人，会烧水、分茶、记账和接待，不会法术。"
+          },
+          "description": "无灵根凡人，会烧水、分茶、记账和接待，不会法术。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "innerstar-tea-keeper"
+            ]
+          }
+        },
+        {
+          "id": "innerstar-tea-keeper-opening-night",
+          "predicate": "opening-night",
+          "value": {
+            "kind": "text",
+            "value": "此前亲见已入夜，之后日夜随实际时间变化。"
+          },
+          "description": "此前亲见已入夜，之后日夜随实际时间变化。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "innerstar-tea-keeper"
+            ]
+          }
+        },
+        {
+          "id": "innerstar-tea-keeper-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根。"
+          },
+          "description": "无灵根。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "有能力者取得同意并实际验根。"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "innerstar-tea-keeper-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "innerstar-tea-keeper-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "innerstar-tea-keeper-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "innerstar-tea-keeper-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "innerstar-tea-keeper-perception",
+          "definition_id": "perception",
+          "value": 1
+        },
+        {
+          "id": "innerstar-tea-keeper-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 28
+        }
+      ],
+      "agent": {
+        "id": "innerstar-tea-keeper",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "清河茶馆经营者，也照料自家隆兴的小客房，认真实收款与已租房。",
+            "voice": "说话慢，讲清价格和房间，忙不过来就说明。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "整理今晚的茶杯和空房，有客人时先确认需要饮茶还是住宿。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "叶岑",
+              "description": "清河茶馆经营者，也照料自家隆兴的小客房，认真实收款与已租房。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-qinghe-teahouse",
+              "name": "清河茶馆",
+              "description": "挂茶旗的会客阁楼，茶具和房间需由经营者安排。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-longxing-inn",
+              "name": "隆兴客栈",
+              "description": "一二层供凡人住宿，三层供暂留修士；各间租用分别协商。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-longxing-room",
+              "name": "隆兴二层空客房",
+              "description": "一间当前未出租的普通客房，门窗、木床和蒲席齐备。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-tea-ledger",
+              "name": "清河经营款匣",
+              "description": "清河日常收支公款。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-inn-ledger",
+              "name": "隆兴经营款匣",
+              "description": "隆兴住宿收支公款。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-tea-leaves",
+              "name": "一包普通茶叶",
+              "description": "装有四杯份普通干茶的小包，分取后相应减少存量。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-tea-kettle",
+              "name": "清河水壶",
+              "description": "装有刚烧好可饮热水的铜壶，当前四杯量；后续取水、加热需要实际条件。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-tea-cup-a",
+              "name": "清河茶杯甲",
+              "description": "清洁的空陶杯。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-tea-cup-b",
+              "name": "清河茶杯乙",
+              "description": "清洁的空陶杯。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-market",
+              "name": "天星坊市",
+              "description": "丹药、法器、材料和修理铺各有自己的货物与经营者。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "innerstar-tea-keeper"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-qinghe-teahouse",
+              "canonical_entity_ids": [
+                "innerstar-qinghe-teahouse"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-longxing-inn",
+              "canonical_entity_ids": [
+                "innerstar-longxing-inn"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-longxing-room",
+              "canonical_entity_ids": [
+                "innerstar-longxing-room"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-tea-ledger",
+              "canonical_entity_ids": [
+                "innerstar-tea-ledger"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-inn-ledger",
+              "canonical_entity_ids": [
+                "innerstar-inn-ledger"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-tea-leaves",
+              "canonical_entity_ids": [
+                "innerstar-tea-leaves"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-tea-kettle",
+              "canonical_entity_ids": [
+                "innerstar-tea-kettle"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-tea-cup-a",
+              "canonical_entity_ids": [
+                "innerstar-tea-cup-a"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-tea-cup-b",
+              "canonical_entity_ids": [
+                "innerstar-tea-cup-b"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-market",
+              "canonical_entity_ids": [
+                "innerstar-market"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己经营两处小铺的日常经历。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "service",
+              "subjectId": "self",
+              "predicate": "service",
+              "value": {
+                "kind": "text",
+                "value": "普通淡茶每杯5铜，隆兴二层空房一夜20铜；客人自愿，茶款入茶账，房款入客栈账。实际交房后该房不能再租给别人。"
+              },
+              "description": "普通淡茶每杯5铜，隆兴二层空房一夜20铜；客人自愿，茶款入茶账，房款入客栈账。实际交房后该房不能再租给别人。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "skill",
+              "subjectId": "self",
+              "predicate": "skill",
+              "value": {
+                "kind": "text",
+                "value": "无灵根凡人，会烧水、分茶、记账和接待，不会法术。"
+              },
+              "description": "无灵根凡人，会烧水、分茶、记账和接待，不会法术。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "opening-night",
+              "subjectId": "self",
+              "predicate": "opening-night",
+              "value": {
+                "kind": "text",
+                "value": "此前亲见已入夜，之后日夜随实际时间变化。"
+              },
+              "description": "此前亲见已入夜，之后日夜随实际时间变化。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
     }
   ],
   "existingEntityFacts": [],
@@ -14591,6 +15307,16 @@
     {
       "id": "innerstar-living-beast-storage",
       "text": "灵兽袋的缩小收容能力不属于普通储物袋；活兽仍有独立状态，未捕获或未驯服不能凭说话成为库存，奇虫排名不覆盖境界、成熟程度和相克条件。",
+      "severity": "hard"
+    },
+    {
+      "id": "innerstar-soul-and-craft-boundaries",
+      "severity": "hard",
+      "text": "禁神牌控制须掌握法术的至少元婴修士与真实交付元神；毁掉该术所收元神部分可造成意识伤损乃至死，威胁不等于已经控制。附身受躯壳和法力限制，不能借名无损释放本体全部神通。炼器、炼符和傀儡须已掌握炼法、适合材料及实际耗料耗力；同名材料不会自行变成完整法宝。"
+    },
+    {
+      "id": "innerstar-real-tea-preparation",
+      "text": "普通淡茶一杯需要实际消耗一份干茶和一杯可饮水，投入真实容器后才产出一杯成茶；饮用、洒掉或倒弃消耗对应成茶。水温随时间与环境变化，需热茶时必须已有热水或有实际燃料工具加热。补进干茶和水须从实际来源取得，不因提供服务自动补满。",
       "severity": "hard"
     }
   ],
@@ -16822,6 +17548,132 @@
     ],
     "fact:innerstar-star-array-clerk-employer": [
       "innerstar-tianxing-current-services"
+    ],
+    "entity:innerstar-qinghe-teahouse": [
+      "innerstar-city-hospitality",
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-qinghe-teahouse-route-innerstar-market": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-market-route-innerstar-qinghe-teahouse": [
+      "innerstar-current-hospitality"
+    ],
+    "entity:innerstar-longxing-inn": [
+      "innerstar-city-hospitality",
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-longxing-inn-route-innerstar-qinghe-teahouse": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-qinghe-teahouse-route-innerstar-longxing-inn": [
+      "innerstar-current-hospitality"
+    ],
+    "entity:innerstar-longxing-room": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-longxing-room-route-innerstar-longxing-inn": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-longxing-inn-route-innerstar-longxing-room": [
+      "innerstar-current-hospitality"
+    ],
+    "entity:innerstar-tea-ledger": [
+      "innerstar-current-hospitality"
+    ],
+    "entity:innerstar-inn-ledger": [
+      "innerstar-current-hospitality"
+    ],
+    "entity:innerstar-tea-leaves": [
+      "innerstar-current-hospitality"
+    ],
+    "entity:innerstar-tea-kettle": [
+      "innerstar-current-hospitality"
+    ],
+    "entity:innerstar-tea-cup-a": [
+      "innerstar-current-hospitality"
+    ],
+    "entity:innerstar-tea-cup-b": [
+      "innerstar-current-hospitality"
+    ],
+    "entity:innerstar-yuangui-island": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-yuangui-island-route-human-inner-star-sea": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:human-inner-star-sea-route-innerstar-yuangui-island": [
+      "innerstar-current-hospitality"
+    ],
+    "entity:innerstar-tongtian-fog-sea": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-tongtian-fog-sea-route-human-inner-star-sea": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:human-inner-star-sea-route-innerstar-tongtian-fog-sea": [
+      "innerstar-current-hospitality"
+    ],
+    "entity:innerstar-tea-keeper": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-tea-keeper-service": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-tea-keeper-skill": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-tea-keeper-opening-night": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-tea-keeper-spiritual-root": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-qinghe-teahouse-owned-by": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-longxing-inn-owned-by": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-longxing-room-owned-by": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-tea-leaves-owned-by": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-tea-kettle-owned-by": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-tea-cup-a-owned-by": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-tea-cup-b-owned-by": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-tea-ledger-owned-by": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:innerstar-inn-ledger-owned-by": [
+      "innerstar-current-hospitality"
+    ],
+    "fact:canon-tianlei-bamboo-material-properties": [
+      "innerstar-bamboo-properties"
+    ],
+    "law:innerstar-soul-and-craft-boundaries": [
+      "innerstar-soul-control-conditions",
+      "innerstar-crafting-conditions"
+    ],
+    "quantity:innerstar-dry-tea-portion": [
+      "innerstar-current-hospitality"
+    ],
+    "quantity:innerstar-water-cup": [
+      "innerstar-current-hospitality"
+    ],
+    "quantity:innerstar-brewed-tea-cup": [
+      "innerstar-current-hospitality"
+    ],
+    "law:innerstar-real-tea-preparation": [
+      "innerstar-current-hospitality"
     ]
   },
   "periodicProperties": [
@@ -16855,6 +17707,41 @@
           },
           "description": "元磁山磁力仍在，研修者远行仍须面对所受限制。"
         }
+      ]
+    }
+  ],
+  "quantityDefinitions": [
+    {
+      "id": "innerstar-dry-tea-portion",
+      "name": "普通干茶一杯份",
+      "unit": "份",
+      "production_law_ids": [
+        "innerstar-real-tea-preparation"
+      ],
+      "consumption_law_ids": [
+        "innerstar-real-tea-preparation"
+      ]
+    },
+    {
+      "id": "innerstar-water-cup",
+      "name": "可饮水",
+      "unit": "杯",
+      "production_law_ids": [
+        "innerstar-real-tea-preparation"
+      ],
+      "consumption_law_ids": [
+        "innerstar-real-tea-preparation"
+      ]
+    },
+    {
+      "id": "innerstar-brewed-tea-cup",
+      "name": "已沏普通茶",
+      "unit": "杯",
+      "production_law_ids": [
+        "innerstar-real-tea-preparation"
+      ],
+      "consumption_law_ids": [
+        "innerstar-real-tea-preparation"
       ]
     }
   ]

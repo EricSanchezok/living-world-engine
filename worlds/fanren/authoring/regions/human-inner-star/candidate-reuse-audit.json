@@ -1,115 +1,684 @@
 {
-  "formatVersion": 1,
-  "moduleId": "human-inner-star",
-  "queueInputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
-  "status": "exact-existing-disposition-reuse-not-new-semantic-approval",
+  "status": "exact-source-record-reuse-not-new-reading",
+  "method": "复用前严格校验源区完整裁决报告、candidateId、extraction reportHash、目标存在与原文锚点；目标区域仍逐项检查适用范围。有效原审读不因重复进入本区而再次冒记。",
   "records": [
     {
-      "candidateId": "batch-0089-object-0016",
-      "extractionReportHash": "458ad693446d0a9b9df97fc0b7b0a7637ca43a9d1a594de0718cf48926b9ce28",
-      "sourceModule": "human-boundless",
-      "targetQueueModule": "human-inner-star",
-      "sourceDispositionReportHash": "b2d931007794c22655fa68f6ec62bb93ae52f83162864227edee85c8aebed20e",
-      "sourceRecordHash": "be1b60dbdc9951e87ca62802031cf5eb4e6e8031d3f5811a2c03d2b59dbbd139",
-      "disposition": "adopted",
-      "targetIds": [
-        "boundless-beast"
-      ],
-      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+      "record": {
+        "candidateId": "batch-0274-object-0016",
+        "batchId": "batch-0274",
+        "reportHash": "fe1c7b0f21eb3c95e590dd7777dbebd6d316093568702134755a648c83858640",
+        "disposition": "corrected",
+        "targetIds": [
+          "immortal-redluo-wine-recipe"
+        ],
+        "reason": "红罗仙酒的古方和有条件效用与仙界传闻分开，饮一口直升仙界明确不作为世界规则。",
+        "evidence": [
+          {
+            "chapterId": "qq-32030806",
+            "chapterSha256": "77da7a052f5d24d5d1d3d51b3adeec82e8c653701dfffae73e20a31672058358",
+            "start": 838,
+            "end": 870,
+            "anchorSha256": "d7063832d58bc2ae7ef1dd1ba341431fc04439ff2a1063c337ec9309acd66146"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "associated-immortal",
+      "sourceReportHash": "f61f241415a842a543b827c6e28a25fe757d46506847e292834f3224e0823269",
+      "sourceRecordHash": "4c3a664f0e80472605453517b6c427aa4446494d9c2bc62db532d1cf7c66babe"
     },
     {
-      "candidateId": "batch-0089-fact-0004",
-      "extractionReportHash": "458ad693446d0a9b9df97fc0b7b0a7637ca43a9d1a594de0718cf48926b9ce28",
-      "sourceModule": "human-boundless",
-      "targetQueueModule": "human-inner-star",
-      "sourceDispositionReportHash": "b2d931007794c22655fa68f6ec62bb93ae52f83162864227edee85c8aebed20e",
-      "sourceRecordHash": "6366d10a4e753bf1a51a5431500806a7a25a28b58b7ebf4aebb95c5091780724",
-      "disposition": "adopted",
-      "targetIds": [
-        "boundless-beast"
-      ],
-      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+      "record": {
+        "candidateId": "batch-0086-object-0001",
+        "batchId": "batch-0086",
+        "reportHash": "a2ac62ef36d06d40f644af242b83d168900361ed5fc94ee61ee6453c8beaf054",
+        "disposition": "later-only",
+        "targetIds": [
+          "yinming-later-people-and-objects"
+        ],
+        "reason": "该条记录韩立成年后的具体来访、交谈、求助、物品使用或相识，不初始化十岁韩立的经历、装备和当地关系。地理及适用机制由对应独立断言维护。",
+        "evidence": [
+          {
+            "chapterId": "qq-22864227",
+            "chapterSha256": "358e1334ca158cc6026fe8983066f2d8858fd113472c2602dedc7662d277f083",
+            "start": 128,
+            "end": 137,
+            "anchorSha256": "37b2797c69731e3fa51fad48a9a39f97f2d2628398409c98a3008c0ae3c4d00f"
+          },
+          {
+            "chapterId": "qq-22873902",
+            "chapterSha256": "250db001e6d2f87db79081c63d037ac643c97fffc27e35dbad700130e5d98e67",
+            "start": 889,
+            "end": 899,
+            "anchorSha256": "d19e46edc789ab196fa92626666ccf2f7818b472e2379f4eeb01e36a74dec70a"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "associated-yinming",
+      "sourceReportHash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f",
+      "sourceRecordHash": "e36be117d5c344764b36e8fe190de5c0adfe59d308dbae5411927b746818a2b6"
     },
     {
-      "candidateId": "batch-0114-fact-0044",
-      "extractionReportHash": "5c6a27f70d617792d3429d6e14091115ac7564f1e34abfdbb263d1625c3a302d",
-      "sourceModule": "human-boundless",
-      "targetQueueModule": "human-inner-star",
-      "sourceDispositionReportHash": "b2d931007794c22655fa68f6ec62bb93ae52f83162864227edee85c8aebed20e",
-      "sourceRecordHash": "de99b78865b869f5adef6c782b2b8f1d1c115c0b035acaedd05141316d360876",
-      "disposition": "later-only",
-      "targetIds": [
-        "human-boundless"
-      ],
-      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+      "record": {
+        "candidateId": "batch-0086-object-0039",
+        "batchId": "batch-0086",
+        "reportHash": "a2ac62ef36d06d40f644af242b83d168900361ed5fc94ee61ee6453c8beaf054",
+        "disposition": "corrected",
+        "targetIds": [
+          "yinming-conditional-apertures"
+        ],
+        "reason": "保留鬼雾接落、空间裂缝和出口回吸机制；本次鱼虾、开缝尺寸、半年预测和韩立成功均不前置。口述周期不是全界准确计时器，暴风山须真实开口和实际通行能力。",
+        "evidence": [
+          {
+            "chapterId": "qq-22856339",
+            "chapterSha256": "ff5f887ddfe4de97d4fc3253c4da02015925aa9891e37399ce4bfe91a88cdd2c",
+            "start": 2257,
+            "end": 2269,
+            "anchorSha256": "c351e197135078f601a0f3e8c70120432c3b0e4a823331f40b04f55b88fa4b32"
+          },
+          {
+            "chapterId": "qq-22873902",
+            "chapterSha256": "250db001e6d2f87db79081c63d037ac643c97fffc27e35dbad700130e5d98e67",
+            "start": 1543,
+            "end": 1554,
+            "anchorSha256": "5e279547586437f545431fc9f7d609c014f60f4a357346ae75108b3c441b6444"
+          },
+          {
+            "chapterId": "qq-22864227",
+            "chapterSha256": "358e1334ca158cc6026fe8983066f2d8858fd113472c2602dedc7662d277f083",
+            "start": 783,
+            "end": 795,
+            "anchorSha256": "a6d6475e0968162543fab0d6f6d4de3008dffc4c28223e612cb83200a75588c2"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "associated-yinming",
+      "sourceReportHash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f",
+      "sourceRecordHash": "8584b76f667ba0de1b36de5e7b9bdbecf7849eb4f8152caff93cb534a1a85111"
     },
     {
-      "candidateId": "batch-0170-fact-0055",
-      "extractionReportHash": "17963d841c4970c9fcdc53597b06fd24fdbe4fbb4243520aca32b87933d9bf2a",
-      "sourceModule": "human-north",
-      "targetQueueModule": "human-inner-star",
-      "sourceDispositionReportHash": "0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4",
-      "sourceRecordHash": "1b7fccd512b3b13289ab3ff4136f4cfe8ba1cdc6111146382f94c79ac6add49e",
-      "disposition": "corrected",
-      "targetIds": [
-        "canon-bingpo",
-        "north-three-halls"
-      ],
-      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+      "record": {
+        "candidateId": "batch-0087-object-0001",
+        "batchId": "batch-0087",
+        "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
+        "disposition": "later-only",
+        "targetIds": [
+          "yinming-later-people-and-objects"
+        ],
+        "reason": "该条记录韩立成年后的具体来访、交谈、求助、物品使用或相识，不初始化十岁韩立的经历、装备和当地关系。地理及适用机制由对应独立断言维护。",
+        "evidence": [
+          {
+            "chapterId": "qq-22894719",
+            "chapterSha256": "15b02af8faf17f512ca597638a0e7462df4cb45223b2f92aaad95b1af0cd46bf",
+            "start": 574,
+            "end": 582,
+            "anchorSha256": "24c7899a2f6c03b1c4d769a21bd15ffaa38de194254abbfed3edc8dff3ca8b22"
+          },
+          {
+            "chapterId": "qq-22916059",
+            "chapterSha256": "601aeebf8e09a5bf28fd22f3e35acca6a7013c911774350d76561eb8c31c56dc",
+            "start": 1978,
+            "end": 1985,
+            "anchorSha256": "2efbe648eed77ec9b4e9e5766620e24e0a742f7774e37f852962165640fc581f"
+          },
+          {
+            "chapterId": "qq-22905125",
+            "chapterSha256": "cfdb378142a4223cc5b6b54362c4abc7098a278df9e6fcd4deec09ec262f69a8",
+            "start": 2358,
+            "end": 2366,
+            "anchorSha256": "7219c94447d654c8cfc9a2b7f5982514345b2b6572c82771bd80d7b68bcfc330"
+          },
+          {
+            "chapterId": "qq-22894719",
+            "chapterSha256": "15b02af8faf17f512ca597638a0e7462df4cb45223b2f92aaad95b1af0cd46bf",
+            "start": 1050,
+            "end": 1057,
+            "anchorSha256": "7e00dbaacdd4ac262aa2e3ece994b3d94aec12b2eabe1b4cb4557162c7b26e85"
+          },
+          {
+            "chapterId": "qq-22885680",
+            "chapterSha256": "91cf8ce7e889f150f523b6a4f90d3165d62de361fa822beeb258caa1b52e21ef",
+            "start": 1006,
+            "end": 1018,
+            "anchorSha256": "624401858fc8b43d7d608ab35245f43fccc32eb79f7f5d0b9ee2ec86314f7f70"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "associated-yinming",
+      "sourceReportHash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f",
+      "sourceRecordHash": "13595b60e451513106b57cd4a9698bdc662130c01514209754a2356a753fba25"
     },
     {
-      "candidateId": "batch-0176-object-0005",
-      "extractionReportHash": "1b18afd1ccd5a199b42376ee235a5af718a41e8fa9b25af1706a5df55a882f20",
-      "sourceModule": "human-north",
-      "targetQueueModule": "human-inner-star",
-      "sourceDispositionReportHash": "0bd2876b77126a73fd9abd4ef376b2418f961630f3f8599f0d124552ad7355f4",
-      "sourceRecordHash": "fdd9d406296867c38bd1fde11300de5a170564e3b8d134cfa62ca559be34b718",
-      "disposition": "corrected",
-      "targetIds": [
-        "canon-bingfeng",
-        "north-bingfeng-ritual",
-        "north-opening-persons"
-      ],
-      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
+      "record": {
+        "candidateId": "batch-0087-object-0015",
+        "batchId": "batch-0087",
+        "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
+        "disposition": "corrected",
+        "targetIds": [
+          "human-luanxing-sea",
+          "yinming-space-and-witness"
+        ],
+        "reason": "复用乱星海地理身份；后期韩立自称和匿名旧来客死亡不写入T0人际关系。",
+        "evidence": [
+          {
+            "chapterId": "qq-22885680",
+            "chapterSha256": "91cf8ce7e889f150f523b6a4f90d3165d62de361fa822beeb258caa1b52e21ef",
+            "start": 867,
+            "end": 877,
+            "anchorSha256": "58e79d003cda5d9a4e9fc347e4f23157a89aa6202e0705ca382d265446ef317c"
+          },
+          {
+            "chapterId": "qq-22894719",
+            "chapterSha256": "15b02af8faf17f512ca597638a0e7462df4cb45223b2f92aaad95b1af0cd46bf",
+            "start": 574,
+            "end": 582,
+            "anchorSha256": "24c7899a2f6c03b1c4d769a21bd15ffaa38de194254abbfed3edc8dff3ca8b22"
+          },
+          {
+            "chapterId": "qq-22894719",
+            "chapterSha256": "15b02af8faf17f512ca597638a0e7462df4cb45223b2f92aaad95b1af0cd46bf",
+            "start": 602,
+            "end": 617,
+            "anchorSha256": "79a3aecb4e16ea415ed70a7c52a1148dc154169fea748b46c2535a0e2410b9ab"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "associated-yinming",
+      "sourceReportHash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f",
+      "sourceRecordHash": "183b2a4ca48cac0b2aa8b114f4c45f1b7b124e4f2f8bcdc4e11bc993386a25db"
     },
     {
-      "candidateId": "batch-0176-fact-0007",
-      "extractionReportHash": "1b18afd1ccd5a199b42376ee235a5af718a41e8fa9b25af1706a5df55a882f20",
+      "record": {
+        "candidateId": "batch-0087-fact-0003",
+        "batchId": "batch-0087",
+        "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
+        "disposition": "corrected",
+        "targetIds": [
+          "yinming-conditional-apertures"
+        ],
+        "reason": "保留鬼雾接落、空间裂缝和出口回吸机制；本次鱼虾、开缝尺寸、半年预测和韩立成功均不前置。口述周期不是全界准确计时器，暴风山须真实开口和实际通行能力。",
+        "evidence": [
+          {
+            "chapterId": "qq-22885680",
+            "chapterSha256": "91cf8ce7e889f150f523b6a4f90d3165d62de361fa822beeb258caa1b52e21ef",
+            "start": 786,
+            "end": 797,
+            "anchorSha256": "681091a40fecd253501eb4fbd38be2991e998eb261bb8f5c64c10aa506fa8d03"
+          },
+          {
+            "chapterId": "qq-22885680",
+            "chapterSha256": "91cf8ce7e889f150f523b6a4f90d3165d62de361fa822beeb258caa1b52e21ef",
+            "start": 534,
+            "end": 544,
+            "anchorSha256": "c4f7d59061e18be675966b39e47285d36d1de7d64feb39f8b2597711c9ddb6c2"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "associated-yinming",
+      "sourceReportHash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f",
+      "sourceRecordHash": "5ea99d019471492c04920fe90efa4ef30da98372dfc26dd08ee8aaa7e841530e"
+    },
+    {
+      "record": {
+        "candidateId": "batch-0087-fact-0047",
+        "batchId": "batch-0087",
+        "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
+        "disposition": "corrected",
+        "targetIds": [
+          "yinming-space-and-witness",
+          "yinming-opening-life"
+        ],
+        "reason": "保留已有空间、聚落与跨海来客的地理线索，具体当时人数、姓名、地图和来访经历不前置。方圆百里及七八村属于居民概述，当前八村规模另标定；不凭来客出身建立常开航路。",
+        "evidence": [
+          {
+            "chapterId": "qq-22885680",
+            "chapterSha256": "91cf8ce7e889f150f523b6a4f90d3165d62de361fa822beeb258caa1b52e21ef",
+            "start": 786,
+            "end": 797,
+            "anchorSha256": "681091a40fecd253501eb4fbd38be2991e998eb261bb8f5c64c10aa506fa8d03"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "associated-yinming",
+      "sourceReportHash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f",
+      "sourceRecordHash": "ebf9115154725b3669c00f961d9fd3de99030d143d204ba5952547373e7a7637"
+    },
+    {
+      "record": {
+        "candidateId": "batch-0087-fact-0051",
+        "batchId": "batch-0087",
+        "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
+        "disposition": "bounded-uncertainty",
+        "targetIds": [
+          "yinming-former-star-cultivator"
+        ],
+        "reason": "旧乱星海修士死亡只知早于抱还子说话，不能与其他具名修士合并。",
+        "evidence": [
+          {
+            "chapterId": "qq-22894719",
+            "chapterSha256": "15b02af8faf17f512ca597638a0e7462df4cb45223b2f92aaad95b1af0cd46bf",
+            "start": 602,
+            "end": 617,
+            "anchorSha256": "79a3aecb4e16ea415ed70a7c52a1148dc154169fea748b46c2535a0e2410b9ab"
+          }
+        ],
+        "uncertainty": {
+          "kind": "source-underdetermined",
+          "boundary": "死亡相对T0的时间未定，不生成精确死者墓或遗物。"
+        },
+        "destinationModule": null
+      },
+      "sourceModule": "associated-yinming",
+      "sourceReportHash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f",
+      "sourceRecordHash": "70c918ac6fd2e5fab0bd788325bec010c5a1f418001969db076133b11f0eeb5a"
+    },
+    {
+      "record": {
+        "candidateId": "batch-0179-object-0014",
+        "batchId": "batch-0179",
+        "reportHash": "02bc56debddc445224ddc9c1904bc992c4ec7b2d4dc200e6c70a762ee4ca3b07",
+        "disposition": "corrected",
+        "targetIds": [
+          "yinming-living-true-spirit"
+        ],
+        "reason": "早期居民及韩立的罗睺推测与后期天澜解释分别保留；长生真灵和界面能力可有据回溯，隐匿位置与空间连接为已标注推定，不把猜测当作当时人物全知。",
+        "evidence": [
+          {
+            "chapterId": "qq-26895545",
+            "chapterSha256": "bed67e37f822f2f6aeaf5d2407258cc9df7d0c23a386cf128ed0f3cbb7d57a6c",
+            "start": 2083,
+            "end": 2092,
+            "anchorSha256": "de15adb23371cfb2bc882400ea0105ebc49f0da1a0ea405c474e6653d2c07a2f"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "associated-yinming",
+      "sourceReportHash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f",
+      "sourceRecordHash": "e5cdf396f8be753456908e8a02bd3941c6ad87983e5e588b4ba9a0000c250d45"
+    },
+    {
+      "record": {
+        "candidateId": "batch-0179-object-0037",
+        "batchId": "batch-0179",
+        "reportHash": "02bc56debddc445224ddc9c1904bc992c4ec7b2d4dc200e6c70a762ee4ca3b07",
+        "disposition": "corrected",
+        "targetIds": [
+          "yinming-space-and-witness",
+          "yinming-opening-life"
+        ],
+        "reason": "保留已有空间、聚落与跨海来客的地理线索，具体当时人数、姓名、地图和来访经历不前置。方圆百里及七八村属于居民概述，当前八村规模另标定；不凭来客出身建立常开航路。",
+        "evidence": [
+          {
+            "chapterId": "qq-26895545",
+            "chapterSha256": "bed67e37f822f2f6aeaf5d2407258cc9df7d0c23a386cf128ed0f3cbb7d57a6c",
+            "start": 2166,
+            "end": 2177,
+            "anchorSha256": "6b7e299044a93f52cfd8b4e9cd1c18cff198d0f8e2410014122ef0ee29ea0cf6"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "associated-yinming",
+      "sourceReportHash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f",
+      "sourceRecordHash": "1737f958623fd226da0d1b91e887df53934410b04a34c503382f1080023c49d2"
+    },
+    {
+      "record": {
+        "candidateId": "batch-0232-object-0069",
+        "batchId": "batch-0232",
+        "reportHash": "77ebe719b998cbda629246f957d24f438a883c96394bb7f20d91bebd43178dd2",
+        "disposition": "corrected",
+        "targetIds": [
+          "yinming-space-and-witness",
+          "yinming-opening-life"
+        ],
+        "reason": "保留已有空间、聚落与跨海来客的地理线索，具体当时人数、姓名、地图和来访经历不前置。方圆百里及七八村属于居民概述，当前八村规模另标定；不凭来客出身建立常开航路。",
+        "evidence": [
+          {
+            "chapterId": "qq-29494382",
+            "chapterSha256": "854736a3c8a17cd69ba1c4a926417329fbd7605ead61e30aab0b309887551c10",
+            "start": 2991,
+            "end": 2997,
+            "anchorSha256": "c59e9da08452316acfc6e930f30a1f1110b7cf922fc4923485563217488d6fd2"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "associated-yinming",
+      "sourceReportHash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f",
+      "sourceRecordHash": "ddd671cf1c681d4ab243b6bd4bb0a8f60dfdf4c53b27aaab360aaa62ea9dca31"
+    },
+    {
+      "record": {
+        "candidateId": "batch-0232-fact-0010",
+        "batchId": "batch-0232",
+        "reportHash": "77ebe719b998cbda629246f957d24f438a883c96394bb7f20d91bebd43178dd2",
+        "disposition": "later-only",
+        "targetIds": [
+          "yinming-later-people-and-objects"
+        ],
+        "reason": "该条记录韩立成年后的具体来访、交谈、求助、物品使用或相识，不初始化十岁韩立的经历、装备和当地关系。地理及适用机制由对应独立断言维护。",
+        "evidence": [
+          {
+            "chapterId": "qq-29494382",
+            "chapterSha256": "854736a3c8a17cd69ba1c4a926417329fbd7605ead61e30aab0b309887551c10",
+            "start": 2974,
+            "end": 2980,
+            "anchorSha256": "0d865502253f252cf7b530a104dbd5009cc743516a86258d8221cfcab7602dd7"
+          },
+          {
+            "chapterId": "qq-29494382",
+            "chapterSha256": "854736a3c8a17cd69ba1c4a926417329fbd7605ead61e30aab0b309887551c10",
+            "start": 2991,
+            "end": 2997,
+            "anchorSha256": "c59e9da08452316acfc6e930f30a1f1110b7cf922fc4923485563217488d6fd2"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "associated-yinming",
+      "sourceReportHash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f",
+      "sourceRecordHash": "67555f94e032d09a813b138b1da6fb5489fd5a9401f3cbbeb975a70b4c2fe411"
+    },
+    {
+      "record": {
+        "candidateId": "batch-0232-fact-0060",
+        "batchId": "batch-0232",
+        "reportHash": "77ebe719b998cbda629246f957d24f438a883c96394bb7f20d91bebd43178dd2",
+        "disposition": "later-only",
+        "targetIds": [
+          "yinming-later-people-and-objects"
+        ],
+        "reason": "该条记录韩立成年后的具体来访、交谈、求助、物品使用或相识，不初始化十岁韩立的经历、装备和当地关系。地理及适用机制由对应独立断言维护。",
+        "evidence": [
+          {
+            "chapterId": "qq-29494382",
+            "chapterSha256": "854736a3c8a17cd69ba1c4a926417329fbd7605ead61e30aab0b309887551c10",
+            "start": 2991,
+            "end": 2997,
+            "anchorSha256": "c59e9da08452316acfc6e930f30a1f1110b7cf922fc4923485563217488d6fd2"
+          },
+          {
+            "chapterId": "qq-29494382",
+            "chapterSha256": "854736a3c8a17cd69ba1c4a926417329fbd7605ead61e30aab0b309887551c10",
+            "start": 2998,
+            "end": 3010,
+            "anchorSha256": "257e1df5c6cc8ff830b54ff1f9d9b5287690abb6b0b196d7896ef5e499eaf092"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "associated-yinming",
+      "sourceReportHash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f",
+      "sourceRecordHash": "2db92ede79489b0388879095d4a5136452ad3969ed30562e9d2ee15dd35890c5"
+    },
+    {
+      "record": {
+        "candidateId": "batch-0241-object-0023",
+        "batchId": "batch-0241",
+        "reportHash": "89bfe131905aa8b802504ecffa61ff8ebce7c6fc8cc400ac8810a6281d1496cc",
+        "disposition": "corrected",
+        "targetIds": [
+          "yinming-space-and-witness",
+          "yinming-opening-life"
+        ],
+        "reason": "保留已有空间、聚落与跨海来客的地理线索，具体当时人数、姓名、地图和来访经历不前置。方圆百里及七八村属于居民概述，当前八村规模另标定；不凭来客出身建立常开航路。",
+        "evidence": [
+          {
+            "chapterId": "qq-29905274",
+            "chapterSha256": "fd3e4ad50fe9d4cec410d2840e3a0ce81f8d9022d178d26c9db291c53d0697dd",
+            "start": 1425,
+            "end": 1431,
+            "anchorSha256": "1a07fa3c723b321fb7d14e6ad340a1c8f2396515c63a681e9394bb01dfb3fa99"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "associated-yinming",
+      "sourceReportHash": "18601d7584ce1196704b17fecfc7dd7d267d7dd97a62356372a7f86863987f5f",
+      "sourceRecordHash": "1d81d4dd442d663ca80ab79f244bfde2f88cfe10bdf7dc0a9a0d3ab7e852ba1f"
+    },
+    {
+      "record": {
+        "candidateId": "batch-0140-fact-0035",
+        "batchId": "batch-0140",
+        "reportHash": "a3030a7afcd3960889aba9d8e0b5cc047a7722ae0c64b8edd54437669dcd7c33",
+        "disposition": "corrected",
+        "targetIds": [
+          "dajin-liaozhou-economy-boundary"
+        ],
+        "reason": "一次地方拍卖比较不能推出全晋永远比天南贵；未知材料存在不等全域图鉴已知。",
+        "evidence": [
+          {
+            "chapterId": "qq-25212397",
+            "chapterSha256": "2e567d1942c9fb74077e940279b4e5b09770bffbcfb29481ab5edf60ab6b054e",
+            "start": 1733,
+            "end": 1796,
+            "anchorSha256": "16b6dfe7fdf036a7b4fcc96b958fbe97912c43052287419298f34789fa98d39e"
+          },
+          {
+            "chapterId": "qq-25212397",
+            "chapterSha256": "2e567d1942c9fb74077e940279b4e5b09770bffbcfb29481ab5edf60ab6b054e",
+            "start": 1870,
+            "end": 1948,
+            "anchorSha256": "7d72d73fef49a6bf41c78dc2db3c26214316d028c24c6da75a3e397ac49c288e"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
       "sourceModule": "human-dajin",
-      "targetQueueModule": "human-inner-star",
-      "sourceDispositionReportHash": "20506365133dc66355708e0825a613d87c65b616c653ff7757144f3283478f14",
-      "sourceRecordHash": "9ce6058fe6c00031d701ee084fa06ecb98fd9e5c59195200e97342a6dae2b175",
-      "disposition": "corrected",
-      "targetIds": [
-        "north-xuling-ancient-array",
-        "void-north-receiver",
-        "north-ancient-oneway"
-      ],
-      "scopeCheck": "same-global-opening-and-same-candidate-assertion; no-local-entity-or-global-rule-promotion"
-    }
-  ],
-  "skipped": [],
-  "legacyClassificationSnapshot": null,
-  "validationScope": "complete-queue-including-pending",
-  "missingSourceEvidenceIds": [],
-  "outputDispositionReportHash": "2b237afa9534aa0dce477bec2b8578d215a392ab75e954d2fb3b112ea264f559",
-  "reusedCount": 6,
-  "result": {
-    "moduleId": "human-inner-star",
-    "candidates": 2015,
-    "counts": {
-      "adopted": 2,
-      "corrected": 3,
-      "history-only": 0,
-      "later-only": 1,
-      "bounded-uncertainty": 0,
-      "transferred": 0,
-      "pending": 2009
+      "sourceReportHash": "31623d62158c95c19a1be4e1bfc7d6267c624a45800fd8a10b603b4ccfeb413b",
+      "sourceRecordHash": "ecdb48849918ad5d1151a9e165863598aa84b2d5bf6a3bb8055ee8d1f7a25f53"
     },
-    "completed": 6,
-    "unresolved": 2009,
-    "boundedUncertainty": 0,
-    "approvedForRuntime": false,
-    "reportHash": "2b237afa9534aa0dce477bec2b8578d215a392ab75e954d2fb3b112ea264f559"
-  }
+    {
+      "record": {
+        "candidateId": "batch-0114-object-0007",
+        "batchId": "batch-0114",
+        "reportHash": "5c6a27f70d617792d3429d6e14091115ac7564f1e34abfdbb263d1625c3a302d",
+        "disposition": "corrected",
+        "targetIds": [
+          "human-outer-star"
+        ],
+        "reason": "紫灵复用乱星海身份索引；本次结丹、与韩立红颜往来和谷中合作是后期，不新建谷区紫灵。",
+        "evidence": [
+          {
+            "chapterId": "qq-24000912",
+            "chapterSha256": "99508ef5e5b2cd730feaffdadb8b78b4e224cdd17c17893037a477e4295e7d54",
+            "start": 785,
+            "end": 872,
+            "anchorSha256": "aa61cea2faaa303aa9671d79c35136356aa12a468b1a03640d4449999d77e872"
+          },
+          {
+            "chapterId": "qq-24000912",
+            "chapterSha256": "99508ef5e5b2cd730feaffdadb8b78b4e224cdd17c17893037a477e4295e7d54",
+            "start": 873,
+            "end": 1027,
+            "anchorSha256": "6d0ebe442ad4534dbaa896fcc0628f1df2a0fd855e48699922632ef263edde8a"
+          },
+          {
+            "chapterId": "qq-24012731",
+            "chapterSha256": "1350705c8e6d9170c76f1ac187cc318f5dd4468676dcf5c566019b18aef2181e",
+            "start": 1004,
+            "end": 1234,
+            "anchorSha256": "e0917ebc1821381a34b269098bdcc91cd5a4ed175d1f6a1e415dd84d4eccacbe"
+          },
+          {
+            "chapterId": "qq-24013810",
+            "chapterSha256": "214a92584d8452fb49076497af6eb3b1dbe7ce77da02bfe7a18114439a9b8a93",
+            "start": 917,
+            "end": 1289,
+            "anchorSha256": "a284d3f124155bdd7516ed331da5d5280e9303a6e409fcbc5bd8515cd961da0f"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "human-devil-valley",
+      "sourceReportHash": "81c8ea07cebc4558203037cb4f9a28b86f8d647a8717fb7260db168b43bf11a7",
+      "sourceRecordHash": "6cb24e7c4cdfed17c86a17c0829b0ed2d412cf6e40890cab1038d434bb860bc7"
+    },
+    {
+      "record": {
+        "candidateId": "batch-0128-object-0002",
+        "batchId": "batch-0128",
+        "reportHash": "cba919670874681dbf29084ccd05beef6be2985bd34f88e366dece54cf04e358",
+        "disposition": "corrected",
+        "targetIds": [
+          "canon-zi-ling",
+          "dv-creation-pill-experience"
+        ],
+        "reason": "此时仍结丹初期，预期还需数年打坐才中期；不把效果预计当立即晋阶或开篇境界。",
+        "evidence": [
+          {
+            "chapterId": "qq-24674671",
+            "chapterSha256": "4f5b9338e32a4c60aa094c8ef84945ef6153752b130658ca9a2747c559f4c112",
+            "start": 357,
+            "end": 463,
+            "anchorSha256": "495efc22fdf5fc3a7a63b5c8d10e771bc699ec4708e163c8f07dfabdfa1f193e"
+          },
+          {
+            "chapterId": "qq-24712325",
+            "chapterSha256": "14a03c663286bbc69b49da84022fb3ba657dc2bb8129efc99e3d9d44843a97b8",
+            "start": 2094,
+            "end": 2157,
+            "anchorSha256": "0e62b17301549187a54787a491d5d77d937f68ce070be3ba79a27568abfa3ba9"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "human-devil-valley",
+      "sourceReportHash": "81c8ea07cebc4558203037cb4f9a28b86f8d647a8717fb7260db168b43bf11a7",
+      "sourceRecordHash": "ec5c10c9d38bf2916f2a218405ee5c48277e5b10e1dd288b6aac5a234fd2c648"
+    },
+    {
+      "record": {
+        "candidateId": "batch-0179-object-0040",
+        "batchId": "batch-0179",
+        "reportHash": "02bc56debddc445224ddc9c1904bc992c4ec7b2d4dc200e6c70a762ee4ca3b07",
+        "disposition": "corrected",
+        "targetIds": [
+          "human-devil-valley",
+          "dv-later-reconnaissance"
+        ],
+        "reason": "回忆中的坠魔谷在东裕昌州，不因韩现身乱星海而迁谷；神识化千为后来亲创。",
+        "evidence": [
+          {
+            "chapterId": "qq-26914609",
+            "chapterSha256": "ac8aae90b67f73c2ff2b53bb7687f5f146bceb32ba269d9e4e37865282621950",
+            "start": 1362,
+            "end": 1455,
+            "anchorSha256": "c5524295beb867df41391e2cfaa96e21a9671d9a411b0e20eba4967c5e73de8b"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "human-devil-valley",
+      "sourceReportHash": "81c8ea07cebc4558203037cb4f9a28b86f8d647a8717fb7260db168b43bf11a7",
+      "sourceRecordHash": "d9bd3034d6c56b0d1ef2175560d46c79ed094804d34aaf0ac5ce0c1a05609c32"
+    },
+    {
+      "record": {
+        "candidateId": "batch-0198-fact-0038",
+        "batchId": "batch-0198",
+        "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
+        "disposition": "later-only",
+        "targetIds": [
+          "dv-later-retreat-and-white-fog"
+        ],
+        "reason": "南宫等在乱星海岛、韩返天南，通行有实际传送阵，不合为一地。",
+        "evidence": [
+          {
+            "chapterId": "qq-27742669",
+            "chapterSha256": "23d4696b536c5d523de68692e9dbf9a1e8ec1c355e97dadac43d40ba813bbba4",
+            "start": 1786,
+            "end": 1892,
+            "anchorSha256": "911c5c209365ef7c3413db93d42e7bffc45595c84a53eff226e79af4fb3f5c5f"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "human-devil-valley",
+      "sourceReportHash": "81c8ea07cebc4558203037cb4f9a28b86f8d647a8717fb7260db168b43bf11a7",
+      "sourceRecordHash": "d37a199800a5ae6625fe97c5e633f3a2258b6594ee764ca16bc9cf2236df3b84"
+    },
+    {
+      "record": {
+        "candidateId": "batch-0198-object-0001",
+        "batchId": "batch-0198",
+        "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
+        "disposition": "corrected",
+        "targetIds": [
+          "canon-han-li",
+          "far-han-second-soul-puppet",
+          "far-later-visitors-and-soul"
+        ],
+        "reason": "后期真正韩立与第二元婴操纵的人形傀儡分开；qq-27742669引号中先出屋者是傀儡。化神、灵宝和宗门职位不前置。",
+        "evidence": [
+          {
+            "chapterId": "qq-27734013",
+            "chapterSha256": "c4398a46148c4817e08aa664aa86f3bc3f021b856ce5e35133814a43c71b78a5",
+            "start": 2869,
+            "end": 2880,
+            "anchorSha256": "1e5de57710b074267015034b2dd50c7f1fc5b792bb34f42889e26dda5b5b79a8"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "human-far-seas",
+      "sourceReportHash": "d387e51ae13a616f1c26b5c96fd19a3e130f941ad17b4969f823cc0ee52d8b4e",
+      "sourceRecordHash": "f914290d910421ff7ef72de74edbc80d935a236eae8c1055743163ea8c89be81"
+    },
+    {
+      "record": {
+        "candidateId": "batch-0198-object-0091",
+        "batchId": "batch-0198",
+        "reportHash": "dc0c4853c1d1f5c8b24e0278b39d655cb41ed111563d5a3c06a00fdc9cc92668",
+        "disposition": "later-only",
+        "targetIds": [
+          "far-han-four-followers",
+          "far-later-visitors-and-soul"
+        ],
+        "reason": "来自韩立后来岛屿的四人于田琴儿到达时接管，开篇无此隶属和任务。",
+        "evidence": [
+          {
+            "chapterId": "qq-27759955",
+            "chapterSha256": "e0b91ba361cb2b9338f11c3eb5373a6aad4ddda88c569a9b0332d62c50366632",
+            "start": 1782,
+            "end": 1791,
+            "anchorSha256": "f969c517d64538513b5e7deffd7c7c605a018cc3d1ece0cd38bf2b43f28511ab"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "sourceModule": "human-far-seas",
+      "sourceReportHash": "d387e51ae13a616f1c26b5c96fd19a3e130f941ad17b4969f823cc0ee52d8b4e",
+      "sourceRecordHash": "920d6ba1c4ed72ce0b8f191781f6b4dac15e7aa2e407348535938f30309d4b06"
+    }
+  ]
 }
