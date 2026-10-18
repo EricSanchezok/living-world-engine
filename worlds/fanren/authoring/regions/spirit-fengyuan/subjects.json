@@ -49,15 +49,20 @@
   },
   {
     "id": "future-fengyuan-imprisoned-immortal",
-    "label": "灵王封印的真仙",
-    "kind": "person-reference",
-    "openingState": "owned-other-region-history",
+    "label": "凝躯真仙／后来灵王仙囚",
+    "kind": "person",
+    "openingState": "present",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "fengyuan-ling-king-and-sanctuary"
+      "fengyuan-immortal-long-reconstruction",
+      "fengyuan-immortal-current-recovery"
     ],
-    "aliases": [],
-    "reason": "开篇还在海底重铸仙躯；后期才被灵王镇压，需由spirit-seas承载，不能在此提前生成囚徒。"
+    "aliases": [
+      "金银焰青年",
+      "金袍仙使",
+      "灵王封印的真仙"
+    ],
+    "reason": "长达十几万年凝躯史与后期海底现场支持T0潜海修复；确切坐标和完成度为本区必要补写，非推给海区的未完成任务。"
   },
   {
     "id": "canon-wood-grand-elder-name",
@@ -1227,6 +1232,1590 @@
     "claimIds": [
       "fengyuan-current-life",
       "fengyuan-opening-calibration"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "future-fengyuan-jiatun-elder",
+    "label": "甲豚第一太上长老",
+    "kind": "person",
+    "openingState": "later-or-unplaced",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-maliang-pursuit-archive"
+    ],
+    "aliases": [],
+    "reason": "后来长老；没有可定位T0的出生和就职证据。"
+  },
+  {
+    "id": "future-fengyuan-fei-commander",
+    "label": "费统领",
+    "kind": "person",
+    "openingState": "later-or-unplaced",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-maliang-pursuit-archive"
+    ],
+    "aliases": [],
+    "reason": "后来甲豚传送殿卫士，T0在世未证。"
+  },
+  {
+    "id": "future-fengyuan-yuanhe-island",
+    "label": "元合岛",
+    "kind": "place",
+    "openingState": "later-or-unplaced",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-late-human-rise"
+    ],
+    "aliases": [],
+    "reason": "后期岛名与青元宫落点不提前赋给韩立。"
+  },
+  {
+    "id": "future-fengyuan-qingyuan-palace",
+    "label": "青元宫",
+    "kind": "organization",
+    "openingState": "later-or-unplaced",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-late-human-rise"
+    ],
+    "aliases": [],
+    "reason": "韩后来创设的势力。"
+  },
+  {
+    "id": "future-fengyuan-lan-yaoer",
+    "label": "蓝药儿",
+    "kind": "person",
+    "openingState": "later-or-unplaced",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-mingsha-battle-archive"
+    ],
+    "aliases": [],
+    "reason": "后期门下人物；出生与收徒时间未证。"
+  },
+  {
+    "id": "future-fengyuan-huashi-ancestor",
+    "label": "花石老祖",
+    "kind": "person",
+    "openingState": "later-or-unplaced",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-mingsha-battle-archive"
+    ],
+    "aliases": [],
+    "reason": "后期随韩行动者，当前身份未确证。"
+  },
+  {
+    "id": "future-fengyuan-yun-dan",
+    "label": "云淡",
+    "kind": "person",
+    "openingState": "later-or-unplaced",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-mingsha-battle-archive"
+    ],
+    "aliases": [],
+    "reason": "与月梳为兄妹；不套用在他们抵达前会厅众人的年龄总述。"
+  },
+  {
+    "id": "future-fengyuan-yue-shu",
+    "label": "月梳",
+    "kind": "person",
+    "openingState": "later-or-unplaced",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-mingsha-battle-archive"
+    ],
+    "aliases": [],
+    "reason": "云淡之妹，未来契约和敌意不前置。"
+  },
+  {
+    "id": "future-fengyuan-jinshi-leng",
+    "label": "金石族冷道友",
+    "kind": "person",
+    "openingState": "later-or-unplaced",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-mingsha-battle-archive"
+    ],
+    "aliases": [],
+    "reason": "后期受邀者；此段并未出席古老人物年龄总述所在场景。"
+  },
+  {
+    "id": "future-shura-ying-er",
+    "label": "樱儿",
+    "kind": "person",
+    "openingState": "later-or-unplaced",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-shura-yi-archive"
+    ],
+    "aliases": [],
+    "reason": "罗族母之女，后期已合体且百年前悟时空；T0出生年月无据，未实例化。"
+  },
+  {
+    "id": "future-shura-bi-zhu",
+    "label": "碧珠",
+    "kind": "person",
+    "openingState": "later-or-unplaced",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-shura-spider-society"
+    ],
+    "aliases": [],
+    "reason": "族母侄孙，后期炼虚化人；T0出生年不明。"
+  },
+  {
+    "id": "future-shura-wuying",
+    "label": "无影",
+    "kind": "person",
+    "openingState": "later-or-unplaced",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-shura-spider-society"
+    ],
+    "aliases": [],
+    "reason": "后期银衣白发合体侦察者，不与万蜂同体。"
+  },
+  {
+    "id": "future-shura-wanfeng",
+    "label": "万蜂",
+    "kind": "person",
+    "openingState": "later-or-unplaced",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-shura-spider-society"
+    ],
+    "aliases": [],
+    "reason": "后期可化蜂群的矮瘦黄袍侦察者，分身不等于独立万名NPC。"
+  },
+  {
+    "id": "future-shura-liu-shuo",
+    "label": "流烁",
+    "kind": "person",
+    "openingState": "later-or-unplaced",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-shura-future-transactions"
+    ],
+    "aliases": [],
+    "reason": "后期空鱼族长；当时合体与祖孙关系不推T0同职。"
+  },
+  {
+    "id": "future-shura-liushuo-granddaughter",
+    "label": "流烁孙女",
+    "kind": "person",
+    "openingState": "later-or-unplaced",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "fengyuan-shura-future-transactions"
+    ],
+    "aliases": [],
+    "reason": "后期有炼丹天赋的孙女，未知出生年及姓名，不写T0同龄小女孩。"
+  },
+  {
+    "id": "fengyuan-mumian-city",
+    "label": "木棉城",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-mumian-old-city",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-sacred-tree-enclosure",
+    "label": "通灵圣树旧禁地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-wood-sacred-tree-antiquity",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-wood-sacred-tree",
+    "label": "通灵圣树",
+    "kind": "plant",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-wood-sacred-tree-antiquity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-tree-warden",
+    "label": "槐叙",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-tree-warden-private-stock",
+    "label": "槐叙私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-sap-store",
+    "label": "禁地今季留存树汁",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-immortal-leaf-wine",
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-wine-store",
+    "label": "旧酿仙叶酒",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-immortal-leaf-wine",
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-sap-allocation",
+    "label": "今季树汁用途议案",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-old-array-study",
+    "label": "木棉阵学小楼",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-array-scholar",
+    "label": "榆砚",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-array-scholar-private-stock",
+    "label": "榆砚私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-wood-array-design",
+    "label": "旧木阵设计副卷",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-wood-array-old-design",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-array-model-stock",
+    "label": "阵学模型料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-array-model",
+    "label": "枝络试阵模型",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-yechu-hideout",
+    "label": "木棉材色辨验间",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-ye-chu",
+    "label": "叶楚",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-ye-chu-old-service",
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-ye-chu-private-stock",
+    "label": "叶楚私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-ye-chu-old-service",
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-yechu-samples",
+    "label": "叶楚待验木样",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-greenlimb-refuge",
+    "label": "绿肢隐谷",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-greenlimb-people",
+    "label": "绿肢族隐谷支群",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-greenlimb-flower",
+    "label": "圣晶之花",
+    "kind": "plant",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-greenlimb-gardener",
+    "label": "曲枝",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-greenlimb-gardener-private-stock",
+    "label": "曲枝私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-greenlimb-speaker",
+    "label": "弥颈",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-greenlimb-speaker-private-stock",
+    "label": "弥颈私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-greenlimb-shed-petals",
+    "label": "自然落下的晶花屑",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-tianji-domain",
+    "label": "秘族谷地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-secret-races",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-tianji-people",
+    "label": "天忌族",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-secret-races",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-jushou-domain",
+    "label": "层崖聚居地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-secret-races",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-jushou-people",
+    "label": "巨手族",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-secret-races",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-guli-domain",
+    "label": "暖石台地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-secret-races",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-guli-people",
+    "label": "古黎族",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-secret-races",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-tianchan-domain",
+    "label": "鸣林族地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-secret-races",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-tianchan-people",
+    "label": "天蝉族",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-secret-races",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-jinshi-domain",
+    "label": "矿山城域",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-secret-races",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-jinshi-people",
+    "label": "金石族",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-secret-races",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-xihe-domain",
+    "label": "幻幕原野",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-secret-races",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-xihe-people",
+    "label": "细禾族",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-secret-races",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-xihe-main-city",
+    "label": "细禾主城",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-secret-races",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-xihe-cartographer",
+    "label": "纹纱",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-xihe-cartographer-private-stock",
+    "label": "纹纱私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-xihe-public-map",
+    "label": "细禾访客路图草稿",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-residence-yin-gangzi",
+    "label": "银罡子静修居",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-yin-gangzi",
+    "label": "银罡子",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-ancient-foreign-cultivators",
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-yin-gangzi-private-stock",
+    "label": "银罡子私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-ancient-foreign-cultivators",
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-residence-hua-ying",
+    "label": "化影静修居",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-hua-ying",
+    "label": "化影",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-ancient-foreign-cultivators",
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-hua-ying-private-stock",
+    "label": "化影私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-ancient-foreign-cultivators",
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-residence-wu-ling-lady",
+    "label": "乌灵夫人静修居",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-wu-ling-lady",
+    "label": "乌灵夫人",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-ancient-foreign-cultivators",
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-wu-ling-lady-private-stock",
+    "label": "乌灵夫人私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-ancient-foreign-cultivators",
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-residence-fengyuan-yellow-robed-nun",
+    "label": "黄袍道姑静修居",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-fengyuan-yellow-robed-nun",
+    "label": "黄袍道姑",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-ancient-foreign-cultivators",
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-fengyuan-yellow-robed-nun-private-stock",
+    "label": "黄袍道姑私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-ancient-foreign-cultivators",
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-residence-fengyuan-gold-staff-elder",
+    "label": "金杖老翁静修居",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-fengyuan-gold-staff-elder",
+    "label": "金杖老翁",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-ancient-foreign-cultivators",
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-fengyuan-gold-staff-elder-private-stock",
+    "label": "金杖老翁私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-ancient-foreign-cultivators",
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-residence-fengyuan-bamboo-scholar",
+    "label": "青筒儒生静修居",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-fengyuan-bamboo-scholar",
+    "label": "青筒儒生",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-ancient-foreign-cultivators",
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-fengyuan-bamboo-scholar-private-stock",
+    "label": "青筒儒生私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-ancient-foreign-cultivators",
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-yin-test-stone",
+    "label": "银罡子的护石试件",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-huaying-trace-record",
+    "label": "化影藏形实录",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-wuling-furnace",
+    "label": "乌灵试火炉",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-old-record-letter",
+    "label": "金杖老翁的考辨来函",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-bamboo-archive",
+    "label": "青筒旧简收藏",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-mingsha-waste",
+    "label": "鸣煞之地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-mingsha-old-geography",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-tianwaitian",
+    "label": "天外天",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-mingsha-old-geography",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-thunder-crossing-sea",
+    "label": "风雷交界海域",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-immortal-long-reconstruction",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-immortal-seabed-palace",
+    "label": "隐海凝躯宫",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-immortal-long-reconstruction",
+      "fengyuan-immortal-current-recovery"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "future-fengyuan-imprisoned-immortal-private-stock",
+    "label": "凝躯仙魂私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-immortal-long-reconstruction",
+      "fengyuan-immortal-current-recovery",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-immortal-recovery-stock",
+    "label": "凝躯宫留存灵料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-immortal-current-recovery",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-minor-shura-realm",
+    "label": "小修罗界",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-minor-shura-old-transit",
+      "fengyuan-shura-native-land",
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-whitewood",
+    "label": "修罗白木林",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-native-land",
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-mountains",
+    "label": "天蛛群山",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-native-land",
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-tianzhu-city",
+    "label": "天蛛城",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-native-land",
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-council",
+    "label": "天蛛城内殿",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-dryfire",
+    "label": "乾火池",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-native-land",
+      "fengyuan-shura-kongyu-heritage",
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-kongyu-village",
+    "label": "乾火池下空鱼聚落",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-kongyu-heritage",
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-island-sea",
+    "label": "修罗古战场岛海",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-native-land",
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-frozen-island",
+    "label": "修罗雪岛",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-native-land",
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-cold-pool",
+    "label": "封藏寒潭",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-cold-pool-treasures",
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-people",
+    "label": "天蛛城修罗蛛族群",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-spider-biology",
+      "fengyuan-shura-spider-society",
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-kongyu-people",
+    "label": "乾火池空鱼支群",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-kongyu-heritage",
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-shura-luo-matriarch",
+    "label": "罗族母",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-shura-spider-biology",
+      "fengyuan-shura-spider-society",
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-shura-luo-matriarch-private-stock",
+    "label": "罗族母私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-current-calibration",
+    "claimIds": [
+      "fengyuan-shura-spider-biology",
+      "fengyuan-shura-spider-society",
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-silk-steward",
+    "label": "丝蘅",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-silk-steward-private-stock",
+    "label": "丝蘅私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-courier",
+    "label": "岑足",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-courier-private-stock",
+    "label": "岑足私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-kongyu-keeper",
+    "label": "流阙",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-kongyu-keeper-private-stock",
+    "label": "流阙私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-kongyu-crafter",
+    "label": "环汀",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-kongyu-crafter-private-stock",
+    "label": "环汀私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-households",
+    "label": "天蛛城其余住民",
+    "kind": "collective",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-kongyu-households",
+    "label": "乾火池其余住民",
+    "kind": "collective",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-whitewood-beasts",
+    "label": "白木林异兽小群",
+    "kind": "collective",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-ancestral-cores",
+    "label": "天蛛旧核匣",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-spider-biology",
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-city-material",
+    "label": "天蛛城维护公料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-kongyu-trial-box",
+    "label": "空鱼试作小匣",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-kongyu-trade-letter",
+    "label": "空鱼交换呈书",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-kongyu-craft-stock",
+    "label": "空鱼修器公料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-louling-stone",
+    "label": "镂灵石",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-kongyu-heritage",
+      "fengyuan-shura-cold-pool-treasures",
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-shanhai-pearl",
+    "label": "山海珠",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-kongyu-heritage",
+      "fengyuan-shura-cold-pool-treasures",
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shanhai-inner-space",
+    "label": "山海珠内洞天",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-kongyu-heritage",
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-kongyu-ancestral-tablet",
+    "label": "空鱼圣物遗训简",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-kongyu-heritage",
+      "fengyuan-shura-current-continuity"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-array-room",
+    "label": "伏灵山旧跨界阵室",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-transit"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-old-heart",
+    "label": "完整修罗旧心护器",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-transit"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-array-stock",
+    "label": "旧阵封存极品石",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-transit"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-return-chart",
+    "label": "旧阵与返程坐标札",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-transit",
+      "fengyuan-shura-return-conflict"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-trader-sap-request",
+    "label": "木岑树汁请领函",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-old-box-1",
+    "label": "天蛛族旧小匣1",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-old-box-2",
+    "label": "天蛛族旧小匣2",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-shura-old-box-3",
+    "label": "天蛛族旧小匣3",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-shura-current-continuity",
+      "fengyuan-reviewed-finite-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-taishou-mountains",
+    "label": "太兽山脉",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-southern-passage",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-jiaoyuan-canyon",
+    "label": "蛟渊大峡谷",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-southern-passage",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-dreamwatch-tree",
+    "label": "黑叶梦罗灵树",
+    "kind": "plant",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-black-leaf-defense",
+      "fengyuan-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "fengyuan-dreamwatch-linked-trees",
+    "label": "梦罗联根树群",
+    "kind": "collective",
+    "openingState": "present",
+    "classification": "explicit-original-or-source-geography",
+    "claimIds": [
+      "fengyuan-reviewed-current-life",
+      "fengyuan-reviewed-finite-values"
     ],
     "aliases": []
   }

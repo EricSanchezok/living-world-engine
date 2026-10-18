@@ -7,7 +7,32 @@
       "kind": "location",
       "placement": "spirit-realm",
       "description": "众多异族割据的大洲，各族疆域之间有商道、险地和各自掌控的传送设施。",
-      "facts": [],
+      "facts": [
+        {
+          "id": "fengyuan-review-thunder-continent-route-to-fengyuan-thunder-crossing-sea",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "fengyuan-thunder-crossing-sea"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "fengyuan-review-thunder-continent-route-conditions-fengyuan-thunder-crossing-sea",
+          "predicate": "route-conditions",
+          "value": {
+            "kind": "text",
+            "value": "从雷鸣一侧海岸进入交界海，海况和追踪线索需本地观察。"
+          },
+          "description": "从雷鸣一侧海岸进入交界海，海况和追踪线索需本地观察。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
       "meters": [],
       "ratings": [],
       "quantities": []
@@ -21652,6 +21677,12 @@
     ],
     "fact:thunder-herb-hidden-grove-location-secrecy": [
       "thunder-current-life"
+    ],
+    "fact:fengyuan-review-thunder-continent-route-to-fengyuan-thunder-crossing-sea": [
+      "fengyuan-reviewed-current-life"
+    ],
+    "fact:fengyuan-review-thunder-continent-route-conditions-fengyuan-thunder-crossing-sea": [
+      "fengyuan-reviewed-current-life"
     ]
   },
   "quantityDefinitions": [
