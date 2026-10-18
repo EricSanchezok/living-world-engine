@@ -1,0 +1,208 @@
+{
+  "status": "source-linked-rule-backprojection-not-release-approval",
+  "apiCalls": 0,
+  "method": "运行规则直接绑定已对照原文；来源条目含后期个案时，只取该个案证实的作用边界，不将后期事情作为开篇已发生的依赖。以下保留编辑追溯链。",
+  "rules": [
+    {
+      "ruleId": "cultivation-substitute-roots",
+      "runtimeClaimId": "runtime-cultivation-substitute-roots",
+      "sourceClaimIds": [
+        "foundation-substitute-roots",
+        "shared-tianlan-mortal-path-exceptions"
+      ],
+      "openingDependencies": [
+        "foundation-substitute-roots"
+      ]
+    },
+    {
+      "ruleId": "cultivation-lifespan",
+      "runtimeClaimId": "runtime-cultivation-lifespan",
+      "sourceClaimIds": [
+        "foundation-lifespan",
+        "shared-core-lifespan-and-appearance",
+        "shared-space-and-resource-access",
+        "shared-final-lingyuling-lifespan"
+      ],
+      "openingDependencies": [
+        "foundation-lifespan"
+      ]
+    },
+    {
+      "ruleId": "cultivation-spirit-tribulations",
+      "runtimeClaimId": "runtime-cultivation-spirit-tribulations",
+      "sourceClaimIds": [
+        "foundation-spirit-tribulations",
+        "shared-tribulation-varies-by-species",
+        "shared-yinyue-voluntary-remedy-and-tribulation-delay"
+      ],
+      "openingDependencies": [
+        "foundation-spirit-tribulations"
+      ]
+    },
+    {
+      "ruleId": "cultivation-hidden-roots",
+      "runtimeClaimId": "runtime-cultivation-hidden-roots",
+      "sourceClaimIds": [
+        "foundation-hidden-roots",
+        "shared-yuetian-hidden-root-observation",
+        "shared-yuetian-root-and-teaching"
+      ],
+      "openingDependencies": [
+        "foundation-hidden-roots"
+      ]
+    },
+    {
+      "ruleId": "cultivation-spiritual-perception",
+      "runtimeClaimId": "runtime-cultivation-spiritual-perception",
+      "sourceClaimIds": [
+        "foundation-spiritual-perception",
+        "shared-dayan-soul-contract-and-history",
+        "shared-late-death-evidence-and-search-limit",
+        "shared-spirit-eye-and-sage-power"
+      ],
+      "openingDependencies": [
+        "foundation-spiritual-perception"
+      ]
+    },
+    {
+      "ruleId": "cultivation-talisman-treasure",
+      "runtimeClaimId": "runtime-cultivation-talisman-treasure",
+      "sourceClaimIds": [
+        "foundation-talisman-treasure",
+        "shared-zhenbao-specific-exception"
+      ],
+      "openingDependencies": [
+        "foundation-talisman-treasure"
+      ]
+    },
+    {
+      "ruleId": "cultivation-natal-treasure",
+      "runtimeClaimId": "runtime-cultivation-natal-treasure",
+      "sourceClaimIds": [
+        "foundation-natal-treasure",
+        "shared-xuantian-and-law-material-boundaries",
+        "shared-yis-soul-escape-and-real-implements",
+        "shared-sword-purification-and-cultivation"
+      ],
+      "openingDependencies": [
+        "foundation-natal-treasure"
+      ]
+    },
+    {
+      "ruleId": "cultivation-nascent-soul",
+      "runtimeClaimId": "runtime-cultivation-nascent-soul",
+      "sourceClaimIds": [
+        "foundation-nascent-soul",
+        "shared-second-infant-risk-and-autonomy",
+        "shared-late-han-combat-exceptions",
+        "shared-late-death-evidence-and-search-limit"
+      ],
+      "openingDependencies": [
+        "foundation-nascent-soul"
+      ]
+    },
+    {
+      "ruleId": "cultivation-mortal-body-training",
+      "runtimeClaimId": "runtime-cultivation-mortal-body-training",
+      "sourceClaimIds": [
+        "shared-local-longchun-entry",
+        "shared-local-xiangjia-limit",
+        "shared-tianlan-mortal-path-exceptions",
+        "shared-restoration-and-two-color-lightning"
+      ],
+      "openingDependencies": []
+    },
+    {
+      "ruleId": "cultivation-avatars-and-cognition",
+      "runtimeClaimId": "runtime-cultivation-avatars-and-cognition",
+      "sourceClaimIds": [
+        "shared-second-infant-risk-and-autonomy",
+        "shared-blood-escape-and-separated-self",
+        "shared-second-infant-cognition-and-hostages",
+        "shared-second-infant-restricted-work",
+        "shared-blood-soul-is-not-omniscience"
+      ],
+      "openingDependencies": []
+    },
+    {
+      "ruleId": "cultivation-combat-conditions",
+      "runtimeClaimId": "runtime-cultivation-combat-conditions",
+      "sourceClaimIds": [
+        "shared-blades-training-and-embodied-resistance",
+        "shared-poison-body-and-wine",
+        "shared-nirvana-blood-burn-cost",
+        "shared-borer-victory-conditional-sacrifice",
+        "shared-late-han-combat-exceptions"
+      ],
+      "openingDependencies": []
+    },
+    {
+      "ruleId": "cultivation-heart-demons",
+      "runtimeClaimId": "runtime-cultivation-heart-demons",
+      "sourceClaimIds": [
+        "shared-local-heart-demon-and-medicine",
+        "shared-heart-demon-not-real-asset-duplication",
+        "shared-mahayana-lightning-and-preparation",
+        "shared-mahayana-heart-trial-and-body"
+      ],
+      "openingDependencies": []
+    },
+    {
+      "ruleId": "cultivation-oaths-and-choice",
+      "runtimeClaimId": "runtime-cultivation-oaths-and-choice",
+      "sourceClaimIds": [
+        "shared-social-obedience-is-not-control",
+        "shared-dayan-soul-contract-and-history",
+        "shared-chaos-trade-and-promises",
+        "shared-late-blood-contract-and-sources",
+        "shared-tian-ding-inheritance-and-soul-privacy"
+      ],
+      "openingDependencies": []
+    },
+    {
+      "ruleId": "cultivation-species-and-transformations",
+      "runtimeClaimId": "runtime-cultivation-species-and-transformations",
+      "sourceClaimIds": [
+        "shared-transforming-beast-and-costly-hunt",
+        "shared-yueyang-beasts-and-lures",
+        "shared-feiling-cultivation-exceptions",
+        "shared-true-spirit-and-family-duel",
+        "shared-muzu-combat-and-closing-study"
+      ],
+      "openingDependencies": []
+    },
+    {
+      "ruleId": "cultivation-arrays-and-maintenance",
+      "runtimeClaimId": "runtime-cultivation-arrays-and-maintenance",
+      "sourceClaimIds": [
+        "shared-early-han-training-sequence",
+        "shared-siege-spells-and-repair-costs",
+        "shared-spirit-eye-and-sage-power",
+        "shared-muzu-combat-and-closing-study"
+      ],
+      "openingDependencies": []
+    },
+    {
+      "ruleId": "cultivation-crossworld-environment",
+      "runtimeClaimId": "runtime-cultivation-crossworld-environment",
+      "sourceClaimIds": [
+        "shared-shenshen-and-huashen-risks",
+        "shared-deep-abyss-and-crossworld-risk",
+        "shared-maliang-defeat-and-interface-constraints",
+        "shared-final-human-visit-and-ascension"
+      ],
+      "openingDependencies": []
+    },
+    {
+      "ruleId": "cultivation-cultivating-resources",
+      "runtimeClaimId": "runtime-cultivation-cultivating-resources",
+      "sourceClaimIds": [
+        "shared-growth-needs-local-spiritual-energy",
+        "shared-core-breakthrough-process",
+        "shared-second-infant-and-plant-body",
+        "shared-baimai-material-and-body"
+      ],
+      "openingDependencies": []
+    }
+  ]
+}
