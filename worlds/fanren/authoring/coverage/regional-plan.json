@@ -5,31 +5,6 @@
   "scope_note": "这里是有正文检索线索的制作分区，不是完整世界断言。分区名称不确定开篇疆域、存亡、当权者或可达性；共同名称不能自动合并。全书提取后仍要补入未命中的地区。关联空间按解释两界所需范围审定，仙界不开放探索。",
   "modules": [
     {
-      "id": "shared-foundations",
-      "realm": "shared",
-      "title": "两界修炼、资源与行动基础规则",
-      "search_terms": [
-        "灵根",
-        "夺舍",
-        "寿元",
-        "法宝",
-        "神识",
-        "元婴",
-        "雷劫",
-        "修炼"
-      ],
-      "dimensions": [
-        "cultivation-and-actions",
-        "society-and-resources",
-        "history-and-current-state"
-      ],
-      "opening_status": "reviewed-current-module-broader-source-closure-pending",
-      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
-      "module": "regions/shared-foundations/module.json",
-      "review": "regions/shared-foundations/review.json",
-      "evidence": "coverage/regional-status.json"
-    },
-    {
       "id": "human-local",
       "realm": "human",
       "title": "开篇地方社会",
@@ -54,289 +29,28 @@
       "evidence": "coverage/regional-status.json"
     },
     {
-      "id": "human-yue",
-      "realm": "human",
-      "title": "越国修仙社会",
+      "id": "shared-foundations",
+      "realm": "shared",
+      "title": "两界修炼、资源与行动基础规则",
       "search_terms": [
-        "越国",
-        "太南谷",
-        "黄枫谷",
-        "燕家堡",
-        "血色禁地"
+        "灵根",
+        "夺舍",
+        "寿元",
+        "法宝",
+        "神识",
+        "元婴",
+        "雷劫",
+        "修炼"
       ],
       "dimensions": [
-        "geography-and-travel",
         "cultivation-and-actions",
         "society-and-resources",
-        "people-and-relationships",
         "history-and-current-state"
       ],
       "opening_status": "reviewed-current-module-broader-source-closure-pending",
       "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
-      "module": "regions/human-yue/module.json",
-      "review": "regions/human-yue/review.json",
-      "evidence": "coverage/regional-status.json"
-    },
-    {
-      "id": "human-tiannan",
-      "realm": "human",
-      "title": "天南各国及宗派网络",
-      "search_terms": [
-        "天南",
-        "元武国",
-        "溪国",
-        "落云宗",
-        "天道盟",
-        "九国盟"
-      ],
-      "dimensions": [
-        "geography-and-travel",
-        "cultivation-and-actions",
-        "society-and-resources",
-        "people-and-relationships",
-        "history-and-current-state"
-      ],
-      "opening_status": "reviewed-current-module-broader-source-closure-pending",
-      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
-      "module": "regions/human-tiannan/module.json",
-      "review": "regions/human-tiannan/review.json",
-      "evidence": "coverage/regional-status.json"
-    },
-    {
-      "id": "human-steppe",
-      "realm": "human",
-      "title": "慕兰与突兀及草原通行",
-      "search_terms": [
-        "慕兰",
-        "幕兰",
-        "突兀",
-        "天澜草原"
-      ],
-      "dimensions": [
-        "geography-and-travel",
-        "cultivation-and-actions",
-        "society-and-resources",
-        "people-and-relationships",
-        "history-and-current-state"
-      ],
-      "opening_status": "reviewed-current-module-broader-source-closure-pending",
-      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
-      "module": "regions/human-steppe/module.json",
-      "evidence": "coverage/regional-status.json",
-      "review": "regions/human-steppe/review.json"
-    },
-    {
-      "id": "human-boundless",
-      "realm": "human",
-      "title": "无边海与边缘通路",
-      "search_terms": [
-        "无边海"
-      ],
-      "dimensions": [
-        "geography-and-travel",
-        "cultivation-and-actions",
-        "society-and-resources",
-        "people-and-relationships",
-        "history-and-current-state"
-      ],
-      "opening_status": "reviewed-current-module-and-current-candidate-queue",
-      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
-      "module": "regions/human-boundless/module.json",
-      "review": "regions/human-boundless/review.json",
-      "evidence": "coverage/regional-status.json"
-    },
-    {
-      "id": "human-inner-star",
-      "realm": "human",
-      "title": "乱星海内海与星宫",
-      "search_terms": [
-        "乱星海",
-        "内星海",
-        "天星城",
-        "魁星岛",
-        "星宫",
-        "逆星盟"
-      ],
-      "dimensions": [
-        "geography-and-travel",
-        "cultivation-and-actions",
-        "society-and-resources",
-        "people-and-relationships",
-        "history-and-current-state"
-      ],
-      "opening_status": "reviewed-current-module-broader-source-closure-pending",
-      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
-      "module": "regions/human-inner-star/module.json",
-      "review": "regions/human-inner-star/review.json",
-      "evidence": "coverage/regional-status.json"
-    },
-    {
-      "id": "human-outer-star",
-      "realm": "human",
-      "title": "外星海与海族资源",
-      "search_terms": [
-        "外星海",
-        "奇渊岛"
-      ],
-      "dimensions": [
-        "geography-and-travel",
-        "cultivation-and-actions",
-        "society-and-resources",
-        "people-and-relationships",
-        "history-and-current-state"
-      ],
-      "opening_status": "reviewed-current-module-broader-source-closure-pending",
-      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
-      "module": "regions/human-outer-star/module.json",
-      "review": "regions/human-outer-star/review.json",
-      "evidence": "coverage/regional-status.json"
-    },
-    {
-      "id": "human-void-hall",
-      "realm": "human",
-      "title": "虚天殿相关秘境",
-      "search_terms": [
-        "虚天殿",
-        "虚天鼎"
-      ],
-      "dimensions": [
-        "geography-and-travel",
-        "cultivation-and-actions",
-        "society-and-resources",
-        "people-and-relationships",
-        "history-and-current-state"
-      ],
-      "opening_status": "reviewed-current-module-broader-source-closure-pending",
-      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
-      "module": "regions/human-void-hall/module.json",
-      "review": "regions/human-void-hall/review.json",
-      "evidence": "coverage/regional-status.json"
-    },
-    {
-      "id": "human-devil-valley",
-      "realm": "human",
-      "title": "坠魔谷及上古遗迹",
-      "search_terms": [
-        "坠魔谷"
-      ],
-      "dimensions": [
-        "geography-and-travel",
-        "cultivation-and-actions",
-        "society-and-resources",
-        "people-and-relationships",
-        "history-and-current-state"
-      ],
-      "opening_status": "reviewed-current-module-broader-source-closure-pending",
-      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
-      "module": "regions/human-devil-valley/module.json",
-      "review": "regions/human-devil-valley/review.json",
-      "evidence": "coverage/regional-status.json"
-    },
-    {
-      "id": "human-dajin",
-      "realm": "human",
-      "title": "大晋社会与修仙势力",
-      "search_terms": [
-        "大晋",
-        "阴罗宗",
-        "太一门",
-        "天魔宗"
-      ],
-      "dimensions": [
-        "geography-and-travel",
-        "cultivation-and-actions",
-        "society-and-resources",
-        "people-and-relationships",
-        "history-and-current-state"
-      ],
-      "opening_status": "reviewed-current-module-broader-source-closure-pending",
-      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
-      "module": "regions/human-dajin/module.json",
-      "review": "regions/human-dajin/review.json",
-      "evidence": "coverage/regional-status.json"
-    },
-    {
-      "id": "human-south-kunwu",
-      "realm": "human",
-      "title": "南疆与昆吾山",
-      "search_terms": [
-        "南疆",
-        "昆吾山"
-      ],
-      "dimensions": [
-        "geography-and-travel",
-        "cultivation-and-actions",
-        "society-and-resources",
-        "people-and-relationships",
-        "history-and-current-state"
-      ],
-      "opening_status": "reviewed-current-module-broader-source-closure-pending",
-      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
-      "module": "regions/human-south-kunwu/module.json",
-      "review": "regions/human-south-kunwu/review.json",
-      "evidence": "coverage/regional-status.json"
-    },
-    {
-      "id": "human-north",
-      "realm": "human",
-      "title": "北冥岛、冰海与小极宫",
-      "search_terms": [
-        "北冥岛",
-        "小极宫",
-        "冰海"
-      ],
-      "dimensions": [
-        "geography-and-travel",
-        "cultivation-and-actions",
-        "society-and-resources",
-        "people-and-relationships",
-        "history-and-current-state"
-      ],
-      "opening_status": "reviewed-current-module-and-current-candidate-queue",
-      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
-      "module": "regions/human-north/module.json",
-      "review": "regions/human-north/review.json",
-      "evidence": "coverage/regional-status.json"
-    },
-    {
-      "id": "human-ten-thousand",
-      "realm": "human",
-      "title": "万妖谷及妖族势力",
-      "search_terms": [
-        "万妖谷"
-      ],
-      "dimensions": [
-        "geography-and-travel",
-        "cultivation-and-actions",
-        "society-and-resources",
-        "people-and-relationships",
-        "history-and-current-state"
-      ],
-      "opening_status": "reviewed-current-module-and-current-candidate-queue",
-      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
-      "module": "regions/human-ten-thousand/module.json",
-      "review": "regions/human-ten-thousand/review.json",
-      "evidence": "coverage/regional-status.json"
-    },
-    {
-      "id": "human-far-seas",
-      "realm": "human",
-      "title": "五龙海及天沙大陆",
-      "search_terms": [
-        "五龙海",
-        "天沙大陆"
-      ],
-      "dimensions": [
-        "geography-and-travel",
-        "cultivation-and-actions",
-        "society-and-resources",
-        "people-and-relationships",
-        "history-and-current-state"
-      ],
-      "opening_status": "reviewed-current-module-broader-source-closure-pending",
-      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
-      "module": "regions/human-far-seas/module.json",
-      "review": "regions/human-far-seas/review.json",
+      "module": "regions/shared-foundations/module.json",
+      "review": "regions/shared-foundations/review.json",
       "evidence": "coverage/regional-status.json"
     },
     {
@@ -472,6 +186,31 @@
       "evidence": "coverage/regional-status.json"
     },
     {
+      "id": "human-inner-star",
+      "realm": "human",
+      "title": "乱星海内海与星宫",
+      "search_terms": [
+        "乱星海",
+        "内星海",
+        "天星城",
+        "魁星岛",
+        "星宫",
+        "逆星盟"
+      ],
+      "dimensions": [
+        "geography-and-travel",
+        "cultivation-and-actions",
+        "society-and-resources",
+        "people-and-relationships",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-inner-star/module.json",
+      "review": "regions/human-inner-star/review.json",
+      "evidence": "coverage/regional-status.json"
+    },
+    {
       "id": "spirit-thunder",
       "realm": "spirit",
       "title": "雷鸣大陆及天云、角蚩",
@@ -491,6 +230,89 @@
       "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
       "module": "regions/spirit-thunder/module.json",
       "review": "regions/spirit-thunder/review.json",
+      "evidence": "coverage/regional-status.json"
+    },
+    {
+      "id": "human-outer-star",
+      "realm": "human",
+      "title": "外星海与海族资源",
+      "search_terms": [
+        "外星海",
+        "奇渊岛"
+      ],
+      "dimensions": [
+        "geography-and-travel",
+        "cultivation-and-actions",
+        "society-and-resources",
+        "people-and-relationships",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-outer-star/module.json",
+      "review": "regions/human-outer-star/review.json",
+      "evidence": "coverage/regional-status.json"
+    },
+    {
+      "id": "associated-guanghan",
+      "realm": "shared",
+      "title": "广寒界与灵界关联秘境",
+      "search_terms": [
+        "广寒界"
+      ],
+      "dimensions": [
+        "geography-and-travel",
+        "cultivation-and-actions",
+        "society-and-resources",
+        "people-and-relationships",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/associated-guanghan/module.json",
+      "review": "regions/associated-guanghan/review.json",
+      "evidence": "coverage/regional-status.json"
+    },
+    {
+      "id": "human-void-hall",
+      "realm": "human",
+      "title": "虚天殿相关秘境",
+      "search_terms": [
+        "虚天殿",
+        "虚天鼎"
+      ],
+      "dimensions": [
+        "geography-and-travel",
+        "cultivation-and-actions",
+        "society-and-resources",
+        "people-and-relationships",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-void-hall/module.json",
+      "review": "regions/human-void-hall/review.json",
+      "evidence": "coverage/regional-status.json"
+    },
+    {
+      "id": "associated-yinming",
+      "realm": "shared",
+      "title": "阴冥空间与界面解释",
+      "search_terms": [
+        "阴冥之地",
+        "罗睺"
+      ],
+      "dimensions": [
+        "geography-and-travel",
+        "cultivation-and-actions",
+        "society-and-resources",
+        "people-and-relationships",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/associated-yinming/module.json",
+      "review": "regions/associated-yinming/review.json",
       "evidence": "coverage/regional-status.json"
     },
     {
@@ -536,26 +358,6 @@
       "evidence": "coverage/regional-status.json"
     },
     {
-      "id": "associated-guanghan",
-      "realm": "shared",
-      "title": "广寒界与灵界关联秘境",
-      "search_terms": [
-        "广寒界"
-      ],
-      "dimensions": [
-        "geography-and-travel",
-        "cultivation-and-actions",
-        "society-and-resources",
-        "people-and-relationships",
-        "history-and-current-state"
-      ],
-      "opening_status": "reviewed-current-module-broader-source-closure-pending",
-      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
-      "module": "regions/associated-guanghan/module.json",
-      "review": "regions/associated-guanghan/review.json",
-      "evidence": "coverage/regional-status.json"
-    },
-    {
       "id": "associated-demon",
       "realm": "shared",
       "title": "魔界对两界的影响及所需地点",
@@ -575,27 +377,6 @@
       "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
       "module": "regions/associated-demon/module.json",
       "review": "regions/associated-demon/review.json",
-      "evidence": "coverage/regional-status.json"
-    },
-    {
-      "id": "associated-yinming",
-      "realm": "shared",
-      "title": "阴冥空间与界面解释",
-      "search_terms": [
-        "阴冥之地",
-        "罗睺"
-      ],
-      "dimensions": [
-        "geography-and-travel",
-        "cultivation-and-actions",
-        "society-and-resources",
-        "people-and-relationships",
-        "history-and-current-state"
-      ],
-      "opening_status": "reviewed-current-module-broader-source-closure-pending",
-      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
-      "module": "regions/associated-yinming/module.json",
-      "review": "regions/associated-yinming/review.json",
       "evidence": "coverage/regional-status.json"
     },
     {
@@ -620,6 +401,202 @@
       "evidence": "coverage/regional-status.json"
     },
     {
+      "id": "human-dajin",
+      "realm": "human",
+      "title": "大晋社会与修仙势力",
+      "search_terms": [
+        "大晋",
+        "阴罗宗",
+        "太一门",
+        "天魔宗"
+      ],
+      "dimensions": [
+        "geography-and-travel",
+        "cultivation-and-actions",
+        "society-and-resources",
+        "people-and-relationships",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-dajin/module.json",
+      "review": "regions/human-dajin/review.json",
+      "evidence": "coverage/regional-status.json"
+    },
+    {
+      "id": "human-ten-thousand",
+      "realm": "human",
+      "title": "万妖谷及妖族势力",
+      "search_terms": [
+        "万妖谷"
+      ],
+      "dimensions": [
+        "geography-and-travel",
+        "cultivation-and-actions",
+        "society-and-resources",
+        "people-and-relationships",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-and-current-candidate-queue",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-ten-thousand/module.json",
+      "review": "regions/human-ten-thousand/review.json",
+      "evidence": "coverage/regional-status.json"
+    },
+    {
+      "id": "human-north",
+      "realm": "human",
+      "title": "北冥岛、冰海与小极宫",
+      "search_terms": [
+        "北冥岛",
+        "小极宫",
+        "冰海"
+      ],
+      "dimensions": [
+        "geography-and-travel",
+        "cultivation-and-actions",
+        "society-and-resources",
+        "people-and-relationships",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-and-current-candidate-queue",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-north/module.json",
+      "review": "regions/human-north/review.json",
+      "evidence": "coverage/regional-status.json"
+    },
+    {
+      "id": "human-south-kunwu",
+      "realm": "human",
+      "title": "南疆与昆吾山",
+      "search_terms": [
+        "南疆",
+        "昆吾山"
+      ],
+      "dimensions": [
+        "geography-and-travel",
+        "cultivation-and-actions",
+        "society-and-resources",
+        "people-and-relationships",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-south-kunwu/module.json",
+      "review": "regions/human-south-kunwu/review.json",
+      "evidence": "coverage/regional-status.json"
+    },
+    {
+      "id": "human-tiannan",
+      "realm": "human",
+      "title": "天南各国及宗派网络",
+      "search_terms": [
+        "天南",
+        "元武国",
+        "溪国",
+        "落云宗",
+        "天道盟",
+        "九国盟"
+      ],
+      "dimensions": [
+        "geography-and-travel",
+        "cultivation-and-actions",
+        "society-and-resources",
+        "people-and-relationships",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-tiannan/module.json",
+      "review": "regions/human-tiannan/review.json",
+      "evidence": "coverage/regional-status.json"
+    },
+    {
+      "id": "human-yue",
+      "realm": "human",
+      "title": "越国修仙社会",
+      "search_terms": [
+        "越国",
+        "太南谷",
+        "黄枫谷",
+        "燕家堡",
+        "血色禁地"
+      ],
+      "dimensions": [
+        "geography-and-travel",
+        "cultivation-and-actions",
+        "society-and-resources",
+        "people-and-relationships",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-yue/module.json",
+      "review": "regions/human-yue/review.json",
+      "evidence": "coverage/regional-status.json"
+    },
+    {
+      "id": "human-boundless",
+      "realm": "human",
+      "title": "无边海与边缘通路",
+      "search_terms": [
+        "无边海"
+      ],
+      "dimensions": [
+        "geography-and-travel",
+        "cultivation-and-actions",
+        "society-and-resources",
+        "people-and-relationships",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-and-current-candidate-queue",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-boundless/module.json",
+      "review": "regions/human-boundless/review.json",
+      "evidence": "coverage/regional-status.json"
+    },
+    {
+      "id": "human-devil-valley",
+      "realm": "human",
+      "title": "坠魔谷及上古遗迹",
+      "search_terms": [
+        "坠魔谷"
+      ],
+      "dimensions": [
+        "geography-and-travel",
+        "cultivation-and-actions",
+        "society-and-resources",
+        "people-and-relationships",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-devil-valley/module.json",
+      "review": "regions/human-devil-valley/review.json",
+      "evidence": "coverage/regional-status.json"
+    },
+    {
+      "id": "human-far-seas",
+      "realm": "human",
+      "title": "五龙海及天沙大陆",
+      "search_terms": [
+        "五龙海",
+        "天沙大陆"
+      ],
+      "dimensions": [
+        "geography-and-travel",
+        "cultivation-and-actions",
+        "society-and-resources",
+        "people-and-relationships",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-far-seas/module.json",
+      "review": "regions/human-far-seas/review.json",
+      "evidence": "coverage/regional-status.json"
+    },
+    {
       "id": "associated-immortal",
       "realm": "shared",
       "title": "仙界相关历史与外部势力（不开放探索）",
@@ -639,6 +616,63 @@
       "module": "regions/associated-immortal/module.json",
       "review": "regions/associated-immortal/review.json",
       "evidence": "coverage/regional-status.json"
+    },
+    {
+      "id": "human-steppe",
+      "realm": "human",
+      "title": "慕兰与突兀及草原通行",
+      "search_terms": [
+        "慕兰",
+        "幕兰",
+        "突兀",
+        "天澜草原"
+      ],
+      "dimensions": [
+        "geography-and-travel",
+        "cultivation-and-actions",
+        "society-and-resources",
+        "people-and-relationships",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-and-source-validated-full-world-and-live-pending",
+      "module": "regions/human-steppe/module.json",
+      "evidence": "coverage/regional-status.json",
+      "review": "regions/human-steppe/review.json"
+    },
+    {
+      "id": "associated-xiaolingtian",
+      "realm": "associated",
+      "title": "小灵天及必要测界设施",
+      "search_terms": [
+        "小灵天",
+        "小灵界",
+        "绿海",
+        "绿灵族",
+        "太玄罡木",
+        "天玄罡木",
+        "天门山",
+        "铁钧",
+        "簇影",
+        "石纤云",
+        "凌飞仙",
+        "罡靳",
+        "夜眠族",
+        "月牙一族",
+        "巨螂族"
+      ],
+      "dimensions": [
+        "geography-and-travel",
+        "cultivation-and-actions",
+        "society-and-resources",
+        "people-and-relationships",
+        "history-and-current-state"
+      ],
+      "opening_status": "reviewed-current-module-broader-source-closure-pending",
+      "runtime_status": "module-schema-source-and-initial-state-validated-full-world-and-live-pending",
+      "module": "regions/associated-xiaolingtian/module.json",
+      "review": "regions/associated-xiaolingtian/review.json",
+      "evidence": "regions/associated-xiaolingtian/local-validation.json"
     }
   ]
 }
