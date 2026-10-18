@@ -859,6 +859,19 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "dajin-coast-wharf-route-dajin-kuzhu-mist",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-kuzhu-mist"
+          },
+          "description": "先从可靠航图或沿海修士取得方位，再以实际航行或飞遁抵达，不能仅凭岛名瞬移。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "从航图或知情修士取得此岛可靠方位，或实际航行辨认此处。"
+          }
         }
       ],
       "meters": [],
@@ -6327,6 +6340,585 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "dajin-kuzhu-island",
+      "name": "苦竹岛",
+      "kind": "location",
+      "placement": "human-realm",
+      "description": "近海迷雾环绕的林木岛屿，古阵遮掩内部景物，远观不能直接辨出隐蔽山居。",
+      "facts": [
+        {
+          "id": "dajin-kuzhu-island-route-dajin-kuzhu-mist",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-kuzhu-mist"
+          },
+          "description": "迷雾与古阵阻隔，须获得通行指引或实际破除阻碍。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-kuzhu-island-route-dajin-kuzhu-yingfeng-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-kuzhu-yingfeng-hall"
+          },
+          "description": "穿过岛内山林登峰，入殿另须主人许可。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-kuzhu-mist",
+      "name": "苦竹岛外雾海",
+      "kind": "location",
+      "placement": "dajin-kuzhu-island",
+      "description": "连绵海雾使视线与探查受阻，进入须辨认航路与阵法状态。",
+      "facts": [
+        {
+          "id": "dajin-kuzhu-mist-route-dajin-coast-wharf",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-coast-wharf"
+          },
+          "description": "先从可靠航图或沿海修士取得方位，再以实际航行或飞遁抵达，不能仅凭岛名瞬移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-kuzhu-mist-route-dajin-kuzhu-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-kuzhu-island"
+          },
+          "description": "迷雾与古阵阻隔，须获得通行指引或实际破除阻碍。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-kuzhu-yingfeng-hall",
+      "name": "迎凤木殿",
+      "kind": "location",
+      "placement": "dajin-kuzhu-island",
+      "description": "山顶木殿有大厅与偏殿，来访须先通报。",
+      "facts": [
+        {
+          "id": "dajin-kuzhu-yingfeng-hall-route-dajin-kuzhu-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-kuzhu-island"
+          },
+          "description": "穿过岛内山林登峰，入殿另须主人许可。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-kuzhu-yingfeng-hall-route-dajin-kuzhu-store",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-kuzhu-store"
+          },
+          "description": "器库有值守与保管安排。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-tiansang-tree",
+      "name": "天桑神树",
+      "kind": "plant",
+      "placement": "dajin-kuzhu-island",
+      "description": "紫色桑木的多条树干同根相连，构成同一株古树；采叶和损伤须从实际树体扣除。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-wanmu-array",
+      "name": "万木大阵",
+      "kind": "item",
+      "placement": "dajin-kuzhu-island",
+      "description": "古木阵以神树为阵眼，遮蔽与削弱闯入者的能力取决于阵法完好、供能及对方实际手段。",
+      "facts": [
+        {
+          "id": "dajin-wanmu-array-array-core",
+          "predicate": "array-core",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-tiansang-tree"
+          },
+          "description": "同一古树根系支撑阵眼，破坏会影响阵法。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-wanmu-array-managed-by",
+          "predicate": "managed-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-ku-zhu"
+          },
+          "description": "岛主负责启闭维护，阵法不自主无限运转。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 30
+        }
+      ]
+    },
+    {
+      "id": "dajin-kuzhu-store",
+      "name": "苦竹岛值守库",
+      "kind": "location",
+      "placement": "dajin-kuzhu-yingfeng-hall",
+      "description": "巡阵器物与维护材料分类保存，取用要记录用途。",
+      "facts": [
+        {
+          "id": "dajin-kuzhu-store-managed-by",
+          "predicate": "managed-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-ku-zhu"
+          },
+          "description": "取用须获当前管理者许可。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "dajin-kuzhu-store-route-dajin-kuzhu-yingfeng-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-kuzhu-yingfeng-hall"
+          },
+          "description": "器库有值守与保管安排。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "maintenance-material",
+          "amount": 8
+        }
+      ]
+    },
+    {
+      "id": "canon-ku-zhu",
+      "name": "苦竹老人",
+      "kind": "person",
+      "placement": "dajin-kuzhu-yingfeng-hall",
+      "description": "绿袍白发、面容年轻的海岛修士，重视神树和岛屿秩序，先衡量利害再决定争斗或交易。",
+      "facts": [
+        {
+          "id": "canon-ku-zhu-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "元婴初期"
+          },
+          "description": "元婴初期",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-ku-zhu"
+            ]
+          }
+        },
+        {
+          "id": "canon-ku-zhu-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "元婴初期，熟悉木属性法力、三口寒竹练剑的协同控制和本岛古阵维护；大规模剑阵仍需真实器物与持续修炼。"
+          },
+          "description": "元婴初期，熟悉木属性法力、三口寒竹练剑的协同控制和本岛古阵维护；大规模剑阵仍需真实器物与持续修炼。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-ku-zhu"
+            ]
+          }
+        },
+        {
+          "id": "canon-ku-zhu-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "有可支持木属性修炼的灵根，具体根系构成未定。"
+          },
+          "description": "有可支持木属性修炼的灵根，具体根系构成未定。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-ku-zhu"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-ku-zhu-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-ku-zhu-mana",
+          "definition_id": "mana",
+          "current": 650
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-ku-zhu-cultivation",
+          "definition_id": "cultivation",
+          "value": 4
+        },
+        {
+          "id": "canon-ku-zhu-force",
+          "definition_id": "force",
+          "value": 3
+        },
+        {
+          "id": "canon-ku-zhu-craft",
+          "definition_id": "craft",
+          "value": 3
+        },
+        {
+          "id": "canon-ku-zhu-perception",
+          "definition_id": "perception",
+          "value": 4
+        },
+        {
+          "id": "canon-ku-zhu-influence",
+          "definition_id": "influence",
+          "value": 3
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 120
+        }
+      ],
+      "agent": {
+        "id": "canon-ku-zhu",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "绿袍白发、面容年轻的海岛修士，重视神树和岛屿秩序，先衡量利害再决定争斗或交易。",
+            "voice": "客气而谨慎，注重代价、威胁与承诺，不把未知来客当熟人。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "检查古阵近海一侧的供能与树根状况，留足修炼时间。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "苦竹老人",
+              "description": "绿袍白发、面容年轻的海岛修士，重视神树和岛屿秩序，先衡量利害再决定争斗或交易。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-kuzhu-yingfeng-hall",
+              "name": "迎凤木殿",
+              "description": "山顶木殿有大厅与偏殿，来访须先通报。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-kuzhu-island",
+              "name": "苦竹岛",
+              "description": "近海迷雾环绕的林木岛屿，古阵遮掩内部景物，远观不能直接辨出隐蔽山居。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-tiansang-tree",
+              "name": "天桑神树",
+              "description": "紫色桑木的多条树干同根相连，构成同一株古树；采叶和损伤须从实际树体扣除。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-wanmu-array",
+              "name": "万木大阵",
+              "description": "古木阵以神树为阵眼，遮蔽与削弱闯入者的能力取决于阵法完好、供能及对方实际手段。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-kuzhu-store",
+              "name": "苦竹岛值守库",
+              "description": "巡阵器物与维护材料分类保存，取用要记录用途。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-kuzhu-training-sword-1",
+              "name": "寒竹练剑1",
+              "description": "自己所有、放在值守库的寒竹练剑之一；使用须真实取出并耗法力。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-kuzhu-training-sword-2",
+              "name": "寒竹练剑2",
+              "description": "自己所有、放在值守库的寒竹练剑之一；使用须真实取出并耗法力。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dajin-kuzhu-training-sword-3",
+              "name": "寒竹练剑3",
+              "description": "自己所有、放在值守库的寒竹练剑之一；使用须真实取出并耗法力。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-ku-zhu"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-kuzhu-yingfeng-hall",
+              "canonical_entity_ids": [
+                "dajin-kuzhu-yingfeng-hall"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-kuzhu-island",
+              "canonical_entity_ids": [
+                "dajin-kuzhu-island"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-tiansang-tree",
+              "canonical_entity_ids": [
+                "canon-tiansang-tree"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-wanmu-array",
+              "canonical_entity_ids": [
+                "dajin-wanmu-array"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-kuzhu-store",
+              "canonical_entity_ids": [
+                "dajin-kuzhu-store"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-kuzhu-training-sword-1",
+              "canonical_entity_ids": [
+                "dajin-kuzhu-training-sword-1"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-kuzhu-training-sword-2",
+              "canonical_entity_ids": [
+                "dajin-kuzhu-training-sword-2"
+              ]
+            },
+            {
+              "local_entity_id": "known-dajin-kuzhu-training-sword-3",
+              "canonical_entity_ids": [
+                "dajin-kuzhu-training-sword-3"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "本人修学、管理岛屿及亲自察看的器物。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "元婴初期，熟悉木属性法力、三口寒竹练剑的协同控制和本岛古阵维护；大规模剑阵仍需真实器物与持续修炼。"
+              },
+              "description": "元婴初期，熟悉木属性法力、三口寒竹练剑的协同控制和本岛古阵维护；大规模剑阵仍需真实器物与持续修炼。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "owns-training-sword-1",
+              "subjectId": "known-dajin-kuzhu-training-sword-1",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "self"
+              },
+              "description": "这口练剑属于自己，存放在已知值守库。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "owns-training-sword-2",
+              "subjectId": "known-dajin-kuzhu-training-sword-2",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "self"
+              },
+              "description": "这口练剑属于自己，存放在已知值守库。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "owns-training-sword-3",
+              "subjectId": "known-dajin-kuzhu-training-sword-3",
+              "predicate": "owned-by",
+              "value": {
+                "kind": "local_entity",
+                "localEntityId": "self"
+              },
+              "description": "这口练剑属于自己，存放在已知值守库。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dajin-kuzhu-training-sword-1",
+      "name": "寒竹练剑1",
+      "kind": "item",
+      "placement": "dajin-kuzhu-store",
+      "description": "木属性练剑，须由法力实际驱动，单口和合击不能凭空增殖。",
+      "facts": [
+        {
+          "id": "dajin-kuzhu-training-sword-1-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-ku-zhu"
+          },
+          "description": "岛主私用练剑，不随领取而转让所有权。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-kuzhu-training-sword-2",
+      "name": "寒竹练剑2",
+      "kind": "item",
+      "placement": "dajin-kuzhu-store",
+      "description": "木属性练剑，须由法力实际驱动，单口和合击不能凭空增殖。",
+      "facts": [
+        {
+          "id": "dajin-kuzhu-training-sword-2-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-ku-zhu"
+          },
+          "description": "岛主私用练剑，不随领取而转让所有权。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-kuzhu-training-sword-3",
+      "name": "寒竹练剑3",
+      "kind": "item",
+      "placement": "dajin-kuzhu-store",
+      "description": "木属性练剑，须由法力实际驱动，单口和合击不能凭空增殖。",
+      "facts": [
+        {
+          "id": "dajin-kuzhu-training-sword-3-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-ku-zhu"
+          },
+          "description": "岛主私用练剑，不随领取而转让所有权。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [],
@@ -6384,6 +6976,11 @@
     {
       "id": "dajin-tianfu-lost-knowledge",
       "text": "三大密符的名声不等于三种完整制作知识都可取得。六丁天甲旧传已失，化灵符须结丹丹火及时间材料；古祖符需重新炼化和培炼，不因拿到物品即有原威能。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-kuzhu-unique-root-and-trade",
+      "text": "天桑多干是同一根系，不生成多株独有神树；万木阵须真实阵眼、供能和完整结构。灵叶、法剑或灵禽羽翎的取得须从现存资源和权属产生，交易争议可协商或冲突，不能固定重现将来来客的比试结果。",
       "severity": "hard"
     }
   ],
@@ -7410,6 +8007,100 @@
     "law:dajin-tianfu-lost-knowledge": [
       "dajin-tianfu-three-talisman-state",
       "dajin-ancestral-hualing-talisman"
+    ],
+    "entity:dajin-kuzhu-island": [
+      "dajin-kuzhu-old-island"
+    ],
+    "entity:dajin-kuzhu-mist": [
+      "dajin-kuzhu-old-island"
+    ],
+    "entity:dajin-kuzhu-yingfeng-hall": [
+      "dajin-kuzhu-old-island"
+    ],
+    "entity:canon-tiansang-tree": [
+      "dajin-kuzhu-old-island"
+    ],
+    "entity:dajin-wanmu-array": [
+      "dajin-kuzhu-method-boundaries"
+    ],
+    "entity:dajin-kuzhu-store": [
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "entity:canon-ku-zhu": [
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "fact:canon-ku-zhu-cultivation-state": [
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "fact:canon-ku-zhu-learned-skill": [
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "fact:canon-ku-zhu-spiritual-root": [
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "entity:dajin-kuzhu-training-sword-1": [
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "fact:dajin-kuzhu-training-sword-1-owner": [
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "entity:dajin-kuzhu-training-sword-2": [
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "fact:dajin-kuzhu-training-sword-2-owner": [
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "entity:dajin-kuzhu-training-sword-3": [
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "fact:dajin-kuzhu-training-sword-3-owner": [
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "fact:dajin-wanmu-array-array-core": [
+      "dajin-kuzhu-old-island"
+    ],
+    "fact:dajin-wanmu-array-managed-by": [
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "fact:dajin-kuzhu-store-managed-by": [
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "fact:dajin-coast-wharf-route-dajin-kuzhu-mist": [
+      "dajin-kuzhu-old-island",
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "fact:dajin-kuzhu-mist-route-dajin-coast-wharf": [
+      "dajin-kuzhu-old-island",
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "fact:dajin-kuzhu-mist-route-dajin-kuzhu-island": [
+      "dajin-kuzhu-old-island",
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "fact:dajin-kuzhu-island-route-dajin-kuzhu-mist": [
+      "dajin-kuzhu-old-island",
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "fact:dajin-kuzhu-island-route-dajin-kuzhu-yingfeng-hall": [
+      "dajin-kuzhu-old-island",
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "fact:dajin-kuzhu-yingfeng-hall-route-dajin-kuzhu-island": [
+      "dajin-kuzhu-old-island",
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "fact:dajin-kuzhu-yingfeng-hall-route-dajin-kuzhu-store": [
+      "dajin-kuzhu-old-island",
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "fact:dajin-kuzhu-store-route-dajin-kuzhu-yingfeng-hall": [
+      "dajin-kuzhu-old-island",
+      "dajin-kuzhu-opening-calibration"
+    ],
+    "law:dajin-kuzhu-unique-root-and-trade": [
+      "dajin-kuzhu-old-island",
+      "dajin-kuzhu-method-boundaries",
+      "dajin-kuzhu-opening-calibration"
     ]
   }
 }
