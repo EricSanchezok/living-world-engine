@@ -51,9 +51,9 @@
   {
     "id": "future-outerstar-fan-furen",
     "label": "范夫人",
-    "kind": "person",
-    "openingState": "reserved-human-inner-star-timeline",
-    "classification": "source-reference-with-explicit-temporal-assessment",
+    "kind": "identity-alias",
+    "openingState": "alias-of-reviewed-identity",
+    "classification": "reviewed-cross-region-identity-alias",
     "claimIds": [
       "outerstar-market-claims",
       "outer-reviewed-secret-market",
@@ -63,7 +63,32 @@
       "范左使",
       "范门主（后期）"
     ],
-    "reason": "保留唯一原著身份索引，待妙音门及乱星海时间线判断；当前只给原创当值鉴定师，不复制后期角色。"
+    "reason": "范夫人、范左使与范静梅为同一妙音门人物：早期同段本名与称谓连续，外海韩立直接认出为妙音范左使，后由文思月说明夺权迁海。此记录仅保留旧资料ID的可解析别名，不代表第二人物；后期任门主和外海经历不前置开篇。",
+    "canonicalId": "canon-fan-jingmei",
+    "aliasOf": "canon-fan-jingmei",
+    "identityEvidence": [
+      {
+        "chapterId": "qq-21946291",
+        "start": 381,
+        "end": 673,
+        "chapterSha256": "7e1db8b2a9fa41b4df27c20cce75e82316f3b66a468782e10e6c9ce5cad3d2b9",
+        "anchorSha256": "27d608a70f108e90b0fb5c81dad3ea411bba72a377af24e380a9b243ecee44ab"
+      },
+      {
+        "chapterId": "qq-22625712",
+        "start": 1425,
+        "end": 1506,
+        "chapterSha256": "fa75a1974710ca4989247711246a8b63bf265f662fd63c0ec28c82a48bc612b5",
+        "anchorSha256": "86ee2df0acd259ae0ccb0b76d58b892d4c65e8a76c8ef315a1e8a409f2acfae3"
+      },
+      {
+        "chapterId": "qq-22644687",
+        "start": 672,
+        "end": 978,
+        "chapterSha256": "275d33cb8709e62c1e5bac1b6536a5d9947236118481f07399fb13014b22a483",
+        "anchorSha256": "01eb4821073c776c3c0256784f4d705b504f78c9bb297fe0ef0d46123fbbc057"
+      }
+    ]
   },
   {
     "id": "future-outerstar-wen-siyue",

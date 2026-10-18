@@ -3076,14 +3076,39 @@
   {
     "id": "innerstar-juhun-bowl-reference",
     "label": "聚魂钵",
-    "kind": "item",
-    "openingState": "t0-state-or-ownership-underdetermined",
-    "classification": "source-reference-with-explicit-temporal-assessment",
+    "kind": "identity-alias",
+    "openingState": "alias-of-reviewed-identity",
+    "classification": "reviewed-cross-region-identity-alias",
     "claimIds": [
       "innerstar-later-city-training"
     ],
     "aliases": [],
-    "reason": "后期资料身份或称名，T0准确年岁、能力、所在和物件所有权未能确定，不生成第二实体。"
+    "reason": "韩从越皇所得聚魂钵与后来制傀、以残余阴气开启玄阴经的钵沿连续持有记录为同一器。此ID只作原资料别名，魂消耗与残阴气状态分别记录，不能生成第二钵。",
+    "canonicalId": "yue-emperor-juhun-bowl",
+    "aliasOf": "yue-emperor-juhun-bowl",
+    "identityEvidence": [
+      {
+        "chapterId": "qq-21571660",
+        "start": 2629,
+        "end": 2858,
+        "chapterSha256": "4bb28caee7a3ba3995725e0d695a32598e9db735c81901249176e7a891d7a214",
+        "anchorSha256": "2c7a20522cd8262d0645d00ef1ea84ef770e8c37e7ca0f19407b5ea93ca21615"
+      },
+      {
+        "chapterId": "qq-21902113",
+        "start": 1774,
+        "end": 2116,
+        "chapterSha256": "a969e7f055dc4a9816f30f0f3b9bc95df5e2bd2bae0c2d1315f73bc663e06d36",
+        "anchorSha256": "46c2e4039d90f0997d9735c22cf50b8fd7d30e5fa220b26d3113611245af08e5"
+      },
+      {
+        "chapterId": "qq-22542887",
+        "start": 129,
+        "end": 379,
+        "chapterSha256": "4ac247a2f48941f098c0514c39951c2133c819af8c3310cbb06097bc434922a6",
+        "anchorSha256": "ebf57ef0bdd49119bc0162a2f76a211a0e043514f0293a61acabe6046d1a8672"
+      }
+    ]
   },
   {
     "id": "innerstar-feeding-pill-kind",

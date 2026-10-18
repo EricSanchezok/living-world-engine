@@ -316,6 +316,26 @@
           }
         }
       ]
+    },
+    {
+      "entityId": "canon-han-li",
+      "facts": [
+        {
+          "id": "source-han-opening-literacy",
+          "predicate": "literacy",
+          "value": {
+            "kind": "text",
+            "value": "尚未学会识字，不能自行读懂书信、书名与法诀文字；可听人讲解，也可以从基础识字开始学习。"
+          },
+          "description": "尚未学会识字，不能自行读懂书信、书名与法诀文字；可听人讲解，也可以从基础识字开始学习。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-han-li"
+            ]
+          }
+        }
+      ]
     }
   ],
   "placements": [],
@@ -382,6 +402,39 @@
             "confidence": 1,
             "evidenceIds": [
               "source-wound-powder-supply-experience"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "agent_id": "canon-han-li",
+      "belief": {
+        "local_entities": [],
+        "bindings": [],
+        "evidence": [
+          {
+            "id": "source-unlearned-characters-experience",
+            "kind": "observation",
+            "description": "自己尚没有学会读写文字的生活经历。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "source-own-literacy",
+            "subjectId": "self",
+            "predicate": "literacy",
+            "value": {
+              "kind": "text",
+              "value": "尚未学会识字，不能自行读懂书信、书名与法诀文字；可听人讲解，也可以从基础识字开始学习。"
+            },
+            "description": "尚未学会识字，不能自行读懂书信、书名与法诀文字；可听人讲解，也可以从基础识字开始学习。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "source-unlearned-characters-experience"
             ]
           }
         ]
@@ -499,6 +552,12 @@
     "cognition:canon-mo-juren": [
       "source-supplement-mo-wound-powder",
       "source-supplement-local-supply-calibration"
+    ],
+    "fact:source-han-opening-literacy": [
+      "source-supplement-han-opening-literacy"
+    ],
+    "cognition:canon-han-li": [
+      "source-supplement-han-opening-literacy"
     ]
   }
 }
