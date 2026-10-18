@@ -10407,9 +10407,9 @@
           "predicate": "spiritual-root",
           "value": {
             "kind": "text",
-            "value": "具备已验修仙资质，能以自身冰法传承引气修炼。"
+            "value": "先天木、水双属性灵根，已将金、火、土丹灵根炼入自身；五行已全。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
           },
-          "description": "具备已验修仙资质，能以自身冰法传承引气修炼。",
+          "description": "先天木、水双属性灵根，已将金、火、土丹灵根炼入自身；五行已全。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -10691,6 +10691,13 @@
               "description": "自身经历、修行和职务往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -10752,6 +10759,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "先天木、水双属性灵根，已将金、火、土丹灵根炼入自身；五行已全。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
+              },
+              "description": "先天木、水双属性灵根，已将金、火、土丹灵根炼入自身；五行已全。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -13525,9 +13547,9 @@
           "predicate": "cultivation-foundation",
           "value": {
             "kind": "text",
-            "value": "具备自己长期修行形成的法体与法力；灵根情况须具体检测。"
+            "value": "血影功已凝成可独立行动的法体，以自身法力维持遁形和血光术；分出形体须分配已有法力，不能复制本体储备。"
           },
-          "description": "具备自己长期修行形成的法体与法力；灵根情况须具体检测。",
+          "description": "血影功已凝成可独立行动的法体，以自身法力维持遁形和血光术；分出形体须分配已有法力，不能复制本体储备。",
           "access": {
             "kind": "private"
           }
@@ -13695,6 +13717,13 @@
               "description": "自身经历、修行和职务往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -13741,6 +13770,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-cultivation-foundation",
+              "subjectId": "self",
+              "predicate": "cultivation-foundation",
+              "value": {
+                "kind": "text",
+                "value": "血影功已凝成可独立行动的法体，以自身法力维持遁形和血光术；分出形体须分配已有法力，不能复制本体储备。"
+              },
+              "description": "血影功已凝成可独立行动的法体，以自身法力维持遁形和血光术；分出形体须分配已有法力，不能复制本体储备。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -13826,9 +13870,9 @@
           "predicate": "cultivation-foundation",
           "value": {
             "kind": "text",
-            "value": "具备自己长期修行形成的法体与法力；灵根情况须具体检测。"
+            "value": "雷法经长期修炼与自身法体相合，可调动现有大乘法力催动赤雷遁及雷蛟法相；雷纹不等于无限外源法力。"
           },
-          "description": "具备自己长期修行形成的法体与法力；灵根情况须具体检测。",
+          "description": "雷法经长期修炼与自身法体相合，可调动现有大乘法力催动赤雷遁及雷蛟法相；雷纹不等于无限外源法力。",
           "access": {
             "kind": "private"
           }
@@ -14008,6 +14052,13 @@
               "description": "自身经历、修行和职务往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -14039,6 +14090,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-cultivation-foundation",
+              "subjectId": "self",
+              "predicate": "cultivation-foundation",
+              "value": {
+                "kind": "text",
+                "value": "雷法经长期修炼与自身法体相合，可调动现有大乘法力催动赤雷遁及雷蛟法相；雷纹不等于无限外源法力。"
+              },
+              "description": "雷法经长期修炼与自身法体相合，可调动现有大乘法力催动赤雷遁及雷蛟法相；雷纹不等于无限外源法力。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -14124,9 +14190,9 @@
           "predicate": "cultivation-foundation",
           "value": {
             "kind": "text",
-            "value": "具备自己长期修行形成的法体与法力；灵根情况须具体检测。"
+            "value": "自身法体已承载大乘修为，可用现有法力护身、布阵并维持对已驯血鸠的控制；灵兽能力与本人法力分别存在。"
           },
-          "description": "具备自己长期修行形成的法体与法力；灵根情况须具体检测。",
+          "description": "自身法体已承载大乘修为，可用现有法力护身、布阵并维持对已驯血鸠的控制；灵兽能力与本人法力分别存在。",
           "access": {
             "kind": "private"
           }
@@ -14462,6 +14528,13 @@
               "description": "自身经历、修行和职务往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -14493,6 +14566,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-cultivation-foundation",
+              "subjectId": "self",
+              "predicate": "cultivation-foundation",
+              "value": {
+                "kind": "text",
+                "value": "自身法体已承载大乘修为，可用现有法力护身、布阵并维持对已驯血鸠的控制；灵兽能力与本人法力分别存在。"
+              },
+              "description": "自身法体已承载大乘修为，可用现有法力护身、布阵并维持对已驯血鸠的控制；灵兽能力与本人法力分别存在。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -14578,9 +14666,9 @@
           "predicate": "cultivation-foundation",
           "value": {
             "kind": "text",
-            "value": "具备自己长期修行形成的法体与法力；灵根情况须具体检测。"
+            "value": "自身法体已承载大乘修为，琉璃幻目依自身神识运转，剑气与遁行消耗现有法力；外貌鹰鼻不自动构成鹰族血脉。"
           },
-          "description": "具备自己长期修行形成的法体与法力；灵根情况须具体检测。",
+          "description": "自身法体已承载大乘修为，琉璃幻目依自身神识运转，剑气与遁行消耗现有法力；外貌鹰鼻不自动构成鹰族血脉。",
           "access": {
             "kind": "private"
           }
@@ -14820,6 +14908,13 @@
               "description": "自身经历、修行和职务往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -14851,6 +14946,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-cultivation-foundation",
+              "subjectId": "self",
+              "predicate": "cultivation-foundation",
+              "value": {
+                "kind": "text",
+                "value": "自身法体已承载大乘修为，琉璃幻目依自身神识运转，剑气与遁行消耗现有法力；外貌鹰鼻不自动构成鹰族血脉。"
+              },
+              "description": "自身法体已承载大乘修为，琉璃幻目依自身神识运转，剑气与遁行消耗现有法力；外貌鹰鼻不自动构成鹰族血脉。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -22702,7 +22812,8 @@
       "blood-current-life",
       "blood-current-values",
       "blood-ding-identity-boundary",
-      "blood-ding-opening-placement"
+      "blood-ding-opening-placement",
+      "spirit-blood-fixed-cultivation-bases"
     ],
     "fact:canon-bingpo-cultivation-state": [
       "blood-bingpo-opening-location",
@@ -22726,8 +22837,7 @@
       "blood-current-life"
     ],
     "fact:canon-bingpo-spiritual-root": [
-      "blood-bingpo-opening-location",
-      "blood-current-life"
+      "spirit-blood-fixed-cultivation-bases"
     ],
     "fact:canon-bingpo-inherited-oath": [
       "blood-tianding-treasure"
@@ -23286,7 +23396,8 @@
     "entity:canon-xue-ying-zi": [
       "blood-xueyingzi-identity",
       "blood-current-life",
-      "blood-current-values"
+      "blood-current-values",
+      "spirit-blood-fixed-cultivation-bases"
     ],
     "fact:canon-xue-ying-zi-cultivation-state": [
       "blood-xueyingzi-identity",
@@ -23299,8 +23410,7 @@
       "blood-current-values"
     ],
     "fact:canon-xue-ying-zi-cultivation-foundation": [
-      "blood-xueyingzi-identity",
-      "blood-current-life"
+      "spirit-blood-fixed-cultivation-bases"
     ],
     "entity:canon-xue-ying-zi-resources": [
       "blood-current-life",
@@ -23312,7 +23422,8 @@
     "entity:canon-chi-lei-laozu": [
       "blood-chilei-identity",
       "blood-current-life",
-      "blood-current-values"
+      "blood-current-values",
+      "spirit-blood-fixed-cultivation-bases"
     ],
     "fact:canon-chi-lei-laozu-cultivation-state": [
       "blood-chilei-identity",
@@ -23325,8 +23436,7 @@
       "blood-current-values"
     ],
     "fact:canon-chi-lei-laozu-cultivation-foundation": [
-      "blood-chilei-identity",
-      "blood-current-life"
+      "spirit-blood-fixed-cultivation-bases"
     ],
     "entity:canon-chi-lei-laozu-resources": [
       "blood-current-life",
@@ -23338,7 +23448,8 @@
     "entity:canon-blood-ruyi": [
       "blood-bone-sect-two-elders",
       "blood-current-life",
-      "blood-current-values"
+      "blood-current-values",
+      "spirit-blood-fixed-cultivation-bases"
     ],
     "fact:canon-blood-ruyi-cultivation-state": [
       "blood-bone-sect-two-elders",
@@ -23350,8 +23461,7 @@
       "blood-reviewed-life"
     ],
     "fact:canon-blood-ruyi-cultivation-foundation": [
-      "blood-bone-sect-two-elders",
-      "blood-current-life"
+      "spirit-blood-fixed-cultivation-bases"
     ],
     "entity:canon-blood-ruyi-resources": [
       "blood-current-life",
@@ -23363,7 +23473,8 @@
     "entity:canon-blood-eagle-elder": [
       "blood-bone-sect-two-elders",
       "blood-current-life",
-      "blood-current-values"
+      "blood-current-values",
+      "spirit-blood-fixed-cultivation-bases"
     ],
     "fact:canon-blood-eagle-elder-cultivation-state": [
       "blood-bone-sect-two-elders",
@@ -23375,8 +23486,7 @@
       "blood-reviewed-life"
     ],
     "fact:canon-blood-eagle-elder-cultivation-foundation": [
-      "blood-bone-sect-two-elders",
-      "blood-current-life"
+      "spirit-blood-fixed-cultivation-bases"
     ],
     "entity:canon-blood-eagle-elder-resources": [
       "blood-current-life",

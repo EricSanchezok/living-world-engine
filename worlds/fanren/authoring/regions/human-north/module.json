@@ -906,9 +906,9 @@
           "predicate": "spiritual-root",
           "value": {
             "kind": "text",
-            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+            "value": "水、木双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
           },
-          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "description": "水、木双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -1262,6 +1262,13 @@
               "description": "自己经历、修学及明确记录的当期往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -1308,6 +1315,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "水、木双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
+              },
+              "description": "水、木双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -1738,9 +1760,9 @@
           "predicate": "spiritual-root",
           "value": {
             "kind": "text",
-            "value": "已有支持当前修炼的灵根，细分属性未确定。"
+            "value": "金、水、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
           },
-          "description": "已有支持当前修炼的灵根，细分属性未确定。",
+          "description": "金、水、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -1911,6 +1933,13 @@
               "description": "自己经历、修学及明确记录的当期往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -1957,6 +1986,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "金、水、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
+              },
+              "description": "金、水、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -2034,9 +2078,9 @@
           "predicate": "spiritual-root",
           "value": {
             "kind": "text",
-            "value": "已有支持当前修炼的灵根，细分属性未确定。"
+            "value": "木、水、火三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
           },
-          "description": "已有支持当前修炼的灵根，细分属性未确定。",
+          "description": "木、水、火三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -2219,6 +2263,13 @@
               "description": "自己经历、修学及明确记录的当期往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -2265,6 +2316,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "木、水、火三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
+              },
+              "description": "木、水、火三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -2342,9 +2408,9 @@
           "predicate": "spiritual-root",
           "value": {
             "kind": "text",
-            "value": "已有支持当前修炼的灵根，细分属性未确定。"
+            "value": "金、木、水、火四属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
           },
-          "description": "已有支持当前修炼的灵根，细分属性未确定。",
+          "description": "金、木、水、火四属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -2491,6 +2557,13 @@
               "description": "自己经历、修学及明确记录的当期往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -2537,6 +2610,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "金、木、水、火四属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
+              },
+              "description": "金、木、水、火四属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -4008,9 +4096,9 @@
           "predicate": "spiritual-root",
           "value": {
             "kind": "text",
-            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+            "value": "水、土双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
           },
-          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "description": "水、土双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -4193,6 +4281,13 @@
               "description": "自己经历、修学及明确记录的当期往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -4239,6 +4334,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "水、土双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
+              },
+              "description": "水、土双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -4316,9 +4426,9 @@
           "predicate": "spiritual-root",
           "value": {
             "kind": "text",
-            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+            "value": "木、水双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
           },
-          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "description": "木、水双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -4525,6 +4635,13 @@
               "description": "自己经历、修学及明确记录的当期往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -4571,6 +4688,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "木、水双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
+              },
+              "description": "木、水双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -4648,9 +4780,9 @@
           "predicate": "spiritual-root",
           "value": {
             "kind": "text",
-            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+            "value": "金、水双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
           },
-          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "description": "金、水双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -4833,6 +4965,13 @@
               "description": "自己经历、修学及明确记录的当期往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -4879,6 +5018,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "金、水双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
+              },
+              "description": "金、水双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -4956,9 +5110,9 @@
           "predicate": "spiritual-root",
           "value": {
             "kind": "text",
-            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+            "value": "木、火双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
           },
-          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "description": "木、火双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -5129,6 +5283,13 @@
               "description": "自己经历、修学及明确记录的当期往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -5175,6 +5336,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "木、火双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
+              },
+              "description": "木、火双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -5252,9 +5428,9 @@
           "predicate": "spiritual-root",
           "value": {
             "kind": "text",
-            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+            "value": "水、土双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
           },
-          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "description": "水、土双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -5489,6 +5665,13 @@
               "description": "自己经历、修学及明确记录的当期往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -5535,6 +5718,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "水、土双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
+              },
+              "description": "水、土双属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -5612,9 +5810,9 @@
           "predicate": "spiritual-root",
           "value": {
             "kind": "text",
-            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+            "value": "金、木、水三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
           },
-          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "description": "金、木、水三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -5809,6 +6007,13 @@
               "description": "自己经历、修学及明确记录的当期往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -5855,6 +6060,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "金、木、水三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
+              },
+              "description": "金、木、水三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -7584,9 +7804,9 @@
           "predicate": "spiritual-root",
           "value": {
             "kind": "text",
-            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+            "value": "金、火、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
           },
-          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "description": "金、火、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -7709,6 +7929,13 @@
               "description": "自己经历、修学及明确记录的当期往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -7755,6 +7982,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "金、火、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
+              },
+              "description": "金、火、土三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -7832,9 +8074,9 @@
           "predicate": "spiritual-root",
           "value": {
             "kind": "text",
-            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+            "value": "金、木、水三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
           },
-          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "description": "金、木、水三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -8005,6 +8247,13 @@
               "description": "自己经历、修学及明确记录的当期往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -8051,6 +8300,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "金、木、水三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
+              },
+              "description": "金、木、水三属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -8251,7 +8515,7 @@
       "name": "绿发毒妖",
       "kind": "person",
       "placement": "north-green-demon-lodge",
-      "description": "长期以毒物凝炼妖术的绿发妖修，物种未明，不因外形就视为蛇族。",
+      "description": "长期以毒物凝炼妖术的绿发化形妖修，习惯先试探对手的护体手段再使毒针。",
       "facts": [
         {
           "id": "canon-green-poison-demon-cultivation-state",
@@ -8284,13 +8548,13 @@
           }
         },
         {
-          "id": "canon-green-poison-demon-spiritual-root",
-          "predicate": "spiritual-root",
+          "id": "canon-green-poison-demon-cultivation-foundation",
+          "predicate": "cultivation-foundation",
           "value": {
             "kind": "text",
-            "value": "妖族修炼基础，种属未确认。"
+            "value": "已有八级化形妖体与妖丹，靠自身妖力运转所学毒法；人族测根法不能替代对妖丹和妖力的实际检视。"
           },
-          "description": "妖族修炼基础，种属未确认。",
+          "description": "已有八级化形妖体与妖丹，靠自身妖力运转所学毒法；人族测根法不能替代对妖丹和妖力的实际检视。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -8353,7 +8617,7 @@
         },
         "character": {
           "persona": {
-            "summary": "长期以毒物凝炼妖术的绿发妖修，物种未明，不因外形就视为蛇族。",
+            "summary": "长期以毒物凝炼妖术的绿发化形妖修，习惯先试探对手的护体手段再使毒针。",
             "voice": "按自己的经历说话，分清亲眼所见与传闻；不替陌生人作决定。"
           },
           "goals": [
@@ -8370,7 +8634,7 @@
             {
               "id": "self",
               "name": "绿发毒妖",
-              "description": "长期以毒物凝炼妖术的绿发妖修，物种未明，不因外形就视为蛇族。",
+              "description": "长期以毒物凝炼妖术的绿发化形妖修，习惯先试探对手的护体手段再使毒针。",
               "status": "observed"
             },
             {
@@ -8425,6 +8689,13 @@
               "description": "自己经历、修学及明确记录的当期往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -8471,6 +8742,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-cultivation-foundation",
+              "subjectId": "self",
+              "predicate": "cultivation-foundation",
+              "value": {
+                "kind": "text",
+                "value": "已有八级化形妖体与妖丹，靠自身妖力运转所学毒法；人族测根法不能替代对妖丹和妖力的实际检视。"
+              },
+              "description": "已有八级化形妖体与妖丹，靠自身妖力运转所学毒法；人族测根法不能替代对妖丹和妖力的实际检视。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -9181,7 +9467,8 @@
     "entity:canon-hanli-shangren": [
       "north-shixiang-identity",
       "north-opening-persons",
-      "north-values"
+      "north-values",
+      "human-north-fixed-cultivation-bases"
     ],
     "fact:canon-hanli-shangren-cultivation-state": [
       "north-shixiang-identity",
@@ -9193,7 +9480,7 @@
       "north-opening-persons"
     ],
     "fact:canon-hanli-shangren-spiritual-root": [
-      "north-values"
+      "human-north-fixed-cultivation-bases"
     ],
     "entity:canon-hanli-shangren-pouch": [
       "north-present-life",
@@ -9237,7 +9524,8 @@
     ],
     "entity:north-zhao-ning": [
       "north-present-life",
-      "north-values"
+      "north-values",
+      "human-north-fixed-cultivation-bases"
     ],
     "fact:north-zhao-ning-cultivation-state": [
       "north-present-life",
@@ -9247,7 +9535,7 @@
       "north-present-life"
     ],
     "fact:north-zhao-ning-spiritual-root": [
-      "north-values"
+      "human-north-fixed-cultivation-bases"
     ],
     "entity:north-zhao-ning-pouch": [
       "north-present-life",
@@ -9259,7 +9547,8 @@
     ],
     "entity:north-su-yuan": [
       "north-present-life",
-      "north-values"
+      "north-values",
+      "human-north-fixed-cultivation-bases"
     ],
     "fact:north-su-yuan-cultivation-state": [
       "north-present-life",
@@ -9269,7 +9558,7 @@
       "north-present-life"
     ],
     "fact:north-su-yuan-spiritual-root": [
-      "north-values"
+      "human-north-fixed-cultivation-bases"
     ],
     "entity:north-su-yuan-pouch": [
       "north-present-life",
@@ -9281,7 +9570,8 @@
     ],
     "entity:north-luo-jin": [
       "north-present-life",
-      "north-values"
+      "north-values",
+      "human-north-fixed-cultivation-bases"
     ],
     "fact:north-luo-jin-cultivation-state": [
       "north-present-life",
@@ -9291,7 +9581,7 @@
       "north-present-life"
     ],
     "fact:north-luo-jin-spiritual-root": [
-      "north-values"
+      "human-north-fixed-cultivation-bases"
     ],
     "entity:north-luo-jin-pouch": [
       "north-present-life",
@@ -9575,7 +9865,8 @@
     "entity:canon-bai-yaoyi": [
       "north-north-cast-opening",
       "north-north-cast-relations",
-      "north-values"
+      "north-values",
+      "human-north-fixed-cultivation-bases"
     ],
     "fact:canon-bai-yaoyi-cultivation-state": [
       "north-north-cast-opening",
@@ -9587,7 +9878,7 @@
       "north-north-cast-relations"
     ],
     "fact:canon-bai-yaoyi-spiritual-root": [
-      "north-values"
+      "human-north-fixed-cultivation-bases"
     ],
     "entity:canon-bai-yaoyi-pouch": [
       "north-present-life",
@@ -9603,7 +9894,8 @@
     "entity:canon-bai-mengxin": [
       "north-north-cast-opening",
       "north-north-cast-relations",
-      "north-values"
+      "north-values",
+      "human-north-fixed-cultivation-bases"
     ],
     "fact:canon-bai-mengxin-cultivation-state": [
       "north-north-cast-opening",
@@ -9615,7 +9907,7 @@
       "north-north-cast-relations"
     ],
     "fact:canon-bai-mengxin-spiritual-root": [
-      "north-values"
+      "human-north-fixed-cultivation-bases"
     ],
     "entity:canon-bai-mengxin-pouch": [
       "north-present-life",
@@ -9631,7 +9923,8 @@
     "entity:canon-ouyang-north-elder": [
       "north-north-cast-opening",
       "north-north-cast-relations",
-      "north-values"
+      "north-values",
+      "human-north-fixed-cultivation-bases"
     ],
     "fact:canon-ouyang-north-elder-cultivation-state": [
       "north-north-cast-opening",
@@ -9643,7 +9936,7 @@
       "north-north-cast-relations"
     ],
     "fact:canon-ouyang-north-elder-spiritual-root": [
-      "north-values"
+      "human-north-fixed-cultivation-bases"
     ],
     "entity:canon-ouyang-north-elder-pouch": [
       "north-present-life",
@@ -9659,7 +9952,8 @@
     "entity:canon-ren-bi": [
       "north-north-cast-opening",
       "north-north-cast-relations",
-      "north-values"
+      "north-values",
+      "human-north-fixed-cultivation-bases"
     ],
     "fact:canon-ren-bi-cultivation-state": [
       "north-north-cast-opening",
@@ -9671,7 +9965,7 @@
       "north-north-cast-relations"
     ],
     "fact:canon-ren-bi-spiritual-root": [
-      "north-values"
+      "human-north-fixed-cultivation-bases"
     ],
     "entity:canon-ren-bi-pouch": [
       "north-present-life",
@@ -9687,7 +9981,8 @@
     "entity:canon-liu-palace-master": [
       "north-north-cast-opening",
       "north-north-cast-relations",
-      "north-values"
+      "north-values",
+      "human-north-fixed-cultivation-bases"
     ],
     "fact:canon-liu-palace-master-cultivation-state": [
       "north-north-cast-opening",
@@ -9699,7 +9994,7 @@
       "north-north-cast-relations"
     ],
     "fact:canon-liu-palace-master-spiritual-root": [
-      "north-values"
+      "human-north-fixed-cultivation-bases"
     ],
     "entity:canon-liu-palace-master-pouch": [
       "north-present-life",
@@ -9715,7 +10010,8 @@
     "entity:canon-ye-north-inspector": [
       "north-north-cast-opening",
       "north-north-cast-relations",
-      "north-values"
+      "north-values",
+      "human-north-fixed-cultivation-bases"
     ],
     "fact:canon-ye-north-inspector-cultivation-state": [
       "north-north-cast-opening",
@@ -9727,7 +10023,7 @@
       "north-north-cast-relations"
     ],
     "fact:canon-ye-north-inspector-spiritual-root": [
-      "north-values"
+      "human-north-fixed-cultivation-bases"
     ],
     "entity:canon-ye-north-inspector-pouch": [
       "north-present-life",
@@ -10306,7 +10602,8 @@
     "entity:canon-mojiu": [
       "north-mojiu-long-identities",
       "north-mojiu-long-opening",
-      "north-values"
+      "north-values",
+      "human-north-fixed-cultivation-bases"
     ],
     "fact:canon-mojiu-cultivation-state": [
       "north-mojiu-long-identities",
@@ -10318,7 +10615,7 @@
       "north-mojiu-long-opening"
     ],
     "fact:canon-mojiu-spiritual-root": [
-      "north-values"
+      "human-north-fixed-cultivation-bases"
     ],
     "entity:canon-mojiu-pouch": [
       "north-present-life",
@@ -10331,7 +10628,8 @@
     "entity:canon-long-liucui": [
       "north-mojiu-long-identities",
       "north-mojiu-long-opening",
-      "north-values"
+      "north-values",
+      "human-north-fixed-cultivation-bases"
     ],
     "fact:canon-long-liucui-cultivation-state": [
       "north-mojiu-long-identities",
@@ -10343,7 +10641,7 @@
       "north-mojiu-long-opening"
     ],
     "fact:canon-long-liucui-spiritual-root": [
-      "north-values"
+      "human-north-fixed-cultivation-bases"
     ],
     "entity:canon-long-liucui-pouch": [
       "north-present-life",
@@ -10440,7 +10738,8 @@
     "entity:canon-green-poison-demon": [
       "north-poison-pair",
       "north-poison-pair-opening",
-      "north-values"
+      "north-values",
+      "human-north-fixed-cultivation-bases"
     ],
     "fact:canon-green-poison-demon-cultivation-state": [
       "north-poison-pair",
@@ -10450,9 +10749,6 @@
     "fact:canon-green-poison-demon-learned-skill": [
       "north-poison-pair",
       "north-poison-pair-opening"
-    ],
-    "fact:canon-green-poison-demon-spiritual-root": [
-      "north-values"
     ],
     "entity:canon-green-poison-demon-pouch": [
       "north-present-life",
@@ -10501,6 +10797,9 @@
     ],
     "fact:north-shixiang-ice-hall-travel-north-hanli-realm": [
       "north-values"
+    ],
+    "fact:canon-green-poison-demon-cultivation-foundation": [
+      "human-north-fixed-cultivation-bases"
     ]
   }
 }

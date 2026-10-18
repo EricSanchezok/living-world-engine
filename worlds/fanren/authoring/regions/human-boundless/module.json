@@ -2054,9 +2054,9 @@
           "predicate": "spiritual-root",
           "value": {
             "kind": "text",
-            "value": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。"
+            "value": "金、木、水、土四属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
           },
-          "description": "具有能支持当前修炼的灵根；具体属性未在此记录中确定。",
+          "description": "金、木、水、土四属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -2251,6 +2251,13 @@
               "description": "自己经历、修学及明确记录的当期往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "personal-cultivation-examination",
+              "kind": "observation",
+              "description": "自己过去的检测、修行及反复施术经历。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -2297,6 +2304,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "known-fixed-spiritual-root",
+              "subjectId": "self",
+              "predicate": "spiritual-root",
+              "value": {
+                "kind": "text",
+                "value": "金、木、水、土四属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。"
+              },
+              "description": "金、木、水、土四属性灵根。自身已经过检测与修行验证；检测只能揭示既有属性，不会重新生成灵根，也不自动增加功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "personal-cultivation-examination"
               ]
             }
           ]
@@ -3071,7 +3093,8 @@
     ],
     "entity:boundless-wei-qiao": [
       "boundless-present-life",
-      "boundless-values"
+      "boundless-values",
+      "human-boundless-fixed-cultivation-bases"
     ],
     "fact:boundless-wei-qiao-cultivation-state": [
       "boundless-present-life",
@@ -3081,7 +3104,7 @@
       "boundless-present-life"
     ],
     "fact:boundless-wei-qiao-spiritual-root": [
-      "boundless-values"
+      "human-boundless-fixed-cultivation-bases"
     ],
     "entity:boundless-wei-qiao-pouch": [
       "boundless-present-life",
