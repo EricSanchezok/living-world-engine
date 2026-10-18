@@ -149,7 +149,7 @@ export function deepSeekResponsesRequestPlan(inference: ResolvedModelInference):
     delete transformed.thinking;
     if (inference.thinking === "disabled") transformed.reasoning = { effort: "none" };
     else if (inference.effort !== null) transformed.reasoning = { effort: inference.effort };
-    else if (inference.thinking === "enabled") transformed.reasoning = { effort: "high" };
+    else if (inference.thinking === "enabled") transformed.reasoning = { effort: "low" };
     // SDKs may encode the system prompt as developer for reasoning-capable models;
     // DeepSeek treats developer as user, so preserve our system instruction role.
     if (Array.isArray(transformed.input)) transformed.input = transformed.input.map((item) =>

@@ -211,7 +211,7 @@ describe("provider account protocol matrix", () => {
     expect(result.audit.invocations[0]!.tokenUsage).toMatchObject({ input: 10, output: 5, cacheRead: 1 });
     expect(original.account(accountId).protocol).toBe("openai-chat");
   });
-  it("pins Flash with low semantic reasoning and retains the legacy profiles' explicit inference", () => {
+  it("pins Flash with disabled ordinary generation and low decision reasoning", () => {
     const catalog = loadModelCatalog();
     const deepSeekProfiles = Object.entries(catalog.profiles)
       .filter(([, profile]) => catalog.account(profile.account_id).dialect === "deepseek");
@@ -228,7 +228,7 @@ describe("provider account protocol matrix", () => {
         kind: "exact",
         model_id: "deepseek-flash",
       });
-      const semantic = ["creation-deepseek", "decision-deepseek", "decision-deepseek-long"].includes(id);
+      const semantic = ["decision-deepseek", "decision-deepseek-long"].includes(id);
       expect(profile.inference.thinking).toBe(semantic ? "enabled" : "disabled");
       expect(profile.inference.effort).toBe(semantic ? "low" : "auto");
       expect(profile.response_transport).toBe("deepseek-sse-v1");

@@ -1,4 +1,5 @@
 import { isIP } from "node:net";
+import { guardDeepSeekFetch } from "./deepseek-policy";
 import { Agent, buildConnector, fetch as undiciFetch } from "undici";
 import type { ProviderAccountConfig } from "./model-catalog";
 import { createHttpsDnsLookup } from "./model-dns";
@@ -10,8 +11,9 @@ export type AccountFetchResolver = (
 ) => typeof fetch | undefined;
 
 /**
- * Creates opt-in account transports for environments where a TUN route wins
- * over a reachable physical interface. The catalog carries only the name of
+ * Applies the live DeepSeek request policy and optional account routing for
+ * environments where a TUN route wins over a reachable physical interface.
+ * The catalog carries only the name of
  * the environment variable; the address is read at process start and is
  * never included in model audits or persisted state.
  */
@@ -26,7 +28,7 @@ export function createModelFetchResolver(
     const localAddress = addressEnv ? env[addressEnv]?.trim() : undefined;
     const dnsResolver = account.network?.dns_over_https_url;
     const connectAttempts = account.network?.socket_connect_attempts ?? 1;
-    if (!localAddress && !dnsResolver && connectAttempts === 1) return undefined;
+    if (!localAddress && !dnsResolver && connectAttempts === 1) return account.models_dev_provider_id === "deepseek" ? guardDeepSeekFetch(fetch) : undefined;
     if (localAddress && isIP(localAddress) === 0) {
       throw new Error(
         `model account ${accountId} requires ${addressEnv} to contain a local IP address`,
@@ -62,7 +64,8 @@ export function createModelFetchResolver(
       );
       return response as unknown as Response;
     };
-    transports.set(key, { dispatcher, fetch: boundFetch });
-    return boundFetch;
+    const transport = account.models_dev_provider_id === "deepseek" ? guardDeepSeekFetch(boundFetch) : boundFetch;
+    transports.set(key, { dispatcher, fetch: transport });
+    return transport;
   };
 }

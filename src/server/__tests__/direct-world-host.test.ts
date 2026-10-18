@@ -696,6 +696,11 @@ describe("direct world through persistent WorldHost", () => {
       expect(saved.narratives[0]).toMatchObject({ status: "complete", attempts: 2, segments: [
         ...prefix.map((text, sequence) => ({ sequence, text })), { sequence: prefix.length, text: "三枚灵石仍在你身上。" }] });
       expect(saved.narratives[0]!.grounding.flatMap(check => check.choices)).toContain("added_content");
+      const drafts = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body)))
+        .filter(wire => wire.messages && directCreationContext(wire).scene);
+      expect(drafts).toHaveLength(2);
+      expect(drafts[0]).not.toHaveProperty("thinking");
+      expect(drafts[1]).toMatchObject({ thinking: { type: "enabled" }, reasoning_effort: "low" });
       expect(saved.state.truth.elapsedSeconds).toBe(1);
       expect(Object.keys(saved.state.truth.entities)).toEqual(Object.keys(world.initialState.truth.entities));
       expect(replaySimulationState(saved.state)).toEqual(saved.state);

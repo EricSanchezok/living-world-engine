@@ -1,7 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { closeSync, existsSync, mkdirSync, openSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { pathToFileURL } from "node:url";
 import { loadStepCompilationProbeSources } from "./step-eligibility-probe";
 import { loadTruthProbeSource, probeInferenceEvidence, scorePlanBatch } from "./step-json-probe";
 import { ModelCatalog, type ModelCatalogDocument } from "../../src/engine/models/model-catalog";
@@ -18,7 +17,7 @@ import { STEP_E1_BUDGET, STEP_E1_PROTOCOL } from "../../src/engine/benchmarks/st
 import { ExperimentBudget, deepSeekExperimentUsage } from "../../src/engine/benchmarks/action-compilation/experiment-budget";
 import { FirstPassExperimentTransport } from "../../src/engine/benchmarks/action-compilation/experiment-transport";
 
-type Arm = "B" | "H" | "L";
+type Arm = "B" | "L";
 /** Gateway construction resolves transports for all catalog accounts. Guard
  * actual sends, so an unused configured account cannot block initialization. */
 export const thinkingProbeAccountFetch = (send: typeof fetch) => (id: string): typeof fetch => async (input, init) => {
@@ -26,10 +25,11 @@ export const thinkingProbeAccountFetch = (send: typeof fetch) => (id: string): t
   return send(input, init);
 };
 export function thinkingProbeBody(body: Record<string, unknown>, arm: Arm) {
+  if (arm !== "B" && arm !== "L") throw new Error("Only disabled or low thinking is supported");
   const base = structuredClone(body);
   delete base.thinking;
   delete base.reasoning_effort;
-  return openAIChatRequestPlan({ thinking: arm === "B" ? "disabled" : "enabled", effort: arm === "B" ? null : arm === "L" ? "low" : "high",
+  return openAIChatRequestPlan({ thinking: arm === "B" ? "disabled" : "enabled", effort: arm === "B" ? null : "low",
     reasoningBudgetTokens: null, reasoningSummary: null, textVerbosity: null, temperature: null, topP: null }).transformBody(base);
 }
 export function thinkingProbeEvidence(raw: unknown, arm: Arm) {
@@ -41,23 +41,25 @@ export function thinkingProbeEvidence(raw: unknown, arm: Arm) {
   return { inferenceValid, inferenceError: inferenceValid ? null : "enabled thinking/model could not be verified",
     reasoningPresent, reasoningTokens: response?.usage?.completion_tokens_details?.reasoning_tokens ?? null };
 }
-export function thinkingCatalog(catalog: ModelCatalog, effort: "high" | "low" = "high"): ModelCatalog {
+export function thinkingCatalog(catalog: ModelCatalog, effort: "low" = "low"): ModelCatalog {
+  if (effort !== "low") throw new Error("Only low reasoning is supported");
   const profiles = { ...structuredClone(catalog.profiles) };
   profiles["truth-deepseek"] = { ...profiles["truth-deepseek"]!, inference: {
     ...profiles["truth-deepseek"]!.inference, thinking: "enabled", effort } };
   return new ModelCatalog({ schema_version: catalog.schemaVersion, scheduler: catalog.scheduler,
     registry: catalog.registry, accounts: catalog.accounts, profiles, model_overrides: catalog.modelOverrides } as ModelCatalogDocument);
 }
-function order(kind: "compile" | "truth", count: number, treatment: "H" | "L", repetitions: number) {
+function order(kind: "compile" | "truth", count: number, treatment: "L", repetitions: number) {
   return Array.from({ length: count }, (_, sourceIndex) => Array.from({ length: repetitions }, (_, repetition) =>
     (["B", treatment] as const).map((arm) => ({ kind, sourceIndex, sourceId: `${kind}-${sourceIndex}`, repetition, arm,
       id: `${kind}-${sourceIndex}-${repetition}-${arm}`, phase: "discovery" as const }))
       .sort((a, b) => contentHash({ seed: STEP_E1_PROTOCOL.seed, ...a }).localeCompare(contentHash({ seed: STEP_E1_PROTOCOL.seed, ...b }))))).flat(2);
 }
 
-export async function runThinkingStudy(study: { trialId: "probes-e1-thinking-02" | "probes-e1-low-01"; treatment: "H" | "L"; compileRepetitions: number; compileInputCeiling: number }) {
+export async function runThinkingStudy(study: { trialId: "probes-e1-low-01"; treatment: "L"; compileRepetitions: number; compileInputCeiling: number }) {
   const TRIAL = study.trialId;
-  const effort = study.treatment === "L" ? "low" : "high";
+  const effort = "low";
+  if (study.treatment !== "L") throw new Error("Only the low-thinking experiment is supported");
   if (process.argv.length > 3 || (process.argv[2] && process.argv[2] !== "prepare")) throw new Error("usage: step-thinking-probe.ts [prepare]");
   const root = path.resolve(STEP_E1_PROTOCOL.root), directory = path.join(root, "runs", TRIAL);
   const { sources, catalog, resources, registry } = await loadStepCompilationProbeSources();
@@ -176,5 +178,3 @@ export async function runThinkingStudy(study: { trialId: "probes-e1-thinking-02"
   finally { clearInterval(timer);report();process.off("SIGINT", stop);process.off("SIGTERM", stop);unlinkSync(lock); }
   console.log(JSON.stringify({ trialId: TRIAL, status, failure, completed: rows.length }));
 }
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) void runThinkingStudy({
-  trialId: "probes-e1-thinking-02", treatment: "H", compileRepetitions: 2, compileInputCeiling: 300000 });

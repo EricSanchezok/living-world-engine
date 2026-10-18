@@ -44,8 +44,8 @@ export async function adjudicateFanren(argv = process.argv.slice(2),
   const baseProfileId = argument("--profile-base", profileId);
   const accountConcurrency = Number(argument("--account-concurrency", String(concurrency)));
   const modelOverride = argument("--model", "deepseek-flash"), effortOverride = argument("--effort", "low");
-  const thinking = argument("--thinking", "auto");
-  if (!["auto", "enabled"].includes(thinking)) throw new Error("invalid adjudication thinking mode (auto, enabled)");
+  const thinking = argument("--thinking", "enabled");
+  if (!["auto", "enabled", "disabled"].includes(thinking)) throw new Error("invalid adjudication thinking mode (auto, enabled, disabled)");
   if (effortOverride && !["low", "high", "max"].includes(effortOverride)) throw new Error("invalid adjudication effort (low, high, max)");
   const fresh = argv.includes("--fresh");
   const planOnly = argv.includes("--plan"), maxCalls = Number(argument("--max-calls", String(count * 3)));
@@ -63,7 +63,7 @@ export async function adjudicateFanren(argv = process.argv.slice(2),
   const transportSystem = `${system}\n\n## 传输与局部修复\n正文完整提供。p 编号是精确段落定位的可逆短编号；候选中的 quote 保留原引文范围。若 context.revisionRequest.repair 存在，本次只输出所列替换条目，程序保留其余条目并合成完整审校记录后重新执行全部校验。完整性要求针对合并后的记录；本次输出结构以提供的补丁 schema 为准。不得补丁外改写、漏掉修复目标或删除已发现的遗漏。每条替换记录的证据、sourceClaim、时间与判定要求均不变。`;
   const baseCatalog = loadModelCatalog(path.resolve(process.env.LIVINGWORLD_MODEL_CATALOG_PATH ?? "config/models.yaml"));
   const catalog = sourceAdjudicationCatalog(baseCatalog, { profileId, baseProfileId, modelId: modelOverride,
-    effort: effortOverride as "low" | "high" | "max", thinking: thinking as "auto" | "enabled", accountConcurrency });
+    effort: effortOverride as "low" | "high" | "max", thinking: thinking as "auto" | "enabled" | "disabled", accountConcurrency });
   let next = 0, failed = 0, draining = false, generationRequests = 0, reused = 0, pending = 0, completed = 0;
   const cancelPending = new AbortController();
   const stopDispatch = () => { draining = true; cancelPending.abort(); };

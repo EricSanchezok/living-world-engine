@@ -74,6 +74,8 @@ export async function readAction(input: { decisions: DirectDecisions; agentId: s
       generated = await decisions.provider.generateStructured({ ...decisions.scope, subjectId: agentId,
         modelRegistrySnapshotHash: decisions.control.registryHash, modelInvocation: decisions.next(agentId),
         profileId: input.profileId, role: autonomous ? "creation" : "decision", schemaName: autonomous ? "AutonomousActionReadingV2" : "PlayerActionReadingV5", system, userPrompt,
+        ...(autonomous && decisions.provider.catalog.account(decisions.provider.catalog.profile(input.profileId).account_id).dialect === "deepseek"
+          ? { inferenceOverrides: { thinking: "enabled" as const, effort: "low" } } : {}),
         promptVersion: `${autonomous ? "autonomous-action" : "player-reading"}-${contentHash({ system, userPrompt })}`,
         context: { [autonomous ? "autonomousReading" : "playerReading"]: { executionSite, state: context, language: input.language, catalog, cognition,
           exactQuotes: Object.fromEntries(input.quotes.map((quote, index) => [`q${index}`, quote])) },

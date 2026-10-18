@@ -1,7 +1,7 @@
 # Use low reasoning for language boundaries
 
 ## Status
-Accepted
+Superseded by [0269](0269-flash-default-generation-and-task-owned-reasoning.md)
 Class: architecture
 
 ## Context and Problem Statement

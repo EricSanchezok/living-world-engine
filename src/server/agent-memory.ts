@@ -94,6 +94,8 @@ export class AgentMemoryService {
       const profiles = agentCapabilityModels(document.state, control, source.agentId);
       const result = await this.provider.generateStructured({ ...execution.scope, priority: "background", abortSignal: signal,
         modelRegistrySnapshotHash: control.registryHash, profileId: profiles.creation, role: "creation", subjectId: source.agentId,
+        ...(this.provider.catalog.account(this.provider.catalog.profile(profiles.creation).account_id).models_dev_provider_id === "deepseek"
+          ? { inferenceOverrides: { thinking: "enabled" as const, effort: "low" } } : {}),
         schemaName: "AgentMemoryV1", promptVersion: `agent-memory-${contentHash({ system, userPrompt })}`,
         system, userPrompt, context: source.input, schema: memoryOutputSchema, jsonExamplePolicy: "omit" });
       signal.throwIfAborted();

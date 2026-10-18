@@ -9,6 +9,8 @@ import { parseWorldArchive } from "../../src/server/world-import";
 import { assembleRegionalModules } from "./regional-composition";
 import { contentHash } from "../../src/engine/models/model-audit";
 import { assertFullSourceClosure } from "./source-closure-files";
+import { bindRuntimeModels } from "./runtime-model-bindings";
+import { capabilityModelsSchema } from "../../src/engine/models/capability-bindings";
 
 const root = path.resolve("worlds/fanren/authoring");
 const json = (file: string) => JSON.parse(readFileSync(path.join(root, file), "utf8"));
@@ -28,12 +30,14 @@ const authored = target === "full"
       return { module: json(`regions/${region.id}/module.json`), claims: json(`regions/${region.id}/claims.json`), review: json(`regions/${region.id}/review.json`) };
     }))
   : { module: json(`modules/${name}.json`), claims: json(`claims/${name}.json`), receipts: [] };
-const { template, receipt } = compileAuthoredModule(authored.module, authored.claims, json(`reviews/${name}.json`),
+const { template: approvedTemplate, receipt } = compileAuthoredModule(authored.module, authored.claims, json(`reviews/${name}.json`),
   id => {
     if (!/^qq-\d+$/.test(id)) throw new Error(`invalid chapter identity ${id}`);
     return readFileSync(path.resolve(".livingworld-cache/fanren-sources/chapters", `${id}.txt`), "utf8");
   }, new Set(integrity.blocked_chapters));
 const catalog = loadModelCatalog(path.resolve(process.env.LIVINGWORLD_MODEL_CATALOG_PATH ?? "config/models.yaml"));
+const runtimeModels = capabilityModelsSchema.parse(JSON.parse(readFileSync(path.resolve("worlds/fanren/runtime-models.json"), "utf8")));
+const template = bindRuntimeModels(approvedTemplate, runtimeModels);
 const definition = buildWorldDefinition(template, { modelCatalog: catalog });
 const files = new Map<string, string>([
   ["script.yaml", stringify(template.manifest)], ["laws.yaml", stringify(template.laws)],
@@ -62,7 +66,7 @@ try {
 const artifacts = path.resolve(".livingworld-cache/fanren-artifacts");
 mkdirSync(artifacts, { recursive: true });
 writeFileSync(path.join(artifacts, `${name}.zip`), archive);
-writeFileSync(path.join(root, "reviews", `${name}-build.json`), `${JSON.stringify({ ...receipt, sourceClosureReceipt,
+writeFileSync(path.join(root, "reviews", `${name}-build.json`), `${JSON.stringify({ ...receipt, sourceClosureReceipt, runtimeModels,
   worldHash: definition.contentHash, regionalReceipts: authored.receipts, files: Object.fromEntries([...files].map(([file, contents]) => [file, contentHash(contents)])),
   entities: Object.keys(definition.initialState.truth.entities).length, agents: Object.keys(definition.initialState.agents).length,
   originIds: definition.participation?.origins.map(origin => origin.id), archiveImportValidated: true,

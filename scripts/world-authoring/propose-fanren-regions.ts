@@ -27,12 +27,14 @@ async function main() {
   const args = process.argv.slice(2), argument = (name: string, fallback: string) => args.includes(name) ? args[args.indexOf(name) + 1]! : fallback;
   const concurrency = Number(argument("--concurrency", "4")), accountConcurrency = Number(argument("--account-concurrency", "16"));
   const count = Number(argument("--count", "398")), start = argument("--start", "batch-0001"), selectedModules = argument("--modules", "").split(",").filter(Boolean);
-  const modelId = argument("--model", "deepseek-flash"), effort = argument("--effort", "high");
-  if (!["low", "high", "max"].includes(effort)) throw new Error("invalid regional proposal effort (low, high, max)");
+  const modelId = argument("--model", "deepseek-flash");
+  const thinking = argument("--thinking", "disabled");
+  if (!["enabled", "disabled"].includes(thinking)) throw new Error("regional thinking must be enabled or disabled");
+  if (argument("--effort", "low") !== "low") throw new Error("regional proposal effort must be low");
   if (![concurrency, accountConcurrency, count].every(value => Number.isSafeInteger(value) && value > 0) || concurrency > accountConcurrency || accountConcurrency > 16) throw new Error("invalid regional proposal concurrency or count");
   const profileId = "creation-deepseek", system = readFileSync(path.join(root, "regional-proposal-policy.md"), "utf8"), policyHash = contentHash(system);
   const catalog = sourceAdjudicationCatalog(loadModelCatalog(path.resolve(process.env.LIVINGWORLD_MODEL_CATALOG_PATH ?? "config/models.yaml")), {
-    profileId, baseProfileId: profileId, modelId, effort: effort as "low" | "high" | "max", thinking: "enabled", accountConcurrency });
+    profileId, baseProfileId: profileId, modelId, effort: "low", thinking: thinking as "enabled" | "disabled", accountConcurrency });
   const gateway = createModelGateway(catalog, process.env, { registry: new ModelRegistry(catalog, path.join(cache, "regional-model-runtime")), fetchForAccount: createModelFetchResolver(process.env) });
   await gateway.assertProfilesAvailable([profileId]);
   const allBatches = json(path.join(root, "coverage/batches.json")) as ReadingBatch[];

@@ -730,6 +730,8 @@ export class WorldHost {
         const result = await this.options.provider.generateStructured({
           ...scope, role: "creation", subjectId: beat.agentId,
           profileId: models.creation,
+          ...(beat.attempts > 0 && this.options.provider.catalog.account(this.options.provider.catalog.profile(models.creation).account_id).dialect === "deepseek"
+            ? { inferenceOverrides: { thinking: "enabled" as const, effort: "low" } } : {}),
           ...(control ? { modelRegistrySnapshotHash: control.registryHash } : {}),
           correlation: { executionId: execution?.id, instanceId: id, revision: document.state.revision },
           observer: execution?.trace ?? this.runtimeObserver,

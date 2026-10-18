@@ -4,9 +4,9 @@
 
 ## 调用与费用控制
 
-`adjudicate-fanren.ts` 默认每次处理一个批次，使用 `deepseek-flash`、`low` effort、单并发。`--model`、`--effort`、`--profile` 和 `--profile-base` 可显式覆盖；实际生效模型、推理设置和用量以保存的调用 audit 为准。低推理档位仍会消耗推理 token，不是硬性推理额度；它也不能替代编辑检查。
+`adjudicate-fanren.ts` 默认每次处理一个批次，使用 `deepseek-flash`、`low` effort、单并发。DeepSeek 账户只允许 Flash，并须明确关闭思考或使用 low；`--model`、`--effort` 不能越过这一限制。切换其他供应商时，`--profile-base` 和对应模型、推理参数仍按该供应商能力校验。实际生效模型、推理设置和用量以保存的调用 audit 为准。低推理档位仍会消耗推理 token，不是硬性推理额度；它也不能替代编辑检查。
 
-后续地区初审工具 `propose-fanren-regions.ts` 也默认使用 Flash/high，并提供 `--model`、`--effort` 覆盖。其输出仍须由编辑对照来源处理，不能直接关闭地区制作项。
+后续地区初审工具 `propose-fanren-regions.ts` 也默认使用 Flash/关闭思考，可用 `--thinking enabled` 明确启用 low；DeepSeek 模型仅允许 `deepseek-flash`。其输出仍须由编辑对照来源处理，不能直接关闭地区制作项。
 
 ```sh
 npx tsx scripts/world-authoring/adjudicate-fanren.ts --start batch-0001 --count 398 --plan

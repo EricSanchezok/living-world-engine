@@ -233,6 +233,7 @@ describe("direct world through the actual simulation entry", () => {
       expect(result.state.agents.keeper!.character.goals["understand-traveler"]!.status).toBe("active");
     }
     const request = f.transport.mock.calls.map(([, init]) => JSON.parse(String(init?.body))).find(wire => !wire.questions);
+    expect(request).toMatchObject({ thinking: { type: "enabled" }, reasoning_effort: "low" });
     const reading = directCreationContext(request).autonomousReading;
     expect(JSON.stringify(reading)).not.toContain("canonicalEntityIds");
     expect(JSON.stringify(reading)).not.toContain('"truth"');

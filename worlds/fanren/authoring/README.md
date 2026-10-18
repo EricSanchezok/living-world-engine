@@ -50,6 +50,8 @@
 
 ## 抽取与构建工具
 
+运行模型统一由 [`runtime-models.json`](../runtime-models.json) 配置。构建完成原文和编辑审定校验后，统一绑定世界、现有人物与身份初始化中的模型，并将绑定写入构建回执；原文事实与历史审定不改写。当前闭集裁定使用 Typesafe，开放表达使用 Flash，超长上下文保留显式 Flash 回退。历史游玩报告仍对应各自记录的世界与模型版本。
+
 [正文复核执行参考](sources/adjudication.md)说明 Flash 默认配置、无需模型调用的计划检查、合格结果复用、局部修复及调用上限。
 
 [抽取规则](extraction-policy.md)用于每批两遍正文对照。`npx tsx scripts/world-authoring/extract-fanren.ts --start batch-0001 --count 1` 调用已配置模型，原始输出与调用证据保存在忽略缓存中；[抽取候选](extractions/batch-0001.json)保留定位指纹，不携带原文段落，也不自动获得运行许可。精确引文失败会阻止产物，必要的编辑修改另存[绑定来源和草稿指纹的修订记录](reviews/batch-0001-corrections.json)。机器提取可以先于人工逐章通读；`extracted` 不意味着 `reviewed`。

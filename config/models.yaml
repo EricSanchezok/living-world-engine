@@ -170,7 +170,7 @@ profiles:
     request_timeout_ms: 180000
     max_output_tokens: 32768
     max_input_bytes: 4000000
-    inference: { thinking: enabled, effort: low }
+    inference: { thinking: disabled, effort: auto }
   decision-deepseek-long:
     account_id: deepseek-api
     selector: { kind: exact, model_id: deepseek-flash }

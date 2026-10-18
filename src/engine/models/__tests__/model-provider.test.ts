@@ -86,19 +86,19 @@ function catalog(resolution = false, compilation = false, streamed = false) {
     profiles: {
       deep: {
         account_id: "deepseek",
-        selector: { kind: "exact", model_id: "deepseek-v4-pro" },
+        selector: { kind: "exact", model_id: "deepseek-flash" },
         description: "DeepSeek adapter contract test",
         allowed_roles: ["agent-mind"],
         request_timeout_ms: 10_000,
         max_output_tokens: 1_000,
         inference: {
-          thinking: "enabled", effort: "max", reasoning_budget_tokens: "auto",
+          thinking: "enabled", effort: "low", reasoning_budget_tokens: "auto",
           reasoning_summary: "auto", text_verbosity: "auto", temperature: "auto", top_p: "auto",
         },
       },
       flash: {
         account_id: "deepseek",
-        selector: { kind: "exact", model_id: "deepseek-v4-flash" },
+        selector: { kind: "exact", model_id: "deepseek-flash" },
         description: "DeepSeek non-thinking adapter contract test",
         ...(streamed ? { response_transport: "deepseek-sse-v1" } : {}),
         allowed_roles: compilation ? ["action-compilation"] : resolution ? ["agent-mind", "truth-resolution"] : ["agent-mind"],
@@ -164,7 +164,7 @@ function deepSeekResponse(
   content = JSON.stringify({ answer: "deepseek" }),
   status = 200,
   finishReason = "stop",
-  model = "deepseek-v4-pro",
+  model = "deepseek-flash",
 ): Response {
   return Response.json({
     id: "deepseek-response",
@@ -231,7 +231,7 @@ describe("model catalog and provider adapters", () => {
     const before = structuredClone(gateway.catalog.profile("deep"));
     const result = await gateway.generateStructured({ ...request("deep"), observer,
       inferenceOverrides: { thinking: "disabled", effort: "auto" } });
-    expect(wires[0]).toMatchObject({ model: "deepseek-v4-pro", thinking: { type: "disabled" } });
+    expect(wires[0]).toMatchObject({ model: "deepseek-flash", thinking: { type: "disabled" } });
     expect(wires[0]).not.toHaveProperty("reasoning_effort");
     expect(result.audit.resolvedInference).toMatchObject({ thinking: "disabled", effort: null });
     expect(observer.events.find(event => event.event === "model.context.serialized")?.payload).toMatchObject({
@@ -246,7 +246,7 @@ describe("model catalog and provider adapters", () => {
   it("publishes text through the gateway before the provider sends terminal usage", async () => {
     const configured = catalog(false, false, true), emitted = deferred<void>();
     let stream!: ReadableStreamDefaultController<Uint8Array>;
-    const fixture = deepSeekStreamFixture(), encoder = new TextEncoder();
+    const fixture = deepSeekStreamFixture(undefined, "stop", "deepseek-flash"), encoder = new TextEncoder();
     const gateway = new ModelGateway(configured, credentials, { registry: createTestModelRegistry(configured), maxTransportAttempts: 3,
       fetch: async () => new Response(new ReadableStream({ start(controller) {
         stream = controller;
@@ -265,14 +265,14 @@ describe("model catalog and provider adapters", () => {
   it("uses native streaming with the same full JSON request and canonical output", async () => {
     const bodies: Record<string, unknown>[] = [];
     const observer = new RecordingRuntimeObserver({ mode: "full" });
-    const fixture = deepSeekStreamFixture();
+    const fixture = deepSeekStreamFixture(undefined, "stop", "deepseek-flash");
     const results = [];
     for (const streaming of [false, true]) {
       const configured = catalog(false, false, streaming);
       const gateway = new ModelGateway(configured, credentials, { registry: createTestModelRegistry(configured), maxTransportAttempts: 1,
         fetch: async (_url, init) => {
           bodies.push(JSON.parse(String(init?.body)));
-          if (!streaming) return Response.json({ id: "stream-response", model: "deepseek-v4-flash", created: 1,
+          if (!streaming) return Response.json({ id: "stream-response", model: "deepseek-flash", created: 1,
             choices: [{ index: 0, message: { role: "assistant", content: '{"answer":"行动自由 🐉"}' }, finish_reason: "stop" }], usage: fixture.usage });
           const bytes = new TextEncoder().encode(fixture.raw);
           let position = 0;
@@ -303,7 +303,7 @@ describe("model catalog and provider adapters", () => {
     const gateway = new ModelGateway(configured, credentials, { registry: createTestModelRegistry(configured), maxTransportAttempts: 1,
       fetch: async () => {
         calls++;
-        const raw = deepSeekStreamFixture(undefined, kind === "length" ? "length" : "stop").raw;
+        const raw = deepSeekStreamFixture(undefined, kind === "length" ? "length" : "stop", "deepseek-flash").raw;
         return new Response(kind === "missing-done" ? raw.replace("data: [DONE]\r\n\r\n", "") : raw,
           { headers: { "content-type": "text/event-stream" } });
       } });
@@ -382,7 +382,7 @@ describe("model catalog and provider adapters", () => {
     const bodies: unknown[] = [];
     const gateway = createGateway(credentials, { fetch: async (_input, init) => {
       bodies.push(JSON.parse(String(init?.body)));
-      return deepSeekResponse(content, 200, "stop", "deepseek-v4-flash");
+      return deepSeekResponse(content, 200, "stop", "deepseek-flash");
     } });
     const input = { ...request("flash"), schema: closerOutputSchema };
     await expect(gateway.generateStructured(input)).rejects.toBeInstanceOf(ModelOutputError);
@@ -407,7 +407,7 @@ describe("model catalog and provider adapters", () => {
     if (policy === TERMINAL_ROOT_CLOSER_RECOVERY) fixture.text = JSON.stringify(fixture.value) + "}";
     expect(() => parseLastJsonValueWithRecovery(fixture.text)).toThrow();
     const gateway = createGateway(credentials, { fetch: async () => {
-      calls++; return deepSeekResponse(fixture.text, 200, "stop", "deepseek-v4-flash");
+      calls++; return deepSeekResponse(fixture.text, 200, "stop", "deepseek-flash");
     } });
     const failure = await gateway.generateStructured({ ...request("flash"), jsonSyntaxRecovery: policy,
       schema: closerOutputSchema,
@@ -439,7 +439,7 @@ describe("model catalog and provider adapters", () => {
     const configured = catalog(true);
     const gateway = new ModelGateway(configured, credentials, { registry: createTestModelRegistry(configured),
       fetch: async (_url, init) => {
-        body = String(init?.body); return deepSeekResponse(JSON.stringify(wire), 200, "stop", "deepseek-v4-flash");
+        body = String(init?.body); return deepSeekResponse(JSON.stringify(wire), 200, "stop", "deepseek-flash");
       } });
     const prompt = promptBundle("truth-resolution");
     const result = await dependentFieldsProvider(gateway).generateStructured({ ...request("flash"),
@@ -460,7 +460,7 @@ describe("model catalog and provider adapters", () => {
     let calls = 0;
     const configured = catalog(true);
     const gateway = new ModelGateway(configured, credentials, { registry: createTestModelRegistry(configured),
-      fetch: async () => { calls++; return deepSeekResponse(JSON.stringify(wire), 200, "stop", "deepseek-v4-flash"); } });
+      fetch: async () => { calls++; return deepSeekResponse(JSON.stringify(wire), 200, "stop", "deepseek-flash"); } });
     const prompt = promptBundle("truth-resolution");
     const failure = await dependentFieldsProvider(gateway).generateStructured({ ...request("flash"),
       role: "truth-resolution", schemaName: "truth_resolution_plan_commit", schema: resolutionPlanCommitDirectiveSchema,
@@ -507,7 +507,7 @@ describe("model catalog and provider adapters", () => {
     const configured = catalog(true);
     let calls = 0;
     const gateway = new ModelGateway(configured, credentials, { registry: createTestModelRegistry(configured),
-      fetch: async () => { calls++; return deepSeekResponse(JSON.stringify(wire), 200, "stop", "deepseek-v4-flash"); } });
+      fetch: async () => { calls++; return deepSeekResponse(JSON.stringify(wire), 200, "stop", "deepseek-flash"); } });
     const prompt = promptBundle("truth-resolution");
     const failure = await dependentFieldsProvider(gateway).generateStructured({ ...request("flash"),
       role: "truth-resolution", schemaName: "truth_resolution_plan_commit", schema: resolutionPlanCommitDirectiveSchema,
@@ -533,7 +533,7 @@ describe("model catalog and provider adapters", () => {
     const configured = catalog(true), prompt = promptBundle("truth-resolution");
     let calls = 0, nextIssues: unknown;
     const gateway = dependentFieldsProvider(new ModelGateway(configured, credentials, { registry: createTestModelRegistry(configured),
-      fetch: async () => deepSeekResponse(JSON.stringify(calls++ === 0 ? wire : fixed), 200, "stop", "deepseek-v4-flash") }));
+      fetch: async () => deepSeekResponse(JSON.stringify(calls++ === 0 ? wire : fixed), 200, "stop", "deepseek-flash") }));
     const result = await runSemanticRepairLoop({ role: "truth-resolution", repairScope: "step", targetIds: ["look"], maxRepairs: 1,
       invoke: async context => {
         if (context.attempt === 1) nextIssues = context.issues;
@@ -735,7 +735,7 @@ describe("model catalog and provider adapters", () => {
     const gateway = createGateway(credentials, {
       fetch: async (_input, init) => {
         body = JSON.parse(String(init?.body)) as Record<string, unknown>;
-        return deepSeekResponse(JSON.stringify({ answer: "flash" }), 200, "stop", "deepseek-v4-flash");
+        return deepSeekResponse(JSON.stringify({ answer: "flash" }), 200, "stop", "deepseek-flash");
       },
     });
 
@@ -743,7 +743,7 @@ describe("model catalog and provider adapters", () => {
       value: { answer: "flash" },
     });
     expect(body).toMatchObject({
-      model: "deepseek-v4-flash",
+      model: "deepseek-flash",
       response_format: { type: "json_object" },
       thinking: { type: "disabled" },
     });
@@ -818,7 +818,7 @@ describe("model catalog and provider adapters", () => {
     let calls = 0;
     const gateway = createGateway(credentials, { fetch: async () => {
       calls++;
-      return deepSeekResponse(content, 200, "stop", "deepseek-v4-flash");
+      return deepSeekResponse(content, 200, "stop", "deepseek-flash");
     } });
     const failure = await gateway.generateStructured(request("flash")).then(
       () => { throw new Error("malformed root accepted"); }, error => error,
@@ -877,10 +877,10 @@ describe("model catalog and provider adapters", () => {
 
     const deepBody = calls.find((call) => call.url.includes("deepseek"))!.body;
     expect(deepBody).toMatchObject({
-      model: "deepseek-v4-pro",
+      model: "deepseek-flash",
       response_format: { type: "json_object" },
       thinking: { type: "enabled" },
-      reasoning_effort: "max",
+      reasoning_effort: "low",
     });
     expect(JSON.stringify(deepBody)).toContain("Example JSON output shape");
     const deepPrompt = String((deepBody.messages as Array<{ content?: string }>)[1]?.content);

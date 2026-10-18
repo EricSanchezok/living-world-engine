@@ -8,7 +8,7 @@ import { ModelRegistry } from "../../src/engine/models/model-registry";
 import { thinkingCatalog, thinkingProbeBody, thinkingProbeEvidence, thinkingProbeAccountFetch } from "./step-thinking-probe";
 
 describe("controlled STEP-E1 thinking probe", () => {
-  it.each(["high", "low"] as const)("changes only the selected profile's %s inference and leaves the base catalog immutable", (effort) => {
+  it.each(["low"] as const)("changes only the selected profile's %s inference and leaves the base catalog immutable", (effort) => {
     const base = loadModelCatalog(path.resolve("config/models.yaml"));
     const high = thinkingCatalog(base, effort);
     expect(high.hash).not.toBe(base.hash);
@@ -27,10 +27,8 @@ describe("controlled STEP-E1 thinking probe", () => {
     const base = { model: "deepseek-v4-flash", max_tokens: 131072, messages: [{ role: "system", content: "Complete all slots." }],
       thinking: { type: "disabled" }, response_format: { type: "json_object" } };
     const before = structuredClone(base);
-    const high = thinkingProbeBody(base, "H");
-    expect(high).toEqual({ ...base, thinking: { type: "enabled" }, reasoning_effort: "high" });
-    expect(thinkingProbeBody(high, "B")).toEqual(base);
-    const low = thinkingProbeBody(high, "L");
+    expect(() => thinkingProbeBody(base, "H" as never)).toThrow("Only disabled or low");
+    const low = thinkingProbeBody(base, "L");
     expect(low).toEqual({ ...base, thinking: { type: "enabled" }, reasoning_effort: "low" });
     expect(thinkingProbeBody(low, "B")).toEqual(base);
     expect(base).toEqual(before);
@@ -38,12 +36,12 @@ describe("controlled STEP-E1 thinking probe", () => {
 
   it("fails closed when the enabled mode is not visible in the actual response", () => {
     const raw = { model: "deepseek-v4-flash", usage: { completion_tokens: 3 }, choices: [{ message: { reasoning_content: "" } }] };
-    expect(thinkingProbeEvidence(raw, "H").inferenceValid).toBe(false);
+    expect(thinkingProbeEvidence(raw, "L").inferenceValid).toBe(false);
     const thinking = { ...raw, choices: [{ message: { reasoning_content: "Provider reasoning." } }] };
-    expect(thinkingProbeEvidence(thinking, "H").inferenceValid).toBe(true);
+    expect(thinkingProbeEvidence(thinking, "L").inferenceValid).toBe(true);
     expect(thinkingProbeEvidence(thinking, "L").inferenceValid).toBe(true);
     expect(thinkingProbeEvidence(thinking, "B").inferenceValid).toBe(false);
-    expect(thinkingProbeEvidence({ ...thinking, model: "another-model" }, "H").inferenceValid).toBe(false);
+    expect(thinkingProbeEvidence({ ...thinking, model: "another-model" }, "L").inferenceValid).toBe(false);
   });
 
   it("constructs the real multi-account gateway without sending and guards only actual unapproved sends", async () => {

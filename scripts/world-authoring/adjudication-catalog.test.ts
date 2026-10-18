@@ -4,6 +4,15 @@ import { loadModelCatalog } from "../../src/engine/models/model-catalog";
 import { sourceAdjudicationCatalog } from "./adjudication-catalog";
 
 describe("source adjudication workload catalog", () => {
+  it("allows Flash source review at low and rejects expensive overrides before a gateway exists", () => {
+    const base = loadModelCatalog();
+    const options = { profileId: "creation-deepseek", baseProfileId: "creation-deepseek", modelId: "deepseek-flash", effort: "low" as const, accountConcurrency: 1 };
+    expect(sourceAdjudicationCatalog(base, options).profile(options.profileId).inference).toMatchObject({ thinking: "enabled", effort: "low" });
+    expect(sourceAdjudicationCatalog(base, { ...options, thinking: "disabled" }).profile(options.profileId).inference).toMatchObject({ thinking: "disabled", effort: "auto" });
+    for (const override of [{ modelId: "deepseek-v4-pro" }, { effort: "high" as const }, { effort: "max" as const }, { thinking: "auto" as const }]) {
+      expect(() => sourceAdjudicationCatalog(base, { ...options, ...override })).toThrow("DeepSeek source work requires");
+    }
+  });
   it("creates a dedicated creation profile while preserving account transport and the global catalog", () => {
     const base = loadModelCatalog(path.resolve("config/models.yaml")), original = base.hash;
     const catalog = sourceAdjudicationCatalog(base, { profileId: "source-review-openai", baseProfileId: "agent-openai",

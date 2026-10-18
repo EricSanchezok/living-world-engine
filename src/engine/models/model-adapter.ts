@@ -1,4 +1,5 @@
 import { withModelRequestDeadline } from "./model-request-deadline";
+import { guardDeepSeekFetch } from "./deepseek-policy";
 import { observeResponseStream } from "./response-stream";
 import { generateText, streamText, jsonSchema, NoObjectGeneratedError, NoOutputGeneratedError, Output, tool } from "ai";
 import { JSONRepairError, jsonrepair } from "jsonrepair";
@@ -763,7 +764,8 @@ export function createModelProviderAdapter(
   if (account.protocol === "typesafe-systemone") {
     return new TypeSafeModelAdapter(accountId, account, apiKey, fetchImplementation);
   }
-  return new ProtocolModelAdapter(accountId, apiKey, fetchImplementation, account);
+  return new ProtocolModelAdapter(accountId, apiKey,
+    account.models_dev_provider_id === "deepseek" ? guardDeepSeekFetch(fetchImplementation) : fetchImplementation, account);
 }
 
 export function validateModelProviderAccount(

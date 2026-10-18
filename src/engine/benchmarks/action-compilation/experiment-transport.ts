@@ -1,4 +1,5 @@
 import path from "node:path";
+import { assertDeepSeekRequest } from "../../models/deepseek-policy";
 import { existsSync, readdirSync } from "node:fs";
 import { contentHash } from "../../models/model-audit";
 import { serializeRuntimeError } from "../../runtime/observability";
@@ -57,6 +58,7 @@ export class FirstPassExperimentTransport {
         throw new ExperimentBudgetError("experiment attempted an unapproved provider endpoint");
       }
       const body = await request.clone().json() as Record<string, unknown>;
+      if (url.hostname === "api.deepseek.com") assertDeepSeekRequest(body, url.pathname.endsWith("/responses"));
       request.signal.throwIfAborted();
       if (this.stopped) throw new ExperimentBudgetError(this.stopped);
       const outputLimit = body.max_tokens ?? body.max_completion_tokens ?? body.max_output_tokens;
