@@ -160,7 +160,7 @@
   },
   {
     "id": "spirit-anyuan-market",
-    "label": "安远城坊市",
+    "label": "安远城街市",
     "kind": "location",
     "openingState": "present",
     "classification": "original",
@@ -1682,7 +1682,9 @@
     "claimIds": [
       "spirit3-later-mortals-excluded"
     ],
-    "aliases": [],
+    "aliases": [
+      "金玉门"
+    ],
     "reason": "同一段称名异写可作为同一后期门派候选；缺少T0创立依据，不强行生成现存门派。"
   },
   {
@@ -1694,7 +1696,9 @@
     "claimIds": [
       "spirit3-later-mortals-excluded"
     ],
-    "aliases": [],
+    "aliases": [
+      "潘清"
+    ],
     "reason": "方夫人后期二十五六岁儿子；称名异写留索引，不在T0生成同龄人。"
   },
   {
@@ -1810,5 +1814,1729 @@
       "spirit3-current-life"
     ],
     "aliases": []
+  },
+  {
+    "id": "spirit3-sinew-one",
+    "label": "地蛟筋甲",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-dijiao-sinew",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-sinew-two",
+    "label": "地蛟筋乙",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-dijiao-sinew",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-sinew-bow-plan",
+    "label": "试制筋弓图",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-dijiao-sinew",
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-iron-heavy-blade",
+    "label": "守备乌铁刀",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-mundane-weapon-examples",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-bone-armor",
+    "label": "守备骨片甲",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-mundane-weapon-examples",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-anyuan-crossbow",
+    "label": "安远草原门巨弩",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-city-defense-boundary",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-anyuan-bolts",
+    "label": "门弩现用长矢",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-anyuan-cart-shed",
+    "label": "安远街市车棚",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-cart-driver",
+    "label": "曹砚",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-cart-driver-private-stock",
+    "label": "曹砚私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-anyuan-cart",
+    "label": "曹砚的街市兽车",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-cart-beast",
+    "label": "曹砚的灰背驮兽",
+    "kind": "animal",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-cart-feed",
+    "label": "驮兽干草",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-cart-tool",
+    "label": "守备借出的轮轴工具",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-cart-fare-board",
+    "label": "兽车行价牌",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-heiling-range",
+    "label": "黑陵山脉",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-beast-ecology",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-qing-wolf-pack",
+    "label": "翡翠草原小狼群",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-beast-ecology",
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-red-python-group",
+    "label": "黑陵赤蟒群",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-beast-ecology",
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-leopard-bird-group",
+    "label": "黑陵豹禽群",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-beast-ecology",
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-sand-worm-group",
+    "label": "青罗近地沙虫群",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-beast-ecology",
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-ranking-island",
+    "label": "天灵高空榜碑岛",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-ranking-wall",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-ranking-jade-wall",
+    "label": "混沌万灵榜玉壁",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-ranking-wall",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-ranking-custodian",
+    "label": "乔缄",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-ranking-custodian-private-stock",
+    "label": "乔缄私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-ranking-notebook",
+    "label": "榜碑观测册",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-ranking-wall",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-shadow-note",
+    "label": "普通影符工艺手录",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-shadow-talisman-bounds",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-chaling-note",
+    "label": "诧灵琵琶旧闻摘记",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-chaling-history",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-shadow-sample",
+    "label": "乔缄试制影符",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-shadow-talisman-bounds",
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-tianyuan-hall",
+    "label": "天元圣皇理事院",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-tianyuan-court",
+    "label": "天元圣皇府",
+    "kind": "organization",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-imperial-public-property"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-current-tianyuan-ruler",
+    "label": "天元圣皇",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-current-tianyuan-ruler-private-stock",
+    "label": "天元圣皇私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-tianyuan-court-fund",
+    "label": "天元圣皇本期事务公库",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-tianyuan-court-ledger",
+    "label": "天元圣皇本期议簿",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-current-tianyuan-ruler-seal",
+    "label": "天元圣皇现用印令",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-current-tianyuan-ruler-defense",
+    "label": "天元圣皇个人护身佩",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-xuanwu-hall",
+    "label": "玄武霸皇理事院",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-xuanwu-court",
+    "label": "玄武霸皇府",
+    "kind": "organization",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-imperial-public-property"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-current-xuanwu-ruler",
+    "label": "玄武霸皇",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-current-xuanwu-ruler-private-stock",
+    "label": "玄武霸皇私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-xuanwu-court-fund",
+    "label": "玄武霸皇本期事务公库",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-xuanwu-court-ledger",
+    "label": "玄武霸皇本期议簿",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-current-xuanwu-ruler-seal",
+    "label": "玄武霸皇现用印令",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-current-xuanwu-ruler-defense",
+    "label": "玄武霸皇个人护身佩",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-tianling-hall",
+    "label": "天灵灵皇理事院",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-tianling-court",
+    "label": "天灵灵皇府",
+    "kind": "organization",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-imperial-public-property"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-current-tianling-ruler",
+    "label": "天灵灵皇",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-current-tianling-ruler-private-stock",
+    "label": "天灵灵皇私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-tianling-court-fund",
+    "label": "天灵灵皇本期事务公库",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-tianling-court-ledger",
+    "label": "天灵灵皇本期议簿",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-current-tianling-ruler-seal",
+    "label": "天灵灵皇现用印令",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-current-tianling-ruler-defense",
+    "label": "天灵灵皇个人护身佩",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-anyuan-budget-petition",
+    "label": "安远教习补料呈文",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-capital-library-petition",
+    "label": "圣城阅书开放呈文",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-stockade-budget-petition",
+    "label": "石溪寨护具呈文",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-tree-garden-petition",
+    "label": "枝台药圃呈文",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-ranking-petition",
+    "label": "榜碑摹录呈文",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-xuanwu-stockade",
+    "label": "玄武石溪寨",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-xuanwu-social-pattern",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-stockade-teacher",
+    "label": "罗砺",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-stockade-teacher-private-stock",
+    "label": "罗砺私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-stockade-student",
+    "label": "艾棠",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-stockade-student-private-stock",
+    "label": "艾棠私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-stockade-supply",
+    "label": "石溪寨教习公料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-stockade-shield",
+    "label": "石溪寨练力盾",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-stockade-drive",
+    "label": "石溪护臂灵具",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-spirit-team-equipment",
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-stockade-letter",
+    "label": "石溪教头的港务问函",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-whitebone-mountain",
+    "label": "白骨门山地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-whitebone-history",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-whitebone-sect",
+    "label": "白骨门",
+    "kind": "organization",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-whitebone-history",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-whitebone-study",
+    "label": "万骨静室",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-wan-gu-zhenren",
+    "label": "万骨真人",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-whitebone-history",
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-wan-gu-zhenren-private-stock",
+    "label": "万骨真人私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-whitebone-pupil",
+    "label": "应朔",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-whitebone-pupil-private-stock",
+    "label": "应朔私用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-whitebone-manual",
+    "label": "白骨入门手录",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-whitebone-experiment",
+    "label": "应朔练法记录",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-whitebone-public-stock",
+    "label": "白骨门教习公库",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-wangu-bone-shield",
+    "label": "万骨的骨盾",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-pupil-bone-shield",
+    "label": "应朔试制骨盾",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-maple-city",
+    "label": "枫林城",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-maple-city",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-maple-array-hall",
+    "label": "枫林传送殿",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-maple-city",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-maple-array",
+    "label": "枫林长程阵台",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-maple-city",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-xu-copper-hills",
+    "label": "许氏精铜矿丘",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-xu-ancient-foundations",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-xu-mine",
+    "label": "许氏现用矿井",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-xu-ancient-foundations",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-xu-mirage-array",
+    "label": "许氏迷蜃幻境阵基",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-xu-ancient-foundations",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-xu-copper-stock",
+    "label": "许氏已采精铜",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-xu-mirage-token",
+    "label": "许氏现用幻阵控制牌",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-xu-array-fund",
+    "label": "许氏幻阵供能盒",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-reviewed-life",
+      "spirit3-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-tianma-waste",
+    "label": "天马荒原",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-tianma-waste",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "spirit3-wanggui-peak",
+    "label": "望龟峰",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-and-explicit-original-detail",
+    "claimIds": [
+      "spirit3-tianma-waste",
+      "spirit3-reviewed-life"
+    ],
+    "aliases": [
+      "望龟蜂"
+    ]
+  },
+  {
+    "id": "future-spirit3-zhao-commander",
+    "label": "赵统领",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "赵统领是后期验车守门者，职务与年龄不能移入T0。 27871260章末银甲人喊两修士检查，27872540承接称赵统领并继续放行，连续场景支持同一人；不并入赵城主。 原文明确即进城时守门统领，前章称赵统领；不另建无名银甲人。 原文明确同一个门卫统领；后期人物仅一个身份。 第三日调近千精锐为后期命令，不预先生成同一调度。"
+  },
+  {
+    "id": "future-spirit3-li-inspector",
+    "label": "李先生",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "李先生与黄大师确有两人，未明说姓名分别对应儒生或僧人；只保留称呼索引和同场群组。"
+  },
+  {
+    "id": "future-spirit3-huang-inspector",
+    "label": "黄大师",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "黄大师的姓名—外形映射未被本段明确，不能凭称大师自动断定就是僧人。"
+  },
+  {
+    "id": "future-spirit3-white-inspector",
+    "label": "白袍验车儒生",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "白袍儒生执行后期检查，不能确定他在李/黄中是哪一人；保留外形主体与未定称名映射。 回指前次验车儒生，身份连续；姓名与李黄对应仍保留未定。"
+  },
+  {
+    "id": "future-spirit3-green-monk",
+    "label": "青袈裟验车僧人",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "青袈裟僧人为另一名检查修士，铜钵对应明确，李/黄称呼对应仍未知。 回指前次验车僧人，铜钵与服饰对应；不与儒生合并。"
+  },
+  {
+    "id": "future-spirit3-bao-fighter",
+    "label": "鲍姓炼体士",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "鲍姓炼体士售筋及制止抢劫为后期现场，未证此凡人T0存活。"
+  },
+  {
+    "id": "future-spirit3-xin-fighter",
+    "label": "辛姓炼体士",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "辛姓大汉缺石与起意属于后期个人处境，不建T0同年龄人物。"
+  },
+  {
+    "id": "future-spirit3-qin-cultivator",
+    "label": "秦姓金玉宗修士",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "锦袍男子当场自称秦某，假丹仍为筑基后期大成；后期师门与见闻不前置。 27903474明确自称秦某，故无需只凭相邻称呼猜姓；假丹不超筑基。 秦姓修士带队寻药为未来任务，不强制触发。 秦的巧合或高妖两猜测是未确认推理，后文真相不倒灌其当时认识。 秦后期筑基身份和带队行为保持未来。"
+  },
+  {
+    "id": "future-spirit3-tiandong-owner",
+    "label": "天东商号主人",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "商号主人无灵根且未炼体为后期转述的个人状态，不证明凡人不能经营巨商。"
+  },
+  {
+    "id": "future-spirit3-fang-husband",
+    "label": "方夫人亡夫",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "死亡虽早于此场二十余年，仍不能据此当作早于全书T0的已故历史。"
+  },
+  {
+    "id": "future-spirit3-goulou-sect",
+    "label": "岣嵝山门派",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "岣嵝山作为修士门派身份保留，建派时间未明；后期受雇和告辞不前置。 受雇到货即离开是具体委托终结，不作本区固定日程。"
+  },
+  {
+    "id": "future-spirit3-tiandong-pass",
+    "label": "天东验车令牌",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "此令牌属于后期张奎车队，不提前复制同一身份凭证。 令牌验明商队后仍须检查；一次放行不能成为永久免检许可。"
+  },
+  {
+    "id": "future-spirit3-anyuan-siege",
+    "label": "安远兽潮与城破",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "城外人群涌入与紧张面色都是未来兽潮局势，开篇不预设。 临时检查是城主在兽潮时的命令，不无条件套用每次和平入城。 方夫人判断和韩立猜测均当期信息，后续结果不升为T0已知未来。 青骨甲报信者只见本次军情，留匿名角色索引不补原著姓名。 戒严传令与独角狼卫兵是后期临时军情，不前置动员。 这次上空修士多筑基不等于城市永远只准筑基守卫。 第二日新变异小狼不是已证T0固定物种或必定出现的波次。 杀无赦是本次戒严口令，须执行者行动，不是常态自动处罚。 修士监视豹禽等分工属当期军令。 数百万狼为未来来袭规模，不加入T0可复制野兽库存。 上次损失只相对本次兽潮，未有绝对年，不当作T0既定负债和军械损毁。 广场数万人和分发武器是战争时期当期状态。 灰袍修士广播与空防为特定战时布置，不创造开篇同一队伍。 两波投石杀狼计数是战果，不能反推所有火球固定杀伤一百头。 十余万死伤及大量箭矢消耗是未来战后统计，不转为开篇资源变化。 本次毒毛变种伤亡真实，通常淘汰只是一般推测，不能设全体变种限时灭绝。 第二日两三成守卫存活是特定战场损失，不设固定生存概率。 大胡子判断保留法力是战术考虑，不是零法力即自动破城的机制。 蛇毒腐蚀与伤员是此次变异飞蟒攻击结果，不赋普通赤蟒同种毒。 此役巨蟒变种没有早于T0证据，不将未来规模实体化。 第四类可由27906143和前段明确为青狼；四类是青狼、赤蟒、豹禽、沙虫，非未知第五种。 城破死伤和少数逃生者均未来结果。 三四日撤兽是此役结尾，不设所有兽潮同周期。 派人调查不前置为T0圣城既有案件。 毒雾和蟒群冲垮防线是这场未来战役结果。 多年未变的废墟是后期观察，不能令开篇活城先毁。"
+  },
+  {
+    "id": "future-spirit3-city-inspection",
+    "label": "安远验车事件",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "本次镜与钵扫描仅证明当时检查过程和未发现问题，不赋全知侦测。"
+  },
+  {
+    "id": "future-spirit3-liu-brothers",
+    "label": "柳氏兄弟",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "柳氏兄弟属于后期方夫人护从，不能由称兄弟推定所有同姓人物或准确人数。"
+  },
+  {
+    "id": "future-spirit3-zhao-city-lord",
+    "label": "赵城主",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "紫袍城主与后续赵城主同场承接；不并入银甲赵统领，也不前置其后期任期。 三百多年未发潮为赵城主此时判断，不能从T0启动三百年强制战争。 赵炼体实力被秦类比筑基后期，不表示他修仙到筑基；死亡制傀仍未来。 几乎筑基后期仅描述炼体战力，不改为拥有法力的筑基修士。 擒获断臂由后期城破引发，不前置伤势。 十日杀令出自筱虹搜魂后的说法，不能把转述写成公开可见文书。 此例搜魂杀死赵是未来事件，不能生成当前干尸。"
+  },
+  {
+    "id": "future-spirit3-xiao-officer",
+    "label": "肖姓军官",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "肖姓军官为后期守城执行者，身体实力不是修仙境界。 肖军官炼体能力留后期人物卡档案，不据年龄未知提前生成人。"
+  },
+  {
+    "id": "future-spirit3-du-xiao",
+    "label": "杜啸",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "杜啸的巨化与狼牙棒是本次人物技能和装备，未证其T0已出生。"
+  },
+  {
+    "id": "future-spirit3-bearded-officer",
+    "label": "大胡子军官",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "另一城墙军官和肖姓军官不同人，无法因同职合并。"
+  },
+  {
+    "id": "future-spirit3-wang-bald-cultivator",
+    "label": "汪姓光头修士",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "27952776秦明确称汪兄，统一汪姓光头大汉；两人的假丹都属筑基后期。 首领为秦与汪两个筑基假丹修士；保持个体，豹禽到场是未来。 汪姓光头男子独立主体，后来离开及七城传闻是当期见闻。 汪对七城与调查的陈述仍当期口述，保留证据层级。"
+  },
+  {
+    "id": "future-spirit3-daier",
+    "label": "黛儿",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "四五岁黛儿在韩立飞升后出生，不能生成同龄T0儿童或预建与韩立关系。 血脉和母亲死亡属于后期家事；半妖存在不要求所有人已知具体女孩。 少主、逃回人族和圣族血脉构成父系语境推定，但此句未直接确认父名；不杜撰实名父亲。 显著气息与凡人掩蔽是该半妖个案，不推广全体半妖隐匿法则。 只信任韩立是经历救援后的私人态度。 带回黑凤宫为筱虹当时立场，不设所有半妖必须服从的自然法则。"
+  },
+  {
+    "id": "future-spirit3-xiaohong",
+    "label": "筱虹",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [
+      "宫装少妇",
+      "筱姑姑"
+    ],
+    "reason": "后章筱姑姑和筱虹连续对应同一黑凤女子；策划兽潮与所用灵禽为后期。 黑焰灵禽归当时筱虹驱使，不能凭能力记载复制T0资产。 精血祭珠此次追踪有目标和近处条件，不赋跨界全知定位。 省数百年是发丹者许诺，未展示效果，不能当任意低妖服丹固定收益。 抓黛儿动机、驱兽及躲人族高修均是未来秘密，不给T0居民全知。 追踪结果及三日期限是本次施法与命令。 白丹省修行仍是许诺，没有相等年数的确定状态变化。 少妇未确认八级，保留赵猜测及她的含糊答复，不据此锁境界。 统属黑凤妖王仅在后期具证，不反推T0已为同任家臣。"
+  },
+  {
+    "id": "future-spirit3-zhao-daughter",
+    "label": "赵城主之女",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "赵女及黛儿母系关系为后期家庭，死亡不作为早于T0历史。"
+  },
+  {
+    "id": "future-spirit3-zhao-house",
+    "label": "赵府",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "赵府归属和管家婢女仅在后期具证，勿创建T0相同家业。 老管家接人是未来事件，不能让其当前认识韩立。"
+  },
+  {
+    "id": "future-spirit3-snake-demon",
+    "label": "人首蛇身妖",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "人首蛇身妖是车队旧遇者及未来从属，勿与三首蛇因物种近似合并。"
+  },
+  {
+    "id": "future-spirit3-threehead-snake",
+    "label": "三首黑蛇妖",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "三首黑蛇是另一独立妖兽，保持未来主体区别。"
+  },
+  {
+    "id": "future-spirit3-false-zhao-sword",
+    "label": "假赵短剑诱饵",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "27985826假赵用短剑作诱饵，来自筱虹操尸计划，不是真赵遗赠或可靠指路凭据。"
+  },
+  {
+    "id": "future-spirit3-refugee-camp",
+    "label": "安远难民营",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "临时逃难营地由未来城破产生，不预建同批难民。"
+  },
+  {
+    "id": "future-spirit3-mingshi-elder",
+    "label": "冥尸谷黑袍老者",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "冥尸谷元婴老者是后期追踪者，未具名不并入他谷长老。 黑焰灭其身婴属于未来死亡，不前置。"
+  },
+  {
+    "id": "future-spirit3-false-zhao",
+    "label": "筱虹操纵的赵尸傀",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "尸傀由筱虹分神控制，声音相同不等于另一存活赵；元婴能识是施术者判断。 营地众人误把尸傀认作赵，真相与各人认知分开，假托投友不能当真实好友线。"
+  },
+  {
+    "id": "future-spirit3-ranking-change",
+    "label": "第三玄天灵物榜变",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "两人增至十几人是榜变时到场，不拿人数作为T0常驻守卫编制。 白发绿袍者对真灵之劫的忧虑是未来推测，不前置人物和预知。 正文同刻与罪魁支持关联，未解释绿液如何作用榜碑；不创造可复制通用因果公式。 聚集观察是未来榜变事件，不设T0同一行动。"
+  },
+  {
+    "id": "future-spirit3-tianyuan-holder",
+    "label": "韩立后期所见白袍天元圣皇",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "白袍圣皇新术识影为未来行动，旧称号不证明T0此人已得该术。 新修神通与借香发生在韩立天渊任职后，T0不得先拥有识破结果。"
+  },
+  {
+    "id": "future-spirit3-xuanwu-four",
+    "label": "出身玄武的四化神修士",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "四名化神修士在后期离天渊半年，未证明T0已成年或修成化神。"
+  },
+  {
+    "id": "future-spirit3-fire-armored-cultivator",
+    "label": "火姓红甲修士",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "同场称火兄，补火姓但无名字；极雷珠爆炸伤害不分敌我，未来持有不前置。"
+  },
+  {
+    "id": "future-spirit3-xuanwu-recruitment",
+    "label": "玄武新合体受邀",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "新合体答应霸皇和戚煦冰拟访都是后期消息，未证T0同关系。"
+  },
+  {
+    "id": "future-spirit3-xu-qianyu",
+    "label": "许芊羽",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "后期化神和韩立指点不前置；数百年前同事仍晚于全书T0。"
+  },
+  {
+    "id": "future-spirit3-xu-jiao",
+    "label": "许蛟",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "任族长千年仅相对后期返族时点，尚不足单句断定早于T0，保留身份与待定任期而不直接覆盖当前家主。"
+  },
+  {
+    "id": "future-spirit3-xu-lu",
+    "label": "许鲁",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "许鲁化神中期是后期实见，具体生年和T0阶位无据，保留身份档案不杜撰当前。"
+  },
+  {
+    "id": "future-spirit3-xu-huo",
+    "label": "许火",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "许火与许岩一初一中但句中未分配，两者年序与T0存活不够明确，不能按排序硬绑定境界。"
+  },
+  {
+    "id": "future-spirit3-xu-yan",
+    "label": "许岩",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "许岩后期会乾蓝冰焰不等于T0已修；不硬分炼虚初中，能力极致为本人说法非其当时已达到。"
+  },
+  {
+    "id": "future-spirit3-wanbao-trip",
+    "label": "本次万宝大会行程",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "本次大会尚数年是后期相对时间，不设开篇数年必开同届会。"
+  },
+  {
+    "id": "future-spirit3-huang-dang",
+    "label": "黄荡",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "黄荡为当期合体老者，但未见早于T0明确年龄，此轮保留独立索引不借老者二字直接定千年前修为。 认出韩立来自未来名声，不建立开篇相识。 回礼与识别是后期相遇，不前置认知。"
+  },
+  {
+    "id": "future-spirit3-yue-hua",
+    "label": "岳华仙子",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [
+      "月华仙子"
+    ],
+    "reason": "岳华/月华按连续一行同身份，后期结丹及求医关系不前置。"
+  },
+  {
+    "id": "future-spirit3-bai-huaji",
+    "label": "白化及",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "父女遇骗局与出售血参是未来事件，T0不生成相同家业。 祖传血参只说明代际持有，不能确定距T0千余年的当时已存在同株。"
+  },
+  {
+    "id": "future-spirit3-bai-guoer",
+    "label": "白果儿",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "童年、寒毒与韩立记名关系均未来，不能已有同龄弟子。"
+  },
+  {
+    "id": "future-spirit3-tian-qingye",
+    "label": "田青叶",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "后期化神老妪与弟子关系明确，T0出生和修为仍无绝对年代；不据年老提前成年。 关系确证限后期；修为和任期不足T0回溯，明示索引边界。 向韩立求证传闻与拜见是未来认知，不提前认识少年韩立。"
+  },
+  {
+    "id": "future-spirit3-nanshan-three",
+    "label": "南山三恶",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "三恶设局为后期犯罪，未具名不补三个原著实名。"
+  },
+  {
+    "id": "future-spirit3-xuanwu-retainers",
+    "label": "后期霸皇四近侍",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "当期四名贴身力士及祖孙关系缺T0年份，职制可参考不复制四名未来本人。"
+  },
+  {
+    "id": "future-spirit3-jinguang-sect",
+    "label": "金广宗",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "金广宗当期两化神长老与师徒有据，建派年不明；不以宗字自动判万年前已存。"
+  },
+  {
+    "id": "future-spirit3-hupo-wine",
+    "label": "虎魄灵酒",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "虎魄灵酒仅当期饮用实见，灵气丰厚不证明固定增修为数值；T0配方与持有年未明。"
+  },
+  {
+    "id": "future-spirit3-tianling-war",
+    "label": "天灵城魔劫",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "叶颖转述长辈计划与莫简离见闻，仅相应人物知情；城为诱饵不是T0共识。 未来城陷、砍树和崩溃不覆盖T0活城与阵眼。 休整增兵筑堡种魔树是未来行动，开篇不造同规模军营。 向其他据点传讯为未来知识传播，NPC不会开篇先知道。"
+  },
+  {
+    "id": "future-spirit3-lanshui-sect",
+    "label": "蓝水宗",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "执法追杀是宗主求饶威慑，未见实际调令，不能当必触发程序。 外围宗门资格仅自述，未见圣城契据；保留称言而非通用制度。 求饶时单方说法不足证实执法组织隶属和自动追杀义务。"
+  },
+  {
+    "id": "future-spirit3-tianling-succession",
+    "label": "后期灵皇更替",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "死亡与即将重选为后期具体政治事件。 女修连败十一人和中期胜后期为未来战绩，不赋所有中期通用优势。"
+  },
+  {
+    "id": "future-spirit3-xuanwu-demon-node",
+    "label": "玄武暴魔驻地与魔界节点",
+    "kind": "indexed-subject",
+    "openingState": "not-instantiated-at-opening",
+    "classification": "future-or-source-underdetermined",
+    "claimIds": [
+      "spirit3-reviewed-opening-audit"
+    ],
+    "aliases": [],
+    "reason": "暴魔种族与当期驻军分开；36907142明确从玄武节点进入魔界，驻地仍为灵界。 嗜战为族群描写，蓝纹甲和身高是当场所见；不要求每个成员同种人格或T0驻军。"
+  },
+  {
+    "id": "spirit3-wanmiao-name",
+    "label": "万妙境",
+    "kind": "unresolved-place-name",
+    "openingState": "unresolved-not-a-fourth-human-domain",
+    "classification": "source-underdetermined",
+    "claimIds": [
+      "spirit3-tianma-waste"
+    ],
+    "aliases": [],
+    "reason": "只在天马荒原边界段出现，未定所指，不以一处称名创造完整第四境。"
   }
 ]

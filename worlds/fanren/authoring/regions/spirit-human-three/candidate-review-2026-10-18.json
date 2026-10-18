@@ -1,0 +1,251 @@
+{
+  "moduleId": "spirit-human-three",
+  "date": "2026-10-18",
+  "reviewer": "world_content",
+  "scope": "现有343候选逐项原文上下文审定，当前区域运行内容与所采用129锚点语义复读；根独立验收另行记录。",
+  "counts": {
+    "entities": 223,
+    "agents": 38,
+    "entityFacts": 467,
+    "claims": 47,
+    "sourceAnchors": 129
+  },
+  "candidateCounts": {
+    "adopted": 20,
+    "corrected": 174,
+    "history-only": 0,
+    "later-only": 136,
+    "bounded-uncertainty": 13,
+    "transferred": 0,
+    "pending": 0
+  },
+  "contentHashes": {
+    "moduleHash": "3e7da6eb5c18f2fbd624be1908ee90e53759735f35908a1bd24b9b930046079a",
+    "claimsHash": "db0341919c77bb5b144b25927fad6d4167018108f333c0ce1a4803b89d328869",
+    "dispositionsHash": "6c6f25c645a52a35a4f011380fdf2e0b305e80175fe47e785b6ba2b5d10bef86"
+  },
+  "sourceReading": {
+    "retainedFullChapterRecords": 14,
+    "contextReviewChapterRecords": 63,
+    "newClaimSecondReadingChapters": 29,
+    "boundary": "全文记录与本轮区间阅读分别保留；没有用摘要或机器支持标签替代原文语义审读。"
+  },
+  "checks": {
+    "regionalSchema": true,
+    "sourceAnchors": {
+      "passed": true,
+      "count": 129
+    },
+    "strictCandidateContract": {
+      "moduleId": "spirit-human-three",
+      "candidates": 343,
+      "counts": {
+        "adopted": 20,
+        "corrected": 174,
+        "history-only": 0,
+        "later-only": 136,
+        "bounded-uncertainty": 13,
+        "transferred": 0,
+        "pending": 0
+      },
+      "completed": 343,
+      "unresolved": 0,
+      "boundedUncertainty": 13,
+      "approvedForRuntime": false,
+      "reportHash": "6c6f25c645a52a35a4f011380fdf2e0b305e80175fe47e785b6ba2b5d10bef86"
+    },
+    "assembly": {
+      "regions": 30,
+      "entities": 3876,
+      "agents": 677,
+      "passed": true
+    },
+    "realZipImport": {
+      "passed": true,
+      "originId": "spirit-merchant",
+      "moduleHash": "3e7da6eb5c18f2fbd624be1908ee90e53759735f35908a1bd24b9b930046079a",
+      "test": "真实ZIP → LocalDatabase → WorldHost，本地fixture transport调用次数0；验有限资源、产权、互识、实际能力和未来隔离。",
+      "timing": "最终三皇境界和关检路线修订后重新通过真实ZIP导入，并重新通过来源和装配校验。",
+      "modelCalls": 0
+    },
+    "testCommand": "npx vitest run --config .livingworld-cache/fanren-completion/spirit-review/vitest-three.config.mts",
+    "validationCommand": "npx tsx .livingworld-cache/fanren-completion/spirit-review/validate-three.ts",
+    "modelCalls": 0
+  },
+  "semanticCorrections": [
+    "安远普通街市不冒充修士坊市，城市容量不冒充实际人口。",
+    "赵统领与赵城主分开；秦、汪、火等称名按连续场景核对，未来成年状态不回填T0。",
+    "韩立步行大半年返回的是安远城，并非虞阳城；具体行程不设为所有人的固定耗时。",
+    "青狼、赤蟒、豹禽、沙虫有有限群量和分离损伤边界，不把单次变异和兽潮战术赋给全部物种。",
+    "三皇职称与后期具体持位者分开，当前原创持位者有公共预算与私人库存、待决事务和关系。",
+    "影符普通二至五成与传闻完美符、甲元符分别记录；当前试制符仅两成且一次性。",
+    "许氏万年矿脉与护阵复用唯一族居；固定幻景与主动开阵耗用分开，幻景不是实际搬山。",
+    "万骨万年开派支持存活与旧门派，开篇精确修为和生活明确原创；排名不作为永恒规则。",
+    "纯后期搜魂案例和未来凡人排除档案validAtOpening=false且无开篇provenance引用。"
+  ],
+  "boundedUncertainties": [
+    {
+      "candidateId": "batch-0201-object-0012",
+      "targetIds": [
+        "future-spirit3-li-inspector"
+      ],
+      "reason": "李先生与黄大师确有两人，未明说姓名分别对应儒生或僧人；只保留称呼索引和同场群组。",
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "李先生与黄大师确有两人，未明说姓名分别对应儒生或僧人；只保留称呼索引和同场群组。"
+      }
+    },
+    {
+      "candidateId": "batch-0201-object-0013",
+      "targetIds": [
+        "future-spirit3-huang-inspector"
+      ],
+      "reason": "黄大师的姓名—外形映射未被本段明确，不能凭称大师自动断定就是僧人。",
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "黄大师的姓名—外形映射未被本段明确，不能凭称大师自动断定就是僧人。"
+      }
+    },
+    {
+      "candidateId": "batch-0203-fact-0030",
+      "targetIds": [
+        "future-spirit3-daier"
+      ],
+      "reason": "少主、逃回人族和圣族血脉构成父系语境推定，但此句未直接确认父名；不杜撰实名父亲。",
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "少主、逃回人族和圣族血脉构成父系语境推定，但此句未直接确认父名；不杜撰实名父亲。"
+      }
+    },
+    {
+      "candidateId": "batch-0284-object-0052",
+      "targetIds": [
+        "future-spirit3-xu-jiao"
+      ],
+      "reason": "任族长千年仅相对后期返族时点，尚不足单句断定早于T0，保留身份与待定任期而不直接覆盖当前家主。",
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "任族长千年仅相对后期返族时点，尚不足单句断定早于T0，保留身份与待定任期而不直接覆盖当前家主。"
+      }
+    },
+    {
+      "candidateId": "batch-0284-object-0053",
+      "targetIds": [
+        "future-spirit3-xu-lu"
+      ],
+      "reason": "许鲁化神中期是后期实见，具体生年和T0阶位无据，保留身份档案不杜撰当前。",
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "许鲁化神中期是后期实见，具体生年和T0阶位无据，保留身份档案不杜撰当前。"
+      }
+    },
+    {
+      "candidateId": "batch-0284-object-0054",
+      "targetIds": [
+        "future-spirit3-xu-huo"
+      ],
+      "reason": "许火与许岩一初一中但句中未分配，两者年序与T0存活不够明确，不能按排序硬绑定境界。",
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "许火与许岩一初一中但句中未分配，两者年序与T0存活不够明确，不能按排序硬绑定境界。"
+      }
+    },
+    {
+      "candidateId": "batch-0284-object-0055",
+      "targetIds": [
+        "future-spirit3-xu-yan"
+      ],
+      "reason": "许岩后期会乾蓝冰焰不等于T0已修；不硬分炼虚初中，能力极致为本人说法非其当时已达到。",
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "许岩后期会乾蓝冰焰不等于T0已修；不硬分炼虚初中，能力极致为本人说法非其当时已达到。"
+      }
+    },
+    {
+      "candidateId": "batch-0286-object-0009",
+      "targetIds": [
+        "future-spirit3-huang-dang"
+      ],
+      "reason": "黄荡为当期合体老者，但未见早于T0明确年龄，此轮保留独立索引不借老者二字直接定千年前修为。",
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "黄荡为当期合体老者，但未见早于T0明确年龄，此轮保留独立索引不借老者二字直接定千年前修为。"
+      }
+    },
+    {
+      "candidateId": "batch-0287-object-0013",
+      "targetIds": [
+        "future-spirit3-tian-qingye"
+      ],
+      "reason": "后期化神老妪与弟子关系明确，T0出生和修为仍无绝对年代；不据年老提前成年。",
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "后期化神老妪与弟子关系明确，T0出生和修为仍无绝对年代；不据年老提前成年。"
+      }
+    },
+    {
+      "candidateId": "batch-0287-object-0026",
+      "targetIds": [
+        "future-spirit3-jinguang-sect"
+      ],
+      "reason": "金广宗当期两化神长老与师徒有据，建派年不明；不以宗字自动判万年前已存。",
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "金广宗当期两化神长老与师徒有据，建派年不明；不以宗字自动判万年前已存。"
+      }
+    },
+    {
+      "candidateId": "batch-0287-fact-0031",
+      "targetIds": [
+        "future-spirit3-tian-qingye"
+      ],
+      "reason": "关系确证限后期；修为和任期不足T0回溯，明示索引边界。",
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "关系确证限后期；修为和任期不足T0回溯，明示索引边界。"
+      }
+    },
+    {
+      "candidateId": "batch-0293-object-0056",
+      "targetIds": [
+        "spirit3-wanmiao-name"
+      ],
+      "reason": "仅一处万妙境，缺权威对应，不将其擅并天灵或另设人族第四境；荒原边界保留未知另一侧。",
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "仅一处万妙境，缺权威对应，不将其擅并天灵或另设人族第四境；荒原边界保留未知另一侧。"
+      }
+    },
+    {
+      "candidateId": "batch-0294-issue-0006",
+      "targetIds": [
+        "future-spirit3-lanshui-sect"
+      ],
+      "reason": "求饶时单方说法不足证实执法组织隶属和自动追杀义务。",
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "求饶时单方说法不足证实执法组织隶属和自动追杀义务。"
+      }
+    }
+  ],
+  "crossRegionReviewRequired": [
+    {
+      "moduleId": "spirit-blood",
+      "scope": "许氏两名管理者对新增矿区、阵基、控制牌、供能盒的认识与矿丘返程通路，建议已交根代理；不在本区创建倒置装配依赖。"
+    }
+  ],
+  "notClaims": [
+    "本地无模型测试不是实际模型游玩。",
+    "候选处置不是全书来源审校或全世界发布批准。",
+    "有界不确定项没有被宣布已获原文答案。"
+  ],
+  "fileByteSha256": {
+    "module.json": "7f7a64648e5e8b7dac2ac5afaeab062fa4a91872af245246ce1839f5c32ede09",
+    "claims.json": "02cb39d4ac4114a78f9380498528d9fe171d18d4848c0572979ae3a6ba96f487",
+    "review.json": "0f62765b1aef420d4fe61e4368b3d928247834c816f6fa08ae68e389ed31414e",
+    "subjects.json": "d5ae1464affc7efae5341ab28737bd5d30d6cd800e703181061325ea9eb5ebc3",
+    "source-reading.json": "6f8a712e17fa5f607240fa1a7852ef634ac525e62c294de8ddb63ed2368c01e2",
+    "candidate-dispositions.json": "a0f1fec8316eb7b97f0419c874bbee264cd7589560577a6445746bce730c9048",
+    "README.md": "00810e992953fd2532d600706bb515ebec0269159b6515ca60527d8e96e3c8d9"
+  }
+}

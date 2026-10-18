@@ -11097,6 +11097,18 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "blood-xu-estate-route-to-copper-hills",
+          "predicate": "route-to-copper-hills",
+          "value": {
+            "kind": "entity",
+            "entityId": "spirit3-xu-copper-hills"
+          },
+          "description": "经家族准许的出入口往返矿丘；须先打开护阵通路，不把目见山峰作为实际坐标。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [],
@@ -11351,6 +11363,42 @@
               "name": "许望川的密室钥牌",
               "description": "共同开启祖庙的两枚实际钥牌之一，知道各由谁持有。",
               "status": "observed"
+            },
+            {
+              "id": "three-region-spirit3-xu-copper-hills",
+              "name": "许氏精铜矿丘",
+              "description": "黄红矿土延向许氏有灵脉的族地，矿产与修行灵气的取舍长期存在。",
+              "status": "observed"
+            },
+            {
+              "id": "three-region-spirit3-xu-mine",
+              "name": "许氏现用矿井",
+              "description": "支撑木与矿轨分出一段已勘明开采面，深处未勘地层不算现有可取库存。",
+              "status": "observed"
+            },
+            {
+              "id": "three-region-spirit3-xu-copper-stock",
+              "name": "许氏已采精铜",
+              "description": "八份已经采出和初炼的精铜，不等于整条矿脉储量。",
+              "status": "observed"
+            },
+            {
+              "id": "three-region-spirit3-xu-mirage-array",
+              "name": "许氏迷蜃幻境阵基",
+              "description": "万年前复原的七八成幻阵阵基，令外观山峰坐标偏移；阵力不是实际搬山。",
+              "status": "observed"
+            },
+            {
+              "id": "three-region-spirit3-xu-mirage-token",
+              "name": "许氏现用幻阵控制牌",
+              "description": "许含章按家族事务保管的当前控制牌，使用须核对已获授权。牌侧刻有当前保管人的验印记。",
+              "status": "observed"
+            },
+            {
+              "id": "three-region-spirit3-xu-array-fund",
+              "name": "许氏幻阵供能盒",
+              "description": "当前可供阵使用的十二枚高阶石，与养护其他祖物公库分开。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -11425,6 +11473,42 @@
               "canonical_entity_ids": [
                 "blood-xu-key-b"
               ]
+            },
+            {
+              "local_entity_id": "three-region-spirit3-xu-copper-hills",
+              "canonical_entity_ids": [
+                "spirit3-xu-copper-hills"
+              ]
+            },
+            {
+              "local_entity_id": "three-region-spirit3-xu-mine",
+              "canonical_entity_ids": [
+                "spirit3-xu-mine"
+              ]
+            },
+            {
+              "local_entity_id": "three-region-spirit3-xu-copper-stock",
+              "canonical_entity_ids": [
+                "spirit3-xu-copper-stock"
+              ]
+            },
+            {
+              "local_entity_id": "three-region-spirit3-xu-mirage-array",
+              "canonical_entity_ids": [
+                "spirit3-xu-mirage-array"
+              ]
+            },
+            {
+              "local_entity_id": "three-region-spirit3-xu-mirage-token",
+              "canonical_entity_ids": [
+                "spirit3-xu-mirage-token"
+              ]
+            },
+            {
+              "local_entity_id": "three-region-spirit3-xu-array-fund",
+              "canonical_entity_ids": [
+                "spirit3-xu-array-fund"
+              ]
             }
           ],
           "evidence": [
@@ -11432,6 +11516,13 @@
               "id": "prior-life",
               "kind": "observation",
               "description": "自身经历、修行和职务往来。",
+              "sourceId": null,
+              "step": 0
+            },
+            {
+              "id": "three-region-family-memory",
+              "kind": "observation",
+              "description": "家族长期居住与本人已经参与的矿务和护阵事务。",
               "sourceId": null,
               "step": 0
             }
@@ -11480,6 +11571,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "three-region-known-array-operation",
+              "subjectId": "self",
+              "predicate": "known-array-operation",
+              "value": {
+                "kind": "text",
+                "value": "本人参与许氏矿务与护阵；许含章保管族有控制牌。现有阵基维持固定幻景，主动变更或打开入口需从家族供能盒实耗一枚高阶灵石；目见山峰偏位不是真实搬山。供能盒和精铜属族产，不得当作个人私产。"
+              },
+              "description": "本人参与许氏矿务与护阵；许含章保管族有控制牌。现有阵基维持固定幻景，主动变更或打开入口需从家族供能盒实耗一枚高阶灵石；目见山峰偏位不是真实搬山。供能盒和精铜属族产，不得当作个人私产。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "three-region-family-memory"
               ]
             }
           ]
@@ -11724,6 +11830,42 @@
               "name": "许望川的密室钥牌",
               "description": "共同开启祖庙的两枚实际钥牌之一，知道各由谁持有。",
               "status": "observed"
+            },
+            {
+              "id": "three-region-spirit3-xu-copper-hills",
+              "name": "许氏精铜矿丘",
+              "description": "黄红矿土延向许氏有灵脉的族地，矿产与修行灵气的取舍长期存在。",
+              "status": "observed"
+            },
+            {
+              "id": "three-region-spirit3-xu-mine",
+              "name": "许氏现用矿井",
+              "description": "支撑木与矿轨分出一段已勘明开采面，深处未勘地层不算现有可取库存。",
+              "status": "observed"
+            },
+            {
+              "id": "three-region-spirit3-xu-copper-stock",
+              "name": "许氏已采精铜",
+              "description": "八份已经采出和初炼的精铜，不等于整条矿脉储量。",
+              "status": "observed"
+            },
+            {
+              "id": "three-region-spirit3-xu-mirage-array",
+              "name": "许氏迷蜃幻境阵基",
+              "description": "万年前复原的七八成幻阵阵基，令外观山峰坐标偏移；阵力不是实际搬山。",
+              "status": "observed"
+            },
+            {
+              "id": "three-region-spirit3-xu-mirage-token",
+              "name": "许氏现用幻阵控制牌",
+              "description": "许含章按家族事务保管的当前控制牌，使用须核对已获授权。牌侧刻有当前保管人的验印记。",
+              "status": "observed"
+            },
+            {
+              "id": "three-region-spirit3-xu-array-fund",
+              "name": "许氏幻阵供能盒",
+              "description": "当前可供阵使用的十二枚高阶石，与养护其他祖物公库分开。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -11798,6 +11940,42 @@
               "canonical_entity_ids": [
                 "blood-xu-key-b"
               ]
+            },
+            {
+              "local_entity_id": "three-region-spirit3-xu-copper-hills",
+              "canonical_entity_ids": [
+                "spirit3-xu-copper-hills"
+              ]
+            },
+            {
+              "local_entity_id": "three-region-spirit3-xu-mine",
+              "canonical_entity_ids": [
+                "spirit3-xu-mine"
+              ]
+            },
+            {
+              "local_entity_id": "three-region-spirit3-xu-copper-stock",
+              "canonical_entity_ids": [
+                "spirit3-xu-copper-stock"
+              ]
+            },
+            {
+              "local_entity_id": "three-region-spirit3-xu-mirage-array",
+              "canonical_entity_ids": [
+                "spirit3-xu-mirage-array"
+              ]
+            },
+            {
+              "local_entity_id": "three-region-spirit3-xu-mirage-token",
+              "canonical_entity_ids": [
+                "spirit3-xu-mirage-token"
+              ]
+            },
+            {
+              "local_entity_id": "three-region-spirit3-xu-array-fund",
+              "canonical_entity_ids": [
+                "spirit3-xu-array-fund"
+              ]
             }
           ],
           "evidence": [
@@ -11805,6 +11983,13 @@
               "id": "prior-life",
               "kind": "observation",
               "description": "自身经历、修行和职务往来。",
+              "sourceId": null,
+              "step": 0
+            },
+            {
+              "id": "three-region-family-memory",
+              "kind": "observation",
+              "description": "家族长期居住与本人已经参与的矿务和护阵事务。",
               "sourceId": null,
               "step": 0
             }
@@ -11853,6 +12038,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "three-region-known-array-operation",
+              "subjectId": "self",
+              "predicate": "known-array-operation",
+              "value": {
+                "kind": "text",
+                "value": "本人参与许氏矿务与护阵；许含章保管族有控制牌。现有阵基维持固定幻景，主动变更或打开入口需从家族供能盒实耗一枚高阶灵石；目见山峰偏位不是真实搬山。供能盒和精铜属族产，不得当作个人私产。"
+              },
+              "description": "本人参与许氏矿务与护阵；许含章保管族有控制牌。现有阵基维持固定幻景，主动变更或打开入口需从家族供能盒实耗一枚高阶灵石；目见山峰偏位不是真实搬山。供能盒和精铜属族产，不得当作个人私产。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "three-region-family-memory"
               ]
             }
           ]
@@ -22612,7 +22812,8 @@
     "entity:blood-xu-keeper": [
       "blood-bingpo-xu-lineage",
       "blood-current-life",
-      "blood-current-values"
+      "blood-current-values",
+      "blood-reviewed-life"
     ],
     "fact:blood-xu-keeper-cultivation-state": [
       "blood-bingpo-xu-lineage",
@@ -22638,7 +22839,8 @@
     "entity:blood-xu-ritualist": [
       "blood-bingpo-xu-lineage",
       "blood-current-life",
-      "blood-current-values"
+      "blood-current-values",
+      "blood-reviewed-life"
     ],
     "fact:blood-xu-ritualist-cultivation-state": [
       "blood-bingpo-xu-lineage",
@@ -24267,6 +24469,9 @@
       "blood-reviewed-life"
     ],
     "fact:blood-upper-reply-authorized-recipient": [
+      "blood-reviewed-life"
+    ],
+    "fact:blood-xu-estate-route-to-copper-hills": [
       "blood-reviewed-life"
     ]
   },
