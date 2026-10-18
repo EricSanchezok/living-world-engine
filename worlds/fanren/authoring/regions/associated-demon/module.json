@@ -1105,7 +1105,7 @@
       "name": "魔源海岸渡口",
       "kind": "location",
       "placement": "associated-demon-realm",
-      "description": "当前供小规模合法海行准备的岸港，精确落点与人员原创。",
+      "description": "一处小型岸港，为获准出海的旅人和船只准备补给。",
       "facts": [
         {
           "id": "ad-moyuan-port-route-ad-huanxiao-desert",
@@ -9592,9 +9592,9 @@
           "predicate": "body-type",
           "value": {
             "kind": "text",
-            "value": "有灵性仙家傀儡，完整身世受记忆禁制约束；cultivation=8只是战力层级标定，非自然魔族大乘寿元。"
+            "value": "有灵性的仙家傀儡，实力相当于大乘层级，寿命受傀儡自身条件约束；身世记忆受到禁制。"
           },
-          "description": "有灵性仙家傀儡，完整身世受记忆禁制约束；cultivation=8只是战力层级标定，非自然魔族大乘寿元。",
+          "description": "有灵性的仙家傀儡，实力相当于大乘层级，寿命受傀儡自身条件约束；身世记忆受到禁制。",
           "access": {
             "kind": "private"
           }
@@ -9616,9 +9616,9 @@
           "predicate": "energy-accounting",
           "value": {
             "kind": "text",
-            "value": "每全力出手耗1可用仙灵量；自由活动每5184000共同秒耗1，按实际时长折算；留雷海静息不耗此项。新供物须先检验和转化，半数实得能量进入返界封存，不能同时算可用量。仅这些精确换算为当前标定。"
+            "value": "每次全力出手消耗1可用仙灵量；离开雷海自由活动每60日消耗1，按实际时长折算，留在雷海静息不消耗这一项。新供物须先检验和转化，所得能量半数封存用于返界，其余才可使用。"
           },
-          "description": "每全力出手耗1可用仙灵量；自由活动每5184000共同秒耗1，按实际时长折算；留雷海静息不耗此项。新供物须先检验和转化，半数实得能量进入返界封存，不能同时算可用量。仅这些精确换算为当前标定。",
+          "description": "每次全力出手消耗1可用仙灵量；离开雷海自由活动每60日消耗1，按实际时长折算，留在雷海静息不消耗这一项。新供物须先检验和转化，所得能量半数封存用于返界，其余才可使用。",
           "access": {
             "kind": "private"
           }
@@ -9878,9 +9878,9 @@
           "predicate": "one-treatment-cost",
           "value": {
             "kind": "text",
-            "value": "一次完整人形洗髓暂按消耗20标定份，实际身体、莲瓣和承受状态决定结果，不能只扣数值就宣告进阶。"
+            "value": "一次完整人形洗髓需要20份池中灵液，结果取决于身体、莲瓣和承受状态；完成洗髓并不等于进阶。"
           },
-          "description": "一次完整人形洗髓暂按消耗20标定份，实际身体、莲瓣和承受状态决定结果，不能只扣数值就宣告进阶。",
+          "description": "一次完整人形洗髓需要20份池中灵液，结果取决于身体、莲瓣和承受状态；完成洗髓并不等于进阶。",
           "access": {
             "kind": "private"
           }
@@ -10087,9 +10087,9 @@
           "predicate": "cultivation-state",
           "value": {
             "kind": "text",
-            "value": "掌天瓶分离的灵性主体，当前8级为隐遁与灵性能力标定，不是普通修士境界或第二完整瓶身。"
+            "value": "掌天瓶分离的灵性主体，隐遁与灵性能力相当于大乘层级；它不是普通修士，也不具第二个完整瓶身。"
           },
-          "description": "掌天瓶分离的灵性主体，当前8级为隐遁与灵性能力标定，不是普通修士境界或第二完整瓶身。",
+          "description": "掌天瓶分离的灵性主体，隐遁与灵性能力相当于大乘层级；它不是普通修士，也不具第二个完整瓶身。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -10144,9 +10144,9 @@
           "predicate": "pool-replenishment",
           "value": {
             "kind": "text",
-            "value": "原有补充现象需实际瓶灵作用与灵气来源，本包未给普通人物任意复制或转移全部特殊能量的能力。"
+            "value": "补充特殊能量需要瓶灵的实际作用和灵气来源，普通人物无法随意复制或转移它们。"
           },
-          "description": "原有补充现象需实际瓶灵作用与灵气来源，本包未给普通人物任意复制或转移全部特殊能量的能力。",
+          "description": "补充特殊能量需要瓶灵的实际作用和灵气来源，普通人物无法随意复制或转移它们。",
           "access": {
             "kind": "private"
           }
@@ -10298,9 +10298,9 @@
           "predicate": "cultivation-state",
           "value": {
             "kind": "text",
-            "value": "古仙残魂，原仙体已毁；当前8级为受困状态的能力层级标定，并非完整大乘肉身或全盛真仙。"
+            "value": "古仙残魂，原仙体已毁，受困状态下的能力相当于大乘层级，远非全盛时的真仙。"
           },
-          "description": "古仙残魂，原仙体已毁；当前8级为受困状态的能力层级标定，并非完整大乘肉身或全盛真仙。",
+          "description": "古仙残魂，原仙体已毁，受困状态下的能力相当于大乘层级，远非全盛时的真仙。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -17752,7 +17752,7 @@
       "name": "泣灵圣砖1",
       "kind": "item",
       "placement": "ad-tianfang-mountains",
-      "description": "古传承四块之一，含相应残诀与地图片段；当前所在为明确开篇补写，未提前转交后来拍卖人。",
+      "description": "古传承四块之一，含有相应残诀与地图片段。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -17763,7 +17763,7 @@
       "name": "泣灵圣砖2",
       "kind": "item",
       "placement": "ad-hai-family",
-      "description": "古传承四块之一，含相应残诀与地图片段；当前所在为明确开篇补写，未提前转交后来拍卖人。",
+      "description": "古传承四块之一，含有相应残诀与地图片段。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -17774,7 +17774,7 @@
       "name": "泣灵圣砖3",
       "kind": "item",
       "placement": "ad-qiling-icefield",
-      "description": "古传承四块之一，含相应残诀与地图片段；当前所在为明确开篇补写，未提前转交后来拍卖人。",
+      "description": "古传承四块之一，含有相应残诀与地图片段。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -17785,7 +17785,7 @@
       "name": "泣灵圣砖4",
       "kind": "item",
       "placement": "ad-tianmang-valley",
-      "description": "古传承四块之一，含相应残诀与地图片段；当前所在为明确开篇补写，未提前转交后来拍卖人。",
+      "description": "古传承四块之一，含有相应残诀与地图片段。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -17803,9 +17803,9 @@
           "predicate": "activation-and-crossing",
           "value": {
             "kind": "text",
-            "value": "需识别并祭炼原有控制结构；常规航行每共同日耗1魔石，受阻破界另需适格操作者与足够法力，并至少耗80现有魔石。数值是初始标定，条件不满足时不能只扣费通过。"
+            "value": "须识别并祭炼原有控制结构；常规航行每日消耗1魔石，受阻破界还需适格操作者、足够法力及至少80魔石。材料齐备也不能代替施术条件。"
           },
-          "description": "需识别并祭炼原有控制结构；常规航行每共同日耗1魔石，受阻破界另需适格操作者与足够法力，并至少耗80现有魔石。数值是初始标定，条件不满足时不能只扣费通过。",
+          "description": "须识别并祭炼原有控制结构；常规航行每日消耗1魔石，受阻破界还需适格操作者、足够法力及至少80魔石。材料齐备也不能代替施术条件。",
           "access": {
             "kind": "private"
           }
@@ -17860,7 +17860,7 @@
       "name": "火云矿",
       "kind": "location",
       "placement": "associated-demon-realm",
-      "description": "沙丘中的旧矿脉，当前由白家经营为明确开篇回溯；没有预先遭后期魔兽占据。",
+      "description": "沙丘中的旧矿脉，目前由白家经营。",
       "facts": [
         {
           "id": "ad-firecloud-mine-route-to-ad-yinchuan-oasis",
@@ -17956,7 +17956,7 @@
       "name": "火云石在矿原料",
       "kind": "container",
       "placement": "ad-firecloud-lava",
-      "description": "当前可勘段有24份可用晶质标定，仍在矿体；必须耐热开采和搬运，不能远程当库存支出。",
+      "description": "已勘明的矿段中有24份可用晶质，仍须耐热开采并搬运出矿体。",
       "facts": [
         {
           "id": "ad-firecloud-deposit-owned-by",
@@ -18614,7 +18614,7 @@
       "name": "东阁旧炼器料",
       "kind": "container",
       "placement": "ad-qiling-outer-store-a",
-      "description": "尚可利用的少量古料，数量是当前明确补写。",
+      "description": "一批尚可利用的古料。",
       "facts": [],
       "meters": [],
       "ratings": [],

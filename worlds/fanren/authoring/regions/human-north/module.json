@@ -219,7 +219,7 @@
             "kind": "entity",
             "entityId": "north-snow-station"
           },
-          "description": "沿标定雪路接近冰城，守门者核对来意。",
+          "description": "沿雪路接近冰城，守门者会核对来意。",
           "access": {
             "kind": "public"
           }
@@ -229,9 +229,9 @@
           "predicate": "travel-condition",
           "value": {
             "kind": "text",
-            "value": "沿标定雪路接近冰城，守门者核对来意。"
+            "value": "沿雪路接近冰城，守门者会核对来意。"
           },
-          "description": "沿标定雪路接近冰城，守门者核对来意。",
+          "description": "沿雪路接近冰城，守门者会核对来意。",
           "access": {
             "kind": "public"
           }
@@ -642,7 +642,7 @@
       "name": "冰凤闭关洞室",
       "kind": "location",
       "placement": "north-bingyuan",
-      "description": "原创当前洞室；外界传闻通过守岛者或实际来访传入。",
+      "description": "洞室；外界传闻通过守岛者或实际来访传入。",
       "facts": [
         {
           "id": "north-bingfeng-retreat-route-north-bingyuan",
@@ -678,7 +678,7 @@
       "name": "北地迎雪驿",
       "kind": "location",
       "placement": "human-beiming-island",
-      "description": "原创避寒驿屋，有维持中的温室小阵和火炉，靠有限储备接待来客；走出暖屋仍须抗寒。",
+      "description": "避寒驿屋，有维持中的温室小阵和火炉，靠有限储备接待来客；走出暖屋仍须抗寒。",
       "facts": [
         {
           "id": "north-snow-station-route-human-beiming-island",
@@ -711,7 +711,7 @@
             "kind": "entity",
             "entityId": "north-ice-city"
           },
-          "description": "沿标定雪路接近冰城，守门者核对来意。",
+          "description": "沿雪路接近冰城，守门者会核对来意。",
           "access": {
             "kind": "public"
           }
@@ -721,9 +721,9 @@
           "predicate": "travel-condition",
           "value": {
             "kind": "text",
-            "value": "沿标定雪路接近冰城，守门者核对来意。"
+            "value": "沿雪路接近冰城，守门者会核对来意。"
           },
-          "description": "沿标定雪路接近冰城，守门者核对来意。",
+          "description": "沿雪路接近冰城，守门者会核对来意。",
           "access": {
             "kind": "public"
           }
@@ -738,7 +738,7 @@
       "name": "冰城门房",
       "kind": "location",
       "placement": "north-ice-city",
-      "description": "原创值守房，存放来客记录和当值物资。",
+      "description": "值守房，存放来客记录和当值物资。",
       "facts": [
         {
           "id": "north-gate-room-route-north-ice-city",
@@ -774,7 +774,7 @@
       "name": "小极宫公库",
       "kind": "location",
       "placement": "north-inner-palace",
-      "description": "原创日常公库，与长老私用储物分开。",
+      "description": "日常公库，与长老私用储物分开。",
       "facts": [
         {
           "id": "north-stockroom-route-north-inner-palace",
@@ -3767,7 +3767,7 @@
       "name": "宫内冰灵果园",
       "kind": "location",
       "placement": "north-inner-palace",
-      "description": "具体当期果园位置为补写，当前十二粒成熟果实仍在枝头。",
+      "description": "果园中十二粒成熟果实仍挂在枝头。",
       "facts": [
         {
           "id": "north-fruit-garden-route-north-inner-palace",
@@ -3803,7 +3803,7 @@
       "name": "冰海玄冰药点",
       "kind": "location",
       "placement": "human-ice-sea",
-      "description": "原创已勘定药点，两朵玄冰花附生万年玄冰，严寒和妖修活动影响采集。",
+      "description": "已勘定药点，两朵玄冰花附生万年玄冰，严寒和妖修活动影响采集。",
       "facts": [
         {
           "id": "north-ice-flower-site-route-human-ice-sea",
@@ -6475,7 +6475,7 @@
       "name": "主殿常规出殿阵",
       "kind": "item",
       "placement": "north-xuling-first-main",
-      "description": "既存小型出口阵；当期落点为明确补写，未启动。",
+      "description": "一座小型出口阵，尚未启动。",
       "facts": [
         {
           "id": "north-xuling-exit-one-owner",
@@ -6516,7 +6516,7 @@
       "name": "主殿常规出殿阵",
       "kind": "item",
       "placement": "north-xuling-first-main",
-      "description": "既存小型出口阵；当期落点为明确补写，未启动。",
+      "description": "一座小型出口阵，尚未启动。",
       "facts": [
         {
           "id": "north-xuling-exit-two-owner",
@@ -6557,7 +6557,7 @@
       "name": "冰渊岛族中仪式地",
       "kind": "location",
       "placement": "north-bingyuan",
-      "description": "冰凤族传统进阶仪式地，精确构造和仪式耗料没有被原文完整列出；需本族已学知识准备，不免费自动升阶。",
+      "description": "冰凤族传统进阶仪式地，须掌握本族仪式知识并备齐所需材料；能否进阶仍取决于修行与施术情况。",
       "facts": [
         {
           "id": "north-bingyuan-ritual-ground-route-north-bingyuan",
@@ -6641,7 +6641,7 @@
       "name": "殿内小厅传送阵",
       "kind": "item",
       "placement": "north-xuling-inner-array-room",
-      "description": "现存成对内部阵的一端，当前二十枚低阶灵石为补写供能库存。",
+      "description": "成对内部传送阵的一端，备有二十枚低阶灵石供能。",
       "facts": [
         {
           "id": "north-inner-transfer-one-owner",
@@ -7451,7 +7451,7 @@
       "name": "柳翠派驻地",
       "kind": "location",
       "placement": "human-beiming-island",
-      "description": "位置在半岛外围为补写；来往与物资独立于小极宫内库。",
+      "description": "位于半岛外围，来往与物资独立于小极宫内库。",
       "facts": [
         {
           "id": "north-liucui-seat-route-north-entry-market",
@@ -7511,7 +7511,7 @@
       "name": "北地散修行院",
       "kind": "location",
       "placement": "human-beiming-island",
-      "description": "原创摩鸠当前租住的小院，闭关与会面有自己的安排。",
+      "description": "摩鸠当前租住的小院，闭关与会面有自己的安排。",
       "facts": [
         {
           "id": "north-mojiu-lodge-route-north-entry-market",
@@ -8229,7 +8229,7 @@
       "name": "北地石客舍",
       "kind": "location",
       "placement": "north-entry-market",
-      "description": "原创当期供绿发妖修暂住的独立客舍。",
+      "description": "供绿发妖修暂住的独立客舍。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -8240,7 +8240,7 @@
       "name": "北地暖客舍",
       "kind": "location",
       "placement": "north-entry-market",
-      "description": "原创当期供蛇妖暂住的独立客舍，与他人私物分开。",
+      "description": "供蛇妖暂住的独立客舍，与他人私物分开。",
       "facts": [],
       "meters": [],
       "ratings": [],
