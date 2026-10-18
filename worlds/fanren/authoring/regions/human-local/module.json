@@ -4346,6 +4346,21 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "canon-mo-juren-rare-formula-knowledge",
+          "predicate": "rare-formula-knowledge",
+          "value": {
+            "kind": "text",
+            "value": "掌握若干有助增长功力和突破瓶颈的珍稀药物配方，但缺少所需稀有药材，从未见过或制成这些成药。知道配方不等于有现成药物。"
+          },
+          "description": "掌握若干有助增长功力和突破瓶颈的珍稀药物配方，但缺少所需稀有药材，从未见过或制成这些成药。知道配方不等于有现成药物。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-mo-juren"
+            ]
+          }
         }
       ],
       "meters": [
@@ -4546,6 +4561,21 @@
                 "value": "高明的凡俗医药知识、外伤治疗、普通药材炮制、已学凡俗掌法与护身武艺；没有先天灵根与常态法力。掌握长春功文字但自身无法正常练出法力。"
               },
               "description": "高明的凡俗医药知识、外伤治疗、普通药材炮制、已学凡俗掌法与护身武艺；没有先天灵根与常态法力。掌握长春功文字但自身无法正常练出法力。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "rare-formula-knowledge",
+              "subjectId": "self",
+              "predicate": "rare-formula-knowledge",
+              "value": {
+                "kind": "text",
+                "value": "掌握若干有助增长功力和突破瓶颈的珍稀药物配方，但缺少所需稀有药材，从未见过或制成这些成药。知道配方不等于有现成药物。"
+              },
+              "description": "掌握若干有助增长功力和突破瓶颈的珍稀药物配方，但缺少所需稀有药材，从未见过或制成这些成药。知道配方不等于有现成药物。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -13943,6 +13973,89 @@
           }
         }
       ]
+    },
+    {
+      "entityId": "han-uncle",
+      "facts": [
+        {
+          "id": "han-uncle-prior-household-support",
+          "predicate": "prior-household-support",
+          "value": {
+            "kind": "text",
+            "value": "曾多次托人给兄长一家捎带吃用之物，也曾介绍韩家大哥作铁匠学徒。"
+          },
+          "description": "曾多次托人给兄长一家捎带吃用之物，也曾介绍韩家大哥作铁匠学徒。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "han-uncle",
+              "han-father",
+              "han-mother",
+              "canon-han-li"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "han-father",
+      "facts": [
+        {
+          "id": "han-father-attitude-toward-uncle",
+          "predicate": "attitude-toward-uncle",
+          "value": {
+            "kind": "text",
+            "value": "感激三弟长期照顾家里，平时不善言表。"
+          },
+          "description": "感激三弟长期照顾家里，平时不善言表。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "han-father"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "han-mother",
+      "facts": [
+        {
+          "id": "han-mother-attitude-toward-uncle",
+          "predicate": "attitude-toward-uncle",
+          "value": {
+            "kind": "text",
+            "value": "感激三叔长期照顾家里，平时不常说出口。"
+          },
+          "description": "感激三叔长期照顾家里，平时不常说出口。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "han-mother"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "canon-han-li",
+      "facts": [
+        {
+          "id": "canon-han-li-attitude-toward-uncle",
+          "predicate": "attitude-toward-uncle",
+          "value": {
+            "kind": "text",
+            "value": "对曾照顾家里的三叔印象很好。"
+          },
+          "description": "对曾照顾家里的三叔印象很好。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-han-li"
+            ]
+          }
+        }
+      ]
     }
   ],
   "placements": [
@@ -13982,6 +14095,11 @@
     {
       "id": "local-cavern-physical-controls",
       "text": "山体机关必须有真实传动、操作与对应结构才能发生效果。局部二号毁殿不等于全山都已坍塌；损坏、禁入、维修和耗料都须核实。人物威慑话语不直接作为既成破坏提交。",
+      "severity": "hard"
+    },
+    {
+      "id": "local-chousui-dose-and-remedy",
+      "text": "抽髓丸以透支身体潜力和寿命换取当前武力。通常整粒用药会形成周期续服需求，并带来抽筋吸髓的剧痛；直接停药可能瘫痪或死亡，持续照常服药亦会在初用后十年内耗尽生命。小剂量用作其他药的药引与普通服法不同，不自动套用整粒服药的后果；另配救治秘药须有真正掌握方法的医者与相应药材，可能保命却不能尽复寿命并会失去武功。原料、配方、用量、实际服用与治疗均须成立，知道药名不能凭空得到药物或疗效。",
       "severity": "hard"
     }
   ],
@@ -14690,7 +14808,8 @@
       "local-mo-established",
       "local-mo-yu-history",
       "local-original-implementation",
-      "local-runtime-calibration"
+      "local-runtime-calibration",
+      "local-mo-rare-formula-knowledge"
     ],
     "fact:canon-mo-juren-learned-skill": [
       "local-mo-established",
@@ -15811,6 +15930,215 @@
     "fact:canon-zhang-tie-spiritual-root": [
       "local-zhangtie-root-backprojection",
       "local-zhangtie-root-completion"
+    ],
+    "fact:han-uncle-prior-household-support": [
+      "local-prior-household-support"
+    ],
+    "fact:han-father-attitude-toward-uncle": [
+      "local-prior-household-support"
+    ],
+    "fact:han-mother-attitude-toward-uncle": [
+      "local-prior-household-support"
+    ],
+    "fact:canon-han-li-attitude-toward-uncle": [
+      "local-prior-household-support"
+    ],
+    "cognition:han-uncle": [
+      "local-prior-household-support"
+    ],
+    "cognition:han-father": [
+      "local-prior-household-support"
+    ],
+    "cognition:han-mother": [
+      "local-prior-household-support"
+    ],
+    "cognition:canon-han-li": [
+      "local-prior-household-support"
+    ],
+    "law:local-chousui-dose-and-remedy": [
+      "local-chousui-dose-and-remedy"
+    ],
+    "fact:canon-mo-juren-rare-formula-knowledge": [
+      "local-mo-rare-formula-knowledge"
     ]
-  }
+  },
+  "agentCognition": [
+    {
+      "agent_id": "han-uncle",
+      "belief": {
+        "local_entities": [],
+        "bindings": [],
+        "evidence": [
+          {
+            "id": "prior-family-help",
+            "kind": "observation",
+            "description": "过去亲历的家庭往来。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "prior-family-support",
+            "subjectId": "self",
+            "predicate": "prior-household-support",
+            "value": {
+              "kind": "text",
+              "value": "曾多次托人给兄长一家捎带吃用之物，也曾介绍韩家大哥作铁匠学徒。"
+            },
+            "description": "曾多次托人给兄长一家捎带吃用之物，也曾介绍韩家大哥作铁匠学徒。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "prior-family-help"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "agent_id": "han-father",
+      "belief": {
+        "local_entities": [],
+        "bindings": [],
+        "evidence": [
+          {
+            "id": "prior-family-help",
+            "kind": "observation",
+            "description": "过去亲历的家庭往来。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "prior-family-support",
+            "subjectId": "uncle",
+            "predicate": "prior-household-support",
+            "value": {
+              "kind": "text",
+              "value": "三叔以前常托人捎吃的用的，也替家里大哥介绍了铁匠学徒的工作。"
+            },
+            "description": "三叔以前常托人捎吃的用的，也替家里大哥介绍了铁匠学徒的工作。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "prior-family-help"
+            ]
+          },
+          {
+            "id": "own-gratitude",
+            "subjectId": "self",
+            "predicate": "attitude-toward-uncle",
+            "value": {
+              "kind": "text",
+              "value": "我心里感激三叔的照顾，平时不常说出口。"
+            },
+            "description": "我心里感激三叔的照顾，平时不常说出口。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "prior-family-help"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "agent_id": "han-mother",
+      "belief": {
+        "local_entities": [],
+        "bindings": [],
+        "evidence": [
+          {
+            "id": "prior-family-help",
+            "kind": "observation",
+            "description": "过去亲历的家庭往来。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "prior-family-support",
+            "subjectId": "uncle",
+            "predicate": "prior-household-support",
+            "value": {
+              "kind": "text",
+              "value": "三叔以前常托人捎吃的用的，也替家里大哥介绍了铁匠学徒的工作。"
+            },
+            "description": "三叔以前常托人捎吃的用的，也替家里大哥介绍了铁匠学徒的工作。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "prior-family-help"
+            ]
+          },
+          {
+            "id": "own-gratitude",
+            "subjectId": "self",
+            "predicate": "attitude-toward-uncle",
+            "value": {
+              "kind": "text",
+              "value": "我心里感激三叔的照顾，平时不常说出口。"
+            },
+            "description": "我心里感激三叔的照顾，平时不常说出口。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "prior-family-help"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "agent_id": "canon-han-li",
+      "belief": {
+        "local_entities": [],
+        "bindings": [],
+        "evidence": [
+          {
+            "id": "prior-family-help",
+            "kind": "observation",
+            "description": "过去亲历的家庭往来。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "prior-family-support",
+            "subjectId": "uncle",
+            "predicate": "prior-household-support",
+            "value": {
+              "kind": "text",
+              "value": "三叔以前常托人捎吃的用的，也替家里大哥介绍了铁匠学徒的工作。"
+            },
+            "description": "三叔以前常托人捎吃的用的，也替家里大哥介绍了铁匠学徒的工作。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "prior-family-help"
+            ]
+          },
+          {
+            "id": "own-gratitude",
+            "subjectId": "self",
+            "predicate": "attitude-toward-uncle",
+            "value": {
+              "kind": "text",
+              "value": "我对三叔印象很好。"
+            },
+            "description": "我对三叔印象很好。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "prior-family-help"
+            ]
+          }
+        ]
+      }
+    }
+  ]
 }

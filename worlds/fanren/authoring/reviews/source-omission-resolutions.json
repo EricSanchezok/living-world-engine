@@ -6,7 +6,7 @@
   "total": 2834,
   "completed": 530,
   "pending": 2304,
-  "recordsHash": "653a01e0f2f4860e3a5a5472b660cd27d8cfda21cde237061c03b87d366b4d27",
+  "recordsHash": "21fbc3372e6d97c0d9a465835cbec45b18f58141c80e93a7741facff35225f88",
   "anchorCount": 775,
   "readScope": "逐条阅读审校遗漏、所引完整原段与已有地区审定目标；歧义另读相邻段。记录保留原描述供纠错追踪，事实以 disposition 和 statement 为准。证据重叠不自动批准。",
   "limitations": [
@@ -15,27 +15,6 @@
     "后期事件与假身份只入来源索引，不改开篇认知、库存或人物生命状态。"
   ],
   "runtimeSupplementQueue": [
-    {
-      "id": "batch-0001:omission:6",
-      "ordinal": 6,
-      "subject": "韩立家庭",
-      "statement": "三叔过去常托人捎生活用品，父母感激、韩对叔有好印象，皆先于入门安排；不是当前欠债或未来定期无条件供给。",
-      "runtimeDisposition": "check-existing-family-cognition-and-add-source-detail"
-    },
-    {
-      "id": "batch-0003:omission:5",
-      "ordinal": 22,
-      "subject": "抽髓丸",
-      "statement": "韩按医理说抽髓丸须反复服用、抽筋吸髓般痛苦，停药有瘫痪或死亡风险，常规持续服用也透支寿命；属于凡药机制，不让后世超凡解救永远不可能，也不让厉在T0已服。",
-      "runtimeDisposition": "check-existing-pill-law-and-add-pain-boundary"
-    },
-    {
-      "id": "batch-0004:omission:2",
-      "ordinal": 25,
-      "subject": "墨居仁",
-      "statement": "墨已掌握圣药配方而缺稀贵药材，未曾制出此处所列成药；拥有配方不等库存现货或当时已教给韩。",
-      "runtimeDisposition": "check-existing-medicine-knowledge"
-    },
     {
       "id": "batch-0019:omission:2",
       "ordinal": 115,
@@ -315,9 +294,9 @@
         }
       ],
       "targetIds": [
-        "local-uncle-established-link"
+        "local-prior-household-support"
       ],
-      "runtimeDisposition": "check-existing-family-cognition-and-add-source-detail"
+      "runtimeDisposition": "runtime-authored-source-compared-assembly-passed"
     },
     {
       "id": "batch-0001:omission:7",
@@ -878,8 +857,10 @@
           "anchorSha256": "bceb6febd60f6991bb3321b6b707eb2ee37e6f3e4932e903b09493324c966d54"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "check-existing-pill-law-and-add-pain-boundary"
+      "targetIds": [
+        "local-chousui-dose-and-remedy"
+      ],
+      "runtimeDisposition": "runtime-authored-source-compared-assembly-passed"
     },
     {
       "id": "batch-0004:omission:0",
@@ -963,9 +944,9 @@
         }
       ],
       "targetIds": [
-        "canon-mo-juren"
+        "local-mo-rare-formula-knowledge"
       ],
-      "runtimeDisposition": "check-existing-medicine-knowledge"
+      "runtimeDisposition": "runtime-authored-source-compared-assembly-passed"
     },
     {
       "id": "batch-0004:omission:3",

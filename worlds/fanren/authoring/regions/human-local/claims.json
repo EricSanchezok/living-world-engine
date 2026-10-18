@@ -6055,5 +6055,83 @@
       "local-zhangtie-root-backprojection"
     ],
     "evidence": []
+  },
+  {
+    "id": "local-prior-household-support",
+    "statement": "韩三叔在开篇前已经常托人给韩家捎吃用之物，介绍大哥作铁匠学徒；父母心里感激，韩立对三叔印象很好。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "作者据原文分别记录既有关系、医理与后期示例；人物只能知道亲历或已学部分。",
+    "openingReason": "第一章明确回述既往，不包含三叔下一次来访、入门安排或留下银两。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-4631519",
+        "chapterSha256": "2f2ce45c472968189d83b46cd951f159eed3b679f477c57569807fdea6b9551a",
+        "start": 1199,
+        "end": 1320,
+        "anchorSha256": "3afd12cddb8597089d409008cd5f6684c89ef7db61d7ba8fa312fc3fff4158d6"
+      }
+    ]
+  },
+  {
+    "id": "local-chousui-dose-and-remedy",
+    "statement": "抽髓丸通常全量服用以透支寿命换武力，之后须周期续服并经受抽筋吸髓之痛；停用有瘫痪、死亡风险，常规续服亦有十年内耗命后果。韩立后来说明自己只把一粒分十次作其他药的药引，并提出由墨另配秘药救治、损失武功的方案；不能抹掉剂量与救治条件，把所有接触药物都判定必死。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "作者据原文分别记录既有关系、医理与后期示例；人物只能知道亲历或已学部分。",
+    "openingReason": "后期医理说明用于既有药物机制，韩立的认药经历、厉飞雨是否服用及后来救治不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-4820423",
+        "chapterSha256": "57360e47289acc9fb1dfb4c502838a9128c085978190b310c43c6b592add8e81",
+        "start": 1478,
+        "end": 1589,
+        "anchorSha256": "bceb6febd60f6991bb3321b6b707eb2ee37e6f3e4932e903b09493324c966d54"
+      },
+      {
+        "chapterId": "qq-4820423",
+        "chapterSha256": "57360e47289acc9fb1dfb4c502838a9128c085978190b310c43c6b592add8e81",
+        "start": 1794,
+        "end": 1984,
+        "anchorSha256": "7bd1a6a93c5b0de5727d8f568a6919ff1de32d76dd55646d83339d964e4c2093"
+      },
+      {
+        "chapterId": "qq-4820423",
+        "chapterSha256": "57360e47289acc9fb1dfb4c502838a9128c085978190b310c43c6b592add8e81",
+        "start": 2035,
+        "end": 2238,
+        "anchorSha256": "0e5d2dd12b7faa5d029d357ee3737489d6c799aedcc9957a386b4791c818bc1b"
+      }
+    ]
+  },
+  {
+    "id": "local-mo-rare-formula-knowledge",
+    "statement": "墨大夫此前掌握若干助功、突破瓶颈珍稀药方，因药材不齐从未见过或制成其中成药。具体药材和剂量本段未列，不捏造现货、配比或韩立已获传授。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "作者据原文分别记录既有关系、医理与后期示例；人物只能知道亲历或已学部分。",
+    "openingReason": "原文回述墨已有医药知识与未实现的配药愿望；既有知识连续性回溯，韩立日后的学习、催药和炼药不回填。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-20023592",
+        "chapterSha256": "995dac6d0dd8dbe0252378e53ad99788be4f44bcf70f1031a89a1bf4330f9379",
+        "start": 343,
+        "end": 433,
+        "anchorSha256": "a207339b491649bbfc146db25d11cf4ab0f9cf9cf8eb5796c0ef9d5891bb0366"
+      },
+      {
+        "chapterId": "qq-20023592",
+        "chapterSha256": "995dac6d0dd8dbe0252378e53ad99788be4f44bcf70f1031a89a1bf4330f9379",
+        "start": 434,
+        "end": 510,
+        "anchorSha256": "6bc941a87a30dc887fe75a52b34f73935970a4d4e3313431c70d680cfa17f5bf"
+      }
+    ]
   }
 ]
