@@ -261,30 +261,6 @@
           }
         },
         {
-          "id": "blood-wanyue-mountains-route-blood-ice-cache",
-          "predicate": "route-to",
-          "value": {
-            "kind": "entity",
-            "entityId": "blood-ice-cache"
-          },
-          "description": "route-to",
-          "access": {
-            "kind": "public"
-          }
-        },
-        {
-          "id": "blood-wanyue-mountains-condition-blood-ice-cache",
-          "predicate": "travel-condition",
-          "value": {
-            "kind": "text",
-            "value": "按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。"
-          },
-          "description": "按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。",
-          "access": {
-            "kind": "public"
-          }
-        },
-        {
           "id": "blood-wanyue-mountains-route-blood-qingping-cave",
           "predicate": "route-to",
           "value": {
@@ -1697,15 +1673,15 @@
       "id": "blood-ice-cache",
       "name": "冰魄昔日封藏处",
       "kind": "location",
-      "placement": "blood-wanyue-mountains",
-      "description": "万月山中的一处旧封藏点。隐匣藏在普通山石之后，外观不标明其主人和用途；须找到实物并辨认封存手法才能进一步查验。",
+      "placement": "spirit-tianyuan-domain",
+      "description": "天元境荒坡下的旧洞窟，深处普通石壁后封着古铜门，门上银色符封完整；隐蔽大厅中央石桌上保存一只青色小鼎。",
       "facts": [
         {
-          "id": "blood-ice-cache-route-blood-wanyue-mountains",
+          "id": "blood-ice-cache-return-route",
           "predicate": "route-to",
           "value": {
             "kind": "entity",
-            "entityId": "blood-wanyue-mountains"
+            "entityId": "spirit-inner-caravan-road"
           },
           "description": "route-to",
           "access": {
@@ -1713,15 +1689,16 @@
           }
         },
         {
-          "id": "blood-ice-cache-condition-blood-wanyue-mountains",
-          "predicate": "travel-condition",
+          "id": "blood-ice-cache-sealed-entry",
+          "predicate": "entry-restriction",
           "value": {
             "kind": "text",
-            "value": "按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。"
+            "value": "地下石壁伪装与门上符封完好；相配虚天鼎及法诀可显门揭符。其他破解须实测禁制并承担毁物与惊动风险，不能仅因知道地名便进入。"
           },
-          "description": "按实际道路、遁速、地形和补给行进；跨广大地域要经过相应时间，私室还需获得许可。",
+          "description": "地下石壁伪装与门上符封完好；相配虚天鼎及法诀可显门揭符。其他破解须实测禁制并承担毁物与惊动风险，不能仅因知道地名便进入。",
           "access": {
-            "kind": "public"
+            "kind": "discoverable",
+            "condition": "实际抵达旧洞窟并检视石壁禁制，或获得亲历者可信说明。"
           }
         }
       ],
@@ -10598,14 +10575,20 @@
             },
             {
               "id": "known-blood-xuling-ding",
-              "name": "冰魄虚灵钥匙鼎",
-              "description": "灵界另炼的钥匙鼎，封藏于隐匣；同人界虚天鼎是两物，未有人取得使用许可。",
+              "name": "虚灵鼎",
+              "description": "自己在灵界另炼的虚灵鼎，现随身保管；与留在人界的虚天鼎和另封藏的虚皇鼎各为一物。",
               "status": "observed"
             },
             {
               "id": "known-canon-weng-thunder-elder",
               "name": "翁姓长老",
               "description": "雷鸣旧识，自己并不知道封瓶后来如何转送。",
+              "status": "observed"
+            },
+            {
+              "id": "known-blood-xuhuang-ding",
+              "name": "虚皇鼎",
+              "description": "自己昔年另炼并封藏在天元境地下旧室中的仿制钥匙；不知外界是否有人发现该处。",
               "status": "observed"
             }
           ],
@@ -10692,6 +10675,12 @@
               "local_entity_id": "known-canon-weng-thunder-elder",
               "canonical_entity_ids": [
                 "canon-weng-thunder-elder"
+              ]
+            },
+            {
+              "local_entity_id": "known-blood-xuhuang-ding",
+              "canonical_entity_ids": [
+                "blood-xuhuang-ding"
               ]
             }
           ],
@@ -11006,10 +10995,10 @@
     },
     {
       "id": "blood-xuling-ding",
-      "name": "冰魄虚灵钥匙鼎",
+      "name": "虚灵鼎",
       "kind": "item",
-      "placement": "blood-ice-cache",
-      "description": "灵界另炼的钥匙鼎，封藏于隐匣；同人界虚天鼎是两物，未有人取得使用许可。",
+      "placement": "canon-bingpo",
+      "description": "冰魄在灵界另炼的青色宝鼎，与昔年留在人界的虚天鼎及另行封藏的虚皇鼎分别独立。",
       "facts": [
         {
           "id": "blood-xuling-ding-owned-by",
@@ -11028,9 +11017,9 @@
           "predicate": "limited-key",
           "value": {
             "kind": "text",
-            "value": "与冰魄精血及相应秘术协作可帮助利用入口破绽；仿制钥匙不是随时开天鼎宫的万能通行物。"
+            "value": "同源鼎式炼制的仿制宝鼎，驱使依赖相配法诀与法力；不具有天鼎宫原钥的完整权限。"
           },
-          "description": "与冰魄精血及相应秘术协作可帮助利用入口破绽；仿制钥匙不是随时开天鼎宫的万能通行物。",
+          "description": "同源鼎式炼制的仿制宝鼎，驱使依赖相配法诀与法力；不具有天鼎宫原钥的完整权限。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -20976,6 +20965,45 @@
           "amount": 0
         }
       ]
+    },
+    {
+      "id": "blood-xuhuang-ding",
+      "name": "虚皇鼎",
+      "kind": "item",
+      "placement": "blood-ice-cache",
+      "description": "冰魄出发前又炼制的青色小鼎，独立封存在地下大厅石桌上；是较早两鼎效用更强的仿制钥匙。",
+      "facts": [
+        {
+          "id": "blood-xuhuang-ding-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-bingpo"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "blood-xuhuang-ding-limited-key",
+          "predicate": "limited-key",
+          "value": {
+            "kind": "text",
+            "value": "仿制钥匙，能借相配法诀辅助利用天鼎宫大阵破绽；仍须真实开启时机、足够法力与具体秘术，不是随时开启宫殿的原钥。"
+          },
+          "description": "仿制钥匙，能借相配法诀辅助利用天鼎宫大阵破绽；仍须真实开启时机、足够法力与具体秘术，不是随时开启宫殿的原钥。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-bingpo"
+            ]
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [
@@ -21004,6 +21032,19 @@
           "description": "循山路经村口通报入庄；祖庙不随外客通行开放。",
           "access": {
             "kind": "public"
+          }
+        },
+        {
+          "id": "blood-ice-cache-hidden-route",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "blood-ice-cache"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "discoverable",
+            "condition": "通过实际勘察、已验证旧线索或冰魄亲述辨认荒坡地下入口；仍须经过真实路程并处理门禁。"
           }
         }
       ]
@@ -21172,7 +21213,7 @@
       "blood-current-life"
     ],
     "entity:blood-ice-cache": [
-      "blood-current-life"
+      "blood-ding-opening-placement"
     ],
     "fact:blood-crane-city-route-blood-gate": [
       "blood-blood-geography",
@@ -21299,22 +21340,6 @@
       "blood-current-life"
     ],
     "fact:blood-lake-shore-condition-blood-wanyue-mountains": [
-      "blood-blood-geography",
-      "blood-current-life"
-    ],
-    "fact:blood-wanyue-mountains-route-blood-ice-cache": [
-      "blood-blood-geography",
-      "blood-current-life"
-    ],
-    "fact:blood-wanyue-mountains-condition-blood-ice-cache": [
-      "blood-blood-geography",
-      "blood-current-life"
-    ],
-    "fact:blood-ice-cache-route-blood-wanyue-mountains": [
-      "blood-blood-geography",
-      "blood-current-life"
-    ],
-    "fact:blood-ice-cache-condition-blood-wanyue-mountains": [
       "blood-blood-geography",
       "blood-current-life"
     ],
@@ -22675,7 +22700,9 @@
     "entity:canon-bingpo": [
       "blood-bingpo-opening-location",
       "blood-current-life",
-      "blood-current-values"
+      "blood-current-values",
+      "blood-ding-identity-boundary",
+      "blood-ding-opening-placement"
     ],
     "fact:canon-bingpo-cultivation-state": [
       "blood-bingpo-opening-location",
@@ -22760,15 +22787,14 @@
       "blood-current-life"
     ],
     "entity:blood-xuling-ding": [
-      "blood-current-life",
-      "blood-current-values"
+      "blood-ding-identity-boundary",
+      "blood-ding-opening-placement"
     ],
     "fact:blood-xuling-ding-owned-by": [
-      "blood-current-life"
+      "blood-ding-opening-placement"
     ],
     "fact:blood-xuling-ding-limited-key": [
-      "blood-ding-identity-boundary",
-      "blood-tianding-palace"
+      "blood-ding-identity-boundary"
     ],
     "cognition:canon-weng-thunder-elder": [
       "blood-bingpo-blood-soul",
@@ -24473,6 +24499,27 @@
     ],
     "fact:blood-xu-estate-route-to-copper-hills": [
       "blood-reviewed-life"
+    ],
+    "fact:blood-ice-cache-return-route": [
+      "blood-ding-opening-placement"
+    ],
+    "fact:blood-ice-cache-sealed-entry": [
+      "blood-ding-opening-placement"
+    ],
+    "fact:blood-ice-cache-hidden-route": [
+      "blood-ding-opening-placement"
+    ],
+    "fact:blood-xuhuang-ding-owned-by": [
+      "blood-ding-identity-boundary",
+      "blood-ding-opening-placement"
+    ],
+    "fact:blood-xuhuang-ding-limited-key": [
+      "blood-ding-identity-boundary",
+      "blood-ding-opening-placement"
+    ],
+    "entity:blood-xuhuang-ding": [
+      "blood-ding-identity-boundary",
+      "blood-ding-opening-placement"
     ]
   },
   "periodicProperties": [

@@ -547,9 +547,9 @@
     "label": "冰魄昔日封藏处",
     "kind": "location",
     "openingState": "present",
-    "classification": "explicit-original",
+    "classification": "explicit-original-location-with-source-structure",
     "claimIds": [
-      "blood-current-life"
+      "blood-ding-opening-placement"
     ],
     "aliases": []
   },
@@ -1850,15 +1850,18 @@
   },
   {
     "id": "blood-xuling-ding",
-    "label": "冰魄虚灵钥匙鼎",
+    "label": "虚灵鼎",
     "kind": "item",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
     "claimIds": [
-      "blood-current-life",
-      "blood-current-values"
+      "blood-ding-identity-boundary",
+      "blood-ding-opening-placement"
     ],
-    "aliases": []
+    "aliases": [
+      "虚灵宝鼎"
+    ],
+    "reason": "与虚天、虚皇三物分立。"
   },
   {
     "id": "blood-xu-ancestral-estate",
@@ -3922,5 +3925,18 @@
       "blood-reviewed-values"
     ],
     "aliases": []
+  },
+  {
+    "id": "blood-xuhuang-ding",
+    "label": "虚皇鼎",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-object-with-original-opening-placement",
+    "claimIds": [
+      "blood-ding-identity-boundary",
+      "blood-ding-opening-placement"
+    ],
+    "aliases": [],
+    "reason": "旧藏取物是另一真实器物；不作为虚灵的异名。"
   }
 ]
