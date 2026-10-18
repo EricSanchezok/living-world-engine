@@ -1,0 +1,504 @@
+{
+  "id": "global-source-supplement",
+  "entities": [
+    {
+      "facts": [
+        {
+          "id": "source-qixuan-valley-peak-path-route-divine-hand-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "divine-hand-valley"
+          },
+          "description": "沿山间小路可到相邻地点。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "source-qixuan-valley-peak-path-route-red-water-peak",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "red-water-peak"
+          },
+          "description": "沿山间小路可到相邻地点。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [],
+      "id": "source-qixuan-valley-peak-path",
+      "name": "谷峰间山路",
+      "kind": "location",
+      "placement": "caixia-mountain",
+      "description": "神手谷与赤水峰之间的山间小径，土石路面有低洼处，树下散着落叶。"
+    },
+    {
+      "facts": [
+        {
+          "id": "canon-heaven-bottle-body-concealment",
+          "predicate": "concealment",
+          "value": {
+            "kind": "text",
+            "value": "藏在山路低洼处的泥土落叶下，未被清理或触及前不显露。"
+          },
+          "description": "落叶泥土遮住瓶身。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "canon-heaven-bottle-body-material-resistance",
+          "predicate": "material-resistance",
+          "value": {
+            "kind": "text",
+            "value": "寻常徒手拧拉和凡人铁锤重击不能轻易开盖或砸损，仍须依据实际力量和已证手段判断。"
+          },
+          "description": "细纹瓶身的材料异常坚硬。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "canon-heaven-bottle-body-condensation-rule",
+          "predicate": "conditional-conversion",
+          "value": {
+            "kind": "text",
+            "value": "须在明净夜空下有光线实际照达；袋、盒、厚叶遮蔽及阴雨不累计。当前人界天象下累计七个完整合格夜晚的等效暴露量凝成一滴，部分夜晚按实际有效时长累计。生成时扣除七夜进度，已有一滴未取出则不继续积累；瓶盖可随凝成后正常开启。其他界面天象须重新核定，不自动照搬七个当地长夜。"
+          },
+          "description": "凝液取决于实际环境与连续记录。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "canon-heaven-bottle-body-exposure-progress",
+          "predicate": "effective-exposure-nights",
+          "value": {
+            "kind": "number",
+            "value": 0
+          },
+          "description": "已累计的有效晴夜暴露量。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "canon-heaven-bottle-body-bottle-cap-state",
+          "predicate": "container-cap-state",
+          "value": {
+            "kind": "text",
+            "value": "紧闭；尚未完成这一轮凝成。"
+          },
+          "description": "瓶盖当前紧闭。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "canon-heaven-bottle-body-plant-use",
+          "predicate": "plant-use",
+          "value": {
+            "kind": "text",
+            "value": "原液需对已有植物实际施用并扣除所用滴量。已证一滴对一株普通人参隔夜增至百年药性，三乌草反复滴用可继续增龄；稀释分施许多草药只有较弱增长。其他种类与剂量须按实际效果判断，不保证全植物同倍率，也不能无中生株。直接给动物服用有胀体爆裂的实证风险；催熟草药制药另依实际方药。"
+          },
+          "description": "滴液必须真实消耗，作用按对象判断。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "canon-heaven-bottle-body-liquid-storage",
+          "predicate": "liquid-storage",
+          "value": {
+            "kind": "text",
+            "value": "瓶内原液可留存；取出时记数量、容器和时间。普通容器原液一刻即900秒后消散失效，稀释稍久亦会失效，尚无依据的精确延长时间不能凭称述取得。"
+          },
+          "description": "取出凝液须及时使用。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "source-green-condensate",
+          "amount": 0
+        }
+      ],
+      "id": "canon-heaven-bottle-body",
+      "name": "青绿小瓶",
+      "kind": "item",
+      "placement": "source-qixuan-valley-peak-path",
+      "description": "泥土裹着一只颇沉的小瓶，细长颈、圆腹，瓶盖紧闭；擦净处可见青绿色泽与叶状纹饰。"
+    }
+  ],
+  "existingEntityFacts": [
+    {
+      "entityId": "divine-hand-valley",
+      "facts": [
+        {
+          "id": "divine-hand-valley-route-valley-peak-path",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "source-qixuan-valley-peak-path"
+          },
+          "description": "一条山间小路连通谷地与山峰。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "red-water-peak",
+      "facts": [
+        {
+          "id": "red-water-peak-route-valley-peak-path",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "source-qixuan-valley-peak-path"
+          },
+          "description": "一条山间小路连通谷地与山峰。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "qixuan-sect",
+      "facts": [
+        {
+          "id": "qixuan-sect-probation-policy",
+          "predicate": "admission-policy",
+          "value": {
+            "kind": "text",
+            "value": "可对表现突出但未达到该次考核条件者安排记名学习和约定复试；是否合格及内外门分流须由门内考核作出，具体期限随该次承诺记录。"
+          },
+          "description": "记名考察与内外门分流。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "qixuan-flying-bird",
+      "facts": [
+        {
+          "id": "qixuan-flying-bird-recruit-path",
+          "predicate": "recruitment",
+          "value": {
+            "kind": "text",
+            "value": "可接纳内门考核未通过、被门内分派的外门弟子；分派需经过真实安排。"
+          },
+          "description": "外门分流去处。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "qixuan-treasure-gathering",
+      "facts": [
+        {
+          "id": "qixuan-treasure-gathering-recruit-path",
+          "predicate": "recruitment",
+          "value": {
+            "kind": "text",
+            "value": "可接纳内门考核未通过、被门内分派的外门弟子；分派需经过真实安排。"
+          },
+          "description": "外门分流去处。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "qixuan-outer-blade",
+      "facts": [
+        {
+          "id": "qixuan-outer-blade-recruit-path",
+          "predicate": "recruitment",
+          "value": {
+            "kind": "text",
+            "value": "从表现杰出、进一步受训者中选用，待遇较普通外门优厚；有意愿不等于已有职位。"
+          },
+          "description": "进一步训练后可能选入。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "qixuan-four-seas",
+      "facts": [
+        {
+          "id": "qixuan-four-seas-recruit-path",
+          "predicate": "recruitment",
+          "value": {
+            "kind": "text",
+            "value": "招收武林道上已有名望和拿手功夫的人物，不是新入门童子的直接分流去处。"
+          },
+          "description": "招收成名江湖人士。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "qixuan-seven-arts",
+      "facts": [
+        {
+          "id": "qixuan-seven-arts-promotion-expectation",
+          "predicate": "promotion-expectation",
+          "value": {
+            "kind": "text",
+            "value": "门中有人认为学成核心绝技者至少可任护法；这是一种地位预期，实际职责与任命仍由门内决定。"
+          },
+          "description": "学成有受重用的期待。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "mo-herbal-stock",
+      "facts": [
+        {
+          "id": "mo-herbal-stock-prepared-wound-powder-allocation",
+          "predicate": "material-allocation",
+          "value": {
+            "kind": "text",
+            "value": "六十包现存普通药材中有两包已制成外伤药粉，其余五十八包尚未制为该药。制成的两包也计入同一herb-packet库存；每次取用需同时减少相应库存和已制药包数。"
+          },
+          "description": "已制成与未制成药材共用有限总库存。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "mo-herbal-stock-prepared-wound-powder-count",
+          "predicate": "prepared-wound-powder-packets",
+          "value": {
+            "kind": "number",
+            "value": 2
+          },
+          "description": "其中已制成外伤药粉的包数，已包含在总药材库存中。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "mo-herbal-stock-wound-powder-use",
+          "predicate": "use-rule",
+          "value": {
+            "kind": "text",
+            "value": "外敷普通伤口、瘀肿可止血缓痛，仍依伤势清理与恢复；不因此治愈阴魂咒等无关伤病。"
+          },
+          "description": "外伤药粉的适用范围。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ]
+    }
+  ],
+  "placements": [],
+  "entityDescriptions": [],
+  "agentCognition": [
+    {
+      "agent_id": "canon-yue-hall-master",
+      "belief": {
+        "local_entities": [],
+        "bindings": [],
+        "evidence": [
+          {
+            "id": "source-local-admission-practice-experience",
+            "kind": "observation",
+            "description": "自己履行职务与处理既有物资的实际经历。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "source-local-admission-practice",
+            "subjectId": "self",
+            "predicate": "known-practice",
+            "value": {
+              "kind": "text",
+              "value": "可为合适的待选弟子安排记名学习、约定复试及内外门分流；聚宝、飞鸟接纳普通外门，外刃另经训练选拔，四海招成名武人。"
+            },
+            "description": "可为合适的待选弟子安排记名学习、约定复试及内外门分流；聚宝、飞鸟接纳普通外门，外刃另经训练选拔，四海招成名武人。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "source-local-admission-practice-experience"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "agent_id": "canon-mo-juren",
+      "belief": {
+        "local_entities": [],
+        "bindings": [],
+        "evidence": [
+          {
+            "id": "source-wound-powder-supply-experience",
+            "kind": "observation",
+            "description": "自己履行职务与处理既有物资的实际经历。",
+            "sourceId": null,
+            "step": 0
+          }
+        ],
+        "claims": [
+          {
+            "id": "source-wound-powder-supply",
+            "subjectId": "self",
+            "predicate": "known-practice",
+            "value": {
+              "kind": "text",
+              "value": "自己的六十包药材中两包已制为外伤药粉。外伤药可止血缓痛；应按实际伤势与用量处置，药粉用完便须重新炮制。"
+            },
+            "description": "自己的六十包药材中两包已制为外伤药粉。外伤药可止血缓痛；应按实际伤势与用量处置，药粉用完便须重新炮制。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "source-wound-powder-supply-experience"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "periodicProperties": [],
+  "quantityDefinitions": [
+    {
+      "id": "source-green-condensate",
+      "name": "翠绿凝液",
+      "unit": "滴",
+      "production_law_ids": [
+        "source-conditional-natural-conversion"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation",
+        "source-conditional-natural-conversion"
+      ]
+    }
+  ],
+  "laws": [
+    {
+      "id": "source-conditional-natural-conversion",
+      "text": "依赖环境条件的物质转化须核对真实器物、输入、有效经历时长与容量；以物的已记条件及进度产生并更新有限数量。时间经过本身不能跳过遮蔽、天气、材料或容量。分装、稀释不复制有效物质，耗散与使用都应扣减相应数量并记录发生时间。秘密作用条件不因其客观存在而自动成为人物知识。",
+      "severity": "hard"
+    }
+  ],
+  "provenance": {
+    "entity:source-qixuan-valley-peak-path": [
+      "source-supplement-bottle-opening-placement"
+    ],
+    "fact:source-qixuan-valley-peak-path-route-divine-hand-valley": [
+      "source-supplement-bottle-opening-placement"
+    ],
+    "fact:divine-hand-valley-route-valley-peak-path": [
+      "source-supplement-bottle-opening-placement"
+    ],
+    "fact:source-qixuan-valley-peak-path-route-red-water-peak": [
+      "source-supplement-bottle-opening-placement"
+    ],
+    "fact:red-water-peak-route-valley-peak-path": [
+      "source-supplement-bottle-opening-placement"
+    ],
+    "entity:canon-heaven-bottle-body": [
+      "source-supplement-bottle-body",
+      "source-supplement-bottle-opening-placement",
+      "source-supplement-bottle-progress-calibration"
+    ],
+    "fact:canon-heaven-bottle-body-concealment": [
+      "source-supplement-bottle-opening-placement"
+    ],
+    "fact:canon-heaven-bottle-body-material-resistance": [
+      "source-supplement-bottle-body"
+    ],
+    "fact:canon-heaven-bottle-body-condensation-rule": [
+      "source-supplement-bottle-light-conditions",
+      "source-supplement-bottle-progress-calibration"
+    ],
+    "fact:canon-heaven-bottle-body-exposure-progress": [
+      "source-supplement-bottle-progress-calibration"
+    ],
+    "fact:canon-heaven-bottle-body-bottle-cap-state": [
+      "source-supplement-bottle-opening-placement",
+      "source-supplement-bottle-progress-calibration"
+    ],
+    "fact:canon-heaven-bottle-body-plant-use": [
+      "source-supplement-bottle-plant-and-animal-effects"
+    ],
+    "fact:canon-heaven-bottle-body-liquid-storage": [
+      "source-supplement-bottle-storage"
+    ],
+    "law:source-conditional-natural-conversion": [
+      "source-supplement-bottle-light-conditions",
+      "source-supplement-bottle-progress-calibration",
+      "source-supplement-bottle-storage"
+    ],
+    "quantity:source-green-condensate": [
+      "source-supplement-bottle-progress-calibration",
+      "source-supplement-bottle-plant-and-animal-effects",
+      "source-supplement-bottle-storage"
+    ],
+    "fact:qixuan-sect-probation-policy": [
+      "source-supplement-qixuan-probation"
+    ],
+    "fact:qixuan-flying-bird-recruit-path": [
+      "source-supplement-qixuan-outer-appointments"
+    ],
+    "fact:qixuan-treasure-gathering-recruit-path": [
+      "source-supplement-qixuan-outer-appointments"
+    ],
+    "fact:qixuan-outer-blade-recruit-path": [
+      "source-supplement-qixuan-outer-appointments"
+    ],
+    "fact:qixuan-four-seas-recruit-path": [
+      "source-supplement-qixuan-outer-appointments"
+    ],
+    "fact:qixuan-seven-arts-promotion-expectation": [
+      "source-supplement-qixuan-outer-appointments"
+    ],
+    "fact:mo-herbal-stock-prepared-wound-powder-allocation": [
+      "source-supplement-local-supply-calibration"
+    ],
+    "fact:mo-herbal-stock-prepared-wound-powder-count": [
+      "source-supplement-local-supply-calibration"
+    ],
+    "fact:mo-herbal-stock-wound-powder-use": [
+      "source-supplement-mo-wound-powder"
+    ],
+    "cognition:canon-yue-hall-master": [
+      "source-supplement-qixuan-probation",
+      "source-supplement-qixuan-outer-appointments",
+      "source-supplement-local-supply-calibration"
+    ],
+    "cognition:canon-mo-juren": [
+      "source-supplement-mo-wound-powder",
+      "source-supplement-local-supply-calibration"
+    ]
+  }
+}
