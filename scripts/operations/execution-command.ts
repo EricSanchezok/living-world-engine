@@ -38,7 +38,7 @@ function argumentsFor(argv: readonly string[]): {
   trial: number;
 } {
   const executionIds: string[] = [];
-  let database = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v36", "livingworld.sqlite");
+  let database = path.resolve(process.env.LIVINGWORLD_DATA_ROOT ?? ".livingworld-v37", "livingworld.sqlite");
   let output: string | undefined;
   let probeReport: string | undefined;
   let trial = 1;

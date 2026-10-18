@@ -66,6 +66,8 @@ export type CapabilityEffect =
 export interface PreparedDirectAction {
   actionId: string; reads: Record<string, string>; status: ActionOutcome["status"]; summary: string;
   operations: WorldDeltaOperation[]; visibleFactIds: string[]; visibleEntityIds: string[]; deliveredToEntityIds: string[];
+  /** Delivered passive observations that do not request a new private decision. */
+  incidentalRecipientEntityIds: string[];
   /** Perception is bound to the value that actually survives settlement. */
   propertyVisibility: Array<{ factId: string; previousValueHash: string; proposedValueHash: string; previousVisible: boolean; proposedVisible: boolean }>;
   visibleManner: string | null;
@@ -83,7 +85,7 @@ export interface PreparedDirectAction {
   interruptionCandidateIds: string[];
 }
 export interface DirectRuntimeState {
-  kind: "direct-world"; version: 6; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
+  kind: "direct-world"; version: 7; hash: string; worldHash: string; modelCatalogHash: string; registryHash: string;
   models: { decision: string; creation: string; fallback: string };
   modelOverrides: { decision: string | null; creation: string | null; fallback: string | null };
   intents: Record<string, AgentIntentState>;

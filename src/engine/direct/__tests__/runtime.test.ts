@@ -24,7 +24,7 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
   creationResponse?: unknown; creationResponses?: unknown[]; missingCoverage?: boolean; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
   recipient?: string; resolvedRecipient?: string; searchLocation?: string; transferAuthority?: string; transferExecution?: string;
   reactionProgress?: string; playerProgress?: string; duplicateIdentity?: boolean; timerSeconds?: number; timerWakeAgentIds?: string[]; interaction?: string; duration?: string; actorVisible?: boolean; delivery?: boolean;
-  playerAuthorization?: "authorized" | "outside_scope" | "unknown"; mannerSupported?: boolean;
+  playerAuthorization?: "authorized" | "outside_scope" | "unknown"; mannerSupported?: boolean; witnessRelevance?: "reconsider" | "retain";
   worldOutcomes?: Record<string, string>;
   readingOverrides?: Record<string, string>; npcReadings?: unknown[]; factValues?: Record<string, string>; resolvedDuration?: string; resolvedDurations?: Record<string, string>; effectRepresentation?: "existing" | "no_change" | "already" | "expand";
   withMana?: boolean; meterImpacts?: Record<string, string>; inspectedStock?: number; quantityMeasured?: boolean;
@@ -65,6 +65,7 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
         value = options.referenceOnly && (instructions.task ?? instructions).data?.entityId === "hidden-workroom" && !options.referenceVisible ? "hidden" : "visible";
       }
       if (id.includes("actor_visibility")) value = options.actorVisible === false ? "hidden" : "visible";
+      if (id.includes("_relevance")) value = options.witnessRelevance ?? "reconsider";
       if (id.includes("delivery") && options.delivery === false) value = "unavailable";
       if (id.endsWith("_world_expansion")) value = options.introduce ? "introduce" : "none";
       if (id.endsWith("_request_progress")) value = options.reactionProgress ?? "complete";
@@ -470,6 +471,50 @@ describe("direct world through the actual simulation entry", () => {
     expect(ownSummary.split("有人在吗？")).toHaveLength(2);
     expect(readDirectState(result.state.executionState!, result.state).intents.keeper?.wakeReasons.includes("observation")).toBe(delivered);
     expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+
+  it.each(["retain", "reconsider"] as const)("remembers passive events while only waking for relevant ones: %s", async relevance => {
+    const f = await fixture({ operation: "change", target: "door", witnessRelevance: relevance });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("轻轻推开石门"));
+    const packet = result.committed.observations.find(item => item.observerId === "keeper");
+    expect(packet).toBeDefined();
+    expect(Object.values(result.state.agents.keeper!.belief.evidence).some(item => item.sourceId === packet!.id)).toBe(true);
+    expect(readDirectState(result.state.executionState!, result.state).intents.keeper!.wakeReasons.includes("observation")).toBe(relevance === "reconsider");
+    expect(f.transport).toHaveBeenCalledTimes(3);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+
+  it.each(["guard", "broadcast"])("never gates direct speech or a public call as incidental: %s", async recipient => {
+    const f = await fixture({ operation: "speak", recipient, speech: "input", witnessRelevance: "retain" });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("请帮我打开这扇门。"));
+    expect(readDirectState(result.state.executionState!, result.state).intents.keeper!.wakeReasons).toContain("observation");
+    expect(result.committed.observations.find(item => item.observerId === "keeper")?.scene?.speech?.utterance).toBe("请帮我打开这扇门。");
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
+
+  it("reuses a decision across clock-only changes but honors deadlines, timers and new outcomes", async () => {
+    const f = await fixture({ operation: "wait" }); await f.engine.bootstrapAgents();
+    const state = structuredClone(f.engine.snapshot);
+    const control = readDirectState(state.executionState!, state);
+    const decide = () => chooseAction({ state, definition: toWorldRuntimeContract(f.world), control,
+      decisions: new DirectDecisions(f.gateway, control, { workloadId: "wake-regression", batchId: `choice-${f.transport.mock.calls.length}`,
+        runtimeIdentity: { worldHash: state.worldHash, revision: state.revision } }), agentId: "keeper", creationEnabled: false });
+    await decide(); const calls = f.transport.mock.calls.length;
+    state.truth.elapsedSeconds += 10;
+    control.intents.keeper!.wakeReasons = ["dependency-changed"];
+    expect((await decide()).frame).toBeNull();
+    expect(f.transport).toHaveBeenCalledTimes(calls);
+    expect(control.intents.keeper!.dependencies.clock).toBe(contentHash(state.truth.elapsedSeconds));
+    for (const reason of ["deadline", "timer:appointment"]) {
+      control.intents.keeper!.wakeReasons = [reason];
+      await decide();
+    }
+    expect(f.transport).toHaveBeenCalledTimes(calls + 2);
+    control.intents.keeper!.recentOutcomeIds = ["new-result"];
+    await decide();
+    expect(f.transport).toHaveBeenCalledTimes(calls + 3);
   });
 
   it("preserves the NPC's explicit observation target instead of substituting inventory", async () => {

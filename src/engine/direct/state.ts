@@ -20,7 +20,8 @@ export function sealDirectState(value: Omit<DirectRuntimeState, "hash"> | Direct
 }
 export function readDirectState(value: AlgorithmExecutionState, state: Readonly<SimulationState>): DirectRuntimeState {
   const data = value.data as unknown as DirectRuntimeState;
-  if (data.kind !== "direct-world" || data.version !== 6 || data.worldHash !== state.worldHash ||
+  if (data.kind !== "direct-world" || data.version !== 7 || data.worldHash !== state.worldHash ||
+    Object.values(data.prepared).some(prepared => !Array.isArray(prepared.incidentalRecipientEntityIds)) ||
     Object.values(data.prepared).some(prepared => prepared.visibleManner !== null && typeof prepared.visibleManner !== "string") ||
     data.hash !== contentHash({ ...data, hash: "" })) throw new Error("invalid direct runtime state");
   return structuredClone(data);
@@ -29,6 +30,10 @@ export function readDependency(state: Readonly<SimulationState>, key: string): u
   const [domain, ...parts] = key.split(":"); const id = parts.join(":");
   if (domain === "catalog" && id === "entities") return establishedEntityDirectory(state);
   if (domain === "agent") return state.agents[id] ?? null;
+  if (domain === "concerns") {
+    const character = state.agents[id]?.character;
+    return character ? { goals: character.goals, commitments: character.commitments } : null;
+  }
   if (domain === "evidence") return state.agents[id] ? orderedValues(state.agents[id]!.belief.evidence) : null;
   if (domain === "clock") return state.truth.elapsedSeconds;
   if (domain === "collections") return {

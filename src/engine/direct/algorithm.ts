@@ -32,7 +32,7 @@ import { withFreshMemory } from "../cognition/memory";
 
 export interface DirectWorldConfig extends CapabilityModelOverrides { creationEnabled: boolean }
 export const DIRECT_WORLD_CONFIG: DirectWorldConfig = { decision: null, creation: null, fallback: null, creationEnabled: true };
-export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "18", config: config as unknown as JsonObject });
+export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "19", config: config as unknown as JsonObject });
 export const directWorldAlgorithmRef = (config = DIRECT_WORLD_CONFIG) => algorithmRef(directWorldManifest(config));
 
 function components(state: Readonly<SimulationState>, frames: ActionFrame[]): ActionFrame[][] {
@@ -59,7 +59,7 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     const registryHash = context.modelScope.modelRegistrySnapshotHash ?? (await this.provider.modelRegistryDiagnostics?.())?.registry.currentHash;
     if (!registryHash) throw new Error("direct runtime requires the captured model registry");
     const modelOverrides = { decision: this.config.decision, creation: this.config.creation, fallback: this.config.fallback };
-    const control = sealDirectState({ kind: "direct-world", version: 6, worldHash: input.state.worldHash,
+    const control = sealDirectState({ kind: "direct-world", version: 7, worldHash: input.state.worldHash,
       modelCatalogHash: this.provider.catalog.hash, registryHash, models: resolveCapabilityModels(input.definition.modelProfiles, modelOverrides), modelOverrides,
       intents: Object.fromEntries(Object.keys(input.state.agents).sort().map(id => [id, readyIntent()])),
       activities: [], prepared: {}, capabilities: [], cache: {}, dependencies: {}, completedSubmissionIds: [] });
@@ -176,7 +176,7 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
       control.prepared[frame.id] = { actionId: frame.id, reads: {},
         status: "succeeded", visibleManner: null, summary: "你复核了自己已有的记录。", operations: [], visibleFactIds: [], propertyVisibility: [], visibleEntityIds: [], namedEntityIds: [], inspectedQuantityIds: [],
         actorOnlyFactIds: [], actorOnlyEntityIds: [],
-        deliveredToEntityIds: [], randomRequests: [], randomBindings: [], sharedClaims: [], ongoing: false, requestProgress: "complete", interruptActivityIds: [], interruptionCandidateIds: [] };
+        deliveredToEntityIds: [], incidentalRecipientEntityIds: [], randomRequests: [], randomBindings: [], sharedClaims: [], ongoing: false, requestProgress: "complete", interruptActivityIds: [], interruptionCandidateIds: [] };
     }
     const needsPreparation = control.activities.filter(frame => frame.kind !== "reflect" && frame.activityStatus !== "paused" && (frame.dueAtSeconds !== null || frame.durationSeconds === 0) &&
       (!control.prepared[frame.id] || Object.entries(control.prepared[frame.id]!.reads).some(([key, hash]) => contentHash(readDependency(source, key)) !== hash) ||
@@ -233,6 +233,7 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     await context.stages?.before(executionStage("direct-settlement"));
     const { settlements, rng, randomRequests, randomResults } = settlePreparedActions(source, control, due, atSeconds);
     const deliveredInterruptionCandidates = Object.fromEntries(settlements.map(item => [item.frame.id, control.prepared[item.frame.id]!.interruptActivityIds]));
+    const incidentalRecipients = Object.fromEntries(settlements.map(item => [item.frame.id, control.prepared[item.frame.id]!.incidentalRecipientEntityIds]));
     const completed = settlements.map(item => item.frame), completedActionIds = completed.map(frame => frame.id);
     const ongoing = completed.filter(frame => control.prepared[frame.id]!.ongoing && settlements.find(item => item.frame.id === frame.id)?.outcome.status === "succeeded");
     control.activities = control.activities.filter(frame => !completedActionIds.includes(frame.id) || ongoing.some(item => item.id === frame.id)).map(frame => structuredClone(frame));
@@ -304,7 +305,7 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     for (const observation of perception.observations) {
       const owner = perceptionState.agents[observation.observerId]!;
       const index = events.findIndex(event => observation.sourceEventIds.includes(event.id)); const frame = settlements[index]?.frame;
-      if (frame && frame.actorId !== owner.id && !Object.values(owner.belief.evidence).some(evidence =>
+      if (frame && frame.actorId !== owner.id && !incidentalRecipients[frame.id]?.includes(owner.entityId) && !Object.values(owner.belief.evidence).some(evidence =>
         evidence.step === owner.observationCursorStep && evidence.description === observation.summary)) {
         const policy = input.policyRoster[owner.id];
         // Newly admitted Agents receive their model policy at the host commit boundary.

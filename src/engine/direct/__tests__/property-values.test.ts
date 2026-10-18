@@ -333,7 +333,7 @@ describe("action-bound property values through the model HTTP and simulation ent
     const pending = await f.act("花一枚灵石记录检修结果，写满一分钟。");
     expect(pending.state.truth.elapsedSeconds).toBe(1);
     expect(pending.committed.outcomes).toEqual([]);
-    expect(pending.control.version).toBe(6);
+    expect(pending.control.version).toBe(7);
     const control = JSON.parse(JSON.stringify(pending.control)) as typeof pending.control;
     const frame = control.activities[0]!;
     expect(control.prepared[frame.id]!.propertyVisibility).toHaveLength(1);

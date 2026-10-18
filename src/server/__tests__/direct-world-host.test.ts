@@ -1082,7 +1082,7 @@ describe("direct world through persistent WorldHost", () => {
       let host = makeHost();
       const created = await host.createInstance({ worldId: world.id, start: { kind: "observer" } });
       const id = created.summary.id;
-      expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 36, executionAlgorithm: DEFAULT_ALGORITHM_REF,
+      expect(database.readInstance(id).document).toMatchObject({ schemaVersion: 37, executionAlgorithm: DEFAULT_ALGORITHM_REF,
         state: { schemaVersion: 23, executionState: { data: { kind: "direct-world" } } } });
       expect(f.transport).not.toHaveBeenCalled();
       await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });

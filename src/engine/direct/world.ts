@@ -1,5 +1,5 @@
 import { createWorldExpansion, type WorldExpansion } from "./expansion";
-import { canHaveWitnesses, contactQuestions, contactPolicy } from "./contact";
+import { canHaveWitnesses, contactQuestions, contactPolicy, isPassiveWitness } from "./contact";
 import type { ActionOutcome, CausalSource, FactValue, ModelExecutionAudit, SimulationState, WorldDeltaOperation, WorldFact, WorldEntity } from "../contracts/model";
 import type { WorldRuntimeContract } from "../runtime/world-definition";
 import type { ExternalActionInput } from "../runtime/execution";
@@ -133,6 +133,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
     }
   };
   const candidates = new Map<string, string[]>();
+  const recipientConcerns: Record<string, JsonValue> = {};
   const randomOptions = new Map<string, { distributionId: string; stepId: string; applies: string; facts: WorldFact[] }>();
   const durations = [...new Set([ ...frames.map(frame => frame.durationSeconds),
     ...orderedValues(state.truth.mechanics.temporalProfiles).flatMap(profile => profile.kind === "fixed" ? [profile.durationSeconds] : []),
@@ -318,9 +319,21 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
       const contact = contactQuestions(frame, recipient, state.truth.placements[recipient] === state.truth.placements[frame.actorEntityId]);
       questions[`${prefix}_delivery${ordinal}`] = contact.delivery;
       questions[`${prefix}_actor_visibility${ordinal}`] = contact.actorVisibility;
+      const witness = Object.values(state.agents).find(agent => agent.entityId === recipient);
+      if (witness && isPassiveWitness(frame, recipient)) {
+        questions[`${prefix}_relevance${ordinal}`] = contact.relevance;
+        recipientConcerns[recipient] = {
+          goals: Object.values(witness.character.goals).filter(goal => goal.status === "active"),
+          commitments: Object.values(witness.character.commitments),
+          work: decisions.control.activities.filter(activity => activity.actorId === witness.id)
+            .map(activity => ({ attempt: activity.expression?.attempt ?? activity.proposal.rawText, interruptCondition: activity.interruptCondition })),
+          waiting: decisions.control.intents[witness.id]?.wait ?? null,
+        } as unknown as JsonValue;
+        Object.assign(view.reads, captureDependencies(state, [`concerns:${witness.id}`]));
+      }
     }
   }
-  if ([...candidates.values()].some(recipients => recipients.length)) Object.assign(view.state as object, { contactPolicy });
+  if ([...candidates.values()].some(recipients => recipients.length)) Object.assign(view.state as object, { contactPolicy, recipientConcerns });
   let answers = await decisions.ask(null, view.state, view.reads, questions);
   if (groupedEffects.size) answers = { ...answers, ...Object.fromEntries([...groupedEffects].map(([id, grouped]) => [id,
     { type: "choice" as const, choice: grouped.decode(answers), probabilities: null, confidence: null }])) };
@@ -598,6 +611,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         ...(["succeeded", "partial"].includes(status) ? expansion?.facts ?? [] : []),
         ...operations.flatMap(operation => operation.kind === "set_fact" && operation.fact.predicate === "proximity" ? [operation.fact] : [])].map(fact => fact.id),
       visibleEntityIds: ["succeeded", "partial"].includes(status) ? [...visibleEntities, ...(expansion?.entities ?? [])].map(entity => entity.id) : [], deliveredToEntityIds,
+      incidentalRecipientEntityIds: (candidates.get(prefix) ?? []).filter((recipient, ordinal) =>
+        deliveredToEntityIds.includes(recipient) && isPassiveWitness(frame, recipient) && answers[`${prefix}_relevance${ordinal}`]?.type === "choice" && selected(answers, `${prefix}_relevance${ordinal}`) === "retain"),
       namedEntityIds: [...entityNames].filter(([id]) => id.startsWith(`${prefix}_`) && selected(answers, id) === "named").map(([, entityId]) => entityId),
       actorVisibleToEntityIds: deliveredToEntityIds.filter(recipient => expansion?.actorVisibleToEntityIds.includes(recipient) || (candidates.get(prefix) ?? []).includes(recipient) && selected(answers,
         `${prefix}_actor_visibility${(candidates.get(prefix) ?? []).indexOf(recipient)}`) === "visible"),

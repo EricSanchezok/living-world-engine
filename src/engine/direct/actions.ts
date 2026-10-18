@@ -260,9 +260,14 @@ export async function chooseAction(input: { state: Readonly<SimulationState>; de
     if (["recipient", "target", "search_location"].includes(id)) item.instructions = { ...item.instructions as Record<string, JsonValue>,
       referenceRule: "Resolve the intended local identity against the actual published exchanges, their stable mentions and delivered speakers. Corrections may replace a preceding focus. A prior unsuccessful search does not automatically override the current conversational addressee. If more than one interpretation genuinely remains, preserve uncertainty instead of substituting another person." };
   }
-  const inputHash = contentHash({ perspective: view.state, submittedAction: external ?? null, goal: intent.goalId });
-  if (!external && inputHash === intent.lastInputHash) {
+  const decisionPerspective = { ...view.state as Record<string, JsonValue> };
+  delete decisionPerspective.elapsedSeconds;
+  const inputHash = contentHash({ perspective: decisionPerspective, submittedAction: external ?? null, goal: intent.goalId,
+    recentOutcomeIds: intent.recentOutcomeIds, causeActionId: intent.causeActionId });
+  const temporalWake = intent.wakeReasons.some(reason => reason === "deadline" || reason.startsWith("timer:"));
+  if (!external && !temporalWake && inputHash === intent.lastInputHash) {
     intent.status = "waiting"; intent.wakeReasons = []; intent.wait = { entityIds: [], untilSeconds: null, reason: "same-input" };
+    intent.dependencies = view.reads;
     return { frame: null, audits: [] as ModelExecutionAudit[], reads: view.reads, cognition: null };
   }
   const reading = jointInterpretation ? await readAction({ decisions, agentId, context, questions, autonomous: !external,
