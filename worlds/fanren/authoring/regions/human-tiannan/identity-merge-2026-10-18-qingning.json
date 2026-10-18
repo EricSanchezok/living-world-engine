@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "source_completion/direct-source-identity/2026-10-18",
+  "apiCalls": 0,
+  "status": "source-only-identity-merge",
+  "retiredId": "tiannan-qingning-mirror",
+  "canonicalId": "innerstar-qingning-mirror-reference",
+  "statement": "后文明确回忆韩在血色试炼所得的青凝镜，前文同一韩持镜在古长老战中毁坏。两区资料指同一器物；凝光宝镜为其原型古宝，保持独立。",
+  "oldSubject": {
+    "id": "tiannan-qingning-mirror",
+    "label": "青凝镜",
+    "kind": "source-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "tiannan-sister-battle-equipment"
+    ],
+    "aliases": [],
+    "reason": "凝光宝镜简化法器，绝非同件原古宝。"
+  },
+  "canonicalSubject": {
+    "id": "innerstar-qingning-mirror-reference",
+    "label": "青凝镜",
+    "kind": "item",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-gu-battle-and-loot"
+    ],
+    "aliases": [],
+    "reason": "所述后期人物或具体物件，开篇出生、所在、所学和持有不足以唯一定位；保留资料身份，不生成同名活体或财物。"
+  },
+  "evidence": [
+    {
+      "chapterId": "qq-23761459",
+      "chapterSha256": "96ac35e2e6dda836dc98107496041ed83d6cf54200c5190ef178681c05dd0a60",
+      "start": 756,
+      "end": 1316,
+      "anchorSha256": "731120b096eddb40bf33200af9413a3c982da97bd1a2eb66303fab45461fb06b"
+    },
+    {
+      "chapterId": "qq-21856764",
+      "chapterSha256": "462e2223c47003b40e7cdfffc651a38792d5d8dea1184a7a0b901ce9a940b223",
+      "start": 737,
+      "end": 1327,
+      "anchorSha256": "7a70a5eda7f7d18f9c51e364c39e800e61b524b9b4aaa9358c2a7273f2a1c33a"
+    }
+  ],
+  "changes": [
+    {
+      "candidateId": "batch-0108-object-0032",
+      "before": {
+        "candidateId": "batch-0108-object-0032",
+        "batchId": "batch-0108",
+        "reportHash": "e2a3b8ff553d68961b7a66f3e8423adfb614a255db22e963dca0b67fce95ee2c",
+        "disposition": "corrected",
+        "targetIds": [
+          "tiannan-qingning-mirror",
+          "tiannan-sister-battle-equipment"
+        ],
+        "reason": "青凝为低阶仿制而非原镜改名。",
+        "evidence": [
+          {
+            "chapterId": "qq-23761459",
+            "chapterSha256": "96ac35e2e6dda836dc98107496041ed83d6cf54200c5190ef178681c05dd0a60",
+            "start": 966,
+            "end": 976,
+            "anchorSha256": "f933a764b0906cd6ad3b318fa005554e1d8172b69035248f79c011d3253ddd19"
+          },
+          {
+            "chapterId": "qq-23761459",
+            "chapterSha256": "96ac35e2e6dda836dc98107496041ed83d6cf54200c5190ef178681c05dd0a60",
+            "start": 984,
+            "end": 991,
+            "anchorSha256": "31cd05e85fdc7b1132a2601eededb8681a8b639e57cf523db11b4e51aeffaae2"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      },
+      "after": {
+        "candidateId": "batch-0108-object-0032",
+        "batchId": "batch-0108",
+        "reportHash": "e2a3b8ff553d68961b7a66f3e8423adfb614a255db22e963dca0b67fce95ee2c",
+        "disposition": "corrected",
+        "targetIds": [
+          "innerstar-qingning-mirror-reference",
+          "tiannan-sister-battle-equipment"
+        ],
+        "reason": "青凝为低阶仿制而非原镜改名。 跨区同物复核：此青凝镜即韩早年持有而后毁于古长老一战的简化法器，唯一资料身份复用 innerstar-qingning-mirror-reference；不是掩月师姐凝光宝镜。",
+        "evidence": [
+          {
+            "chapterId": "qq-23761459",
+            "chapterSha256": "96ac35e2e6dda836dc98107496041ed83d6cf54200c5190ef178681c05dd0a60",
+            "start": 966,
+            "end": 976,
+            "anchorSha256": "f933a764b0906cd6ad3b318fa005554e1d8172b69035248f79c011d3253ddd19"
+          },
+          {
+            "chapterId": "qq-23761459",
+            "chapterSha256": "96ac35e2e6dda836dc98107496041ed83d6cf54200c5190ef178681c05dd0a60",
+            "start": 984,
+            "end": 991,
+            "anchorSha256": "31cd05e85fdc7b1132a2601eededb8681a8b639e57cf523db11b4e51aeffaae2"
+          }
+        ],
+        "uncertainty": null,
+        "destinationModule": null
+      }
+    }
+  ],
+  "beforeDispositionHash": "15b37d5b949d1388730ea79e0f02b0e39d2a2800e991f55195667691bbd298b1",
+  "afterDispositionHash": "b237a88b6e9d00db811ec323ba22b1ebd77a6e212dda81a77a176a7aa4cae4d1",
+  "subjectsHash": "df00c570cc20fa239732896fc717f9cf0f1e7d8d9e6071aba92a35f09f065b57",
+  "moduleHash": "aa18696bed2e45c8c7a9cf75fe3cc1fd726426e7c29a6a56b861d6aa0b525956",
+  "claimsHash": "8ad7a422f97f5c829ed3f6e0df678f0c4e982f10710241d468387e9c1393986e",
+  "validation": {
+    "moduleId": "human-tiannan",
+    "candidates": 2961,
+    "counts": {
+      "adopted": 72,
+      "corrected": 2177,
+      "history-only": 13,
+      "later-only": 693,
+      "bounded-uncertainty": 6,
+      "transferred": 0,
+      "pending": 0
+    },
+    "completed": 2961,
+    "unresolved": 0,
+    "boundedUncertainty": 6,
+    "approvedForRuntime": false,
+    "reportHash": "b237a88b6e9d00db811ec323ba22b1ebd77a6e212dda81a77a176a7aa4cae4d1"
+  },
+  "limitations": [
+    "只归一来源档案，不改变任何开篇实体、库存、所有权或认知。",
+    "保留原始提取/模型审校及原历史单元审计，其旧ID为当时快照，由本报告显式取代活动引用。",
+    "原Tiannan声明继续描述简化品和古宝原型区别；当前运行验收资格不升级。"
+  ]
+}
