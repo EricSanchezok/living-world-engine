@@ -892,11 +892,13 @@ describe("direct world through persistent WorldHost", () => {
       await host.drainNarratives(id);
       const failed = database.readInstance(id).document.state;
       expect(playerReadings).toBe(2);
-      expect(failed.truth.elapsedSeconds).toBe(3);
+      // The continuation is checked alongside the reply at the first boundary.
+      expect(failed.truth.elapsedSeconds).toBe(2);
+      expect(failed.truth.timers["second-clock"]?.status).toBe("scheduled");
       expect(readDirectState(failed.executionState!, failed)).toMatchObject({ intents: { player: { status: "failed" } },
         activities: [expect.objectContaining({ actorId: "keeper", dueAtSeconds: 61 })] });
       const restarted = new WorldHost(options);
-      await restarted.advance(id, { expectedRevision: failed.revision, trigger: "realtime" });
+      await restarted.advance(id, { expectedRevision: failed.revision, trigger: "batch", steps: 2 });
       for (let i = 0; i < 250; i++) {
         if (database.readInstance(id).document.state.truth.elapsedSeconds === 61 && restarted.instance(id).run?.status === "completed") break;
         await new Promise(resolve => setTimeout(resolve, 10));

@@ -32,7 +32,7 @@ import { withFreshMemory } from "../cognition/memory";
 
 export interface DirectWorldConfig extends CapabilityModelOverrides { creationEnabled: boolean }
 export const DIRECT_WORLD_CONFIG: DirectWorldConfig = { decision: null, creation: null, fallback: null, creationEnabled: true };
-export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "19", config: config as unknown as JsonObject });
+export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "20", config: config as unknown as JsonObject });
 export const directWorldAlgorithmRef = (config = DIRECT_WORLD_CONFIG) => algorithmRef(directWorldManifest(config));
 
 function components(state: Readonly<SimulationState>, frames: ActionFrame[]): ActionFrame[][] {
@@ -129,10 +129,12 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     const pendingPlayers = Object.entries(control.intents).filter(([id, intent]) => input.policyRoster[id]?.kind === "external" && intent.status === "ready" && intent.activeSubmission).map(([id]) => id);
     const participantWork = foreground.size > 0 || Object.entries(control.intents).some(([id, intent]) =>
       input.policyRoster[id]?.kind === "external" && intent.activeSubmission !== null);
-    // Active replies still hold the turn after the player's own action settles.
-    // Their next clock boundary must not admit unrelated ready agents.
-    const owners = submissions.length ? submissions.map(action => action.agentId) : reactions.length ? reactions.map(([id]) => id)
-      : pendingPlayers.length ? pendingPlayers : participantWork ? [] : ready.map(([id]) => id);
+    // Admit authorized continuations alongside eligible replies. Local work must
+    // not starve the participant's next step or delay admission of its deadline.
+    // Replies still hold the turn without admitting unrelated ready agents.
+    const continuations = [...pendingPlayers, ...reactions.map(([id]) => id)];
+    const owners = submissions.length ? submissions.map(action => action.agentId)
+      : continuations.length ? continuations : participantWork ? [] : ready.map(([id]) => id);
     const select = (ids: string[]) => Promise.allSettled(ids.map(async agentId => ({ agentId,
       result: await withFreshMemory(() => chooseAction({ state: source, definition: authority, control, decisions, agentId,
         external: input.policyRoster[agentId]?.kind === "external"

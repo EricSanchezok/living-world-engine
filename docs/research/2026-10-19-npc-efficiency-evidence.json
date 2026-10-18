@@ -1,0 +1,606 @@
+{
+  "measurement": "provider-reported usage from model.audit.persisted; reasoning is included in output, cacheRead is included in input; missing in-flight usage is unknown",
+  "seed": 20261019,
+  "origin": "herbal-apprentice",
+  "runs": [
+    {
+      "label": "baseline",
+      "sourceCommit": "fdbb4a546aa86321cd67a60da9d407f1fac7a590",
+      "sourceDiffHash": null,
+      "instanceId": "4c02b175-1b01-4463-947d-3f47cd7d1be6",
+      "worldHash": "sha256:d1486d1b975f28887fa4a8872c2c9a12945b871abe1d51cd51309cb07d5d3721",
+      "algorithm": {
+        "role": "world-execution",
+        "id": "direct-world",
+        "version": "18",
+        "contractVersion": 15,
+        "config": {
+          "decision": null,
+          "creation": null,
+          "fallback": null,
+          "creationEnabled": true
+        },
+        "children": {},
+        "manifestHash": "787ae13ee4bd5384bd20843cc38a44e90c4475669a0ada9c1a3b70cb0ab3f3c4"
+      },
+      "population": 852,
+      "limits": null,
+      "durationSeconds": 583.251,
+      "failure": "Action interpretation failed player authorization (outside_scope); no candidate action was executed.",
+      "completedTurns": 1,
+      "physicalCalls": 33,
+      "auditedCalls": 32,
+      "usageUnknownCalls": 1,
+      "usageByProvider": {
+        "deepseek": {
+          "calls": 32,
+          "input": 985931,
+          "output": 126826,
+          "reasoning": 115310,
+          "cacheRead": 43264
+        }
+      },
+      "usageByStage": {
+        "player-interpretation": {
+          "calls": 3,
+          "input": 50886,
+          "output": 2611,
+          "reasoning": 1395,
+          "cacheRead": 8576
+        },
+        "npc-interpretation": {
+          "calls": 8,
+          "input": 93356,
+          "output": 3966,
+          "reasoning": 2217,
+          "cacheRead": 8448
+        },
+        "world-adjudication": {
+          "calls": 12,
+          "input": 760295,
+          "output": 110328,
+          "reasoning": 102834,
+          "cacheRead": 5888
+        },
+        "narrative-generation": {
+          "calls": 3,
+          "input": 27752,
+          "output": 1270,
+          "reasoning": 757,
+          "cacheRead": 6912
+        },
+        "publication-check": {
+          "calls": 5,
+          "input": 52094,
+          "output": 8004,
+          "reasoning": 7734,
+          "cacheRead": 12672
+        },
+        "direct-capability-5172bf53afd20c40dcc912c84a5e9b3f33e6368ea3889f7e652e227c4bd39666": {
+          "calls": 1,
+          "input": 1548,
+          "output": 647,
+          "reasoning": 373,
+          "cacheRead": 768
+        }
+      },
+      "models": [
+        "deepseek-flash"
+      ],
+      "narrativeStatuses": [
+        "complete",
+        "complete",
+        "complete",
+        "complete",
+        "complete",
+        "generating"
+      ],
+      "firstComparableTurn": {
+        "timing": {
+          "text": "我把周荃刚才想单买草药的报价告诉师父陈守拙，请他决定是否愿意出售；受托药材先不交给周荃。",
+          "seconds": 436.755,
+          "fromRevision": 1,
+          "toRevision": 7,
+          "worldSeconds": 360
+        },
+        "usageByProvider": {
+          "deepseek": {
+            "calls": 23,
+            "input": 538374,
+            "output": 87116,
+            "reasoning": 82706,
+            "cacheRead": 34432
+          }
+        },
+        "usageByStage": {
+          "player-interpretation": {
+            "calls": 2,
+            "input": 31160,
+            "output": 1744,
+            "reasoning": 923,
+            "cacheRead": 5888
+          },
+          "npc-interpretation": {
+            "calls": 5,
+            "input": 55424,
+            "output": 2232,
+            "reasoning": 1176,
+            "cacheRead": 5376
+          },
+          "world-adjudication": {
+            "calls": 8,
+            "input": 371944,
+            "output": 73866,
+            "reasoning": 72116,
+            "cacheRead": 3584
+          },
+          "narrative-generation": {
+            "calls": 3,
+            "input": 27752,
+            "output": 1270,
+            "reasoning": 757,
+            "cacheRead": 6912
+          },
+          "publication-check": {
+            "calls": 5,
+            "input": 52094,
+            "output": 8004,
+            "reasoning": 7734,
+            "cacheRead": 12672
+          }
+        }
+      },
+      "finalRevision": 8,
+      "finalWorldSeconds": 420,
+      "participantWaits": [],
+      "artifacts": {
+        "report.json": "7af26464f6e77622f702ba89b7c5fa4e3cee504ccac00d88554b14c4b4a60ab2",
+        "summary.json": "6c42cedbf1b7c35759960a33c31b515bacde4289449a2a678fd764d3981c4bf0",
+        "summary-turn1.json": "5c6d9c7caa5604bf22cc64eaa03ef1afd13d2beacb505c16e4312521f3e64268",
+        "final.json": "b23e73a886a3130569116206cb7386e5d208a2299b03f6934a98886d931258d5"
+      },
+      "producerLabel": "merged main before changes"
+    },
+    {
+      "label": "optimized",
+      "sourceCommit": "ea703706f306eb9da04d2b0215b168e786bd2d89",
+      "sourceDiffHash": "7da9062f26db88b0fc9ef7ed4fefc6b1405b8427dcf7d84a813a94e597cb631a",
+      "instanceId": "09dee690-9ed8-4965-94b7-946cf7e018d7",
+      "worldHash": "sha256:26142d110076bf522db42967d091e443f56b5819dc40d67169a28bd131f49710",
+      "algorithm": {
+        "role": "world-execution",
+        "id": "direct-world",
+        "version": "19",
+        "contractVersion": 15,
+        "config": {
+          "decision": null,
+          "creation": null,
+          "fallback": null,
+          "creationEnabled": true
+        },
+        "children": {},
+        "manifestHash": "3c03937e7b522d9a44c96fac1968ad74f66957226b47fba6deb2a429bd55adcf"
+      },
+      "population": 852,
+      "limits": null,
+      "durationSeconds": 614.899,
+      "failure": "playtest observation budget reached",
+      "completedTurns": 0,
+      "physicalCalls": 24,
+      "auditedCalls": 24,
+      "usageUnknownCalls": 0,
+      "usageByProvider": {
+        "deepseek": {
+          "calls": 24,
+          "input": 523455,
+          "output": 95044,
+          "reasoning": 89080,
+          "cacheRead": 58240
+        }
+      },
+      "usageByStage": {
+        "player-interpretation": {
+          "calls": 1,
+          "input": 14421,
+          "output": 793,
+          "reasoning": 389,
+          "cacheRead": 8320
+        },
+        "npc-interpretation": {
+          "calls": 10,
+          "input": 144448,
+          "output": 2389,
+          "reasoning": 0,
+          "cacheRead": 30592
+        },
+        "world-adjudication": {
+          "calls": 6,
+          "input": 283284,
+          "output": 78136,
+          "reasoning": 75875,
+          "cacheRead": 2816
+        },
+        "narrative-generation": {
+          "calls": 3,
+          "input": 32536,
+          "output": 645,
+          "reasoning": 0,
+          "cacheRead": 6016
+        },
+        "publication-check": {
+          "calls": 4,
+          "input": 48766,
+          "output": 13081,
+          "reasoning": 12816,
+          "cacheRead": 10496
+        }
+      },
+      "models": [
+        "deepseek-flash"
+      ],
+      "narrativeStatuses": [
+        "fallback",
+        "complete",
+        "complete"
+      ],
+      "firstComparableTurn": null,
+      "finalRevision": 8,
+      "finalWorldSeconds": 600,
+      "participantWaits": [],
+      "artifacts": {
+        "report.json": "06cc7420ec20ae8bb7302ba02b9c93f8ceecf7722e1b1dd796d1df2a54ef9993",
+        "summary.json": "c8d649f3d629190c6d344a0a9baf9c27815db00cb221748bb47c9c2711250357",
+        "final.json": "37afc80f4d9e9f4d6b4d437b7776b349f25a66559d90be870f6d6771ca658aab"
+      },
+      "producerLabel": "rejected non-thinking NPC probe"
+    },
+    {
+      "label": "final",
+      "sourceCommit": "ea703706f306eb9da04d2b0215b168e786bd2d89",
+      "sourceDiffHash": "8cb66d4c242e440afe2b21dca94a18d6e66ba48b08846bceb9346db99501f830",
+      "instanceId": "050a6c2b-f1e6-49a8-b92a-4a68c307e4a9",
+      "worldHash": "sha256:26142d110076bf522db42967d091e443f56b5819dc40d67169a28bd131f49710",
+      "algorithm": {
+        "role": "world-execution",
+        "id": "direct-world",
+        "version": "19",
+        "contractVersion": 15,
+        "config": {
+          "decision": null,
+          "creation": null,
+          "fallback": null,
+          "creationEnabled": true
+        },
+        "children": {},
+        "manifestHash": "3c03937e7b522d9a44c96fac1968ad74f66957226b47fba6deb2a429bd55adcf"
+      },
+      "population": 852,
+      "limits": {
+        "cap": 70,
+        "deadlineMs": 1200000
+      },
+      "durationSeconds": 1100.058,
+      "failure": "playtest observation budget reached",
+      "completedTurns": 1,
+      "physicalCalls": 70,
+      "auditedCalls": 67,
+      "usageUnknownCalls": 3,
+      "usageByProvider": {
+        "deepseek": {
+          "calls": 67,
+          "input": 1658113,
+          "output": 247434,
+          "reasoning": 225289,
+          "cacheRead": 201984
+        }
+      },
+      "usageByStage": {
+        "player-interpretation": {
+          "calls": 2,
+          "input": 33217,
+          "output": 1502,
+          "reasoning": 755,
+          "cacheRead": 11008
+        },
+        "npc-interpretation": {
+          "calls": 22,
+          "input": 350577,
+          "output": 13421,
+          "reasoning": 7576,
+          "cacheRead": 104704
+        },
+        "world-adjudication": {
+          "calls": 15,
+          "input": 973457,
+          "output": 176920,
+          "reasoning": 166405,
+          "cacheRead": 7936
+        },
+        "narrative-generation": {
+          "calls": 10,
+          "input": 120930,
+          "output": 3366,
+          "reasoning": 1171,
+          "cacheRead": 29696
+        },
+        "publication-check": {
+          "calls": 13,
+          "input": 165625,
+          "output": 42994,
+          "reasoning": 42241,
+          "cacheRead": 47104
+        },
+        "memory-compression": {
+          "calls": 5,
+          "input": 14307,
+          "output": 9231,
+          "reasoning": 7141,
+          "cacheRead": 1536
+        }
+      },
+      "models": [
+        "deepseek-flash"
+      ],
+      "narrativeStatuses": [
+        "complete",
+        "complete",
+        "fallback",
+        "complete",
+        "fallback",
+        "complete",
+        "generating"
+      ],
+      "firstComparableTurn": {
+        "timing": {
+          "text": "我把周荃刚才想单买草药的报价告诉师父陈守拙，请他决定是否愿意出售；受托药材先不交给周荃。",
+          "startedAt": "2026-10-18T17:01:14.911Z",
+          "endedAt": "2026-10-18T17:07:48.709Z",
+          "physicalCalls": 16,
+          "seconds": 393.798,
+          "fromRevision": 1,
+          "toRevision": 5,
+          "worldSeconds": 120
+        },
+        "usageByProvider": {
+          "deepseek": {
+            "calls": 16,
+            "input": 327456,
+            "output": 65001,
+            "reasoning": 60632,
+            "cacheRead": 59904
+          }
+        },
+        "usageByStage": {
+          "player-interpretation": {
+            "calls": 1,
+            "input": 14430,
+            "output": 719,
+            "reasoning": 339,
+            "cacheRead": 8320
+          },
+          "npc-interpretation": {
+            "calls": 6,
+            "input": 62216,
+            "output": 2979,
+            "reasoning": 1696,
+            "cacheRead": 34560
+          },
+          "world-adjudication": {
+            "calls": 4,
+            "input": 201172,
+            "output": 53354,
+            "reasoning": 51060,
+            "cacheRead": 1792
+          },
+          "narrative-generation": {
+            "calls": 2,
+            "input": 18132,
+            "output": 250,
+            "reasoning": 0,
+            "cacheRead": 5888
+          },
+          "publication-check": {
+            "calls": 3,
+            "input": 31506,
+            "output": 7699,
+            "reasoning": 7537,
+            "cacheRead": 9344
+          }
+        }
+      },
+      "finalRevision": 11,
+      "finalWorldSeconds": 720,
+      "participantWaits": [],
+      "artifacts": {
+        "report.json": "9d3deadbb0cd5b3030fcb350ecfb0e863afd0efa8067fbae9586c76353563fe5",
+        "summary.json": "7704f08b1abe853cdcaaa07dbbe6d4d9c3073edd5d1e9e4637ea6a816e96ed17",
+        "summary-turn1.json": "8c94892cafede8467caf1bbf8eb3d13d49e1676224600e09dc78dfdf923586f3",
+        "final.json": "73d8d09ecc3dc95da78d8053f8b5f74b5f5340d8de695d7afd7dfdc9a33bb17f",
+        "source-files.json": "807c0d1379bed86eee1b102cda681d61b9d94caf55e4d281d49180f28015bba8",
+        "replay.json": "564e95a0b8d2a3890fd756a419bd9c571a58c87ab14a7de09687ffeee3d1b8ee"
+      },
+      "producerLabel": "Flash policy before continuation fairness repair"
+    },
+    {
+      "label": "fair",
+      "sourceCommit": "69885c705395b70c15882f251e69577c54a3a83c",
+      "sourceDiffHash": "91352d2115295dff2c2c301bb5072d673eed4940d4f9d9c5018a26ab08477605",
+      "instanceId": "730d7ed8-e627-4107-abab-36bcc46c26e2",
+      "worldHash": "sha256:26142d110076bf522db42967d091e443f56b5819dc40d67169a28bd131f49710",
+      "algorithm": {
+        "role": "world-execution",
+        "id": "direct-world",
+        "version": "20",
+        "contractVersion": 15,
+        "config": {
+          "decision": null,
+          "creation": null,
+          "fallback": null,
+          "creationEnabled": true
+        },
+        "children": {},
+        "manifestHash": "2e3411ff4badf212a33352f6e719e079025d23559a37339c131072261a84fa6f"
+      },
+      "population": 852,
+      "limits": {
+        "cap": 70,
+        "deadlineMs": 1200000
+      },
+      "durationSeconds": 1005.234,
+      "failure": null,
+      "completedTurns": 2,
+      "physicalCalls": 54,
+      "auditedCalls": 54,
+      "usageUnknownCalls": 0,
+      "usageByProvider": {
+        "deepseek": {
+          "calls": 54,
+          "input": 1590766,
+          "output": 245912,
+          "reasoning": 229306,
+          "cacheRead": 156416
+        }
+      },
+      "usageByStage": {
+        "player-interpretation": {
+          "calls": 3,
+          "input": 51682,
+          "output": 2168,
+          "reasoning": 1036,
+          "cacheRead": 17024
+        },
+        "npc-interpretation": {
+          "calls": 12,
+          "input": 164083,
+          "output": 14075,
+          "reasoning": 11289,
+          "cacheRead": 53376
+        },
+        "world-adjudication": {
+          "calls": 17,
+          "input": 1137032,
+          "output": 181534,
+          "reasoning": 171302,
+          "cacheRead": 13952
+        },
+        "narrative-generation": {
+          "calls": 10,
+          "input": 104544,
+          "output": 2515,
+          "reasoning": 757,
+          "cacheRead": 29696
+        },
+        "publication-check": {
+          "calls": 12,
+          "input": 133425,
+          "output": 45620,
+          "reasoning": 44922,
+          "cacheRead": 42368
+        }
+      },
+      "models": [
+        "deepseek-flash"
+      ],
+      "narrativeStatuses": [
+        "fallback",
+        "complete",
+        "complete",
+        "complete",
+        "complete",
+        "complete",
+        "fallback"
+      ],
+      "firstComparableTurn": {
+        "timing": {
+          "text": "我把周荃刚才想单买草药的报价告诉师父陈守拙，请他决定是否愿意出售；受托药材先不交给周荃。",
+          "startedAt": "2026-10-18T17:26:34.891Z",
+          "endedAt": "2026-10-18T17:32:46.277Z",
+          "physicalCalls": 22,
+          "seconds": 371.386,
+          "fromRevision": 1,
+          "toRevision": 5,
+          "worldSeconds": 360
+        },
+        "usageByProvider": {
+          "deepseek": {
+            "calls": 22,
+            "input": 559390,
+            "output": 84824,
+            "reasoning": 79531,
+            "cacheRead": 71168
+          }
+        },
+        "usageByStage": {
+          "player-interpretation": {
+            "calls": 1,
+            "input": 14420,
+            "output": 742,
+            "reasoning": 329,
+            "cacheRead": 8320
+          },
+          "npc-interpretation": {
+            "calls": 5,
+            "input": 54916,
+            "output": 2991,
+            "reasoning": 1802,
+            "cacheRead": 29568
+          },
+          "world-adjudication": {
+            "calls": 7,
+            "input": 405228,
+            "output": 71355,
+            "reasoning": 68639,
+            "cacheRead": 5632
+          },
+          "narrative-generation": {
+            "calls": 4,
+            "input": 36042,
+            "output": 771,
+            "reasoning": 66,
+            "cacheRead": 11776
+          },
+          "publication-check": {
+            "calls": 5,
+            "input": 48784,
+            "output": 8965,
+            "reasoning": 8695,
+            "cacheRead": 15872
+          }
+        }
+      },
+      "finalRevision": 10,
+      "finalWorldSeconds": 660,
+      "participantWaits": [
+        {
+          "actor": "herbal-apprentice-1",
+          "submission": "efficiency-1",
+          "startedAtSeconds": 420,
+          "dueAtSeconds": 540,
+          "durationSeconds": 120
+        }
+      ],
+      "artifacts": {
+        "report.json": "c0202e319fab95b40d39d7336f3ffdfd8c7c6e13c6f7a18ea62c8364c6d5aef9",
+        "summary.json": "bef8c37040ae400219454c856038469cf61307f9bba7512353cf167710064857",
+        "summary-turn1.json": "3092d5f1c5c9046e194236c3cb2ba79c4a18aae828d61ef35176886443c71e55",
+        "final.json": "3e4a8a2591bdc7830da8da3cac182c9e559708a5615a798b89b5a361ce605088",
+        "source-files.json": "773fa01121f72ae5bfa1080be95cd04223c5b2efa976babe5d119eac0819f9d1",
+        "replay.json": "34ce9695f4d9bc52ff679253f78b4e0c5b8320b9120b53fdc4c67812d6865aff"
+      },
+      "sourceVerification": {
+        "runtimeDrift": [],
+        "testOnlyDrift": [
+          "src/server/__tests__/direct-world-host.test.ts"
+        ],
+        "runtimeFilesChecked": 7272
+      },
+      "replay": {
+        "revision": 10,
+        "match": true,
+        "stateHash": "8dcf0396c48319bec3328ea4f53bef8ca2831da607500f64adf5ecb703d908b1",
+        "replayedHash": "8dcf0396c48319bec3328ea4f53bef8ca2831da607500f64adf5ecb703d908b1"
+      },
+      "producerLabel": "final direct-world@20 runtime"
+    }
+  ]
+}

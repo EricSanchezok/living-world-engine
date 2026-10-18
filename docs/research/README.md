@@ -12,6 +12,7 @@
 
 | 日期 | 主题 | 文件 |
 |---|---|---|
+| 2026-10-19 | NPC 唤醒、Flash 分工与完整《凡人》真实消耗对照 | [验证报告](2026-10-19-npc-efficiency-validation.md) · [实际用量](2026-10-19-npc-efficiency-evidence.json) |
 | 2026-10-17 | 《赛博朋克 2077》世界资料、人物关系与多出身草案 | [研究入口](2026-10-17-cyberpunk2077-world-research.md) |
 | 2026-10-17 | 《凡人修仙传》原著还原、玩家出身与百人世界编写方法 | [调研报告](2026-10-17-fanren-canonical-world-authoring.md) |
 | 2026-10-15 | 引擎收尾、完整 72 轮确认回归与主目录交付 | [完整报告](2026-10-15-conversation-continuity-wrap-up.md) · [全部正文与评阅](2026-10-15-conversation-continuity-wrap-up-a1f93bef-transcript.md) |

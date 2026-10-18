@@ -118,7 +118,7 @@ describe("local causal work during participant activities", () => {
     expect(f.reads.seller).toBeLessThanOrEqual(4);
     expect(f.reads.distant).toBeUndefined();
   });
-  it("batches local work with direct participant reactions between the participant's authorized steps", async () => {
+  it("admits a pending participant continuation alongside local work and direct reactions without starvation", async () => {
     const f = await fixture("fairness");
     let result = await f.engine.step(f.roster, { expectedRevision: 0, trigger: "participant_action", externalActions: [
       { agentId: "player", submissionId: "long-rest", rawText: "Whisper to the buyer that I will rest, then rest quietly for 3600 seconds.", goal: "Rest", means: null, targetIds: [] },
@@ -126,11 +126,26 @@ describe("local causal work during participant activities", () => {
     const control = readDirectState(result.state.executionState!, result.state);
     expect(control.intents.keeper!.causeActionId).toBe(result.committed.directEvent.frames.find(frame => frame.actorId === "player")!.id);
     expect(control.intents.seller!.causeActionId).toBe(result.committed.directEvent.frames.find(frame => frame.actorId === "keeper")!.id);
+    expect(control.intents.player).toMatchObject({ status: "ready", activeSubmission: { submissionId: "long-rest" } });
+    const deadline = result.state.truth.elapsedSeconds + 3600;
     result = await f.engine.step(f.roster, { expectedRevision: result.state.revision, trigger: "manual", externalActions: [] });
+    expect(f.reads.player).toBe(2);
     expect(f.reads.keeper).toBe(2);
     expect(f.reads.seller).toBe(2);
     expect(result.committed.directEvent.frames).toContainEqual(expect.objectContaining({ actorId: "seller", kind: "speak" }));
+    expect(readDirectState(result.state.executionState!, result.state).activities).toContainEqual(expect.objectContaining({
+      actorId: "player", kind: "wait", dueAtSeconds: deadline,
+    }));
     expect(f.reads.distant).toBeUndefined();
+    const restarted = new SimulationEngine(f.world, f.algorithm, structuredClone(result.state));
+    for (let n = 0; result.state.truth.elapsedSeconds < deadline && n < 10; n++) {
+      result = await restarted.step(f.roster, { expectedRevision: result.state.revision, trigger: "manual", externalActions: [] });
+    }
+    expect(result.state.truth.elapsedSeconds).toBe(deadline);
+    expect(readDirectState(result.state.executionState!, result.state).completedSubmissionIds).toContain("long-rest");
+    expect(f.reads.player).toBe(2);
+    expect(f.reads.distant).toBeUndefined();
+    expect(replaySimulationState(result.state)).toEqual(result.state);
   });
   it("keeps a local request's real departure and return eligible across restart", async () => {
     const f = await fixture("departure");
