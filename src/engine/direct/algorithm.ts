@@ -32,7 +32,7 @@ import { withFreshMemory } from "../cognition/memory";
 
 export interface DirectWorldConfig extends CapabilityModelOverrides { creationEnabled: boolean }
 export const DIRECT_WORLD_CONFIG: DirectWorldConfig = { decision: null, creation: null, fallback: null, creationEnabled: true };
-export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "16", config: config as unknown as JsonObject });
+export const directWorldManifest = (config = DIRECT_WORLD_CONFIG) => defineAlgorithmManifest({ id: "direct-world", version: "17", config: config as unknown as JsonObject });
 export const directWorldAlgorithmRef = (config = DIRECT_WORLD_CONFIG) => algorithmRef(directWorldManifest(config));
 
 function components(state: Readonly<SimulationState>, frames: ActionFrame[]): ActionFrame[][] {
@@ -142,9 +142,11 @@ export class DirectWorldAlgorithm implements DirectExecutionAlgorithm {
     const frames = selected.flatMap(result => result.status === "fulfilled" && result.value.result.frame &&
       participantIds.includes(result.value.agentId) ? [result.value.result.frame] : []);
     if (frames.length) {
-      const local = ready.filter(([id]) => !owners.includes(id) && hasLocalOpportunity(source, id, frames)).map(([id]) => id);
-      owners.push(...local);
-      selected.push(...await select(local));
+      // A new submission does not discard already delivered work when its actor has left the player's location.
+      const additional = ready.filter(([id]) => !owners.includes(id) &&
+        (foreground.has(id) || localActors.has(id) || hasLocalOpportunity(source, id, frames))).map(([id]) => id);
+      owners.push(...additional);
+      selected.push(...await select(additional));
     }
     selected.forEach((result, index) => {
       const id = owners[index]!; activatedAgentIds.push(id);

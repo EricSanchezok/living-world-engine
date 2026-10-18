@@ -48,10 +48,10 @@ function elapsedReceipts(source: ScenePacket) {
   return source.observations.flatMap(observation => {
     const duration = observation.scene?.action?.durationSeconds;
     if (!duration || observation.scene?.actionKind === "speak") return [];
-    const firstLarger = ordered.find(([seconds]) => seconds > duration)?.[0];
     return [{ observationId: observation.id, durationSeconds: duration,
       fromWorldTimeSeconds: observation.worldTimeSeconds - duration, toWorldTimeSeconds: observation.worldTimeSeconds,
-      equivalents: ordered.filter(([seconds]) => seconds > 1 && (seconds <= duration || seconds === firstLarger))
+      // Each authored unit above one second has its own fraction, even beyond this interval.
+      equivalents: ordered.filter(([seconds]) => seconds > 1)
         .map(([seconds, terms]) => ({ terms, secondsPerUnit: seconds,
           wholeUnits: Math.floor(duration / seconds), remainderSeconds: duration % seconds,
           approximateUnits: Number((duration / seconds).toPrecision(6)) })) }];
@@ -65,7 +65,7 @@ export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscou
     responseTo: source.reply?.requested ?? null,
     kind: source.reply?.kind ?? "newly_observed_events",
     time: { boundary: source.boundary, elapsedUnits: source.elapsedUnits, elapsedReceipts: elapsedReceipts(source), observedPeriodicTransitions: source.observedPeriodicTransitions,
-      interpretation: "Action durations are elapsed seconds. Convert only with these exact local term-to-seconds values; an hour and an authored traditional unit are not interchangeable. Local days may differ from 24 hours. A stopping condition can end an activity before its requested duration; state only the actual elapsed receipt. The supplied equivalents are arithmetic, not sightings of a sun or moon. observedPeriodicTransitions certifies an already observed public phase transition exactly at its recorded boundary, including the start of that phase rather than merely some time within it. Calendar phases are observed properties, not inferred from a generic day length; even a long elapsed interval can remain within one local night or a place with constant light." },
+      interpretation: "Action durations are elapsed seconds. Convert only with these exact local term-to-seconds values; an hour and an authored traditional unit are not interchangeable. Each equivalent pairs its own terms with its own quantity: keep that pair together when writing prose. wholeUnits and remainderSeconds give the exact duration; approximateUnits is only a rounded aid. Local days may differ from 24 hours. A stopping condition can end an activity before its requested duration; state only the actual elapsed receipt. The supplied equivalents are arithmetic, not sightings of a sun or moon. observedPeriodicTransitions certifies an already observed public phase transition exactly at its recorded boundary, including the start of that phase rather than merely some time within it. Calendar phases are observed properties, not inferred from a generic day length; even a long elapsed interval can remain within one local night or a place with constant light." },
     spatialEvidence: { participantLocation: source.location, nonSpeechReceipts: source.observations.filter(observation => observation.scene?.actionKind !== "speak").map(priorReceipt),
       interpretation: "Actual non-speech outcomes and observed properties establish presence and movement, including movement caused by another operation. Delivered requests to bring, summon or visit someone do not locate that person. Their implied premises remain the speaker's view, not an independently established absence. No recorded arrival proves only that no arrival is established, not that the person is absent. A newly heard or mentioned person may already be present; earlier prose supplies no independent movement evidence." },
     propertyHistory: { observations: source.observedProperties ?? [],

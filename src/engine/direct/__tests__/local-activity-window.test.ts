@@ -9,7 +9,7 @@ import { replaySimulationState } from "../../runtime/transaction";
 import { readDirectState } from "../state";
 import type { PolicyBinding } from "../../runtime/execution";
 
-async function fixture(mode: "reservation" | "repeat" | "departure" | "fairness" = "reservation") {
+async function fixture(mode: "reservation" | "repeat" | "departure" | "fairness" | "remote-return" = "reservation") {
   const reads: Record<string, number> = {};
   const f = directTestProvider(wire => {
     const context = wire.messages ? directCreationContext(wire) : {};
@@ -18,21 +18,26 @@ async function fixture(mode: "reservation" | "repeat" | "departure" | "fairness"
       const actor = reading.state.perspective.agentId, count = reads[actor] = (reads[actor] ?? 0) + 1;
       expect(JSON.stringify(reading)).not.toContain("canonicalEntityIds");
       expect(JSON.stringify(reading)).not.toContain('"truth"');
-      const operation = actor === "player" ? mode === "fairness" && count === 1 ? "speak" : "wait" : mode === "departure" && actor === "seller" && [2, 3].includes(count) ? "move" : mode === "repeat" || actor === "keeper" && count === 1 || actor === "seller" && count === (mode === "departure" ? 4 : 2) ? "speak" : "wait";
+      const operation = mode === "remote-return"
+        ? actor === "player" && count === 1 ? "speak" : actor === "seller" && [2, 3].includes(count) ? "move" : actor === "seller" && count === 4 ? "speak" : "wait"
+        : actor === "player" ? mode === "fairness" && count === 1 ? "speak" : "wait" : mode === "departure" && actor === "seller" && [2, 3].includes(count) ? "move" : mode === "repeat" || actor === "keeper" && count === 1 || actor === "seller" && count === (mode === "departure" ? 4 : 2) ? "speak" : "wait";
       const privateNotice = mode === "fairness" && actor === "player" && operation === "speak";
-      const utterance = operation === "speak" ? privateNotice ? "I will rest here." : actor === "keeper" ? "Can you reserve these goods?" : "I can reserve them until the next visit." : null;
+      const privateRequest = mode === "remote-return" && actor === "player" && operation === "speak";
+      const utterance = operation === "speak" ? privateRequest ? "Please visit the store and return to tell me whether you can inspect it."
+        : mode === "remote-return" ? "I returned from the store; I have not inspected its contents yet."
+        : privateNotice ? "I will rest here." : actor === "keeper" ? "Can you reserve these goods?" : "I can reserve them until the next visit." : null;
       return { understanding: operation === "speak" ? "Discuss the local reservation." : "Wait for the relevant reply without repeating the exchange.",
         ...(actor === "player" ? {} : { urgency: 0.5 }), interaction: "world_action",
-        action: { operation, target: operation === "move" ? count === 2 ? "store-local" : "yard-local" : "none", recipient: actor === "keeper" ? "seller-local" : "buyer-local", tool: "none", resource: "none", amount: "unknown",
+        action: { operation, target: operation === "move" ? count === 2 ? "store-local" : "yard-local" : "none", recipient: privateRequest || actor === "keeper" ? "seller-local" : mode === "remote-return" && actor === "seller" ? "traveler" : "buyer-local", tool: "none", resource: "none", amount: "unknown",
           timing: "default", duration: actor === "player" && operation === "wait" ? "d0" : "default", interruption: "none", goal: "none", progress_next: mode === "fairness" && actor === "player" && count === 1 ? "continue" : "complete", observation_scope: "target",
-          attempt: privateNotice ? "Whisper to the buyer that I will rest here." : operation === "speak" ? "Discuss the requested reservation." : "Rest until the requested time, or wait for a new relevant message.", utterance, manner: privateNotice ? "A quiet aside only the buyer can hear." : null, literalQuote: "none" } };
+          attempt: privateRequest ? "Privately ask the seller to visit the store and return to report." : privateNotice ? "Whisper to the buyer that I will rest here." : operation === "speak" ? "Discuss the requested reservation." : "Rest until the requested time, or wait for a new relevant message.", utterance, manner: privateRequest ? "A quiet request only the seller can hear." : privateNotice ? "A quiet aside only the buyer can hear." : null, literalQuote: "none" } };
     }
     return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => {
       const contact = (question.instructions as { task?: { data?: { actionId: string; recipient: string } } }).task?.data;
       const action = (wire.state as { actions?: Array<{ id: string; actorId: string }> }).actions?.find(frame => frame.id === contact?.actionId);
-      const privateNoticeUnavailable = mode === "fairness" && action?.actorId === "player" && contact?.recipient !== "keeper";
+      const privateNoticeUnavailable = action?.actorId === "player" && (mode === "fairness" && contact?.recipient !== "keeper" || mode === "remote-return" && contact?.recipient !== "seller-entity");
       return [id, nativeAnswer(question,
-      id.endsWith("_duration") ? "s1" : id.endsWith("_movement") ? "enter" : id.endsWith("_request_progress") ? mode === "departure" && [2, 3].includes(reads.seller ?? 0) ? "continue" : "complete" : id.includes("outcome") ? "succeeded"
+      id.endsWith("_duration") ? "s1" : id.endsWith("_movement") ? "enter" : id.endsWith("_request_progress") ? ["departure", "remote-return"].includes(mode) && [2, 3].includes(reads.seller ?? 0) ? "continue" : "complete" : id.includes("outcome") ? "succeeded"
         : id.includes("visible") ? "visible" : id.includes("delivery") ? privateNoticeUnavailable ? "unavailable" : "delivered" : id.includes("fact") ? "unchanged" : "none")];
     }));
   });
@@ -69,6 +74,37 @@ async function fixture(mode: "reservation" | "repeat" | "departure" | "fairness"
 }
 
 describe("local causal work during participant activities", () => {
+  it("keeps an already requested remote return eligible when the participant submits a new long wait", async () => {
+    const f = await fixture("remote-return");
+    let result = await f.engine.step(f.roster, { expectedRevision: 0, trigger: "participant_action", externalActions: [
+      { agentId: "player", submissionId: "store-request", rawText: "Privately ask the seller to visit the store and return to report.", goal: "Hear the seller's report", means: null, targetIds: [] },
+    ] });
+    const request = result.committed.directEvent.frames.find(frame => frame.actorId === "player")!;
+    result = await f.engine.step(f.roster, { expectedRevision: result.state.revision, trigger: "manual", externalActions: [] });
+    expect(result.state.truth.placements["seller-entity"]).toBe("store");
+    expect(readDirectState(result.state.executionState!, result.state).intents.seller).toEqual(expect.objectContaining({ status: "ready", causeActionId: request.id }));
+    expect(readDirectState(result.state.executionState!, result.state).intents.distant!.status).toBe("ready");
+    expect(f.reads.seller).toBe(2);
+
+    const deadline = result.state.truth.elapsedSeconds + 3600;
+    const restarted = new SimulationEngine(f.world, f.algorithm, structuredClone(result.state));
+    result = await restarted.step(f.roster, { expectedRevision: result.state.revision, trigger: "participant_action", externalActions: [
+      { agentId: "player", submissionId: "new-long-rest", rawText: "Rest quietly here for 3600 seconds.", goal: "Rest", means: null, targetIds: [] },
+    ] });
+    expect(f.reads.seller).toBe(3);
+    expect(result.state.truth.placements["seller-entity"]).toBe("courtyard");
+    expect(result.state.truth.elapsedSeconds).toBeLessThan(deadline);
+    expect(readDirectState(result.state.executionState!, result.state).intents.seller!.causeActionId).toBe(request.id);
+    for (let n = 0; result.state.truth.elapsedSeconds < deadline && n < 10; n++) {
+      result = await restarted.step(f.roster, { expectedRevision: result.state.revision, trigger: "manual", externalActions: [] });
+    }
+    const replies = result.state.history.flatMap(step => step.directEvent?.frames ?? []).filter(frame => frame.actorId === "seller" && frame.kind === "speak");
+    expect(replies).toHaveLength(1);
+    expect(replies[0]!.dueAtSeconds).toBeLessThan(deadline);
+    expect(result.state.truth.elapsedSeconds).toBe(deadline);
+    expect(f.reads.distant).toBeUndefined();
+    expect(replaySimulationState(result.state)).toEqual(result.state);
+  });
   it("quiesces repeated unchanged NPC dialogue without discarding the participant deadline", async () => {
     const f = await fixture("repeat");
     let result = await f.engine.step(f.roster, { expectedRevision: 0, trigger: "participant_action", externalActions: [

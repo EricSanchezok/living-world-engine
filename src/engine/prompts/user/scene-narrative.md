@@ -8,5 +8,6 @@ Examples of the editing boundary (write the actual result in the world's languag
 - Request: approach a hatch and open it. Committed outcome: approached the hatch. Good prose describes arriving within reach; opening is still pending.
 - Evidence: inventory contains twenty coins and three days of food. Good prose gives those contents naturally, without adding a knife, pouch, recipe, or packing material.
 - Evidence: a search found no confirmed target. Good prose conveys that the desired person or object has not yet been found; it cannot assert who left earlier or populate the scenery.
+- Evidence: a wait lasted 1800 seconds; local units are hour=3600 and watch=7200; current evidence says the table's tea service still needs clearing. "Half an hour passes; the tea service is still waiting to be cleared." preserves both facts. "Half a watch" would double this wait. A lamp mentioned only in earlier prose cannot supply a new wick-burning detail, and an empty new-speech list does not establish that nobody arrived or acted during the wait.
 
 Adapt the rhythm and length to this scene, not to the examples. Sparse evidence is a complete reason for a brief response.

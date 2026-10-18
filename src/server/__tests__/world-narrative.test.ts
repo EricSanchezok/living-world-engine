@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { decisionPromptV2 } from "../../engine/models/decision-v2";
-import { completeParagraphs, renderNarrativeSegment, continueNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeRepair, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, narrativeOutputSchema } from "../narrative/publication";
+import { completeParagraphs, renderNarrativeSegment, continueNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeRepair, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, narrativeGroundingIssue, narrativeOutputSchema } from "../narrative/publication";
 import { narrativeEvidence, narrativeTask, narrativeDiscourse } from "../narrative/scene";
 import { earlierRequestReceipts } from "../narrative/outbox";
 import { type ScenePacket } from "../narrative/contracts";
@@ -582,7 +582,8 @@ describe("immutable narrative paragraphs", () => {
     const elapsed = [{ observationId: "heard", durationSeconds: 151120, fromWorldTimeSeconds: 80, toWorldTimeSeconds: 151200,
       equivalents: [{ terms: ["小时"], secondsPerUnit: 3600, wholeUnits: 41, remainderSeconds: 3520, approximateUnits: 41.9778 },
         { terms: ["时辰"], secondsPerUnit: 7200, wholeUnits: 20, remainderSeconds: 7120, approximateUnits: 20.9889 },
-        { terms: ["天", "日"], secondsPerUnit: 345600, wholeUnits: 0, remainderSeconds: 151120, approximateUnits: 0.437269 }] }];
+        { terms: ["天", "日"], secondsPerUnit: 345600, wholeUnits: 0, remainderSeconds: 151120, approximateUnits: 0.437269 },
+        { terms: ["月"], secondsPerUnit: 2592000, wholeUnits: 0, remainderSeconds: 151120, approximateUnits: 0.0583025 }] }];
     expect(narrativeTask(scene).time.elapsedReceipts).toEqual(elapsed);
     expect(narrativeTask(scene).time).not.toHaveProperty("sunrises");
     const provider = directTestProvider(wire => {
@@ -592,6 +593,69 @@ describe("immutable narrative paragraphs", () => {
     });
     await checkNarrativeGrounding(provider.gateway, { workloadId: "narrative", batchId: "long-local-night",
       runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 1 } }, scene, [renderNarrativeSegment("静坐还不到当地一个昼夜。", scene)], "decision-deepseek", "decision-deepseek", 1);
+    expect(provider.transport).toHaveBeenCalledTimes(1);
+  });
+  it.each([7200, 5400])("retains an authored unit above the first larger unit for a short wait: %s", secondsPerUnit => {
+    const scene = structuredClone(source);
+    scene.elapsedUnits = { 秒: 1, 分钟: 60, 小时: 3600, 时辰: secondsPerUnit };
+    scene.observations[0]!.worldTimeSeconds = 2700;
+    Object.assign(scene.observations[0]!.scene!, { actionKind: "wait", speech: null, outcome: "等候结束。",
+      action: { target: null, tool: null, resource: null, durationSeconds: 1800, addressing: "none" } });
+    const receipt = narrativeTask(scene).time.elapsedReceipts[0]!;
+    expect(receipt).toMatchObject({ durationSeconds: 1800, fromWorldTimeSeconds: 900, toWorldTimeSeconds: 2700 });
+    expect(receipt.equivalents).toEqual([
+      { terms: ["分钟"], secondsPerUnit: 60, wholeUnits: 30, remainderSeconds: 0, approximateUnits: 30 },
+      { terms: ["小时"], secondsPerUnit: 3600, wholeUnits: 0, remainderSeconds: 1800, approximateUnits: 0.5 },
+      { terms: ["时辰"], secondsPerUnit, wholeUnits: 0, remainderSeconds: 1800, approximateUnits: secondsPerUnit === 7200 ? 0.25 : 0.333333 },
+    ]);
+    for (const equivalent of receipt.equivalents) {
+      expect(equivalent.wholeUnits * equivalent.secondsPerUnit + equivalent.remainderSeconds).toBe(1800);
+    }
+    expect(narrativeTask(scene).time.observedPeriodicTransitions).toEqual([]);
+  });
+  it("keeps current tea evidence, old decorative prose and exact wait scale separate through publication and repair", async () => {
+    const scene = structuredClone(source);
+    scene.location = "前厅";
+    scene.elapsedUnits = { 分钟: 60, 小时: 3600, 时辰: 7200 };
+    scene.boundary = { revision: 8, step: 5, worldTimeSeconds: 2700 };
+    scene.speech = [];
+    scene.knownEntities = [
+      { localEntityId: "tea", name: "前厅茶具", description: "留在前厅桌上，需要收拾的茶具。" },
+      { localEntityId: "lamp", name: "提灯", description: "放在药铺的提灯。" },
+    ];
+    scene.observedProperties = [{ subject: "前厅茶具", subjectLocalId: "tea", predicate: "tidiness",
+      value: { kind: "text", value: "茶具待收拾" }, stance: "believed", description: "茶具待收拾", evidenceBoundary: scene.boundary }];
+    Object.assign(scene.observations[0]!, { id: "completed-wait", ...scene.boundary, summary: "等候结束。\n前厅茶具：茶具待收拾。" });
+    Object.assign(scene.observations[0]!.scene!, { actionKind: "wait", actor: "你", speech: null, outcome: "等候结束。",
+      action: { target: null, tool: null, resource: null, durationSeconds: 1800, addressing: "none" } });
+    const history = structuredClone(discourse);
+    history.exchanges[0]!.paragraphs[0]!.text = "厅里灯影落在桌面上。";
+    const correct = "半小时过去，桌上的茶具仍待收拾。";
+    const rejected = "半个时辰过去，厅里的灯芯烧得短了些。";
+    const task = narrativeTask(scene, history);
+    const provider = directTestProvider(wire => {
+      expect(wire.state).toMatchObject({ paragraphs: [correct, rejected], publicationTask: task,
+        scene: { knownEntities: scene.knownEntities, observedProperties: scene.observedProperties },
+        discourse: { exchanges: [{ paragraphs: [{ text: "厅里灯影落在桌面上。" }] }] } });
+      expect(task.newReceipts[0]!.actualResult).toBe("等候结束。\n前厅茶具：茶具待收拾。");
+      expect(task.newSpeech).toEqual([]);
+      expect(task.time.elapsedReceipts[0]!.equivalents.at(-1)).toMatchObject({ terms: ["时辰"], approximateUnits: 0.25 });
+      expect(JSON.stringify(narrativeEvidence(scene))).not.toContain("灯影");
+      expect(Object.keys(wire.questions)).toHaveLength(12);
+      // Fixed semantic answers exercise the gateway and repair contract;
+      // this mock does not claim to prove a model's factual judgment.
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeChoice(question,
+        id === "paragraph1_material" ? "added_content" : id === "paragraph1_evidence" ? "contradiction" : "grounded")]));
+    });
+    const decision = await checkNarrativeGrounding(provider.gateway, { workloadId: "narrative", batchId: "short-wait-evidence",
+      runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 8 } }, scene,
+    [correct, rejected].map(text => renderNarrativeSegment(text, scene)), "decision-deepseek", "decision-deepseek", 1, history);
+    expect(narrativeGroundingChoices(decision.answers, 2)).toEqual(["grounded", "contradiction"]);
+    const repair = narrativeRepair(scene, [correct], narrativeGroundingIssue(decision.answers, 1, rejected));
+    expect(repair).toMatchObject({ mode: "continue_published", currentObservationIds: ["completed-wait"], immutablePublishedParagraphs: [correct], unpublishedSpeech: [] });
+    expect(repair.issue).toContain("material (added_content)");
+    expect(repair.issue).toContain("evidence (contradiction)");
+    expect(narrativeFallback(scene)).toBe("等候结束。\n前厅茶具：茶具待收拾。");
     expect(provider.transport).toHaveBeenCalledTimes(1);
   });
   it("renders a factual fallback handover in natural language with its exact amount", () => {
