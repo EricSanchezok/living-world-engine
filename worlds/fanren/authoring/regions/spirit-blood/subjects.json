@@ -75,13 +75,15 @@
     "id": "canon-blood-chi-lei",
     "label": "赤雷老祖",
     "kind": "person",
-    "openingState": "opening-placement-pending",
+    "openingState": "same-subject-as-canon-chi-lei-laozu",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "blood-blood-old-cultivators"
+      "blood-bone-elder-identities"
     ],
-    "aliases": [],
-    "reason": "已直读后期雷法与血芒蛇战斗，但T0个人物件获取与居所待本区候选闭环。"
+    "aliases": [
+      "赤雷老祖"
+    ],
+    "reason": "连续原文确认唯一运行主体为canon-chi-lei-laozu；此旧索引仅保留引用，不生成第二人。"
   },
   {
     "id": "canon-blood-feng-founder",
@@ -99,37 +101,44 @@
     "id": "canon-blood-xue-sha",
     "label": "血煞",
     "kind": "person",
-    "openingState": "opening-placement-pending",
-    "classification": "source-reference-with-explicit-temporal-assessment",
+    "openingState": "present-with-explicit-backprojection",
+    "classification": "backprojection-and-explicit-current-life",
     "claimIds": [
-      "blood-league-local-structure"
+      "blood-xuesha-avatar",
+      "blood-reviewed-life"
     ],
     "aliases": [],
-    "reason": "商盟邀请的顶阶外援，不与天鼎血狱血影合并。"
+    "reason": "万年祭炼化身支持T0存活；本体与化身分别有实体但只一个当前决策主体。"
   },
   {
     "id": "canon-blood-tianjiu",
     "label": "天鸠",
     "kind": "person",
-    "openingState": "source-candidate-pending",
+    "openingState": "same-subject-as-canon-blood-eagle-elder",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "blood-blood-old-cultivators"
+      "blood-bone-elder-identities"
     ],
-    "aliases": [],
-    "reason": "全书候选有具名，尚未读取全部相关章以确定T0。"
+    "aliases": [
+      "天鸠",
+      "天阙"
+    ],
+    "reason": "连续原文确认唯一运行主体为canon-blood-eagle-elder；此旧索引仅保留引用，不生成第二人。"
   },
   {
     "id": "canon-blood-dimeng",
     "label": "地梦",
     "kind": "person",
-    "openingState": "source-candidate-pending",
+    "openingState": "same-subject-as-canon-blood-ruyi",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "blood-blood-old-cultivators"
+      "blood-bone-elder-identities"
     ],
-    "aliases": [],
-    "reason": "全书候选有具名，待原文与时点核对。"
+    "aliases": [
+      "如意",
+      "地梦"
+    ],
+    "reason": "连续原文确认唯一运行主体为canon-blood-ruyi；此旧索引仅保留引用，不生成第二人。"
   },
   {
     "id": "blood-continent",
@@ -2552,7 +2561,9 @@
       "blood-current-life",
       "blood-current-values"
     ],
-    "aliases": [],
+    "aliases": [
+      "赤雷老祖"
+    ],
     "reason": "原典结构或高阶身份回溯，具体T0地点/库存/交易明确原创或标定。"
   },
   {
@@ -2579,7 +2590,10 @@
       "blood-current-life",
       "blood-current-values"
     ],
-    "aliases": [],
+    "aliases": [
+      "如意",
+      "地梦"
+    ],
     "reason": "原典结构或高阶身份回溯，具体T0地点/库存/交易明确原创或标定。"
   },
   {
@@ -2606,7 +2620,10 @@
       "blood-current-life",
       "blood-current-values"
     ],
-    "aliases": [],
+    "aliases": [
+      "天鸠",
+      "天阙"
+    ],
     "reason": "原典结构或高阶身份回溯，具体T0地点/库存/交易明确原创或标定。"
   },
   {
@@ -2738,5 +2755,1172 @@
     ],
     "aliases": [],
     "reason": "原典结构或高阶身份回溯，具体T0地点/库存/交易明确原创或标定。"
+  },
+  {
+    "id": "blood-bone-ancestral-hall",
+    "label": "血骨门祖师堂",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-yellow-wind-chart",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-xuesha-cave",
+    "label": "血煞静修府",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-xuesha-avatar",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-lihuo-domain",
+    "label": "离火宗山地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-old-sect-network",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-lihuo-office",
+    "label": "离火宗执事房",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-old-sect-network",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-lihuo-altar",
+    "label": "离火宗古祭坛",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-ancient-altar-network",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-upper-court",
+    "label": "上宗通事院",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-old-sect-network",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-wangu-mountain",
+    "label": "万蛊山",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-old-sect-network",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-luotian-valley",
+    "label": "落天谷",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-old-sect-network",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-observation-city",
+    "label": "血天金塔城",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-yu-tower",
+    "label": "玉氏观象塔",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-observing-mirror",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-league-archive",
+    "label": "血天分盟藏经阁",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-league-archive",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-xuehen-domain",
+    "label": "血痕宗辖地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-old-sect-network",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-xuehen-array-hall",
+    "label": "血痕宗阵厅",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-old-sect-network",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-offshore-sea",
+    "label": "血天外海",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-offshore-powers",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-tuyao-refuge",
+    "label": "涂咬海岩府",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-offshore-powers",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-qingjiao-palace",
+    "label": "青蛟殿海域",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-offshore-powers",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-zhenghai-palace",
+    "label": "镇海宫海域",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-offshore-powers",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-lihuo-sect",
+    "label": "离火宗",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-old-sect-network",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-lihuo-upper-sect",
+    "label": "离火宗所依上宗",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-old-sect-network",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-xuehen-sect",
+    "label": "血痕宗",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-old-sect-network",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-blood-xue-sha-review-stock",
+    "label": "血煞自用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-blood-he-daxiansheng",
+    "label": "何大先生",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-observing-mirror",
+      "blood-old-sect-network",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-blood-he-daxiansheng-review-stock",
+    "label": "何大先生自用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-blood-lingyun",
+    "label": "灵云夫人",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-old-sect-network",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-blood-lingyun-review-stock",
+    "label": "灵云夫人自用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-blood-yu-elder",
+    "label": "玉姓长者",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-observing-mirror",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-blood-yu-elder-review-stock",
+    "label": "玉姓长者自用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-tu-yao",
+    "label": "涂咬",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-offshore-powers",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-tu-yao-review-stock",
+    "label": "涂咬自用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-lihuo-steward",
+    "label": "陆衡",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-lihuo-steward-review-stock",
+    "label": "陆衡自用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-xuehen-array-keeper",
+    "label": "桑符",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-xuehen-array-keeper-review-stock",
+    "label": "桑符自用储备",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-xuesha-avatar",
+    "label": "血煞同源化身",
+    "kind": "animated-body",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-xuesha-avatar",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-yellow-wind-chart",
+    "label": "黄风图",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-yellow-wind-chart",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-chart-request",
+    "label": "黄风图试演请议",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-observing-mirror",
+    "label": "观天镜",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-observing-mirror",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-he-observation-note",
+    "label": "落天谷旧观测札",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-lingyun-observation-note",
+    "label": "万蛊山虫鸣札",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-xuesha-note",
+    "label": "化身温养札",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-xuesha-invitation",
+    "label": "碧影协助询函",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-lihuo-ledger",
+    "label": "离火宗年供账",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-upper-reply",
+    "label": "上宗收供回函",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-xuehen-end-ledger",
+    "label": "血痕宗目的地残录",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-qingjiao-letter",
+    "label": "青蛟殿水道询函",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-chart-trial-stock",
+    "label": "黄风图试演公库",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-lihuo-tribute-stock",
+    "label": "离火宗年供备款",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-league-invitation-fund",
+    "label": "旧谱核验预算",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-bloodsteel-stock",
+    "label": "血罡铁小批存料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-lingyun-insect-feed",
+    "label": "万蛊山当用饲料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-ruyi-bird-feed",
+    "label": "血鸠当用饲料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-xuehen-transfer-array",
+    "label": "血痕宗跨陆阵",
+    "kind": "blood-array",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-old-sect-network",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-gu-specimen",
+    "label": "血蛊保存标本",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-blood-gu-mechanism",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-ruyi-bird-flock",
+    "label": "如意血鸠群",
+    "kind": "creature-group",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-lingyun-insect-colony",
+    "label": "灵云自养蛊群",
+    "kind": "creature-group",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-yuangang-manual",
+    "label": "元罡罩金文典籍",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-league-archive",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-archive-permission-register",
+    "label": "藏经许可簿",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-league-archive",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-ruyi-spirit-ring",
+    "label": "如意灵禽环",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-bone-elder-identities",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-yanyu-subject",
+    "label": "烟雨真人",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-or-future-only",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "后期商盟大乘长老，T0出生、进阶和任职缺日期；不生成当前同一成人。"
+  },
+  {
+    "id": "blood-jun-yimeng-subject",
+    "label": "君易梦",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-or-future-only",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "君长老同君易梦，T0出生与任职未能回溯；后期奉命入屠魔盟不先执行。"
+  },
+  {
+    "id": "blood-unnamed-yellow-reporter",
+    "label": "黄衣汇报者",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-or-future-only",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "仅明确后期给碧影传讯，与其他影子未证同一，T0未知。"
+  },
+  {
+    "id": "blood-purple-armor-elder",
+    "label": "紫甲魁梧大汉",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-or-future-only",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "与烟雨同行的后期大乘，宗属与本名未明，不据颜色合并。"
+  },
+  {
+    "id": "blood-snake-marked-elder",
+    "label": "四翼蛇纹老者",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-or-future-only",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "后期与烟雨同行，形体可证，具体族属与生年未定。"
+  },
+  {
+    "id": "blood-snake-tribe-subject",
+    "label": "鸣蛇族与风蛇族称名线索",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-or-future-only",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "前邀风蛇、后报鸣蛇，不能只因相邻情节断定同一族；保留来源边界。"
+  },
+  {
+    "id": "blood-unnamed-qingmian",
+    "label": "血袍青面修士",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-or-future-only",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "后期四名使者之一，T0身份未知，不强认既有长老。"
+  },
+  {
+    "id": "blood-cheqi-subject",
+    "label": "车骑兄",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-or-future-only",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "红毛大汉被称车骑兄；完整姓名、族属与T0年代仍未明。"
+  },
+  {
+    "id": "blood-unnamed-fat-elder",
+    "label": "血道胖老者",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-or-future-only",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "后期阵中十二人之一，姓名和T0状态未明。"
+  },
+  {
+    "id": "blood-unnamed-barefoot-elder",
+    "label": "赤足皂衣长老",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-or-future-only",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "后期率先祭飞剑，具体身份和T0状态未明。"
+  },
+  {
+    "id": "thunder-tuyao-descendant",
+    "label": "涂咬紫衣后裔",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-or-future-only",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "后期云城被掠幼兽与海上女童同一主体，出生不明，不在T0预造女童。"
+  },
+  {
+    "id": "blood-later-travel-party",
+    "label": "韩立后期血天同行与载具",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-or-future-only",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "花石、朱果儿、六翼后期状态及韩立圣舟、飞车、傀儡仅供时序归档，不成为T0资产。"
+  },
+  {
+    "id": "blood-future-palace-conflict",
+    "label": "后期天鼎争夺",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-or-future-only",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "围门阵、先后入宫、提前关闭和死伤均为后期条件轨迹，不预定发生。"
+  },
+  {
+    "id": "blood-future-eight-visitors",
+    "label": "八名异大陆来访强者",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-or-future-only",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "后期血天与雷鸣联合八人拜访，没有姓名与出生证据，不制造八个T0人物。"
+  },
+  {
+    "id": "blood-biying-blood-treatise",
+    "label": "商盟血道旧谱",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-qingjiao-court",
+    "label": "青蛟殿",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-offshore-powers",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-zhenghai-court",
+    "label": "镇海宫",
+    "kind": "social-group",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-offshore-powers",
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-archive-key",
+    "label": "藏经柜钥符",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-bounded-or-explicit-current-life",
+    "claimIds": [
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-qingjiao-chief-one",
+    "label": "青蛟殿大殿主",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-offshore-powers"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-qingjiao-chief-one-private-stock",
+    "label": "青蛟殿大殿主私用石料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-qingjiao-chief-one-defense",
+    "label": "青蛟殿大殿主护身鳞佩",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-qingjiao-chief-two",
+    "label": "青蛟殿二殿主",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-offshore-powers"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-qingjiao-chief-two-private-stock",
+    "label": "青蛟殿二殿主私用石料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-qingjiao-chief-two-defense",
+    "label": "青蛟殿二殿主护身鳞佩",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-zhenghai-chief-one",
+    "label": "镇海宫大宫主",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-offshore-powers"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-zhenghai-chief-one-private-stock",
+    "label": "镇海宫大宫主私用石料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-zhenghai-chief-one-defense",
+    "label": "镇海宫大宫主护身鳞佩",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-zhenghai-chief-two",
+    "label": "镇海宫二宫主",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-offshore-powers"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-zhenghai-chief-two-private-stock",
+    "label": "镇海宫二宫主私用石料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-zhenghai-chief-two-defense",
+    "label": "镇海宫二宫主护身鳞佩",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-zhenghai-chief-three",
+    "label": "镇海宫三宫主",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-offshore-powers"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-zhenghai-chief-three-private-stock",
+    "label": "镇海宫三宫主私用石料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-zhenghai-chief-three-defense",
+    "label": "镇海宫三宫主护身鳞佩",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-upper-collector",
+    "label": "上宗收供使",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-upper-collector-private-stock",
+    "label": "上宗收供使私用石料",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-upper-collector-defense",
+    "label": "上宗收供使护身鳞佩",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-qingjiao-council-note",
+    "label": "青蛟殿水路议簿",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-zhenghai-council-note",
+    "label": "镇海宫界碑议簿",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-upper-receipt-book",
+    "label": "上宗本期收供簿",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-qingjiao-public-stock",
+    "label": "青蛟殿水路公库",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-zhenghai-public-stock",
+    "label": "镇海宫测绘公库",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "blood-upper-received-stock",
+    "label": "上宗离火年供收讫库",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-opening-office-and-resources",
+    "claimIds": [
+      "blood-reviewed-life",
+      "blood-reviewed-values"
+    ],
+    "aliases": []
   }
 ]
