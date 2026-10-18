@@ -6,7 +6,7 @@
   "total": 2834,
   "completed": 1600,
   "pending": 1234,
-  "recordsHash": "5b66c9c7106891f10a58eee637bf64c0a6a8389206ee60893003b1132f997981",
+  "recordsHash": "e074fbfc579ed52856fe303f0345cf214f50651d103881a6f74f664faf54e01f",
   "anchorCount": 2525,
   "readScope": "逐条阅读审校遗漏、所引完整原段与已有地区审定目标；歧义另读相邻段。记录保留原描述供纠错追踪，事实以 disposition 和 statement 为准。证据重叠不自动批准。",
   "limitations": [
@@ -70,55 +70,6 @@
       "subject": "七派禁入皇城规则",
       "statement": "七派对皇城的禁入与不犯不敬大错便放任，是长期社会规约及执行选择；不是空间障碍、永久不可进宫或任何皇帝都不受追究。",
       "runtimeDisposition": "check-yue-palace-social-rule"
-    },
-    {
-      "id": "batch-0126:omission:3",
-      "ordinal": 818,
-      "subject": "大衍神君早年得知通天灵宝",
-      "statement": "大衍自述早年见通天灵宝资料，只证既往有了解；替材研究及答应韩的条件发生后期，不把已解决材料问题前置。",
-      "runtimeDisposition": "check-existing-dayan-knowledge-only"
-    },
-    {
-      "id": "batch-0204:omission:5",
-      "ordinal": 1297,
-      "subject": "落日城（人族）",
-      "statement": "落日城是围落日之墓诸城中修士掌控巨城，有兽车；韩田乘数时辰仅这次路线耗时，不等于全城任两点固定数时辰。",
-      "runtimeDisposition": "check-existing-luori-city-and-transport"
-    },
-    {
-      "id": "batch-0204:omission:7",
-      "ordinal": 1299,
-      "subject": "落日城（人族）",
-      "statement": "落日城是围落日之墓诸城中修士掌控巨城，有兽车；韩田乘数时辰仅这次路线耗时，不等于全城任两点固定数时辰。",
-      "runtimeDisposition": "check-existing-luori-city-and-transport"
-    },
-    {
-      "id": "batch-0212:omission:0",
-      "ordinal": 1348,
-      "subject": "三大主城",
-      "statement": "三境三主城为既有地区首府概称；近千化神拍卖仅可能大型都会规模比较，不生第四新三大主城或固定每城千名出席者。",
-      "runtimeDisposition": "check-existing-three-human-capitals"
-    },
-    {
-      "id": "batch-0215:omission:6",
-      "ordinal": 1376,
-      "subject": "灵界",
-      "statement": "灵界是全域既有界面非新地点；金越讲供玄天招真灵及化天盾跨三陆万年旧战是历史讲述和警告，血祭召宝需具体条件，不能自动触发当前百族大战。",
-      "runtimeDisposition": "check-existing-xuantian-old-war-history"
-    },
-    {
-      "id": "batch-0215:omission:7",
-      "ordinal": 1377,
-      "subject": "百族大战与化天盾旧事",
-      "statement": "灵界是全域既有界面非新地点；金越讲供玄天招真灵及化天盾跨三陆万年旧战是历史讲述和警告，血祭召宝需具体条件，不能自动触发当前百族大战。",
-      "runtimeDisposition": "check-existing-xuantian-old-war-history"
-    },
-    {
-      "id": "batch-0237:omission:1",
-      "ordinal": 1553,
-      "subject": "六足本体",
-      "statement": "黑巨虫、六足人形与翠绿复眼是同一人物本体与化形，既有身份归一；展示本体发生后期不提前授予目击者认识。",
-      "runtimeDisposition": "check-existing-liuzu-form"
     }
   ],
   "records": [
@@ -25903,9 +25854,10 @@
         }
       ],
       "targetIds": [
-        "dv-seven-flame-recipe"
+        "dv-dayan-old-tongtian-study",
+        "canon-da-yan"
       ],
-      "runtimeDisposition": "check-existing-dayan-knowledge-only"
+      "runtimeDisposition": "reviewed-regional-runtime-binding"
     },
     {
       "id": "batch-0126:omission:4",
@@ -41379,8 +41331,12 @@
           "anchorSha256": "f14731390a3275ca8d613b52964e84a8627bab09a603d5a06c85f3ff5f75c6d3"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "check-existing-luori-city-and-transport"
+      "targetIds": [
+        "spirit3-sunset-cart-and-government",
+        "spirit-sunset-trade-cart",
+        "spirit-sunset-draught-beast"
+      ],
+      "runtimeDisposition": "reviewed-regional-runtime-binding"
     },
     {
       "id": "batch-0204:omission:6",
@@ -41444,8 +41400,12 @@
           "anchorSha256": "e55e6629871a905e5a3ca3b520881a720aedea6784d3d4a168f7e051a08b1020"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "check-existing-luori-city-and-transport"
+      "targetIds": [
+        "spirit3-sunset-cart-and-government",
+        "spirit-sunset-trade-cart",
+        "spirit-sunset-draught-beast"
+      ],
+      "runtimeDisposition": "reviewed-regional-runtime-binding"
     },
     {
       "id": "batch-0204:omission:8",
@@ -43064,8 +43024,13 @@
           "anchorSha256": "6a4b2a1155aa62c2f2904ff73c9e15435b90061c471bd5058d8b37e9ca77a478"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "check-existing-three-human-capitals"
+      "targetIds": [
+        "spirit3-three-domains",
+        "spirit-tianyuan-capital",
+        "spirit-xuanwu-capital",
+        "spirit-tianling-capital"
+      ],
+      "runtimeDisposition": "existing-regional-geography"
     },
     {
       "id": "batch-0212:omission:1",
@@ -44023,8 +43988,11 @@
           "anchorSha256": "7d8d57738ceb3739dc65bb6097e7e4900fabd900313bdc20afd25024e237485f"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "check-existing-xuantian-old-war-history"
+      "targetIds": [
+        "tianyuan-xuantian-war-old-accounts",
+        "canon-jinyue-monk"
+      ],
+      "runtimeDisposition": "reviewed-regional-runtime-binding"
     },
     {
       "id": "batch-0215:omission:7",
@@ -44051,8 +44019,11 @@
           "anchorSha256": "0ec8c49c749902babe58decdbbe5c47175e6db589e3bdc190766cfc9bbd91b76"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "check-existing-xuantian-old-war-history"
+      "targetIds": [
+        "tianyuan-xuantian-war-old-accounts",
+        "canon-jinyue-monk"
+      ],
+      "runtimeDisposition": "reviewed-regional-runtime-binding"
     },
     {
       "id": "batch-0215:omission:8",
@@ -50286,8 +50257,11 @@
           "anchorSha256": "8f885d3bfa4640f683837b7e2b6c8a7133ce4b64396175b4b096e19c9f54bffc"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "check-existing-liuzu-form"
+      "targetIds": [
+        "feiling-liuzu-insect-body",
+        "canon-liu-zu"
+      ],
+      "runtimeDisposition": "reviewed-regional-runtime-binding"
     },
     {
       "id": "batch-0237:omission:2",

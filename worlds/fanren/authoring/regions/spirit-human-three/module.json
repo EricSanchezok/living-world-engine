@@ -10777,6 +10777,18 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "spirit-sunset-human-city-cultivator-administration",
+          "predicate": "civil-administration",
+          "value": {
+            "kind": "text",
+            "value": "人族修士主持的边界大城；城中凡人、炼体士和修士均可依法生活，不能因是修士城便把凡人排除。"
+          },
+          "description": "人族修士主持的边界大城；城中凡人、炼体士和修士均可依法生活，不能因是修士城便把凡人排除。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -11390,9 +11402,9 @@
           "predicate": "learned-skill",
           "value": {
             "kind": "text",
-            "value": "筑基辨材、灵具材料粗加工、御物和防护；不是顶阶灵具师。"
+            "value": "筑基辨材、灵具材料粗加工、御物和防护；不是顶阶灵具师。 熟悉自用兽车的套缰、驾车与日常喂养。"
           },
-          "description": "筑基辨材、灵具材料粗加工、御物和防护；不是顶阶灵具师。",
+          "description": "筑基辨材、灵具材料粗加工、御物和防护；不是顶阶灵具师。 熟悉自用兽车的套缰、驾车与日常喂养。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -11514,6 +11526,18 @@
               "name": "落日材料铺现料",
               "description": "已核过成色的普通灵具材料，按实际成交数量交付。",
               "status": "observed"
+            },
+            {
+              "id": "known-spirit-sunset-trade-cart",
+              "name": "董箐的运料兽车",
+              "description": "自用运料兽车，可商量借用，但要先看车轴、载重和驮兽状态。",
+              "status": "observed"
+            },
+            {
+              "id": "known-spirit-sunset-draught-beast",
+              "name": "铺后驮兽",
+              "description": "自己饲养的拉车兽，要喂食饮水和休息，不能只顾多拉货。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -11533,6 +11557,18 @@
               "local_entity_id": "known-spirit-sunset-material-stock",
               "canonical_entity_ids": [
                 "spirit-sunset-material-stock"
+              ]
+            },
+            {
+              "local_entity_id": "known-spirit-sunset-trade-cart",
+              "canonical_entity_ids": [
+                "spirit-sunset-trade-cart"
+              ]
+            },
+            {
+              "local_entity_id": "known-spirit-sunset-draught-beast",
+              "canonical_entity_ids": [
+                "spirit-sunset-draught-beast"
               ]
             }
           ],
@@ -11559,9 +11595,9 @@
               "predicate": "learned-skill",
               "value": {
                 "kind": "text",
-                "value": "筑基辨材、灵具材料粗加工、御物和防护；不是顶阶灵具师。"
+                "value": "筑基辨材、灵具材料粗加工、御物和防护；不是顶阶灵具师。 熟悉自用兽车的套缰、驾车与日常喂养。"
               },
-              "description": "筑基辨材、灵具材料粗加工、御物和防护；不是顶阶灵具师。",
+              "description": "筑基辨材、灵具材料粗加工、御物和防护；不是顶阶灵具师。 熟悉自用兽车的套缰、驾车与日常喂养。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -11631,6 +11667,10 @@
         {
           "definition_id": "joining-wire",
           "amount": 10
+        },
+        {
+          "definition_id": "grain",
+          "amount": 7
         }
       ],
       "ratings": []
@@ -17521,6 +17561,90 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "spirit-sunset-trade-cart",
+      "name": "董箐的运料兽车",
+      "kind": "item",
+      "placement": "spirit-sunset-human-market",
+      "description": "停在材料铺旁的四轮木车，可载少量货物或至多四名常人体型乘客，须以现有驮兽牵引。",
+      "facts": [
+        {
+          "id": "spirit-sunset-trade-cart-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "spirit-sunset-material-dealer"
+          },
+          "description": "董箐的个人经营财物，借用或买卖须本人同意。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "spirit-sunset-trade-cart-movement-condition",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "需实际套妥驮兽、有人掌缰、车轴完好和道路可通；行程随街路、载重与兽力变化，不固定为数个时辰。"
+          },
+          "description": "上车和乘车移动各需实际动作，兽车不会遥距召来。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "spirit-sunset-draught-beast",
+      "name": "铺后驮兽",
+      "kind": "creature",
+      "placement": "spirit-sunset-human-market",
+      "description": "材料铺饲养的温顺低阶驮兽，熟悉董箐的牵引，仍会疲乏、饥饿和受伤。",
+      "facts": [
+        {
+          "id": "spirit-sunset-draught-beast-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "spirit-sunset-material-dealer"
+          },
+          "description": "董箐的个人经营财物，借用或买卖须本人同意。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "spirit-sunset-draught-beast-care",
+          "predicate": "care-requirement",
+          "value": {
+            "kind": "text",
+            "value": "每个本地日需一份实际口粮与饮水、足够休息；缺食缺水或连续重载会损体力，不能无穷奔走。"
+          },
+          "description": "兽的照料有真实消耗。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "spirit-sunset-draught-beast-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "spirit-sunset-draught-beast-force",
+          "definition_id": "force",
+          "value": 1
+        }
+      ],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [
@@ -18849,7 +18973,8 @@
     ],
     "entity:spirit-sunset-human-city": [
       "spirit3-sunset-border",
-      "spirit3-current-life"
+      "spirit3-current-life",
+      "spirit3-sunset-cart-and-government"
     ],
     "fact:spirit-inner-caravan-road-route-spirit-sunset-human-city": [
       "spirit3-sunset-border",
@@ -18934,17 +19059,20 @@
     ],
     "entity:spirit-sunset-material-dealer": [
       "spirit3-current-life",
-      "spirit3-current-calibration"
+      "spirit3-current-calibration",
+      "spirit3-sunset-cart-and-government"
     ],
     "fact:spirit-sunset-material-dealer-learned-skill": [
-      "spirit3-current-life"
+      "spirit3-current-life",
+      "spirit3-sunset-cart-and-government"
     ],
     "fact:spirit-sunset-material-dealer-cultivation-state": [
       "spirit3-current-life"
     ],
     "entity:spirit-sunset-material-stock": [
       "spirit3-current-life",
-      "spirit3-current-calibration"
+      "spirit3-current-calibration",
+      "spirit3-sunset-cart-and-government"
     ],
     "fact:spirit-sunset-material-stock-owned-by": [
       "spirit3-current-life"
@@ -20167,6 +20295,27 @@
     "fact:spirit-wilderness-fringe-route-condition-spirit-wilderness-gate": [
       "spirit3-wilderness-transit-boundary",
       "spirit3-current-life"
+    ],
+    "fact:spirit-sunset-human-city-cultivator-administration": [
+      "spirit3-sunset-cart-and-government"
+    ],
+    "entity:spirit-sunset-trade-cart": [
+      "spirit3-sunset-cart-and-government"
+    ],
+    "fact:spirit-sunset-trade-cart-owned-by": [
+      "spirit3-sunset-cart-and-government"
+    ],
+    "fact:spirit-sunset-trade-cart-movement-condition": [
+      "spirit3-sunset-cart-and-government"
+    ],
+    "entity:spirit-sunset-draught-beast": [
+      "spirit3-sunset-cart-and-government"
+    ],
+    "fact:spirit-sunset-draught-beast-owned-by": [
+      "spirit3-sunset-cart-and-government"
+    ],
+    "fact:spirit-sunset-draught-beast-care": [
+      "spirit3-sunset-cart-and-government"
     ]
   },
   "quantityDefinitions": [

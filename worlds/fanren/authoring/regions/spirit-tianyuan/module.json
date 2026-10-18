@@ -1176,6 +1176,21 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "canon-jinyue-monk-old-xuantian-accounts",
+          "predicate": "known-tradition",
+          "value": {
+            "kind": "text",
+            "value": "读过化天盾旧战的记载：持宝者曾跨三大陆逃遁万年，许多族群被卷入。古说玄天宝可供奉招真灵，也有血祭召宝传说；我没有可直接施展的完整血祭法，也不知道当前何处将有新宝。"
+          },
+          "description": "读过化天盾旧战的记载：持宝者曾跨三大陆逃遁万年，许多族群被卷入。古说玄天宝可供奉招真灵，也有血祭召宝传说；我没有可直接施展的完整血祭法，也不知道当前何处将有新宝。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-jinyue-monk"
+            ]
+          }
         }
       ],
       "meters": [
@@ -1526,6 +1541,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "personal-cultivation-examination"
+              ]
+            },
+            {
+              "id": "old-xuantian-accounts",
+              "subjectId": "self",
+              "predicate": "known-tradition",
+              "value": {
+                "kind": "text",
+                "value": "读过化天盾旧战的记载：持宝者曾跨三大陆逃遁万年，许多族群被卷入。古说玄天宝可供奉招真灵，也有血祭召宝传说；我没有可直接施展的完整血祭法，也不知道当前何处将有新宝。"
+              },
+              "description": "读过化天盾旧战的记载：持宝者曾跨三大陆逃遁万年，许多族群被卷入。古说玄天宝可供奉招真灵，也有血祭召宝传说；我没有可直接施展的完整血祭法，也不知道当前何处将有新宝。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
               ]
             }
           ]
@@ -18970,7 +19000,8 @@
       "tianyuan-council-roster",
       "tianyuan-current-city-life",
       "tianyuan-city-calibration",
-      "spirit-tianyuan-fixed-cultivation-bases"
+      "spirit-tianyuan-fixed-cultivation-bases",
+      "tianyuan-xuantian-war-old-accounts"
     ],
     "fact:canon-jinyue-monk-cultivation-state": [
       "tianyuan-named-elders",
@@ -21171,6 +21202,9 @@
     ],
     "fact:canon-ming-oldmaster-spiritual-root": [
       "spirit-tianyuan-fixed-cultivation-bases"
+    ],
+    "fact:canon-jinyue-monk-old-xuantian-accounts": [
+      "tianyuan-xuantian-war-old-accounts"
     ]
   },
   "agentCognition": [

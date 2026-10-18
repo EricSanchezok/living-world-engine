@@ -5509,6 +5509,21 @@
               "canon-da-yan"
             ]
           }
+        },
+        {
+          "id": "canon-da-yan-old-tongtian-study",
+          "predicate": "prior-study",
+          "value": {
+            "kind": "text",
+            "value": "早年在一处古修遗址读过通天灵宝资料，知道这类宝物存在，之后一直留意但所得甚少；现时没有七焰扇炼法或已经研成的替代材料表。"
+          },
+          "description": "早年在一处古修遗址读过通天灵宝资料，知道这类宝物存在，之后一直留意但所得甚少；现时没有七焰扇炼法或已经研成的替代材料表。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-da-yan"
+            ]
+          }
         }
       ],
       "meters": [
@@ -5727,6 +5742,21 @@
               "confidence": 0.9,
               "evidenceIds": [
                 "old-friend-testimony"
+              ]
+            },
+            {
+              "id": "old-tongtian-study",
+              "subjectId": "self",
+              "predicate": "prior-study",
+              "value": {
+                "kind": "text",
+                "value": "早年在一处古修遗址读过通天灵宝资料，知道这类宝物存在，之后一直留意但所得甚少；现时没有七焰扇炼法或已经研成的替代材料表。"
+              },
+              "description": "早年在一处古修遗址读过通天灵宝资料，知道这类宝物存在，之后一直留意但所得甚少；现时没有七焰扇炼法或已经研成的替代材料表。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
               ]
             }
           ]
@@ -10951,7 +10981,8 @@
     "entity:canon-da-yan": [
       "dv-dayan-history",
       "dv-dayan-knowledge",
-      "dv-opening-values"
+      "dv-opening-values",
+      "dv-dayan-old-tongtian-study"
     ],
     "fact:canon-da-yan-cultivation-state": [
       "dv-dayan-history",
@@ -11665,6 +11696,9 @@
     "fact:canon-lu-weiying-other-name": [
       "dv-lu-xuanji-identity",
       "dv-opening-life"
+    ],
+    "fact:canon-da-yan-old-tongtian-study": [
+      "dv-dayan-old-tongtian-study"
     ]
   },
   "quantityDefinitions": [
