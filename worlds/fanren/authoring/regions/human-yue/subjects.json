@@ -3,13 +3,13 @@
     "id": "canon-wu-feng",
     "label": "吴风",
     "kind": "person",
-    "openingState": "opening-detail-source-closure-pending",
+    "openingState": "alive-at-opening-specific-career-unresolved",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "yue-present-life"
+      "yue-huangfeng-supply-and-teachers"
     ],
     "aliases": [],
-    "reason": "后文传功师兄不与吴管事同一人；其T0年龄与授课职位仍待闭合。"
+    "reason": "后期三十来岁说明共同开篇已出生；具体当时境界、年龄与传功职位本段未给，不自动放为同职位修士。"
   },
   {
     "id": "canon-li-huayuan",
@@ -2670,5 +2670,222 @@
     ],
     "aliases": [],
     "reason": "身份证据来自韩立后来太南会的同场介绍；不能据当次职位、功法或小团体关系推定开篇状态。已给青年年龄者可推较年幼，但本轮未生成当年能力或当期在谷位置。"
+  },
+  {
+    "id": "yue-baiji-hall",
+    "label": "百机堂",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "runtime-source-or-explicit-original",
+    "claimIds": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-transmission-hall",
+    "label": "传功阁",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "runtime-source-or-explicit-original",
+    "claimIds": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-xuankun-mountain",
+    "label": "玄坤山",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "runtime-source-or-explicit-original",
+    "claimIds": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-new-disciple-houses",
+    "label": "新人石屋区",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "runtime-source-or-explicit-original",
+    "claimIds": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-han-household",
+    "label": "菡家家产共同体",
+    "kind": "organization",
+    "openingState": "present",
+    "classification": "runtime-source-or-explicit-original",
+    "claimIds": [
+      "yue-current-rooms-and-family-brush"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-jinzhu-brush",
+    "label": "金竺笔",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "runtime-source-or-explicit-original",
+    "claimIds": [
+      "yue-jinzhu-brush-family-history",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-han-yunzhi-brother-reference",
+    "label": "菡云芝未名兄长",
+    "kind": "person",
+    "openingState": "source-reference-opening-detail-unresolved",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-han-siblings-tainan-trade"
+    ],
+    "aliases": [],
+    "reason": "同场兄妹称谓已确立；不同于原创叔父菡祺，姓名与开篇精确年龄未给。"
+  },
+  {
+    "id": "yue-qinye-market-seller-reference",
+    "label": "回风钵叶家摊主",
+    "kind": "person",
+    "openingState": "source-reference-opening-detail-unresolved",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-tainan-auction-and-qingxi-book"
+    ],
+    "aliases": [],
+    "reason": "树叶衣领和自称叶家能认族，不能直接合马脸叶豹。"
+  },
+  {
+    "id": "yue-tainan-round-faced-youth",
+    "label": "赠青溪笔录的圆脸青年",
+    "kind": "person",
+    "openingState": "source-reference-opening-detail-unresolved",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-tainan-auction-and-qingxi-book"
+    ],
+    "aliases": [],
+    "reason": "已知低阶散修身份但无姓名，不合其他圆脸者。"
+  },
+  {
+    "id": "yue-tainan-dark-bowl-buyer",
+    "label": "求回风钵的黑汉",
+    "kind": "person",
+    "openingState": "source-reference-opening-detail-unresolved",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-tainan-auction-and-qingxi-book"
+    ],
+    "aliases": [],
+    "reason": "与追杀韩的魁梧大汉没有连续性证据，保独立市场指称。"
+  },
+  {
+    "id": "yue-tainan-yellow-ambusher",
+    "label": "太南谷外黄衣伏击者",
+    "kind": "person",
+    "openingState": "source-reference-opening-detail-unresolved",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-tainan-marking-and-ambush"
+    ],
+    "aliases": [],
+    "reason": "同场青黑葫芦与飞符持有者；后期死不代表开篇死。"
+  },
+  {
+    "id": "yue-tainan-blade-ambusher",
+    "label": "太南谷外持刀伏击者",
+    "kind": "person",
+    "openingState": "source-reference-opening-detail-unresolved",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-tainan-marking-and-ambush"
+    ],
+    "aliases": [],
+    "reason": "地下巨力到土甲黑刀连续同人；不因体型合市场黑汉。"
+  },
+  {
+    "id": "yue-huangfeng-lin-elder-reference",
+    "label": "发新人用品的林姓老者",
+    "kind": "person",
+    "openingState": "source-reference-opening-detail-unresolved",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-huangfeng-supply-and-teachers"
+    ],
+    "aliases": [],
+    "reason": "仅同姓及会刻木不足同千竹林师兄，后续如有连续证据再统一；此档不新生第二活人。"
+  },
+  {
+    "id": "yue-huangfeng-yu-deacon",
+    "label": "百机堂于执事",
+    "kind": "person",
+    "openingState": "source-reference-opening-detail-unresolved",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-huangfeng-supply-and-teachers"
+    ],
+    "aliases": [],
+    "reason": "服从堂主并持工作竹简，职务在后期见，开篇任职未据此强定。"
+  },
+  {
+    "id": "yue-huangfeng-ye-grandnephew",
+    "label": "叶管事未名侄孙",
+    "kind": "person",
+    "openingState": "source-reference-opening-detail-unresolved",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-huangfeng-entry-and-dan-bargain"
+    ],
+    "aliases": [],
+    "reason": "亲属与丹名额纠纷有明说，尚未给姓名，不把后来丹/年龄前置。"
+  },
+  {
+    "id": "yue-qingxi-travel-notes",
+    "label": "青溪笔录",
+    "kind": "item",
+    "openingState": "source-reference-opening-detail-unresolved",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-tainan-auction-and-qingxi-book"
+    ],
+    "aliases": [],
+    "reason": "该次赠书为真实物件，开篇所在未明，不作为全知可靠法则书。"
+  },
+  {
+    "id": "yue-qingxi-zhenren",
+    "label": "青溪真人",
+    "kind": "person",
+    "openingState": "source-reference-opening-detail-unresolved",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-tainan-auction-and-qingxi-book"
+    ],
+    "aliases": [
+      "青溪上人"
+    ],
+    "reason": "杂记作者青溪真人/上人连续同称，存亡年龄未明。"
+  },
+  {
+    "id": "yue-huifeng-bowl-reference",
+    "label": "回风钵",
+    "kind": "item",
+    "openingState": "source-reference-opening-detail-unresolved",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-tainan-auction-and-qingxi-book"
+    ],
+    "aliases": [],
+    "reason": "后期摊主出售的法器，报价不等转让完成，不前置买主库存。"
   }
 ]

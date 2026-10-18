@@ -907,6 +907,54 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "yue-huangfeng-valley-route-yue-baiji-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-baiji-hall"
+          },
+          "description": "可循门内山路或实际御器来往，室内和授课区域仍需核准通行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-huangfeng-valley-route-yue-transmission-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-transmission-hall"
+          },
+          "description": "可循门内山路或实际御器来往，室内和授课区域仍需核准通行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-huangfeng-valley-route-yue-xuankun-mountain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-xuankun-mountain"
+          },
+          "description": "可循门内山路或实际御器来往，室内和授课区域仍需核准通行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-huangfeng-valley-route-yue-new-disciple-houses",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-new-disciple-houses"
+          },
+          "description": "可循门内山路或实际御器来往，室内和授课区域仍需核准通行。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -2774,6 +2822,12 @@
               "name": "马园主",
               "description": "长期宗务往来中认识，未公开的私事仍不知。",
               "status": "observed"
+            },
+            {
+              "id": "known-yue-baiji-hall",
+              "name": "百机堂",
+              "description": "自己日常接触并认识的事物。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -2830,6 +2884,12 @@
               "canonical_entity_ids": [
                 "canon-huangfeng-ma-gardener"
               ]
+            },
+            {
+              "local_entity_id": "known-yue-baiji-hall",
+              "canonical_entity_ids": [
+                "yue-baiji-hall"
+              ]
             }
           ],
           "evidence": [
@@ -2881,6 +2941,21 @@
                 "value": "自己是筑基修士。"
               },
               "description": "自己是筑基修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-work-property",
+              "subjectId": "self",
+              "predicate": "current-responsibility",
+              "value": {
+                "kind": "text",
+                "value": "我负责在百机堂分配谷中杂务，实际工作和领料要核对。"
+              },
+              "description": "我负责在百机堂分配谷中杂务，实际工作和领料要核对。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -12199,6 +12274,12 @@
               "name": "菡祺笔具材料",
               "description": "叔父教自己分辨的笔毛和笔杆。",
               "status": "observed"
+            },
+            {
+              "id": "known-canon-jinzhu-brush",
+              "name": "家传符笔",
+              "description": "自己日常接触并认识的事物。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -12230,6 +12311,12 @@
               "local_entity_id": "known-yue-han-pen-material",
               "canonical_entity_ids": [
                 "yue-han-pen-material"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-jinzhu-brush",
+              "canonical_entity_ids": [
+                "canon-jinzhu-brush"
               ]
             }
           ],
@@ -12282,6 +12369,21 @@
                 "value": "自己是凡人。"
               },
               "description": "自己是凡人。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-work-property",
+              "subjectId": "self",
+              "predicate": "current-responsibility",
+              "value": {
+                "kind": "text",
+                "value": "家里有一支金黄色的祖传符笔，现由菡祺保管。"
+              },
+              "description": "家里有一支金黄色的祖传符笔，现由菡祺保管。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -13371,6 +13473,18 @@
               "name": "菡祺笔具材料",
               "description": "可供整理低阶笔具的毛料与笔杆，当前四份。",
               "status": "observed"
+            },
+            {
+              "id": "known-canon-jinzhu-brush",
+              "name": "家传金竺笔",
+              "description": "自己日常接触并认识的事物。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-han-household",
+              "name": "菡家家产",
+              "description": "自己日常接触并认识的事物。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -13402,6 +13516,18 @@
               "local_entity_id": "known-yue-han-pen-material",
               "canonical_entity_ids": [
                 "yue-han-pen-material"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-jinzhu-brush",
+              "canonical_entity_ids": [
+                "canon-jinzhu-brush"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-han-household",
+              "canonical_entity_ids": [
+                "yue-han-household"
               ]
             }
           ],
@@ -13454,6 +13580,21 @@
                 "value": "自己是炼气修士。"
               },
               "description": "自己是炼气修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-work-property",
+              "subjectId": "self",
+              "predicate": "current-responsibility",
+              "value": {
+                "kind": "text",
+                "value": "我在小院保管家传金竺笔，这是家产而非私卖之物；目前没有出售或交换约定。"
+              },
+              "description": "我在小院保管家传金竺笔，这是家产而非私卖之物；目前没有出售或交换约定。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -20159,6 +20300,174 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "yue-baiji-hall",
+      "name": "百机堂",
+      "kind": "location",
+      "placement": "yue-huangfeng-valley",
+      "description": "处理谷内杂务分配的堂所。",
+      "facts": [
+        {
+          "id": "yue-baiji-hall-route-yue-huangfeng-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-huangfeng-valley"
+          },
+          "description": "可循门内山路或实际御器来往，室内和授课区域仍需核准通行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-baiji-work-authority",
+          "predicate": "assignment-authority",
+          "value": {
+            "kind": "text",
+            "value": "叶管事分配杂务；当期领用公共材料须登记，报酬随实际工作核定，不因领到任务就直接发足。"
+          },
+          "description": "叶管事分配杂务；当期领用公共材料须登记，报酬随实际工作核定，不因领到任务就直接发足。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-transmission-hall",
+      "name": "传功阁",
+      "kind": "location",
+      "placement": "yue-huangfeng-valley",
+      "description": "依山而建的石楼，后半延入山腹，廊中有并列石门。",
+      "facts": [
+        {
+          "id": "yue-transmission-hall-route-yue-huangfeng-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-huangfeng-valley"
+          },
+          "description": "可循门内山路或实际御器来往，室内和授课区域仍需核准通行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-xuankun-mountain",
+      "name": "玄坤山",
+      "kind": "location",
+      "placement": "yue-huangfeng-valley",
+      "description": "供达到相应基础功法层次的门人择地建居的山地。",
+      "facts": [
+        {
+          "id": "yue-xuankun-mountain-route-yue-huangfeng-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-huangfeng-valley"
+          },
+          "description": "可循门内山路或实际御器来往，室内和授课区域仍需核准通行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-xuankun-residence-eligibility",
+          "predicate": "residence-rule",
+          "value": {
+            "kind": "text",
+            "value": "门中基础功法达到十层的弟子可申请迁来择地建居，建设需自己实际完成。"
+          },
+          "description": "门中基础功法达到十层的弟子可申请迁来择地建居，建设需自己实际完成。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-new-disciple-houses",
+      "name": "新人石屋区",
+      "kind": "location",
+      "placement": "yue-huangfeng-valley",
+      "description": "山岭上的简朴石屋区，领取住所仍须门内安排。",
+      "facts": [
+        {
+          "id": "yue-new-disciple-houses-route-yue-huangfeng-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-huangfeng-valley"
+          },
+          "description": "可循门内山路或实际御器来往，室内和授课区域仍需核准通行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-han-household",
+      "name": "菡家家产共同体",
+      "kind": "organization",
+      "placement": "yue-han-craft-cottage",
+      "description": "菡家亲属共同保管祖传器物的家庭。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-jinzhu-brush",
+      "name": "金竺笔",
+      "kind": "item",
+      "placement": "yue-han-craft-cottage",
+      "description": "笔尖到笔杆泛着淡黄光的金黄色符笔。",
+      "facts": [
+        {
+          "id": "jinzhu-brush-material-history",
+          "predicate": "craft-material",
+          "value": {
+            "kind": "text",
+            "value": "家传记载：笔尖用二级金睛猿颈毛，杆由金精与乌铁合制，曾经筑基修士文武火祭炼；适于制符但不保证绘制成功。"
+          },
+          "description": "家传记载：笔尖用二级金睛猿颈毛，杆由金精与乌铁合制，曾经筑基修士文武火祭炼；适于制符但不保证绘制成功。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "获得菡家保管人的可靠说明，或有相应制器知识并实际检查材料。"
+          }
+        },
+        {
+          "id": "jinzhu-brush-owner",
+          "predicate": "owner",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-han-household"
+          },
+          "description": "菡家共同家产，菡祺当前保管，尚无出售约定。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [
@@ -20641,6 +20950,11 @@
       "id": "yue-guest-key-not-universal",
       "text": "太南谷客舍的通行符只对应自身禁制，使用后仍留有实际符纸；权限、保管和借还须以实际关系为准。通音符只传讯请求接引，不能替代接应者开阵。",
       "severity": "hard"
+    },
+    {
+      "id": "yue-monthly-work-not-auto-credit",
+      "text": "黄枫谷的杂务、月赏与入门配给需要当前资格、实际履职、库存和办理；任务表中的年交或季交额是义务目标，不是种植后保证产出。功法和术法须真正学习与练习，得到书本不等已掌握全部。",
+      "severity": "hard"
     }
   ],
   "provenance": {
@@ -21102,7 +21416,8 @@
     ],
     "entity:canon-huangfeng-ye-steward": [
       "yue-huangfeng-elders",
-      "yue-values"
+      "yue-values",
+      "yue-current-rooms-and-family-brush"
     ],
     "fact:canon-huangfeng-ye-steward-cultivation-state": [
       "yue-huangfeng-elders",
@@ -22045,7 +22360,8 @@
     ],
     "entity:canon-han-yunzhi": [
       "yue-opening-young-persons",
-      "yue-values"
+      "yue-values",
+      "yue-current-rooms-and-family-brush"
     ],
     "fact:canon-han-yunzhi-cultivation-state": [
       "yue-opening-young-persons",
@@ -22142,7 +22458,8 @@
     ],
     "entity:yue-han-uncle": [
       "yue-present-life",
-      "yue-values"
+      "yue-values",
+      "yue-current-rooms-and-family-brush"
     ],
     "fact:yue-han-uncle-cultivation-state": [
       "yue-present-life",
@@ -23170,6 +23487,79 @@
       "yue-guest-ward-operation",
       "yue-present-guesthouse-custody",
       "yue-tainan-valley-physical-layout"
+    ],
+    "entity:yue-baiji-hall": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "fact:yue-huangfeng-valley-route-yue-baiji-hall": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "fact:yue-baiji-hall-route-yue-huangfeng-valley": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "entity:yue-transmission-hall": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "fact:yue-huangfeng-valley-route-yue-transmission-hall": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "fact:yue-transmission-hall-route-yue-huangfeng-valley": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "entity:yue-xuankun-mountain": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "fact:yue-huangfeng-valley-route-yue-xuankun-mountain": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "fact:yue-xuankun-mountain-route-yue-huangfeng-valley": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "entity:yue-new-disciple-houses": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "fact:yue-huangfeng-valley-route-yue-new-disciple-houses": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "fact:yue-new-disciple-houses-route-yue-huangfeng-valley": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "fact:yue-xuankun-residence-eligibility": [
+      "yue-huangfeng-institutions-and-locations"
+    ],
+    "fact:yue-baiji-work-authority": [
+      "yue-current-rooms-and-family-brush",
+      "yue-huangfeng-institutions-and-locations"
+    ],
+    "entity:yue-han-household": [
+      "yue-current-rooms-and-family-brush"
+    ],
+    "entity:canon-jinzhu-brush": [
+      "yue-jinzhu-brush-family-history",
+      "yue-current-rooms-and-family-brush"
+    ],
+    "fact:jinzhu-brush-material-history": [
+      "yue-jinzhu-brush-family-history"
+    ],
+    "fact:jinzhu-brush-owner": [
+      "yue-current-rooms-and-family-brush"
+    ],
+    "law:yue-monthly-work-not-auto-credit": [
+      "yue-huangfeng-institutions-and-locations",
+      "yue-huangfeng-issued-gear",
+      "yue-early-talisman-and-spell-boundaries"
     ]
   }
 }
