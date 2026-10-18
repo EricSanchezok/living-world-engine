@@ -1530,7 +1530,9 @@
     "classification": "source-and-explicit-calibration",
     "claimIds": [
       "innerstar-magnetic-training",
-      "innerstar-bounded-values"
+      "innerstar-bounded-values",
+      "innerstar-magnetic-mountain-behavior",
+      "innerstar-mountain-transfer-attempt"
     ],
     "aliases": []
   },
@@ -4431,10 +4433,11 @@
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
       "innerstar-palace-supervision-testimony",
-      "innerstar-later-palace-avatars"
+      "innerstar-later-palace-avatars",
+      "innerstar-ximen-death-and-evidence"
     ],
     "aliases": [],
-    "reason": "T0出生、修成、所在或所有权未由此后文段唯一确定，仅存资料而不生成当前活体/库存。"
+    "reason": "T0出生、修成、所在或所有权未由此后文段唯一确定，仅存资料而不生成当前活体/库存。 后期西门被确认为两人中的袭韩者，但本段未闭合对应哪个外貌；这两指称与西门不得据此生成第三人。"
   },
   {
     "id": "innerstar-void-white-cold",
@@ -4444,10 +4447,11 @@
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
       "innerstar-palace-supervision-testimony",
-      "innerstar-later-palace-avatars"
+      "innerstar-later-palace-avatars",
+      "innerstar-ximen-death-and-evidence"
     ],
     "aliases": [],
-    "reason": "T0出生、修成、所在或所有权未由此后文段唯一确定，仅存资料而不生成当前活体/库存。"
+    "reason": "T0出生、修成、所在或所有权未由此后文段唯一确定，仅存资料而不生成当前活体/库存。 后期西门被确认为两人中的袭韩者，但本段未闭合对应哪个外貌；这两指称与西门不得据此生成第三人。"
   },
   {
     "id": "innerstar-ge-li",
@@ -6032,7 +6036,8 @@
     "openingState": "t0-state-or-ownership-underdetermined",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "innerstar-later-wen-battle"
+      "innerstar-later-wen-battle",
+      "innerstar-liudao-final-battle"
     ],
     "aliases": [],
     "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
@@ -6044,7 +6049,9 @@
     "openingState": "t0-state-or-ownership-underdetermined",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "innerstar-later-wen-battle"
+      "innerstar-later-wen-battle",
+      "innerstar-liudao-final-battle",
+      "innerstar-wen-furen-last-choice"
     ],
     "aliases": [],
     "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
@@ -6502,7 +6509,10 @@
     "openingState": "t0-state-or-ownership-underdetermined",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "innerstar-guest-token-and-penalty"
+      "innerstar-guest-token-and-penalty",
+      "innerstar-pillar-guards-and-city-entry",
+      "innerstar-rescue-bargain-and-authority",
+      "innerstar-honorary-office-public-announcement"
     ],
     "aliases": [],
     "reason": "仅后来借给韩，权利范围按所宣授权及实际承认，非所有资源物权。"
@@ -6968,7 +6978,10 @@
     "openingState": "t0-state-or-ownership-underdetermined",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "innerstar-yinsha-return-check"
+      "innerstar-yinsha-return-check",
+      "innerstar-rescue-bargain-and-authority",
+      "innerstar-siege-deployment-and-car",
+      "innerstar-lan-siblings-return"
     ],
     "aliases": [],
     "reason": "银鲨元婴初期迎客者，明确非岛主；不并其他赵姓修士。"
@@ -7407,5 +7420,316 @@
     ],
     "aliases": [],
     "reason": "未来逼宗门表态的命令载体，非客卿金牌或原始星宫身份环。"
+  },
+  {
+    "id": "innerstar-long-jinlian",
+    "label": "金莲门隆姓老者",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-pillar-guards-and-city-entry"
+    ],
+    "aliases": [],
+    "reason": "婴初守柱、断臂血遁及接臂均本次，不给T0伤残。"
+  },
+  {
+    "id": "innerstar-hua-daoist",
+    "label": "骅姓道士",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-pillar-guards-and-city-entry"
+    ],
+    "aliases": [],
+    "reason": "守柱婴初、当次身婴俱灭，不并别处华/骅姓。"
+  },
+  {
+    "id": "innerstar-ning-pillar",
+    "label": "守柱宁姓儒生",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-pillar-guards-and-city-entry"
+    ],
+    "aliases": [],
+    "reason": "丹后留舟，非银鲨宁长老。"
+  },
+  {
+    "id": "innerstar-ma-star-elder",
+    "label": "星宫马长老",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-rescue-bargain-and-authority",
+      "innerstar-lan-siblings-return"
+    ],
+    "aliases": [
+      "紫袍大汉"
+    ],
+    "reason": "麻脸紫袍婴中、曾随双圣追魔，本次政局不前置。"
+  },
+  {
+    "id": "innerstar-ximen-star-elder",
+    "label": "星宫西门长老",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-ximen-death-and-evidence"
+    ],
+    "aliases": [],
+    "reason": "唯一具名袭韩执法者；旧慈眉/冷面是两待映射指称，此人属于两者之一，未据此增加第三活人。"
+  },
+  {
+    "id": "innerstar-qiu-ni-elder",
+    "label": "逆盟邱姓老妪",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-miaohe-death-reports",
+      "innerstar-lan-siblings-return"
+    ],
+    "aliases": [],
+    "reason": "红绿衣绿眼婴中，本次守阵角色，非其他邱姓。"
+  },
+  {
+    "id": "innerstar-sun-star-elder",
+    "label": "星宫孙长老",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-rescue-bargain-and-authority"
+    ],
+    "aliases": [],
+    "reason": "黄袍婴初，门禁怀疑/召集非轮值为本期，不并外海孙师叔。"
+  },
+  {
+    "id": "innerstar-jinlian-sect",
+    "label": "金莲门",
+    "kind": "organization-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-pillar-guards-and-city-entry"
+    ],
+    "aliases": [],
+    "reason": "隆所属宗门，天瑞岛尚许未交不提前入资产。"
+  },
+  {
+    "id": "innerstar-tianrui-island",
+    "label": "天瑞岛",
+    "kind": "place-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-pillar-guards-and-city-entry"
+    ],
+    "aliases": [],
+    "reason": "万法三大灵岛之一，花草优质为修士评价，未来政治许让未交。"
+  },
+  {
+    "id": "innerstar-sacred-founder-hall",
+    "label": "圣山创祖圣殿",
+    "kind": "place-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-rescue-bargain-and-authority",
+      "innerstar-siege-deployment-and-car"
+    ],
+    "aliases": [
+      "圣殿"
+    ],
+    "reason": "最高层青石旧修炼地，非传送星空殿；明确古老存在但具体T0禁制/人员未据本期照搬。"
+  },
+  {
+    "id": "innerstar-ximen-soul-lamp",
+    "label": "西门对应元神灵灯",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-ximen-death-and-evidence"
+    ],
+    "aliases": [],
+    "reason": "本次灯熄有旁白证实死亡，非全世界灯灭必死。"
+  },
+  {
+    "id": "innerstar-city-shield",
+    "label": "天星护城蓝幕",
+    "kind": "array-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-pillar-guards-and-city-entry",
+      "innerstar-siege-deployment-and-car"
+    ],
+    "aliases": [],
+    "reason": "门口由授权旗盘开圆道；别将唯一令等同任意自动通行。"
+  },
+  {
+    "id": "innerstar-green-dragon-car",
+    "label": "四绿蛟尸兽车",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-siege-deployment-and-car"
+    ],
+    "aliases": [],
+    "reason": "蛟尸/蟒魂复合炼制载具，非四头活蛟的新族裔。"
+  },
+  {
+    "id": "innerstar-car-python-souls",
+    "label": "兽车深海灵蟒魂",
+    "kind": "soul-group-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-siege-deployment-and-car"
+    ],
+    "aliases": [],
+    "reason": "车内四蛟尸填魂，器物与魂分，不把蟒魂误成蛟魂。"
+  },
+  {
+    "id": "innerstar-lan-brother",
+    "label": "蓝氏兄魔",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-lan-siblings-return",
+      "innerstar-siege-victory-public-identity"
+    ],
+    "aliases": [],
+    "reason": "与妹妹两独立主体，恶行旧闻不定T0出生/药史。"
+  },
+  {
+    "id": "innerstar-lan-sister",
+    "label": "蓝氏妹魔",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-lan-siblings-return",
+      "innerstar-siege-victory-public-identity"
+    ],
+    "aliases": [],
+    "reason": "修阴女刹阳决的女性，与兄同行；不并魔界蓝氏前辈。"
+  },
+  {
+    "id": "innerstar-monie-island",
+    "label": "魔孽岛",
+    "kind": "place-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-lan-siblings-return"
+    ],
+    "aliases": [],
+    "reason": "二人自称隐居多年，不能只凭多年将其T0放此岛。"
+  },
+  {
+    "id": "innerstar-lan-yinnv-method",
+    "label": "阴女刹阳决",
+    "kind": "method-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-lan-siblings-return"
+    ],
+    "aliases": [],
+    "reason": "赵介绍女魔所修吸元阳法，不能变成普遍双修法。"
+  },
+  {
+    "id": "innerstar-liudao-twohead-snake",
+    "label": "六道双首乌蛇",
+    "kind": "creature-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-liudao-final-battle"
+    ],
+    "aliases": [],
+    "reason": "单条豢养蛇，不把这只个体新建整个双首种族。"
+  },
+  {
+    "id": "innerstar-liudao-corpse-pair",
+    "label": "六道附魔两炼尸",
+    "kind": "corpse-group-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-liudao-final-battle"
+    ],
+    "aliases": [],
+    "reason": "一男一女尸，男同貌；实际肉身来源未答，与控制者意识分开。"
+  },
+  {
+    "id": "innerstar-liudao-bone-banner",
+    "label": "六道所炼三神白骨幡",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-wen-furen-last-choice"
+    ],
+    "aliases": [],
+    "reason": "灵界邪器的皮毛仿品，三骷髅为幡首组成非独立生物种族。"
+  },
+  {
+    "id": "innerstar-liudao-green-prison",
+    "label": "六道囚婴绿瓶",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-liudao-final-battle",
+      "innerstar-wen-furen-last-choice"
+    ],
+    "aliases": [],
+    "reason": "囚温婴且被带逃，非韩小绿瓶/掌天瓶。"
+  },
+  {
+    "id": "innerstar-ling-blue-hook",
+    "label": "凌玉灵蓝色玉钩",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-mountain-transfer-attempt"
+    ],
+    "aliases": [],
+    "reason": "本次护元磁影响法宝，不把未说明的五行材料补定。"
+  },
+  {
+    "id": "innerstar-magnetic-door-token",
+    "label": "元磁洞门玉牌",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-mountain-transfer-attempt"
+    ],
+    "aliases": [],
+    "reason": "掌管特定门禁，不自动取得洞中山或整个星宫所有权。"
+  },
+  {
+    "id": "innerstar-honorary-elder-agreement",
+    "label": "韩与星宫挂名客卿约",
+    "kind": "agreement-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-honorary-office-public-announcement"
+    ],
+    "aliases": [],
+    "reason": "战后另付灵石挂名，不与早先暂借令或三救命约混一份。"
   }
 ]
