@@ -1,0 +1,135 @@
+{
+  "formatVersion": 1,
+  "status": "opening-life-local-validation-passed-not-global-release",
+  "paidCalls": 0,
+  "rootAssignments": {
+    "canon-wei-wuya": "木、水双灵根",
+    "canon-zhiyang-shangren": "火、土双灵根",
+    "canon-hehuan-yi-elder": "金、水双灵根",
+    "canon-yunlu-laomo": "木、火双灵根",
+    "canon-wang-tiansheng": "水、土双灵根",
+    "canon-wang-tiangu": "金、水、土三灵根",
+    "canon-cheng-tiankun": "木、火双灵根",
+    "canon-lu-luo": "水、木、土三灵根",
+    "tiannan-shen-yan": "金、木、水三灵根",
+    "tiannan-luo-shu": "木、水、火三灵根",
+    "tiannan-yu-qing": "金、土双灵根",
+    "tiannan-du-ning": "金、火、土三灵根",
+    "tiannan-liang-shi": "金、木双灵根",
+    "tiannan-wen-zhi": "木、火、土三灵根",
+    "tiannan-shi-jing": "木、水、土三灵根",
+    "tiannan-chen-lu": "木、水、火、土四灵根"
+  },
+  "newAgents": [
+    "original-tiannan-gu-nan",
+    "original-tiannan-meng-pan",
+    "original-tiannan-yao-heng",
+    "original-tiannan-wu-bai",
+    "original-tiannan-su-qin",
+    "original-tiannan-yu-tang",
+    "original-tiannan-zhou-yun",
+    "original-tiannan-chen-que",
+    "original-tiannan-luo-yi",
+    "original-tiannan-zhao-heng",
+    "original-tiannan-lin-qiao"
+  ],
+  "sourceIdentityConsolidation": {
+    "from": "canon-ma-huangfeng-medicine",
+    "to": "canon-huangfeng-ma-gardener",
+    "rows": [
+      {
+        "candidateId": "batch-0116-object-0009",
+        "before": [
+          "canon-ma-huangfeng-medicine",
+          "tiannan-xiao-reunion-and-gifts"
+        ],
+        "after": [
+          "canon-huangfeng-ma-gardener",
+          "tiannan-xiao-reunion-and-gifts"
+        ]
+      },
+      {
+        "candidateId": "batch-0116-object-0010",
+        "before": [
+          "canon-ma-huangfeng-medicine",
+          "tiannan-xiao-reunion-and-gifts"
+        ],
+        "after": [
+          "canon-huangfeng-ma-gardener",
+          "tiannan-xiao-reunion-and-gifts"
+        ]
+      }
+    ]
+  },
+  "moduleHash": "054c8a8b2733f9f73bd37eae46fbf93701f23f2bc2e6b8e483201f153548a1db",
+  "limitations": [
+    "当前具体场所与人员按明确原创支持生活；不宣称天南全部人口已逐人创建。",
+    "不替代全域源遗漏审定、导入和真实游玩验收。"
+  ],
+  "validation": {
+    "assembly": {
+      "regionIds": [
+        "human-local",
+        "shared-foundations",
+        "spirit-human-three",
+        "spirit-demon-seven",
+        "spirit-tianyuan",
+        "spirit-fengyuan",
+        "spirit-feiling",
+        "spirit-minghe",
+        "human-inner-star",
+        "spirit-thunder",
+        "human-outer-star",
+        "associated-guanghan",
+        "human-void-hall",
+        "associated-yinming",
+        "spirit-blood",
+        "spirit-seas",
+        "associated-demon",
+        "associated-reported",
+        "human-dajin",
+        "human-ten-thousand",
+        "human-north",
+        "human-south-kunwu",
+        "human-tiannan",
+        "human-yue",
+        "human-boundless",
+        "human-devil-valley",
+        "human-far-seas",
+        "associated-immortal",
+        "human-steppe",
+        "associated-xiaolingtian"
+      ],
+      "entities": 4569,
+      "agents": 768,
+      "worldHash": "sha256:3fdb975559021a6ddc74b54bd25ed8eb0c95a239f6a567b3c46afc23627f7e63"
+    },
+    "fixedRootsAndSelfKnowledge": 29,
+    "publicStoresWithCustodians": 8,
+    "individualCapacitiesAndAssets": "checked",
+    "openingArtifactGroups": 4,
+    "openingArtifacts": 10,
+    "oneSelfBindingPerAgent": "checked",
+    "paidCalls": 0
+  },
+  "openingArtifacts": {
+    "stallRequests": [
+      "tiannan-meng-stall-request",
+      "tiannan-yao-stall-request",
+      "tiannan-market-rent-ledger",
+      "tiannan-market-entry-stall"
+    ],
+    "damagedSeal": [
+      "tiannan-moyan-sealed-crate",
+      "tiannan-moyan-crate-note"
+    ],
+    "crackedWard": [
+      "tiannan-tiansha-courtyard-ward",
+      "tiannan-tiansha-cracked-tile-a",
+      "tiannan-tiansha-cracked-tile-b"
+    ],
+    "unverifiedLetter": [
+      "tiannan-qianhuan-unsealed-letter"
+    ]
+  }
+}

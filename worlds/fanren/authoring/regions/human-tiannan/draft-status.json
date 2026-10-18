@@ -1,11 +1,11 @@
 {
   "id": "human-tiannan",
-  "status": "module-reviewed-coverage-open",
-  "scope": "审校边界是当前module/claims全部内容，不是整个地区或全量候选完成。",
+  "status": "regional-candidates-and-opening-life-authored",
+  "scope": "当前模块、声明、2961候选处置及具体当期生活网已作者审定；独立源遗漏和真实游玩仍由全域门禁验收。",
   "statistics": {
-    "entities": 123,
-    "agents": 18,
-    "claims": 156,
+    "entities": 179,
+    "agents": 29,
+    "claims": 159,
     "anchors": 2565,
     "periodicProperties": 1
   },
@@ -16,12 +16,12 @@
     "requiredProvenance": "passed",
     "factIdUniqueness": "passed",
     "semanticReview": "current-module-completed",
-    "focusedWorldAssembly": "opening + human-local + shared-foundations + human-tiannan + human-yue passed",
+    "focusedWorldAssembly": "all current 30 regions passed for this snapshot",
     "periodicBoundaryAssertions": "passed",
     "cognitionAndOwnershipAssertions": "passed",
     "actualGameplay": "not-run; root owns final play acceptance",
-    "moduleHash": "ba920757732b23eae4007dc2b0f90eb55c618beabdfd2b34a0f3953816a881ed",
-    "claimsHash": "63ba9fa79efafd25fe97163f46fdefcaf1b025351cc0cda35ca6165f4ec682e0",
+    "moduleHash": "054c8a8b2733f9f73bd37eae46fbf93701f23f2bc2e6b8e483201f153548a1db",
+    "claimsHash": "016ae5b927ecf8a4237b591b9d4f357cbec5e2fceb077dbe70134fd0a0cbe965",
     "candidateDispositions": {
       "moduleId": "human-tiannan",
       "candidates": 2961,
@@ -38,18 +38,64 @@
       "unresolved": 0,
       "boundedUncertainty": 6,
       "approvedForRuntime": false,
-      "reportHash": "f077971bd7efb26aea4e108fc43e108cb03a55cfa9d2cf508e3cf41aa25d8fbf"
+      "reportHash": "15b37d5b949d1388730ea79e0f02b0e39d2a2800e991f55195667691bbd298b1"
+    },
+    "livingAssertions": {
+      "assembly": {
+        "regionIds": [
+          "human-local",
+          "shared-foundations",
+          "spirit-human-three",
+          "spirit-demon-seven",
+          "spirit-tianyuan",
+          "spirit-fengyuan",
+          "spirit-feiling",
+          "spirit-minghe",
+          "human-inner-star",
+          "spirit-thunder",
+          "human-outer-star",
+          "associated-guanghan",
+          "human-void-hall",
+          "associated-yinming",
+          "spirit-blood",
+          "spirit-seas",
+          "associated-demon",
+          "associated-reported",
+          "human-dajin",
+          "human-ten-thousand",
+          "human-north",
+          "human-south-kunwu",
+          "human-tiannan",
+          "human-yue",
+          "human-boundless",
+          "human-devil-valley",
+          "human-far-seas",
+          "associated-immortal",
+          "human-steppe",
+          "associated-xiaolingtian"
+        ],
+        "entities": 4569,
+        "agents": 768,
+        "worldHash": "sha256:3fdb975559021a6ddc74b54bd25ed8eb0c95a239f6a567b3c46afc23627f7e63"
+      },
+      "fixedRootsAndSelfKnowledge": 29,
+      "publicStoresWithCustodians": 8,
+      "individualCapacitiesAndAssets": "checked",
+      "openingArtifactGroups": 4,
+      "openingArtifacts": 10,
+      "oneSelfBindingPerAgent": "checked",
+      "paidCalls": 0
     }
   },
   "candidateCoverage": {
     "inputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
     "candidateCount": 2961,
     "formalDispositions": 2961,
-    "status": "lexical-candidates-closed-not-regional-release"
+    "status": "lexical-candidates-closed-not-global-release"
   },
   "completedCorrections": [
     "复核全部采用锚点上下文；魏无涯依据提前两百余年突破的回述修正T0元婴后期。",
-    "王蝉暗灵根与家人已知资质落实；保留其他未确证灵根属性的未知范围。",
+    "王蝉暗灵根沿原文，其余16名修士以明确原创固定客观属性并补本人检测认知；不再留运行时任意生成的空资质。",
     "慕沛灵依据试剑年龄限制与韩立约二百岁时间线归为开篇未出生；天道盟尚未形成。",
     "修正沈砚已持玉简却想拒收的矛盾，去掉未实体化的客户/交易/轮班承诺；温芷请求程长老示范，自己不冒充定灵丹主炼者。",
     "阗天上元灭光阵、联盟阵钥、现有维护库和余清操作权限明确分离；启阵需人员、法力及真实灵石。",
@@ -57,22 +103,23 @@
     "三名天南资深修士互识，私有库存和机构公产未合并；全部人物认知清理作者术语与未来剧透。"
   ],
   "unfinished": [
-    "区域候选尚未逐项分类并绑定最终运行/历史/未来处置。",
-    "元武国仍是地理节点；辛如音、齐云霄、付家与元武三正派尚未制作，已有相关阅读不能代替内容落地。",
-    "宋玉和柳玉的T0出生、师承尚未闭合，当前仅索引而不实例化后期成人。慕沛灵已据年龄证据明确尚未出生。",
-    "魔焰门、天煞宗、千幻宗等部分宗门目前只有组织及隶属，完整岗位与驻地生活仍待展开。",
-    "天南完整国家、宗派、族群和社会网络覆盖尚未完成。",
-    "虞国绝对南北方位、御灵宗天都/天罗称名源内冲突留在来源异文台账，不制造第二宗门或静默改原文。"
+    "全域独立source review的遗漏、别名、身份问题仍须对本区已有结论逐项对账；不得把词法候选关闭代替源遗漏关闭。",
+    "最终导入、九出身和真实游玩验收由root统筹。"
   ],
   "files": {
-    "module.json": "ba920757732b23eae4007dc2b0f90eb55c618beabdfd2b34a0f3953816a881ed",
-    "claims.json": "63ba9fa79efafd25fe97163f46fdefcaf1b025351cc0cda35ca6165f4ec682e0",
-    "subjects.json": "f85118ae679a693fab1c0b6bbde8fdf64d3a43146511f02f6741d77158d2fe96"
+    "module.json": "054c8a8b2733f9f73bd37eae46fbf93701f23f2bc2e6b8e483201f153548a1db",
+    "claims.json": "016ae5b927ecf8a4237b591b9d4f357cbec5e2fceb077dbe70134fd0a0cbe965",
+    "subjects.json": "afca607885c70a058c5b045b744fae32383e1c20308e225343f17ea811ec4d49"
   },
   "integrationNotes": [
     "装配顺序human-tiannan在human-yue和human-devil-valley之前；human-yue依赖human-local的墨居仁。",
     "review.json的full只覆盖其指纹绑定的当前模块。地区覆盖未完成须继续体现在总表。",
     "无付费模型调用；无Git操作；根代理负责独立验收、完整包装配与真实游玩。"
   ],
-  "candidateDisposition": "2961/2961已有明确逐条处置，0待审；本轮148条直接审定及59条精确复用，另修旧审2条。"
+  "candidateDisposition": "2961/2961已有明确逐条处置，0待审；本单元直接复读0条。",
+  "boundedSourceLimits": [
+    "宋玉和柳玉等后期身份按出生/师承证据保留源档；原文未给T0事实不自动生成后期成人。",
+    "虞国绝对南北方位、御灵宗天都/天罗称名，以及其他具体版本疑点保留原文边界，不静默改字或复制主体。",
+    "元武三派与魔道外务站的人员、库存及精确接待点明确原创，不声称原著交代了所有T0门内人口。"
+  ]
 }
