@@ -2,19 +2,20 @@
   "status": "module-reviewed-coverage-open",
   "scope": "有源据的草原地理、边界、普通部落与圣殿生活模块；并非919候选全量闭环。",
   "candidateCount": 919,
-  "candidateDisposition": "尚未逐条处置；本轮只逐条核实已采用来源与14个重要主体时间状态。",
+  "candidateDisposition": "182/919已逐条处理（86严格同ID/源指纹复用，96本轮直接复读），737待审。",
   "remaining": [
     "祝/毕/田锺、乐姓、天风穆、金阳/拜火等重要人物与部落需继续做开篇断代和能力资产落点。",
     "谷双蒲与御灵宗关系须与天南/坠魔谷的东门图主体联核，尚未实例化。",
     "天澜圣兽上界主体位置/年代和圣鼎唯一器物未完成，不把后期召唤分身预置开篇。",
     "黄沙魔尘幡当前为完整实物与保管/部族祖训，具体施阵威力与损伤需要更多来源，不能仅凭名字自动施展无边能力。",
-    "919词法候选未逐条人工归类；当前模块通过不代表整个地区候选已结项。"
+    "737词法候选仍待逐条归类；当前模块通过不代表全草原制作已完成。",
+    "天风穆有数百年修行的回溯依据；下一角色生活单元补明确较早修为、部落关系与资产，当前仅来源身份。"
   ],
   "statistics": {
     "entities": 76,
     "agents": 12,
-    "claims": 21,
-    "anchors": 39,
+    "claims": 29,
+    "anchors": 77,
     "fullReadChapters": 13,
     "additionalAnchorOnlyChapters": 1,
     "periodicProperties": 1,
@@ -29,19 +30,45 @@
     "entities": 3420,
     "agents": 624,
     "worldHash": "sha256:a8de649f7a9870abe5f6b0c79af82dccdf1e0a0c5dd3c95002ace835d68dabd6",
-    "moduleHash": "38b10bb62e7f31101a40415c04d939025172e5e7e451230b4831b0bcc982b017",
-    "claimsHash": "d9f066e6a4eaf96592726bdd95fd29f7345e149e161d6b317a58ecddc45e6dbc",
+    "moduleHash": "87a68d937ae327ae661267f361a821b1b52f6fba37bc2ac7c657c89e508f5d6b",
+    "claimsHash": "79b8bebd0a432219ee5ccf023c15136c38283bf53c19776aad16803dedf263ae",
     "regionalSchema": "passed",
     "sourceAndAnchorSha256": "passed",
     "requiredProvenance": 277,
     "actualModelGameplay": "not-run; root owns final gameplay acceptance",
-    "otherModuleApprovals": "not modified; assembly used ephemeral local validation inputs only"
+    "otherModuleApprovals": "not modified; assembly used ephemeral local validation inputs only",
+    "candidateDispositions": {
+      "moduleId": "human-steppe",
+      "candidates": 919,
+      "counts": {
+        "adopted": 12,
+        "corrected": 115,
+        "history-only": 2,
+        "later-only": 53,
+        "bounded-uncertainty": 0,
+        "transferred": 0,
+        "pending": 737
+      },
+      "completed": 182,
+      "unresolved": 737,
+      "boundedUncertainty": 0,
+      "approvedForRuntime": false,
+      "reportHash": "4c3ad2d6f5a6103c5ba3fc912dcf1c7dae9012b1fa9fb336081ddb7bf9d15b5b"
+    },
+    "priorAssemblyOnly": true,
+    "currentAssembly": {
+      "regions": 30,
+      "entities": 3973,
+      "agents": 685,
+      "worldHash": "sha256:4b772ea973b5f4a383f55152f520459468db18048680fd8160d85c159fbef71a",
+      "note": "该次30区域快照通过；其余区域仍各自审定，不授予全域发布或真实游玩批准。"
+    }
   },
   "candidateCoverage": {
     "inputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
     "candidateCount": 919,
-    "formalDispositions": 0,
-    "status": "not reviewed item-by-item"
+    "formalDispositions": 182,
+    "status": "partial-editorial-closure-not-regional-release"
   },
   "integrationNotes": [
     "装配须位于 human-tiannan、human-devil-valley、human-dajin之后：依赖tiannan-border-loess、dv-cangkun-hidden-cave、dajin-shun-river。",
@@ -49,11 +76,19 @@
     "跨区路由仅补既有entity facts；原地区文件完全未修改。",
     "无付费API调用，无Git操作，未运行全量check:fast。"
   ],
-  "fileSha256": {
+  "priorFileSha256": {
     "module.json": "ccbc3fc61f3c992be7f0338c28ec7bf68ca7292e72f2f8c2557d39e001927eeb",
     "claims.json": "5d62fa6658a79c1eb07638e6ebc179e75dcf3c40a1e6dc7c910ec549a6e7f3b5",
     "subjects.json": "8798a83016b273a7281726ffb961b42cf6bc111a9d86c78c787afdfbf5659793",
     "source-reading.json": "c6f6dd1e3ebad4c7ffc7ebea4305388177893a916e3ea4c1e13182d0d88e4652",
     "review.json": "3725c64ec914626260b57d89e06af2bc67dd01b067ed2ad38af306d7c8734e44"
+  },
+  "fileSha256": {
+    "module.json": "3f0d00ec50a2ab025e846ca713b445551ac3a574d85e4b0b6300346fe4f4b3e8",
+    "claims.json": "f0a8730e770d5b927b40352933c8dab3f87558a2ae508873b6d97abe9959d702",
+    "subjects.json": "a141469a6855fbb83aa62e721a1c33279d457c284942ff110673a8fdb7078f9d",
+    "source-reading.json": "779f362cc6bc16ed4a42b48f74ed0de84789768da31693ece80fd165f9b836dc",
+    "review.json": "66aedd127499b1346bf235a4fee9f8c09a1017837848e0e1a2102826593d2e08",
+    "candidate-dispositions.json": "7291edc318daff0d6a6744657362e269bc34478e7f7d2a0381ad62a38b8556e3"
   }
 }

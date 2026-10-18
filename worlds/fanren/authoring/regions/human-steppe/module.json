@@ -6344,6 +6344,11 @@
       "id": "steppe-travel-and-language",
       "text": "草原父节点不能缩短跨区路线；骑乘、遁行、行舟耗时取决于实际距离、能力和补给。语言需要已学知识或翻译；知道地名不会获得当地秘仪、他人动机或路线上的全部消息。",
       "severity": "hard"
+    },
+    {
+      "id": "steppe-arts-and-limited-hide",
+      "text": "灵术须本人学会并有实际法力、配合与条件；红尘万丈会妨碍探测但不是绝对全知屏障，单人术不能凭名称扩成数十里联军阵。须弥虫幼虫的空间藏形有大小和时长限制、可能被识破，不能将它当永久无代价异界仓库。",
+      "severity": "hard"
     }
   ],
   "provenance": {
@@ -7317,6 +7322,10 @@
     "fact:steppe-lamp-door-seal-owner": [
       "steppe-opening-concrete-life",
       "steppe-values"
+    ],
+    "law:steppe-arts-and-limited-hide": [
+      "steppe-wind-and-xumi-limits",
+      "steppe-lingshu"
     ]
   }
 }
