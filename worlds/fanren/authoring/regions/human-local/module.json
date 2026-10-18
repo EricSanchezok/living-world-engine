@@ -198,6 +198,30 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "caixia-road-route-local-hidden-basin",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-hidden-basin"
+          },
+          "description": "按地形寻找槐洞，再匍匐过狭道；行人不初始知道确切入口。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "caixia-road-route-local-luosha-slope",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-luosha-slope"
+          },
+          "description": "沿普通边界驿道步行或骑行，不能略过补给。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -233,6 +257,18 @@
           "description": "进山入口有人值守，访客可以陈明来意，准入属于门派决定。",
           "access": {
             "kind": "public"
+          }
+        },
+        {
+          "id": "caixia-mountain-route-local-thorn-gully",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-thorn-gully"
+          },
+          "description": "山顶观察后须自备绳索、攀爬工具和安全落点。",
+          "access": {
+            "kind": "private"
           }
         }
       ],
@@ -949,7 +985,7 @@
     },
     {
       "id": "qixuan-main-hall",
-      "name": "七玄门总堂",
+      "name": "七玄殿",
       "kind": "location",
       "placement": "sunset-peak",
       "description": "山顶总堂的议事处；不预设战争包围或机关已经启动。",
@@ -962,6 +998,90 @@
             "entityId": "qixuan-checkpoint-13"
           },
           "description": "山顶总堂的议事处；不预设战争包围或机关已经启动。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "qixuan-main-hall-route-local-sunset-cavern",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-sunset-cavern"
+          },
+          "description": "主殿后封闭通道，须实际得准或采取可行手段进入。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "qixuan-main-hall-route-local-qixuan-sidehall-1",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-qixuan-sidehall-1"
+          },
+          "description": "由峰顶殿前空地往来，非跨山瞬移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "qixuan-main-hall-route-local-qixuan-sidehall-2",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-qixuan-sidehall-2"
+          },
+          "description": "由峰顶殿前空地往来，非跨山瞬移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "qixuan-main-hall-route-local-qixuan-sidehall-3",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-qixuan-sidehall-3"
+          },
+          "description": "由峰顶殿前空地往来，非跨山瞬移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "qixuan-main-hall-route-local-qixuan-sidehall-4",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-qixuan-sidehall-4"
+          },
+          "description": "由峰顶殿前空地往来，非跨山瞬移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "qixuan-main-hall-route-local-qixuan-sidehall-5",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-qixuan-sidehall-5"
+          },
+          "description": "由峰顶殿前空地往来，非跨山瞬移。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "qixuan-main-hall-route-local-qixuan-sidehall-6",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-qixuan-sidehall-6"
+          },
+          "description": "由峰顶殿前空地往来，非跨山瞬移。",
           "access": {
             "kind": "public"
           }
@@ -1217,6 +1337,30 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "qixuan-kitchen-route-local-cliff-grove",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-cliff-grove"
+          },
+          "description": "沿山路入林，所耗时间由距离、光照与步速确定。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "qixuan-kitchen-route-local-common-clinic",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-common-clinic"
+          },
+          "description": "堂院普通道路。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -1238,6 +1382,18 @@
             "entityId": "caixia-road"
           },
           "description": "野狼帮处理帮务和核算收入的总坛，陌生访客会受盘问。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "wild-wolf-headquarters-route-local-luosha-slope",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-luosha-slope"
+          },
+          "description": "经野狼管辖路段，依实际通行和路况。",
           "access": {
             "kind": "public"
           }
@@ -1873,7 +2029,7 @@
     },
     {
       "id": "canon-qixuan-master",
-      "name": "王门主",
+      "name": "王绝楚",
       "kind": "person",
       "placement": "qixuan-main-hall",
       "description": "七玄门现任门主，掌理门派事务。",
@@ -1997,7 +2153,7 @@
             },
             {
               "id": "location",
-              "name": "七玄门总堂",
+              "name": "七玄殿",
               "description": "自己熟悉的所在处。",
               "status": "observed"
             },
@@ -2015,7 +2171,7 @@
             },
             {
               "id": "known-qixuan-main-hall",
-              "name": "总堂",
+              "name": "七玄殿",
               "description": "熟悉向总堂禀事的路。",
               "status": "observed"
             },
@@ -2023,6 +2179,36 @@
               "id": "known-qixuan-sect-funds",
               "name": "日用银库",
               "description": "一千八百两当前日用银；其他未写实财富不自动变为可支配库存。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-sunset-cavern",
+              "name": "落日峰石乳洞",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-cavern-control",
+              "name": "山腹机关室",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-cavern-two",
+              "name": "二号机关",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-cavern-other",
+              "name": "旧总控联动",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-chen-mechanic",
+              "name": "陈衡",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
               "status": "observed"
             }
           ],
@@ -2062,6 +2248,36 @@
               "canonical_entity_ids": [
                 "qixuan-sect-funds"
               ]
+            },
+            {
+              "local_entity_id": "known-local-sunset-cavern",
+              "canonical_entity_ids": [
+                "local-sunset-cavern"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-cavern-control",
+              "canonical_entity_ids": [
+                "local-cavern-control"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-cavern-two",
+              "canonical_entity_ids": [
+                "local-cavern-two"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-cavern-other",
+              "canonical_entity_ids": [
+                "local-cavern-other"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-chen-mechanic",
+              "canonical_entity_ids": [
+                "local-chen-mechanic"
+              ]
             }
           ],
           "evidence": [
@@ -2083,6 +2299,21 @@
                 "value": "具有本门凡俗武艺、内家调息与掌门行政经验；无已知修仙法力。"
               },
               "description": "具有本门凡俗武艺、内家调息与掌门行政经验；无已知修仙法力。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "cavern-knowledge",
+              "subjectId": "self",
+              "predicate": "cavern-knowledge",
+              "value": {
+                "kind": "text",
+                "value": "知道旧洞室和二号联动，当前锁定；全控一处销轴磨损，检修完成之前不假定全部完好。"
+              },
+              "description": "知道旧洞室和二号联动，当前锁定；全控一处销轴磨损，检修完成之前不假定全部完好。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -2222,7 +2453,7 @@
             },
             {
               "id": "known-qixuan-main-hall",
-              "name": "总堂",
+              "name": "七玄殿",
               "description": "熟悉向总堂禀事的路。",
               "status": "observed"
             },
@@ -2411,7 +2642,7 @@
             },
             {
               "id": "location",
-              "name": "七玄门总堂",
+              "name": "七玄殿",
               "description": "自己熟悉的所在处。",
               "status": "observed"
             },
@@ -2429,7 +2660,7 @@
             },
             {
               "id": "known-qixuan-main-hall",
-              "name": "总堂",
+              "name": "七玄殿",
               "description": "熟悉向总堂禀事的路。",
               "status": "observed"
             }
@@ -2624,7 +2855,7 @@
             },
             {
               "id": "known-qixuan-main-hall",
-              "name": "总堂",
+              "name": "七玄殿",
               "description": "熟悉向总堂禀事的路。",
               "status": "observed"
             }
@@ -2819,7 +3050,7 @@
             },
             {
               "id": "known-qixuan-main-hall",
-              "name": "总堂",
+              "name": "七玄殿",
               "description": "熟悉向总堂禀事的路。",
               "status": "observed"
             }
@@ -3014,7 +3245,7 @@
             },
             {
               "id": "known-qixuan-main-hall",
-              "name": "总堂",
+              "name": "七玄殿",
               "description": "熟悉向总堂禀事的路。",
               "status": "observed"
             }
@@ -3209,7 +3440,7 @@
             },
             {
               "id": "known-qixuan-main-hall",
-              "name": "总堂",
+              "name": "七玄殿",
               "description": "熟悉向总堂禀事的路。",
               "status": "observed"
             }
@@ -3398,7 +3629,7 @@
             },
             {
               "id": "location",
-              "name": "七玄门总堂",
+              "name": "七玄殿",
               "description": "自己熟悉的所在处。",
               "status": "observed"
             },
@@ -3416,7 +3647,7 @@
             },
             {
               "id": "known-qixuan-main-hall",
-              "name": "总堂",
+              "name": "七玄殿",
               "description": "熟悉向总堂禀事的路。",
               "status": "observed"
             },
@@ -4208,6 +4439,24 @@
               "name": "墨大夫医具",
               "description": "诊脉、针灸与处理外伤的医具，药材另从药园领取。",
               "status": "observed"
+            },
+            {
+              "id": "known-local-doctor-luo",
+              "name": "罗大夫",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-doctor-he",
+              "name": "何大夫",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-doctor-qiu",
+              "name": "邱大夫",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -4245,6 +4494,24 @@
               "local_entity_id": "known-local-mo-medical-kit",
               "canonical_entity_ids": [
                 "local-mo-medical-kit"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-doctor-luo",
+              "canonical_entity_ids": [
+                "local-doctor-luo"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-doctor-he",
+              "canonical_entity_ids": [
+                "local-doctor-he"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-doctor-qiu",
+              "canonical_entity_ids": [
+                "local-doctor-qiu"
               ]
             }
           ],
@@ -5038,6 +5305,12 @@
               "name": "门内大厨房",
               "description": "自己熟悉的所在处。",
               "status": "observed"
+            },
+            {
+              "id": "known-local-doctor-he",
+              "name": "何大夫",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -5051,6 +5324,12 @@
               "local_entity_id": "location",
               "canonical_entity_ids": [
                 "qixuan-kitchen"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-doctor-he",
+              "canonical_entity_ids": [
+                "local-doctor-he"
               ]
             }
           ],
@@ -5200,7 +5479,7 @@
             },
             {
               "id": "known-qixuan-main-hall",
-              "name": "总堂",
+              "name": "七玄殿",
               "description": "熟悉向总堂禀事的路。",
               "status": "observed"
             }
@@ -5293,6 +5572,18 @@
             "entityId": "baimang-mountain"
           },
           "description": "镜州境内规模大于彩霞山的大山，山路陌生，进山需准备。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "jingzhou-capital-route-local-iron-spear-yard",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-iron-spear-yard"
+          },
+          "description": "沿城郊小路步行往来。",
           "access": {
             "kind": "public"
           }
@@ -7154,6 +7445,18 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "canon-li-elder-elders-rank",
+          "predicate": "elders-rank",
+          "value": {
+            "kind": "number",
+            "value": 5
+          },
+          "description": "旧职务回溯：门中排行第五，与其他同姓人物分开。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [
@@ -8024,7 +8327,7 @@
             },
             {
               "id": "location",
-              "name": "七玄门总堂",
+              "name": "七玄殿",
               "description": "自己熟悉的所在处。",
               "status": "observed"
             },
@@ -10968,6 +11271,12 @@
               "name": "锻打工具",
               "description": "铁锤、钳子、铁砧和普通小炉。",
               "status": "observed"
+            },
+            {
+              "id": "known-local-doctor-qiu",
+              "name": "邱大夫",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -10999,6 +11308,12 @@
               "local_entity_id": "known-local-forging-tools",
               "canonical_entity_ids": [
                 "local-forging-tools"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-doctor-qiu",
+              "canonical_entity_ids": [
+                "local-doctor-qiu"
               ]
             }
           ],
@@ -11387,6 +11702,2187 @@
       "meters": [],
       "quantities": [],
       "ratings": []
+    },
+    {
+      "id": "local-sunset-cavern",
+      "name": "落日峰石乳洞",
+      "kind": "location",
+      "placement": "sunset-peak",
+      "description": "山腹巨大天然石乳洞，后经古人布置土木机关；当前须通过守护入口进入。",
+      "facts": [
+        {
+          "id": "local-sunset-cavern-route-qixuan-main-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "qixuan-main-hall"
+          },
+          "description": "主殿后封闭通道，须实际得准或采取可行手段进入。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "local-sunset-cavern-route-local-cavern-control",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-cavern-control"
+          },
+          "description": "沿实际窄道进入操作室，锁钥与守卫不因知道地名消失。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-cavern-control",
+      "name": "山腹机关室",
+      "kind": "location",
+      "placement": "local-sunset-cavern",
+      "description": "独立操作处，控制杆与承重构件相连，当前保持锁定。",
+      "facts": [
+        {
+          "id": "local-cavern-control-route-local-sunset-cavern",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-sunset-cavern"
+          },
+          "description": "沿实际窄道进入操作室，锁钥与守卫不因知道地名消失。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-hidden-basin",
+      "name": "槐洞小水潭",
+      "kind": "location",
+      "placement": "caixia-mountain",
+      "description": "小盆地四壁陡峭，进入须找到老槐树洞与狭窄通道；没有韩厉交易记忆。",
+      "facts": [
+        {
+          "id": "local-hidden-basin-route-caixia-road",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "caixia-road"
+          },
+          "description": "按地形寻找槐洞，再匍匐过狭道；行人不初始知道确切入口。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-thorn-gully",
+      "name": "藤荆山沟",
+      "kind": "location",
+      "placement": "caixia-mountain",
+      "description": "两峰夹一字长沟，藤蔓遮顶，两端灌木；尚没有后来韩立垂下的绳索。",
+      "facts": [
+        {
+          "id": "local-thorn-gully-route-caixia-mountain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "caixia-mountain"
+          },
+          "description": "山顶观察后须自备绳索、攀爬工具和安全落点。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-cliff-grove",
+      "name": "山崖松林",
+      "kind": "location",
+      "placement": "caixia-mountain",
+      "description": "普通山林，近溪，不是必须举行决斗的场地。",
+      "facts": [
+        {
+          "id": "local-cliff-grove-route-qixuan-kitchen",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "qixuan-kitchen"
+          },
+          "description": "沿山路入林，所耗时间由距离、光照与步速确定。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "local-cliff-grove-route-local-stream",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-stream"
+          },
+          "description": "沿林下小径靠近溪边。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-stream",
+      "name": "松林小溪",
+      "kind": "location",
+      "placement": "local-cliff-grove",
+      "description": "溪水流经偏僻山路，没有预设倒地待救的厉飞雨。",
+      "facts": [
+        {
+          "id": "local-stream-route-local-cliff-grove",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-cliff-grove"
+          },
+          "description": "沿林下小径靠近溪边。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-luosha-slope",
+      "name": "落沙坡",
+      "kind": "location",
+      "placement": "jingzhou",
+      "description": "两派边界地带，可行旅，不预设必然和谈或伏击。",
+      "facts": [
+        {
+          "id": "local-luosha-slope-route-caixia-road",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "caixia-road"
+          },
+          "description": "沿普通边界驿道步行或骑行，不能略过补给。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "local-luosha-slope-route-wild-wolf-headquarters",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "wild-wolf-headquarters"
+          },
+          "description": "经野狼管辖路段，依实际通行和路况。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "local-luosha-slope-route-local-duanshui-yard",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-duanshui-yard"
+          },
+          "description": "经地方山路，入堂仍须许可。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-common-clinic",
+      "name": "门内常用医舍",
+      "kind": "location",
+      "placement": "caixia-mountain",
+      "description": "普通弟子求诊与处理外伤的医舍，三位大夫在此轮值。",
+      "facts": [
+        {
+          "id": "local-common-clinic-route-qixuan-kitchen",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "qixuan-kitchen"
+          },
+          "description": "堂院普通道路。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-iron-spear-yard",
+      "name": "铁枪会堂院",
+      "kind": "location",
+      "placement": "jingzhou",
+      "description": "小会日常议事与存放器具的地方。",
+      "facts": [
+        {
+          "id": "local-iron-spear-yard-route-jingzhou-capital",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "jingzhou-capital"
+          },
+          "description": "沿城郊小路步行往来。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-duanshui-yard",
+      "name": "断水门堂院",
+      "kind": "location",
+      "placement": "jingzhou",
+      "description": "地方小派自己的住处，尚未同野狼订下攻山盟约。",
+      "facts": [
+        {
+          "id": "local-duanshui-yard-route-local-luosha-slope",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-luosha-slope"
+          },
+          "description": "经地方山路，入堂仍须许可。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-qixuan-sidehall-1",
+      "name": "七玄偏殿1",
+      "kind": "location",
+      "placement": "sunset-peak",
+      "description": "峰顶六座小石殿之一，门内按次序编号。",
+      "facts": [
+        {
+          "id": "local-qixuan-sidehall-1-route-qixuan-main-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "qixuan-main-hall"
+          },
+          "description": "由峰顶殿前空地往来，非跨山瞬移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-qixuan-sidehall-2",
+      "name": "七玄偏殿2",
+      "kind": "location",
+      "placement": "sunset-peak",
+      "description": "峰顶六座小石殿之一，门内按次序编号。",
+      "facts": [
+        {
+          "id": "local-qixuan-sidehall-2-route-qixuan-main-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "qixuan-main-hall"
+          },
+          "description": "由峰顶殿前空地往来，非跨山瞬移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-qixuan-sidehall-3",
+      "name": "七玄偏殿3",
+      "kind": "location",
+      "placement": "sunset-peak",
+      "description": "峰顶六座小石殿之一，门内按次序编号。",
+      "facts": [
+        {
+          "id": "local-qixuan-sidehall-3-route-qixuan-main-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "qixuan-main-hall"
+          },
+          "description": "由峰顶殿前空地往来，非跨山瞬移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-qixuan-sidehall-4",
+      "name": "七玄偏殿4",
+      "kind": "location",
+      "placement": "sunset-peak",
+      "description": "峰顶六座小石殿之一，门内按次序编号。",
+      "facts": [
+        {
+          "id": "local-qixuan-sidehall-4-route-qixuan-main-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "qixuan-main-hall"
+          },
+          "description": "由峰顶殿前空地往来，非跨山瞬移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-qixuan-sidehall-5",
+      "name": "七玄偏殿5",
+      "kind": "location",
+      "placement": "sunset-peak",
+      "description": "峰顶六座小石殿之一，门内按次序编号。",
+      "facts": [
+        {
+          "id": "local-qixuan-sidehall-5-route-qixuan-main-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "qixuan-main-hall"
+          },
+          "description": "由峰顶殿前空地往来，非跨山瞬移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-qixuan-sidehall-6",
+      "name": "七玄偏殿6",
+      "kind": "location",
+      "placement": "sunset-peak",
+      "description": "峰顶六座小石殿之一，门内按次序编号。",
+      "facts": [
+        {
+          "id": "local-qixuan-sidehall-6-route-qixuan-main-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "qixuan-main-hall"
+          },
+          "description": "由峰顶殿前空地往来，非跨山瞬移。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-cavern-two",
+      "name": "二号机关",
+      "kind": "item",
+      "placement": "local-cavern-control",
+      "description": "能松开对应副殿支撑构件的旧装置，当前锁定且未触发。",
+      "facts": [
+        {
+          "id": "local-cavern-two-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "qixuan-sect"
+          },
+          "description": "已有所有权与暂时保管另计。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "local-cavern-two-mechanical-state",
+          "predicate": "mechanical-state",
+          "value": {
+            "kind": "text",
+            "value": "锁定；需实际解锁并推动整段传动，不接受远程口令自动启动。"
+          },
+          "description": "锁定；需实际解锁并推动整段传动，不接受远程口令自动启动。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "local-cavern-two-affected-structure",
+          "predicate": "affected-structure",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-qixuan-sidehall-2"
+          },
+          "description": "二号机关对应第二偏殿的基础；成功触发会破坏其支撑，并危及殿内的人与物。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-cavern-other",
+      "name": "旧总控联动",
+      "kind": "item",
+      "placement": "local-cavern-control",
+      "description": "联系其余承重结构的机关，各处保养不同；真正全开会危及山体，但受损或被堵处不能凭口令保证同样响应。",
+      "facts": [
+        {
+          "id": "local-cavern-other-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "qixuan-sect"
+          },
+          "description": "已有所有权与暂时保管另计。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "local-cavern-other-maintenance-state",
+          "predicate": "maintenance-state",
+          "value": {
+            "kind": "text",
+            "value": "一处销轴磨损，其余已知传动封存；未完成勘验前不能声称知道全山立即坍塌的全部后果。"
+          },
+          "description": "一处销轴磨损，其余已知传动封存；未完成勘验前不能声称知道全山立即坍塌的全部后果。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "local-cavern-other-repair",
+          "predicate": "repair",
+          "value": {
+            "kind": "text",
+            "value": "需1份相容木铁料、熟悉机关的匠人和半日细作更换销轴，验收前仍保持锁定。"
+          },
+          "description": "需1份相容木铁料、熟悉机关的匠人和半日细作更换销轴，验收前仍保持锁定。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-chen-mechanic",
+      "name": "陈衡",
+      "kind": "person",
+      "placement": "local-cavern-control",
+      "description": "地方凡俗生活者，有自己有限资产、职责与选择。",
+      "facts": [
+        {
+          "id": "local-chen-mechanic-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "凡俗木工、传动维护和本职已知通道；无修仙神识。"
+          },
+          "description": "凡俗木工、传动维护和本职已知通道；无修仙神识。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "local-chen-mechanic-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "local-chen-mechanic-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "local-chen-mechanic-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "local-chen-mechanic-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "local-chen-mechanic-perception",
+          "definition_id": "perception",
+          "value": 1
+        }
+      ],
+      "quantities": [],
+      "agent": {
+        "id": "local-chen-mechanic",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "地方凡俗生活者，有自己有限资产、职责与选择。",
+            "voice": "愿拿旧件说明问题，不轻易讨论机密机关。"
+          },
+          "goals": [
+            {
+              "id": "current-life",
+              "description": "向门主报告总控销轴磨损，争取木料与半日检修，同时保持现有锁定。",
+              "priority": 0.6,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "陈衡",
+              "description": "地方凡俗生活者，有自己有限资产、职责与选择。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "山腹机关室",
+              "description": "本人日常所在。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-chen-mechanic-purse",
+              "name": "陈衡私囊",
+              "description": "本人实际支配的积蓄。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-qixuan-master",
+              "name": "王绝楚",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-sunset-cavern",
+              "name": "落日峰石乳洞",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-cavern-control",
+              "name": "山腹机关室",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-cavern-two",
+              "name": "二号机关",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-cavern-other",
+              "name": "旧总控联动",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-cavern-key",
+              "name": "机关室钥匙",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-mechanic-stock",
+              "name": "机关维护料",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "local-chen-mechanic"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "local-cavern-control"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-chen-mechanic-purse",
+              "canonical_entity_ids": [
+                "local-chen-mechanic-purse"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-qixuan-master",
+              "canonical_entity_ids": [
+                "canon-qixuan-master"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-sunset-cavern",
+              "canonical_entity_ids": [
+                "local-sunset-cavern"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-cavern-control",
+              "canonical_entity_ids": [
+                "local-cavern-control"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-cavern-two",
+              "canonical_entity_ids": [
+                "local-cavern-two"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-cavern-other",
+              "canonical_entity_ids": [
+                "local-cavern-other"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-cavern-key",
+              "canonical_entity_ids": [
+                "local-cavern-key"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-mechanic-stock",
+              "canonical_entity_ids": [
+                "local-mechanic-stock"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己的学习、工作与生活经历。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "凡俗木工、传动维护和本职已知通道；无修仙神识。"
+              },
+              "description": "凡俗木工、传动维护和本职已知通道；无修仙神识。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "cavern-knowledge",
+              "subjectId": "self",
+              "predicate": "cavern-knowledge",
+              "value": {
+                "kind": "text",
+                "value": "知道旧洞室和二号联动，当前锁定；全控一处销轴磨损，检修完成之前不假定全部完好。"
+              },
+              "description": "知道旧洞室和二号联动，当前锁定；全控一处销轴磨损，检修完成之前不假定全部完好。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "local-chen-mechanic-purse",
+      "name": "陈衡私囊",
+      "kind": "container",
+      "placement": "local-chen-mechanic",
+      "description": "本人的劳动所得；不得与门派账混为一笔。",
+      "facts": [
+        {
+          "id": "local-chen-mechanic-purse-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-chen-mechanic"
+          },
+          "description": "已有所有权与暂时保管另计。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 90
+        },
+        {
+          "definition_id": "silver",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "local-doctor-luo",
+      "name": "罗大夫",
+      "kind": "person",
+      "placement": "local-common-clinic",
+      "description": "地方凡俗生活者，有自己有限资产、职责与选择。",
+      "facts": [
+        {
+          "id": "local-doctor-luo-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "普通外伤、缝合及常见草药，不能凭看一眼确诊所有毒。"
+          },
+          "description": "普通外伤、缝合及常见草药，不能凭看一眼确诊所有毒。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "local-doctor-luo-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "local-doctor-luo-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "local-doctor-luo-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "local-doctor-luo-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "local-doctor-luo-perception",
+          "definition_id": "perception",
+          "value": 1
+        }
+      ],
+      "quantities": [],
+      "agent": {
+        "id": "local-doctor-luo",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "地方凡俗生活者，有自己有限资产、职责与选择。",
+            "voice": "先听病人说过程，遇不会的症状会承认并请会诊。"
+          },
+          "goals": [
+            {
+              "id": "current-life",
+              "description": "同另两位医者核对药柜中的三包止血药，约定有伤者来诊时如何取用。",
+              "priority": 0.6,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "罗大夫",
+              "description": "地方凡俗生活者，有自己有限资产、职责与选择。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "门内常用医舍",
+              "description": "本人日常所在。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-doctor-luo-purse",
+              "name": "罗大夫私囊",
+              "description": "本人实际支配的积蓄。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-clinic-stock",
+              "name": "医舍药柜",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-clinic-splint",
+              "name": "待修夹板",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-doctor-he",
+              "name": "何大夫",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-doctor-qiu",
+              "name": "邱大夫",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-mo-juren",
+              "name": "墨大夫",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "local-doctor-luo"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "local-common-clinic"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-doctor-luo-purse",
+              "canonical_entity_ids": [
+                "local-doctor-luo-purse"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-clinic-stock",
+              "canonical_entity_ids": [
+                "local-clinic-stock"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-clinic-splint",
+              "canonical_entity_ids": [
+                "local-clinic-splint"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-doctor-he",
+              "canonical_entity_ids": [
+                "local-doctor-he"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-doctor-qiu",
+              "canonical_entity_ids": [
+                "local-doctor-qiu"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-mo-juren",
+              "canonical_entity_ids": [
+                "canon-mo-juren"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己的学习、工作与生活经历。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "普通外伤、缝合及常见草药，不能凭看一眼确诊所有毒。"
+              },
+              "description": "普通外伤、缝合及常见草药，不能凭看一眼确诊所有毒。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "local-doctor-luo-purse",
+      "name": "罗大夫私囊",
+      "kind": "container",
+      "placement": "local-doctor-luo",
+      "description": "本人的劳动所得；不得与门派账混为一笔。",
+      "facts": [
+        {
+          "id": "local-doctor-luo-purse-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-doctor-luo"
+          },
+          "description": "已有所有权与暂时保管另计。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 90
+        },
+        {
+          "definition_id": "silver",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "local-doctor-he",
+      "name": "何大夫",
+      "kind": "person",
+      "placement": "local-common-clinic",
+      "description": "地方凡俗生活者，有自己有限资产、职责与选择。",
+      "facts": [
+        {
+          "id": "local-doctor-he-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "凡俗内科问诊、普通汤剂，药性和剂量需辨证。"
+          },
+          "description": "凡俗内科问诊、普通汤剂，药性和剂量需辨证。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "local-doctor-he-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "local-doctor-he-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "local-doctor-he-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "local-doctor-he-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "local-doctor-he-perception",
+          "definition_id": "perception",
+          "value": 1
+        }
+      ],
+      "quantities": [],
+      "agent": {
+        "id": "local-doctor-he",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "地方凡俗生活者，有自己有限资产、职责与选择。",
+            "voice": "言语缓慢，愿解释为什么仍须等药效。"
+          },
+          "goals": [
+            {
+              "id": "current-life",
+              "description": "向厨房核实何时有洁净热水可供医舍，再与罗大夫核对现有药材。",
+              "priority": 0.6,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "何大夫",
+              "description": "地方凡俗生活者，有自己有限资产、职责与选择。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "门内常用医舍",
+              "description": "本人日常所在。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-doctor-he-purse",
+              "name": "何大夫私囊",
+              "description": "本人实际支配的积蓄。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-doctor-luo",
+              "name": "罗大夫",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-doctor-qiu",
+              "name": "邱大夫",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-clinic-stock",
+              "name": "医舍药柜",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-cook",
+              "name": "孙灶头",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-mo-juren",
+              "name": "墨大夫",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "local-doctor-he"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "local-common-clinic"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-doctor-he-purse",
+              "canonical_entity_ids": [
+                "local-doctor-he-purse"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-doctor-luo",
+              "canonical_entity_ids": [
+                "local-doctor-luo"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-doctor-qiu",
+              "canonical_entity_ids": [
+                "local-doctor-qiu"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-clinic-stock",
+              "canonical_entity_ids": [
+                "local-clinic-stock"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-cook",
+              "canonical_entity_ids": [
+                "local-cook"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-mo-juren",
+              "canonical_entity_ids": [
+                "canon-mo-juren"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己的学习、工作与生活经历。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "凡俗内科问诊、普通汤剂，药性和剂量需辨证。"
+              },
+              "description": "凡俗内科问诊、普通汤剂，药性和剂量需辨证。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "local-doctor-he-purse",
+      "name": "何大夫私囊",
+      "kind": "container",
+      "placement": "local-doctor-he",
+      "description": "本人的劳动所得；不得与门派账混为一笔。",
+      "facts": [
+        {
+          "id": "local-doctor-he-purse-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-doctor-he"
+          },
+          "description": "已有所有权与暂时保管另计。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 90
+        },
+        {
+          "definition_id": "silver",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "local-doctor-qiu",
+      "name": "邱大夫",
+      "kind": "person",
+      "placement": "local-common-clinic",
+      "description": "地方凡俗生活者，有自己有限资产、职责与选择。",
+      "facts": [
+        {
+          "id": "local-doctor-qiu-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "普通跌打接骨、器械清洁；不能修仙续肢。"
+          },
+          "description": "普通跌打接骨、器械清洁；不能修仙续肢。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "local-doctor-qiu-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "local-doctor-qiu-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "local-doctor-qiu-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "local-doctor-qiu-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "local-doctor-qiu-perception",
+          "definition_id": "perception",
+          "value": 1
+        }
+      ],
+      "quantities": [],
+      "agent": {
+        "id": "local-doctor-qiu",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "地方凡俗生活者，有自己有限资产、职责与选择。",
+            "voice": "说话干脆，对不愿休息的人会直说后果。"
+          },
+          "goals": [
+            {
+              "id": "current-life",
+              "description": "修好一副夹板后再决定是否接新的出诊，工钱与药费分别核算。",
+              "priority": 0.6,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "邱大夫",
+              "description": "地方凡俗生活者，有自己有限资产、职责与选择。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "门内常用医舍",
+              "description": "本人日常所在。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-doctor-qiu-purse",
+              "name": "邱大夫私囊",
+              "description": "本人实际支配的积蓄。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-doctor-luo",
+              "name": "罗大夫",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-doctor-he",
+              "name": "何大夫",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-clinic-stock",
+              "name": "医舍药柜",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-clinic-splint",
+              "name": "待修夹板",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-metalworker",
+              "name": "周铁匠",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-mo-juren",
+              "name": "墨大夫",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "local-doctor-qiu"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "local-common-clinic"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-doctor-qiu-purse",
+              "canonical_entity_ids": [
+                "local-doctor-qiu-purse"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-doctor-luo",
+              "canonical_entity_ids": [
+                "local-doctor-luo"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-doctor-he",
+              "canonical_entity_ids": [
+                "local-doctor-he"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-clinic-stock",
+              "canonical_entity_ids": [
+                "local-clinic-stock"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-clinic-splint",
+              "canonical_entity_ids": [
+                "local-clinic-splint"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-metalworker",
+              "canonical_entity_ids": [
+                "local-metalworker"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-mo-juren",
+              "canonical_entity_ids": [
+                "canon-mo-juren"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己的学习、工作与生活经历。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "普通跌打接骨、器械清洁；不能修仙续肢。"
+              },
+              "description": "普通跌打接骨、器械清洁；不能修仙续肢。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "local-doctor-qiu-purse",
+      "name": "邱大夫私囊",
+      "kind": "container",
+      "placement": "local-doctor-qiu",
+      "description": "本人的劳动所得；不得与门派账混为一笔。",
+      "facts": [
+        {
+          "id": "local-doctor-qiu-purse-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-doctor-qiu"
+          },
+          "description": "已有所有权与暂时保管另计。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 90
+        },
+        {
+          "definition_id": "silver",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "local-iron-spear-steward",
+      "name": "周菱",
+      "kind": "person",
+      "placement": "local-iron-spear-yard",
+      "description": "地方凡俗生活者，有自己有限资产、职责与选择。",
+      "facts": [
+        {
+          "id": "local-iron-spear-steward-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "普通枪术、同会议事和账簿记载；无修仙法力。"
+          },
+          "description": "普通枪术、同会议事和账簿记载；无修仙法力。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "local-iron-spear-steward-member-of",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-iron-spear"
+          },
+          "description": "{'entity': 'local-iron-spear'}",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "local-iron-spear-steward-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "local-iron-spear-steward-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "local-iron-spear-steward-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "local-iron-spear-steward-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "local-iron-spear-steward-perception",
+          "definition_id": "perception",
+          "value": 1
+        }
+      ],
+      "quantities": [],
+      "agent": {
+        "id": "local-iron-spear-steward",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "地方凡俗生活者，有自己有限资产、职责与选择。",
+            "voice": "问清各自应付多少，不肯以空口担保借出公库。"
+          },
+          "goals": [
+            {
+              "id": "current-life",
+              "description": "与断水门来客商议护送一车普通药材，避免卷入两大派争端。",
+              "priority": 0.6,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "周菱",
+              "description": "地方凡俗生活者，有自己有限资产、职责与选择。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "铁枪会堂院",
+              "description": "本人日常所在。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-iron-spear-steward-purse",
+              "name": "周菱私囊",
+              "description": "本人实际支配的积蓄。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-iron-spear",
+              "name": "铁枪会",
+              "description": "自己的组织与公私资产边界。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-iron-spear-fund",
+              "name": "铁枪会公库",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-duanshui-steward",
+              "name": "顾平",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-luosha-slope",
+              "name": "落沙坡",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "local-iron-spear-steward"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "local-iron-spear-yard"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-iron-spear-steward-purse",
+              "canonical_entity_ids": [
+                "local-iron-spear-steward-purse"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-iron-spear",
+              "canonical_entity_ids": [
+                "local-iron-spear"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-iron-spear-fund",
+              "canonical_entity_ids": [
+                "local-iron-spear-fund"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-duanshui-steward",
+              "canonical_entity_ids": [
+                "local-duanshui-steward"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-luosha-slope",
+              "canonical_entity_ids": [
+                "local-luosha-slope"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己的学习、工作与生活经历。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "普通枪术、同会议事和账簿记载；无修仙法力。"
+              },
+              "description": "普通枪术、同会议事和账簿记载；无修仙法力。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "local-iron-spear-steward-purse",
+      "name": "周菱私囊",
+      "kind": "container",
+      "placement": "local-iron-spear-steward",
+      "description": "本人的劳动所得；不得与门派账混为一笔。",
+      "facts": [
+        {
+          "id": "local-iron-spear-steward-purse-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-iron-spear-steward"
+          },
+          "description": "已有所有权与暂时保管另计。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 90
+        },
+        {
+          "definition_id": "silver",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "local-duanshui-steward",
+      "name": "顾平",
+      "kind": "person",
+      "placement": "local-duanshui-yard",
+      "description": "地方凡俗生活者，有自己有限资产、职责与选择。",
+      "facts": [
+        {
+          "id": "local-duanshui-steward-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "普通刀术与本地行路经验；无修仙法力。"
+          },
+          "description": "普通刀术与本地行路经验；无修仙法力。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "local-duanshui-steward-member-of",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-duanshui"
+          },
+          "description": "{'entity': 'local-duanshui'}",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "local-duanshui-steward-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "local-duanshui-steward-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "local-duanshui-steward-force",
+          "definition_id": "force",
+          "value": 1
+        },
+        {
+          "id": "local-duanshui-steward-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "local-duanshui-steward-perception",
+          "definition_id": "perception",
+          "value": 1
+        }
+      ],
+      "quantities": [],
+      "agent": {
+        "id": "local-duanshui-steward",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "地方凡俗生活者，有自己有限资产、职责与选择。",
+            "voice": "讲实地见过的事，对道听途说总补一句尚未核实。"
+          },
+          "goals": [
+            {
+              "id": "current-life",
+              "description": "核实一段边路是否可走，再答复铁枪会的协作提议。",
+              "priority": 0.6,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "顾平",
+              "description": "地方凡俗生活者，有自己有限资产、职责与选择。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "断水门堂院",
+              "description": "本人日常所在。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-duanshui-steward-purse",
+              "name": "顾平私囊",
+              "description": "本人实际支配的积蓄。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-duanshui",
+              "name": "断水门",
+              "description": "自己的组织与公私资产边界。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-duanshui-fund",
+              "name": "断水门公库",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-iron-spear-steward",
+              "name": "周菱",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            },
+            {
+              "id": "known-local-luosha-slope",
+              "name": "落沙坡",
+              "description": "过去实际接触的工作人或物；仅本职所知，不授对方私密经历。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "local-duanshui-steward"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "local-duanshui-yard"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-duanshui-steward-purse",
+              "canonical_entity_ids": [
+                "local-duanshui-steward-purse"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-duanshui",
+              "canonical_entity_ids": [
+                "local-duanshui"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-duanshui-fund",
+              "canonical_entity_ids": [
+                "local-duanshui-fund"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-iron-spear-steward",
+              "canonical_entity_ids": [
+                "local-iron-spear-steward"
+              ]
+            },
+            {
+              "local_entity_id": "known-local-luosha-slope",
+              "canonical_entity_ids": [
+                "local-luosha-slope"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己的学习、工作与生活经历。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "普通刀术与本地行路经验；无修仙法力。"
+              },
+              "description": "普通刀术与本地行路经验；无修仙法力。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "local-duanshui-steward-purse",
+      "name": "顾平私囊",
+      "kind": "container",
+      "placement": "local-duanshui-steward",
+      "description": "本人的劳动所得；不得与门派账混为一笔。",
+      "facts": [
+        {
+          "id": "local-duanshui-steward-purse-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-duanshui-steward"
+          },
+          "description": "已有所有权与暂时保管另计。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 90
+        },
+        {
+          "definition_id": "silver",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "local-iron-spear",
+      "name": "铁枪会",
+      "kind": "social-group",
+      "placement": "local-iron-spear-yard",
+      "description": "独立地方组织，成员并非另一帮主的私有财产。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-duanshui",
+      "name": "断水门",
+      "kind": "social-group",
+      "placement": "local-duanshui-yard",
+      "description": "独立地方组织，成员并非另一帮主的私有财产。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-mechanic-stock",
+      "name": "机关维护料",
+      "kind": "container",
+      "placement": "local-cavern-control",
+      "description": "有限现有资源；经授权用途支用与个人所得分开。",
+      "facts": [
+        {
+          "id": "local-mechanic-stock-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "qixuan-sect"
+          },
+          "description": "已有所有权与暂时保管另计。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "craft-material",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "local-clinic-stock",
+      "name": "医舍药柜",
+      "kind": "container",
+      "placement": "local-common-clinic",
+      "description": "有限现有资源；经授权用途支用与个人所得分开。",
+      "facts": [
+        {
+          "id": "local-clinic-stock-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "qixuan-sect"
+          },
+          "description": "已有所有权与暂时保管另计。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "herb-packet",
+          "amount": 3
+        },
+        {
+          "definition_id": "copper",
+          "amount": 180
+        }
+      ]
+    },
+    {
+      "id": "local-iron-spear-fund",
+      "name": "铁枪会公库",
+      "kind": "container",
+      "placement": "local-iron-spear-yard",
+      "description": "有限现有资源；经授权用途支用与个人所得分开。",
+      "facts": [
+        {
+          "id": "local-iron-spear-fund-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-iron-spear"
+          },
+          "description": "已有所有权与暂时保管另计。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "silver",
+          "amount": 18
+        },
+        {
+          "definition_id": "grain",
+          "amount": 12
+        }
+      ]
+    },
+    {
+      "id": "local-duanshui-fund",
+      "name": "断水门公库",
+      "kind": "container",
+      "placement": "local-duanshui-yard",
+      "description": "有限现有资源；经授权用途支用与个人所得分开。",
+      "facts": [
+        {
+          "id": "local-duanshui-fund-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "local-duanshui"
+          },
+          "description": "已有所有权与暂时保管另计。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "silver",
+          "amount": 15
+        },
+        {
+          "definition_id": "grain",
+          "amount": 10
+        }
+      ]
+    },
+    {
+      "id": "local-cavern-key",
+      "name": "机关室钥匙",
+      "kind": "item",
+      "placement": "local-chen-mechanic",
+      "description": "陈衡当前受托保管的钥匙，不等同他拥有山体或可擅自启动。",
+      "facts": [
+        {
+          "id": "local-cavern-key-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "qixuan-sect"
+          },
+          "description": "已有所有权与暂时保管另计。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "local-clinic-splint",
+      "name": "待修夹板",
+      "kind": "item",
+      "placement": "local-common-clinic",
+      "description": "边缘毛刺待磨平，不能当已经绑好在伤者身上。",
+      "facts": [
+        {
+          "id": "local-clinic-splint-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "qixuan-sect"
+          },
+          "description": "已有所有权与暂时保管另计。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [
@@ -11464,6 +13960,16 @@
     {
       "id": "local-conflict",
       "text": "七玄门与野狼帮有既存利益冲突，但是否交涉、扩招、开战、获得军械或雇到修士由真实行动与资源决定；小说中的攻山、死契斗与死亡不自动触发。",
+      "severity": "hard"
+    },
+    {
+      "id": "local-orders-are-social",
+      "text": "帮规、死契、门派令牌和工资约定是人的承诺、权限及执行行为，不能自动剥夺角色意志或隔空伤害。处罚与违约追索须通过有能力和获知信息的人实际采取行动。",
+      "severity": "hard"
+    },
+    {
+      "id": "local-cavern-physical-controls",
+      "text": "山体机关必须有真实传动、操作与对应结构才能发生效果。局部二号毁殿不等于全山都已坍塌；损坏、禁入、维修和耗料都须核实。人物威慑话语不直接作为既成破坏提交。",
       "severity": "hard"
     }
   ],
@@ -11695,7 +14201,8 @@
     ],
     "entity:qixuan-main-hall": [
       "local-caixia-topology",
-      "local-original-implementation"
+      "local-original-implementation",
+      "local-sunset-old-cavern"
     ],
     "fact:qixuan-checkpoint-13-route-qixuan-main-hall": [
       "local-caixia-topology",
@@ -12039,7 +14546,8 @@
       "local-faction-history",
       "local-mo-established",
       "local-original-implementation",
-      "local-runtime-calibration"
+      "local-runtime-calibration",
+      "local-wang-name-and-role-continuity"
     ],
     "fact:canon-qixuan-master-learned-skill": [
       "local-master-name",
@@ -12883,6 +15391,410 @@
     ],
     "fact:local-mo-medical-kit-owned-by": [
       "local-original-implementation"
+    ],
+    "entity:local-sunset-cavern": [
+      "local-sunset-old-cavern",
+      "local-reviewed-opening-additions"
+    ],
+    "entity:local-cavern-control": [
+      "local-sunset-old-cavern",
+      "local-reviewed-opening-additions"
+    ],
+    "entity:local-hidden-basin": [
+      "local-hidden-basin-and-gully",
+      "local-reviewed-opening-additions"
+    ],
+    "entity:local-thorn-gully": [
+      "local-hidden-basin-and-gully",
+      "local-reviewed-opening-additions"
+    ],
+    "entity:local-cliff-grove": [
+      "local-waterfall-and-grove",
+      "local-reviewed-opening-additions"
+    ],
+    "entity:local-stream": [
+      "local-waterfall-and-grove",
+      "local-reviewed-opening-additions"
+    ],
+    "entity:local-luosha-slope": [
+      "local-boundary-slope-and-li-yard",
+      "local-reviewed-opening-additions"
+    ],
+    "entity:local-common-clinic": [
+      "local-doctors-and-guest-freedom",
+      "local-reviewed-opening-additions"
+    ],
+    "entity:local-iron-spear-yard": [
+      "local-other-sects-interest",
+      "local-reviewed-opening-additions"
+    ],
+    "entity:local-duanshui-yard": [
+      "local-other-sects-interest",
+      "local-reviewed-opening-additions"
+    ],
+    "fact:local-sunset-cavern-route-qixuan-main-hall": [
+      "local-sunset-old-cavern",
+      "local-reviewed-opening-additions"
+    ],
+    "fact:qixuan-main-hall-route-local-sunset-cavern": [
+      "local-sunset-old-cavern",
+      "local-reviewed-opening-additions"
+    ],
+    "fact:local-cavern-control-route-local-sunset-cavern": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-sunset-cavern-route-local-cavern-control": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-hidden-basin-route-caixia-road": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:caixia-road-route-local-hidden-basin": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-thorn-gully-route-caixia-mountain": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:caixia-mountain-route-local-thorn-gully": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-cliff-grove-route-qixuan-kitchen": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:qixuan-kitchen-route-local-cliff-grove": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-stream-route-local-cliff-grove": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-cliff-grove-route-local-stream": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-luosha-slope-route-caixia-road": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:caixia-road-route-local-luosha-slope": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-luosha-slope-route-wild-wolf-headquarters": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:wild-wolf-headquarters-route-local-luosha-slope": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-common-clinic-route-qixuan-kitchen": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:qixuan-kitchen-route-local-common-clinic": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-iron-spear-yard-route-jingzhou-capital": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:jingzhou-capital-route-local-iron-spear-yard": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-duanshui-yard-route-local-luosha-slope": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-luosha-slope-route-local-duanshui-yard": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-qixuan-sidehall-1": [
+      "local-sunset-old-cavern",
+      "local-reviewed-opening-additions"
+    ],
+    "fact:local-qixuan-sidehall-1-route-qixuan-main-hall": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:qixuan-main-hall-route-local-qixuan-sidehall-1": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-qixuan-sidehall-2": [
+      "local-sunset-old-cavern",
+      "local-reviewed-opening-additions"
+    ],
+    "fact:local-qixuan-sidehall-2-route-qixuan-main-hall": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:qixuan-main-hall-route-local-qixuan-sidehall-2": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-qixuan-sidehall-3": [
+      "local-sunset-old-cavern",
+      "local-reviewed-opening-additions"
+    ],
+    "fact:local-qixuan-sidehall-3-route-qixuan-main-hall": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:qixuan-main-hall-route-local-qixuan-sidehall-3": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-qixuan-sidehall-4": [
+      "local-sunset-old-cavern",
+      "local-reviewed-opening-additions"
+    ],
+    "fact:local-qixuan-sidehall-4-route-qixuan-main-hall": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:qixuan-main-hall-route-local-qixuan-sidehall-4": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-qixuan-sidehall-5": [
+      "local-sunset-old-cavern",
+      "local-reviewed-opening-additions"
+    ],
+    "fact:local-qixuan-sidehall-5-route-qixuan-main-hall": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:qixuan-main-hall-route-local-qixuan-sidehall-5": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-qixuan-sidehall-6": [
+      "local-sunset-old-cavern",
+      "local-reviewed-opening-additions"
+    ],
+    "fact:local-qixuan-sidehall-6-route-qixuan-main-hall": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:qixuan-main-hall-route-local-qixuan-sidehall-6": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-cavern-two": [
+      "local-sunset-old-cavern",
+      "local-reviewed-opening-additions"
+    ],
+    "fact:local-cavern-two-owned-by": [
+      "local-sunset-old-cavern",
+      "local-reviewed-opening-additions"
+    ],
+    "fact:local-cavern-two-mechanical-state": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-cavern-two-affected-structure": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-cavern-other": [
+      "local-sunset-old-cavern",
+      "local-reviewed-opening-additions"
+    ],
+    "fact:local-cavern-other-owned-by": [
+      "local-sunset-old-cavern",
+      "local-reviewed-opening-additions"
+    ],
+    "fact:local-cavern-other-maintenance-state": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-chen-mechanic": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-chen-mechanic-learned-skill": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-chen-mechanic-purse": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-chen-mechanic-purse-owned-by": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-doctor-luo": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-doctor-luo-learned-skill": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-doctor-luo-purse": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-doctor-luo-purse-owned-by": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-doctor-he": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-doctor-he-learned-skill": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-doctor-he-purse": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-doctor-he-purse-owned-by": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-doctor-qiu": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-doctor-qiu-learned-skill": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-doctor-qiu-purse": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-doctor-qiu-purse-owned-by": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-iron-spear-steward": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-iron-spear-steward-learned-skill": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-iron-spear-steward-purse": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-iron-spear-steward-purse-owned-by": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-duanshui-steward": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-duanshui-steward-learned-skill": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-duanshui-steward-purse": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-duanshui-steward-purse-owned-by": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-iron-spear": [
+      "local-other-sects-interest",
+      "local-reviewed-opening-additions"
+    ],
+    "entity:local-duanshui": [
+      "local-other-sects-interest",
+      "local-reviewed-opening-additions"
+    ],
+    "fact:local-iron-spear-steward-member-of": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-duanshui-steward-member-of": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-mechanic-stock": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-mechanic-stock-owned-by": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-clinic-stock": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-clinic-stock-owned-by": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-iron-spear-fund": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-iron-spear-fund-owned-by": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-duanshui-fund": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-duanshui-fund-owned-by": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-cavern-key": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-cavern-key-owned-by": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-cavern-other-repair": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "entity:local-clinic-splint": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:local-clinic-splint-owned-by": [
+      "local-reviewed-opening-additions",
+      "local-runtime-calibration"
+    ],
+    "fact:canon-li-elder-elders-rank": [
+      "local-li-fifth-elder-family",
+      "local-reviewed-opening-additions"
+    ],
+    "law:local-orders-are-social": [
+      "local-order-token-and-social-penalty",
+      "local-duel-contract-scope"
+    ],
+    "law:local-cavern-physical-controls": [
+      "local-sunset-old-cavern",
+      "local-reviewed-opening-additions"
     ]
   }
 }

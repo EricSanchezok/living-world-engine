@@ -45,7 +45,7 @@ describe("Fanren human-local canonical opening", () => {
         expect(entity.agent.belief.claims.some(claim => claim.predicate === "learned-skill")).toBe(true);
       }
     }
-    expect(entities.filter(entity => entity.name === "王门主")).toHaveLength(1);
+    expect(entities.filter(entity => entity.id === "canon-qixuan-master" && entity.name === "王绝楚")).toHaveLength(1);
     expect(entities.some(entity => entity.id === "candidate-wang-juechu")).toBe(false);
     expect(entities.some(entity => /^(future-quhun|canon-quhun|small-green-bottle)$/.test(entity.id))).toBe(false);
     expect(local.find(entity => entity.id === "canon-wang-yang")?.agent).toBeDefined();
@@ -90,7 +90,7 @@ describe("Fanren human-local canonical opening", () => {
       for (let iteration = 0; iteration < 30; iteration++) {
         for (const fact of Object.values(state.truth.facts)) if (fact.predicate === "route-to" && fact.value.kind === "entity" && reached.has(fact.subjectId)) reached.add(fact.value.entityId);
       }
-      for (const place of ["qixuan-main-hall", "divine-hand-valley", "zhang-tie-home", "local-li-feiyu-home", "wild-wolf-headquarters", "betrothed-family-home"]) expect(reached).toContain(place);
+      for (const place of ["qixuan-main-hall", "divine-hand-valley", "zhang-tie-home", "local-li-feiyu-home", "wild-wolf-headquarters", "betrothed-family-home", "local-common-clinic", "local-iron-spear-yard", "local-duanshui-yard", "local-luosha-slope"]) expect(reached).toContain(place);
       expect(replaySimulationState(state)).toEqual(state);
       expect(fixture.transport).not.toHaveBeenCalled();
     } finally { database.close(); rmSync(directory, { recursive: true, force: true }); }
