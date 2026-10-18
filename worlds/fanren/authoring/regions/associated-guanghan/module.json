@@ -79,6 +79,30 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "guanghan-arrival-sea-route-guanghan-ore-lake",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-ore-lake"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-arrival-sea-condition-guanghan-ore-lake",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -176,6 +200,30 @@
             "kind": "discoverable",
             "condition": "在林中观察明暗变化或取得可靠的长时记录。"
           }
+        },
+        {
+          "id": "guanghan-dark-forest-route-guanghan-mainland-steppe",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-mainland-steppe"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-dark-forest-condition-guanghan-mainland-steppe",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -236,6 +284,30 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "guanghan-myriad-bird-ridge-route-guanghan-sun-desert",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-sun-desert"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-myriad-bird-ridge-condition-guanghan-sun-desert",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -282,7 +354,7 @@
       "id": "guanghan-white-cliff",
       "name": "白石山崖",
       "kind": "location",
-      "placement": "guanghan-realm",
+      "placement": "guanghan-yellow-ruins",
       "description": "藏有通往紫殿空间的古禁制与石台。",
       "facts": [
         {
@@ -329,6 +401,30 @@
             "value": "先识别并实际破开入口禁制，再依古阵方法传送；强横五行或元磁克制须有足够真实能力。当前障壁完好，知道秘境名字不等于获知入口坐标。"
           },
           "description": "先识别并实际破开入口禁制，再依古阵方法传送；强横五行或元磁克制须有足够真实能力。当前障壁完好，知道秘境名字不等于获知入口坐标。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-white-cliff-route-guanghan-yellow-ruins",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-yellow-ruins"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-white-cliff-condition-guanghan-yellow-ruins",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
           "access": {
             "kind": "public"
           }
@@ -569,9 +665,9 @@
           "predicate": "learned-skill",
           "value": {
             "kind": "text",
-            "value": "暗兽法体、夜色潜行、影身与近身搏杀；分影没有独立元神。"
+            "value": "暗兽法体、夜色潜行、影身与近身搏杀；分影没有独立元神。 受重创时可施金蝉脱壳逃遁，耗损法体与元气，连续施术会缩小躯体；脱出的仍是同一元神。"
           },
-          "description": "暗兽法体、夜色潜行、影身与近身搏杀；分影没有独立元神。",
+          "description": "暗兽法体、夜色潜行、影身与近身搏杀；分影没有独立元神。 受重创时可施金蝉脱壳逃遁，耗损法体与元气，连续施术会缩小躯体；脱出的仍是同一元神。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -698,9 +794,9 @@
               "predicate": "learned-skill",
               "value": {
                 "kind": "text",
-                "value": "暗兽法体、夜色潜行、影身与近身搏杀；分影没有独立元神。"
+                "value": "暗兽法体、夜色潜行、影身与近身搏杀；分影没有独立元神。 受重创时可施金蝉脱壳逃遁，耗损法体与元气，连续施术会缩小躯体；脱出的仍是同一元神。"
               },
-              "description": "暗兽法体、夜色潜行、影身与近身搏杀；分影没有独立元神。",
+              "description": "暗兽法体、夜色潜行、影身与近身搏杀；分影没有独立元神。 受重创时可施金蝉脱壳逃遁，耗损法体与元气，连续施术会缩小躯体；脱出的仍是同一元神。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -2741,14 +2837,14 @@
       "name": "北侧稀植药畦",
       "kind": "plant-group",
       "placement": "guanghan-garden",
-      "description": "七株不同外观的古灵药，不凭颜色直接知道丹方。",
+      "description": "尚有6株不同外观的古灵药，与旁侧已单独登记的药株分开计数。",
       "facts": [
         {
           "id": "guanghan-mixed-a-living-plant-count",
           "predicate": "living-plant-count",
           "value": {
             "kind": "number",
-            "value": 7
+            "value": 6
           },
           "description": "living-plant-count",
           "access": {
@@ -2777,14 +2873,14 @@
       "name": "南侧稀植药畦",
       "kind": "plant-group",
       "placement": "guanghan-garden",
-      "description": "八株不同外观的古灵药，需要真实辨识与保存试验。",
+      "description": "尚有7株不同外观的古灵药，与旁侧已单独登记的药株分开计数。",
       "facts": [
         {
           "id": "guanghan-mixed-b-living-plant-count",
           "predicate": "living-plant-count",
           "value": {
             "kind": "number",
-            "value": 8
+            "value": 7
           },
           "description": "living-plant-count",
           "access": {
@@ -3233,6 +3329,18 @@
             "kind": "discoverable",
             "condition": "勘察根须和泉水，或从实际试验得到方法。"
           }
+        },
+        {
+          "id": "guanghan-silver-lotus-immortal-body-use",
+          "predicate": "immortal-body-use",
+          "value": {
+            "kind": "text",
+            "value": "足够成熟时可助凝固真仙之躯；当前成熟程度须依实物检查，不能仅因古老就断言可用。"
+          },
+          "description": "足够成熟时可助凝固真仙之躯；当前成熟程度须依实物检查，不能仅因古老就断言可用。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [],
@@ -3562,6 +3670,31 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "guanghan-xuling-pill-1-medicine-identity",
+          "predicate": "medicine-identity",
+          "value": {
+            "kind": "text",
+            "value": "太虚妙灵丹，又称虚灵丹；同一实物的别名。"
+          },
+          "description": "太虚妙灵丹，又称虚灵丹；同一实物的别名。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "guanghan-xuling-pill-1-medicine-effect",
+          "predicate": "medicine-effect",
+          "value": {
+            "kind": "text",
+            "value": "对具备条件的合体修士突破瓶颈有助益，合体后期冲击大乘亦可受益；洗灵池、净灵莲前服用可降低后患风险，效果依实际条件，不保证成功。"
+          },
+          "description": "对具备条件的合体修士突破瓶颈有助益，合体后期冲击大乘亦可受益；洗灵池、净灵莲前服用可降低后患风险，效果依实际条件，不保证成功。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "取得可靠丹药辨识与服用资料。"
+          }
         }
       ],
       "meters": [],
@@ -3585,6 +3718,31 @@
           "description": "在古禁制封存中，尚无当代来访者取得控制；旧主身份与去向未明。",
           "access": {
             "kind": "private"
+          }
+        },
+        {
+          "id": "guanghan-xuling-pill-2-medicine-identity",
+          "predicate": "medicine-identity",
+          "value": {
+            "kind": "text",
+            "value": "太虚妙灵丹，又称虚灵丹；同一实物的别名。"
+          },
+          "description": "太虚妙灵丹，又称虚灵丹；同一实物的别名。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "guanghan-xuling-pill-2-medicine-effect",
+          "predicate": "medicine-effect",
+          "value": {
+            "kind": "text",
+            "value": "对具备条件的合体修士突破瓶颈有助益，合体后期冲击大乘亦可受益；洗灵池、净灵莲前服用可降低后患风险，效果依实际条件，不保证成功。"
+          },
+          "description": "对具备条件的合体修士突破瓶颈有助益，合体后期冲击大乘亦可受益；洗灵池、净灵莲前服用可降低后患风险，效果依实际条件，不保证成功。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "取得可靠丹药辨识与服用资料。"
           }
         }
       ],
@@ -4192,6 +4350,126 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "guanghan-mind-cave-route-guanghan-mind-last-chamber",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-mind-last-chamber"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mind-cave-condition-guanghan-mind-last-chamber",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mind-cave-route-guanghan-mind-chamber-1",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-mind-chamber-1"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mind-cave-condition-guanghan-mind-chamber-1",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。"
+          },
+          "description": "沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mind-cave-route-guanghan-mind-chamber-2",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-mind-chamber-2"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mind-cave-condition-guanghan-mind-chamber-2",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。"
+          },
+          "description": "沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mind-cave-route-guanghan-mind-chamber-3",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-mind-chamber-3"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mind-cave-condition-guanghan-mind-chamber-3",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。"
+          },
+          "description": "沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mind-cave-route-guanghan-mind-chamber-4",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-mind-chamber-4"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mind-cave-condition-guanghan-mind-chamber-4",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。"
+          },
+          "description": "沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -4224,10 +4502,10 @@
     },
     {
       "id": "guanghan-mind-inscription",
-      "name": "炼神术金篆石壁",
+      "name": "炼神术末篇金篆石壁",
       "kind": "item",
-      "placement": "guanghan-mind-cave",
-      "description": "刻有前三层修法；表层和后段封护不同，未破罩无法读出最后部分。",
+      "placement": "guanghan-mind-last-chamber",
+      "description": "五处刻文的最后部分，在银色光罩内；单独抄得此壁仍不足凑齐完整经文。",
       "facts": [
         {
           "id": "guanghan-mind-inscription-custody-status",
@@ -5529,6 +5807,31 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "guanghan-xuling-pill-3-medicine-identity",
+          "predicate": "medicine-identity",
+          "value": {
+            "kind": "text",
+            "value": "太虚妙灵丹，又称虚灵丹；同一实物的别名。"
+          },
+          "description": "太虚妙灵丹，又称虚灵丹；同一实物的别名。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "guanghan-xuling-pill-3-medicine-effect",
+          "predicate": "medicine-effect",
+          "value": {
+            "kind": "text",
+            "value": "对具备条件的合体修士突破瓶颈有助益，合体后期冲击大乘亦可受益；洗灵池、净灵莲前服用可降低后患风险，效果依实际条件，不保证成功。"
+          },
+          "description": "对具备条件的合体修士突破瓶颈有助益，合体后期冲击大乘亦可受益；洗灵池、净灵莲前服用可降低后患风险，效果依实际条件，不保证成功。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "取得可靠丹药辨识与服用资料。"
+          }
         }
       ],
       "meters": [],
@@ -6286,6 +6589,1422 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "guanghan-sun-desert",
+      "name": "旭日沙漠",
+      "kind": "location",
+      "placement": "guanghan-realm",
+      "description": "刺目日光笼罩的荒漠，阴影稀少，长时暴晒有致命危险。",
+      "facts": [
+        {
+          "id": "guanghan-sun-desert-route-guanghan-myriad-bird-ridge",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-myriad-bird-ridge"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-sun-desert-condition-guanghan-myriad-bird-ridge",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-sun-desert-sunlight-hazard",
+          "predicate": "sunlight-hazard",
+          "value": {
+            "kind": "text",
+            "value": "日光持续侵蚀法体与防护，须按受照时间、防护与实际承受能力判定；典籍的半日告诫不是对所有生灵统一倒计时。"
+          },
+          "description": "日光持续侵蚀法体与防护，须按受照时间、防护与实际承受能力判定；典籍的半日告诫不是对所有生灵统一倒计时。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际感受日照或取得可靠典籍。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-mainland-steppe",
+      "name": "暗林外草原",
+      "kind": "location",
+      "placement": "guanghan-realm",
+      "description": "无边青草地接着暗林边缘，湖泊与孤山散布其间。",
+      "facts": [
+        {
+          "id": "guanghan-mainland-steppe-route-guanghan-dark-forest",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-dark-forest"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mainland-steppe-condition-guanghan-dark-forest",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mainland-steppe-route-guanghan-steppe-lake",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-steppe-lake"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mainland-steppe-condition-guanghan-steppe-lake",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mainland-steppe-route-guanghan-steppe-hill",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-steppe-hill"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mainland-steppe-condition-guanghan-steppe-hill",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mainland-steppe-route-guanghan-barren-plain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-barren-plain"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mainland-steppe-condition-guanghan-barren-plain",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-steppe-lake",
+      "name": "草原大湖",
+      "kind": "location",
+      "placement": "guanghan-mainland-steppe",
+      "description": "水域辽阔，岸上可见巨兽活动留下的深坑。",
+      "facts": [
+        {
+          "id": "guanghan-steppe-lake-route-guanghan-mainland-steppe",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-mainland-steppe"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-steppe-lake-condition-guanghan-mainland-steppe",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-steppe-hill",
+      "name": "青色孤山",
+      "kind": "location",
+      "placement": "guanghan-mainland-steppe",
+      "description": "灵气较浓的小山，山腰有狼兽栖息的天然洞穴。",
+      "facts": [
+        {
+          "id": "guanghan-steppe-hill-route-guanghan-mainland-steppe",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-mainland-steppe"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-steppe-hill-condition-guanghan-mainland-steppe",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-barren-plain",
+      "name": "荒凉原野",
+      "kind": "location",
+      "placement": "guanghan-realm",
+      "description": "裸土与碎石交错，长途穿越须辨方向并安排补给。",
+      "facts": [
+        {
+          "id": "guanghan-barren-plain-route-guanghan-mainland-steppe",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-mainland-steppe"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-barren-plain-condition-guanghan-mainland-steppe",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-barren-plain-route-guanghan-mountain-chain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-mountain-chain"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-barren-plain-condition-guanghan-mountain-chain",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-mountain-chain",
+      "name": "界内连山",
+      "kind": "location",
+      "placement": "guanghan-realm",
+      "description": "连绵峰岭间有虫群和兽径，旧图不能担保今日安全。",
+      "facts": [
+        {
+          "id": "guanghan-mountain-chain-route-guanghan-barren-plain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-barren-plain"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mountain-chain-condition-guanghan-barren-plain",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mountain-chain-route-guanghan-yellow-ruins",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-yellow-ruins"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mountain-chain-condition-guanghan-yellow-ruins",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-yellow-ruins",
+      "name": "黄沙古遗址",
+      "kind": "location",
+      "placement": "guanghan-realm",
+      "description": "风沙下藏有成片残垣和仍可活动的古代机关。",
+      "facts": [
+        {
+          "id": "guanghan-yellow-ruins-route-guanghan-mountain-chain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-mountain-chain"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-yellow-ruins-condition-guanghan-mountain-chain",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-yellow-ruins-route-guanghan-white-cliff",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-white-cliff"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-yellow-ruins-condition-guanghan-white-cliff",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-ore-lake",
+      "name": "双峰矿岛巨湖",
+      "kind": "location",
+      "placement": "guanghan-realm",
+      "description": "宽广湖面包围双峰岛，水下鱼群对闯入者保持警戒。",
+      "facts": [
+        {
+          "id": "guanghan-ore-lake-route-guanghan-arrival-sea",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-arrival-sea"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-ore-lake-condition-guanghan-arrival-sea",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-ore-lake-route-guanghan-ore-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-ore-island"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-ore-lake-condition-guanghan-ore-island",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-ore-island",
+      "name": "双峰湖心岛",
+      "kind": "location",
+      "placement": "guanghan-ore-lake",
+      "description": "千余里岛地上灰绿两峰并立，湖岸没有现成的安全登陆保证。",
+      "facts": [
+        {
+          "id": "guanghan-ore-island-route-guanghan-ore-lake",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-ore-lake"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-ore-island-condition-guanghan-ore-lake",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-ore-island-route-guanghan-grey-peak",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-grey-peak"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-ore-island-condition-guanghan-grey-peak",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-ore-island-route-guanghan-green-peak",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-green-peak"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-ore-island-condition-guanghan-green-peak",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-grey-peak",
+      "name": "灰色矿峰",
+      "kind": "location",
+      "placement": "guanghan-ore-island",
+      "description": "万丈余高的灰色山峰，大半山体寸草不生，岩层藏有特殊矿石。",
+      "facts": [
+        {
+          "id": "guanghan-grey-peak-route-guanghan-ore-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-ore-island"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-grey-peak-condition-guanghan-ore-island",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-green-peak",
+      "name": "翠绿山峰",
+      "kind": "location",
+      "placement": "guanghan-ore-island",
+      "description": "三四千丈高的青翠山峰，林木茂密。",
+      "facts": [
+        {
+          "id": "guanghan-green-peak-route-guanghan-ore-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-ore-island"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-green-peak-condition-guanghan-ore-island",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-mind-last-chamber",
+      "name": "炼神末篇石窟",
+      "kind": "location",
+      "placement": "guanghan-mind-cave",
+      "description": "分岔通道深处的广阔石窟，银光罩遮护末篇文字。",
+      "facts": [
+        {
+          "id": "guanghan-mind-last-chamber-route-guanghan-mind-cave",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-mind-cave"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mind-last-chamber-condition-guanghan-mind-cave",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。"
+          },
+          "description": "沿实际地形行进并消耗相应时间与补给；地名只标方向，探查、绕行、天气和沿途生灵会改变通行。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-ore-outcrop",
+      "name": "灰峰露头矿",
+      "kind": "container",
+      "placement": "guanghan-grey-peak",
+      "description": "岩层显露的特殊原矿，取下需要工具、法力、时间与避险。",
+      "facts": [
+        {
+          "id": "guanghan-ore-outcrop-extraction-condition",
+          "predicate": "extraction-condition",
+          "value": {
+            "kind": "text",
+            "value": "现存三十六份为已经露出的有限原矿，采下会减少露头库存；深层矿石须实际勘探和开采。石茧族旧地图不等于对整个矿岛的所有权凭证。"
+          },
+          "description": "现存三十六份为已经露出的有限原矿，采下会减少露头库存；深层矿石须实际勘探和开采。石茧族旧地图不等于对整个矿岛的所有权凭证。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "guanghan-grey-ore",
+          "amount": 36
+        }
+      ]
+    },
+    {
+      "id": "guanghan-taiyi-scroll",
+      "name": "十一重古禁画卷",
+      "kind": "item",
+      "placement": "guanghan-white-cliff",
+      "description": "末重画卷借山体增幅太乙青光，前重禁制能逐渐恢复。",
+      "facts": [
+        {
+          "id": "guanghan-taiyi-scroll-restriction-state",
+          "predicate": "restriction-state",
+          "value": {
+            "kind": "text",
+            "value": "十一重禁制完整；未持续突破时前重可复原，末重依太乙青山维持。移走主材会改变禁制状态。"
+          },
+          "description": "十一重禁制完整；未持续突破时前重可复原，末重依太乙青山维持。移走主材会改变禁制状态。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实地测试、辨认禁制响应。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-taiyi-mountain",
+      "name": "太乙青山",
+      "kind": "item",
+      "placement": "guanghan-taiyi-scroll",
+      "description": "青色山体为画卷主材，被古禁控制；与黑色元磁山是不同的唯一实物。",
+      "facts": [
+        {
+          "id": "guanghan-taiyi-mountain-material-condition",
+          "predicate": "material-condition",
+          "value": {
+            "kind": "text",
+            "value": "尚未炼成太乙极山。其青光可切割来物、对普通神念隐蔽；相克元磁神通也须足够总威能和配合，不能只凭术名成功。"
+          },
+          "description": "尚未炼成太乙极山。其青光可切割来物、对普通神念隐蔽；相克元磁神通也须足够总威能和配合，不能只凭术名成功。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-mind-chamber-1",
+      "name": "炼神刻文石窟1",
+      "kind": "location",
+      "placement": "guanghan-mind-cave",
+      "description": "天然洞窟中一面淡白石壁铭有金色符文，与其他刻文段分处不同岔路。",
+      "facts": [
+        {
+          "id": "guanghan-mind-chamber-1-route-guanghan-mind-cave",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-mind-cave"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mind-chamber-1-condition-guanghan-mind-cave",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。"
+          },
+          "description": "沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-mind-inscription-1",
+      "name": "炼神金篆石壁1",
+      "kind": "item",
+      "placement": "guanghan-mind-chamber-1",
+      "description": "经文一部分；读懂需要金篆文知识，拓下仍须与其他段落核对。",
+      "facts": [
+        {
+          "id": "guanghan-mind-inscription-1-text-segment",
+          "predicate": "text-segment",
+          "value": {
+            "kind": "text",
+            "value": "五处刻文中的第1部分，不能独自代表完整前三层。"
+          },
+          "description": "五处刻文中的第1部分，不能独自代表完整前三层。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "到达该石窟并读懂金篆文。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-mind-chamber-2",
+      "name": "炼神刻文石窟2",
+      "kind": "location",
+      "placement": "guanghan-mind-cave",
+      "description": "天然洞窟中一面淡白石壁铭有金色符文，与其他刻文段分处不同岔路。",
+      "facts": [
+        {
+          "id": "guanghan-mind-chamber-2-route-guanghan-mind-cave",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-mind-cave"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mind-chamber-2-condition-guanghan-mind-cave",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。"
+          },
+          "description": "沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-mind-inscription-2",
+      "name": "炼神金篆石壁2",
+      "kind": "item",
+      "placement": "guanghan-mind-chamber-2",
+      "description": "经文一部分；读懂需要金篆文知识，拓下仍须与其他段落核对。",
+      "facts": [
+        {
+          "id": "guanghan-mind-inscription-2-text-segment",
+          "predicate": "text-segment",
+          "value": {
+            "kind": "text",
+            "value": "五处刻文中的第2部分，不能独自代表完整前三层。"
+          },
+          "description": "五处刻文中的第2部分，不能独自代表完整前三层。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "到达该石窟并读懂金篆文。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-mind-chamber-3",
+      "name": "炼神刻文石窟3",
+      "kind": "location",
+      "placement": "guanghan-mind-cave",
+      "description": "天然洞窟中一面淡白石壁铭有金色符文，与其他刻文段分处不同岔路。",
+      "facts": [
+        {
+          "id": "guanghan-mind-chamber-3-route-guanghan-mind-cave",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-mind-cave"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mind-chamber-3-condition-guanghan-mind-cave",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。"
+          },
+          "description": "沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-mind-inscription-3",
+      "name": "炼神金篆石壁3",
+      "kind": "item",
+      "placement": "guanghan-mind-chamber-3",
+      "description": "经文一部分；读懂需要金篆文知识，拓下仍须与其他段落核对。",
+      "facts": [
+        {
+          "id": "guanghan-mind-inscription-3-text-segment",
+          "predicate": "text-segment",
+          "value": {
+            "kind": "text",
+            "value": "五处刻文中的第3部分，不能独自代表完整前三层。"
+          },
+          "description": "五处刻文中的第3部分，不能独自代表完整前三层。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "到达该石窟并读懂金篆文。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-mind-chamber-4",
+      "name": "炼神刻文石窟4",
+      "kind": "location",
+      "placement": "guanghan-mind-cave",
+      "description": "天然洞窟中一面淡白石壁铭有金色符文，与其他刻文段分处不同岔路。",
+      "facts": [
+        {
+          "id": "guanghan-mind-chamber-4-route-guanghan-mind-cave",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "guanghan-mind-cave"
+          },
+          "description": "route-to",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "guanghan-mind-chamber-4-condition-guanghan-mind-cave",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。"
+          },
+          "description": "沿天然地下岔路寻找，不知路径时可能绕行；已发生的坍塌或设障会影响通路。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-mind-inscription-4",
+      "name": "炼神金篆石壁4",
+      "kind": "item",
+      "placement": "guanghan-mind-chamber-4",
+      "description": "经文一部分；读懂需要金篆文知识，拓下仍须与其他段落核对。",
+      "facts": [
+        {
+          "id": "guanghan-mind-inscription-4-text-segment",
+          "predicate": "text-segment",
+          "value": {
+            "kind": "text",
+            "value": "五处刻文中的第4部分，不能独自代表完整前三层。"
+          },
+          "description": "五处刻文中的第4部分，不能独自代表完整前三层。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "到达该石窟并读懂金篆文。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-rainbow-fish",
+      "name": "飞虹鱼湖群",
+      "kind": "creature-group",
+      "placement": "guanghan-ore-lake",
+      "description": "群居毒鱼，喷吐剧毒液体并保卫水域；鱼丹需从真实个体取得，不能重复取丹而鱼体仍完好。",
+      "facts": [
+        {
+          "id": "guanghan-rainbow-fish-individual-count",
+          "predicate": "individual-count",
+          "value": {
+            "kind": "number",
+            "value": 3000
+          },
+          "description": "individual-count",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "guanghan-rainbow-fish-biological-actions",
+          "predicate": "biological-actions",
+          "value": {
+            "kind": "text",
+            "value": "群居毒鱼，喷吐剧毒液体并保卫水域；鱼丹需从真实个体取得，不能重复取丹而鱼体仍完好。"
+          },
+          "description": "群居毒鱼，喷吐剧毒液体并保卫水域；鱼丹需从真实个体取得，不能重复取丹而鱼体仍完好。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "guanghan-rainbow-fish-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "guanghan-rainbow-fish-force",
+          "definition_id": "force",
+          "value": 6
+        }
+      ],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-silver-swarm",
+      "name": "银潮虫群",
+      "kind": "creature-group",
+      "placement": "guanghan-mountain-chain",
+      "description": "银色飞虫能聚合成巨虫并追踪食物，合体或散群不改变存活个体总数。",
+      "facts": [
+        {
+          "id": "guanghan-silver-swarm-individual-count",
+          "predicate": "individual-count",
+          "value": {
+            "kind": "number",
+            "value": 100000
+          },
+          "description": "individual-count",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "guanghan-silver-swarm-biological-actions",
+          "predicate": "biological-actions",
+          "value": {
+            "kind": "text",
+            "value": "银色飞虫能聚合成巨虫并追踪食物，合体或散群不改变存活个体总数。"
+          },
+          "description": "银色飞虫能聚合成巨虫并追踪食物，合体或散群不改变存活个体总数。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "guanghan-silver-swarm-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "guanghan-silver-swarm-force",
+          "definition_id": "force",
+          "value": 6
+        }
+      ],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-blood-butterflies",
+      "name": "化血蝶群",
+      "kind": "creature-group",
+      "placement": "guanghan-mountain-chain",
+      "description": "绿色毒蝶靠毒风制敌，与银潮虫为敌，但彼此遭遇依实际位置。",
+      "facts": [
+        {
+          "id": "guanghan-blood-butterflies-individual-count",
+          "predicate": "individual-count",
+          "value": {
+            "kind": "number",
+            "value": 600
+          },
+          "description": "individual-count",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "guanghan-blood-butterflies-biological-actions",
+          "predicate": "biological-actions",
+          "value": {
+            "kind": "text",
+            "value": "绿色毒蝶靠毒风制敌，与银潮虫为敌，但彼此遭遇依实际位置。"
+          },
+          "description": "绿色毒蝶靠毒风制敌，与银潮虫为敌，但彼此遭遇依实际位置。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "guanghan-blood-butterflies-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "guanghan-blood-butterflies-force",
+          "definition_id": "force",
+          "value": 6
+        }
+      ],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-deer-lions",
+      "name": "鹿首狮兽群",
+      "kind": "creature-group",
+      "placement": "guanghan-mainland-steppe",
+      "description": "麋鹿般头颅与狮身的猎群，沿草原边缘觅食。",
+      "facts": [
+        {
+          "id": "guanghan-deer-lions-individual-count",
+          "predicate": "individual-count",
+          "value": {
+            "kind": "number",
+            "value": 12
+          },
+          "description": "individual-count",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "guanghan-deer-lions-biological-actions",
+          "predicate": "biological-actions",
+          "value": {
+            "kind": "text",
+            "value": "麋鹿般头颅与狮身的猎群，沿草原边缘觅食。"
+          },
+          "description": "麋鹿般头颅与狮身的猎群，沿草原边缘觅食。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "guanghan-deer-lions-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "guanghan-deer-lions-force",
+          "definition_id": "force",
+          "value": 5
+        }
+      ],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-steppe-wolves",
+      "name": "青山灰狼群",
+      "kind": "creature-group",
+      "placement": "guanghan-steppe-hill",
+      "description": "低阶灰狼守着山腰洞穴，遇强敌会警戒、逃遁或围护幼兽。",
+      "facts": [
+        {
+          "id": "guanghan-steppe-wolves-individual-count",
+          "predicate": "individual-count",
+          "value": {
+            "kind": "number",
+            "value": 6
+          },
+          "description": "individual-count",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "guanghan-steppe-wolves-biological-actions",
+          "predicate": "biological-actions",
+          "value": {
+            "kind": "text",
+            "value": "低阶灰狼守着山腰洞穴，遇强敌会警戒、逃遁或围护幼兽。"
+          },
+          "description": "低阶灰狼守着山腰洞穴，遇强敌会警戒、逃遁或围护幼兽。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "guanghan-steppe-wolves-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "guanghan-steppe-wolves-force",
+          "definition_id": "force",
+          "value": 2
+        }
+      ],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-lake-beasts",
+      "name": "草原湖兽群",
+      "kind": "creature-group",
+      "placement": "guanghan-steppe-lake",
+      "description": "形体似马非马似鱼非鱼，可喷强劲水柱；行为由当前猎食和领地状态决定。",
+      "facts": [
+        {
+          "id": "guanghan-lake-beasts-individual-count",
+          "predicate": "individual-count",
+          "value": {
+            "kind": "number",
+            "value": 7
+          },
+          "description": "individual-count",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "guanghan-lake-beasts-biological-actions",
+          "predicate": "biological-actions",
+          "value": {
+            "kind": "text",
+            "value": "形体似马非马似鱼非鱼，可喷强劲水柱；行为由当前猎食和领地状态决定。"
+          },
+          "description": "形体似马非马似鱼非鱼，可喷强劲水柱；行为由当前猎食和领地状态决定。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "guanghan-lake-beasts-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "guanghan-lake-beasts-force",
+          "definition_id": "force",
+          "value": 6
+        }
+      ],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-four-wing-birds",
+      "name": "四翅鸟群",
+      "kind": "creature-group",
+      "placement": "guanghan-mainland-steppe",
+      "description": "四翼怪鸟能喷风刃，栖息于草原高处，受威胁时聚群。",
+      "facts": [
+        {
+          "id": "guanghan-four-wing-birds-individual-count",
+          "predicate": "individual-count",
+          "value": {
+            "kind": "number",
+            "value": 18
+          },
+          "description": "individual-count",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "guanghan-four-wing-birds-biological-actions",
+          "predicate": "biological-actions",
+          "value": {
+            "kind": "text",
+            "value": "四翼怪鸟能喷风刃，栖息于草原高处，受威胁时聚群。"
+          },
+          "description": "四翼怪鸟能喷风刃，栖息于草原高处，受威胁时聚群。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "guanghan-four-wing-birds-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "guanghan-four-wing-birds-force",
+          "definition_id": "force",
+          "value": 4
+        }
+      ],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-ghost-face-tree",
+      "name": "鬼面古树",
+      "kind": "plant",
+      "placement": "guanghan-yellow-ruins",
+      "description": "树干有狰狞面孔，根须可活动，能喷绿液抵抗袭击；体内可能凝有需鉴定的晶质。",
+      "facts": [
+        {
+          "id": "guanghan-ghost-face-tree-living-stock",
+          "predicate": "living-stock",
+          "value": {
+            "kind": "number",
+            "value": 1
+          },
+          "description": "living-stock",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-thunder-peng-guardian",
+      "name": "遗址雷鹏机关",
+      "kind": "item",
+      "placement": "guanghan-yellow-ruins",
+      "description": "古代巨鸟机关，金身银头青羽，表面留有旧损、羽毛残缺且缺一爪，仍能驱使雷弧巡守。",
+      "facts": [
+        {
+          "id": "guanghan-thunder-peng-guardian-guardian-condition",
+          "predicate": "guardian-condition",
+          "value": {
+            "kind": "text",
+            "value": "依古阵反应巡守，须实际触发才攻击；可被侦察、绕行、损坏，不能自动归发现者所有。"
+          },
+          "description": "依古阵反应巡守，须实际触发才攻击；可被侦察、绕行、损坏，不能自动归发现者所有。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "勘查机关响应或古阵结构。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-flame-coral",
+      "name": "炎瑚草",
+      "kind": "plant",
+      "placement": "guanghan-garden",
+      "description": "生长在药园中的一株古灵草，实际鉴定才能确认药性、种子与适用方法。",
+      "facts": [
+        {
+          "id": "guanghan-flame-coral-harvest-accounting",
+          "predicate": "harvest-accounting",
+          "value": {
+            "kind": "text",
+            "value": "采种、枝叶或整株都改变同一植株的实际状态；取种不是同时得到未受损全株，未获得丹方不能凭名字炼丹。"
+          },
+          "description": "采种、枝叶或整株都改变同一植株的实际状态；取种不是同时得到未受损全株，未获得丹方不能凭名字炼丹。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "guanghan-yinfeng-herb",
+      "name": "阴凤草",
+      "kind": "plant",
+      "placement": "guanghan-garden",
+      "description": "生长在药园中的一株古灵草，实际鉴定才能确认药性、种子与适用方法。",
+      "facts": [
+        {
+          "id": "guanghan-yinfeng-herb-harvest-accounting",
+          "predicate": "harvest-accounting",
+          "value": {
+            "kind": "text",
+            "value": "采种、枝叶或整株都改变同一植株的实际状态；取种不是同时得到未受损全株，未获得丹方不能凭名字炼丹。"
+          },
+          "description": "采种、枝叶或整株都改变同一植株的实际状态；取种不是同时得到未受损全株，未获得丹方不能凭名字炼丹。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [
@@ -6353,7 +8072,7 @@
   "laws": [
     {
       "id": "guanghan-closed-realm",
-      "text": "广寒当前闭合。只有实际令、有效开启时机、激发者与适用接引设施共同满足才可进入；旧记述、拓印或角色知道书中情节都不会自动创造入口。未来开启不是强制日程。",
+      "text": "广寒当前闭合。已知常规入境需要实物令、有效时机、激发者和适用接引设施；旧记述和拓印不会创造入口。特殊潜入有古史个例，但必须具备确实足以越界的能力与方法，不能据传闻免费跨界；未来开启不是强制日程。",
       "severity": "hard"
     },
     {
@@ -6369,6 +8088,21 @@
     {
       "id": "guanghan-star-consequences",
       "text": "星阵灌体的结果依实际法体、神识、分流手段与阵况；不复制后来韩立独有物品救场。毁坏关键构件可造成阵力紊乱和空间风险，未毁坏前不得提前坍塌或给出固定胜利奖励。",
+      "severity": "hard"
+    },
+    {
+      "id": "guanghan-native-and-entry",
+      "text": "令牌的圣族进入限制适用于外来传送，不抹除本土合体生灵，也不禁止在界内真实突破；突破需有积累和条件。旧图、旧次安全记录与族人经验均可失准。",
+      "severity": "hard"
+    },
+    {
+      "id": "guanghan-partial-text",
+      "text": "炼神经文分在五处石壁，抄一处不是全文；阅读、收齐、解释、满足修法条件与修成分别记录。临时访客、未来传授、盟约与占领不凭预知小说成立。",
+      "severity": "hard"
+    },
+    {
+      "id": "guanghan-material-and-medicine",
+      "text": "太乙青山、画卷、丹药、活药株、原矿与生物各有有限存量和实际位置，拆取会改变原结构；秘境丹药不可因别名翻倍。生服异药须计药性积压、炼化和身体代价。",
       "severity": "hard"
     }
   ],
@@ -6535,9 +8269,7 @@
     ],
     "fact:guanghan-gold-king-learned-skill": [
       "guanghan-dark-forest-ecology",
-      "guanghan-night-python",
-      "guanghan-current-life",
-      "guanghan-current-values"
+      "guanghan-native-ecology"
     ],
     "fact:guanghan-gold-king-cultivation-path": [
       "guanghan-dark-forest-ecology",
@@ -7488,8 +9220,9 @@
       "guanghan-mind-cave"
     ],
     "entity:guanghan-mind-inscription": [
-      "guanghan-mind-cave",
-      "guanghan-mind-technique-conditions"
+      "guanghan-five-inscriptions",
+      "guanghan-mind-technique-conditions",
+      "guanghan-current-life"
     ],
     "fact:guanghan-mind-inscription-custody-status": [
       "guanghan-mind-cave",
@@ -7653,6 +9386,7 @@
     ],
     "law:guanghan-closed-realm": [
       "guanghan-entry-and-exit",
+      "guanghan-later-identification",
       "guanghan-current-life"
     ],
     "law:guanghan-ancient-preservation": [
@@ -7944,6 +9678,580 @@
     ],
     "fact:guanghan-empty-silk-piece-count": [
       "guanghan-study-and-sword-map"
+    ],
+    "entity:guanghan-sun-desert": [
+      "guanghan-sun-desert-and-routes",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-mainland-steppe": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-steppe-lake": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-steppe-hill": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-barren-plain": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-mountain-chain": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-yellow-ruins": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-ore-lake": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-ore-island": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-grey-peak": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-green-peak": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-mind-last-chamber": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-myriad-bird-ridge-route-guanghan-sun-desert": [
+      "guanghan-sun-desert-and-routes",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-myriad-bird-ridge-condition-guanghan-sun-desert": [
+      "guanghan-sun-desert-and-routes",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-sun-desert-route-guanghan-myriad-bird-ridge": [
+      "guanghan-sun-desert-and-routes",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-sun-desert-condition-guanghan-myriad-bird-ridge": [
+      "guanghan-sun-desert-and-routes",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-dark-forest-route-guanghan-mainland-steppe": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-dark-forest-condition-guanghan-mainland-steppe": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mainland-steppe-route-guanghan-dark-forest": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mainland-steppe-condition-guanghan-dark-forest": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mainland-steppe-route-guanghan-steppe-lake": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mainland-steppe-condition-guanghan-steppe-lake": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-steppe-lake-route-guanghan-mainland-steppe": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-steppe-lake-condition-guanghan-mainland-steppe": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mainland-steppe-route-guanghan-steppe-hill": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mainland-steppe-condition-guanghan-steppe-hill": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-steppe-hill-route-guanghan-mainland-steppe": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-steppe-hill-condition-guanghan-mainland-steppe": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mainland-steppe-route-guanghan-barren-plain": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mainland-steppe-condition-guanghan-barren-plain": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-barren-plain-route-guanghan-mainland-steppe": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-barren-plain-condition-guanghan-mainland-steppe": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-barren-plain-route-guanghan-mountain-chain": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-barren-plain-condition-guanghan-mountain-chain": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mountain-chain-route-guanghan-barren-plain": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mountain-chain-condition-guanghan-barren-plain": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mountain-chain-route-guanghan-yellow-ruins": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mountain-chain-condition-guanghan-yellow-ruins": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-yellow-ruins-route-guanghan-mountain-chain": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-yellow-ruins-condition-guanghan-mountain-chain": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-yellow-ruins-route-guanghan-white-cliff": [
+      "guanghan-taiyi-restriction",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-yellow-ruins-condition-guanghan-white-cliff": [
+      "guanghan-taiyi-restriction",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-white-cliff-route-guanghan-yellow-ruins": [
+      "guanghan-taiyi-restriction",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-white-cliff-condition-guanghan-yellow-ruins": [
+      "guanghan-taiyi-restriction",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-arrival-sea-route-guanghan-ore-lake": [
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-arrival-sea-condition-guanghan-ore-lake": [
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-ore-lake-route-guanghan-arrival-sea": [
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-ore-lake-condition-guanghan-arrival-sea": [
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-ore-lake-route-guanghan-ore-island": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-ore-lake-condition-guanghan-ore-island": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-ore-island-route-guanghan-ore-lake": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-ore-island-condition-guanghan-ore-lake": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-ore-island-route-guanghan-grey-peak": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-ore-island-condition-guanghan-grey-peak": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-grey-peak-route-guanghan-ore-island": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-grey-peak-condition-guanghan-ore-island": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-ore-island-route-guanghan-green-peak": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-ore-island-condition-guanghan-green-peak": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-green-peak-route-guanghan-ore-island": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-green-peak-condition-guanghan-ore-island": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mind-cave-route-guanghan-mind-last-chamber": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mind-cave-condition-guanghan-mind-last-chamber": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mind-last-chamber-route-guanghan-mind-cave": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mind-last-chamber-condition-guanghan-mind-cave": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-sun-desert-sunlight-hazard": [
+      "guanghan-sun-desert-and-routes"
+    ],
+    "entity:guanghan-ore-outcrop": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "quantity:guanghan-grey-ore": [
+      "guanghan-mineral-lake",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-ore-outcrop-extraction-condition": [
+      "guanghan-mineral-lake",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-taiyi-scroll": [
+      "guanghan-taiyi-restriction",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-taiyi-mountain": [
+      "guanghan-taiyi-restriction",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-taiyi-scroll-restriction-state": [
+      "guanghan-taiyi-restriction"
+    ],
+    "fact:guanghan-taiyi-mountain-material-condition": [
+      "guanghan-taiyi-restriction"
+    ],
+    "entity:guanghan-mind-chamber-1": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-mind-inscription-1": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-mind-inscription-1-text-segment": [
+      "guanghan-five-inscriptions"
+    ],
+    "fact:guanghan-mind-cave-route-guanghan-mind-chamber-1": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mind-cave-condition-guanghan-mind-chamber-1": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mind-chamber-1-route-guanghan-mind-cave": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mind-chamber-1-condition-guanghan-mind-cave": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "entity:guanghan-mind-chamber-2": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-mind-inscription-2": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-mind-inscription-2-text-segment": [
+      "guanghan-five-inscriptions"
+    ],
+    "fact:guanghan-mind-cave-route-guanghan-mind-chamber-2": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mind-cave-condition-guanghan-mind-chamber-2": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mind-chamber-2-route-guanghan-mind-cave": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mind-chamber-2-condition-guanghan-mind-cave": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "entity:guanghan-mind-chamber-3": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-mind-inscription-3": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-mind-inscription-3-text-segment": [
+      "guanghan-five-inscriptions"
+    ],
+    "fact:guanghan-mind-cave-route-guanghan-mind-chamber-3": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mind-cave-condition-guanghan-mind-chamber-3": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mind-chamber-3-route-guanghan-mind-cave": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mind-chamber-3-condition-guanghan-mind-cave": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "entity:guanghan-mind-chamber-4": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-mind-inscription-4": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-mind-inscription-4-text-segment": [
+      "guanghan-five-inscriptions"
+    ],
+    "fact:guanghan-mind-cave-route-guanghan-mind-chamber-4": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mind-cave-condition-guanghan-mind-chamber-4": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mind-chamber-4-route-guanghan-mind-cave": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "fact:guanghan-mind-chamber-4-condition-guanghan-mind-cave": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life"
+    ],
+    "entity:guanghan-rainbow-fish": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-rainbow-fish-individual-count": [
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-rainbow-fish-biological-actions": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake"
+    ],
+    "entity:guanghan-silver-swarm": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-silver-swarm-individual-count": [
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-silver-swarm-biological-actions": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake"
+    ],
+    "entity:guanghan-blood-butterflies": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-blood-butterflies-individual-count": [
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-blood-butterflies-biological-actions": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake"
+    ],
+    "entity:guanghan-deer-lions": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-deer-lions-individual-count": [
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-deer-lions-biological-actions": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake"
+    ],
+    "entity:guanghan-steppe-wolves": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-steppe-wolves-individual-count": [
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-steppe-wolves-biological-actions": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake"
+    ],
+    "entity:guanghan-lake-beasts": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-lake-beasts-individual-count": [
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-lake-beasts-biological-actions": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake"
+    ],
+    "entity:guanghan-four-wing-birds": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-four-wing-birds-individual-count": [
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-four-wing-birds-biological-actions": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake"
+    ],
+    "entity:guanghan-ghost-face-tree": [
+      "guanghan-native-ecology",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-ghost-face-tree-living-stock": [
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-thunder-peng-guardian": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-thunder-peng-guardian-guardian-condition": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life"
+    ],
+    "entity:guanghan-flame-coral": [
+      "guanghan-later-identification",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-flame-coral-harvest-accounting": [
+      "guanghan-later-identification",
+      "guanghan-current-values"
+    ],
+    "entity:guanghan-yinfeng-herb": [
+      "guanghan-later-identification",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-yinfeng-herb-harvest-accounting": [
+      "guanghan-later-identification",
+      "guanghan-current-values"
+    ],
+    "fact:guanghan-xuling-pill-1-medicine-identity": [
+      "guanghan-later-identification"
+    ],
+    "fact:guanghan-xuling-pill-1-medicine-effect": [
+      "guanghan-later-identification"
+    ],
+    "fact:guanghan-xuling-pill-2-medicine-identity": [
+      "guanghan-later-identification"
+    ],
+    "fact:guanghan-xuling-pill-2-medicine-effect": [
+      "guanghan-later-identification"
+    ],
+    "fact:guanghan-xuling-pill-3-medicine-identity": [
+      "guanghan-later-identification"
+    ],
+    "fact:guanghan-xuling-pill-3-medicine-effect": [
+      "guanghan-later-identification"
+    ],
+    "fact:guanghan-silver-lotus-immortal-body-use": [
+      "guanghan-later-identification"
+    ],
+    "law:guanghan-native-and-entry": [
+      "guanghan-entry-and-exit",
+      "guanghan-native-ecology",
+      "guanghan-expedition-conventions"
+    ],
+    "law:guanghan-partial-text": [
+      "guanghan-five-inscriptions",
+      "guanghan-mind-technique-conditions"
+    ],
+    "law:guanghan-material-and-medicine": [
+      "guanghan-taiyi-restriction",
+      "guanghan-later-identification",
+      "guanghan-raw-herb-use",
+      "guanghan-mineral-lake"
     ]
   },
   "quantityDefinitions": [
@@ -7962,6 +10270,17 @@
       "id": "guanghan-pure-top-stone",
       "name": "广寒精纯极品灵石",
       "unit": "块",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    },
+    {
+      "id": "guanghan-grey-ore",
+      "name": "广寒灰峰原矿",
+      "unit": "份",
       "production_law_ids": [
         "resource-conservation"
       ],

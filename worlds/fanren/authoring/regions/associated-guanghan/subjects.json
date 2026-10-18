@@ -973,7 +973,7 @@
   },
   {
     "id": "guanghan-gourd-sword-1",
-    "label": "葫中金剑1",
+    "label": "葫中金剑胚1",
     "kind": "item",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
@@ -985,7 +985,7 @@
   },
   {
     "id": "guanghan-gourd-sword-2",
-    "label": "葫中金剑2",
+    "label": "葫中金剑胚2",
     "kind": "item",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
@@ -997,7 +997,7 @@
   },
   {
     "id": "guanghan-gourd-sword-3",
-    "label": "葫中金剑3",
+    "label": "葫中金剑胚3",
     "kind": "item",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
@@ -1009,7 +1009,7 @@
   },
   {
     "id": "guanghan-gourd-sword-4",
-    "label": "葫中金剑4",
+    "label": "葫中金剑胚4",
     "kind": "item",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
@@ -1021,7 +1021,7 @@
   },
   {
     "id": "guanghan-gourd-sword-5",
-    "label": "葫中金剑5",
+    "label": "葫中金剑胚5",
     "kind": "item",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
@@ -1073,7 +1073,9 @@
     "claimIds": [
       "guanghan-main-hall-treasures"
     ],
-    "aliases": []
+    "aliases": [
+      "太虚妙灵丹"
+    ]
   },
   {
     "id": "guanghan-xuling-pill-2",
@@ -1084,7 +1086,9 @@
     "claimIds": [
       "guanghan-main-hall-treasures"
     ],
-    "aliases": []
+    "aliases": [
+      "太虚妙灵丹"
+    ]
   },
   {
     "id": "guanghan-gold-tower",
@@ -1297,13 +1301,14 @@
   },
   {
     "id": "guanghan-mind-inscription",
-    "label": "炼神术金篆石壁",
+    "label": "炼神术末篇金篆石壁",
     "kind": "item",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
     "claimIds": [
-      "guanghan-mind-cave",
-      "guanghan-mind-technique-conditions"
+      "guanghan-five-inscriptions",
+      "guanghan-mind-technique-conditions",
+      "guanghan-current-life"
     ],
     "aliases": []
   },
@@ -1446,7 +1451,9 @@
     "claimIds": [
       "guanghan-main-hall-treasures"
     ],
-    "aliases": []
+    "aliases": [
+      "太虚妙灵丹"
+    ]
   },
   {
     "id": "guanghan-rare-material-c",
@@ -1807,5 +1814,649 @@
       "guanghan-current-values"
     ],
     "aliases": []
+  },
+  {
+    "id": "guanghan-sun-desert",
+    "label": "旭日沙漠",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-sun-desert-and-routes",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-mainland-steppe",
+    "label": "暗林外草原",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-steppe-lake",
+    "label": "草原大湖",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-steppe-hill",
+    "label": "青色孤山",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-barren-plain",
+    "label": "荒凉原野",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-mountain-chain",
+    "label": "界内连山",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-yellow-ruins",
+    "label": "黄沙古遗址",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-ore-lake",
+    "label": "双峰矿岛巨湖",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-ore-island",
+    "label": "双峰湖心岛",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-grey-peak",
+    "label": "灰色矿峰",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-green-peak",
+    "label": "翠绿山峰",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-mind-last-chamber",
+    "label": "炼神末篇石窟",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-ore-outcrop",
+    "label": "灰峰露头矿",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-taiyi-scroll",
+    "label": "十一重古禁画卷",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-taiyi-restriction",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-taiyi-mountain",
+    "label": "太乙青山",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-taiyi-restriction",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-mind-chamber-1",
+    "label": "炼神刻文石窟1",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-mind-inscription-1",
+    "label": "炼神金篆石壁1",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-mind-chamber-2",
+    "label": "炼神刻文石窟2",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-mind-inscription-2",
+    "label": "炼神金篆石壁2",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-mind-chamber-3",
+    "label": "炼神刻文石窟3",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-mind-inscription-3",
+    "label": "炼神金篆石壁3",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-mind-chamber-4",
+    "label": "炼神刻文石窟4",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-mind-inscription-4",
+    "label": "炼神金篆石壁4",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-five-inscriptions",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-rainbow-fish",
+    "label": "飞虹鱼湖群",
+    "kind": "creature-group",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-silver-swarm",
+    "label": "银潮虫群",
+    "kind": "creature-group",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-blood-butterflies",
+    "label": "化血蝶群",
+    "kind": "creature-group",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-deer-lions",
+    "label": "鹿首狮兽群",
+    "kind": "creature-group",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-steppe-wolves",
+    "label": "青山灰狼群",
+    "kind": "creature-group",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-lake-beasts",
+    "label": "草原湖兽群",
+    "kind": "creature-group",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-four-wing-birds",
+    "label": "四翅鸟群",
+    "kind": "creature-group",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-native-ecology",
+      "guanghan-mineral-lake",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-ghost-face-tree",
+    "label": "鬼面古树",
+    "kind": "plant",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-native-ecology",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-thunder-peng-guardian",
+    "label": "遗址雷鹏机关",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-mainland-geography",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-flame-coral",
+    "label": "炎瑚草",
+    "kind": "plant",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-later-identification",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "guanghan-yinfeng-herb",
+    "label": "阴凤草",
+    "kind": "plant",
+    "openingState": "present",
+    "classification": "source-backed-with-explicit-original-initial-state",
+    "claimIds": [
+      "guanghan-later-identification",
+      "guanghan-current-life",
+      "guanghan-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "future-guanghan-liu",
+    "label": "柳水儿",
+    "kind": "person",
+    "openingState": "source-reference-not-runtime-instance",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "guanghan-magnetic-planning"
+    ],
+    "aliases": [],
+    "reason": "先天元磁、晶族客卿身份及后期拜师有据，开篇年龄和修行阶段未定；不前置此次任务、法宝或与韩立关系。"
+  },
+  {
+    "id": "future-guanghan-shi",
+    "label": "石昆",
+    "kind": "person",
+    "openingState": "source-reference-not-runtime-instance",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "guanghan-magnetic-planning"
+    ],
+    "aliases": [],
+    "reason": "后天元磁、石茧族与段天刃师徒为后期证据；不由数千年寻人计划断言当时已拜师持同样宝物。"
+  },
+  {
+    "id": "future-guanghan-tie",
+    "label": "铁坚",
+    "kind": "person",
+    "openingState": "source-reference-not-runtime-instance",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "guanghan-current-life"
+    ],
+    "aliases": [],
+    "reason": "后期云城住客与拍卖同行记录；不因同姓合并铁统领，开篇位置、生年未定。"
+  },
+  {
+    "id": "future-guanghan-shu",
+    "label": "蜀黍",
+    "kind": "person",
+    "openingState": "source-reference-not-runtime-instance",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "guanghan-current-life"
+    ],
+    "aliases": [
+      "金角青年"
+    ],
+    "reason": "本工作版本明确“名叫蜀黍”的金角特使，不擅改姓名；未来率队、宝物、死亡均不前置。"
+  },
+  {
+    "id": "future-guanghan-leng",
+    "label": "冷寒",
+    "kind": "person",
+    "openingState": "source-reference-not-runtime-instance",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "guanghan-current-life"
+    ],
+    "aliases": [],
+    "reason": "角蚩族后期受命者；开篇年龄、职务、位置无确证。"
+  },
+  {
+    "id": "future-guanghan-bai",
+    "label": "白果",
+    "kind": "person",
+    "openingState": "source-reference-not-runtime-instance",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "guanghan-current-life"
+    ],
+    "aliases": [],
+    "reason": "角蚩族后期受命者，与冷寒两人分别索引。"
+  },
+  {
+    "id": "future-guanghan-seaking-siblings",
+    "label": "海王族王族兄妹",
+    "kind": "person-group",
+    "openingState": "source-reference-not-runtime-instance",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "guanghan-native-ecology"
+    ],
+    "aliases": [],
+    "reason": "前后连续鱼尾男女及兄妹自称支持同组；不补全本名、开篇驻地或当前鲸兽契约。"
+  },
+  {
+    "id": "future-guanghan-named-guests",
+    "label": "后期入界队伍与守卫",
+    "kind": "person-group",
+    "openingState": "source-reference-not-runtime-instance",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "guanghan-current-life"
+    ],
+    "aliases": [],
+    "reason": "铁统领、花姓迎者、凝姓中年、戎族守卫、天云失踪二人等各在对应候选中保留身份，匿名不合并、不推生死或开篇驻地。"
+  },
+  {
+    "id": "future-guanghan-visitor-equipment",
+    "label": "后期来访者的携带物与技艺",
+    "kind": "inventory-reference",
+    "openingState": "source-reference-not-runtime-instance",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "guanghan-current-life"
+    ],
+    "aliases": [],
+    "reason": "各候选分别保存持有者、使用与损坏时点；不作为开篇韩立、柳水儿、石昆或来访队伍的资产。"
+  },
+  {
+    "id": "future-guanghan-contracts",
+    "label": "韩立广寒任务与云城交易",
+    "kind": "event",
+    "openingState": "source-reference-not-runtime-instance",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "guanghan-current-life"
+    ],
+    "aliases": [],
+    "reason": "带队、采矿、破禁、借跨陆阵与灵石对价是未来各方协商结果，不作为既定任务或欠债。"
+  },
+  {
+    "id": "future-guanghan-jiaochi-plan",
+    "label": "角蚩广寒行动",
+    "kind": "event",
+    "openingState": "source-reference-not-runtime-instance",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "guanghan-current-life"
+    ],
+    "aliases": [],
+    "reason": "五份目标、五支持宝队与其余掩护队明确区别；失去一队后“其他四队”不改成总共四队。不强迫战事与未来计划兑现。"
+  },
+  {
+    "id": "guanghan-uncertain-spirits",
+    "label": "银潮虫魂与无名异兽",
+    "kind": "identity-reference",
+    "openingState": "source-reference-not-runtime-instance",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "guanghan-native-ecology"
+    ],
+    "aliases": [],
+    "reason": "人面虫影与银潮中心人面银虫存在关联线索但未确证同一；无名白蛇与白蟒、陌生族群也不凭外观强合。"
+  },
+  {
+    "id": "guanghan-sunwarning-reference",
+    "label": "广寒危险经验与未知成因",
+    "kind": "knowledge-reference",
+    "openingState": "source-reference-not-runtime-instance",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "guanghan-origin-testimony",
+      "guanghan-sun-desert-and-routes"
+    ],
+    "aliases": [],
+    "reason": "危险警示有出处；不将八凶数字、死亡统计、怪云原因、仙界从属与古战起源变成超出正文的确定事实。"
+  },
+  {
+    "id": "future-guanghan-xuanguang",
+    "label": "玄光刃",
+    "kind": "item",
+    "openingState": "source-reference-not-runtime-instance",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "guanghan-current-life"
+    ],
+    "aliases": [],
+    "reason": "后期戎族大汉巨刃与玄光刃由后章明确回指为同物；开篇物主、所在和归韩立均不确定，不重复生成。"
+  },
+  {
+    "id": "future-guanghan-return",
+    "label": "后期返界与修为结果",
+    "kind": "event",
+    "openingState": "source-reference-not-runtime-instance",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "guanghan-current-life"
+    ],
+    "aliases": [],
+    "reason": "月仙子与凝姓者成功、柳石失败、胥未归为特定历程；未来可因行动而改变，失踪不等于死亡。"
+  },
+  {
+    "id": "guanghan-xiaolingtian-reference",
+    "label": "小灵天比较记录",
+    "kind": "place-reference",
+    "openingState": "source-reference-not-runtime-instance",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "guanghan-origin-testimony"
+    ],
+    "aliases": [],
+    "reason": "朱果儿记忆所述的小灵天是另一微型流动界面；不因灵气或尺度相似而并入广寒。其独立区域制作另有覆盖单元。"
   }
 ]
