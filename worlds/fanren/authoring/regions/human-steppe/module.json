@@ -1532,6 +1532,21 @@
               "evidenceIds": [
                 "prior-life"
               ]
+            },
+            {
+              "id": "lamp-flame-study",
+              "subjectId": "known-canon-mulan-yuanming-lamp",
+              "predicate": "capability",
+              "value": {
+                "kind": "text",
+                "value": "灯的青焰受催动条件限制，可炼宝并克木；仍可能遇到抵抗或封禁。灯油与族产保管必须分开记录。"
+              },
+              "description": "自己此前参与守灯、研读祭仪所知的功能边界，并非一次说出即可让灯生效。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
             }
           ]
         }
@@ -2221,6 +2236,21 @@
                 "value": "自己是元婴修士。"
               },
               "description": "自己是元婴修士。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "lamp-flame-study",
+              "subjectId": "known-canon-mulan-yuanming-lamp",
+              "predicate": "capability",
+              "value": {
+                "kind": "text",
+                "value": "灯的青焰受催动条件限制，可炼宝并克木；仍可能遇到抵抗或封禁。灯油与族产保管必须分开记录。"
+              },
+              "description": "自己此前参与守灯、研读祭仪所知的功能边界，并非一次说出即可让灯生效。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -5909,6 +5939,22 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "steppe-yuanming-flame-limits",
+          "predicate": "capability",
+          "value": {
+            "kind": "text",
+            "value": "受适当操作者婴火、法力与灯油条件催动时可放青焰炼宝，尤克木性；法焰有被抵抗或器物封禁的可能。灯未点燃时不会自动伤害或炼化附近物品。"
+          },
+          "description": "青焰不是对任何法宝都无条件即毁的权限；应核点灯、供能、接触及抵抗条件。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-zhong-mulan",
+              "steppe-deng-shou"
+            ]
+          }
         }
       ],
       "meters": [],
@@ -6349,6 +6395,11 @@
       "id": "steppe-arts-and-limited-hide",
       "text": "灵术须本人学会并有实际法力、配合与条件；红尘万丈会妨碍探测但不是绝对全知屏障，单人术不能凭名称扩成数十里联军阵。须弥虫幼虫的空间藏形有大小和时长限制、可能被识破，不能将它当永久无代价异界仓库。",
       "severity": "hard"
+    },
+    {
+      "id": "steppe-cooperative-array-inputs",
+      "text": "多人灵术大阵可由法士承担阵器位置，但须真实参与、主持、相应术法能力和法力；不能仅宣称结阵就生成无数参与者或施放器物。协作人数、当前消耗与受击中断应依实际局势判定。",
+      "severity": "hard"
     }
   ],
   "provenance": {
@@ -6678,7 +6729,9 @@
     "entity:canon-zhong-mulan": [
       "steppe-zhong-duration",
       "steppe-zhong-opening",
-      "steppe-values"
+      "steppe-values",
+      "steppe-yuanming-custody-and-limits",
+      "steppe-opening-concrete-life"
     ],
     "fact:canon-zhong-mulan-cultivation-state": [
       "steppe-zhong-duration",
@@ -6725,7 +6778,9 @@
     "entity:steppe-deng-shou": [
       "steppe-present-life",
       "steppe-lamp-stock",
-      "steppe-values"
+      "steppe-values",
+      "steppe-yuanming-custody-and-limits",
+      "steppe-opening-concrete-life"
     ],
     "fact:steppe-deng-shou-cultivation-state": [
       "steppe-present-life",
@@ -7325,6 +7380,14 @@
     ],
     "law:steppe-arts-and-limited-hide": [
       "steppe-wind-and-xumi-limits",
+      "steppe-lingshu"
+    ],
+    "fact:steppe-yuanming-flame-limits": [
+      "steppe-yuanming-custody-and-limits",
+      "steppe-ritual-limits"
+    ],
+    "law:steppe-cooperative-array-inputs": [
+      "steppe-formation-and-fire-inputs",
       "steppe-lingshu"
     ]
   }
