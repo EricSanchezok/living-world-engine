@@ -1,687 +1,1803 @@
 {
+  "formatVersion": 1,
+  "moduleId": "associated-reported",
   "queueInputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
-  "queueCandidateCount": 68,
-  "scope": "68项逐条原文复核并区分运行、历史、传闻、未来和跨区归属。cross-region目标是唯一身份约定，实际是否已装配由根构建检查；本区不代替其他地区制作。",
-  "dispositions": [
+  "status": "editorial-dispositions-not-release-approval",
+  "reviewer": "root/68-legacy-judgments-and-pinned-source-contexts/2026-10-18",
+  "records": [
     {
       "candidateId": "batch-0087-object-0009",
-      "label": "阴司之界",
-      "kind": "object",
       "batchId": "batch-0087",
       "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
-      "status": "unverified-report-indexed",
-      "runtimeEntityId": "reported-yin-si",
-      "note": "两处人物说法均未证明阴司存在；只保留传说主体，不创建可探索地图。"
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "reported-yin-si"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：两处人物说法均未证明阴司存在；只保留传说主体，不创建可探索地图。",
+      "evidence": [
+        {
+          "chapterId": "qq-22885680",
+          "chapterSha256": "91cf8ce7e889f150f523b6a4f90d3165d62de361fa822beeb258caa1b52e21ef",
+          "start": 389,
+          "end": 398,
+          "anchorSha256": "ff30ac183d5605e0e5de78b34b6f01e7668c89ff57a0573208138cdfade35fc7"
+        },
+        {
+          "chapterId": "qq-22885680",
+          "chapterSha256": "91cf8ce7e889f150f523b6a4f90d3165d62de361fa822beeb258caa1b52e21ef",
+          "start": 456,
+          "end": 463,
+          "anchorSha256": "38a10cdf616f89f9d4f0349a6c2d3081d0b7008ffee7554ef571cc1c5d14c864"
+        }
+      ],
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "阴司界的存在没有正文确证；不生成可探索空间、通道或真实管理机构。"
+      },
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0087-issue-0014",
-      "label": "本次校验修复",
-      "kind": "issue",
       "batchId": "batch-0087",
       "reportHash": "01303e19f12f58c178b1df136aa0abb4c7bf50c4d7d50d8031547a0bec823090",
-      "status": "source-correction-resolved",
-      "runtimeEntityId": null,
-      "note": "引文位置修复已读原文核对；梅凝通灵之气例外归 associated-yinming，不以此条生成开篇成年梅凝或玩家经历。"
+      "disposition": "corrected",
+      "targetIds": [
+        "yinming-pure-qi-exception"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：引文位置修复已读原文核对；梅凝通灵之气例外归 associated-yinming，不以此条生成开篇成年梅凝或玩家经历。",
+      "evidence": [
+        {
+          "chapterId": "qq-22913000",
+          "chapterSha256": "47931b4883dbdce62ad61955ec3ebd3e273a2cadce165e414d26dc15ea26dba7",
+          "start": 31,
+          "end": 43,
+          "anchorSha256": "b285968c81135d24305d11fc27eefec50cef1b047153dd01a9ae5670f09d0a38"
+        },
+        {
+          "chapterId": "qq-22885680",
+          "chapterSha256": "91cf8ce7e889f150f523b6a4f90d3165d62de361fa822beeb258caa1b52e21ef",
+          "start": 456,
+          "end": 463,
+          "anchorSha256": "38a10cdf616f89f9d4f0349a6c2d3081d0b7008ffee7554ef571cc1c5d14c864"
+        },
+        {
+          "chapterId": "qq-22913000",
+          "chapterSha256": "47931b4883dbdce62ad61955ec3ebd3e273a2cadce165e414d26dc15ea26dba7",
+          "start": 1012,
+          "end": 1023,
+          "anchorSha256": "25873184badedcf29829886d7232c0263404b546c9269f340d43f31fd3433961"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0126-object-0008",
-      "label": "鬼灵门门主",
-      "kind": "object",
       "batchId": "batch-0126",
       "reportHash": "12ca6888de19cd87aa990a5a2a0ec1933c4b73581da1ace7c9dd66a7e467a5c5",
-      "status": "cross-region-identity",
-      "runtimeEntityId": "canon-wang-tiansheng",
-      "note": "王门主与王天胜为同人，Tiannan 拥有唯一实体；后期谷内邀约和门主境界不由本候选回填。"
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-wang-tiansheng"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：王门主与王天胜为同人，Tiannan 拥有唯一实体；后期谷内邀约和门主境界不由本候选回填。",
+      "evidence": [
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 458,
+          "end": 469,
+          "anchorSha256": "12c69a428ed41b5f66aadbc1d3253cf6f85a012f0a33af276f9d47456bc88982"
+        },
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 1420,
+          "end": 1429,
+          "anchorSha256": "dd87e529b8887c096adbd081b3ec65ec1fbb81cac35523bd14b6dc5216f32a54"
+        },
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 1503,
+          "end": 1508,
+          "anchorSha256": "1b0ee489a26a75528dcdd0483a44b7de95b786d3f9cead18e342a86e3666c298"
+        },
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 661,
+          "end": 666,
+          "anchorSha256": "5867b9417c051ad13b1e3562113137e1131d89f20f7bcccd009ebbcdd28af744"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0126-object-0009",
-      "label": "魏无涯",
-      "kind": "object",
       "batchId": "batch-0126",
       "reportHash": "12ca6888de19cd87aa990a5a2a0ec1933c4b73581da1ace7c9dd66a7e467a5c5",
-      "status": "cross-region-identity",
-      "runtimeEntityId": "canon-wei-wuya",
-      "note": "魏无涯归 Tiannan；受邀入谷是未来条件事件，不能变成开篇坐标。"
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-wei-wuya"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：魏无涯归 Tiannan；受邀入谷是未来条件事件，不能变成开篇坐标。",
+      "evidence": [
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 764,
+          "end": 773,
+          "anchorSha256": "c61a48795f4756e0c1d6406bc20f68cca9ecd01cac83e00339e7992aefae0b45"
+        },
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 1545,
+          "end": 1559,
+          "anchorSha256": "2d64071e3ced80f48377866605c20124c8970c893da7129e516c5e7de68cf2c9"
+        },
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 880,
+          "end": 888,
+          "anchorSha256": "f53b07be4f8d269ec4ef2ade5ed53c2d75717eed42add1367cfa43720292e981"
+        },
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 934,
+          "end": 944,
+          "anchorSha256": "5161e24050777b7034eed619e56cdc0d0d60857901aeaf8182259b3ff13aa0bf"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0126-object-0025",
-      "label": "灵缈园",
-      "kind": "object",
       "batchId": "batch-0126",
       "reportHash": "12ca6888de19cd87aa990a5a2a0ec1933c4b73581da1ace7c9dd66a7e467a5c5",
-      "status": "ambiguous-place-name-disambiguated",
-      "runtimeEntityId": "reported-lingmiao-tradition",
-      "note": "原句所称灵缈园有传说、入口幌子、古通道或经历等不同指代；不把词相同的两个空间合并。"
+      "disposition": "corrected",
+      "targetIds": [
+        "reported-lingmiao-tradition"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：原句所称灵缈园有传说、入口幌子、古通道或经历等不同指代；不把词相同的两个空间合并。",
+      "evidence": [
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 934,
+          "end": 944,
+          "anchorSha256": "5161e24050777b7034eed619e56cdc0d0d60857901aeaf8182259b3ff13aa0bf"
+        },
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 1316,
+          "end": 1327,
+          "anchorSha256": "e3af60a32c18240e9b65718066a4bffb29c6686a96e6d3cf9b27bd71eb7ee808"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0126-object-0027",
-      "label": "灵界",
-      "kind": "object",
       "batchId": "batch-0126",
       "reportHash": "12ca6888de19cd87aa990a5a2a0ec1933c4b73581da1ace7c9dd66a7e467a5c5",
-      "status": "cross-region-identity",
-      "runtimeEntityId": "spirit-realm",
-      "note": "灵界唯一顶层实体，人物言辞不新增第二灵界。"
+      "disposition": "corrected",
+      "targetIds": [
+        "spirit-realm"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：灵界唯一顶层实体，人物言辞不新增第二灵界。",
+      "evidence": [
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 971,
+          "end": 983,
+          "anchorSha256": "30927c520c5e4c27af2deea08a6ecfe3e04bfb9444c51230bde8304c46b51812"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0126-object-0028",
-      "label": "人界",
-      "kind": "object",
       "batchId": "batch-0126",
       "reportHash": "12ca6888de19cd87aa990a5a2a0ec1933c4b73581da1ace7c9dd66a7e467a5c5",
-      "status": "cross-region-identity",
-      "runtimeEntityId": "human-realm",
-      "note": "人界唯一顶层实体，后期空间解释另按来源范围保留。"
+      "disposition": "corrected",
+      "targetIds": [
+        "human-realm"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：人界唯一顶层实体，后期空间解释另按来源范围保留。",
+      "evidence": [
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 971,
+          "end": 983,
+          "anchorSha256": "30927c520c5e4c27af2deea08a6ecfe3e04bfb9444c51230bde8304c46b51812"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0126-fact-0012",
-      "label": "灵缈园",
-      "kind": "fact",
       "batchId": "batch-0126",
       "reportHash": "12ca6888de19cd87aa990a5a2a0ec1933c4b73581da1ace7c9dd66a7e467a5c5",
-      "status": "testimony-scoped",
-      "runtimeEntityId": "reported-lingmiao-tradition",
-      "note": "王门主从画轴所得且有利益动机的保证，只支持后期的说法；后文实见灰隙与药园各自建档。"
+      "disposition": "corrected",
+      "targetIds": [
+        "reported-lingmiao-tradition"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：王门主从画轴所得且有利益动机的保证，只支持后期的说法；后文实见灰隙与药园各自建档。",
+      "evidence": [
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 1316,
+          "end": 1327,
+          "anchorSha256": "e3af60a32c18240e9b65718066a4bffb29c6686a96e6d3cf9b27bd71eb7ee808"
+        },
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 934,
+          "end": 944,
+          "anchorSha256": "5161e24050777b7034eed619e56cdc0d0d60857901aeaf8182259b3ff13aa0bf"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0126-fact-0038",
-      "label": "魏无涯",
-      "kind": "fact",
       "batchId": "batch-0126",
       "reportHash": "12ca6888de19cd87aa990a5a2a0ec1933c4b73581da1ace7c9dd66a7e467a5c5",
-      "status": "future-conditional",
-      "runtimeEntityId": null,
-      "note": "魏无涯协助和突破期待是后期邀约，没有初始合约、到场、突破或欠债。"
+      "disposition": "later-only",
+      "targetIds": [
+        "reported-lingmiao-promises"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：魏无涯协助和突破期待是后期邀约，没有初始合约、到场、突破或欠债。",
+      "evidence": [
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 880,
+          "end": 888,
+          "anchorSha256": "f53b07be4f8d269ec4ef2ade5ed53c2d75717eed42add1367cfa43720292e981"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0126-fact-0070",
-      "label": "鬼灵门门主",
-      "kind": "fact",
       "batchId": "batch-0126",
       "reportHash": "12ca6888de19cd87aa990a5a2a0ec1933c4b73581da1ace7c9dd66a7e467a5c5",
-      "status": "testimony-scoped",
-      "runtimeEntityId": "reported-lingmiao-tradition",
-      "note": "王门主从画轴所得且有利益动机的保证，只支持后期的说法；后文实见灰隙与药园各自建档。"
+      "disposition": "corrected",
+      "targetIds": [
+        "reported-lingmiao-tradition"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：王门主从画轴所得且有利益动机的保证，只支持后期的说法；后文实见灰隙与药园各自建档。",
+      "evidence": [
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 1268,
+          "end": 1278,
+          "anchorSha256": "15518cbe6f4def95aad8e26f320f78d060c4a97b01faebbbec16401b96b8c516"
+        },
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 1457,
+          "end": 1467,
+          "anchorSha256": "7a036ff71b67a30f144c60daa9767f25d38c8e7f66a85098c45d7227b9d3127c"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0126-fact-0071",
-      "label": "灵缈园",
-      "kind": "fact",
       "batchId": "batch-0126",
       "reportHash": "12ca6888de19cd87aa990a5a2a0ec1933c4b73581da1ace7c9dd66a7e467a5c5",
-      "status": "future-conditional",
-      "runtimeEntityId": null,
-      "note": "魏无涯协助和突破期待是后期邀约，没有初始合约、到场、突破或欠债。"
+      "disposition": "later-only",
+      "targetIds": [
+        "reported-lingmiao-promises"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：魏无涯协助和突破期待是后期邀约，没有初始合约、到场、突破或欠债。",
+      "evidence": [
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 1363,
+          "end": 1373,
+          "anchorSha256": "ee74878211ba9c1578a9826db8d454b760e49e1d30d15baf8c05c23cf12a9193"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0126-fact-0076",
-      "label": "鬼灵门",
-      "kind": "fact",
       "batchId": "batch-0126",
       "reportHash": "12ca6888de19cd87aa990a5a2a0ec1933c4b73581da1ace7c9dd66a7e467a5c5",
-      "status": "testimony-scoped",
-      "runtimeEntityId": "reported-lingmiao-tradition",
-      "note": "王门主从画轴所得且有利益动机的保证，只支持后期的说法；后文实见灰隙与药园各自建档。"
+      "disposition": "corrected",
+      "targetIds": [
+        "reported-lingmiao-tradition"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：王门主从画轴所得且有利益动机的保证，只支持后期的说法；后文实见灰隙与药园各自建档。",
+      "evidence": [
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 862,
+          "end": 879,
+          "anchorSha256": "c699b75245557916ec60cd9139e136a8f6020aaa03f5b77a73fbbf50ce10ddce"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0126-issue-0003",
-      "label": "灵缈园存在性",
-      "kind": "issue",
       "batchId": "batch-0126",
       "reportHash": "12ca6888de19cd87aa990a5a2a0ec1933c4b73581da1ace7c9dd66a7e467a5c5",
-      "status": "testimony-scoped",
-      "runtimeEntityId": "reported-lingmiao-tradition",
-      "note": "王门主从画轴所得且有利益动机的保证，只支持后期的说法；后文实见灰隙与药园各自建档。"
+      "disposition": "corrected",
+      "targetIds": [
+        "reported-lingmiao-tradition"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：王门主从画轴所得且有利益动机的保证，只支持后期的说法；后文实见灰隙与药园各自建档。",
+      "evidence": [
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 1316,
+          "end": 1327,
+          "anchorSha256": "e3af60a32c18240e9b65718066a4bffb29c6686a96e6d3cf9b27bd71eb7ee808"
+        },
+        {
+          "chapterId": "qq-24594511",
+          "chapterSha256": "193d483504d3ecd3f78a14d43650b3647ce0dba09358acf1694d39c0b71559e3",
+          "start": 934,
+          "end": 944,
+          "anchorSha256": "5161e24050777b7034eed619e56cdc0d0d60857901aeaf8182259b3ff13aa0bf"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0127-object-0003",
-      "label": "鬼灵门门主",
-      "kind": "object",
       "batchId": "batch-0127",
       "reportHash": "9bda5f15b1515454a6d47c62bff5b2025ead6451ecf69b422c56aa4762a1388a",
-      "status": "cross-region-identity",
-      "runtimeEntityId": "canon-wang-tiansheng",
-      "note": "王门主与王天胜为同人，Tiannan 拥有唯一实体；后期谷内邀约和门主境界不由本候选回填。"
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-wang-tiansheng"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：王门主与王天胜为同人，Tiannan 拥有唯一实体；后期谷内邀约和门主境界不由本候选回填。",
+      "evidence": [
+        {
+          "chapterId": "qq-24622521",
+          "chapterSha256": "c6ac70b7d5549ec98d83da390f694a6794e172684f6d1510a95bc419325301de",
+          "start": 666,
+          "end": 677,
+          "anchorSha256": "f96f73897319627c6245c83b6a0bae96b34cc3f6c7fe70518e0789c0bac75ed0"
+        },
+        {
+          "chapterId": "qq-24622521",
+          "chapterSha256": "c6ac70b7d5549ec98d83da390f694a6794e172684f6d1510a95bc419325301de",
+          "start": 214,
+          "end": 227,
+          "anchorSha256": "49ba5c45f6ad09bb5b61745da622cbc71022cee1262add7c95eb37a2dd85b908"
+        },
+        {
+          "chapterId": "qq-24622521",
+          "chapterSha256": "c6ac70b7d5549ec98d83da390f694a6794e172684f6d1510a95bc419325301de",
+          "start": 1738,
+          "end": 1757,
+          "anchorSha256": "928cda40beed728f9d9d84a470b7b735e82aac2e3c941ef897ef540d5c4cb7ee"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0127-object-0025",
-      "label": "灵缈园",
-      "kind": "object",
       "batchId": "batch-0127",
       "reportHash": "9bda5f15b1515454a6d47c62bff5b2025ead6451ecf69b422c56aa4762a1388a",
-      "status": "ambiguous-place-name-disambiguated",
-      "runtimeEntityId": "reported-lingmiao-tradition",
-      "note": "原句所称灵缈园有传说、入口幌子、古通道或经历等不同指代；不把词相同的两个空间合并。"
+      "disposition": "corrected",
+      "targetIds": [
+        "reported-lingmiao-tradition"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：原句所称灵缈园有传说、入口幌子、古通道或经历等不同指代；不把词相同的两个空间合并。",
+      "evidence": [
+        {
+          "chapterId": "qq-24622521",
+          "chapterSha256": "c6ac70b7d5549ec98d83da390f694a6794e172684f6d1510a95bc419325301de",
+          "start": 289,
+          "end": 303,
+          "anchorSha256": "c2896dca9011c2c8652a93da6b26f66415907d5e961d698c5805113e03b7ebe6"
+        },
+        {
+          "chapterId": "qq-24650048",
+          "chapterSha256": "4246c92c91289e3290fe711975ea12def1956a21a318d34253cd8eeb13ef1a3a",
+          "start": 2362,
+          "end": 2372,
+          "anchorSha256": "ae2308eb8551ea8b2ee83e19f11de2f5f594a1a98d450cbfb41b274233c43544"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0127-object-0026",
-      "label": "坠魔谷",
-      "kind": "object",
       "batchId": "batch-0127",
       "reportHash": "9bda5f15b1515454a6d47c62bff5b2025ead6451ecf69b422c56aa4762a1388a",
-      "status": "cross-region-geography",
-      "runtimeEntityId": "human-devil-valley",
-      "note": "坠魔谷唯一地域由 human-devil-valley 制作，不与封魔灰隙或药园残骸同一化。"
+      "disposition": "corrected",
+      "targetIds": [
+        "human-devil-valley"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：坠魔谷唯一地域由 human-devil-valley 制作，不与封魔灰隙或药园残骸同一化。",
+      "evidence": [
+        {
+          "chapterId": "qq-24650048",
+          "chapterSha256": "4246c92c91289e3290fe711975ea12def1956a21a318d34253cd8eeb13ef1a3a",
+          "start": 1928,
+          "end": 1937,
+          "anchorSha256": "cf6355ecef3034823aea50bf5a995fe302fa8d6af79d19ebf065e6cd5d4213ff"
+        },
+        {
+          "chapterId": "qq-24622521",
+          "chapterSha256": "c6ac70b7d5549ec98d83da390f694a6794e172684f6d1510a95bc419325301de",
+          "start": 419,
+          "end": 432,
+          "anchorSha256": "971ace5508bf61baf94f992debc6030ef8c806f038adaf5caaaaac85a9664d9d"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0127-object-0029",
-      "label": "祭坛",
-      "kind": "object",
       "batchId": "batch-0127",
       "reportHash": "9bda5f15b1515454a6d47c62bff5b2025ead6451ecf69b422c56aa4762a1388a",
-      "status": "cross-region-ancient-structure",
-      "runtimeEntityId": "dv-white-altar",
-      "note": "白石梯形祭坛是真实古建筑，归谷区；后来登坛人群不回填。"
+      "disposition": "adopted",
+      "targetIds": [
+        "dv-white-altar"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：白石梯形祭坛是真实古建筑，归谷区；后来登坛人群不回填。",
+      "evidence": [
+        {
+          "chapterId": "qq-24622521",
+          "chapterSha256": "c6ac70b7d5549ec98d83da390f694a6794e172684f6d1510a95bc419325301de",
+          "start": 553,
+          "end": 566,
+          "anchorSha256": "3d03b91286f9e1b4b3296084d225cc206eb011c15aec04b8802a9c1d9f99b576"
+        },
+        {
+          "chapterId": "qq-24650048",
+          "chapterSha256": "4246c92c91289e3290fe711975ea12def1956a21a318d34253cd8eeb13ef1a3a",
+          "start": 2455,
+          "end": 2466,
+          "anchorSha256": "ddca006e0d13f00adeefd8a9afe906467df5bff99330ccd3bd63f4b651e1de32"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0127-fact-0002",
-      "label": "鬼灵门门主",
-      "kind": "fact",
       "batchId": "batch-0127",
       "reportHash": "9bda5f15b1515454a6d47c62bff5b2025ead6451ecf69b422c56aa4762a1388a",
-      "status": "future-transfer-with-ancient-item",
-      "runtimeEntityId": "dv-cangkun-scroll",
-      "note": "古画轴物件与伪苍坤分魂归谷区；王天古取得并交门主的流转尚未发生。"
+      "disposition": "later-only",
+      "targetIds": [
+        "dv-cangkun-scroll"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：古画轴物件与伪苍坤分魂归谷区；王天古取得并交门主的流转尚未发生。",
+      "evidence": [
+        {
+          "chapterId": "qq-24622521",
+          "chapterSha256": "c6ac70b7d5549ec98d83da390f694a6794e172684f6d1510a95bc419325301de",
+          "start": 1738,
+          "end": 1757,
+          "anchorSha256": "928cda40beed728f9d9d84a470b7b735e82aac2e3c941ef897ef540d5c4cb7ee"
+        },
+        {
+          "chapterId": "qq-24622521",
+          "chapterSha256": "c6ac70b7d5549ec98d83da390f694a6794e172684f6d1510a95bc419325301de",
+          "start": 1798,
+          "end": 1808,
+          "anchorSha256": "06d27e4fd6d3db55ad6cf9adbfd813aa01255cb9b39b7432aa49dc5b36eb7a37"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0127-fact-0015",
-      "label": "祭坛",
-      "kind": "fact",
       "batchId": "batch-0127",
       "reportHash": "9bda5f15b1515454a6d47c62bff5b2025ead6451ecf69b422c56aa4762a1388a",
-      "status": "cross-region-ancient-structure",
-      "runtimeEntityId": "dv-white-altar",
-      "note": "白石梯形祭坛是真实古建筑，归谷区；后来登坛人群不回填。"
+      "disposition": "adopted",
+      "targetIds": [
+        "dv-white-altar"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：白石梯形祭坛是真实古建筑，归谷区；后来登坛人群不回填。",
+      "evidence": [
+        {
+          "chapterId": "qq-24622521",
+          "chapterSha256": "c6ac70b7d5549ec98d83da390f694a6794e172684f6d1510a95bc419325301de",
+          "start": 553,
+          "end": 566,
+          "anchorSha256": "3d03b91286f9e1b4b3296084d225cc206eb011c15aec04b8802a9c1d9f99b576"
+        },
+        {
+          "chapterId": "qq-24622521",
+          "chapterSha256": "c6ac70b7d5549ec98d83da390f694a6794e172684f6d1510a95bc419325301de",
+          "start": 289,
+          "end": 303,
+          "anchorSha256": "c2896dca9011c2c8652a93da6b26f66415907d5e961d698c5805113e03b7ebe6"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0127-fact-0018",
-      "label": "灵缈园",
-      "kind": "fact",
       "batchId": "batch-0127",
       "reportHash": "9bda5f15b1515454a6d47c62bff5b2025ead6451ecf69b422c56aa4762a1388a",
-      "status": "testimony-checked-against-later-observation",
-      "runtimeEntityId": "dv-grey-gap",
-      "note": "祭坛通向灰色封魔间隙，称药园入口不等于真的长满灵药。"
+      "disposition": "corrected",
+      "targetIds": [
+        "dv-grey-gap"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：祭坛通向灰色封魔间隙，称药园入口不等于真的长满灵药。",
+      "evidence": [
+        {
+          "chapterId": "qq-24650048",
+          "chapterSha256": "4246c92c91289e3290fe711975ea12def1956a21a318d34253cd8eeb13ef1a3a",
+          "start": 2362,
+          "end": 2372,
+          "anchorSha256": "ae2308eb8551ea8b2ee83e19f11de2f5f594a1a98d450cbfb41b274233c43544"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0127-issue-0012",
-      "label": "灵缈园入口",
-      "kind": "issue",
       "batchId": "batch-0127",
       "reportHash": "9bda5f15b1515454a6d47c62bff5b2025ead6451ecf69b422c56aa4762a1388a",
-      "status": "testimony-checked-against-later-observation",
-      "runtimeEntityId": "dv-grey-gap",
-      "note": "祭坛通向灰色封魔间隙，称药园入口不等于真的长满灵药。"
+      "disposition": "corrected",
+      "targetIds": [
+        "dv-grey-gap"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：祭坛通向灰色封魔间隙，称药园入口不等于真的长满灵药。",
+      "evidence": [
+        {
+          "chapterId": "qq-24650048",
+          "chapterSha256": "4246c92c91289e3290fe711975ea12def1956a21a318d34253cd8eeb13ef1a3a",
+          "start": 2362,
+          "end": 2372,
+          "anchorSha256": "ae2308eb8551ea8b2ee83e19f11de2f5f594a1a98d450cbfb41b274233c43544"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0128-object-0011",
-      "label": "鬼灵门",
-      "kind": "object",
       "batchId": "batch-0128",
       "reportHash": "cba919670874681dbf29084ccd05beef6be2985bd34f88e366dece54cf04e358",
-      "status": "cross-region-identity",
-      "runtimeEntityId": "guiling-sect",
-      "note": "鬼灵门唯一组织归 Tiannan，谷内人员伤亡/法阵/行动不前置。"
+      "disposition": "corrected",
+      "targetIds": [
+        "guiling-sect"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：鬼灵门唯一组织归 Tiannan，谷内人员伤亡/法阵/行动不前置。",
+      "evidence": [
+        {
+          "chapterId": "qq-24674671",
+          "chapterSha256": "4f5b9338e32a4c60aa094c8ef84945ef6153752b130658ca9a2747c559f4c112",
+          "start": 2013,
+          "end": 2027,
+          "anchorSha256": "65d8c272dac342fa41eae30252a1ae36383ced28af389db65ff83300a8feb69b"
+        },
+        {
+          "chapterId": "qq-24698919",
+          "chapterSha256": "86ebca3fc4344eadddfa72c3a5e0a37a94bb8df75c3870a1f26ec91b9be5ea87",
+          "start": 1937,
+          "end": 1949,
+          "anchorSha256": "a1a36a96dfa8a34cb0810c346c4f9b72d693a11504b5dd34d845f26d93edb75f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0128-object-0014",
-      "label": "灵界",
-      "kind": "object",
       "batchId": "batch-0128",
       "reportHash": "cba919670874681dbf29084ccd05beef6be2985bd34f88e366dece54cf04e358",
-      "status": "cross-region-identity",
-      "runtimeEntityId": "spirit-realm",
-      "note": "灵界唯一顶层实体，人物言辞不新增第二灵界。"
+      "disposition": "corrected",
+      "targetIds": [
+        "spirit-realm"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：灵界唯一顶层实体，人物言辞不新增第二灵界。",
+      "evidence": [
+        {
+          "chapterId": "qq-24686768",
+          "chapterSha256": "2eda4dbbc1de3beabc66194aa8304fe50b2cc0f9751eb86d3496380311bb18e8",
+          "start": 227,
+          "end": 236,
+          "anchorSha256": "238197eb6d04c02c8c745131c175f9d5f07fb05d02099a9dbaee7da5d59a4083"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0128-object-0015",
-      "label": "人界",
-      "kind": "object",
       "batchId": "batch-0128",
       "reportHash": "cba919670874681dbf29084ccd05beef6be2985bd34f88e366dece54cf04e358",
-      "status": "cross-region-identity",
-      "runtimeEntityId": "human-realm",
-      "note": "人界唯一顶层实体，后期空间解释另按来源范围保留。"
+      "disposition": "corrected",
+      "targetIds": [
+        "human-realm"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：人界唯一顶层实体，后期空间解释另按来源范围保留。",
+      "evidence": [
+        {
+          "chapterId": "qq-24686768",
+          "chapterSha256": "2eda4dbbc1de3beabc66194aa8304fe50b2cc0f9751eb86d3496380311bb18e8",
+          "start": 225,
+          "end": 236,
+          "anchorSha256": "031253b9a3e87b702ba276db76f01eccbd34ad374f5c0789419c50a92763e0a0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0128-object-0018",
-      "label": "灵缈园",
-      "kind": "object",
       "batchId": "batch-0128",
       "reportHash": "cba919670874681dbf29084ccd05beef6be2985bd34f88e366dece54cf04e358",
-      "status": "ambiguous-place-name-disambiguated",
-      "runtimeEntityId": "reported-lingmiao-tradition",
-      "note": "原句所称灵缈园有传说、入口幌子、古通道或经历等不同指代；不把词相同的两个空间合并。"
+      "disposition": "corrected",
+      "targetIds": [
+        "reported-lingmiao-tradition"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：原句所称灵缈园有传说、入口幌子、古通道或经历等不同指代；不把词相同的两个空间合并。",
+      "evidence": [
+        {
+          "chapterId": "qq-24675567",
+          "chapterSha256": "a6c99ee3f1fdf60a349f5c9d254dfb0dd19b943d2cb3d6d05ff29aeac0300330",
+          "start": 1844,
+          "end": 1858,
+          "anchorSha256": "5c70df29e2b3c673ba20f0cf374e3dbacd0eae9cada0187ee4ac5650f58c4f01"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0128-object-0022",
-      "label": "交界灰色空间",
-      "kind": "object",
       "batchId": "batch-0128",
       "reportHash": "cba919670874681dbf29084ccd05beef6be2985bd34f88e366dece54cf04e358",
-      "status": "cross-region-ancient-space",
-      "runtimeEntityId": "dv-grey-gap",
-      "note": "独立灰色封魔间隙归谷区，有晶封魔躯，不是药园残骸。"
+      "disposition": "adopted",
+      "targetIds": [
+        "dv-grey-gap"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：独立灰色封魔间隙归谷区，有晶封魔躯，不是药园残骸。",
+      "evidence": [
+        {
+          "chapterId": "qq-24689251",
+          "chapterSha256": "1beafb2dd9fdbaa107060cf206c7acc0cb89ac64907476efb9a34f9667875eee",
+          "start": 834,
+          "end": 843,
+          "anchorSha256": "adae1d51e4cef6bb858339ac661a7903d06beb5b8973490b6b70f8df19617f6f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0128-fact-0026",
-      "label": "灵缈园",
-      "kind": "fact",
       "batchId": "batch-0128",
       "reportHash": "cba919670874681dbf29084ccd05beef6be2985bd34f88e366dece54cf04e358",
-      "status": "cross-region-conditional-transit",
-      "runtimeEntityId": "dv-white-altar",
-      "note": "旧祭坛及隐藏裂隙机制可回溯，现已显露并开启的状态是后来真实行动。"
+      "disposition": "corrected",
+      "targetIds": [
+        "dv-white-altar"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：旧祭坛及隐藏裂隙机制可回溯，现已显露并开启的状态是后来真实行动。",
+      "evidence": [
+        {
+          "chapterId": "qq-24675567",
+          "chapterSha256": "a6c99ee3f1fdf60a349f5c9d254dfb0dd19b943d2cb3d6d05ff29aeac0300330",
+          "start": 1844,
+          "end": 1858,
+          "anchorSha256": "5c70df29e2b3c673ba20f0cf374e3dbacd0eae9cada0187ee4ac5650f58c4f01"
+        },
+        {
+          "chapterId": "qq-24675567",
+          "chapterSha256": "a6c99ee3f1fdf60a349f5c9d254dfb0dd19b943d2cb3d6d05ff29aeac0300330",
+          "start": 2213,
+          "end": 2222,
+          "anchorSha256": "4ce5e435672e7a282428b512df66b1afde4ddf40622052fe88850e3a38640737"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0128-fact-0028",
-      "label": "空间裂缝",
-      "kind": "fact",
       "batchId": "batch-0128",
       "reportHash": "cba919670874681dbf29084ccd05beef6be2985bd34f88e366dece54cf04e358",
-      "status": "testimony-and-capability-scoped",
-      "runtimeEntityId": "dv-grey-gap",
-      "note": "斩割风险与当时六七成估计分别处理；不是所有通行者固定成功率，也不允许无破界保护普通步行。"
+      "disposition": "corrected",
+      "targetIds": [
+        "dv-grey-gap"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：斩割风险与当时六七成估计分别处理；不是所有通行者固定成功率，也不允许无破界保护普通步行。",
+      "evidence": [
+        {
+          "chapterId": "qq-24686768",
+          "chapterSha256": "2eda4dbbc1de3beabc66194aa8304fe50b2cc0f9751eb86d3496380311bb18e8",
+          "start": 186,
+          "end": 199,
+          "anchorSha256": "ad9ca0159986d0affca3f37393a17dd6736252b278c4b87e196215b0d4349d6b"
+        },
+        {
+          "chapterId": "qq-24686768",
+          "chapterSha256": "2eda4dbbc1de3beabc66194aa8304fe50b2cc0f9751eb86d3496380311bb18e8",
+          "start": 337,
+          "end": 349,
+          "anchorSha256": "5e833e27bc61cec0e5653602fd03a0beb5aa61ced6a9477e454e2369a428c1e5"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0128-fact-0034",
-      "label": "交界灰色空间",
-      "kind": "fact",
       "batchId": "batch-0128",
       "reportHash": "cba919670874681dbf29084ccd05beef6be2985bd34f88e366dece54cf04e358",
-      "status": "deceptive-testimony-scoped",
-      "runtimeEntityId": "reported-lingmiao-tradition",
-      "note": "古魔伪残魂自辩不具客观全知；灰隙实见无药，后来另有真药园，不能推出所有药园已采毁。"
+      "disposition": "corrected",
+      "targetIds": [
+        "reported-lingmiao-tradition"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：古魔伪残魂自辩不具客观全知；灰隙实见无药，后来另有真药园，不能推出所有药园已采毁。",
+      "evidence": [
+        {
+          "chapterId": "qq-24689251",
+          "chapterSha256": "1beafb2dd9fdbaa107060cf206c7acc0cb89ac64907476efb9a34f9667875eee",
+          "start": 2862,
+          "end": 2873,
+          "anchorSha256": "079657f821e3ca4f745bfab0985853791a0d913ab75f696f6afb3a8d90b9ff5f"
+        },
+        {
+          "chapterId": "qq-24689251",
+          "chapterSha256": "1beafb2dd9fdbaa107060cf206c7acc0cb89ac64907476efb9a34f9667875eee",
+          "start": 3041,
+          "end": 3057,
+          "anchorSha256": "de8adce8e47f8c378df3bcedc5ab4d35cce972ab195a0e5f49f104e283f9c85d"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0128-fact-0035",
-      "label": "灵缈园",
-      "kind": "fact",
       "batchId": "batch-0128",
       "reportHash": "cba919670874681dbf29084ccd05beef6be2985bd34f88e366dece54cf04e358",
-      "status": "deceptive-testimony-scoped",
-      "runtimeEntityId": "reported-lingmiao-tradition",
-      "note": "古魔伪残魂自辩不具客观全知；灰隙实见无药，后来另有真药园，不能推出所有药园已采毁。"
+      "disposition": "corrected",
+      "targetIds": [
+        "reported-lingmiao-tradition"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：古魔伪残魂自辩不具客观全知；灰隙实见无药，后来另有真药园，不能推出所有药园已采毁。",
+      "evidence": [
+        {
+          "chapterId": "qq-24689251",
+          "chapterSha256": "1beafb2dd9fdbaa107060cf206c7acc0cb89ac64907476efb9a34f9667875eee",
+          "start": 2957,
+          "end": 2974,
+          "anchorSha256": "39890fba77dd08194e13fd2fe8dae591e4ccc6baba845f17a3efaa9eeb4834a1"
+        },
+        {
+          "chapterId": "qq-24689251",
+          "chapterSha256": "1beafb2dd9fdbaa107060cf206c7acc0cb89ac64907476efb9a34f9667875eee",
+          "start": 2999,
+          "end": 3010,
+          "anchorSha256": "a3c0cca97323cdb5722210f2ecf765b8f36069bbf9a2b07f7df06d53b10a7fb0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0128-issue-0003",
-      "label": "灵缈园说法可靠性",
-      "kind": "issue",
       "batchId": "batch-0128",
       "reportHash": "cba919670874681dbf29084ccd05beef6be2985bd34f88e366dece54cf04e358",
-      "status": "deceptive-testimony-scoped",
-      "runtimeEntityId": "reported-lingmiao-tradition",
-      "note": "古魔伪残魂自辩不具客观全知；灰隙实见无药，后来另有真药园，不能推出所有药园已采毁。"
+      "disposition": "corrected",
+      "targetIds": [
+        "reported-lingmiao-tradition"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：古魔伪残魂自辩不具客观全知；灰隙实见无药，后来另有真药园，不能推出所有药园已采毁。",
+      "evidence": [
+        {
+          "chapterId": "qq-24689251",
+          "chapterSha256": "1beafb2dd9fdbaa107060cf206c7acc0cb89ac64907476efb9a34f9667875eee",
+          "start": 2862,
+          "end": 2873,
+          "anchorSha256": "079657f821e3ca4f745bfab0985853791a0d913ab75f696f6afb3a8d90b9ff5f"
+        },
+        {
+          "chapterId": "qq-24689251",
+          "chapterSha256": "1beafb2dd9fdbaa107060cf206c7acc0cb89ac64907476efb9a34f9667875eee",
+          "start": 3041,
+          "end": 3057,
+          "anchorSha256": "de8adce8e47f8c378df3bcedc5ab4d35cce972ab195a0e5f49f104e283f9c85d"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-object-0001",
-      "label": "韩立",
-      "kind": "object",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "cross-region-identity",
-      "runtimeEntityId": "han-li",
-      "note": "唯一韩立由开篇模块维护；后期战斗、境界、法宝、入园不是开篇事实。"
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-han-li"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：唯一韩立由开篇模块维护；后期战斗、境界、法宝、入园不是开篇事实。",
+      "evidence": [
+        {
+          "chapterId": "qq-24844643",
+          "chapterSha256": "adda76e79384dffbe24d98c7da6be744b7a9012946d664aff3ca5c4931a84d0d",
+          "start": 3083,
+          "end": 3104,
+          "anchorSha256": "a2c1a8dc1c452c94a76074f82e2300fd7084c3ad2f6fde349ca49d16aeff8699"
+        },
+        {
+          "chapterId": "qq-24820442",
+          "chapterSha256": "0004aab50b68e27abdb5a1ecc5be11ffb8179e4905b9e67bcb26f12788f0876f",
+          "start": 254,
+          "end": 267,
+          "anchorSha256": "09a18e3dafcea4b3c380be6feccce85f4f0fda8de18255655fb332d1b26756d2"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-object-0002",
-      "label": "魔魂",
-      "kind": "object",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "cross-region-distinct-soul",
-      "runtimeEntityId": "canon-xueyan-ancient-demon",
-      "note": "本段与韩立交战并入药园的是古魔主魂，不能与掌握原躯的早离体分魂合并。"
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-xueyan-ancient-demon"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：本段与韩立交战并入药园的是古魔主魂，不能与掌握原躯的早离体分魂合并。",
+      "evidence": [
+        {
+          "chapterId": "qq-24820442",
+          "chapterSha256": "0004aab50b68e27abdb5a1ecc5be11ffb8179e4905b9e67bcb26f12788f0876f",
+          "start": 214,
+          "end": 232,
+          "anchorSha256": "7229b21d5811594e9aa0874f2f8396966cffbaef94eb7d3960ce190c5df17eec"
+        },
+        {
+          "chapterId": "qq-24820442",
+          "chapterSha256": "0004aab50b68e27abdb5a1ecc5be11ffb8179e4905b9e67bcb26f12788f0876f",
+          "start": 1415,
+          "end": 1426,
+          "anchorSha256": "dd18ecbc1893fafd45a6c4ccd662b1c2c57a952bb6db2fd107cea90ef176fcff"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-object-0006",
-      "label": "银月",
-      "kind": "object",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "cross-region-identity",
-      "runtimeEntityId": "canon-xueling-soul",
-      "note": "银月即雪玲器灵阶段别名，不生成第二角色；此处白狐化形和随韩经历未发生。"
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-xueling-soul"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：银月即雪玲器灵阶段别名，不生成第二角色；此处白狐化形和随韩经历未发生。",
+      "evidence": [
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 2786,
+          "end": 2799,
+          "anchorSha256": "06e6dd84720cd224c34d1cf8fc5f1313ce29b02e1a857a7a2eb9430e9219dfca"
+        },
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 2893,
+          "end": 2902,
+          "anchorSha256": "cebe9206f898e6d756d0aa0ae3865be5eb9c3d900be6f03b8a6effcf6b1a604e"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-object-0021",
-      "label": "坠魔谷",
-      "kind": "object",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "cross-region-geography",
-      "runtimeEntityId": "human-devil-valley",
-      "note": "坠魔谷唯一地域由 human-devil-valley 制作，不与封魔灰隙或药园残骸同一化。"
+      "disposition": "corrected",
+      "targetIds": [
+        "human-devil-valley"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：坠魔谷唯一地域由 human-devil-valley 制作，不与封魔灰隙或药园残骸同一化。",
+      "evidence": [
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 2299,
+          "end": 2313,
+          "anchorSha256": "cffa989178427f0e9fcf007768590a590266f7d1050add22d9f7dbfcc99b29da"
+        },
+        {
+          "chapterId": "qq-24832527",
+          "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+          "start": 1520,
+          "end": 1536,
+          "anchorSha256": "304e477ed713e7c48d173e9f4e3ad403a6cbb5c639cbc6b28b34211c15d9e3bc"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-object-0022",
-      "label": "灵缈园",
-      "kind": "object",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "runtime-ancient-place",
-      "runtimeEntityId": "associated-lingmiao-remnant",
-      "note": "数十丈药园残骸，石亭半廊与古药实际存在；后期韩立入住/采收不预置。"
+      "disposition": "adopted",
+      "targetIds": [
+        "associated-lingmiao-remnant"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：数十丈药园残骸，石亭半廊与古药实际存在；后期韩立入住/采收不预置。",
+      "evidence": [
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 2170,
+          "end": 2184,
+          "anchorSha256": "bb55bec9f5eb3aa518e11711157da3f5389cec421fe576577dc64f0d5a218c4a"
+        },
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 640,
+          "end": 648,
+          "anchorSha256": "854cbdf10d5b29c85c7e5e6a5dc43c1ddd382a0c91595783e3658de2d5d6ea06"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-object-0030",
-      "label": "紫罗天火",
-      "kind": "object",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "future-player-technique",
-      "runtimeEntityId": null,
-      "note": "紫罗天火属于后来韩立修成并带入之能力，不是残园公共火源或开篇少年能力。"
+      "disposition": "later-only",
+      "targetIds": [
+        "reported-garden-remnant"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：紫罗天火属于后来韩立修成并带入之能力，不是残园公共火源或开篇少年能力。",
+      "evidence": [
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 533,
+          "end": 539,
+          "anchorSha256": "bc9411dc030fa4ecd65a860fa3ed7bd089fe4d5bc2de53e03ea6547dd9a66ebe"
+        },
+        {
+          "chapterId": "qq-24832527",
+          "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+          "start": 1441,
+          "end": 1458,
+          "anchorSha256": "77536cb53b139af2251df8eef80a80e35a44e22014ea5371a61c70fd6c7289e1"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-object-0035",
-      "label": "绛云丹",
-      "kind": "object",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "recipe-properties-indexed",
-      "runtimeEntityId": "reported-jiangyun-formula",
-      "note": "只收功效、配伍与园中主材限制；完整玉简与外界辅料不凭空出现，不能原地免费成丹。"
+      "disposition": "adopted",
+      "targetIds": [
+        "reported-jiangyun-formula"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：只收功效、配伍与园中主材限制；完整玉简与外界辅料不凭空出现，不能原地免费成丹。",
+      "evidence": [
+        {
+          "chapterId": "qq-24832527",
+          "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+          "start": 769,
+          "end": 782,
+          "anchorSha256": "31a92a56591d3f747bd2d265e2d29b24d90839a0964cb341e5c19e56ac1ce799"
+        },
+        {
+          "chapterId": "qq-24832527",
+          "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+          "start": 829,
+          "end": 846,
+          "anchorSha256": "37df4a4d5eebee26e6bf152d43fe2ccc3020933de2d536034295fd3b647675e3"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-object-0036",
-      "label": "雪魄丸",
-      "kind": "object",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "same-context-name-variation",
-      "runtimeEntityId": "reported-xuepo-formula",
-      "note": "同章雪魄丸/冰魄丸连续称名，保留异写说明，不重复生成两套配方库存。"
+      "disposition": "adopted",
+      "targetIds": [
+        "reported-xuepo-formula"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：同章雪魄丸/冰魄丸连续称名，保留异写说明，不重复生成两套配方库存。",
+      "evidence": [
+        {
+          "chapterId": "qq-24832527",
+          "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+          "start": 904,
+          "end": 918,
+          "anchorSha256": "575284ea2bc160ae92fbcf11429cfcb40c5ac7516caa4d8b13912c2a67399103"
+        },
+        {
+          "chapterId": "qq-24832527",
+          "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+          "start": 1421,
+          "end": 1435,
+          "anchorSha256": "9916facd1573ad6c87536368f64a395e7ea303caa6831b1101776ce502f6c3cc"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-object-0037",
-      "label": "银色禁制",
-      "kind": "object",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "runtime-restriction",
-      "runtimeEntityId": "reported-garden-silver-restriction",
-      "note": "银禁制针对古魔及魔气的实见效能可回溯；后期灭主魂结果不强制，任意人族破阵也非绝对免疫。"
+      "disposition": "adopted",
+      "targetIds": [
+        "reported-garden-silver-restriction"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：银禁制针对古魔及魔气的实见效能可回溯；后期灭主魂结果不强制，任意人族破阵也非绝对免疫。",
+      "evidence": [
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 1901,
+          "end": 1913,
+          "anchorSha256": "a1bf32c82fd15b7816bc3ba3025049cba477c2b30ffa6748b4a51c50452829d5"
+        },
+        {
+          "chapterId": "qq-24843672",
+          "chapterSha256": "cacd7106459f837cecba57f5aad7b0737eea4fc50b49d11aa880aa558a5b2078",
+          "start": 347,
+          "end": 362,
+          "anchorSha256": "aa519fd48991ab33a67555ef616a0537357a8fc00e55c0a7d8c0a2c97ed8df2b"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-object-0040",
-      "label": "人界",
-      "kind": "object",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "cross-region-identity",
-      "runtimeEntityId": "human-realm",
-      "note": "人界唯一顶层实体，后期空间解释另按来源范围保留。"
+      "disposition": "corrected",
+      "targetIds": [
+        "human-realm"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：人界唯一顶层实体，后期空间解释另按来源范围保留。",
+      "evidence": [
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 2015,
+          "end": 2030,
+          "anchorSha256": "2d01cf4287127206e3797b0be5eb1b678042c20f9e91fe77fe1d1c71ee85e2f6"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-object-0041",
-      "label": "灵界修士",
-      "kind": "object",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "inference-not-named-person",
-      "runtimeEntityId": null,
-      "note": "灵界修士是大衍对布阵者的猜测，不能创造开篇在场命名作者。"
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "reported-silver-restriction"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：灵界修士是大衍对布阵者的猜测，不能创造开篇在场命名作者。",
+      "evidence": [
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 2051,
+          "end": 2065,
+          "anchorSha256": "41753cb4be96ede38e773b9a9fbe4ee8030854a8f04b2901660ad128e94e096e"
+        }
+      ],
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "布阵者身份无确证，不能依大衍猜测创造具名灵界修士或其T0驻地。"
+      },
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-object-0046",
-      "label": "土遁术",
-      "kind": "object",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "capability-not-route",
-      "runtimeEntityId": "reported-garden-ground-restriction",
-      "note": "土遁是动作能力；残阵缺口不是现成出口，不能由会土遁推成跨界通行。"
+      "disposition": "corrected",
+      "targetIds": [
+        "reported-garden-ground-restriction"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：土遁是动作能力；残阵缺口不是现成出口，不能由会土遁推成跨界通行。",
+      "evidence": [
+        {
+          "chapterId": "qq-24832527",
+          "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+          "start": 2738,
+          "end": 2752,
+          "anchorSha256": "93f73f0623edcf25c7dbbe97c53103b2db8baf606f3fc87dafff3b147513f328"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-fact-0016",
-      "label": "紫罗天火",
-      "kind": "fact",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "future-player-technique",
-      "runtimeEntityId": null,
-      "note": "紫罗天火属于后来韩立修成并带入之能力，不是残园公共火源或开篇少年能力。"
+      "disposition": "later-only",
+      "targetIds": [
+        "reported-garden-remnant"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：紫罗天火属于后来韩立修成并带入之能力，不是残园公共火源或开篇少年能力。",
+      "evidence": [
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 533,
+          "end": 539,
+          "anchorSha256": "bc9411dc030fa4ecd65a860fa3ed7bd089fe4d5bc2de53e03ea6547dd9a66ebe"
+        },
+        {
+          "chapterId": "qq-24832527",
+          "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+          "start": 1441,
+          "end": 1458,
+          "anchorSha256": "77536cb53b139af2251df8eef80a80e35a44e22014ea5371a61c70fd6c7289e1"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-fact-0022",
-      "label": "宋姓女子",
-      "kind": "fact",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "future-gift-cross-region",
-      "runtimeEntityId": "canon-song-yu",
-      "note": "宋姓女子所赠药方玉简为后来交流，所属人物归 Tiannan；残园内不凭空放副本。"
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-song-yu"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：宋姓女子所赠药方玉简为后来交流，所属人物归 Tiannan；残园内不凭空放副本。",
+      "evidence": [
+        {
+          "chapterId": "qq-24832527",
+          "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+          "start": 590,
+          "end": 608,
+          "anchorSha256": "6ce30fdad9896a0385456ccc46e3b07f600625e36c81f195312c109582da75c9"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-fact-0023",
-      "label": "灵缈园",
-      "kind": "fact",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "historical-explanation-scoped",
-      "runtimeEntityId": "reported-lingmiao-tradition",
-      "note": "大衍的古药园类别知识单列为人物解释，与实际残骸物理布局分开。"
+      "disposition": "corrected",
+      "targetIds": [
+        "reported-lingmiao-tradition"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：大衍的古药园类别知识单列为人物解释，与实际残骸物理布局分开。",
+      "evidence": [
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 2170,
+          "end": 2184,
+          "anchorSha256": "bb55bec9f5eb3aa518e11711157da3f5389cec421fe576577dc64f0d5a218c4a"
+        },
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 2331,
+          "end": 2347,
+          "anchorSha256": "47043ea8ae47f32248f6a9c8a991ad540d1900ece677d721f952666190569985"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-fact-0024",
-      "label": "银色禁制",
-      "kind": "fact",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "runtime-restriction",
-      "runtimeEntityId": "reported-garden-silver-restriction",
-      "note": "银禁制针对古魔及魔气的实见效能可回溯；后期灭主魂结果不强制，任意人族破阵也非绝对免疫。"
+      "disposition": "adopted",
+      "targetIds": [
+        "reported-garden-silver-restriction"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：银禁制针对古魔及魔气的实见效能可回溯；后期灭主魂结果不强制，任意人族破阵也非绝对免疫。",
+      "evidence": [
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 1666,
+          "end": 1681,
+          "anchorSha256": "888bc8315da2bcb7be7fdc63cef6091538d6d4e24be7fd58c0ae2d94401c68f3"
+        },
+        {
+          "chapterId": "qq-24843672",
+          "chapterSha256": "cacd7106459f837cecba57f5aad7b0737eea4fc50b49d11aa880aa558a5b2078",
+          "start": 347,
+          "end": 362,
+          "anchorSha256": "aa519fd48991ab33a67555ef616a0537357a8fc00e55c0a7d8c0a2c97ed8df2b"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-fact-0026",
-      "label": "空间裂缝",
-      "kind": "fact",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "future-conditional-entry",
-      "runtimeEntityId": "associated-lingmiao-remnant",
-      "note": "后来攻击偶中薄弱点才进入；初始无裂口和对战者，不以章节指定玩家必被卷入。"
+      "disposition": "later-only",
+      "targetIds": [
+        "associated-lingmiao-remnant"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：后来攻击偶中薄弱点才进入；初始无裂口和对战者，不以章节指定玩家必被卷入。",
+      "evidence": [
+        {
+          "chapterId": "qq-24820442",
+          "chapterSha256": "0004aab50b68e27abdb5a1ecc5be11ffb8179e4905b9e67bcb26f12788f0876f",
+          "start": 2053,
+          "end": 2069,
+          "anchorSha256": "0544f647c0e1f3588a5db3b168488f64be2a5e057f27ba949827cbddbf77e025"
+        },
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 120,
+          "end": 133,
+          "anchorSha256": "ee7439b5b813e87230caefd86c0a5ef8b2bac7c63369fc9bd773d00b55979c43"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-fact-0027",
-      "label": "空间薄弱点",
-      "kind": "fact",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "runtime-spatial-property",
-      "runtimeEntityId": "reported-garden-weak-point",
-      "note": "薄弱点可在内部游走；后来亭上米粒点不是 T0 固定坐标，本版当前位置明确标定。"
+      "disposition": "adopted",
+      "targetIds": [
+        "reported-garden-weak-point"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：薄弱点可在内部游走；后来亭上米粒点不是 T0 固定坐标，本版当前位置明确标定。",
+      "evidence": [
+        {
+          "chapterId": "qq-24843672",
+          "chapterSha256": "cacd7106459f837cecba57f5aad7b0737eea4fc50b49d11aa880aa558a5b2078",
+          "start": 1738,
+          "end": 1763,
+          "anchorSha256": "153dc08867ebeb74b2c216e8db1615364bfb4d9f99db1a85b44a521d924e5c10"
+        },
+        {
+          "chapterId": "qq-24843672",
+          "chapterSha256": "cacd7106459f837cecba57f5aad7b0737eea4fc50b49d11aa880aa558a5b2078",
+          "start": 2126,
+          "end": 2140,
+          "anchorSha256": "1614f8e237c736c17524988d987ea20ba64a8958a93607123c35eebeeea8e244"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-fact-0028",
-      "label": "灵缈园残骸",
-      "kind": "fact",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "runtime-ancient-place",
-      "runtimeEntityId": "associated-lingmiao-remnant",
-      "note": "数十丈药园残骸，石亭半廊与古药实际存在；后期韩立入住/采收不预置。"
+      "disposition": "adopted",
+      "targetIds": [
+        "associated-lingmiao-remnant"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：数十丈药园残骸，石亭半廊与古药实际存在；后期韩立入住/采收不预置。",
+      "evidence": [
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 297,
+          "end": 306,
+          "anchorSha256": "c729d65a8a2f9c33414a1e457a2b81f02a7cac7c932c22c790ce768992eb73d6"
+        },
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 359,
+          "end": 368,
+          "anchorSha256": "cdf9dd58fa1787b623f5ffb2f9492949927f8d3f244efa3294d14845fe9c628c"
+        },
+        {
+          "chapterId": "qq-24843672",
+          "chapterSha256": "cacd7106459f837cecba57f5aad7b0737eea4fc50b49d11aa880aa558a5b2078",
+          "start": 2815,
+          "end": 2836,
+          "anchorSha256": "d499efd6d81cc2f00113b4a01047783289ac8eee7c8977ccb4726d718cca1647"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-fact-0029",
-      "label": "药园灵药",
-      "kind": "fact",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "runtime-herb-species",
-      "runtimeEntityId": "reported-garden-beds",
-      "note": "具名万年药种可回溯，精确当前药量标定；韩立只认三分之一是后来个人知识，不变成玩家识药比例。"
+      "disposition": "adopted",
+      "targetIds": [
+        "reported-garden-beds"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：具名万年药种可回溯，精确当前药量标定；韩立只认三分之一是后来个人知识，不变成玩家识药比例。",
+      "evidence": [
+        {
+          "chapterId": "qq-24832527",
+          "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+          "start": 3,
+          "end": 18,
+          "anchorSha256": "0a7870c12d68dcd1dbb83a4644dc590b4414d0cd741f53fb543aea8f9ef63314"
+        },
+        {
+          "chapterId": "qq-24832527",
+          "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+          "start": 170,
+          "end": 179,
+          "anchorSha256": "48642d8190bda594bcb7f562e8dc7b84f922db84b1534f931379081e34197e7e"
+        },
+        {
+          "chapterId": "qq-24832527",
+          "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+          "start": 312,
+          "end": 323,
+          "anchorSha256": "3bd62e8fd8f2db8ddfc7fc37569d1c877777f2d64a5b6cd3e94e36a1c57f2c8d"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-fact-0033",
-      "label": "韩立",
-      "kind": "fact",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "future-plan-or-outcome",
-      "runtimeEntityId": null,
-      "note": "二三十年估计、二十七年脱出与宁州落点都不是强制计时器或自动晋级。"
+      "disposition": "later-only",
+      "targetIds": [
+        "reported-moving-weakness"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：二三十年估计、二十七年脱出与宁州落点都不是强制计时器或自动晋级。",
+      "evidence": [
+        {
+          "chapterId": "qq-24843672",
+          "chapterSha256": "cacd7106459f837cecba57f5aad7b0737eea4fc50b49d11aa880aa558a5b2078",
+          "start": 2541,
+          "end": 2557,
+          "anchorSha256": "5d76004acd118c3e355b573d3de07701f255c731e3ee5dab4686cefcb3228b5e"
+        },
+        {
+          "chapterId": "qq-24843672",
+          "chapterSha256": "cacd7106459f837cecba57f5aad7b0737eea4fc50b49d11aa880aa558a5b2078",
+          "start": 2616,
+          "end": 2634,
+          "anchorSha256": "9e2ae13d2c633e81f25c79f11a3c4fe105df8073bc3c41490696c8a4e2651478"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-fact-0038",
-      "label": "坠魔谷大战",
-      "kind": "fact",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "future-conditional-entry",
-      "runtimeEntityId": "associated-lingmiao-remnant",
-      "note": "后来攻击偶中薄弱点才进入；初始无裂口和对战者，不以章节指定玩家必被卷入。"
+      "disposition": "later-only",
+      "targetIds": [
+        "associated-lingmiao-remnant"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：后来攻击偶中薄弱点才进入；初始无裂口和对战者，不以章节指定玩家必被卷入。",
+      "evidence": [
+        {
+          "chapterId": "qq-24820442",
+          "chapterSha256": "0004aab50b68e27abdb5a1ecc5be11ffb8179e4905b9e67bcb26f12788f0876f",
+          "start": 2177,
+          "end": 2202,
+          "anchorSha256": "fcde343e45a3d177c9208069483fe1819357fd9addace23b8344150a3440f2aa"
+        },
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 640,
+          "end": 648,
+          "anchorSha256": "854cbdf10d5b29c85c7e5e6a5dc43c1ddd382a0c91595783e3658de2d5d6ea06"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-fact-0039",
-      "label": "空间裂缝",
-      "kind": "fact",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "future-conditional-entry",
-      "runtimeEntityId": "associated-lingmiao-remnant",
-      "note": "后来攻击偶中薄弱点才进入；初始无裂口和对战者，不以章节指定玩家必被卷入。"
+      "disposition": "later-only",
+      "targetIds": [
+        "associated-lingmiao-remnant"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：后来攻击偶中薄弱点才进入；初始无裂口和对战者，不以章节指定玩家必被卷入。",
+      "evidence": [
+        {
+          "chapterId": "qq-24843672",
+          "chapterSha256": "cacd7106459f837cecba57f5aad7b0737eea4fc50b49d11aa880aa558a5b2078",
+          "start": 1616,
+          "end": 1634,
+          "anchorSha256": "2fd3b351f47231fcd165f1861252e86b32582b9fc80bbfffa32a48de48bcf2df"
+        },
+        {
+          "chapterId": "qq-24843672",
+          "chapterSha256": "cacd7106459f837cecba57f5aad7b0737eea4fc50b49d11aa880aa558a5b2078",
+          "start": 1635,
+          "end": 1644,
+          "anchorSha256": "a133200acebd8f3668157373b050b9675c8ba77342f43e14daf2e2be5120c289"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-fact-0040",
-      "label": "韩立",
-      "kind": "fact",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "future-plan-or-outcome",
-      "runtimeEntityId": null,
-      "note": "二三十年估计、二十七年脱出与宁州落点都不是强制计时器或自动晋级。"
+      "disposition": "later-only",
+      "targetIds": [
+        "reported-moving-weakness"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：二三十年估计、二十七年脱出与宁州落点都不是强制计时器或自动晋级。",
+      "evidence": [
+        {
+          "chapterId": "qq-24844643",
+          "chapterSha256": "adda76e79384dffbe24d98c7da6be744b7a9012946d664aff3ca5c4931a84d0d",
+          "start": 3118,
+          "end": 3131,
+          "anchorSha256": "922b91890f4fa664b6d201d1da2c7bb8a7c15ab53bc238c004b8587d1b256951"
+        },
+        {
+          "chapterId": "qq-24844643",
+          "chapterSha256": "adda76e79384dffbe24d98c7da6be744b7a9012946d664aff3ca5c4931a84d0d",
+          "start": 3087,
+          "end": 3101,
+          "anchorSha256": "2943a7919b29f7849929829113b28ed4b3e2b76531303d95d5128795c6904182"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-fact-0043",
-      "label": "血遁术",
-      "kind": "fact",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "bounded-space-capability",
-      "runtimeEntityId": "associated-lingmiao-remnant",
-      "note": "血遁仍是同界遁术，不因速度快穿过完整空间壁；此处不生成韩立血遁技能。"
+      "disposition": "adopted",
+      "targetIds": [
+        "associated-lingmiao-remnant"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：血遁仍是同界遁术，不因速度快穿过完整空间壁；此处不生成韩立血遁技能。",
+      "evidence": [
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 1296,
+          "end": 1307,
+          "anchorSha256": "74a2dd07d7b30cde48731004db413f33c1b2df9fddc028cb3cd63f326c93c54f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-fact-0046",
-      "label": "韩立",
-      "kind": "fact",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "recipe-properties-indexed",
-      "runtimeEntityId": "reported-jiangyun-formula",
-      "note": "只收功效、配伍与园中主材限制；完整玉简与外界辅料不凭空出现，不能原地免费成丹。"
+      "disposition": "adopted",
+      "targetIds": [
+        "reported-jiangyun-formula"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：只收功效、配伍与园中主材限制；完整玉简与外界辅料不凭空出现，不能原地免费成丹。",
+      "evidence": [
+        {
+          "chapterId": "qq-24832527",
+          "chapterSha256": "791bb2f1437d221c8880f4348cbeeb28cf6f936a64bb3a403b99a7b8524cd97b",
+          "start": 715,
+          "end": 733,
+          "anchorSha256": "a95f53787f8ed4d91c90c1b1a4c3d74863d649d475eeb0a9b867b384cc37b8e5"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0131-fact-0048",
-      "label": "魔魂",
-      "kind": "fact",
       "batchId": "batch-0131",
       "reportHash": "0cb37b80808a753825359785654c51431da05ad7a546104a29a711c2d35cb549",
-      "status": "future-soul-ability-and-death",
-      "runtimeEntityId": "canon-xueyan-ancient-demon",
-      "note": "血矛/断臂骨剑以实际法体和精血为前提，封钵主魂当前没有南陇肉身；后期灭亡与残器未前置。"
+      "disposition": "later-only",
+      "targetIds": [
+        "canon-xueyan-ancient-demon"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：血矛/断臂骨剑以实际法体和精血为前提，封钵主魂当前没有南陇肉身；后期灭亡与残器未前置。",
+      "evidence": [
+        {
+          "chapterId": "qq-24820442",
+          "chapterSha256": "0004aab50b68e27abdb5a1ecc5be11ffb8179e4905b9e67bcb26f12788f0876f",
+          "start": 967,
+          "end": 980,
+          "anchorSha256": "7dfece28be134948fb7da4d59a2abfac34648c5a039ec0c65969af576100f5ff"
+        },
+        {
+          "chapterId": "qq-24830939",
+          "chapterSha256": "da790fcf9542f4e8476c2efc692ee65a415fbf3168ff075259e82b51809ed6a9",
+          "start": 1740,
+          "end": 1756,
+          "anchorSha256": "62c65061284914bdfc7fd4e3b458ad3fee4dc9510262b4b719d0a04974c8d425"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0133-object-0010",
-      "label": "灵缈园",
-      "kind": "object",
       "batchId": "batch-0133",
       "reportHash": "34dbd584879fd15183783fc2d9b4087a189a97740467887d8df242107e57436a",
-      "status": "runtime-ancient-place",
-      "runtimeEntityId": "associated-lingmiao-remnant",
-      "note": "数十丈药园残骸，石亭半廊与古药实际存在；后期韩立入住/采收不预置。"
+      "disposition": "adopted",
+      "targetIds": [
+        "associated-lingmiao-remnant"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：数十丈药园残骸，石亭半廊与古药实际存在；后期韩立入住/采收不预置。",
+      "evidence": [
+        {
+          "chapterId": "qq-24900714",
+          "chapterSha256": "3974ec9b2bae3925b9aad0c4b5e78e1ca439f03ada9182347536a7f3d950e4c1",
+          "start": 10,
+          "end": 26,
+          "anchorSha256": "e6f4a55dff8ec5621d92d449c580f285bb6b7003eaa21809dfe58bafbf113f79"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0133-fact-0001",
-      "label": "韩立",
-      "kind": "fact",
       "batchId": "batch-0133",
       "reportHash": "34dbd584879fd15183783fc2d9b4087a189a97740467887d8df242107e57436a",
-      "status": "runtime-herb-limit",
-      "runtimeEntityId": "reported-garden-beds",
-      "note": "所获药物无延寿效能与当前药种约束一致，不把万年药龄等同延寿。"
+      "disposition": "adopted",
+      "targetIds": [
+        "reported-garden-beds"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：所获药物无延寿效能与当前药种约束一致，不把万年药龄等同延寿。",
+      "evidence": [
+        {
+          "chapterId": "qq-24900714",
+          "chapterSha256": "3974ec9b2bae3925b9aad0c4b5e78e1ca439f03ada9182347536a7f3d950e4c1",
+          "start": 10,
+          "end": 26,
+          "anchorSha256": "e6f4a55dff8ec5621d92d449c580f285bb6b7003eaa21809dfe58bafbf113f79"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0145-object-0048",
-      "label": "灵缈园",
-      "kind": "object",
       "batchId": "batch-0145",
       "reportHash": "f48ee28c6fa36e3a683534a10b88600e948ac151758bb33c14e065e0550db26a",
-      "status": "testimony-technological-scope",
-      "runtimeEntityId": "reported-lingmiao-tradition",
-      "note": "天机阁长老关于当时空间技术/灵脉数量的知识归大晋，不能据此否认一切例外或给残园开放传送阵。"
+      "disposition": "corrected",
+      "targetIds": [
+        "reported-lingmiao-tradition"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：天机阁长老关于当时空间技术/灵脉数量的知识归大晋，不能据此否认一切例外或给残园开放传送阵。",
+      "evidence": [
+        {
+          "chapterId": "qq-25443818",
+          "chapterSha256": "568d2e359804aafc948072a54884782b33d642292771887178232305c5432a75",
+          "start": 1615,
+          "end": 1621,
+          "anchorSha256": "577361fc376a9cf9896701412304ec2539e902646a2648e848d1a0830956b59b"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0145-fact-0063",
-      "label": "空间裂缝",
-      "kind": "fact",
       "batchId": "batch-0145",
       "reportHash": "f48ee28c6fa36e3a683534a10b88600e948ac151758bb33c14e065e0550db26a",
-      "status": "testimony-technological-scope",
-      "runtimeEntityId": "reported-lingmiao-tradition",
-      "note": "天机阁长老关于当时空间技术/灵脉数量的知识归大晋，不能据此否认一切例外或给残园开放传送阵。"
+      "disposition": "corrected",
+      "targetIds": [
+        "reported-lingmiao-tradition"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：天机阁长老关于当时空间技术/灵脉数量的知识归大晋，不能据此否认一切例外或给残园开放传送阵。",
+      "evidence": [
+        {
+          "chapterId": "qq-25443818",
+          "chapterSha256": "568d2e359804aafc948072a54884782b33d642292771887178232305c5432a75",
+          "start": 1589,
+          "end": 1603,
+          "anchorSha256": "dd989b564461f84bf7ff17407ba8a77b970e1210450a103602d80cda65985909"
+        },
+        {
+          "chapterId": "qq-25443818",
+          "chapterSha256": "568d2e359804aafc948072a54884782b33d642292771887178232305c5432a75",
+          "start": 1615,
+          "end": 1621,
+          "anchorSha256": "577361fc376a9cf9896701412304ec2539e902646a2648e848d1a0830956b59b"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0159-object-0039",
-      "label": "灵缈园",
-      "kind": "object",
       "batchId": "batch-0159",
       "reportHash": "4353ecc3133006c0cc7b4e3585f8628b2eaad9056bcc8fd53b5bc239d4fee86a",
-      "status": "ambiguous-place-name-disambiguated",
-      "runtimeEntityId": "reported-lingmiao-tradition",
-      "note": "原句所称灵缈园有传说、入口幌子、古通道或经历等不同指代；不把词相同的两个空间合并。"
+      "disposition": "corrected",
+      "targetIds": [
+        "reported-lingmiao-tradition"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：原句所称灵缈园有传说、入口幌子、古通道或经历等不同指代；不把词相同的两个空间合并。",
+      "evidence": [
+        {
+          "chapterId": "qq-26062445",
+          "chapterSha256": "78c2eaab1c65b908309427367499b7b7e7ae1aa6273c139623667ee5d548ba06",
+          "start": 491,
+          "end": 501,
+          "anchorSha256": "5743211f9594a5a82e1a0e50363eea903079734d5fbc66d14efb68ebf900bb9c"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0159-object-0053",
-      "label": "圣界",
-      "kind": "object",
       "batchId": "batch-0159",
       "reportHash": "4353ecc3133006c0cc7b4e3585f8628b2eaad9056bcc8fd53b5bc239d4fee86a",
-      "status": "cross-region-identity",
-      "runtimeEntityId": "associated-demon-realm",
-      "note": "圣界是魔界自称，复用 associated-demon 主体；不新建第三层世界。"
+      "disposition": "corrected",
+      "targetIds": [
+        "associated-demon-realm"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：圣界是魔界自称，复用 associated-demon 主体；不新建第三层世界。",
+      "evidence": [
+        {
+          "chapterId": "qq-26062445",
+          "chapterSha256": "78c2eaab1c65b908309427367499b7b7e7ae1aa6273c139623667ee5d548ba06",
+          "start": 429,
+          "end": 438,
+          "anchorSha256": "17b5332d660c684d59a6f150252cd7f37325b81f66fef88646f00624cbe157ff"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0159-fact-0040",
-      "label": "灵缈园",
-      "kind": "fact",
       "batchId": "batch-0159",
       "reportHash": "4353ecc3133006c0cc7b4e3585f8628b2eaad9056bcc8fd53b5bc239d4fee86a",
-      "status": "historical-route-destroyed",
-      "runtimeEntityId": null,
-      "note": "元刹谈古魔旧入侵通道进入后已碎，不是 T0 常开门；她的古事知识归昆吾融合主体。"
+      "disposition": "history-only",
+      "targetIds": [
+        "reported-space-access"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：元刹谈古魔旧入侵通道进入后已碎，不是 T0 常开门；她的古事知识归昆吾融合主体。",
+      "evidence": [
+        {
+          "chapterId": "qq-26062445",
+          "chapterSha256": "78c2eaab1c65b908309427367499b7b7e7ae1aa6273c139623667ee5d548ba06",
+          "start": 491,
+          "end": 501,
+          "anchorSha256": "5743211f9594a5a82e1a0e50363eea903079734d5fbc66d14efb68ebf900bb9c"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0163-object-0046",
-      "label": "灵缈园",
-      "kind": "object",
       "batchId": "batch-0163",
       "reportHash": "251524ae7a071d1e236198ac10a524912b53c0de5a3d58aef51a23261f5358e9",
-      "status": "ambiguous-place-name-disambiguated",
-      "runtimeEntityId": "reported-lingmiao-tradition",
-      "note": "原句所称灵缈园有传说、入口幌子、古通道或经历等不同指代；不把词相同的两个空间合并。"
+      "disposition": "corrected",
+      "targetIds": [
+        "reported-lingmiao-tradition"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：原句所称灵缈园有传说、入口幌子、古通道或经历等不同指代；不把词相同的两个空间合并。",
+      "evidence": [
+        {
+          "chapterId": "qq-26266606",
+          "chapterSha256": "b2f1e7bd76a10f5bd04867d30b2f1ec49022921573696f4bb15a96f94061a3a7",
+          "start": 2091,
+          "end": 2099,
+          "anchorSha256": "9410235c5c75b64b86a4dbe1c4a5f34636573b393f186922ac3832ee5aa1158c"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0163-fact-0027",
-      "label": "韩立",
-      "kind": "fact",
       "batchId": "batch-0163",
       "reportHash": "251524ae7a071d1e236198ac10a524912b53c0de5a3d58aef51a23261f5358e9",
-      "status": "future-experience-with-general-constraint",
-      "runtimeEntityId": null,
-      "note": "韩立提议来自后来破界经验，不提前给少年记忆；相冲属性不能简单求和的约束另入空间法则。"
+      "disposition": "later-only",
+      "targetIds": [
+        "reported-moving-weakness"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：韩立提议来自后来破界经验，不提前给少年记忆；相冲属性不能简单求和的约束另入空间法则。",
+      "evidence": [
+        {
+          "chapterId": "qq-26266606",
+          "chapterSha256": "b2f1e7bd76a10f5bd04867d30b2f1ec49022921573696f4bb15a96f94061a3a7",
+          "start": 2053,
+          "end": 2063,
+          "anchorSha256": "6c94b9059bca6aaf56a71dd8eab13162159391f4bbaa9c010e0759c3eaff7a4a"
+        },
+        {
+          "chapterId": "qq-26266606",
+          "chapterSha256": "b2f1e7bd76a10f5bd04867d30b2f1ec49022921573696f4bb15a96f94061a3a7",
+          "start": 2091,
+          "end": 2099,
+          "anchorSha256": "9410235c5c75b64b86a4dbe1c4a5f34636573b393f186922ac3832ee5aa1158c"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
     },
     {
       "candidateId": "batch-0241-object-0022",
-      "label": "阴司界",
-      "kind": "object",
       "batchId": "batch-0241",
       "reportHash": "89bfe131905aa8b802504ecffa61ff8ebce7c6fc8cc400ac8810a6281d1496cc",
-      "status": "unverified-report-indexed",
-      "runtimeEntityId": "reported-yin-si",
-      "note": "两处人物说法均未证明阴司存在；只保留传说主体，不创建可探索地图。"
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "reported-yin-si"
+      ],
+      "reason": "复核既有逐条判断及对应原文段落后保留：两处人物说法均未证明阴司存在；只保留传说主体，不创建可探索地图。",
+      "evidence": [
+        {
+          "chapterId": "qq-29916466",
+          "chapterSha256": "8009aa4576e26eeaf0d3235dc35661686b28044cd99a2e047823726a1e44be95",
+          "start": 251,
+          "end": 263,
+          "anchorSha256": "db5f643f911da6235d126bc935d42080f04864a81e1c80dc2d7b5dec7978acfe"
+        }
+      ],
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "阴司界的存在没有正文确证；不生成可探索空间、通道或真实管理机构。"
+      },
+      "destinationModule": null
     }
   ]
 }
