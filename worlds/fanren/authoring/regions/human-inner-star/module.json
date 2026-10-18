@@ -15268,6 +15268,30 @@
           ]
         }
       }
+    },
+    {
+      "id": "innerstar-hongyue-island",
+      "name": "红月岛",
+      "kind": "location",
+      "placement": "human-inner-star-sea",
+      "description": "内海一座岛屿，沿海岸寻找泊舟处，内陆与现居者须实际探明。",
+      "facts": [
+        {
+          "id": "innerstar-hongyue-island-route",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-inner-star-sea"
+          },
+          "description": "经海路出入，须海船或御器及补给；岛名不提供安全航线。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [],
@@ -15318,6 +15342,11 @@
       "id": "innerstar-real-tea-preparation",
       "text": "普通淡茶一杯需要实际消耗一份干茶和一杯可饮水，投入真实容器后才产出一杯成茶；饮用、洒掉或倒弃消耗对应成茶。水温随时间与环境变化，需热茶时必须已有热水或有实际燃料工具加热。补进干茶和水须从实际来源取得，不因提供服务自动补满。",
       "severity": "hard"
+    },
+    {
+      "id": "innerstar-artifact-spirit-distinction",
+      "severity": "hard",
+      "text": "法宝显化动物形状不等于已经封入该动物元神，不会仅凭形状获得对应完整神通。真实器灵封印需要有元神、相应法门与过程；强灵更难封入，不能以说出器灵名称替代实际来源和成功条件。"
     }
   ],
   "provenance": {
@@ -17674,6 +17703,15 @@
     ],
     "law:innerstar-real-tea-preparation": [
       "innerstar-current-hospitality"
+    ],
+    "entity:innerstar-hongyue-island": [
+      "innerstar-hongyue-geography"
+    ],
+    "fact:innerstar-hongyue-island-route": [
+      "innerstar-hongyue-geography"
+    ],
+    "law:innerstar-artifact-spirit-distinction": [
+      "innerstar-artifact-spirit-boundaries"
     ]
   },
   "periodicProperties": [
