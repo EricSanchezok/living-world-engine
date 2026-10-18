@@ -18,7 +18,8 @@ export function participantDiscourse(document: WorldInstanceDocument, participan
     revision: throughBeatId ? document.narratives[limit]!.source.boundary.revision : document.state.revision,
     arrival: { id: participant.arrival.id, text: participant.arrival.scene, entities: participant.arrival.knownEntities },
     beats: beats.map(beat => ({ id: beat.id, submissionId: beat.submissionId, requested: beat.source.requestedAction,
-      paragraphs: beat.segments.map(segment => ({ id: `${beat.id}:${segment.sequence}`, text: segment.text, mentions: segment.mentions })),
+      paragraphs: beat.segments.map(segment => ({ id: `${beat.id}:${segment.sequence}`, text: segment.text,
+        worldTimeSeconds: beat.source.boundary.worldTimeSeconds, mentions: segment.mentions })),
       entities: beat.source.knownEntities,
       speakers: beat.source.speech.flatMap(speech => speech.speakerLocalId ? [{ localEntityId: speech.speakerLocalId, label: speech.speaker, utterance: speech.utterance }] : []) })),
     unresolved });

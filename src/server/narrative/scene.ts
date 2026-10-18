@@ -39,33 +39,50 @@ function priorReceipt(observation: ScenePacket["observations"][number] & { reque
 }
 
 /** Arithmetic scale is separate from observed weather or calendar transitions. */
-function elapsedReceipts(source: ScenePacket) {
+function elapsedEquivalents(elapsedUnits: ScenePacket["elapsedUnits"], duration: number) {
   const units = new Map<number, string[]>();
-  for (const [term, seconds] of Object.entries(source.elapsedUnits)) {
+  for (const [term, seconds] of Object.entries(elapsedUnits)) {
     const terms = units.get(seconds) ?? []; terms.push(term); units.set(seconds, terms);
   }
-  const ordered = [...units].sort(([left], [right]) => left - right);
+  // Each authored unit above one second has its own fraction, even beyond this interval.
+  return [...units].sort(([left], [right]) => left - right).filter(([seconds]) => seconds > 1)
+    .map(([seconds, terms]) => ({ terms, secondsPerUnit: seconds,
+      wholeUnits: Math.floor(duration / seconds), remainderSeconds: duration % seconds,
+      approximateUnits: Number((duration / seconds).toPrecision(6)) }));
+}
+
+function elapsedReceipts(source: ScenePacket) {
   return source.observations.flatMap(observation => {
     const duration = observation.scene?.action?.durationSeconds;
     if (!duration || observation.scene?.actionKind === "speak") return [];
     return [{ observationId: observation.id, durationSeconds: duration,
       fromWorldTimeSeconds: observation.worldTimeSeconds - duration, toWorldTimeSeconds: observation.worldTimeSeconds,
-      // Each authored unit above one second has its own fraction, even beyond this interval.
-      equivalents: ordered.filter(([seconds]) => seconds > 1)
-        .map(([seconds, terms]) => ({ terms, secondsPerUnit: seconds,
-          wholeUnits: Math.floor(duration / seconds), remainderSeconds: duration % seconds,
-          approximateUnits: Number((duration / seconds).toPrecision(6)) })) }];
+      equivalents: elapsedEquivalents(source.elapsedUnits, duration) }];
   });
+}
+
+/** Published boundary metadata supplies an interval; prose and action durations do not. */
+function previousPublicationInterval(source: ScenePacket, discourse?: ParticipantDiscourse) {
+  const previous = discourse?.exchanges.flatMap(exchange => exchange.paragraphs).at(-1);
+  const current = source.boundary.worldTimeSeconds;
+  if (!previous || !Number.isSafeInteger(previous.worldTimeSeconds) || previous.worldTimeSeconds < 0 ||
+    !Number.isSafeInteger(current) || current < previous.worldTimeSeconds) return null;
+  const duration = current - previous.worldTimeSeconds;
+  return { paragraphId: previous.id, fromWorldTimeSeconds: previous.worldTimeSeconds, toWorldTimeSeconds: current,
+    durationSeconds: duration, equivalents: elapsedEquivalents(source.elapsedUnits, duration) };
 }
 
 /** A publication task separates new receipts from the prose used to resolve references. */
 export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscourse) {
+  const recoveryFocus = source.reply?.kind === "recovery" && source.reply.focusLocalEntityId
+    ? source.knownEntities.find(entity => entity.localEntityId === source.reply!.focusLocalEntityId) : undefined;
   return {
     viewpoint: "The participant is the player. Address their character as you in second person; other characters remain third person.",
     responseTo: source.reply?.requested ?? null,
     kind: source.reply?.kind ?? "newly_observed_events",
-    time: { boundary: source.boundary, elapsedUnits: source.elapsedUnits, elapsedReceipts: elapsedReceipts(source), observedPeriodicTransitions: source.observedPeriodicTransitions,
-      interpretation: "Action durations are elapsed seconds. Convert only with these exact local term-to-seconds values; an hour and an authored traditional unit are not interchangeable. Each equivalent pairs its own terms with its own quantity: keep that pair together when writing prose. wholeUnits and remainderSeconds give the exact duration; approximateUnits is only a rounded aid. Local days may differ from 24 hours. A stopping condition can end an activity before its requested duration; state only the actual elapsed receipt. The supplied equivalents are arithmetic, not sightings of a sun or moon. observedPeriodicTransitions certifies an already observed public phase transition exactly at its recorded boundary, including the start of that phase rather than merely some time within it. Calendar phases are observed properties, not inferred from a generic day length; even a long elapsed interval can remain within one local night or a place with constant light." },
+    time: { boundary: source.boundary, elapsedUnits: source.elapsedUnits, elapsedReceipts: elapsedReceipts(source),
+      previousPublicationInterval: previousPublicationInterval(source, discourse), observedPeriodicTransitions: source.observedPeriodicTransitions,
+      interpretation: "Each elapsed receipt belongs only to its identified action, between fromWorldTimeSeconds and toWorldTimeSeconds. It is not the interval since the previous paragraph, since departure or for the entire task. previousPublicationInterval separately measures from this participant’s latest actually published paragraph boundary to the current boundary. Use it for a transition since that paragraph, not for the whole period since a departure. A zero interval means this boundary already has a published prefix: do not pass the action duration again. The interval belongs once to this presentation boundary, not once per paragraph in the batch. A null interval establishes no gap; do not substitute an action duration. Use a story-gap duration only when evidence establishes both endpoints of that interval; otherwise omit it or describe only the identified action's duration. Action durations are elapsed seconds. Convert only with these exact local term-to-seconds values; an hour and an authored traditional unit are not interchangeable. Each equivalent pairs its own terms with its own quantity: keep that pair together when writing prose. wholeUnits and remainderSeconds give the exact duration; approximateUnits is only a rounded aid. Local days may differ from 24 hours. A stopping condition can end an activity before its requested duration; state only the actual elapsed receipt. The supplied equivalents are arithmetic, not sightings of a sun or moon. observedPeriodicTransitions certifies an already observed public phase transition exactly at its recorded boundary, including the start of that phase rather than merely some time within it. Calendar phases are observed properties, not inferred from a generic day length; even a long elapsed interval can remain within one local night or a place with constant light." },
     spatialEvidence: { participantLocation: source.location, nonSpeechReceipts: source.observations.filter(observation => observation.scene?.actionKind !== "speak").map(priorReceipt),
       interpretation: "Actual non-speech outcomes and observed properties establish presence and movement, including movement caused by another operation. Delivered requests to bring, summon or visit someone do not locate that person. Their implied premises remain the speaker's view, not an independently established absence. No recorded arrival proves only that no arrival is established, not that the person is absent. A newly heard or mentioned person may already be present; earlier prose supplies no independent movement evidence." },
     propertyHistory: { observations: source.observedProperties ?? [],
@@ -77,6 +94,9 @@ export function narrativeTask(source: ScenePacket, discourse?: ParticipantDiscou
     executionBoundary: source.reply ? {
       newPhysicalEffects: false, newSpeech: false, elapsedWorldTime: false,
       explanation: source.reply.reason,
+      recoveryFocus: recoveryFocus ? { localEntityId: recoveryFocus.localEntityId,
+        name: recoveryFocus.name, description: recoveryFocus.description } : null,
+      recoveryAttribution: "A non-null recoveryFocus identifies the character whose response processing was interrupted. Preserve this exact local identity; originalRequest may address somebody else. It does not establish that any other character failed, refused, remained inactive or lacks the requested result. A null focus supplies no named responder; do not infer one from the request. A response-processing interruption before commit is not a half-spoken utterance or unfinished physical act. newSpeech=false supplies no partial dialogue. The focus does not prove that the player previously addressed that character. Treat generic continuation language in explanation as conditional: actual earlier receipts determine whether any requested part remains unfinished. Preserve a completed requested result; suggest retry or clarification only for a specific evidenced remaining goal, never automatically for this focus.",
       scope: "Only this failed or explanatory boundary; earlier observed events retain their actual actors and effects. Only participant_step belongs to this request; caused_response is another actor responding through recorded causality; concurrent_event is independent; unattributed has no established request relation.",
       originalRequest: source.reply.requested,
       earlierObservedEvents: (source.priorObservedReceipts ?? []).map(priorReceipt),

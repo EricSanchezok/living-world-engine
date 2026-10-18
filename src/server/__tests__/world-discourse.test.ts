@@ -10,9 +10,75 @@ import type { ParticipantDiscourse } from "../../engine/contracts/discourse";
 import { LocalDatabase } from "../local-database";
 import { WorldHost } from "../world-host";
 import { participantDiscourse } from "../world-discourse";
-import type { ScenePacket } from "../narrative/contracts";
+import type { NarrativeBeat, ScenePacket } from "../narrative/contracts";
+import { contentHash } from "../../engine/models/model-audit";
+import { narrativeDiscourse, narrativeTask } from "../narrative/scene";
+import { checkNarrativeGrounding, narrativeGroundingChoices, renderNarrativeSegment } from "../narrative/publication";
 
 describe("published discourse through the persistent entry path", () => {
+  it("projects published boundary time separately from the arriving action duration", async () => {
+    const root = mkdtempSync(path.join(tmpdir(), "lwe-discourse-time-"));
+    const provider = directTestProvider(wire => {
+      expect(wire.state).toMatchObject({ publicationTask: { time: {
+        boundary: { worldTimeSeconds: 1570 },
+        previousPublicationInterval: { paragraphId: "earlier:0", fromWorldTimeSeconds: 360, toWorldTimeSeconds: 1570, durationSeconds: 1210 },
+        elapsedReceipts: [{ durationSeconds: 600, fromWorldTimeSeconds: 970, toWorldTimeSeconds: 1570 }],
+      } }, discourse: { exchanges: [{ paragraphs: [{ worldTimeSeconds: 360 }] }] } });
+      expect(wire.questions.paragraph1_evidence!.instructions).toMatchObject({ focus: expect.stringContaining("previousPublicationInterval") });
+      // Fixed answers exercise the real publication projection and rejection propagation, not model quality.
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id,
+        nativeAnswer(question, id === "paragraph1_evidence" ? "contradiction" : "grounded")]));
+    }, undefined, { arrival: () => ({ title: "前厅", scene: "你在前厅。" }) });
+    await provider.registry.capture();
+    const world = loadWorldScript(path.resolve("test/fixtures/open-world-script"), { seed: 1, modelCatalog: provider.catalog });
+    const database = new LocalDatabase(path.join(root, "world.sqlite"), { heartbeat: false });
+    const host = new WorldHost({ repository: new MemoryWorldRepository({ [world.id]: world }), store: database, ledger: database, provider: provider.gateway });
+    try {
+      const id = (await host.createInstance({ worldId: world.id, start: { kind: "observer" } })).summary.id;
+      const view = await host.transferControl(id, { expectedRevision: 0, target: { kind: "agent", agentId: "player" } });
+      const document = database.readInstance(id).document, participantId = view.conversation!.participantId;
+      const source: ScenePacket = { participantId, agentId: "player", submissionId: "count", submittedAt: null,
+        requestedAction: "请掌柜盘点", world: { name: "商行", language: "zh-CN", style: "自然" }, playerName: "东家", location: "前厅",
+        boundary: { revision: 9, step: 8, worldTimeSeconds: 1570 }, elapsedUnits: { 分钟: 60 }, observedPeriodicTransitions: [],
+        reply: null, speech: [], memories: [], knownEntities: [], observations: [{ id: "return", revision: 9, step: 8,
+          worldTimeSeconds: 1570, sourceEventIds: ["move"], summary: "掌柜回到前厅。", scene: {
+            actionKind: "move", status: "succeeded", actor: "掌柜", attempt: "回前厅", manner: null,
+            outcome: "掌柜回到前厅。", details: [], speech: null,
+            action: { target: null, tool: null, resource: null, durationSeconds: 600, addressing: "none" },
+          } }] };
+      const beat = (beatId: string, time: number, text: string | null): NarrativeBeat => {
+        const scene = structuredClone(source); scene.boundary.worldTimeSeconds = time;
+        return { id: beatId, participantId, agentId: "player", submissionId: "count", status: text ? "complete" : "queued",
+          source: scene, sourceHash: contentHash(scene), segments: text ? [{ sequence: 0, text, mentions: [], publishedAt: "2026-01-01T00:00:00Z" }] : [],
+          attempts: 0, executionIds: [], createdAt: "2026-01-01T00:00:00Z", firstParagraphAt: null, completedAt: null, error: null, producer: null, grounding: [] };
+      };
+      const earlier = beat("earlier", 360, "你留在前厅。"), current = beat("current", 1570, null);
+      const other = beat("other", 1500, "另一个人的叙事。"); other.participantId = "another-reader";
+      document.narratives = [earlier, other, current, beat("later", 2000, "之后的叙事。")];
+      const before = contentHash(document), discourse = participantDiscourse(document, participantId, current.id);
+      const task = narrativeTask(current.source, discourse);
+      expect(discourse.exchanges.flatMap(exchange => exchange.paragraphs)).toEqual([{ id: "earlier:0", text: "你留在前厅。", mentions: [], worldTimeSeconds: 360 }]);
+      expect(narrativeDiscourse(discourse).exchanges[0]!.paragraphs[0]).toHaveProperty("worldTimeSeconds", 360);
+      expect(task.time).toMatchObject({ previousPublicationInterval: { paragraphId: "earlier:0", fromWorldTimeSeconds: 360,
+        toWorldTimeSeconds: 1570, durationSeconds: 1210, equivalents: [{ terms: ["分钟"], wholeUnits: 20, remainderSeconds: 10 }] },
+        elapsedReceipts: [{ durationSeconds: 600, fromWorldTimeSeconds: 970, toWorldTimeSeconds: 1570 }] });
+      const paragraphs = ["掌柜走了十分钟的返程，回到前厅。", "约莫十分钟后，掌柜回到了前厅。"];
+      const result = await checkNarrativeGrounding(provider.gateway, { workloadId: "narrative", batchId: "published-time",
+        runtimeIdentity: { worldHash: world.contentHash, revision: 9 } }, current.source,
+        paragraphs.map(text => renderNarrativeSegment(text, current.source)), "decision-deepseek", "decision-deepseek", 1, discourse);
+      expect(narrativeGroundingChoices(result.answers, 2)).toEqual(["grounded", "contradiction"]);
+      expect(contentHash(document)).toBe(before);
+      expect(narrativeTask(current.source).time).toHaveProperty("previousPublicationInterval", null);
+      const empty = structuredClone(document); empty.narratives = [current];
+      expect(narrativeTask(current.source, participantDiscourse(empty, participantId, current.id)).time).toHaveProperty("previousPublicationInterval", null);
+      const reversed = structuredClone(document); reversed.narratives[0]!.source.boundary.worldTimeSeconds = 1600;
+      expect(narrativeTask(current.source, participantDiscourse(reversed, participantId, current.id)).time).toHaveProperty("previousPublicationInterval", null);
+      current.segments = [{ sequence: 0, text: "掌柜回到了前厅。", mentions: [], publishedAt: "2026-01-01T00:00:01Z" }];
+      expect(narrativeTask(current.source, participantDiscourse(document, participantId, current.id)).time).toMatchObject({
+        previousPublicationInterval: { paragraphId: "current:0", fromWorldTimeSeconds: 1570, toWorldTimeSeconds: 1570, durationSeconds: 0 },
+      });
+    } finally { database.close(); rmSync(root, { recursive: true, force: true }); }
+  });
   it("shares introduced identity across explanation, an elliptical follow-up, reload and replay", async () => {
     const root = mkdtempSync(path.join(tmpdir(), "lwe-shared-discourse-"));
     let phase = "introduction";

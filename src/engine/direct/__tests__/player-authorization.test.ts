@@ -18,7 +18,7 @@ function discourse(requested = historicalRequest): ParticipantDiscourse {
   const source = { version: 1 as const, participantId: "human", agentId: "player", asOfRevision: 0,
     arrival: { id: "arrival", text: "你和守门人站在门边。" }, entities: [],
     exchanges: [{ id: "earlier-exchange", submissionId: "earlier-submission", requested,
-      paragraphs: [{ id: "earlier-paragraph", text: "守门人说：先告诉我你愿意付多少钱。", mentions: [] }],
+      paragraphs: [{ id: "earlier-paragraph", worldTimeSeconds: 0, text: "守门人说：先告诉我你愿意付多少钱。", mentions: [] }],
       speakers: [{ localEntityId: "guard", label: "守门人", utterance: "先告诉我你愿意付多少钱。" }] }], unresolved: [] };
   return { ...source, hash: contentHash({ ...source, hash: "" }) };
 }

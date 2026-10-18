@@ -12,8 +12,11 @@ import { LocalDatabase } from "../local-database";
 import { WorldHost } from "../world-host";
 import { DirectWorldAlgorithm } from "../../engine/direct/algorithm";
 import { SimulationEngine } from "../../engine/runtime/simulation";
-import { directControlHistory } from "../../engine/direct/canonical";
-import { readDirectState } from "../../engine/direct/state";
+import { directControlHistory, commitDirectRecord, sealDirectRecord } from "../../engine/direct/canonical";
+import { readDirectState, sealDirectState } from "../../engine/direct/state";
+import { createJsonDelta } from "../../engine/runtime/json-delta";
+import type { JsonObject } from "../../engine/runtime/json";
+import { contentHash } from "../../engine/models/model-audit";
 import type { StructuredModelRequest } from "../../engine/models/model-provider";
 import { ExperimentBudgetError } from "../../engine/benchmarks/action-compilation/experiment-budget";
 import { participantReactionIds } from "../../engine/direct/foreground";
@@ -505,7 +508,7 @@ describe("direct world through persistent WorldHost", () => {
       const context = directCreationContext(wire);
       if (context.scene) {
         proseCalls++;
-        if ((context.scene as { reply?: unknown }).reply) return { paragraphs: ["你的问题已经问出，但这次回复生成中断了。可以接着追问尚未得到回答的部分。"] };
+        if ((context.scene as { reply?: unknown }).reply) throw new Error("A pure known-response failure must not reach narrative creation");
         return createText(wire);
       }
       if (!context.playerControlled) {
@@ -545,8 +548,42 @@ describe("direct world through persistent WorldHost", () => {
         expect(saved.narratives.every(beat => beat.status === "complete")).toBe(true);
         expect(saved.narratives[1]!.source).toMatchObject({ reply: { kind: "recovery" },
           priorObservedReceipts: [{ requestRelation: "participant_step", scene: { actor: "你", speech: { utterance: "请问铜钥匙多少钱？" } } }] });
-        expect(saved.narratives[1]!.segments[0]!.text).toContain("你的问题已经问出");
-        expect(proseCalls).toBe(2);
+        expect(saved.narratives[1]!.source.reply!.reason).toContain("does not establish that the player's requested goal remains unfinished");
+        expect(saved.narratives[1]!.source.reply!.reason).not.toContain("outstanding question can be continued");
+        const recovery = saved.narratives[1]!, focus = recovery.source.knownEntities.find(entity => entity.localEntityId === recovery.source.reply!.focusLocalEntityId)!;
+        expect(recovery.segments[0]!.text.startsWith(focus.name)).toBe(true);
+        expect(recovery.segments[0]!.text).toContain("这一步的回应处理未能完成。已确认的进展仍然保留。");
+        expect(recovery.segments[0]!.mentions).toEqual([{ localEntityId: focus.localEntityId, surface: focus.name }]);
+        expect(recovery).toMatchObject({ status: "complete", attempts: 0, executionIds: [], grounding: [], producer: null });
+        expect(proseCalls).toBe(1);
+        const pending = structuredClone(saved);
+        const firstRecovery = pending.narratives.find(beat => beat.source.reply?.kind === "recovery")!;
+        firstRecovery.status = "queued"; firstRecovery.attempts = 0; firstRecovery.segments = [];
+        firstRecovery.completedAt = null; firstRecovery.firstParagraphAt = null;
+        const before = readDirectState(pending.state.executionState!, pending.state), after = structuredClone(before);
+        const responding = Object.entries(after.intents).find(([agentId, intent]) => agentId !== participant.agentId && intent.failure)!;
+        expect(responding).toBeDefined();
+        responding[1].failure = { ...responding[1].failure!, inputHash: "second-failed-attempt", atRevision: pending.state.revision };
+        // A second canonical failure receipt has no new visible outcome or world effect.
+        pending.state = commitDirectRecord(pending.state, sealDirectRecord({ version: 2, id: "", baseRevision: pending.state.revision,
+          producerHash: pending.state.executionState!.producerHash, authorityHash: pending.state.bootstrapDirect!.authorityHash,
+          reads: {}, fromSeconds: pending.state.truth.elapsedSeconds, atSeconds: pending.state.truth.elapsedSeconds,
+          frames: [], completedActionIds: [], controlDelta: createJsonDelta(before as unknown as JsonObject, sealDirectState(after) as unknown as JsonObject),
+          operations: [], events: [], outcomes: [], observations: [], beliefPatches: [], characterPatches: [], cognition: [],
+          presentation: [], decisions: [], modelAudits: [], rng: pending.state.truth.rng, randomRequests: [], randomResults: [],
+          timerUpdates: pending.state.truth.timers })).state;
+        const stateHash = contentHash(pending.state), callsBeforeQueue = f.transport.mock.calls.length;
+        const executionIds = Object.values(saved.runs).flatMap(run => run.executionIds);
+        const ledgerHash = () => contentHash(executionIds.map(executionId => database.executionEvents(executionId)));
+        const originalLedger = ledgerHash();
+        enqueueNarrative(pending, new Date().toISOString());
+        expect(pending.narratives.filter(beat => beat.source.reply?.kind === "recovery")).toEqual([firstRecovery]);
+        expect(firstRecovery).toMatchObject({ status: "queued", attempts: 0, segments: [] });
+        expect(contentHash(pending.state)).toBe(stateHash);
+        expect([...directControlHistory(pending.state)].filter(([revision, control]) =>
+          control.intents[responding[0]]?.failure?.atRevision === revision - 1)).toHaveLength(2);
+        expect(ledgerHash()).toBe(originalLedger); expect(f.transport).toHaveBeenCalledTimes(callsBeforeQueue);
+        expect(replaySimulationState(pending.state)).toEqual(pending.state);
       }
       expect(saved.state.history.flatMap(step => step.directEvent?.frames ?? []).map(frame => frame.actorId)).toEqual(["player"]);
       expect(replaySimulationState(saved.state)).toEqual(saved.state);

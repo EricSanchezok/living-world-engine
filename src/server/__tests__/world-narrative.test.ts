@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 import { decisionPromptV2 } from "../../engine/models/decision-v2";
-import { completeParagraphs, renderNarrativeSegment, continueNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeRepair, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, narrativeGroundingIssue, narrativeOutputSchema } from "../narrative/publication";
+import { completeParagraphs, renderNarrativeSegment, continueNarrativeSegment, narrativeContinuation, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeRepair, deliveredDialogue, directKnownRecovery, checkNarrativeGrounding, narrativeGroundingChoices, narrativeGroundingIssue, narrativeOutputSchema } from "../narrative/publication";
 import { narrativeEvidence, narrativeTask, narrativeDiscourse } from "../narrative/scene";
-import { earlierRequestReceipts } from "../narrative/outbox";
+import { earlierRequestReceipts, sameRecoveryFeedback } from "../narrative/outbox";
 import { type ScenePacket } from "../narrative/contracts";
 import type { ParticipantDiscourse } from "../../engine/contracts/discourse";
 import { directTestProvider, nativeChoice } from "../../engine/testing/direct-provider";
@@ -119,7 +119,7 @@ describe("immutable narrative paragraphs", () => {
   const discourse: ParticipantDiscourse = { version: 1, participantId: "reader", agentId: "traveler", asOfRevision: 1,
     arrival: { id: "arrival", text: "码头在眼前。" }, entities: [{ localEntityId: "shopkeeper", label: "店主", description: "木门旁的人",
       firstMentionParagraphId: "first", lastMentionParagraphId: "first", surfaces: ["店主"] }],
-    exchanges: [{ id: "first", submissionId: "previous", requested: "拿起木箱再问价", paragraphs: [{ id: "p1", text: "店主在木门旁。", mentions: [] }], speakers: [] }],
+    exchanges: [{ id: "first", submissionId: "previous", requested: "拿起木箱再问价", paragraphs: [{ id: "p1", worldTimeSeconds: 0, text: "店主在木门旁。", mentions: [] }], speakers: [] }],
     unresolved: [{ submissionId: "previous", requested: "拿起木箱再问价", status: "pending", receipts: ["没有拿起木箱。"] }], hash: "discourse" };
   it("retains published antecedents without passing historic requests as execution evidence", () => {
     const projected = narrativeDiscourse(discourse);
@@ -268,6 +268,136 @@ describe("immutable narrative paragraphs", () => {
     scene.observations = [];
     expect(narrativeTask(scene)).toMatchObject({ ownSpeechOnly: false });
   });
+  it("binds recovery to the local failed responder rather than the request's addressee", async () => {
+    const scene = structuredClone(source);
+    scene.observations = []; scene.speech = [];
+    scene.knownEntities = [{ localEntityId: "assistant", name: "小柳", description: "负责杂务的帮工" },
+      { localEntityId: "manager", name: "许掌柜", description: "负责货物的掌柜" }];
+    scene.reply = { agentId: scene.agentId, submissionId: "action", kind: "recovery",
+      requested: "请许掌柜清点库房后告诉我实数。", focusLocalEntityId: "assistant", reason: "A relevant response was interrupted." };
+    scene.priorObservedReceipts = [{ ...structuredClone(source.observations[0]!), requestRelation: "concurrent_event",
+      scene: { actionKind: "move", status: "succeeded", actor: "许掌柜", actorLocalId: "manager", attempt: "走去库房",
+        manner: null, outcome: "许掌柜去了库房。", details: [], speech: null } }];
+    const task = narrativeTask(scene);
+    expect(task.executionBoundary).toMatchObject({ recoveryFocus: scene.knownEntities[0],
+      originalRequest: scene.reply.requested, earlierObservedEvents: [{ actorLocalId: "manager", status: "succeeded" }] });
+    expect(task.executionBoundary?.recoveryFocus).not.toHaveProperty("canonicalEntityIds");
+    const correct = "帮工小柳这一步的回应处理未能完成；许掌柜先前去库房的进展仍然保留。";
+    const wrong = "许掌柜这一步的回应处理未能完成。";
+    const provider = directTestProvider(wire => {
+      expect(wire.state).toMatchObject({ paragraphs: [correct, wrong], publicationTask: task });
+      expect(Object.keys(wire.questions)).toHaveLength(12);
+      expect(wire.questions.paragraph1_evidence!.instructions).toMatchObject({ focus: expect.stringContaining("executionBoundary.recoveryFocus") });
+      // The stub verifies context and rejection propagation, not model judgment quality.
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeChoice(question,
+        id === "paragraph1_evidence" ? "contradiction" : "grounded")]));
+    });
+    const decision = await checkNarrativeGrounding(provider.gateway, { workloadId: "narrative", batchId: "recovery-owner",
+      runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 1 } }, scene,
+      [correct, wrong].map(text => renderNarrativeSegment(text, scene)), "decision-deepseek", "decision-deepseek", 1);
+    expect(narrativeGroundingChoices(decision.answers, 2)).toEqual(["grounded", "contradiction"]);
+    expect(provider.transport).toHaveBeenCalledTimes(1);
+  });
+  it.each([
+    ["recovery", null], ["recovery", "unresolved"], ["clarification", "manager"],
+  ] as const)("does not infer an interrupted responder from an unbound or explanatory focus: %s %s", (kind, focusLocalEntityId) => {
+    const scene = structuredClone(source);
+    scene.knownEntities = [{ localEntityId: "manager", name: "许掌柜", description: "掌柜" }];
+    scene.reply = { agentId: scene.agentId, submissionId: "action", kind,
+      requested: "请许掌柜清点库房。", focusLocalEntityId, reason: "Explain the available boundary." };
+    expect(narrativeTask(scene).executionBoundary?.recoveryFocus).toBeNull();
+  });
+  it("keeps a correct delivered quote separate from unsupported surrounding action in one publication batch", async () => {
+    const scene = structuredClone(source);
+    const utterance = "请去库房清点药箱，数清后告诉我实数。";
+    scene.knownEntities = [{ localEntityId: "manager", name: "许掌柜", description: "长期管理药铺的掌柜" }];
+    scene.observations[0]!.scene = { actionKind: "speak", status: "succeeded", actor: "你", actorLocalId: "self",
+      attempt: utterance, manner: null, outcome: "话语已送达。", details: [], speech: { speaker: "你", speakerLocalId: "self", utterance } };
+    scene.speech = [{ id: "speech-ab12", speaker: "你", speakerLocalId: "self", utterance }];
+    const texts = ["你向管理药铺的许掌柜说：[[speech-ab12]]", "你转向许掌柜说：[[speech-ab12]]她没有动身。"];
+    const provider = directTestProvider(wire => {
+      const state = wire.state as unknown as { paragraphRendering: Array<{ parts: unknown[] }> };
+      for (const paragraph of state.paragraphRendering) expect(paragraph.parts).toContainEqual({ kind: "delivered_speech",
+        speechId: "speech-ab12", speaker: "你", speakerLocalId: "self", utterance, text: `“${utterance}”` });
+      expect(wire.questions.paragraph1_speech!.instructions).toMatchObject({ focus: expect.stringContaining("unsupported adjacent gesture") });
+      expect(Object.keys(wire.questions)).toHaveLength(12);
+      // The whole bad paragraph still fails; exact quote provenance is not a bypass.
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeChoice(question,
+        id === "paragraph1_agency" || id === "paragraph1_evidence" ? "added_content" : "grounded")]));
+    });
+    const decision = await checkNarrativeGrounding(provider.gateway, { workloadId: "narrative", batchId: "quote-and-action",
+      runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 1 } }, scene,
+      texts.map(text => renderNarrativeSegment(text, scene)), "decision-deepseek", "decision-deepseek", 1);
+    expect(narrativeGroundingChoices(decision.answers, 2)).toEqual(["grounded", "added_content"]);
+    expect(provider.transport).toHaveBeenCalledTimes(1);
+  });
+  it("keeps an uncommitted response separate from partial speech and an already satisfied request", async () => {
+    const scene = structuredClone(source); scene.observations = []; scene.speech = [];
+    scene.boundary = { revision: 10, step: 9, worldTimeSeconds: 1330 };
+    scene.knownEntities = [{ localEntityId: "helper", name: "阿柳", description: "帮工" },
+      { localEntityId: "manager", name: "许掌柜", description: "掌柜" }];
+    scene.reply = { agentId: scene.agentId, submissionId: "action", kind: "recovery", focusLocalEntityId: "helper",
+      requested: "请许掌柜清点库房，回来告诉我实数。", reason: "The outstanding question can be continued." };
+    scene.priorObservedReceipts = [{ ...structuredClone(source.observations[0]!), id: "manager-report", requestRelation: "caused_response",
+      worldTimeSeconds: 1330, summary: "听到许掌柜的答复。", scene: { actionKind: "speak", status: "succeeded", actor: "许掌柜", actorLocalId: "manager",
+        attempt: "报告实数", outcome: "话语已送达。", manner: null, details: [],
+        speech: { speaker: "许掌柜", speakerLocalId: "manager", utterance: "库里逐排点过，实数六十箱。" } } }];
+    const frozenSource = JSON.stringify(scene), task = narrativeTask(scene);
+    expect(task.executionBoundary).toMatchObject({ newSpeech: false, recoveryFocus: scene.knownEntities[0],
+      explanation: "The outstanding question can be continued.",
+      earlierObservedEvents: [{ actorLocalId: "manager", deliveredSpeech: { utterance: "库里逐排点过，实数六十箱。" } }] });
+    expect(task.executionBoundary!.recoveryAttribution).toContain("actual earlier receipts determine whether any requested part remains unfinished");
+    const paragraphs = ["阿柳这一步的回应处理未能完成；许掌柜报出的六十箱实数不受影响。",
+      "阿柳的话说到一半停住了。", "清点的请托还没有办完，你可以再向阿柳问一遍，或换个人去办。"];
+    const provider = directTestProvider(wire => {
+      expect(wire.state).toMatchObject({ publicationTask: task, paragraphs });
+      expect(wire.questions.paragraph1_evidence!.instructions).toMatchObject({
+        focus: expect.stringContaining("Uncommitted response processing is not a half-spoken utterance") });
+      expect(wire.questions.paragraph1_evidence!.instructions).toMatchObject({
+        focus: expect.stringContaining("Retry or clarification advice requires a specific evidenced unfinished player goal") });
+      expect(Object.keys(wire.questions)).toHaveLength(18);
+      // Fixed semantic answers verify context and rejection propagation, not model judgment quality.
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeChoice(question,
+        id === "paragraph1_evidence" ? "added_content" : id === "paragraph2_evidence" ? "contradiction" : "grounded")]));
+    });
+    const result = await checkNarrativeGrounding(provider.gateway, { workloadId: "narrative", batchId: "completed-request-recovery",
+      runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 10 } }, scene,
+      paragraphs.map(text => renderNarrativeSegment(text, scene)), "decision-deepseek", "decision-deepseek", 1);
+    expect(narrativeGroundingChoices(result.answers, 3)).toEqual(["grounded", "added_content", "contradiction"]);
+    expect(JSON.stringify(scene)).toBe(frozenSource);
+    expect(provider.transport).toHaveBeenCalledTimes(1);
+  });
+  it("limits an elapsed receipt to its action rather than the gap after an earlier departure", async () => {
+    const scene = structuredClone(source); scene.speech = []; scene.elapsedUnits = { 分钟: 60 };
+    scene.boundary = { revision: 9, step: 8, worldTimeSeconds: 1270 };
+    scene.knownEntities = [{ localEntityId: "manager", name: "许掌柜", description: "掌柜" }];
+    Object.assign(scene.observations[0]!, { id: "return", worldTimeSeconds: 1270, summary: "许掌柜回到了前厅。" });
+    scene.observations[0]!.scene = { actionKind: "move", status: "succeeded", actor: "许掌柜", actorLocalId: "manager",
+      attempt: "回前厅", outcome: "许掌柜回到了前厅。", manner: "步子稳而快。", speech: null, details: [],
+      action: { target: null, tool: null, resource: null, durationSeconds: 300, addressing: "none" } };
+    scene.priorObservedReceipts = [{ ...structuredClone(scene.observations[0]!), id: "departure", worldTimeSeconds: 300,
+      requestRelation: "concurrent_event", summary: "许掌柜离开前厅。", scene: { ...scene.observations[0]!.scene,
+        action: undefined, outcome: "许掌柜离开前厅。" } }];
+    const task = narrativeTask(scene);
+    expect(task.time.elapsedReceipts).toMatchObject([{ observationId: "return", durationSeconds: 300,
+      fromWorldTimeSeconds: 970, toWorldTimeSeconds: 1270, equivalents: [{ terms: ["分钟"], wholeUnits: 5 }] }]);
+    expect(task.alreadyObservedForThisRequest[0]!.worldTimeSeconds).toBe(300);
+    expect(task.time.interpretation).toContain("It is not the interval since the previous paragraph, since departure or for the entire task");
+    const paragraphs = ["许掌柜走了约五分钟的返程，回到前厅。", "许掌柜离开前厅后，约莫又过五分钟便回来了。"];
+    const provider = directTestProvider(wire => {
+      expect(wire.state).toMatchObject({ publicationTask: task, paragraphs });
+      expect(wire.questions.paragraph1_evidence!.instructions).toMatchObject({
+        focus: expect.stringContaining("A story-gap duration needs evidence for both endpoints") });
+      expect(Object.keys(wire.questions)).toHaveLength(12);
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeChoice(question,
+        id === "paragraph1_evidence" ? "contradiction" : "grounded")]));
+    });
+    const result = await checkNarrativeGrounding(provider.gateway, { workloadId: "narrative", batchId: "action-duration-scope",
+      runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 9 } }, scene,
+      paragraphs.map(text => renderNarrativeSegment(text, scene)), "decision-deepseek", "decision-deepseek", 1);
+    expect(narrativeGroundingChoices(result.answers, 2)).toEqual(["grounded", "contradiction"]);
+    expect(provider.transport).toHaveBeenCalledTimes(1);
+  });
   it("makes recovery's unexecuted request distinct from actual event receipts", () => {
     const scene = structuredClone(source);
     scene.observations = []; scene.speech = [];
@@ -275,6 +405,51 @@ describe("immutable narrative paragraphs", () => {
     expect(narrativeTask(scene)).toMatchObject({ kind: "recovery", newReceipts: [], executionBoundary: {
       newPhysicalEffects: false, elapsedWorldTime: false, newSpeech: false, originalRequest: "等五秒", earlierObservedEvents: [],
     } });
+  });
+  it("coalesces only identical known-responder feedback while retaining changed visible progress", () => {
+    const earlier = { causeActionId: "player-question", failure: { atRevision: 1, inputHash: "first-attempt",
+      message: "An existing value requires creation permission", recoverable: true as const, servicePause: null } };
+    const latest = { ...earlier, failure: { ...earlier.failure, atRevision: 2, inputHash: "second-attempt" } };
+    const previous = structuredClone(source);
+    previous.observations = []; previous.speech = [];
+    previous.reply = { kind: "recovery", agentId: previous.agentId, submissionId: "action",
+      requested: "请掌柜清点货物。", focusLocalEntityId: "helper", reason: "A response was interrupted." };
+    previous.knownEntities = [{ localEntityId: "helper", name: "帮工", description: "已有雇员" }];
+    const current = { ...structuredClone(previous), boundary: { revision: 3, step: 3, worldTimeSeconds: 60 } };
+    expect(sameRecoveryFeedback(previous, current, earlier, latest)).toBe(true);
+    expect(sameRecoveryFeedback(previous, current, undefined, latest)).toBe(false);
+    expect(sameRecoveryFeedback(previous, current, earlier, { ...latest, causeActionId: "another-question" })).toBe(false);
+    expect(sameRecoveryFeedback(previous, current, earlier, { ...latest, failure: null })).toBe(false);
+    expect(sameRecoveryFeedback(previous, current, earlier, { ...latest,
+      failure: { ...latest.failure, message: "A different failure" } })).toBe(false);
+    const variants: ScenePacket[] = [
+      { ...current, participantId: "other" }, { ...current, submissionId: "other" },
+      { ...current, knownEntities: [] },
+      { ...current, reply: { ...current.reply!, focusLocalEntityId: null } },
+      { ...current, reply: { ...current.reply!, kind: "clarification" } },
+      { ...current, priorObservedReceipts: [{ ...source.observations[0]!, requestRelation: "caused_response" }] },
+      { ...current, memories: [{ kind: "observation", description: "掌柜已经给出实数。" }] },
+      { ...current, currentHoldings: { coverage: "complete-current-self-holdings", quantities: [{ name: "铜币", unit: "枚", amount: 3 }] } },
+    ];
+    for (const variant of variants) expect(sameRecoveryFeedback(previous, variant, earlier, latest)).toBe(false);
+    expect(earlier.failure.inputHash).toBe("first-attempt"); expect(latest.failure.inputHash).toBe("second-attempt");
+  });
+  it("preserves visible pace without promoting ambiguous manner into private mental knowledge", async () => {
+    const scene = structuredClone(source); scene.speech = [];
+    scene.observations[0]!.scene = { actionKind: "move", status: "succeeded", actor: "掌柜", actorLocalId: "manager",
+      attempt: "", manner: "步子稳而快，边走边把要说的话理清。", outcome: "掌柜回到了前厅。", speech: null, details: [] };
+    const paragraphs = ["掌柜回到前厅，步子稳而快。", "掌柜回到前厅，边走边在心里把要说的话理清。"];
+    const provider = directTestProvider(wire => {
+      expect(wire.questions.paragraph1_evidence!.instructions).toMatchObject({ focus: expect.stringContaining("not direct access to another character's private thoughts") });
+      expect(wire.state).toMatchObject({ publicationTask: { newReceipts: [{ manner: scene.observations[0]!.scene!.manner }] } });
+      return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => [id, nativeChoice(question,
+        id === "paragraph1_evidence" ? "added_content" : "grounded")]));
+    });
+    const decision = await checkNarrativeGrounding(provider.gateway, { workloadId: "narrative", batchId: "visible-manner",
+      runtimeIdentity: { worldHash: `sha256:${"a".repeat(64)}`, revision: 1 } }, scene,
+      paragraphs.map(text => renderNarrativeSegment(text, scene)), "decision-deepseek", "decision-deepseek", 1);
+    expect(narrativeGroundingChoices(decision.answers, 2)).toEqual(["grounded", "added_content"]);
+    expect(provider.transport).toHaveBeenCalledTimes(1);
   });
   it("keeps a completed wait distinct from the failed inspection in the same request", () => {
     const scene = structuredClone(source); scene.observations = []; scene.speech = [];
@@ -657,6 +832,50 @@ describe("immutable narrative paragraphs", () => {
     expect(repair.issue).toContain("evidence (contradiction)");
     expect(narrativeFallback(scene)).toBe("等候结束。\n前厅茶具：茶具待收拾。");
     expect(provider.transport).toHaveBeenCalledTimes(1);
+  });
+  it("directly renders only fresh known-response failures without new world evidence", () => {
+    const scene = structuredClone(source); scene.observations = []; scene.speech = [];
+    scene.knownEntities = [{ localEntityId: "helper", name: "阿柳", description: "负责杂务的帮工。" }];
+    scene.reply = { agentId: scene.agentId, submissionId: "action", kind: "recovery", focusLocalEntityId: "helper",
+      requested: "请掌柜清点药箱。", reason: "Response processing did not complete before commit." };
+    scene.priorObservedReceipts = [{ ...structuredClone(source.observations[0]!), requestRelation: "caused_response" }];
+    const beat = { source: scene, attempts: 0, segments: [] }, before = JSON.stringify(beat);
+    expect(directKnownRecovery(beat, discourse)).toEqual([{
+      text: "阿柳（负责杂务的帮工）这一步的回应处理未能完成。已确认的进展仍然保留。",
+      mentions: [{ localEntityId: "helper", surface: "阿柳" }],
+    }]);
+    const introduced = structuredClone(discourse);
+    introduced.entities.push({ ...introduced.entities[0]!, localEntityId: "helper", label: "阿柳", surfaces: ["阿柳"] });
+    expect(directKnownRecovery(beat, introduced)?.[0]!.text).toBe(narrativeFallback(scene));
+    expect(JSON.stringify(beat)).toBe(before);
+    const excluded: ScenePacket[] = [
+      { ...scene, reply: null },
+      { ...scene, reply: { ...scene.reply, kind: "clarification" } },
+      { ...scene, reply: { ...scene.reply, focusLocalEntityId: null } },
+      { ...scene, reply: { ...scene.reply, focusLocalEntityId: "unknown" } },
+      { ...scene, knownEntities: [] },
+      { ...scene, observations: source.observations },
+      { ...scene, speech: source.speech },
+    ];
+    for (const source of excluded) expect(directKnownRecovery({ ...beat, source }, discourse)).toBeNull();
+    expect(directKnownRecovery({ ...beat, attempts: 1 }, discourse)).toBeNull();
+    expect(directKnownRecovery({ ...beat, segments: [{ sequence: 0, text: "先前已经发布的进展。", mentions: [], publishedAt: "2026-10-18T00:00:00Z" }] }, discourse)).toBeNull();
+  });
+  it("appends the uncompleted recovery boundary after a published prefix without replaying it", () => {
+    const scene = structuredClone(source); scene.observations = []; scene.speech = [];
+    scene.knownEntities = [{ localEntityId: "helper", name: "阿柳", description: "已认识的帮工" }];
+    scene.reply = { agentId: scene.agentId, submissionId: "action", kind: "recovery", focusLocalEntityId: "helper",
+      requested: "请掌柜清点药箱。", reason: "The outstanding question can be continued." };
+    const prefix = "许掌柜已报告库里有六十箱。", before = JSON.stringify(scene);
+    const notice = "阿柳这一步的回应处理未能完成。已确认的进展仍然保留。";
+    expect(narrativeFallback(scene, [prefix])).toBe(notice);
+    expect(narrativeFallback(scene, [prefix, notice])).toBe("");
+    expect(narrativeFallback(scene, [])).toBe(notice);
+    expect(JSON.stringify(scene)).toBe(before);
+    scene.reply.focusLocalEntityId = "unknown";
+    expect(narrativeFallback(scene, [prefix])).toBe("这一步的回应处理未能完成。已确认的进展仍然保留。");
+    scene.reply.kind = "clarification";
+    expect(narrativeFallback(scene, [prefix])).toBe("");
   });
   it("renders a factual fallback handover in natural language with its exact amount", () => {
     const scene = structuredClone(source);

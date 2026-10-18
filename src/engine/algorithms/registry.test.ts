@@ -51,7 +51,7 @@ it("rejects historical Truth contracts and random scheduling instead of changing
 describe("built-in algorithm registry", () => {
   it("defaults to direct actions with script capability bindings", () => {
     const registry = registerBuiltinAlgorithms(new WorldExecutionAlgorithmRegistry());
-    expect(DEFAULT_ALGORITHM_REF).toMatchObject({ id: "direct-world", version: "17", children: {},
+    expect(DEFAULT_ALGORITHM_REF).toMatchObject({ id: "direct-world", version: "18", children: {},
       config: { decision: null, creation: null, fallback: null, creationEnabled: true } });
     expect(registry.has(DEFAULT_ALGORITHM_REF)).toBe(true);
     expect(registry.has(defineAlgorithmRef({ ...DEFAULT_ALGORITHM_REF, version: "0" }))).toBe(false);
@@ -103,7 +103,7 @@ describe("built-in algorithm registry", () => {
       "work-batching/shared-context-slot-batching@2",
       "work-batching/shared-state-first-slot-batching@1",
       "work-scheduling/bounded-concurrency@1",
-      "world-execution/direct-world@17",
+      "world-execution/direct-world@18",
       "world-execution/eager-reference@29",
     ]);
   });

@@ -24,7 +24,7 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
   creationResponse?: unknown; creationResponses?: unknown[]; missingCoverage?: boolean; introduce?: boolean; outcome?: string; movement?: string; effectExpansion?: boolean; expression?: number;
   recipient?: string; resolvedRecipient?: string; searchLocation?: string; transferAuthority?: string; transferExecution?: string;
   reactionProgress?: string; playerProgress?: string; duplicateIdentity?: boolean; timerSeconds?: number; timerWakeAgentIds?: string[]; interaction?: string; duration?: string; actorVisible?: boolean; delivery?: boolean;
-  playerAuthorization?: "authorized" | "outside_scope" | "unknown";
+  playerAuthorization?: "authorized" | "outside_scope" | "unknown"; mannerSupported?: boolean;
   worldOutcomes?: Record<string, string>;
   readingOverrides?: Record<string, string>; npcReadings?: unknown[]; factValues?: Record<string, string>; resolvedDuration?: string; resolvedDurations?: Record<string, string>; effectRepresentation?: "existing" | "no_change" | "already" | "expand";
   withMana?: boolean; meterImpacts?: Record<string, string>; inspectedStock?: number; quantityMeasured?: boolean;
@@ -69,6 +69,7 @@ async function fixture(options: { resourceUnit?: string; openingQuantity?: numbe
       if (id.endsWith("_world_expansion")) value = options.introduce ? "introduce" : "none";
       if (id.endsWith("_request_progress")) value = options.reactionProgress ?? "complete";
       if (id.endsWith("_player_authorization")) value = options.playerAuthorization ?? "authorized";
+      if (id.endsWith("_manner")) value = options.mannerSupported === false ? "unsupported" : "supported";
       if (id.endsWith("_outcome") && options.worldOutcomes) {
         const action = (wire.state as { actions: Array<{ actorId: string }> }).actions[Number(id.split("_")[0]!.slice(1))]!;
         value = options.worldOutcomes[action.actorId] ?? value;
@@ -1669,6 +1670,21 @@ describe("direct world through the actual simulation entry", () => {
     const result = await f.engine.step(f.roster, f.request('先走近守门人，然后问：“门能开吗？”'));
     expect(result.state.history[0]!.directEvent!.frames[0]!.utterance).toBeNull();
     expect(result.committed.observations.every(o => o.scene?.speech === null)).toBe(true);
+  });
+  it.each([true, false])("keeps movement independent of a visible or privately mental manner: %s", async visible => {
+    const manner = visible ? "步子稳而快。" : "步子稳而快，边走边把要说的话理清。";
+    const f = await fixture({ operation: "move", target: "guard", movement: "near", expression: 1, creationEnabled: true,
+      mannerSupported: visible, creationResponse: { attempt: "走近守门人", utterance: null, manner } });
+    await f.engine.bootstrapAgents();
+    const result = await f.engine.step(f.roster, f.request("走近守门人"));
+    expect(result.state.truth.placements.player).toBe(result.state.truth.placements.keeper);
+    const observed = result.committed.observations.find(o => o.observerId === "keeper")!;
+    expect(observed.scene).toMatchObject({ actionKind: "move", status: "succeeded", manner: visible ? manner : null });
+    const world = f.transport.mock.calls.map(([, init]) => directDecisionContext(JSON.parse(String(init?.body))))
+      .find(wire => wire?.questions.a0_manner)!;
+    expect(JSON.stringify(world.state)).toContain("Private thoughts, motives, memories and silent mental preparation are not observable performance");
+    expect(result.state.history[0]!.directEvent!.frames[0]!.expression?.manner).toBe(manner);
+    expect(replaySimulationState(result.state)).toEqual(result.state);
   });
   it("admits persistent new people with their own cognition and queues them without leaking private motivation", async () => {
     const f = await fixture({ target: "none", observationScope: "surroundings", creationEnabled: true, introduce: true,

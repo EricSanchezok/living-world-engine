@@ -38,7 +38,12 @@ export function projectParticipantDiscourse(source: PublishedDiscourseSource): P
   const exchanges: ParticipantDiscourse["exchanges"] = [];
   for (const beat of source.beats) {
     if (!beat.paragraphs.length) continue;
-    for (const paragraph of beat.paragraphs) for (const reference of paragraph.mentions) mention(reference, paragraph.id, beat.entities);
+    for (const paragraph of beat.paragraphs) {
+      if (!Number.isSafeInteger(paragraph.worldTimeSeconds) || paragraph.worldTimeSeconds < 0) {
+        throw new Error("Published paragraph has no valid world-time boundary");
+      }
+      for (const reference of paragraph.mentions) mention(reference, paragraph.id, beat.entities);
+    }
     const previous = exchanges.at(-1);
     const published = beat.paragraphs.map(paragraph => paragraph.text).join("\n");
     const speakers = beat.speakers.filter(speaker => published.includes(speaker.utterance));

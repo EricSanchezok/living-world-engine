@@ -76,6 +76,24 @@ export function earlierRequestReceipts(beats: readonly Pick<NarrativeBeat, "part
     }).map(observation => structuredClone(observation));
 }
 
+type RecoveryAttempt = Pick<DirectRuntimeState["intents"][string], "causeActionId" | "failure">;
+
+/** Repeated failed attempts retain their Ledger records but share unchanged feedback. */
+export function sameRecoveryFeedback(previous: ScenePacket, current: ScenePacket,
+  earlier: RecoveryAttempt | undefined, latest: RecoveryAttempt): boolean {
+  const focus = current.reply?.focusLocalEntityId;
+  if (current.reply?.kind !== "recovery" || previous.reply?.kind !== "recovery" || !focus ||
+    previous.reply.focusLocalEntityId !== focus || !current.knownEntities.some(entity => entity.localEntityId === focus) ||
+    !previous.knownEntities.some(entity => entity.localEntityId === focus) || !latest.causeActionId ||
+    earlier?.causeActionId !== latest.causeActionId || !earlier.failure || !latest.failure ||
+    earlier.failure.servicePause || latest.failure.servicePause || earlier.failure.message !== latest.failure.message ||
+    earlier.failure.recoverable !== latest.failure.recoverable) return false;
+  const { boundary: _previousBoundary, ...previousContent } = previous;
+  const { boundary: _currentBoundary, ...currentContent } = current;
+  void _previousBoundary; void _currentBoundary;
+  return contentHash(previousContent) === contentHash(currentContent);
+}
+
 /** Coalesce immediate prerequisites and replies; admitted activities and terminal runs remain publishable. */
 export function nextNarrative(document: WorldInstanceDocument): NarrativeBeat | undefined {
   const seen = new Set<string>();
@@ -195,6 +213,7 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
       const record = step.directEvent; if (!record) continue;
       const intent = controlHistory.get(step.revision)![participant.agentId];
       const replies = [...(record.presentation ?? []).filter(reply => reply.agentId === participant.agentId)];
+      const responseFailures = new Map<string, { ownerId: string; intent: RecoveryAttempt }>();
       const failed = intent?.failure;
       if (failed && failed.atRevision === step.baseRevision && !failed.servicePause && intent.activeSubmission) {
         replies.push({ submissionId: intent.activeSubmission.submissionId, agentId: participant.agentId, kind: "recovery",
@@ -215,7 +234,8 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
           binding.canonicalEntityIds.length === 1 && binding.canonicalEntityIds[0] === boundaryState.agents[ownerId]?.entityId);
         replies.push({ submissionId: original.submissionId, agentId: participant.agentId, kind: "recovery",
           requested: original.text, focusLocalEntityId: local?.localEntityId ?? null,
-          reason: "The player's interaction already committed. Processing a relevant character response was interrupted before that response could commit. Preserve the delivered question and earlierObservedEvents according to their requestRelation and actual actor. Explain that the response could not be completed and the outstanding question can be continued. This is not a refusal, silence, a missed delivery, or evidence that the character did nothing. Do not invent their intended answer, motive, private activity or the technical cause." });
+          reason: "The player's interaction already committed. Processing a relevant character response was interrupted before that response could commit. Preserve the delivered question and earlierObservedEvents according to their requestRelation and actual actor. Explain only that this response processing did not complete before commit. This does not establish that the player's requested goal remains unfinished; use the actual earlier receipts to preserve any completed result. This is not a refusal, silence, a missed delivery, or evidence that the character did nothing. Do not invent their intended answer, motive, private activity or the technical cause." });
+        responseFailures.set(original.submissionId, { ownerId, intent: other });
       }
       for (const reply of replies) {
         const id = `reply-${contentHash([participant.id, step.revision, reply.submissionId]).slice(0, 24)}`;
@@ -242,6 +262,9 @@ export function enqueueNarrative(document: WorldInstanceDocument, now: string): 
             return { kind: evidence.kind, description: observation ? executedDescription(observation) : evidence.description };
           }).slice(-16),
         };
+        const response = responseFailures.get(reply.submissionId);
+        if (response && document.narratives.some(beat => sameRecoveryFeedback(beat.source, source,
+          controlHistory.get(beat.source.boundary.revision)?.[response.ownerId], response.intent))) continue;
         document.narratives.push(queuedBeat(id, source, now));
       }
     }

@@ -7,6 +7,8 @@ export interface DiscourseMention {
 export interface DiscourseParagraph {
   id: string;
   text: string;
+  /** World boundary of the immutable scene owning this published paragraph. */
+  worldTimeSeconds: number;
   mentions: DiscourseMention[];
 }
 

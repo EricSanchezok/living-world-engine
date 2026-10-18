@@ -5,7 +5,7 @@ import type { WorldStepPreparation } from "../engine/runtime/execution";
 import { loadPromptAsset } from "../engine/prompts";
 import { agentCapabilityModels } from "../engine/models/capability-bindings";
 import { enqueueNarrative, nextNarrative, settleQueuedNarratives } from "./narrative/outbox";
-import { completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, continueNarrativeSegment, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeRepair, deliveredDialogue, checkNarrativeGrounding, narrativeGroundingChoices, narrativeGroundingIssue, narrativeOutputSchema, narrativeOutputJsonSchema } from "./narrative/publication";
+import { completeParagraphs, renderNarrativeSegment, explicitNarrativeMentions, continueNarrativeSegment, requireDeliveredSpeech, assertSpeechMultiplicity, assertSpeechOrder, narrativeFallback, narrativeRepair, deliveredDialogue, directKnownRecovery, checkNarrativeGrounding, narrativeGroundingChoices, narrativeGroundingIssue, narrativeOutputSchema, narrativeOutputJsonSchema } from "./narrative/publication";
 import { narrativeEvidence, narrativeTask, narrativeDiscourse } from "./narrative/scene";
 import { type NarrativeBeat } from "./narrative/contracts";
 import { participantDiscourse } from "./world-discourse";
@@ -660,12 +660,13 @@ export class WorldHost {
       const beat = nextNarrative(document);
       if (!beat) return;
       const discourse = participantDiscourse(document, beat.participantId, beat.id);
-      const dialogue = beat.attempts === 0 && !beat.segments.length ? deliveredDialogue(beat.source, discourse) : null;
-      if (dialogue) {
+      const direct = directKnownRecovery(beat, discourse) ??
+        (beat.attempts === 0 && !beat.segments.length ? deliveredDialogue(beat.source, discourse) : null);
+      if (direct) {
         this.updateNarrative(id, beat.id, item => {
           const at = this.now().toISOString();
-          item.segments = dialogue.map((paragraph, sequence) => ({ ...paragraph, sequence, publishedAt: at }));
-          item.status = "complete"; item.error = null; item.firstParagraphAt = at; item.completedAt = at;
+          item.segments = direct.map((paragraph, sequence) => ({ ...paragraph, sequence, publishedAt: at }));
+          item.status = "complete"; item.error = null; item.producer = null; item.firstParagraphAt = at; item.completedAt = at;
         });
         continue;
       }
