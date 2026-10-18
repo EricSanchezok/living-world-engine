@@ -208,6 +208,54 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "demon-phoenix-town-route-to-demon-phoenix-palace",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-palace"
+          },
+          "description": "route-to-demon-phoenix-palace",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-town-condition-demon-phoenix-palace",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "城内至宫前需步行约半个时辰；访客须在前庭说明来意，内院另行获准。"
+          },
+          "description": "城内至宫前需步行约半个时辰；访客须在前庭说明来意，内院另行获准。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-town-route-to-demon-phoenix-lava-ground",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-lava-ground"
+          },
+          "description": "route-to-demon-phoenix-lava-ground",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-town-condition-demon-phoenix-lava-ground",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿山路往返每单程至少一当地昼夜；熔岩地需防热护具或持续法力防护，来访采集须取得社区授权。"
+          },
+          "description": "沿山路往返每单程至少一当地昼夜；熔岩地需防热护具或持续法力防护，来访采集须取得社区授权。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -218,7 +266,7 @@
       "id": "demon-phoenix-court",
       "name": "黑凤之地议事处",
       "kind": "location",
-      "placement": "demon-phoenix-territory",
+      "placement": "demon-phoenix-palace",
       "description": "接见使者、处理族内事务的所在；旁听和进入内院须获准。",
       "facts": [
         {
@@ -241,6 +289,30 @@
             "value": "接见使者、处理族内事务的所在；旁听和进入内院须获准。"
           },
           "description": "接见使者、处理族内事务的所在；旁听和进入内院须获准。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-court-route-to-demon-phoenix-palace",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-palace"
+          },
+          "description": "route-to-demon-phoenix-palace",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-court-condition-demon-phoenix-palace",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "前庭与议事处相通；接见时按守门安排进入。"
+          },
+          "description": "前庭与议事处相通；接见时按守门安排进入。",
           "access": {
             "kind": "public"
           }
@@ -2019,6 +2091,36 @@
               "name": "筱砚",
               "description": "本地长期公务往来，各自只知道已报告的事务。",
               "status": "observed"
+            },
+            {
+              "id": "resource-demon-phoenix-palace",
+              "name": "黑凤宫",
+              "description": "玄黑石檐沿山而建，前庭接见来使，侧道通向炎域；进内院需经当值者许可。",
+              "status": "observed"
+            },
+            {
+              "id": "resource-demon-phoenix-inner-sanctuary",
+              "name": "黑凤族秘禁地",
+              "description": "深入山腹的静修石室以层层阵门隔开，门外有存放入内文书的石龛；此刻没有获准入内的闭关者。",
+              "status": "observed"
+            },
+            {
+              "id": "resource-demon-phoenix-sanctuary-seal",
+              "name": "秘禁地启门符",
+              "description": "一枚刻有黑羽纹的石符，与秘禁地阵门匹配。",
+              "status": "observed"
+            },
+            {
+              "id": "resource-demon-phoenix-reserve-pill",
+              "name": "筱馆旧炼黑炎丹",
+              "description": "以封符锁住的一枚黑色丹丸，瓶塞可见旧炼标记；服用需先辨识和评估自身修行。",
+              "status": "observed"
+            },
+            {
+              "id": "resource-demon-phoenix-silk-purchase-proposal",
+              "name": "黑凤王的购丝意向",
+              "description": "署筱馆名的一页短笺，请筱砚代表公库提出回复。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -2045,6 +2147,36 @@
               "canonical_entity_ids": [
                 "demon-phoenix-firekeeper"
               ]
+            },
+            {
+              "local_entity_id": "resource-demon-phoenix-palace",
+              "canonical_entity_ids": [
+                "demon-phoenix-palace"
+              ]
+            },
+            {
+              "local_entity_id": "resource-demon-phoenix-inner-sanctuary",
+              "canonical_entity_ids": [
+                "demon-phoenix-inner-sanctuary"
+              ]
+            },
+            {
+              "local_entity_id": "resource-demon-phoenix-sanctuary-seal",
+              "canonical_entity_ids": [
+                "demon-phoenix-sanctuary-seal"
+              ]
+            },
+            {
+              "local_entity_id": "resource-demon-phoenix-reserve-pill",
+              "canonical_entity_ids": [
+                "demon-phoenix-reserve-pill"
+              ]
+            },
+            {
+              "local_entity_id": "resource-demon-phoenix-silk-purchase-proposal",
+              "canonical_entity_ids": [
+                "demon-phoenix-silk-purchase-proposal"
+              ]
             }
           ],
           "evidence": [
@@ -2059,6 +2191,13 @@
               "id": "opening-night",
               "kind": "observation",
               "description": "开篇时当地已入夜；这是当时的观察，此后须根据新见闻判断。",
+              "sourceId": null,
+              "step": 0
+            },
+            {
+              "id": "resource-review-prior-life",
+              "kind": "observation",
+              "description": "自己在开篇前实际参与的资源保管、制备与书面协商。",
               "sourceId": null,
               "step": 0
             }
@@ -2122,6 +2261,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "opening-night"
+              ]
+            },
+            {
+              "id": "resource-current-arrangement",
+              "subjectId": "self",
+              "predicate": "known-resources",
+              "value": {
+                "kind": "text",
+                "value": "秘禁地由我保管启门符；个人瓶内留一颗旧炼黑炎丹。我已提出个人六十灵石购丝，等待筱砚代表公库回复，尚未付款。"
+              },
+              "description": "秘禁地由我保管启门符；个人瓶内留一颗旧炼黑炎丹。我已提出个人六十灵石购丝，等待筱砚代表公库回复，尚未付款。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "resource-review-prior-life"
               ]
             }
           ]
@@ -3462,9 +3616,9 @@
           "predicate": "learned-skill",
           "value": {
             "kind": "text",
-            "value": "控火、火脉观测、低阶炼器。"
+            "value": "控火、火脉观测、低阶炼器；已学晶丝护腕工序，须备齐丝材、普通材料及工时。"
           },
-          "description": "控火、火脉观测、低阶炼器。",
+          "description": "控火、火脉观测、低阶炼器；已学晶丝护腕工序，须备齐丝材、普通材料及工时。",
           "access": {
             "kind": "agents",
             "agentIds": [
@@ -3509,6 +3663,21 @@
           "description": "reports-to",
           "access": {
             "kind": "private"
+          }
+        },
+        {
+          "id": "demon-phoenix-firekeeper-black-flame-accumulation",
+          "predicate": "black-flame-accumulation",
+          "value": {
+            "kind": "text",
+            "value": "已修成本命黑焰，但可凝黑炎丹的特殊积累尚不足；至少还需四百年修炼积累，此间耗损会延后，不能靠换身刷新。"
+          },
+          "description": "已修成本命黑焰，但可凝黑炎丹的特殊积累尚不足；至少还需四百年修炼积累，此间耗损会延后，不能靠换身刷新。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "demon-phoenix-firekeeper"
+            ]
           }
         }
       ],
@@ -3572,7 +3741,7 @@
           "goals": [
             {
               "id": "current-purpose",
-              "description": "核实火脉温度异常是否影响炼器订单。",
+              "description": "决定是否接受黑凤王个人购入一根公有晶炎丝的提议，并守住火虫产丝记录与护育安排。",
               "priority": 0.5,
               "progress": 0
             }
@@ -3609,6 +3778,42 @@
               "name": "筱馆",
               "description": "本地长期公务往来，各自只知道已报告的事务。",
               "status": "observed"
+            },
+            {
+              "id": "resource-demon-phoenix-lava-ground",
+              "name": "黑凤熔岩养虫地",
+              "description": "赤黑岩池上层层热浪滚动，沿池设窄石台观察火虫，落脚区与禁采区以岩标分开。",
+              "status": "observed"
+            },
+            {
+              "id": "resource-demon-phoenix-silk-stock",
+              "name": "三根晶炎丝",
+              "description": "三根火红细丝分置隔热细管，管口记录了对应岩槽与采集日期。",
+              "status": "observed"
+            },
+            {
+              "id": "resource-demon-phoenix-fireworm-record",
+              "name": "火虫观察簿",
+              "description": "岩槽编号、吐丝记录与护育禁采安排逐页写在石纸上。",
+              "status": "observed"
+            },
+            {
+              "id": "resource-demon-phoenix-silk-wristguard-method",
+              "name": "晶丝护腕工序册",
+              "description": "筱砚自用工序册，写着如何将晶炎丝嵌入低阶火脉作业护腕。",
+              "status": "observed"
+            },
+            {
+              "id": "resource-demon-phoenix-silk-purchase-proposal",
+              "name": "黑凤王的购丝意向",
+              "description": "署筱馆名的一页短笺，请筱砚代表公库提出回复。",
+              "status": "observed"
+            },
+            {
+              "id": "resource-demon-phoenix-palace-flame-domain",
+              "name": "黑凤宫炎域",
+              "description": "隔热石廊尽头是一片由禁制分开的火室，静修者可依承受能力选用；值守记录记载各室火势与启闭。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -3641,6 +3846,42 @@
               "canonical_entity_ids": [
                 "canon-black-phoenix-king"
               ]
+            },
+            {
+              "local_entity_id": "resource-demon-phoenix-lava-ground",
+              "canonical_entity_ids": [
+                "demon-phoenix-lava-ground"
+              ]
+            },
+            {
+              "local_entity_id": "resource-demon-phoenix-silk-stock",
+              "canonical_entity_ids": [
+                "demon-phoenix-silk-stock"
+              ]
+            },
+            {
+              "local_entity_id": "resource-demon-phoenix-fireworm-record",
+              "canonical_entity_ids": [
+                "demon-phoenix-fireworm-record"
+              ]
+            },
+            {
+              "local_entity_id": "resource-demon-phoenix-silk-wristguard-method",
+              "canonical_entity_ids": [
+                "demon-phoenix-silk-wristguard-method"
+              ]
+            },
+            {
+              "local_entity_id": "resource-demon-phoenix-silk-purchase-proposal",
+              "canonical_entity_ids": [
+                "demon-phoenix-silk-purchase-proposal"
+              ]
+            },
+            {
+              "local_entity_id": "resource-demon-phoenix-palace-flame-domain",
+              "canonical_entity_ids": [
+                "demon-phoenix-palace-flame-domain"
+              ]
             }
           ],
           "evidence": [
@@ -3657,6 +3898,13 @@
               "description": "开篇时当地已入夜；这是当时的观察，此后须根据新见闻判断。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "resource-review-prior-life",
+              "kind": "observation",
+              "description": "自己在开篇前实际参与的资源保管、制备与书面协商。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -3666,9 +3914,9 @@
               "predicate": "learned-skill",
               "value": {
                 "kind": "text",
-                "value": "控火、火脉观测、低阶炼器。"
+                "value": "控火、火脉观测、低阶炼器；已学晶丝护腕工序，须备齐丝材、普通材料及工时。"
               },
-              "description": "控火、火脉观测、低阶炼器。",
+              "description": "控火、火脉观测、低阶炼器；已学晶丝护腕工序，须备齐丝材、普通材料及工时。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -3696,9 +3944,9 @@
               "predicate": "work-purpose",
               "value": {
                 "kind": "text",
-                "value": "核实火脉温度异常是否影响炼器订单。"
+                "value": "决定是否接受黑凤王个人购入一根公有晶炎丝的提议，并守住火虫产丝记录与护育安排。"
               },
-              "description": "核实火脉温度异常是否影响炼器订单。",
+              "description": "决定是否接受黑凤王个人购入一根公有晶炎丝的提议，并守住火虫产丝记录与护育安排。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -3718,6 +3966,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "opening-night"
+              ]
+            },
+            {
+              "id": "resource-current-arrangement",
+              "subjectId": "self",
+              "predicate": "known-resources",
+              "value": {
+                "kind": "text",
+                "value": "决定是否接受黑凤王个人购入一根公有晶炎丝的提议，并守住火虫产丝记录与护育安排。 公库有三根完整丝，已采丝的三只虫不能再产。我已学护腕工序；自己的凝丹积累尚远不足，不以本命火冒充已有丹药。"
+              },
+              "description": "决定是否接受黑凤王个人购入一根公有晶炎丝的提议，并守住火虫产丝记录与护育安排。 公库有三根完整丝，已采丝的三只虫不能再产。我已学护腕工序；自己的凝丹积累尚远不足，不以本命火冒充已有丹药。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "resource-review-prior-life"
               ]
             }
           ]
@@ -7963,6 +8226,763 @@
           "amount": 5
         }
       ]
+    },
+    {
+      "id": "demon-phoenix-palace",
+      "name": "黑凤宫",
+      "kind": "location",
+      "placement": "demon-phoenix-territory",
+      "description": "玄黑石檐沿山而建，前庭接见来使，侧道通向炎域；进内院需经当值者许可。",
+      "facts": [
+        {
+          "id": "demon-phoenix-palace-route-to-demon-phoenix-town",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-town"
+          },
+          "description": "route-to-demon-phoenix-town",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-palace-condition-demon-phoenix-town",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "城内至宫前需步行约半个时辰；访客须在前庭说明来意，内院另行获准。"
+          },
+          "description": "城内至宫前需步行约半个时辰；访客须在前庭说明来意，内院另行获准。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-palace-route-to-demon-phoenix-court",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-court"
+          },
+          "description": "route-to-demon-phoenix-court",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-palace-condition-demon-phoenix-court",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "前庭与议事处相通；接见时按守门安排进入。"
+          },
+          "description": "前庭与议事处相通；接见时按守门安排进入。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-palace-route-to-demon-phoenix-palace-flame-domain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-palace-flame-domain"
+          },
+          "description": "route-to-demon-phoenix-palace-flame-domain",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-palace-condition-demon-phoenix-palace-flame-domain",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "火室入口由筱砚安排时段，须具控火或防火护具；高修为也须尊重使用者占用。"
+          },
+          "description": "火室入口由筱砚安排时段，须具控火或防火护具；高修为也须尊重使用者占用。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-palace-route-to-demon-phoenix-inner-sanctuary",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-inner-sanctuary"
+          },
+          "description": "route-to-demon-phoenix-inner-sanctuary",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-palace-condition-demon-phoenix-inner-sanctuary",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "秘禁地阵门默认关闭；黑凤王授权并交接通行符后才可按记录启门，擅闯可触发防护。"
+          },
+          "description": "秘禁地阵门默认关闭；黑凤王授权并交接通行符后才可按记录启门，擅闯可触发防护。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "demon-phoenix-palace-flame-domain",
+      "name": "黑凤宫炎域",
+      "kind": "location",
+      "placement": "demon-phoenix-palace",
+      "description": "隔热石廊尽头是一片由禁制分开的火室，静修者可依承受能力选用；值守记录记载各室火势与启闭。",
+      "facts": [
+        {
+          "id": "demon-phoenix-palace-flame-domain-route-to-demon-phoenix-palace",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-palace"
+          },
+          "description": "route-to-demon-phoenix-palace",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-palace-flame-domain-condition-demon-phoenix-palace",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "火室入口由筱砚安排时段，须具控火或防火护具；高修为也须尊重使用者占用。"
+          },
+          "description": "火室入口由筱砚安排时段，须具控火或防火护具；高修为也须尊重使用者占用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "demon-phoenix-inner-sanctuary",
+      "name": "黑凤族秘禁地",
+      "kind": "location",
+      "placement": "demon-phoenix-palace",
+      "description": "深入山腹的静修石室以层层阵门隔开，门外有存放入内文书的石龛；此刻没有获准入内的闭关者。",
+      "facts": [
+        {
+          "id": "demon-phoenix-inner-sanctuary-route-to-demon-phoenix-palace",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-palace"
+          },
+          "description": "route-to-demon-phoenix-palace",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-inner-sanctuary-condition-demon-phoenix-palace",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "秘禁地阵门默认关闭；黑凤王授权并交接通行符后才可按记录启门，擅闯可触发防护。"
+          },
+          "description": "秘禁地阵门默认关闭；黑凤王授权并交接通行符后才可按记录启门，擅闯可触发防护。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "demon-phoenix-lava-ground",
+      "name": "黑凤熔岩养虫地",
+      "kind": "location",
+      "placement": "demon-phoenix-territory",
+      "description": "赤黑岩池上层层热浪滚动，沿池设窄石台观察火虫，落脚区与禁采区以岩标分开。",
+      "facts": [
+        {
+          "id": "demon-phoenix-lava-ground-route-to-demon-phoenix-town",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-town"
+          },
+          "description": "route-to-demon-phoenix-town",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-lava-ground-condition-demon-phoenix-town",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "沿山路往返每单程至少一当地昼夜；熔岩地需防热护具或持续法力防护，来访采集须取得社区授权。"
+          },
+          "description": "沿山路往返每单程至少一当地昼夜；熔岩地需防热护具或持续法力防护，来访采集须取得社区授权。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "demon-phoenix-sanctuary-seal",
+      "name": "秘禁地启门符",
+      "kind": "item",
+      "placement": "canon-black-phoenix-king-purse",
+      "description": "一枚刻有黑羽纹的石符，与秘禁地阵门匹配。",
+      "facts": [
+        {
+          "id": "demon-phoenix-sanctuary-seal-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-community"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "demon-phoenix-sanctuary-seal-custodian",
+          "predicate": "custodian",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-black-phoenix-king"
+          },
+          "description": "custodian",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "demon-phoenix-fireworm-1",
+      "name": "熔岩火虫（岩槽1）",
+      "kind": "creature",
+      "placement": "demon-phoenix-lava-ground",
+      "description": "细长火虫依附岩槽吸取地火，靠近时会缩回热裂隙。",
+      "facts": [
+        {
+          "id": "demon-phoenix-fireworm-1-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-community"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "demon-phoenix-fireworm-1-silk-lifecycle",
+          "predicate": "silk-lifecycle",
+          "value": {
+            "kind": "text",
+            "value": "已吐过唯一的一根灵丝，余生不能再产晶炎丝。"
+          },
+          "description": "已吐过唯一的一根灵丝，余生不能再产晶炎丝。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-fireworm-1-handling",
+          "predicate": "handling",
+          "value": {
+            "kind": "text",
+            "value": "移栖须保留地火环境；强迫采丝可能伤虫，不会凭伤害提前产生成熟灵丝。"
+          },
+          "description": "移栖须保留地火环境；强迫采丝可能伤虫，不会凭伤害提前产生成熟灵丝。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "demon-phoenix-fireworm-2",
+      "name": "熔岩火虫（岩槽2）",
+      "kind": "creature",
+      "placement": "demon-phoenix-lava-ground",
+      "description": "细长火虫依附岩槽吸取地火，靠近时会缩回热裂隙。",
+      "facts": [
+        {
+          "id": "demon-phoenix-fireworm-2-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-community"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "demon-phoenix-fireworm-2-silk-lifecycle",
+          "predicate": "silk-lifecycle",
+          "value": {
+            "kind": "text",
+            "value": "已吐过唯一的一根灵丝，余生不能再产晶炎丝。"
+          },
+          "description": "已吐过唯一的一根灵丝，余生不能再产晶炎丝。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-fireworm-2-handling",
+          "predicate": "handling",
+          "value": {
+            "kind": "text",
+            "value": "移栖须保留地火环境；强迫采丝可能伤虫，不会凭伤害提前产生成熟灵丝。"
+          },
+          "description": "移栖须保留地火环境；强迫采丝可能伤虫，不会凭伤害提前产生成熟灵丝。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "demon-phoenix-fireworm-3",
+      "name": "熔岩火虫（岩槽3）",
+      "kind": "creature",
+      "placement": "demon-phoenix-lava-ground",
+      "description": "细长火虫依附岩槽吸取地火，靠近时会缩回热裂隙。",
+      "facts": [
+        {
+          "id": "demon-phoenix-fireworm-3-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-community"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "demon-phoenix-fireworm-3-silk-lifecycle",
+          "predicate": "silk-lifecycle",
+          "value": {
+            "kind": "text",
+            "value": "已吐过唯一的一根灵丝，余生不能再产晶炎丝。"
+          },
+          "description": "已吐过唯一的一根灵丝，余生不能再产晶炎丝。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-fireworm-3-handling",
+          "predicate": "handling",
+          "value": {
+            "kind": "text",
+            "value": "移栖须保留地火环境；强迫采丝可能伤虫，不会凭伤害提前产生成熟灵丝。"
+          },
+          "description": "移栖须保留地火环境；强迫采丝可能伤虫，不会凭伤害提前产生成熟灵丝。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "demon-phoenix-fireworm-4",
+      "name": "熔岩火虫（岩槽4）",
+      "kind": "creature",
+      "placement": "demon-phoenix-lava-ground",
+      "description": "细长火虫依附岩槽吸取地火，靠近时会缩回热裂隙。",
+      "facts": [
+        {
+          "id": "demon-phoenix-fireworm-4-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-community"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "demon-phoenix-fireworm-4-silk-lifecycle",
+          "predicate": "silk-lifecycle",
+          "value": {
+            "kind": "text",
+            "value": "尚未吐丝且尚未成熟；成熟日期无法从现有记录确定。"
+          },
+          "description": "尚未吐丝且尚未成熟；成熟日期无法从现有记录确定。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-fireworm-4-handling",
+          "predicate": "handling",
+          "value": {
+            "kind": "text",
+            "value": "移栖须保留地火环境；强迫采丝可能伤虫，不会凭伤害提前产生成熟灵丝。"
+          },
+          "description": "移栖须保留地火环境；强迫采丝可能伤虫，不会凭伤害提前产生成熟灵丝。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "demon-phoenix-fireworm-5",
+      "name": "熔岩火虫（岩槽5）",
+      "kind": "creature",
+      "placement": "demon-phoenix-lava-ground",
+      "description": "细长火虫依附岩槽吸取地火，靠近时会缩回热裂隙。",
+      "facts": [
+        {
+          "id": "demon-phoenix-fireworm-5-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-community"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "demon-phoenix-fireworm-5-silk-lifecycle",
+          "predicate": "silk-lifecycle",
+          "value": {
+            "kind": "text",
+            "value": "尚未吐丝且尚未成熟；成熟日期无法从现有记录确定。"
+          },
+          "description": "尚未吐丝且尚未成熟；成熟日期无法从现有记录确定。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-fireworm-5-handling",
+          "predicate": "handling",
+          "value": {
+            "kind": "text",
+            "value": "移栖须保留地火环境；强迫采丝可能伤虫，不会凭伤害提前产生成熟灵丝。"
+          },
+          "description": "移栖须保留地火环境；强迫采丝可能伤虫，不会凭伤害提前产生成熟灵丝。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "demon-phoenix-fireworm-6",
+      "name": "熔岩火虫（岩槽6）",
+      "kind": "creature",
+      "placement": "demon-phoenix-lava-ground",
+      "description": "细长火虫依附岩槽吸取地火，靠近时会缩回热裂隙。",
+      "facts": [
+        {
+          "id": "demon-phoenix-fireworm-6-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-community"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "demon-phoenix-fireworm-6-silk-lifecycle",
+          "predicate": "silk-lifecycle",
+          "value": {
+            "kind": "text",
+            "value": "尚未吐丝且尚未成熟；成熟日期无法从现有记录确定。"
+          },
+          "description": "尚未吐丝且尚未成熟；成熟日期无法从现有记录确定。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-fireworm-6-handling",
+          "predicate": "handling",
+          "value": {
+            "kind": "text",
+            "value": "移栖须保留地火环境；强迫采丝可能伤虫，不会凭伤害提前产生成熟灵丝。"
+          },
+          "description": "移栖须保留地火环境；强迫采丝可能伤虫，不会凭伤害提前产生成熟灵丝。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "demon-phoenix-silk-stock",
+      "name": "三根晶炎丝",
+      "kind": "container",
+      "placement": "demon-phoenix-common-stock",
+      "description": "三根火红细丝分置隔热细管，管口记录了对应岩槽与采集日期。",
+      "facts": [
+        {
+          "id": "demon-phoenix-silk-stock-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-community"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "demon-phoenix-silk-stock-material-identity",
+          "predicate": "material-identity",
+          "value": {
+            "kind": "text",
+            "value": "本容器一份材料专指一根完整晶炎丝；不能与普通炼器材料视作可等额互换。"
+          },
+          "description": "本容器一份材料专指一根完整晶炎丝；不能与普通炼器材料视作可等额互换。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-silk-stock-source-worms",
+          "predicate": "source-worms",
+          "value": {
+            "kind": "text",
+            "value": "对应岩槽1、2、3；这些虫的产丝已记账，库存使用后不能从同一虫再补。"
+          },
+          "description": "对应岩槽1、2、3；这些虫的产丝已记账，库存使用后不能从同一虫再补。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "crystal-flame-silk-thread",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "id": "demon-phoenix-reserve-pill",
+      "name": "筱馆旧炼黑炎丹",
+      "kind": "container",
+      "placement": "canon-black-phoenix-king-purse",
+      "description": "以封符锁住的一枚黑色丹丸，瓶塞可见旧炼标记；服用需先辨识和评估自身修行。",
+      "facts": [
+        {
+          "id": "demon-phoenix-reserve-pill-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-black-phoenix-king"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "demon-phoenix-reserve-pill-medicine-identity",
+          "predicate": "medicine-identity",
+          "value": {
+            "kind": "text",
+            "value": "仅一颗黑炎丹；消耗后为空瓶，无按日补货。"
+          },
+          "description": "仅一颗黑炎丹；消耗后为空瓶，无按日补货。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "demon-phoenix-reserve-pill-purpose",
+          "predicate": "purpose",
+          "value": {
+            "kind": "text",
+            "value": "可辅助具备冲击炼虚条件的修士，不替代五行合一、功法、修行积累或突破过程。"
+          },
+          "description": "可辅助具备冲击炼虚条件的修士，不替代五行合一、功法、修行积累或突破过程。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "black-flame-pill-dose",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "demon-phoenix-silk-wristguard-method",
+      "name": "晶丝护腕工序册",
+      "kind": "item",
+      "placement": "demon-phoenix-firekeeper-tools",
+      "description": "筱砚自用工序册，写着如何将晶炎丝嵌入低阶火脉作业护腕。",
+      "facts": [
+        {
+          "id": "demon-phoenix-silk-wristguard-method-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-firekeeper"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "demon-phoenix-silk-wristguard-method-contents",
+          "predicate": "contents",
+          "value": {
+            "kind": "text",
+            "value": "每副护腕需一根完整晶炎丝、两份普通炼器材料、十二时辰连续工序和八十点法力，并须掌握控火、低阶炼器及编丝手法。成品仅提供作业隔热和有限火属适配，非高阶斗法法宝；失败按实际损耗扣材料，不能重用已消耗灵丝。"
+          },
+          "description": "每副护腕需一根完整晶炎丝、两份普通炼器材料、十二时辰连续工序和八十点法力，并须掌握控火、低阶炼器及编丝手法。成品仅提供作业隔热和有限火属适配，非高阶斗法法宝；失败按实际损耗扣材料，不能重用已消耗灵丝。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际翻阅此册或由筱砚传授。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "demon-phoenix-fireworm-record",
+      "name": "火虫观察簿",
+      "kind": "item",
+      "placement": "demon-phoenix-firekeeper-tools",
+      "description": "岩槽编号、吐丝记录与护育禁采安排逐页写在石纸上。",
+      "facts": [
+        {
+          "id": "demon-phoenix-fireworm-record-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-community"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "demon-phoenix-fireworm-record-contents",
+          "predicate": "contents",
+          "value": {
+            "kind": "text",
+            "value": "岩槽1至3已各吐一根，三根已入公库；岩槽4至6未成熟，尚无可信成熟日。采丝和转让需记账，虫不可因换岩槽重复登记首丝。"
+          },
+          "description": "岩槽1至3已各吐一根，三根已入公库；岩槽4至6未成熟，尚无可信成熟日。采丝和转让需记账，虫不可因换岩槽重复登记首丝。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际查阅观察簿或向筱砚询问已报告的记录。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "demon-phoenix-silk-purchase-proposal",
+      "name": "黑凤王的购丝意向",
+      "kind": "item",
+      "placement": "demon-phoenix-firekeeper-tools",
+      "description": "署筱馆名的一页短笺，请筱砚代表公库提出回复。",
+      "facts": [
+        {
+          "id": "demon-phoenix-silk-purchase-proposal-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "demon-phoenix-firekeeper"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "demon-phoenix-silk-purchase-proposal-contents",
+          "predicate": "contents",
+          "value": {
+            "kind": "text",
+            "value": "筱馆愿以个人六十低阶灵石买一根公有晶炎丝，供本人制作火脉护腕。尚未同意或付款；筱砚可以拒绝、协商价格或保留材料。交易成立须从王的真实库存付到公库，丝亦实际移交，不从公库支付王的私人采购。"
+          },
+          "description": "筱馆愿以个人六十低阶灵石买一根公有晶炎丝，供本人制作火脉护腕。尚未同意或付款；筱砚可以拒绝、协商价格或保留材料。交易成立须从王的真实库存付到公库，丝亦实际移交，不从公库支付王的私人采购。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际阅读短笺或听取当事人说明。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [
@@ -8210,6 +9230,21 @@
       "id": "demon7-territory-and-politics",
       "text": "三皇七妖的约定、王庭许可和社区权属是可以违背但有社会后果的规范。境界高不等于知晓所有秘密、拥有所有族产或能无条件命令各方。",
       "severity": "hard"
+    },
+    {
+      "id": "demon7-soul-devouring-rule",
+      "text": "灵魂吞噬只对确实已学此术且有可行动魂体者成立，须实际进行元神争战并承担反噬、受灭风险。借体期限和同化取决于状态；器灵、族属和灵魂同源本身不自动授予此术，更不能跳过所依赖的载体与克制条件。",
+      "severity": "hard"
+    },
+    {
+      "id": "demon7-black-flame-production",
+      "text": "黑炎丹需化神以上黑凤已修本命火及长期特殊积累，基本千年一颗；已炼出、许出或失去的丹都按真实库存计算，不能因许诺、任务或血脉标签凭空生成。突破效果按受用者实际准备与条件判断，不保证成功或统一百分比。",
+      "severity": "hard"
+    },
+    {
+      "id": "demon7-crystal-silk-conservation",
+      "text": "晶炎丝必须来自已实际成熟且未吐过唯一一丝的火虫，采集后将其生命期产丝状态记为已用。已有丝材按库存转移、编制或损耗；普通材料不能直接充当晶炎丝。未知其他产地不等于不存在，但不能靠传闻在当场刷新资源。",
+      "severity": "hard"
     }
   ],
   "provenance": {
@@ -8259,7 +9294,8 @@
       "demon7-current-life"
     ],
     "entity:demon-phoenix-court": [
-      "demon7-current-life"
+      "demon7-phoenix-establishments",
+      "demon7-phoenix-resource-life"
     ],
     "fact:demon-phoenix-town-route-demon-phoenix-court": [
       "demon7-current-life"
@@ -8637,7 +9673,9 @@
       "demon7-black-phoenix",
       "demon7-opening-office-inference",
       "demon7-current-life",
-      "demon7-current-values"
+      "demon7-current-values",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
     ],
     "fact:canon-black-phoenix-king-cultivation-state": [
       "demon7-black-phoenix",
@@ -8775,14 +9813,17 @@
     ],
     "entity:demon-phoenix-firekeeper": [
       "demon7-current-life",
-      "demon7-current-values"
+      "demon7-current-values",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
     ],
     "fact:demon-phoenix-firekeeper-cultivation-state": [
       "demon7-current-life",
       "demon7-current-values"
     ],
     "fact:demon-phoenix-firekeeper-learned-skill": [
-      "demon7-current-life"
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
     ],
     "fact:demon-phoenix-firekeeper-cultivation-path": [
       "demon7-current-life"
@@ -9262,6 +10303,289 @@
     ],
     "fact:demon-flood-order-materials-contents": [
       "demon7-current-life"
+    ],
+    "entity:demon-phoenix-palace": [
+      "demon7-phoenix-establishments",
+      "demon7-phoenix-resource-life"
+    ],
+    "entity:demon-phoenix-palace-flame-domain": [
+      "demon7-phoenix-establishments",
+      "demon7-phoenix-resource-life"
+    ],
+    "entity:demon-phoenix-inner-sanctuary": [
+      "demon7-phoenix-establishments",
+      "demon7-phoenix-resource-life"
+    ],
+    "entity:demon-phoenix-lava-ground": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-town-route-to-demon-phoenix-palace": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-town-condition-demon-phoenix-palace": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-palace-route-to-demon-phoenix-town": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-palace-condition-demon-phoenix-town": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-palace-route-to-demon-phoenix-court": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-palace-condition-demon-phoenix-court": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-court-route-to-demon-phoenix-palace": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-court-condition-demon-phoenix-palace": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-palace-route-to-demon-phoenix-palace-flame-domain": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-palace-condition-demon-phoenix-palace-flame-domain": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-palace-flame-domain-route-to-demon-phoenix-palace": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-palace-flame-domain-condition-demon-phoenix-palace": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-palace-route-to-demon-phoenix-inner-sanctuary": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-palace-condition-demon-phoenix-inner-sanctuary": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-inner-sanctuary-route-to-demon-phoenix-palace": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-inner-sanctuary-condition-demon-phoenix-palace": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-town-route-to-demon-phoenix-lava-ground": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-town-condition-demon-phoenix-lava-ground": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-lava-ground-route-to-demon-phoenix-town": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-lava-ground-condition-demon-phoenix-town": [
+      "demon7-phoenix-resource-life"
+    ],
+    "entity:demon-phoenix-sanctuary-seal": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-sanctuary-seal-owned-by": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-sanctuary-seal-custodian": [
+      "demon7-phoenix-resource-life"
+    ],
+    "entity:demon-phoenix-fireworm-1": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-fireworm-1-owned-by": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-fireworm-1-silk-lifecycle": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-fireworm-1-handling": [
+      "demon7-phoenix-resource-life"
+    ],
+    "entity:demon-phoenix-fireworm-2": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-fireworm-2-owned-by": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-fireworm-2-silk-lifecycle": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-fireworm-2-handling": [
+      "demon7-phoenix-resource-life"
+    ],
+    "entity:demon-phoenix-fireworm-3": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-fireworm-3-owned-by": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-fireworm-3-silk-lifecycle": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-fireworm-3-handling": [
+      "demon7-phoenix-resource-life"
+    ],
+    "entity:demon-phoenix-fireworm-4": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-fireworm-4-owned-by": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-fireworm-4-silk-lifecycle": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-fireworm-4-handling": [
+      "demon7-phoenix-resource-life"
+    ],
+    "entity:demon-phoenix-fireworm-5": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-fireworm-5-owned-by": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-fireworm-5-silk-lifecycle": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-fireworm-5-handling": [
+      "demon7-phoenix-resource-life"
+    ],
+    "entity:demon-phoenix-fireworm-6": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-fireworm-6-owned-by": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-fireworm-6-silk-lifecycle": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-fireworm-6-handling": [
+      "demon7-phoenix-resource-life"
+    ],
+    "entity:demon-phoenix-silk-stock": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-silk-stock-owned-by": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-silk-stock-material-identity": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-silk-stock-source-worms": [
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "entity:demon-phoenix-reserve-pill": [
+      "demon7-black-flame-pill",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-reserve-pill-owned-by": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-reserve-pill-medicine-identity": [
+      "demon7-black-flame-pill",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-reserve-pill-purpose": [
+      "demon7-black-flame-pill"
+    ],
+    "entity:demon-phoenix-silk-wristguard-method": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-silk-wristguard-method-owned-by": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-silk-wristguard-method-contents": [
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "entity:demon-phoenix-fireworm-record": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-fireworm-record-owned-by": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-fireworm-record-contents": [
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "entity:demon-phoenix-silk-purchase-proposal": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-silk-purchase-proposal-owned-by": [
+      "demon7-phoenix-resource-life"
+    ],
+    "fact:demon-phoenix-silk-purchase-proposal-contents": [
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "fact:demon-phoenix-firekeeper-black-flame-accumulation": [
+      "demon7-black-flame-pill",
+      "demon7-phoenix-resource-values"
+    ],
+    "law:demon7-soul-devouring-rule": [
+      "demon7-soul-devouring-boundary"
+    ],
+    "law:demon7-black-flame-production": [
+      "demon7-black-flame-pill"
+    ],
+    "law:demon7-crystal-silk-conservation": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "quantity:black-flame-pill-dose": [
+      "demon7-black-flame-pill",
+      "demon7-phoenix-resource-values"
+    ],
+    "quantity:crystal-flame-silk-thread": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-values"
     ]
-  }
+  },
+  "quantityDefinitions": [
+    {
+      "id": "black-flame-pill-dose",
+      "name": "黑炎丹",
+      "unit": "颗",
+      "production_law_ids": [
+        "demon7-black-flame-production"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    },
+    {
+      "id": "crystal-flame-silk-thread",
+      "name": "晶炎丝",
+      "unit": "根",
+      "production_law_ids": [
+        "demon7-crystal-silk-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    }
+  ]
 }

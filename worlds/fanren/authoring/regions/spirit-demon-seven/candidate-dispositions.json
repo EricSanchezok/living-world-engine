@@ -1,6 +1,3751 @@
 {
-  "queueInputHash": "2d6c3c6e41c97ad54c16a5767b716dff55da1ff170df4acbb1defa5cc6c78f9f",
-  "queueCandidateCount": 0,
-  "scope": "当前抽取批次尚无本区候选；本区依据直接阅读制作，不能据此声称全书增量已经核完。",
-  "dispositions": []
+  "formatVersion": 1,
+  "moduleId": "spirit-demon-seven",
+  "queueInputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
+  "status": "editorial-dispositions-not-release-approval",
+  "reviewer": "world_content/local-primary-text-context-and-temporal-review/2026-10-18",
+  "records": [
+    {
+      "candidateId": "batch-0092-object-0002",
+      "batchId": "batch-0092",
+      "reportHash": "ae8d1b4b7feab49434df9bc02f484af376467326faf9194fb66b11646e59f44d",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-xueling-soul"
+      ],
+      "reason": "银月是雪玲同一魂主体在韩立取得玉如意之后使用的名字；狐身与剑中器灵是后续载体，不在T0复制成新人物。",
+      "evidence": [
+        {
+          "chapterId": "qq-23079880",
+          "chapterSha256": "c132aaf3abee1e52d00e806b0dcbf2b27f40deb33a171e0e363b6b9ba283be99",
+          "start": 92,
+          "end": 133,
+          "anchorSha256": "3efff90b91a090a1beaf41b25baec9e85c50d84f19ac9f998b14a318aaf86071"
+        },
+        {
+          "chapterId": "qq-23079880",
+          "chapterSha256": "c132aaf3abee1e52d00e806b0dcbf2b27f40deb33a171e0e363b6b9ba283be99",
+          "start": 1013,
+          "end": 1264,
+          "anchorSha256": "8f788ddc54ce8eef4eb0285c8b25c4d098b212f8dc3268d6d316180ee36501e2"
+        },
+        {
+          "chapterId": "qq-23089446",
+          "chapterSha256": "ec85a729bee32c85b8a7aafc5c802eeb4be290a0c84e2eb07778b27d15d57184",
+          "start": 1470,
+          "end": 1668,
+          "anchorSha256": "fd4a434f7f171d3b38369d0e8d01cac5ae03e744707ed4f83ea728133e3368f0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0092-object-0005",
+      "batchId": "batch-0092",
+      "reportHash": "ae8d1b4b7feab49434df9bc02f484af376467326faf9194fb66b11646e59f44d",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon7-linglong-souls"
+      ],
+      "reason": "银月自述银月狼族出身时仍承认记忆残缺；结合珑梦指认采用共同族属，不让其他狼族自动获得她的经历。",
+      "evidence": [
+        {
+          "chapterId": "qq-23079880",
+          "chapterSha256": "c132aaf3abee1e52d00e806b0dcbf2b27f40deb33a171e0e363b6b9ba283be99",
+          "start": 1013,
+          "end": 1264,
+          "anchorSha256": "8f788ddc54ce8eef4eb0285c8b25c4d098b212f8dc3268d6d316180ee36501e2"
+        },
+        {
+          "chapterId": "qq-23079880",
+          "chapterSha256": "c132aaf3abee1e52d00e806b0dcbf2b27f40deb33a171e0e363b6b9ba283be99",
+          "start": 1511,
+          "end": 1773,
+          "anchorSha256": "c9a653b338a11f63f148192495784c10074b75ea387b3e6aced3e4876ea96f78"
+        },
+        {
+          "chapterId": "qq-23079880",
+          "chapterSha256": "c132aaf3abee1e52d00e806b0dcbf2b27f40deb33a171e0e363b6b9ba283be99",
+          "start": 1774,
+          "end": 2052,
+          "anchorSha256": "acec0df3aaf2b08e839a98ed5c8233af1258eef9304971791f624a10b9108352"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0092-object-0033",
+      "batchId": "batch-0092",
+      "reportHash": "ae8d1b4b7feab49434df9bc02f484af376467326faf9194fb66b11646e59f44d",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-soul-devouring-boundary"
+      ],
+      "reason": "保留元神攻战与临时借体的限制；来自银月解释，不能概括为任意器灵可无风险夺舍。",
+      "evidence": [
+        {
+          "chapterId": "qq-23079880",
+          "chapterSha256": "c132aaf3abee1e52d00e806b0dcbf2b27f40deb33a171e0e363b6b9ba283be99",
+          "start": 1511,
+          "end": 1773,
+          "anchorSha256": "c9a653b338a11f63f148192495784c10074b75ea387b3e6aced3e4876ea96f78"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0092-fact-0014",
+      "batchId": "batch-0092",
+      "reportHash": "ae8d1b4b7feab49434df9bc02f484af376467326faf9194fb66b11646e59f44d",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-xueling-soul"
+      ],
+      "reason": "自取名与失忆是当时的自述；器灵通常失智带有“应该”的限定，不能据此抹去所有器灵智能。",
+      "evidence": [
+        {
+          "chapterId": "qq-23079880",
+          "chapterSha256": "c132aaf3abee1e52d00e806b0dcbf2b27f40deb33a171e0e363b6b9ba283be99",
+          "start": 1013,
+          "end": 1264,
+          "anchorSha256": "8f788ddc54ce8eef4eb0285c8b25c4d098b212f8dc3268d6d316180ee36501e2"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0092-fact-0015",
+      "batchId": "batch-0092",
+      "reportHash": "ae8d1b4b7feab49434df9bc02f484af376467326faf9194fb66b11646e59f44d",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-soul-devouring-boundary"
+      ],
+      "reason": "吞噬须元神争战，强敌可反灭施术者；同一躯体久留会同化，非永久自由换身能力。",
+      "evidence": [
+        {
+          "chapterId": "qq-23079880",
+          "chapterSha256": "c132aaf3abee1e52d00e806b0dcbf2b27f40deb33a171e0e363b6b9ba283be99",
+          "start": 1511,
+          "end": 1773,
+          "anchorSha256": "c9a653b338a11f63f148192495784c10074b75ea387b3e6aced3e4876ea96f78"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0092-fact-0016",
+      "batchId": "batch-0092",
+      "reportHash": "ae8d1b4b7feab49434df9bc02f484af376467326faf9194fb66b11646e59f44d",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-silvermoon-human-encounters"
+      ],
+      "reason": "四瞳狐相克、尸魈先占身体与本次成功共同构成具体例外；不提前给T0器灵狐身。",
+      "evidence": [
+        {
+          "chapterId": "qq-23079880",
+          "chapterSha256": "c132aaf3abee1e52d00e806b0dcbf2b27f40deb33a171e0e363b6b9ba283be99",
+          "start": 1774,
+          "end": 2052,
+          "anchorSha256": "acec0df3aaf2b08e839a98ed5c8233af1258eef9304971791f624a10b9108352"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0106-object-0002",
+      "batchId": "batch-0106",
+      "reportHash": "29a8b3699d57a0cb436e77de5aff00bfa0849c37d0d38ebaec14ca2cbbdcdbda",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-silvermoon-human-encounters"
+      ],
+      "reason": "白狐遁入藏宝处并带回玉盒发生在韩立取得此魂之后；不把此形态、关系或战利品写入开篇。",
+      "evidence": [
+        {
+          "chapterId": "qq-23657230",
+          "chapterSha256": "c3c22744ab8b9d6ce39f213f37f640bd1f9e46d103410221ac5178b0be523da4",
+          "start": 2465,
+          "end": 2563,
+          "anchorSha256": "24341dcaee111ba0584693d8391122b662f31b13899009a18e29f0356e31d492"
+        },
+        {
+          "chapterId": "qq-23678977",
+          "chapterSha256": "432f2481a23a06750c322a886dc5e404e116dc7d40c2cefec2d6a24c853e9fec",
+          "start": 2028,
+          "end": 2114,
+          "anchorSha256": "39fa04e02a6932c25bdd3ca08ee0e7c6b26394e9f980af2c290644eb975030d2"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0106-fact-0061",
+      "batchId": "batch-0106",
+      "reportHash": "29a8b3699d57a0cb436e77de5aff00bfa0849c37d0d38ebaec14ca2cbbdcdbda",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-silvermoon-human-encounters"
+      ],
+      "reason": "银月明确说玉盒遮灵气是逃过元婴查探的关键，遁术不能单独保证隐匿成功；本次探宝仍为未来。",
+      "evidence": [
+        {
+          "chapterId": "qq-23678977",
+          "chapterSha256": "432f2481a23a06750c322a886dc5e404e116dc7d40c2cefec2d6a24c853e9fec",
+          "start": 2028,
+          "end": 2114,
+          "anchorSha256": "39fa04e02a6932c25bdd3ca08ee0e7c6b26394e9f980af2c290644eb975030d2"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0162-object-0007",
+      "batchId": "batch-0162",
+      "reportHash": "3d96d9cf15013bfe0815745835479812c348232fadf764042d86a7040c33841c",
+      "disposition": "history-only",
+      "targetIds": [
+        "demon7-linglong-souls"
+      ],
+      "reason": "珑梦叙述第五次千年雷劫时秘术失误而分魂；采用远古同源关系，不把本次附身花天奇提前。",
+      "evidence": [
+        {
+          "chapterId": "qq-26192303",
+          "chapterSha256": "3f48017911245abf59149c21029cd456f6c973f49791899d1ea5b9f53e84ad1f",
+          "start": 2321,
+          "end": 2526,
+          "anchorSha256": "061b4f087b8fd3d60c02a5d5b1509faa8da0f95fed8d3dfa8e871f1b7198c2fc"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0162-object-0020",
+      "batchId": "batch-0162",
+      "reportHash": "3d96d9cf15013bfe0815745835479812c348232fadf764042d86a7040c33841c",
+      "disposition": "adopted",
+      "targetIds": [
+        "canon-tian-kui"
+      ],
+      "reason": "同一连续对话用天奎神狼和天奎妖王称玲珑夫君，合为已有天奎主体；不由称号推断银月狼族血脉。",
+      "evidence": [
+        {
+          "chapterId": "qq-26192303",
+          "chapterSha256": "3f48017911245abf59149c21029cd456f6c973f49791899d1ea5b9f53e84ad1f",
+          "start": 2010,
+          "end": 2102,
+          "anchorSha256": "1e92bb76e16768554e2e5d9e2c769f586ac15c12ce110e7afa61d20520d296cd"
+        },
+        {
+          "chapterId": "qq-26192303",
+          "chapterSha256": "3f48017911245abf59149c21029cd456f6c973f49791899d1ea5b9f53e84ad1f",
+          "start": 3168,
+          "end": 3244,
+          "anchorSha256": "d5d1db8595966a0769fda8c4a5fca18a775b26b6e6fdce1bd73b5732a7076059"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0162-object-0027",
+      "batchId": "batch-0162",
+      "reportHash": "3d96d9cf15013bfe0815745835479812c348232fadf764042d86a7040c33841c",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-tiankui-ancient-marriage"
+      ],
+      "reason": "玲珑及两魂属银月狼族；天奎是夫君，不能因邻近列举而并入银月血统。",
+      "evidence": [
+        {
+          "chapterId": "qq-26192303",
+          "chapterSha256": "3f48017911245abf59149c21029cd456f6c973f49791899d1ea5b9f53e84ad1f",
+          "start": 1817,
+          "end": 1920,
+          "anchorSha256": "3dc07eee048e34006c60e44db76b649b63bcc2f29810db1fbd771e18182b2a95"
+        },
+        {
+          "chapterId": "qq-26192303",
+          "chapterSha256": "3f48017911245abf59149c21029cd456f6c973f49791899d1ea5b9f53e84ad1f",
+          "start": 2010,
+          "end": 2102,
+          "anchorSha256": "1e92bb76e16768554e2e5d9e2c769f586ac15c12ce110e7afa61d20520d296cd"
+        },
+        {
+          "chapterId": "qq-26192303",
+          "chapterSha256": "3f48017911245abf59149c21029cd456f6c973f49791899d1ea5b9f53e84ad1f",
+          "start": 3168,
+          "end": 3244,
+          "anchorSha256": "d5d1db8595966a0769fda8c4a5fca18a775b26b6e6fdce1bd73b5732a7076059"
+        },
+        {
+          "chapterId": "qq-35919567",
+          "chapterSha256": "d91c270c2d2a257d4f6833fa57aba69cfcb5f2184a4a3179f4d54de24d247076",
+          "start": 1001,
+          "end": 1789,
+          "anchorSha256": "f04df0b31c2ca33b445b5e80da9d0d1405a8b3d4a809a83813e971c21578c117"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0162-object-0046",
+      "batchId": "batch-0162",
+      "reportHash": "3d96d9cf15013bfe0815745835479812c348232fadf764042d86a7040c33841c",
+      "disposition": "corrected",
+      "targetIds": [
+        "spirit-realm"
+      ],
+      "reason": "本批灵界是既有上界及身份背景；逆灵通道在人界何处是谈论者的猜测，非已经确定的开放路线。",
+      "evidence": [
+        {
+          "chapterId": "qq-26183671",
+          "chapterSha256": "80eac725d0b38a0397eae2afe7693015b2902182236ac955791f99cc41e9f1d2",
+          "start": 1396,
+          "end": 1530,
+          "anchorSha256": "a09a17747f5407c5459320745d714cc9fd3a1b0508700ecb263561cfcbacb12a"
+        },
+        {
+          "chapterId": "qq-26192303",
+          "chapterSha256": "3f48017911245abf59149c21029cd456f6c973f49791899d1ea5b9f53e84ad1f",
+          "start": 3168,
+          "end": 3244,
+          "anchorSha256": "d5d1db8595966a0769fda8c4a5fca18a775b26b6e6fdce1bd73b5732a7076059"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0162-fact-0018",
+      "batchId": "batch-0162",
+      "reportHash": "3d96d9cf15013bfe0815745835479812c348232fadf764042d86a7040c33841c",
+      "disposition": "history-only",
+      "targetIds": [
+        "demon7-linglong-souls"
+      ],
+      "reason": "古老分魂原因由珑梦讲述、银月部分认回；两魂同源不等于T0已有后期融合、复苏或相识韩立。",
+      "evidence": [
+        {
+          "chapterId": "qq-26192303",
+          "chapterSha256": "3f48017911245abf59149c21029cd456f6c973f49791899d1ea5b9f53e84ad1f",
+          "start": 2321,
+          "end": 2526,
+          "anchorSha256": "061b4f087b8fd3d60c02a5d5b1509faa8da0f95fed8d3dfa8e871f1b7198c2fc"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0162-issue-0012",
+      "batchId": "batch-0162",
+      "reportHash": "3d96d9cf15013bfe0815745835479812c348232fadf764042d86a7040c33841c",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-extraction-editorial-notes"
+      ],
+      "reason": "此行是抽取修订日志，不是新世界实体或新的T0事件；银月身份以正文连续指认校核，其他角色引文修补仍不自动批准昆吾情节前置。",
+      "evidence": [
+        {
+          "chapterId": "qq-26192303",
+          "chapterSha256": "3f48017911245abf59149c21029cd456f6c973f49791899d1ea5b9f53e84ad1f",
+          "start": 1641,
+          "end": 1720,
+          "anchorSha256": "27834fc5eaabda9812b35ff11796dba8fad5399aa2f705636f1e25a2138dda15"
+        },
+        {
+          "chapterId": "qq-26218536",
+          "chapterSha256": "1f7f0d91c5bc4cce131765db431f938e588f4f8fc592efdaea489e1b6674346d",
+          "start": 115,
+          "end": 183,
+          "anchorSha256": "495f83b0e36c52bf9847678f2a486061fa6cd6f1b7a743dd2ff292a3405c26d5"
+        },
+        {
+          "chapterId": "qq-26192303",
+          "chapterSha256": "3f48017911245abf59149c21029cd456f6c973f49791899d1ea5b9f53e84ad1f",
+          "start": 563,
+          "end": 570,
+          "anchorSha256": "27dd28cdd26a078dae942b4ec2a153eee2a285725fbf51ddce06b45ace9e47c3"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0167-object-0002",
+      "batchId": "batch-0167",
+      "reportHash": "1d7c977a524f64d7bd8bf142d2197f37b7b626ea14167a9f8332593c3e8a997f",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-linglong-return"
+      ],
+      "reason": "夺回躯体、吞魔魂和回灵界是昆吾后续事件；既有T0融合封印及失散魂保持，返回不预定发生。",
+      "evidence": [
+        {
+          "chapterId": "qq-26417609",
+          "chapterSha256": "cb5ba8310e78f0b4aa012058cf375deb7c51b3136192e7e00b50ddfeea3bdcfe",
+          "start": 2313,
+          "end": 2554,
+          "anchorSha256": "c4c56303a7ce8eeba6127b4455fbd2bdf56f4fedf55f673b67889cb294c2b953"
+        },
+        {
+          "chapterId": "qq-26409297",
+          "chapterSha256": "7cec4246f89396f4cb325ee6850f3a9c491a476c610d4ecf41e438586cbd0dd6",
+          "start": 2500,
+          "end": 2694,
+          "anchorSha256": "4825ec6fae1df59da648165e0274dcc7999b15863154f41e7fe0be7c95c26287"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0167-object-0011",
+      "batchId": "batch-0167",
+      "reportHash": "1d7c977a524f64d7bd8bf142d2197f37b7b626ea14167a9f8332593c3e8a997f",
+      "disposition": "adopted",
+      "targetIds": [
+        "canon-tian-kui"
+      ],
+      "reason": "玲珑亲称天奎狼王妃子，与既有唯一夫君身份相接；特殊归界资格属于她的双重身份与印记。",
+      "evidence": [
+        {
+          "chapterId": "qq-26417609",
+          "chapterSha256": "cb5ba8310e78f0b4aa012058cf375deb7c51b3136192e7e00b50ddfeea3bdcfe",
+          "start": 2313,
+          "end": 2554,
+          "anchorSha256": "c4c56303a7ce8eeba6127b4455fbd2bdf56f4fedf55f673b67889cb294c2b953"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0167-object-0025",
+      "batchId": "batch-0167",
+      "reportHash": "1d7c977a524f64d7bd8bf142d2197f37b7b626ea14167a9f8332593c3e8a997f",
+      "disposition": "adopted",
+      "targetIds": [
+        "canon-linglong"
+      ],
+      "reason": "银月狼族大公主是玲珑的古老身份，不把当前已复原完整体与回界状态前置。",
+      "evidence": [
+        {
+          "chapterId": "qq-26417609",
+          "chapterSha256": "cb5ba8310e78f0b4aa012058cf375deb7c51b3136192e7e00b50ddfeea3bdcfe",
+          "start": 2313,
+          "end": 2554,
+          "anchorSha256": "c4c56303a7ce8eeba6127b4455fbd2bdf56f4fedf55f673b67889cb294c2b953"
+        },
+        {
+          "chapterId": "qq-26436913",
+          "chapterSha256": "3fb673ecc941fc2ef4128cbfa7775ee9d022744c4bfcdcd1cd84cc7c51adcb00",
+          "start": 2321,
+          "end": 2505,
+          "anchorSha256": "4d5ec1ecee0b4c6c6115c942808c8d8fc6385d8f18c9514295c5fc866a5475b3"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0167-object-0057",
+      "batchId": "batch-0167",
+      "reportHash": "1d7c977a524f64d7bd8bf142d2197f37b7b626ea14167a9f8332593c3e8a997f",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-linglong-return"
+      ],
+      "reason": "对元刹分神使用灵魂吞噬有韩立束缚、雷电等协助，不是T0已吞噬结果或无条件胜利规则。",
+      "evidence": [
+        {
+          "chapterId": "qq-26431671",
+          "chapterSha256": "d96c5c03108de899525cdc00211dd011f5731b093c262806f136eb8980e5b3b5",
+          "start": 2988,
+          "end": 3047,
+          "anchorSha256": "a23f75efa59f6253637a630cbdacc54dbe4967a4a654d5ec23edb02b82e58262"
+        },
+        {
+          "chapterId": "qq-26436913",
+          "chapterSha256": "3fb673ecc941fc2ef4128cbfa7775ee9d022744c4bfcdcd1cd84cc7c51adcb00",
+          "start": 671,
+          "end": 734,
+          "anchorSha256": "fd615969dae65e5d00e5def63fc675cda10867f86aae6f47ff88b0ebd75b91bb"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0167-fact-0012",
+      "batchId": "batch-0167",
+      "reportHash": "1d7c977a524f64d7bd8bf142d2197f37b7b626ea14167a9f8332593c3e8a997f",
+      "disposition": "history-only",
+      "targetIds": [
+        "demon7-inverse-route"
+      ],
+      "reason": "王妃、大公主与预植双印可回溯；归界必须本体神念条件和族中法阵配合，不能新增随身逆星盘本体。",
+      "evidence": [
+        {
+          "chapterId": "qq-26417609",
+          "chapterSha256": "cb5ba8310e78f0b4aa012058cf375deb7c51b3136192e7e00b50ddfeea3bdcfe",
+          "start": 2313,
+          "end": 2554,
+          "anchorSha256": "c4c56303a7ce8eeba6127b4455fbd2bdf56f4fedf55f673b67889cb294c2b953"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0202-object-0029",
+      "batchId": "batch-0202",
+      "reportHash": "08bda4459749163da4b28facab3a05534e4e316a2db533e6444ed51ca9f907f7",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-xueling-soul"
+      ],
+      "reason": "韩立看到安远银狼而想起银月，仅猜它们或是同族；不合并银狼兽群与银月狼族，更不使她此刻在安远。",
+      "evidence": [
+        {
+          "chapterId": "qq-27914319",
+          "chapterSha256": "e62c15eb28a927d2afb2ad68319e734a5c2da57cda90f739e25d3e5623d4ce25",
+          "start": 43,
+          "end": 87,
+          "anchorSha256": "7f42123ba5723971881a1203d0700c3eca67a261cb7c52dea7c4f35a6cc52c6e"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0202-fact-0018",
+      "batchId": "batch-0202",
+      "reportHash": "08bda4459749163da4b28facab3a05534e4e316a2db533e6444ed51ca9f907f7",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-silvermoon-human-encounters"
+      ],
+      "reason": "这是韩立入灵界后的一次回忆及族属猜测，非开篇发生的相认或已确认同族关系。",
+      "evidence": [
+        {
+          "chapterId": "qq-27914319",
+          "chapterSha256": "e62c15eb28a927d2afb2ad68319e734a5c2da57cda90f739e25d3e5623d4ce25",
+          "start": 43,
+          "end": 87,
+          "anchorSha256": "7f42123ba5723971881a1203d0700c3eca67a261cb7c52dea7c4f35a6cc52c6e"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0202-issue-0001",
+      "batchId": "batch-0202",
+      "reportHash": "08bda4459749163da4b28facab3a05534e4e316a2db533e6444ed51ca9f907f7",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-extraction-editorial-notes"
+      ],
+      "reason": "引文修订日志只修定位；银月自称出身与韩立猜狼群同族仍须分别处理，灵具和城防的叙事不是本区T0事件。",
+      "evidence": [
+        {
+          "chapterId": "qq-27914319",
+          "chapterSha256": "e62c15eb28a927d2afb2ad68319e734a5c2da57cda90f739e25d3e5623d4ce25",
+          "start": 2274,
+          "end": 2317,
+          "anchorSha256": "72b0d4482e1bfb93b18436a06bb697794f18feda9d9a0a8fc4d9ac59d35f3824"
+        },
+        {
+          "chapterId": "qq-27914319",
+          "chapterSha256": "e62c15eb28a927d2afb2ad68319e734a5c2da57cda90f739e25d3e5623d4ce25",
+          "start": 2357,
+          "end": 2417,
+          "anchorSha256": "0424102766744808d1d4bc1d19d2a7036319eb6ca8b1fec98cd4837e9cc99ad3"
+        },
+        {
+          "chapterId": "qq-27930011",
+          "chapterSha256": "35384779b0ba157e770c22e4d8f4e09a9a0ff880ef0e7c285b3d33eade4eafe9",
+          "start": 2908,
+          "end": 3004,
+          "anchorSha256": "59b33a98bd0de392387dbe07a79c23a8683b948b0a8b5b71bb906c56bdd23fc6"
+        },
+        {
+          "chapterId": "qq-27940416",
+          "chapterSha256": "f224cdd096cb83707b24a3543097d6b3f3d5ceaf888d967ccaf387f7f629a692",
+          "start": 2341,
+          "end": 2386,
+          "anchorSha256": "1801ae8a40e09adc3ae43255ec0db11b0263498760939111d3696f1225fba108"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0203-object-0008",
+      "batchId": "batch-0203",
+      "reportHash": "e1be032f6210955a38ce52e62fa9e1291be7ba1414fda7e263059cbe44f40d9e",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-demon-daier"
+      ],
+      "reason": "黛儿是韩立入灵界时的幼童、赵城主外孙女；该幼年阶段远在T0之后，不生成同龄开篇儿童。",
+      "evidence": [
+        {
+          "chapterId": "qq-27964502",
+          "chapterSha256": "fe8ec30ebab3734d5510ea1d06467e85f9b4d735d7045bb20c05aa0eaebae762",
+          "start": 1870,
+          "end": 1937,
+          "anchorSha256": "ff225beb819f8879e5650e5d7f43ef9e97a176419727f6087a316dd48f33de45"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0203-object-0009",
+      "batchId": "batch-0203",
+      "reportHash": "e1be032f6210955a38ce52e62fa9e1291be7ba1414fda7e263059cbe44f40d9e",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-demon-xiaohong"
+      ],
+      "reason": "本章宫装少妇与后文自报筱虹者连续同一人；追捕赵城主和引发兽潮为后期任务，不赋作开篇职责。",
+      "evidence": [
+        {
+          "chapterId": "qq-27971637",
+          "chapterSha256": "a728d891548eb3ce07dc90f29120275a65cc60d8b4804a740cb24f78f06aba6e",
+          "start": 41,
+          "end": 112,
+          "anchorSha256": "af9abf96fa3edd395738f6a7982b95c2b2ca7b6c042afd62137e869133109dae"
+        },
+        {
+          "chapterId": "qq-28643714",
+          "chapterSha256": "4f481bd6c295266d1405f5f4b0fa99761abe159a6c86866ae1e5a7aa599e5b0e",
+          "start": 101,
+          "end": 950,
+          "anchorSha256": "93f72839c2bd8ef9fdd4d0f34024788c9977857936eeaefaaea7cebda155de16"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0203-object-0015",
+      "batchId": "batch-0203",
+      "reportHash": "e1be032f6210955a38ce52e62fa9e1291be7ba1414fda7e263059cbe44f40d9e",
+      "disposition": "adopted",
+      "targetIds": [
+        "canon-black-phoenix-king"
+      ],
+      "reason": "黑凤妖王、少妇所称家主指黑凤族统治者；具体筱馆之名由后章自报，T0在位沿既有明确推定。",
+      "evidence": [
+        {
+          "chapterId": "qq-27971637",
+          "chapterSha256": "a728d891548eb3ce07dc90f29120275a65cc60d8b4804a740cb24f78f06aba6e",
+          "start": 1454,
+          "end": 1504,
+          "anchorSha256": "2103dcc931b3a4a1f78c4a5fcdf353f96a47190845312d98726d3d14b2096304"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0203-object-0016",
+      "batchId": "batch-0203",
+      "reportHash": "e1be032f6210955a38ce52e62fa9e1291be7ba1414fda7e263059cbe44f40d9e",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "demon7-black-phoenix-junior-lineage"
+      ],
+      "reason": "本章少主与赵氏女的关系和后章少族长之孙女不能直接拼成同一代；保留两个称谓的语境，暂不画父子谱。",
+      "evidence": [
+        {
+          "chapterId": "qq-27971637",
+          "chapterSha256": "a728d891548eb3ce07dc90f29120275a65cc60d8b4804a740cb24f78f06aba6e",
+          "start": 1505,
+          "end": 1606,
+          "anchorSha256": "7f8714826587df4808d4e7fa3a2a40833d421410ad50c3f012e49bcd178217b3"
+        },
+        {
+          "chapterId": "qq-27971637",
+          "chapterSha256": "a728d891548eb3ce07dc90f29120275a65cc60d8b4804a740cb24f78f06aba6e",
+          "start": 1255,
+          "end": 1695,
+          "anchorSha256": "12aefca21004ab8c9162ab020158f137289ca169261a1b097335a7f92fd5cced"
+        },
+        {
+          "chapterId": "qq-28071833",
+          "chapterSha256": "b720344b25d2ff913b2d8d137d28ae47ca237c25bd1b8f449088f83b0281044a",
+          "start": 2326,
+          "end": 2783,
+          "anchorSha256": "444422471cdeba911e2b62e447a53a33a6e4d59bdbbc50c31281290f53380bf0"
+        }
+      ],
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "qq27971637少主与赵氏女、qq28071833少族长嫡孙女及公孙兄并见；未给足完整姓名代际。黛儿父亲的存在不等于这几种称谓全部同人。"
+      },
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0203-object-0020",
+      "batchId": "batch-0203",
+      "reportHash": "e1be032f6210955a38ce52e62fa9e1291be7ba1414fda7e263059cbe44f40d9e",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon-phoenix-palace"
+      ],
+      "reason": "黑凤宫是族内目的地；建立宫廷地点的开篇存在作回溯，带回黛儿的行动未发生。",
+      "evidence": [
+        {
+          "chapterId": "qq-27971637",
+          "chapterSha256": "a728d891548eb3ce07dc90f29120275a65cc60d8b4804a740cb24f78f06aba6e",
+          "start": 1655,
+          "end": 1758,
+          "anchorSha256": "f0ae64326c5313f15ebd3a4a264a795f762170af739cb138a1df07e64a686c41"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0203-object-0023",
+      "batchId": "batch-0203",
+      "reportHash": "e1be032f6210955a38ce52e62fa9e1291be7ba1414fda7e263059cbe44f40d9e",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon-phoenix-community"
+      ],
+      "reason": "黑凤族与其血脉、王庭为族群背景；对混血的强制接回是这名执行者立场，非所有成员无例外行为。",
+      "evidence": [
+        {
+          "chapterId": "qq-27971637",
+          "chapterSha256": "a728d891548eb3ce07dc90f29120275a65cc60d8b4804a740cb24f78f06aba6e",
+          "start": 1505,
+          "end": 1606,
+          "anchorSha256": "7f8714826587df4808d4e7fa3a2a40833d421410ad50c3f012e49bcd178217b3"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0203-fact-0029",
+      "batchId": "batch-0203",
+      "reportHash": "e1be032f6210955a38ce52e62fa9e1291be7ba1414fda7e263059cbe44f40d9e",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-daier-lineage-and-encounters"
+      ],
+      "reason": "赵城主说女儿因黛儿而亡，发生于后来这代家庭；不前置死亡或给当前NPC注入其消息。",
+      "evidence": [
+        {
+          "chapterId": "qq-27971637",
+          "chapterSha256": "a728d891548eb3ce07dc90f29120275a65cc60d8b4804a740cb24f78f06aba6e",
+          "start": 1330,
+          "end": 1453,
+          "anchorSha256": "cc08e8865965930b9b7090077d9f56486a90359bf6aa69738b28f2a2c5520442"
+        },
+        {
+          "chapterId": "qq-27971637",
+          "chapterSha256": "a728d891548eb3ce07dc90f29120275a65cc60d8b4804a740cb24f78f06aba6e",
+          "start": 1607,
+          "end": 1654,
+          "anchorSha256": "1968e8191c26c81b05e9303d4b508d413af50463c83151b4c923fee23f18a03b"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0203-fact-0030",
+      "batchId": "batch-0203",
+      "reportHash": "e1be032f6210955a38ce52e62fa9e1291be7ba1414fda7e263059cbe44f40d9e",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "demon7-black-phoenix-junior-lineage"
+      ],
+      "reason": "少妇的话将少主、赵氏女、黛儿血脉联系起来，但与少族长称谓代际未完全明确；不硬定两称完全同人。",
+      "evidence": [
+        {
+          "chapterId": "qq-27971637",
+          "chapterSha256": "a728d891548eb3ce07dc90f29120275a65cc60d8b4804a740cb24f78f06aba6e",
+          "start": 1505,
+          "end": 1606,
+          "anchorSha256": "7f8714826587df4808d4e7fa3a2a40833d421410ad50c3f012e49bcd178217b3"
+        },
+        {
+          "chapterId": "qq-27971637",
+          "chapterSha256": "a728d891548eb3ce07dc90f29120275a65cc60d8b4804a740cb24f78f06aba6e",
+          "start": 1255,
+          "end": 1695,
+          "anchorSha256": "12aefca21004ab8c9162ab020158f137289ca169261a1b097335a7f92fd5cced"
+        },
+        {
+          "chapterId": "qq-28071833",
+          "chapterSha256": "b720344b25d2ff913b2d8d137d28ae47ca237c25bd1b8f449088f83b0281044a",
+          "start": 2326,
+          "end": 2783,
+          "anchorSha256": "444422471cdeba911e2b62e447a53a33a6e4d59bdbbc50c31281290f53380bf0"
+        }
+      ],
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "qq27971637少主与赵氏女、qq28071833少族长嫡孙女及公孙兄并见；未给足完整姓名代际。黛儿父亲的存在不等于这几种称谓全部同人。"
+      },
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0203-fact-0063",
+      "batchId": "batch-0203",
+      "reportHash": "e1be032f6210955a38ce52e62fa9e1291be7ba1414fda7e263059cbe44f40d9e",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-daier-lineage-and-encounters"
+      ],
+      "reason": "少妇在逼问中提自家主神通和血脉，这次告知及追捕属未来；黑凤王长期身份另有来源。",
+      "evidence": [
+        {
+          "chapterId": "qq-27971637",
+          "chapterSha256": "a728d891548eb3ce07dc90f29120275a65cc60d8b4804a740cb24f78f06aba6e",
+          "start": 1505,
+          "end": 1606,
+          "anchorSha256": "7f8714826587df4808d4e7fa3a2a40833d421410ad50c3f012e49bcd178217b3"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0203-fact-0064",
+      "batchId": "batch-0203",
+      "reportHash": "e1be032f6210955a38ce52e62fa9e1291be7ba1414fda7e263059cbe44f40d9e",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-daier-lineage-and-encounters"
+      ],
+      "reason": "带黛儿回宫是当时具体目标，不是开篇已经存在的人物任务或必然事件。",
+      "evidence": [
+        {
+          "chapterId": "qq-27971637",
+          "chapterSha256": "a728d891548eb3ce07dc90f29120275a65cc60d8b4804a740cb24f78f06aba6e",
+          "start": 1655,
+          "end": 1758,
+          "anchorSha256": "f0ae64326c5313f15ebd3a4a264a795f762170af739cb138a1df07e64a686c41"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0203-issue-0006",
+      "batchId": "batch-0203",
+      "reportHash": "e1be032f6210955a38ce52e62fa9e1291be7ba1414fda7e263059cbe44f40d9e",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "demon7-black-phoenix-junior-lineage"
+      ],
+      "reason": "后文明确黛儿为少族长嫡孙，但少主、少族长与公孙兄的精确对应仍有称谓层次；不凭“姑姑”补生物亲缘。",
+      "evidence": [
+        {
+          "chapterId": "qq-27971637",
+          "chapterSha256": "a728d891548eb3ce07dc90f29120275a65cc60d8b4804a740cb24f78f06aba6e",
+          "start": 1505,
+          "end": 1606,
+          "anchorSha256": "7f8714826587df4808d4e7fa3a2a40833d421410ad50c3f012e49bcd178217b3"
+        },
+        {
+          "chapterId": "qq-27971637",
+          "chapterSha256": "a728d891548eb3ce07dc90f29120275a65cc60d8b4804a740cb24f78f06aba6e",
+          "start": 1607,
+          "end": 1654,
+          "anchorSha256": "1968e8191c26c81b05e9303d4b508d413af50463c83151b4c923fee23f18a03b"
+        },
+        {
+          "chapterId": "qq-27971637",
+          "chapterSha256": "a728d891548eb3ce07dc90f29120275a65cc60d8b4804a740cb24f78f06aba6e",
+          "start": 1255,
+          "end": 1695,
+          "anchorSha256": "12aefca21004ab8c9162ab020158f137289ca169261a1b097335a7f92fd5cced"
+        },
+        {
+          "chapterId": "qq-28071833",
+          "chapterSha256": "b720344b25d2ff913b2d8d137d28ae47ca237c25bd1b8f449088f83b0281044a",
+          "start": 2326,
+          "end": 2783,
+          "anchorSha256": "444422471cdeba911e2b62e447a53a33a6e4d59bdbbc50c31281290f53380bf0"
+        }
+      ],
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "qq27971637少主与赵氏女、qq28071833少族长嫡孙女及公孙兄并见；未给足完整姓名代际。黛儿父亲的存在不等于这几种称谓全部同人。"
+      },
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0204-object-0001",
+      "batchId": "batch-0204",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-postopening-han-travel"
+      ],
+      "reason": "虞阳经营与离城为韩立入灵界后的生活，不改十岁山村韩立状态，也不预置未来炼器资产。",
+      "evidence": [
+        {
+          "chapterId": "qq-27999146",
+          "chapterSha256": "e936cdc63b6977bd50a382aedd8c46fb04461f23109fffae9e3f4897462eb927",
+          "start": 3133,
+          "end": 3159,
+          "anchorSha256": "54da47157e53f3bbd95252fadf4e5d466f734963fb343b5ac12357348042a534"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "chapterSha256": "0c79c3014e9e526f142f15725db95957ed6244a34e6a542ef0b79d4644a5925b",
+          "start": 1791,
+          "end": 1850,
+          "anchorSha256": "59eced0f667d3c931df6363af58a2e65a8292bbdec172e9cb17527c96a5b5260"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0204-object-0002",
+      "batchId": "batch-0204",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-demon-xiaohong"
+      ],
+      "reason": "宫装少妇、筱姑姑、筱姓女子与后来自报筱虹者同一；本场威胁与黛儿关系仅后期记录。",
+      "evidence": [
+        {
+          "chapterId": "qq-27994420",
+          "chapterSha256": "0c79c3014e9e526f142f15725db95957ed6244a34e6a542ef0b79d4644a5925b",
+          "start": 0,
+          "end": 65,
+          "anchorSha256": "2d1cf5e0f775d9292b999a837d72ad321dcf4af9a6b4482905ee0153af0a9f00"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "chapterSha256": "0c79c3014e9e526f142f15725db95957ed6244a34e6a542ef0b79d4644a5925b",
+          "start": 1654,
+          "end": 1700,
+          "anchorSha256": "aaed43f70f564766841560ec974c37ee636e735f640d1452eca47a07e1f0df32"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "chapterSha256": "0c79c3014e9e526f142f15725db95957ed6244a34e6a542ef0b79d4644a5925b",
+          "start": 1791,
+          "end": 1850,
+          "anchorSha256": "59eced0f667d3c931df6363af58a2e65a8292bbdec172e9cb17527c96a5b5260"
+        },
+        {
+          "chapterId": "qq-28643714",
+          "chapterSha256": "4f481bd6c295266d1405f5f4b0fa99761abe159a6c86866ae1e5a7aa599e5b0e",
+          "start": 101,
+          "end": 950,
+          "anchorSha256": "93f72839c2bd8ef9fdd4d0f34024788c9977857936eeaefaaea7cebda155de16"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0204-object-0003",
+      "batchId": "batch-0204",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-demon-daier"
+      ],
+      "reason": "传承珠注入与选择跟随筱姑姑发生于此场遭遇；保留当事人说法，不将此选择强加未来玩家。",
+      "evidence": [
+        {
+          "chapterId": "qq-27994420",
+          "chapterSha256": "0c79c3014e9e526f142f15725db95957ed6244a34e6a542ef0b79d4644a5925b",
+          "start": 1654,
+          "end": 1700,
+          "anchorSha256": "aaed43f70f564766841560ec974c37ee636e735f640d1452eca47a07e1f0df32"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "chapterSha256": "0c79c3014e9e526f142f15725db95957ed6244a34e6a542ef0b79d4644a5925b",
+          "start": 2046,
+          "end": 2153,
+          "anchorSha256": "15eca80750fa8b3b2482a07c4f143f4cd18f59e9a6201bc7d817377e9abdda41"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "chapterSha256": "0c79c3014e9e526f142f15725db95957ed6244a34e6a542ef0b79d4644a5925b",
+          "start": 1791,
+          "end": 1850,
+          "anchorSha256": "59eced0f667d3c931df6363af58a2e65a8292bbdec172e9cb17527c96a5b5260"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0204-object-0018",
+      "batchId": "batch-0204",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon-phoenix-community"
+      ],
+      "reason": "族属和血脉背景可纳入；传承珠具体原理在此是韩立推测，接受知识不等于即时完全掌握秘术。",
+      "evidence": [
+        {
+          "chapterId": "qq-27994420",
+          "chapterSha256": "0c79c3014e9e526f142f15725db95957ed6244a34e6a542ef0b79d4644a5925b",
+          "start": 1654,
+          "end": 1700,
+          "anchorSha256": "aaed43f70f564766841560ec974c37ee636e735f640d1452eca47a07e1f0df32"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "chapterSha256": "0c79c3014e9e526f142f15725db95957ed6244a34e6a542ef0b79d4644a5925b",
+          "start": 2046,
+          "end": 2153,
+          "anchorSha256": "15eca80750fa8b3b2482a07c4f143f4cd18f59e9a6201bc7d817377e9abdda41"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0204-object-0041",
+      "batchId": "batch-0204",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-inheritance-pearl-boundary"
+      ],
+      "reason": "珠的注入与需消化有少妇口述；精魂炼制、损失比例和人格影响主要为韩立类比推测，不能当精确普适工艺。",
+      "evidence": [
+        {
+          "chapterId": "qq-27994420",
+          "chapterSha256": "0c79c3014e9e526f142f15725db95957ed6244a34e6a542ef0b79d4644a5925b",
+          "start": 2046,
+          "end": 2153,
+          "anchorSha256": "15eca80750fa8b3b2482a07c4f143f4cd18f59e9a6201bc7d817377e9abdda41"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "chapterSha256": "0c79c3014e9e526f142f15725db95957ed6244a34e6a542ef0b79d4644a5925b",
+          "start": 2170,
+          "end": 2239,
+          "anchorSha256": "7f556c8c6beea15937adc57666541e69c9664e4ed40e085fb96b13eb10dfde59"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "chapterSha256": "0c79c3014e9e526f142f15725db95957ed6244a34e6a542ef0b79d4644a5925b",
+          "start": 1938,
+          "end": 2448,
+          "anchorSha256": "40e58c13f0b4001d449bf4ee458fa24d72b3aa8dad5c25932e14c98debca3946"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0204-object-0054",
+      "batchId": "batch-0204",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-postopening-han-travel"
+      ],
+      "reason": "筱虹经傀儡提供的短剑信物随后被韩立毁掉；不在T0创建已交付或已毁器物，也不把所报路线视真实承诺。",
+      "evidence": [
+        {
+          "chapterId": "qq-28009787",
+          "chapterSha256": "47535d8454a576b3e847783adad38d3cd679b2cd6b3ceafc27db361f9ae0206c",
+          "start": 587,
+          "end": 681,
+          "anchorSha256": "eaddd79da7ab7b12d0862df55e75eb0da10c9373a0bd220a29658fdb44ff04aa"
+        },
+        {
+          "chapterId": "qq-28009787",
+          "chapterSha256": "47535d8454a576b3e847783adad38d3cd679b2cd6b3ceafc27db361f9ae0206c",
+          "start": 682,
+          "end": 700,
+          "anchorSha256": "9e6d3c3abedbe0c2f0b8c1fbcceab7c6a8b53ad16704ac8a1b02d049c21b7454"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0204-fact-0009",
+      "batchId": "batch-0204",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-daier-lineage-and-encounters"
+      ],
+      "reason": "黛儿直系血脉是少妇对当时孩子的指认，不证明T0已有同一幼童；族谱不补代数。",
+      "evidence": [
+        {
+          "chapterId": "qq-27994420",
+          "chapterSha256": "0c79c3014e9e526f142f15725db95957ed6244a34e6a542ef0b79d4644a5925b",
+          "start": 1654,
+          "end": 1700,
+          "anchorSha256": "aaed43f70f564766841560ec974c37ee636e735f640d1452eca47a07e1f0df32"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0204-fact-0010",
+      "batchId": "batch-0204",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-inheritance-pearl-boundary"
+      ],
+      "reason": "本次注入传承珠及女童获知半妖身份属于后期学习事件；不跨越时间自动赋知识。",
+      "evidence": [
+        {
+          "chapterId": "qq-27994420",
+          "chapterSha256": "0c79c3014e9e526f142f15725db95957ed6244a34e6a542ef0b79d4644a5925b",
+          "start": 2046,
+          "end": 2153,
+          "anchorSha256": "15eca80750fa8b3b2482a07c4f143f4cd18f59e9a6201bc7d817377e9abdda41"
+        },
+        {
+          "chapterId": "qq-27994420",
+          "chapterSha256": "0c79c3014e9e526f142f15725db95957ed6244a34e6a542ef0b79d4644a5925b",
+          "start": 1938,
+          "end": 2448,
+          "anchorSha256": "40e58c13f0b4001d449bf4ee458fa24d72b3aa8dad5c25932e14c98debca3946"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0204-fact-0040",
+      "batchId": "batch-0204",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-postopening-han-travel"
+      ],
+      "reason": "韩立毁信物、不信妖女地名是自己的后期选择；不把不信任当作所有人物对黑凤族的固定态度。",
+      "evidence": [
+        {
+          "chapterId": "qq-28009787",
+          "chapterSha256": "47535d8454a576b3e847783adad38d3cd679b2cd6b3ceafc27db361f9ae0206c",
+          "start": 682,
+          "end": 700,
+          "anchorSha256": "9e6d3c3abedbe0c2f0b8c1fbcceab7c6a8b53ad16704ac8a1b02d049c21b7454"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0204-issue-0003",
+      "batchId": "batch-0204",
+      "reportHash": "aae3d139d103fbe1a6951c8d4f709ca573bd5b5aad0e4854ee78046d08480f22",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-demon-xiaohong"
+      ],
+      "reason": "后章直接自报筱虹解决真名；“姑姑”仅称呼，具体亲缘和T0职务仍不能由此得出。",
+      "evidence": [
+        {
+          "chapterId": "qq-27994420",
+          "chapterSha256": "0c79c3014e9e526f142f15725db95957ed6244a34e6a542ef0b79d4644a5925b",
+          "start": 1791,
+          "end": 1850,
+          "anchorSha256": "59eced0f667d3c931df6363af58a2e65a8292bbdec172e9cb17527c96a5b5260"
+        },
+        {
+          "chapterId": "qq-28643714",
+          "chapterSha256": "4f481bd6c295266d1405f5f4b0fa99761abe159a6c86866ae1e5a7aa599e5b0e",
+          "start": 101,
+          "end": 950,
+          "anchorSha256": "93f72839c2bd8ef9fdd4d0f34024788c9977857936eeaefaaea7cebda155de16"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0205-object-0017",
+      "batchId": "batch-0205",
+      "reportHash": "452cc870cfcd7b64108677959436a37fe387fd3eeb0f9dfd985467e28403ad34",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "听命寰苍奇、散布灵族重宝消息和潜入落日之墓为本次任务，不提前布置敌对剧情。",
+      "evidence": [
+        {
+          "chapterId": "qq-28071833",
+          "chapterSha256": "b720344b25d2ff913b2d8d137d28ae47ca237c25bd1b8f449088f83b0281044a",
+          "start": 1953,
+          "end": 2009,
+          "anchorSha256": "1c345c0554c6603a4984ed2a9910bed7d16aef317739eafc93c3c0edb30f32f4"
+        },
+        {
+          "chapterId": "qq-28071833",
+          "chapterSha256": "b720344b25d2ff913b2d8d137d28ae47ca237c25bd1b8f449088f83b0281044a",
+          "start": 2373,
+          "end": 2457,
+          "anchorSha256": "995820dd4ceee29400d7417ca4a71af2b93efa9f3a48c89b66730163137627d7"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0205-object-0018",
+      "batchId": "batch-0205",
+      "reportHash": "452cc870cfcd7b64108677959436a37fe387fd3eeb0f9dfd985467e28403ad34",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-demon-daier"
+      ],
+      "reason": "寰与筱虹对话确认当时五级及变异真凤血，远在T0后；不赠开篇化形实力。",
+      "evidence": [
+        {
+          "chapterId": "qq-28071833",
+          "chapterSha256": "b720344b25d2ff913b2d8d137d28ae47ca237c25bd1b8f449088f83b0281044a",
+          "start": 2458,
+          "end": 2497,
+          "anchorSha256": "c2d17eb39f60ef30930b5f93f775bf9862273926b3e1ebed267c2819726eeb1d"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0205-object-0023",
+      "batchId": "batch-0205",
+      "reportHash": "452cc870cfcd7b64108677959436a37fe387fd3eeb0f9dfd985467e28403ad34",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "demon7-black-phoenix-junior-lineage"
+      ],
+      "reason": "公孙兄可决定向黛儿提亲，是少族长相关主事者；正文未给完整名、T0境界及其与早先“少主”的同一证明。",
+      "evidence": [
+        {
+          "chapterId": "qq-28071833",
+          "chapterSha256": "b720344b25d2ff913b2d8d137d28ae47ca237c25bd1b8f449088f83b0281044a",
+          "start": 2625,
+          "end": 2686,
+          "anchorSha256": "b6136444f68b68fb4113c71e3b5439d2a211c53c6c2a8fad9bbd7a989fd8b735"
+        },
+        {
+          "chapterId": "qq-27971637",
+          "chapterSha256": "a728d891548eb3ce07dc90f29120275a65cc60d8b4804a740cb24f78f06aba6e",
+          "start": 1255,
+          "end": 1695,
+          "anchorSha256": "12aefca21004ab8c9162ab020158f137289ca169261a1b097335a7f92fd5cced"
+        },
+        {
+          "chapterId": "qq-28071833",
+          "chapterSha256": "b720344b25d2ff913b2d8d137d28ae47ca237c25bd1b8f449088f83b0281044a",
+          "start": 2326,
+          "end": 2783,
+          "anchorSha256": "444422471cdeba911e2b62e447a53a33a6e4d59bdbbc50c31281290f53380bf0"
+        }
+      ],
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "qq27971637少主与赵氏女、qq28071833少族长嫡孙女及公孙兄并见；未给足完整姓名代际。黛儿父亲的存在不等于这几种称谓全部同人。"
+      },
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0205-object-0039",
+      "batchId": "batch-0205",
+      "reportHash": "452cc870cfcd7b64108677959436a37fe387fd3eeb0f9dfd985467e28403ad34",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon-phoenix-community"
+      ],
+      "reason": "叙述明言黑凤为七王族之一；空间天赋有筱虹施展例证，不等于每名幼体自动能长距瞬移。",
+      "evidence": [
+        {
+          "chapterId": "qq-28090936",
+          "chapterSha256": "b0d2a2579b88b1aacccc17eadbc7a8d8e88dff4e788ec85a389a9d6b175fc48a",
+          "start": 1580,
+          "end": 1623,
+          "anchorSha256": "3daa513018cf29e7ee84297fa87eb2454bf18fd9b8ced33c9629274527e967d1"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0205-object-0041",
+      "batchId": "batch-0205",
+      "reportHash": "452cc870cfcd7b64108677959436a37fe387fd3eeb0f9dfd985467e28403ad34",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon7-seven-territories"
+      ],
+      "reason": "七大王族是人妖辖境中的族政结构；不扩为整个灵界只有七个妖种，也不据此命名未核第七族。",
+      "evidence": [
+        {
+          "chapterId": "qq-28090936",
+          "chapterSha256": "b0d2a2579b88b1aacccc17eadbc7a8d8e88dff4e788ec85a389a9d6b175fc48a",
+          "start": 1580,
+          "end": 1623,
+          "anchorSha256": "3daa513018cf29e7ee84297fa87eb2454bf18fd9b8ced33c9629274527e967d1"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0205-fact-0037",
+      "batchId": "batch-0205",
+      "reportHash": "452cc870cfcd7b64108677959436a37fe387fd3eeb0f9dfd985467e28403ad34",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "幻焰蛾窃听后的部署是后来情报行动，人物只获得当时侦察到的内容，不成为开篇全知计划。",
+      "evidence": [
+        {
+          "chapterId": "qq-28071833",
+          "chapterSha256": "b720344b25d2ff913b2d8d137d28ae47ca237c25bd1b8f449088f83b0281044a",
+          "start": 2725,
+          "end": 2921,
+          "anchorSha256": "595b2c1b809aed6c9c3074bcd60904949046e86cff2cebae74e4149b192ecf39"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0205-fact-0038",
+      "batchId": "batch-0205",
+      "reportHash": "452cc870cfcd7b64108677959436a37fe387fd3eeb0f9dfd985467e28403ad34",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-demon-xiaohong"
+      ],
+      "reason": "寰的“筱侄女”与黛儿的“筱姑姑”是称呼，不独立证明两条血缘；人名由后续自报闭合。",
+      "evidence": [
+        {
+          "chapterId": "qq-28071833",
+          "chapterSha256": "b720344b25d2ff913b2d8d137d28ae47ca237c25bd1b8f449088f83b0281044a",
+          "start": 2373,
+          "end": 2457,
+          "anchorSha256": "995820dd4ceee29400d7417ca4a71af2b93efa9f3a48c89b66730163137627d7"
+        },
+        {
+          "chapterId": "qq-28643714",
+          "chapterSha256": "4f481bd6c295266d1405f5f4b0fa99761abe159a6c86866ae1e5a7aa599e5b0e",
+          "start": 101,
+          "end": 950,
+          "anchorSha256": "93f72839c2bd8ef9fdd4d0f34024788c9977857936eeaefaaea7cebda155de16"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0205-fact-0039",
+      "batchId": "batch-0205",
+      "reportHash": "452cc870cfcd7b64108677959436a37fe387fd3eeb0f9dfd985467e28403ad34",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-demon-daier"
+      ],
+      "reason": "五级、变异血脉和嫡孙身份属于黛儿在宫中成长的后来阶段，不能前置或复制成年体。",
+      "evidence": [
+        {
+          "chapterId": "qq-28071833",
+          "chapterSha256": "b720344b25d2ff913b2d8d137d28ae47ca237c25bd1b8f449088f83b0281044a",
+          "start": 2373,
+          "end": 2457,
+          "anchorSha256": "995820dd4ceee29400d7417ca4a71af2b93efa9f3a48c89b66730163137627d7"
+        },
+        {
+          "chapterId": "qq-28071833",
+          "chapterSha256": "b720344b25d2ff913b2d8d137d28ae47ca237c25bd1b8f449088f83b0281044a",
+          "start": 2561,
+          "end": 2624,
+          "anchorSha256": "e39bc64b9189d1c54aad2959b7d95e27f76aba8f0ba4e77d77b291e24911f73e"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0205-fact-0040",
+      "batchId": "batch-0205",
+      "reportHash": "452cc870cfcd7b64108677959436a37fe387fd3eeb0f9dfd985467e28403ad34",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-daier-lineage-and-encounters"
+      ],
+      "reason": "寰提出联姻、筱虹答应传话，尚无婚约成立或黛儿同意；不生成开篇强制婚配。",
+      "evidence": [
+        {
+          "chapterId": "qq-28071833",
+          "chapterSha256": "b720344b25d2ff913b2d8d137d28ae47ca237c25bd1b8f449088f83b0281044a",
+          "start": 2498,
+          "end": 2560,
+          "anchorSha256": "d7c69785c459af153d9b374fae72c4352d30e980b1e89312feda461b0a25e1be"
+        },
+        {
+          "chapterId": "qq-28071833",
+          "chapterSha256": "b720344b25d2ff913b2d8d137d28ae47ca237c25bd1b8f449088f83b0281044a",
+          "start": 2625,
+          "end": 2686,
+          "anchorSha256": "b6136444f68b68fb4113c71e3b5439d2a211c53c6c2a8fad9bbd7a989fd8b735"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0205-fact-0057",
+      "batchId": "batch-0205",
+      "reportHash": "452cc870cfcd7b64108677959436a37fe387fd3eeb0f9dfd985467e28403ad34",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-seven-territories"
+      ],
+      "reason": "黑凤王族地位有叙述依据；凤族空间天赋由寰所言及筱虹行为支持，施术门槛仍按个体实际能力。",
+      "evidence": [
+        {
+          "chapterId": "qq-28090936",
+          "chapterSha256": "b0d2a2579b88b1aacccc17eadbc7a8d8e88dff4e788ec85a389a9d6b175fc48a",
+          "start": 1580,
+          "end": 1623,
+          "anchorSha256": "3daa513018cf29e7ee84297fa87eb2454bf18fd9b8ced33c9629274527e967d1"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0205-fact-0058",
+      "batchId": "batch-0205",
+      "reportHash": "452cc870cfcd7b64108677959436a37fe387fd3eeb0f9dfd985467e28403ad34",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "守谷与等寰击杀灵族是本场企图，不是已经成功或恒常族群行为。",
+      "evidence": [
+        {
+          "chapterId": "qq-28090936",
+          "chapterSha256": "b0d2a2579b88b1aacccc17eadbc7a8d8e88dff4e788ec85a389a9d6b175fc48a",
+          "start": 1486,
+          "end": 1561,
+          "anchorSha256": "347106a19b3560ef949e7ab25ff91895cf8fb93cb734666c20019cad88e8cca5"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0205-issue-0001",
+      "batchId": "batch-0205",
+      "reportHash": "452cc870cfcd7b64108677959436a37fe387fd3eeb0f9dfd985467e28403ad34",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-extraction-editorial-notes"
+      ],
+      "reason": "这是抽取分类及引用修订说明；“侄女”连续引文有效仍不等于亲缘证明，未把编辑动作当世界事件。",
+      "evidence": [
+        {
+          "chapterId": "qq-28059597",
+          "chapterSha256": "fac3fbfd37e1dca0eb098022b79c6e2823ba7c2c807b1f17a06ab4c39a9ce4ff",
+          "start": 2207,
+          "end": 2238,
+          "anchorSha256": "d291eb833b5163f99189bdd51d9ba75d1a8fca49fca74d3ff798f33b02de10d5"
+        },
+        {
+          "chapterId": "qq-28071833",
+          "chapterSha256": "b720344b25d2ff913b2d8d137d28ae47ca237c25bd1b8f449088f83b0281044a",
+          "start": 2373,
+          "end": 2457,
+          "anchorSha256": "995820dd4ceee29400d7417ca4a71af2b93efa9f3a48c89b66730163137627d7"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0206-object-0008",
+      "batchId": "batch-0206",
+      "reportHash": "74f1b060ede6daeb204dedcd7f417bb26e58cfec8a5bb38afa4eb784a6ee5cf5",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-demon-xiaohong"
+      ],
+      "reason": "宫装少妇在此是化神初期筱姓黑凤，后任务才为后期；红帕飞刀及战斗状态不回填T0。",
+      "evidence": [
+        {
+          "chapterId": "qq-28116190",
+          "chapterSha256": "66b8408f6e8b703ea1f2892a319463edf6feb33c76db7983d09123a83a1c9a47",
+          "start": 2796,
+          "end": 2829,
+          "anchorSha256": "af06c83bb069e03c68438ed5f53e82544f41d5aa75027196b1fdf41652cb4db4"
+        },
+        {
+          "chapterId": "qq-28133895",
+          "chapterSha256": "ce50d1711a5f0e7624be033ced12d72dc89930afc5372db685e3e94b39282aef",
+          "start": 271,
+          "end": 330,
+          "anchorSha256": "1c5141c88a51a71b9bbb9cf5126c49058d09aeb102bf5190912b7744347bc80c"
+        },
+        {
+          "chapterId": "qq-28643714",
+          "chapterSha256": "4f481bd6c295266d1405f5f4b0fa99761abe159a6c86866ae1e5a7aa599e5b0e",
+          "start": 101,
+          "end": 950,
+          "anchorSha256": "93f72839c2bd8ef9fdd4d0f34024788c9977857936eeaefaaea7cebda155de16"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0206-object-0013",
+      "batchId": "batch-0206",
+      "reportHash": "74f1b060ede6daeb204dedcd7f417bb26e58cfec8a5bb38afa4eb784a6ee5cf5",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "demon7-three-headed-moon-wolf"
+      ],
+      "reason": "三名青年自认一只三首月狼并能合体，个体同一明确；其诞生和获得三分身日期未给，不在T0造三个无关NPC。",
+      "evidence": [
+        {
+          "chapterId": "qq-28133895",
+          "chapterSha256": "ce50d1711a5f0e7624be033ced12d72dc89930afc5372db685e3e94b39282aef",
+          "start": 57,
+          "end": 183,
+          "anchorSha256": "7362955b00015fc7194d7ed6bea734f4923b7732c9f597fb9a137339ad420b16"
+        },
+        {
+          "chapterId": "qq-28140693",
+          "chapterSha256": "4c19a79a2d5af1a3acc4dc23e891400cd875615fa26f06df7502547dd035a038",
+          "start": 1610,
+          "end": 1636,
+          "anchorSha256": "88c67413816fd79cd704102b127c6b109f627c56571c22d193f61ac2d87e1f6d"
+        },
+        {
+          "chapterId": "qq-28140693",
+          "chapterSha256": "4c19a79a2d5af1a3acc4dc23e891400cd875615fa26f06df7502547dd035a038",
+          "start": 1444,
+          "end": 1702,
+          "anchorSha256": "74a021fab532b36f3b3a0f49333fc5a6ec69462007ae4b614e03a08dea2006e8"
+        }
+      ],
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "qq28133895三名青年自认同一三首变异狼，qq28140693合三为一；并非银月或三个无关主体。T0出生、修成分身年月及所在地未给，不据外貌固定开篇人物。"
+      },
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0206-object-0026",
+      "batchId": "batch-0206",
+      "reportHash": "74f1b060ede6daeb204dedcd7f417bb26e58cfec8a5bb38afa4eb784a6ee5cf5",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-three-headed-moon-wolf"
+      ],
+      "reason": "三首月狼是变异个例，三元婴分身非全族标准；保留个体索引和未能定位的T0时间。",
+      "evidence": [
+        {
+          "chapterId": "qq-28133895",
+          "chapterSha256": "ce50d1711a5f0e7624be033ced12d72dc89930afc5372db685e3e94b39282aef",
+          "start": 57,
+          "end": 183,
+          "anchorSha256": "7362955b00015fc7194d7ed6bea734f4923b7732c9f597fb9a137339ad420b16"
+        },
+        {
+          "chapterId": "qq-28140693",
+          "chapterSha256": "4c19a79a2d5af1a3acc4dc23e891400cd875615fa26f06df7502547dd035a038",
+          "start": 1444,
+          "end": 1702,
+          "anchorSha256": "74a021fab532b36f3b3a0f49333fc5a6ec69462007ae4b614e03a08dea2006e8"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0206-object-0028",
+      "batchId": "batch-0206",
+      "reportHash": "74f1b060ede6daeb204dedcd7f417bb26e58cfec8a5bb38afa4eb784a6ee5cf5",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon-phoenix-community"
+      ],
+      "reason": "黑凤族血脉及化形体制有本场表现；这次入谷和所用黑火不成为所有族人的开篇已学技能。",
+      "evidence": [
+        {
+          "chapterId": "qq-28116190",
+          "chapterSha256": "66b8408f6e8b703ea1f2892a319463edf6feb33c76db7983d09123a83a1c9a47",
+          "start": 2796,
+          "end": 2829,
+          "anchorSha256": "af06c83bb069e03c68438ed5f53e82544f41d5aa75027196b1fdf41652cb4db4"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0206-issue-0009",
+      "batchId": "batch-0206",
+      "reportHash": "74f1b060ede6daeb204dedcd7f417bb26e58cfec8a5bb38afa4eb784a6ee5cf5",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-demon-xiaohong"
+      ],
+      "reason": "天樱被寰当作灵族对手，宫装少妇自报筱虹于后章，确为不同主体；不用相似描写合并。",
+      "evidence": [
+        {
+          "chapterId": "qq-28133895",
+          "chapterSha256": "ce50d1711a5f0e7624be033ced12d72dc89930afc5372db685e3e94b39282aef",
+          "start": 271,
+          "end": 330,
+          "anchorSha256": "1c5141c88a51a71b9bbb9cf5126c49058d09aeb102bf5190912b7744347bc80c"
+        },
+        {
+          "chapterId": "qq-28108023",
+          "chapterSha256": "e0678057272f2bc56aaa1452e741228dde3d443df12c25ebc50a1384e15cc6d5",
+          "start": 944,
+          "end": 1000,
+          "anchorSha256": "111cb359857f55e379c162022fea4a8437d25bce80cacc8fb6155e3640381db3"
+        },
+        {
+          "chapterId": "qq-28643714",
+          "chapterSha256": "4f481bd6c295266d1405f5f4b0fa99761abe159a6c86866ae1e5a7aa599e5b0e",
+          "start": 101,
+          "end": 950,
+          "anchorSha256": "93f72839c2bd8ef9fdd4d0f34024788c9977857936eeaefaaea7cebda155de16"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0215-object-0011",
+      "batchId": "batch-0215",
+      "reportHash": "a64b70e1c38391cee89457bbd8fc7518d097c00616399db37b34e3415ec40c49",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-demon-xiaohong"
+      ],
+      "reason": "自报姓名接通早先筱姓少妇；本章化神后期、任务同行和谋血交易属于该后期时点。",
+      "evidence": [
+        {
+          "chapterId": "qq-28643714",
+          "chapterSha256": "4f481bd6c295266d1405f5f4b0fa99761abe159a6c86866ae1e5a7aa599e5b0e",
+          "start": 529,
+          "end": 724,
+          "anchorSha256": "181f6fbe4bcf7fe94f3763a5757d991bb68cbc3d247b4180e5d235b59dd88f73"
+        },
+        {
+          "chapterId": "qq-28654805",
+          "chapterSha256": "cddc3b5b28579bcb11e095a9bfc46b16dab460839848020fea9930f395f55478",
+          "start": 924,
+          "end": 957,
+          "anchorSha256": "d0c19caf50b23dda99da40d5d1a0796a673666b4d76ba07be05a2d2dae3829cc"
+        },
+        {
+          "chapterId": "qq-28667468",
+          "chapterSha256": "a212d04153055e9d0c62ca6d6f9fd8725821d38850d95202a91b3d28dcbfb142",
+          "start": 2033,
+          "end": 2211,
+          "anchorSha256": "fc83e415b7307869130d24ca521413995fd9c0528aac690825417bddc39326a1"
+        },
+        {
+          "chapterId": "qq-28643714",
+          "chapterSha256": "4f481bd6c295266d1405f5f4b0fa99761abe159a6c86866ae1e5a7aa599e5b0e",
+          "start": 101,
+          "end": 950,
+          "anchorSha256": "93f72839c2bd8ef9fdd4d0f34024788c9977857936eeaefaaea7cebda155de16"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0215-object-0026",
+      "batchId": "batch-0215",
+      "reportHash": "a64b70e1c38391cee89457bbd8fc7518d097c00616399db37b34e3415ec40c49",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-black-flame-pill"
+      ],
+      "reason": "筱虹声称有三颗并许作报酬，后章实见三颗；这些具体丹和交易不属于T0公库存货。",
+      "evidence": [
+        {
+          "chapterId": "qq-28654805",
+          "chapterSha256": "cddc3b5b28579bcb11e095a9bfc46b16dab460839848020fea9930f395f55478",
+          "start": 1580,
+          "end": 1713,
+          "anchorSha256": "169956d8d4d540c70f36ff81189b794976f3e5e251d10914631bf4915847f699"
+        },
+        {
+          "chapterId": "qq-28654805",
+          "chapterSha256": "cddc3b5b28579bcb11e095a9bfc46b16dab460839848020fea9930f395f55478",
+          "start": 1744,
+          "end": 1826,
+          "anchorSha256": "c287b4853271896123fe619e22741acfcbcd3526f0a5a4be234ce4ee09ec6220"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0215-object-0041",
+      "batchId": "batch-0215",
+      "reportHash": "a64b70e1c38391cee89457bbd8fc7518d097c00616399db37b34e3415ec40c49",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon-phoenix-community"
+      ],
+      "reason": "黑凤为凤族旁支、七大妖族之一；天凤真血纯度和感应强弱是当前个体比较，不判黑凤人人胜过叶家。",
+      "evidence": [
+        {
+          "chapterId": "qq-28654805",
+          "chapterSha256": "cddc3b5b28579bcb11e095a9bfc46b16dab460839848020fea9930f395f55478",
+          "start": 339,
+          "end": 489,
+          "anchorSha256": "2c225178ce32eadcc5a25b281652e59bbc5dea0e9a3bd8256a6322b1e44bc6bd"
+        },
+        {
+          "chapterId": "qq-28654805",
+          "chapterSha256": "cddc3b5b28579bcb11e095a9bfc46b16dab460839848020fea9930f395f55478",
+          "start": 1019,
+          "end": 1146,
+          "anchorSha256": "668308b3eb8ca9bd2541f44395e2f8079313f2c4f72646c9ddf6c798a42d2af7"
+        },
+        {
+          "chapterId": "qq-28667468",
+          "chapterSha256": "a212d04153055e9d0c62ca6d6f9fd8725821d38850d95202a91b3d28dcbfb142",
+          "start": 1960,
+          "end": 2032,
+          "anchorSha256": "8e4eadad617e6b95dc4ee81773ac58183800de4e2367c1ee5eecf1836bf0ec9f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0215-object-0054",
+      "batchId": "batch-0215",
+      "reportHash": "a64b70e1c38391cee89457bbd8fc7518d097c00616399db37b34e3415ec40c49",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon7-seven-territories"
+      ],
+      "reason": "陇东所说七大妖族是共同辖境王族语境，复用七地制度，不另造七个实体或全部灵界物种清单。",
+      "evidence": [
+        {
+          "chapterId": "qq-28654805",
+          "chapterSha256": "cddc3b5b28579bcb11e095a9bfc46b16dab460839848020fea9930f395f55478",
+          "start": 339,
+          "end": 489,
+          "anchorSha256": "2c225178ce32eadcc5a25b281652e59bbc5dea0e9a3bd8256a6322b1e44bc6bd"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0215-object-0057",
+      "batchId": "batch-0215",
+      "reportHash": "a64b70e1c38391cee89457bbd8fc7518d097c00616399db37b34e3415ec40c49",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-black-phoenix-flame"
+      ],
+      "reason": "筱虹用自身修成黑炎焰对特定怪鸟风雷奏效；不可写成对任何风雷永久免疫。",
+      "evidence": [
+        {
+          "chapterId": "qq-28667468",
+          "chapterSha256": "a212d04153055e9d0c62ca6d6f9fd8725821d38850d95202a91b3d28dcbfb142",
+          "start": 1960,
+          "end": 2032,
+          "anchorSha256": "8e4eadad617e6b95dc4ee81773ac58183800de4e2367c1ee5eecf1836bf0ec9f"
+        },
+        {
+          "chapterId": "qq-28667468",
+          "chapterSha256": "a212d04153055e9d0c62ca6d6f9fd8725821d38850d95202a91b3d28dcbfb142",
+          "start": 955,
+          "end": 1071,
+          "anchorSha256": "44742fb8b874cf9a3624eabc05692c2bffc99ba09596b623f45003bc819e5a8d"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0215-object-0061",
+      "batchId": "batch-0215",
+      "reportHash": "a64b70e1c38391cee89457bbd8fc7518d097c00616399db37b34e3415ec40c49",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "叶颖血脉与谋夺计划系这一同行任务；七八分只是筱虹自估，尚无抽血成功事实。",
+      "evidence": [
+        {
+          "chapterId": "qq-28654805",
+          "chapterSha256": "cddc3b5b28579bcb11e095a9bfc46b16dab460839848020fea9930f395f55478",
+          "start": 958,
+          "end": 1018,
+          "anchorSha256": "13e7f92888ae981771cfd2e04bd6dcef18f96a8266ab176f53eef4fbf90845e8"
+        },
+        {
+          "chapterId": "qq-28654805",
+          "chapterSha256": "cddc3b5b28579bcb11e095a9bfc46b16dab460839848020fea9930f395f55478",
+          "start": 1942,
+          "end": 2008,
+          "anchorSha256": "f23245c1104cef20d4e2128e07ad43242cf89f4ef12b81d7a14421bbc7827542"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0215-fact-0019",
+      "batchId": "batch-0215",
+      "reportHash": "a64b70e1c38391cee89457bbd8fc7518d097c00616399db37b34e3415ec40c49",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-demon-xiaohong"
+      ],
+      "reason": "叙述明确黑裙少妇是兽潮后那位筱姓女子，且其自报筱虹，别名闭合；任务记忆不进T0。",
+      "evidence": [
+        {
+          "chapterId": "qq-28643714",
+          "chapterSha256": "4f481bd6c295266d1405f5f4b0fa99761abe159a6c86866ae1e5a7aa599e5b0e",
+          "start": 261,
+          "end": 300,
+          "anchorSha256": "456bf49bc89220e1c449264a1b006efd447f262740bcf4291b1391bf63490a96"
+        },
+        {
+          "chapterId": "qq-28643714",
+          "chapterSha256": "4f481bd6c295266d1405f5f4b0fa99761abe159a6c86866ae1e5a7aa599e5b0e",
+          "start": 1251,
+          "end": 1276,
+          "anchorSha256": "8e8091fdc4f51d03868dac243cbbdad041d6a53b1aa4dc73ba38ad90f83e5321"
+        },
+        {
+          "chapterId": "qq-28643714",
+          "chapterSha256": "4f481bd6c295266d1405f5f4b0fa99761abe159a6c86866ae1e5a7aa599e5b0e",
+          "start": 101,
+          "end": 950,
+          "anchorSha256": "93f72839c2bd8ef9fdd4d0f34024788c9977857936eeaefaaea7cebda155de16"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0215-fact-0028",
+      "batchId": "batch-0215",
+      "reportHash": "a64b70e1c38391cee89457bbd8fc7518d097c00616399db37b34e3415ec40c49",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "这是筱虹感应并判断叶颖血脉的对话，不是所有角色事先共享的真灵世家情报。",
+      "evidence": [
+        {
+          "chapterId": "qq-28654805",
+          "chapterSha256": "cddc3b5b28579bcb11e095a9bfc46b16dab460839848020fea9930f395f55478",
+          "start": 958,
+          "end": 1018,
+          "anchorSha256": "13e7f92888ae981771cfd2e04bd6dcef18f96a8266ab176f53eef4fbf90845e8"
+        },
+        {
+          "chapterId": "qq-28654805",
+          "chapterSha256": "cddc3b5b28579bcb11e095a9bfc46b16dab460839848020fea9930f395f55478",
+          "start": 1019,
+          "end": 1146,
+          "anchorSha256": "668308b3eb8ca9bd2541f44395e2f8079313f2c4f72646c9ddf6c798a42d2af7"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0215-fact-0029",
+      "batchId": "batch-0215",
+      "reportHash": "a64b70e1c38391cee89457bbd8fc7518d097c00616399db37b34e3415ec40c49",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "计划在完成公事后行事、许三丹及自估成功率，尚未交丹或实施；不生成开篇债务。",
+      "evidence": [
+        {
+          "chapterId": "qq-28654805",
+          "chapterSha256": "cddc3b5b28579bcb11e095a9bfc46b16dab460839848020fea9930f395f55478",
+          "start": 1424,
+          "end": 1488,
+          "anchorSha256": "c657a992fa35439d9ae8074386dd2dd91d66616d6718d9de93caf30fe2197d76"
+        },
+        {
+          "chapterId": "qq-28654805",
+          "chapterSha256": "cddc3b5b28579bcb11e095a9bfc46b16dab460839848020fea9930f395f55478",
+          "start": 1580,
+          "end": 1713,
+          "anchorSha256": "169956d8d4d540c70f36ff81189b794976f3e5e251d10914631bf4915847f699"
+        },
+        {
+          "chapterId": "qq-28654805",
+          "chapterSha256": "cddc3b5b28579bcb11e095a9bfc46b16dab460839848020fea9930f395f55478",
+          "start": 1942,
+          "end": 2008,
+          "anchorSha256": "f23245c1104cef20d4e2128e07ad43242cf89f4ef12b81d7a14421bbc7827542"
+        },
+        {
+          "chapterId": "qq-28654805",
+          "chapterSha256": "cddc3b5b28579bcb11e095a9bfc46b16dab460839848020fea9930f395f55478",
+          "start": 1827,
+          "end": 1941,
+          "anchorSha256": "b9ba7c5420f4e8fa8ccb7ce7f785f1d2bddff37c62307422493e0817da3a2b55"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0215-issue-0015",
+      "batchId": "batch-0215",
+      "reportHash": "a64b70e1c38391cee89457bbd8fc7518d097c00616399db37b34e3415ec40c49",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "维持自估而非客观成功率，真血深融躯体使抽取困难；这场企图不能作为通用剥离配方。",
+      "evidence": [
+        {
+          "chapterId": "qq-28654805",
+          "chapterSha256": "cddc3b5b28579bcb11e095a9bfc46b16dab460839848020fea9930f395f55478",
+          "start": 1942,
+          "end": 2008,
+          "anchorSha256": "f23245c1104cef20d4e2128e07ad43242cf89f4ef12b81d7a14421bbc7827542"
+        },
+        {
+          "chapterId": "qq-28654805",
+          "chapterSha256": "cddc3b5b28579bcb11e095a9bfc46b16dab460839848020fea9930f395f55478",
+          "start": 1827,
+          "end": 1941,
+          "anchorSha256": "b9ba7c5420f4e8fa8ccb7ce7f785f1d2bddff37c62307422493e0817da3a2b55"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0216-object-0003",
+      "batchId": "batch-0216",
+      "reportHash": "083de436389ddca7729e175758526f59b571ddd30d69b4357e2bb1fb7a896aac",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "辨草、分果和同行经历为这次蛮荒旅途；临时掌握的韩立飞剑与分得灵果均不入开篇库存。",
+      "evidence": [
+        {
+          "chapterId": "qq-28684838",
+          "chapterSha256": "1763bf0c484f7d3a3b75e6b8cd84a64288e4bcd3da1714da45a651398a3996fa",
+          "start": 2535,
+          "end": 2560,
+          "anchorSha256": "f551f246d0d485079b8baa09ab6806041cd7ae66cef02f7f2795ff62c21d4efe"
+        },
+        {
+          "chapterId": "qq-28696249",
+          "chapterSha256": "9c41aaa4382b87c423f5521eeed429c552b45a437b35acf1565a7dd4ece41d94",
+          "start": 2711,
+          "end": 2807,
+          "anchorSha256": "3e397732a754a55dbc54258d673a534c45bda92906483387c1335a5b1fdaf7b9"
+        },
+        {
+          "chapterId": "qq-28724086",
+          "chapterSha256": "7b4ea128f04b7cdad1632bf348e212e43882dbc98e7feb3e2ec88bbb7e67f6b7",
+          "start": 2195,
+          "end": 2248,
+          "anchorSha256": "7c65d43220ec6fe12b98bca3944fb5c435db8488ed24fb396791732ec5a7aa47"
+        },
+        {
+          "chapterId": "qq-28727291",
+          "chapterSha256": "f54c8e81d526dd8c579cbb12c6b326277241b9346cb78fa471177ea46a58c691",
+          "start": 70,
+          "end": 121,
+          "anchorSha256": "2efaaaf4155637aa9e93d8859a906a5ac55268b609d03b96ea1a7e57d86c9231"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0216-object-0032",
+      "batchId": "batch-0216",
+      "reportHash": "083de436389ddca7729e175758526f59b571ddd30d69b4357e2bb1fb7a896aac",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon-phoenix-community"
+      ],
+      "reason": "黑凤族称谓复用同一族群；本次与叶颖交换灵果的财力比较只适用于参与者。",
+      "evidence": [
+        {
+          "chapterId": "qq-28727291",
+          "chapterSha256": "f54c8e81d526dd8c579cbb12c6b326277241b9346cb78fa471177ea46a58c691",
+          "start": 70,
+          "end": 121,
+          "anchorSha256": "2efaaaf4155637aa9e93d8859a906a5ac55268b609d03b96ea1a7e57d86c9231"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0216-fact-0045",
+      "batchId": "batch-0216",
+      "reportHash": "083de436389ddca7729e175758526f59b571ddd30d69b4357e2bb1fb7a896aac",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "黑凤少妇是筱虹，参与分果换材的具体事件在T0后，不把此任务作为族史已发生事实。",
+      "evidence": [
+        {
+          "chapterId": "qq-28727291",
+          "chapterSha256": "f54c8e81d526dd8c579cbb12c6b326277241b9346cb78fa471177ea46a58c691",
+          "start": 70,
+          "end": 121,
+          "anchorSha256": "2efaaaf4155637aa9e93d8859a906a5ac55268b609d03b96ea1a7e57d86c9231"
+        },
+        {
+          "chapterId": "qq-28724086",
+          "chapterSha256": "7b4ea128f04b7cdad1632bf348e212e43882dbc98e7feb3e2ec88bbb7e67f6b7",
+          "start": 2195,
+          "end": 2248,
+          "anchorSha256": "7c65d43220ec6fe12b98bca3944fb5c435db8488ed24fb396791732ec5a7aa47"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0217-object-0003",
+      "batchId": "batch-0217",
+      "reportHash": "933c7c6e36e94377c3e4dbc573293ff66dc34471f1d3a5d3d4b8509fbba11c5b",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "筱虹变黑凤与袭击者作战是后期遇险；形态变化不复制库存或增加第二人物。",
+      "evidence": [
+        {
+          "chapterId": "qq-28737633",
+          "chapterSha256": "c137cceb8969cd4e33bde9d08b3e2eabee6b1e475bea7c4bd5f4ff496c6b39e7",
+          "start": 293,
+          "end": 365,
+          "anchorSha256": "d26cbd3f95db5ac482bd9940c123cf0969a776b2d6eb2bdef17312e7d76ac076"
+        },
+        {
+          "chapterId": "qq-28737633",
+          "chapterSha256": "c137cceb8969cd4e33bde9d08b3e2eabee6b1e475bea7c4bd5f4ff496c6b39e7",
+          "start": 366,
+          "end": 400,
+          "anchorSha256": "d36271e3dd8ef771982c7dcb33337ec06e8b72557ffb91eb8c8f2d0d7f794a73"
+        },
+        {
+          "chapterId": "qq-28749999",
+          "chapterSha256": "cc3a8670cf1ec59e658a1cfb9096aa734234408daea526ecd5686cf1dc74237e",
+          "start": 2847,
+          "end": 2888,
+          "anchorSha256": "3f568bc44ab536fbb4bfa3a290379a5d9d54ccae1aaf16e3e6b4fbe53cd8c6a5"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0217-object-0012",
+      "batchId": "batch-0217",
+      "reportHash": "933c7c6e36e94377c3e4dbc573293ff66dc34471f1d3a5d3d4b8509fbba11c5b",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon-phoenix-community"
+      ],
+      "reason": "紫云认出黑凤族并称呼道友，族群既存；并非证明紫云城与黑凤族有开篇同盟。",
+      "evidence": [
+        {
+          "chapterId": "qq-28737633",
+          "chapterSha256": "c137cceb8969cd4e33bde9d08b3e2eabee6b1e475bea7c4bd5f4ff496c6b39e7",
+          "start": 1356,
+          "end": 1443,
+          "anchorSha256": "ea3dce074e3003ebc82d3fe247edc9932589a966922d5a36f1fbfb6573c90391"
+        },
+        {
+          "chapterId": "qq-28749999",
+          "chapterSha256": "cc3a8670cf1ec59e658a1cfb9096aa734234408daea526ecd5686cf1dc74237e",
+          "start": 2847,
+          "end": 2888,
+          "anchorSha256": "3f568bc44ab536fbb4bfa3a290379a5d9d54ccae1aaf16e3e6b4fbe53cd8c6a5"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0217-fact-0011",
+      "batchId": "batch-0217",
+      "reportHash": "933c7c6e36e94377c3e4dbc573293ff66dc34471f1d3a5d3d4b8509fbba11c5b",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "筱虹向紫云询问并因陌生名号迟疑是特定相遇，不建立T0旧识。",
+      "evidence": [
+        {
+          "chapterId": "qq-28737633",
+          "chapterSha256": "c137cceb8969cd4e33bde9d08b3e2eabee6b1e475bea7c4bd5f4ff496c6b39e7",
+          "start": 293,
+          "end": 365,
+          "anchorSha256": "d26cbd3f95db5ac482bd9940c123cf0969a776b2d6eb2bdef17312e7d76ac076"
+        },
+        {
+          "chapterId": "qq-28737633",
+          "chapterSha256": "c137cceb8969cd4e33bde9d08b3e2eabee6b1e475bea7c4bd5f4ff496c6b39e7",
+          "start": 366,
+          "end": 400,
+          "anchorSha256": "d36271e3dd8ef771982c7dcb33337ec06e8b72557ffb91eb8c8f2d0d7f794a73"
+        },
+        {
+          "chapterId": "qq-28737633",
+          "chapterSha256": "c137cceb8969cd4e33bde9d08b3e2eabee6b1e475bea7c4bd5f4ff496c6b39e7",
+          "start": 1356,
+          "end": 1443,
+          "anchorSha256": "ea3dce074e3003ebc82d3fe247edc9932589a966922d5a36f1fbfb6573c90391"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0217-fact-0012",
+      "batchId": "batch-0217",
+      "reportHash": "933c7c6e36e94377c3e4dbc573293ff66dc34471f1d3a5d3d4b8509fbba11c5b",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-black-phoenix-flame"
+      ],
+      "reason": "黑色羽毛、褐冠、绿目和三四丈是本次筱虹原形；族群血脉有据，尺寸不可作全部黑凤统一数值。",
+      "evidence": [
+        {
+          "chapterId": "qq-28749999",
+          "chapterSha256": "cc3a8670cf1ec59e658a1cfb9096aa734234408daea526ecd5686cf1dc74237e",
+          "start": 2847,
+          "end": 2888,
+          "anchorSha256": "3f568bc44ab536fbb4bfa3a290379a5d9d54ccae1aaf16e3e6b4fbe53cd8c6a5"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0218-object-0004",
+      "batchId": "batch-0218",
+      "reportHash": "4ceefa13e88b3cb34028adc0e699037b641ba3b660e70418168bd5cb1689e049",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "与陇东的协商和逃离木族是后期行动；族务优先是她当场取舍，不预先固定将来选择。",
+      "evidence": [
+        {
+          "chapterId": "qq-28789988",
+          "chapterSha256": "20e739868bed6703995c37f71df1c36aea6710114805260ae2104f528efaabf2",
+          "start": 1352,
+          "end": 1423,
+          "anchorSha256": "630d03a9339ce76d0e762cd3af41c08889c7ae918d518afd7f5e46ba085ac882"
+        },
+        {
+          "chapterId": "qq-28806732",
+          "chapterSha256": "1ac9f146705e1d8104635d35a80c1deafc7b9d88ff92d46eae7a8f622e0b6794",
+          "start": 573,
+          "end": 649,
+          "anchorSha256": "30725608efa98fa984d18af888175c0dc0adfc9500e71565b0346725adb7fc15"
+        },
+        {
+          "chapterId": "qq-28793511",
+          "chapterSha256": "9ae4fb66768732574235e12db7574c4e6439e2e763e1231d0494d7885d4e7ff7",
+          "start": 1354,
+          "end": 1426,
+          "anchorSha256": "b76030228fdeb8bcf9f833a1ac108fdd485e34eb868decb3f1f43133c27112af"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0218-object-0013",
+      "batchId": "batch-0218",
+      "reportHash": "4ceefa13e88b3cb34028adc0e699037b641ba3b660e70418168bd5cb1689e049",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "木族卧底是这次情报任务涉及的部署，没有其T0起始日期，不在开篇种下已通报的间谍网。",
+      "evidence": [
+        {
+          "chapterId": "qq-28793511",
+          "chapterSha256": "9ae4fb66768732574235e12db7574c4e6439e2e763e1231d0494d7885d4e7ff7",
+          "start": 1354,
+          "end": 1426,
+          "anchorSha256": "b76030228fdeb8bcf9f833a1ac108fdd485e34eb868decb3f1f43133c27112af"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0218-fact-0022",
+      "batchId": "batch-0218",
+      "reportHash": "4ceefa13e88b3cb34028adc0e699037b641ba3b660e70418168bd5cb1689e049",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "筱虹表态以族中事项优先并和陇东分配目标，保留为后期动机参考，不成为既定将来行动。",
+      "evidence": [
+        {
+          "chapterId": "qq-28789988",
+          "chapterSha256": "20e739868bed6703995c37f71df1c36aea6710114805260ae2104f528efaabf2",
+          "start": 1770,
+          "end": 1825,
+          "anchorSha256": "5e23825de7798f304abb7e8c9847fabda48c09716f598587f7bf7e3f19a52fd6"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0219-object-0007",
+      "batchId": "batch-0219",
+      "reportHash": "ae3b89c2b40831e7643fc6212d8311572a20d8ab1951dab00cafc06fc3f21c6a",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "索要天凤翎及阻韩后遭压制为任务发展；不回填开篇伤势、所有权或敌对关系。",
+      "evidence": [
+        {
+          "chapterId": "qq-28854121",
+          "chapterSha256": "481d15735820a4bc22b7f2e89b8319a21baac5ee8aeb69f930d35864c7f04bde",
+          "start": 1820,
+          "end": 1831,
+          "anchorSha256": "210bcb4a307defb2e3ad7f97dc172f710cfdddd888a941da0d4ce9fb5234cefe"
+        },
+        {
+          "chapterId": "qq-28854121",
+          "chapterSha256": "481d15735820a4bc22b7f2e89b8319a21baac5ee8aeb69f930d35864c7f04bde",
+          "start": 1777,
+          "end": 1819,
+          "anchorSha256": "55e7527680afd0a3226e6c903dd9b75e81a5cb24708894ca9b9dd26900d33b25"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0219-object-0014",
+      "batchId": "batch-0219",
+      "reportHash": "ae3b89c2b40831e7643fc6212d8311572a20d8ab1951dab00cafc06fc3f21c6a",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon-phoenix-community"
+      ],
+      "reason": "黑凤嫡系只是族内身份概念；本次人物与任务物资归属按后期记载，不把族人都归王个人所有。",
+      "evidence": [
+        {
+          "chapterId": "qq-28854121",
+          "chapterSha256": "481d15735820a4bc22b7f2e89b8319a21baac5ee8aeb69f930d35864c7f04bde",
+          "start": 1820,
+          "end": 1831,
+          "anchorSha256": "210bcb4a307defb2e3ad7f97dc172f710cfdddd888a941da0d4ce9fb5234cefe"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0219-object-0038",
+      "batchId": "batch-0219",
+      "reportHash": "ae3b89c2b40831e7643fc6212d8311572a20d8ab1951dab00cafc06fc3f21c6a",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-assets"
+      ],
+      "reason": "墨色古境原字保留，随后明说镜面可判断为镜类器物；不默改源文，不将这面后期法器放入开篇。",
+      "evidence": [
+        {
+          "chapterId": "qq-28854121",
+          "chapterSha256": "481d15735820a4bc22b7f2e89b8319a21baac5ee8aeb69f930d35864c7f04bde",
+          "start": 3033,
+          "end": 3129,
+          "anchorSha256": "1e25cdc6049eae3d6c23160ad176e32136cacdc8c0a5fbd5fcc47a3c2e6f6dd3"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0219-object-0039",
+      "batchId": "batch-0219",
+      "reportHash": "ae3b89c2b40831e7643fc6212d8311572a20d8ab1951dab00cafc06fc3f21c6a",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-assets"
+      ],
+      "reason": "筱虹放出白丝网对敌，属于当时施法和资产；不因通用丝网外观绑定到其他族器物。",
+      "evidence": [
+        {
+          "chapterId": "qq-28854121",
+          "chapterSha256": "481d15735820a4bc22b7f2e89b8319a21baac5ee8aeb69f930d35864c7f04bde",
+          "start": 3130,
+          "end": 3186,
+          "anchorSha256": "804785f496d73c8b3a00d2ed59d2279edfd87d941896c1a62e31e6b7be667ba9"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0219-fact-0033",
+      "batchId": "batch-0219",
+      "reportHash": "ae3b89c2b40831e7643fc6212d8311572a20d8ab1951dab00cafc06fc3f21c6a",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "韩立与筱虹此时对峙并交战，不能回溯成十岁韩立已结仇或必有此战。",
+      "evidence": [
+        {
+          "chapterId": "qq-28854121",
+          "chapterSha256": "481d15735820a4bc22b7f2e89b8319a21baac5ee8aeb69f930d35864c7f04bde",
+          "start": 1820,
+          "end": 1831,
+          "anchorSha256": "210bcb4a307defb2e3ad7f97dc172f710cfdddd888a941da0d4ce9fb5234cefe"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0220-object-0023",
+      "batchId": "batch-0220",
+      "reportHash": "dfff91a1b445d376ee6bd3433c3f750305f21c0be05a056edbc867f918e2cc00",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon7-black-flame-pill"
+      ],
+      "reason": "黑凤本命火参与炼丹的必要条件有叙述明确说明；采用工艺限制，具体三丹仍属后期个人资产。",
+      "evidence": [
+        {
+          "chapterId": "qq-28938743",
+          "chapterSha256": "544dfe260b0684c3f6213b4f2a6380955aebf664fde474d5ebb016967e2fbd68",
+          "start": 200,
+          "end": 314,
+          "anchorSha256": "6c588777a9cfd637e867c9b3c800803a8dc2e16e973d0ad6df5a2d584c91ed53"
+        },
+        {
+          "chapterId": "qq-28938743",
+          "chapterSha256": "544dfe260b0684c3f6213b4f2a6380955aebf664fde474d5ebb016967e2fbd68",
+          "start": 1162,
+          "end": 1213,
+          "anchorSha256": "7b30588fe8f9944fe4cdabadaa3cddd598b986cc89412993c71c84a2350c2e79"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0220-object-0024",
+      "batchId": "batch-0220",
+      "reportHash": "dfff91a1b445d376ee6bd3433c3f750305f21c0be05a056edbc867f918e2cc00",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-assets"
+      ],
+      "reason": "储物镯被韩立收走是后期已发生事件，不能令T0筱虹失去尚未校定的财物。",
+      "evidence": [
+        {
+          "chapterId": "qq-28938743",
+          "chapterSha256": "544dfe260b0684c3f6213b4f2a6380955aebf664fde474d5ebb016967e2fbd68",
+          "start": 53,
+          "end": 68,
+          "anchorSha256": "6dc7a880fcf844013b16db0e2a0a70514e47b53bc96804caab871b76fa036ed5"
+        },
+        {
+          "chapterId": "qq-28897240",
+          "chapterSha256": "aa202b74dfbe6ac930115e5aac32aae6dce003d840221e8925e119430c66173f",
+          "start": 2464,
+          "end": 2558,
+          "anchorSha256": "8a268474e5de3c52fd36c7941618c0172f311bd2cc12544abed076b959f93155"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0220-object-0056",
+      "batchId": "batch-0220",
+      "reportHash": "dfff91a1b445d376ee6bd3433c3f750305f21c0be05a056edbc867f918e2cc00",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon7-seven-territories"
+      ],
+      "reason": "七大妖族地位说明取材渠道优势；不能由此让任意族人无成本产生稀有材料。",
+      "evidence": [
+        {
+          "chapterId": "qq-28938743",
+          "chapterSha256": "544dfe260b0684c3f6213b4f2a6380955aebf664fde474d5ebb016967e2fbd68",
+          "start": 200,
+          "end": 314,
+          "anchorSha256": "6c588777a9cfd637e867c9b3c800803a8dc2e16e973d0ad6df5a2d584c91ed53"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0220-object-0069",
+      "batchId": "batch-0220",
+      "reportHash": "dfff91a1b445d376ee6bd3433c3f750305f21c0be05a056edbc867f918e2cc00",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon7-black-flame-pill"
+      ],
+      "reason": "化神以上且修成本命火、千年一颗是叙述给出的基本限制；不是每日采集或瞬时刷新丹药。",
+      "evidence": [
+        {
+          "chapterId": "qq-28938743",
+          "chapterSha256": "544dfe260b0684c3f6213b4f2a6380955aebf664fde474d5ebb016967e2fbd68",
+          "start": 1214,
+          "end": 1305,
+          "anchorSha256": "43e004a81fb772b6bd7c586dddb797de0f21946320fb8886ed3f527eb6448241"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0220-fact-0038",
+      "batchId": "batch-0220",
+      "reportHash": "dfff91a1b445d376ee6bd3433c3f750305f21c0be05a056edbc867f918e2cc00",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-assets"
+      ],
+      "reason": "元磁山镇压与收镯是韩立这次行动，不改开篇位置、健康、敌友或库存。",
+      "evidence": [
+        {
+          "chapterId": "qq-28938743",
+          "chapterSha256": "544dfe260b0684c3f6213b4f2a6380955aebf664fde474d5ebb016967e2fbd68",
+          "start": 126,
+          "end": 161,
+          "anchorSha256": "6c1103e5c1e3fc8fa12d86abb1d191fa85834889ef17be87ba869a0bfe25f008"
+        },
+        {
+          "chapterId": "qq-28938743",
+          "chapterSha256": "544dfe260b0684c3f6213b4f2a6380955aebf664fde474d5ebb016967e2fbd68",
+          "start": 69,
+          "end": 108,
+          "anchorSha256": "fe9ebdd2fc156066c184135c155df333ce2bfa89576ba200b797a541e6c58d04"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0220-fact-0039",
+      "batchId": "batch-0220",
+      "reportHash": "dfff91a1b445d376ee6bd3433c3f750305f21c0be05a056edbc867f918e2cc00",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-black-flame-pill"
+      ],
+      "reason": "只黑凤能以本命火炼此丹、其积累有限；三颗增两成是韩立所处突破条件的描述，不对所有人固定加20%。",
+      "evidence": [
+        {
+          "chapterId": "qq-28938743",
+          "chapterSha256": "544dfe260b0684c3f6213b4f2a6380955aebf664fde474d5ebb016967e2fbd68",
+          "start": 200,
+          "end": 314,
+          "anchorSha256": "6c588777a9cfd637e867c9b3c800803a8dc2e16e973d0ad6df5a2d584c91ed53"
+        },
+        {
+          "chapterId": "qq-28938743",
+          "chapterSha256": "544dfe260b0684c3f6213b4f2a6380955aebf664fde474d5ebb016967e2fbd68",
+          "start": 1162,
+          "end": 1213,
+          "anchorSha256": "7b30588fe8f9944fe4cdabadaa3cddd598b986cc89412993c71c84a2350c2e79"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0284-object-0037",
+      "batchId": "batch-0284",
+      "reportHash": "a4d723dc58a9bc245a219d38bb50d3e75a05fd23e7702ea105dc5dbc1dc72fe9",
+      "disposition": "bounded-uncertainty",
+      "targetIds": [
+        "demon7-yinguang-reference"
+      ],
+      "reason": "银光含部分银月血脉但并非出身银月狼族；曾随敖啸千年是回述，长老职位及T0具体境界日期未足，保留唯一资料索引。",
+      "evidence": [
+        {
+          "chapterId": "qq-32897639",
+          "chapterSha256": "c0c8d9dd20779f3e06382b2f7359ca10659424685af68b758df3a1fcd9ead625",
+          "start": 2533,
+          "end": 2619,
+          "anchorSha256": "9d3294b49f80ee4d0786b65d52985db0f1156c92c2e8335cfeb5c4b4eda1b7ad"
+        },
+        {
+          "chapterId": "qq-32897639",
+          "chapterSha256": "c0c8d9dd20779f3e06382b2f7359ca10659424685af68b758df3a1fcd9ead625",
+          "start": 522,
+          "end": 689,
+          "anchorSha256": "f12a6b6111548044f71d16f40e921aecf379d588a1916a1a4011a0713977b475"
+        }
+      ],
+      "uncertainty": {
+        "kind": "source-underdetermined",
+        "boundary": "含银月部分血脉但并非出身该族，曾在敖啸门下千年；确切T0任职、境界、居地仍缺独立时间锚，不能将天渊候补/长老位置硬套。"
+      },
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0284-object-0041",
+      "batchId": "batch-0284",
+      "reportHash": "a4d723dc58a9bc245a219d38bb50d3e75a05fd23e7702ea105dc5dbc1dc72fe9",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-ao-xiao"
+      ],
+      "reason": "敖啸古老大乘身份沿已核历史；第二十一次劫损耗和当时闭关是后来近况，不把伤势前置。",
+      "evidence": [
+        {
+          "chapterId": "qq-32897639",
+          "chapterSha256": "c0c8d9dd20779f3e06382b2f7359ca10659424685af68b758df3a1fcd9ead625",
+          "start": 2446,
+          "end": 2532,
+          "anchorSha256": "9b330bd44c4de9ce81850b941a63c2d16d6a02e7ea8c045f38f1e7a33a41f50f"
+        },
+        {
+          "chapterId": "qq-32897639",
+          "chapterSha256": "c0c8d9dd20779f3e06382b2f7359ca10659424685af68b758df3a1fcd9ead625",
+          "start": 2814,
+          "end": 2981,
+          "anchorSha256": "957d79803923b36f215f220946d7088baf514aaf2e58c5aaf1cacd830ff0b240"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0284-object-0043",
+      "batchId": "batch-0284",
+      "reportHash": "a4d723dc58a9bc245a219d38bb50d3e75a05fd23e7702ea105dc5dbc1dc72fe9",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-tian-kui"
+      ],
+      "reason": "天奎神狼复用狼王；玲珑归来后的波折是传闻和猜测，不覆盖开篇已回溯的古老婚姻史。",
+      "evidence": [
+        {
+          "chapterId": "qq-32907983",
+          "chapterSha256": "bc2d8854dc4ffe01bca2cdfc1a25f362233b206ff86513fd7b0b8fda080fda12",
+          "start": 0,
+          "end": 87,
+          "anchorSha256": "4b23f870d9bd1909d5a6468c2e85318e5f8e4bb089072d10380263eb3830af03"
+        },
+        {
+          "chapterId": "qq-32907983",
+          "chapterSha256": "bc2d8854dc4ffe01bca2cdfc1a25f362233b206ff86513fd7b0b8fda080fda12",
+          "start": 362,
+          "end": 485,
+          "anchorSha256": "ea24535276c8d8c221d198c49c8f667c3963192fb304db44fb8341e384e0aedb"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0284-object-0044",
+      "batchId": "batch-0284",
+      "reportHash": "a4d723dc58a9bc245a219d38bb50d3e75a05fd23e7702ea105dc5dbc1dc72fe9",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-tiankui-ancient-marriage"
+      ],
+      "reason": "敖啸与玲珑血脉、银光部分血脉、天奎婚姻须分开；不把有关系的人都标银月狼族。",
+      "evidence": [
+        {
+          "chapterId": "qq-32897639",
+          "chapterSha256": "c0c8d9dd20779f3e06382b2f7359ca10659424685af68b758df3a1fcd9ead625",
+          "start": 2533,
+          "end": 2619,
+          "anchorSha256": "9d3294b49f80ee4d0786b65d52985db0f1156c92c2e8335cfeb5c4b4eda1b7ad"
+        },
+        {
+          "chapterId": "qq-32907983",
+          "chapterSha256": "bc2d8854dc4ffe01bca2cdfc1a25f362233b206ff86513fd7b0b8fda080fda12",
+          "start": 88,
+          "end": 240,
+          "anchorSha256": "faf7eb74cefd0152c05739b7946ab625a0b97f31212d47a1052be27ff115d639"
+        },
+        {
+          "chapterId": "qq-35919567",
+          "chapterSha256": "d91c270c2d2a257d4f6833fa57aba69cfcb5f2184a4a3179f4d54de24d247076",
+          "start": 1001,
+          "end": 1789,
+          "anchorSha256": "f04df0b31c2ca33b445b5e80da9d0d1405a8b3d4a809a83813e971c21578c117"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0284-fact-0042",
+      "batchId": "batch-0284",
+      "reportHash": "a4d723dc58a9bc245a219d38bb50d3e75a05fd23e7702ea105dc5dbc1dc72fe9",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-ao-later-tribulation"
+      ],
+      "reason": "二十一次大劫已受损、正恢复为天渊议会此时所获近况；不是开篇修为或生命状态。",
+      "evidence": [
+        {
+          "chapterId": "qq-32897639",
+          "chapterSha256": "c0c8d9dd20779f3e06382b2f7359ca10659424685af68b758df3a1fcd9ead625",
+          "start": 2814,
+          "end": 2981,
+          "anchorSha256": "957d79803923b36f215f220946d7088baf514aaf2e58c5aaf1cacd830ff0b240"
+        },
+        {
+          "chapterId": "qq-32897639",
+          "chapterSha256": "c0c8d9dd20779f3e06382b2f7359ca10659424685af68b758df3a1fcd9ead625",
+          "start": 3062,
+          "end": 3131,
+          "anchorSha256": "933716e99965ac73e1ed6d6a0f1d7697ddcfbc3455d70d7d0b926a4beded2905"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0284-fact-0044",
+      "batchId": "batch-0284",
+      "reportHash": "a4d723dc58a9bc245a219d38bb50d3e75a05fd23e7702ea105dc5dbc1dc72fe9",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-linglong-return"
+      ],
+      "reason": "玲珑回界时化神后期、数百年后炼虚中期等为返回后的进展，不把后期境界赋给T0失散魂。",
+      "evidence": [
+        {
+          "chapterId": "qq-32907983",
+          "chapterSha256": "bc2d8854dc4ffe01bca2cdfc1a25f362233b206ff86513fd7b0b8fda080fda12",
+          "start": 0,
+          "end": 87,
+          "anchorSha256": "4b23f870d9bd1909d5a6468c2e85318e5f8e4bb089072d10380263eb3830af03"
+        },
+        {
+          "chapterId": "qq-32907983",
+          "chapterSha256": "bc2d8854dc4ffe01bca2cdfc1a25f362233b206ff86513fd7b0b8fda080fda12",
+          "start": 88,
+          "end": 240,
+          "anchorSha256": "faf7eb74cefd0152c05739b7946ab625a0b97f31212d47a1052be27ff115d639"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0287-object-0005",
+      "batchId": "batch-0287",
+      "reportHash": "be55f7d7cc024b72c0e38f860e9e5e610f2bd6a5ff2051f0f2ab8f259a695905",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-black-phoenix-later-diplomacy"
+      ],
+      "reason": "王到九仙山、拟介绍韩立的活动属于万宝会时期；不在T0预设会面行程。",
+      "evidence": [
+        {
+          "chapterId": "qq-33052637",
+          "chapterSha256": "f07abb12a59736c157761fd791f05aa3cec7b857871ef3c6012ae0df278e6d0b",
+          "start": 2704,
+          "end": 2759,
+          "anchorSha256": "942c3329a3d865a58212968b7c4ba0970e1fe77a5adb419cd6afd1b26d21380d"
+        },
+        {
+          "chapterId": "qq-33052637",
+          "chapterSha256": "f07abb12a59736c157761fd791f05aa3cec7b857871ef3c6012ae0df278e6d0b",
+          "start": 2811,
+          "end": 2855,
+          "anchorSha256": "04d1c4bd187200d4c90e97a9f4c871aa11402d8fe90ff99c6623121f4fe76c70"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0287-fact-0015",
+      "batchId": "batch-0287",
+      "reportHash": "be55f7d7cc024b72c0e38f860e9e5e610f2bd6a5ff2051f0f2ab8f259a695905",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-black-phoenix-later-diplomacy"
+      ],
+      "reason": "韩立那时不认识黑凤王而认识族人，不能推为两人永不相识或使王在T0知道韩立。",
+      "evidence": [
+        {
+          "chapterId": "qq-33052637",
+          "chapterSha256": "f07abb12a59736c157761fd791f05aa3cec7b857871ef3c6012ae0df278e6d0b",
+          "start": 2811,
+          "end": 2855,
+          "anchorSha256": "04d1c4bd187200d4c90e97a9f4c871aa11402d8fe90ff99c6623121f4fe76c70"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0289-object-0007",
+      "batchId": "batch-0289",
+      "reportHash": "3be8bc003850432f631075576c7d0da1cc88897d8662a76e950ff0be898e0f27",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-black-phoenix-king"
+      ],
+      "reason": "筱馆自报名即黑凤王，现场合体后期有叙述；T0在位境界沿显式推定，叶家交好和处罚不擅补开篇起始日期。",
+      "evidence": [
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 261,
+          "end": 308,
+          "anchorSha256": "d0e657fb07c4691a460b9ff2b1e431b06f2c6910a7ccd95a85811254809a55fa"
+        },
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 309,
+          "end": 350,
+          "anchorSha256": "ead9f708101846bada7ee59be65d8bd2fa7ab0945562a56a736eb3dcc042454a"
+        },
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 181,
+          "end": 237,
+          "anchorSha256": "910f11f50d38273ae884eefc9d5c65e0b05b3cc21768a504f3cfc0a71195fd68"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0289-object-0008",
+      "batchId": "batch-0289",
+      "reportHash": "3be8bc003850432f631075576c7d0da1cc88897d8662a76e950ff0be898e0f27",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-demon-xiaohong"
+      ],
+      "reason": "被罚炎域千年属于图谋叶颖之后；原候选不得将处罚任务挂在T0，年龄下限线索另列边界。",
+      "evidence": [
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 351,
+          "end": 408,
+          "anchorSha256": "12cbe71a04c4c4d2d5a20cc95832d3972cb5a0cac97e23c2dc060c49d3c3de09"
+        },
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 409,
+          "end": 584,
+          "anchorSha256": "2722f777169f87267fabd912998a15c92783fc210d2558b9f56b232deb27431f"
+        },
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 983,
+          "end": 1045,
+          "anchorSha256": "979d8946df61ca624a0ef62a9c02a2440e04cae2c7e6b2ca14e0e4cecb8b3425"
+        },
+        {
+          "chapterId": "qq-28643714",
+          "chapterSha256": "4f481bd6c295266d1405f5f4b0fa99761abe159a6c86866ae1e5a7aa599e5b0e",
+          "start": 101,
+          "end": 950,
+          "anchorSha256": "93f72839c2bd8ef9fdd4d0f34024788c9977857936eeaefaaea7cebda155de16"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0289-object-0009",
+      "batchId": "batch-0289",
+      "reportHash": "3be8bc003850432f631075576c7d0da1cc88897d8662a76e950ff0be898e0f27",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-demon-daier"
+      ],
+      "reason": "本章韩立尚疑，后章黛儿以石堆往事自认并获韩认可，凤灵仙子与小黛儿合一；成年外观不前置。",
+      "evidence": [
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 756,
+          "end": 817,
+          "anchorSha256": "06e7b6efa73f294135f23cbbe76971328123b56199048e20d339cae11c37aadb"
+        },
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 1437,
+          "end": 1560,
+          "anchorSha256": "8ad4a6b9bff3f2c178a7fba40b2eb826515516cb06c66b6e715108844797331a"
+        },
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 1581,
+          "end": 1791,
+          "anchorSha256": "797e080a8c516af9056e596af459da38e53fda18e3096e3ba4c978576a0acb53"
+        },
+        {
+          "chapterId": "qq-33356799",
+          "chapterSha256": "5ff1f149d36f0599c43eefd2c4edf4e868bf74eb45645212392c7e8f8faa06bb",
+          "start": 1639,
+          "end": 2424,
+          "anchorSha256": "c4e0f8357c1c47ae9e6a83d3d26d0c5647d5798508452383bc4011a70126d2e0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0289-object-0034",
+      "batchId": "batch-0289",
+      "reportHash": "3be8bc003850432f631075576c7d0da1cc88897d8662a76e950ff0be898e0f27",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon-phoenix-palace-flame-domain"
+      ],
+      "reason": "炎域是黑凤宫内存在的设施；本次面壁处罚为未来，当前用途及布景明确原创回溯。",
+      "evidence": [
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 409,
+          "end": 584,
+          "anchorSha256": "2722f777169f87267fabd912998a15c92783fc210d2558b9f56b232deb27431f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0289-object-0041",
+      "batchId": "batch-0289",
+      "reportHash": "3be8bc003850432f631075576c7d0da1cc88897d8662a76e950ff0be898e0f27",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon-phoenix-community"
+      ],
+      "reason": "族群与特产资料可用；黛儿成长、筱虹处罚不能随族群条目一起回填T0。",
+      "evidence": [
+        {
+          "chapterId": "qq-33234580",
+          "chapterSha256": "0fbc81cc6c8267c1e0ecedc8591544e738cab4e1290eaab24a60bc68a91d8bd0",
+          "start": 1702,
+          "end": 1953,
+          "anchorSha256": "e04a67cafc8eda0ecd00fa8c73935922ead0d6a7488655d98d6d9105c5574ef2"
+        },
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 1133,
+          "end": 1201,
+          "anchorSha256": "83e450a4ab406c8ddc9d3a5e74c412eb6f0fb6dcdbf23a8e15827932c4d0f673"
+        },
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 409,
+          "end": 584,
+          "anchorSha256": "2722f777169f87267fabd912998a15c92783fc210d2558b9f56b232deb27431f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0289-object-0071",
+      "batchId": "batch-0289",
+      "reportHash": "3be8bc003850432f631075576c7d0da1cc88897d8662a76e950ff0be898e0f27",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-crystal-flame-silk"
+      ],
+      "reason": "火虫一生一丝及唯一已知熔岩来源是韩立所知传闻；保留限定，不声称全灵界穷尽搜寻或无限增益。",
+      "evidence": [
+        {
+          "chapterId": "qq-33234580",
+          "chapterSha256": "0fbc81cc6c8267c1e0ecedc8591544e738cab4e1290eaab24a60bc68a91d8bd0",
+          "start": 1560,
+          "end": 1583,
+          "anchorSha256": "5ba1a3e0a6c5838c9f7e9e768c36404f78bbe806fb0888c3f5c874fdbc75382d"
+        },
+        {
+          "chapterId": "qq-33234580",
+          "chapterSha256": "0fbc81cc6c8267c1e0ecedc8591544e738cab4e1290eaab24a60bc68a91d8bd0",
+          "start": 1702,
+          "end": 1953,
+          "anchorSha256": "e04a67cafc8eda0ecd00fa8c73935922ead0d6a7488655d98d6d9105c5574ef2"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0289-object-0076",
+      "batchId": "batch-0289",
+      "reportHash": "3be8bc003850432f631075576c7d0da1cc88897d8662a76e950ff0be898e0f27",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-black-phoenix-later-assets"
+      ],
+      "reason": "王用本命真翎遮黛儿容貌由彭厥转述，强大不可洞穿也属其说法；不创建T0已借出的同一羽翎。",
+      "evidence": [
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 1581,
+          "end": 1791,
+          "anchorSha256": "797e080a8c516af9056e596af459da38e53fda18e3096e3ba4c978576a0acb53"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0289-fact-0035",
+      "batchId": "batch-0289",
+      "reportHash": "3be8bc003850432f631075576c7d0da1cc88897d8662a76e950ff0be898e0f27",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-black-phoenix-king"
+      ],
+      "reason": "姓名、王号和现场合体后期明确；T0早于此事，境界只按既有有据推定，不把现场战力数值机械回溯。",
+      "evidence": [
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 261,
+          "end": 308,
+          "anchorSha256": "d0e657fb07c4691a460b9ff2b1e431b06f2c6910a7ccd95a85811254809a55fa"
+        },
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 309,
+          "end": 350,
+          "anchorSha256": "ead9f708101846bada7ee59be65d8bd2fa7ab0945562a56a736eb3dcc042454a"
+        },
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 181,
+          "end": 237,
+          "anchorSha256": "910f11f50d38273ae884eefc9d5c65e0b05b3cc21768a504f3cfc0a71195fd68"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0289-fact-0037",
+      "batchId": "batch-0289",
+      "reportHash": "3be8bc003850432f631075576c7d0da1cc88897d8662a76e950ff0be898e0f27",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-black-phoenix-later-diplomacy"
+      ],
+      "reason": "多年好友及致谢是筱馆当场说法，韩立仍不知真假；不在T0植入双方已达成谅解或韩王旧交。",
+      "evidence": [
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 409,
+          "end": 584,
+          "anchorSha256": "2722f777169f87267fabd912998a15c92783fc210d2558b9f56b232deb27431f"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0289-fact-0038",
+      "batchId": "batch-0289",
+      "reportHash": "3be8bc003850432f631075576c7d0da1cc88897d8662a76e950ff0be898e0f27",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-demon-daier"
+      ],
+      "reason": "直系后人与凤灵仙子名号在此由彭厥转述；后续相认闭合身份，仍未确定全部父系代数。",
+      "evidence": [
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 1437,
+          "end": 1560,
+          "anchorSha256": "8ad4a6b9bff3f2c178a7fba40b2eb826515516cb06c66b6e715108844797331a"
+        },
+        {
+          "chapterId": "qq-33216806",
+          "chapterSha256": "3f1e9c8ace1c7a78d9e8aa8e24c2316827baa3a321343537ef895b80773c2612",
+          "start": 1581,
+          "end": 1791,
+          "anchorSha256": "797e080a8c516af9056e596af459da38e53fda18e3096e3ba4c978576a0acb53"
+        },
+        {
+          "chapterId": "qq-33356799",
+          "chapterSha256": "5ff1f149d36f0599c43eefd2c4edf4e868bf74eb45645212392c7e8f8faa06bb",
+          "start": 1639,
+          "end": 2424,
+          "anchorSha256": "c4e0f8357c1c47ae9e6a83d3d26d0c5647d5798508452383bc4011a70126d2e0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0289-fact-0046",
+      "batchId": "batch-0289",
+      "reportHash": "3be8bc003850432f631075576c7d0da1cc88897d8662a76e950ff0be898e0f27",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-crystal-flame-silk"
+      ],
+      "reason": "“据说”“只在某片发现”保留；资源稀缺可落实实物，但不把未知产地等同不存在其他种群。",
+      "evidence": [
+        {
+          "chapterId": "qq-33234580",
+          "chapterSha256": "0fbc81cc6c8267c1e0ecedc8591544e738cab4e1290eaab24a60bc68a91d8bd0",
+          "start": 1702,
+          "end": 1953,
+          "anchorSha256": "e04a67cafc8eda0ecd00fa8c73935922ead0d6a7488655d98d6d9105c5574ef2"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0291-object-0016",
+      "batchId": "batch-0291",
+      "reportHash": "31d83a46fdc953573651989bd662035e0a62fb4547c0ea402a3fde50dd500012",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-black-phoenix-later-diplomacy"
+      ],
+      "reason": "宠爱黛儿及其来访是当时近况；不将尚未出生的直系后人放入T0王庭认知。",
+      "evidence": [
+        {
+          "chapterId": "qq-33356799",
+          "chapterSha256": "5ff1f149d36f0599c43eefd2c4edf4e868bf74eb45645212392c7e8f8faa06bb",
+          "start": 26,
+          "end": 56,
+          "anchorSha256": "18e153d8ec05289002bc1689ea1c566c12f5607b8f8f6dedbc8f8a13d0bbf498"
+        },
+        {
+          "chapterId": "qq-33356799",
+          "chapterSha256": "5ff1f149d36f0599c43eefd2c4edf4e868bf74eb45645212392c7e8f8faa06bb",
+          "start": 57,
+          "end": 102,
+          "anchorSha256": "e8458346143b5428a5cd92ae6d9432042c55205fd495b52b88649ff03c9c436e"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0291-object-0029",
+      "batchId": "batch-0291",
+      "reportHash": "31d83a46fdc953573651989bd662035e0a62fb4547c0ea402a3fde50dd500012",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-demon-daier"
+      ],
+      "reason": "黛儿自述化形重塑、似南宫容貌或来自幼时印象，因果仍是她的推测；身份由相认确定。",
+      "evidence": [
+        {
+          "chapterId": "qq-33356799",
+          "chapterSha256": "5ff1f149d36f0599c43eefd2c4edf4e868bf74eb45645212392c7e8f8faa06bb",
+          "start": 2360,
+          "end": 2398,
+          "anchorSha256": "fdf016978353ad21080d4af2140887675931f528f552e9d1475081a5c12293cb"
+        },
+        {
+          "chapterId": "qq-33356799",
+          "chapterSha256": "5ff1f149d36f0599c43eefd2c4edf4e868bf74eb45645212392c7e8f8faa06bb",
+          "start": 1844,
+          "end": 2050,
+          "anchorSha256": "e4fd49f06a7baa2eafb1490228957afd6b0c0084381fbc8c1570232d40720d78"
+        },
+        {
+          "chapterId": "qq-33356799",
+          "chapterSha256": "5ff1f149d36f0599c43eefd2c4edf4e868bf74eb45645212392c7e8f8faa06bb",
+          "start": 1639,
+          "end": 2424,
+          "anchorSha256": "c4e0f8357c1c47ae9e6a83d3d26d0c5647d5798508452383bc4011a70126d2e0"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0291-object-0041",
+      "batchId": "batch-0291",
+      "reportHash": "31d83a46fdc953573651989bd662035e0a62fb4547c0ea402a3fde50dd500012",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-daier-lineage-and-encounters"
+      ],
+      "reason": "刚回黑凤宫未见父亲是其后期生活回述；未交代父亲姓名或T0去向，不补死亡或失踪。",
+      "evidence": [
+        {
+          "chapterId": "qq-33356799",
+          "chapterSha256": "5ff1f149d36f0599c43eefd2c4edf4e868bf74eb45645212392c7e8f8faa06bb",
+          "start": 2268,
+          "end": 2359,
+          "anchorSha256": "102424c3e011d82fce0630a1e180acd2ae766ce4aa5b774e188f9e452401bfae"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0291-issue-0019",
+      "batchId": "batch-0291",
+      "reportHash": "31d83a46fdc953573651989bd662035e0a62fb4547c0ea402a3fde50dd500012",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-extraction-editorial-notes"
+      ],
+      "reason": "补证日志不是世界事件；黛儿相认可由正文复核，战舟图交易、请帖等跨区后期对象不随日志提前实例化。",
+      "evidence": [
+        {
+          "chapterId": "qq-33323447",
+          "chapterSha256": "c1fa8c4adf08f075d47e6bbd648a65e01163010f90a3bfa5ec653aa21b8cdfe4",
+          "start": 2071,
+          "end": 2292,
+          "anchorSha256": "a2f9312eb5187e2b328ac953b226722026336f4b93d1cdf0523d9f5b9b8ea8a3"
+        },
+        {
+          "chapterId": "qq-33347127",
+          "chapterSha256": "a15d4db1ce5d6a6e2ef6ae26ac118a6811d6fade591990598bad63465c908a99",
+          "start": 2765,
+          "end": 2906,
+          "anchorSha256": "48920c7f01911c593720981450596eb62f01a75c03da1302877d489f025e3082"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0293-object-0027",
+      "batchId": "batch-0293",
+      "reportHash": "2f403b1e3d94304bcbea0e8bf00a6f9320c6800ad8069ee07f002afd015d1995",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-bingfeng-later-encounters"
+      ],
+      "reason": "黑凤嫡系袭击冰凤由她亲述，发生在偷渡后；不把族群整体设为开篇仇敌，也不另造第二冰凤。",
+      "evidence": [
+        {
+          "chapterId": "qq-33487940",
+          "chapterSha256": "ee79a6115ff155ab2c339f04a549634fe9893518f77d89060274eb83c2d942a9",
+          "start": 2862,
+          "end": 2982,
+          "anchorSha256": "c1f492607d76e6e56de8600c8fc2e79d20757653521bc32a0306708769ebd39e"
+        },
+        {
+          "chapterId": "qq-33487940",
+          "chapterSha256": "ee79a6115ff155ab2c339f04a549634fe9893518f77d89060274eb83c2d942a9",
+          "start": 2983,
+          "end": 3079,
+          "anchorSha256": "0359e39e34b75bef7237edd89aff84be975852949e4ff54827d5108366f15f65"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0293-fact-0004",
+      "batchId": "batch-0293",
+      "reportHash": "2f403b1e3d94304bcbea0e8bf00a6f9320c6800ad8069ee07f002afd015d1995",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-bingfeng-later-encounters"
+      ],
+      "reason": "袭击者为未具名黑凤嫡系，不能自动认作筱虹或筱馆；受袭、跌境均属未来。",
+      "evidence": [
+        {
+          "chapterId": "qq-33487940",
+          "chapterSha256": "ee79a6115ff155ab2c339f04a549634fe9893518f77d89060274eb83c2d942a9",
+          "start": 2983,
+          "end": 3079,
+          "anchorSha256": "0359e39e34b75bef7237edd89aff84be975852949e4ff54827d5108366f15f65"
+        },
+        {
+          "chapterId": "qq-33487940",
+          "chapterSha256": "ee79a6115ff155ab2c339f04a549634fe9893518f77d89060274eb83c2d942a9",
+          "start": 2445,
+          "end": 2580,
+          "anchorSha256": "6f355a509a33b95f2eccf7cf9c8a6412dcc887db50664468d3477b7e272d24ec"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0293-fact-0005",
+      "batchId": "batch-0293",
+      "reportHash": "2f403b1e3d94304bcbea0e8bf00a6f9320c6800ad8069ee07f002afd015d1995",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-bingfeng-later-encounters"
+      ],
+      "reason": "血光人先救后强迫灵兽有冰凤回述，真实身份当时不知；“扯平”是冰凤态度，不是客观债务法则。",
+      "evidence": [
+        {
+          "chapterId": "qq-33487940",
+          "chapterSha256": "ee79a6115ff155ab2c339f04a549634fe9893518f77d89060274eb83c2d942a9",
+          "start": 2445,
+          "end": 2580,
+          "anchorSha256": "6f355a509a33b95f2eccf7cf9c8a6412dcc887db50664468d3477b7e272d24ec"
+        },
+        {
+          "chapterId": "qq-33487940",
+          "chapterSha256": "ee79a6115ff155ab2c339f04a549634fe9893518f77d89060274eb83c2d942a9",
+          "start": 1030,
+          "end": 1126,
+          "anchorSha256": "83f113adb1bfed0f459deb126aecbd651e0fdc769ed50854ab3cfa350ce530ec"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0293-issue-0010",
+      "batchId": "batch-0293",
+      "reportHash": "2f403b1e3d94304bcbea0e8bf00a6f9320c6800ad8069ee07f002afd015d1995",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-extraction-editorial-notes"
+      ],
+      "reason": "该项是跨主题引文修订清单；本区只采用冰凤同一及未具名黑凤袭击者边界，未把修订成功等同T0批准。",
+      "evidence": [
+        {
+          "chapterId": "qq-33487940",
+          "chapterSha256": "ee79a6115ff155ab2c339f04a549634fe9893518f77d89060274eb83c2d942a9",
+          "start": 390,
+          "end": 435,
+          "anchorSha256": "d4d0c31fd8066b3439cb6f7363efcf8c1e1842f643e9d38711016735f1202d0e"
+        },
+        {
+          "chapterId": "qq-33455006",
+          "chapterSha256": "d37e7478064447d8d24374a371e2ff0fa8e018c3619d283ffae9d8fea4cc27b8",
+          "start": 1410,
+          "end": 1451,
+          "anchorSha256": "c0ea3842965d880c881d0270797b83b3b09d19875e8c57c9a3f86b07b35843b7"
+        },
+        {
+          "chapterId": "qq-33534457",
+          "chapterSha256": "f00efbe2b175949f35da13127d4605fae443c2cfec5b67c242ad168db92e9355",
+          "start": 1599,
+          "end": 1638,
+          "anchorSha256": "1439afefecc343ceadb6732fa3c63e641cf8adebd5e722735df2604d035dd23c"
+        },
+        {
+          "chapterId": "qq-33519331",
+          "chapterSha256": "bdf32c4fc86458b5cae17639a0d965011608d7227981e126d7ea726df70a4c14",
+          "start": 2281,
+          "end": 2355,
+          "anchorSha256": "7c5cc967fe1285847ddfcc08c4d748a49934b08af4a8b9da925b9bbc823b0305"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0319-object-0006",
+      "batchId": "batch-0319",
+      "reportHash": "49e5d8591e1d43b762f59e0f5185eb24bf80f6440c8ce2b541c956a5fd6edd7c",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-bingfeng-later-encounters"
+      ],
+      "reason": "筱虹参与胁迫、增进修为及相信青龙保证皆在魔劫期间，不能写成T0人物当前计划。",
+      "evidence": [
+        {
+          "chapterId": "qq-36018890",
+          "chapterSha256": "9b2c814eee98a60e3115a55fe31e3eeca56fca761a32992d7079fe3f7378f98d",
+          "start": 1906,
+          "end": 2145,
+          "anchorSha256": "faed9980d64bba7b6bc75f95b75a56492a7b84a9b4a5d8aeed681049f817a8cb"
+        },
+        {
+          "chapterId": "qq-36082361",
+          "chapterSha256": "3b28f64e06f10c55e319dbda8d153db44e7827024ccd12644afffe9b53a64392",
+          "start": 729,
+          "end": 847,
+          "anchorSha256": "45359e253122d4a4d53aaa17439c2f63bdd1dee72bf147d828205be0a2b2f3e8"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0319-object-0012",
+      "batchId": "batch-0319",
+      "reportHash": "49e5d8591e1d43b762f59e0f5185eb24bf80f6440c8ce2b541c956a5fd6edd7c",
+      "disposition": "adopted",
+      "targetIds": [
+        "canon-black-phoenix-king"
+      ],
+      "reason": "王对族人的处分权是制度背景；冰凤关于应被治罪和筱虹关于会默许是相互冲突的预期，不是已判处罚。",
+      "evidence": [
+        {
+          "chapterId": "qq-36018890",
+          "chapterSha256": "9b2c814eee98a60e3115a55fe31e3eeca56fca761a32992d7079fe3f7378f98d",
+          "start": 2604,
+          "end": 2741,
+          "anchorSha256": "24973392b1a14b2c4b137bcfa3ffa2e784d32ae22a7388526f0e51e6444a38c4"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0319-object-0017",
+      "batchId": "batch-0319",
+      "reportHash": "49e5d8591e1d43b762f59e0f5185eb24bf80f6440c8ce2b541c956a5fd6edd7c",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon-phoenix-community"
+      ],
+      "reason": "黑凤族复用同一族群；筱虹的胁迫行为不代表每个成员或永恒族规。",
+      "evidence": [
+        {
+          "chapterId": "qq-36018890",
+          "chapterSha256": "9b2c814eee98a60e3115a55fe31e3eeca56fca761a32992d7079fe3f7378f98d",
+          "start": 1906,
+          "end": 2145,
+          "anchorSha256": "faed9980d64bba7b6bc75f95b75a56492a7b84a9b4a5d8aeed681049f817a8cb"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0319-object-0018",
+      "batchId": "batch-0319",
+      "reportHash": "49e5d8591e1d43b762f59e0f5185eb24bf80f6440c8ce2b541c956a5fd6edd7c",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-xiaohong-later-missions"
+      ],
+      "reason": "魔族攻城后取消城内两族区域限制是临时变化，不覆盖开篇既有天渊边界制度。",
+      "evidence": [
+        {
+          "chapterId": "qq-36018890",
+          "chapterSha256": "9b2c814eee98a60e3115a55fe31e3eeca56fca761a32992d7079fe3f7378f98d",
+          "start": 2772,
+          "end": 2967,
+          "anchorSha256": "4bd8eec0671300180e7aa9c925668af6f73fc040310847297e4c355f2bc83c2d"
+        },
+        {
+          "chapterId": "qq-36018890",
+          "chapterSha256": "9b2c814eee98a60e3115a55fe31e3eeca56fca761a32992d7079fe3f7378f98d",
+          "start": 2195,
+          "end": 2248,
+          "anchorSha256": "f5b3a5e082d93e013cef0228bc455b63f93b13e1380e621bb596c8ab01895adc"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0319-fact-0025",
+      "batchId": "batch-0319",
+      "reportHash": "49e5d8591e1d43b762f59e0f5185eb24bf80f6440c8ce2b541c956a5fd6edd7c",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-bingfeng-later-encounters"
+      ],
+      "reason": "旧处罚和新行为的惩处风险由人物当场讨论；不把“王必罚”作为确定世界结果。",
+      "evidence": [
+        {
+          "chapterId": "qq-36018890",
+          "chapterSha256": "9b2c814eee98a60e3115a55fe31e3eeca56fca761a32992d7079fe3f7378f98d",
+          "start": 1906,
+          "end": 2145,
+          "anchorSha256": "faed9980d64bba7b6bc75f95b75a56492a7b84a9b4a5d8aeed681049f817a8cb"
+        },
+        {
+          "chapterId": "qq-36018890",
+          "chapterSha256": "9b2c814eee98a60e3115a55fe31e3eeca56fca761a32992d7079fe3f7378f98d",
+          "start": 2604,
+          "end": 2741,
+          "anchorSha256": "24973392b1a14b2c4b137bcfa3ffa2e784d32ae22a7388526f0e51e6444a38c4"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0347-object-0005",
+      "batchId": "batch-0347",
+      "reportHash": "da5d6db6f6ae5ca3c1f72d923df9e5eb240869ec257e0cbfa5e023f7d6f0d23a",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-ao-later-tribulation"
+      ],
+      "reason": "敖啸乘银舟抵木族并带玲珑是后来行动；不将此位置、同行关系和法宝临时状态前置。",
+      "evidence": [
+        {
+          "chapterId": "qq-40434478",
+          "chapterSha256": "a5d5413e221e4325754c597d2e2b240e8a9eebcbbdc409eb5ef33f81e580a730",
+          "start": 3017,
+          "end": 3048,
+          "anchorSha256": "f675f577c99716a7819f90fa374eb7d6f21a08304fd714f550e5b995faf6907d"
+        },
+        {
+          "chapterId": "qq-40485322",
+          "chapterSha256": "eb1f656422928fbb55ff6de47f294d81d53671a1bb18ea98d592b6d57410dd13",
+          "start": 2976,
+          "end": 3052,
+          "anchorSha256": "2e31da192b74c5c0dfd90a00d898ff63692e71ad9938f44cd76b7ed3b139e163"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0347-object-0019",
+      "batchId": "batch-0347",
+      "reportHash": "da5d6db6f6ae5ca3c1f72d923df9e5eb240869ec257e0cbfa5e023f7d6f0d23a",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon7-ao-long-history"
+      ],
+      "reason": "敖啸银月狼族出身可沿古老历史；玲珑此时在人旁的形态和重逢属于未来。",
+      "evidence": [
+        {
+          "chapterId": "qq-40434478",
+          "chapterSha256": "a5d5413e221e4325754c597d2e2b240e8a9eebcbbdc409eb5ef33f81e580a730",
+          "start": 3017,
+          "end": 3048,
+          "anchorSha256": "f675f577c99716a7819f90fa374eb7d6f21a08304fd714f550e5b995faf6907d"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0347-fact-0030",
+      "batchId": "batch-0347",
+      "reportHash": "da5d6db6f6ae5ca3c1f72d923df9e5eb240869ec257e0cbfa5e023f7d6f0d23a",
+      "disposition": "corrected",
+      "targetIds": [
+        "canon-ao-xiao"
+      ],
+      "reason": "敖啸是此叙事时段人妖辖境妖族唯一大乘，不是全灵界所有妖类只有他一位；木族地点不回填T0。",
+      "evidence": [
+        {
+          "chapterId": "qq-40434478",
+          "chapterSha256": "a5d5413e221e4325754c597d2e2b240e8a9eebcbbdc409eb5ef33f81e580a730",
+          "start": 3017,
+          "end": 3048,
+          "anchorSha256": "f675f577c99716a7819f90fa374eb7d6f21a08304fd714f550e5b995faf6907d"
+        },
+        {
+          "chapterId": "qq-40434478",
+          "chapterSha256": "a5d5413e221e4325754c597d2e2b240e8a9eebcbbdc409eb5ef33f81e580a730",
+          "start": 3049,
+          "end": 3082,
+          "anchorSha256": "777c7895fa46adaa87c77947fdfb3f64448550666ef465bbf7a262c9a62a7589"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0354-object-0008",
+      "batchId": "batch-0354",
+      "reportHash": "eba63f7fe1648dfb76b8236c9908857cb57e2516f61ff6f4df750b7c3396c283",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-black-phoenix-later-diplomacy"
+      ],
+      "reason": "黑凤王认出已大乘韩立与旧会面相接，属于后期结识；T0王不因此认识十岁韩立。",
+      "evidence": [
+        {
+          "chapterId": "qq-41347092",
+          "chapterSha256": "3d606f01d0a2599bf05333feec857b60fb0ae3be84cf874c2aba1998bdf5c56d",
+          "start": 786,
+          "end": 839,
+          "anchorSha256": "a96f9d124b5612f69718c4bc432f228f05da9dff119b6464f12b3ceb43b76b5c"
+        },
+        {
+          "chapterId": "qq-41372703",
+          "chapterSha256": "b46ecaf8f30fad84790740ae2710c52ae95469dcba87b4c64b034f73f15e4425",
+          "start": 2781,
+          "end": 2897,
+          "anchorSha256": "661cd8434526156e6df85c572ba02837fc07b37b16654ddff07b7a0a93c7f069"
+        },
+        {
+          "chapterId": "qq-41347092",
+          "chapterSha256": "3d606f01d0a2599bf05333feec857b60fb0ae3be84cf874c2aba1998bdf5c56d",
+          "start": 703,
+          "end": 785,
+          "anchorSha256": "6495b2a9840b74f8f3ae5df2d512677d8b5cfba40033ba89bf09c04e23ad1375"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0354-object-0060",
+      "batchId": "batch-0354",
+      "reportHash": "eba63f7fe1648dfb76b8236c9908857cb57e2516f61ff6f4df750b7c3396c283",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon-phoenix-inner-sanctuary"
+      ],
+      "reason": "黑凤族秘禁地是族内修炼设施；黛儿在内是未来调度，开篇空置用途和具体位置明确补写。",
+      "evidence": [
+        {
+          "chapterId": "qq-41372703",
+          "chapterSha256": "b46ecaf8f30fad84790740ae2710c52ae95469dcba87b4c64b034f73f15e4425",
+          "start": 2781,
+          "end": 2897,
+          "anchorSha256": "661cd8434526156e6df85c572ba02837fc07b37b16654ddff07b7a0a93c7f069"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0354-object-0061",
+      "batchId": "batch-0354",
+      "reportHash": "eba63f7fe1648dfb76b8236c9908857cb57e2516f61ff6f4df750b7c3396c283",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-demon-daier"
+      ],
+      "reason": "从魔劫开始闭关至当时未出关是筱馆报告，不能使T0有这段经历。",
+      "evidence": [
+        {
+          "chapterId": "qq-41372703",
+          "chapterSha256": "b46ecaf8f30fad84790740ae2710c52ae95469dcba87b4c64b034f73f15e4425",
+          "start": 2781,
+          "end": 2897,
+          "anchorSha256": "661cd8434526156e6df85c572ba02837fc07b37b16654ddff07b7a0a93c7f069"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0354-object-0062",
+      "batchId": "batch-0354",
+      "reportHash": "eba63f7fe1648dfb76b8236c9908857cb57e2516f61ff6f4df750b7c3396c283",
+      "disposition": "adopted",
+      "targetIds": [
+        "demon-phoenix-inner-sanctuary"
+      ],
+      "reason": "秘禁地作为既有族内设施回溯，精确布局和当前资源原创，不等于T0已有未来闭关队伍。",
+      "evidence": [
+        {
+          "chapterId": "qq-41372703",
+          "chapterSha256": "b46ecaf8f30fad84790740ae2710c52ae95469dcba87b4c64b034f73f15e4425",
+          "start": 2781,
+          "end": 2897,
+          "anchorSha256": "661cd8434526156e6df85c572ba02837fc07b37b16654ddff07b7a0a93c7f069"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0354-fact-0018",
+      "batchId": "batch-0354",
+      "reportHash": "eba63f7fe1648dfb76b8236c9908857cb57e2516f61ff6f4df750b7c3396c283",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-daier-lineage-and-encounters"
+      ],
+      "reason": "筱馆下令黛儿等闭关发生在后来的魔劫开始时；不形成当前命令或必然未来。",
+      "evidence": [
+        {
+          "chapterId": "qq-41372703",
+          "chapterSha256": "b46ecaf8f30fad84790740ae2710c52ae95469dcba87b4c64b034f73f15e4425",
+          "start": 2781,
+          "end": 2897,
+          "anchorSha256": "661cd8434526156e6df85c572ba02837fc07b37b16654ddff07b7a0a93c7f069"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0356-object-0025",
+      "batchId": "batch-0356",
+      "reportHash": "bd1be38040fe53ae1a4dee3318840ef4ab9b1d0cf522f894b76e428b28ff61ef",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-black-phoenix-later-diplomacy"
+      ],
+      "reason": "合体长老使者赴韩庆典为未来外交，不补其未知姓名、T0职务和已成庆典。",
+      "evidence": [
+        {
+          "chapterId": "qq-41668724",
+          "chapterSha256": "963726442b8ae9454892104ee9fa0e01d96ec2806d37e9438ea3fe1856a06964",
+          "start": 2473,
+          "end": 2539,
+          "anchorSha256": "68378a933bd3a5917ba4711bafbd127277ba2357a61f94a9040d21b9b9494067"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0356-object-0026",
+      "batchId": "batch-0356",
+      "reportHash": "bd1be38040fe53ae1a4dee3318840ef4ab9b1d0cf522f894b76e428b28ff61ef",
+      "disposition": "corrected",
+      "targetIds": [
+        "future-demon-daier"
+      ],
+      "reason": "未见黛儿只能得韩立推测仍闭关；不能把推测当此刻独立观察或开篇状态。",
+      "evidence": [
+        {
+          "chapterId": "qq-41668724",
+          "chapterSha256": "963726442b8ae9454892104ee9fa0e01d96ec2806d37e9438ea3fe1856a06964",
+          "start": 2427,
+          "end": 2472,
+          "anchorSha256": "d020ab2ade6e792ac7a977b937c0bc7aaf24716022b43bfd7c6055d34c1ca0e6"
+        },
+        {
+          "chapterId": "qq-41668724",
+          "chapterSha256": "963726442b8ae9454892104ee9fa0e01d96ec2806d37e9438ea3fe1856a06964",
+          "start": 2473,
+          "end": 2539,
+          "anchorSha256": "68378a933bd3a5917ba4711bafbd127277ba2357a61f94a9040d21b9b9494067"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0356-object-0047",
+      "batchId": "batch-0356",
+      "reportHash": "bd1be38040fe53ae1a4dee3318840ef4ab9b1d0cf522f894b76e428b28ff61ef",
+      "disposition": "later-only",
+      "targetIds": [
+        "demon7-black-phoenix-later-diplomacy"
+      ],
+      "reason": "派合体长老祝贺是这次礼仪行动，不提前建立与韩立的大乘交往。",
+      "evidence": [
+        {
+          "chapterId": "qq-41668724",
+          "chapterSha256": "963726442b8ae9454892104ee9fa0e01d96ec2806d37e9438ea3fe1856a06964",
+          "start": 2427,
+          "end": 2472,
+          "anchorSha256": "d020ab2ade6e792ac7a977b937c0bc7aaf24716022b43bfd7c6055d34c1ca0e6"
+        },
+        {
+          "chapterId": "qq-41668724",
+          "chapterSha256": "963726442b8ae9454892104ee9fa0e01d96ec2806d37e9438ea3fe1856a06964",
+          "start": 2473,
+          "end": 2539,
+          "anchorSha256": "68378a933bd3a5917ba4711bafbd127277ba2357a61f94a9040d21b9b9494067"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    },
+    {
+      "candidateId": "batch-0356-fact-0049",
+      "batchId": "batch-0356",
+      "reportHash": "bd1be38040fe53ae1a4dee3318840ef4ab9b1d0cf522f894b76e428b28ff61ef",
+      "disposition": "corrected",
+      "targetIds": [
+        "demon7-daier-lineage-and-encounters"
+      ],
+      "reason": "韩立依据使者选择推断黛儿闭关，保留认识来源及不确定性；不得成为全知事实。",
+      "evidence": [
+        {
+          "chapterId": "qq-41668724",
+          "chapterSha256": "963726442b8ae9454892104ee9fa0e01d96ec2806d37e9438ea3fe1856a06964",
+          "start": 2427,
+          "end": 2472,
+          "anchorSha256": "d020ab2ade6e792ac7a977b937c0bc7aaf24716022b43bfd7c6055d34c1ca0e6"
+        },
+        {
+          "chapterId": "qq-41668724",
+          "chapterSha256": "963726442b8ae9454892104ee9fa0e01d96ec2806d37e9438ea3fe1856a06964",
+          "start": 2473,
+          "end": 2539,
+          "anchorSha256": "68378a933bd3a5917ba4711bafbd127277ba2357a61f94a9040d21b9b9494067"
+        }
+      ],
+      "uncertainty": null,
+      "destinationModule": null
+    }
+  ]
 }

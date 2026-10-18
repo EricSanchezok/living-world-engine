@@ -66,25 +66,34 @@
     "id": "future-demon-daier",
     "label": "黛儿",
     "kind": "person",
-    "openingState": "not-born-or-unplaced",
+    "openingState": "not-born-at-opening",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
       "demon7-black-phoenix"
     ],
-    "aliases": [],
-    "reason": "后期幼童，不按同龄复制到开篇；后续生育取决于世界演化。"
+    "aliases": [
+      "凤灵仙子",
+      "赵小姐"
+    ],
+    "reason": "韩立入灵界时四五岁；后来的凤灵仙子经本人讲述石堆旧事与韩立相认确认同一。T0不生成幼童或成年分身。"
   },
   {
     "id": "future-demon-xiaohong",
     "label": "筱虹",
     "kind": "person",
-    "openingState": "historical-time-undetermined",
+    "openingState": "opening-age-and-rank-underdetermined",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "demon7-black-phoenix"
+      "demon7-black-phoenix",
+      "demon7-black-flame-pill"
     ],
-    "aliases": [],
-    "reason": "后期化神黑凤族成员，当前年龄与任职缺乏依据；不赋予尚未发生的黛儿任务。"
+    "aliases": [
+      "筱姑姑",
+      "筱道友",
+      "黑裙少妇",
+      "宫装少妇"
+    ],
+    "reason": "qq28643714叙述并自报姓名闭合宫装少妇。亲炼三丹和每千年一丹提供古老资历线索，但精确每丹起止、入阶和T0职务仍未锁定；不抄后期任务/处罚或为其编造全部T0库存。"
   },
   {
     "id": "future-demon-flower-fairy",
@@ -1120,5 +1129,390 @@
       "demon7-current-values"
     ],
     "aliases": []
+  },
+  {
+    "id": "demon-phoenix-palace",
+    "label": "黑凤宫",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-with-source-mechanism",
+    "claimIds": [
+      "demon7-phoenix-establishments",
+      "demon7-phoenix-resource-life"
+    ],
+    "aliases": [],
+    "reason": "物件、位置、库存和具体当前用途采用明确原创；所引材料限制另标正文或人物说法。"
+  },
+  {
+    "id": "demon-phoenix-palace-flame-domain",
+    "label": "黑凤宫炎域",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-with-source-mechanism",
+    "claimIds": [
+      "demon7-phoenix-establishments",
+      "demon7-phoenix-resource-life"
+    ],
+    "aliases": [],
+    "reason": "物件、位置、库存和具体当前用途采用明确原创；所引材料限制另标正文或人物说法。"
+  },
+  {
+    "id": "demon-phoenix-inner-sanctuary",
+    "label": "黑凤族秘禁地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-with-source-mechanism",
+    "claimIds": [
+      "demon7-phoenix-establishments",
+      "demon7-phoenix-resource-life"
+    ],
+    "aliases": [],
+    "reason": "物件、位置、库存和具体当前用途采用明确原创；所引材料限制另标正文或人物说法。"
+  },
+  {
+    "id": "demon-phoenix-lava-ground",
+    "label": "黑凤熔岩养虫地",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-with-source-mechanism",
+    "claimIds": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life"
+    ],
+    "aliases": [],
+    "reason": "物件、位置、库存和具体当前用途采用明确原创；所引材料限制另标正文或人物说法。"
+  },
+  {
+    "id": "demon-phoenix-sanctuary-seal",
+    "label": "秘禁地启门符",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-with-source-mechanism",
+    "claimIds": [
+      "demon7-phoenix-resource-life"
+    ],
+    "aliases": [],
+    "reason": "物件、位置、库存和具体当前用途采用明确原创；所引材料限制另标正文或人物说法。"
+  },
+  {
+    "id": "demon-phoenix-fireworm-1",
+    "label": "熔岩火虫（岩槽1）",
+    "kind": "creature",
+    "openingState": "present",
+    "classification": "explicit-original-with-source-mechanism",
+    "claimIds": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "aliases": [],
+    "reason": "物件、位置、库存和具体当前用途采用明确原创；所引材料限制另标正文或人物说法。"
+  },
+  {
+    "id": "demon-phoenix-fireworm-2",
+    "label": "熔岩火虫（岩槽2）",
+    "kind": "creature",
+    "openingState": "present",
+    "classification": "explicit-original-with-source-mechanism",
+    "claimIds": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "aliases": [],
+    "reason": "物件、位置、库存和具体当前用途采用明确原创；所引材料限制另标正文或人物说法。"
+  },
+  {
+    "id": "demon-phoenix-fireworm-3",
+    "label": "熔岩火虫（岩槽3）",
+    "kind": "creature",
+    "openingState": "present",
+    "classification": "explicit-original-with-source-mechanism",
+    "claimIds": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "aliases": [],
+    "reason": "物件、位置、库存和具体当前用途采用明确原创；所引材料限制另标正文或人物说法。"
+  },
+  {
+    "id": "demon-phoenix-fireworm-4",
+    "label": "熔岩火虫（岩槽4）",
+    "kind": "creature",
+    "openingState": "present",
+    "classification": "explicit-original-with-source-mechanism",
+    "claimIds": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "aliases": [],
+    "reason": "物件、位置、库存和具体当前用途采用明确原创；所引材料限制另标正文或人物说法。"
+  },
+  {
+    "id": "demon-phoenix-fireworm-5",
+    "label": "熔岩火虫（岩槽5）",
+    "kind": "creature",
+    "openingState": "present",
+    "classification": "explicit-original-with-source-mechanism",
+    "claimIds": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "aliases": [],
+    "reason": "物件、位置、库存和具体当前用途采用明确原创；所引材料限制另标正文或人物说法。"
+  },
+  {
+    "id": "demon-phoenix-fireworm-6",
+    "label": "熔岩火虫（岩槽6）",
+    "kind": "creature",
+    "openingState": "present",
+    "classification": "explicit-original-with-source-mechanism",
+    "claimIds": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "aliases": [],
+    "reason": "物件、位置、库存和具体当前用途采用明确原创；所引材料限制另标正文或人物说法。"
+  },
+  {
+    "id": "demon-phoenix-silk-stock",
+    "label": "三根晶炎丝",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-with-source-mechanism",
+    "claimIds": [
+      "demon7-crystal-flame-silk",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "aliases": [],
+    "reason": "物件、位置、库存和具体当前用途采用明确原创；所引材料限制另标正文或人物说法。"
+  },
+  {
+    "id": "demon-phoenix-reserve-pill",
+    "label": "筱馆旧炼黑炎丹",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-with-source-mechanism",
+    "claimIds": [
+      "demon7-black-flame-pill",
+      "demon7-phoenix-resource-life",
+      "demon7-phoenix-resource-values"
+    ],
+    "aliases": [],
+    "reason": "物件、位置、库存和具体当前用途采用明确原创；所引材料限制另标正文或人物说法。"
+  },
+  {
+    "id": "demon-phoenix-silk-wristguard-method",
+    "label": "晶丝护腕工序册",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-with-source-mechanism",
+    "claimIds": [
+      "demon7-phoenix-resource-life"
+    ],
+    "aliases": [],
+    "reason": "物件、位置、库存和具体当前用途采用明确原创；所引材料限制另标正文或人物说法。"
+  },
+  {
+    "id": "demon-phoenix-fireworm-record",
+    "label": "火虫观察簿",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-with-source-mechanism",
+    "claimIds": [
+      "demon7-phoenix-resource-life"
+    ],
+    "aliases": [],
+    "reason": "物件、位置、库存和具体当前用途采用明确原创；所引材料限制另标正文或人物说法。"
+  },
+  {
+    "id": "demon-phoenix-silk-purchase-proposal",
+    "label": "黑凤王的购丝意向",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-with-source-mechanism",
+    "claimIds": [
+      "demon7-phoenix-resource-life"
+    ],
+    "aliases": [],
+    "reason": "物件、位置、库存和具体当前用途采用明确原创；所引材料限制另标正文或人物说法。"
+  },
+  {
+    "id": "demon7-silvermoon-human-encounters",
+    "label": "银月在人界的后续经历",
+    "kind": "event",
+    "openingState": "later-only",
+    "classification": "editorial-source-boundary",
+    "claimIds": [
+      "demon7-soul-devouring-boundary",
+      "demon7-linglong-souls"
+    ],
+    "aliases": [],
+    "reason": "狐身、入剑、遁取玉盒和韩立旧识皆在T0之后；同一魂跨载体，不生成新银月。"
+  },
+  {
+    "id": "demon7-linglong-return",
+    "label": "玲珑夺回躯体与返界",
+    "kind": "event",
+    "openingState": "later-only",
+    "classification": "editorial-source-boundary",
+    "claimIds": [
+      "demon7-linglong-souls",
+      "demon7-inverse-route"
+    ],
+    "aliases": [],
+    "reason": "昆吾后续吞魔魂、合体及逆灵通道启动依具体条件而发生，非既定事件。"
+  },
+  {
+    "id": "demon7-black-phoenix-junior-lineage",
+    "label": "黑凤少主与少族长的称谓层次",
+    "kind": "identity-question",
+    "openingState": "source-underdetermined",
+    "classification": "editorial-source-boundary",
+    "claimIds": [
+      "demon7-black-phoenix"
+    ],
+    "aliases": [],
+    "reason": "qq27971637少主与赵氏女、qq28071833少族长嫡孙女及公孙兄并见；未给足完整姓名代际。黛儿父亲的存在不等于这几种称谓全部同人。"
+  },
+  {
+    "id": "demon7-daier-lineage-and-encounters",
+    "label": "黛儿家庭及后续见闻",
+    "kind": "event",
+    "openingState": "later-only",
+    "classification": "editorial-source-boundary",
+    "claimIds": [
+      "demon7-black-phoenix"
+    ],
+    "aliases": [],
+    "reason": "赵氏外家、回宫、成长、相认和闭关按原文叙事时间存资料，不成为T0在世家属关系。"
+  },
+  {
+    "id": "demon7-postopening-han-travel",
+    "label": "韩立入灵界后的虞阳经历",
+    "kind": "event",
+    "openingState": "later-only",
+    "classification": "editorial-source-boundary",
+    "claimIds": [
+      "demon7-black-phoenix"
+    ],
+    "aliases": [],
+    "reason": "毁短信物、在虞阳生活与炼灵具是未来个人选择，不能从开篇执行。"
+  },
+  {
+    "id": "demon7-xiaohong-later-missions",
+    "label": "筱虹后续任务与交易企图",
+    "kind": "event",
+    "openingState": "later-only",
+    "classification": "editorial-source-boundary",
+    "claimIds": [
+      "demon7-black-phoenix",
+      "demon7-black-flame-pill"
+    ],
+    "aliases": [],
+    "reason": "安远、混沌谷、黑叶森林及后来的魔劫事件分别记录；任务和关系都不前置。"
+  },
+  {
+    "id": "demon7-three-headed-moon-wolf",
+    "label": "三首月狼",
+    "kind": "person",
+    "openingState": "source-underdetermined",
+    "classification": "editorial-source-boundary",
+    "claimIds": [
+      "demon7-black-phoenix-flame"
+    ],
+    "aliases": [],
+    "reason": "qq28133895三名青年自认同一三首变异狼，qq28140693合三为一；并非银月或三个无关主体。T0出生、修成分身年月及所在地未给，不据外貌固定开篇人物。"
+  },
+  {
+    "id": "demon7-xiaohong-later-assets",
+    "label": "筱虹后期器物",
+    "kind": "inventory-reference",
+    "openingState": "later-only",
+    "classification": "editorial-source-boundary",
+    "claimIds": [
+      "demon7-black-phoenix",
+      "demon7-black-flame-pill"
+    ],
+    "aliases": [],
+    "reason": "镜、丝网、储物镯与三黑炎丹的占有及被收走都以任务时点为限，原字古境另作文本异常记录。"
+  },
+  {
+    "id": "demon7-yinguang-reference",
+    "label": "银光仙子",
+    "kind": "person",
+    "openingState": "source-underdetermined",
+    "classification": "editorial-source-boundary",
+    "claimIds": [
+      "demon7-ao-long-history"
+    ],
+    "aliases": [],
+    "reason": "含银月部分血脉但并非出身该族，曾在敖啸门下千年；确切T0任职、境界、居地仍缺独立时间锚，不能将天渊候补/长老位置硬套。"
+  },
+  {
+    "id": "demon7-ao-later-tribulation",
+    "label": "敖啸后期天劫与援战",
+    "kind": "event",
+    "openingState": "later-only",
+    "classification": "editorial-source-boundary",
+    "claimIds": [
+      "demon7-ao-long-history"
+    ],
+    "aliases": [],
+    "reason": "第二十一次劫损耗、恢复和木族援战为后期近况；T0不预伤、不前置同行玲珑。"
+  },
+  {
+    "id": "demon7-black-phoenix-later-diplomacy",
+    "label": "黑凤王后期外交",
+    "kind": "event",
+    "openingState": "later-only",
+    "classification": "editorial-source-boundary",
+    "claimIds": [
+      "demon7-black-phoenix"
+    ],
+    "aliases": [],
+    "reason": "万宝会会面、叶家和解、庆贺韩立大乘为后期交往，不能进入王的T0认识。"
+  },
+  {
+    "id": "demon7-black-phoenix-later-assets",
+    "label": "黑凤王后期本命真翎使用",
+    "kind": "inventory-reference",
+    "openingState": "later-only",
+    "classification": "editorial-source-boundary",
+    "claimIds": [
+      "demon7-black-phoenix"
+    ],
+    "aliases": [],
+    "reason": "用羽翎遮黛儿容貌由彭厥转述，效果的绝对性不可超出消息来源；不预置被借出的羽翎。"
+  },
+  {
+    "id": "demon7-bingfeng-later-encounters",
+    "label": "冰凤与黑凤族的后续冲突",
+    "kind": "event",
+    "openingState": "later-only",
+    "classification": "editorial-source-boundary",
+    "claimIds": [
+      "demon7-black-phoenix"
+    ],
+    "aliases": [],
+    "reason": "冰凤复用人界唯一主体；偷渡后遭未具名黑凤族人攻击、被人族魔修强迫和筱虹胁迫皆是后来事件。"
+  },
+  {
+    "id": "demon7-extraction-editorial-notes",
+    "label": "候选抽取校订日志",
+    "kind": "editorial-note",
+    "openingState": "not-a-world-event",
+    "classification": "editorial-source-boundary",
+    "claimIds": [
+      "demon7-black-phoenix",
+      "demon7-linglong-souls"
+    ],
+    "aliases": [],
+    "reason": "编辑补证和分类改写只描述资料处理，不构成世界事件或运行批准；混合跨区条目仍应分别核时间、主体与说法。"
   }
 ]
