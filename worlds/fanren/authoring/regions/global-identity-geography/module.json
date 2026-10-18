@@ -156,6 +156,54 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "yue-blood-one-sky",
+      "name": "血禁一线天",
+      "kind": "location",
+      "placement": "yue-blood-forbidden",
+      "description": "两侧陡峭险峰夹出狭长山路，通向禁地中心一带。",
+      "facts": [
+        {
+          "id": "yue-blood-one-sky-route-yue-blood-forbidden",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-blood-forbidden"
+          },
+          "description": "沿狭窄山路退回禁地外围，岩壁陡峭，须实际行走。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-blood-one-sky-route-yue-blood-central-garden",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-blood-central-garden"
+          },
+          "description": "沿两峰之间的小路向中心区行进，再由实际找到的铜门进入外层花园。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-blood-one-sky-terrain",
+          "predicate": "terrain",
+          "value": {
+            "kind": "text",
+            "value": "陡峰夹道，地面只容沿狭路进退；攀登困难，凌空飞越易暴露。"
+          },
+          "description": "高处飞行会使行迹暴露，并不保证每次都有埋伏者；是否遭袭取决于实际在场者与行动。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [
@@ -228,6 +276,40 @@
           }
         }
       ]
+    },
+    {
+      "entityId": "yue-blood-forbidden",
+      "facts": [
+        {
+          "id": "yue-blood-forbidden-route-yue-blood-one-sky",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-blood-one-sky"
+          },
+          "description": "从禁地外围找到通往中心区的险峰夹道，不能凭地点名称越过未知地形。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ]
+    },
+    {
+      "entityId": "yue-blood-central-garden",
+      "facts": [
+        {
+          "id": "yue-blood-central-garden-route-yue-blood-one-sky",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-blood-one-sky"
+          },
+          "description": "离开中心花园铜门后沿山路退往一线天峡道。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ]
     }
   ],
   "placements": [],
@@ -290,6 +372,24 @@
     ],
     "fact:yue-jiayuan-wharf-route-yue-jiayuan-west": [
       "global-jiayuan-present-street-links"
+    ],
+    "fact:yue-blood-forbidden-route-yue-blood-one-sky": [
+      "global-blood-one-sky-geography"
+    ],
+    "fact:yue-blood-central-garden-route-yue-blood-one-sky": [
+      "global-blood-one-sky-geography"
+    ],
+    "entity:yue-blood-one-sky": [
+      "global-blood-one-sky-geography"
+    ],
+    "fact:yue-blood-one-sky-route-yue-blood-forbidden": [
+      "global-blood-one-sky-geography"
+    ],
+    "fact:yue-blood-one-sky-route-yue-blood-central-garden": [
+      "global-blood-one-sky-geography"
+    ],
+    "fact:yue-blood-one-sky-terrain": [
+      "global-blood-one-sky-geography"
     ]
   }
 }
