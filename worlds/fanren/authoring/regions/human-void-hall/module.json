@@ -1436,6 +1436,19 @@
             "kind": "discoverable",
             "condition": "实际探测罩内外感应差异或取得已验证的禁制知识。"
           }
+        },
+        {
+          "id": "void-hanli-platform-control-interface",
+          "predicate": "control-interface",
+          "value": {
+            "kind": "text",
+            "value": "祭坛藏有巨型控制法阵，中心的鼎形纹样是阵眼标记；操纵须相配虚天鼎、法诀与足够协同法力。"
+          },
+          "description": "祭坛藏有巨型控制法阵，中心的鼎形纹样是阵眼标记；操纵须相配虚天鼎、法诀与足够协同法力。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际显露并检查祭坛隐藏控制阵，或获得可信且可核对的相配控制传承。"
+          }
         }
       ],
       "meters": [],
@@ -13732,6 +13745,11 @@
       "id": "void-matched-control-practice",
       "text": "虚天鼎的持有、附带冰焰炼化、相配通宝诀参悟、体内培炼和实际控制权限分别成立。该鼎三层法诀要求依次为元婴中期、元婴后期、化神；第一层的有限驱使不能当作完全操控。不得挪用另一灵宝的法诀直接替代；培炼耗时须依据实际修行，不因知晓经文便瞬间完成。",
       "severity": "hard"
+    },
+    {
+      "id": "void-control-and-dormancy",
+      "text": "封殿期间部分傀儡和机关关闭，不会自动解除仍在运行的禁神及塔壁空间隔绝。蛮破宝室石门不等获得其中宝物或触发取宝挪移。祭坛控阵须实际显阵、相配虚天鼎与法诀及足够法力；协同法力须有能成立的具体合力秘术和参与者配合，不能仅按人数相加。",
+      "severity": "hard"
     }
   ],
   "provenance": {
@@ -15829,6 +15847,12 @@
     ],
     "law:void-matched-control-practice": [
       "void-matched-tongbao-inscription"
+    ],
+    "fact:void-hanli-platform-control-interface": [
+      "void-closed-control-boundaries"
+    ],
+    "law:void-control-and-dormancy": [
+      "void-closed-control-boundaries"
     ]
   },
   "periodicProperties": [
