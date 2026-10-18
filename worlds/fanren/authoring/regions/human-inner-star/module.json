@@ -468,7 +468,7 @@
             "kind": "entity",
             "entityId": "innerstar-nanming-port"
           },
-          "description": "沿近海航线前往天星港，须船、御器或相应通行能力，海况和给养实际核定。",
+          "description": "沿近海航线前往南明港，须船、御器或相应通行能力，海况和给养实际核定。",
           "access": {
             "kind": "public"
           }
@@ -16262,6 +16262,21 @@
       "id": "innerstar-thunder-reserve",
       "severity": "hard",
       "text": "金雷竹法宝的辟邪神雷有实际蓄量；释放消耗已有蓄雷，恢复需要相应静养过程，不能以材质名称承诺无限雷力。敌人的估计不是持有者实际剩余量，须依真实法宝、修养和已发生消耗裁定。"
+    },
+    {
+      "id": "innerstar-limited-mind-probing",
+      "severity": "hard",
+      "text": "迷魂取心声须有实际施术、相应神识和对象条件，只能得到该手段实际引出的部分内容，不能把一次迷魂等同完整读心或永久控制。此限制不抹掉其他已有法门各自经证实的作用。"
+    },
+    {
+      "id": "innerstar-egg-transit-resilience",
+      "severity": "hard",
+      "text": "普通未孵化灵兽卵不能默认承受传送；携带过阵需核对已知种类、特殊耐受或实际培育阶段，否则存在死亡结果。装入灵兽袋不自行授予抗传送能力，特殊兽卵按其真实例外条件判断。"
+    },
+    {
+      "id": "innerstar-borrowed-treasure-conditions",
+      "severity": "hard",
+      "text": "取得旧法宝不等于已完成炼化、心神相通或掌握全部神通。可以由他人使用的法宝仍按真实陪炼程度和其认主、器灵、禁制等条件发挥，不得以普通旧飞刀可用为由抹去其他宝物限制。"
     }
   ],
   "provenance": {
@@ -18747,6 +18762,15 @@
     ],
     "law:innerstar-thunder-reserve": [
       "innerstar-thunder-replenishment"
+    ],
+    "law:innerstar-limited-mind-probing": [
+      "innerstar-mind-probing-limit"
+    ],
+    "law:innerstar-egg-transit-resilience": [
+      "innerstar-young-eggs-transit"
+    ],
+    "law:innerstar-borrowed-treasure-conditions": [
+      "innerstar-borrowed-treasure-output"
     ]
   },
   "periodicProperties": [
