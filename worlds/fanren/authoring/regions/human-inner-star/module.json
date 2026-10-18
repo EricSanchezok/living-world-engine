@@ -18,7 +18,80 @@
       "kind": "location",
       "placement": "human-luanxing-sea",
       "description": "主要人居和已探明海路所在，各岛间仍需船、遁行或传送。",
-      "facts": [],
+      "facts": [
+        {
+          "id": "human-inner-star-sea-route-human-jinbie-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-jinbie-island"
+          },
+          "description": "通往金鳖岛",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-inner-star-sea-travel-human-jinbie-island",
+          "predicate": "travel-human-jinbie-island",
+          "value": {
+            "kind": "text",
+            "value": "航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。"
+          },
+          "description": "航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-inner-star-sea-route-human-huaming-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-huaming-island"
+          },
+          "description": "通往化鸣岛",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-inner-star-sea-travel-human-huaming-island",
+          "predicate": "travel-human-huaming-island",
+          "value": {
+            "kind": "text",
+            "value": "航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。"
+          },
+          "description": "航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-inner-star-sea-route-human-haiyuan-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-haiyuan-island"
+          },
+          "description": "通往海猿岛",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-inner-star-sea-travel-human-haiyuan-island",
+          "predicate": "travel-human-haiyuan-island",
+          "value": {
+            "kind": "text",
+            "value": "航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。"
+          },
+          "description": "航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
       "meters": [],
       "ratings": [],
       "quantities": []
@@ -1238,6 +1311,18 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "human-kuixing-city-flight-restraint",
+          "predicate": "flight-restraint",
+          "value": {
+            "kind": "text",
+            "value": "城外禁制使飞行法器沉重；足够修为可付出额外法力继续飞行，仍须面对岛内规制。"
+          },
+          "description": "城外禁制使飞行法器沉重；足够修为可付出额外法力继续飞行，仍须面对岛内规制。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -1271,6 +1356,90 @@
             "value": "护罩内的修仙街区并非一条窄街，云梦阁悬浮其间。"
           },
           "description": "护罩内的修仙街区并非一条窄街，云梦阁悬浮其间。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-tiandu-market-route-innerstar-baishui-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-baishui-hall"
+          },
+          "description": "通往白水楼",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-tiandu-market-travel-innerstar-baishui-hall",
+          "predicate": "travel-innerstar-baishui-hall",
+          "value": {
+            "kind": "text",
+            "value": "沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。"
+          },
+          "description": "沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-tiandu-market-route-innerstar-shanhai-hall",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-shanhai-hall"
+          },
+          "description": "通往山海阁",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-tiandu-market-travel-innerstar-shanhai-hall",
+          "predicate": "travel-innerstar-shanhai-hall",
+          "value": {
+            "kind": "text",
+            "value": "沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。"
+          },
+          "description": "沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-tiandu-market-route-innerstar-yuhuan-house",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-yuhuan-house"
+          },
+          "description": "通往玉环居",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-tiandu-market-travel-innerstar-yuhuan-house",
+          "predicate": "travel-innerstar-yuhuan-house",
+          "value": {
+            "kind": "text",
+            "value": "沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。"
+          },
+          "description": "沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-tiandu-market-district-layout",
+          "predicate": "district-layout",
+          "value": {
+            "kind": "text",
+            "value": "这是覆盖魁星城北区的交易城区，白罩内有多条街巷，并非一条狭巷。"
+          },
+          "description": "这是覆盖魁星城北区的交易城区，白罩内有多条街巷，并非一条狭巷。",
           "access": {
             "kind": "public"
           }
@@ -1643,6 +1812,30 @@
             "value": "当前没有承领全岛修炼地的修士，护阵经费由魁星岛务负担；村中自筹是独立补充。若有人合法承领，则需承担防护费用，可收居民有限灵石并免主岛年贡。"
           },
           "description": "当前没有承领全岛修炼地的修士，护阵经费由魁星岛务负担；村中自筹是独立补充。若有人合法承领，则需承担防护费用，可收居民有限灵石并免主岛年贡。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-xiaohuan-island-route-innerstar-xiaohuan-mountain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-xiaohuan-mountain"
+          },
+          "description": "通往小寰山",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-xiaohuan-island-travel-innerstar-xiaohuan-mountain",
+          "predicate": "travel-innerstar-xiaohuan-mountain",
+          "value": {
+            "kind": "text",
+            "value": "沿山路出入，另建洞府需现场勘察与登记。"
+          },
+          "description": "沿山路出入，另建洞府需现场勘察与登记。",
           "access": {
             "kind": "public"
           }
@@ -10822,6 +11015,19 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "innerstar-sleeping-gold-insects-material-limits",
+          "predicate": "material-limits",
+          "value": {
+            "kind": "text",
+            "value": "银色幼虫能吞金属、灵气与适当灵虫，玉木可困；蛛虫互克仍须比较成熟程度、等级和真实攻击，不能保证吞尽任何敌手。"
+          },
+          "description": "银色幼虫能吞金属、灵气与适当灵虫，玉木可困；蛛虫互克仍须比较成熟程度、等级和真实攻击，不能保证吞尽任何敌手。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际研究或试验幼虫的摄食、束缚或交战反应，只揭示当次足以观察的性质。"
+          }
         }
       ],
       "meters": [],
@@ -11250,6 +11456,1428 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "innerstar-liulian-group",
+      "name": "六连殿",
+      "kind": "social-group",
+      "placement": "innerstar-tiandu-market",
+      "description": "六家殿阁联合经营的商家，共同进退；商号财物不等于雇员私财。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-baishui-hall",
+      "name": "白水楼",
+      "kind": "location",
+      "placement": "innerstar-tiandu-market",
+      "description": "金剑旗的法器商阁。",
+      "facts": [
+        {
+          "id": "innerstar-baishui-hall-route-innerstar-tiandu-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-tiandu-market"
+          },
+          "description": "通往天都街",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-baishui-hall-travel-innerstar-tiandu-market",
+          "predicate": "travel-innerstar-tiandu-market",
+          "value": {
+            "kind": "text",
+            "value": "沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。"
+          },
+          "description": "沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-baishui-hall-affiliation",
+          "predicate": "affiliation",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-liulian-group"
+          },
+          "description": "六连联合店阁。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-shanhai-hall",
+      "name": "山海阁",
+      "kind": "location",
+      "placement": "innerstar-tiandu-market",
+      "description": "蓝兽旗的商阁。",
+      "facts": [
+        {
+          "id": "innerstar-shanhai-hall-route-innerstar-tiandu-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-tiandu-market"
+          },
+          "description": "通往天都街",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-shanhai-hall-travel-innerstar-tiandu-market",
+          "predicate": "travel-innerstar-tiandu-market",
+          "value": {
+            "kind": "text",
+            "value": "沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。"
+          },
+          "description": "沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-shanhai-hall-affiliation",
+          "predicate": "affiliation",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-liulian-group"
+          },
+          "description": "六连联合店阁。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-yuhuan-house",
+      "name": "玉环居",
+      "kind": "location",
+      "placement": "innerstar-tiandu-market",
+      "description": "青灵芝旗的灵药商阁。",
+      "facts": [
+        {
+          "id": "innerstar-yuhuan-house-route-innerstar-tiandu-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-tiandu-market"
+          },
+          "description": "通往天都街",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-yuhuan-house-travel-innerstar-tiandu-market",
+          "predicate": "travel-innerstar-tiandu-market",
+          "value": {
+            "kind": "text",
+            "value": "沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。"
+          },
+          "description": "沿北区街巷到店门，进门交易；关闭与接待按当时情况判断。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-yuhuan-house-affiliation",
+          "predicate": "affiliation",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-liulian-group"
+          },
+          "description": "六连联合店阁。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-yunmeng-pavilion",
+      "name": "云梦阁",
+      "kind": "location",
+      "placement": "innerstar-tiandu-market",
+      "description": "悬在天都北区上空三十余丈的翠绿阁楼，散着淡光。",
+      "facts": [
+        {
+          "id": "innerstar-yunmeng-pavilion-access-condition",
+          "predicate": "access-condition",
+          "value": {
+            "kind": "text",
+            "value": "需实际可用的升空或接引方式到达；在下方看见阁楼不等于已进入。"
+          },
+          "description": "需实际可用的升空或接引方式到达；在下方看见阁楼不等于已进入。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "human-jinbie-island",
+      "name": "金鳖岛",
+      "kind": "location",
+      "placement": "human-inner-star-sea",
+      "description": "有修士隐居的海岛，具体洞府归属须核。",
+      "facts": [
+        {
+          "id": "human-jinbie-island-route-human-inner-star-sea",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-inner-star-sea"
+          },
+          "description": "通往内星海",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-jinbie-island-travel-human-inner-star-sea",
+          "predicate": "travel-human-inner-star-sea",
+          "value": {
+            "kind": "text",
+            "value": "航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。"
+          },
+          "description": "航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "human-huaming-island",
+      "name": "化鸣岛",
+      "kind": "location",
+      "placement": "human-inner-star-sea",
+      "description": "内星海一座岛屿，船航与御器均需实际行程。",
+      "facts": [
+        {
+          "id": "human-huaming-island-route-human-inner-star-sea",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-inner-star-sea"
+          },
+          "description": "通往内星海",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-huaming-island-travel-human-inner-star-sea",
+          "predicate": "travel-human-inner-star-sea",
+          "value": {
+            "kind": "text",
+            "value": "航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。"
+          },
+          "description": "航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "human-haiyuan-island",
+      "name": "海猿岛",
+      "kind": "location",
+      "placement": "human-inner-star-sea",
+      "description": "偏远中型海岛，低阶灵脉和海猿贸易吸引低阶修士，未设岛主。",
+      "facts": [
+        {
+          "id": "human-haiyuan-island-route-human-inner-star-sea",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-inner-star-sea"
+          },
+          "description": "通往内星海",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-haiyuan-island-travel-human-inner-star-sea",
+          "predicate": "travel-human-inner-star-sea",
+          "value": {
+            "kind": "text",
+            "value": "航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。"
+          },
+          "description": "航行需船只、补给和识路；御器需对应能力与法力，不按一条地图关系瞬间到达。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-haiyuan-island-route-innerstar-haiyuan-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-haiyuan-market"
+          },
+          "description": "通往海猿收购埠",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-haiyuan-island-travel-innerstar-haiyuan-market",
+          "predicate": "travel-innerstar-haiyuan-market",
+          "value": {
+            "kind": "text",
+            "value": "岛上道路可步行；海猿出没处在近海，不是柜台无限生货。"
+          },
+          "description": "岛上道路可步行；海猿出没处在近海，不是柜台无限生货。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-haiyuan-island-route-innerstar-haiyuan-coast",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-haiyuan-coast"
+          },
+          "description": "通往海猿近岸",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-haiyuan-island-travel-innerstar-haiyuan-coast",
+          "predicate": "travel-innerstar-haiyuan-coast",
+          "value": {
+            "kind": "text",
+            "value": "沿岸路到水边，入水须水性或避水手段。"
+          },
+          "description": "沿岸路到水边，入水须水性或避水手段。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-xiaohuan-mountain",
+      "name": "小寰山",
+      "kind": "location",
+      "placement": "human-xiaohuan-island",
+      "description": "小寰岛的山地，未因访客入山就改变住用权。",
+      "facts": [
+        {
+          "id": "innerstar-xiaohuan-mountain-route-human-xiaohuan-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-xiaohuan-island"
+          },
+          "description": "通往小寰岛",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-xiaohuan-mountain-travel-human-xiaohuan-island",
+          "predicate": "travel-human-xiaohuan-island",
+          "value": {
+            "kind": "text",
+            "value": "沿山路出入，另建洞府需现场勘察与登记。"
+          },
+          "description": "沿山路出入，另建洞府需现场勘察与登记。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-liulian-working-fund",
+      "name": "六连店阁周转匣",
+      "kind": "container",
+      "placement": "innerstar-yuhuan-house",
+      "description": "店阁共有的有限周转灵石。",
+      "facts": [
+        {
+          "id": "innerstar-liulian-working-fund-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-liulian-group"
+          },
+          "description": "由六连殿所有；实际交付才改变归属。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 120
+        }
+      ]
+    },
+    {
+      "id": "innerstar-current-xueling",
+      "name": "玉环现存雪灵水",
+      "kind": "item",
+      "placement": "innerstar-yuhuan-house",
+      "description": "一小瓶奇寒透明液；实际分量只够一次常规冲关用量，消耗后须补货。",
+      "facts": [
+        {
+          "id": "innerstar-current-xueling-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-liulian-group"
+          },
+          "description": "由六连殿所有；实际交付才改变归属。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-current-tianhuo",
+      "name": "玉环现存天火液",
+      "kind": "item",
+      "placement": "innerstar-yuhuan-house",
+      "description": "一小瓶炙热赤液；实际分量只够一次常规冲关用量，不能重复服用不减存量。",
+      "facts": [
+        {
+          "id": "innerstar-current-tianhuo-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-liulian-group"
+          },
+          "description": "由六连殿所有；实际交付才改变归属。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-current-sea-notes",
+      "name": "海丹药性汇抄",
+      "kind": "item",
+      "placement": "innerstar-yuhuan-house",
+      "description": "记录妖丹主辅料的区别、灵药性状和有限冲关作用；不是完整炼制丹方，不自动授予炼丹技能。",
+      "facts": [
+        {
+          "id": "innerstar-current-sea-notes-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-liulian-group"
+          },
+          "description": "由六连殿所有；实际交付才改变归属。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-current-water-shield",
+      "name": "白水普通水盾",
+      "kind": "item",
+      "placement": "innerstar-baishui-hall",
+      "description": "一面普通水属性下阶防御法器，需炼气者注入法力维持，受力过强可破。",
+      "facts": [
+        {
+          "id": "innerstar-current-water-shield-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-liulian-group"
+          },
+          "description": "由六连殿所有；实际交付才改变归属。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-haiyuan-market",
+      "name": "海猿收购埠",
+      "kind": "location",
+      "placement": "human-haiyuan-island",
+      "description": "商户联合维持的小埠与活猿收购棚，等候海船装运。",
+      "facts": [
+        {
+          "id": "innerstar-haiyuan-market-route-human-haiyuan-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-haiyuan-island"
+          },
+          "description": "通往海猿岛",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-haiyuan-market-travel-human-haiyuan-island",
+          "predicate": "travel-human-haiyuan-island",
+          "value": {
+            "kind": "text",
+            "value": "岛上道路可步行；海猿出没处在近海，不是柜台无限生货。"
+          },
+          "description": "岛上道路可步行；海猿出没处在近海，不是柜台无限生货。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-haiyuan-merchants",
+      "name": "海猿岛商户合伙",
+      "kind": "social-group",
+      "placement": "innerstar-haiyuan-market",
+      "description": "共担收购棚与维护阵费用，没有全岛主权。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-haiyuan-array",
+      "name": "收购埠护栏阵",
+      "kind": "item",
+      "placement": "innerstar-haiyuan-market",
+      "description": "商户合资的小阵，阻低阶兽冲撞；须灵石维护，强攻会损坏。",
+      "facts": [
+        {
+          "id": "innerstar-haiyuan-array-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-haiyuan-merchants"
+          },
+          "description": "由海猿岛商户合伙所有；实际交付才改变归属。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-haiyuan-coast",
+      "name": "海猿近岸",
+      "kind": "location",
+      "placement": "human-haiyuan-island",
+      "description": "海猿潜水捕鱼的浅深水交界海岸。",
+      "facts": [
+        {
+          "id": "innerstar-haiyuan-coast-route-human-haiyuan-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-haiyuan-island"
+          },
+          "description": "通往海猿岛",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-haiyuan-coast-travel-human-haiyuan-island",
+          "predicate": "travel-human-haiyuan-island",
+          "value": {
+            "kind": "text",
+            "value": "沿岸路到水边，入水须水性或避水手段。"
+          },
+          "description": "沿岸路到水边，入水须水性或避水手段。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-haiyuan-wild-apes",
+      "name": "近岸野生海猿",
+      "kind": "creature-group",
+      "placement": "innerstar-haiyuan-coast",
+      "description": "三头未被收服的海猿，会潜水捕鱼和低阶水箭；可逃跑或反抗。",
+      "facts": [
+        {
+          "id": "innerstar-haiyuan-wild-apes-count",
+          "predicate": "individual-count",
+          "value": {
+            "kind": "number",
+            "value": 3
+          },
+          "description": "当前三头，捕捉、迁离、死亡会改变数量。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "在近岸实际看清并清点海猿，不能从传闻获知当前总数。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-haiyuan-captive",
+      "name": "邱舟收购的海猿",
+      "kind": "creature",
+      "placement": "innerstar-haiyuan-cage",
+      "description": "一头已捕的海猿，关在有锁木笼中；能活动、饮食与反抗。",
+      "facts": [
+        {
+          "id": "innerstar-haiyuan-captive-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-haiyuan-trader"
+          },
+          "description": "由邱舟所有；实际交付才改变归属。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-haiyuan-captive-care",
+          "predicate": "care",
+          "value": {
+            "kind": "text",
+            "value": "木笼是实际约束但非永久奴役；需要鱼食和饮水，转卖须交付，驯养仍需时间与能力。"
+          },
+          "description": "木笼是实际约束但非永久奴役；需要鱼食和饮水，转卖须交付，驯养仍需时间与能力。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-haiyuan-net",
+      "name": "邱舟的捕网",
+      "kind": "item",
+      "placement": "innerstar-haiyuan-market",
+      "description": "一张可补修的细孔结实捕网，不是高阶法宝。",
+      "facts": [
+        {
+          "id": "innerstar-haiyuan-net-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-haiyuan-trader"
+          },
+          "description": "由邱舟所有；实际交付才改变归属。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-current-clerk",
+      "name": "顾篆",
+      "kind": "person",
+      "placement": "innerstar-yuhuan-house",
+      "description": "六连店阁受雇经手人，管理有限现货；赚工钱而非私占商号。",
+      "facts": [
+        {
+          "id": "innerstar-current-clerk-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼气7层。"
+          },
+          "description": "炼气7层。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "innerstar-current-clerk"
+            ]
+          }
+        },
+        {
+          "id": "innerstar-current-clerk-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "辨认常见水火药性、记账、用低阶法器；不会仅凭药性说明炼出高阶丹。"
+          },
+          "description": "辨认常见水火药性、记账、用低阶法器；不会仅凭药性说明炼出高阶丹。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "innerstar-current-clerk"
+            ]
+          }
+        },
+        {
+          "id": "innerstar-current-clerk-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "水、木、土三灵根，已检测并据此入道。"
+          },
+          "description": "水、木、土三灵根，已检测并据此入道。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "有检测能力者取得本人同意并实际查验灵根。"
+          }
+        },
+        {
+          "id": "innerstar-current-clerk-trade-authority",
+          "predicate": "trade-authority",
+          "value": {
+            "kind": "text",
+            "value": "受雇可出售两瓶辅助液各60低阶石、汇抄3石、水盾8石；收款进入商号周转匣，自己的9石另存身上，不得提取公款作私人修炼。"
+          },
+          "description": "受雇可出售两瓶辅助液各60低阶石、汇抄3石、水盾8石；收款进入商号周转匣，自己的9石另存身上，不得提取公款作私人修炼。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "innerstar-current-clerk"
+            ]
+          }
+        },
+        {
+          "id": "innerstar-current-clerk-employed-by",
+          "predicate": "employed-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-liulian-group"
+          },
+          "description": "由六连店阁雇用，负责日常交易；不因此拥有商号。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "innerstar-current-clerk-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "innerstar-current-clerk-mana",
+          "definition_id": "mana",
+          "current": 50
+        }
+      ],
+      "ratings": [
+        {
+          "id": "innerstar-current-clerk-cultivation",
+          "definition_id": "cultivation",
+          "value": 1
+        },
+        {
+          "id": "innerstar-current-clerk-force",
+          "definition_id": "force",
+          "value": 2
+        },
+        {
+          "id": "innerstar-current-clerk-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "innerstar-current-clerk-perception",
+          "definition_id": "perception",
+          "value": 2
+        },
+        {
+          "id": "innerstar-current-clerk-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 9
+        }
+      ],
+      "agent": {
+        "id": "innerstar-current-clerk",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "六连店阁受雇经手人，管理有限现货；赚工钱而非私占商号。",
+            "voice": "先说明实物与条件，遇未明之处愿意查验，不夸大承诺。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "核对两瓶辅助液的封装，有来客询价就说明现货价格，按授权完成成交。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "顾篆",
+              "description": "六连店阁受雇经手人，管理有限现货；赚工钱而非私占商号。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "玉环居",
+              "description": "当前所在且熟悉的生活地点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-liulian-group",
+              "name": "六连殿",
+              "description": "六家殿阁联合经营的商家，共同进退；商号财物不等于雇员私财。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-baishui-hall",
+              "name": "白水楼",
+              "description": "金剑旗的法器商阁。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-shanhai-hall",
+              "name": "山海阁",
+              "description": "蓝兽旗的商阁。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-yuhuan-house",
+              "name": "玉环居",
+              "description": "青灵芝旗的灵药商阁。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-liulian-working-fund",
+              "name": "六连店阁周转匣",
+              "description": "店阁共有的有限周转灵石。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-current-xueling",
+              "name": "玉环现存雪灵水",
+              "description": "一小瓶奇寒透明液；实际分量只够一次常规冲关用量，消耗后须补货。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-current-tianhuo",
+              "name": "玉环现存天火液",
+              "description": "一小瓶炙热赤液；实际分量只够一次常规冲关用量，不能重复服用不减存量。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-current-sea-notes",
+              "name": "海丹药性汇抄",
+              "description": "记录妖丹主辅料的区别、灵药性状和有限冲关作用；不是完整炼制丹方，不自动授予炼丹技能。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-current-water-shield",
+              "name": "白水普通水盾",
+              "description": "一面普通水属性下阶防御法器，需炼气者注入法力维持，受力过强可破。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "innerstar-current-clerk"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "innerstar-yuhuan-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-liulian-group",
+              "canonical_entity_ids": [
+                "innerstar-liulian-group"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-baishui-hall",
+              "canonical_entity_ids": [
+                "innerstar-baishui-hall"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-shanhai-hall",
+              "canonical_entity_ids": [
+                "innerstar-shanhai-hall"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-yuhuan-house",
+              "canonical_entity_ids": [
+                "innerstar-yuhuan-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-liulian-working-fund",
+              "canonical_entity_ids": [
+                "innerstar-liulian-working-fund"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-current-xueling",
+              "canonical_entity_ids": [
+                "innerstar-current-xueling"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-current-tianhuo",
+              "canonical_entity_ids": [
+                "innerstar-current-tianhuo"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-current-sea-notes",
+              "canonical_entity_ids": [
+                "innerstar-current-sea-notes"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-current-water-shield",
+              "canonical_entity_ids": [
+                "innerstar-current-water-shield"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "实际生活、学艺与经营经历。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "own-foundation",
+              "subjectId": "self",
+              "predicate": "own-foundation",
+              "value": {
+                "kind": "text",
+                "value": "自己炼气7层，水木土三灵根。"
+              },
+              "description": "自己炼气7层，水木土三灵根。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "skill",
+              "subjectId": "self",
+              "predicate": "skill",
+              "value": {
+                "kind": "text",
+                "value": "辨认常见水火药性、记账、用低阶法器；不会仅凭药性说明炼出高阶丹。"
+              },
+              "description": "辨认常见水火药性、记账、用低阶法器；不会仅凭药性说明炼出高阶丹。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "purpose",
+              "subjectId": "self",
+              "predicate": "purpose",
+              "value": {
+                "kind": "text",
+                "value": "核对两瓶辅助液的封装，有来客询价就说明现货价格，按授权完成成交。"
+              },
+              "description": "核对两瓶辅助液的封装，有来客询价就说明现货价格，按授权完成成交。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "opening-night",
+              "subjectId": "self",
+              "predicate": "opening-night",
+              "value": {
+                "kind": "text",
+                "value": "此前出门与开店时亲见夜色；此后时段按实际经过变化。"
+              },
+              "description": "此前出门与开店时亲见夜色；此后时段按实际经过变化。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "trade-authority",
+              "subjectId": "self",
+              "predicate": "trade-authority",
+              "value": {
+                "kind": "text",
+                "value": "受雇可出售两瓶辅助液各60低阶石、汇抄3石、水盾8石；收款进入商号周转匣，自己的9石另存身上，不得提取公款作私人修炼。"
+              },
+              "description": "受雇可出售两瓶辅助液各60低阶石、汇抄3石、水盾8石；收款进入商号周转匣，自己的9石另存身上，不得提取公款作私人修炼。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "innerstar-haiyuan-trader",
+      "name": "邱舟",
+      "kind": "person",
+      "placement": "innerstar-haiyuan-market",
+      "description": "海猿岛低阶收购人，参与商户合伙，靠捕捉与转卖活猿谋生。",
+      "facts": [
+        {
+          "id": "innerstar-haiyuan-trader-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼气6层。"
+          },
+          "description": "炼气6层。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "innerstar-haiyuan-trader"
+            ]
+          }
+        },
+        {
+          "id": "innerstar-haiyuan-trader-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "会基础水箭、识海猿习性、捕鱼与补网，已能使用灵气但不擅高阶驭兽。"
+          },
+          "description": "会基础水箭、识海猿习性、捕鱼与补网，已能使用灵气但不擅高阶驭兽。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "innerstar-haiyuan-trader"
+            ]
+          }
+        },
+        {
+          "id": "innerstar-haiyuan-trader-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "水、木、土三灵根，已检测并据此入道。"
+          },
+          "description": "水、木、土三灵根，已检测并据此入道。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "有检测能力者取得本人同意并实际查验灵根。"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "innerstar-haiyuan-trader-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "innerstar-haiyuan-trader-mana",
+          "definition_id": "mana",
+          "current": 50
+        }
+      ],
+      "ratings": [
+        {
+          "id": "innerstar-haiyuan-trader-cultivation",
+          "definition_id": "cultivation",
+          "value": 1
+        },
+        {
+          "id": "innerstar-haiyuan-trader-force",
+          "definition_id": "force",
+          "value": 2
+        },
+        {
+          "id": "innerstar-haiyuan-trader-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "innerstar-haiyuan-trader-perception",
+          "definition_id": "perception",
+          "value": 2
+        },
+        {
+          "id": "innerstar-haiyuan-trader-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 12
+        }
+      ],
+      "agent": {
+        "id": "innerstar-haiyuan-trader",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "海猿岛低阶收购人，参与商户合伙，靠捕捉与转卖活猿谋生。",
+            "voice": "先说明实物与条件，遇未明之处愿意查验，不夸大承诺。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "给已捕海猿准备饮水和鱼食，再补捕网；只有谈妥实物和价格才出让。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "邱舟",
+              "description": "海猿岛低阶收购人，参与商户合伙，靠捕捉与转卖活猿谋生。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "海猿收购埠",
+              "description": "当前所在且熟悉的生活地点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-human-haiyuan-island",
+              "name": "海猿岛",
+              "description": "偏远中型海岛，低阶灵脉和海猿贸易吸引低阶修士，未设岛主。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-haiyuan-coast",
+              "name": "海猿近岸",
+              "description": "海猿潜水捕鱼的浅深水交界海岸。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-haiyuan-merchants",
+              "name": "海猿岛商户合伙",
+              "description": "共担收购棚与维护阵费用，没有全岛主权。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-haiyuan-array",
+              "name": "收购埠护栏阵",
+              "description": "商户合资的小阵，阻低阶兽冲撞；须灵石维护，强攻会损坏。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-haiyuan-captive",
+              "name": "邱舟收购的海猿",
+              "description": "一头已捕的海猿，关在有锁木笼中；能活动、饮食与反抗。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-haiyuan-net",
+              "name": "邱舟的捕网",
+              "description": "一张可补修的细孔结实捕网，不是高阶法宝。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-haiyuan-feed",
+              "name": "海猿的鱼食水桶",
+              "description": "两条鲜鱼与一桶水，需实际消耗和补充。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-haiyuan-cage",
+              "name": "海猿木笼",
+              "description": "自己用来约束已捕海猿的木笼。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "innerstar-haiyuan-trader"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "innerstar-haiyuan-market"
+              ]
+            },
+            {
+              "local_entity_id": "known-human-haiyuan-island",
+              "canonical_entity_ids": [
+                "human-haiyuan-island"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-haiyuan-coast",
+              "canonical_entity_ids": [
+                "innerstar-haiyuan-coast"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-haiyuan-merchants",
+              "canonical_entity_ids": [
+                "innerstar-haiyuan-merchants"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-haiyuan-array",
+              "canonical_entity_ids": [
+                "innerstar-haiyuan-array"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-haiyuan-captive",
+              "canonical_entity_ids": [
+                "innerstar-haiyuan-captive"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-haiyuan-net",
+              "canonical_entity_ids": [
+                "innerstar-haiyuan-net"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-haiyuan-feed",
+              "canonical_entity_ids": [
+                "innerstar-haiyuan-feed"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-haiyuan-cage",
+              "canonical_entity_ids": [
+                "innerstar-haiyuan-cage"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "实际生活、学艺与经营经历。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "own-foundation",
+              "subjectId": "self",
+              "predicate": "own-foundation",
+              "value": {
+                "kind": "text",
+                "value": "自己炼气6层，水木土三灵根。"
+              },
+              "description": "自己炼气6层，水木土三灵根。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "skill",
+              "subjectId": "self",
+              "predicate": "skill",
+              "value": {
+                "kind": "text",
+                "value": "会基础水箭、识海猿习性、捕鱼与补网，已能使用灵气但不擅高阶驭兽。"
+              },
+              "description": "会基础水箭、识海猿习性、捕鱼与补网，已能使用灵气但不擅高阶驭兽。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "purpose",
+              "subjectId": "self",
+              "predicate": "purpose",
+              "value": {
+                "kind": "text",
+                "value": "给已捕海猿准备饮水和鱼食，再补捕网；只有谈妥实物和价格才出让。"
+              },
+              "description": "给已捕海猿准备饮水和鱼食，再补捕网；只有谈妥实物和价格才出让。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "opening-night",
+              "subjectId": "self",
+              "predicate": "opening-night",
+              "value": {
+                "kind": "text",
+                "value": "此前出门与开店时亲见夜色；此后时段按实际经过变化。"
+              },
+              "description": "此前出门与开店时亲见夜色；此后时段按实际经过变化。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "innerstar-haiyuan-feed",
+      "name": "海猿的鱼食水桶",
+      "kind": "container",
+      "placement": "innerstar-haiyuan-market",
+      "description": "两条鲜鱼与一桶水，需实际消耗和补充。",
+      "facts": [
+        {
+          "id": "innerstar-haiyuan-feed-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-haiyuan-trader"
+          },
+          "description": "由邱舟所有；实际交付才改变归属。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-haiyuan-cage",
+      "name": "海猿木笼",
+      "kind": "container",
+      "placement": "innerstar-haiyuan-market",
+      "description": "锁住笼门的木笼，普通工具可实际打开，不能阻挡所有法术。",
+      "facts": [
+        {
+          "id": "innerstar-haiyuan-cage-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-haiyuan-trader"
+          },
+          "description": "邱舟的木笼。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [],
@@ -11280,6 +12908,16 @@
       "id": "innerstar-magnetic-window",
       "severity": "hard",
       "text": "元磁山只有一个真实主体。已受其约束的研修者，平日远离时必须判定反噬及当前法力条件，不能用口头意图取消限制；百年磁力全消窗口可解除此项牵制，但不使人瞬间到达远方、不消除其他禁制，也不授予未知终关解法。离开和回来都需真实移动。"
+    },
+    {
+      "id": "innerstar-alchemy-constraints",
+      "text": "本海域常售高阶丹方以妖丹为主料，炼气低阶配方可不用。配方、适配辅料、炼制能力及实物必须具备；药性汇抄不等于完整配方。降尘丹一次冲关仅一颗，辅助液也不保证结丹成功，不能把传闻或举例百分比写成确定概率。",
+      "severity": "hard"
+    },
+    {
+      "id": "innerstar-living-beast-storage",
+      "text": "灵兽袋的缩小收容能力不属于普通储物袋；活兽仍有独立状态，未捕获或未驯服不能凭说话成为库存，奇虫排名不覆盖境界、成熟程度和相克条件。",
+      "severity": "hard"
     }
   ],
   "provenance": {
@@ -12922,6 +14560,325 @@
     ],
     "fact:human-kuixing-island-perimeter-array": [
       "innerstar-kuixing-geography-details"
+    ],
+    "entity:innerstar-liulian-group": [
+      "innerstar-tiandu-commerce",
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-baishui-hall": [
+      "innerstar-tiandu-commerce",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-baishui-hall-route-innerstar-tiandu-market": [
+      "innerstar-tiandu-commerce",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-baishui-hall-travel-innerstar-tiandu-market": [
+      "innerstar-tiandu-commerce",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-tiandu-market-route-innerstar-baishui-hall": [
+      "innerstar-tiandu-commerce",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-tiandu-market-travel-innerstar-baishui-hall": [
+      "innerstar-tiandu-commerce",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-baishui-hall-affiliation": [
+      "innerstar-tiandu-commerce"
+    ],
+    "entity:innerstar-shanhai-hall": [
+      "innerstar-tiandu-commerce",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-shanhai-hall-route-innerstar-tiandu-market": [
+      "innerstar-tiandu-commerce",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-shanhai-hall-travel-innerstar-tiandu-market": [
+      "innerstar-tiandu-commerce",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-tiandu-market-route-innerstar-shanhai-hall": [
+      "innerstar-tiandu-commerce",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-tiandu-market-travel-innerstar-shanhai-hall": [
+      "innerstar-tiandu-commerce",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-shanhai-hall-affiliation": [
+      "innerstar-tiandu-commerce"
+    ],
+    "entity:innerstar-yuhuan-house": [
+      "innerstar-tiandu-commerce",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-yuhuan-house-route-innerstar-tiandu-market": [
+      "innerstar-tiandu-commerce",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-yuhuan-house-travel-innerstar-tiandu-market": [
+      "innerstar-tiandu-commerce",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-tiandu-market-route-innerstar-yuhuan-house": [
+      "innerstar-tiandu-commerce",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-tiandu-market-travel-innerstar-yuhuan-house": [
+      "innerstar-tiandu-commerce",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-yuhuan-house-affiliation": [
+      "innerstar-tiandu-commerce"
+    ],
+    "entity:innerstar-yunmeng-pavilion": [
+      "innerstar-tiandu-commerce"
+    ],
+    "fact:innerstar-yunmeng-pavilion-access-condition": [
+      "innerstar-tiandu-commerce"
+    ],
+    "fact:human-kuixing-city-flight-restraint": [
+      "innerstar-tiandu-commerce"
+    ],
+    "fact:innerstar-tiandu-market-district-layout": [
+      "innerstar-tiandu-commerce"
+    ],
+    "entity:human-jinbie-island": [
+      "innerstar-named-island-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-jinbie-island-route-human-inner-star-sea": [
+      "innerstar-named-island-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-jinbie-island-travel-human-inner-star-sea": [
+      "innerstar-named-island-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-inner-star-sea-route-human-jinbie-island": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-inner-star-sea-travel-human-jinbie-island": [
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:human-huaming-island": [
+      "innerstar-named-island-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-huaming-island-route-human-inner-star-sea": [
+      "innerstar-named-island-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-huaming-island-travel-human-inner-star-sea": [
+      "innerstar-named-island-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-inner-star-sea-route-human-huaming-island": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-inner-star-sea-travel-human-huaming-island": [
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:human-haiyuan-island": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-haiyuan-island-route-human-inner-star-sea": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-haiyuan-island-travel-human-inner-star-sea": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-inner-star-sea-route-human-haiyuan-island": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-inner-star-sea-travel-human-haiyuan-island": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-xiaohuan-mountain": [
+      "innerstar-named-island-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-xiaohuan-mountain-route-human-xiaohuan-island": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-xiaohuan-mountain-travel-human-xiaohuan-island": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-xiaohuan-island-route-innerstar-xiaohuan-mountain": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-xiaohuan-island-travel-innerstar-xiaohuan-mountain": [
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-liulian-working-fund": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-liulian-working-fund-owned-by": [
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-current-xueling": [
+      "innerstar-sea-alchemy",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-current-xueling-owned-by": [
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-current-tianhuo": [
+      "innerstar-sea-alchemy",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-current-tianhuo-owned-by": [
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-current-sea-notes": [
+      "innerstar-sea-alchemy",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-current-sea-notes-owned-by": [
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-current-water-shield": [
+      "innerstar-merchant-current-stock",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-current-water-shield-owned-by": [
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-haiyuan-market": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-haiyuan-market-route-human-haiyuan-island": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-haiyuan-market-travel-human-haiyuan-island": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-haiyuan-island-route-innerstar-haiyuan-market": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-haiyuan-island-travel-innerstar-haiyuan-market": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-haiyuan-merchants": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-haiyuan-array": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-haiyuan-array-owned-by": [
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-haiyuan-coast": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-haiyuan-coast-route-human-haiyuan-island": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-haiyuan-coast-travel-human-haiyuan-island": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-haiyuan-island-route-innerstar-haiyuan-coast": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:human-haiyuan-island-travel-innerstar-haiyuan-coast": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-haiyuan-wild-apes": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-haiyuan-wild-apes-count": [
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-haiyuan-captive": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-haiyuan-net": [
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-current-clerk": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-current-clerk-cultivation-state": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-current-clerk-learned-skill": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-current-clerk-spiritual-root": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-current-clerk-trade-authority": [
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-haiyuan-trader": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-haiyuan-trader-cultivation-state": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-haiyuan-trader-learned-skill": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-haiyuan-trader-spiritual-root": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-haiyuan-captive-owned-by": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-haiyuan-net-owned-by": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-haiyuan-captive-care": [
+      "innerstar-haiyuan-geography",
+      "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-haiyuan-feed": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-haiyuan-feed-owned-by": [
+      "innerstar-merchant-current-stock"
+    ],
+    "law:innerstar-alchemy-constraints": [
+      "innerstar-sea-alchemy",
+      "innerstar-merchant-current-stock"
+    ],
+    "law:innerstar-living-beast-storage": [
+      "innerstar-beast-and-bag-rules",
+      "innerstar-haiyuan-geography"
+    ],
+    "fact:innerstar-sleeping-gold-insects-material-limits": [
+      "innerstar-beast-and-bag-rules"
+    ],
+    "entity:innerstar-haiyuan-cage": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-haiyuan-cage-owned-by": [
+      "innerstar-merchant-current-stock"
+    ],
+    "fact:innerstar-current-clerk-employed-by": [
+      "innerstar-merchant-current-stock"
     ]
   },
   "periodicProperties": [
