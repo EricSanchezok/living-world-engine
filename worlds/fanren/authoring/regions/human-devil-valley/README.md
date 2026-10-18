@@ -6,4 +6,6 @@
 
 凡人阶段可从问山庐的图稿署名、借出原件和抄本报价介入外围生活；有能力者可调查古藏、矿脉、古阵与残魂交易。所有入谷风险可拒绝，没有按小说章节强迫取宝、相遇或战争的安排。
 
-747条最终候选均已处置，64章实际全文阅读，关键采用锚点再次返回上下文。未确证T0的后来物件/人员保留索引；数量、部分居所、小阶段和旧器未知功能明确原创或标定。跨区依赖为human-tiannan / human-dongyu / dongyu-changzhou / guiling-sect / yuling-sect及associated-reported；不生成占位假实体。根代理将苍坤洞府挂到其唯一human-mulan-steppe。
+原模块依据此前64章实际全文阅读和采用锚点二读。旧747条表只完成候选导航分类；本轮严格原文裁决85条，662条仍待审，不能以旧分类替代逐条源文审定。旧表保存在`candidate-navigation.json`，严格表在`candidate-dispositions.json`。本轮27章选段与上下文的阅读记录在`candidate-source-reading.json`，不声称这27章新增完成全章审定。未确证T0的后来物件/人员保留索引；数量、部分居所、小阶段和旧器未知功能明确原创或标定。跨区依赖为human-tiannan / human-dongyu / dongyu-changzhou / guiling-sect / yuling-sect及associated-reported；不生成占位假实体。根代理将苍坤洞府挂到其唯一human-mulan-steppe。
+
+本轮补入三项原文边界：凶名和寻宝者把握不等于客观成功率；两仪阴环之外有据的防护阵或宝物仍可尝试；灵烛果采后半日内需入鼎、逾半日药力减、逾三日失效。造化丹具体服药窗口仍未知，未编造秒数。原无锚点的共同开篇issue已以原批六章正文补锚，并保留修复说明；未修改提取报告。

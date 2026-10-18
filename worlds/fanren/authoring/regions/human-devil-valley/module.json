@@ -180,9 +180,9 @@
           "predicate": "opening-cycle",
           "value": {
             "kind": "text",
-            "value": "当前不是约五十年一遇的较稳定年，本版选定距下一次稳定窗口约十二人界年；这是开篇相位标定，稳定期仍保留裂隙危险。"
+            "value": "当前不是约五十年一遇的较稳定年，距下一次较稳定窗口约十二人界年；较稳定时仍保留裂隙危险。"
           },
-          "description": "当前不是约五十年一遇的较稳定年，本版选定距下一次稳定窗口约十二人界年；这是开篇相位标定，稳定期仍保留裂隙危险。",
+          "description": "当前不是约五十年一遇的较稳定年，距下一次较稳定窗口约十二人界年；较稳定时仍保留裂隙危险。",
           "access": {
             "kind": "discoverable",
             "condition": "连续观察谷口变化或取得可信长期观测记录。"
@@ -2421,9 +2421,9 @@
           "predicate": "operating-boundary",
           "value": {
             "kind": "text",
-            "value": "需学会催动并持续供给法力。本版适配元婴操作者，一次近身护三人，每行进十分钟耗10法力量；不替代探测普通空间裂缝。"
+            "value": "需学会催动并持续供给法力。适配元婴操作者，一次近身护三人，每行进十分钟耗10法力量；不替代探测普通空间裂缝。"
           },
-          "description": "需学会催动并持续供给法力。本版适配元婴操作者，一次近身护三人，每行进十分钟耗10法力量；不替代探测普通空间裂缝。",
+          "description": "需学会催动并持续供给法力。适配元婴操作者，一次近身护三人，每行进十分钟耗10法力量；不替代探测普通空间裂缝。",
           "access": {
             "kind": "private"
           }
@@ -3613,7 +3613,7 @@
             {
               "id": "known-dv-nanlong-family-book",
               "name": "南陇祖传残记",
-              "description": "祖传隐语提及苍坤与血咒门，不包含现代安全路线或银钵内真相。",
+              "description": "祖传隐语提及苍坤与血咒门，不包含现时确认安全的路线或银钵内真相。",
               "status": "observed"
             },
             {
@@ -5384,7 +5384,7 @@
       "name": "南陇祖传残记",
       "kind": "item",
       "placement": "canon-nanlong-hou",
-      "description": "祖传隐语提及苍坤与血咒门，不包含现代安全路线或银钵内真相。",
+      "description": "祖传隐语提及苍坤与血咒门，不包含现时确认安全的路线或银钵内真相。",
       "facts": [
         {
           "id": "dv-nanlong-family-book-owned-by",
@@ -7511,16 +7511,16 @@
       "name": "灵烛果植株",
       "kind": "item",
       "placement": "dv-oasis",
-      "description": "湖泥中独立植株，不能移植；现在三枚成熟果与其关联，不随一次摘取重置成熟。",
+      "description": "湖泥中独立生长的灵烛果植株，移植会损毁；枝上结着成熟灵果。",
       "facts": [
         {
           "id": "dv-candle-stem-harvest-rule",
           "predicate": "harvest-rule",
           "value": {
             "kind": "text",
-            "value": "摘果后不能长期保存，合适木器仅短时缓和损耗；需完整造化丹配方、辅材与炉火尽快入药。普通背包储放或断茎移植会损药，不自动出丹。"
+            "value": "采摘后须在半个人界日内入鼎炼药；超过半日效力大减，超过三个人界日效力全失。合适木器仅能短时保存，不能取消时限。需完整造化丹配方、辅材与炉火；普通储放不自动成丹，断茎移植会损药。"
           },
-          "description": "摘果后不能长期保存，合适木器仅短时缓和损耗；需完整造化丹配方、辅材与炉火尽快入药。普通背包储放或断茎移植会损药，不自动出丹。",
+          "description": "采摘后须在半个人界日内入鼎炼药；超过半日效力大减，超过三个人界日效力全失。合适木器仅能短时保存，不能取消时限。需完整造化丹配方、辅材与炉火；普通储放不自动成丹，断茎移植会损药。",
           "access": {
             "kind": "private"
           }
@@ -9806,6 +9806,11 @@
       "id": "dv-fruit-and-remains",
       "text": "活兽内丹不能同时作为战利品；古兽不灭之体有条件和代价。灵烛果、古丹、有限火灵料与北极元晶的采收、辨识、加工分别消耗真实物件，不由角色自述复制。",
       "severity": "hard"
+    },
+    {
+      "id": "dv-reputation-is-not-fate",
+      "text": "坠魔谷的凶名、无人能归的概括、寻宝者自称的把握与必有重宝的诱劝，不是客观成功率或强制结局。实际风险按裂缝、禁制、古兽和行动条件结算。两仪阴环是避北极元光的一种手段；有据的其他宝物或多人防护阵也可尝试，但须拥有实际知识、装备与力量。",
+      "severity": "hard"
     }
   ],
   "provenance": {
@@ -11441,7 +11446,8 @@
       "dv-candle-fruit"
     ],
     "fact:dv-candle-stem-harvest-rule": [
-      "dv-candle-fruit"
+      "dv-candle-fruit",
+      "dv-candle-preservation"
     ],
     "entity:dv-map-owner": [
       "dv-opening-life",
@@ -11873,6 +11879,10 @@
       "dv-toad-capability",
       "dv-ancient-relics",
       "dv-polar-light"
+    ],
+    "law:dv-reputation-is-not-fate": [
+      "dv-valley-reputation",
+      "dv-liangyi-alternatives"
     ]
   },
   "quantityDefinitions": [
