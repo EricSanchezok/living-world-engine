@@ -9,3 +9,5 @@
 早元武地理、三正派、秘店、齐辛传承与初期援越场景128条逐项复核；本轮128条具体处置见 [candidate-review-2026-10-18-early-yuanwu.json](candidate-review-2026-10-18-early-yuanwu.json)。并非全区域或真实游玩验收。
 
 齐辛后期遭遇、星尘商贸、返越修阵与撤派历史109条逐项复核；本轮109条具体处置见 [candidate-review-2026-10-18-war-return.json](candidate-review-2026-10-18-war-return.json)。并非全区域或真实游玩验收。
+
+返天南、云梦宗门、招收入门及药园捕狐152条逐项阅读处置；本轮152条具体处置见 [candidate-review-2026-10-18-luoyun-entry.json](candidate-review-2026-10-18-luoyun-entry.json)。并非全区域或真实游玩验收。
