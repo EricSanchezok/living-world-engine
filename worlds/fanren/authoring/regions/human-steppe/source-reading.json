@@ -1,5 +1,5 @@
 {
-  "scope": "本轮13章完整读取；二读仅指本模块采用锚点及邻近上下文，不声明919候选已完成。",
+  "scope": "当前累计19章有完整读取记录，另有明确段落阅读；二读仅所采用事实，不声明919候选或全章事实已完成。",
   "sourceReads": [
     {
       "chapterId": "qq-21723002",
@@ -95,7 +95,17 @@
       "firstPass": "world_content完整读取本章缓存工作本。",
       "secondPass": "采用锚点及邻近上下文已再次对照。",
       "usedBy": [
-        "steppe-language-and-work"
+        "steppe-language-and-work",
+        "steppe-expedition-equipment-scope",
+        "steppe-later-mine-raids",
+        "steppe-fengyuan-and-language"
+      ],
+      "additionalPasses": [
+        {
+          "reader": "source_completion",
+          "scope": "complete-text-first-pass-and-selected-new-claim-anchors-second-pass",
+          "audit": "candidate-review-2026-10-18-expedition-and-first-front.json"
+        }
       ]
     },
     {
@@ -124,6 +134,64 @@
       "usedBy": [
         "steppe-zhong-duration",
         "steppe-lamp-stock"
+      ]
+    },
+    {
+      "chapterId": "qq-23610628",
+      "sha256": "a166c6a2f2a434f7b297508f1a3904b788ad4a52b3d78fbf4971deed127a92f8",
+      "firstPass": "source_completion完整读取本章缓存工作本；中间截断输出另行分章重读补全。",
+      "secondPass": "本单元采用锚点及邻近上下文再次对照，不声称全章所有事实已审定。",
+      "usedBy": [
+        "steppe-cave-betrayal-and-persons"
+      ]
+    },
+    {
+      "chapterId": "qq-23619630",
+      "sha256": "d2b047f2db2bc56e3248548d9b4ab59b777049ede420c0f3bb68beb198039b0f",
+      "firstPass": "source_completion完整读取本章缓存工作本；中间截断输出另行分章重读补全。",
+      "secondPass": "本单元采用锚点及邻近上下文再次对照，不声称全章所有事实已审定。",
+      "usedBy": [
+        "steppe-cave-betrayal-and-persons",
+        "steppe-expedition-equipment-scope"
+      ]
+    },
+    {
+      "chapterId": "qq-23645449",
+      "sha256": "bd18652e22708c7180a4b6ebecbad683c32227d9b874552112b246048b89e117",
+      "firstPass": "source_completion完整读取本章缓存工作本；中间截断输出另行分章重读补全。",
+      "secondPass": "本单元采用锚点及邻近上下文再次对照，不声称全章所有事实已审定。",
+      "usedBy": [
+        "steppe-cave-betrayal-and-persons",
+        "steppe-expedition-equipment-scope"
+      ]
+    },
+    {
+      "chapterId": "qq-23654784",
+      "sha256": "cbe63f7423a56acbea12cba5b577212f1b1837d8846e80873445dfc2b76a3c63",
+      "firstPass": "source_completion完整读取本章缓存工作本；中间截断输出另行分章重读补全。",
+      "secondPass": "本单元采用锚点及邻近上下文再次对照，不声称全章所有事实已审定。",
+      "usedBy": [
+        "steppe-cave-betrayal-and-persons",
+        "steppe-expedition-equipment-scope"
+      ]
+    },
+    {
+      "chapterId": "qq-23634312",
+      "sha256": "eacd6a6da63591609025bb1335eda2b5ec8842f0a1f398a9a89d493ef0b33728",
+      "firstPass": "source_completion完整读取本章缓存工作本；中间截断输出另行分章重读补全。",
+      "secondPass": "本单元采用锚点及邻近上下文再次对照，不声称全章所有事实已审定。",
+      "usedBy": [
+        "steppe-cave-betrayal-and-persons"
+      ]
+    },
+    {
+      "chapterId": "qq-23688676",
+      "sha256": "62b086a42e5cc8f4e1f05e603dd7ab96c1be8c55479aee37d07180c46939d333",
+      "firstPass": "source_completion完整读取本章缓存工作本；中间截断输出另行分章重读补全。",
+      "secondPass": "本单元采用锚点及邻近上下文再次对照，不声称全章所有事实已审定。",
+      "usedBy": [
+        "steppe-expedition-equipment-scope",
+        "steppe-fengyuan-and-language"
       ]
     }
   ],
@@ -275,6 +343,47 @@
         "qq-23598729",
         "qq-23564975",
         "qq-23575972"
+      ]
+    },
+    {
+      "file": "candidate-review-2026-10-18-expedition-and-first-front.json",
+      "method": "direct full-paragraph context reading and second-pass new-claim anchors",
+      "scope": "selected-candidates-only-not-complete-chapter-reading",
+      "fullChapterReads": [
+        "qq-23610628",
+        "qq-23619630",
+        "qq-23645449",
+        "qq-23654784",
+        "qq-23634312",
+        "qq-23678977",
+        "qq-23688676"
+      ],
+      "paragraphs": 111,
+      "chapters": [
+        "qq-23610628",
+        "qq-23622073",
+        "qq-23654784",
+        "qq-23619630",
+        "qq-23645449",
+        "qq-23634312",
+        "qq-23657230",
+        "qq-23690822",
+        "qq-23678977",
+        "qq-23688676",
+        "qq-23702059",
+        "qq-23702539",
+        "qq-23796831",
+        "qq-23819953",
+        "qq-23796184",
+        "qq-23784979",
+        "qq-23807763",
+        "qq-23785873",
+        "qq-23832077",
+        "qq-23821274",
+        "qq-23854072",
+        "qq-23833045",
+        "qq-23844232",
+        "qq-23855718"
       ]
     }
   ]
