@@ -1,0 +1,142 @@
+{
+  "formatVersion": 1,
+  "status": "source-confirmed-identity-correction-not-release-approval",
+  "apiCalls": 0,
+  "canonicalId": "canon-lu-weiying",
+  "alias": "璇玑子",
+  "retiredIds": [
+    "canon-xuanjizi",
+    "canon-xuanjizi-supplies"
+  ],
+  "before": {
+    "moduleHash": "cc2bb03e2941325bd4f297ab3ea4ba790c57685fb9482bca77e747f6a9394134",
+    "entities": 195,
+    "agents": 18,
+    "dispositionHash": "81c8ea07cebc4558203037cb4f9a28b86f8d647a8717fb7260db168b43bf11a7"
+  },
+  "after": {
+    "moduleHash": "541c9c738b36092449f26e80edf473435b9796649bca3b0d52cfd7329af310f0",
+    "claimsHash": "a7d4059f8799c1f59c78b889d31e19059160638dd087470c473b52a9638aab04",
+    "entities": 193,
+    "agents": 17,
+    "dispositionHash": "0c48cf4102388a3323280fd9448e5bb46bafce30fc9708072320ffc948d56400"
+  },
+  "removedResources": [
+    {
+      "entityId": "canon-xuanjizi",
+      "definition_id": "low-stone",
+      "amount": 180
+    },
+    {
+      "entityId": "canon-xuanjizi-supplies",
+      "definition_id": "mid-stone",
+      "amount": 24
+    },
+    {
+      "entityId": "canon-xuanjizi-supplies",
+      "definition_id": "craft-material",
+      "amount": 8
+    },
+    {
+      "entityId": "canon-xuanjizi-supplies",
+      "definition_id": "grain",
+      "amount": 10
+    }
+  ],
+  "retainedResources": [
+    {
+      "entityId": "canon-lu-weiying",
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 180
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-lu-weiying-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-lu-weiying-mana",
+          "definition_id": "mana",
+          "current": 880
+        }
+      ]
+    },
+    {
+      "entityId": "canon-lu-weiying-supplies",
+      "quantities": [
+        {
+          "definition_id": "mid-stone",
+          "amount": 24
+        },
+        {
+          "definition_id": "craft-material",
+          "amount": 8
+        },
+        {
+          "definition_id": "grain",
+          "amount": 10
+        }
+      ],
+      "meters": []
+    }
+  ],
+  "relationshipCorrection": "删除鲁/璇互识自环和南陇重复认知；保留鲁一套能力资源，原创陆缃师徒/计划双向改指同人，未叠加两套法力或技能等级。",
+  "changedCandidateIds": [
+    "batch-0110-object-0003",
+    "batch-0110-fact-0001"
+  ],
+  "evidence": [
+    {
+      "chapterId": "qq-23785873",
+      "chapterSha256": "b389209c58133f324a5944d7730458171f9046d02201b674a68b584152a1d1d1",
+      "start": 1841,
+      "end": 1951,
+      "anchorSha256": "6a391a6b77df0fe6e8b4ef42b315eebc4304a3eb901331012dc44234da26f37e"
+    },
+    {
+      "chapterId": "qq-23819953",
+      "chapterSha256": "25e7337a5e51cbf1f72ae2b021961478a70e98b5e8bde8c1591613fa056f803f",
+      "start": 1901,
+      "end": 2071,
+      "anchorSha256": "33bd8afd4245b1eb78cae6c44b98aee81ade711bdd5085a26cfcc8346c6fbfdb"
+    },
+    {
+      "chapterId": "qq-23819953",
+      "chapterSha256": "25e7337a5e51cbf1f72ae2b021961478a70e98b5e8bde8c1591613fa056f803f",
+      "start": 1715,
+      "end": 1794,
+      "anchorSha256": "94421dce0905878894535968d95217411e21c5bce54773b85a6f057145acf227"
+    },
+    {
+      "chapterId": "qq-23819953",
+      "chapterSha256": "25e7337a5e51cbf1f72ae2b021961478a70e98b5e8bde8c1591613fa056f803f",
+      "start": 415,
+      "end": 495,
+      "anchorSha256": "8761ba1e211486219469c466d97e3682a4245027d00dd12418a670eb6e280d79"
+    }
+  ],
+  "validation": {
+    "moduleId": "human-devil-valley",
+    "candidates": 747,
+    "counts": {
+      "adopted": 107,
+      "corrected": 364,
+      "history-only": 21,
+      "later-only": 254,
+      "bounded-uncertainty": 1,
+      "transferred": 0,
+      "pending": 0
+    },
+    "completed": 747,
+    "unresolved": 0,
+    "boundedUncertainty": 1,
+    "approvedForRuntime": false,
+    "reportHash": "0c48cf4102388a3323280fd9448e5bb46bafce30fc9708072320ffc948d56400"
+  },
+  "historicalEvidence": "原提取/独立审校报告保留原字节；此报告只纠正当前身份和编辑处置，shared现行引用由root同步。",
+  "approvedForRuntime": false
+}

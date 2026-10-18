@@ -3535,18 +3535,6 @@
           "access": {
             "kind": "private"
           }
-        },
-        {
-          "id": "canon-nanlong-hou-known-associate-canon-xuanjizi",
-          "predicate": "known-associate",
-          "value": {
-            "kind": "entity",
-            "entityId": "canon-xuanjizi"
-          },
-          "description": "known-associate",
-          "access": {
-            "kind": "private"
-          }
         }
       ],
       "meters": [
@@ -3637,14 +3625,8 @@
             },
             {
               "id": "known-canon-lu-weiying",
-              "name": "鲁卫英",
-              "description": "已有修行往来，各自私藏的线索不会全共享。",
-              "status": "observed"
-            },
-            {
-              "id": "known-canon-xuanjizi",
-              "name": "璇玑子",
-              "description": "已有修行往来，各自私藏的线索不会全共享。",
+              "name": "鲁卫英（璇玑子）",
+              "description": "已有修行往来，各自私藏的线索不会全共享。鲁卫英与璇玑子是同一位修士的称呼。",
               "status": "observed"
             },
             {
@@ -3689,12 +3671,6 @@
               "local_entity_id": "known-canon-lu-weiying",
               "canonical_entity_ids": [
                 "canon-lu-weiying"
-              ]
-            },
-            {
-              "local_entity_id": "known-canon-xuanjizi",
-              "canonical_entity_ids": [
-                "canon-xuanjizi"
               ]
             },
             {
@@ -3817,7 +3793,7 @@
       "name": "鲁卫英",
       "kind": "person",
       "placement": "dv-tianji-house",
-      "description": "天极门修士，熟悉部分佛阵与古兽旧闻，做事先量风险，对秘密和收益颇看重。",
+      "description": "天极门修士，熟悉部分佛阵与古兽旧闻，做事先量风险，对秘密和收益颇看重。别称璇玑子，亦指导门中后辈阵学。",
       "facts": [
         {
           "id": "canon-lu-weiying-cultivation-state",
@@ -3889,15 +3865,27 @@
           }
         },
         {
-          "id": "canon-lu-weiying-known-associate-canon-xuanjizi",
-          "predicate": "known-associate",
+          "id": "canon-lu-weiying-teacher-dv-tianji-apprentice",
+          "predicate": "teacher",
           "value": {
             "kind": "entity",
-            "entityId": "canon-xuanjizi"
+            "entityId": "dv-tianji-apprentice"
           },
-          "description": "known-associate",
+          "description": "teacher",
           "access": {
             "kind": "private"
+          }
+        },
+        {
+          "id": "canon-lu-weiying-other-name",
+          "predicate": "also-known-as",
+          "value": {
+            "kind": "text",
+            "value": "璇玑子"
+          },
+          "description": "也以璇玑子之名称呼。",
+          "access": {
+            "kind": "public"
           }
         }
       ],
@@ -3955,13 +3943,19 @@
         },
         "character": {
           "persona": {
-            "summary": "天极门修士，熟悉部分佛阵与古兽旧闻，做事先量风险，对秘密和收益颇看重。",
+            "summary": "天极门修士，熟悉部分佛阵与古兽旧闻，做事先量风险，对秘密和收益颇看重。别称璇玑子，亦指导门中后辈阵学。",
             "voice": "语气平和，先问退路与分成；讲自己的旧见闻时会捻须，动怒后反而短句直说。"
           },
           "goals": [
             {
               "id": "current-purpose",
               "description": "决定是否借出旧佛阵札记给门中晚辈，保留原本。",
+              "priority": 0.5,
+              "progress": 0
+            },
+            {
+              "id": "apprentice-choice",
+              "description": "给想独立历练的学徒一个能负责的选择。",
               "priority": 0.5,
               "progress": 0
             }
@@ -3972,7 +3966,7 @@
             {
               "id": "self",
               "name": "鲁卫英",
-              "description": "天极门修士，熟悉部分佛阵与古兽旧闻，做事先量风险，对秘密和收益颇看重。",
+              "description": "天极门修士，熟悉部分佛阵与古兽旧闻，做事先量风险，对秘密和收益颇看重。别称璇玑子，亦指导门中后辈阵学。",
               "status": "observed"
             },
             {
@@ -4000,12 +3994,6 @@
               "status": "observed"
             },
             {
-              "id": "known-canon-xuanjizi",
-              "name": "璇玑子",
-              "description": "已有修行往来，各自私藏的线索不会全共享。",
-              "status": "observed"
-            },
-            {
               "id": "known-dv-lu-buddhist-notes",
               "name": "鲁氏佛阵札记",
               "description": "旧典札记包括小须弥金刚阵特征与持续恢复机制，不知道谷中具体大厅坐标。",
@@ -4021,6 +4009,18 @@
               "id": "known-human-devil-valley",
               "name": "坠魔谷",
               "description": "知道此谷凶名与古禁传说，未见现在内谷。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dv-tianji-apprentice",
+              "name": "陆缃",
+              "description": "实际阵法师徒，历练许可与所学程度须商议；不是派去必死谷内的强制任务。",
+              "status": "observed"
+            },
+            {
+              "id": "known-dv-tianji-trip-plan",
+              "name": "陆缃历练计划",
+              "description": "学徒递来的计划，可逐项商议风险与所需技能。",
               "status": "observed"
             }
           ],
@@ -4056,12 +4056,6 @@
               ]
             },
             {
-              "local_entity_id": "known-canon-xuanjizi",
-              "canonical_entity_ids": [
-                "canon-xuanjizi"
-              ]
-            },
-            {
               "local_entity_id": "known-dv-lu-buddhist-notes",
               "canonical_entity_ids": [
                 "dv-lu-buddhist-notes"
@@ -4077,6 +4071,18 @@
               "local_entity_id": "known-human-devil-valley",
               "canonical_entity_ids": [
                 "human-devil-valley"
+              ]
+            },
+            {
+              "local_entity_id": "known-dv-tianji-apprentice",
+              "canonical_entity_ids": [
+                "dv-tianji-apprentice"
+              ]
+            },
+            {
+              "local_entity_id": "known-dv-tianji-trip-plan",
+              "canonical_entity_ids": [
+                "dv-tianji-trip-plan"
               ]
             }
           ],
@@ -4134,6 +4140,21 @@
               "evidenceIds": [
                 "prior-life"
               ]
+            },
+            {
+              "id": "teaching-choice",
+              "subjectId": "self",
+              "predicate": "teaching-choice",
+              "value": {
+                "kind": "text",
+                "value": "给想独立历练的学徒一个能负责的选择。"
+              },
+              "description": "给想独立历练的学徒一个能负责的选择。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
             }
           ]
         }
@@ -4152,370 +4173,6 @@
           "value": {
             "kind": "entity",
             "entityId": "canon-lu-weiying"
-          },
-          "description": "owned-by",
-          "access": {
-            "kind": "private"
-          }
-        }
-      ],
-      "meters": [],
-      "ratings": [],
-      "quantities": [
-        {
-          "definition_id": "mid-stone",
-          "amount": 24
-        },
-        {
-          "definition_id": "craft-material",
-          "amount": 8
-        },
-        {
-          "definition_id": "grain",
-          "amount": 10
-        }
-      ]
-    },
-    {
-      "id": "canon-xuanjizi",
-      "name": "璇玑子",
-      "kind": "person",
-      "placement": "dv-tianji-house",
-      "description": "天极门元婴修士，与南陇、鲁有交情；处理门中人情和历练。",
-      "facts": [
-        {
-          "id": "canon-xuanjizi-cultivation-state",
-          "predicate": "cultivation-state",
-          "value": {
-            "kind": "text",
-            "value": "元婴"
-          },
-          "description": "元婴",
-          "access": {
-            "kind": "agents",
-            "agentIds": [
-              "canon-xuanjizi"
-            ]
-          }
-        },
-        {
-          "id": "canon-xuanjizi-learned-skill",
-          "predicate": "learned-skill",
-          "value": {
-            "kind": "text",
-            "value": "元婴防护、传讯和基础古禁研判。"
-          },
-          "description": "元婴防护、传讯和基础古禁研判。",
-          "access": {
-            "kind": "agents",
-            "agentIds": [
-              "canon-xuanjizi"
-            ]
-          }
-        },
-        {
-          "id": "canon-xuanjizi-spiritual-root",
-          "predicate": "spiritual-root",
-          "value": {
-            "kind": "text",
-            "value": "有木水双灵根，已据自身经历完成检测。"
-          },
-          "description": "有木水双灵根，已据自身经历完成检测。",
-          "access": {
-            "kind": "agents",
-            "agentIds": [
-              "canon-xuanjizi"
-            ]
-          }
-        },
-        {
-          "id": "canon-xuanjizi-member-of",
-          "predicate": "member-of",
-          "value": {
-            "kind": "entity",
-            "entityId": "tianji-sect"
-          },
-          "description": "member-of",
-          "access": {
-            "kind": "public"
-          }
-        },
-        {
-          "id": "canon-xuanjizi-known-associate-canon-nanlong-hou",
-          "predicate": "known-associate",
-          "value": {
-            "kind": "entity",
-            "entityId": "canon-nanlong-hou"
-          },
-          "description": "known-associate",
-          "access": {
-            "kind": "private"
-          }
-        },
-        {
-          "id": "canon-xuanjizi-known-associate-canon-lu-weiying",
-          "predicate": "known-associate",
-          "value": {
-            "kind": "entity",
-            "entityId": "canon-lu-weiying"
-          },
-          "description": "known-associate",
-          "access": {
-            "kind": "private"
-          }
-        },
-        {
-          "id": "canon-xuanjizi-teacher-dv-tianji-apprentice",
-          "predicate": "teacher",
-          "value": {
-            "kind": "entity",
-            "entityId": "dv-tianji-apprentice"
-          },
-          "description": "teacher",
-          "access": {
-            "kind": "private"
-          }
-        }
-      ],
-      "meters": [
-        {
-          "id": "canon-xuanjizi-health",
-          "definition_id": "health",
-          "current": 100
-        },
-        {
-          "id": "canon-xuanjizi-mana",
-          "definition_id": "mana",
-          "current": 880
-        }
-      ],
-      "ratings": [
-        {
-          "id": "canon-xuanjizi-cultivation",
-          "definition_id": "cultivation",
-          "value": 4
-        },
-        {
-          "id": "canon-xuanjizi-force",
-          "definition_id": "force",
-          "value": 4
-        },
-        {
-          "id": "canon-xuanjizi-craft",
-          "definition_id": "craft",
-          "value": 4
-        },
-        {
-          "id": "canon-xuanjizi-perception",
-          "definition_id": "perception",
-          "value": 4
-        },
-        {
-          "id": "canon-xuanjizi-influence",
-          "definition_id": "influence",
-          "value": 4
-        }
-      ],
-      "quantities": [
-        {
-          "definition_id": "low-stone",
-          "amount": 180
-        }
-      ],
-      "agent": {
-        "id": "canon-xuanjizi",
-        "model_profiles": {
-          "decision": "decision-jev",
-          "creation": "creation-deepseek",
-          "fallback": "decision-deepseek"
-        },
-        "character": {
-          "persona": {
-            "summary": "天极门元婴修士，与南陇、鲁有交情；处理门中人情和历练。",
-            "voice": "客气地把条件逐项说清，习惯借门中事务说明利害；朋友求援时先安排人手再劝说。"
-          },
-          "goals": [
-            {
-              "id": "current-purpose",
-              "description": "给想独立历练的学徒一个能负责的选择。",
-              "priority": 0.5,
-              "progress": 0
-            }
-          ]
-        },
-        "belief": {
-          "local_entities": [
-            {
-              "id": "self",
-              "name": "璇玑子",
-              "description": "天极门元婴修士，与南陇、鲁有交情；处理门中人情和历练。",
-              "status": "observed"
-            },
-            {
-              "id": "location",
-              "name": "天极门别院",
-              "description": "自己当前所在之处。",
-              "status": "observed"
-            },
-            {
-              "id": "known-canon-xuanjizi-supplies",
-              "name": "璇玑子个人储备",
-              "description": "个人物资与有限灵石，不包含所属门派全部财产。",
-              "status": "observed"
-            },
-            {
-              "id": "known-tianji-sect",
-              "name": "天极门",
-              "description": "自己长期所属宗门，职位不等于全部公产所有权。",
-              "status": "observed"
-            },
-            {
-              "id": "known-canon-nanlong-hou",
-              "name": "南陇侯",
-              "description": "已有修行往来，各自私藏的线索不会全共享。",
-              "status": "observed"
-            },
-            {
-              "id": "known-canon-lu-weiying",
-              "name": "鲁卫英",
-              "description": "已有修行往来，各自私藏的线索不会全共享。",
-              "status": "observed"
-            },
-            {
-              "id": "known-dv-tianji-apprentice",
-              "name": "陆缃",
-              "description": "实际阵法师徒，历练许可与所学程度须商议；不是派去必死谷内的强制任务。",
-              "status": "observed"
-            },
-            {
-              "id": "known-dv-tianji-trip-plan",
-              "name": "陆缃历练计划",
-              "description": "学徒递来的计划，可逐项商议风险与所需技能。",
-              "status": "observed"
-            }
-          ],
-          "bindings": [
-            {
-              "local_entity_id": "self",
-              "canonical_entity_ids": [
-                "canon-xuanjizi"
-              ]
-            },
-            {
-              "local_entity_id": "location",
-              "canonical_entity_ids": [
-                "dv-tianji-house"
-              ]
-            },
-            {
-              "local_entity_id": "known-canon-xuanjizi-supplies",
-              "canonical_entity_ids": [
-                "canon-xuanjizi-supplies"
-              ]
-            },
-            {
-              "local_entity_id": "known-tianji-sect",
-              "canonical_entity_ids": [
-                "tianji-sect"
-              ]
-            },
-            {
-              "local_entity_id": "known-canon-nanlong-hou",
-              "canonical_entity_ids": [
-                "canon-nanlong-hou"
-              ]
-            },
-            {
-              "local_entity_id": "known-canon-lu-weiying",
-              "canonical_entity_ids": [
-                "canon-lu-weiying"
-              ]
-            },
-            {
-              "local_entity_id": "known-dv-tianji-apprentice",
-              "canonical_entity_ids": [
-                "dv-tianji-apprentice"
-              ]
-            },
-            {
-              "local_entity_id": "known-dv-tianji-trip-plan",
-              "canonical_entity_ids": [
-                "dv-tianji-trip-plan"
-              ]
-            }
-          ],
-          "evidence": [
-            {
-              "id": "prior-life",
-              "kind": "observation",
-              "description": "自身经历、修行和职务往来。",
-              "sourceId": null,
-              "step": 0
-            }
-          ],
-          "claims": [
-            {
-              "id": "learned-skill",
-              "subjectId": "self",
-              "predicate": "learned-skill",
-              "value": {
-                "kind": "text",
-                "value": "元婴防护、传讯和基础古禁研判。"
-              },
-              "description": "元婴防护、传讯和基础古禁研判。",
-              "stance": "believed",
-              "confidence": 1,
-              "evidenceIds": [
-                "prior-life"
-              ]
-            },
-            {
-              "id": "self-cultivation-foundation",
-              "subjectId": "self",
-              "predicate": "self-cultivation-foundation",
-              "value": {
-                "kind": "text",
-                "value": "自己具有木水双灵根，已有相应修行经历。"
-              },
-              "description": "自己具有木水双灵根，已有相应修行经历。",
-              "stance": "believed",
-              "confidence": 1,
-              "evidenceIds": [
-                "prior-life"
-              ]
-            },
-            {
-              "id": "current-life",
-              "subjectId": "self",
-              "predicate": "current-life",
-              "value": {
-                "kind": "text",
-                "value": "给想独立历练的学徒一个能负责的选择。"
-              },
-              "description": "给想独立历练的学徒一个能负责的选择。",
-              "stance": "believed",
-              "confidence": 1,
-              "evidenceIds": [
-                "prior-life"
-              ]
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "canon-xuanjizi-supplies",
-      "name": "璇玑子个人储备",
-      "kind": "container",
-      "placement": "dv-tianji-house",
-      "description": "个人物资与有限灵石，不包含所属门派全部财产。",
-      "facts": [
-        {
-          "id": "canon-xuanjizi-supplies-owned-by",
-          "predicate": "owned-by",
-          "value": {
-            "kind": "entity",
-            "entityId": "canon-xuanjizi"
           },
           "description": "owned-by",
           "access": {
@@ -8867,11 +8524,11 @@
           }
         },
         {
-          "id": "dv-tianji-apprentice-apprentice-canon-xuanjizi",
+          "id": "dv-tianji-apprentice-apprentice-canon-lu-weiying",
           "predicate": "apprentice",
           "value": {
             "kind": "entity",
-            "entityId": "canon-xuanjizi"
+            "entityId": "canon-lu-weiying"
           },
           "description": "apprentice",
           "access": {
@@ -8966,9 +8623,9 @@
               "status": "observed"
             },
             {
-              "id": "known-canon-xuanjizi",
-              "name": "璇玑子",
-              "description": "实际阵法师徒，历练许可与所学程度须商议；不是派去必死谷内的强制任务。",
+              "id": "known-canon-lu-weiying",
+              "name": "鲁卫英（璇玑子）",
+              "description": "实际阵法师徒，历练许可与所学程度须商议；不是派去必死谷内的强制任务。鲁卫英与璇玑子是同一位修士的称呼。",
               "status": "observed"
             },
             {
@@ -8998,9 +8655,9 @@
               ]
             },
             {
-              "local_entity_id": "known-canon-xuanjizi",
+              "local_entity_id": "known-canon-lu-weiying",
               "canonical_entity_ids": [
-                "canon-xuanjizi"
+                "canon-lu-weiying"
               ]
             },
             {
@@ -11062,7 +10719,8 @@
     "entity:canon-lu-weiying": [
       "dv-elder-opening-inference",
       "dv-opening-life",
-      "dv-opening-values"
+      "dv-opening-values",
+      "dv-lu-xuanji-identity"
     ],
     "fact:canon-lu-weiying-cultivation-state": [
       "dv-elder-opening-inference",
@@ -11082,31 +10740,6 @@
       "dv-opening-values"
     ],
     "fact:canon-lu-weiying-supplies-owned-by": [
-      "dv-opening-life"
-    ],
-    "entity:canon-xuanjizi": [
-      "dv-elder-opening-inference",
-      "dv-opening-life",
-      "dv-opening-values"
-    ],
-    "fact:canon-xuanjizi-cultivation-state": [
-      "dv-elder-opening-inference",
-      "dv-opening-life",
-      "dv-opening-values"
-    ],
-    "fact:canon-xuanjizi-learned-skill": [
-      "dv-elder-opening-inference",
-      "dv-opening-life",
-      "dv-opening-values"
-    ],
-    "fact:canon-xuanjizi-spiritual-root": [
-      "dv-opening-life"
-    ],
-    "entity:canon-xuanjizi-supplies": [
-      "dv-opening-life",
-      "dv-opening-values"
-    ],
-    "fact:canon-xuanjizi-supplies-owned-by": [
       "dv-opening-life"
     ],
     "entity:canon-tianjing-zhenren": [
@@ -11188,10 +10821,6 @@
       "dv-elder-opening-inference",
       "dv-opening-life"
     ],
-    "fact:canon-xuanjizi-member-of": [
-      "dv-elder-opening-inference",
-      "dv-opening-life"
-    ],
     "fact:canon-dongmen-tu-member-of": [
       "dv-elder-opening-inference",
       "dv-opening-life"
@@ -11204,18 +10833,6 @@
       "dv-opening-life"
     ],
     "fact:canon-lu-weiying-known-associate-canon-nanlong-hou": [
-      "dv-opening-life"
-    ],
-    "fact:canon-nanlong-hou-known-associate-canon-xuanjizi": [
-      "dv-opening-life"
-    ],
-    "fact:canon-xuanjizi-known-associate-canon-nanlong-hou": [
-      "dv-opening-life"
-    ],
-    "fact:canon-lu-weiying-known-associate-canon-xuanjizi": [
-      "dv-opening-life"
-    ],
-    "fact:canon-xuanjizi-known-associate-canon-lu-weiying": [
       "dv-opening-life"
     ],
     "entity:dv-nanlong-family-book": [
@@ -11682,10 +11299,10 @@
     "fact:dv-young-surveyor-apprentice-dv-map-owner": [
       "dv-opening-life"
     ],
-    "fact:canon-xuanjizi-teacher-dv-tianji-apprentice": [
+    "fact:canon-lu-weiying-teacher-dv-tianji-apprentice": [
       "dv-opening-life"
     ],
-    "fact:dv-tianji-apprentice-apprentice-canon-xuanjizi": [
+    "fact:dv-tianji-apprentice-apprentice-canon-lu-weiying": [
       "dv-opening-life"
     ],
     "fact:dv-map-owner-negotiating-with-dv-copy-scholar": [
@@ -12044,6 +11661,10 @@
     ],
     "fact:dongyu-ningzhou-route-dv-linglin-mountains": [
       "dv-ningzhou-travel-calibration"
+    ],
+    "fact:canon-lu-weiying-other-name": [
+      "dv-lu-xuanji-identity",
+      "dv-opening-life"
     ]
   },
   "quantityDefinitions": [

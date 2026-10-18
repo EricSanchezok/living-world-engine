@@ -820,13 +820,15 @@
   },
   {
     "id": "dv-elder-opening-inference",
-    "statement": "南陇侯、鲁卫英、璇玑子、天晶真人、东门图、鬼灵钟长老后期已属资深元婴。本版将他们在开篇存活、已有元婴初期及相关专业明确作为有据回溯；具体住宅、职务范围和交情起年为原创，不硬套后期伤亡和所有宝物。",
+    "statement": "南陇侯、鲁卫英（璇玑子）、天晶真人、东门图、鬼灵钟长老后期已属资深元婴。本版将他们在开篇存活、已有元婴初期及相关专业明确作为有据回溯；具体住宅、职务范围和交情起年为原创，不硬套后期伤亡和所有宝物。",
     "classification": "backprojection",
     "validAtOpening": true,
     "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
-    "openingReason": "南陇及璇玑后期大限将近、鲁早年亲历旧围剿支持较早人生；各人精确开篇小境界未有逐年直证。",
+    "openingReason": "南陇及鲁卫英（璇玑子）后期大限将近，鲁早年亲历旧围剿支持较早人生；连续邀约确认鲁/璇同一主体。各人精确开篇小境界未有逐年直证。",
     "status": "reviewed",
-    "dependencies": [],
+    "dependencies": [
+      "dv-lu-xuanji-identity"
+    ],
     "evidence": [
       {
         "chapterId": "qq-23821274",
@@ -871,7 +873,7 @@
     "classification": "backprojection",
     "validAtOpening": true,
     "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
-    "openingReason": "祖传线索可保留，当前已知程度和与璇玑/鲁旧交起年明确补写。",
+    "openingReason": "祖传线索可保留；与鲁卫英（璇玑子）旧交的确切起年明确补写。",
     "status": "reviewed",
     "dependencies": [],
     "evidence": [
@@ -3524,6 +3526,46 @@
         "start": 2963,
         "end": 3133,
         "anchorSha256": "0bee3b38ff045a8493b37b732dc80966216a82f12d2552b42639905d0c324edb"
+      }
+    ]
+  },
+  {
+    "id": "dv-lu-xuanji-identity",
+    "statement": "鲁卫英在阗天自报天极门长老并交绿色邀简；韩持同简到玉和轩，地下白袍被正文明确称为约他之人，南陇紧接称此人为璇玑子。连续邀约和引见确认同一身份，璇玑子作为鲁卫英别名；不是两个天极长老，亦不同于苍坤探府的云姓白衫。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者于后期连续场景获知身份称呼；T0人物仅知自己实际交往对象。",
+    "openingReason": "同一身份不随篇章变成两个主体；T0存活、当期元婴初阶和已用别名沿原有明确回溯/必要补写，非原著逐年直证。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-23785873",
+        "chapterSha256": "b389209c58133f324a5944d7730458171f9046d02201b674a68b584152a1d1d1",
+        "start": 1841,
+        "end": 1951,
+        "anchorSha256": "6a391a6b77df0fe6e8b4ef42b315eebc4304a3eb901331012dc44234da26f37e"
+      },
+      {
+        "chapterId": "qq-23819953",
+        "chapterSha256": "25e7337a5e51cbf1f72ae2b021961478a70e98b5e8bde8c1591613fa056f803f",
+        "start": 1901,
+        "end": 2071,
+        "anchorSha256": "33bd8afd4245b1eb78cae6c44b98aee81ade711bdd5085a26cfcc8346c6fbfdb"
+      },
+      {
+        "chapterId": "qq-23819953",
+        "chapterSha256": "25e7337a5e51cbf1f72ae2b021961478a70e98b5e8bde8c1591613fa056f803f",
+        "start": 1715,
+        "end": 1794,
+        "anchorSha256": "94421dce0905878894535968d95217411e21c5bce54773b85a6f057145acf227"
+      },
+      {
+        "chapterId": "qq-23819953",
+        "chapterSha256": "25e7337a5e51cbf1f72ae2b021961478a70e98b5e8bde8c1591613fa056f803f",
+        "start": 415,
+        "end": 495,
+        "anchorSha256": "8761ba1e211486219469c466d97e3682a4245027d00dd12418a670eb6e280d79"
       }
     ]
   }

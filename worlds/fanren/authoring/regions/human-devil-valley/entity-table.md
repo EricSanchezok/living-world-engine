@@ -122,8 +122,6 @@
 | canon-nanlong-hou-supplies | 南陇侯个人储备 | container | dv-nanlong-retreat |
 | canon-lu-weiying | 鲁卫英 | person | dv-tianji-house |
 | canon-lu-weiying-supplies | 鲁卫英个人储备 | container | dv-tianji-house |
-| canon-xuanjizi | 璇玑子 | person | dv-tianji-house |
-| canon-xuanjizi-supplies | 璇玑子个人储备 | container | dv-tianji-house |
 | canon-tianjing-zhenren | 天晶真人 | person | dv-tianjing-workshop |
 | canon-tianjing-zhenren-supplies | 天晶真人个人储备 | container | dv-tianjing-workshop |
 | canon-dongmen-tu | 东门图 | person | dv-dongmen-room |
@@ -196,3 +194,4 @@
 | dv-herb-ridge | 内谷阴坡草地 | location | dv-inner |
 | dv-huanling-herbs | 幻灵草丛 | container | dv-herb-ridge |
 | dv-purple-flame-herbs | 紫焰花丛 | container | dv-outer |
+| dv-linglin-mountains | 灵麟山 | location | dongyu-ningzhou |
