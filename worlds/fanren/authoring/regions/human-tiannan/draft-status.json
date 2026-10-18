@@ -5,8 +5,8 @@
   "statistics": {
     "entities": 123,
     "agents": 18,
-    "claims": 72,
-    "anchors": 702,
+    "claims": 83,
+    "anchors": 859,
     "periodicProperties": 1
   },
   "localValidation": {
@@ -21,30 +21,30 @@
     "cognitionAndOwnershipAssertions": "passed",
     "actualGameplay": "not-run; root owns final play acceptance",
     "moduleHash": "ba920757732b23eae4007dc2b0f90eb55c618beabdfd2b34a0f3953816a881ed",
-    "claimsHash": "63f4e4cd75cd2d42038bd9bd3c5a2865f98a0c952b460d2d51a0bf67d9e5c5c2",
+    "claimsHash": "751588473c7d6fc2981cd7339f99ce0492f3255ec260b1edde69e4ade31867ca",
     "candidateDispositions": {
       "moduleId": "human-tiannan",
       "candidates": 2961,
       "counts": {
         "adopted": 51,
-        "corrected": 858,
+        "corrected": 986,
         "history-only": 9,
-        "later-only": 335,
+        "later-only": 365,
         "bounded-uncertainty": 6,
         "transferred": 0,
-        "pending": 1702
+        "pending": 1544
       },
-      "completed": 1259,
-      "unresolved": 1702,
+      "completed": 1417,
+      "unresolved": 1544,
       "boundedUncertainty": 6,
       "approvedForRuntime": false,
-      "reportHash": "f8906fd289a8a6cbe08533f238b8b6f7f2b9c06d38da46c1c45a479ccd66a2b3"
+      "reportHash": "ba297b7145d0afda42a1c41a8c3de17065c64984bbc345f2ac3e5bd375a3cf7d"
     }
   },
   "candidateCoverage": {
     "inputHash": "88b3497b3eff7505c7b8f386de372083b74f80b05d9d00a9eb8c173aba6be96f",
     "candidateCount": 2961,
-    "formalDispositions": 1259,
+    "formalDispositions": 1417,
     "status": "partial-editorial-closure-not-regional-release"
   },
   "completedCorrections": [
@@ -66,13 +66,13 @@
   ],
   "files": {
     "module.json": "ba920757732b23eae4007dc2b0f90eb55c618beabdfd2b34a0f3953816a881ed",
-    "claims.json": "63f4e4cd75cd2d42038bd9bd3c5a2865f98a0c952b460d2d51a0bf67d9e5c5c2",
-    "subjects.json": "43ad85a745cbe993ed74e5e20fbf04bd7e1122f045f7eb5831313bc9b9ab4570"
+    "claims.json": "751588473c7d6fc2981cd7339f99ce0492f3255ec260b1edde69e4ade31867ca",
+    "subjects.json": "d633acdda1669886ac3ac052b97d8529c5afa17df0805083a62f927343511116"
   },
   "integrationNotes": [
     "装配顺序human-tiannan在human-yue和human-devil-valley之前；human-yue依赖human-local的墨居仁。",
     "review.json的full只覆盖其指纹绑定的当前模块。地区覆盖未完成须继续体现在总表。",
     "无付费模型调用；无Git操作；根代理负责独立验收、完整包装配与真实游玩。"
   ],
-  "candidateDisposition": "1259/2961已有明确逐条处置，1702待审；本单元直接复读173条。"
+  "candidateDisposition": "1417/2961已有明确逐条处置，1544待审；本单元直接复读158条。"
 }
