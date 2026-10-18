@@ -6,7 +6,9 @@
     "openingState": "time-undetermined",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "void-old-rivalries"
+      "void-old-rivalries",
+      "void-later-entry-alliance",
+      "void-later-treasure-bargain"
     ],
     "aliases": [],
     "reason": "极阴孙子，后期已结丹但生年未在当前证据确定，先索引而不前置成年少岛主。"
@@ -34,18 +36,6 @@
     ],
     "aliases": [],
     "reason": "认识上轮死去玉真人，但当前年龄与境界需其完整历史补证。"
-  },
-  {
-    "id": "future-void-zhengdao-old-farmer",
-    "label": "黑瘦老农修士",
-    "kind": "person",
-    "openingState": "time-undetermined",
-    "classification": "source-reference-with-explicit-temporal-assessment",
-    "claimIds": [
-      "void-wanfa-and-alliance"
-    ],
-    "aliases": [],
-    "reason": "本轮寻宝结伴者，当前不以外貌称谓造确定身份。"
   },
   {
     "id": "future-void-ni-xing-alliance",
@@ -2260,14 +2250,16 @@
   },
   {
     "id": "canon-yu-zhenren-remains",
-    "label": "玉真人遗骨与辟火衣",
+    "label": "玉真人遗骨",
     "kind": "item",
     "openingState": "present",
     "classification": "source-and-explicit-original-calibration",
     "claimIds": [
-      "void-ghost-mist"
+      "void-ghost-mist",
+      "void-yu-remains-and-robe"
     ],
-    "aliases": []
+    "aliases": [],
+    "reason": "按明确周期相位回溯遗骨当前在鬼雾；辟火衣另为独立可移动实体。"
   },
   {
     "id": "canon-wan-sangu-cold-flood",
@@ -2316,5 +2308,28 @@
       "void-bounded-values"
     ],
     "aliases": []
+  },
+  {
+    "id": "canon-yu-fireproof-robe",
+    "label": "玉真人辟火宝衣",
+    "kind": "item",
+    "openingState": "present-by-explicit-phase-backprojection",
+    "classification": "runtime-source-or-explicit-original",
+    "claimIds": [
+      "void-yu-remains-and-robe"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "void-ancient-host-information-reference",
+    "label": "虚天殿主遗留信息的称谓",
+    "kind": "historical-role-reference",
+    "openingState": "historical-role-not-additional-person",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "void-later-treasure-bargain"
+    ],
+    "aliases": [],
+    "reason": "本段经极阴转述而未指名；不是额外开篇活人，后续身份证据需与同一古殿源链对照。"
   }
 ]

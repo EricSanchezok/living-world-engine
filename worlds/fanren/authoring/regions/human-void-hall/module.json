@@ -13177,10 +13177,10 @@
     },
     {
       "id": "canon-yu-zhenren-remains",
-      "name": "玉真人遗骨与辟火衣",
+      "name": "玉真人遗骨",
       "kind": "item",
       "placement": "void-mist",
-      "description": "上轮遇难的冰灵根修士遗留，宝衣仍随遗骨，不是当前活人。",
+      "description": "冰灵根修士遗留的遗骨，仍留在鬼雾中。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -13375,6 +13375,31 @@
       "placement": "void-arrival-room",
       "description": "与北域古阵相应的接收设施；单向关联不能逆向当作返乡捷径。",
       "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-yu-fireproof-robe",
+      "name": "玉真人辟火宝衣",
+      "kind": "item",
+      "placement": "canon-yu-zhenren-remains",
+      "description": "遗骨上尚存的旧宝衣，衣物可单独取下。",
+      "facts": [
+        {
+          "id": "canon-yu-fireproof-robe-material",
+          "predicate": "material-and-protection",
+          "value": {
+            "kind": "text",
+            "value": "百年冰蚕丝炼制，能阻隔等闲火焰；并不免疫所有火法。"
+          },
+          "description": "百年冰蚕丝炼制，能阻隔等闲火焰；并不免疫所有火法。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际近看衣料并施行有能力支持的辨材或防火检验。"
+          }
+        }
+      ],
       "meters": [],
       "ratings": [],
       "quantities": []
@@ -13581,6 +13606,11 @@
     {
       "id": "void-pills-not-universal-roots",
       "text": "补天丹洗炼已有先天灵根的长期过程不能替代无灵根者获资质；元婴突破、寿元延长传闻不是客观保证。九曲灵参配方和万年灵乳分别有适用条件，不能复制灵药、忽略辅料或跳过炼化。",
+      "severity": "hard"
+    },
+    {
+      "id": "void-garment-and-relative-gates",
+      "text": "遗骨与所披衣物分别移动，取衣不自动带走遗骨；辟火宝衣仅有与材质和炼制相符的防护，不能免疫所有火焰。殿门、厅端阵与试炼窗口须依实际古阵状态生效，不能把某次聚会等待的第四日写成所有开殿的固定第四日。",
       "severity": "hard"
     }
   ],
@@ -15525,7 +15555,9 @@
       "void-iron-fire-ants"
     ],
     "entity:canon-yu-zhenren-remains": [
-      "void-ghost-mist"
+      "void-ghost-mist",
+      "void-yu-remains-and-robe",
+      "void-bounded-values"
     ],
     "entity:canon-wan-sangu-cold-flood": [
       "void-animals-and-borrowing",
@@ -15623,6 +15655,16 @@
     ],
     "fact:void-arrival-room-outside": [
       "void-north-arrival-room"
+    ],
+    "entity:canon-yu-fireproof-robe": [
+      "void-yu-remains-and-robe"
+    ],
+    "fact:canon-yu-fireproof-robe-material": [
+      "void-yu-remains-and-robe"
+    ],
+    "law:void-garment-and-relative-gates": [
+      "void-relative-entry-clock",
+      "void-yu-remains-and-robe"
     ]
   },
   "periodicProperties": [
