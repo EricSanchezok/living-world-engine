@@ -1,6 +1,6 @@
 {
   "status": "editorial-source-reading-not-release-approval",
-  "method": "前两组已通过阅读记录原样保留；第三组383项按连续场景审读，4项新增严格同源复用；30条新增声明准确切片第二遍对照。",
+  "method": "候选同ID与源指纹严格复用；新增项逐段读取本地原文，按叙述/人物说法/后期事件/有据回溯分别裁定；新增声明逐切片二读。",
   "completedCandidateIds": [
     "batch-0001-object-0030",
     "batch-0001-object-0036",
@@ -677,46 +677,438 @@
     "batch-0032-fact-0036",
     "batch-0032-fact-0044",
     "batch-0032-fact-0045",
+    "batch-0033-object-0001",
     "batch-0033-object-0002",
     "batch-0033-object-0003",
+    "batch-0033-object-0006",
+    "batch-0033-object-0013",
+    "batch-0033-object-0016",
+    "batch-0033-object-0017",
+    "batch-0033-object-0022",
+    "batch-0033-object-0029",
+    "batch-0033-object-0030",
+    "batch-0033-fact-0005",
+    "batch-0033-fact-0008",
+    "batch-0033-fact-0010",
+    "batch-0033-fact-0019",
+    "batch-0033-fact-0023",
+    "batch-0033-fact-0031",
+    "batch-0033-fact-0035",
+    "batch-0033-fact-0058",
+    "batch-0033-fact-0059",
+    "batch-0033-issue-0007",
+    "batch-0033-issue-0009",
+    "batch-0034-object-0001",
     "batch-0034-object-0002",
+    "batch-0034-object-0003",
+    "batch-0034-object-0004",
+    "batch-0034-object-0005",
+    "batch-0034-object-0006",
+    "batch-0034-object-0007",
+    "batch-0034-object-0008",
+    "batch-0034-object-0009",
+    "batch-0034-object-0010",
+    "batch-0034-object-0011",
     "batch-0034-object-0013",
+    "batch-0034-object-0014",
+    "batch-0034-object-0015",
+    "batch-0034-object-0016",
+    "batch-0034-object-0017",
+    "batch-0034-object-0018",
+    "batch-0034-object-0019",
+    "batch-0034-object-0020",
+    "batch-0034-object-0021",
+    "batch-0034-object-0022",
     "batch-0034-object-0023",
+    "batch-0034-object-0024",
     "batch-0034-object-0029",
+    "batch-0034-object-0030",
+    "batch-0034-object-0031",
     "batch-0034-object-0032",
     "batch-0034-object-0033",
+    "batch-0034-object-0034",
+    "batch-0034-object-0035",
     "batch-0034-object-0036",
     "batch-0034-object-0037",
+    "batch-0034-object-0040",
     "batch-0034-object-0042",
     "batch-0034-object-0043",
+    "batch-0034-object-0047",
+    "batch-0034-object-0049",
+    "batch-0034-object-0050",
+    "batch-0034-fact-0007",
+    "batch-0034-fact-0008",
+    "batch-0034-fact-0045",
+    "batch-0034-fact-0049",
+    "batch-0034-issue-0006",
+    "batch-0035-object-0001",
+    "batch-0035-object-0002",
+    "batch-0035-object-0003",
+    "batch-0035-object-0004",
+    "batch-0035-object-0005",
+    "batch-0035-object-0022",
+    "batch-0035-object-0024",
+    "batch-0035-object-0029",
+    "batch-0035-object-0030",
+    "batch-0035-object-0031",
+    "batch-0035-object-0032",
+    "batch-0035-object-0033",
+    "batch-0035-object-0034",
+    "batch-0035-object-0035",
+    "batch-0035-object-0037",
+    "batch-0035-object-0038",
     "batch-0035-object-0039",
+    "batch-0035-object-0044",
+    "batch-0035-object-0048",
+    "batch-0035-fact-0001",
+    "batch-0035-fact-0002",
+    "batch-0035-fact-0009",
+    "batch-0035-fact-0011",
+    "batch-0035-fact-0025",
+    "batch-0035-issue-0003",
+    "batch-0036-object-0001",
+    "batch-0036-object-0002",
+    "batch-0036-object-0003",
+    "batch-0036-object-0004",
+    "batch-0036-object-0005",
+    "batch-0036-object-0006",
+    "batch-0036-object-0007",
+    "batch-0036-object-0008",
+    "batch-0036-object-0009",
+    "batch-0036-object-0010",
+    "batch-0036-object-0011",
+    "batch-0036-object-0012",
+    "batch-0036-object-0013",
+    "batch-0036-object-0014",
     "batch-0036-object-0015",
+    "batch-0036-object-0016",
+    "batch-0036-object-0017",
+    "batch-0036-object-0018",
+    "batch-0036-object-0019",
+    "batch-0036-object-0024",
+    "batch-0036-object-0025",
+    "batch-0036-object-0026",
+    "batch-0036-object-0027",
+    "batch-0036-object-0028",
+    "batch-0036-object-0029",
+    "batch-0036-object-0030",
+    "batch-0036-object-0031",
+    "batch-0036-object-0032",
+    "batch-0036-object-0033",
+    "batch-0036-object-0034",
+    "batch-0036-object-0038",
     "batch-0036-object-0043",
     "batch-0036-object-0044",
     "batch-0036-object-0045",
     "batch-0036-object-0046",
     "batch-0036-object-0049",
+    "batch-0036-object-0051",
+    "batch-0036-object-0052",
     "batch-0036-object-0053",
+    "batch-0036-object-0057",
+    "batch-0036-object-0058",
+    "batch-0036-object-0063",
+    "batch-0036-object-0067",
+    "batch-0036-object-0069",
+    "batch-0036-object-0070",
+    "batch-0036-object-0071",
+    "batch-0036-object-0072",
+    "batch-0036-object-0073",
+    "batch-0036-fact-0029",
     "batch-0036-fact-0033",
+    "batch-0036-fact-0036",
+    "batch-0036-fact-0046",
+    "batch-0036-fact-0051",
+    "batch-0036-fact-0052",
+    "batch-0036-fact-0074",
+    "batch-0036-issue-0001",
     "batch-0036-issue-0005",
+    "batch-0036-issue-0006",
+    "batch-0036-issue-0010",
+    "batch-0037-object-0001",
+    "batch-0037-object-0006",
+    "batch-0037-object-0010",
+    "batch-0037-object-0011",
+    "batch-0037-object-0012",
+    "batch-0037-object-0017",
+    "batch-0037-object-0018",
+    "batch-0037-object-0019",
+    "batch-0037-object-0020",
+    "batch-0037-object-0022",
+    "batch-0037-object-0023",
+    "batch-0037-object-0024",
+    "batch-0037-object-0025",
+    "batch-0037-object-0026",
+    "batch-0037-object-0028",
+    "batch-0037-object-0029",
+    "batch-0037-object-0030",
+    "batch-0037-object-0034",
+    "batch-0037-object-0039",
+    "batch-0037-object-0042",
+    "batch-0037-fact-0003",
+    "batch-0037-fact-0019",
+    "batch-0037-fact-0021",
+    "batch-0037-fact-0038",
+    "batch-0038-object-0001",
+    "batch-0038-object-0002",
+    "batch-0038-object-0003",
+    "batch-0038-object-0004",
+    "batch-0038-object-0005",
+    "batch-0038-object-0006",
+    "batch-0038-object-0007",
+    "batch-0038-object-0008",
+    "batch-0038-object-0013",
+    "batch-0038-object-0015",
+    "batch-0038-object-0016",
+    "batch-0038-object-0017",
+    "batch-0038-object-0018",
+    "batch-0038-object-0019",
+    "batch-0038-object-0020",
     "batch-0038-object-0021",
+    "batch-0038-object-0027",
     "batch-0038-object-0028",
     "batch-0038-object-0029",
     "batch-0038-object-0030",
     "batch-0038-object-0031",
     "batch-0038-object-0032",
+    "batch-0038-object-0034",
+    "batch-0038-object-0035",
+    "batch-0038-object-0036",
+    "batch-0038-object-0037",
+    "batch-0038-object-0038",
+    "batch-0038-object-0039",
+    "batch-0038-object-0040",
+    "batch-0038-object-0041",
+    "batch-0038-object-0042",
+    "batch-0038-object-0043",
+    "batch-0038-object-0050",
+    "batch-0038-object-0052",
+    "batch-0038-object-0053",
+    "batch-0038-object-0054",
+    "batch-0038-object-0055",
+    "batch-0038-object-0056",
+    "batch-0038-object-0057",
+    "batch-0038-object-0058",
+    "batch-0038-object-0059",
+    "batch-0038-object-0061",
+    "batch-0038-object-0062",
+    "batch-0038-object-0063",
+    "batch-0038-object-0066",
+    "batch-0038-object-0067",
+    "batch-0038-object-0068",
+    "batch-0038-object-0069",
+    "batch-0038-object-0070",
+    "batch-0038-object-0071",
+    "batch-0038-object-0072",
+    "batch-0038-object-0073",
+    "batch-0038-object-0074",
+    "batch-0038-fact-0001",
     "batch-0038-fact-0002",
+    "batch-0038-fact-0003",
+    "batch-0038-fact-0005",
+    "batch-0038-fact-0006",
+    "batch-0038-fact-0007",
     "batch-0038-fact-0008",
+    "batch-0038-fact-0010",
+    "batch-0038-fact-0011",
+    "batch-0038-fact-0017",
+    "batch-0038-fact-0018",
+    "batch-0038-fact-0019",
+    "batch-0038-fact-0046",
+    "batch-0038-fact-0056",
+    "batch-0038-fact-0060",
+    "batch-0039-object-0001",
+    "batch-0039-object-0002",
+    "batch-0039-object-0006",
+    "batch-0039-object-0007",
+    "batch-0039-object-0009",
+    "batch-0039-object-0016",
+    "batch-0039-object-0018",
     "batch-0039-object-0019",
     "batch-0039-object-0020",
     "batch-0039-object-0029",
     "batch-0039-object-0030",
+    "batch-0039-object-0031",
+    "batch-0039-object-0032",
+    "batch-0039-object-0035",
+    "batch-0039-object-0036",
+    "batch-0039-object-0037",
+    "batch-0039-object-0039",
+    "batch-0039-object-0043",
+    "batch-0039-object-0047",
+    "batch-0039-fact-0001",
     "batch-0039-fact-0002",
+    "batch-0039-fact-0015",
+    "batch-0039-fact-0024",
+    "batch-0039-fact-0035",
+    "batch-0039-fact-0037",
+    "batch-0039-fact-0040",
+    "batch-0039-fact-0042",
+    "batch-0039-fact-0043",
+    "batch-0039-fact-0050",
+    "batch-0039-fact-0052",
+    "batch-0039-fact-0053",
+    "batch-0039-fact-0054",
+    "batch-0039-fact-0055",
     "batch-0039-fact-0056",
     "batch-0039-fact-0068",
+    "batch-0039-fact-0069",
+    "batch-0039-fact-0070",
+    "batch-0039-issue-0010",
+    "batch-0040-object-0001",
+    "batch-0040-object-0002",
+    "batch-0040-object-0003",
+    "batch-0040-object-0004",
+    "batch-0040-object-0005",
+    "batch-0040-object-0011",
+    "batch-0040-object-0017",
+    "batch-0040-object-0018",
+    "batch-0040-object-0019",
+    "batch-0040-object-0020",
+    "batch-0040-object-0021",
+    "batch-0040-object-0026",
+    "batch-0040-object-0027",
+    "batch-0040-object-0028",
+    "batch-0040-object-0032",
+    "batch-0040-object-0033",
+    "batch-0040-object-0034",
+    "batch-0040-object-0035",
+    "batch-0040-object-0037",
+    "batch-0040-object-0038",
+    "batch-0040-object-0039",
+    "batch-0040-object-0041",
+    "batch-0040-fact-0034",
+    "batch-0040-fact-0036",
+    "batch-0040-fact-0041",
+    "batch-0040-fact-0055",
+    "batch-0041-object-0001",
+    "batch-0041-object-0004",
+    "batch-0041-object-0005",
+    "batch-0041-object-0009",
+    "batch-0041-object-0010",
+    "batch-0041-object-0023",
+    "batch-0041-object-0028",
+    "batch-0041-object-0029",
+    "batch-0041-object-0030",
+    "batch-0041-object-0031",
+    "batch-0041-object-0035",
+    "batch-0041-object-0036",
+    "batch-0041-object-0037",
+    "batch-0041-object-0038",
+    "batch-0041-object-0039",
+    "batch-0041-object-0040",
+    "batch-0041-object-0041",
+    "batch-0041-object-0043",
+    "batch-0041-object-0044",
+    "batch-0041-fact-0009",
+    "batch-0041-fact-0015",
+    "batch-0041-fact-0023",
+    "batch-0041-fact-0024",
+    "batch-0041-fact-0045",
+    "batch-0041-fact-0063",
+    "batch-0041-issue-0004",
+    "batch-0043-object-0001",
+    "batch-0043-object-0002",
+    "batch-0043-object-0003",
+    "batch-0043-object-0004",
+    "batch-0043-object-0005",
     "batch-0043-object-0006",
+    "batch-0043-object-0007",
+    "batch-0043-object-0009",
+    "batch-0043-object-0010",
+    "batch-0043-object-0011",
+    "batch-0043-object-0012",
+    "batch-0043-object-0013",
+    "batch-0043-object-0014",
+    "batch-0043-object-0016",
+    "batch-0043-object-0017",
+    "batch-0043-object-0018",
+    "batch-0043-object-0019",
+    "batch-0043-object-0020",
+    "batch-0043-object-0021",
+    "batch-0043-object-0022",
+    "batch-0043-object-0023",
+    "batch-0043-object-0024",
+    "batch-0043-object-0025",
+    "batch-0043-object-0026",
+    "batch-0043-object-0029",
+    "batch-0043-object-0031",
+    "batch-0043-object-0032",
+    "batch-0043-object-0033",
+    "batch-0043-object-0034",
+    "batch-0043-object-0035",
+    "batch-0043-object-0036",
+    "batch-0043-object-0037",
+    "batch-0043-object-0038",
+    "batch-0043-object-0039",
+    "batch-0043-object-0040",
+    "batch-0043-object-0041",
+    "batch-0043-object-0042",
+    "batch-0043-object-0043",
+    "batch-0043-object-0044",
+    "batch-0043-object-0045",
+    "batch-0043-object-0046",
+    "batch-0043-object-0047",
+    "batch-0043-object-0048",
+    "batch-0043-object-0051",
+    "batch-0043-object-0052",
+    "batch-0043-object-0053",
+    "batch-0043-object-0054",
+    "batch-0043-object-0055",
     "batch-0043-object-0056",
+    "batch-0043-object-0057",
+    "batch-0043-fact-0001",
+    "batch-0043-fact-0002",
+    "batch-0043-fact-0003",
+    "batch-0043-fact-0004",
+    "batch-0043-fact-0005",
+    "batch-0043-fact-0036",
+    "batch-0043-fact-0037",
+    "batch-0043-fact-0041",
+    "batch-0044-object-0001",
+    "batch-0044-object-0011",
+    "batch-0044-object-0012",
+    "batch-0044-object-0020",
+    "batch-0044-object-0025",
+    "batch-0044-fact-0027",
+    "batch-0044-fact-0028",
+    "batch-0044-fact-0030",
+    "batch-0044-issue-0017",
+    "batch-0044-issue-0018",
+    "batch-0045-object-0001",
+    "batch-0045-object-0002",
+    "batch-0045-object-0003",
+    "batch-0045-object-0004",
+    "batch-0045-object-0005",
+    "batch-0045-object-0006",
+    "batch-0045-object-0007",
+    "batch-0045-object-0008",
+    "batch-0045-object-0009",
+    "batch-0045-object-0010",
+    "batch-0045-object-0011",
+    "batch-0045-object-0013",
+    "batch-0045-object-0014",
+    "batch-0045-object-0015",
+    "batch-0045-object-0016",
+    "batch-0045-object-0017",
+    "batch-0045-object-0018",
+    "batch-0045-object-0020",
+    "batch-0045-object-0021",
+    "batch-0045-object-0022",
+    "batch-0045-object-0023",
+    "batch-0045-object-0024",
+    "batch-0045-object-0025",
+    "batch-0045-object-0026",
     "batch-0045-object-0027",
+    "batch-0045-object-0028",
+    "batch-0045-object-0053",
+    "batch-0045-object-0054",
+    "batch-0045-object-0056",
+    "batch-0045-fact-0009",
+    "batch-0045-fact-0045",
+    "batch-0045-fact-0046",
+    "batch-0045-fact-0053",
+    "batch-0045-issue-0003",
     "batch-0046-object-0001",
     "batch-0046-object-0004",
     "batch-0048-object-0037",
@@ -4488,6 +4880,2897 @@
         }
       ],
       "method": "第三组针对制度或身份冲突补读完整章节。"
+    },
+    {
+      "chapterId": "qq-21101015",
+      "sha256": "79d663d8301ed9719da3314d8d542329c1f4837b3a31646214f33dd562e085f2",
+      "reviewedRanges": [
+        {
+          "start": 175,
+          "end": 362
+        },
+        {
+          "start": 519,
+          "end": 671
+        },
+        {
+          "start": 1006,
+          "end": 1288
+        },
+        {
+          "start": 1720,
+          "end": 2399
+        },
+        {
+          "start": 2746,
+          "end": 2857
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21103488",
+      "sha256": "d02d6c8947f248c3de78dfc12f89a2325292d451b74a4b7d239c7b2746a9e0ef",
+      "reviewedRanges": [
+        {
+          "start": 572,
+          "end": 741
+        },
+        {
+          "start": 2055,
+          "end": 2238
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21106360",
+      "sha256": "31936c086ca036dcfcebbb1378376ee2ca931ce150c9ee537760336606f8bd67",
+      "reviewedRanges": [
+        {
+          "start": 106,
+          "end": 326
+        },
+        {
+          "start": 853,
+          "end": 1130
+        },
+        {
+          "start": 2037,
+          "end": 2366
+        },
+        {
+          "start": 2725,
+          "end": 3069
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21112061",
+      "sha256": "f2179e8cc69cb01ce3d4c1fafc1a2043d8bb95bf95ea4f4c783d11d968f2dfef",
+      "reviewedRanges": [
+        {
+          "start": 1096,
+          "end": 1252
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21115148",
+      "sha256": "f9477c8b4009432d816ef060cb303414483ece7e2666af7c8a5269be6ac617b4",
+      "reviewedRanges": [
+        {
+          "start": 301,
+          "end": 632
+        },
+        {
+          "start": 2060,
+          "end": 2249
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21117968",
+      "sha256": "d3612a90358f650855112487d383ecb97a4955d7fcf4e244029e97d3bb238bdd",
+      "reviewedRanges": [
+        {
+          "start": 534,
+          "end": 904
+        },
+        {
+          "start": 1180,
+          "end": 1579
+        },
+        {
+          "start": 2460,
+          "end": 2659
+        },
+        {
+          "start": 2660,
+          "end": 2887
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21121196",
+      "sha256": "ef78295cb5bea1cb54ec5abec3e28e748da8c055ae0deed22bb2ec08420f4fb6",
+      "reviewedRanges": [
+        {
+          "start": 241,
+          "end": 566
+        },
+        {
+          "start": 1304,
+          "end": 1587
+        },
+        {
+          "start": 2416,
+          "end": 2566
+        },
+        {
+          "start": 2635,
+          "end": 2857
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21123710",
+      "sha256": "106fec4526bb60e8b6b14c605819570e9ece697fa62416afb2fdd4e615b9d76d",
+      "reviewedRanges": [
+        {
+          "start": 100,
+          "end": 280
+        },
+        {
+          "start": 1166,
+          "end": 1430
+        },
+        {
+          "start": 1571,
+          "end": 1767
+        },
+        {
+          "start": 1768,
+          "end": 2037
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21128718",
+      "sha256": "dd7bb27db4fd25e3a2d2b87b7036a862c96e4370094c37d583eaf28cac057790",
+      "reviewedRanges": [
+        {
+          "start": 133,
+          "end": 313
+        },
+        {
+          "start": 314,
+          "end": 509
+        },
+        {
+          "start": 736,
+          "end": 923
+        },
+        {
+          "start": 1325,
+          "end": 1527
+        },
+        {
+          "start": 1665,
+          "end": 1832
+        },
+        {
+          "start": 1927,
+          "end": 2441
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21131760",
+      "sha256": "efc826853da0004fb3ba8f88a4bc938fedbfa5d9729f1eca2c612552662769bc",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 141
+        },
+        {
+          "start": 282,
+          "end": 622
+        },
+        {
+          "start": 832,
+          "end": 977
+        },
+        {
+          "start": 2183,
+          "end": 2351
+        },
+        {
+          "start": 2520,
+          "end": 2713
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21134400",
+      "sha256": "d518e135bdd8f36a5890a696d1d8deedceb9fb20a4258bded0e94145adc745a2",
+      "reviewedRanges": [
+        {
+          "start": 56,
+          "end": 240
+        },
+        {
+          "start": 241,
+          "end": 445
+        },
+        {
+          "start": 624,
+          "end": 1027
+        },
+        {
+          "start": 1028,
+          "end": 1901
+        },
+        {
+          "start": 2466,
+          "end": 2657
+        },
+        {
+          "start": 2715,
+          "end": 2889
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21138378",
+      "sha256": "22c75ff240e04504380f7b718e67c3c46def05763e374091d8f84a30d308c8d8",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 402
+        },
+        {
+          "start": 1285,
+          "end": 1529
+        },
+        {
+          "start": 1648,
+          "end": 1950
+        },
+        {
+          "start": 1951,
+          "end": 2340
+        },
+        {
+          "start": 2432,
+          "end": 2782
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21139984",
+      "sha256": "fdfac76b34b2e3a4acc118a84393af741137f7f43e12e3b903447ce9ebd602d0",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 179
+        },
+        {
+          "start": 388,
+          "end": 828
+        },
+        {
+          "start": 1515,
+          "end": 1756
+        },
+        {
+          "start": 2771,
+          "end": 2965
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21148047",
+      "sha256": "555fdbb0dc74b88443fdcef9b1913e0a81fd609afe7347913331652bb05e10a1",
+      "reviewedRanges": [
+        {
+          "start": 1221,
+          "end": 1578
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21162988",
+      "sha256": "138b44681c6f39cb11c7a77e3cc875fcb913966a0f4f201a940617e6881b9794",
+      "reviewedRanges": [
+        {
+          "start": 266,
+          "end": 486
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21164902",
+      "sha256": "5f16087d5f5e417b2a1be7f5d92c370a2bf6555cd103b09a379fab1f665e0457",
+      "reviewedRanges": [
+        {
+          "start": 66,
+          "end": 191
+        },
+        {
+          "start": 207,
+          "end": 404
+        },
+        {
+          "start": 405,
+          "end": 528
+        },
+        {
+          "start": 690,
+          "end": 857
+        },
+        {
+          "start": 858,
+          "end": 1111
+        },
+        {
+          "start": 1619,
+          "end": 1849
+        },
+        {
+          "start": 1850,
+          "end": 2178
+        },
+        {
+          "start": 2399,
+          "end": 2550
+        },
+        {
+          "start": 2728,
+          "end": 2903
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21172158",
+      "sha256": "d9d7785c9f486dd37eaf75ecb2231db1e95e5ca5a871c7c610640e0bda36360b",
+      "reviewedRanges": [
+        {
+          "start": 74,
+          "end": 248
+        },
+        {
+          "start": 572,
+          "end": 719
+        },
+        {
+          "start": 2039,
+          "end": 2299
+        },
+        {
+          "start": 2621,
+          "end": 2862
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21173930",
+      "sha256": "4dc3c0fdaa668dbe05aa6218811c01122a86abe498f35ba4e42a9f354fd520f8",
+      "reviewedRanges": [
+        {
+          "start": 252,
+          "end": 439
+        },
+        {
+          "start": 551,
+          "end": 926
+        },
+        {
+          "start": 961,
+          "end": 1061
+        },
+        {
+          "start": 1062,
+          "end": 1356
+        },
+        {
+          "start": 1357,
+          "end": 1528
+        },
+        {
+          "start": 1555,
+          "end": 1858
+        },
+        {
+          "start": 2042,
+          "end": 2418
+        },
+        {
+          "start": 2745,
+          "end": 2948
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21181055",
+      "sha256": "d10878c3e76a0bf8bc384f7bb18af9a944aa2adff4925d0ef34e8d3ffee37521",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 103
+        },
+        {
+          "start": 502,
+          "end": 674
+        },
+        {
+          "start": 675,
+          "end": 1396
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21184800",
+      "sha256": "f9a1575494884ad4a94b308fe450ac3c0f89e26a1c21e1b21546bd5ff4eaf47b",
+      "reviewedRanges": [
+        {
+          "start": 136,
+          "end": 301
+        },
+        {
+          "start": 302,
+          "end": 756
+        },
+        {
+          "start": 757,
+          "end": 916
+        },
+        {
+          "start": 1070,
+          "end": 1284
+        },
+        {
+          "start": 1599,
+          "end": 2295
+        },
+        {
+          "start": 2425,
+          "end": 2639
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21187560",
+      "sha256": "12f595ce74590753aa2d19c0103e9273a2953432d40c75aae67f7068cf36bea1",
+      "reviewedRanges": [
+        {
+          "start": 2180,
+          "end": 2561
+        },
+        {
+          "start": 2562,
+          "end": 2957
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21193160",
+      "sha256": "15f392728e69f2f6fd511e94041c80b0b150dbe31b3fc29ece854093721957ee",
+      "reviewedRanges": [
+        {
+          "start": 185,
+          "end": 822
+        },
+        {
+          "start": 2538,
+          "end": 2705
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21196248",
+      "sha256": "3306876ec3cbfbd993cc1403b826dd5108ba68d0245460ec880297e6acbbb0ee",
+      "reviewedRanges": [
+        {
+          "start": 223,
+          "end": 507
+        },
+        {
+          "start": 1629,
+          "end": 1867
+        },
+        {
+          "start": 2709,
+          "end": 2852
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21201321",
+      "sha256": "6fe22555b3f7ae2654421c6e49c7c539561499450e2d8496c422693b3113b9f8",
+      "reviewedRanges": [
+        {
+          "start": 456,
+          "end": 619
+        },
+        {
+          "start": 1338,
+          "end": 1749
+        },
+        {
+          "start": 1865,
+          "end": 2084
+        },
+        {
+          "start": 2195,
+          "end": 2408
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21204630",
+      "sha256": "9ef7c9343d22efd257b7c767f98dcf28a9d801e9b316ae4528c53e101b36f434",
+      "reviewedRanges": [
+        {
+          "start": 206,
+          "end": 409
+        },
+        {
+          "start": 747,
+          "end": 898
+        },
+        {
+          "start": 1417,
+          "end": 1681
+        },
+        {
+          "start": 2423,
+          "end": 2616
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21214905",
+      "sha256": "06e6202820b0e40c2e48b55a9bf5a53a4cda4b39077c658ec24db8d1381c24bc",
+      "reviewedRanges": [
+        {
+          "start": 464,
+          "end": 678
+        },
+        {
+          "start": 2464,
+          "end": 2707
+        },
+        {
+          "start": 2778,
+          "end": 2906
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21219801",
+      "sha256": "6db1b750ae4910503828e75972f5f5eabdd2b24d9bbf6d9af7d70e54ec17d60b",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 238
+        },
+        {
+          "start": 239,
+          "end": 785
+        },
+        {
+          "start": 786,
+          "end": 1510
+        },
+        {
+          "start": 1679,
+          "end": 2100
+        },
+        {
+          "start": 2101,
+          "end": 2547
+        },
+        {
+          "start": 2548,
+          "end": 2674
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21224704",
+      "sha256": "7eb123f12dda3edd5079c39be7b864bb5ccce00d675fe71cc511ce50bb8479fc",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 145
+        },
+        {
+          "start": 703,
+          "end": 921
+        },
+        {
+          "start": 1419,
+          "end": 1606
+        },
+        {
+          "start": 2096,
+          "end": 2356
+        },
+        {
+          "start": 2404,
+          "end": 2854
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21227943",
+      "sha256": "817a98e7ea902b8e1466adbbc616cacd382aa74b86791ab0830df7fa8a208563",
+      "reviewedRanges": [
+        {
+          "start": 533,
+          "end": 781
+        },
+        {
+          "start": 782,
+          "end": 1014
+        },
+        {
+          "start": 1015,
+          "end": 1198
+        },
+        {
+          "start": 1199,
+          "end": 1334
+        },
+        {
+          "start": 1439,
+          "end": 1720
+        },
+        {
+          "start": 1721,
+          "end": 2117
+        },
+        {
+          "start": 2587,
+          "end": 2739
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21233615",
+      "sha256": "d63df3066a184a6c8d9bf0308e39c8acf6496621e313a3fe51c1f0e63afa975a",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 119
+        },
+        {
+          "start": 120,
+          "end": 330
+        },
+        {
+          "start": 716,
+          "end": 959
+        },
+        {
+          "start": 1356,
+          "end": 1649
+        },
+        {
+          "start": 2107,
+          "end": 2564
+        },
+        {
+          "start": 2788,
+          "end": 3012
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21236842",
+      "sha256": "e116371a13888118c8a56d369e2c32840f73d1cf4322b3f089d217c327f9b54f",
+      "reviewedRanges": [
+        {
+          "start": 120,
+          "end": 352
+        },
+        {
+          "start": 955,
+          "end": 1057
+        },
+        {
+          "start": 1109,
+          "end": 1414
+        },
+        {
+          "start": 1850,
+          "end": 2006
+        },
+        {
+          "start": 2099,
+          "end": 2268
+        },
+        {
+          "start": 2269,
+          "end": 2388
+        },
+        {
+          "start": 2394,
+          "end": 2563
+        },
+        {
+          "start": 2676,
+          "end": 2820
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21245223",
+      "sha256": "52470b565a938d67aeb02db37be0f6dff7e1f92ef446dfc0c4c109a1011f34c6",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 68
+        },
+        {
+          "start": 136,
+          "end": 313
+        },
+        {
+          "start": 699,
+          "end": 1009
+        },
+        {
+          "start": 1010,
+          "end": 1218
+        },
+        {
+          "start": 1598,
+          "end": 2057
+        },
+        {
+          "start": 2240,
+          "end": 2428
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21255176",
+      "sha256": "029fc73046e99b4e12c0b4ac73ead54dda93331cff8e42c2fa16bf6bdd18ffa7",
+      "reviewedRanges": [
+        {
+          "start": 72,
+          "end": 357
+        },
+        {
+          "start": 785,
+          "end": 994
+        },
+        {
+          "start": 1591,
+          "end": 1704
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21261869",
+      "sha256": "bc7654b23e8e33e25bd3fb3d594e7be60f9d11b6630edfe645489a64ada98e20",
+      "reviewedRanges": [
+        {
+          "start": 870,
+          "end": 1827
+        },
+        {
+          "start": 1959,
+          "end": 2404
+        },
+        {
+          "start": 2752,
+          "end": 2866
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21271384",
+      "sha256": "8de77b178123b152987dc9bc464d449fc7d5deb31a303bdd9d44a263a68e3d77",
+      "reviewedRanges": [
+        {
+          "start": 217,
+          "end": 382
+        },
+        {
+          "start": 777,
+          "end": 1021
+        },
+        {
+          "start": 1308,
+          "end": 1567
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21279326",
+      "sha256": "811c8085fbad0581ab534bc150404fe0cdd3f2240c770e89a143bc271151732e",
+      "reviewedRanges": [
+        {
+          "start": 444,
+          "end": 601
+        },
+        {
+          "start": 856,
+          "end": 989
+        },
+        {
+          "start": 1277,
+          "end": 1662
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21288316",
+      "sha256": "77b35a3a763025c338f31b087e4c27107207ad3b2fd409efcc5f20fe96940a9c",
+      "reviewedRanges": [
+        {
+          "start": 1106,
+          "end": 1271
+        },
+        {
+          "start": 1272,
+          "end": 1567
+        },
+        {
+          "start": 1620,
+          "end": 2009
+        },
+        {
+          "start": 2175,
+          "end": 2301
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21304992",
+      "sha256": "570779656f87eb6895fa3f7719c98eac2541c8e426262e43e07dd51743a0bd2e",
+      "reviewedRanges": [
+        {
+          "start": 73,
+          "end": 300
+        },
+        {
+          "start": 1388,
+          "end": 1609
+        },
+        {
+          "start": 1668,
+          "end": 1939
+        },
+        {
+          "start": 1940,
+          "end": 2132
+        },
+        {
+          "start": 2218,
+          "end": 2473
+        },
+        {
+          "start": 2474,
+          "end": 2630
+        },
+        {
+          "start": 2842,
+          "end": 3082
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21319170",
+      "sha256": "2fb5fa7dd67fc2e879142445e83c0d7778de7eedaaed8feb47adf80eb4abceb4",
+      "reviewedRanges": [
+        {
+          "start": 437,
+          "end": 674
+        },
+        {
+          "start": 1020,
+          "end": 1179
+        },
+        {
+          "start": 1584,
+          "end": 1885
+        },
+        {
+          "start": 2024,
+          "end": 2152
+        },
+        {
+          "start": 2456,
+          "end": 2583
+        },
+        {
+          "start": 2644,
+          "end": 2881
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21321612",
+      "sha256": "9610e6774e31f6991604b901cb9931f4b73b59e47196bfb8393cd9b7cf7813b3",
+      "reviewedRanges": [
+        {
+          "start": 505,
+          "end": 829
+        },
+        {
+          "start": 911,
+          "end": 1118
+        },
+        {
+          "start": 1343,
+          "end": 1528
+        },
+        {
+          "start": 1637,
+          "end": 1775
+        },
+        {
+          "start": 1800,
+          "end": 1931
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21325829",
+      "sha256": "1fbb5c457f2e0e53d1582ddb80939d2e66f4b3cb53289d9075ff7c57e9ef715f",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 119
+        },
+        {
+          "start": 222,
+          "end": 459
+        },
+        {
+          "start": 3010,
+          "end": 3152
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21329806",
+      "sha256": "b9b6e74d3b58d0765fecdec47ad324e98d16275393a2cec834aff00d097da924",
+      "reviewedRanges": [
+        {
+          "start": 1557,
+          "end": 1821
+        },
+        {
+          "start": 2022,
+          "end": 2207
+        },
+        {
+          "start": 2298,
+          "end": 2492
+        },
+        {
+          "start": 2648,
+          "end": 2835
+        },
+        {
+          "start": 2836,
+          "end": 2924
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21334991",
+      "sha256": "d33ab248ffa9bb2100b7920f53e595c498633fc42000f4ad162ce524ba4f00b8",
+      "reviewedRanges": [
+        {
+          "start": 399,
+          "end": 601
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21338139",
+      "sha256": "59d2dd590dbcf4be3095aecfe3755cb438c6501026a20aa0e5254dcc2814708f",
+      "reviewedRanges": [
+        {
+          "start": 460,
+          "end": 655
+        },
+        {
+          "start": 2664,
+          "end": 2940
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21342642",
+      "sha256": "bca03659b0287c9f8537b60acf8543423783c9ac55f8916dafda530ea4cf863d",
+      "reviewedRanges": [
+        {
+          "start": 588,
+          "end": 750
+        },
+        {
+          "start": 830,
+          "end": 1072
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21345937",
+      "sha256": "4cbc21efdfd374b903680ee17a195881adb827122fe116a0f0d655bf2f72eea0",
+      "reviewedRanges": [
+        {
+          "start": 515,
+          "end": 764
+        },
+        {
+          "start": 1479,
+          "end": 1757
+        },
+        {
+          "start": 1933,
+          "end": 2080
+        },
+        {
+          "start": 2286,
+          "end": 2684
+        },
+        {
+          "start": 2685,
+          "end": 2881
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21352160",
+      "sha256": "811d905c55e08b83e76d123def54d21dfd9c211ff7b8f8805338494abc8987db",
+      "reviewedRanges": [
+        {
+          "start": 847,
+          "end": 996
+        },
+        {
+          "start": 1104,
+          "end": 1223
+        },
+        {
+          "start": 2669,
+          "end": 2812
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21356116",
+      "sha256": "141dc7e37eb9a40c4cab24e439261dba138f729dfd472d624c147a9a49ef859f",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 123
+        },
+        {
+          "start": 124,
+          "end": 253
+        },
+        {
+          "start": 356,
+          "end": 540
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21360344",
+      "sha256": "61457241c15b5d4acda5a9213f5d0a3f7976b49e24d37b79c5a73202a029207f",
+      "reviewedRanges": [
+        {
+          "start": 392,
+          "end": 546
+        },
+        {
+          "start": 1403,
+          "end": 1575
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21392684",
+      "sha256": "9a8872ae557d2c8081696065337db9b164e0cf0ff8f09aab8d6091c3cc14424d",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 181
+        },
+        {
+          "start": 344,
+          "end": 546
+        },
+        {
+          "start": 547,
+          "end": 623
+        },
+        {
+          "start": 662,
+          "end": 1259
+        },
+        {
+          "start": 2056,
+          "end": 2216
+        },
+        {
+          "start": 2361,
+          "end": 2528
+        },
+        {
+          "start": 2637,
+          "end": 2880
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21395190",
+      "sha256": "ee33deb1c72d1e8ca7317db602f6beeb850c435bdc8331d19420e1c293885a20",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 216
+        },
+        {
+          "start": 628,
+          "end": 858
+        },
+        {
+          "start": 859,
+          "end": 1004
+        },
+        {
+          "start": 1034,
+          "end": 1214
+        },
+        {
+          "start": 1215,
+          "end": 1415
+        },
+        {
+          "start": 1468,
+          "end": 1618
+        },
+        {
+          "start": 1619,
+          "end": 1865
+        },
+        {
+          "start": 2291,
+          "end": 2682
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21401199",
+      "sha256": "abd0478331b8593cc62459c02aeb5a24c9c4c3823831590b1893f1b684b3fbe7",
+      "reviewedRanges": [
+        {
+          "start": 509,
+          "end": 666
+        },
+        {
+          "start": 830,
+          "end": 1057
+        },
+        {
+          "start": 2292,
+          "end": 2529
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21409256",
+      "sha256": "0a703bfe8682620495783717db569286634476fe1d4fe51127189d1d6f5ca303",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 297
+        },
+        {
+          "start": 298,
+          "end": 448
+        },
+        {
+          "start": 536,
+          "end": 897
+        },
+        {
+          "start": 992,
+          "end": 1222
+        },
+        {
+          "start": 1555,
+          "end": 1769
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21412240",
+      "sha256": "f29fbd90dfcfb2f9c7a5041108dc7034b04cec7308563c2b133af34aafe35d8c",
+      "reviewedRanges": [
+        {
+          "start": 494,
+          "end": 634
+        },
+        {
+          "start": 753,
+          "end": 1079
+        },
+        {
+          "start": 1531,
+          "end": 1798
+        },
+        {
+          "start": 2146,
+          "end": 2850
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21418005",
+      "sha256": "ddd6f28a6a3b06320123381834a24af0581243cc692ac16e71dbdc18ab1167ca",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 538
+        },
+        {
+          "start": 625,
+          "end": 1093
+        },
+        {
+          "start": 1158,
+          "end": 1264
+        },
+        {
+          "start": 1359,
+          "end": 1673
+        },
+        {
+          "start": 1674,
+          "end": 1864
+        },
+        {
+          "start": 1922,
+          "end": 2094
+        },
+        {
+          "start": 2200,
+          "end": 2373
+        },
+        {
+          "start": 2509,
+          "end": 2688
+        },
+        {
+          "start": 2734,
+          "end": 2876
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21420950",
+      "sha256": "6bffc46a50acdcfa822b680cfcd2bb94b9bbc8e13725b251152de88844350c36",
+      "reviewedRanges": [
+        {
+          "start": 920,
+          "end": 1149
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21427960",
+      "sha256": "83af89b0e4a8ea4504433f9ae2f8d589b8a50567c0e511eaca9850f0533a517e",
+      "reviewedRanges": [
+        {
+          "start": 782,
+          "end": 1151
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21433231",
+      "sha256": "e5cf7687d7687368c5ce0827ebd35f6231cc86ffd7a04ecd33146a7cd2ab9e53",
+      "reviewedRanges": [
+        {
+          "start": 520,
+          "end": 865
+        },
+        {
+          "start": 1076,
+          "end": 1259
+        },
+        {
+          "start": 2072,
+          "end": 2461
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21450731",
+      "sha256": "179c9165890cb368128830750c9ae57fb765f542a69a87f95a2b32e43007d69c",
+      "reviewedRanges": [
+        {
+          "start": 29,
+          "end": 197
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21454080",
+      "sha256": "1f3ebb69e35176f8504929e2bcf5551e5f054f28e928caf23d0cc8d6b54ec89e",
+      "reviewedRanges": [
+        {
+          "start": 186,
+          "end": 567
+        },
+        {
+          "start": 678,
+          "end": 843
+        },
+        {
+          "start": 1223,
+          "end": 1399
+        },
+        {
+          "start": 1605,
+          "end": 1760
+        },
+        {
+          "start": 2677,
+          "end": 2945
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21459953",
+      "sha256": "4d1f417084deeb83cd408e6f75147e30aeeeb77ebebe8deebd1078ebf4a618fa",
+      "reviewedRanges": [
+        {
+          "start": 193,
+          "end": 471
+        },
+        {
+          "start": 1691,
+          "end": 1852
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21462945",
+      "sha256": "9e8ac6101d3ae65a983366777ccfdfc6784c558afbb4a27dd49fd3ee10329417",
+      "reviewedRanges": [
+        {
+          "start": 1689,
+          "end": 1867
+        },
+        {
+          "start": 2241,
+          "end": 2524
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21468079",
+      "sha256": "a425c1afec0a6403574e7017d2736a3c204c52ddc44aca4b58ccb5c6b5b55da4",
+      "reviewedRanges": [
+        {
+          "start": 53,
+          "end": 249
+        },
+        {
+          "start": 657,
+          "end": 802
+        },
+        {
+          "start": 1690,
+          "end": 1910
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21471370",
+      "sha256": "7ae911c5c6f1a08e4e4a7e6c2b3e19f25de26f186972bff1c09581177bdf5612",
+      "reviewedRanges": [
+        {
+          "start": 1179,
+          "end": 1244
+        },
+        {
+          "start": 1524,
+          "end": 1690
+        },
+        {
+          "start": 1922,
+          "end": 2199
+        },
+        {
+          "start": 2200,
+          "end": 2469
+        },
+        {
+          "start": 2470,
+          "end": 2742
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21478199",
+      "sha256": "ec9af8544356f73e079cb7b017a98144efc5e2329952fd6ef8a02570a044bcc7",
+      "reviewedRanges": [
+        {
+          "start": 540,
+          "end": 858
+        },
+        {
+          "start": 1271,
+          "end": 1548
+        },
+        {
+          "start": 1795,
+          "end": 2079
+        },
+        {
+          "start": 2182,
+          "end": 2432
+        },
+        {
+          "start": 2523,
+          "end": 2710
+        },
+        {
+          "start": 2732,
+          "end": 3011
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21101015",
+      "sha256": "79d663d8301ed9719da3314d8d542329c1f4837b3a31646214f33dd562e085f2",
+      "reviewedRanges": [
+        {
+          "start": 230,
+          "end": 490
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21101015",
+      "sha256": "79d663d8301ed9719da3314d8d542329c1f4837b3a31646214f33dd562e085f2",
+      "reviewedRanges": [
+        {
+          "start": 2230,
+          "end": 2460
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21101015",
+      "sha256": "79d663d8301ed9719da3314d8d542329c1f4837b3a31646214f33dd562e085f2",
+      "reviewedRanges": [
+        {
+          "start": 2790,
+          "end": 2924
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21106360",
+      "sha256": "31936c086ca036dcfcebbb1378376ee2ca931ce150c9ee537760336606f8bd67",
+      "reviewedRanges": [
+        {
+          "start": 820,
+          "end": 1170
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21106360",
+      "sha256": "31936c086ca036dcfcebbb1378376ee2ca931ce150c9ee537760336606f8bd67",
+      "reviewedRanges": [
+        {
+          "start": 2100,
+          "end": 2280
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21112061",
+      "sha256": "f2179e8cc69cb01ce3d4c1fafc1a2043d8bb95bf95ea4f4c783d11d968f2dfef",
+      "reviewedRanges": [
+        {
+          "start": 1080,
+          "end": 1450
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21117968",
+      "sha256": "d3612a90358f650855112487d383ecb97a4955d7fcf4e244029e97d3bb238bdd",
+      "reviewedRanges": [
+        {
+          "start": 1723,
+          "end": 1825
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21117968",
+      "sha256": "d3612a90358f650855112487d383ecb97a4955d7fcf4e244029e97d3bb238bdd",
+      "reviewedRanges": [
+        {
+          "start": 2530,
+          "end": 2887
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21121196",
+      "sha256": "ef78295cb5bea1cb54ec5abec3e28e748da8c055ae0deed22bb2ec08420f4fb6",
+      "reviewedRanges": [
+        {
+          "start": 150,
+          "end": 510
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21115148",
+      "sha256": "f9477c8b4009432d816ef060cb303414483ece7e2666af7c8a5269be6ac617b4",
+      "reviewedRanges": [
+        {
+          "start": 2080,
+          "end": 2420
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21121196",
+      "sha256": "ef78295cb5bea1cb54ec5abec3e28e748da8c055ae0deed22bb2ec08420f4fb6",
+      "reviewedRanges": [
+        {
+          "start": 1350,
+          "end": 1600
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21123710",
+      "sha256": "106fec4526bb60e8b6b14c605819570e9ece697fa62416afb2fdd4e615b9d76d",
+      "reviewedRanges": [
+        {
+          "start": 1200,
+          "end": 2000
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21128718",
+      "sha256": "dd7bb27db4fd25e3a2d2b87b7036a862c96e4370094c37d583eaf28cac057790",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 288
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21131760",
+      "sha256": "efc826853da0004fb3ba8f88a4bc938fedbfa5d9729f1eca2c612552662769bc",
+      "reviewedRanges": [
+        {
+          "start": 310,
+          "end": 560
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21131760",
+      "sha256": "efc826853da0004fb3ba8f88a4bc938fedbfa5d9729f1eca2c612552662769bc",
+      "reviewedRanges": [
+        {
+          "start": 2150,
+          "end": 2610
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21134400",
+      "sha256": "d518e135bdd8f36a5890a696d1d8deedceb9fb20a4258bded0e94145adc745a2",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 235
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21134400",
+      "sha256": "d518e135bdd8f36a5890a696d1d8deedceb9fb20a4258bded0e94145adc745a2",
+      "reviewedRanges": [
+        {
+          "start": 610,
+          "end": 1020
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21134400",
+      "sha256": "d518e135bdd8f36a5890a696d1d8deedceb9fb20a4258bded0e94145adc745a2",
+      "reviewedRanges": [
+        {
+          "start": 1330,
+          "end": 1790
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21138378",
+      "sha256": "22c75ff240e04504380f7b718e67c3c46def05763e374091d8f84a30d308c8d8",
+      "reviewedRanges": [
+        {
+          "start": 1250,
+          "end": 1430
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21139984",
+      "sha256": "fdfac76b34b2e3a4acc118a84393af741137f7f43e12e3b903447ce9ebd602d0",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 825
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21196248",
+      "sha256": "3306876ec3cbfbd993cc1403b826dd5108ba68d0245460ec880297e6acbbb0ee",
+      "reviewedRanges": [
+        {
+          "start": 223,
+          "end": 507
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21196248",
+      "sha256": "3306876ec3cbfbd993cc1403b826dd5108ba68d0245460ec880297e6acbbb0ee",
+      "reviewedRanges": [
+        {
+          "start": 1629,
+          "end": 1867
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21214905",
+      "sha256": "06e6202820b0e40c2e48b55a9bf5a53a4cda4b39077c658ec24db8d1381c24bc",
+      "reviewedRanges": [
+        {
+          "start": 2464,
+          "end": 2740
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21138378",
+      "sha256": "22c75ff240e04504380f7b718e67c3c46def05763e374091d8f84a30d308c8d8",
+      "reviewedRanges": [
+        {
+          "start": 2156,
+          "end": 2290
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21139984",
+      "sha256": "fdfac76b34b2e3a4acc118a84393af741137f7f43e12e3b903447ce9ebd602d0",
+      "reviewedRanges": [
+        {
+          "start": 1510,
+          "end": 1720
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21139984",
+      "sha256": "fdfac76b34b2e3a4acc118a84393af741137f7f43e12e3b903447ce9ebd602d0",
+      "reviewedRanges": [
+        {
+          "start": 2840,
+          "end": 2965
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21162988",
+      "sha256": "138b44681c6f39cb11c7a77e3cc875fcb913966a0f4f201a940617e6881b9794",
+      "reviewedRanges": [
+        {
+          "start": 300,
+          "end": 710
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21164902",
+      "sha256": "5f16087d5f5e417b2a1be7f5d92c370a2bf6555cd103b09a379fab1f665e0457",
+      "reviewedRanges": [
+        {
+          "start": 1960,
+          "end": 2050
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21164902",
+      "sha256": "5f16087d5f5e417b2a1be7f5d92c370a2bf6555cd103b09a379fab1f665e0457",
+      "reviewedRanges": [
+        {
+          "start": 1490,
+          "end": 2050
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21164902",
+      "sha256": "5f16087d5f5e417b2a1be7f5d92c370a2bf6555cd103b09a379fab1f665e0457",
+      "reviewedRanges": [
+        {
+          "start": 2390,
+          "end": 2830
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21172158",
+      "sha256": "d9d7785c9f486dd37eaf75ecb2231db1e95e5ca5a871c7c610640e0bda36360b",
+      "reviewedRanges": [
+        {
+          "start": 74,
+          "end": 248
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21172158",
+      "sha256": "d9d7785c9f486dd37eaf75ecb2231db1e95e5ca5a871c7c610640e0bda36360b",
+      "reviewedRanges": [
+        {
+          "start": 2039,
+          "end": 2299
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21338139",
+      "sha256": "59d2dd590dbcf4be3095aecfe3755cb438c6501026a20aa0e5254dcc2814708f",
+      "reviewedRanges": [
+        {
+          "start": 460,
+          "end": 1300
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21338139",
+      "sha256": "59d2dd590dbcf4be3095aecfe3755cb438c6501026a20aa0e5254dcc2814708f",
+      "reviewedRanges": [
+        {
+          "start": 2664,
+          "end": 2940
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21172158",
+      "sha256": "d9d7785c9f486dd37eaf75ecb2231db1e95e5ca5a871c7c610640e0bda36360b",
+      "reviewedRanges": [
+        {
+          "start": 2621,
+          "end": 2862
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21173930",
+      "sha256": "4dc3c0fdaa668dbe05aa6218811c01122a86abe498f35ba4e42a9f354fd520f8",
+      "reviewedRanges": [
+        {
+          "start": 780,
+          "end": 1061
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21181055",
+      "sha256": "d10878c3e76a0bf8bc384f7bb18af9a944aa2adff4925d0ef34e8d3ffee37521",
+      "reviewedRanges": [
+        {
+          "start": 502,
+          "end": 1030
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21187560",
+      "sha256": "12f595ce74590753aa2d19c0103e9273a2953432d40c75aae67f7068cf36bea1",
+      "reviewedRanges": [
+        {
+          "start": 2400,
+          "end": 2740
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21173930",
+      "sha256": "4dc3c0fdaa668dbe05aa6218811c01122a86abe498f35ba4e42a9f354fd520f8",
+      "reviewedRanges": [
+        {
+          "start": 551,
+          "end": 926
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21173930",
+      "sha256": "4dc3c0fdaa668dbe05aa6218811c01122a86abe498f35ba4e42a9f354fd520f8",
+      "reviewedRanges": [
+        {
+          "start": 2042,
+          "end": 2418
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21184800",
+      "sha256": "f9a1575494884ad4a94b308fe450ac3c0f89e26a1c21e1b21546bd5ff4eaf47b",
+      "reviewedRanges": [
+        {
+          "start": 136,
+          "end": 916
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21184800",
+      "sha256": "f9a1575494884ad4a94b308fe450ac3c0f89e26a1c21e1b21546bd5ff4eaf47b",
+      "reviewedRanges": [
+        {
+          "start": 1599,
+          "end": 2295
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21184800",
+      "sha256": "f9a1575494884ad4a94b308fe450ac3c0f89e26a1c21e1b21546bd5ff4eaf47b",
+      "reviewedRanges": [
+        {
+          "start": 2425,
+          "end": 2639
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21187560",
+      "sha256": "12f595ce74590753aa2d19c0103e9273a2953432d40c75aae67f7068cf36bea1",
+      "reviewedRanges": [
+        {
+          "start": 2180,
+          "end": 2957
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21193160",
+      "sha256": "15f392728e69f2f6fd511e94041c80b0b150dbe31b3fc29ece854093721957ee",
+      "reviewedRanges": [
+        {
+          "start": 185,
+          "end": 822
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21184800",
+      "sha256": "f9a1575494884ad4a94b308fe450ac3c0f89e26a1c21e1b21546bd5ff4eaf47b",
+      "reviewedRanges": [
+        {
+          "start": 979,
+          "end": 1069
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21201321",
+      "sha256": "6fe22555b3f7ae2654421c6e49c7c539561499450e2d8496c422693b3113b9f8",
+      "reviewedRanges": [
+        {
+          "start": 1338,
+          "end": 1749
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21219801",
+      "sha256": "6db1b750ae4910503828e75972f5f5eabdd2b24d9bbf6d9af7d70e54ec17d60b",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 238
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21219801",
+      "sha256": "6db1b750ae4910503828e75972f5f5eabdd2b24d9bbf6d9af7d70e54ec17d60b",
+      "reviewedRanges": [
+        {
+          "start": 786,
+          "end": 1510
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21227943",
+      "sha256": "817a98e7ea902b8e1466adbbc616cacd382aa74b86791ab0830df7fa8a208563",
+      "reviewedRanges": [
+        {
+          "start": 533,
+          "end": 1720
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21261869",
+      "sha256": "bc7654b23e8e33e25bd3fb3d594e7be60f9d11b6630edfe645489a64ada98e20",
+      "reviewedRanges": [
+        {
+          "start": 1190,
+          "end": 1574
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21219801",
+      "sha256": "6db1b750ae4910503828e75972f5f5eabdd2b24d9bbf6d9af7d70e54ec17d60b",
+      "reviewedRanges": [
+        {
+          "start": 1679,
+          "end": 2045
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21236842",
+      "sha256": "e116371a13888118c8a56d369e2c32840f73d1cf4322b3f089d217c327f9b54f",
+      "reviewedRanges": [
+        {
+          "start": 2394,
+          "end": 2563
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21245223",
+      "sha256": "52470b565a938d67aeb02db37be0f6dff7e1f92ef446dfc0c4c109a1011f34c6",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 68
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21245223",
+      "sha256": "52470b565a938d67aeb02db37be0f6dff7e1f92ef446dfc0c4c109a1011f34c6",
+      "reviewedRanges": [
+        {
+          "start": 1800,
+          "end": 2057
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21261869",
+      "sha256": "bc7654b23e8e33e25bd3fb3d594e7be60f9d11b6630edfe645489a64ada98e20",
+      "reviewedRanges": [
+        {
+          "start": 870,
+          "end": 1110
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21219801",
+      "sha256": "6db1b750ae4910503828e75972f5f5eabdd2b24d9bbf6d9af7d70e54ec17d60b",
+      "reviewedRanges": [
+        {
+          "start": 1738,
+          "end": 2045
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21227943",
+      "sha256": "817a98e7ea902b8e1466adbbc616cacd382aa74b86791ab0830df7fa8a208563",
+      "reviewedRanges": [
+        {
+          "start": 1721,
+          "end": 2117
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21233615",
+      "sha256": "d63df3066a184a6c8d9bf0308e39c8acf6496621e313a3fe51c1f0e63afa975a",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 330
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21236842",
+      "sha256": "e116371a13888118c8a56d369e2c32840f73d1cf4322b3f089d217c327f9b54f",
+      "reviewedRanges": [
+        {
+          "start": 1109,
+          "end": 1414
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21236842",
+      "sha256": "e116371a13888118c8a56d369e2c32840f73d1cf4322b3f089d217c327f9b54f",
+      "reviewedRanges": [
+        {
+          "start": 1850,
+          "end": 2388
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21245223",
+      "sha256": "52470b565a938d67aeb02db37be0f6dff7e1f92ef446dfc0c4c109a1011f34c6",
+      "reviewedRanges": [
+        {
+          "start": 699,
+          "end": 1218
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21224704",
+      "sha256": "7eb123f12dda3edd5079c39be7b864bb5ccce00d675fe71cc511ce50bb8479fc",
+      "reviewedRanges": [
+        {
+          "start": 703,
+          "end": 921
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21224704",
+      "sha256": "7eb123f12dda3edd5079c39be7b864bb5ccce00d675fe71cc511ce50bb8479fc",
+      "reviewedRanges": [
+        {
+          "start": 1419,
+          "end": 1606
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21224704",
+      "sha256": "7eb123f12dda3edd5079c39be7b864bb5ccce00d675fe71cc511ce50bb8479fc",
+      "reviewedRanges": [
+        {
+          "start": 2096,
+          "end": 2854
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21233615",
+      "sha256": "d63df3066a184a6c8d9bf0308e39c8acf6496621e313a3fe51c1f0e63afa975a",
+      "reviewedRanges": [
+        {
+          "start": 2107,
+          "end": 2564
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21245223",
+      "sha256": "52470b565a938d67aeb02db37be0f6dff7e1f92ef446dfc0c4c109a1011f34c6",
+      "reviewedRanges": [
+        {
+          "start": 136,
+          "end": 313
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21255176",
+      "sha256": "029fc73046e99b4e12c0b4ac73ead54dda93331cff8e42c2fa16bf6bdd18ffa7",
+      "reviewedRanges": [
+        {
+          "start": 72,
+          "end": 357
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21255176",
+      "sha256": "029fc73046e99b4e12c0b4ac73ead54dda93331cff8e42c2fa16bf6bdd18ffa7",
+      "reviewedRanges": [
+        {
+          "start": 785,
+          "end": 994
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21255176",
+      "sha256": "029fc73046e99b4e12c0b4ac73ead54dda93331cff8e42c2fa16bf6bdd18ffa7",
+      "reviewedRanges": [
+        {
+          "start": 1591,
+          "end": 1704
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21261869",
+      "sha256": "bc7654b23e8e33e25bd3fb3d594e7be60f9d11b6630edfe645489a64ada98e20",
+      "reviewedRanges": [
+        {
+          "start": 870,
+          "end": 1827
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21271384",
+      "sha256": "8de77b178123b152987dc9bc464d449fc7d5deb31a303bdd9d44a263a68e3d77",
+      "reviewedRanges": [
+        {
+          "start": 217,
+          "end": 382
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21261869",
+      "sha256": "bc7654b23e8e33e25bd3fb3d594e7be60f9d11b6630edfe645489a64ada98e20",
+      "reviewedRanges": [
+        {
+          "start": 1959,
+          "end": 2404
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21261869",
+      "sha256": "bc7654b23e8e33e25bd3fb3d594e7be60f9d11b6630edfe645489a64ada98e20",
+      "reviewedRanges": [
+        {
+          "start": 2752,
+          "end": 2866
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21271384",
+      "sha256": "8de77b178123b152987dc9bc464d449fc7d5deb31a303bdd9d44a263a68e3d77",
+      "reviewedRanges": [
+        {
+          "start": 777,
+          "end": 1021
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21271384",
+      "sha256": "8de77b178123b152987dc9bc464d449fc7d5deb31a303bdd9d44a263a68e3d77",
+      "reviewedRanges": [
+        {
+          "start": 1308,
+          "end": 1567
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21279326",
+      "sha256": "811c8085fbad0581ab534bc150404fe0cdd3f2240c770e89a143bc271151732e",
+      "reviewedRanges": [
+        {
+          "start": 856,
+          "end": 989
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21279326",
+      "sha256": "811c8085fbad0581ab534bc150404fe0cdd3f2240c770e89a143bc271151732e",
+      "reviewedRanges": [
+        {
+          "start": 1277,
+          "end": 1662
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21288316",
+      "sha256": "77b35a3a763025c338f31b087e4c27107207ad3b2fd409efcc5f20fe96940a9c",
+      "reviewedRanges": [
+        {
+          "start": 1272,
+          "end": 1567
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21288316",
+      "sha256": "77b35a3a763025c338f31b087e4c27107207ad3b2fd409efcc5f20fe96940a9c",
+      "reviewedRanges": [
+        {
+          "start": 1620,
+          "end": 2009
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21288316",
+      "sha256": "77b35a3a763025c338f31b087e4c27107207ad3b2fd409efcc5f20fe96940a9c",
+      "reviewedRanges": [
+        {
+          "start": 1620,
+          "end": 1850
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21325829",
+      "sha256": "1fbb5c457f2e0e53d1582ddb80939d2e66f4b3cb53289d9075ff7c57e9ef715f",
+      "reviewedRanges": [
+        {
+          "start": 222,
+          "end": 459
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21325829",
+      "sha256": "1fbb5c457f2e0e53d1582ddb80939d2e66f4b3cb53289d9075ff7c57e9ef715f",
+      "reviewedRanges": [
+        {
+          "start": 3645,
+          "end": 3891
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21329806",
+      "sha256": "b9b6e74d3b58d0765fecdec47ad324e98d16275393a2cec834aff00d097da924",
+      "reviewedRanges": [
+        {
+          "start": 1557,
+          "end": 1821
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21334991",
+      "sha256": "d33ab248ffa9bb2100b7920f53e595c498633fc42000f4ad162ce524ba4f00b8",
+      "reviewedRanges": [
+        {
+          "start": 1780,
+          "end": 2410
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21325829",
+      "sha256": "1fbb5c457f2e0e53d1582ddb80939d2e66f4b3cb53289d9075ff7c57e9ef715f",
+      "reviewedRanges": [
+        {
+          "start": 419,
+          "end": 705
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21325829",
+      "sha256": "1fbb5c457f2e0e53d1582ddb80939d2e66f4b3cb53289d9075ff7c57e9ef715f",
+      "reviewedRanges": [
+        {
+          "start": 1900,
+          "end": 2240
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21325829",
+      "sha256": "1fbb5c457f2e0e53d1582ddb80939d2e66f4b3cb53289d9075ff7c57e9ef715f",
+      "reviewedRanges": [
+        {
+          "start": 3458,
+          "end": 3593
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21329806",
+      "sha256": "b9b6e74d3b58d0765fecdec47ad324e98d16275393a2cec834aff00d097da924",
+      "reviewedRanges": [
+        {
+          "start": 1887,
+          "end": 2492
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21334991",
+      "sha256": "d33ab248ffa9bb2100b7920f53e595c498633fc42000f4ad162ce524ba4f00b8",
+      "reviewedRanges": [
+        {
+          "start": 1780,
+          "end": 2949
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21338139",
+      "sha256": "59d2dd590dbcf4be3095aecfe3755cb438c6501026a20aa0e5254dcc2814708f",
+      "reviewedRanges": [
+        {
+          "start": 460,
+          "end": 1492
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21329806",
+      "sha256": "b9b6e74d3b58d0765fecdec47ad324e98d16275393a2cec834aff00d097da924",
+      "reviewedRanges": [
+        {
+          "start": 255,
+          "end": 279
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21321612",
+      "sha256": "9610e6774e31f6991604b901cb9931f4b73b59e47196bfb8393cd9b7cf7813b3",
+      "reviewedRanges": [
+        {
+          "start": 1637,
+          "end": 1931
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21325829",
+      "sha256": "1fbb5c457f2e0e53d1582ddb80939d2e66f4b3cb53289d9075ff7c57e9ef715f",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 459
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21356116",
+      "sha256": "141dc7e37eb9a40c4cab24e439261dba138f729dfd472d624c147a9a49ef859f",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 253
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21342642",
+      "sha256": "bca03659b0287c9f8537b60acf8543423783c9ac55f8916dafda530ea4cf863d",
+      "reviewedRanges": [
+        {
+          "start": 588,
+          "end": 1072
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21478199",
+      "sha256": "ec9af8544356f73e079cb7b017a98144efc5e2329952fd6ef8a02570a044bcc7",
+      "reviewedRanges": [
+        {
+          "start": 1795,
+          "end": 1975
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21304992",
+      "sha256": "570779656f87eb6895fa3f7719c98eac2541c8e426262e43e07dd51743a0bd2e",
+      "reviewedRanges": [
+        {
+          "start": 1388,
+          "end": 2132
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21304992",
+      "sha256": "570779656f87eb6895fa3f7719c98eac2541c8e426262e43e07dd51743a0bd2e",
+      "reviewedRanges": [
+        {
+          "start": 2218,
+          "end": 2630
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21319170",
+      "sha256": "2fb5fa7dd67fc2e879142445e83c0d7778de7eedaaed8feb47adf80eb4abceb4",
+      "reviewedRanges": [
+        {
+          "start": 1020,
+          "end": 1179
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21319170",
+      "sha256": "2fb5fa7dd67fc2e879142445e83c0d7778de7eedaaed8feb47adf80eb4abceb4",
+      "reviewedRanges": [
+        {
+          "start": 1584,
+          "end": 1885
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21319170",
+      "sha256": "2fb5fa7dd67fc2e879142445e83c0d7778de7eedaaed8feb47adf80eb4abceb4",
+      "reviewedRanges": [
+        {
+          "start": 2644,
+          "end": 2881
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21321612",
+      "sha256": "9610e6774e31f6991604b901cb9931f4b73b59e47196bfb8393cd9b7cf7813b3",
+      "reviewedRanges": [
+        {
+          "start": 505,
+          "end": 1118
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21321612",
+      "sha256": "9610e6774e31f6991604b901cb9931f4b73b59e47196bfb8393cd9b7cf7813b3",
+      "reviewedRanges": [
+        {
+          "start": 1343,
+          "end": 1528
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21392684",
+      "sha256": "9a8872ae557d2c8081696065337db9b164e0cf0ff8f09aab8d6091c3cc14424d",
+      "reviewedRanges": [
+        {
+          "start": 662,
+          "end": 1259
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21392684",
+      "sha256": "9a8872ae557d2c8081696065337db9b164e0cf0ff8f09aab8d6091c3cc14424d",
+      "reviewedRanges": [
+        {
+          "start": 2056,
+          "end": 2216
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21392684",
+      "sha256": "9a8872ae557d2c8081696065337db9b164e0cf0ff8f09aab8d6091c3cc14424d",
+      "reviewedRanges": [
+        {
+          "start": 2056,
+          "end": 2528
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21395190",
+      "sha256": "ee33deb1c72d1e8ca7317db602f6beeb850c435bdc8331d19420e1c293885a20",
+      "reviewedRanges": [
+        {
+          "start": 628,
+          "end": 1214
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21401199",
+      "sha256": "abd0478331b8593cc62459c02aeb5a24c9c4c3823831590b1893f1b684b3fbe7",
+      "reviewedRanges": [
+        {
+          "start": 509,
+          "end": 1057
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21409256",
+      "sha256": "0a703bfe8682620495783717db569286634476fe1d4fe51127189d1d6f5ca303",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 897
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21418005",
+      "sha256": "ddd6f28a6a3b06320123381834a24af0581243cc692ac16e71dbdc18ab1167ca",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 538
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21418005",
+      "sha256": "ddd6f28a6a3b06320123381834a24af0581243cc692ac16e71dbdc18ab1167ca",
+      "reviewedRanges": [
+        {
+          "start": 1922,
+          "end": 2094
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21409256",
+      "sha256": "0a703bfe8682620495783717db569286634476fe1d4fe51127189d1d6f5ca303",
+      "reviewedRanges": [
+        {
+          "start": 992,
+          "end": 1222
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21409256",
+      "sha256": "0a703bfe8682620495783717db569286634476fe1d4fe51127189d1d6f5ca303",
+      "reviewedRanges": [
+        {
+          "start": 1555,
+          "end": 1769
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21395190",
+      "sha256": "ee33deb1c72d1e8ca7317db602f6beeb850c435bdc8331d19420e1c293885a20",
+      "reviewedRanges": [
+        {
+          "start": 1619,
+          "end": 1865
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21345937",
+      "sha256": "4cbc21efdfd374b903680ee17a195881adb827122fe116a0f0d655bf2f72eea0",
+      "reviewedRanges": [
+        {
+          "start": 1479,
+          "end": 1757
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21345937",
+      "sha256": "4cbc21efdfd374b903680ee17a195881adb827122fe116a0f0d655bf2f72eea0",
+      "reviewedRanges": [
+        {
+          "start": 1933,
+          "end": 2080
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21418005",
+      "sha256": "ddd6f28a6a3b06320123381834a24af0581243cc692ac16e71dbdc18ab1167ca",
+      "reviewedRanges": [
+        {
+          "start": 1359,
+          "end": 1864
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21454080",
+      "sha256": "1f3ebb69e35176f8504929e2bcf5551e5f054f28e928caf23d0cc8d6b54ec89e",
+      "reviewedRanges": [
+        {
+          "start": 1223,
+          "end": 1399
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21454080",
+      "sha256": "1f3ebb69e35176f8504929e2bcf5551e5f054f28e928caf23d0cc8d6b54ec89e",
+      "reviewedRanges": [
+        {
+          "start": 2677,
+          "end": 2945
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21462945",
+      "sha256": "9e8ac6101d3ae65a983366777ccfdfc6784c558afbb4a27dd49fd3ee10329417",
+      "reviewedRanges": [
+        {
+          "start": 2241,
+          "end": 2524
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21433231",
+      "sha256": "e5cf7687d7687368c5ce0827ebd35f6231cc86ffd7a04ecd33146a7cd2ab9e53",
+      "reviewedRanges": [
+        {
+          "start": 1076,
+          "end": 1259
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21433231",
+      "sha256": "e5cf7687d7687368c5ce0827ebd35f6231cc86ffd7a04ecd33146a7cd2ab9e53",
+      "reviewedRanges": [
+        {
+          "start": 2072,
+          "end": 2461
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21468079",
+      "sha256": "a425c1afec0a6403574e7017d2736a3c204c52ddc44aca4b58ccb5c6b5b55da4",
+      "reviewedRanges": [
+        {
+          "start": 53,
+          "end": 249
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21471370",
+      "sha256": "7ae911c5c6f1a08e4e4a7e6c2b3e19f25de26f186972bff1c09581177bdf5612",
+      "reviewedRanges": [
+        {
+          "start": 1524,
+          "end": 1690
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21471370",
+      "sha256": "7ae911c5c6f1a08e4e4a7e6c2b3e19f25de26f186972bff1c09581177bdf5612",
+      "reviewedRanges": [
+        {
+          "start": 1922,
+          "end": 2199
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21478199",
+      "sha256": "ec9af8544356f73e079cb7b017a98144efc5e2329952fd6ef8a02570a044bcc7",
+      "reviewedRanges": [
+        {
+          "start": 2182,
+          "end": 3011
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21471370",
+      "sha256": "7ae911c5c6f1a08e4e4a7e6c2b3e19f25de26f186972bff1c09581177bdf5612",
+      "reviewedRanges": [
+        {
+          "start": 2200,
+          "end": 2742
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21478199",
+      "sha256": "ec9af8544356f73e079cb7b017a98144efc5e2329952fd6ef8a02570a044bcc7",
+      "reviewedRanges": [
+        {
+          "start": 1795,
+          "end": 2182
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21360344",
+      "sha256": "61457241c15b5d4acda5a9213f5d0a3f7976b49e24d37b79c5a73202a029207f",
+      "reviewedRanges": [
+        {
+          "start": 1403,
+          "end": 1575
+        }
+      ],
+      "method": "第四组新声明实际代码点切片二读；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21117968",
+      "sha256": "d3612a90358f650855112487d383ecb97a4955d7fcf4e244029e97d3bb238bdd",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 2887
+        }
+      ],
+      "method": "第四组对秦家关系与李化元体质补读；与对应候选相邻段合并的已读范围。"
     }
   ],
   "boundedCorrections": [
