@@ -641,9 +641,11 @@
     "classification": "runtime-source-or-explicit-original",
     "claimIds": [
       "yue-li-ma",
-      "yue-values"
+      "yue-values",
+      "yue-old-school-reunion-and-survival"
     ],
-    "aliases": []
+    "aliases": [],
+    "reason": "复用其它已审地区同一主体，后期状态不生成开篇副本。"
   },
   {
     "id": "canon-huangfeng-ma-gardener-pouch",
@@ -773,9 +775,11 @@
     "classification": "runtime-source-or-explicit-original",
     "claimIds": [
       "yue-yanyue",
-      "yue-values"
+      "yue-values",
+      "yue-nangong-disguise-and-pursuit"
     ],
-    "aliases": []
+    "aliases": [],
+    "reason": "复用其它已审地区同一主体，后期状态不生成开篇副本。"
   },
   {
     "id": "canon-nangong-wan-pouch",
@@ -2555,13 +2559,15 @@
     "openingState": "source-reference-opening-detail-unresolved",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "yue-tainan-traveller-identities"
+      "yue-tainan-traveller-identities",
+      "yue-blood-servants-identity-and-metamorphosis"
     ],
     "aliases": [
       "松纹道士",
-      "松纹"
+      "松纹",
+      "血侍青纹"
     ],
-    "reason": "身份证据来自韩立后来太南会的同场介绍；不能据当次职位、功法或小团体关系推定开篇状态。已给青年年龄者可推较年幼，但本轮未生成当年能力或当期在谷位置。"
+    "reason": "21511370韩当面认出太南旧人；后血侍身份不前置。"
   },
   {
     "id": "canon-hei-mu",
@@ -2642,10 +2648,13 @@
     "openingState": "source-reference-opening-detail-unresolved",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "yue-tainan-traveller-identities"
+      "yue-tainan-traveller-identities",
+      "yue-blood-servants-identity-and-metamorphosis"
     ],
-    "aliases": [],
-    "reason": "身份证据来自韩立后来太南会的同场介绍；不能据当次职位、功法或小团体关系推定开篇状态。已给青年年龄者可推较年幼，但本轮未生成当年能力或当期在谷位置。"
+    "aliases": [
+      "叶蛇（连续场景推定）"
+    ],
+    "reason": "吴入场后四血侍恰齐并全妖化，与唯一缺席叶蛇同一为排他连续性推定，非直接自报名。"
   },
   {
     "id": "canon-huang-xiaotian",
@@ -4103,17 +4112,6 @@
     "aliases": []
   },
   {
-    "id": "yue-blood-box-jade-fragments",
-    "label": "金箱内断玉",
-    "kind": "item",
-    "openingState": "present-at-opening",
-    "classification": "source-grounded-with-explicit-original-opening-details",
-    "claimIds": [
-      "yue-sealed-interior-fixed-contents"
-    ],
-    "aliases": []
-  },
-  {
     "id": "yue-xu-yuelu-librarian",
     "label": "岳麓许老",
     "kind": "person",
@@ -4184,10 +4182,13 @@
     "openingState": "source-reference-opening-detail-unresolved",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "yue-huangfeng-young-sparring"
+      "yue-huangfeng-young-sparring",
+      "yue-murong-and-li-cousin-continuity"
     ],
-    "aliases": [],
-    "reason": "后期八九岁双胞胎与雷灵根天赋，不是成年管事慕容衫；开篇未生成这两个孩子。"
+    "aliases": [
+      "黄枫雷根双胞胎"
+    ],
+    "reason": "同一早期传功双胞胎与后期守阵兄弟；不合管事慕容衫。"
   },
   {
     "id": "yue-wood-staff-disciple",
@@ -6234,30 +6235,6 @@
     "reason": "冷殿白影血侍，不等别界冰族。"
   },
   {
-    "id": "yue-yeshe",
-    "label": "叶蛇",
-    "kind": "person-reference",
-    "openingState": "later-state-not-applied",
-    "classification": "source-reference-with-explicit-temporal-assessment",
-    "claimIds": [
-      "yue-heisha-capture-and-knowledge"
-    ],
-    "aliases": [],
-    "reason": "血侍后期才有此职，资质好是同伴话。"
-  },
-  {
-    "id": "yue-heisha-qingwen-reference",
-    "label": "血侍青纹指称",
-    "kind": "scene-reference",
-    "openingState": "later-state-not-applied",
-    "classification": "source-reference-with-explicit-temporal-assessment",
-    "claimIds": [
-      "yue-heisha-capture-and-knowledge"
-    ],
-    "aliases": [],
-    "reason": "此批仅被提名，与太南青纹的同一性需后续当面认人；非另一活体。"
-  },
-  {
     "id": "yue-heisha-sect",
     "label": "黑煞教",
     "kind": "organization-reference",
@@ -6473,5 +6450,803 @@
       "血蜘蛛"
     ],
     "reason": "后期矿洞母蛛与韩孵出的双卵分开；本批尚无母蛛出生年与开篇等级证据，当前运行穴中不预造后期同级遭遇。"
+  },
+  {
+    "id": "yue-blood-tower-token",
+    "label": "古塔禁制令牌",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-xiang-disguise-and-blood-tower-source",
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-blood-earthwood-manual",
+    "label": "土木导引法",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-xiang-disguise-and-blood-tower-source",
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-blood-gate-diagrams",
+    "label": "三门禁阵图",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-xiang-disguise-and-blood-tower-source",
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-blood-old-bracer",
+    "label": "古塔旧护腕",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-xiang-disguise-and-blood-tower-source",
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-blood-intruder-remains",
+    "label": "塔内无名残骸",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-xiang-disguise-and-blood-tower-source",
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-liuding-tianjia-talisman",
+    "label": "六丁天甲符",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-xiang-disguise-and-blood-tower-source",
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-nanwu-city",
+    "label": "南乌城",
+    "kind": "location",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-baiju-mountain",
+    "label": "白菊山",
+    "kind": "location",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-mining-east-market",
+    "label": "矿东家族坊市",
+    "kind": "location",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-tianshi-peak",
+    "label": "天石峰",
+    "kind": "location",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-jinglong-bell",
+    "label": "惊龙钟",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-old-huangfeng-alarm-and-access",
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-baiju-flower-patch",
+    "label": "白菊山花丛",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-nanwu-host",
+    "label": "方禾",
+    "kind": "person",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-nanwu-host-pouch",
+    "label": "方禾的日用包",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-east-market-smith",
+    "label": "贺铸",
+    "kind": "person",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-east-market-smith-pouch",
+    "label": "贺铸的日用包",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-east-market-clerk",
+    "label": "贺簿",
+    "kind": "person",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-east-market-clerk-pouch",
+    "label": "贺簿的日用包",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-nanwu-food",
+    "label": "南乌饭铺米粮",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-east-market-house",
+    "label": "矿东贺氏材料铺",
+    "kind": "organization",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-east-market-till",
+    "label": "贺氏公款匣",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-east-market-tiemu",
+    "label": "铁母料盒",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-east-market-jingyu",
+    "label": "晶玉料盒",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-east-market-broken-feet",
+    "label": "贺铸待修阵脚",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-nie-ying",
+    "label": "聂盈",
+    "kind": "person",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion",
+      "yue-old-school-reunion-and-survival"
+    ],
+    "aliases": [],
+    "reason": "后期二百年修行不足精确T0生日，早期已修行露面；本区当前26炼气为必要有限补写。"
+  },
+  {
+    "id": "canon-nie-ying-pouch",
+    "label": "聂盈的日用包",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-nie-basic-manual",
+    "label": "聂盈的运气抄本",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "canon-huiming",
+    "label": "辉明",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-palace-assault-nine-and-formation"
+    ],
+    "aliases": [],
+    "reason": "陈巧倩师伯/师父线属于后期宗门关系，开篇是否当同职位未明，当前不另生成结丹长辈。"
+  },
+  {
+    "id": "canon-liu-jing",
+    "label": "刘靖",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-palace-assault-nine-and-formation"
+    ],
+    "aliases": [],
+    "reason": "李第三徒、童年被邪修掳救与后期血手名声；具体开篇年龄师承未载，不生成既定死者。"
+  },
+  {
+    "id": "canon-zhong-weiniang",
+    "label": "钟卫娘",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-palace-assault-nine-and-formation"
+    ],
+    "aliases": [],
+    "reason": "李七弟子，十六筑基是同门转述；苦恋刘靖/丧侣知情发生于以后。"
+  },
+  {
+    "id": "yue-xuehong",
+    "label": "雪虹",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-palace-assault-nine-and-formation"
+    ],
+    "aliases": [],
+    "reason": "辉明门下女修，后宫战被杀；道侣另人。"
+  },
+  {
+    "id": "yue-xuehong-partner",
+    "label": "雪虹道侣",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-palace-assault-nine-and-formation"
+    ],
+    "aliases": [],
+    "reason": "雪虹夫婿后仍在场用蓝符，不合越皇杀的另一师兄。"
+  },
+  {
+    "id": "yue-palace-wang-disciple",
+    "label": "辉明门下王师兄",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-palace-assault-nine-and-formation"
+    ],
+    "aliases": [],
+    "reason": "先被冰妖袭韩救，后蓝袍穿胸杀；不合王蝉等同姓。"
+  },
+  {
+    "id": "yue-palace-unnamed-disciple",
+    "label": "越皇所杀另一位未名师兄",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-palace-assault-nine-and-formation"
+    ],
+    "aliases": [],
+    "reason": "与刘靖同死，非雪虹道侣；此人是陈巧倩的师兄但未载姓氏，不能合陈巧天或陈家大哥。"
+  },
+  {
+    "id": "yue-later-yue-emperor",
+    "label": "黑煞之乱时越皇",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-heisha-emperor-and-avatar"
+    ],
+    "aliases": [
+      "越皇",
+      "越国皇帝"
+    ],
+    "reason": "当期帝与蓝袍两身；真实姓名/即位年未定，T0皇位不反推此人。"
+  },
+  {
+    "id": "yue-later-blue-avatar-body",
+    "label": "黑煞蓝袍人肉身",
+    "kind": "body-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-heisha-emperor-and-avatar"
+    ],
+    "aliases": [
+      "假山密室白净中年"
+    ],
+    "reason": "蓝袍与越皇同时两肉身；化身关系为韩推断，未另造无关完整生命。"
+  },
+  {
+    "id": "innerstar-heisha-leader-reference",
+    "label": "黑煞教主",
+    "kind": "role-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-heisha-emperor-and-avatar"
+    ],
+    "aliases": [],
+    "reason": "既有Inner同一教主称谓资料，帝/蓝身关系在本区闭合，不以称号单独生成活人。"
+  },
+  {
+    "id": "yue-snow-blue-talisman",
+    "label": "雪虹蓝色符宝",
+    "kind": "item-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-palace-assault-nine-and-formation"
+    ],
+    "aliases": [],
+    "reason": "雪虹死后道侣取用，非已被越皇杀者持有。"
+  },
+  {
+    "id": "yue-liujing-firebird-true-treasure",
+    "label": "刘靖火鸟真宝",
+    "kind": "item-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-palace-fight-tools-and-losses"
+    ],
+    "aliases": [],
+    "reason": "后战实际激发/消耗的唯一法物，T0归属未定不创建复制。"
+  },
+  {
+    "id": "yue-emperor-juhun-bowl",
+    "label": "聚魂钵",
+    "kind": "item-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-heisha-manual-conditions"
+    ],
+    "aliases": [],
+    "reason": "收魂器与魂灵分别；韩后来所获不等开篇现有魂库存。"
+  },
+  {
+    "id": "yue-yuling-quhun-occupant",
+    "label": "侵占曲魂的御灵元神",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-quhun-occupant-and-false-letter"
+    ],
+    "aliases": [],
+    "reason": "原结丹修士未名，后失躯与占尸，张铁/韩第二元婴不是该人。"
+  },
+  {
+    "id": "yue-jiayuan-gold-mantis",
+    "label": "嘉元西山金背巨螳螂",
+    "kind": "creature-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-quhun-tracking-and-pet-control"
+    ],
+    "aliases": [],
+    "reason": "该修士原宠，韩估等级未实检；死卵沿Inner同一后续链。"
+  },
+  {
+    "id": "yue-heisha-map",
+    "label": "越皇尸中锦帕地图",
+    "kind": "item-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-palace-aftermath-and-finite-promises"
+    ],
+    "aliases": [],
+    "reason": "画非越国残图，藏身方式只是韩猜，未有确切目标地。"
+  },
+  {
+    "id": "yue-immortal-qin-clan",
+    "label": "议婚陈家的修仙秦家",
+    "kind": "organization-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-palace-aftermath-and-finite-promises"
+    ],
+    "aliases": [],
+    "reason": "与越京凡俗秦家不是同族证据，后投魔取消婚事，不虚构开篇全族名单。"
+  },
+  {
+    "id": "yue-qiaoqian-proposed-spouse",
+    "label": "陈巧倩议婚秦氏青年",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-palace-aftermath-and-finite-promises"
+    ],
+    "aliases": [],
+    "reason": "天阙刚筑基、拟入赘但终未嫁，不设为已成夫妇。"
+  },
+  {
+    "id": "yue-huangfeng-huang-elder",
+    "label": "黄枫黄师叔",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-withdrawal-deception-and-six-sects"
+    ],
+    "aliases": [],
+    "reason": "结丹持风云幡带撤队，不凭姓合黄龙教主。"
+  },
+  {
+    "id": "yue-redpink-skeleton-male",
+    "label": "红粉骷髅中的骷髅男",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-withdrawal-deception-and-six-sects"
+    ],
+    "aliases": [],
+    "reason": "与娇艳女同场两人；个人姓名/开篇所在未明。"
+  },
+  {
+    "id": "yue-redpink-skeleton-female",
+    "label": "红粉骷髅中的娇艳女",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-withdrawal-deception-and-six-sects"
+    ],
+    "aliases": [],
+    "reason": "不合田不缺或同姓任意女修，连称组合非单人。"
+  },
+  {
+    "id": "yue-huang-fengyun-banner",
+    "label": "黄师叔风云幡",
+    "kind": "item-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-withdrawal-deception-and-six-sects"
+    ],
+    "aliases": [],
+    "reason": "本役遮雾幡而非袁坤/其他风幡，未前置所有权。"
+  },
+  {
+    "id": "yue-guiling-yuhong",
+    "label": "于洪",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-suihun-disciples-and-memory-traces"
+    ],
+    "aliases": [
+      "碎魂六师弟"
+    ],
+    "reason": "由同刻死亡本命牌闭合，不仅因排行同。"
+  },
+  {
+    "id": "yue-guiling-xun-third",
+    "label": "碎魂询姓三徒",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-suihun-disciples-and-memory-traces"
+    ],
+    "aliases": [
+      "乌衣汉子",
+      "询师兄"
+    ],
+    "reason": "后自称询某与乌衣连续；不与溪国询通合。"
+  },
+  {
+    "id": "yue-guiling-fifth-woman",
+    "label": "碎魂五师妹",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-suihun-disciples-and-memory-traces"
+    ],
+    "aliases": [],
+    "reason": "当次三徒中的妇人，别于柳姓御灵女。"
+  },
+  {
+    "id": "yue-guiling-que-disciple",
+    "label": "碎魂阙姓弟子",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-suihun-disciples-and-memory-traces"
+    ],
+    "aliases": [
+      "锦衣书生"
+    ],
+    "reason": "与于洪不和是后来，未知名不凭姓接别人。"
+  },
+  {
+    "id": "yue-hehuan-deserter",
+    "label": "潜鬼灵合欢弃徒",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-suihun-disciples-and-memory-traces"
+    ],
+    "aliases": [
+      "黑衫老者"
+    ],
+    "reason": "董璇儿旧属但与于洪同行不同人，后搜魂死。"
+  },
+  {
+    "id": "canon-chen-qiaotian",
+    "label": "陈巧天",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-chen-qiaotian-and-family-art"
+    ],
+    "aliases": [],
+    "reason": "巧倩兄，韩入谷时刚筑基，血试同行是他的另一个大哥。"
+  },
+  {
+    "id": "yue-late-yan-uncle",
+    "label": "燕如嫣元婴堂叔",
+    "kind": "person-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-yan-power-change-and-blood-bracelet"
+    ],
+    "aliases": [],
+    "reason": "后期隐修逃禁的堂叔，不合T0燕祖或燕柱。"
+  },
+  {
+    "id": "canon-blood-soul-bracelet",
+    "label": "血魂镯",
+    "kind": "item-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-yan-power-change-and-blood-bracelet"
+    ],
+    "aliases": [],
+    "reason": "历代鬼灵门主传物，后王天胜死钟收/燕赠韩，开篇持有人未据此强配。"
+  },
+  {
+    "id": "canon-li-yingning",
+    "label": "李缨宁",
+    "kind": "source-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-home-return-and-mothers-destiny"
+    ],
+    "aliases": [],
+    "reason": "复用其它已审地区同一主体，后期状态不生成开篇副本。"
+  },
+  {
+    "id": "canon-tian-buque",
+    "label": "田不缺",
+    "kind": "source-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-nangong-disguise-and-pursuit"
+    ],
+    "aliases": [],
+    "reason": "复用其它已审地区同一主体，后期状态不生成开篇副本。"
+  },
+  {
+    "id": "canon-xiang-zhili",
+    "label": "向之礼",
+    "kind": "source-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-xiang-disguise-and-blood-tower-source"
+    ],
+    "aliases": [],
+    "reason": "复用其它已审地区同一主体，后期状态不生成开篇副本。"
+  },
+  {
+    "id": "canon-zhong-devil-elder",
+    "label": "鬼灵钟长老",
+    "kind": "source-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-yan-power-change-and-blood-bracelet"
+    ],
+    "aliases": [],
+    "reason": "复用其它已审地区同一主体，后期状态不生成开篇副本。"
+  },
+  {
+    "id": "innerstar-goldmantis-eggs-reference",
+    "label": "金背刀螂死卵",
+    "kind": "source-reference",
+    "openingState": "later-state-not-applied",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "yue-quhun-tracking-and-pet-control"
+    ],
+    "aliases": [],
+    "reason": "复用其它已审地区同一主体，后期状态不生成开篇副本。"
+  },
+  {
+    "id": "yue-yuelu-dan-rack",
+    "label": "丹屋旧货架",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-yuelu-rack-and-wanbao-hospitality",
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-wanbao-guest-room",
+    "label": "万宝楼贵宾室",
+    "kind": "location",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-yuelu-rack-and-wanbao-hospitality",
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-wanbao-tea-set",
+    "label": "万宝楼茶具与茶料",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-yuelu-rack-and-wanbao-hospitality",
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-wanbao-attendant",
+    "label": "陆青",
+    "kind": "person",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "yue-wanbao-attendant-pouch",
+    "label": "陆青的日用包",
+    "kind": "item",
+    "openingState": "present-at-opening",
+    "classification": "source-grounded-with-explicit-original-opening-details",
+    "claimIds": [
+      "yue-final-yue-living-completion"
+    ],
+    "aliases": []
   }
 ]

@@ -91,6 +91,30 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "human-yue-route-yue-nanwu-city",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-nanwu-city"
+          },
+          "description": "沿现存道路或适用遁行抵达，仍需实际路程和通行条件。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "human-yue-route-yue-mining-east-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-mining-east-market"
+          },
+          "description": "沿现存道路或适用遁行抵达，仍需实际路程和通行条件。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -1036,6 +1060,18 @@
             "entityId": "yue-tianzhi-library"
           },
           "description": "沿门内道路进阁，来客须在柜台登记，阅本不得擅自带出。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-huangfeng-valley-route-yue-tianshi-peak",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-tianshi-peak"
+          },
+          "description": "沿现存道路或适用遁行抵达，仍需实际路程和通行条件。",
           "access": {
             "kind": "public"
           }
@@ -2246,6 +2282,12 @@
               "name": "令狐老祖",
               "description": "同门长期相识，知道对方在宗内的身份；闭关安排和私人资源要当面询问。",
               "status": "observed"
+            },
+            {
+              "id": "known-yue-jinglong-bell",
+              "name": "惊龙钟",
+              "description": "议事殿的警钟，八十一响代表重大灭门警讯，非日常点卯。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -2343,6 +2385,12 @@
               "local_entity_id": "known-canon-linghu-laozu",
               "canonical_entity_ids": [
                 "canon-linghu-laozu"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-jinglong-bell",
+              "canonical_entity_ids": [
+                "yue-jinglong-bell"
               ]
             }
           ],
@@ -2855,6 +2903,18 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "canon-huangfeng-ye-steward-work-allocation",
+          "predicate": "work-allocation",
+          "value": {
+            "kind": "text",
+            "value": "低阶弟子按月完成杂务，包括矿场监工、坊市执事、照料灵禽异兽和药园种植；门内按实际完成情况发低阶灵石，叶管事负责分配，不凭口头认领自动领到奖励。"
+          },
+          "description": "低阶弟子按月完成杂务，包括矿场监工、坊市执事、照料灵禽异兽和药园种植；门内按实际完成情况发低阶灵石，叶管事负责分配，不凭口头认领自动领到奖励。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [
@@ -3056,6 +3116,30 @@
               "name": "姜安",
               "description": "坊市当前经营者，有租务往来而非无条件听令。",
               "status": "observed"
+            },
+            {
+              "id": "known-yue-huangfeng-market",
+              "name": "黄枫坊市",
+              "description": "自己安排弟子杂务时使用的实际工作地点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-old-mine",
+              "name": "荒原灵石矿",
+              "description": "自己安排弟子杂务时使用的实际工作地点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-huangfeng-garden",
+              "name": "百药园",
+              "description": "自己安排弟子杂务时使用的实际工作地点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-qilin-beast-pens",
+              "name": "麒麟阁兽栏",
+              "description": "自己安排弟子杂务时使用的实际工作地点。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -3190,6 +3274,30 @@
               "canonical_entity_ids": [
                 "yue-market-restaurant-keeper"
               ]
+            },
+            {
+              "local_entity_id": "known-yue-huangfeng-market",
+              "canonical_entity_ids": [
+                "yue-huangfeng-market"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-old-mine",
+              "canonical_entity_ids": [
+                "yue-old-mine"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-huangfeng-garden",
+              "canonical_entity_ids": [
+                "yue-huangfeng-garden"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-qilin-beast-pens",
+              "canonical_entity_ids": [
+                "yue-qilin-beast-pens"
+              ]
             }
           ],
           "evidence": [
@@ -3271,6 +3379,21 @@
                 "value": "自己曾经验灵，知道自身是金木火三属性灵根。"
               },
               "description": "自己曾经验灵，知道自身是金木火三属性灵根。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "work-allocation",
+              "subjectId": "self",
+              "predicate": "work-allocation",
+              "value": {
+                "kind": "text",
+                "value": "低阶弟子按月完成杂务，包括矿场监工、坊市执事、照料灵禽异兽和药园种植；门内按实际完成情况发低阶灵石，叶管事负责分配，不凭口头认领自动领到奖励。"
+              },
+              "description": "低阶弟子按月完成杂务，包括矿场监工、坊市执事、照料灵禽异兽和药园种植；门内按实际完成情况发低阶灵石，叶管事负责分配，不凭口头认领自动领到奖励。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -8303,9 +8426,9 @@
           "predicate": "usage-rule",
           "value": {
             "kind": "text",
-            "value": "当前标定六份威能；一次完成有效小剑攻击耗一份并须具备可催动法力，持续大耗另按真实过程，不把一份当无限攻击。"
+            "value": "当前留有六份威能；一次完成有效小剑攻击耗一份并须具备可催动法力，持续大耗另按真实过程，不把一份当无限攻击。"
           },
-          "description": "当前标定六份威能；一次完成有效小剑攻击耗一份并须具备可催动法力，持续大耗另按真实过程，不把一份当无限攻击。",
+          "description": "当前留有六份威能；一次完成有效小剑攻击耗一份并须具备可催动法力，持续大耗另按真实过程，不把一份当无限攻击。",
           "access": {
             "kind": "public"
           }
@@ -9674,6 +9797,22 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "yue-storekeeper-knows-canon-nie-ying",
+          "predicate": "acquainted-with",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-nie-ying"
+          },
+          "description": "曾为日用配给当面交接，相互认识。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "yue-storekeeper",
+              "canon-nie-ying"
+            ]
+          }
         }
       ],
       "meters": [
@@ -9797,6 +9936,12 @@
               "name": "沈素",
               "description": "器坊往来的执事弟子，领料时当面点清。",
               "status": "observed"
+            },
+            {
+              "id": "known-canon-nie-ying",
+              "name": "聂盈",
+              "description": "来领取过日用材料的聂盈师妹，领取须依门内许可，并非她有任意开库权限。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -9852,6 +9997,12 @@
               "local_entity_id": "known-yue-craft-peer",
               "canonical_entity_ids": [
                 "yue-craft-peer"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-nie-ying",
+              "canonical_entity_ids": [
+                "canon-nie-ying"
               ]
             }
           ],
@@ -20680,7 +20831,7 @@
       "name": "中心巨塔",
       "kind": "location",
       "placement": "yue-blood-inner-wood",
-      "description": "百丈古塔在树林中央，门户与内室仍被古禁封闭，未能窥见内部。",
+      "description": "百丈古塔立在密林中央，门户与内室仍被古禁封闭。",
       "facts": [
         {
           "id": "yue-blood-ancient-tower-route-yue-blood-inner-wood",
@@ -20728,6 +20879,19 @@
           "description": "需先解除外门古禁并进入塔内，沿实际石阶到对应室内。",
           "access": {
             "kind": "public"
+          }
+        },
+        {
+          "id": "yue-blood-ancient-tower-outer-pressure",
+          "predicate": "entry-condition",
+          "value": {
+            "kind": "text",
+            "value": "要无视外围压制进入此区域须有元婴后期修为；持对应禁制令牌方可正常开启塔门。强破古禁是另一项有风险的实际行动，不能凭声称持令视作成功。"
+          },
+          "description": "要无视外围压制进入此区域须有元婴后期修为；持对应禁制令牌方可正常开启塔门。强破古禁是另一项有风险的实际行动，不能凭声称持令视作成功。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际研究此处禁制及对应令牌，或得到有证据的可靠使用记录；远望巨塔不足。"
           }
         }
       ],
@@ -20943,7 +21107,7 @@
       "name": "地下金色巨箱",
       "kind": "item",
       "placement": "yue-blood-jade-pavilion",
-      "description": "古禁覆盖的金色巨箱，盖闭，有真实器壁和封印；其内尚未探明。",
+      "description": "古禁覆盖的金色巨箱，箱盖闭合，需解除封印才能检查里面。",
       "facts": [
         {
           "id": "yue-blood-golden-chest-owner",
@@ -20962,9 +21126,9 @@
           "predicate": "contents-state",
           "value": {
             "kind": "text",
-            "value": "箱内有三块无灵力断玉，表面磨损，未刻有可识读的完整文字。"
+            "value": "箱内有一块进入中心古塔的禁制令牌，表面刻着与塔门相应的古纹。"
           },
-          "description": "箱内有三块无灵力断玉，表面磨损，未刻有可识读的完整文字。",
+          "description": "箱内有一块进入中心古塔的禁制令牌，表面刻着与塔门相应的古纹。",
           "access": {
             "kind": "discoverable",
             "condition": "实际解除金箱封禁并打开箱盖，检查箱内。"
@@ -21026,7 +21190,7 @@
       "name": "沼泽边玉髓芝",
       "kind": "item",
       "placement": "yue-blood-under-swamp",
-      "description": "当前在株玉髓芝，仍需辨认、采下和保存，数量为有限标定。",
+      "description": "当前在株玉髓芝，仍需辨认、采下和保存，采集后相应减少。",
       "facts": [
         {
           "id": "yue-blood-herb-0-owner",
@@ -21055,7 +21219,7 @@
       "name": "沼泽边紫猴花",
       "kind": "item",
       "placement": "yue-blood-under-swamp",
-      "description": "当前在株紫猴花，仍需辨认、采下和保存，数量为有限标定。",
+      "description": "当前在株紫猴花，仍需辨认、采下和保存，采集后相应减少。",
       "facts": [
         {
           "id": "yue-blood-herb-1-owner",
@@ -21084,7 +21248,7 @@
       "name": "沼泽边天灵果",
       "kind": "item",
       "placement": "yue-blood-under-swamp",
-      "description": "当前在株天灵果，仍需辨认、采下和保存，数量为有限标定。",
+      "description": "当前在株天灵果，仍需辨认、采下和保存，采集后相应减少。",
       "facts": [
         {
           "id": "yue-blood-herb-2-owner",
@@ -22250,7 +22414,7 @@
       "name": "万宝楼",
       "kind": "location",
       "placement": "yue-huangfeng-market",
-      "description": "法器买卖铺，柜中物件需要实看、议价与交割。",
+      "description": "法器买卖铺，红桐柜台陈列实际货物，二楼有接待室；交易须实看、议价与交割。",
       "facts": [
         {
           "id": "yue-market-wanbao-route-yue-huangfeng-market",
@@ -22284,6 +22448,18 @@
             "entityId": "yue-market-wanbao-keeper"
           },
           "description": "实际归属关系，保管不自动转移所有权。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-market-wanbao-route-yue-wanbao-guest-room",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-wanbao-guest-room"
+          },
+          "description": "沿楼梯通行；进入接待室需店家同意。",
           "access": {
             "kind": "public"
           }
@@ -25019,7 +25195,7 @@
       "id": "yue-yuelu-dan-tools",
       "name": "岳麓旧炉与抄录器具",
       "kind": "item",
-      "placement": "yue-yuelu-dan-room",
+      "placement": "yue-yuelu-dan-rack",
       "description": "门中公产，使用或领取须记账，不是值班人的私藏。",
       "facts": [
         {
@@ -28737,7 +28913,7 @@
       "name": "古塔下层石室",
       "kind": "location",
       "placement": "yue-blood-ancient-tower",
-      "description": "封闭石室中央只有空石台和开裂导流石片。",
+      "description": "石室中央有导流石台和三片开裂的旧石材，侧壁一道古禁通向上层。",
       "facts": [
         {
           "id": "yue-blood-tower-lower-room-route-yue-blood-ancient-tower",
@@ -28761,7 +28937,7 @@
       "name": "古塔上层残室",
       "kind": "location",
       "placement": "yue-blood-ancient-tower",
-      "description": "木架已朽，原有纸页只剩无字碎屑，没有可读完整秘籍。",
+      "description": "石架上封存功法、阵图和一件旧护腕；侧面禁制中困着一具衣袍残骸。",
       "facts": [
         {
           "id": "yue-blood-tower-upper-room-route-yue-blood-ancient-tower",
@@ -28786,22 +28962,6 @@
       "kind": "item",
       "placement": "yue-blood-tower-lower-room",
       "description": "三片有裂纹的旧石材，表面导流纹残缺，不再构成能运行的阵器。",
-      "facts": [],
-      "meters": [],
-      "ratings": [],
-      "quantities": [
-        {
-          "definition_id": "craft-material",
-          "amount": 3
-        }
-      ]
-    },
-    {
-      "id": "yue-blood-box-jade-fragments",
-      "name": "金箱内断玉",
-      "kind": "item",
-      "placement": "yue-blood-golden-chest",
-      "description": "三块无灵力旧断玉，无完整文字或可运行禁制。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -29016,6 +29176,24 @@
               "name": "叶管事",
               "description": "坊市租务接触过的黄枫管事，未见其私人账目。",
               "status": "observed"
+            },
+            {
+              "id": "known-yue-wanbao-attendant",
+              "name": "陆青",
+              "description": "当班接待伙计陆青，负责引客与茶具，不能擅自改价。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-wanbao-guest-room",
+              "name": "万宝楼贵宾室",
+              "description": "本店楼上接待室。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-wanbao-tea-set",
+              "name": "万宝楼茶具与茶料",
+              "description": "本店现有茶水，用料要实际记账。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -29053,6 +29231,24 @@
               "local_entity_id": "known-canon-huangfeng-ye-steward",
               "canonical_entity_ids": [
                 "canon-huangfeng-ye-steward"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-wanbao-attendant",
+              "canonical_entity_ids": [
+                "yue-wanbao-attendant"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-wanbao-guest-room",
+              "canonical_entity_ids": [
+                "yue-wanbao-guest-room"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-wanbao-tea-set",
+              "canonical_entity_ids": [
+                "yue-wanbao-tea-set"
               ]
             }
           ],
@@ -35847,6 +36043,18 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "yue-yuejing-route-yue-baiju-mountain",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-baiju-mountain"
+          },
+          "description": "沿现存道路或适用遁行抵达，仍需实际路程和通行条件。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -40621,6 +40829,2251 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "yue-blood-tower-token",
+      "name": "古塔禁制令牌",
+      "kind": "item",
+      "placement": "yue-blood-golden-chest",
+      "description": "刻有相应古纹的旧令牌，需取出并实际施用才能开启对应塔门。",
+      "facts": [
+        {
+          "id": "yue-blood-tower-token-opens",
+          "predicate": "opens-location",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-blood-ancient-tower"
+          },
+          "description": "此令对应塔门；到达仍须解决外部压制禁制，拿令不能代替修为和实际行路。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "取得令牌并比对对应塔门古纹，或读懂可信的使用说明。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-blood-earthwood-manual",
+      "name": "土木导引法",
+      "kind": "item",
+      "placement": "yue-blood-tower-upper-room",
+      "description": "完整记有炼气至筑基的土木导引步骤，需相合灵根、已懂前层并实际修炼；筑基仍需突破条件，不附送丹药或成功。",
+      "facts": [
+        {
+          "id": "yue-blood-earthwood-manual-function",
+          "predicate": "content-and-use",
+          "value": {
+            "kind": "text",
+            "value": "完整记有炼气至筑基的土木导引步骤，需相合灵根、已懂前层并实际修炼；筑基仍需突破条件，不附送丹药或成功。"
+          },
+          "description": "完整记有炼气至筑基的土木导引步骤，需相合灵根、已懂前层并实际修炼；筑基仍需突破条件，不附送丹药或成功。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际取阅、检查并在条件允许时试用该物，不能仅凭名称获得全套知识。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-blood-gate-diagrams",
+      "name": "三门禁阵图",
+      "kind": "item",
+      "placement": "yue-blood-tower-upper-room",
+      "description": "示警、闭门与遮影三阵的有限阵图，分别需四低阶石、六低阶石、四低阶石及对应木石阵脚；没有古塔全套控制权或跨界传阵图。",
+      "facts": [
+        {
+          "id": "yue-blood-gate-diagrams-function",
+          "predicate": "content-and-use",
+          "value": {
+            "kind": "text",
+            "value": "示警、闭门与遮影三阵的有限阵图，分别需四低阶石、六低阶石、四低阶石及对应木石阵脚；没有古塔全套控制权或跨界传阵图。"
+          },
+          "description": "示警、闭门与遮影三阵的有限阵图，分别需四低阶石、六低阶石、四低阶石及对应木石阵脚；没有古塔全套控制权或跨界传阵图。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际取阅、检查并在条件允许时试用该物，不能仅凭名称获得全套知识。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-blood-old-bracer",
+      "name": "古塔旧护腕",
+      "kind": "item",
+      "placement": "yue-blood-tower-upper-room",
+      "description": "一件保存完好的旧护腕，炼气修士注入法力可护持手臂表面；法力耗尽即止，不能抵消所有伤害。",
+      "facts": [
+        {
+          "id": "yue-blood-old-bracer-function",
+          "predicate": "content-and-use",
+          "value": {
+            "kind": "text",
+            "value": "一件保存完好的旧护腕，炼气修士注入法力可护持手臂表面；法力耗尽即止，不能抵消所有伤害。"
+          },
+          "description": "一件保存完好的旧护腕，炼气修士注入法力可护持手臂表面；法力耗尽即止，不能抵消所有伤害。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际取阅、检查并在条件允许时试用该物，不能仅凭名称获得全套知识。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-blood-intruder-remains",
+      "name": "塔内无名残骸",
+      "kind": "item",
+      "placement": "yue-blood-tower-upper-room",
+      "description": "被古禁困住的无名修士残骸，衣物残破，身份没有可靠铭记。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-liuding-tianjia-talisman",
+      "name": "六丁天甲符",
+      "kind": "item",
+      "placement": "yue-blood-intruder-remains",
+      "description": "残骸衣内保存的一张银符，符纹完整；其名称与用法须通过识读或实际研究辨认。",
+      "facts": [
+        {
+          "id": "canon-liuding-tianjia-talisman-use",
+          "predicate": "activation-condition",
+          "value": {
+            "kind": "text",
+            "value": "掌握对应法诀后可启符，吸引附近实际天地灵气形成六层光罩并凝为护身战甲；环境灵气受阻或不足会限制发挥。战甲主要护躯干，四肢头颅不因此自动全护；停止后可收回银符。此处只有一张成符，没有炼制法。"
+          },
+          "description": "掌握对应法诀后可启符，吸引附近实际天地灵气形成六层光罩并凝为护身战甲；环境灵气受阻或不足会限制发挥。战甲主要护躯干，四肢头颅不因此自动全护；停止后可收回银符。此处只有一张成符，没有炼制法。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际研究符纹、以可信典籍认符或通过有条件试用观察功能；未检查残骸者不知道其存在。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-nanwu-city",
+      "name": "南乌城",
+      "kind": "location",
+      "placement": "human-yue",
+      "description": "越京附近的城镇，驿路和集市连接周边乡里。",
+      "facts": [
+        {
+          "id": "yue-nanwu-city-route-human-yue",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-yue"
+          },
+          "description": "沿现存道路或适用遁行抵达，仍需实际路程和通行条件。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-nanwu-city-food-price",
+          "predicate": "service-price",
+          "value": {
+            "kind": "text",
+            "value": "方禾饭铺一碗饭十文，实际烹成与食用才减少米粮，不能只说请客就吃到。"
+          },
+          "description": "方禾饭铺一碗饭十文，实际烹成与食用才减少米粮，不能只说请客就吃到。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-baiju-mountain",
+      "name": "白菊山",
+      "kind": "location",
+      "placement": "yue-yuejing",
+      "description": "都城郊外的山地，有山路与野生白菊。",
+      "facts": [
+        {
+          "id": "yue-baiju-mountain-route-yue-yuejing",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-yuejing"
+          },
+          "description": "沿现存道路或适用遁行抵达，仍需实际路程和通行条件。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-mining-east-market",
+      "name": "矿东家族坊市",
+      "kind": "location",
+      "placement": "human-yue",
+      "description": "灵矿以东数天路程的小坊市，家族修士经营普通材料。",
+      "facts": [
+        {
+          "id": "yue-mining-east-market-route-human-yue",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-yue"
+          },
+          "description": "沿现存道路或适用遁行抵达，仍需实际路程和通行条件。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-tianshi-peak",
+      "name": "天石峰",
+      "kind": "location",
+      "placement": "yue-huangfeng-valley",
+      "description": "黄枫门内的一座山峰，山道通往议事殿附近。",
+      "facts": [
+        {
+          "id": "yue-tianshi-peak-route-yue-huangfeng-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-huangfeng-valley"
+          },
+          "description": "沿现存道路或适用遁行抵达，仍需实际路程和通行条件。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-jinglong-bell",
+      "name": "惊龙钟",
+      "kind": "item",
+      "placement": "yue-huangfeng-hall",
+      "description": "议事殿的警钟，由值守人员按铃序敲击传讯。",
+      "facts": [
+        {
+          "id": "yue-jinglong-bell-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "huangfeng-sect"
+          },
+          "description": "所有权与携带、保管和使用许可分别处理。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-jinglong-bell-signal",
+          "predicate": "signal-code",
+          "value": {
+            "kind": "text",
+            "value": "连续八十一响是宗门灭门大险的警讯；响声传讯不使灾难凭空发生，也不证明所有听者已获准确敌情。"
+          },
+          "description": "连续八十一响是宗门灭门大险的警讯；响声传讯不使灾难凭空发生，也不证明所有听者已获准确敌情。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-baiju-flower-patch",
+      "name": "白菊山花丛",
+      "kind": "item",
+      "placement": "yue-baiju-mountain",
+      "description": "山道旁普通白菊，采下后减少，药用须实际辨识。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "yue-white-chrysanthemum",
+          "amount": 12
+        }
+      ]
+    },
+    {
+      "id": "yue-nanwu-host",
+      "name": "方禾",
+      "kind": "person",
+      "placement": "yue-nanwu-city",
+      "description": "南乌饭铺掌柜，熟悉客人歇脚与普通采购。",
+      "facts": [
+        {
+          "id": "yue-nanwu-host-age",
+          "predicate": "age",
+          "value": {
+            "kind": "text",
+            "value": "34岁"
+          },
+          "description": "34岁",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "yue-nanwu-host"
+            ]
+          }
+        },
+        {
+          "id": "yue-nanwu-host-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "凡人"
+          },
+          "description": "凡人",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "yue-nanwu-host"
+            ]
+          }
+        },
+        {
+          "id": "yue-nanwu-host-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "南乌饭铺掌柜，熟悉客人歇脚与普通采购。"
+          },
+          "description": "南乌饭铺掌柜，熟悉客人歇脚与普通采购。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "yue-nanwu-host"
+            ]
+          }
+        },
+        {
+          "id": "yue-nanwu-host-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根"
+          },
+          "description": "无灵根",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际使用适用的验灵手段检查，或获得可信的既有验灵记录；看脸、听名与观看法术不等检测。"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "yue-nanwu-host-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "yue-nanwu-host-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "yue-nanwu-host-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "yue-nanwu-host-perception",
+          "definition_id": "perception",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "silver",
+          "amount": 3
+        }
+      ],
+      "agent": {
+        "id": "yue-nanwu-host",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "南乌饭铺掌柜，熟悉客人歇脚与普通采购。",
+            "voice": "先问几位用饭，讲价爽快，谈仙家只说自己见过的。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "查看粮柜，按剩粮安排今天的饭。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "方禾",
+              "description": "南乌饭铺掌柜，熟悉客人歇脚与普通采购。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "南乌城",
+              "description": "自己日常生活或当值之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-nanwu-host-pouch",
+              "name": "方禾的日用包",
+              "description": "自己的日用品与口粮，不是公家的账。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-nanwu-food",
+              "name": "南乌饭铺米粮",
+              "description": "自己的粮柜，卖饭要取米烹煮。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "yue-nanwu-host"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "yue-nanwu-city"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-nanwu-host-pouch",
+              "canonical_entity_ids": [
+                "yue-nanwu-host-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-nanwu-food",
+              "canonical_entity_ids": [
+                "yue-nanwu-food"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己的生活、修学、交往及已见记录。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "age",
+              "subjectId": "self",
+              "predicate": "age",
+              "value": {
+                "kind": "text",
+                "value": "34岁"
+              },
+              "description": "34岁",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "凡人"
+              },
+              "description": "凡人",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "南乌饭铺掌柜，熟悉客人歇脚与普通采购。"
+              },
+              "description": "南乌饭铺掌柜，熟悉客人歇脚与普通采购。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "root-knowledge",
+              "subjectId": "self",
+              "predicate": "root-knowledge",
+              "value": {
+                "kind": "text",
+                "value": "自己未经过可靠验灵，不知道是否有灵根。"
+              },
+              "description": "自己未经过可靠验灵，不知道是否有灵根。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "查看粮柜，按剩粮安排今天的饭。"
+              },
+              "description": "查看粮柜，按剩粮安排今天的饭。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "yue-nanwu-host-pouch",
+      "name": "方禾的日用包",
+      "kind": "item",
+      "placement": "yue-nanwu-host",
+      "description": "随身普通衣物、餐具与个人口粮。",
+      "facts": [
+        {
+          "id": "yue-nanwu-host-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-nanwu-host"
+          },
+          "description": "所有权与携带、保管和使用许可分别处理。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "id": "yue-east-market-smith",
+      "name": "贺铸",
+      "kind": "person",
+      "placement": "yue-mining-east-market",
+      "description": "炼气工匠，能切分铁母晶玉并修补普通阵脚。",
+      "facts": [
+        {
+          "id": "yue-east-market-smith-age",
+          "predicate": "age",
+          "value": {
+            "kind": "text",
+            "value": "43岁"
+          },
+          "description": "43岁",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "yue-east-market-smith"
+            ]
+          }
+        },
+        {
+          "id": "yue-east-market-smith-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼气"
+          },
+          "description": "炼气",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "yue-east-market-smith"
+            ]
+          }
+        },
+        {
+          "id": "yue-east-market-smith-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "炼气工匠，能切分铁母晶玉并修补普通阵脚。"
+          },
+          "description": "炼气工匠，能切分铁母晶玉并修补普通阵脚。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "yue-east-market-smith"
+            ]
+          }
+        },
+        {
+          "id": "yue-east-market-smith-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "金火土三属性灵根"
+          },
+          "description": "金火土三属性灵根",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际使用适用的验灵手段检查，或获得可信的既有验灵记录；看脸、听名与观看法术不等检测。"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "yue-east-market-smith-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "yue-east-market-smith-mana",
+          "definition_id": "mana",
+          "current": 80
+        }
+      ],
+      "ratings": [
+        {
+          "id": "yue-east-market-smith-cultivation",
+          "definition_id": "cultivation",
+          "value": 1
+        },
+        {
+          "id": "yue-east-market-smith-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "yue-east-market-smith-perception",
+          "definition_id": "perception",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 10
+        }
+      ],
+      "agent": {
+        "id": "yue-east-market-smith",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "炼气工匠，能切分铁母晶玉并修补普通阵脚。",
+            "voice": "习惯把工件拿来细看，再说明材料与工钱。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "检查两块待修的阵脚裂口，先判断能否补料。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "贺铸",
+              "description": "炼气工匠，能切分铁母晶玉并修补普通阵脚。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "矿东家族坊市",
+              "description": "自己日常生活或当值之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-east-market-smith-pouch",
+              "name": "贺铸的日用包",
+              "description": "自己的日用品与口粮，不是公家的账。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-east-market-tiemu",
+              "name": "铁母料盒",
+              "description": "店中铁母库存，领用或出售须扣现货并记账。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-east-market-jingyu",
+              "name": "晶玉料盒",
+              "description": "店中晶玉库存，领用或出售须扣现货并记账。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-east-market-broken-feet",
+              "name": "贺铸待修阵脚",
+              "description": "自己正查看能否修补的两块旧阵脚。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-east-market-house",
+              "name": "矿东贺氏材料铺",
+              "description": "贺家共有材料铺，不能把公货任意赠为私礼。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-east-market-till",
+              "name": "贺氏公款匣",
+              "description": "公款需按真实收付记账。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-east-market-clerk",
+              "name": "贺簿",
+              "description": "同族一起管铺的账房，出售公货需交他记账。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "yue-east-market-smith"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "yue-mining-east-market"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-east-market-smith-pouch",
+              "canonical_entity_ids": [
+                "yue-east-market-smith-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-east-market-tiemu",
+              "canonical_entity_ids": [
+                "yue-east-market-tiemu"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-east-market-jingyu",
+              "canonical_entity_ids": [
+                "yue-east-market-jingyu"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-east-market-broken-feet",
+              "canonical_entity_ids": [
+                "yue-east-market-broken-feet"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-east-market-house",
+              "canonical_entity_ids": [
+                "yue-east-market-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-east-market-till",
+              "canonical_entity_ids": [
+                "yue-east-market-till"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-east-market-clerk",
+              "canonical_entity_ids": [
+                "yue-east-market-clerk"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己的生活、修学、交往及已见记录。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "age",
+              "subjectId": "self",
+              "predicate": "age",
+              "value": {
+                "kind": "text",
+                "value": "43岁"
+              },
+              "description": "43岁",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "炼气"
+              },
+              "description": "炼气",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "炼气工匠，能切分铁母晶玉并修补普通阵脚。"
+              },
+              "description": "炼气工匠，能切分铁母晶玉并修补普通阵脚。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "root-knowledge",
+              "subjectId": "self",
+              "predicate": "root-knowledge",
+              "value": {
+                "kind": "text",
+                "value": "自己曾经验灵，知道自身是金火土三属性灵根。"
+              },
+              "description": "自己曾经验灵，知道自身是金火土三属性灵根。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "检查两块待修的阵脚裂口，先判断能否补料。"
+              },
+              "description": "检查两块待修的阵脚裂口，先判断能否补料。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "yue-east-market-smith-pouch",
+      "name": "贺铸的日用包",
+      "kind": "item",
+      "placement": "yue-east-market-smith",
+      "description": "随身普通衣物、餐具与个人口粮。",
+      "facts": [
+        {
+          "id": "yue-east-market-smith-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-east-market-smith"
+          },
+          "description": "所有权与携带、保管和使用许可分别处理。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "id": "yue-east-market-clerk",
+      "name": "贺簿",
+      "kind": "person",
+      "placement": "yue-mining-east-market",
+      "description": "炼气账房，记录市场材料买卖，不替客户担保未知古阵必能修好。",
+      "facts": [
+        {
+          "id": "yue-east-market-clerk-age",
+          "predicate": "age",
+          "value": {
+            "kind": "text",
+            "value": "36岁"
+          },
+          "description": "36岁",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "yue-east-market-clerk"
+            ]
+          }
+        },
+        {
+          "id": "yue-east-market-clerk-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼气"
+          },
+          "description": "炼气",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "yue-east-market-clerk"
+            ]
+          }
+        },
+        {
+          "id": "yue-east-market-clerk-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "炼气账房，记录市场材料买卖，不替客户担保未知古阵必能修好。"
+          },
+          "description": "炼气账房，记录市场材料买卖，不替客户担保未知古阵必能修好。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "yue-east-market-clerk"
+            ]
+          }
+        },
+        {
+          "id": "yue-east-market-clerk-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "木水土三属性灵根"
+          },
+          "description": "木水土三属性灵根",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际使用适用的验灵手段检查，或获得可信的既有验灵记录；看脸、听名与观看法术不等检测。"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "yue-east-market-clerk-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "yue-east-market-clerk-mana",
+          "definition_id": "mana",
+          "current": 80
+        }
+      ],
+      "ratings": [
+        {
+          "id": "yue-east-market-clerk-cultivation",
+          "definition_id": "cultivation",
+          "value": 1
+        },
+        {
+          "id": "yue-east-market-clerk-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "yue-east-market-clerk-perception",
+          "definition_id": "perception",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 10
+        }
+      ],
+      "agent": {
+        "id": "yue-east-market-clerk",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "炼气账房，记录市场材料买卖，不替客户担保未知古阵必能修好。",
+            "voice": "报货数清楚，缺货就直接说明。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "把现存材料和账面逐项核对。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "贺簿",
+              "description": "炼气账房，记录市场材料买卖，不替客户担保未知古阵必能修好。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "矿东家族坊市",
+              "description": "自己日常生活或当值之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-east-market-clerk-pouch",
+              "name": "贺簿的日用包",
+              "description": "自己的日用品与口粮，不是公家的账。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-east-market-tiemu",
+              "name": "铁母料盒",
+              "description": "店中铁母库存，领用或出售须扣现货并记账。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-east-market-jingyu",
+              "name": "晶玉料盒",
+              "description": "店中晶玉库存，领用或出售须扣现货并记账。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-east-market-house",
+              "name": "矿东贺氏材料铺",
+              "description": "贺家共有材料铺，不能把公货任意赠为私礼。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-east-market-till",
+              "name": "贺氏公款匣",
+              "description": "公款需按真实收付记账。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-east-market-smith",
+              "name": "贺铸",
+              "description": "同族工匠，修补估料后才可拨料。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "yue-east-market-clerk"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "yue-mining-east-market"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-east-market-clerk-pouch",
+              "canonical_entity_ids": [
+                "yue-east-market-clerk-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-east-market-tiemu",
+              "canonical_entity_ids": [
+                "yue-east-market-tiemu"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-east-market-jingyu",
+              "canonical_entity_ids": [
+                "yue-east-market-jingyu"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-east-market-house",
+              "canonical_entity_ids": [
+                "yue-east-market-house"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-east-market-till",
+              "canonical_entity_ids": [
+                "yue-east-market-till"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-east-market-smith",
+              "canonical_entity_ids": [
+                "yue-east-market-smith"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己的生活、修学、交往及已见记录。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "age",
+              "subjectId": "self",
+              "predicate": "age",
+              "value": {
+                "kind": "text",
+                "value": "36岁"
+              },
+              "description": "36岁",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "炼气"
+              },
+              "description": "炼气",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "炼气账房，记录市场材料买卖，不替客户担保未知古阵必能修好。"
+              },
+              "description": "炼气账房，记录市场材料买卖，不替客户担保未知古阵必能修好。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "root-knowledge",
+              "subjectId": "self",
+              "predicate": "root-knowledge",
+              "value": {
+                "kind": "text",
+                "value": "自己曾经验灵，知道自身是木水土三属性灵根。"
+              },
+              "description": "自己曾经验灵，知道自身是木水土三属性灵根。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "把现存材料和账面逐项核对。"
+              },
+              "description": "把现存材料和账面逐项核对。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "yue-east-market-clerk-pouch",
+      "name": "贺簿的日用包",
+      "kind": "item",
+      "placement": "yue-east-market-clerk",
+      "description": "随身普通衣物、餐具与个人口粮。",
+      "facts": [
+        {
+          "id": "yue-east-market-clerk-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-east-market-clerk"
+          },
+          "description": "所有权与携带、保管和使用许可分别处理。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "id": "yue-nanwu-food",
+      "name": "南乌饭铺米粮",
+      "kind": "item",
+      "placement": "yue-nanwu-city",
+      "description": "店中未烹米粮，供实际做饭售卖。",
+      "facts": [
+        {
+          "id": "yue-nanwu-food-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-nanwu-host"
+          },
+          "description": "所有权与携带、保管和使用许可分别处理。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 40
+        }
+      ]
+    },
+    {
+      "id": "yue-east-market-house",
+      "name": "矿东贺氏材料铺",
+      "kind": "organization",
+      "placement": "yue-mining-east-market",
+      "description": "贺家共同经营的材料铺，公款与个人修炼钱分开。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-east-market-till",
+      "name": "贺氏公款匣",
+      "kind": "item",
+      "placement": "yue-east-market-clerk",
+      "description": "商铺收付低阶灵石，账房管理不等个人所有。",
+      "facts": [
+        {
+          "id": "yue-east-market-till-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-east-market-house"
+          },
+          "description": "所有权与携带、保管和使用许可分别处理。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-east-market-till-authority",
+          "predicate": "resource-authority",
+          "value": {
+            "kind": "text",
+            "value": "贺簿可代材料铺收已确认货款、支付已核采购和领料开销；私人借款须商议，收付款必须有实际对象和数额。"
+          },
+          "description": "贺簿可代材料铺收已确认货款、支付已核采购和领料开销；私人借款须商议，收付款必须有实际对象和数额。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 50
+        }
+      ]
+    },
+    {
+      "id": "yue-east-market-tiemu",
+      "name": "铁母料盒",
+      "kind": "item",
+      "placement": "yue-mining-east-market",
+      "description": "可切分作相应器材的铁母，每份一低阶石；不替代未知阵法所有材料。",
+      "facts": [
+        {
+          "id": "yue-east-market-tiemu-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-east-market-house"
+          },
+          "description": "所有权与携带、保管和使用许可分别处理。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "yue-tiemu",
+          "amount": 20
+        }
+      ]
+    },
+    {
+      "id": "yue-east-market-jingyu",
+      "name": "晶玉料盒",
+      "kind": "item",
+      "placement": "yue-mining-east-market",
+      "description": "可切分作相应器材的晶玉，每份一低阶石；不替代未知阵法所有材料。",
+      "facts": [
+        {
+          "id": "yue-east-market-jingyu-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-east-market-house"
+          },
+          "description": "所有权与携带、保管和使用许可分别处理。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "yue-jingyu",
+          "amount": 16
+        }
+      ]
+    },
+    {
+      "id": "yue-east-market-broken-feet",
+      "name": "贺铸待修阵脚",
+      "kind": "item",
+      "placement": "yue-east-market-smith",
+      "description": "两块有裂口的示警阵脚，店中自有旧物。",
+      "facts": [
+        {
+          "id": "yue-east-market-broken-feet-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-east-market-house"
+          },
+          "description": "所有权与携带、保管和使用许可分别处理。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "craft-material",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "canon-nie-ying",
+      "name": "聂盈",
+      "kind": "person",
+      "placement": "yue-huangfeng-valley",
+      "description": "黄枫炼气女弟子，已习基础运气与御物，待人温和，练习时重视控制法力。",
+      "facts": [
+        {
+          "id": "canon-nie-ying-age",
+          "predicate": "age",
+          "value": {
+            "kind": "text",
+            "value": "26岁"
+          },
+          "description": "26岁",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-nie-ying"
+            ]
+          }
+        },
+        {
+          "id": "canon-nie-ying-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼气"
+          },
+          "description": "炼气",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-nie-ying"
+            ]
+          }
+        },
+        {
+          "id": "canon-nie-ying-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "黄枫炼气女弟子，已习基础运气与御物，待人温和，练习时重视控制法力。"
+          },
+          "description": "黄枫炼气女弟子，已习基础运气与御物，待人温和，练习时重视控制法力。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-nie-ying"
+            ]
+          }
+        },
+        {
+          "id": "canon-nie-ying-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "金水木三属性灵根"
+          },
+          "description": "金水木三属性灵根",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际使用适用的验灵手段检查，或获得可信的既有验灵记录；看脸、听名与观看法术不等检测。"
+          }
+        },
+        {
+          "id": "canon-nie-ying-member",
+          "predicate": "member-of",
+          "value": {
+            "kind": "entity",
+            "entityId": "huangfeng-sect"
+          },
+          "description": "黄枫弟子，门内资源仍需申请。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "canon-nie-ying-stage-detail",
+          "predicate": "cultivation-detail",
+          "value": {
+            "kind": "text",
+            "value": "炼气八层，当前不具筑基或结丹能力。"
+          },
+          "description": "炼气八层，当前不具筑基或结丹能力。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-nie-ying"
+            ]
+          }
+        },
+        {
+          "id": "canon-nie-ying-knows-yue-storekeeper",
+          "predicate": "acquainted-with",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-storekeeper"
+          },
+          "description": "曾为日用配给当面交接，相互认识。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-nie-ying",
+              "yue-storekeeper"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "canon-nie-ying-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "canon-nie-ying-mana",
+          "definition_id": "mana",
+          "current": 80
+        }
+      ],
+      "ratings": [
+        {
+          "id": "canon-nie-ying-cultivation",
+          "definition_id": "cultivation",
+          "value": 1
+        },
+        {
+          "id": "canon-nie-ying-craft",
+          "definition_id": "craft",
+          "value": 1
+        },
+        {
+          "id": "canon-nie-ying-perception",
+          "definition_id": "perception",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 10
+        }
+      ],
+      "agent": {
+        "id": "canon-nie-ying",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "黄枫炼气女弟子，已习基础运气与御物，待人温和，练习时重视控制法力。",
+            "voice": "答话清楚，不轻易替别人作保证；遇见不懂之事愿意问明。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "把日常运气练习完成，再整理自己的法诀抄本。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "聂盈",
+              "description": "黄枫炼气女弟子，已习基础运气与御物，待人温和，练习时重视控制法力。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "黄枫谷山门",
+              "description": "自己日常生活或当值之处。",
+              "status": "observed"
+            },
+            {
+              "id": "known-canon-nie-ying-pouch",
+              "name": "聂盈的日用包",
+              "description": "自己的日用品与口粮，不是公家的账。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-nie-basic-manual",
+              "name": "聂盈的运气抄本",
+              "description": "自己的抄本，记录当前练习步骤。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-storekeeper",
+              "name": "韩守平",
+              "description": "配给库的韩守平，自己领日用材料时与他交接；公物须依许可领取。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "canon-nie-ying"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "yue-huangfeng-valley"
+              ]
+            },
+            {
+              "local_entity_id": "known-canon-nie-ying-pouch",
+              "canonical_entity_ids": [
+                "canon-nie-ying-pouch"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-nie-basic-manual",
+              "canonical_entity_ids": [
+                "yue-nie-basic-manual"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-storekeeper",
+              "canonical_entity_ids": [
+                "yue-storekeeper"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己的生活、修学、交往及已见记录。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "age",
+              "subjectId": "self",
+              "predicate": "age",
+              "value": {
+                "kind": "text",
+                "value": "26岁"
+              },
+              "description": "26岁",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "炼气"
+              },
+              "description": "炼气",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "黄枫炼气女弟子，已习基础运气与御物，待人温和，练习时重视控制法力。"
+              },
+              "description": "黄枫炼气女弟子，已习基础运气与御物，待人温和，练习时重视控制法力。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "root-knowledge",
+              "subjectId": "self",
+              "predicate": "root-knowledge",
+              "value": {
+                "kind": "text",
+                "value": "自己曾经验灵，知道自身是金水木三属性灵根。"
+              },
+              "description": "自己曾经验灵，知道自身是金水木三属性灵根。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "把日常运气练习完成，再整理自己的法诀抄本。"
+              },
+              "description": "把日常运气练习完成，再整理自己的法诀抄本。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "stage-detail",
+              "subjectId": "self",
+              "predicate": "stage-detail",
+              "value": {
+                "kind": "text",
+                "value": "自己目前炼气八层，需扎实练习而非急求突破。"
+              },
+              "description": "自己目前炼气八层，需扎实练习而非急求突破。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon-nie-ying-pouch",
+      "name": "聂盈的日用包",
+      "kind": "item",
+      "placement": "canon-nie-ying",
+      "description": "随身普通衣物、餐具与个人口粮。",
+      "facts": [
+        {
+          "id": "canon-nie-ying-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-nie-ying"
+          },
+          "description": "所有权与携带、保管和使用许可分别处理。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "id": "yue-nie-basic-manual",
+      "name": "聂盈的运气抄本",
+      "kind": "item",
+      "placement": "canon-nie-ying",
+      "description": "炼气基础运气和御物练习记录，不含她尚未学过的高阶法术。",
+      "facts": [
+        {
+          "id": "yue-nie-basic-manual-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-nie-ying"
+          },
+          "description": "所有权与携带、保管和使用许可分别处理。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-yuelu-dan-rack",
+      "name": "丹屋旧货架",
+      "kind": "item",
+      "placement": "yue-yuelu-dan-room",
+      "description": "依墙的旧木架，置有当前登记的耐火炉、原料与抄录器具。",
+      "facts": [
+        {
+          "id": "yue-yuelu-dan-rack-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "huangfeng-sect"
+          },
+          "description": "实际所有人；保管、搬运和使用许可另行确认。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-wanbao-guest-room",
+      "name": "万宝楼贵宾室",
+      "kind": "location",
+      "placement": "yue-market-wanbao",
+      "description": "二楼小室设桌椅供商谈，柜角的香炉当前未点燃；出入由当班人引领。",
+      "facts": [
+        {
+          "id": "yue-wanbao-guest-room-route-yue-market-wanbao",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-market-wanbao"
+          },
+          "description": "沿楼梯通行；进入接待室需店家同意。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "yue-wanbao-tea-set",
+      "name": "万宝楼茶具与茶料",
+      "kind": "item",
+      "placement": "yue-wanbao-guest-room",
+      "description": "一壶四杯与封存茶料、清水；沏茶须用现有茶水并实际加热，未沏的茶不能当作已送到客人面前。",
+      "facts": [
+        {
+          "id": "yue-wanbao-tea-set-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-market-wanbao-business"
+          },
+          "description": "实际所有人；保管、搬运和使用许可另行确认。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "yue-wanbao-tea-set-hospitality",
+          "predicate": "service-rule",
+          "value": {
+            "kind": "text",
+            "value": "当班人经掌柜许可可用一壶份茶叶和一壶份清水待客；泡成后原料减少。香气与提神程度视实际品质和饮用者，不保证消除疲劳或任何病痛。"
+          },
+          "description": "当班人经掌柜许可可用一壶份茶叶和一壶份清水待客；泡成后原料减少。香气与提神程度视实际品质和饮用者，不保证消除疲劳或任何病痛。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "yue-biyun-tea",
+          "amount": 12
+        },
+        {
+          "definition_id": "yue-clean-water",
+          "amount": 4
+        }
+      ]
+    },
+    {
+      "id": "yue-wanbao-attendant",
+      "name": "陆青",
+      "kind": "person",
+      "placement": "yue-market-wanbao",
+      "description": "万宝楼接待伙计，熟悉店内货柜、楼梯与沏茶用具，遇到改价先请示掌柜。",
+      "facts": [
+        {
+          "id": "yue-wanbao-attendant-age",
+          "predicate": "age",
+          "value": {
+            "kind": "text",
+            "value": "22岁"
+          },
+          "description": "22岁",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "yue-wanbao-attendant"
+            ]
+          }
+        },
+        {
+          "id": "yue-wanbao-attendant-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "凡人"
+          },
+          "description": "凡人",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "yue-wanbao-attendant"
+            ]
+          }
+        },
+        {
+          "id": "yue-wanbao-attendant-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "万宝楼接待伙计，熟悉店内货柜、楼梯与沏茶用具，遇到改价先请示掌柜。"
+          },
+          "description": "万宝楼接待伙计，熟悉店内货柜、楼梯与沏茶用具，遇到改价先请示掌柜。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "yue-wanbao-attendant"
+            ]
+          }
+        },
+        {
+          "id": "yue-wanbao-attendant-current-purpose",
+          "predicate": "current-purpose",
+          "value": {
+            "kind": "text",
+            "value": "先核清接待室茶料和清水，收好空杯，等客来时再招呼。"
+          },
+          "description": "先核清接待室茶料和清水，收好空杯，等客来时再招呼。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "yue-wanbao-attendant"
+            ]
+          }
+        },
+        {
+          "id": "yue-wanbao-attendant-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "无灵根"
+          },
+          "description": "无灵根",
+          "access": {
+            "kind": "discoverable",
+            "condition": "经适用验灵手段实际检查；衣着职业不能替代检测。"
+          }
+        },
+        {
+          "id": "yue-wanbao-attendant-attire",
+          "predicate": "attire",
+          "value": {
+            "kind": "text",
+            "value": "统一青衫，袖口收束便于端盘。"
+          },
+          "description": "统一青衫，袖口收束便于端盘。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "yue-wanbao-attendant-health",
+          "definition_id": "health",
+          "current": 100
+        }
+      ],
+      "ratings": [
+        {
+          "id": "yue-wanbao-attendant-cultivation",
+          "definition_id": "cultivation",
+          "value": 0
+        },
+        {
+          "id": "yue-wanbao-attendant-craft",
+          "definition_id": "craft",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "copper",
+          "amount": 80
+        }
+      ],
+      "agent": {
+        "id": "yue-wanbao-attendant",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "万宝楼接待伙计，熟悉店内货柜、楼梯与沏茶用具，遇到改价先请示掌柜。",
+            "voice": "先问客人要看什么，再说明现货；不懂的货物坦说需请掌柜来。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "先核清接待室茶料和清水，收好空杯，等客来时再招呼。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "陆青",
+              "description": "万宝楼接待伙计，熟悉店内货柜、楼梯与沏茶用具，遇到改价先请示掌柜。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "万宝楼",
+              "description": "自己当值的店堂。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-market-wanbao-keeper",
+              "name": "苏瑞",
+              "description": "自己当值的掌柜，议价和公物支用先请示他。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-wanbao-guest-room",
+              "name": "万宝楼贵宾室",
+              "description": "楼上接待室，自己会引路。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-wanbao-tea-set",
+              "name": "万宝楼茶具与茶料",
+              "description": "待客用茶水为商号公物，需依掌柜许可使用。",
+              "status": "observed"
+            },
+            {
+              "id": "known-yue-wanbao-attendant-pouch",
+              "name": "陆青的日用包",
+              "description": "自己的行囊，不含商号货物。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "yue-wanbao-attendant"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "yue-market-wanbao"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-market-wanbao-keeper",
+              "canonical_entity_ids": [
+                "yue-market-wanbao-keeper"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-wanbao-guest-room",
+              "canonical_entity_ids": [
+                "yue-wanbao-guest-room"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-wanbao-tea-set",
+              "canonical_entity_ids": [
+                "yue-wanbao-tea-set"
+              ]
+            },
+            {
+              "local_entity_id": "known-yue-wanbao-attendant-pouch",
+              "canonical_entity_ids": [
+                "yue-wanbao-attendant-pouch"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "自己实际工作与交接经历。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "age",
+              "subjectId": "self",
+              "predicate": "age",
+              "value": {
+                "kind": "text",
+                "value": "22岁"
+              },
+              "description": "22岁",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "cultivation-state",
+              "subjectId": "self",
+              "predicate": "cultivation-state",
+              "value": {
+                "kind": "text",
+                "value": "凡人"
+              },
+              "description": "凡人",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "万宝楼接待伙计，熟悉店内货柜、楼梯与沏茶用具，遇到改价先请示掌柜。"
+              },
+              "description": "万宝楼接待伙计，熟悉店内货柜、楼梯与沏茶用具，遇到改价先请示掌柜。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "current-purpose",
+              "subjectId": "self",
+              "predicate": "current-purpose",
+              "value": {
+                "kind": "text",
+                "value": "先核清接待室茶料和清水，收好空杯，等客来时再招呼。"
+              },
+              "description": "先核清接待室茶料和清水，收好空杯，等客来时再招呼。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "yue-wanbao-attendant-pouch",
+      "name": "陆青的日用包",
+      "kind": "item",
+      "placement": "yue-wanbao-attendant",
+      "description": "普通备用衣物与自己的口粮。",
+      "facts": [
+        {
+          "id": "yue-wanbao-attendant-pouch-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "yue-wanbao-attendant"
+          },
+          "description": "实际所有人；保管、搬运和使用许可另行确认。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "grain",
+          "amount": 2
+        }
+      ]
     }
   ],
   "existingEntityFacts": [
@@ -41115,6 +43568,61 @@
       "consumption_law_ids": [
         "resource-conservation"
       ]
+    },
+    {
+      "id": "yue-tiemu",
+      "name": "铁母",
+      "unit": "份",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    },
+    {
+      "id": "yue-jingyu",
+      "name": "晶玉",
+      "unit": "份",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    },
+    {
+      "id": "yue-white-chrysanthemum",
+      "name": "普通白菊",
+      "unit": "株",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    },
+    {
+      "id": "yue-biyun-tea",
+      "name": "碧云茶叶",
+      "unit": "壶份",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    },
+    {
+      "id": "yue-clean-water",
+      "name": "饮用清水",
+      "unit": "壶份",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
     }
   ],
   "laws": [
@@ -41181,6 +43689,21 @@
     {
       "id": "yue-political-access",
       "text": "皇城与门内禁入、战争征调和商家许可是由实际人物执行的社会安排，不能把一条规则直接变成强制移动、凭空罚款或命定未来。",
+      "severity": "hard"
+    },
+    {
+      "id": "yue-blood-manual-constraints",
+      "text": "煞妖诀、血凝五行丹和煞丹术须有对应法门/真实材料及实际修炼，伪丹不等正常金丹；法门所载成功机会不能作无条件保证，停进和长期神智迟钝代价不能漏去。血灵钻必须久炼压元并承担痛苦，释放后原有凝练消耗；修髓丹只有相应炼者适用，他人不可通服。",
+      "severity": "hard"
+    },
+    {
+      "id": "yue-body-blood-tracking",
+      "text": "以特定身体精血炼成的引魂钟只对对应躯壳发挥感应或控制；超过有效距离、被相应手段隔绝时不能定位，不直接追踪一切魂魄。躯壳与其中元神、旧主人意识是不同对象。",
+      "severity": "hard"
+    },
+    {
+      "id": "yue-blood-tower-access",
+      "text": "金箱内的令牌与中心巨塔对应，获得令牌不等已到塔内或具有元婴后期；外部压制与塔门古禁分别成立。塔中六丁天甲符吸附近实际天地灵气，不能在气源被隔绝时凭符名产无限灵力，启停、损坏与转交均作用同一张实物。",
       "severity": "hard"
     }
   ],
@@ -43484,7 +46007,8 @@
       "yue-blood-stone-hall"
     ],
     "fact:yue-blood-golden-chest-contents-boundary": [
-      "yue-sealed-interior-fixed-contents"
+      "yue-xiang-disguise-and-blood-tower-source",
+      "yue-final-yue-living-completion"
     ],
     "entity:canon-blood-ink-jiao": [
       "yue-blood-stone-hall",
@@ -45225,9 +47749,6 @@
       "yue-sealed-interior-fixed-contents"
     ],
     "entity:yue-blood-tower-stone-fragments": [
-      "yue-sealed-interior-fixed-contents"
-    ],
-    "entity:yue-blood-box-jade-fragments": [
       "yue-sealed-interior-fixed-contents"
     ],
     "law:yue-yuelu-service-conservation": [
@@ -47078,6 +49599,322 @@
     ],
     "quantity:yue-raw-spirit-ore": [
       "yue-present-yuejing-yan-and-learning"
+    ],
+    "entity:yue-blood-tower-token": [
+      "yue-xiang-disguise-and-blood-tower-source",
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-blood-tower-token-opens": [
+      "yue-xiang-disguise-and-blood-tower-source",
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-blood-ancient-tower-outer-pressure": [
+      "yue-xiang-disguise-and-blood-tower-source",
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-blood-earthwood-manual": [
+      "yue-xiang-disguise-and-blood-tower-source",
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-blood-earthwood-manual-function": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-blood-gate-diagrams": [
+      "yue-xiang-disguise-and-blood-tower-source",
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-blood-gate-diagrams-function": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-blood-old-bracer": [
+      "yue-xiang-disguise-and-blood-tower-source",
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-blood-old-bracer-function": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-blood-intruder-remains": [
+      "yue-xiang-disguise-and-blood-tower-source",
+      "yue-final-yue-living-completion"
+    ],
+    "entity:canon-liuding-tianjia-talisman": [
+      "yue-xiang-disguise-and-blood-tower-source",
+      "yue-final-yue-living-completion"
+    ],
+    "fact:canon-liuding-tianjia-talisman-use": [
+      "yue-xiang-disguise-and-blood-tower-source",
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-nanwu-city": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:human-yue-route-yue-nanwu-city": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-nanwu-city-route-human-yue": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-baiju-mountain": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-yuejing-route-yue-baiju-mountain": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-baiju-mountain-route-yue-yuejing": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-mining-east-market": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:human-yue-route-yue-mining-east-market": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-mining-east-market-route-human-yue": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-tianshi-peak": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-huangfeng-valley-route-yue-tianshi-peak": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-tianshi-peak-route-yue-huangfeng-valley": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-jinglong-bell": [
+      "yue-old-huangfeng-alarm-and-access",
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-jinglong-bell-owner": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-jinglong-bell-signal": [
+      "yue-old-huangfeng-alarm-and-access"
+    ],
+    "entity:yue-baiju-flower-patch": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-nanwu-host": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-nanwu-host-age": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-nanwu-host-cultivation-state": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-nanwu-host-learned-skill": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-nanwu-host-spiritual-root": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-nanwu-host-pouch": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-nanwu-host-pouch-owner": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-east-market-smith": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-east-market-smith-age": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-east-market-smith-cultivation-state": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-east-market-smith-learned-skill": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-east-market-smith-spiritual-root": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-east-market-smith-pouch": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-east-market-smith-pouch-owner": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-east-market-clerk": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-east-market-clerk-age": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-east-market-clerk-cultivation-state": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-east-market-clerk-learned-skill": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-east-market-clerk-spiritual-root": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-east-market-clerk-pouch": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-east-market-clerk-pouch-owner": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-nanwu-food": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-nanwu-food-owner": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-nanwu-city-food-price": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-east-market-house": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-east-market-till": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-east-market-till-owner": [
+      "yue-final-yue-living-completion"
+    ],
+    "quantity:yue-tiemu": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-east-market-tiemu": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-east-market-tiemu-owner": [
+      "yue-final-yue-living-completion"
+    ],
+    "quantity:yue-jingyu": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-east-market-jingyu": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-east-market-jingyu-owner": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-east-market-broken-feet": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-east-market-broken-feet-owner": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-east-market-till-authority": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:canon-nie-ying": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:canon-nie-ying-age": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:canon-nie-ying-cultivation-state": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:canon-nie-ying-learned-skill": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:canon-nie-ying-spiritual-root": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:canon-nie-ying-pouch": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:canon-nie-ying-pouch-owner": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:canon-nie-ying-member": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:canon-nie-ying-stage-detail": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-nie-basic-manual": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-nie-basic-manual-owner": [
+      "yue-final-yue-living-completion"
+    ],
+    "law:yue-blood-manual-constraints": [
+      "yue-heisha-manual-conditions"
+    ],
+    "law:yue-body-blood-tracking": [
+      "yue-quhun-tracking-and-pet-control"
+    ],
+    "law:yue-blood-tower-access": [
+      "yue-xiang-disguise-and-blood-tower-source"
+    ],
+    "fact:canon-nie-ying-knows-yue-storekeeper": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-storekeeper-knows-canon-nie-ying": [
+      "yue-final-yue-living-completion"
+    ],
+    "quantity:yue-white-chrysanthemum": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-yuelu-dan-rack": [
+      "yue-yuelu-rack-and-wanbao-hospitality",
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-yuelu-dan-rack-owner": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-wanbao-guest-room": [
+      "yue-yuelu-rack-and-wanbao-hospitality",
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-market-wanbao-route-yue-wanbao-guest-room": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-wanbao-guest-room-route-yue-market-wanbao": [
+      "yue-final-yue-living-completion"
+    ],
+    "quantity:yue-biyun-tea": [
+      "yue-final-yue-living-completion"
+    ],
+    "quantity:yue-clean-water": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-wanbao-tea-set": [
+      "yue-yuelu-rack-and-wanbao-hospitality",
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-wanbao-tea-set-owner": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-wanbao-tea-set-hospitality": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-wanbao-attendant": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-wanbao-attendant-age": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-wanbao-attendant-cultivation-state": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-wanbao-attendant-learned-skill": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-wanbao-attendant-current-purpose": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-wanbao-attendant-spiritual-root": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-wanbao-attendant-attire": [
+      "yue-final-yue-living-completion"
+    ],
+    "entity:yue-wanbao-attendant-pouch": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:yue-wanbao-attendant-pouch-owner": [
+      "yue-final-yue-living-completion"
+    ],
+    "fact:canon-huangfeng-ye-steward-work-allocation": [
+      "yue-current-rooms-and-family-brush"
     ]
   }
 }

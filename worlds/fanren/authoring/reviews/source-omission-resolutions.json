@@ -6,7 +6,7 @@
   "total": 2834,
   "completed": 1600,
   "pending": 1234,
-  "recordsHash": "e074fbfc579ed52856fe303f0345cf214f50651d103881a6f74f664faf54e01f",
+  "recordsHash": "2b5bb5f45a47d72e23f900012f2de540dae81f845ca5168f3d7a9acb4bc671dd",
   "anchorCount": 2525,
   "readScope": "逐条阅读审校遗漏、所引完整原段与已有地区审定目标；歧义另读相邻段。记录保留原描述供纠错追踪，事实以 disposition 和 statement 为准。证据重叠不自动批准。",
   "limitations": [
@@ -14,64 +14,7 @@
     "来源归档不等于已生成所有T0实体；runtimeSupplementQueue 未闭合项另须地区补写和验证。",
     "后期事件与假身份只入来源索引，不改开篇认知、库存或人物生命状态。"
   ],
-  "runtimeSupplementQueue": [
-    {
-      "id": "batch-0019:omission:2",
-      "ordinal": 115,
-      "subject": "黄枫谷有坊市、矿产地等",
-      "statement": "叶管事列黄枫矿场监督、坊市执事、灵禽饲养、药园种植为低阶弟子工作，按完成领取灵石；是组织制度，叶能安排不等无条件获取资源或永久有权。",
-      "runtimeDisposition": "check-huangfeng-resource-and-office-entities"
-    },
-    {
-      "id": "batch-0020:omission:8",
-      "ordinal": 126,
-      "subject": "岳麓殿一楼货架",
-      "statement": "岳麓丹屋货架、万宝楼红桐柜台青衫侍从与贵宾室是后期实际所见的设施；回溯建筑可作明确配置，具体库存数量和当次饮茶交易不照搬T0。",
-      "runtimeDisposition": "check-existing-yue-trade-locations"
-    },
-    {
-      "id": "batch-0021:omission:7",
-      "ordinal": 135,
-      "subject": "万宝楼",
-      "statement": "岳麓丹屋货架、万宝楼红桐柜台青衫侍从与贵宾室是后期实际所见的设施；回溯建筑可作明确配置，具体库存数量和当次饮茶交易不照搬T0。",
-      "runtimeDisposition": "check-existing-yue-trade-locations"
-    },
-    {
-      "id": "batch-0030:omission:0",
-      "ordinal": 191,
-      "subject": "传送阵",
-      "statement": "已有设施或功法能力有正文依据：岳麓外传阵轮值、订符店材料价退款、灵兽院售驯兽、归元功附甲；原文见到的具体库存/值守与掌握者不强套T0。",
-      "runtimeDisposition": "regional-owner-informed-for-existing-or-new-runtime-mapping"
-    },
-    {
-      "id": "batch-0034:omission:2",
-      "ordinal": 213,
-      "subject": "归元灵甲",
-      "statement": "已有设施或功法能力有正文依据：岳麓外传阵轮值、订符店材料价退款、灵兽院售驯兽、归元功附甲；原文见到的具体库存/值守与掌握者不强套T0。",
-      "runtimeDisposition": "regional-owner-informed-for-existing-or-new-runtime-mapping"
-    },
-    {
-      "id": "batch-0040:omission:4",
-      "ordinal": 252,
-      "subject": "秦言二弟",
-      "statement": "原文明两名四十余男子是秦言二弟和三弟，身份各独立；当前句不支持各自具体商铺或精确生日，名字未给，不混成秦言或秦贵。",
-      "runtimeDisposition": "regional-owner-informed-for-qin-household"
-    },
-    {
-      "id": "batch-0040:omission:5",
-      "ordinal": 253,
-      "subject": "秦言三弟",
-      "statement": "原文明两名四十余男子是秦言二弟和三弟，身份各独立；当前句不支持各自具体商铺或精确生日，名字未给，不混成秦言或秦贵。",
-      "runtimeDisposition": "regional-owner-informed-for-qin-household"
-    },
-    {
-      "id": "batch-0045:omission:4",
-      "ordinal": 288,
-      "subject": "七派禁入皇城规则",
-      "statement": "七派对皇城的禁入与不犯不敬大错便放任，是长期社会规约及执行选择；不是空间障碍、永久不可进宫或任何皇帝都不受追究。",
-      "runtimeDisposition": "check-yue-palace-social-rule"
-    }
-  ],
+  "runtimeSupplementQueue": [],
   "records": [
     {
       "id": "batch-0001:omission:0",
@@ -3751,8 +3694,16 @@
           "anchorSha256": "ab93a68e6a50d79a4fa27572c680d0582bd8b3dcf24cd98f5f4685c439e99755"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "check-huangfeng-resource-and-office-entities"
+      "targetIds": [
+        "yue-current-rooms-and-family-brush",
+        "canon-huangfeng-ye-steward",
+        "yue-huangfeng-market",
+        "yue-old-mine",
+        "yue-huangfeng-garden",
+        "yue-qilin-beast-pens"
+      ],
+      "runtimeDisposition": "mapped-to-source-reviewed-yue-entities-and-claims-with-bounded-original-opening-state",
+      "mappingNote": "设施/关系及法门已经实际接入；未来一次人数、交易、掌握者和库存不整体前置。"
     },
     {
       "id": "batch-0019:omission:3",
@@ -4072,8 +4023,13 @@
           "anchorSha256": "8ee66e41d1f9b72941a7862c09e8f8f6e155f7c2fa5cf6554182a912f05b4807"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "check-existing-yue-trade-locations"
+      "targetIds": [
+        "yue-yuelu-rack-and-wanbao-hospitality",
+        "yue-yuelu-dan-rack",
+        "yue-yuelu-dan-tools"
+      ],
+      "runtimeDisposition": "mapped-to-source-reviewed-yue-entities-and-claims-with-bounded-original-opening-state",
+      "mappingNote": "设施/关系及法门已经实际接入；未来一次人数、交易、掌握者和库存不整体前置。"
     },
     {
       "id": "batch-0020:omission:9",
@@ -4331,8 +4287,15 @@
           "anchorSha256": "2acf5aa6ce87dfc43070750e4faba3774f33b1e9da6e49e17807757a6f99707a"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "check-existing-yue-trade-locations"
+      "targetIds": [
+        "yue-yuelu-rack-and-wanbao-hospitality",
+        "yue-market-wanbao",
+        "yue-wanbao-guest-room",
+        "yue-wanbao-attendant",
+        "yue-wanbao-tea-set"
+      ],
+      "runtimeDisposition": "mapped-to-source-reviewed-yue-entities-and-claims-with-bounded-original-opening-state",
+      "mappingNote": "设施/关系及法门已经实际接入；未来一次人数、交易、掌握者和库存不整体前置。"
     },
     {
       "id": "batch-0022:omission:0",
@@ -6052,8 +6015,15 @@
           "anchorSha256": "8c6590e7f77f79d74899f51803beac8e5b5a9253147aea4f1de0bfe626429faa"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "regional-owner-informed-for-existing-or-new-runtime-mapping"
+      "targetIds": [
+        "yue-present-yue-services-and-unknown-roots",
+        "yue-yuelu-outer-array",
+        "yue-yuelu-inner-array",
+        "yue-yuelu-guard-a",
+        "yue-yuelu-guard-b"
+      ],
+      "runtimeDisposition": "mapped-to-source-reviewed-yue-entities-and-claims-with-bounded-original-opening-state",
+      "mappingNote": "设施/关系及法门已经实际接入；未来一次人数、交易、掌握者和库存不整体前置。"
     },
     {
       "id": "batch-0030:omission:1",
@@ -6756,8 +6726,12 @@
           "anchorSha256": "3e46fd8043b0bbf12b4505d5861f0bea45e0373b121cd89f2dd2a162a3f57753"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "regional-owner-informed-for-existing-or-new-runtime-mapping"
+      "targetIds": [
+        "yue-greenwave-learning-and-body",
+        "yue-greenwave-guiyuan"
+      ],
+      "runtimeDisposition": "mapped-to-source-reviewed-yue-entities-and-claims-with-bounded-original-opening-state",
+      "mappingNote": "法门和社会规则有条件成立；归元灵甲未自动赋给韩立，皇城政治惯例不是物理禁入。"
     },
     {
       "id": "batch-0034:omission:3",
@@ -7949,8 +7923,13 @@
           "anchorSha256": "eb617d70164cf5d442ed6c504ae0c6ecbd6497817f17b3eab33e83523dccaea4"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "regional-owner-informed-for-qin-household"
+      "targetIds": [
+        "yue-qin-old-protection-and-family",
+        "yue-present-yuejing-yan-and-learning",
+        "yue-qin-second-brother"
+      ],
+      "runtimeDisposition": "mapped-to-source-reviewed-yue-entities-and-claims-with-bounded-original-opening-state",
+      "mappingNote": "设施/关系及法门已经实际接入；未来一次人数、交易、掌握者和库存不整体前置。"
     },
     {
       "id": "batch-0040:omission:5",
@@ -7977,8 +7956,13 @@
           "anchorSha256": "eb617d70164cf5d442ed6c504ae0c6ecbd6497817f17b3eab33e83523dccaea4"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "regional-owner-informed-for-qin-household"
+      "targetIds": [
+        "yue-qin-old-protection-and-family",
+        "yue-present-yuejing-yan-and-learning",
+        "yue-qin-third-brother"
+      ],
+      "runtimeDisposition": "mapped-to-source-reviewed-yue-entities-and-claims-with-bounded-original-opening-state",
+      "mappingNote": "设施/关系及法门已经实际接入；未来一次人数、交易、掌握者和库存不整体前置。"
     },
     {
       "id": "batch-0040:omission:6",
@@ -9038,8 +9022,11 @@
           "anchorSha256": "2ab36621115e48a7697a8f2ec8cf954cf08818583f20602f44b98fc7e8b20a60"
         }
       ],
-      "targetIds": [],
-      "runtimeDisposition": "check-yue-palace-social-rule"
+      "targetIds": [
+        "yue-palace-sect-restraint"
+      ],
+      "runtimeDisposition": "mapped-to-source-reviewed-yue-entities-and-claims-with-bounded-original-opening-state",
+      "mappingNote": "法门和社会规则有条件成立；归元灵甲未自动赋给韩立，皇城政治惯例不是物理禁入。"
     },
     {
       "id": "batch-0045:omission:5",

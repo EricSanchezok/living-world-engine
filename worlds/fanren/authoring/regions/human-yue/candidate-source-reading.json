@@ -1,6 +1,6 @@
 {
   "status": "editorial-source-reading-not-release-approval",
-  "method": "候选同ID与源指纹严格复用；新增项逐段读取本地原文，按叙述/人物说法/后期事件/有据回溯分别裁定；新增声明逐切片二读。",
+  "method": "同候选同源指纹严格复用；新增项逐段读取本地原文，区分叙述、人物说法、推断、后期事件与有据回溯；全部新增声明代码点切片实际二读。",
   "completedCandidateIds": [
     "batch-0001-object-0030",
     "batch-0001-object-0036",
@@ -1110,35 +1110,309 @@
     "batch-0045-fact-0053",
     "batch-0045-issue-0003",
     "batch-0046-object-0001",
+    "batch-0046-object-0002",
+    "batch-0046-object-0003",
     "batch-0046-object-0004",
+    "batch-0046-object-0005",
+    "batch-0046-object-0007",
+    "batch-0046-object-0016",
+    "batch-0046-object-0024",
+    "batch-0046-object-0031",
+    "batch-0046-object-0032",
+    "batch-0046-object-0033",
+    "batch-0046-object-0037",
+    "batch-0046-object-0038",
+    "batch-0046-object-0041",
+    "batch-0046-object-0043",
+    "batch-0046-object-0047",
+    "batch-0046-object-0056",
+    "batch-0046-object-0058",
+    "batch-0046-fact-0014",
+    "batch-0046-fact-0021",
+    "batch-0046-fact-0042",
+    "batch-0046-fact-0066",
+    "batch-0046-fact-0067",
+    "batch-0046-issue-0011",
+    "batch-0047-object-0001",
+    "batch-0047-object-0002",
+    "batch-0047-object-0003",
+    "batch-0047-object-0004",
+    "batch-0047-object-0005",
+    "batch-0047-object-0006",
+    "batch-0047-object-0007",
+    "batch-0047-object-0008",
+    "batch-0047-object-0009",
+    "batch-0047-object-0010",
+    "batch-0047-object-0011",
+    "batch-0047-object-0012",
+    "batch-0047-object-0013",
+    "batch-0047-object-0014",
+    "batch-0047-object-0015",
+    "batch-0047-object-0016",
+    "batch-0047-object-0017",
+    "batch-0047-object-0019",
+    "batch-0047-object-0021",
+    "batch-0047-object-0022",
+    "batch-0047-object-0023",
+    "batch-0047-object-0024",
+    "batch-0047-object-0025",
+    "batch-0047-object-0026",
+    "batch-0047-object-0027",
+    "batch-0047-object-0028",
+    "batch-0047-object-0029",
+    "batch-0047-object-0030",
+    "batch-0047-object-0031",
+    "batch-0047-object-0032",
+    "batch-0047-object-0033",
+    "batch-0047-object-0034",
+    "batch-0047-object-0035",
+    "batch-0047-object-0037",
+    "batch-0047-object-0038",
+    "batch-0047-object-0039",
+    "batch-0047-object-0040",
+    "batch-0047-object-0041",
+    "batch-0047-object-0044",
+    "batch-0047-object-0045",
+    "batch-0047-object-0046",
+    "batch-0047-object-0047",
+    "batch-0047-object-0048",
+    "batch-0047-object-0049",
+    "batch-0047-object-0052",
+    "batch-0047-object-0053",
+    "batch-0047-object-0054",
+    "batch-0047-object-0055",
+    "batch-0047-object-0056",
+    "batch-0047-object-0057",
+    "batch-0047-object-0058",
+    "batch-0047-object-0059",
+    "batch-0047-object-0060",
+    "batch-0047-fact-0014",
+    "batch-0047-fact-0015",
+    "batch-0047-fact-0021",
+    "batch-0047-fact-0037",
+    "batch-0047-fact-0038",
+    "batch-0047-fact-0040",
+    "batch-0047-fact-0046",
+    "batch-0047-issue-0003",
+    "batch-0047-issue-0007",
+    "batch-0048-object-0001",
+    "batch-0048-object-0002",
+    "batch-0048-object-0003",
+    "batch-0048-object-0004",
+    "batch-0048-object-0005",
+    "batch-0048-object-0006",
+    "batch-0048-object-0007",
+    "batch-0048-object-0008",
+    "batch-0048-object-0009",
+    "batch-0048-object-0010",
+    "batch-0048-object-0011",
+    "batch-0048-object-0012",
+    "batch-0048-object-0016",
+    "batch-0048-object-0017",
+    "batch-0048-object-0019",
+    "batch-0048-object-0020",
+    "batch-0048-object-0021",
+    "batch-0048-object-0022",
+    "batch-0048-object-0023",
+    "batch-0048-object-0024",
+    "batch-0048-object-0025",
+    "batch-0048-object-0026",
+    "batch-0048-object-0027",
+    "batch-0048-object-0028",
+    "batch-0048-object-0029",
+    "batch-0048-object-0030",
+    "batch-0048-object-0031",
+    "batch-0048-object-0032",
+    "batch-0048-object-0033",
+    "batch-0048-object-0034",
+    "batch-0048-object-0035",
+    "batch-0048-object-0036",
     "batch-0048-object-0037",
+    "batch-0048-object-0038",
+    "batch-0048-object-0039",
+    "batch-0048-object-0040",
+    "batch-0048-object-0041",
+    "batch-0048-object-0042",
+    "batch-0048-object-0043",
+    "batch-0048-object-0044",
+    "batch-0048-fact-0001",
+    "batch-0048-fact-0005",
+    "batch-0048-fact-0009",
+    "batch-0048-fact-0012",
+    "batch-0048-fact-0034",
     "batch-0049-object-0001",
     "batch-0049-object-0002",
+    "batch-0049-object-0003",
+    "batch-0049-object-0004",
+    "batch-0049-object-0005",
+    "batch-0049-object-0006",
+    "batch-0049-object-0007",
+    "batch-0049-object-0008",
+    "batch-0049-object-0009",
+    "batch-0049-object-0010",
+    "batch-0049-object-0011",
+    "batch-0049-object-0012",
+    "batch-0049-object-0013",
+    "batch-0049-object-0014",
     "batch-0049-object-0015",
+    "batch-0049-object-0016",
+    "batch-0049-object-0017",
+    "batch-0049-object-0018",
+    "batch-0049-object-0019",
+    "batch-0049-object-0020",
+    "batch-0049-object-0021",
+    "batch-0049-object-0022",
+    "batch-0049-object-0023",
+    "batch-0049-object-0024",
+    "batch-0049-object-0025",
+    "batch-0049-object-0026",
+    "batch-0049-object-0027",
+    "batch-0049-object-0028",
+    "batch-0049-object-0029",
+    "batch-0049-object-0031",
+    "batch-0049-object-0032",
+    "batch-0049-object-0033",
+    "batch-0049-object-0034",
+    "batch-0049-object-0037",
+    "batch-0049-object-0038",
+    "batch-0049-object-0039",
+    "batch-0049-object-0041",
+    "batch-0049-object-0043",
+    "batch-0049-object-0054",
+    "batch-0049-object-0055",
+    "batch-0049-object-0056",
+    "batch-0049-object-0057",
+    "batch-0049-object-0058",
+    "batch-0049-object-0059",
+    "batch-0049-object-0062",
+    "batch-0049-object-0063",
+    "batch-0049-object-0065",
+    "batch-0049-object-0067",
+    "batch-0049-object-0069",
+    "batch-0049-object-0073",
+    "batch-0049-object-0074",
+    "batch-0049-object-0075",
+    "batch-0049-object-0076",
+    "batch-0049-fact-0015",
+    "batch-0049-fact-0025",
+    "batch-0049-fact-0030",
+    "batch-0049-issue-0019",
+    "batch-0050-object-0001",
+    "batch-0050-object-0002",
+    "batch-0050-object-0003",
+    "batch-0050-object-0004",
+    "batch-0050-object-0005",
+    "batch-0050-object-0006",
+    "batch-0050-object-0007",
+    "batch-0050-object-0008",
+    "batch-0050-object-0009",
     "batch-0050-object-0010",
     "batch-0050-object-0011",
+    "batch-0050-object-0012",
+    "batch-0050-object-0013",
+    "batch-0050-object-0014",
+    "batch-0050-object-0015",
+    "batch-0050-object-0016",
+    "batch-0050-object-0017",
+    "batch-0050-object-0018",
+    "batch-0050-object-0020",
+    "batch-0050-object-0021",
+    "batch-0050-object-0023",
+    "batch-0050-object-0024",
+    "batch-0050-object-0025",
+    "batch-0050-object-0026",
+    "batch-0050-object-0028",
+    "batch-0050-object-0029",
+    "batch-0050-object-0030",
+    "batch-0050-object-0031",
+    "batch-0050-object-0033",
+    "batch-0050-object-0034",
+    "batch-0050-object-0035",
+    "batch-0050-object-0036",
+    "batch-0050-object-0037",
+    "batch-0050-object-0039",
+    "batch-0050-object-0040",
+    "batch-0050-object-0041",
+    "batch-0050-object-0042",
+    "batch-0050-object-0043",
+    "batch-0050-object-0044",
+    "batch-0050-object-0045",
     "batch-0050-object-0046",
+    "batch-0050-fact-0052",
+    "batch-0050-fact-0054",
     "batch-0050-fact-0057",
+    "batch-0050-fact-0058",
+    "batch-0050-fact-0059",
+    "batch-0050-fact-0073",
+    "batch-0050-issue-0006",
     "batch-0051-object-0001",
+    "batch-0051-object-0002",
+    "batch-0051-object-0003",
+    "batch-0051-object-0005",
+    "batch-0051-object-0017",
+    "batch-0051-object-0018",
+    "batch-0051-object-0019",
+    "batch-0051-object-0020",
     "batch-0051-object-0021",
+    "batch-0051-object-0022",
+    "batch-0051-object-0024",
+    "batch-0051-object-0025",
+    "batch-0051-object-0026",
+    "batch-0051-object-0027",
+    "batch-0051-object-0029",
+    "batch-0051-object-0030",
+    "batch-0051-object-0032",
     "batch-0051-object-0033",
+    "batch-0051-object-0034",
+    "batch-0051-object-0037",
+    "batch-0051-object-0038",
+    "batch-0051-object-0044",
+    "batch-0051-object-0050",
+    "batch-0051-object-0051",
+    "batch-0051-object-0052",
+    "batch-0051-fact-0025",
+    "batch-0051-fact-0029",
+    "batch-0051-fact-0030",
+    "batch-0051-fact-0033",
+    "batch-0051-fact-0034",
     "batch-0051-fact-0035",
     "batch-0051-fact-0036",
+    "batch-0051-fact-0037",
     "batch-0051-fact-0038",
+    "batch-0051-fact-0039",
+    "batch-0051-fact-0040",
+    "batch-0051-fact-0046",
+    "batch-0051-fact-0052",
+    "batch-0051-fact-0053",
     "batch-0052-object-0001",
+    "batch-0052-object-0003",
+    "batch-0052-object-0004",
+    "batch-0052-object-0005",
+    "batch-0052-object-0006",
     "batch-0052-object-0007",
+    "batch-0052-object-0008",
+    "batch-0052-object-0009",
+    "batch-0052-object-0010",
     "batch-0052-object-0011",
     "batch-0052-object-0013",
     "batch-0052-object-0014",
     "batch-0052-object-0015",
     "batch-0052-object-0042",
+    "batch-0052-fact-0001",
+    "batch-0052-fact-0002",
+    "batch-0052-fact-0003",
     "batch-0052-fact-0009",
     "batch-0052-fact-0010",
     "batch-0052-fact-0013",
     "batch-0052-fact-0014",
     "batch-0052-fact-0047",
+    "batch-0052-issue-0003",
     "batch-0053-object-0001",
+    "batch-0053-object-0006",
     "batch-0053-object-0009",
+    "batch-0053-object-0013",
+    "batch-0053-object-0014",
+    "batch-0053-object-0015",
     "batch-0053-object-0019",
     "batch-0053-object-0020",
     "batch-0053-object-0021",
@@ -1147,15 +1421,53 @@
     "batch-0053-object-0024",
     "batch-0053-object-0025",
     "batch-0053-object-0026",
+    "batch-0053-object-0028",
+    "batch-0053-object-0029",
+    "batch-0053-object-0030",
+    "batch-0053-object-0031",
+    "batch-0053-object-0032",
+    "batch-0053-object-0033",
+    "batch-0053-object-0034",
+    "batch-0053-object-0035",
+    "batch-0053-object-0036",
+    "batch-0053-object-0037",
+    "batch-0053-object-0039",
+    "batch-0053-object-0041",
+    "batch-0053-object-0042",
+    "batch-0053-object-0043",
     "batch-0053-object-0053",
+    "batch-0053-object-0054",
+    "batch-0053-object-0057",
+    "batch-0053-object-0058",
+    "batch-0053-object-0059",
+    "batch-0053-object-0060",
+    "batch-0053-object-0061",
+    "batch-0053-object-0062",
     "batch-0053-object-0065",
+    "batch-0053-object-0069",
+    "batch-0053-fact-0013",
+    "batch-0053-fact-0014",
+    "batch-0053-fact-0015",
+    "batch-0053-fact-0016",
+    "batch-0053-fact-0017",
+    "batch-0053-fact-0018",
     "batch-0053-fact-0019",
+    "batch-0053-fact-0020",
     "batch-0053-fact-0022",
     "batch-0053-fact-0033",
+    "batch-0053-fact-0034",
+    "batch-0053-fact-0035",
+    "batch-0053-fact-0039",
+    "batch-0053-fact-0052",
+    "batch-0053-fact-0053",
     "batch-0053-fact-0058",
+    "batch-0053-issue-0001",
+    "batch-0053-issue-0014",
     "batch-0054-object-0005",
     "batch-0054-object-0029",
     "batch-0054-object-0030",
+    "batch-0054-fact-0011",
+    "batch-0054-fact-0023",
     "batch-0054-fact-0045",
     "batch-0056-object-0039",
     "batch-0056-object-0057",
@@ -1165,62 +1477,166 @@
     "batch-0064-object-0031",
     "batch-0064-object-0050",
     "batch-0064-fact-0014",
+    "batch-0065-object-0015",
+    "batch-0065-object-0025",
+    "batch-0065-object-0026",
+    "batch-0065-object-0038",
+    "batch-0065-fact-0055",
+    "batch-0065-fact-0087",
     "batch-0089-object-0025",
     "batch-0089-object-0028",
     "batch-0089-object-0039",
     "batch-0089-object-0042",
+    "batch-0089-object-0043",
     "batch-0089-object-0056",
     "batch-0089-fact-0005",
     "batch-0089-fact-0022",
+    "batch-0089-fact-0078",
+    "batch-0093-object-0042",
+    "batch-0093-object-0066",
+    "batch-0093-fact-0049",
     "batch-0096-object-0001",
+    "batch-0096-object-0023",
+    "batch-0096-object-0024",
     "batch-0096-object-0028",
     "batch-0096-fact-0012",
+    "batch-0096-fact-0013",
+    "batch-0096-issue-0002",
     "batch-0097-object-0022",
+    "batch-0097-object-0040",
+    "batch-0097-fact-0034",
     "batch-0098-object-0001",
     "batch-0098-object-0034",
+    "batch-0098-object-0035",
+    "batch-0098-object-0050",
     "batch-0098-fact-0001",
+    "batch-0098-fact-0002",
     "batch-0098-fact-0046",
     "batch-0099-object-0001",
+    "batch-0099-object-0005",
+    "batch-0099-object-0006",
+    "batch-0099-object-0007",
+    "batch-0099-object-0008",
+    "batch-0099-object-0009",
+    "batch-0099-object-0010",
+    "batch-0099-object-0023",
+    "batch-0099-object-0026",
+    "batch-0099-object-0028",
+    "batch-0099-object-0030",
+    "batch-0099-object-0032",
+    "batch-0099-object-0042",
+    "batch-0099-object-0043",
     "batch-0099-object-0044",
+    "batch-0099-object-0045",
+    "batch-0099-fact-0002",
+    "batch-0099-fact-0005",
+    "batch-0099-fact-0023",
+    "batch-0099-fact-0032",
+    "batch-0099-fact-0033",
+    "batch-0099-fact-0034",
     "batch-0099-fact-0035",
     "batch-0100-object-0001",
+    "batch-0100-object-0002",
     "batch-0100-object-0003",
+    "batch-0100-object-0005",
+    "batch-0100-object-0011",
+    "batch-0100-object-0013",
+    "batch-0100-object-0014",
+    "batch-0100-object-0015",
+    "batch-0100-object-0035",
+    "batch-0100-object-0036",
+    "batch-0100-object-0068",
+    "batch-0100-object-0069",
+    "batch-0100-object-0076",
+    "batch-0100-fact-0009",
+    "batch-0100-fact-0010",
+    "batch-0100-fact-0016",
+    "batch-0100-fact-0051",
+    "batch-0101-object-0009",
     "batch-0101-object-0016",
     "batch-0101-object-0027",
+    "batch-0101-fact-0010",
+    "batch-0101-fact-0069",
     "batch-0101-fact-0070",
     "batch-0101-fact-0071",
     "batch-0103-object-0001",
     "batch-0103-object-0027",
+    "batch-0103-object-0032",
     "batch-0103-fact-0037",
+    "batch-0103-fact-0041",
+    "batch-0103-issue-0008",
     "batch-0106-object-0012",
     "batch-0106-object-0022",
+    "batch-0106-fact-0039",
+    "batch-0106-fact-0079",
+    "batch-0106-fact-0086",
+    "batch-0106-issue-0004",
     "batch-0107-object-0001",
+    "batch-0107-object-0002",
+    "batch-0107-object-0003",
     "batch-0107-object-0004",
+    "batch-0107-object-0005",
+    "batch-0107-object-0006",
+    "batch-0107-object-0010",
+    "batch-0107-object-0021",
+    "batch-0107-object-0023",
+    "batch-0107-object-0024",
     "batch-0107-object-0028",
     "batch-0107-object-0029",
+    "batch-0107-object-0030",
+    "batch-0107-object-0031",
+    "batch-0107-object-0032",
     "batch-0107-object-0033",
+    "batch-0107-object-0034",
     "batch-0107-object-0038",
     "batch-0107-fact-0001",
+    "batch-0107-fact-0008",
+    "batch-0107-fact-0012",
+    "batch-0107-fact-0013",
+    "batch-0107-fact-0014",
     "batch-0107-fact-0015",
+    "batch-0107-fact-0016",
     "batch-0107-fact-0022",
+    "batch-0107-fact-0023",
+    "batch-0107-fact-0024",
+    "batch-0107-fact-0030",
+    "batch-0107-fact-0046",
     "batch-0107-fact-0062",
+    "batch-0107-fact-0063",
+    "batch-0107-fact-0064",
+    "batch-0107-issue-0005",
+    "batch-0107-issue-0006",
     "batch-0108-object-0018",
     "batch-0108-object-0023",
     "batch-0108-fact-0001",
+    "batch-0108-fact-0041",
     "batch-0109-object-0001",
     "batch-0109-object-0009",
     "batch-0109-object-0033",
     "batch-0109-object-0038",
     "batch-0109-object-0057",
+    "batch-0109-fact-0040",
+    "batch-0109-fact-0041",
+    "batch-0109-fact-0042",
     "batch-0109-fact-0043",
+    "batch-0109-fact-0044",
+    "batch-0109-fact-0050",
+    "batch-0109-issue-0001",
     "batch-0110-object-0009",
+    "batch-0110-object-0049",
     "batch-0110-object-0050",
     "batch-0110-object-0052",
+    "batch-0110-object-0056",
     "batch-0110-object-0080",
+    "batch-0110-fact-0039",
+    "batch-0110-fact-0066",
     "batch-0110-fact-0069",
+    "batch-0110-fact-0070",
+    "batch-0110-issue-0003",
     "batch-0113-object-0064",
     "batch-0115-object-0028",
     "batch-0115-object-0042",
+    "batch-0115-fact-0019",
     "batch-0116-object-0001",
     "batch-0116-object-0003",
     "batch-0116-object-0006",
@@ -1230,20 +1646,40 @@
     "batch-0116-object-0010",
     "batch-0116-object-0028",
     "batch-0116-object-0054",
+    "batch-0116-fact-0012",
     "batch-0116-fact-0013",
+    "batch-0116-fact-0014",
+    "batch-0116-issue-0013",
+    "batch-0122-object-0004",
+    "batch-0122-object-0005",
+    "batch-0122-object-0010",
     "batch-0122-object-0016",
     "batch-0122-object-0017",
+    "batch-0122-object-0022",
     "batch-0122-object-0023",
+    "batch-0122-fact-0070",
+    "batch-0122-fact-0071",
+    "batch-0122-fact-0075",
+    "batch-0122-fact-0076",
+    "batch-0122-fact-0081",
     "batch-0123-object-0005",
     "batch-0123-object-0038",
     "batch-0123-fact-0009",
     "batch-0129-object-0003",
     "batch-0129-object-0016",
     "batch-0129-object-0017",
+    "batch-0129-fact-0003",
     "batch-0129-fact-0006",
+    "batch-0129-fact-0008",
     "batch-0129-issue-0014",
     "batch-0133-object-0059",
     "batch-0133-fact-0029",
+    "batch-0149-object-0019",
+    "batch-0149-object-0020",
+    "batch-0149-object-0023",
+    "batch-0149-object-0030",
+    "batch-0149-fact-0013",
+    "batch-0149-issue-0006",
     "batch-0183-object-0020",
     "batch-0183-object-0025",
     "batch-0183-object-0028",
@@ -1261,27 +1697,58 @@
     "batch-0185-object-0053",
     "batch-0185-object-0067",
     "batch-0185-fact-0022",
+    "batch-0185-fact-0023",
     "batch-0188-object-0006",
+    "batch-0188-object-0007",
+    "batch-0188-object-0008",
+    "batch-0188-object-0009",
     "batch-0188-object-0010",
+    "batch-0188-object-0029",
+    "batch-0188-object-0034",
+    "batch-0188-object-0035",
     "batch-0188-object-0036",
     "batch-0188-object-0041",
+    "batch-0188-object-0042",
+    "batch-0188-object-0070",
+    "batch-0188-object-0071",
+    "batch-0188-fact-0045",
     "batch-0189-object-0002",
     "batch-0189-object-0020",
+    "batch-0189-object-0028",
     "batch-0189-object-0030",
     "batch-0189-object-0031",
+    "batch-0189-object-0032",
     "batch-0189-object-0042",
     "batch-0189-object-0047",
     "batch-0189-object-0053",
     "batch-0189-object-0081",
+    "batch-0189-fact-0006",
+    "batch-0189-fact-0038",
+    "batch-0189-fact-0039",
+    "batch-0189-fact-0040",
     "batch-0189-fact-0041",
     "batch-0195-object-0003",
     "batch-0195-object-0022",
     "batch-0195-object-0034",
+    "batch-0195-fact-0045",
     "batch-0195-fact-0059",
     "batch-0199-object-0003",
+    "batch-0199-object-0007",
+    "batch-0199-object-0025",
+    "batch-0199-object-0026",
+    "batch-0199-object-0027",
+    "batch-0199-object-0056",
+    "batch-0199-object-0057",
+    "batch-0199-fact-0051",
+    "batch-0199-fact-0052",
+    "batch-0199-fact-0053",
+    "batch-0199-fact-0054",
+    "batch-0199-fact-0070",
+    "batch-0199-issue-0003",
     "batch-0354-object-0016",
     "batch-0354-fact-0029",
     "batch-0354-issue-0011",
+    "batch-0396-object-0079",
     "batch-0397-object-0024",
     "batch-0397-object-0025",
     "batch-0397-object-0026",
@@ -7771,6 +8238,3261 @@
         }
       ],
       "method": "第四组对秦家关系与李化元体质补读；与对应候选相邻段合并的已读范围。"
+    },
+    {
+      "chapterId": "qq-21482743",
+      "sha256": "1122261e3912bd9e1790f34a9e5ad8cb427a3ad59bb6b7b28e24c050ec73a58c",
+      "reviewedRanges": [
+        {
+          "start": 197,
+          "end": 343
+        },
+        {
+          "start": 1933,
+          "end": 2121
+        },
+        {
+          "start": 2560,
+          "end": 2818
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21486647",
+      "sha256": "04b01c5a90fa12d949beef1fd35fadfe81951138b8e2df97f1950d34a8aed72d",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 123
+        },
+        {
+          "start": 124,
+          "end": 297
+        },
+        {
+          "start": 449,
+          "end": 613
+        },
+        {
+          "start": 653,
+          "end": 820
+        },
+        {
+          "start": 874,
+          "end": 1138
+        },
+        {
+          "start": 1206,
+          "end": 1360
+        },
+        {
+          "start": 1567,
+          "end": 1769
+        },
+        {
+          "start": 2297,
+          "end": 2500
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21492189",
+      "sha256": "b5732b023ba6625b031f3a159a5ace9bf91f589bce9ccdc40e3b00c8b22c15ec",
+      "reviewedRanges": [
+        {
+          "start": 478,
+          "end": 641
+        },
+        {
+          "start": 686,
+          "end": 789
+        },
+        {
+          "start": 948,
+          "end": 1215
+        },
+        {
+          "start": 1507,
+          "end": 1658
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21495981",
+      "sha256": "db28149c23ae6e7f8e49747c398c5c628d286cd7418b395d4c73c49616de150d",
+      "reviewedRanges": [
+        {
+          "start": 47,
+          "end": 193
+        },
+        {
+          "start": 287,
+          "end": 480
+        },
+        {
+          "start": 858,
+          "end": 1067
+        },
+        {
+          "start": 1097,
+          "end": 1255
+        },
+        {
+          "start": 2014,
+          "end": 2300
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21502462",
+      "sha256": "80444e0cb3347979bc20cd635c7806bde2abeccf51fdfb81ddf39da8bf2e8e48",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 144
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21505116",
+      "sha256": "95a5dd6ead56844bdd3ba2a27eda3c8def97a3ae0a89596ef55a92b9aa25aa0d",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 93
+        },
+        {
+          "start": 325,
+          "end": 633
+        },
+        {
+          "start": 882,
+          "end": 1063
+        },
+        {
+          "start": 1064,
+          "end": 1233
+        },
+        {
+          "start": 1543,
+          "end": 1739
+        },
+        {
+          "start": 1918,
+          "end": 2089
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21511370",
+      "sha256": "d89233fd83267c7740a02465b17b167f73cc9e2d1d391527752e310a8499e354",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 143
+        },
+        {
+          "start": 144,
+          "end": 462
+        },
+        {
+          "start": 552,
+          "end": 766
+        },
+        {
+          "start": 767,
+          "end": 939
+        },
+        {
+          "start": 1002,
+          "end": 1190
+        },
+        {
+          "start": 1191,
+          "end": 2064
+        },
+        {
+          "start": 2228,
+          "end": 2397
+        },
+        {
+          "start": 2577,
+          "end": 2838
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21513724",
+      "sha256": "bd6848c12f78bcdd37dec4da9f4d579f61693ce7067815e931b57c08fa8516f2",
+      "reviewedRanges": [
+        {
+          "start": 21,
+          "end": 281
+        },
+        {
+          "start": 382,
+          "end": 536
+        },
+        {
+          "start": 603,
+          "end": 824
+        },
+        {
+          "start": 848,
+          "end": 1131
+        },
+        {
+          "start": 1261,
+          "end": 1529
+        },
+        {
+          "start": 2032,
+          "end": 2368
+        },
+        {
+          "start": 2463,
+          "end": 2633
+        },
+        {
+          "start": 2708,
+          "end": 2864
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21520260",
+      "sha256": "7b65fe09227c03336eeace327a2a82ddc7f9d0c9dbed8c8735dd24f7af5f1ce6",
+      "reviewedRanges": [
+        {
+          "start": 189,
+          "end": 594
+        },
+        {
+          "start": 595,
+          "end": 901
+        },
+        {
+          "start": 902,
+          "end": 1170
+        },
+        {
+          "start": 1171,
+          "end": 1488
+        },
+        {
+          "start": 1784,
+          "end": 1904
+        },
+        {
+          "start": 2055,
+          "end": 2334
+        },
+        {
+          "start": 2799,
+          "end": 3106
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21524404",
+      "sha256": "3fcd6d1517ce0c951983ae9a81f6879759f9ddfeacb52a04e8e5ee823b8110f9",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 382
+        },
+        {
+          "start": 1041,
+          "end": 1305
+        },
+        {
+          "start": 1669,
+          "end": 1793
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21527019",
+      "sha256": "78e81a66ddd7934fd49d8cca7e6cca515c39b4eca266844fd8471bf20c2beec4",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 155
+        },
+        {
+          "start": 417,
+          "end": 714
+        },
+        {
+          "start": 787,
+          "end": 1190
+        },
+        {
+          "start": 1939,
+          "end": 2116
+        },
+        {
+          "start": 2117,
+          "end": 2329
+        },
+        {
+          "start": 2358,
+          "end": 2470
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21532344",
+      "sha256": "1e0582eca954c8647cb6ae2236336e4d13d2345475e15024a9056c3bf5827f75",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 176
+        },
+        {
+          "start": 177,
+          "end": 529
+        },
+        {
+          "start": 855,
+          "end": 1085
+        },
+        {
+          "start": 1086,
+          "end": 1774
+        },
+        {
+          "start": 2456,
+          "end": 2724
+        },
+        {
+          "start": 2725,
+          "end": 2856
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21535780",
+      "sha256": "af749a4516072a8d8a56011d539a4ec8b8ee5486e03f669da88ae75a3fdee743",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 361
+        },
+        {
+          "start": 367,
+          "end": 497
+        },
+        {
+          "start": 565,
+          "end": 978
+        },
+        {
+          "start": 997,
+          "end": 1157
+        },
+        {
+          "start": 1176,
+          "end": 1629
+        },
+        {
+          "start": 1695,
+          "end": 1938
+        },
+        {
+          "start": 1974,
+          "end": 2286
+        },
+        {
+          "start": 2513,
+          "end": 2911
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21541285",
+      "sha256": "f5f4f35b81b4f5f38f6dc97217fe49e9e941cb5619cc37c45c028bf078369936",
+      "reviewedRanges": [
+        {
+          "start": 46,
+          "end": 388
+        },
+        {
+          "start": 389,
+          "end": 612
+        },
+        {
+          "start": 665,
+          "end": 779
+        },
+        {
+          "start": 780,
+          "end": 994
+        },
+        {
+          "start": 1119,
+          "end": 1291
+        },
+        {
+          "start": 1835,
+          "end": 2061
+        },
+        {
+          "start": 2703,
+          "end": 2930
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21544475",
+      "sha256": "673d1c4a496ef8d0674a1a1850f5f6756d26a4f87984ca47ac7a1bcbcc9f5d85",
+      "reviewedRanges": [
+        {
+          "start": 31,
+          "end": 263
+        },
+        {
+          "start": 612,
+          "end": 803
+        },
+        {
+          "start": 804,
+          "end": 991
+        },
+        {
+          "start": 1267,
+          "end": 1495
+        },
+        {
+          "start": 2054,
+          "end": 2259
+        },
+        {
+          "start": 2313,
+          "end": 2539
+        },
+        {
+          "start": 2540,
+          "end": 2751
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21552664",
+      "sha256": "1d6ee380f553d84878d792de0790525bd43d78c6a96977b0408e82a3d750871a",
+      "reviewedRanges": [
+        {
+          "start": 14,
+          "end": 261
+        },
+        {
+          "start": 575,
+          "end": 717
+        },
+        {
+          "start": 1009,
+          "end": 1134
+        },
+        {
+          "start": 1135,
+          "end": 1320
+        },
+        {
+          "start": 1577,
+          "end": 1717
+        },
+        {
+          "start": 1881,
+          "end": 2157
+        },
+        {
+          "start": 2744,
+          "end": 2899
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21560043",
+      "sha256": "176be771b1b00f66bb09c720eb1253ed44c76df9c478efbe3f6e7cf4d53cc6f3",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 199
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21567908",
+      "sha256": "59f7c3089c1e5f6705fd37dc985e62b6fdce5b67347d96b748faa678dc693a6b",
+      "reviewedRanges": [
+        {
+          "start": 459,
+          "end": 620
+        },
+        {
+          "start": 900,
+          "end": 1318
+        },
+        {
+          "start": 1611,
+          "end": 1785
+        },
+        {
+          "start": 2268,
+          "end": 2450
+        },
+        {
+          "start": 2576,
+          "end": 2805
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21571660",
+      "sha256": "4bb28caee7a3ba3995725e0d695a32598e9db735c81901249176e7a891d7a214",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 259
+        },
+        {
+          "start": 554,
+          "end": 769
+        },
+        {
+          "start": 833,
+          "end": 1090
+        },
+        {
+          "start": 1091,
+          "end": 1324
+        },
+        {
+          "start": 1325,
+          "end": 1582
+        },
+        {
+          "start": 2093,
+          "end": 2321
+        },
+        {
+          "start": 2322,
+          "end": 2858
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21578712",
+      "sha256": "1e8a9f080edd8260a3fff8f8baafafd8a99c456073d42956bfc61ed7fc6819e8",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 105
+        },
+        {
+          "start": 106,
+          "end": 342
+        },
+        {
+          "start": 486,
+          "end": 744
+        },
+        {
+          "start": 836,
+          "end": 942
+        },
+        {
+          "start": 943,
+          "end": 1094
+        },
+        {
+          "start": 1100,
+          "end": 1621
+        },
+        {
+          "start": 1780,
+          "end": 2055
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21587604",
+      "sha256": "f226125eb33ca565a721c210613b1b976800ab28907c63fea3e153a06b9f28e8",
+      "reviewedRanges": [
+        {
+          "start": 15,
+          "end": 246
+        },
+        {
+          "start": 460,
+          "end": 711
+        },
+        {
+          "start": 1233,
+          "end": 1540
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21594924",
+      "sha256": "b71f0ecdc21b293ac80ae22d1e924acfa0c5a1b96d75ed0eeb5e8362347c8cf9",
+      "reviewedRanges": [
+        {
+          "start": 1513,
+          "end": 1653
+        },
+        {
+          "start": 2076,
+          "end": 2213
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21602779",
+      "sha256": "b0e730db8ed780c5277868c2d69290e58b25e7d19797d82820330f14c9ffd494",
+      "reviewedRanges": [
+        {
+          "start": 93,
+          "end": 217
+        },
+        {
+          "start": 662,
+          "end": 814
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21608730",
+      "sha256": "90abe79ee5687197ad6459fe61e5409561bbeaa8f6005dff60832871a4582cb6",
+      "reviewedRanges": [
+        {
+          "start": 42,
+          "end": 366
+        },
+        {
+          "start": 568,
+          "end": 759
+        },
+        {
+          "start": 935,
+          "end": 1116
+        },
+        {
+          "start": 1558,
+          "end": 1680
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21612327",
+      "sha256": "54f5beb5f71f25ea9a1b1e31cd1879f929f6762ed3759069f7bcb82f51333530",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 450
+        },
+        {
+          "start": 628,
+          "end": 1008
+        },
+        {
+          "start": 1009,
+          "end": 1335
+        },
+        {
+          "start": 1336,
+          "end": 1557
+        },
+        {
+          "start": 1625,
+          "end": 1940
+        },
+        {
+          "start": 2191,
+          "end": 2424
+        },
+        {
+          "start": 2425,
+          "end": 2581
+        },
+        {
+          "start": 2680,
+          "end": 2849
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21616259",
+      "sha256": "5350ab460d5952f15a483183f8c2a0facd2746046f6a99064225068ef7cd3b7f",
+      "reviewedRanges": [
+        {
+          "start": 262,
+          "end": 428
+        },
+        {
+          "start": 461,
+          "end": 682
+        },
+        {
+          "start": 971,
+          "end": 1335
+        },
+        {
+          "start": 1336,
+          "end": 1828
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21621142",
+      "sha256": "eb49b32741fbadb79575d72b52259e810e42656adfc470e09eaf13fb08aab6df",
+      "reviewedRanges": [
+        {
+          "start": 212,
+          "end": 414
+        },
+        {
+          "start": 571,
+          "end": 870
+        },
+        {
+          "start": 1250,
+          "end": 1427
+        },
+        {
+          "start": 1745,
+          "end": 1963
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21626774",
+      "sha256": "fbe283b7f1b20b16cf612bce72c4ed46d96dc335633690bf07d63a9a1da6d01f",
+      "reviewedRanges": [
+        {
+          "start": 95,
+          "end": 406
+        },
+        {
+          "start": 1124,
+          "end": 1368
+        },
+        {
+          "start": 2370,
+          "end": 2913
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21630495",
+      "sha256": "fff4fad4d6fd4e3d88603c18d3c39bcc58c10289dd334f6edd85b633ea448496",
+      "reviewedRanges": [
+        {
+          "start": 1035,
+          "end": 1262
+        },
+        {
+          "start": 2701,
+          "end": 2790
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21638109",
+      "sha256": "10262f7aa3a6048d253eb389851de96612e81f1e1703177ae79dd07b67eb3dd7",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 127
+        },
+        {
+          "start": 546,
+          "end": 806
+        },
+        {
+          "start": 846,
+          "end": 985
+        },
+        {
+          "start": 986,
+          "end": 1128
+        },
+        {
+          "start": 1297,
+          "end": 1494
+        },
+        {
+          "start": 1649,
+          "end": 1872
+        },
+        {
+          "start": 1985,
+          "end": 2274
+        },
+        {
+          "start": 2718,
+          "end": 3009
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21639952",
+      "sha256": "ba6cbddd163a7734a0220302f1e1ce61ecde5543ef3f77e9fc6646bcf631e78f",
+      "reviewedRanges": [
+        {
+          "start": 504,
+          "end": 607
+        },
+        {
+          "start": 931,
+          "end": 1055
+        },
+        {
+          "start": 1232,
+          "end": 1420
+        },
+        {
+          "start": 2150,
+          "end": 2339
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21646618",
+      "sha256": "a721bdc291ed0d98eb6e6361156ad64d19fbebaeb5bc453c259286bc70ae0e1d",
+      "reviewedRanges": [
+        {
+          "start": 1776,
+          "end": 1965
+        },
+        {
+          "start": 2086,
+          "end": 2261
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21649001",
+      "sha256": "e34189ddb126cc6047ca5fc1d18a1ae10344e4fa5f2cca0feb5de1a20c91dad6",
+      "reviewedRanges": [
+        {
+          "start": 207,
+          "end": 423
+        },
+        {
+          "start": 900,
+          "end": 1106
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21656878",
+      "sha256": "45d82a5c720423f102cdce2c184d68806d0f6bf7c7de69cf189c4b5a60e076be",
+      "reviewedRanges": [
+        {
+          "start": 56,
+          "end": 327
+        },
+        {
+          "start": 610,
+          "end": 861
+        },
+        {
+          "start": 986,
+          "end": 1369
+        },
+        {
+          "start": 1370,
+          "end": 1495
+        },
+        {
+          "start": 1496,
+          "end": 1758
+        },
+        {
+          "start": 1979,
+          "end": 2147
+        },
+        {
+          "start": 2274,
+          "end": 2567
+        },
+        {
+          "start": 2648,
+          "end": 2743
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21657402",
+      "sha256": "a82f6d5eb60f840385e3d0757cb8d4727a2c3a718ebfc8d1cd415009dde85725",
+      "reviewedRanges": [
+        {
+          "start": 89,
+          "end": 512
+        },
+        {
+          "start": 896,
+          "end": 1045
+        },
+        {
+          "start": 1313,
+          "end": 1492
+        },
+        {
+          "start": 1629,
+          "end": 2041
+        },
+        {
+          "start": 2349,
+          "end": 2589
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21665824",
+      "sha256": "58ef4406465d779b9f36e3f7eaeaa66216b44c00fb56613b64f482449cc4e916",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 183
+        },
+        {
+          "start": 1451,
+          "end": 1585
+        },
+        {
+          "start": 1780,
+          "end": 2107
+        },
+        {
+          "start": 2201,
+          "end": 2437
+        },
+        {
+          "start": 2587,
+          "end": 2946
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21674380",
+      "sha256": "58da8189aed4ffa78493de807cc9815c75f5bb632a4480dc06705aa9a61b3044",
+      "reviewedRanges": [
+        {
+          "start": 2437,
+          "end": 2590
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21681333",
+      "sha256": "f239c4a935ff945047fbbce3634db2f3210d4c6fa0d200e882c677c392832cc8",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 282
+        },
+        {
+          "start": 336,
+          "end": 486
+        },
+        {
+          "start": 487,
+          "end": 861
+        },
+        {
+          "start": 1117,
+          "end": 1288
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21701398",
+      "sha256": "d09cbd1efce39bd20da3c16c0f397f45d312d7629906828dfa412efbbfba6d4e",
+      "reviewedRanges": [
+        {
+          "start": 750,
+          "end": 919
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21710631",
+      "sha256": "f64b4417a9882cab6a7de87e318d59619b8e7e5bb1a68e764a0219fa6da9e8d8",
+      "reviewedRanges": [
+        {
+          "start": 2731,
+          "end": 2880
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21712855",
+      "sha256": "49f3b68a72019dcb974228ad6cb28b2321da0fff92152c0ff5039c3a039909d6",
+      "reviewedRanges": [
+        {
+          "start": 23,
+          "end": 171
+        },
+        {
+          "start": 1555,
+          "end": 1850
+        },
+        {
+          "start": 1851,
+          "end": 2016
+        },
+        {
+          "start": 2017,
+          "end": 2206
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21720161",
+      "sha256": "d5a5ada45e3c10576e042e239e2943bd3e5b3580044fb784dd95af3ef360b4bb",
+      "reviewedRanges": [
+        {
+          "start": 216,
+          "end": 462
+        },
+        {
+          "start": 1198,
+          "end": 1972
+        },
+        {
+          "start": 2177,
+          "end": 2440
+        },
+        {
+          "start": 2441,
+          "end": 2937
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21730941",
+      "sha256": "f145c5ca594834c17ea82c4b79d1d8fc34f71c44f7ea52860b782def38a2eef6",
+      "reviewedRanges": [
+        {
+          "start": 25,
+          "end": 207
+        },
+        {
+          "start": 208,
+          "end": 676
+        },
+        {
+          "start": 703,
+          "end": 848
+        },
+        {
+          "start": 961,
+          "end": 1155
+        },
+        {
+          "start": 1461,
+          "end": 1628
+        },
+        {
+          "start": 1918,
+          "end": 2189
+        },
+        {
+          "start": 2325,
+          "end": 2526
+        },
+        {
+          "start": 2527,
+          "end": 2696
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21737114",
+      "sha256": "f047664ab9ec4d77cf2fb3cf20e3500b812e0bb13e69253fc6d0a1d062772923",
+      "reviewedRanges": [
+        {
+          "start": 150,
+          "end": 267
+        },
+        {
+          "start": 1278,
+          "end": 1424
+        },
+        {
+          "start": 1982,
+          "end": 2193
+        },
+        {
+          "start": 2568,
+          "end": 2866
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21739768",
+      "sha256": "cae34ac7fbd8de16ed6664511255f1c41d78b8921229a62f43c9fa9709ded3b3",
+      "reviewedRanges": [
+        {
+          "start": 302,
+          "end": 455
+        },
+        {
+          "start": 480,
+          "end": 718
+        },
+        {
+          "start": 989,
+          "end": 1196
+        },
+        {
+          "start": 1703,
+          "end": 1813
+        },
+        {
+          "start": 2065,
+          "end": 2202
+        },
+        {
+          "start": 2490,
+          "end": 2807
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21746905",
+      "sha256": "835d83a3ed475b0584553170cd2e0a8c493531aaa2b40ce4f407d59e0f7645d8",
+      "reviewedRanges": [
+        {
+          "start": 988,
+          "end": 1397
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-22163153",
+      "sha256": "5864d812754082029a381c830b5b2f29fb3f357e1277f605c9ca1b344bdf148c",
+      "reviewedRanges": [
+        {
+          "start": 1007,
+          "end": 1452
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-22170386",
+      "sha256": "fd1dd81e685cf60825eed103ce29eb015af36dc1f88d55e0fddb8e547369a170",
+      "reviewedRanges": [
+        {
+          "start": 2312,
+          "end": 2514
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-22959019",
+      "sha256": "b04d48ff98c6ac2f601653d11806f2f5c2d47a2256102ebabd2dd3fb5a9c4fec",
+      "reviewedRanges": [
+        {
+          "start": 1317,
+          "end": 1553
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-22978584",
+      "sha256": "e89052ba88e59231e4df435eea4db3232299b99c27a78ca5a27988e69656a084",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 276
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23131698",
+      "sha256": "f2a95e48e83b759fd85f86445374ed6853fa4f6a1c2e7107951dc3eee9749ecf",
+      "reviewedRanges": [
+        {
+          "start": 879,
+          "end": 1145
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23245002",
+      "sha256": "0754a79909281481ae923aefebaaa6ce8cfa4c38514bcfb719d34a28a50fd397",
+      "reviewedRanges": [
+        {
+          "start": 1293,
+          "end": 1696
+        },
+        {
+          "start": 2485,
+          "end": 2811
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23290199",
+      "sha256": "c077767cebf1add1b645ab4f8917b9443b95c68b2401029aade1f6269bce865d",
+      "reviewedRanges": [
+        {
+          "start": 2273,
+          "end": 2611
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23312572",
+      "sha256": "2f7a5424b159e49cdbdbdcd5f069030c537dca79e7b2d4633ce0872e501f6c0c",
+      "reviewedRanges": [
+        {
+          "start": 1229,
+          "end": 1543
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23346276",
+      "sha256": "0c31f47926b58293878886a977af135d8637f1cf56c34c3218a4ae830e0420d1",
+      "reviewedRanges": [
+        {
+          "start": 1412,
+          "end": 1627
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23356666",
+      "sha256": "4b2dd684c8a1526571ed7a7235e0189cb37386a2e69540f0d8bf0262c8601886",
+      "reviewedRanges": [
+        {
+          "start": 686,
+          "end": 1014
+        },
+        {
+          "start": 2123,
+          "end": 2461
+        },
+        {
+          "start": 2731,
+          "end": 2924
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23364160",
+      "sha256": "4e236356719ff29b6481ad7f2ae7e1b07bc5bd24ff2c68acac864b768368166c",
+      "reviewedRanges": [
+        {
+          "start": 729,
+          "end": 1252
+        },
+        {
+          "start": 1490,
+          "end": 1686
+        },
+        {
+          "start": 1826,
+          "end": 2448
+        },
+        {
+          "start": 2449,
+          "end": 2679
+        },
+        {
+          "start": 2760,
+          "end": 2905
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23391016",
+      "sha256": "1e2f98a7129f5cebbc5856da4486fe98d45de06fb0a5c865d3a5881e4d793f7a",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 540
+        },
+        {
+          "start": 1321,
+          "end": 1586
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23402160",
+      "sha256": "8b4025c8d215ab22d454cfda2c4343a8dc6101a62e2a6b52c5c3af2f24d1b6ed",
+      "reviewedRanges": [
+        {
+          "start": 310,
+          "end": 514
+        },
+        {
+          "start": 515,
+          "end": 725
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23423780",
+      "sha256": "8d6827a9a0a655042c7274ec31e14167101526ff876ae928e1c59c7fec07c87f",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 342
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23448399",
+      "sha256": "ee97aafe7d544351afc66af0305a9214f0b404c5ca28a707ba536da5f952682f",
+      "reviewedRanges": [
+        {
+          "start": 910,
+          "end": 1697
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23539111",
+      "sha256": "2491c2a7fa334f622f242c9b196cb1cd0c450dce69083d44f1b92cb98ee7278e",
+      "reviewedRanges": [
+        {
+          "start": 1513,
+          "end": 1762
+        },
+        {
+          "start": 1871,
+          "end": 2093
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23551923",
+      "sha256": "54eeab89dde8920d74b878146ab3e8abc241c7e615b034307bb3ee410675a214",
+      "reviewedRanges": [
+        {
+          "start": 1168,
+          "end": 1355
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23668849",
+      "sha256": "99f9607049120f30f865d519c927cc55364cf48f8bf72bed2acb2b786e4e48a0",
+      "reviewedRanges": [
+        {
+          "start": 799,
+          "end": 1098
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23688676",
+      "sha256": "62b086a42e5cc8f4e1f05e603dd7ab96c1be8c55479aee37d07180c46939d333",
+      "reviewedRanges": [
+        {
+          "start": 2190,
+          "end": 2454
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23690822",
+      "sha256": "8329d76839cbf399153322f9bbb8765179b50a8bc1f8b2be7001b49c729bb59c",
+      "reviewedRanges": [
+        {
+          "start": 2546,
+          "end": 2708
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23702059",
+      "sha256": "288f40223af2fbdefa01279dbac8d53164760aff965357526870f7e2b47dbe42",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 267
+        },
+        {
+          "start": 683,
+          "end": 967
+        },
+        {
+          "start": 1078,
+          "end": 1286
+        },
+        {
+          "start": 2183,
+          "end": 2735
+        },
+        {
+          "start": 2736,
+          "end": 2847
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23702539",
+      "sha256": "9963bdfb8fea17b84422ed873f257b190e8ae3237e1019333a28007417b67b14",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 219
+        },
+        {
+          "start": 220,
+          "end": 593
+        },
+        {
+          "start": 1405,
+          "end": 1625
+        },
+        {
+          "start": 2284,
+          "end": 2438
+        },
+        {
+          "start": 2501,
+          "end": 2919
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23713664",
+      "sha256": "0633266e5acbd42673f574de2a0392457b36a7ed54858267ba0798999854f3d0",
+      "reviewedRanges": [
+        {
+          "start": 114,
+          "end": 358
+        },
+        {
+          "start": 736,
+          "end": 889
+        },
+        {
+          "start": 2111,
+          "end": 2536
+        },
+        {
+          "start": 2607,
+          "end": 2903
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23725436",
+      "sha256": "7a65a899c8b43e93768c6c89824283d089f35ebf5426311efbaaf1526d20e241",
+      "reviewedRanges": [
+        {
+          "start": 774,
+          "end": 927
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23734776",
+      "sha256": "6b50cce55ca8d0593984f798eaa91e530bc0d21177f92e4278caa6916460bfe1",
+      "reviewedRanges": [
+        {
+          "start": 2234,
+          "end": 2887
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23737406",
+      "sha256": "2fb9e249481f67e9d2fba6063f351afa58b67700e015c81991325281ee64ecfd",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 244
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23796831",
+      "sha256": "e516bc9992083ba7e0aa396b5cfa09e308549712e66700b63ec3e5204294e2fc",
+      "reviewedRanges": [
+        {
+          "start": 688,
+          "end": 975
+        },
+        {
+          "start": 1990,
+          "end": 2356
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23807763",
+      "sha256": "0d6bb08142d6f0823a716c1dcb8804a0318b51e9cb319d112f03aad67b24b96f",
+      "reviewedRanges": [
+        {
+          "start": 228,
+          "end": 388
+        },
+        {
+          "start": 389,
+          "end": 624
+        },
+        {
+          "start": 693,
+          "end": 908
+        },
+        {
+          "start": 2468,
+          "end": 2657
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23833045",
+      "sha256": "db29bda597441fbfe765203c147e49c9a5396ca6bd18697f5c9d4e34d58bfd5a",
+      "reviewedRanges": [
+        {
+          "start": 1617,
+          "end": 1855
+        },
+        {
+          "start": 1856,
+          "end": 2051
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-23844232",
+      "sha256": "191b01c7d5a3feba18f990d808afccd659cdff3a372261823fb94ad38de4b1e6",
+      "reviewedRanges": [
+        {
+          "start": 270,
+          "end": 456
+        },
+        {
+          "start": 653,
+          "end": 773
+        },
+        {
+          "start": 774,
+          "end": 948
+        },
+        {
+          "start": 997,
+          "end": 1156
+        },
+        {
+          "start": 1725,
+          "end": 2124
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-24037140",
+      "sha256": "9ef77f42dda39fcd3559c8304846037d5e10e119648881fd400cf6fcf7ff7a57",
+      "reviewedRanges": [
+        {
+          "start": 1298,
+          "end": 1531
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-24084491",
+      "sha256": "74895f6e77071b87a7f7f562cb34932a4017d0fe30bf362bbb2aedd86f8703c9",
+      "reviewedRanges": [
+        {
+          "start": 1410,
+          "end": 2134
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-24404166",
+      "sha256": "fea10c9af9fae2931f8df6195a39f2a7512d4cf596eeeaa3d784c9a1c5a04946",
+      "reviewedRanges": [
+        {
+          "start": 2528,
+          "end": 2720
+        },
+        {
+          "start": 2721,
+          "end": 3063
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-24407188",
+      "sha256": "6907d250cb9642184ab84a1eb17f55d7e65d9162748d86cd10c0d06bde1aaf27",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 156
+        },
+        {
+          "start": 409,
+          "end": 1347
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-24718257",
+      "sha256": "3d0093a3da3ba2c74115c14273dbbfa18382cb1b2eed421f2c7987bea19aec38",
+      "reviewedRanges": [
+        {
+          "start": 1269,
+          "end": 1450
+        },
+        {
+          "start": 1451,
+          "end": 1694
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-24754047",
+      "sha256": "08e93462727124699492c7b7c0383517eb846ff6767497fe36cb1123fa9bc534",
+      "reviewedRanges": [
+        {
+          "start": 2621,
+          "end": 2909
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-25581812",
+      "sha256": "33da2958e944cff0a1f04438f161f3d1f5a6df673e62bc9d6e988e00ba277a60",
+      "reviewedRanges": [
+        {
+          "start": 45,
+          "end": 650
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-27160733",
+      "sha256": "ae84099560d007e20e45a37f96f4afa681a82f7b36e1f0ceb411980692e6b659",
+      "reviewedRanges": [
+        {
+          "start": 1051,
+          "end": 1208
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-27308835",
+      "sha256": "5470939231c182e0f643bc30822f4f399d47f6710e4e801a61ccbd79238b1ceb",
+      "reviewedRanges": [
+        {
+          "start": 764,
+          "end": 882
+        },
+        {
+          "start": 1061,
+          "end": 1761
+        },
+        {
+          "start": 1795,
+          "end": 2068
+        },
+        {
+          "start": 2154,
+          "end": 2338
+        },
+        {
+          "start": 2377,
+          "end": 2771
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-27310310",
+      "sha256": "917c8117470b4ad2fb838c5893d26cb0ed1591bad5e25b4b1a30ab1c9b6f90a3",
+      "reviewedRanges": [
+        {
+          "start": 1121,
+          "end": 1435
+        },
+        {
+          "start": 1436,
+          "end": 1778
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-27320762",
+      "sha256": "6acbec9e0438ac10357456a4e705634295a979d3b5448a6ab132cb73a4cbdb7d",
+      "reviewedRanges": [
+        {
+          "start": 561,
+          "end": 778
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-27343785",
+      "sha256": "a93506a7f0beee181de830f576edec7bce36a3ef5aee4551d37492e95d6e77c3",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 420
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-27595545",
+      "sha256": "7300eb04cef112bae90bdce57be706eb3025a573e52390e7ba528e29082fdef2",
+      "reviewedRanges": [
+        {
+          "start": 2707,
+          "end": 2928
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-27767314",
+      "sha256": "a1a8dbd67e35965328185465afe28629d959be022c0678a1d2e4469b1dc54a97",
+      "reviewedRanges": [
+        {
+          "start": 839,
+          "end": 1198
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-27790919",
+      "sha256": "4878d567f403a5600b2f47d9952ffc6b2bf8f5cb82e2595456bf00dd99a14f06",
+      "reviewedRanges": [
+        {
+          "start": 1005,
+          "end": 1531
+        },
+        {
+          "start": 2023,
+          "end": 2285
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-47993911",
+      "sha256": "1b712aa55f841d0c9562d9fa9beeddcc9bd5a113ab72452cf9adb7e6bfbec133",
+      "reviewedRanges": [
+        {
+          "start": 431,
+          "end": 614
+        }
+      ]
+    },
+    {
+      "chapterId": "qq-21486647",
+      "sha256": "04b01c5a90fa12d949beef1fd35fadfe81951138b8e2df97f1950d34a8aed72d",
+      "reviewedRanges": [
+        {
+          "start": 51,
+          "end": 297
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21492189",
+      "sha256": "b5732b023ba6625b031f3a159a5ace9bf91f589bce9ccdc40e3b00c8b22c15ec",
+      "reviewedRanges": [
+        {
+          "start": 478,
+          "end": 641
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21492189",
+      "sha256": "b5732b023ba6625b031f3a159a5ace9bf91f589bce9ccdc40e3b00c8b22c15ec",
+      "reviewedRanges": [
+        {
+          "start": 948,
+          "end": 1215
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21505116",
+      "sha256": "95a5dd6ead56844bdd3ba2a27eda3c8def97a3ae0a89596ef55a92b9aa25aa0d",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 93
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21505116",
+      "sha256": "95a5dd6ead56844bdd3ba2a27eda3c8def97a3ae0a89596ef55a92b9aa25aa0d",
+      "reviewedRanges": [
+        {
+          "start": 1543,
+          "end": 2089
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21535780",
+      "sha256": "af749a4516072a8d8a56011d539a4ec8b8ee5486e03f669da88ae75a3fdee743",
+      "reviewedRanges": [
+        {
+          "start": 2513,
+          "end": 2911
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21541285",
+      "sha256": "f5f4f35b81b4f5f38f6dc97217fe49e9e941cb5619cc37c45c028bf078369936",
+      "reviewedRanges": [
+        {
+          "start": 780,
+          "end": 994
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21560043",
+      "sha256": "176be771b1b00f66bb09c720eb1253ed44c76df9c478efbe3f6e7cf4d53cc6f3",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 199
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21511370",
+      "sha256": "d89233fd83267c7740a02465b17b167f73cc9e2d1d391527752e310a8499e354",
+      "reviewedRanges": [
+        {
+          "start": 567,
+          "end": 831
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21511370",
+      "sha256": "d89233fd83267c7740a02465b17b167f73cc9e2d1d391527752e310a8499e354",
+      "reviewedRanges": [
+        {
+          "start": 1191,
+          "end": 2064
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21511370",
+      "sha256": "d89233fd83267c7740a02465b17b167f73cc9e2d1d391527752e310a8499e354",
+      "reviewedRanges": [
+        {
+          "start": 2609,
+          "end": 2770
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21513724",
+      "sha256": "bd6848c12f78bcdd37dec4da9f4d579f61693ce7067815e931b57c08fa8516f2",
+      "reviewedRanges": [
+        {
+          "start": 1102,
+          "end": 1478
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21513724",
+      "sha256": "bd6848c12f78bcdd37dec4da9f4d579f61693ce7067815e931b57c08fa8516f2",
+      "reviewedRanges": [
+        {
+          "start": 2032,
+          "end": 2633
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21520260",
+      "sha256": "7b65fe09227c03336eeace327a2a82ddc7f9d0c9dbed8c8735dd24f7af5f1ce6",
+      "reviewedRanges": [
+        {
+          "start": 2167,
+          "end": 2370
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21532344",
+      "sha256": "1e0582eca954c8647cb6ae2236336e4d13d2345475e15024a9056c3bf5827f75",
+      "reviewedRanges": [
+        {
+          "start": 964,
+          "end": 1304
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21513724",
+      "sha256": "bd6848c12f78bcdd37dec4da9f4d579f61693ce7067815e931b57c08fa8516f2",
+      "reviewedRanges": [
+        {
+          "start": 1478,
+          "end": 2032
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21513724",
+      "sha256": "bd6848c12f78bcdd37dec4da9f4d579f61693ce7067815e931b57c08fa8516f2",
+      "reviewedRanges": [
+        {
+          "start": 432,
+          "end": 982
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21527019",
+      "sha256": "78e81a66ddd7934fd49d8cca7e6cca515c39b4eca266844fd8471bf20c2beec4",
+      "reviewedRanges": [
+        {
+          "start": 37,
+          "end": 575
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21532344",
+      "sha256": "1e0582eca954c8647cb6ae2236336e4d13d2345475e15024a9056c3bf5827f75",
+      "reviewedRanges": [
+        {
+          "start": 964,
+          "end": 1304
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21544475",
+      "sha256": "673d1c4a496ef8d0674a1a1850f5f6756d26a4f87984ca47ac7a1bcbcc9f5d85",
+      "reviewedRanges": [
+        {
+          "start": 722,
+          "end": 1060
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21544475",
+      "sha256": "673d1c4a496ef8d0674a1a1850f5f6756d26a4f87984ca47ac7a1bcbcc9f5d85",
+      "reviewedRanges": [
+        {
+          "start": 2103,
+          "end": 2604
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21567908",
+      "sha256": "59f7c3089c1e5f6705fd37dc985e62b6fdce5b67347d96b748faa678dc693a6b",
+      "reviewedRanges": [
+        {
+          "start": 1118,
+          "end": 1690
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21567908",
+      "sha256": "59f7c3089c1e5f6705fd37dc985e62b6fdce5b67347d96b748faa678dc693a6b",
+      "reviewedRanges": [
+        {
+          "start": 2260,
+          "end": 2480
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21513724",
+      "sha256": "bd6848c12f78bcdd37dec4da9f4d579f61693ce7067815e931b57c08fa8516f2",
+      "reviewedRanges": [
+        {
+          "start": 982,
+          "end": 1102
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21527019",
+      "sha256": "78e81a66ddd7934fd49d8cca7e6cca515c39b4eca266844fd8471bf20c2beec4",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 800
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21532344",
+      "sha256": "1e0582eca954c8647cb6ae2236336e4d13d2345475e15024a9056c3bf5827f75",
+      "reviewedRanges": [
+        {
+          "start": 1486,
+          "end": 1774
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21535780",
+      "sha256": "af749a4516072a8d8a56011d539a4ec8b8ee5486e03f669da88ae75a3fdee743",
+      "reviewedRanges": [
+        {
+          "start": 1695,
+          "end": 2286
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21541285",
+      "sha256": "f5f4f35b81b4f5f38f6dc97217fe49e9e941cb5619cc37c45c028bf078369936",
+      "reviewedRanges": [
+        {
+          "start": 46,
+          "end": 388
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21541285",
+      "sha256": "f5f4f35b81b4f5f38f6dc97217fe49e9e941cb5619cc37c45c028bf078369936",
+      "reviewedRanges": [
+        {
+          "start": 990,
+          "end": 1135
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21571660",
+      "sha256": "4bb28caee7a3ba3995725e0d695a32598e9db735c81901249176e7a891d7a214",
+      "reviewedRanges": [
+        {
+          "start": 2322,
+          "end": 2479
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21571660",
+      "sha256": "4bb28caee7a3ba3995725e0d695a32598e9db735c81901249176e7a891d7a214",
+      "reviewedRanges": [
+        {
+          "start": 554,
+          "end": 1090
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21571660",
+      "sha256": "4bb28caee7a3ba3995725e0d695a32598e9db735c81901249176e7a891d7a214",
+      "reviewedRanges": [
+        {
+          "start": 1091,
+          "end": 1582
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21571660",
+      "sha256": "4bb28caee7a3ba3995725e0d695a32598e9db735c81901249176e7a891d7a214",
+      "reviewedRanges": [
+        {
+          "start": 1582,
+          "end": 2093
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21571660",
+      "sha256": "4bb28caee7a3ba3995725e0d695a32598e9db735c81901249176e7a891d7a214",
+      "reviewedRanges": [
+        {
+          "start": 2093,
+          "end": 2858
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21578712",
+      "sha256": "1e8a9f080edd8260a3fff8f8baafafd8a99c456073d42956bfc61ed7fc6819e8",
+      "reviewedRanges": [
+        {
+          "start": 486,
+          "end": 942
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21578712",
+      "sha256": "1e8a9f080edd8260a3fff8f8baafafd8a99c456073d42956bfc61ed7fc6819e8",
+      "reviewedRanges": [
+        {
+          "start": 1100,
+          "end": 1621
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21587604",
+      "sha256": "f226125eb33ca565a721c210613b1b976800ab28907c63fea3e153a06b9f28e8",
+      "reviewedRanges": [
+        {
+          "start": 497,
+          "end": 644
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21608730",
+      "sha256": "90abe79ee5687197ad6459fe61e5409561bbeaa8f6005dff60832871a4582cb6",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 221
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21608730",
+      "sha256": "90abe79ee5687197ad6459fe61e5409561bbeaa8f6005dff60832871a4582cb6",
+      "reviewedRanges": [
+        {
+          "start": 655,
+          "end": 727
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-24407188",
+      "sha256": "6907d250cb9642184ab84a1eb17f55d7e65d9162748d86cd10c0d06bde1aaf27",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 156
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21608730",
+      "sha256": "90abe79ee5687197ad6459fe61e5409561bbeaa8f6005dff60832871a4582cb6",
+      "reviewedRanges": [
+        {
+          "start": 935,
+          "end": 1116
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21612327",
+      "sha256": "54f5beb5f71f25ea9a1b1e31cd1879f929f6762ed3759069f7bcb82f51333530",
+      "reviewedRanges": [
+        {
+          "start": 55,
+          "end": 406
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21612327",
+      "sha256": "54f5beb5f71f25ea9a1b1e31cd1879f929f6762ed3759069f7bcb82f51333530",
+      "reviewedRanges": [
+        {
+          "start": 813,
+          "end": 1231
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21612327",
+      "sha256": "54f5beb5f71f25ea9a1b1e31cd1879f929f6762ed3759069f7bcb82f51333530",
+      "reviewedRanges": [
+        {
+          "start": 1723,
+          "end": 1890
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21612327",
+      "sha256": "54f5beb5f71f25ea9a1b1e31cd1879f929f6762ed3759069f7bcb82f51333530",
+      "reviewedRanges": [
+        {
+          "start": 2496,
+          "end": 2791
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23391016",
+      "sha256": "1e2f98a7129f5cebbc5856da4486fe98d45de06fb0a5c865d3a5881e4d793f7a",
+      "reviewedRanges": [
+        {
+          "start": 266,
+          "end": 540
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23844232",
+      "sha256": "191b01c7d5a3feba18f990d808afccd659cdff3a372261823fb94ad38de4b1e6",
+      "reviewedRanges": [
+        {
+          "start": 1725,
+          "end": 2124
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21612327",
+      "sha256": "54f5beb5f71f25ea9a1b1e31cd1879f929f6762ed3759069f7bcb82f51333530",
+      "reviewedRanges": [
+        {
+          "start": 1231,
+          "end": 1723
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21626774",
+      "sha256": "fbe283b7f1b20b16cf612bce72c4ed46d96dc335633690bf07d63a9a1da6d01f",
+      "reviewedRanges": [
+        {
+          "start": 95,
+          "end": 406
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21630495",
+      "sha256": "fff4fad4d6fd4e3d88603c18d3c39bcc58c10289dd334f6edd85b633ea448496",
+      "reviewedRanges": [
+        {
+          "start": 1035,
+          "end": 1262
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21639952",
+      "sha256": "ba6cbddd163a7734a0220302f1e1ce61ecde5543ef3f77e9fc6646bcf631e78f",
+      "reviewedRanges": [
+        {
+          "start": 504,
+          "end": 607
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21639952",
+      "sha256": "ba6cbddd163a7734a0220302f1e1ce61ecde5543ef3f77e9fc6646bcf631e78f",
+      "reviewedRanges": [
+        {
+          "start": 931,
+          "end": 1232
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21646618",
+      "sha256": "a721bdc291ed0d98eb6e6361156ad64d19fbebaeb5bc453c259286bc70ae0e1d",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 1776
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21646618",
+      "sha256": "a721bdc291ed0d98eb6e6361156ad64d19fbebaeb5bc453c259286bc70ae0e1d",
+      "reviewedRanges": [
+        {
+          "start": 1776,
+          "end": 2261
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21616259",
+      "sha256": "5350ab460d5952f15a483183f8c2a0facd2746046f6a99064225068ef7cd3b7f",
+      "reviewedRanges": [
+        {
+          "start": 1100,
+          "end": 1479
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21638109",
+      "sha256": "10262f7aa3a6048d253eb389851de96612e81f1e1703177ae79dd07b67eb3dd7",
+      "reviewedRanges": [
+        {
+          "start": 652,
+          "end": 1106
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21638109",
+      "sha256": "10262f7aa3a6048d253eb389851de96612e81f1e1703177ae79dd07b67eb3dd7",
+      "reviewedRanges": [
+        {
+          "start": 2066,
+          "end": 2250
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21649001",
+      "sha256": "e34189ddb126cc6047ca5fc1d18a1ae10344e4fa5f2cca0feb5de1a20c91dad6",
+      "reviewedRanges": [
+        {
+          "start": 207,
+          "end": 423
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21649001",
+      "sha256": "e34189ddb126cc6047ca5fc1d18a1ae10344e4fa5f2cca0feb5de1a20c91dad6",
+      "reviewedRanges": [
+        {
+          "start": 900,
+          "end": 1106
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21656878",
+      "sha256": "45d82a5c720423f102cdce2c184d68806d0f6bf7c7de69cf189c4b5a60e076be",
+      "reviewedRanges": [
+        {
+          "start": 610,
+          "end": 861
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21616259",
+      "sha256": "5350ab460d5952f15a483183f8c2a0facd2746046f6a99064225068ef7cd3b7f",
+      "reviewedRanges": [
+        {
+          "start": 1479,
+          "end": 1700
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21656878",
+      "sha256": "45d82a5c720423f102cdce2c184d68806d0f6bf7c7de69cf189c4b5a60e076be",
+      "reviewedRanges": [
+        {
+          "start": 1114,
+          "end": 1433
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21656878",
+      "sha256": "45d82a5c720423f102cdce2c184d68806d0f6bf7c7de69cf189c4b5a60e076be",
+      "reviewedRanges": [
+        {
+          "start": 2480,
+          "end": 2743
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21657402",
+      "sha256": "a82f6d5eb60f840385e3d0757cb8d4727a2c3a718ebfc8d1cd415009dde85725",
+      "reviewedRanges": [
+        {
+          "start": 224,
+          "end": 402
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21657402",
+      "sha256": "a82f6d5eb60f840385e3d0757cb8d4727a2c3a718ebfc8d1cd415009dde85725",
+      "reviewedRanges": [
+        {
+          "start": 944,
+          "end": 1084
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21657402",
+      "sha256": "a82f6d5eb60f840385e3d0757cb8d4727a2c3a718ebfc8d1cd415009dde85725",
+      "reviewedRanges": [
+        {
+          "start": 1386,
+          "end": 2454
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21665824",
+      "sha256": "58ef4406465d779b9f36e3f7eaeaa66216b44c00fb56613b64f482449cc4e916",
+      "reviewedRanges": [
+        {
+          "start": 1962,
+          "end": 2931
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21674380",
+      "sha256": "58da8189aed4ffa78493de807cc9815c75f5bb632a4480dc06705aa9a61b3044",
+      "reviewedRanges": [
+        {
+          "start": 2350,
+          "end": 2730
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21681333",
+      "sha256": "f239c4a935ff945047fbbce3634db2f3210d4c6fa0d200e882c677c392832cc8",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 234
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21720161",
+      "sha256": "d5a5ada45e3c10576e042e239e2943bd3e5b3580044fb784dd95af3ef360b4bb",
+      "reviewedRanges": [
+        {
+          "start": 1264,
+          "end": 1550
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21720161",
+      "sha256": "d5a5ada45e3c10576e042e239e2943bd3e5b3580044fb784dd95af3ef360b4bb",
+      "reviewedRanges": [
+        {
+          "start": 2240,
+          "end": 2840
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23734776",
+      "sha256": "6b50cce55ca8d0593984f798eaa91e530bc0d21177f92e4278caa6916460bfe1",
+      "reviewedRanges": [
+        {
+          "start": 2234,
+          "end": 2887
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21720161",
+      "sha256": "d5a5ada45e3c10576e042e239e2943bd3e5b3580044fb784dd95af3ef360b4bb",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 500
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21712855",
+      "sha256": "49f3b68a72019dcb974228ad6cb28b2321da0fff92152c0ff5039c3a039909d6",
+      "reviewedRanges": [
+        {
+          "start": 1555,
+          "end": 2016
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21730941",
+      "sha256": "f145c5ca594834c17ea82c4b79d1d8fc34f71c44f7ea52860b782def38a2eef6",
+      "reviewedRanges": [
+        {
+          "start": 96,
+          "end": 255
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21730941",
+      "sha256": "f145c5ca594834c17ea82c4b79d1d8fc34f71c44f7ea52860b782def38a2eef6",
+      "reviewedRanges": [
+        {
+          "start": 703,
+          "end": 1155
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21730941",
+      "sha256": "f145c5ca594834c17ea82c4b79d1d8fc34f71c44f7ea52860b782def38a2eef6",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 96
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21737114",
+      "sha256": "f047664ab9ec4d77cf2fb3cf20e3500b812e0bb13e69253fc6d0a1d062772923",
+      "reviewedRanges": [
+        {
+          "start": 2035,
+          "end": 2850
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21739768",
+      "sha256": "cae34ac7fbd8de16ed6664511255f1c41d78b8921229a62f43c9fa9709ded3b3",
+      "reviewedRanges": [
+        {
+          "start": 373,
+          "end": 1086
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21739768",
+      "sha256": "cae34ac7fbd8de16ed6664511255f1c41d78b8921229a62f43c9fa9709ded3b3",
+      "reviewedRanges": [
+        {
+          "start": 2139,
+          "end": 2807
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21746905",
+      "sha256": "835d83a3ed475b0584553170cd2e0a8c493531aaa2b40ce4f407d59e0f7645d8",
+      "reviewedRanges": [
+        {
+          "start": 1200,
+          "end": 1450
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23734776",
+      "sha256": "6b50cce55ca8d0593984f798eaa91e530bc0d21177f92e4278caa6916460bfe1",
+      "reviewedRanges": [
+        {
+          "start": 2234,
+          "end": 2887
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23737406",
+      "sha256": "2fb9e249481f67e9d2fba6063f351afa58b67700e015c81991325281ee64ecfd",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 244
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-21730941",
+      "sha256": "f145c5ca594834c17ea82c4b79d1d8fc34f71c44f7ea52860b782def38a2eef6",
+      "reviewedRanges": [
+        {
+          "start": 2400,
+          "end": 2853
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-22163153",
+      "sha256": "5864d812754082029a381c830b5b2f29fb3f357e1277f605c9ca1b344bdf148c",
+      "reviewedRanges": [
+        {
+          "start": 1180,
+          "end": 1430
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-22170386",
+      "sha256": "fd1dd81e685cf60825eed103ce29eb015af36dc1f88d55e0fddb8e547369a170",
+      "reviewedRanges": [
+        {
+          "start": 2310,
+          "end": 2520
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-22978584",
+      "sha256": "e89052ba88e59231e4df435eea4db3232299b99c27a78ca5a27988e69656a084",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 276
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23131698",
+      "sha256": "f2a95e48e83b759fd85f86445374ed6853fa4f6a1c2e7107951dc3eee9749ecf",
+      "reviewedRanges": [
+        {
+          "start": 879,
+          "end": 1145
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23245002",
+      "sha256": "0754a79909281481ae923aefebaaa6ce8cfa4c38514bcfb719d34a28a50fd397",
+      "reviewedRanges": [
+        {
+          "start": 1293,
+          "end": 1696
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23312572",
+      "sha256": "2f7a5424b159e49cdbdbdcd5f069030c537dca79e7b2d4633ce0872e501f6c0c",
+      "reviewedRanges": [
+        {
+          "start": 1229,
+          "end": 1543
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23356666",
+      "sha256": "4b2dd684c8a1526571ed7a7235e0189cb37386a2e69540f0d8bf0262c8601886",
+      "reviewedRanges": [
+        {
+          "start": 686,
+          "end": 1014
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-27343785",
+      "sha256": "a93506a7f0beee181de830f576edec7bce36a3ef5aee4551d37492e95d6e77c3",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 420
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23356666",
+      "sha256": "4b2dd684c8a1526571ed7a7235e0189cb37386a2e69540f0d8bf0262c8601886",
+      "reviewedRanges": [
+        {
+          "start": 2123,
+          "end": 2461
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23364160",
+      "sha256": "4e236356719ff29b6481ad7f2ae7e1b07bc5bd24ff2c68acac864b768368166c",
+      "reviewedRanges": [
+        {
+          "start": 729,
+          "end": 1252
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23364160",
+      "sha256": "4e236356719ff29b6481ad7f2ae7e1b07bc5bd24ff2c68acac864b768368166c",
+      "reviewedRanges": [
+        {
+          "start": 1490,
+          "end": 1686
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23364160",
+      "sha256": "4e236356719ff29b6481ad7f2ae7e1b07bc5bd24ff2c68acac864b768368166c",
+      "reviewedRanges": [
+        {
+          "start": 1826,
+          "end": 2679
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23402160",
+      "sha256": "8b4025c8d215ab22d454cfda2c4343a8dc6101a62e2a6b52c5c3af2f24d1b6ed",
+      "reviewedRanges": [
+        {
+          "start": 310,
+          "end": 725
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23423780",
+      "sha256": "8d6827a9a0a655042c7274ec31e14167101526ff876ae928e1c59c7fec07c87f",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 342
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23391016",
+      "sha256": "1e2f98a7129f5cebbc5856da4486fe98d45de06fb0a5c865d3a5881e4d793f7a",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 540
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23844232",
+      "sha256": "191b01c7d5a3feba18f990d808afccd659cdff3a372261823fb94ad38de4b1e6",
+      "reviewedRanges": [
+        {
+          "start": 774,
+          "end": 1156
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23844232",
+      "sha256": "191b01c7d5a3feba18f990d808afccd659cdff3a372261823fb94ad38de4b1e6",
+      "reviewedRanges": [
+        {
+          "start": 1725,
+          "end": 2124
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23690822",
+      "sha256": "8329d76839cbf399153322f9bbb8765179b50a8bc1f8b2be7001b49c729bb59c",
+      "reviewedRanges": [
+        {
+          "start": 2546,
+          "end": 2708
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23702059",
+      "sha256": "288f40223af2fbdefa01279dbac8d53164760aff965357526870f7e2b47dbe42",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 267
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23702059",
+      "sha256": "288f40223af2fbdefa01279dbac8d53164760aff965357526870f7e2b47dbe42",
+      "reviewedRanges": [
+        {
+          "start": 1078,
+          "end": 1286
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23702059",
+      "sha256": "288f40223af2fbdefa01279dbac8d53164760aff965357526870f7e2b47dbe42",
+      "reviewedRanges": [
+        {
+          "start": 2183,
+          "end": 2735
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23702539",
+      "sha256": "9963bdfb8fea17b84422ed873f257b190e8ae3237e1019333a28007417b67b14",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 593
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23702539",
+      "sha256": "9963bdfb8fea17b84422ed873f257b190e8ae3237e1019333a28007417b67b14",
+      "reviewedRanges": [
+        {
+          "start": 2501,
+          "end": 2919
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-24084491",
+      "sha256": "74895f6e77071b87a7f7f562cb34932a4017d0fe30bf362bbb2aedd86f8703c9",
+      "reviewedRanges": [
+        {
+          "start": 1410,
+          "end": 2134
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23713664",
+      "sha256": "0633266e5acbd42673f574de2a0392457b36a7ed54858267ba0798999854f3d0",
+      "reviewedRanges": [
+        {
+          "start": 2111,
+          "end": 2903
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23796831",
+      "sha256": "e516bc9992083ba7e0aa396b5cfa09e308549712e66700b63ec3e5204294e2fc",
+      "reviewedRanges": [
+        {
+          "start": 1990,
+          "end": 2356
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23807763",
+      "sha256": "0d6bb08142d6f0823a716c1dcb8804a0318b51e9cb319d112f03aad67b24b96f",
+      "reviewedRanges": [
+        {
+          "start": 228,
+          "end": 908
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23807763",
+      "sha256": "0d6bb08142d6f0823a716c1dcb8804a0318b51e9cb319d112f03aad67b24b96f",
+      "reviewedRanges": [
+        {
+          "start": 2468,
+          "end": 2657
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-24754047",
+      "sha256": "08e93462727124699492c7b7c0383517eb846ff6767497fe36cb1123fa9bc534",
+      "reviewedRanges": [
+        {
+          "start": 2621,
+          "end": 2909
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-27160733",
+      "sha256": "ae84099560d007e20e45a37f96f4afa681a82f7b36e1f0ceb411980692e6b659",
+      "reviewedRanges": [
+        {
+          "start": 1051,
+          "end": 1208
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23702059",
+      "sha256": "288f40223af2fbdefa01279dbac8d53164760aff965357526870f7e2b47dbe42",
+      "reviewedRanges": [
+        {
+          "start": 113,
+          "end": 267
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23833045",
+      "sha256": "db29bda597441fbfe765203c147e49c9a5396ca6bd18697f5c9d4e34d58bfd5a",
+      "reviewedRanges": [
+        {
+          "start": 1617,
+          "end": 2051
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23844232",
+      "sha256": "191b01c7d5a3feba18f990d808afccd659cdff3a372261823fb94ad38de4b1e6",
+      "reviewedRanges": [
+        {
+          "start": 270,
+          "end": 456
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-23844232",
+      "sha256": "191b01c7d5a3feba18f990d808afccd659cdff3a372261823fb94ad38de4b1e6",
+      "reviewedRanges": [
+        {
+          "start": 653,
+          "end": 1156
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-24404166",
+      "sha256": "fea10c9af9fae2931f8df6195a39f2a7512d4cf596eeeaa3d784c9a1c5a04946",
+      "reviewedRanges": [
+        {
+          "start": 2528,
+          "end": 3063
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-24407188",
+      "sha256": "6907d250cb9642184ab84a1eb17f55d7e65d9162748d86cd10c0d06bde1aaf27",
+      "reviewedRanges": [
+        {
+          "start": 0,
+          "end": 156
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-24407188",
+      "sha256": "6907d250cb9642184ab84a1eb17f55d7e65d9162748d86cd10c0d06bde1aaf27",
+      "reviewedRanges": [
+        {
+          "start": 409,
+          "end": 1347
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-27308835",
+      "sha256": "5470939231c182e0f643bc30822f4f399d47f6710e4e801a61ccbd79238b1ceb",
+      "reviewedRanges": [
+        {
+          "start": 764,
+          "end": 882
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-27308835",
+      "sha256": "5470939231c182e0f643bc30822f4f399d47f6710e4e801a61ccbd79238b1ceb",
+      "reviewedRanges": [
+        {
+          "start": 1061,
+          "end": 1761
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-27308835",
+      "sha256": "5470939231c182e0f643bc30822f4f399d47f6710e4e801a61ccbd79238b1ceb",
+      "reviewedRanges": [
+        {
+          "start": 2154,
+          "end": 2771
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-27310310",
+      "sha256": "917c8117470b4ad2fb838c5893d26cb0ed1591bad5e25b4b1a30ab1c9b6f90a3",
+      "reviewedRanges": [
+        {
+          "start": 1121,
+          "end": 1778
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-25581812",
+      "sha256": "33da2958e944cff0a1f04438f161f3d1f5a6df673e62bc9d6e988e00ba277a60",
+      "reviewedRanges": [
+        {
+          "start": 45,
+          "end": 650
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-27595545",
+      "sha256": "7300eb04cef112bae90bdce57be706eb3025a573e52390e7ba528e29082fdef2",
+      "reviewedRanges": [
+        {
+          "start": 2707,
+          "end": 2928
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-27790919",
+      "sha256": "4878d567f403a5600b2f47d9952ffc6b2bf8f5cb82e2595456bf00dd99a14f06",
+      "reviewedRanges": [
+        {
+          "start": 1005,
+          "end": 1531
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-27790919",
+      "sha256": "4878d567f403a5600b2f47d9952ffc6b2bf8f5cb82e2595456bf00dd99a14f06",
+      "reviewedRanges": [
+        {
+          "start": 2023,
+          "end": 2285
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-27790919",
+      "sha256": "4878d567f403a5600b2f47d9952ffc6b2bf8f5cb82e2595456bf00dd99a14f06",
+      "reviewedRanges": [
+        {
+          "start": 1531,
+          "end": 3100
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-27767314",
+      "sha256": "a1a8dbd67e35965328185465afe28629d959be022c0678a1d2e4469b1dc54a97",
+      "reviewedRanges": [
+        {
+          "start": 839,
+          "end": 1198
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-47993911",
+      "sha256": "1b712aa55f841d0c9562d9fa9beeddcc9bd5a113ab72452cf9adb7e6bfbec133",
+      "reviewedRanges": [
+        {
+          "start": 431,
+          "end": 614
+        }
+      ],
+      "method": "第五组新声明实际代码点切片二读（含指出越皇尸体场所/董璇儿承受光柱/田公子目的旁白等纠正的补充源段）；只覆盖列明范围。"
+    },
+    {
+      "chapterId": "qq-20607808",
+      "sha256": "96f226564f827d56972d91fbf3431ac7dcbe738efd0d1f60360b09ad27d1a241",
+      "reviewedRanges": [
+        {
+          "start": 1582,
+          "end": 1795
+        }
+      ],
+      "method": "八条遗漏落点核对时实际原文复读；只记录明确范围。"
+    },
+    {
+      "chapterId": "qq-20651393",
+      "sha256": "46c6bd4599d7037c4094c8a8cd41eec984220e912ea9e6f28dc262a629998e84",
+      "reviewedRanges": [
+        {
+          "start": 367,
+          "end": 424
+        }
+      ],
+      "method": "八条遗漏落点核对时实际原文复读；只记录明确范围。"
+    },
+    {
+      "chapterId": "qq-20711961",
+      "sha256": "781ca966817af85c8f984d9ce0b5e1cff17cdd419e1608af03279730d363fb7a",
+      "reviewedRanges": [
+        {
+          "start": 980,
+          "end": 1650
+        }
+      ],
+      "method": "八条遗漏落点核对时实际原文复读；只记录明确范围。"
+    },
+    {
+      "chapterId": "qq-20711961",
+      "sha256": "781ca966817af85c8f984d9ce0b5e1cff17cdd419e1608af03279730d363fb7a",
+      "reviewedRanges": [
+        {
+          "start": 1650,
+          "end": 2400
+        }
+      ],
+      "method": "八条遗漏落点核对时实际原文复读；只记录明确范围。"
+    },
+    {
+      "chapterId": "qq-21471370",
+      "sha256": "7ae911c5c6f1a08e4e4a7e6c2b3e19f25de26f186972bff1c09581177bdf5612",
+      "reviewedRanges": [
+        {
+          "start": 2250,
+          "end": 2490
+        }
+      ],
+      "method": "八条遗漏落点核对时实际原文复读；只记录明确范围。"
     }
   ],
   "boundedCorrections": [
