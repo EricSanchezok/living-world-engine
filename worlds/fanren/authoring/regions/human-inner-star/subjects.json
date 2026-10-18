@@ -4564,10 +4564,13 @@
     "openingState": "t0-state-or-ownership-underdetermined",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "innerstar-later-fire-path-bargain"
+      "innerstar-later-fire-path-bargain",
+      "innerstar-chen-guide-and-miaohe"
     ],
-    "aliases": [],
-    "reason": "三阳老魔与青阳秘雷有关联，元瑶是否为亲近子弟仅蛮据物推测；T0年龄修为与位置尚不足。"
+    "aliases": [
+      "三阳上人"
+    ],
+    "reason": "三阳老魔/上人为连续青阳门线称名；辰明确自承其弟子，后向师侄称祖师，不造另一位无名祖师。"
   },
   {
     "id": "innerstar-qingyang-reference",
@@ -4576,7 +4579,8 @@
     "openingState": "t0-state-or-ownership-underdetermined",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "innerstar-later-fire-path-bargain"
+      "innerstar-later-fire-path-bargain",
+      "innerstar-chen-guide-and-miaohe"
     ],
     "aliases": [],
     "reason": "青阳门制雷关系为明确资料，仍无本段T0具体地理和名单，不与大晋泰阳门或其他青阳名自动合并。"
@@ -6325,38 +6329,470 @@
   },
   {
     "id": "innerstar-late-port-gan",
-    "label": "港口甘姓长辈",
+    "label": "甘霖",
     "kind": "person-reference",
     "openingState": "t0-state-or-ownership-underdetermined",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "innerstar-late-port-politics"
+      "innerstar-late-port-politics",
+      "innerstar-huangsha-return-contact"
     ],
-    "aliases": [],
-    "reason": "灰白双目、外观似盲不是医学确定失明；不和大晋甘家成员自动合一。"
+    "aliases": [
+      "甘姓长辈"
+    ],
+    "reason": "下章自报甘霖黄沙长老，沿港口同人；T0年龄/修为/职务未定。"
   },
   {
     "id": "innerstar-late-port-hun",
-    "label": "港口语境混老魔",
+    "label": "混老魔",
     "kind": "person-reference",
     "openingState": "t0-state-or-ownership-underdetermined",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "innerstar-late-port-politics"
+      "innerstar-late-port-politics",
+      "innerstar-later-void-release"
     ],
     "aliases": [],
-    "reason": "此时只被提名，不能无据与混元/极阴/六道任一相似称号合并。"
+    "reason": "甘据焚火声势辨本人、火云修士后遭冰凤灭杀；不与六道等相似号合并。"
   },
   {
     "id": "innerstar-late-port-reference",
-    "label": "虚天再现的无名港口",
+    "label": "苦门岛港口",
     "kind": "place-reference",
     "openingState": "t0-state-or-ownership-underdetermined",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "innerstar-late-port-politics"
+      "innerstar-late-port-politics",
+      "innerstar-huangsha-return-contact"
     ],
     "aliases": [],
-    "reason": "只记该次匿名岛港，未假造开篇岛名或必发天象。"
+    "reason": "下章连续从同港入苦门内陆，非另一个匿名岛港；T0港口建立年代未定。"
+  },
+  {
+    "id": "innerstar-shi-xuan",
+    "label": "石宣",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-huangsha-return-contact"
+    ],
+    "aliases": [],
+    "reason": "青衫结丹老者当年与马师兄处理剿令，非甘霖；旧令相对后期二百年不证T0已在任。"
+  },
+  {
+    "id": "innerstar-huangsha-sect",
+    "label": "黄沙门",
+    "kind": "organization-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-huangsha-return-contact"
+    ],
+    "aliases": [],
+    "reason": "苦门后期独占门派，不并慕兰黄沙部或其他黄沙宗。"
+  },
+  {
+    "id": "innerstar-kumen-island",
+    "label": "苦门岛",
+    "kind": "place-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-huangsha-return-contact"
+    ],
+    "aliases": [],
+    "reason": "后来探知地理与大城市，当前政属/城建期不能据该段定。"
+  },
+  {
+    "id": "innerstar-guixing-island",
+    "label": "癸星岛",
+    "kind": "place-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-huangsha-return-contact"
+    ],
+    "aliases": [],
+    "reason": "内十二成员，苦门以北数百万里；与魁星字音相似但两地明确分开。"
+  },
+  {
+    "id": "innerstar-inner-twelve",
+    "label": "内十二星岛",
+    "kind": "place-group-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-huangsha-return-contact"
+    ],
+    "aliases": [],
+    "reason": "一组星岛而非单岛，只明确成员癸星，不凭名称补全名单。"
+  },
+  {
+    "id": "innerstar-tian-wen-husband",
+    "label": "田姓儒雅男子",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-tian-family-transit"
+    ],
+    "aliases": [],
+    "reason": "文思月此时的丈夫与女父，不是她早期已亡首夫；全名未给。"
+  },
+  {
+    "id": "innerstar-late-zhang-transit",
+    "label": "张姓传送执事",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-tian-family-transit",
+      "innerstar-guest-token-and-penalty"
+    ],
+    "aliases": [
+      "阴厉汉子"
+    ],
+    "reason": "明确结丹初期、阴厉高瘦；不与早期秃顶顾/儒雅乾混同。"
+  },
+  {
+    "id": "innerstar-late-huang-transit",
+    "label": "黄姓传送执事",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-tian-family-transit",
+      "innerstar-guest-token-and-penalty"
+    ],
+    "aliases": [],
+    "reason": "婴儿面老者，连续称黄兄；自称他们刚结丹，但本段未给精确小境阶。"
+  },
+  {
+    "id": "innerstar-yinsha-guard",
+    "label": "银鲨岛披发守者",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-tian-family-transit"
+    ],
+    "aliases": [],
+    "reason": "另一端星宫结丹中期守者，非殿内张/黄两人。"
+  },
+  {
+    "id": "innerstar-law-enforcement-hall",
+    "label": "星宫执法殿",
+    "kind": "organization-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-guest-token-and-penalty"
+    ],
+    "aliases": [],
+    "reason": "处罚机构依温口述，不能把处罚命令当已执行或全员同罚。"
+  },
+  {
+    "id": "innerstar-wen-guest-token",
+    "label": "温青暂借客卿金令",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-guest-token-and-penalty"
+    ],
+    "aliases": [],
+    "reason": "仅后来借给韩，权利范围按所宣授权及实际承认，非所有资源物权。"
+  },
+  {
+    "id": "canon-great-shift-token",
+    "label": "大挪移令",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-guest-token-and-penalty"
+    ],
+    "aliases": [],
+    "reason": "沿韩实际所持远传护身令，当前所见不定T0所有权；不与单次传送符混。"
+  },
+  {
+    "id": "innerstar-ling-dunyin-talisman",
+    "label": "凌玉灵遁音符",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-ling-return-message"
+    ],
+    "aliases": [],
+    "reason": "本次被韩抓碎后在双圣处复现的特制符，不能泛化普通传音符。"
+  },
+  {
+    "id": "innerstar-star-couple-method",
+    "label": "星宫独门双修秘术",
+    "kind": "method-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-star-couple-tradition"
+    ],
+    "aliases": [],
+    "reason": "旧传承路径，不是粉红简的引龙/颠凤；非保证进阶。"
+  },
+  {
+    "id": "innerstar-lingming-method",
+    "label": "灵暝决",
+    "kind": "method-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-saints-late-plans"
+    ],
+    "aliases": [],
+    "reason": "温青已修的预感功法，准确性为伴侣评价；不是无条件读真值。"
+  },
+  {
+    "id": "innerstar-fenhuo-method",
+    "label": "焚火大法",
+    "kind": "method-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-void-release"
+    ],
+    "aliases": [],
+    "reason": "混老魔身份经甘由该火云声势判断，T0修习阶段未明。"
+  },
+  {
+    "id": "innerstar-bailu-fish-kind",
+    "label": "白鹭鱼妖",
+    "kind": "species-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-tian-family-transit"
+    ],
+    "aliases": [],
+    "reason": "内丹为田夫妇治女所寻，尚未捕获；不凭求药生一只已死资源。"
+  },
+  {
+    "id": "innerstar-chen-jing",
+    "label": "辰京",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-chen-guide-and-miaohe"
+    ],
+    "aliases": [],
+    "reason": "三阳弟子、该时丹初；后出师与T0出生/境界未定。"
+  },
+  {
+    "id": "innerstar-chen-yan-junior",
+    "label": "言姓师侄",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-chen-guide-and-miaohe"
+    ],
+    "aliases": [],
+    "reason": "与辰同行筑基后期女修，外貌十七八不是实际年龄。"
+  },
+  {
+    "id": "innerstar-chen-white-junior",
+    "label": "辰京同行白发老者",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-chen-guide-and-miaohe"
+    ],
+    "aliases": [],
+    "reason": "筑基后期，非同城元婴黄昆或传送执事黄。"
+  },
+  {
+    "id": "innerstar-huang-kun",
+    "label": "黄昆",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-miaohe-huang-capture"
+    ],
+    "aliases": [
+      "白兄（本段称姓异文）"
+    ],
+    "reason": "自报离龙黄昆，前同伴称白兄是同一连续持针者称姓异文；不新造白姓第三元婴。"
+  },
+  {
+    "id": "innerstar-lilong-island",
+    "label": "离龙岛",
+    "kind": "place-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-miaohe-huang-capture"
+    ],
+    "aliases": [],
+    "reason": "黄自报岛属，T0具体位置/治理未明。"
+  },
+  {
+    "id": "innerstar-leikong-island",
+    "label": "雷空岛",
+    "kind": "place-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-offshore-market"
+    ],
+    "aliases": [],
+    "reason": "连续到达/离岛为雷空，正文数句误称碧灵保为源异文。"
+  },
+  {
+    "id": "innerstar-leikong-city",
+    "label": "雷空石城",
+    "kind": "place-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-offshore-market"
+    ],
+    "aliases": [],
+    "reason": "此时新建十余里，不能将新城/八塔前置T0。"
+  },
+  {
+    "id": "innerstar-leikong-eight-towers",
+    "label": "雷空八塔护城阵",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-offshore-market"
+    ],
+    "aliases": [],
+    "reason": "八塔各镇守、有开阵条件；不是知塔名即免除能量与守者。"
+  },
+  {
+    "id": "innerstar-huang-baiai-needle",
+    "label": "白哀针",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-mind-surveillance",
+      "innerstar-miaohe-huang-capture"
+    ],
+    "aliases": [],
+    "reason": "出针者同场被称白兄后自报黄，针与之后牛毛白丝是否一套未明。"
+  },
+  {
+    "id": "innerstar-huang-white-needles",
+    "label": "黄昆白丝细针",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-miaohe-huang-capture"
+    ],
+    "aliases": [],
+    "reason": "同场出针变丝网，后冰封灵性失；不凭颜色并白哀单针。"
+  },
+  {
+    "id": "innerstar-huang-silver-wheel",
+    "label": "黄昆银轮",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-miaohe-huang-capture"
+    ],
+    "aliases": [],
+    "reason": "原文前段主语回黄袍后放银轮，非妙鹤玉锤；本次被斩。"
+  },
+  {
+    "id": "innerstar-miaohe-jade-hammer",
+    "label": "妙鹤玉锤",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-miaohe-huang-capture"
+    ],
+    "aliases": [],
+    "reason": "碧绿锤后冰封，非黄昆器物。"
+  },
+  {
+    "id": "innerstar-miaohe-red-shield",
+    "label": "妙鹤红盾",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-miaohe-huang-capture"
+    ],
+    "aliases": [],
+    "reason": "同场护身被傀儡穿透，不成无敌防御。"
+  },
+  {
+    "id": "innerstar-later-blue-feather",
+    "label": "海底青色翎羽",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-sea-feather-and-yingli"
+    ],
+    "aliases": [],
+    "reason": "巨禽争斗后韩所得唯一落羽；起初来源层级仅推测，不T0给韩。"
+  },
+  {
+    "id": "innerstar-later-yingli-six",
+    "label": "辰京所遇六级婴鲤",
+    "kind": "creature-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-sea-feather-and-yingli"
+    ],
+    "aliases": [],
+    "reason": "比旧只更大，另一个具体个体；不与种类或早期被猎者合并。"
+  },
+  {
+    "id": "innerstar-yingli-yellow-drum",
+    "label": "六级婴鲤黄鼓",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-sea-feather-and-yingli"
+    ],
+    "aliases": [],
+    "reason": "四持器中唯一古宝，刀剑旗属顶阶法器；不泛化每只同装备。"
+  },
+  {
+    "id": "innerstar-han-mind-thousand",
+    "label": "韩立神识化千",
+    "kind": "method-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-mind-surveillance"
+    ],
+    "aliases": [],
+    "reason": "借大衍自悟，有元神指挥与距离限制，T0不发给十岁韩。"
+  },
+  {
+    "id": "innerstar-mind-living-attachment",
+    "label": "神念寄附通灵活物",
+    "kind": "method-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-mind-surveillance"
+    ],
+    "aliases": [],
+    "reason": "独立分神有期限，普通灵物不自动服从；受祭炼者可控制。"
   }
 ]
