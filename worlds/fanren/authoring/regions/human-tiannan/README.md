@@ -19,3 +19,5 @@
 元武旧案、御灵追婴回宗与阗天赴会158条逐项处置；本轮158条具体处置见 [candidate-review-2026-10-18-wood-return.json](candidate-review-2026-10-18-wood-return.json)。并非全区域或真实游玩验收。
 
 阗天交换、孙家后裔选择、苍坤行程169条逐项原段审定；本轮169条具体处置见 [candidate-review-2026-10-18-fair-cangkun.json](candidate-review-2026-10-18-fair-cangkun.json)。并非全区域或真实游玩验收。
+
+北凉婚约、殿议与黄龙山前段203条逐项原段核对；本轮203条具体处置见 [candidate-review-2026-10-18-border-meeting.json](candidate-review-2026-10-18-border-meeting.json)。并非全区域或真实游玩验收。
