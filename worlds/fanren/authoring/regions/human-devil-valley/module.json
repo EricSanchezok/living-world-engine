@@ -6,7 +6,7 @@
       "name": "万岭山脉",
       "kind": "location",
       "placement": "dongyu-changzhou",
-      "description": "山岭层叠，林谷间时有瘴气，西北深处藏着坠魔谷；各处采药小路不能直达古禁内部。",
+      "description": "昌州盆地中央的广大山脉，山腹长期有周期退散的毒瘴，外围通常较稀薄，西北深处藏着坠魔谷；采药小路不能直达古禁内部。",
       "facts": [],
       "meters": [],
       "ratings": [],
@@ -36,9 +36,9 @@
           "predicate": "travel-condition",
           "value": {
             "kind": "text",
-            "value": "沿城外山道行进，常人需两日、修士按实际遁速；瘴气须看当天风向准备防护。"
+            "value": "沿城外山道行进，常人需两日、修士按实际遁速；路线限外围较稀薄地带，仍须观察局部瘴气并备防护，不能借此穿越浓瘴山腹。"
           },
-          "description": "沿城外山道行进，常人需两日、修士按实际遁速；瘴气须看当天风向准备防护。",
+          "description": "沿城外山道行进，常人需两日、修士按实际遁速；路线限外围较稀薄地带，仍须观察局部瘴气并备防护，不能借此穿越浓瘴山腹。",
           "access": {
             "kind": "public"
           }
@@ -53,7 +53,7 @@
       "name": "问山庐",
       "kind": "location",
       "placement": "devil-wanling-mountains",
-      "description": "两间木屋依坡而建，门前挂着旧路标，供附近采药者停脚、比对山图。",
+      "description": "山脉外围瘴气较稀薄处的两间木屋，门前挂着旧路标，供附近采药者停脚、比对山图。",
       "facts": [
         {
           "id": "dv-foothill-lodge-route-dv-yehua-city",
@@ -72,9 +72,9 @@
           "predicate": "travel-condition",
           "value": {
             "kind": "text",
-            "value": "沿城外山道行进，常人需两日、修士按实际遁速；瘴气须看当天风向准备防护。"
+            "value": "沿城外山道行进，常人需两日、修士按实际遁速；路线限外围较稀薄地带，仍须观察局部瘴气并备防护，不能借此穿越浓瘴山腹。"
           },
-          "description": "沿城外山道行进，常人需两日、修士按实际遁速；瘴气须看当天风向准备防护。",
+          "description": "沿城外山道行进，常人需两日、修士按实际遁速；路线限外围较稀薄地带，仍须观察局部瘴气并备防护，不能借此穿越浓瘴山腹。",
           "access": {
             "kind": "public"
           }
@@ -120,9 +120,9 @@
           "predicate": "travel-condition",
           "value": {
             "kind": "text",
-            "value": "沿山岭旧路，需先跨过当日瘴气带；抵达谷口不等于进入外谷。"
+            "value": "沿旧路深入山脉，须按当前瘴气相位具备实际避毒、辨向和行路手段；护身耐毒不等于能认路，抵谷口仍未进入外谷。"
           },
-          "description": "沿山岭旧路，需先跨过当日瘴气带；抵达谷口不等于进入外谷。",
+          "description": "沿旧路深入山脉，须按当前瘴气相位具备实际避毒、辨向和行路手段；护身耐毒不等于能认路，抵谷口仍未进入外谷。",
           "access": {
             "kind": "public"
           }
@@ -174,21 +174,7 @@
       "kind": "location",
       "placement": "devil-wanling-mountains",
       "description": "古战场被重叠禁制包围，谷口空间裂缝明暗相间；外谷与深处内谷各有危险，地形辽阔而非一个房间。",
-      "facts": [
-        {
-          "id": "human-devil-valley-opening-cycle",
-          "predicate": "opening-cycle",
-          "value": {
-            "kind": "text",
-            "value": "当前不是约五十年一遇的较稳定年，距下一次较稳定窗口约十二人界年；较稳定时仍保留裂隙危险。"
-          },
-          "description": "当前不是约五十年一遇的较稳定年，距下一次较稳定窗口约十二人界年；较稳定时仍保留裂隙危险。",
-          "access": {
-            "kind": "discoverable",
-            "condition": "连续观察谷口变化或取得可信长期观测记录。"
-          }
-        }
-      ],
+      "facts": [],
       "meters": [],
       "ratings": [],
       "quantities": []
@@ -217,9 +203,9 @@
           "predicate": "travel-condition",
           "value": {
             "kind": "text",
-            "value": "沿山岭旧路，需先跨过当日瘴气带；抵达谷口不等于进入外谷。"
+            "value": "沿旧路深入山脉，须按当前瘴气相位具备实际避毒、辨向和行路手段；护身耐毒不等于能认路，抵谷口仍未进入外谷。"
           },
-          "description": "沿山岭旧路，需先跨过当日瘴气带；抵达谷口不等于进入外谷。",
+          "description": "沿旧路深入山脉，须按当前瘴气相位具备实际避毒、辨向和行路手段；护身耐毒不等于能认路，抵谷口仍未进入外谷。",
           "access": {
             "kind": "public"
           }
@@ -5800,6 +5786,21 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "canon-da-yan-valley-testimony",
+          "predicate": "remembered-testimony",
+          "value": {
+            "kind": "text",
+            "value": "自己没有亲入坠魔谷。旧日几位友人入谷遇古魔，只有一人的分神逃来讲述；自己听过此事但不知道谷中现时全貌。"
+          },
+          "description": "自己没有亲入坠魔谷。旧日几位友人入谷遇古魔，只有一人的分神逃来讲述；自己听过此事但不知道谷中现时全貌。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "canon-da-yan"
+            ]
+          }
         }
       ],
       "meters": [
@@ -5935,6 +5936,13 @@
               "description": "自身经历、修行和职务往来。",
               "sourceId": null,
               "step": 0
+            },
+            {
+              "id": "old-friend-testimony",
+              "kind": "observation",
+              "description": "旧日听逃归友人分神讲述入谷遇古魔的经历，自己并未随行。",
+              "sourceId": null,
+              "step": 0
             }
           ],
           "claims": [
@@ -6011,6 +6019,21 @@
               "confidence": 1,
               "evidenceIds": [
                 "prior-life"
+              ]
+            },
+            {
+              "id": "remembered-valley-testimony",
+              "subjectId": "self",
+              "predicate": "remembered-testimony",
+              "value": {
+                "kind": "text",
+                "value": "自己没有亲入坠魔谷。旧日几位友人入谷遇古魔，只有一人的分神逃来讲述；自己听过此事但不知道谷中现时全貌。"
+              },
+              "description": "自己没有亲入坠魔谷。旧日几位友人入谷遇古魔，只有一人的分神逃来讲述；自己听过此事但不知道谷中现时全貌。",
+              "stance": "believed",
+              "confidence": 0.9,
+              "evidenceIds": [
+                "old-friend-testimony"
               ]
             }
           ]
@@ -9811,11 +9834,17 @@
       "id": "dv-reputation-is-not-fate",
       "text": "坠魔谷的凶名、无人能归的概括、寻宝者自称的把握与必有重宝的诱劝，不是客观成功率或强制结局。实际风险按裂缝、禁制、古兽和行动条件结算。两仪阴环是避北极元光的一种手段；有据的其他宝物或多人防护阵也可尝试，但须拥有实际知识、装备与力量。",
       "severity": "hard"
+    },
+    {
+      "id": "dv-miasma-and-navigation",
+      "text": "万岭山脉山腹长期浓瘴剧毒且遮蔽辨向，外围较稀薄；当前程度取实际miasma-phase。抵御毒性不自动解决迷路，也不等于能在浓瘴中采药。退瘴期与谷口相对稳定期同步；谷口仍须探测或避让真实裂缝，不因稳定就安全。观察当前相位不自动获知完整未来周期。",
+      "severity": "hard"
     }
   ],
   "provenance": {
     "entity:devil-wanling-mountains": [
-      "dv-geography"
+      "dv-geography",
+      "dv-mountain-miasma"
     ],
     "entity:dv-yehua-city": [
       "dv-geography",
@@ -9920,7 +9949,8 @@
     "fact:dv-yehua-city-condition-dv-foothill-lodge": [
       "dv-geography",
       "dv-unstable-rifts",
-      "dv-opening-life"
+      "dv-opening-life",
+      "dv-mountain-miasma"
     ],
     "fact:dv-foothill-lodge-route-dv-yehua-city": [
       "dv-geography",
@@ -9930,7 +9960,8 @@
     "fact:dv-foothill-lodge-condition-dv-yehua-city": [
       "dv-geography",
       "dv-unstable-rifts",
-      "dv-opening-life"
+      "dv-opening-life",
+      "dv-mountain-miasma"
     ],
     "fact:dv-foothill-lodge-route-dv-tracing-room": [
       "dv-geography",
@@ -9960,7 +9991,8 @@
     "fact:dv-foothill-lodge-condition-dv-mouth": [
       "dv-geography",
       "dv-unstable-rifts",
-      "dv-opening-life"
+      "dv-opening-life",
+      "dv-mountain-miasma"
     ],
     "fact:dv-mouth-route-dv-foothill-lodge": [
       "dv-geography",
@@ -9970,7 +10002,8 @@
     "fact:dv-mouth-condition-dv-foothill-lodge": [
       "dv-geography",
       "dv-unstable-rifts",
-      "dv-opening-life"
+      "dv-opening-life",
+      "dv-mountain-miasma"
     ],
     "fact:dv-mouth-route-dv-outer": [
       "dv-geography",
@@ -10411,10 +10444,6 @@
       "dv-geography",
       "dv-unstable-rifts",
       "dv-opening-life"
-    ],
-    "fact:human-devil-valley-opening-cycle": [
-      "dv-unstable-rifts",
-      "dv-opening-values"
     ],
     "entity:dv-grey-gap": [
       "dv-altar-and-grey-gap"
@@ -11883,6 +11912,21 @@
     "law:dv-reputation-is-not-fate": [
       "dv-valley-reputation",
       "dv-liangyi-alternatives"
+    ],
+    "periodic:dv-mountain-miasma-cycle": [
+      "dv-mountain-miasma",
+      "dv-miasma-cycle-calibration"
+    ],
+    "periodic:dv-valley-rift-cycle": [
+      "dv-mountain-miasma",
+      "dv-miasma-cycle-calibration"
+    ],
+    "law:dv-miasma-and-navigation": [
+      "dv-mountain-miasma",
+      "dv-miasma-cycle-calibration"
+    ],
+    "fact:canon-da-yan-valley-testimony": [
+      "dv-dayan-friends-history"
     ]
   },
   "quantityDefinitions": [
@@ -11950,6 +11994,66 @@
       ],
       "consumption_law_ids": [
         "resource-conservation"
+      ]
+    }
+  ],
+  "periodicProperties": [
+    {
+      "id": "dv-mountain-miasma-cycle",
+      "subject_id": "devil-wanling-mountains",
+      "predicate": "miasma-phase",
+      "access": {
+        "kind": "discoverable",
+        "condition": "在万岭山脉实地观察当前瘴气；只得当前相位，不因见到瘴气就知道未来精确日期。"
+      },
+      "period_seconds": 1576800000,
+      "initial_phase_seconds": 1166832000,
+      "phases": [
+        {
+          "starts_at_seconds": 0,
+          "value": {
+            "kind": "text",
+            "value": "usual"
+          },
+          "description": "山腹浓密毒瘴遮蔽方向，外围较稀薄；深入须有避毒和辨向手段。"
+        },
+        {
+          "starts_at_seconds": 1545264000,
+          "value": {
+            "kind": "text",
+            "value": "quieter"
+          },
+          "description": "山脉主瘴退散，采药通行条件改善；谷口仍有空间裂缝。"
+        }
+      ]
+    },
+    {
+      "id": "dv-valley-rift-cycle",
+      "subject_id": "human-devil-valley",
+      "predicate": "rift-phase",
+      "access": {
+        "kind": "discoverable",
+        "condition": "在谷口实地检查当前裂缝波动，或取得可信现时观察；不凭一次目睹获得未来周期时间。"
+      },
+      "period_seconds": 1576800000,
+      "initial_phase_seconds": 1166832000,
+      "phases": [
+        {
+          "starts_at_seconds": 0,
+          "value": {
+            "kind": "text",
+            "value": "usual"
+          },
+          "description": "谷口处于通常波动期，裂缝数量与位置变动不定。"
+        },
+        {
+          "starts_at_seconds": 1545264000,
+          "value": {
+            "kind": "text",
+            "value": "quieter"
+          },
+          "description": "谷口处于相对稳定期，仍有危险裂缝，稳定不等于安全。"
+        }
       ]
     }
   ]

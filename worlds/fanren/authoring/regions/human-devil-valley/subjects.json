@@ -128,9 +128,13 @@
     "openingState": "present",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "dv-geography"
+      "dv-geography",
+      "dv-mountain-miasma"
     ],
-    "aliases": [],
+    "aliases": [
+      "万灵山（同段异写）",
+      "万领山（同段异写）"
+    ],
     "reason": "古迹/旧魂/物种有据回溯；当前人员细节、资产及生活明确标定或原创。"
   },
   {
@@ -2679,5 +2683,56 @@
     ],
     "aliases": [],
     "reason": "韩立称昔年以天外陨铁炼两仪环，南陇认可宝物身份；未给开篇生死位置，不生成无据活人。"
+  },
+  {
+    "id": "dv-historical-dayan-friends",
+    "label": "大衍旧日入谷友人",
+    "kind": "historical-group",
+    "openingState": "historical-testimony",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "dv-dayan-friends-history"
+    ],
+    "aliases": [],
+    "reason": "数名而非已知确数，未实名不合并苍坤或后期探谷者。"
+  },
+  {
+    "id": "dv-historical-friend-fragment",
+    "label": "大衍友人的逃归分神",
+    "kind": "historical-soul-fragment",
+    "openingState": "later-fate-undetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "dv-dayan-friends-history"
+    ],
+    "aliases": [],
+    "reason": "只知曾逃来报信，开篇仍否存续不明，不新造永生NPC。"
+  },
+  {
+    "id": "dv-later-han-demon-corpse",
+    "label": "韩立所控天煞魔尸",
+    "kind": "creature",
+    "openingState": "t0-ownership-and-state-undetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "dv-demon-corpse-identity"
+    ],
+    "aliases": [
+      "天绝魔尸",
+      "天魔煞尸"
+    ],
+    "reason": "三种名称为连续行动中同尸，不前置后期控制或简单神识。"
+  },
+  {
+    "id": "dv-unnamed-market-family",
+    "label": "万岭坊市未名经营家族",
+    "kind": "organization",
+    "openingState": "t0-existence-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "dv-market-family-boundary"
+    ],
+    "aliases": [],
+    "reason": "后期经营日久，具体成立年代不明，不据此造确定开篇家主。"
   }
 ]
