@@ -257,3 +257,7 @@
 | thunder-wangu-crisis-fuel | 万古危急阵用石 | container | thunder-wangu-crisis-entry |
 | canon-greenlight-yuan-message-case | 元姓驻守的万里符匣 | container | canon-greenlight-yuan |
 | canon-qian-ji-zi-message-case | 千机子的万里符匣 | container | canon-qian-ji-zi |
+| thunder-fireyang-community | 火阳支族 | social-group | thunder-fireyang-settlement |
+| thunder-fireyang-port | 火阳天然港 | location | thunder-firecloud-island |
+| thunder-fireyang-earthfire-cellar | 火阳地火窖 | location | thunder-fireyang-settlement |
+| thunder-lieyang-pill-stock | 地火窖中的烈阳神丹 | container | thunder-fireyang-earthfire-cellar |

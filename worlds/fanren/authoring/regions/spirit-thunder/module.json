@@ -19761,6 +19761,30 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "thunder-fireyang-settlement-route-thunder-fireyang-port",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-fireyang-port"
+          },
+          "description": "住区有实际小路通向港口。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-fireyang-settlement-route-thunder-fireyang-earthfire-cellar",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-fireyang-earthfire-cellar"
+          },
+          "description": "住区有实际小路通向地火窖。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [],
@@ -20699,6 +20723,18 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "thunder-fireyang-herbalist-pill-custody",
+          "predicate": "custody-authority",
+          "value": {
+            "kind": "text",
+            "value": "受托维护地火窖；可为部族重大救治议价，须明确部族所得和疗效边界才交付旧丹，不能作为私物赠送。"
+          },
+          "description": "受托维护及有边界的议价权。",
+          "access": {
+            "kind": "private"
+          }
         }
       ],
       "meters": [
@@ -20811,6 +20847,30 @@
               "name": "旧沿岸航图",
               "description": "自己的旧图，知道海岸而不知古阵核心的准确所在。",
               "status": "observed"
+            },
+            {
+              "id": "known-thunder-fireyang-community",
+              "name": "火阳支族",
+              "description": "生活在火云岛的娲氏支族，港口与地火窖由族中共同保有。",
+              "status": "observed"
+            },
+            {
+              "id": "known-thunder-fireyang-port",
+              "name": "火阳天然港",
+              "description": "避风小湾内泊舟，岸边数座石屋旁立百丈石柱，柱顶小木屋可望近海。",
+              "status": "observed"
+            },
+            {
+              "id": "known-thunder-fireyang-earthfire-cellar",
+              "name": "火阳地火窖",
+              "description": "石阶尽头的热窖以地火温养族中旧丹，火口旁留有照看丹匣的位置。",
+              "status": "observed"
+            },
+            {
+              "id": "known-thunder-lieyang-pill-stock",
+              "name": "地火窖中的烈阳神丹",
+              "description": "丹匣内只有一颗火性旧丹，长年受地火温养。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -20861,6 +20921,30 @@
               "canonical_entity_ids": [
                 "thunder-coastal-notes"
               ]
+            },
+            {
+              "local_entity_id": "known-thunder-fireyang-community",
+              "canonical_entity_ids": [
+                "thunder-fireyang-community"
+              ]
+            },
+            {
+              "local_entity_id": "known-thunder-fireyang-port",
+              "canonical_entity_ids": [
+                "thunder-fireyang-port"
+              ]
+            },
+            {
+              "local_entity_id": "known-thunder-fireyang-earthfire-cellar",
+              "canonical_entity_ids": [
+                "thunder-fireyang-earthfire-cellar"
+              ]
+            },
+            {
+              "local_entity_id": "known-thunder-lieyang-pill-stock",
+              "canonical_entity_ids": [
+                "thunder-lieyang-pill-stock"
+              ]
             }
           ],
           "evidence": [
@@ -20882,6 +20966,21 @@
                 "value": "采药、止血药制作、近岸辨路与结丹修行。"
               },
               "description": "采药、止血药制作、近岸辨路与结丹修行。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "fireyang-pill-custody",
+              "subjectId": "self",
+              "predicate": "custody-authority",
+              "value": {
+                "kind": "text",
+                "value": "受托维护地火窖；可为部族重大救治议价，须明确部族所得和疗效边界才交付旧丹，不能作为私物赠送。"
+              },
+              "description": "受托维护及有边界的议价权。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -23230,6 +23329,155 @@
         {
           "definition_id": "thunder-seal-sheet",
           "amount": 4
+        }
+      ]
+    },
+    {
+      "id": "thunder-fireyang-community",
+      "name": "火阳支族",
+      "kind": "social-group",
+      "placement": "thunder-fireyang-settlement",
+      "description": "生活在火云岛的娲氏支族，港口与地火窖由族中共同保有。",
+      "facts": [
+        {
+          "id": "thunder-fireyang-community-affiliation",
+          "predicate": "affiliation",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-washi-people"
+          },
+          "description": "属于娲氏族群的一支。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-fireyang-port",
+      "name": "火阳天然港",
+      "kind": "location",
+      "placement": "thunder-firecloud-island",
+      "description": "避风小湾内泊舟，岸边数座石屋旁立百丈石柱，柱顶小木屋可望近海。",
+      "facts": [
+        {
+          "id": "thunder-fireyang-port-route",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-fireyang-settlement"
+          },
+          "description": "沿岸坡道通向住区。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-fireyang-port-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-fireyang-community"
+          },
+          "description": "港口归火阳支族共有。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-fireyang-earthfire-cellar",
+      "name": "火阳地火窖",
+      "kind": "location",
+      "placement": "thunder-fireyang-settlement",
+      "description": "石阶尽头的热窖以地火温养族中旧丹，火口旁留有照看丹匣的位置。",
+      "facts": [
+        {
+          "id": "thunder-fireyang-earthfire-cellar-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-fireyang-community"
+          },
+          "description": "地火窖属火阳支族。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-fireyang-earthfire-cellar-route",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-fireyang-settlement"
+          },
+          "description": "石阶上行通住区。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "thunder-lieyang-pill-stock",
+      "name": "地火窖中的烈阳神丹",
+      "kind": "container",
+      "placement": "thunder-fireyang-earthfire-cellar",
+      "description": "丹匣内只有一颗火性旧丹，长年受地火温养。",
+      "facts": [
+        {
+          "id": "thunder-lieyang-pill-stock-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-fireyang-community"
+          },
+          "description": "丹药为部族共有。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-lieyang-pill-stock-custodian",
+          "predicate": "custodian",
+          "value": {
+            "kind": "entity",
+            "entityId": "thunder-fireyang-herbalist"
+          },
+          "description": "芷鳞受托维护和议价，不能将族物当私产。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "thunder-lieyang-pill-stock-use-rule",
+          "predicate": "use-rule",
+          "value": {
+            "kind": "text",
+            "value": "取用须打开丹匣；服用消耗一颗，不能将丹匣和其中丹药重复计数。取出后不再受此窖地火温养。疗伤须依实际伤势、火性适配和炼化判断，祭司所称起死回生不能作为无条件复活保证，效果须有实际依据。"
+          },
+          "description": "服用扣除实际丹药，疗效依伤势与炼化。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "thunder-lieyang-pill",
+          "amount": 1
         }
       ]
     }
@@ -26214,7 +26462,8 @@
     ],
     "entity:thunder-fireyang-herbalist": [
       "thunder-current-life",
-      "thunder-current-values"
+      "thunder-current-values",
+      "thunder-fireyang-custody-at-opening"
     ],
     "fact:thunder-fireyang-herbalist-cultivation-state": [
       "thunder-current-life",
@@ -26639,6 +26888,59 @@
     ],
     "fact:canon-qian-ji-zi-message-case-known-recipient": [
       "thunder-current-life"
+    ],
+    "entity:thunder-fireyang-community": [
+      "thunder-ancient-lieyang-pill",
+      "thunder-fireyang-custody-at-opening"
+    ],
+    "fact:thunder-fireyang-community-affiliation": [
+      "thunder-fireyang-custody-at-opening"
+    ],
+    "entity:thunder-fireyang-port": [
+      "thunder-ancient-lieyang-pill",
+      "thunder-fireyang-custody-at-opening"
+    ],
+    "fact:thunder-fireyang-port-route": [
+      "thunder-fireyang-custody-at-opening"
+    ],
+    "entity:thunder-fireyang-earthfire-cellar": [
+      "thunder-ancient-lieyang-pill",
+      "thunder-fireyang-custody-at-opening"
+    ],
+    "fact:thunder-fireyang-earthfire-cellar-owned-by": [
+      "thunder-fireyang-custody-at-opening"
+    ],
+    "fact:thunder-fireyang-earthfire-cellar-route": [
+      "thunder-fireyang-custody-at-opening"
+    ],
+    "entity:thunder-lieyang-pill-stock": [
+      "thunder-ancient-lieyang-pill",
+      "thunder-fireyang-custody-at-opening"
+    ],
+    "fact:thunder-lieyang-pill-stock-owned-by": [
+      "thunder-fireyang-custody-at-opening"
+    ],
+    "fact:thunder-lieyang-pill-stock-custodian": [
+      "thunder-fireyang-custody-at-opening"
+    ],
+    "fact:thunder-lieyang-pill-stock-use-rule": [
+      "thunder-fireyang-custody-at-opening"
+    ],
+    "fact:thunder-fireyang-settlement-route-thunder-fireyang-port": [
+      "thunder-fireyang-custody-at-opening"
+    ],
+    "fact:thunder-fireyang-settlement-route-thunder-fireyang-earthfire-cellar": [
+      "thunder-fireyang-custody-at-opening"
+    ],
+    "fact:thunder-fireyang-herbalist-pill-custody": [
+      "thunder-fireyang-custody-at-opening"
+    ],
+    "quantity:thunder-lieyang-pill": [
+      "thunder-ancient-lieyang-pill",
+      "thunder-fireyang-custody-at-opening"
+    ],
+    "fact:thunder-fireyang-port-owned-by": [
+      "thunder-fireyang-custody-at-opening"
     ]
   },
   "quantityDefinitions": [
@@ -26701,6 +27003,17 @@
       "id": "thunder-food-ration",
       "name": "雷鸣行旅粮",
       "unit": "份",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    },
+    {
+      "id": "thunder-lieyang-pill",
+      "name": "烈阳神丹",
+      "unit": "颗",
       "production_law_ids": [
         "resource-conservation"
       ],
