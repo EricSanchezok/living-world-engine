@@ -25,6 +25,7 @@ export function assembleRegionalModules(baseInput: unknown, baseClaimInput: unkn
   const claims = z.array(authoredClaimSchema).parse(baseClaimInput);
   const provenance = structuredClone(base.provenance);
   const claimIds = new Set(claims.map(claim => claim.id));
+  const openingClaimIds = new Set(claims.filter(claim => claim.validAtOpening).map(claim => claim.id));
   const entities = new Map(template.entities.map(entity => [entity.id, entity]));
   const factIds = new Set(template.entities.flatMap(entity => entity.facts.map(fact => fact.id)));
   const lawIds = new Set(template.laws.laws.map(law => law.id));
@@ -44,8 +45,9 @@ export function assembleRegionalModules(baseInput: unknown, baseClaimInput: unkn
     moduleIds.add(region.id);
     for (const claim of regionClaims) {
       if (claimIds.has(claim.id)) throw new Error(`duplicate regional claim ${claim.id}`);
-      if (claim.status !== "reviewed" || !claim.validAtOpening) throw new Error(`unreviewed regional claim ${claim.id}`);
+      if (claim.status !== "reviewed") throw new Error(`unreviewed regional claim ${claim.id}`);
       claimIds.add(claim.id); claims.push(claim);
+      if (claim.validAtOpening) openingClaimIds.add(claim.id);
     }
     const required = new Map<string, string>();
     for (const entity of region.entities) {
@@ -121,6 +123,7 @@ export function assembleRegionalModules(baseInput: unknown, baseClaimInput: unkn
     for (const [key, destination] of required) {
       const refs = region.provenance[key];
       if (!refs?.length || refs.some(ref => !claimIds.has(ref))) throw new Error(`missing regional provenance ${key}`);
+      if (refs.some(ref => !openingClaimIds.has(ref))) throw new Error(`post-opening regional provenance ${key}`);
       provenance[destination] = [...new Set([...(provenance[destination] ?? []), ...refs])];
     }
     receipts.push({ moduleId: region.id, moduleHash: review.moduleHash, claimsHash: review.claimsHash, reviewer: review.reviewer });

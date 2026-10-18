@@ -22,6 +22,19 @@ function fixture() {
 }
 
 describe("regional deterministic assembly", () => {
+  it("retains an audited future record only in the authoring archive, never as opening provenance", () => {
+    const f = fixture();
+    const future = { ...f.claims[0]!, id: "future-store-fire", validAtOpening: false,
+      statement: "The later story describes a fire; it has not occurred at the opening." };
+    f.claims.push(future);
+    const merged = assembleRegionalModules(f.base, [], [{ module: f.module, claims: f.claims, review: f.review() }]);
+    expect(merged.claims).toContainEqual(future);
+    expect(Object.values(merged.module.provenance).flat()).not.toContain(future.id);
+    expect(merged.module.template.entities).toHaveLength(f.base.template.entities.length + 1);
+    f.module.provenance["entity:east-store"]!.push(future.id);
+    expect(() => assembleRegionalModules(f.base, [], [{ module: f.module, claims: f.claims, review: f.review() }]))
+      .toThrow("post-opening regional provenance");
+  });
   it("merges a distinct resource with finite real stock and rejects redefinition or missing conservation laws", () => {
     const f = fixture();
     const law = f.base.template.laws.laws[0]!.id;
