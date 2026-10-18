@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "status": "base-entry-validated-regional-and-live-qualification-pending",
+  "moduleHash": "29ca92a98b19fcfe367e191f1569e21a245b46b86b6dcb64204ebab5d6ac1019",
+  "claimsHash": "a90537820bf559c74050ff681934c3e2e7e28f9cad1d0db3e875d2817e41a466",
+  "scope": "full-world base and nine origin initialization; not final release acceptance",
+  "reviewer": "root",
+  "apiCalls": 0,
+  "tests": {
+    "passed": 9,
+    "failed": 0,
+    "entryPath": "ZIP -> LocalDatabase.importWorld -> WorldHost.createInstance -> persisted state -> replaySimulationState",
+    "originIds": [
+      "herbal-apprentice",
+      "merchant-heir",
+      "escort-apprentice",
+      "clan-junior",
+      "foundation-independent",
+      "core-clan-elder",
+      "spirit-merchant",
+      "spirit-array-master",
+      "han-li"
+    ],
+    "verified": [
+      "single Han Li identity and existing-character control",
+      "mutual recognition for each authored contact",
+      "personal property and household or company holdings remain separate",
+      "cultivation, mana and learned methods are real initial state",
+      "hidden roots and cargo contents stay outside initial player beliefs",
+      "each actor selects decision-deepseek",
+      "local calendar deadlines use the authored realm day length",
+      "array assistant has already delivered the request; broker remembers the actual return deadline",
+      "no network model transport invoked"
+    ]
+  },
+  "checks": {
+    "baseCompilation": true,
+    "evidenceHashes": true,
+    "regionalAssembly": {
+      "regions": 30,
+      "entities": 4433,
+      "agents": 754,
+      "worldHash": "sha256:f93a040eb9a2745e2817591c486521d5346603ace4c673fde891b32745c1a719",
+      "usedClaims": 933,
+      "apiCalls": 0
+    }
+  },
+  "limitations": [
+    "The entry test ran before restoring the spirit-realm base description required by the regional patch precondition; that text is replaced during assembly and changes no origin state. The subsequent 30-region strict assembly passed.",
+    "Regions still under editorial review are not certified complete by this record.",
+    "Real gameplay and final full-population acceptance remain pending."
+  ]
+}
