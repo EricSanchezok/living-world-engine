@@ -16,9 +16,10 @@ import { assembleRegionalModules } from "./regional-composition";
 
 const root = path.resolve("worlds/fanren/authoring");
 const read = (file: string) => JSON.parse(readFileSync(path.join(root, file), "utf8"));
+const regions: string[] = read("coverage/regional-plan.json").modules.map((region: { id: string }) => region.id);
 function assembled() {
   return assembleRegionalModules(read("modules/opening-sample.json"), read("claims/opening-sample.json"),
-    ["human-local", "shared-foundations", "spirit-human-three"].map(id => ({
+    regions.map(id => ({
       module: read(`regions/${id}/module.json`), claims: read(`regions/${id}/claims.json`), review: read(`regions/${id}/review.json`),
     })));
 }

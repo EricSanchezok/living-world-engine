@@ -16,7 +16,7 @@ import { assembleRegionalModules } from "./regional-composition";
 
 const root = path.resolve("worlds/fanren/authoring");
 const read = (file: string) => JSON.parse(readFileSync(path.join(root, file), "utf8"));
-const regions = ["human-local", "shared-foundations", "spirit-human-three", "spirit-demon-seven", "spirit-tianyuan"];
+const regions: string[] = read("coverage/regional-plan.json").modules.map((region: { id: string }) => region.id);
 function template() {
   return parseWorldTemplate(assembleRegionalModules(read("modules/opening-sample.json"), read("claims/opening-sample.json"),
     regions.map(id => ({ module: read(`regions/${id}/module.json`), claims: read(`regions/${id}/claims.json`), review: read(`regions/${id}/review.json`) }))).module.template);
@@ -46,7 +46,11 @@ describe("Fanren demon territories and Tianyuan civil life", () => {
     expect(all.filter(entity => entity.id === "canon-dongtian-rat-king")).toHaveLength(1);
     expect(all.filter(entity => entity.id === "canon-ao-xiao")).toHaveLength(1);
     expect(all.filter(entity => entity.id === "canon-mo-jian-li")).toHaveLength(1);
-    expect(all.some(entity => ["canon-linglong", "canon-xueling-soul", "canon-longmeng-soul", "canon-yin-yue"].includes(entity.id))).toBe(false);
+    const demonEntities = read("regions/spirit-demon-seven/module.json").entities as typeof all;
+    expect(demonEntities.some(entity => ["canon-linglong", "canon-xueling-soul", "canon-longmeng-soul", "canon-yin-yue"].includes(entity.id))).toBe(false);
+    expect(all.filter(entity => entity.id === "canon-xueling-soul")).toHaveLength(1);
+    expect(all.filter(entity => entity.id === "canon-longmeng-soul")).toHaveLength(1);
+    expect(all.some(entity => entity.id === "canon-yin-yue")).toBe(false);
     const subjects = read("regions/spirit-demon-seven/subjects.json");
     expect(subjects.find((subject: { id: string }) => subject.id === "canon-xueling-soul")?.aliases).toContain("银月");
     expect(subjects.find((subject: { id: string }) => subject.id === "demon-seventh-unidentified")?.reason).toContain("原创");

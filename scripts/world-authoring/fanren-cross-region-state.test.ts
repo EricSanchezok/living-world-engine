@@ -14,8 +14,7 @@ import { assembleRegionalModules } from "./regional-composition";
 
 const root = path.resolve("worlds/fanren/authoring");
 const read = (file: string) => JSON.parse(readFileSync(path.join(root, file), "utf8"));
-const regions = ["human-local", "shared-foundations", "spirit-human-three", "spirit-demon-seven", "spirit-tianyuan",
-  "spirit-fengyuan", "spirit-feiling", "spirit-minghe", "human-inner-star", "spirit-thunder", "human-outer-star", "associated-guanghan", "human-void-hall", "associated-yinming"];
+const regions: string[] = read("coverage/regional-plan.json").modules.map((region: { id: string }) => region.id);
 function archive() {
   const world = assembleRegionalModules(read("modules/opening-sample.json"), read("claims/opening-sample.json"), regions.map(id => ({
     module: read(`regions/${id}/module.json`), claims: read(`regions/${id}/claims.json`), review: read(`regions/${id}/review.json`),
