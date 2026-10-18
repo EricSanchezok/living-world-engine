@@ -17,6 +17,7 @@ import { literalNumbers } from "./actions";
 import { changedFact } from "./presentation";
 import { extendCapability } from "./capabilities";
 import { proposePropertyValues } from "./property-values";
+import { groupPropertyValueChoices } from "./property-value-choices";
 import { agentCapabilityModels } from "../models/capability-bindings";
 import { interruptionCandidates } from "./interruption";
 
@@ -114,6 +115,7 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   view.state = { ...view.state as Record<string, JsonValue>, playerAuthorization: playerAuthorization as unknown as JsonValue,
     adjudicationPolicy: loadPromptAsset("user/direct-world.md"), adjudicationRules };
   const effects = new Map<string, { fact: WorldFact; values: FactValue[] }>();
+  const groupedEffects = new Map<string, NonNullable<ReturnType<typeof groupPropertyValueChoices>>>();
   const visibility = new Map<string, WorldFact>();
   const quantityVisibility = new Map<string, string>();
   const entityVisibility = new Map<string, WorldEntity>();
@@ -213,6 +215,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
         { unchanged: "This property is unaffected or evidence is insufficient",
           ...(fact.value.kind === "text" ? { new_value: "This action necessarily changes this property, but NONE of the offered values expresses the new state. Request an open qualitative effect for this exact property." } : {}),
           ...Object.fromEntries(values.map((value, i) => [`v${i}`, value as unknown as Record<string, JsonValue>])) });
+      const grouped = groupPropertyValueChoices(id, questions[id]!);
+      if (grouped) { groupedEffects.set(id, grouped); Object.assign(questions, grouped.questions); }
     }
     if (["use", "change"].includes(frame.kind)) {
       if (!capability) questions[`${prefix}_expression`] = question("How will this immediate result be represented? existing requires a specific available property or authored procedure that actually expresses the result. An unrelated appearance or object description is insufficient. A posture, holding/contact, ongoing pressure or bodily relation that REMAINS after the final stage needs an actual property, even when its intended wider benefit fails. Do not preserve intermediate states that the same method then ends. Use expand if that property is missing. no_change is a newly performed bounded method with no continuing qualitative condition after its final stage; independent meter or resource costs can still apply. already means evidence establishes that the requested end state already holds: no repeated method occurs. Do not silently drop a requested state change or duplicate a property for a differently worded method.", {
@@ -318,6 +322,8 @@ export async function prepareActions(state: Readonly<SimulationState>, definitio
   }
   if ([...candidates.values()].some(recipients => recipients.length)) Object.assign(view.state as object, { contactPolicy });
   let answers = await decisions.ask(null, view.state, view.reads, questions);
+  if (groupedEffects.size) answers = { ...answers, ...Object.fromEntries([...groupedEffects].map(([id, grouped]) => [id,
+    { type: "choice" as const, choice: grouped.decode(answers), probabilities: null, confidence: null }])) };
   for (const [index, frame] of frames.entries()) if (frame.submissionId) {
     const authorization = selected(answers, `a${index}_player_authorization`);
     if (authorization !== "authorized") rejected.push({ actionId: frame.id, reason: authorization as "outside_scope" | "unknown" });

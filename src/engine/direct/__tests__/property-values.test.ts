@@ -10,17 +10,61 @@ import { readDirectState } from "../state";
 import { settlePreparedActions } from "../settlement";
 import { sourceFor } from "../world";
 import type { PolicyBinding } from "../../runtime/execution";
-import type { DecisionQuestionV2 } from "../../models/decision-v2";
+import { decisionQuestionV2Schema, type DecisionAnswerV2, type DecisionQuestionV2 } from "../../models/decision-v2";
+import { groupPropertyValueChoices } from "../property-value-choices";
 
 const original = "08:00，记录人亲见阀座渗水，尚未更换。";
 const first = `${original}\n08:15，按本人现场记录，更换一只适配阀；保压未见外漏。具体压力读数未记录。`;
 const second = `${first}\n08:30，空载检查已完成；带负载持续试验未做。`;
 
+describe("large finite property selection consistency", () => {
+  it("retains all values beyond a two-level domain, checks the selected path and ignores inactive branches", () => {
+    const count = 253 * 254 + 1;
+    const root: DecisionQuestionV2 = { type: "choice", version: "test", instructions: { task: "Select the actual resulting property value" },
+      criteria: { unchanged: "Keep the current value", new_value: "Request an open value", ...Object.fromEntries(Array.from({ length: count }, (_, index) =>
+        [`v${index}`, { kind: "text", value: `record-${index}` }])) } };
+    const grouped = groupPropertyValueChoices("property", root)!;
+    const values: string[] = [];
+    const answers: Record<string, DecisionAnswerV2> = {};
+    for (const [id, question] of Object.entries(grouped.questions)) {
+      expect(decisionQuestionV2Schema.safeParse(question).success).toBe(true);
+      values.push(...Object.keys(question.criteria).filter(key => /^v\d+$/u.test(key)));
+      answers[id] = { type: "choice", choice: id === "property" ? "unchanged" : "not_selected", probabilities: null, confidence: null };
+    }
+    expect(values).toHaveLength(count);
+    expect(new Set(values).size).toBe(count);
+    expect(grouped.decode(answers)).toBe("unchanged");
+    const select = (id: string): boolean => {
+      for (const [key, entry] of Object.entries(grouped.questions[id]!.criteria)) {
+        const child = (entry as { questionId?: string } | null)?.questionId;
+        if (key === `v${count - 1}` || child && select(child)) {
+          answers[id] = { type: "choice", choice: key, probabilities: null, confidence: null }; return true;
+        }
+      }
+      return false;
+    };
+    expect(select("property")).toBe(true);
+    expect(grouped.decode(answers)).toBe(`v${count - 1}`);
+    const leafId = Object.keys(grouped.questions).find(id => `v${count - 1}` in grouped.questions[id]!.criteria)!;
+    answers[leafId] = { type: "choice", choice: "not_selected", probabilities: null, confidence: null };
+    expect(() => grouped.decode(answers)).toThrow("has no finite selection");
+    select("property");
+    answers.property = { type: "choice", choice: "unchanged", probabilities: null, confidence: null };
+    expect(grouped.decode(answers)).toBe("unchanged");
+    select("property");
+    for (const choice of [`v${count}`, "__proto__", "constructor"]) {
+      answers[leafId] = { type: "choice", choice, probabilities: null, confidence: null };
+      expect(() => grouped.decode(answers)).toThrow("Invalid property value selection");
+    }
+  });
+});
+
 async function fixture(options: { missingProperty?: boolean; reject?: boolean; mixed?: boolean; quoted?: boolean; current?: boolean;
   oldVisibility?: "visible" | "hidden" | "examined" | "retained"; newVisibility?: "visible" | "hidden" | "examined" | "retained";
-  discoverable?: boolean; pendingDebit?: boolean } = {}) {
+  discoverable?: boolean; pendingDebit?: boolean; domainSize?: number; finiteValue?: string; creationEnabled?: boolean; expectedFailure?: string } = {}) {
   let turn = 0;
   const requests: Record<string, unknown>[] = [];
+  const worldQuestions: Array<Record<string, DecisionQuestionV2>> = [];
   const created = { description: "把本次检修情况记在页上", applicability: "作者能操作此页", effectDescription: "记录本次检修情况",
     effects: [{ kind: "fact", subject: "target", predicate: "entries", value: first, description: "可读的记录正文" }] };
   const f = directTestProvider(wire => {
@@ -41,6 +85,22 @@ async function fixture(options: { missingProperty?: boolean; reject?: boolean; m
       return created;
     }
     const perspective = Boolean((wire.state as { perspective?: unknown }).perspective);
+    const finiteSelections = new Map<string, string>();
+    if (Object.keys(wire.questions).some(id => /^a\d+_fact\d+$/u.test(id))) {
+      worldQuestions.push(wire.questions);
+      const findValue = (id: string): boolean => {
+        const question = wire.questions[id];
+        if (question?.type !== "choice") return false;
+        for (const [key, item] of Object.entries(question.criteria)) {
+          const entry = item as { value?: string; questionId?: string } | null;
+          if (entry?.value === options.finiteValue || entry?.questionId && findValue(entry.questionId)) {
+            finiteSelections.set(id, key); return true;
+          }
+        }
+        return false;
+      };
+      if (options.finiteValue) for (const id of Object.keys(wire.questions).filter(id => /^a\d+_fact\d+$/u.test(id))) findValue(id);
+    }
     return Object.fromEntries(Object.entries(wire.questions).map(([id, question]) => {
       const instructions = question.instructions as { data?: { factId?: string; fact?: { id: string; predicate: string } }; task?: { data?: { factId?: string; fact?: { id: string; predicate: string } } } };
       const data = (instructions.task ?? instructions).data, fact = data?.fact;
@@ -60,6 +120,7 @@ async function fixture(options: { missingProperty?: boolean; reject?: boolean; m
       if (id.endsWith("_expression")) value = options.missingProperty && turn === 0 || options.mixed ? "expand" : "existing";
       if (/_fact\d+$/u.test(id)) {
         value = fact?.predicate === "entries" ? "new_value" : "unchanged";
+        if (fact?.predicate === "entries" && options.finiteValue) value = finiteSelections.get(id) ?? options.finiteValue;
         if (fact?.predicate === "entries" && options.quoted && turn === 1 && question.type === "choice") {
           value = Object.entries(question.criteria).find(([, item]) => (item as { value?: string })?.value === "明确替换的正文")?.[0] ?? "new_value";
         }
@@ -69,6 +130,7 @@ async function fixture(options: { missingProperty?: boolean; reject?: boolean; m
         if (fact?.predicate === "checked" && question.type === "choice") value = Object.entries(question.criteria)
           .find(([, item]) => (item as { value?: boolean })?.value === true)?.[0] ?? "unchanged";
       }
+      if (id.includes("_values_")) value = finiteSelections.get(id) ?? "not_selected";
       if (/^a\d+_value\d+$/u.test(id)) value = options.reject ? "reject" : "accept";
       if (id.includes("capability")) value = perspective && question.type === "choice"
         ? Object.keys(question.criteria).find(key => key.startsWith("capability-")) ?? "none" : "apply";
@@ -85,6 +147,15 @@ async function fixture(options: { missingProperty?: boolean; reject?: boolean; m
   actor.belief.evidence["own-work"] = { id: "own-work", kind: "observation", description: "WITNESSED-REPAIR：本人更换一只适配阀并保压，未见外漏，未记下数值。", sourceId: "own-work", step: 0 };
   state.agents.keeper!.character.persona.summary = "OTHER-MIND：秘密计划";
   const provenance = state.truth.facts["gate-lock"]!.provenance;
+  if (options.domainSize) {
+    state.truth.entities.archive = { id: "archive", kind: "object", name: "远处存档", description: "不在当前场景中的旧记录", lifecycle: "active", createdAtStep: 0 };
+    state.truth.placements.archive = null;
+    for (let index = 0; index < options.domainSize; index++) {
+      const id = `archive-entry-${String(index).padStart(4, "0")}`;
+      state.truth.facts[id] = { id, subjectId: "archive", predicate: "entries", value: { kind: "text", value: `既有正文第${index}号` },
+        description: "已存在的正文", access: { kind: "public" }, provenance };
+    }
+  }
   if (!options.missingProperty) state.truth.facts["work-entries"] = { id: "work-entries", subjectId: "gate", predicate: "entries",
     value: { kind: "text", value: original }, description: "正文内容本身", access: options.discoverable
       ? { kind: "discoverable", condition: "The treated ink can be written normally but its current contents require an actual examination through the reading lens." }
@@ -98,7 +169,7 @@ async function fixture(options: { missingProperty?: boolean; reject?: boolean; m
     assertions: [{ kind: "elapsed_seconds_compare", operator: "eq", value: 1 }] };
   world.historyBaseHash = historyReplayBaseHash(state);
   await f.registry.capture();
-  const algorithm = new DirectWorldAlgorithm(f.gateway, { decision: "decision-jev", creation: "creation-deepseek", fallback: "decision-deepseek", creationEnabled: true });
+  const algorithm = new DirectWorldAlgorithm(f.gateway, { decision: "decision-jev", creation: "creation-deepseek", fallback: "decision-deepseek", creationEnabled: options.creationEnabled ?? true });
   const engine = new SimulationEngine(world, algorithm);
   const roster: Record<string, PolicyBinding> = { player: { kind: "external", agentId: "player", participantId: "human" }, keeper: { kind: "idle", agentId: "keeper", reason: "explicit" } };
   await engine.bootstrapAgents();
@@ -107,16 +178,64 @@ async function fixture(options: { missingProperty?: boolean; reject?: boolean; m
     const result = await engine.step(roster, { expectedRevision: engine.snapshot.revision, trigger: "participant_action",
       externalActions: [{ agentId: "player", submissionId: `write-${turn}`, rawText: text, goal: text, means: null, targetIds: [] }] });
     const control = readDirectState(result.state.executionState!, result.state);
-    expect(control.intents.player!.failure).toBeNull();
+    if (options.expectedFailure) expect(control.intents.player!.failure?.message).toContain(options.expectedFailure);
+    else expect(control.intents.player!.failure).toBeNull();
     expect(replaySimulationState(result.state)).toEqual(result.state);
     turn++;
     return { ...result, calls: f.transport.mock.calls.length - beforeCalls, control,
       entries: Object.values(result.state.truth.facts).find(fact => fact.subjectId === "gate" && fact.predicate === "entries")! };
   };
-  return { ...f, act, requests };
+  return { ...f, act, requests, worldQuestions };
 }
 
 describe("action-bound property values through the model HTTP and simulation entry", () => {
+  it("selects a finite tail value beyond 255 choices without creation or extra dispatch", async () => {
+    const f = await fixture({ domainSize: 300, finiteValue: "既有正文第299号", creationEnabled: false });
+    const result = await f.act("将正文替换为既有正文第299号，并核对本页。");
+    expect(result.entries.value).toEqual({ kind: "text", value: "既有正文第299号" });
+    expect(result.calls).toBe(2);
+    expect(f.requests).toEqual([]);
+    expect(f.worldQuestions).toHaveLength(1);
+    const recorded = Object.values(result.control.cache).find(result => Object.keys(result.answers).some(id => id.includes("_values_")))!;
+    expect(Object.values(recorded.answers).some(answer => answer.type === "choice" && answer.choice.startsWith("group_"))).toBe(true);
+    const entries = Object.values(f.worldQuestions[0]!).flatMap(question => question.type === "choice"
+      ? Object.entries(question.criteria).filter(([key]) => /^v\d+$/u.test(key)).map(([, value]) => value as { value?: string }) : []);
+    for (let index = 0; index < 300; index++) expect(entries.filter(entry => entry.value === `既有正文第${index}号`)).toHaveLength(1);
+    for (const question of Object.values(f.worldQuestions[0]!)) if (question.type === "choice") expect(Object.keys(question.criteria).length).toBeLessThanOrEqual(255);
+  });
+
+  it.each([239, 240, 241])("retains the finite boundary and singleton tail with %i remote values", async domainSize => {
+    const f = await fixture({ domainSize, finiteValue: "unavailable", creationEnabled: false });
+    const result = await f.act("将正文改成 unavailable，并核对本页。");
+    expect(result.entries.value).toEqual({ kind: "text", value: "unavailable" });
+    expect(result.calls).toBe(2);
+    const questions = f.worldQuestions[0]!;
+    const groups = Object.entries(questions).filter(([id]) => id.includes("_values_"));
+    if (domainSize === 239) {
+      expect(groups).toEqual([]);
+      const root = Object.values(questions).find(question => question.type === "choice" && Object.keys(question.criteria).length === 255)!;
+      expect(root.type === "choice" && Object.keys(root.criteria)).toEqual(["unchanged", "new_value", ...Array.from({ length: 253 }, (_, index) => `v${index}`)].sort());
+      expect(JSON.stringify(root.instructions)).not.toContain("valueSelection");
+    } else {
+      expect(groups).toHaveLength(domainSize === 240 ? 1 : 2);
+      expect(groups.map(([, question]) => question.type === "choice" ? Object.keys(question.criteria).length : 0)).toEqual(domainSize === 240 ? [255] : [255, 2]);
+    }
+  });
+
+  it("retains an unchanged overflow property and still forbids an open value without creation", async () => {
+    const f = await fixture({ domainSize: 300, finiteValue: "unchanged", creationEnabled: false });
+    const unchanged = await f.act("保留正文不改，只核对本页。");
+    expect(unchanged.entries.value).toEqual({ kind: "text", value: original });
+    expect(unchanged.calls).toBe(2);
+    const disabled = await fixture({ domainSize: 300, finiteValue: "new_value", creationEnabled: false,
+      expectedFailure: "the creation capability is disabled" });
+    const rejected = await disabled.act("将正文改成尚未列出的新内容。");
+    expect(rejected.entries.value).toEqual({ kind: "text", value: original });
+    expect(rejected.state.truth.facts["work-checked"]!.value).toEqual({ kind: "boolean", value: false });
+    expect(rejected.calls).toBe(2);
+    expect(disabled.requests).toEqual([]);
+  });
+
   it("writes actual contents, retains an append, permits a correction and does not learn any of those values", async () => {
     const f = await fixture();
     const one = await f.act("把刚才亲见的换阀情况追加到检修簿，并核对本页。");
