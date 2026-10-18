@@ -1423,6 +1423,19 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "void-hanli-platform-sensing-isolation",
+          "predicate": "sensing-isolation",
+          "value": {
+            "kind": "text",
+            "value": "天罡罩可阻隔外部秘术对内部相关对象的感应，未收到信号不直接证明对象平安或死亡。"
+          },
+          "description": "天罡罩可阻隔外部秘术对内部相关对象的感应，未收到信号不直接证明对象平安或死亡。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际探测罩内外感应差异或取得已验证的禁制知识。"
+          }
         }
       ],
       "meters": [],
@@ -1602,6 +1615,19 @@
           "description": "须先有实际开放的法阵、通路与相应防护；当前封殿期没有凭记忆任意传送的入口。",
           "access": {
             "kind": "public"
+          }
+        },
+        {
+          "id": "void-hidden-array-destination",
+          "predicate": "destination",
+          "value": {
+            "kind": "text",
+            "value": "此阵通向内殿第二层的灵泉宝室，不是直接出殿的阵。"
+          },
+          "description": "此阵通向内殿第二层的灵泉宝室，不是直接出殿的阵。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际检验阵理或使用此阵抵达目的地。"
           }
         }
       ],
@@ -12428,7 +12454,21 @@
       "kind": "item",
       "placement": "void-spring",
       "description": "泉水留在灵眼附近灵气充沛，离开后会很快变普通水，非可无限装瓶的灵乳。",
-      "facts": [],
+      "facts": [
+        {
+          "id": "void-spirit-spring-detached-water",
+          "predicate": "detached-water",
+          "value": {
+            "kind": "text",
+            "value": "离池的泉水很快失去异香和灵气，化为普通清水；浸泡与取水带走不是同种收益。"
+          },
+          "description": "离池的泉水很快失去异香和灵气，化为普通清水；浸泡与取水带走不是同种收益。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际取少量泉水观察变化，或在泉中进行真实恢复。"
+          }
+        }
+      ],
       "meters": [],
       "ratings": [],
       "quantities": []
@@ -13663,6 +13703,16 @@
     {
       "id": "void-cold-ding-resistance",
       "text": "乾蓝冰焰的极寒并非所有材料都无法抵挡；耐受的蛛丝、蚕丝或经药术辅助的火蟒仍须按实际强度与维持时间结算。提鼎寒流与吸力随进程变化，保护同行者需要真实防护能力和范围。",
+      "severity": "hard"
+    },
+    {
+      "id": "void-spring-collection",
+      "text": "灵眼之泉的池体、禁制、积乳和离池水分别结算。离池水灵气散去，取走积乳会减少现存量；不能只因知道凝乳原理即每日生成万年份灵乳。移动泉体须处理其与内殿的真实禁制连接。",
+      "severity": "hard"
+    },
+    {
+      "id": "void-artifact-and-spirit-control",
+      "text": "取得玉如意不等完全控制其独立器灵；红黄化身、银狼与器物形态共享既有主体，不重复生成灵魂或物品。实际护持、遁术与响应受施法、器物状态及器灵意愿制约。",
       "severity": "hard"
     }
   ],
@@ -15740,6 +15790,21 @@
     ],
     "law:void-cold-ding-resistance": [
       "void-iceflame-conditional-resistance"
+    ],
+    "fact:void-hidden-array-destination": [
+      "void-hidden-route-and-spring-conditions"
+    ],
+    "fact:void-spirit-spring-detached-water": [
+      "void-hidden-route-and-spring-conditions"
+    ],
+    "fact:void-hanli-platform-sensing-isolation": [
+      "void-platform-sensing-barrier"
+    ],
+    "law:void-spring-collection": [
+      "void-hidden-route-and-spring-conditions"
+    ],
+    "law:void-artifact-and-spirit-control": [
+      "void-ruyi-independent-spirit"
     ]
   },
   "periodicProperties": [
