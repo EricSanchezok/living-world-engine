@@ -138,6 +138,18 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "human-inner-star-sea-route-innerstar-beast-grave-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-beast-grave-island"
+          },
+          "description": "需实际海行、定位与给养往来，偏航海域没有仅凭地名即抵达的通道。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -16308,6 +16320,115 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "innerstar-beast-grave-island",
+      "name": "无名妖兽墓岛",
+      "kind": "location",
+      "placement": "human-inner-star-sea",
+      "description": "偏离常用航路的一座小岛，岩地荒凉，岛内有谷。",
+      "facts": [
+        {
+          "id": "innerstar-beast-grave-island-route-human-inner-star-sea",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "human-inner-star-sea"
+          },
+          "description": "需实际海行、定位与给养往来，偏航海域没有仅凭地名即抵达的通道。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-beast-grave-island-route-innerstar-grave-shore",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-grave-shore"
+          },
+          "description": "沿岛岸地面往来，出海另需舟船或相应御行能力。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-grave-shore",
+      "name": "墓岛石岸",
+      "kind": "location",
+      "placement": "innerstar-beast-grave-island",
+      "description": "潮水拍打石岸，荒径通往岛内谷地。",
+      "facts": [
+        {
+          "id": "innerstar-grave-shore-route-innerstar-beast-grave-island",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-beast-grave-island"
+          },
+          "description": "沿岛岸地面往来，出海另需舟船或相应御行能力。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-grave-shore-route-innerstar-grave-valley",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-grave-valley"
+          },
+          "description": "沿荒径步行穿过石地，实际消耗路程与时间。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-grave-valley",
+      "name": "墓岛阴谷",
+      "kind": "location",
+      "placement": "innerstar-beast-grave-island",
+      "description": "低洼谷地积着阴气，四周岩壁遮去一部分天光。",
+      "facts": [
+        {
+          "id": "innerstar-grave-valley-route-innerstar-grave-shore",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-grave-shore"
+          },
+          "description": "沿荒径步行穿过石地，实际消耗路程与时间。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-grave-valley-yin-condition",
+          "predicate": "local-qi",
+          "value": {
+            "kind": "text",
+            "value": "谷地阴气浓重，是否适用于某种秘术仍须核对该术条件与现场。"
+          },
+          "description": "可经现场查验辨明的阴气状态。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际在谷地以相应灵气感知能力查验，不因听过地名就知其强弱与用途。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [],
@@ -16408,6 +16529,21 @@
       "id": "innerstar-jiao-individual-capability",
       "severity": "hard",
       "text": "蛟类的种族优势不使幼体自动达到八级，也不保证每只纯种越阶必胜；能力依实际个体、血统、修行与交战条件裁定。典籍估计不能直接替代本次战斗结果。"
+    },
+    {
+      "id": "innerstar-soul-return-cost",
+      "severity": "hard",
+      "text": "还魂术与夺舍不能混用：前者须可用魂魄、适合的新死肉身、结丹以上施术修为、玄阴场地与真实布阵准备，且付出严重修为代价并可能受扰失败；不从尸体凭空生成原有魂魄。活体夺舍按实际法门、元神和宿主条件判断，已成立限制不能借还魂之名规避；有据的特殊法门仍保留各自例外。"
+    },
+    {
+      "id": "innerstar-prepared-demonic-cost",
+      "severity": "hard",
+      "text": "阴魔斩等预凝精元的一次手段须已有实际凝炼并扣除消耗，不能靠同一句宣告无限续发。化劫避死须有已炼成的肢体替身并真实消耗；据说只有某境界能修的传闻不能抹去有据的个体例外，也不能向未学者自动授术。"
+    },
+    {
+      "id": "innerstar-manifestation-identity",
+      "severity": "hard",
+      "text": "飞剑分出的剑光与法术凝出的魔影按实际神通维系，不自动新增可拾取实剑或具有独立意识的人物；撤术、破坏和反噬按真实施法结构与能力处理。"
     }
   ],
   "provenance": {
@@ -18942,6 +19078,50 @@
     ],
     "law:innerstar-jiao-individual-capability": [
       "innerstar-jiao-species-limit"
+    ],
+    "entity:innerstar-beast-grave-island": [
+      "innerstar-grave-island-history",
+      "innerstar-grave-island-opening"
+    ],
+    "entity:innerstar-grave-shore": [
+      "innerstar-grave-island-opening"
+    ],
+    "entity:innerstar-grave-valley": [
+      "innerstar-grave-island-history",
+      "innerstar-grave-island-opening"
+    ],
+    "fact:innerstar-beast-grave-island-route-human-inner-star-sea": [
+      "innerstar-grave-island-history",
+      "innerstar-grave-island-opening"
+    ],
+    "fact:human-inner-star-sea-route-innerstar-beast-grave-island": [
+      "innerstar-grave-island-history",
+      "innerstar-grave-island-opening"
+    ],
+    "fact:innerstar-beast-grave-island-route-innerstar-grave-shore": [
+      "innerstar-grave-island-opening"
+    ],
+    "fact:innerstar-grave-shore-route-innerstar-beast-grave-island": [
+      "innerstar-grave-island-opening"
+    ],
+    "fact:innerstar-grave-shore-route-innerstar-grave-valley": [
+      "innerstar-grave-island-opening"
+    ],
+    "fact:innerstar-grave-valley-route-innerstar-grave-shore": [
+      "innerstar-grave-island-opening"
+    ],
+    "fact:innerstar-grave-valley-yin-condition": [
+      "innerstar-grave-island-history",
+      "innerstar-grave-island-opening"
+    ],
+    "law:innerstar-soul-return-cost": [
+      "innerstar-soul-return-conditions"
+    ],
+    "law:innerstar-prepared-demonic-cost": [
+      "innerstar-one-use-demonic-methods"
+    ],
+    "law:innerstar-manifestation-identity": [
+      "innerstar-one-use-demonic-methods"
     ]
   },
   "periodicProperties": [

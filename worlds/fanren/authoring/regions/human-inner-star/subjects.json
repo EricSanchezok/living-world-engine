@@ -4860,16 +4860,22 @@
   },
   {
     "id": "innerstar-nixing-young-lord",
-    "label": "南明段少主称号",
+    "label": "温天仁",
     "kind": "person-reference",
     "openingState": "t0-state-or-ownership-underdetermined",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
       "innerstar-later-nanming-inspection",
-      "innerstar-later-cang-private-plot"
+      "innerstar-later-cang-private-plot",
+      "innerstar-later-wentianren-identity"
     ],
-    "aliases": [],
-    "reason": "本段未具名的少主称谓，苍讨好献人是私念，不能替其创已下令行动；待具名链归一。"
+    "aliases": [
+      "温公子",
+      "六道传人",
+      "逆星盟少主",
+      "温天明（此段异文）"
+    ],
+    "reason": "后文紫灵明确其六道师承，沿用南明少主唯一身份；当场温天明为称字异文，非万天明。T0出生、境界、师承起始未定位。"
   },
   {
     "id": "innerstar-nixing-sacred-ancestor",
@@ -4878,10 +4884,11 @@
     "openingState": "t0-state-or-ownership-underdetermined",
     "classification": "source-reference-with-explicit-temporal-assessment",
     "claimIds": [
-      "innerstar-later-nanming-inspection"
+      "innerstar-later-nanming-inspection",
+      "innerstar-later-wentianren-identity"
     ],
     "aliases": [],
-    "reason": "本段少主师承尊号，不仅凭圣祖二字自动合六道或其他高阶者。"
+    "reason": "南明圣祖尊号与后文温天仁六道师承线索关联canon-liudao-jisheng；本项仅尊号指称档，不生成第二圣祖。"
   },
   {
     "id": "innerstar-xin-ming",
@@ -5580,5 +5587,584 @@
     ],
     "aliases": [],
     "reason": "范称因兽潮未能组成；无运行组织、成员名册或强制任务。"
+  },
+  {
+    "id": "innerstar-qingyang-ding",
+    "label": "青阳丁姓护法",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-qingyang-rescue"
+    ],
+    "aliases": [],
+    "reason": "后期追捕与死亡不提前；T0年龄/现职未定。"
+  },
+  {
+    "id": "innerstar-ke-yu",
+    "label": "柯宇",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-qingyang-rescue"
+    ],
+    "aliases": [],
+    "reason": "皇明后来召集者；未从后期现职强推开篇名册。"
+  },
+  {
+    "id": "innerstar-qingyang-tracker",
+    "label": "尾随元瑶的青阳弟子",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-qingyang-rescue"
+    ],
+    "aliases": [],
+    "reason": "内门资格为丁的许诺，不当已升职。"
+  },
+  {
+    "id": "innerstar-skull-cultivator",
+    "label": "追捕元瑶的骷髅头",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-qingyang-rescue"
+    ],
+    "aliases": [
+      "骷髅头"
+    ],
+    "reason": "只有后期事件/回述；具体T0存亡身份未定，不能合温天仁。"
+  },
+  {
+    "id": "innerstar-axe-cultivator",
+    "label": "追捕元瑶的恶汉",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-qingyang-rescue"
+    ],
+    "aliases": [
+      "恶汉",
+      "丑陋汉子"
+    ],
+    "reason": "只有后期事件/回述；具体T0存亡身份未定，不能合温天仁。"
+  },
+  {
+    "id": "innerstar-qingyang-young-lord",
+    "label": "青阳门少主",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-yanli-history"
+    ],
+    "aliases": [
+      "青阳少主"
+    ],
+    "reason": "只有后期事件/回述；具体T0存亡身份未定，不能合温天仁。"
+  },
+  {
+    "id": "innerstar-qingyang-axe",
+    "label": "恶汉开山钺",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-qingyang-rescue"
+    ],
+    "aliases": [
+      "开山钺",
+      "巨钺"
+    ],
+    "reason": "收回与逃遁连续动作确定同物；不复制一柄巨钺。"
+  },
+  {
+    "id": "innerstar-qingyang-strange-blade",
+    "label": "骷髅头怪刃",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-qingyang-rescue"
+    ],
+    "aliases": [
+      "怪刃"
+    ],
+    "reason": "由二人召回与恶汉持钺的动作连续性归属推定，非明确姓名署记。"
+  },
+  {
+    "id": "innerstar-yuanyao-red-hammer",
+    "label": "元瑶的红色怪锤",
+    "kind": "later-source-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-qingyang-rescue"
+    ],
+    "aliases": [],
+    "reason": "只登记后期实得或居处，未初始化T0库存、洞府所有权或已掌握全术。"
+  },
+  {
+    "id": "innerstar-yuanyao-green-cave",
+    "label": "元瑶后期绿山洞府",
+    "kind": "later-source-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-qingyang-rescue"
+    ],
+    "aliases": [],
+    "reason": "只登记后期实得或居处，未初始化T0库存、洞府所有权或已掌握全术。"
+  },
+  {
+    "id": "innerstar-qingyang-array-jade",
+    "label": "青阳阵法乌黑玉简",
+    "kind": "later-source-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-yuanyaogifts"
+    ],
+    "aliases": [],
+    "reason": "只登记后期实得或居处，未初始化T0库存、洞府所有权或已掌握全术。"
+  },
+  {
+    "id": "innerstar-yuanyao-pill-gift",
+    "label": "韩回赠元瑶的两瓶六级妖丹成药",
+    "kind": "later-source-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-yuanyaogifts"
+    ],
+    "aliases": [],
+    "reason": "只登记后期实得或居处，未初始化T0库存、洞府所有权或已掌握全术。"
+  },
+  {
+    "id": "innerstar-tihun-refining-jade",
+    "label": "啼魂后续祭炼绿玉简",
+    "kind": "later-source-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-tihun-unfinished"
+    ],
+    "aliases": [],
+    "reason": "只登记后期实得或居处，未初始化T0库存、洞府所有权或已掌握全术。"
+  },
+  {
+    "id": "canon-tihun",
+    "label": "啼魂",
+    "kind": "individual-creature-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-tihun-unfinished"
+    ],
+    "aliases": [
+      "啼魂兽"
+    ],
+    "reason": "唯一已知个体而非无数同名种群；此处半祭炼状态属于后期，开篇进度、所在地和持有未定。"
+  },
+  {
+    "id": "canon-minghun-pearl",
+    "label": "鸣魂珠",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-tihun-unfinished"
+    ],
+    "aliases": [],
+    "reason": "与唯一啼魂关联的控制珠；不开篇复制或预发。"
+  },
+  {
+    "id": "innerstar-juling-array-reference",
+    "label": "拘灵阵",
+    "kind": "method-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-qingyang-rescue",
+      "innerstar-later-yuanyaogifts"
+    ],
+    "aliases": [],
+    "reason": "隐藏灵气的阵法，获得玉简不等已布成；祖师全藏能力保人物说法。"
+  },
+  {
+    "id": "innerstar-taiyang-sect-reference",
+    "label": "泰阳宗",
+    "kind": "organization-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-island-watchers"
+    ],
+    "aliases": [],
+    "reason": "后期岛边所见的身份与关系；出生、T0现职与位置未确定，不创建开篇在场NPC。泰阳宗不合大晋泰阳门。"
+  },
+  {
+    "id": "innerstar-zhao-qiao",
+    "label": "昭樵",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-island-watchers"
+    ],
+    "aliases": [
+      "昭师伯"
+    ],
+    "reason": "后期岛边所见的身份与关系；出生、T0现职与位置未确定，不创建开篇在场NPC。泰阳宗不合大晋泰阳门。"
+  },
+  {
+    "id": "innerstar-bu-diankong",
+    "label": "步颠空",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-island-watchers"
+    ],
+    "aliases": [],
+    "reason": "后期岛边所见的身份与关系；出生、T0现职与位置未确定，不创建开篇在场NPC。泰阳宗不合大晋泰阳门。"
+  },
+  {
+    "id": "innerstar-huiling",
+    "label": "慧灵",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-island-watchers"
+    ],
+    "aliases": [],
+    "reason": "后期岛边所见的身份与关系；出生、T0现职与位置未确定，不创建开篇在场NPC。泰阳宗不合大晋泰阳门。"
+  },
+  {
+    "id": "innerstar-mei-sister",
+    "label": "梅姓女散修",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-island-watchers"
+    ],
+    "aliases": [
+      "梅姑娘"
+    ],
+    "reason": "后期岛边所见的身份与关系；出生、T0现职与位置未确定，不创建开篇在场NPC。泰阳宗不合大晋泰阳门。"
+  },
+  {
+    "id": "innerstar-mei-brother",
+    "label": "梅姓男散修",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-island-watchers"
+    ],
+    "aliases": [
+      "梅兄"
+    ],
+    "reason": "后期岛边所见的身份与关系；出生、T0现职与位置未确定，不创建开篇在场NPC。泰阳宗不合大晋泰阳门。"
+  },
+  {
+    "id": "innerstar-fu-suitor",
+    "label": "追求梅妹的符姓男子",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-island-watchers"
+    ],
+    "aliases": [
+      "符道友"
+    ],
+    "reason": "后期岛边所见的身份与关系；出生、T0现职与位置未确定，不创建开篇在场NPC。泰阳宗不合大晋泰阳门。"
+  },
+  {
+    "id": "innerstar-white-shadow",
+    "label": "白影结丹修士",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-island-watchers"
+    ],
+    "aliases": [
+      "白影"
+    ],
+    "reason": "后期岛边所见的身份与关系；出生、T0现职与位置未确定，不创建开篇在场NPC。泰阳宗不合大晋泰阳门。"
+  },
+  {
+    "id": "innerstar-fu-flute",
+    "label": "符姓修士玉笛",
+    "kind": "later-source-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-island-watchers"
+    ],
+    "aliases": [],
+    "reason": "只记当次物件或有限牵引兽群，鸟种与开篇所在地未定。"
+  },
+  {
+    "id": "innerstar-wen-beast-cart",
+    "label": "温天仁飞天兽车",
+    "kind": "later-source-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-island-watchers"
+    ],
+    "aliases": [],
+    "reason": "只记当次物件或有限牵引兽群，鸟种与开篇所在地未定。"
+  },
+  {
+    "id": "innerstar-wen-three-birds",
+    "label": "温车前的三只六目四翅青鸟",
+    "kind": "later-source-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-island-watchers"
+    ],
+    "aliases": [],
+    "reason": "只记当次物件或有限牵引兽群，鸟种与开篇所在地未定。"
+  },
+  {
+    "id": "innerstar-shenjiu-hall",
+    "label": "后期逆星盟神鸠堂",
+    "kind": "organization-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-wentianren-identity"
+    ],
+    "aliases": [],
+    "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
+  },
+  {
+    "id": "innerstar-huangming-deputy",
+    "label": "后期皇明副岛主",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-wentianren-identity"
+    ],
+    "aliases": [],
+    "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
+  },
+  {
+    "id": "innerstar-wen-qingming-talisman",
+    "label": "韩所得青冥针符宝",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-wen-battle"
+    ],
+    "aliases": [],
+    "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
+  },
+  {
+    "id": "innerstar-wen-silver-bell",
+    "label": "温天仁银钟",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-wen-battle"
+    ],
+    "aliases": [],
+    "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
+  },
+  {
+    "id": "innerstar-wen-bronze-shield",
+    "label": "温天仁青铜古盾",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-wen-battle"
+    ],
+    "aliases": [],
+    "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
+  },
+  {
+    "id": "innerstar-wen-purple-banner",
+    "label": "温天仁紫幡",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-wen-battle"
+    ],
+    "aliases": [],
+    "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
+  },
+  {
+    "id": "innerstar-wen-gold-needles",
+    "label": "温天仁金针组",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-wen-battle"
+    ],
+    "aliases": [],
+    "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
+  },
+  {
+    "id": "innerstar-six-demon-shadows",
+    "label": "六极真魔功的六道幻影",
+    "kind": "manifestation-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-wen-battle"
+    ],
+    "aliases": [],
+    "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
+  },
+  {
+    "id": "innerstar-six-demon-art",
+    "label": "六极真魔功",
+    "kind": "method-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-wen-battle"
+    ],
+    "aliases": [],
+    "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
+  },
+  {
+    "id": "innerstar-huajie-method",
+    "label": "化劫大法",
+    "kind": "method-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-one-use-demonic-methods"
+    ],
+    "aliases": [],
+    "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
+  },
+  {
+    "id": "innerstar-yinmo-slash",
+    "label": "阴魔斩",
+    "kind": "method-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-one-use-demonic-methods"
+    ],
+    "aliases": [],
+    "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
+  },
+  {
+    "id": "innerstar-gaiyang-method",
+    "label": "改阳神术",
+    "kind": "method-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-ghostfog-loss"
+    ],
+    "aliases": [],
+    "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
+  },
+  {
+    "id": "innerstar-tianjing-reference",
+    "label": "天镜散人",
+    "kind": "person-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-tianjing-mirror-history"
+    ],
+    "aliases": [],
+    "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
+  },
+  {
+    "id": "innerstar-eight-mirrors-original",
+    "label": "八门金光镜原本",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-tianjing-mirror-history"
+    ],
+    "aliases": [],
+    "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
+  },
+  {
+    "id": "innerstar-wen-eight-mirrors",
+    "label": "温天仁八门金光镜仿品",
+    "kind": "item-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-tianjing-mirror-history"
+    ],
+    "aliases": [],
+    "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
+  },
+  {
+    "id": "innerstar-gold-flame",
+    "label": "镜中金光神焰",
+    "kind": "method-reference",
+    "openingState": "t0-state-or-ownership-underdetermined",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-later-wen-battle"
+    ],
+    "aliases": [],
+    "reason": "后期/历史资料主体；不将后得物品或暂不能定位T0的身份投放开篇。原镜与仿品、青冥针本体与符宝、幻影与生灵严格分开。"
+  },
+  {
+    "id": "innerstar-beast-grave-island",
+    "label": "无名妖兽墓岛",
+    "kind": "location",
+    "openingState": "present-at-opening",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-grave-island-history",
+      "innerstar-grave-island-opening"
+    ],
+    "aliases": [],
+    "reason": "旧墓岛有据回溯，石岸荒径为明示原创；没有未来还魂场景。"
+  },
+  {
+    "id": "innerstar-grave-shore",
+    "label": "墓岛石岸",
+    "kind": "location",
+    "openingState": "present-at-opening",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-grave-island-opening"
+    ],
+    "aliases": [],
+    "reason": "旧墓岛有据回溯，石岸荒径为明示原创；没有未来还魂场景。"
+  },
+  {
+    "id": "innerstar-grave-valley",
+    "label": "墓岛阴谷",
+    "kind": "location",
+    "openingState": "present-at-opening",
+    "classification": "source-reference-with-explicit-temporal-assessment",
+    "claimIds": [
+      "innerstar-grave-island-history",
+      "innerstar-grave-island-opening"
+    ],
+    "aliases": [],
+    "reason": "旧墓岛有据回溯，石岸荒径为明示原创；没有未来还魂场景。"
   }
 ]
