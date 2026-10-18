@@ -761,6 +761,19 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "dv-inner-creature-response",
+          "predicate": "creature-response",
+          "value": {
+            "kind": "text",
+            "value": "内谷的异样影响可使部分灵兽躁乱，具体反应并不一致。须观察所携灵兽自身状况，不能把一次失控推广为所有灵兽必然失控。"
+          },
+          "description": "内谷的异样影响可使部分灵兽躁乱，具体反应并不一致。须观察所携灵兽自身状况，不能把一次失控推广为所有灵兽必然失控。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "在内谷实际观察灵兽反应，或获得有具体对象和经历依据的可靠告知。"
+          }
         }
       ],
       "meters": [],
@@ -1421,7 +1434,7 @@
       "name": "禁飞盆地",
       "kind": "location",
       "placement": "human-devil-valley",
-      "description": "阴湿盆地遍布水坑和灌木，越近白石祭坛越难离地，低空漂浮也会招来血雷。",
+      "description": "阴湿盆地遍布水坑和灌木，临近白石祭坛的区域连低空漂浮也会招来血雷。",
       "facts": [
         {
           "id": "dv-wet-basin-route-dv-inner",
@@ -1531,6 +1544,19 @@
           "access": {
             "kind": "discoverable",
             "condition": "实察祭坛结构并拥有足够古阵/空间知识，或由知情者真实传授。"
+          }
+        },
+        {
+          "id": "dv-white-altar-structure",
+          "predicate": "structure",
+          "value": {
+            "kind": "text",
+            "value": "阶梯越高附加重力越强；顶面约百余丈，白玉砖间有六七丈碧美玉供桌，四角青柱约十丈。攀登耗力和用时取决于承受者的实际能力。"
+          },
+          "description": "阶梯越高附加重力越强；顶面约百余丈，白玉砖间有六七丈碧美玉供桌，四角青柱约十丈。攀登耗力和用时取决于承受者的实际能力。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "登临并实际检查对应高度的阶梯、顶面和青柱。"
           }
         }
       ],
@@ -7545,6 +7571,19 @@
           "access": {
             "kind": "private"
           }
+        },
+        {
+          "id": "dv-candle-stem-pill-boundary",
+          "predicate": "medicine-boundary",
+          "value": {
+            "kind": "text",
+            "value": "造化丹须真实配方和材料；服丹可能经历幻境并获得修炼体会，幻境里的法术不等于已掌握技能。药效、突破与族类适配须按实际修为和身体判断，不能承诺立即进阶。"
+          },
+          "description": "造化丹须真实配方和材料；服丹可能经历幻境并获得修炼体会，幻境里的法术不等于已掌握技能。药效、突破与族类适配须按实际修为和身体判断，不能承诺立即进阶。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "实际研究相应药典配方、服药经历或获得有依据的传授；只见果实不获完整炼法。"
+          }
         }
       ],
       "meters": [],
@@ -11931,6 +11970,15 @@
     ],
     "fact:dv-pool-cave-depth": [
       "dv-pool-depth"
+    ],
+    "fact:dv-inner-creature-response": [
+      "dv-inner-creature-response"
+    ],
+    "fact:dv-white-altar-structure": [
+      "dv-altar-gravity-and-rift"
+    ],
+    "fact:dv-candle-stem-pill-boundary": [
+      "dv-creation-pill-experience"
     ]
   },
   "quantityDefinitions": [
