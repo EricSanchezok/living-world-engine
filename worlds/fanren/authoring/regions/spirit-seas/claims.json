@@ -12,7 +12,7 @@
   },
   {
     "id": "seas-finite-values",
-    "statement": "资源、工价、修为映射、冷却与交通时长为明确有限标定。跨洲阵此配置每次24枚极品灵石及两阵芯，至多6位普通人形；不是全书统一费率。一灵界当地昼夜345600共同秒；普通月沿全局标定为30个人界日，只有明确约定的“灵界本地月”才取30个当地昼夜。",
+    "statement": "资源、工价、修为映射、冷却与交通时长为明确有限标定。跨洲阵此配置每次24枚极品灵石及两阵芯，至多6位普通人形；不是全书统一费率。一灵界当地昼夜345600共同秒；普通月沿全局标定为30个人界日，只有明确约定的“灵界本地月”才取30个当地昼夜。 三商盟端常规复用时间现以seas-array-reuse-interval所列百年为准，旧两本地日标定撤销；短途接引与普通路不受此间隔。",
     "classification": "calibration",
     "validAtOpening": true,
     "learnedTime": "作者设定开篇生活与数值；人物只从自己的经历、当前文书和观察得知。",
@@ -108,7 +108,7 @@
   },
   {
     "id": "seas-admission-and-schedules",
-    "statement": "跨大陆名额会不定期拍卖，下一次可隔数十到二三百年；介绍与身份可作为入场途径，合体以上可直接参加。日常进入禁地仍验信物、需接引，资格不是免费传送。",
+    "statement": "跨大陆名额会不定期拍卖，下一次可隔数十到二三百年；介绍与身份可作为入场途径，合体以上可直接参加。日常进入禁地仍验信物、需接引，资格不是免费传送。 准入原句为经人介绍且在本族中有身份地位者有资格，合体以上另可直接参加；不能将介绍与身份误拆为任一项即可。",
     "classification": "backprojection",
     "validAtOpening": true,
     "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
@@ -296,6 +296,13 @@
         "start": 2352,
         "end": 2543,
         "anchorSha256": "dbb7b56c91cffd6aa8c1643d02e5dd7bcdaa2e9caa63d931c34d2c9bc6a7339c"
+      },
+      {
+        "chapterId": "qq-44839020",
+        "chapterSha256": "c539c9d4a04c3ba9656cda452711b321ecd0eb8bd2f13f83e3f25f27767c27bf",
+        "start": 2088,
+        "end": 2204,
+        "anchorSha256": "656e42016d2f7155864af81fae689c6cb4c8f83f3e7eba0a4be5b29da1834541"
       }
     ]
   },
@@ -487,18 +494,27 @@
         "start": 2742,
         "end": 2929,
         "anchorSha256": "ec810c284fc9c2b90ecf10fc82657a624b3a52e588922568c9de2bf0488e2348"
+      },
+      {
+        "chapterId": "qq-46966989",
+        "chapterSha256": "8a689bf43d4fc67344c39f8c94e0809bc8498ac11b26acc32832b9bbef091b90",
+        "start": 2538,
+        "end": 2618,
+        "anchorSha256": "5f0d3271211102aba21935e6ab3a212bb545aeabd3a77020e692d9373533ade4"
       }
     ]
   },
   {
     "id": "seas-xuanjiuling-shadow",
-    "statement": "商盟影子为轩九灵：连续叙事中承担九劫灭真一击的唯一人物。秘术来自祖上、破真仙身需炼九真灵元神，非随手连发；T0本体存活，当前尚无完整九份炼成储备为明确补写。",
+    "statement": "商盟影子为轩九灵：连续叙事中承担九劫灭真一击的唯一人物。秘术来自祖上、破真仙身需炼九真灵元神，非随手连发；T0本体存活，当前尚无完整九份炼成储备为明确补写。 轩九灵与轩八灵是后期连续称谓；开篇显示“轩氏影子”，不凭后期称号推定当前真灵元神数。",
     "classification": "backprojection",
     "validAtOpening": true,
     "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
     "openingReason": "不把未来招募众修、献祭与一击成绩预置。保留本人所学与尚需代价。",
     "status": "reviewed",
-    "dependencies": [],
+    "dependencies": [
+      "seas-shadow-name-time"
+    ],
     "evidence": [
       {
         "chapterId": "qq-46875789",
@@ -605,7 +621,7 @@
   },
   {
     "id": "seas-guangling-fruit",
-    "statement": "广灵道果一次服食一枚，可在万年内形成利于修炼参悟的广灵道体，不直接增加对敌战力；七八倍等描述为田飞儿经验说法，非引擎固定万能倍数。往届约千人受邀而百余得果，未来大会不按章节自动召开。",
+    "statement": "田飞儿称广灵道果一生只能服食一颗，可在万年内形成利于修炼参悟的广灵道体，不直接增加对敌战力；七八倍等描述为田飞儿经验说法，非引擎固定万能倍数。往届约千人受邀而百余得果，未来大会不按章节自动召开。",
     "classification": "testimony",
     "validAtOpening": true,
     "learnedTime": "读者在后期正文获知；运行人物仅接收亲历、机构训练或实际传闻，不接收后续章节结果。",
@@ -640,6 +656,13 @@
         "start": 2172,
         "end": 2361,
         "anchorSha256": "924bd364dba09ba4da2bb51eba5e36e5d0b70b4821561e12e8087ca321ddb3f1"
+      },
+      {
+        "chapterId": "qq-45086060",
+        "chapterSha256": "600c92ee0a123c0bd3d433ba8cb1fe5a7adc2eb4118432fa7ceeb7850ff19ecb",
+        "start": 1529,
+        "end": 1756,
+        "anchorSha256": "a36ab491121d661e48884640d038c3b0e25d037c6b471d0a35b50ca0a7406763"
       }
     ]
   },
@@ -720,6 +743,13 @@
         "start": 989,
         "end": 1179,
         "anchorSha256": "08f35e0e267126f420d8affc3dbb32f08b375163d18d675c0d4f6bb5d7a7629d"
+      },
+      {
+        "chapterId": "qq-47872196",
+        "chapterSha256": "1885a94636dcab4762629e1e21c277f2c8b705db731c763b25c35fe4ebb59deb",
+        "start": 144,
+        "end": 176,
+        "anchorSha256": "4db8707854ca360102a93a8ed654ccf29288174d0fa25d948cce3951db188b1c"
       }
     ]
   },
@@ -852,5 +882,119 @@
         "anchorSha256": "81c1e66c0cf78010ef7f6fcc895416c027f531334a127d6233cad2b0842e759d"
       }
     ]
+  },
+  {
+    "id": "seas-array-reuse-interval",
+    "statement": "明尊对风元这座商盟跨陆阵说明“一般百年内”只能使用一次；只约束这座阵的常规复用，不扩成所有传送阵不可例外的物理法则。本版三商盟端采用相同常规间隔，每次成功发出或接收后该端下一常规使用时刻为当前共同秒加3153600000。另两端同配置及双向占用是明确运行标定；提前复用须实际改变设施条件、付出代价并验证，不能仅付普通票钱绕过。",
+    "classification": "testimony",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知此原则或身份；人物认知仍依世界内获得信息的时间。",
+    "openingReason": "风元阵规则有直接说明，百年按共同人界年计；其他端的同型当前配置是原创。T0三个端均已静置足期，不复制后期雷鸣故障或给韩立预留位置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-45110486",
+        "chapterSha256": "28ebb52a10e4e6a483bcb852422f433e031e6e747aef8f6ebec23cb5c6a2771d",
+        "start": 498,
+        "end": 587,
+        "anchorSha256": "bd842e90a26a95803c48c3d9670081f05e1d1ad1c1d096d287e4fc0e3cf57283"
+      }
+    ]
+  },
+  {
+    "id": "seas-shadow-name-time",
+    "statement": "银罡子说旧称轩八灵者新改轩九灵，并推测又斩一真灵；模糊影子自述九劫灭真、九魂一击，后续施术主体同为轩九灵。唯一ID不变，T0以“轩氏影子”称呼，尚未攒足九魂。旧称八灵同样不提供T0精确积累数，不能反推开篇已有八魂。",
+    "classification": "backprojection",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知此原则或身份；人物认知仍依世界内获得信息的时间。",
+    "openingReason": "长久修炼和祖传秘术支持同主体回溯，精确T0称号和积累无年号；采用不冒称计数的当前称呼。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-46857816",
+        "chapterSha256": "e99d0bfa8448652dd97c43ebd72232764eeec6df11f08d746590aa6dfae4a22d",
+        "start": 1200,
+        "end": 1650,
+        "anchorSha256": "49c06d21c4894e89f07271a03e98b0cc96390c6bed2dc21b5186794e651b2d87"
+      },
+      {
+        "chapterId": "qq-46924410",
+        "chapterSha256": "9edf357ad297de163cf50a92d0161b53e1945607447169c0174e9b47a4cf04c9",
+        "start": 0,
+        "end": 665,
+        "anchorSha256": "a999d65276ea555f27eab0937cdd3c0ba9d55237d73822e896f054d9e38e7550"
+      },
+      {
+        "chapterId": "qq-46875789",
+        "chapterSha256": "58106fd037ab45c0b581d1e0a6ae8dcdf74e895f6280a4975a8ea345161468e1",
+        "start": 2906,
+        "end": 3210,
+        "anchorSha256": "27a3256fa44c8250e0fb36243a9501fcdd0761dc02a04c8590796b74fd67e4fe"
+      }
+    ]
+  },
+  {
+    "id": "seas-access-token-rule",
+    "statement": "商盟巡骑查验有“盟”字的客卿信物，再由接引人员安排进场；持信物不等于越过接引。长老进入符能穿过对应洞天禁制，是特定权限器物，盗持不等于取得长老身份。禁制与社会认可分别裁决。",
+    "classification": "canon",
+    "validAtOpening": true,
+    "learnedTime": "读者在后期正文获知此原则或身份；人物认知仍依世界内获得信息的时间。",
+    "openingReason": "这些是已有机构的准入手段；本次韩立来访、田飞儿盗符与逃遁均不前置。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": [
+      {
+        "chapterId": "qq-44686892",
+        "chapterSha256": "5a9cd37cda84474672df3a2a202ec69eece0e04ae4cbcf90da982dd7b326188d",
+        "start": 1726,
+        "end": 1789,
+        "anchorSha256": "a8f841228f52e1b400133d98f7259a226d65fc56f326edb4f329113461cf5821"
+      },
+      {
+        "chapterId": "qq-44686892",
+        "chapterSha256": "5a9cd37cda84474672df3a2a202ec69eece0e04ae4cbcf90da982dd7b326188d",
+        "start": 1790,
+        "end": 1862,
+        "anchorSha256": "2e97137d433591991aa920b301c77f8469f519d0751aded0ae3e9bb7969b68e3"
+      },
+      {
+        "chapterId": "qq-44710597",
+        "chapterSha256": "a3ff49a05417d55e51196899f471a0d06fbcafc047241f0718531185c1aa2a19",
+        "start": 1728,
+        "end": 1797,
+        "anchorSha256": "4392475042c368dff5c9dc7c2e38d13787dc264f5d1e9db980acc0e9e45b78e5"
+      },
+      {
+        "chapterId": "qq-45027005",
+        "chapterSha256": "c56d2120cb1102a5e8e885066e92eaa1a157cfe6d7d7e9077865d197cbdece19",
+        "start": 624,
+        "end": 717,
+        "anchorSha256": "bb138ac2e047df0e841a72c74d3e97eb960952a723704ae7bf44a13ff377c2ff"
+      }
+    ]
+  },
+  {
+    "id": "seas-reviewed-current-life",
+    "statement": "补实黑焦巡哨、现任巡卫严照及黑翼灵鹰、他的查验登记册、贾姓长老持有的一枚进入符、甲豚守正收到的对岸通行询函、素阴观星者自绘的公开星图片。这些具体人、物、关系、日期和路线均原创；不是把韩立来访时的未具名巡骑强认成数千年前同一批人。",
+    "classification": "original",
+    "validAtOpening": true,
+    "learnedTime": "作者设定开篇具体设施、人员和有限数值；人物仅由亲历、文书或实际传授得知。",
+    "openingReason": "将已有岗位、持物与当前行动线索落到真实实体；未知后期人名和寿龄仅在索引保留。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
+  },
+  {
+    "id": "seas-reviewed-current-values",
+    "statement": "巡卫为明确原创炼虚修士，灵鹰为已经训练的低阶妖禽；巡哨单次耗骑者20法力和鹰15法力，休息与饲料按实际恢复，不无限飞行。现存进入符仅一枚，无复制手艺；一份公开星图可抄一份纸本消耗一份材料与一个时辰。商盟当前三阵每次最多六人和24极品两阵芯均为当前配置标定，不宣称原文后期五十七人传送也只有六人。",
+    "classification": "calibration",
+    "validAtOpening": true,
+    "learnedTime": "作者设定开篇具体设施、人员和有限数值；人物仅由亲历、文书或实际传授得知。",
+    "openingReason": "数量和成本只限定当前设施和现有技能，不增无限物资；升级扩容仍需实际改造。",
+    "status": "reviewed",
+    "dependencies": [],
+    "evidence": []
   }
 ]

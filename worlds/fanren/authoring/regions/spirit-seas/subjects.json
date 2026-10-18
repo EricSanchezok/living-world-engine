@@ -330,7 +330,7 @@
   },
   {
     "id": "seas-fengyuan-array-core",
-    "label": "商盟fengyuan阵体",
+    "label": "商盟风元阵体",
     "kind": "item",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
@@ -342,7 +342,7 @@
   },
   {
     "id": "seas-fengyuan-energy",
-    "label": "商盟fengyuan公用供能库",
+    "label": "商盟风元公用供能库",
     "kind": "container",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
@@ -402,7 +402,7 @@
   },
   {
     "id": "seas-thunder-array-core",
-    "label": "商盟thunder阵体",
+    "label": "商盟雷鸣阵体",
     "kind": "item",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
@@ -414,7 +414,7 @@
   },
   {
     "id": "seas-thunder-energy",
-    "label": "商盟thunder公用供能库",
+    "label": "商盟雷鸣公用供能库",
     "kind": "container",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
@@ -474,7 +474,7 @@
   },
   {
     "id": "seas-blood-array-core",
-    "label": "商盟blood阵体",
+    "label": "商盟血天阵体",
     "kind": "item",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
@@ -486,7 +486,7 @@
   },
   {
     "id": "seas-blood-energy",
-    "label": "商盟blood公用供能库",
+    "label": "商盟血天公用供能库",
     "kind": "container",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
@@ -821,22 +821,27 @@
   },
   {
     "id": "canon-xuan-jiu-ling",
-    "label": "轩九灵",
+    "label": "轩氏影子",
     "kind": "person",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
     "claimIds": [
       "seas-xuanjiuling-shadow",
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-shadow-name-time"
     ],
     "aliases": [
-      "商盟影子"
-    ]
+      "商盟影子",
+      "轩八灵",
+      "轩九灵",
+      "本盟影子"
+    ],
+    "reason": "轩八灵、轩九灵是后期连续称号，开篇确切计数不可判；同主体只生成一位，当前不使用已炼九灵的称呼。"
   },
   {
     "id": "canon-xuan-jiu-ling-private-stock",
-    "label": "轩九灵的私人储备",
+    "label": "轩氏影子的私人储备",
     "kind": "container",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
@@ -1259,7 +1264,7 @@
   },
   {
     "id": "seas-thunder-signal-wall",
-    "label": "商盟thunder传讯壁",
+    "label": "商盟雷鸣传讯壁",
     "kind": "item",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
@@ -1283,7 +1288,7 @@
   },
   {
     "id": "seas-blood-signal-wall",
-    "label": "商盟blood传讯壁",
+    "label": "商盟血天传讯壁",
     "kind": "item",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
@@ -1366,7 +1371,7 @@
   },
   {
     "id": "seas-shadow-method",
-    "label": "轩九灵祖传秘术册",
+    "label": "轩氏影子祖传秘术册",
     "kind": "item",
     "openingState": "present",
     "classification": "reviewed-source-and-calibration",
@@ -2247,5 +2252,156 @@
       "seas-finite-values"
     ],
     "aliases": []
+  },
+  {
+    "id": "seas-patrol-post",
+    "label": "黑焦巡哨",
+    "kind": "location",
+    "openingState": "present",
+    "classification": "explicit-original-current-life",
+    "claimIds": [
+      "seas-access-token-rule",
+      "seas-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "seas-jia-entry-seal",
+    "label": "贾长老进入符",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-current-life",
+    "claimIds": [
+      "seas-access-token-rule",
+      "seas-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "seas-patrol-ledger",
+    "label": "巡哨查验簿",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-current-life",
+    "claimIds": [
+      "seas-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "seas-patrol-rider",
+    "label": "严照",
+    "kind": "person",
+    "openingState": "present",
+    "classification": "explicit-original-current-life",
+    "claimIds": [
+      "seas-reviewed-current-life",
+      "seas-reviewed-current-values"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "seas-patrol-hawk",
+    "label": "巡哨黑翼灵鹰",
+    "kind": "creature",
+    "openingState": "present",
+    "classification": "explicit-original-current-life",
+    "claimIds": [
+      "seas-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "seas-hawk-provisions",
+    "label": "鹰架饲料袋",
+    "kind": "container",
+    "openingState": "present",
+    "classification": "explicit-original-current-life",
+    "claimIds": [
+      "seas-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "seas-jiatun-transit-inquiry",
+    "label": "甲豚对岸询函",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-current-life",
+    "claimIds": [
+      "seas-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "seas-suyin-public-star-chart",
+    "label": "观星者公开星图片",
+    "kind": "item",
+    "openingState": "present",
+    "classification": "explicit-original-current-life",
+    "claimIds": [
+      "seas-reviewed-current-life"
+    ],
+    "aliases": []
+  },
+  {
+    "id": "seas-unnamed-blood-messenger",
+    "label": "血天冷艳女使",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-at-opening",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "相邻接待场景连续，但未提供姓名、出生或T0任职年代；仅保留后期岗位身份。"
+  },
+  {
+    "id": "seas-unnamed-port-officer",
+    "label": "血天港口分盟负责人",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-at-opening",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "后期报告碧影死讯的中年负责人，姓名和T0寿龄不明，不与其他无名官员合并。"
+  },
+  {
+    "id": "seas-blood-mu-elder",
+    "label": "木姓商盟长老",
+    "kind": "indexed-subject",
+    "openingState": "unresolved-at-opening",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "qq46171489中被文心凤称木兄的绿袍长老，异于碧影；后期任职已知，T0出生和境界无精确锚点。"
+  },
+  {
+    "id": "seas-future-contested-world",
+    "label": "商盟与鬼界争夺的小世界",
+    "kind": "indexed-subject",
+    "openingState": "not-discovered-at-opening",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "百余年前发现相对大乘韩立时代，距T0仍在未来；不生成已知入口、三十六据点、决斗场和当前资源权。原始世界形成时间未定。"
+  },
+  {
+    "id": "seas-future-demon-suppression-league",
+    "label": "血天屠魔盟",
+    "kind": "indexed-subject",
+    "openingState": "future-organization",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "面对后期血祭才拟议的临时联盟，T0未成立；不倒灌君易梦参与或碧影安排。"
+  },
+  {
+    "id": "seas-future-maliang-confrontation",
+    "label": "马良下界与商盟应战诸事件",
+    "kind": "indexed-subject",
+    "openingState": "future-events",
+    "classification": "source-bounded-editorial-index",
+    "claimIds": [],
+    "aliases": [],
+    "reason": "马良下界、血祭、追踪、各方邀战与撤退为后期可能轨迹，不创建开篇任务、兵力、债务或确定死亡。"
   }
 ]

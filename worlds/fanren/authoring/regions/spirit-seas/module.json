@@ -125,6 +125,30 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "seas-heijiao-peaks-reviewed-route-seas-patrol-post",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "seas-patrol-post"
+          },
+          "description": "reviewed-route-seas-patrol-post",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "seas-heijiao-peaks-reviewed-condition-seas-patrol-post",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "山道步行约半个时辰；入禁地须让巡哨核验凭证并取得接引。"
+          },
+          "description": "山道步行约半个时辰；入禁地须让巡哨核验凭证并取得接引。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -182,6 +206,30 @@
             "value": "光门与地下接引台构成短程通道，准许、阵完整与当值接引缺一不可。"
           },
           "description": "光门与地下接引台构成短程通道，准许、阵完整与当值接引缺一不可。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "seas-xuantian-gate-reviewed-route-seas-patrol-post",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "seas-patrol-post"
+          },
+          "description": "reviewed-route-seas-patrol-post",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "seas-xuantian-gate-reviewed-condition-seas-patrol-post",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "山道步行约半个时辰；入禁地须让巡哨核验凭证并取得接引。"
+          },
+          "description": "山道步行约半个时辰；入禁地须让巡哨核验凭证并取得接引。",
           "access": {
             "kind": "public"
           }
@@ -616,7 +664,7 @@
       "name": "商盟拍卖洞天",
       "kind": "location",
       "placement": "seas-auction-tower",
-      "description": "有广场、石台、飞屋和警戒禁制，当前只是小规模委托洽谈，未开未来大会。",
+      "description": "有广场、石台、飞屋和警戒禁制，当前只受理小规模委托洽谈。",
       "facts": [
         {
           "id": "seas-auction-space-route-seas-auction-tower",
@@ -760,7 +808,7 @@
       "name": "雷鸣商盟总堂",
       "kind": "location",
       "placement": "thunder-cloud-city",
-      "description": "有持有人、守卫与受控门禁的实际场所。",
+      "description": "银灰石庭面向雷鸣商路，公示栏记录货运和传送受理时段；主事内室另有门禁。",
       "facts": [
         {
           "id": "seas-thunder-headquarters-route-thunder-cloud-city",
@@ -820,7 +868,7 @@
       "name": "血天商盟传送厅",
       "kind": "location",
       "placement": "blood-crane-city",
-      "description": "有持有人、守卫与受控门禁的实际场所。",
+      "description": "血鹤城外一片青石地围住巨型阵台，侧屋收存耗材和接应记录；到访者要先向分盟登记。",
       "facts": [
         {
           "id": "seas-blood-relay-hall-route-blood-crane-city",
@@ -863,9 +911,9 @@
           "predicate": "travel-condition",
           "value": {
             "kind": "text",
-            "value": "两端授权与接应、兼容阵体完好、出发端真实消耗24枚极品灵石及两枚阵芯、满足冷却；上限六人。登记名额与收费另议，不能从身上灵石数量直接取得他人阵权。"
+            "value": "仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。"
           },
-          "description": "两端授权与接应、兼容阵体完好、出发端真实消耗24枚极品灵石及两枚阵芯、满足冷却；上限六人。登记名额与收费另议，不能从身上灵石数量直接取得他人阵权。",
+          "description": "仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。",
           "access": {
             "kind": "public"
           }
@@ -887,9 +935,9 @@
           "predicate": "travel-condition",
           "value": {
             "kind": "text",
-            "value": "两端授权与接应、兼容阵体完好、出发端真实消耗24枚极品灵石及两枚阵芯、满足冷却；上限六人。登记名额与收费另议，不能从身上灵石数量直接取得他人阵权。"
+            "value": "仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。"
           },
-          "description": "两端授权与接应、兼容阵体完好、出发端真实消耗24枚极品灵石及两枚阵芯、满足冷却；上限六人。登记名额与收费另议，不能从身上灵石数量直接取得他人阵权。",
+          "description": "仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。",
           "access": {
             "kind": "public"
           }
@@ -904,7 +952,7 @@
       "name": "风元商盟传送厅",
       "kind": "location",
       "placement": "seas-underground-headquarters",
-      "description": "有持有人、守卫与受控门禁的实际场所。",
+      "description": "地下总堂深处的一座高殿，阵槽环绕石台，旁设等候席与锁柜；内街步行可至门外。",
       "facts": [
         {
           "id": "seas-fengyuan-relay-hall-route-seas-underground-headquarters",
@@ -947,9 +995,9 @@
           "predicate": "travel-condition",
           "value": {
             "kind": "text",
-            "value": "两端授权与接应、兼容阵体完好、出发端真实消耗24枚极品灵石及两枚阵芯、满足冷却；上限六人。登记名额与收费另议，不能从身上灵石数量直接取得他人阵权。"
+            "value": "仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。"
           },
-          "description": "两端授权与接应、兼容阵体完好、出发端真实消耗24枚极品灵石及两枚阵芯、满足冷却；上限六人。登记名额与收费另议，不能从身上灵石数量直接取得他人阵权。",
+          "description": "仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。",
           "access": {
             "kind": "public"
           }
@@ -971,9 +1019,9 @@
           "predicate": "travel-condition",
           "value": {
             "kind": "text",
-            "value": "两端授权与接应、兼容阵体完好、出发端真实消耗24枚极品灵石及两枚阵芯、满足冷却；上限六人。登记名额与收费另议，不能从身上灵石数量直接取得他人阵权。"
+            "value": "仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。"
           },
-          "description": "两端授权与接应、兼容阵体完好、出发端真实消耗24枚极品灵石及两枚阵芯、满足冷却；上限六人。登记名额与收费另议，不能从身上灵石数量直接取得他人阵权。",
+          "description": "仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。",
           "access": {
             "kind": "public"
           }
@@ -988,7 +1036,7 @@
       "name": "雷鸣商盟传送厅",
       "kind": "location",
       "placement": "seas-thunder-headquarters",
-      "description": "有持有人、守卫与受控门禁的实际场所。",
+      "description": "雷鸣总堂后院的方形阵厅，出入台阶与装芯通道分开，值守者能核对两端接应。",
       "facts": [
         {
           "id": "seas-thunder-relay-hall-route-seas-thunder-headquarters",
@@ -1031,9 +1079,9 @@
           "predicate": "travel-condition",
           "value": {
             "kind": "text",
-            "value": "两端授权与接应、兼容阵体完好、出发端真实消耗24枚极品灵石及两枚阵芯、满足冷却；上限六人。登记名额与收费另议，不能从身上灵石数量直接取得他人阵权。"
+            "value": "仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。"
           },
-          "description": "两端授权与接应、兼容阵体完好、出发端真实消耗24枚极品灵石及两枚阵芯、满足冷却；上限六人。登记名额与收费另议，不能从身上灵石数量直接取得他人阵权。",
+          "description": "仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。",
           "access": {
             "kind": "public"
           }
@@ -1055,9 +1103,9 @@
           "predicate": "travel-condition",
           "value": {
             "kind": "text",
-            "value": "两端授权与接应、兼容阵体完好、出发端真实消耗24枚极品灵石及两枚阵芯、满足冷却；上限六人。登记名额与收费另议，不能从身上灵石数量直接取得他人阵权。"
+            "value": "仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。"
           },
-          "description": "两端授权与接应、兼容阵体完好、出发端真实消耗24枚极品灵石及两枚阵芯、满足冷却；上限六人。登记名额与收费另议，不能从身上灵石数量直接取得他人阵权。",
+          "description": "仅这条跨陆路径须两端授权与接应、阵体完好、两端均已达到next-available-time；出发端实耗24枚极品灵石和两枚阵芯，成功后两端各进入百年常规复用间隔；上限六人。名额、收费和行李另议，步行进出阵厅不占传送运力。",
           "access": {
             "kind": "public"
           }
@@ -1072,7 +1120,7 @@
       "name": "胡氏三尾狐修行所",
       "kind": "location",
       "placement": "blood-north-domain",
-      "description": "有持有人、守卫与受控门禁的实际场所。",
+      "description": "靠着血天市路的狐族小院，前室放交易札记，后室留给主人静修与梳尾；来客先叩外门。",
       "facts": [
         {
           "id": "seas-hu-house-route-blood-north-domain",
@@ -1105,10 +1153,10 @@
     },
     {
       "id": "seas-fengyuan-array-core",
-      "name": "商盟fengyuan阵体",
+      "name": "商盟风元阵体",
       "kind": "item",
       "placement": "seas-fengyuan-relay-hall",
-      "description": "仅连另两处商盟登记阵厅，需装入两枚兼容阵芯、24枚极品灵石并确认接应；每次最多六人及合理行李，输送完成后该端至少两个本地日散去余波。",
+      "description": "连接另外两处商盟登记阵厅；当前每班至多六人与合理行李。两端均须已到下一常规使用时刻、阵体完好并互相接应，出发端投入24枚极品灵石和两枚完整阵芯。一般百年内只能使用一次，发出与接收都会占用本端一次运力。",
       "facts": [
         {
           "id": "seas-fengyuan-array-core-owned-by",
@@ -1163,9 +1211,21 @@
           "predicate": "departure-accounting",
           "value": {
             "kind": "text",
-            "value": "一次成功出发由出发端实际消耗24极品石与两完整配套阵芯，阵芯当次毁去；将本端next-available-time设为当前共同秒加691200。冷却与耗用不由另一端自动代付。"
+            "value": "出发端实耗24枚极品灵石和两枚配套阵芯，阵芯当次失效；成功传送时同时将出发、接收两端next-available-time设为当前共同秒加3153600000。未成功按实际损耗记账。欲提前复用须具体解决限制并验证，不能靠反向传送、另付票钱或口头授权刷新。"
           },
-          "description": "一次成功出发由出发端实际消耗24极品石与两完整配套阵芯，阵芯当次毁去；将本端next-available-time设为当前共同秒加691200。冷却与耗用不由另一端自动代付。",
+          "description": "出发端实耗24枚极品灵石和两枚配套阵芯，阵芯当次失效；成功传送时同时将出发、接收两端next-available-time设为当前共同秒加3153600000。未成功按实际损耗记账。欲提前复用须具体解决限制并验证，不能靠反向传送、另付票钱或口头授权刷新。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "seas-fengyuan-array-core-routine-interval-seconds",
+          "predicate": "routine-interval-seconds",
+          "value": {
+            "kind": "number",
+            "value": 3153600000
+          },
+          "description": "routine-interval-seconds",
           "access": {
             "kind": "private"
           }
@@ -1177,7 +1237,7 @@
     },
     {
       "id": "seas-fengyuan-energy",
-      "name": "商盟fengyuan公用供能库",
+      "name": "商盟风元公用供能库",
       "kind": "container",
       "placement": "seas-fengyuan-relay-hall",
       "description": "本端跨洲供能库存；申请人付费不等于库存瞬间增加。",
@@ -1302,10 +1362,10 @@
     },
     {
       "id": "seas-thunder-array-core",
-      "name": "商盟thunder阵体",
+      "name": "商盟雷鸣阵体",
       "kind": "item",
       "placement": "seas-thunder-relay-hall",
-      "description": "仅连另两处商盟登记阵厅，需装入两枚兼容阵芯、24枚极品灵石并确认接应；每次最多六人及合理行李，输送完成后该端至少两个本地日散去余波。",
+      "description": "连接另外两处商盟登记阵厅；当前每班至多六人与合理行李。两端均须已到下一常规使用时刻、阵体完好并互相接应，出发端投入24枚极品灵石和两枚完整阵芯。一般百年内只能使用一次，发出与接收都会占用本端一次运力。",
       "facts": [
         {
           "id": "seas-thunder-array-core-owned-by",
@@ -1360,9 +1420,21 @@
           "predicate": "departure-accounting",
           "value": {
             "kind": "text",
-            "value": "一次成功出发由出发端实际消耗24极品石与两完整配套阵芯，阵芯当次毁去；将本端next-available-time设为当前共同秒加691200。冷却与耗用不由另一端自动代付。"
+            "value": "出发端实耗24枚极品灵石和两枚配套阵芯，阵芯当次失效；成功传送时同时将出发、接收两端next-available-time设为当前共同秒加3153600000。未成功按实际损耗记账。欲提前复用须具体解决限制并验证，不能靠反向传送、另付票钱或口头授权刷新。"
           },
-          "description": "一次成功出发由出发端实际消耗24极品石与两完整配套阵芯，阵芯当次毁去；将本端next-available-time设为当前共同秒加691200。冷却与耗用不由另一端自动代付。",
+          "description": "出发端实耗24枚极品灵石和两枚配套阵芯，阵芯当次失效；成功传送时同时将出发、接收两端next-available-time设为当前共同秒加3153600000。未成功按实际损耗记账。欲提前复用须具体解决限制并验证，不能靠反向传送、另付票钱或口头授权刷新。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "seas-thunder-array-core-routine-interval-seconds",
+          "predicate": "routine-interval-seconds",
+          "value": {
+            "kind": "number",
+            "value": 3153600000
+          },
+          "description": "routine-interval-seconds",
           "access": {
             "kind": "private"
           }
@@ -1374,7 +1446,7 @@
     },
     {
       "id": "seas-thunder-energy",
-      "name": "商盟thunder公用供能库",
+      "name": "商盟雷鸣公用供能库",
       "kind": "container",
       "placement": "seas-thunder-relay-hall",
       "description": "本端跨洲供能库存；申请人付费不等于库存瞬间增加。",
@@ -1499,10 +1571,10 @@
     },
     {
       "id": "seas-blood-array-core",
-      "name": "商盟blood阵体",
+      "name": "商盟血天阵体",
       "kind": "item",
       "placement": "seas-blood-relay-hall",
-      "description": "仅连另两处商盟登记阵厅，需装入两枚兼容阵芯、24枚极品灵石并确认接应；每次最多六人及合理行李，输送完成后该端至少两个本地日散去余波。",
+      "description": "连接另外两处商盟登记阵厅；当前每班至多六人与合理行李。两端均须已到下一常规使用时刻、阵体完好并互相接应，出发端投入24枚极品灵石和两枚完整阵芯。一般百年内只能使用一次，发出与接收都会占用本端一次运力。",
       "facts": [
         {
           "id": "seas-blood-array-core-owned-by",
@@ -1557,9 +1629,21 @@
           "predicate": "departure-accounting",
           "value": {
             "kind": "text",
-            "value": "一次成功出发由出发端实际消耗24极品石与两完整配套阵芯，阵芯当次毁去；将本端next-available-time设为当前共同秒加691200。冷却与耗用不由另一端自动代付。"
+            "value": "出发端实耗24枚极品灵石和两枚配套阵芯，阵芯当次失效；成功传送时同时将出发、接收两端next-available-time设为当前共同秒加3153600000。未成功按实际损耗记账。欲提前复用须具体解决限制并验证，不能靠反向传送、另付票钱或口头授权刷新。"
           },
-          "description": "一次成功出发由出发端实际消耗24极品石与两完整配套阵芯，阵芯当次毁去；将本端next-available-time设为当前共同秒加691200。冷却与耗用不由另一端自动代付。",
+          "description": "出发端实耗24枚极品灵石和两枚配套阵芯，阵芯当次失效；成功传送时同时将出发、接收两端next-available-time设为当前共同秒加3153600000。未成功按实际损耗记账。欲提前复用须具体解决限制并验证，不能靠反向传送、另付票钱或口头授权刷新。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "seas-blood-array-core-routine-interval-seconds",
+          "predicate": "routine-interval-seconds",
+          "value": {
+            "kind": "number",
+            "value": 3153600000
+          },
+          "description": "routine-interval-seconds",
           "access": {
             "kind": "private"
           }
@@ -1571,7 +1655,7 @@
     },
     {
       "id": "seas-blood-energy",
-      "name": "商盟blood公用供能库",
+      "name": "商盟血天公用供能库",
       "kind": "container",
       "placement": "seas-blood-relay-hall",
       "description": "本端跨洲供能库存；申请人付费不等于库存瞬间增加。",
@@ -2116,7 +2200,7 @@
       "name": "甲豚雷鸣接应殿",
       "kind": "location",
       "placement": "thunder-continent",
-      "description": "当前为甲豚往来者服务的另一端殿，精确落点与配置属原创。",
+      "description": "雷鸣一侧山坳中的接应殿，墙上留有甲豚族往来标记；阵槽目前没有可供回程的极品灵石与完整阵芯。",
       "facts": [
         {
           "id": "seas-jiatun-thunder-counterpart-route-seas-jiatun-array-hall",
@@ -2205,7 +2289,7 @@
       "name": "甲豚配套阵芯1",
       "kind": "item",
       "placement": "seas-jiatun-array-hall",
-      "description": "完整一次性核心，需真实投入，不能以文字说已换芯而保留原物。",
+      "description": "与本殿阵槽匹配的一次性核心，封纸完整；投入传送后会失效。",
       "facts": [
         {
           "id": "seas-jiatun-chip-1-owned-by",
@@ -2229,7 +2313,7 @@
       "name": "甲豚配套阵芯2",
       "kind": "item",
       "placement": "seas-jiatun-array-hall",
-      "description": "完整一次性核心，需真实投入，不能以文字说已换芯而保留原物。",
+      "description": "与本殿阵槽匹配的一次性核心，封纸完整；投入传送后会失效。",
       "facts": [
         {
           "id": "seas-jiatun-chip-2-owned-by",
@@ -2423,7 +2507,7 @@
             },
             {
               "id": "known-canon-xuan-jiu-ling",
-              "name": "轩九灵",
+              "name": "轩氏影子",
               "description": "少数知悉彼此真实身份的长期合作人，不共享所有私念。",
               "status": "observed"
             },
@@ -2647,6 +2731,21 @@
                 "value": "知道商盟高层相传的仙界后裔监察历史与登天阁旧藏；现无与仙界通联的可靠渠道。"
               },
               "description": "知道商盟高层相传的仙界后裔监察历史与登天阁旧藏；现无与仙界通联的可靠渠道。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "reviewed-transit-interval",
+              "subjectId": "self",
+              "predicate": "known-transit-condition",
+              "value": {
+                "kind": "text",
+                "value": "现用商盟三端每次发出或接收都占用该端一次常规运力，一般百年内不能再用；尚无已验证的提前重开办法。能买票不等于可短期往返或转乘。"
+              },
+              "description": "从当前受理文书和当事人说明获知的行程限制。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -2884,7 +2983,7 @@
             {
               "id": "known-seas-hu-invitation",
               "name": "飞云致胡玉双邀约",
-              "description": "自己寄出的主持邀请，尚未收到接受承诺。",
+              "description": "请胡玉双在60个本地日内回复是否愿赴风元主持一次小规模交易；拟酬20高阶灵石并提供单程名额。百年常规用阵间隔会妨碍迅速返回，往返方案尚未落实，不能保证60日到场。本人可拒绝或要求先解决回程，当前未签约。",
               "status": "observed"
             },
             {
@@ -3035,6 +3134,21 @@
                 "value": "跨洲联络会持续耗费双方本人灵力，不能单凭存石无限通话。"
               },
               "description": "跨洲联络会持续耗费双方本人灵力，不能单凭存石无限通话。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "reviewed-transit-interval",
+              "subjectId": "self",
+              "predicate": "known-transit-condition",
+              "value": {
+                "kind": "text",
+                "value": "现用商盟三端每次发出或接收都占用该端一次常规运力，一般百年内不能再用；尚无已验证的提前重开办法。能买票不等于可短期往返或转乘。"
+              },
+              "description": "从当前受理文书和当事人说明获知的行程限制。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -3241,26 +3355,26 @@
             },
             {
               "id": "known-seas-thunder-signal-wall",
-              "name": "商盟thunder传讯壁",
+              "name": "商盟雷鸣传讯壁",
               "description": "自己分盟实际讯端。",
               "status": "observed"
             },
             {
               "id": "known-seas-thunder-relay-hall",
               "name": "雷鸣商盟传送厅",
-              "description": "自己有实际开阵职权；消耗出发端库存及两芯，次日不能无视两本地日冷却再次出发。",
+              "description": "自己有实际开阵职权；消耗出发端库存及两芯，须分别核对出发与接收端的百年常规复用时刻。",
               "status": "observed"
             },
             {
               "id": "known-seas-thunder-array-core",
-              "name": "商盟thunder阵体",
-              "description": "自己有实际开阵职权；消耗出发端库存及两芯，次日不能无视两本地日冷却再次出发。",
+              "name": "商盟雷鸣阵体",
+              "description": "连接另外两处商盟登记阵厅；当前每班至多六人与合理行李。两端均须已到下一常规使用时刻、阵体完好并互相接应，出发端投入24枚极品灵石和两枚完整阵芯。一般百年内只能使用一次，发出与接收都会占用本端一次运力。",
               "status": "observed"
             },
             {
               "id": "known-seas-thunder-energy",
-              "name": "商盟thunder公用供能库",
-              "description": "自己有实际开阵职权；消耗出发端库存及两芯，次日不能无视两本地日冷却再次出发。",
+              "name": "商盟雷鸣公用供能库",
+              "description": "自己有实际开阵职权；消耗出发端库存及两芯，须分别核对出发与接收端的百年常规复用时刻。",
               "status": "observed"
             }
           ],
@@ -3375,6 +3489,21 @@
                 "value": "跨洲联络会持续耗费双方本人灵力，不能单凭存石无限通话。"
               },
               "description": "跨洲联络会持续耗费双方本人灵力，不能单凭存石无限通话。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "reviewed-transit-interval",
+              "subjectId": "self",
+              "predicate": "known-transit-condition",
+              "value": {
+                "kind": "text",
+                "value": "现用商盟三端每次发出或接收都占用该端一次常规运力，一般百年内不能再用；尚无已验证的提前重开办法。能买票不等于可短期往返或转乘。"
+              },
+              "description": "从当前受理文书和当事人说明获知的行程限制。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -3564,7 +3693,7 @@
             {
               "id": "known-seas-hu-invitation",
               "name": "飞云致胡玉双邀约",
-              "description": "邀约胡玉双在60个本地日内择期至风元主持一场小规模材料交易；报酬20高阶石，另提供本人往返名额，接受前须两方落实用阵班次。尚未签约，不强迫赴任。",
+              "description": "请胡玉双在60个本地日内回复是否愿赴风元主持一次小规模交易；拟酬20高阶灵石并提供单程名额。百年常规用阵间隔会妨碍迅速返回，往返方案尚未落实，不能保证60日到场。本人可拒绝或要求先解决回程，当前未签约。",
               "status": "observed"
             },
             {
@@ -3640,6 +3769,21 @@
                 "value": "熟悉自己的身体资质与已经练过的功法。"
               },
               "description": "熟悉自己的身体资质与已经练过的功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "reviewed-transit-interval",
+              "subjectId": "self",
+              "predicate": "known-transit-condition",
+              "value": {
+                "kind": "text",
+                "value": "现用商盟三端每次发出或接收都占用该端一次常规运力，一般百年内不能再用；尚无已验证的提前重开办法。能买票不等于可短期往返或转乘。"
+              },
+              "description": "从当前受理文书和当事人说明获知的行程限制。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -3867,6 +4011,12 @@
               "name": "四长老合练札记",
               "description": "参与记录的真实研究，不将愿望当已成神通。",
               "status": "observed"
+            },
+            {
+              "id": "reviewed-seas-jia-entry-seal",
+              "name": "贾长老进入符",
+              "description": "一枚刻有塔内阵纹的符片，由贾姓长老持有；只能辅助穿过所登记的拍卖洞天禁制。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -3917,6 +4067,12 @@
               "canonical_entity_ids": [
                 "seas-four-study-notes"
               ]
+            },
+            {
+              "local_entity_id": "reviewed-seas-jia-entry-seal",
+              "canonical_entity_ids": [
+                "seas-jia-entry-seal"
+              ]
             }
           ],
           "evidence": [
@@ -3924,6 +4080,13 @@
               "id": "prior-life",
               "kind": "observation",
               "description": "自身经历、修行和职务往来。",
+              "sourceId": null,
+              "step": 0
+            },
+            {
+              "id": "reviewed-current-duty",
+              "kind": "observation",
+              "description": "自己保管长老进入符并使用过对应禁制。",
               "sourceId": null,
               "step": 0
             }
@@ -4002,7 +4165,7 @@
     },
     {
       "id": "canon-xuan-jiu-ling",
-      "name": "轩九灵",
+      "name": "轩氏影子",
       "kind": "person",
       "placement": "seas-shadow-retreat",
       "description": "商盟影子，隐蔽行事的大乘修士，珍惜自己的秘术与脱身余地。",
@@ -4123,7 +4286,7 @@
           "local_entities": [
             {
               "id": "self",
-              "name": "轩九灵",
+              "name": "轩氏影子",
               "description": "商盟影子，隐蔽行事的大乘修士，珍惜自己的秘术与脱身余地。",
               "status": "observed"
             },
@@ -4135,7 +4298,7 @@
             },
             {
               "id": "known-canon-xuan-jiu-ling-private-stock",
-              "name": "轩九灵的私人储备",
+              "name": "轩氏影子的私人储备",
               "description": "自用财物，不属于所在机构公库。",
               "status": "observed"
             },
@@ -4147,7 +4310,7 @@
             },
             {
               "id": "known-seas-shadow-method",
-              "name": "轩九灵祖传秘术册",
+              "name": "轩氏影子祖传秘术册",
               "description": "九劫灭真法传承与个人研究，完整施展需九真灵元神的特殊炼化积累；当前没有凑齐可释放一击的储备。",
               "status": "observed"
             }
@@ -4245,7 +4408,7 @@
     },
     {
       "id": "canon-xuan-jiu-ling-private-stock",
-      "name": "轩九灵的私人储备",
+      "name": "轩氏影子的私人储备",
       "kind": "container",
       "placement": "canon-xuan-jiu-ling",
       "description": "自用财物，不属于所在机构公库。",
@@ -4393,7 +4556,7 @@
           "goals": [
             {
               "id": "current-purpose",
-              "description": "弄清两个申请人的目的和时间约束，提出可执行的共乘方案。",
+              "description": "向两位目的地不同的申请人讲清百年用阵间隔，商议取舍、替代路线或延期，不先收无法兑现的票钱。",
               "priority": 0.5,
               "progress": 0
             }
@@ -4422,7 +4585,7 @@
             {
               "id": "known-seas-seat-ledger",
               "name": "本轮跨洲运力账",
-              "description": "当前已可查阅的受理条件和费用，未替自己签任何出行约。",
+              "description": "三端现均可受理。风元本轮只能选雷鸣或血天开一次六人内输送；发出和接收端随后一般百年不能再用，不能靠同阵转乘另一陆解决两个申请人的不同目的地。每席拟价12高阶灵石，价款付入盟库，耗用仍须从真实极品库存扣。",
               "status": "observed"
             },
             {
@@ -4441,6 +4604,18 @@
               "id": "known-seas-journey-applicant",
               "name": "卢缄",
               "description": "已在接引处见面讨论不同目的地，尚可自由决定是否合作。",
+              "status": "observed"
+            },
+            {
+              "id": "reviewed-seas-patrol-rider",
+              "name": "严照",
+              "description": "商盟炼虚巡骑，熟悉黑焦峰的热风，交接时先看证物再听解释。",
+              "status": "observed"
+            },
+            {
+              "id": "reviewed-seas-patrol-ledger",
+              "name": "巡哨查验簿",
+              "description": "写有今日巡线和接引交接的册子，客卿登记与员工通行分栏记录。",
               "status": "observed"
             }
           ],
@@ -4486,6 +4661,18 @@
               "canonical_entity_ids": [
                 "seas-journey-applicant"
               ]
+            },
+            {
+              "local_entity_id": "reviewed-seas-patrol-rider",
+              "canonical_entity_ids": [
+                "seas-patrol-rider"
+              ]
+            },
+            {
+              "local_entity_id": "reviewed-seas-patrol-ledger",
+              "canonical_entity_ids": [
+                "seas-patrol-ledger"
+              ]
             }
           ],
           "evidence": [
@@ -4493,6 +4680,13 @@
               "id": "prior-life",
               "kind": "observation",
               "description": "自身经历、修行和职务往来。",
+              "sourceId": null,
+              "step": 0
+            },
+            {
+              "id": "reviewed-current-duty",
+              "kind": "observation",
+              "description": "实际登记和巡哨交接。",
               "sourceId": null,
               "step": 0
             }
@@ -4522,6 +4716,21 @@
                 "value": "熟悉自己的身体资质与已经练过的功法。"
               },
               "description": "熟悉自己的身体资质与已经练过的功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "reviewed-transit-interval",
+              "subjectId": "self",
+              "predicate": "known-transit-condition",
+              "value": {
+                "kind": "text",
+                "value": "现用商盟三端每次发出或接收都占用该端一次常规运力，一般百年内不能再用；尚无已验证的提前重开办法。能买票不等于可短期往返或转乘。"
+              },
+              "description": "从当前受理文书和当事人说明获知的行程限制。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -4723,7 +4932,7 @@
             {
               "id": "known-seas-seat-ledger",
               "name": "本轮跨洲运力账",
-              "description": "当前已可查阅的受理条件和费用，未替自己签任何出行约。",
+              "description": "三端现均可受理。风元本轮只能选雷鸣或血天开一次六人内输送；发出和接收端随后一般百年不能再用，不能靠同阵转乘另一陆解决两个申请人的不同目的地。每席拟价12高阶灵石，价款付入盟库，耗用仍须从真实极品库存扣。",
               "status": "observed"
             },
             {
@@ -4835,6 +5044,21 @@
                 "value": "熟悉自己的身体资质与已经练过的功法。"
               },
               "description": "熟悉自己的身体资质与已经练过的功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "reviewed-transit-interval",
+              "subjectId": "self",
+              "predicate": "known-transit-condition",
+              "value": {
+                "kind": "text",
+                "value": "现用商盟三端每次发出或接收都占用该端一次常规运力，一般百年内不能再用；尚无已验证的提前重开办法。能买票不等于可短期往返或转乘。"
+              },
+              "description": "从当前受理文书和当事人说明获知的行程限制。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -4995,7 +5219,7 @@
           "goals": [
             {
               "id": "current-purpose",
-              "description": "争取准时到雷鸣，也考虑先替岑枝照管货物换取费用。",
+              "description": "争取按期赴雷鸣问艺，核清转乘是否可行，再决定是否改变行程或将邀请改为书面交流。",
               "priority": 0.5,
               "progress": 0
             }
@@ -5036,7 +5260,7 @@
             {
               "id": "known-seas-seat-ledger",
               "name": "本轮跨洲运力账",
-              "description": "当前已可查阅的受理条件和费用，未替自己签任何出行约。",
+              "description": "三端现均可受理。风元本轮只能选雷鸣或血天开一次六人内输送；发出和接收端随后一般百年不能再用，不能靠同阵转乘另一陆解决两个申请人的不同目的地。每席拟价12高阶灵石，价款付入盟库，耗用仍须从真实极品库存扣。",
               "status": "observed"
             },
             {
@@ -5148,6 +5372,21 @@
                 "value": "熟悉自己的身体资质与已经练过的功法。"
               },
               "description": "熟悉自己的身体资质与已经练过的功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "reviewed-transit-interval",
+              "subjectId": "self",
+              "predicate": "known-transit-condition",
+              "value": {
+                "kind": "text",
+                "value": "现用商盟三端每次发出或接收都占用该端一次常规运力，一般百年内不能再用；尚无已验证的提前重开办法。能买票不等于可短期往返或转乘。"
+              },
+              "description": "从当前受理文书和当事人说明获知的行程限制。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -5710,19 +5949,19 @@
             {
               "id": "known-seas-fengyuan-relay-hall",
               "name": "风元商盟传送厅",
-              "description": "自己有实际开阵职权；消耗出发端库存及两芯，次日不能无视两本地日冷却再次出发。",
+              "description": "自己有实际开阵职权；消耗出发端库存及两芯，须分别核对出发与接收端的百年常规复用时刻。",
               "status": "observed"
             },
             {
               "id": "known-seas-fengyuan-array-core",
-              "name": "商盟fengyuan阵体",
-              "description": "自己有实际开阵职权；消耗出发端库存及两芯，次日不能无视两本地日冷却再次出发。",
+              "name": "商盟风元阵体",
+              "description": "连接另外两处商盟登记阵厅；当前每班至多六人与合理行李。两端均须已到下一常规使用时刻、阵体完好并互相接应，出发端投入24枚极品灵石和两枚完整阵芯。一般百年内只能使用一次，发出与接收都会占用本端一次运力。",
               "status": "observed"
             },
             {
               "id": "known-seas-fengyuan-energy",
-              "name": "商盟fengyuan公用供能库",
-              "description": "自己有实际开阵职权；消耗出发端库存及两芯，次日不能无视两本地日冷却再次出发。",
+              "name": "商盟风元公用供能库",
+              "description": "自己有实际开阵职权；消耗出发端库存及两芯，须分别核对出发与接收端的百年常规复用时刻。",
               "status": "observed"
             }
           ],
@@ -5834,6 +6073,21 @@
                 "value": "熟悉自己的身体资质与已经练过的功法。"
               },
               "description": "熟悉自己的身体资质与已经练过的功法。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "reviewed-transit-interval",
+              "subjectId": "self",
+              "predicate": "known-transit-condition",
+              "value": {
+                "kind": "text",
+                "value": "现用商盟三端每次发出或接收都占用该端一次常规运力，一般百年内不能再用；尚无已验证的提前重开办法。能买票不等于可短期往返或转乘。"
+              },
+              "description": "从当前受理文书和当事人说明获知的行程限制。",
               "stance": "believed",
               "confidence": 1,
               "evidenceIds": [
@@ -6031,6 +6285,12 @@
               "name": "甲豚雷鸣端空供能库",
               "description": "对岸回程耗材尚未送达，不能让来客误以为往返已经包办。",
               "status": "observed"
+            },
+            {
+              "id": "reviewed-seas-jiatun-transit-inquiry",
+              "name": "甲豚对岸询函",
+              "description": "从雷鸣接应殿送来的盖印短函，询问可否接受一支尚未具名登记的三人商旅队。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -6063,6 +6323,12 @@
               "canonical_entity_ids": [
                 "seas-jiatun-return-energy"
               ]
+            },
+            {
+              "local_entity_id": "reviewed-seas-jiatun-transit-inquiry",
+              "canonical_entity_ids": [
+                "seas-jiatun-transit-inquiry"
+              ]
             }
           ],
           "evidence": [
@@ -6070,6 +6336,13 @@
               "id": "prior-life",
               "kind": "observation",
               "description": "自身经历、修行和职务往来。",
+              "sourceId": null,
+              "step": 0
+            },
+            {
+              "id": "reviewed-current-duty",
+              "kind": "observation",
+              "description": "自己收到的待审核询函。",
               "sourceId": null,
               "step": 0
             }
@@ -6284,6 +6557,12 @@
               "name": "素阴观星者的私人储备",
               "description": "自用财物，不属于所在机构公库。",
               "status": "observed"
+            },
+            {
+              "id": "reviewed-seas-suyin-public-star-chart",
+              "name": "观星者公开星图片",
+              "description": "观星者自绘的季节星位和测量记号，遮去了族中修法线索。",
+              "status": "observed"
             }
           ],
           "bindings": [
@@ -6304,6 +6583,12 @@
               "canonical_entity_ids": [
                 "seas-suyin-keeper-private-stock"
               ]
+            },
+            {
+              "local_entity_id": "reviewed-seas-suyin-public-star-chart",
+              "canonical_entity_ids": [
+                "seas-suyin-public-star-chart"
+              ]
             }
           ],
           "evidence": [
@@ -6311,6 +6596,13 @@
               "id": "prior-life",
               "kind": "observation",
               "description": "自身经历、修行和职务往来。",
+              "sourceId": null,
+              "step": 0
+            },
+            {
+              "id": "reviewed-current-duty",
+              "kind": "observation",
+              "description": "自己绘制的公开图和复制工序。",
               "sourceId": null,
               "step": 0
             }
@@ -7295,7 +7587,7 @@
       "name": "本轮跨洲运力账",
       "kind": "item",
       "placement": "seas-pass-clerk",
-      "description": "当前两端均可受理；本轮可开一次六人内输送，去雷鸣或血天须由接应方确认。标价每席12高阶石，共乘可另议，收费从实际付款人移给盟库；不据此产生极品石。",
+      "description": "三端现均可受理。风元本轮只能选雷鸣或血天开一次六人内输送；发出和接收端随后一般百年不能再用，不能靠同阵转乘另一陆解决两个申请人的不同目的地。每席拟价12高阶灵石，价款付入盟库，耗用仍须从真实极品库存扣。",
       "facts": [
         {
           "id": "seas-seat-ledger-owned-by",
@@ -7686,7 +7978,7 @@
     },
     {
       "id": "seas-thunder-signal-wall",
-      "name": "商盟thunder传讯壁",
+      "name": "商盟雷鸣传讯壁",
       "kind": "item",
       "placement": "seas-thunder-headquarters",
       "description": "仅与已登记分盟讯端双向联络的传讯壁，需双方值守应答、持续投入本人法力和装置辅助供能。",
@@ -7751,7 +8043,7 @@
     },
     {
       "id": "seas-blood-signal-wall",
-      "name": "商盟blood传讯壁",
+      "name": "商盟血天传讯壁",
       "kind": "item",
       "placement": "blood-league-headquarters",
       "description": "仅与已登记分盟讯端双向联络的传讯壁，需双方值守应答、持续投入本人法力和装置辅助供能。",
@@ -7819,7 +8111,7 @@
       "name": "青蛟冲月剑",
       "kind": "item",
       "placement": "seas-archive",
-      "description": "旧主冲月老人三剑之一，当前保管位置为明确补写，剑有青蛟形态与月精炼养；未有当前出售委托。",
+      "description": "青色长剑封在剑匣中，剑身有蛟形纹与月精炼养痕迹；是冲月老人旧炼三剑之一，当前没有出售委托。",
       "facts": [
         {
           "id": "seas-ancient-sword-owned-by",
@@ -7934,7 +8226,7 @@
     },
     {
       "id": "seas-shadow-method",
-      "name": "轩九灵祖传秘术册",
+      "name": "轩氏影子祖传秘术册",
       "kind": "item",
       "placement": "canon-xuan-jiu-ling",
       "description": "九劫灭真法传承与个人研究，完整施展需九真灵元神的特殊炼化积累；当前没有凑齐可释放一击的储备。",
@@ -13381,7 +13673,7 @@
       "name": "飞云致胡玉双邀约",
       "kind": "item",
       "placement": "canon-hu-yushuang",
-      "description": "邀约胡玉双在60个本地日内择期至风元主持一场小规模材料交易；报酬20高阶石，另提供本人往返名额，接受前须两方落实用阵班次。尚未签约，不强迫赴任。",
+      "description": "请胡玉双在60个本地日内回复是否愿赴风元主持一次小规模交易；拟酬20高阶灵石并提供单程名额。百年常规用阵间隔会妨碍迅速返回，往返方案尚未落实，不能保证60日到场。本人可拒绝或要求先解决回程，当前未签约。",
       "facts": [
         {
           "id": "seas-hu-invitation-owned-by",
@@ -13882,6 +14174,545 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "seas-patrol-post",
+      "name": "黑焦巡哨",
+      "kind": "location",
+      "placement": "seas-heijiao-peaks",
+      "description": "黑焦峰山道旁的高岩台，台沿系着鹰架和示警铃，登记石案上压着巡线图。",
+      "facts": [
+        {
+          "id": "seas-patrol-post-reviewed-route-seas-heijiao-peaks",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "seas-heijiao-peaks"
+          },
+          "description": "reviewed-route-seas-heijiao-peaks",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "seas-patrol-post-reviewed-condition-seas-heijiao-peaks",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "山道步行约半个时辰；入禁地须让巡哨核验凭证并取得接引。"
+          },
+          "description": "山道步行约半个时辰；入禁地须让巡哨核验凭证并取得接引。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "seas-patrol-post-reviewed-route-seas-xuantian-gate",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "seas-xuantian-gate"
+          },
+          "description": "reviewed-route-seas-xuantian-gate",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "seas-patrol-post-reviewed-condition-seas-xuantian-gate",
+          "predicate": "travel-condition",
+          "value": {
+            "kind": "text",
+            "value": "山道步行约半个时辰；入禁地须让巡哨核验凭证并取得接引。"
+          },
+          "description": "山道步行约半个时辰；入禁地须让巡哨核验凭证并取得接引。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "seas-jia-entry-seal",
+      "name": "贾长老进入符",
+      "kind": "item",
+      "placement": "canon-helian-jia",
+      "description": "一枚刻有塔内阵纹的符片，由贾姓长老持有；只能辅助穿过所登记的拍卖洞天禁制。",
+      "facts": [
+        {
+          "id": "seas-jia-entry-seal-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "seas-fengyuan-branch"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "seas-jia-entry-seal-custodian",
+          "predicate": "custodian",
+          "value": {
+            "kind": "entity",
+            "entityId": "canon-helian-jia"
+          },
+          "description": "custodian",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "seas-jia-entry-seal-access-boundary",
+          "predicate": "access-boundary",
+          "value": {
+            "kind": "text",
+            "value": "此符只匹配本处洞天，盗取不会取得长老身份；没有已知复制手艺，持有者仍要避开损坏、反制和不匹配的禁制。"
+          },
+          "description": "此符只匹配本处洞天，盗取不会取得长老身份；没有已知复制手艺，持有者仍要避开损坏、反制和不匹配的禁制。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "seas-patrol-ledger",
+      "name": "巡哨查验簿",
+      "kind": "item",
+      "placement": "seas-patrol-post",
+      "description": "写有今日巡线和接引交接的册子，客卿登记与员工通行分栏记录。",
+      "facts": [
+        {
+          "id": "seas-patrol-ledger-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "seas-fengyuan-branch"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "seas-patrol-ledger-contents",
+          "predicate": "contents",
+          "value": {
+            "kind": "text",
+            "value": "柯衡负责接引登记，严照负责外围查验。外客提交“盟”字令牌时要查真伪与登记，尚无人获本轮拍卖入场许可；员工自己的职务通行不能转卖成客卿资格。"
+          },
+          "description": "柯衡负责接引登记，严照负责外围查验。外客提交“盟”字令牌时要查真伪与登记，尚无人获本轮拍卖入场许可；员工自己的职务通行不能转卖成客卿资格。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "获准实际翻阅登记簿或由登记人员说明。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "seas-patrol-rider",
+      "name": "严照",
+      "kind": "person",
+      "placement": "seas-patrol-post",
+      "description": "商盟炼虚巡骑，熟悉黑焦峰的热风，交接时先看证物再听解释。",
+      "facts": [
+        {
+          "id": "seas-patrol-rider-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼虚"
+          },
+          "description": "炼虚",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "seas-patrol-rider"
+            ]
+          }
+        },
+        {
+          "id": "seas-patrol-rider-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "炼虚修法、御鹰、辨识本盟通行纹记、巡线示警；不知长老私室和外陆秘情。"
+          },
+          "description": "炼虚修法、御鹰、辨识本盟通行纹记、巡线示警；不知长老私室和外陆秘情。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "seas-patrol-rider"
+            ]
+          }
+        },
+        {
+          "id": "seas-patrol-rider-cultivation-foundation",
+          "predicate": "cultivation-foundation",
+          "value": {
+            "kind": "text",
+            "value": "自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。"
+          },
+          "description": "自身族属的法体和修法基础已成，境界、法力、肉身与具体学艺分别发挥作用。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "seas-patrol-rider"
+            ]
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "seas-patrol-rider-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "seas-patrol-rider-mana",
+          "definition_id": "mana",
+          "current": 1320
+        }
+      ],
+      "ratings": [
+        {
+          "id": "seas-patrol-rider-cultivation",
+          "definition_id": "cultivation",
+          "value": 6
+        },
+        {
+          "id": "seas-patrol-rider-force",
+          "definition_id": "force",
+          "value": 6
+        },
+        {
+          "id": "seas-patrol-rider-craft",
+          "definition_id": "craft",
+          "value": 6
+        },
+        {
+          "id": "seas-patrol-rider-perception",
+          "definition_id": "perception",
+          "value": 6
+        },
+        {
+          "id": "seas-patrol-rider-influence",
+          "definition_id": "influence",
+          "value": 6
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 90
+        }
+      ],
+      "agent": {
+        "id": "seas-patrol-rider",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "商盟炼虚巡骑，熟悉黑焦峰的热风，交接时先看证物再听解释。",
+            "voice": "问话短，习惯让来客把令牌翻过来；认错人会先更正登记，不用官腔掩饰。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "完成这班巡线，并与柯衡核对职务通行和外客接引记录。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "严照",
+              "description": "商盟炼虚巡骑，熟悉黑焦峰的热风，交接时先看证物再听解释。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "黑焦巡哨",
+              "description": "自己当前值守的岩台。",
+              "status": "observed"
+            },
+            {
+              "id": "reviewed-seas-patrol-hawk",
+              "name": "巡哨黑翼灵鹰",
+              "description": "已训练的黑翼妖禽，脚环与巡哨鹰架匹配；会受伤、饥饿和疲倦，不具真灵血脉神通。",
+              "status": "observed"
+            },
+            {
+              "id": "reviewed-seas-patrol-ledger",
+              "name": "巡哨查验簿",
+              "description": "写有今日巡线和接引交接的册子，客卿登记与员工通行分栏记录。",
+              "status": "observed"
+            },
+            {
+              "id": "reviewed-seas-hawk-provisions",
+              "name": "鹰架饲料袋",
+              "description": "干肉与饲料按巡哨份额封装，开袋后需登记消耗。",
+              "status": "observed"
+            },
+            {
+              "id": "reviewed-seas-pass-clerk",
+              "name": "柯衡",
+              "description": "商盟炼虚登记员，记人名和条款很准，对临时改签很头疼。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "seas-patrol-rider"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "seas-patrol-post"
+              ]
+            },
+            {
+              "local_entity_id": "reviewed-seas-patrol-hawk",
+              "canonical_entity_ids": [
+                "seas-patrol-hawk"
+              ]
+            },
+            {
+              "local_entity_id": "reviewed-seas-patrol-ledger",
+              "canonical_entity_ids": [
+                "seas-patrol-ledger"
+              ]
+            },
+            {
+              "local_entity_id": "reviewed-seas-hawk-provisions",
+              "canonical_entity_ids": [
+                "seas-hawk-provisions"
+              ]
+            },
+            {
+              "local_entity_id": "reviewed-seas-pass-clerk",
+              "canonical_entity_ids": [
+                "seas-pass-clerk"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "任职和实际巡哨训练所得。",
+              "sourceId": null,
+              "step": 0
+            },
+            {
+              "id": "reviewed-current-duty",
+              "kind": "observation",
+              "description": "实际值班、御鹰训练和与接引员交接。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "learned-skill",
+              "subjectId": "self",
+              "predicate": "learned-skill",
+              "value": {
+                "kind": "text",
+                "value": "炼虚修法、御鹰、辨识本盟通行纹记、巡线示警。"
+              },
+              "description": "自己实际练过的巡骑手艺。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "seas-patrol-hawk",
+      "name": "巡哨黑翼灵鹰",
+      "kind": "creature",
+      "placement": "seas-patrol-post",
+      "description": "已训练的黑翼妖禽，脚环与巡哨鹰架匹配；会受伤、饥饿和疲倦，不具真灵血脉神通。",
+      "facts": [
+        {
+          "id": "seas-patrol-hawk-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "seas-fengyuan-branch"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "seas-patrol-hawk-trained-response",
+          "predicate": "trained-response",
+          "value": {
+            "kind": "text",
+            "value": "接受严照熟悉的短哨和手势，可载其按巡线飞行；不凭陌生人口令无条件换主。"
+          },
+          "description": "接受严照熟悉的短哨和手势，可载其按巡线飞行；不凭陌生人口令无条件换主。",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "seas-patrol-hawk-patrol-cost",
+          "predicate": "patrol-cost",
+          "value": {
+            "kind": "text",
+            "value": "一次环峰巡线需骑者持续约20法力并消耗本鹰15法力；受伤、逆风和载重会增加负担，休息和进食须实际发生。"
+          },
+          "description": "一次环峰巡线需骑者持续约20法力并消耗本鹰15法力；受伤、逆风和载重会增加负担，休息和进食须实际发生。",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "seas-patrol-hawk-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "seas-patrol-hawk-mana",
+          "definition_id": "mana",
+          "current": 80
+        }
+      ],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "seas-hawk-provisions",
+      "name": "鹰架饲料袋",
+      "kind": "container",
+      "placement": "seas-patrol-post",
+      "description": "干肉与饲料按巡哨份额封装，开袋后需登记消耗。",
+      "facts": [
+        {
+          "id": "seas-hawk-provisions-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "seas-fengyuan-branch"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "seas-hawk-feed",
+          "amount": 6
+        }
+      ]
+    },
+    {
+      "id": "seas-jiatun-transit-inquiry",
+      "name": "甲豚对岸询函",
+      "kind": "item",
+      "placement": "seas-jiatun-guardian",
+      "description": "从雷鸣接应殿送来的盖印短函，询问可否接受一支尚未具名登记的三人商旅队。",
+      "facts": [
+        {
+          "id": "seas-jiatun-transit-inquiry-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "seas-jiatun-domain-people"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "seas-jiatun-transit-inquiry-contents",
+          "predicate": "contents",
+          "value": {
+            "kind": "text",
+            "value": "对岸询问三人赴风元的条件，尚未给姓名和有效身份证明，且对岸无回程耗材。守正可要求补资料、拒绝或待查，不等于已批准或已有队伍进入本殿。"
+          },
+          "description": "对岸询问三人赴风元的条件，尚未给姓名和有效身份证明，且对岸无回程耗材。守正可要求补资料、拒绝或待查，不等于已批准或已有队伍进入本殿。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "守正出示或实际获准阅读信函。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "seas-suyin-public-star-chart",
+      "name": "观星者公开星图片",
+      "kind": "item",
+      "placement": "seas-suyin-keeper",
+      "description": "观星者自绘的季节星位和测量记号，遮去了族中修法线索。",
+      "facts": [
+        {
+          "id": "seas-suyin-public-star-chart-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "seas-suyin-keeper"
+          },
+          "description": "owned-by",
+          "access": {
+            "kind": "private"
+          }
+        },
+        {
+          "id": "seas-suyin-public-star-chart-copy-cost",
+          "predicate": "copy-cost",
+          "value": {
+            "kind": "text",
+            "value": "本人会按公开图绘制纸本；每份耗一份普通材料和一个时辰，不能据此复制被遮去的族中内法。"
+          },
+          "description": "本人会按公开图绘制纸本；每份耗一份普通材料和一个时辰，不能据此复制被遮去的族中内法。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "本人愿意说明交换工序或实际观看图册。"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [
@@ -14295,12 +15126,12 @@
     },
     {
       "id": "seas-plant-growth",
-      "text": "广灵道果当前未熟；未成熟、稀释汁与完整成熟果是不同状态。服果的修炼帮助不等于即刻境界提升，也不允许绕开真实功法、资源和突破条件。",
+      "text": "广灵道果当前未熟；未成熟、稀释汁与完整成熟果是不同状态。服果的修炼帮助不等于即刻境界提升，也不允许绕开真实功法、资源和突破条件。 完整道果的服食资格按一生一颗记录；不能在万年体质期过后或换一棵树便重复获得完整道果的效用，稀释灵汁仍按其自身效果处理。",
       "severity": "hard"
     },
     {
       "id": "seas-identity-temporality",
-      "text": "胡玉双后期来到风元、田飞儿那届执事、真龙追索魇龙血、商盟对付马良、轩九灵九灵炼成、四黑猊阵前召唤均须当下真实因果，不作为T0已成履历或定时任务。",
+      "text": "胡玉双后期来到风元、田飞儿那届执事、真龙追索魇龙血、商盟对付马良、轩氏影子九灵炼成、四黑猊阵前召唤均须当下真实因果，不作为T0已成履历或定时任务。",
       "severity": "hard"
     }
   ],
@@ -14589,7 +15420,9 @@
     ],
     "entity:seas-fengyuan-array-core": [
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-array-reuse-interval",
+      "seas-reviewed-current-values"
     ],
     "fact:seas-fengyuan-array-core-owned-by": [
       "seas-current-life"
@@ -14637,7 +15470,9 @@
     ],
     "entity:seas-thunder-array-core": [
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-array-reuse-interval",
+      "seas-reviewed-current-values"
     ],
     "fact:seas-thunder-array-core-owned-by": [
       "seas-current-life"
@@ -14685,7 +15520,9 @@
     ],
     "entity:seas-blood-array-core": [
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-array-reuse-interval",
+      "seas-reviewed-current-values"
     ],
     "fact:seas-blood-array-core-owned-by": [
       "seas-current-life"
@@ -14737,9 +15574,8 @@
       "seas-admission-and-schedules"
     ],
     "fact:seas-fengyuan-relay-hall-condition-seas-thunder-relay-hall": [
-      "seas-thunder-shared-array",
-      "seas-finite-values",
-      "seas-admission-and-schedules"
+      "seas-array-reuse-interval",
+      "seas-reviewed-current-values"
     ],
     "fact:seas-thunder-relay-hall-route-seas-fengyuan-relay-hall": [
       "seas-thunder-shared-array",
@@ -14747,9 +15583,8 @@
       "seas-admission-and-schedules"
     ],
     "fact:seas-thunder-relay-hall-condition-seas-fengyuan-relay-hall": [
-      "seas-thunder-shared-array",
-      "seas-finite-values",
-      "seas-admission-and-schedules"
+      "seas-array-reuse-interval",
+      "seas-reviewed-current-values"
     ],
     "fact:seas-fengyuan-relay-hall-route-seas-blood-relay-hall": [
       "seas-thunder-shared-array",
@@ -14757,9 +15592,8 @@
       "seas-admission-and-schedules"
     ],
     "fact:seas-fengyuan-relay-hall-condition-seas-blood-relay-hall": [
-      "seas-thunder-shared-array",
-      "seas-finite-values",
-      "seas-admission-and-schedules"
+      "seas-array-reuse-interval",
+      "seas-reviewed-current-values"
     ],
     "fact:seas-blood-relay-hall-route-seas-fengyuan-relay-hall": [
       "seas-thunder-shared-array",
@@ -14767,9 +15601,8 @@
       "seas-admission-and-schedules"
     ],
     "fact:seas-blood-relay-hall-condition-seas-fengyuan-relay-hall": [
-      "seas-thunder-shared-array",
-      "seas-finite-values",
-      "seas-admission-and-schedules"
+      "seas-array-reuse-interval",
+      "seas-reviewed-current-values"
     ],
     "fact:seas-blood-relay-hall-route-seas-thunder-relay-hall": [
       "seas-thunder-shared-array",
@@ -14777,9 +15610,8 @@
       "seas-admission-and-schedules"
     ],
     "fact:seas-blood-relay-hall-condition-seas-thunder-relay-hall": [
-      "seas-thunder-shared-array",
-      "seas-finite-values",
-      "seas-admission-and-schedules"
+      "seas-array-reuse-interval",
+      "seas-reviewed-current-values"
     ],
     "fact:seas-thunder-relay-hall-route-seas-blood-relay-hall": [
       "seas-thunder-shared-array",
@@ -14787,9 +15619,8 @@
       "seas-admission-and-schedules"
     ],
     "fact:seas-thunder-relay-hall-condition-seas-blood-relay-hall": [
-      "seas-thunder-shared-array",
-      "seas-finite-values",
-      "seas-admission-and-schedules"
+      "seas-array-reuse-interval",
+      "seas-reviewed-current-values"
     ],
     "entity:seas-wuya-sea": [
       "seas-wuya-sea-route",
@@ -14985,7 +15816,8 @@
     "entity:canon-ming-zun": [
       "seas-league-known-people",
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-array-reuse-interval"
     ],
     "fact:canon-ming-zun-cultivation-state": [
       "seas-league-known-people",
@@ -15011,7 +15843,8 @@
     "entity:canon-fei-yun": [
       "seas-league-known-people",
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-array-reuse-interval"
     ],
     "fact:canon-fei-yun-cultivation-state": [
       "seas-league-known-people",
@@ -15037,7 +15870,8 @@
     "entity:canon-lei-yuan": [
       "seas-league-known-people",
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-array-reuse-interval"
     ],
     "fact:canon-lei-yuan-cultivation-state": [
       "seas-league-known-people",
@@ -15063,7 +15897,8 @@
     "entity:canon-hu-yushuang": [
       "seas-league-known-people",
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-array-reuse-interval"
     ],
     "fact:canon-hu-yushuang-cultivation-state": [
       "seas-league-known-people",
@@ -15089,7 +15924,9 @@
     "entity:canon-helian-jia": [
       "seas-league-four-elders",
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-reviewed-current-life",
+      "seas-reviewed-current-values"
     ],
     "fact:canon-helian-jia-cultivation-state": [
       "seas-league-four-elders",
@@ -15115,7 +15952,8 @@
     "entity:canon-xuan-jiu-ling": [
       "seas-xuanjiuling-shadow",
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-shadow-name-time"
     ],
     "fact:canon-xuan-jiu-ling-cultivation-state": [
       "seas-xuanjiuling-shadow",
@@ -15140,7 +15978,10 @@
     ],
     "entity:seas-pass-clerk": [
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-reviewed-current-life",
+      "seas-reviewed-current-values",
+      "seas-array-reuse-interval"
     ],
     "fact:seas-pass-clerk-cultivation-state": [
       "seas-current-life",
@@ -15162,7 +16003,8 @@
     ],
     "entity:seas-herb-scholar": [
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-array-reuse-interval"
     ],
     "fact:seas-herb-scholar-cultivation-state": [
       "seas-current-life",
@@ -15184,7 +16026,8 @@
     ],
     "entity:seas-journey-applicant": [
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-array-reuse-interval"
     ],
     "fact:seas-journey-applicant-cultivation-state": [
       "seas-current-life",
@@ -15228,7 +16071,8 @@
     ],
     "entity:seas-array-tutor": [
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-array-reuse-interval"
     ],
     "fact:seas-array-tutor-cultivation-state": [
       "seas-current-life",
@@ -15250,7 +16094,9 @@
     ],
     "entity:seas-jiatun-guardian": [
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-reviewed-current-life",
+      "seas-reviewed-current-values"
     ],
     "fact:seas-jiatun-guardian-cultivation-state": [
       "seas-current-life",
@@ -15272,7 +16118,9 @@
     ],
     "entity:seas-suyin-keeper": [
       "seas-current-life",
-      "seas-finite-values"
+      "seas-finite-values",
+      "seas-reviewed-current-life",
+      "seas-reviewed-current-values"
     ],
     "fact:seas-suyin-keeper-cultivation-state": [
       "seas-current-life",
@@ -15390,7 +16238,8 @@
       "seas-league-federation",
       "seas-current-life",
       "seas-ming-blood-oath",
-      "seas-seven-orifice-contact"
+      "seas-seven-orifice-contact",
+      "seas-array-reuse-interval"
     ],
     "entity:seas-seat-ledger": [
       "seas-current-life",
@@ -16320,8 +17169,9 @@
       "seas-finite-values"
     ],
     "entity:seas-hu-invitation": [
-      "seas-current-life",
-      "seas-finite-values"
+      "seas-reviewed-current-life",
+      "seas-reviewed-current-values",
+      "seas-array-reuse-interval"
     ],
     "fact:seas-hu-invitation-owned-by": [
       "seas-current-life"
@@ -16379,19 +17229,22 @@
       "seas-current-life"
     ],
     "fact:seas-fengyuan-array-core-departure-accounting": [
-      "seas-finite-values"
+      "seas-array-reuse-interval",
+      "seas-reviewed-current-values"
     ],
     "fact:seas-thunder-array-core-operating-authority": [
       "seas-current-life"
     ],
     "fact:seas-thunder-array-core-departure-accounting": [
-      "seas-finite-values"
+      "seas-array-reuse-interval",
+      "seas-reviewed-current-values"
     ],
     "fact:seas-blood-array-core-operating-authority": [
       "seas-current-life"
     ],
     "fact:seas-blood-array-core-departure-accounting": [
-      "seas-finite-values"
+      "seas-array-reuse-interval",
+      "seas-reviewed-current-values"
     ],
     "entity:seas-jiatun-return-energy": [
       "seas-current-life",
@@ -16454,6 +17307,129 @@
       "seas-xuanjiuling-shadow",
       "seas-helian-black-spirits",
       "seas-nightmare-blood"
+    ],
+    "fact:seas-fengyuan-array-core-routine-interval-seconds": [
+      "seas-array-reuse-interval",
+      "seas-reviewed-current-values"
+    ],
+    "fact:seas-thunder-array-core-routine-interval-seconds": [
+      "seas-array-reuse-interval",
+      "seas-reviewed-current-values"
+    ],
+    "fact:seas-blood-array-core-routine-interval-seconds": [
+      "seas-array-reuse-interval",
+      "seas-reviewed-current-values"
+    ],
+    "entity:seas-patrol-post": [
+      "seas-access-token-rule",
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-heijiao-peaks-reviewed-route-seas-patrol-post": [
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-heijiao-peaks-reviewed-condition-seas-patrol-post": [
+      "seas-access-token-rule",
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-patrol-post-reviewed-route-seas-heijiao-peaks": [
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-patrol-post-reviewed-condition-seas-heijiao-peaks": [
+      "seas-access-token-rule",
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-patrol-post-reviewed-route-seas-xuantian-gate": [
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-patrol-post-reviewed-condition-seas-xuantian-gate": [
+      "seas-access-token-rule",
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-xuantian-gate-reviewed-route-seas-patrol-post": [
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-xuantian-gate-reviewed-condition-seas-patrol-post": [
+      "seas-access-token-rule",
+      "seas-reviewed-current-life"
+    ],
+    "entity:seas-jia-entry-seal": [
+      "seas-access-token-rule",
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-jia-entry-seal-owned-by": [
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-jia-entry-seal-custodian": [
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-jia-entry-seal-access-boundary": [
+      "seas-access-token-rule",
+      "seas-reviewed-current-life"
+    ],
+    "entity:seas-patrol-ledger": [
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-patrol-ledger-owned-by": [
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-patrol-ledger-contents": [
+      "seas-access-token-rule",
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-patrol-rider-cultivation-state": [
+      "seas-reviewed-current-life",
+      "seas-reviewed-current-values"
+    ],
+    "fact:seas-patrol-rider-learned-skill": [
+      "seas-reviewed-current-life",
+      "seas-reviewed-current-values"
+    ],
+    "fact:seas-patrol-rider-cultivation-foundation": [
+      "seas-reviewed-current-life",
+      "seas-reviewed-current-values"
+    ],
+    "entity:seas-patrol-rider": [
+      "seas-reviewed-current-life",
+      "seas-reviewed-current-values"
+    ],
+    "entity:seas-patrol-hawk": [
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-patrol-hawk-owned-by": [
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-patrol-hawk-trained-response": [
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-patrol-hawk-patrol-cost": [
+      "seas-reviewed-current-values"
+    ],
+    "entity:seas-hawk-provisions": [
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-hawk-provisions-owned-by": [
+      "seas-reviewed-current-life"
+    ],
+    "quantity:seas-hawk-feed": [
+      "seas-reviewed-current-values"
+    ],
+    "entity:seas-jiatun-transit-inquiry": [
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-jiatun-transit-inquiry-owned-by": [
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-jiatun-transit-inquiry-contents": [
+      "seas-reviewed-current-life"
+    ],
+    "entity:seas-suyin-public-star-chart": [
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-suyin-public-star-chart-owned-by": [
+      "seas-reviewed-current-life"
+    ],
+    "fact:seas-suyin-public-star-chart-copy-cost": [
+      "seas-reviewed-current-values"
     ]
   },
   "agentCognition": [
@@ -16482,19 +17458,19 @@
           {
             "id": "seas-known-blood-relay-hall",
             "name": "血天商盟传送厅",
-            "description": "自己负责的商盟跨洲阵设施或供能，出发耗24极品与两芯，冷却两本地日。",
+            "description": "自己负责的商盟跨洲阵设施或供能，出发耗24极品与两芯，发出与接收均占用该端一次百年常规运力。",
             "status": "observed"
           },
           {
             "id": "seas-known-blood-array-core",
-            "name": "商盟blood阵体",
-            "description": "自己负责的商盟跨洲阵设施或供能，出发耗24极品与两芯，冷却两本地日。",
+            "name": "商盟血天阵体",
+            "description": "自己负责的商盟跨洲阵设施或供能，出发耗24极品与两芯，发出与接收均占用该端一次百年常规运力。",
             "status": "observed"
           },
           {
             "id": "seas-known-blood-energy",
-            "name": "商盟blood公用供能库",
-            "description": "自己负责的商盟跨洲阵设施或供能，出发耗24极品与两芯，冷却两本地日。",
+            "name": "商盟血天公用供能库",
+            "description": "自己负责的商盟跨洲阵设施或供能，出发耗24极品与两芯，发出与接收均占用该端一次百年常规运力。",
             "status": "observed"
           }
         ],
@@ -16543,6 +17519,13 @@
             "description": "三陆盟中已有公务交往。",
             "sourceId": null,
             "step": 0
+          },
+          {
+            "id": "seas-review-transit",
+            "kind": "observation",
+            "description": "自己主管的血天端常规操作记录。",
+            "sourceId": null,
+            "step": 0
           }
         ],
         "claims": [
@@ -16559,6 +17542,21 @@
             "confidence": 1,
             "evidenceIds": [
               "seas-past-league-work"
+            ]
+          },
+          {
+            "id": "seas-review-transit-interval",
+            "subjectId": "self",
+            "predicate": "known-transit-condition",
+            "value": {
+              "kind": "text",
+              "value": "本端发出或接收一次后一般百年内不能再用，当前已静置足期；尚无已验证提前再开的办法。"
+            },
+            "description": "自己主管的当前阵体使用条件。",
+            "stance": "believed",
+            "confidence": 1,
+            "evidenceIds": [
+              "seas-review-transit"
             ]
           }
         ]
@@ -16715,6 +17713,17 @@
       "id": "wind-gold-jin",
       "name": "风精金",
       "unit": "斤",
+      "production_law_ids": [
+        "resource-conservation"
+      ],
+      "consumption_law_ids": [
+        "resource-conservation"
+      ]
+    },
+    {
+      "id": "seas-hawk-feed",
+      "name": "灵鹰饲肉",
+      "unit": "份",
       "production_law_ids": [
         "resource-conservation"
       ],
