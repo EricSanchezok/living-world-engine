@@ -6232,6 +6232,101 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "dajin-tianfu-archive",
+      "name": "天符门藏经阁",
+      "kind": "location",
+      "placement": "dajin-baizhu",
+      "description": "三层藏书阁，书架、玉简与门派禁制分别保管；深奥典籍须得到授权和足够阅读能力。",
+      "facts": [],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianfu-ancestral-chest",
+      "name": "天符门祖传符匣",
+      "kind": "item",
+      "placement": "dajin-tianfu-archive",
+      "description": "古朴木匣封存祖传灵符，依掌门保管制度领取，非对所有来客开放。",
+      "facts": [
+        {
+          "id": "dajin-tianfu-ancestral-chest-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianfu"
+          },
+          "description": "属于门派传承，掌门职司保管不等于任意个人可售。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "canon-tianfu-ancestral-hualing",
+      "name": "天符祖传化灵符",
+      "kind": "item",
+      "placement": "dajin-tianfu-ancestral-chest",
+      "description": "翠绿木属性灵符，符面金银纹若隐若现，中心有淡紫光点；强旧真元尚未被当代持有者炼化。",
+      "facts": [
+        {
+          "id": "canon-tianfu-ancestral-hualing-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianfu"
+          },
+          "description": "属于门派传承，掌门职司保管不等于任意个人可售。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "canon-tianfu-ancestral-hualing-refinement",
+          "predicate": "refinement-state",
+          "value": {
+            "kind": "text",
+            "value": "未由现任使用者炼化；旧真元尚强，须真实法力、属性相容和持续培炼。"
+          },
+          "description": "持有符匣不自动获得祖师战力。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "dajin-tianfu-talisman-corpus",
+      "name": "天符门制符旧藏",
+      "kind": "item",
+      "placement": "dajin-tianfu-archive",
+      "description": "制符典籍与化灵符传承，记录六丁天甲旧事但不含已经失落的完整制作玉简。",
+      "facts": [
+        {
+          "id": "dajin-tianfu-talisman-corpus-owner",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "dajin-tianfu"
+          },
+          "description": "属于门派传承，掌门职司保管不等于任意个人可售。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
     }
   ],
   "existingEntityFacts": [],
@@ -6279,6 +6374,16 @@
     {
       "id": "dajin-secret-exchange-operation",
       "text": "交易会的身份牌只证明有效入场资格，编号不等于在场人数；失效和撤销按当期规则。遮形须实际符箓与完好法阵，不抹消物品、行为和可追查线索。灵石竞价和以物易物均须有真实资源与权利人同意。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-guest-obligation-boundary",
+      "text": "客卿挂名不自动承担全部宗门命令，也不自动得到公库所有权；报酬、一次援助、继续供奉和退出分别按实际承诺与行为处理。",
+      "severity": "hard"
+    },
+    {
+      "id": "dajin-tianfu-lost-knowledge",
+      "text": "三大密符的名声不等于三种完整制作知识都可取得。六丁天甲旧传已失，化灵符须结丹丹火及时间材料；古祖符需重新炼化和培炼，不因拿到物品即有原威能。",
       "severity": "hard"
     }
   ],
@@ -7274,6 +7379,37 @@
     ],
     "fact:dajin-sanyuan-managed-dajin-mingyang-sect": [
       "dajin-tianfu-commercial-network"
+    ],
+    "entity:dajin-tianfu-archive": [
+      "dajin-tianfu-three-talisman-state"
+    ],
+    "entity:dajin-tianfu-ancestral-chest": [
+      "dajin-ancestral-hualing-talisman"
+    ],
+    "entity:canon-tianfu-ancestral-hualing": [
+      "dajin-ancestral-hualing-talisman"
+    ],
+    "entity:dajin-tianfu-talisman-corpus": [
+      "dajin-tianfu-three-talisman-state"
+    ],
+    "fact:dajin-tianfu-ancestral-chest-owner": [
+      "dajin-ancestral-hualing-talisman"
+    ],
+    "fact:canon-tianfu-ancestral-hualing-owner": [
+      "dajin-ancestral-hualing-talisman"
+    ],
+    "fact:dajin-tianfu-talisman-corpus-owner": [
+      "dajin-tianfu-three-talisman-state"
+    ],
+    "fact:canon-tianfu-ancestral-hualing-refinement": [
+      "dajin-ancestral-hualing-talisman"
+    ],
+    "law:dajin-guest-obligation-boundary": [
+      "dajin-guest-elder-institution"
+    ],
+    "law:dajin-tianfu-lost-knowledge": [
+      "dajin-tianfu-three-talisman-state",
+      "dajin-ancestral-hualing-talisman"
     ]
   }
 }

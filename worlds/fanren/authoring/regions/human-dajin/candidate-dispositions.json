@@ -17337,9 +17337,12 @@
       "candidateId": "batch-0149-object-0001",
       "batchId": "batch-0149",
       "reportHash": "21f08f112be69f93fdb751342bb4d0b2540f38d8a84eac97b1b59d892054eb0f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“韩立”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "later-only",
+      "targetIds": [
+        "future-dajin-elder-summons",
+        "future-dajin-guest-elder-compact"
+      ],
+      "reason": "归还秘法、成年修为与客卿协议是后期韩立经历。",
       "evidence": [
         {
           "chapterId": "qq-25579406",
@@ -17363,10 +17366,7 @@
           "anchorSha256": "ed4ebae76b975d2081d134b6d943545c4d792846cfbc434b5171324aad327217"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
@@ -17431,9 +17431,12 @@
       "candidateId": "batch-0149-object-0021",
       "batchId": "batch-0149",
       "reportHash": "21f08f112be69f93fdb751342bb4d0b2540f38d8a84eac97b1b59d892054eb0f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“大晋”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "adopted",
+      "targetIds": [
+        "human-dajin",
+        "dajin-guest-elder-institution"
+      ],
+      "reason": "疆域复用并保留客卿地方制度。",
       "evidence": [
         {
           "chapterId": "qq-25581812",
@@ -17450,19 +17453,19 @@
           "anchorSha256": "7eeaa0e72c0252c447b2f2d3440d59c8fbe6557b7bb709dce662b8b21275e4a0"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0149-object-0022",
       "batchId": "batch-0149",
       "reportHash": "21f08f112be69f93fdb751342bb4d0b2540f38d8a84eac97b1b59d892054eb0f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“天南”：出处章包含已采用事实，但本候选的身份、时间或额外内容尚未逐项裁决，不能仅按同章自动归并。",
+      "disposition": "corrected",
+      "targetIds": [
+        "human-tiannan",
+        "dajin-guest-elder-institution"
+      ],
+      "reason": "天南当时无该常设制度，不将现状变未来创设的禁止。",
       "evidence": [
         {
           "chapterId": "qq-25581812",
@@ -17479,19 +17482,18 @@
           "anchorSha256": "16ac949764fffa96fd238b0c59faf5c4bb22ff7bcbaf447259434214fae0ca22"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0149-object-0024",
       "batchId": "batch-0149",
       "reportHash": "21f08f112be69f93fdb751342bb4d0b2540f38d8a84eac97b1b59d892054eb0f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“华云州”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-huayun"
+      ],
+      "reason": "同一沿海州，后期屠蛟大会不固定开篇事件。",
       "evidence": [
         {
           "chapterId": "qq-25579406",
@@ -17508,19 +17510,19 @@
           "anchorSha256": "d13627f2751d4cca53ca5856e263f86acca672455bc512c2d0e6eebe5163a84b"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0149-object-0044",
       "batchId": "batch-0149",
       "reportHash": "21f08f112be69f93fdb751342bb4d0b2540f38d8a84eac97b1b59d892054eb0f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“灵石”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "foundation-stone-exchange",
+        "future-dajin-guest-elder-compact"
+      ],
+      "reason": "灵石资源既存，数万赠款与年供奉为未发生的具体交易，不能预发给玩家。",
       "evidence": [
         {
           "chapterId": "qq-25602410",
@@ -17537,19 +17539,18 @@
           "anchorSha256": "66054bf76f4128987fd8d8e77a49a30301de32868e0b04b7653bc4dda3e2f60e"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0149-object-0050",
       "batchId": "batch-0149",
       "reportHash": "21f08f112be69f93fdb751342bb4d0b2540f38d8a84eac97b1b59d892054eb0f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“客卿长老”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-guest-elder-institution"
+      ],
+      "reason": "挂名非普通长老，另立一次援助协议仍能产生真实承诺。",
       "evidence": [
         {
           "chapterId": "qq-25591422",
@@ -17573,19 +17574,18 @@
           "anchorSha256": "16ac949764fffa96fd238b0c59faf5c4bb22ff7bcbaf447259434214fae0ca22"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0149-fact-0039",
       "batchId": "batch-0149",
       "reportHash": "21f08f112be69f93fdb751342bb4d0b2540f38d8a84eac97b1b59d892054eb0f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“客卿长老”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-guest-elder-institution"
+      ],
+      "reason": "地方制度按原段社会原因回溯。",
       "evidence": [
         {
           "chapterId": "qq-25591422",
@@ -17595,19 +17595,18 @@
           "anchorSha256": "519e932b80f7f285833ed26f2cfa9089b236efe2432fd66495a10e0f1f3eefcc"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0149-fact-0040",
       "batchId": "batch-0149",
       "reportHash": "21f08f112be69f93fdb751342bb4d0b2540f38d8a84eac97b1b59d892054eb0f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“客卿长老”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-guest-elder-institution"
+      ],
+      "reason": "一般挂名无强制救援，不等于另行承诺可以当不存在。",
       "evidence": [
         {
           "chapterId": "qq-25591422",
@@ -17624,19 +17623,18 @@
           "anchorSha256": "084dc335bdf48d617712be0a830cab4b3c408d217a37e21f35580eecb90c7cec"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0149-fact-0041",
       "batchId": "batch-0149",
       "reportHash": "21f08f112be69f93fdb751342bb4d0b2540f38d8a84eac97b1b59d892054eb0f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“客卿长老”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "corrected",
+      "targetIds": [
+        "dajin-guest-elder-institution"
+      ],
+      "reason": "待遇可高于普通长老但具体报酬按宗门资产和约定，非无上限获取。",
       "evidence": [
         {
           "chapterId": "qq-25591422",
@@ -17646,19 +17644,18 @@
           "anchorSha256": "084dc335bdf48d617712be0a830cab4b3c408d217a37e21f35580eecb90c7cec"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
       "candidateId": "batch-0149-fact-0042",
       "batchId": "batch-0149",
       "reportHash": "21f08f112be69f93fdb751342bb4d0b2540f38d8a84eac97b1b59d892054eb0f",
-      "disposition": "pending",
-      "targetIds": [],
-      "reason": "待审“客卿长老”：已有提取定位；需直接核定原文语义、开篇成立时间及目标归属，候选不必全部生成新实体。",
+      "disposition": "adopted",
+      "targetIds": [
+        "dajin-guest-elder-institution"
+      ],
+      "reason": "中小宗多、元婴较少的相对结构支持制度，未给全世界人数不补精确统计。",
       "evidence": [
         {
           "chapterId": "qq-25591422",
@@ -17668,10 +17665,7 @@
           "anchorSha256": "80d336fedae4e59d403cc1b9d94a2e8819faf2ce140bf9340af9d084fee18736"
         }
       ],
-      "uncertainty": {
-        "kind": "missing-evidence",
-        "boundary": "缺本条内容的最终编辑判断；不以已提取或模型supported代替。"
-      },
+      "uncertainty": null,
       "destinationModule": null
     },
     {
