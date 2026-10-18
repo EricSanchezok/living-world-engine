@@ -568,6 +568,54 @@
           "access": {
             "kind": "public"
           }
+        },
+        {
+          "id": "innerstar-market-route-innerstar-baimen-bookshop",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-baimen-bookshop"
+          },
+          "description": "沿城中街路通往白门阁",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-market-access-innerstar-baimen-bookshop",
+          "predicate": "access-innerstar-baimen-bookshop",
+          "value": {
+            "kind": "text",
+            "value": "需要实际行至门口并按接待情况进入。"
+          },
+          "description": "需要实际行至门口并按接待情况进入。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-market-route-innerstar-fengle-auction",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-fengle-auction"
+          },
+          "description": "沿城中街路通往丰乐拍卖行",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-market-access-innerstar-fengle-auction",
+          "predicate": "access-innerstar-fengle-auction",
+          "value": {
+            "kind": "text",
+            "value": "需要实际行至门口并按接待情况进入。"
+          },
+          "description": "需要实际行至门口并按接待情况进入。",
+          "access": {
+            "kind": "public"
+          }
         }
       ],
       "meters": [],
@@ -807,7 +855,7 @@
       "name": "星空殿",
       "kind": "location",
       "placement": "innerstar-holy-mountain",
-      "description": "位于圣山五十层附近，传送阵由星宫轮值者看守。",
+      "description": "圣山第五十层的白石大殿，各阵前石碑标示目的地，由星宫阵吏轮值。",
       "facts": [
         {
           "id": "innerstar-star-hall-route-innerstar-holy-mountain",
@@ -829,6 +877,18 @@
             "value": "位于圣山五十层附近，传送阵由星宫轮值者看守。"
           },
           "description": "位于圣山五十层附近，传送阵由星宫轮值者看守。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-star-hall-transit-cost",
+          "predicate": "transit-cost",
+          "value": {
+            "kind": "text",
+            "value": "此处一次至多七人、总价700低阶灵石；可协商分摊，供能另由星宫公库实耗三块中阶石，必须核各人保护与目的地阵状态。"
+          },
+          "description": "此处一次至多七人、总价700低阶灵石；可协商分摊，供能另由星宫公库实耗三块中阶石，必须核各人保护与目的地阵状态。",
           "access": {
             "kind": "public"
           }
@@ -12878,6 +12938,1620 @@
       "meters": [],
       "ratings": [],
       "quantities": []
+    },
+    {
+      "id": "innerstar-baimen-bookshop",
+      "name": "白门阁",
+      "kind": "location",
+      "placement": "innerstar-market",
+      "description": "经营已整理海兽资料与书册的书铺，未识物种仍须调查。",
+      "facts": [
+        {
+          "id": "innerstar-baimen-bookshop-route-innerstar-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-market"
+          },
+          "description": "沿城中街路通往天星坊市",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-baimen-bookshop-access-innerstar-market",
+          "predicate": "access-innerstar-market",
+          "value": {
+            "kind": "text",
+            "value": "需要实际行至门口并按接待情况进入。"
+          },
+          "description": "需要实际行至门口并按接待情况进入。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-fengle-auction",
+      "name": "丰乐拍卖行",
+      "kind": "location",
+      "placement": "innerstar-market",
+      "description": "丰乐商盟的天星拍卖场，物品和出售委托需当次登记，不能凭招牌获取任何稀材。",
+      "facts": [
+        {
+          "id": "innerstar-fengle-auction-route-innerstar-market",
+          "predicate": "route-to",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-market"
+          },
+          "description": "沿城中街路通往天星坊市",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-fengle-auction-access-innerstar-market",
+          "predicate": "access-innerstar-market",
+          "value": {
+            "kind": "text",
+            "value": "需要实际行至门口并按接待情况进入。"
+          },
+          "description": "需要实际行至门口并按接待情况进入。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-fengle-auction-affiliated",
+          "predicate": "affiliation",
+          "value": {
+            "kind": "entity",
+            "entityId": "fengle-trade-alliance"
+          },
+          "description": "丰乐商盟经营。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-fengle-auction-current-status",
+          "predicate": "current-status",
+          "value": {
+            "kind": "text",
+            "value": "本场当前未公告拍品或开拍时间；寄售须有实物、委托与主持者。"
+          },
+          "description": "本场当前未公告拍品或开拍时间；寄售须有实物、委托与主持者。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-baimen-stock",
+      "name": "白门抄本书架",
+      "kind": "container",
+      "placement": "innerstar-baimen-bookshop",
+      "description": "书铺当前可供阅抄的有限册本。",
+      "facts": [
+        {
+          "id": "innerstar-baimen-stock-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-baimen-bookshop"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-baimen-ledger",
+      "name": "白门抄录公账",
+      "kind": "container",
+      "placement": "innerstar-baimen-bookshop",
+      "description": "书铺收支独立记账的公款匣。",
+      "facts": [
+        {
+          "id": "innerstar-baimen-ledger-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-baimen-bookshop"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 24
+        }
+      ]
+    },
+    {
+      "id": "innerstar-baimen-beasts",
+      "name": "近海兽性抄册",
+      "kind": "item",
+      "placement": "innerstar-baimen-stock",
+      "description": "记录海猿会水箭潜水、婴鲤水系特长及噬金幼虫玉木束缚；无当前野兽坐标或隐藏人物资料。",
+      "facts": [
+        {
+          "id": "innerstar-baimen-beasts-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-baimen-bookshop"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-baimen-sea-map",
+      "name": "已知内海路线册",
+      "kind": "item",
+      "placement": "innerstar-baimen-stock",
+      "description": "记录天星、魁星与西南三岛的已知地理，不声称覆盖未探的全部外海。",
+      "facts": [
+        {
+          "id": "innerstar-baimen-sea-map-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-baimen-bookshop"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-baimen-copy-jade",
+      "name": "白门待刻玉片",
+      "kind": "item",
+      "placement": "innerstar-baimen-stock",
+      "description": "一片尚未写入内容的可刻玉片；抄录要实际读取原册并耗工。",
+      "facts": [
+        {
+          "id": "innerstar-baimen-copy-jade-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-baimen-bookshop"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-transit-supply",
+      "name": "星空殿供能公库",
+      "kind": "container",
+      "placement": "innerstar-star-hall",
+      "description": "用于启阵的有限中阶石与收费款分账，属于星宫。",
+      "facts": [
+        {
+          "id": "innerstar-transit-supply-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": [
+        {
+          "definition_id": "mid-stone",
+          "amount": 12
+        }
+      ]
+    },
+    {
+      "id": "innerstar-transit-receipts",
+      "name": "星空殿收费匣",
+      "kind": "container",
+      "placement": "innerstar-star-hall",
+      "description": "尚未收取新旅费的空公款匣，收费后才增加余额。",
+      "facts": [
+        {
+          "id": "innerstar-transit-receipts-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-transit-charm-1",
+      "name": "星空殿护身传送符1",
+      "kind": "item",
+      "placement": "innerstar-transit-supply",
+      "description": "尚未使用的一次性远程保护符，适合当前星空殿外海阵距，不能代替大挪移令支持任何距离。",
+      "facts": [
+        {
+          "id": "innerstar-transit-charm-1-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-transit-charm-1-use-condition",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。"
+          },
+          "description": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-transit-charm-2",
+      "name": "星空殿护身传送符2",
+      "kind": "item",
+      "placement": "innerstar-transit-supply",
+      "description": "尚未使用的一次性远程保护符，适合当前星空殿外海阵距，不能代替大挪移令支持任何距离。",
+      "facts": [
+        {
+          "id": "innerstar-transit-charm-2-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-transit-charm-2-use-condition",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。"
+          },
+          "description": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-transit-charm-3",
+      "name": "星空殿护身传送符3",
+      "kind": "item",
+      "placement": "innerstar-transit-supply",
+      "description": "尚未使用的一次性远程保护符，适合当前星空殿外海阵距，不能代替大挪移令支持任何距离。",
+      "facts": [
+        {
+          "id": "innerstar-transit-charm-3-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-transit-charm-3-use-condition",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。"
+          },
+          "description": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-transit-charm-4",
+      "name": "星空殿护身传送符4",
+      "kind": "item",
+      "placement": "innerstar-transit-supply",
+      "description": "尚未使用的一次性远程保护符，适合当前星空殿外海阵距，不能代替大挪移令支持任何距离。",
+      "facts": [
+        {
+          "id": "innerstar-transit-charm-4-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-transit-charm-4-use-condition",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。"
+          },
+          "description": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-transit-charm-5",
+      "name": "星空殿护身传送符5",
+      "kind": "item",
+      "placement": "innerstar-transit-supply",
+      "description": "尚未使用的一次性远程保护符，适合当前星空殿外海阵距，不能代替大挪移令支持任何距离。",
+      "facts": [
+        {
+          "id": "innerstar-transit-charm-5-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-transit-charm-5-use-condition",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。"
+          },
+          "description": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-transit-charm-6",
+      "name": "星空殿护身传送符6",
+      "kind": "item",
+      "placement": "innerstar-transit-supply",
+      "description": "尚未使用的一次性远程保护符，适合当前星空殿外海阵距，不能代替大挪移令支持任何距离。",
+      "facts": [
+        {
+          "id": "innerstar-transit-charm-6-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-transit-charm-6-use-condition",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。"
+          },
+          "description": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-transit-charm-7",
+      "name": "星空殿护身传送符7",
+      "kind": "item",
+      "placement": "innerstar-transit-supply",
+      "description": "尚未使用的一次性远程保护符，适合当前星空殿外海阵距，不能代替大挪移令支持任何距离。",
+      "facts": [
+        {
+          "id": "innerstar-transit-charm-7-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-transit-charm-7-use-condition",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。"
+          },
+          "description": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-transit-charm-8",
+      "name": "星空殿护身传送符8",
+      "kind": "item",
+      "placement": "innerstar-transit-supply",
+      "description": "尚未使用的一次性远程保护符，适合当前星空殿外海阵距，不能代替大挪移令支持任何距离。",
+      "facts": [
+        {
+          "id": "innerstar-transit-charm-8-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-transit-charm-8-use-condition",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。"
+          },
+          "description": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-transit-charm-9",
+      "name": "星空殿护身传送符9",
+      "kind": "item",
+      "placement": "innerstar-transit-supply",
+      "description": "尚未使用的一次性远程保护符，适合当前星空殿外海阵距，不能代替大挪移令支持任何距离。",
+      "facts": [
+        {
+          "id": "innerstar-transit-charm-9-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-transit-charm-9-use-condition",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。"
+          },
+          "description": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-transit-charm-10",
+      "name": "星空殿护身传送符10",
+      "kind": "item",
+      "placement": "innerstar-transit-supply",
+      "description": "尚未使用的一次性远程保护符，适合当前星空殿外海阵距，不能代替大挪移令支持任何距离。",
+      "facts": [
+        {
+          "id": "innerstar-transit-charm-10-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-transit-charm-10-use-condition",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。"
+          },
+          "description": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-transit-charm-11",
+      "name": "星空殿护身传送符11",
+      "kind": "item",
+      "placement": "innerstar-transit-supply",
+      "description": "尚未使用的一次性远程保护符，适合当前星空殿外海阵距，不能代替大挪移令支持任何距离。",
+      "facts": [
+        {
+          "id": "innerstar-transit-charm-11-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-transit-charm-11-use-condition",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。"
+          },
+          "description": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-transit-charm-12",
+      "name": "星空殿护身传送符12",
+      "kind": "item",
+      "placement": "innerstar-transit-supply",
+      "description": "尚未使用的一次性远程保护符，适合当前星空殿外海阵距，不能代替大挪移令支持任何距离。",
+      "facts": [
+        {
+          "id": "innerstar-transit-charm-12-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-transit-charm-12-use-condition",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。"
+          },
+          "description": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-transit-charm-13",
+      "name": "星空殿护身传送符13",
+      "kind": "item",
+      "placement": "innerstar-transit-supply",
+      "description": "尚未使用的一次性远程保护符，适合当前星空殿外海阵距，不能代替大挪移令支持任何距离。",
+      "facts": [
+        {
+          "id": "innerstar-transit-charm-13-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-transit-charm-13-use-condition",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。"
+          },
+          "description": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-transit-charm-14",
+      "name": "星空殿护身传送符14",
+      "kind": "item",
+      "placement": "innerstar-transit-supply",
+      "description": "尚未使用的一次性远程保护符，适合当前星空殿外海阵距，不能代替大挪移令支持任何距离。",
+      "facts": [
+        {
+          "id": "innerstar-transit-charm-14-owned-by",
+          "predicate": "owned-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "实际归属与保管，转让须交付。",
+          "access": {
+            "kind": "public"
+          }
+        },
+        {
+          "id": "innerstar-transit-charm-14-use-condition",
+          "predicate": "use-condition",
+          "value": {
+            "kind": "text",
+            "value": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。"
+          },
+          "description": "须实际贴于旅客并在传送时消耗本符，不能一符保护数人或重复使用。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [],
+      "ratings": [],
+      "quantities": []
+    },
+    {
+      "id": "innerstar-baimen-clerk",
+      "name": "孟谦",
+      "kind": "person",
+      "placement": "innerstar-baimen-bookshop",
+      "description": "白门阁受雇书吏，按已有册页核对和抄录，私款与书铺账分开。",
+      "facts": [
+        {
+          "id": "innerstar-baimen-clerk-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "炼气六层"
+          },
+          "description": "炼气六层",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "innerstar-baimen-clerk"
+            ]
+          }
+        },
+        {
+          "id": "innerstar-baimen-clerk-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "会阅读、用神识逐项查册、向玉片录入已读信息；不会凭书名补齐缺页。"
+          },
+          "description": "会阅读、用神识逐项查册、向玉片录入已读信息；不会凭书名补齐缺页。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "innerstar-baimen-clerk"
+            ]
+          }
+        },
+        {
+          "id": "innerstar-baimen-clerk-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "水木土三灵根。"
+          },
+          "description": "水木土三灵根。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "有能力者取得同意并实际验根。"
+          }
+        },
+        {
+          "id": "innerstar-baimen-clerk-service-authority",
+          "predicate": "service-authority",
+          "value": {
+            "kind": "text",
+            "value": "受书铺雇用可收5低阶石把现有兽性抄册复制到一片待刻玉片，收费入公账；原册留铺，交出副本后库存少一片，其他资料和来料另议。"
+          },
+          "description": "受书铺雇用可收5低阶石把现有兽性抄册复制到一片待刻玉片，收费入公账；原册留铺，交出副本后库存少一片，其他资料和来料另议。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "innerstar-baimen-clerk"
+            ]
+          }
+        },
+        {
+          "id": "innerstar-baimen-clerk-employer",
+          "predicate": "employed-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "innerstar-baimen-bookshop"
+          },
+          "description": "受雇管理书铺现有册本。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "innerstar-baimen-clerk-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "innerstar-baimen-clerk-mana",
+          "definition_id": "mana",
+          "current": 50
+        }
+      ],
+      "ratings": [
+        {
+          "id": "innerstar-baimen-clerk-cultivation",
+          "definition_id": "cultivation",
+          "value": 1
+        },
+        {
+          "id": "innerstar-baimen-clerk-force",
+          "definition_id": "force",
+          "value": 2
+        },
+        {
+          "id": "innerstar-baimen-clerk-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "innerstar-baimen-clerk-perception",
+          "definition_id": "perception",
+          "value": 2
+        },
+        {
+          "id": "innerstar-baimen-clerk-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 7
+        }
+      ],
+      "agent": {
+        "id": "innerstar-baimen-clerk",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "白门阁受雇书吏，按已有册页核对和抄录，私款与书铺账分开。",
+            "voice": "按实际库存、手续与能力回答，能做就落实，条件不足说明具体缺口。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "检查待刻玉片是否完好，有来客则按所需段落查册议价。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "孟谦",
+              "description": "白门阁受雇书吏，按已有册页核对和抄录，私款与书铺账分开。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "白门阁",
+              "description": "熟悉的工作地点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-baimen-stock",
+              "name": "白门抄本书架",
+              "description": "书铺当前可供阅抄的有限册本。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-baimen-ledger",
+              "name": "白门抄录公账",
+              "description": "书铺收支独立记账的公款匣。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-baimen-beasts",
+              "name": "近海兽性抄册",
+              "description": "记录海猿会水箭潜水、婴鲤水系特长及噬金幼虫玉木束缚；无当前野兽坐标或隐藏人物资料。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-baimen-sea-map",
+              "name": "已知内海路线册",
+              "description": "记录天星、魁星与西南三岛的已知地理，不声称覆盖未探的全部外海。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-baimen-copy-jade",
+              "name": "白门待刻玉片",
+              "description": "一片尚未写入内容的可刻玉片；抄录要实际读取原册并耗工。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-market",
+              "name": "天星坊市",
+              "description": "丹药、法器、材料和修理铺各有自己的货物与经营者。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "innerstar-baimen-clerk"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "innerstar-baimen-bookshop"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-baimen-stock",
+              "canonical_entity_ids": [
+                "innerstar-baimen-stock"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-baimen-ledger",
+              "canonical_entity_ids": [
+                "innerstar-baimen-ledger"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-baimen-beasts",
+              "canonical_entity_ids": [
+                "innerstar-baimen-beasts"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-baimen-sea-map",
+              "canonical_entity_ids": [
+                "innerstar-baimen-sea-map"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-baimen-copy-jade",
+              "canonical_entity_ids": [
+                "innerstar-baimen-copy-jade"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-market",
+              "canonical_entity_ids": [
+                "innerstar-market"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "生活、学艺及已有职务经历。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "rank",
+              "subjectId": "self",
+              "predicate": "rank",
+              "value": {
+                "kind": "text",
+                "value": "炼气六层，水木土三灵根，已知自身根骨。"
+              },
+              "description": "炼气六层，水木土三灵根，已知自身根骨。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "skill",
+              "subjectId": "self",
+              "predicate": "skill",
+              "value": {
+                "kind": "text",
+                "value": "会阅读、用神识逐项查册、向玉片录入已读信息；不会凭书名补齐缺页。"
+              },
+              "description": "会阅读、用神识逐项查册、向玉片录入已读信息；不会凭书名补齐缺页。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "goal",
+              "subjectId": "self",
+              "predicate": "goal",
+              "value": {
+                "kind": "text",
+                "value": "检查待刻玉片是否完好，有来客则按所需段落查册议价。"
+              },
+              "description": "检查待刻玉片是否完好，有来客则按所需段落查册议价。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "opening-night",
+              "subjectId": "self",
+              "predicate": "opening-night",
+              "value": {
+                "kind": "text",
+                "value": "此前值勤时亲见夜色；之后时段随实际时间变化。"
+              },
+              "description": "此前值勤时亲见夜色；之后时段随实际时间变化。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "service-authority",
+              "subjectId": "self",
+              "predicate": "service-authority",
+              "value": {
+                "kind": "text",
+                "value": "受书铺雇用可收5低阶石把现有兽性抄册复制到一片待刻玉片，收费入公账；原册留铺，交出副本后库存少一片，其他资料和来料另议。"
+              },
+              "description": "受书铺雇用可收5低阶石把现有兽性抄册复制到一片待刻玉片，收费入公账；原册留铺，交出副本后库存少一片，其他资料和来料另议。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "innerstar-star-array-clerk",
+      "name": "闻衡",
+      "kind": "person",
+      "placement": "innerstar-star-hall",
+      "description": "星宫当值阵吏，负责现成阵纹核验、供能与旅客保护，不任意改变目的地。",
+      "facts": [
+        {
+          "id": "innerstar-star-array-clerk-cultivation-state",
+          "predicate": "cultivation-state",
+          "value": {
+            "kind": "text",
+            "value": "筑基中期"
+          },
+          "description": "筑基中期",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "innerstar-star-array-clerk"
+            ]
+          }
+        },
+        {
+          "id": "innerstar-star-array-clerk-learned-skill",
+          "predicate": "learned-skill",
+          "value": {
+            "kind": "text",
+            "value": "能核验和启用既成外海传送阵、识别一次护符与记账；无独力新建跨界阵能力。"
+          },
+          "description": "能核验和启用既成外海传送阵、识别一次护符与记账；无独力新建跨界阵能力。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "innerstar-star-array-clerk"
+            ]
+          }
+        },
+        {
+          "id": "innerstar-star-array-clerk-spiritual-root",
+          "predicate": "spiritual-root",
+          "value": {
+            "kind": "text",
+            "value": "水木土三灵根。"
+          },
+          "description": "水木土三灵根。",
+          "access": {
+            "kind": "discoverable",
+            "condition": "有能力者取得同意并实际验根。"
+          }
+        },
+        {
+          "id": "innerstar-star-array-clerk-service-authority",
+          "predicate": "service-authority",
+          "value": {
+            "kind": "text",
+            "value": "可从供能公库每次支用三块中阶石、按人数各发一张护符并收合计700低阶石入收费匣；单次上限七人，须实际核验两端和保护。"
+          },
+          "description": "可从供能公库每次支用三块中阶石、按人数各发一张护符并收合计700低阶石入收费匣；单次上限七人，须实际核验两端和保护。",
+          "access": {
+            "kind": "agents",
+            "agentIds": [
+              "innerstar-star-array-clerk"
+            ]
+          }
+        },
+        {
+          "id": "innerstar-star-array-clerk-employer",
+          "predicate": "employed-by",
+          "value": {
+            "kind": "entity",
+            "entityId": "star-palace"
+          },
+          "description": "星宫受雇当值，不拥有公库。",
+          "access": {
+            "kind": "public"
+          }
+        }
+      ],
+      "meters": [
+        {
+          "id": "innerstar-star-array-clerk-health",
+          "definition_id": "health",
+          "current": 100
+        },
+        {
+          "id": "innerstar-star-array-clerk-mana",
+          "definition_id": "mana",
+          "current": 50
+        }
+      ],
+      "ratings": [
+        {
+          "id": "innerstar-star-array-clerk-cultivation",
+          "definition_id": "cultivation",
+          "value": 2
+        },
+        {
+          "id": "innerstar-star-array-clerk-force",
+          "definition_id": "force",
+          "value": 2
+        },
+        {
+          "id": "innerstar-star-array-clerk-craft",
+          "definition_id": "craft",
+          "value": 2
+        },
+        {
+          "id": "innerstar-star-array-clerk-perception",
+          "definition_id": "perception",
+          "value": 2
+        },
+        {
+          "id": "innerstar-star-array-clerk-influence",
+          "definition_id": "influence",
+          "value": 1
+        }
+      ],
+      "quantities": [
+        {
+          "definition_id": "low-stone",
+          "amount": 7
+        }
+      ],
+      "agent": {
+        "id": "innerstar-star-array-clerk",
+        "model_profiles": {
+          "decision": "decision-jev",
+          "creation": "creation-deepseek",
+          "fallback": "decision-deepseek"
+        },
+        "character": {
+          "persona": {
+            "summary": "星宫当值阵吏，负责现成阵纹核验、供能与旅客保护，不任意改变目的地。",
+            "voice": "按实际库存、手续与能力回答，能做就落实，条件不足说明具体缺口。"
+          },
+          "goals": [
+            {
+              "id": "current-purpose",
+              "description": "先核对供能石和剩余护符；有旅客时按实有人数、保护及阵口条件办理。",
+              "priority": 0.5,
+              "progress": 0
+            }
+          ]
+        },
+        "belief": {
+          "local_entities": [
+            {
+              "id": "self",
+              "name": "闻衡",
+              "description": "星宫当值阵吏，负责现成阵纹核验、供能与旅客保护，不任意改变目的地。",
+              "status": "observed"
+            },
+            {
+              "id": "location",
+              "name": "星空殿",
+              "description": "熟悉的工作地点。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-transit-supply",
+              "name": "星空殿供能公库",
+              "description": "用于启阵的有限中阶石与收费款分账，属于星宫。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-transit-receipts",
+              "name": "星空殿收费匣",
+              "description": "尚未收取新旅费的空公款匣，收费后才增加余额。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-star-hall",
+              "name": "星空殿",
+              "description": "圣山第五十层的白石大殿，各阵前石碑标示目的地，由星宫阵吏轮值。",
+              "status": "observed"
+            },
+            {
+              "id": "known-star-palace",
+              "name": "星宫",
+              "description": "统治者、执事与卫队分工处理海域事务，个人私财与星宫公库分别存在。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-transit-charm-1",
+              "name": "星空殿护身传送符1",
+              "description": "本班公库的一次护符。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-transit-charm-2",
+              "name": "星空殿护身传送符2",
+              "description": "本班公库的一次护符。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-transit-charm-3",
+              "name": "星空殿护身传送符3",
+              "description": "本班公库的一次护符。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-transit-charm-4",
+              "name": "星空殿护身传送符4",
+              "description": "本班公库的一次护符。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-transit-charm-5",
+              "name": "星空殿护身传送符5",
+              "description": "本班公库的一次护符。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-transit-charm-6",
+              "name": "星空殿护身传送符6",
+              "description": "本班公库的一次护符。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-transit-charm-7",
+              "name": "星空殿护身传送符7",
+              "description": "本班公库的一次护符。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-transit-charm-8",
+              "name": "星空殿护身传送符8",
+              "description": "本班公库的一次护符。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-transit-charm-9",
+              "name": "星空殿护身传送符9",
+              "description": "本班公库的一次护符。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-transit-charm-10",
+              "name": "星空殿护身传送符10",
+              "description": "本班公库的一次护符。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-transit-charm-11",
+              "name": "星空殿护身传送符11",
+              "description": "本班公库的一次护符。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-transit-charm-12",
+              "name": "星空殿护身传送符12",
+              "description": "本班公库的一次护符。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-transit-charm-13",
+              "name": "星空殿护身传送符13",
+              "description": "本班公库的一次护符。",
+              "status": "observed"
+            },
+            {
+              "id": "known-innerstar-transit-charm-14",
+              "name": "星空殿护身传送符14",
+              "description": "本班公库的一次护符。",
+              "status": "observed"
+            },
+            {
+              "id": "known-outerstar-ningcui-array",
+              "name": "凝翠传送石屋",
+              "description": "既定外海接收阵口，启用前需核对可用状态。",
+              "status": "observed"
+            },
+            {
+              "id": "known-outerstar-qiyuan-array",
+              "name": "奇渊传送石屋",
+              "description": "另一既定接收阵口；不能把目的地任选改成未知地区。",
+              "status": "observed"
+            }
+          ],
+          "bindings": [
+            {
+              "local_entity_id": "self",
+              "canonical_entity_ids": [
+                "innerstar-star-array-clerk"
+              ]
+            },
+            {
+              "local_entity_id": "location",
+              "canonical_entity_ids": [
+                "innerstar-star-hall"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-transit-supply",
+              "canonical_entity_ids": [
+                "innerstar-transit-supply"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-transit-receipts",
+              "canonical_entity_ids": [
+                "innerstar-transit-receipts"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-star-hall",
+              "canonical_entity_ids": [
+                "innerstar-star-hall"
+              ]
+            },
+            {
+              "local_entity_id": "known-star-palace",
+              "canonical_entity_ids": [
+                "star-palace"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-transit-charm-1",
+              "canonical_entity_ids": [
+                "innerstar-transit-charm-1"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-transit-charm-2",
+              "canonical_entity_ids": [
+                "innerstar-transit-charm-2"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-transit-charm-3",
+              "canonical_entity_ids": [
+                "innerstar-transit-charm-3"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-transit-charm-4",
+              "canonical_entity_ids": [
+                "innerstar-transit-charm-4"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-transit-charm-5",
+              "canonical_entity_ids": [
+                "innerstar-transit-charm-5"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-transit-charm-6",
+              "canonical_entity_ids": [
+                "innerstar-transit-charm-6"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-transit-charm-7",
+              "canonical_entity_ids": [
+                "innerstar-transit-charm-7"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-transit-charm-8",
+              "canonical_entity_ids": [
+                "innerstar-transit-charm-8"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-transit-charm-9",
+              "canonical_entity_ids": [
+                "innerstar-transit-charm-9"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-transit-charm-10",
+              "canonical_entity_ids": [
+                "innerstar-transit-charm-10"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-transit-charm-11",
+              "canonical_entity_ids": [
+                "innerstar-transit-charm-11"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-transit-charm-12",
+              "canonical_entity_ids": [
+                "innerstar-transit-charm-12"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-transit-charm-13",
+              "canonical_entity_ids": [
+                "innerstar-transit-charm-13"
+              ]
+            },
+            {
+              "local_entity_id": "known-innerstar-transit-charm-14",
+              "canonical_entity_ids": [
+                "innerstar-transit-charm-14"
+              ]
+            },
+            {
+              "local_entity_id": "known-outerstar-ningcui-array",
+              "canonical_entity_ids": [
+                "outerstar-ningcui-array"
+              ]
+            },
+            {
+              "local_entity_id": "known-outerstar-qiyuan-array",
+              "canonical_entity_ids": [
+                "outerstar-qiyuan-array"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "prior-life",
+              "kind": "observation",
+              "description": "生活、学艺及已有职务经历。",
+              "sourceId": null,
+              "step": 0
+            }
+          ],
+          "claims": [
+            {
+              "id": "rank",
+              "subjectId": "self",
+              "predicate": "rank",
+              "value": {
+                "kind": "text",
+                "value": "筑基中期，水木土三灵根，已知自身根骨。"
+              },
+              "description": "筑基中期，水木土三灵根，已知自身根骨。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "skill",
+              "subjectId": "self",
+              "predicate": "skill",
+              "value": {
+                "kind": "text",
+                "value": "能核验和启用既成外海传送阵、识别一次护符与记账；无独力新建跨界阵能力。"
+              },
+              "description": "能核验和启用既成外海传送阵、识别一次护符与记账；无独力新建跨界阵能力。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "goal",
+              "subjectId": "self",
+              "predicate": "goal",
+              "value": {
+                "kind": "text",
+                "value": "先核对供能石和剩余护符；有旅客时按实有人数、保护及阵口条件办理。"
+              },
+              "description": "先核对供能石和剩余护符；有旅客时按实有人数、保护及阵口条件办理。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "opening-night",
+              "subjectId": "self",
+              "predicate": "opening-night",
+              "value": {
+                "kind": "text",
+                "value": "此前值勤时亲见夜色；之后时段随实际时间变化。"
+              },
+              "description": "此前值勤时亲见夜色；之后时段随实际时间变化。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            },
+            {
+              "id": "service-authority",
+              "subjectId": "self",
+              "predicate": "service-authority",
+              "value": {
+                "kind": "text",
+                "value": "可从供能公库每次支用三块中阶石、按人数各发一张护符并收合计700低阶石入收费匣；单次上限七人，须实际核验两端和保护。"
+              },
+              "description": "可从供能公库每次支用三块中阶石、按人数各发一张护符并收合计700低阶石入收费匣；单次上限七人，须实际核验两端和保护。",
+              "stance": "believed",
+              "confidence": 1,
+              "evidenceIds": [
+                "prior-life"
+              ]
+            }
+          ]
+        }
+      }
     }
   ],
   "existingEntityFacts": [],
@@ -13043,7 +14717,8 @@
     ],
     "entity:innerstar-star-hall": [
       "innerstar-tianxing-city",
-      "innerstar-present-life"
+      "innerstar-present-life",
+      "innerstar-transit-operation"
     ],
     "fact:innerstar-holy-mountain-route-innerstar-star-hall": [
       "innerstar-present-life"
@@ -14879,6 +16554,274 @@
     ],
     "fact:innerstar-current-clerk-employed-by": [
       "innerstar-merchant-current-stock"
+    ],
+    "entity:innerstar-baimen-bookshop": [
+      "innerstar-books-and-auction",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-baimen-bookshop-route-innerstar-market": [
+      "innerstar-books-and-auction",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-baimen-bookshop-access-innerstar-market": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-market-route-innerstar-baimen-bookshop": [
+      "innerstar-books-and-auction",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-market-access-innerstar-baimen-bookshop": [
+      "innerstar-tianxing-current-services"
+    ],
+    "entity:innerstar-fengle-auction": [
+      "innerstar-books-and-auction",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-fengle-auction-route-innerstar-market": [
+      "innerstar-books-and-auction",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-fengle-auction-access-innerstar-market": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-market-route-innerstar-fengle-auction": [
+      "innerstar-books-and-auction",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-market-access-innerstar-fengle-auction": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-fengle-auction-affiliated": [
+      "innerstar-books-and-auction"
+    ],
+    "fact:innerstar-fengle-auction-current-status": [
+      "innerstar-tianxing-current-services"
+    ],
+    "entity:innerstar-baimen-stock": [
+      "innerstar-tianxing-current-services"
+    ],
+    "entity:innerstar-baimen-ledger": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-baimen-stock-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-baimen-ledger-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "entity:innerstar-baimen-beasts": [
+      "innerstar-books-and-auction",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-baimen-beasts-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "entity:innerstar-baimen-sea-map": [
+      "innerstar-books-and-auction",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-baimen-sea-map-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "entity:innerstar-baimen-copy-jade": [
+      "innerstar-books-and-auction",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-baimen-copy-jade-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "entity:innerstar-transit-supply": [
+      "innerstar-transit-operation",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-supply-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "entity:innerstar-transit-receipts": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-receipts-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "entity:innerstar-transit-charm-1": [
+      "innerstar-transit-operation",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-1-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-1-use-condition": [
+      "innerstar-transit-operation"
+    ],
+    "entity:innerstar-transit-charm-2": [
+      "innerstar-transit-operation",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-2-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-2-use-condition": [
+      "innerstar-transit-operation"
+    ],
+    "entity:innerstar-transit-charm-3": [
+      "innerstar-transit-operation",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-3-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-3-use-condition": [
+      "innerstar-transit-operation"
+    ],
+    "entity:innerstar-transit-charm-4": [
+      "innerstar-transit-operation",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-4-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-4-use-condition": [
+      "innerstar-transit-operation"
+    ],
+    "entity:innerstar-transit-charm-5": [
+      "innerstar-transit-operation",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-5-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-5-use-condition": [
+      "innerstar-transit-operation"
+    ],
+    "entity:innerstar-transit-charm-6": [
+      "innerstar-transit-operation",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-6-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-6-use-condition": [
+      "innerstar-transit-operation"
+    ],
+    "entity:innerstar-transit-charm-7": [
+      "innerstar-transit-operation",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-7-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-7-use-condition": [
+      "innerstar-transit-operation"
+    ],
+    "entity:innerstar-transit-charm-8": [
+      "innerstar-transit-operation",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-8-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-8-use-condition": [
+      "innerstar-transit-operation"
+    ],
+    "entity:innerstar-transit-charm-9": [
+      "innerstar-transit-operation",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-9-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-9-use-condition": [
+      "innerstar-transit-operation"
+    ],
+    "entity:innerstar-transit-charm-10": [
+      "innerstar-transit-operation",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-10-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-10-use-condition": [
+      "innerstar-transit-operation"
+    ],
+    "entity:innerstar-transit-charm-11": [
+      "innerstar-transit-operation",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-11-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-11-use-condition": [
+      "innerstar-transit-operation"
+    ],
+    "entity:innerstar-transit-charm-12": [
+      "innerstar-transit-operation",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-12-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-12-use-condition": [
+      "innerstar-transit-operation"
+    ],
+    "entity:innerstar-transit-charm-13": [
+      "innerstar-transit-operation",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-13-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-13-use-condition": [
+      "innerstar-transit-operation"
+    ],
+    "entity:innerstar-transit-charm-14": [
+      "innerstar-transit-operation",
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-14-owned-by": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-transit-charm-14-use-condition": [
+      "innerstar-transit-operation"
+    ],
+    "fact:innerstar-star-hall-transit-cost": [
+      "innerstar-transit-operation",
+      "innerstar-tianxing-current-services"
+    ],
+    "entity:innerstar-baimen-clerk": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-baimen-clerk-cultivation-state": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-baimen-clerk-learned-skill": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-baimen-clerk-spiritual-root": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-baimen-clerk-service-authority": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-baimen-clerk-employer": [
+      "innerstar-tianxing-current-services"
+    ],
+    "entity:innerstar-star-array-clerk": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-star-array-clerk-cultivation-state": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-star-array-clerk-learned-skill": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-star-array-clerk-spiritual-root": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-star-array-clerk-service-authority": [
+      "innerstar-tianxing-current-services"
+    ],
+    "fact:innerstar-star-array-clerk-employer": [
+      "innerstar-tianxing-current-services"
     ]
   },
   "periodicProperties": [
